@@ -1,0 +1,9 @@
+#177 training/gate-open  (start here)
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: trainingCue('spawn') (beeps)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 3 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A heavy steel containment gate grinding open with a warning buzzer. No music, no voice.

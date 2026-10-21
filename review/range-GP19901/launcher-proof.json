@@ -1,0 +1,104 @@
+{
+  "data": {
+    "bs": [],
+    "hs": [],
+    "state": {
+      "state": "ACTIVE",
+      "drill": {
+        "weapon": "launcher",
+        "id": "blast-school",
+        "mode": "groups",
+        "duration": 30,
+        "waves": 4,
+        "exposure": 5,
+        "gap": 0.45,
+        "group": 5,
+        "minHits": 1,
+        "maxEvents": 1,
+        "clearBonus": 10,
+        "missPenalty": 3,
+        "wrongZonePenalty": 2,
+        "contact": 0.6,
+        "layout": "blast",
+        "collateralBonus": 10
+      },
+      "id": "1791883572344-1",
+      "loadout": "{\"mode\":\"semi\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"dual\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+      "elapsed": 0.3829000000000232,
+      "countdown": 0,
+      "wave": 1,
+      "activation": 1,
+      "plan": {
+        "ids": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "zone": null,
+        "priority": null,
+        "exposure": 5
+      },
+      "phase": "raising",
+      "score": 0,
+      "efficiency": 0,
+      "stats": {
+        "base": 0,
+        "bonuses": 0,
+        "deductions": 0,
+        "shots": 0,
+        "units": 0,
+        "attackSeconds": 0,
+        "contactSeconds": 0,
+        "cleared": 0,
+        "missed": 0
+      },
+      "result": null,
+      "targets": [
+        {
+          "index": 0,
+          "hits": 0,
+          "contact": 0,
+          "done": false,
+          "clearAt": null,
+          "bonus": false
+        },
+        {
+          "index": 1,
+          "hits": 0,
+          "contact": 0,
+          "done": false,
+          "clearAt": null,
+          "bonus": false
+        },
+        {
+          "index": 2,
+          "hits": 0,
+          "contact": 0,
+          "done": false,
+          "clearAt": null,
+          "bonus": false
+        },
+        {
+          "index": 3,
+          "hits": 0,
+          "contact": 0,
+          "done": false,
+          "clearAt": null,
+          "bonus": false
+        },
+        {
+          "index": 4,
+          "hits": 0,
+          "contact": 0,
+          "done": false,
+          "clearAt": null,
+          "bonus": false
+        }
+      ]
+    },
+    "ammo": 6
+  },
+  "errors": []
+}

@@ -1,0 +1,36 @@
+    // GP-179: local host contracts for the isolated zombie ability system.
+    const enemyAbilities = createZombieAbilityRuntime({
+      THREE, TSL, scene,
+      actors: () => zombies,
+      target: zTarget,
+      players: (x, z, r) => playersNear(x, z, r, { alive: true }),
+      playerRadius: PLAYER_RADIUS,
+      playerHeight: p => p.local ? Math.max(.7, getStanceEyeY() + .1) : 1.7,
+      active: () => gameStarted && !gameOver && !won && !paused && !scriptedKill && !cine,
+      domain: () => training.active ? 'training' : hollowFloor ? 'below:' + (heartBuilt ? 'heart' : belowTheme) : 'world',
+      inDomain: z => !!z.below === !!hollowFloor && (!training.active || !!z.trainingZ),
+      canAct: z => z.alive && !z.sleeping && !(z.poiGuard && !z.poiAwake) && !z.crawling &&
+        !(z.riseT > 0 || z.knockT > 0 || z.getUpT > 0 || z.belowRiseT > 0 || z.hitReact > 0 || z.windowClimb || z.belowFallV != null) &&
+        (!zombieGraceActive() || !!hollowFloor || !!training.active || !!(z.poiGuard && z.poiAwake)),
+      ground: (x, z, maxY) => training.active && training.tg ? training.tg.floorY :
+        hollowFloor ? (heartBuilt ? heartBuilt.groundAt(x, z) : hollow.groundAt(x, z)) : entityGroundY(x, z, maxY),
+      preparePose: z => { if (z.farLod) { z.farLod = false; setZombieRenderLod(z.mesh, false); } },
+      wet: (x, z, y) => !training.active && !hollowFloor && waterDepthAt(x, z) > .2 && y < (waterLevelAt(x, z) || 0) + .4,
+      world: () => ({ trainingTg: training.active ? training.tg : null,
+        belowSolids: hollowFloor ? (heartBuilt ? heartBuilt.solids : hollow.warren()?.solids || []) : null,
+        builds: hollowFloor ? [] : builds, buildGrid: BUILD_GRID,
+        rocks, trees, worldSolids, house, houseHeight: HQ_H }),
+      box: segmentHitsBox, cylinder: segmentHitsCylinder, build: segmentHitsBuild,
+      damage: (p, amount, cause, owner) => damagePlayer(amount, cause, owner, null, p),
+      damageBuild: (b, amount) => damageBuild(b, amount, 'enemy'),
+      sound: (z, action) => { const p = z.mesh.position, sa = sndAt(p.x, p.z, 45);
+        if (action === 'windup') AudioSys.zombieVoice(z.typeKey, 'attack', sa.v, sa.pan, z);
+        else if (action === 'throw') AudioSys.heavyStep(sa.v, sa.pan, true);
+      },
+      impact: (kind, p, playerHit) => { const sa = sndAt(p.x, p.z, 45);
+        if (kind === 'stone') { spawnChunks(p.x, p.y, p.z, 0x786e61, 9, 4); spawnDust(p.x, p.y, p.z, 8); AudioSys.bulletImpact('rock', sa.v, sa.pan); addShake(sa.v * (playerHit ? .45 : .16)); }
+        else { spawnEmbers(p.x, p.y, p.z, 14, 1.1); AudioSys.bulletImpact('dirt', sa.v, sa.pan); }
+      },
+      fireMote: p => spawnEmbers(p.x, p.y, p.z, 1, .35),
+      acidMote: p => spawnMote(p.x, p.y + .08, p.z, acidMoteMat, { vx: 0, vy: .45, vz: 0, grav: .2, drag: .5, life: .55, scale: .25 })
+    });

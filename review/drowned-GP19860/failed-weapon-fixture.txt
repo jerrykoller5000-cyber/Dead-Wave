@@ -1,0 +1,1 @@
+First fixture passed string flamer to numeric setWeapon(index), causing undefined weapon stats. Corrected to existing flamer index 10. No game code changed.

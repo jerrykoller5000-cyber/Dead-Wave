@@ -1,0 +1,210 @@
+{
+  "loadSec": 17.563,
+  "views": {
+    "reverse": {
+      "cutaway": [
+        {
+          "side": "east",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "south",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "west",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "overhead",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "east",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        }
+      ],
+      "solids": 118,
+      "draws": 1211
+    },
+    "original": {
+      "cutaway": [
+        {
+          "side": "east",
+          "opacity": 0.06000000000000005,
+          "hidden": true
+        },
+        {
+          "side": "south",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "west",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "overhead",
+          "opacity": 0,
+          "hidden": true
+        },
+        {
+          "side": "east",
+          "opacity": 0.06000000000000005,
+          "hidden": true
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        }
+      ],
+      "solids": 118,
+      "draws": 1781
+    },
+    "rangeClear": {
+      "cutaway": [
+        {
+          "side": "east",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "south",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "west",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "overhead",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "east",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        }
+      ],
+      "solids": 118,
+      "draws": 2171
+    },
+    "buildClear": {
+      "cutaway": [
+        {
+          "side": "east",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "south",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "west",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "overhead",
+          "opacity": 0,
+          "hidden": true
+        },
+        {
+          "side": "east",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        }
+      ],
+      "solids": 118,
+      "draws": 2501
+    }
+  },
+  "errors": []
+}

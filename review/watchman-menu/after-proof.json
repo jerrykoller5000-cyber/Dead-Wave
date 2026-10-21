@@ -1,0 +1,63 @@
+{
+  "phase": "after",
+  "menu": {
+    "wasLocked": true,
+    "unlocked": true,
+    "wheel": {
+      "kind": "build",
+      "page": 2,
+      "keys": [
+        "light",
+        "flame",
+        "heavy",
+        "mortar",
+        "m240"
+      ]
+    },
+    "name": "Watchman MG",
+    "iconChildren": 8,
+    "iconBox": {
+      "width": 22,
+      "height": 18
+    }
+  },
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "loadSec": 15.659,
+  "trainingRestriction": "Building comes to the Training Ground later.",
+  "matchMenu": {
+    "wasLocked": true,
+    "unlocked": true,
+    "wheel": {
+      "kind": "build",
+      "page": 2,
+      "keys": [
+        "light",
+        "flame",
+        "heavy",
+        "mortar",
+        "m240"
+      ]
+    },
+    "name": "Watchman MG",
+    "iconChildren": 8,
+    "iconBox": {
+      "width": 22,
+      "height": 18
+    }
+  },
+  "placement": {
+    "selected": "m240",
+    "hint": "",
+    "point": {
+      "x": -60,
+      "z": -68
+    },
+    "placed": true,
+    "meshChildren": 4,
+    "beltMax": 1000,
+    "mounted": true,
+    "beltBefore": 500,
+    "beltAfter": 499
+  },
+  "errors": []
+}

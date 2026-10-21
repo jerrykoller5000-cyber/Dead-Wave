@@ -13,3 +13,26 @@ __pycache__/
 index.dev.html
 Claude outputs/
 Commit and Push.bat
+Claude Commit.bat
+# Jerry's Suno originals (WAV, ~550 MB). The game plays the mp3s made from them.
+assets/soundtrack/incoming/*.wav
+
+# One page per test run (tools/tests/run-all.mjs): a killed run can leave one behind
+tools/tests/test*.html
+
+# The shipped copy and the desktop shell's build output (tools/package.mjs, desktop/)
+dist/
+desktop/node_modules/
+desktop/src-tauri/target/
+
+# The camera's inbox (tools/CAMERA.md) and Claude's launcher for it
+review/camera/jobs/
+Claude Camera.bat
+
+# CL-163: ElevenLabs music takes while Jerry picks them (45 tracks x up to 4 takes, hundreds of MB).
+# The picked ones go into the game as their own files; the prompts, guides and receipts here stay tracked.
+z-music/**/*.mp3
+
+# Leftovers from "Tidy up Tiny Trek.bat" and a crashed shell (CL-202)
+_DELETE ME/
+bash.exe.stackdump

@@ -1,0 +1,6 @@
+--- a/index.html
++++ b/index.html
+@@
+       mortar:    { slot: 'object', on: ['ground', 'platform', 'floor'], height: 1.2 },
++      m240:      { slot: 'object', on: ['ground', 'platform', 'floor'], height: 1.2 },
+       lure:      { slot: 'object', on: ['ground', 'platform', 'floor'], height: 1.7 },

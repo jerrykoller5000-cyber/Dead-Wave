@@ -1,0 +1,9 @@
+#72 caveguard-hurt
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 0.4 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A short, high, raspy squeal from a gaunt cave creature. Close-up, dry. No words, no music.
+
+In the game: zombieVoice('caveguard', 'hurt')

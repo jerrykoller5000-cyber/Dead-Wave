@@ -1,0 +1,14 @@
+{
+  "index.html": {
+    "beforeSHA256": "419819026d7fab1924e5c4be7496dc1b33a0cc40b90bf877c9ab96fb62b70fc9",
+    "afterSHA256": "5aaddfedcf366f19d46c0ad12a0542ae4befdfe3b18300c5bde0e1a675f7672c",
+    "lineDelta": 10,
+    "BOM": false
+  },
+  "ui/training-danger.js": {
+    "beforeSHA256": "b7aa4cb68253ffc319e05c575bcaefa0612a3190e463cc53fe4ebb882dfc868b",
+    "afterSHA256": "325ddff3afe60f23ab10b2e9d41e8706a13d7936bd07e0400efae5e6388fed1f",
+    "lineDelta": 0,
+    "BOM": false
+  }
+}

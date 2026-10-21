@@ -1,0 +1,35 @@
+✔ shield follows actual scream completion; opening lasts 2.4 seconds (1.4879ms)
+✔ each completed scream creates a fresh opening (0.1817ms)
+✔ head loss and death remove shield and cancel scream (0.1365ms)
+✔ shield never affects another species (0.1026ms)
+✔ half turn is accelerated and bounded at multiple frame rates (1.5754ms)
+✔ scream commits facing, then exhausted pose relaxes (0.2017ms)
+✔ room clear removes private state and hides effects (0.1889ms)
+✔ a Spitter takes time to reverse and steering agrees at 30, 60 and 144 Hz (2.5122ms)
+✔ a jittering target directly behind does not flip the committed turn direction (0.4258ms)
+✔ melee wind-ups hold their facing, and rising/crawling bodies keep existing control (0.3133ms)
+✔ spit preload opens the jaw, leans back, then releases and settles continuously (1.4197ms)
+✔ phase follows resolved distance and stops rather than marching when blocked (3.409ms)
+✔ motion restores every saved transform and reset discards pending shots and gait state (0.3218ms)
+✔ detached legs and hit reactions keep the existing pose (0.2154ms)
+✔ jaw preparation preserves the complete surface while adding an articulated lower-jaw joint (2.0685ms)
+✔ every current zombie has complete, distinct state recipes (1.6486ms)
+✔ low growlers stay low on hits/death too; feral keeps an angry lower register (0.8778ms)
+✔ spider hisses and spitter boils without pitched electronic beeps or shared throats (0.1824ms)
+✔ approved leaper/drowned base voices survive; movement and gurgles remain quiet (0.1807ms)
+✔ soldiers bicker, bomber drones and guardian combines huffs with creature shrieks (0.1652ms)
+✔ screamer is noisy and more intense; demon charge and giant steps have their own shape (0.518ms)
+✔ recipes are immutable, finite, bounded; saturation has no DC or invalid values (1.2403ms)
+✔ combat feedback has independent priority, and leaper movement cannot spam (0.2382ms)
+✔ four structurally different performances per state have bounded costs and immediate combat feedback (14.982ms)
+✔ individual voices stay stable across states; new actors have distinct traits (0.697ms)
+✔ a shuffled phrase bag covers all four choices and never repeats at its boundary (3.278ms)
+✔ character has articulation and source differences, not only randomized pitch (0.747ms)
+ℹ tests 27
+ℹ suites 0
+ℹ pass 27
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 125.7195

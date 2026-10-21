@@ -1,0 +1,272 @@
+{
+ "at": "2026-10-15T09:43:45.750Z",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "results": [
+  {
+   "id": "animal.rabbit",
+   "variant": "loaf",
+   "mode": null,
+   "ok": true,
+   "ms": 220,
+   "tris": 8072,
+   "size": [
+    0.306,
+    0.537,
+    0.522
+   ],
+   "error": null
+  },
+  {
+   "id": "animal.rabbit",
+   "variant": "graze",
+   "mode": null,
+   "ok": true,
+   "ms": 131,
+   "tris": 8072,
+   "size": [
+    0.318,
+    0.566,
+    0.537
+   ],
+   "error": null
+  },
+  {
+   "id": "animal.rabbit",
+   "variant": "groom",
+   "mode": null,
+   "ok": true,
+   "ms": 133,
+   "tris": 8072,
+   "size": [
+    0.281,
+    0.499,
+    0.477
+   ],
+   "error": null
+  },
+  {
+   "id": "animal.rabbit",
+   "variant": "drink",
+   "mode": null,
+   "ok": true,
+   "ms": 134,
+   "tris": 8072,
+   "size": [
+    0.319,
+    0.568,
+    0.536
+   ],
+   "error": null
+  },
+  {
+   "id": "animal.rabbit",
+   "variant": "hop",
+   "mode": null,
+   "ok": true,
+   "ms": 122,
+   "tris": 8072,
+   "size": [
+    0.28,
+    0.492,
+    0.477
+   ],
+   "error": null
+  },
+  {
+   "id": "animal.killer-rabbit",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 117,
+   "tris": 8152,
+   "size": [
+    0.374,
+    0.561,
+    0.577
+   ],
+   "error": null
+  },
+  {
+   "id": "animal.bird",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 170,
+   "tris": 3036,
+   "size": [
+    0.526,
+    0.204,
+    0.501
+   ],
+   "error": null
+  },
+  {
+   "id": "animal.bee",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 105,
+   "tris": 2364,
+   "size": [
+    0.197,
+    0.086,
+    0.211
+   ],
+   "error": null
+  },
+  {
+   "id": "animal.butterfly",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 106,
+   "tris": 1544,
+   "size": [
+    0.338,
+    0.086,
+    0.231
+   ],
+   "error": null
+  },
+  {
+   "id": "animal.frog",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 109,
+   "tris": 5760,
+   "size": [
+    0.147,
+    0.089,
+    0.157
+   ],
+   "error": null
+  },
+  {
+   "id": "animal.squirrel",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 123,
+   "tris": 4628,
+   "size": [
+    0.161,
+    0.293,
+    0.387
+   ],
+   "error": null
+  },
+  {
+   "id": "animal.turtle",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 192,
+   "tris": 2840,
+   "size": [
+    0.286,
+    0.121,
+    0.388
+   ],
+   "error": null
+  },
+  {
+   "id": "animal.fish",
+   "variant": "0",
+   "mode": null,
+   "ok": true,
+   "ms": 105,
+   "tris": 2460,
+   "size": [
+    0.119,
+    0.153,
+    0.353
+   ],
+   "error": null
+  },
+  {
+   "id": "animal.fish",
+   "variant": "1",
+   "mode": null,
+   "ok": true,
+   "ms": 105,
+   "tris": 2460,
+   "size": [
+    0.127,
+    0.164,
+    0.377
+   ],
+   "error": null
+  },
+  {
+   "id": "animal.fish",
+   "variant": "2",
+   "mode": null,
+   "ok": true,
+   "ms": 105,
+   "tris": 2460,
+   "size": [
+    0.171,
+    0.22,
+    0.508
+   ],
+   "error": null
+  },
+  {
+   "id": "animal.fish",
+   "variant": "3",
+   "mode": null,
+   "ok": true,
+   "ms": 100,
+   "tris": 2460,
+   "size": [
+    0.092,
+    0.118,
+    0.273
+   ],
+   "error": null
+  },
+  {
+   "id": "animal.lily-pad",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 102,
+   "tris": 2072,
+   "size": [
+    0.942,
+    0.082,
+    0.943
+   ],
+   "error": null
+  },
+  {
+   "id": "animal.nest",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 105,
+   "tris": 2546,
+   "size": [
+    0.529,
+    0.128,
+    0.523
+   ],
+   "error": null
+  },
+  {
+   "id": "animal.burrow",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 180,
+   "tris": 3542,
+   "size": [
+    1.192,
+    0.389,
+    1.06
+   ],
+   "error": null
+  }
+ ]
+}

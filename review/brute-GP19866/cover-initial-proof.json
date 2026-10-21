@@ -1,0 +1,48 @@
+{
+  "loadSec": 17.727,
+  "hit": {
+    "events": [
+      {
+        "t": 0.0195,
+        "phase": "wind"
+      },
+      {
+        "t": 0.791,
+        "phase": "strike"
+      },
+      {
+        "t": 1.044199999988079,
+        "phase": "recover"
+      },
+      {
+        "t": 1.7062999999821187,
+        "phase": "idle"
+      }
+    ],
+    "hp": 9984,
+    "damage": 16,
+    "knockback": 0.9242856927984349,
+    "impactAt": 0.9078999999761581,
+    "minHand": 0.15560965265436266
+  },
+  "miss": {
+    "hp": 10000,
+    "missFrames": 50,
+    "shake": 0.32901327111445283,
+    "lean": 1.057844741516461,
+    "yawChange": 0
+  },
+  "roll": {
+    "hp": 10000,
+    "phase": "miss"
+  },
+  "height": {
+    "hp": 10000,
+    "phase": "idle"
+  },
+  "cover": {
+    "hp": 9984,
+    "phase": "recover",
+    "wallHp": 130
+  }
+}

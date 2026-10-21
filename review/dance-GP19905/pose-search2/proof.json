@@ -1,0 +1,731 @@
+{
+  "mode": "freeze-search",
+  "alpha": false,
+  "diagnosticLight": true,
+  "motionBlur": false,
+  "motionBlurSamples": 1,
+  "motionBlurAccumulation": null,
+  "captureSourceHash": "a1193135320ad27eef88aff20e9dfa6d9354f9e0250ba4fa55a4a577ef19bc70",
+  "motionBlurShutterFrames": 0,
+  "deliveryDuration": 20,
+  "size": [
+    1280,
+    720
+  ],
+  "fps": 30,
+  "start": 0,
+  "out": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\review\\dance-GP19905\\pose-search2",
+  "outfitPath": "review/dance-GP19905/outfit.json",
+  "started": "2026-10-13T13:59:30.312Z",
+  "motionSourceHash": "62e9bb612a6847ac6c1d8c9a053ae98a1d4acb8b60f1c4339b33ed59be751066",
+  "camera": {
+    "position": [
+      1.9,
+      1.65,
+      4.1
+    ],
+    "look": [
+      0,
+      0.78,
+      0
+    ],
+    "fov": 34
+  },
+  "samples": [
+    {
+      "seconds": 20,
+      "state": {
+        "phrase": "cheek-rest ground freeze",
+        "beat": 34.440766333333336
+      },
+      "contacts": {
+        "hands": [
+          {
+            "point": [
+              0.09520889799831818,
+              0.559772283092628,
+              0.17515355605630406
+            ],
+            "target": [
+              -0.322,
+              0.012,
+              -0.1157
+            ],
+            "error": 0.7474714240451462,
+            "planted": 0
+          },
+          {
+            "point": [
+              0.6957403054756013,
+              0.347480518898428,
+              -0.40454489175283215
+            ],
+            "target": [
+              0.23800000000000002,
+              0.012,
+              -0.1157
+            ],
+            "error": 0.6367925386724946,
+            "planted": 0
+          }
+        ],
+        "feet": [
+          {
+            "point": [
+              -0.6068288260392907,
+              0.5086007833576512,
+              0.1798965117312696
+            ],
+            "target": [
+              -0.222,
+              0.07,
+              -0.3807
+            ],
+            "error": 0.8091553135696455
+          },
+          {
+            "point": [
+              -0.4780471074901985,
+              0.32093921887518523,
+              0.10629469838602237
+            ],
+            "target": [
+              0.13799999999999998,
+              0.07,
+              -0.3807
+            ],
+            "error": 0.8244078884101129
+          }
+        ]
+      },
+      "bounds": {
+        "min": [
+          -0.6575095822791123,
+          -0.02321893185971735,
+          -0.7284729104152985
+        ],
+        "max": [
+          1.0813690749128468,
+          0.8229967057502707,
+          0.33717007498155727
+        ]
+      },
+      "root": [
+        -0.042,
+        0,
+        -0.0907
+      ],
+      "drawCalls": 2,
+      "file": "best.png"
+    }
+  ],
+  "gameRenderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "loadSeconds": 12.718,
+  "setup": {
+    "backend": "webgpu",
+    "picked": {
+      "hat": "ballcapBack",
+      "eyewear": "aviators",
+      "rolled": true,
+      "shorts": false,
+      "gloves": true,
+      "skin": 0,
+      "hair": "darkBrown",
+      "eyes": "blue"
+    },
+    "wardrobe": {
+      "version": 1,
+      "items": {
+        "cap": {
+          "camo": "papDigital",
+          "style": "ballcapBack"
+        },
+        "helmet": {
+          "camo": "papDigital"
+        },
+        "mask": {
+          "camo": "papDigital"
+        },
+        "shirt": {
+          "camo": "papDigital",
+          "sleeves": "rolled"
+        },
+        "trousers": {
+          "camo": "papDigital",
+          "cut": "trousers"
+        },
+        "gloves": {
+          "camo": "feldgrau",
+          "worn": true
+        },
+        "carrier": {
+          "camo": "papDigital"
+        },
+        "pads": {
+          "camo": "papDigital"
+        },
+        "holster": {
+          "camo": "papDigital"
+        },
+        "belt": {
+          "camo": "papDigital"
+        },
+        "pack": {
+          "camo": "papDigital"
+        },
+        "eyewear": {
+          "style": "aviators"
+        },
+        "boots": {
+          "colour": "black",
+          "rubber": "yellow"
+        }
+      },
+      "guns": {
+        "m4": "papDigital",
+        "shotgun": "papDigital",
+        "sniper": "m14Woodland",
+        "minigun": "dpmDesert",
+        "uzi": "papDigital",
+        "pistol": "teloMimetico"
+      },
+      "body": {
+        "hair": "darkBrown",
+        "eyes": "blue",
+        "skin": 0
+      }
+    },
+    "storedWardrobe": null,
+    "gear": {
+      "helmet": {
+        "count": 7,
+        "visible": 7,
+        "sourceCount": 7
+      },
+      "vest": {
+        "count": 10,
+        "visible": 10,
+        "sourceCount": 10
+      },
+      "pads": {
+        "count": 12,
+        "visible": 12,
+        "sourceCount": 12
+      },
+      "nvg": {
+        "count": 1,
+        "visible": 1,
+        "sourceCount": 1
+      },
+      "bareHead": {
+        "count": 1,
+        "visible": 0,
+        "sourceCount": 1
+      },
+      "bareTorso": {
+        "count": 4,
+        "visible": 0,
+        "sourceCount": 4
+      }
+    },
+    "gearOwned": {
+      "helmet": true,
+      "vest": true,
+      "pads": true,
+      "nvg": true
+    },
+    "motionMissing": false,
+    "duration": 20,
+    "source": "Fresh TT.makeMarine in camera browser with TT.dressMarine current page profile and matching live gear visibility",
+    "note": "Read-only latest tt_wardrobe from the Grave Shift Edge profile, port 8766"
+  },
+  "search": {
+    "count": 1620,
+    "best": [
+      {
+        "config": {
+          "freeX": -0.15,
+          "freeY": 0,
+          "freeZ": 0.2,
+          "freeElbow": -0.5,
+          "legZL": 0,
+          "legZR": -0.2,
+          "rootRoll": -1.55,
+          "rootPitch": 0.2,
+          "cheekY": 0.18,
+          "palmTilt": -0.8,
+          "palmRoll": 0.5235987755982988,
+          "poleX": 0.4,
+          "poleY": -2,
+          "poleZ": 0
+        },
+        "wristDeg": 22.436273228940536,
+        "elbow": [
+          0.6808466111549609,
+          0.07998467541064573,
+          -0.38381133768851583
+        ],
+        "elbowFlex": -1.3045158943629922,
+        "armLo": 0.028243664426344378,
+        "bootLo": 0.2396923578412124,
+        "torsoLo": 0.011276804518507377,
+        "palm": [
+          0.6957403054756013,
+          0.347480518898428,
+          -0.40454489175283215
+        ],
+        "headContactError": 0.0003026325958808351,
+        "hip": [
+          -0.042,
+          0.3926130823790973,
+          -0.0907
+        ],
+        "score": 0.23924464809053025
+      },
+      {
+        "config": {
+          "freeX": -0.15,
+          "freeY": 0,
+          "freeZ": 0.2,
+          "freeElbow": -0.5,
+          "legZL": 0,
+          "legZR": -0.2,
+          "rootRoll": -1.55,
+          "rootPitch": 0.2,
+          "cheekY": 0.18,
+          "palmTilt": -0.8,
+          "palmRoll": 0.5235987755982988,
+          "poleX": 0.4,
+          "poleY": -1,
+          "poleZ": 0
+        },
+        "wristDeg": 20.772140375246863,
+        "elbow": [
+          0.6827796481718885,
+          0.08150023185247046,
+          -0.3758737178000807
+        ],
+        "elbowFlex": -1.3045158943629904,
+        "armLo": 0.028901990908550848,
+        "bootLo": 0.2409652456416279,
+        "torsoLo": 0.012956555020451899,
+        "palm": [
+          0.695709560254677,
+          0.3487987022103787,
+          -0.4045363913151202
+        ],
+        "headContactError": 0.00028446982932348974,
+        "hip": [
+          -0.042,
+          0.3938859701795128,
+          -0.0907
+        ],
+        "score": 0.24235465283598914
+      },
+      {
+        "config": {
+          "freeX": -0.15,
+          "freeY": 0,
+          "freeZ": 0.2,
+          "freeElbow": -0.5,
+          "legZL": 0,
+          "legZR": -0.2,
+          "rootRoll": -1.55,
+          "rootPitch": 0.2,
+          "cheekY": 0.18,
+          "palmTilt": -0.8,
+          "palmRoll": 0.5235987755982988,
+          "poleX": 1.2,
+          "poleY": -2,
+          "poleZ": 0
+        },
+        "wristDeg": 19.435400699828204,
+        "elbow": [
+          0.6841658683159115,
+          0.08259605665366349,
+          -0.36949151053143664
+        ],
+        "elbowFlex": -1.3045158943629904,
+        "armLo": 0.02938919481532562,
+        "bootLo": 0.24163530585909027,
+        "torsoLo": 0.013847584607100283,
+        "palm": [
+          0.6956840901262034,
+          0.34950492490647683,
+          -0.4045331073553762
+        ],
+        "headContactError": 0.00027713621027901006,
+        "hip": [
+          -0.042,
+          0.3945560303969752,
+          -0.0907
+        ],
+        "score": 0.2447173361794182
+      },
+      {
+        "config": {
+          "freeX": -0.15,
+          "freeY": 0,
+          "freeZ": 0.2,
+          "freeElbow": -0.5,
+          "legZL": 0,
+          "legZR": -0.2,
+          "rootRoll": -1.55,
+          "rootPitch": 0.2,
+          "cheekY": 0.18,
+          "palmTilt": -0.8,
+          "palmRoll": 0,
+          "poleX": 0.4,
+          "poleY": -2,
+          "poleZ": 0
+        },
+        "wristDeg": 18.314606652337496,
+        "elbow": [
+          0.6752364652534366,
+          0.0805453409720637,
+          -0.40266748608863956
+        ],
+        "elbowFlex": -1.3427451298750464,
+        "armLo": 0.02936603002067143,
+        "bootLo": 0.2410757931257514,
+        "torsoLo": 0.011988046229972904,
+        "palm": [
+          0.6957416950167296,
+          0.34886423209119244,
+          -0.4045682015684864
+        ],
+        "headContactError": 0.00031043860635418145,
+        "hip": [
+          -0.042,
+          0.3939965176636363,
+          -0.0907
+        ],
+        "score": 0.24493453616689895
+      },
+      {
+        "config": {
+          "freeX": -0.15,
+          "freeY": 0,
+          "freeZ": 0.2,
+          "freeElbow": -0.5,
+          "legZL": 0,
+          "legZR": -0.2,
+          "rootRoll": -1.55,
+          "rootPitch": -0.15,
+          "cheekY": 0.18,
+          "palmTilt": -0.8,
+          "palmRoll": 0,
+          "poleX": 0.4,
+          "poleY": -2,
+          "poleZ": 0
+        },
+        "wristDeg": 14.987556688665896,
+        "elbow": [
+          0.6918109446303289,
+          0.08212372679503337,
+          -0.3630640534472672
+        ],
+        "elbowFlex": -1.3427451298750444,
+        "armLo": 0.02971555653550379,
+        "bootLo": 0.2207425024580495,
+        "torsoLo": 0.014270692485127912,
+        "palm": [
+          0.7016809194028722,
+          0.35037528474304147,
+          -0.391269919836224
+        ],
+        "headContactError": 0.000311125304029226,
+        "hip": [
+          -0.042,
+          0.38790349338284064,
+          -0.0907
+        ],
+        "score": 0.2466890357178112
+      },
+      {
+        "config": {
+          "freeX": -0.15,
+          "freeY": 0,
+          "freeZ": 0.2,
+          "freeElbow": -0.5,
+          "legZL": 0,
+          "legZR": -0.2,
+          "rootRoll": -1.55,
+          "rootPitch": 0.02,
+          "cheekY": 0.18,
+          "palmTilt": -0.8,
+          "palmRoll": 0.5235987755982988,
+          "poleX": 0.4,
+          "poleY": -1,
+          "poleZ": 0
+        },
+        "wristDeg": 26.73538277712576,
+        "elbow": [
+          0.6975173825706898,
+          0.08266641053816264,
+          -0.35330286193977734
+        ],
+        "elbowFlex": -1.3045158943629895,
+        "armLo": 0.029784115585204288,
+        "bootLo": 0.23214569027900608,
+        "torsoLo": 0.013178037655727282,
+        "palm": [
+          0.698909207820591,
+          0.3463364050902339,
+          -0.3973882424493447
+        ],
+        "headContactError": 0.00028677514830749613,
+        "hip": [
+          -0.042,
+          0.38815321607104236,
+          -0.0907
+        ],
+        "score": 0.24678832940909642
+      },
+      {
+        "config": {
+          "freeX": -0.15,
+          "freeY": 0,
+          "freeZ": 0.2,
+          "freeElbow": -0.5,
+          "legZL": 0,
+          "legZR": -0.2,
+          "rootRoll": -1.55,
+          "rootPitch": 0.02,
+          "cheekY": 0.18,
+          "palmTilt": -0.8,
+          "palmRoll": 0,
+          "poleX": 0.4,
+          "poleY": -2,
+          "poleZ": 0
+        },
+        "wristDeg": 15.759177560113875,
+        "elbow": [
+          0.6855578797735846,
+          0.08133368267227795,
+          -0.3827992120204065
+        ],
+        "elbowFlex": -1.3427451298750448,
+        "armLo": 0.029778736791521307,
+        "bootLo": 0.23637354993936757,
+        "torsoLo": 0.012766291214387104,
+        "palm": [
+          0.6989357023151878,
+          0.350519263799724,
+          -0.397424939087453
+        ],
+        "headContactError": 0.0003122460185413631,
+        "hip": [
+          -0.042,
+          0.39238107573140385,
+          -0.0907
+        ],
+        "score": 0.24701614414302017
+      },
+      {
+        "config": {
+          "freeX": -0.15,
+          "freeY": 0,
+          "freeZ": 0.2,
+          "freeElbow": -0.5,
+          "legZL": 0,
+          "legZR": -0.2,
+          "rootRoll": -1.55,
+          "rootPitch": 0.2,
+          "cheekY": 0.18,
+          "palmTilt": -0.8,
+          "palmRoll": 0,
+          "poleX": 0.4,
+          "poleY": -1,
+          "poleZ": 0
+        },
+        "wristDeg": 19.38379645287256,
+        "elbow": [
+          0.6784313855249073,
+          0.08236536724965925,
+          -0.3925412561995915
+        ],
+        "elbowFlex": -1.3427451298750457,
+        "armLo": 0.03016516556541901,
+        "bootLo": 0.24239173983359286,
+        "torsoLo": 0.013927428004453346,
+        "palm": [
+          0.695710919736796,
+          0.35022574019519126,
+          -0.4045566018958962
+        ],
+        "headContactError": 0.00029112925671126227,
+        "hip": [
+          -0.042,
+          0.39531246437147777,
+          -0.0907
+        ],
+        "score": 0.24873712039420767
+      },
+      {
+        "config": {
+          "freeX": -0.15,
+          "freeY": 0,
+          "freeZ": 0.2,
+          "freeElbow": -0.5,
+          "legZL": 0,
+          "legZR": -0.2,
+          "rootRoll": -1.55,
+          "rootPitch": -0.15,
+          "cheekY": 0.18,
+          "palmTilt": -0.8,
+          "palmRoll": 0,
+          "poleX": 1.2,
+          "poleY": -2,
+          "poleZ": 0.6
+        },
+        "wristDeg": 18.7837108811348,
+        "elbow": [
+          0.7202030338968801,
+          0.08773899038559606,
+          -0.30076787289167806
+        ],
+        "elbowFlex": -1.3427451298750464,
+        "armLo": 0.030248373463040247,
+        "bootLo": 0.21062806450164712,
+        "torsoLo": 0.013245831695212984,
+        "palm": [
+          0.7016603624419595,
+          0.3403165531311449,
+          -0.39123058857038784
+        ],
+        "headContactError": 0.00029035441294799193,
+        "hip": [
+          -0.042,
+          0.37778905542643826,
+          -0.0907
+        ],
+        "score": 0.2491454114446811
+      },
+      {
+        "config": {
+          "freeX": -0.15,
+          "freeY": 0,
+          "freeZ": 0.2,
+          "freeElbow": -0.5,
+          "legZL": 0,
+          "legZR": -0.2,
+          "rootRoll": -1.55,
+          "rootPitch": 0.2,
+          "cheekY": 0.18,
+          "palmTilt": -0.8,
+          "palmRoll": 0.5235987755982988,
+          "poleX": 1.2,
+          "poleY": -1,
+          "poleZ": 0
+        },
+        "wristDeg": 16.66208477638529,
+        "elbow": [
+          0.6865675940400746,
+          0.08452265927837127,
+          -0.3562607400008218
+        ],
+        "elbowFlex": -1.30451589436299,
+        "armLo": 0.030280742193219988,
+        "bootLo": 0.24203129438612708,
+        "torsoLo": 0.014060574550651905,
+        "palm": [
+          0.6956295973276561,
+          0.34997457366533236,
+          -0.40453631811958163
+        ],
+        "headContactError": 0.00028430842255973215,
+        "hip": [
+          -0.042,
+          0.394952018924012,
+          -0.0907
+        ],
+        "score": 0.24924679519169723
+      },
+      {
+        "config": {
+          "freeX": -0.15,
+          "freeY": 0,
+          "freeZ": 0.2,
+          "freeElbow": -0.5,
+          "legZL": 0,
+          "legZR": -0.2,
+          "rootRoll": -1.55,
+          "rootPitch": 0.02,
+          "cheekY": 0.18,
+          "palmTilt": -0.8,
+          "palmRoll": 0.5235987755982988,
+          "poleX": 1.2,
+          "poleY": -2,
+          "poleZ": 0
+        },
+        "wristDeg": 24.856673374651116,
+        "elbow": [
+          0.7003335377076135,
+          0.08399033865896977,
+          -0.34447011764824936
+        ],
+        "elbowFlex": -1.3045158943629889,
+        "armLo": 0.030394096838071788,
+        "bootLo": 0.23246881168658648,
+        "torsoLo": 0.013332433387962916,
+        "palm": [
+          0.698883795682653,
+          0.3466945790648427,
+          -0.3973826734134046
+        ],
+        "headContactError": 0.000278149034497092,
+        "hip": [
+          -0.042,
+          0.38847633747862276,
+          -0.0907
+        ],
+        "score": 0.24975197453532985
+      },
+      {
+        "config": {
+          "freeX": -0.15,
+          "freeY": 0,
+          "freeZ": 0.2,
+          "freeElbow": -0.5,
+          "legZL": 0,
+          "legZR": -0.2,
+          "rootRoll": -1.55,
+          "rootPitch": 0.2,
+          "cheekY": 0.18,
+          "palmTilt": -0.8,
+          "palmRoll": 0.5235987755982988,
+          "poleX": 0.4,
+          "poleY": -0.3,
+          "poleZ": 0
+        },
+        "wristDeg": 16.21342377019144,
+        "elbow": [
+          0.6868958833820054,
+          0.08479020361191393,
+          -0.3541240607940152
+        ],
+        "elbowFlex": -1.3045158943629895,
+        "armLo": 0.030409755555803428,
+        "bootLo": 0.24196986632437822,
+        "torsoLo": 0.01407074333931585,
+        "palm": [
+          0.6956206259676054,
+          0.34992481843705947,
+          -0.4045381002453999
+        ],
+        "headContactError": 0.0002882127098117343,
+        "hip": [
+          -0.042,
+          0.39489059086226314,
+          -0.0907
+        ],
+        "score": 0.24993090487713449
+      }
+    ],
+    "bestLegs": []
+  },
+  "ok": true,
+  "errors": [],
+  "finished": "2026-10-13T13:59:47.841Z"
+}

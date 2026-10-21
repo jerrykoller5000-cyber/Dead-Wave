@@ -1,0 +1,41 @@
+GP-19903 arm convention audit (read-only source investigation)
+
+Confirmed conventions
+- Upper arm and forearm run down local -Y; +Y up and +Z forward. L suffix is the -X side, R suffix the +X side.
+- Natural elbow flexion is NEGATIVE local X, not positive. Rx(-a)*(0,-1,0) bends toward +Z. Factory elbows are -.35/-.2 (studio/marine-body.js:420); accepted gameplay uses -.24 at rest (index.html:17872), then approximately -.71 to -1.25 at a full run (18965-18970). Elbow y/z stay zero for this unarmed motion.
+- Negative shoulder X lifts an arm forward. Outward shoulder roll is L NEGATIVE Z, R POSITIVE Z. The relaxed gameplay shoulder signs happen to be slightly inward: L z+.11, R z-.11; movement increases outward roll through those signs (index.html:18976).
+- Hand local palm normal is +Z; straight fingers point -Y, curl toward +Z with NEGATIVE finger X (studio/marine-hand.js:6-9,205-206).
+- Actual accepted unarmed wrist orientation is L [.05,+1.15,0], R [.05,-1.15,0] (index.html:42001-42002). This turns the palms inward toward the body, follows the local elbow frame, and avoids solving an arbitrary world-space hand orientation.
+
+Why generic limb IK produced arm flips
+- studio/ik.js:54 chooses positive knee-style local-X bend and constructs shoulder local X from upperDirection cross lowerDirection (64-75). For the same forward arm bend, that axis is opposite the marine's natural arm hinge. The endpoint can therefore be correct while the upper arm twists about 180 degrees around its long axis and the elbow uses the opposite bend convention.
+- The gameplay-specific solveArmIK already solves both hinge branches and explicitly selects the negative natural branch nearest -.8 (index.html:41931-41938). Its existence is strong evidence that generic ikLimb is not sufficient for natural marine arms without adapting that branch.
+- A world-fixed palm quaternion then counter-rotates that unstable shoulder/forearm frame at the wrist. Numerically correct hand contacts do not establish anatomical plausibility.
+
+Recommended upright dance control
+- Author shoulders, negative elbow flex, local wrist, and hand curl in FK. Reserve arm IK for actual brief floor contacts, using the natural negative branch or a deliberately adapted solver. Do not apply world-hand orientation to upright FK poses.
+- Keep elbow x roughly [-1.65,-.12] for these upright keys, elbow y/z zero, shoulder y near zero, wrist x/z small (these keys use |x/z| <= .08). Local wrist y around +/-1.0 to1.15 is the known working inward pronation. It is an existing rig approximation of forearm rotation, not a reason to rotate the upper arm axially.
+- Palms-down is contextual: local-Y pronation plus an outward shoulder reach turns an inward palm downward naturally. Do not force every palm normal to world-down or add a fixed wrist x=PI/2; that reintroduces broken wrists as the elbow moves.
+- Blend relaxed/hang/fist poses with the musical phrase and finger lag, using wrist.userData.hand.set(pose).update(). A held palms-up open-hand pose must not persist through the whole dance.
+
+Three starting keys, local XYZ radians (not a claim of final visual approval)
+Neutral (matches accepted gameplay):
+  L shoulder [-.06,0,+.11], elbow x -.24, wrist [.05,+1.15,0].
+  R shoulder [-.06,0,-.11], elbow x -.24, wrist [.05,-1.15,0].
+Asymmetric running-man pump (reverse left/right pitch and bend next beat):
+  L shoulder [-.55,0,-.08], elbow x -.90, wrist [.05,+1.15,-.05].
+  R shoulder [+.45,0,+.12], elbow x -.65, wrist [.05,-1.15,+.05].
+  Keep the side-dependent shoulder Z and wrist Y signs when swapping the pitch/bend lead.
+Side hit / open side reach (mirror for opposite accent):
+  L shoulder [-.18,0,-1.05], elbow x -.32, wrist [.05,+1.0,-.08].
+  R shoulder [+.12,0,+.16], elbow x -.72, wrist [.05,-1.15,+.05].
+  Side reach can use relaxed -> open -> relaxed fingers; pump uses a loose fist/hang blend.
+
+Numerical verification, vendored THREE rotation composition, upright parent
+Neutral palms: L normal [.8988,.2006,.3898], R [-.8988,.2006,.3898] (inward, not exposed straight upward).
+Pump: L palm [-.3377,.8743,.4355], normal [.9344,.3395,.1081]; R palm [.3710,.5824,.0057], normal [-.9338,-.0388,.3557]. The forward hand is around low chest level, rear hand beside the hip; elbows remain outside torso.
+Side hit: L palm [-.7643,.8315,.2161], normal [.5437,-.5543,.6302] (clearly downward component). R palm [.3868,.6192,.1813], normal [-.9415,.0659,.3304].
+These positions use actual source shoulder offsets +/- .34,1.08,.02, elbow offset 0,-.28,0, L wrist .02,-.214,.06 / R wrist -.01,-.214,.05, palm wrist-local 0,-.048,.016.
+
+What still needs native review
+Render these through the actual posed mesh, shoulder deformation and finger updates. Inspect at least front and 3/4 angles during fast transitions and watch sleeve/upper-arm axial twist. Audit local joint angles and actual visible mesh vertices; then judge real-time motion. Ground contact and zero floor penetration alone are insufficient (v1 passed those while looking anatomically wrong).

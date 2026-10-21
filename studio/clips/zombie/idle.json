@@ -1,0 +1,12 @@
+{
+  "format": "dw-clip/1",
+  "name": "idle",
+  "rig": "zombie",
+  "length": 2.4,
+  "loop": true,
+  "notes": "Standing, dead on its feet: the chest sags and sways, the head lolls. The arms keep the game's droop. The base pose the motion presets react from (D-42).",
+  "tracks": {
+    "spine": { "rot": [[0, [8, 0, -3]], [1.2, [11, 2, 3]], [2.4, [8, 0, -3]]] },
+    "head": { "rot": [[0, [10, 8, 4]], [1.2, [15, -6, -5]], [2.4, [10, 8, 4]]] }
+  }
+}

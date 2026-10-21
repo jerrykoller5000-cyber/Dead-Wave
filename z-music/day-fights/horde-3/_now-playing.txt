@@ -1,0 +1,3 @@
+Fight (9-15 zombies)
+Used for: Fights in daylight, picked by horde size
+The game plays now: assets/soundtrack/chip_fight_1 (dayFight)

@@ -1,0 +1,447 @@
+{
+  "loadSec": 14.348,
+  "checks": [
+    {
+      "primary": "m4",
+      "secondary": "pistol",
+      "packClear": true,
+      "bounds": [
+        {
+          "kind": "pistol",
+          "z": -0.34500000000012604
+        }
+      ],
+      "emptyShift": 0,
+      "hollow": true
+    },
+    {
+      "primary": "m4",
+      "secondary": "revolver",
+      "packClear": true,
+      "bounds": [
+        {
+          "kind": "revolver",
+          "z": -0.34500000000001835
+        },
+        {
+          "kind": "revolver",
+          "z": -0.34499999999990466
+        }
+      ],
+      "emptyShift": 0,
+      "hollow": true
+    },
+    {
+      "primary": "m4",
+      "secondary": "uzi",
+      "packClear": true,
+      "bounds": [
+        {
+          "kind": "uzi",
+          "z": -0.34500000000003306
+        },
+        {
+          "kind": "uzi",
+          "z": -0.34499999999997893
+        }
+      ],
+      "emptyShift": 0,
+      "hollow": true
+    },
+    {
+      "primary": "ak",
+      "secondary": "pistol",
+      "packClear": true,
+      "bounds": [
+        {
+          "kind": "pistol",
+          "z": -0.34500000000012604
+        }
+      ],
+      "emptyShift": 0,
+      "hollow": true
+    },
+    {
+      "primary": "ak",
+      "secondary": "revolver",
+      "packClear": true,
+      "bounds": [
+        {
+          "kind": "revolver",
+          "z": -0.34500000000001835
+        },
+        {
+          "kind": "revolver",
+          "z": -0.34499999999990466
+        }
+      ],
+      "emptyShift": 0,
+      "hollow": true
+    },
+    {
+      "primary": "ak",
+      "secondary": "uzi",
+      "packClear": true,
+      "bounds": [
+        {
+          "kind": "uzi",
+          "z": -0.34500000000003306
+        },
+        {
+          "kind": "uzi",
+          "z": -0.34499999999997893
+        }
+      ],
+      "emptyShift": 0,
+      "hollow": true
+    },
+    {
+      "primary": "aa12",
+      "secondary": "pistol",
+      "packClear": true,
+      "bounds": [
+        {
+          "kind": "pistol",
+          "z": -0.34500000000012604
+        }
+      ],
+      "emptyShift": 0,
+      "hollow": true
+    },
+    {
+      "primary": "aa12",
+      "secondary": "revolver",
+      "packClear": true,
+      "bounds": [
+        {
+          "kind": "revolver",
+          "z": -0.34500000000001835
+        },
+        {
+          "kind": "revolver",
+          "z": -0.34499999999990466
+        }
+      ],
+      "emptyShift": 0,
+      "hollow": true
+    },
+    {
+      "primary": "aa12",
+      "secondary": "uzi",
+      "packClear": true,
+      "bounds": [
+        {
+          "kind": "uzi",
+          "z": -0.34500000000003306
+        },
+        {
+          "kind": "uzi",
+          "z": -0.34499999999997893
+        }
+      ],
+      "emptyShift": 0,
+      "hollow": true
+    },
+    {
+      "primary": "shotgun",
+      "secondary": "pistol",
+      "packClear": true,
+      "bounds": [
+        {
+          "kind": "pistol",
+          "z": -0.34500000000012604
+        }
+      ],
+      "emptyShift": 0,
+      "hollow": true
+    },
+    {
+      "primary": "shotgun",
+      "secondary": "revolver",
+      "packClear": true,
+      "bounds": [
+        {
+          "kind": "revolver",
+          "z": -0.34500000000001835
+        },
+        {
+          "kind": "revolver",
+          "z": -0.34500000000001835
+        }
+      ],
+      "emptyShift": 0,
+      "hollow": true
+    },
+    {
+      "primary": "shotgun",
+      "secondary": "uzi",
+      "packClear": true,
+      "bounds": [
+        {
+          "kind": "uzi",
+          "z": -0.34499999999991937
+        },
+        {
+          "kind": "uzi",
+          "z": -0.34499999999997893
+        }
+      ],
+      "emptyShift": 0,
+      "hollow": true
+    },
+    {
+      "primary": "sniper",
+      "secondary": "pistol",
+      "packClear": true,
+      "bounds": [
+        {
+          "kind": "pistol",
+          "z": -0.34500000000012604
+        }
+      ],
+      "emptyShift": 0,
+      "hollow": true
+    },
+    {
+      "primary": "sniper",
+      "secondary": "revolver",
+      "packClear": true,
+      "bounds": [
+        {
+          "kind": "revolver",
+          "z": -0.34500000000001835
+        },
+        {
+          "kind": "revolver",
+          "z": -0.34499999999990466
+        }
+      ],
+      "emptyShift": 0,
+      "hollow": true
+    },
+    {
+      "primary": "sniper",
+      "secondary": "uzi",
+      "packClear": true,
+      "bounds": [
+        {
+          "kind": "uzi",
+          "z": -0.34500000000003306
+        },
+        {
+          "kind": "uzi",
+          "z": -0.34499999999997893
+        }
+      ],
+      "emptyShift": 0,
+      "hollow": true
+    },
+    {
+      "primary": "launcher",
+      "secondary": "pistol",
+      "packClear": true,
+      "bounds": [
+        {
+          "kind": "pistol",
+          "z": -0.34500000000012604
+        }
+      ],
+      "emptyShift": 0,
+      "hollow": true
+    },
+    {
+      "primary": "launcher",
+      "secondary": "revolver",
+      "packClear": true,
+      "bounds": [
+        {
+          "kind": "revolver",
+          "z": -0.34500000000001835
+        },
+        {
+          "kind": "revolver",
+          "z": -0.34500000000001835
+        }
+      ],
+      "emptyShift": 0,
+      "hollow": true
+    },
+    {
+      "primary": "launcher",
+      "secondary": "uzi",
+      "packClear": true,
+      "bounds": [
+        {
+          "kind": "uzi",
+          "z": -0.34499999999991937
+        },
+        {
+          "kind": "uzi",
+          "z": -0.34499999999997893
+        }
+      ],
+      "emptyShift": 0,
+      "hollow": true
+    },
+    {
+      "primary": "flamer",
+      "secondary": "pistol",
+      "packClear": true,
+      "bounds": [
+        {
+          "kind": "pistol",
+          "z": -0.34500000000012604
+        }
+      ],
+      "emptyShift": 0,
+      "hollow": true
+    },
+    {
+      "primary": "flamer",
+      "secondary": "revolver",
+      "packClear": true,
+      "bounds": [
+        {
+          "kind": "revolver",
+          "z": -0.34500000000001835
+        },
+        {
+          "kind": "revolver",
+          "z": -0.34499999999990466
+        }
+      ],
+      "emptyShift": 0,
+      "hollow": true
+    },
+    {
+      "primary": "flamer",
+      "secondary": "uzi",
+      "packClear": true,
+      "bounds": [
+        {
+          "kind": "uzi",
+          "z": -0.34500000000003306
+        },
+        {
+          "kind": "uzi",
+          "z": -0.34499999999997893
+        }
+      ],
+      "emptyShift": 0,
+      "hollow": true
+    },
+    {
+      "primary": "chainsaw",
+      "secondary": "pistol",
+      "packClear": true,
+      "bounds": [
+        {
+          "kind": "pistol",
+          "z": -0.34500000000012604
+        }
+      ],
+      "emptyShift": 0,
+      "hollow": true
+    },
+    {
+      "primary": "chainsaw",
+      "secondary": "revolver",
+      "packClear": true,
+      "bounds": [
+        {
+          "kind": "revolver",
+          "z": -0.34500000000001835
+        },
+        {
+          "kind": "revolver",
+          "z": -0.34499999999990466
+        }
+      ],
+      "emptyShift": 0,
+      "hollow": true
+    },
+    {
+      "primary": "chainsaw",
+      "secondary": "uzi",
+      "packClear": true,
+      "bounds": [
+        {
+          "kind": "uzi",
+          "z": -0.34500000000003306
+        },
+        {
+          "kind": "uzi",
+          "z": -0.34499999999997893
+        }
+      ],
+      "emptyShift": 0,
+      "hollow": true
+    },
+    {
+      "primary": "minigun",
+      "secondary": "pistol",
+      "packClear": true,
+      "bounds": [
+        {
+          "kind": "pistol",
+          "z": -0.34500000000012604
+        }
+      ],
+      "emptyShift": 0,
+      "hollow": true
+    },
+    {
+      "primary": "minigun",
+      "secondary": "revolver",
+      "packClear": true,
+      "bounds": [
+        {
+          "kind": "revolver",
+          "z": -0.34500000000001835
+        },
+        {
+          "kind": "revolver",
+          "z": -0.34499999999990466
+        }
+      ],
+      "emptyShift": 0,
+      "hollow": true
+    },
+    {
+      "primary": "minigun",
+      "secondary": "uzi",
+      "packClear": true,
+      "bounds": [
+        {
+          "kind": "uzi",
+          "z": -0.34500000000003306
+        },
+        {
+          "kind": "uzi",
+          "z": -0.34499999999997893
+        }
+      ],
+      "emptyShift": 0,
+      "hollow": true
+    }
+  ],
+  "poses": [
+    {
+      "move": "walk",
+      "bad": []
+    },
+    {
+      "move": "run",
+      "bad": []
+    },
+    {
+      "move": "crouch",
+      "bad": []
+    },
+    {
+      "move": "smoke",
+      "bad": []
+    }
+  ],
+  "errors": []
+}

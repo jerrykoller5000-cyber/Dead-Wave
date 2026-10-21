@@ -1,0 +1,9 @@
+#68 weapons/shotgun
+TRY: synthesized and already decent; record it, compare, keep the better one
+Now: GUN shotgun (Breacher-12)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 1.2 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A single 12 gauge pump shotgun blast outdoors, a huge deep boom with echo. No music, no voice.

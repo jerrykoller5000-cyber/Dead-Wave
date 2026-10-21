@@ -1,0 +1,17 @@
+{
+  "hash": "70c112dfbd97d372dc91fa8023a15a3b76b29cf51b5b4243d81e41005c8fe530",
+  "anchors": [
+    "    import { prepareMilitaryAppearance, cycleMilitaryCamo } from './ga",
+    "typeKey === 'shambler' || typeKey === 'drowned' || typeKey === 'milita",
+    "        if (ud.typeKey === 'drowned') resetDrownedMotion({ typeKey: ud",
+    "      resetMilitary(z); // GP-19864: restore the soldier before the co",
+    "      for (const z of zombies) resetMilitary(z);",
+    "        restoreMilitaryPose(z); // GP-19864",
+    "        let militaryStep = null;",
+    "z.mesh.rotation.y = militaryStep ? militaryStep.yaw",
+    "!militaryStep?.busy && z.attackWindup",
+    "            if (type === 'player' && chooseDrownedAttack",
+    "const contact = stillNearPlayer && militaryCanReach",
+    "        applyMilitaryPose(z, dt); // GP-19864"
+  ]
+}

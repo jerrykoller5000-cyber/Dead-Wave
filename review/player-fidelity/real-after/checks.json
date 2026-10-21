@@ -1,0 +1,49 @@
+{
+  "before": false,
+  "sourceHashes": {
+    "studio/marine-body.js": "c4bb56f8ecac3b305cfc8967c36fcc251a23f08cfe53eeb5557b58b5836f57ad",
+    "ui/marine-face.js": "fe2db293cf8205894ad0f2e06499f8433d526edafd8bec0e79abffd0bba2fd5b",
+    "studio/marine-detail.js": "15656a503c46fb04b31e81f6277f3b77c4a7f9c87d82cdd6fbf1d2648351c093",
+    "studio/marine-headgear.js": "23363fe21d47cd152df80bfd0aeed545c51ec7e5ce4672da8714018c5e244f1d",
+    "index.html (makeMarine)": "080aba097bc135ec487863c02db5f6556571643edfd23bed08d17ef2591beb46"
+  },
+  "sourceUnchanged": true,
+  "results": {
+    "t199": {
+      "pass": 10,
+      "fail": 0,
+      "skip": 0
+    },
+    "t134": {
+      "pass": 9,
+      "fail": 0,
+      "skip": 0
+    },
+    "t146": {
+      "pass": 43,
+      "fail": 0,
+      "skip": 0
+    },
+    "t184": {
+      "pass": 27,
+      "fail": 2,
+      "skip": 0
+    },
+    "t224": {
+      "pass": 42,
+      "fail": 0,
+      "skip": 0
+    },
+    "t189": {
+      "pass": 42,
+      "fail": 5,
+      "skip": 0
+    }
+  },
+  "errors": [
+    "Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'.",
+    "Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'.",
+    "Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'.",
+    "Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'."
+  ]
+}

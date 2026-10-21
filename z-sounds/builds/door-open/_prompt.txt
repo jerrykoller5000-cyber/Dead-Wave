@@ -1,0 +1,9 @@
+#95 builds/door-open
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: doorSound(open)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.8 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A heavy reinforced wooden door swinging open, a creaking hinge. No music, no voice.

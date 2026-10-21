@@ -1,0 +1,9 @@
+#88 footsteps-hop
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 0.6 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A single heavy one-legged hop landing on dirt, a stumbling thump. No voice, no music.
+
+In the game: deadStep('hop') — a maimed zombie hopping on one leg

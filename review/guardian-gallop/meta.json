@@ -1,0 +1,9 @@
+{
+  "asset": "guardian-gallop",
+  "owner": "claude",
+  "rig": "guardian",
+  "clip": "gallop",
+  "reference": "Sprint_Loop",
+  "task": "CL-62",
+  "design": "default"
+}

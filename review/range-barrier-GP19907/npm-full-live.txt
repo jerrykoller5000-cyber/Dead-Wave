@@ -1,0 +1,9 @@
+
+> grave-shift@0.1.0 test
+> node tools/tests/run-all.mjs --jobs 4 --no-retry
+
+check-players: 294 player.position reads, all in the allowed places
+ERROR t6a      0 pass   0 fail  240.0s  — window.TT never appeared: no page error reported
+ERROR tfish    0 pass   0 fail  240.0s  — window.TT never appeared: no page error reported
+ERROR t0       0 pass   0 fail  240.0s  — window.TT never appeared: no page error reported
+ERROR t1       0 pass   0 fail  240.3s  — window.TT never appeared: no page error reported

@@ -1,0 +1,2 @@
+#hudNotices #supplyNotice { position:static; box-sizing:border-box; width:100%; padding:9px 10px; border-left:3px solid #ffe066; background:#10180de8; color:#f4ecc5; font:700 11px/1.45 var(--font-hud); letter-spacing:.025em; text-align:left; overflow-wrap:anywhere; box-shadow:0 5px 16px #0007; }
+#hudNotices #supplyNotice[hidden] { display:none; }

@@ -1,0 +1,81 @@
+    function buildWatchtower(cx, cz) {
+      const gy = groundMinAround(cx, cz, 1.6);
+      const parts = [];
+      const wood = new THREE.MeshStandardMaterial({ color: 0x6b4a2a });
+      const woodDark = new THREE.MeshStandardMaterial({ color: 0x503722 });
+      for (const [lx, lz] of [[-1.1, -1.1], [1.1, -1.1], [-1.1, 1.1], [1.1, 1.1]]) {
+        poiBox(parts, wood, 0.26, 5.6, 0.26, lx, 2.8, lz, 0, lx * 0.045, -lz * 0.045);
+      }
+      // Cross braces
+      poiBox(parts, woodDark, 0.14, 3.2, 0.14, 0, 1.7, -1.14, 0, 0.72);
+      poiBox(parts, woodDark, 0.14, 3.2, 0.14, 0, 1.7, 1.14, 0, -0.72);
+      poiBox(parts, woodDark, 0.14, 3.2, 0.14, -1.14, 1.7, 0, 0, 0, 0.72);
+      poiBox(parts, woodDark, 0.14, 3.2, 0.14, 1.14, 1.7, 0, 0, 0, -0.72);
+      poiBox(parts, wood, 3.0, 0.2, 3.0, 0, 5.5, 0);                       // deck
+      // Open balustrades let the lookout read from below; the ladder has a real gap.
+      for (const x of [-1.43, 1.43]) for (const z of [-1.43, 0, 1.43])
+        poiBox(parts, wood, 0.12, 0.88, 0.12, x, 6.02, z);
+      for (const y of [5.94, 6.42]) {
+        for (const x of [-1.43, 1.43]) poiBox(parts, woodDark, 0.1, 0.09, 2.9, x, y, 0);
+        poiBox(parts, woodDark, 2.9, 0.09, 0.1, 0, y, 1.43);
+        for (const x of [-1.0, 1.0]) poiBox(parts, woodDark, 0.91, 0.09, 0.1, x, y, -1.43);
+      }
+      // No roof — an open deck gives a clean, unobstructed firing position up top
+      // (also means the lantern and the sky above it are actually visible from below).
+
+      // A ladder up the south face, planted just clear of the tower's own collision
+      // cylinder so climbing it never has to fight the collision that keeps you off
+      // the base. A short landing bridges the gap to the deck edge up top.
+      for (const lx of [-0.35, 0.35]) {
+        poiBox(parts, woodDark, 0.08, 5.5, 0.08, lx, 2.85, -TOWER_LADDER_OUT);
+      }
+      for (let i = 0; i < 15; i++) {
+        poiBox(parts, wood, 0.78, 0.07, 0.07, 0, 0.35 + i * 0.36, -TOWER_LADDER_OUT);
+      }
+      poiBox(parts, woodDark, 0.9, 0.12, TOWER_LADDER_OUT - 1.4, 0, 5.56, -(TOWER_LADDER_OUT + 1.4) / 2);
+
+      const details = appendLandmarkDetails(parts, 'tower', cx, cz, gy, 0, { ladderOut: TOWER_LADDER_OUT });
+
+      const mesh = mergeParts(parts, poiMat, { castShadow: true, receiveShadow: true });
+      mesh.position.set(cx, gy, cz);
+      scene.add(mesh);
+
+      const towerObj = {
+        kind: 'tower', x: cx, z: cz, gy, hp: TOWER_MAX_HP, maxHp: TOWER_MAX_HP, alive: true,
+        mesh, colliders: [], debrisColor: 0x6b4a2a, rubbleRadius: 2.4,
+        deckY: gy + 5.62, ladderX: cx, ladderZ: cz - TOWER_LADDER_OUT, idleT: 0
+      };
+      towerObj.colliders.push(addSolid(cx, cz, 1.75, gy, gy + 5.4, towerObj));
+      details.register(towerObj);
+      mesh.userData.landmarkTheme = details.theme;
+
+      // Lantern up top — reads from right across the valley at night.
+      const light = new THREE.PointLight(0xffb066, 0, 16, 2);
+      light.position.set(cx - 1.08, gy + 6.1, cz + 1.08);
+      scene.add(light);
+      campfires.push({ x: cx, z: cz, y: gy + 5.6, light, phase: 2.1, lantern: true });
+      towerObj.light = light;
+
+      // A small floating condition bar, shown only once it's actually taken a hit —
+      // built from its own assets rather than the barricade HUD's, which aren't
+      // defined yet at the point the world generates.
+      const barGroup = new THREE.Group();
+      barGroup.add(new THREE.Mesh(
+        new THREE.PlaneGeometry(1.0, 0.1),
+        new THREE.MeshBasicMaterial({ color: 0x151a20, transparent: true, opacity: 0.8, depthWrite: false })
+      ));
+      const barFgMat = new THREE.MeshBasicMaterial({ color: 0x51d86a, depthWrite: false, transparent: true, opacity: 0.95 });
+      const barFg = new THREE.Mesh(new THREE.PlaneGeometry(0.94, 0.08), barFgMat);
+      barFg.position.z = 0.004;
+      barGroup.add(barFg);
+      barGroup.visible = false;
+      barGroup.renderOrder = 5;
+      scene.add(barGroup);
+      towerObj.bar = barGroup;
+      towerObj.barFg = barFg;
+      towerObj.barFgMat = barFgMat;
+
+      tower = towerObj;
+      landmarks.push(towerObj);
+    }
+

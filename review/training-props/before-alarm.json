@@ -1,0 +1,32 @@
+{
+ "target": "player",
+ "label": "player",
+ "view": null,
+ "cam": {
+  "fov": 45,
+  "x": -33,
+  "y": -195,
+  "z": -641.5,
+  "tx": -44,
+  "ty": -198.3,
+  "tz": -639.5
+ },
+ "time": 0.5,
+ "size": [
+  1440,
+  900
+ ],
+ "center": {
+  "x": -24,
+  "y": -199.1,
+  "z": -638
+ },
+ "boxSize": {
+  "x": 0.8,
+  "y": 1.9,
+  "z": 0.8
+ },
+ "mode": "title",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "at": "2026-10-09T21:12:21.850Z"
+}

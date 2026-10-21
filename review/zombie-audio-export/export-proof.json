@@ -1,0 +1,19 @@
+{
+  "completedAt": "2026-10-10T04:21:35.670Z",
+  "staging": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\.tmp-zombie-audio-GP-178",
+  "sourceHashes": {
+    "core/audio.js": "83decda1cf1faded3a3b6243ad4f8887c76948f13fb39906bbfd1e8775fd0a8a",
+    "ui/zombie-audio.js": "c75082efb3038411e8b368db4eb2fe91cb274edeccfdfe70bc131e4d4ff113c1",
+    "ui/zombie-vocal-phrases.js": "2c2c2d97012a0aa63dd0f745d97d69b0b3a9c3a7fb5be2a16b4883223fc57847"
+  },
+  "individualClips": 292,
+  "latestReferences": 103,
+  "earlierClips": 157,
+  "totalWavs": 552,
+  "totalBytes": 457768998,
+  "maximumIndividualPeak": 0.5279595255851746,
+  "allVariantsCovered": true,
+  "allTailsComplete": true,
+  "allFilesDistinct": true,
+  "browserErrors": []
+}

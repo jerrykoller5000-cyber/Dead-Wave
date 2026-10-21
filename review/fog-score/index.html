@@ -1,0 +1,38 @@
+<!doctype html><meta charset="utf-8"><title>fog night's score</title>
+<style>body{margin:24px;background:#14181f;color:#e6e6e0;font-family:Georgia,serif;max-width:1100px} h1,h2{font-weight:normal}
+button{font:inherit;background:#2a313b;color:#e6e6e0;border:1px solid #556;border-radius:6px;padding:8px 14px;margin:4px;cursor:pointer}
+button.on{background:#5a7f92} img{width:100%;margin-top:10px} .row{margin:8px 0}</style>
+<h1>Fog Night's own score · CL-77 · v1</h1>
+<p>Night 14 is Fog Night. Until now it played night 14's normal fight song. Now it has its own: the same song family,
+the same parts in the same order, but heard through the fog. At first the band is far off and muffled, with a foghorn and
+the mist breathing over it. As the fight goes on it gets clearer, part by part, and the last part (climax) is almost clear.
+Click a part to hear it loop. Click it again to stop. The second row is night 14's normal song, to compare.
+Your notes go in notes.md.</p>
+<div id="rows"></div>
+<p><button id="stop">Stop</button></p>
+<h2>What the fog does (a picture of the sound)</h2>
+<p>Brighter means louder; higher up means higher notes. The dark top on the left is the fog cutting the high sounds.</p>
+<img src="v1/fog-spectrogram.png">
+<script>
+const songs = [['Fog Night (new)', '../../assets/soundtrack/fight_fognight_sections.ogg', [["stalk", 0.0, 17.1429], ["dropA", 17.1429, 34.2857], ["riffB", 51.4286, 34.2857], ["break", 85.7143, 17.1429], ["dropA2", 102.8571, 34.2857], ["bridge", 137.1428, 34.2857], ["climax", 171.4286, 34.2857]]],
+               ['Night 14 (as it was)', '../../assets/soundtrack/fight_n14_sections.ogg', [["stalk", 0.0, 16.5517], ["dropA", 16.5517, 33.1035], ["riffB", 49.6552, 33.1035], ["break", 82.7586, 16.5517], ["dropA2", 99.3104, 33.1035], ["bridge", 132.4138, 33.1035], ["climax", 165.5173, 33.1035]]]];
+const el = new Audio(); let cur = null, btn = null, src = null;
+el.addEventListener('timeupdate', () => { if (cur && el.currentTime >= cur[1] + cur[2] - 0.05) el.currentTime = cur[1]; });
+function stop() { el.pause(); cur = null; if (btn) btn.classList.remove('on'); btn = null; }
+document.getElementById('stop').onclick = stop;
+const rows = document.getElementById('rows');
+for (const [title, file, secs] of songs) {
+  const d = document.createElement('div'); d.className = 'row'; d.innerHTML = '<h2>' + title + '</h2>';
+  for (const s of secs) {
+    const b = document.createElement('button'); b.textContent = s[0];
+    b.onclick = () => {
+      if (btn === b) return stop();
+      stop(); cur = s; btn = b; b.classList.add('on');
+      const go = () => { el.currentTime = s[1]; el.play(); };
+      if (src !== file) { src = file; el.src = file; el.addEventListener('loadedmetadata', go, { once: true }); } else go();
+    };
+    d.appendChild(b);
+  }
+  rows.appendChild(d);
+}
+</script>

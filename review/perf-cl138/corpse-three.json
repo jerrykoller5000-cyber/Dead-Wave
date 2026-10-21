@@ -1,0 +1,32 @@
+{
+ "target": "corpse",
+ "label": "corpse feral",
+ "view": "three",
+ "cam": {
+  "x": -14.798207278148658,
+  "y": -195.52638061813747,
+  "z": -640.8007448358032,
+  "tx": -20,
+  "ty": -199.3,
+  "tz": -647,
+  "fov": 35
+ },
+ "time": 0.5,
+ "size": [
+  1600,
+  900
+ ],
+ "center": {
+  "x": -20,
+  "y": -199.3,
+  "z": -647
+ },
+ "boxSize": {
+  "x": 2.4,
+  "y": 1.9,
+  "z": 2.4
+ },
+ "mode": "training",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "at": "2026-10-09T22:01:01.392Z"
+}

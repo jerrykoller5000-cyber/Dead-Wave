@@ -1,0 +1,47 @@
+<!doctype html><meta charset="utf-8"><title>below: the sound (CL-101)</title>
+<script type="module">
+// tools/belowsound.mjs drives this: a scripted walk below with AudioSys's ambience, recorded off the mix.
+class RecCtx extends (window.AudioContext || window.webkitAudioContext) {
+  constructor(o) { super(o); const rec = this.createMediaStreamDestination(); Object.defineProperty(this, 'destination', { value: rec }); this._rec = rec; }
+}
+window.AudioContext = RecCtx;
+const { AudioSys: A } = await import('../core/audio.js');
+window.runTour = async (theme, plan) => {
+  A.setMuted && A.setMuted(false);
+  A.ambienceStart();
+  const st = { dt: 0.05, wind: 0.55, water: 0, night: false, rain: 0, started: true, forest: 0.7, below: null };
+  const B = { on: true, theme, stir: 0, phase: 'calm', hush: true };
+  let recorder = null, chunks = [];
+  const tryRec = () => {
+    const rec = window.__rec; if (recorder || !rec) return;
+    recorder = new MediaRecorder(rec.stream, { mimeType: 'audio/webm;codecs=opus' });
+    recorder.ondataavailable = (e) => chunks.push(e.data); recorder.start();
+  };
+  const t0 = performance.now(); const marks = [];
+  while (true) {
+    const t = (performance.now() - t0) / 1000;
+    const step = plan.find((p) => t >= p.from && t < p.to);
+    if (!step) break;
+    if (!marks.includes(step.label)) marks.push(step.label);
+    st.cave = step.cave || 0; st.cavePan = step.cavePan || 0; st.pit = step.pit || 0; st.night = !!step.night;   // CL-82
+    if (step.below) {
+      B.theme = theme; B.phase = step.phase || 'calm'; B.hush = step.hush !== false;
+      B.stir = step.stir != null ? step.stir : (step.stirFrom + (step.stirTo - step.stirFrom) * (t - step.from) / (step.to - step.from));
+      st.below = B;
+    } else st.below = null;
+    A.updateAmbience(st);
+    tryRec();
+    await new Promise((r) => setTimeout(r, 50));
+  }
+  if (!recorder) return { error: 'no recorder' };
+  await new Promise((r) => { recorder.onstop = r; recorder.stop(); });
+  const blob = new Blob(chunks, { type: 'audio/webm' });
+  const buf = new Uint8Array(await blob.arrayBuffer());
+  let s = ''; for (let i = 0; i < buf.length; i += 0x8000) s += String.fromCharCode.apply(null, buf.subarray(i, i + 0x8000));
+  return { b64: btoa(s), marks, counts: A.belowState().counts };
+};
+// the recorder's stream: the context is made lazily by AudioSys, so catch it when it is
+const origCMSD = AudioContext.prototype.createMediaStreamDestination;
+AudioContext.prototype.createMediaStreamDestination = function () { const d = origCMSD.call(this); window.__rec = d; return d; };
+window.ready = true;
+</script>

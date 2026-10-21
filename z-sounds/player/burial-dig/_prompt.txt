@@ -1,0 +1,9 @@
+#25 player/burial-dig
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: gravePat()
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 1 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A shovel pushing into dirt and patting a grave mound flat, two pats. No music, no voice.

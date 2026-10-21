@@ -1,0 +1,37 @@
+import { chromium } from 'playwright';
+import fs from 'fs';
+const out = process.argv[2] || 't';
+const b = await chromium.launch({ executablePath: process.env.CHROME || undefined, args: ['--no-sandbox'] });
+const p = await b.newPage({ viewport: { width: 800, height: 600 } });
+p.on('pageerror', e => console.log('PAGEERROR', e.message));
+p.on('console', m => { if (/TERR/.test(m.text())) console.log(m.text()); });
+await p.goto('http://localhost:' + (process.env.PORT || 8793) + '/' + (process.env.PAGE || 'test.html') + '?debug=1&raf=timer', { waitUntil: 'load' });
+for (let i = 0; i < 80; i++) { if (await p.evaluate('!!window.TT')) break; await p.waitForTimeout(500); }
+await p.addScriptTag({ content: fs.readFileSync(new URL('./renderer.js', import.meta.url), 'utf8') });
+if (fs.existsSync(new URL('./detail.js', import.meta.url))) await p.addScriptTag({ content: fs.readFileSync(new URL('./detail.js', import.meta.url), 'utf8') });
+const only = process.env.ONLY || '';
+const res = await p.evaluate(async (only) => {
+  const T = window.TT; const THREE = T.THREE;
+  const shots = {};
+  const waters = []; T.scene.traverse(o => { if (o.isMesh && o.material && o.material.transparent && o.material.opacity > 0.5 && o.geometry && o.geometry.attributes.position && o.geometry.attributes.position.count > 200 && o !== T.ground) waters.push(o); });
+  const all = [T.ground, ...waters.slice(0, 6)];
+  const g0 = T.sampleHeight(0, 0);
+  const sky = [0.53, 0.72, 1.0];
+  const O = { physical: true, fog: [0.24, 0.47, 1.0, 190, 640], shade: window.__shade || null };
+  const want = (k) => !only || only.split(',').includes(k);
+  const R = (k, cam, w, h, o2) => { if (!want(k)) return; window.__camK = 2 * Math.tan((cam.fov || 30) * Math.PI / 360) / h; shots[k] = window.__render(all, cam, w, h, sky, Object.assign({}, O, o2 || {})).url; };
+  R('top', { pos: [0.01, 700, 0], target: [0, 0, 0], fov: 38 }, 900, 900, { fog: null });
+  R('topc', { pos: [0.01, 300, 0], target: [0, 0, 0], fov: 30 }, 900, 900, { fog: null });
+  R('game', { pos: [-4, g0 + 17, 14], target: [-10, g0, -4], fov: 50 }, 960, 540);
+  R('spawn', { pos: [12, g0 + 22, 30], target: [0, g0, 0], fov: 50 }, 900, 560);
+  R('walk', { pos: [3, g0 + 1.7, 9], target: [-8, g0, -20], fov: 60 }, 900, 560);
+  const gy = T.POI.graveyard; if (gy) R('grave', { pos: [gy.x + 10, T.sampleHeight(gy.x, gy.z) + 16, gy.z + 22], target: [gy.x, T.sampleHeight(gy.x, gy.z), gy.z], fov: 50 }, 900, 560);
+  R('lake', { pos: [-60, 40, -40], target: [-138, -3, -104], fov: 55 }, 900, 560);
+  R('mtn', { pos: [40, 60, 40], target: [150, 30, 150], fov: 55 }, 900, 560);
+  const br = T.POI.bridges[+(window.__brIdx || 0)]; if (br) R('bridge', { pos: [br.x + 6, T.sampleHeight(br.x, br.z) + 14, br.z - 22], target: [br.x, T.sampleHeight(br.x, br.z), br.z], fov: 55 }, 900, 560);
+  const cp = T.POI.campsites[0]; if (cp) R('camp', { pos: [cp.x + 12, T.sampleHeight(cp.x, cp.z) + 10, cp.z + 14], target: [cp.x, T.sampleHeight(cp.x, cp.z), cp.z], fov: 55 }, 900, 560);
+  return { shots, waters: waters.length };
+}, only);
+for (const [k, url] of Object.entries(res.shots)) fs.writeFileSync(`${out}_${k}.png`, Buffer.from(url.split(',')[1], 'base64'));
+console.log('done', res.waters);
+await b.close();

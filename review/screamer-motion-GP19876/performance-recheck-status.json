@@ -1,0 +1,5 @@
+{
+  "status": "not verified",
+  "reason": "Follow-up native browser load stalled for over five minutes without reaching the measurements. Verified only the task-owned Node process and its temporary browser descendants and stopped that tree; original completed paired results retained.",
+  "ownedProcessId": 26800
+}

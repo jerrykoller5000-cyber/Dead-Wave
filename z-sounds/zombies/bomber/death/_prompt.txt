@@ -1,0 +1,9 @@
+#51 bomber-death
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 1.5 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A bloated zombie's last hollow, gassy groan, deflating with a long wet hiss of escaping gas. Close-up, dry. No words, no music.
+
+In the game: zombieVoice('bomber', 'death')

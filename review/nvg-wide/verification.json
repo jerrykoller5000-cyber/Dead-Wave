@@ -1,0 +1,15 @@
+{
+  "on": "block",
+  "off": "none",
+  "restored": true,
+  "grainClip": "none",
+  "fps": 60.93906093906094,
+  "low": 55.55555555555556,
+  "worstMs": 18,
+  "command": "node tools/camera.mjs job review/nvg-wide/check.json",
+  "screenshots": [
+    "before.png",
+    "after.png"
+  ],
+  "notes": "Matched camera and active NVGs. Camera lens unchanged. Short FPS sample only."
+}

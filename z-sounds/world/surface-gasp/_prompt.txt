@@ -1,0 +1,9 @@
+#144 world/surface-gasp
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: surface()
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 1.2 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A man bursting up out of water and gasping for air, dripping. No words.

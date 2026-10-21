@@ -1,0 +1,4 @@
+{
+  "cmd": "eval",
+  "code": "T.setGearDbg('flashlight');document.activeElement?.blur();if(!/Light ON/.test(document.getElementById('tacticalLine').textContent)){document.body.dispatchEvent(new KeyboardEvent('keydown',{code:'Digit2',key:'2',bubbles:true}));document.body.dispatchEvent(new KeyboardEvent('keyup',{code:'Digit2',key:'2',bubbles:true}));}await wait(600);return {hud:document.getElementById('tacticalLine').textContent,errors:window.nvgReviewErrors||[]};"
+}

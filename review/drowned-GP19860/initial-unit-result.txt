@@ -1,0 +1,46 @@
+✔ a grab has a visible tell before a single catch (1.624ms)
+✔ turning behind a committed grab makes it miss (0.2741ms)
+✔ range, height, cover and dodge each prevent a catch (0.2246ms)
+✔ only one drowned can hold a player and release gives a brief safe interval (0.182ms)
+✔ dodging and landed melee release a grip (0.2104ms)
+✔ death, limb loss, knockdown, climbing and target changes release immediately (0.2684ms)
+✖ pull follows resolved backward travel and cannot exceed its distance budget (0.754ms)
+✔ drag and recovery end without player input and enforce cooldown (0.2365ms)
+✔ dousing extinguishes burning allies and ages nearby ground fire (0.274ms)
+✔ dousing respects cover and stops when the drowned is dead or sleeping (0.203ms)
+✔ ordinary types do not gain grabs or fire suppression (0.1213ms)
+✔ clear and reset release victims and forget pooled actor state (0.1653ms)
+✔ animation bends the elbows and restores every modified axis (0.3306ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 12
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 81.7061
+
+✖ failing tests:
+
+test at review\drowned-GP19860\behavior.test.mjs:13:1
+✖ pull follows resolved backward travel and cannot exceed its distance budget (0.754ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + -0
+  - 0
+  
+      at TestContext.<anonymous> (file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/drowned-GP19860/behavior.test.mjs:13:271)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1106:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:788:18)
+      at Test.postRun (node:internal/test_runner/test:1235:19)
+      at Test.run (node:internal/test_runner/test:1163:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: -0,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

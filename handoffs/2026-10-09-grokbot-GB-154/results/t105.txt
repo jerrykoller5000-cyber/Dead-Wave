@@ -1,0 +1,15 @@
+PASS the chase catches him and hauls him (scene true)
+PASS the haul says it can be kicked free (escape, open, need 5)
+PASS four presses: still hauled (4 kicks)
+PASS each press is published (4/5)
+PASS the fifth press: free, no scripted kill, not game over
+PASS it cost 50 HP (80 -> 30.0; the 40% regen may have ticked since)
+PASS the unbanked skulls are gone (bag 0)
+PASS escape published: kick-free with a receipt, lost 7 skulls ($42)
+PASS the cine bars are gone and he has his gun back
+PASS he stands outside the lip (11.89 m out)
+PASS a second catch in the same run
+PASS the second catch can be kicked free again, at 8 presses (GB-112)
+PASS six presses are not enough the second time (6/8)
+PASS Space skips to the death, as before: caveguard
+PASS no page errors

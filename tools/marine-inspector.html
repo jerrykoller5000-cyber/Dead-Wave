@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Dead Wave — 1:1 Marine CIF, Kit & Animation Inspector</title>
+<script type="importmap">
+{
+  "imports": {
+    "three": "../vendor/three/three.webgpu.js",
+    "three/webgpu": "../vendor/three/three.webgpu.js",
+    "three/tsl": "../vendor/three/three.tsl.js",
+    "three/addons/": "../vendor/three/addons/"
+  }
+}
+</script>
+<style>
+  :root {
+    --bg: #0f1311;
+    --panel: #161c18;
+    --panel-alt: #1d2520;
+    --border: #2c3931;
+    --accent: #a6c48a;
+    --accent-bright: #c5e6a6;
+    --warn: #e09f3e;
+    --text: #e3ebe6;
+    --muted: #8fa195;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0; width: 100%; height: 100%;
+    background: var(--bg); color: var(--text);
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    font-size: 12px; overflow: hidden; user-select: none;
+  }
+  .layout {
+    display: grid;
+    grid-template-columns: 365px 1fr 395px;
+    grid-template-rows: 42px 1fr;
+    width: 100vw; height: 100vh;
+  }
+  header {
+    grid-column: 1 / -1;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 14px; background: #111613;
+    border-bottom: 1px solid var(--border);
+  }
+  header .title {
+    font-weight: 700; font-size: 13px; letter-spacing: 0.06em;
+    color: var(--accent-bright); text-transform: uppercase;
+  }
+  header .shortcuts {
+    color: var(--muted); font-size: 11px;
+  }
+  header .shortcuts kbd {
+    background: var(--panel-alt); border: 1px solid var(--border);
+    padding: 1px 5px; border-radius: 3px; color: var(--text); font-family: monospace;
+  }
+  #statusBadge {
+    font-family: monospace; font-size: 11px; color: var(--accent);
+    background: rgba(166, 196, 138, 0.1); border: 1px solid var(--border);
+    padding: 3px 8px; border-radius: 4px;
+  }
+  .sidebar {
+    background: var(--panel);
+    overflow-y: auto; padding: 9px;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .sidebar.left { border-right: 1px solid var(--border); }
+  .sidebar.right { border-left: 1px solid var(--border); }
+
+  .card {
+    background: var(--panel-alt);
+    border: 1px solid var(--border);
+    border-radius: 5px; padding: 8px;
+  }
+  .card h3 {
+    margin: 0 0 6px 0; font-size: 11px; letter-spacing: 0.07em;
+    text-transform: uppercase; color: var(--accent);
+    border-bottom: 1px solid var(--border); padding-bottom: 4px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 5px; }
+  label.field {
+    display: flex; flex-direction: column; gap: 2px;
+    font-size: 11px; color: var(--muted);
+  }
+  label.chk {
+    display: flex; align-items: center; gap: 5px;
+    font-size: 11px; color: var(--text); cursor: pointer;
+    padding: 1px 0;
+  }
+  select, input[type="text"] {
+    background: #101512; color: var(--text);
+    border: 1px solid var(--border); border-radius: 3px;
+    padding: 3px 5px; font-size: 11px;
+  }
+  input[type="range"] { width: 100%; accent-color: var(--accent); cursor: pointer; }
+  button {
+    background: #232e27; color: var(--text);
+    border: 1px solid var(--border); border-radius: 3px;
+    padding: 4px 7px; font-size: 11px; cursor: pointer;
+    transition: background 0.12s, border-color 0.12s;
+  }
+  button:hover { background: #2e3d33; border-color: var(--accent); }
+  button.primary {
+    background: #2d4229; border-color: var(--accent); color: var(--accent-bright); font-weight: 600;
+  }
+  button.warn {
+    background: #3d2f18; border-color: var(--warn); color: #ffdca8;
+  }
+
+  /* Center Viewport */
+  .center-col {
+    position: relative; width: 100%; height: 100%;
+    display: flex; flex-direction: column;
+  }
+  #viewport {
+    flex: 1; width: 100%; height: 100%; position: relative; overflow: hidden;
+  }
+  .cam-bar {
+    position: absolute; top: 10px; left: 10px; right: 10px;
+    display: flex; flex-wrap: wrap; gap: 5px; justify-content: space-between;
+    pointer-events: none;
+  }
+  .cam-bar > div {
+    display: flex; gap: 4px; flex-wrap: wrap; pointer-events: auto;
+    background: rgba(15, 19, 17, 0.86); padding: 5px; border-radius: 5px;
+    border: 1px solid var(--border);
+  }
+  .joint-overlay {
+    position: absolute; top: 108px; left: 10px;
+    background: rgba(15, 19, 17, 0.84);
+    border: 1px solid var(--border);
+    border-radius: 5px; padding: 6px 8px;
+    font-family: monospace; font-size: 10px; line-height: 1.45;
+    color: var(--muted); pointer-events: none;
+    max-width: 340px;
+  }
+  .joint-overlay strong { color: var(--accent-bright); }
+  .bottom-hud {
+    position: absolute; bottom: 10px; left: 10px; right: 10px;
+    background: rgba(18, 23, 20, 0.94); border: 1px solid var(--border);
+    border-radius: 6px; padding: 8px 12px;
+    display: flex; flex-direction: column; gap: 5px;
+  }
+  .hud-top {
+    display: flex; justify-content: space-between; align-items: center; gap: 8px;
+  }
+  #activeAnimTitle { font-weight: 700; font-size: 13px; color: var(--accent-bright); }
+  #activeAnimDesc { color: var(--muted); font-size: 11px; }
+  #activeAnimSource {
+    font-family: monospace; font-size: 10.5px; color: #eab664;
+    margin-top: 1px;
+  }
+  .scrubber-row {
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  /* Animation catalog list */
+  #animList {
+    flex: 1; min-height: 260px; max-height: 450px;
+    overflow-y: auto; border: 1px solid var(--border);
+    border-radius: 4px; background: #101512; padding: 4px;
+    display: flex; flex-direction: column; gap: 2px;
+  }
+  .anim-cat-header {
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--warn);
+    padding: 6px 4px 2px 4px; border-bottom: 1px solid #222c26;
+  }
+  .anim-row {
+    display: grid; grid-template-columns: 28px 1fr 42px;
+    align-items: center; text-align: left;
+    background: transparent; border: 1px solid transparent;
+    padding: 4px 6px; border-radius: 3px; font-size: 11px;
+  }
+  .anim-row:hover { background: #1d2620; }
+  .anim-row.active {
+    background: #273824; border-color: var(--accent); color: var(--accent-bright); font-weight: 600;
+  }
+  .anim-idx { font-family: monospace; color: var(--muted); font-size: 10px; }
+  .anim-dur { font-family: monospace; color: var(--muted); font-size: 10px; text-align: right; }
+  .muted { color: var(--muted); font-size: 11px; }
+  #flaggedList {
+    max-height: 105px; overflow-y: auto; display: flex; flex-direction: column; gap: 4px;
+    margin-top: 5px; font-size: 11px;
+  }
+  .flag-item {
+    background: #101512; border-left: 3px solid var(--warn); padding: 4px 6px; border-radius: 2px;
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+  <header>
+    <div class="title">Dead Wave — 1:1 Marine CIF, Kit, Weapon &amp; Animation Inspector</div>
+    <div class="shortcuts">
+      Cycle Anim: <kbd>[</kbd> <kbd>]</kbd> or <kbd>↑</kbd> <kbd>↓</kbd> · Play/Pause: <kbd>Space</kbd> · Step Frame: <kbd>,</kbd> <kbd>.</kbd> · Camera Focus: <kbd>1</kbd>–<kbd>7</kbd> + Wheel / Orbit
+    </div>
+    <div id="statusBadge">INITIALIZING 1:1 GAME RIG…</div>
+  </header>
+
+  <!-- LEFT SIDEBAR: REAL GAME CIF WARDROBE, GEAR, WEAPONS & CARRY RIG -->
+  <aside class="sidebar left">
+    <div class="card">
+      <h3>CIF Quick Presets (Real Game Kit)</h3>
+      <div class="grid-2">
+        <button type="button" class="primary" data-cif-preset="full">Full Battle Rattle</button>
+        <button type="button" data-cif-preset="specops">Night Spec-Ops (NVG)</button>
+        <button type="button" data-cif-preset="jungle">Jungle Recon (Boonie)</button>
+        <button type="button" data-cif-preset="shorts">Summer PT / Shorts</button>
+        <button type="button" class="warn" data-cif-preset="stripped" style="grid-column: 1 / -1;">Stripped Base Rig (Inspect Shoulders, Waist &amp; Seams)</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>CIF Issue Gear &amp; Uniform (`ui/wardrobe.js`)</h3>
+      <div class="grid-2">
+        <label class="chk"><input type="checkbox" id="gear_helmet" checked /> Helmet + Earset</label>
+        <label class="chk"><input type="checkbox" id="gear_nvg" checked /> Rhino NVG Mount</label>
+        <label class="chk"><input type="checkbox" id="gear_nvgDown" /> Flip NVG Down</label>
+        <label class="chk"><input type="checkbox" id="gear_vest" checked /> Plate Carrier Vest</label>
+        <label class="chk"><input type="checkbox" id="gear_pouches" checked /> H-Harness &amp; Pouches</label>
+        <label class="chk"><input type="checkbox" id="gear_pack" checked /> Assault Back Pack</label>
+        <label class="chk"><input type="checkbox" id="gear_shirt" checked /> Combat Shirt / BDU</label>
+        <label class="chk"><input type="checkbox" id="gear_gloves" checked /> Tactical Gloves</label>
+        <label class="chk"><input type="checkbox" id="gear_trousers" checked /> Trousers / Shorts</label>
+        <label class="chk"><input type="checkbox" id="gear_boots" checked /> Combat Boots</label>
+        <label class="chk" style="grid-column: 1 / -1;"><input type="checkbox" id="gear_insulatedBoots" /> Insulated Rubber Boots (`world/lightning.js`)</label>
+      </div>
+      <div class="grid-2" style="margin-top:5px;">
+        <label class="field">Sleeve Cut (`SLEEVES`)
+          <select id="sleevesMode">
+            <option value="down">Sleeves Down</option>
+            <option value="rolled">Sleeves Rolled</option>
+          </select>
+        </label>
+        <label class="field">Trouser Cut (`TROUSER_CUTS`)
+          <select id="trouserCut">
+            <option value="trousers" selected>Full BDU Trousers</option>
+            <option value="shorts">Rolled Utility Shorts</option>
+          </select>
+        </label>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Body, Soft Cover, Eyewear &amp; Boots (`ui/marine-dress.js`)</h3>
+      <div class="grid-2">
+        <label class="field">Skin Tone (`0..5`)
+          <select id="dressSkin">
+            <option value="0">0 — Fair (#f2c9ac)</option>
+            <option value="1" selected>1 — Light Tan (#e5b592)</option>
+            <option value="2">2 — Warm Olive (#d19a72)</option>
+            <option value="3">3 — Bronze (#b67c52)</option>
+            <option value="4">4 — Deep Brown (#8c5836)</option>
+            <option value="5">5 — Dark (#5c3822)</option>
+          </select>
+        </label>
+        <label class="field">Eye Colour (`BODY_CHOICES.eyes`)
+          <select id="dressEyes">
+            <option value="brown" selected>Brown</option>
+            <option value="hazel">Hazel</option>
+            <option value="green">Green</option>
+            <option value="blue">Blue</option>
+            <option value="grey">Grey</option>
+          </select>
+        </label>
+        <label class="field">Hair Colour (`BODY_CHOICES.hair`)
+          <select id="dressHairColor">
+            <option value="black">Black</option>
+            <option value="darkBrown" selected>Dark Brown</option>
+            <option value="brown">Brown</option>
+            <option value="auburn">Auburn</option>
+            <option value="blond">Blond</option>
+            <option value="grey">Grey</option>
+          </select>
+        </label>
+        <label class="field">Boot Colour (`BOOT_COLOURS`)
+          <select id="dressBootColor">
+            <option value="black" selected>Black Leather</option>
+            <option value="tan">Desert Tan Suede</option>
+            <option value="brown">Jungle Brown</option>
+            <option value="oxblood">Oxblood Paratrooper</option>
+          </select>
+        </label>
+        <label class="field">Soft Cap (when Helmet off)
+          <select id="dressHat">
+            <option value="none" selected>None (Bare Head)</option>
+            <option value="cover">8-Point Utility Cover</option>
+            <option value="boonie">Jungle Boonie Hat</option>
+            <option value="ballcap">Ball Cap (Forward)</option>
+            <option value="ballcapBack">Ball Cap (Backwards)</option>
+          </select>
+        </label>
+        <label class="field">Eyewear (`EYEWEAR_STYLES`)
+          <select id="dressEyewear">
+            <option value="none" selected>None</option>
+            <option value="aviators">Wireframe Aviators</option>
+            <option value="pitViper">Pit Viper Wraparound</option>
+            <option value="wayfarer">Dark Wayfarers</option>
+            <option value="goggles">Dust Goggles</option>
+          </select>
+        </label>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Per-Slot Camo Swatches (`WARDROBE_SLOTS`)</h3>
+      <div class="grid-2">
+        <label class="field">Shirt &amp; Trousers <select id="camoUniform"></select></label>
+        <label class="field">Plate Carrier Vest <select id="camoVest"></select></label>
+        <label class="field">Pouches &amp; Harness <select id="camoPouches"></select></label>
+        <label class="field">Assault Pack <select id="camoPack"></select></label>
+        <label class="field">Helmet &amp; Cap <select id="camoHelmet"></select></label>
+        <label class="field">Tactical Gloves <select id="camoGloves"></select></label>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Weapon Hold, Blade &amp; Workbench (`combat/weapons.js`)</h3>
+      <div class="grid-2">
+        <label class="field">In-Hand Mode
+          <select id="weaponMode">
+            <option value="gun" selected>Firearm / Heavy Weapon</option>
+            <option value="blade">Melee Blade Slash Hold</option>
+            <option value="unarmed">Unarmed (`UNARMED_ARMS`)</option>
+          </select>
+        </label>
+        <label class="field">Weapon Finish
+          <select id="gunFinish"></select>
+        </label>
+        <label class="field">Firearm (12 Game Guns)
+          <select id="weaponSelect">
+            <option value="m4" selected>M4 — Carbine (`m4`)</option>
+            <option value="ak">AK — Rifle (`ak`)</option>
+            <option value="shotgun">Shotgun — Pump 12ga (`shotgun`)</option>
+            <option value="aa12">AA-12 — Auto Drum (`aa12`)</option>
+            <option value="sniper">Sniper — Bolt Rifle (`sniper`)</option>
+            <option value="pistol">Pistol — 9mm Service (`pistol`)</option>
+            <option value="revolver">Revolver — .357 (`revolver`)</option>
+            <option value="uzi">Uzi — Compact SMG (`uzi`)</option>
+            <option value="launcher">Launcher — 40mm Six-Shot (`launcher`)</option>
+            <option value="flamer">Flamer — Fuel Thrower (`flamer`)</option>
+            <option value="minigun">Minigun — 6-Barrel (`minigun`)</option>
+            <option value="chainsaw">Chainsaw — 2-Stroke (`chainsaw`)</option>
+          </select>
+        </label>
+        <label class="field">Blade (`BLADE_STATS`)
+          <select id="bladeSelect">
+            <option value="knife" selected>Knife (`makeKnifeModel`)</option>
+            <option value="machete">Machete (`macheteModel`)</option>
+            <option value="katana">Red Katana (`makeKatanaModel`)</option>
+          </select>
+        </label>
+      </div>
+      <div class="grid-2" style="margin-top:5px;">
+        <label class="chk" style="grid-column:1 / -1; color:var(--accent-bright); font-weight:600;">
+          <input type="checkbox" id="modShoulderADS" /> RMB Shoulder ADS / Cheek Weld (`SHOULDER_HOLD`)
+        </label>
+        <label class="chk"><input type="checkbox" id="modSuppressor" /> Suppressor Can</label>
+        <label class="chk"><input type="checkbox" id="modExtMag" /> Extended Mag / Tube</label>
+        <label class="chk"><input type="checkbox" id="modHeavyBarrel" /> Heavy Barrel</label>
+        <label class="chk"><input type="checkbox" id="modLaser" /> Laser Sight</label>
+        <label class="chk"><input type="checkbox" id="modAkimbo" /> Akimbo Dual-Wield</label>
+        <label class="chk"><input type="checkbox" id="modKatanaWorn" checked /> Hip Katana Saya (`katanaWorn`)</label>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>On-Body Carry Rig (`buildCarryRig` + `CARRY_FIT`)</h3>
+      <div class="grid-2">
+        <label class="field">Back Sling 0 (Left)
+          <select id="carrySlung0">
+            <option value="">Empty</option>
+            <option value="m4">M4</option><option value="ak">AK</option>
+            <option value="shotgun" selected>Shotgun</option><option value="aa12">AA-12</option>
+            <option value="sniper">Sniper</option><option value="launcher">Launcher</option>
+            <option value="flamer">Flamer</option><option value="minigun">Minigun</option>
+            <option value="chainsaw">Chainsaw</option>
+          </select>
+        </label>
+        <label class="field">Back Sling 1 (Right)
+          <select id="carrySlung1">
+            <option value="">Empty</option>
+            <option value="m4">M4</option><option value="ak">AK</option>
+            <option value="shotgun">Shotgun</option><option value="aa12">AA-12</option>
+            <option value="sniper" selected>Sniper</option><option value="launcher">Launcher</option>
+            <option value="flamer">Flamer</option><option value="minigun">Minigun</option>
+            <option value="chainsaw">Chainsaw</option>
+          </select>
+        </label>
+        <label class="field">Chest Holster 0
+          <select id="carryHolster0">
+            <option value="">Empty</option>
+            <option value="pistol">Pistol</option><option value="revolver">Revolver</option><option value="uzi" selected>Uzi</option>
+          </select>
+        </label>
+        <label class="field">Chest Holster 1
+          <select id="carryHolster1">
+            <option value="" selected>Empty</option>
+            <option value="pistol">Pistol</option><option value="revolver">Revolver</option><option value="uzi">Uzi</option>
+          </select>
+        </label>
+        <label class="field">Right Hip Holster
+          <select id="carryHip">
+            <option value="">Empty</option>
+            <option value="pistol" selected>Pistol</option>
+          </select>
+        </label>
+        <label class="field">Left Hip Pair (`hipPair`)
+          <select id="carryHipPair">
+            <option value="" selected>Empty</option>
+            <option value="pistol">Paired Pistol</option>
+          </select>
+        </label>
+      </div>
+      <div class="grid-2" style="margin-top:5px;">
+        <label class="field">Rifle Mags: <span id="carryMagsVal">3</span>
+          <input type="range" id="carryMags" min="0" max="5" value="3" />
+        </label>
+        <label class="field">Frag Grenades: <span id="carryGrenadesVal">2</span>
+          <input type="range" id="carryGrenades" min="0" max="4" value="2" />
+        </label>
+        <label class="field">12ga Bandolier: <span id="carryShellsVal">6</span>
+          <input type="range" id="carryShells" min="0" max="10" value="6" />
+        </label>
+        <label class="field">40mm Belt: <span id="carryRounds40Val">0</span>
+          <input type="range" id="carryRounds40" min="0" max="6" value="0" />
+        </label>
+        <label class="field">Minigun Boxes: <span id="carryBoxesVal">0</span>
+          <input type="range" id="carryBoxes" min="0" max="2" value="0" />
+        </label>
+        <label class="field">Flamer Tanks: <span id="carryTanksVal">0</span>
+          <input type="range" id="carryTanks" min="0" max="2" value="0" />
+        </label>
+      </div>
+    </div>
+  </aside>
+
+  <!-- CENTER VIEWPORT -->
+  <main class="center-col">
+    <div id="viewport"></div>
+
+    <div class="cam-bar">
+      <div>
+        <button type="button" data-cam-focus="full" title="Key 1">1: Full Body</button>
+        <button type="button" data-cam-focus="threeQ" title="Key 2">2: 3/4 View</button>
+        <button type="button" data-cam-focus="head" title="Key 3">3: Head / NVG</button>
+        <button type="button" data-cam-focus="torso" title="Key 4">4: Shoulders / Vest</button>
+        <button type="button" data-cam-focus="hands" title="Key 5">5: Hands / Gun IK</button>
+        <button type="button" data-cam-focus="back" title="Key 6">6: Back / Slings</button>
+        <button type="button" data-cam-focus="boots" title="Key 7">7: Waist / Boots</button>
+      </div>
+      <div>
+        <select id="lightingPreset" title="Lighting Environment">
+          <option value="studio" selected>Light: Armoury Studio</option>
+          <option value="day">Light: High Noon Sun</option>
+          <option value="night">Light: Night NVG Green</option>
+          <option value="rim">Light: Silhouette Rim</option>
+        </select>
+        <label class="chk" style="padding:0 4px;"><input type="checkbox" id="chkTurntable" /> Turntable</label>
+        <label class="chk" style="padding:0 4px;"><input type="checkbox" id="chkWireframe" /> Wireframe</label>
+        <label class="chk" style="padding:0 4px;"><input type="checkbox" id="chkAxes" /> Joint Axes</label>
+        <label class="chk" style="padding:0 4px;"><input type="checkbox" id="chkGrid" checked /> Grid &amp; Height Ruler</label>
+      </div>
+    </div>
+
+    <div class="joint-overlay" id="jointReadout">
+      <strong>LIVE 1:1 RIG TELEMETRY</strong><br/>
+      Loading joints…
+    </div>
+
+    <div class="bottom-hud">
+      <div class="hud-top">
+        <div>
+          <span id="activeAnimIndex" style="font-family:monospace;color:var(--warn);margin-right:6px;">1 / 52</span>
+          <span id="activeAnimTitle">CIF Turntable Stance</span>
+          <div id="activeAnimDesc">Subtle breathing and unarmed arm hang from the CIF locker preview.</div>
+          <div id="activeAnimSource">Source: index.html · poseDressPreview() + UNARMED_ARMS</div>
+        </div>
+        <div style="display:flex;gap:5px;align-items:center;">
+          <button type="button" id="btnPrevAnim" class="primary">◀ Prev [</button>
+          <button type="button" id="btnPlayPause">⏸ Pause (Space)</button>
+          <button type="button" id="btnNextAnim" class="primary">Next ] ▶</button>
+          <select id="animSpeed" title="Playback Speed">
+            <option value="0.1">0.1× Slow-Mo</option>
+            <option value="0.25">0.25× Quarter</option>
+            <option value="0.5">0.5× Half</option>
+            <option value="1" selected>1.0× Normal</option>
+            <option value="1.5">1.5× Fast</option>
+          </select>
+        </div>
+      </div>
+      <div class="scrubber-row">
+        <input type="range" id="animScrubber" min="0" max="1" step="0.001" value="0" />
+        <span id="animTimeReadout" style="font-family:monospace;min-width:135px;text-align:right;color:var(--muted);">0.00s / 4.00s (0%)</span>
+      </div>
+    </div>
+  </main>
+
+  <!-- RIGHT SIDEBAR: RAPID ANIMATION CYCLER, AIM OFFSETS & FIDELITY LOGGER -->
+  <aside class="sidebar right">
+    <div class="card" style="display:flex;flex-direction:column;flex:1;min-height:0;">
+      <h3>
+        <span>All Real Game Animations &amp; Poses</span>
+        <span class="muted">Click or press [ / ]</span>
+      </h3>
+      <div class="grid-2" style="margin-bottom:6px;">
+        <input type="text" id="animSearch" placeholder="Search anims (reload, dive, shoulder, climb…)" />
+        <select id="animCategory"></select>
+      </div>
+      <div id="animList"></div>
+    </div>
+
+    <div class="card">
+      <h3>
+        <span>Aim &amp; Torso Look Offset</span>
+        <button type="button" id="btnResetAim" style="padding:2px 6px;font-size:10px;">Reset 0°</button>
+      </h3>
+      <div class="grid-2">
+        <label class="field">Aim Bearing Offset (-60° to +60°)
+          <input type="range" id="aimYaw" min="-1.05" max="1.05" step="0.02" value="0" />
+        </label>
+        <label class="field">Aim Elevation Pitch (-45° to +45°)
+          <input type="range" id="aimPitch" min="-0.78" max="0.78" step="0.02" value="0" />
+        </label>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Fidelity &amp; Animation Issue Logger (For Agent Handoffs)</h3>
+      <div style="display:flex;gap:5px;">
+        <input type="text" id="flagNoteInput" placeholder="Note on current pose/shoulders/mesh…" style="flex:1;" />
+        <button type="button" id="btnFlagIssue" class="warn">Flag Current</button>
+        <button type="button" id="btnCopyFlags">Copy Report</button>
+      </div>
+      <div id="flaggedList"></div>
+    </div>
+  </aside>
+</div>
+
+<script type="module">
+  import { initMarineInspector } from './marine-inspector.js';
+  initMarineInspector().catch((err) => {
+    console.error(err);
+    const badge = document.getElementById('statusBadge');
+    if (badge) {
+      badge.textContent = 'ERROR: ' + (err && err.message ? err.message : String(err));
+      badge.style.color = '#ff6b6b';
+    }
+  });
+</script>
+</body>
+</html>

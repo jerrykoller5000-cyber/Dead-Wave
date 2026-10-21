@@ -1,0 +1,107 @@
+{
+  "loadSec": 21.708,
+  "stations": [
+    {
+      "name": "cif",
+      "prompt": {
+        "action": "cif",
+        "text": "ECIF",
+        "classes": "floating on",
+        "opacity": "1"
+      },
+      "menu": {
+        "shop": false,
+        "cif": true,
+        "armory": false
+      }
+    },
+    {
+      "name": "kiosk",
+      "prompt": {
+        "action": "kiosk",
+        "text": "ESupply kiosk",
+        "classes": "floating on",
+        "opacity": "1"
+      },
+      "menu": {
+        "shop": true,
+        "cif": false,
+        "armory": false
+      }
+    },
+    {
+      "name": "armory",
+      "prompt": {
+        "action": "armory",
+        "text": "EArmory",
+        "classes": "floating on",
+        "opacity": "1"
+      },
+      "menu": {
+        "shop": false,
+        "cif": true,
+        "armory": true
+      }
+    }
+  ],
+  "initial": {
+    "raised": true,
+    "amount": 1,
+    "awaitExit": false
+  },
+  "recovery": {
+    "wake": false,
+    "position": [
+      -40.25,
+      -200,
+      -648.7
+    ],
+    "fence": {
+      "raised": false,
+      "amount": 0,
+      "awaitExit": true
+    }
+  },
+  "rearm": {
+    "near": {
+      "raised": false,
+      "amount": 0,
+      "awaitExit": true
+    },
+    "far": {
+      "raised": true,
+      "amount": 1,
+      "awaitExit": false
+    },
+    "position": [
+      -40,
+      -200,
+      -647.13
+    ]
+  },
+  "collisions": {
+    "player": [
+      -39.19,
+      -200,
+      -647.4300000000001
+    ],
+    "zombie": [
+      -40.0769728354654,
+      -200,
+      -647.1461009520966
+    ],
+    "bay": {
+      "minX": -44,
+      "maxX": -36.300000000000004,
+      "minZ": -652,
+      "maxZ": -647.85,
+      "minY": -200,
+      "maxY": -197,
+      "exitFaces": [
+        "maxX",
+        "maxZ"
+      ]
+    }
+  },
+  "errors": []
+}

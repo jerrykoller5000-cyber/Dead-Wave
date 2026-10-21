@@ -1,0 +1,68 @@
+PASS TT.reloadClipDbg.hold is exported
+PASS pistol: every visible magazine is seated or in the palm
+PASS pistol: hidden only while the hand is at the pouch
+PASS pistol: the magazine rides in the palm between the well and the pouch (14 beats)
+PASS pistol: the support hand is on the well as the magazine goes home (0.000 m)
+PASS pistol: and at the pouch when it stows the empty (0.000 m)
+PASS pistol: the slide has a grab point
+PASS pistol: the hand on the slide as it racks (0.000 m; 0.503 m from that shoulder)
+PASS pistol: the firing hand stays on the grip (0.000 m)
+PASS pistol: seated after the reload
+PASS uzi: every visible magazine is seated or in the palm
+PASS uzi: hidden only while the hand is at the pouch
+PASS uzi: the magazine rides in the palm between the well and the pouch (13 beats)
+PASS uzi: the support hand is on the well as the magazine goes home (0.000 m)
+FAIL uzi: and at the pouch when it stows the empty (0.235 m)
+PASS uzi: the firing hand stays on the grip (0.000 m)
+PASS uzi: seated after the reload
+PASS sniper: every visible magazine is seated or in the palm
+PASS sniper: hidden only while the hand is at the pouch
+PASS sniper: the magazine rides in the palm between the well and the pouch (11 beats)
+PASS sniper: the support hand is on the well as the magazine goes home (0.000 m)
+PASS sniper: and at the pouch when it stows the empty (0.000 m)
+PASS sniper: the bolt has a grab point
+PASS sniper: the hand on the bolt as it cycles (0.000 m; 0.373 m from that shoulder)
+PASS sniper: the firing hand stays on the grip (0.000 m)
+PASS sniper: seated after the reload
+PASS m4: every visible magazine is seated or in the palm (or the clip's falling empty)
+PASS m4: the firing hand stays on the grip (0.001 m)
+PASS m4: seated after the reload
+PASS ak: every visible magazine is seated or in the palm (or the clip's falling empty)
+PASS ak: the firing hand stays on the grip (0.000 m)
+PASS ak: seated after the reload
+PASS aa12: every visible magazine is seated or in the palm (or the clip's falling empty)
+PASS aa12: the firing hand stays on the grip (0.001 m)
+PASS aa12: seated after the reload
+PASS pistol akimbo: both magazines stay seated
+PASS pistol akimbo: and visible (no magazine vanishing mid-air)
+PASS pistol akimbo: the right gun goes to its pouch first (beat 8), then the left (beat 17 of 25)
+PASS pistol akimbo: each gun comes in to the pouch (0.260 / 0.196 m from its hold)
+PASS pistol akimbo: the other gun stays up meanwhile (0.000 / 0.000 m)
+FAIL pistol akimbo: each gun's well comes onto its own side's pouch (0.031 / 0.101 m)
+PASS pistol akimbo: each hand stays on its own gun's grip (worst 0.001 m)
+PASS uzi akimbo: both magazines stay seated
+PASS uzi akimbo: and visible (no magazine vanishing mid-air)
+PASS uzi akimbo: the right gun goes to its pouch first (beat 7), then the left (beat 17 of 25)
+PASS uzi akimbo: each gun comes in to the pouch (0.279 / 0.130 m from its hold)
+PASS uzi akimbo: the other gun stays up meanwhile (0.000 / 0.000 m)
+FAIL uzi akimbo: each gun's well comes onto its own side's pouch (0.065 / 0.211 m)
+PASS uzi akimbo: each hand stays on its own gun's grip (worst 0.001 m)
+PASS revolver akimbo: both magazines stay seated
+PASS revolver akimbo: and visible (no magazine vanishing mid-air)
+PASS revolver akimbo: the right gun goes to its pouch first (beat 6), then the left (beat 17 of 25)
+PASS revolver akimbo: each gun comes in to the pouch (0.285 / 0.282 m from its hold)
+PASS revolver akimbo: the other gun stays up meanwhile (0.000 / 0.000 m)
+FAIL revolver akimbo: each gun's well comes onto its own side's pouch (0.015 / 0.076 m)
+PASS revolver akimbo: each hand stays on its own gun's grip (worst 0.001 m)
+PASS revolver: the cylinder stays on the gun
+PASS revolver: the support hand is at the cylinder while it loads (0.040 m)
+PASS revolver: it fetches from the pouch (0.001 m)
+PASS launcher: the drum stays on the gun
+PASS launcher: the support hand is at the drum while it loads (0.042 m)
+PASS launcher: it fetches from the pouch (0.000 m)
+PASS shotgun: has its loading shell
+PASS shotgun: the shell is in the palm or at the port, never in midair
+PASS shotgun: the shell rides in the palm from the pouch (10 beats)
+PASS shotgun: the hand is on the port while the shell goes in (0.000 m)
+page errors:
+  TypeError: Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'.

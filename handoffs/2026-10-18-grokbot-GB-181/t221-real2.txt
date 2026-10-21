@@ -1,0 +1,28 @@
+PASS the sniper is in hand
+PASS the sniper has its bolt handle
+PASS the whole bolt handle is on the gun's right, gun-local x < 0 (x -0.147 .. -0.046)
+PASS the knob stands out on the right (-0.147)
+PASS gun.userData.boltSide is -1
+PASS the hand's grab point is the knob (gun-local x -0.130)
+PASS the sniper's interval (0.9 s), damage (92) and magazine (5) are unchanged
+PASS two shots fired (0.050 s, 1.000 s)
+PASS the bolt is worked after the first shot (179 frames)
+PASS the cycle starts after the shot (+0.050 s)
+PASS and is over before the next shot (last frame 0.750 s after the shot; next shot at 0.950 s)
+PASS the bolt is home while fireCooldown is still running (0.100 s left)
+PASS no round goes off during the cycle
+PASS it goes all the way: up and back (open 1.000, back 1.000)
+PASS up before back
+PASS then forward before it turns down
+PASS the knob rises as the bolt is turned up (0.069 m)
+PASS and comes back with the bolt (0.090 m)
+PASS the next shot comes at the gun's interval (0.950 s, interval 0.9 s)
+PASS the support hand is on the knob through the cycle (122 frames, worst 0.035 m)
+PASS the first shot's case comes out
+PASS on the bolt's pull, not on the shot (+0.450 s)
+PASS thrown out to the gun's right (gun-local vx -2.598; world -2.580,1.316,-0.743 age 0.050)
+PASS the bolt is home after the cycle (0.000 m)
+PASS the last round fired
+PASS no bolt cycle after the last round
+PASS the reload runs
+PASS the last round's case comes out on the reload's bolt pull

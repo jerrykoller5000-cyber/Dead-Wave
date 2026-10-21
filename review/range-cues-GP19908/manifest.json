@@ -1,0 +1,44 @@
+{
+  "task": "GP-19908",
+  "source": "C:/Users/Zero/Desktop/Jerry_Game_Related/PA-Guy/Drill-Audio/Drill Order/shot_timer_start_beep.wav",
+  "seconds": 0.3,
+  "rate": 48000,
+  "channels": 1,
+  "files": [
+    {
+      "file": "ui/range-feature.js",
+      "bytes": 4239,
+      "sha256": "91ed63747012ea8f08a2a46f130f0ed25860d0a394325d7760b21aca0e6a1820"
+    },
+    {
+      "file": "ui/range-targets.js",
+      "bytes": 7938,
+      "sha256": "94f3254b5b05c75ebf85f095e6689d592d84927c2046d8fabf9368db615d0f7f"
+    },
+    {
+      "file": "ui/training-audio.js",
+      "bytes": 7726,
+      "sha256": "6396d9b2e651430f962e0a6992f4ce3ce40e41b2b259c28a37d286b6cce7a665"
+    },
+    {
+      "file": "ui/range-start-audio.js",
+      "bytes": 1313,
+      "sha256": "32cacc0ae81aa439d61e7c355b6745f6d3ab84ec7b1ac132c9418a4d33b2e3d0"
+    },
+    {
+      "file": "ui/range-barrier-feedback.js",
+      "bytes": 544,
+      "sha256": "913d295cd97a0bbb20ec9491f4a5adc890e713dd95cb399bd821e74c54846718"
+    },
+    {
+      "file": "ui/range-feedback.test.mjs",
+      "bytes": 3109,
+      "sha256": "6122d4f017f0f36409e0d8742216bec39d0637652b32dba8e26bd65bff772d87"
+    },
+    {
+      "file": "assets/audio/training/shot-timer-start.wav",
+      "bytes": 28844,
+      "sha256": "93cb7fe0ad7a19027ee155311349b8a289c4d5c61f5e3e50d8cf8e1142e556a7"
+    }
+  ]
+}

@@ -1,0 +1,140 @@
+{
+  "m4-support-before": {
+    "roll": {
+      "r": 0,
+      "l": 0
+    },
+    "shot": "m4-support-before"
+  },
+  "m4-support-after": {
+    "roll": {
+      "r": -0.85,
+      "l": -0.85
+    },
+    "shot": "m4-support-after"
+  },
+  "m4-grip-before": {
+    "roll": {
+      "r": 0,
+      "l": 0
+    },
+    "shot": "m4-grip-before"
+  },
+  "m4-grip-after": {
+    "roll": {
+      "r": -0.85,
+      "l": -0.85
+    },
+    "shot": "m4-grip-after"
+  },
+  "pistol-hands-before": {
+    "roll": {
+      "r": 0,
+      "l": 0
+    },
+    "shot": "pistol-hands-before"
+  },
+  "pistol-hands-after": {
+    "roll": {
+      "r": -0.85,
+      "l": 0.85
+    },
+    "shot": "pistol-hands-after"
+  },
+  "flamer-support-before": {
+    "roll": {
+      "r": 0,
+      "l": 0
+    },
+    "shot": "flamer-support-before"
+  },
+  "flamer-support-after": {
+    "roll": {
+      "r": -0.85,
+      "l": 0.85
+    },
+    "shot": "flamer-support-after"
+  },
+  "knife-022-before": {
+    "shot": "knife-022-before"
+  },
+  "knife-022-after": {
+    "shot": "knife-022-after"
+  },
+  "knife-040-before": {
+    "shot": "knife-040-before"
+  },
+  "knife-040-after": {
+    "shot": "knife-040-after"
+  },
+  "knife-055-before": {
+    "shot": "knife-055-before"
+  },
+  "knife-055-after": {
+    "shot": "knife-055-after"
+  },
+  "draw-m4-before": {
+    "handToGun": 0.525,
+    "segs": [
+      "reach",
+      "raise"
+    ],
+    "shot": "draw-m4-before"
+  },
+  "draw-m4-after": {
+    "handToGun": 0.134,
+    "segs": [
+      "reach",
+      "raise"
+    ],
+    "shot": "draw-m4-after"
+  },
+  "draw-uzi-before": {
+    "handToGun": 0.076,
+    "segs": [
+      "reach",
+      "raise"
+    ],
+    "shot": "draw-uzi-before"
+  },
+  "draw-uzi-after": {
+    "handToGun": 0,
+    "segs": [
+      "reach",
+      "raise"
+    ],
+    "shot": "draw-uzi-after"
+  },
+  "draw-pistol-before": {
+    "handToGun": 0.158,
+    "segs": [
+      "reach",
+      "raise"
+    ],
+    "shot": "draw-pistol-before"
+  },
+  "draw-pistol-after": {
+    "handToGun": 0.138,
+    "segs": [
+      "reach",
+      "raise"
+    ],
+    "shot": "draw-pistol-after"
+  },
+  "draw-revolver-before": {
+    "handToGun": 0.232,
+    "segs": [
+      "reach",
+      "raise"
+    ],
+    "shot": "draw-revolver-before"
+  },
+  "draw-revolver-after": {
+    "handToGun": 0.001,
+    "segs": [
+      "reach",
+      "raise"
+    ],
+    "shot": "draw-revolver-after"
+  }
+}

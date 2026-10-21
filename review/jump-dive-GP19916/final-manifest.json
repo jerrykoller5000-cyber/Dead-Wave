@@ -1,0 +1,25 @@
+{
+  "at": "2026-10-14T09:20:44.389Z",
+  "source": [
+    {
+      "path": "index.html",
+      "sha256": "0f9b43d2f6113aa30df1206c64050e684daec987ea7afe2054941c2cfa9890db",
+      "bom": false
+    },
+    {
+      "path": "studio/marine-dive.js",
+      "sha256": "9e2dce19f896569806c4d4babc06da8ca4b43a3903b6970c596987f46dc198d2",
+      "bom": false
+    },
+    {
+      "path": "studio/marine-dive.test.mjs",
+      "sha256": "f6243d128fc1cb52a70da1b077c769d687b089d81458a3bec0bd6c3f63356e15",
+      "bom": false
+    }
+  ],
+  "screenshots": [
+    "before-rise-air.png",
+    "after-rise-air.png"
+  ],
+  "concurrentChange": "Claude CL194 added slow:false timed-drill policy, retained alongside upwardSpeed"
+}

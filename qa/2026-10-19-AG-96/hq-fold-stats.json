@@ -1,0 +1,29 @@
+{
+  "beforeStats": {
+    "folded": null,
+    "baked": {
+      "merged": 39,
+      "removed": 430
+    },
+    "nodes": 201,
+    "meshes": 169,
+    "visibleMeshes": 157,
+    "foldedMeshes": 0,
+    "gy": -3.1686761379241943
+  },
+  "afterStats": {
+    "folded": {
+      "folded": 9,
+      "removed": 62
+    },
+    "baked": {
+      "merged": 39,
+      "removed": 430
+    },
+    "nodes": 148,
+    "meshes": 116,
+    "visibleMeshes": 115,
+    "foldedMeshes": 9,
+    "gy": -3.1686761379241943
+  }
+}

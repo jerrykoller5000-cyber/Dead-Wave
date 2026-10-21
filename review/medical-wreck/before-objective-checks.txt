@@ -1,0 +1,18 @@
+PASS props file loads: seven sites
+PASS sites match the CL-6 centres and approaches and GP-8 facings
+PASS the world builds the props at load (CL-15)
+PASS seven props, in the scene
+PASS colliders on the radio cabinet and the fuel stand only (fuel,radio)
+PASS no ground cover within 1.3 m of any prop (0)
+PASS two draws a prop (three for the radio): 3,2,2,2,2,2,2
+PASS every state within GP-8's footprint
+PASS every prop sits on the lowest ground under it
+PASS every approach point has 0.75 m clear
+PASS radio starts broken, light amber
+PASS repaired: connectors seated, light green
+PASS a cache goes closed → open → empty (closed,open,empty)
+PASS fuel: a partial claim shows partial
+PASS unavailable and unknown ids leave a prop alone
+PASS an unknown state is refused
+info: 2176 triangles drawn for all seven
+PASS cheap: under 8,000 triangles for all seven

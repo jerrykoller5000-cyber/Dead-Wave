@@ -1,0 +1,9 @@
+#60 colossus-attack
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 1.5 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A colossal giant's huge deep roar of effort as it smashes down, with a low boom. Dry. No words, no music.
+
+In the game: zombieVoice('colossus', 'attack')

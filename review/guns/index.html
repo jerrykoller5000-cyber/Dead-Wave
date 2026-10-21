@@ -1,0 +1,18 @@
+<!doctype html><meta charset="utf-8"><title>guns</title>
+<style>body{margin:24px;background:#14181f;color:#e6e6e0;font-family:Georgia,serif} h1{font-weight:normal} h2{font-weight:normal;margin:28px 0 6px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px} figure{margin:0} img{width:100%;display:block} figcaption{font-size:14px;opacity:.7;margin:4px 0}</style>
+<h1>The guns · CU-81 · v1</h1>
+<p>Every weapon rebuilt: the twelve guns, the knife and the machete, and the M240B on its tripod. The parts are drawn
+from real outlines now (grips with a finger groove, stocks, magazines with their curve, turned barrels, muzzle
+devices and scope tubes), and the metal is lighter and less shiny, so the guns stop reading as black shapes.
+Each gun keeps its name, its grips and moving parts where they were, and its wood and polymer, so camo and
+the rune finish still go on. Old (v0) on the left, new (v1) on the right. Your notes go in notes.md.</p>
+<script>
+const both = (k) => `<div class="row"><figure><figcaption>${k} (v0, before)</figcaption><img src="v0/${k}.png"></figure><figure><figcaption>${k} (v1)</figcaption><img src="v1/${k}.png"></figure></div>`;
+document.write('<h2>All twelve</h2>' + both('lineup'));
+for (const k of ['m4', 'ak', 'aa12', 'shotgun', 'sniper', 'minigun', 'launcher', 'flamer', 'chainsaw', 'uzi', 'pistol', 'revolver', 'knife', 'machete', 'm240']) {
+  document.write(`<h2>${k}</h2>` + both('side-' + k) + both('three-' + k));
+}
+document.write('<h2>Camo and the rune finish still on the furniture</h2>' + both('guns-camo') + both('lineup-rune'));
+document.write('<div class="row"><figure><figcaption>rune finish on the M4 at night (CL-111 v1)</figcaption><img src="../rune-finish/v1/m4-night.png"></figure><figure><figcaption>the same on the new M4</figcaption><img src="v1/rune-m4-night.png"></figure></div>');
+</script>

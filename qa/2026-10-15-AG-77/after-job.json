@@ -1,0 +1,18 @@
+{
+  "out": "qa/2026-10-15-AG-77/after/",
+  "cols": 4,
+  "shots": [
+    { "target": "weapon.flamer", "view": "side", "out": "qa/2026-10-15-AG-77/after/flamer-side.png", "caption": "Flamer - Side (After)" },
+    { "target": "weapon.flamer", "view": "right", "zoom": 1.6, "out": "qa/2026-10-15-AG-77/after/flamer-right-close.png", "caption": "Flamer - Right Grip & Hoses (After)" },
+    { "target": "weapon.flamer", "view": "rear3", "zoom": 1.8, "out": "qa/2026-10-15-AG-77/after/flamer-rear3-close.png", "caption": "Flamer - Rear Hose & Grip (After)" },
+    { "target": "weapon.chainsaw", "view": "side", "zoom": 1.5, "out": "qa/2026-10-15-AG-77/after/chainsaw-side-close.png", "caption": "Chainsaw - Grip & Trigger (After)" },
+    { "target": "weapon.chainsaw", "view": "three", "zoom": 1.6, "out": "qa/2026-10-15-AG-77/after/chainsaw-top-close.png", "caption": "Chainsaw - Carry Handle (After)" },
+    { "target": "weapon.knife", "view": "top", "zoom": 1.4, "out": "qa/2026-10-15-AG-77/after/knife-top.png", "caption": "Knife - Top Blade & Hilt (After)" },
+    { "target": "weapon.machete", "view": "side", "zoom": 1.2, "out": "qa/2026-10-15-AG-77/after/machete-side.png", "caption": "Machete - Serrated Spine (After)" },
+    { "target": "weapon.katana", "view": "side", "out": "qa/2026-10-15-AG-77/after/katana-side.png", "caption": "Katana - Side (After)" },
+    { "target": "weapon.katana", "view": "three", "zoom": 2.2, "out": "qa/2026-10-15-AG-77/after/katana-hilt-close.png", "caption": "Katana - Hilt Join Close (After)" },
+    { "target": "weapon.katana-sheathed", "view": "side", "out": "qa/2026-10-15-AG-77/after/katana-sheathed-side.png", "caption": "Katana Sheathed - Side (After)" },
+    { "target": "weapon.m240", "view": "side", "zoom": 1.8, "out": "qa/2026-10-15-AG-77/after/m240-side-close.png", "caption": "M240 - Trigger & Tripod (After)" },
+    { "target": "weapon.m240-folded", "view": "side", "zoom": 1.8, "out": "qa/2026-10-15-AG-77/after/m240-folded-side.png", "caption": "M240 Folded - Side (After)" }
+  ]
+}

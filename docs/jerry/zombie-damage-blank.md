@@ -1,0 +1,45 @@
+# Zombie damage, blank
+
+Same rows and columns as zombie-damage.md. The numbers are empty so you can write your own.
+
+## How much of a hit each zombie keeps
+
+| Zombie | HP | Bullet | Pellet | Fire | Burn | Blast | Blade | Crush |
+|---|---|---|---|---|---|---|---|---|
+| Shambler |  |  |  |  |  |  |  |  |
+| Feral |  |  |  |  |  |  |  |  |
+| Leaper |  |  |  |  |  |  |  |  |
+| Spider |  |  |  |  |  |  |  |  |
+| Drowned |  |  |  |  |  |  |  |  |
+| Military |  |  |  |  |  |  |  |  |
+| Brute |  |  |  |  |  |  |  |  |
+| Spitter |  |  |  |  |  |  |  |  |
+| Screamer |  |  |  |  |  |  |  |  |
+| Bomber |  |  |  |  |  |  |  |  |
+| Demon |  |  |  |  |  |  |  |  |
+| Colossus |  |  |  |  |  |  |  |  |
+| Guardian |  |  |  |  |  |  |  |  |
+
+## Damage from each weapon
+
+| Weapon | What one shot is | Shambler | Feral | Leaper | Spider | Drowned | Military | Brute | Spitter | Screamer | Bomber | Demon | Colossus | Guardian |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Pistol | one round |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| Wasp SMG | one round |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| GW-4 Carbine | one round |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| KR-7 Rifle | one round |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| Revolver | one round |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| Sniper | one round |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| Rotary Gun | one round |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| Watchman MG | one round |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| Shotgun | one shell, all 7 pellets |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| Breacher-12 | one shell, all 5 pellets |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| Launcher | direct hit |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| Grenade | centre of the blast |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| Mortar | centre of the blast |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| Knife | one swing |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| Machete | one swing |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| Chainsaw | one bite, every 0.12 s |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| Flamethrower | one tick, every 0.08 s |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| Light turret | one round |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| Heavy turret | one round |  |  |  |  |  |  |  |  |  |  |  |  |  |

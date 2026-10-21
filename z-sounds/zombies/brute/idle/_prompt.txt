@@ -1,0 +1,9 @@
+#32 brute-idle
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 3 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A huge brute zombie's slow, very deep rumbling moan from an enormous chest, heavy breathing, ominous and low. Close-up, dry. No words, no music.
+
+In the game: zombieVoice('brute', 'idle')

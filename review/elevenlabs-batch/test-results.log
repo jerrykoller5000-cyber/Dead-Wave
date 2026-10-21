@@ -1,0 +1,31 @@
+✔ all attached prompts agree with the existing independent catalogue (2.026ms)
+✔ full plan makes 716 unique take paths and preserves all prompt text (5.2709ms)
+✔ sample spreads across sounds and priority selection starts with starred entries (1.4213ms)
+✔ short generation length is explicit while requested length is retained (0.8834ms)
+✔ loop and Auto metadata become the correct API fields (0.4145ms)
+✔ edited prompts get new paths; extra document instructions never become requests (6.377ms)
+✔ invalid traversal, duplicate folders and malformed prompt blocks fail closed (1.1624ms)
+✔ plan inspection does not create files or call the network (4.9895ms)
+✔ a generation needs both a key and a sufficient explicit budget before requesting (7.1565ms)
+✔ success uses correct request parameters, saves MP3 and resumes without spending again (42.2927ms)
+✔ 401 response stops safely and never logs the response body or API key (10.1657ms)
+✔ explicit rate limit retries with Retry-After; quota exhaustion never retries (20.601ms)
+✔ network ambiguity and server errors do not automatically repeat a potentially charged POST (33.7203ms)
+✔ a crash after the paid response and completed file is recovered by hash without regeneration (10.2865ms)
+✔ interrupted sending, missing paid files and corrupt completed files require review (21.7942ms)
+✔ an existing untracked recording is never overwritten (8.5739ms)
+✔ two simultaneous runners cannot generate from the same output folder (12.5904ms)
+✔ reported charges exceeding the estimate stop before another request (11.8289ms)
+✔ aborted batches preserve progress without starting later jobs (5.7827ms)
+✔ invalid or oversized response audio is flagged for review rather than saved or retried (26.676ms)
+✔ a symlink output cannot redirect writes outside the chosen output root (4.3898ms)
+✔ matching History download repairs an uncertain take without a new generation (17.7171ms)
+✔ recovery preserves existing different audio and rejects invalid downloads (12.1766ms)
+ℹ tests 23
+ℹ suites 0
+ℹ pass 23
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 345.2941

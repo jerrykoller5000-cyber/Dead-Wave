@@ -1,0 +1,728 @@
+{
+  "at": "2026-10-09T11:47:15.645Z",
+  "sources": {
+    "studio/weapon-sidearms.js": "9fb3936f9ee16f1373dedc07df53a4a05c067579a734f9d4fed3e72991d26be6",
+    "studio/weapon-longarms.js": "bd755dd33f51872a9eb699bbd9d3e7a87d97de458a18aeb328f4104ec3f71e00",
+    "studio/weapon-heavy.js": "c1e9761739d4e7bbb9b6fd61968c8382faf6676d20c89af1ecf940d30ab98003"
+  },
+  "images": {
+    "before": [
+      {
+        "path": "review/weapon-fidelity/before/aa12-side.png",
+        "sha256": "195549ee3cdc76e1a3ca81bddfa0fd0a6c8a47065ea9b32a772c9fc41e1b178f",
+        "modified": "2026-10-09T11:02:54.256Z"
+      },
+      {
+        "path": "review/weapon-fidelity/before/aa12-three.png",
+        "sha256": "f763821eea61508e73659725c6b549e27b88b78460f4c74293cdec533984bdac",
+        "modified": "2026-10-09T11:02:54.771Z"
+      },
+      {
+        "path": "review/weapon-fidelity/before/ak-side.png",
+        "sha256": "de25135ebcdfa957e3c24c29fb8f9d9697687bbf595bfcf282b9e8b6a1c03177",
+        "modified": "2026-10-09T11:02:53.257Z"
+      },
+      {
+        "path": "review/weapon-fidelity/before/ak-three.png",
+        "sha256": "d427ab5cc63bfb59e984fd5a2f54dd923df303cdc0fcf03d746044bcae7a93c8",
+        "modified": "2026-10-09T11:02:53.788Z"
+      },
+      {
+        "path": "review/weapon-fidelity/before/chainsaw-side.png",
+        "sha256": "5b02fc10cd74062d79ce6a093ecd8ea8e0ef65aab312e2084005fce7a42bfbcf",
+        "modified": "2026-10-09T11:03:00.037Z"
+      },
+      {
+        "path": "review/weapon-fidelity/before/chainsaw-three.png",
+        "sha256": "f18339bd331ef37d77756b877778023370718fb7d9a37ec4e26273d2c4bb0163",
+        "modified": "2026-10-09T11:03:00.570Z"
+      },
+      {
+        "path": "review/weapon-fidelity/before/flamer-side.png",
+        "sha256": "4dbe3a77092967ef0bef13e2cdabc0294023fdadb576192f52bc3e8b998769dc",
+        "modified": "2026-10-09T11:02:59.078Z"
+      },
+      {
+        "path": "review/weapon-fidelity/before/flamer-three.png",
+        "sha256": "a28a2e5849fea2d83f68c989af471cd551e8c6ee187ddb2bfeb68d94f703f47c",
+        "modified": "2026-10-09T11:02:59.606Z"
+      },
+      {
+        "path": "review/weapon-fidelity/before/knife-side.png",
+        "sha256": "e31ae9bb3f415874a2cc345d67b6e9bcf63c7a6d0dab5dd509b600cc847f8ad2",
+        "modified": "2026-10-09T11:03:00.976Z"
+      },
+      {
+        "path": "review/weapon-fidelity/before/knife-three.png",
+        "sha256": "9e65b99478245c2407e02f28c9ae44cfcb702fe271a44a6945a3dab78a831eb3",
+        "modified": "2026-10-09T11:03:01.525Z"
+      },
+      {
+        "path": "review/weapon-fidelity/before/launcher-side.png",
+        "sha256": "da4eb32319ae5f29d8febe7803520418d4c1d9972308598583caecce29b428e1",
+        "modified": "2026-10-09T11:02:58.147Z"
+      },
+      {
+        "path": "review/weapon-fidelity/before/launcher-three.png",
+        "sha256": "0f91ab23b47697f024e086e6f40b1984ed77fdcbc8c4cf3fa1bfb3eb3ef3ed9d",
+        "modified": "2026-10-09T11:02:58.659Z"
+      },
+      {
+        "path": "review/weapon-fidelity/before/m240-side.png",
+        "sha256": "ef1447d4bea341017a0e1ecb601b3073b0c4a5dbfb9d9b83d1aa9db3f6869d63",
+        "modified": "2026-10-09T11:03:02.897Z"
+      },
+      {
+        "path": "review/weapon-fidelity/before/m240-three.png",
+        "sha256": "9b9c1c99d54d3d0efdb342406e7cf67006de37bf261fd59a83b4e2a308951ec0",
+        "modified": "2026-10-09T11:03:03.445Z"
+      },
+      {
+        "path": "review/weapon-fidelity/before/m240Carried-side.png",
+        "sha256": "f7ad06edc66376cd41866ab5a26ad2c2c844fad0823f3d626d8a00c3faa5213e",
+        "modified": "2026-10-09T11:03:03.896Z"
+      },
+      {
+        "path": "review/weapon-fidelity/before/m240Carried-three.png",
+        "sha256": "07436b63e3413ccb2fed1d309d387315b3660ef8908c355dc3d56d3656bc93c9",
+        "modified": "2026-10-09T11:03:04.428Z"
+      },
+      {
+        "path": "review/weapon-fidelity/before/m4-side.png",
+        "sha256": "f3384526fa17f34743b196c6f842623f7e3869e102132157edc0961da9b0327f",
+        "modified": "2026-10-09T11:02:52.324Z"
+      },
+      {
+        "path": "review/weapon-fidelity/before/m4-three.png",
+        "sha256": "2259357ddf0d073f6e6843ceef59faddef8e38485c5d16fd4cb88c3f9f39b16c",
+        "modified": "2026-10-09T11:02:52.861Z"
+      },
+      {
+        "path": "review/weapon-fidelity/before/machete-side.png",
+        "sha256": "1e0782a30c573ec68dd2ac4ddf5566194eaf03f0c7fb506e8940294acd194b5f",
+        "modified": "2026-10-09T11:03:01.937Z"
+      },
+      {
+        "path": "review/weapon-fidelity/before/machete-three.png",
+        "sha256": "8f5e84d06d19c36c3f696b433752bb17645c22b539e47635a11621e1b61c8f51",
+        "modified": "2026-10-09T11:03:02.486Z"
+      },
+      {
+        "path": "review/weapon-fidelity/before/minigun-side.png",
+        "sha256": "2751101b2dbe24c5ef3438e7aba9d57788be680184d979b00caa389a7ed04924",
+        "modified": "2026-10-09T11:02:57.162Z"
+      },
+      {
+        "path": "review/weapon-fidelity/before/minigun-three.png",
+        "sha256": "1d1a16afb10144bdf0b6535d04f38535f84b7aab0c8983da7d23794571190117",
+        "modified": "2026-10-09T11:02:57.723Z"
+      },
+      {
+        "path": "review/weapon-fidelity/before/mortar-side.png",
+        "sha256": "bfbf4546d0314fe90656991cb4b5d3a40761670c633deeacdd9e99519539e03d",
+        "modified": "2026-10-09T11:03:04.858Z"
+      },
+      {
+        "path": "review/weapon-fidelity/before/mortar-three.png",
+        "sha256": "91c435060a45b7e19101b9a419e7177d152a796851a9f61c673e97d085f3bab7",
+        "modified": "2026-10-09T11:03:05.414Z"
+      },
+      {
+        "path": "review/weapon-fidelity/before/mortarCarried-side.png",
+        "sha256": "9cf645ecd86e13674ca24a0a951e86b8a3d0cbd865c753019c72b1108bdff03e",
+        "modified": "2026-10-09T11:03:05.852Z"
+      },
+      {
+        "path": "review/weapon-fidelity/before/mortarCarried-three.png",
+        "sha256": "4dc4208bf017c0ee248053d5f999114e065c0c2e0b213f590adeae8b058c9ec0",
+        "modified": "2026-10-09T11:03:06.373Z"
+      },
+      {
+        "path": "review/weapon-fidelity/before/pistol-side.png",
+        "sha256": "8b8831764aa9c1de6e6ea5dce2bd3181204e06f0685f19411672e14170fb1f4e",
+        "modified": "2026-10-09T11:02:49.377Z"
+      },
+      {
+        "path": "review/weapon-fidelity/before/pistol-three.png",
+        "sha256": "e82031953edd69b83044a135002f1134f389e074ea5d373cc86cbabd4e00fa4a",
+        "modified": "2026-10-09T11:02:49.929Z"
+      },
+      {
+        "path": "review/weapon-fidelity/before/revolver-side.png",
+        "sha256": "5abbff654b4f399034e8b18c5610a81b8a68a897018a1b6c1d7de5f8ffdf6324",
+        "modified": "2026-10-09T11:02:50.366Z"
+      },
+      {
+        "path": "review/weapon-fidelity/before/revolver-three.png",
+        "sha256": "92ca5e4bc0a2c2f65c02e20f48379c8cdd46bcf4801a2cf81f2bc6d5706f8ce3",
+        "modified": "2026-10-09T11:02:50.920Z"
+      },
+      {
+        "path": "review/weapon-fidelity/before/shotgun-side.png",
+        "sha256": "37bec7294ffd48177835daea2243474e84476d2e5995e1bfc135d9cf289d7806",
+        "modified": "2026-10-09T11:02:55.216Z"
+      },
+      {
+        "path": "review/weapon-fidelity/before/shotgun-three.png",
+        "sha256": "b118efa985ec4c0b6146e44c77101a881caf471f171b0ff3f9c47c6061c5c8b3",
+        "modified": "2026-10-09T11:02:55.759Z"
+      },
+      {
+        "path": "review/weapon-fidelity/before/sniper-side.png",
+        "sha256": "337c83ed441ac5866c777b387e614dc80ae3cef274ee92180475addaa09aa762",
+        "modified": "2026-10-09T11:02:56.183Z"
+      },
+      {
+        "path": "review/weapon-fidelity/before/sniper-three.png",
+        "sha256": "f0450ac41cc48a9a52acb5079f19af87a70ff8ea264bc0f28ca1e4db18f7f16e",
+        "modified": "2026-10-09T11:02:56.742Z"
+      },
+      {
+        "path": "review/weapon-fidelity/before/uzi-side.png",
+        "sha256": "7a49d6190462f76ff0ab1c2ab061bfd5ad68471571e9cc267947733203433370",
+        "modified": "2026-10-09T11:02:51.365Z"
+      },
+      {
+        "path": "review/weapon-fidelity/before/uzi-three.png",
+        "sha256": "0175d447cf95b9e1524374416ab86b98bf6cdc0078d99fbf4d59e9d2883c0114",
+        "modified": "2026-10-09T11:02:51.928Z"
+      }
+    ],
+    "after": [
+      {
+        "path": "review/weapon-fidelity/after/aa12-side.png",
+        "sha256": "a78c1ccb716911522fbde4278e5495029338ee59564912317bcb4a23b2abb99f",
+        "modified": "2026-10-09T11:45:07.541Z"
+      },
+      {
+        "path": "review/weapon-fidelity/after/aa12-three.png",
+        "sha256": "b1f7ffebfe67d56cc7fb714b94bb06dc266b94173932170f01807af91374ac2b",
+        "modified": "2026-10-09T11:45:08.068Z"
+      },
+      {
+        "path": "review/weapon-fidelity/after/ak-side.png",
+        "sha256": "89dfcc92b0866853e3f5a0c13b32bda72b01a145c5717b4703a0dab1e736ab4e",
+        "modified": "2026-10-09T11:45:06.463Z"
+      },
+      {
+        "path": "review/weapon-fidelity/after/ak-three.png",
+        "sha256": "ed50c8249fcd89ad85326e26e09019143ff2415a847ca57756af30c0bc7ece89",
+        "modified": "2026-10-09T11:45:06.994Z"
+      },
+      {
+        "path": "review/weapon-fidelity/after/chainsaw-side.png",
+        "sha256": "aa73de48d523ad98669d298e1e93103890ab6f192fc6d6b3e33279e2e21743a7",
+        "modified": "2026-10-09T11:45:14.177Z"
+      },
+      {
+        "path": "review/weapon-fidelity/after/chainsaw-three.png",
+        "sha256": "98cca3c26a82609bbe668e0357763915bdd88c43d4d5e9e8eb519e5159f5b984",
+        "modified": "2026-10-09T11:45:14.725Z"
+      },
+      {
+        "path": "review/weapon-fidelity/after/flamer-side.png",
+        "sha256": "549fa117fbd24f7b34dfe0013ec35de0ffd84a8917374d88a5f4df92e2aed954",
+        "modified": "2026-10-09T11:45:13.072Z"
+      },
+      {
+        "path": "review/weapon-fidelity/after/flamer-three.png",
+        "sha256": "8adc9ecd81854e978c72248c6fd14c838a7f798432a40d0a6fb4385a0f8715d6",
+        "modified": "2026-10-09T11:45:13.605Z"
+      },
+      {
+        "path": "review/weapon-fidelity/after/knife-side.png",
+        "sha256": "561691ae7481b4f420b87894c29be88cb4af7014ad37b70fb0ee681be756cd31",
+        "modified": "2026-10-09T11:45:15.301Z"
+      },
+      {
+        "path": "review/weapon-fidelity/after/knife-three.png",
+        "sha256": "2b08d779b80f9f42395382242a6bc4dc92640659afc86d5a59fa2fb0fc4faa79",
+        "modified": "2026-10-09T11:45:15.866Z"
+      },
+      {
+        "path": "review/weapon-fidelity/after/launcher-side.png",
+        "sha256": "19d42318f34ca9e566ee3607368261b8294a9d939140bec161d6d999d72ec9d0",
+        "modified": "2026-10-09T11:45:12.006Z"
+      },
+      {
+        "path": "review/weapon-fidelity/after/launcher-three.png",
+        "sha256": "8973641ddf05f75ea02b522d1c5677ec8e3ad85039599d1c90af1cd09fcbfc91",
+        "modified": "2026-10-09T11:45:12.509Z"
+      },
+      {
+        "path": "review/weapon-fidelity/after/m240-side.png",
+        "sha256": "14d62d08567b485ad3406e52989a9f8688c6fa3a26220e72e7d4b72b1fb1cde1",
+        "modified": "2026-10-09T11:45:17.536Z"
+      },
+      {
+        "path": "review/weapon-fidelity/after/m240-three.png",
+        "sha256": "a7777b625910ae4ef4ca2093f60e1d28aed51c4cd041b78b57f53a8185b7663c",
+        "modified": "2026-10-09T11:45:18.097Z"
+      },
+      {
+        "path": "review/weapon-fidelity/after/m240Carried-side.png",
+        "sha256": "0c46570aaea90640555c0575fb10b8a4534b911490f9e5f55bd9bb77384ee1bd",
+        "modified": "2026-10-09T11:45:18.681Z"
+      },
+      {
+        "path": "review/weapon-fidelity/after/m240Carried-three.png",
+        "sha256": "21675ae871ec2f997a1d7a3d8874afc298aa550b8d5f898a8220e57594e6f27e",
+        "modified": "2026-10-09T11:45:19.225Z"
+      },
+      {
+        "path": "review/weapon-fidelity/after/m4-side.png",
+        "sha256": "058b0d9747eafac89eed50db9c77274576658241ac2368230b8fca472e2c652d",
+        "modified": "2026-10-09T11:45:05.360Z"
+      },
+      {
+        "path": "review/weapon-fidelity/after/m4-three.png",
+        "sha256": "64363daa6e3c742ac7d39521fa76e3f19e10fb3b7eabc73624a88fc2c39c0693",
+        "modified": "2026-10-09T11:45:05.892Z"
+      },
+      {
+        "path": "review/weapon-fidelity/after/machete-side.png",
+        "sha256": "01a4f3344ab94ddc82cff79954b940034018a3d29132b145bc79fd5763b8bf2d",
+        "modified": "2026-10-09T11:45:16.416Z"
+      },
+      {
+        "path": "review/weapon-fidelity/after/machete-three.png",
+        "sha256": "1d5579ce86e7a797be6366d75fe4f3c8c818060a8b3752cd9712fe7017af8b62",
+        "modified": "2026-10-09T11:45:16.942Z"
+      },
+      {
+        "path": "review/weapon-fidelity/after/minigun-side.png",
+        "sha256": "c7e885a2ecae8d61dd47f9db600521dc4cee064cb7b6de01d854e6c9bb8a45cf",
+        "modified": "2026-10-09T11:45:10.868Z"
+      },
+      {
+        "path": "review/weapon-fidelity/after/minigun-three.png",
+        "sha256": "5b5196438e5d624be7c739622778cb79b6a7dba21fe402f8e9681e9f9d3ca698",
+        "modified": "2026-10-09T11:45:11.431Z"
+      },
+      {
+        "path": "review/weapon-fidelity/after/mortar-side.png",
+        "sha256": "69e0d8ffe87ec97954a6ee127f7221d9ee75409eff5a67c31e86ac6afbefcb0d",
+        "modified": "2026-10-09T11:45:19.798Z"
+      },
+      {
+        "path": "review/weapon-fidelity/after/mortar-three.png",
+        "sha256": "0ea067564ee2da1fb43f1948fde1716dfd7afbd465fc063b776b5c7080ac1bc4",
+        "modified": "2026-10-09T11:45:20.347Z"
+      },
+      {
+        "path": "review/weapon-fidelity/after/mortarCarried-side.png",
+        "sha256": "16afcdae5da551382fc66c336380e4c911ee768bf3b52bf787f7a4fb0016d7d5",
+        "modified": "2026-10-09T11:45:20.910Z"
+      },
+      {
+        "path": "review/weapon-fidelity/after/mortarCarried-three.png",
+        "sha256": "678946995ba943b49da2efea83c1d4dcb1089c6a5f4430212d60af6ca2f23d53",
+        "modified": "2026-10-09T11:45:21.428Z"
+      },
+      {
+        "path": "review/weapon-fidelity/after/pistol-side.png",
+        "sha256": "6ee288a48c55f4422832c7c2f5be06be55de42bdee873bbde223e40ad6973c60",
+        "modified": "2026-10-09T11:45:02.072Z"
+      },
+      {
+        "path": "review/weapon-fidelity/after/pistol-three.png",
+        "sha256": "2041a0cf71dc2eb3448c9fcae618be5211f59c38b312ee8dab857ac5aa96af8a",
+        "modified": "2026-10-09T11:45:02.593Z"
+      },
+      {
+        "path": "review/weapon-fidelity/after/revolver-side.png",
+        "sha256": "4dafdd69e5cab14d331becad0ada7fbf3043d70d1ffdc6b1d3579e88e769101d",
+        "modified": "2026-10-09T11:45:03.160Z"
+      },
+      {
+        "path": "review/weapon-fidelity/after/revolver-three.png",
+        "sha256": "2096cea1cd6f8704018fb28bc21ab8e1c0536ffc49c1ebf0ef6ca2277b9f2903",
+        "modified": "2026-10-09T11:45:03.702Z"
+      },
+      {
+        "path": "review/weapon-fidelity/after/shotgun-side.png",
+        "sha256": "3591519d52f82b06f3c7d7ab7f68758226ad1ff413cf9f59648db048c47d05ba",
+        "modified": "2026-10-09T11:45:08.619Z"
+      },
+      {
+        "path": "review/weapon-fidelity/after/shotgun-three.png",
+        "sha256": "4581b7e1292acfca83228856eb6f44165449ccb6fee947cf15cd952504376a17",
+        "modified": "2026-10-09T11:45:09.175Z"
+      },
+      {
+        "path": "review/weapon-fidelity/after/sniper-side.png",
+        "sha256": "d609b751f3ae3d73973bd4e99241c1743bda30d8ad73c8eb4349c7babb3e00bc",
+        "modified": "2026-10-09T11:45:09.754Z"
+      },
+      {
+        "path": "review/weapon-fidelity/after/sniper-three.png",
+        "sha256": "68833603ecd926156616f2fba854ee9f691c82d460a969e358ec9ab0bae66c6a",
+        "modified": "2026-10-09T11:45:10.321Z"
+      },
+      {
+        "path": "review/weapon-fidelity/after/uzi-side.png",
+        "sha256": "aa75d551ea6a544efef80e4421d3e78a9c61576d772c8e5207908ba7135dce12",
+        "modified": "2026-10-09T11:45:04.239Z"
+      },
+      {
+        "path": "review/weapon-fidelity/after/uzi-three.png",
+        "sha256": "783bf2fcd9fd994f5a6f0e9b59a71f25999b40e48ec774cd05c2e8d504a853b0",
+        "modified": "2026-10-09T11:45:04.788Z"
+      }
+    ],
+    "studio": [
+      {
+        "path": "review/weapon-fidelity/studio/aa12-side.png",
+        "sha256": "83d859236f31123dff7ad76b24d392e5b4d94b00ee85e4d1190cc011199592e4",
+        "modified": "2026-10-09T11:45:27.926Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/aa12-three.png",
+        "sha256": "f9b41762a9bffc89c00a503f533e5a8b7af7602e2968a767b2b57749a6ce5ea3",
+        "modified": "2026-10-09T11:45:28.271Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/aa12-threeR.png",
+        "sha256": "face92a390bf44b12598f2033400f974f2ff81fe55c8bbc67e5166858c47d720",
+        "modified": "2026-10-09T11:45:28.621Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/ak-side.png",
+        "sha256": "df33ce441b06d5aee59ab1adc13c84f30640b2c28f02e490108eaf21133ae309",
+        "modified": "2026-10-09T11:45:26.814Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/ak-three.png",
+        "sha256": "2dc246b68245c9510d7d67731ce272fe39f5ed49a0dcf894d391e71cdd693b02",
+        "modified": "2026-10-09T11:45:27.194Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/ak-threeR.png",
+        "sha256": "abaee00c06f344e442150e02301f7b557220769c70d95aaf3db3790ba74c9cb7",
+        "modified": "2026-10-09T11:45:27.555Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/chainsaw-side.png",
+        "sha256": "5ae88387989dc96885911b0b25d8823500e6a191698d4866588ec79e99653a02",
+        "modified": "2026-10-09T11:45:34.401Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/chainsaw-three.png",
+        "sha256": "1c6e04e7b99ffea101141ead4bcb8469154454348332f1f27823d49d1e42fbc7",
+        "modified": "2026-10-09T11:45:34.775Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/chainsaw-threeR.png",
+        "sha256": "58ed212b1245ae1e260298eac86cb958c459d394df45bd54393c72891d249717",
+        "modified": "2026-10-09T11:45:35.103Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/flamer-side.png",
+        "sha256": "b65cfba25edf46507920295baebd8dcab26fa4e25324b7365a6881fe36af35de",
+        "modified": "2026-10-09T11:45:33.290Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/flamer-three.png",
+        "sha256": "63760009fb226d37910ab97d370f28ab8aec76d042616d0ddf9a960f7aefeebb",
+        "modified": "2026-10-09T11:45:33.674Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/flamer-threeR.png",
+        "sha256": "9807c6a60bf2d55f993fc6c8ef008a727f8a6bc9b37bd53034ccd3d1229ebb16",
+        "modified": "2026-10-09T11:45:34.024Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/knife-side.png",
+        "sha256": "795432b7da2495f364d8f16995445815ebb9997a92f3dff2b0f61e21fe0d5028",
+        "modified": "2026-10-09T11:45:35.451Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/knife-three.png",
+        "sha256": "b8037db1362026edf87555efcd1cba7707267050dc3fb300fbef72340d2d82b6",
+        "modified": "2026-10-09T11:45:35.798Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/knife-threeR.png",
+        "sha256": "f6bc6e64c0c1a920c37facfff377209a5a2dee2692b4ec751732aff7c3a4c949",
+        "modified": "2026-10-09T11:45:36.151Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/launcher-side.png",
+        "sha256": "19e80928dc24ecdd6a44b3314e2412d0d43ba16305b68b8ea47c5f704ce373fb",
+        "modified": "2026-10-09T11:45:32.205Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/launcher-three.png",
+        "sha256": "98ae780bed87471fc7fc8bc4ea2f054d1d0304552e1f6e1b356e6724c27f4bdd",
+        "modified": "2026-10-09T11:45:32.552Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/launcher-threeR.png",
+        "sha256": "3633be0a89cc1c275d9b069e054dd8dbab528ec7aee8482680be0415f4624b2f",
+        "modified": "2026-10-09T11:45:32.910Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/m240-side.png",
+        "sha256": "b79e744396c9121edf6bae327ca9915ea2cb2eef279eefa26e4c777d4511a3d1",
+        "modified": "2026-10-09T11:45:37.544Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/m240-three.png",
+        "sha256": "a93e2e2cf4ba349d3ec07216b90ed5736ad90936fccc853c0ae23a8a25782136",
+        "modified": "2026-10-09T11:45:37.900Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/m240-threeR.png",
+        "sha256": "01a68817b9ebb8b93335bbf9e477cd625fc5d8fc7b0eb45ea8547263b9ac2099",
+        "modified": "2026-10-09T11:45:38.261Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/m240Carried-side.png",
+        "sha256": "8203344f91b1fcb81478040146109854e5b598c7d6f64678cd39e3cb6f703820",
+        "modified": "2026-10-09T11:45:38.629Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/m240Carried-three.png",
+        "sha256": "f4889c72a5de542d949e985c6971c8063e20aa8cb4bf62a825a9222c94812921",
+        "modified": "2026-10-09T11:45:39.000Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/m240Carried-threeR.png",
+        "sha256": "0caaf1e04d2f73a8aa8e57953756e1d31cfa3244063bf73047b1097390890b3a",
+        "modified": "2026-10-09T11:45:39.358Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/m4-side.png",
+        "sha256": "1e6e14548448da659e685a9f17644f19c4ff41d1bfe6d20ccaa7cac45e9b5917",
+        "modified": "2026-10-09T11:45:25.731Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/m4-three.png",
+        "sha256": "31976a2b816374105a9c67381a806a49a25b5ffcd62e4e5741ba8584f856701a",
+        "modified": "2026-10-09T11:45:26.073Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/m4-threeR.png",
+        "sha256": "499e92964f68a8fd1bbdbe058e3b30963a09da76515ee9b3a69c6e6b92437c4d",
+        "modified": "2026-10-09T11:45:26.439Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/machete-side.png",
+        "sha256": "be7554930bef3cf397cdaf9dd262100970d3c0d60f33d936ee93e31486f3626a",
+        "modified": "2026-10-09T11:45:36.521Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/machete-three.png",
+        "sha256": "d51ee5bb1768ab81c4b6a57f566ef8b1f6c4943d341b5ac9aeb6f728b4955b5f",
+        "modified": "2026-10-09T11:45:36.862Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/machete-threeR.png",
+        "sha256": "93d4782c2ef39dc815940baa1337a772c4195fb6973d136c033b4e9bd8a173cf",
+        "modified": "2026-10-09T11:45:37.196Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/minigun-side.png",
+        "sha256": "d798b63b388c69262f1254f8bad687d85439849916c410cd734ef2386b704cc7",
+        "modified": "2026-10-09T11:45:31.124Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/minigun-three.png",
+        "sha256": "063dd1c11f632bf695336c67cb968cbc670c64f3d0fb9d50b8bf0d312530cbbd",
+        "modified": "2026-10-09T11:45:31.484Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/minigun-threeR.png",
+        "sha256": "09eeaae5bbb075674630930079ae70a6a79d1be552beaa9dcbc3cffdd6453d23",
+        "modified": "2026-10-09T11:45:31.858Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/mortar-side.png",
+        "sha256": "7b099a8f6d9b741d785eaf3df6ab963c8b74ff4c3c95bc82371cdebaeb8df867",
+        "modified": "2026-10-09T11:45:39.729Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/mortar-three.png",
+        "sha256": "291b6c6d34b56d4fb8442c08f79985684bba2c72a7349167fe8db42eb0003e6a",
+        "modified": "2026-10-09T11:45:40.107Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/mortar-threeR.png",
+        "sha256": "23efaa3978f2ff723684465e1fc0a5566a176010c7427b5965b2fef3b3ec14c5",
+        "modified": "2026-10-09T11:45:40.477Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/mortarCarried-side.png",
+        "sha256": "a695da89f3aef8f5295b9e34100888d3c7a5c14231159449c49b5392f9c809b2",
+        "modified": "2026-10-09T11:45:40.830Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/mortarCarried-three.png",
+        "sha256": "086a43c10340a29fe9ab3a0fb6dbf11c48838e53f322d6dc4e0ea552ea974444",
+        "modified": "2026-10-09T11:45:41.181Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/mortarCarried-threeR.png",
+        "sha256": "e023376d555948a1af7142cf76f103e68583896d6e61f54ea04cca84bed4ced1",
+        "modified": "2026-10-09T11:45:41.515Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/pistol-side.png",
+        "sha256": "9db809e81ce0f60f3d7f8d792d81f60e2ee94099f3a591c88e45c7d83d2fb914",
+        "modified": "2026-10-09T11:45:22.510Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/pistol-three.png",
+        "sha256": "9be8d21ac73f6d287e9d687c018828347862393a8f9580d9a800ed68095094c0",
+        "modified": "2026-10-09T11:45:22.856Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/pistol-threeR.png",
+        "sha256": "2d68ac1becb261728f45454dbe692957fd486e48012e364bc64187ff0defad59",
+        "modified": "2026-10-09T11:45:23.221Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/revolver-side.png",
+        "sha256": "b846a6b689e2950f13dad7e556ca1f650b08cb7324f45750125d9198a329d56e",
+        "modified": "2026-10-09T11:45:23.633Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/revolver-three.png",
+        "sha256": "ef53180fe87804b3a5020804d4391c1f92a9b1ddc303c619342a81fa58dd5929",
+        "modified": "2026-10-09T11:45:23.972Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/revolver-threeR.png",
+        "sha256": "5e04c65fc96759eccbb4286a1aa5c21823ecf8b57701f546511c0039b601b211",
+        "modified": "2026-10-09T11:45:24.332Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/shotgun-side.png",
+        "sha256": "bdae49d9f3a56c428bda8c558f23b6108b23d210ac8915db22ac7477f4bfa7b8",
+        "modified": "2026-10-09T11:45:28.980Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/shotgun-three.png",
+        "sha256": "226531827ef08b566e5f40fdc9b1f1efa0fc06547d6a1d37e93830fe078e79ec",
+        "modified": "2026-10-09T11:45:29.302Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/shotgun-threeR.png",
+        "sha256": "204435781ee06800b2e1dc6e148eae176d88362dcf9b0672f4cd274c0efe354f",
+        "modified": "2026-10-09T11:45:29.668Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/sniper-side.png",
+        "sha256": "db7d2ea3f24fc9ac447defe831a536b8a7d10ff36c7a9df397fb79411a550e6e",
+        "modified": "2026-10-09T11:45:30.029Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/sniper-three.png",
+        "sha256": "326642335bc0487ff7659c2b4e4cbec106107be1e4a5da131dc75256029c6bb6",
+        "modified": "2026-10-09T11:45:30.398Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/sniper-threeR.png",
+        "sha256": "986b6c568eebde7429705b0f352d90eee652839a1bc4d7f0ac91a97487b865b8",
+        "modified": "2026-10-09T11:45:30.756Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/uzi-side.png",
+        "sha256": "5fe96b5c17854d5872dd711a838a9d716f944ca581962aa5e1e786409768ad10",
+        "modified": "2026-10-09T11:45:24.708Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/uzi-three.png",
+        "sha256": "dfb34ee7689d9493608b91c401887dede110549bc2c54a9c447477c6e959280a",
+        "modified": "2026-10-09T11:45:25.064Z"
+      },
+      {
+        "path": "review/weapon-fidelity/studio/uzi-threeR.png",
+        "sha256": "966e85c22898215cb62a7d01f8a6cf88598ef90c694065698296e2a33b2ccd7a",
+        "modified": "2026-10-09T11:45:25.400Z"
+      }
+    ],
+    "preview": [
+      {
+        "path": "review/weapon-fidelity/preview/aa12.png",
+        "sha256": "d8451046c0e14c9b601ebc35b1861755dd11e322e8d2f1ffab4fcfd33c84e16a",
+        "modified": "2026-10-09T11:45:43.973Z"
+      },
+      {
+        "path": "review/weapon-fidelity/preview/ak.png",
+        "sha256": "8e56baee6e3988d574c713ea4b97b092b39cb0aef635d6747e0442b0b4434a1f",
+        "modified": "2026-10-09T11:45:43.602Z"
+      },
+      {
+        "path": "review/weapon-fidelity/preview/chainsaw.png",
+        "sha256": "d4aeb171e17d84131f58094966f5b85acbae2fe8b7ef48f45ffb2029c5921b2b",
+        "modified": "2026-10-09T11:45:46.137Z"
+      },
+      {
+        "path": "review/weapon-fidelity/preview/flamer.png",
+        "sha256": "745bd14198c65a5eab07e326736e62c53dc6c3bf4df0873b1302f77a65453fdd",
+        "modified": "2026-10-09T11:45:45.789Z"
+      },
+      {
+        "path": "review/weapon-fidelity/preview/knife.png",
+        "sha256": "375b86d4c8556b23be1b25468b2921a76e6d9d25740391fbea4e719d37ae79cb",
+        "modified": "2026-10-09T11:45:46.479Z"
+      },
+      {
+        "path": "review/weapon-fidelity/preview/launcher.png",
+        "sha256": "09a2670ccb93f7eb00f47db399472bcf701dc98749d618ab73705a0e234c65b3",
+        "modified": "2026-10-09T11:45:45.433Z"
+      },
+      {
+        "path": "review/weapon-fidelity/preview/m240.png",
+        "sha256": "279b5e2625402ed89abc9cbae194a3856d483bb340a2539aa14e9b8c85733ed5",
+        "modified": "2026-10-09T11:45:47.222Z"
+      },
+      {
+        "path": "review/weapon-fidelity/preview/m4.png",
+        "sha256": "c1087d839bfe047b67dc6003d83bf98f4b36b591737debf294d06abd6455c24d",
+        "modified": "2026-10-09T11:45:43.259Z"
+      },
+      {
+        "path": "review/weapon-fidelity/preview/machete.png",
+        "sha256": "a82d44f0bf92493b278e91b06a254ef8aa8ab0ae52b6bf8ddc67297096fe5638",
+        "modified": "2026-10-09T11:45:46.857Z"
+      },
+      {
+        "path": "review/weapon-fidelity/preview/minigun.png",
+        "sha256": "063efff7c2d48e06113d3f036757fad26f3809cd9f95c161a510070a6b4d2273",
+        "modified": "2026-10-09T11:45:45.094Z"
+      },
+      {
+        "path": "review/weapon-fidelity/preview/mortar.png",
+        "sha256": "1ef7e29b6d02dfdafa5ec1a9bcaa57afbf3da3c482624c965045603472a19d1e",
+        "modified": "2026-10-09T11:45:47.595Z"
+      },
+      {
+        "path": "review/weapon-fidelity/preview/pistol.png",
+        "sha256": "d6306b4923644879ccecc7c4eb26f406cb7288eea2628fb2c648c3f0b0e9c325",
+        "modified": "2026-10-09T11:45:42.159Z"
+      },
+      {
+        "path": "review/weapon-fidelity/preview/revolver.png",
+        "sha256": "5d548a8a27a39049dffba0ccd024755446bfe5998b73d04a660f4a82154a7431",
+        "modified": "2026-10-09T11:45:42.515Z"
+      },
+      {
+        "path": "review/weapon-fidelity/preview/shotgun.png",
+        "sha256": "68623f4e4ae14240ec97066a34fe0b3621daa9cf158db8d374b38fca6db4a2cd",
+        "modified": "2026-10-09T11:45:44.351Z"
+      },
+      {
+        "path": "review/weapon-fidelity/preview/sniper.png",
+        "sha256": "bf6ffa5552555a9e6cad6af46ef9e342bf624ae56355e08aba8339b693611487",
+        "modified": "2026-10-09T11:45:44.722Z"
+      },
+      {
+        "path": "review/weapon-fidelity/preview/uzi.png",
+        "sha256": "6cb2b74777b19bf3431abd018b45410da6ae4cf08d3769f7c49b9ec429a16531",
+        "modified": "2026-10-09T11:45:42.867Z"
+      }
+    ]
+  }
+}

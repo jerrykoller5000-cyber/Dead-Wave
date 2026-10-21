@@ -1,0 +1,57 @@
+{
+  "step1": {
+    "built": true,
+    "off": false,
+    "locked": true,
+    "stage": "chained",
+    "cuttersTaken": false,
+    "chainVisible": true,
+    "chainNodes": 1,
+    "prompt": "Chained shut.",
+    "hudPrompt": "",
+    "reachBlockedBy": "locked"
+  },
+  "step2": {
+    "cuttersVisible": true,
+    "cuttersNodes": 1,
+    "cuttersMatrixAutoUpdate": false,
+    "pos": {
+      "x": -160.66,
+      "y": 0.68,
+      "z": 86.82
+    },
+    "prompt": "E — Take the bolt cutters",
+    "hudPrompt": ""
+  },
+  "step3": {
+    "cuttersTaken": true,
+    "beforeHoldPrompt": "Hold E — Cut the chain",
+    "midCutProgress": 0.51,
+    "midCutPrompt": "Cutting the chain… 51%",
+    "hudPrompt": "",
+    "chainVisible": true
+  },
+  "step4": {
+    "stage": "alarm",
+    "alarmRemainingS": 19.2,
+    "chainVisible": false,
+    "locked": false,
+    "reachBlockedBy": null,
+    "truckPromptAfterCut": null,
+    "calledAliveCount": 3,
+    "expectedTotalForDay1": 6,
+    "remainingToCall": 3,
+    "calledTypes": [
+      "shambler",
+      "shambler",
+      "shambler"
+    ],
+    "calledDistancesM": [
+      39.3,
+      47,
+      39
+    ],
+    "pageErrors": []
+  },
+  "pageErrors": []
+}

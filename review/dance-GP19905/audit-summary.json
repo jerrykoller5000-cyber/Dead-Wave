@@ -1,0 +1,73 @@
+{
+  "task": "GP-19905",
+  "motionSourceHash": "732005e7e52293ef76f3be09512aabb31695c9ece4b80027ee395e44498aacbc",
+  "poses": 601,
+  "boundaries": 26,
+  "deterministicSeeks": 13,
+  "quality": {
+    "noFloorPenetration": true,
+    "noElbowHyperextension": true,
+    "handsOutsideTorsoProxy": true,
+    "plantedHandsWithin25mm": true,
+    "freeWristsWithin30Degrees": true,
+    "plantedWristsWithin92Degrees": true,
+    "fullyInsideFrame": true,
+    "framingMarginAtLeast24px": true,
+    "deterministicSeek": true,
+    "note": "Numerical diagnostics are necessary checks, not a substitute for viewing the animation."
+  },
+  "browserErrors": [],
+  "minFrameMarginPixels": 75.60114328557574,
+  "maxPlantedPalmErrorMeters": 0.0008771575283442876,
+  "maxFreeWristDegrees": 28.591090900000143,
+  "minHopBootSurfaceGapMeters": 0.03453395277400112,
+  "hopKneeRangesDegrees": [
+    {
+      "beat": 9,
+      "knees": [
+        43.789008669401994,
+        51.13264613592587
+      ]
+    },
+    {
+      "beat": 10,
+      "knees": [
+        49.37196101910561,
+        58.13555458460473
+      ]
+    },
+    {
+      "beat": 11,
+      "knees": [
+        41.30546574870678,
+        49.01094960269047
+      ]
+    },
+    {
+      "beat": 18,
+      "knees": [
+        42.61011170817546,
+        46.10950074275606
+      ]
+    },
+    {
+      "beat": 19,
+      "knees": [
+        49.601145665819914,
+        53.744828909238855
+      ]
+    }
+  ],
+  "boundaryMaxPositionMeters": 0.00020687211703884287,
+  "boundarySampleIntervalSeconds": 0.00002,
+  "finalPoseHoldSeconds": 0.7205219078603733,
+  "finalSupport": "Right elbow pad; 6 mm clearance over floor plane",
+  "floorToleranceNote": "Worst boot vertex is 1.24 mm below the floor during the kick-up, within the existing 2 mm audit tolerance.",
+  "limitations": [
+    "Torso proxy is not exhaustive mesh self-collision.",
+    "Normal-speed human playback judgement and live intro startup/decode performance remain with integration.",
+    "Shared npm regression suite not rerun for this isolated unimported presentation motion."
+  ],
+  "proof": "final-audit/proof.json",
+  "brightSheet": "final-sheet-v2/contact-sheet.png"
+}

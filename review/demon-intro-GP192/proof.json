@@ -1,0 +1,227 @@
+{
+  "idle": {
+    "enabled": true,
+    "loopSeconds": 24,
+    "active": true,
+    "looping": true,
+    "cues": {
+      "enter": 5.650666666666667,
+      "clear": 11.76
+    },
+    "musicGain": 0.09600000083446503,
+    "demon": {
+      "wanted": false,
+      "playing": false,
+      "fading": false,
+      "ready": true,
+      "seconds": 125.6,
+      "error": null
+    }
+  },
+  "alarm": {
+    "enabled": true,
+    "loopSeconds": 24,
+    "active": true,
+    "looping": true,
+    "cues": {
+      "enter": 5.650666666666667,
+      "clear": 11.76
+    },
+    "musicGain": 0.09600000083446503,
+    "demon": {
+      "wanted": false,
+      "playing": false,
+      "fading": false,
+      "ready": true,
+      "seconds": 125.6,
+      "error": null
+    }
+  },
+  "release": {
+    "audio": {
+      "enabled": true,
+      "loopSeconds": 24,
+      "active": true,
+      "looping": true,
+      "cues": {
+        "enter": 5.650666666666667,
+        "clear": 11.76,
+        "spawn": 16.912
+      },
+      "musicGain": 0.09600000083446503,
+      "demon": {
+        "wanted": true,
+        "playing": true,
+        "fading": false,
+        "ready": true,
+        "seconds": 125.6,
+        "error": null
+      }
+    },
+    "pending": null,
+    "gate": {
+      "active": true,
+      "amount": 1,
+      "flashing": true,
+      "lit": true
+    },
+    "demons": [
+      {
+        "kind": "demon",
+        "entry": true
+      },
+      {
+        "kind": "demon",
+        "entry": true
+      }
+    ]
+  },
+  "partial": {
+    "enabled": true,
+    "loopSeconds": 24,
+    "active": true,
+    "looping": true,
+    "cues": {
+      "enter": 5.650666666666667,
+      "clear": 11.76,
+      "spawn": 16.912
+    },
+    "musicGain": 0.09600000083446503,
+    "demon": {
+      "wanted": true,
+      "playing": true,
+      "fading": false,
+      "ready": true,
+      "seconds": 125.6,
+      "error": null
+    }
+  },
+  "mixed": {
+    "audio": {
+      "enabled": true,
+      "loopSeconds": 24,
+      "active": true,
+      "looping": true,
+      "cues": {
+        "enter": 5.650666666666667,
+        "clear": 11.76,
+        "spawn": 16.912
+      },
+      "musicGain": 0.09600000083446503,
+      "demon": {
+        "wanted": false,
+        "playing": false,
+        "fading": true,
+        "ready": true,
+        "seconds": 125.6,
+        "error": null
+      }
+    },
+    "alive": 1
+  },
+  "faded": {
+    "enabled": true,
+    "loopSeconds": 24,
+    "active": true,
+    "looping": true,
+    "cues": {
+      "enter": 5.650666666666667,
+      "clear": 11.76,
+      "spawn": 16.912
+    },
+    "musicGain": 0.09600000083446503,
+    "demon": {
+      "wanted": false,
+      "playing": false,
+      "fading": false,
+      "ready": true,
+      "seconds": 125.6,
+      "error": null
+    }
+  },
+  "repeat": {
+    "enabled": true,
+    "loopSeconds": 24,
+    "active": true,
+    "looping": true,
+    "cues": {
+      "enter": 5.650666666666667,
+      "clear": 11.76,
+      "spawn": 16.912
+    },
+    "musicGain": 0.09600000083446503,
+    "demon": {
+      "wanted": true,
+      "playing": true,
+      "fading": false,
+      "ready": true,
+      "seconds": 125.6,
+      "error": null
+    }
+  },
+  "clear": {
+    "enabled": true,
+    "loopSeconds": 24,
+    "active": true,
+    "looping": true,
+    "cues": {
+      "enter": 5.650666666666667,
+      "clear": 11.76,
+      "spawn": 16.912
+    },
+    "musicGain": 0.09600000083446503,
+    "demon": {
+      "wanted": false,
+      "playing": false,
+      "fading": true,
+      "ready": true,
+      "seconds": 125.6,
+      "error": null
+    }
+  },
+  "mute": {
+    "enabled": true,
+    "loopSeconds": 24,
+    "active": true,
+    "looping": true,
+    "cues": {
+      "enter": 5.650666666666667,
+      "clear": 11.76,
+      "spawn": 16.912
+    },
+    "musicGain": 0.06066516041755676,
+    "demon": {
+      "wanted": true,
+      "playing": true,
+      "fading": false,
+      "ready": true,
+      "seconds": 125.6,
+      "error": null
+    }
+  },
+  "blackout": {
+    "enabled": true,
+    "loopSeconds": 24,
+    "active": true,
+    "looping": true,
+    "cues": {
+      "enter": 5.650666666666667,
+      "clear": 11.76,
+      "spawn": 16.912,
+      "blackout": 37.221333333333334
+    },
+    "musicGain": 0.08410674333572388,
+    "demon": {
+      "wanted": false,
+      "playing": false,
+      "fading": true,
+      "ready": true,
+      "seconds": 125.6,
+      "error": null
+    }
+  },
+  "left": {
+    "enabled": false
+  },
+  "errors": []
+}

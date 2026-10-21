@@ -1,0 +1,110 @@
+{
+  "geometry": {
+    "overlaps": 0,
+    "left": true,
+    "right": true,
+    "wireInPillar": 0,
+    "meshes": 6,
+    "segments": 15,
+    "renderSpans": 15,
+    "scale": [
+      0.84,
+      0.84,
+      0.84
+    ],
+    "keypads": [
+      {
+        "side": -1,
+        "x": -8.19,
+        "y": -198.7,
+        "z": -649.82,
+        "front": {
+          "x": -9,
+          "z": -649.82
+        }
+      },
+      {
+        "side": 1,
+        "x": -7.81,
+        "y": -198.7,
+        "z": -649.82,
+        "front": {
+          "x": -7,
+          "z": -649.82
+        }
+      }
+    ]
+  },
+  "access": {
+    "result": [
+      {
+        "name": "skull",
+        "action": "hqWindow",
+        "p": [
+          -43.1,
+          -200,
+          -643
+        ]
+      },
+      {
+        "name": "keypad",
+        "action": "trainingDoor",
+        "p": [
+          -9.15,
+          -200,
+          -649.4
+        ]
+      },
+      {
+        "name": "alarm",
+        "action": "trainingPanel",
+        "p": [
+          -43.1,
+          -200,
+          -637
+        ]
+      }
+    ],
+    "phase": [
+      {
+        "equal": 0,
+        "scale": [
+          0.84,
+          0.84,
+          0.84
+        ]
+      },
+      {
+        "equal": 0,
+        "scale": [
+          0.84,
+          0.84,
+          0.84
+        ]
+      }
+    ]
+  },
+  "sound": {
+    "before": 0,
+    "after": 1,
+    "plays": 0,
+    "newPlays": 1,
+    "at": [
+      -41.535,
+      -200,
+      -630
+    ],
+    "idle": 1
+  },
+  "lifecycle": {
+    "fence": {
+      "raised": true,
+      "amount": 1,
+      "awaitExit": false
+    },
+    "reused": true,
+    "before": 15,
+    "after": 15
+  },
+  "errors": []
+}

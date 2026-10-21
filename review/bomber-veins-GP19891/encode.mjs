@@ -1,0 +1,5 @@
+import {spawnSync} from 'node:child_process';const dir='review/bomber-veins-GP19891',ff='C:/Users/Zero/AppData/Roaming/Python/Python314/site-packages/imageio_ffmpeg/binaries/ffmpeg-win-x86_64-v7.1.exe';
+const font="fontfile='C\\:/Windows/Fonts/arial.ttf'",label=text=>`drawtext=${font}:text='${text}':fontsize=24:fontcolor=white:x=20:y=20:box=1:boxcolor=black@0.6`;
+const filters=`[0:v]fps=30,scale=800:534,setsar=1,${label('BEFORE')}[a];[1:v]fps=30,scale=800:534,setsar=1,${label('MORE VEINS - LIVE')}[b];[a][b]hstack=inputs=2:shortest=1[v]`;
+const r=spawnSync(ff,['-y','-i',dir+'/before.webm','-i',dir+'/after.webm','-filter_complex',filters,'-map','[v]','-an','-c:v','libx264','-crf','20','-pix_fmt','yuv420p','-movflags','+faststart',dir+'/vein-comparison.mp4'],{encoding:'utf8'});if(r.status)throw Error(r.stderr);
+for(const t of [1.5,4.5]){const q=spawnSync(ff,['-y','-ss',String(t),'-i',dir+'/vein-comparison.mp4','-frames:v','1',dir+'/frame-'+t+'.png'],{encoding:'utf8'});if(q.status)throw Error(q.stderr);}console.log('Saved vein comparison and far/near frames');

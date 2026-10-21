@@ -1,0 +1,27 @@
+{
+  "phase": "before",
+  "menu": {
+    "wasLocked": true,
+    "unlocked": true,
+    "wheel": {
+      "kind": "build",
+      "page": 2,
+      "keys": [
+        "light",
+        "flame",
+        "heavy",
+        "mortar",
+        "m240"
+      ]
+    },
+    "name": "Watchman MG",
+    "iconChildren": 0,
+    "iconBox": {
+      "width": 0,
+      "height": 0
+    }
+  },
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "loadSec": 17.568,
+  "errors": []
+}

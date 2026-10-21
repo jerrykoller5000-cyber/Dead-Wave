@@ -1,0 +1,7 @@
+npm test -- t161 t186 --jobs 2 --all-fails
+Sandbox attempt: Chrome never reported a debugging port; crash server failed to launch.
+Retry outside sandbox:
+check-players: 287 player.position reads, all in the allowed places
+ok t161 7 pass 0 fail 19.1s
+ok t186 34 pass 0 fail 65.2s
+2 checks: 41 pass, 0 fail

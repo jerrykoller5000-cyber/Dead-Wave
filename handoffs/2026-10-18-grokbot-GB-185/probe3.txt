@@ -1,0 +1,1 @@
+{"A0":22,"Ayaw":-3.1686761379241943,"A1":-2,"Bs0":0.65,"Bskin0":true,"Bskin1":true,"Bs1":0.48,"B0":23,"B1":-1,"C0":21,"C1":-3,"url":"?debug=1&raf=timer&__gameTestToken=eac149a3-f223-418b-8256-9bfc6c05759a"}

@@ -1,0 +1,9 @@
+#146 world/cave-mouth
+MISSING: the game makes no sound here now
+Now: (caveGroan now and then)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 8 s   Loop: on   Prompt influence: ~0.6
+
+Prompt:
+Wind breathing in and out of a dark cave mouth, hollow and low, with faint drips, seamless. No music, no voice.

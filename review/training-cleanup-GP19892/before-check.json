@@ -1,0 +1,30 @@
+{
+  "loadSec": 21.078,
+  "idleAim": {
+    "updates": 120,
+    "gateLensMatrixCalls": 720,
+    "danger": {
+      "active": false,
+      "amount": 0,
+      "pulse": 0.3304754774941641,
+      "angle": 4.126409999918932,
+      "lights": 3,
+      "color": 16751154,
+      "red": 16777215,
+      "fill": 0
+    }
+  },
+  "hazards": {
+    "before": {
+      "pools": 1,
+      "flight": 1
+    },
+    "after": {
+      "pools": 1,
+      "flight": 1,
+      "visibleFlight": 1
+    },
+    "trails": 0
+  },
+  "errors": []
+}

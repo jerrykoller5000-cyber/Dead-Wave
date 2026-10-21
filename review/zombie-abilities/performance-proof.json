@@ -1,0 +1,114 @@
+{
+  "at": "2026-10-10T04:54:02.788Z",
+  "sourceHash": "b8eaf84e0d983264ccb4f7e9d4e70efa6304377dd2698628b250ed59a8ea468a",
+  "samples": [
+    {
+      "enabled": false,
+      "loadSeconds": 13.383,
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "fixture": {
+        "count": 48,
+        "visible": 48,
+        "abilities": {
+          "clock": 0,
+          "domain": null,
+          "shots": 0,
+          "trails": 0,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 0,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      },
+      "frames": [
+        {
+          "fps": 55.9720139930035,
+          "low": 34.48275862068966,
+          "worst": 29,
+          "hitches": 0,
+          "frames": 56
+        },
+        {
+          "fps": 61.00610060969734,
+          "low": 58.139534873647136,
+          "worst": 17.200000002980232,
+          "hitches": 0,
+          "frames": 61
+        },
+        {
+          "fps": 59.99999999999999,
+          "low": 58.139534873647136,
+          "worst": 17.200000002980232,
+          "hitches": 0,
+          "frames": 60
+        }
+      ],
+      "meanFps": 58.99270486756694,
+      "errors": []
+    },
+    {
+      "enabled": true,
+      "loadSeconds": 18.301,
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "fixture": {
+        "count": 48,
+        "visible": 48,
+        "abilities": {
+          "clock": 7.061900000020871,
+          "domain": "training",
+          "shots": 0,
+          "trails": 2,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 2,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      },
+      "frames": [
+        {
+          "fps": 59.93407252058459,
+          "low": 49.751243795847785,
+          "worst": 20.099999994039536,
+          "hitches": 0,
+          "frames": 60
+        },
+        {
+          "fps": 59.95802937925583,
+          "low": 57.47126439734673,
+          "worst": 17.399999991059303,
+          "hitches": 0,
+          "frames": 60
+        },
+        {
+          "fps": 59.87426404497024,
+          "low": 57.142857142857146,
+          "worst": 17.5,
+          "hitches": 0,
+          "frames": 60
+        }
+      ],
+      "meanFps": 59.922121981603546,
+      "errors": []
+    }
+  ],
+  "comparison": "Same source, same 48 mixed enemies in Training; attachment and frame update disabled in baseline only.",
+  "deltaPercent": 1.575478046180545
+}

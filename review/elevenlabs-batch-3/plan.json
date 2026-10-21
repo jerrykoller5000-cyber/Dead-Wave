@@ -1,0 +1,6063 @@
+{
+  "schema": "grave-shift-elevenlabs-sfx-v1",
+  "source": "Claude outputs/PROMPTS-3.md",
+  "sourceSha256": "01b798b591b0d6b42e6e2239ceba0d207d236c79af0babace1f037c553f2ff9d",
+  "jobs": [
+    {
+      "id": "crew/megaphone-squawk/01_eleven_56b26e8fc94284f6.mp3",
+      "folder": "crew/megaphone-squawk",
+      "n": 1,
+      "take": 1,
+      "priority": true,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "A handheld military megaphone keyed on outdoors: a click, a short squeal of feedback and a crackle, then it cuts off. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "crew/truck-horn/01_eleven_1ba5756f66b89068.mp3",
+      "folder": "crew/truck-horn",
+      "n": 2,
+      "take": 1,
+      "priority": true,
+      "requestedSeconds": 2.5,
+      "seconds": 2.5,
+      "loop": false,
+      "payload": {
+        "text": "An old pickup truck horn wired to a weak battery, honking the rhythm 'shave and a haircut, two bits' outdoors, slightly sour and wheezy. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2.5
+      },
+      "estimatedCredits": 50
+    },
+    {
+      "id": "crew/flare-distant/01_eleven_b03834f241a3eba7.mp3",
+      "folder": "crew/flare-distant",
+      "n": 3,
+      "take": 1,
+      "priority": true,
+      "requestedSeconds": 3,
+      "seconds": 3,
+      "loop": false,
+      "payload": {
+        "text": "A distant signal flare fired far across a forest valley: a faint pop, a rising hiss and a soft echo off the mountains. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 3
+      },
+      "estimatedCredits": 60
+    },
+    {
+      "id": "crew/mud-emerge/01_eleven_1287d9a148e55642.mp3",
+      "folder": "crew/mud-emerge",
+      "n": 4,
+      "take": 1,
+      "priority": true,
+      "requestedSeconds": 2.5,
+      "seconds": 2.5,
+      "loop": false,
+      "payload": {
+        "text": "A man heaving himself up out of thick sucking creek mud: a long wet suction, gloopy pops and dripping. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2.5
+      },
+      "estimatedCredits": 50
+    },
+    {
+      "id": "crew/hatch-pry/01_eleven_d59a7b669838fa16.mp3",
+      "folder": "crew/hatch-pry",
+      "n": 7,
+      "take": 1,
+      "priority": true,
+      "requestedSeconds": 2.5,
+      "seconds": 2.5,
+      "loop": false,
+      "payload": {
+        "text": "A rusty iron cellar hatch pried open with a crowbar: metal straining, a sharp screech of hinges and a heavy clank as it falls open. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2.5
+      },
+      "estimatedCredits": 50
+    },
+    {
+      "id": "crew/kettle-whistle/01_eleven_15cec01bdb1956f5.mp3",
+      "folder": "crew/kettle-whistle",
+      "n": 9,
+      "take": 1,
+      "priority": true,
+      "requestedSeconds": 4,
+      "seconds": 4,
+      "loop": false,
+      "payload": {
+        "text": "A small metal camping kettle on a gas stove coming to the boil and starting to whistle, rising to a shrill steady whistle. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 4
+      },
+      "estimatedCredits": 80
+    },
+    {
+      "id": "burial/shovel-fill/01_eleven_291d47254266e70f.mp3",
+      "folder": "burial/shovel-fill",
+      "n": 21,
+      "take": 1,
+      "priority": true,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "A shovelful of loose earth thrown onto a wooden coffin lid in a grave, a soft heavy thud and dirt pattering. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "story/the-tone/01_eleven_1e0c79dc7f39938c.mp3",
+      "folder": "story/the-tone",
+      "n": 24,
+      "take": 1,
+      "priority": true,
+      "requestedSeconds": 12,
+      "seconds": 12,
+      "loop": true,
+      "payload": {
+        "text": "A deep unnatural resonant hum coming up through water and rock, slowly pulsing in a repeating rhythm like it is almost saying a word, eerie and vast, seamless. No music, no voice.",
+        "loop": true,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 12
+      },
+      "estimatedCredits": 240
+    },
+    {
+      "id": "story/tone-swell/01_eleven_750e3b28351719bb.mp3",
+      "folder": "story/tone-swell",
+      "n": 25,
+      "take": 1,
+      "priority": true,
+      "requestedSeconds": 4,
+      "seconds": 4,
+      "loop": false,
+      "payload": {
+        "text": "A deep eerie resonant hum swelling louder from far beneath the ground, then sinking back down. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 4
+      },
+      "estimatedCredits": 80
+    },
+    {
+      "id": "story/tone-silenced/01_eleven_6446a6e4886bff3c.mp3",
+      "folder": "story/tone-silenced",
+      "n": 26,
+      "take": 1,
+      "priority": true,
+      "requestedSeconds": 4,
+      "seconds": 4,
+      "loop": false,
+      "payload": {
+        "text": "A deep resonant hum and its own mirror cancelling each other: the sound thins and collapses into total silence with a soft rush of air. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 4
+      },
+      "estimatedCredits": 80
+    },
+    {
+      "id": "story/relay-power-up/01_eleven_5c407fc933d08c3e.mp3",
+      "folder": "story/relay-power-up",
+      "n": 28,
+      "take": 1,
+      "priority": true,
+      "requestedSeconds": 3.5,
+      "seconds": 3.5,
+      "loop": false,
+      "payload": {
+        "text": "A big military radio relay powering up: heavy switches clunking, relays clicking in sequence and a hum rising to a steady tone. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 3.5
+      },
+      "estimatedCredits": 70
+    },
+    {
+      "id": "story/rune-door-hum/01_eleven_d71b4b729c6add46.mp3",
+      "folder": "story/rune-door-hum",
+      "n": 33,
+      "take": 1,
+      "priority": true,
+      "requestedSeconds": 8,
+      "seconds": 8,
+      "loop": true,
+      "payload": {
+        "text": "An ancient carved stone slab humming with a warm low singing resonance in a cave, faint and steady, seamless. No music, no voice.",
+        "loop": true,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 8
+      },
+      "estimatedCredits": 160
+    },
+    {
+      "id": "story/rune-door-open/01_eleven_9fa463621ffca9f5.mp3",
+      "folder": "story/rune-door-open",
+      "n": 34,
+      "take": 1,
+      "priority": true,
+      "requestedSeconds": 5,
+      "seconds": 5,
+      "loop": false,
+      "payload": {
+        "text": "A massive carved stone door grinding slowly open in a cave, deep stone scraping, dust falling and a low boom as it stops. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 5
+      },
+      "estimatedCredits": 100
+    },
+    {
+      "id": "story/dog-tag/01_eleven_5269a88cb421bccc.mp3",
+      "folder": "story/dog-tag",
+      "n": 37,
+      "take": 1,
+      "priority": true,
+      "requestedSeconds": 1,
+      "seconds": 1,
+      "loop": false,
+      "payload": {
+        "text": "Military dog tags and their ball chain picked up from dirt, a light metallic jingle. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1
+      },
+      "estimatedCredits": 20
+    },
+    {
+      "id": "ui/missing-in-action/01_eleven_ac2a73bb2c6c6262.mp3",
+      "folder": "ui/missing-in-action",
+      "n": 44,
+      "take": 1,
+      "priority": true,
+      "requestedSeconds": 4,
+      "seconds": 4,
+      "loop": false,
+      "payload": {
+        "text": "A military radio channel going dead: a burst of static that thins out into empty hiss and a lonely wind. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 4
+      },
+      "estimatedCredits": 80
+    },
+    {
+      "id": "world/underwater/01_eleven_b90b4b9e9494a316.mp3",
+      "folder": "world/underwater",
+      "n": 51,
+      "take": 1,
+      "priority": true,
+      "requestedSeconds": 8,
+      "seconds": 8,
+      "loop": true,
+      "payload": {
+        "text": "Being underwater in a deep lake: a muffled heavy pressure, low rumble and slow bubbles, seamless. No music, no voice.",
+        "loop": true,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 8
+      },
+      "estimatedCredits": 160
+    },
+    {
+      "id": "player/footstep-metal/01_eleven_9f5c55efbde6126b.mp3",
+      "folder": "player/footstep-metal",
+      "n": 58,
+      "take": 1,
+      "priority": true,
+      "requestedSeconds": 0.4,
+      "seconds": 0.5,
+      "loop": false,
+      "payload": {
+        "text": "A single combat boot footstep on a steel plate floor, a firm metallic clank. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.5
+      },
+      "estimatedCredits": 10
+    },
+    {
+      "id": "player/footstep-stone/01_eleven_06bf2f3972d1b5a8.mp3",
+      "folder": "player/footstep-stone",
+      "n": 59,
+      "take": 1,
+      "priority": true,
+      "requestedSeconds": 0.4,
+      "seconds": 0.5,
+      "loop": false,
+      "payload": {
+        "text": "A single combat boot footstep on bare cave rock, a hard gritty scuff with a short cave echo. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.5
+      },
+      "estimatedCredits": 10
+    },
+    {
+      "id": "training/alarm/01_eleven_8884242700e376bc.mp3",
+      "folder": "training/alarm",
+      "n": 72,
+      "take": 1,
+      "priority": true,
+      "requestedSeconds": 3,
+      "seconds": 3,
+      "loop": false,
+      "payload": {
+        "text": "An indoor military training facility alarm: a rising and falling electronic siren whooping three times, echoing in a concrete hall. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 3
+      },
+      "estimatedCredits": 60
+    },
+    {
+      "id": "weapons/machine-gun-shot/01_eleven_eac9cf44a40be15c.mp3",
+      "folder": "weapons/machine-gun-shot",
+      "n": 81,
+      "take": 1,
+      "priority": true,
+      "requestedSeconds": 0.8,
+      "seconds": 0.8,
+      "loop": false,
+      "payload": {
+        "text": "A single shot from a belt-fed 7.62 machine gun outdoors, a heavy punchy crack with a short echo. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.8
+      },
+      "estimatedCredits": 16
+    },
+    {
+      "id": "crew/mud-step/01_eleven_21df1eb5dd6d36fe.mp3",
+      "folder": "crew/mud-step",
+      "n": 5,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 0.6,
+      "seconds": 0.6,
+      "loop": false,
+      "payload": {
+        "text": "A single boot step pulled out of thick wet mud, a sticky squelch and a suck. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.6
+      },
+      "estimatedCredits": 12
+    },
+    {
+      "id": "crew/ladder-raise/01_eleven_e57992bc9e5dad83.mp3",
+      "folder": "crew/ladder-raise",
+      "n": 6,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "A long wooden ladder lifted and dropped against a wooden tower: a scrape, a hollow knock and a rattle settling. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "crew/hatch-slam/01_eleven_ea231218864f00b0.mp3",
+      "folder": "crew/hatch-slam",
+      "n": 8,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 1,
+      "seconds": 1,
+      "loop": false,
+      "payload": {
+        "text": "A heavy iron hatch slamming shut on a stone floor, a deep clang with a short ring. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1
+      },
+      "estimatedCredits": 20
+    },
+    {
+      "id": "crew/tea-pour/01_eleven_dd9039663f08df63.mp3",
+      "folder": "crew/tea-pour",
+      "n": 10,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 2,
+      "seconds": 2,
+      "loop": false,
+      "payload": {
+        "text": "Hot tea poured from a kettle into a tin camping mug, then a spoon stirring and clinking twice. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2
+      },
+      "estimatedCredits": 40
+    },
+    {
+      "id": "crew/biscuit-tin/01_eleven_ee54dcf2334cae70.mp3",
+      "folder": "crew/biscuit-tin",
+      "n": 11,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 1,
+      "seconds": 1,
+      "loop": false,
+      "payload": {
+        "text": "A round metal biscuit tin lid prised off with a pop and a light tinny wobble. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1
+      },
+      "estimatedCredits": 20
+    },
+    {
+      "id": "crew/belt-rattle/01_eleven_8aa8864f85410165.mp3",
+      "folder": "crew/belt-rattle",
+      "n": 12,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "A linked belt of rifle ammunition lifted and laid into a machine gun feed tray, a heavy metallic rattle and a latch snapping shut. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "crew/gun-cleaning/01_eleven_7e59977266da36f7.mp3",
+      "folder": "crew/gun-cleaning",
+      "n": 13,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 2.5,
+      "seconds": 2.5,
+      "loop": false,
+      "payload": {
+        "text": "A cleaning rod and brush pushed in and out of a rifle barrel, metal scraping, then a cloth wiping. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2.5
+      },
+      "estimatedCredits": 50
+    },
+    {
+      "id": "crew/med-bag/01_eleven_626e8b728126c2d0.mp3",
+      "folder": "crew/med-bag",
+      "n": 14,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "A canvas medic bag unzipped and opened, packets and bandages rustling inside. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "crew/bandage-wrap/01_eleven_ac8dc047ff60dc69.mp3",
+      "folder": "crew/bandage-wrap",
+      "n": 15,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 2,
+      "seconds": 2,
+      "loop": false,
+      "payload": {
+        "text": "A cloth bandage unrolled and wrapped tightly around an arm, fabric rustling and a strip of tape torn. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2
+      },
+      "estimatedCredits": 40
+    },
+    {
+      "id": "crew/ratchet/01_eleven_86e84be55968e65a.mp3",
+      "folder": "crew/ratchet",
+      "n": 16,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 1,
+      "seconds": 1,
+      "loop": false,
+      "payload": {
+        "text": "A ratchet wrench clicking quickly as it tightens a bolt, then a final hard click. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1
+      },
+      "estimatedCredits": 20
+    },
+    {
+      "id": "crew/engine-crank/01_eleven_466286c44b564103.mp3",
+      "folder": "crew/engine-crank",
+      "n": 17,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 3,
+      "seconds": 3,
+      "loop": false,
+      "payload": {
+        "text": "An old truck engine cranking over, sputtering, coughing and failing to start, outdoors. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 3
+      },
+      "estimatedCredits": 60
+    },
+    {
+      "id": "crew/roof-step/01_eleven_46c8e60d58ac7b53.mp3",
+      "folder": "crew/roof-step",
+      "n": 18,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 0.5,
+      "seconds": 0.5,
+      "loop": false,
+      "payload": {
+        "text": "A single combat boot footstep on a corrugated metal roof, a hollow bong with a small rattle. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.5
+      },
+      "estimatedCredits": 10
+    },
+    {
+      "id": "crew/crate-sit/01_eleven_f65cdc7e65b443cc.mp3",
+      "folder": "crew/crate-sit",
+      "n": 19,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 1,
+      "seconds": 1,
+      "loop": false,
+      "payload": {
+        "text": "Someone sitting down heavily on a wooden supply crate, a creak and a groan of the boards. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1
+      },
+      "estimatedCredits": 20
+    },
+    {
+      "id": "crew/sleeping-bag/01_eleven_0610d230b7e51c45.mp3",
+      "folder": "crew/sleeping-bag",
+      "n": 20,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "A nylon sleeping bag rustling as someone rolls over in it. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "burial/marker-hammer/01_eleven_9b9fd7233c415791.mp3",
+      "folder": "burial/marker-hammer",
+      "n": 22,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 2,
+      "seconds": 2,
+      "loop": false,
+      "payload": {
+        "text": "A wooden grave marker hammered into the ground with three solid blows of a mallet, outdoors. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2
+      },
+      "estimatedCredits": 40
+    },
+    {
+      "id": "burial/dog-tag-hang/01_eleven_6b3ea878da3f289a.mp3",
+      "folder": "burial/dog-tag-hang",
+      "n": 23,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 1,
+      "seconds": 1,
+      "loop": false,
+      "payload": {
+        "text": "A metal dog tag chain hung over a wooden post, a light chain jingle and a soft tap. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1
+      },
+      "estimatedCredits": 20
+    },
+    {
+      "id": "story/relay-spark/01_eleven_a951b7e6a861af8b.mp3",
+      "folder": "story/relay-spark",
+      "n": 27,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "A broken electrical panel spitting sparks, a crackling buzz and a few sharp electrical snaps. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "story/fuse-pull/01_eleven_35d4fb51e3dd3b1a.mp3",
+      "folder": "story/fuse-pull",
+      "n": 29,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 0.8,
+      "seconds": 0.8,
+      "loop": false,
+      "payload": {
+        "text": "A heavy cartridge fuse pulled out of a metal fuse box, a stiff scrape and a click. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.8
+      },
+      "estimatedCredits": 16
+    },
+    {
+      "id": "story/hush-on/01_eleven_a2cd76f85a245e58.mp3",
+      "folder": "story/hush-on",
+      "n": 30,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "A small handmade electronic box switched on: a toggle click, a whine charging up and a soft wavering hum. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "story/hush-hum/01_eleven_38b51ffd6b91a051.mp3",
+      "folder": "story/hush-hum",
+      "n": 31,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 6,
+      "seconds": 6,
+      "loop": true,
+      "payload": {
+        "text": "A soft wavering electronic hum with a slow phasing shimmer, like noise-cancelling, quiet and steady, seamless. No music, no voice.",
+        "loop": true,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 6
+      },
+      "estimatedCredits": 120
+    },
+    {
+      "id": "story/hush-dying/01_eleven_7710a06b75a9272f.mp3",
+      "folder": "story/hush-dying",
+      "n": 32,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 2,
+      "seconds": 2,
+      "loop": false,
+      "payload": {
+        "text": "A small electronic hum winding down as its battery dies, warbling lower, a little crackle and then silence. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2
+      },
+      "estimatedCredits": 40
+    },
+    {
+      "id": "story/rune-shard/01_eleven_509b629f46612a49.mp3",
+      "folder": "story/rune-shard",
+      "n": 35,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 1.2,
+      "seconds": 1.2,
+      "loop": false,
+      "payload": {
+        "text": "A small carved stone shard picked up off rock, a stony click and a faint glassy chime that fades. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.2
+      },
+      "estimatedCredits": 24
+    },
+    {
+      "id": "story/stones-pulse/01_eleven_49d7eb7b9d77f11e.mp3",
+      "folder": "story/stones-pulse",
+      "n": 36,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 2.5,
+      "seconds": 2.5,
+      "loop": false,
+      "payload": {
+        "text": "One deep resonant pulse travelling through deep water, a soft round underwater boom with a long ring. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2.5
+      },
+      "estimatedCredits": 50
+    },
+    {
+      "id": "story/field-note/01_eleven_4d370f51f8af0a00.mp3",
+      "folder": "story/field-note",
+      "n": 38,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 0.8,
+      "seconds": 0.8,
+      "loop": false,
+      "payload": {
+        "text": "A small paper card unfolded and held up, a dry paper rustle and crinkle. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.8
+      },
+      "estimatedCredits": 16
+    },
+    {
+      "id": "story/heart-beat/01_eleven_6e7ef2ce7ba88964.mp3",
+      "folder": "story/heart-beat",
+      "n": 39,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 3,
+      "seconds": 3,
+      "loop": false,
+      "payload": {
+        "text": "A single enormous slow heartbeat from far below the earth, two deep muffled thumps you feel more than hear. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 3
+      },
+      "estimatedCredits": 60
+    },
+    {
+      "id": "story/heart-fall/01_eleven_7bbb0379ff27e170.mp3",
+      "folder": "story/heart-fall",
+      "n": 40,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 6,
+      "seconds": 6,
+      "loop": false,
+      "payload": {
+        "text": "Something enormous dying deep underground: a vast groan that breaks apart into rumbling and collapses into silence. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 6
+      },
+      "estimatedCredits": 120
+    },
+    {
+      "id": "story/lake-breath/01_eleven_f2b622132996c10e.mp3",
+      "folder": "story/lake-breath",
+      "n": 41,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 6,
+      "seconds": 6,
+      "loop": false,
+      "payload": {
+        "text": "A huge slow exhale rolling across a still lake at night, a low breathy rush and soft lapping water. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 6
+      },
+      "estimatedCredits": 120
+    },
+    {
+      "id": "story/iron-bars/01_eleven_abb1626d277bcaab.mp3",
+      "folder": "story/iron-bars",
+      "n": 42,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 1,
+      "seconds": 1,
+      "loop": false,
+      "payload": {
+        "text": "Rusty iron bars rattled and clanging against each other in a stone doorway. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1
+      },
+      "estimatedCredits": 20
+    },
+    {
+      "id": "story/coffin-creak/01_eleven_6e33badc1cb51f7f.mp3",
+      "folder": "story/coffin-creak",
+      "n": 43,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 2,
+      "seconds": 2,
+      "loop": false,
+      "payload": {
+        "text": "An old iron-banded wooden coffin lid creaking slowly open, wood groaning and metal scraping. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2
+      },
+      "estimatedCredits": 40
+    },
+    {
+      "id": "ui/deja-vu/01_eleven_0baca404e2f886f3.mp3",
+      "folder": "ui/deja-vu",
+      "n": 45,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 2.5,
+      "seconds": 2.5,
+      "loop": false,
+      "payload": {
+        "text": "An uncanny reversed whisper swelling up and snapping off, airy and unsettling. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2.5
+      },
+      "estimatedCredits": 50
+    },
+    {
+      "id": "ui/badge/01_eleven_1c6006517bba263d.mp3",
+      "folder": "ui/badge",
+      "n": 46,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "Two metal dog tags clinking together, followed by one low warm horn note. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "ui/dawn-card/01_eleven_335ac9d7ab4a8d5b.mp3",
+      "folder": "ui/dawn-card",
+      "n": 47,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 1,
+      "seconds": 1,
+      "loop": false,
+      "payload": {
+        "text": "A paper card slid across a wooden table and tapped down. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1
+      },
+      "estimatedCredits": 20
+    },
+    {
+      "id": "ui/expand/01_eleven_d684509dc8970f24.mp3",
+      "folder": "ui/expand",
+      "n": 48,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "A short rising mechanical whir and a solid clunk, like a structure locking open. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "world/frogs-night/01_eleven_4b53e9317b27a8df.mp3",
+      "folder": "world/frogs-night",
+      "n": 49,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 10,
+      "seconds": 10,
+      "loop": true,
+      "payload": {
+        "text": "Frogs and insects croaking at night beside a forest lake, calm and steady, seamless. No music, no voice.",
+        "loop": true,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 10
+      },
+      "estimatedCredits": 200
+    },
+    {
+      "id": "world/fog-wind/01_eleven_3aaf6d0e88d138bb.mp3",
+      "folder": "world/fog-wind",
+      "n": 50,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 10,
+      "seconds": 10,
+      "loop": true,
+      "payload": {
+        "text": "A thick fog over a forest at night: a low hollow wind, very still and eerie, distant creaks, seamless. No music, no voice.",
+        "loop": true,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 10
+      },
+      "estimatedCredits": 200
+    },
+    {
+      "id": "world/graveyard-ambience/01_eleven_75d94ab0a883eaac.mp3",
+      "folder": "world/graveyard-ambience",
+      "n": 52,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 10,
+      "seconds": 10,
+      "loop": true,
+      "payload": {
+        "text": "An old abandoned cemetery at dusk: a soft wind through dry grass, a creaking iron gate far off, a crow, seamless. No music, no voice.",
+        "loop": true,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 10
+      },
+      "estimatedCredits": 200
+    },
+    {
+      "id": "world/chapel-choir/01_eleven_5f0f9cc49438b530.mp3",
+      "folder": "world/chapel-choir",
+      "n": 53,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 6,
+      "seconds": 6,
+      "loop": false,
+      "payload": {
+        "text": "A faint ghostly choir holding one soft 'aah' chord inside a ruined stone church, echoing. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 6
+      },
+      "estimatedCredits": 120
+    },
+    {
+      "id": "world/heavenly-choir/01_eleven_5add0553c445d05b.mp3",
+      "folder": "world/heavenly-choir",
+      "n": 54,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 3,
+      "seconds": 3,
+      "loop": false,
+      "payload": {
+        "text": "A short bright heavenly choir chord swelling 'aah', with a shimmer of bells. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 3
+      },
+      "estimatedCredits": 60
+    },
+    {
+      "id": "world/holy-blast/01_eleven_e1f94b7151506e54.mp3",
+      "folder": "world/holy-blast",
+      "n": 55,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 2.5,
+      "seconds": 2.5,
+      "loop": false,
+      "payload": {
+        "text": "A huge blast of light: a bright shimmering whoosh into a big booming explosion with a choir hit. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2.5
+      },
+      "estimatedCredits": 50
+    },
+    {
+      "id": "world/tree-crown-fire/01_eleven_985afea0e7c513ca.mp3",
+      "folder": "world/tree-crown-fire",
+      "n": 56,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 3,
+      "seconds": 3,
+      "loop": false,
+      "payload": {
+        "text": "The top of a pine tree catching fire, a fast roaring whoosh of flame and crackling needles. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 3
+      },
+      "estimatedCredits": 60
+    },
+    {
+      "id": "world/trunk-bump/01_eleven_968deb8fcf745e80.mp3",
+      "folder": "world/trunk-bump",
+      "n": 57,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 0.5,
+      "seconds": 0.5,
+      "loop": false,
+      "payload": {
+        "text": "Bumping into a thick tree trunk, a dull wooden thud and a light rustle of leaves above. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.5
+      },
+      "estimatedCredits": 10
+    },
+    {
+      "id": "player/footstep-mud/01_eleven_780fbcaa7ed52946.mp3",
+      "folder": "player/footstep-mud",
+      "n": 60,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 0.5,
+      "seconds": 0.5,
+      "loop": false,
+      "payload": {
+        "text": "A single combat boot footstep in soft wet mud, a sticky squelch. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.5
+      },
+      "estimatedCredits": 10
+    },
+    {
+      "id": "player/footstep-leaves/01_eleven_3bf9d513170e7393.mp3",
+      "folder": "player/footstep-leaves",
+      "n": 61,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 0.5,
+      "seconds": 0.5,
+      "loop": false,
+      "payload": {
+        "text": "A single combat boot footstep on dry fallen leaves and twigs, a crunchy rustle. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.5
+      },
+      "estimatedCredits": 10
+    },
+    {
+      "id": "player/medkit/01_eleven_a9f836579be1271e.mp3",
+      "folder": "player/medkit",
+      "n": 62,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "A first aid kit snapped open, a bandage pack torn and a quick wrap of gauze. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "player/grenade-throw/01_eleven_a4f923c04a211090.mp3",
+      "folder": "player/grenade-throw",
+      "n": 63,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 0.6,
+      "seconds": 0.6,
+      "loop": false,
+      "payload": {
+        "text": "A hand grenade thrown overarm: a quick whoosh of the arm and the spoon flying off with a ping. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.6
+      },
+      "estimatedCredits": 12
+    },
+    {
+      "id": "player/drowning/01_eleven_b488adafd803fc73.mp3",
+      "folder": "player/drowning",
+      "n": 64,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "Muffled choking and air bubbles escaping underwater, heavy and panicked. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "player/ammo-pickup/01_eleven_8170dd1c00f83760.mp3",
+      "folder": "player/ammo-pickup",
+      "n": 65,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 0.6,
+      "seconds": 0.6,
+      "loop": false,
+      "payload": {
+        "text": "Picking up a box of rifle rounds, a heavy rattle of cartridges and a cardboard flap. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.6
+      },
+      "estimatedCredits": 12
+    },
+    {
+      "id": "weapon-foley/chainsaw-dry-pull/01_eleven_36f49a4325dbdb04.mp3",
+      "folder": "weapon-foley/chainsaw-dry-pull",
+      "n": 66,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 1,
+      "seconds": 1,
+      "loop": false,
+      "payload": {
+        "text": "A chainsaw pull cord yanked once, the engine turning over but not catching. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1
+      },
+      "estimatedCredits": 20
+    },
+    {
+      "id": "weapon-foley/suppressor-on/01_eleven_e727648afcbc3e10.mp3",
+      "folder": "weapon-foley/suppressor-on",
+      "n": 67,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 1.2,
+      "seconds": 1.2,
+      "loop": false,
+      "payload": {
+        "text": "A metal suppressor screwed onto a pistol barrel, a gritty threaded twist and a final click. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.2
+      },
+      "estimatedCredits": 24
+    },
+    {
+      "id": "weapon-foley/laser-click/01_eleven_a07c7927ed8ed6cc.mp3",
+      "folder": "weapon-foley/laser-click",
+      "n": 68,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 0.3,
+      "seconds": 0.5,
+      "loop": false,
+      "payload": {
+        "text": "A small tactical laser module switched on, a crisp tiny click and a faint electronic chirp. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.5
+      },
+      "estimatedCredits": 10
+    },
+    {
+      "id": "weapon-foley/shotgun-hull/01_eleven_04d6050ec3d79d11.mp3",
+      "folder": "weapon-foley/shotgun-hull",
+      "n": 69,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 0.6,
+      "seconds": 0.6,
+      "loop": false,
+      "payload": {
+        "text": "An empty plastic shotgun shell hull bouncing twice on hard ground, a hollow plasticky tock. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.6
+      },
+      "estimatedCredits": 12
+    },
+    {
+      "id": "weapons/pistol-suppressed/01_eleven_f4c6c402d407c633.mp3",
+      "folder": "weapons/pistol-suppressed",
+      "n": 70,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 0.6,
+      "seconds": 0.6,
+      "loop": false,
+      "payload": {
+        "text": "A suppressed 9mm pistol shot outdoors, a sharp muffled thump and a metallic slide clack. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.6
+      },
+      "estimatedCredits": 12
+    },
+    {
+      "id": "weapons/carbine-suppressed/01_eleven_228db4f7c0afc0f5.mp3",
+      "folder": "weapons/carbine-suppressed",
+      "n": 71,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 0.6,
+      "seconds": 0.6,
+      "loop": false,
+      "payload": {
+        "text": "A suppressed 5.56 carbine shot outdoors, a hard muffled crack and a mechanical clatter. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.6
+      },
+      "estimatedCredits": 12
+    },
+    {
+      "id": "training/pa-chime/01_eleven_0840fb459c6b0f9a.mp3",
+      "folder": "training/pa-chime",
+      "n": 73,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "A public address chime in a concrete hall, two soft descending tones with a slight echo. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "training/keypad-press/01_eleven_23341845139307c3.mp3",
+      "folder": "training/keypad-press",
+      "n": 74,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 0.2,
+      "seconds": 0.5,
+      "loop": false,
+      "payload": {
+        "text": "A single press of a rugged metal keypad button with a short electronic beep. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.5
+      },
+      "estimatedCredits": 10
+    },
+    {
+      "id": "training/keypad-accept/01_eleven_7b0b77348c7e2a74.mp3",
+      "folder": "training/keypad-accept",
+      "n": 75,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 0.8,
+      "seconds": 0.8,
+      "loop": false,
+      "payload": {
+        "text": "A security keypad accepting a code: two rising beeps and a heavy magnetic lock releasing with a clunk. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.8
+      },
+      "estimatedCredits": 16
+    },
+    {
+      "id": "training/keypad-deny/01_eleven_47e65c0b665a3fe2.mp3",
+      "folder": "training/keypad-deny",
+      "n": 76,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 0.6,
+      "seconds": 0.6,
+      "loop": false,
+      "payload": {
+        "text": "A security keypad rejecting a code: a low harsh double buzz. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.6
+      },
+      "estimatedCredits": 12
+    },
+    {
+      "id": "training/hangar-door/01_eleven_cddaf4684b5aded4.mp3",
+      "folder": "training/hangar-door",
+      "n": 77,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 6,
+      "seconds": 6,
+      "loop": false,
+      "payload": {
+        "text": "A huge metal hangar door rolling open on rails: a heavy motor whine, rumbling and clanking, then a boom as it stops. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 6
+      },
+      "estimatedCredits": 120
+    },
+    {
+      "id": "hq/sample-window/01_eleven_95acfc44595c7aba.mp3",
+      "folder": "hq/sample-window",
+      "n": 78,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "A sack of bones dropped down a metal chute into a steel bin, a clattering slide and a heavy rattling crash. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "hq/terminal-boot/01_eleven_2ff00062fa39c3eb.mp3",
+      "folder": "hq/terminal-boot",
+      "n": 79,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 2,
+      "seconds": 2,
+      "loop": false,
+      "payload": {
+        "text": "A rugged military computer terminal powering on: a fan spinning up, a hard drive whirr and two short beeps. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2
+      },
+      "estimatedCredits": 40
+    },
+    {
+      "id": "hq/generator/01_eleven_594bcac14b5a65a9.mp3",
+      "folder": "hq/generator",
+      "n": 80,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 10,
+      "seconds": 10,
+      "loop": true,
+      "payload": {
+        "text": "A diesel generator running steadily outside a building, a low chugging rumble with a rattling exhaust, seamless. No music, no voice.",
+        "loop": true,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 10
+      },
+      "estimatedCredits": 200
+    },
+    {
+      "id": "weapons/rotary-gun-loop/01_eleven_a99871a5def20212.mp3",
+      "folder": "weapons/rotary-gun-loop",
+      "n": 82,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 4,
+      "seconds": 4,
+      "loop": true,
+      "payload": {
+        "text": "A rotary machine gun firing continuously, a steady ripping roar of thousands of rounds a minute, seamless. No music, no voice.",
+        "loop": true,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 4
+      },
+      "estimatedCredits": 80
+    },
+    {
+      "id": "turrets/light-turret-shot/01_eleven_89b68f225e44eab7.mp3",
+      "folder": "turrets/light-turret-shot",
+      "n": 83,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 0.5,
+      "seconds": 0.5,
+      "loop": false,
+      "payload": {
+        "text": "A single shot from an automated small caliber sentry gun, a sharp mechanical crack. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.5
+      },
+      "estimatedCredits": 10
+    },
+    {
+      "id": "turrets/heavy-turret-shot/01_eleven_dc38b455c351bfc8.mp3",
+      "folder": "turrets/heavy-turret-shot",
+      "n": 84,
+      "take": 1,
+      "priority": false,
+      "requestedSeconds": 0.7,
+      "seconds": 0.7,
+      "loop": false,
+      "payload": {
+        "text": "A single shot from a heavy automated turret, a deep thumping boom. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.7
+      },
+      "estimatedCredits": 14
+    },
+    {
+      "id": "crew/megaphone-squawk/02_eleven_56b26e8fc94284f6.mp3",
+      "folder": "crew/megaphone-squawk",
+      "n": 1,
+      "take": 2,
+      "priority": true,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "A handheld military megaphone keyed on outdoors: a click, a short squeal of feedback and a crackle, then it cuts off. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "crew/truck-horn/02_eleven_1ba5756f66b89068.mp3",
+      "folder": "crew/truck-horn",
+      "n": 2,
+      "take": 2,
+      "priority": true,
+      "requestedSeconds": 2.5,
+      "seconds": 2.5,
+      "loop": false,
+      "payload": {
+        "text": "An old pickup truck horn wired to a weak battery, honking the rhythm 'shave and a haircut, two bits' outdoors, slightly sour and wheezy. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2.5
+      },
+      "estimatedCredits": 50
+    },
+    {
+      "id": "crew/flare-distant/02_eleven_b03834f241a3eba7.mp3",
+      "folder": "crew/flare-distant",
+      "n": 3,
+      "take": 2,
+      "priority": true,
+      "requestedSeconds": 3,
+      "seconds": 3,
+      "loop": false,
+      "payload": {
+        "text": "A distant signal flare fired far across a forest valley: a faint pop, a rising hiss and a soft echo off the mountains. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 3
+      },
+      "estimatedCredits": 60
+    },
+    {
+      "id": "crew/mud-emerge/02_eleven_1287d9a148e55642.mp3",
+      "folder": "crew/mud-emerge",
+      "n": 4,
+      "take": 2,
+      "priority": true,
+      "requestedSeconds": 2.5,
+      "seconds": 2.5,
+      "loop": false,
+      "payload": {
+        "text": "A man heaving himself up out of thick sucking creek mud: a long wet suction, gloopy pops and dripping. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2.5
+      },
+      "estimatedCredits": 50
+    },
+    {
+      "id": "crew/hatch-pry/02_eleven_d59a7b669838fa16.mp3",
+      "folder": "crew/hatch-pry",
+      "n": 7,
+      "take": 2,
+      "priority": true,
+      "requestedSeconds": 2.5,
+      "seconds": 2.5,
+      "loop": false,
+      "payload": {
+        "text": "A rusty iron cellar hatch pried open with a crowbar: metal straining, a sharp screech of hinges and a heavy clank as it falls open. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2.5
+      },
+      "estimatedCredits": 50
+    },
+    {
+      "id": "crew/kettle-whistle/02_eleven_15cec01bdb1956f5.mp3",
+      "folder": "crew/kettle-whistle",
+      "n": 9,
+      "take": 2,
+      "priority": true,
+      "requestedSeconds": 4,
+      "seconds": 4,
+      "loop": false,
+      "payload": {
+        "text": "A small metal camping kettle on a gas stove coming to the boil and starting to whistle, rising to a shrill steady whistle. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 4
+      },
+      "estimatedCredits": 80
+    },
+    {
+      "id": "burial/shovel-fill/02_eleven_291d47254266e70f.mp3",
+      "folder": "burial/shovel-fill",
+      "n": 21,
+      "take": 2,
+      "priority": true,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "A shovelful of loose earth thrown onto a wooden coffin lid in a grave, a soft heavy thud and dirt pattering. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "story/the-tone/02_eleven_1e0c79dc7f39938c.mp3",
+      "folder": "story/the-tone",
+      "n": 24,
+      "take": 2,
+      "priority": true,
+      "requestedSeconds": 12,
+      "seconds": 12,
+      "loop": true,
+      "payload": {
+        "text": "A deep unnatural resonant hum coming up through water and rock, slowly pulsing in a repeating rhythm like it is almost saying a word, eerie and vast, seamless. No music, no voice.",
+        "loop": true,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 12
+      },
+      "estimatedCredits": 240
+    },
+    {
+      "id": "story/tone-swell/02_eleven_750e3b28351719bb.mp3",
+      "folder": "story/tone-swell",
+      "n": 25,
+      "take": 2,
+      "priority": true,
+      "requestedSeconds": 4,
+      "seconds": 4,
+      "loop": false,
+      "payload": {
+        "text": "A deep eerie resonant hum swelling louder from far beneath the ground, then sinking back down. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 4
+      },
+      "estimatedCredits": 80
+    },
+    {
+      "id": "story/tone-silenced/02_eleven_6446a6e4886bff3c.mp3",
+      "folder": "story/tone-silenced",
+      "n": 26,
+      "take": 2,
+      "priority": true,
+      "requestedSeconds": 4,
+      "seconds": 4,
+      "loop": false,
+      "payload": {
+        "text": "A deep resonant hum and its own mirror cancelling each other: the sound thins and collapses into total silence with a soft rush of air. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 4
+      },
+      "estimatedCredits": 80
+    },
+    {
+      "id": "story/relay-power-up/02_eleven_5c407fc933d08c3e.mp3",
+      "folder": "story/relay-power-up",
+      "n": 28,
+      "take": 2,
+      "priority": true,
+      "requestedSeconds": 3.5,
+      "seconds": 3.5,
+      "loop": false,
+      "payload": {
+        "text": "A big military radio relay powering up: heavy switches clunking, relays clicking in sequence and a hum rising to a steady tone. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 3.5
+      },
+      "estimatedCredits": 70
+    },
+    {
+      "id": "story/rune-door-hum/02_eleven_d71b4b729c6add46.mp3",
+      "folder": "story/rune-door-hum",
+      "n": 33,
+      "take": 2,
+      "priority": true,
+      "requestedSeconds": 8,
+      "seconds": 8,
+      "loop": true,
+      "payload": {
+        "text": "An ancient carved stone slab humming with a warm low singing resonance in a cave, faint and steady, seamless. No music, no voice.",
+        "loop": true,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 8
+      },
+      "estimatedCredits": 160
+    },
+    {
+      "id": "story/rune-door-open/02_eleven_9fa463621ffca9f5.mp3",
+      "folder": "story/rune-door-open",
+      "n": 34,
+      "take": 2,
+      "priority": true,
+      "requestedSeconds": 5,
+      "seconds": 5,
+      "loop": false,
+      "payload": {
+        "text": "A massive carved stone door grinding slowly open in a cave, deep stone scraping, dust falling and a low boom as it stops. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 5
+      },
+      "estimatedCredits": 100
+    },
+    {
+      "id": "story/dog-tag/02_eleven_5269a88cb421bccc.mp3",
+      "folder": "story/dog-tag",
+      "n": 37,
+      "take": 2,
+      "priority": true,
+      "requestedSeconds": 1,
+      "seconds": 1,
+      "loop": false,
+      "payload": {
+        "text": "Military dog tags and their ball chain picked up from dirt, a light metallic jingle. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1
+      },
+      "estimatedCredits": 20
+    },
+    {
+      "id": "ui/missing-in-action/02_eleven_ac2a73bb2c6c6262.mp3",
+      "folder": "ui/missing-in-action",
+      "n": 44,
+      "take": 2,
+      "priority": true,
+      "requestedSeconds": 4,
+      "seconds": 4,
+      "loop": false,
+      "payload": {
+        "text": "A military radio channel going dead: a burst of static that thins out into empty hiss and a lonely wind. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 4
+      },
+      "estimatedCredits": 80
+    },
+    {
+      "id": "world/underwater/02_eleven_b90b4b9e9494a316.mp3",
+      "folder": "world/underwater",
+      "n": 51,
+      "take": 2,
+      "priority": true,
+      "requestedSeconds": 8,
+      "seconds": 8,
+      "loop": true,
+      "payload": {
+        "text": "Being underwater in a deep lake: a muffled heavy pressure, low rumble and slow bubbles, seamless. No music, no voice.",
+        "loop": true,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 8
+      },
+      "estimatedCredits": 160
+    },
+    {
+      "id": "player/footstep-metal/02_eleven_9f5c55efbde6126b.mp3",
+      "folder": "player/footstep-metal",
+      "n": 58,
+      "take": 2,
+      "priority": true,
+      "requestedSeconds": 0.4,
+      "seconds": 0.5,
+      "loop": false,
+      "payload": {
+        "text": "A single combat boot footstep on a steel plate floor, a firm metallic clank. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.5
+      },
+      "estimatedCredits": 10
+    },
+    {
+      "id": "player/footstep-stone/02_eleven_06bf2f3972d1b5a8.mp3",
+      "folder": "player/footstep-stone",
+      "n": 59,
+      "take": 2,
+      "priority": true,
+      "requestedSeconds": 0.4,
+      "seconds": 0.5,
+      "loop": false,
+      "payload": {
+        "text": "A single combat boot footstep on bare cave rock, a hard gritty scuff with a short cave echo. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.5
+      },
+      "estimatedCredits": 10
+    },
+    {
+      "id": "training/alarm/02_eleven_8884242700e376bc.mp3",
+      "folder": "training/alarm",
+      "n": 72,
+      "take": 2,
+      "priority": true,
+      "requestedSeconds": 3,
+      "seconds": 3,
+      "loop": false,
+      "payload": {
+        "text": "An indoor military training facility alarm: a rising and falling electronic siren whooping three times, echoing in a concrete hall. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 3
+      },
+      "estimatedCredits": 60
+    },
+    {
+      "id": "weapons/machine-gun-shot/02_eleven_eac9cf44a40be15c.mp3",
+      "folder": "weapons/machine-gun-shot",
+      "n": 81,
+      "take": 2,
+      "priority": true,
+      "requestedSeconds": 0.8,
+      "seconds": 0.8,
+      "loop": false,
+      "payload": {
+        "text": "A single shot from a belt-fed 7.62 machine gun outdoors, a heavy punchy crack with a short echo. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.8
+      },
+      "estimatedCredits": 16
+    },
+    {
+      "id": "crew/mud-step/02_eleven_21df1eb5dd6d36fe.mp3",
+      "folder": "crew/mud-step",
+      "n": 5,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 0.6,
+      "seconds": 0.6,
+      "loop": false,
+      "payload": {
+        "text": "A single boot step pulled out of thick wet mud, a sticky squelch and a suck. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.6
+      },
+      "estimatedCredits": 12
+    },
+    {
+      "id": "crew/ladder-raise/02_eleven_e57992bc9e5dad83.mp3",
+      "folder": "crew/ladder-raise",
+      "n": 6,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "A long wooden ladder lifted and dropped against a wooden tower: a scrape, a hollow knock and a rattle settling. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "crew/hatch-slam/02_eleven_ea231218864f00b0.mp3",
+      "folder": "crew/hatch-slam",
+      "n": 8,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 1,
+      "seconds": 1,
+      "loop": false,
+      "payload": {
+        "text": "A heavy iron hatch slamming shut on a stone floor, a deep clang with a short ring. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1
+      },
+      "estimatedCredits": 20
+    },
+    {
+      "id": "crew/tea-pour/02_eleven_dd9039663f08df63.mp3",
+      "folder": "crew/tea-pour",
+      "n": 10,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 2,
+      "seconds": 2,
+      "loop": false,
+      "payload": {
+        "text": "Hot tea poured from a kettle into a tin camping mug, then a spoon stirring and clinking twice. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2
+      },
+      "estimatedCredits": 40
+    },
+    {
+      "id": "crew/biscuit-tin/02_eleven_ee54dcf2334cae70.mp3",
+      "folder": "crew/biscuit-tin",
+      "n": 11,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 1,
+      "seconds": 1,
+      "loop": false,
+      "payload": {
+        "text": "A round metal biscuit tin lid prised off with a pop and a light tinny wobble. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1
+      },
+      "estimatedCredits": 20
+    },
+    {
+      "id": "crew/belt-rattle/02_eleven_8aa8864f85410165.mp3",
+      "folder": "crew/belt-rattle",
+      "n": 12,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "A linked belt of rifle ammunition lifted and laid into a machine gun feed tray, a heavy metallic rattle and a latch snapping shut. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "crew/gun-cleaning/02_eleven_7e59977266da36f7.mp3",
+      "folder": "crew/gun-cleaning",
+      "n": 13,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 2.5,
+      "seconds": 2.5,
+      "loop": false,
+      "payload": {
+        "text": "A cleaning rod and brush pushed in and out of a rifle barrel, metal scraping, then a cloth wiping. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2.5
+      },
+      "estimatedCredits": 50
+    },
+    {
+      "id": "crew/med-bag/02_eleven_626e8b728126c2d0.mp3",
+      "folder": "crew/med-bag",
+      "n": 14,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "A canvas medic bag unzipped and opened, packets and bandages rustling inside. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "crew/bandage-wrap/02_eleven_ac8dc047ff60dc69.mp3",
+      "folder": "crew/bandage-wrap",
+      "n": 15,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 2,
+      "seconds": 2,
+      "loop": false,
+      "payload": {
+        "text": "A cloth bandage unrolled and wrapped tightly around an arm, fabric rustling and a strip of tape torn. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2
+      },
+      "estimatedCredits": 40
+    },
+    {
+      "id": "crew/ratchet/02_eleven_86e84be55968e65a.mp3",
+      "folder": "crew/ratchet",
+      "n": 16,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 1,
+      "seconds": 1,
+      "loop": false,
+      "payload": {
+        "text": "A ratchet wrench clicking quickly as it tightens a bolt, then a final hard click. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1
+      },
+      "estimatedCredits": 20
+    },
+    {
+      "id": "crew/engine-crank/02_eleven_466286c44b564103.mp3",
+      "folder": "crew/engine-crank",
+      "n": 17,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 3,
+      "seconds": 3,
+      "loop": false,
+      "payload": {
+        "text": "An old truck engine cranking over, sputtering, coughing and failing to start, outdoors. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 3
+      },
+      "estimatedCredits": 60
+    },
+    {
+      "id": "crew/roof-step/02_eleven_46c8e60d58ac7b53.mp3",
+      "folder": "crew/roof-step",
+      "n": 18,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 0.5,
+      "seconds": 0.5,
+      "loop": false,
+      "payload": {
+        "text": "A single combat boot footstep on a corrugated metal roof, a hollow bong with a small rattle. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.5
+      },
+      "estimatedCredits": 10
+    },
+    {
+      "id": "crew/crate-sit/02_eleven_f65cdc7e65b443cc.mp3",
+      "folder": "crew/crate-sit",
+      "n": 19,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 1,
+      "seconds": 1,
+      "loop": false,
+      "payload": {
+        "text": "Someone sitting down heavily on a wooden supply crate, a creak and a groan of the boards. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1
+      },
+      "estimatedCredits": 20
+    },
+    {
+      "id": "crew/sleeping-bag/02_eleven_0610d230b7e51c45.mp3",
+      "folder": "crew/sleeping-bag",
+      "n": 20,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "A nylon sleeping bag rustling as someone rolls over in it. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "burial/marker-hammer/02_eleven_9b9fd7233c415791.mp3",
+      "folder": "burial/marker-hammer",
+      "n": 22,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 2,
+      "seconds": 2,
+      "loop": false,
+      "payload": {
+        "text": "A wooden grave marker hammered into the ground with three solid blows of a mallet, outdoors. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2
+      },
+      "estimatedCredits": 40
+    },
+    {
+      "id": "burial/dog-tag-hang/02_eleven_6b3ea878da3f289a.mp3",
+      "folder": "burial/dog-tag-hang",
+      "n": 23,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 1,
+      "seconds": 1,
+      "loop": false,
+      "payload": {
+        "text": "A metal dog tag chain hung over a wooden post, a light chain jingle and a soft tap. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1
+      },
+      "estimatedCredits": 20
+    },
+    {
+      "id": "story/relay-spark/02_eleven_a951b7e6a861af8b.mp3",
+      "folder": "story/relay-spark",
+      "n": 27,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "A broken electrical panel spitting sparks, a crackling buzz and a few sharp electrical snaps. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "story/fuse-pull/02_eleven_35d4fb51e3dd3b1a.mp3",
+      "folder": "story/fuse-pull",
+      "n": 29,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 0.8,
+      "seconds": 0.8,
+      "loop": false,
+      "payload": {
+        "text": "A heavy cartridge fuse pulled out of a metal fuse box, a stiff scrape and a click. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.8
+      },
+      "estimatedCredits": 16
+    },
+    {
+      "id": "story/hush-on/02_eleven_a2cd76f85a245e58.mp3",
+      "folder": "story/hush-on",
+      "n": 30,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "A small handmade electronic box switched on: a toggle click, a whine charging up and a soft wavering hum. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "story/hush-hum/02_eleven_38b51ffd6b91a051.mp3",
+      "folder": "story/hush-hum",
+      "n": 31,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 6,
+      "seconds": 6,
+      "loop": true,
+      "payload": {
+        "text": "A soft wavering electronic hum with a slow phasing shimmer, like noise-cancelling, quiet and steady, seamless. No music, no voice.",
+        "loop": true,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 6
+      },
+      "estimatedCredits": 120
+    },
+    {
+      "id": "story/hush-dying/02_eleven_7710a06b75a9272f.mp3",
+      "folder": "story/hush-dying",
+      "n": 32,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 2,
+      "seconds": 2,
+      "loop": false,
+      "payload": {
+        "text": "A small electronic hum winding down as its battery dies, warbling lower, a little crackle and then silence. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2
+      },
+      "estimatedCredits": 40
+    },
+    {
+      "id": "story/rune-shard/02_eleven_509b629f46612a49.mp3",
+      "folder": "story/rune-shard",
+      "n": 35,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 1.2,
+      "seconds": 1.2,
+      "loop": false,
+      "payload": {
+        "text": "A small carved stone shard picked up off rock, a stony click and a faint glassy chime that fades. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.2
+      },
+      "estimatedCredits": 24
+    },
+    {
+      "id": "story/stones-pulse/02_eleven_49d7eb7b9d77f11e.mp3",
+      "folder": "story/stones-pulse",
+      "n": 36,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 2.5,
+      "seconds": 2.5,
+      "loop": false,
+      "payload": {
+        "text": "One deep resonant pulse travelling through deep water, a soft round underwater boom with a long ring. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2.5
+      },
+      "estimatedCredits": 50
+    },
+    {
+      "id": "story/field-note/02_eleven_4d370f51f8af0a00.mp3",
+      "folder": "story/field-note",
+      "n": 38,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 0.8,
+      "seconds": 0.8,
+      "loop": false,
+      "payload": {
+        "text": "A small paper card unfolded and held up, a dry paper rustle and crinkle. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.8
+      },
+      "estimatedCredits": 16
+    },
+    {
+      "id": "story/heart-beat/02_eleven_6e7ef2ce7ba88964.mp3",
+      "folder": "story/heart-beat",
+      "n": 39,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 3,
+      "seconds": 3,
+      "loop": false,
+      "payload": {
+        "text": "A single enormous slow heartbeat from far below the earth, two deep muffled thumps you feel more than hear. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 3
+      },
+      "estimatedCredits": 60
+    },
+    {
+      "id": "story/heart-fall/02_eleven_7bbb0379ff27e170.mp3",
+      "folder": "story/heart-fall",
+      "n": 40,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 6,
+      "seconds": 6,
+      "loop": false,
+      "payload": {
+        "text": "Something enormous dying deep underground: a vast groan that breaks apart into rumbling and collapses into silence. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 6
+      },
+      "estimatedCredits": 120
+    },
+    {
+      "id": "story/lake-breath/02_eleven_f2b622132996c10e.mp3",
+      "folder": "story/lake-breath",
+      "n": 41,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 6,
+      "seconds": 6,
+      "loop": false,
+      "payload": {
+        "text": "A huge slow exhale rolling across a still lake at night, a low breathy rush and soft lapping water. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 6
+      },
+      "estimatedCredits": 120
+    },
+    {
+      "id": "story/iron-bars/02_eleven_abb1626d277bcaab.mp3",
+      "folder": "story/iron-bars",
+      "n": 42,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 1,
+      "seconds": 1,
+      "loop": false,
+      "payload": {
+        "text": "Rusty iron bars rattled and clanging against each other in a stone doorway. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1
+      },
+      "estimatedCredits": 20
+    },
+    {
+      "id": "story/coffin-creak/02_eleven_6e33badc1cb51f7f.mp3",
+      "folder": "story/coffin-creak",
+      "n": 43,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 2,
+      "seconds": 2,
+      "loop": false,
+      "payload": {
+        "text": "An old iron-banded wooden coffin lid creaking slowly open, wood groaning and metal scraping. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2
+      },
+      "estimatedCredits": 40
+    },
+    {
+      "id": "ui/deja-vu/02_eleven_0baca404e2f886f3.mp3",
+      "folder": "ui/deja-vu",
+      "n": 45,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 2.5,
+      "seconds": 2.5,
+      "loop": false,
+      "payload": {
+        "text": "An uncanny reversed whisper swelling up and snapping off, airy and unsettling. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2.5
+      },
+      "estimatedCredits": 50
+    },
+    {
+      "id": "ui/badge/02_eleven_1c6006517bba263d.mp3",
+      "folder": "ui/badge",
+      "n": 46,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "Two metal dog tags clinking together, followed by one low warm horn note. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "ui/dawn-card/02_eleven_335ac9d7ab4a8d5b.mp3",
+      "folder": "ui/dawn-card",
+      "n": 47,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 1,
+      "seconds": 1,
+      "loop": false,
+      "payload": {
+        "text": "A paper card slid across a wooden table and tapped down. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1
+      },
+      "estimatedCredits": 20
+    },
+    {
+      "id": "ui/expand/02_eleven_d684509dc8970f24.mp3",
+      "folder": "ui/expand",
+      "n": 48,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "A short rising mechanical whir and a solid clunk, like a structure locking open. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "world/frogs-night/02_eleven_4b53e9317b27a8df.mp3",
+      "folder": "world/frogs-night",
+      "n": 49,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 10,
+      "seconds": 10,
+      "loop": true,
+      "payload": {
+        "text": "Frogs and insects croaking at night beside a forest lake, calm and steady, seamless. No music, no voice.",
+        "loop": true,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 10
+      },
+      "estimatedCredits": 200
+    },
+    {
+      "id": "world/fog-wind/02_eleven_3aaf6d0e88d138bb.mp3",
+      "folder": "world/fog-wind",
+      "n": 50,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 10,
+      "seconds": 10,
+      "loop": true,
+      "payload": {
+        "text": "A thick fog over a forest at night: a low hollow wind, very still and eerie, distant creaks, seamless. No music, no voice.",
+        "loop": true,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 10
+      },
+      "estimatedCredits": 200
+    },
+    {
+      "id": "world/graveyard-ambience/02_eleven_75d94ab0a883eaac.mp3",
+      "folder": "world/graveyard-ambience",
+      "n": 52,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 10,
+      "seconds": 10,
+      "loop": true,
+      "payload": {
+        "text": "An old abandoned cemetery at dusk: a soft wind through dry grass, a creaking iron gate far off, a crow, seamless. No music, no voice.",
+        "loop": true,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 10
+      },
+      "estimatedCredits": 200
+    },
+    {
+      "id": "world/chapel-choir/02_eleven_5f0f9cc49438b530.mp3",
+      "folder": "world/chapel-choir",
+      "n": 53,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 6,
+      "seconds": 6,
+      "loop": false,
+      "payload": {
+        "text": "A faint ghostly choir holding one soft 'aah' chord inside a ruined stone church, echoing. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 6
+      },
+      "estimatedCredits": 120
+    },
+    {
+      "id": "world/heavenly-choir/02_eleven_5add0553c445d05b.mp3",
+      "folder": "world/heavenly-choir",
+      "n": 54,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 3,
+      "seconds": 3,
+      "loop": false,
+      "payload": {
+        "text": "A short bright heavenly choir chord swelling 'aah', with a shimmer of bells. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 3
+      },
+      "estimatedCredits": 60
+    },
+    {
+      "id": "world/holy-blast/02_eleven_e1f94b7151506e54.mp3",
+      "folder": "world/holy-blast",
+      "n": 55,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 2.5,
+      "seconds": 2.5,
+      "loop": false,
+      "payload": {
+        "text": "A huge blast of light: a bright shimmering whoosh into a big booming explosion with a choir hit. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2.5
+      },
+      "estimatedCredits": 50
+    },
+    {
+      "id": "world/tree-crown-fire/02_eleven_985afea0e7c513ca.mp3",
+      "folder": "world/tree-crown-fire",
+      "n": 56,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 3,
+      "seconds": 3,
+      "loop": false,
+      "payload": {
+        "text": "The top of a pine tree catching fire, a fast roaring whoosh of flame and crackling needles. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 3
+      },
+      "estimatedCredits": 60
+    },
+    {
+      "id": "world/trunk-bump/02_eleven_968deb8fcf745e80.mp3",
+      "folder": "world/trunk-bump",
+      "n": 57,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 0.5,
+      "seconds": 0.5,
+      "loop": false,
+      "payload": {
+        "text": "Bumping into a thick tree trunk, a dull wooden thud and a light rustle of leaves above. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.5
+      },
+      "estimatedCredits": 10
+    },
+    {
+      "id": "player/footstep-mud/02_eleven_780fbcaa7ed52946.mp3",
+      "folder": "player/footstep-mud",
+      "n": 60,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 0.5,
+      "seconds": 0.5,
+      "loop": false,
+      "payload": {
+        "text": "A single combat boot footstep in soft wet mud, a sticky squelch. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.5
+      },
+      "estimatedCredits": 10
+    },
+    {
+      "id": "player/footstep-leaves/02_eleven_3bf9d513170e7393.mp3",
+      "folder": "player/footstep-leaves",
+      "n": 61,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 0.5,
+      "seconds": 0.5,
+      "loop": false,
+      "payload": {
+        "text": "A single combat boot footstep on dry fallen leaves and twigs, a crunchy rustle. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.5
+      },
+      "estimatedCredits": 10
+    },
+    {
+      "id": "player/medkit/02_eleven_a9f836579be1271e.mp3",
+      "folder": "player/medkit",
+      "n": 62,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "A first aid kit snapped open, a bandage pack torn and a quick wrap of gauze. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "player/grenade-throw/02_eleven_a4f923c04a211090.mp3",
+      "folder": "player/grenade-throw",
+      "n": 63,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 0.6,
+      "seconds": 0.6,
+      "loop": false,
+      "payload": {
+        "text": "A hand grenade thrown overarm: a quick whoosh of the arm and the spoon flying off with a ping. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.6
+      },
+      "estimatedCredits": 12
+    },
+    {
+      "id": "player/drowning/02_eleven_b488adafd803fc73.mp3",
+      "folder": "player/drowning",
+      "n": 64,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "Muffled choking and air bubbles escaping underwater, heavy and panicked. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "player/ammo-pickup/02_eleven_8170dd1c00f83760.mp3",
+      "folder": "player/ammo-pickup",
+      "n": 65,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 0.6,
+      "seconds": 0.6,
+      "loop": false,
+      "payload": {
+        "text": "Picking up a box of rifle rounds, a heavy rattle of cartridges and a cardboard flap. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.6
+      },
+      "estimatedCredits": 12
+    },
+    {
+      "id": "weapon-foley/chainsaw-dry-pull/02_eleven_36f49a4325dbdb04.mp3",
+      "folder": "weapon-foley/chainsaw-dry-pull",
+      "n": 66,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 1,
+      "seconds": 1,
+      "loop": false,
+      "payload": {
+        "text": "A chainsaw pull cord yanked once, the engine turning over but not catching. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1
+      },
+      "estimatedCredits": 20
+    },
+    {
+      "id": "weapon-foley/suppressor-on/02_eleven_e727648afcbc3e10.mp3",
+      "folder": "weapon-foley/suppressor-on",
+      "n": 67,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 1.2,
+      "seconds": 1.2,
+      "loop": false,
+      "payload": {
+        "text": "A metal suppressor screwed onto a pistol barrel, a gritty threaded twist and a final click. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.2
+      },
+      "estimatedCredits": 24
+    },
+    {
+      "id": "weapon-foley/laser-click/02_eleven_a07c7927ed8ed6cc.mp3",
+      "folder": "weapon-foley/laser-click",
+      "n": 68,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 0.3,
+      "seconds": 0.5,
+      "loop": false,
+      "payload": {
+        "text": "A small tactical laser module switched on, a crisp tiny click and a faint electronic chirp. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.5
+      },
+      "estimatedCredits": 10
+    },
+    {
+      "id": "weapon-foley/shotgun-hull/02_eleven_04d6050ec3d79d11.mp3",
+      "folder": "weapon-foley/shotgun-hull",
+      "n": 69,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 0.6,
+      "seconds": 0.6,
+      "loop": false,
+      "payload": {
+        "text": "An empty plastic shotgun shell hull bouncing twice on hard ground, a hollow plasticky tock. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.6
+      },
+      "estimatedCredits": 12
+    },
+    {
+      "id": "weapons/pistol-suppressed/02_eleven_f4c6c402d407c633.mp3",
+      "folder": "weapons/pistol-suppressed",
+      "n": 70,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 0.6,
+      "seconds": 0.6,
+      "loop": false,
+      "payload": {
+        "text": "A suppressed 9mm pistol shot outdoors, a sharp muffled thump and a metallic slide clack. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.6
+      },
+      "estimatedCredits": 12
+    },
+    {
+      "id": "weapons/carbine-suppressed/02_eleven_228db4f7c0afc0f5.mp3",
+      "folder": "weapons/carbine-suppressed",
+      "n": 71,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 0.6,
+      "seconds": 0.6,
+      "loop": false,
+      "payload": {
+        "text": "A suppressed 5.56 carbine shot outdoors, a hard muffled crack and a mechanical clatter. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.6
+      },
+      "estimatedCredits": 12
+    },
+    {
+      "id": "training/pa-chime/02_eleven_0840fb459c6b0f9a.mp3",
+      "folder": "training/pa-chime",
+      "n": 73,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "A public address chime in a concrete hall, two soft descending tones with a slight echo. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "training/keypad-press/02_eleven_23341845139307c3.mp3",
+      "folder": "training/keypad-press",
+      "n": 74,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 0.2,
+      "seconds": 0.5,
+      "loop": false,
+      "payload": {
+        "text": "A single press of a rugged metal keypad button with a short electronic beep. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.5
+      },
+      "estimatedCredits": 10
+    },
+    {
+      "id": "training/keypad-accept/02_eleven_7b0b77348c7e2a74.mp3",
+      "folder": "training/keypad-accept",
+      "n": 75,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 0.8,
+      "seconds": 0.8,
+      "loop": false,
+      "payload": {
+        "text": "A security keypad accepting a code: two rising beeps and a heavy magnetic lock releasing with a clunk. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.8
+      },
+      "estimatedCredits": 16
+    },
+    {
+      "id": "training/keypad-deny/02_eleven_47e65c0b665a3fe2.mp3",
+      "folder": "training/keypad-deny",
+      "n": 76,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 0.6,
+      "seconds": 0.6,
+      "loop": false,
+      "payload": {
+        "text": "A security keypad rejecting a code: a low harsh double buzz. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.6
+      },
+      "estimatedCredits": 12
+    },
+    {
+      "id": "training/hangar-door/02_eleven_cddaf4684b5aded4.mp3",
+      "folder": "training/hangar-door",
+      "n": 77,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 6,
+      "seconds": 6,
+      "loop": false,
+      "payload": {
+        "text": "A huge metal hangar door rolling open on rails: a heavy motor whine, rumbling and clanking, then a boom as it stops. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 6
+      },
+      "estimatedCredits": 120
+    },
+    {
+      "id": "hq/sample-window/02_eleven_95acfc44595c7aba.mp3",
+      "folder": "hq/sample-window",
+      "n": 78,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "A sack of bones dropped down a metal chute into a steel bin, a clattering slide and a heavy rattling crash. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "hq/terminal-boot/02_eleven_2ff00062fa39c3eb.mp3",
+      "folder": "hq/terminal-boot",
+      "n": 79,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 2,
+      "seconds": 2,
+      "loop": false,
+      "payload": {
+        "text": "A rugged military computer terminal powering on: a fan spinning up, a hard drive whirr and two short beeps. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2
+      },
+      "estimatedCredits": 40
+    },
+    {
+      "id": "hq/generator/02_eleven_594bcac14b5a65a9.mp3",
+      "folder": "hq/generator",
+      "n": 80,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 10,
+      "seconds": 10,
+      "loop": true,
+      "payload": {
+        "text": "A diesel generator running steadily outside a building, a low chugging rumble with a rattling exhaust, seamless. No music, no voice.",
+        "loop": true,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 10
+      },
+      "estimatedCredits": 200
+    },
+    {
+      "id": "weapons/rotary-gun-loop/02_eleven_a99871a5def20212.mp3",
+      "folder": "weapons/rotary-gun-loop",
+      "n": 82,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 4,
+      "seconds": 4,
+      "loop": true,
+      "payload": {
+        "text": "A rotary machine gun firing continuously, a steady ripping roar of thousands of rounds a minute, seamless. No music, no voice.",
+        "loop": true,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 4
+      },
+      "estimatedCredits": 80
+    },
+    {
+      "id": "turrets/light-turret-shot/02_eleven_89b68f225e44eab7.mp3",
+      "folder": "turrets/light-turret-shot",
+      "n": 83,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 0.5,
+      "seconds": 0.5,
+      "loop": false,
+      "payload": {
+        "text": "A single shot from an automated small caliber sentry gun, a sharp mechanical crack. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.5
+      },
+      "estimatedCredits": 10
+    },
+    {
+      "id": "turrets/heavy-turret-shot/02_eleven_dc38b455c351bfc8.mp3",
+      "folder": "turrets/heavy-turret-shot",
+      "n": 84,
+      "take": 2,
+      "priority": false,
+      "requestedSeconds": 0.7,
+      "seconds": 0.7,
+      "loop": false,
+      "payload": {
+        "text": "A single shot from a heavy automated turret, a deep thumping boom. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.7
+      },
+      "estimatedCredits": 14
+    },
+    {
+      "id": "crew/megaphone-squawk/03_eleven_56b26e8fc94284f6.mp3",
+      "folder": "crew/megaphone-squawk",
+      "n": 1,
+      "take": 3,
+      "priority": true,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "A handheld military megaphone keyed on outdoors: a click, a short squeal of feedback and a crackle, then it cuts off. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "crew/truck-horn/03_eleven_1ba5756f66b89068.mp3",
+      "folder": "crew/truck-horn",
+      "n": 2,
+      "take": 3,
+      "priority": true,
+      "requestedSeconds": 2.5,
+      "seconds": 2.5,
+      "loop": false,
+      "payload": {
+        "text": "An old pickup truck horn wired to a weak battery, honking the rhythm 'shave and a haircut, two bits' outdoors, slightly sour and wheezy. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2.5
+      },
+      "estimatedCredits": 50
+    },
+    {
+      "id": "crew/flare-distant/03_eleven_b03834f241a3eba7.mp3",
+      "folder": "crew/flare-distant",
+      "n": 3,
+      "take": 3,
+      "priority": true,
+      "requestedSeconds": 3,
+      "seconds": 3,
+      "loop": false,
+      "payload": {
+        "text": "A distant signal flare fired far across a forest valley: a faint pop, a rising hiss and a soft echo off the mountains. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 3
+      },
+      "estimatedCredits": 60
+    },
+    {
+      "id": "crew/mud-emerge/03_eleven_1287d9a148e55642.mp3",
+      "folder": "crew/mud-emerge",
+      "n": 4,
+      "take": 3,
+      "priority": true,
+      "requestedSeconds": 2.5,
+      "seconds": 2.5,
+      "loop": false,
+      "payload": {
+        "text": "A man heaving himself up out of thick sucking creek mud: a long wet suction, gloopy pops and dripping. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2.5
+      },
+      "estimatedCredits": 50
+    },
+    {
+      "id": "crew/hatch-pry/03_eleven_d59a7b669838fa16.mp3",
+      "folder": "crew/hatch-pry",
+      "n": 7,
+      "take": 3,
+      "priority": true,
+      "requestedSeconds": 2.5,
+      "seconds": 2.5,
+      "loop": false,
+      "payload": {
+        "text": "A rusty iron cellar hatch pried open with a crowbar: metal straining, a sharp screech of hinges and a heavy clank as it falls open. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2.5
+      },
+      "estimatedCredits": 50
+    },
+    {
+      "id": "crew/kettle-whistle/03_eleven_15cec01bdb1956f5.mp3",
+      "folder": "crew/kettle-whistle",
+      "n": 9,
+      "take": 3,
+      "priority": true,
+      "requestedSeconds": 4,
+      "seconds": 4,
+      "loop": false,
+      "payload": {
+        "text": "A small metal camping kettle on a gas stove coming to the boil and starting to whistle, rising to a shrill steady whistle. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 4
+      },
+      "estimatedCredits": 80
+    },
+    {
+      "id": "burial/shovel-fill/03_eleven_291d47254266e70f.mp3",
+      "folder": "burial/shovel-fill",
+      "n": 21,
+      "take": 3,
+      "priority": true,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "A shovelful of loose earth thrown onto a wooden coffin lid in a grave, a soft heavy thud and dirt pattering. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "story/the-tone/03_eleven_1e0c79dc7f39938c.mp3",
+      "folder": "story/the-tone",
+      "n": 24,
+      "take": 3,
+      "priority": true,
+      "requestedSeconds": 12,
+      "seconds": 12,
+      "loop": true,
+      "payload": {
+        "text": "A deep unnatural resonant hum coming up through water and rock, slowly pulsing in a repeating rhythm like it is almost saying a word, eerie and vast, seamless. No music, no voice.",
+        "loop": true,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 12
+      },
+      "estimatedCredits": 240
+    },
+    {
+      "id": "story/tone-swell/03_eleven_750e3b28351719bb.mp3",
+      "folder": "story/tone-swell",
+      "n": 25,
+      "take": 3,
+      "priority": true,
+      "requestedSeconds": 4,
+      "seconds": 4,
+      "loop": false,
+      "payload": {
+        "text": "A deep eerie resonant hum swelling louder from far beneath the ground, then sinking back down. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 4
+      },
+      "estimatedCredits": 80
+    },
+    {
+      "id": "story/tone-silenced/03_eleven_6446a6e4886bff3c.mp3",
+      "folder": "story/tone-silenced",
+      "n": 26,
+      "take": 3,
+      "priority": true,
+      "requestedSeconds": 4,
+      "seconds": 4,
+      "loop": false,
+      "payload": {
+        "text": "A deep resonant hum and its own mirror cancelling each other: the sound thins and collapses into total silence with a soft rush of air. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 4
+      },
+      "estimatedCredits": 80
+    },
+    {
+      "id": "story/relay-power-up/03_eleven_5c407fc933d08c3e.mp3",
+      "folder": "story/relay-power-up",
+      "n": 28,
+      "take": 3,
+      "priority": true,
+      "requestedSeconds": 3.5,
+      "seconds": 3.5,
+      "loop": false,
+      "payload": {
+        "text": "A big military radio relay powering up: heavy switches clunking, relays clicking in sequence and a hum rising to a steady tone. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 3.5
+      },
+      "estimatedCredits": 70
+    },
+    {
+      "id": "story/rune-door-hum/03_eleven_d71b4b729c6add46.mp3",
+      "folder": "story/rune-door-hum",
+      "n": 33,
+      "take": 3,
+      "priority": true,
+      "requestedSeconds": 8,
+      "seconds": 8,
+      "loop": true,
+      "payload": {
+        "text": "An ancient carved stone slab humming with a warm low singing resonance in a cave, faint and steady, seamless. No music, no voice.",
+        "loop": true,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 8
+      },
+      "estimatedCredits": 160
+    },
+    {
+      "id": "story/rune-door-open/03_eleven_9fa463621ffca9f5.mp3",
+      "folder": "story/rune-door-open",
+      "n": 34,
+      "take": 3,
+      "priority": true,
+      "requestedSeconds": 5,
+      "seconds": 5,
+      "loop": false,
+      "payload": {
+        "text": "A massive carved stone door grinding slowly open in a cave, deep stone scraping, dust falling and a low boom as it stops. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 5
+      },
+      "estimatedCredits": 100
+    },
+    {
+      "id": "story/dog-tag/03_eleven_5269a88cb421bccc.mp3",
+      "folder": "story/dog-tag",
+      "n": 37,
+      "take": 3,
+      "priority": true,
+      "requestedSeconds": 1,
+      "seconds": 1,
+      "loop": false,
+      "payload": {
+        "text": "Military dog tags and their ball chain picked up from dirt, a light metallic jingle. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1
+      },
+      "estimatedCredits": 20
+    },
+    {
+      "id": "ui/missing-in-action/03_eleven_ac2a73bb2c6c6262.mp3",
+      "folder": "ui/missing-in-action",
+      "n": 44,
+      "take": 3,
+      "priority": true,
+      "requestedSeconds": 4,
+      "seconds": 4,
+      "loop": false,
+      "payload": {
+        "text": "A military radio channel going dead: a burst of static that thins out into empty hiss and a lonely wind. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 4
+      },
+      "estimatedCredits": 80
+    },
+    {
+      "id": "world/underwater/03_eleven_b90b4b9e9494a316.mp3",
+      "folder": "world/underwater",
+      "n": 51,
+      "take": 3,
+      "priority": true,
+      "requestedSeconds": 8,
+      "seconds": 8,
+      "loop": true,
+      "payload": {
+        "text": "Being underwater in a deep lake: a muffled heavy pressure, low rumble and slow bubbles, seamless. No music, no voice.",
+        "loop": true,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 8
+      },
+      "estimatedCredits": 160
+    },
+    {
+      "id": "player/footstep-metal/03_eleven_9f5c55efbde6126b.mp3",
+      "folder": "player/footstep-metal",
+      "n": 58,
+      "take": 3,
+      "priority": true,
+      "requestedSeconds": 0.4,
+      "seconds": 0.5,
+      "loop": false,
+      "payload": {
+        "text": "A single combat boot footstep on a steel plate floor, a firm metallic clank. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.5
+      },
+      "estimatedCredits": 10
+    },
+    {
+      "id": "player/footstep-stone/03_eleven_06bf2f3972d1b5a8.mp3",
+      "folder": "player/footstep-stone",
+      "n": 59,
+      "take": 3,
+      "priority": true,
+      "requestedSeconds": 0.4,
+      "seconds": 0.5,
+      "loop": false,
+      "payload": {
+        "text": "A single combat boot footstep on bare cave rock, a hard gritty scuff with a short cave echo. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.5
+      },
+      "estimatedCredits": 10
+    },
+    {
+      "id": "training/alarm/03_eleven_8884242700e376bc.mp3",
+      "folder": "training/alarm",
+      "n": 72,
+      "take": 3,
+      "priority": true,
+      "requestedSeconds": 3,
+      "seconds": 3,
+      "loop": false,
+      "payload": {
+        "text": "An indoor military training facility alarm: a rising and falling electronic siren whooping three times, echoing in a concrete hall. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 3
+      },
+      "estimatedCredits": 60
+    },
+    {
+      "id": "weapons/machine-gun-shot/03_eleven_eac9cf44a40be15c.mp3",
+      "folder": "weapons/machine-gun-shot",
+      "n": 81,
+      "take": 3,
+      "priority": true,
+      "requestedSeconds": 0.8,
+      "seconds": 0.8,
+      "loop": false,
+      "payload": {
+        "text": "A single shot from a belt-fed 7.62 machine gun outdoors, a heavy punchy crack with a short echo. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.8
+      },
+      "estimatedCredits": 16
+    },
+    {
+      "id": "crew/mud-step/03_eleven_21df1eb5dd6d36fe.mp3",
+      "folder": "crew/mud-step",
+      "n": 5,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 0.6,
+      "seconds": 0.6,
+      "loop": false,
+      "payload": {
+        "text": "A single boot step pulled out of thick wet mud, a sticky squelch and a suck. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.6
+      },
+      "estimatedCredits": 12
+    },
+    {
+      "id": "crew/ladder-raise/03_eleven_e57992bc9e5dad83.mp3",
+      "folder": "crew/ladder-raise",
+      "n": 6,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "A long wooden ladder lifted and dropped against a wooden tower: a scrape, a hollow knock and a rattle settling. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "crew/hatch-slam/03_eleven_ea231218864f00b0.mp3",
+      "folder": "crew/hatch-slam",
+      "n": 8,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 1,
+      "seconds": 1,
+      "loop": false,
+      "payload": {
+        "text": "A heavy iron hatch slamming shut on a stone floor, a deep clang with a short ring. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1
+      },
+      "estimatedCredits": 20
+    },
+    {
+      "id": "crew/tea-pour/03_eleven_dd9039663f08df63.mp3",
+      "folder": "crew/tea-pour",
+      "n": 10,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 2,
+      "seconds": 2,
+      "loop": false,
+      "payload": {
+        "text": "Hot tea poured from a kettle into a tin camping mug, then a spoon stirring and clinking twice. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2
+      },
+      "estimatedCredits": 40
+    },
+    {
+      "id": "crew/biscuit-tin/03_eleven_ee54dcf2334cae70.mp3",
+      "folder": "crew/biscuit-tin",
+      "n": 11,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 1,
+      "seconds": 1,
+      "loop": false,
+      "payload": {
+        "text": "A round metal biscuit tin lid prised off with a pop and a light tinny wobble. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1
+      },
+      "estimatedCredits": 20
+    },
+    {
+      "id": "crew/belt-rattle/03_eleven_8aa8864f85410165.mp3",
+      "folder": "crew/belt-rattle",
+      "n": 12,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "A linked belt of rifle ammunition lifted and laid into a machine gun feed tray, a heavy metallic rattle and a latch snapping shut. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "crew/gun-cleaning/03_eleven_7e59977266da36f7.mp3",
+      "folder": "crew/gun-cleaning",
+      "n": 13,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 2.5,
+      "seconds": 2.5,
+      "loop": false,
+      "payload": {
+        "text": "A cleaning rod and brush pushed in and out of a rifle barrel, metal scraping, then a cloth wiping. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2.5
+      },
+      "estimatedCredits": 50
+    },
+    {
+      "id": "crew/med-bag/03_eleven_626e8b728126c2d0.mp3",
+      "folder": "crew/med-bag",
+      "n": 14,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "A canvas medic bag unzipped and opened, packets and bandages rustling inside. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "crew/bandage-wrap/03_eleven_ac8dc047ff60dc69.mp3",
+      "folder": "crew/bandage-wrap",
+      "n": 15,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 2,
+      "seconds": 2,
+      "loop": false,
+      "payload": {
+        "text": "A cloth bandage unrolled and wrapped tightly around an arm, fabric rustling and a strip of tape torn. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2
+      },
+      "estimatedCredits": 40
+    },
+    {
+      "id": "crew/ratchet/03_eleven_86e84be55968e65a.mp3",
+      "folder": "crew/ratchet",
+      "n": 16,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 1,
+      "seconds": 1,
+      "loop": false,
+      "payload": {
+        "text": "A ratchet wrench clicking quickly as it tightens a bolt, then a final hard click. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1
+      },
+      "estimatedCredits": 20
+    },
+    {
+      "id": "crew/engine-crank/03_eleven_466286c44b564103.mp3",
+      "folder": "crew/engine-crank",
+      "n": 17,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 3,
+      "seconds": 3,
+      "loop": false,
+      "payload": {
+        "text": "An old truck engine cranking over, sputtering, coughing and failing to start, outdoors. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 3
+      },
+      "estimatedCredits": 60
+    },
+    {
+      "id": "crew/roof-step/03_eleven_46c8e60d58ac7b53.mp3",
+      "folder": "crew/roof-step",
+      "n": 18,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 0.5,
+      "seconds": 0.5,
+      "loop": false,
+      "payload": {
+        "text": "A single combat boot footstep on a corrugated metal roof, a hollow bong with a small rattle. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.5
+      },
+      "estimatedCredits": 10
+    },
+    {
+      "id": "crew/crate-sit/03_eleven_f65cdc7e65b443cc.mp3",
+      "folder": "crew/crate-sit",
+      "n": 19,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 1,
+      "seconds": 1,
+      "loop": false,
+      "payload": {
+        "text": "Someone sitting down heavily on a wooden supply crate, a creak and a groan of the boards. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1
+      },
+      "estimatedCredits": 20
+    },
+    {
+      "id": "crew/sleeping-bag/03_eleven_0610d230b7e51c45.mp3",
+      "folder": "crew/sleeping-bag",
+      "n": 20,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "A nylon sleeping bag rustling as someone rolls over in it. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "burial/marker-hammer/03_eleven_9b9fd7233c415791.mp3",
+      "folder": "burial/marker-hammer",
+      "n": 22,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 2,
+      "seconds": 2,
+      "loop": false,
+      "payload": {
+        "text": "A wooden grave marker hammered into the ground with three solid blows of a mallet, outdoors. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2
+      },
+      "estimatedCredits": 40
+    },
+    {
+      "id": "burial/dog-tag-hang/03_eleven_6b3ea878da3f289a.mp3",
+      "folder": "burial/dog-tag-hang",
+      "n": 23,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 1,
+      "seconds": 1,
+      "loop": false,
+      "payload": {
+        "text": "A metal dog tag chain hung over a wooden post, a light chain jingle and a soft tap. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1
+      },
+      "estimatedCredits": 20
+    },
+    {
+      "id": "story/relay-spark/03_eleven_a951b7e6a861af8b.mp3",
+      "folder": "story/relay-spark",
+      "n": 27,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "A broken electrical panel spitting sparks, a crackling buzz and a few sharp electrical snaps. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "story/fuse-pull/03_eleven_35d4fb51e3dd3b1a.mp3",
+      "folder": "story/fuse-pull",
+      "n": 29,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 0.8,
+      "seconds": 0.8,
+      "loop": false,
+      "payload": {
+        "text": "A heavy cartridge fuse pulled out of a metal fuse box, a stiff scrape and a click. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.8
+      },
+      "estimatedCredits": 16
+    },
+    {
+      "id": "story/hush-on/03_eleven_a2cd76f85a245e58.mp3",
+      "folder": "story/hush-on",
+      "n": 30,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "A small handmade electronic box switched on: a toggle click, a whine charging up and a soft wavering hum. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "story/hush-hum/03_eleven_38b51ffd6b91a051.mp3",
+      "folder": "story/hush-hum",
+      "n": 31,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 6,
+      "seconds": 6,
+      "loop": true,
+      "payload": {
+        "text": "A soft wavering electronic hum with a slow phasing shimmer, like noise-cancelling, quiet and steady, seamless. No music, no voice.",
+        "loop": true,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 6
+      },
+      "estimatedCredits": 120
+    },
+    {
+      "id": "story/hush-dying/03_eleven_7710a06b75a9272f.mp3",
+      "folder": "story/hush-dying",
+      "n": 32,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 2,
+      "seconds": 2,
+      "loop": false,
+      "payload": {
+        "text": "A small electronic hum winding down as its battery dies, warbling lower, a little crackle and then silence. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2
+      },
+      "estimatedCredits": 40
+    },
+    {
+      "id": "story/rune-shard/03_eleven_509b629f46612a49.mp3",
+      "folder": "story/rune-shard",
+      "n": 35,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 1.2,
+      "seconds": 1.2,
+      "loop": false,
+      "payload": {
+        "text": "A small carved stone shard picked up off rock, a stony click and a faint glassy chime that fades. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.2
+      },
+      "estimatedCredits": 24
+    },
+    {
+      "id": "story/stones-pulse/03_eleven_49d7eb7b9d77f11e.mp3",
+      "folder": "story/stones-pulse",
+      "n": 36,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 2.5,
+      "seconds": 2.5,
+      "loop": false,
+      "payload": {
+        "text": "One deep resonant pulse travelling through deep water, a soft round underwater boom with a long ring. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2.5
+      },
+      "estimatedCredits": 50
+    },
+    {
+      "id": "story/field-note/03_eleven_4d370f51f8af0a00.mp3",
+      "folder": "story/field-note",
+      "n": 38,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 0.8,
+      "seconds": 0.8,
+      "loop": false,
+      "payload": {
+        "text": "A small paper card unfolded and held up, a dry paper rustle and crinkle. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.8
+      },
+      "estimatedCredits": 16
+    },
+    {
+      "id": "story/heart-beat/03_eleven_6e7ef2ce7ba88964.mp3",
+      "folder": "story/heart-beat",
+      "n": 39,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 3,
+      "seconds": 3,
+      "loop": false,
+      "payload": {
+        "text": "A single enormous slow heartbeat from far below the earth, two deep muffled thumps you feel more than hear. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 3
+      },
+      "estimatedCredits": 60
+    },
+    {
+      "id": "story/heart-fall/03_eleven_7bbb0379ff27e170.mp3",
+      "folder": "story/heart-fall",
+      "n": 40,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 6,
+      "seconds": 6,
+      "loop": false,
+      "payload": {
+        "text": "Something enormous dying deep underground: a vast groan that breaks apart into rumbling and collapses into silence. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 6
+      },
+      "estimatedCredits": 120
+    },
+    {
+      "id": "story/lake-breath/03_eleven_f2b622132996c10e.mp3",
+      "folder": "story/lake-breath",
+      "n": 41,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 6,
+      "seconds": 6,
+      "loop": false,
+      "payload": {
+        "text": "A huge slow exhale rolling across a still lake at night, a low breathy rush and soft lapping water. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 6
+      },
+      "estimatedCredits": 120
+    },
+    {
+      "id": "story/iron-bars/03_eleven_abb1626d277bcaab.mp3",
+      "folder": "story/iron-bars",
+      "n": 42,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 1,
+      "seconds": 1,
+      "loop": false,
+      "payload": {
+        "text": "Rusty iron bars rattled and clanging against each other in a stone doorway. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1
+      },
+      "estimatedCredits": 20
+    },
+    {
+      "id": "story/coffin-creak/03_eleven_6e33badc1cb51f7f.mp3",
+      "folder": "story/coffin-creak",
+      "n": 43,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 2,
+      "seconds": 2,
+      "loop": false,
+      "payload": {
+        "text": "An old iron-banded wooden coffin lid creaking slowly open, wood groaning and metal scraping. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2
+      },
+      "estimatedCredits": 40
+    },
+    {
+      "id": "ui/deja-vu/03_eleven_0baca404e2f886f3.mp3",
+      "folder": "ui/deja-vu",
+      "n": 45,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 2.5,
+      "seconds": 2.5,
+      "loop": false,
+      "payload": {
+        "text": "An uncanny reversed whisper swelling up and snapping off, airy and unsettling. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2.5
+      },
+      "estimatedCredits": 50
+    },
+    {
+      "id": "ui/badge/03_eleven_1c6006517bba263d.mp3",
+      "folder": "ui/badge",
+      "n": 46,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "Two metal dog tags clinking together, followed by one low warm horn note. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "ui/dawn-card/03_eleven_335ac9d7ab4a8d5b.mp3",
+      "folder": "ui/dawn-card",
+      "n": 47,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 1,
+      "seconds": 1,
+      "loop": false,
+      "payload": {
+        "text": "A paper card slid across a wooden table and tapped down. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1
+      },
+      "estimatedCredits": 20
+    },
+    {
+      "id": "ui/expand/03_eleven_d684509dc8970f24.mp3",
+      "folder": "ui/expand",
+      "n": 48,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "A short rising mechanical whir and a solid clunk, like a structure locking open. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "world/frogs-night/03_eleven_4b53e9317b27a8df.mp3",
+      "folder": "world/frogs-night",
+      "n": 49,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 10,
+      "seconds": 10,
+      "loop": true,
+      "payload": {
+        "text": "Frogs and insects croaking at night beside a forest lake, calm and steady, seamless. No music, no voice.",
+        "loop": true,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 10
+      },
+      "estimatedCredits": 200
+    },
+    {
+      "id": "world/fog-wind/03_eleven_3aaf6d0e88d138bb.mp3",
+      "folder": "world/fog-wind",
+      "n": 50,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 10,
+      "seconds": 10,
+      "loop": true,
+      "payload": {
+        "text": "A thick fog over a forest at night: a low hollow wind, very still and eerie, distant creaks, seamless. No music, no voice.",
+        "loop": true,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 10
+      },
+      "estimatedCredits": 200
+    },
+    {
+      "id": "world/graveyard-ambience/03_eleven_75d94ab0a883eaac.mp3",
+      "folder": "world/graveyard-ambience",
+      "n": 52,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 10,
+      "seconds": 10,
+      "loop": true,
+      "payload": {
+        "text": "An old abandoned cemetery at dusk: a soft wind through dry grass, a creaking iron gate far off, a crow, seamless. No music, no voice.",
+        "loop": true,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 10
+      },
+      "estimatedCredits": 200
+    },
+    {
+      "id": "world/chapel-choir/03_eleven_5f0f9cc49438b530.mp3",
+      "folder": "world/chapel-choir",
+      "n": 53,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 6,
+      "seconds": 6,
+      "loop": false,
+      "payload": {
+        "text": "A faint ghostly choir holding one soft 'aah' chord inside a ruined stone church, echoing. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 6
+      },
+      "estimatedCredits": 120
+    },
+    {
+      "id": "world/heavenly-choir/03_eleven_5add0553c445d05b.mp3",
+      "folder": "world/heavenly-choir",
+      "n": 54,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 3,
+      "seconds": 3,
+      "loop": false,
+      "payload": {
+        "text": "A short bright heavenly choir chord swelling 'aah', with a shimmer of bells. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 3
+      },
+      "estimatedCredits": 60
+    },
+    {
+      "id": "world/holy-blast/03_eleven_e1f94b7151506e54.mp3",
+      "folder": "world/holy-blast",
+      "n": 55,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 2.5,
+      "seconds": 2.5,
+      "loop": false,
+      "payload": {
+        "text": "A huge blast of light: a bright shimmering whoosh into a big booming explosion with a choir hit. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2.5
+      },
+      "estimatedCredits": 50
+    },
+    {
+      "id": "world/tree-crown-fire/03_eleven_985afea0e7c513ca.mp3",
+      "folder": "world/tree-crown-fire",
+      "n": 56,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 3,
+      "seconds": 3,
+      "loop": false,
+      "payload": {
+        "text": "The top of a pine tree catching fire, a fast roaring whoosh of flame and crackling needles. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 3
+      },
+      "estimatedCredits": 60
+    },
+    {
+      "id": "world/trunk-bump/03_eleven_968deb8fcf745e80.mp3",
+      "folder": "world/trunk-bump",
+      "n": 57,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 0.5,
+      "seconds": 0.5,
+      "loop": false,
+      "payload": {
+        "text": "Bumping into a thick tree trunk, a dull wooden thud and a light rustle of leaves above. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.5
+      },
+      "estimatedCredits": 10
+    },
+    {
+      "id": "player/footstep-mud/03_eleven_780fbcaa7ed52946.mp3",
+      "folder": "player/footstep-mud",
+      "n": 60,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 0.5,
+      "seconds": 0.5,
+      "loop": false,
+      "payload": {
+        "text": "A single combat boot footstep in soft wet mud, a sticky squelch. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.5
+      },
+      "estimatedCredits": 10
+    },
+    {
+      "id": "player/footstep-leaves/03_eleven_3bf9d513170e7393.mp3",
+      "folder": "player/footstep-leaves",
+      "n": 61,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 0.5,
+      "seconds": 0.5,
+      "loop": false,
+      "payload": {
+        "text": "A single combat boot footstep on dry fallen leaves and twigs, a crunchy rustle. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.5
+      },
+      "estimatedCredits": 10
+    },
+    {
+      "id": "player/medkit/03_eleven_a9f836579be1271e.mp3",
+      "folder": "player/medkit",
+      "n": 62,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "A first aid kit snapped open, a bandage pack torn and a quick wrap of gauze. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "player/grenade-throw/03_eleven_a4f923c04a211090.mp3",
+      "folder": "player/grenade-throw",
+      "n": 63,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 0.6,
+      "seconds": 0.6,
+      "loop": false,
+      "payload": {
+        "text": "A hand grenade thrown overarm: a quick whoosh of the arm and the spoon flying off with a ping. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.6
+      },
+      "estimatedCredits": 12
+    },
+    {
+      "id": "player/drowning/03_eleven_b488adafd803fc73.mp3",
+      "folder": "player/drowning",
+      "n": 64,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "Muffled choking and air bubbles escaping underwater, heavy and panicked. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "player/ammo-pickup/03_eleven_8170dd1c00f83760.mp3",
+      "folder": "player/ammo-pickup",
+      "n": 65,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 0.6,
+      "seconds": 0.6,
+      "loop": false,
+      "payload": {
+        "text": "Picking up a box of rifle rounds, a heavy rattle of cartridges and a cardboard flap. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.6
+      },
+      "estimatedCredits": 12
+    },
+    {
+      "id": "weapon-foley/chainsaw-dry-pull/03_eleven_36f49a4325dbdb04.mp3",
+      "folder": "weapon-foley/chainsaw-dry-pull",
+      "n": 66,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 1,
+      "seconds": 1,
+      "loop": false,
+      "payload": {
+        "text": "A chainsaw pull cord yanked once, the engine turning over but not catching. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1
+      },
+      "estimatedCredits": 20
+    },
+    {
+      "id": "weapon-foley/suppressor-on/03_eleven_e727648afcbc3e10.mp3",
+      "folder": "weapon-foley/suppressor-on",
+      "n": 67,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 1.2,
+      "seconds": 1.2,
+      "loop": false,
+      "payload": {
+        "text": "A metal suppressor screwed onto a pistol barrel, a gritty threaded twist and a final click. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.2
+      },
+      "estimatedCredits": 24
+    },
+    {
+      "id": "weapon-foley/laser-click/03_eleven_a07c7927ed8ed6cc.mp3",
+      "folder": "weapon-foley/laser-click",
+      "n": 68,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 0.3,
+      "seconds": 0.5,
+      "loop": false,
+      "payload": {
+        "text": "A small tactical laser module switched on, a crisp tiny click and a faint electronic chirp. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.5
+      },
+      "estimatedCredits": 10
+    },
+    {
+      "id": "weapon-foley/shotgun-hull/03_eleven_04d6050ec3d79d11.mp3",
+      "folder": "weapon-foley/shotgun-hull",
+      "n": 69,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 0.6,
+      "seconds": 0.6,
+      "loop": false,
+      "payload": {
+        "text": "An empty plastic shotgun shell hull bouncing twice on hard ground, a hollow plasticky tock. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.6
+      },
+      "estimatedCredits": 12
+    },
+    {
+      "id": "weapons/pistol-suppressed/03_eleven_f4c6c402d407c633.mp3",
+      "folder": "weapons/pistol-suppressed",
+      "n": 70,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 0.6,
+      "seconds": 0.6,
+      "loop": false,
+      "payload": {
+        "text": "A suppressed 9mm pistol shot outdoors, a sharp muffled thump and a metallic slide clack. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.6
+      },
+      "estimatedCredits": 12
+    },
+    {
+      "id": "weapons/carbine-suppressed/03_eleven_228db4f7c0afc0f5.mp3",
+      "folder": "weapons/carbine-suppressed",
+      "n": 71,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 0.6,
+      "seconds": 0.6,
+      "loop": false,
+      "payload": {
+        "text": "A suppressed 5.56 carbine shot outdoors, a hard muffled crack and a mechanical clatter. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.6
+      },
+      "estimatedCredits": 12
+    },
+    {
+      "id": "training/pa-chime/03_eleven_0840fb459c6b0f9a.mp3",
+      "folder": "training/pa-chime",
+      "n": 73,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "A public address chime in a concrete hall, two soft descending tones with a slight echo. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "training/keypad-press/03_eleven_23341845139307c3.mp3",
+      "folder": "training/keypad-press",
+      "n": 74,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 0.2,
+      "seconds": 0.5,
+      "loop": false,
+      "payload": {
+        "text": "A single press of a rugged metal keypad button with a short electronic beep. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.5
+      },
+      "estimatedCredits": 10
+    },
+    {
+      "id": "training/keypad-accept/03_eleven_7b0b77348c7e2a74.mp3",
+      "folder": "training/keypad-accept",
+      "n": 75,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 0.8,
+      "seconds": 0.8,
+      "loop": false,
+      "payload": {
+        "text": "A security keypad accepting a code: two rising beeps and a heavy magnetic lock releasing with a clunk. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.8
+      },
+      "estimatedCredits": 16
+    },
+    {
+      "id": "training/keypad-deny/03_eleven_47e65c0b665a3fe2.mp3",
+      "folder": "training/keypad-deny",
+      "n": 76,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 0.6,
+      "seconds": 0.6,
+      "loop": false,
+      "payload": {
+        "text": "A security keypad rejecting a code: a low harsh double buzz. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.6
+      },
+      "estimatedCredits": 12
+    },
+    {
+      "id": "training/hangar-door/03_eleven_cddaf4684b5aded4.mp3",
+      "folder": "training/hangar-door",
+      "n": 77,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 6,
+      "seconds": 6,
+      "loop": false,
+      "payload": {
+        "text": "A huge metal hangar door rolling open on rails: a heavy motor whine, rumbling and clanking, then a boom as it stops. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 6
+      },
+      "estimatedCredits": 120
+    },
+    {
+      "id": "hq/sample-window/03_eleven_95acfc44595c7aba.mp3",
+      "folder": "hq/sample-window",
+      "n": 78,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "A sack of bones dropped down a metal chute into a steel bin, a clattering slide and a heavy rattling crash. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "hq/terminal-boot/03_eleven_2ff00062fa39c3eb.mp3",
+      "folder": "hq/terminal-boot",
+      "n": 79,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 2,
+      "seconds": 2,
+      "loop": false,
+      "payload": {
+        "text": "A rugged military computer terminal powering on: a fan spinning up, a hard drive whirr and two short beeps. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2
+      },
+      "estimatedCredits": 40
+    },
+    {
+      "id": "hq/generator/03_eleven_594bcac14b5a65a9.mp3",
+      "folder": "hq/generator",
+      "n": 80,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 10,
+      "seconds": 10,
+      "loop": true,
+      "payload": {
+        "text": "A diesel generator running steadily outside a building, a low chugging rumble with a rattling exhaust, seamless. No music, no voice.",
+        "loop": true,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 10
+      },
+      "estimatedCredits": 200
+    },
+    {
+      "id": "weapons/rotary-gun-loop/03_eleven_a99871a5def20212.mp3",
+      "folder": "weapons/rotary-gun-loop",
+      "n": 82,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 4,
+      "seconds": 4,
+      "loop": true,
+      "payload": {
+        "text": "A rotary machine gun firing continuously, a steady ripping roar of thousands of rounds a minute, seamless. No music, no voice.",
+        "loop": true,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 4
+      },
+      "estimatedCredits": 80
+    },
+    {
+      "id": "turrets/light-turret-shot/03_eleven_89b68f225e44eab7.mp3",
+      "folder": "turrets/light-turret-shot",
+      "n": 83,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 0.5,
+      "seconds": 0.5,
+      "loop": false,
+      "payload": {
+        "text": "A single shot from an automated small caliber sentry gun, a sharp mechanical crack. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.5
+      },
+      "estimatedCredits": 10
+    },
+    {
+      "id": "turrets/heavy-turret-shot/03_eleven_dc38b455c351bfc8.mp3",
+      "folder": "turrets/heavy-turret-shot",
+      "n": 84,
+      "take": 3,
+      "priority": false,
+      "requestedSeconds": 0.7,
+      "seconds": 0.7,
+      "loop": false,
+      "payload": {
+        "text": "A single shot from a heavy automated turret, a deep thumping boom. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.7
+      },
+      "estimatedCredits": 14
+    },
+    {
+      "id": "crew/megaphone-squawk/04_eleven_56b26e8fc94284f6.mp3",
+      "folder": "crew/megaphone-squawk",
+      "n": 1,
+      "take": 4,
+      "priority": true,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "A handheld military megaphone keyed on outdoors: a click, a short squeal of feedback and a crackle, then it cuts off. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "crew/truck-horn/04_eleven_1ba5756f66b89068.mp3",
+      "folder": "crew/truck-horn",
+      "n": 2,
+      "take": 4,
+      "priority": true,
+      "requestedSeconds": 2.5,
+      "seconds": 2.5,
+      "loop": false,
+      "payload": {
+        "text": "An old pickup truck horn wired to a weak battery, honking the rhythm 'shave and a haircut, two bits' outdoors, slightly sour and wheezy. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2.5
+      },
+      "estimatedCredits": 50
+    },
+    {
+      "id": "crew/flare-distant/04_eleven_b03834f241a3eba7.mp3",
+      "folder": "crew/flare-distant",
+      "n": 3,
+      "take": 4,
+      "priority": true,
+      "requestedSeconds": 3,
+      "seconds": 3,
+      "loop": false,
+      "payload": {
+        "text": "A distant signal flare fired far across a forest valley: a faint pop, a rising hiss and a soft echo off the mountains. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 3
+      },
+      "estimatedCredits": 60
+    },
+    {
+      "id": "crew/mud-emerge/04_eleven_1287d9a148e55642.mp3",
+      "folder": "crew/mud-emerge",
+      "n": 4,
+      "take": 4,
+      "priority": true,
+      "requestedSeconds": 2.5,
+      "seconds": 2.5,
+      "loop": false,
+      "payload": {
+        "text": "A man heaving himself up out of thick sucking creek mud: a long wet suction, gloopy pops and dripping. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2.5
+      },
+      "estimatedCredits": 50
+    },
+    {
+      "id": "crew/hatch-pry/04_eleven_d59a7b669838fa16.mp3",
+      "folder": "crew/hatch-pry",
+      "n": 7,
+      "take": 4,
+      "priority": true,
+      "requestedSeconds": 2.5,
+      "seconds": 2.5,
+      "loop": false,
+      "payload": {
+        "text": "A rusty iron cellar hatch pried open with a crowbar: metal straining, a sharp screech of hinges and a heavy clank as it falls open. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2.5
+      },
+      "estimatedCredits": 50
+    },
+    {
+      "id": "crew/kettle-whistle/04_eleven_15cec01bdb1956f5.mp3",
+      "folder": "crew/kettle-whistle",
+      "n": 9,
+      "take": 4,
+      "priority": true,
+      "requestedSeconds": 4,
+      "seconds": 4,
+      "loop": false,
+      "payload": {
+        "text": "A small metal camping kettle on a gas stove coming to the boil and starting to whistle, rising to a shrill steady whistle. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 4
+      },
+      "estimatedCredits": 80
+    },
+    {
+      "id": "burial/shovel-fill/04_eleven_291d47254266e70f.mp3",
+      "folder": "burial/shovel-fill",
+      "n": 21,
+      "take": 4,
+      "priority": true,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "A shovelful of loose earth thrown onto a wooden coffin lid in a grave, a soft heavy thud and dirt pattering. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "story/the-tone/04_eleven_1e0c79dc7f39938c.mp3",
+      "folder": "story/the-tone",
+      "n": 24,
+      "take": 4,
+      "priority": true,
+      "requestedSeconds": 12,
+      "seconds": 12,
+      "loop": true,
+      "payload": {
+        "text": "A deep unnatural resonant hum coming up through water and rock, slowly pulsing in a repeating rhythm like it is almost saying a word, eerie and vast, seamless. No music, no voice.",
+        "loop": true,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 12
+      },
+      "estimatedCredits": 240
+    },
+    {
+      "id": "story/tone-swell/04_eleven_750e3b28351719bb.mp3",
+      "folder": "story/tone-swell",
+      "n": 25,
+      "take": 4,
+      "priority": true,
+      "requestedSeconds": 4,
+      "seconds": 4,
+      "loop": false,
+      "payload": {
+        "text": "A deep eerie resonant hum swelling louder from far beneath the ground, then sinking back down. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 4
+      },
+      "estimatedCredits": 80
+    },
+    {
+      "id": "story/tone-silenced/04_eleven_6446a6e4886bff3c.mp3",
+      "folder": "story/tone-silenced",
+      "n": 26,
+      "take": 4,
+      "priority": true,
+      "requestedSeconds": 4,
+      "seconds": 4,
+      "loop": false,
+      "payload": {
+        "text": "A deep resonant hum and its own mirror cancelling each other: the sound thins and collapses into total silence with a soft rush of air. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 4
+      },
+      "estimatedCredits": 80
+    },
+    {
+      "id": "story/relay-power-up/04_eleven_5c407fc933d08c3e.mp3",
+      "folder": "story/relay-power-up",
+      "n": 28,
+      "take": 4,
+      "priority": true,
+      "requestedSeconds": 3.5,
+      "seconds": 3.5,
+      "loop": false,
+      "payload": {
+        "text": "A big military radio relay powering up: heavy switches clunking, relays clicking in sequence and a hum rising to a steady tone. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 3.5
+      },
+      "estimatedCredits": 70
+    },
+    {
+      "id": "story/rune-door-hum/04_eleven_d71b4b729c6add46.mp3",
+      "folder": "story/rune-door-hum",
+      "n": 33,
+      "take": 4,
+      "priority": true,
+      "requestedSeconds": 8,
+      "seconds": 8,
+      "loop": true,
+      "payload": {
+        "text": "An ancient carved stone slab humming with a warm low singing resonance in a cave, faint and steady, seamless. No music, no voice.",
+        "loop": true,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 8
+      },
+      "estimatedCredits": 160
+    },
+    {
+      "id": "story/rune-door-open/04_eleven_9fa463621ffca9f5.mp3",
+      "folder": "story/rune-door-open",
+      "n": 34,
+      "take": 4,
+      "priority": true,
+      "requestedSeconds": 5,
+      "seconds": 5,
+      "loop": false,
+      "payload": {
+        "text": "A massive carved stone door grinding slowly open in a cave, deep stone scraping, dust falling and a low boom as it stops. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 5
+      },
+      "estimatedCredits": 100
+    },
+    {
+      "id": "story/dog-tag/04_eleven_5269a88cb421bccc.mp3",
+      "folder": "story/dog-tag",
+      "n": 37,
+      "take": 4,
+      "priority": true,
+      "requestedSeconds": 1,
+      "seconds": 1,
+      "loop": false,
+      "payload": {
+        "text": "Military dog tags and their ball chain picked up from dirt, a light metallic jingle. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1
+      },
+      "estimatedCredits": 20
+    },
+    {
+      "id": "ui/missing-in-action/04_eleven_ac2a73bb2c6c6262.mp3",
+      "folder": "ui/missing-in-action",
+      "n": 44,
+      "take": 4,
+      "priority": true,
+      "requestedSeconds": 4,
+      "seconds": 4,
+      "loop": false,
+      "payload": {
+        "text": "A military radio channel going dead: a burst of static that thins out into empty hiss and a lonely wind. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 4
+      },
+      "estimatedCredits": 80
+    },
+    {
+      "id": "world/underwater/04_eleven_b90b4b9e9494a316.mp3",
+      "folder": "world/underwater",
+      "n": 51,
+      "take": 4,
+      "priority": true,
+      "requestedSeconds": 8,
+      "seconds": 8,
+      "loop": true,
+      "payload": {
+        "text": "Being underwater in a deep lake: a muffled heavy pressure, low rumble and slow bubbles, seamless. No music, no voice.",
+        "loop": true,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 8
+      },
+      "estimatedCredits": 160
+    },
+    {
+      "id": "player/footstep-metal/04_eleven_9f5c55efbde6126b.mp3",
+      "folder": "player/footstep-metal",
+      "n": 58,
+      "take": 4,
+      "priority": true,
+      "requestedSeconds": 0.4,
+      "seconds": 0.5,
+      "loop": false,
+      "payload": {
+        "text": "A single combat boot footstep on a steel plate floor, a firm metallic clank. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.5
+      },
+      "estimatedCredits": 10
+    },
+    {
+      "id": "player/footstep-stone/04_eleven_06bf2f3972d1b5a8.mp3",
+      "folder": "player/footstep-stone",
+      "n": 59,
+      "take": 4,
+      "priority": true,
+      "requestedSeconds": 0.4,
+      "seconds": 0.5,
+      "loop": false,
+      "payload": {
+        "text": "A single combat boot footstep on bare cave rock, a hard gritty scuff with a short cave echo. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.5
+      },
+      "estimatedCredits": 10
+    },
+    {
+      "id": "training/alarm/04_eleven_8884242700e376bc.mp3",
+      "folder": "training/alarm",
+      "n": 72,
+      "take": 4,
+      "priority": true,
+      "requestedSeconds": 3,
+      "seconds": 3,
+      "loop": false,
+      "payload": {
+        "text": "An indoor military training facility alarm: a rising and falling electronic siren whooping three times, echoing in a concrete hall. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 3
+      },
+      "estimatedCredits": 60
+    },
+    {
+      "id": "weapons/machine-gun-shot/04_eleven_eac9cf44a40be15c.mp3",
+      "folder": "weapons/machine-gun-shot",
+      "n": 81,
+      "take": 4,
+      "priority": true,
+      "requestedSeconds": 0.8,
+      "seconds": 0.8,
+      "loop": false,
+      "payload": {
+        "text": "A single shot from a belt-fed 7.62 machine gun outdoors, a heavy punchy crack with a short echo. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.8
+      },
+      "estimatedCredits": 16
+    },
+    {
+      "id": "crew/mud-step/04_eleven_21df1eb5dd6d36fe.mp3",
+      "folder": "crew/mud-step",
+      "n": 5,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 0.6,
+      "seconds": 0.6,
+      "loop": false,
+      "payload": {
+        "text": "A single boot step pulled out of thick wet mud, a sticky squelch and a suck. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.6
+      },
+      "estimatedCredits": 12
+    },
+    {
+      "id": "crew/ladder-raise/04_eleven_e57992bc9e5dad83.mp3",
+      "folder": "crew/ladder-raise",
+      "n": 6,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "A long wooden ladder lifted and dropped against a wooden tower: a scrape, a hollow knock and a rattle settling. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "crew/hatch-slam/04_eleven_ea231218864f00b0.mp3",
+      "folder": "crew/hatch-slam",
+      "n": 8,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 1,
+      "seconds": 1,
+      "loop": false,
+      "payload": {
+        "text": "A heavy iron hatch slamming shut on a stone floor, a deep clang with a short ring. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1
+      },
+      "estimatedCredits": 20
+    },
+    {
+      "id": "crew/tea-pour/04_eleven_dd9039663f08df63.mp3",
+      "folder": "crew/tea-pour",
+      "n": 10,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 2,
+      "seconds": 2,
+      "loop": false,
+      "payload": {
+        "text": "Hot tea poured from a kettle into a tin camping mug, then a spoon stirring and clinking twice. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2
+      },
+      "estimatedCredits": 40
+    },
+    {
+      "id": "crew/biscuit-tin/04_eleven_ee54dcf2334cae70.mp3",
+      "folder": "crew/biscuit-tin",
+      "n": 11,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 1,
+      "seconds": 1,
+      "loop": false,
+      "payload": {
+        "text": "A round metal biscuit tin lid prised off with a pop and a light tinny wobble. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1
+      },
+      "estimatedCredits": 20
+    },
+    {
+      "id": "crew/belt-rattle/04_eleven_8aa8864f85410165.mp3",
+      "folder": "crew/belt-rattle",
+      "n": 12,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "A linked belt of rifle ammunition lifted and laid into a machine gun feed tray, a heavy metallic rattle and a latch snapping shut. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "crew/gun-cleaning/04_eleven_7e59977266da36f7.mp3",
+      "folder": "crew/gun-cleaning",
+      "n": 13,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 2.5,
+      "seconds": 2.5,
+      "loop": false,
+      "payload": {
+        "text": "A cleaning rod and brush pushed in and out of a rifle barrel, metal scraping, then a cloth wiping. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2.5
+      },
+      "estimatedCredits": 50
+    },
+    {
+      "id": "crew/med-bag/04_eleven_626e8b728126c2d0.mp3",
+      "folder": "crew/med-bag",
+      "n": 14,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "A canvas medic bag unzipped and opened, packets and bandages rustling inside. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "crew/bandage-wrap/04_eleven_ac8dc047ff60dc69.mp3",
+      "folder": "crew/bandage-wrap",
+      "n": 15,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 2,
+      "seconds": 2,
+      "loop": false,
+      "payload": {
+        "text": "A cloth bandage unrolled and wrapped tightly around an arm, fabric rustling and a strip of tape torn. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2
+      },
+      "estimatedCredits": 40
+    },
+    {
+      "id": "crew/ratchet/04_eleven_86e84be55968e65a.mp3",
+      "folder": "crew/ratchet",
+      "n": 16,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 1,
+      "seconds": 1,
+      "loop": false,
+      "payload": {
+        "text": "A ratchet wrench clicking quickly as it tightens a bolt, then a final hard click. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1
+      },
+      "estimatedCredits": 20
+    },
+    {
+      "id": "crew/engine-crank/04_eleven_466286c44b564103.mp3",
+      "folder": "crew/engine-crank",
+      "n": 17,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 3,
+      "seconds": 3,
+      "loop": false,
+      "payload": {
+        "text": "An old truck engine cranking over, sputtering, coughing and failing to start, outdoors. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 3
+      },
+      "estimatedCredits": 60
+    },
+    {
+      "id": "crew/roof-step/04_eleven_46c8e60d58ac7b53.mp3",
+      "folder": "crew/roof-step",
+      "n": 18,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 0.5,
+      "seconds": 0.5,
+      "loop": false,
+      "payload": {
+        "text": "A single combat boot footstep on a corrugated metal roof, a hollow bong with a small rattle. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.5
+      },
+      "estimatedCredits": 10
+    },
+    {
+      "id": "crew/crate-sit/04_eleven_f65cdc7e65b443cc.mp3",
+      "folder": "crew/crate-sit",
+      "n": 19,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 1,
+      "seconds": 1,
+      "loop": false,
+      "payload": {
+        "text": "Someone sitting down heavily on a wooden supply crate, a creak and a groan of the boards. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1
+      },
+      "estimatedCredits": 20
+    },
+    {
+      "id": "crew/sleeping-bag/04_eleven_0610d230b7e51c45.mp3",
+      "folder": "crew/sleeping-bag",
+      "n": 20,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "A nylon sleeping bag rustling as someone rolls over in it. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "burial/marker-hammer/04_eleven_9b9fd7233c415791.mp3",
+      "folder": "burial/marker-hammer",
+      "n": 22,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 2,
+      "seconds": 2,
+      "loop": false,
+      "payload": {
+        "text": "A wooden grave marker hammered into the ground with three solid blows of a mallet, outdoors. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2
+      },
+      "estimatedCredits": 40
+    },
+    {
+      "id": "burial/dog-tag-hang/04_eleven_6b3ea878da3f289a.mp3",
+      "folder": "burial/dog-tag-hang",
+      "n": 23,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 1,
+      "seconds": 1,
+      "loop": false,
+      "payload": {
+        "text": "A metal dog tag chain hung over a wooden post, a light chain jingle and a soft tap. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1
+      },
+      "estimatedCredits": 20
+    },
+    {
+      "id": "story/relay-spark/04_eleven_a951b7e6a861af8b.mp3",
+      "folder": "story/relay-spark",
+      "n": 27,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "A broken electrical panel spitting sparks, a crackling buzz and a few sharp electrical snaps. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "story/fuse-pull/04_eleven_35d4fb51e3dd3b1a.mp3",
+      "folder": "story/fuse-pull",
+      "n": 29,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 0.8,
+      "seconds": 0.8,
+      "loop": false,
+      "payload": {
+        "text": "A heavy cartridge fuse pulled out of a metal fuse box, a stiff scrape and a click. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.8
+      },
+      "estimatedCredits": 16
+    },
+    {
+      "id": "story/hush-on/04_eleven_a2cd76f85a245e58.mp3",
+      "folder": "story/hush-on",
+      "n": 30,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "A small handmade electronic box switched on: a toggle click, a whine charging up and a soft wavering hum. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "story/hush-hum/04_eleven_38b51ffd6b91a051.mp3",
+      "folder": "story/hush-hum",
+      "n": 31,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 6,
+      "seconds": 6,
+      "loop": true,
+      "payload": {
+        "text": "A soft wavering electronic hum with a slow phasing shimmer, like noise-cancelling, quiet and steady, seamless. No music, no voice.",
+        "loop": true,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 6
+      },
+      "estimatedCredits": 120
+    },
+    {
+      "id": "story/hush-dying/04_eleven_7710a06b75a9272f.mp3",
+      "folder": "story/hush-dying",
+      "n": 32,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 2,
+      "seconds": 2,
+      "loop": false,
+      "payload": {
+        "text": "A small electronic hum winding down as its battery dies, warbling lower, a little crackle and then silence. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2
+      },
+      "estimatedCredits": 40
+    },
+    {
+      "id": "story/rune-shard/04_eleven_509b629f46612a49.mp3",
+      "folder": "story/rune-shard",
+      "n": 35,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 1.2,
+      "seconds": 1.2,
+      "loop": false,
+      "payload": {
+        "text": "A small carved stone shard picked up off rock, a stony click and a faint glassy chime that fades. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.2
+      },
+      "estimatedCredits": 24
+    },
+    {
+      "id": "story/stones-pulse/04_eleven_49d7eb7b9d77f11e.mp3",
+      "folder": "story/stones-pulse",
+      "n": 36,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 2.5,
+      "seconds": 2.5,
+      "loop": false,
+      "payload": {
+        "text": "One deep resonant pulse travelling through deep water, a soft round underwater boom with a long ring. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2.5
+      },
+      "estimatedCredits": 50
+    },
+    {
+      "id": "story/field-note/04_eleven_4d370f51f8af0a00.mp3",
+      "folder": "story/field-note",
+      "n": 38,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 0.8,
+      "seconds": 0.8,
+      "loop": false,
+      "payload": {
+        "text": "A small paper card unfolded and held up, a dry paper rustle and crinkle. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.8
+      },
+      "estimatedCredits": 16
+    },
+    {
+      "id": "story/heart-beat/04_eleven_6e7ef2ce7ba88964.mp3",
+      "folder": "story/heart-beat",
+      "n": 39,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 3,
+      "seconds": 3,
+      "loop": false,
+      "payload": {
+        "text": "A single enormous slow heartbeat from far below the earth, two deep muffled thumps you feel more than hear. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 3
+      },
+      "estimatedCredits": 60
+    },
+    {
+      "id": "story/heart-fall/04_eleven_7bbb0379ff27e170.mp3",
+      "folder": "story/heart-fall",
+      "n": 40,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 6,
+      "seconds": 6,
+      "loop": false,
+      "payload": {
+        "text": "Something enormous dying deep underground: a vast groan that breaks apart into rumbling and collapses into silence. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 6
+      },
+      "estimatedCredits": 120
+    },
+    {
+      "id": "story/lake-breath/04_eleven_f2b622132996c10e.mp3",
+      "folder": "story/lake-breath",
+      "n": 41,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 6,
+      "seconds": 6,
+      "loop": false,
+      "payload": {
+        "text": "A huge slow exhale rolling across a still lake at night, a low breathy rush and soft lapping water. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 6
+      },
+      "estimatedCredits": 120
+    },
+    {
+      "id": "story/iron-bars/04_eleven_abb1626d277bcaab.mp3",
+      "folder": "story/iron-bars",
+      "n": 42,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 1,
+      "seconds": 1,
+      "loop": false,
+      "payload": {
+        "text": "Rusty iron bars rattled and clanging against each other in a stone doorway. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1
+      },
+      "estimatedCredits": 20
+    },
+    {
+      "id": "story/coffin-creak/04_eleven_6e33badc1cb51f7f.mp3",
+      "folder": "story/coffin-creak",
+      "n": 43,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 2,
+      "seconds": 2,
+      "loop": false,
+      "payload": {
+        "text": "An old iron-banded wooden coffin lid creaking slowly open, wood groaning and metal scraping. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2
+      },
+      "estimatedCredits": 40
+    },
+    {
+      "id": "ui/deja-vu/04_eleven_0baca404e2f886f3.mp3",
+      "folder": "ui/deja-vu",
+      "n": 45,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 2.5,
+      "seconds": 2.5,
+      "loop": false,
+      "payload": {
+        "text": "An uncanny reversed whisper swelling up and snapping off, airy and unsettling. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2.5
+      },
+      "estimatedCredits": 50
+    },
+    {
+      "id": "ui/badge/04_eleven_1c6006517bba263d.mp3",
+      "folder": "ui/badge",
+      "n": 46,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "Two metal dog tags clinking together, followed by one low warm horn note. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "ui/dawn-card/04_eleven_335ac9d7ab4a8d5b.mp3",
+      "folder": "ui/dawn-card",
+      "n": 47,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 1,
+      "seconds": 1,
+      "loop": false,
+      "payload": {
+        "text": "A paper card slid across a wooden table and tapped down. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1
+      },
+      "estimatedCredits": 20
+    },
+    {
+      "id": "ui/expand/04_eleven_d684509dc8970f24.mp3",
+      "folder": "ui/expand",
+      "n": 48,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "A short rising mechanical whir and a solid clunk, like a structure locking open. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "world/frogs-night/04_eleven_4b53e9317b27a8df.mp3",
+      "folder": "world/frogs-night",
+      "n": 49,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 10,
+      "seconds": 10,
+      "loop": true,
+      "payload": {
+        "text": "Frogs and insects croaking at night beside a forest lake, calm and steady, seamless. No music, no voice.",
+        "loop": true,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 10
+      },
+      "estimatedCredits": 200
+    },
+    {
+      "id": "world/fog-wind/04_eleven_3aaf6d0e88d138bb.mp3",
+      "folder": "world/fog-wind",
+      "n": 50,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 10,
+      "seconds": 10,
+      "loop": true,
+      "payload": {
+        "text": "A thick fog over a forest at night: a low hollow wind, very still and eerie, distant creaks, seamless. No music, no voice.",
+        "loop": true,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 10
+      },
+      "estimatedCredits": 200
+    },
+    {
+      "id": "world/graveyard-ambience/04_eleven_75d94ab0a883eaac.mp3",
+      "folder": "world/graveyard-ambience",
+      "n": 52,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 10,
+      "seconds": 10,
+      "loop": true,
+      "payload": {
+        "text": "An old abandoned cemetery at dusk: a soft wind through dry grass, a creaking iron gate far off, a crow, seamless. No music, no voice.",
+        "loop": true,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 10
+      },
+      "estimatedCredits": 200
+    },
+    {
+      "id": "world/chapel-choir/04_eleven_5f0f9cc49438b530.mp3",
+      "folder": "world/chapel-choir",
+      "n": 53,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 6,
+      "seconds": 6,
+      "loop": false,
+      "payload": {
+        "text": "A faint ghostly choir holding one soft 'aah' chord inside a ruined stone church, echoing. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 6
+      },
+      "estimatedCredits": 120
+    },
+    {
+      "id": "world/heavenly-choir/04_eleven_5add0553c445d05b.mp3",
+      "folder": "world/heavenly-choir",
+      "n": 54,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 3,
+      "seconds": 3,
+      "loop": false,
+      "payload": {
+        "text": "A short bright heavenly choir chord swelling 'aah', with a shimmer of bells. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 3
+      },
+      "estimatedCredits": 60
+    },
+    {
+      "id": "world/holy-blast/04_eleven_e1f94b7151506e54.mp3",
+      "folder": "world/holy-blast",
+      "n": 55,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 2.5,
+      "seconds": 2.5,
+      "loop": false,
+      "payload": {
+        "text": "A huge blast of light: a bright shimmering whoosh into a big booming explosion with a choir hit. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2.5
+      },
+      "estimatedCredits": 50
+    },
+    {
+      "id": "world/tree-crown-fire/04_eleven_985afea0e7c513ca.mp3",
+      "folder": "world/tree-crown-fire",
+      "n": 56,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 3,
+      "seconds": 3,
+      "loop": false,
+      "payload": {
+        "text": "The top of a pine tree catching fire, a fast roaring whoosh of flame and crackling needles. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 3
+      },
+      "estimatedCredits": 60
+    },
+    {
+      "id": "world/trunk-bump/04_eleven_968deb8fcf745e80.mp3",
+      "folder": "world/trunk-bump",
+      "n": 57,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 0.5,
+      "seconds": 0.5,
+      "loop": false,
+      "payload": {
+        "text": "Bumping into a thick tree trunk, a dull wooden thud and a light rustle of leaves above. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.5
+      },
+      "estimatedCredits": 10
+    },
+    {
+      "id": "player/footstep-mud/04_eleven_780fbcaa7ed52946.mp3",
+      "folder": "player/footstep-mud",
+      "n": 60,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 0.5,
+      "seconds": 0.5,
+      "loop": false,
+      "payload": {
+        "text": "A single combat boot footstep in soft wet mud, a sticky squelch. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.5
+      },
+      "estimatedCredits": 10
+    },
+    {
+      "id": "player/footstep-leaves/04_eleven_3bf9d513170e7393.mp3",
+      "folder": "player/footstep-leaves",
+      "n": 61,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 0.5,
+      "seconds": 0.5,
+      "loop": false,
+      "payload": {
+        "text": "A single combat boot footstep on dry fallen leaves and twigs, a crunchy rustle. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.5
+      },
+      "estimatedCredits": 10
+    },
+    {
+      "id": "player/medkit/04_eleven_a9f836579be1271e.mp3",
+      "folder": "player/medkit",
+      "n": 62,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "A first aid kit snapped open, a bandage pack torn and a quick wrap of gauze. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "player/grenade-throw/04_eleven_a4f923c04a211090.mp3",
+      "folder": "player/grenade-throw",
+      "n": 63,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 0.6,
+      "seconds": 0.6,
+      "loop": false,
+      "payload": {
+        "text": "A hand grenade thrown overarm: a quick whoosh of the arm and the spoon flying off with a ping. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.6
+      },
+      "estimatedCredits": 12
+    },
+    {
+      "id": "player/drowning/04_eleven_b488adafd803fc73.mp3",
+      "folder": "player/drowning",
+      "n": 64,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "Muffled choking and air bubbles escaping underwater, heavy and panicked. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "player/ammo-pickup/04_eleven_8170dd1c00f83760.mp3",
+      "folder": "player/ammo-pickup",
+      "n": 65,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 0.6,
+      "seconds": 0.6,
+      "loop": false,
+      "payload": {
+        "text": "Picking up a box of rifle rounds, a heavy rattle of cartridges and a cardboard flap. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.6
+      },
+      "estimatedCredits": 12
+    },
+    {
+      "id": "weapon-foley/chainsaw-dry-pull/04_eleven_36f49a4325dbdb04.mp3",
+      "folder": "weapon-foley/chainsaw-dry-pull",
+      "n": 66,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 1,
+      "seconds": 1,
+      "loop": false,
+      "payload": {
+        "text": "A chainsaw pull cord yanked once, the engine turning over but not catching. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1
+      },
+      "estimatedCredits": 20
+    },
+    {
+      "id": "weapon-foley/suppressor-on/04_eleven_e727648afcbc3e10.mp3",
+      "folder": "weapon-foley/suppressor-on",
+      "n": 67,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 1.2,
+      "seconds": 1.2,
+      "loop": false,
+      "payload": {
+        "text": "A metal suppressor screwed onto a pistol barrel, a gritty threaded twist and a final click. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.2
+      },
+      "estimatedCredits": 24
+    },
+    {
+      "id": "weapon-foley/laser-click/04_eleven_a07c7927ed8ed6cc.mp3",
+      "folder": "weapon-foley/laser-click",
+      "n": 68,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 0.3,
+      "seconds": 0.5,
+      "loop": false,
+      "payload": {
+        "text": "A small tactical laser module switched on, a crisp tiny click and a faint electronic chirp. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.5
+      },
+      "estimatedCredits": 10
+    },
+    {
+      "id": "weapon-foley/shotgun-hull/04_eleven_04d6050ec3d79d11.mp3",
+      "folder": "weapon-foley/shotgun-hull",
+      "n": 69,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 0.6,
+      "seconds": 0.6,
+      "loop": false,
+      "payload": {
+        "text": "An empty plastic shotgun shell hull bouncing twice on hard ground, a hollow plasticky tock. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.6
+      },
+      "estimatedCredits": 12
+    },
+    {
+      "id": "weapons/pistol-suppressed/04_eleven_f4c6c402d407c633.mp3",
+      "folder": "weapons/pistol-suppressed",
+      "n": 70,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 0.6,
+      "seconds": 0.6,
+      "loop": false,
+      "payload": {
+        "text": "A suppressed 9mm pistol shot outdoors, a sharp muffled thump and a metallic slide clack. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.6
+      },
+      "estimatedCredits": 12
+    },
+    {
+      "id": "weapons/carbine-suppressed/04_eleven_228db4f7c0afc0f5.mp3",
+      "folder": "weapons/carbine-suppressed",
+      "n": 71,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 0.6,
+      "seconds": 0.6,
+      "loop": false,
+      "payload": {
+        "text": "A suppressed 5.56 carbine shot outdoors, a hard muffled crack and a mechanical clatter. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.6
+      },
+      "estimatedCredits": 12
+    },
+    {
+      "id": "training/pa-chime/04_eleven_0840fb459c6b0f9a.mp3",
+      "folder": "training/pa-chime",
+      "n": 73,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "A public address chime in a concrete hall, two soft descending tones with a slight echo. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "training/keypad-press/04_eleven_23341845139307c3.mp3",
+      "folder": "training/keypad-press",
+      "n": 74,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 0.2,
+      "seconds": 0.5,
+      "loop": false,
+      "payload": {
+        "text": "A single press of a rugged metal keypad button with a short electronic beep. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.5
+      },
+      "estimatedCredits": 10
+    },
+    {
+      "id": "training/keypad-accept/04_eleven_7b0b77348c7e2a74.mp3",
+      "folder": "training/keypad-accept",
+      "n": 75,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 0.8,
+      "seconds": 0.8,
+      "loop": false,
+      "payload": {
+        "text": "A security keypad accepting a code: two rising beeps and a heavy magnetic lock releasing with a clunk. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.8
+      },
+      "estimatedCredits": 16
+    },
+    {
+      "id": "training/keypad-deny/04_eleven_47e65c0b665a3fe2.mp3",
+      "folder": "training/keypad-deny",
+      "n": 76,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 0.6,
+      "seconds": 0.6,
+      "loop": false,
+      "payload": {
+        "text": "A security keypad rejecting a code: a low harsh double buzz. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.6
+      },
+      "estimatedCredits": 12
+    },
+    {
+      "id": "training/hangar-door/04_eleven_cddaf4684b5aded4.mp3",
+      "folder": "training/hangar-door",
+      "n": 77,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 6,
+      "seconds": 6,
+      "loop": false,
+      "payload": {
+        "text": "A huge metal hangar door rolling open on rails: a heavy motor whine, rumbling and clanking, then a boom as it stops. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 6
+      },
+      "estimatedCredits": 120
+    },
+    {
+      "id": "hq/sample-window/04_eleven_95acfc44595c7aba.mp3",
+      "folder": "hq/sample-window",
+      "n": 78,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 1.5,
+      "seconds": 1.5,
+      "loop": false,
+      "payload": {
+        "text": "A sack of bones dropped down a metal chute into a steel bin, a clattering slide and a heavy rattling crash. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 1.5
+      },
+      "estimatedCredits": 30
+    },
+    {
+      "id": "hq/terminal-boot/04_eleven_2ff00062fa39c3eb.mp3",
+      "folder": "hq/terminal-boot",
+      "n": 79,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 2,
+      "seconds": 2,
+      "loop": false,
+      "payload": {
+        "text": "A rugged military computer terminal powering on: a fan spinning up, a hard drive whirr and two short beeps. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 2
+      },
+      "estimatedCredits": 40
+    },
+    {
+      "id": "hq/generator/04_eleven_594bcac14b5a65a9.mp3",
+      "folder": "hq/generator",
+      "n": 80,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 10,
+      "seconds": 10,
+      "loop": true,
+      "payload": {
+        "text": "A diesel generator running steadily outside a building, a low chugging rumble with a rattling exhaust, seamless. No music, no voice.",
+        "loop": true,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 10
+      },
+      "estimatedCredits": 200
+    },
+    {
+      "id": "weapons/rotary-gun-loop/04_eleven_a99871a5def20212.mp3",
+      "folder": "weapons/rotary-gun-loop",
+      "n": 82,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 4,
+      "seconds": 4,
+      "loop": true,
+      "payload": {
+        "text": "A rotary machine gun firing continuously, a steady ripping roar of thousands of rounds a minute, seamless. No music, no voice.",
+        "loop": true,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 4
+      },
+      "estimatedCredits": 80
+    },
+    {
+      "id": "turrets/light-turret-shot/04_eleven_89b68f225e44eab7.mp3",
+      "folder": "turrets/light-turret-shot",
+      "n": 83,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 0.5,
+      "seconds": 0.5,
+      "loop": false,
+      "payload": {
+        "text": "A single shot from an automated small caliber sentry gun, a sharp mechanical crack. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.5
+      },
+      "estimatedCredits": 10
+    },
+    {
+      "id": "turrets/heavy-turret-shot/04_eleven_dc38b455c351bfc8.mp3",
+      "folder": "turrets/heavy-turret-shot",
+      "n": 84,
+      "take": 4,
+      "priority": false,
+      "requestedSeconds": 0.7,
+      "seconds": 0.7,
+      "loop": false,
+      "payload": {
+        "text": "A single shot from a heavy automated turret, a deep thumping boom. No music, no voice.",
+        "loop": false,
+        "prompt_influence": 0.6,
+        "model_id": "eleven_text_to_sound_v2",
+        "duration_seconds": 0.7
+      },
+      "estimatedCredits": 14
+    }
+  ],
+  "summary": {
+    "sounds": 84,
+    "clips": 336,
+    "fixedSeconds": 876,
+    "autoDurationClips": 0,
+    "shortClipsAdjusted": 16,
+    "estimatedCredits": 17520
+  }
+}

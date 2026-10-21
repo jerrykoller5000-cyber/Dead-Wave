@@ -1,0 +1,9 @@
+#102 build-attacks-wood-break
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 2 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A wooden barricade smashed apart: planks cracking, splintering and clattering to the ground. No voice, no music.
+
+In the game: buildBreak('wood')

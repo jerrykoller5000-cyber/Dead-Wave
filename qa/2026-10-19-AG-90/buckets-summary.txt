@@ -1,0 +1,167 @@
+
+================ Group (ALL BUCKETS) ================
+Total buckets: 32
+ 1604n /  401x (auto=0, m=802, shown=0, vis=401, culled=0, moved=0, v=336..1059) -> TT.trees[].group (batched) | n=4,m=2 | ud=[_tbFrozen] | BufferGeometry(color+ember+normal+position) | MeshStandardNodeMaterial:#ffffff/r0.95
+   pos: ["-163.39,-1.65,-53.88@mast (50.7m)","73.84,6.86,89.48@bridge#0 (24.1m)","170.98,0.57,-66.73@cave#5 (31.1m)"] ud: {"_tbFrozen":true}
+  228n /    6x (auto=228, m=216, shown=216, vis=0, culled=6, moved=0, v=148..148) -> UNKNOWN | n=38,m=36 | ud=[] | CylinderGeometry(normal+position+uv) | MeshStandardMaterial:#2f6b34/r0.75
+   pos: ["-72.06,-3.38,-88.83@camp#1(hikers) (70.4m)","-210.16,-3.38,-113.47@cave#3 (108.8m)","-113.01,-3.38,-67.6@mast (75.2m)"] ud: {"_cull":"object"}
+   88n /   22x (auto=88, m=44, shown=44, vis=22, culled=0, moved=22, v=765..1059) -> TT.trees[].group (live) | n=4,m=2 | ud=[_tbFrozen] | BufferGeometry(color+ember+normal+position) | MeshStandardNodeMaterial:#ffffff/r0.95
+   pos: ["31.17,-3.84,1.18@camp#0(ranger) (24.8m)","-33.25,-3.9,-25.69@HQ (0,0) (42.0m)","-30.43,-2.99,8.44@HQ (0,0) (31.6m)"] ud: {"_tbFrozen":false}
+   77n /    1x (auto=77, m=76, shown=76, vis=1, culled=0, moved=0, v=13529..13529) -> UNKNOWN | n=77,m=76 | ud=[] | BufferGeometry(color+normal+position+wdepth+wflow) | MeshStandardNodeMaterial:#ffffff+trans/r0.46
+   pos: ["0,0,0@origin (0,0)"] ud: {"_cull":"object"}
+   69n /    1x (auto=69, m=52, shown=44, vis=0, culled=1, moved=0, v=66..66) -> TT.POI.lakeHole | n=69,m=52 | ud=[] | CylinderGeometry(normal+position+uv) | MeshBasicMaterial:#030404/rnull
+   pos: ["-134,0,-107@mast (104.7m)"] ud: {"_cull":"object"}
+   67n /    1x (auto=67, m=66, shown=66, vis=1, culled=0, moved=0, v=88..88) -> UNKNOWN | n=67,m=66 | ud=[kind,mouthZ] | CylinderGeometry(normal+position+uv) | MeshStandardMaterial:#0d0906/r1
+   pos: ["-7.84,-3.83,-28.33@HQ (0,0) (29.4m)"] ud: {"mouthZ":0,"kind":0,"_cull":"object"}
+   60n /    6x (auto=0, m=42, shown=30, vis=6, culled=0, moved=0, v=855..1059) -> TT.trees[].group (batched) | n=10,m=7 | ud=[_tbFrozen] | BufferGeometry(color+ember+normal+position) | MeshStandardNodeMaterial:#ffffff/r0.95
+   pos: ["-104.47,4.44,-209.38@cave#4 (94.7m)","194.82,4.49,57.58@cave#0 (32.7m)","232.55,-5.81,-4.04@cave#0 (100.3m)"] ud: {"_tbFrozen":true}
+   54n /    6x (auto=54, m=48, shown=48, vis=0, culled=6, moved=0, v=24..24) -> UNKNOWN | n=9,m=8 | ud=[] | BoxGeometry(normal+position+uv) | MeshStandardMaterial:#8a6a45/r0.9
+   pos: ["-94.96,0.37,95.35@graveyard (8.0m)","-92.96,0.56,95.35@graveyard (6.9m)","-90.96,0.71,95.35@graveyard (6.3m)"] ud: {"_cull":"object"}
+   30n /    3x (auto=30, m=12, shown=12, vis=0, culled=3, moved=0, v=480..512) -> TT.POI.caves[].group | n=10,m=4 | ud=[] | BufferGeometry(color+gwear+gworn+normal+position) | MeshStandardNodeMaterial:#ffffff/r1
+   pos: ["-19,3.95,187.79@cave#1 (0.0m)","-161.35,0.68,90.29@cave#2 (0.0m)","-186.76,1.92,-7.22@cave#3 (0.0m)"] ud: {"_cull":"object"}
+   26n /    1x (auto=26, m=25, shown=25, vis=0, culled=0, moved=0, v=14..14) -> UNKNOWN | n=26,m=25 | ud=[dots,hit,ring,segs,simple,state] | CylinderGeometry(normal+position+uv) | MeshBasicMaterial:#6fe3ff+trans/rnull
+   pos: ["0,0,0@origin (0,0)"] ud: {"ring":"Object3D(Mesh)","state":"","hit":null,"dots":0,"segs":0,"simple":true}
+   20n /    1x (auto=20, m=19, shown=19, vis=0, culled=0, moved=0, v=42..42) -> UNKNOWN | n=20,m=19 | ud=[ring] | SphereGeometry(normal+position+uv) | MeshBasicMaterial:#ffd24a+trans/rnull
+   pos: ["0,0,0@origin (0,0)"] ud: {"ring":"Object3D(Mesh)"}
+   20n /    1x (auto=20, m=19, shown=19, vis=0, culled=0, moved=0, v=42..42) -> UNKNOWN | n=20,m=19 | ud=[dots,hit,ring,state] | SphereGeometry(normal+position+uv) | MeshBasicMaterial:#ffd24a+trans/rnull
+   pos: ["0,0,0@origin (0,0)"] ud: {"ring":"Object3D(Mesh)","state":"","hit":null,"dots":0}
+   15n /   15x (auto=15, m=0, shown=0, vis=0, culled=0, moved=0, v=0..0) -> UNKNOWN | n=1,m=0 | ud=[] | no-geo | no-mat
+   pos: ["0,0,0@origin (0,0)","0,0,0@origin (0,0)","0,0,0@origin (0,0)"] ud: {}
+   13n /    1x (auto=13, m=8, shown=8, vis=0, culled=1, moved=0, v=24..24) -> UNKNOWN | n=13,m=8 | ud=[] | BoxGeometry(normal+position+uv) | MeshStandardMaterial:#24170d/r0.9
+   pos: ["-128.32,1.06,-2.22@mast (25.1m)"] ud: {"_cull":"object"}
+   12n /    6x (auto=12, m=6, shown=6, vis=0, culled=6, moved=0, v=912..912) -> landmark:barrel | n=2,m=1 | ud=[] | BufferGeometry(color+normal+position) | MeshStandardMaterial:vcol/r0.55
+   pos: ["-121.98,0.96,47.47@graveyard (52.6m)","-96.64,0.2,-37.11@mast (65.6m)","37.53,-1.81,30.98@bridge#0 (45.9m)"] ud: {"_cull":"object"}
+   11n /    1x (auto=11, m=5, shown=5, vis=0, culled=1, moved=0, v=480..480) -> TT.POI.caves[].group | n=11,m=5 | ud=[] | BufferGeometry(color+gwear+gworn+normal+position) | MeshStandardNodeMaterial:#ffffff/r1
+   pos: ["164.48,3.71,69.65@cave#0 (0.0m)"] ud: {"_cull":"object"}
+    9n /    1x (auto=9, m=7, shown=7, vis=1, culled=0, moved=0, v=24..24) -> TT.KIOSK.group | n=9,m=7 | ud=[bulb,glow,screen] | BoxGeometry(normal+position+uv) | MeshStandardMaterial:#1d2126/r0.5
+   pos: ["-5.04,-3.17,2.2@HQ (0,0) (5.5m)"] ud: {"screen":"object","bulb":"object","glow":"Object3D(PointLight)","_cull":"object"}
+    9n /    1x (auto=9, m=8, shown=8, vis=0, culled=0, moved=0, v=135..135) -> UNKNOWN | n=9,m=8 | ud=[projKind] | LatheGeometry(normal+position+uv) | MeshStandardMaterial:#4a5530/r0.55
+   pos: ["0,0,0@origin (0,0)"] ud: {"projKind":"mortar"}
+    6n /    3x (auto=6, m=3, shown=3, vis=1, culled=2, moved=0, v=7740..11208) -> UNKNOWN | n=2,m=1 | ud=[landmarkTheme] | BufferGeometry(color+normal+position) | MeshStandardMaterial:vcol/r0.85
+   pos: ["56.43,4.55,72.85@bridge#0 (0.0m)","-46.85,0.69,50.1@bridge#1 (0.0m)","-99.91,0.19,-41.77@mast (65.4m)"] ud: {"landmarkTheme":"patched timber footbridge","_cull":"object"}
+    6n /    3x (auto=6, m=3, shown=3, vis=1, culled=2, moved=0, v=4620..4764) -> landmark:shed | n=2,m=1 | ud=[landmarkTheme] | BufferGeometry(color+normal+position) | MeshStandardMaterial:vcol/r0.85
+   pos: ["33.73,-1.63,33.57@bridge#0 (45.4m)","-63.52,-1.94,-104.56@camp#1(hikers) (65.7m)","-48.13,-3.06,-16.34@HQ (0,0) (50.8m)"] ud: {"landmarkTheme":"field repair shop","_cull":"object"}
+    5n /    1x (auto=5, m=4, shown=4, vis=0, culled=1, moved=0, v=40..40) -> UNKNOWN | n=5,m=4 | ud=[] | CylinderGeometry(normal+position+uv) | MeshStandardMaterial:#6e5a3c/r0.9
+   pos: ["-128.8,0.16,-2.08@mast (24.7m)"] ud: {"_cull":"object"}
+    4n /    2x (auto=4, m=2, shown=2, vis=0, culled=2, moved=0, v=7332..7404) -> landmark:cabin | n=2,m=1 | ud=[landmarkTheme] | BufferGeometry(color+normal+position) | MeshStandardMaterial:vcol/r0.85
+   pos: ["19.98,5.54,104.09@bridge#0 (48.0m)","91.37,3.96,-66.82@camp#0(ranger) (70.8m)"] ud: {"landmarkTheme":"last aid station","_cull":"object"}
+    4n /    1x (auto=0, m=2, shown=0, vis=1, culled=0, moved=0, v=765..765) -> TT.trees[].group (batched) [deadWood] | n=4,m=2 | ud=[_tbFrozen] | BufferGeometry(color+ember+normal+position) | MeshStandardNodeMaterial:#ffffff/r0.95
+   pos: ["-166.03,10.64,96.07@cave#2 (7.4m)"] ud: {"_tbFrozen":true}
+    4n /    1x (auto=4, m=3, shown=3, vis=0, culled=1, moved=0, v=4..4) -> UNKNOWN | n=4,m=3 | ud=[] | PlaneGeometry(normal+position+uv) | MeshStandardMaterial:#ffffff/r0.95
+   pos: ["-128.89,-0.1,-2.84@mast (24.5m)"] ud: {"_cull":"object"}
+    4n /    1x (auto=4, m=3, shown=3, vis=0, culled=1, moved=0, v=112..112) -> UNKNOWN | n=4,m=3 | ud=[] | CylinderGeometry(normal+position+uv) | MeshStandardMaterial:#5d6640/r0.9
+   pos: ["-128.48,-0.14,-3.5@mast (24.9m)"] ud: {"_cull":"object"}
+    3n /    1x (auto=3, m=2, shown=2, vis=0, culled=0, moved=0, v=4..4) -> TT.house.bar | n=3,m=2 | ud=[] | PlaneGeometry(normal+position+uv) | MeshBasicMaterial:#0b0d08+trans/rnull
+   pos: ["0,3.43,0@origin (0,0)"] ud: {}
+    3n /    1x (auto=3, m=2, shown=2, vis=0, culled=0, moved=0, v=4..4) -> landmark-bar:tower | n=3,m=2 | ud=[] | PlaneGeometry(normal+position+uv) | MeshBasicMaterial:#151a20+trans/rnull
+   pos: ["0,0,0@origin (0,0)"] ud: {}
+    3n /    1x (auto=3, m=2, shown=2, vis=0, culled=0, moved=0, v=24..24) -> UNKNOWN | n=3,m=2 | ud=[] | BufferGeometry(position) | LineBasicMaterial:#ff4a36+trans/rnull
+   pos: ["0,0,0@origin (0,0)"] ud: {}
+    3n /    1x (auto=3, m=2, shown=2, vis=0, culled=0, moved=0, v=24..24) -> UNKNOWN | n=3,m=2 | ud=[] | BufferGeometry(position) | LineBasicMaterial:#22c55e+trans/rnull
+   pos: ["0,0,0@origin (0,0)"] ud: {}
+    3n /    1x (auto=3, m=2, shown=2, vis=0, culled=0, moved=0, v=24..24) -> UNKNOWN | n=3,m=2 | ud=[] | BufferGeometry(position) | LineBasicMaterial:#ef4444+trans/rnull
+   pos: ["0,0,0@origin (0,0)"] ud: {}
+    3n /    1x (auto=3, m=2, shown=2, vis=0, culled=0, moved=0, v=24..24) -> UNKNOWN | n=3,m=2 | ud=[] | BufferGeometry(position) | LineBasicMaterial:#ffa04a+trans/rnull
+   pos: ["0,0,0@origin (0,0)"] ud: {}
+    2n /    1x (auto=2, m=1, shown=1, vis=1, culled=0, moved=1, v=48240..48240) -> UNKNOWN | n=2,m=1 | ud=[] | BufferGeometry(color+normal+position) | MeshStandardMaterial:#ffffff+trans+em:#ffffff/r1
+   pos: ["16.9,0,18.43@HQ (0,0) (25.0m)"] ud: {}
+
+================ 1 (ALL BUCKETS) ================
+Total buckets: 1
+  138n /    2x (auto=138, m=136, shown=136, vis=1, culled=1, moved=0, v=88..88) -> UNKNOWN | n=69,m=68 | ud=[kind,mouthZ] | CylinderGeometry(normal+position+uv) | MeshStandardMaterial:#0d0906/r1
+   pos: ["28.23,-4.68,-17.96@camp#0(ranger) (9.0m)","-24.91,1.06,46.52@camp#2(trapper) (9.0m)"] ud: {"mouthZ":0,"kind":1,"_cull":"object"}
+
+================ Mesh (ALL BUCKETS) ================
+Total buckets: 46
+  283n /  283x (auto=0, m=283, shown=143, vis=143, culled=0, moved=0, v=72..24876) -> UNKNOWN | n=1,m=1 | ud=[spans] | BufferGeometry(color+normal+position+sway) | MeshStandardNodeMaterial:vcol/r0.95
+   pos: ["0,0,0@origin (0,0)","0,0,0@origin (0,0)","0,0,0@origin (0,0)"] ud: {"spans":"Array(14)"}
+  147n /  147x (auto=147, m=147, shown=147, vis=147, culled=0, moved=0, v=144..696) -> TT.rocks[].mesh | n=1,m=1 | ud=[] | BufferGeometry(color+normal+position) | MeshStandardMaterial:vcol/r0.9
+   pos: ["15.22,-5.63,-49.25@camp#0(ranger) (33.0m)","-195.33,1.6,-49.68@cave#3 (43.3m)","-208.13,-1.18,89.39@cave#2 (46.8m)"] ud: {}
+  133n /  133x (auto=133, m=133, shown=0, vis=0, culled=133, moved=133, v=20..20) -> TT.motes[].mesh (active) | n=1,m=1 | ud=[] | SphereGeometry(normal+position+uv) | MeshBasicMaterial:#c6b48f+trans/rnull
+   pos: ["-11.29,4.03,-185.11@cave#4 (2.4m)","162.63,4.36,69.23@cave#0 (1.9m)","162.86,4.3,68.65@cave#0 (1.9m)"] ud: {"_cull":"object"}
+  109n /  109x (auto=109, m=109, shown=0, vis=0, culled=100, moved=10, v=20..20) -> TT.motePool[] (pooled mote) | n=1,m=1 | ud=[] | SphereGeometry(normal+position+uv) | MeshBasicMaterial:#c6b48f+trans/rnull
+   pos: ["-158.89,1.75,89.38@cave#2 (2.6m)","-159.83,1.81,89.58@cave#2 (1.7m)","-158.98,1.64,89.77@cave#2 (2.4m)"] ud: {"_cull":"object"}
+   80n /   80x (auto=80, m=80, shown=0, vis=0, culled=0, moved=3, v=12..12) -> UNKNOWN | n=1,m=1 | ud=[effectPooled,poolCap] | TetrahedronGeometry(normal+position+uv) | MeshStandardMaterial:pooled(cap=88)+trans/r0.9
+   pos: ["32.61,-2.68,-45.52@camp#0(ranger) (22.5m)","7.59,-3.12,5.69@HQ (0,0) (9.5m)","25.43,0.01,44.43@bridge#0 (42.1m)"] ud: {"effectPooled":true,"poolCap":88}
+   51n /   51x (auto=0, m=51, shown=51, vis=51, culled=0, moved=0, v=336..13959) -> UNKNOWN | n=1,m=1 | ud=[treeBatch] | BufferGeometry(color+ember+normal+position) | MeshStandardNodeMaterial:#ffffff/r0.95
+   pos: ["0,0,0@origin (0,0)","0,0,0@origin (0,0)","0,0,0@origin (0,0)"] ud: {"treeBatch":"-3,-1"}
+   51n /   51x (auto=0, m=51, shown=51, vis=51, culled=0, moved=0, v=816..46320) -> UNKNOWN | n=1,m=1 | ud=[treeBatch] | BufferGeometry(color+ember+normal+position) | MeshStandardNodeMaterial:#ffffff/r0.82
+   pos: ["0,0,0@origin (0,0)","0,0,0@origin (0,0)","0,0,0@origin (0,0)"] ud: {"treeBatch":"-3,-1"}
+   43n /   43x (auto=43, m=43, shown=0, vis=0, culled=43, moved=0, v=1890..24156) -> UNKNOWN | n=1,m=1 | ud=[landmarkTheme] | BufferGeometry(color+normal+position) | MeshStandardMaterial:vcol/r0.85
+   pos: ["-153.37,0.22,-4.15@mast (0.0m)","219.18,-5.86,14.37@cave#0 (77.8m)","215.43,-0.59,42.85@cave#0 (57.6m)"] ud: {"landmarkTheme":"silent emergency relay station","_cull":"object"}
+   40n /   40x (auto=0, m=40, shown=0, vis=0, culled=0, moved=0, v=73..73) -> UNKNOWN | n=1,m=1 | ud=[] | BufferGeometry(normal+position+uv) | MeshStandardMaterial:#ffffff+trans/r0.12
+   pos: ["0,0,0@origin (0,0)","0,0,0@origin (0,0)","0,0,0@origin (0,0)"] ud: {}
+   30n /   30x (auto=30, m=30, shown=0, vis=0, culled=30, moved=0, v=144..4968) -> UNKNOWN | n=1,m=1 | ud=[bedLife] | BufferGeometry(color+ember+normal+position) | MeshStandardMaterial:vcol/r0.95
+   pos: ["-90,0,-198@cave#4 (78.3m)","-90,0,-162@cave#4 (81.6m)","-90,0,-126@camp#1(hikers) (98.6m)"] ud: {"bedLife":true,"_cull":"object"}
+   27n /   27x (auto=27, m=27, shown=4, vis=4, culled=23, moved=27, v=204..9216) -> UNKNOWN | n=1,m=1 | ud=[bedLife] | BufferGeometry(color+ember+normal+position) | MeshStandardMaterial:vcol/r0.9
+   pos: ["-90,0,-198@cave#4 (78.3m)","-90,0,-162@cave#4 (81.6m)","-90,0,-126@camp#1(hikers) (98.6m)"] ud: {"bedLife":true,"_cull":"object"}
+   25n /   25x (auto=25, m=25, shown=0, vis=0, culled=0, moved=0, v=98..98) -> UNKNOWN | n=1,m=1 | ud=[effectPooled,poolCap] | CapsuleGeometry(normal+position+uv) | MeshStandardMaterial:pooled(cap=88)+trans+em:#3a0505/r0.55
+   pos: ["-10.89,-3.11,4.68@HQ (0,0) (11.9m)","-5.71,-3.11,6.41@HQ (0,0) (8.6m)","-8.73,-3.11,5.55@HQ (0,0) (10.3m)"] ud: {"effectPooled":true,"poolCap":88}
+   25n /   25x (auto=25, m=25, shown=0, vis=0, culled=0, moved=0, v=42..42) -> UNKNOWN | n=1,m=1 | ud=[effectPooled,poolCap] | SphereGeometry(normal+position+uv) | MeshStandardMaterial:pooled(cap=88)+trans+em:#3a0505/r0.55
+   pos: ["-10.85,-3.11,5.13@HQ (0,0) (12.0m)","-8.62,-2.54,12.07@HQ (0,0) (14.8m)","-10.02,-3.11,4.95@HQ (0,0) (11.2m)"] ud: {"effectPooled":true,"poolCap":88}
+   16n /   16x (auto=16, m=16, shown=16, vis=16, culled=0, moved=16, v=20..20) -> TT.motes[].mesh (active) | n=1,m=1 | ud=[] | SphereGeometry(normal+position+uv) | MeshBasicMaterial:#ffffaf+trans/rnull
+   pos: ["9.83,-1.98,-2.18@HQ (0,0) (10.1m)","-5.74,-2.29,-10.32@HQ (0,0) (11.8m)","-8,-1.53,-12.16@HQ (0,0) (14.6m)"] ud: {"_cull":"object"}
+   15n /   15x (auto=15, m=15, shown=0, vis=0, culled=0, moved=0, v=4..4) -> UNKNOWN | n=1,m=1 | ud=[] | PlaneGeometry(normal+position+uv) | MeshBasicMaterial:#22c55e+trans/rnull
+   pos: ["0,0,0@origin (0,0)","0,0,0@origin (0,0)","0,0,0@origin (0,0)"] ud: {}
+   14n /   14x (auto=14, m=14, shown=0, vis=0, culled=0, moved=0, v=24..24) -> UNKNOWN | n=1,m=1 | ud=[effectPooled,poolCap] | BoxGeometry(normal+position+uv) | MeshStandardMaterial:pooled(cap=88)+trans+em:#3a0505/r0.55
+   pos: ["-7.98,-3.11,4.36@HQ (0,0) (9.1m)","-11.29,-3.11,5.14@HQ (0,0) (12.4m)","-10.63,-3.11,6.34@HQ (0,0) (12.4m)"] ud: {"effectPooled":true,"poolCap":88}
+    9n /    9x (auto=9, m=9, shown=0, vis=0, culled=9, moved=0, v=120..3912) -> UNKNOWN | n=1,m=1 | ud=[bedLife] | BufferGeometry(color+ember+normal+position) | MeshStandardMaterial:vcol/r0.7
+   pos: ["-90,0,-126@camp#1(hikers) (98.6m)","-90,0,-90@camp#1(hikers) (88.4m)","-54,0,-90@camp#1(hikers) (52.7m)"] ud: {"bedLife":true,"_cull":"object"}
+    9n /    9x (auto=9, m=9, shown=0, vis=0, culled=0, moved=0, v=40..40) -> UNKNOWN | n=1,m=1 | ud=[effectPooled,poolCap] | CylinderGeometry(normal+position+uv) | MeshStandardMaterial:pooled(cap=108)+trans/r0.28
+   pos: ["0.19,-2.43,0.55@HQ (0,0) (0.6m)","0.18,-2.45,0.48@HQ (0,0) (0.5m)","0.19,-2.44,0.49@HQ (0,0) (0.5m)"] ud: {"effectPooled":true,"poolCap":108}
+    5n /    5x (auto=5, m=5, shown=0, vis=0, culled=0, moved=0, v=60..60) -> UNKNOWN | n=1,m=1 | ud=[effectPooled,poolCap] | IcosahedronGeometry(normal+position+uv) | MeshBasicMaterial:pooled(cap=140)+trans/rnull
+   pos: ["0,-2.17,0@origin (0,0)","0,-2.17,0@origin (0,0)","0,-2.17,0@origin (0,0)"] ud: {"effectPooled":true,"poolCap":140}
+    4n /    4x (auto=4, m=4, shown=2, vis=2, culled=2, moved=0, v=288..576) -> landmark:fence | n=1,m=1 | ud=[] | BufferGeometry(color+normal+position) | MeshStandardMaterial:vcol/r0.85
+   pos: ["28.85,-5.33,-23.27@camp#0(ranger) (6.7m)","3.6,2.15,-86.59@camp#1(hikers) (7.4m)","-27.03,0.97,45.8@camp#2(trapper) (6.8m)"] ud: {"_cull":"object"}
+    4n /    4x (auto=4, m=4, shown=0, vis=0, culled=4, moved=0, v=108..144) -> landmark:sign | n=1,m=1 | ud=[] | BufferGeometry(color+normal+position) | MeshStandardMaterial:vcol/r0.85
+   pos: ["-85.76,0.52,86.15@graveyard (5.2m)","-93.56,0.3,92.95@graveyard (5.2m)","-114.25,-0.15,48.17@graveyard (47.6m)"] ud: {"_cull":"object"}
+    3n /    3x (auto=3, m=3, shown=0, vis=0, culled=0, moved=0, v=27..27) -> landmark-ember:campsite | n=1,m=1 | ud=[] | ConeGeometry(normal+position+uv) | MeshStandardMaterial:#ff5a1a+em:#ff6a22/r0.8
+   pos: ["35.52,-6.53,-23.24@camp#0(ranger) (0.0m)","-1.98,1.37,-81.68@camp#1(hikers) (0.0m)","-33.49,0.44,43.81@camp#2(trapper) (0.0m)"] ud: {}
+    3n /    3x (auto=3, m=3, shown=1, vis=1, culled=2, moved=0, v=288..127536) -> UNKNOWN | n=1,m=1 | ud=[] | BufferGeometry(color+normal+position) | MeshStandardMaterial:vcol/r0.85
+   pos: ["19.98,5.85,104.09@bridge#0 (48.0m)","0,0,0@origin (0,0)","0,0,0@origin (0,0)"] ud: {"_cull":"object"}
+    3n /    3x (auto=3, m=3, shown=0, vis=0, culled=3, moved=3, v=34..34) -> TT.ripples[].mesh (active) | n=1,m=1 | ud=[] | RingGeometry(normal+position+uv) | MeshBasicMaterial:#90c3e8+trans/rnull
+   pos: ["-136.09,-3.36,-108.9@mast (106.2m)","-122.42,-3.38,-95.14@mast (96.1m)","-123.95,-3.36,-96.67@mast (97.1m)"] ud: {"_cull":"object"}
+    2n /    2x (auto=2, m=2, shown=0, vis=0, culled=2, moved=1, v=34..34) -> TT.ripplePool[] (pooled ripple) | n=1,m=1 | ud=[] | RingGeometry(normal+position+uv) | MeshBasicMaterial:#90c3e8+trans/rnull
+   pos: ["-128.61,-3.3,-104.18@mast (103.0m)","-125.89,-3.35,-99.17@mast (98.9m)"] ud: {"_cull":"object"}
+    2n /    2x (auto=2, m=2, shown=2, vis=2, culled=0, moved=0, v=14..82) -> UNKNOWN | n=1,m=1 | ud=[noCull] | BufferGeometry(normal+position+uv) | MeshStandardMaterial:#ffffff+trans/r1
+   pos: ["0,0,0@origin (0,0)","0,0,0@origin (0,0)"] ud: {"noCull":true}
+    2n /    2x (auto=2, m=2, shown=0, vis=0, culled=0, moved=0, v=42..42) -> UNKNOWN | n=1,m=1 | ud=[effectPooled,poolCap] | SphereGeometry(normal+position+uv) | MeshStandardMaterial:pooled(cap=88)+trans+em:#affe4f/r0.5
+   pos: ["-11.56,-3.05,1.69@HQ (0,0) (11.7m)","-2.05,-3,10.82@HQ (0,0) (11.0m)"] ud: {"effectPooled":true,"poolCap":88}
+    2n /    2x (auto=2, m=2, shown=0, vis=0, culled=0, moved=0, v=98..98) -> UNKNOWN | n=1,m=1 | ud=[effectPooled,poolCap] | CapsuleGeometry(normal+position+uv) | MeshStandardMaterial:pooled(cap=88)+trans+em:#affe4f/r0.5
+   pos: ["-8.64,-3.11,5.22@HQ (0,0) (10.1m)","-5.62,-2.91,4.61@HQ (0,0) (7.3m)"] ud: {"effectPooled":true,"poolCap":88}
+    2n /    1x (auto=2, m=2, shown=1, vis=0, culled=0, moved=0, v=52..52) -> UNKNOWN | n=2,m=2 | ud=[shell] | CylinderGeometry(normal+position+uv) | MeshStandardMaterial:#cb5857+trans/r0.55
+   pos: ["0.16,-2.35,0.55@HQ (0,0) (0.6m)"] ud: {"shell":true}
+    1n /    1x (auto=1, m=1, shown=1, vis=1, culled=0, moved=0, v=1025..1025) -> UNKNOWN | n=1,m=1 | ud=[] | SphereGeometry(normal+position+uv) | MeshBasicNodeMaterial:#ffffff/rnull
+   pos: ["0,6.74,-16.86@HQ (0,0) (16.9m)"] ud: {}
+    1n /    1x (auto=1, m=1, shown=0, vis=0, culled=0, moved=0, v=133121..133121) -> TT.ground | n=1,m=1 | ud=[] | BufferGeometry(color+gwear+gworn+normal+position) | MeshStandardNodeMaterial:#ffffff/r0.92
+   pos: ["0,0,0@origin (0,0)"] ud: {}
+    1n /    1x (auto=1, m=1, shown=0, vis=0, culled=0, moved=0, v=8..8) -> UNKNOWN | n=1,m=1 | ud=[] | CylinderGeometry(normal+position+uv) | MeshBasicMaterial:#aecdee+trans/rnull
+   pos: ["0,0,0@origin (0,0)"] ud: {}
+    1n /    1x (auto=1, m=1, shown=1, vis=1, culled=0, moved=0, v=30..30) -> UNKNOWN | n=1,m=1 | ud=[lastN] | SphereGeometry(normal+position+uv) | MeshBasicMaterial:#7a0000/rnull
+   pos: ["0,0,0@origin (0,0)"] ud: {"lastN":0}
+    1n /    1x (auto=1, m=1, shown=1, vis=1, culled=0, moved=0, v=12..12) -> UNKNOWN | n=1,m=1 | ud=[] | CircleGeometry(normal+position+uv) | MeshBasicMaterial:#ffffff+trans/rnull
+   pos: ["0,0,0@origin (0,0)"] ud: {}
+    1n /    1x (auto=1, m=1, shown=1, vis=1, culled=0, moved=0, v=106782..106782) -> UNKNOWN | n=1,m=1 | ud=[bedLife] | BufferGeometry(color+ember+normal+position) | MeshStandardNodeMaterial:#ffffff/r0.92
+   pos: ["0,0,0@origin (0,0)"] ud: {"bedLife":true,"_cull":"object"}
+    1n /    1x (auto=1, m=1, shown=1, vis=1, culled=0, moved=0, v=12600..12600) -> landmark:campsite:ranger | n=1,m=1 | ud=[landmarkTheme] | BufferGeometry(color+normal+position) | MeshStandardMaterial:vcol/r0.85
+   pos: ["35.52,-6.73,-23.24@camp#0(ranger) (0.0m)"] ud: {"landmarkTheme":"ranger search party","_cull":"object"}
+    1n /    1x (auto=1, m=1, shown=1, vis=1, culled=0, moved=0, v=19296..19296) -> landmark:campsite:hikers | n=1,m=1 | ud=[landmarkTheme] | BufferGeometry(color+normal+position) | MeshStandardMaterial:vcol/r0.85
+   pos: ["-1.98,1.17,-81.68@camp#1(hikers) (0.0m)"] ud: {"landmarkTheme":"interrupted hiking holiday","_cull":"object"}
+    1n /    1x (auto=1, m=1, shown=0, vis=0, culled=1, moved=0, v=22032..22032) -> landmark:campsite:trapper | n=1,m=1 | ud=[landmarkTheme] | BufferGeometry(color+normal+position) | MeshStandardMaterial:vcol/r0.85
+   pos: ["-33.49,0.24,43.81@camp#2(trapper) (0.0m)"] ud: {"landmarkTheme":"trapper winter preparations","_cull":"object"}
+    1n /    1x (auto=1, m=1, shown=0, vis=0, culled=1, moved=0, v=8502..8502) -> landmark:graveyard | n=1,m=1 | ud=[landmarkTheme] | BufferGeometry(color+normal+position) | MeshStandardMaterial:vcol/r0.85
+   pos: ["-89.96,0.48,89.15@graveyard (0.0m)"] ud: {"landmarkTheme":"old parish cemetery and recent hurried burials","_cull":"object"}
+    1n /    1x (auto=1, m=1, shown=0, vis=0, culled=1, moved=0, v=81..81) -> TT.campfires[].bulb | n=1,m=1 | ud=[] | SphereGeometry(normal+position+uv) | MeshStandardMaterial:#ff2200+em:#ff1100/r1
+   pos: ["-153.37,15.12,-4.15@mast (0.0m)"] ud: {"_cull":"object"}
+    1n /    1x (auto=1, m=1, shown=0, vis=0, culled=0, moved=0, v=34..34) -> UNKNOWN | n=1,m=1 | ud=[] | CylinderGeometry(normal+position+uv) | MeshBasicMaterial:#ffffb4/rnull
+   pos: ["-0.14,-2.22,4.81@HQ (0,0) (4.8m)"] ud: {}
+    1n /    1x (auto=1, m=1, shown=0, vis=0, culled=1, moved=1, v=19..19) -> UNKNOWN | n=1,m=1 | ud=[] | ConeGeometry(normal+position+uv) | MeshStandardMaterial:#111111+em:#ffa31a/r0.5
+   pos: ["-149.87,3.16,-1.15@mast (4.6m)"] ud: {"_cull":"object"}
+    1n /    1x (auto=1, m=1, shown=0, vis=0, culled=0, moved=1, v=19..19) -> UNKNOWN | n=1,m=1 | ud=[] | ConeGeometry(normal+position+uv) | MeshStandardMaterial:#111111+em:#3dff6a/r0.5
+   pos: ["-156.92,5.41,6.69@mast (11.4m)"] ud: {}
+    1n /    1x (auto=1, m=1, shown=0, vis=0, culled=0, moved=0, v=4..4) -> UNKNOWN | n=1,m=1 | ud=[effectPooled,poolCap] | PlaneGeometry(normal+position+uv) | MeshBasicMaterial:pooled(cap=96)+trans/rnull
+   pos: ["0,0,0@origin (0,0)"] ud: {"effectPooled":true,"poolCap":96}
+    1n /    1x (auto=1, m=1, shown=0, vis=0, culled=1, moved=0, v=20..20) -> TT.motePool[] (pooled mote) | n=1,m=1 | ud=[] | SphereGeometry(normal+position+uv) | MeshBasicMaterial:#cfeaff+trans/rnull
+   pos: ["-134.7,-5.35,-103.13@mast (100.7m)"] ud: {"_cull":"object"}
+    1n /    1x (auto=1, m=1, shown=0, vis=0, culled=1, moved=1, v=20..20) -> TT.motes[].mesh (active) | n=1,m=1 | ud=[] | SphereGeometry(normal+position+uv) | MeshBasicMaterial:#cfeaff+trans/rnull
+   pos: ["-122.28,-3.7,-95.42@mast (96.4m)"] ud: {"_cull":"object"}

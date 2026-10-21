@@ -1,0 +1,9 @@
+#97 builds/stairs-fold
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: toggleStairs / buildSound
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 1 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A folding wooden stair ladder swinging down and thumping into place. No music, no voice.

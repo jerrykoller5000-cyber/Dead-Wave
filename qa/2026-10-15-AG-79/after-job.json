@@ -1,0 +1,13 @@
+{
+  "out": "qa/2026-10-15-AG-79/after/",
+  "sheet": true,
+  "cols": 5,
+  "shots": [
+    { "target": "person.skeletal-marine", "view": "three" },
+    { "target": "prop.bone-raft", "view": "three" },
+    { "target": "build:wall:*", "view": "three" },
+    { "target": "build:floor:*", "view": "three" },
+    { "target": "build:barricade:*", "view": "three" },
+    { "target": "build:sandbag:*", "view": "three" }
+  ]
+}

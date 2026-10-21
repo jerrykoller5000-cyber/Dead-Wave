@@ -1,0 +1,47 @@
+== t215 2026-10-15T03:28:23.9390506-05:00
+check-players: 294 player.position reads, all in the allowed places
+ok    t215     4 pass   0 fail  39.6s
+
+1 checks: 4 pass, 0 fail
+== t218 2026-10-15T03:29:04.4597648-05:00
+check-players: 294 player.position reads, all in the allowed places
+FAIL  t218    41 pass   3 fail  194.4s
+
+1 checks: 41 pass, 3 fail
+
+by owner:
+  unassigned
+    t218   3 fail  FAIL pistol akimbo: each gun's well comes onto its own side's pouch (0.023 / 0.060 m)
+           FAIL pistol akimbo: each gun's well comes onto its own side's pouch (0.023 / 0.060 m)
+           FAIL uzi akimbo: each gun's well comes onto its own side's pouch (0.044 / 0.149 m)
+           FAIL revolver akimbo: each gun's well comes onto its own side's pouch (0.023 / 0.102 m)
+== t221 2026-10-15T03:32:19.8445005-05:00
+check-players: 294 player.position reads, all in the allowed places
+FAIL  t221    26 pass   1 fail  55.0s
+
+1 checks: 26 pass, 1 fail
+
+by owner:
+  unassigned
+    t221   1 fail  FAIL thrown out to the gun's right (gun-local vx 0.185)
+           FAIL thrown out to the gun's right (gun-local vx 0.185)
+== t242 2026-10-15T03:33:15.6871379-05:00
+check-players: 294 player.position reads, all in the allowed places
+FAIL  t242    14 pass   1 fail  38.2s
+
+1 checks: 14 pass, 1 fail
+
+by owner:
+  unassigned
+    t242   1 fail  FAIL extended: the magazine is inside the grip above its bottom (worst 6.1 mm out at u 0.152 v 3
+           FAIL extended: the magazine is inside the grip above its bottom (worst 6.1 mm out at u 0.152 v 30.5 mm x -11.0 mm; 66 points)
+== t252 2026-10-15T03:33:54.8564347-05:00
+check-players: 294 player.position reads, all in the allowed places
+FAIL  t252    11 pass   1 fail  52.8s
+
+1 checks: 11 pass, 1 fail
+
+by owner:
+  unassigned
+    t252   1 fail  FAIL M4 fires a burst through the flick (1 rounds)
+           FAIL M4 fires a burst through the flick (1 rounds)

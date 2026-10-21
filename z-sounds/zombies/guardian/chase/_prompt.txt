@@ -1,0 +1,9 @@
+#65 guardian-chase
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 1.5 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A monstrous beast's two quick snarling barks into a rising high-pitched screech as it hunts. Close-up, dry. No words, no music.
+
+In the game: zombieVoice('guardian', 'chase')

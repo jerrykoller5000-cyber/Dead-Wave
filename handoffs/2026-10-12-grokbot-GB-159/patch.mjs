@@ -1,0 +1,12 @@
+import fs from 'node:fs';
+const f = 'world/training.js';
+const before = fs.readFileSync(f);
+let s = before.toString('utf8');
+const rep = (a, b) => { const n = s.split(a).length - 1; if (n !== 1) throw new Error('anchor x' + n + ': ' + a); s = s.replace(a, b); };
+rep("import { bakeStatic } from './bake.js';   // CL-117\n", "import { bakeStatic } from './bake.js';   // CL-117\nimport { dressTrainingWear } from './training-wear.js';   // GB-159\n");
+rep("  releaseGate.setState({});\n", "  releaseGate.setState({});\n\n  // GB-159 (Jerry): the place has been used: worn paint, pocks and patches, grime and rust, tired props, a flickering\n  // strip, faded signs (world/training-wear.js). Visual only; its decals stay out of the solids below.\n  const wear = dressTrainingWear(T, { R, B, bedAt, add, box, std, lampMat,\n    texture: (w, h, draw) => keep(canvasTex(T, w, h, draw)) });\n");
+rep("...targets.map((t) => t.pivot)]);\n    for (const s of propSolids", "...targets.map((t) => t.pivot), ...wear.decals, ...wear.dead, wear.flicker]);\n    for (const s of propSolids");
+rep("    targets, hitTarget, resetTargets, update, setLights,", "    wear: { parts: wear.parts, flicker: wear.flicker, dead: wear.dead },   // GB-159\n    targets, hitTarget, resetTargets, update: (dt) => { update(dt); wear.update(dt, lit); }, setLights,");
+if (!fs.readFileSync(f).equals(before)) throw new Error('changed underneath');
+if (s.charCodeAt(0) === 0xFEFF) throw new Error('bom');
+fs.writeFileSync(f, s, 'utf8'); console.log('patched');

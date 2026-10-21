@@ -1,0 +1,9 @@
+#5 player/footstep-tile  (start here)
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: trainingCue('step') (a tone now)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.4 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A single combat boot footstep on a smooth tiled concrete floor indoors, a crisp tap with a short room echo. No music, no voice.

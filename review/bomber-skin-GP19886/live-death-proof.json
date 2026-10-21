@@ -1,0 +1,186 @@
+{
+  "direct": [
+    {
+      "kind": "bullet",
+      "alive": false,
+      "detonated": true,
+      "parent": false,
+      "lostParts": 5,
+      "corpse": false,
+      "motes": 44,
+      "debris": 10,
+      "repeatAdds": 0
+    },
+    {
+      "kind": "generic",
+      "alive": false,
+      "detonated": true,
+      "parent": false,
+      "lostParts": 5,
+      "corpse": false,
+      "motes": 44,
+      "debris": 10,
+      "repeatAdds": 0
+    },
+    {
+      "kind": "melee",
+      "alive": false,
+      "detonated": true,
+      "parent": false,
+      "lostParts": 5,
+      "corpse": false,
+      "motes": 44,
+      "debris": 10,
+      "repeatAdds": 0
+    },
+    {
+      "kind": "chainsaw",
+      "alive": false,
+      "detonated": true,
+      "parent": false,
+      "lostParts": 5,
+      "corpse": false,
+      "motes": 44,
+      "debris": 10,
+      "repeatAdds": 0
+    },
+    {
+      "kind": "pellet",
+      "alive": false,
+      "detonated": true,
+      "parent": false,
+      "lostParts": 5,
+      "corpse": false,
+      "motes": 44,
+      "debris": 10,
+      "repeatAdds": 0
+    },
+    {
+      "kind": "explosive",
+      "alive": false,
+      "detonated": true,
+      "parent": false,
+      "lostParts": 5,
+      "corpse": false,
+      "motes": 40,
+      "debris": 10,
+      "repeatAdds": 0
+    }
+  ],
+  "chain": [
+    {
+      "alive": false,
+      "detonated": true,
+      "parent": false,
+      "lostParts": 5,
+      "corpse": false
+    },
+    {
+      "alive": false,
+      "detonated": true,
+      "parent": false,
+      "lostParts": 5,
+      "corpse": false
+    }
+  ],
+  "projectile": {
+    "alive": false,
+    "detonated": true,
+    "parent": false,
+    "lostParts": 5,
+    "corpse": false
+  },
+  "fire": {
+    "alive": false,
+    "detonated": true,
+    "parent": false,
+    "lostParts": 5,
+    "corpse": false
+  },
+  "contact": {
+    "alive": false,
+    "detonated": true,
+    "parent": false,
+    "lostParts": 5,
+    "corpse": false
+  },
+  "headless": {
+    "alive": false,
+    "detonated": true,
+    "parent": false,
+    "lostParts": 5,
+    "corpse": false
+  },
+  "reset": {
+    "detonated": false,
+    "motes": 0
+  },
+  "pool": {
+    "sameMesh": true,
+    "prepared": true,
+    "parts": {
+      "armL": false,
+      "armR": false,
+      "legL": false,
+      "legR": false,
+      "head": false
+    },
+    "before": {
+      "belly": "6a4bda87-3325-4d27-ad0d-9fe94869156c",
+      "bellyScale": [
+        1,
+        1,
+        1
+      ],
+      "legL": [
+        -0.18590000000000004,
+        -0.022000000000000002,
+        0
+      ],
+      "legR": [
+        0.18590000000000004,
+        -0.022000000000000002,
+        0
+      ],
+      "armL": [
+        -0.48576,
+        0.4106506987015426,
+        0
+      ],
+      "armR": [
+        0.48576,
+        0.462,
+        0
+      ]
+    },
+    "after": {
+      "belly": "6a4bda87-3325-4d27-ad0d-9fe94869156c",
+      "bellyScale": [
+        1,
+        1,
+        1
+      ],
+      "legL": [
+        -0.18590000000000004,
+        -0.022000000000000002,
+        0
+      ],
+      "legR": [
+        0.18590000000000004,
+        -0.022000000000000002,
+        0
+      ],
+      "armL": [
+        -0.48576,
+        0.4106506987015426,
+        0
+      ],
+      "armR": [
+        0.48576,
+        0.462,
+        0
+      ]
+    }
+  },
+  "errors": []
+}

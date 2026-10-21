@@ -1,0 +1,882 @@
+[
+  {
+    "time": 0,
+    "phase": "idle",
+    "bashCd": 0.8836999999880792,
+    "t": 0.11630000001192094,
+    "attackCd": -0.11630000001192094,
+    "wind": 0,
+    "swing": 0,
+    "dist": 1.3787032499568568,
+    "parts": {
+      "armL": false,
+      "armR": false,
+      "legL": false,
+      "legR": false,
+      "head": false
+    },
+    "pos": [
+      -30,
+      -200,
+      -631.5787032499569
+    ]
+  },
+  {
+    "time": 0.1,
+    "phase": "idle",
+    "bashCd": 0.7665000000000004,
+    "t": 0.23350000000000004,
+    "attackCd": 0.8331000000238419,
+    "wind": 0.20310000002384185,
+    "swing": 0,
+    "dist": 0.954146250000008,
+    "parts": {
+      "armL": false,
+      "armR": false,
+      "legL": false,
+      "legR": false,
+      "head": false
+    },
+    "pos": [
+      -30,
+      -200,
+      -631.15414625
+    ]
+  },
+  {
+    "time": 0.2,
+    "phase": "idle",
+    "bashCd": 0.6477999999821191,
+    "t": 0.35220000001788154,
+    "attackCd": 0.7144000000059606,
+    "wind": 0.08440000000596047,
+    "swing": 0,
+    "dist": 0.9199999999999591,
+    "parts": {
+      "armL": false,
+      "armR": false,
+      "legL": false,
+      "legR": false,
+      "head": false
+    },
+    "pos": [
+      -30,
+      -200,
+      -631.12
+    ]
+  },
+  {
+    "time": 0.3,
+    "phase": "idle",
+    "bashCd": 0.5302999999821192,
+    "t": 0.4697000000178816,
+    "attackCd": 0.5969000000059607,
+    "wind": -0.016,
+    "swing": 0.2629000000059605,
+    "dist": 0.9199999999999591,
+    "parts": {
+      "armL": false,
+      "armR": false,
+      "legL": false,
+      "legR": false,
+      "head": false
+    },
+    "pos": [
+      -30,
+      -200,
+      -631.12
+    ]
+  },
+  {
+    "time": 0.4,
+    "phase": "idle",
+    "bashCd": 0.41239999997615867,
+    "t": 0.587600000023842,
+    "attackCd": 0.4790000000000003,
+    "wind": -0.016,
+    "swing": 0.14500000000000005,
+    "dist": 0.9199999999999591,
+    "parts": {
+      "armL": false,
+      "armR": false,
+      "legL": false,
+      "legR": false,
+      "head": false
+    },
+    "pos": [
+      -30,
+      -200,
+      -631.12
+    ]
+  },
+  {
+    "time": 0.5,
+    "phase": "idle",
+    "bashCd": 0.29389999997615857,
+    "t": 0.7061000000238419,
+    "attackCd": 0.3605000000000002,
+    "wind": -0.016,
+    "swing": 0.026500000000000058,
+    "dist": 0.9199999999999591,
+    "parts": {
+      "armL": false,
+      "armR": false,
+      "legL": false,
+      "legR": false,
+      "head": false
+    },
+    "pos": [
+      -30,
+      -200,
+      -631.12
+    ]
+  },
+  {
+    "time": 0.6,
+    "phase": "idle",
+    "bashCd": 0.17589999997615854,
+    "t": 0.8241000000238419,
+    "attackCd": 0.24250000000000013,
+    "wind": -0.016,
+    "swing": -0.007899999976158083,
+    "dist": 0.9199999999999591,
+    "parts": {
+      "armL": false,
+      "armR": false,
+      "legL": false,
+      "legR": false,
+      "head": false
+    },
+    "pos": [
+      -30,
+      -200,
+      -631.12
+    ]
+  },
+  {
+    "time": 0.7,
+    "phase": "idle",
+    "bashCd": 0.05900000000000044,
+    "t": 0.9409999999999998,
+    "attackCd": 0.125600000023842,
+    "wind": -0.016,
+    "swing": -0.007899999976158083,
+    "dist": 0.9199999999999591,
+    "parts": {
+      "armL": false,
+      "armR": false,
+      "legL": false,
+      "legR": false,
+      "head": false
+    },
+    "pos": [
+      -30,
+      -200,
+      -631.12
+    ]
+  },
+  {
+    "time": 0.8,
+    "phase": "idle",
+    "bashCd": -0.05810000002384143,
+    "t": 1.0581000000238416,
+    "attackCd": 0.008500000000000136,
+    "wind": -0.016,
+    "swing": -0.007899999976158083,
+    "dist": 0.9199999999999591,
+    "parts": {
+      "armL": false,
+      "armR": false,
+      "legL": false,
+      "legR": false,
+      "head": false
+    },
+    "pos": [
+      -30,
+      -200,
+      -631.12
+    ]
+  },
+  {
+    "time": 0.9,
+    "phase": "bashWind",
+    "bashCd": 3.497300000011921,
+    "t": 0.11869999998807908,
+    "attackCd": -0.11019999998807894,
+    "wind": -0.016,
+    "swing": -0.007899999976158083,
+    "dist": 0.9199999999999591,
+    "parts": {
+      "armL": false,
+      "armR": false,
+      "legL": false,
+      "legR": false,
+      "head": false
+    },
+    "pos": [
+      -30,
+      -200,
+      -631.12
+    ]
+  },
+  {
+    "time": 1,
+    "phase": "bashWind",
+    "bashCd": 3.382800000011921,
+    "t": 0.23319999998807905,
+    "attackCd": -0.22469999998807894,
+    "wind": -0.016,
+    "swing": -0.007899999976158083,
+    "dist": 0.9199999999999591,
+    "parts": {
+      "armL": false,
+      "armR": false,
+      "legL": false,
+      "legR": false,
+      "head": false
+    },
+    "pos": [
+      -30,
+      -200,
+      -631.12
+    ]
+  },
+  {
+    "time": 1.1,
+    "phase": "bashWind",
+    "bashCd": 3.2662000000178812,
+    "t": 0.3497999999821187,
+    "attackCd": -0.3412999999821186,
+    "wind": -0.016,
+    "swing": -0.007899999976158083,
+    "dist": 0.9199999999999591,
+    "parts": {
+      "armL": false,
+      "armR": false,
+      "legL": false,
+      "legR": false,
+      "head": false
+    },
+    "pos": [
+      -30,
+      -200,
+      -631.12
+    ]
+  },
+  {
+    "time": 1.2,
+    "phase": "bash",
+    "bashCd": 3.149800000011921,
+    "t": 0.0335,
+    "attackCd": 0.8499000000059606,
+    "wind": -0.016,
+    "swing": -0.007899999976158083,
+    "dist": 0.9199999999999591,
+    "parts": {
+      "armL": false,
+      "armR": false,
+      "legL": false,
+      "legR": false,
+      "head": false
+    },
+    "pos": [
+      -30,
+      -200,
+      -631.12
+    ]
+  },
+  {
+    "time": 1.3,
+    "phase": "bash",
+    "bashCd": 3.0331000000238424,
+    "t": 0.1501999999880791,
+    "attackCd": 0.7332000000178817,
+    "wind": -0.016,
+    "swing": -0.007899999976158083,
+    "dist": 0.9199999999999591,
+    "parts": {
+      "armL": false,
+      "armR": false,
+      "legL": false,
+      "legR": false,
+      "head": false
+    },
+    "pos": [
+      -30,
+      -200,
+      -631.12
+    ]
+  },
+  {
+    "time": 1.4,
+    "phase": "bashRecover",
+    "bashCd": 2.9167000000178818,
+    "t": 0.016599999994039535,
+    "attackCd": 0.6168000000119214,
+    "wind": -0.016,
+    "swing": -0.007899999976158083,
+    "dist": 0.9199999999999591,
+    "parts": {
+      "armL": false,
+      "armR": false,
+      "legL": false,
+      "legR": false,
+      "head": false
+    },
+    "pos": [
+      -30,
+      -200,
+      -631.12
+    ]
+  },
+  {
+    "time": 1.5,
+    "phase": "bashRecover",
+    "bashCd": 2.8000000000000007,
+    "t": 0.13330000001192094,
+    "attackCd": 0.50009999999404,
+    "wind": -0.016,
+    "swing": -0.007899999976158083,
+    "dist": 0.9199999999999591,
+    "parts": {
+      "armL": false,
+      "armR": false,
+      "legL": false,
+      "legR": false,
+      "head": false
+    },
+    "pos": [
+      -30,
+      -200,
+      -631.12
+    ]
+  },
+  {
+    "time": 1.6,
+    "phase": "bashRecover",
+    "bashCd": 2.683300000011922,
+    "t": 0.25,
+    "attackCd": 0.3834000000059608,
+    "wind": -0.016,
+    "swing": -0.007899999976158083,
+    "dist": 0.9199999999999591,
+    "parts": {
+      "armL": false,
+      "armR": false,
+      "legL": false,
+      "legR": false,
+      "head": false
+    },
+    "pos": [
+      -30,
+      -200,
+      -631.12
+    ]
+  },
+  {
+    "time": 1.7,
+    "phase": "bashRecover",
+    "bashCd": 2.5667000000178826,
+    "t": 0.36659999999403964,
+    "attackCd": 0.26680000001192117,
+    "wind": -0.016,
+    "swing": -0.007899999976158083,
+    "dist": 0.9199999999999591,
+    "parts": {
+      "armL": false,
+      "armR": false,
+      "legL": false,
+      "legR": false,
+      "head": false
+    },
+    "pos": [
+      -30,
+      -200,
+      -631.12
+    ]
+  },
+  {
+    "time": 1.8,
+    "phase": "idle",
+    "bashCd": 2.450500000000001,
+    "t": 0.016200000017881393,
+    "attackCd": 0.1505999999940397,
+    "wind": -0.016,
+    "swing": -0.007899999976158083,
+    "dist": 0.9199999999999591,
+    "parts": {
+      "armL": false,
+      "armR": false,
+      "legL": false,
+      "legR": false,
+      "head": false
+    },
+    "pos": [
+      -30,
+      -200,
+      -631.12
+    ]
+  },
+  {
+    "time": 1.9,
+    "phase": "idle",
+    "bashCd": 2.3335000000000004,
+    "t": 0.1332000000178814,
+    "attackCd": 0.0335999999940397,
+    "wind": -0.016,
+    "swing": -0.007899999976158083,
+    "dist": 0.9199999999999591,
+    "parts": {
+      "armL": false,
+      "armR": false,
+      "legL": false,
+      "legR": false,
+      "head": false
+    },
+    "pos": [
+      -30,
+      -200,
+      -631.12
+    ]
+  },
+  {
+    "time": 2,
+    "phase": "idle",
+    "bashCd": 2.2167000000178816,
+    "t": 0.2500000000000001,
+    "attackCd": 0.7834000000059606,
+    "wind": 0.15340000000596044,
+    "swing": -0.007899999976158083,
+    "dist": 0.9199999999999591,
+    "parts": {
+      "armL": false,
+      "armR": false,
+      "legL": false,
+      "legR": false,
+      "head": false
+    },
+    "pos": [
+      -30,
+      -200,
+      -631.12
+    ]
+  },
+  {
+    "time": 2.1,
+    "phase": "idle",
+    "bashCd": 2.099600000023842,
+    "t": 0.36709999999403975,
+    "attackCd": 0.6663000000119211,
+    "wind": 0.03630000001192088,
+    "swing": -0.007899999976158083,
+    "dist": 0.9199999999999591,
+    "parts": {
+      "armL": false,
+      "armR": false,
+      "legL": false,
+      "legR": false,
+      "head": false
+    },
+    "pos": [
+      -30,
+      -200,
+      -631.12
+    ]
+  },
+  {
+    "time": 2.2,
+    "phase": "idle",
+    "bashCd": 1.9832000000178813,
+    "t": 0.4835000000000003,
+    "attackCd": 0.5499000000059608,
+    "wind": -0.013400000005960512,
+    "swing": 0.2133000000119209,
+    "dist": 0.9199999999999591,
+    "parts": {
+      "armL": false,
+      "armR": false,
+      "legL": false,
+      "legR": false,
+      "head": false
+    },
+    "pos": [
+      -30,
+      -200,
+      -631.12
+    ]
+  },
+  {
+    "time": 2.3,
+    "phase": "idle",
+    "bashCd": 1.8666000000238416,
+    "t": 0.6000999999940396,
+    "attackCd": 0.4333000000119213,
+    "wind": -0.013400000005960512,
+    "swing": 0.09670000001788137,
+    "dist": 0.9199999999999591,
+    "parts": {
+      "armL": false,
+      "armR": false,
+      "legL": false,
+      "legR": false,
+      "head": false
+    },
+    "pos": [
+      -30,
+      -200,
+      -631.12
+    ]
+  },
+  {
+    "time": 2.4,
+    "phase": "idle",
+    "bashCd": 1.7499999999999998,
+    "t": 0.7167000000178814,
+    "attackCd": 0.31669999998807935,
+    "wind": -0.013400000005960512,
+    "swing": -0.0031999999880790962,
+    "dist": 0.9199999999999591,
+    "parts": {
+      "armL": false,
+      "armR": false,
+      "legL": false,
+      "legR": false,
+      "head": false
+    },
+    "pos": [
+      -30,
+      -200,
+      -631.12
+    ]
+  },
+  {
+    "time": 2.5,
+    "phase": "idle",
+    "bashCd": 1.6333000000119209,
+    "t": 0.8334000000059603,
+    "attackCd": 0.20000000000000023,
+    "wind": -0.013400000005960512,
+    "swing": -0.0031999999880790962,
+    "dist": 0.9199999999999591,
+    "parts": {
+      "armL": false,
+      "armR": false,
+      "legL": false,
+      "legR": false,
+      "head": false
+    },
+    "pos": [
+      -30,
+      -200,
+      -631.12
+    ]
+  },
+  {
+    "time": 2.6,
+    "phase": "idle",
+    "bashCd": 1.5167000000178814,
+    "t": 0.9499999999999997,
+    "attackCd": 0.08340000000596069,
+    "wind": -0.013400000005960512,
+    "swing": -0.0031999999880790962,
+    "dist": 0.9199999999999591,
+    "parts": {
+      "armL": false,
+      "armR": false,
+      "legL": false,
+      "legR": false,
+      "head": false
+    },
+    "pos": [
+      -30,
+      -200,
+      -631.12
+    ]
+  },
+  {
+    "time": 2.7,
+    "phase": "idle",
+    "bashCd": 1.4000000000000001,
+    "t": 1.066700000017881,
+    "attackCd": 0.8330999999940395,
+    "wind": 0.20309999999403955,
+    "swing": -0.0031999999880790962,
+    "dist": 0.9199999999999591,
+    "parts": {
+      "armL": false,
+      "armR": false,
+      "legL": false,
+      "legR": false,
+      "head": false
+    },
+    "pos": [
+      -30,
+      -200,
+      -631.12
+    ]
+  },
+  {
+    "time": 2.8,
+    "phase": "idle",
+    "bashCd": 1.2832000000178816,
+    "t": 1.1834999999999996,
+    "attackCd": 0.716300000011921,
+    "wind": 0.08630000001192091,
+    "swing": -0.0031999999880790962,
+    "dist": 0.9199999999999591,
+    "parts": {
+      "armL": false,
+      "armR": false,
+      "legL": false,
+      "legR": false,
+      "head": false
+    },
+    "pos": [
+      -30,
+      -200,
+      -631.12
+    ]
+  },
+  {
+    "time": 2.9,
+    "phase": "idle",
+    "bashCd": 1.1663000000119215,
+    "t": 1.3004000000059597,
+    "attackCd": 0.5994000000059606,
+    "wind": -0.013599999994039557,
+    "swing": 0.263,
+    "dist": 0.9199999999999591,
+    "parts": {
+      "armL": false,
+      "armR": false,
+      "legL": false,
+      "legR": false,
+      "head": false
+    },
+    "pos": [
+      -30,
+      -200,
+      -631.12
+    ]
+  },
+  {
+    "time": 3,
+    "phase": "idle",
+    "bashCd": 1.0498000000119214,
+    "t": 1.4169000000059597,
+    "attackCd": 0.4829000000059606,
+    "wind": -0.013599999994039557,
+    "swing": 0.14650000000000002,
+    "dist": 0.9199999999999591,
+    "parts": {
+      "armL": false,
+      "armR": false,
+      "legL": false,
+      "legR": false,
+      "head": false
+    },
+    "pos": [
+      -30,
+      -200,
+      -631.12
+    ]
+  },
+  {
+    "time": 3.1,
+    "phase": "idle",
+    "bashCd": 0.9333000000119215,
+    "t": 1.5334000000059596,
+    "attackCd": 0.3664000000059605,
+    "wind": -0.013599999994039557,
+    "swing": 0.03,
+    "dist": 0.9199999999999591,
+    "parts": {
+      "armL": false,
+      "armR": false,
+      "legL": false,
+      "legR": false,
+      "head": false
+    },
+    "pos": [
+      -30,
+      -200,
+      -631.12
+    ]
+  },
+  {
+    "time": 3.2,
+    "phase": "idle",
+    "bashCd": 0.8167000000178821,
+    "t": 1.6499999999999988,
+    "attackCd": 0.24980000001192088,
+    "wind": -0.013599999994039557,
+    "swing": -0.003199999988079072,
+    "dist": 0.9199999999999591,
+    "parts": {
+      "armL": false,
+      "armR": false,
+      "legL": false,
+      "legR": false,
+      "head": false
+    },
+    "pos": [
+      -30,
+      -200,
+      -631.12
+    ]
+  },
+  {
+    "time": 3.3,
+    "phase": "idle",
+    "bashCd": 0.7000000000000008,
+    "t": 1.76670000001788,
+    "attackCd": 0.13309999999403954,
+    "wind": -0.013599999994039557,
+    "swing": -0.003199999988079072,
+    "dist": 0.9199999999999591,
+    "parts": {
+      "armL": false,
+      "armR": false,
+      "legL": false,
+      "legR": false,
+      "head": false
+    },
+    "pos": [
+      -30,
+      -200,
+      -631.12
+    ]
+  },
+  {
+    "time": 3.4,
+    "phase": "idle",
+    "bashCd": 0.5836000000238428,
+    "t": 1.8830999999940383,
+    "attackCd": 0.016700000017881394,
+    "wind": -0.013599999994039557,
+    "swing": -0.003199999988079072,
+    "dist": 0.9199999999999591,
+    "parts": {
+      "armL": false,
+      "armR": false,
+      "legL": false,
+      "legR": false,
+      "head": false
+    },
+    "pos": [
+      -30,
+      -200,
+      -631.12
+    ]
+  },
+  {
+    "time": 3.5,
+    "phase": "idle",
+    "bashCd": 0.4666000000238429,
+    "t": 2.0000999999940383,
+    "attackCd": 0.7500000000000002,
+    "wind": 0.12000000000000001,
+    "swing": -0.003199999988079072,
+    "dist": 0.9199999999999591,
+    "parts": {
+      "armL": false,
+      "armR": false,
+      "legL": false,
+      "legR": false,
+      "head": false
+    },
+    "pos": [
+      -30,
+      -200,
+      -631.12
+    ]
+  },
+  {
+    "time": 3.6,
+    "phase": "idle",
+    "bashCd": 0.3499000000059614,
+    "t": 2.1168000000119194,
+    "attackCd": 0.6332999999821189,
+    "wind": 0.00329999998211861,
+    "swing": -0.003199999988079072,
+    "dist": 0.9199999999999591,
+    "parts": {
+      "armL": false,
+      "armR": false,
+      "legL": false,
+      "legR": false,
+      "head": false
+    },
+    "pos": [
+      -30,
+      -200,
+      -631.12
+    ]
+  },
+  {
+    "time": 3.7,
+    "phase": "idle",
+    "bashCd": 0.23330000001192175,
+    "t": 2.2334000000059584,
+    "attackCd": 0.5166999999880795,
+    "wind": -0.012600000023841856,
+    "swing": 0.17930000001192098,
+    "dist": 0.9199999999999591,
+    "parts": {
+      "armL": false,
+      "armR": false,
+      "legL": false,
+      "legR": false,
+      "head": false
+    },
+    "pos": [
+      -30,
+      -200,
+      -631.12
+    ]
+  },
+  {
+    "time": 3.8,
+    "phase": "idle",
+    "bashCd": 0.11660000002384262,
+    "t": 2.3500999999940375,
+    "attackCd": 0.40000000000000036,
+    "wind": -0.012600000023841856,
+    "swing": 0.06260000002384186,
+    "dist": 0.9199999999999591,
+    "parts": {
+      "armL": false,
+      "armR": false,
+      "legL": false,
+      "legR": false,
+      "head": false
+    },
+    "pos": [
+      -30,
+      -200,
+      -631.12
+    ]
+  },
+  {
+    "time": 3.9,
+    "phase": "idle",
+    "bashCd": 7.528699885739343e-16,
+    "t": 2.466700000017879,
+    "attackCd": 0.2833999999761584,
+    "wind": -0.012600000023841856,
+    "swing": -0.0040000000000000036,
+    "dist": 0.9199999999999591,
+    "parts": {
+      "armL": false,
+      "armR": false,
+      "legL": false,
+      "legR": false,
+      "head": false
+    },
+    "pos": [
+      -30,
+      -200,
+      -631.12
+    ]
+  }
+]

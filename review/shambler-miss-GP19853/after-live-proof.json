@@ -1,0 +1,23 @@
+{
+  "loadSec": 18.215,
+  "hit": {
+    "armorBefore": 100,
+    "armorAfter": 96.1,
+    "state": null,
+    "alive": true
+  },
+  "interruption": {
+    "activeBeforeShot": true,
+    "hp": 9999,
+    "state": null,
+    "activeAfterShot": false,
+    "hitPartT": 0.346699999988079
+  },
+  "performance": {
+    "count": 48,
+    "fps": 60.17752369507983,
+    "p95Ms": 17.80000001192093,
+    "maxActive": 48
+  },
+  "errors": []
+}

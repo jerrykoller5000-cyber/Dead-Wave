@@ -1,0 +1,9 @@
+#17 player/armor-hit  (start here)
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: armorHit()
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.4 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A blow landing on a soldier's ballistic body armor plate: a dull hard thump with a ceramic crack. No music, no voice.

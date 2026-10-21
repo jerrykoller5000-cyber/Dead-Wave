@@ -1,0 +1,9 @@
+#91 footsteps-huge
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 1 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A single massive, booming footstep of a giant monster, the ground shaking, a deep thud and loose stones. No voice, no music.
+
+In the game: heavyStep(huge) — guardian

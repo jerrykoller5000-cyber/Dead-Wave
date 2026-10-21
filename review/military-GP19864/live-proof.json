@@ -1,0 +1,1779 @@
+{
+  "loadSec": 17.387,
+  "shots": [
+    {
+      "name": "face",
+      "damage": 9999,
+      "expected": 14.8,
+      "hit": {
+        "t": 0.4948089414408325,
+        "zone": "face",
+        "part": "head"
+      },
+      "headLost": true,
+      "alive": true
+    },
+    {
+      "name": "helmet",
+      "damage": 6,
+      "expected": 6,
+      "hit": {
+        "t": 0.4700282133954943,
+        "zone": "helmet",
+        "part": "head"
+      },
+      "headLost": false,
+      "alive": true
+    },
+    {
+      "name": "rear",
+      "damage": 6,
+      "expected": 6,
+      "hit": {
+        "t": 0.48266720691962445,
+        "zone": "helmet",
+        "part": "head"
+      },
+      "headLost": false,
+      "alive": true
+    },
+    {
+      "name": "helmetRim",
+      "damage": 6,
+      "expected": 6,
+      "hit": {
+        "t": 0.4998717427178197,
+        "zone": "helmet",
+        "part": "head"
+      },
+      "headLost": false,
+      "alive": true
+    },
+    {
+      "name": "chest",
+      "damage": 5,
+      "expected": 5,
+      "hit": {
+        "t": 0.5052254771577888,
+        "zone": "chest",
+        "part": "torso"
+      },
+      "headLost": false,
+      "alive": true
+    },
+    {
+      "name": "arm",
+      "damage": 8,
+      "expected": 8,
+      "hit": {
+        "t": 0.482354503887775,
+        "zone": "exposed",
+        "part": "armL"
+      },
+      "headLost": false,
+      "alive": true
+    },
+    {
+      "name": "thigh",
+      "damage": 8,
+      "expected": 8,
+      "hit": {
+        "t": 0.4769608904387989,
+        "zone": "exposed",
+        "part": "legL"
+      },
+      "headLost": false,
+      "alive": true
+    },
+    {
+      "name": "blast",
+      "damage": 6,
+      "expected": 6
+    }
+  ],
+  "kick": {
+    "event": {
+      "vx": 0,
+      "vy": 2.1247999997138978,
+      "vz": 12,
+      "age": 0.567,
+      "fuse": 1.35,
+      "phase": "kickRecover",
+      "head": false
+    },
+    "originalFuse": 1.35,
+    "startedAge": 0.3,
+    "handThrown": true,
+    "owner": 0
+  },
+  "bash": {
+    "phases": [
+      "idle",
+      "bashWind",
+      "bash",
+      "bashRecover"
+    ],
+    "trace": [
+      {
+        "phase": "idle",
+        "cd": 0.9838000000119209,
+        "attackCd": -0.01619999998807907,
+        "wind": 0,
+        "swing": 0,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 1.7489700000375024
+      },
+      {
+        "phase": "idle",
+        "cd": 0.9675999999940396,
+        "attackCd": -0.032400000005960466,
+        "wind": 0,
+        "swing": 0,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 1.6979399999811449
+      },
+      {
+        "phase": "idle",
+        "cd": 0.9510000000000001,
+        "attackCd": -0.049,
+        "wind": 0,
+        "swing": 0,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 1.6456499999999323
+      },
+      {
+        "phase": "idle",
+        "cd": 0.935,
+        "attackCd": -0.065,
+        "wind": 0,
+        "swing": 0,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 1.5952499999999645
+      },
+      {
+        "phase": "idle",
+        "cd": 0.9184000000059606,
+        "attackCd": -0.08159999999403954,
+        "wind": 0,
+        "swing": 0,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 1.542960000018752
+      },
+      {
+        "phase": "idle",
+        "cd": 0.9015000000000001,
+        "attackCd": -0.0985,
+        "wind": 0,
+        "swing": 0,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 1.4897250000000213
+      },
+      {
+        "phase": "idle",
+        "cd": 0.8849000000059606,
+        "attackCd": -0.11509999999403954,
+        "wind": 0,
+        "swing": 0,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 1.4374350000188088
+      },
+      {
+        "phase": "idle",
+        "cd": 0.8683000000119211,
+        "attackCd": -0.13169999998807908,
+        "wind": 0,
+        "swing": 0,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 1.3851450000375962
+      },
+      {
+        "phase": "idle",
+        "cd": 0.8514000000059606,
+        "attackCd": -0.14859999999403953,
+        "wind": 0,
+        "swing": 0,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 1.3319100000188655
+      },
+      {
+        "phase": "idle",
+        "cd": 0.8343000000119211,
+        "attackCd": -0.16569999998807905,
+        "wind": 0,
+        "swing": 0,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 1.2780450000376504
+      },
+      {
+        "phase": "idle",
+        "cd": 0.8181999999880792,
+        "attackCd": -0.1818000000119209,
+        "wind": 0,
+        "swing": 0,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 1.2273299999625351
+      },
+      {
+        "phase": "idle",
+        "cd": 0.8018000000119211,
+        "attackCd": -0.19819999998807905,
+        "wind": 0,
+        "swing": 0,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 1.1756700000375986
+      },
+      {
+        "phase": "idle",
+        "cd": 0.7848000000119211,
+        "attackCd": -0.21519999998807904,
+        "wind": 0,
+        "swing": 0,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 1.1221200000376257
+      },
+      {
+        "phase": "idle",
+        "cd": 0.7685000000000002,
+        "attackCd": -0.23149999999999996,
+        "wind": 0,
+        "swing": 0,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 1.070775000000026
+      },
+      {
+        "phase": "idle",
+        "cd": 0.7524000000059606,
+        "attackCd": 0.85,
+        "wind": 0.22,
+        "swing": 0,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 1.020060000018816
+      },
+      {
+        "phase": "idle",
+        "cd": 0.7359000000059607,
+        "attackCd": 0.8335,
+        "wind": 0.20350000000000001,
+        "swing": 0,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9680850000188457
+      },
+      {
+        "phase": "idle",
+        "cd": 0.7186999999880793,
+        "attackCd": 0.8162999999821187,
+        "wind": 0.18629999998211863,
+        "swing": 0,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "idle",
+        "cd": 0.7023000000119212,
+        "attackCd": 0.7999000000059605,
+        "wind": 0.16990000000596048,
+        "swing": 0,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "idle",
+        "cd": 0.6860999999940398,
+        "attackCd": 0.7836999999880792,
+        "wind": 0.1536999999880791,
+        "swing": 0,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "idle",
+        "cd": 0.6694000000059608,
+        "attackCd": 0.7670000000000001,
+        "wind": 0.137,
+        "swing": 0,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "idle",
+        "cd": 0.6525999999940398,
+        "attackCd": 0.7501999999880792,
+        "wind": 0.12019999998807908,
+        "swing": 0,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "idle",
+        "cd": 0.6359000000059608,
+        "attackCd": 0.7335000000000002,
+        "wind": 0.10350000000000001,
+        "swing": 0,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "idle",
+        "cd": 0.6194000000059608,
+        "attackCd": 0.7170000000000002,
+        "wind": 0.08700000000000001,
+        "swing": 0,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "idle",
+        "cd": 0.6029000000059609,
+        "attackCd": 0.7005000000000002,
+        "wind": 0.07050000000000001,
+        "swing": 0,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "idle",
+        "cd": 0.5859000000059609,
+        "attackCd": 0.6835000000000002,
+        "wind": 0.053500000000000006,
+        "swing": 0,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "idle",
+        "cd": 0.5689000000059609,
+        "attackCd": 0.6665000000000002,
+        "wind": 0.036500000000000005,
+        "swing": 0,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "idle",
+        "cd": 0.5521999999880794,
+        "attackCd": 0.6497999999821188,
+        "wind": 0.01979999998211861,
+        "swing": 0,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "idle",
+        "cd": 0.5360000000000004,
+        "attackCd": 0.6335999999940397,
+        "wind": 0.003599999994039541,
+        "swing": 0,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "idle",
+        "cd": 0.5189000000059608,
+        "attackCd": 0.6165000000000002,
+        "wind": -0.013499999999999995,
+        "swing": 0.28,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "idle",
+        "cd": 0.5020000000000003,
+        "attackCd": 0.5995999999940397,
+        "wind": -0.013499999999999995,
+        "swing": 0.26309999999403955,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9221970000007786
+      },
+      {
+        "phase": "idle",
+        "cd": 0.4859000000059608,
+        "attackCd": 0.5835000000000001,
+        "wind": -0.013499999999999995,
+        "swing": 0.247,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "idle",
+        "cd": 0.46930000001192124,
+        "attackCd": 0.5669000000059606,
+        "wind": -0.013499999999999995,
+        "swing": 0.23040000000596045,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "idle",
+        "cd": 0.45169999998807936,
+        "attackCd": 0.5492999999821188,
+        "wind": -0.013499999999999995,
+        "swing": 0.2127999999821186,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "idle",
+        "cd": 0.43440000000596074,
+        "attackCd": 0.5320000000000001,
+        "wind": -0.013499999999999995,
+        "swing": 0.1955,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "idle",
+        "cd": 0.41719999998807933,
+        "attackCd": 0.5147999999821188,
+        "wind": -0.013499999999999995,
+        "swing": 0.17829999998211862,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "idle",
+        "cd": 0.3994000000059607,
+        "attackCd": 0.49700000000000016,
+        "wind": -0.013499999999999995,
+        "swing": 0.16050000000000003,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "idle",
+        "cd": 0.38330000001192116,
+        "attackCd": 0.4809000000059606,
+        "wind": -0.013499999999999995,
+        "swing": 0.14440000000596048,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "idle",
+        "cd": 0.3665000000000002,
+        "attackCd": 0.46409999999403967,
+        "wind": -0.013499999999999995,
+        "swing": 0.12759999999403956,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "idle",
+        "cd": 0.35019999998807927,
+        "attackCd": 0.4477999999821187,
+        "wind": -0.013499999999999995,
+        "swing": 0.11129999998211863,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "idle",
+        "cd": 0.33319999998807925,
+        "attackCd": 0.4307999999821187,
+        "wind": -0.013499999999999995,
+        "swing": 0.09429999998211863,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "idle",
+        "cd": 0.3170999999940397,
+        "attackCd": 0.41469999998807916,
+        "wind": -0.013499999999999995,
+        "swing": 0.0781999999880791,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "idle",
+        "cd": 0.3000999999940397,
+        "attackCd": 0.39769999998807914,
+        "wind": -0.013499999999999995,
+        "swing": 0.061199999988079096,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "idle",
+        "cd": 0.2835999999940397,
+        "attackCd": 0.38119999998807913,
+        "wind": -0.013499999999999995,
+        "swing": 0.044699999988079095,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "idle",
+        "cd": 0.26709999999403966,
+        "attackCd": 0.3646999999880791,
+        "wind": -0.013499999999999995,
+        "swing": 0.028199999988079094,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "idle",
+        "cd": 0.25109999999403965,
+        "attackCd": 0.3486999999880791,
+        "wind": -0.013499999999999995,
+        "swing": 0.012199999988079094,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "idle",
+        "cd": 0.23409999999403963,
+        "attackCd": 0.3316999999880791,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "idle",
+        "cd": 0.21759999999403962,
+        "attackCd": 0.31519999998807907,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "idle",
+        "cd": 0.2015999999940396,
+        "attackCd": 0.29919999998807906,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "idle",
+        "cd": 0.18500000000000005,
+        "attackCd": 0.2825999999940395,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "idle",
+        "cd": 0.1680999999940396,
+        "attackCd": 0.265699999988079,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "idle",
+        "cd": 0.15190000000596054,
+        "attackCd": 0.24949999999999994,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "idle",
+        "cd": 0.13519999998807916,
+        "attackCd": 0.23279999998211856,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "idle",
+        "cd": 0.11850000000000009,
+        "attackCd": 0.2160999999940395,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "idle",
+        "cd": 0.10190000000596056,
+        "attackCd": 0.19949999999999996,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "idle",
+        "cd": 0.08530000001192102,
+        "attackCd": 0.1829000000059604,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "idle",
+        "cd": 0.06859999999403962,
+        "attackCd": 0.16619999998807902,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "idle",
+        "cd": 0.05159999999403962,
+        "attackCd": 0.14919999998807904,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "idle",
+        "cd": 0.035199999988079156,
+        "attackCd": 0.13279999998211856,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "idle",
+        "cd": 0.018500000000000086,
+        "attackCd": 0.11609999999403949,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "idle",
+        "cd": 0.0019000000059605504,
+        "attackCd": 0.09949999999999995,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "idle",
+        "cd": -0.014699999988078985,
+        "attackCd": 0.08290000000596041,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "idle",
+        "cd": -0.03140000000596038,
+        "attackCd": 0.06619999998807902,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "idle",
+        "cd": -0.048400000005960384,
+        "attackCd": 0.049199999988079016,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "idle",
+        "cd": -0.06490000000596038,
+        "attackCd": 0.032699999988079015,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "idle",
+        "cd": -0.08149999999999992,
+        "attackCd": 0.01609999999403948,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "bashWind",
+        "cd": 3.6,
+        "attackCd": -0.0005999999940395906,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "bashWind",
+        "cd": 3.5833999999761583,
+        "attackCd": -0.01720000001788145,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "bashWind",
+        "cd": 3.5665999999940396,
+        "attackCd": -0.03400000000000006,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "bashWind",
+        "cd": 3.5495999999940397,
+        "attackCd": -0.05100000000000006,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "bashWind",
+        "cd": 3.533299999982119,
+        "attackCd": -0.06730000001192099,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "bashWind",
+        "cd": 3.5165,
+        "attackCd": -0.0840999999940396,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "bashWind",
+        "cd": 3.4998999999761584,
+        "attackCd": -0.10070000001788146,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "bashWind",
+        "cd": 3.4833999999761582,
+        "attackCd": -0.11720000001788146,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "bashWind",
+        "cd": 3.4670999999940397,
+        "attackCd": -0.13350000000000006,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "bashWind",
+        "cd": 3.4503999999761583,
+        "attackCd": -0.15020000001788145,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "bashWind",
+        "cd": 3.4335,
+        "attackCd": -0.1670999999940396,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "bashWind",
+        "cd": 3.417,
+        "attackCd": -0.1835999999940396,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "bashWind",
+        "cd": 3.4004999999999996,
+        "attackCd": -0.2000999999940396,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "bashWind",
+        "cd": 3.3837999999821182,
+        "attackCd": -0.21680000001192098,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "bashWind",
+        "cd": 3.367199999988079,
+        "attackCd": -0.2334000000059605,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "bashWind",
+        "cd": 3.350399999976158,
+        "attackCd": -0.25020000001788145,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "bashWind",
+        "cd": 3.3339999999999996,
+        "attackCd": -0.2665999999940396,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "bashWind",
+        "cd": 3.3171999999880786,
+        "attackCd": -0.28340000000596055,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "bashWind",
+        "cd": 3.3004999999999995,
+        "attackCd": -0.30009999999403963,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "bashWind",
+        "cd": 3.2836999999880785,
+        "attackCd": -0.3169000000059606,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "bashWind",
+        "cd": 3.267099999994039,
+        "attackCd": -0.33350000000000013,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "bashWind",
+        "cd": 3.2504999999999997,
+        "attackCd": -0.3500999999940397,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "bashWind",
+        "cd": 3.2336999999880787,
+        "attackCd": -0.3669000000059606,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "bashWind",
+        "cd": 3.2168999999761576,
+        "attackCd": -0.38370000001788157,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "bashWind",
+        "cd": 3.2003999999761574,
+        "attackCd": -0.4002000000178816,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "bash",
+        "cd": 3.183799999982118,
+        "attackCd": 0.8834000000059605,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "bash",
+        "cd": 3.1664999999999996,
+        "attackCd": 0.8661000000238419,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "bash",
+        "cd": 3.1493999999761577,
+        "attackCd": 0.8490000000000001,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "bash",
+        "cd": 3.1327999999821183,
+        "attackCd": 0.8324000000059606,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "bash",
+        "cd": 3.115699999988079,
+        "attackCd": 0.815300000011921,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "bash",
+        "cd": 3.0995,
+        "attackCd": 0.799100000023842,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "bash",
+        "cd": 3.0827999999821185,
+        "attackCd": 0.7824000000059605,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "bash",
+        "cd": 3.0658999999761583,
+        "attackCd": 0.7655000000000001,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "bash",
+        "cd": 3.0496999999880794,
+        "attackCd": 0.749300000011921,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      },
+      {
+        "phase": "bash",
+        "cd": 3.033299999982119,
+        "attackCd": 0.7329000000059606,
+        "wind": -0.013499999999999995,
+        "swing": -0.004800000011920907,
+        "react": 0,
+        "parts": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "dist": 0.9199999999999591
+      }
+    ],
+    "hp": 40,
+    "jolt": {
+      "kvx": 0,
+      "kvz": 0,
+      "stumbleT": 0,
+      "aimOff": 0.2,
+      "aimT": 0,
+      "jx": 0,
+      "jz": 1,
+      "jolt": 0,
+      "kneeT": 0,
+      "kneeCd": 0,
+      "hits": 2,
+      "knees": 0,
+      "speedK": 1,
+      "react": 0
+    },
+    "displacement": 2.2598464171143178
+  },
+  "motion": {
+    "maxRate": 3.82289156490884,
+    "maxHipTwist": 0.48750000000000004,
+    "maxKnee": 0.9838349642325874,
+    "minSole": -0.027454570245765808,
+    "maxSole": 0.10711106915846358
+  },
+  "pool": {
+    "hopping": true,
+    "reset": true,
+    "finite": true,
+    "camo": "m81",
+    "oldCamo": "m81",
+    "skins": 2
+  },
+  "perf": [
+    {
+      "on": false,
+      "fps": 60.083449235048676,
+      "p95": 17.19999998807907,
+      "alive": 48
+    },
+    {
+      "on": true,
+      "fps": 60.41958041958042,
+      "p95": 17.599999994039536,
+      "alive": 48
+    },
+    {
+      "on": false,
+      "fps": 60.150375939849624,
+      "p95": 17.400000005960464,
+      "alive": 48
+    },
+    {
+      "on": true,
+      "fps": 60.224167735059424,
+      "p95": 17.700000017881393,
+      "alive": 48
+    }
+  ],
+  "errors": []
+}

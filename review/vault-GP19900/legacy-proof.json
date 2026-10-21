@@ -1,0 +1,10 @@
+{
+  "before": {
+    "result": "PASS a sandbag starts a vault\nPASS he is 0.75 m past the sandbag (want >= 0.5)\nPASS he is down and the hop is over (8 waits)\nPASS he is not still inside it (push 0.00)\nPASS during the hop he keeps 70% of his speed (0.70 of 1.00)\nPASS wire: 0.75 m past, grounded true\nPASS barricade: 0.75 m past, push 0.00\nPASS a plain wall does not vault\nPASS an unbarred window vaults (0.75 m past)\nPASS a ring of barricades can be left (moved 1.75 m, stuck false)",
+    "errors": []
+  },
+  "after": {
+    "result": "PASS a sandbag starts a vault\nPASS he is 0.70 m past the sandbag (want >= 0.5)\nPASS he is down and the hop is over (12 waits)\nPASS he is not still inside it (push 0.00)\nPASS during the hop he keeps 70% of his speed (0.70 of 1.00)\nPASS wire: 0.70 m past, grounded true\nPASS barricade: 0.71 m past, push 0.00\nPASS a plain wall does not vault\nPASS an unbarred window vaults (0.70 m past)\nPASS a ring of barricades can be left (moved 1.72 m, stuck false)",
+    "errors": []
+  }
+}

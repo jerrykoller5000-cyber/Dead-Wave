@@ -1,0 +1,27 @@
+{
+  "at": "2026-10-10T03:46:58.663Z",
+  "performance": {
+    "bodies": 48,
+    "silentFps": 60.384870603848704,
+    "voicedFps": 58.9037904755858,
+    "ratio": 0.9754726620517341,
+    "actualCries": 6
+  },
+  "training": {
+    "loadSeconds": 12.274,
+    "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "errors": []
+  },
+  "worldScreamer": {
+    "training": false,
+    "newAttackCues": 1,
+    "legacyCalls": 0,
+    "tactics": "scream",
+    "context": "running"
+  },
+  "match": {
+    "loadSeconds": 20.566,
+    "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "errors": []
+  }
+}

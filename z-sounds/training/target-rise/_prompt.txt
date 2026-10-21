@@ -1,0 +1,9 @@
+#172 training/target-rise
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: trainingCue('reset')
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 1.2 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A spring-loaded steel target plate swinging back up, a mechanical clank. No music, no voice.

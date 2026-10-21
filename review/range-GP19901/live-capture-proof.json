@@ -1,0 +1,109 @@
+{
+  "rear": [
+    0.06,
+    0.06,
+    0.06,
+    0.06,
+    0.06,
+    0.06
+  ],
+  "front": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+  ],
+  "station": {
+    "action": "rangeConsole",
+    "open": true,
+    "drills": 5
+  },
+  "inventory": {
+    "r": {
+      "ok": true,
+      "id": "1791886755874-1"
+    },
+    "single": true,
+    "before": {
+      "size": 12,
+      "maxSpare": 14,
+      "loaded": [
+        4,
+        5
+      ],
+      "spare": [
+        3,
+        2
+      ]
+    },
+    "after": {
+      "size": 12,
+      "maxSpare": 14,
+      "loaded": [
+        4,
+        5
+      ],
+      "spare": [
+        3,
+        2
+      ]
+    },
+    "dual": true,
+    "sameUnlocks": true
+  },
+  "scene": {
+    "out": {
+      "roots": 0,
+      "feature": null
+    },
+    "in": {
+      "roots": 1,
+      "huds": 1,
+      "targets": 5
+    }
+  },
+  "activePerf": {
+    "samples": [
+      {
+        "fps": 57.792332883840004,
+        "worst": 22.09999999962747,
+        "hitches": 0
+      },
+      {
+        "fps": 58.17053662320298,
+        "worst": 21,
+        "hitches": 0
+      },
+      {
+        "fps": 57.62304921968787,
+        "worst": 26.299999999813735,
+        "hitches": 0
+      }
+    ],
+    "alive": 0
+  },
+  "perf": {
+    "samples": [
+      {
+        "fps": 35.41494510683606,
+        "worst": 62.5,
+        "hitches": 1
+      },
+      {
+        "fps": 33.958740130743834,
+        "worst": 80.10000000009313,
+        "hitches": 1
+      },
+      {
+        "fps": 34.72322694522504,
+        "worst": 35.6999999997206,
+        "hitches": 0
+      }
+    ],
+    "alive": 48
+  },
+  "t215": "PASS read index.html and the scripts and styles the game loaded (233 files)\nPASS no broken characters in them\nPASS the HUD reads clean: timeLine \"Daylight · 12:00\", tacticalLine \"NVG — · Laser — · Light —\", grenadeChips \"G×0H×0\", ammoDetail \"12 / 12  ·  50 Bullets  ·  SEMI\", hpNum \"100 / 100\"\nPASS and shows its dots and times signs (NVG — · Laser — · Light — / G×0H×0)",
+  "errors": []
+}

@@ -1,0 +1,58 @@
+{
+  "baselineHash": "4bff3f12dbbac8a2403988475c9ff81d67076c13edde482267ca90096c2d24bf",
+  "liveHash": "fbf7b89db05a90a5631f8476ce4743c52863610c65a337cb7dd24efddc0a2a74",
+  "before": {
+    "perf": {
+      "samples": [
+        {
+          "fps": 34.31708991077739,
+          "worst": 35.89999999990687,
+          "hitches": 0
+        },
+        {
+          "fps": 34.60706560922855,
+          "worst": 38.39999999990687,
+          "hitches": 0
+        },
+        {
+          "fps": 34.214352921052196,
+          "worst": 34,
+          "hitches": 0
+        }
+      ],
+      "alive": 48,
+      "memory": {
+        "geometries": 4293,
+        "textures": 141
+      }
+    },
+    "errors": []
+  },
+  "live": {
+    "perf": {
+      "samples": [
+        {
+          "fps": 33.78949146815872,
+          "worst": 37.40000000037253,
+          "hitches": 0
+        },
+        {
+          "fps": 34.63603301968854,
+          "worst": 36.700000000186265,
+          "hitches": 0
+        },
+        {
+          "fps": 31.58227181808147,
+          "worst": 44.90000000037253,
+          "hitches": 0
+        }
+      ],
+      "alive": 48,
+      "memory": {
+        "geometries": 4248,
+        "textures": 142
+      }
+    },
+    "errors": []
+  }
+}

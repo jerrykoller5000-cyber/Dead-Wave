@@ -1,0 +1,38 @@
+[
+  {
+    "name": "t253",
+    "pass": 24,
+    "fail": 0,
+    "note": "",
+    "lines": [
+      "PASS the dive is wired, idle, a full meter",
+      "PASS V dives (air)",
+      "PASS time slows (0.28)",
+      "PASS he leaves the ground (0.58 m up)",
+      "PASS he lies flat in the air (1.00)",
+      "PASS the meter is being drawn down (0.82)",
+      "PASS he fires mid-air (pistol 12 -> 11)",
+      "PASS a zombie's swing misses him in the air (100 -> 100)",
+      "PASS fire still lands (100 -> 98.6)",
+      "PASS he lands (down)",
+      "PASS the dive carried him 2.5 m at 9.0 m/s (a wall can stop it short)",
+      "PASS time is back to normal on the ground (1.00)",
+      "PASS a key held through the landing does not get him up",
+      "PASS a fresh W gets him up (up)",
+      "PASS and he is back on his feet",
+      "PASS a short cooldown before the next one",
+      "PASS with an empty meter he still dives",
+      "PASS but at full speed (1.00)",
+      "PASS a kill tops the meter up (0.11 -> 0.17)",
+      "PASS the shoulder aim is up (0.91)",
+      "PASS shouldered, V dives",
+      "PASS the shoulder camera comes down with him (1.83 -> 1.32 m over his feet)",
+      "PASS and he lands (down)",
+      "PASS no page errors"
+    ],
+    "errs": [],
+    "raw": "PASS the dive is wired, idle, a full meter\nPASS V dives (air)\nPASS time slows (0.28)\nPASS he leaves the ground (0.58 m up)\nPASS he lies flat in the air (1.00)\nPASS the meter is being drawn down (0.82)\nPASS he fires mid-air (pistol 12 -> 11)\nPASS a zombie's swing misses him in the air (100 -> 100)\nPASS fire still lands (100 -> 98.6)\nPASS he lands (down)\nPASS the dive carried him 2.5 m at 9.0 m/s (a wall can stop it short)\nPASS time is back to normal on the ground (1.00)\nPASS a key held through the landing does not get him up\nPASS a fresh W gets him up (up)\nPASS and he is back on his feet\nPASS a short cooldown before the next one\nPASS with an empty meter he still dives\nPASS but at full speed (1.00)\nPASS a kill tops the meter up (0.11 -> 0.17)\nPASS the shoulder aim is up (0.91)\nPASS shouldered, V dives\nPASS the shoulder camera comes down with him (1.83 -> 1.32 m over his feet)\nPASS and he lands (down)\nPASS no page errors",
+    "info": false,
+    "secs": 97.396
+  }
+]

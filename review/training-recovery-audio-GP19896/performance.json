@@ -1,0 +1,23 @@
+{
+  "samples": [
+    {
+      "before": true,
+      "fps": 50.63392074021355,
+      "worst": 28,
+      "over50": 0,
+      "remaining": 27,
+      "shots": 123,
+      "drawCalls": 4302
+    },
+    {
+      "before": false,
+      "fps": 58.58907931446792,
+      "worst": 23.19999998807907,
+      "over50": 0,
+      "remaining": 28,
+      "shots": 126,
+      "drawCalls": 7843
+    }
+  ],
+  "errors": []
+}

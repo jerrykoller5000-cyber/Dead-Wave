@@ -1,0 +1,95 @@
+[
+  {
+    "u": 128,
+    "v": 89.9,
+    "expected": {
+      "zone": "head",
+      "points": 10
+    },
+    "actual": {
+      "zone": "plate",
+      "points": 2,
+      "mult": 2,
+      "total": 4,
+      "lane": 3,
+      "range": 16
+    },
+    "point": {
+      "x": 0,
+      "y": -197.55494638888888,
+      "z": -624.07
+    }
+  },
+  {
+    "u": 128,
+    "v": 285.9,
+    "expected": {
+      "zone": "bull",
+      "points": 10
+    },
+    "actual": {
+      "zone": "ring",
+      "points": 5,
+      "mult": 2,
+      "total": 10,
+      "lane": 3,
+      "range": 16
+    },
+    "point": {
+      "x": 0,
+      "y": -198.53113527777776,
+      "z": -624.07
+    }
+  },
+  {
+    "u": 128,
+    "v": 50.1,
+    "expected": {
+      "zone": "head",
+      "points": 10
+    },
+    "actual": {
+      "zone": "head",
+      "points": 10,
+      "mult": 2,
+      "total": 20,
+      "lane": 3,
+      "range": 16
+    },
+    "point": {
+      "x": 0,
+      "y": -197.35672027777775,
+      "z": -624.07
+    }
+  },
+  {
+    "u": 153.9,
+    "v": 260,
+    "expected": {
+      "zone": "bull",
+      "points": 10
+    },
+    "actual": {
+      "zone": "bull",
+      "points": 10,
+      "mult": 2,
+      "total": 20,
+      "lane": 3,
+      "range": 16
+    },
+    "point": {
+      "x": -0.12899638888888856,
+      "y": -198.40213888888889,
+      "z": -624.07
+    }
+  },
+  {
+    "u": 128,
+    "v": 121.9,
+    "expected": {
+      "zone": "plate",
+      "points": 2
+    },
+    "actual": null
+  }
+]

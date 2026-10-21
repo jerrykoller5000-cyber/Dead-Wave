@@ -1,0 +1,4 @@
+node --test review/military-GP19864/behavior.test.mjs game/weaknesses.test.mjs
+9 pass / 0 fail (2026-10-11).
+node --check game/military-appearance.js -> exit 0.
+node tools/check-players.mjs -> 295 reads, all allowed, exit 0.

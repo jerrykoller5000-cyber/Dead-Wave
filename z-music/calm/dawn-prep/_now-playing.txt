@@ -1,0 +1,3 @@
+Morning
+Used for: Morning, the first hour of the day
+The game plays now: assets/soundtrack/calm_day (pool "dawnprep")

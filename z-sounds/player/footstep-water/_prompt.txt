@@ -1,0 +1,9 @@
+#4 player/footstep-water
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: footstep(wet)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.6 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A single footstep wading through shallow water, a splash and a drip. No music, no voice.

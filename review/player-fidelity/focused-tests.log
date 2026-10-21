@@ -1,0 +1,21 @@
+
+> dead-wave@0.1.0 test
+> node tools/tests/run-all.mjs t101 t104 t134 t140 t146 t184 t193 t199 t215 t224 --jobs 1 --no-retry
+
+check-players: 287 player.position reads, all in the allowed places
+ok    t101     9 pass   0 fail  27.7s
+ok    t104     5 pass   0 fail  27.5s
+ok    t134     9 pass   0 fail  16.9s
+ok    t140    17 pass   0 fail  14.6s
+ok    t146    43 pass   0 fail  22.1s
+ok    t184    29 pass   0 fail  33.8s
+ok    t193    18 pass   0 fail  45.6s
+FAIL  t199     9 pass   1 fail  32.1s
+ok    t215     4 pass   0 fail  21.8s
+ok    t224    26 pass   0 fail  71.2s
+
+10 checks: 169 pass, 1 fail
+
+by owner:
+  unassigned
+    t199   1 fail  FAIL walking, the lowest sole is not in the ground (-0.060 m)

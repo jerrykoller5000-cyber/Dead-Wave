@@ -1,0 +1,9 @@
+#89 footsteps-crawl
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 0.8 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A hand slapping down on dirt and a body dragging forward along the ground, one pull. No voice, no music.
+
+In the game: deadStep('crawl') — a legless zombie crawling

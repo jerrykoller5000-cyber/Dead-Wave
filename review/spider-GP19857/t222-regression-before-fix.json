@@ -1,0 +1,18 @@
+[
+  {
+    "mode": "baseline",
+    "pass": 9,
+    "fail": [],
+    "raw": "INFO shambler  head: head 6 | chest: body 6 | legs: legs 6\nINFO feral     head: head 6 | chest: head 2, body 4 | legs: legs 6\nINFO brute     head: head 6 | chest: body 6 | legs: legs 6\nINFO spider    head: head 6 | chest: body 6 | legs: -\nINFO leaper    head: head 6 | chest: head 6 | legs: -\nINFO colossus  head: head 6 | chest: body 6 | legs: legs 6\nPASS pointing at a head is a headshot: 36/36 (was 17/64)\nPASS pointing at a chest lands in the body: body 28, head 2 (a head only where the head covers the chest from up here)\nPASS pointing at the legs lands low: 24/24\nPASS no round aimed at a body goes into the ground or past it (0)\nPASS the reticle rings a head lined up, and not a chest (true, los-clear)\nPASS his round into the head flashes the gold X on the reticle (rgb(255, 210, 74))\nPASS the ticks show the spread: pistol 7.0 px, shotgun 38.6 px\nPASS a runner crossing in front of him at 3-6 m/s, the cursor on it, is hit: hit 16 (was 7/36)\nPASS the launcher is not led (it lobs): -0.27 m off the body",
+    "errors": []
+  },
+  {
+    "mode": "current",
+    "pass": 8,
+    "fail": [
+      "FAIL pointing at a head is a headshot: 34/36 (was 17/64)"
+    ],
+    "raw": "INFO shambler  head: head 6 | chest: body 5, head 1 | legs: legs 6\nINFO feral     head: head 6 | chest: head 2, body 4 | legs: legs 6\nINFO brute     head: head 6 | chest: body 6 | legs: legs 6\nINFO spider    head: body 2, head 4 | chest: head 2, body 4 | legs: -\nINFO leaper    head: head 6 | chest: head 6 | legs: -\nINFO colossus  head: head 6 | chest: body 6 | legs: legs 6\nFAIL pointing at a head is a headshot: 34/36 (was 17/64)\nPASS pointing at a chest lands in the body: body 25, head 5 (a head only where the head covers the chest from up here)\nPASS pointing at the legs lands low: 24/24\nPASS no round aimed at a body goes into the ground or past it (0)\nPASS the reticle rings a head lined up, and not a chest (true, los-clear)\nPASS his round into the head flashes the gold X on the reticle (rgb(255, 210, 74))\nPASS the ticks show the spread: pistol 7.0 px, shotgun 38.7 px\nPASS a runner crossing in front of him at 3-6 m/s, the cursor on it, is hit: hit 16 (was 7/36)\nPASS the launcher is not led (it lobs): -0.27 m off the body",
+    "errors": []
+  }
+]

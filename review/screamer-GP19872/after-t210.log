@@ -1,0 +1,9 @@
+PASS each walker kind has an idle, a hunting and a swinging voice
+PASS no two kinds sound alike at rest (pitch band, vowel, mask, rasp): shambler 6uh3, feral 9e6, leaper 27i6, drowned 5um1, military 7um3, brute 4o2, spitter 9e2, screamer 26i4, bomber 5o1
+PASS the brute is under the shambler, the screamer far over it (52-440 Hz across the kinds)
+PASS every throat plays
+PASS the feral hunting him speaks in its own voice (4 times)
+PASS a shambler is heard on its feet (3 steps)
+PASS a hopper thumps (1)
+PASS a crawler slaps and drags (2)
+PASS no errors

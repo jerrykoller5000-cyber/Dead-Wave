@@ -1,0 +1,9 @@
+#3 shambler-attack
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 1 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A short, violent zombie snarl as it lunges to bite, a wet guttural 'GHAH' with a gnashing of teeth at the end. Close-up, dry. No words, no music.
+
+In the game: zombieVoice('shambler', 'attack')

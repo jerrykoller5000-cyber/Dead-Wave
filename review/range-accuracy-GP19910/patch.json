@@ -1,0 +1,14 @@
+{
+  "file": "world/training-ballistics.js",
+  "before": "3c3083b449f8bdafebde756aa82e1bc954b31a71f1f097754c2738b285ca2f90",
+  "patches": [
+    {
+      "oldText": "    const t=segmentBox(a,b,solid);",
+      "newText": "    let t;\n    if(solid.target!=null){\n      // A target is a thin drawn plate, not the front face of its broad-phase box.\n      // Aim, silhouette tests and scoring must share the actual upright surface.\n      if(Math.abs(d.z)<1e-10)continue;\n      t=((solid.minZ+solid.maxZ)*.5-a.z)/d.z;\n      if(t<0||t>1)continue;\n      const x=a.x+d.x*t,y=a.y+d.y*t;\n      if(x<solid.minX||x>solid.maxX||y<solid.minY||y>solid.maxY)continue;\n    }else t=segmentBox(a,b,solid);"
+    },
+    {
+      "oldText": "  if(hit.solid.floor)hit.normal.y=1;",
+      "newText": "  if(hit.solid.floor)hit.normal.y=1;\n  else if(hit.solid.target!=null)hit.normal.z=d.z>0?-1:1;"
+    }
+  ]
+}

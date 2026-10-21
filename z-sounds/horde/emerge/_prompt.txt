@@ -1,0 +1,9 @@
+#98 horde-emerge
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 2.5 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A zombie clawing its way up out of the earth: digging, dirt crumbling and roots tearing, a hand bursting through. No voice, no music.
+
+In the game: emerge() — clawing up out of the ground

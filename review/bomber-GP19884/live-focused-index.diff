@@ -1,0 +1,103 @@
+--- index.html fresh before
++++ index.html live bomber
+@@ -1328,6 +1328,7 @@
+     import { militaryActive, militaryCanReach, stepMilitary, restoreMilitaryPose, resetMilitary, applyMilitaryPose, militaryProjectileHit, militaryBulletShare } from './game/military-behavior.js';
+     import { prepareMilitaryAppearance, cycleMilitaryCamo } from './game/military-appearance.js';
+     import { BRUTE, stepBrute, bruteCanReach, restoreBrutePose, resetBrute, applyBrutePose, beginBruteBuild } from './game/brute-behavior.js'; // GP-19866
++    import { prepareBomberAppearance, restoreBomberPose, resetBomber, stepBomber, applyBomberPose } from './game/bomber-behavior.js'; // GP-19884
+     import { makeBruteArmor, resetBruteArmor, hitBruteArmor, bruteProjectileHit } from './game/brute-armor.js'; // GP-19867
+     import { steerSpitter, spitterFacing, prepareSpitterJaw, restoreSpitterMotion, resetSpitterMotion, applySpitterMotion } from './game/spitter-motion.js'; // GP-19870
+     import { SCREAMER, screamerProtected, tickScreamerShield, restoreScreamerPose, resetScreamer, steerScreamer, applyScreamerPose } from './game/screamer-behavior.js'; // GP-19872
+@@ -31935,7 +31936,7 @@
+         armor: 0, scale: 0.96, color: 0xd8cabb, eye: 0xff55ff, hunch: 0, tactics: 'scream'
+       },
+       bomber: {
+-        name: 'Bomber', hp: 34, speed: 4.32, radius: 0.58, damage: 0, reward: 9, cashDrop: 9,
++        name: 'Bomber', hp: 34, speed: 2.8, radius: 0.78, damage: 0, reward: 9, cashDrop: 9,
+         armor: 0, scale: 1.1, color: 0x8f9c4a, eye: 0xffee44, hunch: 0.15, tactics: 'bomb', fat: true
+       },
+       // Demon: a brute that came up from somewhere worse. Horned, spined, cracked with
+@@ -32942,6 +32943,7 @@
+       g.userData.dismembered = false;
+       g.userData.partsLost = typeKey === 'spider' ? { armL: true, armR: true, legL: true, legR: true, head: false } : { armL: false, armR: false, legL: false, legR: false, head: false };
+       applyZombieConcept({ THREE, g, typeKey, scale: s, rbox });
++      if(typeKey==='bomber')prepareBomberAppearance(THREE,g,s); // GP-19884: sculpt the actual concept surfaces
+       if(typeKey==='spitter')prepareSpitterJaw(THREE,g,s); // actual concept jaw, before skin bind
+       if(typeKey==='screamer')prepareScreamerAppearance(THREE,g,s); // preserve bright tongue; articulate jaw before skin bind
+       if(typeKey==='brute')makeBruteArmor(THREE,g,s); // GP-19867: split the actual concept plates before skin bind
+@@ -33003,7 +33005,7 @@
+         armLBase: armLG.userData.baseRotX || 0,
+         armRBase: armRG.userData.baseRotX || 0
+       };
+-      if (typeKey === 'shambler' || typeKey === 'drowned' || typeKey === 'military' || typeKey === 'brute' || typeKey === 'spitter' || typeKey === 'screamer') prepareShamblerFeet(THREE, g, s);   // before skin binds the boots
++      if (typeKey === 'shambler' || typeKey === 'drowned' || typeKey === 'military' || typeKey === 'brute' || typeKey === 'spitter' || typeKey === 'screamer' || typeKey === 'bomber') prepareShamblerFeet(THREE, g, s);   // before skin binds the boots
+       compactZombieMesh(g);
+       skinZombieMesh(g, s);   // CL-138
+       attachZombieAbilityVisuals(THREE, g, typeKey, s);   // GP-179
+@@ -33323,6 +33325,7 @@
+         if (ud.typeKey === 'spitter') resetSpitterMotion({ typeKey: ud.typeKey, mesh });
+         if (ud.typeKey === 'screamer') resetScreamer({ typeKey: ud.typeKey, mesh });
+         if (ud.typeKey === 'drowned') resetDrownedMotion({ typeKey: ud.typeKey, mesh });
++        if (ud.typeKey === 'bomber') resetBomber({ typeKey: ud.typeKey, mesh }); // GP-19884
+         if (ud.typeKey === 'brute') { resetBrute({ typeKey: ud.typeKey, mesh }); resetBruteArmor(mesh); }
+         if (ud.typeKey === 'military') { resetMilitary({ typeKey: ud.typeKey, mesh }); cycleMilitaryCamo(mesh); }
+       }
+@@ -34525,6 +34528,7 @@
+     function killZombie(z, award = true, deathInfo = null) {
+       if (!z.alive) return;
+       z.alive = false;
++      resetBomber(z); // GP-19884: release the live pose before rupture
+       resetBrute(z); // GP-19866: restore planted feet before the corpse
+       resetMilitary(z); // GP-19864: restore the soldier before the corpse pose
+       resetSpitterMotion(z); // GP-19870: release the live pose before the corpse
+@@ -34541,7 +34545,7 @@
+         if (z.poiGuard.bounty) settleBounty(z.poiGuard);   // GB-57: the reward, after its poi-cleared
+       }
+       const info = deathInfo || { kind: 'generic', dir: { x: 0, z: 0 }, defense: true };
+-      const kind = info.kind || 'generic';
++      const kind = z.typeKey === 'bomber' ? 'explosive' : (info.kind || 'generic'); // GP-19884: every death ruptures his belly
+       const dx = (info.dir && info.dir.x) || 0;
+       const dz = (info.dir && info.dir.z) || 0;
+       const px = z.mesh.position.x, py = z.mesh.position.y, pz = z.mesh.position.z;
+@@ -34669,6 +34673,7 @@
+     }
+ 
+     function clearZombies() {
++      for (const z of zombies) resetBomber(z); // GP-19884
+       for (const z of zombies) resetBrute(z);
+       for (const z of zombies) resetMilitary(z);
+       for (const z of zombies) resetSpitterMotion(z); // GP-19870
+@@ -48359,6 +48364,7 @@
+       fogCullPrep();   // GB-59
+       for (const z of zombies) {
+         if (!z.alive) continue;
++        restoreBomberPose(z); // GP-19884
+         restoreBrutePose(z); // GP-19866: restore before ordinary hit/crawl/death poses
+         restoreMilitaryPose(z); // GP-19864
+         restoreSpitterMotion(z); // GP-19870
+@@ -49033,6 +49039,8 @@
+           }
+         }
+         if (z.abilityBusy) spd = 0;   // GP-179: feet stay planted through the tell and follow-through
++        const bomberStep = stepBomber(z,sx,sz,spd,dt,!graceFreeze && !rising && !z.abilityBusy && !gameOver && !won && !scriptedKill);
++        if(bomberStep){sx=bomberStep.x;sz=bomberStep.z;spd=bomberStep.speed;} // GP-19884: acceleration, coast and committed turning
+         let mx = zx + ((graceFreeze || rising) ? 0 : sx * spd * dt);
+         let mz = zz + ((graceFreeze || rising) ? 0 : sz * spd * dt);
+         if (z.hzStaggerT > 0) {   // GB-94 follow-up: the stagger's shove back along the shot, easing off over its 0.4 s
+@@ -49209,7 +49217,7 @@
+           }
+         }
+         // Face the way they are actually travelling, including any detour around a bluff.
+-        if (!knocked) z.mesh.rotation.y = bruteStep ? bruteStep.yaw : militaryStep ? militaryStep.yaw : drownedStep ? drownedStep.yaw : drownedTurn ? drownedTurn.yaw : screamerTurn ? screamerTurn.yaw : spitterTurn ? spitterTurn.yaw : spiderTurn ? spiderTurn.yaw : shamblerTurn ? shamblerTurn.yaw : Math.atan2(sx, sz); // hold the facing while down
++        if (!knocked) z.mesh.rotation.y = bomberStep ? bomberStep.yaw : bruteStep ? bruteStep.yaw : militaryStep ? militaryStep.yaw : drownedStep ? drownedStep.yaw : drownedTurn ? drownedTurn.yaw : screamerTurn ? screamerTurn.yaw : spitterTurn ? spitterTurn.yaw : spiderTurn ? spiderTurn.yaw : shamblerTurn ? shamblerTurn.yaw : Math.atan2(sx, sz); // hold the facing while down
+         {
+           const pitch = knockDownPitch(z, dt);
+           if (pitch !== 0 || z.mesh.rotation.x !== 0) {
+@@ -49673,6 +49681,7 @@
+         applyLeaperMotion(THREE, z, dt, standing ? 0 : walkAmt, dist); // GP-19856
+         applyShamblerMotion(z, dt, phase, standing ? 0 : walkAmt, marineGait);
+         applyShamblerRecovery(z);
++        applyBomberPose(z, dt); // GP-19884: low planted waddle, hip lag and belly weight
+         applyBrutePose(z, dt); // GP-19866: heavy planted stride and committed smash
+         applyMilitaryPose(z, dt); // GP-19864: planted combat stride, guard, bash and kick
+         applySpitterMotion(z, dt); // GP-19870: hunched shuffle, hip lag and final retch/recoil

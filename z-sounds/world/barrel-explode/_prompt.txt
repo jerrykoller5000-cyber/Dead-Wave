@@ -1,0 +1,9 @@
+#148 world/barrel-explode
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: grenadeBoom (barrel)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 2.5 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A fuel drum exploding: a heavy whoomp of a fireball and metal shrapnel. No music, no voice.

@@ -1,0 +1,112 @@
+{
+  "loadSec": 17.405,
+  "samples": [
+    {
+      "name": "reverse",
+      "fps": 60.07659766192944,
+      "p95Ms": 17.900000005960464,
+      "alive": 48,
+      "shell": [
+        {
+          "side": "east",
+          "opacity": 0.06,
+          "hidden": true
+        },
+        {
+          "side": "south",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "west",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "overhead",
+          "opacity": 0,
+          "hidden": true
+        },
+        {
+          "side": "east",
+          "opacity": 0.06,
+          "hidden": true
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "name": "build",
+      "fps": 60.11421701223367,
+      "p95Ms": 17.900000005960464,
+      "alive": 48,
+      "shell": [
+        {
+          "side": "east",
+          "opacity": 0.06,
+          "hidden": true
+        },
+        {
+          "side": "south",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "west",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "overhead",
+          "opacity": 0,
+          "hidden": true
+        },
+        {
+          "side": "east",
+          "opacity": 0.06,
+          "hidden": true
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

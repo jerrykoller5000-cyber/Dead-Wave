@@ -1,0 +1,77 @@
+[
+{
+"file": "studio/weapon-sidearms.js",
+"old": "  K.slab(gunBand([[0.12, -0.016], [0.122, -0.052], [0.108, -0.064], [0.042, -0.064], [0.026, -0.050], [0.018, -0.032]], 0.0042), 0.012, gunPoly, { bevel: 0.003 });",
+"new": [
+"  // GB-177 (pass 2: the guard read as a thin wire): a moulded guard, thicker and wider, its front squared, its back",
+"  // running up into the frame.",
+"  K.slab(gunBand([[0.118, -0.014], [0.122, -0.05], [0.113, -0.064], [0.046, -0.066], [0.03, -0.057], [0.022, -0.04], [0.02, -0.014]], 0.006), 0.016, gunPoly, { bevel: 0.003 });"
+]
+},
+{
+"file": "studio/weapon-sidearms.js",
+"old": "  const rOuter = .05618532;",
+"new": [
+"  const rOuter = .0505;   // GB-177: slimmer (was 0.0562); the chambers at r 0.033 keep the bore line"
+]
+},
+{
+"file": "studio/weapon-sidearms.js",
+"old": "  const rings = [[-.04, .05, 0], [-.034, rOuter, 0], [-.026, rOuter, 1], [.022, rOuter, 1], [.032, rOuter, 0], [.04, .049, 0]];",
+"new": [
+"  const rings = [[-.04, .045, 0], [-.034, rOuter, 0], [-.026, rOuter, 1], [.022, rOuter, 1], [.032, rOuter, 0], [.04, .0445, 0]];"
+]
+},
+{
+"file": "studio/weapon-sidearms.js",
+"old": "    K.slab([[.019, -.002], [.031, -.002], [.029, .002], [.021, .002]], .0012, gunDark, {x: Math.cos(a) * .0545, y: Math.sin(a) * .0545, rz: a, parent: cylinder, bevel: .0004});",
+"new": [
+"    K.slab([[.019, -.002], [.031, -.002], [.029, .002], [.021, .002]], .0012, gunDark, {x: Math.cos(a) * .049, y: Math.sin(a) * .049, rz: a, parent: cylinder, bevel: .0004});"
+]
+},
+{
+"file": "studio/weapon-sidearms.js",
+"old": "  K.lathe([[0, -.03], [.052, -.03], [.055, -.027], [.052, -.022], [0, -.022]], steelMat, {y: .05, seg: 28});   // recoil shield",
+"new": [
+"  K.lathe([[0, -.03], [.047, -.03], [.05, -.027], [.047, -.022], [0, -.022]], steelMat, {y: .05, seg: 28});   // recoil shield (GB-177: to the slimmer cylinder)"
+]
+},
+{
+"file": "studio/weapon-sidearms.js",
+"old": "  K.lathe([[0, .09], [.025, .09], [.025, .11], [.023, .134], [.022, .17], [.022, .371], [.021, .378], [.019, .382], [0, .382]], steelMat, {y: .083, seg: 24});",
+"new": [
+"  // GB-177 (pass 2: barrel and cylinder too heavy): a slimmer barrel, underlug and rib; the bore stays at y 0.083.",
+"  K.lathe([[0, .09], [.021, .09], [.021, .11], [.019, .134], [.018, .17], [.018, .371], [.017, .378], [.015, .382], [0, .382]], steelMat, {y: .083, seg: 24});"
+]
+},
+{
+"file": "studio/weapon-sidearms.js",
+"old": "  K.slab([[.09, .077], [.12, .072], [.2, .069], [.37, .069], [.379, .063], [.38, .054], [.376, .045], [.365, .041], [.15, .039], [.125, .037], [.105, .031], [.09, .033]], .034, steelMat, {bevel: .009, segs: 4});",
+"new": [
+"  K.slab([[.09, .077], [.12, .073], [.2, .071], [.37, .071], [.379, .066], [.38, .058], [.376, .05], [.365, .046], [.15, .044], [.125, .041], [.105, .036], [.09, .037]], .028, steelMat, {bevel: .008, segs: 4});"
+]
+},
+{
+"file": "studio/weapon-sidearms.js",
+"old": "  K.slab([[.081, .111], [.102, .105], [.133, .1], [.37, .101], [.378, .105], [.375, .095], [.15, .093], [.105, .094], [.085, .1]], .016, steelMat, {bevel: .003, segs: 3});",
+"new": [
+"  K.slab([[.081, .109], [.102, .103], [.133, .099], [.37, .1], [.378, .104], [.375, .095], [.15, .093], [.105, .094], [.085, .1]], .012, steelMat, {bevel: .003, segs: 3});"
+]
+},
+{
+"file": "studio/weapon-heavy.js",
+"old": "  // Red trigger seated on the grip's front strap, bowed so the hollow faces the palm.",
+"new": [
+"  // GB-177 (pass 2: the trigger was a long red bar buried in the grip): a red trigger blade hung from the grip's front",
+"  // strap, its tip curling forward like the other guns', inside a guard that runs from the strap and back to it."
+]
+},
+{
+"file": "studio/weapon-heavy.js",
+"old": "  K.slab(gunBand([[-0.278, 0.268], [-0.252, 0.230], [-0.246, 0.198], [-0.258, 0.166], [-0.280, 0.142]], 0.009), 0.024, fuelRedMat, { bevel: 0.003 });",
+"new": [
+"  K.slab(gunBand([[-0.222, 0.25], [-0.214, 0.236], [-0.216, 0.22], [-0.206, 0.206]], 0.0045), 0.012, fuelRedMat, { bevel: 0.002 });",
+"  K.slab(gunBand([[-0.228, 0.262], [-0.19, 0.258], [-0.182, 0.22], [-0.19, 0.186], [-0.244, 0.182]], 0.005), 0.016, gunDark, { bevel: 0.002 });"
+]
+}
+]

@@ -1,0 +1,244 @@
+{
+  "mode": "render",
+  "alpha": false,
+  "diagnosticLight": false,
+  "motionBlur": true,
+  "motionBlurSamples": 9,
+  "motionBlurShutterFrames": 0.4,
+  "deliveryDuration": 20,
+  "size": [
+    1280,
+    720
+  ],
+  "fps": 30,
+  "start": 5.533333333,
+  "frames": 1,
+  "out": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\review\\dance-GP19904\\blur-final-check",
+  "outfitPath": "review/dance-GP19904/outfit.json",
+  "started": "2026-10-13T13:12:06.063Z",
+  "motionSourceHash": "76edb5ead645021d3cff53087597089af002ee2bd6c79d7d04b50955d462f6a3",
+  "camera": {
+    "position": [
+      1.9,
+      1.65,
+      4.1
+    ],
+    "look": [
+      0,
+      0.78,
+      0
+    ],
+    "fov": 34
+  },
+  "samples": [
+    {
+      "seconds": 5.533333333,
+      "state": {
+        "phrase": "together side hop",
+        "beat": 9.528612018314876
+      },
+      "contacts": {
+        "hands": [
+          {
+            "point": [
+              -0.7188262045107542,
+              0.9031190634084821,
+              0.6305737289996496
+            ],
+            "target": [
+              -0.565745669928059,
+              0.22934494970544805,
+              0.6085301499101796
+            ],
+            "error": 0.6912966987795519,
+            "planted": 0
+          },
+          {
+            "point": [
+              0.30155848451714173,
+              0.8530152182360913,
+              0.5808082523510781
+            ],
+            "target": [
+              0.07396082015635616,
+              0.22934494970544805,
+              0.6279107212092405
+            ],
+            "error": 0.6655703893985245,
+            "planted": 0
+          }
+        ],
+        "feet": [
+          {
+            "point": [
+              -0.3294930535122133,
+              0.21734494970544804,
+              0.24051561047366876
+            ],
+            "target": [
+              -0.3294930535122133,
+              0.21734494970544804,
+              0.24051561047366862
+            ],
+            "error": 1.3877787807814457e-16
+          },
+          {
+            "point": [
+              -0.13958018926840257,
+              0.21734494970544804,
+              0.24626921757807754
+            ],
+            "target": [
+              -0.13958018926840254,
+              0.21734494970544804,
+              0.24626921757807735
+            ],
+            "error": 1.962615573354719e-16
+          }
+        ]
+      },
+      "bounds": {
+        "min": [
+          -0.8733361440723035,
+          0.17458956621538052,
+          -0.1000101052194956
+        ],
+        "max": [
+          0.46632007302573897,
+          1.809361245360005,
+          0.8219817954024657
+        ]
+      },
+      "root": [
+        -0.23377956782393836,
+        0.21734494970544804,
+        0.2184038792569505
+      ],
+      "drawCalls": 18,
+      "file": "00000.png"
+    }
+  ],
+  "gameRenderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "loadSeconds": 12.2,
+  "setup": {
+    "backend": "webgpu",
+    "picked": {
+      "hat": "ballcapBack",
+      "eyewear": "aviators",
+      "rolled": true,
+      "shorts": false,
+      "gloves": true,
+      "skin": 0,
+      "hair": "darkBrown",
+      "eyes": "blue"
+    },
+    "wardrobe": {
+      "version": 1,
+      "items": {
+        "cap": {
+          "camo": "papDigital",
+          "style": "ballcapBack"
+        },
+        "helmet": {
+          "camo": "papDigital"
+        },
+        "mask": {
+          "camo": "papDigital"
+        },
+        "shirt": {
+          "camo": "papDigital",
+          "sleeves": "rolled"
+        },
+        "trousers": {
+          "camo": "papDigital",
+          "cut": "trousers"
+        },
+        "gloves": {
+          "camo": "feldgrau",
+          "worn": true
+        },
+        "carrier": {
+          "camo": "papDigital"
+        },
+        "pads": {
+          "camo": "papDigital"
+        },
+        "holster": {
+          "camo": "papDigital"
+        },
+        "belt": {
+          "camo": "papDigital"
+        },
+        "pack": {
+          "camo": "papDigital"
+        },
+        "eyewear": {
+          "style": "aviators"
+        },
+        "boots": {
+          "colour": "black",
+          "rubber": "yellow"
+        }
+      },
+      "guns": {
+        "m4": "papDigital",
+        "shotgun": "papDigital",
+        "sniper": "m14Woodland",
+        "minigun": "dpmDesert",
+        "uzi": "papDigital",
+        "pistol": "teloMimetico"
+      },
+      "body": {
+        "hair": "darkBrown",
+        "eyes": "blue",
+        "skin": 0
+      }
+    },
+    "storedWardrobe": null,
+    "gear": {
+      "helmet": {
+        "count": 7,
+        "visible": 7,
+        "sourceCount": 7
+      },
+      "vest": {
+        "count": 10,
+        "visible": 10,
+        "sourceCount": 10
+      },
+      "pads": {
+        "count": 12,
+        "visible": 12,
+        "sourceCount": 12
+      },
+      "nvg": {
+        "count": 1,
+        "visible": 1,
+        "sourceCount": 1
+      },
+      "bareHead": {
+        "count": 1,
+        "visible": 0,
+        "sourceCount": 1
+      },
+      "bareTorso": {
+        "count": 4,
+        "visible": 0,
+        "sourceCount": 4
+      }
+    },
+    "gearOwned": {
+      "helmet": true,
+      "vest": true,
+      "pads": true,
+      "nvg": true
+    },
+    "motionMissing": false,
+    "duration": 20,
+    "source": "Fresh TT.makeMarine in camera browser with TT.dressMarine current page profile and matching live gear visibility",
+    "note": "Read-only latest tt_wardrobe from the Grave Shift Edge profile, port 8766"
+  },
+  "ok": true,
+  "errors": [],
+  "finished": "2026-10-13T13:12:19.888Z"
+}

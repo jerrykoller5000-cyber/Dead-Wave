@@ -1,0 +1,9 @@
+#154 vehicles/chute-open
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: chuteOpen()
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 1.2 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A parachute canopy deploying with a loud whoosh and a snap of lines. No music, no voice.

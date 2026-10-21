@@ -1,0 +1,9 @@
+#38 weapon-foley/pump-forward  (start here)
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: foley pumpFwd
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.4 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A pump shotgun's fore-end pushed forward, a solid metallic clack. No music, no voice.

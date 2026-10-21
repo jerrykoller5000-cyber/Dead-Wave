@@ -1,0 +1,9 @@
+#98 builds/mine-beep
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: mineBeep()
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.4 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A landmine arming, a short high electronic beep. No music, no voice.

@@ -1,0 +1,291 @@
+{
+  "task": "GP-19906",
+  "motionSourceHash": "d11fe67f4d07a964cd176673e990d6fd50a0158e32828f617480ffc2d95e8070",
+  "poses": 601,
+  "boundaries": 28,
+  "deterministicSeeks": 13,
+  "quality": {
+    "noFloorPenetration": true,
+    "noElbowHyperextension": true,
+    "handsOutsideTorsoProxy": true,
+    "plantedHandsWithin25mm": true,
+    "freeWristsWithin30Degrees": true,
+    "plantedWristsWithin92Degrees": true,
+    "fullyInsideFrame": true,
+    "framingMarginAtLeast24px": true,
+    "deterministicSeek": true,
+    "note": "Numerical diagnostics are necessary checks, not a substitute for viewing the animation."
+  },
+  "browserErrors": [],
+  "minFrameMarginPixels": 75.60114328557574,
+  "maxPlantedPalmErrorMeters": 0.0008771575283442876,
+  "maxFreeWristDegrees": 28.16662840132076,
+  "maxPlantedWristDegrees": 90.0868492826197,
+  "minHopBootSurfaceGapMeters": 0.028255519601197487,
+  "hopKneeRangesDegrees": [
+    {
+      "beat": 9,
+      "knees": [
+        46.76671291948328,
+        52.508666653321455
+      ]
+    },
+    {
+      "beat": 10,
+      "knees": [
+        63.14632768953837,
+        50.96027921775243
+      ]
+    },
+    {
+      "beat": 11,
+      "knees": [
+        48.770125379786165,
+        58.27253440598284
+      ]
+    }
+  ],
+  "hopDirectionalMotion": [
+    {
+      "beat": 9,
+      "seconds": [
+        5.233333333333333,
+        5.8
+      ],
+      "samples": 18,
+      "cameraLateralVelocityMetersPerSecond": {
+        "min": -2.125000813028085,
+        "max": 0,
+        "span": 2.125000813028085,
+        "peakSpeed": 2.125000813028085,
+        "meanSpeed": 1.2488112499999984
+      },
+      "rootLeanDegrees": {
+        "min": -13.177925069590065,
+        "max": 15.63774534335338,
+        "span": 28.815670412943447
+      },
+      "torsoLeanDegrees": {
+        "min": -2.108468011134411,
+        "max": 2.5020392549365416,
+        "span": 4.610507266070952
+      },
+      "meanSoleLateralOffsetMeters": {
+        "min": -0.11482377998219825,
+        "max": 0.11461552582050628,
+        "span": 0.22943930580270455
+      },
+      "meanSoleOffsetNote": "Measured in outer travel-group coordinates; sign reverses from trailing feet to forward reach during flight.",
+      "kneeDegrees": [
+        {
+          "side": "L",
+          "min": 37.785372768916616,
+          "max": 84.5520856883999,
+          "span": 46.76671291948328
+        },
+        {
+          "side": "R",
+          "min": 32.11197851843683,
+          "max": 84.62064517175828,
+          "span": 52.508666653321455
+        }
+      ],
+      "ankleDegrees": [
+        {
+          "side": "L",
+          "min": -60.69029274341002,
+          "max": -19.34440335635982,
+          "span": 41.3458893870502
+        },
+        {
+          "side": "R",
+          "min": -60.72168118186676,
+          "max": -16.681095601709384,
+          "span": 44.04058558015737
+        }
+      ]
+    },
+    {
+      "beat": 10,
+      "seconds": [
+        5.833333333333333,
+        6.366666666666666
+      ],
+      "samples": 17,
+      "cameraLateralVelocityMetersPerSecond": {
+        "min": -9.30089338879716e-16,
+        "max": 2.351667566417743,
+        "span": 2.3516675664177438,
+        "peakSpeed": 2.351667566417743,
+        "meanSpeed": 1.4633129470588253
+      },
+      "rootLeanDegrees": {
+        "min": -16.006380119964998,
+        "max": 12.918001712735174,
+        "span": 28.92438183270017
+      },
+      "torsoLeanDegrees": {
+        "min": -2.5610208191944004,
+        "max": 2.0668802740376284,
+        "span": 4.627901093232029
+      },
+      "meanSoleLateralOffsetMeters": {
+        "min": -0.1118890917863482,
+        "max": 0.1132473544271181,
+        "span": 0.2251364462134663
+      },
+      "meanSoleOffsetNote": "Measured in outer travel-group coordinates; sign reverses from trailing feet to forward reach during flight.",
+      "kneeDegrees": [
+        {
+          "side": "L",
+          "min": 25.877955175810794,
+          "max": 89.02428286534916,
+          "span": 63.14632768953837
+        },
+        {
+          "side": "R",
+          "min": 35.047973956858314,
+          "max": 86.00825317461074,
+          "span": 50.96027921775243
+        }
+      ],
+      "ankleDegrees": [
+        {
+          "side": "L",
+          "min": -61.104066562313676,
+          "max": -14.549808964318533,
+          "span": 46.55425759799515
+        },
+        {
+          "side": "R",
+          "min": -62.55895409496219,
+          "max": -19.610846271676355,
+          "span": 42.94810782328584
+        }
+      ]
+    },
+    {
+      "beat": 11,
+      "seconds": [
+        6.4,
+        6.966666666666667
+      ],
+      "samples": 18,
+      "cameraLateralVelocityMetersPerSecond": {
+        "min": -1.6433339620750482,
+        "max": 0,
+        "span": 1.6433339620750482,
+        "peakSpeed": 1.6433339620750482,
+        "meanSpeed": 0.9658303726530953
+      },
+      "rootLeanDegrees": {
+        "min": -13.172143092842433,
+        "max": 15.997488923869302,
+        "span": 29.169632016711734
+      },
+      "torsoLeanDegrees": {
+        "min": -2.10754289485479,
+        "max": 2.559598227819088,
+        "span": 4.667141122673877
+      },
+      "meanSoleLateralOffsetMeters": {
+        "min": -0.11385109212346436,
+        "max": 0.11499934812718182,
+        "span": 0.2288504402506462
+      },
+      "meanSoleOffsetNote": "Measured in outer travel-group coordinates; sign reverses from trailing feet to forward reach during flight.",
+      "kneeDegrees": [
+        {
+          "side": "L",
+          "min": 36.28474877648374,
+          "max": 85.0548741562699,
+          "span": 48.770125379786165
+        },
+        {
+          "side": "R",
+          "min": 26.869038761863763,
+          "max": 85.1415731678466,
+          "span": 58.27253440598284
+        }
+      ],
+      "ankleDegrees": [
+        {
+          "side": "L",
+          "min": -61.73439981965785,
+          "max": -19.015871729824248,
+          "span": 42.718528089833605
+        },
+        {
+          "side": "R",
+          "min": -60.95432622377037,
+          "max": -15.999141605020274,
+          "span": 44.955184618750096
+        }
+      ]
+    }
+  ],
+  "hopVelocityNote": "Central finite differences of root translation at 30 fps, projected onto the fixed camera lateral axis (.907,0,-.420). Mean speed includes grounded anticipation and landing within each beat.",
+  "backspin": {
+    "sampledBeatRange": [
+      26,
+      30
+    ],
+    "supportParts": [
+      "torso"
+    ],
+    "floorClearanceMeters": {
+      "min": 0.0059999999999999845,
+      "max": 0.00600000000000004,
+      "span": 5.551115123125783e-17
+    },
+    "soleHeightMeters": {
+      "min": 0.3259899324730841,
+      "max": 0.8895468559860447,
+      "span": 0.5635569235129605
+    },
+    "handVerticesInsideTorsoProxy": 0
+  },
+  "handstandDrop": {
+    "sampledBeatRange": [
+      25,
+      26
+    ],
+    "hipHeightMeters": {
+      "min": 0.2887923915279794,
+      "max": 1.1869233651760447,
+      "span": 0.8981309736480653
+    },
+    "maximumFloorClearanceMeters": 0.051760845342437724,
+    "lowestPartSequence": [
+      "elbowL",
+      "wristR",
+      "wristL",
+      "head",
+      "torso"
+    ],
+    "note": "Hands withdraw before the accelerating tumble; support transfers via helmet/head toward torso/backpack. A brief floor clearance is intentional, not a planted-contact assertion."
+  },
+  "boundaryMaxPositionMeters": 0.00021374844714795998,
+  "boundaryMaxAngleRadians": 0.0003141110041146733,
+  "boundarySampleIntervalSeconds": 0.00002,
+  "deterministicSeekMaxDifference": 0,
+  "finalPoseHoldSeconds": 0.7205219078603733,
+  "finalSupport": "Right elbow pad; 6 mm clearance over floor plane",
+  "finalSupportClearanceMeters": 0.005999999999999978,
+  "finalWristDegrees": 22.436273228940532,
+  "floorToleranceMeters": 0.002,
+  "worstFloorPenetrationMeters": 0.0012424808363099213,
+  "floorToleranceNote": "Worst boot vertex is 1.24 mm below the floor during kick-up, within the existing 2 mm audit tolerance; the noFloorPenetration flag means within that tolerance, not mathematically zero intersection.",
+  "limitations": [
+    "Torso proxy is not exhaustive mesh self-collision.",
+    "Normal-speed human playback judgement and live intro startup/decode performance remain with integration.",
+    "Shared npm regression suite not rerun by this audit for the isolated presentation motion."
+  ],
+  "proof": "final-audit/proof.json",
+  "brightSheet": "sheet1/contact-sheet.png",
+  "visualChecks": [
+    "Inspected all 27 bright sequence poses.",
+    "Inspected full-resolution backspin and handstand-drop frames."
+  ],
+  "command": "node review/dance-GP19906/capture.mjs --audit --audit-rate 30 --diagnostic-light --out review/dance-GP19906/check1 --outfit review/dance-GP19906/outfit.json --camera 1.9,1.65,4.1 --look 0,.78,0 --fov 34 --snapshot 15.15"
+}

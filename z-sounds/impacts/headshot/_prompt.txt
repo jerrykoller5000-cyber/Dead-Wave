@@ -1,0 +1,9 @@
+#94 impacts-headshot
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 0.7 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A bullet cracking a skull: a sharp bony crack and a wet burst. No voice, no music.
+
+In the game: headshot() → foley 'headshot'

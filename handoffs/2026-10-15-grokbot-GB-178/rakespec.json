@@ -1,0 +1,84 @@
+[
+{
+"file": "studio/weapon-sidearms.js",
+"oldBlock": [
+"  // GB-172: narrower grip on the same centre line (cz -0.02, cy -0.08, h 0.18, rake 0.25). t242 copies these points."
+],
+"new": [
+"  // GB-172: narrower grip on the same centre line (cz -0.02, cy -0.08, h 0.18, rake 0.30, GB-179: 17 deg). t242 copies these points."
+]
+},
+{
+"file": "studio/weapon-sidearms.js",
+"oldBlock": [
+"  K.slab(shapedGrip(-0.02, -0.08, 0.18, 0.074, 0.25, pistolGrip), 0.046, gunPoly, { bevel: 0.008, segs: 3 });"
+],
+"new": [
+"  K.slab(shapedGrip(-0.02, -0.08, 0.18, 0.074, 0.3, pistolGrip), 0.046, gunPoly, { bevel: 0.008, segs: 3 });"
+]
+},
+{
+"file": "studio/weapon-sidearms.js",
+"oldBlock": [
+"  const gripPanel = shapedGrip(-0.02, -0.08, 0.18, 0.074, 0.25, [[0.18, 0.010], [0.42, 0.008], [0.70, 0.010], [0.88, 0.0], [0.86, -0.016], [0.62, -0.018], [0.34, -0.012], [0.16, -0.004]]);"
+],
+"new": [
+"  const gripPanel = shapedGrip(-0.02, -0.08, 0.18, 0.074, 0.3, [[0.18, 0.010], [0.42, 0.008], [0.70, 0.010], [0.88, 0.0], [0.86, -0.016], [0.62, -0.018], [0.34, -0.012], [0.16, -0.004]]);"
+]
+},
+{
+"file": "studio/weapon-sidearms.js",
+"oldBlock": [
+"  const mag = K.group(0, -0.088, -0.0251);"
+],
+"new": [
+"  const mag = K.group(0, -0.0877, -0.0255);"
+]
+},
+{
+"file": "studio/weapon-sidearms.js",
+"oldBlock": [
+"  K.slab([[-0.010, 0.081], [0.010, 0.081], [0.010, -0.081], [-0.010, -0.081]], 0.028, magPoly, { bevel: 0.003, rx: 0.25, parent: mag });"
+],
+"new": [
+"  K.slab([[-0.010, 0.081], [0.010, 0.081], [0.010, -0.081], [-0.010, -0.081]], 0.028, magPoly, { bevel: 0.003, rx: 0.3, parent: mag });"
+]
+},
+{
+"file": "studio/weapon-sidearms.js",
+"oldBlock": [
+"  K.slab([[-0.014, -0.081], [0.012, -0.081], [0.014, -0.091], [-0.016, -0.093]], 0.034, magPoly, { bevel: 0.003, rx: 0.25, parent: mag });"
+],
+"new": [
+"  K.slab([[-0.014, -0.081], [0.012, -0.081], [0.014, -0.091], [-0.016, -0.093]], 0.034, magPoly, { bevel: 0.003, rx: 0.3, parent: mag });"
+]
+},
+{
+"file": "index.html",
+"oldBlock": [
+"        const shape = new THREE.Group(), tilt = w === 'uzi' ? 0.22 : w === 'pistol' ? 0.25 : 0;"
+],
+"new": [
+"        const shape = new THREE.Group(), tilt = w === 'uzi' ? 0.22 : w === 'pistol' ? 0.3 : 0;   // GB-179: the pistol grip's rake is 0.30 (17 deg)"
+]
+},
+{
+"file": "tools/tests/t242.js",
+"oldBlock": [
+"    const cz = -0.02, cy = -0.08, h = 0.18, d = 0.074, rake = 0.25, sr = Math.sin(rake), cr = Math.cos(rake), k = d / 0.08;"
+],
+"new": [
+"    const cz = -0.02, cy = -0.08, h = 0.18, d = 0.074, rake = 0.3, sr = Math.sin(rake), cr = Math.cos(rake), k = d / 0.08;   // GB-179: 17 deg"
+]
+},
+{
+"file": "tools/tests/t242.js",
+"oldBlock": [
+"      g.userData.mag.position.copy(g.userData.baseMagPos);"
+],
+"new": [
+"      g.userData.mag.position.copy(g.userData.baseMagPos);",
+"      if (g.userData.baseMagRot) g.userData.mag.rotation.copy(g.userData.baseMagRot);   // GB-179: a reload swing left over from startMatch tilted it (offline: in by 8.5 mm at rest)"
+]
+}
+]

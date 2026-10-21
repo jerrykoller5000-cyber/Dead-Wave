@@ -1,0 +1,52 @@
+{
+  "before": {
+    "walk": {
+      "armOpposition": -0.8644253445348384,
+      "armLegOpposition": -0.8665880777270467,
+      "flatFrames": 0,
+      "palmFwd": [
+        0.12015009281435596,
+        0.39593150666974
+      ],
+      "minPalmSide": 0.21810897041209334
+    },
+    "run": {
+      "armOpposition": -0.9630943576472056,
+      "armLegOpposition": -0.9726849435635263,
+      "flatFrames": 33,
+      "palmFwd": [
+        0.2348743276145342,
+        0.4444819771525772
+      ],
+      "minPalmSide": 0.15758900425572953
+    },
+    "transitionDelta": 0.4987874442350597
+  },
+  "after": {
+    "walk": {
+      "armOpposition": -0.9999999999999994,
+      "armLegOpposition": -0.8059152028863024,
+      "flatFrames": 0,
+      "palmFwd": [
+        -0.03753836412829514,
+        0.32211859041285607
+      ],
+      "minPalmSide": 0.2399495582560643
+    },
+    "run": {
+      "armOpposition": -1.0000000000000002,
+      "armLegOpposition": -0.9315998549111175,
+      "flatFrames": 0,
+      "palmFwd": [
+        -0.061218621104558224,
+        0.389655958961157
+      ],
+      "minPalmSide": 0.2809960058617575
+    },
+    "transitionDelta": 0.1530155286236058
+  },
+  "scope": {
+    "current": "856c980e734d89c3c6465f9329cda3cfc875f8194ba6328c1fe3b61369eb855d",
+    "onlyArmLayerChanged": true
+  }
+}

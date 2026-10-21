@@ -1,0 +1,22 @@
+{
+  "hash": "c7cd7dccb968edd2c26fa7f0310c3b7acdecb19097348966d5a9f6d37e0c0afb",
+  "changes": [
+    "import { BRUTE, stepBrute, bruteCanReach, restoreBrutePose, resetBrute, applyBrutePose }",
+    "from './game/brute-behavior.js'; // GP-19866",
+    "Brute plate construction only",
+    "if (ud.typeKey === 'brute') resetBrute({ typeKey: ud.typeKey, mesh });",
+    "      let dmg;\r\n      if (share != null)",
+    "const upperHit = militaryZone ? militaryZone === 'face' : hitFrac > 0.62;",
+    "(militaryZone ? militaryZone === 'face' : hitFrac > headLineOf(z))",
+    "        if (militaryZone && info.militaryPart) z.hitPart = info.militaryPart;",
+    "    const PART_KEYS =",
+    "if (bruteStep.started === 'wind') { z.attackCd=Math.max(z.attackCd,BRUTE.cooldown);",
+    "if (bruteStep.hit) damagePlayer(z.damage,'brute',z,null,bruteStep.victim);",
+    "dodging:v=>v === localPlayer && rollT > 0,",
+    "if (type === 'player' && bruteStep?.controlsAttack) return;",
+    "_pierceHits.push({ z, t, militaryHit });",
+    "z._militaryRound=militaryHit;",
+    "militaryPart:h.militaryHit?.part, defense:",
+    "militaryPart:hitZ._militaryRound?.part, defense:"
+  ]
+}

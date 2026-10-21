@@ -1,0 +1,15 @@
+{
+  "files": [
+    {
+      "path": "game/screamer-behavior.js",
+      "sha256": "e6fe252731af5825a9936fc02f3176ee05c21b5be91dc25ae65ca632fa35525e"
+    },
+    {
+      "path": "game/screamer-behavior.test.mjs",
+      "sha256": "d11ed95d95c9c645e5790a09f0f891ff2fae3d6ea02240a3d14ecb34af717584"
+    }
+  ],
+  "productionIndexEdited": false,
+  "appearanceEdited": false,
+  "audioEdited": false
+}

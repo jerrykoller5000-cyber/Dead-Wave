@@ -1,0 +1,82 @@
+{
+ "mortar": {
+  "mounted": true,
+  "mount": {
+   "jumpCm": 40.88,
+   "jumpJoint": "kneeR",
+   "jumpFrame": 1,
+   "popCm": 4.5
+  },
+  "fired": 1,
+  "round": "0:clearv 5:clear(hidden) 10:clear(hidden) 15:clear(hidden) 20:clear(hidden) 25:reach(hidden) 30:reach(hidden) 35:reach(hidden) 40:reach(hidden) 45:reach(hidden) 50:grab* 55:grab* 60:bring* 65:bring* 70:bring* 75:bring* 80:bring* 85:bring* 90:ready* 95:ready* 100:ready* 105:ready* 110:ready* 115:ready* 120:ready* 125:ready* 130:ready* 135:ready* 140:ready* 145:ready*",
+  "load": {
+   "jumpCm": 12.23,
+   "jumpJoint": "wristL",
+   "jumpFrame": 1,
+   "popCm": 8.01
+  },
+  "traverse": {
+   "ankleL": {
+    "maxSlipCm": 1.5,
+    "skateCm": 11.9,
+    "steps": 14,
+    "plantedFrames": 247,
+    "frames": 360
+   },
+   "ankleR": {
+    "maxSlipCm": 2.2,
+    "skateCm": 15.1,
+    "steps": 18,
+    "plantedFrames": 219,
+    "frames": 360
+   },
+   "outOfReachFrames": 0
+  },
+  "traverseYaw": [
+   -1.22,
+   1.22
+  ],
+  "dismount": {
+   "jumpCm": 20.79,
+   "jumpJoint": "ankleL",
+   "jumpFrame": 12,
+   "popCm": 5.06
+  }
+ },
+ "m240": {
+  "mounted": true,
+  "mount": {
+   "jumpCm": 21.83,
+   "jumpJoint": "ankleR",
+   "jumpFrame": 13,
+   "popCm": 3.23
+  },
+  "traverse": {
+   "ankleL": {
+    "maxSlipCm": 1,
+    "skateCm": 10,
+    "steps": 15,
+    "plantedFrames": 210,
+    "frames": 360
+   },
+   "ankleR": {
+    "maxSlipCm": 1.4,
+    "skateCm": 8.7,
+    "steps": 13,
+    "plantedFrames": 256,
+    "frames": 360
+   },
+   "outOfReachFrames": 0
+  },
+  "traverseYaw": [
+   -1.19,
+   1.19
+  ],
+  "dismount": {
+   "jumpCm": 38.72,
+   "jumpJoint": "ankleL",
+   "jumpFrame": 1,
+   "popCm": 17.88
+  }
+ }
+}

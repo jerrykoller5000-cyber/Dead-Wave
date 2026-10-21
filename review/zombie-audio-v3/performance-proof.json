@@ -1,0 +1,761 @@
+{
+  "startedAt": "2026-10-10T04:10:16.519Z",
+  "method": "Two fresh offscreen real-GPU Engine Training browsers, baseline v2 then revised v3; 1440x900, warm:none, browser resource cache disabled. Forty-eight stationary mixed-type bodies on the same build-room grid. Two seconds settling, 1.5 seconds of voice warm-up, then one four-second RAF sample per version. Same manually scheduled calls at 320 ms intervals and the actual zombie objects supplied as actor tokens.",
+  "limitations": "One brief sample per version is a regression probe, not a sustained 60 FPS certification. OS and GPU caches may favor the second run even though each browser is fresh. Engine load time includes title dismissal, entering Training and fixed waits; it is not a cold title-screen measurement. Gameplay AI attacks and incidental groans are suppressed only in this comparison fixture.",
+  "baselineHashes": {
+    "/core/audio.js": "103c57e7dff24708e05203fad0beb1cced6782c3a6c4e96daee5997c85ec03ad",
+    "/ui/zombie-audio.js": "e8ab51e2bea55c2099753b4b9c4884c3177933cd6a8b4bf2daf72c5d714fff08"
+  },
+  "productionHashesBefore": {
+    "core/audio.js": "83decda1cf1faded3a3b6243ad4f8887c76948f13fb39906bbfd1e8775fd0a8a",
+    "ui/zombie-audio.js": "c75082efb3038411e8b368db4eb2fe91cb274edeccfdfe70bc131e4d4ff113c1",
+    "ui/zombie-vocal-phrases.js": "2c2c2d97012a0aa63dd0f745d97d69b0b3a9c3a7fb5be2a16b4883223fc57847"
+  },
+  "runs": [
+    {
+      "version": "baseline-v2",
+      "engineTrainingLoadSeconds": 17.606,
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "headless": false,
+      "sample": {
+        "training": true,
+        "context": "running",
+        "bodies": 48,
+        "grid": [
+          {
+            "type": "shambler",
+            "x": -34,
+            "z": -640
+          },
+          {
+            "type": "feral",
+            "x": -32,
+            "z": -640
+          },
+          {
+            "type": "leaper",
+            "x": -30,
+            "z": -640
+          },
+          {
+            "type": "drowned",
+            "x": -28,
+            "z": -640
+          },
+          {
+            "type": "military",
+            "x": -26,
+            "z": -640
+          },
+          {
+            "type": "brute",
+            "x": -24,
+            "z": -640
+          },
+          {
+            "type": "spitter",
+            "x": -22,
+            "z": -640
+          },
+          {
+            "type": "screamer",
+            "x": -20,
+            "z": -640
+          },
+          {
+            "type": "bomber",
+            "x": -34,
+            "z": -638
+          },
+          {
+            "type": "spider",
+            "x": -32,
+            "z": -638
+          },
+          {
+            "type": "demon",
+            "x": -30,
+            "z": -638
+          },
+          {
+            "type": "colossus",
+            "x": -28,
+            "z": -638
+          },
+          {
+            "type": "guardian",
+            "x": -26,
+            "z": -638
+          },
+          {
+            "type": "caveguard",
+            "x": -24,
+            "z": -638
+          },
+          {
+            "type": "shambler",
+            "x": -22,
+            "z": -638
+          },
+          {
+            "type": "feral",
+            "x": -20,
+            "z": -638
+          },
+          {
+            "type": "leaper",
+            "x": -34,
+            "z": -636
+          },
+          {
+            "type": "drowned",
+            "x": -32,
+            "z": -636
+          },
+          {
+            "type": "military",
+            "x": -30,
+            "z": -636
+          },
+          {
+            "type": "brute",
+            "x": -28,
+            "z": -636
+          },
+          {
+            "type": "spitter",
+            "x": -26,
+            "z": -636
+          },
+          {
+            "type": "screamer",
+            "x": -24,
+            "z": -636
+          },
+          {
+            "type": "bomber",
+            "x": -22,
+            "z": -636
+          },
+          {
+            "type": "spider",
+            "x": -20,
+            "z": -636
+          },
+          {
+            "type": "demon",
+            "x": -34,
+            "z": -634
+          },
+          {
+            "type": "colossus",
+            "x": -32,
+            "z": -634
+          },
+          {
+            "type": "guardian",
+            "x": -30,
+            "z": -634
+          },
+          {
+            "type": "caveguard",
+            "x": -28,
+            "z": -634
+          },
+          {
+            "type": "shambler",
+            "x": -26,
+            "z": -634
+          },
+          {
+            "type": "feral",
+            "x": -24,
+            "z": -634
+          },
+          {
+            "type": "leaper",
+            "x": -22,
+            "z": -634
+          },
+          {
+            "type": "drowned",
+            "x": -20,
+            "z": -634
+          },
+          {
+            "type": "military",
+            "x": -34,
+            "z": -632
+          },
+          {
+            "type": "brute",
+            "x": -32,
+            "z": -632
+          },
+          {
+            "type": "spitter",
+            "x": -30,
+            "z": -632
+          },
+          {
+            "type": "screamer",
+            "x": -28,
+            "z": -632
+          },
+          {
+            "type": "bomber",
+            "x": -26,
+            "z": -632
+          },
+          {
+            "type": "spider",
+            "x": -24,
+            "z": -632
+          },
+          {
+            "type": "demon",
+            "x": -22,
+            "z": -632
+          },
+          {
+            "type": "colossus",
+            "x": -20,
+            "z": -632
+          },
+          {
+            "type": "guardian",
+            "x": -34,
+            "z": -630
+          },
+          {
+            "type": "caveguard",
+            "x": -32,
+            "z": -630
+          },
+          {
+            "type": "shambler",
+            "x": -30,
+            "z": -630
+          },
+          {
+            "type": "feral",
+            "x": -28,
+            "z": -630
+          },
+          {
+            "type": "leaper",
+            "x": -26,
+            "z": -630
+          },
+          {
+            "type": "drowned",
+            "x": -24,
+            "z": -630
+          },
+          {
+            "type": "military",
+            "x": -22,
+            "z": -630
+          },
+          {
+            "type": "brute",
+            "x": -20,
+            "z": -630
+          }
+        ],
+        "requestedCries": 13,
+        "actualCries": 13,
+        "events": {
+          "shambler:idle": 1,
+          "brute:chase": 1,
+          "demon:attack": 1,
+          "feral:idle": 1,
+          "spitter:chase": 1,
+          "colossus:attack": 1,
+          "leaper:idle": 1,
+          "screamer:chase": 1,
+          "guardian:attack": 1,
+          "drowned:idle": 1,
+          "bomber:chase": 1,
+          "caveguard:attack": 1,
+          "military:idle": 1
+        },
+        "warmEvents": {
+          "shambler:attack": 1,
+          "feral:attack": 1,
+          "brute:attack": 1,
+          "bomber:attack": 1,
+          "screamer:attack": 1
+        },
+        "attempts": [
+          {
+            "type": "shambler",
+            "state": "idle",
+            "scheduledMs": 100,
+            "actualMs": 117.89999999850988
+          },
+          {
+            "type": "brute",
+            "state": "chase",
+            "scheduledMs": 420,
+            "actualMs": 454.8999999985099
+          },
+          {
+            "type": "demon",
+            "state": "attack",
+            "scheduledMs": 740,
+            "actualMs": 760.8999999985099
+          },
+          {
+            "type": "feral",
+            "state": "idle",
+            "scheduledMs": 1060,
+            "actualMs": 1075.6999999955297
+          },
+          {
+            "type": "spitter",
+            "state": "chase",
+            "scheduledMs": 1380,
+            "actualMs": 1392.6999999955297
+          },
+          {
+            "type": "colossus",
+            "state": "attack",
+            "scheduledMs": 1700,
+            "actualMs": 1723.5999999940395
+          },
+          {
+            "type": "leaper",
+            "state": "idle",
+            "scheduledMs": 2020,
+            "actualMs": 2033.5999999940395
+          },
+          {
+            "type": "screamer",
+            "state": "chase",
+            "scheduledMs": 2340,
+            "actualMs": 2366.5999999940395
+          },
+          {
+            "type": "guardian",
+            "state": "attack",
+            "scheduledMs": 2660,
+            "actualMs": 2682.5999999940395
+          },
+          {
+            "type": "drowned",
+            "state": "idle",
+            "scheduledMs": 2980,
+            "actualMs": 2994.5
+          },
+          {
+            "type": "bomber",
+            "state": "chase",
+            "scheduledMs": 3300,
+            "actualMs": 3321.6999999955297
+          },
+          {
+            "type": "caveguard",
+            "state": "attack",
+            "scheduledMs": 3620,
+            "actualMs": 3650.6999999955297
+          },
+          {
+            "type": "military",
+            "state": "idle",
+            "scheduledMs": 3940,
+            "actualMs": 3969.39999999851
+          }
+        ],
+        "frames": 240,
+        "elapsedMs": 4004.6999999955297,
+        "fps": 59.929582740347065,
+        "medianFrameMs": 16.400000005960464,
+        "p95FrameMs": 18.5,
+        "maxFrameMs": 22.399999998509884
+      },
+      "fulfilledRoutes": [
+        "/core/audio.js",
+        "/ui/zombie-audio.js"
+      ],
+      "errors": [],
+      "fetchErrors": []
+    },
+    {
+      "version": "revised-v3",
+      "engineTrainingLoadSeconds": 13.438,
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "headless": false,
+      "sample": {
+        "training": true,
+        "context": "running",
+        "bodies": 48,
+        "grid": [
+          {
+            "type": "shambler",
+            "x": -34,
+            "z": -640
+          },
+          {
+            "type": "feral",
+            "x": -32,
+            "z": -640
+          },
+          {
+            "type": "leaper",
+            "x": -30,
+            "z": -640
+          },
+          {
+            "type": "drowned",
+            "x": -28,
+            "z": -640
+          },
+          {
+            "type": "military",
+            "x": -26,
+            "z": -640
+          },
+          {
+            "type": "brute",
+            "x": -24,
+            "z": -640
+          },
+          {
+            "type": "spitter",
+            "x": -22,
+            "z": -640
+          },
+          {
+            "type": "screamer",
+            "x": -20,
+            "z": -640
+          },
+          {
+            "type": "bomber",
+            "x": -34,
+            "z": -638
+          },
+          {
+            "type": "spider",
+            "x": -32,
+            "z": -638
+          },
+          {
+            "type": "demon",
+            "x": -30,
+            "z": -638
+          },
+          {
+            "type": "colossus",
+            "x": -28,
+            "z": -638
+          },
+          {
+            "type": "guardian",
+            "x": -26,
+            "z": -638
+          },
+          {
+            "type": "caveguard",
+            "x": -24,
+            "z": -638
+          },
+          {
+            "type": "shambler",
+            "x": -22,
+            "z": -638
+          },
+          {
+            "type": "feral",
+            "x": -20,
+            "z": -638
+          },
+          {
+            "type": "leaper",
+            "x": -34,
+            "z": -636
+          },
+          {
+            "type": "drowned",
+            "x": -32,
+            "z": -636
+          },
+          {
+            "type": "military",
+            "x": -30,
+            "z": -636
+          },
+          {
+            "type": "brute",
+            "x": -28,
+            "z": -636
+          },
+          {
+            "type": "spitter",
+            "x": -26,
+            "z": -636
+          },
+          {
+            "type": "screamer",
+            "x": -24,
+            "z": -636
+          },
+          {
+            "type": "bomber",
+            "x": -22,
+            "z": -636
+          },
+          {
+            "type": "spider",
+            "x": -20,
+            "z": -636
+          },
+          {
+            "type": "demon",
+            "x": -34,
+            "z": -634
+          },
+          {
+            "type": "colossus",
+            "x": -32,
+            "z": -634
+          },
+          {
+            "type": "guardian",
+            "x": -30,
+            "z": -634
+          },
+          {
+            "type": "caveguard",
+            "x": -28,
+            "z": -634
+          },
+          {
+            "type": "shambler",
+            "x": -26,
+            "z": -634
+          },
+          {
+            "type": "feral",
+            "x": -24,
+            "z": -634
+          },
+          {
+            "type": "leaper",
+            "x": -22,
+            "z": -634
+          },
+          {
+            "type": "drowned",
+            "x": -20,
+            "z": -634
+          },
+          {
+            "type": "military",
+            "x": -34,
+            "z": -632
+          },
+          {
+            "type": "brute",
+            "x": -32,
+            "z": -632
+          },
+          {
+            "type": "spitter",
+            "x": -30,
+            "z": -632
+          },
+          {
+            "type": "screamer",
+            "x": -28,
+            "z": -632
+          },
+          {
+            "type": "bomber",
+            "x": -26,
+            "z": -632
+          },
+          {
+            "type": "spider",
+            "x": -24,
+            "z": -632
+          },
+          {
+            "type": "demon",
+            "x": -22,
+            "z": -632
+          },
+          {
+            "type": "colossus",
+            "x": -20,
+            "z": -632
+          },
+          {
+            "type": "guardian",
+            "x": -34,
+            "z": -630
+          },
+          {
+            "type": "caveguard",
+            "x": -32,
+            "z": -630
+          },
+          {
+            "type": "shambler",
+            "x": -30,
+            "z": -630
+          },
+          {
+            "type": "feral",
+            "x": -28,
+            "z": -630
+          },
+          {
+            "type": "leaper",
+            "x": -26,
+            "z": -630
+          },
+          {
+            "type": "drowned",
+            "x": -24,
+            "z": -630
+          },
+          {
+            "type": "military",
+            "x": -22,
+            "z": -630
+          },
+          {
+            "type": "brute",
+            "x": -20,
+            "z": -630
+          }
+        ],
+        "requestedCries": 13,
+        "actualCries": 13,
+        "events": {
+          "shambler:idle": 1,
+          "brute:chase": 1,
+          "demon:attack": 1,
+          "feral:idle": 1,
+          "spitter:chase": 1,
+          "colossus:attack": 1,
+          "leaper:idle": 1,
+          "screamer:chase": 1,
+          "guardian:attack": 1,
+          "drowned:idle": 1,
+          "bomber:chase": 1,
+          "caveguard:attack": 1,
+          "military:idle": 1
+        },
+        "warmEvents": {
+          "shambler:attack": 1,
+          "feral:attack": 1,
+          "brute:attack": 1,
+          "bomber:attack": 1,
+          "screamer:attack": 1
+        },
+        "attempts": [
+          {
+            "type": "shambler",
+            "state": "idle",
+            "scheduledMs": 100,
+            "actualMs": 115.29999999701977
+          },
+          {
+            "type": "brute",
+            "state": "chase",
+            "scheduledMs": 420,
+            "actualMs": 444.79999999701977
+          },
+          {
+            "type": "demon",
+            "state": "attack",
+            "scheduledMs": 740,
+            "actualMs": 767.6000000014901
+          },
+          {
+            "type": "feral",
+            "state": "idle",
+            "scheduledMs": 1060,
+            "actualMs": 1089.5
+          },
+          {
+            "type": "spitter",
+            "state": "chase",
+            "scheduledMs": 1380,
+            "actualMs": 1403.2999999970198
+          },
+          {
+            "type": "colossus",
+            "state": "attack",
+            "scheduledMs": 1700,
+            "actualMs": 1726.2000000029802
+          },
+          {
+            "type": "leaper",
+            "state": "idle",
+            "scheduledMs": 2020,
+            "actualMs": 2039.7999999970198
+          },
+          {
+            "type": "screamer",
+            "state": "chase",
+            "scheduledMs": 2340,
+            "actualMs": 2372.60000000149
+          },
+          {
+            "type": "guardian",
+            "state": "attack",
+            "scheduledMs": 2660,
+            "actualMs": 2691.10000000149
+          },
+          {
+            "type": "drowned",
+            "state": "idle",
+            "scheduledMs": 2980,
+            "actualMs": 2995.5
+          },
+          {
+            "type": "bomber",
+            "state": "chase",
+            "scheduledMs": 3300,
+            "actualMs": 3325.2999999970198
+          },
+          {
+            "type": "caveguard",
+            "state": "attack",
+            "scheduledMs": 3620,
+            "actualMs": 3647.7000000029802
+          },
+          {
+            "type": "military",
+            "state": "idle",
+            "scheduledMs": 3940,
+            "actualMs": 3965.7000000029802
+          }
+        ],
+        "frames": 237,
+        "elapsedMs": 4001.89999999851,
+        "fps": 59.221869611956386,
+        "medianFrameMs": 16.600000001490116,
+        "p95FrameMs": 19.600000001490116,
+        "maxFrameMs": 21.80000000447035
+      },
+      "fulfilledRoutes": [],
+      "errors": [],
+      "fetchErrors": []
+    }
+  ],
+  "fpsRatio": 0.9881909218114042,
+  "fpsDifference": -0.7077131283906795,
+  "engineTrainingLoadDifferenceSeconds": -4.168000000000001,
+  "observedNoMaterialFrameRegression": true,
+  "productionHashesAfter": {
+    "core/audio.js": "83decda1cf1faded3a3b6243ad4f8887c76948f13fb39906bbfd1e8775fd0a8a",
+    "ui/zombie-audio.js": "c75082efb3038411e8b368db4eb2fe91cb274edeccfdfe70bc131e4d4ff113c1",
+    "ui/zombie-vocal-phrases.js": "2c2c2d97012a0aa63dd0f745d97d69b0b3a9c3a7fb5be2a16b4883223fc57847"
+  },
+  "completedAt": "2026-10-10T04:11:04.023Z"
+}

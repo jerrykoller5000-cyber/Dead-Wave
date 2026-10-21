@@ -1,0 +1,104 @@
+{
+  "checks": [
+    {
+      "pass": true,
+      "what": "full charge setting is 0.8 seconds"
+    },
+    {
+      "pass": true,
+      "what": "G starts charge"
+    },
+    {
+      "pass": true,
+      "what": "condition reached"
+    },
+    {
+      "pass": true,
+      "what": "condition reached"
+    },
+    {
+      "pass": true,
+      "what": "actual charge saturates within one-frame tolerance"
+    },
+    {
+      "pass": true,
+      "what": "full throw strength unchanged"
+    },
+    {
+      "pass": true,
+      "what": "holding longer remains capped"
+    },
+    {
+      "pass": true,
+      "what": "condition reached"
+    },
+    {
+      "pass": true,
+      "what": "released grenade uses full preview strength"
+    },
+    {
+      "pass": true,
+      "what": "release clears charge and preview"
+    },
+    {
+      "pass": true,
+      "what": "condition reached"
+    },
+    {
+      "pass": true,
+      "what": "condition reached"
+    },
+    {
+      "pass": true,
+      "what": "tap remains a short lob"
+    }
+  ],
+  "atEight": {
+    "t": 0.8,
+    "speed": {
+      "h": 17,
+      "vy": 7.5,
+      "k": 1
+    },
+    "hit": {
+      "x": -0.3309023920013186,
+      "y": -199.88,
+      "z": -624.4320225469489,
+      "t": 1.0769531250000002,
+      "kind": "ground"
+    }
+  },
+  "full": {
+    "elapsed": 0.8012000000029809,
+    "t": 0.8,
+    "speed": {
+      "h": 17,
+      "vy": 7.5,
+      "k": 1
+    },
+    "hit": {
+      "x": -0.3309023920013186,
+      "y": -199.88,
+      "z": -624.4320225469489,
+      "t": 1.0769531250000002,
+      "kind": "ground"
+    }
+  },
+  "thrown": {
+    "h": 17,
+    "vy": 7.5,
+    "charge": 0.8,
+    "releaseDelay": 0.09999999999999964
+  },
+  "cam": {
+    "x": 8,
+    "y": -188,
+    "z": -641,
+    "tx": 0,
+    "ty": -199,
+    "tz": -640,
+    "fov": 50
+  },
+  "loadSeconds": 12.484,
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+}

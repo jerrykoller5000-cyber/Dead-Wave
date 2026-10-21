@@ -1,0 +1,55 @@
+# Weapon sounds, take two (CL-135)
+
+Open `index.html` and click: grey is CL-134 (before), gold is now. Or play
+`weapon-sounds-2-reel.mp3`, which goes through the ones that changed most, each before then now:
+
+- 0:00.0  The wheel moving over three guns, then the change: before
+- 0:01.0  The wheel moving over three guns, then the change: now
+- 0:02.9  Pistol reload: before
+- 0:04.8  Pistol reload: now
+- 0:07.2  GW-4 Carbine reload: before
+- 0:09.3  GW-4 Carbine reload: now
+- 0:12.0  KR-7 Rifle reload: before
+- 0:14.5  KR-7 Rifle reload: now
+- 0:17.6  Breacher-12 (drum) reload: before
+- 0:20.8  Breacher-12 (drum) reload: now
+- 0:24.4  Sniper reload: before
+- 0:27.4  Sniper reload: now
+- 0:30.8  Rotary gun (box and belt) reload: before
+- 0:32.7  Rotary gun (box and belt) reload: now
+- 0:35.3  Flamethrower (valve, tank, igniter) reload: before
+- 0:38.2  Flamethrower (valve, tank, igniter) reload: now
+- 0:41.7  Shotgun (shells, then the pump) reload: before
+- 0:44.8  Shotgun (shells, then the pump) reload: now
+- 0:48.4  Revolver reload: before
+- 0:50.7  Revolver reload: now
+- 0:53.6  Launcher reload: before
+- 0:56.2  Launcher reload: now
+- 0:59.2  Dry fire (twice): before
+- 1:00.2  Dry fire (twice): now
+- 1:01.7  Shotgun pump: before
+- 1:02.8  Shotgun pump: now
+- 1:04.2  Spent cases landing: before
+- 1:05.4  Spent cases landing: now
+- 1:07.0  Bullets into rock: before
+- 1:08.7  Bullets into rock: now
+- 1:10.7  Bullets into metal: before
+- 1:12.7  Bullets into metal: now
+- 1:14.7  Bullets into wood: before
+- 1:16.2  Bullets into wood: now
+- 1:18.2  Pistol: burst: before
+- 1:21.9  Pistol: burst: now
+- 1:26.1  Wasp SMG: burst: before
+- 1:27.7  Wasp SMG: burst: now
+- 1:29.8  GW-4 Carbine: burst: before
+- 1:32.1  GW-4 Carbine: burst: now
+- 1:35.0  KR-7 Rifle: burst: before
+- 1:37.6  KR-7 Rifle: burst: now
+- 1:40.7  Watchman MG: burst: before
+- 1:43.5  Watchman MG: burst: now
+- 1:46.6  Breacher-12: burst: before
+- 1:50.0  Breacher-12: burst: now
+- 1:53.9  Revolver: one: before
+- 1:56.1  Revolver: one: now
+- 1:58.8  Sniper: a round and the bolt on the animation's beats: before
+- 2:02.0  Sniper: a round and the bolt on the animation's beats: now

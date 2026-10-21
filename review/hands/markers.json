@@ -1,0 +1,4 @@
+[
+  { "name": "markers-m4", "weapon": "m4", "settle": 3.0, "views": ["gripR-side", "gripR-under", "gripL-side", "gripL-under", "gripL-front"],
+    "eval": "const THREE = T.THREE, ud = T.getMarine().userData; const dot = (c, p, parent) => { const m = new THREE.Mesh(new THREE.SphereGeometry(0.006, 8, 6), new THREE.MeshBasicMaterial({ color: c, depthTest: false })); m.renderOrder = 999; m.position.set(...p); parent.add(m); }; dot(0xff2020, [-0.01, -0.26, 0.12], ud.elbowRG); dot(0x20ff40, [-0.01, -0.27, 0.08], ud.elbowRG); dot(0xff2020, [0.02, -0.27, 0.13], ud.elbowLG); dot(0x20ff40, [0.02, -0.275, 0.09], ud.elbowLG);" }
+]

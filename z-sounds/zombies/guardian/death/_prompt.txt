@@ -1,0 +1,9 @@
+#68 guardian-death
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 2.5 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A monstrous beast's dying shriek falling into a low, weak growl and a final breath. Close-up, dry. No words, no music.
+
+In the game: zombieVoice('guardian', 'death')

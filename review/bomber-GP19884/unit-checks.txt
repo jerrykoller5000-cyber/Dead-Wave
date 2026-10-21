@@ -1,0 +1,16 @@
+✔ starts as a slow stagger and builds pace rather than jumping to a sprint (1.6937ms)
+✔ momentum keeps moving during braking and takes several seconds to stop (1.0127ms)
+✔ a target behind cannot instantly flip facing or cancel forward momentum (0.3485ms)
+✔ behind-target jitter keeps the chosen turn instead of flipping shoulders (0.4177ms)
+✔ pace and turning agree at30,60and144Hz (0.9655ms)
+✔ spawn grace and disabled movement plant the feet; knocking down drops momentum (0.451ms)
+✔ amputation and other species retain the existing movement path (0.1411ms)
+✔ paused and malformed elapsed time cannot create runaway momentum (0.124ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 85.7585

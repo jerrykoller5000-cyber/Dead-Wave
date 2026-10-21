@@ -1,0 +1,23 @@
+<!doctype html><meta charset="utf-8"><title>GB-173 weapon close-up</title>
+<style>html,body{margin:0;background:#4a5060}</style>
+<script type="importmap">{"imports":{"three":"../../vendor/three/three.webgpu.js","three/webgpu":"../../vendor/three/three.webgpu.js","three/tsl":"../../vendor/three/three.tsl.js","three/addons/":"../../vendor/three/addons/"}}</script>
+<script type="module">
+// ?w=aa12&c=px,py,pz,tx,ty,tz,fov  (gun space: +z muzzle, +y up, +x the gun's left)
+import * as THREE from 'three';
+window.onerror = (m) => { window.ERR = String(m); };
+try {
+  const q = new URLSearchParams(location.search), w = q.get('w'), c = (q.get('c') || '0.6,0.1,0.4,0,0,0,30').split(',').map(Number);
+  const { weaponModelContext } = await import('../../tools/marine-inspector.js');
+  const L = await import('../../studio/weapon-longarms.js?' + Date.now()), S = await import('../../studio/weapon-sidearms.js?' + Date.now());
+  const make = { aa12: L.makeAa12Model, sniper: L.makeSniperModel, revolver: S.makeRevolverModel }[w];
+  const R = new THREE.WebGPURenderer({ antialias: true, forceWebGL: true }); R.setSize(innerWidth, innerHeight); document.body.appendChild(R.domElement); await R.init();
+  const Sc = new THREE.Scene(); Sc.background = new THREE.Color(0x4a5060);
+  Sc.add(new THREE.HemisphereLight(0xffffff, 0x334, 1.3)); const sun = new THREE.DirectionalLight(0xffffff, 2.4); sun.position.set(2, 3, 2.5); Sc.add(sun);
+  const back = new THREE.DirectionalLight(0xffffff, 0.8); back.position.set(-2, 1, -2); Sc.add(back);
+  const grid = new THREE.GridHelper(4, 40, 0x2a2e38, 0x2a2e38); grid.position.y = -0.45; Sc.add(grid);
+  const gun = make(weaponModelContext()); Sc.add(gun);
+  const C = new THREE.PerspectiveCamera(c[6], innerWidth / innerHeight, 0.005, 20); C.position.set(c[0], c[1], c[2]); C.lookAt(c[3], c[4], c[5]);
+  R.render(Sc, C); await new Promise((r) => setTimeout(r, 300)); R.render(Sc, C);
+} catch (e) { window.ERR = String(e && e.stack || e); }
+window.DONE = true;
+</script>

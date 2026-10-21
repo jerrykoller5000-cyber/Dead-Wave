@@ -1,0 +1,9 @@
+#108 build-attacks-wire-break
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 2 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A barbed wire fence snapping: wire pinging and whipping, posts falling. No voice, no music.
+
+In the game: buildBreak('wire')

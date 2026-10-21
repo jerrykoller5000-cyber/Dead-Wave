@@ -1,0 +1,76 @@
+{
+  "loadSec": 24.293,
+  "enabled": {
+    "samples": [
+      {
+        "fps": 53.16085588978421,
+        "worst": 39.10000000009313,
+        "hitches": 0
+      },
+      {
+        "fps": 55.806166581412086,
+        "worst": 23.799999999813735,
+        "hitches": 0
+      },
+      {
+        "fps": 56.02764030255413,
+        "worst": 22.700000000186265,
+        "hitches": 0
+      }
+    ],
+    "alive": 48,
+    "memory": {
+      "geometries": 4139,
+      "textures": 142
+    }
+  },
+  "bypassed": {
+    "samples": [
+      {
+        "fps": 56.59843410998465,
+        "worst": 23.799999999813735,
+        "hitches": 0
+      },
+      {
+        "fps": 56.769798467207934,
+        "worst": 22.399999999906868,
+        "hitches": 0
+      },
+      {
+        "fps": 58.4453535943972,
+        "worst": 21.899999999906868,
+        "hitches": 0
+      }
+    ],
+    "alive": 48,
+    "memory": {
+      "geometries": 4139,
+      "textures": 142
+    }
+  },
+  "restored": {
+    "samples": [
+      {
+        "fps": 58.476682422881225,
+        "worst": 21,
+        "hitches": 0
+      },
+      {
+        "fps": 58.62523816503272,
+        "worst": 21.300000000279397,
+        "hitches": 0
+      },
+      {
+        "fps": 58.24959953400057,
+        "worst": 21.59999999962747,
+        "hitches": 0
+      }
+    ],
+    "alive": 48,
+    "memory": {
+      "geometries": 4139,
+      "textures": 142
+    }
+  },
+  "errors": []
+}

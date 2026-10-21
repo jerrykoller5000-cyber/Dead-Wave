@@ -1,0 +1,1128 @@
+{
+  "ok": true,
+  "value": {
+    "checks": [
+      {
+        "pass": true,
+        "what": "close cursor has finite comfortable shot direction at 0.05"
+      },
+      {
+        "pass": true,
+        "what": "near aim stays beyond the muzzle at 0.05"
+      },
+      {
+        "pass": true,
+        "what": "close cursor has finite comfortable shot direction at 0.2"
+      },
+      {
+        "pass": true,
+        "what": "near aim stays beyond the muzzle at 0.2"
+      },
+      {
+        "pass": true,
+        "what": "close cursor has finite comfortable shot direction at 0.4"
+      },
+      {
+        "pass": true,
+        "what": "near aim stays beyond the muzzle at 0.4"
+      },
+      {
+        "pass": true,
+        "what": "close cursor has finite comfortable shot direction at 0.6"
+      },
+      {
+        "pass": true,
+        "what": "near aim stays beyond the muzzle at 0.6"
+      },
+      {
+        "pass": true,
+        "what": "close cursor has finite comfortable shot direction at 0.9"
+      },
+      {
+        "pass": true,
+        "what": "near aim stays beyond the muzzle at 0.9"
+      },
+      {
+        "pass": true,
+        "what": "close cursor has finite comfortable shot direction at 1.2"
+      },
+      {
+        "pass": true,
+        "what": "near aim stays beyond the muzzle at 1.2"
+      },
+      {
+        "pass": true,
+        "what": "close cursor has finite comfortable shot direction at 1.5"
+      },
+      {
+        "pass": true,
+        "what": "near aim stays beyond the muzzle at 1.5"
+      },
+      {
+        "pass": true,
+        "what": "cursor over torso detects the marine before the floor"
+      },
+      {
+        "pass": true,
+        "what": "cursor across own head does not flip facing"
+      },
+      {
+        "pass": true,
+        "what": "minigun cannot point back through marine at -0.2"
+      },
+      {
+        "pass": true,
+        "what": "minigun muzzle stays above floor at -0.2"
+      },
+      {
+        "pass": true,
+        "what": "minigun firing hand remains attached at -0.2 (0.0000)"
+      },
+      {
+        "pass": true,
+        "what": "minigun cannot point back through marine at 0"
+      },
+      {
+        "pass": true,
+        "what": "minigun muzzle stays above floor at 0"
+      },
+      {
+        "pass": true,
+        "what": "minigun firing hand remains attached at 0 (0.0000)"
+      },
+      {
+        "pass": true,
+        "what": "minigun cannot point back through marine at 0.3"
+      },
+      {
+        "pass": true,
+        "what": "minigun muzzle stays above floor at 0.3"
+      },
+      {
+        "pass": true,
+        "what": "minigun firing hand remains attached at 0.3 (0.0000)"
+      },
+      {
+        "pass": true,
+        "what": "minigun cannot point back through marine at 1.2"
+      },
+      {
+        "pass": true,
+        "what": "minigun muzzle stays above floor at 1.2"
+      },
+      {
+        "pass": true,
+        "what": "minigun firing hand remains attached at 1.2 (0.0000)"
+      },
+      {
+        "pass": true,
+        "what": "m4 cannot point back through marine at -0.2"
+      },
+      {
+        "pass": true,
+        "what": "m4 muzzle stays above floor at -0.2"
+      },
+      {
+        "pass": true,
+        "what": "m4 firing hand remains attached at -0.2 (0.0003)"
+      },
+      {
+        "pass": true,
+        "what": "m4 cannot point back through marine at 0"
+      },
+      {
+        "pass": true,
+        "what": "m4 muzzle stays above floor at 0"
+      },
+      {
+        "pass": true,
+        "what": "m4 firing hand remains attached at 0 (0.0003)"
+      },
+      {
+        "pass": true,
+        "what": "m4 cannot point back through marine at 0.3"
+      },
+      {
+        "pass": true,
+        "what": "m4 muzzle stays above floor at 0.3"
+      },
+      {
+        "pass": true,
+        "what": "m4 firing hand remains attached at 0.3 (0.0003)"
+      },
+      {
+        "pass": true,
+        "what": "m4 cannot point back through marine at 1.2"
+      },
+      {
+        "pass": true,
+        "what": "m4 muzzle stays above floor at 1.2"
+      },
+      {
+        "pass": true,
+        "what": "m4 firing hand remains attached at 1.2 (0.0003)"
+      },
+      {
+        "pass": true,
+        "what": "ak cannot point back through marine at -0.2"
+      },
+      {
+        "pass": true,
+        "what": "ak muzzle stays above floor at -0.2"
+      },
+      {
+        "pass": true,
+        "what": "ak firing hand remains attached at -0.2 (0.0003)"
+      },
+      {
+        "pass": true,
+        "what": "ak cannot point back through marine at 0"
+      },
+      {
+        "pass": true,
+        "what": "ak muzzle stays above floor at 0"
+      },
+      {
+        "pass": true,
+        "what": "ak firing hand remains attached at 0 (0.0003)"
+      },
+      {
+        "pass": true,
+        "what": "ak cannot point back through marine at 0.3"
+      },
+      {
+        "pass": true,
+        "what": "ak muzzle stays above floor at 0.3"
+      },
+      {
+        "pass": true,
+        "what": "ak firing hand remains attached at 0.3 (0.0003)"
+      },
+      {
+        "pass": true,
+        "what": "ak cannot point back through marine at 1.2"
+      },
+      {
+        "pass": true,
+        "what": "ak muzzle stays above floor at 1.2"
+      },
+      {
+        "pass": true,
+        "what": "ak firing hand remains attached at 1.2 (0.0003)"
+      },
+      {
+        "pass": true,
+        "what": "pistol cannot point back through marine at -0.2"
+      },
+      {
+        "pass": true,
+        "what": "pistol muzzle stays above floor at -0.2"
+      },
+      {
+        "pass": true,
+        "what": "pistol firing hand remains attached at -0.2 (0.0003)"
+      },
+      {
+        "pass": true,
+        "what": "pistol cannot point back through marine at 0"
+      },
+      {
+        "pass": true,
+        "what": "pistol muzzle stays above floor at 0"
+      },
+      {
+        "pass": true,
+        "what": "pistol firing hand remains attached at 0 (0.0003)"
+      },
+      {
+        "pass": true,
+        "what": "pistol cannot point back through marine at 0.3"
+      },
+      {
+        "pass": true,
+        "what": "pistol muzzle stays above floor at 0.3"
+      },
+      {
+        "pass": true,
+        "what": "pistol firing hand remains attached at 0.3 (0.0003)"
+      },
+      {
+        "pass": true,
+        "what": "pistol cannot point back through marine at 1.2"
+      },
+      {
+        "pass": true,
+        "what": "pistol muzzle stays above floor at 1.2"
+      },
+      {
+        "pass": true,
+        "what": "pistol firing hand remains attached at 1.2 (0.0003)"
+      },
+      {
+        "pass": true,
+        "what": "uzi cannot point back through marine at -0.2"
+      },
+      {
+        "pass": true,
+        "what": "uzi muzzle stays above floor at -0.2"
+      },
+      {
+        "pass": true,
+        "what": "uzi firing hand remains attached at -0.2 (0.0002)"
+      },
+      {
+        "pass": true,
+        "what": "uzi cannot point back through marine at 0"
+      },
+      {
+        "pass": true,
+        "what": "uzi muzzle stays above floor at 0"
+      },
+      {
+        "pass": true,
+        "what": "uzi firing hand remains attached at 0 (0.0002)"
+      },
+      {
+        "pass": true,
+        "what": "uzi cannot point back through marine at 0.3"
+      },
+      {
+        "pass": true,
+        "what": "uzi muzzle stays above floor at 0.3"
+      },
+      {
+        "pass": true,
+        "what": "uzi firing hand remains attached at 0.3 (0.0002)"
+      },
+      {
+        "pass": true,
+        "what": "uzi cannot point back through marine at 1.2"
+      },
+      {
+        "pass": true,
+        "what": "uzi muzzle stays above floor at 1.2"
+      },
+      {
+        "pass": true,
+        "what": "uzi firing hand remains attached at 1.2 (0.0001)"
+      },
+      {
+        "pass": true,
+        "what": "shotgun cannot point back through marine at -0.2"
+      },
+      {
+        "pass": true,
+        "what": "shotgun muzzle stays above floor at -0.2"
+      },
+      {
+        "pass": true,
+        "what": "shotgun firing hand remains attached at -0.2 (0.0003)"
+      },
+      {
+        "pass": true,
+        "what": "shotgun cannot point back through marine at 0"
+      },
+      {
+        "pass": true,
+        "what": "shotgun muzzle stays above floor at 0"
+      },
+      {
+        "pass": true,
+        "what": "shotgun firing hand remains attached at 0 (0.0003)"
+      },
+      {
+        "pass": true,
+        "what": "shotgun cannot point back through marine at 0.3"
+      },
+      {
+        "pass": true,
+        "what": "shotgun muzzle stays above floor at 0.3"
+      },
+      {
+        "pass": true,
+        "what": "shotgun firing hand remains attached at 0.3 (0.0003)"
+      },
+      {
+        "pass": true,
+        "what": "shotgun cannot point back through marine at 1.2"
+      },
+      {
+        "pass": true,
+        "what": "shotgun muzzle stays above floor at 1.2"
+      },
+      {
+        "pass": true,
+        "what": "shotgun firing hand remains attached at 1.2 (0.0002)"
+      },
+      {
+        "pass": true,
+        "what": "aa12 cannot point back through marine at -0.2"
+      },
+      {
+        "pass": true,
+        "what": "aa12 muzzle stays above floor at -0.2"
+      },
+      {
+        "pass": true,
+        "what": "aa12 firing hand remains attached at -0.2 (0.0003)"
+      },
+      {
+        "pass": true,
+        "what": "aa12 cannot point back through marine at 0"
+      },
+      {
+        "pass": true,
+        "what": "aa12 muzzle stays above floor at 0"
+      },
+      {
+        "pass": true,
+        "what": "aa12 firing hand remains attached at 0 (0.0003)"
+      },
+      {
+        "pass": true,
+        "what": "aa12 cannot point back through marine at 0.3"
+      },
+      {
+        "pass": true,
+        "what": "aa12 muzzle stays above floor at 0.3"
+      },
+      {
+        "pass": true,
+        "what": "aa12 firing hand remains attached at 0.3 (0.0003)"
+      },
+      {
+        "pass": true,
+        "what": "aa12 cannot point back through marine at 1.2"
+      },
+      {
+        "pass": true,
+        "what": "aa12 muzzle stays above floor at 1.2"
+      },
+      {
+        "pass": true,
+        "what": "aa12 firing hand remains attached at 1.2 (0.0003)"
+      },
+      {
+        "pass": true,
+        "what": "revolver cannot point back through marine at -0.2"
+      },
+      {
+        "pass": true,
+        "what": "revolver muzzle stays above floor at -0.2"
+      },
+      {
+        "pass": true,
+        "what": "revolver firing hand remains attached at -0.2 (0.0003)"
+      },
+      {
+        "pass": true,
+        "what": "revolver cannot point back through marine at 0"
+      },
+      {
+        "pass": true,
+        "what": "revolver muzzle stays above floor at 0"
+      },
+      {
+        "pass": true,
+        "what": "revolver firing hand remains attached at 0 (0.0003)"
+      },
+      {
+        "pass": true,
+        "what": "revolver cannot point back through marine at 0.3"
+      },
+      {
+        "pass": true,
+        "what": "revolver muzzle stays above floor at 0.3"
+      },
+      {
+        "pass": true,
+        "what": "revolver firing hand remains attached at 0.3 (0.0003)"
+      },
+      {
+        "pass": true,
+        "what": "revolver cannot point back through marine at 1.2"
+      },
+      {
+        "pass": true,
+        "what": "revolver muzzle stays above floor at 1.2"
+      },
+      {
+        "pass": true,
+        "what": "revolver firing hand remains attached at 1.2 (0.0003)"
+      },
+      {
+        "pass": true,
+        "what": "sniper cannot point back through marine at -0.2"
+      },
+      {
+        "pass": true,
+        "what": "sniper muzzle stays above floor at -0.2"
+      },
+      {
+        "pass": true,
+        "what": "sniper firing hand remains attached at -0.2 (0.0002)"
+      },
+      {
+        "pass": true,
+        "what": "sniper cannot point back through marine at 0"
+      },
+      {
+        "pass": true,
+        "what": "sniper muzzle stays above floor at 0"
+      },
+      {
+        "pass": true,
+        "what": "sniper firing hand remains attached at 0 (0.0002)"
+      },
+      {
+        "pass": true,
+        "what": "sniper cannot point back through marine at 0.3"
+      },
+      {
+        "pass": true,
+        "what": "sniper muzzle stays above floor at 0.3"
+      },
+      {
+        "pass": true,
+        "what": "sniper firing hand remains attached at 0.3 (0.0002)"
+      },
+      {
+        "pass": true,
+        "what": "sniper cannot point back through marine at 1.2"
+      },
+      {
+        "pass": true,
+        "what": "sniper muzzle stays above floor at 1.2"
+      },
+      {
+        "pass": true,
+        "what": "sniper firing hand remains attached at 1.2 (0.0002)"
+      },
+      {
+        "pass": true,
+        "what": "launcher cannot point back through marine at -0.2"
+      },
+      {
+        "pass": true,
+        "what": "launcher muzzle stays above floor at -0.2"
+      },
+      {
+        "pass": true,
+        "what": "launcher firing hand remains attached at -0.2 (0.0003)"
+      },
+      {
+        "pass": true,
+        "what": "launcher cannot point back through marine at 0"
+      },
+      {
+        "pass": true,
+        "what": "launcher muzzle stays above floor at 0"
+      },
+      {
+        "pass": true,
+        "what": "launcher firing hand remains attached at 0 (0.0003)"
+      },
+      {
+        "pass": true,
+        "what": "launcher cannot point back through marine at 0.3"
+      },
+      {
+        "pass": true,
+        "what": "launcher muzzle stays above floor at 0.3"
+      },
+      {
+        "pass": true,
+        "what": "launcher firing hand remains attached at 0.3 (0.0003)"
+      },
+      {
+        "pass": true,
+        "what": "launcher cannot point back through marine at 1.2"
+      },
+      {
+        "pass": true,
+        "what": "launcher muzzle stays above floor at 1.2"
+      },
+      {
+        "pass": true,
+        "what": "launcher firing hand remains attached at 1.2 (0.0003)"
+      },
+      {
+        "pass": true,
+        "what": "flamer cannot point back through marine at -0.2"
+      },
+      {
+        "pass": true,
+        "what": "flamer muzzle stays above floor at -0.2"
+      },
+      {
+        "pass": true,
+        "what": "flamer firing hand remains attached at -0.2 (0.0002)"
+      },
+      {
+        "pass": true,
+        "what": "flamer cannot point back through marine at 0"
+      },
+      {
+        "pass": true,
+        "what": "flamer muzzle stays above floor at 0"
+      },
+      {
+        "pass": true,
+        "what": "flamer firing hand remains attached at 0 (0.0002)"
+      },
+      {
+        "pass": true,
+        "what": "flamer cannot point back through marine at 0.3"
+      },
+      {
+        "pass": true,
+        "what": "flamer muzzle stays above floor at 0.3"
+      },
+      {
+        "pass": true,
+        "what": "flamer firing hand remains attached at 0.3 (0.0002)"
+      },
+      {
+        "pass": true,
+        "what": "flamer cannot point back through marine at 1.2"
+      },
+      {
+        "pass": true,
+        "what": "flamer muzzle stays above floor at 1.2"
+      },
+      {
+        "pass": true,
+        "what": "flamer firing hand remains attached at 1.2 (0.0002)"
+      },
+      {
+        "pass": true,
+        "what": "chainsaw cannot point back through marine at -0.2"
+      },
+      {
+        "pass": true,
+        "what": "chainsaw muzzle stays above floor at -0.2"
+      },
+      {
+        "pass": true,
+        "what": "chainsaw firing hand remains attached at -0.2 (0.0005)"
+      },
+      {
+        "pass": true,
+        "what": "chainsaw cannot point back through marine at 0"
+      },
+      {
+        "pass": true,
+        "what": "chainsaw muzzle stays above floor at 0"
+      },
+      {
+        "pass": true,
+        "what": "chainsaw firing hand remains attached at 0 (0.0005)"
+      },
+      {
+        "pass": true,
+        "what": "chainsaw cannot point back through marine at 0.3"
+      },
+      {
+        "pass": true,
+        "what": "chainsaw muzzle stays above floor at 0.3"
+      },
+      {
+        "pass": true,
+        "what": "chainsaw firing hand remains attached at 0.3 (0.0005)"
+      },
+      {
+        "pass": true,
+        "what": "chainsaw cannot point back through marine at 1.2"
+      },
+      {
+        "pass": true,
+        "what": "chainsaw muzzle stays above floor at 1.2"
+      },
+      {
+        "pass": true,
+        "what": "chainsaw firing hand remains attached at 1.2 (0.0004)"
+      },
+      {
+        "pass": true,
+        "what": "ordinary distant aim is unchanged"
+      },
+      {
+        "pass": true,
+        "what": "scoped sight line is exact"
+      },
+      {
+        "pass": true,
+        "what": "zero runtime errors"
+      }
+    ],
+    "matrix": [
+      {
+        "weapon": "minigun",
+        "d": -0.2,
+        "forward": 0.9921125924623518,
+        "muzzleY": 0.6754158318656778,
+        "handError": 1.2388052197178104e-13
+      },
+      {
+        "weapon": "minigun",
+        "d": 0,
+        "forward": 0.992136364833653,
+        "muzzleY": 0.6755064913530475,
+        "handError": 1.2783424183565e-13
+      },
+      {
+        "weapon": "minigun",
+        "d": 0.3,
+        "forward": 0.9921400952145983,
+        "muzzleY": 0.675516543804207,
+        "handError": 1.4322093251330558e-13
+      },
+      {
+        "weapon": "minigun",
+        "d": 1.2,
+        "forward": 0.9976159708296615,
+        "muzzleY": 0.5595971286675763,
+        "handError": 4.586633014830595e-14
+      },
+      {
+        "weapon": "m4",
+        "d": -0.2,
+        "forward": 0.9932967044775152,
+        "muzzleY": 0.9862914305978165,
+        "handError": 0.0002801706329424577
+      },
+      {
+        "weapon": "m4",
+        "d": 0,
+        "forward": 0.993303330225625,
+        "muzzleY": 0.9859269079803425,
+        "handError": 0.000280170945159968
+      },
+      {
+        "weapon": "m4",
+        "d": 0.3,
+        "forward": 0.9933090462145274,
+        "muzzleY": 0.9856538782321707,
+        "handError": 0.00028012294816828016
+      },
+      {
+        "weapon": "m4",
+        "d": 1.2,
+        "forward": 0.9875692074272929,
+        "muzzleY": 0.8920696265925585,
+        "handError": 0.00027749180596445136
+      },
+      {
+        "weapon": "ak",
+        "d": -0.2,
+        "forward": 0.9933115678798354,
+        "muzzleY": 1.020222155266083,
+        "handError": 0.00027660048119812497
+      },
+      {
+        "weapon": "ak",
+        "d": 0,
+        "forward": 0.9933094375019819,
+        "muzzleY": 1.0207516577948752,
+        "handError": 0.0002759946488289061
+      },
+      {
+        "weapon": "ak",
+        "d": 0.3,
+        "forward": 0.9933145514567052,
+        "muzzleY": 1.0208618006660117,
+        "handError": 0.00027541550252500175
+      },
+      {
+        "weapon": "ak",
+        "d": 1.2,
+        "forward": 0.9873324201698493,
+        "muzzleY": 0.9211025889041196,
+        "handError": 0.00026592227260619064
+      },
+      {
+        "weapon": "pistol",
+        "d": -0.2,
+        "forward": 0.9994983779028829,
+        "muzzleY": 1.0187478377893342,
+        "handError": 0.0002940318602657608
+      },
+      {
+        "weapon": "pistol",
+        "d": 0,
+        "forward": 0.999473816783748,
+        "muzzleY": 1.0136690381789606,
+        "handError": 0.00029425106490235317
+      },
+      {
+        "weapon": "pistol",
+        "d": 0.3,
+        "forward": 0.9993938323324364,
+        "muzzleY": 1.0071275478418613,
+        "handError": 0.0002945685220728415
+      },
+      {
+        "weapon": "pistol",
+        "d": 1.2,
+        "forward": 0.9921467421684999,
+        "muzzleY": 0.9544808159907916,
+        "handError": 0.00028637852106284413
+      },
+      {
+        "weapon": "uzi",
+        "d": -0.2,
+        "forward": 0.9996676151329517,
+        "muzzleY": 0.931646671799939,
+        "handError": 0.00015281901114076336
+      },
+      {
+        "weapon": "uzi",
+        "d": 0,
+        "forward": 0.9996708496550293,
+        "muzzleY": 0.9315547281469776,
+        "handError": 0.00015297540340907068
+      },
+      {
+        "weapon": "uzi",
+        "d": 0.3,
+        "forward": 0.999673852130832,
+        "muzzleY": 0.9319260647339149,
+        "handError": 0.00015323228983864443
+      },
+      {
+        "weapon": "uzi",
+        "d": 1.2,
+        "forward": 0.9953746894871015,
+        "muzzleY": 0.8882506218286892,
+        "handError": 0.0001492010178124625
+      },
+      {
+        "weapon": "shotgun",
+        "d": -0.2,
+        "forward": 0.9926155346168388,
+        "muzzleY": 0.9805395629843758,
+        "handError": 0.0002513648848358712
+      },
+      {
+        "weapon": "shotgun",
+        "d": 0,
+        "forward": 0.9923666752660375,
+        "muzzleY": 0.975445213486978,
+        "handError": 0.000251212899660933
+      },
+      {
+        "weapon": "shotgun",
+        "d": 0.3,
+        "forward": 0.9920780411699549,
+        "muzzleY": 0.9700571346562583,
+        "handError": 0.00025111382990703266
+      },
+      {
+        "weapon": "shotgun",
+        "d": 1.2,
+        "forward": 0.9825342294649314,
+        "muzzleY": 0.860104743206989,
+        "handError": 0.00024549681659127355
+      },
+      {
+        "weapon": "aa12",
+        "d": -0.2,
+        "forward": 0.9891318814337011,
+        "muzzleY": 0.9144581686267372,
+        "handError": 0.0002637316831299959
+      },
+      {
+        "weapon": "aa12",
+        "d": 0,
+        "forward": 0.9887439067962324,
+        "muzzleY": 0.9101648899533643,
+        "handError": 0.00026391094470837464
+      },
+      {
+        "weapon": "aa12",
+        "d": 0.3,
+        "forward": 0.9884112420449706,
+        "muzzleY": 0.9064498177991993,
+        "handError": 0.0002640831459885733
+      },
+      {
+        "weapon": "aa12",
+        "d": 1.2,
+        "forward": 0.9753810338182912,
+        "muzzleY": 0.8089461115895062,
+        "handError": 0.00026524920194967997
+      },
+      {
+        "weapon": "revolver",
+        "d": -0.2,
+        "forward": 0.9985044355796651,
+        "muzzleY": 0.9889596444114375,
+        "handError": 0.00029497338856017316
+      },
+      {
+        "weapon": "revolver",
+        "d": 0,
+        "forward": 0.9984770513728651,
+        "muzzleY": 0.9907670156884762,
+        "handError": 0.00029464889840890207
+      },
+      {
+        "weapon": "revolver",
+        "d": 0.3,
+        "forward": 0.9984472781394682,
+        "muzzleY": 0.9928462373781599,
+        "handError": 0.00029419036490734127
+      },
+      {
+        "weapon": "revolver",
+        "d": 1.2,
+        "forward": 0.9892849425471661,
+        "muzzleY": 0.939671843661614,
+        "handError": 0.00028423523964301906
+      },
+      {
+        "weapon": "sniper",
+        "d": -0.2,
+        "forward": 0.9989711553015778,
+        "muzzleY": 0.9729578858881496,
+        "handError": 0.00020979123035933629
+      },
+      {
+        "weapon": "sniper",
+        "d": 0,
+        "forward": 0.99920329820225,
+        "muzzleY": 0.9787617951939751,
+        "handError": 0.00020989261146312445
+      },
+      {
+        "weapon": "sniper",
+        "d": 0.3,
+        "forward": 0.9994017879834405,
+        "muzzleY": 0.9844426172689111,
+        "handError": 0.00021002974168478778
+      },
+      {
+        "weapon": "sniper",
+        "d": 1.2,
+        "forward": 0.9144017535834479,
+        "muzzleY": 0.6186332167044384,
+        "handError": 0.000215555753050687
+      },
+      {
+        "weapon": "launcher",
+        "d": -0.2,
+        "forward": 0.9930359697248635,
+        "muzzleY": 0.9775210728553247,
+        "handError": 0.00031062942618761513
+      },
+      {
+        "weapon": "launcher",
+        "d": 0,
+        "forward": 0.9931092788535268,
+        "muzzleY": 0.9783986135258829,
+        "handError": 0.0003107157405756494
+      },
+      {
+        "weapon": "launcher",
+        "d": 0.3,
+        "forward": 0.9931495630430275,
+        "muzzleY": 0.9789650830475978,
+        "handError": 0.000310745197063828
+      },
+      {
+        "weapon": "launcher",
+        "d": 1.2,
+        "forward": 0.9866028636498091,
+        "muzzleY": 0.9027804628266836,
+        "handError": 0.0003085433732518588
+      },
+      {
+        "weapon": "flamer",
+        "d": -0.2,
+        "forward": 0.9965053378601681,
+        "muzzleY": 0.9354084366103166,
+        "handError": 0.00017311187150673076
+      },
+      {
+        "weapon": "flamer",
+        "d": 0,
+        "forward": 0.9966568093167055,
+        "muzzleY": 0.9331912697036557,
+        "handError": 0.00017426807799868072
+      },
+      {
+        "weapon": "flamer",
+        "d": 0.3,
+        "forward": 0.9968040814669548,
+        "muzzleY": 0.9305950595231423,
+        "handError": 0.00017513883524349514
+      },
+      {
+        "weapon": "flamer",
+        "d": 1.2,
+        "forward": 0.9962211008413442,
+        "muzzleY": 0.8512966661911889,
+        "handError": 0.00020712402290717143
+      },
+      {
+        "weapon": "chainsaw",
+        "d": -0.2,
+        "forward": 0.990535877456955,
+        "muzzleY": 0.6825590616772388,
+        "handError": 0.000515105052919485
+      },
+      {
+        "weapon": "chainsaw",
+        "d": 0,
+        "forward": 0.990094412269838,
+        "muzzleY": 0.6800438938907405,
+        "handError": 0.0005064154007132956
+      },
+      {
+        "weapon": "chainsaw",
+        "d": 0.3,
+        "forward": 0.9896917880409876,
+        "muzzleY": 0.6770171143354276,
+        "handError": 0.0004979342497519815
+      },
+      {
+        "weapon": "chainsaw",
+        "d": 1.2,
+        "forward": 0.9893246646555149,
+        "muzzleY": 0.6618930770041516,
+        "handError": 0.00037226301147649907
+      }
+    ],
+    "samples": [
+      {
+        "d": 0.05,
+        "raw": {
+          "x": 0.2133891838971893,
+          "y": -200,
+          "z": -642.3940026263996
+        },
+        "point": {
+          "x": 0,
+          "y": -199.05,
+          "z": -640.75
+        },
+        "dir": {
+          "x": -0.11478846692567493,
+          "y": -0.057754507384769595,
+          "z": 0.9917096473956457
+        }
+      },
+      {
+        "d": 0.2,
+        "raw": {
+          "x": 0.2108209311878224,
+          "y": -200,
+          "z": -642.1839343899741
+        },
+        "point": {
+          "x": 0.5627845380249847,
+          "y": -199.06047107900534,
+          "z": -640.8215203549814
+        },
+        "dir": {
+          "x": 0.13706730657651114,
+          "y": -0.06189699769920218,
+          "z": 0.9886259733305035
+        }
+      },
+      {
+        "d": 0.4,
+        "raw": {
+          "x": 0.20742631287172086,
+          "y": -200,
+          "z": -641.9062742202879
+        },
+        "point": {
+          "x": 0.4192420557499526,
+          "y": -199.19013399282233,
+          "z": -640.7894036780338
+        },
+        "dir": {
+          "x": 0.07148974136740589,
+          "y": -0.11741428871293139,
+          "z": 0.9905064874523829
+        }
+      },
+      {
+        "d": 0.6,
+        "raw": {
+          "x": 0.20406519778926002,
+          "y": -200,
+          "z": -641.6313544216604
+        },
+        "point": {
+          "x": 0.3318073286638904,
+          "y": -199.4154701244428,
+          "z": -640.774600283849
+        },
+        "dir": {
+          "x": 0.031897867342694536,
+          "y": -0.21102933543644345,
+          "z": 0.9769591320235667
+        }
+      },
+      {
+        "d": 0.9,
+        "raw": {
+          "x": 0.19908526672342752,
+          "y": -200,
+          "z": -641.2240248264166
+        },
+        "point": {
+          "x": 0.2506530726057514,
+          "y": -199.78442186625844,
+          "z": -640.7640051348017
+        },
+        "dir": {
+          "x": -0.0034815239445372295,
+          "y": -0.35141922041171353,
+          "z": 0.9362117338061124
+        }
+      },
+      {
+        "d": 1.2,
+        "raw": {
+          "x": 0.1941779843982787,
+          "y": -200,
+          "z": -640.8226374785262
+        },
+        "point": {
+          "x": 0.19986262773687302,
+          "y": -199.99495990141952,
+          "z": -640.7588942617461
+        },
+        "dir": {
+          "x": -0.02386542850280105,
+          "y": -0.4227028043181384,
+          "z": 0.9059540719837619
+        }
+      },
+      {
+        "d": 1.5,
+        "raw": {
+          "x": 0.1893417725929405,
+          "y": -200,
+          "z": -640.4270632886424
+        },
+        "point": {
+          "x": 0.1893417725929405,
+          "y": -200,
+          "z": -640.4270632886424
+        },
+        "dir": {
+          "x": -0.02524707112693092,
+          "y": -0.37492450823865986,
+          "z": 0.9267114969188149
+        }
+      }
+    ],
+    "errors": []
+  },
+  "loadSeconds": 14.762,
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+}

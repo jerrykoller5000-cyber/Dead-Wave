@@ -1,0 +1,150 @@
+{
+  "combat": {
+    "alive": 1,
+    "release": {
+      "active": false,
+      "amount": 0,
+      "flashing": false,
+      "lit": false
+    },
+    "audio": {
+      "enabled": true,
+      "loopSeconds": 24,
+      "active": true,
+      "looping": true,
+      "cues": {
+        "enter": 4.661333333333333,
+        "clear": 12.24,
+        "spawn": 17.912
+      },
+      "musicGain": 0.09600000083446503,
+      "introGain": 0.30000001192092896,
+      "door": {
+        "ready": true,
+        "seconds": 0.5973333333333334,
+        "plays": 1,
+        "active": 0
+      },
+      "encounters": {
+        "selected": "demon",
+        "tracks": {
+          "demon": {
+            "wanted": true,
+            "playing": true,
+            "looping": true,
+            "fading": false,
+            "ready": true,
+            "seconds": 125.6,
+            "error": null
+          }
+        }
+      }
+    },
+    "danger": {
+      "active": true,
+      "amount": 1,
+      "pulse": 0.721823777170403,
+      "angle": 24.76374999999999,
+      "lights": 4,
+      "red": 16713731,
+      "fill": 143.5732588311883
+    }
+  },
+  "door": {
+    "enabled": true,
+    "loopSeconds": 24,
+    "active": true,
+    "looping": true,
+    "cues": {
+      "enter": 4.661333333333333,
+      "clear": 12.24,
+      "spawn": 17.912
+    },
+    "musicGain": 0.09600000083446503,
+    "introGain": 0.30000001192092896,
+    "door": {
+      "ready": true,
+      "seconds": 0.5973333333333334,
+      "plays": 3,
+      "active": 0
+    },
+    "encounters": {
+      "selected": null,
+      "tracks": {
+        "demon": {
+          "wanted": false,
+          "playing": false,
+          "looping": false,
+          "fading": true,
+          "ready": true,
+          "seconds": 125.6,
+          "error": null
+        }
+      }
+    }
+  },
+  "cleared": {
+    "active": false,
+    "amount": 0,
+    "pulse": 0.46629479509265437,
+    "angle": 35.59950000002977,
+    "lights": 4,
+    "red": 16777215,
+    "fill": 0
+  },
+  "deaths": {
+    "partial": {
+      "active": true,
+      "amount": 1,
+      "pulse": 0.9960573506572423,
+      "angle": 50.51624999999998,
+      "lights": 4,
+      "red": 16713731,
+      "fill": 169.62544831243804
+    },
+    "last": {
+      "active": false,
+      "amount": 0,
+      "pulse": 0.6682795046663594,
+      "angle": 53.30775000005957,
+      "lights": 4,
+      "red": 16777215,
+      "fill": 0
+    }
+  },
+  "switch": {
+    "lights": {
+      "on": false,
+      "night": true,
+      "room": false
+    },
+    "danger": {
+      "active": false,
+      "amount": 0,
+      "pulse": 0.39723050660082415,
+      "angle": 70.1407500000297,
+      "lights": 4,
+      "red": 5264987,
+      "fill": 0
+    }
+  },
+  "blackout": {
+    "active": false,
+    "amount": 0,
+    "pulse": 0.15676338382310562,
+    "angle": 86.97350000001514,
+    "lights": 4,
+    "red": 16777215,
+    "fill": 0
+  },
+  "left": {
+    "active": false,
+    "amount": 0,
+    "pulse": 0.5,
+    "angle": 0,
+    "lights": 4,
+    "red": 16777215,
+    "fill": 0
+  },
+  "errors": []
+}

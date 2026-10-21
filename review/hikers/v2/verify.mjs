@@ -1,0 +1,5 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';
+const old=JSON.parse(fs.readFileSync(new URL('before-checks.json',import.meta.url))).state,now=JSON.parse(fs.readFileSync(new URL('after-checks.json',import.meta.url))).state;
+assert.deepEqual(now.history,old.history);for(const c of now.camps){const b=old.camps.find(x=>x.style===c.style);if(c.style!=='hikers')assert.deepEqual(c,b);else{assert.deepEqual(c.colliders.slice(0,6),b.colliders.slice(0,6));assert.equal(c.colliders.length,9);for(const s of c.colliders.slice(6)){assert(Math.hypot(s.x-c.x,s.z-c.z)-s.r>20,'refuge clear of main camp');assert(s.y1>s.y0);}}}
+const story=fs.readFileSync('docs/story.md','utf8'),strings=fs.readFileSync('ui/strings.js','utf8');assert(!story.includes('Ana Pike'));assert(!strings.includes('Ana Pike'));assert(story.includes("while he's on the roof. During the alarm he fires his M4."));assert(story.includes('Bunkmates. He still has his.'));assert(strings.includes('"story.survivor.pike.name": "Spc. Pike"'));
+console.log('PASS: refuge solids over 20m from camp; original camp/history retained; male Pike name and story consistent.');

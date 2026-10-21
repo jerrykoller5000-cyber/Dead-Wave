@@ -1,0 +1,1014 @@
+{
+ "version": 1,
+ "note": "CL-145: one entry per folder. Takes are any .mp3/.wav/.ogg in the folder. hook = where the game plays it today (procedural), to be swapped for a sample bank.",
+ "sounds": [
+  {
+   "n": 1,
+   "id": "shambler-idle",
+   "folder": "zombies/shambler/idle",
+   "seconds": 2.5,
+   "loop": false,
+   "hook": "zombieVoice('shambler', 'idle')",
+   "prompt": "A single slow, low zombie moan, deep and wet, from a rotting throat with mucus rattling in it, trailing off into a breathy exhale. Close-up, dry, no reverb. No words, no music."
+  },
+  {
+   "n": 2,
+   "id": "shambler-chase",
+   "folder": "zombies/shambler/chase",
+   "seconds": 1.5,
+   "loop": false,
+   "hook": "zombieVoice('shambler', 'chase')",
+   "prompt": "A zombie's hungry groan rising in pitch as it notices prey, guttural and wet, 'ohh-uhh', urgent but still sluggish. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 3,
+   "id": "shambler-attack",
+   "folder": "zombies/shambler/attack",
+   "seconds": 1.0,
+   "loop": false,
+   "hook": "zombieVoice('shambler', 'attack')",
+   "prompt": "A short, violent zombie snarl as it lunges to bite, a wet guttural 'GHAH' with a gnashing of teeth at the end. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 4,
+   "id": "shambler-hurt",
+   "folder": "zombies/shambler/hurt",
+   "seconds": 0.6,
+   "loop": false,
+   "hook": "zombieVoice('shambler', 'hurt')",
+   "prompt": "A brief pained zombie grunt when struck, a choked wet 'uhk', low and rough. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 5,
+   "id": "shambler-death",
+   "folder": "zombies/shambler/death",
+   "seconds": 2.5,
+   "loop": false,
+   "hook": "zombieVoice('shambler', 'death')",
+   "prompt": "A zombie's final death rattle: a long gurgling groan collapsing into a wet, bubbling last breath. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 6,
+   "id": "feral-idle",
+   "folder": "zombies/feral/idle",
+   "seconds": 1.5,
+   "loop": false,
+   "hook": "zombieVoice('feral', 'idle')",
+   "prompt": "A feral zombie's quick ragged panting with two short animal snarls, like a rabid dog breathing through clenched teeth, restless. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 7,
+   "id": "feral-chase",
+   "folder": "zombies/feral/chase",
+   "seconds": 1.2,
+   "loop": false,
+   "hook": "zombieVoice('feral', 'chase')",
+   "prompt": "A sprinting feral zombie snarling in three rapid, harsh, breathless bursts, hoarse and enraged. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 8,
+   "id": "feral-attack",
+   "folder": "zombies/feral/attack",
+   "seconds": 0.8,
+   "loop": false,
+   "hook": "zombieVoice('feral', 'attack')",
+   "prompt": "A feral zombie's vicious screeching snarl as it leaps to attack, high, harsh and raspy, ending in a hiss. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 9,
+   "id": "feral-hurt",
+   "folder": "zombies/feral/hurt",
+   "seconds": 0.5,
+   "loop": false,
+   "hook": "zombieVoice('feral', 'hurt')",
+   "prompt": "A sharp, angry yelp-snarl from a feral zombie hit by a bullet, short and hoarse. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 10,
+   "id": "feral-death",
+   "folder": "zombies/feral/death",
+   "seconds": 1.8,
+   "loop": false,
+   "hook": "zombieVoice('feral', 'death')",
+   "prompt": "A feral zombie's dying shriek breaking into a hoarse falling wheeze and a last choked breath. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 11,
+   "id": "leaper-idle",
+   "folder": "zombies/leaper/idle",
+   "seconds": 1.5,
+   "loop": false,
+   "hook": "zombieVoice('leaper', 'idle')",
+   "prompt": "Soft, quick, wet tongue clicks and chitters from a crouching mutant, like a large insect clicking its mandibles, sparse and creepy. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 12,
+   "id": "leaper-chase",
+   "folder": "zombies/leaper/chase",
+   "seconds": 1.2,
+   "loop": false,
+   "hook": "zombieVoice('leaper', 'chase')",
+   "prompt": "Fast, excited clicking and chittering from a mutant creature, rapid wet tongue clicks speeding up. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 13,
+   "id": "leaper-attack",
+   "folder": "zombies/leaper/attack",
+   "seconds": 0.8,
+   "loop": false,
+   "hook": "zombieVoice('leaper', 'attack')",
+   "prompt": "A sharp snapping click followed by a quick airy hiss, a mutant lashing out with a strike. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 14,
+   "id": "leaper-hurt",
+   "folder": "zombies/leaper/hurt",
+   "seconds": 0.4,
+   "loop": false,
+   "hook": "zombieVoice('leaper', 'hurt')",
+   "prompt": "A single sharp pained clack and squeak from a small mutant creature. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 15,
+   "id": "leaper-death",
+   "folder": "zombies/leaper/death",
+   "seconds": 1.2,
+   "loop": false,
+   "hook": "zombieVoice('leaper', 'death')",
+   "prompt": "A mutant creature's clicking slowing and sputtering out into a final weak rattle. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 16,
+   "id": "leaper-move",
+   "folder": "zombies/leaper/move",
+   "seconds": 0.8,
+   "loop": false,
+   "hook": "zombieVoice('leaper', 'move')",
+   "prompt": "A shrill, piercing squeal-chirp as a mutant creature launches itself into a leap, with quick clicks after it. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 17,
+   "id": "spider-idle",
+   "folder": "zombies/spider/idle",
+   "seconds": 2.0,
+   "loop": false,
+   "hook": "zombieVoice('spider', 'idle')",
+   "prompt": "A long, airy, rasping hiss like a giant spider, dry and breathy with a fluttering chitter under it. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 18,
+   "id": "spider-chase",
+   "folder": "zombies/spider/chase",
+   "seconds": 1.3,
+   "loop": false,
+   "hook": "zombieVoice('spider', 'chase')",
+   "prompt": "An aggressive rattling hiss from a giant spider creature, faster and more agitated, with chattering fangs. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 19,
+   "id": "spider-attack",
+   "folder": "zombies/spider/attack",
+   "seconds": 1.0,
+   "loop": false,
+   "hook": "zombieVoice('spider', 'attack')",
+   "prompt": "A violent, sharp, screeching hiss from a giant spider rearing to strike, harsh high air burst. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 20,
+   "id": "spider-hurt",
+   "folder": "zombies/spider/hurt",
+   "seconds": 0.5,
+   "loop": false,
+   "hook": "zombieVoice('spider', 'hurt')",
+   "prompt": "A short sharp pained hiss-squeal from a giant spider creature. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 21,
+   "id": "spider-death",
+   "folder": "zombies/spider/death",
+   "seconds": 2.2,
+   "loop": false,
+   "hook": "zombieVoice('spider', 'death')",
+   "prompt": "A giant spider creature's dying hiss falling slowly in pitch, legs twitching and clicking, ending in a dull thud. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 22,
+   "id": "drowned-idle",
+   "folder": "zombies/drowned/idle",
+   "seconds": 2.0,
+   "loop": false,
+   "hook": "zombieVoice('drowned', 'idle')",
+   "prompt": "A drowned zombie's waterlogged gurgling moan, bubbling water in its throat and lungs, wet and choking, with dripping. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 23,
+   "id": "drowned-chase",
+   "folder": "zombies/drowned/chase",
+   "seconds": 1.5,
+   "loop": false,
+   "hook": "zombieVoice('drowned', 'chase')",
+   "prompt": "A drowned zombie's urgent gurgling groan, coughing up water as it lurches forward, bubbles and wet splutters. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 24,
+   "id": "drowned-attack",
+   "folder": "zombies/drowned/attack",
+   "seconds": 1.0,
+   "loop": false,
+   "hook": "zombieVoice('drowned', 'attack')",
+   "prompt": "A drowned zombie's choking, water-filled snarl as it lunges, spraying water from its mouth. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 25,
+   "id": "drowned-hurt",
+   "folder": "zombies/drowned/hurt",
+   "seconds": 0.5,
+   "loop": false,
+   "hook": "zombieVoice('drowned', 'hurt')",
+   "prompt": "A short wet gurgling grunt from a drowned zombie when struck, a splash of water in the throat. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 26,
+   "id": "drowned-death",
+   "folder": "zombies/drowned/death",
+   "seconds": 2.2,
+   "loop": false,
+   "hook": "zombieVoice('drowned', 'death')",
+   "prompt": "A drowned zombie's last long gurgle, water bubbling out of its lungs as it sinks and goes silent. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 27,
+   "id": "military-idle",
+   "folder": "zombies/military/idle",
+   "seconds": 1.8,
+   "loop": false,
+   "hook": "zombieVoice('military', 'idle')",
+   "prompt": "A zombie soldier's low growling breaths muffled through a rubber gas mask, three short grunts with a hollow filtered rasp. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 28,
+   "id": "military-chase",
+   "folder": "zombies/military/chase",
+   "seconds": 1.2,
+   "loop": false,
+   "hook": "zombieVoice('military', 'chase')",
+   "prompt": "A zombie soldier's rapid, aggressive grunts through a gas mask, muffled and filtered, three quick bursts. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 29,
+   "id": "military-attack",
+   "folder": "zombies/military/attack",
+   "seconds": 0.9,
+   "loop": false,
+   "hook": "zombieVoice('military', 'attack')",
+   "prompt": "A zombie soldier's harsh muffled roar through a gas mask as it lunges, with a rattle of gear and webbing. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 30,
+   "id": "military-hurt",
+   "folder": "zombies/military/hurt",
+   "seconds": 0.5,
+   "loop": false,
+   "hook": "zombieVoice('military', 'hurt')",
+   "prompt": "A short muffled pained grunt through a gas mask from a zombie soldier. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 31,
+   "id": "military-death",
+   "folder": "zombies/military/death",
+   "seconds": 2.0,
+   "loop": false,
+   "hook": "zombieVoice('military', 'death')",
+   "prompt": "A zombie soldier's dying groan muffled through a gas mask, fading into a filtered wheezing last breath. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 32,
+   "id": "brute-idle",
+   "folder": "zombies/brute/idle",
+   "seconds": 3.0,
+   "loop": false,
+   "hook": "zombieVoice('brute', 'idle')",
+   "prompt": "A huge brute zombie's slow, very deep rumbling moan from an enormous chest, heavy breathing, ominous and low. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 33,
+   "id": "brute-chase",
+   "folder": "zombies/brute/chase",
+   "seconds": 2.0,
+   "loop": false,
+   "hook": "zombieVoice('brute', 'chase')",
+   "prompt": "A massive brute zombie's deep, swelling bellow as it starts towards its prey, slow and powerful. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 34,
+   "id": "brute-attack",
+   "folder": "zombies/brute/attack",
+   "seconds": 1.2,
+   "loop": false,
+   "hook": "zombieVoice('brute', 'attack')",
+   "prompt": "A giant brute zombie's deep, explosive roar of effort as it swings a heavy blow, a huge grunt. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 35,
+   "id": "brute-hurt",
+   "folder": "zombies/brute/hurt",
+   "seconds": 0.7,
+   "loop": false,
+   "hook": "zombieVoice('brute', 'hurt')",
+   "prompt": "A deep, short, angry grunt from a giant brute zombie that has been shot, more annoyed than hurt. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 36,
+   "id": "brute-death",
+   "folder": "zombies/brute/death",
+   "seconds": 3.0,
+   "loop": false,
+   "hook": "zombieVoice('brute', 'death')",
+   "prompt": "A giant brute zombie's long, deep dying groan sinking lower and lower, a last heavy exhale. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 37,
+   "id": "spitter-idle",
+   "folder": "zombies/spitter/idle",
+   "seconds": 2.0,
+   "loop": false,
+   "hook": "zombieVoice('spitter', 'idle')",
+   "prompt": "A zombie with a throat full of acid phlegm: wet bubbling gurgles, slurping and a sizzling hiss, slow and disgusting. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 38,
+   "id": "spitter-chase",
+   "folder": "zombies/spitter/chase",
+   "seconds": 1.5,
+   "loop": false,
+   "hook": "zombieVoice('spitter', 'chase')",
+   "prompt": "A spitter zombie's agitated bubbling and slurping, hawking phlegm up its throat with a hiss. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 39,
+   "id": "spitter-attack",
+   "folder": "zombies/spitter/attack",
+   "seconds": 1.0,
+   "loop": false,
+   "hook": "zombieVoice('spitter', 'attack')",
+   "prompt": "A spitter zombie violently hacking and hissing, a wet retch with a sharp sizzling burst. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 40,
+   "id": "spitter-hurt",
+   "folder": "zombies/spitter/hurt",
+   "seconds": 0.5,
+   "loop": false,
+   "hook": "zombieVoice('spitter', 'hurt')",
+   "prompt": "A short wet squelching gurgle from a spitter zombie being hit. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 41,
+   "id": "spitter-death",
+   "folder": "zombies/spitter/death",
+   "seconds": 2.2,
+   "loop": false,
+   "hook": "zombieVoice('spitter', 'death')",
+   "prompt": "A spitter zombie's dying gurgle, bubbling and sizzling as its acid throat drains out, fading. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 42,
+   "id": "screamer-idle",
+   "folder": "zombies/screamer/idle",
+   "seconds": 2.0,
+   "loop": false,
+   "hook": "zombieVoice('screamer', 'idle')",
+   "prompt": "A thin, eerie, high-pitched whining moan from a gaunt female zombie, raspy and unsettling. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 43,
+   "id": "screamer-chase",
+   "folder": "zombies/screamer/chase",
+   "seconds": 1.5,
+   "loop": false,
+   "hook": "zombieVoice('screamer', 'chase')",
+   "prompt": "A screaming zombie's rising, harsh, high-pitched wail as it spots prey, raspy and shrill. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 44,
+   "id": "screamer-attack",
+   "folder": "zombies/screamer/attack",
+   "seconds": 1.5,
+   "loop": false,
+   "hook": "zombieVoice('screamer', 'attack')",
+   "prompt": "A screamer zombie's ear-splitting, distorted shriek as it attacks, extremely high, harsh and raw. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 45,
+   "id": "screamer-hurt",
+   "folder": "zombies/screamer/hurt",
+   "seconds": 0.6,
+   "loop": false,
+   "hook": "zombieVoice('screamer', 'hurt')",
+   "prompt": "A short piercing pained shriek from a screamer zombie. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 46,
+   "id": "screamer-death",
+   "folder": "zombies/screamer/death",
+   "seconds": 2.0,
+   "loop": false,
+   "hook": "zombieVoice('screamer', 'death')",
+   "prompt": "A screamer zombie's dying shriek that cracks and breaks, falling into a raspy wheeze. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 47,
+   "id": "bomber-idle",
+   "folder": "zombies/bomber/idle",
+   "seconds": 2.5,
+   "loop": false,
+   "hook": "zombieVoice('bomber', 'idle')",
+   "prompt": "A bloated zombie's hollow, low, gassy moan, its swollen belly gurgling and creaking, slow and heavy. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 48,
+   "id": "bomber-chase",
+   "folder": "zombies/bomber/chase",
+   "seconds": 2.0,
+   "loop": false,
+   "hook": "zombieVoice('bomber', 'chase')",
+   "prompt": "A bloated zombie's hollow, booming groan as it waddles faster, stomach churning and bubbling. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 49,
+   "id": "bomber-attack",
+   "folder": "zombies/bomber/attack",
+   "seconds": 1.0,
+   "loop": false,
+   "hook": "zombieVoice('bomber', 'attack')",
+   "prompt": "A bloated zombie's swelling, strained groan as its belly stretches and creaks, about to burst. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 50,
+   "id": "bomber-hurt",
+   "folder": "zombies/bomber/hurt",
+   "seconds": 0.6,
+   "loop": false,
+   "hook": "zombieVoice('bomber', 'hurt')",
+   "prompt": "A short hollow grunt from a bloated zombie with a wet belly slosh. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 51,
+   "id": "bomber-death",
+   "folder": "zombies/bomber/death",
+   "seconds": 1.5,
+   "loop": false,
+   "hook": "zombieVoice('bomber', 'death')",
+   "prompt": "A bloated zombie's last hollow, gassy groan, deflating with a long wet hiss of escaping gas. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 52,
+   "id": "demon-idle",
+   "folder": "zombies/demon/idle",
+   "seconds": 2.5,
+   "loop": false,
+   "hook": "zombieVoice('demon', 'idle')",
+   "prompt": "A horned demon zombie's deep, distorted, gravelly growl with the crackle and hiss of smouldering embers on its body. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 53,
+   "id": "demon-chase",
+   "folder": "zombies/demon/chase",
+   "seconds": 1.8,
+   "loop": false,
+   "hook": "zombieVoice('demon', 'chase')",
+   "prompt": "A demon zombie's deep snarling growl rising in anger, gravelly and distorted, with a crackling fire whoosh. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 54,
+   "id": "demon-attack",
+   "folder": "zombies/demon/attack",
+   "seconds": 1.2,
+   "loop": false,
+   "hook": "zombieVoice('demon', 'attack')",
+   "prompt": "A demon zombie's ferocious deep roar as it strikes, gravelly and distorted, with a burst of fire. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 55,
+   "id": "demon-charge",
+   "folder": "zombies/demon/charge",
+   "seconds": 2.0,
+   "loop": false,
+   "hook": "zombieVoice('demon', 'charge')",
+   "prompt": "A demon zombie winding up to charge: a rising whoosh of fire, a sharp snort, then a huge deep bellowing roar. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 56,
+   "id": "demon-hurt",
+   "folder": "zombies/demon/hurt",
+   "seconds": 0.7,
+   "loop": false,
+   "hook": "zombieVoice('demon', 'hurt')",
+   "prompt": "A short, deep, angry, distorted snarl from a demon when struck, with a spit of embers. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 57,
+   "id": "demon-death",
+   "folder": "zombies/demon/death",
+   "seconds": 3.0,
+   "loop": false,
+   "hook": "zombieVoice('demon', 'death')",
+   "prompt": "A demon zombie's long, deep, distorted dying roar fading into the hiss of embers going out. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 58,
+   "id": "colossus-idle",
+   "folder": "zombies/colossus/idle",
+   "seconds": 3.5,
+   "loop": false,
+   "hook": "zombieVoice('colossus', 'idle')",
+   "prompt": "A colossal giant zombie's enormous, extremely deep, slow moan, like a huge beast breathing, with rumbling sub-bass. Dry. No words, no music."
+  },
+  {
+   "n": 59,
+   "id": "colossus-chase",
+   "folder": "zombies/colossus/chase",
+   "seconds": 2.5,
+   "loop": false,
+   "hook": "zombieVoice('colossus', 'chase')",
+   "prompt": "A colossal giant zombie's deep thundering groan building in power, very low and heavy, sub-bass rumble. Dry. No words, no music."
+  },
+  {
+   "n": 60,
+   "id": "colossus-attack",
+   "folder": "zombies/colossus/attack",
+   "seconds": 1.5,
+   "loop": false,
+   "hook": "zombieVoice('colossus', 'attack')",
+   "prompt": "A colossal giant's huge deep roar of effort as it smashes down, with a low boom. Dry. No words, no music."
+  },
+  {
+   "n": 61,
+   "id": "colossus-hurt",
+   "folder": "zombies/colossus/hurt",
+   "seconds": 0.8,
+   "loop": false,
+   "hook": "zombieVoice('colossus', 'hurt')",
+   "prompt": "A short, deep, booming grunt from a colossal giant zombie hit by gunfire. Dry. No words, no music."
+  },
+  {
+   "n": 62,
+   "id": "colossus-death",
+   "folder": "zombies/colossus/death",
+   "seconds": 4.0,
+   "loop": false,
+   "hook": "zombieVoice('colossus', 'death')",
+   "prompt": "A colossal giant zombie's long, deep, dying roar collapsing into a huge rumbling exhale. Dry. No words, no music."
+  },
+  {
+   "n": 63,
+   "id": "colossus-step",
+   "folder": "zombies/colossus/step",
+   "seconds": 1.0,
+   "loop": false,
+   "hook": "zombieVoice('colossus', 'step')",
+   "prompt": "A single gigantic footstep of a colossal creature on dirt, a deep earth-shaking thud with a low boom and debris settling. No music."
+  },
+  {
+   "n": 64,
+   "id": "guardian-idle",
+   "folder": "zombies/guardian/idle",
+   "seconds": 2.0,
+   "loop": false,
+   "hook": "zombieVoice('guardian', 'idle')",
+   "prompt": "A large predatory beast's three low, huffing barks followed by a short, high, menacing shriek, like a monstrous hyena. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 65,
+   "id": "guardian-chase",
+   "folder": "zombies/guardian/chase",
+   "seconds": 1.5,
+   "loop": false,
+   "hook": "zombieVoice('guardian', 'chase')",
+   "prompt": "A monstrous beast's two quick snarling barks into a rising high-pitched screech as it hunts. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 66,
+   "id": "guardian-attack",
+   "folder": "zombies/guardian/attack",
+   "seconds": 1.2,
+   "loop": false,
+   "hook": "zombieVoice('guardian', 'attack')",
+   "prompt": "A monstrous beast's snarl exploding into a piercing, distorted shriek as it strikes. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 67,
+   "id": "guardian-hurt",
+   "folder": "zombies/guardian/hurt",
+   "seconds": 0.6,
+   "loop": false,
+   "hook": "zombieVoice('guardian', 'hurt')",
+   "prompt": "A monstrous beast's short pained snarl and yelp when shot. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 68,
+   "id": "guardian-death",
+   "folder": "zombies/guardian/death",
+   "seconds": 2.5,
+   "loop": false,
+   "hook": "zombieVoice('guardian', 'death')",
+   "prompt": "A monstrous beast's dying shriek falling into a low, weak growl and a final breath. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 69,
+   "id": "caveguard-idle",
+   "folder": "zombies/caveguard/idle",
+   "seconds": 2.0,
+   "loop": false,
+   "hook": "zombieVoice('caveguard', 'idle')",
+   "prompt": "A thin, whistling, breathy wheeze from a gaunt pale cave creature, eerie and rasping, with faint wet clicks. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 70,
+   "id": "caveguard-chase",
+   "folder": "zombies/caveguard/chase",
+   "seconds": 1.2,
+   "loop": false,
+   "hook": "zombieVoice('caveguard', 'chase')",
+   "prompt": "A gaunt cave creature's rasping, high, breathy hiss-shriek as it scrambles towards prey. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 71,
+   "id": "caveguard-attack",
+   "folder": "zombies/caveguard/attack",
+   "seconds": 1.0,
+   "loop": false,
+   "hook": "zombieVoice('caveguard', 'attack')",
+   "prompt": "A gaunt cave creature's sharp, whistling, rasping screech as it grabs, with a snap. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 72,
+   "id": "caveguard-hurt",
+   "folder": "zombies/caveguard/hurt",
+   "seconds": 0.4,
+   "loop": false,
+   "hook": "zombieVoice('caveguard', 'hurt')",
+   "prompt": "A short, high, raspy squeal from a gaunt cave creature. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 73,
+   "id": "caveguard-death",
+   "folder": "zombies/caveguard/death",
+   "seconds": 2.0,
+   "loop": false,
+   "hook": "zombieVoice('caveguard', 'death')",
+   "prompt": "A gaunt cave creature's dying whistling wheeze, falling and rattling into silence. Close-up, dry. No words, no music."
+  },
+  {
+   "n": 74,
+   "id": "screamer-call",
+   "folder": "zombies/screamer/call",
+   "seconds": 3.0,
+   "loop": false,
+   "hook": "AudioSys.scream()",
+   "prompt": "A screamer zombie's long, piercing, blood-curdling scream calling the horde, very loud and raw, ringing out across an open valley. No words, no music."
+  },
+  {
+   "n": 75,
+   "id": "spider-spit",
+   "folder": "zombies/spider/spit",
+   "seconds": 0.8,
+   "loop": false,
+   "hook": "AudioSys.spit()",
+   "prompt": "A creature spitting a glob of acid: a wet hawking retch and a thick liquid launch, splattering through the air. No words, no music."
+  },
+  {
+   "n": 76,
+   "id": "spider-acid-splash",
+   "folder": "zombies/spider/acid-splash",
+   "seconds": 1.5,
+   "loop": false,
+   "hook": "AudioSys.acidHit()",
+   "prompt": "A glob of acid splattering onto the ground and sizzling, hissing and bubbling as it burns. No words, no music."
+  },
+  {
+   "n": 77,
+   "id": "bomber-burst",
+   "folder": "zombies/bomber/burst",
+   "seconds": 2.0,
+   "loop": false,
+   "hook": "bomber explode (with grenadeBoom)",
+   "prompt": "A bloated zombie bursting apart: a deep wet gory explosion, a splatter of guts and liquid raining down. No words, no music."
+  },
+  {
+   "n": 78,
+   "id": "guardian-roar",
+   "folder": "zombies/guardian/roar",
+   "seconds": 3.5,
+   "loop": false,
+   "hook": "AudioSys.bossRoar()",
+   "prompt": "A huge monster boss's terrifying roar, deep and powerful with a shrieking top, echoing across an open valley. No words, no music."
+  },
+  {
+   "n": 79,
+   "id": "guardian-slam",
+   "folder": "zombies/guardian/slam",
+   "seconds": 1.5,
+   "loop": false,
+   "hook": "AudioSys.bossSlam()",
+   "prompt": "A massive monster slamming its fists into the ground: a deep heavy impact, cracking earth and falling rocks. No words, no music."
+  },
+  {
+   "n": 80,
+   "id": "caveguard-growl",
+   "folder": "zombies/caveguard/growl",
+   "seconds": 3.0,
+   "loop": false,
+   "hook": "AudioSys.guardianGrowl()",
+   "prompt": "A low, wet, menacing growl from a creature hiding in a dark cave, close and echoing off the rock walls. No words, no music."
+  },
+  {
+   "n": 81,
+   "id": "caveguard-screech",
+   "folder": "zombies/caveguard/screech",
+   "seconds": 2.0,
+   "loop": false,
+   "hook": "AudioSys.caveScreech()",
+   "prompt": "An inhuman, high, whistling screech from deep inside a cave, reverberating down a long rock tunnel. No words, no music."
+  },
+  {
+   "n": 82,
+   "id": "caveguard-cave-groan",
+   "folder": "zombies/caveguard/cave-groan",
+   "seconds": 4.0,
+   "loop": false,
+   "hook": "AudioSys.caveGroan()",
+   "prompt": "A distant, deep, mournful groan rising from far below in a cave, faint, with long rocky echo. No words, no music."
+  },
+  {
+   "n": 83,
+   "id": "caveguard-in-walls",
+   "folder": "zombies/caveguard/in-walls",
+   "seconds": 5.0,
+   "loop": false,
+   "hook": "AudioSys.guardianInWalls()",
+   "prompt": "Something large moving inside the rock walls of a cave: a long scraping drag of claws on stone, then three heavy knocks, muffled. No words, no music."
+  },
+  {
+   "n": 84,
+   "id": "footsteps-shuffle",
+   "folder": "footsteps/shuffle",
+   "seconds": 0.8,
+   "loop": false,
+   "hook": "deadStep(shambler / spitter / screamer / bomber / default)",
+   "prompt": "A single slow dragging zombie footstep on dirt: a scuff of a shoe and the drag of a limp foot. No voice, no music."
+  },
+  {
+   "n": 85,
+   "id": "footsteps-barefoot",
+   "folder": "footsteps/barefoot",
+   "seconds": 0.5,
+   "loop": false,
+   "hook": "deadStep(feral, leaper)",
+   "prompt": "A single fast bare-foot slap on hard dirt, a running step. No voice, no music."
+  },
+  {
+   "n": 86,
+   "id": "footsteps-waterlogged",
+   "folder": "footsteps/waterlogged",
+   "seconds": 0.7,
+   "loop": false,
+   "hook": "deadStep(drowned)",
+   "prompt": "A single squelching waterlogged footstep, a soaked shoe squishing and dripping. No voice, no music."
+  },
+  {
+   "n": 87,
+   "id": "footsteps-boots",
+   "folder": "footsteps/boots",
+   "seconds": 0.6,
+   "loop": false,
+   "hook": "deadStep(military)",
+   "prompt": "A single heavy military combat boot step on gravel with a faint rattle of gear. No voice, no music."
+  },
+  {
+   "n": 88,
+   "id": "footsteps-hop",
+   "folder": "footsteps/hop",
+   "seconds": 0.6,
+   "loop": false,
+   "hook": "deadStep('hop') \u2014 a maimed zombie hopping on one leg",
+   "prompt": "A single heavy one-legged hop landing on dirt, a stumbling thump. No voice, no music."
+  },
+  {
+   "n": 89,
+   "id": "footsteps-crawl",
+   "folder": "footsteps/crawl",
+   "seconds": 0.8,
+   "loop": false,
+   "hook": "deadStep('crawl') \u2014 a legless zombie crawling",
+   "prompt": "A hand slapping down on dirt and a body dragging forward along the ground, one pull. No voice, no music."
+  },
+  {
+   "n": 90,
+   "id": "footsteps-heavy",
+   "folder": "footsteps/heavy",
+   "seconds": 0.8,
+   "loop": false,
+   "hook": "heavyStep() \u2014 brute, demon",
+   "prompt": "A single heavy, thudding footstep of a huge creature on dirt, with weight and a low thump. No voice, no music."
+  },
+  {
+   "n": 91,
+   "id": "footsteps-huge",
+   "folder": "footsteps/huge",
+   "seconds": 1.0,
+   "loop": false,
+   "hook": "heavyStep(huge) \u2014 guardian",
+   "prompt": "A single massive, booming footstep of a giant monster, the ground shaking, a deep thud and loose stones. No voice, no music."
+  },
+  {
+   "n": 92,
+   "id": "impacts-flesh-hit",
+   "folder": "impacts/flesh-hit",
+   "seconds": 0.4,
+   "loop": false,
+   "hook": "zombieHit() \u2192 foley 'hit'",
+   "prompt": "A bullet hitting rotten flesh: a short wet thwack. No voice, no music."
+  },
+  {
+   "n": 93,
+   "id": "impacts-flesh-hit-heavy",
+   "folder": "impacts/flesh-hit-heavy",
+   "seconds": 0.6,
+   "loop": false,
+   "hook": "zombieHit(heavy) \u2192 foley 'hitHeavy'",
+   "prompt": "A heavy round smashing into a body: a deep, wet, meaty impact. No voice, no music."
+  },
+  {
+   "n": 94,
+   "id": "impacts-headshot",
+   "folder": "impacts/headshot",
+   "seconds": 0.7,
+   "loop": false,
+   "hook": "headshot() \u2192 foley 'headshot'",
+   "prompt": "A bullet cracking a skull: a sharp bony crack and a wet burst. No voice, no music."
+  },
+  {
+   "n": 95,
+   "id": "impacts-gore-small",
+   "folder": "impacts/gore-small",
+   "seconds": 0.8,
+   "loop": false,
+   "hook": "gore(big=false) \u2014 a limb or head coming off",
+   "prompt": "A limb tearing off a zombie: a wet rip, a crunch of bone and a splatter. No voice, no music."
+  },
+  {
+   "n": 96,
+   "id": "impacts-gore-big",
+   "folder": "impacts/gore-big",
+   "seconds": 1.5,
+   "loop": false,
+   "hook": "gore(big=true) \u2014 a body blown apart",
+   "prompt": "A body blown apart: a big wet gory burst and chunks splattering on the ground. No voice, no music."
+  },
+  {
+   "n": 97,
+   "id": "impacts-body-fall",
+   "folder": "impacts/body-fall",
+   "seconds": 1.0,
+   "loop": false,
+   "hook": "zombieDeath() \u2014 the body hitting the ground",
+   "prompt": "A dead body collapsing onto dirt: a heavy limp thud and a soft rustle. No voice, no music."
+  },
+  {
+   "n": 98,
+   "id": "horde-emerge",
+   "folder": "horde/emerge",
+   "seconds": 2.5,
+   "loop": false,
+   "hook": "emerge() \u2014 clawing up out of the ground",
+   "prompt": "A zombie clawing its way up out of the earth: digging, dirt crumbling and roots tearing, a hand bursting through. No voice, no music."
+  },
+  {
+   "n": 99,
+   "id": "horde-groan-near",
+   "folder": "horde/groan-near",
+   "seconds": 3.0,
+   "loop": false,
+   "hook": "groan() \u2014 the night's ambience, near",
+   "prompt": "A few zombies groaning together nearby, overlapping low moans in the open air at night. No words, no music."
+  },
+  {
+   "n": 100,
+   "id": "horde-distant",
+   "folder": "horde/distant",
+   "seconds": 8.0,
+   "loop": true,
+   "hook": "distantGroan() \u2014 the horde far off",
+   "prompt": "A large zombie horde moaning far away across a valley at night, a distant overlapping drone of groans carried on the wind. No words, no music."
+  },
+  {
+   "n": 101,
+   "id": "build-attacks-wood-hit",
+   "folder": "build-attacks/wood-hit",
+   "seconds": 0.8,
+   "loop": false,
+   "hook": "buildHit('wood')",
+   "prompt": "Zombie fists pounding a wooden barricade: a heavy thump and wood creaking and splintering a little. No voice, no music."
+  },
+  {
+   "n": 102,
+   "id": "build-attacks-wood-break",
+   "folder": "build-attacks/wood-break",
+   "seconds": 2.0,
+   "loop": false,
+   "hook": "buildBreak('wood')",
+   "prompt": "A wooden barricade smashed apart: planks cracking, splintering and clattering to the ground. No voice, no music."
+  },
+  {
+   "n": 103,
+   "id": "build-attacks-stone-hit",
+   "folder": "build-attacks/stone-hit",
+   "seconds": 0.8,
+   "loop": false,
+   "hook": "buildHit('stone')",
+   "prompt": "Zombie fists hammering a stone wall: a dull heavy thud and a little grit trickling. No voice, no music."
+  },
+  {
+   "n": 104,
+   "id": "build-attacks-stone-break",
+   "folder": "build-attacks/stone-break",
+   "seconds": 2.0,
+   "loop": false,
+   "hook": "buildBreak('stone')",
+   "prompt": "A stone wall collapsing: blocks cracking and tumbling down in a rumble of rubble. No voice, no music."
+  },
+  {
+   "n": 105,
+   "id": "build-attacks-sand-hit",
+   "folder": "build-attacks/sand-hit",
+   "seconds": 0.8,
+   "loop": false,
+   "hook": "buildHit('sand')",
+   "prompt": "Zombie fists punching sandbags: a muffled soft thump and sand hissing. No voice, no music."
+  },
+  {
+   "n": 106,
+   "id": "build-attacks-sand-break",
+   "folder": "build-attacks/sand-break",
+   "seconds": 2.0,
+   "loop": false,
+   "hook": "buildBreak('sand')",
+   "prompt": "Sandbags ripping open: burlap tearing and sand pouring out in a rush. No voice, no music."
+  },
+  {
+   "n": 107,
+   "id": "build-attacks-wire-hit",
+   "folder": "build-attacks/wire-hit",
+   "seconds": 0.8,
+   "loop": false,
+   "hook": "buildHit('wire')",
+   "prompt": "Zombies pushing into barbed wire: the wire twanging, rattling and creaking with tension. No voice, no music."
+  },
+  {
+   "n": 108,
+   "id": "build-attacks-wire-break",
+   "folder": "build-attacks/wire-break",
+   "seconds": 2.0,
+   "loop": false,
+   "hook": "buildBreak('wire')",
+   "prompt": "A barbed wire fence snapping: wire pinging and whipping, posts falling. No voice, no music."
+  },
+  {
+   "n": 109,
+   "id": "build-attacks-metal-hit",
+   "folder": "build-attacks/metal-hit",
+   "seconds": 0.8,
+   "loop": false,
+   "hook": "buildHit('metal', 'steel')",
+   "prompt": "Zombie fists banging a steel wall: a loud hollow metallic clang and a ringing rattle. No voice, no music."
+  },
+  {
+   "n": 110,
+   "id": "build-attacks-metal-break",
+   "folder": "build-attacks/metal-break",
+   "seconds": 2.0,
+   "loop": false,
+   "hook": "buildBreak('metal', 'steel')",
+   "prompt": "A steel wall torn down: metal shrieking and bending, crashing to the ground with a clang. No voice, no music."
+  },
+  {
+   "n": 111,
+   "id": "build-attacks-turret-hit",
+   "folder": "build-attacks/turret-hit",
+   "seconds": 0.8,
+   "loop": false,
+   "hook": "buildHit('turret')",
+   "prompt": "Zombies clawing and pounding a gun turret: metal clanks and scrapes on a machine. No voice, no music."
+  },
+  {
+   "n": 112,
+   "id": "build-attacks-turret-break",
+   "folder": "build-attacks/turret-break",
+   "seconds": 2.0,
+   "loop": false,
+   "hook": "buildBreak('turret')",
+   "prompt": "A gun turret destroyed: a crunch of metal, sparks crackling, a short electrical fizz and parts clattering. No voice, no music."
+  }
+ ]
+}

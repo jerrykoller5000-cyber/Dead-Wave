@@ -1,0 +1,129 @@
+--- before training hooks
++++ after training hooks
+@@ -1298,6 +1298,7 @@
+     import { createTrainingSecurity } from './ui/training-security.js';   // GP-167
+     import { trainingIntroKinds } from './ui/training-encounter.js';
+     import { createTrainingDanger } from './ui/training-danger.js';
++    import { CONTAINMENT, createTrainingContainment } from './game/training-containment.js'; // GP-19879
+     import { createTrainingRelease } from './ui/training-release.js';   // GP-191
+     import { createHitPops, hitPopText } from './ui/training-hit-pops.js';   // CL-171
+     import { buildTrainingTunnel, tunnelLine, tunnelDepth, tunnelShows, cameraInRoom } from './world/training-tunnel.js';   // CL-171
+@@ -36766,7 +36767,7 @@
+       // CU-63: a dummy counts the hit and never dies, and never ends the run.
+       if (p && p.dummy) { p.hits++; p.damage += amount; return; }
+       if (devGodMode) return; // "godmode" dev cheat — every damage source funnels through here
+-      if (gameOver || won || !gameStarted) return;
++      if (gameOver || won || !gameStarted || training.wake) return; // GP-19879: recovery owns the player
+       if (scriptedKill) return; // a scripted kill owns the ending; nothing else gets a bite
+       if (rollT > 0) return; // untouchable mid-roll
+       // Armour takes the first ARMOR_ABSORB of a hit while there is any left; the
+@@ -36843,7 +36844,7 @@
+     }
+ 
+     function updateHealthRegen(dt) {
+-      if (!gameStarted || gameOver || won || paused) return;
++      if (!gameStarted || gameOver || won || paused || training.wake?.purge) return;
+       sinceHurt += dt;
+       const cap = PLAYER_MAX_HP * regenCapFrac();   // GB-116: no survivor lifts it now (Okafor heals instead)
+       if (sinceHurt < REGEN_DELAY || playerHp >= cap) return;
+@@ -49964,6 +49965,7 @@
+       if (!training.tg) { training.tg = buildTrainingGround(THREE, { gridOffset: BUILD_GRID / 2, grid: BUILD_GRID, securityLabel: sayText('training.securityLabel'), labels: { noBuild: sayText('training.noBuildZone', {}, 'NO BUILD ZONE'), gate: sayText('training.gateTitle'), containment: sayText('training.gateDetail'), infirmary: sayText('training.infirmaryLabel'), medical: sayText('training.medicalLabel') } }); training.copies = trainingCopies(training.tg); }
+       if (!training.danger) training.danger = createTrainingDanger(THREE, training.tg, training.copies.alarmBeacon);
+       training.danger.reset();
++      ensureTrainingContainment().reset(); // GP-19879: persistent mounted fixtures, fresh sweep state
+       if (!training.security) {
+         const door = training.tg.securityDoor;
+         training.security = createTrainingSecurity({ ...door, onChange: (state) => { door.setState(state); trainingDoorSound(state); } });
+@@ -50093,6 +50095,8 @@
+       bankTrainingScore();   // CL-144
+       resetJump(jumpFeel); vaultSpaceWas = false;
+       training.deployment?.cancel(); training.release?.reset();
++      training.containment?.reset(); // GP-19879: cancel flight tickets before leaving
++      if (training.wake?.purge) { playerHp=PLAYER_MAX_HP; updateHpHud(); }
+       training.active = false;
+       training.danger?.reset();
+       training.doorQuiet = true; training.security?.reset(); training.doorQuiet = false;
+@@ -50298,7 +50302,7 @@
+         zombies.splice(i, 1);
+       }
+     }
+-    function trainingClear() { training.deployment?.cancel(); training.release?.reset(); const n = trainingAlive(); clearZombies(); training.security?.sync(false, 0); AudioSys.trainingCue('clear'); publishUI('training-clear', { count: n }); return n; }
++    function trainingClear() { training.containment?.reset(); training.deployment?.cancel(); training.release?.reset(); const n = trainingAlive(); clearZombies(); training.security?.sync(false, 0); AudioSys.trainingCue('clear'); publishUI('training-clear', { count: n }); return n; }
+     // CL-136 (Jerry, 2026-10-09: "zombies clip into walls in training"): the old rectangle was one size for all, so a
+     // brute's shoulders and a colossus's whole chest went through the plaster. Each body keeps its own radius (and a
+     // little) off the wall faces, inside the stations' margins the rectangle already kept.
+@@ -50424,7 +50428,33 @@
+       if (!training.tunnel.group.parent) scene.add(training.tunnel.group);
+       return training.tunnel;
+     }
++    // GP-19879: one instanced model batch serves all sixteen wall fixtures.
++    function ensureTrainingContainment() {
++      if (!training.containment && training.tg) training.containment=createTrainingContainment(THREE,training.tg,{
++        makeGun:makeMinigun,getZombies:()=>zombies,
++        onShot:(turret)=>{ const sa=sndAt(turret.x,turret.z,70);AudioSys.turretShot('m240',sa.v*.42,sa.pan); },
++        onHit:(z,round,n)=>{
++          if (n<CONTAINMENT.hits) spawnBlood(z.mesh.position.x,z.mesh.position.y+(z.hitH||1.4)*.5,z.mesh.position.z,round.dir.x,round.dir.z,3);
++          else killZombie(z,false,{kind:'bullet',dir:{x:round.dir.x,z:round.dir.z},defense:true,raw:z.maxHp||z.hp});
++        }
++      });
++      return training.containment;
++    }
+     function trainingBlackout() {
++      if (!training.tg || training.wake) return;
++      if (ensureTrainingContainment()?.start()) {
++        training.deployment?.cancel(); training.release?.reset();
++        abortScriptedKill(); stopFiring(); cancelPlaceMode();
++        mouseFireHeld=false;zoomHeld=false;velX=velZ=vy=rollT=0;grounded=true;
++        grenadeCharging=false;cancelGrenadeAnim();marineIdle.reset();
++        enemyAbilities.clear();clearDrowned(zombies);feralMotion.clear();
++        playerHp=0;updateHpHud();
++        training.wake={purge:true,t:0,rootY:localPlayer.position.y,at:localPlayer.position.clone(),yaw:player.rotation.y};
++        return;
++      }
++      finishTrainingBlackout();
++    }
++    function finishTrainingBlackout() {
+       enemyAbilities.clear();   // GP-179
+       feralMotion.clear();   // GP-198
+       if (!training.tg || training.wake) return;
+@@ -50494,10 +50524,10 @@
+     function updateTraining(dt) {
+       if (!training.active || !training.tg) return;
+       const tg = training.tg;
+-      if (!paused && !shopOpen && !cifOpen && !training.wake) {
++      if (!paused && !shopOpen && !cifOpen && (!training.wake || training.wake.purge)) {
+         const entrants = zombies.filter(z => z.alive && z.trainingEntry);
+-        training.release?.tick(dt, training.deployment?.read(), entrants.length);
+-        training.deployment?.tick(dt);
++        if (training.wake?.purge) tg.releaseGate?.setState({amount:entrants.length?1:0,lit:true});
++        else { training.release?.tick(dt, training.deployment?.read(), entrants.length); training.deployment?.tick(dt); }
+         for (const z of entrants) {
+           const entry = z.trainingEntry;
+           entry.z -= dt * (entry.pace || 3);   // CL-171: its own walking pace, so the stride matches the ground
+@@ -50527,11 +50557,26 @@
+       tg.targets.forEach((t,i)=>{ if (falling[i] && t.state==='down' && AudioSys.targetFall && t.plate) { t.plate.getWorldPosition(_tFallP); const s = sndAt(_tFallP.x, _tFallP.z, 60); AudioSys.targetFall(Math.max(0.3, s.v), s.pan); } });
+       if(!rising&&tg.targets.some(t=>t.state==='rising'))AudioSys.trainingCue('reset');
+       training.impacts?.update(dt);
++      training.containment?.tick(paused || shopOpen || cifOpen ? 0 : dt); // GP-19879
+       if (training.sweepT > 0) { training.sweepT -= dt; trainingSweep(); }
+       weather.raining = false; weather.intensity = 0;
+       for (const [from, copy] of (training.copies && training.copies.moving) || []) { copy.position.copy(from.position); copy.scale.copy(from.scale); copy.rotation.copy(from.rotation); }
+       const w = training.wake;
+       if (w) {
++        if (w.purge) {
++          if (!paused && !shopOpen && !cifOpen) w.t+=dt;
++          mouseFireHeld=false;velX=velZ=vy=0;grounded=true;
++          localPlayer.position.copy(w.at);
++          // A brief collapse remains visible before the existing blackout and bed sequence.
++          rollPivot.rotation.x=Math.min(1,w.t/.45)*1.1;weaponMount.visible=false;offhandMount.visible=false;
++          if (!paused && !shopOpen && !cifOpen) updateCorpses(dt);
++          if (w.t>2.2) training.blackout.classList.add('on');
++          if (!training.containment.read().active) {
++            training.wake=null;rollPivot.rotation.set(0,0,0);
++            finishTrainingBlackout();
++          }
++          return;
++        }
+         if (w.hold > 0) {   // CL-171: still out cold, in the dark
+           w.hold -= dt;
+           if (!w.skulls && w.hold < TRAINING_KO_HOLD - 0.4) { w.skulls = true; training.skullsCleared = trainingClearSkulls(); }

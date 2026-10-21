@@ -1,0 +1,9 @@
+#105 turrets/mortar-round-drop  (start here)
+MISSING: the game makes no sound here now
+Now: (the shot only)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.8 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A mortar round slid into the mortar tube by hand, a metallic scrape sliding down the tube. No music, no voice.

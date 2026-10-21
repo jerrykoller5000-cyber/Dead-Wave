@@ -1,0 +1,31 @@
+✔ recovery progresses from lying through sit, side swing, foot plant and upright (0.9052ms)
+✔ no root, facing or joint discontinuity at any phase boundary (0.7602ms)
+✔ boots remain planted while the pelvis rises over them (0.2565ms)
+✔ clamps late/hitched sampling to the final standing pose (0.5656ms)
+✔ small aim changes retain stance; left/right/180 turns settle both feet (3.1486ms)
+✔ yaw wrap takes the short path and simulation is independent of frame rate (0.8177ms)
+✔ reversing a turn and continuous rotation never strands a foot (2.2932ms)
+✔ support boots stay on the ground turning on the heel or the ball, swing clears ground, root and aim untouched (8.2968ms)
+✔ teleport and excluded actions discard the planted stance (0.3861ms)
+✔ initial pose transitions cannot leave hovering boots; both feet settle on the sampled floor (2.4264ms)
+✔ armed flicks keep the chest on aim while the hips and feet step round (0.3543ms)
+✔ crouched pivots use smaller steps and settle both feet at every tested frame rate (1.2551ms)
+✔ crouched support feet stay fixed with bent knees, low swing and unchanged body height (3.9448ms)
+✔ crouched pivots plant the entire sole on a slope after changing facing (4.2858ms)
+✔ small turns pivot on the ground without a step, standing and crouched (1.3488ms)
+✔ bigger turns take few steps and still settle both feet on the aim (1.1889ms)
+✔ a step slides round on the ground before it lifts; a flick far behind lifts at once (0.1595ms)
+✔ a planted boot turns on its heel when it leads the turn and on its ball when it trails; its knee follows the toes (1.9189ms)
+✔ cursor under/on the marine retains facing and a comfortable forward hold (0.8138ms)
+✔ a ray through the head cannot aim backward even when its floor pick is far behind (0.123ms)
+✔ outside the body, close aiming follows the requested side without moving the raw pick (0.5301ms)
+✔ clamp releases continuously at the comfortable range; ordinary distant aim is exact (0.1331ms)
+✔ scope retains its actual sight line; crouch gets a lower ready pose (0.1571ms)
+ℹ tests 23
+ℹ suites 0
+ℹ pass 23
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 131.6256

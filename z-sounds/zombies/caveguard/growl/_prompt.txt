@@ -1,0 +1,9 @@
+#80 caveguard-growl
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 3 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A low, wet, menacing growl from a creature hiding in a dark cave, close and echoing off the rock walls. No words, no music.
+
+In the game: AudioSys.guardianGrowl()

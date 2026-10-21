@@ -1,0 +1,38 @@
+{
+ "m240": {
+  "mounted": true,
+  "mount": {
+   "jumpCm": 702.55,
+   "jumpJoint": "hips",
+   "jumpFrame": 2,
+   "popCm": 697.95
+  },
+  "traverse": {
+   "ankleL": {
+    "maxSlipCm": 0,
+    "skateCm": 0,
+    "steps": 0,
+    "plantedFrames": 360,
+    "frames": 360
+   },
+   "ankleR": {
+    "maxSlipCm": 0,
+    "skateCm": 0,
+    "steps": 0,
+    "plantedFrames": 360,
+    "frames": 360
+   },
+   "outOfReachFrames": 360
+  },
+  "traverseYaw": [
+   -1.19,
+   1.19
+  ],
+  "dismount": {
+   "jumpCm": 0,
+   "jumpJoint": "",
+   "jumpFrame": -1,
+   "popCm": 0
+  }
+ }
+}

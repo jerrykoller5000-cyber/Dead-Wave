@@ -1,0 +1,9 @@
+#2 player/footstep-run-dirt  (start here)
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: footstep(dry, running)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.4 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A single fast running combat boot footstep on dirt, a heavier scuffing impact, close. No music, no voice.

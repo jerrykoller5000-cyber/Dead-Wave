@@ -1,0 +1,3 @@
+Achievement
+Used for: A short cue: an achievement unlocked
+The game plays now: assets/soundtrack/cue_achievement (stings.achievement)

@@ -1,0 +1,3 @@
+Airdrop
+Used for: A short cue: a supply airdrop is incoming
+The game plays now: assets/soundtrack/cue_airdrop (stings.airdrop)

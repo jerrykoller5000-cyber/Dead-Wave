@@ -1,0 +1,78 @@
+{
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "before": {
+    "meshes": 248,
+    "tris": 6216
+  },
+  "after": {
+    "id": "build.sandbag",
+    "name": "Sandbag wall",
+    "kind": "model",
+    "variant": "2",
+    "mode": null,
+    "center": {
+      "x": -26.004112005233765,
+      "y": -199.1568654179573,
+      "z": -631.27
+    },
+    "size": {
+      "x": 2.031412124633789,
+      "y": 1.6862691640853882,
+      "z": 0.6600000262260437
+    },
+    "yaw": 0,
+    "info": {
+      "meshes": 2,
+      "drawables": 2,
+      "tris": 1428,
+      "points": 0,
+      "segments": 0,
+      "materials": 2
+    }
+  },
+  "sheetResults": [
+    {
+      "id": "build.sandbag",
+      "variant": "0",
+      "mode": null,
+      "ok": true,
+      "ms": 140,
+      "tris": 1656,
+      "size": [
+        1.99,
+        1.278,
+        0.591
+      ],
+      "error": null
+    },
+    {
+      "id": "build.sandbag",
+      "variant": "1",
+      "mode": null,
+      "ok": true,
+      "ms": 112,
+      "tris": 2352,
+      "size": [
+        2,
+        1.64,
+        0.79
+      ],
+      "error": null
+    },
+    {
+      "id": "build.sandbag",
+      "variant": "2",
+      "mode": null,
+      "ok": true,
+      "ms": 112,
+      "tris": 1428,
+      "size": [
+        2.031,
+        1.686,
+        0.66
+      ],
+      "error": null
+    }
+  ],
+  "errors": []
+}

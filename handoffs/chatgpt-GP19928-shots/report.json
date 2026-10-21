@@ -1,0 +1,92 @@
+{
+  "first": {
+    "hidden": false,
+    "title": "New here? Ten minutes on the range.",
+    "choices": [
+      "Go to Training",
+      "Play anyway"
+    ],
+    "box": [
+      420,
+      215,
+      440,
+      290
+    ],
+    "overflowX": false,
+    "saved": "seen"
+  },
+  "narrow": {
+    "hidden": false,
+    "title": "New here? Ten minutes on the range.",
+    "choices": [
+      "Go to Training",
+      "Play anyway"
+    ],
+    "box": [
+      23,
+      250,
+      343,
+      344
+    ],
+    "overflowX": false,
+    "saved": "seen"
+  },
+  "training": {
+    "playing": true,
+    "cardHidden": true,
+    "saved": "seen"
+  },
+  "afterTraining": {
+    "hidden": true,
+    "title": "New here? Ten minutes on the range.",
+    "choices": [
+      "Go to Training",
+      "Play anyway"
+    ],
+    "box": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "overflowX": false,
+    "saved": "seen"
+  },
+  "secondFresh": {
+    "hidden": false,
+    "title": "New here? Ten minutes on the range.",
+    "choices": [
+      "Go to Training",
+      "Play anyway"
+    ],
+    "box": [
+      420,
+      215,
+      440,
+      290
+    ],
+    "overflowX": false,
+    "saved": "seen"
+  },
+  "playAnyway": {
+    "cardHidden": true,
+    "saved": "seen"
+  },
+  "afterPlayAnyway": {
+    "hidden": true,
+    "title": "New here? Ten minutes on the range.",
+    "choices": [
+      "Go to Training",
+      "Play anyway"
+    ],
+    "box": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "overflowX": false,
+    "saved": "seen"
+  },
+  "errors": []
+}

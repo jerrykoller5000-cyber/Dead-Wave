@@ -1,0 +1,1621 @@
+{
+  "schema": "grave-shift-elevenlabs-sfx-v1",
+  "source": "Claude outputs/PROMPTS-2.md",
+  "sourceSha256": "af2077890c40e15180f73e7dc548fb7e82952d9c252ec3a6d7bb98b0004615ab",
+  "model": "eleven_text_to_sound_v2",
+  "promptInfluence": 0.6,
+  "variants": 4,
+  "sounds": [
+    {
+      "n": 1,
+      "folder": "player/footstep-dirt",
+      "priority": true,
+      "status": "upgrade",
+      "requestedSeconds": 0.5,
+      "loop": false,
+      "prompt": "A single soldier's combat boot footstep on packed dirt and short grass, outdoors, close. No music, no voice."
+    },
+    {
+      "n": 2,
+      "folder": "player/footstep-run-dirt",
+      "priority": true,
+      "status": "upgrade",
+      "requestedSeconds": 0.4,
+      "loop": false,
+      "prompt": "A single fast running combat boot footstep on dirt, a heavier scuffing impact, close. No music, no voice."
+    },
+    {
+      "n": 3,
+      "folder": "player/footstep-wood",
+      "priority": true,
+      "status": "upgrade",
+      "requestedSeconds": 0.5,
+      "loop": false,
+      "prompt": "A single combat boot footstep on hollow wooden floorboards, a deep knock with a small creak. No music, no voice."
+    },
+    {
+      "n": 4,
+      "folder": "player/footstep-water",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.6,
+      "loop": false,
+      "prompt": "A single footstep wading through shallow water, a splash and a drip. No music, no voice."
+    },
+    {
+      "n": 5,
+      "folder": "player/footstep-tile",
+      "priority": true,
+      "status": "upgrade",
+      "requestedSeconds": 0.4,
+      "loop": false,
+      "prompt": "A single combat boot footstep on a smooth tiled concrete floor indoors, a crisp tap with a short room echo. No music, no voice."
+    },
+    {
+      "n": 6,
+      "folder": "player/jump",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.5,
+      "loop": false,
+      "prompt": "A soldier jumping: a short effort exhale and the rustle and clink of gear and webbing. No music, no voice."
+    },
+    {
+      "n": 7,
+      "folder": "player/land",
+      "priority": true,
+      "status": "missing",
+      "requestedSeconds": 0.5,
+      "loop": false,
+      "prompt": "A soldier landing from a jump onto dirt: a heavy boot thud and a rattle of gear. No music, no voice."
+    },
+    {
+      "n": 8,
+      "folder": "player/dodge-roll",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.8,
+      "loop": false,
+      "prompt": "A soldier diving and rolling on the ground: cloth and gear thumping on dirt, a grunt-free tumble. No music, no voice."
+    },
+    {
+      "n": 9,
+      "folder": "player/vault",
+      "priority": false,
+      "status": "missing",
+      "requestedSeconds": 0.8,
+      "loop": false,
+      "prompt": "A soldier vaulting over a low wall: hands slapping concrete, gear scraping, boots landing. No music, no voice."
+    },
+    {
+      "n": 10,
+      "folder": "player/ladder-climb",
+      "priority": false,
+      "status": "missing",
+      "requestedSeconds": 0.6,
+      "loop": false,
+      "prompt": "A single step climbing a metal ladder: a boot on a steel rung and a hand gripping the rail. No music, no voice."
+    },
+    {
+      "n": 11,
+      "folder": "player/swim-stroke",
+      "priority": false,
+      "status": "missing",
+      "requestedSeconds": 1,
+      "loop": false,
+      "prompt": "A single swimming stroke in a lake: an arm pulling through water and a soft splash. No music, no voice."
+    },
+    {
+      "n": 12,
+      "folder": "player/hurt",
+      "priority": true,
+      "status": "upgrade",
+      "requestedSeconds": 0.6,
+      "loop": false,
+      "prompt": "A short pained grunt from a tough male soldier who has just been hit, through clenched teeth. No words."
+    },
+    {
+      "n": 13,
+      "folder": "player/hurt-heavy",
+      "priority": false,
+      "status": "missing",
+      "requestedSeconds": 0.8,
+      "loop": false,
+      "prompt": "A male soldier's sharp cry of pain from a heavy blow, winded. No words."
+    },
+    {
+      "n": 14,
+      "folder": "player/death",
+      "priority": false,
+      "status": "missing",
+      "requestedSeconds": 1.5,
+      "loop": false,
+      "prompt": "A male soldier's last choked gasp as he collapses, and his body and gear hitting the ground. No words."
+    },
+    {
+      "n": 15,
+      "folder": "player/breath-tired",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 2,
+      "loop": false,
+      "prompt": "A tired male soldier's heavy breathing after sprinting, three hard breaths. No words."
+    },
+    {
+      "n": 16,
+      "folder": "player/heartbeat-low",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 1.2,
+      "loop": true,
+      "prompt": "A slow, heavy, muffled heartbeat heard from inside the body, two beats, for low health. No music, no voice."
+    },
+    {
+      "n": 17,
+      "folder": "player/armor-hit",
+      "priority": true,
+      "status": "upgrade",
+      "requestedSeconds": 0.4,
+      "loop": false,
+      "prompt": "A blow landing on a soldier's ballistic body armor plate: a dull hard thump with a ceramic crack. No music, no voice."
+    },
+    {
+      "n": 18,
+      "folder": "player/armor-don",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 1.2,
+      "loop": false,
+      "prompt": "A soldier strapping on a plate carrier: velcro ripping and straps cinching tight. No music, no voice."
+    },
+    {
+      "n": 19,
+      "folder": "player/medpen",
+      "priority": true,
+      "status": "upgrade",
+      "requestedSeconds": 0.8,
+      "loop": false,
+      "prompt": "An auto-injector pen jabbed into a thigh: a sharp click, a hiss of the spring, a quick relieved exhale. No music, no voice."
+    },
+    {
+      "n": 20,
+      "folder": "player/nvg-on",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.8,
+      "loop": false,
+      "prompt": "Night vision goggles flipping down and powering on: a mechanical click and a rising high-pitched electronic whine. No music, no voice."
+    },
+    {
+      "n": 21,
+      "folder": "player/nvg-off",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.6,
+      "loop": false,
+      "prompt": "Night vision goggles flipping up and powering off: a click and a falling electronic whine. No music, no voice."
+    },
+    {
+      "n": 22,
+      "folder": "player/nvg-hum",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 4,
+      "loop": true,
+      "prompt": "A very quiet, steady high electronic hum of night vision goggles running, seamless. No music, no voice."
+    },
+    {
+      "n": 23,
+      "folder": "player/flashlight-click",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.3,
+      "loop": false,
+      "prompt": "A weapon-mounted flashlight's tactical tail switch clicking on, a crisp plastic click. No music, no voice."
+    },
+    {
+      "n": 24,
+      "folder": "player/chute-land",
+      "priority": false,
+      "status": "missing",
+      "requestedSeconds": 1.2,
+      "loop": false,
+      "prompt": "A paratrooper landing on grass: boots thumping down, a stumble and the parachute canopy collapsing with a flutter. No music, no voice."
+    },
+    {
+      "n": 25,
+      "folder": "player/burial-dig",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 1,
+      "loop": false,
+      "prompt": "A shovel pushing into dirt and patting a grave mound flat, two pats. No music, no voice."
+    },
+    {
+      "n": 26,
+      "folder": "player/burial-chisel",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.8,
+      "loop": false,
+      "prompt": "A hammer striking a chisel on a stone grave marker, two ringing strikes with stone chips. No music, no voice."
+    },
+    {
+      "n": 27,
+      "folder": "player/burial-heave",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 1,
+      "loop": false,
+      "prompt": "A male soldier straining to lift something heavy, a deep effort grunt. No words."
+    },
+    {
+      "n": 28,
+      "folder": "weapon-foley/mag-out",
+      "priority": true,
+      "status": "upgrade",
+      "requestedSeconds": 0.5,
+      "loop": false,
+      "prompt": "A rifle magazine being pulled out of the magazine well, a metallic slide and click. No music, no voice."
+    },
+    {
+      "n": 29,
+      "folder": "weapon-foley/mag-in",
+      "priority": true,
+      "status": "upgrade",
+      "requestedSeconds": 0.5,
+      "loop": false,
+      "prompt": "A rifle magazine being inserted and locked into the magazine well, a solid metal click. No music, no voice."
+    },
+    {
+      "n": 30,
+      "folder": "weapon-foley/mag-slap",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.4,
+      "loop": false,
+      "prompt": "A palm slapping the bottom of a seated rifle magazine, a firm plastic and metal thump. No music, no voice."
+    },
+    {
+      "n": 31,
+      "folder": "weapon-foley/mag-release",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.3,
+      "loop": false,
+      "prompt": "A pistol magazine release button pressed, a small sharp click. No music, no voice."
+    },
+    {
+      "n": 32,
+      "folder": "weapon-foley/mag-drop",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.6,
+      "loop": false,
+      "prompt": "An empty metal magazine dropping onto dirt and bouncing once. No music, no voice."
+    },
+    {
+      "n": 33,
+      "folder": "weapon-foley/slide-back",
+      "priority": true,
+      "status": "upgrade",
+      "requestedSeconds": 0.4,
+      "loop": false,
+      "prompt": "A pistol slide racked back, a crisp metallic scrape. No music, no voice."
+    },
+    {
+      "n": 34,
+      "folder": "weapon-foley/slide-forward",
+      "priority": true,
+      "status": "upgrade",
+      "requestedSeconds": 0.4,
+      "loop": false,
+      "prompt": "A pistol slide snapping forward into battery, a sharp metallic clack. No music, no voice."
+    },
+    {
+      "n": 35,
+      "folder": "weapon-foley/charging-handle",
+      "priority": false,
+      "status": "missing",
+      "requestedSeconds": 0.6,
+      "loop": false,
+      "prompt": "An assault rifle charging handle pulled back and released, a springy metallic clack. No music, no voice."
+    },
+    {
+      "n": 36,
+      "folder": "weapon-foley/bolt-cycle",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 1.2,
+      "loop": false,
+      "prompt": "A bolt-action sniper rifle cycled: bolt lifted, pulled back, pushed forward and locked down, four crisp metallic motions. No music, no voice."
+    },
+    {
+      "n": 37,
+      "folder": "weapon-foley/pump-back",
+      "priority": true,
+      "status": "upgrade",
+      "requestedSeconds": 0.4,
+      "loop": false,
+      "prompt": "A pump shotgun's fore-end pulled back, a rough metallic clack. No music, no voice."
+    },
+    {
+      "n": 38,
+      "folder": "weapon-foley/pump-forward",
+      "priority": true,
+      "status": "upgrade",
+      "requestedSeconds": 0.4,
+      "loop": false,
+      "prompt": "A pump shotgun's fore-end pushed forward, a solid metallic clack. No music, no voice."
+    },
+    {
+      "n": 39,
+      "folder": "weapon-foley/shell-insert",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.4,
+      "loop": false,
+      "prompt": "A single shotgun shell pushed into the loading port, a short brass and spring click. No music, no voice."
+    },
+    {
+      "n": 40,
+      "folder": "weapon-foley/cylinder-open",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.5,
+      "loop": false,
+      "prompt": "A revolver cylinder swung open, a metallic click and swing. No music, no voice."
+    },
+    {
+      "n": 41,
+      "folder": "weapon-foley/cylinder-spin",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.8,
+      "loop": false,
+      "prompt": "A revolver cylinder spun and snapped closed, a ratcheting whir and a click. No music, no voice."
+    },
+    {
+      "n": 42,
+      "folder": "weapon-foley/drum-out",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.6,
+      "loop": false,
+      "prompt": "A heavy drum magazine unlatched and pulled off a shotgun, a clunky metal release. No music, no voice."
+    },
+    {
+      "n": 43,
+      "folder": "weapon-foley/drum-in",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.6,
+      "loop": false,
+      "prompt": "A heavy drum magazine seated onto a shotgun, a deep metal clunk and latch. No music, no voice."
+    },
+    {
+      "n": 44,
+      "folder": "weapon-foley/belt-feed",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 1.2,
+      "loop": false,
+      "prompt": "A machine gun feed tray cover opened, an ammunition belt laid in with rattling links, the cover slammed shut. No music, no voice."
+    },
+    {
+      "n": 45,
+      "folder": "weapon-foley/launcher-open",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.6,
+      "loop": false,
+      "prompt": "A grenade launcher breech opened, a heavy metal hinge clack. No music, no voice."
+    },
+    {
+      "n": 46,
+      "folder": "weapon-foley/launcher-shell",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.6,
+      "loop": false,
+      "prompt": "A 40mm grenade round pushed into a launcher tube and the breech snapped shut. No music, no voice."
+    },
+    {
+      "n": 47,
+      "folder": "weapon-foley/dry-fire",
+      "priority": true,
+      "status": "upgrade",
+      "requestedSeconds": 0.3,
+      "loop": false,
+      "prompt": "A gun's hammer falling on an empty chamber, a hollow dry click. No music, no voice."
+    },
+    {
+      "n": 48,
+      "folder": "weapon-foley/brass",
+      "priority": true,
+      "status": "upgrade",
+      "requestedSeconds": 0.6,
+      "loop": false,
+      "prompt": "A single spent brass rifle casing falling on dirt and a stone, a small tinkling bounce. No music, no voice."
+    },
+    {
+      "n": 49,
+      "folder": "weapon-foley/brass-concrete",
+      "priority": false,
+      "status": "missing",
+      "requestedSeconds": 0.6,
+      "loop": false,
+      "prompt": "A single spent brass casing bouncing on a concrete floor, a bright tinkling ring. No music, no voice."
+    },
+    {
+      "n": 50,
+      "folder": "weapon-foley/weapon-switch",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.6,
+      "loop": false,
+      "prompt": "A soldier swapping weapons: a rifle sling shifting and a pistol drawn from a holster, quick gear rustle. No music, no voice."
+    },
+    {
+      "n": 51,
+      "folder": "weapon-foley/wheel-tick",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.15,
+      "loop": false,
+      "prompt": "A tiny soft mechanical tick, like a selection dial clicking one notch. No music, no voice."
+    },
+    {
+      "n": 52,
+      "folder": "weapon-foley/grenade-pin",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.8,
+      "loop": false,
+      "prompt": "A hand grenade pin pulled and the spoon flying off with a metallic ping. No music, no voice."
+    },
+    {
+      "n": 53,
+      "folder": "weapon-foley/grenade-bounce",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.5,
+      "loop": false,
+      "prompt": "A hand grenade bouncing once on dirt, a heavy metallic thunk. No music, no voice."
+    },
+    {
+      "n": 54,
+      "folder": "weapon-foley/knife-swing",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.4,
+      "loop": false,
+      "prompt": "A combat knife slashing fast through the air, a short sharp whoosh. No music, no voice."
+    },
+    {
+      "n": 55,
+      "folder": "weapon-foley/knife-hit",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.4,
+      "loop": false,
+      "prompt": "A combat knife stabbing into flesh, a wet thick thud. No music, no voice."
+    },
+    {
+      "n": 56,
+      "folder": "weapon-foley/machete-swing",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.5,
+      "loop": false,
+      "prompt": "A heavy machete swung hard through the air, a deep whoosh. No music, no voice."
+    },
+    {
+      "n": 57,
+      "folder": "weapon-foley/machete-chop",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.5,
+      "loop": false,
+      "prompt": "A machete chopping into a body, a heavy wet crunch. No music, no voice."
+    },
+    {
+      "n": 58,
+      "folder": "weapon-foley/chainsaw-start",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 1.5,
+      "loop": false,
+      "prompt": "A chainsaw pull-started: a cord yank, the engine catching and sputtering into idle. No music, no voice."
+    },
+    {
+      "n": 59,
+      "folder": "weapon-foley/chainsaw-idle",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 3,
+      "loop": true,
+      "prompt": "A chainsaw idling, a steady rattling two-stroke engine, seamless. No music, no voice."
+    },
+    {
+      "n": 60,
+      "folder": "weapon-foley/chainsaw-rev",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 2,
+      "loop": false,
+      "prompt": "A chainsaw revving to full throttle and holding, a loud screaming two-stroke engine. No music, no voice."
+    },
+    {
+      "n": 61,
+      "folder": "weapon-foley/chainsaw-cut",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 2,
+      "loop": false,
+      "prompt": "A chainsaw at full throttle cutting through flesh and bone, a grinding wet bite. No music, no voice."
+    },
+    {
+      "n": 62,
+      "folder": "weapon-foley/chainsaw-stop",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 1,
+      "loop": false,
+      "prompt": "A chainsaw engine cut off, winding down and the chain rattling to a stop. No music, no voice."
+    },
+    {
+      "n": 63,
+      "folder": "weapons/pistol",
+      "priority": false,
+      "status": "try",
+      "requestedSeconds": 1,
+      "loop": false,
+      "prompt": "A single 9mm handgun shot outdoors, sharp crack with a short natural echo. No music, no voice."
+    },
+    {
+      "n": 64,
+      "folder": "weapons/revolver",
+      "priority": false,
+      "status": "try",
+      "requestedSeconds": 1.2,
+      "loop": false,
+      "prompt": "A single .357 revolver shot outdoors, a loud booming crack with echo. No music, no voice."
+    },
+    {
+      "n": 65,
+      "folder": "weapons/smg",
+      "priority": false,
+      "status": "try",
+      "requestedSeconds": 0.8,
+      "loop": false,
+      "prompt": "A single submachine gun shot outdoors, a fast snappy crack, short echo. No music, no voice."
+    },
+    {
+      "n": 66,
+      "folder": "weapons/carbine",
+      "priority": false,
+      "status": "try",
+      "requestedSeconds": 1,
+      "loop": false,
+      "prompt": "A single 5.56 assault rifle shot outdoors, a punchy crack with a rolling echo. No music, no voice."
+    },
+    {
+      "n": 67,
+      "folder": "weapons/rifle",
+      "priority": false,
+      "status": "try",
+      "requestedSeconds": 1,
+      "loop": false,
+      "prompt": "A single 7.62 battle rifle shot outdoors, a deep heavy crack with a rolling echo. No music, no voice."
+    },
+    {
+      "n": 68,
+      "folder": "weapons/shotgun",
+      "priority": false,
+      "status": "try",
+      "requestedSeconds": 1.2,
+      "loop": false,
+      "prompt": "A single 12 gauge pump shotgun blast outdoors, a huge deep boom with echo. No music, no voice."
+    },
+    {
+      "n": 69,
+      "folder": "weapons/auto-shotgun",
+      "priority": false,
+      "status": "try",
+      "requestedSeconds": 1,
+      "loop": false,
+      "prompt": "A single automatic shotgun blast outdoors, a thick punchy boom. No music, no voice."
+    },
+    {
+      "n": 70,
+      "folder": "weapons/sniper",
+      "priority": false,
+      "status": "try",
+      "requestedSeconds": 2,
+      "loop": false,
+      "prompt": "A single high-powered sniper rifle shot outdoors, a massive crack echoing across a valley. No music, no voice."
+    },
+    {
+      "n": 71,
+      "folder": "weapons/machine-gun",
+      "priority": false,
+      "status": "try",
+      "requestedSeconds": 1,
+      "loop": false,
+      "prompt": "A short burst of three shots from a belt-fed machine gun outdoors, heavy and rhythmic, with echo. No music, no voice."
+    },
+    {
+      "n": 72,
+      "folder": "weapons/rotary-gun",
+      "priority": false,
+      "status": "try",
+      "requestedSeconds": 2,
+      "loop": false,
+      "prompt": "A rotary machine gun firing a two second burst, a continuous ripping roar. No music, no voice."
+    },
+    {
+      "n": 73,
+      "folder": "weapons/rotary-spin",
+      "priority": false,
+      "status": "try",
+      "requestedSeconds": 1.5,
+      "loop": false,
+      "prompt": "A rotary machine gun's barrels spinning up from rest with an electric motor whine, no shooting. No music, no voice."
+    },
+    {
+      "n": 74,
+      "folder": "weapons/grenade-launcher",
+      "priority": false,
+      "status": "try",
+      "requestedSeconds": 1.2,
+      "loop": false,
+      "prompt": "A 40mm grenade launcher firing, a hollow deep thump. No music, no voice."
+    },
+    {
+      "n": 75,
+      "folder": "weapons/mortar-launch",
+      "priority": false,
+      "status": "try",
+      "requestedSeconds": 1.5,
+      "loop": false,
+      "prompt": "A 60mm mortar round firing from its tube, a loud hollow whump. No music, no voice."
+    },
+    {
+      "n": 76,
+      "folder": "weapons/explosion",
+      "priority": false,
+      "status": "try",
+      "requestedSeconds": 2.5,
+      "loop": false,
+      "prompt": "A hand grenade exploding outdoors, a sharp deep blast with dirt and debris raining down. No music, no voice."
+    },
+    {
+      "n": 77,
+      "folder": "weapons/flamethrower",
+      "priority": false,
+      "status": "try",
+      "requestedSeconds": 3,
+      "loop": true,
+      "prompt": "A flamethrower spraying a jet of fire, a roaring whoosh with a hissing gas jet, seamless. No music, no voice."
+    },
+    {
+      "n": 78,
+      "folder": "bullet-impacts/dirt",
+      "priority": true,
+      "status": "upgrade",
+      "requestedSeconds": 0.5,
+      "loop": false,
+      "prompt": "A bullet hitting dirt, a short thud with a spray of earth. No music, no voice."
+    },
+    {
+      "n": 79,
+      "folder": "bullet-impacts/rock",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.5,
+      "loop": false,
+      "prompt": "A bullet hitting rock, a sharp crack with stone chips. No music, no voice."
+    },
+    {
+      "n": 80,
+      "folder": "bullet-impacts/metal",
+      "priority": true,
+      "status": "upgrade",
+      "requestedSeconds": 0.5,
+      "loop": false,
+      "prompt": "A bullet hitting a steel plate, a loud bright clang. No music, no voice."
+    },
+    {
+      "n": 81,
+      "folder": "bullet-impacts/wood",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.5,
+      "loop": false,
+      "prompt": "A bullet hitting thick wood, a hard thock with splinters. No music, no voice."
+    },
+    {
+      "n": 82,
+      "folder": "bullet-impacts/water",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.5,
+      "loop": false,
+      "prompt": "A bullet hitting water, a quick sharp splash. No music, no voice."
+    },
+    {
+      "n": 83,
+      "folder": "bullet-impacts/sand",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.5,
+      "loop": false,
+      "prompt": "A bullet hitting sandbags, a muffled punch and a hiss of sand. No music, no voice."
+    },
+    {
+      "n": 84,
+      "folder": "bullet-impacts/ricochet",
+      "priority": true,
+      "status": "upgrade",
+      "requestedSeconds": 0.8,
+      "loop": false,
+      "prompt": "A bullet ricocheting off stone, a whining zing flying away. No music, no voice."
+    },
+    {
+      "n": 85,
+      "folder": "bullet-impacts/leaves",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.5,
+      "loop": false,
+      "prompt": "A bullet ripping through tree leaves and twigs, a quick rustle and snap. No music, no voice."
+    },
+    {
+      "n": 86,
+      "folder": "builds/place-wood",
+      "priority": true,
+      "status": "upgrade",
+      "requestedSeconds": 0.8,
+      "loop": false,
+      "prompt": "Hammering a wooden barricade together, three quick hammer blows on planks. No music, no voice."
+    },
+    {
+      "n": 87,
+      "folder": "builds/place-sandbag",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.8,
+      "loop": false,
+      "prompt": "A heavy sandbag dropped and patted into place, a soft heavy thump. No music, no voice."
+    },
+    {
+      "n": 88,
+      "folder": "builds/place-metal",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.8,
+      "loop": false,
+      "prompt": "A steel plate wall bolted into place, a clank and a power drill burst. No music, no voice."
+    },
+    {
+      "n": 89,
+      "folder": "builds/place-wire",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 1,
+      "loop": false,
+      "prompt": "Barbed wire unrolled and stretched on posts, a metallic twang and creak. No music, no voice."
+    },
+    {
+      "n": 90,
+      "folder": "builds/place-turret",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 1,
+      "loop": false,
+      "prompt": "An automated gun turret set down and powering on, a heavy clunk and a rising servo whir. No music, no voice."
+    },
+    {
+      "n": 91,
+      "folder": "builds/upgrade",
+      "priority": true,
+      "status": "missing",
+      "requestedSeconds": 1.2,
+      "loop": false,
+      "prompt": "Reinforcing a fortification: a power drill, a wrench tightening, a satisfying final clank. No music, no voice."
+    },
+    {
+      "n": 92,
+      "folder": "builds/repair",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 1,
+      "loop": false,
+      "prompt": "Repairing a damaged barricade: two hammer blows and a wrench ratchet. No music, no voice."
+    },
+    {
+      "n": 93,
+      "folder": "builds/sell",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.8,
+      "loop": false,
+      "prompt": "Dismantling a fortification and pocketing scrap: a crowbar pry, planks clattering and a coin jingle. No music, no voice."
+    },
+    {
+      "n": 94,
+      "folder": "builds/invalid",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.4,
+      "loop": false,
+      "prompt": "A short low dull buzz, a 'no' sound for an action that is not allowed, game interface. No music, no voice."
+    },
+    {
+      "n": 95,
+      "folder": "builds/door-open",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.8,
+      "loop": false,
+      "prompt": "A heavy reinforced wooden door swinging open, a creaking hinge. No music, no voice."
+    },
+    {
+      "n": 96,
+      "folder": "builds/door-close",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.8,
+      "loop": false,
+      "prompt": "A heavy reinforced wooden door slamming shut, a solid thump and latch. No music, no voice."
+    },
+    {
+      "n": 97,
+      "folder": "builds/stairs-fold",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 1,
+      "loop": false,
+      "prompt": "A folding wooden stair ladder swinging down and thumping into place. No music, no voice."
+    },
+    {
+      "n": 98,
+      "folder": "builds/mine-beep",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.4,
+      "loop": false,
+      "prompt": "A landmine arming, a short high electronic beep. No music, no voice."
+    },
+    {
+      "n": 99,
+      "folder": "builds/spike-snap",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.6,
+      "loop": false,
+      "prompt": "A spike trap snapping shut on something, a sharp spring and a wet crunch. No music, no voice."
+    },
+    {
+      "n": 100,
+      "folder": "builds/lure",
+      "priority": true,
+      "status": "missing",
+      "requestedSeconds": 4,
+      "loop": true,
+      "prompt": "A battery-powered noise lure: a loud repeating electronic siren chirp meant to attract attention, seamless. No music, no voice."
+    },
+    {
+      "n": 101,
+      "folder": "turrets/light-turret-fire",
+      "priority": false,
+      "status": "try",
+      "requestedSeconds": 0.6,
+      "loop": false,
+      "prompt": "An automated sentry gun firing a short burst, a fast mechanical rattle of small caliber shots. No music, no voice."
+    },
+    {
+      "n": 102,
+      "folder": "turrets/heavy-turret-fire",
+      "priority": false,
+      "status": "try",
+      "requestedSeconds": 0.8,
+      "loop": false,
+      "prompt": "A heavy automated turret firing two big shots, deep thumping booms. No music, no voice."
+    },
+    {
+      "n": 103,
+      "folder": "turrets/servo",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.6,
+      "loop": false,
+      "prompt": "A gun turret's servo motors swiveling to track a target, a short electric whir. No music, no voice."
+    },
+    {
+      "n": 104,
+      "folder": "turrets/mortar-mount",
+      "priority": true,
+      "status": "missing",
+      "requestedSeconds": 1,
+      "loop": false,
+      "prompt": "A soldier kneeling down behind a mortar tube, gear settling and a hand grabbing the metal tube. No music, no voice."
+    },
+    {
+      "n": 105,
+      "folder": "turrets/mortar-round-drop",
+      "priority": true,
+      "status": "missing",
+      "requestedSeconds": 0.8,
+      "loop": false,
+      "prompt": "A mortar round slid into the mortar tube by hand, a metallic scrape sliding down the tube. No music, no voice."
+    },
+    {
+      "n": 106,
+      "folder": "turrets/mortar-incoming",
+      "priority": false,
+      "status": "missing",
+      "requestedSeconds": 2,
+      "loop": false,
+      "prompt": "A mortar shell whistling down through the air before impact, a falling whistle. No music, no voice."
+    },
+    {
+      "n": 107,
+      "folder": "turrets/mortar-dismount",
+      "priority": false,
+      "status": "missing",
+      "requestedSeconds": 0.8,
+      "loop": false,
+      "prompt": "A soldier standing up from a mortar, gear rattling. No music, no voice."
+    },
+    {
+      "n": 108,
+      "folder": "turrets/machine-gun-mount",
+      "priority": false,
+      "status": "missing",
+      "requestedSeconds": 0.8,
+      "loop": false,
+      "prompt": "A soldier grabbing a tripod-mounted machine gun, the tripod legs creaking and a charging handle pulled. No music, no voice."
+    },
+    {
+      "n": 109,
+      "folder": "hq/alarm-klaxon",
+      "priority": true,
+      "status": "upgrade",
+      "requestedSeconds": 2,
+      "loop": false,
+      "prompt": "A military base alarm klaxon, one long loud blaring blast, echoing. No music, no voice."
+    },
+    {
+      "n": 110,
+      "folder": "hq/alarm-rumble",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 3,
+      "loop": false,
+      "prompt": "A deep distant rumble rolling across a valley at night, the ground trembling. No music, no voice."
+    },
+    {
+      "n": 111,
+      "folder": "hq/flare-launch",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 1.5,
+      "loop": false,
+      "prompt": "A signal flare fired into the sky, a pop and a rising whistle. No music, no voice."
+    },
+    {
+      "n": 112,
+      "folder": "hq/flare-burst",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 2,
+      "loop": false,
+      "prompt": "A signal flare bursting high in the sky, a soft pop and a crackling fizz. No music, no voice."
+    },
+    {
+      "n": 113,
+      "folder": "hq/kiosk-shutter-open",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 1.2,
+      "loop": false,
+      "prompt": "A metal roll-up shutter rattling open on a supply kiosk. No music, no voice."
+    },
+    {
+      "n": 114,
+      "folder": "hq/kiosk-shutter-close",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 1.2,
+      "loop": false,
+      "prompt": "A metal roll-up shutter rattling closed and hitting the bottom. No music, no voice."
+    },
+    {
+      "n": 115,
+      "folder": "hq/kiosk-buy",
+      "priority": true,
+      "status": "upgrade",
+      "requestedSeconds": 0.8,
+      "loop": false,
+      "prompt": "A military supply terminal purchase: an electronic confirmation beep and a crate clunk. No music, no voice."
+    },
+    {
+      "n": 116,
+      "folder": "hq/kiosk-tab",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.2,
+      "loop": false,
+      "prompt": "A short soft electronic interface tick, a terminal tab changing. No music, no voice."
+    },
+    {
+      "n": 117,
+      "folder": "hq/cash",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.6,
+      "loop": false,
+      "prompt": "A few coins and dog tags jingling into a pouch. No music, no voice."
+    },
+    {
+      "n": 118,
+      "folder": "hq/skull-pickup",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.6,
+      "loop": false,
+      "prompt": "Picking up a zombie skull: a hollow bony knock and a wet squelch. No music, no voice."
+    },
+    {
+      "n": 119,
+      "folder": "hq/bag-throw",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 1,
+      "loop": false,
+      "prompt": "A heavy sack full of skulls thrown onto a counter, a rattling bony thud. No music, no voice."
+    },
+    {
+      "n": 120,
+      "folder": "hq/hq-machine",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 1.5,
+      "loop": false,
+      "prompt": "An old military intake machine grinding and clanking as it processes something. No music, no voice."
+    },
+    {
+      "n": 121,
+      "folder": "hq/hq-ding",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.8,
+      "loop": false,
+      "prompt": "A single old mechanical service bell ding. No music, no voice."
+    },
+    {
+      "n": 122,
+      "folder": "hq/pickup",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.5,
+      "loop": false,
+      "prompt": "Picking up supplies: a quick rustle of a pouch and a click. No music, no voice."
+    },
+    {
+      "n": 123,
+      "folder": "hq/crate-land",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 1.5,
+      "loop": false,
+      "prompt": "A heavy supply crate on a parachute landing on dirt, a big wooden thud and a canopy flutter. No music, no voice."
+    },
+    {
+      "n": 124,
+      "folder": "hq/radio-call",
+      "priority": true,
+      "status": "missing",
+      "requestedSeconds": 2,
+      "loop": false,
+      "prompt": "A military field radio crackling on with static and a squelch beep, no voice."
+    },
+    {
+      "n": 125,
+      "folder": "hq/radio-off",
+      "priority": false,
+      "status": "missing",
+      "requestedSeconds": 0.6,
+      "loop": false,
+      "prompt": "A military field radio clicking off with a short squelch. No music, no voice."
+    },
+    {
+      "n": 126,
+      "folder": "hq/armory-bench",
+      "priority": false,
+      "status": "missing",
+      "requestedSeconds": 1.2,
+      "loop": false,
+      "prompt": "A gunsmith working on a rifle on a workbench: a part sliding on, a screw tightened, a click. No music, no voice."
+    },
+    {
+      "n": 127,
+      "folder": "hq/cif-locker",
+      "priority": false,
+      "status": "missing",
+      "requestedSeconds": 1,
+      "loop": false,
+      "prompt": "A metal equipment locker door opening and gear being taken off a hook. No music, no voice."
+    },
+    {
+      "n": 128,
+      "folder": "world/wind-day",
+      "priority": true,
+      "status": "upgrade",
+      "requestedSeconds": 10,
+      "loop": true,
+      "prompt": "Gentle daytime wind through a pine forest valley, rustling needles, calm, seamless. No music, no voice."
+    },
+    {
+      "n": 129,
+      "folder": "world/wind-night",
+      "priority": true,
+      "status": "upgrade",
+      "requestedSeconds": 10,
+      "loop": true,
+      "prompt": "Cold night wind in a forest valley, low and eerie, distant creaking trees, seamless. No music, no voice."
+    },
+    {
+      "n": 130,
+      "folder": "world/crickets-night",
+      "priority": true,
+      "status": "upgrade",
+      "requestedSeconds": 10,
+      "loop": true,
+      "prompt": "Crickets and night insects in a forest clearing, steady, seamless. No music, no voice."
+    },
+    {
+      "n": 131,
+      "folder": "world/river",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 10,
+      "loop": true,
+      "prompt": "A small rocky river flowing steadily, close, seamless. No music, no voice."
+    },
+    {
+      "n": 132,
+      "folder": "world/lake-shore",
+      "priority": false,
+      "status": "missing",
+      "requestedSeconds": 10,
+      "loop": true,
+      "prompt": "Small waves lapping on a lake shore and a wooden dock, gentle, seamless. No music, no voice."
+    },
+    {
+      "n": 133,
+      "folder": "world/rain",
+      "priority": true,
+      "status": "upgrade",
+      "requestedSeconds": 10,
+      "loop": true,
+      "prompt": "Steady rain falling on a forest and on canvas and metal roofs, seamless. No music, no voice."
+    },
+    {
+      "n": 134,
+      "folder": "world/thunder",
+      "priority": true,
+      "status": "upgrade",
+      "requestedSeconds": 6,
+      "loop": false,
+      "prompt": "A distant rolling thunder clap rumbling across mountains. No music, no voice."
+    },
+    {
+      "n": 135,
+      "folder": "world/lightning-strike",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 4,
+      "loop": false,
+      "prompt": "A close lightning strike: a sharp crackling snap and an immediate huge thunder crack. No music, no voice."
+    },
+    {
+      "n": 136,
+      "folder": "world/birds-day",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 4,
+      "loop": false,
+      "prompt": "A few forest songbirds chirping in the morning, distant, sparse. No music, no voice."
+    },
+    {
+      "n": 137,
+      "folder": "world/owl",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 2,
+      "loop": false,
+      "prompt": "A single owl hooting twice at night in a forest, distant. No music, no voice."
+    },
+    {
+      "n": 138,
+      "folder": "world/campfire",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 8,
+      "loop": true,
+      "prompt": "A campfire crackling and popping, close, seamless. No music, no voice."
+    },
+    {
+      "n": 139,
+      "folder": "world/fire-burning",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 6,
+      "loop": true,
+      "prompt": "A large fire burning, roaring and hissing, seamless. No music, no voice."
+    },
+    {
+      "n": 140,
+      "folder": "world/tree-fall",
+      "priority": true,
+      "status": "upgrade",
+      "requestedSeconds": 3,
+      "loop": false,
+      "prompt": "A large pine tree cracking at the base and crashing down through branches to the ground. No music, no voice."
+    },
+    {
+      "n": 141,
+      "folder": "world/tree-thud",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 1,
+      "loop": false,
+      "prompt": "A bullet or blade striking a thick tree trunk, a solid woody thunk. No music, no voice."
+    },
+    {
+      "n": 142,
+      "folder": "world/rock-break",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 1.5,
+      "loop": false,
+      "prompt": "A boulder cracking apart, stone breaking and rubble tumbling. No music, no voice."
+    },
+    {
+      "n": 143,
+      "folder": "world/big-splash",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 1.5,
+      "loop": false,
+      "prompt": "A person falling into a lake, a big deep splash. No music, no voice."
+    },
+    {
+      "n": 144,
+      "folder": "world/surface-gasp",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 1.2,
+      "loop": false,
+      "prompt": "A man bursting up out of water and gasping for air, dripping. No words."
+    },
+    {
+      "n": 145,
+      "folder": "world/rabbit-screech",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 1,
+      "loop": false,
+      "prompt": "A rabid rabbit's shrill, unnatural screech, small and nasty. No music, no voice."
+    },
+    {
+      "n": 146,
+      "folder": "world/cave-mouth",
+      "priority": false,
+      "status": "missing",
+      "requestedSeconds": 8,
+      "loop": true,
+      "prompt": "Wind breathing in and out of a dark cave mouth, hollow and low, with faint drips, seamless. No music, no voice."
+    },
+    {
+      "n": 147,
+      "folder": "world/pit-rumble",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 4,
+      "loop": false,
+      "prompt": "A deep rumble from under a lake, with large bubbles breaking the surface. No music, no voice."
+    },
+    {
+      "n": 148,
+      "folder": "world/barrel-explode",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 2.5,
+      "loop": false,
+      "prompt": "A fuel drum exploding: a heavy whoomp of a fireball and metal shrapnel. No music, no voice."
+    },
+    {
+      "n": 149,
+      "folder": "below/warren-ambience",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 10,
+      "loop": true,
+      "prompt": "An underground tunnel network: low distant rumbles, water dripping, stale air, oppressive, seamless. No music, no voice."
+    },
+    {
+      "n": 150,
+      "folder": "below/drip",
+      "priority": false,
+      "status": "missing",
+      "requestedSeconds": 1,
+      "loop": false,
+      "prompt": "A single water drop falling into a puddle in a stone cave, with echo. No music, no voice."
+    },
+    {
+      "n": 151,
+      "folder": "below/rock-groan",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 3,
+      "loop": false,
+      "prompt": "Deep stone groaning and shifting in a cave ceiling, a few grains falling. No music, no voice."
+    },
+    {
+      "n": 152,
+      "folder": "vehicles/cargo-plane-flyover",
+      "priority": true,
+      "status": "upgrade",
+      "requestedSeconds": 6,
+      "loop": false,
+      "prompt": "A four-engine military propeller cargo plane flying low overhead and away. No music, no voice."
+    },
+    {
+      "n": 153,
+      "folder": "vehicles/cargo-plane-interior",
+      "priority": false,
+      "status": "missing",
+      "requestedSeconds": 10,
+      "loop": true,
+      "prompt": "The inside of a military propeller cargo plane in flight: loud engine drone and wind roar through an open ramp, seamless. No music, no voice."
+    },
+    {
+      "n": 154,
+      "folder": "vehicles/chute-open",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 1.2,
+      "loop": false,
+      "prompt": "A parachute canopy deploying with a loud whoosh and a snap of lines. No music, no voice."
+    },
+    {
+      "n": 155,
+      "folder": "vehicles/floatplane-approach",
+      "priority": true,
+      "status": "missing",
+      "requestedSeconds": 8,
+      "loop": false,
+      "prompt": "A twin-engine propeller floatplane approaching and descending over a lake, engines rising then easing off. No music, no voice."
+    },
+    {
+      "n": 156,
+      "folder": "vehicles/floatplane-landing",
+      "priority": false,
+      "status": "missing",
+      "requestedSeconds": 4,
+      "loop": false,
+      "prompt": "A floatplane touching down on a lake: floats skimming and spraying water, engines easing. No music, no voice."
+    },
+    {
+      "n": 157,
+      "folder": "vehicles/floatplane-idle",
+      "priority": false,
+      "status": "missing",
+      "requestedSeconds": 8,
+      "loop": true,
+      "prompt": "A twin-engine floatplane idling on the water at a dock, propellers ticking over, water lapping, seamless. No music, no voice."
+    },
+    {
+      "n": 158,
+      "folder": "vehicles/floatplane-takeoff",
+      "priority": false,
+      "status": "missing",
+      "requestedSeconds": 8,
+      "loop": false,
+      "prompt": "A floatplane throttling up and taking off from a lake, engines roaring and spray, flying away. No music, no voice."
+    },
+    {
+      "n": 159,
+      "folder": "ui/click",
+      "priority": true,
+      "status": "missing",
+      "requestedSeconds": 0.15,
+      "loop": false,
+      "prompt": "A short crisp interface click, like a heavy military switch, game menu. No music."
+    },
+    {
+      "n": 160,
+      "folder": "ui/hover",
+      "priority": false,
+      "status": "missing",
+      "requestedSeconds": 0.1,
+      "loop": false,
+      "prompt": "A very soft tiny interface tick for hovering over a menu button. No music."
+    },
+    {
+      "n": 161,
+      "folder": "ui/back",
+      "priority": false,
+      "status": "missing",
+      "requestedSeconds": 0.3,
+      "loop": false,
+      "prompt": "A soft low interface click for closing a menu. No music."
+    },
+    {
+      "n": 162,
+      "folder": "ui/map-open",
+      "priority": false,
+      "status": "missing",
+      "requestedSeconds": 0.8,
+      "loop": false,
+      "prompt": "A paper map being unfolded, a quick crinkle and flap. No music."
+    },
+    {
+      "n": 163,
+      "folder": "ui/map-close",
+      "priority": false,
+      "status": "missing",
+      "requestedSeconds": 0.6,
+      "loop": false,
+      "prompt": "A paper map being folded up. No music."
+    },
+    {
+      "n": 164,
+      "folder": "ui/wave-start",
+      "priority": true,
+      "status": "upgrade",
+      "requestedSeconds": 2.5,
+      "loop": false,
+      "prompt": "A deep ominous horn blast signalling an attack, with a heavy drum hit under it."
+    },
+    {
+      "n": 165,
+      "folder": "ui/streak",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.8,
+      "loop": false,
+      "prompt": "A short rising punchy reward sound for a kill streak, gritty and military, not cute."
+    },
+    {
+      "n": 166,
+      "folder": "ui/day-cleared",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 3,
+      "loop": false,
+      "prompt": "A short triumphant brass fanfare for surviving the night, four notes, military."
+    },
+    {
+      "n": 167,
+      "folder": "ui/game-over",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 3,
+      "loop": false,
+      "prompt": "A low mournful brass sting with a deep drum hit for a defeat."
+    },
+    {
+      "n": 168,
+      "folder": "ui/victory",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 4,
+      "loop": false,
+      "prompt": "A swelling triumphant orchestral brass sting for a victory."
+    },
+    {
+      "n": 169,
+      "folder": "ui/objective",
+      "priority": false,
+      "status": "missing",
+      "requestedSeconds": 1,
+      "loop": false,
+      "prompt": "A short confident radio chirp and a soft chime for completing an objective. No music."
+    },
+    {
+      "n": 170,
+      "folder": "training/target-hit",
+      "priority": true,
+      "status": "upgrade",
+      "requestedSeconds": 0.8,
+      "loop": false,
+      "prompt": "A bullet hitting a steel shooting target plate, a loud bright ringing ping. No music, no voice."
+    },
+    {
+      "n": 171,
+      "folder": "training/target-fall",
+      "priority": false,
+      "status": "missing",
+      "requestedSeconds": 1,
+      "loop": false,
+      "prompt": "A steel shooting target plate falling backwards and slamming flat on a concrete floor. No music, no voice."
+    },
+    {
+      "n": 172,
+      "folder": "training/target-rise",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 1.2,
+      "loop": false,
+      "prompt": "A spring-loaded steel target plate swinging back up, a mechanical clank. No music, no voice."
+    },
+    {
+      "n": 173,
+      "folder": "training/wall-impact",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.4,
+      "loop": false,
+      "prompt": "A bullet hitting a tiled concrete wall indoors, a sharp crack with dust. No music, no voice."
+    },
+    {
+      "n": 174,
+      "folder": "training/ventilation",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 10,
+      "loop": true,
+      "prompt": "An industrial building's ventilation system humming and blowing air, steady, seamless. No music, no voice."
+    },
+    {
+      "n": 175,
+      "folder": "training/light-switch",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.5,
+      "loop": false,
+      "prompt": "A big industrial light switch thrown, a heavy clack, and large lights buzzing on. No music, no voice."
+    },
+    {
+      "n": 176,
+      "folder": "training/panel-beep",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.4,
+      "loop": false,
+      "prompt": "A military control panel button beep, short and electronic. No music, no voice."
+    },
+    {
+      "n": 177,
+      "folder": "training/gate-open",
+      "priority": true,
+      "status": "upgrade",
+      "requestedSeconds": 3,
+      "loop": false,
+      "prompt": "A heavy steel containment gate grinding open with a warning buzzer. No music, no voice."
+    },
+    {
+      "n": 178,
+      "folder": "training/clear-all",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 1,
+      "loop": false,
+      "prompt": "A control room confirmation tone and a short air hiss, a room being cleared. No music, no voice."
+    },
+    {
+      "n": 179,
+      "folder": "training/infirmary-wake",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 2,
+      "loop": false,
+      "prompt": "A hospital heart monitor beeping steadily and a man taking a deep waking breath. No words."
+    }
+  ]
+}

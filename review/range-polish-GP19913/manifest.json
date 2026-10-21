@@ -1,0 +1,284 @@
+{
+  "files": [
+    {
+      "path": "ui/range-drills.js",
+      "sha256": "105f7a26175a7a9c762353da890e28155798630d7a0b977b607d9052404ea2e9"
+    },
+    {
+      "path": "ui/range-console.js",
+      "sha256": "30375146cf5287b7ed816115c9cd6d83f0288a9aa3cac41fdc21300b871929ad"
+    },
+    {
+      "path": "ui/range-drills.css",
+      "sha256": "0b225b7a399dcdc0543150ff2b871a00d00e0316bb14d1eb30597c890f5c2c7d"
+    },
+    {
+      "path": "ui/range-feature.js",
+      "sha256": "9b8769b88882ee69e2af398633d4de4c25b8cd0d21af00b5c9049ccea0a73218"
+    },
+    {
+      "path": "ui/strings.js",
+      "sha256": "08cde25b3a9201f83e2f28f3b583171eac65896fa66c23f4e06e890ae77bb5fe"
+    },
+    {
+      "path": "ui/range-drills.test.mjs",
+      "sha256": "fb561aa1e0b9c9a6ff3dd73dfccc4c9df53fe29721d3943ee0d42478d2c24fc3"
+    },
+    {
+      "path": "combat/training-grenades.js",
+      "sha256": "58fe23d3cfe28f939d021e531a9ed182b8f29a313b363524abf1e0b2494336b1"
+    },
+    {
+      "path": "index.html",
+      "sha256": "0ff971d21ae1655240c33a948601330fa252ba886e8d0e9b4bee28fef7ce39a1"
+    }
+  ],
+  "approval": "Jerry: Apply the tested grenade fence fix",
+  "native": {
+    "loadSec": 23.703,
+    "menu": {
+      "counts": [
+        {
+          "w": "pistol",
+          "n": 8
+        },
+        {
+          "w": "uzi",
+          "n": 5
+        },
+        {
+          "w": "m4",
+          "n": 6
+        },
+        {
+          "w": "ak",
+          "n": 5
+        },
+        {
+          "w": "shotgun",
+          "n": 6
+        },
+        {
+          "w": "aa12",
+          "n": 5
+        },
+        {
+          "w": "revolver",
+          "n": 5
+        },
+        {
+          "w": "sniper",
+          "n": 5
+        }
+      ],
+      "retired": {
+        "ok": false,
+        "reason": "drill-unavailable"
+      }
+    },
+    "high": {
+      "preview": {
+        "x": -0.2819673334707367,
+        "y": -197.41036873587197,
+        "z": -639.42,
+        "t": 0.1659007213138482,
+        "kind": "solid"
+      },
+      "first": {
+        "pos": {
+          "x": -0.24419969080330153,
+          "y": -198.26944444444442,
+          "z": -641.956697793205
+        },
+        "from": {
+          "x": -0.24,
+          "y": -198.39,
+          "z": -642.24
+        },
+        "vx": -0.251981448198074,
+        "vy": 7.233333333333314,
+        "vz": 16.998132407701853,
+        "fuse": 1.35
+      },
+      "reverse": {
+        "pos": {
+          "x": -0.28194285683201553,
+          "y": -197.38548121708524,
+          "z": -639.426427503103
+        },
+        "vz": -5.7793650186186305,
+        "age": 0.16666666666667881,
+        "fuse": 1.35
+      },
+      "maxZ": -639.426427503103,
+      "cues": 1
+    },
+    "low": {
+      "preview": {
+        "x": -0.3039844557758124,
+        "y": -199.01999999999998,
+        "z": -639.4366535033237,
+        "t": 0.6565642775881679,
+        "kind": "solid"
+      },
+      "maxZ": -637.4674134649636,
+      "reverse": false,
+      "cues": 1
+    },
+    "drillThrow": {
+      "id": "1791961387332-1",
+      "state": "DISQUALIFIED",
+      "reason": "grenade",
+      "valid": false,
+      "score": 0,
+      "time": 1.3333333333331385,
+      "firstShot": null,
+      "efficiency": 0,
+      "weapon": "pistol",
+      "drill": "first-steps",
+      "loadout": "{\"mode\":\"semi\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+      "at": 1791961392806,
+      "base": 0,
+      "bonuses": 0,
+      "deductions": 0,
+      "shots": 0,
+      "units": 0,
+      "attackSeconds": 0,
+      "contactSeconds": 0,
+      "cleared": 0,
+      "missed": 0,
+      "draws": 0,
+      "reloads": 0
+    },
+    "startVisible": true,
+    "errors": []
+  },
+  "performance": {
+    "before": {
+      "loadSec": 22.72,
+      "weapons": [
+        {
+          "weapon": "pistol",
+          "width": 185,
+          "height": 42.296875
+        },
+        {
+          "weapon": "uzi",
+          "width": 185,
+          "height": 42.296875
+        },
+        {
+          "weapon": "m4",
+          "width": 185,
+          "height": 42.296875
+        },
+        {
+          "weapon": "ak",
+          "width": 185,
+          "height": 42.296875
+        },
+        {
+          "weapon": "shotgun",
+          "width": 185,
+          "height": 42.296875
+        },
+        {
+          "weapon": "aa12",
+          "width": 185,
+          "height": 42.296875
+        },
+        {
+          "weapon": "revolver",
+          "width": 185,
+          "height": 42.296875
+        },
+        {
+          "weapon": "sniper",
+          "width": 185,
+          "height": 42.296875
+        },
+        {
+          "weapon": "launcher",
+          "width": 185,
+          "height": 42.296875
+        },
+        {
+          "weapon": "minigun",
+          "width": 185,
+          "height": 42.296875
+        },
+        {
+          "weapon": "flamer",
+          "width": 185,
+          "height": 42.296875
+        },
+        {
+          "weapon": "chainsaw",
+          "width": 185,
+          "height": 42.296875
+        }
+      ],
+      "perf": {
+        "fps": 59.99999999999999,
+        "low": 57.47126439734673,
+        "worst": 17.399999991059303,
+        "hitches": 0,
+        "frames": 60
+      },
+      "errors": []
+    },
+    "after": {
+      "loadSec": 19.57,
+      "weapons": [
+        {
+          "weapon": "pistol",
+          "width": 251.25,
+          "height": 44
+        },
+        {
+          "weapon": "uzi",
+          "width": 251.25,
+          "height": 44
+        },
+        {
+          "weapon": "m4",
+          "width": 251.25,
+          "height": 44
+        },
+        {
+          "weapon": "ak",
+          "width": 251.25,
+          "height": 44
+        },
+        {
+          "weapon": "shotgun",
+          "width": 251.25,
+          "height": 44
+        },
+        {
+          "weapon": "aa12",
+          "width": 251.25,
+          "height": 44
+        },
+        {
+          "weapon": "revolver",
+          "width": 251.25,
+          "height": 44
+        },
+        {
+          "weapon": "sniper",
+          "width": 251.25,
+          "height": 44
+        }
+      ],
+      "perf": {
+        "fps": 60.27122049221497,
+        "low": 56.818181789318515,
+        "worst": 17.600000008940697,
+        "hitches": 0,
+        "frames": 60
+      },
+      "errors": []
+    }
+  }
+}

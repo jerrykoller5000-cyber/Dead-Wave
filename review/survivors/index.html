@@ -1,0 +1,12 @@
+<!doctype html><meta charset="utf-8"><title>survivors</title>
+<style>body{margin:24px;background:#14181f;color:#e6e6e0;font-family:Georgia,serif} h1{font-weight:normal} h2{font-weight:normal;margin:28px 0 6px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px} figure{margin:0} img{width:100%;display:block} figcaption{font-size:14px;opacity:.7;margin:4px 0}</style>
+<h1>survivors · CL-75 · v1</h1>
+<p>The three Gravewalkers who lived (docs/story.md §5), as themselves: left to right Cpl. Okafor (medic: her aid bag
+with the white band, her M4), Sgt. Brandt (the M240B gunner: a belt of 7.62 across his chest, the boonie, the
+aviators, a beard), Spc. Pike (mechanic: cap on backwards, bare hands, a wrench at her belt, her M4). All in the PGB's
+M81, no helmets, masks off. The same figures wait at their camp and live on the HQ's roof. Your notes go in notes.md.</p>
+<script>
+const rows = [['Together', ['survivors-front']], ['Each', ['survivor-okafor', 'survivor-brandt', 'survivor-pike']]];
+for (const [h, ks] of rows) document.write(`<h2>${h}</h2><div class="row">` + ks.map((k) => `<figure><figcaption>${k} (v1)</figcaption><img src="v1/${k}.png"></figure>`).join('') + '</div>');
+</script>

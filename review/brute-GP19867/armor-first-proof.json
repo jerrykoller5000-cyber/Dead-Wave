@@ -1,0 +1,65 @@
+{
+  "loadSec": 17.909,
+  "front": [
+    {
+      "hit": {
+        "t": 0.5102712630078562,
+        "zone": "exposed",
+        "part": "torso"
+      },
+      "damage": 13.5,
+      "armor": {
+        "front": 45,
+        "left": 30,
+        "right": 30
+      },
+      "collapsed": false,
+      "skins": 1
+    },
+    {
+      "hit": {
+        "t": 0.51021467197747,
+        "zone": "exposed",
+        "part": "torso"
+      },
+      "damage": 13.5,
+      "armor": {
+        "front": 45,
+        "left": 30,
+        "right": 30
+      },
+      "collapsed": false,
+      "skins": 1
+    },
+    {
+      "hit": {
+        "t": 0.510081269232046,
+        "zone": "exposed",
+        "part": "torso"
+      },
+      "damage": 13.5,
+      "armor": {
+        "front": 45,
+        "left": 30,
+        "right": 30
+      },
+      "collapsed": false,
+      "skins": 1
+    },
+    {
+      "hit": {
+        "t": 0.510260450138882,
+        "zone": "exposed",
+        "part": "torso"
+      },
+      "damage": 13.5,
+      "armor": {
+        "front": 45,
+        "left": 30,
+        "right": 30
+      },
+      "collapsed": false,
+      "skins": 1
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "result": {
+    "state": {
+      "enabled": true,
+      "loopSeconds": 24,
+      "active": true,
+      "looping": true,
+      "cues": {
+        "enter": 4.32
+      },
+      "musicGain": 0.09600000083446503
+    },
+    "musicPlaying": false,
+    "worldTrack": null,
+    "amb": 0,
+    "blocked": 0,
+    "cueNodes": 3,
+    "mutedNodes": 0,
+    "initial": 2,
+    "full": 2,
+    "fade": 0.5,
+    "expired": 0,
+    "reused": 1
+  },
+  "exit": {
+    "enabled": false
+  },
+  "peak": 0.04335002601146698,
+  "errors": []
+}

@@ -1,0 +1,686 @@
+[
+  {
+    "id": "site-0",
+    "title": "ranger camp",
+    "group": "Camps and survivors",
+    "camera": "(()=>{const l=TT.landmarks[0];return WS.frame(l.mesh,{yaw:l.campYaw+.6,d:17,up:10});})()"
+  },
+  {
+    "id": "site-1",
+    "title": "hikers camp",
+    "group": "Camps and survivors",
+    "camera": "(()=>{const l=TT.landmarks[1];return WS.frame(l.mesh,{yaw:l.campYaw+.6,d:17,up:10});})()"
+  },
+  {
+    "id": "site-2",
+    "title": "trapper camp",
+    "group": "Camps and survivors",
+    "camera": "(()=>{const l=TT.landmarks[2];return WS.frame(l.mesh,{yaw:l.campYaw+.6,d:17,up:10});})()"
+  },
+  {
+    "id": "site-3",
+    "title": "Ruined aid station",
+    "group": "Coldwater and later occupation",
+    "camera": "(()=>{const l=TT.landmarks[3];return WS.frame(l.mesh,{});})()"
+  },
+  {
+    "id": "site-4",
+    "title": "Burned supply house",
+    "group": "Coldwater and later occupation",
+    "camera": "(()=>{const l=TT.landmarks[4];return WS.frame(l.mesh,{});})()"
+  },
+  {
+    "id": "site-5",
+    "title": "Lookout tower",
+    "group": "Infrastructure and wrecks",
+    "camera": "(()=>{const l=TT.landmarks[5];return WS.frame(l.mesh,{});})()"
+  },
+  {
+    "id": "site-6",
+    "title": "Parish cemetery",
+    "group": "Coldwater and later occupation",
+    "camera": "WS.frame(TT.landmarks[6].mesh,{yaw:2.8,d:20,up:14})"
+  },
+  {
+    "id": "site-7",
+    "title": "Repair shed",
+    "group": "Infrastructure and wrecks",
+    "camera": "(()=>{const l=TT.landmarks[7];return WS.frame(l.mesh,{});})()"
+  },
+  {
+    "id": "site-8",
+    "title": "Food store",
+    "group": "Infrastructure and wrecks",
+    "camera": "(()=>{const l=TT.landmarks[8];return WS.frame(l.mesh,{});})()"
+  },
+  {
+    "id": "site-9",
+    "title": "Generator shelter",
+    "group": "Infrastructure and wrecks",
+    "camera": "(()=>{const l=TT.landmarks[9];return WS.frame(l.mesh,{});})()"
+  },
+  {
+    "id": "site-10",
+    "title": "Broken fence 1",
+    "group": "Everyday dressing",
+    "camera": "(()=>{const l=TT.landmarks[10];return WS.frame(l.mesh,{});})()"
+  },
+  {
+    "id": "site-11",
+    "title": "Broken fence 2",
+    "group": "Everyday dressing",
+    "camera": "(()=>{const l=TT.landmarks[11];return WS.frame(l.mesh,{});})()"
+  },
+  {
+    "id": "site-12",
+    "title": "Broken fence 3",
+    "group": "Everyday dressing",
+    "camera": "(()=>{const l=TT.landmarks[12];return WS.frame(l.mesh,{});})()"
+  },
+  {
+    "id": "site-14",
+    "title": "Warning sign 1",
+    "group": "Everyday dressing",
+    "camera": "(()=>{const l=TT.landmarks[14];return WS.frame(l.mesh,{});})()"
+  },
+  {
+    "id": "site-15",
+    "title": "Warning sign 2",
+    "group": "Everyday dressing",
+    "camera": "(()=>{const l=TT.landmarks[15];return WS.frame(l.mesh,{});})()"
+  },
+  {
+    "id": "site-16",
+    "title": "Warning sign 3",
+    "group": "Everyday dressing",
+    "camera": "(()=>{const l=TT.landmarks[16];return WS.frame(l.mesh,{});})()"
+  },
+  {
+    "id": "site-17",
+    "title": "Warning sign 4",
+    "group": "Everyday dressing",
+    "camera": "(()=>{const l=TT.landmarks[17];return WS.frame(l.mesh,{});})()"
+  },
+  {
+    "id": "site-18",
+    "title": "Fuel drum 1",
+    "group": "Everyday dressing",
+    "camera": "(()=>{const l=TT.landmarks[18];return WS.frame(l.mesh,{});})()"
+  },
+  {
+    "id": "site-19",
+    "title": "Fuel drum 2",
+    "group": "Everyday dressing",
+    "camera": "(()=>{const l=TT.landmarks[19];return WS.frame(l.mesh,{});})()"
+  },
+  {
+    "id": "site-20",
+    "title": "Fuel drum 3",
+    "group": "Everyday dressing",
+    "camera": "(()=>{const l=TT.landmarks[20];return WS.frame(l.mesh,{});})()"
+  },
+  {
+    "id": "site-21",
+    "title": "Fuel drum 4",
+    "group": "Everyday dressing",
+    "camera": "(()=>{const l=TT.landmarks[21];return WS.frame(l.mesh,{});})()"
+  },
+  {
+    "id": "site-22",
+    "title": "Fuel drum 5",
+    "group": "Everyday dressing",
+    "camera": "(()=>{const l=TT.landmarks[22];return WS.frame(l.mesh,{});})()"
+  },
+  {
+    "id": "site-23",
+    "title": "Fuel drum 6",
+    "group": "Everyday dressing",
+    "camera": "(()=>{const l=TT.landmarks[23];return WS.frame(l.mesh,{});})()"
+  },
+  {
+    "id": "dock-0",
+    "title": "Lakeside dock and rowboat",
+    "group": "Infrastructure and wrecks",
+    "camera": "WS.frame(TT.POI.dock.mesh,{})"
+  },
+  {
+    "id": "mast-0",
+    "title": "Emergency relay mast",
+    "group": "Infrastructure and wrecks",
+    "camera": "WS.frame(TT.POI.mast.mesh,{d:24,up:6})"
+  },
+  {
+    "id": "bridges-0",
+    "title": "East timber bridge",
+    "group": "Infrastructure and wrecks",
+    "camera": "WS.frame(TT.POI.bridges[0].mesh,{})"
+  },
+  {
+    "id": "bridges-1",
+    "title": "West reinforced bridge",
+    "group": "Infrastructure and wrecks",
+    "camera": "WS.frame(TT.POI.bridges[1].mesh,{})"
+  },
+  {
+    "id": "wrecks-0",
+    "title": "Medical convoy wreck",
+    "group": "Infrastructure and wrecks",
+    "camera": "WS.frame(TT.POI.wrecks[0].mesh,{})"
+  },
+  {
+    "id": "wrecks-1",
+    "title": "Stripped utility wreck",
+    "group": "Infrastructure and wrecks",
+    "camera": "WS.frame(TT.POI.wrecks[1].mesh,{})"
+  },
+  {
+    "id": "cave-root",
+    "title": "Root cave",
+    "group": "Caves and the first people",
+    "camera": "(()=>{const c=TT.POI.caves.find(c=>c.theme==='root'),a=c.yaw;return {x:c.x+Math.sin(a)*20+Math.cos(a)*3,y:c.gy+10,z:c.z+Math.cos(a)*20-Math.sin(a)*3,tx:c.x,ty:c.gy+2,tz:c.z,fov:50};})()"
+  },
+  {
+    "id": "cave-shale",
+    "title": "Shale cave",
+    "group": "Caves and the first people",
+    "camera": "(()=>{const c=TT.POI.caves.find(c=>c.theme==='shale'),a=c.yaw;return {x:c.x+Math.sin(a)*20+Math.cos(a)*3,y:c.gy+10,z:c.z+Math.cos(a)*20-Math.sin(a)*3,tx:c.x,ty:c.gy+2,tz:c.z,fov:50};})()"
+  },
+  {
+    "id": "cave-iron",
+    "title": "Iron mine entrance",
+    "group": "Caves and the first people",
+    "camera": "(()=>{const c=TT.POI.caves.find(c=>c.theme==='iron'),a=c.yaw;return {x:c.x+Math.sin(a)*20+Math.cos(a)*3,y:c.gy+10,z:c.z+Math.cos(a)*20-Math.sin(a)*3,tx:c.x,ty:c.gy+2,tz:c.z,fov:50};})()"
+  },
+  {
+    "id": "cave-wet",
+    "title": "Wet cave",
+    "group": "Caves and the first people",
+    "camera": "(()=>{const c=TT.POI.caves.find(c=>c.theme==='wet'),a=c.yaw;return {x:c.x+Math.sin(a)*20+Math.cos(a)*3,y:c.gy+10,z:c.z+Math.cos(a)*20-Math.sin(a)*3,tx:c.x,ty:c.gy+2,tz:c.z,fov:50};})()"
+  },
+  {
+    "id": "cave-hill",
+    "title": "Hill barrow",
+    "group": "Caves and the first people",
+    "camera": "(()=>{const c=TT.POI.caves.find(c=>c.theme==='hill'),a=c.yaw;return {x:c.x+Math.sin(a)*20+Math.cos(a)*3,y:c.gy+10,z:c.z+Math.cos(a)*20-Math.sin(a)*3,tx:c.x,ty:c.gy+2,tz:c.z,fov:50};})()"
+  },
+  {
+    "id": "cave-chalk",
+    "title": "Marrow cave",
+    "group": "Caves and the first people",
+    "camera": "(()=>{const c=TT.POI.caves.find(c=>c.theme==='chalk'),a=c.yaw;return {x:c.x+Math.sin(a)*20+Math.cos(a)*3,y:c.gy+10,z:c.z+Math.cos(a)*20-Math.sin(a)*3,tx:c.x,ty:c.gy+2,tz:c.z,fov:50};})()"
+  },
+  {
+    "id": "history-0",
+    "title": "PGB survey board — root",
+    "group": "Caves and the first people",
+    "camera": "WS.frame(TT.historyProps.group.children[0],{})"
+  },
+  {
+    "id": "history-1",
+    "title": "PGB survey board — shale",
+    "group": "Caves and the first people",
+    "camera": "WS.frame(TT.historyProps.group.children[1],{})"
+  },
+  {
+    "id": "history-2",
+    "title": "PGB survey board — iron",
+    "group": "Caves and the first people",
+    "camera": "WS.frame(TT.historyProps.group.children[2],{})"
+  },
+  {
+    "id": "history-3",
+    "title": "Old mine timber set",
+    "group": "Caves and the first people",
+    "camera": "WS.frame(TT.historyProps.group.children[3],{})"
+  },
+  {
+    "id": "history-4",
+    "title": "Cut mine bars",
+    "group": "Caves and the first people",
+    "camera": "WS.frame(TT.historyProps.group.children[4],{})"
+  },
+  {
+    "id": "history-5",
+    "title": "Discarded IRON BELOW boards",
+    "group": "Caves and the first people",
+    "camera": "WS.frame(TT.historyProps.group.children[5],{})"
+  },
+  {
+    "id": "history-6",
+    "title": "Hikers’ equipment at the mine",
+    "group": "Camps and survivors",
+    "camera": "WS.frame(TT.historyProps.group.children[6],{})"
+  },
+  {
+    "id": "history-7",
+    "title": "PGB survey board — wet",
+    "group": "Caves and the first people",
+    "camera": "WS.frame(TT.historyProps.group.children[7],{})"
+  },
+  {
+    "id": "history-8",
+    "title": "PGB survey board — hill",
+    "group": "Caves and the first people",
+    "camera": "WS.frame(TT.historyProps.group.children[8],{})"
+  },
+  {
+    "id": "history-9",
+    "title": "Spent brass at the fallen line",
+    "group": "Evidence of the fall",
+    "camera": "WS.isolate(TT.historyProps.group.children[9],{d:2,up:4})",
+    "isolated": true,
+    "staged": true
+  },
+  {
+    "id": "history-10",
+    "title": "Dropped PGB helmet",
+    "group": "Evidence of the fall",
+    "camera": "WS.isolate(TT.historyProps.group.children[10],{d:1.5,up:1})",
+    "isolated": true,
+    "staged": true
+  },
+  {
+    "id": "history-11",
+    "title": "Drag marks toward the caves",
+    "group": "Evidence of the fall",
+    "camera": "WS.frame(TT.historyProps.group.children[11],{yaw:1.8,d:10,up:9})"
+  },
+  {
+    "id": "history-12",
+    "title": "Stranded ranger pickup",
+    "group": "Camps and survivors",
+    "camera": "WS.frame(TT.historyProps.group.children[12],{d:8,up:4})"
+  },
+  {
+    "id": "history-13",
+    "title": "Trapper’s iron-lined cellar",
+    "group": "Camps and survivors",
+    "camera": "WS.frame(TT.historyProps.group.children[13],{})"
+  },
+  {
+    "id": "history-14",
+    "title": "Protective horseshoes",
+    "group": "Camps and survivors",
+    "camera": "WS.frame(TT.historyProps.group.children[14],{yaw:0,d:3,up:.2})"
+  },
+  {
+    "id": "history-18",
+    "title": "Trapper’s leghold traps",
+    "group": "Evidence of the fall",
+    "camera": "WS.frame(TT.historyProps.group.children[18],{yaw:2,d:1.1,up:2})"
+  },
+  {
+    "id": "history-19",
+    "title": "Coldwater church shell",
+    "group": "Coldwater and later occupation",
+    "camera": "WS.frame(TT.historyProps.group.children[19],{})"
+  },
+  {
+    "id": "history-20",
+    "title": "Coldwater house foundation",
+    "group": "Coldwater and later occupation",
+    "camera": "WS.frame(TT.historyProps.group.children[20],{})"
+  },
+  {
+    "id": "history-21",
+    "title": "Coldwater house foundation",
+    "group": "Coldwater and later occupation",
+    "camera": "WS.frame(TT.historyProps.group.children[21],{yaw:3.5,d:12,up:9})"
+  },
+  {
+    "id": "history-22",
+    "title": "Coldwater house foundation",
+    "group": "Coldwater and later occupation",
+    "camera": "WS.frame(TT.historyProps.group.children[22],{})"
+  },
+  {
+    "id": "history-23",
+    "title": "Standing chimney",
+    "group": "Coldwater and later occupation",
+    "camera": "WS.frame(TT.historyProps.group.children[23],{})"
+  },
+  {
+    "id": "history-24",
+    "title": "Iron-banded burial",
+    "group": "Coldwater and later occupation",
+    "camera": "WS.frame(TT.historyProps.group.children[24],{})"
+  },
+  {
+    "id": "history-25",
+    "title": "Iron-banded burial",
+    "group": "Coldwater and later occupation",
+    "camera": "WS.frame(TT.historyProps.group.children[25],{})"
+  },
+  {
+    "id": "history-26",
+    "title": "Grave opened from below",
+    "group": "Coldwater and later occupation",
+    "camera": "WS.frame(TT.historyProps.group.children[26],{})"
+  },
+  {
+    "id": "history-27",
+    "title": "Cordon gate",
+    "group": "The Cordon",
+    "camera": "WS.frame(TT.historyProps.group.children[27],{})"
+  },
+  {
+    "id": "history-28",
+    "title": "Missing hikers’ trailhead board",
+    "group": "The Cordon",
+    "camera": "WS.frame(TT.historyProps.group.children[28],{})"
+  },
+  {
+    "id": "stone-0",
+    "title": "Ring instruction stone",
+    "group": "Caves and the first people",
+    "camera": "WS.frame(TT.firstPeople.ring,{d:6,up:1.4})"
+  },
+  {
+    "id": "stone-1",
+    "title": "Standing glyph stone 1",
+    "group": "Caves and the first people",
+    "camera": "WS.frame(TT.firstPeople.stones[0],{d:6,up:1.4})"
+  },
+  {
+    "id": "stone-2",
+    "title": "Standing glyph stone 2",
+    "group": "Caves and the first people",
+    "camera": "WS.frame(TT.firstPeople.stones[1],{d:6,up:1.4})"
+  },
+  {
+    "id": "stone-3",
+    "title": "Standing glyph stone 3",
+    "group": "Caves and the first people",
+    "camera": "WS.frame(TT.firstPeople.stones[2],{d:6,up:1.4})"
+  },
+  {
+    "id": "barrow-offerings",
+    "title": "Offerings at the barrow",
+    "group": "Caves and the first people",
+    "camera": "WS.frame(TT.firstPeople.offerings,{d:12,up:5})"
+  },
+  {
+    "id": "marrow-seal",
+    "title": "Carved Marrow seal",
+    "group": "Caves and the first people",
+    "camera": "WS.frame(TT.firstPeople.door,{d:11,up:1})"
+  },
+  {
+    "id": "rabbit-mound",
+    "title": "Rabbit mound and bones",
+    "group": "Secrets and special props",
+    "camera": "WS.frame(TT.scene.getObjectByName('rabbit-mound'),{d:6,up:2.4})"
+  },
+  {
+    "id": "holy-reliquary",
+    "title": "Holy grenade reliquary",
+    "group": "Secrets and special props",
+    "camera": "WS.frame(TT.scene.getObjectByName('holy-reliquary'),{yaw:3.5,d:2,up:1.5})"
+  },
+  {
+    "id": "insulated-boots",
+    "title": "Insulated boots at the relay",
+    "group": "Secrets and special props",
+    "camera": "WS.frame(TT.scene.getObjectByName('insulated-boots'),{d:2.2,up:1.3})"
+  },
+  {
+    "id": "objective-0",
+    "title": "Relay repair cabinet",
+    "group": "Objective props",
+    "camera": "(()=>{const p=window.objectiveSitesFrom(TT.POI,TT.sampleHeight)[0],a=p.facing+Math.PI;return {x:p.x+Math.sin(a)*3.3,y:p.y+2.5,z:p.z+Math.cos(a)*3.3,tx:p.x,ty:p.y+.4,tz:p.z,fov:48};})()"
+  },
+  {
+    "id": "objective-1",
+    "title": "Medical supplies cache",
+    "group": "Objective props",
+    "camera": "(()=>{const p=window.objectiveSitesFrom(TT.POI,TT.sampleHeight)[1],a=p.facing+Math.PI;return {x:p.x+Math.sin(a)*3.3,y:p.y+2.5,z:p.z+Math.cos(a)*3.3,tx:p.x,ty:p.y+.4,tz:p.z,fov:48};})()"
+  },
+  {
+    "id": "objective-2",
+    "title": "Ranger cache",
+    "group": "Objective props",
+    "camera": "(()=>{const p=window.objectiveSitesFrom(TT.POI,TT.sampleHeight)[2],a=p.facing+Math.PI;return {x:p.x+Math.sin(a)*3.3,y:p.y+2.5,z:p.z+Math.cos(a)*3.3,tx:p.x,ty:p.y+.4,tz:p.z,fov:48};})()"
+  },
+  {
+    "id": "objective-3",
+    "title": "Hikers’ cache",
+    "group": "Objective props",
+    "camera": "(()=>{const p=window.objectiveSitesFrom(TT.POI,TT.sampleHeight)[3],a=p.facing+Math.PI;return {x:p.x+Math.sin(a)*3.3,y:p.y+2.5,z:p.z+Math.cos(a)*3.3,tx:p.x,ty:p.y+.4,tz:p.z,fov:48};})()"
+  },
+  {
+    "id": "objective-4",
+    "title": "Trapper cache",
+    "group": "Objective props",
+    "camera": "(()=>{const p=window.objectiveSitesFrom(TT.POI,TT.sampleHeight)[4],a=p.facing+Math.PI;return {x:p.x+Math.sin(a)*3.3,y:p.y+2.5,z:p.z+Math.cos(a)*3.3,tx:p.x,ty:p.y+.4,tz:p.z,fov:48};})()"
+  },
+  {
+    "id": "objective-5",
+    "title": "Fuel depot",
+    "group": "Objective props",
+    "camera": "(()=>{const p=window.objectiveSitesFrom(TT.POI,TT.sampleHeight)[5],a=p.facing+Math.PI;return {x:p.x+Math.sin(a)*3.3,y:p.y+2.5,z:p.z+Math.cos(a)*3.3,tx:p.x,ty:p.y+.4,tz:p.z,fov:48};})()"
+  },
+  {
+    "id": "objective-6",
+    "title": "Wreck salvage cache",
+    "group": "Objective props",
+    "camera": "(()=>{const p=window.objectiveSitesFrom(TT.POI,TT.sampleHeight)[6],a=p.facing+Math.PI;return {x:p.x+Math.sin(a)*3.3,y:p.y+2.5,z:p.z+Math.cos(a)*3.3,tx:p.x,ty:p.y+.4,tz:p.z,fov:48};})()"
+  },
+  {
+    "id": "lake",
+    "title": "Lake and the Pit",
+    "group": "Landscape",
+    "camera": "(()=>{const p=TT.LAKE_HOLE;return{x:p.x+45,y:40,z:p.z+44,tx:p.x,ty:-4,tz:p.z,fov:58};})()"
+  },
+  {
+    "id": "pit",
+    "title": "The Pit and its eight-stone ring",
+    "group": "Landscape",
+    "camera": "(()=>{const p=TT.LAKE_HOLE;return{x:p.x+9,y:12,z:p.z+12,tx:p.x,ty:-9,tz:p.z,fov:52};})()"
+  },
+  {
+    "id": "river-grate",
+    "title": "River outlet and containment grate",
+    "group": "The Cordon",
+    "camera": "(()=>{const g=WSWorld.WALL_GATE,r=WSWorld.WALL_INNER_R,a=g.ang,p={x:Math.cos(a)*r,z:Math.sin(a)*r};return{x:p.x-Math.cos(a)*23-Math.sin(a)*6,y:TT.sampleHeight(p.x,p.z)+8,z:p.z-Math.sin(a)*23+Math.cos(a)*6,tx:p.x,ty:g.spring,tz:p.z,fov:55};})()"
+  },
+  {
+    "id": "woodland",
+    "title": "Woodland, rocks and ground cover",
+    "group": "Landscape",
+    "camera": "(()=>{const t=TT.trees.find(t=>Math.hypot(t.x,t.z)>90&&Math.hypot(t.x,t.z)<120);return{x:t.x+14,y:TT.sampleHeight(t.x,t.z)+11,z:t.z+15,tx:t.x,ty:TT.sampleHeight(t.x,t.z)+2,tz:t.z,fov:52};})()"
+  },
+  {
+    "id": "sandbags",
+    "title": "Abandoned sandbag barricade",
+    "group": "Evidence of the fall",
+    "camera": "(()=>{const p=TT.POI.sandbags;return{x:p.x+12,y:TT.sampleHeight(p.x,p.z)+10,z:p.z-8,tx:p.x+3,ty:TT.sampleHeight(p.x,p.z)+.5,tz:p.z-3,fov:45};})()"
+  },
+  {
+    "id": "heron",
+    "title": "Heron extraction floatplane",
+    "group": "Infrastructure and wrecks",
+    "camera": "(()=>{const h=TT.getExtractionBoat(),p=h.group.position,a=h.group.rotation.y;return{x:p.x+Math.sin(a)*16-Math.cos(a)*9,y:p.y+5,z:p.z+Math.cos(a)*16+Math.sin(a)*9,tx:p.x,ty:p.y+2,tz:p.z,fov:55};})()",
+    "staged": true,
+    "setup": "(()=>{let h=TT.getExtractionBoat();if(h)h.reset();window.dispatchEvent(new CustomEvent('dw-game',{detail:{type:'extraction',phase:'due',day:20,runId:'story-review'}}));h=TT.getExtractionBoat();h.arrive();for(let i=0;i<300;i++)h.update(.1);})()"
+  },
+  {
+    "id": "below-root",
+    "title": "Root warren: chamber and husks",
+    "group": "Underground",
+    "camera": "(()=>{const w=WS.w,C=TT.HOLLOW.CELL,o=w.group.position,p=w.plan,c=p.cells[p.chambers[0]],x=o.x+c.i*C+C/2,z=o.z+c.j*C+C/2,t={x,y:w.groundAt(x,z),z},e=w.entry,dx=t.x-e.x,dz=t.z-e.z,l=Math.hypot(dx,dz)||1,cam={x:t.x-dx/l*2.6,z:t.z-dz/l*2.6};return{x:cam.x,y:(w.groundAt(cam.x,cam.z)??t.y)+1.7,z:cam.z,tx:t.x,ty:t.y+3.6,tz:t.z,fov:75};})()",
+    "staged": true,
+    "setup": "(()=>{WS.saved=TT.scene.children.map(c=>[c,c.visible]);for(const [c]of WS.saved)if(!c.isLight)c.visible=false;WS.w=TT.buildWarren('root',{origin:{x:0,y:260,z:0}});TT.scene.add(WS.w.group);WS.lights=[];for(const l of WS.w.lamps){const p=new WS.T.PointLight(0xffc488,6,16,1.2);p.position.set(l.x,l.y,l.z);TT.scene.add(p);WS.lights.push(p);}})()",
+    "teardown": "(()=>{WS.w.dispose();for(const l of WS.lights)TT.scene.remove(l);for(const [c,visible]of WS.saved)c.visible=visible;})()"
+  },
+  {
+    "id": "deep-root",
+    "title": "Root warren: Deep set piece",
+    "group": "Underground",
+    "camera": "(()=>{const w=WS.w,C=TT.HOLLOW.CELL,o=w.group.position,p=w.plan,c=p.cells[p.chambers[0]],x=o.x+c.i*C+C/2,z=o.z+c.j*C+C/2,t=w.points.set,e=w.points.strongbox,dx=t.x-e.x,dz=t.z-e.z,l=Math.hypot(dx,dz)||1,cam={x:t.x-dx/l*4.5,z:t.z-dz/l*4.5};return{x:cam.x,y:(w.groundAt(cam.x,cam.z)??t.y)+1.7,z:cam.z,tx:t.x,ty:t.y+5,tz:t.z,fov:75};})()",
+    "staged": true,
+    "setup": "(()=>{WS.saved=TT.scene.children.map(c=>[c,c.visible]);for(const [c]of WS.saved)if(!c.isLight)c.visible=false;WS.w=TT.buildWarren('root',{origin:{x:0,y:260,z:0}});TT.scene.add(WS.w.group);WS.lights=[];for(const l of WS.w.lamps){const p=new WS.T.PointLight(0xffc488,6,16,1.2);p.position.set(l.x,l.y,l.z);TT.scene.add(p);WS.lights.push(p);}})()",
+    "teardown": "(()=>{WS.w.dispose();for(const l of WS.lights)TT.scene.remove(l);for(const [c,visible]of WS.saved)c.visible=visible;})()"
+  },
+  {
+    "id": "below-shale",
+    "title": "Shale warren: chamber and husks",
+    "group": "Underground",
+    "camera": "(()=>{const w=WS.w,C=TT.HOLLOW.CELL,o=w.group.position,p=w.plan,c=p.cells[p.chambers[0]],x=o.x+c.i*C+C/2,z=o.z+c.j*C+C/2,t={x,y:w.groundAt(x,z),z},e=w.entry,dx=t.x-e.x,dz=t.z-e.z,l=Math.hypot(dx,dz)||1,cam={x:t.x-dx/l*2.6,z:t.z-dz/l*2.6};return{x:cam.x,y:(w.groundAt(cam.x,cam.z)??t.y)+1.7,z:cam.z,tx:t.x,ty:t.y+3.6,tz:t.z,fov:75};})()",
+    "staged": true,
+    "setup": "(()=>{WS.saved=TT.scene.children.map(c=>[c,c.visible]);for(const [c]of WS.saved)if(!c.isLight)c.visible=false;WS.w=TT.buildWarren('shale',{origin:{x:0,y:260,z:0}});TT.scene.add(WS.w.group);WS.lights=[];for(const l of WS.w.lamps){const p=new WS.T.PointLight(0xffc488,6,16,1.2);p.position.set(l.x,l.y,l.z);TT.scene.add(p);WS.lights.push(p);}})()",
+    "teardown": "(()=>{WS.w.dispose();for(const l of WS.lights)TT.scene.remove(l);for(const [c,visible]of WS.saved)c.visible=visible;})()"
+  },
+  {
+    "id": "deep-shale",
+    "title": "Shale warren: Deep set piece",
+    "group": "Underground",
+    "camera": "(()=>{const w=WS.w,C=TT.HOLLOW.CELL,o=w.group.position,p=w.plan,c=p.cells[p.chambers[0]],x=o.x+c.i*C+C/2,z=o.z+c.j*C+C/2,t=w.points.set,e=w.points.strongbox,dx=t.x-e.x,dz=t.z-e.z,l=Math.hypot(dx,dz)||1,cam={x:t.x-dx/l*4.5,z:t.z-dz/l*4.5};return{x:cam.x,y:(w.groundAt(cam.x,cam.z)??t.y)+1.7,z:cam.z,tx:t.x,ty:t.y+1.2,tz:t.z,fov:75};})()",
+    "staged": true,
+    "setup": "(()=>{WS.saved=TT.scene.children.map(c=>[c,c.visible]);for(const [c]of WS.saved)if(!c.isLight)c.visible=false;WS.w=TT.buildWarren('shale',{origin:{x:0,y:260,z:0}});TT.scene.add(WS.w.group);WS.lights=[];for(const l of WS.w.lamps){const p=new WS.T.PointLight(0xffc488,6,16,1.2);p.position.set(l.x,l.y,l.z);TT.scene.add(p);WS.lights.push(p);}})()",
+    "teardown": "(()=>{WS.w.dispose();for(const l of WS.lights)TT.scene.remove(l);for(const [c,visible]of WS.saved)c.visible=visible;})()"
+  },
+  {
+    "id": "below-iron",
+    "title": "Iron warren: chamber and husks",
+    "group": "Underground",
+    "camera": "(()=>{const w=WS.w,C=TT.HOLLOW.CELL,o=w.group.position,p=w.plan,c=p.cells[p.chambers[0]],x=o.x+c.i*C+C/2,z=o.z+c.j*C+C/2,t={x,y:w.groundAt(x,z),z},e=w.entry,dx=t.x-e.x,dz=t.z-e.z,l=Math.hypot(dx,dz)||1,cam={x:t.x-dx/l*2.6,z:t.z-dz/l*2.6};return{x:cam.x,y:(w.groundAt(cam.x,cam.z)??t.y)+1.7,z:cam.z,tx:t.x,ty:t.y+3.6,tz:t.z,fov:75};})()",
+    "staged": true,
+    "setup": "(()=>{WS.saved=TT.scene.children.map(c=>[c,c.visible]);for(const [c]of WS.saved)if(!c.isLight)c.visible=false;WS.w=TT.buildWarren('iron',{origin:{x:0,y:260,z:0}});TT.scene.add(WS.w.group);WS.lights=[];for(const l of WS.w.lamps){const p=new WS.T.PointLight(0xffc488,6,16,1.2);p.position.set(l.x,l.y,l.z);TT.scene.add(p);WS.lights.push(p);}})()",
+    "teardown": "(()=>{WS.w.dispose();for(const l of WS.lights)TT.scene.remove(l);for(const [c,visible]of WS.saved)c.visible=visible;})()"
+  },
+  {
+    "id": "deep-iron",
+    "title": "Iron warren: Deep set piece",
+    "group": "Underground",
+    "camera": "(()=>{const w=WS.w,C=TT.HOLLOW.CELL,o=w.group.position,p=w.plan,c=p.cells[p.chambers[0]],x=o.x+c.i*C+C/2,z=o.z+c.j*C+C/2,t=w.points.set,e=w.points.strongbox,dx=t.x-e.x,dz=t.z-e.z,l=Math.hypot(dx,dz)||1,cam={x:t.x-dx/l*4.5,z:t.z-dz/l*4.5};return{x:cam.x,y:(w.groundAt(cam.x,cam.z)??t.y)+1.7,z:cam.z,tx:t.x,ty:t.y+1.2,tz:t.z,fov:75};})()",
+    "staged": true,
+    "setup": "(()=>{WS.saved=TT.scene.children.map(c=>[c,c.visible]);for(const [c]of WS.saved)if(!c.isLight)c.visible=false;WS.w=TT.buildWarren('iron',{origin:{x:0,y:260,z:0}});TT.scene.add(WS.w.group);WS.lights=[];for(const l of WS.w.lamps){const p=new WS.T.PointLight(0xffc488,6,16,1.2);p.position.set(l.x,l.y,l.z);TT.scene.add(p);WS.lights.push(p);}})()",
+    "teardown": "(()=>{WS.w.dispose();for(const l of WS.lights)TT.scene.remove(l);for(const [c,visible]of WS.saved)c.visible=visible;})()"
+  },
+  {
+    "id": "below-wet",
+    "title": "Wet warren: chamber and husks",
+    "group": "Underground",
+    "camera": "(()=>{const w=WS.w,C=TT.HOLLOW.CELL,o=w.group.position,p=w.plan,c=p.cells[p.chambers[0]],x=o.x+c.i*C+C/2,z=o.z+c.j*C+C/2,t={x,y:w.groundAt(x,z),z},e=w.entry,dx=t.x-e.x,dz=t.z-e.z,l=Math.hypot(dx,dz)||1,cam={x:t.x-dx/l*2.6,z:t.z-dz/l*2.6};return{x:cam.x,y:(w.groundAt(cam.x,cam.z)??t.y)+1.7,z:cam.z,tx:t.x,ty:t.y+3.6,tz:t.z,fov:75};})()",
+    "staged": true,
+    "setup": "(()=>{WS.saved=TT.scene.children.map(c=>[c,c.visible]);for(const [c]of WS.saved)if(!c.isLight)c.visible=false;WS.w=TT.buildWarren('wet',{origin:{x:0,y:260,z:0}});TT.scene.add(WS.w.group);WS.lights=[];for(const l of WS.w.lamps){const p=new WS.T.PointLight(0xffc488,6,16,1.2);p.position.set(l.x,l.y,l.z);TT.scene.add(p);WS.lights.push(p);}})()",
+    "teardown": "(()=>{WS.w.dispose();for(const l of WS.lights)TT.scene.remove(l);for(const [c,visible]of WS.saved)c.visible=visible;})()"
+  },
+  {
+    "id": "deep-wet",
+    "title": "Wet warren: Deep set piece",
+    "group": "Underground",
+    "camera": "(()=>{const w=WS.w,C=TT.HOLLOW.CELL,o=w.group.position,p=w.plan,c=p.cells[p.chambers[0]],x=o.x+c.i*C+C/2,z=o.z+c.j*C+C/2,t=w.points.set,e=w.points.strongbox,dx=t.x-e.x,dz=t.z-e.z,l=Math.hypot(dx,dz)||1,cam={x:t.x-dx/l*4.5,z:t.z-dz/l*4.5};return{x:cam.x,y:(w.groundAt(cam.x,cam.z)??t.y)+1.7,z:cam.z,tx:t.x,ty:t.y+1.2,tz:t.z,fov:75};})()",
+    "staged": true,
+    "setup": "(()=>{WS.saved=TT.scene.children.map(c=>[c,c.visible]);for(const [c]of WS.saved)if(!c.isLight)c.visible=false;WS.w=TT.buildWarren('wet',{origin:{x:0,y:260,z:0}});TT.scene.add(WS.w.group);WS.lights=[];for(const l of WS.w.lamps){const p=new WS.T.PointLight(0xffc488,6,16,1.2);p.position.set(l.x,l.y,l.z);TT.scene.add(p);WS.lights.push(p);}})()",
+    "teardown": "(()=>{WS.w.dispose();for(const l of WS.lights)TT.scene.remove(l);for(const [c,visible]of WS.saved)c.visible=visible;})()"
+  },
+  {
+    "id": "below-hill",
+    "title": "Hill warren: chamber and husks",
+    "group": "Underground",
+    "camera": "(()=>{const w=WS.w,C=TT.HOLLOW.CELL,o=w.group.position,p=w.plan,c=p.cells[p.chambers[0]],x=o.x+c.i*C+C/2,z=o.z+c.j*C+C/2,t={x,y:w.groundAt(x,z),z},e=w.entry,dx=t.x-e.x,dz=t.z-e.z,l=Math.hypot(dx,dz)||1,cam={x:t.x-dx/l*2.6,z:t.z-dz/l*2.6};return{x:cam.x,y:(w.groundAt(cam.x,cam.z)??t.y)+1.7,z:cam.z,tx:t.x,ty:t.y+3.6,tz:t.z,fov:75};})()",
+    "staged": true,
+    "setup": "(()=>{WS.saved=TT.scene.children.map(c=>[c,c.visible]);for(const [c]of WS.saved)if(!c.isLight)c.visible=false;WS.w=TT.buildWarren('hill',{origin:{x:0,y:260,z:0}});TT.scene.add(WS.w.group);WS.lights=[];for(const l of WS.w.lamps){const p=new WS.T.PointLight(0xffc488,6,16,1.2);p.position.set(l.x,l.y,l.z);TT.scene.add(p);WS.lights.push(p);}})()",
+    "teardown": "(()=>{WS.w.dispose();for(const l of WS.lights)TT.scene.remove(l);for(const [c,visible]of WS.saved)c.visible=visible;})()"
+  },
+  {
+    "id": "deep-hill",
+    "title": "Hill warren: Deep set piece",
+    "group": "Underground",
+    "camera": "(()=>{const w=WS.w,C=TT.HOLLOW.CELL,o=w.group.position,p=w.plan,c=p.cells[p.chambers[0]],x=o.x+c.i*C+C/2,z=o.z+c.j*C+C/2,t=w.points.set,e=w.points.strongbox,dx=t.x-e.x,dz=t.z-e.z,l=Math.hypot(dx,dz)||1,cam={x:t.x-dx/l*4.5,z:t.z-dz/l*4.5};return{x:cam.x,y:(w.groundAt(cam.x,cam.z)??t.y)+1.7,z:cam.z,tx:t.x,ty:t.y+1.2,tz:t.z,fov:75};})()",
+    "staged": true,
+    "setup": "(()=>{WS.saved=TT.scene.children.map(c=>[c,c.visible]);for(const [c]of WS.saved)if(!c.isLight)c.visible=false;WS.w=TT.buildWarren('hill',{origin:{x:0,y:260,z:0}});TT.scene.add(WS.w.group);WS.lights=[];for(const l of WS.w.lamps){const p=new WS.T.PointLight(0xffc488,6,16,1.2);p.position.set(l.x,l.y,l.z);TT.scene.add(p);WS.lights.push(p);}})()",
+    "teardown": "(()=>{WS.w.dispose();for(const l of WS.lights)TT.scene.remove(l);for(const [c,visible]of WS.saved)c.visible=visible;})()"
+  },
+  {
+    "id": "below-crates",
+    "title": "Dragged-down PGB supplies",
+    "group": "Underground",
+    "camera": "WS.isolate(WS.w.group.getObjectByName('fob-crates'),{d:5,up:3,yaw:1.2})",
+    "staged": true,
+    "setup": "(()=>{WS.saved=TT.scene.children.map(c=>[c,c.visible]);for(const [c]of WS.saved)if(!c.isLight)c.visible=false;WS.w=TT.buildWarren('root',{origin:{x:0,y:260,z:0}});TT.scene.add(WS.w.group);WS.lights=[];for(const l of WS.w.lamps){const p=new WS.T.PointLight(0xffc488,6,16,1.2);p.position.set(l.x,l.y,l.z);TT.scene.add(p);WS.lights.push(p);}})()",
+    "teardown": "(()=>{WS.w.dispose();for(const l of WS.lights)TT.scene.remove(l);for(const [c,visible]of WS.saved)c.visible=visible;})()",
+    "isolated": true
+  },
+  {
+    "id": "below-door",
+    "title": "Underground rune door",
+    "group": "Underground",
+    "camera": "WS.isolate(WS.w.group.getObjectByName('rune-door'),{d:6,up:1})",
+    "staged": true,
+    "setup": "(()=>{WS.saved=TT.scene.children.map(c=>[c,c.visible]);for(const [c]of WS.saved)if(!c.isLight)c.visible=false;WS.w=TT.buildWarren('root',{origin:{x:0,y:260,z:0}});TT.scene.add(WS.w.group);WS.lights=[];for(const l of WS.w.lamps){const p=new WS.T.PointLight(0xffc488,6,16,1.2);p.position.set(l.x,l.y,l.z);TT.scene.add(p);WS.lights.push(p);}})()",
+    "teardown": "(()=>{WS.w.dispose();for(const l of WS.lights)TT.scene.remove(l);for(const [c,visible]of WS.saved)c.visible=visible;})()",
+    "isolated": true
+  },
+  {
+    "id": "below-box",
+    "title": "Iron-bound strongbox",
+    "group": "Underground",
+    "camera": "WS.frame(WS.w.group.getObjectByName('strongbox'),{d:4,up:1.4})",
+    "staged": true,
+    "setup": "(()=>{WS.saved=TT.scene.children.map(c=>[c,c.visible]);for(const [c]of WS.saved)if(!c.isLight)c.visible=false;WS.w=TT.buildWarren('root',{origin:{x:0,y:260,z:0}});TT.scene.add(WS.w.group);WS.lights=[];for(const l of WS.w.lamps){const p=new WS.T.PointLight(0xffc488,6,16,1.2);p.position.set(l.x,l.y,l.z);TT.scene.add(p);WS.lights.push(p);}})()",
+    "teardown": "(()=>{WS.w.dispose();for(const l of WS.lights)TT.scene.remove(l);for(const [c,visible]of WS.saved)c.visible=visible;})()"
+  },
+  {
+    "id": "below-breach",
+    "title": "Broken iron barrier and hikers’ descent",
+    "group": "Underground",
+    "camera": "WS.frame(WS.w.group.getObjectByName('iron-wall-cut'),{d:5,up:1.4})",
+    "staged": true,
+    "setup": "(()=>{WS.saved=TT.scene.children.map(c=>[c,c.visible]);for(const [c]of WS.saved)if(!c.isLight)c.visible=false;WS.w=TT.buildWarren('iron',{origin:{x:0,y:260,z:0}});TT.scene.add(WS.w.group);WS.lights=[];for(const l of WS.w.lamps){const p=new WS.T.PointLight(0xffc488,6,16,1.2);p.position.set(l.x,l.y,l.z);TT.scene.add(p);WS.lights.push(p);}})()",
+    "teardown": "(()=>{WS.w.dispose();for(const l of WS.lights)TT.scene.remove(l);for(const [c,visible]of WS.saved)c.visible=visible;})()"
+  },
+  {
+    "id": "heart-chamber",
+    "title": "The Marrow: heart chamber",
+    "group": "Underground",
+    "camera": "(()=>{const h=WS.h;return{x:0,y:h.source.y+2.2,z:h.source.z-TT.HEART.R+1,tx:0,ty:h.source.y+4,tz:h.source.z+4,fov:75};})()",
+    "staged": true,
+    "setup": "(()=>{WS.saved=TT.scene.children.map(c=>[c,c.visible]);for(const [c]of WS.saved)if(!c.isLight)c.visible=false;WS.h=TT.buildHeart({origin:{x:0,y:300,z:0}});TT.scene.add(WS.h.group);WS.lights=[];for(const [color,intensity,p]of [[0x9eeeff,40,{x:WS.h.source.x,y:WS.h.source.y+4,z:WS.h.source.z}],[0xffd8a8,8,{x:WS.h.entry.x,y:WS.h.entry.y+2,z:WS.h.entry.z+4}]]){const l=new WS.T.PointLight(color,intensity,40,1.2);l.position.set(p.x,p.y,p.z);TT.scene.add(l);WS.lights.push(l);}})()",
+    "teardown": "(()=>{TT.scene.remove(WS.h.group);for(const l of WS.lights)TT.scene.remove(l);for(const [c,visible]of WS.saved)c.visible=visible;})()",
+    "worldTime": 0
+  },
+  {
+    "id": "heart-source",
+    "title": "The heart and its supporting columns",
+    "group": "Underground",
+    "camera": "(()=>{const h=WS.h;return{x:h.source.x+7,y:h.source.y+2.5,z:h.source.z-6,tx:h.source.x,ty:h.source.y+1.5,tz:h.source.z,fov:65};})()",
+    "staged": true,
+    "setup": "(()=>{WS.saved=TT.scene.children.map(c=>[c,c.visible]);for(const [c]of WS.saved)if(!c.isLight)c.visible=false;WS.h=TT.buildHeart({origin:{x:0,y:300,z:0}});TT.scene.add(WS.h.group);WS.lights=[];for(const [color,intensity,p]of [[0x9eeeff,40,{x:WS.h.source.x,y:WS.h.source.y+4,z:WS.h.source.z}],[0xffd8a8,8,{x:WS.h.entry.x,y:WS.h.entry.y+2,z:WS.h.entry.z+4}]]){const l=new WS.T.PointLight(color,intensity,40,1.2);l.position.set(p.x,p.y,p.z);TT.scene.add(l);WS.lights.push(l);}})()",
+    "teardown": "(()=>{TT.scene.remove(WS.h.group);for(const l of WS.lights)TT.scene.remove(l);for(const [c,visible]of WS.saved)c.visible=visible;})()",
+    "worldTime": 0
+  },
+  {
+    "id": "offering-0",
+    "title": "Barrow cairns",
+    "group": "Caves and the first people",
+    "camera": "WS.isolate(TT.firstPeople.offerings.children[0],{d:1.6,up:.8})",
+    "staged": true,
+    "isolated": true
+  },
+  {
+    "id": "offering-1",
+    "title": "Ash offering bowl",
+    "group": "Caves and the first people",
+    "camera": "WS.isolate(TT.firstPeople.offerings.children[1],{d:1.6,up:.8})",
+    "staged": true,
+    "isolated": true
+  },
+  {
+    "id": "offering-3",
+    "title": "Antler offering",
+    "group": "Caves and the first people",
+    "camera": "WS.isolate(TT.firstPeople.offerings.children[3],{d:1.6,up:.8})",
+    "staged": true,
+    "isolated": true
+  },
+  {
+    "id": "offering-4",
+    "title": "Carved offering stone",
+    "group": "Caves and the first people",
+    "camera": "WS.isolate(TT.firstPeople.offerings.children[4],{d:1.6,up:.8})",
+    "staged": true,
+    "isolated": true
+  }
+]

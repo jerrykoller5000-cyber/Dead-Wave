@@ -1,0 +1,9 @@
+#45 screamer-hurt
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 0.6 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A short piercing pained shriek from a screamer zombie. Close-up, dry. No words, no music.
+
+In the game: zombieVoice('screamer', 'hurt')

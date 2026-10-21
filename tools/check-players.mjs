@@ -1,0 +1,79 @@
+// CU-63: game logic reads the players list, not player.position.
+// Allowed functions are the local view and the marine's own actions (docs/coop.md §3).
+// A new function that reads player.position fails here until it is named in the same handoff.
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+
+// Kind 1 (the local view), kind 3 (what he does) and the debug/warm-up helpers.
+// CL-150: GB-156's mortar/Watchman crew (dismountMortar, crewFeet, crewLateFeet, updateMortarCrew) are kind 3, like
+// mountMortar and updateMortar: his own body walking in, kneeling at the tube and stepping off it (Claude, lead).
+// CL-181: his own body on the mast's ladder and in its fall (onMastHigh, updateMastClimb, poseLadder, startMastFall,
+// updateMastFall), the smoke off him (updateZapSmoke), the dev console's mast command, and the floating E prompt
+// over his head (promptAnchor, the local view). Kinds 1 and 3 (Claude, lead).
+const ALLOWED = new Set(`
+tick updateWater updateAmbientLife updateAudioDirection updateWindSway updateRoofCutaway ease
+warmEffectPools finishEffectWarmup updateCaveEyes destroyLandmark campsiteMapName drawMinimap
+toFull updateCampfires updateRainDroplets updatePuddles cullFoliageByDistance updateTreeBatchesInner
+updatePitBubbles updateWorldVoices flushShotHits sndAt damageZombie updateTreeFade updateShadowLOD sceneCull
+resolveTreeCollisions updateTowerClimb updateSlopeSlide tryRoll tryVault updateVault enterHollow leaveHollow updateHqLadder stepHqLadder pushOutOfHouse inLot sendMarineToSpawn resetGame
+startMode tipAt smooth updateMarineBody marineBody marineHit damagePlayer updateMouseAim updateMouseAimBody
+raycastTerrain triggerMuzzleFlash knifeAttack chainsawTick updateFlameStream throwGrenade meleeBugs
+meleeWildlife updateMedPenUse cycleWeapon getPlacePoint updateGhostPreview cancelPlaceMode
+buildReachable pickBuildOnRay upgradeTarget scrapTarget nearestOnMyStorey storeyBand playerUpstairs
+ok nearestDoor toggleDoor nearestFoldStairs canReachMortar nearestMortar mountMortar updateMortar
+onBoards nearestGrave nearHQWindow nearHQPanel nearCIF nearKiosk updateKioskPrompt actionTarget
+objectiveReach beginScriptedKill updateCaveKill setupCaveDrag toScene updateGrabScene updateCaveDrag
+finishScriptedKill snd beginMarineInsertion beginHunt makeKnife updateTentacleKill kickFree startGrabScene
+drawFullMap mapEnemyVisible drawMapBlips currentMapMissions updateMarineIdle loopCineCamera resolveTarget ankleIntoHand nearArmory
+devBaseBuild hordeReport devSwarm pulseGuardianFailsafeForTest cineSetup getCaveChase
+stepSetA maybePreRollFromLoop stepLivePreRoll preRollFight stampDebugHooks
+dismountMortar crewFeet crewLateFeet updateMortarCrew
+onMastHigh updateMastClimb poseLadder startMastFall updateMastFall updateZapSmoke runDevCommand promptAnchor
+`.split(/\s+/).filter(Boolean));
+
+export function scan(src) {
+  const lines = src.split(/\n/);
+  const stack = [];
+  let depth = 0;
+  const reads = [];
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    const opens = (line.match(/\{/g) || []).length;
+    const closes = (line.match(/\}/g) || []).length;
+    const fn = /function\s+([A-Za-z0-9_]+)\s*\(/.exec(line);
+    if (fn) stack.push({ name: fn[1], depth });
+    if (line.includes('player.position')) {
+      const name = stack.length ? stack[stack.length - 1].name : '(top)';
+      reads.push({ line: i + 1, name, text: line.trim().slice(0, 140) });
+    }
+    depth += opens - closes;
+    while (stack.length && depth < stack[stack.length - 1].depth) stack.pop();
+  }
+  return reads;
+}
+
+export function violations(reads) {
+  return reads.filter((r) => !ALLOWED.has(r.name));
+}
+
+function report(file, reads) {
+  const bad = violations(reads);
+  if (!bad.length) {
+    console.log(`check-players: ${reads.length} player.position reads, all in the allowed places`);
+    return 0;
+  }
+  console.log('check-players: game logic reads the players list: nearestPlayer, playersNear or players (docs/coop.md).');
+  for (const r of bad) console.log(`  ${file}:${r.line}  ${r.name}  ${r.text}`);
+  console.log(`${bad.length} read(s) in ${new Set(bad.map((r) => r.name)).size} function(s)`);
+  return 1;
+}
+
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  const planted = violations(scan('function planted(){ return player.position.x }'));
+  if (planted.length !== 1) { console.log('check-players: the planted-read check did not fail'); process.exit(1); }
+  const src = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
+  process.exit(report('index.html', scan(src)));
+}

@@ -1,0 +1,48 @@
+{
+ "at": "2026-10-15T09:50:14.017Z",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "results": [
+  {
+   "id": "build.stairs",
+   "variant": "0",
+   "mode": null,
+   "ok": true,
+   "ms": 115,
+   "tris": 864,
+   "size": [
+    2.005,
+    2.15,
+    2.141
+   ],
+   "error": null
+  },
+  {
+   "id": "build.stairs",
+   "variant": "1",
+   "mode": null,
+   "ok": true,
+   "ms": 109,
+   "tris": 804,
+   "size": [
+    2.01,
+    2.211,
+    2.17
+   ],
+   "error": null
+  },
+  {
+   "id": "build.stairs",
+   "variant": "2",
+   "mode": null,
+   "ok": true,
+   "ms": 109,
+   "tris": 956,
+   "size": [
+    2.145,
+    2.211,
+    2.17
+   ],
+   "error": null
+  }
+ ]
+}

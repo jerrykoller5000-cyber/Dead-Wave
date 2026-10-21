@@ -1,0 +1,9 @@
+#150 below/drip
+MISSING: the game makes no sound here now
+Now: (silent)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 1 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A single water drop falling into a puddle in a stone cave, with echo. No music, no voice.

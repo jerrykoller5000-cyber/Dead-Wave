@@ -1,0 +1,9 @@
+#59 colossus-chase
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 2.5 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A colossal giant zombie's deep thundering groan building in power, very low and heavy, sub-bass rumble. Dry. No words, no music.
+
+In the game: zombieVoice('colossus', 'chase')

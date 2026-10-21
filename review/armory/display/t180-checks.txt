@@ -1,0 +1,29 @@
+PASS a fresh run: five spaces, four empty and the pistol (empty0,empty1,empty2,empty3,pistol)
+PASS every gun owned: still five spaces (minigun,m4,uzi,revolver,pistol)
+PASS two primaries, two secondaries and the pistol (minigun,m4,uzi,revolver,pistol)
+PASS Q steps through only those (minigun,m4,uzi,revolver,pistol)
+PASS Q never reaches a stored gun (minigun,m4,uzi,revolver,pistol)
+PASS a suppressor bought for the M4 is owned, not on it
+PASS the M4 has no can yet
+PASS the AK's extended mag is owned, not fitted
+PASS fitted in the Armory: the can is on the M4
+PASS the AK takes its extended mag
+PASS and it shows: a longer magazine on the AK
+PASS an attachment he hasn't bought can't go on
+PASS and one can come off again
+PASS the auto sear goes on the pistol
+PASS the Armory opens
+PASS four slot tiles
+PASS pictures of the real guns on the shelves and in the slots (16, {"drawn":32,"cached":12,"ok":true})
+PASS a real picture, not a blank (53242 chars)
+PASS a stored gun can go to the workbench
+PASS the workbench lists the AK's attachments (ext:fitted heavy:missing suppressor:missing)
+PASS its button takes the mag off
+PASS and puts it back on
+PASS fitted attachments show as tags on the gun (Auto sear, Extended magazine, Auto sear)
+PASS the gun taken from the shelf is on the wheel (ak: ak,m4,uzi,revolver,pistol)
+FAIL the HQ rack holds the stored guns (minigun,m4,ak,shotgun,aa12,sniper,launcher,flamer,pistol,uzi,revolver)
+FAIL not the ones he carries
+PASS back in the middle, the hub says unarmed
+PASS Bigtex shooter: every gun he owns (12)
+PASS off again: five spaces (5)

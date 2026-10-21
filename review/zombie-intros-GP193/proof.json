@@ -1,0 +1,640 @@
+{
+  "idle": {
+    "selected": null,
+    "tracks": {}
+  },
+  "colossus": {
+    "alarm": {
+      "accepted": 2,
+      "audio": {
+        "selected": null,
+        "tracks": {
+          "colossus": {
+            "wanted": false,
+            "playing": false,
+            "looping": false,
+            "fading": false,
+            "ready": true,
+            "seconds": 114.24,
+            "error": null
+          }
+        }
+      },
+      "pending": {
+        "kind": "colossus",
+        "count": 2,
+        "remaining": 1.977800000011924,
+        "seconds": 2
+      }
+    },
+    "release": {
+      "audio": {
+        "selected": "colossus",
+        "tracks": {
+          "colossus": {
+            "wanted": true,
+            "playing": true,
+            "looping": true,
+            "fading": false,
+            "ready": true,
+            "seconds": 114.24,
+            "error": null
+          }
+        }
+      },
+      "gate": {
+        "active": true,
+        "amount": 1,
+        "flashing": true,
+        "lit": true
+      },
+      "alive": 2,
+      "rejected": 0
+    },
+    "panel": {
+      "disabled": true,
+      "status": "2 zombies in the build room · Defeat or clear this group before calling another.",
+      "before": null,
+      "after": null
+    },
+    "partial": {
+      "selected": "colossus",
+      "tracks": {
+        "colossus": {
+          "wanted": true,
+          "playing": true,
+          "looping": true,
+          "fading": false,
+          "ready": true,
+          "seconds": 114.24,
+          "error": null
+        }
+      }
+    },
+    "dead": {
+      "audio": {
+        "selected": null,
+        "tracks": {
+          "colossus": {
+            "wanted": false,
+            "playing": false,
+            "looping": false,
+            "fading": true,
+            "ready": true,
+            "seconds": 114.24,
+            "error": null
+          }
+        }
+      },
+      "alive": 0,
+      "rejected": 1
+    },
+    "faded": {
+      "wanted": false,
+      "playing": false,
+      "looping": false,
+      "fading": false,
+      "ready": true,
+      "seconds": 114.24,
+      "error": null
+    },
+    "unlocked": true
+  },
+  "screamer": {
+    "alarm": {
+      "accepted": 2,
+      "audio": {
+        "selected": null,
+        "tracks": {
+          "colossus": {
+            "wanted": false,
+            "playing": false,
+            "looping": false,
+            "fading": false,
+            "ready": true,
+            "seconds": 114.24,
+            "error": null
+          },
+          "screamer": {
+            "wanted": false,
+            "playing": false,
+            "looping": false,
+            "fading": false,
+            "ready": true,
+            "seconds": 207.2,
+            "error": null
+          }
+        }
+      },
+      "pending": {
+        "kind": "screamer",
+        "count": 2,
+        "remaining": 1.985599999994043,
+        "seconds": 2
+      }
+    },
+    "release": {
+      "audio": {
+        "selected": "screamer",
+        "tracks": {
+          "colossus": {
+            "wanted": false,
+            "playing": false,
+            "looping": false,
+            "fading": false,
+            "ready": true,
+            "seconds": 114.24,
+            "error": null
+          },
+          "screamer": {
+            "wanted": true,
+            "playing": true,
+            "looping": true,
+            "fading": false,
+            "ready": true,
+            "seconds": 207.2,
+            "error": null
+          }
+        }
+      },
+      "gate": {
+        "active": true,
+        "amount": 1,
+        "flashing": true,
+        "lit": true
+      },
+      "alive": 2,
+      "rejected": 0
+    },
+    "partial": {
+      "selected": "screamer",
+      "tracks": {
+        "colossus": {
+          "wanted": false,
+          "playing": false,
+          "looping": false,
+          "fading": false,
+          "ready": true,
+          "seconds": 114.24,
+          "error": null
+        },
+        "screamer": {
+          "wanted": true,
+          "playing": true,
+          "looping": true,
+          "fading": false,
+          "ready": true,
+          "seconds": 207.2,
+          "error": null
+        }
+      }
+    },
+    "dead": {
+      "audio": {
+        "selected": null,
+        "tracks": {
+          "colossus": {
+            "wanted": false,
+            "playing": false,
+            "looping": false,
+            "fading": false,
+            "ready": true,
+            "seconds": 114.24,
+            "error": null
+          },
+          "screamer": {
+            "wanted": false,
+            "playing": false,
+            "looping": false,
+            "fading": true,
+            "ready": true,
+            "seconds": 207.2,
+            "error": null
+          }
+        }
+      },
+      "alive": 1,
+      "rejected": 0
+    },
+    "faded": {
+      "wanted": false,
+      "playing": false,
+      "looping": false,
+      "fading": false,
+      "ready": true,
+      "seconds": 207.2,
+      "error": null
+    },
+    "unlocked": true
+  },
+  "bomber": {
+    "alarm": {
+      "accepted": 2,
+      "audio": {
+        "selected": null,
+        "tracks": {
+          "colossus": {
+            "wanted": false,
+            "playing": false,
+            "looping": false,
+            "fading": false,
+            "ready": true,
+            "seconds": 114.24,
+            "error": null
+          },
+          "screamer": {
+            "wanted": false,
+            "playing": false,
+            "looping": false,
+            "fading": false,
+            "ready": true,
+            "seconds": 207.2,
+            "error": null
+          },
+          "bomber": {
+            "wanted": false,
+            "playing": false,
+            "looping": false,
+            "fading": false,
+            "ready": true,
+            "seconds": 17.16,
+            "error": null
+          }
+        }
+      },
+      "pending": {
+        "kind": "bomber",
+        "count": 2,
+        "remaining": 1.9830999999940426,
+        "seconds": 2
+      }
+    },
+    "release": {
+      "audio": {
+        "selected": "bomber",
+        "tracks": {
+          "colossus": {
+            "wanted": false,
+            "playing": false,
+            "looping": false,
+            "fading": false,
+            "ready": true,
+            "seconds": 114.24,
+            "error": null
+          },
+          "screamer": {
+            "wanted": false,
+            "playing": false,
+            "looping": false,
+            "fading": false,
+            "ready": true,
+            "seconds": 207.2,
+            "error": null
+          },
+          "bomber": {
+            "wanted": true,
+            "playing": true,
+            "looping": true,
+            "fading": false,
+            "ready": true,
+            "seconds": 17.16,
+            "error": null
+          }
+        }
+      },
+      "gate": {
+        "active": true,
+        "amount": 1,
+        "flashing": true,
+        "lit": true
+      },
+      "alive": 2,
+      "rejected": 0
+    },
+    "partial": {
+      "selected": "bomber",
+      "tracks": {
+        "colossus": {
+          "wanted": false,
+          "playing": false,
+          "looping": false,
+          "fading": false,
+          "ready": true,
+          "seconds": 114.24,
+          "error": null
+        },
+        "screamer": {
+          "wanted": false,
+          "playing": false,
+          "looping": false,
+          "fading": false,
+          "ready": true,
+          "seconds": 207.2,
+          "error": null
+        },
+        "bomber": {
+          "wanted": true,
+          "playing": true,
+          "looping": true,
+          "fading": false,
+          "ready": true,
+          "seconds": 17.16,
+          "error": null
+        }
+      }
+    },
+    "dead": {
+      "audio": {
+        "selected": null,
+        "tracks": {
+          "colossus": {
+            "wanted": false,
+            "playing": false,
+            "looping": false,
+            "fading": false,
+            "ready": true,
+            "seconds": 114.24,
+            "error": null
+          },
+          "screamer": {
+            "wanted": false,
+            "playing": false,
+            "looping": false,
+            "fading": false,
+            "ready": true,
+            "seconds": 207.2,
+            "error": null
+          },
+          "bomber": {
+            "wanted": false,
+            "playing": false,
+            "looping": false,
+            "fading": true,
+            "ready": true,
+            "seconds": 17.16,
+            "error": null
+          }
+        }
+      },
+      "alive": 0,
+      "rejected": 1
+    },
+    "faded": {
+      "wanted": false,
+      "playing": false,
+      "looping": false,
+      "fading": false,
+      "ready": true,
+      "seconds": 17.16,
+      "error": null
+    },
+    "unlocked": true
+  },
+  "demon": {
+    "alarm": {
+      "accepted": 2,
+      "audio": {
+        "selected": null,
+        "tracks": {
+          "colossus": {
+            "wanted": false,
+            "playing": false,
+            "looping": false,
+            "fading": false,
+            "ready": true,
+            "seconds": 114.24,
+            "error": null
+          },
+          "screamer": {
+            "wanted": false,
+            "playing": false,
+            "looping": false,
+            "fading": false,
+            "ready": true,
+            "seconds": 207.2,
+            "error": null
+          },
+          "bomber": {
+            "wanted": false,
+            "playing": false,
+            "looping": false,
+            "fading": false,
+            "ready": true,
+            "seconds": 17.16,
+            "error": null
+          },
+          "demon": {
+            "wanted": false,
+            "playing": false,
+            "looping": false,
+            "fading": false,
+            "ready": true,
+            "seconds": 125.6,
+            "error": null
+          }
+        }
+      },
+      "pending": {
+        "kind": "demon",
+        "count": 2,
+        "remaining": 1.9889000000059636,
+        "seconds": 2
+      }
+    },
+    "release": {
+      "audio": {
+        "selected": "demon",
+        "tracks": {
+          "colossus": {
+            "wanted": false,
+            "playing": false,
+            "looping": false,
+            "fading": false,
+            "ready": true,
+            "seconds": 114.24,
+            "error": null
+          },
+          "screamer": {
+            "wanted": false,
+            "playing": false,
+            "looping": false,
+            "fading": false,
+            "ready": true,
+            "seconds": 207.2,
+            "error": null
+          },
+          "bomber": {
+            "wanted": false,
+            "playing": false,
+            "looping": false,
+            "fading": false,
+            "ready": true,
+            "seconds": 17.16,
+            "error": null
+          },
+          "demon": {
+            "wanted": true,
+            "playing": true,
+            "looping": true,
+            "fading": false,
+            "ready": true,
+            "seconds": 125.6,
+            "error": null
+          }
+        }
+      },
+      "gate": {
+        "active": true,
+        "amount": 1,
+        "flashing": true,
+        "lit": true
+      },
+      "alive": 2,
+      "rejected": 0
+    },
+    "partial": {
+      "selected": "demon",
+      "tracks": {
+        "colossus": {
+          "wanted": false,
+          "playing": false,
+          "looping": false,
+          "fading": false,
+          "ready": true,
+          "seconds": 114.24,
+          "error": null
+        },
+        "screamer": {
+          "wanted": false,
+          "playing": false,
+          "looping": false,
+          "fading": false,
+          "ready": true,
+          "seconds": 207.2,
+          "error": null
+        },
+        "bomber": {
+          "wanted": false,
+          "playing": false,
+          "looping": false,
+          "fading": false,
+          "ready": true,
+          "seconds": 17.16,
+          "error": null
+        },
+        "demon": {
+          "wanted": true,
+          "playing": true,
+          "looping": true,
+          "fading": false,
+          "ready": true,
+          "seconds": 125.6,
+          "error": null
+        }
+      }
+    },
+    "dead": {
+      "audio": {
+        "selected": null,
+        "tracks": {
+          "colossus": {
+            "wanted": false,
+            "playing": false,
+            "looping": false,
+            "fading": false,
+            "ready": true,
+            "seconds": 114.24,
+            "error": null
+          },
+          "screamer": {
+            "wanted": false,
+            "playing": false,
+            "looping": false,
+            "fading": false,
+            "ready": true,
+            "seconds": 207.2,
+            "error": null
+          },
+          "bomber": {
+            "wanted": false,
+            "playing": false,
+            "looping": false,
+            "fading": false,
+            "ready": true,
+            "seconds": 17.16,
+            "error": null
+          },
+          "demon": {
+            "wanted": false,
+            "playing": false,
+            "looping": false,
+            "fading": true,
+            "ready": true,
+            "seconds": 125.6,
+            "error": null
+          }
+        }
+      },
+      "alive": 0,
+      "rejected": 1
+    },
+    "faded": {
+      "wanted": false,
+      "playing": false,
+      "looping": false,
+      "fading": false,
+      "ready": true,
+      "seconds": 125.6,
+      "error": null
+    },
+    "unlocked": true
+  },
+  "cancel": {
+    "audio": {
+      "selected": null,
+      "tracks": {
+        "colossus": {
+          "wanted": false,
+          "playing": false,
+          "looping": false,
+          "fading": false,
+          "ready": true,
+          "seconds": 114.24,
+          "error": null
+        },
+        "screamer": {
+          "wanted": false,
+          "playing": false,
+          "looping": false,
+          "fading": false,
+          "ready": true,
+          "seconds": 207.2,
+          "error": null
+        },
+        "bomber": {
+          "wanted": false,
+          "playing": false,
+          "looping": false,
+          "fading": false,
+          "ready": true,
+          "seconds": 17.16,
+          "error": null
+        },
+        "demon": {
+          "wanted": false,
+          "playing": false,
+          "looping": false,
+          "fading": false,
+          "ready": true,
+          "seconds": 125.6,
+          "error": null
+        }
+      }
+    },
+    "alive": 0
+  },
+  "left": {
+    "enabled": false
+  },
+  "errors": []
+}

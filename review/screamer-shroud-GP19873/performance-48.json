@@ -1,0 +1,182 @@
+{
+  "before": {
+    "puffCounts": [
+      12,
+      12,
+      12,
+      12,
+      12,
+      12,
+      12,
+      12,
+      12,
+      12,
+      12,
+      12,
+      12,
+      12,
+      12,
+      12,
+      12,
+      12,
+      12,
+      12,
+      12,
+      12,
+      12,
+      12,
+      12,
+      12,
+      12,
+      12,
+      12,
+      12,
+      12,
+      12,
+      12,
+      12,
+      12,
+      12,
+      12,
+      12,
+      12,
+      12,
+      12,
+      12,
+      12,
+      12,
+      12,
+      12,
+      12,
+      12
+    ],
+    "batches": [
+      {
+        "fps": 60.3408262053973,
+        "p95": 17.400000005960464
+      },
+      {
+        "fps": 59.40134067818608,
+        "p95": 19.5
+      },
+      {
+        "fps": 36.91141260951715,
+        "p95": 36.599999994039536
+      }
+    ],
+    "zombies": 48,
+    "ability": {
+      "clock": 17.744799999982135,
+      "domain": "training",
+      "shots": 0,
+      "trails": 0,
+      "counts": {
+        "fireballs": 0,
+        "stones": 0,
+        "trailDrops": 0,
+        "directHits": 0,
+        "blocked": 0,
+        "acidHits": 0
+      },
+      "pools": {
+        "fireballs": 0,
+        "stones": 0,
+        "trails": 0
+      }
+    },
+    "trailMeshes": 0,
+    "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "loadSeconds": 17.396,
+    "errors": []
+  },
+  "after": {
+    "puffCounts": [
+      18,
+      18,
+      18,
+      18,
+      18,
+      18,
+      18,
+      18,
+      18,
+      18,
+      18,
+      18,
+      18,
+      18,
+      18,
+      18,
+      18,
+      18,
+      18,
+      18,
+      18,
+      18,
+      18,
+      18,
+      18,
+      18,
+      18,
+      18,
+      18,
+      18,
+      18,
+      18,
+      18,
+      18,
+      18,
+      18,
+      18,
+      18,
+      18,
+      18,
+      18,
+      18,
+      18,
+      18,
+      18,
+      18,
+      18,
+      18
+    ],
+    "batches": [
+      {
+        "fps": 59.571352502426066,
+        "p95": 18.80000001192093
+      },
+      {
+        "fps": 59.90215980553195,
+        "p95": 19
+      },
+      {
+        "fps": 59.14210718699706,
+        "p95": 19.200000017881393
+      }
+    ],
+    "zombies": 48,
+    "ability": {
+      "clock": 17.761000000000013,
+      "domain": "training",
+      "shots": 0,
+      "trails": 0,
+      "counts": {
+        "fireballs": 0,
+        "stones": 0,
+        "trailDrops": 0,
+        "directHits": 0,
+        "blocked": 0,
+        "acidHits": 0
+      },
+      "pools": {
+        "fireballs": 0,
+        "stones": 0,
+        "trails": 0
+      }
+    },
+    "trailMeshes": 0,
+    "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "loadSeconds": 16.332,
+    "errors": []
+  }
+}

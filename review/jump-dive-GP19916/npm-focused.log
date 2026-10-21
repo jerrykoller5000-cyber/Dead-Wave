@@ -1,0 +1,4 @@
+check-players: 294 player.position reads, all in the allowed places
+ok    t253    24 pass   0 fail  47.4s
+
+1 checks: 24 pass, 0 fail

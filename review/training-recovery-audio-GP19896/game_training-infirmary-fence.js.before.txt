@@ -1,0 +1,70 @@
+// GP-19893: a retracting enclosure on the two open sides of the medical bay.
+import {bakeStatic} from '../world/bake.js';
+import {createTrainingBlockers} from './training-infirmary.js';
+
+export const INFIRMARY_FENCE = Object.freeze({height:3, clearDistance:.6096, travel:.65});
+export function createTrainingInfirmaryFence(T,tg) {
+  const {x,z}=tg.bed.centre, floor=tg.floorY, origin=tg.origin;
+  const bay={minX:x-3.15,maxX:x+4.55,minZ:z-2,maxZ:z+2.15,minY:floor,maxY:floor+INFIRMARY_FENCE.height,exitFaces:['maxX','maxZ']};
+  const root=new T.Group();root.name='training-infirmary-fence';root.position.set(x-origin.x,0,z-origin.z);tg.group.add(root);
+  const panels=new T.Group();root.add(panels);
+  const frame=new T.MeshStandardMaterial({color:0x39453e,roughness:.78,metalness:.5});
+  const wire=new T.MeshStandardMaterial({color:0x828d82,roughness:.72,metalness:.55,side:T.DoubleSide});
+  const geometries=[];
+  const box=(w,h,d,px,py,pz,parent=panels)=>{
+    const geo=new T.BoxGeometry(w,h,d);geometries.push(geo);
+    const m=new T.Mesh(geo,frame);m.position.set(px-x,py,pz-z);parent.add(m);return m;
+  };
+  const sides=[{axis:'x',at:bay.maxX,lo:bay.minZ+.18,hi:bay.maxZ},{axis:'z',at:bay.maxZ,lo:bay.minX+.24,hi:bay.maxX}];
+  for(const s of sides) {
+    const length=s.hi-s.lo,mid=(s.lo+s.hi)/2;
+    const at=(u,v)=>s.axis==='x'?[s.at-x,v,u+s.lo-z]:[u+s.lo-x,v,s.at-z];
+    for(const u of [s.lo,s.hi]) {
+      const px=s.axis==='x'?s.at:u,pz=s.axis==='x'?u:s.at;
+      box(.09,INFIRMARY_FENCE.height,.09,px,INFIRMARY_FENCE.height/2,pz);
+      box(.24,.035,.24,px,.026,pz,root);
+    }
+    for(const y of [.16,INFIRMARY_FENCE.height-.12]) box(s.axis==='x'?.065:length,.075,s.axis==='x'?length:.065,s.axis==='x'?s.at:mid,y,s.axis==='x'?mid:s.at);
+    // Thin diamond strips are real geometry: no alpha texture or distant mip popping.
+    const pos=[], low=.23, high=INFIRMARY_FENCE.height-.21, thickness=.012;
+    for(const slope of [-1,1]) for(let c=-length-high;c<length+high;c+=.28) {
+      const a=Math.max(0,slope===1?low-c:c-high),b=Math.min(length,slope===1?high-c:c-low);
+      if(b-a<.015)continue;
+      const av=slope*a+c,bv=slope*b+c,du=thickness/Math.sqrt(2),dv=-slope*du;
+      const vertices=[at(a+du,av+dv),at(b+du,bv+dv),at(b-du,bv-dv),at(a-du,av-dv)];
+      for(const i of [0,1,2,0,2,3])pos.push(...vertices[i]);
+    }
+    const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(pos,3));geo.computeVertexNormals();geometries.push(geo);panels.add(new T.Mesh(geo,wire));
+  }
+  bakeStatic(T,panels);bakeStatic(T,root,{skip:o=>o===panels});
+  const solids=sides.map(s=>({minX:s.axis==='x'?s.at-.06:s.lo,maxX:s.axis==='x'?s.at+.06:s.hi,minZ:s.axis==='z'?s.at-.06:s.lo,maxZ:s.axis==='z'?s.at+.06:s.hi,minY:floor,maxY:bay.maxY,prop:true,infirmaryFence:true}));
+  const blocker=createTrainingBlockers([bay]);
+  let raised=false,amount=0,awaitExit=false,previous=new WeakMap();
+  const sync=()=>{panels.position.y=-(INFIRMARY_FENCE.height+.12)*(1-amount);panels.visible=amount>0;};
+  function setRaised(on) {
+    if(raised===on)return;raised=on;
+    for(const s of solids){const i=tg.solids.indexOf(s);if(on&&i<0)tg.solids.push(s);else if(!on&&i>=0)tg.solids.splice(i,1);}
+  }
+  const distance=p=>Math.hypot(Math.max(bay.minX-p.x,0,p.x-bay.maxX),Math.max(bay.minZ-p.z,0,p.z-bay.maxZ));
+  const free=p=>({x:p.x,z:p.z,moved:false,blockX:false,blockZ:false});
+  const api={
+    group:root,bay,solids,
+    reset(){awaitExit=false;previous=new WeakMap();setRaised(true);amount=1;sync();},
+    lowerForRecovery(){awaitExit=true;setRaised(false);amount=0;previous=new WeakMap();sync();},
+    update(dt,p,recovering=false){
+      if(!Number.isFinite(dt)||dt<=0)return;
+      if(awaitExit&&!recovering&&p&&Math.abs(p.y-floor)<2&&distance(p)>INFIRMARY_FENCE.clearDistance){awaitExit=false;setRaised(true);}
+      const want=raised?1:0;amount+=Math.sign(want-amount)*Math.min(Math.abs(want-amount),dt/INFIRMARY_FENCE.travel);sync();
+    },
+    constrain(p,from=p,radius=.42){return raised?blocker.constrain(p,from,radius):free(p);},
+    keepZombie(zombie){
+      const p=zombie.mesh?.position;if(!p)return;
+      const from=previous.get(zombie)||{x:p.x,y:p.y,z:p.z};
+      const v=api.constrain(p,from,(zombie.radius||.42)+.06);p.x=v.x;p.z=v.z;
+      previous.set(zombie,{x:p.x,y:p.y,z:p.z});
+    },
+    state:()=>({raised,amount,awaitExit}),
+    dispose(){setRaised(false);root.removeFromParent();const all=new Set(geometries);root.traverse(m=>{if(m.geometry)all.add(m.geometry);});all.forEach(g=>g.dispose());frame.dispose();wire.dispose();}
+  };
+  api.reset();return api;
+}

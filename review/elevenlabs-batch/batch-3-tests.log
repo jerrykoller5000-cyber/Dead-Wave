@@ -1,0 +1,10 @@
+GP-186 final offline verification
+node --test review/elevenlabs-batch/batch.test.mjs review/elevenlabs-batch/batch-3.test.mjs
+✔ real PowerShell full batch 3 launcher displays 320 clips and declines before requesting a key
+✔ real menu supports batch 3 sample, priority and plan-only, while batch 2 keeps its original selection
+✔ a symlink output cannot redirect writes outside the chosen output root
+ℹ tests 41
+ℹ pass 41
+ℹ fail 0
+ℹ skipped 0
+Initial restricted run: existing junction safety test failed EPERM creating its fixture. Approved offline rerun above passed all checks.

@@ -1,0 +1,15 @@
+{
+  "task": "GP-181",
+  "files": {
+    "game/zombie-abilities.js": "37691135e5330e6dfeacfdde4cecb7a27610c4e6711d2a9141e83855fb788001",
+    "game/zombie-ability-runtime.js": "177f041f0ec7286f7b1500e43f59542beb0a0825150d80cbedbd6fd77470ea58",
+    "game/zombie-ability-runtime.test.mjs": "a512171ccf715cddf536000186f1ec69a9966fa516f6bcf42d8b1c9ef7872116",
+    "review/demon-turns/check.mjs": "c90ce8da04349dffdeef92b505d6625ceb432f910011dcf7f27735f8f4b2b67f"
+  },
+  "unitChecks": 74,
+  "liveGaps": [
+    1.2142999999970194,
+    1.2004999999999992
+  ],
+  "browserErrors": 0
+}

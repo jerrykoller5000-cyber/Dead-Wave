@@ -1,0 +1,9 @@
+#155 vehicles/floatplane-approach  (start here)
+MISSING: the game makes no sound here now
+Now: (silent: Heron)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 8 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A twin-engine propeller floatplane approaching and descending over a lake, engines rising then easing off. No music, no voice.

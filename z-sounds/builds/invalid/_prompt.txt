@@ -1,0 +1,9 @@
+#94 builds/invalid
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: invalid()
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.4 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A short low dull buzz, a 'no' sound for an action that is not allowed, game interface. No music, no voice.

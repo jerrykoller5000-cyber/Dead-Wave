@@ -118,6 +118,31 @@ def drive(x, amount=1.0):
     return np.tanh(x * amount) / np.tanh(amount) if amount > 0 else x
 
 
+def fuzz(x, gain=40.0, bias=0.06, sym=0.75):
+    """Hard, asymmetric clipping — a distortion pedal rather than a warm saturator.
+
+    tanh alone rounds every peak and the result reads as a loud synth. Real high-gain
+    tone comes from clipping hard, clipping asymmetrically (so even harmonics appear)
+    and doing it in two stages with filtering between, which is what this does."""
+    y = x * gain + bias
+    y = np.clip(y, -1.0, sym)                 # stage one: hard, lopsided
+    y = lowpass(y, 5200)                      # tighten before the second stage
+    y = np.tanh(y * 2.2)                      # stage two: round the edges off
+    return y / (np.max(np.abs(y)) + 1e-9)
+
+
+def cabinet(x, presence=1.0, thump=1.0):
+    """4x12 guitar cabinet: a resonant mid hump, a hard top-end rolloff and a low
+    shelf. Without this, distorted saws are fizz — the speaker is most of the tone."""
+    body = bandpass(x, 90 * thump, 620) * 1.15 * thump
+    mid = bandpass(x, 620, 1900) * 1.35
+    edge = bandpass(x, 1900, 4200) * 0.85 * presence
+    air = highpass(lowpass(x, 6200), 4200) * 0.22 * presence
+    y = body + mid + edge + air
+    y = lowpass(y, 6800)                      # speakers do not pass 10k
+    return y * 0.55
+
+
 # ---------------------------------------------------------------- chunked delays
 def comb_feedback(x, delay_s, fb, damp_fc=None):
     """y[n] = x[n] + fb * lp(y[n-D]); chunk recursion (chunk = D)."""
@@ -275,6 +300,38 @@ def drum(kind, variant=0):
     elif kind == 'rim':
         n = int(0.08 * SR); t = t_axis(n)
         x = (np.sin(2 * np.pi * 800 * t) * np.exp(-t * 90) + bandpass(rng.standard_normal(n), 2000, 6000) * np.exp(-t * 120)) * 0.8
+    elif kind == 'kick_metal':
+        # Clicky, fast-decaying double-bass kick: it has to speak at 16th notes, so the
+        # body is short and the beater click is loud enough to cut through guitars.
+        n = int(0.22 * SR); t = t_axis(n)
+        f = 48 + 150 * np.exp(-t * 55)
+        ph = np.cumsum(f / SR)
+        body = np.sin(2 * np.pi * ph) * np.exp(-t * 22)
+        click = highpass(rng.standard_normal(n), 2600) * np.exp(-t * 260) * 1.1
+        sub = np.sin(2 * np.pi * 52 * t) * np.exp(-t * 26) * 0.7
+        x = drive(body * 1.2 + click + sub, 2.2)
+    elif kind == 'snare_metal':
+        n = int(0.34 * SR); t = t_axis(n)
+        tone = (np.sin(2 * np.pi * 210 * t) + 0.5 * np.sin(2 * np.pi * 355 * t)) * np.exp(-t * 34)
+        crack = highpass(rng.standard_normal(n), 3000) * np.exp(-t * 55) * 1.2
+        wires = bandpass(rng.standard_normal(n), 1400, 9000) * np.exp(-t * 20) * 1.1
+        x = drive(tone * 0.8 + crack + wires, 1.9)
+    elif kind == 'crash':
+        n = int(1.8 * SR); t = t_axis(n)
+        x = highpass(rng.standard_normal(n), 3200) * np.exp(-t * 2.4)
+        x += bandpass(rng.standard_normal(n), 6000, 14000) * np.exp(-t * 3.6) * 0.7
+    elif kind == 'china':
+        # Trashy, fast, no sustain — the accent that says metal in one hit.
+        n = int(0.9 * SR); t = t_axis(n)
+        x = highpass(rng.standard_normal(n), 2400) * np.exp(-t * 6.5)
+        x += bandpass(rng.standard_normal(n), 3000, 9000) * np.exp(-t * 9) * 1.2
+        x = drive(x, 1.6)
+    elif kind == 'tom_floor':
+        n = int(0.75 * SR); t = t_axis(n)
+        f = 72 * (1 + 0.7 * np.exp(-t * 16))
+        ph = np.cumsum(f / SR)
+        x = np.sin(2 * np.pi * ph) * np.exp(-t * 4.2) + lowpass(rng.standard_normal(n), 480) * np.exp(-t * 22) * 0.5
+        x = drive(x, 1.5)
     else:
         raise ValueError(kind)
     x = x / (np.max(np.abs(x)) + 1e-9)

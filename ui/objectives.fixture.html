@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GP-9 objective UI fixture</title><link rel="stylesheet" href="./objectives.css">
+<style>
+  *{box-sizing:border-box}body{margin:0;background:#0a100e;color:#bbc8b5;font:13px/1.5 system-ui,sans-serif}
+  header{padding:22px 28px;border-bottom:1px solid #53644744}h1{margin:0;font-size:18px;color:#d9c892}header p{margin:4px 0;color:#85917e}
+  main{display:grid;grid-template-columns:minmax(250px,660px) minmax(230px,300px);gap:24px;max-width:1036px;margin:34px auto;padding:0 24px;align-items:start}
+  #map{position:relative;aspect-ratio:1.2;background:radial-gradient(ellipse at 70% 20%,#30423555,transparent 40%),repeating-linear-gradient(0deg,transparent 0 49px,#93a17710 49px 50px),repeating-linear-gradient(90deg,transparent 0 49px,#93a17710 49px 50px),#19251e;border:1px solid #7e8b6155;border-radius:3px}
+  #map>svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.4}#controls{padding:0 24px 24px;max-width:1036px;margin:auto}select{background:#19251e;color:#ddd9b9;border:1px solid #73835a;padding:8px;font:inherit}label{margin-right:8px}
+  @media(max-width:650px){header{padding:16px}main{display:flex;flex-direction:column;margin:20px auto;padding:0 18px;gap:18px}#map,#hud{width:100%}#controls{padding:0 18px 20px}}
+</style></head><body>
+<header><h1>GP-9 objective UI fixture</h1><p>Stub site data · not connected to the game or inventory</p></header>
+<main><section id="map" aria-label="Map preview"><svg viewBox="0 0 600 500" fill="none" stroke="#849373" stroke-width="1">
+<path d="M0 75Q150 5 260 135T600 80M0 95Q160 20 260 160T600 105M0 115Q170 35 260 185T600 130M0 135Q180 50 260 210T600 155M0 370Q140 460 270 350T600 390M0 395Q140 485 270 375T600 415M0 420Q140 510 270 400T600 440"/></svg></section><section id="hud"></section></main>
+<div id="controls"><label for="scenario">Fixture state</label><select id="scenario"><option>overview</option><option>available</option><option>active</option><option>interrupted</option><option>full</option><option>partial</option><option>claimed</option><option>unavailable</option><option>hidden</option></select></div>
+<script type="module">
+import { mountObjectives, OBJECTIVE_SITES } from './objectives.js';
+import { text } from './strings.js';
+const rounds=text('ammo.unit.rounds');
+const positions=[[-149.87,-1.15],[-112.85,50.77],[30.52,-19.24],[2.02,-77.68],[-37.49,47.81],[-44.13,-18.34],[-95.91,-45.77]];
+const rewards=[{key:'shop.ammo.pack',params:{quantity:60,unit:rounds}},{key:'supply.medpens',params:{count:2}},
+  {key:'shop.ammo.pack',params:{quantity:60,unit:rounds}},{key:'supply.medpens',params:{count:1}},
+  {key:'ammo.quantity.grenades',params:{count:1}},{key:'shop.ammo.fuelHelp',params:{seconds:45}},
+  {key:'shop.ammo.pack',params:{quantity:60,unit:rounds}}];
+const app=mountObjectives({mapRoot:document.getElementById('map'),hudRoot:document.getElementById('hud'),project:p=>({x:(p.x+180)/260,y:(110-p.z)/230})});
+let runId=1,snapshot;
+function fresh(){return {runId,sequence:0,active:true,player:{x:0,z:0},sites:OBJECTIVE_SITES.map((site,i)=>({id:site.id,state:'available',position:{x:positions[i][0],z:positions[i][1]},reachable:false,reward:rewards[i]}))};}
+function scenario(name='overview',id='objective:radio-repair') {
+  runId++;app.reset(runId);snapshot=fresh();app.update(snapshot);
+  if(name!=='overview')app.track(id);
+  const s=snapshot.sites.find(s=>s.id===id);s.reachable=true;
+  if(name==='active'){s.state='active';s.progress=.55;}
+  if(name==='interrupted')s.feedback='interrupted';
+  if(name==='full'){s.state='ready-to-claim';s.feedback='full';}
+  if(name==='partial'){s.state='ready-to-claim';s.feedback='partial';s.remaining={key:'shop.ammo.pack',params:{quantity:18,unit:rounds}};}
+  if(['claimed','unavailable'].includes(name))s.state=name;
+  if(name==='hidden')for(const row of snapshot.sites)if(row.id!==id)row.state='undiscovered';
+  snapshot.sequence++;app.update(snapshot);return app.read();
+}
+scenario();document.getElementById('scenario').addEventListener('change',e=>scenario(e.target.value));
+window.objectiveFixture={app,scenario,tick:()=>{snapshot.sequence++;app.update(snapshot);},snapshot:()=>snapshot};
+</script></body></html>

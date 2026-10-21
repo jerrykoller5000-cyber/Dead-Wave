@@ -1,0 +1,142 @@
+{
+  "loadSec": 20.943,
+  "stations": [
+    {
+      "name": "cif",
+      "side": "front",
+      "position": [
+        6.98,
+        -200,
+        -650.2
+      ],
+      "action": "cif"
+    },
+    {
+      "name": "cif",
+      "side": "back",
+      "position": [
+        8.58,
+        -200,
+        -650.2
+      ],
+      "action": "cif"
+    },
+    {
+      "name": "kiosk",
+      "side": "front",
+      "position": [
+        6.98,
+        -200,
+        -646.6
+      ],
+      "action": "kiosk"
+    },
+    {
+      "name": "kiosk",
+      "side": "back",
+      "position": [
+        8.58,
+        -200,
+        -646.6
+      ],
+      "action": "kiosk"
+    },
+    {
+      "name": "armory",
+      "side": "front",
+      "position": [
+        6.98,
+        -200,
+        -643
+      ],
+      "action": "armory"
+    },
+    {
+      "name": "armory",
+      "side": "back",
+      "position": [
+        8.58,
+        -200,
+        -643
+      ],
+      "action": "armory"
+    },
+    {
+      "name": "hqPanel",
+      "side": "front",
+      "position": [
+        -42.779999999999994,
+        -200,
+        -637
+      ],
+      "action": "trainingPanel"
+    },
+    {
+      "name": "hqPanel",
+      "side": "back",
+      "position": [
+        -44.58,
+        -200,
+        -637
+      ],
+      "action": null
+    },
+    {
+      "name": "skullWindow",
+      "side": "front",
+      "position": [
+        -42.779999999999994,
+        -200,
+        -643
+      ],
+      "action": "hqWindow"
+    },
+    {
+      "name": "skullWindow",
+      "side": "back",
+      "position": [
+        -44.58,
+        -200,
+        -643
+      ],
+      "action": null
+    },
+    {
+      "name": "lightSwitch",
+      "side": "front",
+      "position": [
+        -7.180000000000001,
+        -200,
+        -645.95
+      ],
+      "action": "trainingLights"
+    },
+    {
+      "name": "lightSwitch",
+      "side": "back",
+      "position": [
+        -8.58,
+        -200,
+        -645.95
+      ],
+      "action": null
+    }
+  ],
+  "idle": {
+    "fps": 59.99900827943622,
+    "worst": 20.099999964237213,
+    "over50": 0,
+    "render": {
+      "calls": 6176,
+      "frameCalls": 15,
+      "drawCalls": 280,
+      "triangles": 74717,
+      "points": 0,
+      "lines": 0,
+      "timestamp": 0
+    },
+    "solids": 139,
+    "meshes": 256
+  },
+  "errors": []
+}

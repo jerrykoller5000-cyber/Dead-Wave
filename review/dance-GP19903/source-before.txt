@@ -1,0 +1,321 @@
+// GP-19902. Independent, seekable choreography for a freshly dressed makeMarine().
+// No gameplay state, timers, audio, random numbers, or renderer ownership.
+import * as THREE from 'three';
+import { ikLimb } from '../studio/ik.js';
+import { HAND_POSES, lerpPose } from '../studio/marine-hand.js';
+
+export const DISCLAIMER_DANCE = Object.freeze({
+  duration: 60, bpm: 103.322299, beatSeconds: 60 / 103.322299,
+  sourceStart: 9.151494,
+  phrases: ['swagger', 'top rock', 'running man', 'heel-toe', 'drop and downrock',
+    'six-step', 'kick-outs', 'leg sweep', 'freeze and kick-up', 'windmill',
+    'backspin', 'rise and groove', 'last hit']
+});
+const PI = Math.PI, TAU = PI * 2;
+const clamp = x => Math.max(0, Math.min(1, x));
+const ease = x => { x = clamp(x); return x * x * (3 - 2 * x); };
+const mix = (a, b, t) => a + (b - a) * t;
+const vec = a => new THREE.Vector3(...a);
+const quat = (pitch = 0, yaw = 0, roll = 0) => new THREE.Quaternion().setFromEuler(new THREE.Euler(pitch, yaw, roll, 'YXZ'));
+const palmOffset = vec([0, -.048, .016]);
+const soleOffset = vec([0, -.103, .03]);
+
+// Feet pause between steps; only the swinging foot moves. Beat accents are smooth,
+// with compression preceding the next lift instead of both boots sliding together.
+function stepFoot(b, side, from, to, height = .12) {
+  const cycle = ((b + (side > 0 ? 1 : 0)) % 4 + 4) % 4;
+  let t, a, c;
+  if (cycle < 1) { a = from; c = to; t = cycle; }
+  else if (cycle < 2) return [...to];
+  else if (cycle < 3) { a = to; c = from; t = cycle - 2; }
+  else return [...from];
+  const s = ease(t / .85);
+  return [mix(a[0], c[0], s), mix(a[1], c[1], s) + height * Math.sin(PI * s), mix(a[2], c[2], s)];
+}
+
+function phrasePose(section, t) {
+  const beat = t, s = Math.sin(PI * beat), c = Math.cos(PI * beat);
+  const pulse = Math.pow(.5 + .5 * Math.cos(TAU * beat), 2);
+  const p = {
+    hip: [0, .55 - .035 * pulse, 0], yaw: 0, pitch: .015, roll: -.04 * s,
+    spine: [.025 + .035 * pulse, .06 * s, -.03 * s], head: [-.025, -.06 * s, .04 * s],
+    feet: [[-.19, 0, .02], [.19, 0, .02]], footYaw: [-.13, .13],
+    hands: [[-.30, .58, .12], [.30, .58, .12]], handPlant: [0, 0],
+    handPose: ['relaxed', 'relaxed'], kneePole: [[-.12, .05, 1], [.12, .05, 1]],
+    elbowPole: [[-.4, -.2, -1], [.4, -.2, -1]], spaceYaw: 0, shrug: 0,
+    handAngles: null, handPitch: [0, 0]
+  };
+  if (section <= 3 || section === 11 || section === 12) {
+    for (let i = 0; i < 2; i++) {
+      const side = i ? 1 : -1;
+      p.feet[i] = stepFoot(beat, side, [side * .19, 0, -.09], [side * .25, 0, .20], .11);
+      p.hands[i] = [side * (.30 + .05 * c), .64 + .12 * Math.sin(PI * beat + i * PI), .14 + side * .15 * s];
+    }
+    p.hip[0] = .055 * s;
+  }
+  if (section === 0) {
+    p.yaw = .14 * s;
+    p.spine[2] = -.08 * s;
+    // A loose opening invitation, then settle into the pocket.
+    const welcome = Math.sin(PI * clamp(beat / 3));
+    p.hands[0] = [-.30 - .16 * welcome, .62 + .45 * welcome + .07 * s, .16 + .15 * welcome];
+    p.hands[1] = [.30 + .06 * welcome, .59 + .10 * welcome - .07 * s, .14 - .10 * s];
+  } else if (section === 1) {
+    p.yaw = -.18 * s;
+    p.hip[1] -= .035;
+    p.feet[0] = stepFoot(beat, -1, [-.23, 0, -.12], [.04, 0, .28], .14);
+    p.feet[1] = stepFoot(beat, 1, [.23, 0, -.12], [-.04, 0, .28], .14);
+    p.hands[0] = [-.32 - .10 * Math.max(0, s), .74 + .23 * s, .12 - .18 * s];
+    p.hands[1] = [.32 + .10 * Math.max(0, -s), .74 - .23 * s, .12 + .18 * s];
+    p.spine[1] = .18 * s;
+  } else if (section === 2) {
+    p.yaw = .12 * Math.sin(PI * beat / 2);
+    p.pitch = .09;
+    p.hip[1] = .51 + .03 * Math.cos(TAU * beat);
+    for (let i = 0; i < 2; i++) {
+      const side = i ? 1 : -1, phase = (beat + i) % 2, lift = Math.max(0, Math.sin(PI * phase));
+      p.feet[i] = [side * .17, .21 * lift, -.24 * Math.cos(PI * phase)];
+      p.hands[i] = [side * .30, .76 - .18 * Math.cos(PI * phase), .11 + .23 * Math.cos(PI * phase)];
+      p.handPose[i] = 'fist';
+    }
+  } else if (section === 3) {
+    p.yaw = .30 * s;
+    p.hip[1] = .52 - .04 * pulse;
+    p.hip[0] = .10 * s;
+    p.spine = [.04 + .07 * Math.sin(TAU * beat / 2), -.18 * s, -.08 * s];
+    p.head = [-.06 * Math.sin(TAU * beat / 2 - .6), .10 * s, .06 * s];
+    p.footYaw = [-.2 + .40 * s, .2 + .40 * s];
+    p.feet = [[-.24, .035 * Math.max(0, c), .03], [.24, .035 * Math.max(0, -c), .03]];
+    p.hands = [[-.40, .86 + .32 * s, .16], [.34, .76 + .28 * Math.sin(PI * beat - 1.2), .16]];
+  } else if (section >= 4 && section <= 7) {
+    p.hip = [0, .29 + .016 * Math.sin(TAU * beat), -.02];
+    p.pitch = .95; p.roll = .10 * s; p.spine = [.08, .04 * s, 0];
+    p.head = [-.34, .10 * s, 0];
+    p.hands = [[-.34, .012, .42], [.34, .012, .42]];
+    p.handPlant = [1, 1]; p.handPose = ['open', 'open'];
+    p.elbowPole = [[-1, .1, 0], [1, .1, 0]];
+    p.kneePole = [[-.7, .8, .5], [.7, .8, .5]];
+    const cycle = TAU * beat / 4;
+    p.feet = [[-.22 + .10 * Math.sin(cycle), .06 + .10 * Math.max(0, Math.sin(cycle)), -.30],
+      [.22 + .10 * Math.sin(cycle + PI), .06 + .10 * Math.max(0, -Math.sin(cycle)), -.30]];
+    if (section === 4) {
+      p.yaw = -.20 + .15 * s;
+      p.spaceYaw = 0; p.yaw = .12 * s;
+      p.feet[0] = [-.29 - .12 * s, .05 + .06 * Math.max(0, c), -.25];
+      p.feet[1] = [.25 + .12 * s, .05 + .06 * Math.max(0, -c), -.29];
+    } else if (section === 5) {
+      // Low six-step: a half-turn under two planted arms and alternating rear steps.
+      p.spaceYaw = p.yaw = .50 + .32 * beat;
+      p.handAngles = [0, 1].map(i => {
+        const phase = (beat + i) % 2, release = ease((phase - 1.35) / .65);
+        p.hands[i][1] += .095 * Math.sin(PI * release);
+        p.handPlant[i] = 1 - Math.sin(PI * release);
+        return .50 + .32 * (Math.floor((beat + i) / 2) * 2 - i + 2 * release);
+      });
+      p.hip[0] = .07 * Math.sin(cycle); p.hip[2] = .04 * Math.cos(cycle);
+      p.feet[0] = [-.24 + .18 * Math.sin(cycle), .025 + .12 * Math.max(0, Math.sin(cycle)), -.25 - .13 * Math.cos(cycle)];
+      p.feet[1] = [.24 + .18 * Math.sin(cycle + PI), .025 + .12 * Math.max(0, -Math.sin(cycle)), -.25 + .13 * Math.cos(cycle)];
+    } else if (section === 6) {
+      p.spaceYaw = 0; p.yaw = .20 * s;
+      p.pitch = 1.13;
+      p.hip[1] = .27;
+      p.hands = [[-.35, .012, .31], [.35, .012, .31]];
+      for (let i = 0; i < 2; i++) {
+        const side = i ? 1 : -1, kick = .5 - .5 * Math.cos(PI * beat + i * PI);
+        p.feet[i] = [side * (.18 + .30 * kick), .07 + .10 * kick, -.22 + .28 * kick];
+      }
+      p.roll = .20 * s;
+    } else {
+      p.spaceYaw = 0; p.yaw = .10 * s;
+      p.pitch = 1.06; p.hip[1] = .30;
+      const sweep = TAU * beat / 4;
+      p.feet[0] = [-.16 + .40 * Math.cos(sweep), .09 + .07 * Math.sin(sweep), -.08 + .35 * Math.sin(sweep)];
+      p.feet[1] = [.16, .07 + .09 * Math.max(0, Math.cos(sweep)), -.29];
+      p.hip[0] = -.045 * Math.cos(sweep);
+    }
+  } else if (section === 8) {
+    // A readable freeze, then a controlled two-hand kick-up and scissor hold.
+    const up = ease((beat - 2.2) / 2.2);
+    p.hip = [0, mix(.34, 1.045, up), 0];
+    p.shrug = .13 * up;
+    p.pitch = mix(1.1, PI, up); p.yaw = .25; p.spaceYaw = .25;
+    p.roll = .035 * Math.sin(TAU * beat / 4);
+    p.spine = [0, 0, 0]; p.head = [-.08 * (1 - up), .04 * s, 0];
+    p.hands = [[-.33, .012, mix(.42, -.02, up)], [.33, .012, mix(.42, -.02, up)]];
+    p.handPlant = [1, 1]; p.handPose = ['open', 'open'];
+    p.elbowPole = [[-1, .1, .2], [1, .1, .2]];
+    p.kneePole = [[-.2, .2, 1], [.2, .2, 1]];
+    p.feet = [[mix(-.35, -.30, up), mix(.40, 1.32 + .09 * s, up), mix(-.26, .08, up)],
+      [mix(.20, .30, up), mix(.18, 1.32 - .09 * s, up), mix(-.25, -.10, up)]];
+    p.footYaw = [-.25, .25];
+  } else if (section === 9 || section === 10) {
+    const spin = TAU * beat / (section === 9 ? 4 : 2.5);
+    p.yaw = p.spaceYaw = spin + .25;
+    p.pitch = -PI / 2 + (section === 9 ? .16 * Math.sin(spin * 2) : .02);
+    p.roll = section === 9 ? .12 * Math.cos(spin * 2) : 0;
+    p.hip = [0, section === 9 ? .405 : .305, 0];
+    p.spine = [-.04, 0, 0]; p.head = [.12, 0, 0];
+    const tuck = section === 10 ? .5 - .5 * Math.cos(PI * beat / 2) : 0;
+    p.feet = [[mix(-.46, -.20, tuck), .60 + .13 * Math.sin(spin), mix(.17, -.12, tuck)],
+      [mix(.46, .20, tuck), .60 - .13 * Math.sin(spin), mix(.17, -.12, tuck)]];
+    p.hands = [[mix(-.47, -.27, tuck), mix(.30, .58, tuck), -.32],
+      [mix(.47, .27, tuck), mix(.30, .58, tuck), -.32]];
+    p.kneePole = [[-.2, 1, -.3], [.2, 1, -.3]];
+    p.elbowPole = [[-1, .2, 0], [1, .2, 0]];
+    p.handPose = ['open', 'open'];
+  } else if (section === 11) {
+    // Recover through a low squat, then a lighter reprise.
+    const rise = ease(beat / 2.6);
+    p.hip[1] = mix(.27, p.hip[1], rise);
+    p.pitch = mix(.50, .02, rise);
+    p.feet = [[-.24, .10 * Math.max(0, s) * rise, -.03], [.24, .10 * Math.max(0, -s) * rise, -.03]];
+    p.hands[0][1] = mix(.30, .78 + .15 * s, rise);
+    p.hands[1][1] = mix(.30, .78 - .15 * s, rise);
+    p.yaw = .18 * s * rise;
+  } else if (section === 12) {
+    const settle = ease((beat - 2) / 2);
+    p.yaw = mix(.16 * s, -.15, settle);
+    p.pitch = mix(.03, -.015, settle);
+    p.roll *= 1 - settle;
+    p.spine = [.015, .08 * (1 - settle) * s, -.025 * settle];
+    p.head = [-.015, .15 * settle, .025 * settle];
+    p.hip = [mix(.055 * s, -.04, settle), mix(p.hip[1], .54, settle), 0];
+    p.feet = [[-.24, 0, .055], [.22, 0, -.035]];
+    p.hands = [[mix(-.44, -.31, settle), mix(.78 + .10 * s, .62, settle), .14],
+      [mix(.44, .28, settle), mix(.78 - .10 * s, 1.01, settle), mix(.14, .42, settle)]];
+    p.handPose = ['relaxed', settle > .5 ? 'point' : 'relaxed'];
+    p.handPitch[1] = -PI / 2 * settle;
+  }
+  return p;
+}
+
+function worldPose(p) {
+  const q = quat(0, p.spaceYaw), h = vec(p.hip);
+  // Supports live on the floor, independently of the pelvis' weight transfer.
+  const convert = a => vec(a).applyQuaternion(q);
+  return {
+    hip: h, q: quat(p.pitch, p.yaw, p.roll), spine: quat(...p.spine), head: quat(...p.head),
+    feet: p.feet.map(convert), hands: p.hands.map((a, i) => p.handAngles ? vec(a).applyQuaternion(quat(0, p.handAngles[i])) : convert(a)),
+    footQ: p.footYaw.map(a => quat(0, p.spaceYaw + a)),
+    handQ: p.handPlant.map((a, i) => quat(PI / 2 * a + p.handPitch[i] * (1 - a), p.spaceYaw, (i ? -.18 : .18) * (1 - a))),
+    handPlant: p.handPlant, handPose: p.handPose, shrug: p.shrug,
+    kneePole: p.kneePole.map(a => vec(a).applyQuaternion(q)), elbowPole: p.elbowPole.map(a => vec(a).applyQuaternion(q))
+  };
+}
+function blendPose(a, b, k) {
+  a.hip.lerp(b.hip, k); a.q.slerp(b.q, k); a.spine.slerp(b.spine, k); a.head.slerp(b.head, k); a.shrug = mix(a.shrug, b.shrug, k);
+  for (let i = 0; i < 2; i++) {
+    for (const key of ['feet', 'hands', 'kneePole', 'elbowPole']) a[key][i].lerp(b[key][i], k);
+    for (const key of ['footQ', 'handQ']) a[key][i].slerp(b[key][i], k);
+    a.handPlant[i] = mix(a.handPlant[i], b.handPlant[i], k);
+    if (k > .5) a.handPose[i] = b.handPose[i];
+  }
+  return a;
+}
+
+export function createDisclaimerDance(marine, { floorY = -.025 } = {}) {
+  const u = marine.userData;
+  if (!u?.torsoG || !u.elbowLG?.userData.wrist) throw new TypeError('A fresh, articulated makeMarine() is required');
+  const root = new THREE.Group(); root.name = 'marine-disclaimer-dance';
+  root.add(marine); marine.position.set(0, -.62, 0); marine.rotation.set(0, 0, 0);
+  const legs = [u.legLG, u.legRG], knees = [u.kneeLG, u.kneeRG], ankles = [u.ankleLG, u.ankleRG];
+  const arms = [u.armLG, u.armRG], elbows = [u.elbowLG, u.elbowRG];
+  const wrists = elbows.map(e => e.userData.wrist);
+  const rest = [u.torsoG, u.headG, ...legs, ...knees, ...ankles, ...arms, ...elbows, ...wrists].map(o => [o, o.quaternion.clone()]);
+  const target = new THREE.Vector3(), corrected = new THREE.Vector3(), sideOffset = new THREE.Vector3(), parentQ = new THREE.Quaternion(), identity = new THREE.Quaternion();
+  const shoulderRest = arms.map(a => a.position.y);
+  // The actual helmet/NVG/pack outline matters during a roll. Cache only rigid
+  // central-body meshes; excluding limbs and deforming sleeve caps keeps seeking exact.
+  const limbRoots = new Set([...arms, ...legs]);
+  const caps = new Set(arms.flatMap(a => (a.userData.liveShoulder?.parts || []).map(p => p.mesh)));
+  const supports = [];
+  marine.traverseVisible(o => {
+    if (!o.isMesh || !o.geometry?.attributes.position || caps.has(o)) return;
+    for (let n = o; n && n !== marine; n = n.parent) if (limbRoots.has(n)) return;
+    supports.push(o);
+  });
+  const shoulder = new THREE.Vector3();
+  function bodyFloor() {
+    let low = Infinity;
+    for (const o of supports) {
+      const a = o.geometry.attributes.position, m = o.matrixWorld.elements;
+      for (let i = 0; i < a.count; i++) low = Math.min(low, m[1] * a.getX(i) + m[5] * a.getY(i) + m[9] * a.getZ(i) + m[13]);
+    }
+    return low;
+  }
+  const handPoses = [lerpPose(HAND_POSES.relaxed, HAND_POSES.open, 0), lerpPose(HAND_POSES.relaxed, HAND_POSES.open, 0)];
+  let currentPhrase = 'swagger';
+  function sample(seconds) {
+    const b = Math.max(0, Math.min(DISCLAIMER_DANCE.duration, Number(seconds) || 0)) / DISCLAIMER_DANCE.beatSeconds;
+    const section = Math.min(12, Math.floor(b / 8)), t = b - section * 8;
+    let p = worldPose(phrasePose(section, t));
+    // Longer whole-body transitions into/out of power moves; all are seekable.
+    const transition = section === 4 ? 2 : section === 9 ? 1.8 : section === 11 ? 2.4 : .8;
+    if (section === 9 && t < 2.6) {
+      // Descend over the right arm to a shoulder, then tuck onto the pack/back.
+      const shoulder = phrasePose(9, 0);
+      shoulder.hip = [.06, .56, 0]; shoulder.pitch = -2.04; shoulder.roll = -.36;
+      shoulder.yaw = shoulder.spaceYaw = .25; shoulder.shrug = .02;
+      shoulder.hands = [[-.39, .19, -.18], [.32, .13, -.22]];
+      // Hands release as weight transfers onto the shoulder and helmet, then
+      // stay out of the way while the upper back becomes the spinning contact.
+      shoulder.handPlant = [0, 0]; shoulder.feet = [[-.22, .91, .02], [.27, .80, .12]];
+      const way = worldPose(shoulder);
+      p = t < 1.3 ? blendPose(worldPose(phrasePose(8, 8)), way, ease(t / 1.3)) : blendPose(way, p, ease((t - 1.3) / 1.3));
+    } else if (section > 0 && t < transition) p = blendPose(worldPose(phrasePose(section - 1, 8)), p, ease(t / transition));
+    for (const [o, q] of rest) o.quaternion.copy(q);
+    root.position.copy(p.hip); root.quaternion.copy(p.q);
+    u.torsoG.quaternion.copy(p.spine); u.headG.quaternion.copy(p.head);
+    for (let i = 0; i < 2; i++) arms[i].position.y = shoulderRest[i] + p.shrug;
+    root.updateMatrixWorld(true);
+    const handSupport = section >= 4 && section <= 7 ? 1 : section === 8 ? 1 - ease(t / 2.2) : 0;
+    if (handSupport > 0) {
+      // Move the centre of mass into the supporting arms' reach; don't ask IK
+      // for a longer arm when the rotating torso moves away from its planted palm.
+      let lower = 0;
+      for (let i = 0; i < 2; i++) {
+        arms[i].getWorldPosition(shoulder);
+        target.copy(palmOffset).applyQuaternion(p.handQ[i]).negate().add(p.hands[i]);
+        const horizontal = Math.hypot(shoulder.x - target.x, shoulder.z - target.z);
+        const maxY = target.y + Math.sqrt(Math.max(.01, .49 ** 2 - horizontal ** 2));
+        lower = Math.min(lower, (maxY - shoulder.y) * p.handPlant[i]);
+      }
+      root.position.y += lower * handSupport; root.updateMatrixWorld(true);
+    }
+    if (section >= 8 && section <= 11) {
+      const clearance = floorY + .006 - bodyFloor();
+      // First preserve head clearance. Once on his shoulder/back, keep the
+      // actual kit touching the stage instead of hovering over an assumed torso.
+      const settle = section === 9 ? ease((t - 1.3) / .4) : section === 10 ? 1 : section === 11 ? 1 - ease(t / .5) : 0;
+      root.position.y += clearance >= 0 ? clearance : clearance * settle;
+      p.hip.copy(root.position); root.updateMatrixWorld(true);
+    }
+    for (let i = 0; i < 2; i++) {
+      target.copy(soleOffset).applyQuaternion(p.footQ[i]).negate().add(p.feet[i]);
+      ikLimb(legs[i], knees[i], .27, .25, target, p.kneePole[i], 1, ankles[i].position);
+      knees[i].getWorldQuaternion(parentQ).invert();
+      ankles[i].quaternion.copy(parentQ).multiply(p.footQ[i]);
+      // Airborne feet follow their shins, not an invisible horizontal floor.
+      const freeFoot = ease((p.feet[i].y - .10) / .35);
+      ankles[i].quaternion.slerp(identity, freeFoot);
+      target.copy(palmOffset).applyQuaternion(p.handQ[i]).negate().add(p.hands[i]);
+      ikLimb(arms[i], elbows[i], .28, .222, target, p.elbowPole[i], 1, wrists[i].position);
+      // ikLimb's legacy end offset assumes x=0; compensate the marine wrists' 1–2cm x offset.
+      elbows[i].getWorldQuaternion(parentQ);
+      sideOffset.set(wrists[i].position.x, 0, 0).applyQuaternion(parentQ);
+      corrected.copy(target).sub(sideOffset);
+      ikLimb(arms[i], elbows[i], .28, .222, corrected, p.elbowPole[i], 1, wrists[i].position);
+      elbows[i].getWorldQuaternion(parentQ).invert();
+      wrists[i].quaternion.copy(parentQ).multiply(p.handQ[i]);
+      lerpPose(HAND_POSES[p.handPose[i]], HAND_POSES.open, p.handPlant[i], handPoses[i]);
+      wrists[i].userData.hand?.set(handPoses[i]).update();
+    }
+    root.updateMatrixWorld(true);
+    for (const arm of arms) arm.userData.liveShoulder?.bend();
+    for (const leg of legs) leg.userData.bootShaft?.userData.bend();
+    currentPhrase = DISCLAIMER_DANCE.phrases[section];
+    return { beat: b, phrase: currentPhrase, hip: root.position, targets: p };
+  }
+  sample(0);
+  return { root, marine, sample, duration: DISCLAIMER_DANCE.duration, get phrase() { return currentPhrase; } };
+}

@@ -1,0 +1,20 @@
+{
+  "edge": {
+    "r": {
+      "ok": true,
+      "id": "1791950012340-1"
+    },
+    "score": 4,
+    "base": 4,
+    "shots": 1,
+    "pops": [
+      "+4undefined ×2"
+    ],
+    "position": [
+      0,
+      -200,
+      -642
+    ]
+  },
+  "errors": []
+}

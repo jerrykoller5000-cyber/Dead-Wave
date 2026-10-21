@@ -1,0 +1,9 @@
+#62 colossus-death
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 4 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A colossal giant zombie's long, deep, dying roar collapsing into a huge rumbling exhale. Dry. No words, no music.
+
+In the game: zombieVoice('colossus', 'death')

@@ -1,0 +1,195 @@
+{
+  "version": "v1",
+  "scene": "studio/scenes/zombie-reactions.json",
+  "name": "zombie-reactions",
+  "length": 5,
+  "worst": {
+    "slide:rifle.footL": {
+      "kind": "slide",
+      "key": "rifle.footL",
+      "value": 0,
+      "t": 0,
+      "limb": "footL",
+      "bad": false
+    },
+    "slide:rifle.footR": {
+      "kind": "slide",
+      "key": "rifle.footR",
+      "value": 0,
+      "t": 0,
+      "limb": "footR",
+      "bad": false
+    },
+    "speed:rifle": {
+      "kind": "speed",
+      "key": "rifle",
+      "value": 0,
+      "t": 0,
+      "bad": false
+    },
+    "slide:shotgunFar.footL": {
+      "kind": "slide",
+      "key": "shotgunFar.footL",
+      "value": 0,
+      "t": 0,
+      "limb": "footL",
+      "bad": false
+    },
+    "slide:shotgunFar.footR": {
+      "kind": "slide",
+      "key": "shotgunFar.footR",
+      "value": 0,
+      "t": 0,
+      "limb": "footR",
+      "bad": false
+    },
+    "speed:shotgunFar": {
+      "kind": "speed",
+      "key": "shotgunFar",
+      "value": 0.5521381103838096,
+      "t": 0.6666666666666671,
+      "bad": false
+    },
+    "slide:shotgunClose.footL": {
+      "kind": "slide",
+      "key": "shotgunClose.footL",
+      "value": 0,
+      "t": 0,
+      "limb": "footL",
+      "bad": false
+    },
+    "slide:shotgunClose.footR": {
+      "kind": "slide",
+      "key": "shotgunClose.footR",
+      "value": 0,
+      "t": 0,
+      "limb": "footR",
+      "bad": false
+    },
+    "speed:shotgunClose": {
+      "kind": "speed",
+      "key": "shotgunClose",
+      "value": 1.8190932622975198,
+      "t": 0.8666666666666677,
+      "bad": false
+    },
+    "slide:grenade.footL": {
+      "kind": "slide",
+      "key": "grenade.footL",
+      "value": 0,
+      "t": 0,
+      "limb": "footL",
+      "bad": false
+    },
+    "slide:grenade.footR": {
+      "kind": "slide",
+      "key": "grenade.footR",
+      "value": 0,
+      "t": 0,
+      "limb": "footR",
+      "bad": false
+    },
+    "speed:grenade": {
+      "kind": "speed",
+      "key": "grenade",
+      "value": 6.595263544629514,
+      "t": 0.5166666666666666,
+      "bad": false
+    },
+    "slide:killed.footL": {
+      "kind": "slide",
+      "key": "killed.footL",
+      "value": 0,
+      "t": 0,
+      "limb": "footL",
+      "bad": false
+    },
+    "slide:killed.footR": {
+      "kind": "slide",
+      "key": "killed.footR",
+      "value": 0,
+      "t": 0,
+      "limb": "footR",
+      "bad": false
+    },
+    "speed:killed": {
+      "kind": "speed",
+      "key": "killed",
+      "value": 1.4238014098069274,
+      "t": 0.8833333333333344,
+      "bad": false
+    },
+    "slide:brute.footL": {
+      "kind": "slide",
+      "key": "brute.footL",
+      "value": 0,
+      "t": 0,
+      "limb": "footL",
+      "bad": false
+    },
+    "slide:brute.footR": {
+      "kind": "slide",
+      "key": "brute.footR",
+      "value": 0,
+      "t": 0,
+      "limb": "footR",
+      "bad": false
+    },
+    "speed:brute": {
+      "kind": "speed",
+      "key": "brute",
+      "value": 0,
+      "t": 0,
+      "bad": false
+    },
+    "snap:rifle": {
+      "kind": "snap",
+      "key": "rifle",
+      "value": 0.1917631580505222,
+      "t": 1.2833333333333337,
+      "joint": "head",
+      "bad": false
+    },
+    "snap:shotgunFar": {
+      "kind": "snap",
+      "key": "shotgunFar",
+      "value": 0.13296643361387375,
+      "t": 1.5499999999999994,
+      "joint": "head",
+      "bad": false
+    },
+    "snap:shotgunClose": {
+      "kind": "snap",
+      "key": "shotgunClose",
+      "value": 0.19600737939063115,
+      "t": 3.599999999999992,
+      "joint": "head",
+      "bad": false
+    },
+    "snap:grenade": {
+      "kind": "snap",
+      "key": "grenade",
+      "value": 0.19583098015992353,
+      "t": 3.5833333333333255,
+      "joint": "head",
+      "bad": false
+    },
+    "snap:killed": {
+      "kind": "snap",
+      "key": "killed",
+      "value": 0.005994427485898373,
+      "t": 0.4833333333333333,
+      "joint": "head",
+      "bad": false
+    },
+    "snap:brute": {
+      "kind": "snap",
+      "key": "brute",
+      "value": 0.1917631580505222,
+      "t": 1.2833333333333337,
+      "joint": "head",
+      "bad": false
+    }
+  },
+  "renderSeconds": 52.4
+}

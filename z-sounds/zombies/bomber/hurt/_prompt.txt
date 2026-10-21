@@ -1,0 +1,9 @@
+#50 bomber-hurt
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 0.6 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A short hollow grunt from a bloated zombie with a wet belly slosh. Close-up, dry. No words, no music.
+
+In the game: zombieVoice('bomber', 'hurt')

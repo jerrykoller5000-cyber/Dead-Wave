@@ -1,0 +1,87 @@
+[
+ {
+  "old": "  const pressE = () => window.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyE', bubbles: true }));",
+  "new": [
+   "  const pressE = () => document.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyE', bubbles: true }));   // GB-186: on a Node (ui/prep-checklist.js reads e.target.contains)"
+  ]
+ },
+ {
+  "old": "  const upE = () => window.dispatchEvent(new KeyboardEvent('keyup', { code: 'KeyE', bubbles: true }));",
+  "new": [
+   "  const upE = () => document.dispatchEvent(new KeyboardEvent('keyup', { code: 'KeyE', bubbles: true }));"
+  ]
+ },
+ {
+  "old": "    const prop = bag && bag.props['objective:radio-repair'];",
+  "new": [
+   "    // GB-186: the radio is no hold any more (CL-183/184: its reboot runs by itself); the hold is checked on the fuel depot.",
+   "    const prop = bag && bag.props['objective:fuel-depot'];"
+  ]
+ },
+ {
+  "old": "    ok(!!prop, 'radio prop is placed');",
+  "new": [
+   "    ok(!!prop, 'fuel depot prop is placed');"
+  ]
+ },
+ {
+  "old": "    const far = T.getObjectiveInteraction('objective:radio-repair');",
+  "new": [
+   "    const far = T.getObjectiveInteraction('objective:fuel-depot');"
+  ]
+ },
+ {
+  "old": "    const near = T.getObjectiveInteraction('objective:radio-repair');",
+  "new": [
+   "    const near = T.getObjectiveInteraction('objective:fuel-depot');"
+  ]
+ },
+ {
+  "old": "    const other = T.getObjectiveInteraction('objective:fuel-depot');",
+  "new": [
+   "    const other = T.getObjectiveInteraction('objective:radio-repair');"
+  ]
+ },
+ {
+  "old": "    const held = T.getObjectiveInteraction('objective:radio-repair');",
+  "new": [
+   "    const held = T.getObjectiveInteraction('objective:fuel-depot');"
+  ]
+ },
+ {
+  "old": "    await wait(700);",
+  "new": [
+   "    await (async () => { const t0 = T.getSimTime(); while (T.getSimTime() - t0 < 0.7) await wait(50); })();   // GB-186: 0.7 s of game time"
+  ]
+ },
+ {
+  "old": "    const timed = T.getObjectiveInteraction('objective:radio-repair');",
+  "new": [
+   "    const timed = T.getObjectiveInteraction('objective:fuel-depot');"
+  ]
+ },
+ {
+  "old": "    const fuel = T.getObjectiveInteraction('objective:fuel-depot');",
+  "new": [
+   "    const fuel = T.getObjectiveInteraction('objective:radio-repair');"
+  ]
+ },
+ {
+  "old": "    ok(timed.holdSeconds > 0.3, 'radio hold ran: ' + timed.holdSeconds.toFixed(2));",
+  "new": [
+   "    ok(timed.holdSeconds > 0.3, 'fuel depot hold ran: ' + timed.holdSeconds.toFixed(2));"
+  ]
+ },
+ {
+  "old": "    ok(fuel.holdSeconds === 0, 'fuel hold stays 0: ' + fuel.holdSeconds);",
+  "new": [
+   "    ok(fuel.holdSeconds === 0, 'radio hold stays 0: ' + fuel.holdSeconds);"
+  ]
+ },
+ {
+  "old": "    const left = T.getObjectiveInteraction('objective:radio-repair');",
+  "new": [
+   "    const left = T.getObjectiveInteraction('objective:fuel-depot');"
+  ]
+ }
+]

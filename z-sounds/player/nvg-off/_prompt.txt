@@ -1,0 +1,9 @@
+#21 player/nvg-off
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: nvgToggle(off)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.6 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+Night vision goggles flipping up and powering off: a click and a falling electronic whine. No music, no voice.

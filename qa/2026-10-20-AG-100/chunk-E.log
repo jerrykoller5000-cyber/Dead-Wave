@@ -1,0 +1,86 @@
+# AG-100 Chunk E: t196 t197 t198 t199 t200 t201 t202 t203 t204 t205 t206 t207 t208 t209 t210 t211 t212 t213 t214 t215 t216 t217 t218 t219 t220 t221 t222 t223 t224 t225 t226 t227 t228 t229
+# Started: 2026-10-20T07:13:50.933Z
+
+Game-test request c8edee10-467d-4fc3-b51b-285762f98d7e queued at position 2. Waiting...
+GRANT antigravity AG-100: starting one game-test command
+check-players: 303 player.position reads, all in the allowed places
+ok    t196    17 pass   0 fail  50.3s
+ok    t197     7 pass   0 fail  48.2s
+ok    t198    12 pass   0 fail  62.3s
+ok    t199    10 pass   0 fail  55.2s
+ok    t200     7 pass   0 fail  46.0s
+ok    t201    18 pass   0 fail  70.9s
+ok    t202    12 pass   0 fail  43.9s
+ok    t203    12 pass   0 fail  47.7s
+ok    t204    45 pass   0 fail  73.9s
+ok    t205    13 pass   0 fail  67.8s
+FAIL  t206    17 pass   2 fail  67.1s
+ok    t207    20 pass   0 fail  53.6s
+ok    t208    10 pass   0 fail  77.2s
+FAIL  t209    12 pass   1 fail  53.4s
+ok    t210     9 pass   0 fail  65.5s
+ok    t211    26 pass   0 fail  73.9s
+ok    t212    18 pass   0 fail  49.2s
+ok    t213    22 pass   0 fail  79.2s
+ok    t214    29 pass   0 fail  79.7s
+ok    t215     4 pass   0 fail  46.7s
+           INFO angular acceleration, rad/s^2: walk 222, run 787, jump 779, walk2 866, stop 571
+ok    t216    22 pass   0 fail  60.3s
+ok    t217    55 pass   0 fail  28.6s
+ok    t218    21 pass   0 fail  145.4s
+ok    t219    22 pass   0 fail  61.1s
+ok    t220    16 pass   0 fail  75.4s
+ok    t221    27 pass   0 fail  69.6s
+           INFO shambler  head: head 6 | chest: body 6 | legs: ground 1, legs 4, miss 1
+           INFO feral     head: head 6 | chest: body 5, head 1 | legs: legs 6
+           INFO brute     head: head 5, miss 1 | chest: body 6 | legs: legs 4, ground 2
+           INFO spider    head: head 6 | chest: head 2, body 4 | legs: -
+           INFO leaper    head: head 6 | chest: body 4, head 2 | legs: -
+           INFO colossus at 90 deg 6 m: its head is covered by its own gear from the camera here (no head case)
+           INFO colossus at 90 deg 14 m: its head is covered by its own gear from the camera here (no head case)
+           INFO colossus  head: head 4 | chest: body 6 | legs: legs 6
+           INFO pistol 8 m 3 m/s +: hit, lead 0.22 m (pace x flight 0.33) at 0.62 of its height
+           INFO pistol 8 m 3 m/s -: hit, lead -0.25 m (pace x flight -0.33) at 0.66 of its height
+           INFO pistol 8 m 6 m/s +: miss, lead 0.31 m (pace x flight 0.60)
+           INFO pistol 8 m 6 m/s -: ground, lead -0.31 m (pace x flight -0.60)
+           INFO pistol 18 m 3 m/s +: hit, lead 0.58 m (pace x flight 0.71) at 0.59 of its height
+           INFO pistol 18 m 3 m/s -: ground, lead -0.57 m (pace x flight -0.71)
+           INFO pistol 18 m 6 m/s +: ground, lead 1.09 m (pace x flight 1.39)
+           INFO pistol 18 m 6 m/s -: ground, lead -1.09 m (pace x flight -1.39)
+           INFO m4 8 m 3 m/s +: ground, lead 0.11 m (pace x flight 0.23)
+           INFO m4 8 m 3 m/s -: ground, lead -0.12 m (pace x flight -0.23)
+           INFO m4 8 m 6 m/s +: ground, lead 0.15 m (pace x flight 0.43)
+           INFO m4 8 m 6 m/s -: ground, lead -0.13 m (pace x flight -0.43)
+           INFO m4 18 m 3 m/s +: ground, lead 0.39 m (pace x flight 0.52)
+           INFO m4 18 m 3 m/s -: ground, lead -0.39 m (pace x flight -0.52)
+           INFO m4 18 m 6 m/s +: ground, lead 0.73 m (pace x flight 1.02)
+           INFO m4 18 m 6 m/s -: ground, lead -0.72 m (pace x flight -1.02)
+           INFO launcher 12 m 6 m/s +: ground, lead -0.28 m (pace x flight 2.11)
+FAIL  t222     5 pass   4 fail  190.3s
+FAIL  t223    14 pass   1 fail  75.3s
+ok    t224    27 pass   0 fail  151.1s
+ok    t225    21 pass   0 fail  80.0s
+ok    t226    38 pass   0 fail  209.3s
+           INFO crouched: ankles bent up to 53 deg; an ankle-worn shaft top would be 13.4 cm off the shin
+ok    t227    23 pass   0 fail  67.8s
+ok    t228    13 pass   0 fail  189.2s
+ok    t229    13 pass   0 fail  124.2s
+
+34 checks: 637 pass, 8 fail
+
+by owner:
+  unassigned
+    t206   2 fail  FAIL G down holds, G up throws (held 0.00 s)
+           FAIL G down holds, G up throws (held 0.00 s)
+           FAIL none left: G does not start a hold
+    t209   1 fail  FAIL it hauls itself on its arms: each reaches out and drags back (0.96, 1.94 rad)
+           FAIL it hauls itself on its arms: each reaches out and drags back (0.96, 1.94 rad)
+    t222   4 fail  FAIL pointing at the legs lands low: 20/24
+           FAIL pointing at the legs lands low: 20/24
+           FAIL no round aimed at a body goes into the ground or past it (5)
+           FAIL the reticle rings a head lined up, and not a chest (false, los-clear)
+           FAIL a runner crossing in front of him at 3-6 m/s, the cursor on it, is hit: hit 3, miss 1, ground 12 (was 7/36)
+    t223   1 fail  FAIL and no bank rings like one (the most, selectorSemi, at 0.56): selectorSemi 0.56, selectorAu
+           FAIL and no bank rings like one (the most, selectorSemi, at 0.56): selectorSemi 0.56, selectorAuto 0.53
+
+# Finished: 2026-10-20T08:01:19.012Z code=1 signal=none

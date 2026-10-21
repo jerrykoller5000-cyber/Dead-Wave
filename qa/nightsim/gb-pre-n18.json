@@ -1,0 +1,389 @@
+{
+ "dt": 0.03333333333333333,
+ "god": false,
+ "repeat": 2,
+ "results": [
+  {
+   "night": 18,
+   "loadout": "minigun, aa12, machete, armor 90",
+   "planned": 632,
+   "trick": "Guardian night, the siege: brutes behind a bomber screen",
+   "signature": "shambler",
+   "botError": "Cannot read properties of null (reading 'position')",
+   "wallCapped": true,
+   "waveTotal": 632,
+   "spawned": 365,
+   "killed": 318,
+   "firstSpawn": 0.3,
+   "lastSpawn": 386.5,
+   "lastKill": 386.4,
+   "length": 386.1,
+   "pushes": [
+    6.3,
+    107.2,
+    216.4,
+    358.9
+   ],
+   "lulls": [],
+   "maxAlive": 48,
+   "pile": {
+    "n": 7,
+    "t": 67.8,
+    "type": "shambler",
+    "d": 174
+   },
+   "crowd": {
+    "n": 1,
+    "t": 40
+   },
+   "inside": {
+    "n": 0,
+    "t": 0,
+    "depth": 0
+   },
+   "stuck": [],
+   "lost": [],
+   "capped": true,
+   "tail10": null,
+   "tail5": null,
+   "tail1": null,
+   "deaths": [],
+   "damage": 85,
+   "damageHp": 30,
+   "hits": 21,
+   "damageBy": {
+    "spider": 59,
+    "colossus": 26
+   },
+   "knifeSwings": 8,
+   "meleeKills": 16,
+   "meleeShare": 0.05,
+   "crowd5s": 0.5,
+   "sigPeak": 44,
+   "screamerCalls": 2,
+   "healHp": 0,
+   "samples": [
+    {
+     "t": 30,
+     "alive": 48,
+     "killed": 0,
+     "w": "minigun",
+     "mag": 300,
+     "rel": false,
+     "hp": 100,
+     "near": 138.3
+    },
+    {
+     "t": 60,
+     "alive": 46,
+     "killed": 24,
+     "w": "minigun",
+     "mag": 280,
+     "rel": false,
+     "hp": 99,
+     "near": 132.9
+    },
+    {
+     "t": 90,
+     "alive": 48,
+     "killed": 47,
+     "w": "minigun",
+     "mag": 213,
+     "rel": false,
+     "hp": 98,
+     "near": 53
+    },
+    {
+     "t": 120,
+     "alive": 47,
+     "killed": 82,
+     "w": "minigun",
+     "mag": 247,
+     "rel": false,
+     "hp": 89,
+     "near": 136.2
+    },
+    {
+     "t": 150,
+     "alive": 48,
+     "killed": 100,
+     "w": "minigun",
+     "mag": 164,
+     "rel": false,
+     "hp": 87,
+     "near": 6.5
+    },
+    {
+     "t": 180,
+     "alive": 48,
+     "killed": 130,
+     "w": "minigun",
+     "mag": 300,
+     "rel": false,
+     "hp": 85,
+     "near": 98.3
+    },
+    {
+     "t": 210,
+     "alive": 46,
+     "killed": 153,
+     "w": "aa12",
+     "mag": 9,
+     "rel": false,
+     "hp": 84,
+     "near": 6.5
+    },
+    {
+     "t": 240,
+     "alive": 48,
+     "killed": 180,
+     "w": "minigun",
+     "mag": 35,
+     "rel": false,
+     "hp": 83,
+     "near": 81.2
+    },
+    {
+     "t": 270,
+     "alive": 47,
+     "killed": 216,
+     "w": "minigun",
+     "mag": 147,
+     "rel": false,
+     "hp": 81,
+     "near": 73.3
+    },
+    {
+     "t": 300,
+     "alive": 48,
+     "killed": 234,
+     "w": "minigun",
+     "mag": 95,
+     "rel": false,
+     "hp": 79,
+     "near": 8.6
+    },
+    {
+     "t": 330,
+     "alive": 47,
+     "killed": 266,
+     "w": "minigun",
+     "mag": 3,
+     "rel": false,
+     "hp": 74,
+     "near": 6.2
+    },
+    {
+     "t": 360,
+     "alive": 48,
+     "killed": 291,
+     "w": "minigun",
+     "mag": 171,
+     "rel": false,
+     "hp": 72,
+     "near": 6.3
+    }
+   ],
+   "knees": 1,
+   "wallSecs": 1500,
+   "errors": [],
+   "run": 1
+  },
+  {
+   "night": 18,
+   "loadout": "minigun, aa12, machete, armor 90",
+   "planned": 632,
+   "trick": "Guardian night, the siege: brutes behind a bomber screen",
+   "signature": "shambler",
+   "botError": "Cannot read properties of null (reading 'position')",
+   "wallCapped": true,
+   "waveTotal": 632,
+   "spawned": 374,
+   "killed": 327,
+   "firstSpawn": 0.3,
+   "lastSpawn": 394.3,
+   "lastKill": 395.3,
+   "length": 395.1,
+   "pushes": [
+    6.3,
+    103.5,
+    220.5,
+    356.2
+   ],
+   "lulls": [],
+   "maxAlive": 48,
+   "pile": {
+    "n": 7,
+    "t": 125.4,
+    "type": "screamer",
+    "d": 185
+   },
+   "crowd": {
+    "n": 1,
+    "t": 59.7
+   },
+   "inside": {
+    "n": 0,
+    "t": 0,
+    "depth": 0
+   },
+   "stuck": [],
+   "lost": [],
+   "capped": true,
+   "tail10": null,
+   "tail5": null,
+   "tail1": null,
+   "deaths": [],
+   "damage": 84,
+   "damageHp": 29,
+   "hits": 21,
+   "damageBy": {
+    "spider": 58,
+    "colossus": 26
+   },
+   "knifeSwings": 7,
+   "meleeKills": 14,
+   "meleeShare": 0.043,
+   "crowd5s": 1.1,
+   "sigPeak": 43,
+   "screamerCalls": 2,
+   "healHp": 0,
+   "samples": [
+    {
+     "t": 30,
+     "alive": 48,
+     "killed": 0,
+     "w": "minigun",
+     "mag": 300,
+     "rel": false,
+     "hp": 100,
+     "near": 92
+    },
+    {
+     "t": 60,
+     "alive": 45,
+     "killed": 26,
+     "w": "aa12",
+     "mag": 0,
+     "rel": true,
+     "hp": 99,
+     "near": 158.3
+    },
+    {
+     "t": 90,
+     "alive": 48,
+     "killed": 50,
+     "w": "aa12",
+     "mag": 0,
+     "rel": true,
+     "hp": 89,
+     "near": 25.2
+    },
+    {
+     "t": 120,
+     "alive": 47,
+     "killed": 82,
+     "w": "minigun",
+     "mag": 99,
+     "rel": false,
+     "hp": 89,
+     "near": 6.2
+    },
+    {
+     "t": 150,
+     "alive": 48,
+     "killed": 102,
+     "w": "minigun",
+     "mag": 38,
+     "rel": false,
+     "hp": 87,
+     "near": 59.1
+    },
+    {
+     "t": 180,
+     "alive": 48,
+     "killed": 131,
+     "w": "minigun",
+     "mag": 0,
+     "rel": true,
+     "hp": 85,
+     "near": 8.6
+    },
+    {
+     "t": 210,
+     "alive": 46,
+     "killed": 151,
+     "w": "aa12",
+     "mag": 14,
+     "rel": false,
+     "hp": 85,
+     "near": 8.2
+    },
+    {
+     "t": 240,
+     "alive": 48,
+     "killed": 182,
+     "w": "minigun",
+     "mag": 99,
+     "rel": false,
+     "hp": 85,
+     "near": 6.6
+    },
+    {
+     "t": 270,
+     "alive": 48,
+     "killed": 215,
+     "w": "aa12",
+     "mag": 16,
+     "rel": false,
+     "hp": 81,
+     "near": 83
+    },
+    {
+     "t": 300,
+     "alive": 48,
+     "killed": 237,
+     "w": "minigun",
+     "mag": 174,
+     "rel": false,
+     "hp": 77,
+     "near": 69.9
+    },
+    {
+     "t": 330,
+     "alive": 48,
+     "killed": 266,
+     "w": "aa12",
+     "mag": 16,
+     "rel": false,
+     "hp": 77,
+     "near": 4.7
+    },
+    {
+     "t": 360,
+     "alive": 48,
+     "killed": 291,
+     "w": "minigun",
+     "mag": 199,
+     "rel": false,
+     "hp": 77,
+     "near": 67.1
+    },
+    {
+     "t": 390,
+     "alive": 47,
+     "killed": 321,
+     "w": "minigun",
+     "mag": 215,
+     "rel": false,
+     "hp": 72,
+     "near": 8.3
+    }
+   ],
+   "knees": 1,
+   "wallSecs": 1500,
+   "errors": [],
+   "run": 2
+  }
+ ]
+}

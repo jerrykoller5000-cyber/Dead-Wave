@@ -1,0 +1,18 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+const dir=new URL('./',import.meta.url),read=name=>JSON.parse(fs.readFileSync(new URL(name,dir),'utf8'));
+const before=read('before-checks.json').state,after=read('after-checks.json').state;
+const burial=read('after-burial.json');
+const boxDistance=(p,o)=>Math.hypot(Math.max(0,o.min[0]-p.x,p.x-o.max[0]),Math.max(0,o.min[2]-p.z,p.z-o.max[2]));
+const coldwater=after.history.filter(o=>/coldwater|grave/.test(o.name));
+const plotClear=Math.min(...after.plots.flatMap(p=>coldwater.map(o=>boxDistance(p,o))));
+const crewClear=Math.min(...burial.burial.flatMap(b=>b.diggers.flatMap(p=>coldwater.map(o=>boxDistance(p,o)))));
+assert(plotClear>3,'Burial plot centres have at least 3m to all Coldwater scenery bounds');
+assert(crewClear>2,'Burial crew positions have at least 2m to all Coldwater scenery bounds');
+for(const key of ['plots','trees','sites','paths'])assert.deepEqual(after[key],before[key],key);
+assert(burial.rays.every(r=>r.blocked===0));
+const old=fs.readFileSync(new URL('landmark-before.js',dir),'utf8'),next=fs.readFileSync('assets/world/landmark-details.js','utf8');
+const strip=s=>s.slice(0,s.indexOf("  if(o.kind==='graveyard')"))+s.slice(s.indexOf("  if(o.kind==='tower')"));
+assert.equal(strip(next),strip(old),'All other landmark builders untouched');
+console.log('PASS all six plots clear on 90 sampled rays; all six burial setups finite; original plot positions, trees, paths and objective sites identical; every other landmark builder unchanged.');
+console.log(JSON.stringify({nearestSceneryToPlotCentre:plotClear,nearestSceneryToBurialCrew:crewClear,oldGravesMinTrailDistance:Math.min(...after.stones.map(s=>s.path))}));

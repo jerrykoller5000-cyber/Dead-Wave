@@ -1,0 +1,62 @@
+[
+  {
+    "file": "world/training.js",
+    "before": "c85040d9567ba30c33c40fafe2eb18cdb4459d1fff3ee2976c0f97dbca2f21b0",
+    "after": "70c5146afde2837ae8d6f158132aca69e0bc9ceb12bc253b21f963afcc8ad358",
+    "rebased": false
+  },
+  {
+    "file": "index.html",
+    "before": "fcbe21d5ab224b4c4ea520f5e9272fa49a0446b3f8465e07ac9138c0e3ba7b2d",
+    "after": "834c4267e777600a39c091efd1289d6c9f9d4ce6d5476cdccb5b74c56fc5bf57",
+    "rebased": true
+  },
+  {
+    "file": "world/training-ballistics.js",
+    "before": "32f27d4cb8118039fd28235f956337bc6fdaba70b34013a9682931ca882c0ba3",
+    "after": "3c3083b449f8bdafebde756aa82e1bc954b31a71f1f097754c2738b285ca2f90",
+    "rebased": false
+  },
+  {
+    "file": "ui/range-session.js",
+    "before": "dd548a52b9e04626927256896370b4f280fe63c275a9964467c97a42c75da52a",
+    "after": "6d407d730b3db52b78986005d10ac667b1167c822c779ae45de39fcd3317c898",
+    "rebased": false
+  },
+  {
+    "file": "ui/range-feature.js",
+    "before": "658d8df010bea465788bc635d9fdf6dd8fa44a2a6353d6c071a425544f96a199",
+    "after": "ae9d46acf9f7c55b8ba15387a0e648a0a622c3a6212f30626c119eba3157a279",
+    "rebased": false
+  },
+  {
+    "file": "ui/range-drills.js",
+    "before": "ddec84cbcc805eec28ff16f4418394c01af4a17c037381cd124915ddee9cda68",
+    "after": "356c178194f06f83c6ebff508f752c7745e8493ba6c392eda6d5e8584fac82bf",
+    "rebased": false
+  },
+  {
+    "file": "ui/strings.js",
+    "before": "9d0f26e81aee6a373cc2518f541fc134f73ce8ef22894b8a28da4f46740d59b5",
+    "after": "7ba29ed8cb9206f02191570b4ac333cdb0c1bfc6ed1b49385911f87d54bff324",
+    "rebased": false
+  },
+  {
+    "file": "world/training.test.mjs",
+    "before": "0e2203b5a47a825533554197ee22604454eed8ff2687a5ce60a3154de97896ba",
+    "after": "f2f99614ca9f1dbc5d969559891578925ffab267aa3ad172be54a827351859ce",
+    "rebased": false
+  },
+  {
+    "file": "ui/range-drills.test.mjs",
+    "before": "5ed0a34c88e18af7c9fd6c85d1e24d9c734cc285486d277e51facf781aeef8e5",
+    "after": "1353b06d5f3cdafa57a67649a4051f39650a0376c9526c04b84a66d460dd30f6",
+    "rebased": false
+  },
+  {
+    "file": "world/training-firing-line.js",
+    "before": null,
+    "after": "d9ed8c073dabe222279be0b0a5cf33277a1ce1023bb7281a7659babbbaf07b59",
+    "rebased": false
+  }
+]

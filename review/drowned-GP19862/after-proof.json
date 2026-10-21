@@ -1,0 +1,22 @@
+{
+  "loadSec": 17.52,
+  "grab": {
+    "caught": true,
+    "travel": 3.4137399999887066,
+    "seconds": 1.8,
+    "pulled": 3.5,
+    "hp": 100,
+    "state": {
+      "phase": "idle",
+      "t": 0.651199999988079,
+      "cd": 1.431500000000001,
+      "x": 0,
+      "z": -1,
+      "yaw": 3.141592653589793,
+      "pulled": 3.5,
+      "miss": false,
+      "choice": null
+    }
+  },
+  "errors": []
+}

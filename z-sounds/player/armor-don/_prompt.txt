@@ -1,0 +1,9 @@
+#18 player/armor-don
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: armorDon()
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 1.2 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A soldier strapping on a plate carrier: velcro ripping and straps cinching tight. No music, no voice.

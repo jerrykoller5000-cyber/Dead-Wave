@@ -1,0 +1,365 @@
+{
+  "states": {
+    "carrier-front": {
+      "slings": [
+        "shotgun",
+        "launcher"
+      ],
+      "base": [
+        null,
+        null
+      ],
+      "pairs": [
+        null,
+        null
+      ],
+      "hip": "pistol",
+      "hipPair": null,
+      "wardrobe": [
+        "belt",
+        "boots",
+        "cap",
+        "carrier",
+        "gloves",
+        "helmet",
+        "holster",
+        "mask",
+        "pack",
+        "pads",
+        "shirt",
+        "trousers"
+      ]
+    },
+    "carrier-quarter": {
+      "slings": [
+        "shotgun",
+        "launcher"
+      ],
+      "base": [
+        null,
+        null
+      ],
+      "pairs": [
+        null,
+        null
+      ],
+      "hip": "pistol",
+      "hipPair": null,
+      "wardrobe": [
+        "belt",
+        "boots",
+        "cap",
+        "carrier",
+        "gloves",
+        "helmet",
+        "holster",
+        "mask",
+        "pack",
+        "pads",
+        "shirt",
+        "trousers"
+      ]
+    },
+    "carrier-side": {
+      "slings": [
+        "shotgun",
+        "launcher"
+      ],
+      "base": [
+        null,
+        null
+      ],
+      "pairs": [
+        null,
+        null
+      ],
+      "hip": "pistol",
+      "hipPair": null,
+      "wardrobe": [
+        "belt",
+        "boots",
+        "cap",
+        "carrier",
+        "gloves",
+        "helmet",
+        "holster",
+        "mask",
+        "pack",
+        "pads",
+        "shirt",
+        "trousers"
+      ]
+    },
+    "shirt-front": {
+      "slings": [
+        "shotgun",
+        "launcher"
+      ],
+      "base": [
+        null,
+        null
+      ],
+      "pairs": [
+        null,
+        null
+      ],
+      "hip": "pistol",
+      "hipPair": null,
+      "wardrobe": [
+        "belt",
+        "boots",
+        "cap",
+        "carrier",
+        "gloves",
+        "helmet",
+        "holster",
+        "mask",
+        "pack",
+        "pads",
+        "shirt",
+        "trousers"
+      ]
+    },
+    "shirt-quarter": {
+      "slings": [
+        "shotgun",
+        "launcher"
+      ],
+      "base": [
+        null,
+        null
+      ],
+      "pairs": [
+        null,
+        null
+      ],
+      "hip": "pistol",
+      "hipPair": null,
+      "wardrobe": [
+        "belt",
+        "boots",
+        "cap",
+        "carrier",
+        "gloves",
+        "helmet",
+        "holster",
+        "mask",
+        "pack",
+        "pads",
+        "shirt",
+        "trousers"
+      ]
+    },
+    "back": {
+      "slings": [
+        "shotgun",
+        "launcher"
+      ],
+      "base": [
+        null,
+        null
+      ],
+      "pairs": [
+        null,
+        null
+      ],
+      "hip": "pistol",
+      "hipPair": null,
+      "wardrobe": [
+        "belt",
+        "boots",
+        "cap",
+        "carrier",
+        "gloves",
+        "helmet",
+        "holster",
+        "mask",
+        "pack",
+        "pads",
+        "shirt",
+        "trousers"
+      ]
+    },
+    "shoulder": {
+      "slings": [
+        null,
+        null
+      ],
+      "base": [
+        null,
+        null
+      ],
+      "pairs": [
+        null,
+        null
+      ],
+      "hip": "pistol",
+      "hipPair": null,
+      "wardrobe": [
+        "belt",
+        "boots",
+        "cap",
+        "carrier",
+        "gloves",
+        "helmet",
+        "holster",
+        "mask",
+        "pack",
+        "pads",
+        "shirt",
+        "trousers"
+      ]
+    },
+    "walk": {
+      "slings": [
+        "shotgun",
+        "launcher"
+      ],
+      "base": [
+        null,
+        null
+      ],
+      "pairs": [
+        null,
+        null
+      ],
+      "hip": "pistol",
+      "hipPair": null,
+      "wardrobe": [
+        "belt",
+        "boots",
+        "cap",
+        "carrier",
+        "gloves",
+        "helmet",
+        "holster",
+        "mask",
+        "pack",
+        "pads",
+        "shirt",
+        "trousers"
+      ]
+    },
+    "run": {
+      "slings": [
+        "shotgun",
+        "launcher"
+      ],
+      "base": [
+        null,
+        null
+      ],
+      "pairs": [
+        null,
+        null
+      ],
+      "hip": "pistol",
+      "hipPair": null,
+      "wardrobe": [
+        "belt",
+        "boots",
+        "cap",
+        "carrier",
+        "gloves",
+        "helmet",
+        "holster",
+        "mask",
+        "pack",
+        "pads",
+        "shirt",
+        "trousers"
+      ]
+    },
+    "brandt": {
+      "slings": [
+        "m4",
+        "shotgun"
+      ],
+      "base": [
+        "uzi",
+        "revolver"
+      ],
+      "pairs": [
+        null,
+        null
+      ],
+      "hip": "pistol",
+      "hipPair": null,
+      "wardrobe": [
+        "belt",
+        "boots",
+        "cap",
+        "carrier",
+        "gloves",
+        "helmet",
+        "holster",
+        "mask",
+        "pack",
+        "pads",
+        "shirt",
+        "trousers"
+      ]
+    },
+    "okafor": {
+      "slings": [
+        "m4",
+        "shotgun"
+      ],
+      "base": [
+        "uzi",
+        "revolver"
+      ],
+      "pairs": [
+        null,
+        null
+      ],
+      "hip": "pistol",
+      "hipPair": null,
+      "wardrobe": [
+        "belt",
+        "boots",
+        "cap",
+        "carrier",
+        "gloves",
+        "helmet",
+        "holster",
+        "mask",
+        "pack",
+        "pads",
+        "shirt",
+        "trousers"
+      ]
+    },
+    "pike": {
+      "slings": [
+        "m4",
+        "shotgun"
+      ],
+      "base": [
+        "uzi",
+        "revolver"
+      ],
+      "pairs": [
+        null,
+        null
+      ],
+      "hip": "pistol",
+      "hipPair": null,
+      "wardrobe": [
+        "belt",
+        "boots",
+        "cap",
+        "carrier",
+        "gloves",
+        "helmet",
+        "holster",
+        "mask",
+        "pack",
+        "pads",
+        "shirt",
+        "trousers"
+      ]
+    }
+  },
+  "errors": []
+}

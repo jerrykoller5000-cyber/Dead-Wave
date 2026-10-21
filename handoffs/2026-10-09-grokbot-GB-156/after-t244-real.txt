@@ -1,0 +1,20 @@
+PASS he mounts the mortar
+FAIL mortar mount: no jump - the most the hips, head or a hand moves in a frame is 8.0 cm (wristR@59)
+PASS mortar mount: the body does not teleport to the crew spot (1.8 cm on the first frame)
+PASS he walks in and crouches beside the tube (hips moved 171.7 cm, down 17.8 cm)
+PASS a round is in his hand, ready (ready)
+FAIL held over the muzzle, on the bore line (0.12 m up the axis, 16.4 cm off it)
+PASS the shot still leaves on the click (a shell spent at once)
+PASS and the cooldown still holds the next shot (a second click at once spends nothing)
+PASS the round is let go into the tube on the shot
+PASS it slides down and is gone into the tube 83 ms after the shot (lowest seen -0.39 m on the axis)
+PASS his right hand goes back to the pack for the next round
+PASS the next round is in his hand
+PASS and over the muzzle again 1.35 s after the shot, inside the 2.4 s cooldown
+PASS mortar traverse +-70 deg: a planted foot drifts at most 0.0 cm (11 steps)
+PASS mortar dismount: no jump (7.3 cm, head@19)
+PASS off the tube: no round, his body back on his root
+PASS he mounts the Watchman
+FAIL Watchman mount: no jump (9.0 cm, wristL@14)
+PASS Watchman traverse +-70 deg: a planted foot drifts at most 0.0 cm (9 steps)
+FAIL Watchman dismount: he steps back off it, no jump (10.9 cm, wristR@7)

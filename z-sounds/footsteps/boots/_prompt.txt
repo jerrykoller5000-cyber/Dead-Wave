@@ -1,0 +1,9 @@
+#87 footsteps-boots
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 0.6 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A single heavy military combat boot step on gravel with a faint rattle of gear. No voice, no music.
+
+In the game: deadStep(military)

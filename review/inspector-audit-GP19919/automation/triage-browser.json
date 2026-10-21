@@ -1,0 +1,42 @@
+{
+  "at": "2026-10-14T17:22:48.495Z",
+  "limits": "Both fixtures use current external modules and the current fake renderer; this isolates inline game-source changes, not complete historical dependency snapshots.",
+  "results": [
+    {
+      "name": "t3",
+      "label": "pre-audit",
+      "raw": "wall:ok platform:ok light=lv1/null flame=lv1/null heavy=lv1/null mortar=lv1/null\nwall:ok wall:ok platform:ok light=lv1/null flame=lv1/null heavy=lv1/null mortar=lv1/null\nwall:ok floor:ok light=lv0/null flame=lv0/null heavy=lv0/null mortar=lv0/null\nsandbag:ok platform:NO({\"refusal\":\"needs a wall or floor under it\"}) light=lv0/null flame=lv0/null heavy=lv0/null mortar=lv0/null\nwall:ok platform:ok railing:ok light=lv1/null flame=lv1/null heavy=lv1/null mortar=lv1/null\nwall:ok floor:ok railing:NO({\"refusal\":\"needs a platform or floor under it\"}) light=lv0/null flame=lv0/null heavy=lv0/null mortar=lv0/null\nwall:ok platform:ok wire:ok light=lv1/null flame=lv1/null heavy=lv1/null mortar=lv1/null\nPASS wall+platform, wall+wall+platform, wall+floor, +railing and +wire stacks all go up\nPASS a platform on sandbags is refused (sandbag:ok platform:NO({\"refusal\":\"needs a wall or floor under it\"}))\nFAIL turret: no aim lv1, aimed at the deck lv1\nPASS wall+floor: floor on the ground; railing refused on the wall edge (needs a platform or floor under it), fine on edge1 ({\"level\":0,\"slot\":\"edge1\"})\nPASS aimed at the wall top the floor roofs it (lv1) and takes a railing (lv1)",
+      "pass": 4,
+      "fail": 1,
+      "seconds": 37.236,
+      "errors": []
+    },
+    {
+      "name": "t3",
+      "label": "current",
+      "raw": "wall:ok platform:ok light=lv1/null flame=lv1/null heavy=lv1/null mortar=lv1/null\nwall:ok wall:ok platform:ok light=lv1/null flame=lv1/null heavy=lv1/null mortar=lv1/null\nwall:ok floor:ok light=lv0/null flame=lv0/null heavy=lv0/null mortar=lv0/null\nsandbag:ok platform:NO({\"refusal\":\"needs a wall or floor under it\"}) light=lv0/null flame=lv0/null heavy=lv0/null mortar=lv0/null\nwall:ok platform:ok railing:ok light=lv1/null flame=lv1/null heavy=lv1/null mortar=lv1/null\nwall:ok floor:ok railing:NO({\"refusal\":\"needs a platform or floor under it\"}) light=lv0/null flame=lv0/null heavy=lv0/null mortar=lv0/null\nwall:ok platform:ok wire:ok light=lv1/null flame=lv1/null heavy=lv1/null mortar=lv1/null\nPASS wall+platform, wall+wall+platform, wall+floor, +railing and +wire stacks all go up\nPASS a platform on sandbags is refused (sandbag:ok platform:NO({\"refusal\":\"needs a wall or floor under it\"}))\nFAIL turret: no aim lv1, aimed at the deck lv1\nPASS wall+floor: floor on the ground; railing refused on the wall edge (needs a platform or floor under it), fine on edge1 ({\"level\":0,\"slot\":\"edge1\"})\nPASS aimed at the wall top the floor roofs it (lv1) and takes a railing (lv1)",
+      "pass": 4,
+      "fail": 1,
+      "seconds": 35.296,
+      "errors": []
+    },
+    {
+      "name": "t50",
+      "label": "pre-audit",
+      "raw": "PASS tree batch exports\nPASS batches built at load (156 ms)\nPASS most trees batched (408 of 430, 22 live)\nPASS tree meshes drawn: 208 (own 106 + cells 102) for 430 trees\nPASS every tree in the shadow square is live (16)\nPASS far tree: own meshes hidden while batched\nPASS batch copy sits exactly where the trunk is\nPASS far tree: canopy range drawn\nPASS burning tree goes live\nPASS its batch copy collapses; its own meshes draw\nPASS a changed tree stays live while it is changed\nPASS restored far tree rejoins its batch\nPASS walking up: the tree goes live (not dirty)\nPASS walking away: it rejoins its batch\nPASS a hidden tree leaves no copy behind\nPASS and comes back after restoreTree\nPASS every tree's turn is seeded from its position (0 not)\nFAIL batched count recovers (405)",
+      "pass": 17,
+      "fail": 1,
+      "seconds": 21.933,
+      "errors": []
+    },
+    {
+      "name": "t50",
+      "label": "current",
+      "raw": "PASS tree batch exports\nPASS batches built at load (163 ms)\nPASS most trees batched (408 of 430, 22 live)\nPASS tree meshes drawn: 191 (own 89 + cells 102) for 430 trees\nPASS every tree in the shadow square is live (16)\nPASS far tree: own meshes hidden while batched\nPASS batch copy sits exactly where the trunk is\nPASS far tree: canopy range drawn\nPASS burning tree goes live\nPASS its batch copy collapses; its own meshes draw\nPASS a changed tree stays live while it is changed\nPASS restored far tree rejoins its batch\nPASS walking up: the tree goes live (not dirty)\nPASS walking away: it rejoins its batch\nPASS a hidden tree leaves no copy behind\nPASS and comes back after restoreTree\nPASS every tree's turn is seeded from its position (0 not)\nFAIL batched count recovers (405)",
+      "pass": 17,
+      "fail": 1,
+      "seconds": 21.898,
+      "errors": []
+    }
+  ]
+}

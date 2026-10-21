@@ -1,0 +1,9 @@
+#115 hq/kiosk-buy  (start here)
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: kioskBuy()
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.8 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A military supply terminal purchase: an electronic confirmation beep and a crate clunk. No music, no voice.

@@ -1,0 +1,202 @@
+{
+ "at": "2026-10-15T08:42:57.383Z",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "results": [
+  {
+   "id": "zombie.shambler",
+   "variant": null,
+   "mode": "statue",
+   "ok": true,
+   "ms": 116,
+   "tris": 10436,
+   "size": [
+    0.86,
+    1.886,
+    0.787
+   ],
+   "error": null
+  },
+  {
+   "id": "zombie.feral",
+   "variant": null,
+   "mode": "statue",
+   "ok": true,
+   "ms": 132,
+   "tris": 9964,
+   "size": [
+    0.731,
+    1.471,
+    1.044
+   ],
+   "error": null
+  },
+  {
+   "id": "zombie.leaper",
+   "variant": null,
+   "mode": "statue",
+   "ok": true,
+   "ms": 117,
+   "tris": 10922,
+   "size": [
+    0.818,
+    1.391,
+    1.524
+   ],
+   "error": null
+  },
+  {
+   "id": "zombie.spider",
+   "variant": null,
+   "mode": "statue",
+   "ok": true,
+   "ms": 110,
+   "tris": 7618,
+   "size": [
+    1.727,
+    0.906,
+    1.773
+   ],
+   "error": null
+  },
+  {
+   "id": "zombie.drowned",
+   "variant": null,
+   "mode": "statue",
+   "ok": true,
+   "ms": 123,
+   "tris": 12536,
+   "size": [
+    0.833,
+    1.871,
+    0.551
+   ],
+   "error": null
+  },
+  {
+   "id": "zombie.military",
+   "variant": null,
+   "mode": "statue",
+   "ok": true,
+   "ms": 154,
+   "tris": 17428,
+   "size": [
+    0.951,
+    2.043,
+    0.659
+   ],
+   "error": null
+  },
+  {
+   "id": "zombie.brute",
+   "variant": null,
+   "mode": "statue",
+   "ok": true,
+   "ms": 120,
+   "tris": 15044,
+   "size": [
+    1.747,
+    2.623,
+    0.962
+   ],
+   "error": null
+  },
+  {
+   "id": "zombie.spitter",
+   "variant": null,
+   "mode": "statue",
+   "ok": true,
+   "ms": 122,
+   "tris": 12092,
+   "size": [
+    0.999,
+    1.859,
+    0.698
+   ],
+   "error": null
+  },
+  {
+   "id": "zombie.screamer",
+   "variant": null,
+   "mode": "statue",
+   "ok": true,
+   "ms": 141,
+   "tris": 12524,
+   "size": [
+    1.372,
+    2.668,
+    1.314
+   ],
+   "error": null
+  },
+  {
+   "id": "zombie.bomber",
+   "variant": null,
+   "mode": "statue",
+   "ok": true,
+   "ms": 182,
+   "tris": 17572,
+   "size": [
+    1.552,
+    2.12,
+    1.684
+   ],
+   "error": null
+  },
+  {
+   "id": "zombie.demon",
+   "variant": null,
+   "mode": "statue",
+   "ok": true,
+   "ms": 133,
+   "tris": 14232,
+   "size": [
+    2.024,
+    3.478,
+    1.141
+   ],
+   "error": null
+  },
+  {
+   "id": "zombie.colossus",
+   "variant": null,
+   "mode": "statue",
+   "ok": true,
+   "ms": 128,
+   "tris": 16120,
+   "size": [
+    3.144,
+    4.886,
+    3.217
+   ],
+   "error": null
+  },
+  {
+   "id": "zombie.guardian",
+   "variant": null,
+   "mode": "statue",
+   "ok": true,
+   "ms": 123,
+   "tris": 9928,
+   "size": [
+    1.486,
+    3.267,
+    1.163
+   ],
+   "error": null
+  },
+  {
+   "id": "zombie.caveguard",
+   "variant": null,
+   "mode": "statue",
+   "ok": true,
+   "ms": 125,
+   "tris": 9928,
+   "size": [
+    1.407,
+    2.99,
+    1.328
+   ],
+   "error": null
+  }
+ ]
+}

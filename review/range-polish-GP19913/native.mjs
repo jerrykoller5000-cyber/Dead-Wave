@@ -1,0 +1,20 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';
+const live=process.argv.includes('--live'),{Engine}=await import(live?'../../tools/camera.mjs':'./camera.mjs'),dir='review/range-polish-GP19913',E=new Engine({training:true,warm:'none',size:'1440x900'}),proof={};
+let clock=fs.readFileSync('tools/posesheet.mjs','utf8').match(/const PAGE = String.raw`([\s\S]*?)`;/)[1];
+clock=clock.replace(/const pin = \(\) => \{[^\n]*\};/,"const pin=()=>{p.x=S.x;p.z=S.z;if(window.__target){T.aimTarget.copy(__target);T.setAimYawDbg(Math.atan2(__target.x-p.x,__target.z-p.z));}};").replace('window.dispatchEvent(new KeyboardEvent','document.body.dispatchEvent(new KeyboardEvent');
+try{
+ await E.open();proof.loadSec=E.loadSec;
+ await E.ev(`R.release();T.trainingDbg.panel().close();T.trainingDbg.clear();T.AudioSys.setMuted(true);T.grantAllWeapons();window.__S={x:0,y:-200,z:-642.5};window.__target=new T.THREE.Vector3(0,-198,-630);window.D=await import('/ui/range-drills.js');`);
+ await E.page.evaluate(clock);await E.ev('await wait(100);__step(2);');
+ proof.menu=await E.ev(`T.rangeDbg.open();const counts=[];for(const w of D.RANGE_WEAPONS){document.querySelector('[data-weapon="'+w+'"]').click();counts.push({w,n:document.querySelectorAll('[data-drill]').length});}T.rangeDbg.exit();return {counts,retired:T.rangeDbg.start({weapon:'launcher',id:'old',mode:'groups'})};`);
+ assert.equal(proof.menu.counts.length,8);assert.equal(proof.menu.retired.ok,false);
+ await E.ev(`window.__fenceCues=0;const cue=T.AudioSys.trainingCue;T.AudioSys.trainingCue=(k,...a)=>{if(k==='fence-bump')__fenceCues++;return cue(k,...a);};window.prepare=()=>{T.rangeDbg.exit();for(const g of T.grenadesInFlight.splice(0))g.mesh.visible=false;__S.x=0;__S.z=-642.5;T.player.position.set(0,-200,-642.5);T.setVelDbg(0,0);T.setWeapon(T.WEAPON_ORDER.indexOf('pistol'));T.setGrenadesDbg(3);T.resetSprayDbg();__step(100);};`);
+ proof.high=await E.ev(`prepare();T.startGrenadeCharge();__step(52);const preview=T.grenadeArcDbg();T.releaseGrenadeCharge();let first=null,reverse=null,maxZ=-Infinity;for(let i=0;i<120;i++){__step(1);const g=T.grenadesInFlight[0];if(!g)continue;if(!first)first={pos:{...g.pos},from:{...g.from},vx:g.vx,vy:g.vy,vz:g.vz,fuse:g.fuse};maxZ=Math.max(maxZ,g.pos.z);if(!reverse&&g.vz<0)reverse={pos:{...g.pos},vz:g.vz,age:g.age,fuse:g.fuse};}return {preview:preview.hit,first,reverse,maxZ,cues:__fenceCues};`);
+ console.log('HIGH',JSON.stringify(proof.high));assert.equal(proof.high.preview.kind,'solid');assert(Math.abs(proof.high.preview.z-(-639.42))<.01);assert(proof.high.reverse?.vz<0);assert.equal(proof.high.reverse.fuse,1.35);assert(proof.high.maxZ<-639.419);assert(proof.high.cues>=1);
+ proof.low=await E.ev(`prepare();const before=__fenceCues;T.startGrenadeCharge();__step(1);const preview=T.grenadeArcDbg();T.releaseGrenadeCharge();let maxZ=-Infinity,reverse=false;for(let i=0;i<120;i++){__step(1);const g=T.grenadesInFlight[0];if(g){maxZ=Math.max(maxZ,g.pos.z);if(g.vz<0)reverse=true;}}return {preview:preview.hit,maxZ,reverse,cues:__fenceCues-before};`);
+ console.log('LOW',JSON.stringify(proof.low));assert(proof.low.maxZ>-639.18,'low lob passes the aperture');assert.equal(proof.low.reverse,false);
+ proof.drillThrow=await E.ev(`prepare();T.rangeDbg.start(D.findDrill('pistol','first-steps'));__step(545);T.startGrenadeCharge();__step(20);T.releaseGrenadeCharge();__step(50);return T.rangeDbg.read().result;`);assert.equal(proof.drillThrow.state,'DISQUALIFIED');
+ await E.ev('T.rangeDbg.exit();T.rangeDbg.open();document.querySelector("[data-weapon=pistol]").click();');await E.page.screenshot(`${dir}/${live?'live':'staged'}-menu.png`);
+ proof.startVisible=await E.ev('const r=document.querySelector("[data-start]").getBoundingClientRect();return r.bottom<=innerHeight&&r.top>=0;');assert(proof.startVisible);
+ assert.deepEqual(E.page.errors,[]);
+}finally{proof.errors=E.page?.errors;fs.writeFileSync(`${dir}/${live?'live':'staged'}-native.json`,JSON.stringify(proof,null,2));await E.close();}process.exit(0);

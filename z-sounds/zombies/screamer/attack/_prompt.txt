@@ -1,0 +1,9 @@
+#44 screamer-attack
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 1.5 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A screamer zombie's ear-splitting, distorted shriek as it attacks, extremely high, harsh and raw. Close-up, dry. No words, no music.
+
+In the game: zombieVoice('screamer', 'attack')

@@ -1,0 +1,9 @@
+#23 drowned-chase
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 1.5 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A drowned zombie's urgent gurgling groan, coughing up water as it lurches forward, bubbles and wet splutters. Close-up, dry. No words, no music.
+
+In the game: zombieVoice('drowned', 'chase')

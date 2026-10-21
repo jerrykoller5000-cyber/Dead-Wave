@@ -1,0 +1,137 @@
+{
+  "before": {
+    "ok": true,
+    "value": [
+      {
+        "i": 0,
+        "id": "minimap",
+        "cls": "",
+        "width": 328,
+        "height": 328,
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        },
+        "display": "block",
+        "z": "auto",
+        "parent": "minimapFrame",
+        "game": false
+      },
+      {
+        "i": 1,
+        "id": "fullMapCanvas",
+        "cls": "",
+        "width": 300,
+        "height": 150,
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        },
+        "display": "block",
+        "z": "auto",
+        "parent": "objectiveMapSurface",
+        "game": false
+      },
+      {
+        "i": 2,
+        "id": "cifMarine",
+        "cls": "",
+        "width": 240,
+        "height": 360,
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        },
+        "display": "block",
+        "z": "auto",
+        "parent": "",
+        "game": false
+      },
+      {
+        "i": 3,
+        "id": "",
+        "cls": "",
+        "width": 1440,
+        "height": 1000,
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 1000,
+          "top": 0,
+          "right": 1440,
+          "bottom": 1000,
+          "left": 0
+        },
+        "display": "block",
+        "z": "auto",
+        "parent": "",
+        "game": true
+      }
+    ]
+  },
+  "probe": {
+    "ok": true,
+    "value": {
+      "meanPercent": 0,
+      "subject": "marine",
+      "canvases": [
+        {
+          "i": 0,
+          "id": "minimap",
+          "cls": "",
+          "display": "block",
+          "z": "auto",
+          "parent": "minimapFrame",
+          "game": false
+        },
+        {
+          "i": 1,
+          "id": "fullMapCanvas",
+          "cls": "",
+          "display": "block",
+          "z": "auto",
+          "parent": "objectiveMapSurface",
+          "game": false
+        },
+        {
+          "i": 2,
+          "id": "cifMarine",
+          "cls": "",
+          "display": "block",
+          "z": "auto",
+          "parent": "",
+          "game": false
+        },
+        {
+          "i": 3,
+          "id": "",
+          "cls": "",
+          "display": "block",
+          "z": "auto",
+          "parent": "",
+          "game": true
+        }
+      ],
+      "errors": []
+    }
+  }
+}

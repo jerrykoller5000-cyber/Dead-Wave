@@ -1,0 +1,147 @@
+// t60 — CL-24/25: the music director, Jerry's rhythm. One piece of music at a time: the alarm
+// cuts the music and its sting plays alone; one second later the fight track loops at 60%,
+// 70% with a zombie within 100 m, full at 15 m; the last kill fades it out fast and the
+// relief sting plays alone; then the calm music fades back in slowly. Day fights pick a
+// track by horde size. The briefing board halves the music.
+(async () => {
+  const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
+  const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+  const A = T.AudioSys;
+  const ms = () => A.musicState();
+  const until = async (cond, maxMs) => { const t0 = Date.now(); while (Date.now() - t0 < maxMs) { if (cond()) return true; await wait(100); } return cond(); };
+  const fire = (type) => window.dispatchEvent(new CustomEvent('dw-game', { detail: { type, day: T.getDay ? T.getDay() : 1 } }));
+  try {
+    const s0 = ms();
+    const all = Object.values(s0.pools).flat();
+    ok(!all.some((n) => /^fight_(breach|wire|ash_wind|run_the_line|teeth)$/.test(n)), 'the compose.py fight tracks are out of the pools');
+
+    await startMatch(T, 'Music');
+    // A saved mute (tt_* settings in the tester's browser) would silence the director and
+    // every check below would read nothing: unmute, and say so if music still won't start.
+    if (A.setMuted) A.setMuted(false);
+    if (!ms().playing) A.startMusic();
+    ok(ms().playing === true, 'music is running (muted: ' + (A.isMuted ? A.isMuted() : '?') + ', opening: ' + !!(window.DWOpening && window.DWOpening.active) + ')');
+    await until(() => ms().stage === 'calm' && ms().deckTrack, 3000);
+    const s1 = ms();
+    const wb = s1.waveByDay.map((w) => w.from + ':' + w.track).join(' ');
+    // CL-128 (Jerry's playthrough 1): every night has its own song. CL-209: whichever set music.json holds (CL-165's
+    // switch between the old music and ElevenLabs'), so the check is the shape, not the names: a song for each night from
+    // 1 to 20, at least 19 different (the old set reuses night 13's on night 14, where Fog Night plays its own).
+    const nightSong = (n) => { let t = null; for (const w of ms().waveByDay || []) if (w.from <= n) t = w.track; return t; };   // CL-209: whichever music music.json has (CL-165 switches it)
+    const songs = Array.from({ length: 20 }, (_, i) => nightSong(i + 1));
+    ok(songs.every(Boolean) && new Set(songs).size >= 19, 'waves by day: a song of its own for every night (CL-128): ' + wb);
+    const nightSongs = [...new Set(songs)];
+    ok(nightSongs.length >= 18 && nightSongs.every((k) => s1.sectioned.includes(k)), 'CL-128: every night song is a section song (' + nightSongs.filter((k) => s1.sectioned.includes(k)).length + ' of ' + nightSongs.length + ')');
+    ok(!s1.sectioned.some((k) => /^fight_n\d|^fight_(ember|guardian)(_late)?$/.test(k)), 'CL-128: the old First Blood family is out of the sections (not decoded at start): ' + s1.sectioned.join(', '));
+    // CL-70 (P-20): night 19 sounds bigger than night 2: the wave's music gains up to +2.5 dB over the run
+    // and its floor rises from 70% to 85% from night 8, and neither ever drops from one night to the next.
+    const nc = s1.nightCurve || [];
+    const never = nc.length === 20 && nc.every((n, i) => i === 0 || (n.gain >= nc[i - 1].gain && n.floor >= nc[i - 1].floor));
+    ok(never, 'CL-70: the night gain and floor never drop from one night to the next');
+    ok(nc.length === 20 && nc[0].db === 0 && nc[1].db === 0 && Math.abs(nc[18].db - 2.5) < 1e-9 && Math.abs(nc[19].db - 2.5) < 1e-9,
+      'CL-70: +0 dB on nights 1-2, +2.5 dB by night 19: ' + nc.map((n) => n.db.toFixed(1)).join(' '));
+    ok(nc.length === 20 && nc[7].floor === 0.7 && Math.abs(nc[18].floor - 0.85) < 1e-9, 'CL-70: the floor is 70% to night 8, 85% by night 19');
+    ok(s1.gains.fight_day01 > 1 && s1.gains.fight_day01 < s1.gains.chip_fight_1 && s1.gains.sting_alarm >= 1.5, 'gains (CL-35: the fight music turned down): ' + s1.gains.fight_day01 + ' / ' + s1.gains.sting_alarm);
+    ok(s1.stage === 'calm' && !!s1.deckTrack, 'calm music in prep: ' + s1.deckTrack);
+
+    // The briefing board halves the music, and closing it brings it back.
+    fire('briefing-open');
+    await until(() => ms().briefDuck < 0.56, 12000);
+    ok(ms().briefDuck < 0.56, 'the briefing halves the music: ' + ms().briefDuck.toFixed(2));
+    fire('briefing-closed');
+    await until(() => ms().briefDuck > 0.94, 12000);
+    ok(ms().briefDuck > 0.94, 'closing it restores the music: ' + ms().briefDuck.toFixed(2));
+
+    // The alarm, sounded for real at the HQ: the music is cut, and (D-33) no sting, just the
+    // klaxon, while the camera goes up to the sky (CL-49). The ground rumbles for three seconds
+    // (CL-29) as the camera comes down on the HQ.
+    T.hqStartWave();
+    await wait(300);
+    const s2 = ms();
+    ok(s2.stage === 'alarm' && !s2.sting, 'D-33: the alarm is the klaxon, no sting: ' + s2.stage + '/' + s2.sting);
+    ok(!s2.deckTrack, 'nothing else plays under it: ' + s2.deckTrack);
+    ok(!!T.getLoopCine() && T.getLoopCine().kind === 'alarm', 'the camera holds the HQ for the alarm (D-39, was the sunset pan of CL-49)');
+    await until(() => T.getAlarmShake() > 2.2, 8000);
+    ok(T.getAlarmShake() > 2.2, 'the rumble and shake run for three seconds: ' + T.getAlarmShake().toFixed(1));
+    await until(() => ms().stage !== 'alarm', 12000);
+    ok((ms().stage === 'gap' || ms().stage === 'fight') && !ms().sting, 'then straight into the fight: ' + ms().stage);
+    const tGap = Date.now();
+    await until(() => ms().stage === 'fight', 4000);
+    const gap = (Date.now() - tGap) / 1000;
+    ok(ms().stage === 'fight' && ms().deckTrack === nightSong(1), 'then day 1\'s own song: ' + ms().deckTrack);
+    ok(ms().deckLoop === true, 'and it loops natively, gapless (CL-34)');
+    ok(ms().deckLevel < 0.5, 'fading in (CL-35: over 1.5 s; the song\'s intro is the build): ' + ms().deckLevel.toFixed(2));
+    await until(() => ms().deckLevel >= 0.999, 8000);
+    ok(ms().deckLevel >= 0.999, 'and up within a few seconds: ' + ms().deckLevel.toFixed(2));
+    ok(gap < 0.5, 'the moment the alarm lets go (CL-26): ' + gap.toFixed(1) + ' s');
+    await until(() => T.getAlarmShake() === 0, 15000);
+    ok(T.getAlarmShake() === 0, 'and the shake stops: ' + T.getAlarmShake().toFixed(1));
+    ok(!T.getLoopCine(), 'and the camera is back on the marine');
+    await until(() => T.getPhase() === 'wave', 15000);
+    ok(T.getPhase() === 'wave', 'the wave is on: ' + T.getPhase());
+
+    // Proximity: the floor with nobody near, louder as one closes in. The plan is drained first:
+    // day 1's ground risers (D-29, GB-40) would keep clawing up 35-60 m out.
+    T.drainWavePlanDbg();
+    T.clearZombies && T.clearZombies();
+    // One stays ~200 m off so the wave is still on: an empty field ends the wave by itself
+    // now (CL-41), and the last-kill step below needs a wave to end.
+    const keepFar = () => T.spawnZombie(T.player.position.x + 140, T.player.position.z + 140, 'shambler', true, true);
+    keepFar();
+    await until(() => Math.abs(ms().prox - 0.7) < 0.03, 8000);
+    ok(Math.abs(ms().prox - 0.7) < 0.03, 'the fight at 70% with nobody within 150 m (CL-35): ' + ms().prox.toFixed(2));
+    const p = T.player.position;
+    const far = T.spawnZombie(p.x + 42, p.z + 42, 'shambler', true, true);   // ~60 m
+    await until(() => ms().prox > 0.86 && ms().prox < 0.97, 8000);   // (polled: slow under a loaded run)
+    ok(ms().prox > 0.86 && ms().prox < 0.97, 'at about 60 m it has climbed to ~91%: ' + ms().prox.toFixed(2));
+    T.clearZombies && T.clearZombies();
+    keepFar();
+    T.spawnZombie(p.x + 3, p.z + 3, 'shambler', true, true);
+    await until(() => ms().prox > 0.97, 8000);
+    ok(ms().prox > 0.97, 'full within 20 m: ' + ms().prox.toFixed(2));
+
+    // The last kill: the fight fades out fast, then the relief sting plays alone.
+    ok(T.getPhase() === 'wave', 'still the wave before the last kill: ' + T.getPhase());
+    T.clearZombies && T.clearZombies();
+    T.startPrep();
+    await wait(100);
+    ok(ms().stage === 'release', 'the fight fades out fast first: ' + ms().stage);
+    await until(() => ms().stage !== 'release', 4000);   // CL-209: 0.35 s of game time, however slow the frames come
+    const s3 = ms();
+    ok(s3.stage === 'relief' && s3.sting === 'clear', 'then the relief sting: ' + s3.stage + '/' + s3.sting);
+    ok(!s3.deckTrack, 'with nothing under it: ' + s3.deckTrack);
+    await until(() => ms().stage !== 'relief', 11000);
+    await until(() => !!ms().deckTrack, 4000);
+    const s4 = ms();
+    ok(s4.stage === 'calm' && !!s4.deckTrack && s4.deckTrack !== 'aftermath', 'then the regular calm music, not the aftermath: ' + JSON.stringify({stage: s4.stage, t: s4.deckTrack, m: s4.mood, n: s4.nextMood, err: s4.lastDeckError}));
+    await wait(2000);
+    ok(ms().deckLevel > 0.05 && ms().deckLevel < 0.3, 'fading back in slowly: ' + ms().deckLevel.toFixed(2) + ' ' + JSON.stringify(ms().lastDeckError));
+
+    // A day fight: no alarm, the track follows the horde's size, and ends like a wave.
+    let dz = T.spawnZombie(p.x + 10, p.z + 10, 'shambler', true, true);
+    await until(() => ms().stage === 'dayfight' && ms().deckTrack === 'chip_skirmish_b', 10000);
+    const info = 'zombie ' + (dz ? (dz.alive ? 'alive' : 'dead') : 'not spawned') + ', phase ' + T.getPhase() + ', stage ' + ms().stage;
+    ok(ms().deckTrack === 'chip_skirmish_b', 'one zombie in daylight: day skirmish B: ' + ms().deckTrack + ' (' + info + ')');
+    for (let i = 0; i < 5; i++) T.spawnZombie(p.x + 12 + i, p.z + 10, 'shambler', true, true);
+    await until(() => ms().deckTrack === 'chip_skirmish_a', 8000);
+    ok(ms().deckTrack === 'chip_skirmish_a', 'six: steps up to day skirmish A: ' + ms().deckTrack);
+    for (let i = 0; i < 5; i++) T.spawnZombie(p.x + 12 + i, p.z + 14, 'shambler', true, true);
+    await until(() => ms().deckTrack === 'chip_fight_1', 8000);
+    ok(ms().deckTrack === 'chip_fight_1', 'eleven: Tier 1: ' + ms().deckTrack);
+    // CL-52 (Jerry): a camp cleared ends with the 2 s camp stinger WHILE the fight fades out,
+    // not a hard cut into the long relief sting; then the calm music comes back.
+    T.clearZombies && T.clearZombies();
+    await until(() => ms().stage === 'campclear', 8000);
+    const c1 = ms();
+    ok(c1.stage === 'campclear' && c1.lastCue && c1.lastCue.name === 'camp' && c1.lastCue.played, 'the day fight ends with the camp stinger: ' + c1.stage + '/' + (c1.lastCue && c1.lastCue.name));
+    ok(!!c1.deckTrack && c1.deckLevel > 0.05, 'and the fight music fades under it, no hard cut: ' + (c1.deckLevel || 0).toFixed(2));
+    await until(() => ms().stage === 'calm' && !!ms().deckTrack, 6000);
+    ok(ms().stage === 'calm' && ms().deckTrack === 'calm_day', 'then the day track again: ' + ms().stage + '/' + ms().deckTrack);
+    ok(ms().section === 'all' && ms().deckLoop === true, 'looping through Web Audio, no seam (CL-52): ' + ms().section);
+
+    ok(ms().overlapFrames === 0, 'never a sting and music at once: ' + ms().overlapFrames + ' frames');
+  } catch (e) {
+    out.push('FAIL threw: ' + (e && (e.stack || e.message)));
+  }
+  return out.join('\n');
+})()

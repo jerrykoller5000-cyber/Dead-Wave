@@ -1,0 +1,9 @@
+#142 world/rock-break
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: rockBreak()
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 1.5 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A boulder cracking apart, stone breaking and rubble tumbling. No music, no voice.

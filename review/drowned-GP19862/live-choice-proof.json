@@ -1,0 +1,21 @@
+{
+  "choices": {
+    "grabs": 90,
+    "strikes": 110,
+    "total": 200
+  },
+  "dodge": {
+    "released": true,
+    "phase": "recover"
+  },
+  "melee": {
+    "released": true,
+    "hit": true
+  },
+  "wall": {
+    "travel": 0.5684600000113278,
+    "furthest": -632.35,
+    "released": true
+  },
+  "errors": []
+}

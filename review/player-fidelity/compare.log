@@ -1,0 +1,35 @@
+comparing 29 view(s): review/player-fidelity/before → review/player-fidelity/after
+
+view                   mean%   max%  verdict
+back                     0.49   70.5  same (animation noise)
+ballcap-back             1.07   70.8  CHANGED slightly
+ballcap                  1.29   80.8  CHANGED slightly
+bare-face                1.86   94.6  CHANGED slightly
+belt                     1.46   71.0  CHANGED slightly
+boonie                   1.73   78.3  CHANGED slightly
+boots                    2.77   72.2  CHANGED slightly
+cover                    1.27   94.5  CHANGED slightly
+face-side                2.83   71.4  CHANGED slightly
+face                     2.90   95.4  CHANGED slightly
+front                    0.52   70.8  CHANGED slightly
+goggles                  0.88   68.8  CHANGED slightly
+left                     0.58   70.6  CHANGED slightly
+nvg                      2.44   69.3  CHANGED slightly
+pack                     1.39   71.4  CHANGED slightly
+pistol-aim               0.55   70.2  CHANGED slightly
+pistol-crouch            1.03   72.9  CHANGED slightly
+pistol-run               0.51   70.8  CHANGED slightly
+quarter                  0.64   69.7  CHANGED slightly
+rifle-aim                0.62   81.3  CHANGED slightly
+rifle-crouch             1.29   70.7  CHANGED slightly
+rifle-drawn              0.42   70.1  same (animation noise)
+rifle-run                0.53   70.8  CHANGED slightly
+right                    0.52   70.6  CHANGED slightly
+rolled-shorts            0.51   70.2  CHANGED slightly
+shirt                    0.16   70.2  same (animation noise)
+slung-loadout            0.74   85.8  CHANGED slightly
+top                      0.43   71.1  same (animation noise)
+vest                     2.54   87.3  CHANGED slightly
+
+worst mean difference: 2.90%
+Under ~0.5% is the noise floor for this game: wind, water and wildlife move between runs.

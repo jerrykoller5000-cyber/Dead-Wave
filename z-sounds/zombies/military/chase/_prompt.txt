@@ -1,0 +1,9 @@
+#28 military-chase
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 1.2 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A zombie soldier's rapid, aggressive grunts through a gas mask, muffled and filtered, three quick bursts. Close-up, dry. No words, no music.
+
+In the game: zombieVoice('military', 'chase')

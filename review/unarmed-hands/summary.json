@@ -1,0 +1,38 @@
+{
+  "states": {
+    "idle": {
+      "frames": 50,
+      "minHandSideClearance": 0.21966232345348782,
+      "maxFingertipDistance": 0.04408479037111856
+    },
+    "walk": {
+      "frames": 50,
+      "minHandSideClearance": 0.21702924346795097,
+      "maxFingertipDistance": 0.04408479037111856
+    },
+    "run": {
+      "frames": 50,
+      "minHandSideClearance": 0.22745561463366734,
+      "maxFingertipDistance": 0.04408479037111856
+    },
+    "crouch-walk": {
+      "frames": 50,
+      "minHandSideClearance": 0.250580940916697,
+      "maxFingertipDistance": 0.04408479037111856
+    },
+    "backward": {
+      "frames": 50,
+      "minHandSideClearance": 0.21703315174130156,
+      "maxFingertipDistance": 0.04408479037111856
+    },
+    "strafe": {
+      "frames": 50,
+      "minHandSideClearance": 0.18009568067606166,
+      "maxFingertipDistance": 0.04408479037111856
+    }
+  },
+  "errors": [],
+  "shiftDeltaBefore": 0.5458365905794065,
+  "shiftDeltaAfter": 0.08336737194206278,
+  "restoredPistolGripMatches": true
+}

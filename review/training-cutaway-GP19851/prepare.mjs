@@ -1,0 +1,11 @@
+import fs from 'node:fs';
+const dir='review/training-cutaway-GP19851';
+fs.mkdirSync(dir,{recursive:true});
+for(const name of ['before.html','before-training.js','before-cutaway.js'])if(fs.existsSync(`${dir}/${name}`))throw Error(`baseline exists: ${name}`);
+const html=fs.readFileSync('index.html','utf8'),training=fs.readFileSync('world/training.js','utf8'),cutaway=fs.readFileSync('world/training-cutaway.js','utf8');
+const before=html.replace('<head>','<head><base href="/">').replaceAll("'./world/training.js'",`'/${dir}/before-training.js'`);
+if(before===html||!before.includes(`'/${dir}/before-training.js'`))throw Error('Training import not found');
+fs.writeFileSync(`${dir}/before.html`,before);
+fs.writeFileSync(`${dir}/before-training.js`,training.replaceAll("'./","'/world/").replace("'/world/training-cutaway.js'",`'/${dir}/before-cutaway.js'`));
+fs.writeFileSync(`${dir}/before-cutaway.js`,cutaway.replace("'./bake.js'","'/world/bake.js'"));
+console.log('Saved isolated current Training cutaway baseline.');

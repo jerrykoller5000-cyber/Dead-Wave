@@ -1,0 +1,14 @@
+[
+  {
+    "path": "index.html",
+    "before": "3426fed8077af7a30752d979a3dab1f595b6a9c8fadbccc5bc86cd0124e0861d",
+    "after": "bc5ac03e35700f9ccebf22f0c720a656547ecd805fce45f260eb80d0139e7da7",
+    "hunks": 2
+  },
+  {
+    "path": "world/training.js",
+    "before": "074d6cdd873a9f9c5a9e4811866d15af11d4c1bf69495df83a4f37b5a852fe3a",
+    "after": "f416d8b53857fdc7627328b53646cb82273926cdcde6dd1a73019ba59bcdd506",
+    "hunks": 9
+  }
+]

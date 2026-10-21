@@ -1,0 +1,10 @@
+{
+  "mode": "baseline",
+  "name": "t93",
+  "pass": 10,
+  "fail": [
+    "FAIL walking, no foot goes more than 5 cm into the ground or lifts past 20 cm (drowned -0.06/0.01, brute -0.07/0.03)"
+  ],
+  "raw": "PASS at rest every walker's soles are on the ground, within 3 cm (shambler 0.00 feral 0.00 drowned 0.00 military 0.00 brute 0.00 spitter 0.00 screamer -0.00 colossus 0.00 demon 0.00 bomber -0.00)\nFAIL walking, no foot goes more than 5 cm into the ground or lifts past 20 cm (drowned -0.06/0.01, brute -0.07/0.03)\nPASS every head is inside its hit column, give or take 4 cm of pose (shambler 1.90<1.98 feral 1.39<1.46 drowned 1.79<1.87 military 2.11<2.20 brute 2.59<2.83 spitter 1.92<2.01 screamer 1.80<1.88 colossus 4.40<4.71 demon 3.20<3.32 bomber 2.00<2.09)\nPASS and its centre is in the headshot slice, above 0.78 of hitH, brute aside (shambler 0.84 feral 0.81 drowned 0.82 military 0.84 brute 0.82 spitter 0.80 screamer 0.82 colossus 0.82 demon 0.81 bomber 0.85)\nPASS a bullet at the head's centre is a headshot (e.g. shambler 18.50 vs 10.00)\nPASS hitH (about) unchanged where the head already fitted (brute 2.83, colossus 4.71)\nPASS two pellets do not give it a reacting body\nPASS its feet stay on the ground (deepest -0.00 m) and after (0.01 m)\nPASS a crawling shambler's hips stay where they were (0.25-0.25 m, before 0.25)\nPASS leaper and spider hips unchanged (0.57, 0.50)\nPASS no page errors",
+  "errors": []
+}

@@ -1,0 +1,3 @@
+Camp cleared
+Used for: A short cue: a zombie camp is cleared
+The game plays now: assets/soundtrack/sting_camp (stings.camp)

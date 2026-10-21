@@ -1,0 +1,3 @@
+Dawn
+Used for: A short cue: the sun comes up after a night
+The game plays now: assets/soundtrack/sting_dawn (stings.dawn)

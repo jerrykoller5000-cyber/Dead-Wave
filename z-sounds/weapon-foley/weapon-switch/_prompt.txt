@@ -1,0 +1,9 @@
+#50 weapon-foley/weapon-switch
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: foley weaponSwitch
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.6 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A soldier swapping weapons: a rifle sling shifting and a pistol drawn from a holster, quick gear rustle. No music, no voice.

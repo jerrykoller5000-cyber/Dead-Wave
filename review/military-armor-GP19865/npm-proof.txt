@@ -1,0 +1,5 @@
+npm test -- t215 --jobs 1 --all-fails
+check-players: 295 player.position reads, all in the allowed places
+Error: Chrome never reported a debugging port.
+Crashpad TransactNamedPipe: The pipe has been ended. (0x6D); crash server failed to launch, self-terminating.
+Exit 1 before assertions. Unchanged t215 via elevated real camera: 4 pass / 0 fail (encoding-proof.json).

@@ -1,0 +1,16 @@
+[
+  {
+    "mode": "old-rate",
+    "pass": 5,
+    "fail": [],
+    "raw": "PASS the HQ house is there\nPASS a spider on a line that grazes the corner takes one with room (start 0.29 m clear, end 3.61 m; tight 0% of the time after 3 s; closest 5.7 m)\nPASS a spider on a line that grazes the corner takes one with room (start 0.29 m clear, end 3.65 m; tight 0% of the time after 3 s; closest 3.4 m)\nPASS a spider on a line that grazes the corner takes one with room (start 0.29 m clear, end 3.63 m; tight 0% of the time after 3 s; closest 3.4 m)\nPASS a spider on a line that grazes the corner takes one with room (start 0.29 m clear, end 3.61 m; tight 23% of the time after 3 s; closest 3.5 m)",
+    "errors": []
+  },
+  {
+    "mode": "half-rate",
+    "pass": 5,
+    "fail": [],
+    "raw": "PASS the HQ house is there\nPASS a spider on a line that grazes the corner takes one with room (start 0.29 m clear, end 2.80 m; tight 20% of the time after 3 s; closest 3.7 m)\nPASS a spider on a line that grazes the corner takes one with room (start 0.29 m clear, end 0.90 m; tight 24% of the time after 3 s; closest 3.6 m)\nPASS a spider on a line that grazes the corner takes one with room (start 0.29 m clear, end 3.27 m; tight 0% of the time after 3 s; closest 3.6 m)\nPASS a spider on a line that grazes the corner takes one with room (start 0.29 m clear, end 3.83 m; tight 0% of the time after 3 s; closest 3.5 m)",
+    "errors": []
+  }
+]

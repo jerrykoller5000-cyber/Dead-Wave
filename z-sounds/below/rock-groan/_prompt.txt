@@ -1,0 +1,9 @@
+#151 below/rock-groan
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: rockGroan()
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 3 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+Deep stone groaning and shifting in a cave ceiling, a few grains falling. No music, no voice.

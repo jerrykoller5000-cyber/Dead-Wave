@@ -1,0 +1,16 @@
+[
+  {
+    "kind": "guardian",
+    "tris": 40760,
+    "draws": 44,
+    "eyeCount": 4,
+    "poses": 120
+  },
+  {
+    "kind": "caveguard",
+    "tris": 39708,
+    "draws": 42,
+    "eyeCount": 2,
+    "poses": 120
+  }
+]

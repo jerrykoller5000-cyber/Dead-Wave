@@ -1,0 +1,30 @@
+# chatgpt — GP-19923 Readable demon hand fire — 2026-10-15
+
+Changed:          Replaced the broad wobbling fire cuff with seven narrower curling tongues, upward-traveling bright heat bands and six rising/shrinking embers baked into the existing fire draw. Motion has distinct tip movement, faster rising detail, different silhouettes on each hand and less solid orange coverage; final look still needs native review.
+Files:            game/zombie-ability-visuals.js; review/demon-fire-GP19923; review/zombie-sweep-GP19922/inspect-batch.mjs (append flame captures to the same queued browser).
+Tests:            node --test review/demon-fire-GP19923/motion.test.mjs game/zombie-ability-visuals.test.mjs → tests 12 / pass 12 / fail 0; saved motion-tests.log. Prepared capture modules pass node --check. No graphical game test launched in this task.
+Screenshots:      Not run: fresh slot required. Existing queued all-zombie batch now captures 12 before and 12 after fire frames under review/demon-fire-GP19923/{before,after}, using the same browser/page and actual inspector clock.
+Not verified:     Native appearance/readability, WebGPU/WebGL visual comparison and crowd performance await the queued slot; mathematical motion is not evidence that Jerry will prefer the final look. Full suite remains the coordinated integration job.
+Requests:         Claude asked to include GP-19923's short fire review in the existing queued GP-19922 batch. No new overlapping session requested or opened.
+Contract changes: None; existing attach/update/reset/launch API, per-hand draw budget and anchored launch positions retained.
+
+## Changes and proof
+
+- Fire silhouette: seven thinner interleaved tongues, nine height levels and gaps between tips. Each tongue has its own stretch/curl phase; successive hot lobes travel upward rather than only rocking the entire mesh.
+- Vertex colors move with the rising lobes, with a hotter yellow/orange core and cooler tips. Opacity reduced from .82 to .74 to expose more of the hand and separate the tongues.
+- Six fixed tetrahedral ember slots rise over a 0.7–0.8-second cycle and shrink to zero at reset. They share the tongue mesh/material: no extra game objects, lights, emitters or draw calls. Both fists still add two single-pass transparent draws total.
+- Shared geometry updates once per game timestamp; pause repeats the identical position/color buffers, seeking back reproduces the identical frame. Buffers are reused, with no per-frame particle allocation.
+- Motion test verifies pinned root vertices, tip displacement above .08 sculpture units and color changes above .12 within 80 ms; checks rising embers and finite in-bounds coordinates over 300 samples. These are motion/bounds checks, not a visual acceptance claim.
+- Existing nine ability-visual tests cover 48-body draw budget, cast launch from the actual surviving hand, limb loss, death hiding, pooled reset and Colossus prop continuity: all pass.
+
+## Queue and resume
+
+Jerry's one-game-test rule applies. No game launch and no slot claim in GP-19923. GP-19922 is already queued after Grokbot, Cursor's queue smoke and Antigravity; the fire check is appended to that same prepared child command:
+
+```
+node review/zombie-sweep-GP19922/inspect-batch.mjs
+```
+
+Use the verified queue wrapper when granted, respecting Jerry's manual inspector. The batch intercepts immutable pre-change module snapshots in its before pass and reloads onto current modules for after, including game/zombie-ability-visuals.js. It never restores those snapshots over live crew code. Review frames at real speed and a normal viewing distance, then adjust look/speed if necessary before accepting. Do not rerun snapshot.mjs or copy before.js over live source.
+
+The same user message reinforced GP-19922's all-zombie smoothing target. Its final body fixture now measures 142,454 → 162,152 triangles (+13.83%), not the earlier +0.47%; 64 focused tests and both Guardian rigs' 120 poses still pass. See the updated GP-19922 handoff. No Git operations performed.

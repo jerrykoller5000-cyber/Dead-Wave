@@ -1,0 +1,10 @@
+import fs from 'node:fs';import crypto from 'node:crypto';
+const path='ui/range-targets.js',original=fs.readFileSync(path,'utf8'),hash=s=>crypto.createHash('sha256').update(s).digest('hex');let s=original;
+s=s.replace("import {targetLayout} from './range-drills.js';","import {targetLayout} from './range-drills.js';\nimport {buildRangeControlModel} from './range-control-model.js';");
+const start=s.indexOf(' const metal=new T.MeshStandardMaterial',s.indexOf('export function createRangeProp')),end=s.indexOf(' const O=tg.origin,x=',start);if(start<0||end<0)throw Error('Model anchors missing');
+s=s.slice(0,start)+" const model=buildRangeControlModel(T,g,labels,owned);\n"+s.slice(end);
+s=s.replace("const halfX=Math.abs(Math.cos(at.yaw))*.675+Math.abs(at.nx)*.11,halfZ=Math.abs(at.nx)*.675+Math.abs(at.nz)*.11;","const depth=(model.front-model.back)/2,offset=(model.front+model.back)/2,cx=x+at.nx*offset,cz=z+at.nz*offset;\n const halfX=Math.abs(Math.cos(at.yaw))*model.halfWidth+Math.abs(at.nx)*depth,halfZ=Math.abs(at.nx)*model.halfWidth+Math.abs(at.nz)*depth;");
+s=s.replace('minX:x-halfX,maxX:x+halfX,minY:O.y+.825,maxY:O.y+1.975,minZ:z-halfZ,maxZ:z+halfZ','minX:cx-halfX,maxX:cx+halfX,minY:O.y+at.y-model.halfHeight,maxY:O.y+at.y+model.halfHeight,minZ:cz-halfZ,maxZ:cz+halfZ');
+s=s.replace('for(const m of [metal,mat])','for(const m of model.materials)');
+if(hash(fs.readFileSync(path,'utf8'))!==hash(original))throw Error('Source changed');fs.writeFileSync(path,s,'utf8');fs.writeFileSync('review/range-control-GP19909/change.json',JSON.stringify({file:path,before:hash(original),after:hash(s)},null,2));
+console.log('APPLIED UI exterior model; station position and interaction unchanged.');

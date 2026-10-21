@@ -1,0 +1,3 @@
+import fs from 'node:fs';import {spawnSync} from 'node:child_process';
+const dir='review/dive-clearance-GP19918';
+for(const[name,args]of [['native-extra',[dir+'/extra.mjs']],['perf-before',[dir+'/perf.mjs','--before']],['perf-after',[dir+'/perf.mjs']],['npm-focused',['tools/tests/run-all.mjs','t253','--jobs','1','--no-retry','--all-fails']],['report',[dir+'/report.mjs']]]){console.log('RUN',name);const r=spawnSync(process.execPath,args,{encoding:'utf8',timeout:300000}),log=(r.stdout||'')+(r.stderr||'')+(r.error?'\n'+r.error:'');fs.writeFileSync(dir+'/'+name+'.log',log);console.log(log);console.log('EXIT',name,r.status);if(r.status!==0||name==='npm-focused'&&/\bFAIL\s+t253|\bERROR\s+t253/.test(log))process.exit(1);}process.exit(0);

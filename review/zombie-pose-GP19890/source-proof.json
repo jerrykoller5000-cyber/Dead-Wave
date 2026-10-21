@@ -1,0 +1,17 @@
+[
+  {
+    "file": "game/screamer-behavior.js",
+    "before": "136d913d82d17793366a11e178863996e3d6c2bac51fdc71f62f2ce5d7a7f591",
+    "after": "6efbca95c737d7b36945f52dce207e32c97e69c4b7ed06f102648860d4b4087d"
+  },
+  {
+    "file": "game/bomber-behavior.js",
+    "before": "7972dab57832b1601f51eda753843ab1f5330d16e83d6cbbab4ea3c4e04f8918",
+    "after": "3687a6fa94a19c1b63c81ffde6f601c73a229aecd2193898416c693f70c42d0e"
+  },
+  {
+    "file": "index.html",
+    "before": "7d36bc9d00e5d312ee20386213429a05c018b799c973055160ec5d091a5f2bb0",
+    "after": "b14e2e4f71dd4834d963ff89e2b730876e20a25167e145c81c9a465f947486d1"
+  }
+]

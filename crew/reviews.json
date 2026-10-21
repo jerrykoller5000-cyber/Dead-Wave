@@ -1,0 +1,334 @@
+{
+  "note": "Written by node crew/crew.mjs; the panel reads review/<asset>/notes.md itself.",
+  "assets": [
+    {
+      "asset": "armory",
+      "owner": "claude",
+      "rig": null,
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "below-sound",
+      "owner": "claude",
+      "rig": null,
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "boat",
+      "owner": "claude",
+      "rig": null,
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "crouch-slope",
+      "owner": "claude",
+      "rig": "marine",
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "demo-drag",
+      "owner": "claude",
+      "rig": "guardian",
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "first-people",
+      "owner": "claude",
+      "rig": null,
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "fog-night",
+      "owner": "claude",
+      "rig": null,
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "fog-score",
+      "owner": "claude",
+      "rig": null,
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "guardian",
+      "owner": "claude",
+      "rig": "guardian",
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "guardian-boss",
+      "owner": "claude",
+      "rig": "cave-guardian",
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "guardian-drag",
+      "owner": "claude",
+      "rig": "guardian",
+      "clip": "drag",
+      "reference": "Push_Loop"
+    },
+    {
+      "asset": "guardian-gallop",
+      "owner": "claude",
+      "rig": "guardian",
+      "clip": "gallop",
+      "reference": "Sprint_Loop"
+    },
+    {
+      "asset": "guardian-grab-drag",
+      "owner": "claude",
+      "rig": "marine+guardian",
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "guardian-let-go",
+      "owner": "claude",
+      "rig": "marine+guardian",
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "guardian-pounce",
+      "owner": "claude",
+      "rig": "guardian",
+      "clip": "pounce",
+      "reference": "Zombie_Scratch"
+    },
+    {
+      "asset": "guardian-throw",
+      "owner": "claude",
+      "rig": "guardian",
+      "clip": "throw",
+      "reference": "OverhandThrow"
+    },
+    {
+      "asset": "guardian-throw-out",
+      "owner": "claude",
+      "rig": "marine+guardian",
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "guns",
+      "owner": "cursor",
+      "rig": null,
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "heart",
+      "owner": "claude",
+      "rig": null,
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "heart-score",
+      "owner": "claude",
+      "rig": null,
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "heron",
+      "owner": "claude",
+      "rig": null,
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "history",
+      "owner": "claude",
+      "rig": null,
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "inspect-audit-gp19919",
+      "owner": "chatgpt",
+      "rig": null,
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "lightning",
+      "owner": "claude",
+      "rig": null,
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "marine-carry",
+      "owner": "claude",
+      "rig": "marine",
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "marine-draw",
+      "owner": "claude",
+      "rig": "marine",
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "marine-fidelity",
+      "owner": "claude",
+      "rig": "marine",
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "marine-gait",
+      "owner": "claude",
+      "rig": "marine",
+      "clip": "walk",
+      "reference": "Walk_Loop"
+    },
+    {
+      "asset": "marine-hands",
+      "owner": "claude",
+      "rig": "marine",
+      "clip": "knife-slash",
+      "reference": null
+    },
+    {
+      "asset": "marine-knocked",
+      "owner": "grokbot",
+      "rig": "marine",
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "marine-reload",
+      "owner": "claude",
+      "rig": "marine",
+      "clip": "reload-rifle",
+      "reference": null
+    },
+    {
+      "asset": "marine-run",
+      "owner": "claude",
+      "rig": "marine",
+      "clip": "run",
+      "reference": "Jog_Fwd_Loop"
+    },
+    {
+      "asset": "marine-walk",
+      "owner": "claude",
+      "rig": "marine",
+      "clip": "walk",
+      "reference": "Walk_Loop"
+    },
+    {
+      "asset": "motion-marine-marine",
+      "owner": "grokbot",
+      "rig": "marine",
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "motion-zombie-shambler",
+      "owner": "grokbot",
+      "rig": "zombie",
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "night-lockdown",
+      "owner": "cursor",
+      "rig": null,
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "passages",
+      "owner": "cursor",
+      "rig": null,
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "places-sound",
+      "owner": "claude",
+      "rig": null,
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "player-survivors",
+      "owner": "claude",
+      "rig": "marine",
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "rabbit",
+      "owner": "claude",
+      "rig": null,
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "rune-finish",
+      "owner": "claude",
+      "rig": null,
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "suppressors",
+      "owner": "claude",
+      "rig": null,
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "survivors",
+      "owner": "claude",
+      "rig": "marine",
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "training",
+      "owner": "claude",
+      "rig": null,
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "wardrobe",
+      "owner": "claude",
+      "rig": "marine",
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "warrens",
+      "owner": "claude",
+      "rig": null,
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "zombie-reactions",
+      "owner": "grokbot",
+      "rig": "zombie",
+      "clip": null,
+      "reference": null
+    }
+  ]
+}

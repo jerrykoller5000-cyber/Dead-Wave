@@ -1,0 +1,107 @@
+{
+  "before": [
+    {
+      "line": 8402,
+      "name": "onMastHigh",
+      "text": "return !!L && player.position.y > L.foot + MAST_PERCH.minHigh;"
+    },
+    {
+      "line": 8416,
+      "name": "updateMastClimb",
+      "text": "player.position.x = L.x;"
+    },
+    {
+      "line": 8417,
+      "name": "updateMastClimb",
+      "text": "player.position.z = L.z;"
+    },
+    {
+      "line": 8418,
+      "name": "updateMastClimb",
+      "text": "const y0 = player.position.y;"
+    },
+    {
+      "line": 8419,
+      "name": "updateMastClimb",
+      "text": "player.position.y = Math.min(L.top, y0 + dir * MAST_PERCH.climbSpeed * dt);"
+    },
+    {
+      "line": 8420,
+      "name": "updateMastClimb",
+      "text": "mastClimb.acc += Math.abs(player.position.y - y0);   // a rung every 0.4 m (the ladder's own spacing)"
+    },
+    {
+      "line": 8423,
+      "name": "updateMastClimb",
+      "text": "if (player.position.y <= L.foot) {"
+    },
+    {
+      "line": 8424,
+      "name": "updateMastClimb",
+      "text": "player.position.y = L.foot;"
+    },
+    {
+      "line": 8434,
+      "name": "updateMastClimb",
+      "text": "const p = player.position;"
+    },
+    {
+      "line": 23940,
+      "name": "runDevCommand",
+      "text": "if (L) { letGoOfMast(); player.position.set(L.x, L.foot, L.z - 0.4); velX = 0; velZ = 0; vy = 0; grounded = true; showBanner('MAST', 'The fo"
+    }
+  ],
+  "after": [
+    {
+      "line": 8403,
+      "name": "onMastHigh",
+      "text": "return !!L && player.position.y > L.foot + MAST_PERCH.minHigh;"
+    },
+    {
+      "line": 8417,
+      "name": "updateMastClimb",
+      "text": "player.position.x = L.x;"
+    },
+    {
+      "line": 8418,
+      "name": "updateMastClimb",
+      "text": "player.position.z = L.z;"
+    },
+    {
+      "line": 8419,
+      "name": "updateMastClimb",
+      "text": "const y0 = player.position.y;"
+    },
+    {
+      "line": 8420,
+      "name": "updateMastClimb",
+      "text": "player.position.y = Math.min(L.top, y0 + dir * MAST_PERCH.climbSpeed * dt);"
+    },
+    {
+      "line": 8421,
+      "name": "updateMastClimb",
+      "text": "mastClimb.acc += Math.abs(player.position.y - y0);   // a rung every 0.4 m (the ladder's own spacing)"
+    },
+    {
+      "line": 8424,
+      "name": "updateMastClimb",
+      "text": "if (player.position.y <= L.foot) {"
+    },
+    {
+      "line": 8425,
+      "name": "updateMastClimb",
+      "text": "player.position.y = L.foot;"
+    },
+    {
+      "line": 8435,
+      "name": "updateMastClimb",
+      "text": "const p = player.position;"
+    },
+    {
+      "line": 23942,
+      "name": "runDevCommand",
+      "text": "if (L) { letGoOfMast(); player.position.set(L.x, L.foot, L.z - 0.4); velX = 0; velZ = 0; vy = 0; grounded = true; showBanner('MAST', 'The fo"
+    }
+  ],
+  "unchanged": true
+}

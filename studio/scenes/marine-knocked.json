@@ -1,0 +1,70 @@
+{
+  "format": "dw-scene/1",
+  "name": "marine-knocked",
+  "length": 5,
+  "notes": "GB-50 through D-42: a brute's swing from his left at 0.5 s (he staggers and keeps his feet), and a bomber's blast in front of the second marine (down, and up again).",
+  "actors": {
+    "swiped": {
+      "rig": "marine",
+      "at": [
+        0,
+        0,
+        -1.6
+      ],
+      "face": 90,
+      "clips": [
+        [
+          0,
+          "marine/stand"
+        ]
+      ],
+      "motion": "marine/marine",
+      "hits": [
+        [
+          0.5,
+          {
+            "at": "shoulderR",
+            "dir": [
+              0.2,
+              0.1,
+              1
+            ],
+            "power": 4,
+            "kind": "crush"
+          }
+        ]
+      ]
+    },
+    "blasted": {
+      "rig": "marine",
+      "at": [
+        0,
+        0,
+        1.6
+      ],
+      "face": 90,
+      "clips": [
+        [
+          0,
+          "marine/stand"
+        ]
+      ],
+      "motion": "marine/marine",
+      "hits": [
+        [
+          0.5,
+          {
+            "at": "pelvis",
+            "dir": [
+              -1,
+              0.4,
+              0
+            ],
+            "power": 7,
+            "kind": "blast"
+          }
+        ]
+      ]
+    }
+  }
+}

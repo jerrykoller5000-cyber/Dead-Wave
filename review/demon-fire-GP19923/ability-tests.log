@@ -1,0 +1,17 @@
+✔ a 48-body mixed crowd adds at most 36 idle ability draws (16.5394ms)
+✔ flame fists use a single transparent pass and stay attached while casting (18.7278ms)
+✔ a demon casts and launches from its surviving arm after either kind of limb loss (0.8048ms)
+✔ demon death hides active props without changing corpse pose, and pooling restores the idle budget (0.4645ms)
+✔ colossus death hides active props without changing corpse pose, and pooling restores the idle budget (0.6066ms)
+✔ colossus stone grab and release keep one continuous launch position at sculpture scale 0.75 (2.1092ms)
+✔ colossus stone grab and release keep one continuous launch position at sculpture scale 1 (1.6525ms)
+✔ colossus stone grab and release keep one continuous launch position at sculpture scale 1.8 (1.3111ms)
+✔ missing and replenishing stones switch carrier rendering without duplicate idle draws (0.3109ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 133.4253

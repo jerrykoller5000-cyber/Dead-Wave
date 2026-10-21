@@ -1,0 +1,22 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import {Engine} from '../../tools/camera.mjs';
+const before=process.argv.includes('--before'),dir='review/shambler-turn-GP19854',proof={};const E=new Engine({training:true,warm:'none',size:'1100x780'});
+if(before)E.load=async function(){const goto=this.page.goto.bind(this.page);this.page.goto=(url,...args)=>goto(url.replace('/index.html?',`/${dir}/before.html?`),...args);try{await Engine.prototype.load.call(this);}finally{this.page.goto=goto;}};
+try{
+ await E.open();proof.loadSec=E.loadSec;
+ await E.ev(`R.release();window.D=T.trainingDbg;D.panel().close();D.clear();T.AudioSys.setMuted(true);T.setHp(10000);T.player.position.set(-25,D.tg().floorY,-632);window.F=T.spawnZombie(-32,-632,'shambler',true,true);F.trainingZ=true;F.mesh.position.y=D.tg().floorY;F.mesh.rotation.y=Math.PI/2;F.hp=10000;F.riseT=0;F.attackCd=100;window.S=await import('/game/shambler-steering.js');window.samples=[];window.stopPreview=false;window.takeAt=performance.now();return true;`);
+ const encoded=await E.ev(`const canvas=T.renderer.domElement,chunks=[];const recorder=new MediaRecorder(canvas.captureStream(60),{mimeType:'video/webm;codecs=vp9',videoBitsPerSecond:6500000});recorder.ondataavailable=e=>{if(e.data.size)chunks.push(e.data);};const end=new Promise(r=>recorder.onstop=r);recorder.start();window.still=null;
+ const path=t=>{if(t<.8)return[-25,-632];if(t<1.6)return[-25,-632-(t-.8)*7.5];if(t<2.6)return[-25-(t-1.6)*8,-638];if(t<3.4)return[-33,-638+(t-2.6)*7.5];if(t<4.5)return[-33+(t-3.4)*8,-632];return[-24.2,-632-(t-4.5)*6];};
+ const frame=()=>{if(stopPreview)return;const t=(performance.now()-takeAt)/1000,[px,pz]=path(t);T.player.position.set(px,D.tg().floorY,pz);const p=F.mesh.position,u=F.mesh.userData;
+ samples.push({t,x:p.x,z:p.z,yaw:F.mesh.rotation.y,px,pz,hip:u.hips.rotation.y,knee:u.legLG.userData.shinG.rotation.x,wind:F.attackWindup});
+ T.setShotView({x:p.x+4.3,y:p.y+3.4,z:p.z+5.5,tx:p.x,ty:p.y+.8,tz:p.z,fov:42});if(!still&&t>2.1)still=canvas.toDataURL('image/png').split(',')[1];requestAnimationFrame(frame);};frame();await wait(6400);stopPreview=true;recorder.stop();await end;const bytes=new Uint8Array(await new Blob(chunks).arrayBuffer());let s='';for(let i=0;i<bytes.length;i+=8192)s+=String.fromCharCode(...bytes.subarray(i,i+8192));return btoa(s);`,15000);
+ fs.writeFileSync(`${dir}/${before?'before':'after'}.webm`,Buffer.from(encoded,'base64'));
+ const still=await E.ev(`return still;`);fs.writeFileSync(`${dir}/${before?'before':'after'}-turn-frame.png`,Buffer.from(still,'base64'));
+ proof.samples=await E.ev(`return samples;`);
+ const rates=proof.samples.slice(1).filter((s,i)=>s.t-proof.samples[i].t>.005).map((s)=>{const prev=proof.samples[proof.samples.indexOf(s)-1];return Math.abs(Math.atan2(Math.sin(s.yaw-prev.yaw),Math.cos(s.yaw-prev.yaw)))/(s.t-prev.t);});
+ proof.maxObservedRate=Math.max(...rates);proof.maxHipTwist=Math.max(...proof.samples.map(s=>Math.abs(s.hip)));assert.ok(proof.samples.length>200);
+ if(!before)assert.ok(proof.maxObservedRate<3.2,'actual body no longer snaps across pursuit corners');
+ await E.ev(`D.openPanel();D.panel().element.hidden=true;return true;`);
+ const cam=await E.ev(`const p=F.mesh.position;return {x:p.x+4.3,y:p.y+3.4,z:p.z+5.5,tx:p.x,ty:p.y+.8,tz:p.z,fov:42};`);
+ await E.shoot({target:'player',cam,out:`${dir}/${before?'before':'after'}.png`});
+ proof.errors=E.page.errors;assert.equal(proof.errors.length,0);console.log(JSON.stringify({loadSec:proof.loadSec,frames:proof.samples.length,maxObservedRate:proof.maxObservedRate,maxHipTwist:proof.maxHipTwist,errors:proof.errors}));
+}finally{fs.writeFileSync(`${dir}/${before?'before':'after'}-proof.json`,JSON.stringify(proof,null,2));await E.close();}process.exit(0);

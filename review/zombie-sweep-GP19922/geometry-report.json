@@ -1,0 +1,169 @@
+{
+  "at": "2026-10-15T08:46:40.741Z",
+  "models": [
+    {
+      "type": "shambler",
+      "before": {
+        "tris": 8942,
+        "draws": 13
+      },
+      "after": {
+        "tris": 10068,
+        "draws": 13
+      }
+    },
+    {
+      "type": "feral",
+      "before": {
+        "tris": 8730,
+        "draws": 13
+      },
+      "after": {
+        "tris": 9884,
+        "draws": 13
+      }
+    },
+    {
+      "type": "brute",
+      "before": {
+        "tris": 12452,
+        "draws": 13
+      },
+      "after": {
+        "tris": 14316,
+        "draws": 13
+      },
+      "breakableArmor": [
+        "front",
+        "back",
+        "left",
+        "right"
+      ]
+    },
+    {
+      "type": "military",
+      "before": {
+        "tris": 11918,
+        "draws": 13
+      },
+      "after": {
+        "tris": 13068,
+        "draws": 13
+      }
+    },
+    {
+      "type": "spitter",
+      "before": {
+        "tris": 10194,
+        "draws": 15
+      },
+      "after": {
+        "tris": 11616,
+        "draws": 15
+      },
+      "articulatedJaw": true
+    },
+    {
+      "type": "bomber",
+      "before": {
+        "tris": 12894,
+        "draws": 15
+      },
+      "after": {
+        "tris": 15276,
+        "draws": 15
+      }
+    },
+    {
+      "type": "screamer",
+      "before": {
+        "tris": 10126,
+        "draws": 13
+      },
+      "after": {
+        "tris": 11156,
+        "draws": 13
+      },
+      "articulatedTongue": true
+    },
+    {
+      "type": "drowned",
+      "before": {
+        "tris": 10826,
+        "draws": 13
+      },
+      "after": {
+        "tris": 11952,
+        "draws": 13
+      }
+    },
+    {
+      "type": "leaper",
+      "before": {
+        "tris": 9224,
+        "draws": 13
+      },
+      "after": {
+        "tris": 10914,
+        "draws": 13
+      }
+    },
+    {
+      "type": "spider",
+      "before": {
+        "tris": 6382,
+        "draws": 16
+      },
+      "after": {
+        "tris": 7658,
+        "draws": 16
+      }
+    },
+    {
+      "type": "colossus",
+      "before": {
+        "tris": 12350,
+        "draws": 14
+      },
+      "after": {
+        "tris": 14676,
+        "draws": 14
+      }
+    },
+    {
+      "type": "demon",
+      "before": {
+        "tris": 12720,
+        "draws": 14
+      },
+      "after": {
+        "tris": 12720,
+        "draws": 14
+      }
+    },
+    {
+      "type": "guardian",
+      "before": {
+        "tris": 7848,
+        "draws": 13
+      },
+      "after": {
+        "tris": 9632,
+        "draws": 13
+      }
+    },
+    {
+      "type": "caveguard",
+      "before": {
+        "tris": 7848,
+        "draws": 13
+      },
+      "after": {
+        "tris": 9632,
+        "draws": 13
+      }
+    }
+  ],
+  "beforeTriangles": 142454,
+  "afterTriangles": 162568
+}

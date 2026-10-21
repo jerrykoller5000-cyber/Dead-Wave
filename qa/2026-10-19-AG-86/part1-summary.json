@@ -1,0 +1,190 @@
+{
+  "at": "2026-10-19T20:10:57.843Z",
+  "renderer": "WebGPURenderer",
+  "feet": [
+    {
+      "id": "zombie.brute",
+      "shot": "qa/2026-10-19-AG-86/shots/gp19929-brute-walk-side.png",
+      "minSoleRelM": null,
+      "maxSoleRelM": null,
+      "info": {
+        "meshes": 2,
+        "drawables": 2,
+        "tris": 5896,
+        "points": 0,
+        "segments": 0,
+        "materials": 2
+      }
+    },
+    {
+      "id": "zombie.drowned",
+      "shot": "qa/2026-10-19-AG-86/shots/gp19929-drowned-walk-side.png",
+      "minSoleRelM": null,
+      "maxSoleRelM": null,
+      "info": {
+        "meshes": 2,
+        "drawables": 2,
+        "tris": 5684,
+        "points": 0,
+        "segments": 0,
+        "materials": 2
+      }
+    },
+    {
+      "id": "zombie.spitter",
+      "shot": "qa/2026-10-19-AG-86/shots/gp19929-spitter-walk-side.png",
+      "minSoleRelM": null,
+      "maxSoleRelM": null,
+      "info": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 5228,
+        "points": 0,
+        "segments": 0,
+        "materials": 3
+      }
+    },
+    {
+      "id": "zombie.military",
+      "shot": "qa/2026-10-19-AG-86/shots/gp19929-military-walk-side.png",
+      "minSoleRelM": null,
+      "maxSoleRelM": null,
+      "info": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 5952,
+        "points": 0,
+        "segments": 0,
+        "materials": 3
+      }
+    },
+    {
+      "id": "zombie.colossus",
+      "shot": "qa/2026-10-19-AG-86/shots/gp19929-colossus-walk-side.png",
+      "minSoleRelM": null,
+      "maxSoleRelM": null,
+      "info": {
+        "meshes": 4,
+        "drawables": 4,
+        "tris": 6800,
+        "points": 0,
+        "segments": 0,
+        "materials": 4
+      }
+    }
+  ],
+  "budgetModels": [
+    {
+      "id": "zombie.military",
+      "frontShot": "qa/2026-10-19-AG-86/shots/gp19930-military-front.png",
+      "threeShot": "qa/2026-10-19-AG-86/shots/gp19930-military-three.png",
+      "info": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 5952,
+        "points": 0,
+        "segments": 0,
+        "materials": 3
+      },
+      "size": {
+        "x": 1.3286815008404744,
+        "y": 2.045532261435625,
+        "z": 1.378964830078644
+      },
+      "errors": []
+    },
+    {
+      "id": "zombie.bomber",
+      "frontShot": "qa/2026-10-19-AG-86/shots/gp19930-bomber-front.png",
+      "threeShot": "qa/2026-10-19-AG-86/shots/gp19930-bomber-three.png",
+      "info": {
+        "meshes": 4,
+        "drawables": 4,
+        "tris": 5936,
+        "points": 0,
+        "segments": 0,
+        "materials": 4
+      },
+      "size": {
+        "x": 1.951997471439043,
+        "y": 2.0966717484000412,
+        "z": 1.7565456046934287
+      },
+      "errors": []
+    },
+    {
+      "id": "zombie.screamer",
+      "frontShot": "qa/2026-10-19-AG-86/shots/gp19930-screamer-front.png",
+      "threeShot": "qa/2026-10-19-AG-86/shots/gp19930-screamer-three.png",
+      "info": {
+        "meshes": 4,
+        "drawables": 4,
+        "tris": 5768,
+        "points": 0,
+        "segments": 0,
+        "materials": 4
+      },
+      "size": {
+        "x": 2.1497897418881386,
+        "y": 2.5301015899201786,
+        "z": 1.5803461309474187
+      },
+      "errors": []
+    },
+    {
+      "id": "zombie.demon",
+      "frontShot": "qa/2026-10-19-AG-86/shots/gp19930-demon-front.png",
+      "threeShot": "qa/2026-10-19-AG-86/shots/gp19930-demon-three.png",
+      "info": {
+        "meshes": 4,
+        "drawables": 4,
+        "tris": 5672,
+        "points": 0,
+        "segments": 0,
+        "materials": 4
+      },
+      "size": {
+        "x": 2.4430744843271484,
+        "y": 3.0747380671787425,
+        "z": 2.0855173920341485
+      },
+      "errors": []
+    },
+    {
+      "id": "zombie.spitter",
+      "frontShot": "qa/2026-10-19-AG-86/shots/gp19930-spitter-front.png",
+      "threeShot": "qa/2026-10-19-AG-86/shots/gp19930-spitter-three.png",
+      "info": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 5228,
+        "points": 0,
+        "segments": 0,
+        "materials": 3
+      },
+      "size": {
+        "x": 0.9798081486409274,
+        "y": 1.9838330668642357,
+        "z": 1.0030737988981855
+      },
+      "errors": []
+    }
+  ],
+  "benchNight20High": {
+    "scenario": "night",
+    "seconds": 30,
+    "fps": 32.4,
+    "low": 22.8,
+    "worst": 40.1,
+    "hitches": 5,
+    "draws": 672,
+    "triangles": 1017130,
+    "zombies": 48,
+    "gfx": "high",
+    "windows": 10,
+    "night": 20,
+    "push": 5,
+    "pushes": 6,
+    "last": true
+  }
+}

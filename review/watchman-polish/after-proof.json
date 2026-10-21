@@ -1,0 +1,46 @@
+{
+  "phase": "after",
+  "setup": {
+    "position": [
+      -24,
+      -200,
+      -640
+    ],
+    "gunChildren": 4
+  },
+  "mount": {
+    "mounted": true,
+    "position": [
+      -24,
+      -200,
+      -638.56
+    ],
+    "prompt": "E — Leave the Watchman MG · T — Shoulder it",
+    "hud": {
+      "belt": 500,
+      "feedT": 0,
+      "reserve": 0,
+      "flash": false,
+      "hud": "500 / 1000 · 0 spare · AUTO",
+      "hudName": "Watchman MG"
+    }
+  },
+  "fire": {
+    "start": 500,
+    "end": 488,
+    "spent": 12,
+    "afterRelease": 488
+  },
+  "carry": {
+    "state": {
+      "hp": 120,
+      "kind": "m240",
+      "belt": 488,
+      "liftAge": 0.9252999999970196
+    },
+    "visible": true,
+    "mortar": false
+  },
+  "errors": [],
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+}

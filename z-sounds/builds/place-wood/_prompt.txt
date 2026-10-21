@@ -1,0 +1,9 @@
+#86 builds/place-wood  (start here)
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: place() / buildSound
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.8 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+Hammering a wooden barricade together, three quick hammer blows on planks. No music, no voice.

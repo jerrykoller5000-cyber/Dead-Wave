@@ -1,0 +1,132 @@
+{
+  "at": "2026-10-09T11:37:50.716Z",
+  "scope": "Read-only CPU diagnosis; no browser or production/test edits.",
+  "hashes": {
+    "index.html": "b65c91d4c11ae732134835bbce281cc0d92a80960132b8890abecdfbf4ae0834",
+    "studio/weapon-sidearms.js": "9fb3936f9ee16f1373dedc07df53a4a05c067579a734f9d4fed3e72991d26be6",
+    "tools/tests/fakethree.mjs": "ee2952439d6061976a941af08f0c91cd57cbee8aaa1a9a0e5017feff6b39999b",
+    "tools/tests/t146.js": "7c49130f1fe4f9572e70345373d5cb93f499d1f516174b3315b6f0ec5d7b2644",
+    "tools/tests/t196.js": "b18bdb5b5c3fbe12c3044873799237260ef73c1d950dcb58114d7196966ae8e4",
+    "tools/tests/t218.js": "17b3e3962f6332c328904cc3dbe92741cbf318d4dd51a8c4f5eb23d345cacd3a"
+  },
+  "fakeThreeMtime": "2026-10-09T09:10:56.347Z",
+  "probes": {
+    "actualThree": {
+      "oldClone": {
+        "sameGeometry": true,
+        "sameMaterial": true,
+        "positionVertices": 24,
+        "camoIdentity": true
+      },
+      "currentCloneLean": {
+        "sameGeometry": true,
+        "sameMaterial": true,
+        "positionVertices": 24,
+        "camoIdentity": true
+      },
+      "limbBox": "PASS",
+      "cloneSeatSample": [
+        0,
+        -0.05999999865889549,
+        0
+      ]
+    },
+    "fakeThree": {
+      "oldClone": {
+        "sameGeometry": true,
+        "sameMaterial": true,
+        "positionVertices": 24,
+        "camoIdentity": true
+      },
+      "currentCloneLean": {
+        "sameGeometry": false,
+        "sameMaterial": false,
+        "positionVertices": 0,
+        "camoIdentity": false
+      },
+      "limbBox": "TypeError: (intermediate value).copy(...).applyMatrix4 is not a function",
+      "cloneSeatSample": [
+        0,
+        1000000000,
+        0
+      ]
+    }
+  },
+  "baselineComparison": {
+    "spawnLimbPiece": {
+      "baselinePresent": true,
+      "currentPresent": true,
+      "unchanged": false
+    },
+    "cloneLean": {
+      "baselinePresent": false,
+      "currentPresent": true,
+      "unchanged": false
+    },
+    "reloadLocalBox": {
+      "baselinePresent": true,
+      "currentPresent": true,
+      "unchanged": true
+    },
+    "reloadMagFoot": {
+      "baselinePresent": true,
+      "currentPresent": true,
+      "unchanged": true
+    },
+    "reloadWellWorld": {
+      "baselinePresent": true,
+      "currentPresent": true,
+      "unchanged": true
+    },
+    "reloadPouchWorld": {
+      "baselinePresent": true,
+      "currentPresent": true,
+      "unchanged": true
+    },
+    "akimboReloadAnchor": {
+      "baselinePresent": true,
+      "currentPresent": true,
+      "unchanged": true
+    },
+    "akimboReloadDip": {
+      "baselinePresent": true,
+      "currentPresent": true,
+      "unchanged": true
+    },
+    "syncDualWeaponParts": {
+      "baselinePresent": true,
+      "currentPresent": true,
+      "unchanged": true
+    },
+    "registerGunFurniture": {
+      "baselinePresent": true,
+      "currentPresent": true,
+      "unchanged": true
+    },
+    "dressGuns": {
+      "baselinePresent": true,
+      "currentPresent": true,
+      "unchanged": true
+    }
+  },
+  "diagnosis": {
+    "t196": "All nine blade assertions precede t196.js:55 killZombie. Current CL-136 spawnLimbPiece index.html:13420/13433 uses Box3.applyMatrix4; FakeThree Box3 at lines 534-552 lacks this method. Baseline uses Box3.setFromObject, supported by FakeThree. Sidearm code is not in this exception path.",
+    "t146": "t146.js:75 requires the offhand Uzi mesh to share a registered furniture material. CL-136 cloneLean index.html:13409 uses new obj.constructor().copy(obj,false); FakeThree Mesh (line 348) inherits transform-only Object3D.copy (line 342), dropping geometry/material. Baseline index.html:19017 uses clone(true), whose FakeThree method preserves both (lines 335-340). The standalone reproduction fails with an ordinary BoxGeometry, independent of weapon constructors.",
+    "t218": "The same empty offhand mesh makes seatOf t218.js:49 retain lo.y=1e9. Its nearest pouch result is capped by the [9,9] sentinel at line 130, explaining the reported 9.000 m. Reload bounds/foot/pouch/akimbo helper functions are identical to baseline, and existing sidearms-audit.json establishes bit-identical Pistol/Uzi magazines. Exact second npm failure line was not retained by summary-only runner; not invented here.",
+    "realRenderer": "Existing before-t218.txt and after-t218.txt each contain 66 PASS and no FAIL; after pistol akimbo pouch line reports 0.000 / 0.000 m. Actual Three reproduction preserves geometry/material and supports Box3.applyMatrix4.",
+    "action": "No cosmetic or test expectation change warranted. Harness owner needs equivalent Mesh.copy and Box3.applyMatrix4 support for the current CL-136 source. Sidearm materials remain original context identities; no shared material/prototype mutation found."
+  },
+  "realReload": {
+    "before": {
+      "pass": 66,
+      "fail": 0,
+      "pistolPouch": "PASS pistol akimbo: each gun's well comes onto its own side's pouch (0.000 / 0.000 m)"
+    },
+    "after": {
+      "pass": 66,
+      "fail": 0,
+      "pistolPouch": "PASS pistol akimbo: each gun's well comes onto its own side's pouch (0.000 / 0.000 m)"
+    }
+  },
+  "result": "DIAGNOSIS REPRODUCED"
+}

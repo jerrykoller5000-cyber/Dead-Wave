@@ -1,0 +1,36 @@
+GP-19903 shared regression attempt, 2026-10-13
+
+npm test -- --jobs 1 --no-retry
+check-players: 294 player.position reads, all in the allowed places
+Chrome never reported a debugging port; Crashpad failed to launch in sandbox.
+
+Retried outside the sandbox: npm test -- --no-retry
+check-players: 294 player.position reads, all in the allowed places
+Observed completed tests before stopping the broad run:
+t0 2 pass / 0 fail
+tfish 7 / 0
+t1 2 / 2
+t6a 2 / 0
+t2 5 / 0
+t3 4 / 1
+t4 6 / 0
+t5 31 / 0
+t7 16 / 0
+t9 19 / 0
+t8 3 / 0
+t6 21 / 0
+t10 30 / 0
+t11 13 / 0
+t14 11 / 2
+t12 22 / 0
+t13 8 / 0
+
+The full 244-test run was not completed. These pages took 23–74 seconds
+each, and this presentation module is not imported by the game or shared tests.
+The run was stopped with Ctrl-C after the above results. No test assertions
+were edited, weakened, or skipped inside the runner.
+
+t1 2/2 and t3 4/1 match the retained baseline in
+handoffs/2026-10-11-chatgpt-GP-19856.md. t14's two failures were not triaged
+or shown to be pre-existing in this task. Full-suite completion and triage
+remain with the commit owner. Native dance validation is recorded separately.

@@ -1,0 +1,45 @@
+{
+  "loadSec": 17.644,
+  "headed": {
+    "darts": 1
+  },
+  "headless": {
+    "headLost": true,
+    "maxDarts": 0,
+    "maxWind": 0,
+    "maxAttack": 0,
+    "travel": 2.896710615099649,
+    "from": [
+      -30,
+      -200,
+      -632
+    ],
+    "to": [
+      -30.4469182506012,
+      -200,
+      -634.8620266359541
+    ],
+    "hp": 9998.95,
+    "armor": 9998.05
+  },
+  "contact": {
+    "winds": 0,
+    "buildBefore": 40,
+    "buildAfter": 40,
+    "hpBefore": 9998.95,
+    "hpAfter": 9998.95,
+    "armorBefore": 9998.05,
+    "armorAfter": 9998.05,
+    "darts": 0
+  },
+  "perf": {
+    "headed": 54.5230697068799,
+    "headless": 60.11088415523782,
+    "live": 48
+  },
+  "pool": {
+    "headLost": false,
+    "headVisible": true
+  },
+  "errors": []
+}

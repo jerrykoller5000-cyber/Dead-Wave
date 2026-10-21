@@ -1,0 +1,409 @@
+{
+  "format": "dw-scene/1",
+  "name": "guardian-grab-drag",
+  "notes": "CL-64, the first real scene (D-41). The marine runs from it; the guardian, facing him, lunges low and takes his ankle from behind (Jerry: a creature grabs facing its target, aiming for the leg), rears back and yanks him off his feet onto his face, walks its body round the leg it holds (so he isn't swung through the air) to face its cave, and hauls him away at a walking drag with its steps matched to the ground. Scene +Z is the way to the cave; the game lays the haul path to the real mouth.",
+  "length": 5.5,
+  "actors": {
+    "marine": {
+      "rig": "marine",
+      "at": [
+        [
+          0,
+          [
+            0,
+            0,
+            0.56
+          ]
+        ],
+        [
+          0.4,
+          [
+            0,
+            0,
+            0
+          ],
+          "linear"
+        ]
+      ],
+      "face": 180,
+      "clips": [
+        [
+          0,
+          "marine/flee",
+          {
+            "stride": 0.84
+          }
+        ],
+        [
+          0.4,
+          "marine/fall",
+          {
+            "fade": 0.15
+          }
+        ],
+        [
+          0.75,
+          "marine/dragged",
+          {
+            "fade": 0.25,
+            "loop": true
+          }
+        ]
+      ],
+      "tilt": [
+        [
+          0.42,
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        [
+          0.8,
+          [
+            82,
+            0,
+            0
+          ],
+          "in"
+        ]
+      ],
+      "rise": [
+        [
+          0.42,
+          0
+        ],
+        [
+          0.8,
+          0.13,
+          "in"
+        ]
+      ]
+    },
+    "guardian": {
+      "rig": "guardian",
+      "at": [
+        [
+          0,
+          [
+            0.1,
+            0,
+            2.9
+          ]
+        ],
+        [
+          0.38,
+          [
+            0.1,
+            0,
+            1.8
+          ],
+          "inout"
+        ],
+        [
+          0.55,
+          [
+            0.1,
+            0,
+            1.85
+          ]
+        ],
+        [
+          0.85,
+          [
+            0.1,
+            0,
+            2.4
+          ],
+          "inout"
+        ],
+        [
+          0.95,
+          [
+            0.081,
+            0,
+            2.388
+          ],
+          "linear"
+        ],
+        [
+          1.05,
+          [
+            -0.018,
+            0,
+            2.415
+          ],
+          "linear"
+        ],
+        [
+          1.15,
+          [
+            -0.183,
+            0,
+            2.482
+          ],
+          "linear"
+        ],
+        [
+          1.25,
+          [
+            -0.447,
+            0,
+            2.579
+          ],
+          "linear"
+        ],
+        [
+          1.35,
+          [
+            -0.852,
+            0,
+            2.634
+          ],
+          "linear"
+        ],
+        [
+          1.45,
+          [
+            -1.366,
+            0,
+            2.516
+          ],
+          "linear"
+        ],
+        [
+          1.55,
+          [
+            -1.824,
+            0,
+            2.168
+          ],
+          "linear"
+        ],
+        [
+          1.65,
+          [
+            -2.043,
+            0,
+            1.793
+          ],
+          "linear"
+        ],
+        [
+          1.75,
+          [
+            -2.049,
+            0,
+            1.578
+          ],
+          "linear"
+        ],
+        [
+          1.85,
+          [
+            -1.957,
+            0,
+            1.604
+          ],
+          "linear"
+        ],
+        [
+          1.95,
+          [
+            -1.953,
+            0,
+            1.591
+          ],
+          "linear"
+        ],
+        [
+          2.05,
+          [
+            -1.979,
+            0,
+            1.522
+          ],
+          "linear"
+        ],
+        [
+          2.15,
+          [
+            -1.991,
+            0,
+            1.481
+          ],
+          "linear"
+        ]
+      ],
+      "path": "haul",
+      "onPath": [
+        [
+          2.15,
+          0
+        ],
+        [
+          2.3,
+          1
+        ]
+      ],
+      "aim": {
+        "at": "marine.footL",
+        "w": [
+          [
+            0,
+            1
+          ],
+          [
+            0.85,
+            1
+          ],
+          [
+            2.15,
+            0,
+            "smooth"
+          ]
+        ],
+        "turn": 1
+      },
+      "targets": {
+        "ankle": "marine.footL"
+      },
+      "clips": [
+        [
+          0,
+          "guardian/lunge"
+        ],
+        [
+          0.4,
+          "guardian/pull",
+          {
+            "fade": 0.08
+          }
+        ],
+        [
+          0.85,
+          "guardian/turn",
+          {
+            "fade": 0.1,
+            "speed": 0.77
+          }
+        ],
+        [
+          2.15,
+          "guardian/haul",
+          {
+            "fade": 0.2,
+            "loop": true,
+            "stride": 1.6
+          }
+        ]
+      ]
+    }
+  },
+  "paths": {
+    "haul": {
+      "points": [
+        [
+          -1.991,
+          0,
+          1.481
+        ],
+        [
+          -1.991,
+          0,
+          20
+        ]
+      ],
+      "speed": [
+        [
+          0,
+          0
+        ],
+        [
+          2.1,
+          0
+        ],
+        [
+          2.9,
+          2.2,
+          "inout"
+        ]
+      ]
+    }
+  },
+  "holds": [
+    {
+      "from": "guardian.handR",
+      "to": "marine.footL",
+      "reach": [
+        [
+          0.12,
+          0
+        ],
+        [
+          0.38,
+          1,
+          "out"
+        ],
+        [
+          0.45,
+          1
+        ],
+        [
+          0.6,
+          0,
+          "inout"
+        ]
+      ],
+      "tow": [
+        [
+          0.4,
+          0
+        ],
+        [
+          0.5,
+          1
+        ]
+      ],
+      "lift": [
+        [
+          0.42,
+          0
+        ],
+        [
+          0.65,
+          1,
+          "inout"
+        ]
+      ],
+      "trail": [
+        [
+          0.85,
+          0
+        ],
+        [
+          2.3,
+          1,
+          "inout"
+        ]
+      ]
+    }
+  ],
+  "checks": {
+    "gap": 0.06,
+    "slide": 0.08,
+    "speed": {
+      "guardian": [
+        0,
+        2.6,
+        2.1
+      ],
+      "marine": [
+        0,
+        3.5,
+        0.9
+      ]
+    }
+  }
+}

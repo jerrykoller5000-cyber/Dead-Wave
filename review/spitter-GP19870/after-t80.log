@@ -1,0 +1,14 @@
+PASS the HQ house is there
+PASS the spider starts with the house between them
+PASS it comes round until the house is out of the line (clear after 5.1 s, in the line 100% of the time after; clear of the house)
+PASS and it stays at range: never closer than 5.4 m
+PASS a spitter behind the house keeps creeping in (moved 7.5 m, 13.0 to 7.8 m)
+PASS a spider in the open holds its band (11.0 to 12.8 m)
+PASS a flanker behind the house comes round to him (closest 0.9 m in 30 s; ended at -4.7,-5.4)
+PASS a spider blind inside its back-off range comes on round the corner (clear after 0.9 s; clear of the house; 2.5 to 7.3 m)
+PASS a spider on a line that grazes the corner takes one with room (start 0.29 m clear, end 3.83 m; tight 0% of the time after 3 s; closest 3.5 m)
+PASS the night-12 spot, the line 0.91 m from the ammo kiosk: the spider reads a line and his AK kills it (line true, dead)
+PASS three wall pieces between them stop his rounds (3 walls; 0 damage; trigger held 91 ticks, 0 with his gun not by him)
+PASS a spider behind his wall reads no line (line false)
+PASS and comes on round the wall instead of holding behind it (closest 3.9 m, ended at -12.3,-13.8)
+PASS one 13 m step that spans his wall and the spider: the wall stops it (plain stopped, piercing stopped; control from past the wall hits)

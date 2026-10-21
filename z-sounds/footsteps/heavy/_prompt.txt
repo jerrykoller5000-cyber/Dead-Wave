@@ -1,0 +1,9 @@
+#90 footsteps-heavy
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 0.8 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A single heavy, thudding footstep of a huge creature on dirt, with weight and a low thump. No voice, no music.
+
+In the game: heavyStep() — brute, demon

@@ -1,0 +1,298 @@
+    function killZombie(z, award = true, deathInfo = null) {
+      if (!z.alive) return;
+      z.alive = false;
+      if (z.fogHidden && z.mesh) { z.fogHidden = false; z.mesh.visible = true; }   // GB-59: the corpse is his to walk up to
+      // GP-38 (ChatGPT's request): the last guard of a POI down is a cleared site, once per post.
+      // retirePoiGuards (the alarm) and clearZombies (resets) never come through here, so neither is a clear.
+      if (z.poiGuard && !z.poiGuard.cleared && !zombies.some((o) => o !== z && o.alive && o.poiGuard === z.poiGuard)) {
+        z.poiGuard.cleared = true;
+        publishUI('poi-cleared', { kind: z.poiGuard.kind, index: z.poiGuard.index, x: z.poiGuard.x, z: z.poiGuard.z, count: z.poiGuard.n || 0 });
+        if (z.poiGuard.bounty) settleBounty(z.poiGuard);   // GB-57: the reward, after its poi-cleared
+      }
+      const info = deathInfo || { kind: 'generic', dir: { x: 0, z: 0 }, defense: true };
+      const kind = info.kind || 'generic';
+      const dx = (info.dir && info.dir.x) || 0;
+      const dz = (info.dir && info.dir.z) || 0;
+      const px = z.mesh.position.x, py = z.mesh.position.y, pz = z.mesh.position.z;
+      const skin = z.mesh.userData.skinColor || 0x8a7a60;
+      const eye = z.mesh.userData.eyeColor || 0x88ff44;
+      const hitY = py + (z.hitH || 1.4) * 0.55;
+      if (!z.partsLost) z.partsLost = emptyPartsLost();
+
+      if (kind === 'explosive') {
+        spawnBlood(px, hitY, pz, dx, dz, 26, 2.0);
+        spawnGibBurst(px, hitY, pz, skin, eye, dx, dz, 'explosive');
+        // Full body gib — fling remaining limbs then dispose mesh
+        for (const k of PART_KEYS) {
+          if (!z.partsLost[k]) detachZombiePart(z, k, dx + (Math.random() - 0.5), dz + (Math.random() - 0.5));
+        }
+        z.mesh.userData.gibbed = true;
+        z.mesh.userData.dismembered = true;
+        recycleOrDisposeZombie(z, true);
+      } else if (kind === 'chainsaw') {
+        spawnBlood(px, hitY, pz, dx, dz, 22, 1.7);
+        spawnGibBurst(px, hitY, pz, skin, eye, dx, dz, 'chainsaw');
+        // Heavy meat spray along blade dir + sequential remaining limbs
+        for (const k of PART_KEYS) {
+          if (!z.partsLost[k] && Math.random() < 0.85) detachZombiePart(z, k, dx, dz);
+        }
+        z.mesh.userData.gibbed = true;
+        z.mesh.userData.dismembered = true;
+        recycleOrDisposeZombie(z, true);
+      } else if (kind === 'pellet') {
+        spawnBlood(px, hitY, pz, dx, dz, 18, 1.5);
+        spawnGibBurst(px, hitY, pz, skin, eye, dx, dz, 'pellet');
+        if (Math.random() < 0.65) {
+          const avail = PART_KEYS.filter((k) => !z.partsLost[k]);
+          if (avail.length) detachZombiePart(z, avail[(Math.random() * avail.length) | 0], dx, dz);
+        }
+        if (!beginCorpse(z, dx, dz, info)) recycleOrDisposeZombie(z, z.mesh && z.mesh.userData.dismembered);
+      } else if (kind === 'melee') {
+        spawnBlood(px, hitY, pz, dx, dz, 8, 0.9);
+        if (!beginCorpse(z, dx, dz, info)) recycleOrDisposeZombie(z, z.mesh && z.mesh.userData.dismembered);
+      } else {
+        // bullet / generic — tumble with 1–2 parts
+        spawnBlood(px, hitY, pz, dx, dz, 14, 1.25);
+        const nParts = 1 + ((Math.random() < 0.45) ? 1 : 0);
+        const avail = PART_KEYS.filter((k) => !z.partsLost[k]);
+        for (let n = 0; n < nParts && avail.length; n++) {
+          const ix = (Math.random() * avail.length) | 0;
+          const k = avail.splice(ix, 1)[0];
+          detachZombiePart(z, k, dx, dz);
+        }
+        if (Math.random() < 0.25) spawnFleshChunks(px, hitY, pz, dx, dz, skin, 2);
+        if (!beginCorpse(z, dx, dz, info)) recycleOrDisposeZombie(z, z.mesh && z.mesh.userData.dismembered);
+      }
+
+      const i = zombies.indexOf(z);
+      if (i >= 0) zombies.splice(i, 1);
+      // CL-26: the last kill of a wave gets the finisher.
+      if (phase === 'wave' && waveSpawned >= waveTotal && !gameOver && !won && !zombies.some((o) => o.alive)) {
+        try { beginWaveFinisher(z, px, py, pz); } catch (_) {}
+      }
+      if (award) {
+        matchStats.kills += 1;
+        // Only the marine's own kills feed the kill streak: what a turret, a mine, a
+        // spike trap or a strand of wire takes down still pays, but at the base rate.
+        const mult = info.defense ? 1 : registerKill();
+        z._defenseKill = false;
+        const rawCash = (z.cashDrop != null ? z.cashDrop : (z.reward || 2)) * mult * cashMult() * lateCashMul();
+        const payMul = nightPayMul();   // GB-82: blood moon x1.5, the Lights out dare x1.25, both together at most x1.75
+        if (hqBlackout) dareEarned += rawCash * (payMul - (bloodMoon ? 1.5 : 1));
+        const cash = skullLedger.credit(rawCash * payMul);   // GP-33: fractions carry
+        skullValueTotal += cash;
+        awardCash(px, pz, cash, z.typeKey, py);   // GB-60: py, so a skull from the tunnel comes out of it
+        if (ZOMBIE_MED_DROPS && Math.random() < medDropChance(z.typeKey)) spawnMedDrop(px + 0.6, pz + 0.4);   // GB-94: off (Jerry)
+        {
+          const sa = sndAt(px, pz);
+          AudioSys.zombieDeath(sa.v, sa.pan, z.typeKey === 'brute' || z.typeKey === 'demon' || z.typeKey === 'colossus' || z.typeKey === 'guardian', z.typeKey);   // CL-136: its own cry
+        }
+        if (z.typeKey === 'colossus') {
+          showBanner(dwText('wave.colossusDown'), dwText('wave.colossusReward', { value: cash }), 3.2, '#ffd24a');
+          addShake(0.45);
+          triggerSlowMo(1.1);
+        }
+        if (z.typeKey === 'guardian') {
+          if (z.cavePoke) publishCaveGuardian(z.caveIndex, px, pz, 'death');
+          showBanner(dwText(GUARDIAN_KEYS.name).toUpperCase() + ' DOWN', '+$' + cash + ' in skulls — turn them in at HQ', 3.2, '#bdf3ff');
+          addShake(0.4);
+          triggerSlowMo(1.0);
+          // First-blood: only a planned guardian from a guardian night (never debug spawn).
+          // Combat proposes; ChatGPT economy owns receipt/grant (no direct Cash). D-16 / GB-17.
+          const playerCredit = !info.defense;
+          const plannedGuardian = !!z.guardianPlanned;
+          if (playerCredit && plannedGuardian && !guardianFirstBloodDone) {
+            guardianFirstBloodDone = true;
+            publishUI('guardian-first-blood', {
+              receiptId: 'guardian-night-first',
+              typeKey: 'guardian',
+              playerCredit: true,
+              planned: true,
+              x: px,
+              z: pz,
+              propose: 'mortar-blueprint-or-80-skulls',
+              keys: Object.assign({}, GUARDIAN_KEYS),
+              titleKey: GUARDIAN_KEYS.firstBlood,
+              blueprintKey: GUARDIAN_KEYS.blueprint,
+              skullsKey: GUARDIAN_KEYS.skulls,
+              bonusSkullValue: 80
+            });
+          }
+          publishUI('guardian-killed', {
+            typeKey: 'guardian',
+            playerCredit,
+            planned: plannedGuardian,
+            cash,
+            firstBloodDone: !!guardianFirstBloodDone,
+            keys: Object.assign({}, GUARDIAN_KEYS)
+          });
+        }
+      }
+      // A bomber's payload goes off no matter how it died.
+      if (z.typeKey === 'bomber' && !z._detonated) {
+        z._detonated = true;
+        // GB-77 (P-28): his kill (a shot, his blade, his fire, or a blast he set off) is his chain too.
+        bomberBlast(px, py + 0.7, pz, !info.defense && !info.selfBlast);
+      }
+    }
+
+
+    function damageZombie(z, amount, info = null) {
+      if (!z.alive) return;
+      const kind = (info && info.kind) || 'generic';
+      let dx = (info && info.dir && info.dir.x) || 0;
+      let dz = (info && info.dir && info.dir.z) || 0;
+      const dlen = Math.hypot(dx, dz);
+      if (dlen > 0.01) { dx /= dlen; dz /= dlen; }
+      else { dx = 0; dz = 0; }
+
+      // Armor resist (brute / military). GB-75 (P-26): plates (the `armored` brute) take bullets, pellets,
+      // blades and the saw down to 0.45; blasts and the flame's own hit nearly full; anything else as before.
+      // GB-104: the weakness table first; the old rules only for a hit or a kind the table doesn't cover.
+      const share = weakShare(z, weakTypeOf(kind, info));
+      let dmg;
+      if (share != null) dmg = amount * share;
+      else {
+        const resist = z.armored ? plateResist(z, kind, info) : Math.max(0, Math.min(0.6, z.armor || 0));
+        dmg = amount * (1 - resist);
+        if (info && info.fire) dmg *= 1 - (z.fireResist || 0);
+        // GB-96 (P-100): the shotgun's edge on spiders (in the table now as the spider's pellet 1.1).
+        if (kind === 'pellet' && z.spider) dmg *= SHOTGUN_SPIDER_MUL;
+      }
+      // Head already gone → slightly more fragile
+      if (z.partsLost && z.partsLost.head) dmg *= 1.15;
+
+      // GB-101: the first hit of a shot on it, at full health? Then a kill by that shot is a one-shot kill.
+      if (kind === 'bullet' || kind === 'pellet') { const sd = (info && info.shotId) || 0; if (!sd || z._osSid !== sd) { z._osSid = sd; z._osFull = z.hp >= (z.maxHp || z.hp) - 1e-6; } }
+      z.hp -= dmg;
+      hordeHit(z, dx, dz);   // GB-94: it ducks aside, or (most) staggers
+      {
+        const sa = sndAt(z.mesh.position.x, z.mesh.position.z);
+        AudioSys.zombieHit(sa.v, sa.pan, kind === 'pellet' || kind === 'explosive' || z.typeKey === 'brute' || z.typeKey === 'demon' || z.typeKey === 'colossus', z.typeKey);   // CL-136: its own grunt
+      }
+
+      const hitH = z.hitH || 1.4;
+      // Approximate upper hit from projectile aim height if provided
+      let hitFrac = 0.55;
+      if (info && info.hitY != null) {
+        hitFrac = (info.hitY - z.mesh.position.y) / hitH;
+      }
+      const upperHit = hitFrac > 0.62;
+      // Headshot: a bullet that lands in the top slice of the body. Hits harder, bleeds
+      // more, and is far more likely to take the head clean off.
+      // P-6: a shell's pellets share a shot id; only one of them earns the headshot bonus.
+      const sid = (info && info.shotId) || 0;
+      const headshot = (kind === 'bullet' || kind === 'pellet') && hitFrac > headLineOf(z) && !(z.partsLost && z.partsLost.head) && info && info.hitY != null && !(sid && z._shotHead === sid);
+      if (headshot) {
+        if (sid) z._shotHead = sid;
+        const bonus = dmg * (kind === 'pellet' ? 0.5 : 0.85) * (z.headshotMul || 1);
+        z.hp -= bonus;
+        dmg += bonus;
+        matchStats.headshots += 1;
+        AudioSys.headshot();
+        showHitPing(z.hp <= 0 ? 'HEADSHOT' : 'HEADSHOT', z.hp <= 0 ? '#ff5544' : '#ffd24a');
+        if (z.hp <= 0 || Math.random() < 0.5) {
+          detachZombiePart(z, 'head', dx, dz);
+          spawnGibBurst(z.mesh.position.x, z.mesh.position.y + hitH * 0.85, z.mesh.position.z,
+            z.mesh.userData.skinColor, z.mesh.userData.eyeColor, dx, dz, 'shred');
+        }
+      }
+      const hitY = z.mesh.position.y + hitH * Math.max(0.25, Math.min(0.95, hitFrac));
+      // CL-137: where it landed, for the pose (z.hitPart). The side it came in on: the round's direction against the
+      // body's own right (local +x is (cos yaw, 0, -sin yaw) in the world); a round travelling into its right side has
+      // a negative dot with that. Arms take a third of the body-height hits, on that side.
+      if (z.alive && info && info.hitY != null && kind !== 'fire' && kind !== 'generic') {
+        const yaw = z.mesh.rotation.y, lat = dx * Math.cos(yaw) - dz * Math.sin(yaw);
+        z.hitSide = lat < 0 ? 1 : -1;   // +1: it came in on its right
+        z.hitPart = hitFrac > headLineOf(z) ? 'head' : hitFrac < 0.42 ? (z.hitSide > 0 ? 'legR' : 'legL') : (Math.random() < 0.33 ? (z.hitSide > 0 ? 'armR' : 'armL') : 'torso');
+        z.hitPartT = 0.45;
+      }
+      const sprayAmt = kind === 'pellet' ? 12 : (kind === 'explosive' ? 16 : (kind === 'chainsaw' ? 10 : 7));
+      const force = kind === 'explosive' ? 1.7 : (kind === 'pellet' ? 1.4 : 1.05);
+      spawnBlood(z.mesh.position.x, hitY, z.mesh.position.z, dx, dz, sprayAmt, force);
+      // Heavy rounds go through: spray out the back and a streak on the ground behind.
+      if ((kind === 'bullet' && dmg >= 14) || (kind === 'pellet' && Math.random() < 0.3)) {
+        spawnExitSpray(z.mesh.position.x, hitY, z.mesh.position.z, dx, dz, Math.min(1.6, dmg / 30));
+      }
+      if (headshot) spawnBloodMist(z.mesh.position.x, z.mesh.position.y + hitH * 0.88, z.mesh.position.z, dx, dz);
+      if ((kind === 'bullet' || kind === 'pellet') && !(info && info.defense)) reticleHitMark(z.hp <= 0 ? 'kill' : headshot ? 'head' : 'hit');   // CU-96
+
+      if (z.hp > 0) {
+        tryDismemberOnHit(z, dmg, kind, dx, dz, upperHit);
+        if (dmg >= 14 && kind !== 'melee' && kind !== 'explosive') {
+          spawnFleshChunks(
+            z.mesh.position.x, hitY, z.mesh.position.z, dx, dz,
+            z.mesh.userData.skinColor || 0x8a7a60, kind === 'pellet' ? 4 : 2
+          );
+        }
+      }
+
+      // Hit react. GB-65 (P-6): the pellets of one pull are one hit, summed per zombie and
+      // played once when the shot has landed (flushShotHits). Otherwise the body reacts
+      // (P-70), or today's flinch, stagger and knockdown play (reactToHit).
+      if (sid && kind === 'pellet') {
+        if (z._shotId !== sid) { z._shotId = sid; z._shotN = 0; z._shotDmg = 0; z._shotRaw = 0; z._shotY = 0; z._shotDX = 0; z._shotDZ = 0; }
+        z._shotN = (z._shotN || 0) + 1; z._shotDmg = (z._shotDmg || 0) + dmg; z._shotRaw = (z._shotRaw || 0) + amount; z._shotY = (z._shotY || 0) + hitY;
+        z._shotDX = (z._shotDX || 0) + dx; z._shotDZ = (z._shotDZ || 0) + dz; z._shotDefense = !!(info && info.defense);
+        pendingShots.add(z);
+      } else reactToHit(z, kind, dmg, dx, dz, hitY, amount);
+      z.flashT = 0.14;
+
+      const mats = z.mesh.userData.bodyMats;
+      if (mats) {
+        for (const m of mats) {
+          if (!m.emissive) continue;
+          m.emissive.setHex(0xff2222);
+          m.emissiveIntensity = 0.65;
+        }
+      }
+
+      if (z.hp <= 0) {
+        // Arm's length: some of it lands on you.
+        if (Math.hypot(z.mesh.position.x - player.position.x, z.mesh.position.z - player.position.z) < 2.6) splatScreen(kind === 'explosive' || kind === 'pellet' || kind === 'chainsaw' ? 1 : 0.7);
+        // GB-101: Stopping power, 1 for a headshot kill and 1 for a one-shot kill, by his own rounds (not a turret's),
+        // on a real zombie (TT spawns are flagged ttSpawn).
+        if ((kind === 'bullet' || kind === 'pellet') && !(info && info.defense) && !z.ttSpawn) {
+          if (headshot || (sid && z._shotHead === sid)) skillXp('power', 1, 'headshot');
+          if (z._osFull) skillXp('power', 1, 'one-shot');
+        }
+        killZombie(z, true, { kind, dir: { x: dx, z: dz }, defense: !!(info && info.defense), raw: amount, hitY, shotId: sid, headshot });   // CL-137: headshot, for the way it goes down
+      }
+    }
+
+    // Segment vs axis-aligned box, as a slab test. Returns the entry fraction along
+    // the segment, or null. Used to stop bullets at structures: a panel is a hub plus
+    // whichever arms are showing, and every one of those is world-axis-aligned, so a
+    // handful of slab tests covers the real shape exactly.
+
+    function spawnAcidGlob(z, tx, tz, fromMouth = false) {
+      let ox = z.mesh.position.x, oz = z.mesh.position.z;
+      let oy = z.mesh.position.y + (z.hitH || 1.5) * 0.72;
+      if (fromMouth && z.mesh.userData.head) {   // CL-136: a spitter spits from its mouth, not its chest
+        z.mesh.updateMatrixWorld(true);
+        z.mesh.userData.head.getWorldPosition(_spitMouth);
+        const yaw = z.mesh.rotation.y;
+        ox = _spitMouth.x + Math.sin(yaw) * 0.28; oy = _spitMouth.y - 0.08; oz = _spitMouth.z + Math.cos(yaw) * 0.28;
+      }
+      // Lead the player slightly so standing still is punished.
+      const lead = 0.55;
+      const aimX = tx + velX * lead * (Math.random() * 0.8), aimZ = tz + velZ * lead * (Math.random() * 0.8);
+      const T = 1.0 + Math.hypot(aimX - ox, aimZ - oz) * 0.022;
+      const ty = sampleHeight(aimX, aimZ);
+      const web = !!z.spider;
+      const mesh = acquireAcidGlob(web ? webGlobMat : acidGlobMat);
+      mesh.position.set(ox, oy, oz);
+      acidGlobs.push({
+        mesh,
+        x: ox, y: oy, z: oz,
+        vx: (aimX - ox) / T,
+        vy: (ty - oy) / T + 0.5 * 16 * T,
+        vz: (aimZ - oz) / T,
+        age: 0, web, trail: fromMouth ? 0 : -1
+      });
+      if (fromMouth) {   // the mouthful: a spray of droplets with the glob
+        for (let k = 0; k < 5; k++) spawnMote(ox, oy, oz, acidMoteMat, { vx: (aimX - ox) / T * (0.5 + Math.random() * 0.4) + (Math.random() - 0.5) * 1.5, vy: 1.2 + Math.random() * 2, vz: (aimZ - oz) / T * (0.5 + Math.random() * 0.4) + (Math.random() - 0.5) * 1.5, grav: 12, drag: 0.3, life: 0.5 + Math.random() * 0.3, scale: 0.25 + Math.random() * 0.2 });
+      }
+      AudioSys.spit();
+    }
+

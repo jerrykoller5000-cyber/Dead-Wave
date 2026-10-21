@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<body style="margin:0; overflow:hidden; background:black;">
+  <iframe id="game" src="/index.html?debug=1" style="width:1280px; height:720px; border:none;"></iframe>
+  <script>
+    const sleep = ms => new Promise(r => setTimeout(r, ms));
+    (async function() {
+      const game = document.getElementById('game');
+      while(!game.contentWindow || !game.contentWindow.TT) await sleep(100);
+      const TT = game.contentWindow.TT;
+      
+      if (game.contentWindow.DWOpening) game.contentWindow.DWOpening.dismissForTesting();
+      await sleep(1000);
+      
+      const nameInput = game.contentDocument.getElementById('playerName');
+      if (nameInput) nameInput.value = 'VideoRun';
+      const play = game.contentDocument.getElementById('modeHunt');
+      if (play) play.click();
+      
+      while(!TT.getPhase || TT.getPhase() !== 'prep') await sleep(500);
+      while(game.contentDocument.body.classList.contains('deploying')) await sleep(500);
+      
+      // wait a moment before alarm
+      await sleep(1000);
+      TT.skipPrep();
+      await sleep(4000); // let alarm play out
+      
+      const list = TT.zombies || [];
+      for (let i = 1; i < list.length; i++) {
+        if (list[i].alive) { list[i].hp = 0; TT.killZombie && TT.killZombie(list[i]); }
+      }
+      await sleep(2000);
+      const last = list.find(z => z.alive);
+      if (last) { last.hp = 0; TT.killZombie && TT.killZombie(last); }
+      
+      await sleep(5000); // finisher finishes
+      document.title = "DONE";
+    })();
+  </script>
+</body>
+</html>

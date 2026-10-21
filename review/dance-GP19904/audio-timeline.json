@@ -1,0 +1,426 @@
+{
+  "source": "C:/Users/Zero/Desktop/Jerry_Game_Related/Disclaimer/Been Warned.mp3",
+  "source_duration_seconds": 143.52,
+  "recommended_excerpt": {
+    "source_start_seconds": 9.151494,
+    "duration_seconds": 20,
+    "reason": "Final 20.000-second cut. Timing is not quantized to a whole beat; source playback pitch and speed remain unchanged."
+  },
+  "bpm": 103.322299,
+  "beat_seconds": 0.5807071714499887,
+  "eighth_seconds": 0.29035358572499437,
+  "grid_origin_excerpt_seconds": 0,
+  "median_grid_error_seconds": 0.00448,
+  "tempo_confidence": "High repeated subdivision confidence; medium musical quarter-note/downbeat confidence. 103.4 BPM is preferred; 69/138 BPM metrical alternatives cannot be eliminated without hearing. Minor tempo drift: original first30s ~103.075, middle ~103.5.",
+  "beat_timeline": [
+    {
+      "beat": 0,
+      "seconds": 0.0,
+      "source_seconds": 9.151494,
+      "nearby_attack_seconds": 0.001,
+      "attack_strength": 1.534
+    },
+    {
+      "beat": 1,
+      "seconds": 0.580707,
+      "source_seconds": 9.732201,
+      "nearby_attack_seconds": 0.5797,
+      "attack_strength": 1.295
+    },
+    {
+      "beat": 2,
+      "seconds": 1.161414,
+      "source_seconds": 10.312908,
+      "nearby_attack_seconds": 1.1583,
+      "attack_strength": 1.587
+    },
+    {
+      "beat": 3,
+      "seconds": 1.742122,
+      "source_seconds": 10.893616,
+      "nearby_attack_seconds": 1.737,
+      "attack_strength": 1.939
+    },
+    {
+      "beat": 4,
+      "seconds": 2.322829,
+      "source_seconds": 11.474323,
+      "nearby_attack_seconds": 2.3157,
+      "attack_strength": 1.906
+    },
+    {
+      "beat": 5,
+      "seconds": 2.903536,
+      "source_seconds": 12.05503,
+      "nearby_attack_seconds": 2.9044,
+      "attack_strength": 2.07
+    },
+    {
+      "beat": 6,
+      "seconds": 3.484243,
+      "source_seconds": 12.635737,
+      "nearby_attack_seconds": 3.4831,
+      "attack_strength": 2.075
+    },
+    {
+      "beat": 7,
+      "seconds": 4.06495,
+      "source_seconds": 13.216444,
+      "nearby_attack_seconds": 4.0617,
+      "attack_strength": 2.447
+    },
+    {
+      "beat": 8,
+      "seconds": 4.645657,
+      "source_seconds": 13.797151,
+      "nearby_attack_seconds": 4.6404,
+      "attack_strength": 1.472
+    },
+    {
+      "beat": 9,
+      "seconds": 5.226365,
+      "source_seconds": 14.377859,
+      "nearby_attack_seconds": 5.2191,
+      "attack_strength": 1.6
+    },
+    {
+      "beat": 10,
+      "seconds": 5.807072,
+      "source_seconds": 14.958566,
+      "nearby_attack_seconds": 5.7978,
+      "attack_strength": 1.726
+    },
+    {
+      "beat": 11,
+      "seconds": 6.387779,
+      "source_seconds": 15.539273,
+      "nearby_attack_seconds": 6.3865,
+      "attack_strength": 2.571
+    },
+    {
+      "beat": 12,
+      "seconds": 6.968486,
+      "source_seconds": 16.11998,
+      "nearby_attack_seconds": 6.9652,
+      "attack_strength": 2.349
+    },
+    {
+      "beat": 13,
+      "seconds": 7.549193,
+      "source_seconds": 16.700687,
+      "nearby_attack_seconds": 7.5438,
+      "attack_strength": 2.416
+    },
+    {
+      "beat": 14,
+      "seconds": 8.1299,
+      "source_seconds": 17.281394,
+      "nearby_attack_seconds": 8.1225,
+      "attack_strength": 2.065
+    },
+    {
+      "beat": 15,
+      "seconds": 8.710608,
+      "source_seconds": 17.862102,
+      "nearby_attack_seconds": 8.7012,
+      "attack_strength": 2.421
+    },
+    {
+      "beat": 16,
+      "seconds": 9.291315,
+      "source_seconds": 18.442809,
+      "nearby_attack_seconds": 9.2899,
+      "attack_strength": 1.561
+    },
+    {
+      "beat": 17,
+      "seconds": 9.872022,
+      "source_seconds": 19.023516,
+      "nearby_attack_seconds": 9.8686,
+      "attack_strength": 1.49
+    },
+    {
+      "beat": 18,
+      "seconds": 10.452729,
+      "source_seconds": 19.604223,
+      "nearby_attack_seconds": 10.4472,
+      "attack_strength": 1.615
+    },
+    {
+      "beat": 19,
+      "seconds": 11.033436,
+      "source_seconds": 20.18493,
+      "nearby_attack_seconds": 11.0259,
+      "attack_strength": 2.262
+    },
+    {
+      "beat": 20,
+      "seconds": 11.614143,
+      "source_seconds": 20.765637,
+      "nearby_attack_seconds": 11.6146,
+      "attack_strength": 2.013
+    },
+    {
+      "beat": 21,
+      "seconds": 12.194851,
+      "source_seconds": 21.346345,
+      "nearby_attack_seconds": 12.2032,
+      "attack_strength": 2.14
+    },
+    {
+      "beat": 22,
+      "seconds": 12.775558,
+      "source_seconds": 21.927052,
+      "nearby_attack_seconds": 12.772,
+      "attack_strength": 2.114
+    },
+    {
+      "beat": 23,
+      "seconds": 13.356265,
+      "source_seconds": 22.507759,
+      "nearby_attack_seconds": 13.3506,
+      "attack_strength": 2.748
+    },
+    {
+      "beat": 24,
+      "seconds": 13.936972,
+      "source_seconds": 23.088466,
+      "nearby_attack_seconds": 13.9393,
+      "attack_strength": 1.527
+    },
+    {
+      "beat": 25,
+      "seconds": 14.517679,
+      "source_seconds": 23.669173,
+      "nearby_attack_seconds": 14.518,
+      "attack_strength": 1.58
+    },
+    {
+      "beat": 26,
+      "seconds": 15.098386,
+      "source_seconds": 24.24988,
+      "nearby_attack_seconds": 15.1066,
+      "attack_strength": 1.148
+    },
+    {
+      "beat": 27,
+      "seconds": 15.679094,
+      "source_seconds": 24.830588,
+      "nearby_attack_seconds": 15.6853,
+      "attack_strength": 2.418
+    },
+    {
+      "beat": 28,
+      "seconds": 16.259801,
+      "source_seconds": 25.411295,
+      "nearby_attack_seconds": 16.264,
+      "attack_strength": 0.664
+    },
+    {
+      "beat": 29,
+      "seconds": 16.840508,
+      "source_seconds": 25.992002,
+      "nearby_attack_seconds": 16.8427,
+      "attack_strength": 2.024
+    },
+    {
+      "beat": 30,
+      "seconds": 17.421215,
+      "source_seconds": 26.572709,
+      "nearby_attack_seconds": 17.4314,
+      "attack_strength": 0.653
+    },
+    {
+      "beat": 31,
+      "seconds": 18.001922,
+      "source_seconds": 27.153416,
+      "nearby_attack_seconds": 18.0001,
+      "attack_strength": 0.86
+    },
+    {
+      "beat": 32,
+      "seconds": 18.582629,
+      "source_seconds": 27.734123,
+      "nearby_attack_seconds": 18.5788,
+      "attack_strength": 0.847
+    },
+    {
+      "beat": 33,
+      "seconds": 19.163337,
+      "source_seconds": 28.314831,
+      "nearby_attack_seconds": 19.1674,
+      "attack_strength": 1.193
+    },
+    {
+      "beat": 34,
+      "seconds": 19.744044,
+      "source_seconds": 28.895538,
+      "nearby_attack_seconds": 19.7461,
+      "attack_strength": 1.512
+    }
+  ],
+  "two_bar_phrase_grid": [
+    {
+      "beat": 0,
+      "seconds": 0.0,
+      "source_seconds": 9.151494,
+      "bars_4_4": 2,
+      "mean_energy": 0.005741,
+      "mean_onset": 0.345
+    },
+    {
+      "beat": 8,
+      "seconds": 4.645657,
+      "source_seconds": 13.797151,
+      "bars_4_4": 2,
+      "mean_energy": 0.006226,
+      "mean_onset": 0.352
+    },
+    {
+      "beat": 16,
+      "seconds": 9.291315,
+      "source_seconds": 18.442809,
+      "bars_4_4": 2,
+      "mean_energy": 0.006086,
+      "mean_onset": 0.351
+    },
+    {
+      "beat": 24,
+      "seconds": 13.936972,
+      "source_seconds": 23.088466,
+      "bars_4_4": 2,
+      "mean_energy": 0.005282,
+      "mean_onset": 0.29
+    },
+    {
+      "beat": 32,
+      "seconds": 18.582629,
+      "source_seconds": 27.734123,
+      "bars_4_4": 2,
+      "mean_energy": 0.00727,
+      "mean_onset": 0.353
+    }
+  ],
+  "strong_transient_accents": [
+    {
+      "seconds": 0.28,
+      "source_seconds": 9.432,
+      "strength": 2.119
+    },
+    {
+      "seconds": 1.737,
+      "source_seconds": 10.889,
+      "strength": 2.147
+    },
+    {
+      "seconds": 2.485,
+      "source_seconds": 11.637,
+      "strength": 2.247
+    },
+    {
+      "seconds": 3.064,
+      "source_seconds": 12.216,
+      "strength": 2.398
+    },
+    {
+      "seconds": 4.062,
+      "source_seconds": 13.213,
+      "strength": 2.568
+    },
+    {
+      "seconds": 6.386,
+      "source_seconds": 15.538,
+      "strength": 2.73
+    },
+    {
+      "seconds": 7.135,
+      "source_seconds": 16.286,
+      "strength": 2.604
+    },
+    {
+      "seconds": 7.713,
+      "source_seconds": 16.865,
+      "strength": 2.564
+    },
+    {
+      "seconds": 8.701,
+      "source_seconds": 17.853,
+      "strength": 2.557
+    },
+    {
+      "seconds": 11.026,
+      "source_seconds": 20.177,
+      "strength": 2.39
+    },
+    {
+      "seconds": 11.904,
+      "source_seconds": 21.055,
+      "strength": 2.142
+    },
+    {
+      "seconds": 12.203,
+      "source_seconds": 21.355,
+      "strength": 2.451
+    },
+    {
+      "seconds": 13.351,
+      "source_seconds": 22.502,
+      "strength": 2.919
+    },
+    {
+      "seconds": 15.685,
+      "source_seconds": 24.837,
+      "strength": 2.538
+    },
+    {
+      "seconds": 16.124,
+      "source_seconds": 25.276,
+      "strength": 2.47
+    },
+    {
+      "seconds": 16.843,
+      "source_seconds": 25.994,
+      "strength": 2.168
+    }
+  ],
+  "limitations": [
+    "Waveform and spectral analysis only; no claim of perceptual listening.",
+    "Phrase markers are repeated 8-beat timing blocks; not verified song section labels.",
+    "Strong transients may be bass, snare, hats or scratches; inferred only from frequency bands."
+  ],
+  "choreography_duration_seconds": 19.744043829299617,
+  "delivery_frames": 600,
+  "delivery_fps": 30,
+  "fade_out": {
+    "start_seconds": 19.55,
+    "duration_seconds": 0.45
+  },
+  "choreography_beats": 34,
+  "final_pose_hold_seconds": 0.255956170700383,
+  "delivery_duration_seconds": 20,
+  "delivery_end_beat": 34.440766333333336,
+  "audio_decode_verification": {
+    "command": [
+      "C:/Users/Zero/AppData/Roaming/Python/Python314/site-packages/imageio_ffmpeg/binaries/ffmpeg-win-x86_64-v7.1.exe",
+      "-v",
+      "error",
+      "-i",
+      "review\\dance-GP19904\\audio-dance.mp3",
+      "-map",
+      "0:a:0",
+      "-ac",
+      "2",
+      "-ar",
+      "48000",
+      "-f",
+      "s16le",
+      "pipe:1"
+    ],
+    "decoded_samples_per_channel": 960000,
+    "sample_rate": 48000,
+    "channels": 2,
+    "duration_seconds": 20.0,
+    "passes": true,
+    "note": "MP3 container may include encoder padding; the decoded excerpt is exactly20 seconds."
+  }
+}

@@ -1,0 +1,9 @@
+#10 player/ladder-climb
+MISSING: the game makes no sound here now
+Now: (silent: the HQ ladder, the tower)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.6 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A single step climbing a metal ladder: a boot on a steel rung and a hand gripping the rail. No music, no voice.

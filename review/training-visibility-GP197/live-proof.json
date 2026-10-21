@@ -1,0 +1,531 @@
+{
+  "los": {
+    "covered": "Actual live shotBlocked function in los.test.mjs; spider AI below."
+  },
+  "views": {
+    "east": {
+      "cutaway": [
+        {
+          "side": "east",
+          "opacity": 0.06000000000000005,
+          "hidden": true
+        },
+        {
+          "side": "south",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "west",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "overhead",
+          "opacity": 0,
+          "hidden": true
+        },
+        {
+          "side": "east",
+          "opacity": 0.06000000000000005,
+          "hidden": true
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        }
+      ],
+      "solids": 118
+    },
+    "west": {
+      "cutaway": [
+        {
+          "side": "east",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "south",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "west",
+          "opacity": 0.06000000000000005,
+          "hidden": true
+        },
+        {
+          "side": "overhead",
+          "opacity": 0,
+          "hidden": true
+        },
+        {
+          "side": "east",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        }
+      ],
+      "solids": 118
+    },
+    "north": {
+      "cutaway": [
+        {
+          "side": "east",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "south",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 0.06000000000000005,
+          "hidden": true
+        },
+        {
+          "side": "west",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "overhead",
+          "opacity": 0,
+          "hidden": true
+        },
+        {
+          "side": "east",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 0.06000000000000005,
+          "hidden": true
+        },
+        {
+          "side": "north",
+          "opacity": 0.06000000000000005,
+          "hidden": true
+        },
+        {
+          "side": "north",
+          "opacity": 0.06000000000000005,
+          "hidden": true
+        }
+      ],
+      "solids": 118
+    },
+    "south": {
+      "cutaway": [
+        {
+          "side": "east",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "south",
+          "opacity": 0.06000000000000005,
+          "hidden": true
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "west",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "overhead",
+          "opacity": 0,
+          "hidden": true
+        },
+        {
+          "side": "east",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        }
+      ],
+      "solids": 118
+    }
+  },
+  "trace": {
+    "bullet": true,
+    "aim": false,
+    "aimPoint": null
+  },
+  "restore": [
+    {
+      "side": "east",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "south",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "north",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "west",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "overhead",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "east",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "north",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "north",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "north",
+      "opacity": 1,
+      "hidden": false
+    }
+  ],
+  "spider": {
+    "alive": true,
+    "lineClear": true,
+    "lineT": 0.32241394629903325,
+    "error": "\n    \n    Dismiss\n  "
+  },
+  "orbit": [
+    {
+      "camera": {
+        "x": -21.362131526984207,
+        "y": -190.0917269092057,
+        "z": -632.0488741353539
+      },
+      "shell": [
+        {
+          "side": "east",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "south",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "west",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "overhead",
+          "opacity": 0,
+          "hidden": true
+        },
+        {
+          "side": "east",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "camera": {
+        "x": -13.049797736207081,
+        "y": -190.0917269092057,
+        "z": -623.6617284178865
+      },
+      "shell": [
+        {
+          "side": "east",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "south",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "west",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "overhead",
+          "opacity": 0,
+          "hidden": true
+        },
+        {
+          "side": "east",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "camera": {
+        "x": -4.661675397048384,
+        "y": -190.0917269092057,
+        "z": -631.9503351924817
+      },
+      "shell": [
+        {
+          "side": "east",
+          "opacity": 0.06,
+          "hidden": true
+        },
+        {
+          "side": "south",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "west",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "overhead",
+          "opacity": 0,
+          "hidden": true
+        },
+        {
+          "side": "east",
+          "opacity": 0.06,
+          "hidden": true
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "camera": {
+        "x": -12.952064677205566,
+        "y": -190.0917269092057,
+        "z": -640.3390908500464
+      },
+      "shell": [
+        {
+          "side": "east",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "south",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "west",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "overhead",
+          "opacity": 0,
+          "hidden": true
+        },
+        {
+          "side": "east",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        }
+      ]
+    }
+  ],
+  "rangeExit": [
+    {
+      "side": "east",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "south",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "north",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "west",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "overhead",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "east",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "north",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "north",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "north",
+      "opacity": 1,
+      "hidden": false
+    }
+  ],
+  "errors": []
+}

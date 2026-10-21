@@ -1,0 +1,1 @@
+First live fixture spawned a new debug zombie immediately inside the old death recovery, before its normal final clear. That is unavailable through the real training panel. Corrected fixture waits for the sweep-to-bed transition before checking that reset flight tickets cannot hit a fresh debug zombie. No official assertions changed.

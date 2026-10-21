@@ -1,0 +1,29 @@
+{
+  "gp28Check": {
+    "hidden": true,
+    "box": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "title": "New here? Ten minutes on the range.",
+    "text": "New here? Ten minutes on the range.\n        Try the Training Ground to get your hands on the controls before you head into the valley.\n        \n          Go to Training\n          Play anyway",
+    "trainingLabel": "Go to Training",
+    "playLabel": "Play anyway",
+    "savedFlag": null
+  },
+  "gp28Narrow": {
+    "viewport": [
+      390,
+      844
+    ],
+    "box": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "overflowX": false
+  }
+}

@@ -1,0 +1,9 @@
+#133 world/rain  (start here)
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: rainStart() (synth loop)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 10 s   Loop: on   Prompt influence: ~0.6
+
+Prompt:
+Steady rain falling on a forest and on canvas and metal roofs, seamless. No music, no voice.

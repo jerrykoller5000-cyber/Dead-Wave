@@ -1,0 +1,9 @@
+#112 build-attacks-turret-break
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 2 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A gun turret destroyed: a crunch of metal, sparks crackling, a short electrical fizz and parts clattering. No voice, no music.
+
+In the game: buildBreak('turret')

@@ -1,0 +1,9 @@
+#78 bullet-impacts/dirt  (start here)
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: impactDirt
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.5 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A bullet hitting dirt, a short thud with a spray of earth. No music, no voice.

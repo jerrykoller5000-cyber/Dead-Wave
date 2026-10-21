@@ -1,0 +1,9 @@
+#162 ui/map-open
+MISSING: the game makes no sound here now
+Now: (silent: the map)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.8 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A paper map being unfolded, a quick crinkle and flap. No music.

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Grave Shift — staged dance composite</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../../vendor/fonts/fonts.css">
+  <link rel="stylesheet" href="../../assets/intro/disclaimer.css?v=gp19904-preview">
+  <style>
+    :root { --font-display: 'Black Ops One', 'Chakra Petch', system-ui, sans-serif; --font-hud: 'Chakra Petch', system-ui, sans-serif; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: #000; }
+    /* Full source frame: lateral/depth movement comes from the fixed 3D camera,
+       never a moving CSS crop or translation of the video element. */
+    #disclaimerStage.frame { transform: translate(-50%, -57%) scale(.9); }
+    #disclaimerStage .dsc-dancer { left: 0; top: 0; width: 100%; height: 100%; object-fit: contain; }
+    #disclaimer .dsc-text { opacity: 1; }
+    #disclaimer .dsc-light.red, #disclaimer .dsc-bar .red { animation: dscSoft 1.11s ease-in-out infinite; }
+    #disclaimer .dsc-light.blue, #disclaimer .dsc-bar .blue { animation: dscSoftB 1.11s ease-in-out infinite; }
+    #previewControls { position: fixed; z-index: 105; left: 14px; top: 14px; max-width: min(390px, calc(100vw - 28px)); color: #c2c7c0; background: #0a0e0ce8; border: 1px solid #666b5c66; padding: 7px 10px; font: 12px var(--font-hud); }
+    #previewControls summary { cursor: pointer; letter-spacing: .05em; }
+    #previewControls p { margin: 8px 0; line-height: 1.4; }
+    #previewControls label { display: block; margin-top: 8px; }
+    #previewControls select, #previewControls button { color: #ece9dc; background: #1b211c; border: 1px solid #737d6466; border-radius: 2px; font: inherit; padding: 5px 7px; }
+    #previewControls select { width: 100%; }
+    #previewControls input { width: 100%; accent-color: #b6ad71; }
+    #previewControls output { float: right; font-variant-numeric: tabular-nums; }
+    #previewControls .buttons { display: flex; gap: 7px; margin-top: 8px; }
+    #previewControls[data-clean] { display: none; }
+  </style>
+</head>
+<body>
+  <!-- Original CL-190 visual vocabulary and copy. This page does not load its
+       production controller, game, siren, voices, or proposed replacement cues. -->
+  <div id="disclaimer" class="has-stage" data-state="cards" aria-label="AI disclosure">
+    <div class="dsc-light red"></div><div class="dsc-light blue"></div>
+    <div class="dsc-bar"><span class="red"></span><span class="blue"></span></div>
+    <div id="disclaimerStage" class="frame" aria-hidden="true">
+      <video id="previewDancer" class="dsc-dancer on" muted playsinline preload="auto"></video>
+      <div class="dsc-floor"></div>
+    </div>
+    <div class="dsc-flare"></div>
+    <div class="dsc-card" aria-hidden="true"><span id="previewCard" class="dsc-text"></span></div>
+    <div class="dsc-flash"></div>
+    <p class="dsc-prompt">Press any key or tap to begin</p>
+    <button id="disclaimerSkip" type="button" hidden>Skip</button>
+  </div>
+  <audio id="previewMusic" preload="auto"></audio>
+  <details id="previewControls">
+    <summary>Staged composite · 20 seconds</summary>
+    <p>Layout review only. Select an existing card to inspect its overlap; Claude will set the final card and voice timing.</p>
+    <label>Existing disclaimer card <select id="cardChoice" aria-label="Existing disclaimer card"></select></label>
+    <label for="scrub">Dance timeline <output id="clock">0.00 / 20.00 s</output></label>
+    <input id="scrub" type="range" min="0" max="20" step="0.0333333333" value="0">
+    <div class="buttons"><button id="playButton" type="button">Play</button><button id="restartButton" type="button">Restart</button><button id="muteButton" type="button">Mute music</button></div>
+    <p id="previewStatus" role="status">Loading full 1280 × 720 alpha video.</p>
+  </details>
+  <script type="module">
+    const DURATION = 20;
+    const cards = [
+      'ATTENTION!',
+      'This game was made entirely using artificial intelligence.',
+      'Whether you like it...or it’s just more soulless AI slop...is up to you.',
+      'But I do hope you are able to have some fun.',
+      'Now go on! Git!'
+    ];
+    const video = document.querySelector('#previewDancer'), music = document.querySelector('#previewMusic');
+    const controls = document.querySelector('#previewControls'), select = document.querySelector('#cardChoice');
+    const card = document.querySelector('#previewCard'), prompt = document.querySelector('.dsc-prompt');
+    const skip = document.querySelector('#disclaimerSkip'), status = document.querySelector('#previewStatus');
+    const slider = document.querySelector('#scrub'), clock = document.querySelector('#clock');
+    const playButton = document.querySelector('#playButton'), muteButton = document.querySelector('#muteButton');
+    const params = new URLSearchParams(location.search), errors = [], mediaUrls = [];
+    let running = false, raf = 0, lastSeek = 0, selectedCard = 1;
+    music.volume = .45;
+    cards.forEach((text, index) => { const option = new Option(text, String(index)); select.add(option); });
+    select.add(new Option('No text (layout check)', '-1'));
+    function setCard(index) {
+      selectedCard = Number.isInteger(index) && index >= -1 && index < cards.length ? index : 1;
+      select.value = String(selectedCard); card.textContent = cards[selectedCard] || '';
+      card.classList.toggle('attn', selectedCard === 0);
+    }
+    function paintTime() {
+      const time = Math.min(DURATION, running ? music.currentTime : video.currentTime || 0);
+      slider.value = String(time); clock.textContent = `${time.toFixed(2)} / 20.00 s`;
+      return time;
+    }
+    function pause() {
+      running = false; cancelAnimationFrame(raf); video.pause(); music.pause();
+      video.playbackRate = 1; playButton.textContent = 'Play'; skip.hidden = true; paintTime();
+    }
+    function frame() {
+      if (!running) return;
+      const time = paintTime();
+      if (time >= DURATION - .005 || music.ended) { pause(); status.textContent = '20-second dance complete.'; return; }
+      const drift = video.currentTime - music.currentTime;
+      if (Math.abs(drift) > .18 && !video.seeking && performance.now() - lastSeek > 500) {
+        video.currentTime = music.currentTime; lastSeek = performance.now();
+      } else video.playbackRate = Math.max(.96, Math.min(1.04, 1 - drift * .3));
+      raf = requestAnimationFrame(frame);
+    }
+    async function seek(time) {
+      pause(); prompt.hidden = true;
+      time = Math.max(0, Math.min(DURATION, Number(time) || 0));
+      if (video.readyState < 1) await ready;
+      const requested = Math.min(time, Math.max(0, video.duration - .001));
+      const settled = Math.abs(video.currentTime - requested) < .0001 ? Promise.resolve() : new Promise((resolve, reject) => {
+        const timer = setTimeout(() => { video.removeEventListener('seeked', done); reject(new Error('Video seek timed out')); }, 5000);
+        function done() { clearTimeout(timer); resolve(); }
+        video.addEventListener('seeked', done, { once: true });
+      });
+      video.currentTime = requested; music.currentTime = time;
+      await settled; paintTime(); return proof();
+    }
+    async function play() {
+      await ready;
+      if (video.currentTime >= DURATION - .08) await seek(0);
+      music.currentTime = video.currentTime; prompt.hidden = true;
+      try { await Promise.all([video.play(), music.play()]); }
+      catch (error) { pause(); status.textContent = 'Press Play to start video and music together.'; return false; }
+      running = true; playButton.textContent = 'Pause'; skip.hidden = false;
+      status.textContent = 'Full-frame travel preview; existing card held for layout review.';
+      cancelAnimationFrame(raf); raf = requestAnimationFrame(frame); return true;
+    }
+    function proof() {
+      const box = video.getBoundingClientRect(), stage = document.querySelector('#disclaimerStage').getBoundingClientRect();
+      return { duration: DURATION, videoDuration: video.duration, audioDuration: music.duration, width: video.videoWidth, height: video.videoHeight,
+        crop: [0, 0, 1280, 720], sourceStart: 9.151494, videoTime: video.currentTime, audioTime: music.currentTime,
+        running, selectedCard, videoBox: { x: box.x, y: box.y, width: box.width, height: box.height },
+        stageBox: { x: stage.x, y: stage.y, width: stage.width, height: stage.height }, errors: [...errors] };
+    }
+    // The camera harness' private static server need not implement HTTP byte ranges.
+    // Buffer this short staged clip locally so review seeks cannot silently restart at 0.
+    // Production loading remains Claude's controller's responsibility.
+    async function bufferMedia(element, file) {
+      const response = await fetch(file);
+      if (!response.ok) throw new Error(`${file}: HTTP ${response.status}`);
+      const url = URL.createObjectURL(await response.blob()); mediaUrls.push(url);
+      const loaded = new Promise((resolve, reject) => {
+        element.addEventListener('loadedmetadata', resolve, { once: true });
+        element.addEventListener('error', () => reject(new Error(`${file}: media decode failed`)), { once: true });
+      });
+      element.src = url; element.load(); await loaded;
+    }
+    const ready = Promise.all([bufferMedia(video, 'marine-dance-transparent.webm'), bufferMedia(music, 'audio-dance.mp3')]).then(() => {
+      status.textContent = `Ready: ${video.videoWidth} × ${video.videoHeight}, ${video.duration.toFixed(2)} seconds, full frame.`;
+      return true;
+    });
+    ready.catch(error => { const message = String(error); errors.push(message); status.textContent = message; });
+    select.addEventListener('change', () => setCard(Number(select.value)));
+    slider.addEventListener('input', () => seek(Number(slider.value)).catch(error => errors.push(String(error))));
+    playButton.addEventListener('click', () => running ? pause() : play().catch(error => errors.push(String(error))));
+    document.querySelector('#restartButton').addEventListener('click', async () => { await seek(0); await play(); });
+    muteButton.addEventListener('click', () => { music.muted = !music.muted; muteButton.textContent = music.muted ? 'Unmute music' : 'Mute music'; });
+    skip.addEventListener('click', pause);
+    document.querySelector('#disclaimer').addEventListener('pointerdown', event => {
+      if (event.target === skip) return;
+      if (!prompt.hidden) play().catch(error => errors.push(String(error)));
+    });
+    document.addEventListener('keydown', event => {
+      if (event.target.closest('#previewControls')) return;
+      if (event.code === 'Escape') { event.preventDefault(); pause(); }
+      else if (!prompt.hidden || event.code === 'Space') { event.preventDefault(); running ? pause() : play().catch(error => errors.push(String(error))); }
+    });
+    window.addEventListener('pagehide', () => { pause(); for (const url of mediaUrls) URL.revokeObjectURL(url); });
+    if (params.has('clean')) controls.dataset.clean = '';
+    setCard(params.has('card') ? Number(params.get('card')) : 1);
+    window.disclaimerPreview = { ready, play, pause, seek, setCard, proof, duration: DURATION };
+    ready.then(async () => {
+      if (params.has('time')) await seek(Number(params.get('time')));
+      if (params.get('autoplay') === '1') await play();
+    }).catch(error => errors.push(String(error)));
+  </script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+[
+  {
+    "u": 0,
+    "state": "seated",
+    "handToPath": 0,
+    "footToPalm": 0.275
+  },
+  {
+    "u": 0.1,
+    "state": "drop",
+    "handToPath": 0,
+    "footToPalm": 0.014
+  },
+  {
+    "u": 0.16,
+    "state": "drop",
+    "handToPath": 0,
+    "footToPalm": 0.04
+  },
+  {
+    "u": 0.25,
+    "state": "gone",
+    "handToPath": 0,
+    "footToPalm": null
+  },
+  {
+    "u": 0.32,
+    "state": "gone",
+    "handToPath": 0,
+    "footToPalm": null
+  },
+  {
+    "u": 0.4,
+    "state": "hand",
+    "handToPath": 0,
+    "footToPalm": 0
+  },
+  {
+    "u": 0.48,
+    "state": "hand",
+    "handToPath": 0,
+    "footToPalm": 0
+  },
+  {
+    "u": 0.56,
+    "state": "hand",
+    "handToPath": 0,
+    "footToPalm": 0
+  },
+  {
+    "u": 0.62,
+    "state": "seated",
+    "handToPath": 0,
+    "footToPalm": 0.019
+  },
+  {
+    "u": 0.8,
+    "state": "seated",
+    "handToPath": 0,
+    "footToPalm": 0.161
+  }
+]

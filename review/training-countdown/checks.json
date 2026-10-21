@@ -1,0 +1,32 @@
+{
+  "started": {
+    "sim": 2.1945999999046326,
+    "wall": 24519.5
+  },
+  "deployed": [
+    {
+      "detail": {
+        "type": "training-spawn",
+        "runId": 1,
+        "eventId": 1093,
+        "kind": "shambler",
+        "count": 3
+      },
+      "sim": 7.20059999990463,
+      "wall": 30418.899999976158
+    }
+  ],
+  "activeSeconds": 5.005999999999997,
+  "wallSeconds": 5.899399999976158,
+  "paused": 4.55760000002384,
+  "clearCancelled": true,
+  "blackoutCancelled": true,
+  "leaveCancelled": true,
+  "narrow": {
+    "x": 55,
+    "y": 290,
+    "width": 280,
+    "height": 118.1875
+  },
+  "errors": []
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "a": "    import { skinMergeGroup, skinUnmerge, skinSignature } from './core/skin-merge.js';",
+    "b": "    import { createMarineWaist, followMarineWaist } from './studio/marine-waist.js';\r\n    import { skinMergeGroup, skinUnmerge, skinSignature } from './core/skin-merge.js';"
+  },
+  {
+    "a": "      // Bake rigid parts together (see mergeRigidMeshes); the hip is animated on its own.\r\n      mergeRigidMeshes(g, gearParts, new Set([hip, ...patches]));",
+    "b": "      // The shirt hem rides the pelvis; its upper rows bend into the chest.\r\n      const waist = !legacyBody ? createMarineWaist(THREE,g,{lower:lowerBody,torso:torsoG,projectUV:boxProjectUV}) : null;\r\n      // Bake rigid parts together, keeping the deforming cloth mesh independent.\r\n      mergeRigidMeshes(g, gearParts, new Set([hip, ...patches, ...(waist?[waist.mesh]:[])]));"
+  },
+  {
+    "a": "      if (head) {\r\n        head.rotation.x = headPitch;\r\n        head.rotation.y = headYaw - POSE.holdTwist;",
+    "b": "      followMarineWaist(THREE,ud); // Follow the final pelvis translation/roll after its yaw limit.\r\n      if (head) {\r\n        head.rotation.x = headPitch;\r\n        head.rotation.y = headYaw - POSE.holdTwist;"
+  }
+]

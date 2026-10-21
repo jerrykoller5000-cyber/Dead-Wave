@@ -1,0 +1,30 @@
+✔ flat head and boots stop before a thin wall even when the root clears it (1.0456ms)
+✔ fast swept dive cannot tunnel through a thin wall and diagonal motion slides along it (0.1355ms)
+✔ body above a short obstacle clears it; downward body at its height is blocked (0.1554ms)
+✔ tree/rock circles sweep from outside and a contacted velocity cannot keep driving into the surface (0.464ms)
+✔ touching a wall can steer away without breaking flight or slow-motion policy (0.1398ms)
+✔ flight knees and ankles vary over time, recovery plants before extending, poses stay finite (0.713ms)
+✔ recovery leg IK puts a reachable ankle on its plant and keeps the boot level through torso rotations (2.3667ms)
+✔ corner contact and initial overlap resolve without tunnelling or non-finite corrections (0.2583ms)
+✔ backward-dive boots overlapping a narrow trunk cannot push the root through to its far side (0.1432ms)
+✔ ground dive keeps its existing lift; rising jump momentum is carried (0.8287ms)
+✔ apex/descent receives the usual dive lift once, never a stacked lift (0.1765ms)
+✔ air conversion retains meter cost and cannot retrigger while diving or recovering (0.9294ms)
+✔ empty-meter and timed-drill jump dives retain lift without bullet time; kill refill stays unchanged (0.1594ms)
+✔ carrying an early jump produces more height and airtime than a ground dive (0.2081ms)
+✔ a dive flies about 5 m in slow motion, lands, lies, gets up and cools down (1.9092ms)
+✔ a move key gets him up early, but not before downMin (0.5326ms)
+✔ steering bends the flight and keeps the speed in range (0.8219ms)
+✔ the meter pays for slow motion; empty, the dive is at full speed; it refills idle and with kills (0.5594ms)
+✔ a dive with slow: false (a timed range drill) has no bullet time and costs no meter (0.2028ms)
+✔ the meter running dry mid-flight eases time back to normal (0.2051ms)
+✔ the body lies flat in the air, lower on the way down, flat on the ground, upright again after (0.3024ms)
+✔ the chest turns to the aim: sideways dive faces it, forward is belly down, backward is on his back (0.2749ms)
+ℹ tests 22
+ℹ suites 0
+ℹ pass 22
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 103.6341

@@ -1,0 +1,9 @@
+{
+  "path": "game/training-containment.js",
+  "sha256": "e8080da366b27d76485cd34d6b7644f454c48e139e52e545b5660608d5820360",
+  "controllerUnchanged": true,
+  "indexEdited": false,
+  "worldEdited": false,
+  "renderBatches": 17,
+  "turrets": 4
+}

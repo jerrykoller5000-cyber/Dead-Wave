@@ -1,0 +1,75 @@
+{
+  "loadSec": 22.885,
+  "flow": {
+    "state": "IDLE",
+    "open": false,
+    "targets": 5,
+    "magRestored": true,
+    "focus": "BODY",
+    "monitor": {
+      "updates": 18,
+      "height": 3.3448,
+      "bottom": 2.6448
+    }
+  },
+  "report": {
+    "text": "Last drill resultDraw on the Beep30DRILL COMPLETERun time: 2.60sshot accuracy: 100.0%Plates cleared: 1/1Shots fired: 1First shot after beep: 2.17sBase 10 + bonuses 20 − deductions 0New personal record: Best score · Fastest full clear · Best full-clear accuracy · Fastest draw + shot",
+    "oldModal": false
+  },
+  "movement": {
+    "before": -644,
+    "after": -647.2867677207622
+  },
+  "walk": {
+    "maxGap": 0,
+    "maxSway": 0.020998896888751107,
+    "waist": {
+      "vertices": 1656,
+      "triangles": 552,
+      "uploads": 1187
+    }
+  },
+  "cloth": [
+    {
+      "lean": 0,
+      "twist": 0,
+      "roll": 0,
+      "low": 84,
+      "high": 504,
+      "soft": 1068,
+      "error": 1.2909755597867445e-8,
+      "normalError": 3.5152362354295974e-8
+    },
+    {
+      "lean": 0.36,
+      "twist": 0.5,
+      "roll": 0.05,
+      "low": 84,
+      "high": 504,
+      "soft": 1068,
+      "error": 5.963338047079005e-8,
+      "normalError": 3.800155068400812e-8
+    },
+    {
+      "lean": 0.6,
+      "twist": -0.9,
+      "roll": -0.07,
+      "low": 84,
+      "high": 504,
+      "soft": 1068,
+      "error": 5.8736310750972843e-8,
+      "normalError": 3.850049634657182e-8
+    },
+    {
+      "lean": -0.25,
+      "twist": 0.9,
+      "roll": 0.04,
+      "low": 84,
+      "high": 504,
+      "soft": 1068,
+      "error": 5.887875300205878e-8,
+      "normalError": 4.3116133774390164e-8
+    }
+  ],
+  "errors": []
+}

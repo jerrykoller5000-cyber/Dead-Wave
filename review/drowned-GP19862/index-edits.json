@@ -1,0 +1,10 @@
+[
+  [
+    "clearDrowned, stepDrowned, drownedPull",
+    "clearDrowned, chooseDrownedAttack, stepDrowned, drownedPull"
+  ],
+  [
+    "            if (z.attackCd > 0) return;\r\n            z.attackCd = cd;",
+    "            if (z.attackCd > 0) return;\r\n            if (type === 'player' && chooseDrownedAttack(z, zTarget(z)) !== 'strike') return; // GP-19862: one equal grab/strike choice per contact\r\n            z.attackCd = cd;"
+  ]
+]

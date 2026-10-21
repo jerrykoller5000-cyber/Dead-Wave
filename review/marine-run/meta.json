@@ -1,0 +1,9 @@
+{
+  "asset": "marine-run",
+  "owner": "claude",
+  "rig": "marine",
+  "clip": "run",
+  "reference": "Jog_Fwd_Loop",
+  "design": "default",
+  "task": "CL-84"
+}

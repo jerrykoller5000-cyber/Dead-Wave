@@ -1,0 +1,58 @@
+{
+  "loadSec": 21.494,
+  "pulse": {
+    "runs": [
+      {
+        "distance": 12,
+        "cycles": 2,
+        "min": 0.4200026044729889,
+        "max": 0.8,
+        "maxStep": 0.006963450067083876
+      },
+      {
+        "distance": 7,
+        "cycles": 7,
+        "min": 0.4200008235107278,
+        "max": 0.933326455172812,
+        "maxStep": 0.023398209787414026
+      },
+      {
+        "distance": 3,
+        "cycles": 12,
+        "min": 0.42002872704083066,
+        "max": 1.1110857131973202,
+        "maxStep": 0.05657852354520754
+      }
+    ],
+    "invalidDtUnchanged": true,
+    "injuredRange": 0.6379222094726005,
+    "vertices": 6432,
+    "finite": true,
+    "idempotent": true,
+    "veinParent": true,
+    "pool": {
+      "sameMesh": true,
+      "sameGeometry": true,
+      "vertices": 6432,
+      "detonated": false,
+      "glow": 0.5
+    },
+    "oneVeinMesh": 1
+  },
+  "performance": {
+    "alive": 48,
+    "fps": 59.061649745443056,
+    "worst": 25.80000001192093,
+    "over50": 0,
+    "render": {
+      "calls": 5231,
+      "frameCalls": 15,
+      "drawCalls": 486,
+      "triangles": 803591,
+      "points": 0,
+      "lines": 0,
+      "timestamp": 0
+    }
+  },
+  "errors": []
+}

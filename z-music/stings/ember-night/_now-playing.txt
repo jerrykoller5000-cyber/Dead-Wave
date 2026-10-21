@@ -1,0 +1,3 @@
+Ember night
+Used for: A short cue: a fire horde is coming
+The game plays now: assets/soundtrack/sting_ember (stings.ember)

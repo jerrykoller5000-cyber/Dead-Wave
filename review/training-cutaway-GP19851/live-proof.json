@@ -1,0 +1,1144 @@
+{
+  "loadSec": 17.08,
+  "views": {
+    "reverse": {
+      "cutaway": [
+        {
+          "side": "east",
+          "opacity": 0.06000000000000005,
+          "hidden": true
+        },
+        {
+          "side": "south",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "west",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "overhead",
+          "opacity": 0,
+          "hidden": true
+        },
+        {
+          "side": "east",
+          "opacity": 0.06000000000000005,
+          "hidden": true
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        }
+      ],
+      "solids": 118,
+      "draws": 1241
+    },
+    "original": {
+      "cutaway": [
+        {
+          "side": "east",
+          "opacity": 0.06,
+          "hidden": true
+        },
+        {
+          "side": "south",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "west",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "overhead",
+          "opacity": 0,
+          "hidden": true
+        },
+        {
+          "side": "east",
+          "opacity": 0.06,
+          "hidden": true
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        }
+      ],
+      "solids": 118,
+      "draws": 1826
+    },
+    "rangeClear": {
+      "cutaway": [
+        {
+          "side": "east",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "south",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "west",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "overhead",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "east",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        }
+      ],
+      "solids": 118,
+      "draws": 2216
+    },
+    "buildClear": {
+      "cutaway": [
+        {
+          "side": "east",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "south",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "west",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "overhead",
+          "opacity": 0,
+          "hidden": true
+        },
+        {
+          "side": "east",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        }
+      ],
+      "solids": 118,
+      "draws": 2516
+    }
+  },
+  "trace": [
+    {
+      "bullet": true,
+      "aim": false
+    },
+    {
+      "bullet": true,
+      "aim": false
+    }
+  ],
+  "orbits": [
+    {
+      "x": -11,
+      "views": [
+        {
+          "camera": [
+            -14.609780616091802,
+            -190.09857992763708,
+            -640.2710170585799
+          ],
+          "shell": [
+            {
+              "side": "east",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "south",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "west",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "overhead",
+              "opacity": 0,
+              "hidden": true
+            },
+            {
+              "side": "east",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            }
+          ]
+        },
+        {
+          "camera": [
+            -18.770979801202465,
+            -190.0908445627432,
+            -633.6162465052903
+          ],
+          "shell": [
+            {
+              "side": "east",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "south",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "west",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "overhead",
+              "opacity": 0,
+              "hidden": true
+            },
+            {
+              "side": "east",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            }
+          ]
+        },
+        {
+          "camera": [
+            -17.579425063907173,
+            -190.09179946978256,
+            -627.483705676191
+          ],
+          "shell": [
+            {
+              "side": "east",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "south",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "west",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "overhead",
+              "opacity": 0,
+              "hidden": true
+            },
+            {
+              "side": "east",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            }
+          ]
+        },
+        {
+          "camera": [
+            -12.413567786084347,
+            -190.0917269092057,
+            -624.1232699729004
+          ],
+          "shell": [
+            {
+              "side": "east",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "south",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "west",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "overhead",
+              "opacity": 0,
+              "hidden": true
+            },
+            {
+              "side": "east",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            }
+          ]
+        },
+        {
+          "camera": [
+            -6.451781609538819,
+            -190.0917269092057,
+            -625.4156913689715
+          ],
+          "shell": [
+            {
+              "side": "east",
+              "opacity": 0.06,
+              "hidden": true
+            },
+            {
+              "side": "south",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "west",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "overhead",
+              "opacity": 0,
+              "hidden": true
+            },
+            {
+              "side": "east",
+              "opacity": 0.06,
+              "hidden": true
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            }
+          ]
+        },
+        {
+          "camera": [
+            -3.136511243244345,
+            -190.0917269092057,
+            -630.5425314961296
+          ],
+          "shell": [
+            {
+              "side": "east",
+              "opacity": 0.06,
+              "hidden": true
+            },
+            {
+              "side": "south",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "west",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "overhead",
+              "opacity": 0,
+              "hidden": true
+            },
+            {
+              "side": "east",
+              "opacity": 0.06,
+              "hidden": true
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            }
+          ]
+        },
+        {
+          "camera": [
+            -4.408274095912017,
+            -190.0917269092057,
+            -636.5242920195766
+          ],
+          "shell": [
+            {
+              "side": "east",
+              "opacity": 0.06,
+              "hidden": true
+            },
+            {
+              "side": "south",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "west",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "overhead",
+              "opacity": 0,
+              "hidden": true
+            },
+            {
+              "side": "east",
+              "opacity": 0.06,
+              "hidden": true
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            }
+          ]
+        },
+        {
+          "camera": [
+            -9.580820719020949,
+            -190.0917269092057,
+            -639.875877266176
+          ],
+          "shell": [
+            {
+              "side": "east",
+              "opacity": 0.5742000001072883,
+              "hidden": false
+            },
+            {
+              "side": "south",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "west",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "overhead",
+              "opacity": 0,
+              "hidden": true
+            },
+            {
+              "side": "east",
+              "opacity": 0.5742000001072883,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "x": -5,
+      "views": [
+        {
+          "camera": [
+            -10.154240005779526,
+            -190.0917269092057,
+            -638.5864492905363
+          ],
+          "shell": [
+            {
+              "side": "east",
+              "opacity": 0.06,
+              "hidden": true
+            },
+            {
+              "side": "south",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "west",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "overhead",
+              "opacity": 0,
+              "hidden": true
+            },
+            {
+              "side": "east",
+              "opacity": 0.06,
+              "hidden": true
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            }
+          ]
+        },
+        {
+          "camera": [
+            -12.928577975420229,
+            -190.0917269092057,
+            -633.449472758047
+          ],
+          "shell": [
+            {
+              "side": "east",
+              "opacity": 0.06,
+              "hidden": true
+            },
+            {
+              "side": "south",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "west",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "overhead",
+              "opacity": 0,
+              "hidden": true
+            },
+            {
+              "side": "east",
+              "opacity": 0.06,
+              "hidden": true
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            }
+          ]
+        },
+        {
+          "camera": [
+            -11.593984545947126,
+            -190.0917269092057,
+            -627.4648643250573
+          ],
+          "shell": [
+            {
+              "side": "east",
+              "opacity": 0.06,
+              "hidden": true
+            },
+            {
+              "side": "south",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "west",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "overhead",
+              "opacity": 0,
+              "hidden": true
+            },
+            {
+              "side": "east",
+              "opacity": 0.06,
+              "hidden": true
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            }
+          ]
+        },
+        {
+          "camera": [
+            -6.451325352225028,
+            -190.0917269092057,
+            -624.135019889724
+          ],
+          "shell": [
+            {
+              "side": "east",
+              "opacity": 0.5675999999642372,
+              "hidden": false
+            },
+            {
+              "side": "south",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "west",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "overhead",
+              "opacity": 0.5075999999642372,
+              "hidden": false
+            },
+            {
+              "side": "east",
+              "opacity": 0.5675999999642372,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            }
+          ]
+        },
+        {
+          "camera": [
+            -0.4683740020397312,
+            -190.0917269092057,
+            -625.4110955780369
+          ],
+          "shell": [
+            {
+              "side": "east",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "south",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "west",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "overhead",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "east",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            }
+          ]
+        },
+        {
+          "camera": [
+            2.8620658143290134,
+            -190.0917269092057,
+            -630.5426216833848
+          ],
+          "shell": [
+            {
+              "side": "east",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "south",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "west",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "overhead",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "east",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            }
+          ]
+        },
+        {
+          "camera": [
+            1.5851439154998719,
+            -190.0917269092057,
+            -636.5388213267838
+          ],
+          "shell": [
+            {
+              "side": "east",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "south",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "west",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "overhead",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "east",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            }
+          ]
+        },
+        {
+          "camera": [
+            -3.5406658421667796,
+            -190.0917269092057,
+            -639.8618236710413
+          ],
+          "shell": [
+            {
+              "side": "east",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "south",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "west",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "overhead",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "east",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "restore": [
+    {
+      "side": "east",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "south",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "north",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "west",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "overhead",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "east",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "north",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "north",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "north",
+      "opacity": 1,
+      "hidden": false
+    }
+  ],
+  "lights": true,
+  "errors": []
+}

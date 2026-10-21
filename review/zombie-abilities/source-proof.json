@@ -1,0 +1,16 @@
+{
+  "at": "2026-10-10T05:04:40.353Z",
+  "inlineScripts": 2,
+  "moduleFiles": 4,
+  "syntax": "PASS",
+  "hooks": "PASS",
+  "utf8NoBom": "PASS",
+  "hashes": {
+    "index.html": "2f39d756d6f27ea564c442e9a48723c870098800a3afaaa489ebb96ec6c076d0",
+    "game/zombie-abilities.js": "56def4915af71a494765a5274817a9b7cd12a00267d94052bebfc92d79dd90b0",
+    "game/zombie-ability-collision.js": "8183749a0e54a586eccd5d3f13514277b1c120b653dfa92308a25a0915afc2d9",
+    "game/zombie-ability-runtime.js": "d1c4bbef2c3a0ded070b7106fb41533209a246cb48f8efdb66ab79932d433cd9",
+    "game/zombie-ability-visuals.js": "961bd36a8291735bb7a249f025d3b11d85bbc2c4bed0fa502adc222910d3f492",
+    "ui/strings.js": "90ff9f98b1f1fbd1bc4baf61778925fb984bf0cd9dd694f9230102a8a8d84195"
+  }
+}

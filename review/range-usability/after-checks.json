@@ -1,0 +1,37 @@
+{
+  "sizes": [
+    {
+      "width": 1440,
+      "client": 603,
+      "scroll": 603,
+      "x": 142.40625,
+      "right": 1382.40625,
+      "shelf": 10
+    },
+    {
+      "width": 1280,
+      "client": 603,
+      "scroll": 603,
+      "x": 0.015625,
+      "right": 1228.8125,
+      "shelf": 10
+    },
+    {
+      "width": 1366,
+      "client": 603,
+      "scroll": 603,
+      "x": 71.375,
+      "right": 1311.375,
+      "shelf": 10
+    },
+    {
+      "width": 390,
+      "client": 791,
+      "scroll": 1147,
+      "x": 7.796875,
+      "right": 382.1875,
+      "shelf": 10
+    }
+  ],
+  "errors": []
+}

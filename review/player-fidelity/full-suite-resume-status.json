@@ -1,0 +1,42 @@
+{
+  "state": "complete",
+  "suiteCompleted": true,
+  "scope": "Only four uncompleted serial retries from interrupted full suite; not a fresh full-suite run.",
+  "command": "npm test -- t170 t178 t182 t188 --jobs 1 --no-retry --all-fails",
+  "jobs": 1,
+  "automaticSerialRetry": false,
+  "startedAt": "2026-10-09T10:15:38.732Z",
+  "sourceHashesStart": {
+    "index.html": "9d83b08c66185379aa2039fd0774474cb0920f691631d27159639c37271444ef",
+    "studio/marine-turn.js": "64543fb53a32952e175f3d96fb409c5250e7916dd9dadb2e3ed38d6395f34a02",
+    "studio/marine-body.js": "7a552dcb8d5bb579c7095e2ee82a55639b4cd7cabd4be79a2cbe7dcf482c2079",
+    "ui/marine-face.js": "fe2db293cf8205894ad0f2e06499f8433d526edafd8bec0e79abffd0bba2fd5b",
+    "studio/marine-detail.js": "15656a503c46fb04b31e81f6277f3b77c4a7f9c87d82cdd6fbf1d2648351c093",
+    "studio/marine-headgear.js": "23363fe21d47cd152df80bfd0aeed545c51ec7e5ce4672da8714018c5e244f1d",
+    "tools/tests/fakethree.mjs": "ee2952439d6061976a941af08f0c91cd57cbee8aaa1a9a0e5017feff6b39999b",
+    "tools/tests/run-all.mjs": "7ade2757bc438f0cc22118657dabcf793e1b85d77ba91d4e10972a415319323f",
+    "index.html (makeMarine)": "080aba097bc135ec487863c02db5f6556571643edfd23bed08d17ef2591beb46"
+  },
+  "harnessAtStart": {
+    "modifiedAt": "2026-10-09T09:10:56.347Z",
+    "matrix4Transpose": "transpose() { return this; }"
+  },
+  "originalRunStatus": "review/player-fidelity/full-suite-status.json",
+  "logPath": "review/player-fidelity/full-suite-resume.log",
+  "pid": 27364,
+  "finishedAt": "2026-10-09T10:18:44.965Z",
+  "exitCode": 0,
+  "signal": null,
+  "sourceHashesEnd": {
+    "index.html": "9d83b08c66185379aa2039fd0774474cb0920f691631d27159639c37271444ef",
+    "studio/marine-turn.js": "64543fb53a32952e175f3d96fb409c5250e7916dd9dadb2e3ed38d6395f34a02",
+    "studio/marine-body.js": "7a552dcb8d5bb579c7095e2ee82a55639b4cd7cabd4be79a2cbe7dcf482c2079",
+    "ui/marine-face.js": "fe2db293cf8205894ad0f2e06499f8433d526edafd8bec0e79abffd0bba2fd5b",
+    "studio/marine-detail.js": "15656a503c46fb04b31e81f6277f3b77c4a7f9c87d82cdd6fbf1d2648351c093",
+    "studio/marine-headgear.js": "23363fe21d47cd152df80bfd0aeed545c51ec7e5ce4672da8714018c5e244f1d",
+    "tools/tests/fakethree.mjs": "ee2952439d6061976a941af08f0c91cd57cbee8aaa1a9a0e5017feff6b39999b",
+    "tools/tests/run-all.mjs": "7ade2757bc438f0cc22118657dabcf793e1b85d77ba91d4e10972a415319323f",
+    "index.html (makeMarine)": "080aba097bc135ec487863c02db5f6556571643edfd23bed08d17ef2591beb46"
+  },
+  "changedSources": []
+}

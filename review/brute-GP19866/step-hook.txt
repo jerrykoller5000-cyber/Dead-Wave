@@ -1,0 +1,16 @@
+        let bruteStep = null;
+        if (z.typeKey === 'brute') {
+          const victim = zTarget(z);
+          bruteStep = stepBrute(z, dt, { x:sx, z:sz, speed:spd, target:victim,
+            valid:!graceFreeze && !rising && !gameOver && !won && !scriptedKill && victim.alive !== false && !(victim.hp <= 0),
+            canStart:!lured && !windowRoute && !z.abilityBusy && z.attackWindup <= 0 && !(z.swingT > 0),
+            dodging:v=>v === localPlayer && rollT > 0,
+            blocked:(a,b)=>!!buildBetween(a.x,a.y+.9,a.z,b.x,b.y+.9,b.z) || segCrossesHouse(a.x,a.z,b.x,b.z,z.radius) });
+          if (bruteStep) {
+            sx=bruteStep.x;sz=bruteStep.z;spd=bruteStep.speed;
+            if (bruteStep.started === 'wind') { z.attackCd=Math.max(z.attackCd,BRUTE.cooldown);const sa=sndAt(zx,zz,30);AudioSys.zombieVoice('brute','attack',sa.v,sa.pan,z); }
+            if (bruteStep.hit) damagePlayer(z.damage,'brute',z,null,bruteStep.victim);
+            if (bruteStep.impact) spawnDust(zx+Math.sin(bruteStep.yaw)*1.1,z.mesh.position.y+.08,zz+Math.cos(bruteStep.yaw)*1.1,4);
+            if (bruteStep.started === 'miss') { const sa=sndAt(zx,zz,25);AudioSys.zombieVoice('brute','attack',sa.v*.75,sa.pan,z); }
+          }
+        }

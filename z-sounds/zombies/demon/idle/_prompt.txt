@@ -1,0 +1,9 @@
+#52 demon-idle
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 2.5 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A horned demon zombie's deep, distorted, gravelly growl with the crackle and hiss of smouldering embers on its body. Close-up, dry. No words, no music.
+
+In the game: zombieVoice('demon', 'idle')

@@ -1,0 +1,14 @@
+[
+    {
+        "old":  "      for (const c of casingList()) if (!seen.has(c)) { seen.add(c); newCases.push({ t, c, v: { x: c.vx, y: c.vy, z: c.vz }, q: gun.getWorldQuaternion(new THREE.Quaternion()).invert() }); }",
+        "new":  [
+                    "      for (const c of casingList()) if (!seen.has(c)) { seen.add(c); newCases.push({ t, c, v: { x: c.vx, y: c.vy, z: c.vz }, age: c.age, b: c.bounced, s: c.settled, q: gun.getWorldQuaternion(new THREE.Quaternion()).invert() }); }"
+                ]
+    },
+    {
+        "old":  "      ok(vl.x \u003c -1, \u0027thrown out to the gun\\\u0027s right (gun-local vx \u0027 + f3(vl.x) + \u0027)\u0027);",
+        "new":  [
+                    "      ok(vl.x \u003c -1, \u0027thrown out to the gun\\\u0027s right (gun-local vx \u0027 + f3(vl.x) + \u0027; world \u0027 + [c1.v.x, c1.v.y, c1.v.z].map(f3).join(\u0027,\u0027) + \u0027 age \u0027 + f3(c1.age) + (c1.b ? \u0027 bounced\u0027 : \u0027\u0027) + (c1.s ? \u0027 settled\u0027 : \u0027\u0027) + \u0027)\u0027);"
+                ]
+    }
+]

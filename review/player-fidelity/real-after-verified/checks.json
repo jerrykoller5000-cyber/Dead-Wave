@@ -1,0 +1,39 @@
+{
+  "before": false,
+  "sourceHashes": {
+    "studio/marine-body.js": "7a552dcb8d5bb579c7095e2ee82a55639b4cd7cabd4be79a2cbe7dcf482c2079",
+    "ui/marine-face.js": "fe2db293cf8205894ad0f2e06499f8433d526edafd8bec0e79abffd0bba2fd5b",
+    "studio/marine-detail.js": "15656a503c46fb04b31e81f6277f3b77c4a7f9c87d82cdd6fbf1d2648351c093",
+    "studio/marine-headgear.js": "23363fe21d47cd152df80bfd0aeed545c51ec7e5ce4672da8714018c5e244f1d",
+    "index.html (makeMarine)": "080aba097bc135ec487863c02db5f6556571643edfd23bed08d17ef2591beb46"
+  },
+  "sourceUnchanged": true,
+  "results": {
+    "t184": {
+      "pass": 28,
+      "fail": 1,
+      "skip": 0
+    },
+    "t189": {
+      "pass": 43,
+      "fail": 4,
+      "skip": 0
+    }
+  },
+  "errors": [
+    "Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'.",
+    "Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'."
+  ],
+  "pageErrorDetails": [
+    {
+      "test": "t189",
+      "message": "Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'.",
+      "stack": "TypeError: Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'.\n    at http://127.0.0.1:61642/ui/prep-checklist.js:116:15\n    at eval (eval at evaluate (:311:30), <anonymous>:21:12)\n    at async <anonymous>:337:30"
+    },
+    {
+      "test": "t189",
+      "message": "Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'.",
+      "stack": "TypeError: Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'.\n    at http://127.0.0.1:61642/ui/prep-checklist.js:116:15\n    at eval (eval at evaluate (:311:30), <anonymous>:108:12)\n    at async <anonymous>:337:30"
+    }
+  ]
+}

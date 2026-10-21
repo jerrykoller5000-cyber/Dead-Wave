@@ -1,0 +1,101 @@
+{
+  "at": "2026-10-14T17:15:21.254Z",
+  "results": [
+    {
+      "command": "node --test --test-reporter=tap review/inspector-audit-GP19919/async.test.mjs review/inspector-audit-GP19919/cdp.test.mjs review/inspector-audit-GP19919/automation/automation.test.mjs review/inspector-audit-GP19919/automation/input.test.mjs review/inspector-audit-GP19919/automation/instance-bounds.test.mjs review/inspector-audit-GP19919/usability/marine-controls.test.mjs review/inspector-audit-GP19919/usability/ui-controls.test.mjs review/inspector-audit-GP19919/usability/startup-cleanup.test.mjs",
+      "exit": 0,
+      "proof": [
+        "# tests 122",
+        "# pass 122",
+        "# fail 0",
+        "# cancelled 0",
+        "# skipped 0"
+      ]
+    },
+    {
+      "command": "node review/inspector-audit-GP19919/runtime/runtime.test.mjs",
+      "exit": 0,
+      "proof": [
+        "RESULT 37 runtime checks passed"
+      ]
+    },
+    {
+      "command": "node review/inspector-audit-GP19919/runtime/api.test.mjs",
+      "exit": 0,
+      "proof": [
+        "RESULT 37 API checks passed"
+      ]
+    },
+    {
+      "command": "node review/inspector-audit-GP19919/runtime/presentation.test.mjs",
+      "exit": 0,
+      "proof": [
+        "RESULT 5 held presentation checks passed"
+      ]
+    },
+    {
+      "command": "node --check tools/inspector-launch.mjs",
+      "exit": 0
+    },
+    {
+      "command": "node --check tools/serve.mjs",
+      "exit": 0
+    },
+    {
+      "command": "node --check tools/camera.mjs",
+      "exit": 0
+    },
+    {
+      "command": "node --check tools/camera-rig.js",
+      "exit": 0
+    },
+    {
+      "command": "node --check tools/cdp.mjs",
+      "exit": 0
+    },
+    {
+      "command": "node --check studio/notes-endpoint.mjs",
+      "exit": 0
+    },
+    {
+      "command": "node --check studio/inspector/api.js",
+      "exit": 0
+    },
+    {
+      "command": "node --check studio/inspector/async.js",
+      "exit": 0
+    },
+    {
+      "command": "node --check studio/inspector/catalog.js",
+      "exit": 0
+    },
+    {
+      "command": "node --check studio/inspector/inspector.js",
+      "exit": 0
+    },
+    {
+      "command": "node --check studio/inspector/marine.js",
+      "exit": 0
+    },
+    {
+      "command": "node --check studio/inspector/orbit.js",
+      "exit": 0
+    },
+    {
+      "command": "node --check studio/inspector/stage.js",
+      "exit": 0
+    },
+    {
+      "command": "node --check studio/inspector/subjects.js",
+      "exit": 0
+    },
+    {
+      "command": "node --check studio/inspector/timeline.js",
+      "exit": 0
+    },
+    {
+      "command": "node --check studio/inspector/ui.js",
+      "exit": 0
+    }
+  ]
+}

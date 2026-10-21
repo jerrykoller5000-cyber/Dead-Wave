@@ -1,0 +1,129 @@
+--- before
++++ current
+@@ -1300,4 +1300,5 @@
+     import { SPIDER_WEB, createSpiderWebs } from './game/spider-web.js'; // GP-19857
+     import { leaperGroundPace, tickLeaperMotion, leaperLanding, applyLeaperMotion } from './game/leaper-motion.js'; // GP-19856
++    import { DROWNED, restoreDrownedPose, resetDrowned, clearDrowned, stepDrowned, drownedPull, drownedPace, releaseDrowned, breakDrownedGrip, smotherDrownedFires, applyDrownedPose } from './game/drowned-behavior.js'; // GP-19860
+     import { steerShambler, shamblerCanReach, hasShamblerSteering } from './game/shambler-steering.js';   // GP-19854
+     import { shamblerLungeResult, tickShamblerRecovery, shamblerRecoveryStep, applyShamblerRecovery } from './game/shambler-recovery.js';   // GP-19853
+@@ -17268,4 +17269,5 @@
+       const travel = rollTravel(forward, strafe, camYawCurrent, aimYaw);
+       rollDirX = travel.x; rollDirZ = travel.z;
++      breakDrownedGrip(localPlayer); // GP-19860: the roll breaks a wet grip before moving
+       rollT = ROLL_DUR;
+       rollCd = ROLL_DUR + (gearOwned.pads ? 0.5 : 0.8);
+@@ -33175,4 +33177,5 @@
+       if (!z.alive) return;
+       z.alive = false;
++      resetDrowned(z); // GP-19860: death releases the victim and restores the corpse pose
+       updateZombieAbilityVisuals(z, simTime, {});   // GP-179: fists go dark and the carried stone drops with its owner
+       if (z.fogHidden && z.mesh) { z.fogHidden = false; z.mesh.visible = true; }   // GB-59: the corpse is his to walk up to
+@@ -33313,4 +33316,5 @@
+ 
+     function clearZombies() {
++      clearDrowned(zombies); // GP-19860: no stale grip on room exit/reset
+       clearSpiderWebs(); // explicit clear removes silk hazards/flight too
+       enemyAbilities.clear();   // GP-179
+@@ -43730,9 +43734,11 @@
+       s *= 1 - (z.roleArmorAdd || 0);
+       if (type === 'fire' || type === 'burn') s *= 1 - (z.roleFireAdd || 0);
+-      return Math.max(WEAK_MIN, Math.min(WEAK_MAX, s));
++      const floor = z.typeKey === 'drowned' && (type === 'fire' || type === 'burn') ? .1 : WEAK_MIN; // GP-19860: wet bodies resist 90percent, all other floors unchanged
++      return Math.max(floor, Math.min(WEAK_MAX, s));
+     }
+     function damageZombie(z, amount, info = null) {
+       if (!z.alive) return;
+       const kind = (info && info.kind) || 'generic';
++      if (kind === 'melee' || kind === 'chainsaw') releaseDrowned(z); // GP-19860: a landed blade breaks the grip
+       let dx = (info && info.dir && info.dir.x) || 0;
+       let dz = (info && info.dir && info.dir.z) || 0;
+@@ -46846,4 +46852,22 @@
+     const hordeDbg = { join: (z, night) => { if (z) { z.hz = undefined; hordeJoin(z, night); } return z; }, sprintShare: hordeSprintShare, state: () => hordeState, HORDE, profileOf: hordeProfile, speedFor: hordeSpeedFor, run: () => PHYS.run, refill: () => ({ hold: fieldHold, t: fieldHoldT }) };
+ 
++    // GP-19860: existing cover/terrain/build collision rules also govern wet grips and dousing.
++    function drownedBlocked(a, b) {
++      return !!shotBlocked({ x:a.x, y:a.y+.7, z:a.z }, { x:b.x, y:b.y+.7, z:b.z });
++    }
++    function pullDrownedVictim(z, dx, dz) {
++      const pull = drownedPull(z, dx, dz);
++      if (!pull) return;
++      const victim = pull.target, p = victim.position, fromX = p.x, fromZ = p.z;
++      let x = fromX + pull.x, zz = fromZ + pull.z;
++      if (entityGroundY(x, zz, p.y + STEP_UP) > p.y + STEP_UP || drownedBlocked(p, {x, y:p.y, z:zz})) { releaseDrowned(z); return; }
++      let q = resolveSoftBarricades(x, zz, PLAYER_RADIUS, 1);
++      q = resolveHardBuildCollisions(q.x, q.z, PLAYER_RADIUS, true, p.y);
++      q = resolveStaticProps(q.x, q.z, PLAYER_RADIUS, p.y);
++      if (house.present) q = pushOutOfHouse(q.x, q.z, PLAYER_RADIUS);
++      const safe = resolveDeckBody(q.x, q.z, p.y, fromX, fromZ, p.y);
++      if (Math.hypot(safe.x-x, safe.z-zz) > .025) { releaseDrowned(z); return; }
++      p.x = safe.x; p.z = safe.z;
++    }
+     function updateZombies(dt) {
+       updateRunePistol();   // GB-119: the rune pistol on the dock, by day
+@@ -46856,4 +46880,5 @@
+       if (zombies.length && (ffPlayer.timer > 0 || zombies.some((z) => z.alive && !(z.poiGuard && !z.poiAwake)))) updateFlowFields(dt);
+       hordeFrame(dt);   // GB-94
++      for (const p of smotherDrownedFires(zombies, groundFires, dt, drownedBlocked)) spawnSmokePuff(p.x, p.y, p.z, { tone:'pale', size:.22, grow:.35, vy:.65, life:.65, peak:.35 }); // GP-19860: small pooled steam puffs
+       zombiesRemaining = Math.max(0, waveTotal - waveSpawned) + zombies.length;
+       if (phase === 'wave' && waveSpawned >= waveTotal) {
+@@ -46873,4 +46898,5 @@
+       for (const z of zombies) {
+         if (!z.alive) continue;
++        restoreDrownedPose(z); // GP-19860: restore last grab overlay before the normal rig poses
+         tickSpiderMotion(z, dt); // restore prior Spider pose before reactions
+         let spiderTouch = null;
+@@ -47470,4 +47496,20 @@
+         const shamblerTurn = steerShambler(z, sx, sz, dt);
+         if (shamblerTurn) { sx = shamblerTurn.x; sz = shamblerTurn.z; spd *= shamblerTurn.pace; }
++        let drownedStep = null;
++        if (z.typeKey === 'drowned') {
++          const victim = zTarget(z), local = victim === localPlayer;
++          const valid = !gameOver && !won && !scriptedKill && (!local || (!marineDown() && !climbingTower && !vault && !mortarMounted && !mortarCarried)) && victim.alive !== false && !(victim.hp <= 0);
++          drownedStep = stepDrowned(z, dt, { target:victim, radius:PLAYER_RADIUS, now:simTime, valid:valid && !graceFreeze && !rising,
++            canStart:!lured && !windowRoute && tx === px0 && tz === pz0 && z.attackCd <= 0 && z.attackWindup <= 0 && !(z.swingT > 0),
++            dodging:local && rollT > 0, blocked:Math.hypot(victim.position.x-zx, victim.position.z-zz) < 4 && drownedBlocked(z.mesh.position, victim.position) });
++          if (drownedStep) {
++            sx = drownedStep.x; sz = drownedStep.z; spd = drownedStep.speed;
++            if (drownedStep.started) { const sa = sndAt(zx, zz, 30); AudioSys.zombieVoice('drowned', 'attack', sa.v, sa.pan, z); }
++            if (drownedStep.caught) {
++              damagePlayer(z.damage, 'drowned', z, null, victim);
++              if (local) showBanner(dwText('world.message.drownedGrab'), dwText('world.message.drownedGrabHelp'), 1.2, '#b6e6da');
++            }
++          }
++        }
+         if (z.abilityBusy) spd = 0;   // GP-179: feet stay planted through the tell and follow-through
+         let mx = zx + ((graceFreeze || rising) ? 0 : sx * spd * dt);
+@@ -47515,4 +47557,6 @@
+         }
+         // (Spike traps spring on their own — see updateSpikeTraps.)
++
++        if (drownedStep?.phase === 'drag') pullDrownedVictim(z, mx-zx, mz-zz); // GP-19860: resolved backward steps, never teleport through walls
+ 
+         // Stumps pump: a pulse every fifth of a second, weakening, for a couple of
+@@ -47645,5 +47689,5 @@
+         }
+         // Face the way they are actually travelling, including any detour around a bluff.
+-        if (!knocked) z.mesh.rotation.y = spiderTurn ? spiderTurn.yaw : shamblerTurn ? shamblerTurn.yaw : Math.atan2(sx, sz); // hold the facing while down
++        if (!knocked) z.mesh.rotation.y = drownedStep ? drownedStep.yaw : spiderTurn ? spiderTurn.yaw : shamblerTurn ? shamblerTurn.yaw : Math.atan2(sx, sz); // hold the facing while down
+         {
+           const pitch = knockDownPitch(z, dt);
+@@ -48109,4 +48153,5 @@
+         applyShamblerMotion(z, dt, phase, standing ? 0 : walkAmt, marineGait);
+         applyShamblerRecovery(z);
++        applyDrownedPose(z); // GP-19860: open two-arm reach, bent elbows and backward hauling
+         applyFeralClaws(THREE, z, phase, standing ? 0 : walkAmt);   // GP-19850: open, palms-down rakes over final torso pose
+         if (z.flashT > 0) {
+@@ -48124,5 +48169,5 @@
+ 
+         z.attackCd -= dt;
+-        if ((!zombieGraceActive() || (z.poiGuard && z.poiAwake)) && !spiderWander && !shamblerRecovering && z.attackWindup <= 0 && !rising && !z.abilityBusy && tactics !== 'bomb') {   // GB-43, GP-19858
++        if ((!zombieGraceActive() || (z.poiGuard && z.poiAwake)) && !spiderWander && !shamblerRecovering && !drownedStep && z.attackWindup <= 0 && !rising && !z.abilityBusy && tactics !== 'bomb') {   // GB-43, GP-19858
+           const tryWindup = (type, dmg, cd, build) => {
+             if (z.attackCd > 0) return;
+@@ -49993,4 +50038,6 @@
+             * Math.min(playerWebT > 0 ? SPIDER_WEB.pace : 1, 1 - OTS_SLOW * OTS.w);   // GP-19857/CL-176: stronger slow; web and shoulder do not stack
+         }
++
++        targetSpeed *= drownedPace(localPlayer); // GP-19860: movement remains available during the brief grip
+ 
+         // Spawn swimming water ripples

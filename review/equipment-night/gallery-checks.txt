@@ -1,0 +1,4 @@
+PASS marine-gear: images, controls and 390px layout
+PASS armory/height: images, controls and 390px layout
+PASS weapon-fidelity: images, controls and 390px layout
+PASS equipment-night: images, controls and 390px layout

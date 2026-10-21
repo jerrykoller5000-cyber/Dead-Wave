@@ -1,0 +1,9 @@
+#66 guardian-attack
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 1.2 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A monstrous beast's snarl exploding into a piercing, distorted shriek as it strikes. Close-up, dry. No words, no music.
+
+In the game: zombieVoice('guardian', 'attack')

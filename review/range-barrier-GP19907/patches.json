@@ -1,0 +1,197 @@
+[
+  {
+    "file": "world/training.js",
+    "baseHash": "c85040d9567ba30c33c40fafe2eb18cdb4459d1fff3ee2976c0f97dbca2f21b0",
+    "patches": [
+      {
+        "oldText": "import { partitionTrainingShell } from './training-cutaway.js';",
+        "newText": "import { partitionTrainingShell } from './training-cutaway.js';\nimport { buildFiringLine } from './training-firing-line.js';"
+      },
+      {
+        "oldText": "// Past the yellow line, toward the targets: a shot there does not score.\nexport function overTheLine(playerZ, originZ) {\n  return playerZ > originZ + TRAINING.LINE_Z + 0.2;\n}\n",
+        "newText": ""
+      },
+      {
+        "oldText": "  // A rubber backstop across the far end.",
+        "newText": "  // GP-19907: continuous firing bench and upper mesh; the open middle is for weapons, not bodies.\n  const firingLine = buildFiringLine(T, {root:g,origin:O,range:R,height:H,box,std,keep,steel,steelLight,hazard});\n  solids.push(...firingLine.solids);\n  // A rubber backstop across the far end."
+      },
+      {
+        "oldText": "maxZ: O.z + R.maxZ - 0.9 },",
+        "newText": "maxZ: O.z + firingLine.front - inset },"
+      },
+      {
+        "oldText": "const notProps = new Set([voidBox,",
+        "newText": "const notProps = new Set([firingLine.group, voidBox,"
+      }
+    ]
+  },
+  {
+    "file": "index.html",
+    "baseHash": "eb882a4dac7a2fbf66c418802b5c983536f5f5b7907e423d89c9eb74e326a5cf",
+    "patches": [
+      {
+        "oldText": "propSolids, overTheLine, fallSign",
+        "newText": "propSolids, fallSign"
+      },
+      {
+        "oldText": "camera:camera.position,previousZ:training.feetZ,pairChanged:",
+        "newText": "camera:camera.position,pairChanged:"
+      },
+      {
+        "oldText": "      training.feetZ = p.z;\r\n",
+        "newText": ""
+      },
+      {
+        "oldText": "      const feetZ = training.feetZ;\r\n      const over = feetZ != null && overTheLine(feetZ, tg.origin.z);\r\n",
+        "newText": ""
+      },
+      {
+        "oldText": "      if (over) {\r\n        showBanner(sayText('training.overLine', {}, 'OVER THE LINE!'), '', 1.6, '#e8b50c');\r\n        spawnEmbers(point.x, point.y, point.z, 6, .6);\r\n        AudioSys.trainingCue('target');\r\n        publishUI('training-target', { lane: index + 1, range: tg.targets[index].range, hits: training.hits, score: training.score || 0 });\r\n        return true;\r\n      }\r\n",
+        "newText": ""
+      }
+    ]
+  },
+  {
+    "file": "world/training-ballistics.js",
+    "baseHash": "32f27d4cb8118039fd28235f956337bc6fdaba70b34013a9682931ca882c0ba3",
+    "patches": [
+      {
+        "oldText": "    if(glass && tg.cutaway?.ignoreSolid(solid))continue;",
+        "newText": "    if(glass && (solid.firingFence||solid.firingFrame||tg.cutaway?.ignoreSolid(solid)))continue;"
+      }
+    ]
+  },
+  {
+    "file": "ui/range-session.js",
+    "baseHash": "dd548a52b9e04626927256896370b4f280fe63c275a9964467c97a42c75da52a",
+    "patches": [
+      {
+        "oldText": " function checkPosition(p,previousZ){",
+        "newText": " function checkPosition(p){"
+      },
+      {
+        "oldText": "  if(Math.max(p.z,Number.isFinite(previousZ)?previousZ:p.z)>RANGE_RULES.lineTolerance)finish('DISQUALIFIED','line');\n  else if(p.x< -8||p.x>8||p.z< -12||p.z>30)finish('ABORTED','left-range');",
+        "newText": "  if(p.x< -8||p.x>8||p.z< -12||p.z>30)finish('ABORTED','left-range');"
+      },
+      {
+        "oldText": "position.z> -RANGE_RULES.startMargin)return {ok:false,reason:'start-position'};",
+        "newText": "position.z>30)return {ok:false,reason:'start-position'};"
+      },
+      {
+        "oldText": "function tick(dt,{position,previousZ,paused=false,",
+        "newText": "function tick(dt,{position,paused=false,"
+      },
+      {
+        "oldText": "checkPosition(position,previousZ);",
+        "newText": "checkPosition(position);"
+      },
+      {
+        "oldText": "position.z> -RANGE_RULES.startMargin)){finish('ABORTED','start-position');",
+        "newText": "position.z>30)){finish('ABORTED','start-position');"
+      }
+    ]
+  },
+  {
+    "file": "ui/range-feature.js",
+    "baseHash": "658d8df010bea465788bc635d9fdf6dd8fa44a2a6353d6c071a425544f96a199",
+    "patches": [
+      {
+        "oldText": "p.z>-.05)return {ok:false,reason:'start-position'};",
+        "newText": "p.z>30)return {ok:false,reason:'start-position'};"
+      },
+      {
+        "oldText": "session.checkPosition(position(),c.previousZ==null?null:c.previousZ-tg.origin.z);",
+        "newText": "session.checkPosition(position());"
+      },
+      {
+        "oldText": "previousZ:c.previousZ==null?null:c.previousZ-tg.origin.z,",
+        "newText": ""
+      }
+    ]
+  },
+  {
+    "file": "ui/range-drills.js",
+    "baseHash": "ddec84cbcc805eec28ff16f4418394c01af4a17c037381cd124915ddee9cda68",
+    "patches": [
+      {
+        "oldText": "countdown:8,lineTolerance:.12,startMargin:.05,",
+        "newText": "countdown:8,"
+      }
+    ]
+  },
+  {
+    "file": "ui/strings.js",
+    "baseHash": "9d0f26e81aee6a373cc2518f541fc134f73ce8ef22894b8a28da4f46740d59b5",
+    "patches": [
+      {
+        "oldText": "Stay behind the yellow line. No throwable grenades. Use only the selected weapon. Switching without firing is allowed.",
+        "newText": "Fire through the bench opening. Step back if a low-held weapon strikes the bench. No throwable grenades. Use only the selected weapon. Switching without firing is allowed."
+      },
+      {
+        "oldText": "Stand inside the firing range, behind the yellow line, before starting.",
+        "newText": "Stand inside the firing range before starting."
+      },
+      {
+        "oldText": "  \"range.reason.line\": \"You crossed the yellow firing line.\",\n",
+        "newText": ""
+      },
+      {
+        "oldText": "Return behind the yellow line before starting the countdown.",
+        "newText": "Return to the firing range before starting the countdown."
+      },
+      {
+        "oldText": "Stay behind the line and cut each nearby plate for 0.45 seconds.",
+        "newText": "Cut each nearby plate through the bench opening for 0.45 seconds."
+      }
+    ]
+  },
+  {
+    "file": "world/training.test.mjs",
+    "baseHash": "0e2203b5a47a825533554197ee22604454eed8ff2687a5ce60a3154de97896ba",
+    "patches": [
+      {
+        "oldText": "buildTrainingGround, overTheLine, fallSign",
+        "newText": "buildTrainingGround, fallSign"
+      },
+      {
+        "oldText": "  assert.equal(overTheLine(line - 1, O2.z), false);\n  assert.equal(overTheLine(line + 1, O2.z), true, 'past the yellow line');",
+        "newText": "  assert.ok(clampToRects(tg.walk, O2.x, line + 1).moved, 'firing bench keeps bodies on the shooter side');\n  assert.ok(tg.solids.some(s=>s.firingFence), 'upper fence has a physical shot surface');"
+      },
+      {
+        "oldText": "  let over = 0; const v = new T.Vector3();",
+        "newText": "  let over = 0; const v = new T.Vector3();\n  const firingFixture = tg.group.getObjectByName('training-firing-bench');"
+      },
+      {
+        "oldText": "    if (!P) return;\n    for (let i = 0; i < P.count; i++) {",
+        "newText": "    if (!P) return;\n    // GP-19907 intentionally adds overhead fencing at the existing firing line.\n    let owner=m;while(owner&&owner!==firingFixture)owner=owner.parent;\n    if(owner===firingFixture&&firingFixture)return;\n    for (let i = 0; i < P.count; i++) {"
+      }
+    ]
+  },
+  {
+    "file": "ui/range-drills.test.mjs",
+    "baseHash": "5ed0a34c88e18af7c9fd6c85d1e24d9c734cc285486d277e51facf781aeef8e5",
+    "patches": [
+      {
+        "oldText": "test(`${phase}: swept feet cross the line, camera/muzzle irrelevant`,()=>{const r=phase==='ACTIVE'?active():rig();r.s.checkPosition({x:0,z:-.5},.8);assert.equal(r.s.snapshot().result.reason,'line');});",
+        "newText": "test(`${phase}: position has no line-crossing disqualification`,()=>{const r=phase==='ACTIVE'?active():rig();r.s.checkPosition({x:0,z:.8});assert.equal(r.s.snapshot().state,phase);assert.equal(r.s.snapshot().result,null);});"
+      },
+      {
+        "oldText": "test(`${phase}: tolerance jitter stays legal`,()=>{const r=phase==='ACTIVE'?active():rig();r.s.checkPosition({x:0,z:.119},-.02);assert.equal(r.s.snapshot().state,phase);});",
+        "newText": "test(`${phase}: leaving the room still aborts`,()=>{const r=phase==='ACTIVE'?active():rig();r.s.checkPosition({x:9,z:-.5});assert.equal(r.s.snapshot().state,'ABORTED');assert.equal(r.s.snapshot().result.reason,'left-range');});"
+      },
+      {
+        "oldText": "[{x:0,z:.2},{x:9,z:-1},{x:0,z:-13}]",
+        "newText": "[{x:0,z:31},{x:9,z:-1},{x:0,z:-13}]"
+      },
+      {
+        "oldText": "test('moving across the line during lowering never arms a countdown from an invalid position',()=>{let down=false;const s=createRangeSession({targets:{lowerAll(){},allDown:()=>down}});s.start(pistol,{position:{x:0,z:-.61}});down=true;s.tick(.1,{position:{x:0,z:.3}});assert.equal(s.snapshot().state,'ABORTED');assert.equal(s.snapshot().result.reason,'start-position');});",
+        "newText": "test('preparation validates the room, not a removed line rule',()=>{let down=false;const s=createRangeSession({targets:{lowerAll(){},allDown:()=>down}});s.start(pistol,{position:{x:0,z:-.61}});down=true;s.tick(.1,{position:{x:0,z:.3}});assert.equal(s.snapshot().state,'COUNTDOWN');});"
+      }
+    ]
+  },
+  {
+    "file": "world/training-firing-line.js",
+    "newFile": true,
+    "text": "// GP-19907: fixed firing bench, open shot slot and overhead containment mesh.\n// Geometry is local to the training ground; solids use its world origin.\nimport {bakeStatic} from './bake.js';\nexport const FIRING_LINE = Object.freeze({front:.18,back:.82,top:.86,gapTop:2.15,postWidth:.075});\nexport function buildFiringLine(T,{root,origin,range,height,box,std,keep,steel,steelLight,hazard}) {\n const F=FIRING_LINE,w=range.maxX-range.minX,cx=(range.minX+range.maxX)/2,z=(F.front+F.back)/2;\n const group=new T.Group();group.name='training-firing-bench';root.add(group);\n const panel=std({color:0x39463e,roughness:.82,metalness:.3});\n const rubber=std({color:0x202725,roughness:.94,metalness:.02});\n const wire=std({color:0x79877f,roughness:.7,metalness:.55,side:T.DoubleSide});\n const addBox=(a,b,c,mat,x,y,at)=>box(a,b,c,mat,x,y,at,group);\n // A waist-high worktop over a closed kick panel: one continuous bench, not separate booths.\n addBox(w,.07,F.back-F.front,rubber,cx,F.top-.035,z);\n addBox(w,.72,.09,panel,cx,.405,F.front+.06);\n addBox(w,.075,.075,steel,cx,.055,F.front+.06);\n addBox(w,.05,.07,steelLight,cx,F.top-.025,F.front+.025);\n addBox(w,.025,.05,hazard,cx,F.top-.01,F.front+.055);\n const solids=[],solid=(x0,x1,y0,y1,z0,z1,flags={})=>solids.push({minX:origin.x+x0,maxX:origin.x+x1,minY:origin.y+y0,maxY:origin.y+y1,minZ:origin.z+z0,maxZ:origin.z+z1,metal:true,firingLine:true,...flags});\n solid(range.minX,range.maxX,0,F.top,F.front,F.back);\n // Ceiling-hung posts stay above the slot; only the wall-end anchors run full height.\n const posts=[range.minX,-4.5,-1.5,1.5,4.5,range.maxX].filter(x=>x>=range.minX&&x<=range.maxX);\n const fenceZ=F.back-.075;\n for(const x of posts){\n  const bottom=x===range.minX||x===range.maxX?0:F.gapTop;\n  addBox(F.postWidth,height-bottom,F.postWidth,steel,x,(height+bottom)/2,fenceZ);\n  if(bottom===0)addBox(.22,.035,.23,steelLight,x,.018,fenceZ);\n  addBox(.23,.035,.23,steelLight,x,height-.018,fenceZ);\n  addBox(.065,.73,.065,steel,x,.365,F.front+.45);\n  solid(x-F.postWidth/2,x+F.postWidth/2,bottom,height,fenceZ-F.postWidth/2,fenceZ+F.postWidth/2,{firingFrame:true});\n }\n for(const y of [F.gapTop,height-.065])addBox(w,.065,.065,steel,cx,y,fenceZ);\n addBox(w,.06,.06,steel,cx,.27,F.back-.06);\n // One geometric diamond mesh: no alpha blending or per-link draw calls.\n const positions=[],low=F.gapTop+.05,high=height-.1;\n const ribbon=(x0,y0,x1,y1)=>{\n  const dx=x1-x0,dy=y1-y0,len=Math.hypot(dx,dy),sx=-dy/len*.0055,sy=dx/len*.0055;\n  const q=[[x0+sx,y0+sy,fenceZ],[x1+sx,y1+sy,fenceZ],[x1-sx,y1-sy,fenceZ],[x0-sx,y0-sy,fenceZ]];\n  for(const i of [0,1,2,0,2,3])positions.push(...q[i]);\n };\n for(const slope of [-1,1])for(let c=low-w;c<=high+w;c+=.32){\n  const a=Math.max(0,slope===1?low-c:c-high),b=Math.min(w,slope===1?high-c:c-low);\n  if(b>a+.01)ribbon(range.minX+a,slope*a+c,range.minX+b,slope*b+c);\n }\n const geo=keep(new T.BufferGeometry());geo.setAttribute('position',new T.Float32BufferAttribute(positions,3));geo.computeVertexNormals();\n const mesh=new T.Mesh(geo,wire);mesh.receiveShadow=true;group.add(mesh);\n solid(range.minX,range.maxX,F.gapTop,height,fenceZ-.045,fenceZ+.045,{firingFence:true});\n bakeStatic(T,group);group.traverse(o=>{if(o.geometry&&o.userData.baked)keep(o.geometry);});\n return {group,solids,front:F.front,top:F.top,gapTop:F.gapTop};\n}\n"
+  }
+]

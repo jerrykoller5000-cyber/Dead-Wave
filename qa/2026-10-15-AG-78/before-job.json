@@ -1,0 +1,24 @@
+{
+  "out": "qa/2026-10-15-AG-78/before/",
+  "sheet": true,
+  "cols": 4,
+  "shots": [
+    { "target": "animal.rabbit", "view": "three", "out": "qa/2026-10-15-AG-78/before/01-rabbit-3q.png" },
+    { "target": "animal.rabbit", "view": "side", "out": "qa/2026-10-15-AG-78/before/01-rabbit-side.png" },
+    { "target": "animal.killer-rabbit", "view": "three", "out": "qa/2026-10-15-AG-78/before/02-killer-rabbit-3q.png" },
+    { "target": "animal.killer-rabbit", "view": "front", "out": "qa/2026-10-15-AG-78/before/02-killer-rabbit-front.png" },
+    { "target": "animal.bird", "view": "three", "out": "qa/2026-10-15-AG-78/before/03-bird-3q.png" },
+    { "target": "animal.bird", "view": "top", "out": "qa/2026-10-15-AG-78/before/03-bird-top.png" },
+    { "target": "animal.bee", "view": "three", "out": "qa/2026-10-15-AG-78/before/04-bee-3q.png" },
+    { "target": "animal.butterfly", "view": "three", "out": "qa/2026-10-15-AG-78/before/05-butterfly-3q.png" },
+    { "target": "animal.frog", "view": "three", "out": "qa/2026-10-15-AG-78/before/06-frog-3q.png" },
+    { "target": "animal.squirrel", "view": "three", "out": "qa/2026-10-15-AG-78/before/07-squirrel-3q.png" },
+    { "target": "animal.turtle", "view": "three", "out": "qa/2026-10-15-AG-78/before/08-turtle-3q.png" },
+    { "target": "animal.fish:0", "view": "three", "out": "qa/2026-10-15-AG-78/before/09-fish-0-3q.png" },
+    { "target": "animal.fish:1", "view": "three", "out": "qa/2026-10-15-AG-78/before/09-fish-1-3q.png" },
+    { "target": "animal.fish:2", "view": "three", "out": "qa/2026-10-15-AG-78/before/09-fish-2-3q.png" },
+    { "target": "animal.lily-pad", "view": "three", "out": "qa/2026-10-15-AG-78/before/10-lily-pad-3q.png" },
+    { "target": "animal.nest", "view": "three", "out": "qa/2026-10-15-AG-78/before/11-nest-3q.png" },
+    { "target": "animal.burrow", "view": "three", "out": "qa/2026-10-15-AG-78/before/12-burrow-3q.png" }
+  ]
+}

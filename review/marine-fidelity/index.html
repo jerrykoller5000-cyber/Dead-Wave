@@ -1,0 +1,18 @@
+<!doctype html><meta charset="utf-8"><title>marine-fidelity</title>
+<style>body{margin:24px;background:#14181f;color:#e6e6e0;font-family:Georgia,serif} h1{font-weight:normal} h2{font-weight:normal;margin:28px 0 6px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:10px} .pair figure{margin:0} .pair img{width:100%;display:block} figcaption{font-size:14px;opacity:.7;margin:4px 0}</style>
+<h1>marine-fidelity · CL-94 · v1</h1>
+<p>The fidelity pass on the marine and his kit (D-64): a little less bulky and a touch cleaner; the ear defenders only
+come with the helmet; the facemask coyote brown for good; every item (shirt, trousers, boots, gloves, belt, holster,
+cap, helmet, mask, carrier, pack, pads) its own material, ready for the dressing room (D-66). Before on the left, v1 on
+the right. Your notes go in notes.md in this folder.</p>
+<script>
+const rows = [
+  ['marine-bare', 'The kit he starts with: front, three-quarter, side, back'],
+  ['marine-kit', 'The full kit: helmet, plate carrier, pads, NVG stowed'],
+  ['head-bare', 'Head, no helmet'], ['head-bare-side', 'Head, no helmet, from the side'],
+  ['head-kit', 'Head with the helmet'], ['head-kit-side', 'Head with the helmet, from the side'],
+  ['field-dusk', 'In the field at dusk, by the HQ'], ['field-night', 'In the field at night'], ['field-day', 'In the field by day']
+];
+for (const [k, t] of rows) document.write(`<h2>${t}</h2><div class="pair"><figure><figcaption>before</figcaption><img src="before/${k}.png" alt="${k} before"></figure><figure><figcaption>v1</figcaption><img src="v1/${k}.png" alt="${k} v1"></figure></div>`);
+</script>

@@ -1,0 +1,13 @@
+Inspector ready, one browser: 10.551 s
+PASS statue fire moves, pauses and frame-steps without moving arms
+PASS walking clearance and actual fireball launch vector
+file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/cdp.mjs:137
+      throw new Error('evaluate failed: ' + text);
+            ^
+
+Error: evaluate failed: TypeError: Cannot read properties of null (reading 'userData')
+    at <anonymous>:1:236
+    at Page.evaluate (file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/cdp.mjs:137:13)
+    at async file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/demon-GP19921/verify.mjs:72:15
+
+Node.js v24.13.0

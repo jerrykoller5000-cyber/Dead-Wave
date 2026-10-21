@@ -1,0 +1,22 @@
+{
+ "target": null,
+ "label": "the play camera",
+ "view": null,
+ "cam": {
+  "x": -36.59822616952965,
+  "y": 32.73295493072486,
+  "z": -65.81628281556651,
+  "tx": -42.47038318011048,
+  "ty": 28.66558849996686,
+  "tz": -72.81444702920349,
+  "fov": 60
+ },
+ "time": 0.5,
+ "size": [
+  1280,
+  720
+ ],
+ "mode": "training",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "at": "2026-10-11T15:51:01.753Z"
+}

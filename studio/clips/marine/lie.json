@@ -1,0 +1,17 @@
+{
+  "format": "dw-clip/1",
+  "name": "lie",
+  "rig": "marine",
+  "length": 1.2,
+  "loop": true,
+  "notes": "On his back, being hauled: arms thrown back over his head, clawing; the free leg kicking. A stand-in for CL-64's marine, made for the demo scene.",
+  "tracks": {
+    "shoulderL": { "rot": [[0, [-150, 0, 10]], [0.6, [-138, 0, 16]], [1.2, [-150, 0, 10]]] },
+    "shoulderR": { "rot": [[0, [-142, 0, -14]], [0.6, [-155, 0, -8]], [1.2, [-142, 0, -14]]] },
+    "elbowL": { "rot": [[0, [-35, 0, 0]], [0.6, [-20, 0, 0]], [1.2, [-35, 0, 0]]] },
+    "elbowR": { "rot": [[0, [-20, 0, 0]], [0.6, [-38, 0, 0]], [1.2, [-20, 0, 0]]] },
+    "hipR": { "rot": [[0, [-15, 0, 0]], [0.6, [-35, 0, 0]], [1.2, [-15, 0, 0]]] },
+    "kneeR": { "rot": [[0, [25, 0, 0]], [0.6, [55, 0, 0]], [1.2, [25, 0, 0]]] },
+    "head": { "rot": [[0, [25, 0, 0]], [0.6, [15, 10, 0]], [1.2, [25, 0, 0]]] }
+  }
+}

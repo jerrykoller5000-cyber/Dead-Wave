@@ -1,0 +1,24 @@
+{
+  "los": {
+    "error": "from.distanceTo is not a function"
+  },
+  "views": {
+    "east": {
+      "cutaway": null,
+      "solids": 118
+    },
+    "west": {
+      "cutaway": null,
+      "solids": 118
+    },
+    "north": {
+      "cutaway": null,
+      "solids": 118
+    },
+    "south": {
+      "cutaway": null,
+      "solids": 118
+    }
+  },
+  "errors": []
+}

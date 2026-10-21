@@ -1,0 +1,28 @@
+--- index-before.txt (comparison only)
++++ index.html
+@@ -1299,6 +1299,7 @@
+     import { trainingIntroKinds } from './ui/training-encounter.js';
+     import { createTrainingDanger } from './ui/training-danger.js';
+     import { CONTAINMENT, createTrainingContainment } from './game/training-containment.js'; // GP-19879
++    import { createTrainingInfirmary } from './game/training-infirmary.js'; // GP-19882
+     import { createTrainingRelease } from './ui/training-release.js';   // GP-191
+     import { createHitPops, hitPopText } from './ui/training-hit-pops.js';   // CL-171
+     import { buildTrainingTunnel, tunnelLine, tunnelDepth, tunnelShows, cameraInRoom } from './world/training-tunnel.js';   // CL-171
+@@ -49967,6 +49968,7 @@
+       if (!gameStarted) return;
+       ensureTrainingUi();
+       if (!training.tg) { training.tg = buildTrainingGround(THREE, { gridOffset: BUILD_GRID / 2, grid: BUILD_GRID, securityLabel: sayText('training.securityLabel'), labels: { noBuild: sayText('training.noBuildZone', {}, 'NO BUILD ZONE'), gate: sayText('training.gateTitle'), containment: sayText('training.gateDetail'), infirmary: sayText('training.infirmaryLabel'), medical: sayText('training.medicalLabel') } }); training.copies = trainingCopies(training.tg); }
++      if (!training.infirmary) training.infirmary = createTrainingInfirmary(training.tg); // GP-19882
+       if (!training.danger) training.danger = createTrainingDanger(THREE, training.tg, training.copies.alarmBeacon);
+       training.danger.reset();
+       ensureTrainingContainment().reset(); // GP-19879: persistent mounted fixtures, fresh sweep state
+@@ -50349,6 +50351,9 @@
+       const safe = training.security?.constrain(p, playerFrameStart, PLAYER_RADIUS);
+       if (safe?.moved) { p.x = safe.x; p.z = safe.z; velX = 0; }
+       const ko = tg.keepOut?.(p, PLAYER_RADIUS); if (ko?.moved) { p.x = ko.x; p.z = ko.z; }   // GB-161: the locker bank (and he bumps its door)
++      // GP-19882: scripted collapse/bed poses deliberately enter the furniture.
++      const medical = !training.wake && training.infirmary?.constrain(p, playerFrameStart, PLAYER_RADIUS);
++      if (medical?.moved) { p.x = medical.x; p.z = medical.z; if (medical.blockX) velX = 0; if (medical.blockZ) velZ = 0; }
+       const c = clampToRects(tg.walk, p.x, p.z);
+       if (c.moved) { if (c.x !== p.x) velX = 0; if (c.z !== p.z) velZ = 0; p.x = c.x; p.z = c.z; }
+     }

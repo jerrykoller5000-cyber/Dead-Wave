@@ -1,0 +1,951 @@
+{
+  "shots": [
+    {
+      "wall": "west",
+      "cam": [
+        -53,
+        14,
+        -632
+      ],
+      "walls": [
+        {
+          "side": "rangeSouth",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "east",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "south",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "west",
+          "opacity": 0.06,
+          "hidden": true
+        },
+        {
+          "side": "overhead",
+          "opacity": 0,
+          "hidden": true
+        },
+        {
+          "side": "east",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "rangeSouth",
+          "opacity": 1,
+          "hidden": false
+        }
+      ],
+      "opacity": [
+        {
+          "wall": "west",
+          "x": -43.2,
+          "y": -194.4,
+          "z": -632,
+          "yaw": 1.5707963267948966,
+          "pitch": 0.18,
+          "spin": 0,
+          "fired": 0
+        },
+        {
+          "wall": "east",
+          "x": -8.8,
+          "y": -194.4,
+          "z": -632,
+          "yaw": -1.5707963267948966,
+          "pitch": 0.18,
+          "spin": 0,
+          "fired": 0
+        },
+        {
+          "wall": "south",
+          "x": -26,
+          "y": -194.4,
+          "z": -651.2,
+          "yaw": 0,
+          "pitch": 0.18,
+          "spin": 0,
+          "fired": 0
+        },
+        {
+          "wall": "north",
+          "x": -26,
+          "y": -194.4,
+          "z": -612.8,
+          "yaw": 3.141592653589793,
+          "pitch": 0.18,
+          "spin": 0,
+          "fired": 0
+        }
+      ],
+      "attrs": [
+        {
+          "name": "training-containment-gun",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-rotor",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-rotor",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-rotor",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-gun",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-gun",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-gun",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-gun",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-gun",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-gun",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-gun",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-mount",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-arm",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-swivel",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-status",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-flash",
+          "count": 4,
+          "opacity": null
+        }
+      ]
+    },
+    {
+      "wall": "east",
+      "cam": [
+        1,
+        14,
+        -632
+      ],
+      "walls": [
+        {
+          "side": "rangeSouth",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "east",
+          "opacity": 0.06,
+          "hidden": true
+        },
+        {
+          "side": "south",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "west",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "overhead",
+          "opacity": 0,
+          "hidden": true
+        },
+        {
+          "side": "east",
+          "opacity": 0.06,
+          "hidden": true
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "rangeSouth",
+          "opacity": 1,
+          "hidden": false
+        }
+      ],
+      "opacity": [
+        {
+          "wall": "west",
+          "x": -43.2,
+          "y": -194.4,
+          "z": -632,
+          "yaw": 1.5707963267948966,
+          "pitch": 0.18,
+          "spin": 0,
+          "fired": 0
+        },
+        {
+          "wall": "east",
+          "x": -8.8,
+          "y": -194.4,
+          "z": -632,
+          "yaw": -1.5707963267948966,
+          "pitch": 0.18,
+          "spin": 0,
+          "fired": 0
+        },
+        {
+          "wall": "south",
+          "x": -26,
+          "y": -194.4,
+          "z": -651.2,
+          "yaw": 0,
+          "pitch": 0.18,
+          "spin": 0,
+          "fired": 0
+        },
+        {
+          "wall": "north",
+          "x": -26,
+          "y": -194.4,
+          "z": -612.8,
+          "yaw": 3.141592653589793,
+          "pitch": 0.18,
+          "spin": 0,
+          "fired": 0
+        }
+      ],
+      "attrs": [
+        {
+          "name": "training-containment-gun",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-rotor",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-rotor",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-rotor",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-gun",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-gun",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-gun",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-gun",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-gun",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-gun",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-gun",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-mount",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-arm",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-swivel",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-status",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-flash",
+          "count": 4,
+          "opacity": null
+        }
+      ]
+    },
+    {
+      "wall": "south",
+      "cam": [
+        -26,
+        14,
+        -661
+      ],
+      "walls": [
+        {
+          "side": "rangeSouth",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "east",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "south",
+          "opacity": 0.06,
+          "hidden": true
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "west",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "overhead",
+          "opacity": 0,
+          "hidden": true
+        },
+        {
+          "side": "east",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "rangeSouth",
+          "opacity": 1,
+          "hidden": false
+        }
+      ],
+      "opacity": [
+        {
+          "wall": "west",
+          "x": -43.2,
+          "y": -194.4,
+          "z": -632,
+          "yaw": 1.5707963267948966,
+          "pitch": 0.18,
+          "spin": 0,
+          "fired": 0
+        },
+        {
+          "wall": "east",
+          "x": -8.8,
+          "y": -194.4,
+          "z": -632,
+          "yaw": -1.5707963267948966,
+          "pitch": 0.18,
+          "spin": 0,
+          "fired": 0
+        },
+        {
+          "wall": "south",
+          "x": -26,
+          "y": -194.4,
+          "z": -651.2,
+          "yaw": 0,
+          "pitch": 0.18,
+          "spin": 0,
+          "fired": 0
+        },
+        {
+          "wall": "north",
+          "x": -26,
+          "y": -194.4,
+          "z": -612.8,
+          "yaw": 3.141592653589793,
+          "pitch": 0.18,
+          "spin": 0,
+          "fired": 0
+        }
+      ],
+      "attrs": [
+        {
+          "name": "training-containment-gun",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-rotor",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-rotor",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-rotor",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-gun",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-gun",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-gun",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-gun",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-gun",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-gun",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-gun",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-mount",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-arm",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-swivel",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-status",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-flash",
+          "count": 4,
+          "opacity": null
+        }
+      ]
+    },
+    {
+      "wall": "north",
+      "cam": [
+        -26,
+        14,
+        -603
+      ],
+      "walls": [
+        {
+          "side": "rangeSouth",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "east",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "south",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 0.06,
+          "hidden": true
+        },
+        {
+          "side": "west",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "overhead",
+          "opacity": 0,
+          "hidden": true
+        },
+        {
+          "side": "east",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 0.06,
+          "hidden": true
+        },
+        {
+          "side": "north",
+          "opacity": 0.06,
+          "hidden": true
+        },
+        {
+          "side": "north",
+          "opacity": 0.06,
+          "hidden": true
+        },
+        {
+          "side": "rangeSouth",
+          "opacity": 1,
+          "hidden": false
+        }
+      ],
+      "opacity": [
+        {
+          "wall": "west",
+          "x": -43.2,
+          "y": -194.4,
+          "z": -632,
+          "yaw": 1.5707963267948966,
+          "pitch": 0.18,
+          "spin": 0,
+          "fired": 0
+        },
+        {
+          "wall": "east",
+          "x": -8.8,
+          "y": -194.4,
+          "z": -632,
+          "yaw": -1.5707963267948966,
+          "pitch": 0.18,
+          "spin": 0,
+          "fired": 0
+        },
+        {
+          "wall": "south",
+          "x": -26,
+          "y": -194.4,
+          "z": -651.2,
+          "yaw": 0,
+          "pitch": 0.18,
+          "spin": 0,
+          "fired": 0
+        },
+        {
+          "wall": "north",
+          "x": -26,
+          "y": -194.4,
+          "z": -612.8,
+          "yaw": 3.141592653589793,
+          "pitch": 0.18,
+          "spin": 0,
+          "fired": 0
+        }
+      ],
+      "attrs": [
+        {
+          "name": "training-containment-gun",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-rotor",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-rotor",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-rotor",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-gun",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-gun",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-gun",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-gun",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-gun",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-gun",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-gun",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-mount",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-arm",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-swivel",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-status",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-flash",
+          "count": 4,
+          "opacity": null
+        }
+      ]
+    },
+    {
+      "wall": "inside",
+      "cam": [
+        -26,
+        12,
+        -644
+      ],
+      "walls": [
+        {
+          "side": "rangeSouth",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "east",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "south",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "west",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "overhead",
+          "opacity": 0,
+          "hidden": true
+        },
+        {
+          "side": "east",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "rangeSouth",
+          "opacity": 1,
+          "hidden": false
+        }
+      ],
+      "opacity": [
+        {
+          "wall": "west",
+          "x": -43.2,
+          "y": -194.4,
+          "z": -632,
+          "yaw": 1.5707963267948966,
+          "pitch": 0.18,
+          "spin": 0,
+          "fired": 0
+        },
+        {
+          "wall": "east",
+          "x": -8.8,
+          "y": -194.4,
+          "z": -632,
+          "yaw": -1.5707963267948966,
+          "pitch": 0.18,
+          "spin": 0,
+          "fired": 0
+        },
+        {
+          "wall": "south",
+          "x": -26,
+          "y": -194.4,
+          "z": -651.2,
+          "yaw": 0,
+          "pitch": 0.18,
+          "spin": 0,
+          "fired": 0
+        },
+        {
+          "wall": "north",
+          "x": -26,
+          "y": -194.4,
+          "z": -612.8,
+          "yaw": 3.141592653589793,
+          "pitch": 0.18,
+          "spin": 0,
+          "fired": 0
+        }
+      ],
+      "attrs": [
+        {
+          "name": "training-containment-gun",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-rotor",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-rotor",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-rotor",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-gun",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-gun",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-gun",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-gun",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-gun",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-gun",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-gun",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-mount",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-arm",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-swivel",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-status",
+          "count": 4,
+          "opacity": null
+        },
+        {
+          "name": "training-containment-flash",
+          "count": 4,
+          "opacity": null
+        }
+      ]
+    }
+  ],
+  "loadSeconds": 18.424,
+  "errors": []
+}

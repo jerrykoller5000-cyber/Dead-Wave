@@ -1,0 +1,3 @@
+Skirmish (1-3 zombies)
+Used for: Fights in daylight, picked by horde size
+The game plays now: assets/soundtrack/chip_skirmish_b (dayFight)

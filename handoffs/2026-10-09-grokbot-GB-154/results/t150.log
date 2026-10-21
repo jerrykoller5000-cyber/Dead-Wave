@@ -1,0 +1,13 @@
+PASS the pistol is in his hand, not on his hip
+PASS pistol to M4: stow, reach, raise (stow,reach,raise)
+PASS from the hip to his back
+PASS the arm leaves the hold for the slots (peak 1.00)
+PASS between the two the pistol is back in the hip holster and his hand is empty
+PASS the M4 is up in his hands
+PASS the pistol stays holstered, the M4 is off his back: ["minigun",null]
+PASS U puts the M4 back on his back (stow,raise)
+PASS the M4 is slung again
+PASS U again draws it off his back (reach,raise)
+PASS the flamer, not carried, is no draw: stow,raise
+PASS the draw leaves the fire cooldown alone (-0.05)
+PASS the Uzi ends up in his hand

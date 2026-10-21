@@ -1,0 +1,5 @@
+(node:41068) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./review/zombie-sweep-GP19922/three-loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS guardian: 120 gallop/hand poses, 20508 triangles / 43 draws
+PASS caveguard: 120 gallop/hand poses, 19918 triangles / 41 draws

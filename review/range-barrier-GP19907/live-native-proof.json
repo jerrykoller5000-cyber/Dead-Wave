@@ -1,0 +1,2688 @@
+{
+  "guns": [
+    {
+      "w": "pistol",
+      "begun": {
+        "ok": true,
+        "id": "1791941465948-1"
+      },
+      "s": {
+        "state": "ACTIVE",
+        "drill": {
+          "weapon": "pistol",
+          "id": "pop-patrol",
+          "mode": "sequence",
+          "duration": 30,
+          "waves": 12,
+          "exposure": 1.65,
+          "gap": 0.45,
+          "group": 1,
+          "minHits": 1,
+          "maxEvents": 1,
+          "clearBonus": 10,
+          "missPenalty": 3,
+          "wrongZonePenalty": 2,
+          "contact": 0.6,
+          "order": [
+            0,
+            3,
+            1,
+            4,
+            2
+          ],
+          "speedBonus": 8
+        },
+        "id": "1791941465948-1",
+        "loadout": "{\"mode\":\"semi\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+        "elapsed": 1.95000000000014,
+        "countdown": 0,
+        "wave": 2,
+        "activation": 2,
+        "plan": {
+          "ids": [
+            3
+          ],
+          "zone": null,
+          "priority": null,
+          "exposure": 1.65
+        },
+        "phase": "raising",
+        "score": 25,
+        "efficiency": 100,
+        "stats": {
+          "base": 10,
+          "bonuses": 15,
+          "deductions": 0,
+          "shots": 1,
+          "units": 1,
+          "attackSeconds": 0,
+          "contactSeconds": 0,
+          "cleared": 1,
+          "missed": 0
+        },
+        "result": null,
+        "targets": [
+          {
+            "index": 3,
+            "hits": 0,
+            "contact": 0,
+            "done": false,
+            "clearAt": null,
+            "bonus": false
+          }
+        ]
+      },
+      "freeBefore": 0,
+      "freeAfter": 0,
+      "saw": {
+        "phase": "off",
+        "t": 0,
+        "starts": 0,
+        "take": 0,
+        "cord": 0
+      },
+      "packet": {
+        "run": "1791941465948-1",
+        "phase": "ACTIVE",
+        "weapon": "pistol",
+        "shot": 1,
+        "activation": 1
+      },
+      "ammo": {
+        "minigun": 300,
+        "m4": 30,
+        "ak": 30,
+        "aa12": 20,
+        "pistol": 11,
+        "uzi": 32,
+        "shotgun": 8,
+        "revolver": 6,
+        "sniper": 5,
+        "launcher": 6,
+        "flamer": 60,
+        "chainsaw": null
+      },
+      "muzzle": [
+        0.40593819965890554,
+        -198.93969067930888,
+        -640.1251206683802
+      ],
+      "shooter": [
+        0,
+        -200,
+        -640.61
+      ]
+    },
+    {
+      "w": "uzi",
+      "begun": {
+        "ok": true,
+        "id": "1791941473418-2"
+      },
+      "s": {
+        "state": "ACTIVE",
+        "drill": {
+          "weapon": "uzi",
+          "id": "three-taps",
+          "mode": "burst",
+          "duration": 30,
+          "waves": 10,
+          "exposure": 2,
+          "gap": 0.45,
+          "group": 1,
+          "minHits": 3,
+          "maxEvents": 3,
+          "clearBonus": 10,
+          "missPenalty": 3,
+          "wrongZonePenalty": 2,
+          "contact": 0.6,
+          "efficiencyBonus": 25
+        },
+        "id": "1791941473418-2",
+        "loadout": "{\"mode\":\"auto\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+        "elapsed": 2.299999999999664,
+        "countdown": 0,
+        "wave": 2,
+        "activation": 2,
+        "plan": {
+          "ids": [
+            1
+          ],
+          "zone": null,
+          "priority": null,
+          "exposure": 2
+        },
+        "phase": "raising",
+        "score": 35,
+        "efficiency": 50,
+        "stats": {
+          "base": 25,
+          "bonuses": 10,
+          "deductions": 0,
+          "shots": 6,
+          "units": 6,
+          "attackSeconds": 0,
+          "contactSeconds": 0,
+          "cleared": 1,
+          "missed": 0
+        },
+        "result": null,
+        "targets": [
+          {
+            "index": 1,
+            "hits": 0,
+            "contact": 0,
+            "done": false,
+            "clearAt": null,
+            "bonus": false
+          }
+        ]
+      },
+      "freeBefore": 0,
+      "freeAfter": 0,
+      "saw": {
+        "phase": "off",
+        "t": 0,
+        "starts": 0,
+        "take": 0,
+        "cord": 0
+      },
+      "packet": {
+        "run": "1791941473418-2",
+        "phase": "ACTIVE",
+        "weapon": "uzi",
+        "shot": 6,
+        "activation": 1
+      },
+      "ammo": {
+        "minigun": 300,
+        "m4": 30,
+        "ak": 30,
+        "aa12": 20,
+        "pistol": 12,
+        "uzi": 26,
+        "shotgun": 8,
+        "revolver": 6,
+        "sniper": 5,
+        "launcher": 6,
+        "flamer": 60,
+        "chainsaw": null
+      },
+      "muzzle": [
+        0.44876616422140814,
+        -199.00248342394633,
+        -640.2036844373577
+      ],
+      "shooter": [
+        0,
+        -200,
+        -640.61
+      ]
+    },
+    {
+      "w": "m4",
+      "begun": {
+        "ok": true,
+        "id": "1791941481123-3"
+      },
+      "s": {
+        "state": "ACTIVE",
+        "drill": {
+          "weapon": "m4",
+          "id": "five-wide",
+          "mode": "groups",
+          "duration": 35,
+          "waves": 5,
+          "exposure": 4.2,
+          "gap": 0.45,
+          "group": 5,
+          "minHits": 1,
+          "maxEvents": 1,
+          "clearBonus": 10,
+          "missPenalty": 3,
+          "wrongZonePenalty": 2,
+          "contact": 0.6
+        },
+        "id": "1791941481123-3",
+        "loadout": "{\"mode\":\"auto\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+        "elapsed": 1.9333333333330485,
+        "countdown": 0,
+        "wave": 1,
+        "activation": 1,
+        "plan": {
+          "ids": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "zone": null,
+          "priority": null,
+          "exposure": 4.2
+        },
+        "phase": "exposed",
+        "score": 20,
+        "efficiency": 50,
+        "stats": {
+          "base": 10,
+          "bonuses": 10,
+          "deductions": 0,
+          "shots": 2,
+          "units": 2,
+          "attackSeconds": 0,
+          "contactSeconds": 0,
+          "cleared": 1,
+          "missed": 0
+        },
+        "result": null,
+        "targets": [
+          {
+            "index": 0,
+            "hits": 1,
+            "contact": 0,
+            "done": true,
+            "clearAt": 1.1699999999998476,
+            "bonus": false
+          },
+          {
+            "index": 1,
+            "hits": 0,
+            "contact": 0,
+            "done": false,
+            "clearAt": null,
+            "bonus": false
+          },
+          {
+            "index": 2,
+            "hits": 0,
+            "contact": 0,
+            "done": false,
+            "clearAt": null,
+            "bonus": false
+          },
+          {
+            "index": 3,
+            "hits": 0,
+            "contact": 0,
+            "done": false,
+            "clearAt": null,
+            "bonus": false
+          },
+          {
+            "index": 4,
+            "hits": 0,
+            "contact": 0,
+            "done": false,
+            "clearAt": null,
+            "bonus": false
+          }
+        ]
+      },
+      "freeBefore": 0,
+      "freeAfter": 0,
+      "saw": {
+        "phase": "off",
+        "t": 0,
+        "starts": 0,
+        "take": 0,
+        "cord": 0
+      },
+      "packet": {
+        "run": "1791941481123-3",
+        "phase": "ACTIVE",
+        "weapon": "m4",
+        "shot": 2,
+        "activation": 1
+      },
+      "ammo": {
+        "minigun": 300,
+        "m4": 28,
+        "ak": 30,
+        "aa12": 20,
+        "pistol": 12,
+        "uzi": 32,
+        "shotgun": 8,
+        "revolver": 6,
+        "sniper": 5,
+        "launcher": 6,
+        "flamer": 60,
+        "chainsaw": null
+      },
+      "muzzle": [
+        0.7808369014889551,
+        -198.93619716831907,
+        -639.9085528739802
+      ],
+      "shooter": [
+        0,
+        -200,
+        -640.61
+      ]
+    },
+    {
+      "w": "ak",
+      "begun": {
+        "ok": true,
+        "id": "1791941487216-4"
+      },
+      "s": {
+        "state": "ACTIVE",
+        "drill": {
+          "weapon": "ak",
+          "id": "four-count",
+          "mode": "burst",
+          "duration": 30,
+          "waves": 8,
+          "exposure": 2.8,
+          "gap": 0.45,
+          "group": 1,
+          "minHits": 4,
+          "maxEvents": 4,
+          "clearBonus": 10,
+          "missPenalty": 3,
+          "wrongZonePenalty": 2,
+          "contact": 0.6,
+          "efficiencyBonus": 30
+        },
+        "id": "1791941487216-4",
+        "loadout": "{\"mode\":\"auto\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+        "elapsed": 2.299999999999664,
+        "countdown": 0,
+        "wave": 2,
+        "activation": 2,
+        "plan": {
+          "ids": [
+            1
+          ],
+          "zone": null,
+          "priority": null,
+          "exposure": 2.8
+        },
+        "phase": "raising",
+        "score": 40,
+        "efficiency": 80,
+        "stats": {
+          "base": 30,
+          "bonuses": 10,
+          "deductions": 0,
+          "shots": 5,
+          "units": 5,
+          "attackSeconds": 0,
+          "contactSeconds": 0,
+          "cleared": 1,
+          "missed": 0
+        },
+        "result": null,
+        "targets": [
+          {
+            "index": 1,
+            "hits": 0,
+            "contact": 0,
+            "done": false,
+            "clearAt": null,
+            "bonus": false
+          }
+        ]
+      },
+      "freeBefore": 0,
+      "freeAfter": 0,
+      "saw": {
+        "phase": "off",
+        "t": 0,
+        "starts": 0,
+        "take": 0,
+        "cord": 0
+      },
+      "packet": {
+        "run": "1791941487216-4",
+        "phase": "ACTIVE",
+        "weapon": "ak",
+        "shot": 5,
+        "activation": 1
+      },
+      "ammo": {
+        "minigun": 300,
+        "m4": 30,
+        "ak": 25,
+        "aa12": 20,
+        "pistol": 12,
+        "uzi": 32,
+        "shotgun": 8,
+        "revolver": 6,
+        "sniper": 5,
+        "launcher": 6,
+        "flamer": 60,
+        "chainsaw": null
+      },
+      "muzzle": [
+        0.9007685832042682,
+        -198.89047114840432,
+        -639.9551058100291
+      ],
+      "shooter": [
+        0,
+        -200,
+        -640.61
+      ]
+    },
+    {
+      "w": "shotgun",
+      "begun": {
+        "ok": true,
+        "id": "1791941493603-5"
+      },
+      "s": {
+        "state": "ACTIVE",
+        "drill": {
+          "weapon": "shotgun",
+          "id": "seven-on-steel",
+          "mode": "precision",
+          "duration": 25,
+          "waves": 10,
+          "exposure": 2,
+          "gap": 0.45,
+          "group": 1,
+          "minHits": 1,
+          "maxEvents": 7,
+          "clearBonus": 10,
+          "missPenalty": 3,
+          "wrongZonePenalty": 2,
+          "contact": 0.6,
+          "layout": "close",
+          "pelletBonus": 2
+        },
+        "id": "1791941493603-5",
+        "loadout": "{\"mode\":\"semi\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+        "elapsed": 1.950000000000565,
+        "countdown": 0,
+        "wave": 1,
+        "activation": 1,
+        "plan": {
+          "ids": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "zone": null,
+          "priority": null,
+          "exposure": 25
+        },
+        "phase": "exposed",
+        "score": 16,
+        "efficiency": 100,
+        "stats": {
+          "base": 4,
+          "bonuses": 12,
+          "deductions": 0,
+          "shots": 1,
+          "units": 1,
+          "attackSeconds": 0,
+          "contactSeconds": 0,
+          "cleared": 1,
+          "missed": 0
+        },
+        "result": null,
+        "targets": [
+          {
+            "index": 0,
+            "hits": 2,
+            "contact": 0,
+            "done": true,
+            "clearAt": 1.2033333333336476,
+            "bonus": false
+          },
+          {
+            "index": 1,
+            "hits": 0,
+            "contact": 0,
+            "done": false,
+            "clearAt": null,
+            "bonus": false
+          },
+          {
+            "index": 2,
+            "hits": 0,
+            "contact": 0,
+            "done": false,
+            "clearAt": null,
+            "bonus": false
+          },
+          {
+            "index": 3,
+            "hits": 0,
+            "contact": 0,
+            "done": false,
+            "clearAt": null,
+            "bonus": false
+          },
+          {
+            "index": 4,
+            "hits": 0,
+            "contact": 0,
+            "done": false,
+            "clearAt": null,
+            "bonus": false
+          }
+        ]
+      },
+      "freeBefore": 0,
+      "freeAfter": 0,
+      "saw": {
+        "phase": "off",
+        "t": 0,
+        "starts": 0,
+        "take": 0,
+        "cord": 0
+      },
+      "packet": {
+        "run": "1791941493603-5",
+        "phase": "ACTIVE",
+        "weapon": "shotgun",
+        "shot": 1,
+        "activation": 1
+      },
+      "ammo": {
+        "minigun": 300,
+        "m4": 30,
+        "ak": 30,
+        "aa12": 20,
+        "pistol": 12,
+        "uzi": 32,
+        "shotgun": 7,
+        "revolver": 6,
+        "sniper": 5,
+        "launcher": 6,
+        "flamer": 60,
+        "chainsaw": null
+      },
+      "muzzle": [
+        0.9839059502609668,
+        -198.88517444789795,
+        -639.992814010663
+      ],
+      "shooter": [
+        0,
+        -200,
+        -640.61
+      ]
+    },
+    {
+      "w": "aa12",
+      "begun": {
+        "ok": true,
+        "id": "1791941499652-6"
+      },
+      "s": {
+        "state": "ACTIVE",
+        "drill": {
+          "weapon": "aa12",
+          "id": "breach-wave",
+          "mode": "groups",
+          "duration": 30,
+          "waves": 6,
+          "exposure": 2.3,
+          "gap": 0.45,
+          "group": 3,
+          "minHits": 1,
+          "maxEvents": 5,
+          "clearBonus": 10,
+          "missPenalty": 3,
+          "wrongZonePenalty": 2,
+          "contact": 0.6,
+          "layout": "close"
+        },
+        "id": "1791941499652-6",
+        "loadout": "{\"mode\":\"auto\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+        "elapsed": 2.316666666667338,
+        "countdown": 0,
+        "wave": 1,
+        "activation": 1,
+        "plan": {
+          "ids": [
+            0,
+            1,
+            2
+          ],
+          "zone": null,
+          "priority": null,
+          "exposure": 2.3
+        },
+        "phase": "exposed",
+        "score": 14,
+        "efficiency": 33.333333333333336,
+        "stats": {
+          "base": 4,
+          "bonuses": 10,
+          "deductions": 0,
+          "shots": 3,
+          "units": 3,
+          "attackSeconds": 0,
+          "contactSeconds": 0,
+          "cleared": 1,
+          "missed": 0
+        },
+        "result": null,
+        "targets": [
+          {
+            "index": 0,
+            "hits": 2,
+            "contact": 0,
+            "done": true,
+            "clearAt": 1.2033333333336476,
+            "bonus": false
+          },
+          {
+            "index": 1,
+            "hits": 0,
+            "contact": 0,
+            "done": false,
+            "clearAt": null,
+            "bonus": false
+          },
+          {
+            "index": 2,
+            "hits": 0,
+            "contact": 0,
+            "done": false,
+            "clearAt": null,
+            "bonus": false
+          }
+        ]
+      },
+      "freeBefore": 0,
+      "freeAfter": 0,
+      "saw": {
+        "phase": "off",
+        "t": 0,
+        "starts": 0,
+        "take": 0,
+        "cord": 0
+      },
+      "packet": {
+        "run": "1791941499652-6",
+        "phase": "ACTIVE",
+        "weapon": "aa12",
+        "shot": 3,
+        "activation": 1
+      },
+      "ammo": {
+        "minigun": 300,
+        "m4": 30,
+        "ak": 30,
+        "aa12": 17,
+        "pistol": 12,
+        "uzi": 32,
+        "shotgun": 8,
+        "revolver": 6,
+        "sniper": 5,
+        "launcher": 6,
+        "flamer": 60,
+        "chainsaw": null
+      },
+      "muzzle": [
+        0.9129237340518348,
+        -198.91823666223908,
+        -640.0696827478698
+      ],
+      "shooter": [
+        0,
+        -200,
+        -640.61
+      ]
+    },
+    {
+      "w": "revolver",
+      "begun": {
+        "ok": true,
+        "id": "1791941506051-7"
+      },
+      "s": {
+        "state": "ACTIVE",
+        "drill": {
+          "weapon": "revolver",
+          "id": "triple-stack",
+          "mode": "groups",
+          "duration": 30,
+          "waves": 5,
+          "exposure": 3.6,
+          "gap": 0.45,
+          "group": 3,
+          "minHits": 1,
+          "maxEvents": 1,
+          "clearBonus": 10,
+          "missPenalty": 3,
+          "wrongZonePenalty": 2,
+          "contact": 0.6,
+          "layout": "stack",
+          "order": [
+            0,
+            1,
+            2
+          ],
+          "collateralBonus": 12
+        },
+        "id": "1791941506051-7",
+        "loadout": "{\"mode\":\"semi\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+        "elapsed": 1.950000000000565,
+        "countdown": 0,
+        "wave": 2,
+        "activation": 2,
+        "plan": {
+          "ids": [
+            0,
+            1,
+            2
+          ],
+          "zone": null,
+          "priority": null,
+          "exposure": 3.6
+        },
+        "phase": "raising",
+        "score": 76,
+        "efficiency": 100,
+        "stats": {
+          "base": 22,
+          "bonuses": 54,
+          "deductions": 0,
+          "shots": 1,
+          "units": 1,
+          "attackSeconds": 0,
+          "contactSeconds": 0,
+          "cleared": 3,
+          "missed": 0
+        },
+        "result": null,
+        "targets": [
+          {
+            "index": 0,
+            "hits": 0,
+            "contact": 0,
+            "done": false,
+            "clearAt": null,
+            "bonus": false
+          },
+          {
+            "index": 1,
+            "hits": 0,
+            "contact": 0,
+            "done": false,
+            "clearAt": null,
+            "bonus": false
+          },
+          {
+            "index": 2,
+            "hits": 0,
+            "contact": 0,
+            "done": false,
+            "clearAt": null,
+            "bonus": false
+          }
+        ]
+      },
+      "freeBefore": 0,
+      "freeAfter": 0,
+      "saw": {
+        "phase": "off",
+        "t": 0,
+        "starts": 0,
+        "take": 0,
+        "cord": 0
+      },
+      "packet": {
+        "run": "1791941506051-7",
+        "phase": "ACTIVE",
+        "weapon": "revolver",
+        "shot": 1,
+        "activation": 1
+      },
+      "ammo": {
+        "minigun": 300,
+        "m4": 30,
+        "ak": 30,
+        "aa12": 20,
+        "pistol": 12,
+        "uzi": 32,
+        "shotgun": 8,
+        "revolver": 5,
+        "sniper": 5,
+        "launcher": 6,
+        "flamer": 60,
+        "chainsaw": null
+      },
+      "muzzle": [
+        0.06642316371648843,
+        -198.91898546371172,
+        -639.8867823649421
+      ],
+      "shooter": [
+        0,
+        -200,
+        -640.61
+      ]
+    },
+    {
+      "w": "sniper",
+      "begun": {
+        "ok": true,
+        "id": "1791941512330-8"
+      },
+      "s": {
+        "state": "ACTIVE",
+        "drill": {
+          "weapon": "sniper",
+          "id": "four-deep",
+          "mode": "groups",
+          "duration": 30,
+          "waves": 4,
+          "exposure": 4.5,
+          "gap": 0.45,
+          "group": 4,
+          "minHits": 1,
+          "maxEvents": 1,
+          "clearBonus": 10,
+          "missPenalty": 3,
+          "wrongZonePenalty": 2,
+          "contact": 0.6,
+          "layout": "stack",
+          "order": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "collateralBonus": 20
+        },
+        "id": "1791941512330-8",
+        "loadout": "{\"mode\":\"semi\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+        "elapsed": 1.950000000000565,
+        "countdown": 0,
+        "wave": 1,
+        "activation": 1,
+        "plan": {
+          "ids": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "zone": null,
+          "priority": null,
+          "exposure": 4.5
+        },
+        "phase": "exposed",
+        "score": 92,
+        "efficiency": 100,
+        "stats": {
+          "base": 22,
+          "bonuses": 70,
+          "deductions": 0,
+          "shots": 1,
+          "units": 1,
+          "attackSeconds": 0,
+          "contactSeconds": 0,
+          "cleared": 3,
+          "missed": 0
+        },
+        "result": null,
+        "targets": [
+          {
+            "index": 0,
+            "hits": 1,
+            "contact": 0,
+            "done": true,
+            "clearAt": 1.153333333333633,
+            "bonus": false
+          },
+          {
+            "index": 1,
+            "hits": 1,
+            "contact": 0,
+            "done": true,
+            "clearAt": 1.1700000000003046,
+            "bonus": false
+          },
+          {
+            "index": 2,
+            "hits": 1,
+            "contact": 0,
+            "done": true,
+            "clearAt": 1.2033333333336476,
+            "bonus": false
+          },
+          {
+            "index": 3,
+            "hits": 0,
+            "contact": 0,
+            "done": false,
+            "clearAt": null,
+            "bonus": false
+          }
+        ]
+      },
+      "freeBefore": 0,
+      "freeAfter": 0,
+      "saw": {
+        "phase": "off",
+        "t": 0,
+        "starts": 0,
+        "take": 0,
+        "cord": 0
+      },
+      "packet": {
+        "run": "1791941512330-8",
+        "phase": "ACTIVE",
+        "weapon": "sniper",
+        "shot": 1,
+        "activation": 1
+      },
+      "ammo": {
+        "minigun": 300,
+        "m4": 30,
+        "ak": 30,
+        "aa12": 20,
+        "pistol": 12,
+        "uzi": 32,
+        "shotgun": 8,
+        "revolver": 6,
+        "sniper": 4,
+        "launcher": 6,
+        "flamer": 60,
+        "chainsaw": null
+      },
+      "muzzle": [
+        0.2199776704536579,
+        -198.87985578293933,
+        -639.2950713286117
+      ],
+      "shooter": [
+        0,
+        -200,
+        -640.61
+      ]
+    },
+    {
+      "w": "launcher",
+      "begun": {
+        "ok": true,
+        "id": "1791941519040-9"
+      },
+      "s": {
+        "state": "ACTIVE",
+        "drill": {
+          "weapon": "launcher",
+          "id": "blast-school",
+          "mode": "groups",
+          "duration": 30,
+          "waves": 4,
+          "exposure": 5,
+          "gap": 0.45,
+          "group": 5,
+          "minHits": 1,
+          "maxEvents": 1,
+          "clearBonus": 10,
+          "missPenalty": 3,
+          "wrongZonePenalty": 2,
+          "contact": 0.6,
+          "layout": "blast",
+          "collateralBonus": 10
+        },
+        "id": "1791941519040-9",
+        "loadout": "{\"mode\":\"semi\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+        "elapsed": 1.950000000000565,
+        "countdown": 0,
+        "wave": 1,
+        "activation": 1,
+        "plan": {
+          "ids": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "zone": null,
+          "priority": null,
+          "exposure": 5
+        },
+        "phase": "exposed",
+        "score": 84,
+        "efficiency": 100,
+        "stats": {
+          "base": 14,
+          "bonuses": 70,
+          "deductions": 0,
+          "shots": 1,
+          "units": 1,
+          "attackSeconds": 0,
+          "contactSeconds": 0,
+          "cleared": 4,
+          "missed": 0
+        },
+        "result": null,
+        "targets": [
+          {
+            "index": 0,
+            "hits": 1,
+            "contact": 0,
+            "done": true,
+            "clearAt": 1.4033333333337055,
+            "bonus": false
+          },
+          {
+            "index": 1,
+            "hits": 1,
+            "contact": 0,
+            "done": true,
+            "clearAt": 1.4033333333337055,
+            "bonus": false
+          },
+          {
+            "index": 2,
+            "hits": 1,
+            "contact": 0,
+            "done": true,
+            "clearAt": 1.4033333333337055,
+            "bonus": false
+          },
+          {
+            "index": 3,
+            "hits": 1,
+            "contact": 0,
+            "done": true,
+            "clearAt": 1.4033333333337055,
+            "bonus": false
+          },
+          {
+            "index": 4,
+            "hits": 0,
+            "contact": 0,
+            "done": false,
+            "clearAt": null,
+            "bonus": false
+          }
+        ]
+      },
+      "freeBefore": 0,
+      "freeAfter": 0,
+      "saw": {
+        "phase": "off",
+        "t": 0,
+        "starts": 0,
+        "take": 0,
+        "cord": 0
+      },
+      "packet": {
+        "run": "1791941519040-9",
+        "phase": "ACTIVE",
+        "weapon": "launcher",
+        "shot": 1,
+        "activation": 1
+      },
+      "ammo": {
+        "minigun": 300,
+        "m4": 30,
+        "ak": 30,
+        "aa12": 20,
+        "pistol": 12,
+        "uzi": 32,
+        "shotgun": 8,
+        "revolver": 6,
+        "sniper": 5,
+        "launcher": 5,
+        "flamer": 60,
+        "chainsaw": null
+      },
+      "muzzle": [
+        -0.020250468454578785,
+        -198.93443040389974,
+        -639.7434150002699
+      ],
+      "shooter": [
+        0,
+        -200,
+        -640.61
+      ]
+    },
+    {
+      "w": "minigun",
+      "begun": {
+        "ok": true,
+        "id": "1791941525198-10"
+      },
+      "s": {
+        "state": "ACTIVE",
+        "drill": {
+          "weapon": "minigun",
+          "id": "spin-and-win",
+          "mode": "groups",
+          "duration": 30,
+          "waves": 4,
+          "exposure": 5,
+          "gap": 0.45,
+          "group": 5,
+          "minHits": 3,
+          "maxEvents": 3,
+          "clearBonus": 10,
+          "missPenalty": 3,
+          "wrongZonePenalty": 2,
+          "contact": 0.6
+        },
+        "id": "1791941525198-10",
+        "loadout": "{\"mode\":\"auto\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+        "elapsed": 2.316666666667338,
+        "countdown": 0,
+        "wave": 1,
+        "activation": 1,
+        "plan": {
+          "ids": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "zone": null,
+          "priority": null,
+          "exposure": 5
+        },
+        "phase": "exposed",
+        "score": 25,
+        "efficiency": 37.5,
+        "stats": {
+          "base": 15,
+          "bonuses": 10,
+          "deductions": 0,
+          "shots": 8,
+          "units": 8,
+          "attackSeconds": 0,
+          "contactSeconds": 0,
+          "cleared": 1,
+          "missed": 0
+        },
+        "result": null,
+        "targets": [
+          {
+            "index": 0,
+            "hits": 3,
+            "contact": 0,
+            "done": true,
+            "clearAt": 1.4033333333337055,
+            "bonus": false
+          },
+          {
+            "index": 1,
+            "hits": 0,
+            "contact": 0,
+            "done": false,
+            "clearAt": null,
+            "bonus": false
+          },
+          {
+            "index": 2,
+            "hits": 0,
+            "contact": 0,
+            "done": false,
+            "clearAt": null,
+            "bonus": false
+          },
+          {
+            "index": 3,
+            "hits": 0,
+            "contact": 0,
+            "done": false,
+            "clearAt": null,
+            "bonus": false
+          },
+          {
+            "index": 4,
+            "hits": 0,
+            "contact": 0,
+            "done": false,
+            "clearAt": null,
+            "bonus": false
+          }
+        ]
+      },
+      "freeBefore": 0,
+      "freeAfter": 0,
+      "saw": {
+        "phase": "off",
+        "t": 0,
+        "starts": 0,
+        "take": 0,
+        "cord": 0
+      },
+      "packet": {
+        "run": "1791941525198-10",
+        "phase": "ACTIVE",
+        "weapon": "minigun",
+        "shot": 8,
+        "activation": 1
+      },
+      "ammo": {
+        "minigun": 292,
+        "m4": 30,
+        "ak": 30,
+        "aa12": 20,
+        "pistol": 12,
+        "uzi": 32,
+        "shotgun": 8,
+        "revolver": 6,
+        "sniper": 5,
+        "launcher": 6,
+        "flamer": 60,
+        "chainsaw": null
+      },
+      "muzzle": [
+        0.7359242394062393,
+        -199.35304156899127,
+        -642.4021062876168
+      ],
+      "shooter": [
+        0,
+        -200,
+        -643.5
+      ]
+    },
+    {
+      "w": "flamer",
+      "begun": {
+        "ok": true,
+        "id": "1791941531429-11"
+      },
+      "s": {
+        "state": "ACTIVE",
+        "drill": {
+          "weapon": "flamer",
+          "id": "hot-contact",
+          "mode": "sequence",
+          "duration": 30,
+          "waves": 8,
+          "exposure": 3.2,
+          "gap": 0.45,
+          "group": 1,
+          "minHits": 1,
+          "maxEvents": 1,
+          "clearBonus": 10,
+          "missPenalty": 3,
+          "wrongZonePenalty": 2,
+          "contact": 0.7,
+          "layout": "flame",
+          "continuous": true
+        },
+        "id": "1791941531429-11",
+        "loadout": "{\"mode\":\"auto\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+        "elapsed": 2.89999999999831,
+        "countdown": 0,
+        "wave": 2,
+        "activation": 2,
+        "plan": {
+          "ids": [
+            1
+          ],
+          "zone": null,
+          "priority": null,
+          "exposure": 3.2
+        },
+        "phase": "raising",
+        "score": 35,
+        "efficiency": 62.49999999996359,
+        "stats": {
+          "base": 24.99999999998547,
+          "bonuses": 10,
+          "deductions": 0,
+          "shots": 14,
+          "units": 7,
+          "attackSeconds": 1.1199999999999999,
+          "contactSeconds": 0.6999999999995922,
+          "cleared": 1,
+          "missed": 0
+        },
+        "result": null,
+        "targets": [
+          {
+            "index": 1,
+            "hits": 0,
+            "contact": 0,
+            "done": false,
+            "clearAt": null,
+            "bonus": false
+          }
+        ]
+      },
+      "freeBefore": 0,
+      "freeAfter": 0,
+      "saw": {
+        "phase": "off",
+        "t": 0,
+        "starts": 0,
+        "take": 0,
+        "cord": 0
+      },
+      "packet": {
+        "run": "1791941531429-11",
+        "phase": "ACTIVE",
+        "weapon": "flamer",
+        "shot": 14,
+        "activation": 1
+      },
+      "ammo": {
+        "minigun": 300,
+        "m4": 30,
+        "ak": 30,
+        "aa12": 20,
+        "pistol": 12,
+        "uzi": 32,
+        "shotgun": 8,
+        "revolver": 6,
+        "sniper": 5,
+        "launcher": 6,
+        "flamer": 53,
+        "chainsaw": null
+      },
+      "muzzle": [
+        -0.3396358186065243,
+        -198.94164112747293,
+        -639.7827675227626
+      ],
+      "shooter": [
+        0,
+        -200,
+        -640.61
+      ]
+    },
+    {
+      "w": "chainsaw",
+      "begun": {
+        "ok": true,
+        "id": "1791941540148-12"
+      },
+      "s": {
+        "state": "ACTIVE",
+        "drill": {
+          "weapon": "chainsaw",
+          "id": "first-bite",
+          "mode": "sequence",
+          "duration": 30,
+          "waves": 8,
+          "exposure": 3.5,
+          "gap": 0.45,
+          "group": 1,
+          "minHits": 1,
+          "maxEvents": 1,
+          "clearBonus": 10,
+          "missPenalty": 3,
+          "wrongZonePenalty": 2,
+          "contact": 0.45,
+          "layout": "saw",
+          "continuous": true
+        },
+        "id": "1791941540148-12",
+        "loadout": "{\"mode\":\"auto\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+        "elapsed": 5.449999999996806,
+        "countdown": 0,
+        "wave": 2,
+        "activation": 2,
+        "plan": {
+          "ids": [
+            1
+          ],
+          "zone": null,
+          "priority": null,
+          "exposure": 3.5
+        },
+        "phase": "exposed",
+        "score": 35,
+        "efficiency": 41.53846153846154,
+        "stats": {
+          "base": 24.999999999985448,
+          "bonuses": 10,
+          "deductions": 0,
+          "shots": 65,
+          "units": 1.0833333333327024,
+          "attackSeconds": 1.0833333333327024,
+          "contactSeconds": 0.44999999999973794,
+          "cleared": 1,
+          "missed": 0
+        },
+        "result": null,
+        "targets": [
+          {
+            "index": 1,
+            "hits": 0,
+            "contact": 0,
+            "done": false,
+            "clearAt": null,
+            "bonus": false
+          }
+        ]
+      },
+      "freeBefore": 0,
+      "freeAfter": 0,
+      "saw": {
+        "phase": "ready",
+        "t": 1.02,
+        "starts": 1,
+        "take": 0,
+        "cord": 0
+      },
+      "packet": null,
+      "ammo": {
+        "minigun": 300,
+        "m4": 30,
+        "ak": 30,
+        "aa12": 20,
+        "pistol": 12,
+        "uzi": 32,
+        "shotgun": 8,
+        "revolver": 6,
+        "sniper": 5,
+        "launcher": 6,
+        "flamer": 60,
+        "chainsaw": null
+      },
+      "muzzle": [
+        -2.205341293990832,
+        -199.23685036383725,
+        -639.6056806536888
+      ],
+      "shooter": [
+        -2.4,
+        -200,
+        -640.61
+      ]
+    }
+  ],
+  "rules": [
+    {
+      "phase": "COUNTDOWN",
+      "what": "wrong",
+      "position": [
+        0,
+        -200,
+        -640.61
+      ],
+      "s": {
+        "state": "DISQUALIFIED",
+        "drill": {
+          "weapon": "pistol",
+          "id": "pop-patrol",
+          "mode": "sequence",
+          "duration": 30,
+          "waves": 12,
+          "exposure": 1.65,
+          "gap": 0.45,
+          "group": 1,
+          "minHits": 1,
+          "maxEvents": 1,
+          "clearBonus": 10,
+          "missPenalty": 3,
+          "wrongZonePenalty": 2,
+          "contact": 0.6,
+          "order": [
+            0,
+            3,
+            1,
+            4,
+            2
+          ],
+          "speedBonus": 8
+        },
+        "id": "1791941555887-14",
+        "loadout": "{\"mode\":\"semi\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+        "elapsed": 0,
+        "countdown": 7.666666666666863,
+        "wave": 0,
+        "activation": 0,
+        "plan": {
+          "ids": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "zone": "bull",
+          "priority": null,
+          "exposure": 35
+        },
+        "phase": "ended",
+        "score": 0,
+        "efficiency": 0,
+        "stats": {
+          "base": 0,
+          "bonuses": 0,
+          "deductions": 0,
+          "shots": 0,
+          "units": 0,
+          "attackSeconds": 0,
+          "contactSeconds": 0,
+          "cleared": 0,
+          "missed": 0
+        },
+        "result": {
+          "id": "1791941555887-14",
+          "state": "DISQUALIFIED",
+          "reason": "weapon",
+          "valid": false,
+          "score": 0,
+          "time": 0,
+          "efficiency": 0,
+          "weapon": "pistol",
+          "drill": "pop-patrol",
+          "loadout": "{\"mode\":\"semi\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+          "at": 1791941556309,
+          "base": 0,
+          "bonuses": 0,
+          "deductions": 0,
+          "shots": 0,
+          "units": 0,
+          "attackSeconds": 0,
+          "contactSeconds": 0,
+          "cleared": 0,
+          "missed": 0
+        },
+        "targets": []
+      }
+    },
+    {
+      "phase": "COUNTDOWN",
+      "what": "grenade",
+      "position": [
+        0,
+        -200,
+        -640.61
+      ],
+      "s": {
+        "state": "DISQUALIFIED",
+        "drill": {
+          "weapon": "pistol",
+          "id": "pop-patrol",
+          "mode": "sequence",
+          "duration": 30,
+          "waves": 12,
+          "exposure": 1.65,
+          "gap": 0.45,
+          "group": 1,
+          "minHits": 1,
+          "maxEvents": 1,
+          "clearBonus": 10,
+          "missPenalty": 3,
+          "wrongZonePenalty": 2,
+          "contact": 0.6,
+          "order": [
+            0,
+            3,
+            1,
+            4,
+            2
+          ],
+          "speedBonus": 8
+        },
+        "id": "1791941556821-15",
+        "loadout": "{\"mode\":\"semi\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+        "elapsed": 0,
+        "countdown": 7.266666666667099,
+        "wave": 0,
+        "activation": 0,
+        "plan": {
+          "ids": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "zone": "bull",
+          "priority": null,
+          "exposure": 35
+        },
+        "phase": "ended",
+        "score": 0,
+        "efficiency": 0,
+        "stats": {
+          "base": 0,
+          "bonuses": 0,
+          "deductions": 0,
+          "shots": 0,
+          "units": 0,
+          "attackSeconds": 0,
+          "contactSeconds": 0,
+          "cleared": 0,
+          "missed": 0
+        },
+        "result": {
+          "id": "1791941556821-15",
+          "state": "DISQUALIFIED",
+          "reason": "grenade",
+          "valid": false,
+          "score": 0,
+          "time": 0,
+          "efficiency": 0,
+          "weapon": "pistol",
+          "drill": "pop-patrol",
+          "loadout": "{\"mode\":\"semi\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+          "at": 1791941557463,
+          "base": 0,
+          "bonuses": 0,
+          "deductions": 0,
+          "shots": 0,
+          "units": 0,
+          "attackSeconds": 0,
+          "contactSeconds": 0,
+          "cleared": 0,
+          "missed": 0
+        },
+        "targets": []
+      }
+    },
+    {
+      "phase": "COUNTDOWN",
+      "what": "line",
+      "position": [
+        0,
+        -200,
+        -640.24
+      ],
+      "s": {
+        "state": "COUNTDOWN",
+        "drill": {
+          "weapon": "pistol",
+          "id": "pop-patrol",
+          "mode": "sequence",
+          "duration": 30,
+          "waves": 12,
+          "exposure": 1.65,
+          "gap": 0.45,
+          "group": 1,
+          "minHits": 1,
+          "maxEvents": 1,
+          "clearBonus": 10,
+          "missPenalty": 3,
+          "wrongZonePenalty": 2,
+          "contact": 0.6,
+          "order": [
+            0,
+            3,
+            1,
+            4,
+            2
+          ],
+          "speedBonus": 8
+        },
+        "id": "1791941557866-16",
+        "loadout": "{\"mode\":\"semi\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+        "elapsed": 0,
+        "countdown": 7.3333333333337265,
+        "wave": 0,
+        "activation": 0,
+        "plan": {
+          "ids": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "zone": "bull",
+          "priority": null,
+          "exposure": 35
+        },
+        "phase": "gap",
+        "score": 0,
+        "efficiency": 0,
+        "stats": {
+          "base": 0,
+          "bonuses": 0,
+          "deductions": 0,
+          "shots": 0,
+          "units": 0,
+          "attackSeconds": 0,
+          "contactSeconds": 0,
+          "cleared": 0,
+          "missed": 0
+        },
+        "result": null,
+        "targets": []
+      }
+    },
+    {
+      "phase": "COUNTDOWN",
+      "what": "switch",
+      "position": [
+        0,
+        -200,
+        -640.61
+      ],
+      "s": {
+        "state": "COUNTDOWN",
+        "drill": {
+          "weapon": "pistol",
+          "id": "pop-patrol",
+          "mode": "sequence",
+          "duration": 30,
+          "waves": 12,
+          "exposure": 1.65,
+          "gap": 0.45,
+          "group": 1,
+          "minHits": 1,
+          "maxEvents": 1,
+          "clearBonus": 10,
+          "missPenalty": 3,
+          "wrongZonePenalty": 2,
+          "contact": 0.6,
+          "order": [
+            0,
+            3,
+            1,
+            4,
+            2
+          ],
+          "speedBonus": 8
+        },
+        "id": "1791941558529-17",
+        "loadout": "{\"mode\":\"semi\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+        "elapsed": 0,
+        "countdown": 7.3333333333337265,
+        "wave": 0,
+        "activation": 0,
+        "plan": {
+          "ids": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "zone": "bull",
+          "priority": null,
+          "exposure": 35
+        },
+        "phase": "gap",
+        "score": 0,
+        "efficiency": 0,
+        "stats": {
+          "base": 0,
+          "bonuses": 0,
+          "deductions": 0,
+          "shots": 0,
+          "units": 0,
+          "attackSeconds": 0,
+          "contactSeconds": 0,
+          "cleared": 0,
+          "missed": 0
+        },
+        "result": null,
+        "targets": []
+      }
+    },
+    {
+      "phase": "ACTIVE",
+      "what": "wrong",
+      "position": [
+        0,
+        -200,
+        -640.61
+      ],
+      "s": {
+        "state": "DISQUALIFIED",
+        "drill": {
+          "weapon": "pistol",
+          "id": "pop-patrol",
+          "mode": "sequence",
+          "duration": 30,
+          "waves": 12,
+          "exposure": 1.65,
+          "gap": 0.45,
+          "group": 1,
+          "minHits": 1,
+          "maxEvents": 1,
+          "clearBonus": 10,
+          "missPenalty": 3,
+          "wrongZonePenalty": 2,
+          "contact": 0.6,
+          "order": [
+            0,
+            3,
+            1,
+            4,
+            2
+          ],
+          "speedBonus": 8
+        },
+        "id": "1791941559166-18",
+        "loadout": "{\"mode\":\"semi\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+        "elapsed": 0.8999999999994756,
+        "countdown": 0,
+        "wave": 1,
+        "activation": 1,
+        "plan": {
+          "ids": [
+            0
+          ],
+          "zone": null,
+          "priority": null,
+          "exposure": 1.65
+        },
+        "phase": "ended",
+        "score": 0,
+        "efficiency": 0,
+        "stats": {
+          "base": 0,
+          "bonuses": 0,
+          "deductions": 0,
+          "shots": 0,
+          "units": 0,
+          "attackSeconds": 0,
+          "contactSeconds": 0,
+          "cleared": 0,
+          "missed": 0
+        },
+        "result": {
+          "id": "1791941559166-18",
+          "state": "DISQUALIFIED",
+          "reason": "weapon",
+          "valid": false,
+          "score": 0,
+          "time": 0.8999999999994756,
+          "efficiency": 0,
+          "weapon": "pistol",
+          "drill": "pop-patrol",
+          "loadout": "{\"mode\":\"semi\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+          "at": 1791941564551,
+          "base": 0,
+          "bonuses": 0,
+          "deductions": 0,
+          "shots": 0,
+          "units": 0,
+          "attackSeconds": 0,
+          "contactSeconds": 0,
+          "cleared": 0,
+          "missed": 0
+        },
+        "targets": []
+      }
+    },
+    {
+      "phase": "ACTIVE",
+      "what": "grenade",
+      "position": [
+        0,
+        -200,
+        -640.61
+      ],
+      "s": {
+        "state": "DISQUALIFIED",
+        "drill": {
+          "weapon": "pistol",
+          "id": "pop-patrol",
+          "mode": "sequence",
+          "duration": 30,
+          "waves": 12,
+          "exposure": 1.65,
+          "gap": 0.45,
+          "group": 1,
+          "minHits": 1,
+          "maxEvents": 1,
+          "clearBonus": 10,
+          "missPenalty": 3,
+          "wrongZonePenalty": 2,
+          "contact": 0.6,
+          "order": [
+            0,
+            3,
+            1,
+            4,
+            2
+          ],
+          "speedBonus": 8
+        },
+        "id": "1791941564972-19",
+        "loadout": "{\"mode\":\"semi\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+        "elapsed": 1.2999999999992442,
+        "countdown": 0,
+        "wave": 1,
+        "activation": 1,
+        "plan": {
+          "ids": [
+            0
+          ],
+          "zone": null,
+          "priority": null,
+          "exposure": 1.65
+        },
+        "phase": "ended",
+        "score": 0,
+        "efficiency": 0,
+        "stats": {
+          "base": 0,
+          "bonuses": 0,
+          "deductions": 0,
+          "shots": 0,
+          "units": 0,
+          "attackSeconds": 0,
+          "contactSeconds": 0,
+          "cleared": 0,
+          "missed": 0
+        },
+        "result": {
+          "id": "1791941564972-19",
+          "state": "DISQUALIFIED",
+          "reason": "grenade",
+          "valid": false,
+          "score": 0,
+          "time": 1.2999999999992442,
+          "efficiency": 0,
+          "weapon": "pistol",
+          "drill": "pop-patrol",
+          "loadout": "{\"mode\":\"semi\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+          "at": 1791941569883,
+          "base": 0,
+          "bonuses": 0,
+          "deductions": 0,
+          "shots": 0,
+          "units": 0,
+          "attackSeconds": 0,
+          "contactSeconds": 0,
+          "cleared": 0,
+          "missed": 0
+        },
+        "targets": []
+      }
+    },
+    {
+      "phase": "ACTIVE",
+      "what": "line",
+      "position": [
+        0,
+        -200,
+        -640.24
+      ],
+      "s": {
+        "state": "ACTIVE",
+        "drill": {
+          "weapon": "pistol",
+          "id": "pop-patrol",
+          "mode": "sequence",
+          "duration": 30,
+          "waves": 12,
+          "exposure": 1.65,
+          "gap": 0.45,
+          "group": 1,
+          "minHits": 1,
+          "maxEvents": 1,
+          "clearBonus": 10,
+          "missPenalty": 3,
+          "wrongZonePenalty": 2,
+          "contact": 0.6,
+          "order": [
+            0,
+            3,
+            1,
+            4,
+            2
+          ],
+          "speedBonus": 8
+        },
+        "id": "1791941571175-20",
+        "loadout": "{\"mode\":\"semi\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+        "elapsed": 1.233333333332616,
+        "countdown": 0,
+        "wave": 1,
+        "activation": 1,
+        "plan": {
+          "ids": [
+            0
+          ],
+          "zone": null,
+          "priority": null,
+          "exposure": 1.65
+        },
+        "phase": "exposed",
+        "score": 0,
+        "efficiency": 0,
+        "stats": {
+          "base": 0,
+          "bonuses": 0,
+          "deductions": 0,
+          "shots": 0,
+          "units": 0,
+          "attackSeconds": 0,
+          "contactSeconds": 0,
+          "cleared": 0,
+          "missed": 0
+        },
+        "result": null,
+        "targets": [
+          {
+            "index": 0,
+            "hits": 0,
+            "contact": 0,
+            "done": false,
+            "clearAt": null,
+            "bonus": false
+          }
+        ]
+      }
+    },
+    {
+      "phase": "ACTIVE",
+      "what": "switch",
+      "position": [
+        0,
+        -200,
+        -640.61
+      ],
+      "s": {
+        "state": "ACTIVE",
+        "drill": {
+          "weapon": "pistol",
+          "id": "pop-patrol",
+          "mode": "sequence",
+          "duration": 30,
+          "waves": 12,
+          "exposure": 1.65,
+          "gap": 0.45,
+          "group": 1,
+          "minHits": 1,
+          "maxEvents": 1,
+          "clearBonus": 10,
+          "missPenalty": 3,
+          "wrongZonePenalty": 2,
+          "contact": 0.6,
+          "order": [
+            0,
+            3,
+            1,
+            4,
+            2
+          ],
+          "speedBonus": 8
+        },
+        "id": "1791941576714-21",
+        "loadout": "{\"mode\":\"semi\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+        "elapsed": 1.233333333332616,
+        "countdown": 0,
+        "wave": 1,
+        "activation": 1,
+        "plan": {
+          "ids": [
+            0
+          ],
+          "zone": null,
+          "priority": null,
+          "exposure": 1.65
+        },
+        "phase": "exposed",
+        "score": 0,
+        "efficiency": 0,
+        "stats": {
+          "base": 0,
+          "bonuses": 0,
+          "deductions": 0,
+          "shots": 0,
+          "units": 0,
+          "attackSeconds": 0,
+          "contactSeconds": 0,
+          "cleared": 0,
+          "missed": 0
+        },
+        "result": null,
+        "targets": [
+          {
+            "index": 0,
+            "hits": 0,
+            "contact": 0,
+            "done": false,
+            "clearAt": null,
+            "bonus": false
+          }
+        ]
+      }
+    }
+  ],
+  "loadSec": 22.623,
+  "console": {
+    "w": [
+      "pistol",
+      "uzi",
+      "m4",
+      "ak",
+      "shotgun",
+      "aa12",
+      "revolver",
+      "sniper",
+      "launcher",
+      "minigun",
+      "flamer",
+      "chainsaw"
+    ],
+    "sizes": [
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5
+    ],
+    "state": "IDLE"
+  },
+  "countdown": {
+    "states": [
+      {
+        "s": "COUNTDOWN",
+        "count": 6.833333333334021,
+        "up": 0
+      },
+      {
+        "s": "COUNTDOWN",
+        "count": 5.833333333334611,
+        "up": 0
+      },
+      {
+        "s": "COUNTDOWN",
+        "count": 4.833333333335201,
+        "up": 0
+      },
+      {
+        "s": "COUNTDOWN",
+        "count": 3.8333333333357906,
+        "up": 0
+      },
+      {
+        "s": "COUNTDOWN",
+        "count": 2.8333333333363804,
+        "up": 0
+      },
+      {
+        "s": "COUNTDOWN",
+        "count": 1.833333333336968,
+        "up": 0
+      },
+      {
+        "s": "COUNTDOWN",
+        "count": 0.8333333333375454,
+        "up": 0
+      }
+    ],
+    "last": {
+      "state": "COUNTDOWN",
+      "drill": {
+        "weapon": "pistol",
+        "id": "bullseye",
+        "mode": "precision",
+        "duration": 35,
+        "waves": 10,
+        "exposure": 2,
+        "gap": 0.45,
+        "group": 1,
+        "minHits": 1,
+        "maxEvents": 1,
+        "clearBonus": 10,
+        "missPenalty": 3,
+        "wrongZonePenalty": 2,
+        "contact": 0.6,
+        "zone": "bull",
+        "speedBonus": 0
+      },
+      "id": "1791941549187-13",
+      "loadout": "{\"mode\":\"semi\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+      "elapsed": 0,
+      "countdown": 0.8333333333375454,
+      "wave": 0,
+      "activation": 0,
+      "plan": {
+        "ids": [
+          1
+        ],
+        "zone": null,
+        "priority": null,
+        "exposure": 3.5
+      },
+      "phase": "gap",
+      "score": 0,
+      "efficiency": 0,
+      "stats": {
+        "base": 0,
+        "bonuses": 0,
+        "deductions": 0,
+        "shots": 0,
+        "units": 0,
+        "attackSeconds": 0,
+        "contactSeconds": 0,
+        "cleared": 0,
+        "missed": 0
+      },
+      "result": null,
+      "targets": []
+    },
+    "forbidden": 0,
+    "countdownFrames": 51,
+    "start": {
+      "state": "ACTIVE",
+      "drill": {
+        "weapon": "pistol",
+        "id": "bullseye",
+        "mode": "precision",
+        "duration": 35,
+        "waves": 10,
+        "exposure": 2,
+        "gap": 0.45,
+        "group": 1,
+        "minHits": 1,
+        "maxEvents": 1,
+        "clearBonus": 10,
+        "missPenalty": 3,
+        "wrongZonePenalty": 2,
+        "contact": 0.6,
+        "zone": "bull",
+        "speedBonus": 0
+      },
+      "id": "1791941549187-13",
+      "loadout": "{\"mode\":\"semi\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+      "elapsed": 0,
+      "countdown": 0,
+      "wave": 1,
+      "activation": 1,
+      "plan": {
+        "ids": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "zone": "bull",
+        "priority": null,
+        "exposure": 35
+      },
+      "phase": "raising",
+      "score": 0,
+      "efficiency": 0,
+      "stats": {
+        "base": 0,
+        "bonuses": 0,
+        "deductions": 0,
+        "shots": 0,
+        "units": 0,
+        "attackSeconds": 0,
+        "contactSeconds": 0,
+        "cleared": 0,
+        "missed": 0
+      },
+      "result": null,
+      "targets": [
+        {
+          "index": 0,
+          "hits": 0,
+          "contact": 0,
+          "done": false,
+          "clearAt": null,
+          "bonus": false
+        },
+        {
+          "index": 1,
+          "hits": 0,
+          "contact": 0,
+          "done": false,
+          "clearAt": null,
+          "bonus": false
+        },
+        {
+          "index": 2,
+          "hits": 0,
+          "contact": 0,
+          "done": false,
+          "clearAt": null,
+          "bonus": false
+        },
+        {
+          "index": 3,
+          "hits": 0,
+          "contact": 0,
+          "done": false,
+          "clearAt": null,
+          "bonus": false
+        },
+        {
+          "index": 4,
+          "hits": 0,
+          "contact": 0,
+          "done": false,
+          "clearAt": null,
+          "bonus": false
+        }
+      ]
+    }
+  },
+  "movement": [
+    {
+      "x": -7.4,
+      "style": "run",
+      "maxZ": -640.24,
+      "maxY": -200,
+      "position": [
+        -7.4,
+        -200,
+        -640.24
+      ],
+      "vault": false
+    },
+    {
+      "x": -7.4,
+      "style": "jump",
+      "maxZ": -640.24,
+      "maxY": -198.33166666666656,
+      "position": [
+        -7.4,
+        -200,
+        -640.24
+      ],
+      "vault": false
+    },
+    {
+      "x": -7.4,
+      "style": "crouch",
+      "maxZ": -640.24,
+      "maxY": -200,
+      "position": [
+        -7.4,
+        -200,
+        -640.24
+      ],
+      "vault": false
+    },
+    {
+      "x": -6,
+      "style": "run",
+      "maxZ": -640.24,
+      "maxY": -200,
+      "position": [
+        -6,
+        -200,
+        -640.24
+      ],
+      "vault": false
+    },
+    {
+      "x": -6,
+      "style": "jump",
+      "maxZ": -640.24,
+      "maxY": -198.33166666666656,
+      "position": [
+        -6,
+        -200,
+        -640.24
+      ],
+      "vault": false
+    },
+    {
+      "x": -6,
+      "style": "crouch",
+      "maxZ": -640.24,
+      "maxY": -200,
+      "position": [
+        -6,
+        -200,
+        -640.24
+      ],
+      "vault": false
+    },
+    {
+      "x": -3,
+      "style": "run",
+      "maxZ": -640.24,
+      "maxY": -200,
+      "position": [
+        -3,
+        -200,
+        -640.24
+      ],
+      "vault": false
+    },
+    {
+      "x": -3,
+      "style": "jump",
+      "maxZ": -640.24,
+      "maxY": -198.33166666666656,
+      "position": [
+        -3,
+        -200,
+        -640.24
+      ],
+      "vault": false
+    },
+    {
+      "x": -3,
+      "style": "crouch",
+      "maxZ": -640.24,
+      "maxY": -200,
+      "position": [
+        -3,
+        -200,
+        -640.24
+      ],
+      "vault": false
+    },
+    {
+      "x": 0,
+      "style": "run",
+      "maxZ": -640.24,
+      "maxY": -200,
+      "position": [
+        0,
+        -200,
+        -640.24
+      ],
+      "vault": false
+    },
+    {
+      "x": 0,
+      "style": "jump",
+      "maxZ": -640.24,
+      "maxY": -198.33166666666656,
+      "position": [
+        0,
+        -200,
+        -640.24
+      ],
+      "vault": false
+    },
+    {
+      "x": 0,
+      "style": "crouch",
+      "maxZ": -640.24,
+      "maxY": -200,
+      "position": [
+        0,
+        -200,
+        -640.24
+      ],
+      "vault": false
+    },
+    {
+      "x": 3,
+      "style": "run",
+      "maxZ": -640.24,
+      "maxY": -200,
+      "position": [
+        3,
+        -200,
+        -640.24
+      ],
+      "vault": false
+    },
+    {
+      "x": 3,
+      "style": "jump",
+      "maxZ": -640.24,
+      "maxY": -198.33166666666656,
+      "position": [
+        3,
+        -200,
+        -640.24
+      ],
+      "vault": false
+    },
+    {
+      "x": 3,
+      "style": "crouch",
+      "maxZ": -640.24,
+      "maxY": -200,
+      "position": [
+        3,
+        -200,
+        -640.24
+      ],
+      "vault": false
+    },
+    {
+      "x": 6,
+      "style": "run",
+      "maxZ": -640.24,
+      "maxY": -200,
+      "position": [
+        6,
+        -200,
+        -640.24
+      ],
+      "vault": false
+    },
+    {
+      "x": 6,
+      "style": "jump",
+      "maxZ": -640.24,
+      "maxY": -198.33166666666656,
+      "position": [
+        6,
+        -200,
+        -640.24
+      ],
+      "vault": false
+    },
+    {
+      "x": 6,
+      "style": "crouch",
+      "maxZ": -640.24,
+      "maxY": -200,
+      "position": [
+        6,
+        -200,
+        -640.24
+      ],
+      "vault": false
+    },
+    {
+      "x": 7,
+      "style": "run",
+      "maxZ": -640.24,
+      "maxY": -200,
+      "position": [
+        6.459999976158143,
+        -200,
+        -640.24
+      ],
+      "vault": false
+    },
+    {
+      "x": 7,
+      "style": "jump",
+      "maxZ": -640.24,
+      "maxY": -198.33166666666656,
+      "position": [
+        6.459999976158143,
+        -200,
+        -640.24
+      ],
+      "vault": false
+    },
+    {
+      "x": 7,
+      "style": "crouch",
+      "maxZ": -640.24,
+      "maxY": -200,
+      "position": [
+        6.459999976158143,
+        -200,
+        -640.24
+      ],
+      "vault": false
+    }
+  ],
+  "cleanup": {
+    "counts": [
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5
+    ],
+    "original": {
+      "size": 12,
+      "maxSpare": 14,
+      "loaded": [
+        12,
+        12
+      ],
+      "spare": [
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12
+      ]
+    },
+    "restored": {
+      "size": 12,
+      "maxSpare": 14,
+      "loaded": [
+        12,
+        12
+      ],
+      "spare": [
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12
+      ]
+    },
+    "listeners": 1,
+    "normal": true
+  },
+  "errors": []
+}

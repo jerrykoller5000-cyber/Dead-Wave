@@ -1,0 +1,90 @@
+{
+  "loadSec": 17.611,
+  "hit": {
+    "events": [
+      {
+        "t": 0.02010000002384186,
+        "phase": "wind"
+      },
+      {
+        "t": 0.788,
+        "phase": "strike"
+      },
+      {
+        "t": 1.043800000011921,
+        "phase": "recover"
+      },
+      {
+        "t": 1.7043000000119208,
+        "phase": "idle"
+      }
+    ],
+    "hp": 9984,
+    "damage": 16,
+    "knockback": 0.9240124379954295,
+    "impactAt": 0.908,
+    "minHand": 0.16754141974223558
+  },
+  "miss": {
+    "hp": 10000,
+    "missFrames": 50,
+    "shake": 0.3286781854439832,
+    "lean": 1.0177206785343351,
+    "yawChange": 0
+  },
+  "roll": {
+    "hp": 10000,
+    "phase": "miss"
+  },
+  "height": {
+    "hp": 10000,
+    "phase": "idle"
+  },
+  "cover": {
+    "hp": 10000,
+    "phase": "idle",
+    "wallHp": 70
+  },
+  "pool": {
+    "interrupted": true,
+    "reset": true,
+    "ankles": true,
+    "skins": 1,
+    "finite": true,
+    "armor": 0.45
+  },
+  "motion": {
+    "maxRate": 1.6991999988555961,
+    "minSole": -0.04264031396573387,
+    "maxSole": 0.14341752121137574,
+    "maxKnee": 1.3628976295158581,
+    "hip": 0.29905783186424945
+  },
+  "perf": [
+    {
+      "on": false,
+      "fps": 60.267857142857146,
+      "p95": 17.30000001192093,
+      "alive": 48
+    },
+    {
+      "on": true,
+      "fps": 60.180541625074504,
+      "p95": 17.5,
+      "alive": 48
+    },
+    {
+      "on": false,
+      "fps": 60.180541625074504,
+      "p95": 17.5,
+      "alive": 48
+    },
+    {
+      "on": true,
+      "fps": 60.09682265793065,
+      "p95": 17.69999998807907,
+      "alive": 48
+    }
+  ],
+  "errors": []
+}

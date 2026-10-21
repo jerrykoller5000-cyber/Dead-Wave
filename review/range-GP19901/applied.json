@@ -1,0 +1,20 @@
+[
+  {
+    "file": "index.html",
+    "baseHash": "4bff3f12dbbac8a2403988475c9ff81d67076c13edde482267ca90096c2d24bf",
+    "afterHash": "fbf7b89db05a90a5631f8476ce4743c52863610c65a337cb7dd24efddc0a2a74",
+    "patches": 37
+  },
+  {
+    "file": "world/training.js",
+    "baseHash": "68f84ac922e25c66c1fce3638447cd61f84cf916a42067cff94e1aae0eececf0",
+    "afterHash": "c85040d9567ba30c33c40fafe2eb18cdb4459d1fff3ee2976c0f97dbca2f21b0",
+    "patches": 4
+  },
+  {
+    "file": "world/training-ballistics.js",
+    "baseHash": "2a7d42d7def41bb7c0428427e6cf0d1f2ba970e1a31d9e18b9a25286c6f23a37",
+    "afterHash": "32f27d4cb8118039fd28235f956337bc6fdaba70b34013a9682931ca882c0ba3",
+    "patches": 1
+  }
+]

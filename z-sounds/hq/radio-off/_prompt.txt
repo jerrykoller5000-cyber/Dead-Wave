@@ -1,0 +1,9 @@
+#125 hq/radio-off
+MISSING: the game makes no sound here now
+Now: (silent)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.6 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A military field radio clicking off with a short squelch. No music, no voice.

@@ -1,0 +1,102 @@
+{
+  "sources": {
+    "index.html": {
+      "sha256": "e05b9a73e90098384d92bb9fab1b506761236e7b2e6f69d302c741d1b1f103ff",
+      "bytes": 3184521
+    },
+    "studio/marine-dive-aim.js": {
+      "sha256": "9c285834675a897ba38b7cce74da3e5afaaf3997c36a9dd1a4af5745513eaf48",
+      "bytes": 2744
+    }
+  },
+  "baselineMaxInside": 13951,
+  "finalMaxInside": 0,
+  "finalMaxGrip": 0.00871231638793996,
+  "weapons": [
+    {
+      "weapon": "pistol",
+      "dual": true,
+      "maxGrip": 0.0023016152606107777,
+      "spent": 1
+    },
+    {
+      "weapon": "pistol",
+      "dual": false,
+      "maxGrip": 0.00722644509753457,
+      "spent": 1
+    },
+    {
+      "weapon": "revolver",
+      "dual": false,
+      "maxGrip": 0.007226445097926209,
+      "spent": 1
+    },
+    {
+      "weapon": "uzi",
+      "dual": false,
+      "maxGrip": 0.0018955420416148594,
+      "spent": 2
+    },
+    {
+      "weapon": "m4",
+      "dual": false,
+      "maxGrip": 0.003349331291488486,
+      "spent": 1
+    },
+    {
+      "weapon": "ak",
+      "dual": false,
+      "maxGrip": 0.004606054115793055,
+      "spent": 1
+    }
+  ],
+  "blades": [
+    {
+      "blade": "knife",
+      "visibleFrames": 45,
+      "maxGrip": 1.3433204264361277e-13,
+      "maxInside": 0
+    },
+    {
+      "blade": "machete",
+      "visibleFrames": 83,
+      "maxGrip": 1.7703473934372027e-13,
+      "maxInside": 0
+    },
+    {
+      "blade": "katana",
+      "visibleFrames": 62,
+      "maxGrip": 2.3374032006659043e-13,
+      "maxInside": 0
+    }
+  ],
+  "wall": {
+    "max": 7.696498737292683,
+    "contact": true,
+    "phase": "idle"
+  },
+  "perf": {
+    "before": {
+      "loadSec": 19.175,
+      "perf": {
+        "fps": 59.976009596167124,
+        "low": 57.142857142857146,
+        "worst": 17.5,
+        "hitches": 0,
+        "frames": 60
+      },
+      "errors": []
+    },
+    "after": {
+      "loadSec": 20.816,
+      "perf": {
+        "fps": 60.02400960383594,
+        "low": 57.471264368123705,
+        "worst": 17.399999999906868,
+        "hitches": 0,
+        "frames": 60
+      },
+      "errors": []
+    }
+  }
+}

@@ -1,0 +1,17 @@
+
+> grave-shift@0.1.0 test
+> node tools/tests/run-all.mjs --jobs 1
+
+check-players: 295 player.position reads, all in the allowed places
+file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/cdp.mjs:213
+    throw new Error('Chrome never reported a debugging port.\n' + stderr.slice(0, 500));
+          ^
+
+Error: Chrome never reported a debugging port.
+[1011/121336.554:ERROR:third_party\crashpad\crashpad\util\win\registration_protocol_win.cc:136] TransactNamedPipe: The pipe has been ended. (0x6D)
+[1011/121336.583:ERROR:third_party\crashpad\crashpad\client\crashpad_client_win.cc:144] crash server failed to launch, self-terminating
+
+    at launch (file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/cdp.mjs:213:11)
+    at async file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/tests/run-all.mjs:102:17
+
+Node.js v24.13.0

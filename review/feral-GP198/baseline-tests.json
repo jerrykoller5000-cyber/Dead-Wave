@@ -1,0 +1,18 @@
+{
+  "at": "2026-10-11T06:56:25.412Z",
+  "commit": "8ea48a1",
+  "pass": 24,
+  "fail": 3,
+  "cannotRun": 0,
+  "flaky": [],
+  "files": {
+    "t75": {
+      "pass": 15,
+      "fail": 1
+    },
+    "t93": {
+      "pass": 9,
+      "fail": 2
+    }
+  }
+}

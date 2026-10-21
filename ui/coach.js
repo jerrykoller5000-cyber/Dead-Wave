@@ -1,0 +1,131 @@
+import { text } from './strings.js';
+import { createKeyGuide, KEY_GUIDE_STORAGE_KEY } from './key-guide.js';
+
+export const COACH_STORAGE_KEY = 'dw.coach.v1';
+const FLAGS = ['poiShown', 'pickupShown', 'bankShown', 'purchaseShown', 'banked', 'purchased', 'buildShown', 'pairShown', 'medpenShown', 'built'];
+
+// An observer of committed actions: this module never awards skulls/Cash or starts a wave.
+export function createCoach({ load = () => null, save = () => {} } = {}) {
+  let stored;
+  try { stored = JSON.parse(load()); } catch { /* denied or old storage: session only */ }
+  const profile = Object.fromEntries(FLAGS.map(key => [key, stored?.version === 1 && stored[key] === true]));
+  let runId = null, ready = false, carried = 0, processing = false;
+  let poiKey = null, fightRetired = false;
+  let prep = {}, pairBought = false;
+  const warningsSeen = new Set(); let pendingWarnings = [];
+  const isWarning = id => id === 'caveWarning' || id === 'pitWarning';
+  let pickupSeen = false, purchasePending = false, card = null, remaining = 0, visible = false;
+  const persist = () => { try { save(JSON.stringify({ version: 1, ...profile })); } catch { /* play still works */ } };
+  function handle(event = {}) {
+    if (event.type === 'controls-ready') { ready = true; return; }
+    if (event.type === 'run-reset') {
+      runId = event.runId; ready = false; poiKey = null; fightRetired = false; carried = 0; processing = false; pickupSeen = false;
+      purchasePending = false; card = null; visible = false; warningsSeen.clear(); pendingWarnings = []; prep = {}; pairBought = false; return;
+    }
+    if (event.runId != null && runId != null && event.runId !== runId) return;
+    if (event.type === 'prep-state') prep = {day:event.day,phase:event.phase,cash:event.cash};
+    if (event.type === 'purchase-delivered' && event.cashSpent > 0) {
+      if (event.source === 'build') { profile.built = true; if(card === 'build') card = null; persist(); }
+      if (event.source === 'kiosk' && /^dual:/.test(event.itemId || '')) pairBought = true;
+    }
+    const warning = event.type === 'cave-guardian' && event.warning === true ? 'caveWarning' :
+      event.type === 'pit-near' ? 'pitWarning' : null;
+    if (warning && !warningsSeen.has(warning)) { warningsSeen.add(warning); pendingWarnings.push(warning); }
+    if (event.type === 'poi-guards' && event.day === 1 && event.count > 0 && !fightRetired && !poiKey &&
+        ['ranger','hikers','trapper','campsite','cabin','shed','wreck','tower','graveyard','mast','dock'].some(id => event.labelKey === 'world.' + id)) {
+      poiKey = event.labelKey;
+    } else if (event.type === 'alarm-started') {
+      fightRetired = true; poiKey = null; if (card === 'poi') card = null;
+    }
+    if (event.type === 'skull-pickup' && event.count > 0) {
+      pickupSeen = true; fightRetired = true; if (card === 'poi') card = null;
+      if (Number.isSafeInteger(event.carriedCount)) carried = event.carriedCount;
+    } else if (event.type === 'deposit-accepted' && event.count > 0) {
+      carried = 0; processing = true;
+      if (card === 'pickup' || card === 'bank') card = null;
+    } else if (event.type === 'deposit-complete' && event.count > 0 && event.value > 0) {
+      processing = false; profile.banked = true; persist();
+      if (card === 'pickup' || card === 'bank') card = null;
+    } else if (event.type === 'purchase-delivered' && event.cashSpent > 0 &&
+        ['kiosk', 'build', 'upgrade', 'repair'].includes(event.source)) {
+      profile.purchased = true; purchasePending = !profile.purchaseShown; persist();
+    }
+  }
+  function show(id, seconds) {
+    card = id; remaining = seconds;
+    if (isWarning(id)) return; // Per-run warnings never change the saved teaching profile.
+    profile[`${id}Shown`] = true;
+    if (id === 'purchase') purchasePending = false;
+    persist();
+  }
+  function tick(frame = {}) {
+    if (Number.isSafeInteger(frame.skulls) && frame.skulls >= 0) carried = frame.skulls;
+    if (typeof frame.pendingDeposit === 'boolean') processing = frame.pendingDeposit;
+    if ((card === 'pickup' || card === 'bank') && (!carried || processing || profile.banked)) card = null;
+    if (card === 'bank' && !frame.nearWindow) card = null;
+    const day = frame.day ?? prep.day, phase = frame.phase ?? prep.phase, cash = frame.cash ?? prep.cash;
+    if (frame.building === true && !profile.buildShown) { profile.buildShown = true; persist(); }
+    const canBuild = day === 2 && phase === 'prep' && cash >= 8 && !profile.built && !frame.building;
+    const canPair = day >= 2 && pairBought && frame.hasPair === true && !frame.akimbo;
+    const canHeal = day >= 2 && Number.isFinite(frame.hp) && frame.hp > 0 &&
+      Number.isFinite(frame.maxHp) && frame.maxHp > 0 && frame.hp / frame.maxHp <= .4 && frame.medkits > 0;
+    if ((card === 'build' && !canBuild) || (card === 'pair' && !canPair) || (card === 'medpen' && !canHeal)) card = null;
+    visible = ready && frame.active === true;
+    if (!visible) return null;
+    if (pendingWarnings.length) show(pendingWarnings.shift(), 8);
+    if (!isWarning(card) && carried > 0 && !processing && frame.nearWindow && !profile.banked && !profile.bankShown) show('bank', Infinity);
+    if (!card && carried > 0 && !processing && pickupSeen && !profile.banked && !profile.bankShown && !profile.pickupShown) show('pickup', 8);
+    if (!card && !carried && poiKey && !fightRetired && !profile.banked && !profile.poiShown) show('poi', 12);
+    if (!card && purchasePending && !profile.purchaseShown) show('purchase', 6);
+    if (!card && canHeal && !profile.medpenShown) show('medpen', 8);
+    if (!card && canPair && !profile.pairShown) show('pair', 8);
+    if (!card && canBuild && !profile.buildShown) show('build', 8);
+    const view = read();
+    if (card && Number.isFinite(frame.dt) && frame.dt > 0) {
+      remaining -= Math.min(frame.dt, 1);
+      if (remaining <= 0) card = null;
+    }
+    return view;
+  }
+  function read() {
+    if (!visible || !card) return null;
+    return { id: card, title: card === 'poi' ? text('coach.poi', {poi:text(poiKey)}) : text(`coach.${card}`),
+      body: card === 'poi' ? text('coach.poiHelp') : card === 'pickup' ? text('coach.return') : card === 'purchase' ? text('coach.loop') : '' };
+  }
+  return { handle, tick, profile: () => ({ ...profile }), read };
+}
+
+if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+  const hud = document.getElementById('hudNotices') || document.getElementById('hud');
+  if (hud) {
+    const coach = createCoach({ load: () => localStorage.getItem(COACH_STORAGE_KEY), save: value => localStorage.setItem(COACH_STORAGE_KEY, value) });
+    const guide = createKeyGuide({load:()=>localStorage.getItem(KEY_GUIDE_STORAGE_KEY),save:value=>localStorage.setItem(KEY_GUIDE_STORAGE_KEY,value)});
+    const panel = document.createElement('aside'); panel.id = 'firstMinuteCoach'; panel.hidden = true;
+    panel.setAttribute('role', 'status'); panel.setAttribute('aria-live', 'polite'); panel.setAttribute('aria-atomic', 'true');
+    const title = document.createElement('strong'), body = document.createElement('span'); panel.append(title, body); hud.append(panel);
+    const suppressed = () => document.hidden || ['opening','frontend','deploying','cine'].some(c => document.body.classList.contains(c)) ||
+      !!document.querySelector('#pause.show, #shop.show, #win.show, #bigBanner.show, #devConsole.show');
+    let frame = { active: false }, lastId = null;
+    function render(view) {
+      panel.hidden = !view;
+      if (view && lastId !== view.id) { title.textContent = view.title; body.textContent = view.body; body.hidden = !view.body; }
+      lastId = view?.id || null;
+    }
+    function tickGuidance(dt = frame.dt) {
+      const active=frame.active && !suppressed(),primary=coach.tick({...frame,dt,active});
+      const profile=coach.profile();
+      const extra=guide.tick({...frame,dt,active,priority:!!primary,learnedLoop:profile.banked&&profile.purchased});
+      render(primary||extra);
+    }
+    window.addEventListener('dw-game', ({ detail }) => {
+      if (!detail) return;
+      if (detail.type === 'hud-state') { frame=detail;tickGuidance(); }
+      else { coach.handle(detail);guide.handle(detail);render(suppressed()?null:coach.read()||guide.read()); }
+    });
+    // Pause/menu changes can stop gameplay ticks: hide the card immediately as well.
+    const refresh = () => tickGuidance(0);
+    const observer = new MutationObserver(refresh);
+    for (const target of [document.body, ...document.querySelectorAll('#pause, #shop, #win, #bigBanner, #devConsole')]) observer.observe(target, { attributes: true, attributeFilter: ['class'] });
+    document.addEventListener('visibilitychange', refresh);
+  }
+}

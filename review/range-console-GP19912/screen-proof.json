@@ -1,0 +1,37 @@
+{
+  "load": 23.119,
+  "records": [
+    "230",
+    "9.35s",
+    "100.0%"
+  ],
+  "fast": "Score: 180Run time: 9.35sshot accuracy: 90.0%Plates cleared: 5/510/14/2026Score: 200Run time: 12.00sshot accuracy: 100.0%Plates cleared: 5/510/14/2026Score: 230Run time: 16.00sshot accuracy: 80.0%Plates cleared: 5/510/14/2026",
+  "overflow": false,
+  "height": 3.3448,
+  "result": {
+    "id": "1791959556008-2",
+    "state": "COMPLETED",
+    "reason": "",
+    "valid": true,
+    "score": 30,
+    "time": 2.5666666666665368,
+    "firstShot": 2.1666666666665915,
+    "efficiency": 100,
+    "weapon": "pistol",
+    "drill": "draw-ready",
+    "loadout": "{\"mode\":\"semi\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+    "at": 1791959562987,
+    "base": 10,
+    "bonuses": 20,
+    "deductions": 0,
+    "shots": 1,
+    "units": 1,
+    "attackSeconds": 0,
+    "contactSeconds": 0,
+    "cleared": 1,
+    "missed": 0,
+    "draws": 1,
+    "reloads": 0
+  },
+  "errors": []
+}

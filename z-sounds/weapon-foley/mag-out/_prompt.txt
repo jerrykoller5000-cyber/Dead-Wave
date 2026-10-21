@@ -1,0 +1,9 @@
+#28 weapon-foley/mag-out  (start here)
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: foley magOut
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.5 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A rifle magazine being pulled out of the magazine well, a metallic slide and click. No music, no voice.

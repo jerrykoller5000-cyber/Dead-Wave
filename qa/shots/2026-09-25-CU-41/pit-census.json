@@ -1,0 +1,19 @@
+{
+  "census": [
+    {
+      "what": "Mesh < Group | MeshBasicMaterial #a8f2ff transparent",
+      "n": 2,
+      "ymin": 0,
+      "ymax": 0,
+      "geo": "BufferGeometry",
+      "scale": 1
+    }
+  ],
+  "bubbles": {
+    "on": false,
+    "n": 0,
+    "visible": 0,
+    "popping": 0,
+    "maxY": null
+  }
+}

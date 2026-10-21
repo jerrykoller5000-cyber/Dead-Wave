@@ -1,0 +1,65 @@
+# Questions for Jerry
+
+Asked with `node crew/crew.mjs ask <agent> "<question>"`. They show at the top of the crew panel.
+Jerry answers in chat to Claude (or writes under the question); Claude closes them with
+`node crew/crew.mjs answer Q-<n> "<answer>"`.
+
+## Q-1 · answered · 2026-09-25T06:27Z · cursor
+
+Load budget: since the splash can't be skipped (GP-27), it runs about 14 s on your GPU and the game finishes loading underneath it at 6-7 s, so a player never waits on the load. Keep chasing the 5 s warm target anyway (moving a 2 s shader compile behind the menu, some risk before Saturday), or call the load budget met by the splash?
+
+**Answer (2026-09-25T08:55Z):** Jerry (08:50Z): "Go with what you think", so Claude's call: the load budget is met by the splash (D-36). Don't move the shader compile before Saturday; keep only the first-use stall fixes in CU-36.
+
+## Q-2 · answered · 2026-09-26T03:53Z · claude
+
+The studio is ready for your first note (CL-61). Open Tiny Trek\review\guardian-drag\index.html, watch v2, then write under a '## date - Jerry - v2' line in notes.md in the same folder. The guide is docs/studio-guide.md. Your notes start the guardian's rebuild (CL-62); gallop, pounce and throw are there too whenever you want.
+
+**Answer (2026-09-29):** Jerry: "It's looking better but still needs a lot of work. Ask me the questions for it and I will answer." Claude asks him in chat and works CL-62 from his answers.
+
+## Q-3 · answered · 2026-09-27T04:08Z · claude
+
+Grokbot's GB-60 (skulls always reach the bag) rests on one question about the skull you couldn't pick up at dawn: did it have a glowing ring on the ground under it? A real skull drop always has one, in the colour of that zombie's eyes. If yours had no ring, what you saw wasn't a skull drop (maybe a corpse's head), and we'd chase a different bug.
+
+**Answer (2026-09-29):** Jerry: close it. But the skulls pulled in after the last kill need to make a sound so he knows he collected them: CU-76 (D-68).
+
+## Q-4 · answered · 2026-09-29T07:12Z · cursor
+
+Hollows (D-67), three calls: (1) Does being caught below end the run (the plan), or only cost the haul? (2) A fresh warren layout every run (the plan), or the same every run so they can be learned? (3) Should the secret's final fight (D-56) be underground in the chalk heart, behind the rune doors, rather than at the chalk mouth?
+
+**Answer (2026-09-29):** Jerry: (1) caught below ends the run; (2) the same layout every run; (3) deep in the heart. On the board in D-67 and P-97.
+
+## Q-5 · answered · 2026-09-30T23:05Z · claude
+
+Two specs for your yes: the Hollows (docs/specs/hollows.md: the Hush, five warrens, the stir, the haul, twelve dog tags kept for good) and the secret (docs/specs/secret-quest.md: a five-glyph word a run, learned from the tower, the static and rune shards, entered at the radio once a day; right, and a cleared warren's rune door opens to the chalk heart, where the guardian can be killed for the true ending). The crew builds on them now; say what to change and it changes.
+
+**Answer (2026-09-30, ~23:25Z):** Jerry: "For the hollows and the secret, use your best judgement." Both specs stand as written (docs/specs/hollows.md, docs/specs/secret-quest.md); Claude's calls from here.
+
+## Q-6 · answered · 2026-10-05T22:40Z · claude
+
+Grokbot found the marine is left-handed on screen: his gun arm is his anatomical left, so the stock sits in his left shoulder (GB-129; shots in handoffs/2026-10-02-grokbot-GB-129.md). You asked for the stock in the right shoulder. Mirror him so he is right-handed (Claude, CL-121: the arms swap, and the holsters, the draw, the reload pouch and the carry follow), or keep him as he is?
+
+**Answer (2026-10-05, 7:44 PM CT, to Grokbot):** Jerry: "No, Leave him left handed I think it's cool." He stays left-handed (D-75); CL-121 closed.
+
+## Q-7 · answered · 2026-10-06T02:14Z · cursor
+
+Rule 12 says the title appears within 5 s warm; on your PC it takes 6.3 s warm and 6.4 s cold, because the 100 shader variants compile every time (1.6 s) and nothing is cached. Is about 6 s fine for 1.0, or do you want it under 5 s (a task: precompile less at the title, the rest behind it)? The fps is fine (60 in a night 5, 53 with 48 dead on the title's scene).
+
+**Answer (2026-10-06T04:17Z):** Jerry: 6 is acceptable
+
+## Q-8 · answered · 2026-10-13T10:01Z · chatgpt
+
+Apply GP-19901 tested range integration to the owner-reserved index/world hooks, preserving active GB-167 selector work? Exact37+5patches,34unit/nativeproofs and screenshots ready; owner approvals pending.
+
+**Answer (2026-10-13T10:11Z):** Jerry explicitly approved: Apply the tested range integration. Authorizes the focused 37 index and five world hooks while preserving GB-167 selector edits; owner reviews remain requested.
+
+## Q-9 · answered · 2026-10-13T15:40Z · chatgpt
+
+GP-19907 tested firing-line barrier is ready; awaiting Jerry's reply to the chat approval for focused Claude/Cursor-owned world and index integration (AGENTS2), plus changed line-rule/overhead fixture expectations for lead review. Fifty focused tests,12 weapons,21 movement cases pass; preview after-overview.png.
+
+**Answer (2026-10-14T01:29Z):** Jerry explicitly approved in chat: Apply the tested firing-line changes. Authorizes the focused world/index integration and changed barrier/line-rule tests; preserve current Claude intro and Grokbot selector changes.
+
+## Q-10 · answered · 2026-10-14T04:01Z · chatgpt
+
+GP19910: authorize the two tested world/training-ballistics.js target-plane edits? Claude ownership approval pending;43tests/90realimpacts pass. Async approval in chat ready.
+
+**Answer (2026-10-14T04:04Z):** Jerry approved in chat: Apply the tested scoring fix. Two target-plane edits applied under that override.

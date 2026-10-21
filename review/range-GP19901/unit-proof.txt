@@ -1,0 +1,42 @@
+✔ stow keeps every partial round and chooses the fullest carried magazine (1.9445ms)
+✔ drop loses only the old magazine until it is picked up; empty one is discarded (0.3948ms)
+✔ akimbo tracks two loaded magazines and replaces each independently (0.3194ms)
+✔ buying adds full magazines only and an extended magazine changes capacity without inventing rounds (0.2865ms)
+✔ exact twelve weapons, five distinct drills each; all copy keys exist (1.5819ms)
+✔ eight full seconds down; beep/timer/raise occur at the same transition (1.1924ms)
+✔ COUNTDOWN: wrong gun misses voids immediately (0.2952ms)
+✔ COUNTDOWN: thrown grenade misses voids immediately (0.1085ms)
+✔ COUNTDOWN: wrong launcher voids immediately (0.1253ms)
+✔ COUNTDOWN: swept feet cross the line, camera/muzzle irrelevant (0.1411ms)
+✔ COUNTDOWN: tolerance jitter stays legal (0.1415ms)
+✔ ACTIVE: wrong gun misses voids immediately (0.4339ms)
+✔ ACTIVE: thrown grenade misses voids immediately (0.4303ms)
+✔ ACTIVE: wrong launcher voids immediately (0.3509ms)
+✔ ACTIVE: swept feet cross the line, camera/muzzle irrelevant (0.3544ms)
+✔ ACTIVE: tolerance jitter stays legal (0.2242ms)
+✔ 40 mm selected launcher is legal, weapon switching alone is inert (0.3396ms)
+✔ invalid starting position refuses preparation (0.1252ms)
+✔ moving across the line during lowering never arms a countdown from an invalid position (0.2284ms)
+✔ pause freezes countdown and timeline (0.2658ms)
+✔ pre-start, previous activation/run, duplicate and post-end attacks cannot score (0.5559ms)
+✔ not-yet-upright target never scores (0.2095ms)
+✔ a late projectile or blast from an earlier activation cannot score the next wave (0.4593ms)
+✔ a wrong-zone shotgun discharge incurs one deduction per target, not one per pellet (0.2899ms)
+✔ seven legitimate pellets retained, duplicate callbacks and eighth pellet capped; accuracy <=100 (0.4229ms)
+✔ piercing and blast score distinct plates once and collateral accuracy stays <=100 (0.7311ms)
+✔ continuous scoring equal at 30/60/144 Hz and holding cleared plate cannot farm (2.0439ms)
+✔ continuous empty firing costs fuel/time, stale flames do not earn contact (0.2194ms)
+✔ limited ammunition stops at exact budget and completes after flight drain (0.2836ms)
+✔ death, leave, loadout change and cancellation are never valid runs (0.9123ms)
+✔ all 60 patterns can be played to a finite completion with scoring (48.2532ms)
+✔ saw bank legally within actual 3.1m reach; flame bank within actual 7.5m range (0.3795ms)
+✔ records survive reload, cap top10, separate config/loadout and exclude VOID/aborted (1.1862ms)
+✔ records reject duplicates, malformed data; deterministic ties; quota gracefully retains in memory (0.242ms)
+ℹ tests 34
+ℹ suites 0
+ℹ pass 34
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 165.4313

@@ -1,0 +1,37 @@
+{
+  "version": "v1",
+  "clip": "studio/clips/marine/walk.json",
+  "rig": "marine",
+  "length": 1.3333,
+  "frames": 80,
+  "draws": 17,
+  "triangles": 816,
+  "budget": {
+    "draws": 40,
+    "triangles": 2000
+  },
+  "maxTurn": {
+    "rad": 0.1,
+    "joint": "kneeR",
+    "at": 0.53
+  },
+  "footSlide": {
+    "footL": 0,
+    "footR": 0,
+    "handL": 0,
+    "handR": 0
+  },
+  "events": [
+    [
+      0.6,
+      "footfall"
+    ],
+    [
+      1.2666,
+      "footfall"
+    ]
+  ],
+  "stripFrames": 12,
+  "marked": [],
+  "renderSeconds": 72.5
+}

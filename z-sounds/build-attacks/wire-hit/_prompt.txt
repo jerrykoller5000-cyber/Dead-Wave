@@ -1,0 +1,9 @@
+#107 build-attacks-wire-hit
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 0.8 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+Zombies pushing into barbed wire: the wire twanging, rattling and creaking with tension. No voice, no music.
+
+In the game: buildHit('wire')

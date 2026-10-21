@@ -1,0 +1,9 @@
+#171 training/target-fall
+MISSING: the game makes no sound here now
+Now: (silent)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 1 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A steel shooting target plate falling backwards and slamming flat on a concrete floor. No music, no voice.

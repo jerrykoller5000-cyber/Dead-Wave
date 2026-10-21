@@ -1,0 +1,255 @@
+{
+ "dt": 0.03333333333333333,
+ "god": false,
+ "repeat": 1,
+ "results": [
+  {
+   "night": 11,
+   "loadout": "ak, aa12, machete, armor 90",
+   "planned": 470,
+   "trick": "Rest night, but from every cave; the first demons",
+   "signature": "shambler",
+   "botError": "Cannot read properties of null (reading 'position')",
+   "waveTotal": 470,
+   "spawned": 470,
+   "killed": 470,
+   "firstSpawn": 0.2,
+   "lastSpawn": 490.7,
+   "lastKill": 543.6,
+   "length": 543.4,
+   "pushes": [
+    6.2,
+    60.8,
+    152.3,
+    238.7,
+    383.8
+   ],
+   "lulls": [
+    46.1
+   ],
+   "maxAlive": 48,
+   "pile": {
+    "n": 3,
+    "t": 74.1,
+    "type": "shambler",
+    "d": 159
+   },
+   "crowd": {
+    "n": 1,
+    "t": 219.5
+   },
+   "inside": {
+    "n": 0,
+    "t": 0,
+    "depth": 0
+   },
+   "stuck": [],
+   "lost": [],
+   "capped": false,
+   "tail10": 528.9,
+   "tail5": 536,
+   "tail1": 542.5,
+   "deaths": [],
+   "damage": 49,
+   "damageHp": 17,
+   "hits": 13,
+   "damageBy": {
+    "spider": 33,
+    "bomber": 16
+   },
+   "knifeSwings": 28,
+   "meleeKills": 29,
+   "meleeShare": 0.062,
+   "crowd5s": 0,
+   "sigPeak": 46,
+   "screamerCalls": 2,
+   "healHp": 0,
+   "samples": [
+    {
+     "t": 30,
+     "alive": 48,
+     "killed": 0,
+     "w": "ak",
+     "mag": 0,
+     "rel": true,
+     "hp": 100,
+     "near": 39.3
+    },
+    {
+     "t": 60,
+     "alive": 41,
+     "killed": 31,
+     "w": "ak",
+     "mag": 19,
+     "rel": false,
+     "hp": 100,
+     "near": 15.9
+    },
+    {
+     "t": 90,
+     "alive": 48,
+     "killed": 51,
+     "w": "ak",
+     "mag": 0,
+     "rel": true,
+     "hp": 99,
+     "near": 14.6
+    },
+    {
+     "t": 120,
+     "alive": 48,
+     "killed": 92,
+     "w": "ak",
+     "mag": 24,
+     "rel": false,
+     "hp": 92,
+     "near": 24.8
+    },
+    {
+     "t": 150,
+     "alive": 48,
+     "killed": 110,
+     "w": "aa12",
+     "mag": 0,
+     "rel": true,
+     "hp": 92,
+     "near": 7.2
+    },
+    {
+     "t": 180,
+     "alive": 48,
+     "killed": 145,
+     "w": "ak",
+     "mag": 0,
+     "rel": true,
+     "hp": 90,
+     "near": 3.6
+    },
+    {
+     "t": 210,
+     "alive": 46,
+     "killed": 179,
+     "w": "ak",
+     "mag": 15,
+     "rel": false,
+     "hp": 90,
+     "near": 25.7
+    },
+    {
+     "t": 240,
+     "alive": 48,
+     "killed": 204,
+     "w": "aa12",
+     "mag": 14,
+     "rel": false,
+     "hp": 90,
+     "near": 29.5
+    },
+    {
+     "t": 270,
+     "alive": 48,
+     "killed": 235,
+     "w": "ak",
+     "mag": 25,
+     "rel": false,
+     "hp": 90,
+     "near": 17.4
+    },
+    {
+     "t": 300,
+     "alive": 48,
+     "killed": 267,
+     "w": "ak",
+     "mag": 13,
+     "rel": false,
+     "hp": 89,
+     "near": 32.3
+    },
+    {
+     "t": 330,
+     "alive": 48,
+     "killed": 293,
+     "w": "ak",
+     "mag": 26,
+     "rel": false,
+     "hp": 87,
+     "near": 16.1
+    },
+    {
+     "t": 361,
+     "alive": 26,
+     "killed": 323,
+     "w": "ak",
+     "mag": 1,
+     "rel": false,
+     "hp": 87,
+     "near": 24.2
+    },
+    {
+     "t": 391,
+     "alive": 28,
+     "killed": 348,
+     "w": "ak",
+     "mag": 28,
+     "rel": false,
+     "hp": 87,
+     "near": 159.6
+    },
+    {
+     "t": 421,
+     "alive": 48,
+     "killed": 351,
+     "w": "ak",
+     "mag": 26,
+     "rel": false,
+     "hp": 87,
+     "near": 15.1
+    },
+    {
+     "t": 451,
+     "alive": 48,
+     "killed": 397,
+     "w": "aa12",
+     "mag": 0,
+     "rel": true,
+     "hp": 87,
+     "near": 16.2
+    },
+    {
+     "t": 481,
+     "alive": 48,
+     "killed": 411,
+     "w": "ak",
+     "mag": 6,
+     "rel": false,
+     "hp": 85,
+     "near": 20.4
+    },
+    {
+     "t": 511,
+     "alive": 22,
+     "killed": 448,
+     "w": "ak",
+     "mag": 0,
+     "rel": true,
+     "hp": 83,
+     "near": 24.2
+    },
+    {
+     "t": 541,
+     "alive": 4,
+     "killed": 466,
+     "w": "aa12",
+     "mag": 0,
+     "rel": true,
+     "hp": 83,
+     "near": 24.8
+    }
+   ],
+   "knees": 0,
+   "wallSecs": 259,
+   "errors": [],
+   "run": 1
+  }
+ ]
+}

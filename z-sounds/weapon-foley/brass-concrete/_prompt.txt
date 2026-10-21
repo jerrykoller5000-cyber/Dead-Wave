@@ -1,0 +1,9 @@
+#49 weapon-foley/brass-concrete
+MISSING: the game makes no sound here now
+Now: (foley brass everywhere)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.6 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A single spent brass casing bouncing on a concrete floor, a bright tinkling ring. No music, no voice.

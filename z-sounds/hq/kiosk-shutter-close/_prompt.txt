@@ -1,0 +1,9 @@
+#114 hq/kiosk-shutter-close
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: shutter(close)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 1.2 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A metal roll-up shutter rattling closed and hitting the bottom. No music, no voice.

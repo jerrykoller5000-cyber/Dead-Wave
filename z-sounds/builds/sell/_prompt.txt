@@ -1,0 +1,9 @@
+#93 builds/sell
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: sellChime()
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.8 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+Dismantling a fortification and pocketing scrap: a crowbar pry, planks clattering and a coin jingle. No music, no voice.

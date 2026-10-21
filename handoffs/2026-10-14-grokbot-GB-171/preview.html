@@ -1,0 +1,29 @@
+<!doctype html><meta charset="utf-8"><title>GB-171 grenade</title>
+<style>html,body{margin:0;background:#4a5060}</style>
+<script type="importmap">{"imports":{"three":"../../vendor/three/three.webgpu.js","three/webgpu":"../../vendor/three/three.webgpu.js","three/tsl":"../../vendor/three/three.tsl.js","three/addons/":"../../vendor/three/addons/"}}</script>
+<script type="module">
+import * as THREE from 'three';
+const q = new URLSearchParams(location.search), which = q.get('m') || 'new', view = q.get('v') || 'jerry';
+const R = new THREE.WebGPURenderer({ antialias: true, forceWebGL: true }); R.setSize(innerWidth, innerHeight); document.body.appendChild(R.domElement); await R.init();
+const S = new THREE.Scene(); S.background = new THREE.Color(0x4a5060);
+S.add(new THREE.HemisphereLight(0xffffff, 0x334, 1.4)); const sun = new THREE.DirectionalLight(0xffffff, 2.2); sun.position.set(2, 3, 2.5); S.add(sun);
+const grid = new THREE.GridHelper(2, 20, 0x2a2e38, 0x2a2e38); grid.position.y = -0.06; S.add(grid);
+let g;
+if (which === 'old') {   // the game's in-hand grenade before GB-171, verbatim
+  g = new THREE.Group();
+  const body = new THREE.Mesh(new THREE.SphereGeometry(0.05, 12, 10), new THREE.MeshStandardMaterial({ color: 0x3a5a30, roughness: 0.65, metalness: 0.35 }));
+  body.scale.set(1, 1.18, 1); g.add(body);
+  const lever = new THREE.Mesh(new THREE.BoxGeometry(0.018, 0.01, 0.055), new THREE.MeshStandardMaterial({ color: 0x888888, metalness: 0.7, roughness: 0.35 }));
+  lever.position.set(0.036, 0.03, 0); g.add(lever);
+  const pin = new THREE.Mesh(new THREE.TorusGeometry(0.014, 0.004, 6, 12), new THREE.MeshStandardMaterial({ color: 0xcccccc, metalness: 0.8, roughness: 0.25 }));
+  pin.position.set(0, 0.062, 0); pin.rotation.x = Math.PI / 2; g.add(pin);
+} else {
+  const { makeFragGrenade } = await import('../../studio/frag-grenade.js?' + Date.now());
+  g = makeFragGrenade({ THREE, r: 0.05 });
+}
+S.add(g);
+const C = new THREE.PerspectiveCamera(30, innerWidth / innerHeight, 0.01, 10);
+const V = { jerry: [0.12, 0.13, 0.26], side: [0.3, 0.03, 0.0], back: [-0.2, 0.1, -0.2], top: [0.12, 0.3, 0.12] }[view];
+C.position.set(...V); C.lookAt(0, 0.008, 0);
+R.render(S, C); await new Promise((r) => setTimeout(r, 300)); R.render(S, C); window.DONE = true;
+</script>

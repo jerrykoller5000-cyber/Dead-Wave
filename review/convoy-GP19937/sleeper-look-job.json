@@ -1,0 +1,8 @@
+[
+  {
+    "target": "live:spitter",
+    "view": "front",
+    "out": "review/convoy-GP19937/spitter-sleeper-tint.png",
+    "pre": "const p = T.player.position; const z = T.spawnZombie(p.x + 8, p.z, 'spitter', true, true); const { prepareConvoySleeperAppearance } = await import('../studio/zombie-concepts.js'); prepareConvoySleeperAppearance(T.THREE, z.mesh); await wait(60);"
+  }
+]

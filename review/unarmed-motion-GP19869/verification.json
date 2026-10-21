@@ -1,0 +1,20 @@
+{
+  "walk": {
+    "armOpposition": -0.9999999999999994,
+    "armLegOpposition": -0.8059152028863024,
+    "flatFrames": 0,
+    "minPalmSide": 0.2399495582560643,
+    "rearPalm": -0.03753836412829514
+  },
+  "run": {
+    "armOpposition": -1.0000000000000002,
+    "armLegOpposition": -0.9315998549111175,
+    "flatFrames": 0,
+    "minPalmSide": 0.2809960058617575,
+    "rearPalm": -0.061218621104558224
+  },
+  "transition": {
+    "before": 0.4987874442350597,
+    "after": 0.1530155286236058
+  }
+}

@@ -1,0 +1,351 @@
+{
+ "dt": 0.03333333333333333,
+ "god": false,
+ "repeat": 1,
+ "results": [
+  {
+   "night": 10,
+   "loadout": "ak, shotgun, machete, armor 90",
+   "planned": 431,
+   "trick": "Brute night down one cave, and a colossus",
+   "signature": "shambler",
+   "botError": "Cannot read properties of null (reading 'position')",
+   "stallProbe": {
+    "hp0": 523,
+    "hp1": 523,
+    "maxHp": 523,
+    "died": false,
+    "type": "colossus",
+    "target": {
+     "x": -157.24,
+     "y": 0.68,
+     "z": 92.71,
+     "ground": 0.68,
+     "r": 1.05,
+     "hitH": 4.714999999999999,
+     "climb": false,
+     "onWall": 0
+    },
+    "marine": {
+     "x": -5.9,
+     "y": -3.17,
+     "z": -2.2,
+     "yaw": -1.01,
+     "w": "ak"
+    },
+    "muzzle": [
+     -6.7,
+     -2.75,
+     -2.11
+    ],
+    "aim": [
+     -157.24,
+     3.98,
+     92.72
+    ],
+    "shots": []
+   },
+   "waveTotal": 431,
+   "spawned": 431,
+   "killed": 430,
+   "firstSpawn": 0.3,
+   "lastSpawn": 489.6,
+   "lastKill": 541.1,
+   "length": 540.8,
+   "pushes": [
+    6.2,
+    98.4,
+    220.3,
+    360
+   ],
+   "lulls": [
+    30,
+    30.7,
+    30.8
+   ],
+   "maxAlive": 48,
+   "pile": {
+    "n": 7,
+    "t": 3.2,
+    "type": "feral",
+    "d": 178
+   },
+   "crowd": {
+    "n": 0,
+    "t": 0
+   },
+   "inside": {
+    "n": 0,
+    "t": 0,
+    "depth": 0
+   },
+   "stuck": [
+    {
+     "t": 380,
+     "type": "colossus",
+     "x": -157.3,
+     "z": 92.3,
+     "d": 178,
+     "tactics": "boss",
+     "trait": "armoured",
+     "climber": false,
+     "px": -5.9,
+     "pz": -2.2,
+     "flow": null,
+     "unstick": -0.03,
+     "knock": 0
+    }
+   ],
+   "lost": [
+    {
+     "type": "colossus",
+     "d": 179,
+     "stuck": true,
+     "x": -157.2,
+     "z": 92.7,
+     "px": -5.9,
+     "pz": -2.2,
+     "hp": 523,
+     "target": true,
+     "tactics": "boss",
+     "dying": false,
+     "knock": 0,
+     "riseT": 0,
+     "marine": {
+      "y": -3.17,
+      "gy": -3.17,
+      "w": "ak",
+      "mag": 29,
+      "rel": false,
+      "hp": 68,
+      "firedSinceKill": 0
+     }
+    }
+   ],
+   "capped": false,
+   "tail10": 532,
+   "tail5": 537.6,
+   "tail1": 541.1,
+   "deaths": [],
+   "damage": 98,
+   "damageHp": 34,
+   "hits": 33,
+   "damageBy": {
+    "spider": 98
+   },
+   "knifeSwings": 3,
+   "meleeKills": 3,
+   "meleeShare": 0.007,
+   "crowd5s": 0,
+   "sigPeak": 39,
+   "screamerCalls": 1,
+   "healHp": 2,
+   "samples": [
+    {
+     "t": 30,
+     "alive": 48,
+     "killed": 0,
+     "w": "ak",
+     "mag": 0,
+     "rel": true,
+     "hp": 100,
+     "near": 35.2
+    },
+    {
+     "t": 60,
+     "alive": 45,
+     "killed": 24,
+     "w": "ak",
+     "mag": 13,
+     "rel": false,
+     "hp": 100,
+     "near": 20
+    },
+    {
+     "t": 90,
+     "alive": 39,
+     "killed": 48,
+     "w": "ak",
+     "mag": 15,
+     "rel": false,
+     "hp": 100,
+     "near": 25.9
+    },
+    {
+     "t": 120,
+     "alive": 47,
+     "killed": 82,
+     "w": "ak",
+     "mag": 13,
+     "rel": false,
+     "hp": 98,
+     "near": 17
+    },
+    {
+     "t": 150,
+     "alive": 48,
+     "killed": 92,
+     "w": "ak",
+     "mag": 10,
+     "rel": false,
+     "hp": 98,
+     "near": 32.2
+    },
+    {
+     "t": 180,
+     "alive": 47,
+     "killed": 130,
+     "w": "ak",
+     "mag": 8,
+     "rel": false,
+     "hp": 94,
+     "near": 28.5
+    },
+    {
+     "t": 210,
+     "alive": 29,
+     "killed": 155,
+     "w": "ak",
+     "mag": 1,
+     "rel": false,
+     "hp": 94,
+     "near": 18.2
+    },
+    {
+     "t": 240,
+     "alive": 48,
+     "killed": 183,
+     "w": "ak",
+     "mag": 0,
+     "rel": true,
+     "hp": 92,
+     "near": 28.4
+    },
+    {
+     "t": 270,
+     "alive": 48,
+     "killed": 187,
+     "w": "ak",
+     "mag": 0,
+     "rel": true,
+     "hp": 92,
+     "near": 18.1
+    },
+    {
+     "t": 300,
+     "alive": 48,
+     "killed": 226,
+     "w": "ak",
+     "mag": 24,
+     "rel": false,
+     "hp": 81,
+     "near": 15
+    },
+    {
+     "t": 330,
+     "alive": 43,
+     "killed": 250,
+     "w": "ak",
+     "mag": 17,
+     "rel": false,
+     "hp": 79,
+     "near": 16.3
+    },
+    {
+     "t": 360,
+     "alive": 14,
+     "killed": 279,
+     "w": "ak",
+     "mag": 19,
+     "rel": false,
+     "hp": 76,
+     "near": 23.6
+    },
+    {
+     "t": 390,
+     "alive": 48,
+     "killed": 293,
+     "w": "ak",
+     "mag": 21,
+     "rel": false,
+     "hp": 76,
+     "near": 39.8
+    },
+    {
+     "t": 420,
+     "alive": 47,
+     "killed": 313,
+     "w": "ak",
+     "mag": 14,
+     "rel": false,
+     "hp": 75,
+     "near": 14.6
+    },
+    {
+     "t": 450,
+     "alive": 48,
+     "killed": 342,
+     "w": "ak",
+     "mag": 0,
+     "rel": true,
+     "hp": 70,
+     "near": 15.2
+    },
+    {
+     "t": 480,
+     "alive": 47,
+     "killed": 374,
+     "w": "ak",
+     "mag": 0,
+     "rel": true,
+     "hp": 70,
+     "near": 18.6
+    },
+    {
+     "t": 510,
+     "alive": 34,
+     "killed": 397,
+     "w": "ak",
+     "mag": 5,
+     "rel": false,
+     "hp": 69,
+     "near": 34.2
+    },
+    {
+     "t": 540,
+     "alive": 2,
+     "killed": 429,
+     "w": "ak",
+     "mag": 0,
+     "rel": true,
+     "hp": 67,
+     "near": 14.7
+    },
+    {
+     "t": 570,
+     "alive": 1,
+     "killed": 430,
+     "w": "ak",
+     "mag": 29,
+     "rel": false,
+     "hp": 68,
+     "near": 178.6
+    },
+    {
+     "t": 600,
+     "alive": 1,
+     "killed": 430,
+     "w": "ak",
+     "mag": 29,
+     "rel": false,
+     "hp": 68,
+     "near": 178.6
+    }
+   ],
+   "knees": 0,
+   "wallSecs": 416,
+   "errors": [],
+   "run": 1
+  }
+ ]
+}

@@ -1,0 +1,431 @@
+// tools/studio.mjs — CU-44. Render a clip or a rig into review/<asset>/vN/.
+// Loads the studio and three.js only, never the game. Headless Chrome draws the pictures
+// (CHROME_ARGS is passed through, same as the tests).
+//
+//   node tools/studio.mjs list
+//   node tools/studio.mjs render studio/clips/guardian/drag.json [--asset name] [--vs ref]
+//        [--frames 12] [--cam side|play|front|three] [--root-motion] [--design default|wet|chalk]
+//   node tools/studio.mjs rig guardian [--design ...] [--frames 8]
+import { register } from 'node:module';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { serve } from './serve.mjs';
+import { launch } from './cdp.mjs';
+
+register(new URL('../studio/node-three-hook.mjs', import.meta.url));
+const THREE = await import('three');
+const { rigs, loadClip, createPlayer, sampleClip, rigCost, loadReference } = await import('../studio/index.js');
+
+const ROOT = path.resolve(fileURLToPath(new URL('..', import.meta.url)));
+const SNAP = 0.3;
+const SLIDE = 0.05;
+
+function args() {
+  const rest = process.argv.slice(2);
+  const cmd = rest[0];
+  const pos = [];
+  const opt = {};
+  for (let i = 1; i < rest.length; i++) {
+    const a = rest[i];
+    if (!a.startsWith('--')) { pos.push(a); continue; }
+    const key = a.slice(2);
+    const next = rest[i + 1];
+    if (next === undefined || next.startsWith('--')) opt[key] = true;
+    else { opt[key] = next; i++; }
+  }
+  return { cmd, pos, opt };
+}
+
+function clipsOnDisk() {
+  const dir = path.join(ROOT, 'studio', 'clips');
+  const out = [];
+  if (!fs.existsSync(dir)) return out;
+  for (const rig of fs.readdirSync(dir)) {
+    const sub = path.join(dir, rig);
+    if (!fs.statSync(sub).isDirectory()) continue;
+    for (const f of fs.readdirSync(sub)) if (f.endsWith('.json')) out.push(path.join('studio', 'clips', rig, f));
+  }
+  return out;
+}
+
+function list() {
+  console.log('rigs:', rigs.names().join(', ') || '(none)');
+  console.log('clips:');
+  for (const rel of clipsOnDisk()) {
+    const clip = loadClip(JSON.parse(fs.readFileSync(path.join(ROOT, rel), 'utf8')));
+    console.log('  ' + rel + (clip.reference ? '   vs ' + clip.reference : ''));
+  }
+  const cat = path.join(ROOT, 'assets', 'anim', 'reference', 'catalogue.json');
+  if (fs.existsSync(cat)) {
+    const names = JSON.parse(fs.readFileSync(cat, 'utf8')).map((c) => c.name);
+    console.log('references (' + names.length + '): ' + names.join(', '));
+  }
+  const review = path.join(ROOT, 'review');
+  console.log('review:');
+  if (!fs.existsSync(review)) { console.log('  (none)'); return; }
+  for (const name of fs.readdirSync(review)) {
+    const latest = path.join(review, name, 'latest.txt');
+    if (fs.existsSync(latest)) console.log('  ' + name + '  ' + fs.readFileSync(latest, 'utf8').trim());
+  }
+}
+
+function joints(inst) {
+  return Object.values(inst.R).filter((o) => o && o.isObject3D);
+}
+function stageOf(json) {
+  return json.stage || (rigs.def(json.rig).stage && rigs.def(json.rig).stage.targets) || {};
+}
+function worldStage(inst, stage) {
+  inst.group.updateWorldMatrix(true, true);
+  const out = {};
+  for (const [k, v] of Object.entries(stage)) out[k] = new THREE.Vector3(v[0], v[1], v[2]).applyMatrix4(inst.group.matrixWorld);
+  return out;
+}
+
+// Worst one-frame joint turn at 60 fps, and the most a planted end slid (metres).
+function measure(clip, json, { rootMotion = false, design = null, stripFrames = 12 } = {}) {
+  const inst = rigs.get(json.rig).create({ design: design || undefined });
+  const cost = rigCost(inst.group);
+  const targets = worldStage(inst, stageOf(json));
+  const player = createPlayer(inst).play(clip, { rootMotion });
+  const steps = Math.max(1, Math.ceil(clip.length * 60));
+  const prev = new Map();
+  const pin = {};
+  const slide = {};
+  const bad = new Set();
+  let worst = 0, joint = '', at = 0;
+  const endOf = (name) => inst.R[inst.def.chains[name].end];
+  for (let i = 0; i <= steps; i++) {
+    player.update(i === 0 ? 0 : clip.length / steps, { targets });
+    const t = Math.min(clip.length, (i / steps) * clip.length);
+    const pose = sampleClip(clip, t);
+    let stepSnap = 0;
+    for (const j of joints(inst)) {
+      const q = prev.get(j.name || j.uuid);
+      if (q && i > 0) {
+        const dot = Math.min(1, Math.abs(q.dot(j.quaternion)));
+        const a = 2 * Math.acos(dot);
+        if (a > worst) { worst = a; joint = j.name || ''; at = t; }
+        if (a > stepSnap) stepSnap = a;
+      }
+      prev.set(j.name || j.uuid, j.quaternion.clone());
+    }
+    let stepSlide = 0;
+    for (const name of Object.keys(inst.def.chains)) {
+      const planted = (pose.chains[name] && pose.chains[name].plant) || 0;
+      const end = endOf(name);
+      if (!end) continue;
+      const p = new THREE.Vector3().setFromMatrixPosition(end.matrixWorld);
+      if (planted >= 0.5) {
+        if (!pin[name]) pin[name] = p.clone();
+        else {
+          const d = p.distanceTo(pin[name]);
+          const before = slide[name] || 0;
+          slide[name] = Math.max(before, d);
+          stepSlide = Math.max(stepSlide, d - before);
+        }
+      } else pin[name] = null;
+    }
+    if (i > 0 && (stepSnap > SNAP || stepSlide > SLIDE)) {
+      const u = clip.length > 0 ? t / clip.length : 0;
+      const fi = clip.loop ? Math.min(stripFrames - 1, Math.floor(u * stripFrames))
+        : Math.min(stripFrames - 1, Math.round(u * (stripFrames - 1)));
+      bad.add(fi);
+    }
+  }
+  const budget = rigs.def(json.rig).budget || null;
+  const over = !!(budget && (cost.draws > budget.draws || cost.triangles > budget.triangles));
+  return {
+    length: clip.length,
+    frames: steps,
+    draws: cost.draws,
+    triangles: cost.triangles,
+    budget,
+    over,
+    maxTurn: { rad: +worst.toFixed(3), joint, at: +at.toFixed(2) },
+    footSlide: Object.fromEntries(Object.keys(inst.def.chains).map((n) => [n, +((slide[n] || 0).toFixed(3))])),
+    events: (clip.events || []).map((e) => [e.t, e.name]),
+    bad: [...bad].sort((a, b) => a - b)
+  };
+}
+
+function nextVersion(dir) {
+  const file = path.join(dir, 'latest.txt');
+  if (!fs.existsSync(file)) return 'v1';
+  const n = parseInt(String(fs.readFileSync(file, 'utf8')).replace(/\D/g, ''), 10);
+  return 'v' + ((Number.isFinite(n) ? n : 0) + 1);
+}
+
+function writeIndex(dir, asset, version) {
+  const versions = fs.readdirSync(dir).filter((n) => /^v\d+$/.test(n)).sort((a, b) => parseInt(a.slice(1), 10) - parseInt(b.slice(1), 10));
+  const show = versions.slice(-2).reverse();
+  const blocks = show.map((v) => {
+    const strip = fs.existsSync(path.join(dir, v, 'strip.png')) ? `<img src="${v}/strip.png" alt="${v} strip">` : '';
+    const turn = fs.existsSync(path.join(dir, v, 'turntable.png')) ? `<img src="${v}/turntable.png" alt="${v} turntable">` : '';
+    const vid = fs.existsSync(path.join(dir, v, 'video.webm')) ? `<video src="${v}/video.webm" controls loop></video>` : '';
+    return `<section><h2>${v}</h2>${strip}${turn}${vid}</section>`;
+  }).join('\n');
+  const html = `<!doctype html><meta charset="utf-8"><title>${asset}</title>
+<style>body{margin:24px;background:#14181f;color:#e6e6e0;font-family:Georgia,serif} img,video{max-width:100%;display:block;margin:8px 0} h1{font-weight:normal}</style>
+<h1>${asset}</h1><p>Latest ${version}. The newest version is first; the one before it is under that.</p>
+${blocks}\n`;
+  fs.writeFileSync(path.join(dir, 'index.html'), html);
+  fs.writeFileSync(path.join(dir, 'latest.txt'), version + '\n');
+}
+
+async function shoot(query, file, { video = false } = {}) {
+  const server = await serve(ROOT, 0);
+  const browser = await launch({ headless: true });
+  try {
+    const page = await browser.newPage({ width: 1280, height: 720 });
+    await page.goto(`${server.origin}/tools/studio.html?${query}`, { waitUntil: 'none' });
+    const ok = await page.waitFor('window.__ready === true || !!window.__error', { timeout: 90000 });
+    if (!ok) throw new Error('the studio page did not finish');
+    const err = await page.evaluate('window.__error || ""');
+    if (err) throw new Error(err);
+    if (video) {
+      const len = await page.evaluate('window.__b64 ? window.__b64.length : 0');
+      if (!len) throw new Error('no video was recorded');
+      let b64 = '';
+      const STEP = 400000;
+      for (let i = 0; i < len; i += STEP) b64 += await page.evaluate(`window.__b64.slice(${i}, ${i + STEP})`);
+      await fs.promises.mkdir(path.dirname(file), { recursive: true });
+      await fs.promises.writeFile(file, Buffer.from(b64, 'base64'));
+    } else {
+      const size = await page.evaluate('window.__size || { w: 1280, h: 720 }');
+      await page.setViewport(size.w, size.h);
+      await page.screenshot(file);
+    }
+    const errors = page.errors.filter((e) => !/favicon/i.test(e));
+    if (errors.length) console.log('page:', errors[0].split('\n')[0]);
+  } finally {
+    await Promise.race([browser.close(), new Promise((r) => setTimeout(r, 2500))]);
+    if (typeof server.closeAllConnections === 'function') server.closeAllConnections();
+    await Promise.race([server.close(), new Promise((r) => setTimeout(r, 800))]);
+  }
+}
+
+function ownerTask(rig) {
+  return rig === 'guardian' ? 'CL-62' : '';
+}
+function unchanged(dir, bytes, file = 'clip.json') {
+  const latest = path.join(dir, 'latest.txt');
+  if (!fs.existsSync(latest)) return null;
+  const version = fs.readFileSync(latest, 'utf8').trim();
+  const prev = path.join(dir, version, file);
+  if (!fs.existsSync(prev)) return null;
+  return fs.readFileSync(prev).equals(bytes) ? version : null;
+}
+function writeMeta(dir, meta) {
+  const file = path.join(dir, 'meta.json');
+  const cur = fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, 'utf8')) : {};
+  const next = { ...cur, ...meta, task: meta.task || ownerTask(meta.rig) || cur.task || '' };
+  fs.writeFileSync(file, JSON.stringify(next, null, 2) + '\n');
+}
+
+async function shootBoth(query, stripFile, videoFile) {
+  const server = await serve(ROOT, 0);
+  const browser = await launch({ headless: true });
+  try {
+    const page = await browser.newPage({ width: 1280, height: 720 });
+    await page.goto(`${server.origin}/tools/studio.html?${query}`, { waitUntil: 'none' });
+    const stripOk = await page.waitFor('window.__stripReady === true || !!window.__error', { timeout: 90000 });
+    if (!stripOk) throw new Error('the strip did not finish');
+    const err = await page.evaluate('window.__error || ""');
+    if (err) throw new Error(err);
+    const size = await page.evaluate('window.__size || { w: 1280, h: 720 }');
+    await page.setViewport(size.w, size.h);
+    await page.screenshot(stripFile);
+    await page.evaluate('window.__goVideo = true');
+    const vidOk = await page.waitFor('window.__ready === true || !!window.__error', { timeout: 120000 });
+    if (!vidOk) throw new Error('the video did not finish');
+    const err2 = await page.evaluate('window.__error || ""');
+    if (err2) throw new Error(err2);
+    const len = await page.evaluate('window.__b64 ? window.__b64.length : 0');
+    if (!len) throw new Error('no video was recorded');
+    let b64 = '';
+    const STEP = 400000;
+    for (let i = 0; i < len; i += STEP) b64 += await page.evaluate(`window.__b64.slice(${i}, ${i + STEP})`);
+    await fs.promises.mkdir(path.dirname(videoFile), { recursive: true });
+    await fs.promises.writeFile(videoFile, Buffer.from(b64, 'base64'));
+  } finally {
+    await Promise.race([browser.close(), new Promise((r) => setTimeout(r, 2500))]);
+    await Promise.race([server.close(), new Promise((r) => setTimeout(r, 800))]);
+  }
+}
+
+async function renderClip(rel, opt) {
+  const t0 = Date.now();
+  const abs = path.resolve(ROOT, rel);
+  const raw = fs.readFileSync(abs);
+  const json = JSON.parse(raw.toString('utf8'));
+  const clip = loadClip(json);
+  const frames = Math.max(2, parseInt(opt.frames || '12', 10) || 12);
+  const vs = opt.vs === 'none' ? '' : (opt.vs && opt.vs !== true ? opt.vs : (json.reference || ''));
+  const asset = opt.asset && opt.asset !== true ? opt.asset : `${json.rig}-${json.name}`;
+  const dir = path.join(ROOT, 'review', asset);
+  const same = unchanged(dir, raw);
+  if (same && !opt.force) {
+    console.log(`${asset} unchanged (${same}); no new version. Pass --force to re-render.`);
+    return;
+  }
+  if (vs) {
+    const ref = loadReference(JSON.parse(fs.readFileSync(path.join(ROOT, 'assets', 'anim', 'reference', 'ual.json'), 'utf8')));
+    ref.clip(vs);
+  }
+  const designName = opt.design && opt.design !== true ? opt.design : 'default';
+  const measured = measure(clip, json, { rootMotion: !!opt['root-motion'], stripFrames: frames });
+  fs.mkdirSync(dir, { recursive: true });
+  const version = nextVersion(dir);
+  const ver = path.join(dir, version);
+  fs.mkdirSync(ver, { recursive: true });
+  writeMeta(dir, {
+    asset, owner: 'claude', rig: json.rig, clip: json.name, reference: vs || null, design: designName
+  });
+  fs.writeFileSync(path.join(ver, 'clip.json'), raw);
+  const q = new URLSearchParams({
+    mode: 'both', clip: rel.split(path.sep).join('/'), frames: String(frames),
+    vs, root: opt['root-motion'] ? '1' : '0', design: designName,
+    bad: measured.bad.join(','), over: measured.over ? '1' : '0'
+  });
+  await shootBoth(q.toString(), path.join(ver, 'strip.png'), path.join(ver, 'video.webm'));
+  const stats = {
+    version, clip: rel.split(path.sep).join('/'), rig: json.rig,
+    length: clip.length, frames: measured.frames,
+    draws: measured.draws, triangles: measured.triangles, budget: measured.budget,
+    maxTurn: measured.maxTurn, footSlide: measured.footSlide, events: measured.events,
+    stripFrames: frames, marked: measured.bad,
+    renderSeconds: +((Date.now() - t0) / 1000).toFixed(1)
+  };
+  fs.writeFileSync(path.join(ver, 'stats.json'), JSON.stringify(stats, null, 2) + '\n');
+  writeIndex(dir, asset, version);
+  const slide = Object.entries(measured.footSlide).filter(([, v]) => v > 0).map(([k, v]) => k + ' ' + v).join(', ') || 'none';
+  console.log(`${asset} ${version}  ${clip.length.toFixed(2)}s  draws ${measured.draws}${measured.budget ? '/' + measured.budget.draws : ''}  tris ${measured.triangles}${measured.budget ? '/' + measured.budget.triangles : ''}  maxTurn ${measured.maxTurn.rad} rad ${measured.maxTurn.joint} at ${measured.maxTurn.at}s  slide ${slide}  ${stats.renderSeconds}s`);
+  if (measured.bad.length) console.log('  marked red:', measured.bad.join(', '));
+  console.log('  ' + path.join('review', asset, version));
+}
+
+async function renderRig(name, opt) {
+  const t0 = Date.now();
+  if (!rigs.def(name)) throw new Error('no rig ' + name);
+  const inst = rigs.get(name).create({});
+  const cost = rigCost(inst.group);
+  const budget = rigs.def(name).budget;
+  const asset = opt.asset && opt.asset !== true ? opt.asset : name;
+  const dir = path.join(ROOT, 'review', asset);
+  fs.mkdirSync(dir, { recursive: true });
+  const version = nextVersion(dir);
+  const ver = path.join(dir, version);
+  fs.mkdirSync(ver, { recursive: true });
+  const frames = Math.max(4, parseInt(opt.frames || '8', 10) || 8);
+  const designName = opt.design && opt.design !== true ? opt.design : 'default';
+  writeMeta(dir, { asset, owner: 'claude', rig: name, clip: null, reference: null, design: designName });
+  const over = budget && (cost.draws > budget.draws || cost.triangles > budget.triangles);
+  const q = new URLSearchParams({ mode: 'turntable', rig: name, frames: String(frames), design: designName, over: over ? '1' : '0' });
+  await shoot(q.toString(), path.join(ver, 'turntable.png'));
+  const stats = {
+    version, rig: name, draws: cost.draws, triangles: cost.triangles, budget,
+    renderSeconds: +((Date.now() - t0) / 1000).toFixed(1)
+  };
+  fs.writeFileSync(path.join(ver, 'stats.json'), JSON.stringify(stats, null, 2) + '\n');
+  writeIndex(dir, asset, version);
+  console.log(`${asset} ${version}  turntable  draws ${cost.draws}${budget ? '/' + budget.draws : ''}  tris ${cost.triangles}${budget ? '/' + budget.triangles : ''}  ${stats.renderSeconds}s`);
+  console.log('  ' + path.join('review', asset, version));
+}
+
+async function renderScene(rel, opt) {
+  const t0 = Date.now();
+  const abs = path.resolve(ROOT, rel);
+  const raw = fs.readFileSync(abs);
+  const json = JSON.parse(raw.toString('utf8'));
+  if (!json.name) throw new Error('scene has no name');
+  const asset = opt.asset && opt.asset !== true ? opt.asset : json.name;
+  const dir = path.join(ROOT, 'review', asset);
+  const same = unchanged(dir, raw, 'scene.json');
+  if (same && !opt.force) {
+    console.log(`${asset} unchanged (${same}); no new version. Pass --force to re-render.`);
+    return;
+  }
+  fs.mkdirSync(dir, { recursive: true });
+  const version = nextVersion(dir);
+  const ver = path.join(dir, version);
+  fs.mkdirSync(ver, { recursive: true });
+  const actors = Object.values(json.actors || {});
+  const reacting = actors.some((a) => a.motion);
+  const rigsUsed = [...new Set(actors.map((a) => a.rig))];
+  // A scene is the studio's (Claude's, D-40) unless it says otherwise ("owner", "task" in the JSON);
+  // a reaction on its own is reviewed under review/motion-* with the preset's owner.
+  writeMeta(dir, {
+    asset, owner: json.owner || 'claude', rig: reacting ? rigsUsed.join('+') : 'guardian',
+    scene: json.name, clip: null, reference: null, design: 'default',
+    task: json.task || ''
+  });
+  fs.writeFileSync(path.join(ver, 'scene.json'), raw);
+  const frames = String(Math.max(2, parseInt(opt.frames || '8', 10) || 8));
+  const q = new URLSearchParams({ scene: rel.split(path.sep).join('/'), frames, phase: 'video' });
+  // Four video passes are 2 * (length + length/4) seconds of playback. Software frames run
+  // slower than that clock, so the wait scales with the length and keeps a margin (a 5.5 s
+  // scene took about 450 s on the cloud clone).
+  const playback = 2 * (json.length + json.length / 0.25);
+  const stripWait = Math.round((45 + json.length * 8) * 1000);
+  const videoWait = Math.round((playback * 12 + 90) * 1000);
+  console.log(`  waits: strip ${(stripWait / 1000).toFixed(0)}s, video ${(videoWait / 1000).toFixed(0)}s`);
+  const server = await serve(ROOT, 0);
+  const browser = await launch({ headless: !opt.gpu });
+  let worst = {};
+  try {
+    const page = await browser.newPage({ width: 1280, height: 720 });
+    await page.goto(`${server.origin}/tools/studio-scene.html?${q}`, { waitUntil: 'none' });
+    const stripOk = await page.waitFor('window.__stripReady === true || !!window.__error', { timeout: stripWait });
+    if (!stripOk) throw new Error('the scene strip did not finish');
+    const err = await page.evaluate('window.__error || ""');
+    if (err) throw new Error(err);
+    const size = await page.evaluate('window.__size');
+    await page.setViewport(size.w, size.h);
+    await page.screenshot(path.join(ver, 'strip.png'));
+    worst = await page.evaluate('window.__worst || {}');
+    await page.evaluate('window.__goVideo = true');
+    const vidOk = await page.waitFor('window.__ready === true || !!window.__error', { timeout: videoWait });
+    if (!vidOk) throw new Error('the scene video did not finish');
+    const err2 = await page.evaluate('window.__error || ""');
+    if (err2) throw new Error(err2);
+    const len = await page.evaluate('window.__b64 ? window.__b64.length : 0');
+    if (!len) throw new Error('no video was recorded');
+    let b64 = '';
+    for (let i = 0; i < len; i += 400000) b64 += await page.evaluate(`window.__b64.slice(${i}, ${i + 400000})`);
+    await fs.promises.writeFile(path.join(ver, 'video.webm'), Buffer.from(b64, 'base64'));
+  } finally {
+    await Promise.race([browser.close(), new Promise((r) => setTimeout(r, 2500))]);
+    await Promise.race([server.close(), new Promise((r) => setTimeout(r, 800))]);
+  }
+  const stats = {
+    version, scene: rel.split(path.sep).join('/'), name: json.name, length: json.length,
+    worst, renderSeconds: +((Date.now() - t0) / 1000).toFixed(1)
+  };
+  fs.writeFileSync(path.join(ver, 'stats.json'), JSON.stringify(stats, null, 2) + '\n');
+  writeIndex(dir, asset, version);
+  const flagged = Object.entries(worst).filter(([, v]) => v && v.bad).map(([k, v]) => `${k} ${Number(v.value).toFixed(2)} at ${Number(v.t).toFixed(2)}s`);
+  console.log(`${asset} ${version}  ${json.length}s  ${stats.renderSeconds}s`);
+  if (flagged.length) console.log('  worst:', flagged.join('; '));
+  console.log('  ' + path.join('review', asset, version));
+}
+
+const { cmd, pos, opt } = args();
+try {
+  if (cmd === 'list') list();
+  else if (cmd === 'render' && pos[0]) await renderClip(pos[0], opt);
+  else if (cmd === 'rig' && pos[0]) await renderRig(pos[0], opt);
+  else if (cmd === 'scene' && pos[0]) await renderScene(pos[0], opt);
+  else {
+    console.log('node tools/studio.mjs list');
+    console.log('node tools/studio.mjs render <clip.json> [--vs ref] [--frames 12] [--root-motion] [--design default] [--force]');
+    console.log('node tools/studio.mjs rig <rig> [--frames 8]');
+    console.log('node tools/studio.mjs scene <scene.json> [--frames 8] [--force]');
+    process.exitCode = 2;
+  }
+} catch (e) {
+  console.error(e && e.stack || e);
+  process.exitCode = 1;
+}
+process.exit(process.exitCode || 0);

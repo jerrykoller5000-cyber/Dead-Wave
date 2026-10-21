@@ -1,0 +1,9 @@
+#62 weapon-foley/chainsaw-stop
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: chainsawStop()
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 1 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A chainsaw engine cut off, winding down and the chain rattling to a stop. No music, no voice.

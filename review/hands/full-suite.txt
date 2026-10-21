@@ -1,0 +1,60 @@
+230 checks: 3249 pass, 45 fail, 4 flaky (failed under load, passed alone), 1 could not run, 8 reported no assertions
+
+flaky: failed in the full run, passed when run alone (the load, not the game, until it fails alone too):
+  t155   1 fail in the full run
+  t164   1 fail in the full run
+  t188   1 fail in the full run
+  t213   1 fail in the full run
+
+no assertions (probe, or the check bailed before asserting):
+  t16    692
+  t20    -5,-15 edge0 L0 yaw 0.00 rx 0.00 rz 0.00 ch 1
+  t22    builds box 22,76 / -10,46 barrels before 6 after 12
+  t26    pieces 692 failed: 
+  t27    EMPTY WORLD visible meshes: 2115
+  t28    shambler total 13: hips:1m/1mat torso:1m/1mat armL:1m/1mat Group:1m/1mat armR:1m/1mat Group:1m/1mat 
+  t30    turret at 4.0,-12.0 y -3.17
+  t32    road pieces: wall/door@-38.0 wall/door@-24.0 wire/gate@-20.0 barricade/gate@-18.0
+
+by owner:
+  unassigned — triage
+    t37    1 fail  FAIL threw: TypeError: _lpTmp.copy(...).applyMatrix4 is not a function
+  unassigned
+    t53    1 fail  FAIL threw: TypeError: _lpTmp.copy(...).applyMatrix4 is not a function
+    t61    1 fail  FAIL threw: TypeError: _lpTmp.copy(...).applyMatrix4 is not a function
+    t63    1 fail  FAIL threw: TypeError: _lpTmp.copy(...).applyMatrix4 is not a function
+    t71    1 fail  FAIL threw: TypeError: _lpTmp.copy(...).applyMatrix4 is not a function
+    t72    1 fail  FAIL threw: TypeError: _lpTmp.copy(...).applyMatrix4 is not a function
+    t74    1 fail  FAIL threw: TypeError: _lpTmp.copy(...).applyMatrix4 is not a function
+    t77    1 fail  FAIL threw: TypeError: _lpTmp.copy(...).applyMatrix4 is not a function
+    t80    3 fail  FAIL a spider on a line that grazes the corner takes one with room (start 0.29 m clear, end 1.01
+    t83    1 fail  FAIL threw: TypeError: _lpTmp.copy(...).applyMatrix4 is not a function
+    t85    1 fail  FAIL threw: TypeError: _lpTmp.copy(...).applyMatrix4 is not a function
+    t91    1 fail  FAIL threw: TypeError: _lpTmp.copy(...).applyMatrix4 is not a function
+    t96    1 fail  FAIL threw: TypeError: _lpTmp.copy(...).applyMatrix4 is not a function
+    t97    1 fail  FAIL threw: TypeError: _lpTmp.copy(...).applyMatrix4 is not a function
+    t98    1 fail  FAIL no page errors: TypeError: _lpTmp.copy(...).applyMatrix4 is not a function
+    t109   1 fail  FAIL threw: TypeError: _lpTmp.copy(...).applyMatrix4 is not a function
+    t117   1 fail  FAIL threw: TypeError: _lpTmp.copy(...).applyMatrix4 is not a function
+    t119   1 fail  FAIL threw: TypeError: _lpTmp.copy(...).applyMatrix4 is not a function
+    t128   1 fail  FAIL threw: TypeError: _lpTmp.copy(...).applyMatrix4 is not a function
+    t137   1 fail  FAIL threw: TypeError: _lpTmp.copy(...).applyMatrix4 is not a function
+    t143   1 fail  FAIL threw: TypeError: _lpTmp.copy(...).applyMatrix4 is not a function
+    t146   1 fail  FAIL the second Uzi wears the same camo
+    t148   1 fail  FAIL threw: TypeError: _lpTmp.copy(...).applyMatrix4 is not a function
+    t156   1 fail  FAIL no page errors: Uncaught TypeError: _lpTmp.copy(...).applyMatrix4 is not a function
+    t162   1 fail  FAIL threw TypeError: _lpTmp.copy(...).applyMatrix4 is not a function
+    t168   1 fail  FAIL threw TypeError: _lpTmp.copy(...).applyMatrix4 is not a function
+    t170   1 fail  FAIL threw TypeError: _lpTmp.copy(...).applyMatrix4 is not a function
+    t171   1 fail  FAIL threw TypeError: _lpTmp.copy(...).applyMatrix4 is not a function
+    t173   1 fail  FAIL on the quest's ending every dead drops where it stands
+    t174   1 fail  FAIL threw TypeError: _lpTmp.copy(...).applyMatrix4 is not a function
+    t178   1 fail  FAIL threw TypeError: _lpTmp.copy(...).applyMatrix4 is not a function
+    t182   6 fail  FAIL every gun owned, Cash to spare
+    t196   1 fail  FAIL threw TypeError: _lpTmp.copy(...).applyMatrix4 is not a function
+    t202   1 fail  FAIL threw TypeError: _lpTmp.copy(...).applyMatrix4 is not a function
+    t209   1 fail  FAIL threw: TypeError: _lpTmp.copy(...).applyMatrix4 is not a function
+    t210   1 fail  FAIL threw: TypeError: _lpTmp.copy(...).applyMatrix4 is not a function
+    t218   2 fail  FAIL pistol akimbo: each gun's well comes onto its own side's pouch (0.000 / 9.000 m)
+  Grokbot (builds, wheel, turrets, pillars)
+    t34    0 fail  evaluate failed: TypeError: _lpTmp.copy(...).applyMatrix4 is not a function

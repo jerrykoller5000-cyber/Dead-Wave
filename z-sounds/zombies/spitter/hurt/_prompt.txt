@@ -1,0 +1,9 @@
+#40 spitter-hurt
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 0.5 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A short wet squelching gurgle from a spitter zombie being hit. Close-up, dry. No words, no music.
+
+In the game: zombieVoice('spitter', 'hurt')

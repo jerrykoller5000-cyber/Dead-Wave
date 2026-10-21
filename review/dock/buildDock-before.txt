@@ -1,0 +1,43 @@
+    function buildDock(d) {
+      const parts = [];
+      const plank = new THREE.MeshStandardMaterial({ color: 0x77573a });
+      const post = new THREE.MeshStandardMaterial({ color: 0x54402a });
+      const deckY = d.deckY ?? (LAKE.level + 0.55);
+      const len = DOCK_LEN, hw = DOCK_HW;
+      // Deck slats. Laid a touch wider than their spacing so the seams between boards
+      // read as seams, not as slots you can see the ground through.
+      for (let i = 0; i < 12; i++) {
+        poiBox(parts, plank, hw * 2, 0.12, 0.8, 0, 0, -len / 2 + 0.45 + i * 0.78, 0, 0, 0);
+      }
+      // Posts marching out into the water.
+      for (const lz of [-len / 2 + 0.5, 0, len / 2 - 0.5]) {
+        for (const lx of [-hw + 0.1, hw - 0.1]) {
+          const p = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.14, 3.4, 6), post);
+          p.position.set(lx, -1.55, lz);
+          parts.push(p);
+        }
+      }
+      // No landward abutment block any more: the bank itself was cut down to meet this
+      // deck back when the heightfield was graded (see gradeCrossings), so the planks
+      // land on real ground.
+      const dockGround = (x, z) => sampleHeight(d.x + x * Math.cos(d.yaw) + z * Math.sin(d.yaw), d.z - x * Math.sin(d.yaw) + z * Math.cos(d.yaw));
+      const boatSide = dockGround(-hw - 1.2, 1.8) < dockGround(hw + 1.2, 1.8) ? -1 : 1;
+      const details = appendLandmarkDetails(parts, 'dock', d.x, d.z, deckY, d.yaw, { halfWidth: hw, length: len, boatSide });
+      const g = new THREE.Group();
+      const mesh = mergeParts(parts, poiMat, { castShadow: true, receiveShadow: true });
+      g.add(mesh);
+      g.position.set(d.x, deckY, d.z);
+      g.rotation.y = d.yaw;
+      scene.add(g);
+      details.register();
+      g.userData.landmarkTheme = details.theme;
+      d.mesh = g;
+      platforms.push({ x: d.x, z: d.z, hw, hl: len / 2, yaw: d.yaw, deckY: deckY + 0.08, landmark: true });
+      // The rowboat had no collision at all — you could walk straight through its hull.
+      const cy2 = Math.cos(d.yaw), sy2 = Math.sin(d.yaw);
+      const boatLx = boatSide * (hw + 1.2);
+      for (const boatLz of [0.85, 1.8, 2.65]) {
+        addSolid(d.x + boatLx * cy2 + boatLz * sy2, d.z - boatLx * sy2 + boatLz * cy2, 0.63, deckY - 0.6, deckY + 0.1);
+      }
+    }
+

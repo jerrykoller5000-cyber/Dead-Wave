@@ -1,0 +1,41 @@
+{
+  "at": "2026-10-14T08:56:56.822Z",
+  "source": [
+    {
+      "path": "index.html",
+      "sha256": "b048586ea2c004b12d41565c6d0783680ff8fbc4715ae4030e148fe42be1b244",
+      "bom": false
+    },
+    {
+      "path": "studio/marine-dive.js",
+      "sha256": "63f7e1e16ddbb0e1a184881e132a1659535708e92d06fd1a6a213591fcad5d50",
+      "bom": false
+    },
+    {
+      "path": "studio/marine-dive-pose.js",
+      "sha256": "d1e6aff29d3f96e533544ab6bdad01b2c7e4b9ec32683aad22c07a4f4fba8e4b",
+      "bom": false
+    },
+    {
+      "path": "studio/marine-dive-contact.js",
+      "sha256": "424124c95e9b264f210ac3daba9b3891a7b19ecbb415073e6661447a4fdb9c9d",
+      "bom": false
+    },
+    {
+      "path": "studio/marine-dive.test.mjs",
+      "sha256": "e1b5c140db715718e3e29c0215a6fa010fbdc53c38ce8fb6ae4bf09d33465c3c",
+      "bom": false
+    },
+    {
+      "path": "tools/tests/t253.js",
+      "sha256": "6418c0dbfeb53e8511e5d30413b137a281c3e4eb5a1d94367799966038c86616",
+      "bom": false
+    }
+  ],
+  "screenshots": [
+    "review/dive-GP19915/before-matched-flight.png",
+    "review/dive-GP19915/after-matched-flight.png",
+    "review/dive-GP19915/before-matched-recovery.png",
+    "review/dive-GP19915/after-matched-recovery.png"
+  ]
+}

@@ -1,0 +1,43 @@
+PASS the rig carries its dress registry
+PASS four hats: cover,boonie,ballcap,ballcapBack
+PASS five eyewear picks: none,aviators,pitViper,wayfarer,goggles
+PASS the default dress: {"hat":"cover","eyewear":"none","rolled":false,"shorts":false,"gloves":true,"skin":3,"hair":"darkBrown","eyes":"brown"}
+PASS only the cover shows by default
+PASS the cover has a shape
+PASS the boonie has a shape
+PASS the ballcap has a shape
+PASS the ballcapBack has a shape
+PASS the aviators have a shape
+PASS the pitViper have a shape
+PASS the wayfarer have a shape
+PASS the goggles have a shape
+PASS the cover alone
+PASS the boonie alone
+PASS the ballcap alone
+PASS the ballcapBack alone
+PASS eyewear none alone
+PASS eyewear aviators alone
+PASS eyewear pitViper alone
+PASS eyewear wayfarer alone
+PASS eyewear goggles alone
+PASS the ballcap bill forwards, and backwards behind (0.25, -0.25)
+PASS the boonie and ballcap wear the cap camo
+PASS sleeves rolled on both arms
+PASS shorts on both legs
+PASS bare hands
+PASS bare hands and forearms are his skin
+PASS and back to sleeves down, trousers and gloves
+PASS blond hair
+PASS blue eyes
+PASS the darkest skin
+PASS another marine keeps his own skin
+PASS a bad pick falls back to the default
+PASS the guns have furniture to camo: minigun,m4,ak,aa12,pistol,uzi,shotgun,revolver,sniper,launcher,flamer,chainsaw
+PASS the M4 furniture wears its camo
+PASS the AK keeps its wood
+PASS the M4 metal is untouched (20 parts)
+PASS the second Uzi wears the same camo
+PASS an unknown camo leaves the gun bare
+PASS the profile's boonie and aviators on him
+PASS the helmet hides the hat
+PASS the eyewear stays on with the helmet

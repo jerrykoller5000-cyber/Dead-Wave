@@ -1,0 +1,7 @@
+PASS a mortar can be placed
+PASS the mortar comes with half its shells (8)
+PASS the M240B is placed with 500 of 1,000 rounds
+PASS it does not fire until he is on it
+PASS he mounts it like the mortar
+PASS mounted, one round leaves the belt (499)
+PASS T shoulders it ({"hp":120,"kind":"m240","belt":499})

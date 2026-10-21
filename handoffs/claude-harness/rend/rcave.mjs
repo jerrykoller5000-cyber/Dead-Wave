@@ -1,0 +1,52 @@
+import { chromium } from 'playwright';
+import fs from 'fs';
+const out = process.argv[2] || 'c';
+const b = await chromium.launch({ executablePath: process.env.CHROME || undefined, args: ['--no-sandbox'] });
+const p = await b.newPage({ viewport: { width: 800, height: 600 } });
+p.on('pageerror', e => console.log('PAGEERROR', e.message, e.stack));
+await p.goto('http://localhost:' + (process.env.PORT || 8793) + '/' + (process.env.PAGE || 'test.html') + '?debug=1&raf=timer', { waitUntil: 'load' });
+for (let i = 0; i < 80; i++) { if (await p.evaluate('!!window.TT')) break; await p.waitForTimeout(500); }
+await p.addScriptTag({ content: fs.readFileSync(new URL('./renderer.js', import.meta.url), 'utf8') });
+await p.addScriptTag({ content: fs.readFileSync(new URL('./detail.js', import.meta.url), 'utf8') });
+if (process.env.NOG) await p.evaluate('window.__noGround = true');
+if (process.env.FOL) await p.evaluate('window.__withFoliage = true');
+if (process.env.ONLY) await p.evaluate('window.__only = ' + JSON.stringify(process.env.ONLY));
+const res = await p.evaluate((VIEWS) => {
+  const T = window.TT; const shots = {};
+  const sky = [0.53, 0.72, 1.0];
+  const O = { physical: true, fog: [0.24, 0.47, 1.0, 190, 640], shade: window.__shade || null, shadeTree: window.__shadeTree || null };
+  const R = (k, roots, cam, w, h, o2) => { window.__camK = 2 * Math.tan((cam.fov || 30) * Math.PI / 360) / h; shots[k] = window.__render(roots, cam, w, h, o2 ? [0.62, 0.66, 0.7] : sky, o2 ? { ...O, ...o2 } : O).url; };
+  const near = (x, z, r) => T.trees.filter(t => Math.hypot(t.x - x, t.z - z) < r).map(t => t.group);
+  const info = [];
+  const views = VIEWS.split(',');
+  T.POI.caves.forEach((c, i) => {
+    if (window.__only && c.theme !== window.__only) return;
+    info.push([c.theme, c.x.toFixed(1), c.z.toFixed(1), Math.hypot(c.x, c.z).toFixed(1)]);
+    const fx = Math.sin(c.yaw), fz = Math.cos(c.yaw), rx = Math.cos(c.yaw), rz = -Math.sin(c.yaw);
+    const P = (lx, lz, y) => [c.x + rx * lx + fx * lz, c.gy + y, c.z + rz * lx + fz * lz];
+    const fol = (window.__withFoliage ? T.foliageChunks.filter(m => { m.geometry.computeBoundingSphere(); const b = m.geometry.boundingSphere; return b && Math.hypot(b.center.x - c.x, b.center.z - c.z) < b.radius + 40; }) : []);
+    const roots = [...(window.__noGround ? [] : [T.ground]), c.group, ...near(c.x, c.z, 45), ...fol, ...(window.__extraRoots || [])];
+    if (views.includes('front')) R('cave' + i + '_' + c.theme + '_front', roots, { pos: P(9, 24, 17), target: P(0, -3, 3), fov: 55 }, 640, 460);
+    if (views.includes('side')) R('cave' + i + '_' + c.theme + '_side', roots, { pos: P(26, 2, 12), target: P(0, -5, 3), fov: 55 }, 640, 460);
+    if (views.includes('close')) R('cave' + i + '_' + c.theme + '_close', roots, { pos: P(-2.5, 9, 3.2), target: P(0, -2, 2.4), fov: 60 }, 640, 460);
+    if (views.includes('fog')) R('cave' + i + '_' + c.theme + '_fog', roots, { pos: P(1.5, 15, 8), target: P(0, -1, 3.5), fov: 55 }, 640, 460, { fog: [0.62, 0.66, 0.7, 4, 60] });
+    if (views.includes('game')) R('cave' + i + '_' + c.theme + '_game', roots, { pos: P(6, 26, 24), target: P(0, 4, 0), fov: 50 }, 640, 460);
+    if (views.includes('top')) R('cave' + i + '_' + c.theme + '_top', roots, { pos: P(10, 6, 30), target: P(0, -3, 0), fov: 55 }, 640, 460);
+    if (views.includes('sideL')) R('cave' + i + '_' + c.theme + '_sideL', roots, { pos: P(-24, 3, 9), target: P(0, -4, 3), fov: 55 }, 640, 460);
+    if (views.includes('back2')) R('cave' + i + '_' + c.theme + '_back2', roots, { pos: P(4, -13, 15), target: P(0, 0, 6), fov: 60 }, 640, 460);
+    if (views.includes('hi')) R('cave' + i + '_' + c.theme + '_hi', roots, { pos: P(14, 30, 34), target: P(0, -4, 2), fov: 50 }, 640, 460);
+    if (views.includes('back')) R('cave' + i + '_' + c.theme + '_back', roots, { pos: P(-14, -28, 20), target: P(0, -6, 3), fov: 55 }, 640, 460);
+  });
+  // The pit, seen from above the water like the game camera.
+  const H = T.LAKE_HOLE;
+  let pit = T.POI.lakeHole;
+  if (!pit) T.scene.children.forEach(o => { if (o.isGroup !== false && Math.hypot(o.position.x - H.x, o.position.z - H.z) < 0.5) pit = o; });
+  const waters = []; T.scene.traverse(o => { if (o.isMesh && o.material && o.material.transparent && o.material.opacity > 0.5 && o.geometry && o.geometry.attributes.position && o.geometry.attributes.position.count > 200 && o !== T.ground) waters.push(o); });
+  const lvl = -3.4;
+  if (!window.__only) R('pit', [T.ground, pit, ...waters.slice(0, 3)].filter(Boolean), { pos: [H.x + 6, lvl + 24, H.z + 20], target: [H.x, lvl - 4, H.z], fov: 55 }, 700, 520);
+  if (!window.__only) R('pit_dry', [T.ground, pit].filter(Boolean), { pos: [H.x + 6, lvl + 16, H.z + 16], target: [H.x, lvl - 6, H.z], fov: 55 }, 700, 520);
+  return { shots, info };
+}, process.env.VIEWS || 'front,side,close');
+for (const [k, url] of Object.entries(res.shots)) fs.writeFileSync(`${out}_${k}.png`, Buffer.from(url.split(',')[1], 'base64'));
+console.log(JSON.stringify(res.info));
+await b.close();

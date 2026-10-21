@@ -1,0 +1,186 @@
+// GP-176/177: each species has a throat, and each individual has its own phrasing and voice.
+import { buildZombiePhrases } from './zombie-vocal-phrases.js';
+const throat=(f,dur,vowel,vol,extra={})=>({f,dur,vowel,vol,rough:[.32,23],vib:0,breath:.6,organic:true,formantScale:.7,formantQ:.32,formantGain:1.2,grit:.3,drive:3.5,jitter:.055,chest:.25,...extra});
+const voice=(spec,when=0)=>({kind:'voice',spec,when});
+const base=()=>({kind:'base',when:0});
+const air=(freq,dur,vol,when=0,extra={})=>({kind:'texture',freq,dur,vol,when,q:.6,attack:Math.min(.06,dur*.2),rev:.18,flutter:5,...extra});
+const knock=(freq,dur,vol,when=0)=>air(freq,dur,vol,when,{filterType:'lowpass',attack:.003,flutter:0});
+const bass=(freq,slideTo,dur,vol,when=0)=>({kind:'tone',freq,slideTo,dur,vol,when,type:'sine',attack:.02,rev:.18});
+const clicks=(level=.025)=>[knock(2100,.016,level,.07),knock(1200,.025,level*.8,.18),knock(2900,.012,level*.65,.31)];
+const dark={formantScale:.48,formantQ:.28,chest:.65,grit:.32,drive:4,rough:[.22,18],muffle:1500};
+const angry={formantScale:.72,formantQ:.25,chest:.35,grit:.6,drive:5,rough:[.46,31],jitter:.11,breath:1.1};
+const massive={formantScale:.32,formantQ:.22,chest:.95,grit:.38,drive:3.6,rough:[.13,11],jitter:.03,muffle:1050,breath:1.1};
+const beast={formantScale:.9,formantQ:.3,chest:.35,grit:.62,drive:4.8,rough:[.45,43],jitter:.14,breath:1.2};
+const profiles={
+  shambler:{
+    idle:[voice(throat([29,38,.82],[1.2,1.55],'u',.105,dark)),air(210,.55,.035,.32,{filterType:'lowpass'})],
+    chase:[voice(throat([35,46,.75],[.75,1.0],'o',.12,{...dark,vowel2:'u'})),air(390,.24,.045,.1)],
+    attack:[voice(throat([48,61,.63],[.38,.5],'a',.15,{...dark,grit:.6,rough:[.4,25],vowel2:'o'}))],
+    hurt:[voice(throat([52,66,.77],[.16,.23],'o',.13,{...dark,grit:.65}))],
+    death:[voice(throat([39,51,.58],[.95,1.25],'o',.145,{...dark,vowel2:'u',breath:1.1})),air(240,.35,.04,.72,{filterType:'lowpass'})]
+  },
+  feral:{
+    idle:[voice(throat([65,84,.84],[.28,.4],'uh',.095,{...angry,repeat:[2,.37]})),air(1700,.15,.04,.21)],
+    chase:[voice(throat([81,105,.9],[.18,.25],'a',.12,{...angry,repeat:[3,.24],vowel2:'uh'}))],
+    attack:[voice(throat([105,145,.73],[.4,.57],'a',.185,{...angry,vowel2:'e',grit:.85})),air(1900,.23,.09)],
+    hurt:[voice(throat([95,125,.65],[.17,.23],'a',.14,angry))],
+    death:[voice(throat([112,143,.43],[.7,1.0],'a',.17,{...angry,vowel2:'u'})),air(1150,.32,.055,.58)]
+  },
+  leaper:{
+    idle:[base(),...clicks(.014)],chase:[base(),...clicks(.028)],
+    attack:[base(),knock(2200,.035,.04,.045),air(3100,.09,.035,.18)],
+    hurt:[base(),knock(1700,.03,.02)],death:[base(),...clicks(.022)],
+    move:[voice(throat([390,560,1.35],[.10,.16],'i',.035,{...beast,chest:0,formantScale:1,grit:.65,rough:[.6,65]})),...clicks(.022)]
+  },
+  spider:{
+    idle:[air(2900,.75,.08,0,{freq2:2100,flutter:7}),air(850,.32,.026,.27)],
+    chase:[air(3400,.46,.105,0,{freq2:2400,flutter:13}),air(1900,.17,.05,.19)],
+    attack:[air(4100,.38,.16,0,{freq2:1600,attack:.006,flutter:18}),air(900,.19,.045,.12)],
+    hurt:[air(3300,.14,.13,0,{freq2:1900,attack:.003,flutter:16})],
+    death:[air(3100,1.05,.115,0,{freq2:650,flutter:9}),air(1100,.3,.04,.58),knock(600,.06,.035,.84)]
+  },
+  drowned:{
+    idle:[base(),air(280,.35,.019,.22,{freq2:520,flutter:12}),knock(390,.06,.023,.61)],
+    chase:[base(),air(340,.32,.023,.12,{freq2:650,flutter:14}),knock(440,.045,.024,.43)],
+    attack:[base(),air(520,.18,.03,0,{freq2:230,flutter:17}),knock(310,.04,.028,.18)],
+    hurt:[base(),air(380,.12,.022,0,{flutter:18})],
+    death:[base(),air(420,.5,.027,.17,{freq2:180,flutter:11}),knock(290,.07,.018,.65)]
+  },
+  military:{
+    idle:[voice(throat([61,79,.88],[.22,.3],'uh',.11,{...angry,formantScale:.62,muffle:2200,repeat:[3,.31],vowel2:'o',jitter:.05}))],
+    chase:[voice(throat([74,96,.82],[.14,.20],'a',.125,{...angry,formantScale:.64,muffle:2500,repeat:[3,.21],vowel2:'uh',jitter:.055}))],
+    attack:[voice(throat([95,121,.66],[.31,.43],'a',.17,{...angry,formantScale:.65,grit:.8,vowel2:'uh'})),air(1050,.10,.035)],
+    hurt:[voice(throat([92,117,.72],[.15,.2],'uh',.135,{...angry,formantScale:.6}))],
+    death:[voice(throat([75,98,.45],[.74,1.0],'uh',.15,{...angry,formantScale:.58,vowel2:'u'}))]
+  },
+  brute:{
+    idle:[voice(throat([26,34,.84],[1.5,1.9],'o',.135,{...massive,formantScale:.4})),air(260,.6,.055,.52,{filterType:'lowpass'})],
+    chase:[voice(throat([30,40,.77],[1.05,1.35],'o',.16,{...massive,formantScale:.4,vowel2:'a'}))],
+    attack:[voice(throat([42,54,.58],[.56,.74],'a',.205,{...massive,formantScale:.44,grit:.65,vowel2:'o'})),air(430,.23,.07,.015)],
+    hurt:[voice(throat([45,56,.65],[.24,.32],'o',.165,{...massive,grit:.65}))],
+    death:[voice(throat([32,44,.54],[1.2,1.6],'a',.18,{...massive,vowel2:'u'})),air(190,.45,.06,.85,{filterType:'lowpass'})]
+  },
+  spitter:{
+    idle:[air(290,.82,.08,0,{freq2:570,flutter:17}),air(2400,.6,.045,.13,{freq2:1700}),knock(530,.045,.035,.27),knock(330,.07,.03,.58)],
+    chase:[air(420,.7,.105,0,{freq2:760,flutter:23}),air(2800,.4,.065,.06),knock(610,.05,.04,.22),knock(390,.065,.035,.46)],
+    attack:[air(580,.5,.13,0,{freq2:220,flutter:28,attack:.005}),air(3700,.48,.16,0,{freq2:1900,attack:.008,flutter:13}),knock(760,.06,.065,.06),knock(270,.075,.06,.3)],
+    hurt:[air(740,.18,.12,0,{freq2:300,flutter:26,attack:.004}),air(3100,.13,.085,.03)],
+    death:[air(380,1.1,.115,0,{freq2:160,flutter:19}),air(2300,.85,.075,.06,{freq2:900}),knock(470,.075,.05,.31),knock(260,.09,.04,.73)]
+  },
+  screamer:{
+    idle:[voice(throat([280,370,1.25],[.65,.9],'i',.11,{...beast,chest:.12,formantQ:.22,grit:.85})),air(2100,.45,.065,.18,{freq2:2800})],
+    chase:[voice(throat([370,500,1.35],[.6,.8],'e',.17,{...beast,chest:.14,formantQ:.2,grit:1.05})),air(2850,.6,.1,.05,{freq2:1700,flutter:19})],
+    attack:[voice(throat([470,670,1.55],[1.0,1.3],'a',.285,{...beast,vowel2:'i',formantScale:1.15,formantQ:.18,formantGain:1.65,chest:.18,grit:1.3,drive:5.5,jitter:.22,rough:[.65,57]})),air(2700,1.1,.16,0,{freq2:1800,flutter:23,attack:.006})],
+    hurt:[voice(throat([520,690,.8],[.25,.35],'i',.20,{...beast,grit:1,formantQ:.2})),air(2500,.18,.075)],
+    death:[voice(throat([550,760,.38],[1.15,1.55],'i',.24,{...beast,vowel2:'a',grit:1.2,formantQ:.2,jitter:.18})),air(1800,.7,.10,.55,{freq2:750})]
+  },
+  bomber:{
+    idle:[voice(throat([47,60,.98],[1.25,1.6],'u',.11,{...dark,formantScale:.72,formantQ:.55,chest:.65,rough:[.12,29],jitter:.015,grit:.17,vowel2:'o'}))],
+    chase:[voice(throat([53,68,1.02],[.95,1.3],'o',.14,{...dark,formantScale:.76,formantQ:.6,chest:.7,rough:[.15,33],jitter:.018,grit:.2,vowel2:'u'}))],
+    attack:[voice(throat([60,77,1.12],[.55,.75],'o',.18,{...dark,formantScale:.8,formantQ:.58,chest:.8,rough:[.28,38],jitter:.025,grit:.35})),air(690,.18,.045,.08)],
+    hurt:[voice(throat([62,78,.78],[.18,.26],'u',.14,{...dark,formantScale:.72,chest:.7}))],
+    death:[voice(throat([48,64,.57],[.85,1.1],'o',.16,{...dark,formantScale:.7,chest:.75,grit:.35,vowel2:'u'}))]
+  },
+  demon:{
+    idle:[voice(throat([34,46,.85],[1.3,1.65],'o',.15,{...massive,formantScale:.5,grit:.6,drive:5})),air(730,.65,.07,.32,{freq2:390})],
+    chase:[voice(throat([44,58,.8],[.8,1.1],'a',.18,{...massive,formantScale:.56,grit:.85,drive:5,vowel2:'o'})),air(1150,.4,.08,.14)],
+    attack:[voice(throat([70,95,.58],[.5,.68],'a',.215,{...massive,formantScale:.6,chest:.85,grit:1,drive:5.5,vowel2:'o'})),air(1450,.3,.085,.025,{freq2:620})],
+    charge:[air(1100,.24,.105,0,{freq2:2400,attack:.06,flutter:12}),voice(throat([66,88,1.5],[.22,.3],'a',.19,{...angry,chest:.7,grit:1.1}),.12),voice(throat([76,105,.45],[.65,.88],'a',.24,{...massive,formantScale:.6,chest:.85,grit:1,drive:5.5,vowel2:'o'}),.34),air(1450,.38,.10,.34,{freq2:620})],
+    hurt:[voice(throat([70,95,.6],[.24,.33],'a',.185,{...massive,formantScale:.56,grit:.95,drive:5}))],
+    death:[voice(throat([59,80,.42],[1.25,1.6],'a',.21,{...massive,formantScale:.52,grit:.8,drive:5,vowel2:'u'})),air(550,.55,.07,.87)]
+  },
+  colossus:{
+    idle:[voice(throat([25,31,.9],[1.9,2.3],'u',.17,massive)),air(170,1.0,.07,.7,{filterType:'lowpass',freq2:110,attack:.22,flutter:3})],
+    chase:[voice(throat([27,35,.88],[1.35,1.7],'o',.19,massive)),air(220,.85,.085,.28,{filterType:'lowpass',freq2:120,attack:.17,flutter:4})],
+    attack:[voice(throat([33,43,1.2],[.35,.46],'o',.19,massive)),voice(throat([39,50,.62],[.85,1.1],'a',.245,{...massive,formantScale:.38,grit:.65,vowel2:'o'}),.25),bass(32,25,.65,.10,.26),air(240,.4,.09,.29,{filterType:'lowpass'})],
+    hurt:[voice(throat([37,47,.76],[.3,.42],'o',.19,{...massive,grit:.6})),air(180,.21,.045,.03,{filterType:'lowpass'})],
+    death:[voice(throat([30,40,.73],[1.8,2.25],'a',.23,{...massive,vowel2:'u'})),air(190,1.0,.09,.94,{filterType:'lowpass',freq2:95,attack:.19}),bass(29,23,.8,.065,.85)],
+    step:[bass(39,25,.25,.11),knock(130,.22,.12),knock(520,.075,.05,.035)]
+  },
+  guardian:{
+    idle:[voice(throat([88,120,.68],[.18,.25],'o',.12,{...beast,formantScale:.75,repeat:[3,.27]})),voice(throat([240,330,1.45],[.33,.47],'a',.095,{...beast,chest:.16,formantScale:1.05}),.74)],
+    chase:[voice(throat([125,180,.64],[.15,.22],'a',.145,{...beast,formantScale:.8,repeat:[2,.23]})),voice(throat([330,450,1.6],[.28,.4],'e',.13,{...beast,chest:.18,formantScale:1.1}),.44)],
+    attack:[voice(throat([180,240,.7],[.19,.27],'a',.19,beast)),voice(throat([430,590,1.65],[.6,.8],'a',.21,{...beast,formantScale:1.15,formantQ:.24,vowel2:'i',grit:1,jitter:.2}),.15),air(2400,.38,.085,.18)],
+    hurt:[voice(throat([190,260,.64],[.2,.28],'o',.175,{...beast,formantScale:.88})),air(1800,.10,.045,.03)],
+    death:[voice(throat([430,580,.35],[.9,1.2],'a',.19,{...beast,formantScale:1.05,vowel2:'u',chest:.45})),voice(throat([120,165,.62],[.3,.45],'o',.105,{...beast,formantScale:.7}),.8)]
+  },
+  // This unreviewed cave predator retains its GP-175 vocal folds.
+  caveguard:{
+    idle:[voice({f:[155,184,.86],dur:[.65,.8],vowel:'u',vowel2:'i',rough:[.82,47],vol:.06,vib:.025,muffle:2600,breath:1.25}),air(2900,.045,.035,.22),air(2100,.04,.028,.38)],
+    chase:[voice({f:[192,230,1.07],dur:[.33,.45],vowel:'i',rough:[.86,63],vol:.075,vib:.025,breath:1.4}),air(3500,.08,.04,.12)],
+    attack:[voice({f:[275,330,1.65],dur:[.3,.4],vowel:'e',vowel2:'i',rough:[.92,78],vol:.10,vib:.025,breath:1.7}),air(3900,.13,.05),air(1500,.08,.045,.14)],
+    hurt:[voice({f:[345,405,.74],dur:[.12,.18],vowel:'i',rough:[.9,88],vol:.075,vib:.025,breath:1.2}),air(2400,.06,.035)],
+    death:[voice({f:[235,280,.25],dur:[.7,.95],vowel:'i',vowel2:'u',rough:[.94,39],vol:.095,vib:.08,breath:1.6}),air(1600,.17,.04,.46),air(750,.22,.025,.73)]
+  }
+};
+function freeze(x){if(x&&typeof x==='object'){for(const v of Object.values(x))freeze(v);Object.freeze(x);}return x;}
+export const ZOMBIE_AUDIO_ADDITIONS=freeze(profiles);
+export const ZOMBIE_AUDIO_STATES=Object.freeze(['idle','attack','hurt','death']);
+export function zombieAudioRecipe(type,state){
+  state=state==='hit'?'hurt':state==='leap'?'attack':state;
+  return Object.hasOwn(profiles,type)&&Object.hasOwn(profiles[type],state)?profiles[type][state]:null;
+}
+export function zombieDriveCurve(drive=3.5){const a=new Float32Array(257),scale=Math.tanh(drive);for(let i=0;i<a.length;i++)a[i]=Math.tanh((i/128-1)*drive)/scale;return a;}
+const phraseBanks=new Map();
+export function zombieAudioVariants(type,state){
+  state=state==='hit'?'hurt':state==='leap'?'attack':state;
+  const base=zombieAudioRecipe(type,state);if(!base)return null;
+  const key=type+':'+state;
+  if(!phraseBanks.has(key))phraseBanks.set(key,freeze(buildZombiePhrases(type,state,base)));
+  return phraseBanks.get(key);
+}
+
+// A private PRNG keeps phrase choices and personalities out of the world's random stream.
+function voiceRandom(){let n=0x73ac09e5;return ()=>{n^=n<<13;n^=n>>>17;n^=n<<5;return (n>>>0)/4294967296;};}
+export function createZombieVocalizer(random=voiceRandom()){
+  const actors=new WeakMap(),fallback=new Map(),lastByKind=new Map();
+  const rng=()=>Math.max(0,Math.min(.999999999,random()));
+  const personality=()=>Object.freeze({pitch:.86+rng()*.27,formant:.89+rng()*.22,tempo:.90+rng()*.18,breath:.72+rng()*.60,grit:.84+rng()*.32,body:.86+rng()*.26,level:.94+rng()*.10});
+  return (type,state,actor=null)=>{
+    state=state==='hit'?'hurt':state==='leap'?'attack':state;
+    const bank=zombieAudioVariants(type,state);if(!bank)return null;
+    const object=actor!==null&&(typeof actor==='object'||typeof actor==='function'),store=object?actors:fallback,key=object?actor:type;
+    if(!store.has(key))store.set(key,{identity:personality(),bags:new Map(),last:new Map()});
+    const owner=store.get(key),stateKey=type+':'+state;
+    let bag=owner.bags.get(stateKey);
+    if(!bag?.length){
+      bag=bank.map((_,i)=>i);
+      for(let i=bag.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[bag[i],bag[j]]=[bag[j],bag[i]];}
+      owner.bags.set(stateKey,bag);
+    }
+    // Avoid repeats across the crowd too, without throwing away a member of this actor's bag.
+    const last=lastByKind.get(stateKey),ownLast=owner.last.get(stateKey);
+    if(bag.length>1&&(bag[bag.length-1]===last||bag[bag.length-1]===ownLast)){
+      let j=bag.findIndex(v=>v!==last&&v!==ownLast);if(j<0)j=bag.findIndex(v=>v!==ownLast);
+      if(j>=0)[bag[j],bag[bag.length-1]]=[bag[bag.length-1],bag[j]];
+    }
+    const variant=bag.pop();lastByKind.set(stateKey,variant);owner.last.set(stateKey,variant);
+    return {actions:bank[variant],variant,identity:owner.identity};
+  };
+}
+
+// Finite glottal families: spectral slope and open/closed fold shape, not detuned synth presets.
+export function zombieFoldCoefficients(family='ragged'){
+  const shapes={pressed:[1.05,.32,.11],ragged:[1.32,.41,.24],hollow:[1.72,.59,.06],roar:[.98,.46,.31],breathy:[2.0,.69,.04],whistle:[2.35,.52,.02],chest:[1.5,.50,0]};
+  const [tilt,open,grain]=shapes[family]||shapes.ragged;
+  const real=new Float32Array(65),imag=new Float32Array(65);
+  if(family==='chest'){imag[1]=1;imag[2]=.48;imag[3]=.18;imag[4]=.065;return {real,imag};}
+  for(let h=1;h<imag.length;h++){
+    const roll=Math.pow(h,-tilt)*Math.exp(-h/42),fold=.62+.38*Math.cos(Math.PI*h*open);
+    imag[h]=roll*fold*(1+grain*Math.sin(h*2.17));
+    real[h]=roll*Math.sin(Math.PI*h*open)*.22;
+  }
+  return {real,imag};
+}
+export function createZombieVoiceGate(){
+  let ambientAt=-Infinity,attackAt=-Infinity,hurtAt=-Infinity,deathAt=-Infinity;
+  const next=new Map();
+  return (now,type,state)=>{
+    if(!Number.isFinite(now))return false;
+    const ambient=state==='idle'||state==='chase'||state==='move'||state==='step',key=type+':'+state;
+    if(now<(next.get(key)??-Infinity)||now<(ambient?ambientAt:state==='death'?deathAt:state==='hurt'?hurtAt:attackAt))return false;
+    next.set(key,now+(state==='move'?1.4:state==='step'?.3:ambient?.65:state==='hurt'?.28:state==='death'?.03:.12));
+    if(ambient)ambientAt=now+.28;else if(state==='death')deathAt=now+.03;else if(state==='hurt')hurtAt=now+.028;else attackAt=now+.09;
+    return true;
+  };
+}

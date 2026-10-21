@@ -1,0 +1,8 @@
+# antigravity — AG-84 Sandbag tier 2 (build.sandbag variant 2): merge its 248 parts and trim under 1,500 tris — 2026-10-18
+Changed:          Trimmed `build.sandbag` variant 2 (`decoratePiece` `kind === 'sandbag'`, `tier === 2` in `index.html`) from 6,216 tris / 248 parts down to 1,428 tris / 2 meshes (2 materials: `fieldstoneMat` and `wireMat`) by replacing `_rbox` cobbles/boulders with angular `_box` through-cobbles, consolidating full-span horizontal wire/steel reinforcement bars, and calling `mergeStatic(root)`.
+Files:            index.html, qa/2026-10-18-AG-84/run-ag84.mjs, qa/2026-10-18-AG-84/report.md, qa/2026-10-18-AG-84/before/build-sandbag-2-three.png, qa/2026-10-18-AG-84/after/build-sandbag-2-three.png, qa/2026-10-18-AG-84/after/build-sandbag-2-5m.png, qa/2026-10-18-AG-84/after/sheet.jpg, qa/2026-10-18-AG-84/after/check.json
+Tests:            node qa/2026-10-15-AG-79/verify-node.mjs → 18 passed, 0 failed (build.sandbag tier 2 -> raw 2 meshes, 1,428 tris -> baked 2 meshes, 2 mats, size 2.03x1.69x0.66m; UTF-8 no-BOM clean); queued via slot (rule 16): DWInspect.show("build.sandbag", { variant: "2" }).info → {"meshes":2,"drawables":2,"tris":1428,"points":0,"segments":0,"materials":2}
+Screenshots:      qa/2026-10-18-AG-84/before/build-sandbag-2-three.png, qa/2026-10-18-AG-84/after/build-sandbag-2-three.png, qa/2026-10-18-AG-84/after/build-sandbag-2-5m.png, qa/2026-10-18-AG-84/after/sheet.jpg
+Not verified:     Full browser npm test suite (left for commit-time integration per rule 16; pure-Node geometry/budget test and live inspector check passed).
+Requests:         none
+Contract changes: none

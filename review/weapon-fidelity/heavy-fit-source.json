@@ -1,0 +1,8 @@
+{
+  "exportCompletedAt": "2026-10-09T11:36:49.313Z",
+  "exportSha256": "d7634029e7d7639518ac1becc01ba1db7b2658a19424d3d8627e5cd73bfc804d",
+  "heavySourceSha256": "c1e9761739d4e7bbb9b6fd61968c8382faf6676d20c89af1ecf940d30ab98003",
+  "comparisonScript": "review/weapon-fidelity/heavy-fit-compare.mjs",
+  "comparisonLogic": "review/weapon-fidelity/heavy-fit-cpu.js",
+  "comparisonCompletedAt": "2026-10-09T11:38:50.310Z"
+}

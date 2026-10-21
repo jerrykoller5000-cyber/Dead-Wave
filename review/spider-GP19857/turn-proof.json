@@ -1,0 +1,16 @@
+{
+  "before": {
+    "peakRadSec": 177.0285881922736,
+    "peakAcceleration": 10868.609772448086,
+    "frames": 570,
+    "errors": [],
+    "loadSec": 15.031
+  },
+  "after": {
+    "peakRadSec": 2.659245911418429,
+    "peakAcceleration": 33.03112343950636,
+    "frames": 567,
+    "errors": [],
+    "loadSec": 18.974
+  }
+}

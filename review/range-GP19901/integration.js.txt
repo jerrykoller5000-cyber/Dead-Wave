@@ -1,0 +1,46 @@
+    // GP-19901: the console owns only its session and borrowed ammunition, never unlocks or weapon balance.
+    let rangeFeature=null,rangeShotPacket=null,rangeEventSerial=0;
+    function rangeSignature(w){return JSON.stringify({mode:weaponIsAuto(w)?'auto':'semi',ext:!!extMag[w],heavy:!!heavyFitted[w],can:!!suppressor[w],laser:!!gearOwned.laser&&lasersEnabled,auto:w==='pistol'&&pistolAutoFitted,skills:Object.fromEntries(Object.keys(SKILL_RANKS).map(k=>[k,skillLvl(localPlayer,k)]))});}
+    function rangeRefill(w){
+      if(!w)return;
+      fireCooldown=0; // a drill starts on a fresh weapon clock, without countdown catch-up fuel ticks
+      if(isMagazineWeapon(w)){const size=singleMagSize(w),maxSpare=magazineMaxSpare(w);issueMagazines(magazineStore,w,{size,loaded:size,spareRounds:size*maxSpare,maxSpare});syncMagazine(w);}
+      else if(w!=='chainsaw'){ammoByWeapon[w]=singleMagSize(w);reserveAmmo[caliberOf(w)]=RESERVE_CAP[caliberOf(w)]||60;}
+      else {sawFuel=sawFuelMax();sawHeat=0;sawOverheat=false;}
+      updateAmmoHud();
+    }
+    function ensureRangeFeature(){
+      if(rangeFeature||!training.tg)return;
+      rangeFeature=createRangeFeature(THREE,training.tg,{
+        owned:w=>!!weaponOwned[w],signature:rangeSignature,
+        context:()=>({position:localPlayer.position,camera:camera.position,previousZ:training.feetZ,pairChanged:dualActive,paused:paused||shopOpen||cifOpen,alive:playerHp>0&&!training.wake&&!gameOver,inTraining:training.active,busy:!!vault||!!training.wake||!!training.deployment?.read()||trainingAlive()>0||mortarMounted||mortarCarried||onAnyLadder()||!grounded}),
+        equip:w=>{
+          if(vault||!weaponOwned[w])return null;
+          const saved={weapon:currentWeapon,unarmed,holsteredKey,dual:dualActive,w,mag:magazineStore[w]?JSON.parse(JSON.stringify(magazineStore[w])):null,ammo:ammoByWeapon[w],reserve:{...reserveAmmo},fuel:sawFuel,heat:sawHeat,overheat:sawOverheat};
+          dualActive=false;if(unarmed){const was=paused;paused=false;toggleHolster();paused=was;}setWeapon(WEAPON_ORDER.indexOf(w));if(currentWeapon!==w){dualActive=saved.dual;return null;}
+          syncOffhandVisibility();rangeRefill(w);return saved;
+        },
+        refill:rangeRefill,
+        restore:s=>{
+          reloading=false;reloadTimer=0;reloadWeapon=null;resetReloadAnim();for(let i=droppedMags.length-1;i>=0;i--){const m=droppedMags[i];if(!m.rangeLoan)continue;scene.remove(m.mesh);m.mesh.material.dispose();droppedMags.splice(i,1);}if(s.mag)magazineStore[s.w]=s.mag;ammoByWeapon[s.w]=s.ammo;Object.assign(reserveAmmo,s.reserve);sawFuel=s.fuel;sawHeat=s.heat;sawOverheat=s.overheat;
+          dualActive=s.dual;setWeapon(WEAPON_ORDER.indexOf(s.weapon));if(s.unarmed!==unarmed){const was=paused;paused=false;toggleHolster();paused=was;}holsteredKey=s.holsteredKey;syncOffhandVisibility();updateAmmoHud();
+        },
+        pause:on=>{paused=on;syncReticleVisibility();},
+        stop:()=>{stopFiring();mouseFireHeld=false;zoomHeld=false;prevMouseFireHeld=false;flamerOn=false;sawCutting=false;rangeShotPacket=null;grenadeCharging=false;grenadeChargeT=0;grenadeArc.visible=false;cancelGrenadeAnim();for(const k of Object.keys(keys))keys[k]=false;},
+        cue:k=>{if(k==='start')AudioSys.relayBeep(true);else if(k==='end')AudioSys.hqDing();else if(k==='void')AudioSys.invalid();else if(k==='count')AudioSys.relayBeep(false);else if(k==='open')AudioSys.trainingCue('open');},
+        publish:(phase,s)=>publishUI('range-drill',{phase,weapon:s.drill?.weapon,drill:s.drill?.id,run:s.id,countdown:s.countdown,score:s.score,wave:s.wave,zone:s.plan?.zone,priority:s.plan?.priority}),
+        feedback:(index,point,sc)=>{const b=training.tg.targets[index].box;if(point)spawnEmbers(point.x,point.y,point.z,4,.5);AudioSys.trainingCue('target');training.pops?.add({x:(b.minX+b.maxX)/2,y:b.maxY+.18,z:(b.minZ+b.maxZ)/2},hitPopText(sc,z=>sayText('training.zone.'+z)));}
+      });
+    }
+    function rangeRound(p){
+      const tg=training.tg;if(!tg)return false;
+      const ignored=p.rangeTouched||(p.rangeTouched=new Set());let a={x:p.prev.x,y:p.prev.y,z:p.prev.z};const b={x:p.pos.x,y:p.pos.y,z:p.pos.z};
+      for(let n=0;n<5;n++){
+        const hit=traceTraining(tg,a,b,{ignoreTargets:ignored});if(!hit)return false;
+        if(hit.solid.target==null){if(hit.solid.lockerDoor)tg.wear?.hitDoor?.(hit.point,{x:p.dir.x,z:p.dir.z});if(!hit.solid.securityDoor&&!hit.solid.metal)training.impacts?.add(hit);spawnEmbers(hit.point.x,hit.point.y,hit.point.z,5,.4);p.hit=true;return true;}
+        const index=hit.solid.target;ignored.add(index);
+        if(rangeFeature?.owns())rangeFeature.hit(index,hit.point,p.rangePacket,p.rangeEvent);
+        if(p.pierce>0){p.pierce--;a={x:hit.point.x+p.dir.x*.001,y:hit.point.y+p.dir.y*.001,z:hit.point.z+p.dir.z*.001};continue;}
+        p.hit=true;return true;
+      }return false;
+    }

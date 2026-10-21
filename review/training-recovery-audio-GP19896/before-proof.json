@@ -1,0 +1,38 @@
+{
+  "alive": {
+    "active": true,
+    "amount": 1,
+    "pulse": 0.5731505614575413,
+    "angle": 3.9997599999189335,
+    "lights": 3,
+    "color": 16751154,
+    "red": 16751154,
+    "fill": 7.152328088016477
+  },
+  "death": {
+    "danger": {
+      "active": false,
+      "amount": 0,
+      "pulse": 0.6377480358072936,
+      "angle": 5.580759999918935,
+      "lights": 3,
+      "color": 16751154,
+      "red": 16777215,
+      "fill": 0
+    }
+  },
+  "bed": {
+    "wake": true,
+    "danger": {
+      "active": false,
+      "amount": 0,
+      "pulse": 0.9776283143650981,
+      "angle": 11.785929999959466,
+      "lights": 3,
+      "color": 16751154,
+      "red": 16777215,
+      "fill": 0
+    }
+  },
+  "errors": []
+}

@@ -1,0 +1,313 @@
+check-players: 288 player.position reads, all in the allowed places
+ok    t0       2 pass   0 fail  39.1s
+ok    tfish    7 pass   0 fail  47.5s
+ok    t6a      2 pass   0 fail  54.3s
+ok    t1       4 pass   0 fail  67.0s
+ok    t2       5 pass   0 fail  66.7s
+ok    t3       5 pass   0 fail  72.9s
+ok    t4       6 pass   0 fail  73.5s
+ok    t5      31 pass   0 fail  64.4s
+ok    t7      16 pass   0 fail  48.3s
+ok    t9      19 pass   0 fail  49.7s
+ok    t8       3 pass   0 fail  58.2s
+ok    t6      21 pass   0 fail  100.4s
+ok    t10     30 pass   0 fail  56.3s
+ok    t11     13 pass   0 fail  49.0s
+ok    t12     22 pass   0 fail  67.7s
+ok    t14     13 pass   0 fail  32.1s
+ok    t13      8 pass   0 fail  56.8s
+info  t16      0 pass   0 fail  38.3s  — 692
+ok    t15     10 pass   0 fail  63.6s
+ok    t18      7 pass   0 fail  31.8s
+ok    t17     10 pass   0 fail  55.2s
+info  t20      0 pass   0 fail  40.3s  — -5,-15 edge0 L0 yaw 0.00 rx 0.00 rz 0.00 ch 1
+ok    t19      6 pass   0 fail  65.0s
+info  t22      0 pass   0 fail  51.1s  — builds box 22,76 / -10,46 barrels before 6 after 12
+ok    t21     16 pass   0 fail  74.7s
+info  t26      0 pass   0 fail  40.5s  — pieces 692 failed: 
+ok    t25     29 pass   0 fail  49.7s
+ok    t23      8 pass   0 fail  85.5s
+ok    t24     14 pass   0 fail  67.8s
+info  t28      0 pass   0 fail  28.1s  — shambler total 13: hips:1m/1mat torso:1m/1mat armL:1m/1mat Group:1m/1mat armR:1m/1mat Grou
+info  t27      0 pass   0 fail  41.6s  — EMPTY WORLD visible meshes: 2154
+ok    t29     12 pass   0 fail  34.0s
+info  t30      0 pass   0 fail  29.2s  — turret at 4.0,-12.0 y -3.17
+ok    t31     26 pass   0 fail  27.2s
+ok    t33      4 pass   0 fail  30.8s
+info  t32      0 pass   0 fail  38.5s  — road pieces: wall/door@-38.0 wall/door@-24.0 wire/gate@-20.0 barricade/gate@-18.0
+ok    t34     20 pass   0 fail  43.3s
+ok    t35     28 pass   0 fail  48.2s
+ok    t36     22 pass   0 fail  51.7s
+FAIL  t39     14 pass   1 fail  33.9s
+ok    t38     12 pass   0 fail  66.2s
+ok    t40      6 pass   0 fail  42.4s
+           INFO root mesh 191.4 trees 192.2 hill 196.7 | shale mesh 201.3 trees 201.9 hill 210.0 | iron mesh 196.6 trees 194.2 hill 202.3 | wet mesh 199.8 trees 192.4 hill 205.0 | hill mesh 199.4 trees 197.8 hill 205.8 | chalk mesh 200.6 trees 200.0 hill 208.0
+ok    t42     18 pass   0 fail  18.5s
+ok    t41      9 pass   0 fail  38.2s
+ok    t37     17 pass   0 fail  106.6s
+ok    t44      6 pass   0 fail  18.7s
+ok    t43     35 pass   0 fail  28.7s
+ok    t45      8 pass   0 fail  23.3s
+ok    t46     11 pass   0 fail  32.1s
+ok    t47     17 pass   0 fail  42.3s
+ok    t50     18 pass   0 fail  25.7s
+ok    t48     22 pass   0 fail  55.1s
+ok    t49     32 pass   0 fail  60.7s
+ok    t51     19 pass   0 fail  36.3s
+ok    t52     17 pass   0 fail  27.8s
+ok    t56      1 pass   0 fail  17.6s
+ok    t54     32 pass   0 fail  33.8s
+ok    t53     76 pass   0 fail  52.9s
+ok    t55     10 pass   0 fail  35.3s
+ok    t57     10 pass   0 fail  16.7s
+ok    t58      9 pass   0 fail  31.0s
+ok    t61     22 pass   0 fail  37.9s
+ok    t60     42 pass   0 fail  53.7s
+ok    t62      4 pass   0 fail  30.7s
+FAIL  t59     46 pass   2 fail  61.5s
+ok    t63      6 pass   0 fail  28.1s
+ok    t64      8 pass   0 fail  36.4s
+           INFO largest height change across one puddle: 0.141 m
+ok    t66      4 pass   0 fail  31.2s
+ok    t65     12 pass   0 fail  37.7s
+ok    t68     15 pass   0 fail  27.3s
+ok    t67      9 pass   0 fail  52.1s
+ok    t69     18 pass   0 fail  46.2s
+ok    t70     21 pass   0 fail  59.0s
+ok    t71     16 pass   0 fail  48.5s
+ok    t72     24 pass   0 fail  51.5s
+ok    t73     12 pass   0 fail  42.3s
+ok    t74     18 pass   0 fail  39.5s
+ok    t75     16 pass   0 fail  34.6s
+ok    t76     16 pass   0 fail  41.8s
+ok    t78     18 pass   0 fail  27.1s
+ok    t77     17 pass   0 fail  39.8s
+           INFO the old drape (sampleHeight + 7 cm) went 0.37 m under the drawn bed at worst
+ok    t81      5 pass   0 fail  17.6s
+ok    t82      4 pass   0 fail  16.6s
+ok    t79     12 pass   0 fail  48.8s
+ok    t83     31 pass   0 fail  38.6s
+ok    t84     10 pass   0 fail  42.1s
+ok    t85     15 pass   0 fail  38.6s
+ok    t86     12 pass   0 fail  32.3s
+ok    t87     13 pass   0 fail  29.2s
+ok    t88     13 pass   0 fail  29.0s
+ok    t90     16 pass   0 fail  38.6s
+ok    t89     18 pass   0 fail  42.6s
+ok    t80     14 pass   0 fail  149.3s
+FAIL  t91     14 pass   4 fail  61.9s
+ok    t93     11 pass   0 fail  41.4s
+ok    t92     11 pass   0 fail  48.0s
+ok    t94      8 pass   0 fail  33.6s
+ok    t95      9 pass   0 fail  34.4s
+ok    t96     19 pass   0 fail  35.3s
+ok    t97     15 pass   0 fail  32.1s
+ok    t100     7 pass   0 fail  29.5s
+ok    t101     9 pass   0 fail  32.3s
+           INFO ragdoll off: 160 spawned, 160 alive at the end, 123 ticks, frame 107.03 ms avg / 355.60 ms worst (headless)
+           INFO ragdoll on: 160 spawned, 155 alive at the end, 125 ticks, frame 123.56 ms avg / 288.60 ms worst (headless)
+ok    t98     20 pass   0 fail  76.4s
+ok    t103     6 pass   0 fail  28.5s
+ok    t102    17 pass   0 fail  74.0s
+ok    t105    15 pass   0 fail  46.1s
+           INFO 120 spawned, 120 alive after 92.9 s and 26 legs (650 ticks)
+ok    t99      6 pass   0 fail  122.9s
+ok    t104     5 pass   0 fail  66.2s
+ok    t107     8 pass   0 fail  34.4s
+ok    t108     9 pass   0 fail  36.2s
+ok    t109     5 pass   0 fail  52.5s
+ok    t110     4 pass   0 fail  36.9s
+           INFO feral head centre p10 0.732, median 0.798 of hitH (line 0.7)
+           INFO leaper head centre p10 0.559, median 0.629 of hitH (line 0.55)
+           INFO spider head centre p10 0.636, median 0.670 of hitH (line 0.6)
+ok    t111    11 pass   0 fail  46.9s
+FAIL  t106     8 pass   1 fail  118.0s
+FAIL  t112    12 pass   1 fail  61.6s
+ok    t114     8 pass   0 fail  57.9s
+ok    t113     5 pass   0 fail  84.0s
+ok    t115    10 pass   0 fail  43.4s
+ok    t116     7 pass   0 fail  44.6s
+ok    t117    17 pass   0 fail  35.0s
+ok    t121    31 pass   0 fail  16.3s
+ok    t119    19 pass   0 fail  32.4s
+ok    t120    11 pass   0 fail  34.2s
+ok    t123     3 pass   0 fail  18.3s
+ok    t122    14 pass   0 fail  28.7s
+ok    t125    10 pass   0 fail  29.7s
+ok    t124     5 pass   0 fail  33.5s
+ok    t126    12 pass   0 fail  34.0s
+ok    t129    22 pass   0 fail  25.8s
+ok    t130    14 pass   0 fail  32.4s
+ok    t127    28 pass   0 fail  59.8s
+FAIL  t128    27 pass   1 fail  82.3s
+ok    t133     9 pass   0 fail  36.9s
+ok    t131    18 pass   0 fail  62.0s
+ok    t132    11 pass   0 fail  54.7s
+ok    t135     8 pass   0 fail  30.1s
+ok    t134     9 pass   0 fail  41.7s
+ok    t137     9 pass   0 fail  30.6s
+ok    t138     6 pass   0 fail  30.2s
+ok    t140    17 pass   0 fail  25.7s
+ok    t136    36 pass   0 fail  71.3s
+ok    t139    13 pass   0 fail  55.0s
+ok    t141     7 pass   0 fail  34.6s
+ok    t142    10 pass   0 fail  59.5s
+ok    t145    17 pass   0 fail  41.7s
+ok    t144     9 pass   0 fail  61.8s
+ok    t143    17 pass   0 fail  86.8s
+ok    t146    43 pass   0 fail  50.6s
+ok    t149    16 pass   0 fail  65.0s
+ok    t148    23 pass   0 fail  84.1s
+ok    t151     7 pass   0 fail  33.3s
+ok    t150    13 pass   0 fail  79.6s
+FAIL  t147    12 pass   7 fail  135.4s
+ok    t153    15 pass   0 fail  19.5s
+ok    t154     5 pass   0 fail  31.0s
+ok    t152    27 pass   0 fail  52.9s
+FAIL  t155     4 pass   1 fail  29.6s
+ok    t158    13 pass   0 fail  16.7s
+ok    t156    34 pass   0 fail  50.6s
+ok    t157     6 pass   0 fail  38.8s
+ok    t159    10 pass   0 fail  41.0s
+ok    t161     7 pass   0 fail  19.7s
+ok    t160    11 pass   0 fail  40.2s
+ok    t162    16 pass   0 fail  31.8s
+ok    t165    11 pass   0 fail  17.0s
+ok    t163    16 pass   0 fail  39.8s
+ok    t164    14 pass   0 fail  33.0s
+ok    t167    20 pass   0 fail  22.6s
+ok    t166    11 pass   0 fail  28.7s
+ok    t169     8 pass   0 fail  25.2s
+FAIL  t168    38 pass   1 fail  62.7s
+FAIL  t171    20 pass   3 fail  69.3s
+ok    t172     7 pass   0 fail  72.1s
+FAIL  t170     7 pass  13 fail  98.6s
+ok    t173    12 pass   0 fail  47.5s
+ok    t177    10 pass   0 fail  27.5s
+ok    t174    14 pass   0 fail  60.9s
+ok    t175    25 pass   0 fail  42.4s
+ok    t176     8 pass   0 fail  38.9s
+ok    t179    27 pass   0 fail  30.5s
+ok    t180    29 pass   0 fail  38.4s
+ok    t181    21 pass   0 fail  35.9s
+FAIL  t178     6 pass   2 fail  48.3s
+FAIL  t182    29 pass   5 fail  23.9s
+ok    t183    16 pass   0 fail  32.3s
+           INFO crouch-walk slide 10.03% (at 1.47 m/s ground speed)
+ok    t184    29 pass   0 fail  38.0s
+           INFO holds: m4 4289 ms wall / 450 ms game, ak 945 ms wall / 500 ms game, aa12 782 ms wall / 500 ms game, uzi 672 ms wall / 450 ms game, shotgun 531 ms wall / 350 ms game, revolver 453 ms wall / 350 ms game, sniper 532 ms wall / 350 ms game, pistol 529 ms wall / 350 ms game, pistol 963 ms wall / 400 ms game
+ok    t185    36 pass   0 fail  50.6s
+ok    t186    34 pass   0 fail  63.2s
+ok    t187    75 pass   0 fail  85.7s
+ok    t188    91 pass   0 fail  80.1s
+ok    t190    21 pass   0 fail  42.9s
+ok    t189    26 pass   0 fail  127.0s
+ERROR t191     0 pass   0 fail  120.6s  — window.TT never appeared: no page error reported
+ERROR t192     0 pass   0 fail  120.6s  — window.TT never appeared: no page error reported
+ERROR t193     0 pass   0 fail  120.3s  — window.TT never appeared: no page error reported
+ERROR t194     0 pass   0 fail  120.4s  — window.TT never appeared: no page error reported
+ok    t198    12 pass   0 fail  28.5s
+ERROR t195     0 pass   0 fail  120.4s  — window.TT never appeared: no page error reported
+ERROR t196     0 pass   0 fail  120.3s  — window.TT never appeared: no page error reported
+ERROR t197     0 pass   0 fail  120.4s  — window.TT never appeared: no page error reported
+ok    t199    10 pass   0 fail  34.8s
+ok    t200     7 pass   0 fail  27.5s
+ok    t202    12 pass   0 fail  26.4s
+ok    t203    12 pass   0 fail  29.0s
+ok    t201    18 pass   0 fail  43.8s
+ok    t204    21 pass   0 fail  38.9s
+ok    t205    13 pass   0 fail  41.1s
+ok    t207    20 pass   0 fail  31.0s
+ok    t206    18 pass   0 fail  40.9s
+ok    t209    13 pass   0 fail  34.4s
+ok    t210     9 pass   0 fail  29.4s
+ok    t208    10 pass   0 fail  45.4s
+ok    t211    26 pass   0 fail  39.4s
+ok    t212    18 pass   0 fail  27.5s
+ok    t213    22 pass   0 fail  36.5s
+ok    t215     4 pass   0 fail  24.1s
+ok    t214    29 pass   0 fail  41.6s
+ok    t217    54 pass   0 fail  14.6s
+           INFO angular acceleration, rad/s^2: walk 190, run 796, jump 685, walk2 371, stop 646
+ok    t216    22 pass   0 fail  34.4s
+ok    t219    22 pass   0 fail  18.8s
+ok    t220    16 pass   0 fail  40.0s
+ok    t221    27 pass   0 fail  38.6s
+ok    t223    15 pass   0 fail  37.4s
+           INFO shambler  head: head 6 | chest: body 6 | legs: legs 6
+           INFO feral     head: head 6 | chest: head 2, body 4 | legs: legs 6
+           INFO brute     head: head 6 | chest: body 6 | legs: legs 6
+           INFO spider    head: head 6 | chest: body 6 | legs: -
+           INFO leaper    head: head 6 | chest: head 6 | legs: -
+           INFO colossus  head: head 6 | chest: body 6 | legs: legs 6
+ok    t222     9 pass   0 fail  94.3s
+ok    t218    44 pass   0 fail  146.6s
+
+retrying 20 failed check(s) one at a time: t39 t59 t91 t106 t112 t128 t147 t155 t168 t171 t170 t178 t182 t191 t192 t193 t194 t195 t196 t197
+FAIL  t39     14 pass   1 fail  29.4s
+ok    t59     48 pass   0 fail  53.4s
+ok    t91     18 pass   0 fail  53.1s
+ok    t106     9 pass   0 fail  81.3s
+ok    t112    13 pass   0 fail  28.2s
+ok    t128    28 pass   0 fail  67.6s
+ok    t147    19 pass   0 fail  57.9s
+ok    t155     5 pass   0 fail  28.2s
+ok    t168    39 pass   0 fail  45.7s
+ok    t171    23 pass   0 fail  35.9s
+ok    t170    20 pass   0 fail  71.8s
+FAIL  t178     6 pass   2 fail  47.9s
+FAIL  t182    29 pass   5 fail  22.7s
+ok    t191    16 pass   0 fail  34.3s
+ok    t192    10 pass   0 fail  25.8s
+           INFO on the flat, walking, the lowest sole is -0.006 m
+ok    t193    18 pass   0 fail  49.7s
+ok    t194    35 pass   0 fail  59.4s
+ok    t195    16 pass   0 fail  51.0s
+ok    t196    17 pass   0 fail  28.3s
+ok    t197     7 pass   0 fail  22.7s
+
+225 checks: 3552 pass, 8 fail, 17 flaky (failed under load, passed alone), 8 reported no assertions
+
+flaky: failed in the full run, passed when run alone (the load, not the game, until it fails alone too):
+  t59    2 fail in the full run
+  t91    4 fail in the full run
+  t106   1 fail in the full run
+  t112   1 fail in the full run
+  t128   1 fail in the full run
+  t147   7 fail in the full run
+  t155   1 fail in the full run
+  t168   1 fail in the full run
+  t170   13 fail in the full run
+  t171   3 fail in the full run
+  t191   window.TT never appeared: no page error reported
+  t192   window.TT never appeared: no page error reported
+  t193   window.TT never appeared: no page error reported
+  t194   window.TT never appeared: no page error reported
+  t195   window.TT never appeared: no page error reported
+  t196   window.TT never appeared: no page error reported
+  t197   window.TT never appeared: no page error reported
+
+no assertions (probe, or the check bailed before asserting):
+  t16    692
+  t20    -5,-15 edge0 L0 yaw 0.00 rx 0.00 rz 0.00 ch 1
+  t22    builds box 22,76 / -10,46 barrels before 6 after 12
+  t26    pieces 692 failed: 
+  t27    EMPTY WORLD visible meshes: 2154
+  t28    shambler total 13: hips:1m/1mat torso:1m/1mat armL:1m/1mat Group:1m/1mat armR:1m/1mat Group:1m/1mat 
+  t30    turret at 4.0,-12.0 y -3.17
+  t32    road pieces: wall/door@-38.0 wall/door@-24.0 wire/gate@-20.0 barricade/gate@-18.0
+
+by owner:
+  Claude (world, trees, fire, caves, water, fish)
+    t39    1 fail  FAIL it lands and lies as a log (theta 1.33 of rest 1.36)
+           FAIL it lands and lies as a log (theta 1.33 of rest 1.36)
+  unassigned
+    t178   2 fail  FAIL back up the tunnel: the calm again (end)
+           FAIL back up the tunnel: the calm again (end)
+           FAIL threw TypeError: Cannot read properties of null (reading 'damage')
+    t182   5 fail  FAIL every gun owned, Cash to spare
+           FAIL every gun owned, Cash to spare
+           FAIL three shamblers called in (0)
+           FAIL they stay in the build room while he is on the range ()
+           FAIL in the build room they come for him (Infinity m -> Infinity m)
+           FAIL clear all

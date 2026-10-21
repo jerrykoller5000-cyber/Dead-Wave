@@ -1,0 +1,81 @@
+{
+  "loadSec": 19.079,
+  "pose": {
+    "screamer": {
+      "armRange": 0.4799957286572625,
+      "elbowRange": 0.3999862474068515,
+      "kickDifference": 1.3955968905930547,
+      "chestRange": 0.05499947321231735,
+      "rootGrounded": true,
+      "restored": true,
+      "exposed": {
+        "open": 2.4,
+        "shield": false,
+        "phase": 0,
+        "weight": 0,
+        "exposure": 0.9999938557876467,
+        "hover": 6.206753699581272e-7
+      },
+      "resetRestored": true
+    },
+    "bomber": {
+      "runs": [
+        {
+          "distance": 12,
+          "cycles": 2,
+          "span": 0.08999593886710489
+        },
+        {
+          "distance": 7,
+          "cycles": 4,
+          "span": 0.23165236898955666
+        },
+        {
+          "distance": 3,
+          "cycles": 7,
+          "span": 0.4205542257628443
+        }
+      ],
+      "restored": true,
+      "hands": [
+        {
+          "side": "L",
+          "outside": true,
+          "distance": 0.053644148680696335,
+          "point": [
+            -0.6097383350100785,
+            0.009690081720520993,
+            0.4713482651955587
+          ]
+        },
+        {
+          "side": "R",
+          "outside": true,
+          "distance": 0.0398325405364216,
+          "point": [
+            0.6097383350101069,
+            0.052145253849460005,
+            0.4713482651955019
+          ]
+        }
+      ],
+      "resetRestored": true
+    }
+  },
+  "performance": {
+    "alive": 48,
+    "fps": 60.33882571338418,
+    "worst": 29,
+    "over50": 0,
+    "render": {
+      "calls": 4586,
+      "frameCalls": 15,
+      "drawCalls": 476,
+      "triangles": 674655,
+      "points": 0,
+      "lines": 0,
+      "timestamp": 0
+    }
+  },
+  "errors": []
+}

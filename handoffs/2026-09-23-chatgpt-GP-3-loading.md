@@ -1,0 +1,11 @@
+# ChatGPT — GP-3 Honest loading stages — 2026-09-23
+Changed: The opening now displays terrain, world, enemies and graphics states from DWLoad, with real per-stage counts and no synthetic overall percentage. Video, intro, boot, errors, retry and menu readiness remain controlled by the existing opening/core code.
+Files: ui/loading.js, ui/loading.css, ui/loading.test.mjs; index.html (two opening UI resource tags).
+Tests: 16/16 Node tests pass (5 loading + 11 strings). Edge/Playwright presentation checks pass for simultaneous active stages, hidden old percentage, retry and responsive layout. Actual game with repo stand-in renderer reaches real DWLoad Ready and releases the menu without forcing readiness; no page errors. Full npm test not run: shared CDP Page.enable timeout reproduced this session, CU-8/ Cursor to verify at commit.
+Screenshots: Claude outputs/shots/gp3/{before,after,terrain,world,shaders,ready,mobile,failed}.png, using alternate Playwright presentation fixture. These are UI fixtures, not real GPU world shots. tools/shoot.mjs remains blocked by CDP timeout; no --compare result claimed.
+Not verified: Real GPU cold/warm/background load budgets, frame rate, shared screenshot comparison and final CU-2 title-gate behavior remain Cursor checks.
+Requests: Cursor has the CDP failure and the narrowly scoped integration notice; carry both resource tags through the split. Recheck with CU-2's final explicit ready event.
+Contract changes: None; consumes Claude's approved DWLoad snapshot/subscribe contract. Opening UI tags approved in D-8.
+
+## Behavior
+Late subscriptions replay the latest snapshot. Duplicate/out-of-order sequences and foreign load IDs are ignored; failure/ready are terminal for that channel. Counts are validated before a determinate meter is shown. Simultaneous stages remain simultaneous. A ready snapshot is authoritative even if future background work remains, rather than guessing readiness from counts. Unknown stage details never become player-facing copy. All copy comes from ui/strings.js. Rendering is event-driven with no timer, animation loop or boot dependency. The legacy controller's percentage elements remain only as hidden compatibility targets until Cursor splits the shell.

@@ -1,0 +1,75 @@
+{
+ "mortar": {
+  "mounted": true,
+  "mount": {
+   "jumpCm": 10.43,
+   "jumpJoint": "wristL",
+   "popCm": 0
+  },
+  "fired": 1,
+  "round": "0:- 5:- 10:- 15:- 20:- 25:- 30:- 35:- 40:- 45:- 50:- 55:- 60:- 65:- 70:- 75:- 80:- 85:- 90:- 95:- 100:- 105:- 110:- 115:- 120:- 125:- 130:- 135:- 140:- 145:-",
+  "load": {
+   "jumpCm": 4.17,
+   "jumpJoint": "wristL",
+   "popCm": 0
+  },
+  "traverse": {
+   "ankleL": {
+    "maxSlipCm": 104.5,
+    "skateCm": 389.8,
+    "steps": 0,
+    "plantedFrames": 360,
+    "frames": 360
+   },
+   "ankleR": {
+    "maxSlipCm": 103.1,
+    "skateCm": 383.1,
+    "steps": 0,
+    "plantedFrames": 360,
+    "frames": 360
+   }
+  },
+  "traverseYaw": [
+   -1.22,
+   1.22
+  ],
+  "dismount": {
+   "jumpCm": 10.16,
+   "jumpJoint": "kneeR",
+   "popCm": 3.42
+  }
+ },
+ "m240": {
+  "mounted": true,
+  "mount": {
+   "jumpCm": 13.31,
+   "jumpJoint": "wristL",
+   "popCm": 1.97
+  },
+  "traverse": {
+   "ankleL": {
+    "maxSlipCm": 27.3,
+    "skateCm": 158.6,
+    "steps": 6,
+    "plantedFrames": 265,
+    "frames": 360
+   },
+   "ankleR": {
+    "maxSlipCm": 36.2,
+    "skateCm": 207.9,
+    "steps": 6,
+    "plantedFrames": 260,
+    "frames": 360
+   }
+  },
+  "traverseYaw": [
+   -1.19,
+   1.19
+  ],
+  "dismount": {
+   "jumpCm": 10.18,
+   "jumpJoint": "wristL",
+   "popCm": 7.13
+  }
+ }
+}

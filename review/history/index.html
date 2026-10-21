@@ -1,0 +1,16 @@
+<!doctype html><meta charset="utf-8"><title>valley history</title>
+<style>body{margin:24px;background:#14181f;color:#e6e6e0;font-family:Georgia,serif} h1{font-weight:normal} h2{font-weight:normal;margin:28px 0 6px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px} figure{margin:0} img{width:100%;display:block} figcaption{font-size:14px;opacity:.7;margin:4px 0}</style>
+<h1>The valley's history in things · CL-108, CL-109 · v1</h1>
+<p>Everyone who came here died, and this is what they left. The PGB: a survey board at each warren cave, FOB
+Threshold's sealed door (LOCKDOWN, clawed through) and its motto, the Cordon's chained gate where the trail meets the
+wall. The hikers: their missing posters at the trailhead, their packs, rope and headlamp at the old mine. The rangers:
+their truck at their camp, the radio still on. Coldwater: the church's shell by the old cemetery, ruined footings with
+horseshoes over their doors, a chimney, two coffins' iron bands showing and one grave burst open from below. The
+trapper: his iron-ringed cellar hatch, horseshoes and traps. FOB Threshold's fall: brass, a dropped helmet, drag marks
+toward the nearest cave. Press E by a survey board, the mine's boards, the open grave or the gate to read its note.
+Your notes go in notes.md.</p>
+<script>
+const rows = [['The PGB', ['hq-lockdown', 'cordon-gate']], ['The old mine, and a survey board', ['iron-mine', 'trailhead']], ['Coldwater', ['coldwater-church', 'open-grave']], ['The rangers and the trapper', ['ranger-truck', 'cellar-hatch']], ['FOB Threshold’s fall', ['sandbags-fall']]];
+for (const [h, ks] of rows) document.write(`<h2>${h}</h2><div class="row">` + ks.map((k) => `<figure><figcaption>${k} (v1)</figcaption><img src="v1/${k}.png"></figure>`).join('') + '</div>');
+</script>

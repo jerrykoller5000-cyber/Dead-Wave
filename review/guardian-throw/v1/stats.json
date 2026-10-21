@@ -1,0 +1,39 @@
+{
+  "version": "v1",
+  "clip": "studio/clips/guardian/throw.json",
+  "rig": "guardian",
+  "length": 1.2,
+  "frames": 72,
+  "draws": 150,
+  "triangles": 5808,
+  "budget": {
+    "draws": 160,
+    "triangles": 8000
+  },
+  "maxTurn": {
+    "rad": 0.43,
+    "joint": "shoulderL",
+    "at": 0.32
+  },
+  "footSlide": {
+    "handL": 0,
+    "handR": 0,
+    "footL": 0,
+    "footR": 0
+  },
+  "events": [
+    [
+      0.55,
+      "throw"
+    ],
+    [
+      0.843,
+      "release"
+    ]
+  ],
+  "stripFrames": 12,
+  "marked": [
+    3
+  ],
+  "renderSeconds": 35.8
+}

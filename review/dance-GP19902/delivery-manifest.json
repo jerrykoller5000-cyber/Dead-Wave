@@ -1,0 +1,32 @@
+{
+  "task": "GP-19902",
+  "duration": 60,
+  "fps": 30,
+  "width": 1280,
+  "height": 720,
+  "source": "Been Warned.mp3",
+  "sourceStart": 9.151494,
+  "moduleSha256": "3b8ecbadab3ecd11414d9a286bb8be3c19c002c570e7cdf9cc2f893c7acd0e47",
+  "files": [
+    {
+      "name": "marine-dance.mp4",
+      "bytes": 10851703,
+      "sha256": "15fb3f67061588d22eb5ce02fec0cd900552acd468ee37babbc50b5fc4fea6aa"
+    },
+    {
+      "name": "marine-dance-transparent.webm",
+      "bytes": 23941500,
+      "sha256": "6d208330e8bdc03aeea76ccc3d272430cb32867e3e13ee046c4fccc6c659688b"
+    },
+    {
+      "name": "audio-dance-60s.mp3",
+      "bytes": 1441394,
+      "sha256": "9cfd258a5829bdd0abaeb2786d51990cf837cb69b5088283222d6448d0525900"
+    },
+    {
+      "name": "outfit.json",
+      "bytes": 1444,
+      "sha256": "8e0506d7a919561f6b8bd932fdfc872dccf8d0854a15931938dbc0f3bc537aeb"
+    }
+  ]
+}

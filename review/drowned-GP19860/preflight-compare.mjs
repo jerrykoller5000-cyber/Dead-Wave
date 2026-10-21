@@ -1,0 +1,3 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import {scan,violations} from '../../tools/check-players.mjs';
+const before=violations(scan(fs.readFileSync('review/drowned-GP19860/before.html','utf8'))),after=violations(scan(fs.readFileSync('index.html','utf8')));
+const normalized=reads=>reads.map(({name,text})=>({name,text}));assert.deepEqual(normalized(after),normalized(before));const proof={before,after,unchanged:true};fs.writeFileSync('review/drowned-GP19860/preflight-compare.json',JSON.stringify(proof,null,2));console.log('PASS same '+after.length+' pre-existing mast reads before/after Drowned changes');

@@ -1,0 +1,9 @@
+#76 weapons/explosion
+TRY: synthesized and already decent; record it, compare, keep the better one
+Now: GUN boom (grenadeBoom)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 2.5 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A hand grenade exploding outdoors, a sharp deep blast with dirt and debris raining down. No music, no voice.

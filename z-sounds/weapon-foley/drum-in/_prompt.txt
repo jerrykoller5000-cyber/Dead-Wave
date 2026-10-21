@@ -1,0 +1,9 @@
+#43 weapon-foley/drum-in
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: foley drumIn
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.6 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A heavy drum magazine seated onto a shotgun, a deep metal clunk and latch. No music, no voice.

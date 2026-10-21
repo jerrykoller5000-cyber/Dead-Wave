@@ -5,3 +5,9 @@
 
 *.mp3 binary
 *.png binary
+*.jpg binary
+*.woff2 binary
+
+# Vendored third-party code is stored byte-exact: it is never edited here, and letting
+# git rewrite its line endings would show a 1.7 MB library as changed on every platform.
+vendor/** -text

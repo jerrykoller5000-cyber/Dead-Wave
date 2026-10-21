@@ -1,0 +1,3 @@
+Night 14: Fog Night
+Used for: The wave on night 14 (the fog night)
+The game plays now: assets/soundtrack/fight_fognight_sections (specials.fog)

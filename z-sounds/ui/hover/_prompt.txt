@@ -1,0 +1,9 @@
+#160 ui/hover
+MISSING: the game makes no sound here now
+Now: (silent)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.1 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A very soft tiny interface tick for hovering over a menu button. No music.

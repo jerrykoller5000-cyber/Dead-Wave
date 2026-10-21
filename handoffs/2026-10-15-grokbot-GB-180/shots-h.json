@@ -1,0 +1,114 @@
+[
+ {
+  "target": "weapon:sniper",
+  "view": "left",
+  "size": "1200x700",
+  "settle": 1500,
+  "margin": 0.9,
+  "out": "review/gb180h/after-sniper-left.png"
+ },
+ {
+  "target": "weapon:sniper",
+  "view": "three",
+  "size": "1200x700",
+  "settle": 1500,
+  "margin": 0.9,
+  "out": "review/gb180h/after-sniper-three.png"
+ },
+ {
+  "target": "weapon:aa12",
+  "view": "left",
+  "size": "1200x700",
+  "settle": 1500,
+  "margin": 0.9,
+  "out": "review/gb180h/after-aa12-left.png"
+ },
+ {
+  "target": "weapon:aa12",
+  "view": "three",
+  "size": "1200x700",
+  "settle": 1500,
+  "margin": 0.9,
+  "out": "review/gb180h/after-aa12-three.png"
+ },
+ {
+  "target": "weapon:chainsaw",
+  "view": "left",
+  "size": "1200x700",
+  "settle": 1500,
+  "margin": 0.9,
+  "out": "review/gb180h/after-chainsaw-left.png"
+ },
+ {
+  "target": "weapon:chainsaw",
+  "view": "three",
+  "size": "1200x700",
+  "settle": 1500,
+  "margin": 0.9,
+  "out": "review/gb180h/after-chainsaw-three.png"
+ },
+ {
+  "target": "weapon:mortar",
+  "view": "left",
+  "size": "1200x700",
+  "settle": 1500,
+  "margin": 0.9,
+  "out": "review/gb180h/after-mortar-left.png"
+ },
+ {
+  "target": "weapon:mortar",
+  "view": "three",
+  "size": "1200x700",
+  "settle": 1500,
+  "margin": 0.9,
+  "out": "review/gb180h/after-mortar-three.png"
+ },
+ {
+  "target": "weapon:knife",
+  "view": "left",
+  "size": "1200x700",
+  "settle": 1500,
+  "margin": 0.9,
+  "out": "review/gb180h/after-knife-left.png"
+ },
+ {
+  "target": "weapon:knife",
+  "view": "three",
+  "size": "1200x700",
+  "settle": 1500,
+  "margin": 0.9,
+  "out": "review/gb180h/after-knife-three.png"
+ },
+ {
+  "target": "weapon:machete",
+  "view": "left",
+  "size": "1200x700",
+  "settle": 1500,
+  "margin": 0.9,
+  "out": "review/gb180h/after-machete-left.png"
+ },
+ {
+  "target": "weapon:machete",
+  "view": "three",
+  "size": "1200x700",
+  "settle": 1500,
+  "margin": 0.9,
+  "out": "review/gb180h/after-machete-three.png"
+ },
+ {
+  "target": "weapon:revolver",
+  "view": "left",
+  "size": "1200x700",
+  "settle": 1500,
+  "margin": 0.9,
+  "out": "review/gb180h/after-revolver-left.png"
+ },
+ {
+  "target": "weapon:revolver",
+  "view": "three",
+  "size": "1200x700",
+  "settle": 1500,
+  "margin": 0.9,
+  "out": "review/gb180h/after-revolver-three.png"
+ }
+]

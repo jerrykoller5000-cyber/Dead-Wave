@@ -1,0 +1,268 @@
+{
+  "loadSec": 16.838,
+  "front": [
+    {
+      "hit": {
+        "t": 0.5095963474529791,
+        "zone": "front",
+        "part": "torso"
+      },
+      "damage": 6.75,
+      "armor": {
+        "front": 30,
+        "back": 40,
+        "left": 30,
+        "right": 30
+      },
+      "collapsed": false,
+      "skins": 1
+    },
+    {
+      "hit": {
+        "t": 0.5131717825361951,
+        "zone": "front",
+        "part": "torso"
+      },
+      "damage": 6.75,
+      "armor": {
+        "front": 15,
+        "back": 40,
+        "left": 30,
+        "right": 30
+      },
+      "collapsed": false,
+      "skins": 1
+    },
+    {
+      "hit": {
+        "t": 0.5121753461850934,
+        "zone": "front",
+        "part": "torso"
+      },
+      "damage": 6.75,
+      "armor": {
+        "front": 0,
+        "back": 40,
+        "left": 30,
+        "right": 30
+      },
+      "collapsed": true,
+      "skins": 1
+    },
+    {
+      "hit": {
+        "t": 0.4521390233162492,
+        "zone": "exposed",
+        "part": "armR"
+      },
+      "damage": 13.5,
+      "armor": {
+        "front": 0,
+        "back": 40,
+        "left": 30,
+        "right": 30
+      },
+      "collapsed": true,
+      "skins": 1
+    }
+  ],
+  "surface": [
+    {
+      "name": "side",
+      "expected": 4.5,
+      "hit": {
+        "t": 0.4686261918858993,
+        "zone": "left",
+        "part": "armL"
+      },
+      "damage": 4.5,
+      "headLost": false
+    },
+    {
+      "name": "back",
+      "expected": 4.5,
+      "hit": {
+        "t": 0.5010821107775504,
+        "zone": "back",
+        "part": "torso"
+      },
+      "damage": 4.5,
+      "headLost": false
+    },
+    {
+      "name": "arm",
+      "expected": 9,
+      "hit": {
+        "t": 0.46283610583751444,
+        "zone": "exposed",
+        "part": "armL"
+      },
+      "damage": 9,
+      "headLost": false
+    },
+    {
+      "name": "leg",
+      "expected": 9,
+      "hit": {
+        "t": 0.469109452144437,
+        "zone": "exposed",
+        "part": "legL"
+      },
+      "damage": 9,
+      "headLost": false
+    },
+    {
+      "name": "head",
+      "expected": 16.65,
+      "hit": {
+        "t": 0.4605662460806836,
+        "zone": "exposed",
+        "part": "head"
+      },
+      "damage": 9999,
+      "headLost": true
+    }
+  ],
+  "blast": {
+    "damage": 72,
+    "armor": {
+      "front": 0,
+      "back": 0,
+      "left": 0,
+      "right": 0
+    },
+    "collapsed": true
+  },
+  "pool": {
+    "same": true,
+    "armor": {
+      "front": 45,
+      "back": 40,
+      "left": 30,
+      "right": 30
+    },
+    "restored": true,
+    "finite": true,
+    "skins": 1
+  },
+  "demolition": {
+    "events": [
+      {
+        "t": 0.35519999998807905,
+        "phase": "align",
+        "mode": "build",
+        "wallHp": 130
+      },
+      {
+        "t": 0.3712999999821186,
+        "phase": "wind",
+        "mode": "build",
+        "wallHp": 130
+      },
+      {
+        "t": 1.5863999999761582,
+        "phase": "strike",
+        "mode": "build",
+        "wallHp": 130
+      },
+      {
+        "t": 1.834699999988079,
+        "phase": "recover",
+        "mode": "build",
+        "wallHp": 70
+      },
+      {
+        "t": 2.485699999988079,
+        "phase": "idle",
+        "mode": "build",
+        "wallHp": 70
+      },
+      {
+        "t": 2.5690999999940396,
+        "phase": "align",
+        "mode": "build",
+        "wallHp": 70
+      },
+      {
+        "t": 2.5852999999821185,
+        "phase": "wind",
+        "mode": "build",
+        "wallHp": 70
+      },
+      {
+        "t": 3.3703999999761582,
+        "phase": "strike",
+        "mode": "build",
+        "wallHp": 70
+      },
+      {
+        "t": 3.619899999976158,
+        "phase": "recover",
+        "mode": "build",
+        "wallHp": 10
+      },
+      {
+        "t": 4.269699999988079,
+        "phase": "idle",
+        "mode": "build",
+        "wallHp": 10
+      },
+      {
+        "t": 4.370099999994039,
+        "phase": "align",
+        "mode": "build",
+        "wallHp": 10
+      },
+      {
+        "t": 4.386799999982118,
+        "phase": "wind",
+        "mode": "build",
+        "wallHp": 10
+      },
+      {
+        "t": 5.170199999988079,
+        "phase": "strike",
+        "mode": "build",
+        "wallHp": 10
+      },
+      {
+        "t": 5.320699999988079,
+        "phase": "miss",
+        "mode": "build",
+        "wallHp": -50
+      },
+      {
+        "t": 6.4535,
+        "phase": "idle",
+        "mode": "build",
+        "wallHp": -50
+      },
+      {
+        "t": 6.47,
+        "phase": "wind",
+        "mode": "player",
+        "wallHp": -50
+      }
+    ],
+    "firstDamage": 1.7025,
+    "wallHp": -50,
+    "travel": 0.09999999999990905,
+    "playerHp": 100
+  },
+  "cancel": {
+    "before": "wind",
+    "after": "miss",
+    "wallHp": 130
+  },
+  "movingHead": {
+    "phase": "miss",
+    "hit": {
+      "t": 0.46117818260545246,
+      "zone": "exposed",
+      "part": "head"
+    },
+    "headY": 1.4802200074086898,
+    "oldLine": 2.09346
+  },
+  "errors": []
+}

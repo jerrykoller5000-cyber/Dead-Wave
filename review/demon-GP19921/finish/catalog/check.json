@@ -1,0 +1,20 @@
+{
+ "at": "2026-10-15T07:03:51.455Z",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "results": [
+  {
+   "id": "zombie.demon",
+   "variant": null,
+   "mode": "statue",
+   "ok": true,
+   "ms": 195,
+   "tris": 13540,
+   "size": [
+    2.036,
+    3.143,
+    1.11
+   ],
+   "error": null
+  }
+ ]
+}

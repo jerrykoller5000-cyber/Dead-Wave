@@ -1,0 +1,218 @@
+{
+  "loadSec": 21.425,
+  "loaded": {
+    "takes": [
+      [
+        "build-attacks/wire-hit",
+        1
+      ],
+      [
+        "training/alarm",
+        1
+      ],
+      [
+        "weapons/rotary-gun",
+        1
+      ]
+    ],
+    "door": {
+      "ready": true,
+      "seconds": 0.5973333333333334,
+      "plays": 0,
+      "active": 0
+    },
+    "mix": {
+      "ctx": "running",
+      "weap": 1.350000023841858,
+      "fx": 0.800000011920929,
+      "amb": 0,
+      "musicDuck": 1,
+      "rain": null
+    }
+  },
+  "levels": {
+    "old": {
+      "rms": 0.013410138780912023,
+      "peak": 0.06726296246051788,
+      "frames": 34,
+      "state": "running"
+    },
+    "minigun": {
+      "rms": 0.021034500925074105,
+      "peak": 0.1150897964835167,
+      "frames": 34,
+      "state": "running"
+    }
+  },
+  "bump": {
+    "position": [
+      -40,
+      -200,
+      -647.4300000000001
+    ],
+    "facility": {
+      "up": 0,
+      "down": 0,
+      "bump": 1,
+      "shot": 0,
+      "moving": false
+    },
+    "wirePlays": 1
+  },
+  "alive": {
+    "active": true,
+    "amount": 1,
+    "pulse": 0.9981812688977267,
+    "angle": 5.226819999939199,
+    "lights": 3,
+    "color": 16751154,
+    "red": 16751154,
+    "fill": 9.489996978937498
+  },
+  "death": {
+    "wake": true,
+    "danger": {
+      "active": true,
+      "amount": 1,
+      "pulse": 0.27138567770112165,
+      "angle": 7.952939999878411,
+      "lights": 3,
+      "color": 16724004,
+      "red": 16724004,
+      "fill": 5.492621227356169
+    },
+    "facility": {
+      "up": 0,
+      "down": 0,
+      "bump": 1,
+      "shot": 7,
+      "moving": true
+    },
+    "beds": [
+      {
+        "key": "wind-day",
+        "id": "world/wind-day",
+        "level": 0.13,
+        "pulse": false
+      },
+      {
+        "key": "training-containment",
+        "id": "weapons/rotary-gun",
+        "level": 1.397,
+        "pulse": false
+      }
+    ],
+    "alarmBefore": 0,
+    "alarmAfter": 1,
+    "shots": 21
+  },
+  "bed": {
+    "wake": true,
+    "alive": 0,
+    "danger": {
+      "active": true,
+      "amount": 1,
+      "pulse": 0.9445232907833117,
+      "angle": 26.12151999993916,
+      "lights": 3,
+      "color": 16724004,
+      "red": 16724004,
+      "fill": 9.194878099308214
+    },
+    "facility": {
+      "up": 0,
+      "down": 1,
+      "bump": 1,
+      "shot": 77,
+      "moving": false
+    },
+    "door": {
+      "ready": true,
+      "seconds": 0.5973333333333334,
+      "plays": 2,
+      "active": 0
+    },
+    "beds": [
+      {
+        "key": "wind-day",
+        "id": "world/wind-day",
+        "level": 0.13,
+        "pulse": false
+      }
+    ],
+    "shots": 308
+  },
+  "revive": {
+    "wake": false,
+    "danger": {
+      "active": false,
+      "amount": 0,
+      "pulse": 0.9594662845020009,
+      "angle": 34.422959999918994,
+      "lights": 3,
+      "color": 16751154,
+      "red": 16777215,
+      "fill": 0
+    },
+    "facility": {
+      "up": 0,
+      "down": 1,
+      "bump": 1,
+      "shot": 77,
+      "moving": false
+    },
+    "fence": {
+      "raised": false,
+      "amount": 0,
+      "awaitExit": true
+    }
+  },
+  "raise": {
+    "near": 0,
+    "before": 2,
+    "facility": {
+      "up": 1,
+      "down": 1,
+      "bump": 1,
+      "shot": 77,
+      "moving": false
+    },
+    "door": {
+      "ready": true,
+      "seconds": 0.5973333333333334,
+      "plays": 3,
+      "active": 0
+    },
+    "fence": {
+      "raised": true,
+      "amount": 1,
+      "awaitExit": false
+    }
+  },
+  "muteExit": {
+    "before": {
+      "up": 1,
+      "down": 1,
+      "bump": 1,
+      "shot": 77,
+      "moving": false
+    },
+    "muted": {
+      "up": 1,
+      "down": 1,
+      "bump": 1,
+      "shot": 77,
+      "moving": false
+    },
+    "enabled": false,
+    "beds": [
+      {
+        "key": "wind-day",
+        "id": "world/wind-day",
+        "level": 0.13,
+        "pulse": false
+      }
+    ]
+  },
+  "errors": []
+}

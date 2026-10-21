@@ -1,0 +1,34 @@
+{
+  "format": "dw-hand-path/1",
+  "name": "reload-rifle",
+  "note": "CL-84 part 2: the marine's magazine change for the mag-fed long guns (GW-4, KR-7, Breacher-12). The support hand's path as keys over the reload (t is 0..1 of the gun's reload time), each key a named place on the marine or the gun plus an offset in the marine's own axes (x his side the support hand is on, y up, z forward), in metres. The game turns the places into points every frame and runs a smooth curve through them; the arm reaches it by IK. mag says what the magazine does from that time on.",
+  "weapons": ["m4", "ak", "aa12"],
+  "places": {
+    "fore": "the gun's support grip (WEAPON_HOLD fore)",
+    "well": "the seated magazine's foot, where the palm strips it and pushes the new one home",
+    "pouch": "the top of a magazine pouch on the support side: the carrier's when he wears it, else the belt's",
+    "below": "the new magazine lined up under the well: the seated magazine's foot, 0.1 m further down the gun"
+  },
+  "hand": [
+    { "t": 0.00, "at": "fore" },
+    { "t": 0.10, "at": "well", "off": [0, -0.02, 0] },
+    { "t": 0.16, "at": "well", "off": [0.03, -0.07, 0.02] },
+    { "t": 0.25, "at": "pouch", "off": [0.04, 0.05, 0.14] },
+    { "t": 0.32, "at": "pouch", "off": [0, 0.02, 0.03] },
+    { "t": 0.37, "at": "pouch", "off": [0, 0.06, 0.05] },
+    { "t": 0.45, "at": "below", "off": [0.03, -0.06, 0.08] },
+    { "t": 0.52, "at": "below" },
+    { "t": 0.60, "at": "well" },
+    { "t": 0.64, "at": "well", "off": [0, 0.025, 0] },
+    { "t": 0.70, "at": "well", "off": [0, -0.01, 0] },
+    { "t": 0.88, "at": "fore" },
+    { "t": 1.00, "at": "fore" }
+  ],
+  "mag": [
+    { "t": 0.00, "do": "seated" },
+    { "t": 0.08, "do": "drop" },
+    { "t": 0.22, "do": "gone" },
+    { "t": 0.33, "do": "hand" },
+    { "t": 0.60, "do": "seated" }
+  ]
+}

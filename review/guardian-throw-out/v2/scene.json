@@ -1,0 +1,134 @@
+{
+  "format": "dw-scene/1",
+  "name": "guardian-throw-out",
+  "task": "CL-62",
+  "notes": "CL-62: the aftermath. The guardian walks out of its cave on its hind legs with what is left of the marine carried low in both hands (the carry clip), sets its feet, hauls him back over its head and throws him out onto the apron (the throw clip; the hold lets go at the clip's release event, so he flies with the hands). He is a simulated body the whole way (studio/motion.js, the marine preset), dead from the start: carried, he hangs from the chest between the hands; thrown, he tumbles, lands and settles. Scene +Z is out of the cave; the game lays the path from the real mouth.",
+  "length": 5.4,
+  "paths": {
+    "out": {
+      "points": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          6
+        ]
+      ],
+      "speed": [
+        [
+          0,
+          0
+        ],
+        [
+          0.3,
+          2.4,
+          "inout"
+        ],
+        [
+          1.4,
+          2.4
+        ],
+        [
+          1.9,
+          0,
+          "inout"
+        ]
+      ]
+    }
+  },
+  "actors": {
+    "marine": {
+      "rig": "marine",
+      "at": [
+        0,
+        0,
+        1.1
+      ],
+      "rise": [
+        [
+          0,
+          0.44
+        ]
+      ],
+      "face": 90,
+      "clips": [
+        [
+          0,
+          "marine/lie",
+          {
+            "loop": true
+          }
+        ]
+      ],
+      "motion": "marine/marine",
+      "kill": [
+        0,
+        {
+          "at": "chest",
+          "dir": [
+            0,
+            -1,
+            0
+          ],
+          "power": 0
+        }
+      ]
+    },
+    "guardian": {
+      "rig": "guardian",
+      "path": "out",
+      "clips": [
+        [
+          0,
+          "guardian/carry",
+          {
+            "loop": true,
+            "stride": 2.34
+          }
+        ],
+        [
+          1.9,
+          "guardian/throw",
+          {
+            "fade": 0.2
+          }
+        ]
+      ]
+    }
+  },
+  "holds": [
+    {
+      "from": "guardian.handR",
+      "fromAlso": "guardian.handL",
+      "to": "marine.chest",
+      "limp": [
+        [
+          0,
+          1
+        ],
+        [
+          2.73,
+          1
+        ],
+        [
+          2.743,
+          0
+        ]
+      ]
+    }
+  ],
+  "checks": {
+    "gap": 0.06,
+    "slide": 0.08,
+    "speed": {
+      "guardian": [
+        0,
+        3
+      ]
+    }
+  }
+}

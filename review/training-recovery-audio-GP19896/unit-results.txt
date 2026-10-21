@@ -1,0 +1,40 @@
+✔ a fast roll stops at the physical counter, ignoring display weapons and invisible props (3.2169ms)
+✔ approach remains in range of the Armory E interaction (0.4912ms)
+✔ moving along the front or past either side stays free (0.4822ms)
+✔ landing inside ejects out of the cabinet, and motion above it is free (0.4077ms)
+✔ enclosure starts raised on the two open edges, joins both room walls and stays batched (10.0022ms)
+✔ recovery lowers immediately and does not rise until the player is over two feet outside (2.7613ms)
+✔ scripted recovery, pause, another floor and invalid elapsed time cannot close the enclosure (1.6697ms)
+✔ sprint/roll cannot enter or tunnel across a raised bay; walking away remains free (1.8239ms)
+✔ zombies are kept out, ejected toward open space if already inside, and slide around the corner (2.0299ms)
+✔ a body inside the rear corner is ejected to an open edge instead of into the room wall (1.4782ms)
+✔ reset and repeated visits cannot duplicate solids or leave the fence down (1.2217ms)
+✔ medical furniture no longer belongs to the south-wall fade batch (64.2977ms)
+✔ walking into the stretcher stops outside the frame, including player width (1.1717ms)
+✔ a roll cannot tunnel through the whole bed when its endpoint is beyond it (0.1611ms)
+✔ diagonal approach preserves sideways sliding, and tangent motion does not snag corners (0.235ms)
+✔ exact diagonal corner contact cannot pass into furniture (0.1329ms)
+✔ landing or loading inside furniture ejects into the open aisle, not the wall (0.1858ms)
+✔ IV stand and oxygen cylinder block bodies but the recovery stand point stays free (0.1344ms)
+✔ objects are constrained only where the body overlaps their vertical range (0.142ms)
+✔ walking away after contact is unrestricted and unrelated room positions remain clear (0.1333ms)
+✔ the sagging spare cot also blocks walking without enclosing the infirmary floor (0.1332ms)
+✔ standing on the front side permits use; the equally near opposite side does not (0.7939ms)
+✔ a different floor or a distant player cannot operate the switch (0.1159ms)
+✔ rotated controls use their actual facing direction, not a fixed room side (0.1124ms)
+✔ a closed shutter between player and control blocks reaching around a corner (0.2089ms)
+✔ flush controls remain usable despite their thick architectural wall proxy (0.1393ms)
+✔ missing or invalid control coordinates cannot create an action (0.1206ms)
+✔ encounter pulses and rotates after gate release, pause freezes it, clear restores light materials (3.749ms)
+✔ clear respects manual lights off; reset removes red state without removing pooled lamps (0.7648ms)
+✔ fence sounds only actual motion, no startup/reset or duplicate lowering sounds (9.6644ms)
+✔ contact is paced, four turrets share a motor, shot accents continue, pause and exit stop it (0.6727ms)
+✔ death uses red on tubes, gate and rotating beams until recovery ends with no zombies (3.0409ms)
+ℹ tests 32
+ℹ suites 0
+ℹ pass 32
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 213.8511

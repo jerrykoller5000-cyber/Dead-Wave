@@ -1,0 +1,9 @@
+#79 guardian-slam
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 1.5 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A massive monster slamming its fists into the ground: a deep heavy impact, cracking earth and falling rocks. No words, no music.
+
+In the game: AudioSys.bossSlam()

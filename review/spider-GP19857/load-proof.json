@@ -1,0 +1,18 @@
+[
+  {
+    "mode": "after",
+    "loadSec": 17.367,
+    "initial": 1.5707963267948966,
+    "expected": 1.5707963267948966,
+    "errors": [],
+    "pageErrors": []
+  },
+  {
+    "mode": "before",
+    "loadSec": 17.153,
+    "initial": 2.3178816554300914,
+    "expected": 1.5707963267948966,
+    "errors": [],
+    "pageErrors": []
+  }
+]

@@ -1,0 +1,443 @@
+{
+  "out": [
+    "PASS stock all eleven firearms, no duplicates/melee",
+    "PASS stock minigun original weapon scale",
+    "PASS stock minigun within cabinet",
+    "PASS stock m4 original weapon scale",
+    "PASS stock m4 within cabinet",
+    "PASS stock ak original weapon scale",
+    "PASS stock ak within cabinet",
+    "PASS stock shotgun original weapon scale",
+    "PASS stock shotgun within cabinet",
+    "PASS stock aa12 original weapon scale",
+    "PASS stock aa12 within cabinet",
+    "PASS stock sniper original weapon scale",
+    "PASS stock sniper within cabinet",
+    "PASS stock launcher original weapon scale",
+    "PASS stock launcher within cabinet",
+    "PASS stock flamer original weapon scale",
+    "PASS stock flamer within cabinet",
+    "PASS stock pistol original weapon scale",
+    "PASS stock pistol within cabinet",
+    "PASS stock uzi original weapon scale",
+    "PASS stock uzi within cabinet",
+    "PASS stock revolver original weapon scale",
+    "PASS stock revolver within cabinet",
+    "PASS stock separate minigun/m4",
+    "PASS stock separate minigun/ak",
+    "PASS stock separate minigun/shotgun",
+    "PASS stock separate minigun/aa12",
+    "PASS stock separate minigun/sniper",
+    "PASS stock separate minigun/launcher",
+    "PASS stock separate minigun/flamer",
+    "PASS stock separate minigun/pistol",
+    "PASS stock separate minigun/uzi",
+    "PASS stock separate minigun/revolver",
+    "PASS stock separate m4/ak",
+    "PASS stock separate m4/shotgun",
+    "PASS stock separate m4/aa12",
+    "PASS stock separate m4/sniper",
+    "PASS stock separate m4/launcher",
+    "PASS stock separate m4/flamer",
+    "PASS stock separate m4/pistol",
+    "PASS stock separate m4/uzi",
+    "PASS stock separate m4/revolver",
+    "PASS stock separate ak/shotgun",
+    "PASS stock separate ak/aa12",
+    "PASS stock separate ak/sniper",
+    "PASS stock separate ak/launcher",
+    "PASS stock separate ak/flamer",
+    "PASS stock separate ak/pistol",
+    "PASS stock separate ak/uzi",
+    "PASS stock separate ak/revolver",
+    "PASS stock separate shotgun/aa12",
+    "PASS stock separate shotgun/sniper",
+    "PASS stock separate shotgun/launcher",
+    "PASS stock separate shotgun/flamer",
+    "PASS stock separate shotgun/pistol",
+    "PASS stock separate shotgun/uzi",
+    "PASS stock separate shotgun/revolver",
+    "PASS stock separate aa12/sniper",
+    "PASS stock separate aa12/launcher",
+    "PASS stock separate aa12/flamer",
+    "PASS stock separate aa12/pistol",
+    "PASS stock separate aa12/uzi",
+    "PASS stock separate aa12/revolver",
+    "PASS stock separate sniper/launcher",
+    "PASS stock separate sniper/flamer",
+    "PASS stock separate sniper/pistol",
+    "PASS stock separate sniper/uzi",
+    "PASS stock separate sniper/revolver",
+    "PASS stock separate launcher/flamer",
+    "PASS stock separate launcher/pistol",
+    "PASS stock separate launcher/uzi",
+    "PASS stock separate launcher/revolver",
+    "PASS stock separate flamer/pistol",
+    "PASS stock separate flamer/uzi",
+    "PASS stock separate flamer/revolver",
+    "PASS stock separate pistol/uzi",
+    "PASS stock separate pistol/revolver",
+    "PASS stock separate uzi/revolver",
+    "PASS stock Training mirror matches",
+    "PASS stock both displays excluded from gameplay ray tests",
+    "PASS stock refresh leaves ammo/inventory/loadout unchanged",
+    "PASS upgraded refresh leaves inventory unchanged",
+    "PASS all attachments minigun within cabinet",
+    "PASS all attachments m4 within cabinet",
+    "PASS all attachments ak within cabinet",
+    "PASS all attachments shotgun within cabinet",
+    "PASS all attachments aa12 within cabinet",
+    "PASS all attachments sniper within cabinet",
+    "PASS all attachments launcher within cabinet",
+    "PASS all attachments flamer within cabinet",
+    "PASS all attachments pistol within cabinet",
+    "PASS all attachments uzi within cabinet",
+    "PASS all attachments revolver within cabinet",
+    "PASS attachments separate minigun/m4",
+    "PASS attachments separate minigun/ak",
+    "PASS attachments separate minigun/shotgun",
+    "PASS attachments separate minigun/aa12",
+    "PASS attachments separate minigun/sniper",
+    "PASS attachments separate minigun/launcher",
+    "PASS attachments separate minigun/flamer",
+    "PASS attachments separate minigun/pistol",
+    "PASS attachments separate minigun/uzi",
+    "PASS attachments separate minigun/revolver",
+    "PASS attachments separate m4/ak",
+    "PASS attachments separate m4/shotgun",
+    "PASS attachments separate m4/aa12",
+    "PASS attachments separate m4/sniper",
+    "PASS attachments separate m4/launcher",
+    "PASS attachments separate m4/flamer",
+    "PASS attachments separate m4/pistol",
+    "PASS attachments separate m4/uzi",
+    "PASS attachments separate m4/revolver",
+    "PASS attachments separate ak/shotgun",
+    "PASS attachments separate ak/aa12",
+    "PASS attachments separate ak/sniper",
+    "PASS attachments separate ak/launcher",
+    "PASS attachments separate ak/flamer",
+    "PASS attachments separate ak/pistol",
+    "PASS attachments separate ak/uzi",
+    "PASS attachments separate ak/revolver",
+    "PASS attachments separate shotgun/aa12",
+    "PASS attachments separate shotgun/sniper",
+    "PASS attachments separate shotgun/launcher",
+    "PASS attachments separate shotgun/flamer",
+    "PASS attachments separate shotgun/pistol",
+    "PASS attachments separate shotgun/uzi",
+    "PASS attachments separate shotgun/revolver",
+    "PASS attachments separate aa12/sniper",
+    "PASS attachments separate aa12/launcher",
+    "PASS attachments separate aa12/flamer",
+    "PASS attachments separate aa12/pistol",
+    "PASS attachments separate aa12/uzi",
+    "PASS attachments separate aa12/revolver",
+    "PASS attachments separate sniper/launcher",
+    "PASS attachments separate sniper/flamer",
+    "PASS attachments separate sniper/pistol",
+    "PASS attachments separate sniper/uzi",
+    "PASS attachments separate sniper/revolver",
+    "PASS attachments separate launcher/flamer",
+    "PASS attachments separate launcher/pistol",
+    "PASS attachments separate launcher/uzi",
+    "PASS attachments separate launcher/revolver",
+    "PASS attachments separate flamer/pistol",
+    "PASS attachments separate flamer/uzi",
+    "PASS attachments separate flamer/revolver",
+    "PASS attachments separate pistol/uzi",
+    "PASS attachments separate pistol/revolver",
+    "PASS attachments separate uzi/revolver"
+  ],
+  "stock": [
+    {
+      "k": "minigun",
+      "min": [
+        -1.0832543843984603,
+        0.96,
+        0.4
+      ],
+      "max": [
+        -0.5711877220869064,
+        2.2360000228881836,
+        0.7934337198734285
+      ]
+    },
+    {
+      "k": "m4",
+      "min": [
+        -0.4961877220869064,
+        0.96,
+        0.4
+      ],
+      "max": [
+        -0.08586772322654723,
+        2.383240005970001,
+        0.5201520040631298
+      ]
+    },
+    {
+      "k": "ak",
+      "min": [
+        -0.010867723226547221,
+        0.96,
+        0.4
+      ],
+      "max": [
+        0.39669228255748756,
+        2.4237200236320495,
+        0.5315599977970128
+      ]
+    },
+    {
+      "k": "shotgun",
+      "min": [
+        0.4716922825574875,
+        0.96,
+        0.4
+      ],
+      "max": [
+        0.7326550370454789,
+        2.335599980354309,
+        0.5434500068426136
+      ]
+    },
+    {
+      "k": "aa12",
+      "min": [
+        0.8076550370454789,
+        0.96,
+        0.4
+      ],
+      "max": [
+        1.3431550270318986,
+        2.3532000398635864,
+        0.6790000140666965
+      ]
+    },
+    {
+      "k": "sniper",
+      "min": [
+        1.4181550270318986,
+        0.96,
+        0.4
+      ],
+      "max": [
+        1.780715031027794,
+        2.5677600121498108,
+        0.5852400004863743
+      ]
+    },
+    {
+      "k": "launcher",
+      "min": [
+        1.8557150310277941,
+        0.96,
+        0.39999999999999997
+      ],
+      "max": [
+        2.2402543967962267,
+        2.0511200046539306,
+        0.6704800069332125
+      ]
+    },
+    {
+      "k": "flamer",
+      "min": [
+        2.315254396796227,
+        0.96,
+        0.4
+      ],
+      "max": [
+        2.603254384398461,
+        2.053999981880188,
+        0.6599999904632571
+      ]
+    },
+    {
+      "k": "pistol",
+      "min": [
+        -0.40713886678218847,
+        3.1585731694102286,
+        0.4
+      ],
+      "max": [
+        0.02388613164424891,
+        3.521426830589771,
+        0.4792749971151353
+      ]
+    },
+    {
+      "k": "uzi",
+      "min": [
+        0.34388613164424897,
+        3.0791550317406653,
+        0.4
+      ],
+      "max": [
+        1.0693861192464829,
+        3.6008449682593344,
+        0.5324925124645234
+      ]
+    },
+    {
+      "k": "revolver",
+      "min": [
+        1.389386119246483,
+        3.1744186842441557,
+        0.4
+      ],
+      "max": [
+        1.9271388667821885,
+        3.505581315755844,
+        0.5213603019714356
+      ]
+    }
+  ],
+  "upgraded": [
+    {
+      "k": "minigun",
+      "min": [
+        -1.2264603996276855,
+        0.96,
+        0.4
+      ],
+      "max": [
+        -0.7143937373161315,
+        2.2360000228881836,
+        0.795516932010651
+      ]
+    },
+    {
+      "k": "m4",
+      "min": [
+        -0.6393937373161316,
+        0.96,
+        0.4
+      ],
+      "max": [
+        -0.14174734592437743,
+        2.4862800455093383,
+        0.5201520040631298
+      ]
+    },
+    {
+      "k": "ak",
+      "min": [
+        -0.06674734592437748,
+        0.96,
+        0.4
+      ],
+      "max": [
+        0.45170947074890133,
+        2.571840009689331,
+        0.5315599977970128
+      ]
+    },
+    {
+      "k": "shotgun",
+      "min": [
+        0.5267094707489013,
+        0.96,
+        0.4
+      ],
+      "max": [
+        0.7886222338676452,
+        2.6566999769210815,
+        0.5482000052928927
+      ]
+    },
+    {
+      "k": "aa12",
+      "min": [
+        0.8636222338676451,
+        0.96,
+        0.4
+      ],
+      "max": [
+        1.4298122382164,
+        2.3532000398635864,
+        0.7403800129890445
+      ]
+    },
+    {
+      "k": "sniper",
+      "min": [
+        1.5048122382164002,
+        0.96,
+        0.4
+      ],
+      "max": [
+        1.923921046257019,
+        2.7525599813461303,
+        0.5852400004863743
+      ]
+    },
+    {
+      "k": "launcher",
+      "min": [
+        1.9989210462570193,
+        0.96,
+        0.39999999999999997
+      ],
+      "max": [
+        2.383460412025452,
+        2.0511200046539306,
+        0.6704800069332125
+      ]
+    },
+    {
+      "k": "flamer",
+      "min": [
+        2.458460412025452,
+        0.96,
+        0.4
+      ],
+      "max": [
+        2.746460399627686,
+        2.053999981880188,
+        0.6599999904632571
+      ]
+    },
+    {
+      "k": "pistol",
+      "min": [
+        -0.54020139336586,
+        3.1251440906524657,
+        0.4
+      ],
+      "max": [
+        0.029948624372482247,
+        3.554855909347534,
+        0.4792749971151353
+      ]
+    },
+    {
+      "k": "uzi",
+      "min": [
+        0.3499486243724823,
+        3.0170941615104674,
+        0.4
+      ],
+      "max": [
+        1.2024486458301544,
+        3.6629058384895323,
+        0.5324925124645236
+      ]
+    },
+    {
+      "k": "revolver",
+      "min": [
+        1.5224486458301545,
+        3.1744186842441557,
+        0.4
+      ],
+      "max": [
+        2.06020139336586,
+        3.505581315755844,
+        0.5213603019714356
+      ]
+    }
+  ],
+  "meshes": 105
+}

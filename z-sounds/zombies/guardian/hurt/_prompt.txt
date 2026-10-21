@@ -1,0 +1,9 @@
+#67 guardian-hurt
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 0.6 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A monstrous beast's short pained snarl and yelp when shot. Close-up, dry. No words, no music.
+
+In the game: zombieVoice('guardian', 'hurt')

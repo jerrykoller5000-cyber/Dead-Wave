@@ -1,0 +1,9 @@
+#9 feral-hurt
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 0.5 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A sharp, angry yelp-snarl from a feral zombie hit by a bullet, short and hoarse. Close-up, dry. No words, no music.
+
+In the game: zombieVoice('feral', 'hurt')

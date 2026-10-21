@@ -1,0 +1,8 @@
+[
+ {
+  "old": "    await wait(1600); key('keyup');",
+  "new": [
+   "    await until(() => T.boardingDbg().won, 15000); key('keyup');   // GB-186: the hold runs on game time"
+  ]
+ }
+]

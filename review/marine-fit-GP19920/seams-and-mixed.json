@@ -1,0 +1,277 @@
+{
+  "loadSec": 10.898,
+  "checks": [
+    {
+      "side": "L",
+      "angle": 0,
+      "gap": 3.4343698340513733e-9
+    },
+    {
+      "side": "L",
+      "angle": 0.5,
+      "gap": 4.731409518652911e-9
+    },
+    {
+      "side": "L",
+      "angle": 1,
+      "gap": 5.091986432856794e-9
+    },
+    {
+      "side": "L",
+      "angle": -0.7,
+      "gap": 7.648251742399638e-9
+    },
+    {
+      "side": "R",
+      "angle": 0,
+      "gap": 2.08941526900175e-9
+    },
+    {
+      "side": "R",
+      "angle": 0.5,
+      "gap": 4.797723906623217e-9
+    },
+    {
+      "side": "R",
+      "angle": 1,
+      "gap": 5.279760278283168e-9
+    },
+    {
+      "side": "R",
+      "angle": -0.7,
+      "gap": 7.457228816314757e-9
+    }
+  ],
+  "mixed": [
+    {
+      "secondary": [
+        "pistol",
+        "revolver"
+      ],
+      "slots": [
+        {
+          "kind": "pistol",
+          "position": [
+            0.105,
+            0.46,
+            -0.36925732235757674
+          ],
+          "shellVisible": true
+        },
+        {
+          "kind": "revolver",
+          "position": [
+            0.105,
+            0.15000000000000005,
+            -0.3787595996480648
+          ],
+          "shellVisible": true
+        },
+        {
+          "kind": "revolver",
+          "position": [
+            -0.105,
+            0.15000000000000005,
+            -0.3794395996480533
+          ],
+          "shellVisible": true
+        }
+      ]
+    },
+    {
+      "secondary": [
+        "revolver",
+        "pistol"
+      ],
+      "slots": [
+        {
+          "kind": "revolver",
+          "position": [
+            0.105,
+            0.46,
+            -0.3787595996481785
+          ],
+          "shellVisible": true
+        },
+        {
+          "kind": "pistol",
+          "position": [
+            0.105,
+            0.15000000000000005,
+            -0.36925732235757674
+          ],
+          "shellVisible": true
+        },
+        {
+          "kind": "revolver",
+          "position": [
+            -0.105,
+            0.46,
+            -0.3794395996480533
+          ],
+          "shellVisible": true
+        }
+      ]
+    },
+    {
+      "secondary": [
+        "uzi",
+        "revolver"
+      ],
+      "slots": [
+        {
+          "kind": "uzi",
+          "position": [
+            0.12,
+            0.44999999999999996,
+            -0.3909663243738929
+          ],
+          "shellVisible": false
+        },
+        {
+          "kind": "revolver",
+          "position": [
+            0.105,
+            0.17000000000000004,
+            -0.3787595996481785
+          ],
+          "shellVisible": true
+        },
+        {
+          "kind": "uzi",
+          "position": [
+            -0.12,
+            0.44999999999999996,
+            -0.4089663243739761
+          ],
+          "shellVisible": false
+        },
+        {
+          "kind": "revolver",
+          "position": [
+            -0.105,
+            0.17000000000000004,
+            -0.3794395996480533
+          ],
+          "shellVisible": true
+        }
+      ]
+    },
+    {
+      "secondary": [
+        "revolver",
+        "uzi"
+      ],
+      "slots": [
+        {
+          "kind": "revolver",
+          "position": [
+            0.105,
+            0.17000000000000004,
+            -0.3787595996481785
+          ],
+          "shellVisible": true
+        },
+        {
+          "kind": "uzi",
+          "position": [
+            0.12,
+            0.44999999999999996,
+            -0.3909663243738929
+          ],
+          "shellVisible": false
+        },
+        {
+          "kind": "revolver",
+          "position": [
+            -0.105,
+            0.17000000000000004,
+            -0.3794395996480533
+          ],
+          "shellVisible": true
+        },
+        {
+          "kind": "uzi",
+          "position": [
+            -0.12,
+            0.44999999999999996,
+            -0.4089663243739761
+          ],
+          "shellVisible": false
+        }
+      ]
+    },
+    {
+      "secondary": [
+        "pistol",
+        "uzi"
+      ],
+      "slots": [
+        {
+          "kind": "pistol",
+          "position": [
+            0.105,
+            0.17000000000000004,
+            -0.36925732235757674
+          ],
+          "shellVisible": true
+        },
+        {
+          "kind": "uzi",
+          "position": [
+            0.12,
+            0.44999999999999996,
+            -0.3909663243738929
+          ],
+          "shellVisible": false
+        },
+        {
+          "kind": "uzi",
+          "position": [
+            -0.12,
+            0.44999999999999996,
+            -0.4089663243739761
+          ],
+          "shellVisible": false
+        }
+      ]
+    },
+    {
+      "secondary": [
+        "uzi",
+        "pistol"
+      ],
+      "slots": [
+        {
+          "kind": "uzi",
+          "position": [
+            0.12,
+            0.44999999999999996,
+            -0.3909663243738929
+          ],
+          "shellVisible": false
+        },
+        {
+          "kind": "pistol",
+          "position": [
+            0.105,
+            0.17000000000000004,
+            -0.36925732235757674
+          ],
+          "shellVisible": true
+        },
+        {
+          "kind": "uzi",
+          "position": [
+            -0.12,
+            0.44999999999999996,
+            -0.4089663243739761
+          ],
+          "shellVisible": false
+        }
+      ]
+    }
+  ],
+  "fps": 59.725263786585415,
+  "errors": []
+}

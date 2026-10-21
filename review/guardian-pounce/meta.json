@@ -1,0 +1,9 @@
+{
+  "asset": "guardian-pounce",
+  "owner": "claude",
+  "rig": "guardian",
+  "clip": "pounce",
+  "reference": "Zombie_Scratch",
+  "task": "CL-62",
+  "design": "default"
+}

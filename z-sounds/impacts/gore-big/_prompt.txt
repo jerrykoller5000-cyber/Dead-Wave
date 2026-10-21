@@ -1,0 +1,9 @@
+#96 impacts-gore-big
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 1.5 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A body blown apart: a big wet gory burst and chunks splattering on the ground. No voice, no music.
+
+In the game: gore(big=true) — a body blown apart

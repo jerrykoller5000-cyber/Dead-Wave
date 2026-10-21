@@ -1,0 +1,9 @@
+#66 weapons/carbine
+TRY: synthesized and already decent; record it, compare, keep the better one
+Now: GUN m4 (GW-4 Carbine)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 1 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A single 5.56 assault rifle shot outdoors, a punchy crack with a rolling echo. No music, no voice.

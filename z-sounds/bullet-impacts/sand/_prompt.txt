@@ -1,0 +1,9 @@
+#83 bullet-impacts/sand
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: impactSand
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.5 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A bullet hitting sandbags, a muffled punch and a hiss of sand. No music, no voice.

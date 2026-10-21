@@ -1,0 +1,9 @@
+{
+  "asset": "motion-zombie-shambler",
+  "owner": "grokbot",
+  "rig": "zombie",
+  "motion": "zombie/shambler",
+  "file": "studio/motion/zombie/shambler.json",
+  "task": "D-42",
+  "look": "studio/motion-lab.html?preset=zombie/shambler"
+}

@@ -1,0 +1,14 @@
+[
+  [
+    "lower ? side * (rev ? fit.x : 0.19) : side * 0.015, lower ? (rev ? fit.y : 0.76) : 1.01, lower ? (rev ? fit.z : -0.39) : (side > 0 ? -0.365 : -0.465)",
+    "lower ? side * (rev ? fit.x : 0.19) : side * 0.12, lower ? (rev ? fit.y : 0.76) : 1.01, lower ? (rev ? fit.z : -0.39) : -0.295"
+  ],
+  [
+    "h.g.visible = !!p.holsterOn[i];",
+    "h.g.visible = !!p.holsterOn[i] && (p.secondaryKinds[i] !== \"uzi\" || !!p.secondary[i]);"
+  ],
+  [
+    "h.g.visible = !!p.pairOn[i];",
+    "h.g.visible = !!p.pairOn[i] && (p.secondaryKinds[i] !== \"uzi\" || !!p.paired[i]);"
+  ]
+]

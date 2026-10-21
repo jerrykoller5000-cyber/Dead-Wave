@@ -1,0 +1,54 @@
+{
+  "at": "2026-10-14T16:40:29.304Z",
+  "results": [
+    {
+      "id": "weapon.m4",
+      "meanPercent": 0,
+      "subject": "weapon.m4",
+      "errors": [],
+      "ok": true
+    },
+    {
+      "id": "marine",
+      "meanPercent": 0,
+      "subject": "marine",
+      "errors": [],
+      "ok": true
+    },
+    {
+      "id": "animal.rabbit",
+      "meanPercent": 0,
+      "subject": "animal.rabbit",
+      "errors": [],
+      "ok": true
+    },
+    {
+      "id": "zombie.brute",
+      "meanPercent": 0,
+      "subject": "zombie.brute",
+      "errors": [],
+      "ok": true
+    },
+    {
+      "id": "marine",
+      "meanPercent": 0,
+      "subject": "marine",
+      "errors": [],
+      "ok": true
+    },
+    {
+      "id": "weapon.m4",
+      "meanPercent": 0,
+      "subject": "weapon.m4",
+      "errors": [],
+      "ok": true
+    },
+    {
+      "id": "marine",
+      "meanPercent": 0,
+      "subject": "marine",
+      "errors": [],
+      "ok": true
+    }
+  ]
+}

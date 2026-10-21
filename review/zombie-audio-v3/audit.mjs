@@ -1,0 +1,15 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+const render=JSON.parse(fs.readFileSync('review/zombie-audio-v3/render-proof.json','utf8'));
+const hashes=Object.fromEntries(['core/audio.js','ui/zombie-audio.js','ui/zombie-vocal-phrases.js'].map(p=>[p,createHash('sha256').update(fs.readFileSync(p)).digest('hex')]));
+assert.deepEqual(hashes,render.sourceHashes,'production changed after offline renders');
+const index=fs.readFileSync('index.html','utf8'),hooks=JSON.parse(fs.readFileSync('review/zombie-audio-v3/hooks-proof.json','utf8'));
+for(const h of hooks.calls)assert(index.includes(h.after),'concurrent save lost: '+h.after);
+assert.equal(hooks.calls.length,13);
+const gameplay=JSON.parse(fs.readFileSync('review/zombie-audio-v3/gameplay-proof.json','utf8'));
+assert.equal(gameplay.events.length,14);assert(gameplay.events.every(e=>e.emitterPassed&&e.hurt===1&&e.death===1&&e.noRewardDeath===1&&e.fatalHurt===0));
+assert(gameplay.mute&&gameplay.errors.length===0);
+const proof={at:new Date().toISOString(),sourceHashes:hashes,retainedCallerHooks:13,actualZombieIdentityPaths:14,gameplayErrors:gameplay.errors,summary:'Production render hashes match; all13 zombie emitter hooks remain after concurrent saves; all14 live identity paths pass.'};
+fs.writeFileSync('review/zombie-audio-v3/audit-proof.json',JSON.stringify(proof,null,2));
+console.log(proof.summary);

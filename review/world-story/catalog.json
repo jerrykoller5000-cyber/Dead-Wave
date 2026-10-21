@@ -1,0 +1,1032 @@
+[
+  {
+    "id": "site-0",
+    "title": "ranger camp",
+    "group": "Camps and survivors",
+    "staged": false,
+    "isolated": false,
+    "now": "The ranger tent, fire, covered search desk, board, supplies and disabled pickup already read as a working search camp.",
+    "suggest": "Keep the wilderness-rescue identity. Let a marked search grid, empty litter and abandoned radio connect this camp to the orange ranger jackets below. Add one small sign of a PGB survivor reusing the camp; avoid turning the whole site into a military encampment.",
+    "priority": "Keep and refine"
+  },
+  {
+    "id": "site-1",
+    "title": "hikers camp",
+    "group": "Camps and survivors",
+    "staged": false,
+    "isolated": false,
+    "now": "Two different tents, a fire and scattered leisure equipment distinguish the hikers from the other camps. The arrangement still feels fairly tidy.",
+    "suggest": "Make it an interrupted ordinary holiday: an open map weighted with a mug, one sleeping roll half packed, a camera left toward the mine. Match a distinctive pack color here to the equipment at the cut bars. Preserve civilian gear and the bright tent colors.",
+    "priority": "Story pass"
+  },
+  {
+    "id": "site-2",
+    "title": "trapper camp",
+    "group": "Camps and survivors",
+    "staged": false,
+    "isolated": false,
+    "now": "The lean-to, hanging pot, timber work area, crates and nearby cellar suggest somebody who lived here longer than the other campers.",
+    "suggest": "Give this camp repeated repairs and routines: mismatched roof patches, a worn chopping block, sorted firewood, a repaired stool. Put horseshoes on the shelter as well as the cellar. This is the settler grandson who understood iron, not another recent search team.",
+    "priority": "Story pass"
+  },
+  {
+    "id": "history-6",
+    "title": "Hikers’ equipment at the mine",
+    "group": "Camps and survivors",
+    "staged": false,
+    "isolated": false,
+    "now": "Colored packs, rope and small pale items sit beside the mine.",
+    "suggest": "Let the rope visibly lead into the breach and match one pack to the hikers’ camp. A dropped headlamp and a cut restraint explain the decision that killed them better than a new diary paragraph.",
+    "priority": "Story pass"
+  },
+  {
+    "id": "history-12",
+    "title": "Stranded ranger pickup",
+    "group": "Camps and survivors",
+    "staged": false,
+    "isolated": false,
+    "now": "The pickup now has an opened bent bonnet, missing front tire and exposed supported hub. Its search radio and load still belong to a ranger camp.",
+    "suggest": "Keep the unmistakably disabled silhouette. The only additions I would make are a small worn forestry/SAR identity and search mud on the running boards. Let the radio remain the narrative focus; this truck has already had the big visual pass it needed.",
+    "priority": "Keep and refine"
+  },
+  {
+    "id": "history-13",
+    "title": "Trapper’s iron-lined cellar",
+    "group": "Camps and survivors",
+    "staged": false,
+    "isolated": false,
+    "now": "A low timber hatch with iron straps sits near the trapper’s camp.",
+    "suggest": "Give it a shallow earth lip, worn hand clearance and visible iron lining just inside an ajar edge. Repeat the same dark iron used on the graves and mine seal, so players infer the trapper learned the old protection.",
+    "priority": "Story pass"
+  },
+  {
+    "id": "history-14",
+    "title": "Protective horseshoes",
+    "group": "Camps and survivors",
+    "staged": false,
+    "isolated": false,
+    "now": "Several horseshoes are mounted on a single upright post beside the cellar.",
+    "suggest": "Keep the motif, but mount some directly over the shelter’s opening as the story describes. Vary age and wear; this should feel like a practiced precaution rather than decorative collectibles.",
+    "priority": "Polish"
+  },
+  {
+    "id": "site-3",
+    "title": "Ruined aid station",
+    "group": "Coldwater and later occupation",
+    "staged": false,
+    "isolated": false,
+    "now": "The aid-station cabin is an open wooden ruin with a cot/table and chimney. It closely resembles the second cabin.",
+    "suggest": "Make the old house and its recent reuse readable together: weathered domestic shell, then a folding stretcher, opened dressings and a PGB medical case. Place the spent brass, helmet and drag trail outside the collapsed walls where a player can actually follow them. This is my strongest future location for the dead-soldier leaflet you deferred.",
+    "priority": "First pass"
+  },
+  {
+    "id": "site-4",
+    "title": "Burned supply house",
+    "group": "Coldwater and later occupation",
+    "staged": false,
+    "isolated": false,
+    "now": "The supply house uses nearly the same collapsed cabin silhouette as the aid station; “burned” is not strongly communicated.",
+    "suggest": "Give this one a distinct destruction story: blackened rafters, pale ash, one collapsed roof corner and scorched supply tins. Keep a few newer PGB crates inside the much older building. Make the fire local to this ruin rather than making all Coldwater look recently burned.",
+    "priority": "First pass"
+  },
+  {
+    "id": "site-6",
+    "title": "Parish cemetery",
+    "group": "Coldwater and later occupation",
+    "staged": false,
+    "isolated": false,
+    "now": "The cemetery mixes crosses, upright stones, iron fence remnants and disturbed burials near the church.",
+    "suggest": "Make it feel like a town that died in one winter: clustered ages and weathering, family groupings, then improvised iron restraints. Use one obvious burst burial as the focal point. Keep the graveyard quieter than the PGB sites, with very little modern clutter.",
+    "priority": "First pass"
+  },
+  {
+    "id": "history-19",
+    "title": "Coldwater church shell",
+    "group": "Coldwater and later occupation",
+    "staged": false,
+    "isolated": false,
+    "now": "The church shell is recognizable, but large clean rectangular blocks make it read as a construction blockout.",
+    "suggest": "This is my first major environment overhaul: irregular broken masonry, mortar remnants, a fallen roof beam and a surviving doorway that points toward the graves. A little rusted iron and a simple domestic object can tell the town’s last winter. Avoid filling it with a new occult cult story.",
+    "priority": "First pass"
+  },
+  {
+    "id": "history-20",
+    "title": "Coldwater house foundation",
+    "group": "Coldwater and later occupation",
+    "staged": false,
+    "isolated": false,
+    "now": "The first house foundation is a clean rectangular stone perimeter with a surviving doorframe.",
+    "suggest": "Give it a recognizable hearth and collapsed sill, then half bury the wall bases. A broken cooking pot or stove plate makes this a home, and connects settlers’ everyday iron to their final protective use of it.",
+    "priority": "First pass"
+  },
+  {
+    "id": "history-21",
+    "title": "Coldwater house foundation",
+    "group": "Coldwater and later occupation",
+    "staged": false,
+    "isolated": false,
+    "now": "The second foundation has the same simple stone-and-frame vocabulary near the standing chimney.",
+    "suggest": "Make this footprint a distinct household through an old threshold, shallow cellar recess and a toppled iron bed frame. Let plants and sediment cross the floor line so it reads abandoned for generations.",
+    "priority": "Story pass"
+  },
+  {
+    "id": "history-22",
+    "title": "Coldwater house foundation",
+    "group": "Coldwater and later occupation",
+    "staged": false,
+    "isolated": false,
+    "now": "The third foundation repeats the small ruined house form, with crossed timber inside.",
+    "suggest": "Use a different collapse direction and one work-related remnant, such as a broken ore bucket or tool rack. Keep it a modest house connected to the mining town; avoid assigning an unapproved named occupant.",
+    "priority": "Story pass"
+  },
+  {
+    "id": "history-23",
+    "title": "Standing chimney",
+    "group": "Coldwater and later occupation",
+    "staged": false,
+    "isolated": false,
+    "now": "A tall, very straight stack of stone blocks remains standing on its own.",
+    "suggest": "Add a fractured cap, smoke-blackened hearth opening and low rubble apron. Tie it to the nearby house footprint with a faint floor outline so it reads as the last part of a lost home.",
+    "priority": "First pass"
+  },
+  {
+    "id": "history-24",
+    "title": "Iron-banded burial",
+    "group": "Coldwater and later occupation",
+    "staged": false,
+    "isolated": false,
+    "now": "Iron-banded coffin boards lie almost flush with the grass.",
+    "suggest": "Sink the coffin into a readable earth cut, with a small amount of collapsed soil and broad corroded straps. The iron should look deliberately applied to contain the dead, not like ordinary cargo banding.",
+    "priority": "First pass"
+  },
+  {
+    "id": "history-25",
+    "title": "Iron-banded burial",
+    "group": "Coldwater and later occupation",
+    "staged": false,
+    "isolated": false,
+    "now": "A second banded burial repeats the same flat silhouette.",
+    "suggest": "Vary the condition: keep this one intact and under tension. It becomes the control example beside the opened grave, showing that intact iron still holds.",
+    "priority": "Story pass"
+  },
+  {
+    "id": "history-26",
+    "title": "Grave opened from below",
+    "group": "Coldwater and later occupation",
+    "staged": false,
+    "isolated": false,
+    "now": "The opened grave currently reads as broken boards on grass, without a strong visible burial cavity.",
+    "suggest": "Make the opening unmistakable: a dark earth recess, lid pushed upward, nails bent out and broken straps directed outward. Throw soil away from the center. That single scene should establish that the dead came out, rather than someone digging in.",
+    "priority": "First pass"
+  },
+  {
+    "id": "site-5",
+    "title": "Lookout tower",
+    "group": "Infrastructure and wrecks",
+    "staged": false,
+    "isolated": false,
+    "now": "The lookout is a clear, climbable timber platform, but the deck looks sparse.",
+    "suggest": "Retain it as a practical vantage point. Add a weathered observation rail, a small binocular case and Brandt’s brief scratched clue where someone leaning on the rail would leave it. The view toward the stones should do most of the explaining.",
+    "priority": "Story pass"
+  },
+  {
+    "id": "site-7",
+    "title": "Repair shed",
+    "group": "Infrastructure and wrecks",
+    "staged": false,
+    "isolated": false,
+    "now": "The repair shed has corrugated roofing, open storage and a barrel; its structure is shared with the other sheds.",
+    "suggest": "Identify repair through a bench vise, stripped wheel hub, short lengths of iron and a hand-cranked tool. Let newer PGB repair supplies sit on an older workbench. A removed vehicle part can also explain why a nearby wreck will never drive.",
+    "priority": "Story pass"
+  },
+  {
+    "id": "site-8",
+    "title": "Food store",
+    "group": "Infrastructure and wrecks",
+    "staged": false,
+    "isolated": false,
+    "now": "The food store uses the same shed silhouette, with boxes under a partially open roof near the water.",
+    "suggest": "Give it shelving, collapsed sacks, empty ration sleeves and a gnawed-open corner. Make the old pantry visibly distinct from the sealed modern ration crate. Keep enough readable supplies to support its objective.",
+    "priority": "Story pass"
+  },
+  {
+    "id": "site-9",
+    "title": "Generator shelter",
+    "group": "Infrastructure and wrecks",
+    "staged": false,
+    "isolated": false,
+    "now": "The generator shelter is another open corrugated shed, with its fuel objective nearby.",
+    "suggest": "Make its purpose legible from the path: a generator body, exhaust pipe, cut cable and stained drip tray. The pulled connection should look deliberate or desperate, consistent with people trying to stop the tone entering their equipment. Do not imply the generator caused the tone.",
+    "priority": "Story pass"
+  },
+  {
+    "id": "dock-0",
+    "title": "Lakeside dock and rowboat",
+    "group": "Infrastructure and wrecks",
+    "staged": false,
+    "isolated": false,
+    "now": "The dock, mooring posts and small rowboat clearly establish a lakeside destination.",
+    "suggest": "Keep it as the old landing reused for Heron: replacement planks, a reinforced boarding end and a stowed flare case. Make the little rowboat visibly unusable—split hull, missing bottom boards or swamped interior—so it does not promise an alternate escape or boating system.",
+    "priority": "First pass"
+  },
+  {
+    "id": "mast-0",
+    "title": "Emergency relay mast",
+    "group": "Infrastructure and wrecks",
+    "staged": false,
+    "isolated": false,
+    "now": "The steel mast and cabinets are readable but sit in a relatively empty clearing.",
+    "suggest": "Show a rushed PGB installation: cable reels, anchor blocks, a grounding strap running into rock and an open service box. The fuse socket should look intentionally emptied, supporting Sato’s action. Route the physical cable toward the water/rock clue for the secret.",
+    "priority": "First pass"
+  },
+  {
+    "id": "bridges-0",
+    "title": "East timber bridge",
+    "group": "Infrastructure and wrecks",
+    "staged": false,
+    "isolated": false,
+    "now": "A narrow timber crossing has regular planks and a simple rail.",
+    "suggest": "Make this the older local crossing: uneven boards, hand-hewn supports, water staining and a few sound replacement planks. Keep the safe walking surface obvious and the collision path unchanged.",
+    "priority": "Polish"
+  },
+  {
+    "id": "bridges-1",
+    "title": "West reinforced bridge",
+    "group": "Infrastructure and wrecks",
+    "staged": false,
+    "isolated": false,
+    "now": "The second bridge has a similar timber appearance near the trapper camp.",
+    "suggest": "Differentiate it with practical later repairs: iron straps, mismatched planks and braced posts. This lets the bridges show generations maintaining the same valley routes without extra exposition.",
+    "priority": "Polish"
+  },
+  {
+    "id": "wrecks-0",
+    "title": "Medical convoy wreck",
+    "group": "Infrastructure and wrecks",
+    "staged": false,
+    "isolated": false,
+    "now": "The military cargo truck has an open bonnet and scattered medical cargo, but its upright chassis and wheels still suggest a usable vehicle.",
+    "suggest": "Use the ranger pickup’s clear inoperable language here too: collapsed front suspension, a missing wheel and severe engine damage. Make the load unmistakably FOB Threshold medical supplies with one burst case and an abandoned stretcher. Story v2 explicitly replaces the old Medic-4 framing with PGB supply wrecks.",
+    "priority": "First pass"
+  },
+  {
+    "id": "wrecks-1",
+    "title": "Stripped utility wreck",
+    "group": "Infrastructure and wrecks",
+    "staged": false,
+    "isolated": false,
+    "now": "The utility truck is stripped and surrounded by salvage, yet remains fairly upright and complete.",
+    "suggest": "Make this a cannibalized wreck: one axle on blocks, missing battery and radiator, empty mounting brackets, a removed wheel nearby. Let purposeful dismantling distinguish it from the violently damaged medical truck. No keys or repair prompt implying it can be driven.",
+    "priority": "First pass"
+  },
+  {
+    "id": "heron",
+    "title": "Heron extraction floatplane",
+    "group": "Infrastructure and wrecks",
+    "staged": true,
+    "isolated": false,
+    "now": "The staged arrival view shows the twin-prop floatplane at the lake and dock. It is a much stronger vehicle silhouette than the old background trucks.",
+    "suggest": "Preserve it as the one vehicle that visibly works. Add restrained wear, a recognizable PGB/Ridgeline marking and a clear boarding-side light. The dock, flares and float walkway should make the extraction route obvious under pressure.",
+    "priority": "Keep and refine"
+  },
+  {
+    "id": "history-9",
+    "title": "Spent brass at the fallen line",
+    "group": "Evidence of the fall",
+    "staged": true,
+    "isolated": true,
+    "now": "The brass exists, but cabin boards obscured it in the location view; this isolated picture makes the scattered cases visible.",
+    "suggest": "Move the readable cluster to the outside firing position and fan it to one side of a missing shooter. Make the sandbag line, brass, dropped helmet and drag trail one continuous scene.",
+    "priority": "First pass"
+  },
+  {
+    "id": "history-10",
+    "title": "Dropped PGB helmet",
+    "group": "Evidence of the fall",
+    "staged": true,
+    "isolated": true,
+    "now": "The helmet is a small olive shell with a detached strap-like piece. It was partly hidden by the cabin wreckage, so this is an isolated view.",
+    "suggest": "Seat it visibly in disturbed dirt beside the line, with the strap leading into the drag marks. Match its shape to current PGB equipment so it reads as one of the twelve rather than generic debris.",
+    "priority": "First pass"
+  },
+  {
+    "id": "history-11",
+    "title": "Drag marks toward the caves",
+    "group": "Evidence of the fall",
+    "staged": false,
+    "isolated": false,
+    "now": "The drag marks are extremely faint against the mottled grass in this capture.",
+    "suggest": "Use a broken trail of flattened grass, scraped soil and a few caught fabric scraps, aimed toward the nearest cave. It should be followable from the helmet without becoming a glowing quest path.",
+    "priority": "First pass"
+  },
+  {
+    "id": "history-18",
+    "title": "Trapper’s leghold traps",
+    "group": "Evidence of the fall",
+    "staged": false,
+    "isolated": false,
+    "now": "The chain and jaws of a small trap are largely lost in the grass.",
+    "suggest": "Put one sprung trap on a worn work mat with its chain anchored to the post, and another hanging safely from the curing frame. Keep them clearly stored if they cannot hurt the player.",
+    "priority": "Polish"
+  },
+  {
+    "id": "sandbags",
+    "title": "Abandoned sandbag barricade",
+    "group": "Evidence of the fall",
+    "staged": false,
+    "isolated": false,
+    "now": "A short low pile of bags and broken barricade planks sits beside the aid-station cabin.",
+    "suggest": "Build a coherent last stand around this existing location: bags facing a plausible approach, brass behind them, one dropped helmet and the drag trail leaving the position. Keep any future body/leaflet here tied to one of the nine rather than adding an unexplained extra casualty.",
+    "priority": "First pass"
+  },
+  {
+    "id": "history-27",
+    "title": "Cordon gate",
+    "group": "The Cordon",
+    "staged": false,
+    "isolated": false,
+    "now": "The dark Cordon gate, chain and concise warning have a strong containment identity; the surrounding masonry feels older and more stylized.",
+    "suggest": "Keep the gate. Make the wall’s PGB construction legible through reinforced seams, repair plates and survey hardware, or explicitly propose an older wall reinforced by PGB if Jerry wants that history. Do not silently rewrite who built the Cordon.",
+    "priority": "Story pass"
+  },
+  {
+    "id": "history-28",
+    "title": "Missing hikers’ trailhead board",
+    "group": "The Cordon",
+    "staged": false,
+    "isolated": false,
+    "now": "Three repeated missing-person notices hang at the trailhead by the sealed gate.",
+    "suggest": "Differentiate the faces, curled paper and pinning, with one notice partly covered by a later PGB restriction. Match a distinctive item in one picture to a pack at the mine. This is an excellent quiet introduction to the hikers.",
+    "priority": "Story pass"
+  },
+  {
+    "id": "river-grate",
+    "title": "River outlet and containment grate",
+    "group": "The Cordon",
+    "staged": false,
+    "isolated": false,
+    "now": "A masonry arch and iron grate interrupt the river at the valley wall.",
+    "suggest": "Keep the river running visibly through it. Add caught driftwood, water staining and PGB fasteners or inspection hardware to show deliberate containment. This is also a good quiet reminder that water connects the whole valley.",
+    "priority": "Story pass"
+  },
+  {
+    "id": "cave-root",
+    "title": "Root cave",
+    "group": "Caves and the first people",
+    "staged": false,
+    "isolated": false,
+    "now": "Exposed roots frame a broad black opening.",
+    "suggest": "Carry those roots into a damp threshold and the hanging structures below. Add one snapped search marker caught in the roots; keep the main entry silhouette clear.",
+    "priority": "Story pass"
+  },
+  {
+    "id": "cave-shale",
+    "title": "Shale cave",
+    "group": "Caves and the first people",
+    "staged": false,
+    "isolated": false,
+    "now": "A pointed, angular opening establishes the shale theme.",
+    "suggest": "Extend broken slate layers out onto the approach. Narrow angular fractures should echo the Deep’s hiding places, making the later flankers feel native to this rock.",
+    "priority": "Story pass"
+  },
+  {
+    "id": "cave-iron",
+    "title": "Iron mine entrance",
+    "group": "Caves and the first people",
+    "staged": false,
+    "isolated": false,
+    "now": "Mine timber, cut bars and abandoned hiking gear give this entrance the clearest historical sequence.",
+    "suggest": "Make the old iron closure visually dominant, with bright fresh cut faces and the cut sections discarded outside. Keep the hikers’ gear immediately readable beside it. This is the breach that starts the modern disaster.",
+    "priority": "First pass"
+  },
+  {
+    "id": "cave-wet",
+    "title": "Wet cave",
+    "group": "Caves and the first people",
+    "staged": false,
+    "isolated": false,
+    "now": "A rounded dark mouth has green growth, but the approach looks almost as dry as the other caves.",
+    "suggest": "Add a persistent trickle, tide staining and damp stones that continue to the pools below. The water route is part of how the tone travels; use subtle ripples, not another glowing portal.",
+    "priority": "Story pass"
+  },
+  {
+    "id": "cave-hill",
+    "title": "Hill barrow",
+    "group": "Caves and the first people",
+    "staged": false,
+    "isolated": false,
+    "now": "A lintel and stone supports distinguish the barrow, with small offerings nearby.",
+    "suggest": "Make the threshold visibly built for burial: overlapping stone slabs, a shallow sunken processional approach and offerings sheltered in niches. Keep it much older than the Christian cemetery.",
+    "priority": "Story pass"
+  },
+  {
+    "id": "cave-chalk",
+    "title": "Marrow cave",
+    "group": "Caves and the first people",
+    "staged": false,
+    "isolated": false,
+    "now": "The pale cave is closed by a circular carved slab with a central split.",
+    "suggest": "Expose more bone-white stone around the seal and keep ordinary vegetation back from the crack. The ancient ring, the barrow and this seal should share a precise carving language.",
+    "priority": "Story pass"
+  },
+  {
+    "id": "history-0",
+    "title": "PGB survey board — root",
+    "group": "Caves and the first people",
+    "staged": false,
+    "isolated": false,
+    "now": "The root survey board carries a clear PGB warren number and DO NOT ENTER warning.",
+    "suggest": "Keep the common expedition format. Weather it as a recent installation—mud splashes, crooked stakes, a few torn survey tags—rather than an ancient sign. Add one small theme-specific observation mark only if it helps the player choose equipment.",
+    "priority": "Keep and refine"
+  },
+  {
+    "id": "history-1",
+    "title": "PGB survey board — shale",
+    "group": "Caves and the first people",
+    "staged": false,
+    "isolated": false,
+    "now": "The shale survey board carries a clear PGB warren number and DO NOT ENTER warning.",
+    "suggest": "Keep the common expedition format. Weather it as a recent installation—mud splashes, crooked stakes, a few torn survey tags—rather than an ancient sign. Add one small theme-specific observation mark only if it helps the player choose equipment.",
+    "priority": "Keep and refine"
+  },
+  {
+    "id": "history-2",
+    "title": "PGB survey board — iron",
+    "group": "Caves and the first people",
+    "staged": false,
+    "isolated": false,
+    "now": "The iron survey board carries a clear PGB warren number and DO NOT ENTER warning.",
+    "suggest": "Keep the common expedition format. Weather it as a recent installation—mud splashes, crooked stakes, a few torn survey tags—rather than an ancient sign. Add one small theme-specific observation mark only if it helps the player choose equipment.",
+    "priority": "Keep and refine"
+  },
+  {
+    "id": "history-3",
+    "title": "Old mine timber set",
+    "group": "Caves and the first people",
+    "staged": false,
+    "isolated": false,
+    "now": "Simple posts and a beam mark the abandoned mine entrance.",
+    "suggest": "Age them with split ends, sagging joints and rusty fastening plates. Put older layers of iron reinforcement behind the recent cut. The mine should read as settler industry adapted into a desperate seal.",
+    "priority": "Polish"
+  },
+  {
+    "id": "history-4",
+    "title": "Cut mine bars",
+    "group": "Caves and the first people",
+    "staged": false,
+    "isolated": false,
+    "now": "Thin cut bars remain across parts of the entrance.",
+    "suggest": "Give the cuts unmistakably fresh metal faces; leave a cut bar section and tool marks where the hikers opened the gap. Preserve a clearly human-sized breach rather than a collapsed opening that could have happened naturally.",
+    "priority": "First pass"
+  },
+  {
+    "id": "history-5",
+    "title": "Discarded IRON BELOW boards",
+    "group": "Caves and the first people",
+    "staged": false,
+    "isolated": false,
+    "now": "The IRON BELOW board is a short, direct warning beside the mine.",
+    "suggest": "Keep the brevity. Make the board old, re-nailed and partially fallen, with the same iron-fastening details found on the trapper’s shelter. Its age should suggest inherited knowledge.",
+    "priority": "Keep and refine"
+  },
+  {
+    "id": "history-7",
+    "title": "PGB survey board — wet",
+    "group": "Caves and the first people",
+    "staged": false,
+    "isolated": false,
+    "now": "The wet survey board carries a clear PGB warren number and DO NOT ENTER warning.",
+    "suggest": "Keep the common expedition format. Weather it as a recent installation—mud splashes, crooked stakes, a few torn survey tags—rather than an ancient sign. Add one small theme-specific observation mark only if it helps the player choose equipment.",
+    "priority": "Keep and refine"
+  },
+  {
+    "id": "history-8",
+    "title": "PGB survey board — hill",
+    "group": "Caves and the first people",
+    "staged": false,
+    "isolated": false,
+    "now": "The hill survey board carries a clear PGB warren number and DO NOT ENTER warning.",
+    "suggest": "Keep the common expedition format. Weather it as a recent installation—mud splashes, crooked stakes, a few torn survey tags—rather than an ancient sign. Add one small theme-specific observation mark only if it helps the player choose equipment.",
+    "priority": "Keep and refine"
+  },
+  {
+    "id": "stone-0",
+    "title": "Ring instruction stone",
+    "group": "Caves and the first people",
+    "staged": false,
+    "isolated": false,
+    "now": "The broad instruction slab has a faint circular carving in daylight.",
+    "suggest": "Keep the diagram legible through carved depth and oblique light before relying on the night glow. Match its eight-stone arrangement exactly to the Pit and seal.",
+    "priority": "Keep and refine"
+  },
+  {
+    "id": "stone-1",
+    "title": "Standing glyph stone 1",
+    "group": "Caves and the first people",
+    "staged": false,
+    "isolated": false,
+    "now": "The standing stone has a rough silhouette and faint face markings in daylight.",
+    "suggest": "Keep each glyph distinct and recognizably carved, with lichen stopping at the worn groove edges. Let night reveal information through the established sequence; do not turn every stone into an always-bright waypoint.",
+    "priority": "Keep and refine"
+  },
+  {
+    "id": "stone-2",
+    "title": "Standing glyph stone 2",
+    "group": "Caves and the first people",
+    "staged": false,
+    "isolated": false,
+    "now": "The standing stone has a rough silhouette and faint face markings in daylight.",
+    "suggest": "Keep each glyph distinct and recognizably carved, with lichen stopping at the worn groove edges. Let night reveal information through the established sequence; do not turn every stone into an always-bright waypoint.",
+    "priority": "Keep and refine"
+  },
+  {
+    "id": "stone-3",
+    "title": "Standing glyph stone 3",
+    "group": "Caves and the first people",
+    "staged": false,
+    "isolated": false,
+    "now": "The standing stone has a rough silhouette and faint face markings in daylight.",
+    "suggest": "Keep each glyph distinct and recognizably carved, with lichen stopping at the worn groove edges. Let night reveal information through the established sequence; do not turn every stone into an always-bright waypoint.",
+    "priority": "Keep and refine"
+  },
+  {
+    "id": "barrow-offerings",
+    "title": "Offerings at the barrow",
+    "group": "Caves and the first people",
+    "staged": false,
+    "isolated": false,
+    "now": "Small offerings line the barrow entrance, but their scale and nearby vegetation make them easy to miss.",
+    "suggest": "Cluster them in a few shallow stone niches along the approach. A player should notice intentional placement before identifying each object. Keep these ancient funerary pieces distinct from Coldwater graves and recent PGB warnings.",
+    "priority": "Story pass"
+  },
+  {
+    "id": "marrow-seal",
+    "title": "Carved Marrow seal",
+    "group": "Caves and the first people",
+    "staged": false,
+    "isolated": false,
+    "now": "The round carved door and split opening are a strong unique landmark.",
+    "suggest": "Preserve the form. Add mineral deposits crossing the seams and worn contact edges to sell long closure. Let a faint response travel through the carvings when the tone is active; the door should feel like a physical restraint, not a conventional powered airlock.",
+    "priority": "Keep and refine"
+  },
+  {
+    "id": "offering-0",
+    "title": "Barrow cairns",
+    "group": "Caves and the first people",
+    "staged": true,
+    "isolated": true,
+    "now": "Small flattened stones form the barrow cairns.",
+    "suggest": "Let two or three remain intact and one slump with age. Set them on a shallow worn shelf where their deliberate stacking is visible against the natural rocks.",
+    "priority": "Polish"
+  },
+  {
+    "id": "offering-1",
+    "title": "Ash offering bowl",
+    "group": "Caves and the first people",
+    "staged": true,
+    "isolated": true,
+    "now": "A shallow bowl holds a dark bed of ash.",
+    "suggest": "Shelter it beneath a stone overhang with a few mineral-stained fragments nearby. Keep it as an old funerary offering; avoid a fresh flame that suggests an unseen current caretaker.",
+    "priority": "Polish"
+  },
+  {
+    "id": "offering-3",
+    "title": "Antler offering",
+    "group": "Caves and the first people",
+    "staged": true,
+    "isolated": true,
+    "now": "A small branching antler is one of the barrow offerings.",
+    "suggest": "Place it against darker stone with another fragment partly buried nearby. This is a useful organic contrast to the carved objects and needs visibility more than complexity.",
+    "priority": "Polish"
+  },
+  {
+    "id": "offering-4",
+    "title": "Carved offering stone",
+    "group": "Caves and the first people",
+    "staged": true,
+    "isolated": true,
+    "now": "A small upright carved object shares the ancient glyph material.",
+    "suggest": "Repeat its shape in one burial niche below. That visual rhyme links the offerings, the people buried in the hill and the sealed Marrow without additional text.",
+    "priority": "Polish"
+  },
+  {
+    "id": "below-root",
+    "title": "Root warren: chamber and husks",
+    "group": "Underground",
+    "staged": true,
+    "isolated": false,
+    "now": "Roots and pale veined hanging husks dominate the overhead view.",
+    "suggest": "Keep the hiker boot fragments visible through a few husks. Tie one fabric/gear color back to the hikers’ camp so discovery becomes recognition.",
+    "priority": "Story pass"
+  },
+  {
+    "id": "deep-root",
+    "title": "Root warren: Deep set piece",
+    "group": "Underground",
+    "staged": true,
+    "isolated": false,
+    "now": "A clustered mass of round forms and long roots hangs under the roof, with separate husks nearby.",
+    "suggest": "Give the mass a few restrained human cues—one boot, a bent elbow silhouette, trapped fabric—so it reads as the climbers’ knot rather than a cluster of boulders. Keep much of it unresolved in shadow.",
+    "priority": "First pass"
+  },
+  {
+    "id": "below-shale",
+    "title": "Shale warren: chamber and husks",
+    "group": "Underground",
+    "staged": true,
+    "isolated": false,
+    "now": "A husk with an orange jacket fragment hangs above an angular chamber and lantern.",
+    "suggest": "Use the jacket to identify wilderness search-and-rescue. A small strip of the same orange at the surface camp or mine can connect the ranger search to this fate without naming a new victim.",
+    "priority": "Story pass"
+  },
+  {
+    "id": "deep-shale",
+    "title": "Shale warren: Deep set piece",
+    "group": "Underground",
+    "staged": true,
+    "isolated": false,
+    "now": "Tall fins and narrow black spaces flank the Deep, with small slate fragments on the floor.",
+    "suggest": "Make the fins layered and fractured rather than smooth rectangular dividers. Use disturbed gravel and a single snagged strap at one slit to suggest something moves through the cracks.",
+    "priority": "Story pass"
+  },
+  {
+    "id": "below-iron",
+    "title": "Iron warren: chamber and husks",
+    "group": "Underground",
+    "staged": true,
+    "isolated": false,
+    "now": "Husks hang beside simple mine supports and lanterns.",
+    "suggest": "Show modern equipment caught among older mine infrastructure: a headlamp strap, rescue rope or pack buckle. Keep the age difference between settler workings and recent victims clear.",
+    "priority": "Story pass"
+  },
+  {
+    "id": "deep-iron",
+    "title": "Iron warren: Deep set piece",
+    "group": "Underground",
+    "staged": true,
+    "isolated": false,
+    "now": "Rails, heavy posts, a cart and winch shapes preserve the mine’s industrial identity.",
+    "suggest": "Add rust, failed rail joints and an ore spill. A cart stopped short of a fresh pale break would connect the original mining disaster to the Marrow more clearly than extra signs. Keep the cart shape distinct from a usable vehicle.",
+    "priority": "Story pass"
+  },
+  {
+    "id": "below-wet",
+    "title": "Wet warren: chamber and husks",
+    "group": "Underground",
+    "staged": true,
+    "isolated": false,
+    "now": "Pale hanging husks contrast with the dark flooded passage below.",
+    "suggest": "Let water marks and soaked fabric distinguish these victims from the dry chambers. Keep the tone associated with water and rock through restrained ripples and resonance, not airborne magical smoke.",
+    "priority": "Story pass"
+  },
+  {
+    "id": "deep-wet",
+    "title": "Wet warren: Deep set piece",
+    "group": "Underground",
+    "staged": true,
+    "isolated": false,
+    "now": "A broad dark pool fills the chamber floor beneath hanging husks.",
+    "suggest": "Strengthen the waterline, drowned edges and bones caught in shallow sediment. Show a readable dry perimeter so players understand the space; keep the center opaque and unsettling.",
+    "priority": "Story pass"
+  },
+  {
+    "id": "below-hill",
+    "title": "Hill warren: chamber and husks",
+    "group": "Underground",
+    "staged": true,
+    "isolated": false,
+    "now": "A hanging husk intrudes on the stone-built barrow space.",
+    "suggest": "Separate recent bodies from ancient burials. Use modern cloth or equipment on the husks, while the barrow stones and offerings remain formally arranged and very old.",
+    "priority": "Story pass"
+  },
+  {
+    "id": "deep-hill",
+    "title": "Hill warren: Deep set piece",
+    "group": "Underground",
+    "staged": true,
+    "isolated": false,
+    "now": "A central bier and surrounding low tombs establish a deliberate burial chamber.",
+    "suggest": "Carve a restrained version of the same ancient symbols used on the seal, with mineral wear and displaced offering fragments. Avoid polished fantasy sarcophagi; these are the people who built the restraint around the heart.",
+    "priority": "Story pass"
+  },
+  {
+    "id": "below-crates",
+    "title": "Dragged-down PGB supplies",
+    "group": "Underground",
+    "staged": true,
+    "isolated": true,
+    "now": "The isolated view shows legible PGB / FOB THRESHOLD crates, including a burst-open one.",
+    "suggest": "This is a strong story connection already. Add scraped corners, torn straps and dirt dragged in the same direction as the entry route. Match the stencils and box construction to the surface supply wrecks.",
+    "priority": "Keep and refine"
+  },
+  {
+    "id": "below-door",
+    "title": "Underground rune door",
+    "group": "Underground",
+    "staged": true,
+    "isolated": true,
+    "now": "The underground door is a framed stone slab carrying the rune language. This isolated view exposes the asset rather than its normal lighting.",
+    "suggest": "Make the slab and frame share the Marrow seal’s carved, mineral-worn material. Keep symbols readable at interaction distance, and distinguish “ancient restraint” from a modern keycard door through stone joints and physical wear.",
+    "priority": "Story pass"
+  },
+  {
+    "id": "below-box",
+    "title": "Iron-bound strongbox",
+    "group": "Underground",
+    "staged": true,
+    "isolated": false,
+    "now": "The strongbox is a compact banded chest resting on a small stone base.",
+    "suggest": "Give its iron bands a clear relationship to the settler coffins: protected contents rather than arbitrary treasure. Use hand-forged hardware and old wood; reserve clean modern storage for PGB crates.",
+    "priority": "Story pass"
+  },
+  {
+    "id": "below-breach",
+    "title": "Broken iron barrier and hikers’ descent",
+    "group": "Underground",
+    "staged": true,
+    "isolated": false,
+    "now": "Cut iron sections and a blue descent rope mark the broken barrier deeper in the mine.",
+    "suggest": "Match the rope color and cut-metal treatment to the surface mine scene. A visible knot and abandoned headlamp make the hikers’ exact route readable. Keep the old barrier unmistakably older than the climbing gear.",
+    "priority": "Keep and refine"
+  },
+  {
+    "id": "heart-chamber",
+    "title": "The Marrow: heart chamber",
+    "group": "Underground",
+    "staged": true,
+    "isolated": false,
+    "now": "A large pale chamber, tall columns and a luminous central shaft create a ceremonial, almost architectural space.",
+    "suggest": "Push it toward geology shaped around something incomprehensible: mineral seams, irregular column bases and ancient interventions layered onto the rock. Keep the heart itself unseen, as the story specifies. The chamber can reveal its influence without becoming a giant exposed organ.",
+    "priority": "First pass"
+  },
+  {
+    "id": "heart-source",
+    "title": "The heart and its supporting columns",
+    "group": "Underground",
+    "staged": true,
+    "isolated": false,
+    "now": "The dark central opening, cyan rim, small upright stones and huge surrounding columns make the source visually explicit.",
+    "suggest": "Reduce the sense of a clean machine aperture with fractured pale strata and deposits crossing the rim. Make the load-bearing columns readable for the final encounter, but preserve uncertainty about what is producing the tone below.",
+    "priority": "Story pass"
+  },
+  {
+    "id": "objective-0",
+    "title": "Relay repair cabinet",
+    "group": "Objective props",
+    "staged": false,
+    "isolated": false,
+    "now": "The relay repair cabinet has visible sockets, cables and an amber indicator.",
+    "suggest": "Make the empty fuse position unmistakable and deliberately pulled, with a service lead running to ground. Keep the active interaction visually distinct from the mast’s decorative cabinets. This supports Sato’s choice without another paragraph.",
+    "priority": "Story pass"
+  },
+  {
+    "id": "objective-1",
+    "title": "Medical supplies cache",
+    "group": "Objective props",
+    "staged": false,
+    "isolated": false,
+    "now": "A white medical case with a cross sits on the road by the supply wreck.",
+    "suggest": "Give it a dragged approach mark and a broken outer shipping crate, keeping the clean lid marking for recognition. Use the same case family at the aid station and on Okafor’s kit; that turns a generic pickup into a supply chain.",
+    "priority": "Polish"
+  },
+  {
+    "id": "objective-2",
+    "title": "Ranger cache",
+    "group": "Objective props",
+    "staged": false,
+    "isolated": false,
+    "now": "The ranger cache is an olive case on open ground near the camp.",
+    "suggest": "Move its visual context toward the search desk: rescue tape, spare radio batteries and a folded litter nearby. Keep the interactable case unobstructed, but make it clearly wilderness-rescue equipment.",
+    "priority": "Polish"
+  },
+  {
+    "id": "objective-3",
+    "title": "Hikers’ cache",
+    "group": "Objective props",
+    "staged": false,
+    "isolated": false,
+    "now": "A small red medical pouch sits beside the hikers’ tent.",
+    "suggest": "Keep it civilian and modest: soft fabric, a used zipper and a camping-pack strap. It should look like hikers’ first aid, not a PGB medical drop.",
+    "priority": "Polish"
+  },
+  {
+    "id": "objective-4",
+    "title": "Trapper cache",
+    "group": "Objective props",
+    "staged": false,
+    "isolated": false,
+    "now": "A plain small case sits beside the trapper’s cellar hatch.",
+    "suggest": "Use a repaired wooden supply box or canvas tool roll with old iron hinges. Keep its interactable outline legible while making the owner’s age and habits different from the hikers and rangers.",
+    "priority": "Polish"
+  },
+  {
+    "id": "objective-5",
+    "title": "Fuel depot",
+    "group": "Objective props",
+    "staged": false,
+    "isolated": false,
+    "now": "An olive drum and red jerrycan share a small fuel platform by the generator shelter.",
+    "suggest": "Add a hose connection, spill tray and used rag to tie it physically to the generator. Keep this required supply pickup distinct from the red explosive scenery drums.",
+    "priority": "Polish"
+  },
+  {
+    "id": "objective-6",
+    "title": "Wreck salvage cache",
+    "group": "Objective props",
+    "staged": false,
+    "isolated": false,
+    "now": "A low dark salvage case sits on open ground beside the stripped wreck.",
+    "suggest": "Show a handful of removed components beside it—alternator, cable coil, bolts—so the salvage job feels specific. Preserve the clean interaction silhouette and do not suggest that completing it repairs the truck.",
+    "priority": "Polish"
+  },
+  {
+    "id": "rabbit-mound",
+    "title": "Rabbit mound and bones",
+    "group": "Secrets and special props",
+    "staged": false,
+    "isolated": false,
+    "now": "A dark burrow, scattered bones and skull create a compact visual joke under the trees.",
+    "suggest": "Keep it off the main historical trail as an optional grim surprise. Strengthen the tiny burrow versus oversized victim-bone contrast, but avoid adding dialogue or symbols that make the rabbit responsible for the valley’s history.",
+    "priority": "Keep and refine"
+  },
+  {
+    "id": "holy-reliquary",
+    "title": "Holy grenade reliquary",
+    "group": "Secrets and special props",
+    "staged": false,
+    "isolated": false,
+    "now": "A small open stone container holds a gold grenade near the cemetery.",
+    "suggest": "Give the container the church’s worn stone and a sheltered niche so it belongs visually to this place. Keep the comedic secret optional; do not imply it is the ancient seal’s solution or require a new theology to explain it.",
+    "priority": "Polish"
+  },
+  {
+    "id": "insulated-boots",
+    "title": "Insulated boots at the relay",
+    "group": "Secrets and special props",
+    "staged": false,
+    "isolated": false,
+    "now": "Bright yellow boots beside the relay are easy to spot and visually separate from ordinary supplies.",
+    "suggest": "Place them on a maintenance mat beside an open electrical service case. Keep the readable yellow, add worn soles and a small electrical-work pictogram, and let placement explain their purpose.",
+    "priority": "Keep and refine"
+  },
+  {
+    "id": "site-10",
+    "title": "Broken fence 1",
+    "group": "Everyday dressing",
+    "staged": false,
+    "isolated": false,
+    "now": "Broken posts and separated rails mark the approach to the ranger camp.",
+    "suggest": "Use these as remnants of an older valley boundary, with sagging wire or a few retained rails. Place the break along the actual footpath; let grass fill the abandoned side. Avoid adding a fresh explanatory sign to each fence.",
+    "priority": "Polish"
+  },
+  {
+    "id": "site-11",
+    "title": "Broken fence 2",
+    "group": "Everyday dressing",
+    "staged": false,
+    "isolated": false,
+    "now": "Broken posts and separated rails mark the approach to the hikers’ camp.",
+    "suggest": "Use these as remnants of an older valley boundary, with sagging wire or a few retained rails. Place the break along the actual footpath; let grass fill the abandoned side. Avoid adding a fresh explanatory sign to each fence.",
+    "priority": "Polish"
+  },
+  {
+    "id": "site-12",
+    "title": "Broken fence 3",
+    "group": "Everyday dressing",
+    "staged": false,
+    "isolated": false,
+    "now": "Broken posts and separated rails mark the approach to the trapper camp.",
+    "suggest": "Use these as remnants of an older valley boundary, with sagging wire or a few retained rails. Place the break along the actual footpath; let grass fill the abandoned side. Avoid adding a fresh explanatory sign to each fence.",
+    "priority": "Polish"
+  },
+  {
+    "id": "site-14",
+    "title": "Warning sign 1",
+    "group": "Everyday dressing",
+    "staged": false,
+    "isolated": false,
+    "now": "The red cemetery sign has a damaged dark mark that is hard to interpret at a glance.",
+    "suggest": "Make it a recent PGB restriction fixed to an older cemetery post. Use a single clear keep-out pictogram and a small PGB stencil; let the restrained graves explain why.",
+    "priority": "Polish"
+  },
+  {
+    "id": "site-15",
+    "title": "Warning sign 2",
+    "group": "Everyday dressing",
+    "staged": false,
+    "isolated": false,
+    "now": "The yellow cemetery sign reads mostly as a black dash.",
+    "suggest": "Use a recognizable disturbed-ground warning or a damaged prohibition symbol. Give the two cemetery signs different jobs rather than repeating an unclear mark.",
+    "priority": "Polish"
+  },
+  {
+    "id": "site-16",
+    "title": "Warning sign 3",
+    "group": "Everyday dressing",
+    "staged": false,
+    "isolated": false,
+    "now": "A generic yellow warning sign stands beside the medical supply wreck.",
+    "suggest": "Use a damaged fuel or unstable-wreck pictogram and a bent temporary stand. Keep medical identification on the cargo itself; the sign should not invent a separate Medic-4 event.",
+    "priority": "Polish"
+  },
+  {
+    "id": "site-17",
+    "title": "Warning sign 4",
+    "group": "Everyday dressing",
+    "staged": false,
+    "isolated": false,
+    "now": "A matching yellow sign stands beside the stripped utility truck and crates.",
+    "suggest": "Tie this warning to the visible damage: unsupported chassis or fuel spill. Keep the same PGB sign family, but use a different tilt, damaged edge and fastening from the medical wreck.",
+    "priority": "Polish"
+  },
+  {
+    "id": "site-18",
+    "title": "Fuel drum 1",
+    "group": "Everyday dressing",
+    "staged": false,
+    "isolated": false,
+    "now": "A red fuel drum with a yellow band repeats at the medical wreck.",
+    "suggest": "Add a dented shoulder, faded fuel stencil and a spill under the wreck. If this is an explosive barrel, preserve its readable red gameplay cue.",
+    "priority": "Polish"
+  },
+  {
+    "id": "site-19",
+    "title": "Fuel drum 2",
+    "group": "Everyday dressing",
+    "staged": false,
+    "isolated": false,
+    "now": "A red fuel drum with a yellow band repeats at the utility wreck.",
+    "suggest": "Put it on a pallet with a failed siphon hose or empty jerrycan, making the stripped truck look deliberately cannibalized. Preserve any explosive-barrel cue.",
+    "priority": "Polish"
+  },
+  {
+    "id": "site-20",
+    "title": "Fuel drum 3",
+    "group": "Everyday dressing",
+    "staged": false,
+    "isolated": false,
+    "now": "A red fuel drum with a yellow band repeats at the repair shed.",
+    "suggest": "Add an oily funnel and local grime where it supports the repair work. Keep its silhouette readable from the combat camera.",
+    "priority": "Polish"
+  },
+  {
+    "id": "site-21",
+    "title": "Fuel drum 4",
+    "group": "Everyday dressing",
+    "staged": false,
+    "isolated": false,
+    "now": "A red fuel drum with a yellow band repeats at the food shed.",
+    "suggest": "Separate fuel from the food crates with a small storage boundary; a few stains are enough. Do not suggest that the food objective itself explodes.",
+    "priority": "Polish"
+  },
+  {
+    "id": "site-22",
+    "title": "Fuel drum 5",
+    "group": "Everyday dressing",
+    "staged": false,
+    "isolated": false,
+    "now": "A red fuel drum with a yellow band repeats at the generator shelter.",
+    "suggest": "Connect the storage visually to the generator with a capped hose or drip pan. Differentiate the objective fuel container from ordinary scenery.",
+    "priority": "Polish"
+  },
+  {
+    "id": "site-23",
+    "title": "Fuel drum 6",
+    "group": "Everyday dressing",
+    "staged": false,
+    "isolated": false,
+    "now": "A red fuel drum with a yellow band repeats at the relay.",
+    "suggest": "Treat this as support fuel for a remote signal station: worn inventory mark, partial shelter and a capped service hose. Avoid making every utility prop another lore plaque.",
+    "priority": "Polish"
+  },
+  {
+    "id": "lake",
+    "title": "Lake and the Pit",
+    "group": "Landscape",
+    "staged": false,
+    "isolated": false,
+    "now": "The central water, mountains and visible cyan Pit make the lake the map’s visual center.",
+    "suggest": "Keep the deceptive calm. Add a small number of shoreline clues—an abandoned depth marker, a snapped mooring, submerged stone edges—rather than uniform supernatural effects everywhere. Let the strongest anomaly be near the Pit.",
+    "priority": "Story pass"
+  },
+  {
+    "id": "pit",
+    "title": "The Pit and its eight-stone ring",
+    "group": "Landscape",
+    "staged": false,
+    "isolated": false,
+    "now": "From above, two continuous bright cyan rune bands dominate; eight separate physical stones are not clear in this picture.",
+    "suggest": "Make the eight stone anchors and the collapsed lakebed more visible. Reserve stronger light for the established tone and puzzle states, with the rings reading as an effect of the stones. The current brightness risks making this look like a generic portal before players discover what it contains.",
+    "priority": "First pass"
+  },
+  {
+    "id": "woodland",
+    "title": "Woodland, rocks and ground cover",
+    "group": "Landscape",
+    "staged": false,
+    "isolated": false,
+    "now": "Low-poly trees, scattered rocks, reeds and patchy grass establish a readable, fairly open valley.",
+    "suggest": "Use local vegetation patterns to tell age: deep encroachment around Coldwater, crushed grass at recent camps, wet reeds along water, scraped soil at PGB works. Preserve the clean combat sightlines; the improvement is meaningful placement, not simply adding more foliage.",
+    "priority": "Story pass"
+  }
+]

@@ -1,0 +1,9 @@
+#175 training/light-switch
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: nvgClick()
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.5 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A big industrial light switch thrown, a heavy clack, and large lights buzzing on. No music, no voice.

@@ -1,0 +1,78 @@
+[
+  {
+    "mode": "baseline",
+    "name": "t1",
+    "pass": 2,
+    "fail": [
+      "FAIL cabin: the player is refused (cell taken), the primitive puts the light at lv0 (-)",
+      "FAIL aimed at the deck, a light goes on the deck: {\"refusal\":\"cell taken\"}"
+    ],
+    "raw": "wall@2,0 -> lv0 edge0 y=-3.00\nwall@2,1 -> lv0 edge0 y=-3.00\nplatform@2,0 -> lv1 base y=-1.00\nplatform@2,1 -> lv1 base y=-1.00\nrefusal light on plat: that is the cabin\nrailing@2,0 -> lv1 edge0 y=-0.75\nlight@2,0 -> lv1 object y=-0.46\nheavy@2,1 -> lv1 object y=-0.46\nPASS both walls go down on the ground (lv0)\nFAIL cabin: the player is refused (cell taken), the primitive puts the light at lv0 (-)\nFAIL aimed at the deck, a light goes on the deck: {\"refusal\":\"cell taken\"}\nPASS both platforms stack on the walls at lv1 (-1.00 over -3.00)",
+    "errors": []
+  },
+  {
+    "mode": "baseline",
+    "name": "t3",
+    "pass": 4,
+    "fail": [
+      "FAIL turret: no aim lv1, aimed at the deck lv1"
+    ],
+    "raw": "wall:ok platform:ok light=lv1/null flame=lv1/null heavy=lv1/null mortar=lv1/null\nwall:ok wall:ok platform:ok light=lv1/null flame=lv1/null heavy=lv1/null mortar=lv1/null\nwall:ok floor:ok light=lv0/null flame=lv0/null heavy=lv0/null mortar=lv0/null\nsandbag:ok platform:NO({\"refusal\":\"needs a wall or floor under it\"}) light=lv0/null flame=lv0/null heavy=lv0/null mortar=lv0/null\nwall:ok platform:ok railing:ok light=lv1/null flame=lv1/null heavy=lv1/null mortar=lv1/null\nwall:ok floor:ok railing:NO({\"refusal\":\"needs a platform or floor under it\"}) light=lv0/null flame=lv0/null heavy=lv0/null mortar=lv0/null\nwall:ok platform:ok wire:ok light=lv1/null flame=lv1/null heavy=lv1/null mortar=lv1/null\nPASS wall+platform, wall+wall+platform, wall+floor, +railing and +wire stacks all go up\nPASS a platform on sandbags is refused (sandbag:ok platform:NO({\"refusal\":\"needs a wall or floor under it\"}))\nFAIL turret: no aim lv1, aimed at the deck lv1\nPASS wall+floor: floor on the ground; railing refused on the wall edge (needs a platform or floor under it), fine on edge1 ({\"level\":0,\"slot\":\"edge1\"})\nPASS aimed at the wall top the floor roofs it (lv1) and takes a railing (lv1)",
+    "errors": []
+  },
+  {
+    "mode": "current",
+    "name": "t1",
+    "pass": 2,
+    "fail": [
+      "FAIL cabin: the player is refused (cell taken), the primitive puts the light at lv0 (-)",
+      "FAIL aimed at the deck, a light goes on the deck: {\"refusal\":\"cell taken\"}"
+    ],
+    "raw": "wall@2,0 -> lv0 edge0 y=-3.00\nwall@2,1 -> lv0 edge0 y=-3.00\nplatform@2,0 -> lv1 base y=-1.00\nplatform@2,1 -> lv1 base y=-1.00\nrefusal light on plat: that is the cabin\nrailing@2,0 -> lv1 edge0 y=-0.75\nlight@2,0 -> lv1 object y=-0.46\nheavy@2,1 -> lv1 object y=-0.46\nPASS both walls go down on the ground (lv0)\nFAIL cabin: the player is refused (cell taken), the primitive puts the light at lv0 (-)\nFAIL aimed at the deck, a light goes on the deck: {\"refusal\":\"cell taken\"}\nPASS both platforms stack on the walls at lv1 (-1.00 over -3.00)",
+    "errors": []
+  },
+  {
+    "mode": "current",
+    "name": "t3",
+    "pass": 4,
+    "fail": [
+      "FAIL turret: no aim lv1, aimed at the deck lv1"
+    ],
+    "raw": "wall:ok platform:ok light=lv1/null flame=lv1/null heavy=lv1/null mortar=lv1/null\nwall:ok wall:ok platform:ok light=lv1/null flame=lv1/null heavy=lv1/null mortar=lv1/null\nwall:ok floor:ok light=lv0/null flame=lv0/null heavy=lv0/null mortar=lv0/null\nsandbag:ok platform:NO({\"refusal\":\"needs a wall or floor under it\"}) light=lv0/null flame=lv0/null heavy=lv0/null mortar=lv0/null\nwall:ok platform:ok railing:ok light=lv1/null flame=lv1/null heavy=lv1/null mortar=lv1/null\nwall:ok floor:ok railing:NO({\"refusal\":\"needs a platform or floor under it\"}) light=lv0/null flame=lv0/null heavy=lv0/null mortar=lv0/null\nwall:ok platform:ok wire:ok light=lv1/null flame=lv1/null heavy=lv1/null mortar=lv1/null\nPASS wall+platform, wall+wall+platform, wall+floor, +railing and +wire stacks all go up\nPASS a platform on sandbags is refused (sandbag:ok platform:NO({\"refusal\":\"needs a wall or floor under it\"}))\nFAIL turret: no aim lv1, aimed at the deck lv1\nPASS wall+floor: floor on the ground; railing refused on the wall edge (needs a platform or floor under it), fine on edge1 ({\"level\":0,\"slot\":\"edge1\"})\nPASS aimed at the wall top the floor roofs it (lv1) and takes a railing (lv1)",
+    "errors": []
+  },
+  {
+    "mode": "current",
+    "name": "t75",
+    "pass": 16,
+    "fail": [],
+    "raw": "PASS GB-50 hooks exported\nPASS knocked back along the blow (kv -2.44, 0.00)\nPASS a stumble: lurch 0.73, aim off -0.064 rad, jolt 0.26\nPASS a shambler does not put him on a knee\nPASS a short slide: 0.40 m (dz 0.00)\nPASS over within a moment (speedK 1)\nPASS a brute puts him on one knee (0.55 s)\nPASS slowed, never stopped: walk speed x0.45 at worst\nPASS more for a brute: 1.00 m vs 0.40 m\nPASS back on his feet within 0.55 s\nPASS no knee lock: the next heavy hit within 3 s only knocks him back\nPASS five spawned inside the marine (5)\nPASS nobody inside him: the worst gap is 0.040 m (shambler, 325 samples)\nPASS they crowd him: 3 of 5 at arm’s length\nPASS and their blows land from the ring (8 hits, -72 hp)\nPASS no page errors ()",
+    "errors": []
+  },
+  {
+    "mode": "current",
+    "name": "t93",
+    "pass": 10,
+    "fail": [
+      "FAIL walking, no foot goes more than 5 cm into the ground or lifts past 20 cm (drowned -0.06/0.01, demon -0.06/-0.04)"
+    ],
+    "raw": "PASS at rest every walker's soles are on the ground, within 3 cm (shambler 0.00 feral 0.00 drowned 0.00 military 0.00 brute 0.00 spitter 0.00 screamer 0.00 colossus 0.00 demon 0.00 bomber 0.00)\nFAIL walking, no foot goes more than 5 cm into the ground or lifts past 20 cm (drowned -0.06/0.01, demon -0.06/-0.04)\nPASS every head is inside its hit column, give or take 4 cm of pose (shambler 1.77<1.85 feral 1.51<1.58 drowned 1.84<1.92 military 2.15<2.24 brute 2.60<2.83 spitter 1.90<1.99 screamer 1.90<1.98 colossus 4.38<4.71 demon 3.13<3.24 bomber 2.07<2.16)\nPASS and its centre is in the headshot slice, above 0.78 of hitH, brute aside (shambler 0.84 feral 0.82 drowned 0.82 military 0.84 brute 0.81 spitter 0.79 screamer 0.81 colossus 0.82 demon 0.81 bomber 0.84)\nPASS a bullet at the head's centre is a headshot (e.g. shambler 18.50 vs 10.00)\nPASS hitH (about) unchanged where the head already fitted (brute 2.83, colossus 4.71)\nPASS two pellets do not give it a reacting body\nPASS its feet stay on the ground (deepest -0.01 m) and after (0.01 m)\nPASS a crawling shambler's hips stay where they were (0.26-0.28 m, before 0.25)\nPASS leaper and spider hips unchanged (0.57, 0.50)\nPASS no page errors",
+    "errors": []
+  },
+  {
+    "mode": "current",
+    "name": "t215",
+    "pass": 4,
+    "fail": [],
+    "raw": "PASS read index.html and the scripts and styles the game loaded (193 files)\nPASS no broken characters in them\nPASS the HUD reads clean: timeLine \"Daylight · 08:12 · Grace\", tacticalLine \"NVG — · Laser — · Light —\", grenadeChips \"G×3H×0\", ammoDetail \"12 / 12  ·  50 Bullets  ·  SEMI\", hpNum \"100 / 100\"\nPASS and shows its dots and times signs (NVG — · Laser — · Light — / G×3H×0)",
+    "errors": []
+  },
+  {
+    "mode": "current",
+    "name": "t222",
+    "pass": 9,
+    "fail": [],
+    "raw": "INFO shambler  head: head 6 | chest: body 6 | legs: legs 6\nINFO feral     head: head 6 | chest: body 5, head 1 | legs: legs 6\nINFO brute     head: head 6 | chest: body 6 | legs: legs 6\nINFO spider    head: head 6 | chest: body 6 | legs: -\nINFO leaper    head: head 6 | chest: head 6 | legs: -\nINFO colossus  head: head 6 | chest: body 6 | legs: legs 6\nPASS pointing at a head is a headshot: 36/36 (was 17/64)\nPASS pointing at a chest lands in the body: body 29, head 1 (a head only where the head covers the chest from up here)\nPASS pointing at the legs lands low: 24/24\nPASS no round aimed at a body goes into the ground or past it (0)\nPASS the reticle rings a head lined up, and not a chest (true, los-clear)\nPASS his round into the head flashes the gold X on the reticle (rgb(255, 210, 74))\nPASS the ticks show the spread: pistol 7.0 px, shotgun 38.7 px\nPASS a runner crossing in front of him at 3-6 m/s, the cursor on it, is hit: hit 16 (was 7/36)\nPASS the launcher is not led (it lobs): -0.27 m off the body",
+    "errors": []
+  }
+]

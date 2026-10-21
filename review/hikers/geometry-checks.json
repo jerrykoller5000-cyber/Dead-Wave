@@ -1,0 +1,71 @@
+{
+  "cases": [
+    {
+      "seed": 1,
+      "variant": 0,
+      "vertices": 6357,
+      "originalVertices": 6357,
+      "additionalColliders": 0
+    },
+    {
+      "seed": 1,
+      "variant": 1,
+      "vertices": 11670,
+      "originalVertices": 4992,
+      "additionalColliders": 3
+    },
+    {
+      "seed": 1,
+      "variant": 2,
+      "vertices": 11770,
+      "originalVertices": 11770,
+      "additionalColliders": 0
+    },
+    {
+      "seed": 61,
+      "variant": 0,
+      "vertices": 6357,
+      "originalVertices": 6357,
+      "additionalColliders": 0
+    },
+    {
+      "seed": 61,
+      "variant": 1,
+      "vertices": 11670,
+      "originalVertices": 4992,
+      "additionalColliders": 3
+    },
+    {
+      "seed": 61,
+      "variant": 2,
+      "vertices": 11770,
+      "originalVertices": 11770,
+      "additionalColliders": 0
+    },
+    {
+      "seed": 511,
+      "variant": 0,
+      "vertices": 6357,
+      "originalVertices": 6357,
+      "additionalColliders": 0
+    },
+    {
+      "seed": 511,
+      "variant": 1,
+      "vertices": 11670,
+      "originalVertices": 4992,
+      "additionalColliders": 3
+    },
+    {
+      "seed": 511,
+      "variant": 2,
+      "vertices": 11770,
+      "originalVertices": 11770,
+      "additionalColliders": 0
+    }
+  ],
+  "rngUnchanged": true,
+  "existingCollidersUnchanged": true,
+  "unrelatedCampsIdentical": true,
+  "fakeThree": true
+}

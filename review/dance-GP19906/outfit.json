@@ -1,0 +1,72 @@
+{
+  "wardrobe": {
+    "version": 1,
+    "items": {
+      "cap": {
+        "camo": "papDigital",
+        "style": "ballcapBack"
+      },
+      "helmet": {
+        "camo": "papDigital"
+      },
+      "mask": {
+        "camo": "papDigital"
+      },
+      "shirt": {
+        "camo": "papDigital",
+        "sleeves": "rolled"
+      },
+      "trousers": {
+        "camo": "papDigital",
+        "cut": "trousers"
+      },
+      "gloves": {
+        "camo": "feldgrau",
+        "worn": true
+      },
+      "carrier": {
+        "camo": "papDigital"
+      },
+      "pads": {
+        "camo": "papDigital"
+      },
+      "holster": {
+        "camo": "papDigital"
+      },
+      "belt": {
+        "camo": "papDigital"
+      },
+      "pack": {
+        "camo": "papDigital"
+      },
+      "eyewear": {
+        "style": "aviators"
+      },
+      "boots": {
+        "colour": "black",
+        "rubber": "yellow"
+      }
+    },
+    "guns": {
+      "m4": "papDigital",
+      "shotgun": "papDigital",
+      "sniper": "m14Woodland",
+      "minigun": "dpmDesert",
+      "uzi": "papDigital",
+      "pistol": "teloMimetico"
+    },
+    "body": {
+      "hair": "darkBrown",
+      "eyes": "blue",
+      "skin": 0
+    }
+  },
+  "source": "Read-only latest tt_wardrobe from the Grave Shift Edge profile, port 8766",
+  "gear": {
+    "helmet": true,
+    "vest": true,
+    "pads": true,
+    "nvg": true
+  },
+  "gearSource": "Full training kit as shown in Jerry's screenshots"
+}

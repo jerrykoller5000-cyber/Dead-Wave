@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Disclaimer scene (render source)</title>
+<!-- CL-191: the AI disclosure, drawn one frame at a time by render.mjs (window.renderAt(t)) and baked into
+     assets/disclaimer/disclaimer.mp4. Not part of the game; nothing here runs at play time. -->
+<style>
+  @font-face { font-family: 'Black Ops One'; src: url('../../vendor/fonts/black-ops-one-400-latin.woff2') format('woff2'); font-weight: 400; }
+  @font-face { font-family: 'Chakra Petch'; src: url('../../vendor/fonts/chakra-petch-500-latin.woff2') format('woff2'); font-weight: 500; }
+  @font-face { font-family: 'Chakra Petch'; src: url('../../vendor/fonts/chakra-petch-600-latin.woff2') format('woff2'); font-weight: 600; }
+  @font-face { font-family: 'Chakra Petch'; src: url('../../vendor/fonts/chakra-petch-700-latin.woff2') format('woff2'); font-weight: 700; }
+  html, body { margin: 0; background: #000; }
+  #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: #000; }
+  .abs { position: absolute; }
+  .full { position: absolute; inset: 0; }
+  #scene { position: absolute; inset: 0; }
+  /* police lights */
+  .glow { position: absolute; inset: -12% -12% 0; opacity: 0; mix-blend-mode: screen; }
+  #glowR { background: radial-gradient(ellipse 50% 62% at 15% 6%, rgba(255, 44, 34, 1), rgba(255, 38, 30, .42) 34%, rgba(255, 38, 30, .1) 60%, rgba(255, 38, 30, 0) 78%); }
+  #glowB { background: radial-gradient(ellipse 50% 62% at 85% 6%, rgba(44, 100, 255, 1), rgba(36, 92, 255, .44) 34%, rgba(36, 92, 255, .11) 60%, rgba(36, 92, 255, 0) 78%); }
+  .wash { position: absolute; inset: 0; opacity: 0; mix-blend-mode: screen; }
+  .fog { position: absolute; left: -200px; top: -60px; width: 2320px; height: 1200px; opacity: 0; mix-blend-mode: screen; background-size: 2320px 1200px; }
+  #fogR { background-image: url('fogR.png'); }
+  #fogB { background-image: url('fogB.png'); }
+  #washR { background: rgba(255, 30, 24, .10); }
+  #washB { background: rgba(30, 80, 255, .11); }
+  .beam { position: absolute; top: -40px; width: 1500px; height: 1400px; opacity: 0; mix-blend-mode: screen; transform-origin: 0 0; }
+  #beamR { left: 120px; background: linear-gradient(90deg, rgba(255, 60, 50, 0), rgba(255, 60, 50, .16) 45%, rgba(255, 60, 50, 0)); clip-path: polygon(0 0, 100% 72%, 100% 100%, 0 3%); }
+  #beamB { left: 1800px; background: linear-gradient(90deg, rgba(60, 110, 255, 0), rgba(60, 110, 255, .18) 45%, rgba(60, 110, 255, 0)); clip-path: polygon(0 0, 100% 72%, 100% 100%, 0 3%); }
+  #bar { position: absolute; left: 50%; top: 0; width: 620px; height: 14px; margin-left: -310px; display: flex; gap: 10px; }
+  #bar::before { content: ''; position: absolute; inset: -4px -14px 0; background: #07080b; border-radius: 0 0 10px 10px; z-index: -1; }
+  #bar i { flex: 1; opacity: 0; }
+  #barR { background: linear-gradient(90deg, transparent, #ff5143 22%, #ffd0c8 50%, #ff5143 78%, transparent); box-shadow: 0 0 26px 9px rgba(255, 50, 36, .65); }
+  #barB { background: linear-gradient(90deg, transparent, #4f7dff 22%, #d6e2ff 50%, #4f7dff 78%, transparent); box-shadow: 0 0 26px 9px rgba(60, 100, 255, .65); }
+  /* the stage */
+  #floor { position: absolute; left: 0; right: 0; top: 700px; bottom: 0; background: linear-gradient(to bottom, rgba(14, 18, 26, 0), rgba(14, 18, 26, .55) 55%, rgba(10, 12, 18, .8)); }
+  #floorR, #floorB { position: absolute; left: 0; right: 0; top: 760px; bottom: 0; opacity: 0; mix-blend-mode: screen; }
+  #floorR { background: radial-gradient(ellipse 40% 60% at 22% 100%, rgba(255, 40, 30, .42), transparent 70%); }
+  #floorB { background: radial-gradient(ellipse 40% 60% at 78% 100%, rgba(40, 90, 255, .46), transparent 70%); }
+  #haze { position: absolute; left: 960px; top: 905px; width: 1100px; height: 420px; margin: -210px 0 0 -550px; background: radial-gradient(ellipse at center, rgba(70, 140, 190, .22), rgba(70, 140, 190, .07) 45%, transparent 70%); opacity: 0; mix-blend-mode: screen; }
+  #cone { position: absolute; inset: 0; opacity: 0; mix-blend-mode: screen; background: linear-gradient(to bottom, rgba(200, 225, 255, 0), rgba(200, 225, 255, .075) 60%, rgba(200, 225, 255, .12) 88%, rgba(200, 225, 255, 0) 99%); clip-path: polygon(900px 0, 1020px 0, 1360px 1080px, 560px 1080px); -webkit-mask-image: linear-gradient(90deg, transparent 29%, #000 41%, #000 59%, transparent 71%); }
+  #coneFog { position: absolute; inset: 0; opacity: 0; mix-blend-mode: screen; background: url('fogW.png'); clip-path: polygon(900px 0, 1020px 0, 1360px 1080px, 560px 1080px); -webkit-mask-image: linear-gradient(to bottom, transparent, rgba(0,0,0,.5) 50%, rgba(0,0,0,.8) 85%, transparent); }
+  #pool { position: absolute; left: 960px; top: 1004px; width: 820px; height: 120px; margin: -60px 0 0 -410px; background: radial-gradient(ellipse at center, rgba(185, 215, 255, .30), rgba(185, 215, 255, .09) 50%, transparent 72%); opacity: 0; mix-blend-mode: screen; }
+  #dancerBox { position: absolute; left: 638px; top: 739px; width: 589px; height: 331px; }
+  #dancer, #reflect { position: absolute; left: 0; top: 0; width: 589px; height: 331px; }
+  #dancer { filter: drop-shadow(0 0 7px rgba(130, 205, 255, .28)) drop-shadow(0 0 2px rgba(255, 200, 140, .2)); }
+  #reflect { transform: scaleY(-1); filter: blur(2px); }
+  /* text */
+  #text { position: absolute; inset: 0; }
+  .row { position: absolute; left: 0; width: 1920px; text-align: center; white-space: nowrap; color: #f3f1ea; font: 700 64px/1 'Chakra Petch', sans-serif; letter-spacing: .015em; text-shadow: 0 0 22px rgba(255, 255, 255, .16), 0 3px 0 rgba(0, 0, 0, .55); }
+  .streak { position: absolute; left: 0; width: 1920px; height: 3px; opacity: 0; mix-blend-mode: screen; }
+  .row .w { display: inline-block; margin: 0 .13em; opacity: 0; transform-origin: 50% 70%; }
+  .row .w.gap { margin-left: .3em; }
+  .attn { font: 400 214px/1 'Black Ops One', sans-serif; color: #ff3326; letter-spacing: .035em; }
+  .ai { font: 700 98px/1 'Chakra Petch', sans-serif; letter-spacing: .1em; color: #d4f8ff; text-transform: uppercase; }
+  .ai .l { display: inline-block; opacity: 0; }
+  .slop { color: #ff4a3a; font-size: 74px; text-transform: uppercase; letter-spacing: .03em; }
+  .slop .l { display: inline-block; }
+  .fun { color: #ffc54d; font-size: 136px; letter-spacing: .02em; text-transform: uppercase; }
+  .row .w.fun { margin-left: .28em; transform-origin: 8% 78%; }
+  .git { font: 400 262px/1 'Black Ops One', sans-serif; color: #ff3a2b; letter-spacing: .04em; }
+  .tape { position: absolute; left: 960px; height: 4px; width: 1500px; margin-left: -750px; background: linear-gradient(90deg, transparent, rgba(255, 60, 44, .85) 20%, rgba(255, 60, 44, .85) 80%, transparent); transform: scaleX(0); }
+  #sub { position: absolute; font: 500 30px/1 'Chakra Petch', sans-serif; letter-spacing: .14em; color: #9da6b8; opacity: 0; white-space: nowrap; }
+  #ring { position: absolute; left: 960px; top: 480px; width: 200px; height: 200px; margin: -100px 0 0 -100px; border-radius: 50%; border: 6px solid rgba(255, 90, 70, .9); opacity: 0; box-shadow: 0 0 40px rgba(255, 60, 40, .6), inset 0 0 40px rgba(255, 60, 40, .4); }
+  .spark { position: absolute; width: 5px; height: 26px; border-radius: 3px; background: linear-gradient(#fff3c4, #ffb23a); opacity: 0; box-shadow: 0 0 10px rgba(255, 190, 70, .8); }
+  /* dashcam overlay (does not shake) */
+  #hud { position: absolute; inset: 0; opacity: 0; font: 600 26px/1 'Chakra Petch', sans-serif; color: rgba(236, 240, 246, .78); letter-spacing: .12em; }
+  .br { position: absolute; width: 74px; height: 74px; border-color: rgba(236, 240, 246, .55); border-style: solid; border-width: 0; }
+  #brTL { left: 56px; top: 50px; border-left-width: 3px; border-top-width: 3px; }
+  #brTR { right: 56px; top: 50px; border-right-width: 3px; border-top-width: 3px; }
+  #brBL { left: 56px; bottom: 50px; border-left-width: 3px; border-bottom-width: 3px; }
+  #brBR { right: 56px; bottom: 50px; border-right-width: 3px; border-bottom-width: 3px; }
+  #rec { position: absolute; left: 92px; top: 86px; }
+  #rec b { display: inline-block; width: 18px; height: 18px; border-radius: 50%; background: #ff3b30; margin-right: 14px; vertical-align: -1px; box-shadow: 0 0 12px rgba(255, 50, 40, .8); }
+  #tc { position: absolute; right: 92px; top: 86px; font-variant-numeric: tabular-nums; }
+  /* camera */
+  #flash { position: absolute; inset: 0; background: radial-gradient(ellipse 72% 64% at 50% 46%, #ffffff, rgba(255, 242, 222, .92) 36%, rgba(255, 214, 160, .42) 68%, rgba(255, 190, 120, 0) 100%); opacity: 0; }
+  #grain { position: absolute; inset: -64px; background: url('grain.png'); opacity: .055; mix-blend-mode: screen; }
+  #vignette { position: absolute; inset: 0; background: radial-gradient(ellipse 75% 75% at 50% 46%, transparent 55%, rgba(0, 0, 0, .55) 85%, rgba(0, 0, 0, .8)); }
+  #black { position: absolute; inset: 0; background: #000; opacity: 0; }
+</style>
+</head>
+<body>
+<div id="root">
+  <div id="scene">
+    <div id="washR" class="wash"></div><div id="washB" class="wash"></div>
+    <div id="fogR" class="fog"></div><div id="fogB" class="fog"></div>
+    <div id="glowR" class="glow"></div><div id="glowB" class="glow"></div>
+    <div id="beamR" class="beam"></div><div id="beamB" class="beam"></div>
+    <div id="floor"></div><div id="floorR"></div><div id="floorB"></div>
+    <div id="haze"></div>
+    <div id="cone"></div><div id="coneFog"></div><div id="pool"></div>
+    <div id="dancerBox"><img id="reflect" alt=""><img id="dancer" alt=""></div>
+    <div id="ring"></div>
+    <div id="text"></div>
+    <div id="sub"></div>
+    <div id="streakA" class="streak"></div><div id="streakB" class="streak"></div>
+  </div>
+  <div id="bar"><i id="barR"></i><i id="barB"></i></div>
+  <div id="hud"><i class="br" id="brTL"></i><i class="br" id="brTR"></i><i class="br" id="brBL"></i><i class="br" id="brBR"></i>
+    <div id="rec"><b></b>REC</div><div id="tc">00:00:00:00</div></div>
+  <div id="flash"></div>
+  <div id="grain"></div>
+  <div id="vignette"></div>
+  <div id="black"></div>
+</div>
+<script src="scene.js"></script>
+</body>
+</html>

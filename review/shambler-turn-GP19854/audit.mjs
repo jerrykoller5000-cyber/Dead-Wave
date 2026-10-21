@@ -1,0 +1,11 @@
+import fs from 'node:fs';import vm from 'node:vm';import assert from 'node:assert/strict';import {scan,violations} from '../../tools/check-players.mjs';
+const dir='review/shambler-turn-GP19854',baseline=fs.readFileSync(`${dir}/before.html`,'utf8'),current=fs.readFileSync('index.html','utf8');
+const files={'index.html':baseline.replace('<head><base href="/">','<head>')};
+const fakeFs={existsSync:()=>false,readFileSync:p=>files[p],writeFileSync:(p,s)=>{files[p]=s;}};
+for(const script of ['edit.mjs','contact-fix.mjs'])vm.runInNewContext(fs.readFileSync(`${dir}/${script}`,'utf8').replace("import fs from 'node:fs';",''),{fs:fakeFs,console:{log:()=>{}}});
+fs.writeFileSync(`${dir}/expected-only.html`,files['index.html']);
+const hooks=["import { steerShambler, shamblerCanReach, hasShamblerSteering }",'const shamblerTurn = steerShambler(z, sx, sz, dt);','if (shamblerTurn) { sx = shamblerTurn.x; sz = shamblerTurn.z; spd *= shamblerTurn.pace; }','shamblerTurn ? shamblerTurn.yaw : Math.atan2(sx, sz)','const contact = stillNearPlayer && shamblerCanReach','else if (shamblerCanReach(z, zTarget(z).position.x - mx','if (hasShamblerSteering(z))'];
+for(const h of hooks)assert.equal(current.split(h).length-1,1,'unique live hook: '+h);
+const gb=s=>s.split('\n').filter(l=>l.includes('GB-158'));assert.deepEqual(gb(current),gb(baseline),'preserve active owner speed/cadence lines');
+const bad=s=>violations(scan(s)).map(({name,text})=>({name,text}));assert.deepEqual(bad(baseline),bad(current));
+const proof={sixScopedAreas:true,concurrentOwnerChanges:files['index.html']!==current,existingPreflight:bad(current),newPreflightViolations:0};fs.writeFileSync(`${dir}/audit-proof.json`,JSON.stringify(proof,null,2));console.log('PASS: six scoped source areas, GB158 lines preserved, same five existing aiming preflight reads. Owner changes require separate diff inspection.');

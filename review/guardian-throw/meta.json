@@ -1,0 +1,9 @@
+{
+  "asset": "guardian-throw",
+  "owner": "claude",
+  "rig": "guardian",
+  "clip": "throw",
+  "reference": "OverhandThrow",
+  "task": "CL-62",
+  "design": "default"
+}

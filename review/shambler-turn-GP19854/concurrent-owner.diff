@@ -1,0 +1,88 @@
+--- reserved-edits
+
++++ live
+
+@@ -1066,6 +1066,8 @@
+
+             <label><span data-dw-text="settings.music"></span><input id="volMusic" type="range" min="0" max="100" value="30"><b id="volMusicNum">30</b></label>
+             <label><span data-dw-text="settings.sfx"></span><input id="volSfx" type="range" min="0" max="100" value="80"><b id="volSfxNum">80</b></label>
+             <label><span data-dw-text="settings.look"></span><input id="lookSens" type="range" min="25" max="300" step="5" value="100"><b id="lookSensNum">1.0x</b></label>
++            <label><span id="aimFovLabel">Aim FOV</span><input id="aimFov" type="range" min="24" max="60" step="1" value="38"><b id="aimFovNum">38°</b></label>
++            <label><span id="aimTiltLabel">Aim tilt</span><input id="aimTilt" type="range" min="0" max="30" step="1" value="0"><b id="aimTiltNum">0°</b></label>
+           </div>
+           <div class="settingRow">
+             <span data-dw-text="settings.graphics"></span>
+@@ -17267,7 +17269,13 @@
+
+     const OTS_LIFT = 0.2;         // the camera a little over the pivot
+     const OTS_PITCH = [-0.72, 0.62];   // how far he can look down / up (radians)
+     const OTS_SENS = 0.0022;      // radians a pixel of mouse, times Look sensitivity
+-    const OTS_IN = 9, OTS_OUT = 7;     // how quickly it eases in and out
++    const OTS_IN = 3.2, OTS_OUT = 2.8; // CL-175 (Jerry: "make the transition between the two a bit longer"): about a second each way (was 9 / 7)
++    // CL-175 (Jerry: "an aim FOV slider and tilt angle in the settings"): Settings > Aim FOV (the shouldered view's field
++    // of view, 24-60 degrees, 38 as before) and Aim tilt (how far down the view is tipped when he shoulders the gun,
++    // 0-30 degrees, 0 = level as before). Kept in localStorage tt_aim_fov / tt_aim_tilt.
++    let aimFov = 38, aimTiltDeg = 0;
++    try { const f = +localStorage.getItem('tt_aim_fov'); if (f >= 24 && f <= 60) aimFov = f; } catch (_) {}
++    try { const a = localStorage.getItem('tt_aim_tilt'); if (a != null && +a >= 0 && +a <= 30) aimTiltDeg = +a; } catch (_) {}
+     // Camera, Zomboid-style: a heading that aiming never moves. The marine turns to face
+     // the cursor through 360° instead, so the ground under a still reticle stays put and
+     // shots land on it. (The camera used to swing round after the aim, which slid the
+@@ -39621,7 +39629,9 @@
+
+     }
+     function updateOts(dt) {
+       const want = otsAllowed();
+-      if (want && !OTS.on) { OTS.on = true; OTS.yaw = aimYaw; OTS.pitch = 0; }
++      // CL-175: the view starts tipped down by the Aim tilt setting (0 = level); the camera rises behind the shoulder
++      // as it tips, and the mouse can still look up and down from there.
++      if (want && !OTS.on) { OTS.on = true; OTS.yaw = aimYaw; OTS.pitch = Math.max(OTS_PITCH[0], -THREE.MathUtils.degToRad(aimTiltDeg)); }
+       else if (!want && OTS.on) { OTS.on = false; otsLockWanted(false); }
+       const rate = OTS.on ? OTS_IN : OTS_OUT;
+       OTS.w += ((OTS.on ? 1 : 0) - OTS.w) * (1 - Math.exp(-rate * dt));
+@@ -48339,6 +48349,17 @@
+
+         show();
+       });
+     }
++    {   // CL-175: Aim FOV and Aim tilt (the shoulder aim, CL-174)
++      const fov = document.getElementById('aimFov'), fovNum = document.getElementById('aimFovNum');
++      const tilt = document.getElementById('aimTilt'), tiltNum = document.getElementById('aimTiltNum');
++      const fl = document.getElementById('aimFovLabel'), tlb = document.getElementById('aimTiltLabel');
++      if (fl) fl.textContent = sayText('settings.aimFov', {}, 'Aim FOV');
++      if (tlb) tlb.textContent = sayText('settings.aimTilt', {}, 'Aim tilt');
++      const show = () => { fovNum.textContent = aimFov + '\u00b0'; tiltNum.textContent = aimTiltDeg + '\u00b0'; };
++      fov.value = aimFov; tilt.value = aimTiltDeg; show();
++      fov.addEventListener('input', () => { aimFov = Math.max(24, Math.min(60, +fov.value)); try { localStorage.setItem('tt_aim_fov', String(aimFov)); } catch (_) {} show(); });
++      tilt.addEventListener('input', () => { aimTiltDeg = Math.max(0, Math.min(30, +tilt.value)); try { localStorage.setItem('tt_aim_tilt', String(aimTiltDeg)); } catch (_) {} show(); });
++    }
+ 
+     // Camera settings apply live — both are read straight out of the frame loop. Turning
+     // both off gives the plain fixed rig: no pan, manual tilt back on middle-drag.
+@@ -49714,13 +49735,13 @@
+
+           rollT <= 0 && !shopOpen;
+         if (sniperScoping !== sniperScopingNow) AudioSys.reloadCue('grab', 0.4);
+         sniperScopingNow = sniperScoping;
+-        const fovZoom = sniperZoom ? SCOPE_ZOOM_FOV[scopeZoomLevel] : FOV_ZOOM;
++        const fovZoom = sniperZoom ? SCOPE_ZOOM_FOV[scopeZoomLevel] : aimFov;   // CL-175: the Aim FOV setting (FOV_ZOOM 38 was fixed)
+         const distZoom = sniperZoom ? CAM_DIST_DEFAULT : CAM_DIST_ZOOM;
+         // A few degrees wider at a full sprint: the world opens up and the speed reads.
+         const sprintKick = (!wantZoom && sprintFovKick > 0) ? sprintFovKick : 0;
+         const fovTarget = wantZoom && !sniperZoom ? fovZoom : FOV_DEFAULT + sprintKick;
+         const distTarget = wantZoom ? distZoom : CAM_DIST_DEFAULT;
+-        const zoomLerp = 1 - Math.pow(sniperZoom ? 0.00002 : 0.0008, dt);
++        const zoomLerp = sniperZoom ? 1 - Math.pow(0.00002, dt) : 1 - Math.exp(-OTS_IN * dt);   // CL-175: the shoulder zoom keeps time with the shoulder camera
+         camFovCurrent += (fovTarget - camFovCurrent) * zoomLerp;
+         camDistCurrent += (distTarget - camDistCurrent) * zoomLerp;
+         if (Math.abs(camera.fov - camFovCurrent) > 0.01) {
+@@ -50483,7 +50504,7 @@
+
+       graceActiveDbg: () => zombieGraceActive(), restartGraceDbg: () => { hoursSinceMatchStart = 0; },   // GB-51 (t76)
+       getSawHeat: () => ({ heat: sawHeat, overheat: sawOverheat, biteT: sawBiteT }), setSawHeatDbg: (v) => { sawHeat = v; sawOverheat = false; }, setMouseFireDbg: (v) => { mouseFireHeld = !!v; }, MELEE_SIZE_MUL, meleeSizeMul, WEAPON_STATS,   // GB-52
+       getHitStumble: () => ({ ...hitStumble, speedK: hitStumbleSpeedK(), react: hitReaction.strength * Math.pow(hitReaction.time / hitReaction.duration, 2) }), HIT_KNEE_S, HIT_AIM_S,   // GB-50
+-          otsDbg: () => ({ on: OTS.on, w: OTS.w, yaw: OTS.yaw, pitch: OTS.pitch, locked: document.pointerLockElement === renderer.domElement }), otsLook: (dx, dy) => otsMouse({ movementX: dx, movementY: dy }),   /* CL-174 */
++          otsDbg: () => ({ on: OTS.on, w: OTS.w, yaw: OTS.yaw, pitch: OTS.pitch, locked: document.pointerLockElement === renderer.domElement, fov: aimFov, tilt: aimTiltDeg }), otsLook: (dx, dy) => otsMouse({ movementX: dx, movementY: dy }),   /* CL-174 */
+           rotateBuildDbg: () => rotateBuild(), toggleStairs, nearestFoldStairs, emplacementRate, platforms, updateFoldingStairs, weaponMeshes, offhandMeshes, knifeMesh: () => knife, nightLockdown, lockdownState: () => ({ on: nightLockdown(), placeMode, buildMode, wheel: wheelKind, briefing: hqBriefingOpen, shop: shopOpen, cif: cifOpen }),   /* CU-82 */ setAmmoDbg: (k, n) => { if (isMagazineWeapon(k)) { if (!magazineStore[k]) issueWeaponMagazines(k, 0, 0); setLoadedMagazineRounds(magazineStore, k, n, dualActive && !!DUAL_CAPABLE[k] && !!dualOwned[k]); syncMagazine(k); } else ammoByWeapon[k] = n; }, getPlaceHint: () => placeHint, findRepairCandidate, findScrapCandidate, onMyStorey, refusalText, fireRoundDbg: (ox, oy, oz, dx, dy, dz, damage, speed, pierce) => { spawnProjectile(false, new THREE.Vector3(ox, oy, oz), new THREE.Vector3(dx, dy, dz), damage, 2, null, speed, 'bullet', pierce | 0); return projectiles[projectiles.length - 1]; }, stepProjectilesDbg: (dt) => { updateProjectiles(dt); flushShotHits(); }, /* GB-58 follow-up: one round, stepped by hand */ session, startDeathCine, skipDeathCine, endDeathCine, getCine: () => cine, plotSpot, nearestGrave, getCrew: () => cineCrew, poseCrew, DIG_LEAN, drawPlaque, moundHeight, placeShovel, GRAVE_PLOTS, endGame, playerNameEl, hq, house, getSkullBag: () => skullBag, getSkullLedger: () => skullLedger, awardCash, skullSafeSpot, getSkullLife: () => ({ life: SKULL_LIFE, zipR: SKULL_ZIP_R, zipMax: SKULL_ZIP_MAX }), getSkullRecall: () => skullRecallUntil, updateHQ, HQ_WINDOW_FRONT, HQ_PANEL_FRONT, cashDrops, killZombie, KIOSK, SKULL_LOOK, makeSkullMesh, getGestureT: () => gestureT, mortarArcBlocked, mortarSolve, mountMortar, updateMortarArc, fireMortar, mortarCrewSpot, getMortarNoRoom: () => mortarNoRoom, onStairsRamp, dismountMortar, fireShellDbg, flushShotHits, setMotionEnabledDbg: () => {}, getCorpses: () => corpses, marineDown, bomberBlast, updateCorpsesDbg: (dt) => updateCorpses(dt), freezeCorpse, getMortarAim: () => mortarAimState, setAimTargetDbg: (x, z) => { aimTarget.x = x; aimTarget.z = z; aimTarget.y = sampleHeight(x, z); }, setZoomHeldDbg: (v) => { zoomHeld = !!v; }, getAimCamDbg: () => ({ ads: aimCamAds, pose: aimCamPose, elev: AIM_CAM_ELEV, shoulder: AIM_SHOULDER }) /* CU-114 */, getShoulderDbg: () => ({ w: shoulderHoldW, ads: shoulderAdsW, rawAds: shoulderAds(), cheek: shoulderCheekAng, hold: SHOULDER_HOLD, holds: WEAPON_HOLD }), /* GB-129 */ getWeaponSizeDbg: () => ({ upm: MARINE_UPM, sizes: WEAPON_SIZE, blades: BLADE_SIZE, carry: CARRY_FIT, factors: Object.fromEntries(Object.keys(weaponMeshes).map((k) => [k, weaponSizeFactor(k)])) }), /* GB-130 */ resolveSoftBarricades, resolveHardBuildCollisions, PLAYER_RADIUS_DBG: PLAYER_RADIUS, upgradeBoxPieces, commitUpgradeDbg: (gx, gz) => { commitUpgradeDrag({ gx, gz }); }, beginUpgradeDragDbg: (gx, gz) => { upgradeDrag = { gx, gz }; }, landmarks, nearestAttackableBuild, buildsNear, getGameMode: () => gameMode, devBench, buildsNearDbg: (x, z, r) => buildsNear(x, z, r, []), upgradePlan, applyUpgrade, tryUpgrade, getRepairTarget, getRepairSnapshot, repairNearestBuild, getObjectiveProps, getObjectiveInteraction, buyUpgradeBlueprint, getUpgradeOwned: () => upgradeOwned, tierOf, buildBetween, UPGRADE_TRACKS, setShopTabDbg: (t) => { shopTab = t; renderShop(); }, pushOutOfBuild, upgradeTarget, getUpgradeHint: () => upgradeHint,
+           knifeAttack, BLADE_STATS, bladeStats, landmarkInSquare, levelGroundRect, startReload, isReloading: () => reloading, toggleNvgDbg: () => toggleNvg(), setGearDbg: (k) => { gearOwned[k] = true; }, laserSteadies, STREAK_HEAL_CAP_FRAC, streakHealHp: () => streakHealHp(), fogCullDbg: () => ({ on: fogCullOn, far: _fcFar, margin: FOG_CULL_MARGIN, back: FOG_CULL_BACK, hidden: zombies.filter((z) => z.alive && z.fogHidden).length }), setFogCullDbg: (on) => { fogCullOn = !!on; if (!fogCullOn) for (const z of zombies) if (z.fogHidden) { z.fogHidden = false; if (z.mesh) z.mesh.visible = true; } }, fogCullDepthDbg: (z) => { fogCullPrep(); return fogCullDepth(z); }, LASER_SPREAD_MUL, setLasersDbg: (on) => { lasersEnabled = !!on; updateLasers(); }, laserAimDbg: () => laserAimReport, toggleLasers, aimDirWithSpreadDbg: (s) => aimDirWithSpread(s), getAimDirDbg: () => getAimDir().clone(), resetSprayDbg: () => { sprayHeat = 0; sprayShot = 0; }, onBoards, setAimYawDbg: (y) => { aimYaw = y; }, getKnifeCd: () => knifeCd, setKnifeCd: (v) => { knifeCd = v; },
+           openWheel, closeWheelDbg: () => { wheelKind = null; wheelEl.classList.remove("show"); }, wheelTurnPage, getWheelState: () => ({ kind: wheelKind, page: wheelPage, keys: wheelItems.map((it) => it.key) }), BUILD_PAGES, BUILD_ORDER,

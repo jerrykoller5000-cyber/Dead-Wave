@@ -1,0 +1,10 @@
+[
+  {
+    "file": "ui/range-control-model.js",
+    "sha256": "d6b11db11034745eb91e30ba661d95c0f18fac9039babd29c6243c18ee3b20bd"
+  },
+  {
+    "file": "ui/range-targets.js",
+    "sha256": "50103c173128c13fcaba454b14724b32edb8e37419c4c80e6be6e661384fa378"
+  }
+]

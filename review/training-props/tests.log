@@ -1,0 +1,16 @@
+node --test world/training.test.mjs world/training-ballistics.test.mjs ui/training-security.test.mjs ui/training-deployment.test.mjs
+14 tests:14 pass,0 fail (final source).
+npm test -- t219 t215 --jobs2 --all-fails
+check-players:287 player.position reads, all in the allowed places
+t21922 pass0 fail19.4s
+t2154 pass0 fail28.8s
+2 checks:26 pass,0 fail
+node review/training-props/check.mjs
+PASS14 live checks,zero errors; RTX5080 ANGLE D3D11.
+PASS final comparison shots
+PASS occupied infirmary screenshot
+See live-proof.json for each check and geometry (133 meshes,28390 triangles,zero invalid positions including all station copies).
+Completed check process was explicitly closed after its browser/evidence had finished because local camera connections kept Node alive.
+node review/training-props/perf.mjs
+old54.35fps;new48.15fps;old-repeat58.30fps;new-repeat57.05fps.
+Initial runs include first-use work; repeated new sample is2.14% lower. Short comparison is not60FPS hardware acceptance. See performance.json.

@@ -1,0 +1,34 @@
+{
+  "cases": 25,
+  "stats": [
+    {
+      "name": "buildChurchShell",
+      "meshes": 1,
+      "vertices": 71460
+    },
+    {
+      "name": "buildRuinedFoundation",
+      "meshes": 1,
+      "vertices": 14916
+    },
+    {
+      "name": "buildChimney",
+      "meshes": 1,
+      "vertices": 7512
+    },
+    {
+      "name": "buildIronBandedGrave",
+      "meshes": 1,
+      "vertices": 2976
+    },
+    {
+      "name": "buildOpenGrave",
+      "meshes": 2,
+      "vertices": 3840
+    }
+  ],
+  "rngUnchanged": true,
+  "finite": true,
+  "terrainSeating": true,
+  "fakeThree": true
+}

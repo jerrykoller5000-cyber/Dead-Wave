@@ -1,0 +1,78 @@
+{
+  "performance": {
+    "off": {
+      "fps": 60.04653606536118,
+      "p95Ms": 18.299999982118607,
+      "effects": {
+        "enabled": false,
+        "actors": 0,
+        "echoes": 0
+      },
+      "alive": 48
+    },
+    "on": {
+      "fps": 60.0075009376172,
+      "p95Ms": 18.80000001192093,
+      "effects": {
+        "enabled": true,
+        "actors": 8,
+        "echoes": 18
+      },
+      "alive": 48
+    },
+    "offAgain": {
+      "fps": 60.295447693608835,
+      "p95Ms": 17.30000001192093,
+      "effects": {
+        "enabled": false,
+        "actors": 0,
+        "echoes": 0
+      },
+      "alive": 48
+    },
+    "onAgain": {
+      "fps": 59.952038369036764,
+      "p95Ms": 16.900000005960464,
+      "effects": {
+        "enabled": true,
+        "actors": 8,
+        "echoes": 19
+      },
+      "alive": 48
+    }
+  },
+  "death": {
+    "alive": false,
+    "count": {
+      "enabled": true,
+      "actors": 8,
+      "echoes": 17
+    },
+    "echoes": 24
+  },
+  "clear": {
+    "enabled": true,
+    "actors": 0,
+    "echoes": 0
+  },
+  "reuse": {
+    "before": {
+      "enabled": true,
+      "actors": 1,
+      "echoes": 1
+    },
+    "after": {
+      "enabled": true,
+      "actors": 0,
+      "echoes": 0
+    },
+    "hopping": true,
+    "finite": true
+  },
+  "leave": {
+    "enabled": true,
+    "actors": 0,
+    "echoes": 0
+  },
+  "errors": []
+}

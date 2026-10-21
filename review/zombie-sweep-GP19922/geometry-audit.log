@@ -1,0 +1,15 @@
+shambler: 8942 -> 9972 triangles; draws 13
+feral: 8730 -> 9772 triangles; draws 13
+brute: 12452 -> 14620 triangles; draws 13
+military: 11918 -> 12972 triangles; draws 13
+spitter: 10194 -> 11520 triangles; draws 15
+bomber: 12894 -> 15180 triangles; draws 15
+screamer: 10126 -> 11060 triangles; draws 13
+drowned: 10826 -> 11856 triangles; draws 13
+leaper: 9224 -> 10802 triangles; draws 13
+spider: 6382 -> 7658 triangles; draws 16
+colossus: 12350 -> 14980 triangles; draws 14
+demon: 12720 -> 12720 triangles; draws 14
+guardian: 7848 -> 9520 triangles; draws 13
+caveguard: 7848 -> 9520 triangles; draws 13
+PASS 14 models: finite normals, bounded draws, armor partitions, articulated spit/scream and total triangle budget

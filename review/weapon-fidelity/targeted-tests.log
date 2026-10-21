@@ -1,0 +1,33 @@
+
+> dead-wave@0.1.0 test
+> node tools/tests/run-all.mjs t121 t136 t140 t141 t181 t187 t188 t189 t194 t196 t215 t217 t218 t221 t224 --jobs 4
+
+check-players: 287 player.position reads, all in the allowed places
+ok    t121    31 pass   0 fail  12.2s
+ok    t140    17 pass   0 fail  12.4s
+ok    t141     7 pass   0 fail  23.3s
+ok    t136    36 pass   0 fail  30.0s
+ok    t181    23 pass   0 fail  24.2s
+ok    t189    26 pass   0 fail  23.7s
+ok    t187    75 pass   0 fail  59.7s
+FAIL  t196     9 pass   1 fail  25.8s
+FAIL  t188    90 pass   1 fail  57.3s
+ok    t217    54 pass   0 fail  12.6s
+ok    t194    35 pass   0 fail  59.2s
+ok    t215     4 pass   0 fail  24.5s
+ok    t224    26 pass   0 fail  24.9s
+ok    t221    27 pass   0 fail  30.6s
+FAIL  t218    42 pass   2 fail  134.8s
+
+retrying 3 failed check(s) one at a time: t196 t188 t218
+FAIL  t196     9 pass   1 fail  20.6s
+FAIL  t188    89 pass   2 fail  54.0s
+FAIL  t218    42 pass   2 fail  134.5s
+
+15 checks: 501 pass, 5 fail
+
+by owner:
+  unassigned
+    t188   2 fail  FAIL aa12: support anchor on the gun (0.055 m to it, 0.324 m ahead of the grip)
+    t196   1 fail  FAIL threw TypeError: _lpTmp.copy(...).applyMatrix4 is not a function
+    t218   2 fail  FAIL pistol akimbo: each gun's well comes onto its own side's pouch (0.000 / 9.000 m)

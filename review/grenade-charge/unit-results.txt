@@ -1,0 +1,12 @@
+✔ a tap lobs short, 0.8 s throws furthest (GP-171, half of 1.6 s), and it grows in between (2.6547ms)
+✔ the flight lands on the flat where the motion says, and on a hill sooner (0.2912ms)
+✔ a wall takes it, and the fuse ends it (0.2787ms)
+✔ the dots run evenly to where it lands (0.2378ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 80.4595

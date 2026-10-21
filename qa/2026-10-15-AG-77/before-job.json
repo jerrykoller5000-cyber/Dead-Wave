@@ -1,0 +1,18 @@
+{
+  "out": "qa/2026-10-15-AG-77/before/",
+  "cols": 4,
+  "shots": [
+    { "target": "weapon.flamer", "view": "side", "out": "qa/2026-10-15-AG-77/before/flamer-side.png", "caption": "Flamer - Side (Before)" },
+    { "target": "weapon.flamer", "view": "right", "zoom": 1.6, "out": "qa/2026-10-15-AG-77/before/flamer-right-close.png", "caption": "Flamer - Right Grip & Hoses (Before)" },
+    { "target": "weapon.flamer", "view": "rear3", "zoom": 1.8, "out": "qa/2026-10-15-AG-77/before/flamer-rear3-close.png", "caption": "Flamer - Rear Hose & Grip (Before)" },
+    { "target": "weapon.chainsaw", "view": "side", "zoom": 1.5, "out": "qa/2026-10-15-AG-77/before/chainsaw-side-close.png", "caption": "Chainsaw - Grip & Trigger (Before)" },
+    { "target": "weapon.chainsaw", "view": "three", "zoom": 1.6, "out": "qa/2026-10-15-AG-77/before/chainsaw-top-close.png", "caption": "Chainsaw - Carry Handle (Before)" },
+    { "target": "weapon.knife", "view": "side", "zoom": 1.4, "out": "qa/2026-10-15-AG-77/before/knife-side.png", "caption": "Knife - Side (Before)" },
+    { "target": "weapon.machete", "view": "side", "zoom": 1.2, "out": "qa/2026-10-15-AG-77/before/machete-side.png", "caption": "Machete - Side (Before)" },
+    { "target": "weapon.katana", "view": "side", "out": "qa/2026-10-15-AG-77/before/katana-side.png", "caption": "Katana - Side (Before)" },
+    { "target": "weapon.katana", "view": "three", "zoom": 2.2, "out": "qa/2026-10-15-AG-77/before/katana-hilt-close.png", "caption": "Katana - Hilt Join Close (Before)" },
+    { "target": "weapon.katana-sheathed", "view": "side", "out": "qa/2026-10-15-AG-77/before/katana-sheathed-side.png", "caption": "Katana Sheathed - Side (Before)" },
+    { "target": "weapon.m240", "view": "side", "zoom": 1.8, "out": "qa/2026-10-15-AG-77/before/m240-side-close.png", "caption": "M240 - Trigger & Tripod (Before)" },
+    { "target": "weapon.m240-folded", "view": "side", "zoom": 1.8, "out": "qa/2026-10-15-AG-77/before/m240-folded-side.png", "caption": "M240 Folded - Side (Before)" }
+  ]
+}

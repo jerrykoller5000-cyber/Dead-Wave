@@ -1,0 +1,5 @@
+{
+  "cmd": "eval",
+  "timeout": 180000,
+  "code": "\n R.release();window.nvgReviewErrors=[];window.addEventListener('error',e=>nvgReviewErrors.push(e.message));\n if(!T.trainingDbg.state().active){document.getElementById('playerName').value='NVG review';document.getElementById('modeTraining').click();}\n for(let i=0;i<600&&(!T.trainingDbg.state().active||document.getElementById('trainingBlackout')?.classList.contains('on'));i++)await wait(100);\n T.runDevCommand('godmode');T.clearZombies();T.setGearDbg('helmet');T.setGearDbg('nvg');\n if(T.trainingDbg.lights().on)T.trainingDbg.toggleLights();await wait(300);\n const p=T.player.position;T.setWorldTime(0);await wait(300);\n if(!T.renderer.domElement.classList.contains('nvg-phosphor'))T.toggleNvgDbg();await wait(500);\n return {position:p.toArray(),active:T.renderer.domElement.classList.contains('nvg-phosphor'),overlay:getComputedStyle(document.getElementById('nvgOverlay')).display,renderer:R.renderer()};"
+}

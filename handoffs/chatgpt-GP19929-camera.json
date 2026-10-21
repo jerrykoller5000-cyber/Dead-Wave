@@ -1,0 +1,31 @@
+{
+  "shots": [
+    {
+      "target": "zombie.brute:walk",
+      "view": "side",
+      "wait": 550,
+      "caption": "Brute walking side"
+    },
+    {
+      "target": "zombie.brute:walk",
+      "view": "front",
+      "wait": 550,
+      "caption": "Brute walking front"
+    },
+    {
+      "target": "zombie.drowned:walk",
+      "view": "side",
+      "wait": 550,
+      "caption": "Drowned walking side"
+    },
+    {
+      "target": "zombie.drowned:walk",
+      "view": "front",
+      "wait": 550,
+      "caption": "Drowned walking front"
+    }
+  ],
+  "out": "handoffs/chatgpt-GP19929-feet/",
+  "cols": 2,
+  "inspect": true
+}

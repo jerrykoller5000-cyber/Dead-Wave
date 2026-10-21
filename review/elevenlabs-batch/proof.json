@@ -1,0 +1,26 @@
+{
+  "at": "2026-10-10T08:20:33.833Z",
+  "sourceMatchesCatalogue": 179,
+  "sounds": 179,
+  "priority": 39,
+  "categories": 12,
+  "clips": 716,
+  "unitTests": {
+    "pass": 23,
+    "fail": 0,
+    "skipped": 0,
+    "network": "simulated"
+  },
+  "launcherSyntax": "PASS",
+  "launcherPlanOnly": "PASS",
+  "realRequests": 0,
+  "creditsSpent": 0,
+  "hashes": {
+    "Claude outputs/PROMPTS-2.md": "af2077890c40e15180f73e7dc548fb7e82952d9c252ec3a6d7bb98b0004615ab",
+    "review/elevenlabs-batch/manifest.json": "b132332d846dad600a8f17cb7cf38373f4cf45a35082f35e9f7f7dad2e83fa09",
+    "review/elevenlabs-batch/plan.json": "211260a49d7a4786071350a2300e3499a4dad51f9e867b54d285d7410d75e73b",
+    "review/elevenlabs-batch/batch.mjs": "2a3e9a879bb1d6a57cb98feeab1078c9c7aa001af48e9279884ece7b94716976",
+    "review/elevenlabs-batch/run.mjs": "32399fdaaa8cc282b2e46e7872140f0dc756911994ed85d0763b3e6ce9e842e5",
+    "review/elevenlabs-batch/Start batch.ps1": "568cec4c0dbf5b4a63412dd7816c962b727678d8c340cb5d3e43bb3489fff931"
+  }
+}

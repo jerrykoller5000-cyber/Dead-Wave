@@ -1,0 +1,15 @@
+# antigravity — AG-65 Standalone Marine CIF and animation inspector tool — 2026-10-14
+Changed:          Built a standalone Marine CIF, Kit, Weapon & Animation Inspector (`tools/marine-inspector.html`, `tools/marine-inspector.js`, and `Open Marine Inspector.bat`) that loads the exact in-game Marine rig, 5-finger hands, CIF gear/wardrobe/camo options, 12 firearms, 5 melee blades, stowed carry rig, and all 50 game animations and default poses in under 1 second without launching the full game.
+Files:            tools/marine-inspector.html, tools/marine-inspector.js, Open Marine Inspector.bat, qa/ag75-clean-full-kit.png, qa/ag75-clean-head-nvg.png, qa/ag75-clean-jungle-reload.png, qa/ag75-clean-stripped-axes.png
+Tests:            not run (standalone inspector + QA screenshots; verified zero console/page errors via headless Chrome CDP in verify-marine-inspector.mjs)
+Screenshots:      qa/ag75-clean-full-kit.png, qa/ag75-clean-head-nvg.png, qa/ag75-clean-jungle-reload.png, qa/ag75-clean-stripped-axes.png
+Not verified:     none
+Requests:         none
+Contract changes: none
+
+## Summary of Features Built for Jerry & Crew
+- **Instant Standalone Load (< 1 s):** Loads only the player Marine (`studio/marine-body.js`, `studio/marine-hand.js`, `ui/marine-face.js`, `studio/marine-headgear.js`, `ui/marine-eyewear.js`, `studio/marine-detail.js`, `studio/marine-ao.js`), weapon builders (`studio/weapon-sidearms.js`, `studio/weapon-longarms.js`, `studio/weapon-heavy.js`, `studio/katana.js`), and animation clips (`studio/clips.js`, `studio/hand-poses.js`, `studio/hand-paths.js`) with zero terrain/wave/boot overhead.
+- **CIF Gear & Wardrobe Controls:** Add/remove helmet + earset, Rhino NVG mount, flip NVG down, plate carrier vest, H-harness & pouches, assault backpack, combat shirt/BDU, BDU trousers, tactical gloves, combat boots, sleeve regulation (down vs. USMC Gunny cuff), skin/eye/hair/facial/soft-cover/eyewear options, and all 28 camo swatches. Includes 5 quick presets (`Full Battle Rattle`, `Night Spec-Ops (NVG)`, `Jungle Recon (Boonie)`, `Beret Garrison`, and `Stripped Base Rig`).
+- **Weapons, Blades, Attachments & Carry Rig:** Equip any of the 12 firearms or 5 melee blades (`knife`, `bayonet`, `axe`, `machete`, `katana`) with exact in-game `WEAPON_SIZE` palm-seat offsets and `WEAPON_MOUNT_BASES`, toggle suppressor/laser/optic/extended mag/heavy barrel, and configure slung/holstered/hip weapons and ammo counts (`mags`, `grenades`, `shells`, `rounds40`, `boxes`, `tanks`).
+- **50 Game Animations & Default Poses:** Rapidly cycle with `[` / `]` or `↑` / `↓`, play/pause with `Space`, scrub or step frame-by-frame with `,` / `.`, filter by category or search, and adjust speed (`0.1x`–`2.0x`) and torso/weapon aim pitch/yaw offsets.
+- **Camera Zoom Presets & Fidelity Logger:** Press `1`–`7` (or click the top viewport buttons) to snap between `Full Body`, `3/4 View`, `Head / NVG`, `Vest / Rig`, `Hands / Gun IK`, `Back / Slings`, and `Legs / Boots`, plus mouse wheel zoom, orbit/pan, wireframe, joint axes, and a built-in Fidelity & Animation Issue Logger that exports markdown reports.

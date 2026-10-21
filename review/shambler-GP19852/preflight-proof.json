@@ -1,0 +1,57 @@
+{
+  "sameWithoutGP19852": true,
+  "currentFailures": [
+    {
+      "line": 39718,
+      "name": "updateMouseAimBody",
+      "text": "const ox = aimTarget.x - player.position.x, oz = aimTarget.z - player.position.z;"
+    },
+    {
+      "line": 39720,
+      "name": "updateMouseAimBody",
+      "text": "aimTarget.x = player.position.x + ox * c + oz * s;"
+    },
+    {
+      "line": 39721,
+      "name": "updateMouseAimBody",
+      "text": "aimTarget.z = player.position.z - ox * s + oz * c;"
+    },
+    {
+      "line": 39723,
+      "name": "updateMouseAimBody",
+      "text": "const dx = aimTarget.x - player.position.x;"
+    },
+    {
+      "line": 39724,
+      "name": "updateMouseAimBody",
+      "text": "const dz = aimTarget.z - player.position.z;"
+    }
+  ],
+  "withoutFailures": [
+    {
+      "line": 39715,
+      "name": "updateMouseAimBody",
+      "text": "const ox = aimTarget.x - player.position.x, oz = aimTarget.z - player.position.z;"
+    },
+    {
+      "line": 39717,
+      "name": "updateMouseAimBody",
+      "text": "aimTarget.x = player.position.x + ox * c + oz * s;"
+    },
+    {
+      "line": 39718,
+      "name": "updateMouseAimBody",
+      "text": "aimTarget.z = player.position.z - ox * s + oz * c;"
+    },
+    {
+      "line": 39720,
+      "name": "updateMouseAimBody",
+      "text": "const dx = aimTarget.x - player.position.x;"
+    },
+    {
+      "line": 39721,
+      "name": "updateMouseAimBody",
+      "text": "const dz = aimTarget.z - player.position.z;"
+    }
+  ]
+}

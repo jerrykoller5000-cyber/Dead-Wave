@@ -1,0 +1,620 @@
+{
+  "shots": [
+    {
+      "target": "weapon:pistol",
+      "view": "side",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/after/pistol-side.png",
+      "cam": {
+        "x": -39.53520047783467,
+        "y": 29.335755106994558,
+        "z": -69.93334047286183,
+        "tx": -39.99952499169763,
+        "ty": 29.31954053767658,
+        "tz": -69.93334047286183,
+        "fov": 35
+      }
+    },
+    {
+      "target": "weapon:pistol",
+      "view": "three",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/after/pistol-three.png",
+      "cam": {
+        "x": -39.570140549345446,
+        "y": 29.616954905781203,
+        "z": -69.42162002108455,
+        "tx": -39.99952499169763,
+        "ty": 29.31954053767658,
+        "tz": -69.93334047286183,
+        "fov": 35
+      }
+    },
+    {
+      "target": "weapon:revolver",
+      "view": "side",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/after/revolver-side.png",
+      "cam": {
+        "x": -39.4401383732535,
+        "y": 29.36268521223413,
+        "z": -69.90710829280789,
+        "tx": -40,
+        "ty": 29.34313441341924,
+        "tz": -69.90710829280789,
+        "fov": 35
+      }
+    },
+    {
+      "target": "weapon:revolver",
+      "view": "three",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/after/revolver-three.png",
+      "cam": {
+        "x": -39.511245414574844,
+        "y": 29.681671681761234,
+        "z": -69.32463325973056,
+        "tx": -40,
+        "ty": 29.34313441341924,
+        "tz": -69.90710829280789,
+        "fov": 35
+      }
+    },
+    {
+      "target": "weapon:uzi",
+      "view": "side",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/after/uzi-side.png",
+      "cam": {
+        "x": -39.30643268995667,
+        "y": 29.321956368787966,
+        "z": -69.93130482312364,
+        "tx": -39.99329662564,
+        "ty": 29.297970551617773,
+        "tz": -69.93130482312364,
+        "fov": 35
+      }
+    },
+    {
+      "target": "weapon:uzi",
+      "view": "three",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/after/uzi-three.png",
+      "cam": {
+        "x": -39.37627358910009,
+        "y": 29.725353331285408,
+        "z": -69.19596540261381,
+        "tx": -39.99329662564,
+        "ty": 29.297970551617773,
+        "tz": -69.93130482312364,
+        "fov": 35
+      }
+    },
+    {
+      "target": "weapon:m4",
+      "view": "side",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/after/m4-side.png",
+      "cam": {
+        "x": -38.38810330293443,
+        "y": 29.370456183576824,
+        "z": -69.8621474622868,
+        "tx": -39.98672031717496,
+        "ty": 29.314631247316946,
+        "tz": -69.8621474622868,
+        "fov": 35
+      }
+    },
+    {
+      "target": "weapon:m4",
+      "view": "three",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/after/m4-three.png",
+      "cam": {
+        "x": -38.9966647408748,
+        "y": 30.00039608779585,
+        "z": -68.68224517236315,
+        "tx": -39.98672031717496,
+        "ty": 29.314631247316946,
+        "tz": -69.8621474622868,
+        "fov": 35
+      }
+    },
+    {
+      "target": "weapon:ak",
+      "view": "side",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/after/ak-side.png",
+      "cam": {
+        "x": -38.30694063947367,
+        "y": 29.33235769192172,
+        "z": -69.8637460154185,
+        "tx": -39.983869176781845,
+        "ty": 29.27379805701625,
+        "tz": -69.8637460154185,
+        "fov": 35
+      }
+    },
+    {
+      "target": "weapon:ak",
+      "view": "three",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/after/ak-three.png",
+      "cam": {
+        "x": -38.95693376437902,
+        "y": 29.985107821969333,
+        "z": -68.63989204832522,
+        "tx": -39.983869176781845,
+        "ty": 29.27379805701625,
+        "tz": -69.8637460154185,
+        "fov": 35
+      }
+    },
+    {
+      "target": "weapon:aa12",
+      "view": "side",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/after/aa12-side.png",
+      "cam": {
+        "x": -38.31299271491593,
+        "y": 29.33020861834469,
+        "z": -69.86176414034475,
+        "tx": -40,
+        "ty": 29.27129702581137,
+        "tz": -69.86176414034475,
+        "fov": 35
+      }
+    },
+    {
+      "target": "weapon:aa12",
+      "view": "three",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/after/aa12-three.png",
+      "cam": {
+        "x": -38.81538182886935,
+        "y": 30.091826206799016,
+        "z": -68.44999117904742,
+        "tx": -40,
+        "ty": 29.27129702581137,
+        "tz": -69.86176414034475,
+        "fov": 35
+      }
+    },
+    {
+      "target": "weapon:shotgun",
+      "view": "side",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/after/shotgun-side.png",
+      "cam": {
+        "x": -38.24392477034095,
+        "y": 29.3767653637941,
+        "z": -69.81908459321716,
+        "tx": -40.01467954028555,
+        "ty": 29.31492924464645,
+        "tz": -69.81908459321716,
+        "fov": 35
+      }
+    },
+    {
+      "target": "weapon:shotgun",
+      "view": "three",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/after/shotgun-three.png",
+      "cam": {
+        "x": -39.00702891353781,
+        "y": 30.01288134738844,
+        "z": -68.61821333871073,
+        "tx": -40.01467954028555,
+        "ty": 29.31492924464645,
+        "tz": -69.81908459321716,
+        "fov": 35
+      }
+    },
+    {
+      "target": "weapon:sniper",
+      "view": "side",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/after/sniper-side.png",
+      "cam": {
+        "x": -37.982248374794615,
+        "y": 29.425335630254395,
+        "z": -69.78915243940514,
+        "tx": -40.028571108830114,
+        "ty": 29.35387646575342,
+        "tz": -69.78915243940514,
+        "fov": 35
+      }
+    },
+    {
+      "target": "weapon:sniper",
+      "view": "three",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/after/sniper-three.png",
+      "cam": {
+        "x": -38.84906665879138,
+        "y": 30.17086361312922,
+        "z": -68.38347377359062,
+        "tx": -40.028571108830114,
+        "ty": 29.35387646575342,
+        "tz": -69.78915243940514,
+        "fov": 35
+      }
+    },
+    {
+      "target": "weapon:minigun",
+      "view": "side",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/after/minigun-side.png",
+      "cam": {
+        "x": -37.84218905717198,
+        "y": 29.450707939690954,
+        "z": -69.75799998636245,
+        "tx": -39.945086001900364,
+        "ty": 29.377273160219193,
+        "tz": -69.75799998636245,
+        "fov": 35
+      }
+    },
+    {
+      "target": "weapon:minigun",
+      "view": "three",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/after/minigun-three.png",
+      "cam": {
+        "x": -38.42533164414662,
+        "y": 30.429935384098382,
+        "z": -67.94682727064871,
+        "tx": -39.945086001900364,
+        "ty": 29.377273160219193,
+        "tz": -69.75799998636245,
+        "fov": 35
+      }
+    },
+    {
+      "target": "weapon:launcher",
+      "view": "side",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/after/launcher-side.png",
+      "cam": {
+        "x": -38.66284424459275,
+        "y": 29.415917544343163,
+        "z": -69.93789579300133,
+        "tx": -40,
+        "ty": 29.369223036434022,
+        "tz": -69.93789579300133,
+        "fov": 35
+      }
+    },
+    {
+      "target": "weapon:launcher",
+      "view": "three",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/after/launcher-three.png",
+      "cam": {
+        "x": -39.087020406173366,
+        "y": 30.001600976125765,
+        "z": -68.84984908209324,
+        "tx": -40,
+        "ty": 29.369223036434022,
+        "tz": -69.93789579300133,
+        "fov": 35
+      }
+    },
+    {
+      "target": "weapon:flamer",
+      "view": "side",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/after/flamer-side.png",
+      "cam": {
+        "x": -38.48653602298805,
+        "y": 29.377251839698854,
+        "z": -69.79460627647171,
+        "tx": -39.96227462456732,
+        "ty": 29.32571791216303,
+        "tz": -69.79460627647171,
+        "fov": 35
+      }
+    },
+    {
+      "target": "weapon:flamer",
+      "view": "three",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/after/flamer-three.png",
+      "cam": {
+        "x": -39.046982193884546,
+        "y": 29.959697844950586,
+        "z": -68.70380323393123,
+        "tx": -39.96227462456732,
+        "ty": 29.32571791216303,
+        "tz": -69.79460627647171,
+        "fov": 35
+      }
+    },
+    {
+      "target": "weapon:chainsaw",
+      "view": "side",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/after/chainsaw-side.png",
+      "cam": {
+        "x": -38.46333440236839,
+        "y": 29.412645544743924,
+        "z": -69.79142256790638,
+        "tx": -40.015914120580035,
+        "ty": 29.358428266286694,
+        "tz": -69.79142256790638,
+        "fov": 35
+      }
+    },
+    {
+      "target": "weapon:chainsaw",
+      "view": "three",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/after/chainsaw-three.png",
+      "cam": {
+        "x": -38.937372632185806,
+        "y": 30.10548312809812,
+        "z": -68.50606687435065,
+        "tx": -40.015914120580035,
+        "ty": 29.358428266286694,
+        "tz": -69.79142256790638,
+        "fov": 35
+      }
+    },
+    {
+      "target": "weapon:knife",
+      "view": "side",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/after/knife-side.png",
+      "cam": {
+        "x": -39.50312038752951,
+        "y": 29.36905792323401,
+        "z": -69.92864013426501,
+        "tx": -40,
+        "ty": 29.351706504821777,
+        "tz": -69.92864013426501,
+        "fov": 35
+      }
+    },
+    {
+      "target": "weapon:knife",
+      "view": "three",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/after/knife-three.png",
+      "cam": {
+        "x": -39.69988219801894,
+        "y": 29.559583962943407,
+        "z": -69.5709736655526,
+        "tx": -40,
+        "ty": 29.351706504821777,
+        "tz": -69.92864013426501,
+        "fov": 35
+      }
+    },
+    {
+      "target": "weapon:machete",
+      "view": "side",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/after/machete-side.png",
+      "cam": {
+        "x": -39.13389731790139,
+        "y": 29.370444066038857,
+        "z": -69.82898333715585,
+        "tx": -40,
+        "ty": 29.340199093921107,
+        "tz": -69.82898333715585,
+        "fov": 35
+      }
+    },
+    {
+      "target": "weapon:machete",
+      "view": "three",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/after/machete-three.png",
+      "cam": {
+        "x": -39.52387900380594,
+        "y": 29.669985670371528,
+        "z": -69.26156442943204,
+        "tx": -40,
+        "ty": 29.340199093921107,
+        "tz": -69.82898333715585,
+        "fov": 35
+      }
+    },
+    {
+      "target": "weapon:m240",
+      "view": "side",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/after/m240-side.png",
+      "cam": {
+        "x": -37.496734505964845,
+        "y": 29.923988845449692,
+        "z": -69.875,
+        "tx": -39.8887876868248,
+        "ty": 29.84045650770888,
+        "tz": -69.875,
+        "fov": 35
+      }
+    },
+    {
+      "target": "weapon:m240",
+      "view": "three",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/after/m240-three.png",
+      "cam": {
+        "x": -37.62170179880999,
+        "y": 31.41076006395602,
+        "z": -67.1731922482387,
+        "tx": -39.8887876868248,
+        "ty": 29.84045650770888,
+        "tz": -69.875,
+        "fov": 35
+      }
+    },
+    {
+      "target": "weapon:m240Carried",
+      "view": "side",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/after/m240Carried-side.png",
+      "cam": {
+        "x": -37.938622306461966,
+        "y": 29.350563312679324,
+        "z": -69.815,
+        "tx": -40.04744020104408,
+        "ty": 29.27692176908255,
+        "tz": -69.815,
+        "fov": 35
+      }
+    },
+    {
+      "target": "weapon:m240Carried",
+      "view": "three",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/after/m240Carried-three.png",
+      "cam": {
+        "x": -38.7421835417362,
+        "y": 30.181011545637602,
+        "z": -68.2594556870123,
+        "tx": -40.04744020104408,
+        "ty": 29.27692176908255,
+        "tz": -69.815,
+        "fov": 35
+      }
+    },
+    {
+      "target": "weapon:mortar",
+      "view": "side",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/after/mortar-side.png",
+      "cam": {
+        "x": -37.128964370266694,
+        "y": 30.039764571010892,
+        "z": -70.30598396062851,
+        "tx": -40,
+        "ty": 29.93950579758238,
+        "tz": -70.30598396062851,
+        "fov": 35
+      }
+    },
+    {
+      "target": "weapon:mortar",
+      "view": "three",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/after/mortar-three.png",
+      "cam": {
+        "x": -37.427753414651356,
+        "y": 31.721179787911215,
+        "z": -67.24049985150107,
+        "tx": -40,
+        "ty": 29.93950579758238,
+        "tz": -70.30598396062851,
+        "fov": 35
+      }
+    },
+    {
+      "target": "weapon:mortarCarried",
+      "view": "side",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/after/mortarCarried-side.png",
+      "cam": {
+        "x": -36.389172146525844,
+        "y": 29.95079938779501,
+        "z": -70.00500000193715,
+        "tx": -40,
+        "ty": 29.824706500649455,
+        "tz": -70.00500000193715,
+        "fov": 35
+      }
+    },
+    {
+      "target": "weapon:mortarCarried",
+      "view": "three",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/after/mortarCarried-three.png",
+      "cam": {
+        "x": -37.57940368022727,
+        "y": 31.501339498663604,
+        "z": -67.12024564162768,
+        "tx": -40,
+        "ty": 29.824706500649455,
+        "tz": -70.00500000193715,
+        "fov": 35
+      }
+    }
+  ],
+  "out": "review/weapon-fidelity/after",
+  "cols": 4,
+  "tile": 360,
+  "sheet": true
+}

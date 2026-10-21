@@ -1,0 +1,59 @@
+{
+  "at": "2026-10-15T06:06:43.268Z",
+  "files": [
+    {
+      "path": "index.html",
+      "bytes": 3191327,
+      "sha256": "f6d191c2858fece326de1db3cb9f365427ae4e255e1ae75a1eb94384592ca4e9",
+      "bom": false
+    },
+    {
+      "path": "studio/marine-body.js",
+      "bytes": 42185,
+      "sha256": "a08fab4e545819a900f938b52e1b8851011aebfc43353f6059d63b2f28e731e3",
+      "bom": false
+    },
+    {
+      "path": "studio/marine-headgear.js",
+      "bytes": 12082,
+      "sha256": "84cc1959debafb5fbc65414a6bfccde4456cf5b9b092fd73c936fb73f8b65f7f",
+      "bom": false
+    },
+    {
+      "path": "studio/marine-hand.js",
+      "bytes": 15193,
+      "sha256": "304c604767f614e2a43682ddb6fc8caf59e79bcd35bbcd4c7fbec756125b9215",
+      "bom": false
+    },
+    {
+      "path": "studio/marine-idle.js",
+      "bytes": 11554,
+      "sha256": "4ce53d9c315278b4808adeeaa8b8be793589ee14eca09a69814e9056afae4af1",
+      "bom": false
+    },
+    {
+      "path": "studio/marine-turn.js",
+      "bytes": 19077,
+      "sha256": "0e7ed4eccfb73362e2df37efac63595b30beaf1b28d7f2efac3a6f75ec283486",
+      "bom": false
+    },
+    {
+      "path": "ui/marine-face.js",
+      "bytes": 19267,
+      "sha256": "37024ad4fc125ad0f1e2fcf55f8d295c5375b22e4efb701bb886cb02f4772aeb",
+      "bom": false
+    },
+    {
+      "path": "ui/marine-kit-fit.js",
+      "bytes": 5716,
+      "sha256": "4cd49a9662ac63c5860987d45b600096df08cf19b4a5e858e982424d7919b076",
+      "bom": false
+    },
+    {
+      "path": "ui/weapon-sling.js",
+      "bytes": 4863,
+      "sha256": "e978ef76a6500058e613fb084a8ac89b089a613c55d26f929499761f1bc674b3",
+      "bom": false
+    }
+  ]
+}

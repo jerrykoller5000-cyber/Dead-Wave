@@ -1,0 +1,27 @@
+{
+  "grenade": {
+    "state": "IDLE",
+    "open": false,
+    "targets": 5,
+    "text": "Last drill resultFirst FiveVOIDDISQUALIFIED · Throwable grenades are prohibited.Run time: 1.00sshot accuracy: 0.0%Plates cleared: 0/5Shots fired: 0Base 0 + bonuses 0 − deductions 0"
+  },
+  "weapon": {
+    "state": "IDLE",
+    "open": false,
+    "targets": 5,
+    "text": "Last drill resultFirst FiveVOIDDISQUALIFIED · You attacked with a different weapon.Run time: 0.98sshot accuracy: 0.0%Plates cleared: 0/5Shots fired: 0Base 0 + bonuses 0 − deductions 0"
+  },
+  "cancel": {
+    "state": "IDLE",
+    "open": false,
+    "targets": 5,
+    "text": "Last drill resultFirst FiveVOIDDRILL ABORTED · Run cancelled.Run time: 0.98sshot accuracy: 0.0%Plates cleared: 0/5Shots fired: 0Base 0 + bonuses 0 − deductions 0"
+  },
+  "death": {
+    "state": "IDLE",
+    "open": false,
+    "targets": 5,
+    "text": "Last drill resultFirst FiveVOIDDRILL ABORTED · Player incapacitated.Run time: 0.98sshot accuracy: 0.0%Plates cleared: 0/5Shots fired: 0Base 0 + bonuses 0 − deductions 0"
+  },
+  "errors": []
+}

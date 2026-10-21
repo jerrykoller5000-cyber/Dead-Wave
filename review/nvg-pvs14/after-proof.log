@@ -1,0 +1,44 @@
+{
+ "night": {
+  "filter": "url(\"#nvgImageTube\")",
+  "overlay": "block",
+  "grain": "nvgScintillation"
+ },
+ "off": {
+  "filter": "none",
+  "overlay": "none",
+  "grain": "nvgScintillation"
+ },
+ "samples": [
+  {
+   "fps": 59.83843622202221,
+   "low": 56.497175131730245,
+   "worst": 17.700000002980232,
+   "hitches": 0,
+   "frames": 60
+  },
+  {
+   "fps": 60.05404864413767,
+   "low": 56.49717515551198,
+   "worst": 17.69999999552965,
+   "hitches": 0,
+   "frames": 60
+  },
+  {
+   "fps": 59.922101268083615,
+   "low": 55.865921792360155,
+   "worst": 17.899999998509884,
+   "hitches": 0,
+   "frames": 60
+  },
+  {
+   "fps": 59.374056556126654,
+   "low": 55.865921792360155,
+   "worst": 17.899999998509884,
+   "hitches": 0,
+   "frames": 59
+  }
+ ],
+ "errors": [],
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+}

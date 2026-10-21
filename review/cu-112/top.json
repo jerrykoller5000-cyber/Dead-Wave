@@ -1,0 +1,3 @@
+[
+  { "name": "idle-top", "weapon": "pistol", "settle": 0.2, "eval": "if (!T.isUnarmed()) T.toggleHolster(); __step(50);", "views": ["top", { "name": "front", "cam": [0.15, 1.05, 2.4], "look": [0, 0.72, 0], "fov": 26 }] }
+]

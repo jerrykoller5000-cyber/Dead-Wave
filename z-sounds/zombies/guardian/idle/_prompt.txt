@@ -1,0 +1,9 @@
+#64 guardian-idle
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 2 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A large predatory beast's three low, huffing barks followed by a short, high, menacing shriek, like a monstrous hyena. Close-up, dry. No words, no music.
+
+In the game: zombieVoice('guardian', 'idle')

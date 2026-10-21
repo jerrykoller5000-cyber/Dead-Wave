@@ -1,0 +1,9 @@
+#37 weapon-foley/pump-back  (start here)
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: foley pumpBack
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.4 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A pump shotgun's fore-end pulled back, a rough metallic clack. No music, no voice.

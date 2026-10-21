@@ -1,0 +1,9 @@
+#90 builds/place-turret
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: place()
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 1 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+An automated gun turret set down and powering on, a heavy clunk and a rising servo whir. No music, no voice.

@@ -1,0 +1,18 @@
+[
+  {
+    "path": "index.html",
+    "sha256": "4226012b03ad59229f661e94c84e72e1588fb7ff22780e0c38113019a7f44d50"
+  },
+  {
+    "path": "world/training.js",
+    "sha256": "68f84ac922e25c66c1fce3638447cd61f84cf916a42067cff94e1aae0eececf0"
+  },
+  {
+    "path": "game/training-perimeter.js",
+    "sha256": "12a087b9bcf17d9803e748c4e6dd6ca18bfb9a3535915cc98007a3293cde0e1f"
+  },
+  {
+    "path": "game/training-perimeter.test.mjs",
+    "sha256": "f3e8fd6658a8afa707f8d82e19a6555300a958d30ac68e0093981f91c781dba5"
+  }
+]

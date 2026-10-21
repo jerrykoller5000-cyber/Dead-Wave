@@ -1,0 +1,11 @@
+{
+ "result": "PASS the sniper is in hand\nPASS the sniper has its bolt handle\nPASS the whole bolt handle is on the gun's right, gun-local x < 0 (x -0.147 .. -0.046)\nPASS the knob stands out on the right (-0.147)\nPASS gun.userData.boltSide is -1\nPASS the hand's grab point is the knob (gun-local x -0.130)\nPASS the sniper's interval (0.9 s), damage (92) and magazine (5) are unchanged\nPASS two shots fired (0.017 s, 0.942 s)\nPASS the bolt is worked after the first shot (59 frames)\nPASS the cycle starts after the shot (+0.017 s)\nPASS and is over before the next shot (last frame 0.761 s after the shot; next shot at 0.925 s)\nPASS the bolt is home while fireCooldown is still running (0.123 s left)\nPASS no round goes off during the cycle\nPASS it goes all the way: up and back (open 1.000, back 1.000)\nPASS up before back\nPASS then forward before it turns down\nPASS the knob rises as the bolt is turned up (0.069 m)\nPASS and comes back with the bolt (0.090 m)\nPASS the next shot comes at the gun's interval (0.925 s, interval 0.9 s)\nPASS the support hand is on the knob through the cycle (39 frames, worst 0.010 m)\nPASS the first shot's case comes out\nPASS on the bolt's pull, not on the shot (+0.416 s)\nPASS thrown out to the gun's right (gun-local vx -1.788)\nPASS the bolt is home after the cycle (0.000 m)\nPASS the last round fired\nPASS no bolt cycle after the last round\nPASS the reload runs\nPASS the last round's case comes out on the reload's bolt pull",
+ "errors": [
+  {
+   "message": "Uncaught TypeError: Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'.",
+   "file": "http://127.0.0.1:37713/ui/prep-checklist.js",
+   "line": 116
+  }
+ ],
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+}

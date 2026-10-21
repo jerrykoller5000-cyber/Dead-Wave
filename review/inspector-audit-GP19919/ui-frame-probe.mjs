@@ -1,0 +1,12 @@
+import fs from 'node:fs';import path from 'node:path';
+const h=JSON.parse(fs.readFileSync('review/camera/jobs/_camera.json','utf8'));
+const post=async(body)=>(await fetch('http://127.0.0.1:'+h.port+'/',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body),signal:AbortSignal.timeout(60000)})).json();
+const dir='review/inspector-audit-GP19919/automation';
+const before=await post({cmd:'eval',code:`return [...document.querySelectorAll('canvas')].map((c,i)=>({i,id:c.id,cls:c.className,width:c.width,height:c.height,rect:c.getBoundingClientRect().toJSON(),display:getComputedStyle(c).display,z:getComputedStyle(c).zIndex,parent:c.parentElement.id,game:c===TT.renderer.domElement}));`});
+await post({cmd:'shot',target:'weapon.m4',view:'side',ui:false,out:dir+'/ui-probe-m4.png'});
+await post({cmd:'eval',code:'DWInspect.pause();return true;'});
+await post({cmd:'shot',target:'marine',ui:true,out:dir+'/ui-probe-marine.png'});
+const direct=await post({cmd:'eval',code:'return await DWInspect.shot();'});fs.writeFileSync(dir+'/ui-probe-direct.png',Buffer.from(direct.value.split(',')[1],'base64'));
+const probe=await post({cmd:'eval',code:`const load=src=>new Promise((ok,bad)=>{const im=new Image();im.onload=()=>ok(im);im.onerror=bad;im.src=src+'?b='+Date.now();});const a=await load('/${dir}/ui-probe-marine.png'),b=await load('/${dir}/ui-probe-direct.png');const c=document.createElement('canvas');c.width=400;c.height=400;const g=c.getContext('2d',{willReadFrequently:true});g.drawImage(a,285,0,795,900,0,0,400,400);const p=g.getImageData(0,0,400,400).data;g.clearRect(0,0,400,400);g.drawImage(b,285,0,795,900,0,0,400,400);const q=g.getImageData(0,0,400,400).data;let sum=0;for(let k=0;k<p.length;k+=4)for(let z=0;z<3;z++)sum+=Math.abs(p[k+z]-q[k+z]);return {meanPercent:sum/(400*400*3*255)*100,subject:DWInspect.current().id,canvases:[...document.querySelectorAll('canvas')].map((c,i)=>({i,id:c.id,cls:c.className,display:getComputedStyle(c).display,z:getComputedStyle(c).zIndex,parent:c.parentElement.id,game:c===TT.renderer.domElement})),errors:DWInspect.errors()};`});
+fs.writeFileSync(path.join(dir,'ui-frame-probe.json'),JSON.stringify({before,probe},null,2)+'\n');console.log(JSON.stringify({before,probe}));
+if(!probe.ok||probe.value.subject!=='marine'||probe.value.meanPercent>=1||probe.value.errors.length)process.exitCode=1;

@@ -1,0 +1,9 @@
+#36 weapon-foley/bolt-cycle
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: foley boltUp/Back/Fwd/Down
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 1.2 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A bolt-action sniper rifle cycled: bolt lifted, pulled back, pushed forward and locked down, four crisp metallic motions. No music, no voice.

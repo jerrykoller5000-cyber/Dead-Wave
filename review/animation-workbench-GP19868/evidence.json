@@ -1,0 +1,108 @@
+{
+  "task": "GP-19868",
+  "at": "2026-10-12T03:50:25.719Z",
+  "scope": "Read-only repository assessment; no game or workbench implementation",
+  "files": [
+    {
+      "path": "index.html",
+      "sha256": "f4d9ece209b9561739a10007a2f5a7ee5e593fc20a659abc72cff68f43ce5322"
+    },
+    {
+      "path": "game/feral-motion.js",
+      "sha256": "3c8db9e4c60e5da1f96448d242eabe1fdced852a547df619362d97d81286ab64"
+    },
+    {
+      "path": "game/shambler-motion.js",
+      "sha256": "b217a5a6ae55db87c96a445f81ad78477e8af4dc7ed5a6a59dac437732f4e165"
+    },
+    {
+      "path": "game/shambler-steering.js",
+      "sha256": "88facf5c14787c31496f949748d0e764f23071ce37aa57c25917d64e8ed88737"
+    },
+    {
+      "path": "game/brute-behavior.js",
+      "sha256": "412dcc2af163f9741034070067d54427084802083a7061381f7b628082a448a8"
+    },
+    {
+      "path": "studio/zombie.js",
+      "sha256": "619046a6997b9c0c6e27bab01ac61e248d5c4da30d3b324ef621fdb1d42e11b7"
+    },
+    {
+      "path": "studio/clip.js",
+      "sha256": "d5180c99bcba1c7c15bef6cf2d7c966c03e3b3969a701cebf938507456892d65"
+    },
+    {
+      "path": "studio/scene.js",
+      "sha256": "4fdbf826be2fda42cae57a09e42e8bf9a9e37713dc9dcd536e4c266caadfe660"
+    },
+    {
+      "path": "studio/rigs.js",
+      "sha256": "7f2089c2e32708aec6aa6c50227be6434715e716ca5e541c93eddcb9e3982498"
+    },
+    {
+      "path": "studio/motion-lab.html",
+      "sha256": "a19cdb5eb7e439f1f8eca4536e17e0f04216374920f03bbdc9432ba1e5ce54ae"
+    },
+    {
+      "path": "studio/retarget-ual.mjs",
+      "sha256": "53ed37b2e31546d15fa5e41bb5fad1a97826dc9f2a0d37cb204a7dddca182c7f"
+    },
+    {
+      "path": "tools/studio.mjs",
+      "sha256": "37785f1c19a96ff55eb493f304b9cbbbb7d1f2c99754e073ae24a58b6ff5d269"
+    },
+    {
+      "path": "tools/camera.mjs",
+      "sha256": "a2224412edec11fc4d4abf0172e212e4fc4c1c6886bc37cd49ef24fe8a9202b0"
+    },
+    {
+      "path": "tools/camera-rig.js",
+      "sha256": "2addfaf4bc6de2920cc2d1f092df078e5f6d7d5aec13c22479dc8bf38c89707b"
+    },
+    {
+      "path": "assets/anim/reference/catalogue.json",
+      "sha256": "069215813f87837391d8abc5178af899972b89d6c8ac957e3818764a3dc4ad15"
+    },
+    {
+      "path": "assets/anim/reference/LICENSE.txt",
+      "sha256": "ac101b2f7363cb57b609860153cfa94267e60366806566a23e97b098114dca8d"
+    },
+    {
+      "path": "package.json",
+      "sha256": "6bdfa508725b484d73995e4dbaed442222223cff71b8e5ddba69352d3c1109ef"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "C:/Users/Zero/Downloads/AI_Animation_Workbench_Proposal.md",
+      "sha256": "42dcd605a5ca44fe86aed714119f89c5f678c5676c4e35e0c7dcd663d4774b24"
+    },
+    {
+      "path": "C:/Users/Zero/Downloads/AI_Animation_Workbench_Proposal.docx",
+      "sha256": "cc06f59d543613fb41d63b0c6be6c7d29e2005d79b3a77db3efc30c4cb506ff9"
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/studio.mjs list",
+      "exit": 1,
+      "result": "Three rigs listed; stops at marine knife-slash dw-hand-path/1 incorrectly passed to dw-clip/1 loader."
+    },
+    {
+      "command": "node --import ./studio/node-three.mjs --test studio/clip.test.mjs studio/scene.test.mjs studio/marine-turn.test.mjs",
+      "exit": 1,
+      "result": "34 tests: 33 pass, 1 fail. Guardian budget assertion measures 41 draws /19582 triangles against160/8000 budget. Guardian clip snap measurements: gallop1.20,haul.38,lunge.49,pounce.36,pull1.00rad perframe."
+    },
+    {
+      "command": "node [local Vercel TypeScript]/lib/tsc.js --noEmit --strict --skipLibCheck --target ES2021 --module ESNext --moduleResolution bundler --jsx react-jsx animation-workbench-review.canvas.tsx",
+      "exit": 0,
+      "result": "No TypeScript diagnostics; no packages installed."
+    }
+  ],
+  "notes": [
+    "Historical native browser proofs were inspected, not rerun in this review.",
+    "No controlled human-iteration experiment exists in the inspected evidence.",
+    "DOCX XML text and Markdown checked for architecture, fixed-step caveat, 30-percent illustrative hurdle, economics and concluding test; substantively aligned."
+  ],
+  "sourceHashesUnchanged": true
+}

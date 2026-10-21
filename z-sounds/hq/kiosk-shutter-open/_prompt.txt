@@ -1,0 +1,9 @@
+#113 hq/kiosk-shutter-open
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: shutter(open)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 1.2 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A metal roll-up shutter rattling open on a supply kiosk. No music, no voice.

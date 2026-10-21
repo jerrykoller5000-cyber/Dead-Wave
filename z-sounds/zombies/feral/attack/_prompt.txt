@@ -1,0 +1,9 @@
+#8 feral-attack
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 0.8 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A feral zombie's vicious screeching snarl as it leaps to attack, high, harsh and raspy, ending in a hiss. Close-up, dry. No words, no music.
+
+In the game: zombieVoice('feral', 'attack')

@@ -1,0 +1,9 @@
+#40 weapon-foley/cylinder-open
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: foley cylinderOpen
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.5 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A revolver cylinder swung open, a metallic click and swing. No music, no voice.

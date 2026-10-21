@@ -1,0 +1,75 @@
+GP-19904 — 20-second full-frame dancer integration proposal
+STAGED ONLY. No assets/intro, assets/disclaimer, or index.html changes made here.
+
+Review source:
+  assets/intro/disclaimer.js and disclaimer.css (CL-190)
+  index.html disclaimer markup
+  handoffs/2026-10-13-claude-CL-190.md
+
+New deliverables expected beside this file:
+  marine-dance-transparent.webm — silent VP9 alpha, 1280x720, 600 frames at 30 fps, exactly 20 seconds
+  audio-dance.mp3 — exactly 20 seconds of Been Warned, starting at source second 9.151494
+  marine-dance.mp4 — staged opaque video with the matching music excerpt
+The music remains at its original pitch and speed; the ending fades at excerpt 19.55–20.
+
+Exact proposed dancer metadata for Claude's integration:
+  duration: 20
+  frame: [1280, 720]
+  crop: [0, 0, 1280, 720]
+  start: 9.151494, ONLY if the controller still plays the original full Been Warned song from second 0
+  start: 0, ONLY if Claude instead uses the new audio-dance.mp3 excerpt as the controller's song
+Choose one clock basis; do not delay the pre-trimmed excerpt's dancer by another 9.151494 seconds.
+Keep loop false. Pause cleanly on the final pose; do not stretch playback speed to fit old cue times.
+When integrating into assets/disclaimer, Claude chooses the final published filename and cache version.
+
+Why the old crop must change:
+  CL-190's current media is physically cropped to 612x560 from source rectangle [352,104,612,560].
+  The controller maps that rectangle to left 27.5%, top 14.444%, width 47.813%, height 77.778% of its 16:9 stage.
+  A new physically cropped video would discard lateral/depth travel outside that old rectangle.
+  A new full-frame video under unchanged crop metadata would instead shrink/reposition the entire frame into that
+  narrow box, making the dancer smaller and movement constrained-looking. Crop metadata does not crop source pixels.
+  The full-frame metadata produces left 0%, top 0%, width 100%, height 100%. Keep object-fit contain and 16:9.
+  Do not follow him with a CSS translation or crop: the fixed rendered perspective supplies real lateral/depth motion.
+
+Stage recommendation:
+  Start with CL-190's current #disclaimerStage.frame transform: translate(-50%, -57%) scale(.9).
+  Preserve its responsive width min(100vw,177.78vh), height min(56.25vw,100vh), centered at 50%/50%.
+  This keeps the full 1280x720 framing, the accepted cyan/amber character lighting, and room for the existing lower third.
+  If actual travel overlaps a long two-line card, lift the entire stage slightly (e.g. -59%) or reduce overall scale
+  a little (.86–.88). Verify both left/right extremes and the low/deep position before adjusting. Do not crop the actor.
+  The preview preserves the existing subtle .dsc-floor ambient pool. It is a stationary pool, not a tracked contact
+  shadow; no game-light or dancer-stage edits are proposed.
+
+Timing ownership:
+  Claude must re-time the five existing voice/text cards, siren, chirps, shot, ducking, and ending together.
+  The old dance cues [0.4,3.6,14.2,31.0,67.45] target the previous minute and cannot be reused for this clip.
+  With the original song clock, this dancer spans song 9.151494–29.151494. With the excerpt clock it spans 0–20.
+  This proposal does not assign new card cues or alter any approved disclaimer words.
+  Keep Claude's audio-clock scheduling and compositor animations: the game can stall the main thread during boot.
+
+Isolated preview:
+  Serve the repository normally and open /review/dance-GP19904/disclaimer-preview.html.
+  It imports only existing fonts/disclaimer CSS, the new alpha clip, and the new 20-second music excerpt.
+  It does not import the live controller/game or auto-play siren/voice assets.
+  A selected existing disclaimer card stays visible for layout inspection; this is not a proposed card timeline.
+  The timeline is exactly 0–20 seconds. Press Play or Space to start; Escape/Skip pauses; controls allow seeking.
+  For screenshots: ?clean&card=1&time=4.0 hides review controls and seeks the clip. Card -1 omits text.
+  window.disclaimerPreview.ready / seek(seconds) / setCard(index) / proof() are isolated QA hooks.
+  Card indexes 0–4 match the existing CL-190 copy in order. No replacement disclaimer copy is introduced.
+
+Verification status:
+  Final alpha media verified in the native browser on 2026-10-13.
+  Command: node review/dance-GP19904/composite-check.mjs
+  PASS: ten captures at 1280x720 and 900x900; native-audit-selected left/right travel,
+  standing near/far depth, and lowest-screen pose. Camera and stage remain fixed.
+  Decoded video is 1280x720, exactly 20 seconds, with transparent corners.
+  Requested seeks reached their actual timestamps, rather than repeating the opening frame.
+  Smallest captured source-edge margin: 75 pixels; smallest viewport margin: 122.4 pixels.
+  Longest existing card clears the closest captured dancer by 21.85 pixels at 1280x720;
+  no actor/text overlap in any of the ten captures. Browser errors: none.
+  Proof: composite-proof/proof.json; contact-sheet.png and ten individual screenshots alongside it.
+  The original stage transform (-57%, .9 scale) is sufficient for these verified positions.
+  The isolated preview buffers its short media into local blob URLs for reliable review seeks
+  even when a private static server does not implement HTTP byte ranges. This is preview tooling,
+  not a proposed replacement for Claude's production loading or audio-clock controller.
+  Full voice/card timing, production startup, and live integration remain Claude's work.

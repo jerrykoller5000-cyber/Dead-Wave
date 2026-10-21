@@ -1,0 +1,9 @@
+#73 weapons/rotary-spin
+TRY: synthesized and already decent; record it, compare, keep the better one
+Now: minigunSpin()
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 1.5 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A rotary machine gun's barrels spinning up from rest with an electric motor whine, no shooting. No music, no voice.

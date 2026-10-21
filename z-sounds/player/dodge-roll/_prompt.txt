@@ -1,0 +1,9 @@
+#8 player/dodge-roll
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: dodgeRoll()
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.8 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A soldier diving and rolling on the ground: cloth and gear thumping on dirt, a grunt-free tumble. No music, no voice.

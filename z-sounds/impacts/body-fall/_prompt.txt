@@ -1,0 +1,9 @@
+#97 impacts-body-fall
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 1 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A dead body collapsing onto dirt: a heavy limp thud and a soft rustle. No voice, no music.
+
+In the game: zombieDeath() — the body hitting the ground

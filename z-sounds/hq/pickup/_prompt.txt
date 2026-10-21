@@ -1,0 +1,9 @@
+#122 hq/pickup
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: pickup()
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.5 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+Picking up supplies: a quick rustle of a pouch and a click. No music, no voice.

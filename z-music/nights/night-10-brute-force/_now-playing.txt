@@ -1,0 +1,3 @@
+Night 10: Brute Force
+Used for: The wave on night 10
+The game plays now: assets/soundtrack/fight_night10_sections

@@ -1,0 +1,9 @@
+#106 build-attacks-sand-break
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 2 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+Sandbags ripping open: burlap tearing and sand pouring out in a rush. No voice, no music.
+
+In the game: buildBreak('sand')

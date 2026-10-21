@@ -1,0 +1,97 @@
+{
+  "ok": true,
+  "shots": [
+    {
+      "file": "review/training-recovery/after-bed-0.png",
+      "cam": {
+        "fov": 42,
+        "x": -37.2,
+        "y": -196.7,
+        "z": -646.8,
+        "tx": -40.6,
+        "ty": -199.05,
+        "tz": -650
+      },
+      "label": "player",
+      "ms": 434,
+      "caption": "Wake"
+    },
+    {
+      "file": "review/training-recovery/after-bed-1.png",
+      "cam": {
+        "fov": 42,
+        "x": -37.2,
+        "y": -196.7,
+        "z": -646.8,
+        "tx": -40.6,
+        "ty": -199.05,
+        "tz": -650
+      },
+      "label": "player",
+      "ms": 451,
+      "caption": "Sit up"
+    },
+    {
+      "file": "review/training-recovery/after-bed-2.png",
+      "cam": {
+        "fov": 42,
+        "x": -37.2,
+        "y": -196.7,
+        "z": -646.8,
+        "tx": -40.6,
+        "ty": -199.05,
+        "tz": -650
+      },
+      "label": "player",
+      "ms": 448,
+      "caption": "Swing legs"
+    },
+    {
+      "file": "review/training-recovery/after-bed-3.png",
+      "cam": {
+        "fov": 42,
+        "x": -37.2,
+        "y": -196.7,
+        "z": -646.8,
+        "tx": -40.6,
+        "ty": -199.05,
+        "tz": -650
+      },
+      "label": "player",
+      "ms": 447,
+      "caption": "Plant boots"
+    },
+    {
+      "file": "review/training-recovery/after-bed-4.png",
+      "cam": {
+        "fov": 42,
+        "x": -37.2,
+        "y": -196.7,
+        "z": -646.8,
+        "tx": -40.6,
+        "ty": -199.05,
+        "tz": -650
+      },
+      "label": "player",
+      "ms": 438,
+      "caption": "Stand"
+    },
+    {
+      "file": "review/training-recovery/after-bed-5.png",
+      "cam": {
+        "fov": 42,
+        "x": -37.2,
+        "y": -196.7,
+        "z": -646.8,
+        "tx": -40.6,
+        "ty": -199.05,
+        "tz": -650
+      },
+      "label": "player",
+      "ms": 449,
+      "caption": "Ready"
+    }
+  ],
+  "sheet": "review/training-recovery/sheet.jpg",
+  "ms": 2749
+}

@@ -1,0 +1,39 @@
+/* GP-165: one PVS-14-inspired intensifier image. UI stays above the eyepiece.
+   GP-166: broad corner falloff keeps nearly the whole screen clear. Camera/zoom unchanged. */
+canvas.nvg-phosphor { filter: url(#nvgImageTube); }
+#nvgFilterDefs { position: absolute; width: 0; height: 0; overflow: hidden; pointer-events: none; }
+#nvgOverlay {
+  display: none; position: fixed; inset: 0; z-index: 3; pointer-events: none;
+  background: radial-gradient(ellipse 70% 75% at 50% 50%,
+    transparent 76%, rgba(1,6,5,.045) 82%, rgba(1,5,4,.16) 87%,
+    rgba(0,3,2,.38) 92%, rgba(0,2,1,.78) 97%, #020403 100%);
+}
+#nvgOverlay.on { display: block; }
+#nvgOverlay::before, #nvgOverlay::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+}
+/* A few minute fixed tube specks, away from the clear aiming area. No scanlines,
+   large defect patches, animated lens dirt or a decorative centre glow. */
+#nvgOverlay::before {
+  opacity: .34;
+  background:
+    radial-gradient(circle at 37% 29%, #020805 0 .65px, transparent 1.25px),
+    radial-gradient(circle at 66% 63%, #020805 0 .5px, transparent 1px),
+    radial-gradient(circle at 44% 83%, #020805 0 .55px, transparent 1.2px);
+}
+#nvgOverlay::after {
+  opacity: .16; mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='192' height='192'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.92' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Cpath fill='%23fff' filter='url(%23g)' d='M0 0h192v192H0z'/%3E%3C/svg%3E");
+  background-size: 192px 192px;
+  animation: nvgScintillation .24s steps(1,end) infinite;
+}
+/* Move the texture, never the image or aperture; no full-image brightness pulse. */
+@keyframes nvgScintillation {
+  0% { background-position: 0 0; }
+  25% { background-position: 53px -31px; }
+  50% { background-position: -47px 73px; }
+  75% { background-position: 91px 19px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #nvgOverlay::after { animation: none; opacity: .11; }
+}

@@ -1,0 +1,15 @@
+THIRD-PARTY NOTICES: THE DESKTOP APP
+
+Grave Shift's desktop app (Grave Shift.exe) is built from the Rust crates below. Their licences follow, each with
+the crates it covers. Every crate is used unmodified, and each one's source is on crates.io (https://crates.io)
+under the name and version given; that includes the ones under the Mozilla Public License 2.0.
+Generated with cargo-about from desktop/src-tauri/Cargo.lock for x86_64-pc-windows-msvc (desktop/README.md).
+{{#each licenses}}
+
+================================================================================
+{{{name}}} ({{id}})
+Used by:
+{{#each used_by}}  - {{crate.name}} {{crate.version}}
+{{/each}}--------------------------------------------------------------------------------
+{{{text}}}
+{{/each}}

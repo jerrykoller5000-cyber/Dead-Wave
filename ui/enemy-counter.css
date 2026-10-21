@@ -1,0 +1,7 @@
+#enemyCounterCard { position:fixed; left:50%; bottom:150px; transform:translateX(-50%); z-index:7; width:max-content; max-width:min(440px, calc(100vw - 30px)); box-sizing:border-box; padding:11px 16px; border-left:2px solid #c3a35d; background:#09100be8; color:#dedfd0; font:12px/1.5 var(--font-hud); box-shadow:0 6px 22px #0008; pointer-events:none; }
+#enemyCounterCard[hidden] { display:none; }
+#enemyCounterCard strong, #enemyCounterCard span { display:block; }
+#enemyCounterCard strong { color:#ead399; font-size:12px; font-weight:700; }
+#enemyCounterCard span { margin-top:3px; }
+body.cine #enemyCounterCard, body.deploying #enemyCounterCard, body.frontend #enemyCounterCard, body.opening #enemyCounterCard, body.briefing #enemyCounterCard { display:none; }
+@media(max-width:600px) { #enemyCounterCard { bottom:245px; padding:9px 12px; } }

@@ -1,0 +1,1 @@
+{"cmd":"eval","code":"document.getElementById('gp166Baseline')?.remove();await wait(200);return {background:getComputedStyle(document.getElementById('nvgOverlay')).backgroundImage};"}

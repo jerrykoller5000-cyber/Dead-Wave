@@ -1,0 +1,9 @@
+#140 world/tree-fall  (start here)
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: treeFell()
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 3 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A large pine tree cracking at the base and crashing down through branches to the ground. No music, no voice.

@@ -1,0 +1,19 @@
+<!doctype html><meta charset="utf-8"><title>marine-draw</title>
+<style>body{margin:24px;background:#14181f;color:#e6e6e0;font-family:Georgia,serif} h1{font-weight:normal} h2{font-weight:normal;margin:28px 0 6px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px} figure{margin:0} img{width:100%;display:block} figcaption{font-size:14px;opacity:.7;margin:4px 0}</style>
+<h1>marine-draw · CL-90 part 2 · v1</h1>
+<p>The draw and holster moves. When he switches guns, his hand takes the gun back where it lives (his back, the chest
+holsters under his arms, the hip holster) and then draws the next one from where it lives and brings it up. The left
+hand lets go of the foregrip meanwhile. U is a holster alone; U again is a draw alone. Each strip is four moments of one
+switch, left to right. A shot cuts the move short, so switching never gets slower in a fight. It is better seen in the
+game than in stills: switch guns in prep and watch him. Your notes go in notes.md in this folder.</p>
+<script>
+const sets = [
+  ['M4 to pistol: the M4 goes back over his shoulder, his hand goes down to the hip holster, the pistol comes up', ['draw-m4-to-pistol', 'draw-m4-to-pistol-back']],
+  ['Pistol to revolver: the pistol back on the hip, then the cross-draw from under his left arm', ['draw-pistol-to-revolver']],
+  ['Uzi to shotgun (from behind): the Uzi back in its chest holster, then the shotgun off his back over the shoulder', ['draw-uzi-to-shotgun']],
+];
+for (const [t, keys] of sets) {
+  document.write(`<h2>${t}</h2><div class="row">` + keys.map((k) => `<figure><figcaption>${k}</figcaption><img src="v1/${k}.png" alt="${k}"></figure>`).join('') + '</div>');
+}
+</script>

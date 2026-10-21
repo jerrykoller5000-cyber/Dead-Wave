@@ -1,0 +1,36 @@
+PASS weaponMods, buyHeavyBarrel and fitWeaponMod are exported
+PASS heavy barrel on the M4, AK, Uzi and minigun only (uzi,m4,ak,minigun)
+PASS a bare AK: nothing fitted, nothing owned, both on offer
+PASS the shotgun takes the ext mag, not a barrel
+PASS AK in hand
+PASS bare AK reload 2.000 s (2.0)
+PASS CL-113: bought at the kiosk, not fitted
+PASS ext mag bought and fitted
+PASS AK with the ext mag reloads in 2.500 s (2.5)
+PASS ext mag: 7.62 cap x1.5 (378)
+PASS full up with the ext mag: 45 loaded, 405 rounds in all (more than 30 + the base cap 252)
+PASS heavy barrel bought and fitted; the ext mag stays owned ({"fitted":"heavy","ext":true,"heavy":true,"canExt":true,"canHeavy":true})
+PASS purchase-delivered mod:heavy:ak for $100
+PASS fitting the barrel un-fits the mag: loaded 30 (30)
+PASS taking the ext mag off loses no rounds (405 -> 405)
+PASS the rounds over the smaller cap go back to the reserve: 375 (base cap 252)
+PASS the mag back on: still 405 rounds, the loaded mag keeps its 30
+PASS and off again: still 405
+PASS the 7.62 cap is back to base (252)
+PASS with the barrel the AK reloads in 2.000 s again
+PASS M4 climb after 9 rounds: 0.018 vs bare 0.036 (<= 55%)
+PASS AK climb 0.026 vs bare 0.052
+PASS a fired AK round climbs 0.026 rad with the barrel vs 0.052 bare
+PASS standing still, the barrel does not widen the cone (0.020 vs 0.020)
+PASS running, the movement term doubles: +45% bare, +90% with the barrel
+PASS drawing the bare pistol: 0.28 s dip, fire free ({"swapT":0.28,"swapDur":0.28,"fireCooldown":0})
+PASS drawing the heavy AK: 0.45 s, no shot until it is up ({"swapT":0.45,"swapDur":0.45,"fireCooldown":0.45})
+PASS the kiosk will not sell the owned ext mag twice (CL-113: and does not fit it)
+PASS refitting the owned ext mag is free and reports no purchase
+PASS with the mag back on, the AK draws at the normal speed
+PASS and climbs as bare
+PASS back to the barrel, free
+PASS an unbought barrel will not fit
+PASS no barrel for the shotgun
+PASS a reset clears owned and fitted mods
+PASS no page errors ()

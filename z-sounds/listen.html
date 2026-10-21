@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Z-Sounds Check</title>
+<style>
+  /* CL-148: Jerry's page for the zombie takes in z-sounds/: what the game has found in each folder, each take as
+     recorded, and a take the way the game plays it (evened, with levels.json). Opened by "Listen to Z-Sounds.bat".
+     CL-161: every folder of the game's (batches 2 and 3 too), and a switch per folder for whether the game plays its
+     takes (kept in this browser, which the game shares when it's served from the same place). */
+  :root { --bg: #14171a; --panel: #1c2024; --line: #2b3137; --ink: #e6e9e2; --dim: #9aa3a0; --ok: #5bc27a; --warn: #e2b23b; --none: #555c61; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.4 system-ui, Segoe UI, sans-serif; }
+  header { position: sticky; top: 0; background: var(--bg); border-bottom: 1px solid var(--line); padding: 14px 20px; z-index: 2; }
+  h1 { margin: 0 0 4px; font-size: 20px; letter-spacing: .02em; }
+  .sum { color: var(--dim); }
+  .sum b { color: var(--ink); }
+  main { padding: 10px 20px 60px; max-width: 1200px; }
+  h2 { font-size: 15px; margin: 22px 0 6px; color: var(--dim); text-transform: uppercase; letter-spacing: .08em; }
+  .row { display: grid; grid-template-columns: 240px 64px 1fr; gap: 10px; align-items: start; padding: 8px 10px; border-top: 1px solid var(--line); background: var(--panel); }
+  .row:first-of-type { border-top: 0; }
+  .name { font-weight: 600; word-break: break-word; }
+  .name small { display: block; font-weight: 400; color: var(--dim); }
+  .count { text-align: center; border-radius: 10px; padding: 1px 0; font-weight: 700; background: var(--none); color: #fff; }
+  .count.ok { background: var(--ok); color: #0c1a10; }
+  .count.few { background: var(--warn); color: #241a00; }
+  .prompt { color: var(--dim); font-size: 12.5px; margin-bottom: 6px; }
+  button { background: #2c3339; color: var(--ink); border: 1px solid #3a434b; border-radius: 6px; padding: 3px 9px; margin: 0 4px 4px 0; cursor: pointer; font: inherit; font-size: 13px; }
+  button:hover { background: #38414a; }
+  button.game { border-color: #4b7a5a; }
+  .unplaced { background: #2a2214; border: 1px solid #5a4620; padding: 10px 12px; border-radius: 6px; color: #f0d9a8; }
+  .filter { margin-top: 8px; }
+  .filter label { margin-right: 14px; color: var(--dim); cursor: pointer; }
+  .use { display: inline-block; margin: 0 0 6px; color: var(--dim); font-size: 12.5px; cursor: pointer; }
+  .use input { vertical-align: -2px; }
+  .use.on { color: var(--ok); }
+  .use.gun { color: var(--warn); }
+  @media (max-width: 700px) { .row { grid-template-columns: 1fr 50px; } .row > div:last-child { grid-column: 1 / -1; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>Z-Sounds Check</h1>
+  <div class="sum" id="sum">Looking for takes…</div>
+  <div class="filter"><label><input type="checkbox" id="onlyFilled"> only folders with takes</label><label><input type="checkbox" id="onlyEmpty"> only empty folders</label></div>
+</header>
+<main id="main"></main>
+<script type="module">
+import { TAKE_FOLDERS, PLANNED_FOLDERS, PLANNED_FOLDERS_3, OPT_IN, groupTakes, takeFolderFor, levelFor, createTakeBank, isWired, usesTakes, readUse, writeUse } from '../core/takes.js';
+const ALL = [...TAKE_FOLDERS, ...PLANNED_FOLDERS, ...PLANNED_FOLDERS_3], GUNS = new Set(OPT_IN);
+// CL-161: this page's own bank hears every folder (the gunfire too, which the game leaves off until it's switched on)
+const allOn = { getItem: () => JSON.stringify(Object.fromEntries(ALL.map((f) => [f, true]))), setItem() {} };
+const $ = (s) => document.querySelector(s);
+const getJson = (u) => fetch(u, { cache: 'no-store' }).then((r) => (r.ok ? r.json() : Promise.reject(new Error(r.status))));
+let ctx = null;
+const audio = () => { if (!ctx) ctx = new AudioContext(); if (ctx.state === 'suspended') ctx.resume(); return ctx; };
+const bank = createTakeBank({
+  getCtx: () => ctx, connect: (g) => g.connect(ctx.destination), fetchJson: getJson,
+  fetchBytes: (u) => fetch(u).then((r) => r.arrayBuffer()), root: './', listUrls: ['/__zsounds', 'index.json'], storage: allOn,
+});
+let use = readUse();
+let files = [], manifest = {}, levels = {};
+for (const u of ['/__zsounds', 'index.json']) { try { const j = await getJson(u); if (Array.isArray(j.files)) { files = j.files; break; } } catch (_) {} }
+for (const f of ['manifest.json', 'manifest-2.json', 'manifest-3.json']) { try { for (const m of (await getJson(f)).sounds) manifest[m.folder] = m; } catch (_) {} }
+try { levels = await getJson('levels.json'); } catch (_) { levels = {}; }
+const grouped = groupTakes(files), unplaced = files.filter((f) => !takeFolderFor(f));
+const filled = TAKE_FOLDERS.filter((f) => grouped.has(f)).length, filled2 = PLANNED_FOLDERS.filter((f) => grouped.has(f)).length, filled3 = PLANNED_FOLDERS_3.filter((f) => grouped.has(f)).length;
+$('#sum').innerHTML = `<b>${files.length - unplaced.length}</b> takes. Zombies: <b>${filled}</b> of ${TAKE_FOLDERS.length} folders. Batch 2: <b>${filled2}</b> of ${PLANNED_FOLDERS.length}. Batch 3: <b>${filled3}</b> of ${PLANNED_FOLDERS_3.length} (not wired yet: tell Claude when it's in). ` +
+  `Folders with no takes keep the game's own sound. Untick "in the game" to hear the game's own sound again; the gunfire stays the game's until you tick it.` + (unplaced.length ? ` <b style="color:var(--warn)">${unplaced.length} file(s) in no folder the game knows</b> (below).` : '') +
+  (files.length ? '' : ' <b style="color:var(--warn)">No list from the server: open this through "Listen to Z-Sounds.bat".</b>');
+const url = (rel) => './' + rel.split('/').map(encodeURIComponent).join('/');
+const raw = (rel) => { audio(); const a = new Audio(url(rel)); a.play(); };
+async function asGame(id, btn) { audio(); await bank.init(); await bank.load(id); bank.play(id, 1, 0); btn.blur(); }
+function render() {
+  const main = $('#main'); main.innerHTML = '';
+  const onlyFilled = $('#onlyFilled').checked, onlyEmpty = $('#onlyEmpty').checked;
+  if (unplaced.length) {
+    const d = document.createElement('div'); d.className = 'unplaced';
+    d.innerHTML = '<b>Not in a folder the game knows</b> (move each into one of the folders below):<br>' + unplaced.map((f) => '&nbsp;&nbsp;' + f.replace(/</g, '&lt;')).join('<br>');
+    main.append(d);
+  }
+  let group = '';
+  for (const id of ALL) {
+    const list = grouped.get(id) || [];
+    if ((onlyFilled && !list.length) || (onlyEmpty && list.length)) continue;
+    const g = id.startsWith('zombies/') ? id.split('/').slice(0, 2).join('/') : id.split('/')[0];
+    if (g !== group) { group = g; const h = document.createElement('h2'); h.textContent = g.replace('zombies/', 'zombie: '); main.append(h); }
+    const row = document.createElement('div'); row.className = 'row';
+    const lv = levelFor(id, levels), m = manifest[id];
+    row.innerHTML = `<div class="name">${id.split('/').slice(id.startsWith('zombies/') ? 2 : 1).join('/')}${m && m.start ? ' ★' : ''}<small>${id}${m && m.status ? ' · ' + m.status : ''}${lv !== 1 ? ' · level ' + lv : ''}</small></div>
+      <div class="count ${list.length >= 3 ? 'ok' : list.length ? 'few' : ''}">${list.length}</div><div></div>`;
+    const cell = row.lastElementChild;
+    if (list.length && isWired(id)) {
+      const on = usesTakes(id, use), l = document.createElement('label');
+      l.className = 'use' + (on ? ' on' : '') + (GUNS.has(id) ? ' gun' : '');
+      l.innerHTML = `<input type="checkbox"${on ? ' checked' : ''}> in the game${GUNS.has(id) ? ' (gunfire: compare it with the game\'s own)' : ''}`;
+      l.firstChild.onchange = (e) => { use = readUse(); use[id] = e.target.checked; writeUse(use); l.className = 'use' + (e.target.checked ? ' on' : '') + (GUNS.has(id) ? ' gun' : ''); };
+      cell.append(l);
+    } else if (!isWired(id)) { const n = document.createElement('div'); n.className = 'use'; n.textContent = PLANNED_FOLDERS_3.includes(id) ? 'batch 3: wired once its takes are in' : 'not played by the game: a burst or a loop (batch 3 has a single shot for it)'; cell.append(n); }
+    if (m) { const p = document.createElement('div'); p.className = 'prompt'; p.textContent = m.prompt; cell.append(p); }
+    list.forEach((rel, i) => { const b = document.createElement('button'); b.textContent = '▶ ' + (i + 1); b.title = rel; b.onclick = () => raw(rel); cell.append(b); });
+    if (list.length) { const b = document.createElement('button'); b.className = 'game'; b.textContent = '▶ as in the game'; b.title = 'a take, evened and at its level, the way the game plays it'; b.onclick = () => asGame(id, b); cell.append(b); }
+    main.append(row);
+  }
+}
+$('#onlyFilled').onchange = () => { if ($('#onlyFilled').checked) $('#onlyEmpty').checked = false; render(); };
+$('#onlyEmpty').onchange = () => { if ($('#onlyEmpty').checked) $('#onlyFilled').checked = false; render(); };
+render();
+</script>
+</body>
+</html>

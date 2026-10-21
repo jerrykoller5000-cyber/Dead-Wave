@@ -1,0 +1,9 @@
+PASS every item has its own materials and meshes
+PASS no material is shared by two items: 0
+PASS two marines share no item material (the dressing room dresses one): 0
+PASS each item's meshes wear that item's materials: 0
+PASS the facemask is coyote brown: #81613c
+PASS no ear defenders on a bare head: head 0.287 m wide
+PASS the helmet brings the headset (its ear cups are the widest thing on it): 0.436 m wide with it, 0.287 bare
+PASS full kit is slimmer front to back: 0.565 m (was about 0.70)
+PASS every joint where it was

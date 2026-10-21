@@ -1,0 +1,9 @@
+#138 world/campfire
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: fireCrackle() (synth)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 8 s   Loop: on   Prompt influence: ~0.6
+
+Prompt:
+A campfire crackling and popping, close, seamless. No music, no voice.

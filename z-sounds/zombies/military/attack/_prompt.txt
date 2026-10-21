@@ -1,0 +1,9 @@
+#29 military-attack
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 0.9 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A zombie soldier's harsh muffled roar through a gas mask as it lunges, with a rattle of gear and webbing. Close-up, dry. No words, no music.
+
+In the game: zombieVoice('military', 'attack')

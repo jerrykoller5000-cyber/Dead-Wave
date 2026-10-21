@@ -1,0 +1,1021 @@
+{
+  "source": "C:/Users/Zero/Desktop/Jerry_Game_Related/Disclaimer/Been Warned.mp3",
+  "source_duration_seconds": 143.52,
+  "recommended_excerpt": {
+    "source_start_seconds": 9.151494,
+    "duration_seconds": 60.0,
+    "reason": "Begins on an audible-spectrum percussion attack near full-groove arrival; follows 18.6 seconds of lighter groove with the denser section from about source 27.7 seconds. Source start is computationally estimated, not a verified musical downbeat."
+  },
+  "bpm": 103.322299,
+  "beat_seconds": 0.580707,
+  "eighth_seconds": 0.290354,
+  "grid_origin_excerpt_seconds": 0,
+  "median_grid_error_seconds": 0.00448,
+  "tempo_confidence": "High repeated subdivision confidence; medium musical quarter-note/downbeat confidence. 103.4 BPM is preferred; 69/138 BPM metrical alternatives cannot be eliminated without hearing. Minor tempo drift: original first30s ~103.075, middle ~103.5.",
+  "beat_timeline": [
+    {
+      "beat": 0,
+      "seconds": 0.0,
+      "source_seconds": 9.1515,
+      "nearby_attack_seconds": 0.001,
+      "attack_strength": 1.534
+    },
+    {
+      "beat": 1,
+      "seconds": 0.5807,
+      "source_seconds": 9.7322,
+      "nearby_attack_seconds": 0.5797,
+      "attack_strength": 1.295
+    },
+    {
+      "beat": 2,
+      "seconds": 1.1614,
+      "source_seconds": 10.3129,
+      "nearby_attack_seconds": 1.1583,
+      "attack_strength": 1.587
+    },
+    {
+      "beat": 3,
+      "seconds": 1.7421,
+      "source_seconds": 10.8936,
+      "nearby_attack_seconds": 1.737,
+      "attack_strength": 1.939
+    },
+    {
+      "beat": 4,
+      "seconds": 2.3228,
+      "source_seconds": 11.4743,
+      "nearby_attack_seconds": 2.3157,
+      "attack_strength": 1.906
+    },
+    {
+      "beat": 5,
+      "seconds": 2.9035,
+      "source_seconds": 12.055,
+      "nearby_attack_seconds": 2.9044,
+      "attack_strength": 2.07
+    },
+    {
+      "beat": 6,
+      "seconds": 3.4842,
+      "source_seconds": 12.6357,
+      "nearby_attack_seconds": 3.4831,
+      "attack_strength": 2.075
+    },
+    {
+      "beat": 7,
+      "seconds": 4.065,
+      "source_seconds": 13.2164,
+      "nearby_attack_seconds": 4.0617,
+      "attack_strength": 2.447
+    },
+    {
+      "beat": 8,
+      "seconds": 4.6457,
+      "source_seconds": 13.7972,
+      "nearby_attack_seconds": 4.6404,
+      "attack_strength": 1.472
+    },
+    {
+      "beat": 9,
+      "seconds": 5.2264,
+      "source_seconds": 14.3779,
+      "nearby_attack_seconds": 5.2191,
+      "attack_strength": 1.6
+    },
+    {
+      "beat": 10,
+      "seconds": 5.8071,
+      "source_seconds": 14.9586,
+      "nearby_attack_seconds": 5.7978,
+      "attack_strength": 1.726
+    },
+    {
+      "beat": 11,
+      "seconds": 6.3878,
+      "source_seconds": 15.5393,
+      "nearby_attack_seconds": 6.3865,
+      "attack_strength": 2.571
+    },
+    {
+      "beat": 12,
+      "seconds": 6.9685,
+      "source_seconds": 16.12,
+      "nearby_attack_seconds": 6.9652,
+      "attack_strength": 2.349
+    },
+    {
+      "beat": 13,
+      "seconds": 7.5492,
+      "source_seconds": 16.7007,
+      "nearby_attack_seconds": 7.5438,
+      "attack_strength": 2.416
+    },
+    {
+      "beat": 14,
+      "seconds": 8.1299,
+      "source_seconds": 17.2814,
+      "nearby_attack_seconds": 8.1225,
+      "attack_strength": 2.065
+    },
+    {
+      "beat": 15,
+      "seconds": 8.7106,
+      "source_seconds": 17.8621,
+      "nearby_attack_seconds": 8.7012,
+      "attack_strength": 2.421
+    },
+    {
+      "beat": 16,
+      "seconds": 9.2913,
+      "source_seconds": 18.4428,
+      "nearby_attack_seconds": 9.2899,
+      "attack_strength": 1.561
+    },
+    {
+      "beat": 17,
+      "seconds": 9.872,
+      "source_seconds": 19.0235,
+      "nearby_attack_seconds": 9.8686,
+      "attack_strength": 1.49
+    },
+    {
+      "beat": 18,
+      "seconds": 10.4527,
+      "source_seconds": 19.6042,
+      "nearby_attack_seconds": 10.4472,
+      "attack_strength": 1.615
+    },
+    {
+      "beat": 19,
+      "seconds": 11.0334,
+      "source_seconds": 20.1849,
+      "nearby_attack_seconds": 11.0259,
+      "attack_strength": 2.262
+    },
+    {
+      "beat": 20,
+      "seconds": 11.6141,
+      "source_seconds": 20.7656,
+      "nearby_attack_seconds": 11.6146,
+      "attack_strength": 2.013
+    },
+    {
+      "beat": 21,
+      "seconds": 12.1949,
+      "source_seconds": 21.3463,
+      "nearby_attack_seconds": 12.2032,
+      "attack_strength": 2.14
+    },
+    {
+      "beat": 22,
+      "seconds": 12.7756,
+      "source_seconds": 21.9271,
+      "nearby_attack_seconds": 12.772,
+      "attack_strength": 2.114
+    },
+    {
+      "beat": 23,
+      "seconds": 13.3563,
+      "source_seconds": 22.5078,
+      "nearby_attack_seconds": 13.3506,
+      "attack_strength": 2.748
+    },
+    {
+      "beat": 24,
+      "seconds": 13.937,
+      "source_seconds": 23.0885,
+      "nearby_attack_seconds": 13.9393,
+      "attack_strength": 1.527
+    },
+    {
+      "beat": 25,
+      "seconds": 14.5177,
+      "source_seconds": 23.6692,
+      "nearby_attack_seconds": 14.518,
+      "attack_strength": 1.58
+    },
+    {
+      "beat": 26,
+      "seconds": 15.0984,
+      "source_seconds": 24.2499,
+      "nearby_attack_seconds": 15.1066,
+      "attack_strength": 1.148
+    },
+    {
+      "beat": 27,
+      "seconds": 15.6791,
+      "source_seconds": 24.8306,
+      "nearby_attack_seconds": 15.6853,
+      "attack_strength": 2.418
+    },
+    {
+      "beat": 28,
+      "seconds": 16.2598,
+      "source_seconds": 25.4113,
+      "nearby_attack_seconds": 16.264,
+      "attack_strength": 0.664
+    },
+    {
+      "beat": 29,
+      "seconds": 16.8405,
+      "source_seconds": 25.992,
+      "nearby_attack_seconds": 16.8427,
+      "attack_strength": 2.024
+    },
+    {
+      "beat": 30,
+      "seconds": 17.4212,
+      "source_seconds": 26.5727,
+      "nearby_attack_seconds": 17.4314,
+      "attack_strength": 0.653
+    },
+    {
+      "beat": 31,
+      "seconds": 18.0019,
+      "source_seconds": 27.1534,
+      "nearby_attack_seconds": 18.0001,
+      "attack_strength": 0.86
+    },
+    {
+      "beat": 32,
+      "seconds": 18.5826,
+      "source_seconds": 27.7341,
+      "nearby_attack_seconds": 18.5788,
+      "attack_strength": 0.847
+    },
+    {
+      "beat": 33,
+      "seconds": 19.1633,
+      "source_seconds": 28.3148,
+      "nearby_attack_seconds": 19.1674,
+      "attack_strength": 1.193
+    },
+    {
+      "beat": 34,
+      "seconds": 19.744,
+      "source_seconds": 28.8955,
+      "nearby_attack_seconds": 19.7461,
+      "attack_strength": 1.512
+    },
+    {
+      "beat": 35,
+      "seconds": 20.3248,
+      "source_seconds": 29.4762,
+      "nearby_attack_seconds": 20.3348,
+      "attack_strength": 1.123
+    },
+    {
+      "beat": 36,
+      "seconds": 20.9055,
+      "source_seconds": 30.057,
+      "nearby_attack_seconds": 20.9134,
+      "attack_strength": 1.603
+    },
+    {
+      "beat": 37,
+      "seconds": 21.4862,
+      "source_seconds": 30.6377,
+      "nearby_attack_seconds": 21.4822,
+      "attack_strength": 1.024
+    },
+    {
+      "beat": 38,
+      "seconds": 22.0669,
+      "source_seconds": 31.2184,
+      "nearby_attack_seconds": 22.0708,
+      "attack_strength": 1.423
+    },
+    {
+      "beat": 39,
+      "seconds": 22.6476,
+      "source_seconds": 31.7991,
+      "nearby_attack_seconds": 22.6595,
+      "attack_strength": 0.948
+    },
+    {
+      "beat": 40,
+      "seconds": 23.2283,
+      "source_seconds": 32.3798,
+      "nearby_attack_seconds": 23.2282,
+      "attack_strength": 1.41
+    },
+    {
+      "beat": 41,
+      "seconds": 23.809,
+      "source_seconds": 32.9605,
+      "nearby_attack_seconds": 23.8169,
+      "attack_strength": 1.496
+    },
+    {
+      "beat": 42,
+      "seconds": 24.3897,
+      "source_seconds": 33.5412,
+      "nearby_attack_seconds": 24.3955,
+      "attack_strength": 1.695
+    },
+    {
+      "beat": 43,
+      "seconds": 24.9704,
+      "source_seconds": 34.1219,
+      "nearby_attack_seconds": 24.9942,
+      "attack_strength": 0.663
+    },
+    {
+      "beat": 44,
+      "seconds": 25.5511,
+      "source_seconds": 34.7026,
+      "nearby_attack_seconds": 25.5529,
+      "attack_strength": 1.54
+    },
+    {
+      "beat": 45,
+      "seconds": 26.1318,
+      "source_seconds": 35.2833,
+      "nearby_attack_seconds": 26.1316,
+      "attack_strength": 1.377
+    },
+    {
+      "beat": 46,
+      "seconds": 26.7125,
+      "source_seconds": 35.864,
+      "nearby_attack_seconds": 26.7203,
+      "attack_strength": 1.422
+    },
+    {
+      "beat": 47,
+      "seconds": 27.2932,
+      "source_seconds": 36.4447,
+      "nearby_attack_seconds": 27.2989,
+      "attack_strength": 1.027
+    },
+    {
+      "beat": 48,
+      "seconds": 27.8739,
+      "source_seconds": 37.0254,
+      "nearby_attack_seconds": 27.8776,
+      "attack_strength": 1.169
+    },
+    {
+      "beat": 49,
+      "seconds": 28.4547,
+      "source_seconds": 37.6061,
+      "nearby_attack_seconds": 28.4563,
+      "attack_strength": 1.204
+    },
+    {
+      "beat": 50,
+      "seconds": 29.0354,
+      "source_seconds": 38.1869,
+      "nearby_attack_seconds": 29.045,
+      "attack_strength": 1.377
+    },
+    {
+      "beat": 51,
+      "seconds": 29.6161,
+      "source_seconds": 38.7676,
+      "nearby_attack_seconds": 29.6237,
+      "attack_strength": 1.273
+    },
+    {
+      "beat": 52,
+      "seconds": 30.1968,
+      "source_seconds": 39.3483,
+      "nearby_attack_seconds": 30.2023,
+      "attack_strength": 1.501
+    },
+    {
+      "beat": 53,
+      "seconds": 30.7775,
+      "source_seconds": 39.929,
+      "nearby_attack_seconds": 30.781,
+      "attack_strength": 1.448
+    },
+    {
+      "beat": 54,
+      "seconds": 31.3582,
+      "source_seconds": 40.5097,
+      "nearby_attack_seconds": 31.3597,
+      "attack_strength": 1.305
+    },
+    {
+      "beat": 55,
+      "seconds": 31.9389,
+      "source_seconds": 41.0904,
+      "nearby_attack_seconds": 31.9484,
+      "attack_strength": 1.107
+    },
+    {
+      "beat": 56,
+      "seconds": 32.5196,
+      "source_seconds": 41.6711,
+      "nearby_attack_seconds": 32.5271,
+      "attack_strength": 1.306
+    },
+    {
+      "beat": 57,
+      "seconds": 33.1003,
+      "source_seconds": 42.2518,
+      "nearby_attack_seconds": 33.1057,
+      "attack_strength": 1.18
+    },
+    {
+      "beat": 58,
+      "seconds": 33.681,
+      "source_seconds": 42.8325,
+      "nearby_attack_seconds": 33.6844,
+      "attack_strength": 1.283
+    },
+    {
+      "beat": 59,
+      "seconds": 34.2617,
+      "source_seconds": 43.4132,
+      "nearby_attack_seconds": 34.2731,
+      "attack_strength": 1.026
+    },
+    {
+      "beat": 60,
+      "seconds": 34.8424,
+      "source_seconds": 43.9939,
+      "nearby_attack_seconds": 34.8518,
+      "attack_strength": 1.348
+    },
+    {
+      "beat": 61,
+      "seconds": 35.4231,
+      "source_seconds": 44.5746,
+      "nearby_attack_seconds": 35.4305,
+      "attack_strength": 1.033
+    },
+    {
+      "beat": 62,
+      "seconds": 36.0038,
+      "source_seconds": 45.1553,
+      "nearby_attack_seconds": 36.0091,
+      "attack_strength": 1.868
+    },
+    {
+      "beat": 63,
+      "seconds": 36.5846,
+      "source_seconds": 45.736,
+      "nearby_attack_seconds": 36.6178,
+      "attack_strength": 0.747
+    },
+    {
+      "beat": 64,
+      "seconds": 37.1653,
+      "source_seconds": 46.3168,
+      "nearby_attack_seconds": 37.2164,
+      "attack_strength": 0.571
+    },
+    {
+      "beat": 65,
+      "seconds": 37.746,
+      "source_seconds": 46.8975,
+      "nearby_attack_seconds": 37.7552,
+      "attack_strength": 0.836
+    },
+    {
+      "beat": 66,
+      "seconds": 38.3267,
+      "source_seconds": 47.4782,
+      "nearby_attack_seconds": 38.3339,
+      "attack_strength": 1.012
+    },
+    {
+      "beat": 67,
+      "seconds": 38.9074,
+      "source_seconds": 48.0589,
+      "nearby_attack_seconds": 38.9125,
+      "attack_strength": 1.831
+    },
+    {
+      "beat": 68,
+      "seconds": 39.4881,
+      "source_seconds": 48.6396,
+      "nearby_attack_seconds": 39.4912,
+      "attack_strength": 1.308
+    },
+    {
+      "beat": 69,
+      "seconds": 40.0688,
+      "source_seconds": 49.2203,
+      "nearby_attack_seconds": 40.0699,
+      "attack_strength": 1.254
+    },
+    {
+      "beat": 70,
+      "seconds": 40.6495,
+      "source_seconds": 49.801,
+      "nearby_attack_seconds": 40.6486,
+      "attack_strength": 1.14
+    },
+    {
+      "beat": 71,
+      "seconds": 41.2302,
+      "source_seconds": 50.3817,
+      "nearby_attack_seconds": 41.2273,
+      "attack_strength": 1.499
+    },
+    {
+      "beat": 72,
+      "seconds": 41.8109,
+      "source_seconds": 50.9624,
+      "nearby_attack_seconds": 41.8159,
+      "attack_strength": 1.268
+    },
+    {
+      "beat": 73,
+      "seconds": 42.3916,
+      "source_seconds": 51.5431,
+      "nearby_attack_seconds": 42.3946,
+      "attack_strength": 1.096
+    },
+    {
+      "beat": 74,
+      "seconds": 42.9723,
+      "source_seconds": 52.1238,
+      "nearby_attack_seconds": 42.9733,
+      "attack_strength": 1.292
+    },
+    {
+      "beat": 75,
+      "seconds": 43.553,
+      "source_seconds": 52.7045,
+      "nearby_attack_seconds": 43.562,
+      "attack_strength": 1.685
+    },
+    {
+      "beat": 76,
+      "seconds": 44.1337,
+      "source_seconds": 53.2852,
+      "nearby_attack_seconds": 44.1307,
+      "attack_strength": 1.269
+    },
+    {
+      "beat": 77,
+      "seconds": 44.7145,
+      "source_seconds": 53.8659,
+      "nearby_attack_seconds": 44.7193,
+      "attack_strength": 1.03
+    },
+    {
+      "beat": 78,
+      "seconds": 45.2952,
+      "source_seconds": 54.4467,
+      "nearby_attack_seconds": 45.298,
+      "attack_strength": 0.918
+    },
+    {
+      "beat": 79,
+      "seconds": 45.8759,
+      "source_seconds": 55.0274,
+      "nearby_attack_seconds": 45.8867,
+      "attack_strength": 1.348
+    },
+    {
+      "beat": 80,
+      "seconds": 46.4566,
+      "source_seconds": 55.6081,
+      "nearby_attack_seconds": 46.4554,
+      "attack_strength": 1.171
+    },
+    {
+      "beat": 81,
+      "seconds": 47.0373,
+      "source_seconds": 56.1888,
+      "nearby_attack_seconds": 47.0441,
+      "attack_strength": 0.926
+    },
+    {
+      "beat": 82,
+      "seconds": 47.618,
+      "source_seconds": 56.7695,
+      "nearby_attack_seconds": 47.6227,
+      "attack_strength": 1.199
+    },
+    {
+      "beat": 83,
+      "seconds": 48.1987,
+      "source_seconds": 57.3502,
+      "nearby_attack_seconds": 48.2014,
+      "attack_strength": 1.598
+    },
+    {
+      "beat": 84,
+      "seconds": 48.7794,
+      "source_seconds": 57.9309,
+      "nearby_attack_seconds": 48.7801,
+      "attack_strength": 1.352
+    },
+    {
+      "beat": 85,
+      "seconds": 49.3601,
+      "source_seconds": 58.5116,
+      "nearby_attack_seconds": 49.3588,
+      "attack_strength": 1.272
+    },
+    {
+      "beat": 86,
+      "seconds": 49.9408,
+      "source_seconds": 59.0923,
+      "nearby_attack_seconds": 49.9375,
+      "attack_strength": 1.172
+    },
+    {
+      "beat": 87,
+      "seconds": 50.5215,
+      "source_seconds": 59.673,
+      "nearby_attack_seconds": 50.5162,
+      "attack_strength": 1.405
+    },
+    {
+      "beat": 88,
+      "seconds": 51.1022,
+      "source_seconds": 60.2537,
+      "nearby_attack_seconds": 51.0949,
+      "attack_strength": 1.339
+    },
+    {
+      "beat": 89,
+      "seconds": 51.6829,
+      "source_seconds": 60.8344,
+      "nearby_attack_seconds": 51.6835,
+      "attack_strength": 1.213
+    },
+    {
+      "beat": 90,
+      "seconds": 52.2636,
+      "source_seconds": 61.4151,
+      "nearby_attack_seconds": 52.2622,
+      "attack_strength": 1.255
+    },
+    {
+      "beat": 91,
+      "seconds": 52.8444,
+      "source_seconds": 61.9958,
+      "nearby_attack_seconds": 52.8409,
+      "attack_strength": 1.619
+    },
+    {
+      "beat": 92,
+      "seconds": 53.4251,
+      "source_seconds": 62.5766,
+      "nearby_attack_seconds": 53.4196,
+      "attack_strength": 1.369
+    },
+    {
+      "beat": 93,
+      "seconds": 54.0058,
+      "source_seconds": 63.1573,
+      "nearby_attack_seconds": 54.0082,
+      "attack_strength": 0.826
+    },
+    {
+      "beat": 94,
+      "seconds": 54.5865,
+      "source_seconds": 63.738,
+      "nearby_attack_seconds": 54.5769,
+      "attack_strength": 0.921
+    },
+    {
+      "beat": 95,
+      "seconds": 55.1672,
+      "source_seconds": 64.3187,
+      "nearby_attack_seconds": 55.1656,
+      "attack_strength": 1.354
+    },
+    {
+      "beat": 96,
+      "seconds": 55.7479,
+      "source_seconds": 64.8994,
+      "nearby_attack_seconds": 55.7443,
+      "attack_strength": 0.971
+    },
+    {
+      "beat": 97,
+      "seconds": 56.3286,
+      "source_seconds": 65.4801,
+      "nearby_attack_seconds": 56.333,
+      "attack_strength": 0.958
+    },
+    {
+      "beat": 98,
+      "seconds": 56.9093,
+      "source_seconds": 66.0608,
+      "nearby_attack_seconds": 56.9017,
+      "attack_strength": 1.449
+    },
+    {
+      "beat": 99,
+      "seconds": 57.49,
+      "source_seconds": 66.6415,
+      "nearby_attack_seconds": 57.4903,
+      "attack_strength": 1.627
+    },
+    {
+      "beat": 100,
+      "seconds": 58.0707,
+      "source_seconds": 67.2222,
+      "nearby_attack_seconds": 58.059,
+      "attack_strength": 1.365
+    },
+    {
+      "beat": 101,
+      "seconds": 58.6514,
+      "source_seconds": 67.8029,
+      "nearby_attack_seconds": 58.6377,
+      "attack_strength": 1.029
+    },
+    {
+      "beat": 102,
+      "seconds": 59.2321,
+      "source_seconds": 68.3836,
+      "nearby_attack_seconds": 59.2264,
+      "attack_strength": 1.527
+    },
+    {
+      "beat": 103,
+      "seconds": 59.8128,
+      "source_seconds": 68.9643,
+      "nearby_attack_seconds": 59.8051,
+      "attack_strength": 1.475
+    }
+  ],
+  "two_bar_phrase_grid": [
+    {
+      "beat": 0,
+      "seconds": 0.0,
+      "source_seconds": 9.151,
+      "bars_4_4": 2,
+      "mean_energy": 0.005741,
+      "mean_onset": 0.345
+    },
+    {
+      "beat": 8,
+      "seconds": 4.646,
+      "source_seconds": 13.797,
+      "bars_4_4": 2,
+      "mean_energy": 0.006226,
+      "mean_onset": 0.352
+    },
+    {
+      "beat": 16,
+      "seconds": 9.291,
+      "source_seconds": 18.443,
+      "bars_4_4": 2,
+      "mean_energy": 0.006086,
+      "mean_onset": 0.351
+    },
+    {
+      "beat": 24,
+      "seconds": 13.937,
+      "source_seconds": 23.088,
+      "bars_4_4": 2,
+      "mean_energy": 0.005282,
+      "mean_onset": 0.29
+    },
+    {
+      "beat": 32,
+      "seconds": 18.583,
+      "source_seconds": 27.734,
+      "bars_4_4": 2,
+      "mean_energy": 0.00727,
+      "mean_onset": 0.353
+    },
+    {
+      "beat": 40,
+      "seconds": 23.228,
+      "source_seconds": 32.38,
+      "bars_4_4": 2,
+      "mean_energy": 0.006971,
+      "mean_onset": 0.355
+    },
+    {
+      "beat": 48,
+      "seconds": 27.874,
+      "source_seconds": 37.025,
+      "bars_4_4": 2,
+      "mean_energy": 0.006883,
+      "mean_onset": 0.361
+    },
+    {
+      "beat": 56,
+      "seconds": 32.52,
+      "source_seconds": 41.671,
+      "bars_4_4": 2,
+      "mean_energy": 0.00649,
+      "mean_onset": 0.369
+    },
+    {
+      "beat": 64,
+      "seconds": 37.165,
+      "source_seconds": 46.317,
+      "bars_4_4": 2,
+      "mean_energy": 0.006863,
+      "mean_onset": 0.338
+    },
+    {
+      "beat": 72,
+      "seconds": 41.811,
+      "source_seconds": 50.962,
+      "bars_4_4": 2,
+      "mean_energy": 0.006912,
+      "mean_onset": 0.349
+    },
+    {
+      "beat": 80,
+      "seconds": 46.457,
+      "source_seconds": 55.608,
+      "bars_4_4": 2,
+      "mean_energy": 0.006756,
+      "mean_onset": 0.353
+    },
+    {
+      "beat": 88,
+      "seconds": 51.102,
+      "source_seconds": 60.254,
+      "bars_4_4": 2,
+      "mean_energy": 0.006623,
+      "mean_onset": 0.367
+    },
+    {
+      "beat": 96,
+      "seconds": 55.748,
+      "source_seconds": 64.899,
+      "bars_4_4": 2,
+      "mean_energy": 0.007089,
+      "mean_onset": 0.384
+    }
+  ],
+  "strong_transient_accents": [
+    {
+      "seconds": 0.28,
+      "source_seconds": 9.432,
+      "strength": 2.119
+    },
+    {
+      "seconds": 1.737,
+      "source_seconds": 10.889,
+      "strength": 2.147
+    },
+    {
+      "seconds": 2.485,
+      "source_seconds": 11.637,
+      "strength": 2.247
+    },
+    {
+      "seconds": 3.064,
+      "source_seconds": 12.216,
+      "strength": 2.398
+    },
+    {
+      "seconds": 4.062,
+      "source_seconds": 13.213,
+      "strength": 2.568
+    },
+    {
+      "seconds": 6.386,
+      "source_seconds": 15.538,
+      "strength": 2.73
+    },
+    {
+      "seconds": 7.135,
+      "source_seconds": 16.286,
+      "strength": 2.604
+    },
+    {
+      "seconds": 7.713,
+      "source_seconds": 16.865,
+      "strength": 2.564
+    },
+    {
+      "seconds": 8.701,
+      "source_seconds": 17.853,
+      "strength": 2.557
+    },
+    {
+      "seconds": 11.026,
+      "source_seconds": 20.177,
+      "strength": 2.39
+    },
+    {
+      "seconds": 11.904,
+      "source_seconds": 21.055,
+      "strength": 2.142
+    },
+    {
+      "seconds": 12.203,
+      "source_seconds": 21.355,
+      "strength": 2.451
+    },
+    {
+      "seconds": 13.351,
+      "source_seconds": 22.502,
+      "strength": 2.919
+    },
+    {
+      "seconds": 15.685,
+      "source_seconds": 24.837,
+      "strength": 2.538
+    },
+    {
+      "seconds": 16.124,
+      "source_seconds": 25.276,
+      "strength": 2.47
+    },
+    {
+      "seconds": 16.843,
+      "source_seconds": 25.994,
+      "strength": 2.168
+    },
+    {
+      "seconds": 22.54,
+      "source_seconds": 31.691,
+      "strength": 1.995
+    },
+    {
+      "seconds": 34.722,
+      "source_seconds": 43.874,
+      "strength": 2.155
+    },
+    {
+      "seconds": 35.58,
+      "source_seconds": 44.732,
+      "strength": 2.038
+    },
+    {
+      "seconds": 53.869,
+      "source_seconds": 63.02,
+      "strength": 2.391
+    },
+    {
+      "seconds": 54.298,
+      "source_seconds": 63.449,
+      "strength": 2.421
+    },
+    {
+      "seconds": 55.016,
+      "source_seconds": 64.167,
+      "strength": 2.078
+    },
+    {
+      "seconds": 55.455,
+      "source_seconds": 64.606,
+      "strength": 2.496
+    },
+    {
+      "seconds": 56.034,
+      "source_seconds": 65.185,
+      "strength": 2.235
+    }
+  ],
+  "choreography_suggestion": [
+    {
+      "seconds": 0.0,
+      "move": "Confident intro groove / shoulder pop; show silhouette."
+    },
+    {
+      "seconds": 4.646,
+      "move": "Toprock cross steps, alternating pointing/wave accents."
+    },
+    {
+      "seconds": 9.291,
+      "move": "Heavier toprock with knee bounce and arm sweeps."
+    },
+    {
+      "seconds": 13.937,
+      "move": "Turn, shuffle, prepare drop."
+    },
+    {
+      "seconds": 18.583,
+      "move": "Music becomes denser: decisive drop to six-step floorwork."
+    },
+    {
+      "seconds": 27.874,
+      "move": "Kick-through / CC steps with hand plants."
+    },
+    {
+      "seconds": 37.165,
+      "move": "Power section: windmill/backspin sequence."
+    },
+    {
+      "seconds": 46.457,
+      "move": "Freeze accents, then kip-up."
+    },
+    {
+      "seconds": 55.748,
+      "move": "Final standing hits / confident pose; hold as audio fades."
+    }
+  ],
+  "limitations": [
+    "Waveform and spectral analysis only; no claim of perceptual listening.",
+    "Phrase markers are repeated 8-beat timing blocks; not verified song section labels.",
+    "Strong transients may be bass, snare, hats or scratches; inferred only from frequency bands."
+  ],
+  "strongest_energy_excerpt": {
+    "source_start_seconds": 80.0414,
+    "duration_seconds": 60,
+    "note": "Maximum mean spectral RMS window is approximately80.04\u2013140.04s; recommended9.151\u201369.151s instead preserves a lighter introduction then clear energy lift for floorwork. Strongest energy does not prove best musical excerpt."
+  }
+}

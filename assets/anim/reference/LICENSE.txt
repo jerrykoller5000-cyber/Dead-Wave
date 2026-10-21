@@ -1,0 +1,6 @@
+The reference animations in ual.json come from the Universal Animation Library 1 and 2
+by Quaternius (https://quaternius.com), released under CC0 1.0 Universal (public domain):
+https://creativecommons.org/publicdomain/zero/1.0/
+
+Kept here: the body's bones (no fingers) and the clips listed in catalogue.json, sampled at
+30 fps by studio/import-ual.mjs. Credit is not required; we give it anyway.

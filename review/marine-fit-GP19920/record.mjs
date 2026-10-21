@@ -1,0 +1,13 @@
+import fs from 'node:fs';import crypto from 'node:crypto';
+const root='review/marine-fit-GP19920';
+const files=['index.html','studio/marine-body.js','studio/marine-headgear.js','studio/marine-hand.js','studio/marine-idle.js','studio/marine-turn.js','ui/marine-face.js','ui/marine-kit-fit.js','ui/weapon-sling.js'];
+const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
+fs.writeFileSync(root+'/manifest.json',JSON.stringify({at:new Date().toISOString(),files:files.map(path=>{const b=fs.readFileSync(path);return{path,bytes:b.length,sha256:sha(b),bom:b[0]===239&&b[1]===187&&b[2]===191};})},null,2));
+const all=JSON.parse(fs.readFileSync('crew/tests.json','utf8')),names=['t101','t103','t104','t116','t134','t146','t189','t215','t240','t249','t254'];
+fs.writeFileSync(root+'/focused-tests.json',JSON.stringify({at:all.at,files:Object.fromEntries(names.map(n=>[n,all.files[n]]))},null,2));
+const path='crew/status/chatgpt.md',before=fs.readFileSync(path,'utf8');
+const note='GP-19920: ten Marine fit changes applied; handoff handoffs/2026-10-15-chatgpt-GP-19920.md, source hashes and real shots in review/marine-fit-GP19920. Final focused138pass0fail; rig25pass1fail old standing dip expectation; native27pack-clear/empty-shift checks,3catalog subjects, wrist seam max7.65e-9,59.73FPS/10.898s inspector. Not full-suite/48-zombie proof. Claude exact buildEar recovery and standing expectation review, Antigravity eyes, Cursor full suite pending. Do not mark all gates complete or rerun one-shot scripts/restore snapshots. Preserve concurrent CL197 and weapon work.';
+let after=before.replace('## Notes','## Notes\n\n'+note);
+after=after.replace(/^touching:.*$/m,'touching: '+files.join(', ')+', review/marine-fit-GP19920');
+if(fs.readFileSync(path,'utf8')!==before)throw Error('Card changed');fs.writeFileSync(path,after);
+console.log('manifest, focused results and crew notes saved');

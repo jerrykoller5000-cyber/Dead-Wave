@@ -1,0 +1,9 @@
+#92 impacts-flesh-hit
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 0.4 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A bullet hitting rotten flesh: a short wet thwack. No voice, no music.
+
+In the game: zombieHit() → foley 'hit'

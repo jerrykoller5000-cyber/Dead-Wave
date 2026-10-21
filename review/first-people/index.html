@@ -1,0 +1,15 @@
+<!doctype html><meta charset="utf-8"><title>first people</title>
+<style>body{margin:24px;background:#14181f;color:#e6e6e0;font-family:Georgia,serif} h1{font-weight:normal} h2{font-weight:normal;margin:28px 0 6px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px} figure{margin:0} img{width:100%;display:block} figcaption{font-size:14px;opacity:.7;margin:4px 0}</style>
+<h1>first people · CL-107 · v1</h1>
+<p>The valley's first people, told without words (docs/story.md §2, §7). The standing stones on the highest clear
+ground, each with one of the Pit's glyphs on the side that looks at the lake; the ring stone on the highest of them,
+the ring of eight carved round the dark; offerings at the hill barrow's door (cairns, a stone bowl of old ash, an
+antler, a stone with the crown). And the Marrow cave (the chalk one) sealed by their cracked carved door: he can't
+go in or poke it; the dead still squeeze out through the hole at its foot. The carvings are dark grooves by day and
+give the Pit's cold light at night; on a silenced day they go dark. Your notes go in notes.md.</p>
+<script>
+const rows = [['The ring stone', ['first-ring-stone', 'first-ring-stone-night']], ['Standing stones', ['first-stone-1', 'first-stone-2', 'first-stone-3']],
+  ['The barrow\'s offerings', ['barrow-offerings']], ['The Marrow cave\'s door', ['marrow-door', 'marrow-door-night', 'marrow-door-close']]];
+for (const [h, ks] of rows) document.write(`<h2>${h}</h2><div class="row">` + ks.map((k) => `<figure><figcaption>${k} (v1)</figcaption><img src="v1/${k}.png"></figure>`).join('') + '</div>');
+</script>

@@ -1,0 +1,409 @@
+    const minimapEl = document.getElementById('minimap');
+    const minimapCtx = minimapEl.getContext('2d');
+    const MAP_R = 235;          // world radius the bake covers
+    const MAP_PX = 328;         // minimap canvas (2x its CSS size, so lines stay sharp)
+    const MINI_R = 50;          // world radius the minimap shows
+    const BAKE_PX = 1024;       // ~2.2 px per metre: still crisp blown up to 50 m
+    minimapEl.width = MAP_PX; minimapEl.height = MAP_PX;
+    const mapBake = document.createElement('canvas');
+    mapBake.width = BAKE_PX; mapBake.height = BAKE_PX;
+    const bakeScale = BAKE_PX / (2 * MAP_R); // bake px per metre
+    function worldToBake(x, z) {
+      return { x: (MAP_R - x) * bakeScale, y: (MAP_R - z) * bakeScale };
+    }
+    // Canvas angle of a world heading given as a yaw (facing = (sin yaw, cos yaw)), for
+    // shapes drawn pointing up on a north-up map: rotate(this).
+    const mapRotForYaw = (yaw) => -yaw;
+
+    function bakeMinimap() {
+      const ctx = mapBake.getContext('2d');
+      const img = ctx.createImageData(BAKE_PX, BAKE_PX);
+      const d = img.data;
+      for (let py = 0; py < BAKE_PX; py++) {
+        const wz = MAP_R - (py + 0.5) / bakeScale;
+        for (let px = 0; px < BAKE_PX; px++) {
+          const wx = MAP_R - (px + 0.5) / bakeScale;
+          const i = (py * BAKE_PX + px) * 4;
+          if (wx * wx + wz * wz > MAP_R * MAP_R) { d[i + 3] = 0; continue; }
+          const h = sampleHeight(wx, wz);
+          let r, g, b;
+          if (waterLevelAt(wx, wz) !== null) {
+            r = 38; g = 92; b = 150;
+          } else if (h > 34) {
+            const t = Math.min(1, (h - 34) / 40);
+            r = 120 + t * 120; g = 120 + t * 122; b = 118 + t * 128;
+          } else {
+            const t = Math.max(0, Math.min(1, (h + 8) / 26));
+            r = 58 + t * 46; g = 118 + t * 26; b = 58 + t * 8;
+          }
+          // A touch of hillshade so relief reads when it is blown up on the minimap.
+          const hx = sampleHeight(wx - 1.5, wz) - h, hz = sampleHeight(wx, wz - 1.5) - h;
+          const shade = Math.max(0.78, Math.min(1.18, 1 + (hx + hz) * 0.06));
+          d[i] = r * shade; d[i + 1] = g * shade; d[i + 2] = b * shade; d[i + 3] = 235;
+        }
+      }
+      ctx.putImageData(img, 0, 0);
+      // Tracks are stroked rather than tested per pixel: at this resolution a per-pixel
+      // distance-to-every-segment test cost more than the rest of the bake put together.
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(BAKE_PX / 2, BAKE_PX / 2, MAP_R * bakeScale, 0, Math.PI * 2);
+      ctx.clip();
+      ctx.strokeStyle = 'rgb(156,138,104)'; // tan, not rust: must never be mistaken for a zombie blip
+      ctx.lineJoin = 'round'; ctx.lineCap = 'round';
+      for (const line of PATHS) {
+        // Busier trails draw broader, as they are on the ground (at least the old
+        // width, so a footpath still reads on the map).
+        ctx.lineWidth = Math.max(3.8, (line.hw || TRAIL_HW) * 2.6) * bakeScale;
+        ctx.beginPath();
+        line.forEach((p, k) => { const q = worldToBake(p.x, p.z); if (k) ctx.lineTo(q.x, q.y); else ctx.moveTo(q.x, q.y); });
+        ctx.stroke();
+      }
+      ctx.restore();
+      // Static landmark markers.
+      function mark(x, z, color) {
+        const p = worldToBake(x, z);
+        ctx.fillStyle = 'rgba(0,0,0,0.55)';
+        ctx.fillRect(p.x - 6, p.y - 6, 12, 12);
+        ctx.fillStyle = color;
+        ctx.fillRect(p.x - 4.5, p.y - 4.5, 9, 9);
+      }
+      for (const c of POI.campsites) mark(c.x, c.z, '#ffb347');
+      for (const c of POI.cabins) mark(c.x, c.z, '#c9a17c');
+      if (POI.tower) mark(POI.tower.x, POI.tower.z, '#e6d27a');
+      if (POI.graveyard) mark(POI.graveyard.x, POI.graveyard.z, '#b9b9c9');
+      for (const b of POI.bridges) mark(b.x, b.z, '#d9c7a0');
+      for (const s of POI.sheds) mark(s.x, s.z, '#9a7b5a');
+      for (const w of POI.wrecks) mark(w.x, w.z, '#6a8aaa');
+      if (POI.mast) mark(POI.mast.x, POI.mast.z, '#ff4466');
+      if (POI.dock) mark(POI.dock.x, POI.dock.z, '#5a9ccc');
+    }
+
+    // Shared blip drawing. `toMap(x, z)` returns canvas coords (or null to skip).
+    function mapDot(ctx, p, color, r) {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, r + 1.2, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(0,0,0,0.7)';
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+      ctx.fillStyle = color;
+      ctx.fill();
+    }
+    function mapSquare(ctx, p, color, s) {
+      ctx.fillStyle = 'rgba(0,0,0,0.7)';
+      ctx.fillRect(p.x - s / 2 - 1.2, p.y - s / 2 - 1.2, s + 2.4, s + 2.4);
+      ctx.fillStyle = color;
+      ctx.fillRect(p.x - s / 2, p.y - s / 2, s, s);
+    }
+    function mapArrow(ctx, p, rot, k) {
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(rot);
+      ctx.scale(k, k);
+      ctx.beginPath();
+      ctx.moveTo(0, -9); ctx.lineTo(6, 6); ctx.lineTo(0, 3); ctx.lineTo(-6, 6);
+      ctx.closePath();
+      ctx.lineJoin = 'round';
+      ctx.lineWidth = 3;
+      ctx.strokeStyle = 'rgba(0,0,0,0.85)';
+      ctx.stroke();
+      ctx.fillStyle = '#ffffff';
+      ctx.fill();
+      ctx.restore();
+    }
+    function campsiteMapName(c) {
+      return ({ ranger: 'RANGER CAMP', hikers: 'HIKERS CAMP', trapper: 'TRAPPER CAMP' })[c.style] || 'CAMPSITE';
+    }
+    // Every live blip, in whatever projection the caller hands in.
+    const uiCaveWarnings = new Map();
+    let objectiveRuntime = null;
+    window.addEventListener('dw-cave-warn', ({ detail }) => {
+      if (!detail || !Number.isInteger(detail.index) || detail.index < 0) return;
+      if (detail.level === 1 || detail.level === 2) uiCaveWarnings.set(detail.index, detail.level);
+      else uiCaveWarnings.delete(detail.index);
+    });
+    const buildAttackPulses = createBuildAttackPulses();
+    const farBuildWarnings = createFarBuildWarnings();
+    window.addEventListener('dw-game', ({detail}) => {
+      if (detail?.type !== 'build-hit' && detail?.type !== 'run-reset') return;
+      const now = performance.now();
+      buildAttackPulses.handle(detail, detail.type === 'run-reset' ? [] : builds, now);
+      const cue = farBuildWarnings.handle(detail, detail.type === 'run-reset' ? {} : {
+        active: gameStarted && !gameOver && !won && !paused && !shopOpen,
+        x: player.position.x, z: player.position.z, yaw: camYawCurrent
+      }, now);
+      if (cue) {
+        // A distant defense warning uses the existing sound bus/mute controls.
+        const material = ['light','heavy','flame','mortar'].includes(detail.kind) ? 'turret' : 'wood';
+        if (cue.broke) AudioSys.buildBreak(material, cue.volume, cue.pan);
+        else AudioSys.buildHit(material, cue.volume, cue.pan);
+      }
+    });
+    function drawMapBlips(ctx, toMap, sz, projection) {
+      if (objectiveRuntime && ctx !== fullMapCtx) for (const marker of objectiveRuntime.markers()) {
+        const p = toMap(marker.position.x, marker.position.z); if (!p) continue;
+        mapSquare(ctx, p, marker.selected ? '#fff1bd' : '#d3bb78', 8 * sz);
+        if (marker.selected) { ctx.save(); ctx.strokeStyle = '#fff1bd'; ctx.lineWidth = 2 * sz;
+          ctx.beginPath(); ctx.arc(p.x, p.y, 8 * sz, 0, Math.PI * 2); ctx.stroke(); ctx.restore(); }
+      }
+      for (const [index, level] of uiCaveWarnings) {
+        const cave = POI.caves[index]; if (!cave) continue;
+        const p = toMap(cave.x, cave.z); if (!p) continue;
+        const radius = (7 + (1 + Math.sin(performance.now() * (level === 2 ? .006 : .003))) * 2) * sz;
+        ctx.save(); ctx.beginPath(); ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
+        ctx.strokeStyle = level === 2 ? '#ff755e' : '#ead399'; ctx.lineWidth = 2 * sz; ctx.stroke(); ctx.restore();
+      }
+      const buildAlertTime = performance.now();
+      drawBuildAlerts(ctx, buildAlertMarkers(buildAttackPulses.snapshot(builds, buildAlertTime), { toMap, projection }),
+        { scale: sz, timeMs: buildAlertTime });
+      if (house.present) { const p = toMap(house.group.position.x, house.group.position.z); if (p) mapSquare(ctx, p, '#7cdea0', 9 * sz); }
+      if (skullBag.count > 0) {
+        const p = toMap(HQ_WINDOW_FRONT.x, HQ_WINDOW_FRONT.z);
+        if (p) { ctx.save(); ctx.beginPath(); ctx.arc(p.x, p.y, 11 * sz, 0, Math.PI * 2); ctx.strokeStyle = '#ead399'; ctx.lineWidth = 2 * sz; ctx.stroke(); ctx.restore(); }
+      }
+      { const p = toMap(KIOSK.x, KIOSK.z); if (p) mapSquare(ctx, p, '#ffd24a', 7 * sz); }
+      for (const s of supplyDrops) {
+        if (s.state === 'gone') continue;
+        const p = toMap(s.x, s.z);
+        if (p) mapSquare(ctx, p, (performance.now() % 700 < 350) ? '#ffe066' : '#ffaa00', 8 * sz);
+      }
+      // Zombies: big red dots that flash (~2 Hz) with a glow behind them, so they read
+      // at a glance against any terrain. Brutes, demons and the colossus are drawn larger.
+      const pulse = 0.5 + 0.5 * Math.sin(performance.now() * 0.001 * Math.PI * 2 * 2.1);
+      const core = 'rgb(255,' + Math.round(20 + pulse * 50) + ',' + Math.round(20 + pulse * 40) + ')';
+      const dim = 'rgb(' + Math.round(150 + pulse * 105) + ',0,0)';
+      const glow = 'rgba(255,30,30,' + (0.12 + pulse * 0.3).toFixed(2) + ')';
+      for (const z of zombies) {
+        if (!z.alive) continue;
+        const p = toMap(z.mesh.position.x, z.mesh.position.z);
+        if (!p) continue;
+        const big = (z.typeKey === 'colossus' || z.typeKey === 'guardian') ? 1.65 : (z.typeKey === 'brute' || z.typeKey === 'demon' ? 1.2 : 1);
+        const r = 4.6 * big * sz;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, r * (1.5 + pulse * 0.9), 0, Math.PI * 2);
+        ctx.fillStyle = glow;
+        ctx.fill();
+        mapDot(ctx, p, pulse > 0.5 ? core : dim, r);
+      }
+      if (ctx !== fullMapCtx && extractionFor(day) === 'due' && POI.dock) {
+        // The dock can be beyond the minimap's 50 m reach, so keep its cue at the rim.
+        const p = projectScoutCave(POI.dock, { ...projection, rim: projection.rim - 28 });
+        if (p) {
+          const bright = Math.floor(performance.now() / 450) % 2 === 0;
+          ctx.save();
+          mapSquare(ctx, p, bright ? '#baf3ff' : '#397c91', bright ? 10 : 7);
+          ctx.beginPath(); ctx.arc(p.x, p.y, bright ? 15 : 11, 0, Math.PI * 2);
+          ctx.strokeStyle = bright ? '#baf3ff' : '#397c91'; ctx.lineWidth = 2; ctx.stroke();
+          ctx.restore();
+        }
+      }
+    }
+
+    let minimapTick = 0;
+    function drawMinimap(dt) {
+      if (fullMapOpen) drawFullMap(dt);
+      minimapTick -= dt;
+      if (minimapTick > 0) return;
+      minimapTick = 1 / 30;
+      const ctx = minimapCtx;
+      const W = MAP_PX, C = W / 2, RIM = C - 7;
+      const px = player.position.x, pz = player.position.z;
+      const yaw = camYawCurrent;
+      const cy = Math.cos(yaw), sy = Math.sin(yaw);
+      const k = (C - 4) / MINI_R;                 // canvas px per metre
+      // World -> minimap: screen-right is world (-cos yaw, sin yaw), screen-up is
+      // (sin yaw, cos yaw), exactly the axes WASD moves along.
+      const toLocal = (x, z) => {
+        const dx = x - px, dz = z - pz;
+        const lx = -dx * cy + dz * sy, ly = dx * sy + dz * cy;
+        if (lx * lx + ly * ly > MINI_R * MINI_R) return null; // only what is within 50 m
+        return { x: C + lx * k, y: C - ly * k };
+      };
+      ctx.clearRect(0, 0, W, W);
+      ctx.save();
+      ctx.beginPath(); ctx.arc(C, C, C - 1.5, 0, Math.PI * 2); ctx.clip();
+      ctx.fillStyle = 'rgba(8,12,24,0.85)';
+      ctx.fillRect(0, 0, W, W);
+      // Terrain: the bake, turned by the camera heading and blown up to 50 m.
+      // (Bake +x is world -x and bake +y is world -z; under this map those land on
+      // (cos yaw, sin yaw) and (-sin yaw, cos yaw) Ã¢â‚¬â€ a plain rotation by +yaw.)
+      {
+        const pb = worldToBake(px, pz);
+        ctx.save();
+        ctx.translate(C, C);
+        ctx.rotate(yaw);
+        ctx.scale(k / bakeScale, k / bakeScale);
+        ctx.translate(-pb.x, -pb.y);
+        ctx.imageSmoothingEnabled = true;
+        ctx.drawImage(mapBake, 0, 0);
+        ctx.restore();
+      }
+      // Range rings at 25 m and the 50 m edge, so distance reads off the map.
+      ctx.strokeStyle = 'rgba(255,255,255,0.13)';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.arc(C, C, 25 * k, 0, Math.PI * 2); ctx.stroke();
+      // View cone: the camera always looks up this map, so it never turns.
+      {
+        const hfov = 2 * Math.atan(Math.tan(THREE.MathUtils.degToRad(camera.fov) / 2) * camera.aspect);
+        const reach = 30 * k;
+        const g = ctx.createRadialGradient(C, C, 4, C, C, reach);
+        g.addColorStop(0, 'rgba(255,255,255,0.24)');
+        g.addColorStop(1, 'rgba(255,255,255,0)');
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.moveTo(C, C);
+        ctx.arc(C, C, reach, -Math.PI / 2 - hfov / 2, -Math.PI / 2 + hfov / 2);
+        ctx.closePath();
+        ctx.fill();
+      }
+      drawMapBlips(ctx, toLocal, 1, { x: px, z: pz, yaw, center: C, scale: k, rim: RIM - 8 });
+      drawScoutingMarks(ctx, { preview: getWavePreview(day), day, phase, alarmActive: !!hq.seq }, POI.caves,
+        { x: px, z: pz, yaw, center: C, scale: k, rim: RIM - 22 });
+      drawBountyMarks(ctx, bountyIntel.markers({ day, phase, alarmActive: !!hq.seq }),
+        { x: px, z: pz, yaw, center: C, scale: k, rim: RIM - 42 });
+      drawCacheMarks(ctx, cacheIntel.markers({ runId: uiRunId, day, sites: objectiveRuntime?.snapshot()?.sites || [] }),
+        { x: px, z: pz, yaw, center: C, scale: k, rim: RIM - 56 });
+      // Names follow the rotating minimap rather than the terrain bake, so they
+      // stay upright and readable even while the player turns.
+      ctx.font = '700 15px sans-serif';
+      ctx.textBaseline = 'middle';
+      ctx.lineJoin = 'round';
+      ctx.lineWidth = 4;
+      ctx.strokeStyle = 'rgba(0,0,0,0.95)';
+      ctx.fillStyle = '#ffd19a';
+      for (const camp of POI.campsites) {
+        const p = toLocal(camp.x, camp.z);
+        if (!p) continue;
+        const rightSide = p.x > C + 48;
+        ctx.textAlign = rightSide ? 'right' : 'left';
+        const tx = p.x + (rightSide ? -10 : 10);
+        const ty = Math.max(18, Math.min(W - 18, p.y - 14));
+        const name = campsiteMapName(camp);
+        ctx.strokeText(name, tx, ty);
+        ctx.fillText(name, tx, ty);
+      }
+      ctx.restore();
+
+      ctx.strokeStyle = 'rgba(10,14,8,0.85)';
+      ctx.lineWidth = 3;
+      ctx.beginPath(); ctx.arc(C, C, C - 1.5, 0, Math.PI * 2); ctx.stroke();
+
+      // Threat direction: a red arc on the rim while a wave is inbound.
+      const rimAngle = (wx, wz) => Math.atan2(-(wx * sy + wz * cy), -wx * cy + wz * sy);
+      if (gameStarted && phase !== 'idle' && waveBearings.length && !waveSurround) {
+        ctx.strokeStyle = 'rgba(255,70,60,0.95)';
+        ctx.lineWidth = 6;
+        for (const bAng of waveBearings) {
+          const ca = rimAngle(Math.cos(bAng), Math.sin(bAng)); // spawn direction is (cos a, sin a)
+          ctx.beginPath();
+          ctx.arc(C, C, RIM, ca - 0.45, ca + 0.45);
+          ctx.stroke();
+        }
+      } else if (gameStarted && phase !== 'idle' && waveSurround) {
+        ctx.strokeStyle = 'rgba(255,70,60,0.75)';
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        ctx.arc(C, C, RIM, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+
+      // Marine in the middle, arrow pointing where he faces relative to the view.
+      mapArrow(ctx, { x: C, y: C }, yaw - aimYaw, 1);
+
+      // Compass letters ride the rim so north is always findable.
+      ctx.font = 'bold 17px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.lineWidth = 3.5;
+      ctx.strokeStyle = 'rgba(0,0,0,0.8)';
+      const inset = C - 17;
+      for (const [label, wx, wz] of [['N', 0, 1], ['E', -1, 0], ['S', 0, -1], ['W', 1, 0]]) {
+        const a = rimAngle(wx, wz);
+        const x = C + Math.cos(a) * inset, y = C + Math.sin(a) * inset;
+        ctx.strokeText(label, x, y);
+        ctx.fillStyle = label === 'N' ? '#ffd24a' : 'rgba(255,255,255,0.85)';
+        ctx.fillText(label, x, y);
+      }
+    }
+
+    // --- Full map (Tab) ---------------------------------------------------------------
+    const fullMapEl = document.getElementById('fullMap');
+    const fullMapCanvas = document.getElementById('fullMapCanvas');
+    const fullMapCtx = fullMapCanvas.getContext('2d');
+    let fullMapOpen = false, fullMapTick = 0;
+    function setFullMap(on) {
+      fullMapOpen = !!on;
+      fullMapEl.classList.toggle('show', fullMapOpen);
+      if (fullMapOpen) { fullMapTick = 0; drawFullMap(0); }
+    }
+    function drawFullMap(dt) {
+      fullMapTick -= dt;
+      if (fullMapTick > 0) return;
+      fullMapTick = 1 / 20;
+      const css = Math.round(Math.min(innerWidth * 0.86, innerHeight * 0.8));
+      const W = Math.round(css * Math.min(2, devicePixelRatio || 1));
+      if (fullMapCanvas.width !== W) {
+        fullMapCanvas.width = W; fullMapCanvas.height = W;
+        fullMapCanvas.style.width = css + 'px'; fullMapCanvas.style.height = css + 'px';
+      }
+      const ctx = fullMapCtx;
+      const C = W / 2;
+      const s = W / BAKE_PX;
+      const sz = W / 600;                      // blip size relative to a ~600 px map
+      const toFull = (x, z) => { const p = worldToBake(x, z); return { x: p.x * s, y: p.y * s }; };
+      ctx.clearRect(0, 0, W, W);
+      ctx.imageSmoothingEnabled = true;
+      ctx.drawImage(mapBake, 0, 0, W, W);
+      ctx.strokeStyle = 'rgba(10,14,8,0.9)';
+      ctx.lineWidth = 4 * sz;
+      ctx.beginPath(); ctx.arc(C, C, C - 2 * sz, 0, Math.PI * 2); ctx.stroke();
+      // The minimap's reach, so the two maps visibly relate.
+      const pp = toFull(player.position.x, player.position.z);
+      ctx.strokeStyle = 'rgba(255,255,255,0.45)';
+      ctx.setLineDash([6 * sz, 5 * sz]);
+      ctx.lineWidth = 1.5 * sz;
+      ctx.beginPath(); ctx.arc(pp.x, pp.y, MINI_R * bakeScale * s, 0, Math.PI * 2); ctx.stroke();
+      ctx.setLineDash([]);
+      if (gameStarted && phase !== 'idle' && waveBearings.length && !waveSurround) {
+        ctx.strokeStyle = 'rgba(255,70,60,0.95)';
+        ctx.lineWidth = 9 * sz;
+        for (const bAng of waveBearings) {
+          const ca = Math.atan2(-Math.sin(bAng), -Math.cos(bAng));
+          ctx.beginPath(); ctx.arc(C, C, C - 10 * sz, ca - 0.3, ca + 0.3); ctx.stroke();
+        }
+      }
+      drawMapBlips(ctx, toFull, sz);
+      // Landmark names, only on the big map where there is room for words.
+      {
+        ctx.font = '600 ' + Math.round(11 * sz) + 'px sans-serif';
+        ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+        ctx.lineWidth = 3 * sz; ctx.strokeStyle = 'rgba(0,0,0,0.75)';
+        ctx.fillStyle = 'rgba(255,255,255,0.92)';
+        const label = (x, z, name) => { const q = toFull(x, z); ctx.strokeText(name, q.x, q.y + 6 * sz); ctx.fillText(name, q.x, q.y + 6 * sz); };
+        label(house.group.position.x, house.group.position.z, dwText('map.hq'));
+        if (POI.tower) label(POI.tower.x, POI.tower.z, 'WATCHTOWER');
+        if (POI.graveyard) label(POI.graveyard.x, POI.graveyard.z, 'GRAVEYARD');
+        if (POI.mast) label(POI.mast.x, POI.mast.z, 'RADIO MAST');
+        if (POI.dock) label(POI.dock.x, POI.dock.z, 'DOCK');
+        POI.campsites.forEach((c) => label(c.x, c.z, campsiteMapName(c)));
+        POI.cabins.forEach((c, i) => label(c.x, c.z, dwText('map.cabin')));
+        POI.bridges.forEach((b) => label(b.x, b.z, 'BRIDGE'));
+        // The doors the horde uses Ã¢â‚¬â€ and the one place in the lake you never swim.
+        ctx.fillStyle = 'rgba(255,120,100,0.95)';
+        POI.caves.forEach((c) => label(c.x, c.z, c.name.toUpperCase()));
+        label(LAKE_HOLE.x, LAKE_HOLE.z, 'UNDERWATER PIT');
+        ctx.fillStyle = 'rgba(255,255,255,0.92)';
+      }
+      mapArrow(ctx, pp, mapRotForYaw(aimYaw), 1.4 * sz);
+      ctx.font = 'bold ' + Math.round(22 * sz) + 'px sans-serif';
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.lineWidth = 4 * sz; ctx.strokeStyle = 'rgba(0,0,0,0.8)';
+      const inset = 26 * sz;
+      for (const [label, x, y] of [['N', C, inset], ['E', W - inset, C], ['S', C, W - inset], ['W', inset, C]]) {
+        ctx.strokeText(label, x, y);
+        ctx.fillStyle = label === 'N' ? '#ffd24a' : 'rgba(255,255,255,0.9)';
+        ctx.fillText(label, x, y);
+      }
+    }
+

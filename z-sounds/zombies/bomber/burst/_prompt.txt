@@ -1,0 +1,9 @@
+#77 bomber-burst
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 2 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A bloated zombie bursting apart: a deep wet gory explosion, a splatter of guts and liquid raining down. No words, no music.
+
+In the game: bomber explode (with grenadeBoom)

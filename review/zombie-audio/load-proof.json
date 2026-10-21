@@ -1,0 +1,24 @@
+{
+  "beforeFirstSeconds": 9.618,
+  "afterWarmSeconds": 11.24,
+  "beforeWarmSeconds": 11.559,
+  "repeated": [
+    {
+      "before": false,
+      "seconds": 11.094
+    },
+    {
+      "before": true,
+      "seconds": 11.031
+    },
+    {
+      "before": false,
+      "seconds": 11.558
+    },
+    {
+      "before": true,
+      "seconds": 10.888
+    }
+  ],
+  "errors": []
+}

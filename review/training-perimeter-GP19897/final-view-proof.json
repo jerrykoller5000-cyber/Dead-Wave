@@ -1,0 +1,20 @@
+{
+  "aim": {
+    "cameraHit": false,
+    "roundHit": true,
+    "faded": 0.07999999999999996
+  },
+  "release": {
+    "alive": 1,
+    "entries": 0,
+    "positions": [
+      [
+        -26,
+        -200,
+        -613.6403810879784
+      ]
+    ],
+    "pending": null
+  },
+  "errors": []
+}

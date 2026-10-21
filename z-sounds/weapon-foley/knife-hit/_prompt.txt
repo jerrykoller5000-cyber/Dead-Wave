@@ -1,0 +1,9 @@
+#55 weapon-foley/knife-hit
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: foley knifeHit
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.4 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A combat knife stabbing into flesh, a wet thick thud. No music, no voice.

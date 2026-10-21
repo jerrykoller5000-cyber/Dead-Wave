@@ -1,0 +1,9 @@
+#78 guardian-roar
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 3.5 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A huge monster boss's terrifying roar, deep and powerful with a shrieking top, echoing across an open valley. No words, no music.
+
+In the game: AudioSys.bossRoar()

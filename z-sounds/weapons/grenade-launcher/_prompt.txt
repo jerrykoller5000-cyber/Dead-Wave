@@ -1,0 +1,9 @@
+#74 weapons/grenade-launcher
+TRY: synthesized and already decent; record it, compare, keep the better one
+Now: GUN launcher
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 1.2 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A 40mm grenade launcher firing, a hollow deep thump. No music, no voice.

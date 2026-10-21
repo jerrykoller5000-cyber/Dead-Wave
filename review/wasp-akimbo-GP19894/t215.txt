@@ -1,0 +1,4 @@
+PASS read index.html and the scripts and styles the game loaded (223 files)
+PASS no broken characters in them
+PASS the HUD reads clean: timeLine "Daylight · 12:00", tacticalLine "NVG off · Laser off · Light off", grenadeChips "G×0H×0", ammoDetail "64 / 64  ·  288 Bullets", hpNum "100 / 100"
+PASS and shows its dots and times signs (NVG off · Laser off · Light off / G×0H×0)

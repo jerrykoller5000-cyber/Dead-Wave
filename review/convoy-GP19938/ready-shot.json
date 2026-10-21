@@ -1,0 +1,13 @@
+{
+  "out": "review/convoy-GP19938/ready-shot",
+  "sheet": false,
+  "shots": [
+    {
+      "cam": { "x": -120.4, "y": 2.25, "z": 52, "tx": -117.9, "ty": 0.85, "tz": 48.35, "fov": 47 },
+      "time": "day",
+      "caption": "Eight pumps: ram extended, ambulance lifted, cooler released",
+      "out": "review/convoy-GP19938/ready-shot/ready.png",
+      "pre": "T.runDevCommand('site convoy'); await wait(150); T.doAction(); const D=T.convoyDbg; for (let i=0;i<8;i++){D.step(D.state().untilBeat);T.doAction();} await wait(100); T.player.position.set(-122,T.sampleHeight(-122,54),54);"
+    }
+  ]
+}

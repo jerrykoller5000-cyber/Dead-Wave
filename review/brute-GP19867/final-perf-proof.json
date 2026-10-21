@@ -1,0 +1,17 @@
+{
+  "loadSec": 18.912,
+  "perf": {
+    "fps": 59.25060502393105,
+    "p95": 19.19999998807907,
+    "alive": 48,
+    "shots": 40,
+    "respawns": 1,
+    "broken": 2,
+    "skinDraws": [
+      1
+    ],
+    "finite": true,
+    "spawnMs": 451.69999998807907
+  },
+  "errors": []
+}

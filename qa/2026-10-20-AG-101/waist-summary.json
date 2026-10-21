@@ -1,0 +1,82 @@
+{
+  "shots": [
+    {
+      "tag": "01-waist-idle-3quarter",
+      "file": "qa/2026-10-20-AG-101/01-waist-idle-3quarter.png",
+      "desc": "Idle torso/waist 3/4 view (pistol)",
+      "waistStats": {
+        "vertices": 6720,
+        "triangles": 2240,
+        "uploads": 5,
+        "minNormalLen": 1,
+        "maxNormalLen": 1,
+        "nanCount": 0
+      }
+    },
+    {
+      "tag": "02-waist-idle-side",
+      "file": "qa/2026-10-20-AG-101/02-waist-idle-side.png",
+      "desc": "Idle torso/waist side view (pistol)",
+      "waistStats": {
+        "vertices": 6720,
+        "triangles": 2240,
+        "uploads": 43,
+        "minNormalLen": 1,
+        "maxNormalLen": 1,
+        "nanCount": 0
+      }
+    },
+    {
+      "tag": "03-waist-walk-phase22-3quarter",
+      "file": "qa/2026-10-20-AG-101/03-waist-walk-phase22-3quarter.png",
+      "desc": "Walk cycle phase 0.22 torso/waist 3/4 view",
+      "waistStats": {
+        "vertices": 6720,
+        "triangles": 2240,
+        "uploads": 80,
+        "minNormalLen": 1,
+        "maxNormalLen": 1,
+        "nanCount": 0
+      }
+    },
+    {
+      "tag": "04-waist-walk-phase22-side",
+      "file": "qa/2026-10-20-AG-101/04-waist-walk-phase22-side.png",
+      "desc": "Walk cycle phase 0.22 torso/waist side view",
+      "waistStats": {
+        "vertices": 6720,
+        "triangles": 2240,
+        "uploads": 109,
+        "minNormalLen": 1,
+        "maxNormalLen": 1,
+        "nanCount": 0
+      }
+    },
+    {
+      "tag": "05-waist-walk-phase72-3quarter",
+      "file": "qa/2026-10-20-AG-101/05-waist-walk-phase72-3quarter.png",
+      "desc": "Walk cycle phase 0.72 torso/waist 3/4 view (opposite stride)",
+      "waistStats": {
+        "vertices": 6720,
+        "triangles": 2240,
+        "uploads": 132,
+        "minNormalLen": 1,
+        "maxNormalLen": 1,
+        "nanCount": 0
+      }
+    },
+    {
+      "tag": "06-waist-walk-live-m4",
+      "file": "qa/2026-10-20-AG-101/06-waist-walk-live-m4.png",
+      "desc": "Live walking with M4 full 3/4 view",
+      "waistStats": {
+        "vertices": 6720,
+        "triangles": 2240,
+        "uploads": 166,
+        "minNormalLen": 1,
+        "maxNormalLen": 1,
+        "nanCount": 0
+      }
+    }
+  ]
+}

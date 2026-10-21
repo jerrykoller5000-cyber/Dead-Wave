@@ -1,0 +1,49 @@
+      // GB-124 (Jerry): unarmed, his arms hang at his sides. The original empty gun hold (ARM_*_BASE)
+      // held both hands up. GP-19869: use the stride clock, not the IK thigh angle: knee folding biased both hands forward
+      // and clamped the run at its extremes. A walk is a loose pendulum; running bends the elbows and
+      // lets the upper arm trail far enough that the hand actually passes the hip.
+      // Blended over whatever the state above chose; it eases out while the gun is still in his hand (the holster
+      // move), while the knife or a throw/jab gesture plays, swimming, on the mortar or the ladder, so every gun,
+      // melee and throw pose is exactly as it was.
+      {
+        const gunInHand = marineDraw.state.active && marineDraw.frame().inHand != null;
+        // CL-131: carrying the mortar or the Watchman he has no gun in his hands either: his arms go as unarmed (and
+        // updateCarryPose then brings the right hand up onto what is on his shoulder). They used to hold up an empty grip.
+        const relaxWant = (unarmed || !!mortarCarried) && !swimming && !mortarMounted && !climbingTower && !gameOver &&
+          !(knifeAnimT > 0) && !(gestureT > 0) && !gunInHand;
+        POSE.relax = _ease(POSE.relax || 0, relaxWant ? 1 : 0, dt, 9);
+        const rw = POSE.relax;
+        if (rw > 0.001 && armL && armR) {
+          const U = UNARMED_ARMS, t = POSE.idleT;
+          let swL = 0, swR = 0, bendL = U.elbow, bendR = U.elbow, out = 0, pitch = U.x;
+          if (airborne) { swL = swR = 0.1; out = 0.1; bendL = bendR = -0.2; }
+          else {
+            // Starting/stopping fades the swing, including held beats used by the camera tool.
+            POSE.unarmedMove = _ease(POSE.unarmedMove || 0, (moving || GAIT.holdU != null) && grounded ? 1 : 0, dt, 10);
+            const move = POSE.unarmedMove, runMix = _clamp01(POSE.gaitRun || 0);
+            // Studio foot contacts have a different phase from the fallback sine gait. Blend that offset
+            // with the same Studio/crouch weight as the legs; neither knee bend nor terrain can change it.
+            const phase = walkPhase - (1.65 - 0.9 * runMix) * (POSE.gaitW || 0);
+            const uL = Math.sin(phase), uR = -uL, quiet = 1 - 0.4 * POSE.crouch;
+            const swing = (u) => u * (0.36 + 0.3 * runMix) * quiet;
+            const swayL = Math.sin(t * 1.1) * 0.02, swayR = Math.sin(t * 1.1 + 0.7) * 0.02;
+            swL = swayL + (swing(uL) - swayL) * move;
+            swR = swayR + (swing(uR) - swayR) * move;
+            // A small forearm lag softens the reversal; the bend closes gradually with the run weight.
+            const flex = Math.sin(phase - 0.2), base = -0.28 - 0.7 * runMix, curl = 0.09 + 0.18 * runMix;
+            bendL += (base - flex * curl - bendL) * move;
+            bendR += (base + flex * curl - bendR) * move;
+            pitch += (-0.02 + 0.1 * runMix - pitch) * move;
+            out = Math.sin(t * 0.7) * 0.006 * (1 - move) + (0.04 + 0.11 * runMix) * move;
+            torsoTwist -= uL * (0.035 + 0.04 * runMix) * rw * quiet * move;
+          }
+          const blend = (o, x, y, z) => { o.rotation.x += (x - o.rotation.x) * rw; o.rotation.y += (y - o.rotation.y) * rw; o.rotation.z += (z - o.rotation.z) * rw; };
+          // GB-125: crouched, the arms come forward over the thighs with softer elbows, a little wider of the knees.
+          const cr = POSE.crouch, fx = -cr * CROUCH.armFwd, fb = -cr * CROUCH.armBend;
+          out += cr * CROUCH.armOut;
+          blend(armL, pitch - swL + fx, U.y, -(U.z + out));   // armLG is on -x: out from the body is -z
+          blend(armR, pitch - swR + fx, -U.y, U.z + out);
+          if (elbowL) blend(elbowL, bendL + fb, 0, 0);
+          if (elbowR) blend(elbowR, bendR + fb, 0, 0);
+        }
+      }

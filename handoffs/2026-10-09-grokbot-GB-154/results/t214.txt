@@ -1,0 +1,29 @@
+PASS hooks: magazinesDbg, setMagazinesDbg, reloadGainsMagazine
+PASS the AK in hand
+PASS R starts a reload with 7 in the gun
+FAIL a full magazine went in, the 7-round one is kept as a spare: loaded 7, spares 30,30,12
+PASS no round made or lost: 79 -> 79
+PASS the 7.62 reserve reads exactly the spare rounds: 72 = 72
+PASS the HUD strip shows each magazine: 30,30,12
+FAIL the Bullets total is the spare rounds: Reloading
+FAIL second reload: the last full one in, 3 kept, 12 and 7 untouched: 30 | 30,12,3
+FAIL nothing fuller than 20 carried
+FAIL R with no fuller magazine starts nothing and swaps nothing: 20 | 30,12,3
+PASS with 5 in the gun the 12 is fuller
+FAIL and R takes it: 30 | 12,3
+PASS no magazines left: no reload, 4 still in the gun, reserve 0
+PASS double tap: still reloading (the faster drop)
+PASS the 10-round magazine went to the ground, not the pouch: loaded 30, spares []
+PASS bought an AK magazine
+PASS it comes as a full one beside the 7: 30,7
+PASS the revolver in hand
+FAIL revolver R: a full loader in, the 4 live rounds kept in a loader: 4 | 6,6
+FAIL revolver double tap: the cylinder dumped, nothing pocketed: 6 | [2]
+PASS the Uzi in hand
+PASS akimbo Uzis with 5 and 0: 5,0
+FAIL both swapped: 5,0 | 32,32,10 (the empty one thrown away)
+PASS akimbo: no round made or lost (79)
+PASS minigun boxes do not fill the Watchman belt reserve: 40
+PASS .45 reads 36 with three full spares
+PASS and 5 with one part-used spare (it used to stay at its highest)
+PASS no page errors

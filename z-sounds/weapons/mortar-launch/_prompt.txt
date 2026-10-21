@@ -1,0 +1,9 @@
+#75 weapons/mortar-launch
+TRY: synthesized and already decent; record it, compare, keep the better one
+Now: GUN mortar
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 1.5 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A 60mm mortar round firing from its tube, a loud hollow whump. No music, no voice.

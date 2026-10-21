@@ -1,0 +1,3 @@
+Victory
+Used for: You won
+The game plays now: assets/soundtrack/end_dawn (pool "dawn")

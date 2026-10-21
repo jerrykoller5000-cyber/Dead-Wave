@@ -1,0 +1,5 @@
+== t217 2026-10-15T04:20:06.2787647-05:00
+check-players: 294 player.position reads, all in the allowed places
+ok    t217    55 pass   0 fail  23.5s
+
+1 checks: 55 pass, 0 fail

@@ -1,0 +1,464 @@
+{
+  "at": "2026-10-14T17:19:12.661Z",
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "loadSec": 10.089,
+  "results": [
+    {
+      "name": "ready",
+      "ok": true,
+      "version": "1.1.0",
+      "count": 116,
+      "errors": [],
+      "query": "?inspect=marine&raf=timer"
+    },
+    {
+      "name": "selection-and-move-readback",
+      "ok": true,
+      "state": {
+        "weapon": "pistol",
+        "unarmed": true,
+        "reloading": false,
+        "crouching": false,
+        "grounded": true,
+        "dive": "idle",
+        "vault": false,
+        "akimbo": false,
+        "mortar": null,
+        "carried": false,
+        "zoom": false,
+        "ots": false,
+        "training": true,
+        "wake": false,
+        "grenades": 6,
+        "medkits": 0,
+        "hp": 100,
+        "god": true,
+        "paused": false,
+        "move": "walk",
+        "loop": false,
+        "treadmill": true,
+        "running": false,
+        "holds": {},
+        "error": null,
+        "blade": "machete",
+        "camo": "m81"
+      },
+      "query": "?inspect=marine&raf=timer"
+    },
+    {
+      "name": "validation-keeps-selection",
+      "ok": true,
+      "errors": [
+        "no subject \"missing\" (DWInspect.list())",
+        "no variant \"bogus\" for weapon.m4",
+        "zombie mode must be live, walk, rise or statue",
+        "camera.x must be from -1000000 to 1000000",
+        "sheet views must be an integer from 1 to 32",
+        "no inspector subjects match no-such-subject"
+      ]
+    },
+    {
+      "name": "cancel-grenade-before-subject-switch",
+      "ok": true,
+      "started": true,
+      "before": 6,
+      "after": {
+        "charging": false,
+        "t": 0,
+        "visible": false,
+        "hit": null,
+        "dots": 0,
+        "launcher": false,
+        "lhit": null,
+        "lstate": "",
+        "last": null,
+        "n": 6,
+        "cd": 0
+      }
+    },
+    {
+      "name": "dive-home-isolation",
+      "ok": true,
+      "before": "air",
+      "after": "idle",
+      "grounded": true
+    },
+    {
+      "name": "six-acknowledged-steps",
+      "ok": true,
+      "delta": 0.09999999999999964,
+      "time": {
+        "k": 1,
+        "paused": true,
+        "step": 0,
+        "gameTime": 3.248199999995535,
+        "frames": 178,
+        "rewind": {
+          "nodes": 930,
+          "capacity": 900,
+          "frames": 7,
+          "mb": 35.927
+        },
+        "span": 0.09999999999999964,
+        "scrubbing": false
+      }
+    },
+    {
+      "name": "still-capture-resumes",
+      "ok": true,
+      "bytes": 1165110
+    },
+    {
+      "name": "drive-keeps-game-camera",
+      "ok": true,
+      "free": true
+    },
+    {
+      "name": "model-world-axes",
+      "ok": true,
+      "wanted": [
+        -26,
+        -199.72847246580747,
+        -632
+      ],
+      "actual": [
+        -26,
+        -199.72847246580747,
+        -632
+      ]
+    },
+    {
+      "name": "all-catalog-variants",
+      "ok": true,
+      "cases": 182,
+      "failed": []
+    },
+    {
+      "name": "check-restores-review-recipe",
+      "ok": true,
+      "cameraGap": 0,
+      "before": {
+        "schema": "dw-inspector-session",
+        "schemaVersion": 1,
+        "inspectorVersion": "1.1.0",
+        "view": {
+          "follow": false,
+          "bookmark": null,
+          "offset": {
+            "dx": 0,
+            "dy": 0,
+            "dz": 0
+          }
+        },
+        "subject": {
+          "id": "zombie.brute",
+          "variant": null,
+          "mode": "walk"
+        },
+        "camera": {
+          "x": -22.48405425958351,
+          "y": -198.46360706595385,
+          "z": -631.9968460222432,
+          "tx": -27.999964212657783,
+          "ty": -198.65622738541478,
+          "tz": -631.9842848835561,
+          "fov": 40
+        },
+        "display": {
+          "backdrop": "studio",
+          "light": "studio",
+          "overlays": {
+            "bounds": false,
+            "axes": false,
+            "stick": false,
+            "joints": false,
+            "wire": false,
+            "grid": true,
+            "labels": true
+          }
+        },
+        "clock": {
+          "speed": 0.25,
+          "paused": true
+        },
+        "marine": {
+          "weapon": "none",
+          "akimbo": false,
+          "blade": "machete",
+          "camo": "m81",
+          "gear": {
+            "helmet": true,
+            "vest": true,
+            "pads": true,
+            "nvg": true,
+            "laser": true,
+            "flashlight": true
+          },
+          "wardrobe": {
+            "version": 1,
+            "items": {
+              "cap": {
+                "camo": "m81",
+                "style": "cover"
+              },
+              "helmet": {
+                "camo": "m81"
+              },
+              "mask": {
+                "camo": "coyoteBrown"
+              },
+              "shirt": {
+                "camo": "m81",
+                "sleeves": "down"
+              },
+              "trousers": {
+                "camo": "m81",
+                "cut": "trousers"
+              },
+              "gloves": {
+                "camo": "m81",
+                "worn": true
+              },
+              "carrier": {},
+              "pads": {},
+              "holster": {},
+              "belt": {},
+              "pack": {},
+              "eyewear": {
+                "style": "none"
+              },
+              "boots": {
+                "colour": "black",
+                "rubber": "yellow"
+              }
+            },
+            "guns": {},
+            "body": {
+              "hair": "darkBrown",
+              "eyes": "brown",
+              "skin": 3
+            }
+          },
+          "mods": {
+            "minigun": {
+              "ext": false,
+              "heavy": false
+            },
+            "m4": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "ak": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "pistol": {
+              "ext": false,
+              "suppressor": false,
+              "auto": false
+            },
+            "uzi": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "shotgun": {
+              "ext": false,
+              "suppressor": false
+            },
+            "aa12": {
+              "ext": false
+            },
+            "revolver": {},
+            "sniper": {
+              "ext": false,
+              "suppressor": false
+            },
+            "launcher": {},
+            "flamer": {
+              "ext": false
+            },
+            "chainsaw": {
+              "tank": false
+            }
+          },
+          "move": null,
+          "loop": false,
+          "holds": {}
+        }
+      },
+      "after": {
+        "schema": "dw-inspector-session",
+        "schemaVersion": 1,
+        "inspectorVersion": "1.1.0",
+        "view": {
+          "follow": false,
+          "bookmark": null,
+          "offset": {
+            "dx": 0,
+            "dy": 0,
+            "dz": 0
+          }
+        },
+        "subject": {
+          "id": "zombie.brute",
+          "variant": null,
+          "mode": "walk"
+        },
+        "camera": {
+          "x": -22.48405425958351,
+          "y": -198.46360706595385,
+          "z": -631.9968460222432,
+          "tx": -27.999964212657783,
+          "ty": -198.65622738541478,
+          "tz": -631.9842848835561,
+          "fov": 40
+        },
+        "display": {
+          "backdrop": "studio",
+          "light": "studio",
+          "overlays": {
+            "bounds": false,
+            "axes": false,
+            "stick": false,
+            "joints": false,
+            "wire": false,
+            "grid": true,
+            "labels": true
+          }
+        },
+        "clock": {
+          "speed": 0.25,
+          "paused": true
+        },
+        "marine": {
+          "weapon": "none",
+          "akimbo": false,
+          "blade": "machete",
+          "camo": "m81",
+          "gear": {
+            "helmet": true,
+            "vest": true,
+            "pads": true,
+            "nvg": true,
+            "laser": true,
+            "flashlight": true
+          },
+          "wardrobe": {
+            "version": 1,
+            "items": {
+              "cap": {
+                "camo": "m81",
+                "style": "cover"
+              },
+              "helmet": {
+                "camo": "m81"
+              },
+              "mask": {
+                "camo": "coyoteBrown"
+              },
+              "shirt": {
+                "camo": "m81",
+                "sleeves": "down"
+              },
+              "trousers": {
+                "camo": "m81",
+                "cut": "trousers"
+              },
+              "gloves": {
+                "camo": "m81",
+                "worn": true
+              },
+              "carrier": {},
+              "pads": {},
+              "holster": {},
+              "belt": {},
+              "pack": {},
+              "eyewear": {
+                "style": "none"
+              },
+              "boots": {
+                "colour": "black",
+                "rubber": "yellow"
+              }
+            },
+            "guns": {},
+            "body": {
+              "hair": "darkBrown",
+              "eyes": "brown",
+              "skin": 3
+            }
+          },
+          "mods": {
+            "minigun": {
+              "ext": false,
+              "heavy": false
+            },
+            "m4": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "ak": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "pistol": {
+              "ext": false,
+              "suppressor": false,
+              "auto": false
+            },
+            "uzi": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "shotgun": {
+              "ext": false,
+              "suppressor": false
+            },
+            "aa12": {
+              "ext": false
+            },
+            "revolver": {},
+            "sniper": {
+              "ext": false,
+              "suppressor": false
+            },
+            "launcher": {},
+            "flamer": {
+              "ext": false
+            },
+            "chainsaw": {
+              "tank": false
+            }
+          },
+          "move": null,
+          "loop": false,
+          "holds": {}
+        }
+      }
+    },
+    {
+      "name": "resource-cycle",
+      "ok": true,
+      "before": {
+        "geometries": 769,
+        "textures": 101
+      },
+      "after": {
+        "geometries": 769,
+        "textures": 101
+      }
+    },
+    {
+      "name": "frame-rate",
+      "ok": true,
+      "fps": 60.019232682310815,
+      "errors": []
+    }
+  ]
+}

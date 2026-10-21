@@ -1,0 +1,292 @@
+{
+  "loadSeconds": 16.49,
+  "setup": {
+    "training": true,
+    "mix": {
+      "ctx": "running",
+      "weap": 1.350000023841858,
+      "fx": 0.800000011920929,
+      "amb": 0,
+      "musicDuck": 1,
+      "rain": null
+    }
+  },
+  "events": [
+    {
+      "type": "shambler",
+      "hurt": 1,
+      "fatalHurt": 0,
+      "death": 1,
+      "noRewardDeath": 1
+    },
+    {
+      "type": "feral",
+      "hurt": 1,
+      "fatalHurt": 0,
+      "death": 1,
+      "noRewardDeath": 1
+    },
+    {
+      "type": "leaper",
+      "hurt": 1,
+      "fatalHurt": 0,
+      "death": 1,
+      "noRewardDeath": 1
+    },
+    {
+      "type": "drowned",
+      "hurt": 1,
+      "fatalHurt": 0,
+      "death": 1,
+      "noRewardDeath": 1
+    },
+    {
+      "type": "military",
+      "hurt": 1,
+      "fatalHurt": 0,
+      "death": 1,
+      "noRewardDeath": 1
+    },
+    {
+      "type": "brute",
+      "hurt": 1,
+      "fatalHurt": 0,
+      "death": 1,
+      "noRewardDeath": 1
+    },
+    {
+      "type": "spitter",
+      "hurt": 1,
+      "fatalHurt": 0,
+      "death": 1,
+      "noRewardDeath": 1
+    },
+    {
+      "type": "screamer",
+      "hurt": 1,
+      "fatalHurt": 0,
+      "death": 1,
+      "noRewardDeath": 1
+    },
+    {
+      "type": "bomber",
+      "hurt": 1,
+      "fatalHurt": 0,
+      "death": 1,
+      "noRewardDeath": 1
+    },
+    {
+      "type": "spider",
+      "hurt": 1,
+      "fatalHurt": 0,
+      "death": 1,
+      "noRewardDeath": 1
+    },
+    {
+      "type": "demon",
+      "hurt": 1,
+      "fatalHurt": 0,
+      "death": 1,
+      "noRewardDeath": 1
+    },
+    {
+      "type": "colossus",
+      "hurt": 1,
+      "fatalHurt": 0,
+      "death": 1,
+      "noRewardDeath": 1
+    },
+    {
+      "type": "guardian",
+      "hurt": 1,
+      "fatalHurt": 0,
+      "death": 1,
+      "noRewardDeath": 1
+    },
+    {
+      "type": "caveguard",
+      "hurt": 1,
+      "fatalHurt": 0,
+      "death": 1,
+      "noRewardDeath": 1
+    }
+  ],
+  "live": [
+    {
+      "type": "shambler",
+      "idle": 0,
+      "chase": 1,
+      "attack": 1,
+      "charge": 0,
+      "death": 0,
+      "position": [
+        -25.12,
+        -200,
+        -632
+      ],
+      "player": [
+        -26.362585856331563,
+        -200,
+        -632
+      ],
+      "tactics": "direct",
+      "alive": true
+    },
+    {
+      "type": "spitter",
+      "idle": 0,
+      "chase": 1,
+      "attack": 1,
+      "charge": 0,
+      "death": 0,
+      "position": [
+        -17.362585856331563,
+        -200,
+        -632
+      ],
+      "player": [
+        -26.362585856331563,
+        -200,
+        -632
+      ],
+      "tactics": "creep",
+      "alive": true
+    },
+    {
+      "type": "spider",
+      "idle": 0,
+      "chase": 1,
+      "attack": 1,
+      "charge": 0,
+      "death": 0,
+      "position": [
+        -18.362585856331563,
+        -200,
+        -632
+      ],
+      "player": [
+        -26.362585856331563,
+        -200,
+        -632
+      ],
+      "tactics": "spit",
+      "alive": true
+    },
+    {
+      "type": "demon",
+      "idle": 0,
+      "chase": 1,
+      "attack": 0,
+      "charge": 1,
+      "death": 0,
+      "position": [
+        -16.362585856331563,
+        -200,
+        -632
+      ],
+      "player": [
+        -26.362585856331563,
+        -200,
+        -632
+      ],
+      "tactics": "charge",
+      "alive": true
+    },
+    {
+      "type": "guardian",
+      "idle": 0,
+      "chase": 1,
+      "attack": 1,
+      "charge": 0,
+      "death": 0,
+      "position": [
+        -24.362585856331563,
+        -200,
+        -632
+      ],
+      "player": [
+        -31.097291983713756,
+        -200,
+        -632
+      ],
+      "tactics": "boss",
+      "alive": true
+    },
+    {
+      "type": "colossus",
+      "idle": 0,
+      "chase": 0,
+      "attack": 1,
+      "charge": 0,
+      "death": 0,
+      "position": [
+        -29.097291983713756,
+        -200,
+        -632
+      ],
+      "player": [
+        -35.84073444435309,
+        -200,
+        -632
+      ],
+      "tactics": "boss",
+      "alive": true
+    },
+    {
+      "type": "bomber",
+      "idle": 0,
+      "chase": 1,
+      "attack": 1,
+      "charge": 0,
+      "death": 1,
+      "position": null,
+      "player": [
+        -35.84073684835495,
+        -200,
+        -632
+      ],
+      "tactics": "bomb",
+      "alive": false
+    },
+    {
+      "type": "screamer",
+      "idle": 0,
+      "chase": 1,
+      "attack": 1,
+      "charge": 0,
+      "death": 0,
+      "position": [
+        -30.84073684835495,
+        -200,
+        -632
+      ],
+      "player": [
+        -35.84073684835495,
+        -200,
+        -632
+      ],
+      "tactics": "scream",
+      "alive": true
+    }
+  ],
+  "movement": [
+    {
+      "type": "leaper",
+      "state": "move",
+      "count": 2
+    },
+    {
+      "type": "colossus",
+      "state": "step",
+      "count": 4
+    }
+  ],
+  "mute": true,
+  "performance": {
+    "bodies": 48,
+    "silentFps": 40.176644420154595,
+    "voicedFps": 42.98137473754968,
+    "ratio": 1.0698099693957541
+  },
+  "errors": []
+}

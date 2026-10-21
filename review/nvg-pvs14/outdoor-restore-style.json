@@ -1,0 +1,4 @@
+{
+  "cmd": "eval",
+  "code": "document.getElementById('nvgBeforeCapture')?.remove();return {filter:getComputedStyle(T.renderer.domElement).filter,errors:window.nvgReviewErrors||[]};"
+}

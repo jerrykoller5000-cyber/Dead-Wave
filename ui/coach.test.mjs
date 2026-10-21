@@ -1,0 +1,122 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { createCoach } from './coach.js';
+const frame = (extra = {}) => ({ active: true, skulls: 1, nearWindow: false, pendingDeposit: false, dt: 0, ...extra });
+function start(options) { const c = createCoach(options); c.handle({ type: 'run-reset', runId: 'one' }); c.handle({ type: 'controls-ready' }); return c; }
+const pickup = c => c.handle({ type: 'skull-pickup', count: 1, carriedCount: 1, runId: 'one' });
+test('coach waits for control, banks on completed credit, and never changes currency', () => {
+  const c = createCoach(); pickup(c); assert.equal(c.tick(frame()), null);
+  c.handle({ type: 'controls-ready' }); assert.equal(c.tick(frame()).id, 'pickup');
+  assert.equal(c.tick(frame({ nearWindow: true })).title, 'Press E to bank your skulls.');
+  c.handle({ type: 'deposit-accepted', count: 1 }); assert.equal(c.profile().banked, false);
+  assert.equal(c.tick(frame({ skulls: 0, pendingDeposit: true })), null);
+  c.handle({ type: 'deposit-complete', count: 1, value: 12, cashAfter: 52 });
+  assert.equal(c.profile().banked, true); pickup(c); assert.equal(c.tick(frame({ nearWindow: true })), null);
+});
+test('starting-Cash purchase and failed/debug purchases do not suppress skull lesson', () => {
+  const c = start();
+  for (const e of [{ type:'purchase-failed', cashSpent: 20, source:'kiosk' }, { type:'purchase-delivered', cashSpent:0, source:'kiosk' }, { type:'purchase-delivered', cashSpent:20, source:'debug' }]) c.handle(e);
+  assert.equal(c.tick(frame({ skulls: 0 })), null);
+  c.handle({ type:'purchase-delivered', cashSpent:20, source:'kiosk' }); assert.equal(c.tick(frame({ skulls:0 })).id, 'purchase');
+  pickup(c); assert.equal(c.tick(frame({ nearWindow:true })).id, 'bank'); assert.equal(c.profile().banked, false);
+});
+test('duplicate events never replay a shown prompt; hidden gameplay pauses expiry', () => {
+  const c = start(); pickup(c); assert.equal(c.tick(frame()).id, 'pickup');
+  for(let i=0;i<20;i++) assert.equal(c.tick(frame({ active:false,dt:1 })),null);
+  assert.equal(c.tick(frame()).id,'pickup');
+  for(let i=0;i<8;i++) c.tick(frame({dt:1}));
+  pickup(c); assert.equal(c.tick(frame()),null);
+});
+test('bank prompt replaces pickup, hides when leaving, and ordinary E prompt takes over', () => {
+  const c=start(); pickup(c); c.tick(frame()); assert.equal(c.tick(frame({nearWindow:true})).id,'bank');
+  assert.equal(c.tick(frame({nearWindow:false})),null); assert.equal(c.tick(frame({nearWindow:true})),null);
+});
+test('profile survives runs; corrupt/blocked storage never prevents play', () => {
+  let saved;
+  const c=start({save:v=>saved=v}); pickup(c); c.tick(frame());
+  const restored=start({load:()=>saved}); pickup(restored); assert.equal(restored.tick(frame()),null);
+  c.handle({type:'run-reset',runId:'two'}); pickup(c); assert.equal(c.tick(frame()),null);
+  for(const load of [()=>'{bad',()=>{throw Error('blocked')}]) {
+    const fresh=start({load,save:()=>{throw Error('blocked')}}); pickup(fresh); assert.equal(fresh.tick(frame()).id,'pickup');
+  }
+});
+test('pending deposits and stale prior-run events cannot complete banking', () => {
+  const c=start(); pickup(c); c.handle({type:'deposit-accepted',count:1});
+  assert.equal(c.tick(frame({skulls:0,pendingDeposit:true})),null);
+  c.handle({type:'run-reset',runId:'two'}); c.handle({type:'deposit-complete',runId:'one',count:1,value:12});
+  assert.equal(c.profile().banked,false);
+});
+
+const guards = (c, extra={}) => c.handle({type:'poi-guards',runId:'one',day:1,count:3,labelKey:'world.ranger',...extra});
+test('first fight waits for insertion and yields immediately to pickup then bank',()=>{
+ const c=createCoach();c.handle({type:'run-reset',runId:'one'});guards(c);assert.equal(c.tick(frame({skulls:0})),null);
+ c.handle({type:'controls-ready'});assert.equal(c.tick(frame({skulls:0})).title,'Shamblers at Ranger Camp: go and clear them.');
+ pickup(c);assert.equal(c.tick(frame()).id,'pickup');assert.equal(c.tick(frame({nearWindow:true})).id,'bank');
+});
+test('first-fight card is remembered, expires once, and ignores stale or invalid locations',()=>{
+ let saved;const c=start({save:v=>saved=v});for(const e of [{runId:'old'},{day:2},{count:0},{labelKey:'<script>'}])guards(c,e);
+ assert.equal(c.tick(frame({skulls:0})),null);guards(c);assert.equal(c.tick(frame({skulls:0})).id,'poi');
+ for(let i=0;i<13;i++)c.tick(frame({skulls:0,dt:1}));guards(c);assert.equal(c.tick(frame({skulls:0})),null);
+ const next=start({load:()=>saved});guards(next);assert.equal(next.tick(frame({skulls:0})),null);
+});
+test('alarm retires the first-fight cue but does not suppress the pickup lesson',()=>{
+ const c=start();guards(c);c.tick(frame({skulls:0}));c.handle({type:'alarm-started',runId:'one',day:1});assert.equal(c.tick(frame({skulls:0})),null);guards(c);assert.equal(c.tick(frame({skulls:0})),null);pickup(c);assert.equal(c.tick(frame()).id,'pickup');
+});
+test('experienced profiles do not get a new first-fight lesson, and a reset waits for controls',()=>{
+ const c=start({load:()=>JSON.stringify({version:1,banked:true})});guards(c);assert.equal(c.tick(frame({skulls:0})),null);
+ const fresh=start();fresh.handle({type:'run-reset',runId:'two'});guards(fresh,{runId:'two'});assert.equal(fresh.tick(frame({skulls:0})),null);
+});
+
+test('cave and pit warnings show once per run, survive suppression, and ignore a stale run', () => {
+  const c = createCoach(); c.handle({type:'run-reset', runId:1});
+  c.handle({type:'cave-guardian',runId:1,warning:false});
+  c.handle({type:'pit-near',runId:0}); c.handle({type:'controls-ready'});
+  assert.equal(c.tick({active:true}), null);
+  c.handle({type:'cave-guardian',runId:1,warning:true});
+  assert.equal(c.tick({active:false,dt:30}),null);
+  assert.equal(c.tick({active:true}).id,'caveWarning');
+  assert.match(c.read().title,/Don't shoot/);
+  for(let i=0;i<9;i++)c.tick({active:true,dt:1});
+  c.handle({type:'cave-guardian',runId:1,warning:true}); assert.equal(c.tick({active:true}),null);
+  c.handle({type:'pit-near',runId:1}); assert.equal(c.tick({active:true}).id,'pitWarning');
+  for(let i=0;i<9;i++)c.tick({active:true,dt:1});
+  c.handle({type:'pit-near',runId:1}); assert.equal(c.tick({active:true}),null);
+  c.handle({type:'run-reset',runId:2}); c.handle({type:'pit-near',runId:2});
+  assert.equal(c.tick({active:true}),null); c.handle({type:'controls-ready'});
+  assert.equal(c.tick({active:true}).id,'pitWarning');
+  assert.equal(Object.hasOwn(c.profile(),'pitWarningShown'),false);
+});
+test('an urgent warning takes priority over banking guidance without changing the economy', () => {
+  const c=start(); pickup(c); assert.equal(c.tick(frame({nearWindow:true})).id,'bank');
+  c.handle({type:'pit-near'}); assert.equal(c.tick(frame({nearWindow:true})).id,'pitWarning');
+  assert.equal(c.profile().banked,false);
+});
+
+const lessonFrame = (extra={}) => frame({skulls:0,day:2,phase:'prep',cash:8,hp:40,maxHp:100,medkits:0,building:false,hasPair:false,akimbo:false,...extra});
+test('build coaching needs day-two prep and Cash, and B retires it immediately',()=>{
+ const c=start();
+ for(const f of [{day:1},{day:3},{phase:'wave'},{cash:7},{active:false}])assert.equal(c.tick(lessonFrame(f)),null);
+ assert.equal(c.tick(lessonFrame()).id,'build');
+ assert.equal(c.tick(lessonFrame({building:true})),null);
+ assert.equal(c.tick(lessonFrame()),null);
+ const built=start();built.handle({type:'purchase-delivered',source:'build',cashSpent:8,itemId:'barricade'});
+ assert.equal(built.profile().built,true);for(let i=0;i<9;i++)built.tick(lessonFrame({dt:1}));
+ assert.equal(built.tick(lessonFrame()),null);
+});
+test('pair coaching waits for a delivered pair and compatible held gun; no day-one card',()=>{
+ const c=start({load:()=>JSON.stringify({version:1,purchaseShown:true,buildShown:true})});
+ c.handle({type:'purchase-delivered',source:'debug',cashSpent:80,itemId:'dual:pistol'});
+ assert.equal(c.tick(lessonFrame({hasPair:true})),null);
+ c.handle({type:'purchase-delivered',source:'kiosk',cashSpent:80,itemId:'dual:pistol'});
+ for(const f of [{day:1,hasPair:true},{hasPair:false},{hasPair:true,active:false}])assert.equal(c.tick(lessonFrame(f)),null);
+ assert.equal(c.tick(lessonFrame({hasPair:true})).id,'pair');
+ assert.equal(c.tick(lessonFrame({hasPair:true,akimbo:true})),null);
+ assert.equal(c.tick(lessonFrame({hasPair:true})),null);
+});
+test('MedPen coaching uses health percentage, needs a pen, and survives profile reload',()=>{
+ let saved;const c=start({save:v=>saved=v,load:()=>JSON.stringify({version:1,buildShown:true})});
+ for(const f of [{day:1,medkits:1},{hp:41,medkits:1},{hp:0,medkits:1},{medkits:0},{active:false,medkits:1}])assert.equal(c.tick(lessonFrame(f)),null);
+ assert.equal(c.tick(lessonFrame({hp:80,maxHp:200,medkits:1})).id,'medpen');
+ assert.equal(c.tick(lessonFrame({hp:100,maxHp:200,medkits:0})),null);
+ const restored=start({load:()=>saved});assert.equal(restored.tick(lessonFrame({medkits:1})),null);
+});

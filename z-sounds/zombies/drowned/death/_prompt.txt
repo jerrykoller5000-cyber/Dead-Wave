@@ -1,0 +1,9 @@
+#26 drowned-death
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 2.2 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A drowned zombie's last long gurgle, water bubbling out of its lungs as it sinks and goes silent. Close-up, dry. No words, no music.
+
+In the game: zombieVoice('drowned', 'death')

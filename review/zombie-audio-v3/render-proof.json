@@ -1,0 +1,5563 @@
+{
+  "startedAt": "2026-10-10T04:05:38.729Z",
+  "sourceHashes": {
+    "core/audio.js": "83decda1cf1faded3a3b6243ad4f8887c76948f13fb39906bbfd1e8775fd0a8a",
+    "ui/zombie-audio.js": "c75082efb3038411e8b368db4eb2fe91cb274edeccfdfe70bc131e4d4ff113c1",
+    "ui/zombie-vocal-phrases.js": "2c2c2d97012a0aa63dd0f745d97d69b0b3a9c3a7fb5be2a16b4883223fc57847"
+  },
+  "renders": [
+    {
+      "type": "shambler",
+      "state": "idle",
+      "peak": 0.06595436483621597,
+      "rms": 0.008235482967255972,
+      "dc": 1.7707648270618232e-7,
+      "activeSeconds": 1.928875,
+      "centroidHz": 79.09335731441034,
+      "lowBandFraction": 0.914467070782073,
+      "chestBandFraction": 0.9819356968258198,
+      "subBassFraction": 0.8405438265336541,
+      "hash": "d2e771983323ee7c43ca68796bc6eb532471750b6ecf03d7c7d2a287b3f2525d",
+      "counts": {
+        "shambler": 1,
+        "shambler:idle": 1,
+        "shambler:idle:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "shambler",
+          "state": "idle",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "shambler:idle:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "shambler",
+      "state": "chase",
+      "peak": 0.07117762416601181,
+      "rms": 0.007465132805477322,
+      "dc": 0.0000042705783095849536,
+      "activeSeconds": 1.4738125,
+      "centroidHz": 93.9513547737244,
+      "lowBandFraction": 0.8967605251855982,
+      "chestBandFraction": 0.9783461352509277,
+      "subBassFraction": 0.7987373927597069,
+      "hash": "b2c0374c82bb36120dce8f53b40ac8af9ee9c8ea332c31b979c1bd278b408047",
+      "counts": {
+        "shambler": 1,
+        "shambler:chase": 1,
+        "shambler:chase:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "shambler",
+          "state": "chase",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "shambler:chase:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "shambler",
+      "state": "attack",
+      "peak": 0.09162423014640808,
+      "rms": 0.005880493003878521,
+      "dc": 0.000009487030151737878,
+      "activeSeconds": 1.1082083333333332,
+      "centroidHz": 176.64982098277233,
+      "lowBandFraction": 0.7922434205157624,
+      "chestBandFraction": 0.9433381346241916,
+      "subBassFraction": 0.5273782938812364,
+      "hash": "b705a3ffead365ba2784b9d117489908e234cf6c8366b8406229ff686858a270",
+      "counts": {
+        "shambler": 1,
+        "shambler:attack": 1,
+        "shambler:attack:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "shambler",
+          "state": "attack",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "shambler:attack:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "shambler",
+      "state": "hurt",
+      "peak": 0.14016036689281464,
+      "rms": 0.008954006200757635,
+      "dc": 0.000024153364572622695,
+      "activeSeconds": 0.9741458333333334,
+      "centroidHz": 198.03432173060682,
+      "lowBandFraction": 0.8304338970763107,
+      "chestBandFraction": 0.9004623562709317,
+      "subBassFraction": 0.7262696071171033,
+      "hash": "17bdebf62ecd4b9bc9e109a75e6289ed55fa250b7fc0b8254e78f6e003d0b768",
+      "counts": {
+        "shambler": 1,
+        "shambler:hurt": 1,
+        "shambler:hurt:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "shambler",
+          "state": "hurt",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "shambler:hurt:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "shambler",
+      "state": "death",
+      "peak": 0.19470183551311493,
+      "rms": 0.019362718829565282,
+      "dc": 0.00006749482579154639,
+      "activeSeconds": 1.899875,
+      "centroidHz": 76.87504393908016,
+      "lowBandFraction": 0.9361499534774005,
+      "chestBandFraction": 0.9863741463842994,
+      "subBassFraction": 0.8177833914349861,
+      "hash": "6c573046ee4d38069892d4a9998d5099662a90b169c7ba0cb3ded94508ed8b6f",
+      "counts": {
+        "shambler": 1,
+        "shambler:death": 1,
+        "shambler:death:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "shambler",
+          "state": "death",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "shambler:death:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "feral",
+      "state": "idle",
+      "peak": 0.06927422434091568,
+      "rms": 0.004361062267140068,
+      "dc": 0.0000012461753501734683,
+      "activeSeconds": 1.0866041666666666,
+      "centroidHz": 317.74200067883396,
+      "lowBandFraction": 0.5720364339513021,
+      "chestBandFraction": 0.8019783461479286,
+      "subBassFraction": 0.057527558631509504,
+      "hash": "ecddc1c57551f547bd7fd601b1d682cdbdaaf6d24a942c422c7b71e4df59df44",
+      "counts": {
+        "feral": 1,
+        "feral:idle": 1,
+        "feral:idle:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "feral",
+          "state": "idle",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "feral:idle:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "feral",
+      "state": "chase",
+      "peak": 0.07362011075019836,
+      "rms": 0.004534801520903757,
+      "dc": 0.0000026736258774577005,
+      "activeSeconds": 1.0017083333333334,
+      "centroidHz": 464.0334732886482,
+      "lowBandFraction": 0.3539876873286645,
+      "chestBandFraction": 0.7389102050905192,
+      "subBassFraction": 0.0019174771167330827,
+      "hash": "df2c2afcf4db32feabd854024b5320d86e96982814c891340ec829cd809889fc",
+      "counts": {
+        "feral": 1,
+        "feral:chase": 1,
+        "feral:chase:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "feral",
+          "state": "chase",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "feral:chase:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "feral",
+      "state": "attack",
+      "peak": 0.14736221730709076,
+      "rms": 0.012209353438734175,
+      "dc": 4.162463267401924e-7,
+      "activeSeconds": 1.4508125,
+      "centroidHz": 482.41522097321223,
+      "lowBandFraction": 0.45101138882312397,
+      "chestBandFraction": 0.5766729473008965,
+      "subBassFraction": 0.0001457173538920499,
+      "hash": "2625448afdbb7a49a04f56f9aab7e6f628f11c6a6b5a97444a31bd24da95d643",
+      "counts": {
+        "feral": 1,
+        "feral:attack": 1,
+        "feral:attack:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "feral",
+          "state": "attack",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "feral:attack:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "feral",
+      "state": "hurt",
+      "peak": 0.14922039210796356,
+      "rms": 0.007782175346827387,
+      "dc": 0.000005109778159072522,
+      "activeSeconds": 0.9733958333333333,
+      "centroidHz": 420.19394798184106,
+      "lowBandFraction": 0.43922311284112586,
+      "chestBandFraction": 0.727617730557594,
+      "subBassFraction": 0.04015074195797242,
+      "hash": "5c9cd0e7231b895087c0e8b9f3d9c2abc983584722f78d7df25ed6652e93a211",
+      "counts": {
+        "feral": 1,
+        "feral:hurt": 1,
+        "feral:hurt:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "feral",
+          "state": "hurt",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "feral:hurt:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "feral",
+      "state": "death",
+      "peak": 0.18215668201446533,
+      "rms": 0.013851145977213535,
+      "dc": 0.00004414432387169306,
+      "activeSeconds": 1.7289375,
+      "centroidHz": 449.94124966839945,
+      "lowBandFraction": 0.3046234399185322,
+      "chestBandFraction": 0.7148042595833097,
+      "subBassFraction": 0.04890967252004982,
+      "hash": "8851e3b9d8d73cf136e1882d02731c21ba984adea53c1ae34a6a1473e6839080",
+      "counts": {
+        "feral": 1,
+        "feral:death": 1,
+        "feral:death:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "feral",
+          "state": "death",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "feral:death:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "leaper",
+      "state": "idle",
+      "peak": 0.006739210803061724,
+      "rms": 0.00038283229194808197,
+      "dc": 4.246911086698276e-7,
+      "activeSeconds": 0.3395,
+      "centroidHz": 2342.0987712130554,
+      "lowBandFraction": 0.003975536123833401,
+      "chestBandFraction": 0.30099146336325644,
+      "subBassFraction": 0.00033839210784846927,
+      "hash": "7d9e6f1174aff4e88288fbee359c83bb8933646c0022b34962265233879bae74",
+      "counts": {
+        "leaper": 1,
+        "leaper:idle": 1,
+        "leaper:idle:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "leaper",
+          "state": "idle",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "leaper:idle:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "leaper",
+      "state": "chase",
+      "peak": 0.006791971158236265,
+      "rms": 0.00041593857135259683,
+      "dc": 4.689080663169053e-7,
+      "activeSeconds": 0.29475,
+      "centroidHz": 2560.9107095657037,
+      "lowBandFraction": 0.0033392506598796507,
+      "chestBandFraction": 0.16991076529438012,
+      "subBassFraction": 0.0002834311817154828,
+      "hash": "78d7337c566be25c3bac5b407d666948d257f3f6447e8cca87430f9a0e11c336",
+      "counts": {
+        "leaper": 1,
+        "leaper:chase": 1,
+        "leaper:chase:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "leaper",
+          "state": "chase",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "leaper:chase:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "leaper",
+      "state": "attack",
+      "peak": 0.016695737838745117,
+      "rms": 0.000919627774082723,
+      "dc": 4.351544918753263e-7,
+      "activeSeconds": 0.458125,
+      "centroidHz": 1545.031037545255,
+      "lowBandFraction": 0.0006701732225846874,
+      "chestBandFraction": 0.0018184467223834122,
+      "subBassFraction": 0.000056771190358768335,
+      "hash": "508e89e5f090be2db68f893b9dae095ab60e4d6990816d8c5615e1e15a13515e",
+      "counts": {
+        "leaper": 1,
+        "leaper:attack": 1,
+        "leaper:attack:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "leaper",
+          "state": "attack",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "leaper:attack:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "leaper",
+      "state": "hurt",
+      "peak": 0.07372859865427017,
+      "rms": 0.003285274940824407,
+      "dc": 0.0000047887187111399106,
+      "activeSeconds": 0.6567083333333333,
+      "centroidHz": 836.3366393218721,
+      "lowBandFraction": 0.3887738854986578,
+      "chestBandFraction": 0.4126856427072288,
+      "subBassFraction": 0.2282627606080416,
+      "hash": "08a46a7bfeed19711e20f6edd7db29b331a310ef253786970e9822b4cb92272f",
+      "counts": {
+        "leaper": 1,
+        "leaper:hurt": 1,
+        "leaper:hurt:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "leaper",
+          "state": "hurt",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "leaper:hurt:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "leaper",
+      "state": "death",
+      "peak": 0.14987628161907196,
+      "rms": 0.008121724780294494,
+      "dc": 0.00004196039840883543,
+      "activeSeconds": 1.2871875,
+      "centroidHz": 645.2234197996421,
+      "lowBandFraction": 0.1016276104003859,
+      "chestBandFraction": 0.11474620818445122,
+      "subBassFraction": 0.0815043886691325,
+      "hash": "f634b68877724d33cbcfd1d5b98b67ea7f85fcbc60382aafd45bda33a77bdc16",
+      "counts": {
+        "leaper": 1,
+        "leaper:death": 1,
+        "leaper:death:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "leaper",
+          "state": "death",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "leaper:death:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "drowned",
+      "state": "idle",
+      "peak": 0.02786983922123909,
+      "rms": 0.002504152924205731,
+      "dc": 4.153716220920056e-7,
+      "activeSeconds": 1.2626458333333332,
+      "centroidHz": 440.58462802649376,
+      "lowBandFraction": 0.053594842196646494,
+      "chestBandFraction": 0.8356279954108736,
+      "subBassFraction": 0.004243465761109846,
+      "hash": "f4c586fa016477c73f454759c72c195053f8110e2ec4b7c8c78fb7c25e5dd2e4",
+      "counts": {
+        "drowned": 1,
+        "drowned:idle": 1,
+        "drowned:idle:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "drowned",
+          "state": "idle",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "drowned:idle:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "drowned",
+      "state": "chase",
+      "peak": 0.030791928991675377,
+      "rms": 0.002273294501627961,
+      "dc": 2.482908934319376e-7,
+      "activeSeconds": 1.0111458333333334,
+      "centroidHz": 478.22005646009796,
+      "lowBandFraction": 0.05538404293878161,
+      "chestBandFraction": 0.7470569441097521,
+      "subBassFraction": 0.0002963537550281844,
+      "hash": "905616d76e755cafb31b6f368c10f4e834f3ab512554948f218b416a099c3171",
+      "counts": {
+        "drowned": 1,
+        "drowned:chase": 1,
+        "drowned:chase:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "drowned",
+          "state": "chase",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "drowned:chase:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "drowned",
+      "state": "attack",
+      "peak": 0.026253683492541313,
+      "rms": 0.0017876038604187092,
+      "dc": 5.222448949952382e-7,
+      "activeSeconds": 0.7747083333333333,
+      "centroidHz": 533.5413558072812,
+      "lowBandFraction": 0.07410547447613043,
+      "chestBandFraction": 0.5467547802913257,
+      "subBassFraction": 0.00014486721407258948,
+      "hash": "ab4ea0b58162e455d62d7cb9c331bcd90f5b64128eaa59aa4fe8ad61627f43f2",
+      "counts": {
+        "drowned": 1,
+        "drowned:attack": 1,
+        "drowned:attack:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "drowned",
+          "state": "attack",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "drowned:attack:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "drowned",
+      "state": "hurt",
+      "peak": 0.07648084312677383,
+      "rms": 0.003486999407131412,
+      "dc": 0.000005295612506769994,
+      "activeSeconds": 0.8000416666666667,
+      "centroidHz": 677.4202545673567,
+      "lowBandFraction": 0.36399614129019675,
+      "chestBandFraction": 0.5273702420767886,
+      "subBassFraction": 0.20636723771902632,
+      "hash": "5d85554fb05eaf147384fd5636dbb647085c195ae0e96413a95bcf28c00013d4",
+      "counts": {
+        "drowned": 1,
+        "drowned:hurt": 1,
+        "drowned:hurt:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "drowned",
+          "state": "hurt",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "drowned:hurt:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "drowned",
+      "state": "death",
+      "peak": 0.12065986543893814,
+      "rms": 0.006134591711734687,
+      "dc": 0.0000415747438028825,
+      "activeSeconds": 1.2977083333333332,
+      "centroidHz": 372.83952398449355,
+      "lowBandFraction": 0.24346096366708067,
+      "chestBandFraction": 0.873426683040857,
+      "subBassFraction": 0.14657619122022728,
+      "hash": "31d1b58244b165285e1d195b54592e12257a1ea5d3ffee4f8ddab423c1204fd2",
+      "counts": {
+        "drowned": 1,
+        "drowned:death": 1,
+        "drowned:death:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "drowned",
+          "state": "death",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "drowned:death:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "military",
+      "state": "idle",
+      "peak": 0.08582808822393417,
+      "rms": 0.003651713189038596,
+      "dc": 0.000010322169461131773,
+      "activeSeconds": 1.135,
+      "centroidHz": 228.7437909171086,
+      "lowBandFraction": 0.6973506281098438,
+      "chestBandFraction": 0.8816929896213651,
+      "subBassFraction": 0.43596316882324365,
+      "hash": "54ee45317f4758dd60839e50e5c89b827736e46b4e6788cdfb60dbf54486145c",
+      "counts": {
+        "military": 1,
+        "military:idle": 1,
+        "military:idle:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "military",
+          "state": "idle",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "military:idle:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "military",
+      "state": "chase",
+      "peak": 0.1088852658867836,
+      "rms": 0.003916641448095861,
+      "dc": 0.000012966177301890782,
+      "activeSeconds": 1.1702083333333333,
+      "centroidHz": 267.3580434271512,
+      "lowBandFraction": 0.6479975625926588,
+      "chestBandFraction": 0.8537165654283629,
+      "subBassFraction": 0.09474958484218819,
+      "hash": "7ef67dc3fe97803b795494e36c647a291f8f48d24df74d18e2a0b6189aa99c74",
+      "counts": {
+        "military": 1,
+        "military:chase": 1,
+        "military:chase:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "military",
+          "state": "chase",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "military:chase:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "military",
+      "state": "attack",
+      "peak": 0.13826052844524384,
+      "rms": 0.008245158034640848,
+      "dc": 0.00001752989987304668,
+      "activeSeconds": 1.4300625,
+      "centroidHz": 296.2991385804581,
+      "lowBandFraction": 0.5809714086858915,
+      "chestBandFraction": 0.8342446682526218,
+      "subBassFraction": 0.006792921457515451,
+      "hash": "2b224108f355e3371c782522b939dfb1cbdc70a26de159d4c5c0cc420be8056b",
+      "counts": {
+        "military": 1,
+        "military:attack": 1,
+        "military:attack:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "military",
+          "state": "attack",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "military:attack:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "military",
+      "state": "hurt",
+      "peak": 0.1371287703514099,
+      "rms": 0.007622346398176155,
+      "dc": 0.000009417493696449703,
+      "activeSeconds": 0.9485833333333333,
+      "centroidHz": 371.91601287658966,
+      "lowBandFraction": 0.5182299815575344,
+      "chestBandFraction": 0.7939450884443048,
+      "subBassFraction": 0.04438742335199398,
+      "hash": "c21923a449f8996ca2eff920a8a06f0565d3762f1bf7925c87a763a7097b03fe",
+      "counts": {
+        "military": 1,
+        "military:hurt": 1,
+        "military:hurt:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "military",
+          "state": "hurt",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "military:hurt:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "military",
+      "state": "death",
+      "peak": 0.1549461930990219,
+      "rms": 0.014502773123674845,
+      "dc": 0.000041433981929298384,
+      "activeSeconds": 1.7184375,
+      "centroidHz": 198.395044742338,
+      "lowBandFraction": 0.7446480423249818,
+      "chestBandFraction": 0.9293233123085218,
+      "subBassFraction": 0.3978601269046965,
+      "hash": "99cb8c2b176a0560b68e4f0ed723d8b843048967aa238dbdd5ffef0a96cc2f38",
+      "counts": {
+        "military": 1,
+        "military:death": 1,
+        "military:death:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "military",
+          "state": "death",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "military:death:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "brute",
+      "state": "idle",
+      "peak": 0.1189025416970253,
+      "rms": 0.021429448899012993,
+      "dc": 0.000026680738492457364,
+      "activeSeconds": 2.5515208333333335,
+      "centroidHz": 63.76747386963277,
+      "lowBandFraction": 0.9584905410230593,
+      "chestBandFraction": 0.9918528835695267,
+      "subBassFraction": 0.8356111179541236,
+      "hash": "a52463643f8a34d90fab33cb7daf3f24d604e4e0f53c1038761e6c904b7954ed",
+      "counts": {
+        "brute": 1,
+        "brute:idle": 1,
+        "brute:idle:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "brute",
+          "state": "idle",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "brute:idle:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "brute",
+      "state": "chase",
+      "peak": 0.13615697622299194,
+      "rms": 0.02148960508148073,
+      "dc": 0.000020028315247191208,
+      "activeSeconds": 2.0874375,
+      "centroidHz": 70.51564787864561,
+      "lowBandFraction": 0.9535958392953373,
+      "chestBandFraction": 0.9909608583642051,
+      "subBassFraction": 0.8425045542332874,
+      "hash": "d6bc8f534be87439066f1b41da17aabb70335ce61d60a8f1445f24c976be1d49",
+      "counts": {
+        "brute": 1,
+        "brute:chase": 1,
+        "brute:chase:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "brute",
+          "state": "chase",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "brute:chase:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "brute",
+      "state": "attack",
+      "peak": 0.1822197139263153,
+      "rms": 0.020973583096616708,
+      "dc": 0.000008237653013321872,
+      "activeSeconds": 1.6127083333333334,
+      "centroidHz": 106.90976077952355,
+      "lowBandFraction": 0.8986187343581123,
+      "chestBandFraction": 0.9742635277213881,
+      "subBassFraction": 0.7964885949768123,
+      "hash": "44b43763496c854fd9c3b694bbaef2b0508b872bbf23c240ce126d8c4454c03b",
+      "counts": {
+        "brute": 1,
+        "brute:attack": 1,
+        "brute:attack:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "brute",
+          "state": "attack",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "brute:attack:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "brute",
+      "state": "hurt",
+      "peak": 0.2535131871700287,
+      "rms": 0.020272461998569576,
+      "dc": 0.00008440955425530579,
+      "activeSeconds": 1.279375,
+      "centroidHz": 100.75682914004088,
+      "lowBandFraction": 0.9441244047140873,
+      "chestBandFraction": 0.9761054062625618,
+      "subBassFraction": 0.8323742185158235,
+      "hash": "6a4ad161cd4d09b4c94e3c7d7d04035ea23783f05e3d6e86eb1f3d8086b5abbd",
+      "counts": {
+        "brute": 1,
+        "brute:hurt": 1,
+        "brute:hurt:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "brute",
+          "state": "hurt",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "brute:hurt:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "brute",
+      "state": "death",
+      "peak": 0.40672311186790466,
+      "rms": 0.05024421714718519,
+      "dc": 0.00008719990973151945,
+      "activeSeconds": 2.3874166666666667,
+      "centroidHz": 55.479980698406344,
+      "lowBandFraction": 0.9730889645926328,
+      "chestBandFraction": 0.9959042308841235,
+      "subBassFraction": 0.8549019909223372,
+      "hash": "b8af92b6601808434b6ab4b0255d445dcf5c5728cd6e3e90d2ff3bdcf0363ff6",
+      "counts": {
+        "brute": 1,
+        "brute:death": 1,
+        "brute:death:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "brute",
+          "state": "death",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "brute:death:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "spitter",
+      "state": "idle",
+      "peak": 0.018385935574769974,
+      "rms": 0.0013625782395398716,
+      "dc": 7.855798127003436e-9,
+      "activeSeconds": 0.8643125,
+      "centroidHz": 2720.829047767814,
+      "lowBandFraction": 0.02007379161709354,
+      "chestBandFraction": 0.09027134383122462,
+      "subBassFraction": 0.0030391215389703728,
+      "hash": "0efeeba93ec91d6a8feeae3da32de0cc074860286535cf91d7a1cff7d00be455",
+      "counts": {
+        "spitter": 1,
+        "spitter:idle": 1,
+        "spitter:idle:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "spitter",
+          "state": "idle",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "spitter:idle:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "spitter",
+      "state": "chase",
+      "peak": 0.023047836497426033,
+      "rms": 0.0014702165439884377,
+      "dc": 1.0369871300566993e-7,
+      "activeSeconds": 0.761,
+      "centroidHz": 2537.145259606171,
+      "lowBandFraction": 0.020929626181108996,
+      "chestBandFraction": 0.10153527072982667,
+      "subBassFraction": 0.0014339401219084493,
+      "hash": "9fdc3cfe866fe761efb234cb40dd65e7dc76aae738e14b4de1d3cabbd07d82b3",
+      "counts": {
+        "spitter": 1,
+        "spitter:chase": 1,
+        "spitter:chase:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "spitter",
+          "state": "chase",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "spitter:chase:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "spitter",
+      "state": "attack",
+      "peak": 0.020353222265839577,
+      "rms": 0.0013775359765270335,
+      "dc": 4.019879197161895e-7,
+      "activeSeconds": 0.5843333333333334,
+      "centroidHz": 2180.290563067025,
+      "lowBandFraction": 0.03968992221868347,
+      "chestBandFraction": 0.15558067843796503,
+      "subBassFraction": 0.003506664212901117,
+      "hash": "522a97b3688f55abd393254d95799e0ede59bf6ac844cbb969e606ef1cf4fa1a",
+      "counts": {
+        "spitter": 1,
+        "spitter:attack": 1,
+        "spitter:attack:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "spitter",
+          "state": "attack",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "spitter:attack:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "spitter",
+      "state": "hurt",
+      "peak": 0.0642647072672844,
+      "rms": 0.003437099605345863,
+      "dc": 0.000005445470489958402,
+      "activeSeconds": 0.6363958333333334,
+      "centroidHz": 911.0400346299346,
+      "lowBandFraction": 0.3778263966199351,
+      "chestBandFraction": 0.4127971886836456,
+      "subBassFraction": 0.22208846083697828,
+      "hash": "6f99b37bbbc708825744a8f2c73c1eec4c8d278a36eb6aa08f8a3a2484574518",
+      "counts": {
+        "spitter": 1,
+        "spitter:hurt": 1,
+        "spitter:hurt:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "spitter",
+          "state": "hurt",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "spitter:hurt:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "spitter",
+      "state": "death",
+      "peak": 0.10734400898218155,
+      "rms": 0.004346676783072921,
+      "dc": 0.00004471526674568652,
+      "activeSeconds": 1.1753541666666667,
+      "centroidHz": 1511.017354431237,
+      "lowBandFraction": 0.43329998329168795,
+      "chestBandFraction": 0.4983057813227885,
+      "subBassFraction": 0.32691983571235883,
+      "hash": "d2a970dfd80ba42bb6dfeb46960b0c97a9151376742db95803b94b339f1bd13a",
+      "counts": {
+        "spitter": 1,
+        "spitter:death": 1,
+        "spitter:death:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "spitter",
+          "state": "death",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "spitter:death:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "screamer",
+      "state": "idle",
+      "peak": 0.07561363279819489,
+      "rms": 0.010821803695632001,
+      "dc": 1.4316230310642703e-7,
+      "activeSeconds": 1.7789375,
+      "centroidHz": 595.6543505399958,
+      "lowBandFraction": 0.00018395047082620504,
+      "chestBandFraction": 0.7188582838713212,
+      "subBassFraction": 0.0000064222321082498155,
+      "hash": "da997fb24084bbf46a00bba2428290982e33225876099574a50834d96ae1be2a",
+      "counts": {
+        "screamer": 1,
+        "screamer:idle": 1,
+        "screamer:idle:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "screamer",
+          "state": "idle",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "screamer:idle:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "screamer",
+      "state": "chase",
+      "peak": 0.15276439487934113,
+      "rms": 0.023984189497705765,
+      "dc": 4.8127378682780235e-8,
+      "activeSeconds": 1.8349375,
+      "centroidHz": 613.6730687931566,
+      "lowBandFraction": 0.0000960748677776149,
+      "chestBandFraction": 0.33395791412558146,
+      "subBassFraction": 0.000005729330281822079,
+      "hash": "8cf9df5b3c30604c444e40a7e6a77d2033c412c9ed01f84ab33d171147ad4b87",
+      "counts": {
+        "screamer": 1,
+        "screamer:chase": 1,
+        "screamer:chase:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "screamer",
+          "state": "chase",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "screamer:chase:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "screamer",
+      "state": "attack",
+      "peak": 0.4167053699493408,
+      "rms": 0.08469588499892751,
+      "dc": 9.774077421687936e-8,
+      "activeSeconds": 2.3674166666666667,
+      "centroidHz": 850.733009073831,
+      "lowBandFraction": 0.00012729944395115203,
+      "chestBandFraction": 0.02042783055056011,
+      "subBassFraction": 0.000005883162117244711,
+      "hash": "0bb5f38b4025d00138df23f1e6b678a57916687b0ed753a4fbe6a2610b087fc3",
+      "counts": {
+        "screamer": 1,
+        "screamer:attack": 1,
+        "screamer:attack:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "screamer",
+          "state": "attack",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "screamer:attack:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "screamer",
+      "state": "hurt",
+      "peak": 0.23744766414165497,
+      "rms": 0.022040030381360005,
+      "dc": 0.000005819148990672992,
+      "activeSeconds": 1.247875,
+      "centroidHz": 771.4526303493633,
+      "lowBandFraction": 0.010264235192717283,
+      "chestBandFraction": 0.011972200965558726,
+      "subBassFraction": 0.006008002542177561,
+      "hash": "ddc83e18923f74d17bf86b447ea444f7f5676b10269a7527ecc5fdbf957cd91e",
+      "counts": {
+        "screamer": 1,
+        "screamer:hurt": 1,
+        "screamer:hurt:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "screamer",
+          "state": "hurt",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "screamer:hurt:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "screamer",
+      "state": "death",
+      "peak": 0.19865594804286957,
+      "rms": 0.03901631294666518,
+      "dc": 0.00004517927712740842,
+      "activeSeconds": 2.275729166666667,
+      "centroidHz": 750.5778470565202,
+      "lowBandFraction": 0.0045445252218525856,
+      "chestBandFraction": 0.20399509603275803,
+      "subBassFraction": 0.0035522171376010173,
+      "hash": "757cedf647ef9632d075035b643b5dde2c5c5c61134cd57da04b08b8a7fb7388",
+      "counts": {
+        "screamer": 1,
+        "screamer:death": 1,
+        "screamer:death:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "screamer",
+          "state": "death",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "screamer:death:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "bomber",
+      "state": "idle",
+      "peak": 0.048721060156822205,
+      "rms": 0.010040099151129956,
+      "dc": 6.567397794897563e-7,
+      "activeSeconds": 2.1668541666666665,
+      "centroidHz": 101.80475531064386,
+      "lowBandFraction": 0.8981383141619387,
+      "chestBandFraction": 0.9808143984144464,
+      "subBassFraction": 0.8649405709177459,
+      "hash": "fc76562b38ce48ae1eedef4b6f5688362dc8091006a24d7b277c2594c7f08dc9",
+      "counts": {
+        "bomber": 1,
+        "bomber:idle": 1,
+        "bomber:idle:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "bomber",
+          "state": "idle",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "bomber:idle:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "bomber",
+      "state": "chase",
+      "peak": 0.06366685777902603,
+      "rms": 0.011971497203211971,
+      "dc": 7.25592234146747e-7,
+      "activeSeconds": 1.9594791666666667,
+      "centroidHz": 107.50362772549364,
+      "lowBandFraction": 0.9019620330116618,
+      "chestBandFraction": 0.9778514983996489,
+      "subBassFraction": 0.8868833913154955,
+      "hash": "ecc072b74ff10d9f305ce07f1addef5559ef223513d700e7905de2b4bd95c8ed",
+      "counts": {
+        "bomber": 1,
+        "bomber:chase": 1,
+        "bomber:chase:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "bomber",
+          "state": "chase",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "bomber:chase:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "bomber",
+      "state": "attack",
+      "peak": 0.08372904360294342,
+      "rms": 0.012709435989609474,
+      "dc": 0.000004060938717651044,
+      "activeSeconds": 1.5616458333333334,
+      "centroidHz": 115.80304743570717,
+      "lowBandFraction": 0.9068810305284419,
+      "chestBandFraction": 0.9773407660484652,
+      "subBassFraction": 0.7225150931753572,
+      "hash": "eb1512abf052699bd26244ac8d8dc966d6128b57cd45c113b6b1d8995e598a00",
+      "counts": {
+        "bomber": 1,
+        "bomber:attack": 1,
+        "bomber:attack:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "bomber",
+          "state": "attack",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "bomber:attack:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "bomber",
+      "state": "hurt",
+      "peak": 0.15892969071865082,
+      "rms": 0.009323857764967407,
+      "dc": 0.00004125434199046792,
+      "activeSeconds": 1.046125,
+      "centroidHz": 212.37404875942536,
+      "lowBandFraction": 0.8136072876966849,
+      "chestBandFraction": 0.8871553838087075,
+      "subBassFraction": 0.5026262197534971,
+      "hash": "0baf029fcd5053f3336cda0e8f34707234965a827960497828fc5106a612776d",
+      "counts": {
+        "bomber": 1,
+        "bomber:hurt": 1,
+        "bomber:hurt:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "bomber",
+          "state": "hurt",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "bomber:hurt:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "bomber",
+      "state": "death",
+      "peak": 0.15243013203144073,
+      "rms": 0.01796880894442759,
+      "dc": 0.000029566928328779758,
+      "activeSeconds": 1.7592291666666666,
+      "centroidHz": 90.71636912066423,
+      "lowBandFraction": 0.8972778238075694,
+      "chestBandFraction": 0.9860754143171803,
+      "subBassFraction": 0.8129197058650253,
+      "hash": "a33a83a0597be1cb3d9b135a6c819d71a285f9eb10356a6ae52042954b3fe686",
+      "counts": {
+        "bomber": 1,
+        "bomber:death": 1,
+        "bomber:death:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "bomber",
+          "state": "death",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "bomber:death:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "spider",
+      "state": "idle",
+      "peak": 0.03335531800985336,
+      "rms": 0.0020766028822750684,
+      "dc": 2.202243172306935e-8,
+      "activeSeconds": 0.6404375,
+      "centroidHz": 4453.341871226758,
+      "lowBandFraction": 0.000321251741308493,
+      "chestBandFraction": 0.0024225725409121692,
+      "subBassFraction": 0.00001341002292572727,
+      "hash": "8295363f9d2c13e912ed3eb89c702c88c774556407e0e8a1a539a27c746d361c",
+      "counts": {
+        "spider": 1,
+        "spider:idle": 1,
+        "spider:idle:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "spider",
+          "state": "idle",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "spider:idle:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "spider",
+      "state": "chase",
+      "peak": 0.04113708809018135,
+      "rms": 0.0022031459330443,
+      "dc": 4.974198303461067e-9,
+      "activeSeconds": 0.4333125,
+      "centroidHz": 4383.805310750369,
+      "lowBandFraction": 0.0003326356950648741,
+      "chestBandFraction": 0.004072610226542192,
+      "subBassFraction": 0.000011265049479061291,
+      "hash": "0eeeb49dd587feef77fbb8a3ff4a5fd87da2e24d352c6892b710479ed0145654",
+      "counts": {
+        "spider": 1,
+        "spider:chase": 1,
+        "spider:chase:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "spider",
+          "state": "chase",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "spider:chase:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "spider",
+      "state": "attack",
+      "peak": 0.06665664911270142,
+      "rms": 0.0032026706181232,
+      "dc": 1.8699000128160314e-8,
+      "activeSeconds": 0.4205833333333333,
+      "centroidHz": 4343.482165886779,
+      "lowBandFraction": 0.0003671943014446688,
+      "chestBandFraction": 0.0028232208522787137,
+      "subBassFraction": 0.000009894809561308727,
+      "hash": "709b1f2fd88564d2403e0e3e60ace22239a9a3cafb83cfb28a1cdae55dc0fcd0",
+      "counts": {
+        "spider": 1,
+        "spider:attack": 1,
+        "spider:attack:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "spider",
+          "state": "attack",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "spider:attack:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "spider",
+      "state": "hurt",
+      "peak": 0.08916521072387695,
+      "rms": 0.0039549722705861596,
+      "dc": 0.000005223431420171077,
+      "activeSeconds": 0.620375,
+      "centroidHz": 1889.9460074226483,
+      "lowBandFraction": 0.2960999368038892,
+      "chestBandFraction": 0.31526647673012254,
+      "subBassFraction": 0.1739957536659301,
+      "hash": "a5682f8e99166c91f67d919c74ebc954089b27d3b743a02ec8dd34dca7cfb27b",
+      "counts": {
+        "spider": 1,
+        "spider:hurt": 1,
+        "spider:hurt:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "spider",
+          "state": "hurt",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "spider:hurt:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "spider",
+      "state": "death",
+      "peak": 0.12871822714805603,
+      "rms": 0.005698641695681662,
+      "dc": 0.00004318474835387192,
+      "activeSeconds": 0.9165,
+      "centroidHz": 2880.416857753075,
+      "lowBandFraction": 0.23267717309279695,
+      "chestBandFraction": 0.24020682093593587,
+      "subBassFraction": 0.18538560529876036,
+      "hash": "f232628757502fca3d626daf767b4430fd8bca1f10559e0761ede02b41612d81",
+      "counts": {
+        "spider": 1,
+        "spider:death": 1,
+        "spider:death:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "spider",
+          "state": "death",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "spider:death:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "demon",
+      "state": "idle",
+      "peak": 0.12471330910921097,
+      "rms": 0.020801283280448467,
+      "dc": 0.000009742559154194288,
+      "activeSeconds": 2.2591666666666668,
+      "centroidHz": 89.13597609854719,
+      "lowBandFraction": 0.927404554091781,
+      "chestBandFraction": 0.9795196772472343,
+      "subBassFraction": 0.8072062082252229,
+      "hash": "836ad472b4651198c24c96198bf19bb2851766552e24ff36ac9995d5658d64ba",
+      "counts": {
+        "demon": 1,
+        "demon:idle": 1,
+        "demon:idle:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "demon",
+          "state": "idle",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "demon:idle:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "demon",
+      "state": "chase",
+      "peak": 0.16024497151374817,
+      "rms": 0.01967432613895091,
+      "dc": 0.000012525883574358074,
+      "activeSeconds": 1.7955,
+      "centroidHz": 140.73658068220155,
+      "lowBandFraction": 0.8405796718981372,
+      "chestBandFraction": 0.9400586671776818,
+      "subBassFraction": 0.7206869652293935,
+      "hash": "c35afdaab93e56e6998920be5452381d7287cf4df005f5ecfe18eb58d7182eae",
+      "counts": {
+        "demon": 1,
+        "demon:chase": 1,
+        "demon:chase:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "demon",
+          "state": "chase",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "demon:chase:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "demon",
+      "state": "attack",
+      "peak": 0.18859463930130005,
+      "rms": 0.01921683134375073,
+      "dc": 0.00000600191464315325,
+      "activeSeconds": 1.5298541666666667,
+      "centroidHz": 216.63852301336453,
+      "lowBandFraction": 0.6718520355283082,
+      "chestBandFraction": 0.8977394674009408,
+      "subBassFraction": 0.019119726696026323,
+      "hash": "aee9f3da120e5d50ca592612e054fca20a128182a0bc18a5e24fbac3fb34aa72",
+      "counts": {
+        "demon": 1,
+        "demon:attack": 1,
+        "demon:attack:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "demon",
+          "state": "attack",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "demon:attack:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "demon",
+      "state": "hurt",
+      "peak": 0.2526409924030304,
+      "rms": 0.020021940088290033,
+      "dc": 0.00001561045140450584,
+      "activeSeconds": 1.2830416666666666,
+      "centroidHz": 191.93661213186783,
+      "lowBandFraction": 0.7940337591264806,
+      "chestBandFraction": 0.9103708431038484,
+      "subBassFraction": 0.10501760532463807,
+      "hash": "de4bca6a52493aadbe72f25a3085f1a834b1b32b40e011742c6768a112a25989",
+      "counts": {
+        "demon": 1,
+        "demon:hurt": 1,
+        "demon:hurt:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "demon",
+          "state": "hurt",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "demon:hurt:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "demon",
+      "state": "death",
+      "peak": 0.40972548723220825,
+      "rms": 0.050122449793654565,
+      "dc": 0.0000788329014658428,
+      "activeSeconds": 2.3879375,
+      "centroidHz": 111.82914745240173,
+      "lowBandFraction": 0.9032130673035568,
+      "chestBandFraction": 0.9649987401773463,
+      "subBassFraction": 0.7744435311748518,
+      "hash": "b0879f7d87598d65e94df9aafb616a40200f0bd732ae43abf37630fa088c6552",
+      "counts": {
+        "demon": 1,
+        "demon:death": 1,
+        "demon:death:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "demon",
+          "state": "death",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "demon:death:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "colossus",
+      "state": "idle",
+      "peak": 0.15359924733638763,
+      "rms": 0.026207989811102145,
+      "dc": 0.0000045849001519139944,
+      "activeSeconds": 2.657958333333333,
+      "centroidHz": 47.09916277423885,
+      "lowBandFraction": 0.9854538107601276,
+      "chestBandFraction": 0.9987257861884239,
+      "subBassFraction": 0.8530364348364847,
+      "hash": "b93464893a5697b2eddb6dd47b52f636db511ebe5952c3d1f309d0e1d234f21f",
+      "counts": {
+        "colossus": 1,
+        "colossus:idle": 1,
+        "colossus:idle:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "colossus",
+          "state": "idle",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "colossus:idle:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "colossus",
+      "state": "chase",
+      "peak": 0.16636745631694794,
+      "rms": 0.025958186596875335,
+      "dc": 0.000003782110724733862,
+      "activeSeconds": 2.3762916666666665,
+      "centroidHz": 49.8597583048094,
+      "lowBandFraction": 0.9862162703785622,
+      "chestBandFraction": 0.9990321390708209,
+      "subBassFraction": 0.8604706141090473,
+      "hash": "4b2136a60edf35eac156d0374a14264a9a8d27460c449ea2d40f3c9c0c04984c",
+      "counts": {
+        "colossus": 1,
+        "colossus:chase": 1,
+        "colossus:chase:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "colossus",
+          "state": "chase",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "colossus:chase:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "colossus",
+      "state": "attack",
+      "peak": 0.19613228738307953,
+      "rms": 0.030525602886971977,
+      "dc": 0.00003900419873183445,
+      "activeSeconds": 1.9680208333333333,
+      "centroidHz": 81.62716622622816,
+      "lowBandFraction": 0.9531934308676107,
+      "chestBandFraction": 0.9945551832025329,
+      "subBassFraction": 0.8328643904342927,
+      "hash": "8281c916db05f148a6c927990b1aed035ac6a8aed549baf2f19aea9f63b4aaa6",
+      "counts": {
+        "colossus": 1,
+        "colossus:attack": 1,
+        "colossus:attack:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "colossus",
+          "state": "attack",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "colossus:attack:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "colossus",
+      "state": "hurt",
+      "peak": 0.29652640223503113,
+      "rms": 0.02744238749861672,
+      "dc": 0.00015381158665048707,
+      "activeSeconds": 1.3763958333333333,
+      "centroidHz": 77.52509395803655,
+      "lowBandFraction": 0.9673446950827663,
+      "chestBandFraction": 0.9894885410647977,
+      "subBassFraction": 0.8354223247844461,
+      "hash": "f58969316250ac1c41898e3ca7eeaa3cb331f3b4e6324a4a7c33abc5a33ae77f",
+      "counts": {
+        "colossus": 1,
+        "colossus:hurt": 1,
+        "colossus:hurt:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "colossus",
+          "state": "hurt",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "colossus:hurt:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "colossus",
+      "state": "death",
+      "peak": 0.5126091837882996,
+      "rms": 0.07388083898706926,
+      "dc": 0.000028197675790496003,
+      "activeSeconds": 3.0545833333333334,
+      "centroidHz": 43.71500455469099,
+      "lowBandFraction": 0.9894964616422787,
+      "chestBandFraction": 0.9994076344190294,
+      "subBassFraction": 0.8916205516827718,
+      "hash": "2b84a97222cd7834b75d2793ab9377dea17d3db1c8a5f2416ba0efd88d8878d2",
+      "counts": {
+        "colossus": 1,
+        "colossus:death": 1,
+        "colossus:death:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "colossus",
+          "state": "death",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "colossus:death:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "guardian",
+      "state": "idle",
+      "peak": 0.06102534383535385,
+      "rms": 0.0035454512110434755,
+      "dc": 0.000002977196680372465,
+      "activeSeconds": 1.0175625,
+      "centroidHz": 383.1779117421393,
+      "lowBandFraction": 0.3750434969510491,
+      "chestBandFraction": 0.7445553503366001,
+      "subBassFraction": 0.010446166097238932,
+      "hash": "8ab7639e3504ce52244b5a9ceb78eb35ba677160071a3e286f1e57ee01f2d56e",
+      "counts": {
+        "guardian": 1,
+        "guardian:idle": 1,
+        "guardian:idle:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "guardian",
+          "state": "idle",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "guardian:idle:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "guardian",
+      "state": "chase",
+      "peak": 0.0812401995062828,
+      "rms": 0.004821109932292664,
+      "dc": 0.000008005420265794293,
+      "activeSeconds": 1.1406041666666666,
+      "centroidHz": 546.0432747054869,
+      "lowBandFraction": 0.28261270921187714,
+      "chestBandFraction": 0.4511352992106407,
+      "subBassFraction": 0.0020029755421957737,
+      "hash": "e2510238716dcd4d36505f8588b8147843afe4d298f2cf793462a369b068763a",
+      "counts": {
+        "guardian": 1,
+        "guardian:chase": 1,
+        "guardian:chase:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "guardian",
+          "state": "chase",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "guardian:chase:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "guardian",
+      "state": "attack",
+      "peak": 0.10812456905841827,
+      "rms": 0.0076433438818504125,
+      "dc": 2.8840172817862616e-7,
+      "activeSeconds": 1.2953333333333332,
+      "centroidHz": 621.4658215054326,
+      "lowBandFraction": 0.12432225410731809,
+      "chestBandFraction": 0.445562963480303,
+      "subBassFraction": 0.0004526164246485124,
+      "hash": "47b12344ca372c170bf790df1ffcd852d295e2d74ee6b8e92bb78c9a36e44ce3",
+      "counts": {
+        "guardian": 1,
+        "guardian:attack": 1,
+        "guardian:attack:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "guardian",
+          "state": "attack",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "guardian:attack:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "guardian",
+      "state": "hurt",
+      "peak": 0.17411009967327118,
+      "rms": 0.008934209087771549,
+      "dc": 0.000006780577532278749,
+      "activeSeconds": 1.0055416666666666,
+      "centroidHz": 592.2840422939286,
+      "lowBandFraction": 0.2525354247743735,
+      "chestBandFraction": 0.48339883442593146,
+      "subBassFraction": 0.03349157780689765,
+      "hash": "0830a8845126bb02c1e71c41bc640fb8a3d9da027cc7256e81be5c9eb6bb2cec",
+      "counts": {
+        "guardian": 1,
+        "guardian:hurt": 1,
+        "guardian:hurt:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "guardian",
+          "state": "hurt",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "guardian:hurt:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "guardian",
+      "state": "death",
+      "peak": 0.2792104184627533,
+      "rms": 0.03743133503401238,
+      "dc": 0.00009521728839803196,
+      "activeSeconds": 2.0182708333333332,
+      "centroidHz": 528.5446716801634,
+      "lowBandFraction": 0.030229459542474548,
+      "chestBandFraction": 0.8565691486550499,
+      "subBassFraction": 0.02904064826692206,
+      "hash": "ec5931f6a7effd3666f0a92fbf749f98d9816393b7d335bd14903b7e701e6b43",
+      "counts": {
+        "guardian": 1,
+        "guardian:death": 1,
+        "guardian:death:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "guardian",
+          "state": "death",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "guardian:death:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "caveguard",
+      "state": "idle",
+      "peak": 0.0416887141764164,
+      "rms": 0.005492901361413482,
+      "dc": 4.868649239262646e-7,
+      "activeSeconds": 1.2730625,
+      "centroidHz": 291.2481229088431,
+      "lowBandFraction": 0.7378644580367358,
+      "chestBandFraction": 0.9254192322945985,
+      "subBassFraction": 0.00002033356436068055,
+      "hash": "6ab4b0f5a736d523ac5f8e79f35d8543566250104db53178158b8a004d8a643b",
+      "counts": {
+        "caveguard": 1,
+        "caveguard:idle": 1,
+        "caveguard:idle:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "caveguard",
+          "state": "idle",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "caveguard:idle:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "caveguard",
+      "state": "chase",
+      "peak": 0.05439957603812218,
+      "rms": 0.004892309535109468,
+      "dc": 3.0628255707906203e-7,
+      "activeSeconds": 0.9981458333333333,
+      "centroidHz": 312.32496485688125,
+      "lowBandFraction": 0.3442410402330051,
+      "chestBandFraction": 0.9534839876181909,
+      "subBassFraction": 0.000015266379074050733,
+      "hash": "ddc37e09b1a29eea83269125987d483d914ac2b57049a069aae315b8afa0b99f",
+      "counts": {
+        "caveguard": 1,
+        "caveguard:chase": 1,
+        "caveguard:chase:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "caveguard",
+          "state": "chase",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "caveguard:chase:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "caveguard",
+      "state": "attack",
+      "peak": 0.11684809625148773,
+      "rms": 0.012847977339439633,
+      "dc": 0.000002410242770832425,
+      "activeSeconds": 1.269,
+      "centroidHz": 364.86729342473154,
+      "lowBandFraction": 0.0007465431197424752,
+      "chestBandFraction": 0.9876558102132651,
+      "subBassFraction": 0.000025281070777639162,
+      "hash": "69451df5f8d0780caa81a7fe431b56e591c260a4e2061339f1a0c065ca085545",
+      "counts": {
+        "caveguard": 1,
+        "caveguard:attack": 1,
+        "caveguard:attack:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "caveguard",
+          "state": "attack",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "caveguard:attack:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "caveguard",
+      "state": "hurt",
+      "peak": 0.09667933732271194,
+      "rms": 0.00583571643576754,
+      "dc": 0.000005295718512908689,
+      "activeSeconds": 0.8727083333333333,
+      "centroidHz": 579.6446467889898,
+      "lowBandFraction": 0.13287267960814042,
+      "chestBandFraction": 0.7479327619280732,
+      "subBassFraction": 0.0779959330573258,
+      "hash": "ceac34e3b11dbc264feea399004ecd3423ef82d5cf5419e45fb18545e32cea17",
+      "counts": {
+        "caveguard": 1,
+        "caveguard:hurt": 1,
+        "caveguard:hurt:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "caveguard",
+          "state": "hurt",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "caveguard:hurt:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "caveguard",
+      "state": "death",
+      "peak": 0.13090544939041138,
+      "rms": 0.013447259338850345,
+      "dc": 0.00004312786748438954,
+      "activeSeconds": 1.6914166666666666,
+      "centroidHz": 279.15675857546387,
+      "lowBandFraction": 0.7525144614291917,
+      "chestBandFraction": 0.9655816690513243,
+      "subBassFraction": 0.029531182166424096,
+      "hash": "71ac854063c1047eda4d305e8f6847879a2ce20dfe2638dd385a2c6d3980aef8",
+      "counts": {
+        "caveguard": 1,
+        "caveguard:death": 1,
+        "caveguard:death:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "caveguard",
+          "state": "death",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "caveguard:death:phrase:2"
+          ]
+        }
+      ]
+    }
+  ],
+  "reels": [
+    {
+      "type": "shambler",
+      "state": "idle",
+      "peak": 0.0943579226732254,
+      "rms": 0.010372472529571627,
+      "dc": 0.000009945539130387502,
+      "activeSeconds": 7.137270833333333,
+      "centroidHz": 62.614371592460145,
+      "lowBandFraction": 0.9600164171086053,
+      "chestBandFraction": 0.9917544957769691,
+      "subBassFraction": 0.8569608005552748,
+      "hash": "e5e3320d782fbd881f5f0149fc7fb9d113f4bec12cddb3d1a14827653881ab68",
+      "counts": {
+        "shambler": 4,
+        "shambler:idle": 4,
+        "shambler:idle:phrase:2": 1,
+        "shambler:idle:phrase:1": 1,
+        "shambler:idle:phrase:0": 1,
+        "shambler:idle:phrase:3": 1
+      },
+      "choices": [
+        {
+          "type": "shambler",
+          "state": "idle",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "shambler:idle:phrase:2"
+          ]
+        },
+        {
+          "type": "shambler",
+          "state": "idle",
+          "time": 3.8533333333333335,
+          "phraseKeys": [
+            "shambler:idle:phrase:1"
+          ]
+        },
+        {
+          "type": "shambler",
+          "state": "idle",
+          "time": 7.653333333333333,
+          "phraseKeys": [
+            "shambler:idle:phrase:0"
+          ]
+        },
+        {
+          "type": "shambler",
+          "state": "idle",
+          "time": 11.453333333333333,
+          "phraseKeys": [
+            "shambler:idle:phrase:3"
+          ]
+        }
+      ],
+      "callMetrics": [
+        {
+          "phrase": "shambler:idle:phrase:2",
+          "peak": 0.06595716625452042,
+          "rms": 0.008961963250042953,
+          "dc": 2.721693551894124e-7,
+          "activeSeconds": 1.928875,
+          "centroidHz": 79.16727006839045,
+          "lowBandFraction": 0.9144784061252349,
+          "chestBandFraction": 0.9817748669357017,
+          "subBassFraction": 0.8405475302018321,
+          "hash": "e4c8ccbb3c7e3a04b8bad0616820ec2ad4c75e0b9862d13ad83a4a145a17c7ed"
+        },
+        {
+          "phrase": "shambler:idle:phrase:1",
+          "peak": 0.0911935418844223,
+          "rms": 0.009915483336844087,
+          "dc": 0.0000021192577206828412,
+          "activeSeconds": 1.5205208333333333,
+          "centroidHz": 64.59985868935131,
+          "lowBandFraction": 0.9549540169174813,
+          "chestBandFraction": 0.9904111198392561,
+          "subBassFraction": 0.8585233152571152,
+          "hash": "20025538e551bc6d6fd7bc2ceee4e16b595953e04d85c725e29041cb1d67e893"
+        },
+        {
+          "phrase": "shambler:idle:phrase:0",
+          "peak": 0.0943579226732254,
+          "rms": 0.014296799422656417,
+          "dc": 4.188548070738066e-7,
+          "activeSeconds": 1.9866666666666666,
+          "centroidHz": 56.11350390073645,
+          "lowBandFraction": 0.9775675846637617,
+          "chestBandFraction": 0.9959759977514946,
+          "subBassFraction": 0.8561404688452,
+          "hash": "b373fbdde379d768357c406113f2ca283403d15f2568e6467ad5c9d92a430ac5"
+        },
+        {
+          "phrase": "shambler:idle:phrase:3",
+          "peak": 0.0930228903889656,
+          "rms": 0.007958983529532898,
+          "dc": 0.00003359220934743512,
+          "activeSeconds": 1.7012083333333334,
+          "centroidHz": 60.53777288639488,
+          "lowBandFraction": 0.9664552806966824,
+          "chestBandFraction": 0.992728650706437,
+          "subBassFraction": 0.8704606650698627,
+          "hash": "5bc24dc88e1376bec834b0022d81d99c72f59aec32160428fb80701fdbe248c9"
+        }
+      ]
+    },
+    {
+      "type": "shambler",
+      "state": "attack",
+      "peak": 0.13972719013690948,
+      "rms": 0.00814945816571611,
+      "dc": 0.000011156154590967988,
+      "activeSeconds": 4.639729166666666,
+      "centroidHz": 109.33014757808624,
+      "lowBandFraction": 0.9190449403395246,
+      "chestBandFraction": 0.9789683476236735,
+      "subBassFraction": 0.7241303504386148,
+      "hash": "3964274df268c8781add79b1cdf81af705285d5a7830744ec6486008bc3be441",
+      "counts": {
+        "shambler": 4,
+        "shambler:attack": 4,
+        "shambler:attack:phrase:2": 1,
+        "shambler:attack:phrase:1": 1,
+        "shambler:attack:phrase:0": 1,
+        "shambler:attack:phrase:3": 1
+      },
+      "choices": [
+        {
+          "type": "shambler",
+          "state": "attack",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "shambler:attack:phrase:2"
+          ]
+        },
+        {
+          "type": "shambler",
+          "state": "attack",
+          "time": 3.8533333333333335,
+          "phraseKeys": [
+            "shambler:attack:phrase:1"
+          ]
+        },
+        {
+          "type": "shambler",
+          "state": "attack",
+          "time": 7.653333333333333,
+          "phraseKeys": [
+            "shambler:attack:phrase:0"
+          ]
+        },
+        {
+          "type": "shambler",
+          "state": "attack",
+          "time": 11.453333333333333,
+          "phraseKeys": [
+            "shambler:attack:phrase:3"
+          ]
+        }
+      ],
+      "callMetrics": [
+        {
+          "phrase": "shambler:attack:phrase:2",
+          "peak": 0.09162423014640808,
+          "rms": 0.00639923708938115,
+          "dc": 0.000011234663065433293,
+          "activeSeconds": 1.1082083333333332,
+          "centroidHz": 180.56503326726266,
+          "lowBandFraction": 0.7810581015772432,
+          "chestBandFraction": 0.9391725740277281,
+          "subBassFraction": 0.5266055976221646,
+          "hash": "e1f0c4a833e36dbeb0a67eeca596a0d01760517f7d54210ea2083e0fd5377176"
+        },
+        {
+          "phrase": "shambler:attack:phrase:1",
+          "peak": 0.1289414018392563,
+          "rms": 0.007739091833818926,
+          "dc": 0.00004545730946539497,
+          "activeSeconds": 1.2625625,
+          "centroidHz": 108.76461544673906,
+          "lowBandFraction": 0.8977696670377809,
+          "chestBandFraction": 0.9738508765566795,
+          "subBassFraction": 0.7648745770461464,
+          "hash": "dc032b80d840d7d0369ee72d716a9c0b8a3e15ed60ab7c077ffbebd043ee749c"
+        },
+        {
+          "phrase": "shambler:attack:phrase:0",
+          "peak": 0.13972719013690948,
+          "rms": 0.011453682397974039,
+          "dc": 0.000016631940836185984,
+          "activeSeconds": 1.1346041666666666,
+          "centroidHz": 94.44884856421193,
+          "lowBandFraction": 0.9595705044382962,
+          "chestBandFraction": 0.9899555124729463,
+          "subBassFraction": 0.7545720419053296,
+          "hash": "d5413003dee2c2246ec5ae1ed0010ad9e11c55e6a7d59e6233278bc83f113b42"
+        },
+        {
+          "phrase": "shambler:attack:phrase:3",
+          "peak": 0.12565778195858002,
+          "rms": 0.006513513733572333,
+          "dc": 0.000001817215471544092,
+          "activeSeconds": 1.1343541666666668,
+          "centroidHz": 97.45960885166699,
+          "lowBandFraction": 0.9344680518112218,
+          "chestBandFraction": 0.9846389013152262,
+          "subBassFraction": 0.7401225844319971,
+          "hash": "8f08367c866c84309c18e816783322b79ddddcce643f53ec7cd37dd555a246e8"
+        }
+      ]
+    },
+    {
+      "type": "feral",
+      "state": "idle",
+      "peak": 0.06927308440208435,
+      "rms": 0.0036498226066979497,
+      "dc": 0.000007533572388489821,
+      "activeSeconds": 3.7134583333333335,
+      "centroidHz": 318.46069242773115,
+      "lowBandFraction": 0.5849945040750796,
+      "chestBandFraction": 0.8020822360311743,
+      "subBassFraction": 0.13015675095535326,
+      "hash": "521f1819b82d046baaaeed8d2a75001669c6f42d971b8d1bfd89d798a73fff2d",
+      "counts": {
+        "feral": 4,
+        "feral:idle": 4,
+        "feral:idle:phrase:2": 1,
+        "feral:idle:phrase:1": 1,
+        "feral:idle:phrase:0": 1,
+        "feral:idle:phrase:3": 1
+      },
+      "choices": [
+        {
+          "type": "feral",
+          "state": "idle",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "feral:idle:phrase:2"
+          ]
+        },
+        {
+          "type": "feral",
+          "state": "idle",
+          "time": 3.8533333333333335,
+          "phraseKeys": [
+            "feral:idle:phrase:1"
+          ]
+        },
+        {
+          "type": "feral",
+          "state": "idle",
+          "time": 7.653333333333333,
+          "phraseKeys": [
+            "feral:idle:phrase:0"
+          ]
+        },
+        {
+          "type": "feral",
+          "state": "idle",
+          "time": 11.453333333333333,
+          "phraseKeys": [
+            "feral:idle:phrase:3"
+          ]
+        }
+      ],
+      "callMetrics": [
+        {
+          "phrase": "feral:idle:phrase:2",
+          "peak": 0.06927308440208435,
+          "rms": 0.004745770919616264,
+          "dc": 0.0000014853118545058324,
+          "activeSeconds": 1.0866041666666666,
+          "centroidHz": 305.06616146269664,
+          "lowBandFraction": 0.5772014691772662,
+          "chestBandFraction": 0.8084439540213284,
+          "subBassFraction": 0.05505148384015951,
+          "hash": "5ab3a7e02cf8039ee4e2695c00b15217be1ac2ca792c9bd612978ca91cb8777f"
+        },
+        {
+          "phrase": "feral:idle:phrase:1",
+          "peak": 0.06673943996429443,
+          "rms": 0.0038539127006156715,
+          "dc": 0.000012547505540263968,
+          "activeSeconds": 1.0342083333333334,
+          "centroidHz": 310.2040518884295,
+          "lowBandFraction": 0.5642950833983318,
+          "chestBandFraction": 0.788716387146209,
+          "subBassFraction": 0.05924686818898236,
+          "hash": "2c63a60ae82e31289f741cfb921ae2419d9d878e47d7336dd2121a24174d24a0"
+        },
+        {
+          "phrase": "feral:idle:phrase:0",
+          "peak": 0.06536969542503357,
+          "rms": 0.0025187415189397286,
+          "dc": 0.000009336653197257156,
+          "activeSeconds": 0.4451041666666667,
+          "centroidHz": 513.9416719735103,
+          "lowBandFraction": 0.4721081578136613,
+          "chestBandFraction": 0.6938183721538944,
+          "subBassFraction": 0.2792162239899128,
+          "hash": "e80d8b46472b86b7d2a73a3d87301805f7f9bf8d1a5e825b3da0af7fc9e1b34d"
+        },
+        {
+          "phrase": "feral:idle:phrase:3",
+          "peak": 0.06434287130832672,
+          "rms": 0.0032610198687825177,
+          "dc": 0.000007034337416191176,
+          "activeSeconds": 1.1475416666666667,
+          "centroidHz": 266.54196697812023,
+          "lowBandFraction": 0.6387277268025726,
+          "chestBandFraction": 0.8558048126498384,
+          "subBassFraction": 0.21986898364600843,
+          "hash": "491c74926bf983c415983df4df9cf21bae8caa3f420e2745bb5fac0a630af4d6"
+        }
+      ]
+    },
+    {
+      "type": "feral",
+      "state": "attack",
+      "peak": 0.15293538570404053,
+      "rms": 0.01094808445513087,
+      "dc": 0.0000053678286081413276,
+      "activeSeconds": 5.398604166666667,
+      "centroidHz": 466.0920420251784,
+      "lowBandFraction": 0.38153262583837055,
+      "chestBandFraction": 0.667744971177479,
+      "subBassFraction": 0.0012949918195981373,
+      "hash": "0cb2f3dd2d1a97c1203e2f79deaa291d0c3575a7c5e95fd6dfff5ff3f8d3ee64",
+      "counts": {
+        "feral": 4,
+        "feral:attack": 4,
+        "feral:attack:phrase:2": 1,
+        "feral:attack:phrase:1": 1,
+        "feral:attack:phrase:0": 1,
+        "feral:attack:phrase:3": 1
+      },
+      "choices": [
+        {
+          "type": "feral",
+          "state": "attack",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "feral:attack:phrase:2"
+          ]
+        },
+        {
+          "type": "feral",
+          "state": "attack",
+          "time": 3.8533333333333335,
+          "phraseKeys": [
+            "feral:attack:phrase:1"
+          ]
+        },
+        {
+          "type": "feral",
+          "state": "attack",
+          "time": 7.653333333333333,
+          "phraseKeys": [
+            "feral:attack:phrase:0"
+          ]
+        },
+        {
+          "type": "feral",
+          "state": "attack",
+          "time": 11.453333333333333,
+          "phraseKeys": [
+            "feral:attack:phrase:3"
+          ]
+        }
+      ],
+      "callMetrics": [
+        {
+          "phrase": "feral:attack:phrase:2",
+          "peak": 0.14736220240592957,
+          "rms": 0.013286392438217925,
+          "dc": 4.919612656779653e-7,
+          "activeSeconds": 1.4508125,
+          "centroidHz": 473.4483869491576,
+          "lowBandFraction": 0.46529588341080835,
+          "chestBandFraction": 0.5855237401981165,
+          "subBassFraction": 0.0001498437856014657,
+          "hash": "e9524a5f78b096fe4f63090a7bb4fc814a33c98525052092298c09c912422d68"
+        },
+        {
+          "phrase": "feral:attack:phrase:1",
+          "peak": 0.15293538570404053,
+          "rms": 0.011398549195422892,
+          "dc": 0.000003308524362103891,
+          "activeSeconds": 1.385875,
+          "centroidHz": 471.8797600552031,
+          "lowBandFraction": 0.324463151068474,
+          "chestBandFraction": 0.7102949553730299,
+          "subBassFraction": 0.00029116149972139324,
+          "hash": "45d2328592679540c36263047621d124044c718b76fc3e066c274ff138bf2e2b"
+        },
+        {
+          "phrase": "feral:attack:phrase:0",
+          "peak": 0.149881973862648,
+          "rms": 0.01030351142575187,
+          "dc": 0.000005167518477067017,
+          "activeSeconds": 1.082,
+          "centroidHz": 500.0839436831406,
+          "lowBandFraction": 0.2590810742988422,
+          "chestBandFraction": 0.6533222644456285,
+          "subBassFraction": 0.00036607391135049975,
+          "hash": "88bb5fffe8f1847d0c247abd38793c08ff4a4ad8de08e1908d00f30851571d1c"
+        },
+        {
+          "phrase": "feral:attack:phrase:3",
+          "peak": 0.1458328515291214,
+          "rms": 0.009010700877154835,
+          "dc": 0.0000185793719012448,
+          "activeSeconds": 1.4799166666666668,
+          "centroidHz": 405.35957388553413,
+          "lowBandFraction": 0.43156897660180893,
+          "chestBandFraction": 0.7873569279245598,
+          "subBassFraction": 0.004439322142971081,
+          "hash": "832c8ca7135dcfbe252f0d3ad1937277f08380ac6fd6409e19083e4cff996881"
+        }
+      ]
+    },
+    {
+      "type": "leaper",
+      "state": "idle",
+      "peak": 0.01536928303539753,
+      "rms": 0.0007798995663313404,
+      "dc": 2.429701558986814e-7,
+      "activeSeconds": 1.7262291666666667,
+      "centroidHz": 821.6850814089373,
+      "lowBandFraction": 0.000813279542572741,
+      "chestBandFraction": 0.8116695305286414,
+      "subBassFraction": 0.00012023046953358266,
+      "hash": "2f28031e6f8e130deb25843ab121602fd237583e19f90bbfcc297e3853f3f695",
+      "counts": {
+        "leaper": 4,
+        "leaper:idle": 4,
+        "leaper:idle:phrase:2": 1,
+        "leaper:idle:phrase:1": 1,
+        "leaper:idle:phrase:0": 1,
+        "leaper:idle:phrase:3": 1
+      },
+      "choices": [
+        {
+          "type": "leaper",
+          "state": "idle",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "leaper:idle:phrase:2"
+          ]
+        },
+        {
+          "type": "leaper",
+          "state": "idle",
+          "time": 3.8533333333333335,
+          "phraseKeys": [
+            "leaper:idle:phrase:1"
+          ]
+        },
+        {
+          "type": "leaper",
+          "state": "idle",
+          "time": 7.653333333333333,
+          "phraseKeys": [
+            "leaper:idle:phrase:0"
+          ]
+        },
+        {
+          "type": "leaper",
+          "state": "idle",
+          "time": 11.453333333333333,
+          "phraseKeys": [
+            "leaper:idle:phrase:3"
+          ]
+        }
+      ],
+      "callMetrics": [
+        {
+          "phrase": "leaper:idle:phrase:2",
+          "peak": 0.006739210803061724,
+          "rms": 0.0004166036031862396,
+          "dc": 5.029238191906538e-7,
+          "activeSeconds": 0.3395,
+          "centroidHz": 2341.075885648428,
+          "lowBandFraction": 0.004917373854253916,
+          "chestBandFraction": 0.3122419663030883,
+          "subBassFraction": 0.00046976426828786746,
+          "hash": "efc82a4b07916931b6e1f7dc20679dc0d3cd17fd334449f5258c5db248ed2b67"
+        },
+        {
+          "phrase": "leaper:idle:phrase:1",
+          "peak": 0.01152623351663351,
+          "rms": 0.0006165146601442157,
+          "dc": 2.7839078799696634e-7,
+          "activeSeconds": 0.44533333333333336,
+          "centroidHz": 1154.9244721373223,
+          "lowBandFraction": 0.0010277865443152215,
+          "chestBandFraction": 0.646561464470466,
+          "subBassFraction": 0.0002751234799439087,
+          "hash": "fb27933eb0f9d5dbaf37c91c48b083c01241ba2e9156fd74eea148e28283570d"
+        },
+        {
+          "phrase": "leaper:idle:phrase:0",
+          "peak": 0.01536928303539753,
+          "rms": 0.0013549375251586749,
+          "dc": 7.978563652333131e-8,
+          "activeSeconds": 0.63475,
+          "centroidHz": 499.7480189865362,
+          "lowBandFraction": 0.00029473706055560507,
+          "chestBandFraction": 0.9403878757982045,
+          "subBassFraction": 0.00006244299782753654,
+          "hash": "df2c39b85298ab95ecf601ebc552099fa689dfe5a56e72a074844b47d410272c"
+        },
+        {
+          "phrase": "leaper:idle:phrase:3",
+          "peak": 0.007234804332256317,
+          "rms": 0.0004352145143916731,
+          "dc": 1.4600263795773668e-7,
+          "activeSeconds": 0.30664583333333334,
+          "centroidHz": 2024.9189819565638,
+          "lowBandFraction": 0.0008481265284355697,
+          "chestBandFraction": 0.26991281784209575,
+          "subBassFraction": 0.00024450855912375413,
+          "hash": "1670002b1f0aa0228eb1d5d78fd70bb9191861ce33cf635c59d151c556f160a4"
+        }
+      ]
+    },
+    {
+      "type": "leaper",
+      "state": "attack",
+      "peak": 0.05077242851257324,
+      "rms": 0.0014687270536991985,
+      "dc": 1.3059327818618415e-7,
+      "activeSeconds": 2.197395833333333,
+      "centroidHz": 970.3519204749289,
+      "lowBandFraction": 0.00023719544954708426,
+      "chestBandFraction": 0.005648086572720347,
+      "subBassFraction": 0.00003896238521240338,
+      "hash": "7aacf10c723acef6b97c39df43805fb66e8cd1ffad182887c8e5094809cc810b",
+      "counts": {
+        "leaper": 4,
+        "leaper:attack": 4,
+        "leaper:attack:phrase:2": 1,
+        "leaper:attack:phrase:1": 1,
+        "leaper:attack:phrase:0": 1,
+        "leaper:attack:phrase:3": 1
+      },
+      "choices": [
+        {
+          "type": "leaper",
+          "state": "attack",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "leaper:attack:phrase:2"
+          ]
+        },
+        {
+          "type": "leaper",
+          "state": "attack",
+          "time": 3.8533333333333335,
+          "phraseKeys": [
+            "leaper:attack:phrase:1"
+          ]
+        },
+        {
+          "type": "leaper",
+          "state": "attack",
+          "time": 7.653333333333333,
+          "phraseKeys": [
+            "leaper:attack:phrase:0"
+          ]
+        },
+        {
+          "type": "leaper",
+          "state": "attack",
+          "time": 11.453333333333333,
+          "phraseKeys": [
+            "leaper:attack:phrase:3"
+          ]
+        }
+      ],
+      "callMetrics": [
+        {
+          "phrase": "leaper:attack:phrase:2",
+          "peak": 0.016695737838745117,
+          "rms": 0.0010007521625550616,
+          "dc": 5.153145541369403e-7,
+          "activeSeconds": 0.458125,
+          "centroidHz": 1685.5333054647542,
+          "lowBandFraction": 0.0009224747073179135,
+          "chestBandFraction": 0.00238040356822684,
+          "subBassFraction": 0.00008752651558740966,
+          "hash": "8c294ab43d8721cd7c153b5928aba0d289c05308974b99c86999be4085fc0c25"
+        },
+        {
+          "phrase": "leaper:attack:phrase:1",
+          "peak": 0.05077242851257324,
+          "rms": 0.001690914622315973,
+          "dc": 8.655288992406225e-9,
+          "activeSeconds": 0.6369583333333333,
+          "centroidHz": 926.8122523638792,
+          "lowBandFraction": 0.0001765029368830724,
+          "chestBandFraction": 0.010364536896575679,
+          "subBassFraction": 0.00004683081685005515,
+          "hash": "a2dbb618cfed87174bda0a7a2034f6fb6d88bcf933b73e0644593251d069d95e"
+        },
+        {
+          "phrase": "leaper:attack:phrase:0",
+          "peak": 0.032878100872039795,
+          "rms": 0.0019358452376146533,
+          "dc": 2.912304698250989e-8,
+          "activeSeconds": 0.6488333333333334,
+          "centroidHz": 1011.46167519923,
+          "lowBandFraction": 0.00023188102345277818,
+          "chestBandFraction": 0.0012717204121246353,
+          "subBassFraction": 0.00005107652350225845,
+          "hash": "6e2d75cfc1d642da43b7cc3befa93b5321c332e9930fb3c9a42e4779c3b0588d"
+        },
+        {
+          "phrase": "leaper:attack:phrase:3",
+          "peak": 0.03134185075759888,
+          "rms": 0.0011506694242919445,
+          "dc": 6.327112573986772e-8,
+          "activeSeconds": 0.45347916666666666,
+          "centroidHz": 1487.3751154900485,
+          "lowBandFraction": 0.0002615313209635078,
+          "chestBandFraction": 0.002704356469718596,
+          "subBassFraction": 0.00007436384419586142,
+          "hash": "8aab82b2cb53be1b82392ad7f82dae6d86549d76ffe96abbd86ddbbd1d3b32d3"
+        }
+      ]
+    },
+    {
+      "type": "drowned",
+      "state": "idle",
+      "peak": 0.03206149861216545,
+      "rms": 0.0023394966328370813,
+      "dc": 6.296513892406544e-7,
+      "activeSeconds": 4.606375,
+      "centroidHz": 419.87426168384513,
+      "lowBandFraction": 0.08040738688608347,
+      "chestBandFraction": 0.8430627832763351,
+      "subBassFraction": 0.00801801363238468,
+      "hash": "61836ee72fa1187aa8b9ad97a18d8a0885e299a95e3f3cb7c314579137733423",
+      "counts": {
+        "drowned": 4,
+        "drowned:idle": 4,
+        "drowned:idle:phrase:2": 1,
+        "drowned:idle:phrase:1": 1,
+        "drowned:idle:phrase:0": 1,
+        "drowned:idle:phrase:3": 1
+      },
+      "choices": [
+        {
+          "type": "drowned",
+          "state": "idle",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "drowned:idle:phrase:2"
+          ]
+        },
+        {
+          "type": "drowned",
+          "state": "idle",
+          "time": 3.8533333333333335,
+          "phraseKeys": [
+            "drowned:idle:phrase:1"
+          ]
+        },
+        {
+          "type": "drowned",
+          "state": "idle",
+          "time": 7.653333333333333,
+          "phraseKeys": [
+            "drowned:idle:phrase:0"
+          ]
+        },
+        {
+          "type": "drowned",
+          "state": "idle",
+          "time": 11.453333333333333,
+          "phraseKeys": [
+            "drowned:idle:phrase:3"
+          ]
+        }
+      ],
+      "callMetrics": [
+        {
+          "phrase": "drowned:idle:phrase:2",
+          "peak": 0.02786983922123909,
+          "rms": 0.002725055209612855,
+          "dc": 4.918876777843952e-7,
+          "activeSeconds": 1.2626458333333332,
+          "centroidHz": 448.53686193668017,
+          "lowBandFraction": 0.05455908572064204,
+          "chestBandFraction": 0.7990941787107922,
+          "subBassFraction": 0.004174168803661727,
+          "hash": "80a147bf3773401ff7ee0e2bf1b7f78f61265913c9535c12d6f5719eaa5a5de4"
+        },
+        {
+          "phrase": "drowned:idle:phrase:1",
+          "peak": 0.03206149861216545,
+          "rms": 0.0023140887188857575,
+          "dc": 7.041300775752292e-7,
+          "activeSeconds": 1.0360833333333332,
+          "centroidHz": 410.8913293123799,
+          "lowBandFraction": 0.08675926557728579,
+          "chestBandFraction": 0.8278385483935256,
+          "subBassFraction": 0.005860415227921557,
+          "hash": "cd261b6a5293ceb864d509e304cd27fc9d8aec6cad7167a5026d49cb2662b258"
+        },
+        {
+          "phrase": "drowned:idle:phrase:0",
+          "peak": 0.025388207286596298,
+          "rms": 0.0027444806347527487,
+          "dc": 8.892890400678038e-8,
+          "activeSeconds": 1.3505416666666668,
+          "centroidHz": 422.52610931385425,
+          "lowBandFraction": 0.07912458325799326,
+          "chestBandFraction": 0.8464347074863755,
+          "subBassFraction": 0.0066508286941574825,
+          "hash": "acbacf281cf9676f2332e5d75153cf3f32682d42e907fa5d1eb162611072953e"
+        },
+        {
+          "phrase": "drowned:idle:phrase:3",
+          "peak": 0.02726100943982601,
+          "rms": 0.0016122915620755535,
+          "dc": 0.000001091106463053857,
+          "activeSeconds": 0.9571041666666666,
+          "centroidHz": 410.44401114282044,
+          "lowBandFraction": 0.121678693259487,
+          "chestBandFraction": 0.8192629215146047,
+          "subBassFraction": 0.02192502229803512,
+          "hash": "c9e4c00d28fd86cb9f92e5f829b1a73ea9f6784ef4b14495db326f42d4f3f151"
+        }
+      ]
+    },
+    {
+      "type": "drowned",
+      "state": "attack",
+      "peak": 0.049086593091487885,
+      "rms": 0.002002302022397848,
+      "dc": 5.741082048853988e-7,
+      "activeSeconds": 3.094104166666667,
+      "centroidHz": 559.8890911054488,
+      "lowBandFraction": 0.04738726413627704,
+      "chestBandFraction": 0.46737908741157486,
+      "subBassFraction": 0.00023954966160901178,
+      "hash": "75f88806ca0a157e1d67f086ac349d7d9b7a0c0f398b8c8d901f988db46a45dd",
+      "counts": {
+        "drowned": 4,
+        "drowned:attack": 4,
+        "drowned:attack:phrase:2": 1,
+        "drowned:attack:phrase:1": 1,
+        "drowned:attack:phrase:0": 1,
+        "drowned:attack:phrase:3": 1
+      },
+      "choices": [
+        {
+          "type": "drowned",
+          "state": "attack",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "drowned:attack:phrase:2"
+          ]
+        },
+        {
+          "type": "drowned",
+          "state": "attack",
+          "time": 3.8533333333333335,
+          "phraseKeys": [
+            "drowned:attack:phrase:1"
+          ]
+        },
+        {
+          "type": "drowned",
+          "state": "attack",
+          "time": 7.653333333333333,
+          "phraseKeys": [
+            "drowned:attack:phrase:0"
+          ]
+        },
+        {
+          "type": "drowned",
+          "state": "attack",
+          "time": 11.453333333333333,
+          "phraseKeys": [
+            "drowned:attack:phrase:3"
+          ]
+        }
+      ],
+      "callMetrics": [
+        {
+          "phrase": "drowned:attack:phrase:2",
+          "peak": 0.026253679767251015,
+          "rms": 0.0019452962155284497,
+          "dc": 6.184476847550132e-7,
+          "activeSeconds": 0.7747083333333333,
+          "centroidHz": 553.7522696509196,
+          "lowBandFraction": 0.0636483721724836,
+          "chestBandFraction": 0.4830204888518646,
+          "subBassFraction": 0.0001774070338755476,
+          "hash": "82d0acc116ec0da277bb899a99fc5b215321faf7beaca379c231174621053a09"
+        },
+        {
+          "phrase": "drowned:attack:phrase:1",
+          "peak": 0.04163527116179466,
+          "rms": 0.0021007944532030064,
+          "dc": 0.000002003131771840623,
+          "activeSeconds": 0.754625,
+          "centroidHz": 608.5426797147771,
+          "lowBandFraction": 0.046624246745123714,
+          "chestBandFraction": 0.4327215338805099,
+          "subBassFraction": 0.0005422661530407021,
+          "hash": "9e1b4279502242b57163fb8b2de26d2e66ae62bcee24a6f353704adb7ecf3310"
+        },
+        {
+          "phrase": "drowned:attack:phrase:0",
+          "peak": 0.03315768018364906,
+          "rms": 0.002163278919450668,
+          "dc": 6.494145080040253e-7,
+          "activeSeconds": 0.7767083333333333,
+          "centroidHz": 585.5788053905775,
+          "lowBandFraction": 0.03549407646025492,
+          "chestBandFraction": 0.3723303313355493,
+          "subBassFraction": 0.00016949588965956442,
+          "hash": "b1d52aeb3219c0e5e93225dc5afc9d5daad2dfea4f3fad75ba3a77db92bdc144"
+        },
+        {
+          "phrase": "drowned:attack:phrase:3",
+          "peak": 0.049086593091487885,
+          "rms": 0.0018471112147393947,
+          "dc": 4.048187804484719e-7,
+          "activeSeconds": 0.7880625,
+          "centroidHz": 594.2190166560321,
+          "lowBandFraction": 0.03563213130098208,
+          "chestBandFraction": 0.3604580507185263,
+          "subBassFraction": 0.00017671815084216162,
+          "hash": "bf3dcf36183d9e1727c68fdf997e5442222c409dcddb585116c47b509437f041"
+        }
+      ]
+    },
+    {
+      "type": "military",
+      "state": "idle",
+      "peak": 0.09868433326482773,
+      "rms": 0.004264185842912143,
+      "dc": 0.0000021665300429219118,
+      "activeSeconds": 4.347729166666666,
+      "centroidHz": 238.96281719884922,
+      "lowBandFraction": 0.668754494778895,
+      "chestBandFraction": 0.8782785661948491,
+      "subBassFraction": 0.4870240485454629,
+      "hash": "1e931fee03b1da15f20e95114605f176ccbdc11bc4a5356448956e6b8f1cd1c7",
+      "counts": {
+        "military": 4,
+        "military:idle": 4,
+        "military:idle:phrase:2": 1,
+        "military:idle:phrase:1": 1,
+        "military:idle:phrase:0": 1,
+        "military:idle:phrase:3": 1
+      },
+      "choices": [
+        {
+          "type": "military",
+          "state": "idle",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "military:idle:phrase:2"
+          ]
+        },
+        {
+          "type": "military",
+          "state": "idle",
+          "time": 3.8533333333333335,
+          "phraseKeys": [
+            "military:idle:phrase:1"
+          ]
+        },
+        {
+          "type": "military",
+          "state": "idle",
+          "time": 7.653333333333333,
+          "phraseKeys": [
+            "military:idle:phrase:0"
+          ]
+        },
+        {
+          "type": "military",
+          "state": "idle",
+          "time": 11.453333333333333,
+          "phraseKeys": [
+            "military:idle:phrase:3"
+          ]
+        }
+      ],
+      "callMetrics": [
+        {
+          "phrase": "military:idle:phrase:2",
+          "peak": 0.08582751452922821,
+          "rms": 0.003973846500553853,
+          "dc": 0.000012244030090955516,
+          "activeSeconds": 1.135,
+          "centroidHz": 232.78257153364194,
+          "lowBandFraction": 0.6883672554608894,
+          "chestBandFraction": 0.8781455996260847,
+          "subBassFraction": 0.4845677462481308,
+          "hash": "07480298ea740d749ed7e5d2084a95bf2f0cdcd338e65e1b72e4cccb12def5f3"
+        },
+        {
+          "phrase": "military:idle:phrase:1",
+          "peak": 0.09868433326482773,
+          "rms": 0.005220299350970327,
+          "dc": 0.000017255725001226236,
+          "activeSeconds": 1.05525,
+          "centroidHz": 263.6859973822494,
+          "lowBandFraction": 0.5967922365625443,
+          "chestBandFraction": 0.8627927664523142,
+          "subBassFraction": 0.4521092730290675,
+          "hash": "84a040a48415c4bcd0d3d3d84c1a88aed3e9622b7ff330fb586ff180ad4e60a0"
+        },
+        {
+          "phrase": "military:idle:phrase:0",
+          "peak": 0.0791923776268959,
+          "rms": 0.004516867404607071,
+          "dc": 0.00000724073752634157,
+          "activeSeconds": 1.089125,
+          "centroidHz": 220.38951658335966,
+          "lowBandFraction": 0.712969540792783,
+          "chestBandFraction": 0.8881211280542342,
+          "subBassFraction": 0.5683661881598749,
+          "hash": "b803dd974725cb27a2351c0e6b956bb313990cf95059533b39cb0d2e3f33cebd"
+        },
+        {
+          "phrase": "military:idle:phrase:3",
+          "peak": 0.08205694705247879,
+          "rms": 0.003417247597351068,
+          "dc": 0.000008761844316237715,
+          "activeSeconds": 1.0683541666666667,
+          "centroidHz": 246.66305263529034,
+          "lowBandFraction": 0.6762776722025727,
+          "chestBandFraction": 0.8784237995303155,
+          "subBassFraction": 0.5149498010633613,
+          "hash": "2e591fb49d4d1589fc20d790ba827dbd230468e6527e0ba98e25ef2547489e78"
+        }
+      ]
+    },
+    {
+      "type": "military",
+      "state": "attack",
+      "peak": 0.15744830667972565,
+      "rms": 0.00914137987957192,
+      "dc": 0.0000039081653666671274,
+      "activeSeconds": 5.28675,
+      "centroidHz": 327.39099548864334,
+      "lowBandFraction": 0.5335655801996525,
+      "chestBandFraction": 0.814991839571749,
+      "subBassFraction": 0.0031297937776299774,
+      "hash": "d68648ac196a94fea6bc915b371065048f42047cc6278146025166624194de50",
+      "counts": {
+        "military": 4,
+        "military:attack": 4,
+        "military:attack:phrase:2": 1,
+        "military:attack:phrase:1": 1,
+        "military:attack:phrase:0": 1,
+        "military:attack:phrase:3": 1
+      },
+      "choices": [
+        {
+          "type": "military",
+          "state": "attack",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "military:attack:phrase:2"
+          ]
+        },
+        {
+          "type": "military",
+          "state": "attack",
+          "time": 3.8533333333333335,
+          "phraseKeys": [
+            "military:attack:phrase:1"
+          ]
+        },
+        {
+          "type": "military",
+          "state": "attack",
+          "time": 7.653333333333333,
+          "phraseKeys": [
+            "military:attack:phrase:0"
+          ]
+        },
+        {
+          "type": "military",
+          "state": "attack",
+          "time": 11.453333333333333,
+          "phraseKeys": [
+            "military:attack:phrase:3"
+          ]
+        }
+      ],
+      "callMetrics": [
+        {
+          "phrase": "military:attack:phrase:2",
+          "peak": 0.13826054334640503,
+          "rms": 0.008972499250833784,
+          "dc": 0.00002076038678786531,
+          "activeSeconds": 1.4300625,
+          "centroidHz": 303.5659145685239,
+          "lowBandFraction": 0.5609776074833441,
+          "chestBandFraction": 0.8251070947576211,
+          "subBassFraction": 0.006919942150187568,
+          "hash": "613ccc45273da84e819e235ff7e4aa7cd7e1ec6a421cd0901a7a5f8f824ea798"
+        },
+        {
+          "phrase": "military:attack:phrase:1",
+          "peak": 0.15744830667972565,
+          "rms": 0.010768818192352918,
+          "dc": 0.0000015544219664194454,
+          "activeSeconds": 1.2106875,
+          "centroidHz": 332.50277325911475,
+          "lowBandFraction": 0.540118333482323,
+          "chestBandFraction": 0.8056423867949528,
+          "subBassFraction": 0.000339597262468883,
+          "hash": "3c274531142e6bf15ebc3c89fbc362d1c08ca7db61bc1ec8bd9593fecb8461a0"
+        },
+        {
+          "phrase": "military:attack:phrase:0",
+          "peak": 0.13422517478466034,
+          "rms": 0.009973894004433648,
+          "dc": 0.000012442203661406496,
+          "activeSeconds": 1.3443958333333332,
+          "centroidHz": 327.20523566373834,
+          "lowBandFraction": 0.5317755200900439,
+          "chestBandFraction": 0.8177181671035663,
+          "subBassFraction": 0.0010711956669516949,
+          "hash": "1dad94de0af56ada6b3fad2971de63cc48a3ed04969356e906d5ca6ba77d9f07"
+        },
+        {
+          "phrase": "military:attack:phrase:3",
+          "peak": 0.14331558346748352,
+          "rms": 0.007097215790606887,
+          "dc": 0.000011052505617866455,
+          "activeSeconds": 1.3016041666666667,
+          "centroidHz": 368.43613946803083,
+          "lowBandFraction": 0.4490168160233629,
+          "chestBandFraction": 0.7784822936433686,
+          "subBassFraction": 0.0010652705723229142,
+          "hash": "6218e1ab9793fb6a56810980b93da4302cc58ae3247b60a993a3dd0da6563701"
+        }
+      ]
+    },
+    {
+      "type": "brute",
+      "state": "idle",
+      "peak": 0.1678301841020584,
+      "rms": 0.021340312962801214,
+      "dc": 0.000004274362844348211,
+      "activeSeconds": 9.442833333333333,
+      "centroidHz": 57.329928162483526,
+      "lowBandFraction": 0.9662940673113483,
+      "chestBandFraction": 0.9932148355266539,
+      "subBassFraction": 0.8656194009096706,
+      "hash": "1d0104d5d3e3b2548b4a527ed1cfba6ff7f5998255724b8a0ced1253776afe2e",
+      "counts": {
+        "brute": 4,
+        "brute:idle": 4,
+        "brute:idle:phrase:2": 1,
+        "brute:idle:phrase:1": 1,
+        "brute:idle:phrase:0": 1,
+        "brute:idle:phrase:3": 1
+      },
+      "choices": [
+        {
+          "type": "brute",
+          "state": "idle",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "brute:idle:phrase:2"
+          ]
+        },
+        {
+          "type": "brute",
+          "state": "idle",
+          "time": 3.8533333333333335,
+          "phraseKeys": [
+            "brute:idle:phrase:1"
+          ]
+        },
+        {
+          "type": "brute",
+          "state": "idle",
+          "time": 7.653333333333333,
+          "phraseKeys": [
+            "brute:idle:phrase:0"
+          ]
+        },
+        {
+          "type": "brute",
+          "state": "idle",
+          "time": 11.453333333333333,
+          "phraseKeys": [
+            "brute:idle:phrase:3"
+          ]
+        }
+      ],
+      "callMetrics": [
+        {
+          "phrase": "brute:idle:phrase:2",
+          "peak": 0.1189025416970253,
+          "rms": 0.023319834139976754,
+          "dc": 0.00003159562764208177,
+          "activeSeconds": 2.5515208333333335,
+          "centroidHz": 63.856066137087375,
+          "lowBandFraction": 0.958321742220487,
+          "chestBandFraction": 0.9918095498493248,
+          "subBassFraction": 0.8359625309118968,
+          "hash": "7c0e44e53ace86c6c5606a3dd52e61ce5d576bd91aa98d577c2f75cd59f5684a"
+        },
+        {
+          "phrase": "brute:idle:phrase:1",
+          "peak": 0.1678301841020584,
+          "rms": 0.02268540452348016,
+          "dc": 0.00003560657728334113,
+          "activeSeconds": 2.3394375,
+          "centroidHz": 55.01950939437488,
+          "lowBandFraction": 0.9708282649137231,
+          "chestBandFraction": 0.9933056578549684,
+          "subBassFraction": 0.8850401956833287,
+          "hash": "70ec437ee5838a61cdd12b94940cc1fa1f9c762a87cd9b5f2661d84bc5dc2a0d"
+        },
+        {
+          "phrase": "brute:idle:phrase:0",
+          "peak": 0.13166430592536926,
+          "rms": 0.0188916543852152,
+          "dc": 0.0000291413368139516,
+          "activeSeconds": 2.166125,
+          "centroidHz": 59.62764987647309,
+          "lowBandFraction": 0.9458687719962137,
+          "chestBandFraction": 0.9898326366090009,
+          "subBassFraction": 0.8920199124872282,
+          "hash": "2a7b26c52039ab1f3840dff4ed2cabaf198ef890b67aee83f78ff7164d200189"
+        },
+        {
+          "phrase": "brute:idle:phrase:3",
+          "peak": 0.16681289672851562,
+          "rms": 0.02057287738829155,
+          "dc": 0.00004263374222364728,
+          "activeSeconds": 2.38575,
+          "centroidHz": 51.811927194953896,
+          "lowBandFraction": 0.98301001709035,
+          "chestBandFraction": 0.9966355852982092,
+          "subBassFraction": 0.860242153053911,
+          "hash": "16442c02f00c5f2c1c6cd9194fa9dfd6658f99c19e1da80902d94859944c33a1"
+        }
+      ]
+    },
+    {
+      "type": "brute",
+      "state": "attack",
+      "peak": 0.2494298666715622,
+      "rms": 0.02066901960236351,
+      "dc": 0.000012381560151119381,
+      "activeSeconds": 6.389270833333334,
+      "centroidHz": 92.61381667180761,
+      "lowBandFraction": 0.9247022767508247,
+      "chestBandFraction": 0.9796972745432172,
+      "subBassFraction": 0.8093144002013267,
+      "hash": "41debf78f8b812d3d95f1e94ea9fb18e458d11ce6629af44a2c1c5fe25531966",
+      "counts": {
+        "brute": 4,
+        "brute:attack": 4,
+        "brute:attack:phrase:2": 1,
+        "brute:attack:phrase:1": 1,
+        "brute:attack:phrase:0": 1,
+        "brute:attack:phrase:3": 1
+      },
+      "choices": [
+        {
+          "type": "brute",
+          "state": "attack",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "brute:attack:phrase:2"
+          ]
+        },
+        {
+          "type": "brute",
+          "state": "attack",
+          "time": 3.8533333333333335,
+          "phraseKeys": [
+            "brute:attack:phrase:1"
+          ]
+        },
+        {
+          "type": "brute",
+          "state": "attack",
+          "time": 7.653333333333333,
+          "phraseKeys": [
+            "brute:attack:phrase:0"
+          ]
+        },
+        {
+          "type": "brute",
+          "state": "attack",
+          "time": 11.453333333333333,
+          "phraseKeys": [
+            "brute:attack:phrase:3"
+          ]
+        }
+      ],
+      "callMetrics": [
+        {
+          "phrase": "brute:attack:phrase:2",
+          "peak": 0.1822197139263153,
+          "rms": 0.022823754266750287,
+          "dc": 0.000009755047713719612,
+          "activeSeconds": 1.6127083333333334,
+          "centroidHz": 106.46204446730783,
+          "lowBandFraction": 0.900940773385588,
+          "chestBandFraction": 0.9750066354504261,
+          "subBassFraction": 0.7980109892282018,
+          "hash": "b4a0f6efd7beb09039e796fe1d25c33283b996a624452a63f60f0651d781575b"
+        },
+        {
+          "phrase": "brute:attack:phrase:1",
+          "peak": 0.2494298666715622,
+          "rms": 0.022153130313485817,
+          "dc": 0.00007879568609774045,
+          "activeSeconds": 1.5873125,
+          "centroidHz": 81.65439913744306,
+          "lowBandFraction": 0.9419711161944153,
+          "chestBandFraction": 0.9802384878173742,
+          "subBassFraction": 0.8647091139998947,
+          "hash": "144957bc10a13d5021bb9fea2226acec83be5d4ba1d51a0d0769692e46327d4d"
+        },
+        {
+          "phrase": "brute:attack:phrase:0",
+          "peak": 0.222473606467247,
+          "rms": 0.01812602943600632,
+          "dc": 0.00009620736519297736,
+          "activeSeconds": 1.3666458333333333,
+          "centroidHz": 107.72232666120931,
+          "lowBandFraction": 0.8799192647363425,
+          "chestBandFraction": 0.970073864953366,
+          "subBassFraction": 0.7944014766492347,
+          "hash": "d39a0d445799ee5ab8c6c3aeaed069460b56f950b941c4772665f98a4f636469"
+        },
+        {
+          "phrase": "brute:attack:phrase:3",
+          "peak": 0.23833902180194855,
+          "rms": 0.019687288604808922,
+          "dc": 0.00006093711447176494,
+          "activeSeconds": 1.8226041666666666,
+          "centroidHz": 78.74831636073706,
+          "lowBandFraction": 0.9644631824884968,
+          "chestBandFraction": 0.9906277974457914,
+          "subBassFraction": 0.7754018928551641,
+          "hash": "12faf6d0d2711076f2565fd884136cdcdaaf82fa5f7d50172e9f516824931eee"
+        }
+      ]
+    },
+    {
+      "type": "spitter",
+      "state": "idle",
+      "peak": 0.023061571642756462,
+      "rms": 0.0014365930588526037,
+      "dc": 1.1324894685869729e-7,
+      "activeSeconds": 3.4028541666666667,
+      "centroidHz": 2963.989113140321,
+      "lowBandFraction": 0.029248401856004743,
+      "chestBandFraction": 0.11113905118012254,
+      "subBassFraction": 0.0029693626261768713,
+      "hash": "7c5cfae76bbc3f1a2fd4c7ce2508605012217c4a98b801a247090939ac983d67",
+      "counts": {
+        "spitter": 4,
+        "spitter:idle": 4,
+        "spitter:idle:phrase:2": 1,
+        "spitter:idle:phrase:1": 1,
+        "spitter:idle:phrase:0": 1,
+        "spitter:idle:phrase:3": 1
+      },
+      "choices": [
+        {
+          "type": "spitter",
+          "state": "idle",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "spitter:idle:phrase:2"
+          ]
+        },
+        {
+          "type": "spitter",
+          "state": "idle",
+          "time": 3.8533333333333335,
+          "phraseKeys": [
+            "spitter:idle:phrase:1"
+          ]
+        },
+        {
+          "type": "spitter",
+          "state": "idle",
+          "time": 7.653333333333333,
+          "phraseKeys": [
+            "spitter:idle:phrase:0"
+          ]
+        },
+        {
+          "type": "spitter",
+          "state": "idle",
+          "time": 11.453333333333333,
+          "phraseKeys": [
+            "spitter:idle:phrase:3"
+          ]
+        }
+      ],
+      "callMetrics": [
+        {
+          "phrase": "spitter:idle:phrase:2",
+          "peak": 0.018385935574769974,
+          "rms": 0.0014827772276689096,
+          "dc": 9.302837605395028e-9,
+          "activeSeconds": 0.8643125,
+          "centroidHz": 2723.0401494722164,
+          "lowBandFraction": 0.020690897928131922,
+          "chestBandFraction": 0.08801013322067641,
+          "subBassFraction": 0.00430131482206748,
+          "hash": "d53575591e5464bec4dc9c414030da27eb3c4544277e205f1393421da72705d1"
+        },
+        {
+          "phrase": "spitter:idle:phrase:1",
+          "peak": 0.02025483176112175,
+          "rms": 0.0013220956159566088,
+          "dc": 2.948303962938293e-7,
+          "activeSeconds": 0.8461458333333334,
+          "centroidHz": 3636.4722720991645,
+          "lowBandFraction": 0.023272111301202443,
+          "chestBandFraction": 0.0821167544370573,
+          "subBassFraction": 0.0019110077622762226,
+          "hash": "c4b4ac78adf159322ace7abf310f580a83a762f4ed023a44fdc97c5446136c32"
+        },
+        {
+          "phrase": "spitter:idle:phrase:0",
+          "peak": 0.023061571642756462,
+          "rms": 0.0016205667647018098,
+          "dc": 4.7051429875775474e-7,
+          "activeSeconds": 0.7490625,
+          "centroidHz": 2823.071715060384,
+          "lowBandFraction": 0.0439206326187523,
+          "chestBandFraction": 0.14678563300191838,
+          "subBassFraction": 0.0034791792294541412,
+          "hash": "e7630465922608a0f4b8d67827242023e0ca2736f64e3d78fb431615b26f5014"
+        },
+        {
+          "phrase": "spitter:idle:phrase:3",
+          "peak": 0.021514561027288437,
+          "rms": 0.001341053355902326,
+          "dc": 5.091034275703164e-7,
+          "activeSeconds": 0.9433333333333334,
+          "centroidHz": 2751.327182870896,
+          "lowBandFraction": 0.028989248415936513,
+          "chestBandFraction": 0.12054393648421188,
+          "subBassFraction": 0.002384032041301334,
+          "hash": "e46a81e6e696968b145f2d7affefa46e6fc5615ff657621d1d0f21e499ce3467"
+        }
+      ]
+    },
+    {
+      "type": "spitter",
+      "state": "attack",
+      "peak": 0.04697465896606445,
+      "rms": 0.0019888345231853666,
+      "dc": 5.205884120630232e-7,
+      "activeSeconds": 2.569958333333333,
+      "centroidHz": 3369.567559176646,
+      "lowBandFraction": 0.025676723332910285,
+      "chestBandFraction": 0.09305325989422185,
+      "subBassFraction": 0.0017467135819834072,
+      "hash": "cfd7d5a8e3cc95bfbdbf9398a3a2ccb3fac84f55d07c7fae5f58b1b97b683c0e",
+      "counts": {
+        "spitter": 4,
+        "spitter:attack": 4,
+        "spitter:attack:phrase:2": 1,
+        "spitter:attack:phrase:1": 1,
+        "spitter:attack:phrase:0": 1,
+        "spitter:attack:phrase:3": 1
+      },
+      "choices": [
+        {
+          "type": "spitter",
+          "state": "attack",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "spitter:attack:phrase:2"
+          ]
+        },
+        {
+          "type": "spitter",
+          "state": "attack",
+          "time": 3.8533333333333335,
+          "phraseKeys": [
+            "spitter:attack:phrase:1"
+          ]
+        },
+        {
+          "type": "spitter",
+          "state": "attack",
+          "time": 7.653333333333333,
+          "phraseKeys": [
+            "spitter:attack:phrase:0"
+          ]
+        },
+        {
+          "type": "spitter",
+          "state": "attack",
+          "time": 11.453333333333333,
+          "phraseKeys": [
+            "spitter:attack:phrase:3"
+          ]
+        }
+      ],
+      "callMetrics": [
+        {
+          "phrase": "spitter:attack:phrase:2",
+          "peak": 0.020353222265839577,
+          "rms": 0.0014990544519964506,
+          "dc": 4.760383019902998e-7,
+          "activeSeconds": 0.5843333333333334,
+          "centroidHz": 2139.816174673099,
+          "lowBandFraction": 0.03518028795855438,
+          "chestBandFraction": 0.1634683177340224,
+          "subBassFraction": 0.003013906595900394,
+          "hash": "c458fd26cd536d49fdf0eb19eb81d3a1fb56401a73bfd5785166e6c821ff920d"
+        },
+        {
+          "phrase": "spitter:attack:phrase:1",
+          "peak": 0.04697465896606445,
+          "rms": 0.002846306100395308,
+          "dc": 0.0000021809549803819667,
+          "activeSeconds": 0.774,
+          "centroidHz": 4198.065419722411,
+          "lowBandFraction": 0.008962721610734161,
+          "chestBandFraction": 0.03650672820055221,
+          "subBassFraction": 0.0005390466581911833,
+          "hash": "90b885e5d103c005cc1573761474943b8eaa9b8535ea1861d6233516684ea4e3"
+        },
+        {
+          "phrase": "spitter:attack:phrase:0",
+          "peak": 0.027250194922089577,
+          "rms": 0.0016640561080441324,
+          "dc": 6.138814744732309e-7,
+          "activeSeconds": 0.5131458333333333,
+          "centroidHz": 2640.372256115281,
+          "lowBandFraction": 0.05105557510960143,
+          "chestBandFraction": 0.16617371481457732,
+          "subBassFraction": 0.0061708603262239075,
+          "hash": "43fcacc1656a868c0071939d7b491b735b6d73a030364f62e5fac952137622b2"
+        },
+        {
+          "phrase": "spitter:attack:phrase:3",
+          "peak": 0.03664904087781906,
+          "rms": 0.0017478721752350861,
+          "dc": 1.6364939148417695e-7,
+          "activeSeconds": 0.6984791666666667,
+          "centroidHz": 2866.636126090011,
+          "lowBandFraction": 0.03720254123215264,
+          "chestBandFraction": 0.12879739376640648,
+          "subBassFraction": 0.0009580623814680678,
+          "hash": "27fc1a4931f1104866bb7beab06fe77f2deb4c85c015e73b5c163ffae52dcc94"
+        }
+      ]
+    },
+    {
+      "type": "screamer",
+      "state": "idle",
+      "peak": 0.07561371475458145,
+      "rms": 0.010471601787592,
+      "dc": 3.642935169245897e-7,
+      "activeSeconds": 6.428791666666666,
+      "centroidHz": 537.6696437485479,
+      "lowBandFraction": 0.0021764295878700687,
+      "chestBandFraction": 0.8431602320637878,
+      "subBassFraction": 0.000014411867576627672,
+      "hash": "34d937ee0faaa2bed2dc71931d4252fb1989e7e3ae9631260c9933dfdc508c6b",
+      "counts": {
+        "screamer": 4,
+        "screamer:idle": 4,
+        "screamer:idle:phrase:2": 1,
+        "screamer:idle:phrase:1": 1,
+        "screamer:idle:phrase:0": 1,
+        "screamer:idle:phrase:3": 1
+      },
+      "choices": [
+        {
+          "type": "screamer",
+          "state": "idle",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "screamer:idle:phrase:2"
+          ]
+        },
+        {
+          "type": "screamer",
+          "state": "idle",
+          "time": 3.8533333333333335,
+          "phraseKeys": [
+            "screamer:idle:phrase:1"
+          ]
+        },
+        {
+          "type": "screamer",
+          "state": "idle",
+          "time": 7.653333333333333,
+          "phraseKeys": [
+            "screamer:idle:phrase:0"
+          ]
+        },
+        {
+          "type": "screamer",
+          "state": "idle",
+          "time": 11.453333333333333,
+          "phraseKeys": [
+            "screamer:idle:phrase:3"
+          ]
+        }
+      ],
+      "callMetrics": [
+        {
+          "phrase": "screamer:idle:phrase:2",
+          "peak": 0.07561371475458145,
+          "rms": 0.011776443183279672,
+          "dc": 1.7313484339323916e-7,
+          "activeSeconds": 1.7789375,
+          "centroidHz": 593.0008197289725,
+          "lowBandFraction": 0.00016451791241042454,
+          "chestBandFraction": 0.7747731505211528,
+          "subBassFraction": 0.000006269661690916457,
+          "hash": "e0fad274f9ee4ee4090c3e1bfdcf89d231620822c1c6dc38d7a69e2737d72914"
+        },
+        {
+          "phrase": "screamer:idle:phrase:1",
+          "peak": 0.06918597221374512,
+          "rms": 0.01091951941007037,
+          "dc": 4.31140362906199e-7,
+          "activeSeconds": 1.610625,
+          "centroidHz": 556.7174189553768,
+          "lowBandFraction": 0.00014331586661132416,
+          "chestBandFraction": 0.8396621631823232,
+          "subBassFraction": 0.000012238691261638749,
+          "hash": "7328bca8554de6240382c2d9ab607f274b338506cf04290db11ea5803b6c0bc8"
+        },
+        {
+          "phrase": "screamer:idle:phrase:0",
+          "peak": 0.07343034446239471,
+          "rms": 0.010762554518705598,
+          "dc": 4.409216292750848e-7,
+          "activeSeconds": 1.6455,
+          "centroidHz": 476.5828035360144,
+          "lowBandFraction": 0.0007171168209492853,
+          "chestBandFraction": 0.9220585865979997,
+          "subBassFraction": 0.000008039352316879342,
+          "hash": "ec55001a8f319c309b57a6170f949fa0d3ac0eaf4a5952849350a55ce8c72186"
+        },
+        {
+          "phrase": "screamer:idle:phrase:3",
+          "peak": 0.07072102278470993,
+          "rms": 0.008779967219731238,
+          "dc": 4.0404789710815517e-7,
+          "activeSeconds": 1.3937291666666667,
+          "centroidHz": 499.89289631637547,
+          "lowBandFraction": 0.009367260484712578,
+          "chestBandFraction": 0.9218630865975174,
+          "subBassFraction": 0.00003182273782777001,
+          "hash": "4fe65441f7e35feb0788b37daa93b890dcc784cb0d6448a11b04af3364b13bfc"
+        }
+      ]
+    },
+    {
+      "type": "screamer",
+      "state": "attack",
+      "peak": 0.4546072483062744,
+      "rms": 0.0803022623581933,
+      "dc": 8.441600177598319e-7,
+      "activeSeconds": 8.855791666666667,
+      "centroidHz": 767.8892565632561,
+      "lowBandFraction": 0.00018853235194375682,
+      "chestBandFraction": 0.09033870815863695,
+      "subBassFraction": 0.000013019676249914448,
+      "hash": "a34a6bedfee4ff13a579bbcba1916f0c8765c89f1dcafc840c067dee99b30412",
+      "counts": {
+        "screamer": 4,
+        "screamer:attack": 4,
+        "screamer:attack:phrase:2": 1,
+        "screamer:attack:phrase:1": 1,
+        "screamer:attack:phrase:0": 1,
+        "screamer:attack:phrase:3": 1
+      },
+      "choices": [
+        {
+          "type": "screamer",
+          "state": "attack",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "screamer:attack:phrase:2"
+          ]
+        },
+        {
+          "type": "screamer",
+          "state": "attack",
+          "time": 3.8533333333333335,
+          "phraseKeys": [
+            "screamer:attack:phrase:1"
+          ]
+        },
+        {
+          "type": "screamer",
+          "state": "attack",
+          "time": 7.653333333333333,
+          "phraseKeys": [
+            "screamer:attack:phrase:0"
+          ]
+        },
+        {
+          "type": "screamer",
+          "state": "attack",
+          "time": 11.453333333333333,
+          "phraseKeys": [
+            "screamer:attack:phrase:3"
+          ]
+        }
+      ],
+      "callMetrics": [
+        {
+          "phrase": "screamer:attack:phrase:2",
+          "peak": 0.41670656204223633,
+          "rms": 0.09216727432415027,
+          "dc": 1.1146442686735197e-7,
+          "activeSeconds": 2.3674166666666667,
+          "centroidHz": 853.1548456549359,
+          "lowBandFraction": 0.00012964688050302425,
+          "chestBandFraction": 0.026156261553075388,
+          "subBassFraction": 0.000005711337010457762,
+          "hash": "bf7d02e2bdbde2fb40a4d40d91aac71803aa18223b72e9328790769fa88036b3"
+        },
+        {
+          "phrase": "screamer:attack:phrase:1",
+          "peak": 0.4523482620716095,
+          "rms": 0.08558979898284526,
+          "dc": 0.0000019559517700033718,
+          "activeSeconds": 2.1816458333333335,
+          "centroidHz": 774.198563247483,
+          "lowBandFraction": 0.00017175657155707515,
+          "chestBandFraction": 0.027437378452967547,
+          "subBassFraction": 0.000012679951548090524,
+          "hash": "bdf52ffd4fd911616c5cacafbe4015890c4f1b7c43f824776e99752d6bff4a8d"
+        },
+        {
+          "phrase": "screamer:attack:phrase:0",
+          "peak": 0.4546072483062744,
+          "rms": 0.08462777102756455,
+          "dc": 9.226479768861082e-7,
+          "activeSeconds": 2.3061458333333333,
+          "centroidHz": 681.1958602335108,
+          "lowBandFraction": 0.00020620580649090427,
+          "chestBandFraction": 0.2347135395637312,
+          "subBassFraction": 0.000010541172846601869,
+          "hash": "c40e5651e651f3460bd1afc1f24bcae29ab631d414ae1140386a838305fbe375"
+        },
+        {
+          "phrase": "screamer:attack:phrase:3",
+          "peak": 0.43069523572921753,
+          "rms": 0.06146625997357381,
+          "dc": 6.763922213249034e-7,
+          "activeSeconds": 2.000583333333333,
+          "centroidHz": 747.9668454830153,
+          "lowBandFraction": 0.0003093495355435008,
+          "chestBandFraction": 0.03900944577619002,
+          "subBassFraction": 0.000029310367581399162,
+          "hash": "cce67a85364d81e2d09144035b06e43750837e73776439a9405fb9017c321513"
+        }
+      ]
+    },
+    {
+      "type": "bomber",
+      "state": "idle",
+      "peak": 0.0779896229505539,
+      "rms": 0.011489926962797388,
+      "dc": 2.5742716257278267e-8,
+      "activeSeconds": 8.540791666666667,
+      "centroidHz": 93.86213397473452,
+      "lowBandFraction": 0.8974050217542606,
+      "chestBandFraction": 0.9893367244092155,
+      "subBassFraction": 0.8645977266754438,
+      "hash": "5786c4e9f1210b1e24f2a65881b681825644ef7b689f8233f808f61e180e7e98",
+      "counts": {
+        "bomber": 4,
+        "bomber:idle": 4,
+        "bomber:idle:phrase:2": 1,
+        "bomber:idle:phrase:1": 1,
+        "bomber:idle:phrase:0": 1,
+        "bomber:idle:phrase:3": 1
+      },
+      "choices": [
+        {
+          "type": "bomber",
+          "state": "idle",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "bomber:idle:phrase:2"
+          ]
+        },
+        {
+          "type": "bomber",
+          "state": "idle",
+          "time": 3.8533333333333335,
+          "phraseKeys": [
+            "bomber:idle:phrase:1"
+          ]
+        },
+        {
+          "type": "bomber",
+          "state": "idle",
+          "time": 7.653333333333333,
+          "phraseKeys": [
+            "bomber:idle:phrase:0"
+          ]
+        },
+        {
+          "type": "bomber",
+          "state": "idle",
+          "time": 11.453333333333333,
+          "phraseKeys": [
+            "bomber:idle:phrase:3"
+          ]
+        }
+      ],
+      "callMetrics": [
+        {
+          "phrase": "bomber:idle:phrase:2",
+          "peak": 0.04872234910726547,
+          "rms": 0.01092578468310838,
+          "dc": 8.545909302627317e-7,
+          "activeSeconds": 2.1668958333333332,
+          "centroidHz": 101.69823382189387,
+          "lowBandFraction": 0.8985054650681124,
+          "chestBandFraction": 0.9808407252821612,
+          "subBassFraction": 0.865260395505555,
+          "hash": "29f63b266e8c33872b35dcf930e844f7ddb7853a84736d38d57a4e9f7254622a"
+        },
+        {
+          "phrase": "bomber:idle:phrase:1",
+          "peak": 0.0779896229505539,
+          "rms": 0.013105395155971127,
+          "dc": 0.000005741540994091417,
+          "activeSeconds": 1.8904166666666666,
+          "centroidHz": 85.52990548227677,
+          "lowBandFraction": 0.924633110428755,
+          "chestBandFraction": 0.9939397717654602,
+          "subBassFraction": 0.8877111830227944,
+          "hash": "8bd4f96e88ca1e806dc060e42459bdf438886325bbc4168f8d3e5c598113ae70"
+        },
+        {
+          "phrase": "bomber:idle:phrase:0",
+          "peak": 0.04810014367103577,
+          "rms": 0.011360405171242248,
+          "dc": 0.0000016305319557106542,
+          "activeSeconds": 2.1594166666666665,
+          "centroidHz": 94.25680781360902,
+          "lowBandFraction": 0.8683497319907247,
+          "chestBandFraction": 0.9896233543654154,
+          "subBassFraction": 0.8542896226399117,
+          "hash": "59d6fe6701ade4af355f54742b612fa9a1e46f4d4a9aaef342c36685b5d77d43"
+        },
+        {
+          "phrase": "bomber:idle:phrase:3",
+          "peak": 0.054628971964120865,
+          "rms": 0.0107352742048147,
+          "dc": 0.000004833680518134576,
+          "activeSeconds": 2.3240625,
+          "centroidHz": 96.13129448904607,
+          "lowBandFraction": 0.8922724076663562,
+          "chestBandFraction": 0.9906926733528725,
+          "subBassFraction": 0.849542667854468,
+          "hash": "b6946d11ec6356cdcc35dea6b6c083a02d2722ca07a567b8c65e76cbede0cf13"
+        }
+      ]
+    },
+    {
+      "type": "bomber",
+      "state": "attack",
+      "peak": 0.0960589349269867,
+      "rms": 0.014634749430322096,
+      "dc": 0.000004383643351600324,
+      "activeSeconds": 6.423229166666666,
+      "centroidHz": 98.01305601389436,
+      "lowBandFraction": 0.92454275499395,
+      "chestBandFraction": 0.9896732674322938,
+      "subBassFraction": 0.8226018827361476,
+      "hash": "b34fec76b23a663e81151b303a1aab201e557b290fdf4e33e1ad733bb86e4c10",
+      "counts": {
+        "bomber": 4,
+        "bomber:attack": 4,
+        "bomber:attack:phrase:2": 1,
+        "bomber:attack:phrase:1": 1,
+        "bomber:attack:phrase:0": 1,
+        "bomber:attack:phrase:3": 1
+      },
+      "choices": [
+        {
+          "type": "bomber",
+          "state": "attack",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "bomber:attack:phrase:2"
+          ]
+        },
+        {
+          "type": "bomber",
+          "state": "attack",
+          "time": 3.8533333333333335,
+          "phraseKeys": [
+            "bomber:attack:phrase:1"
+          ]
+        },
+        {
+          "type": "bomber",
+          "state": "attack",
+          "time": 7.653333333333333,
+          "phraseKeys": [
+            "bomber:attack:phrase:0"
+          ]
+        },
+        {
+          "type": "bomber",
+          "state": "attack",
+          "time": 11.453333333333333,
+          "phraseKeys": [
+            "bomber:attack:phrase:3"
+          ]
+        }
+      ],
+      "callMetrics": [
+        {
+          "phrase": "bomber:attack:phrase:2",
+          "peak": 0.08372869342565536,
+          "rms": 0.01383058619418789,
+          "dc": 0.000004780903782670426,
+          "activeSeconds": 1.5616458333333334,
+          "centroidHz": 115.5922581027364,
+          "lowBandFraction": 0.907320512970887,
+          "chestBandFraction": 0.9775177051753928,
+          "subBassFraction": 0.7272495846694222,
+          "hash": "47f1025c01fbd62e8612aa10e5b44c42e742fcfb05189b49afcc1c3f906ca5c9"
+        },
+        {
+          "phrase": "bomber:attack:phrase:1",
+          "peak": 0.0960589349269867,
+          "rms": 0.01632496503151384,
+          "dc": 0.000013124829486782631,
+          "activeSeconds": 1.7231041666666667,
+          "centroidHz": 83.31958401227467,
+          "lowBandFraction": 0.9453536877089107,
+          "chestBandFraction": 0.9957212849940998,
+          "subBassFraction": 0.9092388908477088,
+          "hash": "3e5ab0ea1232f5c3950895bee69b90610246ec91a2d793b4f40d6911d08dc0a6"
+        },
+        {
+          "phrase": "bomber:attack:phrase:0",
+          "peak": 0.08960418403148651,
+          "rms": 0.014507990566101806,
+          "dc": 0.000010291511238860089,
+          "activeSeconds": 1.3585416666666668,
+          "centroidHz": 93.00379798417674,
+          "lowBandFraction": 0.9131470547923985,
+          "chestBandFraction": 0.9913468496714857,
+          "subBassFraction": 0.9022333513674692,
+          "hash": "a47b954b3e8551684b4a72e169e32f3aa1a8c94daf93b2979c129df9f93657e9"
+        },
+        {
+          "phrase": "bomber:attack:phrase:3",
+          "peak": 0.08859609067440033,
+          "rms": 0.014037628182453701,
+          "dc": 0.00001286577746420667,
+          "activeSeconds": 1.7799375,
+          "centroidHz": 104.54906925487414,
+          "lowBandFraction": 0.9245008805413828,
+          "chestBandFraction": 0.991040915770448,
+          "subBassFraction": 0.7404973945193948,
+          "hash": "b3f868a887c3b096b37dcd9f5cce5abc00c73563b0b1cdb4fd60c959a3f35351"
+        }
+      ]
+    },
+    {
+      "type": "spider",
+      "state": "idle",
+      "peak": 0.03532159700989723,
+      "rms": 0.0022887093134299494,
+      "dc": 1.3425004446435912e-8,
+      "activeSeconds": 2.8057291666666666,
+      "centroidHz": 4767.651892710445,
+      "lowBandFraction": 0.00024391942085406134,
+      "chestBandFraction": 0.0016956356310207166,
+      "subBassFraction": 0.000009434258407732247,
+      "hash": "071d9250144e5104fb2e78365cd2ba1b36e61ffb4132070219054588fbe68471",
+      "counts": {
+        "spider": 4,
+        "spider:idle": 4,
+        "spider:idle:phrase:2": 1,
+        "spider:idle:phrase:1": 1,
+        "spider:idle:phrase:0": 1,
+        "spider:idle:phrase:3": 1
+      },
+      "choices": [
+        {
+          "type": "spider",
+          "state": "idle",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "spider:idle:phrase:2"
+          ]
+        },
+        {
+          "type": "spider",
+          "state": "idle",
+          "time": 3.8533333333333335,
+          "phraseKeys": [
+            "spider:idle:phrase:1"
+          ]
+        },
+        {
+          "type": "spider",
+          "state": "idle",
+          "time": 7.653333333333333,
+          "phraseKeys": [
+            "spider:idle:phrase:0"
+          ]
+        },
+        {
+          "type": "spider",
+          "state": "idle",
+          "time": 11.453333333333333,
+          "phraseKeys": [
+            "spider:idle:phrase:3"
+          ]
+        }
+      ],
+      "callMetrics": [
+        {
+          "phrase": "spider:idle:phrase:2",
+          "peak": 0.03335531800985336,
+          "rms": 0.002259789108000838,
+          "dc": 2.6079195461529493e-8,
+          "activeSeconds": 0.6404375,
+          "centroidHz": 4443.95034978409,
+          "lowBandFraction": 0.0003077202249836184,
+          "chestBandFraction": 0.002395243103864004,
+          "subBassFraction": 0.000012900747779950227,
+          "hash": "541749d0232adfac12c6f09760b9bbc949fff64d7a57249c3abd6f77ff808a45"
+        },
+        {
+          "phrase": "spider:idle:phrase:1",
+          "peak": 0.03532159700989723,
+          "rms": 0.002483428976928226,
+          "dc": 3.245013049389353e-9,
+          "activeSeconds": 0.798125,
+          "centroidHz": 4855.35487933206,
+          "lowBandFraction": 0.0002633464700555348,
+          "chestBandFraction": 0.001459929797278942,
+          "subBassFraction": 0.000005944022853225382,
+          "hash": "460d88d35d3e84118361e896d96e69ded205a827be71777bd20eae9e0952b7c4"
+        },
+        {
+          "phrase": "spider:idle:phrase:0",
+          "peak": 0.03215457871556282,
+          "rms": 0.002927542321770764,
+          "dc": 1.979414610868374e-8,
+          "activeSeconds": 0.6635625,
+          "centroidHz": 4891.573037668629,
+          "lowBandFraction": 0.00019705721535210425,
+          "chestBandFraction": 0.0013694639557538506,
+          "subBassFraction": 0.000010190415591837507,
+          "hash": "86058e32cdc1b7e962d747737970bc8e4a52bef833a3d1677f7dd4b48f460aa8"
+        },
+        {
+          "phrase": "spider:idle:phrase:3",
+          "peak": 0.03059767745435238,
+          "rms": 0.001477759358630129,
+          "dc": 1.0724175131175513e-8,
+          "activeSeconds": 0.7036041666666667,
+          "centroidHz": 4705.72954445213,
+          "lowBandFraction": 0.0002494422843442412,
+          "chestBandFraction": 0.0018590017571711761,
+          "subBassFraction": 0.000012586113908263101,
+          "hash": "8786b0c02074b281898a6f80a7e158d361a89b574bfdd742bf7cad73d50551d2"
+        }
+      ]
+    },
+    {
+      "type": "spider",
+      "state": "attack",
+      "peak": 0.06665664911270142,
+      "rms": 0.0029107791650644617,
+      "dc": 9.676833063698002e-9,
+      "activeSeconds": 2.183479166666667,
+      "centroidHz": 4585.519907409965,
+      "lowBandFraction": 0.0003357315903328535,
+      "chestBandFraction": 0.002456689721815835,
+      "subBassFraction": 0.000027657654725584203,
+      "hash": "e5c96baea2a0cbca8403143ff9e597956fb3fd6adf9323eceef3c3e38458514a",
+      "counts": {
+        "spider": 4,
+        "spider:attack": 4,
+        "spider:attack:phrase:2": 1,
+        "spider:attack:phrase:1": 1,
+        "spider:attack:phrase:0": 1,
+        "spider:attack:phrase:3": 1
+      },
+      "choices": [
+        {
+          "type": "spider",
+          "state": "attack",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "spider:attack:phrase:2"
+          ]
+        },
+        {
+          "type": "spider",
+          "state": "attack",
+          "time": 3.8533333333333335,
+          "phraseKeys": [
+            "spider:attack:phrase:1"
+          ]
+        },
+        {
+          "type": "spider",
+          "state": "attack",
+          "time": 7.653333333333333,
+          "phraseKeys": [
+            "spider:attack:phrase:0"
+          ]
+        },
+        {
+          "type": "spider",
+          "state": "attack",
+          "time": 11.453333333333333,
+          "phraseKeys": [
+            "spider:attack:phrase:3"
+          ]
+        }
+      ],
+      "callMetrics": [
+        {
+          "phrase": "spider:attack:phrase:2",
+          "peak": 0.06665664911270142,
+          "rms": 0.0034851922055602986,
+          "dc": 2.214355278334774e-8,
+          "activeSeconds": 0.4205833333333333,
+          "centroidHz": 4372.283127442627,
+          "lowBandFraction": 0.00039651230008616833,
+          "chestBandFraction": 0.0027154689663041608,
+          "subBassFraction": 0.000013785680486746476,
+          "hash": "5582b9604951e7af2f143dccc80da510240b4b76d6a4d46057e33fb947d1cf77"
+        },
+        {
+          "phrase": "spider:attack:phrase:1",
+          "peak": 0.04881555214524269,
+          "rms": 0.0034258947230180383,
+          "dc": 1.533584548524609e-8,
+          "activeSeconds": 0.7425833333333334,
+          "centroidHz": 4725.574653258131,
+          "lowBandFraction": 0.0003028881412443653,
+          "chestBandFraction": 0.00206373549717428,
+          "subBassFraction": 0.000059579716123882755,
+          "hash": "7e4c852b22e4aacb98c62455eb38bed7ebd9b5981375244917164e6f32ec05f6"
+        },
+        {
+          "phrase": "spider:attack:phrase:0",
+          "peak": 0.03635025769472122,
+          "rms": 0.0022896142109309152,
+          "dc": 2.650337603925283e-8,
+          "activeSeconds": 0.3796875,
+          "centroidHz": 4688.555257807646,
+          "lowBandFraction": 0.0002943731248343764,
+          "chestBandFraction": 0.002121979673950286,
+          "subBassFraction": 0.000010018115827435833,
+          "hash": "40554b6d7c1346245b533690fd4fe5bba3a98274136911bbd7ffd54f49619422"
+        },
+        {
+          "phrase": "spider:attack:phrase:3",
+          "peak": 0.05732790753245354,
+          "rms": 0.0024021540600326742,
+          "dc": 1.4487985316873317e-8,
+          "activeSeconds": 0.640625,
+          "centroidHz": 4545.222081996498,
+          "lowBandFraction": 0.0003690235573820451,
+          "chestBandFraction": 0.0029522027409453395,
+          "subBassFraction": 0.000009270452087496756,
+          "hash": "00a7c35b6fee3dce8d820361dbc53d6085bc36e09e3b6a07721751e263ab0fa9"
+        }
+      ]
+    },
+    {
+      "type": "demon",
+      "state": "idle",
+      "peak": 0.19236360490322113,
+      "rms": 0.02117187573903732,
+      "dc": 0.000030800234537365234,
+      "activeSeconds": 8.541645833333334,
+      "centroidHz": 76.06571804107294,
+      "lowBandFraction": 0.9370248430533561,
+      "chestBandFraction": 0.9805975532465634,
+      "subBassFraction": 0.8619401060607288,
+      "hash": "449788e98e58c7116f9b0c5bc8eaab1d1edbc50c191a58de221458f60e25658d",
+      "counts": {
+        "demon": 4,
+        "demon:idle": 4,
+        "demon:idle:phrase:2": 1,
+        "demon:idle:phrase:1": 1,
+        "demon:idle:phrase:0": 1,
+        "demon:idle:phrase:3": 1
+      },
+      "choices": [
+        {
+          "type": "demon",
+          "state": "idle",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "demon:idle:phrase:2"
+          ]
+        },
+        {
+          "type": "demon",
+          "state": "idle",
+          "time": 3.8533333333333335,
+          "phraseKeys": [
+            "demon:idle:phrase:1"
+          ]
+        },
+        {
+          "type": "demon",
+          "state": "idle",
+          "time": 7.653333333333333,
+          "phraseKeys": [
+            "demon:idle:phrase:0"
+          ]
+        },
+        {
+          "type": "demon",
+          "state": "idle",
+          "time": 11.453333333333333,
+          "phraseKeys": [
+            "demon:idle:phrase:3"
+          ]
+        }
+      ],
+      "callMetrics": [
+        {
+          "phrase": "demon:idle:phrase:2",
+          "peak": 0.12471328675746918,
+          "rms": 0.022636255502473057,
+          "dc": 0.000011537295814692125,
+          "activeSeconds": 2.2591666666666668,
+          "centroidHz": 89.11635927299453,
+          "lowBandFraction": 0.9264746875566504,
+          "chestBandFraction": 0.9793678372479123,
+          "subBassFraction": 0.807896407223542,
+          "hash": "fb802d8f96d183eff649bcc5666b561044a5adb0185d7ab0b574e3e32bb036b4"
+        },
+        {
+          "phrase": "demon:idle:phrase:1",
+          "peak": 0.17308135330677032,
+          "rms": 0.023088965108033252,
+          "dc": 0.000056626427858633054,
+          "activeSeconds": 1.9698958333333334,
+          "centroidHz": 63.67510974704581,
+          "lowBandFraction": 0.9620716458947348,
+          "chestBandFraction": 0.9873671190087308,
+          "subBassFraction": 0.8745059464765373,
+          "hash": "985866afa8a652e7fd0c15a1dff3bf4bf27315f6350aa15a35c8d86f285c71bc"
+        },
+        {
+          "phrase": "demon:idle:phrase:0",
+          "peak": 0.13818202912807465,
+          "rms": 0.021543370024651547,
+          "dc": 7.117922670394959e-7,
+          "activeSeconds": 2.250395833333333,
+          "centroidHz": 85.90273464723265,
+          "lowBandFraction": 0.9066841687007361,
+          "chestBandFraction": 0.9712706244714919,
+          "subBassFraction": 0.8643504717032491,
+          "hash": "2c9fe6170bf039d7dce51feebe9ec4ab5dabe14191fc099104649d48aa82cc97"
+        },
+        {
+          "phrase": "demon:idle:phrase:3",
+          "peak": 0.19236360490322113,
+          "rms": 0.018133980076412735,
+          "dc": 0.000048839546095073524,
+          "activeSeconds": 2.0621875,
+          "centroidHz": 66.14280706380225,
+          "lowBandFraction": 0.9480584218068814,
+          "chestBandFraction": 0.983235805793273,
+          "subBassFraction": 0.9063508071390126,
+          "hash": "92300c1a91481af0c1e937f2ba156677ea74db613fe39d5f10904a8c2d11d224"
+        }
+      ]
+    },
+    {
+      "type": "demon",
+      "state": "attack",
+      "peak": 0.2257055789232254,
+      "rms": 0.017189782274628397,
+      "dc": 0.0000030930217189555324,
+      "activeSeconds": 5.835604166666666,
+      "centroidHz": 209.81577011496586,
+      "lowBandFraction": 0.7040501305155681,
+      "chestBandFraction": 0.898136016182223,
+      "subBassFraction": 0.0956598501679796,
+      "hash": "a497c20eb97a47329e20edbb7dc6fea394cf49810446a8af20eb3b1bc2b62bc2",
+      "counts": {
+        "demon": 4,
+        "demon:attack": 4,
+        "demon:attack:phrase:2": 1,
+        "demon:attack:phrase:1": 1,
+        "demon:attack:phrase:0": 1,
+        "demon:attack:phrase:3": 1
+      },
+      "choices": [
+        {
+          "type": "demon",
+          "state": "attack",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "demon:attack:phrase:2"
+          ]
+        },
+        {
+          "type": "demon",
+          "state": "attack",
+          "time": 3.8533333333333335,
+          "phraseKeys": [
+            "demon:attack:phrase:1"
+          ]
+        },
+        {
+          "type": "demon",
+          "state": "attack",
+          "time": 7.653333333333333,
+          "phraseKeys": [
+            "demon:attack:phrase:0"
+          ]
+        },
+        {
+          "type": "demon",
+          "state": "attack",
+          "time": 11.453333333333333,
+          "phraseKeys": [
+            "demon:attack:phrase:3"
+          ]
+        }
+      ],
+      "callMetrics": [
+        {
+          "phrase": "demon:attack:phrase:2",
+          "peak": 0.1885920912027359,
+          "rms": 0.02091201687510705,
+          "dc": 0.000007000718928080658,
+          "activeSeconds": 1.5298541666666667,
+          "centroidHz": 216.66818922140885,
+          "lowBandFraction": 0.6727830237372713,
+          "chestBandFraction": 0.8973259955595658,
+          "subBassFraction": 0.015141642196802625,
+          "hash": "f0c8985014d1534daa58e877997c3c38be08a92bd166c8c50537fbd0e84d26dc"
+        },
+        {
+          "phrase": "demon:attack:phrase:1",
+          "peak": 0.21170473098754883,
+          "rms": 0.017618589995568913,
+          "dc": 0.000036959661362268996,
+          "activeSeconds": 1.4268125,
+          "centroidHz": 176.84794581685472,
+          "lowBandFraction": 0.7827618195325396,
+          "chestBandFraction": 0.9231247039111633,
+          "subBassFraction": 0.18161927452067247,
+          "hash": "f8fcdf5dfb0cff4dbb9506be7bda98ed3be8d0147dfd2a09f11b18f59cc9d866"
+        },
+        {
+          "phrase": "demon:attack:phrase:0",
+          "peak": 0.2070225030183792,
+          "rms": 0.014522104577594595,
+          "dc": 0.0000070216178754577065,
+          "activeSeconds": 1.2685208333333333,
+          "centroidHz": 274.3729108431208,
+          "lowBandFraction": 0.5214430768042027,
+          "chestBandFraction": 0.84729380204983,
+          "subBassFraction": 0.015819267107326753,
+          "hash": "2201fa33acdd8e4ff6879d7e5596807ef6c0cb5e21ac4163034bc6be6c40ab0a"
+        },
+        {
+          "phrase": "demon:attack:phrase:3",
+          "peak": 0.2257055789232254,
+          "rms": 0.015629531672420635,
+          "dc": 0.000048500617845347434,
+          "activeSeconds": 1.6104166666666666,
+          "centroidHz": 191.2564019654811,
+          "lowBandFraction": 0.7827293518074124,
+          "chestBandFraction": 0.9108350929363768,
+          "subBassFraction": 0.18600309574559903,
+          "hash": "0fe0159a2e6359efdedfefb8d678128e4aeddea325c7c191a75ad7e02e9f8f23"
+        }
+      ]
+    },
+    {
+      "type": "colossus",
+      "state": "idle",
+      "peak": 0.16797320544719696,
+      "rms": 0.027962119083584955,
+      "dc": 0.00004156390653308807,
+      "activeSeconds": 11.594770833333333,
+      "centroidHz": 39.75354390811523,
+      "lowBandFraction": 0.9905861605482955,
+      "chestBandFraction": 0.9992949742609801,
+      "subBassFraction": 0.9040895235856345,
+      "hash": "1466e3fdc0d5d7cad8616549f74326a910cc365bf86be19e4f9a56493540b7e5",
+      "counts": {
+        "colossus": 4,
+        "colossus:idle": 4,
+        "colossus:idle:phrase:2": 1,
+        "colossus:idle:phrase:1": 1,
+        "colossus:idle:phrase:0": 1,
+        "colossus:idle:phrase:3": 1
+      },
+      "choices": [
+        {
+          "type": "colossus",
+          "state": "idle",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "colossus:idle:phrase:2"
+          ]
+        },
+        {
+          "type": "colossus",
+          "state": "idle",
+          "time": 3.8533333333333335,
+          "phraseKeys": [
+            "colossus:idle:phrase:1"
+          ]
+        },
+        {
+          "type": "colossus",
+          "state": "idle",
+          "time": 7.653333333333333,
+          "phraseKeys": [
+            "colossus:idle:phrase:0"
+          ]
+        },
+        {
+          "type": "colossus",
+          "state": "idle",
+          "time": 11.453333333333333,
+          "phraseKeys": [
+            "colossus:idle:phrase:3"
+          ]
+        }
+      ],
+      "callMetrics": [
+        {
+          "phrase": "colossus:idle:phrase:2",
+          "peak": 0.1535995751619339,
+          "rms": 0.028519820288327977,
+          "dc": 0.000005697386617633675,
+          "activeSeconds": 2.657979166666667,
+          "centroidHz": 47.11419801925655,
+          "lowBandFraction": 0.9854730931359592,
+          "chestBandFraction": 0.9987069306554818,
+          "subBassFraction": 0.8528516996422221,
+          "hash": "6fff077a8f8d5bbfae168710706e13c2df1f26ff4186f7479d7ff9c6ecca74c0"
+        },
+        {
+          "phrase": "colossus:idle:phrase:1",
+          "peak": 0.1549540013074875,
+          "rms": 0.023772186716619653,
+          "dc": 0.00010872888720964139,
+          "activeSeconds": 2.8522291666666666,
+          "centroidHz": 38.79508393360735,
+          "lowBandFraction": 0.992178460080225,
+          "chestBandFraction": 0.9994418916469886,
+          "subBassFraction": 0.9104991881208313,
+          "hash": "70b8a23f21cb273d9151c0b180b5a79cf5efd888dfb347d54fbdb7cb69bbc8ea"
+        },
+        {
+          "phrase": "colossus:idle:phrase:0",
+          "peak": 0.16797320544719696,
+          "rms": 0.032760656551035654,
+          "dc": 0.0000066396505409043626,
+          "activeSeconds": 2.857083333333333,
+          "centroidHz": 35.39080608923734,
+          "lowBandFraction": 0.9929217621233147,
+          "chestBandFraction": 0.9995244440395045,
+          "subBassFraction": 0.9324727099826051,
+          "hash": "f08d889f6f7f85be0aa09ca17e39f823deceb1e07da0ffd06a545b2df251e72c"
+        },
+        {
+          "phrase": "colossus:idle:phrase:3",
+          "peak": 0.15931399166584015,
+          "rms": 0.026650321597669675,
+          "dc": 0.0000447332784405951,
+          "activeSeconds": 3.2274791666666665,
+          "centroidHz": 38.85051224799087,
+          "lowBandFraction": 0.9914659112225087,
+          "chestBandFraction": 0.9994495894367821,
+          "subBassFraction": 0.9126800322033579,
+          "hash": "abf990b8875cc152854601572b85679c1044f78f3cde8103b96b964536c77c41"
+        }
+      ]
+    },
+    {
+      "type": "colossus",
+      "state": "attack",
+      "peak": 0.23834547400474548,
+      "rms": 0.030004531867249728,
+      "dc": 0.000010566603694572902,
+      "activeSeconds": 8.268,
+      "centroidHz": 74.61526457677171,
+      "lowBandFraction": 0.9636869625536212,
+      "chestBandFraction": 0.995935658929911,
+      "subBassFraction": 0.8147100222837795,
+      "hash": "dc64a1771fbf17c87bac6134c4d2e8de804a4ff107365d20ed5050358e5949d4",
+      "counts": {
+        "colossus": 4,
+        "colossus:attack": 4,
+        "colossus:attack:phrase:2": 1,
+        "colossus:attack:phrase:1": 1,
+        "colossus:attack:phrase:0": 1,
+        "colossus:attack:phrase:3": 1
+      },
+      "choices": [
+        {
+          "type": "colossus",
+          "state": "attack",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "colossus:attack:phrase:2"
+          ]
+        },
+        {
+          "type": "colossus",
+          "state": "attack",
+          "time": 3.8533333333333335,
+          "phraseKeys": [
+            "colossus:attack:phrase:1"
+          ]
+        },
+        {
+          "type": "colossus",
+          "state": "attack",
+          "time": 7.653333333333333,
+          "phraseKeys": [
+            "colossus:attack:phrase:0"
+          ]
+        },
+        {
+          "type": "colossus",
+          "state": "attack",
+          "time": 11.453333333333333,
+          "phraseKeys": [
+            "colossus:attack:phrase:3"
+          ]
+        }
+      ],
+      "callMetrics": [
+        {
+          "phrase": "colossus:attack:phrase:2",
+          "peak": 0.19613227248191833,
+          "rms": 0.033218399671115284,
+          "dc": 0.00004618911909948095,
+          "activeSeconds": 1.9680208333333333,
+          "centroidHz": 81.66490081346133,
+          "lowBandFraction": 0.9527083999424681,
+          "chestBandFraction": 0.994541406855628,
+          "subBassFraction": 0.8321646141240642,
+          "hash": "c8015edbce4a3ffe0b721182ccd7bddb3cbf23a85a68c4755a1518183c7d7e8d"
+        },
+        {
+          "phrase": "colossus:attack:phrase:1",
+          "peak": 0.23834547400474548,
+          "rms": 0.026674214512341254,
+          "dc": 0.00008053380118670287,
+          "activeSeconds": 2.203291666666667,
+          "centroidHz": 63.4080376014713,
+          "lowBandFraction": 0.9756646268128517,
+          "chestBandFraction": 0.9971819590938048,
+          "subBassFraction": 0.8449589741651516,
+          "hash": "66a43c59da926608f8ef077b181834f1a27b61e13ec4527d8d446facd1216cda"
+        },
+        {
+          "phrase": "colossus:attack:phrase:0",
+          "peak": 0.21953226625919342,
+          "rms": 0.03169310488875062,
+          "dc": 0.000042673423447402166,
+          "activeSeconds": 1.8412916666666668,
+          "centroidHz": 82.37398296248786,
+          "lowBandFraction": 0.9585303657234197,
+          "chestBandFraction": 0.9951980802638778,
+          "subBassFraction": 0.7777585587874535,
+          "hash": "7b7815b00ccd04893ac794ab3621ba7e3be6162355761f7896742e7843c5dce1"
+        },
+        {
+          "phrase": "colossus:attack:phrase:3",
+          "peak": 0.2310953587293625,
+          "rms": 0.028643914090281653,
+          "dc": 0.000028276039060456446,
+          "activeSeconds": 2.2553958333333335,
+          "centroidHz": 67.42127107643311,
+          "lowBandFraction": 0.9726632313111763,
+          "chestBandFraction": 0.9974212660530767,
+          "subBassFraction": 0.8101449697457382,
+          "hash": "9319c8dea3a4ff5fa743dbb4d8fedcf296cd73b9565983438cd500589a5a6b11"
+        }
+      ]
+    },
+    {
+      "type": "guardian",
+      "state": "idle",
+      "peak": 0.07875369489192963,
+      "rms": 0.005964994178922878,
+      "dc": 0.000010931528090876513,
+      "activeSeconds": 5.313958333333333,
+      "centroidHz": 462.0322659021031,
+      "lowBandFraction": 0.17227420777663358,
+      "chestBandFraction": 0.8656443572220932,
+      "subBassFraction": 0.0049273317500051345,
+      "hash": "cd2f1593ecc08d0221fa768d95da9fedf2237d010f5adb96c404d41b6da742d9",
+      "counts": {
+        "guardian": 4,
+        "guardian:idle": 4,
+        "guardian:idle:phrase:2": 1,
+        "guardian:idle:phrase:1": 1,
+        "guardian:idle:phrase:0": 1,
+        "guardian:idle:phrase:3": 1
+      },
+      "choices": [
+        {
+          "type": "guardian",
+          "state": "idle",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "guardian:idle:phrase:2"
+          ]
+        },
+        {
+          "type": "guardian",
+          "state": "idle",
+          "time": 3.8533333333333335,
+          "phraseKeys": [
+            "guardian:idle:phrase:1"
+          ]
+        },
+        {
+          "type": "guardian",
+          "state": "idle",
+          "time": 7.653333333333333,
+          "phraseKeys": [
+            "guardian:idle:phrase:0"
+          ]
+        },
+        {
+          "type": "guardian",
+          "state": "idle",
+          "time": 11.453333333333333,
+          "phraseKeys": [
+            "guardian:idle:phrase:3"
+          ]
+        }
+      ],
+      "callMetrics": [
+        {
+          "phrase": "guardian:idle:phrase:2",
+          "peak": 0.06102488934993744,
+          "rms": 0.003858210881715365,
+          "dc": 0.0000035309322588701394,
+          "activeSeconds": 1.0175416666666666,
+          "centroidHz": 378.559867918898,
+          "lowBandFraction": 0.395676030449188,
+          "chestBandFraction": 0.7363886812317214,
+          "subBassFraction": 0.008506524813440794,
+          "hash": "3aba6cd74cb8aec9114ad6b8a6c11feb0a760073dc74feb91a8214cd8a2cc82d"
+        },
+        {
+          "phrase": "guardian:idle:phrase:1",
+          "peak": 0.07875369489192963,
+          "rms": 0.009485414048037155,
+          "dc": 0.000008979731514579256,
+          "activeSeconds": 1.5916666666666666,
+          "centroidHz": 516.7612714963751,
+          "lowBandFraction": 0.01216510370847692,
+          "chestBandFraction": 0.9223227418593904,
+          "subBassFraction": 0.0010242644979009735,
+          "hash": "bc18933486d17e39edcead4e4cc50bb4d916d61b3f5f2f3083e0eff52a7ec555"
+        },
+        {
+          "phrase": "guardian:idle:phrase:0",
+          "peak": 0.06765039265155792,
+          "rms": 0.004618984973871645,
+          "dc": 0.000011378219127014114,
+          "activeSeconds": 1.1258125,
+          "centroidHz": 292.7026724718619,
+          "lowBandFraction": 0.5361196423507514,
+          "chestBandFraction": 0.8859125916901818,
+          "subBassFraction": 0.006224605716458281,
+          "hash": "2da2bd2a2f4fac85f5ccdd0aa3f5cbd775f43ee01a4d3d6a6a578dd1b1242fd5"
+        },
+        {
+          "phrase": "guardian:idle:phrase:3",
+          "peak": 0.07271113991737366,
+          "rms": 0.004616443093397599,
+          "dc": 0.000017752798905753606,
+          "activeSeconds": 1.5789375,
+          "centroidHz": 508.442633400761,
+          "lowBandFraction": 0.22024000217789122,
+          "chestBandFraction": 0.7056134110066081,
+          "subBassFraction": 0.007528500977212086,
+          "hash": "511959944b8456d056789658849bd189c164e43050c1d28e542bdbcce9802523"
+        }
+      ]
+    },
+    {
+      "type": "guardian",
+      "state": "attack",
+      "peak": 0.18405687808990479,
+      "rms": 0.019582062503721707,
+      "dc": 0.000005910732356124898,
+      "activeSeconds": 6.739166666666667,
+      "centroidHz": 730.9429789621566,
+      "lowBandFraction": 0.049062261417815424,
+      "chestBandFraction": 0.14641394085783171,
+      "subBassFraction": 0.00015281117193856347,
+      "hash": "37481933db88b34b0ee5ba696ecdd2139aa4cf2d207f51348e0d20f4894cdcfc",
+      "counts": {
+        "guardian": 4,
+        "guardian:attack": 4,
+        "guardian:attack:phrase:2": 1,
+        "guardian:attack:phrase:1": 1,
+        "guardian:attack:phrase:0": 1,
+        "guardian:attack:phrase:3": 1
+      },
+      "choices": [
+        {
+          "type": "guardian",
+          "state": "attack",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "guardian:attack:phrase:2"
+          ]
+        },
+        {
+          "type": "guardian",
+          "state": "attack",
+          "time": 3.8533333333333335,
+          "phraseKeys": [
+            "guardian:attack:phrase:1"
+          ]
+        },
+        {
+          "type": "guardian",
+          "state": "attack",
+          "time": 7.653333333333333,
+          "phraseKeys": [
+            "guardian:attack:phrase:0"
+          ]
+        },
+        {
+          "type": "guardian",
+          "state": "attack",
+          "time": 11.453333333333333,
+          "phraseKeys": [
+            "guardian:attack:phrase:3"
+          ]
+        }
+      ],
+      "callMetrics": [
+        {
+          "phrase": "guardian:attack:phrase:2",
+          "peak": 0.10812552273273468,
+          "rms": 0.00831759749599536,
+          "dc": 3.481586740027195e-7,
+          "activeSeconds": 1.2953333333333332,
+          "centroidHz": 624.6779517128714,
+          "lowBandFraction": 0.1298538740443956,
+          "chestBandFraction": 0.451819663452001,
+          "subBassFraction": 0.00038689616008144134,
+          "hash": "dbac72d1adbb77ff60b6e41c7a48aa35e2acb2ee3ba88713fbf953af75b7eddb"
+        },
+        {
+          "phrase": "guardian:attack:phrase:1",
+          "peak": 0.18405687808990479,
+          "rms": 0.028783075329551797,
+          "dc": 0.000010617422607294134,
+          "activeSeconds": 1.9208333333333334,
+          "centroidHz": 822.1506263866256,
+          "lowBandFraction": 0.008282884549450744,
+          "chestBandFraction": 0.0388982281214615,
+          "subBassFraction": 0.000054996139859016065,
+          "hash": "42acf4817b4786d846d56bf94e38379f04bfb26e1fe4b5d3e5b622f378f166aa"
+        },
+        {
+          "phrase": "guardian:attack:phrase:0",
+          "peak": 0.11425577849149704,
+          "rms": 0.009119386698430676,
+          "dc": 0.0000013431008564374741,
+          "activeSeconds": 1.3377291666666666,
+          "centroidHz": 496.738182293909,
+          "lowBandFraction": 0.4518877004073252,
+          "chestBandFraction": 0.600833026024756,
+          "subBassFraction": 0.00026275973315950494,
+          "hash": "a4132b47eaf116c1a1cc3dcb11e53e0aadbccc9d4fd5d5d3d53e00999e76d4c2"
+        },
+        {
+          "phrase": "guardian:attack:phrase:3",
+          "peak": 0.181989848613739,
+          "rms": 0.022697662287399376,
+          "dc": 0.000010622770709634478,
+          "activeSeconds": 2.1852708333333335,
+          "centroidHz": 668.3256989658161,
+          "lowBandFraction": 0.018807634993710194,
+          "chestBandFraction": 0.17493674672270226,
+          "subBassFraction": 0.00010753671410177132,
+          "hash": "34f7fcb88a2bbe5846e98bea56f68512276ebc5383d21c147108f592dd4143c8"
+        }
+      ]
+    },
+    {
+      "type": "caveguard",
+      "state": "idle",
+      "peak": 0.05262598767876625,
+      "rms": 0.005593094420549523,
+      "dc": 4.891975295598597e-7,
+      "activeSeconds": 6.153708333333333,
+      "centroidHz": 256.46357323583464,
+      "lowBandFraction": 0.6983167267409955,
+      "chestBandFraction": 0.9618507215398638,
+      "subBassFraction": 0.000029929427222229552,
+      "hash": "e776ee0a805b2e4333ed1d17bf06c0e94350ad5622aa12e42261e380642e0e87",
+      "counts": {
+        "caveguard": 4,
+        "caveguard:idle": 4,
+        "caveguard:idle:phrase:2": 1,
+        "caveguard:idle:phrase:1": 1,
+        "caveguard:idle:phrase:0": 1,
+        "caveguard:idle:phrase:3": 1
+      },
+      "choices": [
+        {
+          "type": "caveguard",
+          "state": "idle",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "caveguard:idle:phrase:2"
+          ]
+        },
+        {
+          "type": "caveguard",
+          "state": "idle",
+          "time": 3.8533333333333335,
+          "phraseKeys": [
+            "caveguard:idle:phrase:1"
+          ]
+        },
+        {
+          "type": "caveguard",
+          "state": "idle",
+          "time": 7.653333333333333,
+          "phraseKeys": [
+            "caveguard:idle:phrase:0"
+          ]
+        },
+        {
+          "type": "caveguard",
+          "state": "idle",
+          "time": 11.453333333333333,
+          "phraseKeys": [
+            "caveguard:idle:phrase:3"
+          ]
+        }
+      ],
+      "callMetrics": [
+        {
+          "phrase": "caveguard:idle:phrase:2",
+          "peak": 0.0416887141764164,
+          "rms": 0.005977454241277031,
+          "dc": 5.765485577877416e-7,
+          "activeSeconds": 1.2730625,
+          "centroidHz": 288.3632181079939,
+          "lowBandFraction": 0.7420805204955295,
+          "chestBandFraction": 0.9277090972574661,
+          "subBassFraction": 0.000020184081724411823,
+          "hash": "087932577b80809e5444a67bec1f8d0d0cab9d751cdf08f796de2858664e045c"
+        },
+        {
+          "phrase": "caveguard:idle:phrase:1",
+          "peak": 0.05262598767876625,
+          "rms": 0.007699250201668016,
+          "dc": 0.0000015213311528649941,
+          "activeSeconds": 1.7835833333333333,
+          "centroidHz": 250.33195075772556,
+          "lowBandFraction": 0.620242094877691,
+          "chestBandFraction": 0.9835498207656187,
+          "subBassFraction": 0.000005359536830160296,
+          "hash": "2b03b512e37ab783d8c5ac7cbf00cea397b6cd7cf9a5cdfb12eb7298558f5d7a"
+        },
+        {
+          "phrase": "caveguard:idle:phrase:0",
+          "peak": 0.03624766319990158,
+          "rms": 0.005000325395539028,
+          "dc": 1.034815128891216e-7,
+          "activeSeconds": 1.3685833333333333,
+          "centroidHz": 234.04549096243855,
+          "lowBandFraction": 0.7623130330897847,
+          "chestBandFraction": 0.9637539181880649,
+          "subBassFraction": 0.00003675871350929517,
+          "hash": "1d1274144a86aeab671cac1326adf3a19caaccf4fe151175a559c8941769411c"
+        },
+        {
+          "phrase": "caveguard:idle:phrase:3",
+          "peak": 0.028772052377462387,
+          "rms": 0.0034515030726619913,
+          "dc": 1.1192132031104315e-7,
+          "activeSeconds": 1.7284791666666666,
+          "centroidHz": 238.92736950170126,
+          "lowBandFraction": 0.8160725187089233,
+          "chestBandFraction": 0.9616381855141717,
+          "subBassFraction": 0.000027728324722891357,
+          "hash": "ae55ce48f7940b355e082b350143e33941a1d19216a1017ba8795bdc4c36a59e"
+        }
+      ]
+    },
+    {
+      "type": "caveguard",
+      "state": "attack",
+      "peak": 0.12228609621524811,
+      "rms": 0.012812393453173756,
+      "dc": 0.0000010591205636210428,
+      "activeSeconds": 6.1855416666666665,
+      "centroidHz": 348.27372106962355,
+      "lowBandFraction": 0.006422400163787217,
+      "chestBandFraction": 0.989077266059836,
+      "subBassFraction": 0.000024217121583526533,
+      "hash": "03023410d887a8700db95507815bd88aafc5d363ddd2b848c96bd45583dfc52e",
+      "counts": {
+        "caveguard": 4,
+        "caveguard:attack": 4,
+        "caveguard:attack:phrase:2": 1,
+        "caveguard:attack:phrase:1": 1,
+        "caveguard:attack:phrase:0": 1,
+        "caveguard:attack:phrase:3": 1
+      },
+      "choices": [
+        {
+          "type": "caveguard",
+          "state": "attack",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "caveguard:attack:phrase:2"
+          ]
+        },
+        {
+          "type": "caveguard",
+          "state": "attack",
+          "time": 3.8533333333333335,
+          "phraseKeys": [
+            "caveguard:attack:phrase:1"
+          ]
+        },
+        {
+          "type": "caveguard",
+          "state": "attack",
+          "time": 7.653333333333333,
+          "phraseKeys": [
+            "caveguard:attack:phrase:0"
+          ]
+        },
+        {
+          "type": "caveguard",
+          "state": "attack",
+          "time": 11.453333333333333,
+          "phraseKeys": [
+            "caveguard:attack:phrase:3"
+          ]
+        }
+      ],
+      "callMetrics": [
+        {
+          "phrase": "caveguard:attack:phrase:2",
+          "peak": 0.11684822291135788,
+          "rms": 0.013981357259262204,
+          "dc": 0.0000028515888039956306,
+          "activeSeconds": 1.269,
+          "centroidHz": 361.80224311982204,
+          "lowBandFraction": 0.0003092366049259014,
+          "chestBandFraction": 0.9873734039118846,
+          "subBassFraction": 0.0000071566525948411615,
+          "hash": "b5175e35065fb4137fb7a26d072e97c5e20f8f63ab29912cad84e1757372c694"
+        },
+        {
+          "phrase": "caveguard:attack:phrase:1",
+          "peak": 0.11157666146755219,
+          "rms": 0.011455526525179244,
+          "dc": 0.000004148541647649274,
+          "activeSeconds": 1.5923541666666667,
+          "centroidHz": 345.8368827430481,
+          "lowBandFraction": 0.0038569006380260594,
+          "chestBandFraction": 0.9897099047164629,
+          "subBassFraction": 0.000009849789561668904,
+          "hash": "a39b975bf3ce65186db6f7d0636630bb39456117eef2d7ccc777df8645a36534"
+        },
+        {
+          "phrase": "caveguard:attack:phrase:0",
+          "peak": 0.12112635374069214,
+          "rms": 0.013992568320608162,
+          "dc": 0.0000010893421523402137,
+          "activeSeconds": 1.4168125,
+          "centroidHz": 365.99704589115447,
+          "lowBandFraction": 0.00959177171474025,
+          "chestBandFraction": 0.984999972936745,
+          "subBassFraction": 0.000004049966616182789,
+          "hash": "e6d78b15a5766fb5a42422bd4b8717a853624ad7ec896c92377db8dc266c3a3e"
+        },
+        {
+          "phrase": "caveguard:attack:phrase:3",
+          "peak": 0.12228609621524811,
+          "rms": 0.01197007317173791,
+          "dc": 9.878810246255953e-7,
+          "activeSeconds": 1.907375,
+          "centroidHz": 310.91207769662606,
+          "lowBandFraction": 0.003052281700838949,
+          "chestBandFraction": 0.994692958099546,
+          "subBassFraction": 0.000007355753952536593,
+          "hash": "e016a2b393be9b7f2e05a43753cfacafec0bc65730a39da088ac3597f1468d86"
+        }
+      ]
+    }
+  ],
+  "extras": [
+    {
+      "type": "demon",
+      "state": "charge",
+      "peak": 0.20140878856182098,
+      "rms": 0.020878023744739772,
+      "dc": 0.000007485075060439033,
+      "activeSeconds": 1.9359375,
+      "centroidHz": 356.41372197363046,
+      "lowBandFraction": 0.39222608119291064,
+      "chestBandFraction": 0.7713173899905408,
+      "subBassFraction": 0.03994449597635082,
+      "hash": "d86e36a9ff1c686c865e2ef287d49a0461ee554c14cc5dbe4f07ade999f47473",
+      "counts": {
+        "demon": 1,
+        "demon:charge": 1,
+        "demon:charge:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "demon",
+          "state": "charge",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "demon:charge:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "leaper",
+      "state": "move",
+      "peak": 0.006461451295763254,
+      "rms": 0.000410900776114415,
+      "dc": 3.02360633185033e-7,
+      "activeSeconds": 0.17772916666666666,
+      "centroidHz": 1096.982585231204,
+      "lowBandFraction": 0.0017401916042352667,
+      "chestBandFraction": 0.2563686389507352,
+      "subBassFraction": 0.00040906820419428584,
+      "hash": "012cde313917dea72ea8ec747a7dd63fcc4632ff404a8b6d7a36b796c935f17d",
+      "counts": {
+        "leaper": 1,
+        "leaper:move": 1,
+        "leaper:move:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "leaper",
+          "state": "move",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "leaper:move:phrase:2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "colossus",
+      "state": "step",
+      "peak": 0.037832967936992645,
+      "rms": 0.0023472442917017067,
+      "dc": 0.00003718160588868828,
+      "activeSeconds": 0.8470208333333333,
+      "centroidHz": 37.402895950945414,
+      "lowBandFraction": 0.9946396591704149,
+      "chestBandFraction": 0.997245426433915,
+      "subBassFraction": 0.9815843362903478,
+      "hash": "46adcc23ae3f459a5a0d01c965690b408f6b26b2dfd434552764757e1156019a",
+      "counts": {
+        "colossus": 1,
+        "colossus:step": 1,
+        "colossus:step:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "colossus",
+          "state": "step",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "colossus:step:phrase:2"
+          ]
+        }
+      ]
+    }
+  ],
+  "mixes": [
+    {
+      "state": "attack",
+      "peak": 0.5266596078872681,
+      "rms": 0.06491529584267966,
+      "dc": 0.000034229683934084965,
+      "activeSeconds": 3.0801666666666665,
+      "centroidHz": 549.7836830395905,
+      "lowBandFraction": 0.3182521571536146,
+      "chestBandFraction": 0.4620199130460314,
+      "subBassFraction": 0.23085231708351558,
+      "hash": "f3abb9ffbd7436cf300af74dd6c939d789ae6a8ffd045b4c4fc170dc82739b10",
+      "counts": {
+        "shambler": 1,
+        "shambler:attack": 1,
+        "shambler:attack:phrase:2": 1,
+        "feral": 1,
+        "feral:attack": 1,
+        "feral:attack:phrase:3": 1,
+        "leaper": 1,
+        "leaper:attack": 1,
+        "leaper:attack:phrase:1": 1,
+        "drowned": 1,
+        "drowned:attack": 1,
+        "drowned:attack:phrase:1": 1,
+        "military": 1,
+        "military:attack": 1,
+        "military:attack:phrase:1": 1,
+        "brute": 1,
+        "brute:attack": 1,
+        "brute:attack:phrase:0": 1,
+        "spitter": 1,
+        "spitter:attack": 1,
+        "spitter:attack:phrase:2": 1,
+        "screamer": 1,
+        "screamer:attack": 1,
+        "screamer:attack:phrase:3": 1,
+        "bomber": 1,
+        "bomber:attack": 1,
+        "bomber:attack:phrase:2": 1,
+        "spider": 1,
+        "spider:attack": 1,
+        "spider:attack:phrase:2": 1,
+        "demon": 1,
+        "demon:attack": 1,
+        "demon:attack:phrase:3": 1,
+        "colossus": 1,
+        "colossus:attack": 1,
+        "colossus:attack:phrase:0": 1,
+        "guardian": 1,
+        "guardian:attack": 1,
+        "guardian:attack:phrase:2": 1,
+        "caveguard": 1,
+        "caveguard:attack": 1,
+        "caveguard:attack:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "shambler",
+          "state": "attack",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "shambler:attack:phrase:2"
+          ]
+        },
+        {
+          "type": "feral",
+          "state": "attack",
+          "time": 0.16533333333333333,
+          "phraseKeys": [
+            "feral:attack:phrase:3"
+          ]
+        },
+        {
+          "type": "leaper",
+          "state": "attack",
+          "time": 0.27466666666666667,
+          "phraseKeys": [
+            "leaper:attack:phrase:1"
+          ]
+        },
+        {
+          "type": "drowned",
+          "state": "attack",
+          "time": 0.384,
+          "phraseKeys": [
+            "drowned:attack:phrase:1"
+          ]
+        },
+        {
+          "type": "military",
+          "state": "attack",
+          "time": 0.49333333333333335,
+          "phraseKeys": [
+            "military:attack:phrase:1"
+          ]
+        },
+        {
+          "type": "brute",
+          "state": "attack",
+          "time": 0.6053333333333333,
+          "phraseKeys": [
+            "brute:attack:phrase:0"
+          ]
+        },
+        {
+          "type": "spitter",
+          "state": "attack",
+          "time": 0.7146666666666667,
+          "phraseKeys": [
+            "spitter:attack:phrase:2"
+          ]
+        },
+        {
+          "type": "screamer",
+          "state": "attack",
+          "time": 0.824,
+          "phraseKeys": [
+            "screamer:attack:phrase:3"
+          ]
+        },
+        {
+          "type": "bomber",
+          "state": "attack",
+          "time": 0.9333333333333333,
+          "phraseKeys": [
+            "bomber:attack:phrase:2"
+          ]
+        },
+        {
+          "type": "spider",
+          "state": "attack",
+          "time": 1.0453333333333332,
+          "phraseKeys": [
+            "spider:attack:phrase:2"
+          ]
+        },
+        {
+          "type": "demon",
+          "state": "attack",
+          "time": 1.1546666666666667,
+          "phraseKeys": [
+            "demon:attack:phrase:3"
+          ]
+        },
+        {
+          "type": "colossus",
+          "state": "attack",
+          "time": 1.264,
+          "phraseKeys": [
+            "colossus:attack:phrase:0"
+          ]
+        },
+        {
+          "type": "guardian",
+          "state": "attack",
+          "time": 1.3733333333333333,
+          "phraseKeys": [
+            "guardian:attack:phrase:2"
+          ]
+        },
+        {
+          "type": "caveguard",
+          "state": "attack",
+          "time": 1.4853333333333334,
+          "phraseKeys": [
+            "caveguard:attack:phrase:2"
+          ]
+        }
+      ],
+      "scheduled": [
+        {
+          "kind": "shambler",
+          "time": 0.05333333333333334
+        },
+        {
+          "kind": "feral",
+          "time": 0.16533333333333333
+        },
+        {
+          "kind": "leaper",
+          "time": 0.27466666666666667
+        },
+        {
+          "kind": "drowned",
+          "time": 0.384
+        },
+        {
+          "kind": "military",
+          "time": 0.49333333333333335
+        },
+        {
+          "kind": "brute",
+          "time": 0.6053333333333333
+        },
+        {
+          "kind": "spitter",
+          "time": 0.7146666666666667
+        },
+        {
+          "kind": "screamer",
+          "time": 0.824
+        },
+        {
+          "kind": "bomber",
+          "time": 0.9333333333333333
+        },
+        {
+          "kind": "spider",
+          "time": 1.0453333333333332
+        },
+        {
+          "kind": "demon",
+          "time": 1.1546666666666667
+        },
+        {
+          "kind": "colossus",
+          "time": 1.264
+        },
+        {
+          "kind": "guardian",
+          "time": 1.3733333333333333
+        },
+        {
+          "kind": "caveguard",
+          "time": 1.4853333333333334
+        }
+      ]
+    },
+    {
+      "state": "death",
+      "peak": 0.7660814523696899,
+      "rms": 0.11052847206023096,
+      "dc": 0.0003721052690491415,
+      "activeSeconds": 2.9999166666666666,
+      "centroidHz": 164.1120987262013,
+      "lowBandFraction": 0.8191517073494835,
+      "chestBandFraction": 0.9327721551145101,
+      "subBassFraction": 0.6002592402693095,
+      "hash": "e9ace3a64fd536c622fd4e846bfa0e2adc40662ef9058a180bdbf3b233f9645e",
+      "counts": {
+        "shambler": 1,
+        "shambler:death": 1,
+        "shambler:death:phrase:2": 1,
+        "feral": 1,
+        "feral:death": 1,
+        "feral:death:phrase:3": 1,
+        "leaper": 1,
+        "leaper:death": 1,
+        "leaper:death:phrase:1": 1,
+        "drowned": 1,
+        "drowned:death": 1,
+        "drowned:death:phrase:1": 1,
+        "military": 1,
+        "military:death": 1,
+        "military:death:phrase:1": 1,
+        "brute": 1,
+        "brute:death": 1,
+        "brute:death:phrase:0": 1,
+        "spitter": 1,
+        "spitter:death": 1,
+        "spitter:death:phrase:2": 1,
+        "screamer": 1,
+        "screamer:death": 1,
+        "screamer:death:phrase:3": 1,
+        "bomber": 1,
+        "bomber:death": 1,
+        "bomber:death:phrase:2": 1,
+        "spider": 1,
+        "spider:death": 1,
+        "spider:death:phrase:2": 1,
+        "demon": 1,
+        "demon:death": 1,
+        "demon:death:phrase:3": 1,
+        "colossus": 1,
+        "colossus:death": 1,
+        "colossus:death:phrase:0": 1,
+        "guardian": 1,
+        "guardian:death": 1,
+        "guardian:death:phrase:2": 1,
+        "caveguard": 1,
+        "caveguard:death": 1,
+        "caveguard:death:phrase:2": 1
+      },
+      "choices": [
+        {
+          "type": "shambler",
+          "state": "death",
+          "time": 0.05333333333333334,
+          "phraseKeys": [
+            "shambler:death:phrase:2"
+          ]
+        },
+        {
+          "type": "feral",
+          "state": "death",
+          "time": 0.09866666666666667,
+          "phraseKeys": [
+            "feral:death:phrase:3"
+          ]
+        },
+        {
+          "type": "leaper",
+          "state": "death",
+          "time": 0.144,
+          "phraseKeys": [
+            "leaper:death:phrase:1"
+          ]
+        },
+        {
+          "type": "drowned",
+          "state": "death",
+          "time": 0.18933333333333333,
+          "phraseKeys": [
+            "drowned:death:phrase:1"
+          ]
+        },
+        {
+          "type": "military",
+          "state": "death",
+          "time": 0.23466666666666666,
+          "phraseKeys": [
+            "military:death:phrase:1"
+          ]
+        },
+        {
+          "type": "brute",
+          "state": "death",
+          "time": 0.28,
+          "phraseKeys": [
+            "brute:death:phrase:0"
+          ]
+        },
+        {
+          "type": "spitter",
+          "state": "death",
+          "time": 0.3253333333333333,
+          "phraseKeys": [
+            "spitter:death:phrase:2"
+          ]
+        },
+        {
+          "type": "screamer",
+          "state": "death",
+          "time": 0.37066666666666664,
+          "phraseKeys": [
+            "screamer:death:phrase:3"
+          ]
+        },
+        {
+          "type": "bomber",
+          "state": "death",
+          "time": 0.41333333333333333,
+          "phraseKeys": [
+            "bomber:death:phrase:2"
+          ]
+        },
+        {
+          "type": "spider",
+          "state": "death",
+          "time": 0.45866666666666667,
+          "phraseKeys": [
+            "spider:death:phrase:2"
+          ]
+        },
+        {
+          "type": "demon",
+          "state": "death",
+          "time": 0.504,
+          "phraseKeys": [
+            "demon:death:phrase:3"
+          ]
+        },
+        {
+          "type": "colossus",
+          "state": "death",
+          "time": 0.5493333333333333,
+          "phraseKeys": [
+            "colossus:death:phrase:0"
+          ]
+        },
+        {
+          "type": "guardian",
+          "state": "death",
+          "time": 0.5946666666666667,
+          "phraseKeys": [
+            "guardian:death:phrase:2"
+          ]
+        },
+        {
+          "type": "caveguard",
+          "state": "death",
+          "time": 0.64,
+          "phraseKeys": [
+            "caveguard:death:phrase:2"
+          ]
+        }
+      ],
+      "scheduled": [
+        {
+          "kind": "shambler",
+          "time": 0.05333333333333334
+        },
+        {
+          "kind": "feral",
+          "time": 0.09866666666666667
+        },
+        {
+          "kind": "leaper",
+          "time": 0.144
+        },
+        {
+          "kind": "drowned",
+          "time": 0.18933333333333333
+        },
+        {
+          "kind": "military",
+          "time": 0.23466666666666666
+        },
+        {
+          "kind": "brute",
+          "time": 0.28
+        },
+        {
+          "kind": "spitter",
+          "time": 0.3253333333333333
+        },
+        {
+          "kind": "screamer",
+          "time": 0.37066666666666664
+        },
+        {
+          "kind": "bomber",
+          "time": 0.41333333333333333
+        },
+        {
+          "kind": "spider",
+          "time": 0.45866666666666667
+        },
+        {
+          "kind": "demon",
+          "time": 0.504
+        },
+        {
+          "kind": "colossus",
+          "time": 0.5493333333333333
+        },
+        {
+          "kind": "guardian",
+          "time": 0.5946666666666667
+        },
+        {
+          "kind": "caveguard",
+          "time": 0.64
+        }
+      ]
+    }
+  ],
+  "training": [
+    {
+      "state": "idle",
+      "peak": 0.06252746284008026,
+      "rms": 0.005765477272347608,
+      "dc": 0.0000020444873116956765,
+      "activeSeconds": 4.474458333333334,
+      "centroidHz": 184.90799180304634,
+      "lowBandFraction": 0.7584711784007171,
+      "chestBandFraction": 0.9012775327380537,
+      "subBassFraction": 0.6175439289494997,
+      "hash": "c1812bcb5b29300682677f4573db395bdf216f41b54546934345d00d82ac9459",
+      "counts": {
+        "guardian": 1,
+        "guardian:idle": 1,
+        "guardian:idle:phrase:2": 1
+      }
+    },
+    {
+      "state": "attack",
+      "peak": 0.11246941983699799,
+      "rms": 0.00888318611946933,
+      "dc": 0.0000012272421871218344,
+      "activeSeconds": 4.476270833333333,
+      "centroidHz": 477.0886100954266,
+      "lowBandFraction": 0.34949918035558997,
+      "chestBandFraction": 0.588134161922862,
+      "subBassFraction": 0.2574766585200897,
+      "hash": "c2e4ff84bc3aedac49f359f25244132309cddcd714838fb469c032a2aa6ad966",
+      "counts": {
+        "guardian": 1,
+        "guardian:attack": 1,
+        "guardian:attack:phrase:2": 1
+      }
+    },
+    {
+      "state": "hurt",
+      "peak": 0.1745690554380417,
+      "rms": 0.009987899538650266,
+      "dc": 0.000007719420685869885,
+      "activeSeconds": 4.475791666666667,
+      "centroidHz": 490.6030094175097,
+      "lowBandFraction": 0.39531076868457277,
+      "chestBandFraction": 0.5820763227211995,
+      "subBassFraction": 0.21811614187953438,
+      "hash": "9f836d6c3ebd9c59e3921208e14bba270c3b850f7f6121b78fb83e81c8c89a73",
+      "counts": {
+        "guardian": 1,
+        "guardian:hurt": 1,
+        "guardian:hurt:phrase:2": 1
+      }
+    },
+    {
+      "state": "death",
+      "peak": 0.28441742062568665,
+      "rms": 0.03774276610716335,
+      "dc": 0.00009617890432692725,
+      "activeSeconds": 4.478083333333333,
+      "centroidHz": 520.7934146102244,
+      "lowBandFraction": 0.046267284433217315,
+      "chestBandFraction": 0.8589411917107144,
+      "subBassFraction": 0.045097788975079704,
+      "hash": "bd89d95e3d0ee9d4ac4069687fa5fb6edc3f470dfa39393b4034cbd85220ba27",
+      "counts": {
+        "guardian": 1,
+        "guardian:death": 1,
+        "guardian:death:phrase:2": 1
+      }
+    }
+  ],
+  "limitations": "Signal checks prove audible, finite, unclipped output. Phrase counters prove structural variety, separately from waveform randomness. These checks do not establish subjective realism, fear or listening balance.",
+  "errors": [],
+  "summary": "70 state samples, 28 four-call reels (112 structurally distinct calls), 3 special cues, 2 horde mixes and 4 Training routes passed. All clips finite, audible and unclipped; every reel covers all four phrases without repeating.",
+  "completedAt": "2026-10-10T04:07:02.555Z",
+  "gallery": {
+    "playableLinks": 131,
+    "distinctFiles": 131,
+    "allWavHeadersValid": true,
+    "noAutoplay": true,
+    "highestFinal50msPeaks": [
+      {
+        "file": "shambler-idle-variations.wav",
+        "seconds": 16.5,
+        "tailPeak": 0
+      },
+      {
+        "file": "shambler-attack-variations.wav",
+        "seconds": 16.5,
+        "tailPeak": 0
+      },
+      {
+        "file": "shambler-idle.wav",
+        "seconds": 4.5,
+        "tailPeak": 0
+      },
+      {
+        "file": "shambler-chase.wav",
+        "seconds": 4.5,
+        "tailPeak": 0
+      },
+      {
+        "file": "shambler-attack.wav",
+        "seconds": 4.5,
+        "tailPeak": 0
+      }
+    ]
+  }
+}

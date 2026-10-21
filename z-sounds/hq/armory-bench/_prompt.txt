@@ -1,0 +1,9 @@
+#126 hq/armory-bench
+MISSING: the game makes no sound here now
+Now: (silent: the Armory)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 1.2 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A gunsmith working on a rifle on a workbench: a part sliding on, a screw tightened, a click. No music, no voice.

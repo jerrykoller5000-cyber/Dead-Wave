@@ -1,0 +1,9 @@
+#1 player/footstep-dirt  (start here)
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: footstep(dry)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.5 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A single soldier's combat boot footstep on packed dirt and short grass, outdoors, close. No music, no voice.

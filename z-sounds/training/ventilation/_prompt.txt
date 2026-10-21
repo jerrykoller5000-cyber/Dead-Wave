@@ -1,0 +1,9 @@
+#174 training/ventilation
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: 60 Hz hum (synth)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 10 s   Loop: on   Prompt influence: ~0.6
+
+Prompt:
+An industrial building's ventilation system humming and blowing air, steady, seamless. No music, no voice.

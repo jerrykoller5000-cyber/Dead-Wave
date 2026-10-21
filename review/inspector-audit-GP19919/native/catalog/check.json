@@ -1,0 +1,2554 @@
+{
+ "at": "2026-10-14T17:18:56.452Z",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "results": [
+  {
+   "id": "marine",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 122,
+   "tris": 81066,
+   "size": [
+    0.893,
+    1.778,
+    0.712
+   ],
+   "error": null
+  },
+  {
+   "id": "marine.fresh",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 247,
+   "tris": 19122,
+   "size": [
+    0.781,
+    1.619,
+    0.967
+   ],
+   "error": null
+  },
+  {
+   "id": "zombie.shambler",
+   "variant": null,
+   "mode": "statue",
+   "ok": true,
+   "ms": 427,
+   "tris": 9514,
+   "size": [
+    0.814,
+    1.944,
+    0.702
+   ],
+   "error": null
+  },
+  {
+   "id": "zombie.feral",
+   "variant": null,
+   "mode": "statue",
+   "ok": true,
+   "ms": 141,
+   "tris": 9014,
+   "size": [
+    0.755,
+    1.401,
+    1.079
+   ],
+   "error": null
+  },
+  {
+   "id": "zombie.leaper",
+   "variant": null,
+   "mode": "statue",
+   "ok": true,
+   "ms": 140,
+   "tris": 9436,
+   "size": [
+    0.84,
+    1.427,
+    1.615
+   ],
+   "error": null
+  },
+  {
+   "id": "zombie.spider",
+   "variant": null,
+   "mode": "statue",
+   "ok": true,
+   "ms": 135,
+   "tris": 6414,
+   "size": [
+    1.727,
+    0.961,
+    1.762
+   ],
+   "error": null
+  },
+  {
+   "id": "zombie.drowned",
+   "variant": null,
+   "mode": "statue",
+   "ok": true,
+   "ms": 144,
+   "tris": 11614,
+   "size": [
+    0.844,
+    1.78,
+    0.563
+   ],
+   "error": null
+  },
+  {
+   "id": "zombie.military",
+   "variant": null,
+   "mode": "statue",
+   "ok": true,
+   "ms": 290,
+   "tris": 16482,
+   "size": [
+    0.92,
+    2.019,
+    0.668
+   ],
+   "error": null
+  },
+  {
+   "id": "zombie.brute",
+   "variant": null,
+   "mode": "statue",
+   "ok": true,
+   "ms": 152,
+   "tris": 14464,
+   "size": [
+    1.83,
+    2.676,
+    1.025
+   ],
+   "error": null
+  },
+  {
+   "id": "zombie.spitter",
+   "variant": null,
+   "mode": "statue",
+   "ok": true,
+   "ms": 157,
+   "tris": 10874,
+   "size": [
+    0.947,
+    2.04,
+    0.7
+   ],
+   "error": null
+  },
+  {
+   "id": "zombie.screamer",
+   "variant": null,
+   "mode": "statue",
+   "ok": true,
+   "ms": 208,
+   "tris": 11698,
+   "size": [
+    1.442,
+    2.639,
+    1.382
+   ],
+   "error": null
+  },
+  {
+   "id": "zombie.bomber",
+   "variant": null,
+   "mode": "statue",
+   "ok": true,
+   "ms": 297,
+   "tris": 15394,
+   "size": [
+    1.623,
+    2.117,
+    1.751
+   ],
+   "error": null
+  },
+  {
+   "id": "zombie.demon",
+   "variant": null,
+   "mode": "statue",
+   "ok": true,
+   "ms": 228,
+   "tris": 14842,
+   "size": [
+    2.142,
+    3.136,
+    1.142
+   ],
+   "error": null
+  },
+  {
+   "id": "zombie.colossus",
+   "variant": null,
+   "mode": "statue",
+   "ok": true,
+   "ms": 268,
+   "tris": 15258,
+   "size": [
+    3.187,
+    5.045,
+    3.209
+   ],
+   "error": null
+  },
+  {
+   "id": "zombie.guardian",
+   "variant": null,
+   "mode": "statue",
+   "ok": true,
+   "ms": 140,
+   "tris": 8096,
+   "size": [
+    1.501,
+    3.275,
+    1.089
+   ],
+   "error": null
+  },
+  {
+   "id": "zombie.caveguard",
+   "variant": null,
+   "mode": "statue",
+   "ok": true,
+   "ms": 133,
+   "tris": 8096,
+   "size": [
+    1.39,
+    2.97,
+    1.281
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.minigun",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 111,
+   "tris": 9536,
+   "size": [
+    0.396,
+    0.512,
+    1.276
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.m4",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 106,
+   "tris": 7600,
+   "size": [
+    0.088,
+    0.301,
+    1.043
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.ak",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 107,
+   "tris": 5516,
+   "size": [
+    0.098,
+    0.304,
+    1.092
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.pistol",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 107,
+   "tris": 4414,
+   "size": [
+    0.048,
+    0.195,
+    0.261
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.uzi",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 110,
+   "tris": 6948,
+   "size": [
+    0.079,
+    0.282,
+    0.432
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.shotgun",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 111,
+   "tris": 4352,
+   "size": [
+    0.088,
+    0.218,
+    1.149
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.aa12",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 111,
+   "tris": 8868,
+   "size": [
+    0.212,
+    0.407,
+    1.059
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.revolver",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 110,
+   "tris": 5406,
+   "size": [
+    0.078,
+    0.214,
+    0.348
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.sniper",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 116,
+   "tris": 8518,
+   "size": [
+    0.156,
+    0.298,
+    1.322
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.launcher",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 110,
+   "tris": 7908,
+   "size": [
+    0.2,
+    0.214,
+    0.828
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.flamer",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 110,
+   "tris": 8916,
+   "size": [
+    0.22,
+    0.241,
+    0.893
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.chainsaw",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 111,
+   "tris": 7016,
+   "size": [
+    0.308,
+    0.337,
+    0.938
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.knife",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 101,
+   "tris": 2668,
+   "size": [
+    0.129,
+    0.071,
+    0.603
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.machete",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 107,
+   "tris": 1704,
+   "size": [
+    0.058,
+    0.123,
+    0.92
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.katana",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 113,
+   "tris": 776,
+   "size": [
+    0.071,
+    0.088,
+    0.919
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.katana-sheathed",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 102,
+   "tris": 616,
+   "size": [
+    0.071,
+    0.09,
+    0.931
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.m240",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 106,
+   "tris": 11332,
+   "size": [
+    0.803,
+    0.959,
+    1.334
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.m240-folded",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 101,
+   "tris": 9900,
+   "size": [
+    0.146,
+    0.366,
+    1.334
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.mortar",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 136,
+   "tris": 4036,
+   "size": [
+    0.92,
+    1.176,
+    1.31
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.mortar-collapsed",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 111,
+   "tris": 4192,
+   "size": [
+    0.92,
+    1.546,
+    0.27
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.mortar-round",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 98,
+   "tris": 72,
+   "size": [
+    0.26,
+    0.18,
+    0.49
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.frag-grenade",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 99,
+   "tris": 372,
+   "size": [
+    0.1,
+    0.124,
+    0.1
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.holy-grenade",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 117,
+   "tris": 880,
+   "size": [
+    0.24,
+    0.29,
+    0.221
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.med-pen",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 135,
+   "tris": 340,
+   "size": [
+    0.06,
+    0.32,
+    0.06
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.rune-pistol",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 181,
+   "tris": 4414,
+   "size": [
+    0.048,
+    0.195,
+    0.261
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.shovel",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 102,
+   "tris": 88,
+   "size": [
+    0.24,
+    1.565,
+    0.1
+   ],
+   "error": null
+  },
+  {
+   "id": "animal.rabbit",
+   "variant": "loaf",
+   "mode": null,
+   "ok": true,
+   "ms": 158,
+   "tris": 1994,
+   "size": [
+    0.239,
+    0.43,
+    0.417
+   ],
+   "error": null
+  },
+  {
+   "id": "animal.rabbit",
+   "variant": "graze",
+   "mode": null,
+   "ok": true,
+   "ms": 109,
+   "tris": 1994,
+   "size": [
+    0.24,
+    0.438,
+    0.415
+   ],
+   "error": null
+  },
+  {
+   "id": "animal.rabbit",
+   "variant": "groom",
+   "mode": null,
+   "ok": true,
+   "ms": 101,
+   "tris": 1994,
+   "size": [
+    0.227,
+    0.413,
+    0.396
+   ],
+   "error": null
+  },
+  {
+   "id": "animal.rabbit",
+   "variant": "drink",
+   "mode": null,
+   "ok": true,
+   "ms": 103,
+   "tris": 1994,
+   "size": [
+    0.267,
+    0.488,
+    0.461
+   ],
+   "error": null
+  },
+  {
+   "id": "animal.rabbit",
+   "variant": "hop",
+   "mode": null,
+   "ok": true,
+   "ms": 104,
+   "tris": 1994,
+   "size": [
+    0.262,
+    0.472,
+    0.456
+   ],
+   "error": null
+  },
+  {
+   "id": "animal.killer-rabbit",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 111,
+   "tris": 574,
+   "size": [
+    0.306,
+    0.555,
+    0.549
+   ],
+   "error": null
+  },
+  {
+   "id": "animal.bird",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 152,
+   "tris": 302,
+   "size": [
+    0.472,
+    0.172,
+    0.474
+   ],
+   "error": null
+  },
+  {
+   "id": "animal.bee",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 118,
+   "tris": 70,
+   "size": [
+    0.159,
+    0.083,
+    0.164
+   ],
+   "error": null
+  },
+  {
+   "id": "animal.butterfly",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 101,
+   "tris": 24,
+   "size": [
+    0.263,
+    0.117,
+    0.107
+   ],
+   "error": null
+  },
+  {
+   "id": "animal.frog",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 99,
+   "tris": 128,
+   "size": [
+    0.149,
+    0.109,
+    0.145
+   ],
+   "error": null
+  },
+  {
+   "id": "animal.squirrel",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 100,
+   "tris": 218,
+   "size": [
+    0.142,
+    0.217,
+    0.322
+   ],
+   "error": null
+  },
+  {
+   "id": "animal.turtle",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 187,
+   "tris": 378,
+   "size": [
+    0.244,
+    0.121,
+    0.306
+   ],
+   "error": null
+  },
+  {
+   "id": "animal.fish",
+   "variant": "0",
+   "mode": null,
+   "ok": true,
+   "ms": 98,
+   "tris": 343,
+   "size": [
+    0.094,
+    0.169,
+    0.398
+   ],
+   "error": null
+  },
+  {
+   "id": "animal.fish",
+   "variant": "1",
+   "mode": null,
+   "ok": true,
+   "ms": 101,
+   "tris": 343,
+   "size": [
+    0.084,
+    0.151,
+    0.357
+   ],
+   "error": null
+  },
+  {
+   "id": "animal.fish",
+   "variant": "2",
+   "mode": null,
+   "ok": true,
+   "ms": 102,
+   "tris": 343,
+   "size": [
+    0.098,
+    0.176,
+    0.416
+   ],
+   "error": null
+  },
+  {
+   "id": "animal.fish",
+   "variant": "3",
+   "mode": null,
+   "ok": true,
+   "ms": 102,
+   "tris": 343,
+   "size": [
+    0.055,
+    0.099,
+    0.233
+   ],
+   "error": null
+  },
+  {
+   "id": "animal.lily-pad",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 102,
+   "tris": 14,
+   "size": [
+    0.981,
+    0,
+    0.981
+   ],
+   "error": null
+  },
+  {
+   "id": "animal.nest",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 102,
+   "tris": 176,
+   "size": [
+    0.58,
+    0.12,
+    0.582
+   ],
+   "error": null
+  },
+  {
+   "id": "animal.burrow",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 147,
+   "tris": 382,
+   "size": [
+    1.067,
+    0.3,
+    1.128
+   ],
+   "error": null
+  },
+  {
+   "id": "person.okafor",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 236,
+   "tris": 27782,
+   "size": [
+    0.806,
+    1.619,
+    0.674
+   ],
+   "error": null
+  },
+  {
+   "id": "person.brandt",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 282,
+   "tris": 25886,
+   "size": [
+    0.806,
+    1.62,
+    0.6
+   ],
+   "error": null
+  },
+  {
+   "id": "person.pike",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 217,
+   "tris": 26370,
+   "size": [
+    0.806,
+    1.636,
+    0.674
+   ],
+   "error": null
+  },
+  {
+   "id": "person.skeletal-marine",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 115,
+   "tris": 2332,
+   "size": [
+    0.382,
+    1.647,
+    0.366
+   ],
+   "error": null
+  },
+  {
+   "id": "person.cave-guardian",
+   "variant": "wet",
+   "mode": null,
+   "ok": true,
+   "ms": 197,
+   "tris": 19582,
+   "size": [
+    2.83,
+    4.139,
+    3.018
+   ],
+   "error": null
+  },
+  {
+   "id": "person.cave-guardian",
+   "variant": "hill",
+   "mode": null,
+   "ok": true,
+   "ms": 144,
+   "tris": 19582,
+   "size": [
+    2.83,
+    4.139,
+    3.018
+   ],
+   "error": null
+  },
+  {
+   "id": "person.cave-guardian",
+   "variant": "root",
+   "mode": null,
+   "ok": true,
+   "ms": 141,
+   "tris": 19582,
+   "size": [
+    2.83,
+    4.139,
+    3.018
+   ],
+   "error": null
+  },
+  {
+   "id": "person.cave-guardian",
+   "variant": "shale",
+   "mode": null,
+   "ok": true,
+   "ms": 144,
+   "tris": 19582,
+   "size": [
+    2.83,
+    4.139,
+    3.018
+   ],
+   "error": null
+  },
+  {
+   "id": "person.cave-guardian",
+   "variant": "iron",
+   "mode": null,
+   "ok": true,
+   "ms": 138,
+   "tris": 19582,
+   "size": [
+    2.83,
+    4.139,
+    3.018
+   ],
+   "error": null
+  },
+  {
+   "id": "person.cave-guardian",
+   "variant": "chalk",
+   "mode": null,
+   "ok": true,
+   "ms": 147,
+   "tris": 19582,
+   "size": [
+    2.83,
+    4.139,
+    3.018
+   ],
+   "error": null
+  },
+  {
+   "id": "build.wall",
+   "variant": "0",
+   "mode": null,
+   "ok": true,
+   "ms": 102,
+   "tris": 204,
+   "size": [
+    2,
+    2.7,
+    0.4
+   ],
+   "error": null
+  },
+  {
+   "id": "build.wall",
+   "variant": "1",
+   "mode": null,
+   "ok": true,
+   "ms": 107,
+   "tris": 444,
+   "size": [
+    2,
+    2.7,
+    0.4
+   ],
+   "error": null
+  },
+  {
+   "id": "build.wall",
+   "variant": "2",
+   "mode": null,
+   "ok": true,
+   "ms": 104,
+   "tris": 456,
+   "size": [
+    2.04,
+    2.7,
+    0.46
+   ],
+   "error": null
+  },
+  {
+   "id": "build.wall",
+   "variant": "3",
+   "mode": null,
+   "ok": true,
+   "ms": 107,
+   "tris": 684,
+   "size": [
+    2.08,
+    2.71,
+    0.48
+   ],
+   "error": null
+  },
+  {
+   "id": "build.wall",
+   "variant": "4",
+   "mode": null,
+   "ok": true,
+   "ms": 109,
+   "tris": 636,
+   "size": [
+    2,
+    2.71,
+    0.36
+   ],
+   "error": null
+  },
+  {
+   "id": "build.floor",
+   "variant": "0",
+   "mode": null,
+   "ok": true,
+   "ms": 99,
+   "tris": 144,
+   "size": [
+    2,
+    0.72,
+    2
+   ],
+   "error": null
+  },
+  {
+   "id": "build.floor",
+   "variant": "1",
+   "mode": null,
+   "ok": true,
+   "ms": 102,
+   "tris": 252,
+   "size": [
+    2,
+    0.72,
+    2
+   ],
+   "error": null
+  },
+  {
+   "id": "build.floor",
+   "variant": "2",
+   "mode": null,
+   "ok": true,
+   "ms": 113,
+   "tris": 852,
+   "size": [
+    2,
+    0.725,
+    2
+   ],
+   "error": null
+  },
+  {
+   "id": "build.barricade",
+   "variant": "0",
+   "mode": null,
+   "ok": true,
+   "ms": 100,
+   "tris": 108,
+   "size": [
+    2,
+    1.9,
+    0.24
+   ],
+   "error": null
+  },
+  {
+   "id": "build.barricade",
+   "variant": "1",
+   "mode": null,
+   "ok": true,
+   "ms": 111,
+   "tris": 204,
+   "size": [
+    2,
+    1.9,
+    0.24
+   ],
+   "error": null
+  },
+  {
+   "id": "build.barricade",
+   "variant": "2",
+   "mode": null,
+   "ok": true,
+   "ms": 104,
+   "tris": 156,
+   "size": [
+    2.577,
+    1.109,
+    1.243
+   ],
+   "error": null
+  },
+  {
+   "id": "build.sandbag",
+   "variant": "0",
+   "mode": null,
+   "ok": true,
+   "ms": 100,
+   "tris": 912,
+   "size": [
+    2,
+    1.262,
+    0.54
+   ],
+   "error": null
+  },
+  {
+   "id": "build.sandbag",
+   "variant": "1",
+   "mode": null,
+   "ok": true,
+   "ms": 103,
+   "tris": 972,
+   "size": [
+    2.04,
+    1.612,
+    0.56
+   ],
+   "error": null
+  },
+  {
+   "id": "build.sandbag",
+   "variant": "2",
+   "mode": null,
+   "ok": true,
+   "ms": 111,
+   "tris": 324,
+   "size": [
+    1.98,
+    1.23,
+    0.66
+   ],
+   "error": null
+  },
+  {
+   "id": "build.wire",
+   "variant": "0",
+   "mode": null,
+   "ok": true,
+   "ms": 98,
+   "tris": 360,
+   "size": [
+    2,
+    1,
+    0.08
+   ],
+   "error": null
+  },
+  {
+   "id": "build.wire",
+   "variant": "1",
+   "mode": null,
+   "ok": true,
+   "ms": 103,
+   "tris": 720,
+   "size": [
+    2,
+    1,
+    0.864
+   ],
+   "error": null
+  },
+  {
+   "id": "build.wire",
+   "variant": "2",
+   "mode": null,
+   "ok": true,
+   "ms": 113,
+   "tris": 360,
+   "size": [
+    1.978,
+    1.25,
+    0.086
+   ],
+   "error": null
+  },
+  {
+   "id": "build.railing",
+   "variant": "0",
+   "mode": null,
+   "ok": true,
+   "ms": 100,
+   "tris": 84,
+   "size": [
+    2,
+    0.72,
+    0.1
+   ],
+   "error": null
+  },
+  {
+   "id": "build.railing",
+   "variant": "1",
+   "mode": null,
+   "ok": true,
+   "ms": 110,
+   "tris": 240,
+   "size": [
+    2,
+    0.72,
+    0.1
+   ],
+   "error": null
+  },
+  {
+   "id": "build.railing",
+   "variant": "2",
+   "mode": null,
+   "ok": true,
+   "ms": 106,
+   "tris": 144,
+   "size": [
+    2,
+    0.729,
+    0.33
+   ],
+   "error": null
+  },
+  {
+   "id": "build.platform",
+   "variant": "0",
+   "mode": null,
+   "ok": true,
+   "ms": 100,
+   "tris": 244,
+   "size": [
+    3.52,
+    0.56,
+    3.52
+   ],
+   "error": null
+  },
+  {
+   "id": "build.platform",
+   "variant": "1",
+   "mode": null,
+   "ok": true,
+   "ms": 111,
+   "tris": 292,
+   "size": [
+    3.52,
+    0.7,
+    3.52
+   ],
+   "error": null
+  },
+  {
+   "id": "build.platform",
+   "variant": "2",
+   "mode": null,
+   "ok": true,
+   "ms": 107,
+   "tris": 364,
+   "size": [
+    3.52,
+    0.735,
+    3.52
+   ],
+   "error": null
+  },
+  {
+   "id": "build.pillar",
+   "variant": "0",
+   "mode": null,
+   "ok": true,
+   "ms": 101,
+   "tris": 84,
+   "size": [
+    0.8,
+    2.5,
+    0.8
+   ],
+   "error": null
+  },
+  {
+   "id": "build.pillar",
+   "variant": "1",
+   "mode": null,
+   "ok": true,
+   "ms": 187,
+   "tris": 120,
+   "size": [
+    0.8,
+    2.5,
+    0.8
+   ],
+   "error": null
+  },
+  {
+   "id": "build.pillar",
+   "variant": "2",
+   "mode": null,
+   "ok": true,
+   "ms": 104,
+   "tris": 168,
+   "size": [
+    0.8,
+    2.5,
+    0.8
+   ],
+   "error": null
+  },
+  {
+   "id": "build.stairs",
+   "variant": "0",
+   "mode": null,
+   "ok": true,
+   "ms": 98,
+   "tris": 108,
+   "size": [
+    1.9,
+    2.113,
+    2.113
+   ],
+   "error": null
+  },
+  {
+   "id": "build.stairs",
+   "variant": "1",
+   "mode": null,
+   "ok": true,
+   "ms": 105,
+   "tris": 216,
+   "size": [
+    1.95,
+    2.234,
+    2.156
+   ],
+   "error": null
+  },
+  {
+   "id": "build.stairs",
+   "variant": "2",
+   "mode": null,
+   "ok": true,
+   "ms": 144,
+   "tris": 252,
+   "size": [
+    1.95,
+    2.234,
+    2.156
+   ],
+   "error": null
+  },
+  {
+   "id": "build.spikes",
+   "variant": "0",
+   "mode": null,
+   "ok": true,
+   "ms": 109,
+   "tris": 60,
+   "size": [
+    1.9,
+    0.075,
+    1.9
+   ],
+   "error": null
+  },
+  {
+   "id": "build.spikes",
+   "variant": "1",
+   "mode": null,
+   "ok": true,
+   "ms": 106,
+   "tris": 108,
+   "size": [
+    1.9,
+    0.11,
+    1.9
+   ],
+   "error": null
+  },
+  {
+   "id": "build.spikes",
+   "variant": "2",
+   "mode": null,
+   "ok": true,
+   "ms": 106,
+   "tris": 108,
+   "size": [
+    1.9,
+    0.11,
+    1.9
+   ],
+   "error": null
+  },
+  {
+   "id": "build.mine",
+   "variant": "0",
+   "mode": null,
+   "ok": true,
+   "ms": 95,
+   "tris": 136,
+   "size": [
+    0.741,
+    0.17,
+    0.76
+   ],
+   "error": null
+  },
+  {
+   "id": "build.mine",
+   "variant": "1",
+   "mode": null,
+   "ok": true,
+   "ms": 101,
+   "tris": 208,
+   "size": [
+    0.741,
+    0.17,
+    0.76
+   ],
+   "error": null
+  },
+  {
+   "id": "build.mine",
+   "variant": "2",
+   "mode": null,
+   "ok": true,
+   "ms": 117,
+   "tris": 280,
+   "size": [
+    0.741,
+    0.42,
+    0.76
+   ],
+   "error": null
+  },
+  {
+   "id": "build.lure",
+   "variant": "0",
+   "mode": null,
+   "ok": true,
+   "ms": 97,
+   "tris": 222,
+   "size": [
+    0.647,
+    1.74,
+    0.68
+   ],
+   "error": null
+  },
+  {
+   "id": "build.lure",
+   "variant": "1",
+   "mode": null,
+   "ok": true,
+   "ms": 116,
+   "tris": 274,
+   "size": [
+    0.647,
+    1.81,
+    0.68
+   ],
+   "error": null
+  },
+  {
+   "id": "build.lure",
+   "variant": "2",
+   "mode": null,
+   "ok": true,
+   "ms": 115,
+   "tris": 614,
+   "size": [
+    0.647,
+    2,
+    0.68
+   ],
+   "error": null
+  },
+  {
+   "id": "build.light",
+   "variant": "0",
+   "mode": null,
+   "ok": true,
+   "ms": 101,
+   "tris": 700,
+   "size": [
+    0.993,
+    1.39,
+    1.319
+   ],
+   "error": null
+  },
+  {
+   "id": "build.light",
+   "variant": "1",
+   "mode": null,
+   "ok": true,
+   "ms": 116,
+   "tris": 756,
+   "size": [
+    0.993,
+    1.42,
+    1.319
+   ],
+   "error": null
+  },
+  {
+   "id": "build.light",
+   "variant": "2",
+   "mode": null,
+   "ok": true,
+   "ms": 114,
+   "tris": 984,
+   "size": [
+    0.993,
+    2.05,
+    1.319
+   ],
+   "error": null
+  },
+  {
+   "id": "build.flame",
+   "variant": "0",
+   "mode": null,
+   "ok": true,
+   "ms": 97,
+   "tris": 480,
+   "size": [
+    1.141,
+    1.475,
+    1.458
+   ],
+   "error": null
+  },
+  {
+   "id": "build.flame",
+   "variant": "1",
+   "mode": null,
+   "ok": true,
+   "ms": 115,
+   "tris": 596,
+   "size": [
+    1.141,
+    1.475,
+    1.458
+   ],
+   "error": null
+  },
+  {
+   "id": "build.flame",
+   "variant": "2",
+   "mode": null,
+   "ok": true,
+   "ms": 116,
+   "tris": 844,
+   "size": [
+    1.141,
+    1.475,
+    1.458
+   ],
+   "error": null
+  },
+  {
+   "id": "build.heavy",
+   "variant": "0",
+   "mode": null,
+   "ok": true,
+   "ms": 99,
+   "tris": 468,
+   "size": [
+    1.5,
+    1.57,
+    2.104
+   ],
+   "error": null
+  },
+  {
+   "id": "build.heavy",
+   "variant": "1",
+   "mode": null,
+   "ok": true,
+   "ms": 100,
+   "tris": 588,
+   "size": [
+    1.5,
+    1.57,
+    2.104
+   ],
+   "error": null
+  },
+  {
+   "id": "build.heavy",
+   "variant": "2",
+   "mode": null,
+   "ok": true,
+   "ms": 117,
+   "tris": 692,
+   "size": [
+    1.5,
+    2.297,
+    2.104
+   ],
+   "error": null
+  },
+  {
+   "id": "build.mortar",
+   "variant": "0",
+   "mode": null,
+   "ok": true,
+   "ms": 100,
+   "tris": 4036,
+   "size": [
+    0.92,
+    1.176,
+    1.31
+   ],
+   "error": null
+  },
+  {
+   "id": "build.mortar",
+   "variant": "1",
+   "mode": null,
+   "ok": true,
+   "ms": 103,
+   "tris": 4120,
+   "size": [
+    1.77,
+    1.176,
+    1.813
+   ],
+   "error": null
+  },
+  {
+   "id": "build.mortar",
+   "variant": "2",
+   "mode": null,
+   "ok": true,
+   "ms": 114,
+   "tris": 4240,
+   "size": [
+    1.77,
+    1.31,
+    1.813
+   ],
+   "error": null
+  },
+  {
+   "id": "build.barrel",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 101,
+   "tris": 168,
+   "size": [
+    0.731,
+    0.95,
+    0.75
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.skull",
+   "variant": "shambler",
+   "mode": null,
+   "ok": true,
+   "ms": 94,
+   "tris": 544,
+   "size": [
+    0.256,
+    0.272,
+    0.28
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.skull",
+   "variant": "feral",
+   "mode": null,
+   "ok": true,
+   "ms": 93,
+   "tris": 564,
+   "size": [
+    0.256,
+    0.28,
+    0.281
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.skull",
+   "variant": "leaper",
+   "mode": null,
+   "ok": true,
+   "ms": 98,
+   "tris": 544,
+   "size": [
+    0.256,
+    0.272,
+    0.389
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.skull",
+   "variant": "spider",
+   "mode": null,
+   "ok": true,
+   "ms": 96,
+   "tris": 736,
+   "size": [
+    0.256,
+    0.272,
+    0.28
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.skull",
+   "variant": "drowned",
+   "mode": null,
+   "ok": true,
+   "ms": 98,
+   "tris": 616,
+   "size": [
+    0.256,
+    0.272,
+    0.28
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.skull",
+   "variant": "military",
+   "mode": null,
+   "ok": true,
+   "ms": 95,
+   "tris": 732,
+   "size": [
+    0.312,
+    0.31,
+    0.352
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.skull",
+   "variant": "brute",
+   "mode": null,
+   "ok": true,
+   "ms": 94,
+   "tris": 556,
+   "size": [
+    0.333,
+    0.354,
+    0.364
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.skull",
+   "variant": "spitter",
+   "mode": null,
+   "ok": true,
+   "ms": 96,
+   "tris": 554,
+   "size": [
+    0.256,
+    0.365,
+    0.28
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.skull",
+   "variant": "screamer",
+   "mode": null,
+   "ok": true,
+   "ms": 95,
+   "tris": 544,
+   "size": [
+    0.256,
+    0.343,
+    0.28
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.skull",
+   "variant": "bomber",
+   "mode": null,
+   "ok": true,
+   "ms": 96,
+   "tris": 612,
+   "size": [
+    0.256,
+    0.355,
+    0.28
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.skull",
+   "variant": "demon",
+   "mode": null,
+   "ok": true,
+   "ms": 94,
+   "tris": 568,
+   "size": [
+    0.379,
+    0.406,
+    0.322
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.skull",
+   "variant": "colossus",
+   "mode": null,
+   "ok": true,
+   "ms": 94,
+   "tris": 580,
+   "size": [
+    0.461,
+    0.506,
+    0.504
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.skull-bag",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 97,
+   "tris": 252,
+   "size": [
+    0.44,
+    0.573,
+    0.377
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.cash",
+   "variant": "5",
+   "mode": null,
+   "ok": true,
+   "ms": 96,
+   "tris": 60,
+   "size": [
+    0.449,
+    0.14,
+    0.253
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.cash",
+   "variant": "25",
+   "mode": null,
+   "ok": true,
+   "ms": 99,
+   "tris": 84,
+   "size": [
+    0.458,
+    0.2,
+    0.274
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.cash",
+   "variant": "100",
+   "mode": null,
+   "ok": true,
+   "ms": 92,
+   "tris": 84,
+   "size": [
+    0.458,
+    0.2,
+    0.274
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.cash",
+   "variant": "500",
+   "mode": null,
+   "ok": true,
+   "ms": 93,
+   "tris": 84,
+   "size": [
+    0.458,
+    0.2,
+    0.274
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.supply-crate",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 99,
+   "tris": 184,
+   "size": [
+    1.06,
+    1.396,
+    1.06
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.parachute",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 100,
+   "tris": 768,
+   "size": [
+    4.057,
+    6.293,
+    4.057
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.kiosk",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 343,
+   "tris": 308,
+   "size": [
+    1.6,
+    2.52,
+    0.798
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.tree",
+   "variant": "pine",
+   "mode": null,
+   "ok": true,
+   "ms": 104,
+   "tris": 352,
+   "size": [
+    2.84,
+    5.302,
+    3.16
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.tree",
+   "variant": "oak",
+   "mode": null,
+   "ok": true,
+   "ms": 100,
+   "tris": 1405,
+   "size": [
+    3.979,
+    4.751,
+    4.323
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.tree",
+   "variant": "autumn",
+   "mode": null,
+   "ok": true,
+   "ms": 99,
+   "tris": 1295,
+   "size": [
+    3.478,
+    4.613,
+    3.643
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.tree",
+   "variant": "birch",
+   "mode": null,
+   "ok": true,
+   "ms": 99,
+   "tris": 1233,
+   "size": [
+    2.784,
+    5.229,
+    2.771
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.fire",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 97,
+   "tris": 18,
+   "size": [
+    1.238,
+    0.942,
+    0.734
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.bone-raft",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 140,
+   "tris": 2632,
+   "size": [
+    3.028,
+    0.756,
+    3.187
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.insulated-boots",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 106,
+   "tris": 96,
+   "size": [
+    0.414,
+    0.39,
+    0.424
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.rubber-boot",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 110,
+   "tris": 1236,
+   "size": [
+    0.149,
+    0.43,
+    0.311
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.worn-boots",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 113,
+   "tris": 2472,
+   "size": [
+    0.452,
+    0.444,
+    0.358
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.rabbit-mound",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 130,
+   "tris": 2032,
+   "size": [
+    2.114,
+    0.737,
+    2.366
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.reliquary",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 116,
+   "tris": 964,
+   "size": [
+    0.835,
+    0.341,
+    0.52
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.relay-vault",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 121,
+   "tris": 2682,
+   "size": [
+    3.708,
+    7.095,
+    7.37
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.pit-tentacles",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 119,
+   "tris": 7784,
+   "size": [
+    10.692,
+    16.34,
+    10.753
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.survey-board",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 112,
+   "tris": 60,
+   "size": [
+    1.273,
+    1.932,
+    0.155
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.lockdown-door",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 113,
+   "tris": 252,
+   "size": [
+    1.9,
+    2.64,
+    0.23
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.cordon-gate",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 112,
+   "tris": 846,
+   "size": [
+    5,
+    4.8,
+    0.5
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.trailhead-board",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 115,
+   "tris": 54,
+   "size": [
+    1.95,
+    2.235,
+    0.451
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.hikers-cache",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 115,
+   "tris": 3256,
+   "size": [
+    4.315,
+    0.859,
+    3.663
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.ranger-truck",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 182,
+   "tris": 5386,
+   "size": [
+    2.386,
+    2.291,
+    4.775
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.brass",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 114,
+   "tris": 480,
+   "size": [
+    0.722,
+    0.013,
+    0.852
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.dropped-helmet",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 116,
+   "tris": 192,
+   "size": [
+    0.407,
+    0.407,
+    0.359
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.iron-below-boards",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 119,
+   "tris": 276,
+   "size": [
+    2.147,
+    1.249,
+    0.709
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.mine-timbers",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 110,
+   "tris": 852,
+   "size": [
+    3.891,
+    3.37,
+    0.509
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.cut-bars",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 113,
+   "tris": 3112,
+   "size": [
+    4.499,
+    2.81,
+    1.893
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.horseshoe",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 114,
+   "tris": 120,
+   "size": [
+    0.221,
+    0.213,
+    0.029
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.ruined-foundation",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 115,
+   "tris": 5140,
+   "size": [
+    6.533,
+    2.207,
+    5.775
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.chimney",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 115,
+   "tris": 2504,
+   "size": [
+    2.164,
+    5.248,
+    2.472
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.church",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 159,
+   "tris": 23820,
+   "size": [
+    6.574,
+    6.321,
+    11.118
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.iron-banded-grave",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 116,
+   "tris": 992,
+   "size": [
+    1.616,
+    0.368,
+    2.733
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.open-grave",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 117,
+   "tris": 1280,
+   "size": [
+    2.139,
+    0.808,
+    3.021
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.traps",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 114,
+   "tris": 920,
+   "size": [
+    0.949,
+    0.193,
+    0.526
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.cellar-hatch",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 116,
+   "tris": 1840,
+   "size": [
+    1.517,
+    0.467,
+    1.603
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.standing-stone",
+   "variant": "0",
+   "mode": null,
+   "ok": true,
+   "ms": 135,
+   "tris": 290,
+   "size": [
+    3.95,
+    2.79,
+    0.979
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.standing-stone",
+   "variant": "2",
+   "mode": null,
+   "ok": true,
+   "ms": 116,
+   "tris": 290,
+   "size": [
+    2.583,
+    2.773,
+    1.508
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.standing-stone",
+   "variant": "4",
+   "mode": null,
+   "ok": true,
+   "ms": 112,
+   "tris": 290,
+   "size": [
+    2.202,
+    2.211,
+    1.041
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.standing-stone",
+   "variant": "7",
+   "mode": null,
+   "ok": true,
+   "ms": 114,
+   "tris": 146,
+   "size": [
+    1.128,
+    2.646,
+    0.676
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.ring-stone",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 113,
+   "tris": 434,
+   "size": [
+    3.45,
+    2.7,
+    2.071
+   ],
+   "error": null
+  },
+  {
+   "id": "prop.marrow-door",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 119,
+   "tris": 602,
+   "size": [
+    7.025,
+    7.34,
+    0.774
+   ],
+   "error": null
+  },
+  {
+   "id": "vehicle.cargo-plane",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 231,
+   "tris": 36177,
+   "size": [
+    34.16,
+    8.889,
+    26.608
+   ],
+   "error": null
+  },
+  {
+   "id": "vehicle.heron",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 161,
+   "tris": 25324,
+   "size": [
+    17.39,
+    5.55,
+    14.33
+   ],
+   "error": null
+  }
+ ]
+}

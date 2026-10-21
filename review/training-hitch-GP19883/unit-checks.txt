@@ -1,0 +1,35 @@
+✔ one centered inward mount on each wall, above heads and inside the actual room (0.8184ms)
+✔ idle fixtures do not shoot; all four spin up and shoot after a death trigger (1.8373ms)
+✔ 48 occupants are eliminated through three distinct arriving hits without stale recycled meshes (3.9369ms)
+✔ room cleanup ignores living zombies in the outdoor world and runs only after start (0.2674ms)
+✔ hidden tunnel entrants hold the sweep until they enter; they are never shot through the gate (0.8089ms)
+✔ reset cancels flying rounds and a later encounter has fresh hit counts (1.2049ms)
+✔ clear/removed targets cannot receive delayed impacts (0.4044ms)
+✔ paused time, repeated triggers and empty rooms cannot create duplicate sweeps (0.5919ms)
+✔ every kind Jerry asked for is built, and the place still builds the same (442.0568ms)
+✔ under the build grid, inside the room, nothing hanging over the range (0.1422ms)
+✔ every canvas draws (a stand-in 2D context), with plenty of minigun holes (12.5609ms)
+✔ every kind of wear Jerry asked for is built (461.1553ms)
+✔ visual only: rooms, targets and stations unchanged, decals are not solids (431.0291ms)
+✔ the strip flickers only now and then, and goes out with the lights (427.1622ms)
+✔ the lanes are not all used alike: one heavy, one barely touched (0.1405ms)
+✔ GB-160: every wear canvas draws without throwing (a stand-in 2D context), and the walls are drawn fine enough (10.9302ms)
+✔ GB-161: every line on the printed signs fits inside its margins (DANGER included) (9.435ms)
+✔ GB-161: the locker bank blocks him, and the door swings when bumped, shot or cut, then settles ajar (never shut) (441.0819ms)
+✔ GB-161: the back wall of the range and what hangs on it fade like the infirmary when the camera is behind it (425.242ms)
+✔ GB-163: the lockers and their door are steel (sparks, no holes) (403.7562ms)
+✔ GB-163: the back wall fade does not thrash at the plane (hysteresis and a hold) (459.8067ms)
+✔ clampToRects: inside stays, outside goes to the nearest edge of the nearest room (1.1445ms)
+✔ segmentBox: where a round first meets a box (0.2189ms)
+✔ the build: two rooms past the map, five targets downrange, every station on a wall facing in (464.0925ms)
+✔ CL-143: the build room is a hangar, and building stays five squares clear of the zombie gate (432.3831ms)
+✔ CL-144: the plates are twice the size, and a hit scores by its ring and the lane (424.4634ms)
+✔ CL-146: the door has a keypad each side, and nothing in the hangar touches the shared wall (497.7808ms)
+ℹ tests 27
+ℹ suites 0
+ℹ pass 27
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3195.307

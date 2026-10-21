@@ -1,0 +1,9 @@
+#139 world/fire-burning
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: fireHiss()
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 6 s   Loop: on   Prompt influence: ~0.6
+
+Prompt:
+A large fire burning, roaring and hissing, seamless. No music, no voice.

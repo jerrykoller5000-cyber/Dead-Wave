@@ -1,0 +1,9 @@
+#173 training/wall-impact
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: trainingCue('impact')
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.4 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A bullet hitting a tiled concrete wall indoors, a sharp crack with dust. No music, no voice.

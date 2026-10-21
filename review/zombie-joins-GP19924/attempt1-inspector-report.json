@@ -1,0 +1,3014 @@
+{
+  "at": "2026-10-15T08:42:57.701Z",
+  "sources": {
+    "studio/zombie-concepts.js": "83b4200a7bd35865f99f668db61ca2ea08782ed5c9cecb7120a958a10a0bda5e",
+    "studio/zombie-guardian-detail.js": "6c84950999d95a0253dacefd04158ac024a5e8f3870169fec8c85fd2372dd81b",
+    "combat/zombie-fidelity.js": "2cc6f45b64c5d2e0e474680699736f2f7690adce1c5edd0ecf766f422d8b00d8",
+    "combat/demon-visual.js": "2bffc41bb52910ec44dbe800b959b5649cc65f175e05887120a5391d0f624597",
+    "game/screamer-appearance.js": "de3fb1ffa24ca507d82c0c26db8192be7f9b9cc16006d31fc159633cc96cf8c7",
+    "game/zombie-ability-visuals.js": "6829f67382b3750a5971630ba5d072f970fc077c527b7075c1af8d95b2c03c83",
+    "combat/zombie-joins.js": "f3beae745f3b9c056c4270d5d586b51e7bf69e7004c1bf223c3de54a95743f07"
+  },
+  "passes": {
+    "before": {
+      "loadSeconds": 10.379,
+      "models": [
+        {
+          "type": "shambler",
+          "entry": {
+            "id": "zombie.shambler",
+            "name": "Shambler",
+            "kind": "zombie",
+            "variant": null,
+            "mode": "statue",
+            "center": {
+              "x": -26,
+              "y": -198.98845896401411,
+              "z": -632
+            },
+            "size": {
+              "x": 0.8500270345206502,
+              "y": 2.0230820719718565,
+              "z": 0.7303760834032573
+            },
+            "yaw": 0,
+            "info": {
+              "meshes": 3,
+              "drawables": 3,
+              "tris": 10292,
+              "points": 0,
+              "segments": 0,
+              "materials": 3
+            }
+          },
+          "cameras": {
+            "front": {
+              "x": -26,
+              "y": -198.69490880868318,
+              "z": -627.8020371990063,
+              "tx": -26,
+              "ty": -198.98845896401411,
+              "tz": -632,
+              "fov": 35
+            },
+            "left": {
+              "x": -21.801221899306583,
+              "y": -198.8418344018128,
+              "z": -632,
+              "tx": -26,
+              "ty": -198.98845896401411,
+              "tz": -632,
+              "fov": 35
+            },
+            "back": {
+              "x": -26,
+              "y": -198.69490880868318,
+              "z": -636.1979628009937,
+              "tx": -26,
+              "ty": -198.98845896401411,
+              "tz": -632,
+              "fov": 35
+            }
+          },
+          "walk": {
+            "stats": {
+              "hp": 24,
+              "speed": 3.19,
+              "damage": 6,
+              "armor": 0,
+              "reward": 1,
+              "radius": 0.42,
+              "scale": 1,
+              "tactics": "direct"
+            },
+            "bad": 0,
+            "info": {
+              "id": "zombie.shambler",
+              "name": "Shambler",
+              "kind": "zombie",
+              "variant": null,
+              "mode": "walk",
+              "center": {
+                "x": -25.30697915101936,
+                "y": -199.00075193750888,
+                "z": -631.7370462651523
+              },
+              "size": {
+                "x": 1.5218232399132994,
+                "y": 1.9330611748737567,
+                "z": 1.359562314877735
+              },
+              "yaw": 2.102509408515493,
+              "info": {
+                "meshes": 3,
+                "drawables": 3,
+                "tris": 10292,
+                "points": 0,
+                "segments": 0,
+                "materials": 3
+              }
+            },
+            "errors": []
+          },
+          "joins": {
+            "bad": 0,
+            "maxWeightError": 0,
+            "vertices": 33300,
+            "skins": 1,
+            "blended": 0
+          }
+        },
+        {
+          "type": "feral",
+          "entry": {
+            "id": "zombie.feral",
+            "name": "Feral",
+            "kind": "zombie",
+            "variant": null,
+            "mode": "statue",
+            "center": {
+              "x": -26,
+              "y": -199.27423155940176,
+              "z": -632
+            },
+            "size": {
+              "x": 0.7564108930265583,
+              "y": 1.4515368811964606,
+              "z": 1.075746366534645
+            },
+            "yaw": 0,
+            "info": {
+              "meshes": 3,
+              "drawables": 3,
+              "tris": 9804,
+              "points": 0,
+              "segments": 0,
+              "materials": 3
+            }
+          },
+          "cameras": {
+            "front": {
+              "x": -26,
+              "y": -199.03952124458397,
+              "z": -628.6434861207831,
+              "tx": -26,
+              "ty": -199.27423155940176,
+              "tz": -632,
+              "fov": 35
+            },
+            "left": {
+              "x": -22.9049333835507,
+              "y": -199.16614945152713,
+              "z": -632,
+              "tx": -26,
+              "ty": -199.27423155940176,
+              "tz": -632,
+              "fov": 35
+            },
+            "back": {
+              "x": -26,
+              "y": -199.03952124458397,
+              "z": -635.3565138792169,
+              "tx": -26,
+              "ty": -199.27423155940176,
+              "tz": -632,
+              "fov": 35
+            }
+          },
+          "walk": {
+            "stats": {
+              "hp": 15,
+              "speed": 5.4,
+              "damage": 7,
+              "armor": 0,
+              "reward": 4,
+              "radius": 0.37,
+              "scale": 0.88,
+              "tactics": "flank"
+            },
+            "bad": 0,
+            "info": {
+              "id": "zombie.feral",
+              "name": "Feral",
+              "kind": "zombie",
+              "variant": null,
+              "mode": "walk",
+              "center": {
+                "x": -20.345664218043474,
+                "y": -199.28272690286647,
+                "z": -631.8939538146004
+              },
+              "size": {
+                "x": 1.5775668578251683,
+                "y": 1.2482967967212346,
+                "z": 1.3748770227343812
+              },
+              "yaw": 1.5501595277686664,
+              "info": {
+                "meshes": 3,
+                "drawables": 3,
+                "tris": 9804,
+                "points": 0,
+                "segments": 0,
+                "materials": 3
+              }
+            },
+            "errors": []
+          },
+          "joins": {
+            "bad": 0,
+            "maxWeightError": 0,
+            "vertices": 31704,
+            "skins": 1,
+            "blended": 0
+          }
+        },
+        {
+          "type": "brute",
+          "entry": {
+            "id": "zombie.brute",
+            "name": "Brute",
+            "kind": "zombie",
+            "variant": null,
+            "mode": "statue",
+            "center": {
+              "x": -26,
+              "y": -198.7319372105771,
+              "z": -632
+            },
+            "size": {
+              "x": 1.9603946354741275,
+              "y": 2.5361255788458266,
+              "z": 0.9816070937389441
+            },
+            "yaw": 0,
+            "info": {
+              "meshes": 3,
+              "drawables": 3,
+              "tris": 15300,
+              "points": 0,
+              "segments": 0,
+              "materials": 3
+            }
+          },
+          "cameras": {
+            "front": {
+              "x": -26,
+              "y": -198.36106167593934,
+              "z": -626.696232756366,
+              "tx": -26,
+              "ty": -198.7319372105771,
+              "tz": -632,
+              "fov": 35
+            },
+            "left": {
+              "x": -20.232659952039345,
+              "y": -198.53053725818174,
+              "z": -632,
+              "tx": -26,
+              "ty": -198.7319372105771,
+              "tz": -632,
+              "fov": 35
+            },
+            "back": {
+              "x": -26,
+              "y": -198.36106167593934,
+              "z": -637.303767243634,
+              "tx": -26,
+              "ty": -198.7319372105771,
+              "tz": -632,
+              "fov": 35
+            }
+          },
+          "walk": {
+            "stats": {
+              "hp": 85,
+              "speed": 1.85,
+              "damage": 16,
+              "armor": 0.28,
+              "reward": 14,
+              "radius": 0.64,
+              "scale": 1.38,
+              "tactics": "tank"
+            },
+            "bad": 0,
+            "info": {
+              "id": "zombie.brute",
+              "name": "Brute",
+              "kind": "zombie",
+              "variant": null,
+              "mode": "walk",
+              "center": {
+                "x": -28.161063974583808,
+                "y": -198.7286272655954,
+                "z": -631.3891353388091
+              },
+              "size": {
+                "x": 1.8261015185635259,
+                "y": 2.511549916591264,
+                "z": 1.1963358413158858
+              },
+              "yaw": 0.030555555555555343,
+              "info": {
+                "meshes": 3,
+                "drawables": 3,
+                "tris": 15300,
+                "points": 0,
+                "segments": 0,
+                "materials": 3
+              }
+            },
+            "errors": []
+          },
+          "joins": {
+            "bad": 0,
+            "maxWeightError": 0,
+            "vertices": 49680,
+            "skins": 1,
+            "blended": 0
+          }
+        },
+        {
+          "type": "military",
+          "entry": {
+            "id": "zombie.military",
+            "name": "Military",
+            "kind": "zombie",
+            "variant": null,
+            "mode": "statue",
+            "center": {
+              "x": -26,
+              "y": -198.95095314384406,
+              "z": -632
+            },
+            "size": {
+              "x": 0.9863545506539957,
+              "y": 2.0980937123118792,
+              "z": 0.6491459638275501
+            },
+            "yaw": 0,
+            "info": {
+              "meshes": 4,
+              "drawables": 4,
+              "tris": 17284,
+              "points": 0,
+              "segments": 0,
+              "materials": 4
+            }
+          },
+          "cameras": {
+            "front": {
+              "x": -26,
+              "y": -198.65124839699712,
+              "z": -627.7140224397893,
+              "tx": -26,
+              "ty": -198.95095314384406,
+              "tz": -632,
+              "fov": 35
+            },
+            "left": {
+              "x": -21.586532099022065,
+              "y": -198.7968314486148,
+              "z": -632,
+              "tx": -26,
+              "ty": -198.95095314384406,
+              "tz": -632,
+              "fov": 35
+            },
+            "back": {
+              "x": -26,
+              "y": -198.65124839699712,
+              "z": -636.2859775602107,
+              "tx": -26,
+              "ty": -198.95095314384406,
+              "tz": -632,
+              "fov": 35
+            }
+          },
+          "walk": {
+            "stats": {
+              "hp": 50,
+              "speed": 3.15,
+              "damage": 12,
+              "armor": 0.12,
+              "reward": 8,
+              "radius": 0.46,
+              "scale": 1.08,
+              "tactics": "weave"
+            },
+            "bad": 0,
+            "info": {
+              "id": "zombie.military",
+              "name": "Military",
+              "kind": "zombie",
+              "variant": null,
+              "mode": "walk",
+              "center": {
+                "x": -23.753467606541925,
+                "y": -198.88372927993854,
+                "z": -631.8749948839763
+              },
+              "size": {
+                "x": 1.2924831344519347,
+                "y": 2.158821791233663,
+                "z": 0.9438784391984427
+              },
+              "yaw": 1.5826468414200048,
+              "info": {
+                "meshes": 4,
+                "drawables": 4,
+                "tris": 17284,
+                "points": 0,
+                "segments": 0,
+                "materials": 4
+              }
+            },
+            "errors": []
+          },
+          "joins": {
+            "bad": 0,
+            "maxWeightError": 0,
+            "vertices": 56184,
+            "skins": 2,
+            "blended": 0
+          }
+        },
+        {
+          "type": "spitter",
+          "entry": {
+            "id": "zombie.spitter",
+            "name": "Spitter",
+            "kind": "zombie",
+            "variant": null,
+            "mode": "statue",
+            "center": {
+              "x": -26,
+              "y": -199.06662516143962,
+              "z": -632
+            },
+            "size": {
+              "x": 0.893078427586552,
+              "y": 1.8667496771207936,
+              "z": 0.6731495008052661
+            },
+            "yaw": 0,
+            "info": {
+              "meshes": 6,
+              "drawables": 6,
+              "tris": 11948,
+              "points": 0,
+              "segments": 0,
+              "materials": 4
+            }
+          },
+          "cameras": {
+            "front": {
+              "x": -26,
+              "y": -198.79579328587033,
+              "z": -628.1269237358042,
+              "tx": -26,
+              "ty": -199.06662516143962,
+              "tz": -632,
+              "fov": 35
+            },
+            "left": {
+              "x": -22.064461369103483,
+              "y": -198.9291931240842,
+              "z": -632,
+              "tx": -26,
+              "ty": -199.06662516143962,
+              "tz": -632,
+              "fov": 35
+            },
+            "back": {
+              "x": -26,
+              "y": -198.79579328587033,
+              "z": -635.8730762641958,
+              "tx": -26,
+              "ty": -199.06662516143962,
+              "tz": -632,
+              "fov": 35
+            }
+          },
+          "walk": {
+            "stats": {
+              "hp": 34,
+              "speed": 2.45,
+              "damage": 9,
+              "armor": 0,
+              "reward": 9,
+              "radius": 0.46,
+              "scale": 1.05,
+              "tactics": "creep"
+            },
+            "bad": 0,
+            "info": {
+              "id": "zombie.spitter",
+              "name": "Spitter",
+              "kind": "zombie",
+              "variant": null,
+              "mode": "walk",
+              "center": {
+                "x": -27.473377264890452,
+                "y": -198.9647179019999,
+                "z": -631.7043657115761
+              },
+              "size": {
+                "x": 1.1497531677774866,
+                "y": 1.9813745443658775,
+                "z": 1.0300559811698804
+              },
+              "yaw": 1.7084156920526579,
+              "info": {
+                "meshes": 6,
+                "drawables": 6,
+                "tris": 11948,
+                "points": 0,
+                "segments": 0,
+                "materials": 4
+              }
+            },
+            "errors": []
+          },
+          "joins": {
+            "bad": 0,
+            "maxWeightError": 0,
+            "vertices": 37776,
+            "skins": 1,
+            "blended": 0
+          }
+        },
+        {
+          "type": "bomber",
+          "entry": {
+            "id": "zombie.bomber",
+            "name": "Bomber",
+            "kind": "zombie",
+            "variant": null,
+            "mode": "statue",
+            "center": {
+              "x": -26,
+              "y": -198.96638365680633,
+              "z": -632
+            },
+            "size": {
+              "x": 1.5131395787000628,
+              "y": 2.067232686387314,
+              "z": 1.7442595227978472
+            },
+            "yaw": 0,
+            "info": {
+              "meshes": 5,
+              "drawables": 5,
+              "tris": 17428,
+              "points": 0,
+              "segments": 0,
+              "materials": 5
+            }
+          },
+          "cameras": {
+            "front": {
+              "x": -26,
+              "y": -198.6228498249346,
+              "z": -627.087237322513,
+              "tx": -26,
+              "ty": -198.96638365680633,
+              "tz": -632,
+              "fov": 35
+            },
+            "left": {
+              "x": -21.346703425291278,
+              "y": -198.80388695974418,
+              "z": -632,
+              "tx": -26,
+              "ty": -198.96638365680633,
+              "tz": -632,
+              "fov": 35
+            },
+            "back": {
+              "x": -26,
+              "y": -198.6228498249346,
+              "z": -636.912762677487,
+              "tx": -26,
+              "ty": -198.96638365680633,
+              "tz": -632,
+              "fov": 35
+            }
+          },
+          "walk": {
+            "stats": {
+              "hp": 34,
+              "speed": 2.8,
+              "damage": 0,
+              "armor": 0,
+              "reward": 9,
+              "radius": 0.78,
+              "scale": 1.1,
+              "tactics": "bomb"
+            },
+            "bad": 0,
+            "info": {
+              "id": "zombie.bomber",
+              "name": "Bomber",
+              "kind": "zombie",
+              "variant": null,
+              "mode": "walk",
+              "center": {
+                "x": -27.367761088997035,
+                "y": -198.92902452587515,
+                "z": -631.3063231236322
+              },
+              "size": {
+                "x": 2.360989905367518,
+                "y": 2.0581377712817357,
+                "z": 2.350820654128256
+              },
+              "yaw": 1.1797512273682207,
+              "info": {
+                "meshes": 5,
+                "drawables": 5,
+                "tris": 17428,
+                "points": 0,
+                "segments": 0,
+                "materials": 5
+              }
+            },
+            "errors": []
+          },
+          "joins": {
+            "bad": 0,
+            "maxWeightError": 0,
+            "vertices": 46728,
+            "skins": 1,
+            "blended": 0
+          }
+        },
+        {
+          "type": "screamer",
+          "entry": {
+            "id": "zombie.screamer",
+            "name": "Screamer",
+            "kind": "zombie",
+            "variant": null,
+            "mode": "statue",
+            "center": {
+              "x": -26,
+              "y": -199.19557880535632,
+              "z": -632
+            },
+            "size": {
+              "x": 1.3766132447290431,
+              "y": 2.589365542192894,
+              "z": 1.3192543595318966
+            },
+            "yaw": 0,
+            "info": {
+              "meshes": 5,
+              "drawables": 5,
+              "tris": 12380,
+              "points": 0,
+              "segments": 0,
+              "materials": 5
+            }
+          },
+          "cameras": {
+            "front": {
+              "x": -26,
+              "y": -198.8030733412289,
+              "z": -626.3869103535778,
+              "tx": -26,
+              "ty": -199.19557880535632,
+              "tz": -632,
+              "fov": 35
+            },
+            "left": {
+              "x": -20.46342513302017,
+              "y": -199.0022373506527,
+              "z": -632,
+              "tx": -26,
+              "ty": -199.19557880535632,
+              "tz": -632,
+              "fov": 35
+            },
+            "back": {
+              "x": -26,
+              "y": -198.8030733412289,
+              "z": -637.6130896464222,
+              "tx": -26,
+              "ty": -199.19557880535632,
+              "tz": -632,
+              "fov": 35
+            }
+          },
+          "walk": {
+            "stats": {
+              "hp": 28,
+              "speed": 3.5,
+              "damage": 6,
+              "armor": 0,
+              "reward": 11,
+              "radius": 0.4,
+              "scale": 0.96,
+              "tactics": "scream"
+            },
+            "bad": 0,
+            "info": {
+              "id": "zombie.screamer",
+              "name": "Screamer",
+              "kind": "zombie",
+              "variant": null,
+              "mode": "walk",
+              "center": {
+                "x": -26.851361747730355,
+                "y": -199.18630890681493,
+                "z": -631.4816442394241
+              },
+              "size": {
+                "x": 2.8514087189529143,
+                "y": 2.5487919490863646,
+                "z": 2.5767362740953104
+              },
+              "yaw": 1.8270635997932851,
+              "info": {
+                "meshes": 5,
+                "drawables": 5,
+                "tris": 12380,
+                "points": 0,
+                "segments": 0,
+                "materials": 5
+              }
+            },
+            "errors": []
+          },
+          "joins": {
+            "bad": 0,
+            "maxWeightError": 0,
+            "vertices": 35916,
+            "skins": 1,
+            "blended": 0
+          }
+        },
+        {
+          "type": "drowned",
+          "entry": {
+            "id": "zombie.drowned",
+            "name": "Drowned",
+            "kind": "zombie",
+            "variant": null,
+            "mode": "statue",
+            "center": {
+              "x": -26,
+              "y": -199.0803497540712,
+              "z": -632
+            },
+            "size": {
+              "x": 0.839891702872773,
+              "y": 1.8393004918576707,
+              "z": 0.562101439407229
+            },
+            "yaw": 0,
+            "info": {
+              "meshes": 3,
+              "drawables": 3,
+              "tris": 12392,
+              "points": 0,
+              "segments": 0,
+              "materials": 3
+            }
+          },
+          "cameras": {
+            "front": {
+              "x": -26,
+              "y": -198.81791719279354,
+              "z": -628.2470395262742,
+              "tx": -26,
+              "ty": -199.0803497540712,
+              "tz": -632,
+              "fov": 35
+            },
+            "left": {
+              "x": -22.144881245297757,
+              "y": -198.9457260406749,
+              "z": -632,
+              "tx": -26,
+              "ty": -199.0803497540712,
+              "tz": -632,
+              "fov": 35
+            },
+            "back": {
+              "x": -26,
+              "y": -198.81791719279354,
+              "z": -635.7529604737258,
+              "tx": -26,
+              "ty": -199.0803497540712,
+              "tz": -632,
+              "fov": 35
+            }
+          },
+          "walk": {
+            "stats": {
+              "hp": 40,
+              "speed": 2.4,
+              "damage": 10,
+              "armor": 0.04,
+              "reward": 6,
+              "radius": 0.44,
+              "scale": 0.98,
+              "tactics": "direct"
+            },
+            "bad": 0,
+            "info": {
+              "id": "zombie.drowned",
+              "name": "Drowned",
+              "kind": "zombie",
+              "variant": null,
+              "mode": "walk",
+              "center": {
+                "x": -26.94283679724366,
+                "y": -199.06297972813388,
+                "z": -631.1092932159551
+              },
+              "size": {
+                "x": 0.9715655071420777,
+                "y": 1.7469486301275765,
+                "z": 0.8036991215598164
+              },
+              "yaw": 1.5998433919141777,
+              "info": {
+                "meshes": 3,
+                "drawables": 3,
+                "tris": 12392,
+                "points": 0,
+                "segments": 0,
+                "materials": 3
+              }
+            },
+            "errors": []
+          },
+          "joins": {
+            "bad": 0,
+            "maxWeightError": 0,
+            "vertices": 40164,
+            "skins": 1,
+            "blended": 0
+          }
+        },
+        {
+          "type": "leaper",
+          "entry": {
+            "id": "zombie.leaper",
+            "name": "Leaper",
+            "kind": "zombie",
+            "variant": null,
+            "mode": "statue",
+            "center": {
+              "x": -26,
+              "y": -199.64069300784507,
+              "z": -632
+            },
+            "size": {
+              "x": 0.7978208827091144,
+              "y": 1.3359069861597561,
+              "z": 1.4521110287639658
+            },
+            "yaw": 0,
+            "info": {
+              "meshes": 3,
+              "drawables": 3,
+              "tris": 10762,
+              "points": 0,
+              "segments": 0,
+              "materials": 3
+            }
+          },
+          "cameras": {
+            "front": {
+              "x": -26,
+              "y": -199.40450298202137,
+              "z": -628.6223252675312,
+              "tx": -26,
+              "ty": -199.64069300784507,
+              "tz": -632,
+              "fov": 35
+            },
+            "left": {
+              "x": -23.094249744721253,
+              "y": -199.5392219729799,
+              "z": -632,
+              "tx": -26,
+              "ty": -199.64069300784507,
+              "tz": -632,
+              "fov": 35
+            },
+            "back": {
+              "x": -26,
+              "y": -199.40450298202137,
+              "z": -635.3776747324688,
+              "tx": -26,
+              "ty": -199.64069300784507,
+              "tz": -632,
+              "fov": 35
+            }
+          },
+          "walk": {
+            "stats": {
+              "hp": 30,
+              "speed": 4.2,
+              "damage": 10,
+              "armor": 0,
+              "reward": 6,
+              "radius": 0.42,
+              "scale": 0.92,
+              "tactics": "leap"
+            },
+            "bad": 0,
+            "info": {
+              "id": "zombie.leaper",
+              "name": "Leaper",
+              "kind": "zombie",
+              "variant": null,
+              "mode": "walk",
+              "center": {
+                "x": -22.356216543962265,
+                "y": -198.49882131603556,
+                "z": -631.8991138082586
+              },
+              "size": {
+                "x": 0.9767432445373316,
+                "y": 1.1475694659656597,
+                "z": 0.8158930005661205
+              },
+              "yaw": 1.5894209076500563,
+              "info": {
+                "meshes": 3,
+                "drawables": 3,
+                "tris": 10762,
+                "points": 0,
+                "segments": 0,
+                "materials": 3
+              }
+            },
+            "errors": []
+          },
+          "joins": {
+            "bad": 0,
+            "maxWeightError": 0,
+            "vertices": 34836,
+            "skins": 1,
+            "blended": 0
+          }
+        },
+        {
+          "type": "spider",
+          "entry": {
+            "id": "zombie.spider",
+            "name": "Spider",
+            "kind": "zombie",
+            "variant": null,
+            "mode": "statue",
+            "center": {
+              "x": -26,
+              "y": -199.51771008171227,
+              "z": -632
+            },
+            "size": {
+              "x": 1.805285612193245,
+              "y": 1.045567810595685,
+              "z": 1.8750079485180322
+            },
+            "yaw": 0,
+            "info": {
+              "meshes": 3,
+              "drawables": 3,
+              "tris": 7618,
+              "points": 0,
+              "segments": 0,
+              "materials": 3
+            }
+          },
+          "cameras": {
+            "front": {
+              "x": -26,
+              "y": -199.2904458986533,
+              "z": -628.7499707659696,
+              "tx": -26,
+              "ty": -199.51771008171227,
+              "tz": -632,
+              "fov": 35
+            },
+            "left": {
+              "x": -22.707092849788182,
+              "y": -199.40271923016198,
+              "z": -632,
+              "tx": -26,
+              "ty": -199.51771008171227,
+              "tz": -632,
+              "fov": 35
+            },
+            "back": {
+              "x": -26,
+              "y": -199.2904458986533,
+              "z": -635.2500292340304,
+              "tx": -26,
+              "ty": -199.51771008171227,
+              "tz": -632,
+              "fov": 35
+            }
+          },
+          "walk": {
+            "stats": {
+              "hp": 44,
+              "speed": 3,
+              "damage": 8,
+              "armor": 0.08,
+              "reward": 10,
+              "radius": 0.62,
+              "scale": 1,
+              "tactics": "spit"
+            },
+            "bad": 0,
+            "info": {
+              "id": "zombie.spider",
+              "name": "Spider",
+              "kind": "zombie",
+              "variant": null,
+              "mode": "walk",
+              "center": {
+                "x": -27.820496653310204,
+                "y": -199.4971073717249,
+                "z": -634.3689508341282
+              },
+              "size": {
+                "x": 2.2769209811632862,
+                "y": 1.0133535318861107,
+                "z": 2.450273874351865
+              },
+              "yaw": 1.3852816280515021,
+              "info": {
+                "meshes": 3,
+                "drawables": 3,
+                "tris": 7618,
+                "points": 0,
+                "segments": 0,
+                "materials": 3
+              }
+            },
+            "errors": []
+          },
+          "joins": {
+            "bad": 0,
+            "maxWeightError": 0,
+            "vertices": 24540,
+            "skins": 1,
+            "blended": 0
+          }
+        },
+        {
+          "type": "colossus",
+          "entry": {
+            "id": "zombie.colossus",
+            "name": "Colossus",
+            "kind": "zombie",
+            "variant": null,
+            "mode": "statue",
+            "center": {
+              "x": -26,
+              "y": -197.47242406543202,
+              "z": -632
+            },
+            "size": {
+              "x": 3.1021191060543067,
+              "y": 5.055151869135955,
+              "z": 3.135745764479566
+            },
+            "yaw": 0,
+            "info": {
+              "meshes": 5,
+              "drawables": 5,
+              "tris": 16376,
+              "points": 0,
+              "segments": 0,
+              "materials": 5
+            }
+          },
+          "cameras": {
+            "front": {
+              "x": -26,
+              "y": -196.68168340124274,
+              "z": -620.6918816658184,
+              "tx": -26,
+              "ty": -197.47242406543202,
+              "tz": -632,
+              "fov": 35
+            },
+            "left": {
+              "x": -14.95767262296987,
+              "y": -197.08681749644634,
+              "z": -632,
+              "tx": -26,
+              "ty": -197.47242406543202,
+              "tz": -632,
+              "fov": 35
+            },
+            "back": {
+              "x": -26,
+              "y": -196.68168340124274,
+              "z": -643.3081183341816,
+              "tx": -26,
+              "ty": -197.47242406543202,
+              "tz": -632,
+              "fov": 35
+            }
+          },
+          "walk": {
+            "stats": {
+              "hp": 520,
+              "speed": 3.4782608695652177,
+              "damage": 30,
+              "armor": 0.32,
+              "reward": 120,
+              "radius": 1.05,
+              "scale": 2.3,
+              "tactics": "boss"
+            },
+            "bad": 0,
+            "info": {
+              "id": "zombie.colossus",
+              "name": "Colossus",
+              "kind": "zombie",
+              "variant": null,
+              "mode": "walk",
+              "center": {
+                "x": -22.671655682936773,
+                "y": -197.51167542905625,
+                "z": -631.8749051313763
+              },
+              "size": {
+                "x": 4.4457625592720795,
+                "y": 5.046114032909998,
+                "z": 3.1662866998540267
+              },
+              "yaw": 1.5709524313356078,
+              "info": {
+                "meshes": 5,
+                "drawables": 5,
+                "tris": 16376,
+                "points": 0,
+                "segments": 0,
+                "materials": 5
+              }
+            },
+            "errors": []
+          },
+          "joins": {
+            "bad": 0,
+            "maxWeightError": 0,
+            "vertices": 50940,
+            "skins": 1,
+            "blended": 0
+          }
+        },
+        {
+          "type": "demon",
+          "entry": {
+            "id": "zombie.demon",
+            "name": "Demon",
+            "kind": "zombie",
+            "variant": null,
+            "mode": "statue",
+            "center": {
+              "x": -26,
+              "y": -198.34106559959952,
+              "z": -632
+            },
+            "size": {
+              "x": 2.0639686348929835,
+              "y": 3.317868800801051,
+              "z": 1.16057511819929
+            },
+            "yaw": 0,
+            "info": {
+              "meshes": 6,
+              "drawables": 6,
+              "tris": 14232,
+              "points": 0,
+              "segments": 0,
+              "materials": 5
+            }
+          },
+          "cameras": {
+            "front": {
+              "x": -26,
+              "y": -197.86126774600086,
+              "z": -625.138571024999,
+              "tx": -26,
+              "ty": -198.34106559959952,
+              "tz": -632,
+              "fov": 35
+            },
+            "left": {
+              "x": -18.736812224755457,
+              "y": -198.08742949352492,
+              "z": -632,
+              "tx": -26,
+              "ty": -198.34106559959952,
+              "tz": -632,
+              "fov": 35
+            },
+            "back": {
+              "x": -26,
+              "y": -197.86126774600086,
+              "z": -638.861428975001,
+              "tx": -26,
+              "ty": -198.34106559959952,
+              "tz": -632,
+              "fov": 35
+            }
+          },
+          "walk": {
+            "stats": {
+              "hp": 130,
+              "speed": 2.5,
+              "damage": 18,
+              "armor": 0.18,
+              "reward": 20,
+              "radius": 0.66,
+              "scale": 1.46,
+              "tactics": "charge"
+            },
+            "bad": 0,
+            "info": {
+              "id": "zombie.demon",
+              "name": "Demon",
+              "kind": "zombie",
+              "variant": null,
+              "mode": "walk",
+              "center": {
+                "x": -24.67088543187092,
+                "y": -198.48768099926787,
+                "z": -631.8745743399462
+              },
+              "size": {
+                "x": 1.913046525043569,
+                "y": 2.944697020657941,
+                "z": 2.1153301371398356
+              },
+              "yaw": 1.5714294719743298,
+              "info": {
+                "meshes": 6,
+                "drawables": 6,
+                "tris": 14232,
+                "points": 0,
+                "segments": 0,
+                "materials": 5
+              }
+            },
+            "errors": []
+          },
+          "joins": {
+            "bad": 0,
+            "maxWeightError": 0,
+            "vertices": 40644,
+            "skins": 1,
+            "blended": 0
+          }
+        },
+        {
+          "type": "guardian",
+          "entry": {
+            "id": "zombie.guardian",
+            "name": "Guardian",
+            "kind": "zombie",
+            "variant": null,
+            "mode": "statue",
+            "center": {
+              "x": -26,
+              "y": -198.25081969926063,
+              "z": -632
+            },
+            "size": {
+              "x": 1.5426179806416123,
+              "y": 3.49836060147868,
+              "z": 1.216380182022931
+            },
+            "yaw": 0,
+            "info": {
+              "meshes": 3,
+              "drawables": 3,
+              "tris": 9768,
+              "points": 0,
+              "segments": 0,
+              "materials": 3
+            }
+          },
+          "cameras": {
+            "front": {
+              "x": -26,
+              "y": -197.7452409664457,
+              "z": -624.7698872755223,
+              "tx": -26,
+              "ty": -198.25081969926063,
+              "tz": -632,
+              "fov": 35
+            },
+            "left": {
+              "x": -18.69842758106763,
+              "y": -197.99584317189178,
+              "z": -632,
+              "tx": -26,
+              "ty": -198.25081969926063,
+              "tz": -632,
+              "fov": 35
+            },
+            "back": {
+              "x": -26,
+              "y": -197.7452409664457,
+              "z": -639.2301127244777,
+              "tx": -26,
+              "ty": -198.25081969926063,
+              "tz": -632,
+              "fov": 35
+            }
+          },
+          "walk": {
+            "stats": {
+              "hp": 420,
+              "speed": 6.086956521739131,
+              "damage": 25,
+              "armor": 0.3,
+              "reward": 150,
+              "radius": 0.7,
+              "scale": 1.7,
+              "tactics": "boss"
+            },
+            "bad": 0,
+            "info": {
+              "id": "zombie.guardian",
+              "name": "Guardian",
+              "kind": "zombie",
+              "variant": null,
+              "mode": "walk",
+              "center": {
+                "x": -19.13922567150402,
+                "y": -198.91623375575077,
+                "z": -631.8747205782139
+              },
+              "size": {
+                "x": 3.39742316720654,
+                "y": 4.946326361172936,
+                "z": 3.75954373555453
+              },
+              "yaw": -1.5707130433523002,
+              "info": {
+                "meshes": 43,
+                "drawables": 43,
+                "tris": 20508,
+                "points": 0,
+                "segments": 0,
+                "materials": 40
+              }
+            },
+            "errors": []
+          },
+          "joins": {
+            "bad": 0,
+            "maxWeightError": 0,
+            "vertices": 0,
+            "skins": 0,
+            "blended": 0
+          }
+        },
+        {
+          "type": "caveguard",
+          "entry": {
+            "id": "zombie.caveguard",
+            "name": "Cave Guardian",
+            "kind": "zombie",
+            "variant": null,
+            "mode": "statue",
+            "center": {
+              "x": -26,
+              "y": -198.64602527560706,
+              "z": -632
+            },
+            "size": {
+              "x": 1.49201245695048,
+              "y": 2.7079494487859392,
+              "z": 1.4200342822202856
+            },
+            "yaw": 0,
+            "info": {
+              "meshes": 3,
+              "drawables": 3,
+              "tris": 9768,
+              "points": 0,
+              "segments": 0,
+              "materials": 3
+            }
+          },
+          "cameras": {
+            "front": {
+              "x": -26,
+              "y": -198.2337819067142,
+              "z": -626.1046451649208,
+              "tx": -26,
+              "ty": -198.64602527560706,
+              "tz": -632,
+              "fov": 35
+            },
+            "left": {
+              "x": -20.180393526769898,
+              "y": -198.4428001394227,
+              "z": -632,
+              "tx": -26,
+              "ty": -198.64602527560706,
+              "tz": -632,
+              "fov": 35
+            },
+            "back": {
+              "x": -26,
+              "y": -198.2337819067142,
+              "z": -637.8953548350792,
+              "tx": -26,
+              "ty": -198.64602527560706,
+              "tz": -632,
+              "fov": 35
+            }
+          },
+          "walk": {
+            "stats": {
+              "hp": 999999,
+              "speed": 14,
+              "damage": 999,
+              "armor": 1,
+              "reward": 0,
+              "radius": 0.5,
+              "scale": 1.52,
+              "tactics": "direct"
+            },
+            "bad": 0,
+            "info": {
+              "id": "zombie.caveguard",
+              "name": "Cave Guardian",
+              "kind": "zombie",
+              "variant": null,
+              "mode": "walk",
+              "center": {
+                "x": -18.33371453520081,
+                "y": -199.1474285979395,
+                "z": -631.8748970353295
+              },
+              "size": {
+                "x": 2.4899009778958536,
+                "y": 3.746119784758605,
+                "z": 2.9700083611372747
+              },
+              "yaw": 1.5707963246095857,
+              "info": {
+                "meshes": 41,
+                "drawables": 41,
+                "tris": 19918,
+                "points": 0,
+                "segments": 0,
+                "materials": 40
+              }
+            },
+            "errors": []
+          },
+          "joins": {
+            "bad": 0,
+            "maxWeightError": 0,
+            "vertices": 0,
+            "skins": 0,
+            "blended": 0
+          }
+        }
+      ],
+      "crowd": {
+        "spawned": 48,
+        "alive": 48,
+        "frames": 336,
+        "fps": 55.90961279265015,
+        "low": 25.526483726987994,
+        "worst": 51.799999999813735,
+        "over50": 1,
+        "errors": []
+      },
+      "catalog": {
+        "ok": true,
+        "check": {
+          "subjects": 14,
+          "broken": []
+        },
+        "sheet": "review/zombie-joins-GP19924/before/catalog/sheet.jpg",
+        "file": "review/zombie-joins-GP19924/before/catalog/check.json",
+        "ms": 1883
+      }
+    },
+    "after": {
+      "loadSeconds": 9.607,
+      "models": [
+        {
+          "type": "shambler",
+          "entry": {
+            "id": "zombie.shambler",
+            "name": "Shambler",
+            "kind": "zombie",
+            "variant": null,
+            "mode": "statue",
+            "center": {
+              "x": -26,
+              "y": -198.98845896401411,
+              "z": -632
+            },
+            "size": {
+              "x": 0.8500266405460657,
+              "y": 2.0230820719718565,
+              "z": 0.7303760834032573
+            },
+            "yaw": 0,
+            "info": {
+              "meshes": 3,
+              "drawables": 3,
+              "tris": 10436,
+              "points": 0,
+              "segments": 0,
+              "materials": 3
+            }
+          },
+          "cameras": {
+            "front": {
+              "x": -26,
+              "y": -198.69490880868318,
+              "z": -627.8020371990063,
+              "tx": -26,
+              "ty": -198.98845896401411,
+              "tz": -632,
+              "fov": 35
+            },
+            "left": {
+              "x": -21.801221899306583,
+              "y": -198.8418344018128,
+              "z": -632,
+              "tx": -26,
+              "ty": -198.98845896401411,
+              "tz": -632,
+              "fov": 35
+            },
+            "back": {
+              "x": -26,
+              "y": -198.69490880868318,
+              "z": -636.1979628009937,
+              "tx": -26,
+              "ty": -198.98845896401411,
+              "tz": -632,
+              "fov": 35
+            }
+          },
+          "walk": {
+            "stats": {
+              "hp": 24,
+              "speed": 3.19,
+              "damage": 6,
+              "armor": 0,
+              "reward": 1,
+              "radius": 0.42,
+              "scale": 1,
+              "tactics": "direct"
+            },
+            "bad": 0,
+            "info": {
+              "id": "zombie.shambler",
+              "name": "Shambler",
+              "kind": "zombie",
+              "variant": null,
+              "mode": "walk",
+              "center": {
+                "x": -25.30697915101936,
+                "y": -199.04275444426054,
+                "z": -631.7370462651523
+              },
+              "size": {
+                "x": 1.4666209331551272,
+                "y": 1.8607122785471688,
+                "z": 1.331898927177349
+              },
+              "yaw": 2.102509408515493,
+              "info": {
+                "meshes": 3,
+                "drawables": 3,
+                "tris": 10436,
+                "points": 0,
+                "segments": 0,
+                "materials": 3
+              }
+            },
+            "errors": []
+          },
+          "joins": {
+            "bad": 0,
+            "maxWeightError": 2.9802322387695312e-8,
+            "vertices": 33768,
+            "skins": 1,
+            "blended": 13642,
+            "loss": {
+              "bad": 0,
+              "lost": true,
+              "remaining": 0,
+              "errors": []
+            }
+          }
+        },
+        {
+          "type": "feral",
+          "entry": {
+            "id": "zombie.feral",
+            "name": "Feral",
+            "kind": "zombie",
+            "variant": null,
+            "mode": "statue",
+            "center": {
+              "x": -26,
+              "y": -199.27423155940176,
+              "z": -632
+            },
+            "size": {
+              "x": 0.7564108930265583,
+              "y": 1.4515368811964606,
+              "z": 1.0821480776535282
+            },
+            "yaw": 0,
+            "info": {
+              "meshes": 3,
+              "drawables": 3,
+              "tris": 9964,
+              "points": 0,
+              "segments": 0,
+              "materials": 3
+            }
+          },
+          "cameras": {
+            "front": {
+              "x": -26,
+              "y": -199.03952124458397,
+              "z": -628.6434861207831,
+              "tx": -26,
+              "ty": -199.27423155940176,
+              "tz": -632,
+              "fov": 35
+            },
+            "left": {
+              "x": -22.9049333835507,
+              "y": -199.16614945152713,
+              "z": -632,
+              "tx": -26,
+              "ty": -199.27423155940176,
+              "tz": -632,
+              "fov": 35
+            },
+            "back": {
+              "x": -26,
+              "y": -199.03952124458397,
+              "z": -635.3565138792169,
+              "tx": -26,
+              "ty": -199.27423155940176,
+              "tz": -632,
+              "fov": 35
+            }
+          },
+          "walk": {
+            "stats": {
+              "hp": 15,
+              "speed": 5.4,
+              "damage": 7,
+              "armor": 0,
+              "reward": 4,
+              "radius": 0.37,
+              "scale": 0.88,
+              "tactics": "flank"
+            },
+            "bad": 0,
+            "info": {
+              "id": "zombie.feral",
+              "name": "Feral",
+              "kind": "zombie",
+              "variant": null,
+              "mode": "walk",
+              "center": {
+                "x": -20.98448174507002,
+                "y": -199.24218023016138,
+                "z": -631.3856482532374
+              },
+              "size": {
+                "x": 2.0306852071319916,
+                "y": 1.515994183256197,
+                "z": 1.914494903384366
+              },
+              "yaw": -1.1062478602919827,
+              "info": {
+                "meshes": 3,
+                "drawables": 3,
+                "tris": 9964,
+                "points": 0,
+                "segments": 0,
+                "materials": 3
+              }
+            },
+            "errors": []
+          },
+          "joins": {
+            "bad": 0,
+            "maxWeightError": 2.9802322387695312e-8,
+            "vertices": 32220,
+            "skins": 1,
+            "blended": 12141
+          }
+        },
+        {
+          "type": "brute",
+          "entry": {
+            "id": "zombie.brute",
+            "name": "Brute",
+            "kind": "zombie",
+            "variant": null,
+            "mode": "statue",
+            "center": {
+              "x": -26,
+              "y": -198.7319372105771,
+              "z": -632
+            },
+            "size": {
+              "x": 1.9603946354741275,
+              "y": 2.5361255788458266,
+              "z": 0.9816070937389441
+            },
+            "yaw": 0,
+            "info": {
+              "meshes": 3,
+              "drawables": 3,
+              "tris": 15044,
+              "points": 0,
+              "segments": 0,
+              "materials": 3
+            }
+          },
+          "cameras": {
+            "front": {
+              "x": -26,
+              "y": -198.36106167593934,
+              "z": -626.696232756366,
+              "tx": -26,
+              "ty": -198.7319372105771,
+              "tz": -632,
+              "fov": 35
+            },
+            "left": {
+              "x": -20.232659952039345,
+              "y": -198.53053725818174,
+              "z": -632,
+              "tx": -26,
+              "ty": -198.7319372105771,
+              "tz": -632,
+              "fov": 35
+            },
+            "back": {
+              "x": -26,
+              "y": -198.36106167593934,
+              "z": -637.303767243634,
+              "tx": -26,
+              "ty": -198.7319372105771,
+              "tz": -632,
+              "fov": 35
+            }
+          },
+          "walk": {
+            "stats": {
+              "hp": 85,
+              "speed": 1.85,
+              "damage": 16,
+              "armor": 0.28,
+              "reward": 14,
+              "radius": 0.64,
+              "scale": 1.38,
+              "tactics": "tank"
+            },
+            "bad": 0,
+            "info": {
+              "id": "zombie.brute",
+              "name": "Brute",
+              "kind": "zombie",
+              "variant": null,
+              "mode": "walk",
+              "center": {
+                "x": -28.06869930137402,
+                "y": -198.68544273877245,
+                "z": -631.3864226374099
+              },
+              "size": {
+                "x": 2.202518758796426,
+                "y": 2.5589768388917093,
+                "z": 1.8168936838400214
+              },
+              "yaw": 0.4025555555555551,
+              "info": {
+                "meshes": 3,
+                "drawables": 3,
+                "tris": 15044,
+                "points": 0,
+                "segments": 0,
+                "materials": 3
+              }
+            },
+            "errors": []
+          },
+          "joins": {
+            "bad": 0,
+            "maxWeightError": 2.9802322387695312e-8,
+            "vertices": 48852,
+            "skins": 1,
+            "blended": 19591,
+            "loss": {
+              "bad": 0,
+              "lost": true,
+              "remaining": 0,
+              "errors": []
+            }
+          }
+        },
+        {
+          "type": "military",
+          "entry": {
+            "id": "zombie.military",
+            "name": "Military",
+            "kind": "zombie",
+            "variant": null,
+            "mode": "statue",
+            "center": {
+              "x": -26,
+              "y": -198.95095314384406,
+              "z": -632
+            },
+            "size": {
+              "x": 0.9863545506539957,
+              "y": 2.0980937123118792,
+              "z": 0.6491459638275501
+            },
+            "yaw": 0,
+            "info": {
+              "meshes": 4,
+              "drawables": 4,
+              "tris": 17428,
+              "points": 0,
+              "segments": 0,
+              "materials": 4
+            }
+          },
+          "cameras": {
+            "front": {
+              "x": -26,
+              "y": -198.65124839699712,
+              "z": -627.7140224397893,
+              "tx": -26,
+              "ty": -198.95095314384406,
+              "tz": -632,
+              "fov": 35
+            },
+            "left": {
+              "x": -21.586532099022065,
+              "y": -198.7968314486148,
+              "z": -632,
+              "tx": -26,
+              "ty": -198.95095314384406,
+              "tz": -632,
+              "fov": 35
+            },
+            "back": {
+              "x": -26,
+              "y": -198.65124839699712,
+              "z": -636.2859775602107,
+              "tx": -26,
+              "ty": -198.95095314384406,
+              "tz": -632,
+              "fov": 35
+            }
+          },
+          "walk": {
+            "stats": {
+              "hp": 50,
+              "speed": 3.15,
+              "damage": 12,
+              "armor": 0.12,
+              "reward": 8,
+              "radius": 0.46,
+              "scale": 1.08,
+              "tactics": "weave"
+            },
+            "bad": 0,
+            "info": {
+              "id": "zombie.military",
+              "name": "Military",
+              "kind": "zombie",
+              "variant": null,
+              "mode": "walk",
+              "center": {
+                "x": -23.753467606541925,
+                "y": -198.99279338269827,
+                "z": -631.8749948839763
+              },
+              "size": {
+                "x": 1.3736903749456069,
+                "y": 1.9450960574652072,
+                "z": 1.0010496439882672
+              },
+              "yaw": 1.5826468414200048,
+              "info": {
+                "meshes": 4,
+                "drawables": 4,
+                "tris": 17428,
+                "points": 0,
+                "segments": 0,
+                "materials": 4
+              }
+            },
+            "errors": []
+          },
+          "joins": {
+            "bad": 0,
+            "maxWeightError": 2.9802322387695312e-8,
+            "vertices": 56652,
+            "skins": 2,
+            "blended": 16052
+          }
+        },
+        {
+          "type": "spitter",
+          "entry": {
+            "id": "zombie.spitter",
+            "name": "Spitter",
+            "kind": "zombie",
+            "variant": null,
+            "mode": "statue",
+            "center": {
+              "x": -26,
+              "y": -199.06662516143962,
+              "z": -632
+            },
+            "size": {
+              "x": 0.893078427586552,
+              "y": 1.8667496771207936,
+              "z": 0.6731495008052661
+            },
+            "yaw": 0,
+            "info": {
+              "meshes": 6,
+              "drawables": 6,
+              "tris": 12092,
+              "points": 0,
+              "segments": 0,
+              "materials": 4
+            }
+          },
+          "cameras": {
+            "front": {
+              "x": -26,
+              "y": -198.79579328587033,
+              "z": -628.1269237358042,
+              "tx": -26,
+              "ty": -199.06662516143962,
+              "tz": -632,
+              "fov": 35
+            },
+            "left": {
+              "x": -22.064461369103483,
+              "y": -198.9291931240842,
+              "z": -632,
+              "tx": -26,
+              "ty": -199.06662516143962,
+              "tz": -632,
+              "fov": 35
+            },
+            "back": {
+              "x": -26,
+              "y": -198.79579328587033,
+              "z": -635.8730762641958,
+              "tx": -26,
+              "ty": -199.06662516143962,
+              "tz": -632,
+              "fov": 35
+            }
+          },
+          "walk": {
+            "stats": {
+              "hp": 34,
+              "speed": 2.45,
+              "damage": 9,
+              "armor": 0,
+              "reward": 9,
+              "radius": 0.46,
+              "scale": 1.05,
+              "tactics": "creep"
+            },
+            "bad": 0,
+            "info": {
+              "id": "zombie.spitter",
+              "name": "Spitter",
+              "kind": "zombie",
+              "variant": null,
+              "mode": "walk",
+              "center": {
+                "x": -27.473377264890452,
+                "y": -198.96960603209558,
+                "z": -631.7043657115761
+              },
+              "size": {
+                "x": 1.0875673076354033,
+                "y": 1.971977467087072,
+                "z": 0.975814884537499
+              },
+              "yaw": 1.7084156920526579,
+              "info": {
+                "meshes": 6,
+                "drawables": 6,
+                "tris": 12092,
+                "points": 0,
+                "segments": 0,
+                "materials": 4
+              }
+            },
+            "errors": []
+          },
+          "joins": {
+            "bad": 0,
+            "maxWeightError": 2.9802322387695312e-8,
+            "vertices": 38244,
+            "skins": 1,
+            "blended": 12859,
+            "loss": {
+              "bad": 0,
+              "lost": true,
+              "remaining": 0,
+              "errors": []
+            }
+          }
+        },
+        {
+          "type": "bomber",
+          "entry": {
+            "id": "zombie.bomber",
+            "name": "Bomber",
+            "kind": "zombie",
+            "variant": null,
+            "mode": "statue",
+            "center": {
+              "x": -26,
+              "y": -198.96638365680633,
+              "z": -632
+            },
+            "size": {
+              "x": 1.5131395787000628,
+              "y": 2.067232686387314,
+              "z": 1.7442595227978472
+            },
+            "yaw": 0,
+            "info": {
+              "meshes": 5,
+              "drawables": 5,
+              "tris": 17572,
+              "points": 0,
+              "segments": 0,
+              "materials": 5
+            }
+          },
+          "cameras": {
+            "front": {
+              "x": -26,
+              "y": -198.6228498249346,
+              "z": -627.087237322513,
+              "tx": -26,
+              "ty": -198.96638365680633,
+              "tz": -632,
+              "fov": 35
+            },
+            "left": {
+              "x": -21.346703425291278,
+              "y": -198.80388695974418,
+              "z": -632,
+              "tx": -26,
+              "ty": -198.96638365680633,
+              "tz": -632,
+              "fov": 35
+            },
+            "back": {
+              "x": -26,
+              "y": -198.6228498249346,
+              "z": -636.912762677487,
+              "tx": -26,
+              "ty": -198.96638365680633,
+              "tz": -632,
+              "fov": 35
+            }
+          },
+          "walk": {
+            "stats": {
+              "hp": 34,
+              "speed": 2.8,
+              "damage": 0,
+              "armor": 0,
+              "reward": 9,
+              "radius": 0.78,
+              "scale": 1.1,
+              "tactics": "bomb"
+            },
+            "bad": 0,
+            "info": {
+              "id": "zombie.bomber",
+              "name": "Bomber",
+              "kind": "zombie",
+              "variant": null,
+              "mode": "walk",
+              "center": {
+                "x": -27.367761088997035,
+                "y": -198.95971495176514,
+                "z": -631.3063231236322
+              },
+              "size": {
+                "x": 2.410191016548225,
+                "y": 2.041370626630794,
+                "z": 2.332260896609114
+              },
+              "yaw": 1.1797512273682207,
+              "info": {
+                "meshes": 5,
+                "drawables": 5,
+                "tris": 17572,
+                "points": 0,
+                "segments": 0,
+                "materials": 5
+              }
+            },
+            "errors": []
+          },
+          "joins": {
+            "bad": 0,
+            "maxWeightError": 2.9802322387695312e-8,
+            "vertices": 47196,
+            "skins": 1,
+            "blended": 10247
+          }
+        },
+        {
+          "type": "screamer",
+          "entry": {
+            "id": "zombie.screamer",
+            "name": "Screamer",
+            "kind": "zombie",
+            "variant": null,
+            "mode": "statue",
+            "center": {
+              "x": -26,
+              "y": -199.19557880535632,
+              "z": -632
+            },
+            "size": {
+              "x": 1.3766132447290431,
+              "y": 2.589365542192894,
+              "z": 1.3192543595318966
+            },
+            "yaw": 0,
+            "info": {
+              "meshes": 5,
+              "drawables": 5,
+              "tris": 12524,
+              "points": 0,
+              "segments": 0,
+              "materials": 5
+            }
+          },
+          "cameras": {
+            "front": {
+              "x": -26,
+              "y": -198.8030733412289,
+              "z": -626.3869103535778,
+              "tx": -26,
+              "ty": -199.19557880535632,
+              "tz": -632,
+              "fov": 35
+            },
+            "left": {
+              "x": -20.46342513302017,
+              "y": -199.0022373506527,
+              "z": -632,
+              "tx": -26,
+              "ty": -199.19557880535632,
+              "tz": -632,
+              "fov": 35
+            },
+            "back": {
+              "x": -26,
+              "y": -198.8030733412289,
+              "z": -637.6130896464222,
+              "tx": -26,
+              "ty": -199.19557880535632,
+              "tz": -632,
+              "fov": 35
+            }
+          },
+          "walk": {
+            "stats": {
+              "hp": 28,
+              "speed": 3.5,
+              "damage": 6,
+              "armor": 0,
+              "reward": 11,
+              "radius": 0.4,
+              "scale": 0.96,
+              "tactics": "scream"
+            },
+            "bad": 0,
+            "info": {
+              "id": "zombie.screamer",
+              "name": "Screamer",
+              "kind": "zombie",
+              "variant": null,
+              "mode": "walk",
+              "center": {
+                "x": -26.851361747730355,
+                "y": -199.1510217544954,
+                "z": -631.4816442394241
+              },
+              "size": {
+                "x": 2.8768425233648536,
+                "y": 2.6316282220822416,
+                "z": 2.599806645605554
+              },
+              "yaw": 1.8270635997932851,
+              "info": {
+                "meshes": 5,
+                "drawables": 5,
+                "tris": 12524,
+                "points": 0,
+                "segments": 0,
+                "materials": 5
+              }
+            },
+            "errors": []
+          },
+          "joins": {
+            "bad": 0,
+            "maxWeightError": 2.9802322387695312e-8,
+            "vertices": 36384,
+            "skins": 1,
+            "blended": 12323,
+            "loss": {
+              "bad": 0,
+              "lost": true,
+              "remaining": 0,
+              "errors": []
+            }
+          }
+        },
+        {
+          "type": "drowned",
+          "entry": {
+            "id": "zombie.drowned",
+            "name": "Drowned",
+            "kind": "zombie",
+            "variant": null,
+            "mode": "statue",
+            "center": {
+              "x": -26,
+              "y": -199.0803497540712,
+              "z": -632
+            },
+            "size": {
+              "x": 0.839891702872773,
+              "y": 1.8393004918576707,
+              "z": 0.5620825983920668
+            },
+            "yaw": 0,
+            "info": {
+              "meshes": 3,
+              "drawables": 3,
+              "tris": 12536,
+              "points": 0,
+              "segments": 0,
+              "materials": 3
+            }
+          },
+          "cameras": {
+            "front": {
+              "x": -26,
+              "y": -198.81791719279354,
+              "z": -628.2470395262742,
+              "tx": -26,
+              "ty": -199.0803497540712,
+              "tz": -632,
+              "fov": 35
+            },
+            "left": {
+              "x": -22.144881245297757,
+              "y": -198.9457260406749,
+              "z": -632,
+              "tx": -26,
+              "ty": -199.0803497540712,
+              "tz": -632,
+              "fov": 35
+            },
+            "back": {
+              "x": -26,
+              "y": -198.81791719279354,
+              "z": -635.7529604737258,
+              "tx": -26,
+              "ty": -199.0803497540712,
+              "tz": -632,
+              "fov": 35
+            }
+          },
+          "walk": {
+            "stats": {
+              "hp": 40,
+              "speed": 2.4,
+              "damage": 10,
+              "armor": 0.04,
+              "reward": 6,
+              "radius": 0.44,
+              "scale": 0.98,
+              "tactics": "direct"
+            },
+            "bad": 0,
+            "info": {
+              "id": "zombie.drowned",
+              "name": "Drowned",
+              "kind": "zombie",
+              "variant": null,
+              "mode": "walk",
+              "center": {
+                "x": -26.94283679724366,
+                "y": -199.10370726261658,
+                "z": -631.1092932159551
+              },
+              "size": {
+                "x": 1.285055851250938,
+                "y": 1.6654760312327994,
+                "z": 0.8721305253013725
+              },
+              "yaw": 1.5998433919141777,
+              "info": {
+                "meshes": 3,
+                "drawables": 3,
+                "tris": 12536,
+                "points": 0,
+                "segments": 0,
+                "materials": 3
+              }
+            },
+            "errors": []
+          },
+          "joins": {
+            "bad": 0,
+            "maxWeightError": 2.9802322387695312e-8,
+            "vertices": 40644,
+            "skins": 1,
+            "blended": 14940
+          }
+        },
+        {
+          "type": "leaper",
+          "entry": {
+            "id": "zombie.leaper",
+            "name": "Leaper",
+            "kind": "zombie",
+            "variant": null,
+            "mode": "statue",
+            "center": {
+              "x": -26,
+              "y": -199.64069300784507,
+              "z": -632
+            },
+            "size": {
+              "x": 0.7978208827091144,
+              "y": 1.3359069861597561,
+              "z": 1.4571330548956212
+            },
+            "yaw": 0,
+            "info": {
+              "meshes": 3,
+              "drawables": 3,
+              "tris": 10922,
+              "points": 0,
+              "segments": 0,
+              "materials": 3
+            }
+          },
+          "cameras": {
+            "front": {
+              "x": -26,
+              "y": -199.40450298202137,
+              "z": -628.6223252675312,
+              "tx": -26,
+              "ty": -199.64069300784507,
+              "tz": -632,
+              "fov": 35
+            },
+            "left": {
+              "x": -23.094249744721253,
+              "y": -199.5392219729799,
+              "z": -632,
+              "tx": -26,
+              "ty": -199.64069300784507,
+              "tz": -632,
+              "fov": 35
+            },
+            "back": {
+              "x": -26,
+              "y": -199.40450298202137,
+              "z": -635.3776747324688,
+              "tx": -26,
+              "ty": -199.64069300784507,
+              "tz": -632,
+              "fov": 35
+            }
+          },
+          "walk": {
+            "stats": {
+              "hp": 30,
+              "speed": 4.2,
+              "damage": 10,
+              "armor": 0,
+              "reward": 6,
+              "radius": 0.42,
+              "scale": 0.92,
+              "tactics": "leap"
+            },
+            "bad": 0,
+            "info": {
+              "id": "zombie.leaper",
+              "name": "Leaper",
+              "kind": "zombie",
+              "variant": null,
+              "mode": "walk",
+              "center": {
+                "x": -22.356216543962265,
+                "y": -198.55107550438467,
+                "z": -631.8991138082586
+              },
+              "size": {
+                "x": 0.9759375957898264,
+                "y": 1.020993892851891,
+                "z": 0.8165417850667609
+              },
+              "yaw": 1.5894209076500563,
+              "info": {
+                "meshes": 3,
+                "drawables": 3,
+                "tris": 10922,
+                "points": 0,
+                "segments": 0,
+                "materials": 3
+              }
+            },
+            "errors": []
+          },
+          "joins": {
+            "bad": 0,
+            "maxWeightError": 2.9802322387695312e-8,
+            "vertices": 35352,
+            "skins": 1,
+            "blended": 12869
+          }
+        },
+        {
+          "type": "spider",
+          "entry": {
+            "id": "zombie.spider",
+            "name": "Spider",
+            "kind": "zombie",
+            "variant": null,
+            "mode": "statue",
+            "center": {
+              "x": -26,
+              "y": -199.51771008171227,
+              "z": -632
+            },
+            "size": {
+              "x": 1.805285612193245,
+              "y": 1.045567810595685,
+              "z": 1.8750079485180322
+            },
+            "yaw": 0,
+            "info": {
+              "meshes": 3,
+              "drawables": 3,
+              "tris": 7618,
+              "points": 0,
+              "segments": 0,
+              "materials": 3
+            }
+          },
+          "cameras": {
+            "front": {
+              "x": -26,
+              "y": -199.2904458986533,
+              "z": -628.7499707659696,
+              "tx": -26,
+              "ty": -199.51771008171227,
+              "tz": -632,
+              "fov": 35
+            },
+            "left": {
+              "x": -22.707092849788182,
+              "y": -199.40271923016198,
+              "z": -632,
+              "tx": -26,
+              "ty": -199.51771008171227,
+              "tz": -632,
+              "fov": 35
+            },
+            "back": {
+              "x": -26,
+              "y": -199.2904458986533,
+              "z": -635.2500292340304,
+              "tx": -26,
+              "ty": -199.51771008171227,
+              "tz": -632,
+              "fov": 35
+            }
+          },
+          "walk": {
+            "stats": {
+              "hp": 44,
+              "speed": 3,
+              "damage": 8,
+              "armor": 0.08,
+              "reward": 10,
+              "radius": 0.62,
+              "scale": 1,
+              "tactics": "spit"
+            },
+            "bad": 0,
+            "info": {
+              "id": "zombie.spider",
+              "name": "Spider",
+              "kind": "zombie",
+              "variant": null,
+              "mode": "walk",
+              "center": {
+                "x": -27.820496653310204,
+                "y": -199.49732056735965,
+                "z": -634.3689508341282
+              },
+              "size": {
+                "x": 2.304640520114795,
+                "y": 1.0187844918385736,
+                "z": 2.4383647927654692
+              },
+              "yaw": 1.3852816280515021,
+              "info": {
+                "meshes": 3,
+                "drawables": 3,
+                "tris": 7618,
+                "points": 0,
+                "segments": 0,
+                "materials": 3
+              }
+            },
+            "errors": []
+          },
+          "joins": {
+            "bad": 0,
+            "maxWeightError": 0,
+            "vertices": 24540,
+            "skins": 1,
+            "blended": 0
+          }
+        },
+        {
+          "type": "colossus",
+          "entry": {
+            "id": "zombie.colossus",
+            "name": "Colossus",
+            "kind": "zombie",
+            "variant": null,
+            "mode": "statue",
+            "center": {
+              "x": -26,
+              "y": -197.47242406543202,
+              "z": -632
+            },
+            "size": {
+              "x": 3.1021191060543067,
+              "y": 5.055151869135955,
+              "z": 3.135745764479566
+            },
+            "yaw": 0,
+            "info": {
+              "meshes": 5,
+              "drawables": 5,
+              "tris": 16120,
+              "points": 0,
+              "segments": 0,
+              "materials": 5
+            }
+          },
+          "cameras": {
+            "front": {
+              "x": -26,
+              "y": -196.68168340124274,
+              "z": -620.6918816658184,
+              "tx": -26,
+              "ty": -197.47242406543202,
+              "tz": -632,
+              "fov": 35
+            },
+            "left": {
+              "x": -14.95767262296987,
+              "y": -197.08681749644634,
+              "z": -632,
+              "tx": -26,
+              "ty": -197.47242406543202,
+              "tz": -632,
+              "fov": 35
+            },
+            "back": {
+              "x": -26,
+              "y": -196.68168340124274,
+              "z": -643.3081183341816,
+              "tx": -26,
+              "ty": -197.47242406543202,
+              "tz": -632,
+              "fov": 35
+            }
+          },
+          "walk": {
+            "stats": {
+              "hp": 520,
+              "speed": 3.4782608695652177,
+              "damage": 30,
+              "armor": 0.32,
+              "reward": 120,
+              "radius": 1.05,
+              "scale": 2.3,
+              "tactics": "boss"
+            },
+            "bad": 0,
+            "info": {
+              "id": "zombie.colossus",
+              "name": "Colossus",
+              "kind": "zombie",
+              "variant": null,
+              "mode": "walk",
+              "center": {
+                "x": -22.671655682936773,
+                "y": -197.5698106697733,
+                "z": -631.8749051313763
+              },
+              "size": {
+                "x": 4.0185934183072085,
+                "y": 5.069810578292589,
+                "z": 3.2038716745995544
+              },
+              "yaw": 1.5709524313356078,
+              "info": {
+                "meshes": 5,
+                "drawables": 5,
+                "tris": 16120,
+                "points": 0,
+                "segments": 0,
+                "materials": 5
+              }
+            },
+            "errors": []
+          },
+          "joins": {
+            "bad": 0,
+            "maxWeightError": 2.9802322387695312e-8,
+            "vertices": 50100,
+            "skins": 1,
+            "blended": 22334
+          }
+        },
+        {
+          "type": "demon",
+          "entry": {
+            "id": "zombie.demon",
+            "name": "Demon",
+            "kind": "zombie",
+            "variant": null,
+            "mode": "statue",
+            "center": {
+              "x": -26,
+              "y": -198.34106559959952,
+              "z": -632
+            },
+            "size": {
+              "x": 2.0639686348929835,
+              "y": 3.317868800801051,
+              "z": 1.16057511819929
+            },
+            "yaw": 0,
+            "info": {
+              "meshes": 6,
+              "drawables": 6,
+              "tris": 14232,
+              "points": 0,
+              "segments": 0,
+              "materials": 5
+            }
+          },
+          "cameras": {
+            "front": {
+              "x": -26,
+              "y": -197.86126774600086,
+              "z": -625.138571024999,
+              "tx": -26,
+              "ty": -198.34106559959952,
+              "tz": -632,
+              "fov": 35
+            },
+            "left": {
+              "x": -18.736812224755457,
+              "y": -198.08742949352492,
+              "z": -632,
+              "tx": -26,
+              "ty": -198.34106559959952,
+              "tz": -632,
+              "fov": 35
+            },
+            "back": {
+              "x": -26,
+              "y": -197.86126774600086,
+              "z": -638.861428975001,
+              "tx": -26,
+              "ty": -198.34106559959952,
+              "tz": -632,
+              "fov": 35
+            }
+          },
+          "walk": {
+            "stats": {
+              "hp": 130,
+              "speed": 2.5,
+              "damage": 18,
+              "armor": 0.18,
+              "reward": 20,
+              "radius": 0.66,
+              "scale": 1.46,
+              "tactics": "charge"
+            },
+            "bad": 0,
+            "info": {
+              "id": "zombie.demon",
+              "name": "Demon",
+              "kind": "zombie",
+              "variant": null,
+              "mode": "walk",
+              "center": {
+                "x": -25.526309697496856,
+                "y": -198.46013422784787,
+                "z": -631.8736843748665
+              },
+              "size": {
+                "x": 1.410249661084542,
+                "y": 3.030555939640891,
+                "z": 1.9035442033919026
+              },
+              "yaw": 1.5723517295856755,
+              "info": {
+                "meshes": 6,
+                "drawables": 6,
+                "tris": 14232,
+                "points": 0,
+                "segments": 0,
+                "materials": 5
+              }
+            },
+            "errors": []
+          },
+          "joins": {
+            "bad": 0,
+            "maxWeightError": 2.9802322387695312e-8,
+            "vertices": 40644,
+            "skins": 1,
+            "blended": 9088,
+            "loss": {
+              "bad": 0,
+              "lost": true,
+              "remaining": 0,
+              "errors": []
+            }
+          }
+        },
+        {
+          "type": "guardian",
+          "entry": {
+            "id": "zombie.guardian",
+            "name": "Guardian",
+            "kind": "zombie",
+            "variant": null,
+            "mode": "statue",
+            "center": {
+              "x": -26,
+              "y": -198.24852864626405,
+              "z": -632
+            },
+            "size": {
+              "x": 1.5426179806416123,
+              "y": 3.502942707471931,
+              "z": 1.216380182022931
+            },
+            "yaw": 0,
+            "info": {
+              "meshes": 3,
+              "drawables": 3,
+              "tris": 9928,
+              "points": 0,
+              "segments": 0,
+              "materials": 3
+            }
+          },
+          "cameras": {
+            "front": {
+              "x": -26,
+              "y": -197.7452409664457,
+              "z": -624.7698872755223,
+              "tx": -26,
+              "ty": -198.25081969926063,
+              "tz": -632,
+              "fov": 35
+            },
+            "left": {
+              "x": -18.69842758106763,
+              "y": -197.99584317189178,
+              "z": -632,
+              "tx": -26,
+              "ty": -198.25081969926063,
+              "tz": -632,
+              "fov": 35
+            },
+            "back": {
+              "x": -26,
+              "y": -197.7452409664457,
+              "z": -639.2301127244777,
+              "tx": -26,
+              "ty": -198.25081969926063,
+              "tz": -632,
+              "fov": 35
+            }
+          },
+          "walk": {
+            "stats": {
+              "hp": 420,
+              "speed": 6.086956521739131,
+              "damage": 25,
+              "armor": 0.3,
+              "reward": 150,
+              "radius": 0.7,
+              "scale": 1.7,
+              "tactics": "boss"
+            },
+            "bad": 0,
+            "info": {
+              "id": "zombie.guardian",
+              "name": "Guardian",
+              "kind": "zombie",
+              "variant": null,
+              "mode": "walk",
+              "center": {
+                "x": -18.672559120186715,
+                "y": -198.95017625880837,
+                "z": -631.8749642738787
+              },
+              "size": {
+                "x": 2.910085218200198,
+                "y": 4.701509090538167,
+                "z": 3.0276305730475315
+              },
+              "yaw": 1.5707550075018921,
+              "info": {
+                "meshes": 5,
+                "drawables": 5,
+                "tris": 20508,
+                "points": 0,
+                "segments": 0,
+                "materials": 2
+              }
+            },
+            "errors": []
+          },
+          "joins": {
+            "bad": 0,
+            "maxWeightError": 2.9802322387695312e-8,
+            "vertices": 66288,
+            "skins": 1,
+            "blended": 31483
+          }
+        },
+        {
+          "type": "caveguard",
+          "entry": {
+            "id": "zombie.caveguard",
+            "name": "Cave Guardian",
+            "kind": "zombie",
+            "variant": null,
+            "mode": "statue",
+            "center": {
+              "x": -26,
+              "y": -198.65106290620872,
+              "z": -632
+            },
+            "size": {
+              "x": 1.49201245695048,
+              "y": 2.6978741875826415,
+              "z": 1.4200342822202856
+            },
+            "yaw": 0,
+            "info": {
+              "meshes": 3,
+              "drawables": 3,
+              "tris": 9928,
+              "points": 0,
+              "segments": 0,
+              "materials": 3
+            }
+          },
+          "cameras": {
+            "front": {
+              "x": -26,
+              "y": -198.2337819067142,
+              "z": -626.1046451649208,
+              "tx": -26,
+              "ty": -198.64602527560706,
+              "tz": -632,
+              "fov": 35
+            },
+            "left": {
+              "x": -20.180393526769898,
+              "y": -198.4428001394227,
+              "z": -632,
+              "tx": -26,
+              "ty": -198.64602527560706,
+              "tz": -632,
+              "fov": 35
+            },
+            "back": {
+              "x": -26,
+              "y": -198.2337819067142,
+              "z": -637.8953548350792,
+              "tx": -26,
+              "ty": -198.64602527560706,
+              "tz": -632,
+              "fov": 35
+            }
+          },
+          "walk": {
+            "stats": {
+              "hp": 999999,
+              "speed": 14,
+              "damage": 999,
+              "armor": 1,
+              "reward": 0,
+              "radius": 0.5,
+              "scale": 1.52,
+              "tactics": "direct"
+            },
+            "bad": 0,
+            "info": {
+              "id": "zombie.caveguard",
+              "name": "Cave Guardian",
+              "kind": "zombie",
+              "variant": null,
+              "mode": "walk",
+              "center": {
+                "x": -24.854640559519755,
+                "y": -199.1606889232547,
+                "z": -631.8748790430127
+              },
+              "size": {
+                "x": 2.1502845383822518,
+                "y": 3.2966085404124783,
+                "z": 2.4026462142037417
+              },
+              "yaw": -1.571206541971891,
+              "info": {
+                "meshes": 3,
+                "drawables": 3,
+                "tris": 19918,
+                "points": 0,
+                "segments": 0,
+                "materials": 2
+              }
+            },
+            "errors": []
+          },
+          "joins": {
+            "bad": 0,
+            "maxWeightError": 2.9802322387695312e-8,
+            "vertices": 64776,
+            "skins": 1,
+            "blended": 28891
+          }
+        }
+      ]
+    }
+  }
+}

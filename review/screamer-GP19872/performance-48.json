@@ -1,0 +1,62 @@
+{
+  "after": {
+    "batches": [
+      {
+        "fps": 60.666666666666664,
+        "p95": 17.400000005960464
+      },
+      {
+        "fps": 60.53953364637013,
+        "p95": 17.19999998807907
+      },
+      {
+        "fps": 60.75495501429285,
+        "p95": 17.200000017881393
+      }
+    ],
+    "zombies": 48,
+    "ability": {
+      "clock": 17.717300000011925,
+      "domain": "training",
+      "shots": 0,
+      "trails": 0,
+      "counts": {
+        "fireballs": 0,
+        "stones": 0,
+        "trailDrops": 0,
+        "directHits": 0,
+        "blocked": 0,
+        "acidHits": 0
+      },
+      "pools": {
+        "fireballs": 0,
+        "stones": 0,
+        "trails": 0
+      }
+    },
+    "trailMeshes": 0,
+    "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "loadSeconds": 18.048,
+    "errors": []
+  },
+  "before": {
+    "batches": [
+      {
+        "fps": 59.96202405131503,
+        "p95": 18.899999976158142
+      },
+      {
+        "fps": 59.85435440404565,
+        "p95": 17.700000017881393
+      },
+      {
+        "fps": 60.00729370456288,
+        "p95": 17.400000005960464
+      }
+    ],
+    "zombies": 48,
+    "loadSeconds": 17.208,
+    "errors": [],
+    "source": "Original baseline perf.mjs console output, preserved in this task tool transcript."
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "task": "GP-19906",
+  "createdAt": "2026-10-13T14:53:28.748Z",
+  "duration": 20,
+  "fps": 30,
+  "frames": 600,
+  "dimensions": [
+    1280,
+    720
+  ],
+  "audioSourceStart": 9.151494,
+  "bpm": 103.322299,
+  "motionSourceHash": "d11fe67f4d07a964cd176673e990d6fd50a0158e32828f617480ffc2d95e8070",
+  "captureSourceHash": "1735e4f54829de7fab984f426625348c3606c99d55b7a55ab197f2c18d9a0e64",
+  "stageHash": "b6b7eaafb4aabb7c39b8d14628d5fad29e86305e2e4c2a54ca5f22b2607e1614",
+  "approvedLightingUnchanged": true,
+  "wardrobeUnchanged": true,
+  "audioUnchanged": true,
+  "audioMetadataCorrection": "Three inherited choreography hints synchronized to beat33.2 and final hold0.720522s; audio/track fields unchanged",
+  "motionBlur": {
+    "samples": 9,
+    "shutterSeconds": 0.013333333333333334,
+    "accumulation": "uint32-premultiplied"
+  },
+  "assets": {
+    "marine-dance.mp4": {
+      "bytes": 3551372,
+      "sha256": "3dfcc251d2eaadc6b523f9c593024f2afaf46a1da6f61c34f95c82928cddb5d1",
+      "verification": "marine-dance.mp4.verification.json"
+    },
+    "marine-dance-transparent.webm": {
+      "bytes": 9686936,
+      "sha256": "e9fbb4c5e0ac158d18420bf4252ab14274b546d8e7a9b03946e0382b0f373d4f",
+      "verification": "marine-dance-transparent.webm.verification.json"
+    }
+  },
+  "audit": "audit-summary.json",
+  "integration": "integration-notes.txt",
+  "liveIntegration": "Pending Claude; no live intro files changed",
+  "before": "review/dance-GP19905/marine-dance.mp4",
+  "sourceArchive": "source-final.txt",
+  "compositeProof": "composite-proof/proof.json",
+  "compositeScreenshots": "composite-proof/contact-sheet.png",
+  "rawFrames": "Removed after both videos verified; 39 selected final stills and complete render proofs retained"
+}

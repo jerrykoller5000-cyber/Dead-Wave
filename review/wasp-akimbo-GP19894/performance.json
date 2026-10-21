@@ -1,0 +1,41 @@
+{
+  "samples": [
+    {
+      "before": true,
+      "alive": 48,
+      "fps": 59.08011705515511,
+      "worst": 25.100000023841858,
+      "over50": 0,
+      "drawCalls": 7451,
+      "autoReset": true
+    },
+    {
+      "before": false,
+      "alive": 48,
+      "fps": 56.80878054086679,
+      "worst": 34.200000047683716,
+      "over50": 0,
+      "drawCalls": 9371,
+      "autoReset": true
+    },
+    {
+      "before": true,
+      "alive": 48,
+      "fps": 59.612518629304326,
+      "worst": 22.600000023841858,
+      "over50": 0,
+      "drawCalls": 11381,
+      "autoReset": true
+    },
+    {
+      "before": false,
+      "alive": 48,
+      "fps": 59.378468368479474,
+      "worst": 20.899999976158142,
+      "over50": 0,
+      "drawCalls": 13361,
+      "autoReset": true
+    }
+  ],
+  "errors": []
+}

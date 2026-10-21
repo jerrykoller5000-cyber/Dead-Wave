@@ -1,0 +1,21 @@
+
+> dead-wave@0.1.0 test
+> node tools/tests/run-all.mjs t206 t225 --jobs 2 --all-fails
+
+check-players: 277 player.position reads, all in the allowed places
+FAIL  t206    18 pass   1 fail  46.9s
+FAIL  t225    19 pass   2 fail  47.5s
+
+retrying 2 failed check(s) one at a time: t206 t225
+FAIL  t206    18 pass   1 fail  38.4s
+FAIL  t225    19 pass   2 fail  37.7s
+
+2 checks: 37 pass, 3 fail
+
+by owner:
+  unassigned
+    t206   1 fail  FAIL hooks: grenadeArcDbg, start/releaseGrenadeCharge, GRENADE_THROW (1.6 s)
+           FAIL hooks: grenadeArcDbg, start/releaseGrenadeCharge, GRENADE_THROW (1.6 s)
+    t225   2 fail  FAIL the longest throw is held 1.6 s (was 3)
+           FAIL the longest throw is held 1.6 s (was 3)
+           FAIL full at 1.6 s (0.80)

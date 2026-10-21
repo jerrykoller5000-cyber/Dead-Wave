@@ -1,0 +1,10 @@
+{
+  "t1": {
+    "raw": "wall@2,0 -> lv0 edge0 y=-3.00\nwall@2,1 -> lv0 edge0 y=-3.00\nplatform@2,0 -> lv1 base y=-1.00\nplatform@2,1 -> lv1 base y=-1.00\nrefusal light on plat: that is the cabin\nrailing@2,0 -> lv1 edge0 y=-0.75\nlight@2,0 -> lv1 object y=-0.46\nheavy@2,1 -> lv1 object y=-0.46\nPASS both walls go down on the ground (lv0)\nFAIL cabin: the player is refused (cell taken), the primitive puts the light at lv0 (-)\nFAIL aimed at the deck, a light goes on the deck: {\"refusal\":\"cell taken\"}\nPASS both platforms stack on the walls at lv1 (-1.00 over -3.00)",
+    "pass": 2,
+    "fail": [
+      "FAIL cabin: the player is refused (cell taken), the primitive puts the light at lv0 (-)",
+      "FAIL aimed at the deck, a light goes on the deck: {\"refusal\":\"cell taken\"}"
+    ]
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "dw.coach.v1": "{\"version\":1,\"poiShown\":true,\"pickupShown\":true,\"bankShown\":true,\"purchaseShown\":false,\"banked\":false,\"purchased\":false,\"buildShown\":false,\"pairShown\":false,\"medpenShown\":false,\"built\":false}",
+  "tt_aim_fov": "45",
+  "tt_aim_tilt": "8",
+  "tt_auto_tilt": "strong",
+  "tt_best_run": "{\"version\":1,\"day\":2,\"kills\":17,\"streak\":0,\"headshots\":0,\"skulls\":0,\"runs\":1,\"evacuated\":0,\"escapeNight\":0,\"hotEscapeNight\":0,\"trueEndings\":0,\"trueEndingDay\":0}",
+  "tt_gfx": "medium",
+  "tt_laser_night": "2",
+  "tt_look_sens": "1.5",
+  "tt_perf_hud": "1",
+  "tt_vol_music": "0.55",
+  "tt_vol_sfx": "0.65"
+}

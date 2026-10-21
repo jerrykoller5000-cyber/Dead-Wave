@@ -1,0 +1,9 @@
+#109 hq/alarm-klaxon  (start here)
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: klaxon()
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 2 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A military base alarm klaxon, one long loud blaring blast, echoing. No music, no voice.

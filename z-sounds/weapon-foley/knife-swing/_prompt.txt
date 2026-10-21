@@ -1,0 +1,9 @@
+#54 weapon-foley/knife-swing
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: foley knifeSwing
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.4 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A combat knife slashing fast through the air, a short sharp whoosh. No music, no voice.

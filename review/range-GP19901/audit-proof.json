@@ -1,0 +1,78 @@
+{
+  "before": {
+    "loadSec": 24.635,
+    "station": null,
+    "perf": {
+      "samples": [
+        {
+          "fps": 53.7297394107605,
+          "worst": 24.100000000093132,
+          "hitches": 0
+        },
+        {
+          "fps": 54.097917230187775,
+          "worst": 24.100000000093132,
+          "hitches": 0
+        },
+        {
+          "fps": 54.105234681452025,
+          "worst": 25.5,
+          "hitches": 0
+        }
+      ],
+      "alive": 48,
+      "draws": 8996
+    },
+    "t215": "PASS read index.html and the scripts and styles the game loaded (230 files)\nPASS no broken characters in them\nPASS the HUD reads clean: timeLine \"Daylight · 12:00\", tacticalLine \"NVG — · Laser — · Light —\", grenadeChips \"G×0H×0\", ammoDetail \"12 / 12  ·  50 Bullets  ·  SEMI\", hpNum \"100 / 100\"\nPASS and shows its dots and times signs (NVG — · Laser — · Light — / G×0H×0)",
+    "errors": []
+  },
+  "after": {
+    "loadSec": 24.412,
+    "station": "rangeConsole",
+    "menu": true,
+    "activePerf": {
+      "samples": [
+        {
+          "fps": 60.37128339286755,
+          "worst": 18.5,
+          "hitches": 0
+        },
+        {
+          "fps": 60.18959723127993,
+          "worst": 18.799999999813735,
+          "hitches": 0
+        },
+        {
+          "fps": 60.11722859576594,
+          "worst": 20.399999999906868,
+          "hitches": 0
+        }
+      ],
+      "alive": 0,
+      "draws": 17141
+    },
+    "perf": {
+      "samples": [
+        {
+          "fps": 56.877429140201606,
+          "worst": 25.100000000093132,
+          "hitches": 0
+        },
+        {
+          "fps": 57.142857142857146,
+          "worst": 23.4000000001397,
+          "hitches": 0
+        },
+        {
+          "fps": 57.24371511710983,
+          "worst": 22.199999999953434,
+          "hitches": 0
+        }
+      ],
+      "alive": 48,
+      "draws": 23966
+    },
+    "t215": "PASS read index.html and the scripts and styles the game loaded (229 files)\nPASS no broken characters in them\nPASS the HUD reads clean: timeLine \"Daylight · 12:00\", tacticalLine \"NVG — · Laser — · Light —\", grenadeChips \"G×0H×0\", ammoDetail \"12 / 12  ·  50 Bullets  ·  SEMI\", hpNum \"100 / 100\"\nPASS and shows its dots and times signs (NVG — · Laser — · Light — / G×0H×0)",
+    "errors": []
+  }
+}

@@ -1,0 +1,9 @@
+#53 weapon-foley/grenade-bounce
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: foley grenadeBounce
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.5 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A hand grenade bouncing once on dirt, a heavy metallic thunk. No music, no voice.

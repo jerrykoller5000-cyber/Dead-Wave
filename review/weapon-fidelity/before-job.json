@@ -1,0 +1,296 @@
+{
+  "shots": [
+    {
+      "target": "weapon:pistol",
+      "view": "side",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/before/pistol-side.png"
+    },
+    {
+      "target": "weapon:pistol",
+      "view": "three",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/before/pistol-three.png"
+    },
+    {
+      "target": "weapon:revolver",
+      "view": "side",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/before/revolver-side.png"
+    },
+    {
+      "target": "weapon:revolver",
+      "view": "three",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/before/revolver-three.png"
+    },
+    {
+      "target": "weapon:uzi",
+      "view": "side",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/before/uzi-side.png"
+    },
+    {
+      "target": "weapon:uzi",
+      "view": "three",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/before/uzi-three.png"
+    },
+    {
+      "target": "weapon:m4",
+      "view": "side",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/before/m4-side.png"
+    },
+    {
+      "target": "weapon:m4",
+      "view": "three",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/before/m4-three.png"
+    },
+    {
+      "target": "weapon:ak",
+      "view": "side",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/before/ak-side.png"
+    },
+    {
+      "target": "weapon:ak",
+      "view": "three",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/before/ak-three.png"
+    },
+    {
+      "target": "weapon:aa12",
+      "view": "side",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/before/aa12-side.png"
+    },
+    {
+      "target": "weapon:aa12",
+      "view": "three",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/before/aa12-three.png"
+    },
+    {
+      "target": "weapon:shotgun",
+      "view": "side",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/before/shotgun-side.png"
+    },
+    {
+      "target": "weapon:shotgun",
+      "view": "three",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/before/shotgun-three.png"
+    },
+    {
+      "target": "weapon:sniper",
+      "view": "side",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/before/sniper-side.png"
+    },
+    {
+      "target": "weapon:sniper",
+      "view": "three",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/before/sniper-three.png"
+    },
+    {
+      "target": "weapon:minigun",
+      "view": "side",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/before/minigun-side.png"
+    },
+    {
+      "target": "weapon:minigun",
+      "view": "three",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/before/minigun-three.png"
+    },
+    {
+      "target": "weapon:launcher",
+      "view": "side",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/before/launcher-side.png"
+    },
+    {
+      "target": "weapon:launcher",
+      "view": "three",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/before/launcher-three.png"
+    },
+    {
+      "target": "weapon:flamer",
+      "view": "side",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/before/flamer-side.png"
+    },
+    {
+      "target": "weapon:flamer",
+      "view": "three",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/before/flamer-three.png"
+    },
+    {
+      "target": "weapon:chainsaw",
+      "view": "side",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/before/chainsaw-side.png"
+    },
+    {
+      "target": "weapon:chainsaw",
+      "view": "three",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/before/chainsaw-three.png"
+    },
+    {
+      "target": "weapon:knife",
+      "view": "side",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/before/knife-side.png"
+    },
+    {
+      "target": "weapon:knife",
+      "view": "three",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/before/knife-three.png"
+    },
+    {
+      "target": "weapon:machete",
+      "view": "side",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/before/machete-side.png"
+    },
+    {
+      "target": "weapon:machete",
+      "view": "three",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/before/machete-three.png"
+    },
+    {
+      "target": "weapon:m240",
+      "view": "side",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/before/m240-side.png"
+    },
+    {
+      "target": "weapon:m240",
+      "view": "three",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/before/m240-three.png"
+    },
+    {
+      "target": "weapon:m240Carried",
+      "view": "side",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/before/m240Carried-side.png"
+    },
+    {
+      "target": "weapon:m240Carried",
+      "view": "three",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/before/m240Carried-three.png"
+    },
+    {
+      "target": "weapon:mortar",
+      "view": "side",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/before/mortar-side.png"
+    },
+    {
+      "target": "weapon:mortar",
+      "view": "three",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/before/mortar-three.png"
+    },
+    {
+      "target": "weapon:mortarCarried",
+      "view": "side",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/before/mortarCarried-side.png"
+    },
+    {
+      "target": "weapon:mortarCarried",
+      "view": "three",
+      "time": "noon",
+      "size": "1024x768",
+      "margin": 1.25,
+      "out": "review/weapon-fidelity/before/mortarCarried-three.png"
+    }
+  ],
+  "out": "review/weapon-fidelity/before",
+  "cols": 4,
+  "tile": 360,
+  "sheet": true
+}

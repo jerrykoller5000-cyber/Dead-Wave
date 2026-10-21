@@ -1,0 +1,813 @@
+{
+    "out":  "review/gb175/before/",
+    "cols":  5,
+    "tile":  300,
+    "shots":  [
+                  {
+                      "out":  "review/gb175/before/minigun-side.png",
+                      "view":  "side",
+                      "target":  "weapon:minigun",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/minigun-top.png",
+                      "view":  "top",
+                      "target":  "weapon:minigun",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/minigun-front.png",
+                      "view":  "front",
+                      "target":  "weapon:minigun",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/minigun-three.png",
+                      "view":  "three",
+                      "target":  "weapon:minigun",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/minigun-close.png",
+                      "zoom":  2.6,
+                      "view":  "side",
+                      "target":  "weapon:minigun",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/m4-side.png",
+                      "view":  "side",
+                      "target":  "weapon:m4",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/m4-top.png",
+                      "view":  "top",
+                      "target":  "weapon:m4",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/m4-front.png",
+                      "view":  "front",
+                      "target":  "weapon:m4",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/m4-three.png",
+                      "view":  "three",
+                      "target":  "weapon:m4",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/m4-close.png",
+                      "zoom":  2.6,
+                      "view":  "side",
+                      "target":  "weapon:m4",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/ak-side.png",
+                      "view":  "side",
+                      "target":  "weapon:ak",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/ak-top.png",
+                      "view":  "top",
+                      "target":  "weapon:ak",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/ak-front.png",
+                      "view":  "front",
+                      "target":  "weapon:ak",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/ak-three.png",
+                      "view":  "three",
+                      "target":  "weapon:ak",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/ak-close.png",
+                      "zoom":  2.6,
+                      "view":  "side",
+                      "target":  "weapon:ak",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/pistol-side.png",
+                      "view":  "side",
+                      "target":  "weapon:pistol",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/pistol-top.png",
+                      "view":  "top",
+                      "target":  "weapon:pistol",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/pistol-front.png",
+                      "view":  "front",
+                      "target":  "weapon:pistol",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/pistol-three.png",
+                      "view":  "three",
+                      "target":  "weapon:pistol",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/pistol-close.png",
+                      "zoom":  2.6,
+                      "view":  "side",
+                      "target":  "weapon:pistol",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/uzi-side.png",
+                      "view":  "side",
+                      "target":  "weapon:uzi",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/uzi-top.png",
+                      "view":  "top",
+                      "target":  "weapon:uzi",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/uzi-front.png",
+                      "view":  "front",
+                      "target":  "weapon:uzi",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/uzi-three.png",
+                      "view":  "three",
+                      "target":  "weapon:uzi",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/uzi-close.png",
+                      "zoom":  2.6,
+                      "view":  "side",
+                      "target":  "weapon:uzi",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/shotgun-side.png",
+                      "view":  "side",
+                      "target":  "weapon:shotgun",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/shotgun-top.png",
+                      "view":  "top",
+                      "target":  "weapon:shotgun",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/shotgun-front.png",
+                      "view":  "front",
+                      "target":  "weapon:shotgun",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/shotgun-three.png",
+                      "view":  "three",
+                      "target":  "weapon:shotgun",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/shotgun-close.png",
+                      "zoom":  2.6,
+                      "view":  "side",
+                      "target":  "weapon:shotgun",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/aa12-side.png",
+                      "view":  "side",
+                      "target":  "weapon:aa12",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/aa12-top.png",
+                      "view":  "top",
+                      "target":  "weapon:aa12",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/aa12-front.png",
+                      "view":  "front",
+                      "target":  "weapon:aa12",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/aa12-three.png",
+                      "view":  "three",
+                      "target":  "weapon:aa12",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/aa12-close.png",
+                      "zoom":  2.6,
+                      "view":  "side",
+                      "target":  "weapon:aa12",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/revolver-side.png",
+                      "view":  "side",
+                      "target":  "weapon:revolver",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/revolver-top.png",
+                      "view":  "top",
+                      "target":  "weapon:revolver",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/revolver-front.png",
+                      "view":  "front",
+                      "target":  "weapon:revolver",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/revolver-three.png",
+                      "view":  "three",
+                      "target":  "weapon:revolver",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/revolver-close.png",
+                      "zoom":  2.6,
+                      "view":  "side",
+                      "target":  "weapon:revolver",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/sniper-side.png",
+                      "view":  "side",
+                      "target":  "weapon:sniper",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/sniper-top.png",
+                      "view":  "top",
+                      "target":  "weapon:sniper",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/sniper-front.png",
+                      "view":  "front",
+                      "target":  "weapon:sniper",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/sniper-three.png",
+                      "view":  "three",
+                      "target":  "weapon:sniper",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/sniper-close.png",
+                      "zoom":  2.6,
+                      "view":  "side",
+                      "target":  "weapon:sniper",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/launcher-side.png",
+                      "view":  "side",
+                      "target":  "weapon:launcher",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/launcher-top.png",
+                      "view":  "top",
+                      "target":  "weapon:launcher",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/launcher-front.png",
+                      "view":  "front",
+                      "target":  "weapon:launcher",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/launcher-three.png",
+                      "view":  "three",
+                      "target":  "weapon:launcher",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/launcher-close.png",
+                      "zoom":  2.6,
+                      "view":  "side",
+                      "target":  "weapon:launcher",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/flamer-side.png",
+                      "view":  "side",
+                      "target":  "weapon:flamer",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/flamer-top.png",
+                      "view":  "top",
+                      "target":  "weapon:flamer",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/flamer-front.png",
+                      "view":  "front",
+                      "target":  "weapon:flamer",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/flamer-three.png",
+                      "view":  "three",
+                      "target":  "weapon:flamer",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/flamer-close.png",
+                      "zoom":  2.6,
+                      "view":  "side",
+                      "target":  "weapon:flamer",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/chainsaw-side.png",
+                      "view":  "side",
+                      "target":  "weapon:chainsaw",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/chainsaw-top.png",
+                      "view":  "top",
+                      "target":  "weapon:chainsaw",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/chainsaw-front.png",
+                      "view":  "front",
+                      "target":  "weapon:chainsaw",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/chainsaw-three.png",
+                      "view":  "three",
+                      "target":  "weapon:chainsaw",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/chainsaw-close.png",
+                      "zoom":  2.6,
+                      "view":  "side",
+                      "target":  "weapon:chainsaw",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/knife-side.png",
+                      "view":  "side",
+                      "target":  "weapon:knife",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/knife-top.png",
+                      "view":  "top",
+                      "target":  "weapon:knife",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/knife-front.png",
+                      "view":  "front",
+                      "target":  "weapon:knife",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/knife-three.png",
+                      "view":  "three",
+                      "target":  "weapon:knife",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/knife-close.png",
+                      "zoom":  2.6,
+                      "view":  "side",
+                      "target":  "weapon:knife",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/machete-side.png",
+                      "view":  "side",
+                      "target":  "weapon:machete",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/machete-top.png",
+                      "view":  "top",
+                      "target":  "weapon:machete",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/machete-front.png",
+                      "view":  "front",
+                      "target":  "weapon:machete",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/machete-three.png",
+                      "view":  "three",
+                      "target":  "weapon:machete",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/machete-close.png",
+                      "zoom":  2.6,
+                      "view":  "side",
+                      "target":  "weapon:machete",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/katana-side.png",
+                      "view":  "side",
+                      "target":  "weapon:katana",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/katana-top.png",
+                      "view":  "top",
+                      "target":  "weapon:katana",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/katana-front.png",
+                      "view":  "front",
+                      "target":  "weapon:katana",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/katana-three.png",
+                      "view":  "three",
+                      "target":  "weapon:katana",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/katana-close.png",
+                      "zoom":  2.6,
+                      "view":  "side",
+                      "target":  "weapon:katana",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/katana-sheathed-side.png",
+                      "view":  "side",
+                      "target":  "weapon:katana-sheathed",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/katana-sheathed-top.png",
+                      "view":  "top",
+                      "target":  "weapon:katana-sheathed",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/katana-sheathed-front.png",
+                      "view":  "front",
+                      "target":  "weapon:katana-sheathed",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/katana-sheathed-three.png",
+                      "view":  "three",
+                      "target":  "weapon:katana-sheathed",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/katana-sheathed-close.png",
+                      "zoom":  2.6,
+                      "view":  "side",
+                      "target":  "weapon:katana-sheathed",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/m240-side.png",
+                      "view":  "side",
+                      "target":  "weapon:m240",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/m240-top.png",
+                      "view":  "top",
+                      "target":  "weapon:m240",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/m240-front.png",
+                      "view":  "front",
+                      "target":  "weapon:m240",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/m240-three.png",
+                      "view":  "three",
+                      "target":  "weapon:m240",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/m240-close.png",
+                      "zoom":  2.6,
+                      "view":  "side",
+                      "target":  "weapon:m240",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/m240-folded-side.png",
+                      "view":  "side",
+                      "target":  "weapon:m240-folded",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/m240-folded-top.png",
+                      "view":  "top",
+                      "target":  "weapon:m240-folded",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/m240-folded-front.png",
+                      "view":  "front",
+                      "target":  "weapon:m240-folded",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/m240-folded-three.png",
+                      "view":  "three",
+                      "target":  "weapon:m240-folded",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/m240-folded-close.png",
+                      "zoom":  2.6,
+                      "view":  "side",
+                      "target":  "weapon:m240-folded",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/mortar-side.png",
+                      "view":  "side",
+                      "target":  "weapon:mortar",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/mortar-top.png",
+                      "view":  "top",
+                      "target":  "weapon:mortar",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/mortar-front.png",
+                      "view":  "front",
+                      "target":  "weapon:mortar",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/mortar-three.png",
+                      "view":  "three",
+                      "target":  "weapon:mortar",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/mortar-close.png",
+                      "zoom":  2.6,
+                      "view":  "side",
+                      "target":  "weapon:mortar",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/mortar-collapsed-side.png",
+                      "view":  "side",
+                      "target":  "weapon:mortar-collapsed",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/mortar-collapsed-top.png",
+                      "view":  "top",
+                      "target":  "weapon:mortar-collapsed",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/mortar-collapsed-front.png",
+                      "view":  "front",
+                      "target":  "weapon:mortar-collapsed",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/mortar-collapsed-three.png",
+                      "view":  "three",
+                      "target":  "weapon:mortar-collapsed",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/mortar-collapsed-close.png",
+                      "zoom":  2.6,
+                      "view":  "side",
+                      "target":  "weapon:mortar-collapsed",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/mortar-round-side.png",
+                      "view":  "side",
+                      "target":  "weapon:mortar-round",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/mortar-round-top.png",
+                      "view":  "top",
+                      "target":  "weapon:mortar-round",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/mortar-round-front.png",
+                      "view":  "front",
+                      "target":  "weapon:mortar-round",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/mortar-round-three.png",
+                      "view":  "three",
+                      "target":  "weapon:mortar-round",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/mortar-round-close.png",
+                      "zoom":  2.6,
+                      "view":  "side",
+                      "target":  "weapon:mortar-round",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/frag-grenade-side.png",
+                      "view":  "side",
+                      "target":  "weapon:frag-grenade",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/frag-grenade-top.png",
+                      "view":  "top",
+                      "target":  "weapon:frag-grenade",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/frag-grenade-front.png",
+                      "view":  "front",
+                      "target":  "weapon:frag-grenade",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/frag-grenade-three.png",
+                      "view":  "three",
+                      "target":  "weapon:frag-grenade",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/frag-grenade-close.png",
+                      "zoom":  2.6,
+                      "view":  "side",
+                      "target":  "weapon:frag-grenade",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/holy-grenade-side.png",
+                      "view":  "side",
+                      "target":  "weapon:holy-grenade",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/holy-grenade-top.png",
+                      "view":  "top",
+                      "target":  "weapon:holy-grenade",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/holy-grenade-front.png",
+                      "view":  "front",
+                      "target":  "weapon:holy-grenade",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/holy-grenade-three.png",
+                      "view":  "three",
+                      "target":  "weapon:holy-grenade",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/holy-grenade-close.png",
+                      "zoom":  2.6,
+                      "view":  "side",
+                      "target":  "weapon:holy-grenade",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/med-pen-side.png",
+                      "view":  "side",
+                      "target":  "weapon:med-pen",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/med-pen-top.png",
+                      "view":  "top",
+                      "target":  "weapon:med-pen",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/med-pen-front.png",
+                      "view":  "front",
+                      "target":  "weapon:med-pen",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/med-pen-three.png",
+                      "view":  "three",
+                      "target":  "weapon:med-pen",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/med-pen-close.png",
+                      "zoom":  2.6,
+                      "view":  "side",
+                      "target":  "weapon:med-pen",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/rune-pistol-side.png",
+                      "view":  "side",
+                      "target":  "weapon:rune-pistol",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/rune-pistol-top.png",
+                      "view":  "top",
+                      "target":  "weapon:rune-pistol",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/rune-pistol-front.png",
+                      "view":  "front",
+                      "target":  "weapon:rune-pistol",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/rune-pistol-three.png",
+                      "view":  "three",
+                      "target":  "weapon:rune-pistol",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/rune-pistol-close.png",
+                      "zoom":  2.6,
+                      "view":  "side",
+                      "target":  "weapon:rune-pistol",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/shovel-side.png",
+                      "view":  "side",
+                      "target":  "weapon:shovel",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/shovel-top.png",
+                      "view":  "top",
+                      "target":  "weapon:shovel",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/shovel-front.png",
+                      "view":  "front",
+                      "target":  "weapon:shovel",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/shovel-three.png",
+                      "view":  "three",
+                      "target":  "weapon:shovel",
+                      "size":  "600x450"
+                  },
+                  {
+                      "out":  "review/gb175/before/shovel-close.png",
+                      "zoom":  2.6,
+                      "view":  "side",
+                      "target":  "weapon:shovel",
+                      "size":  "600x450"
+                  }
+              ]
+}

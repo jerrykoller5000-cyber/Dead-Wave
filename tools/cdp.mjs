@@ -1,0 +1,355 @@
+// A very small Chrome driver, spoken straight down the DevTools Protocol.
+//
+// Why not Playwright: the repo has no build step and no runtime dependencies, and the two
+// tools that need a browser (shoot.mjs and the test runner) between them use about eight
+// calls — navigate, evaluate, screenshot, and listening for errors and console lines. Node
+// 22+ ships a WebSocket client, and every Windows box the game is developed on already has
+// Chrome, so driving it directly costs ~150 lines and nothing to install. `npm test` then
+// works on a clean clone with no network.
+//
+// Set CHROME to use a particular binary.
+import { spawn } from 'node:child_process';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import {
+  assertGameTestSlot,
+  registerGameTestProcess,
+  releaseGameTestReservation,
+  reserveGameTestProcess,
+  unregisterGameTestProcess,
+} from './game-test-slot.mjs';
+
+const CHROME_CANDIDATES = [
+  process.env.CHROME,
+  'C:/Program Files/Google/Chrome/Application/chrome.exe',
+  'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',
+  'C:/Program Files/Microsoft/Edge/Application/msedge.exe',
+  'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',
+  '/usr/bin/google-chrome',
+  '/usr/bin/chromium',
+  '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
+].filter(Boolean);
+
+export function findChrome() {
+  for (const c of CHROME_CANDIDATES) {
+    try { if (fs.existsSync(c)) return c; } catch { /* keep looking */ }
+  }
+  throw new Error('No Chrome or Edge found. Set CHROME=<path to chrome.exe>.');
+}
+
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+async function fetchJson(url, tries = 60) {
+  for (let i = 0; i < tries; i++) {
+    try {
+      const res = await fetch(url);
+      if (res.ok) return await res.json();
+    } catch { /* not up yet */ }
+    await sleep(120);
+  }
+  throw new Error('Chrome did not open its debugging port: ' + url);
+}
+
+// One WebSocket to the browser, with every page attached as a "flat" session on the same
+// socket. Replies and events are routed by id and sessionId.
+class Connection {
+  constructor(ws) {
+    this.ws = ws;
+    this.nextId = 1;
+    this.pending = new Map();
+    this.listeners = [];
+    ws.addEventListener('message', (ev) => {
+      let msg;
+      try { msg = JSON.parse(typeof ev.data === 'string' ? ev.data : String(ev.data)); } catch { return; }
+      if (msg.id && this.pending.has(msg.id)) {
+        const { resolve, reject, timer } = this.pending.get(msg.id);
+        this.pending.delete(msg.id);
+        clearTimeout(timer);
+        if (msg.error) reject(new Error(msg.error.message + ' (' + JSON.stringify(msg.error.data ?? '') + ')'));
+        else resolve(msg.result);
+      } else if (msg.method) {
+        for (const fn of this.listeners) fn(msg);
+      }
+    });
+    ws.addEventListener('close', () => {
+      for (const { reject, timer } of this.pending.values()) { clearTimeout(timer); reject(new Error('CDP connection closed')); }
+      this.pending.clear();
+    });
+  }
+  send(method, params = {}, sessionId, timeoutMs = 120000) {
+    const id = this.nextId++;
+    const payload = { id, method, params };
+    if (sessionId) payload.sessionId = sessionId;
+    return new Promise((resolve, reject) => {
+      const timer = setTimeout(() => {
+        if (this.pending.has(id)) {
+          this.pending.delete(id);
+          reject(new Error('CDP timeout: ' + method));
+        }
+      }, timeoutMs);
+      this.pending.set(id, { resolve, reject, timer });
+      try { this.ws.send(JSON.stringify(payload)); }
+      catch (e) { clearTimeout(timer); this.pending.delete(id); reject(e); }
+    });
+  }
+  onEvent(fn) { this.listeners.push(fn); }
+}
+
+class Page {
+  constructor(conn, sessionId) {
+    this.conn = conn;
+    this.sessionId = sessionId;
+    this.errors = [];
+    this.console = [];
+    this._loaded = false;
+    conn.onEvent((msg) => {
+      if (msg.sessionId !== this.sessionId) return;
+      if (msg.method === 'Page.loadEventFired') this._loaded = true;
+      if (msg.method === 'Runtime.exceptionThrown') {
+        const d = msg.params.exceptionDetails || {};
+        const text = (d.exception && (d.exception.description || d.exception.value)) || d.text || 'unknown error';
+        this.errors.push(String(text).split('\n').slice(0, 6).join('\n'));
+      }
+      if (msg.method === 'Runtime.consoleAPICalled') {
+        const t = msg.params.type;
+        const text = (msg.params.args || []).map((a) => a.value ?? a.description ?? a.type).join(' ');
+        this.console.push({ type: t, text });
+      }
+      if (msg.method === 'Log.entryAdded') {
+        const e = msg.params.entry;
+        this.console.push({ type: e.level, text: e.text });
+      }
+    });
+  }
+  send(method, params, timeoutMs) { return this.conn.send(method, params, this.sessionId, timeoutMs); }
+  async setViewport(width, height, dsf = 1) {
+    await this.send('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: dsf, mobile: false });
+  }
+  async goto(url, { waitUntil = 'load', timeout = 120000 } = {}) {
+    this._loaded = false;
+    if (process.env.DW_GAME_TEST_TOKEN) {
+      try {
+        const target = new URL(url);
+        if (['127.0.0.1', 'localhost'].includes(target.hostname)) {
+          target.searchParams.set('__gameTestToken', process.env.DW_GAME_TEST_TOKEN);
+          url = target.href;
+        }
+      } catch { /* non-URL target; let Chrome report it */ }
+    }
+    await this.send('Page.navigate', { url });
+    if (waitUntil === 'none') return;
+    const t0 = Date.now();
+    while (!this._loaded && Date.now() - t0 < timeout) await sleep(50);
+  }
+  // Evaluates an expression and returns its value. Awaits promises.
+  async evaluate(expression, timeoutMs = 120000) {
+    const res = await this.send('Runtime.evaluate', {
+      expression, returnByValue: true, awaitPromise: true, userGesture: true
+    }, timeoutMs);
+    if (res.exceptionDetails) {
+      const d = res.exceptionDetails;
+      const text = (d.exception && (d.exception.description || d.exception.value)) || d.text;
+      throw new Error('evaluate failed: ' + text);
+    }
+    return res.result.value;
+  }
+  // Polls an expression until it is truthy. Returns false on timeout rather than throwing,
+  // so callers can report what the page was doing instead of just dying.
+  async waitFor(expression, { timeout = 240000, every = 250 } = {}) {
+    const t0 = Date.now();
+    while (Date.now() - t0 < timeout) {
+      try { if (await this.evaluate(expression)) return true; } catch { /* page mid-navigation */ }
+      await sleep(every);
+    }
+    return false;
+  }
+  async screenshot(file) {
+    const res = await this.send('Page.captureScreenshot', { format: 'png', captureBeyondViewport: false });
+    await fs.promises.mkdir(path.dirname(file), { recursive: true });
+    await fs.promises.writeFile(file, Buffer.from(res.data, 'base64'));
+    return file;
+  }
+}
+
+// CU-57: a browser that is already running with --remote-debugging-port (the desktop game's WebView2, started with
+// WEBVIEW2_ADDITIONAL_BROWSER_ARGUMENTS=--remote-debugging-port=<port>): the same Page, on its first page whose url
+// contains `urlPart`. close() only lets go of the socket; the window is the caller's to end.
+export async function attach(port, urlPart = '') {
+  await assertGameTestSlot();
+  const version = await fetchJson(`http://127.0.0.1:${port}/json/version`);
+  const ws = new WebSocket(version.webSocketDebuggerUrl);
+  await new Promise((resolve, reject) => {
+    ws.addEventListener('open', resolve, { once: true });
+    ws.addEventListener('error', () => reject(new Error('could not open the CDP socket')), { once: true });
+  });
+  const conn = new Connection(ws);
+  let target = null;
+  for (let i = 0; i < 120 && !target; i++) {
+    const { targetInfos } = await conn.send('Target.getTargets', {});
+    target = targetInfos.find((t) => t.type === 'page' && t.url.includes(urlPart)) || null;
+    if (!target) await sleep(500);
+  }
+  if (!target) throw new Error('no page matching ' + JSON.stringify(urlPart) + ' on port ' + port);
+  const { sessionId } = await conn.send('Target.attachToTarget', { targetId: target.targetId, flatten: true });
+  const page = new Page(conn, sessionId);
+  await page.send('Page.enable', {});
+  await page.send('Runtime.enable', {});
+  await page.send('Log.enable', {});
+  return { page, url: target.url, close() { try { ws.close(); } catch { /* gone */ } } };
+}
+
+async function waitForExit(proc, timeout = 8000) {
+  if (!proc || proc.exitCode !== null || proc.signalCode !== null) return;
+  await Promise.race([
+    new Promise(resolve => proc.once('exit', resolve)),
+    sleep(timeout),
+  ]);
+}
+
+async function stopOwnedChrome(proc) {
+  if (!proc || proc.exitCode !== null || proc.signalCode !== null) return;
+  try {
+    if (process.platform === 'win32' && proc.pid) {
+      const killer = spawn('taskkill', ['/F', '/T', '/PID', String(proc.pid)], { stdio: 'ignore' });
+      await new Promise(resolve => {
+        killer.once('error', resolve);
+        killer.once('exit', resolve);
+      });
+    } else {
+      proc.kill();
+    }
+  } catch { /* already gone */ }
+  await waitForExit(proc);
+}
+
+export async function launch({ headless = true, args = [] } = {}) {
+  await assertGameTestSlot();
+  const reservationId = await reserveGameTestProcess('Chrome/Edge');
+  let reservationPending = true;
+  let exe, profile;
+  try {
+    exe = findChrome();
+    profile = await fs.promises.mkdtemp(path.join(os.tmpdir(), 'dw-chrome-'));
+  } catch (error) {
+    await releaseGameTestReservation();
+    throw error;
+  }
+  const flags = [
+    '--remote-debugging-port=0',
+    `--user-data-dir=${profile}`,
+    '--no-first-run', '--no-default-browser-check', '--disable-extensions',
+    '--disable-background-timer-throttling', '--disable-renderer-backgrounding',
+    '--disable-backgrounding-occluded-windows', '--mute-audio',
+    '--enable-precise-memory-info',   // CL-219: performance.memory exact, so the bench's spikes can say when the heap was collected
+    // Headless Chrome has no real GPU: SwiftShader gives it WebGL2 so the game renders.
+    // A visible window keeps the real GPU; forcing SwiftShader there made every
+    // "real GPU" number a software-rendering number.
+    ...(headless ? ['--headless=new', '--enable-unsafe-swiftshader', '--use-angle=swiftshader'] : ['--enable-unsafe-webgpu']),
+    // CHROME_ARGS: extra flags for a box that needs them (a cloud container running as
+    // root needs --no-sandbox, say). Space-separated.
+    ...(process.env.CHROME_ARGS ? process.env.CHROME_ARGS.split(/\s+/).filter(Boolean) : []),
+    ...args,
+    'about:blank'
+  ];
+  let proc;
+  let registered = false;
+  try {
+    proc = spawn(exe, flags, { stdio: ['ignore', 'ignore', 'pipe'] });
+    await new Promise((resolve, reject) => {
+      proc.once('spawn', resolve);
+      proc.once('error', reject);
+    });
+    await registerGameTestProcess(proc.pid, 'Chrome/Edge', undefined, reservationId);
+    reservationPending = false;
+    registered = true;
+  } catch (error) {
+    await stopOwnedChrome(proc);
+    if (reservationPending) await releaseGameTestReservation();
+    if (profile) await fs.promises.rm(profile, { recursive: true, force: true }).catch(() => {});
+    throw error;
+  }
+  let stderr = '';
+  proc.stderr.on('data', (d) => { stderr += String(d); });
+  // Chrome writes the port it actually took into the profile.
+  const portFile = path.join(profile, 'DevToolsActivePort');
+  let port = null;
+  for (let i = 0; i < 200 && port == null; i++) {
+    try {
+      const txt = await fs.promises.readFile(portFile, 'utf8');
+      const first = txt.split('\n')[0].trim();
+      if (first) port = Number(first);
+    } catch { await sleep(100); }
+  }
+  if (!port) {
+    await stopOwnedChrome(proc);
+    if (registered) await unregisterGameTestProcess(proc.pid);
+    throw new Error('Chrome never reported a debugging port.\n' + stderr.slice(0, 500));
+  }
+  let ws;
+  try {
+    const version = await fetchJson(`http://127.0.0.1:${port}/json/version`);
+    ws = new WebSocket(version.webSocketDebuggerUrl);
+    await new Promise((resolve, reject) => {
+      ws.addEventListener('open', resolve, { once: true });
+      ws.addEventListener('error', () => reject(new Error('could not open the CDP socket')), { once: true });
+    });
+  } catch (error) {
+    await stopOwnedChrome(proc);
+    if (registered) await unregisterGameTestProcess(proc.pid);
+    await fs.promises.rm(profile, { recursive: true, force: true }).catch(() => {});
+    throw error;
+  }
+  const conn = new Connection(ws);
+  let closePromise = null;
+  const close = async () => {
+    if (closePromise) return closePromise;
+    closePromise = (async () => {
+      process.off('SIGINT', onSigint);
+      process.off('SIGTERM', onSigterm);
+      try { ws.close(); } catch { /* already gone */ }
+      await stopOwnedChrome(proc);
+      if (registered) {
+        await unregisterGameTestProcess(proc.pid);
+        registered = false;
+      }
+      await fs.promises.rm(profile, { recursive: true, force: true }).catch(() => {});
+    })();
+    return closePromise;
+  };
+  let signalClosing = false;
+  const onSignal = (signal, code) => {
+    if (signalClosing) return;
+    signalClosing = true;
+    const ownsProcessExit = process.listenerCount(signal) <= 1;
+    close().finally(() => {
+      if (ownsProcessExit) process.exit(code);
+    });
+  };
+  const onSigint = () => onSignal('SIGINT', 130);
+  const onSigterm = () => onSignal('SIGTERM', 143);
+  process.once('SIGINT', onSigint);
+  process.once('SIGTERM', onSigterm);
+
+  return {
+    exe,
+    async newPage({ width = 1280, height = 720 } = {}) {
+      // A background tab never gets animation frames, and the suite used to leave every
+      // page but one in that state. Each check gets its own window, brought forward, so
+      // document.visibilityState stays visible.
+      const { targetId } = await conn.send('Target.createTarget', {
+        url: 'about:blank', newWindow: true, background: false, width, height
+      });
+      const { sessionId } = await conn.send('Target.attachToTarget', { targetId, flatten: true });
+      const page = new Page(conn, sessionId);
+      await page.send('Page.enable', {});
+      await page.send('Runtime.enable', {});
+      await page.send('Log.enable', {});
+      try { await page.send('Page.bringToFront', {}); } catch { /* headless has nothing to raise */ }
+      try { await page.send('Page.setWebLifecycleState', { state: 'active' }); } catch { /* older Chrome */ }
+      await page.setViewport(width, height);
+      return page;
+    },
+    close
+  };
+}

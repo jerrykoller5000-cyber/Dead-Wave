@@ -1,0 +1,36 @@
+    #nvgOverlay {
+      display: none; position: fixed; inset: 0; pointer-events: none; z-index: 3;
+      background:
+        radial-gradient(ellipse 69% 80% at 50% 50%, transparent 48%, rgba(10,17,22,.16) 68%, rgba(0,3,6,.94) 100%);
+    }
+    #nvgOverlay.on { display: block; }
+    /* White-phosphor NVG: monochrome WP base with a light green cast (not full green-phosphor). */
+    canvas.nvg-phosphor {
+      filter: grayscale(1) brightness(1.5) contrast(1.14) sepia(.1) hue-rotate(92deg) saturate(.38);
+    }
+    /* Soft green tube glow + cheap center bloom on bright mid-frame; no FOV crop. */
+    #nvgOverlay::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 52% 48% at 50% 48%, rgba(140,255,170,.11) 0%, rgba(60,170,100,.045) 40%, transparent 70%),
+        rgba(30,115,70,.05);
+      mix-blend-mode: soft-light;
+    }
+    #nvgOverlay::after {
+      content: ''; position: absolute; inset: 0;
+      /* PVS-14-ish scintillation + faint fixed-pattern grit (no TV scanlines, no FOV mask). */
+      opacity: .09;
+      mix-blend-mode: overlay;
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.15' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.9'/%3E%3C/svg%3E"),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 160px 160px, 220px 220px;
+      animation: tubeGrain .14s steps(3) infinite;
+    }
+    @keyframes tubeGrain {
+      0% { background-position: 0 0, 0 0; }
+      to { background-position: 73px 41px, -47px 29px; }
+    }
+    @media (prefers-reduced-motion: reduce) { #nvgOverlay::after { animation: none; } }
+
+#nvgOverlay::before,#nvgOverlay::after {clip-path:none;}

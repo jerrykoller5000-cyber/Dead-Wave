@@ -1,0 +1,13 @@
+<!doctype html><meta charset="utf-8"><title>heron</title>
+<style>body{margin:24px;background:#14181f;color:#e6e6e0;font-family:Georgia,serif} h1{font-weight:normal} h2{font-weight:normal;margin:28px 0 6px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px} figure{margin:0} img{width:100%;display:block} figcaption{font-size:14px;opacity:.7;margin:4px 0}</style>
+<h1>Heron · CL-110 · v1</h1>
+<p>The way out, story v2 (docs/story.md §1, §3): Heron, the PGB's floatplane, in place of the boat. On night 20, once he
+has called it, the flares go up from the dock, Heron comes in low over the hills with its landing light on, sets
+down far out on the lake, runs in on its floats and swings round to lie along the end of the dock with a float
+against the planks, engines idling. He steps aboard from the end of the dock, as he did with the boat. When the
+next alarm sends it away it pulls off, runs out across the lake and climbs away. Your notes go in notes.md.</p>
+<script>
+const rows = [['Coming in', ['heron-coming-in', 'heron-running-in']], ['At the dock', ['heron-at-the-dock', 'heron-at-the-dock-night']], ['A closer look', ['heron-three-quarter']]];
+for (const [h, ks] of rows) document.write(`<h2>${h}</h2><div class="row">` + ks.map((k) => `<figure><figcaption>${k} (v1)</figcaption><img src="v1/${k}.png"></figure>`).join('') + '</div>');
+</script>

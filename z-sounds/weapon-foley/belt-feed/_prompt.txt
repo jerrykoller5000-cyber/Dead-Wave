@@ -1,0 +1,9 @@
+#44 weapon-foley/belt-feed
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: foley belt, boxLatch, boxSeat
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 1.2 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A machine gun feed tray cover opened, an ammunition belt laid in with rattling links, the cover slammed shut. No music, no voice.

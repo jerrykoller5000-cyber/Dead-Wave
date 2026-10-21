@@ -1,0 +1,40 @@
+{
+  "loadSec": 17.016,
+  "spit": {
+    "shots": [
+      {
+        "time": 2.0677000000178816,
+        "cooldown": 2.8388716816012423
+      },
+      {
+        "time": 5.292300000011916,
+        "cooldown": 3.1263114697276944
+      },
+      {
+        "time": 8.809200000017874,
+        "cooldown": 3.5580334896804504
+      }
+    ],
+    "gaps": [
+      3.2245999999940342,
+      3.5169000000059585
+    ]
+  },
+  "touch": {
+    "hp": 10000,
+    "armor": 10000,
+    "frontHp": 10000,
+    "frontArmor": 10000,
+    "rearHp": 10000,
+    "rearArmor": 10000,
+    "active": 0,
+    "darts": 0,
+    "direction": null,
+    "reversed": false,
+    "peakPose": 0.016340060163548553,
+    "settled": null,
+    "wander": 0.8543214692252148,
+    "alive": true
+  },
+  "errors": []
+}

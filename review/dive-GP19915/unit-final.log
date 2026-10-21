@@ -1,0 +1,24 @@
+✔ flat head and boots stop before a thin wall even when the root clears it (1.0914ms)
+✔ fast swept dive cannot tunnel through a thin wall and diagonal motion slides along it (0.1325ms)
+✔ body above a short obstacle clears it; downward body at its height is blocked (0.1554ms)
+✔ tree/rock circles sweep from outside and a contacted velocity cannot keep driving into the surface (0.4606ms)
+✔ touching a wall can steer away without breaking flight or slow-motion policy (0.1417ms)
+✔ flight knees and ankles vary over time, recovery plants before extending, poses stay finite (0.696ms)
+✔ recovery leg IK puts a reachable ankle on its plant and keeps the boot level through torso rotations (2.1355ms)
+✔ corner contact and initial overlap resolve without tunnelling or non-finite corrections (0.2398ms)
+✔ backward-dive boots overlapping a narrow trunk cannot push the root through to its far side (0.1443ms)
+✔ a dive flies about 5 m in slow motion, lands, lies, gets up and cools down (1.9479ms)
+✔ a move key gets him up early, but not before downMin (0.3094ms)
+✔ steering bends the flight and keeps the speed in range (0.769ms)
+✔ the meter pays for slow motion; empty, the dive is at full speed; it refills idle and with kills (0.5159ms)
+✔ the meter running dry mid-flight eases time back to normal (0.2126ms)
+✔ the body lies flat in the air, lower on the way down, flat on the ground, upright again after (0.2534ms)
+✔ the chest turns to the aim: sideways dive faces it, forward is belly down, backward is on his back (0.779ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 16
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 102.1773

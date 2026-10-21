@@ -1,0 +1,9 @@
+#100 horde-distant
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 8 s   Loop: on   Prompt influence: ~0.6
+
+Prompt:
+A large zombie horde moaning far away across a valley at night, a distant overlapping drone of groans carried on the wind. No words, no music.
+
+In the game: distantGroan() — the horde far off

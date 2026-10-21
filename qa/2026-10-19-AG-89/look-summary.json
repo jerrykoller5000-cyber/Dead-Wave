@@ -1,0 +1,108 @@
+{
+  "slowTurnProbe": [
+    {
+      "yawDeg": 0,
+      "visibleTops": 936,
+      "staleCount": 0
+    },
+    {
+      "yawDeg": 45,
+      "visibleTops": 939,
+      "staleCount": 0
+    },
+    {
+      "yawDeg": 90,
+      "visibleTops": 940,
+      "staleCount": 0
+    },
+    {
+      "yawDeg": 135,
+      "visibleTops": 940,
+      "staleCount": 0
+    },
+    {
+      "yawDeg": 180,
+      "visibleTops": 940,
+      "staleCount": 0
+    },
+    {
+      "yawDeg": 225,
+      "visibleTops": 943,
+      "staleCount": 0
+    },
+    {
+      "yawDeg": 270,
+      "visibleTops": 942,
+      "staleCount": 0
+    },
+    {
+      "yawDeg": 315,
+      "visibleTops": 940,
+      "staleCount": 0
+    }
+  ],
+  "fastTurnProbe": [
+    {
+      "yawDeg": 0,
+      "visibleTops": 939,
+      "staleCount": 0
+    },
+    {
+      "yawDeg": 90,
+      "visibleTops": 937,
+      "staleCount": 0
+    },
+    {
+      "yawDeg": 180,
+      "visibleTops": 939,
+      "staleCount": 0
+    },
+    {
+      "yawDeg": 270,
+      "visibleTops": 936,
+      "staleCount": 0
+    }
+  ],
+  "walkBackProbe": [
+    {
+      "step": 1,
+      "playerPos": [
+        -0.89,
+        -3.21,
+        -22.1
+      ],
+      "visibleTops": 945,
+      "staleCount": 0
+    },
+    {
+      "step": 2,
+      "playerPos": [
+        -0.89,
+        -6.09,
+        -40.21
+      ],
+      "visibleTops": 935,
+      "staleCount": 0
+    },
+    {
+      "step": 3,
+      "playerPos": [
+        -0.89,
+        -4.63,
+        -56.73
+      ],
+      "visibleTops": 938,
+      "staleCount": 3
+    },
+    {
+      "step": 4,
+      "playerPos": [
+        -0.21,
+        -1.09,
+        -71.66
+      ],
+      "visibleTops": 945,
+      "staleCount": 3
+    }
+  ]
+}

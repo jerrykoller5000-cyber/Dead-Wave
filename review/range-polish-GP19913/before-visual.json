@@ -1,0 +1,73 @@
+{
+  "loadSec": 22.72,
+  "weapons": [
+    {
+      "weapon": "pistol",
+      "width": 185,
+      "height": 42.296875
+    },
+    {
+      "weapon": "uzi",
+      "width": 185,
+      "height": 42.296875
+    },
+    {
+      "weapon": "m4",
+      "width": 185,
+      "height": 42.296875
+    },
+    {
+      "weapon": "ak",
+      "width": 185,
+      "height": 42.296875
+    },
+    {
+      "weapon": "shotgun",
+      "width": 185,
+      "height": 42.296875
+    },
+    {
+      "weapon": "aa12",
+      "width": 185,
+      "height": 42.296875
+    },
+    {
+      "weapon": "revolver",
+      "width": 185,
+      "height": 42.296875
+    },
+    {
+      "weapon": "sniper",
+      "width": 185,
+      "height": 42.296875
+    },
+    {
+      "weapon": "launcher",
+      "width": 185,
+      "height": 42.296875
+    },
+    {
+      "weapon": "minigun",
+      "width": 185,
+      "height": 42.296875
+    },
+    {
+      "weapon": "flamer",
+      "width": 185,
+      "height": 42.296875
+    },
+    {
+      "weapon": "chainsaw",
+      "width": 185,
+      "height": 42.296875
+    }
+  ],
+  "perf": {
+    "fps": 59.99999999999999,
+    "low": 57.47126439734673,
+    "worst": 17.399999991059303,
+    "hitches": 0,
+    "frames": 60
+  },
+  "errors": []
+}

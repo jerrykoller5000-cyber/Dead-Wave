@@ -1,0 +1,203 @@
+{
+ "dt": 0.03333333333333333,
+ "god": false,
+ "repeat": 1,
+ "results": [
+  {
+   "night": 8,
+   "loadout": "ak, shotgun, machete, armor 90",
+   "suppressed": [
+    "pistol",
+    "m4",
+    "ak",
+    "shotgun"
+   ],
+   "planned": 350,
+   "trick": "Ember Night: a bomber pack of ten, and the first screamers",
+   "signature": "shambler",
+   "botError": "Cannot read properties of null (reading 'position')",
+   "waveTotal": 350,
+   "spawned": 350,
+   "killed": 350,
+   "skullValue": 2196,
+   "firstSpawn": 0.3,
+   "lastSpawn": 347.1,
+   "lastKill": 389.4,
+   "length": 389.1,
+   "pushes": [
+    0,
+    84.5,
+    169.2,
+    262.2
+   ],
+   "lulls": [
+    31.1,
+    30,
+    30.3
+   ],
+   "maxAlive": 48,
+   "pile": {
+    "n": 6,
+    "t": 201.9,
+    "type": "spider",
+    "d": 100
+   },
+   "crowd": {
+    "n": 2,
+    "t": 56.6
+   },
+   "inside": {
+    "n": 0,
+    "t": 0,
+    "depth": 0
+   },
+   "stuck": [],
+   "lost": [],
+   "capped": false,
+   "tail10": 383,
+   "tail5": 385.3,
+   "tail1": 389.3,
+   "deaths": [],
+   "damage": 50,
+   "damageHp": 18,
+   "hits": 13,
+   "damageBy": {
+    "spider": 34,
+    "brute": 16
+   },
+   "knifeSwings": 20,
+   "meleeKills": 29,
+   "meleeShare": 0.083,
+   "crowd5s": 0.3,
+   "sigPeak": 43,
+   "screamerCalls": 3,
+   "healHp": 0,
+   "samples": [
+    {
+     "t": 30,
+     "alive": 48,
+     "killed": 1,
+     "w": "ak",
+     "mag": 29,
+     "rel": false,
+     "hp": 100,
+     "near": 77.6
+    },
+    {
+     "t": 60,
+     "alive": 31,
+     "killed": 40,
+     "w": "shotgun",
+     "mag": 1,
+     "rel": false,
+     "hp": 100,
+     "near": 3.5
+    },
+    {
+     "t": 90,
+     "alive": 29,
+     "killed": 60,
+     "w": "ak",
+     "mag": 0,
+     "rel": true,
+     "hp": 99,
+     "near": 47.6
+    },
+    {
+     "t": 120,
+     "alive": 48,
+     "killed": 72,
+     "w": "ak",
+     "mag": 26,
+     "rel": false,
+     "hp": 99,
+     "near": 26.2
+    },
+    {
+     "t": 150,
+     "alive": 31,
+     "killed": 119,
+     "w": "ak",
+     "mag": 2,
+     "rel": false,
+     "hp": 99,
+     "near": 75.3
+    },
+    {
+     "t": 180,
+     "alive": 48,
+     "killed": 141,
+     "w": "ak",
+     "mag": 18,
+     "rel": false,
+     "hp": 93,
+     "near": 34.4
+    },
+    {
+     "t": 210,
+     "alive": 48,
+     "killed": 158,
+     "w": "ak",
+     "mag": 0,
+     "rel": true,
+     "hp": 91,
+     "near": 41.2
+    },
+    {
+     "t": 240,
+     "alive": 43,
+     "killed": 196,
+     "w": "ak",
+     "mag": 25,
+     "rel": false,
+     "hp": 88,
+     "near": 39
+    },
+    {
+     "t": 270,
+     "alive": 38,
+     "killed": 227,
+     "w": "shotgun",
+     "mag": 1,
+     "rel": false,
+     "hp": 88,
+     "near": 21.3
+    },
+    {
+     "t": 300,
+     "alive": 48,
+     "killed": 252,
+     "w": "ak",
+     "mag": 26,
+     "rel": false,
+     "hp": 88,
+     "near": 61
+    },
+    {
+     "t": 331,
+     "alive": 48,
+     "killed": 287,
+     "w": "ak",
+     "mag": 20,
+     "rel": false,
+     "hp": 86,
+     "near": 29.1
+    },
+    {
+     "t": 361,
+     "alive": 36,
+     "killed": 314,
+     "w": "shotgun",
+     "mag": 0,
+     "rel": true,
+     "hp": 84,
+     "near": 4.2
+    }
+   ],
+   "knees": 1,
+   "wallSecs": 172,
+   "errors": [],
+   "run": 1
+  }
+ ]
+}

@@ -1,0 +1,18 @@
+{
+  "before": {
+    "maxObservedTurnRate": 21.688428121359173,
+    "p95TurnRate": 3.6175930315329836,
+    "samples": 215,
+    "spitSnapFrames": 11,
+    "loadSeconds": 17.407,
+    "errors": []
+  },
+  "final": {
+    "maxObservedTurnRate": 2.6253676468451905,
+    "p95TurnRate": 1.8768765130424638,
+    "samples": 213,
+    "spitSnapFrames": 9,
+    "loadSeconds": 20.54,
+    "errors": []
+  }
+}

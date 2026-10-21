@@ -1,0 +1,135 @@
+{
+  "output": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\review\\dance-GP19902\\marine-dance.mp4",
+  "bytes": 10851703,
+  "verifiedAt": "2026-10-13T11:44:16.431Z",
+  "expected": {
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "frames": 1800,
+    "durationSeconds": 60,
+    "audio": true,
+    "alpha": false
+  },
+  "actual": {
+    "durationSeconds": 60,
+    "decodedFrames": 1800,
+    "dimensions1280x720": true
+  },
+  "sourceFrames": {
+    "directory": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\review\\dance-GP19902\\frames",
+    "pattern": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\review\\dance-GP19902\\frames\\%05d.png",
+    "start": 0,
+    "count": 1800
+  },
+  "audioAlignment": {
+    "reference": "audio-dance-60s.mp3",
+    "decodedSampleRate": 22050,
+    "checkedFirstSeconds": 8,
+    "lagSamples": 0,
+    "lagSeconds": 0,
+    "normalizedCorrelation": 0.9987008741652815,
+    "passes": true,
+    "method": "Normalized PCM cross-correlation; timing must be within half a 30fps frame. This verifies mux alignment, not perceptual choreography quality."
+  },
+  "alphaChannel": null,
+  "markerTiming": {
+    "sourceExcerptStartSeconds": 9.151494,
+    "bpm": 103.322299,
+    "markers": [
+      {
+        "beat": 0,
+        "intendedSeconds": 0,
+        "frame": 0,
+        "actualFrameSeconds": 0,
+        "quantizationErrorMs": 0
+      },
+      {
+        "beat": 8,
+        "intendedSeconds": 4.646,
+        "frame": 139,
+        "actualFrameSeconds": 4.633333333333334,
+        "quantizationErrorMs": -12.667
+      },
+      {
+        "beat": 16,
+        "intendedSeconds": 9.291,
+        "frame": 279,
+        "actualFrameSeconds": 9.3,
+        "quantizationErrorMs": 9
+      },
+      {
+        "beat": 24,
+        "intendedSeconds": 13.937,
+        "frame": 418,
+        "actualFrameSeconds": 13.933333333333334,
+        "quantizationErrorMs": -3.667
+      },
+      {
+        "beat": 32,
+        "intendedSeconds": 18.583,
+        "frame": 557,
+        "actualFrameSeconds": 18.566666666666666,
+        "quantizationErrorMs": -16.333
+      },
+      {
+        "beat": 40,
+        "intendedSeconds": 23.228,
+        "frame": 697,
+        "actualFrameSeconds": 23.233333333333334,
+        "quantizationErrorMs": 5.333
+      },
+      {
+        "beat": 48,
+        "intendedSeconds": 27.874,
+        "frame": 836,
+        "actualFrameSeconds": 27.866666666666667,
+        "quantizationErrorMs": -7.333
+      },
+      {
+        "beat": 56,
+        "intendedSeconds": 32.52,
+        "frame": 976,
+        "actualFrameSeconds": 32.53333333333333,
+        "quantizationErrorMs": 13.333
+      },
+      {
+        "beat": 64,
+        "intendedSeconds": 37.165,
+        "frame": 1115,
+        "actualFrameSeconds": 37.166666666666664,
+        "quantizationErrorMs": 1.667
+      },
+      {
+        "beat": 72,
+        "intendedSeconds": 41.811,
+        "frame": 1254,
+        "actualFrameSeconds": 41.8,
+        "quantizationErrorMs": -11
+      },
+      {
+        "beat": 80,
+        "intendedSeconds": 46.457,
+        "frame": 1394,
+        "actualFrameSeconds": 46.46666666666667,
+        "quantizationErrorMs": 9.667
+      },
+      {
+        "beat": 88,
+        "intendedSeconds": 51.102,
+        "frame": 1533,
+        "actualFrameSeconds": 51.1,
+        "quantizationErrorMs": -2
+      },
+      {
+        "beat": 96,
+        "intendedSeconds": 55.748,
+        "frame": 1672,
+        "actualFrameSeconds": 55.733333333333334,
+        "quantizationErrorMs": -14.667
+      }
+    ],
+    "limitation": "Markers verify the intended beat-to-frame clock mapping. Character pose hits must still be checked visually."
+  },
+  "passes": true
+}

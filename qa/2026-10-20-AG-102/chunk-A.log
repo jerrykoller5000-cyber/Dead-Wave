@@ -1,0 +1,80 @@
+# AG-102 Chunk A: t68 t69 t70 t71 t72 t73 t74 t75 t76 t77 t78 t79 t80 t81 t82 t83 t84 t85 t86 t87 t88 t89 t90 t91 t92 t93 t94 t95 t96 t97 t98 t99
+# Started: 2026-10-20T10:00:04.438Z
+
+GRANT antigravity AG-102: starting one game-test command
+check-players: 303 player.position reads, all in the allowed places
+ok    t68     15 pass   0 fail  41.4s
+ok    t69     18 pass   0 fail  68.1s
+ok    t70     21 pass   0 fail  71.9s
+ok    t71     16 pass   0 fail  68.3s
+ok    t72     21 pass   0 fail  75.3s
+ok    t73     12 pass   0 fail  58.5s
+FAIL  t74     17 pass   1 fail  59.1s
+FAIL  t75     15 pass   1 fail  50.5s
+FAIL  t76     15 pass   1 fail  57.4s
+ok    t77     17 pass   0 fail  57.8s
+ok    t78     18 pass   0 fail  42.8s
+ok    t79     12 pass   0 fail  71.3s
+ok    t80     14 pass   0 fail  181.1s
+           INFO the old drape (sampleHeight + 7 cm) went 0.37 m under the drawn bed at worst
+ok    t81      5 pass   0 fail  26.4s
+ok    t82      4 pass   0 fail  27.1s
+ok    t83     31 pass   0 fail  63.4s
+ok    t84     10 pass   0 fail  63.9s
+ok    t85     15 pass   0 fail  59.2s
+ok    t86     12 pass   0 fail  47.1s
+ok    t87     13 pass   0 fail  44.1s
+ok    t88     13 pass   0 fail  44.7s
+ok    t89     18 pass   0 fail  50.7s
+ok    t90      6 pass   0 fail  50.0s
+FAIL  t91      6 pass   1 fail  50.0s
+ok    t92      5 pass   0 fail  45.7s
+FAIL  t93     10 pass   1 fail  82.6s
+ok    t94      8 pass   0 fail  46.2s
+ok    t95      9 pass   0 fail  65.8s
+FAIL  t96     16 pass   3 fail  55.7s
+ok    t97     15 pass   0 fail  58.8s
+           INFO ragdoll off: 160 spawned, 160 alive at the end, 107 ticks, frame 151.19 ms avg / 938.90 ms worst (headless)
+           INFO ragdoll on: 160 spawned, 160 alive at the end, 39 ticks, frame 286.60 ms avg / 989.00 ms worst (headless)
+ok    t98     20 pass   0 fail  94.3s
+           INFO 120 spawned, 120 alive after 116.4 s and 26 legs (650 ticks)
+           INFO jump at (-0.2, 3.4, 90.0) from (2.6, 86.6) leg 6
+FAIL  t99      5 pass   1 fail  164.0s
+
+32 checks: 432 pass, 9 fail
+
+by owner:
+  unassigned
+    t74    1 fail  FAIL and come for him (9.0 -> 8.5 m)
+           FAIL and come for him (9.0 -> 8.5 m)
+    t75    1 fail  FAIL nobody inside him: the worst gap is 0.040 m (feral, 115 samples)
+           FAIL nobody inside him: the worst gap is 0.040 m (feral, 115 samples)
+    t76    1 fail  FAIL a walker walks (phase +2.6, idle 0.00)
+           FAIL a walker walks (phase +2.6, idle 0.00)
+    t91    1 fail  FAIL once landed, the topple freezes
+           FAIL once landed, the topple freezes
+    t93    1 fail  FAIL a bullet at the head's centre is a headshot (military 6.00/8.00)
+           FAIL a bullet at the head's centre is a headshot (military 6.00/8.00)
+    t96    3 fail  FAIL after the attack it stays drawn a moment, then goes (2 s)
+           FAIL after the attack it stays drawn a moment, then goes (2 s)
+           FAIL the spitter too, once it stops checking a line (out of its hold range)
+           FAIL switch on: hidden again
+    t99    1 fail  FAIL nobody jumps more than 4 m in a tick (1)
+           FAIL nobody jumps more than 4 m in a tick (1)
+node:fs:2427
+    return binding.writeFileUtf8(
+                   ^
+
+Error: UNKNOWN: unknown error, open 'C:\Users\Zero\Desktop\Tiny Trek\crew\tests.json'
+    at Object.writeFileSync (node:fs:2427:20)
+    at file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/tests/run-all.mjs:292:4
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5) {
+  errno: -4094,
+  code: 'UNKNOWN',
+  syscall: 'open',
+  path: 'C:\\Users\\Zero\\Desktop\\Tiny Trek\\crew\\tests.json'
+}
+
+Node.js v24.13.0
+
+# Finished: 2026-10-20T10:34:13.183Z code=1 signal=none

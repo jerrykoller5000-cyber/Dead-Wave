@@ -1,0 +1,31 @@
+{
+  "live": {
+    "state": {
+      "enabled": true,
+      "loopSeconds": 24,
+      "active": true,
+      "looping": true,
+      "cues": {
+        "enter": 4.6
+      },
+      "musicGain": 0.09600000083446503
+    },
+    "worldPlaying": false,
+    "worldTrack": null,
+    "ambient": 0,
+    "blocked": 0,
+    "cues": 3,
+    "muted": 0,
+    "zeroMusicGain": 0.0000627366389380768,
+    "restoredMusicGain": 0.09473944455385208,
+    "exit": {
+      "enabled": false
+    }
+  },
+  "peak": 0.06157810986042023,
+  "rms": 0.009583538365485127,
+  "buildMs": 248.20000004768372,
+  "cached": true,
+  "disposed": true,
+  "errors": []
+}

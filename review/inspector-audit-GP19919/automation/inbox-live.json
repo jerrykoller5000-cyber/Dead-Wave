@@ -1,0 +1,71 @@
+{
+  "ok": true,
+  "at": "2026-10-14T17:27:51.472Z",
+  "camera": {
+    "up": true,
+    "pid": 34628,
+    "port": 16786,
+    "root": "C:\\Users\\Zero\\Desktop\\Tiny Trek",
+    "mode": "inspect",
+    "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "size": [
+      1440,
+      1000
+    ],
+    "loadSec": 11.185,
+    "warmSec": 0,
+    "shots": 0,
+    "frozen": true,
+    "idleMin": 240,
+    "started": "2026-10-14T17:22:53.303Z",
+    "alive": "2026-10-14T17:27:43.505Z"
+  },
+  "inbox": {
+    "id": "gp19919-inbox-1791998868110",
+    "answer": {
+      "job": "gp19919-inbox-1791998868110",
+      "ok": true,
+      "shots": [
+        {
+          "file": "review/inspector-audit-GP19919/automation/inbox-m4.png",
+          "cam": {
+            "x": -24.522089402269234,
+            "y": -198.84885396143008,
+            "z": -631.8243981051994,
+            "tx": -25.986720317174957,
+            "ty": -198.89999999999998,
+            "tz": -631.8243981051994,
+            "fov": 35
+          },
+          "label": "M4",
+          "thumb": null
+        }
+      ],
+      "ms": 722,
+      "totalMs": 722,
+      "at": "2026-10-14T17:27:48.999Z",
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    "sidecarSchema": 2,
+    "suppressor": true
+  },
+  "layouts": [
+    {
+      "width": 1000,
+      "height": 800,
+      "overflow": [],
+      "barFits": true
+    },
+    {
+      "width": 800,
+      "height": 650,
+      "overflow": [],
+      "barFits": true
+    }
+  ],
+  "failedCli": {
+    "exit": 1,
+    "stdout": "",
+    "stderr": "camera: evaluate failed: Error: no inspector subjects match nothing-gp19919-matches\n    at checkOptions (http://127.0.0.1:59470/studio/inspector/api.js:230:32)\n    at Object.contactSheet (http://127.0.0.1:59470/studio/inspector/api.js:261:61)\n    at <anonymous>:1:11\n"
+  }
+}

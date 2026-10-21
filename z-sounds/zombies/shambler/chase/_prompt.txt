@@ -1,0 +1,9 @@
+#2 shambler-chase
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 1.5 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A zombie's hungry groan rising in pitch as it notices prey, guttural and wet, 'ohh-uhh', urgent but still sluggish. Close-up, dry. No words, no music.
+
+In the game: zombieVoice('shambler', 'chase')

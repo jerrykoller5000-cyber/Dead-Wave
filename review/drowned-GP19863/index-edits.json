@@ -1,0 +1,46 @@
+[
+  [
+    "    import { steerShambler,",
+    "    import { steerDrowned, drownedCanReach, restoreDrownedMotion, resetDrownedMotion, applyDrownedMotion } from './game/drowned-motion.js'; // GP-19863\r\n    import { steerShambler,"
+  ],
+  [
+    "if (typeKey === 'shambler') prepareShamblerFeet",
+    "if (typeKey === 'shambler' || typeKey === 'drowned') prepareShamblerFeet"
+  ],
+  [
+    "        if (ud.typeKey === 'shambler') resetShamblerMotion({ typeKey: ud.typeKey, mesh });",
+    "        if (ud.typeKey === 'shambler') resetShamblerMotion({ typeKey: ud.typeKey, mesh });\r\n        if (ud.typeKey === 'drowned') resetDrownedMotion({ typeKey: ud.typeKey, mesh });"
+  ],
+  [
+    "      resetDrowned(z); // GP-19860",
+    "      resetDrownedMotion(z); // GP-19863: restore shuffled feet before the corpse pose\r\n      resetDrowned(z); // GP-19860"
+  ],
+  [
+    "      clearDrowned(zombies); // GP-19860",
+    "      for (const z of zombies) resetDrownedMotion(z); // GP-19863: room reset forgets turn and gait state\r\n      clearDrowned(zombies); // GP-19860"
+  ],
+  [
+    "        restoreDrownedPose(z); // GP-19860",
+    "        restoreDrownedMotion(z); // GP-19863: clear prior shuffle before ordinary reactions\r\n        restoreDrownedPose(z); // GP-19860"
+  ],
+  [
+    "        let drownedStep = null;",
+    "        const drownedTurn = steerDrowned(z, sx, sz, dt);\r\n        if (drownedTurn) { sx = drownedTurn.x; sz = drownedTurn.z; spd *= drownedTurn.pace; }\r\n        let drownedStep = null;"
+  ],
+  [
+    "drownedStep ? drownedStep.yaw : spiderTurn",
+    "drownedStep ? drownedStep.yaw : drownedTurn ? drownedTurn.yaw : spiderTurn"
+  ],
+  [
+    "        applyDrownedPose(z); // GP-19860",
+    "        applyDrownedMotion(z, dt); // GP-19863: low planted shuffles and weight transfer\r\n        applyDrownedPose(z); // GP-19860"
+  ],
+  [
+    "const contact = stillNearPlayer && shamblerCanReach",
+    "const contact = stillNearPlayer && drownedCanReach(z, zTarget(z).position.x - z.mesh.position.x, zTarget(z).position.z - z.mesh.position.z) && shamblerCanReach"
+  ],
+  [
+    "else if (shamblerCanReach(z, zTarget(z).position.x - mx, zTarget(z).position.z - mz)) tryWindup",
+    "else if (drownedCanReach(z, zTarget(z).position.x - mx, zTarget(z).position.z - mz) && shamblerCanReach(z, zTarget(z).position.x - mx, zTarget(z).position.z - mz)) tryWindup"
+  ]
+]

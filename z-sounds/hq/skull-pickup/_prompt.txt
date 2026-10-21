@@ -1,0 +1,9 @@
+#118 hq/skull-pickup
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: skullPickup()
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.6 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+Picking up a zombie skull: a hollow bony knock and a wet squelch. No music, no voice.

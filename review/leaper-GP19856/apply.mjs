@@ -1,0 +1,11 @@
+import fs from 'node:fs';import crypto from 'node:crypto';import assert from 'node:assert/strict';
+const file='index.html',old=fs.readFileSync(file,'utf8'),hash=s=>crypto.createHash('sha256').update(s).digest('hex');let out=old;
+const edit=(a,b)=>{assert.equal(out.split(a).length,2,`unique hook: ${a.slice(0,80)}`);out=out.replace(a,b);};
+edit("    import { steerShambler, shamblerCanReach, hasShamblerSteering }", "    import { leaperGroundPace, tickLeaperMotion, leaperLanding, applyLeaperMotion } from './game/leaper-motion.js'; // GP-19856\r\n    import { steerShambler, shamblerCanReach, hasShamblerSteering }");
+edit('        const shamblerRecovering = tickShamblerRecovery(z, dt);','        tickLeaperMotion(z, dt); // restore prior visual pose before reactions/LOD\r\n        const shamblerRecovering = tickShamblerRecovery(z, dt);');
+edit('        // Leaper: closes to mid range on all fours, then launches', '        spd = leaperGroundPace(z, spd); // GP-19856: 75% after ground caps/slows; the leap still owns airborne speed\r\n\r\n        // Leaper: closes to mid range on all fours, then launches');
+edit('              z.leapT = 0;\r\n              z.leapCd = 3.2', '              z.leapT = 0;\r\n              leaperLanding(z); // pose-only compression, no attack/movement delay\r\n              z.leapCd = 3.2');
+edit('        applyShamblerMotion(z, dt, phase, standing ? 0 : walkAmt, marineGait);', '        applyLeaperMotion(THREE, z, dt, standing ? 0 : walkAmt, dist); // GP-19856\r\n        applyShamblerMotion(z, dt, phase, standing ? 0 : walkAmt, marineGait);');
+edit('zm.trainingEntry = { x, z, pace: Math.max(1.3, Math.min(3.6, (zm.speed || 3) * 0.9)) };', 'zm.trainingEntry = { x, z, pace: leaperGroundPace(zm, Math.max(1.3, Math.min(3.6, (zm.speed || 3) * 0.9))) };');
+assert.equal(hash(fs.readFileSync(file,'utf8')),hash(old),'fresh live file');fs.writeFileSync(file,out,'utf8');
+fs.writeFileSync('review/leaper-GP19856/edit-proof.json',JSON.stringify({beforeHash:hash(old),afterHash:hash(out),hooks:6,scope:'import, restore, post-cap ground pace, landing pose, final pose, gate entry'},null,2));console.log('Applied six unique Leaper hooks onto freshly read live index; other sections preserved.');

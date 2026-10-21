@@ -1,0 +1,9 @@
+{
+  "asset": "inspect-audit-gp19919",
+  "owner": "chatgpt",
+  "subject": "weapon.m4",
+  "name": "M4",
+  "source": "index.html: makeM4() → studio/weapon-*.js",
+  "task": "CL-196",
+  "look": "index.html?inspect=weapon.m4"
+}

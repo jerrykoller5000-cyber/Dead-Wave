@@ -1,0 +1,9 @@
+#1 shambler-idle
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 2.5 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A single slow, low zombie moan, deep and wet, from a rotting throat with mucus rattling in it, trailing off into a breathy exhale. Close-up, dry, no reverb. No words, no music.
+
+In the game: zombieVoice('shambler', 'idle')

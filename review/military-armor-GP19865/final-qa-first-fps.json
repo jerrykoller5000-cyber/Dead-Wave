@@ -1,0 +1,163 @@
+{
+  "loadSec": 18.434,
+  "pellets": [
+    {
+      "name": "face",
+      "damage": 9999,
+      "expected": 12,
+      "headLost": true
+    },
+    {
+      "name": "helmet",
+      "damage": 6,
+      "expected": 6,
+      "headLost": false
+    },
+    {
+      "name": "chest",
+      "damage": 5,
+      "expected": 5,
+      "headLost": false
+    },
+    {
+      "name": "limb",
+      "damage": 8,
+      "expected": 8,
+      "headLost": false
+    }
+  ],
+  "geometry": {
+    "samples": [
+      {
+        "yaw": 0,
+        "key": "head",
+        "zone": "face",
+        "part": "head",
+        "delta": 1.9698137565526963e-10
+      },
+      {
+        "yaw": 0,
+        "key": "head",
+        "zone": "helmet",
+        "part": "head",
+        "delta": 2.506870544483064e-9
+      },
+      {
+        "yaw": 0,
+        "key": "torso",
+        "zone": "chest",
+        "part": "torso",
+        "delta": 2.528887932395918e-9
+      },
+      {
+        "yaw": 0,
+        "key": "legLG",
+        "zone": "exposed",
+        "part": "legL",
+        "delta": 8.931617112573065e-10
+      },
+      {
+        "yaw": 0.8,
+        "key": "head",
+        "zone": "face",
+        "part": "head",
+        "delta": 1.9694706976380871e-10
+      },
+      {
+        "yaw": 0.8,
+        "key": "head",
+        "zone": "helmet",
+        "part": "head",
+        "delta": 2.5068547793161144e-9
+      },
+      {
+        "yaw": 0.8,
+        "key": "torso",
+        "zone": "chest",
+        "part": "torso",
+        "delta": 2.5288641181120397e-9
+      },
+      {
+        "yaw": 0.8,
+        "key": "legLG",
+        "zone": "exposed",
+        "part": "legL",
+        "delta": 8.931533290734706e-10
+      },
+      {
+        "yaw": 1.57,
+        "key": "head",
+        "zone": "face",
+        "part": "head",
+        "delta": 1.9696866360163767e-10
+      },
+      {
+        "yaw": 1.57,
+        "key": "head",
+        "zone": "helmet",
+        "part": "head",
+        "delta": 2.5068667697247804e-9
+      },
+      {
+        "yaw": 1.57,
+        "key": "torso",
+        "zone": "chest",
+        "part": "torso",
+        "delta": 2.528885267860659e-9
+      },
+      {
+        "yaw": 1.57,
+        "key": "legLG",
+        "zone": "exposed",
+        "part": "legL",
+        "delta": 8.931571593429055e-10
+      },
+      {
+        "yaw": 3.14,
+        "key": "head",
+        "zone": "face",
+        "part": "head",
+        "delta": 1.9695561848109833e-10
+      },
+      {
+        "yaw": 3.14,
+        "key": "head",
+        "zone": "helmet",
+        "part": "head",
+        "delta": 2.5068858100496527e-9
+      },
+      {
+        "yaw": 3.14,
+        "key": "torso",
+        "zone": "chest",
+        "part": "torso",
+        "delta": 2.528879272656326e-9
+      },
+      {
+        "yaw": 3.14,
+        "key": "legLG",
+        "zone": "exposed",
+        "part": "legL",
+        "delta": 8.931370087950086e-10
+      }
+    ],
+    "guard": "guard"
+  },
+  "stress": {
+    "fps": 47.85833931562575,
+    "p95": 24.5,
+    "rounds": 47,
+    "alive": 48,
+    "pace": [
+      4.050019801812729,
+      12.323460071944814
+    ],
+    "camos": [
+      "ucp",
+      "multicam",
+      "dcu",
+      "marpat",
+      "m81"
+    ]
+  }
+}

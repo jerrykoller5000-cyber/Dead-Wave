@@ -1,0 +1,125 @@
+{
+  "scope": "Independent CPU review; actual Three geometry. Box substitute for unrelated rounded-box helper; no renderer/frame-rate claim.",
+  "tests": [
+    "13 returned rig transforms match baseline.",
+    "Sleeve/shorts/glove visibility groups preserve counts and original hierarchy.",
+    "33 closed armor plates, 2080 triangles: every face points outward and every indexed edge has exactly two faces.",
+    "Every pad/carrier material mesh belongs to its corresponding purchase visibility registry.",
+    "Added boot tread keeps sole floor unchanged and fits ±0.083m width / 0.187m forward bound.",
+    "Both six-point carrier shells reproduce original ExtrudeGeometry boundary vertices and extents within 1e-7 m; all 48 faces per shell are outward and watertight."
+  ],
+  "beforeBootBounds": {
+    "min": [
+      -0.07384374737739563,
+      -0.10299999999999998,
+      -0.10300000011920929
+    ],
+    "max": [
+      0.07384374737739563,
+      0.0820000022649765,
+      0.1850000023841858
+    ]
+  },
+  "afterBootBounds": {
+    "min": [
+      -0.08095181067799301,
+      -0.10299999999999998,
+      -0.10300000011920929
+    ],
+    "max": [
+      0.08095181067799301,
+      0.09650000018626453,
+      0.1850000023841858
+    ]
+  },
+  "premerge": {
+    "meshCount": 404,
+    "triangles": 18492
+  },
+  "result": "PASS",
+  "sourceHashes": {
+    "body": "7a552dcb8d5bb579c7095e2ee82a55639b4cd7cabd4be79a2cbe7dcf482c2079",
+    "baselineBody": "d02763638a50286d3d1798974c2f81563719742954078031f6b3adbdeac36f91",
+    "face": "fe2db293cf8205894ad0f2e06499f8433d526edafd8bec0e79abffd0bba2fd5b",
+    "surface": "15656a503c46fb04b31e81f6277f3b77c4a7f9c87d82cdd6fbf1d2648351c093"
+  },
+  "carrierRepair": {
+    "checkedAt": "2026-10-09T09:03:11.485Z",
+    "carriers": [
+      {
+        "dimensions": [
+          0.35,
+          0.335,
+          0.034
+        ],
+        "baselineBounds": {
+          "min": [
+            -0.18299999833106995,
+            -0.17550000548362732,
+            -0.02199999988079071
+          ],
+          "max": [
+            0.18299999833106995,
+            0.17550000548362732,
+            0.02199999988079071
+          ]
+        },
+        "currentBounds": {
+          "min": [
+            -0.18299999833106995,
+            -0.17550000548362732,
+            -0.02199999988079071
+          ],
+          "max": [
+            0.18299999833106995,
+            0.17550000548362732,
+            0.02199999988079071
+          ]
+        },
+        "boundError": 0,
+        "oldToNew": 0,
+        "newToOld": 0,
+        "triangles": 48,
+        "minOutward": 0.00010372327546638562,
+        "allEdgesHaveTwoFaces": true
+      },
+      {
+        "dimensions": [
+          0.35,
+          0.345,
+          0.032
+        ],
+        "baselineBounds": {
+          "min": [
+            -0.18299999833106995,
+            -0.18050000071525574,
+            -0.020999999716877937
+          ],
+          "max": [
+            0.18299999833106995,
+            0.18050000071525574,
+            0.020999999716877937
+          ]
+        },
+        "currentBounds": {
+          "min": [
+            -0.18299999833106995,
+            -0.18050000071525574,
+            -0.020999999716877937
+          ],
+          "max": [
+            0.18299999833106995,
+            0.18050000071525574,
+            0.020999999716877937
+          ]
+        },
+        "boundError": 0,
+        "oldToNew": 0,
+        "newToOld": 0,
+        "triangles": 48,
+        "minOutward": 0.00010458550988806058,
+        "allEdgesHaveTwoFaces": true
+      }
+    ]
+  }
+}

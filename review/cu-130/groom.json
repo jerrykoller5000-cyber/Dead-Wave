@@ -1,0 +1,32 @@
+{
+ "target": "xyz:18,g,18",
+ "label": "point 18,-3.02,18",
+ "view": null,
+ "cam": {
+  "fov": 26,
+  "x": 19.5,
+  "y": -2.55,
+  "z": 18.15,
+  "tx": 18,
+  "ty": -2.88,
+  "tz": 18
+ },
+ "time": 0.40217483999998366,
+ "size": [
+  1280,
+  720
+ ],
+ "center": {
+  "x": 18,
+  "y": -3.0229110717773438,
+  "z": 18
+ },
+ "boxSize": {
+  "x": 4,
+  "y": 2,
+  "z": 4
+ },
+ "mode": "match",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "at": "2026-10-12T08:18:42.936Z"
+}

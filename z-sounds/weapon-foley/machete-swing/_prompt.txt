@@ -1,0 +1,9 @@
+#56 weapon-foley/machete-swing
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: foley macheteSwing
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.5 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A heavy machete swung hard through the air, a deep whoosh. No music, no voice.

@@ -1,0 +1,9 @@
+#120 hq/hq-machine
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: hqMachine()
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 1.5 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+An old military intake machine grinding and clanking as it processes something. No music, no voice.

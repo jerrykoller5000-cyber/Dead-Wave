@@ -1,0 +1,661 @@
+{
+  "mode": "freeze-search",
+  "alpha": false,
+  "diagnosticLight": true,
+  "motionBlur": false,
+  "motionBlurSamples": 1,
+  "motionBlurAccumulation": null,
+  "captureSourceHash": "a1193135320ad27eef88aff20e9dfa6d9354f9e0250ba4fa55a4a577ef19bc70",
+  "motionBlurShutterFrames": 0,
+  "deliveryDuration": 20,
+  "size": [
+    1280,
+    720
+  ],
+  "fps": 30,
+  "start": 0,
+  "out": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\review\\dance-GP19905\\pose-search2-audit",
+  "outfitPath": "review/dance-GP19905/outfit.json",
+  "started": "2026-10-13T14:00:42.247Z",
+  "motionSourceHash": "62e9bb612a6847ac6c1d8c9a053ae98a1d4acb8b60f1c4339b33ed59be751066",
+  "camera": {
+    "position": [
+      1.9,
+      1.65,
+      4.1
+    ],
+    "look": [
+      0,
+      0.78,
+      0
+    ],
+    "fov": 34
+  },
+  "samples": [
+    {
+      "seconds": 20,
+      "state": {
+        "phrase": "cheek-rest ground freeze",
+        "beat": 34.440766333333336
+      },
+      "contacts": {
+        "hands": [
+          {
+            "point": [
+              0.09520889799831818,
+              0.559772283092628,
+              0.17515355605630406
+            ],
+            "target": [
+              -0.322,
+              0.012,
+              -0.1157
+            ],
+            "error": 0.7474714240451462,
+            "planted": 0
+          },
+          {
+            "point": [
+              0.6957403054756013,
+              0.347480518898428,
+              -0.40454489175283215
+            ],
+            "target": [
+              0.23800000000000002,
+              0.012,
+              -0.1157
+            ],
+            "error": 0.6367925386724946,
+            "planted": 0
+          }
+        ],
+        "feet": [
+          {
+            "point": [
+              -0.6068288260392907,
+              0.5086007833576512,
+              0.1798965117312696
+            ],
+            "target": [
+              -0.222,
+              0.07,
+              -0.3807
+            ],
+            "error": 0.8091553135696455
+          },
+          {
+            "point": [
+              -0.4780471074901985,
+              0.32093921887518523,
+              0.10629469838602237
+            ],
+            "target": [
+              0.13799999999999998,
+              0.07,
+              -0.3807
+            ],
+            "error": 0.8244078884101129
+          }
+        ]
+      },
+      "bounds": {
+        "min": [
+          -0.6575095822791123,
+          -0.02321893185971735,
+          -0.7284729104152985
+        ],
+        "max": [
+          1.0813690749128468,
+          0.8229967057502707,
+          0.33717007498155727
+        ]
+      },
+      "root": [
+        -0.042,
+        0,
+        -0.0907
+      ],
+      "drawCalls": 2,
+      "file": "best.png"
+    }
+  ],
+  "gameRenderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "loadSeconds": 11.953,
+  "setup": {
+    "backend": "webgpu",
+    "picked": {
+      "hat": "ballcapBack",
+      "eyewear": "aviators",
+      "rolled": true,
+      "shorts": false,
+      "gloves": true,
+      "skin": 0,
+      "hair": "darkBrown",
+      "eyes": "blue"
+    },
+    "wardrobe": {
+      "version": 1,
+      "items": {
+        "cap": {
+          "camo": "papDigital",
+          "style": "ballcapBack"
+        },
+        "helmet": {
+          "camo": "papDigital"
+        },
+        "mask": {
+          "camo": "papDigital"
+        },
+        "shirt": {
+          "camo": "papDigital",
+          "sleeves": "rolled"
+        },
+        "trousers": {
+          "camo": "papDigital",
+          "cut": "trousers"
+        },
+        "gloves": {
+          "camo": "feldgrau",
+          "worn": true
+        },
+        "carrier": {
+          "camo": "papDigital"
+        },
+        "pads": {
+          "camo": "papDigital"
+        },
+        "holster": {
+          "camo": "papDigital"
+        },
+        "belt": {
+          "camo": "papDigital"
+        },
+        "pack": {
+          "camo": "papDigital"
+        },
+        "eyewear": {
+          "style": "aviators"
+        },
+        "boots": {
+          "colour": "black",
+          "rubber": "yellow"
+        }
+      },
+      "guns": {
+        "m4": "papDigital",
+        "shotgun": "papDigital",
+        "sniper": "m14Woodland",
+        "minigun": "dpmDesert",
+        "uzi": "papDigital",
+        "pistol": "teloMimetico"
+      },
+      "body": {
+        "hair": "darkBrown",
+        "eyes": "blue",
+        "skin": 0
+      }
+    },
+    "storedWardrobe": null,
+    "gear": {
+      "helmet": {
+        "count": 7,
+        "visible": 7,
+        "sourceCount": 7
+      },
+      "vest": {
+        "count": 10,
+        "visible": 10,
+        "sourceCount": 10
+      },
+      "pads": {
+        "count": 12,
+        "visible": 12,
+        "sourceCount": 12
+      },
+      "nvg": {
+        "count": 1,
+        "visible": 1,
+        "sourceCount": 1
+      },
+      "bareHead": {
+        "count": 1,
+        "visible": 0,
+        "sourceCount": 1
+      },
+      "bareTorso": {
+        "count": 4,
+        "visible": 0,
+        "sourceCount": 4
+      }
+    },
+    "gearOwned": {
+      "helmet": true,
+      "vest": true,
+      "pads": true,
+      "nvg": true
+    },
+    "motionMissing": false,
+    "duration": 20,
+    "source": "Fresh TT.makeMarine in camera browser with TT.dressMarine current page profile and matching live gear visibility",
+    "note": "Read-only latest tt_wardrobe from the Grave Shift Edge profile, port 8766"
+  },
+  "search": {
+    "count": 1,
+    "best": [
+      {
+        "config": {
+          "freeX": -0.15,
+          "freeY": 0,
+          "freeZ": 0.2,
+          "freeElbow": -0.5,
+          "legZL": 0,
+          "legZR": -0.2,
+          "rootRoll": -1.55,
+          "rootPitch": 0.2,
+          "cheekY": 0.18,
+          "palmTilt": -0.8,
+          "palmRoll": 0.5235987755982988,
+          "poleX": 0.4,
+          "poleY": -2,
+          "poleZ": 0
+        },
+        "wristDeg": 22.436273228940536,
+        "elbow": [
+          0.6808466111549609,
+          0.07998467541064573,
+          -0.38381133768851583
+        ],
+        "elbowFlex": -1.3045158943629922,
+        "armLo": 0.028243664426344378,
+        "bootLo": 0.2396923578412124,
+        "torsoLo": 0.011276804518507377,
+        "palm": [
+          0.6957403054756013,
+          0.347480518898428,
+          -0.40454489175283215
+        ],
+        "headContactError": 0.0003026325958808351,
+        "hip": [
+          -0.042,
+          0.3926130823790973,
+          -0.0907
+        ],
+        "score": 0.23924464809053025
+      }
+    ],
+    "bestLegs": [],
+    "finalAudit": {
+      "seconds": 20,
+      "phrase": "cheek-rest ground freeze",
+      "beat": 34.440766333333336,
+      "root": [
+        -0.042,
+        0,
+        -0.0907
+      ],
+      "framing": {
+        "ndc": {
+          "min": [
+            -0.2529335444031586,
+            -0.5342330058929097
+          ],
+          "max": [
+            0.43998574508415655,
+            0.027197079264071708
+          ]
+        },
+        "pixels": {
+          "left": 478.1225315819785,
+          "right": 921.5908768538602,
+          "top": 350.2090514649342,
+          "bottom": 552.3238821214475
+        },
+        "minDepth": 4.314457173962808,
+        "maxDepth": 5.084075884975302,
+        "outsideVertices": 0,
+        "minMarginPixels": 167.67611787855253
+      },
+      "hipProjection": {
+        "world": [
+          -0.042,
+          0.3926130823790973,
+          -0.0907
+        ],
+        "pixels": [
+          640.0070968748861,
+          449.17956400976703
+        ],
+        "depth": 4.773223948589055
+      },
+      "hopBootGap": null,
+      "posture": {
+        "torso": [
+          0.019999999999999997,
+          -0.04,
+          0.07000000000000002
+        ],
+        "head": [
+          -0.08,
+          0.060000000000000005,
+          0.15000000000000002
+        ],
+        "legs": [
+          {
+            "side": "L",
+            "thigh": [
+              0.02,
+              0,
+              0
+            ],
+            "knee": [
+              0.12,
+              0,
+              0
+            ],
+            "ankle": [
+              -0.07999999999999999,
+              0,
+              0
+            ]
+          },
+          {
+            "side": "R",
+            "thigh": [
+              -0.8000000000000004,
+              0,
+              -0.20000000000000007
+            ],
+            "knee": [
+              1.5500000000000014,
+              0,
+              0
+            ],
+            "ankle": [
+              -0.38,
+              0,
+              0
+            ]
+          }
+        ]
+      },
+      "shoulderCenter": [
+        0.403571588615451,
+        0.42509154596577975,
+        -0.25257874375591516
+      ],
+      "anatomy": [
+        {
+          "side": "L",
+          "shoulder": [
+            -0.15000000000000002,
+            0,
+            0.2
+          ],
+          "elbow": [
+            -0.5,
+            0,
+            0
+          ],
+          "wrist": [
+            0.12000000000000001,
+            1.2500000000000002,
+            6.98915546593672e-18
+          ],
+          "wristSwing": 0.1200000000000029,
+          "wristTwist": 1.25,
+          "palmNormal": [
+            0.3867391099425533,
+            -0.9221872041958428,
+            -0.0019029604033119485
+          ],
+          "planted": 0,
+          "handVertices": 2676,
+          "insideHandVertices": 0,
+          "minHandTorso": 2.7185379828189618,
+          "minHandPoint": [
+            -0.23605763092840865,
+            0.018126758855598474,
+            0.25425060220241913
+          ],
+          "minForearmTorso": 1.6753010367778374
+        },
+        {
+          "side": "R",
+          "shoulder": [
+            -0.1308788913443968,
+            -1.7769650538904278,
+            3.0148997486630917
+          ],
+          "elbow": [
+            -1.3045158943629922,
+            0,
+            0
+          ],
+          "wrist": [
+            0.19844471679220899,
+            -0.3373975915313502,
+            0.33984067799733775
+          ],
+          "wristSwing": 0.3915868397220718,
+          "wristTwist": -0.3715545630172144,
+          "palmNormal": [
+            -0.7212003063107915,
+            0.4813513361184381,
+            0.49816765189463597
+          ],
+          "planted": 0,
+          "handVertices": 2676,
+          "insideHandVertices": 0,
+          "minHandTorso": null,
+          "minHandPoint": null,
+          "minForearmTorso": null
+        }
+      ],
+      "vertices": 86222,
+      "lowest": [
+        {
+          "y": -0.019000000000000024,
+          "point": [
+            0.6768502150068431,
+            -0.019000000000000024,
+            -0.42473978391957257
+          ],
+          "mesh": "(unnamed)",
+          "part": "armR",
+          "parent": "Group",
+          "material": "wear:pads",
+          "vertices": 34
+        },
+        {
+          "y": -0.0018601636136752892,
+          "point": [
+            0.6820055439470156,
+            -0.0018601636136752892,
+            -0.43791600401225783
+          ],
+          "mesh": "(unnamed)",
+          "part": "armR",
+          "parent": "Group",
+          "material": "wear:pads",
+          "vertices": 34
+        },
+        {
+          "y": 0.004852777346534554,
+          "point": [
+            0.6115839512925911,
+            0.004852777346534554,
+            -0.4384591410103382
+          ],
+          "mesh": "(unnamed)",
+          "part": "armR",
+          "parent": "Group",
+          "material": "wear:shirt",
+          "vertices": 180
+        },
+        {
+          "y": 0.011276804518507377,
+          "point": [
+            0.6500973790066369,
+            0.011276804518507377,
+            -0.37224775790715
+          ],
+          "mesh": "tailored-upper-sleeve:live",
+          "part": "torso",
+          "parent": "shoulder-live",
+          "material": "wear:shirt",
+          "vertices": 960
+        },
+        {
+          "y": 0.028243664426344378,
+          "point": [
+            0.6981456265654175,
+            0.028243664426344378,
+            -0.4123647252863709
+          ],
+          "mesh": "(unnamed)",
+          "part": "elbowR",
+          "parent": "Group",
+          "material": "",
+          "vertices": 80
+        }
+      ],
+      "supportLowest": [
+        {
+          "y": 0.11980421871105229,
+          "point": [
+            0.4364103915874819,
+            0.11980421871105229,
+            -0.2685850366999073
+          ],
+          "mesh": "(unnamed)",
+          "part": "torso",
+          "parent": "Group",
+          "material": "wear:shirt",
+          "vertices": 1440
+        },
+        {
+          "y": 0.17887129026208948,
+          "point": [
+            0.24128599304436354,
+            0.17887129026208948,
+            -0.1356431072974656
+          ],
+          "mesh": "(unnamed)",
+          "part": "torso",
+          "parent": "Group",
+          "material": "",
+          "vertices": 1752
+        },
+        {
+          "y": 0.18094360038459523,
+          "point": [
+            0.20332093724566022,
+            0.18094360038459523,
+            -0.11209847901213192
+          ],
+          "mesh": "(unnamed)",
+          "part": "torso",
+          "parent": "Group",
+          "material": "",
+          "vertices": 792
+        },
+        {
+          "y": 0.1894373644096895,
+          "point": [
+            0.1868749131474016,
+            0.1894373644096895,
+            -0.09787808043321476
+          ],
+          "mesh": "(unnamed)",
+          "part": "torso",
+          "parent": "Group",
+          "material": "wear:carrier",
+          "vertices": 3264
+        },
+        {
+          "y": 0.19491829526124127,
+          "point": [
+            0.03422442046356666,
+            0.19491829526124127,
+            -0.11128939257941506
+          ],
+          "mesh": "(unnamed)",
+          "part": "lowerBody",
+          "parent": "Group",
+          "material": "",
+          "vertices": 684
+        }
+      ],
+      "penetration": 0,
+      "hands": [
+        {
+          "point": [
+            0.09520889799831818,
+            0.559772283092628,
+            0.17515355605630406
+          ],
+          "target": [
+            -0.322,
+            0.012,
+            -0.1157
+          ],
+          "error": 0.7474714240451462,
+          "planted": 0,
+          "side": "L"
+        },
+        {
+          "point": [
+            0.6957403054756013,
+            0.347480518898428,
+            -0.40454489175283215
+          ],
+          "target": [
+            0.23800000000000002,
+            0.012,
+            -0.1157
+          ],
+          "error": 0.6367925386724946,
+          "planted": 0,
+          "side": "R"
+        }
+      ],
+      "feet": [
+        {
+          "point": [
+            -0.6068288260392907,
+            0.5086007833576512,
+            0.1798965117312696
+          ],
+          "target": [
+            -0.222,
+            0.07,
+            -0.3807
+          ],
+          "error": 0.8091553135696455,
+          "ground": false,
+          "legFK": 1,
+          "side": "L"
+        },
+        {
+          "point": [
+            -0.4780471074901985,
+            0.32093921887518523,
+            0.10629469838602237
+          ],
+          "target": [
+            0.13799999999999998,
+            0.07,
+            -0.3807
+          ],
+          "error": 0.8244078884101129,
+          "ground": false,
+          "legFK": 1,
+          "side": "R"
+        }
+      ]
+    }
+  },
+  "ok": true,
+  "errors": [],
+  "finished": "2026-10-13T14:00:55.772Z"
+}

@@ -1,0 +1,9 @@
+#70 caveguard-chase
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 1.2 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A gaunt cave creature's rasping, high, breathy hiss-shriek as it scrambles towards prey. Close-up, dry. No words, no music.
+
+In the game: zombieVoice('caveguard', 'chase')

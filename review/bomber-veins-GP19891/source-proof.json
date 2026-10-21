@@ -1,0 +1,12 @@
+[
+  {
+    "file": "game/bomber-appearance.js",
+    "before": "2060e50726e1b5349f993bd83d4f2065ece93eecdb016a2e87d486a6a2b875ae",
+    "after": "af7ef648cf089fb5faca0059bb3aac622fd142e9a4cdd4adbb6eb9b8086ca5e2"
+  },
+  {
+    "file": "game/bomber-behavior.js",
+    "before": "573c92e679c3b286e0358b368d44da885adc4661e944faa3e263aa3370ba79c2",
+    "after": "a4440fb7511d02b2403f267b1a2c9f5535aa09baeb7f88fdf5c862e3c08532c4"
+  }
+]

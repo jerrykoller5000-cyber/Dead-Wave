@@ -1,0 +1,766 @@
+{
+  "schema": "grave-shift-elevenlabs-sfx-v1",
+  "source": "Claude outputs/PROMPTS-3.md",
+  "sourceSha256": "01b798b591b0d6b42e6e2239ceba0d207d236c79af0babace1f037c553f2ff9d",
+  "model": "eleven_text_to_sound_v2",
+  "promptInfluence": 0.6,
+  "variants": 4,
+  "sounds": [
+    {
+      "n": 1,
+      "folder": "crew/megaphone-squawk",
+      "priority": true,
+      "status": "new",
+      "requestedSeconds": 1.5,
+      "loop": false,
+      "prompt": "A handheld military megaphone keyed on outdoors: a click, a short squeal of feedback and a crackle, then it cuts off. No music, no voice."
+    },
+    {
+      "n": 2,
+      "folder": "crew/truck-horn",
+      "priority": true,
+      "status": "new",
+      "requestedSeconds": 2.5,
+      "loop": false,
+      "prompt": "An old pickup truck horn wired to a weak battery, honking the rhythm 'shave and a haircut, two bits' outdoors, slightly sour and wheezy. No music, no voice."
+    },
+    {
+      "n": 3,
+      "folder": "crew/flare-distant",
+      "priority": true,
+      "status": "new",
+      "requestedSeconds": 3,
+      "loop": false,
+      "prompt": "A distant signal flare fired far across a forest valley: a faint pop, a rising hiss and a soft echo off the mountains. No music, no voice."
+    },
+    {
+      "n": 4,
+      "folder": "crew/mud-emerge",
+      "priority": true,
+      "status": "new",
+      "requestedSeconds": 2.5,
+      "loop": false,
+      "prompt": "A man heaving himself up out of thick sucking creek mud: a long wet suction, gloopy pops and dripping. No music, no voice."
+    },
+    {
+      "n": 5,
+      "folder": "crew/mud-step",
+      "priority": false,
+      "status": "new",
+      "requestedSeconds": 0.6,
+      "loop": false,
+      "prompt": "A single boot step pulled out of thick wet mud, a sticky squelch and a suck. No music, no voice."
+    },
+    {
+      "n": 6,
+      "folder": "crew/ladder-raise",
+      "priority": false,
+      "status": "new",
+      "requestedSeconds": 1.5,
+      "loop": false,
+      "prompt": "A long wooden ladder lifted and dropped against a wooden tower: a scrape, a hollow knock and a rattle settling. No music, no voice."
+    },
+    {
+      "n": 7,
+      "folder": "crew/hatch-pry",
+      "priority": true,
+      "status": "new",
+      "requestedSeconds": 2.5,
+      "loop": false,
+      "prompt": "A rusty iron cellar hatch pried open with a crowbar: metal straining, a sharp screech of hinges and a heavy clank as it falls open. No music, no voice."
+    },
+    {
+      "n": 8,
+      "folder": "crew/hatch-slam",
+      "priority": false,
+      "status": "new",
+      "requestedSeconds": 1,
+      "loop": false,
+      "prompt": "A heavy iron hatch slamming shut on a stone floor, a deep clang with a short ring. No music, no voice."
+    },
+    {
+      "n": 9,
+      "folder": "crew/kettle-whistle",
+      "priority": true,
+      "status": "new",
+      "requestedSeconds": 4,
+      "loop": false,
+      "prompt": "A small metal camping kettle on a gas stove coming to the boil and starting to whistle, rising to a shrill steady whistle. No music, no voice."
+    },
+    {
+      "n": 10,
+      "folder": "crew/tea-pour",
+      "priority": false,
+      "status": "new",
+      "requestedSeconds": 2,
+      "loop": false,
+      "prompt": "Hot tea poured from a kettle into a tin camping mug, then a spoon stirring and clinking twice. No music, no voice."
+    },
+    {
+      "n": 11,
+      "folder": "crew/biscuit-tin",
+      "priority": false,
+      "status": "new",
+      "requestedSeconds": 1,
+      "loop": false,
+      "prompt": "A round metal biscuit tin lid prised off with a pop and a light tinny wobble. No music, no voice."
+    },
+    {
+      "n": 12,
+      "folder": "crew/belt-rattle",
+      "priority": false,
+      "status": "new",
+      "requestedSeconds": 1.5,
+      "loop": false,
+      "prompt": "A linked belt of rifle ammunition lifted and laid into a machine gun feed tray, a heavy metallic rattle and a latch snapping shut. No music, no voice."
+    },
+    {
+      "n": 13,
+      "folder": "crew/gun-cleaning",
+      "priority": false,
+      "status": "new",
+      "requestedSeconds": 2.5,
+      "loop": false,
+      "prompt": "A cleaning rod and brush pushed in and out of a rifle barrel, metal scraping, then a cloth wiping. No music, no voice."
+    },
+    {
+      "n": 14,
+      "folder": "crew/med-bag",
+      "priority": false,
+      "status": "new",
+      "requestedSeconds": 1.5,
+      "loop": false,
+      "prompt": "A canvas medic bag unzipped and opened, packets and bandages rustling inside. No music, no voice."
+    },
+    {
+      "n": 15,
+      "folder": "crew/bandage-wrap",
+      "priority": false,
+      "status": "new",
+      "requestedSeconds": 2,
+      "loop": false,
+      "prompt": "A cloth bandage unrolled and wrapped tightly around an arm, fabric rustling and a strip of tape torn. No music, no voice."
+    },
+    {
+      "n": 16,
+      "folder": "crew/ratchet",
+      "priority": false,
+      "status": "new",
+      "requestedSeconds": 1,
+      "loop": false,
+      "prompt": "A ratchet wrench clicking quickly as it tightens a bolt, then a final hard click. No music, no voice."
+    },
+    {
+      "n": 17,
+      "folder": "crew/engine-crank",
+      "priority": false,
+      "status": "new",
+      "requestedSeconds": 3,
+      "loop": false,
+      "prompt": "An old truck engine cranking over, sputtering, coughing and failing to start, outdoors. No music, no voice."
+    },
+    {
+      "n": 18,
+      "folder": "crew/roof-step",
+      "priority": false,
+      "status": "new",
+      "requestedSeconds": 0.5,
+      "loop": false,
+      "prompt": "A single combat boot footstep on a corrugated metal roof, a hollow bong with a small rattle. No music, no voice."
+    },
+    {
+      "n": 19,
+      "folder": "crew/crate-sit",
+      "priority": false,
+      "status": "new",
+      "requestedSeconds": 1,
+      "loop": false,
+      "prompt": "Someone sitting down heavily on a wooden supply crate, a creak and a groan of the boards. No music, no voice."
+    },
+    {
+      "n": 20,
+      "folder": "crew/sleeping-bag",
+      "priority": false,
+      "status": "new",
+      "requestedSeconds": 1.5,
+      "loop": false,
+      "prompt": "A nylon sleeping bag rustling as someone rolls over in it. No music, no voice."
+    },
+    {
+      "n": 21,
+      "folder": "burial/shovel-fill",
+      "priority": true,
+      "status": "new",
+      "requestedSeconds": 1.5,
+      "loop": false,
+      "prompt": "A shovelful of loose earth thrown onto a wooden coffin lid in a grave, a soft heavy thud and dirt pattering. No music, no voice."
+    },
+    {
+      "n": 22,
+      "folder": "burial/marker-hammer",
+      "priority": false,
+      "status": "new",
+      "requestedSeconds": 2,
+      "loop": false,
+      "prompt": "A wooden grave marker hammered into the ground with three solid blows of a mallet, outdoors. No music, no voice."
+    },
+    {
+      "n": 23,
+      "folder": "burial/dog-tag-hang",
+      "priority": false,
+      "status": "new",
+      "requestedSeconds": 1,
+      "loop": false,
+      "prompt": "A metal dog tag chain hung over a wooden post, a light chain jingle and a soft tap. No music, no voice."
+    },
+    {
+      "n": 24,
+      "folder": "story/the-tone",
+      "priority": true,
+      "status": "missing",
+      "requestedSeconds": 12,
+      "loop": true,
+      "prompt": "A deep unnatural resonant hum coming up through water and rock, slowly pulsing in a repeating rhythm like it is almost saying a word, eerie and vast, seamless. No music, no voice."
+    },
+    {
+      "n": 25,
+      "folder": "story/tone-swell",
+      "priority": true,
+      "status": "missing",
+      "requestedSeconds": 4,
+      "loop": false,
+      "prompt": "A deep eerie resonant hum swelling louder from far beneath the ground, then sinking back down. No music, no voice."
+    },
+    {
+      "n": 26,
+      "folder": "story/tone-silenced",
+      "priority": true,
+      "status": "missing",
+      "requestedSeconds": 4,
+      "loop": false,
+      "prompt": "A deep resonant hum and its own mirror cancelling each other: the sound thins and collapses into total silence with a soft rush of air. No music, no voice."
+    },
+    {
+      "n": 27,
+      "folder": "story/relay-spark",
+      "priority": false,
+      "status": "missing",
+      "requestedSeconds": 1.5,
+      "loop": false,
+      "prompt": "A broken electrical panel spitting sparks, a crackling buzz and a few sharp electrical snaps. No music, no voice."
+    },
+    {
+      "n": 28,
+      "folder": "story/relay-power-up",
+      "priority": true,
+      "status": "missing",
+      "requestedSeconds": 3.5,
+      "loop": false,
+      "prompt": "A big military radio relay powering up: heavy switches clunking, relays clicking in sequence and a hum rising to a steady tone. No music, no voice."
+    },
+    {
+      "n": 29,
+      "folder": "story/fuse-pull",
+      "priority": false,
+      "status": "missing",
+      "requestedSeconds": 0.8,
+      "loop": false,
+      "prompt": "A heavy cartridge fuse pulled out of a metal fuse box, a stiff scrape and a click. No music, no voice."
+    },
+    {
+      "n": 30,
+      "folder": "story/hush-on",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 1.5,
+      "loop": false,
+      "prompt": "A small handmade electronic box switched on: a toggle click, a whine charging up and a soft wavering hum. No music, no voice."
+    },
+    {
+      "n": 31,
+      "folder": "story/hush-hum",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 6,
+      "loop": true,
+      "prompt": "A soft wavering electronic hum with a slow phasing shimmer, like noise-cancelling, quiet and steady, seamless. No music, no voice."
+    },
+    {
+      "n": 32,
+      "folder": "story/hush-dying",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 2,
+      "loop": false,
+      "prompt": "A small electronic hum winding down as its battery dies, warbling lower, a little crackle and then silence. No music, no voice."
+    },
+    {
+      "n": 33,
+      "folder": "story/rune-door-hum",
+      "priority": true,
+      "status": "missing",
+      "requestedSeconds": 8,
+      "loop": true,
+      "prompt": "An ancient carved stone slab humming with a warm low singing resonance in a cave, faint and steady, seamless. No music, no voice."
+    },
+    {
+      "n": 34,
+      "folder": "story/rune-door-open",
+      "priority": true,
+      "status": "missing",
+      "requestedSeconds": 5,
+      "loop": false,
+      "prompt": "A massive carved stone door grinding slowly open in a cave, deep stone scraping, dust falling and a low boom as it stops. No music, no voice."
+    },
+    {
+      "n": 35,
+      "folder": "story/rune-shard",
+      "priority": false,
+      "status": "missing",
+      "requestedSeconds": 1.2,
+      "loop": false,
+      "prompt": "A small carved stone shard picked up off rock, a stony click and a faint glassy chime that fades. No music, no voice."
+    },
+    {
+      "n": 36,
+      "folder": "story/stones-pulse",
+      "priority": false,
+      "status": "missing",
+      "requestedSeconds": 2.5,
+      "loop": false,
+      "prompt": "One deep resonant pulse travelling through deep water, a soft round underwater boom with a long ring. No music, no voice."
+    },
+    {
+      "n": 37,
+      "folder": "story/dog-tag",
+      "priority": true,
+      "status": "missing",
+      "requestedSeconds": 1,
+      "loop": false,
+      "prompt": "Military dog tags and their ball chain picked up from dirt, a light metallic jingle. No music, no voice."
+    },
+    {
+      "n": 38,
+      "folder": "story/field-note",
+      "priority": false,
+      "status": "missing",
+      "requestedSeconds": 0.8,
+      "loop": false,
+      "prompt": "A small paper card unfolded and held up, a dry paper rustle and crinkle. No music, no voice."
+    },
+    {
+      "n": 39,
+      "folder": "story/heart-beat",
+      "priority": false,
+      "status": "missing",
+      "requestedSeconds": 3,
+      "loop": false,
+      "prompt": "A single enormous slow heartbeat from far below the earth, two deep muffled thumps you feel more than hear. No music, no voice."
+    },
+    {
+      "n": 40,
+      "folder": "story/heart-fall",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 6,
+      "loop": false,
+      "prompt": "Something enormous dying deep underground: a vast groan that breaks apart into rumbling and collapses into silence. No music, no voice."
+    },
+    {
+      "n": 41,
+      "folder": "story/lake-breath",
+      "priority": false,
+      "status": "missing",
+      "requestedSeconds": 6,
+      "loop": false,
+      "prompt": "A huge slow exhale rolling across a still lake at night, a low breathy rush and soft lapping water. No music, no voice."
+    },
+    {
+      "n": 42,
+      "folder": "story/iron-bars",
+      "priority": false,
+      "status": "missing",
+      "requestedSeconds": 1,
+      "loop": false,
+      "prompt": "Rusty iron bars rattled and clanging against each other in a stone doorway. No music, no voice."
+    },
+    {
+      "n": 43,
+      "folder": "story/coffin-creak",
+      "priority": false,
+      "status": "missing",
+      "requestedSeconds": 2,
+      "loop": false,
+      "prompt": "An old iron-banded wooden coffin lid creaking slowly open, wood groaning and metal scraping. No music, no voice."
+    },
+    {
+      "n": 44,
+      "folder": "ui/missing-in-action",
+      "priority": true,
+      "status": "new",
+      "requestedSeconds": 4,
+      "loop": false,
+      "prompt": "A military radio channel going dead: a burst of static that thins out into empty hiss and a lonely wind. No music, no voice."
+    },
+    {
+      "n": 45,
+      "folder": "ui/deja-vu",
+      "priority": false,
+      "status": "new",
+      "requestedSeconds": 2.5,
+      "loop": false,
+      "prompt": "An uncanny reversed whisper swelling up and snapping off, airy and unsettling. No music, no voice."
+    },
+    {
+      "n": 46,
+      "folder": "ui/badge",
+      "priority": false,
+      "status": "missing",
+      "requestedSeconds": 1.5,
+      "loop": false,
+      "prompt": "Two metal dog tags clinking together, followed by one low warm horn note. No music, no voice."
+    },
+    {
+      "n": 47,
+      "folder": "ui/dawn-card",
+      "priority": false,
+      "status": "missing",
+      "requestedSeconds": 1,
+      "loop": false,
+      "prompt": "A paper card slid across a wooden table and tapped down. No music, no voice."
+    },
+    {
+      "n": 48,
+      "folder": "ui/expand",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 1.5,
+      "loop": false,
+      "prompt": "A short rising mechanical whir and a solid clunk, like a structure locking open. No music, no voice."
+    },
+    {
+      "n": 49,
+      "folder": "world/frogs-night",
+      "priority": false,
+      "status": "missing",
+      "requestedSeconds": 10,
+      "loop": true,
+      "prompt": "Frogs and insects croaking at night beside a forest lake, calm and steady, seamless. No music, no voice."
+    },
+    {
+      "n": 50,
+      "folder": "world/fog-wind",
+      "priority": false,
+      "status": "missing",
+      "requestedSeconds": 10,
+      "loop": true,
+      "prompt": "A thick fog over a forest at night: a low hollow wind, very still and eerie, distant creaks, seamless. No music, no voice."
+    },
+    {
+      "n": 51,
+      "folder": "world/underwater",
+      "priority": true,
+      "status": "missing",
+      "requestedSeconds": 8,
+      "loop": true,
+      "prompt": "Being underwater in a deep lake: a muffled heavy pressure, low rumble and slow bubbles, seamless. No music, no voice."
+    },
+    {
+      "n": 52,
+      "folder": "world/graveyard-ambience",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 10,
+      "loop": true,
+      "prompt": "An old abandoned cemetery at dusk: a soft wind through dry grass, a creaking iron gate far off, a crow, seamless. No music, no voice."
+    },
+    {
+      "n": 53,
+      "folder": "world/chapel-choir",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 6,
+      "loop": false,
+      "prompt": "A faint ghostly choir holding one soft 'aah' chord inside a ruined stone church, echoing. No music, no voice."
+    },
+    {
+      "n": 54,
+      "folder": "world/heavenly-choir",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 3,
+      "loop": false,
+      "prompt": "A short bright heavenly choir chord swelling 'aah', with a shimmer of bells. No music, no voice."
+    },
+    {
+      "n": 55,
+      "folder": "world/holy-blast",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 2.5,
+      "loop": false,
+      "prompt": "A huge blast of light: a bright shimmering whoosh into a big booming explosion with a choir hit. No music, no voice."
+    },
+    {
+      "n": 56,
+      "folder": "world/tree-crown-fire",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 3,
+      "loop": false,
+      "prompt": "The top of a pine tree catching fire, a fast roaring whoosh of flame and crackling needles. No music, no voice."
+    },
+    {
+      "n": 57,
+      "folder": "world/trunk-bump",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.5,
+      "loop": false,
+      "prompt": "Bumping into a thick tree trunk, a dull wooden thud and a light rustle of leaves above. No music, no voice."
+    },
+    {
+      "n": 58,
+      "folder": "player/footstep-metal",
+      "priority": true,
+      "status": "upgrade",
+      "requestedSeconds": 0.4,
+      "loop": false,
+      "prompt": "A single combat boot footstep on a steel plate floor, a firm metallic clank. No music, no voice."
+    },
+    {
+      "n": 59,
+      "folder": "player/footstep-stone",
+      "priority": true,
+      "status": "upgrade",
+      "requestedSeconds": 0.4,
+      "loop": false,
+      "prompt": "A single combat boot footstep on bare cave rock, a hard gritty scuff with a short cave echo. No music, no voice."
+    },
+    {
+      "n": 60,
+      "folder": "player/footstep-mud",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.5,
+      "loop": false,
+      "prompt": "A single combat boot footstep in soft wet mud, a sticky squelch. No music, no voice."
+    },
+    {
+      "n": 61,
+      "folder": "player/footstep-leaves",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.5,
+      "loop": false,
+      "prompt": "A single combat boot footstep on dry fallen leaves and twigs, a crunchy rustle. No music, no voice."
+    },
+    {
+      "n": 62,
+      "folder": "player/medkit",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 1.5,
+      "loop": false,
+      "prompt": "A first aid kit snapped open, a bandage pack torn and a quick wrap of gauze. No music, no voice."
+    },
+    {
+      "n": 63,
+      "folder": "player/grenade-throw",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.6,
+      "loop": false,
+      "prompt": "A hand grenade thrown overarm: a quick whoosh of the arm and the spoon flying off with a ping. No music, no voice."
+    },
+    {
+      "n": 64,
+      "folder": "player/drowning",
+      "priority": false,
+      "status": "missing",
+      "requestedSeconds": 1.5,
+      "loop": false,
+      "prompt": "Muffled choking and air bubbles escaping underwater, heavy and panicked. No music, no voice."
+    },
+    {
+      "n": 65,
+      "folder": "player/ammo-pickup",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.6,
+      "loop": false,
+      "prompt": "Picking up a box of rifle rounds, a heavy rattle of cartridges and a cardboard flap. No music, no voice."
+    },
+    {
+      "n": 66,
+      "folder": "weapon-foley/chainsaw-dry-pull",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 1,
+      "loop": false,
+      "prompt": "A chainsaw pull cord yanked once, the engine turning over but not catching. No music, no voice."
+    },
+    {
+      "n": 67,
+      "folder": "weapon-foley/suppressor-on",
+      "priority": false,
+      "status": "missing",
+      "requestedSeconds": 1.2,
+      "loop": false,
+      "prompt": "A metal suppressor screwed onto a pistol barrel, a gritty threaded twist and a final click. No music, no voice."
+    },
+    {
+      "n": 68,
+      "folder": "weapon-foley/laser-click",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.3,
+      "loop": false,
+      "prompt": "A small tactical laser module switched on, a crisp tiny click and a faint electronic chirp. No music, no voice."
+    },
+    {
+      "n": 69,
+      "folder": "weapon-foley/shotgun-hull",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.6,
+      "loop": false,
+      "prompt": "An empty plastic shotgun shell hull bouncing twice on hard ground, a hollow plasticky tock. No music, no voice."
+    },
+    {
+      "n": 70,
+      "folder": "weapons/pistol-suppressed",
+      "priority": false,
+      "status": "try",
+      "requestedSeconds": 0.6,
+      "loop": false,
+      "prompt": "A suppressed 9mm pistol shot outdoors, a sharp muffled thump and a metallic slide clack. No music, no voice."
+    },
+    {
+      "n": 71,
+      "folder": "weapons/carbine-suppressed",
+      "priority": false,
+      "status": "try",
+      "requestedSeconds": 0.6,
+      "loop": false,
+      "prompt": "A suppressed 5.56 carbine shot outdoors, a hard muffled crack and a mechanical clatter. No music, no voice."
+    },
+    {
+      "n": 72,
+      "folder": "training/alarm",
+      "priority": true,
+      "status": "upgrade",
+      "requestedSeconds": 3,
+      "loop": false,
+      "prompt": "An indoor military training facility alarm: a rising and falling electronic siren whooping three times, echoing in a concrete hall. No music, no voice."
+    },
+    {
+      "n": 73,
+      "folder": "training/pa-chime",
+      "priority": false,
+      "status": "missing",
+      "requestedSeconds": 1.5,
+      "loop": false,
+      "prompt": "A public address chime in a concrete hall, two soft descending tones with a slight echo. No music, no voice."
+    },
+    {
+      "n": 74,
+      "folder": "training/keypad-press",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.2,
+      "loop": false,
+      "prompt": "A single press of a rugged metal keypad button with a short electronic beep. No music, no voice."
+    },
+    {
+      "n": 75,
+      "folder": "training/keypad-accept",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.8,
+      "loop": false,
+      "prompt": "A security keypad accepting a code: two rising beeps and a heavy magnetic lock releasing with a clunk. No music, no voice."
+    },
+    {
+      "n": 76,
+      "folder": "training/keypad-deny",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 0.6,
+      "loop": false,
+      "prompt": "A security keypad rejecting a code: a low harsh double buzz. No music, no voice."
+    },
+    {
+      "n": 77,
+      "folder": "training/hangar-door",
+      "priority": false,
+      "status": "missing",
+      "requestedSeconds": 6,
+      "loop": false,
+      "prompt": "A huge metal hangar door rolling open on rails: a heavy motor whine, rumbling and clanking, then a boom as it stops. No music, no voice."
+    },
+    {
+      "n": 78,
+      "folder": "hq/sample-window",
+      "priority": false,
+      "status": "upgrade",
+      "requestedSeconds": 1.5,
+      "loop": false,
+      "prompt": "A sack of bones dropped down a metal chute into a steel bin, a clattering slide and a heavy rattling crash. No music, no voice."
+    },
+    {
+      "n": 79,
+      "folder": "hq/terminal-boot",
+      "priority": false,
+      "status": "missing",
+      "requestedSeconds": 2,
+      "loop": false,
+      "prompt": "A rugged military computer terminal powering on: a fan spinning up, a hard drive whirr and two short beeps. No music, no voice."
+    },
+    {
+      "n": 80,
+      "folder": "hq/generator",
+      "priority": false,
+      "status": "missing",
+      "requestedSeconds": 10,
+      "loop": true,
+      "prompt": "A diesel generator running steadily outside a building, a low chugging rumble with a rattling exhaust, seamless. No music, no voice."
+    },
+    {
+      "n": 81,
+      "folder": "weapons/machine-gun-shot",
+      "priority": true,
+      "status": "try",
+      "requestedSeconds": 0.8,
+      "loop": false,
+      "prompt": "A single shot from a belt-fed 7.62 machine gun outdoors, a heavy punchy crack with a short echo. No music, no voice."
+    },
+    {
+      "n": 82,
+      "folder": "weapons/rotary-gun-loop",
+      "priority": false,
+      "status": "try",
+      "requestedSeconds": 4,
+      "loop": true,
+      "prompt": "A rotary machine gun firing continuously, a steady ripping roar of thousands of rounds a minute, seamless. No music, no voice."
+    },
+    {
+      "n": 83,
+      "folder": "turrets/light-turret-shot",
+      "priority": false,
+      "status": "try",
+      "requestedSeconds": 0.5,
+      "loop": false,
+      "prompt": "A single shot from an automated small caliber sentry gun, a sharp mechanical crack. No music, no voice."
+    },
+    {
+      "n": 84,
+      "folder": "turrets/heavy-turret-shot",
+      "priority": false,
+      "status": "try",
+      "requestedSeconds": 0.7,
+      "loop": false,
+      "prompt": "A single shot from a heavy automated turret, a deep thumping boom. No music, no voice."
+    }
+  ]
+}

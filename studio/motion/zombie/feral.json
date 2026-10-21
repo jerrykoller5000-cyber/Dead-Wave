@@ -1,0 +1,23 @@
+{
+  "format": "dw-motion/1",
+  "name": "feral",
+  "version": 1,
+  "owner": "grokbot",
+  "rig": "zombie",
+  "notes": "Fast and light. It goes down easier than a shambler and is back up almost at once: tumble, scramble, keep running.",
+  "mass": 0.8,
+  "strength": 1.2,
+  "tone": { "legs": 0.85, "spine": 0.75, "arms": 0.55, "head": 0.6 },
+  "balance": { "step": 0.12, "fall": 0.45, "steps": 2, "stepTime": 0.2, "lift": 0.1, "lead": 0.22, "anchor": 0.1, "support": 0.85 },
+  "hits": {
+    "bullet": { "recover": 0.35, "knockdown": 6 },
+    "pellet": { "recover": 0.5, "knockdown": 4.5 },
+    "blast": { "recover": 0.9, "knockdown": 2.5, "lift": 0.5 },
+    "blade": { "recover": 0.4, "knockdown": 6 },
+    "crush": { "recover": 0.7, "knockdown": 3 }
+  },
+  "fall": { "tone": { "legs": 0.05, "spine": 0.12, "arms": 0.35, "head": 0.15 }, "catch": 0.7 },
+  "down": { "time": 0.5, "height": 0.4 },
+  "getup": { "time": 0.45 },
+  "death": { "tone": 0.03, "settle": 0.45 }
+}
