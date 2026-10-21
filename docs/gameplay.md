@@ -2,7 +2,9 @@
 
 > **Written before story v2 (2026-10-01).** The numbers and systems below still hold, but the names changed: the cabin
 > is FOB Threshold's HQ, the kiosk is the supply terminal (with the Armory beside it for what you carry), and a wave
-> starts when you sound the alarm at the HQ panel, not on a prep timer. Guns now arrive night by night. The setting, the
+> starts when you sound the alarm at the HQ panel, not on a prep timer. Guns now arrive night by night. Perks are gone
+> from the terminal: the same six skills rank up from what you do ([skills.md](skills.md)), and Cash comes from skulls
+> banked at the HQ sample window. The setting, the
 > survivors, the Hollows and the extraction are in [story.md](story.md); every key is in [controls.md](controls.md).
 
 ## Loadout and the kiosk
