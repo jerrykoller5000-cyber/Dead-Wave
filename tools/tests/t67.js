@@ -20,7 +20,7 @@
     // Stand by a cave, outside its mouth.
     const p = T.player.position;
     p.set(c.x + Math.sin(c.yaw) * 14, T.sampleHeight(c.x + Math.sin(c.yaw) * 14, c.z + Math.cos(c.yaw) * 14), c.z + Math.cos(c.yaw) * 14);
-    await until(() => calls.caveGroan.length > 0, 20000);
+    await until(() => calls.caveGroan.length > 0, 60000);   // CL-230: a long cap for the suite's slow page; it returns as soon as it breathes
     ok(calls.caveGroan.length > 0 && calls.caveGroan[0][0] > 0, 'near a cave it breathes (' + JSON.stringify(calls.caveGroan[0]) + ')');
     // The pit.
     const H = T.LAKE_HOLE;

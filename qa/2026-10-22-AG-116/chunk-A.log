@@ -1,0 +1,56 @@
+# AG-116 chunk A: t68 t69 t70 t71 t72 t73 t74 t75 t76 t77 t78 t79 t80 t81 t82 t83 t84 t85 t86 t87 t88 t89 t90 t91 t92 t93 t94 t95 t96 t97 t98 t99
+# Started: 2026-10-21T23:32:31.305Z
+
+GRANT antigravity AG-116: starting one game-test command
+check-players: 304 player.position reads, all in the allowed places
+ok    t68     15 pass   0 fail  39.1s
+ok    t69     18 pass   0 fail  61.5s
+ok    t70     21 pass   0 fail  67.9s
+ok    t71     16 pass   0 fail  62.7s
+ok    t72     21 pass   0 fail  68.5s
+ok    t73     12 pass   0 fail  53.8s
+FAIL  t74     17 pass   1 fail  52.6s
+FAIL  t75     15 pass   1 fail  50.0s
+FAIL  t76     15 pass   1 fail  56.2s
+ok    t77     17 pass   0 fail  54.9s
+ok    t78     18 pass   0 fail  41.3s
+ok    t79     12 pass   0 fail  68.2s
+FAIL  t80     13 pass   1 fail  171.7s
+           INFO the old drape (sampleHeight + 7 cm) went 0.37 m under the drawn bed at worst
+ok    t81      5 pass   0 fail  23.9s
+ok    t82      4 pass   0 fail  24.2s
+ok    t83     31 pass   0 fail  56.0s
+ok    t84     10 pass   0 fail  59.5s
+ok    t85     15 pass   0 fail  56.6s
+ok    t86     12 pass   0 fail  46.4s
+ok    t87     13 pass   0 fail  42.7s
+ok    t88     13 pass   0 fail  41.7s
+ok    t89     18 pass   0 fail  49.8s
+ok    t90      6 pass   0 fail  48.7s
+ok    t91      7 pass   0 fail  51.1s
+ok    t92      5 pass   0 fail  43.1s
+ok    t93     11 pass   0 fail  81.3s
+ok    t94      8 pass   0 fail  44.8s
+ok    t95      9 pass   0 fail  63.2s
+ok    t96     19 pass   0 fail  56.9s
+ok    t97     15 pass   0 fail  54.2s
+           INFO ragdoll off: 160 spawned, 160 alive at the end, 104 ticks, frame 151.45 ms avg / 1415.90 ms worst (headless)
+           INFO ragdoll on: 160 spawned, 159 alive at the end, 85 ticks, frame 230.09 ms avg / 1337.60 ms worst (headless)
+ok    t98     20 pass   0 fail  88.9s
+           INFO 120 spawned, 120 alive after 113.1 s and 26 legs (650 ticks)
+ok    t99      6 pass   0 fail  158.8s
+
+32 checks: 437 pass, 4 fail
+
+by owner:
+  unassigned
+    t74    1 fail  FAIL and come for him (10.7 -> 11.2 m)
+           FAIL and come for him (10.7 -> 11.2 m)
+    t75    1 fail  FAIL they crowd him: 2 of 5 at arm’s length
+           FAIL they crowd him: 2 of 5 at arm’s length
+    t76    1 fail  FAIL never in step: the closest pair differs by 0.009 rad on average
+           FAIL never in step: the closest pair differs by 0.009 rad on average
+    t80    1 fail  FAIL a spider on a line that grazes the corner takes one with room (start 0.29 m clear, end 0.10
+           FAIL a spider on a line that grazes the corner takes one with room (start 0.29 m clear, end 0.10 m; tight 14% of the time after 3 s; closest 6.0 m)
+
+# Finished: 2026-10-22T00:04:56.444Z code=1

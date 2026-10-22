@@ -9,6 +9,8 @@
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
   const until = async (f, ms) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (f()) return true; await wait(10); } return !!f(); };
   const f2 = (v) => (+v).toFixed(2);
+  // GB-214: waits between steps in game time (capped by wall clock), so a slow page does not start the next step early.
+  const gwait = async (s, cap = 20000) => { const t0 = window.TT.getSimTime(), w0 = Date.now(); while (window.TT.getSimTime() - t0 < s && Date.now() - w0 < cap) await wait(10); };
   try {
     await startMatch(T, 'Throw225');
     T.clearZombies && T.clearZombies(); T.runDevCommand && T.runDevCommand('godmode');
@@ -56,17 +58,17 @@
     const dt = T.getSimTime() - s0, g = T.grenadesInFlight[T.grenadesInFlight.length - 1];
     ok(g && dt > 0.04 && dt < 0.2 && D().n === n0 - 1, 'it leaves at the top of the swing, ' + f2(dt) + ' s after G up (game time)');
     ok(g && g.from && g.from.distanceTo(want) < 0.05, 'from his hand, where the arc started (' + (g && g.from ? f2(g.from.distanceTo(want)) : '-') + ' m off it)');
-    await until(() => A().phase === '', 2000);
+    await until(() => A().phase === '', 20000);
     ok(A().phase === '' && !A().hand.visible, 'then the hand goes back to the gun');
     // --- A tap: thrown as soon as it is in his hand.
-    await wait(700);
+    await gwait(0.7);
     const n1 = D().n, s1 = T.getSimTime();
     T.startGrenadeCharge(); T.releaseGrenadeCharge();
     await until(() => D().n === n1 - 1, 2000);
     const dt1 = T.getSimTime() - s1;
     ok(D().n === n1 - 1 && dt1 < 0.32 && D().last.charge < 0.1, 'a tap: out of the pouch and away in ' + f2(dt1) + ' s, a short lob');
     // --- A hold cut off: it goes back in the pouch, none used.
-    await until(() => A().phase === '', 2000); await wait(700);
+    await until(() => A().phase === '', 20000); await gwait(0.7);
     const n2 = D().n;
     T.startGrenadeCharge();
     await until(() => A().inHand, 1500);

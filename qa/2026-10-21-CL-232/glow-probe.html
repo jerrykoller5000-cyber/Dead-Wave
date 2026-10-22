@@ -1,0 +1,42 @@
+<!doctype html><html><body><script type="importmap">{"imports":{"three":"../../vendor/three/three.webgpu.js","three/webgpu":"../../vendor/three/three.webgpu.js","three/tsl":"../../vendor/three/three.tsl.js"}}</script>
+<script type="module">
+import * as THREE from 'three/webgpu';
+import * as TSL from 'three/tsl';
+const out = window.__out = {};
+try {
+  const renderer = new THREE.WebGPURenderer({ antialias: false });
+  await renderer.init();
+  let builds = 0; const cnb = renderer.backend.createNodeBuilder; renderer.backend.createNodeBuilder = function (o, r) { builds++; return cnb.call(this, o, r); };
+  const W = 64, H = 32, rt = new THREE.RenderTarget(W, H);
+  const scene = new THREE.Scene(); scene.background = new THREE.Color(0x000000);
+  const cam = new THREE.OrthographicCamera(-2, 2, 1, -1, 0.1, 10); cam.position.z = 5;
+  const shared = location.search.includes('shared');
+  let sharedNode = null;
+  const mk = (bx, eye, fire, glowA) => {
+    const sg = new THREE.PlaneGeometry(0.8, 0.8); const n = sg.attributes.position.count;
+    sg.setAttribute('skinIndex', new THREE.Uint16BufferAttribute(new Uint16Array(n * 4), 4)); const sw = new Float32Array(n * 4); for (let i = 0; i < n; i++) sw[i * 4] = 1; sg.setAttribute('skinWeight', new THREE.BufferAttribute(sw, 4));
+    const gl = new Uint8Array(n * 4); for (let i = 0; i < n; i++) { gl[i * 4] = 255; gl[i * 4 + 1] = 0; gl[i * 4 + 2] = 0; gl[i * 4 + 3] = glowA; } sg.setAttribute('zGlow', new THREE.Uint8BufferAttribute(gl, 4, true));
+    const mat = new THREE.MeshStandardNodeMaterial({ color: 0x000000 }); mat.roughness = 1; mat.metalness = 0;
+    const m = new THREE.SkinnedMesh(sg, mat);
+    const ud = { eyeMats: [{ emissiveIntensity: eye }], emberMat: { emissiveIntensity: fire } };
+    if (shared) {
+      if (!sharedNode) { const g = TSL.attribute('zGlow', 'vec4'); sharedNode = TSL.materialEmissive.add(g.rgb.mul(TSL.mix(TSL.reference('userData.zEyeGlow', 'float'), TSL.reference('userData.zFireGlow', 'float'), g.a))); }
+      mat.emissiveNode = sharedNode;
+      Object.defineProperties(m.userData, { zEyeGlow: { get: () => +(ud.eyeMats[0].emissiveIntensity) || 0 }, zFireGlow: { get: () => ud.emberMat ? +ud.emberMat.emissiveIntensity || 0 : 0 } });
+    } else {
+      const g = TSL.attribute('zGlow', 'vec4');
+      mat.emissiveNode = TSL.materialEmissive.add(g.rgb.mul(TSL.mix(TSL.reference('eyeMats.0.emissiveIntensity', 'float', ud), TSL.reference('emberMat.emissiveIntensity', 'float', ud), g.a)));
+    }
+    const b = new THREE.Bone(); m.add(b); m.bind(new THREE.Skeleton([b])); b.position.set(bx, 0, 0); m.frustumCulled = false; scene.add(m); return { m, ud };
+  };
+  const A = mk(-1.5, 1, 0, 0), B = mk(-0.5, 0, 0, 0), C = mk(0.5, 0, 1, 255), D = mk(1.5, 1, 0, 255);
+  scene.updateMatrixWorld(true);
+  const shot = async () => { renderer.setRenderTarget(rt); await renderer.renderAsync(scene, cam); renderer.setRenderTarget(null); const px = await renderer.readRenderTargetPixelsAsync(rt, 0, 0, W, H); const at = (x) => { const X = Math.floor((x + 2) / 4 * W), Y = Math.floor(H / 2); const i = (Y * W + X) * 4; return px[i]; }; return [at(-1.5), at(-0.5), at(0.5), at(1.5)]; };
+  out.first = await shot();
+  A.ud.eyeMats[0].emissiveIntensity = 0; B.ud.eyeMats[0].emissiveIntensity = 1;
+  out.swapped = await shot();
+  out.builds = builds; out.vprog = renderer._pipelines.programs.vertex.size; out.fprog = renderer._pipelines.programs.fragment.size;
+  out.ok = true;
+} catch (e) { out.err = String(e && e.stack || e); }
+out.done = true;
+</script></body></html>

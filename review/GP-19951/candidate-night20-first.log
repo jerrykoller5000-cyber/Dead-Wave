@@ -1,0 +1,27 @@
+bench: scenario night 20 for 30s
+bench: graphics high
+bench: night 20 push 2/6  out 6  spawned 209/851
+bench: night 20 push 4/6  out 3  spawned 416/851
+bench: night 20 push 5/6  out 4  spawned 627/851
+bench: night 20 push 6/6  out 48  spawned 716/851
+bench: profiler on, GPU timestamps on
+fps    60.0   (mean of last 10 s)
+low    50.7   (1% low, same windows)
+worst  16.8 ms
+hitch  0   (frames over 50 ms, whole run)
+draws  255
+tris   716851
+frame  16.67 ms = tick 11 ms + outside 5.67 ms   gpu 0.29 ms
+  r:render                             4.91 ms   worst 13.4
+  zombies                              1.99 ms   worst 7.5
+  r:matrices                           1.36 ms   worst 3.6
+  r:cull                               0.42 ms   worst 1.2
+  m:pose                               0.40 ms   worst 2.6
+  m:hold                               0.40 ms   worst 2.0
+  hud+audio                            0.18 ms   worst 0.6
+  w:stairs+roof+birds+bugs+wildlife    0.18 ms   worst 0.6
+  m:idle                               0.17 ms   worst 1.8
+  drops+hud                            0.14 ms   worst 2.4
+  w:minimap                            0.11 ms   worst 1.4
+  w:treeFall+leaves+batches            0.11 ms   worst 0.3
+{"scenario":"night","seconds":30,"fps":60,"low":50.7,"worst":16.8,"hitches":0,"draws":255,"triangles":716851,"zombies":48,"gfx":"high","windows":10,"night":20,"push":5,"pushes":6,"last":true,"prof":{"frames":1826,"frameMs":16.67,"tickMs":11,"outsideMs":5.67,"top":[{"k":"r:render","avg":4.91,"max":13.4},{"k":"zombies","avg":1.99,"max":7.5},{"k":"r:matrices","avg":1.36,"max":3.6},{"k":"r:cull","avg":0.42,"max":1.2},{"k":"m:pose","avg":0.4,"max":2.6},{"k":"m:hold","avg":0.4,"max":2},{"k":"hud+audio","avg":0.18,"max":0.6},{"k":"w:stairs+roof+birds+bugs+wildlife","avg":0.18,"max":0.6},{"k":"m:idle","avg":0.17,"max":1.8},{"k":"drops+hud","avg":0.14,"max":2.4},{"k":"w:minimap","avg":0.11,"max":1.4},{"k":"w:treeFall+leaves+batches","avg":0.11,"max":0.3}],"spikes":[{"frame":1448,"ms":25.9,"top":["r:render 13.2","zombies 5.0","r:matrices 3.4","r:cull 0.9"],"heapMB":875.9,"freedMB":-0.8,"newPipelines":0,"newTextures":0,"newGeometries":0,"newBuilds":0,"sunShadow":0,"newRenderObjects":0,"t0":52166.5,"t1":52193.5}],"spikeCauses":{"spikes":1,"pipelines":0,"builds":0,"uploads":0,"sunShadow":0,"gc":0,"code":1},"gpuMs":0.29,"gpuSamples":1448,"pipelines":{"made":1,"released":0,"withNewShaders":1,"top":[{"k":"marine-shadow < Group < Group < Group | NodeMaterial:ShadowMaterial | opaque side0 zw | OrthographicCamera","n":1,"newShaders":1,"frames":[789]}],"first":[{"frame":789,"obj":"marine-shadow < Group < Group < Group","kind":"SkinnedMesh","mat":"NodeMaterial:ShadowMaterial","state":"opaque side0 zw","cam":"OrthographicCamera","newShaders":"v"}]},"builds":{"made":1,"top":[{"k":"marine-shadow < Group < Group < Group | SkinnedMesh | MeshBasicMaterial","n":1,"frames":[789]}],"zombieAndEcho":[]},"renderObjects":{"made":279,"perFrame":0.15,"top":[{"k":"Mesh < Scene | MeshBasicMaterial | scene","n":223,"frames":[19,51,67,91,99,131]},{"k":"zombie-skin < Group < Scene | MeshStandardNodeMaterial | scene","n":20,"frames":[21,31,44,344,501,941]},{"k":"zombie-skin < Group < Scene | NodeMaterial | ortho","n":19,"frames":[789,1689]},{"k":"feral-motion-echo < Scene | MeshBasicMaterial | scene","n":6,"frames":[561,565,568,792,795,798]},{"k":"open-molded-holster < Group < Group | MeshStandardMaterial | scene","n":3,"frames":[1299,1309,1320]},{"k":"zombie-skin < Group < Scene | MeshStandardMaterial | scene","n":2,"frames":[1548,1582]},{"k":"marine-shadow < Group < Group | NodeMaterial | ortho","n":1,"frames":[789]},{"k":"Mesh < Group < marine-idle-props | MeshStandardMaterial | scene","n":1,"frames":[1392]},{"k":"open-molded-holster < Group < Group | NodeMaterial | ortho","n":1,"frames":[1689]},{"k":"colossus-back-stone-1 < colossus-carrier-moving-parts < colossus-stone-carrier | NodeMaterial | ortho","n":1,"frames":[1689]},{"k":"colossus-back-stone-2 < colossus-carrier-moving-parts < colossus-stone-carrier | NodeMaterial | ortho","n":1,"frames":[1689]},{"k":"colossus-back-stone-0 < colossus-carrier-moving-parts < colossus-stone-carrier | NodeMaterial | ortho","n":1,"frames":[1689]}],"spikes":[{"frame":1448,"n":0,"top":[]}]},"gc":null}}

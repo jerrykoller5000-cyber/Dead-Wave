@@ -1,0 +1,37 @@
+FAIL  t93       6 pass   5 fail  43.7s  (real renderer)
+    FAIL at rest every walker's soles are on the ground, within 3 cm (shambler 1000000003.17, feral 1000000003.17, drowned 1000000003.17, military 1000000003.17, brute 1000000003.17, spitter 1000000003.17, screamer 1000000003.17, colossus 1000000003.17, demon 1000000003.17, bomber 1000000003.17)
+    FAIL over 1.5 s game time, walking soles stay above -5 cm and below +20 cm (+30 cm for Screamer and Feral) (shambler 1000000000.00/1000000003.17/1.50, feral 1000000000.00/1000000003.17/1.51, drowned 1000000000.00/1000000003.17/1.53, military 1000000000.00/1000000003.17/1.51, brute 1000000000.00/1000000003.17/1.52, spitter 1000000000.00/1000000003.17/1.51, screamer 1000000000.00/1000000003.17/1.50, colossus 1000000000.00/1000000003.17/1.50, demon 1000000000.00/1000000003.17/1.51, bomber 1000000000.00/1000000003.17/1.52)
+    FAIL and its centre is in the headshot slice, above 0.78 of hitH, brute aside (spitter 1.59/2.15/0.69, colossus -999999996.83/4.71/0.67)
+    FAIL a bullet at the head's centre is a headshot (spitter 13.00/13.00, demon 12.00/12.00)
+    FAIL its feet stay on the ground (deepest 9.00 m) and find a planted stance after recovery (9.00 m)
+ok    t202     12 pass   0 fail  25.6s  (real renderer)
+ok    t209     13 pass   0 fail  34.6s  (real renderer)
+ok    t210      9 pass   0 fail  29.6s  (real renderer)
+ok    t222      9 pass   0 fail  142.6s  (real renderer)
+    INFO shambler  head: head 6 | chest: body 6 | legs: body 2, legs 4
+    INFO feral     head: head 5, body 1 | chest: body 6 | legs: legs 4, ground 1, body 1
+    INFO brute     head: head 6 | chest: body 4, head 2 | legs: ground 1, legs 3, body 2
+    INFO spider    head: head 5, body 1 | chest: head 4, body 2 | legs: -
+    INFO leaper    head: head 6 | chest: body 4, head 1, legs 1 | legs: -
+    INFO colossus at 90 deg 6 m: its head is covered by its own gear from the camera here (no head case)
+    INFO colossus at 90 deg 14 m: its head is covered by its own gear from the camera here (no head case)
+    INFO colossus  head: head 4 | chest: body 6 | legs: ground 1, legs 4, body 1
+    INFO pistol 8 m 3 m/s +: hit, lead 0.31 m (pace x flight 0.32) at 0.60 of its height
+    INFO pistol 8 m 3 m/s -: hit, lead -0.32 m (pace x flight -0.32) at 0.68 of its height
+    INFO pistol 8 m 6 m/s +: miss, lead -0.20 m (pace x flight 0.59)
+    INFO pistol 8 m 6 m/s -: hit, lead -0.51 m (pace x flight -0.59) at 0.68 of its height
+    INFO pistol 18 m 3 m/s +: hit, lead 0.70 m (pace x flight 0.71) at 0.64 of its height
+    INFO pistol 18 m 3 m/s -: hit, lead -0.69 m (pace x flight -0.71) at 0.61 of its height
+    INFO pistol 18 m 6 m/s +: hit, lead 1.27 m (pace x flight 1.39) at 0.65 of its height
+    INFO pistol 18 m 6 m/s -: hit, lead -1.30 m (pace x flight -1.39) at 0.59 of its height
+    INFO m4 8 m 3 m/s +: hit, lead 0.22 m (pace x flight 0.23) at 0.63 of its height
+    INFO m4 8 m 3 m/s -: hit, lead -0.23 m (pace x flight -0.23) at 0.66 of its height
+    INFO m4 8 m 6 m/s +: hit, lead 0.32 m (pace x flight 0.42) at 0.69 of its height
+    INFO m4 8 m 6 m/s -: hit, lead -0.31 m (pace x flight -0.42) at 0.66 of its height
+    INFO m4 18 m 3 m/s +: hit, lead 0.51 m (pace x flight 0.52) at 0.64 of its height
+    INFO m4 18 m 3 m/s -: hit, lead -0.52 m (pace x flight -0.52) at 0.64 of its height
+    INFO m4 18 m 6 m/s +: hit, lead 0.91 m (pace x flight 1.02) at 0.60 of its height
+    INFO m4 18 m 6 m/s -: hit, lead -0.94 m (pace x flight -1.02) at 0.64 of its height
+    INFO launcher 12 m 6 m/s +: miss, lead -0.03 m (pace x flight 2.10)
+ok    t270      4 pass   0 fail  19.3s  (real renderer)
+6 checks: 53 pass, 5 fail (real renderer)

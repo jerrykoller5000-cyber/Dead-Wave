@@ -1,0 +1,98 @@
+# AG-116 chunk R: t12 t13 t14 t187 t188 t189 t194 t195 t218 t221 t222 t224 t225 t228 t229 t244 t262 t267 t270 t271
+# Started: 2026-10-22T03:00:29.849Z
+
+GRANT antigravity AG-116: starting one game-test command
+ok    t12      22 pass   0 fail  45.3s  (real renderer)
+ok    t13       8 pass   0 fail  48.0s  (real renderer)
+    meshes: wall 8 wire 1 sandbag 1 floor 2
+    why: {"level":0,"slot":"base"} refusal null cap true
+ok    t14      13 pass   0 fail  29.0s  (real renderer)
+FAIL  t187     97 pass   2 fail  66.3s  (real renderer)
+    FAIL shotgun: zoomed, on the aim (2.26 deg)
+    FAIL launcher: zoomed, on the aim (3.05 deg)
+FAIL  t188    119 pass   2 fail  62.5s  (real renderer)
+    FAIL chainsaw: firing hand on the grip anchor (0.203)
+    FAIL chainsaw: support hand on its anchor (0.353)
+FAIL  t189     35 pass  12 fail  42.3s  (real renderer)
+    FAIL m4@sling+: snug, gap 0.000 m, clipping 0.043 m
+    FAIL aa12@sling+: snug, gap 0.038 m, clipping 0.000 m
+    FAIL shotgun@sling-: snug, gap 0.000 m, clipping 0.040 m
+    FAIL launcher@sling-: snug, gap 0.000 m, clipping 0.022 m
+    FAIL flamer@sling+: snug, gap 0.035 m, clipping 0.000 m
+    FAIL chainsaw@sling-: snug, gap 0.061 m, clipping 0.000 m
+    FAIL ak@sling+: snug, gap 0.026 m, clipping 0.000 m
+    FAIL m4@sling-: snug, gap 0.045 m, clipping 0.000 m
+    FAIL shotgun@sling+: snug, gap 0.000 m, clipping 0.037 m
+    FAIL aa12@sling-: snug, gap 0.066 m, clipping 0.000 m
+    FAIL chainsaw@sling+: snug, gap 0.016 m, clipping 0.000 m
+    FAIL flamer@sling-: snug, gap 0.022 m, clipping 0.000 m
+ok    t194     41 pass   0 fail  101.4s  (real renderer)
+FAIL  t195     17 pass   3 fail  72.2s  (real renderer)
+    FAIL m4: the gun hand rolled onto the grip (175 -> 180 deg)
+    FAIL pistol: the gun hand rolled onto the grip (180 -> 180 deg)
+    FAIL pistol: the support hand rolled onto the gun (180 -> 180 deg)
+ok    t218     35 pass   0 fail  219.8s  (real renderer)
+ok    t221     28 pass   0 fail  57.7s  (real renderer)
+FAIL  t222      7 pass   2 fail  315.4s  (real renderer)
+    INFO shambler  head: head 3, body 3 | chest: body 6 | legs: legs 5, body 1
+    INFO feral     head: head 5, body 1 | chest: body 4, head 2 | legs: legs 6
+    INFO brute     head: head 5, body 1 | chest: body 6 | legs: ground 1, legs 4, body 1
+    INFO spider    head: head 6 | chest: head 4, body 2 | legs: -
+    INFO leaper    head: head 6 | chest: body 4, head 2 | legs: -
+    INFO colossus at 90 deg 6 m: its head is covered by its own gear from the camera here (no head case)
+    INFO colossus at 90 deg 14 m: its head is covered by its own gear from the camera here (no head case)
+    INFO colossus  head: head 4 | chest: body 6 | legs: legs 6
+    FAIL pointing at a head is a headshot: 29/34 (bar 90 %; was 17/64)
+    FAIL the reticle rings a head lined up, and not a chest (false, los-clear)
+    INFO pistol 8 m 3 m/s +: hit, lead 0.27 m (pace x flight 0.31) at 0.66 of its height
+    INFO pistol 8 m 3 m/s -: hit, lead -0.30 m (pace x flight -0.31) at 0.67 of its height
+    INFO pistol 8 m 6 m/s +: hit, lead 0.56 m (pace x flight 0.59) at 0.59 of its height
+    INFO pistol 8 m 6 m/s -: hit, lead -0.31 m (pace x flight -0.59) at 0.66 of its height
+    INFO pistol 18 m 3 m/s +: hit, lead 0.66 m (pace x flight 0.70) at 0.63 of its height
+    INFO pistol 18 m 3 m/s -: hit, lead -0.73 m (pace x flight -0.70) at 0.63 of its height
+    INFO pistol 18 m 6 m/s +: hit, lead 1.44 m (pace x flight 1.39) at 0.57 of its height
+    INFO pistol 18 m 6 m/s -: hit, lead -1.30 m (pace x flight -1.39) at 0.63 of its height
+    INFO m4 8 m 3 m/s +: hit, lead 0.22 m (pace x flight 0.23) at 0.60 of its height
+    INFO m4 8 m 3 m/s -: hit, lead -0.14 m (pace x flight -0.22) at 0.67 of its height
+    INFO m4 8 m 6 m/s +: hit, lead 0.33 m (pace x flight 0.42) at 0.66 of its height
+    INFO m4 8 m 6 m/s -: hit, lead -0.33 m (pace x flight -0.42) at 0.65 of its height
+    INFO m4 18 m 3 m/s +: hit, lead 0.52 m (pace x flight 0.52) at 0.63 of its height
+    INFO m4 18 m 3 m/s -: hit, lead -0.41 m (pace x flight -0.52) at 0.60 of its height
+    INFO m4 18 m 6 m/s +: miss, lead 0.71 m (pace x flight 1.02)
+    INFO m4 18 m 6 m/s -: hit, lead -0.95 m (pace x flight -1.02) at 0.58 of its height
+    INFO launcher 12 m 6 m/s +: miss, lead -0.03 m (pace x flight 2.09)
+FAIL  t224     35 pass  10 fail  43.1s  (real renderer)
+    FAIL m4/ak/uzi/revolver revolver+: snug on the pack, air 0.040 m, clipping 0.000 m (250 of 250 points over the pack)
+    FAIL m4/ak/uzi/revolver revolver-: snug on the pack, air 0.039 m, clipping 0.000 m (250 of 250 points over the pack)
+    FAIL ak/m4/revolver/pistol revolver+: snug on the pack, air 0.084 m, clipping 0.000 m (250 of 250 points over the pack)
+    FAIL ak/m4/revolver/pistol pistol+: snug on the pack, air 0.040 m, clipping 0.000 m (472 of 472 points over the pack)
+    FAIL ak/m4/revolver/pistol revolver-: snug on the pack, air 0.074 m, clipping 0.000 m (250 of 250 points over the pack)
+    FAIL minigun/m4/uzi/revolver revolver+: snug on the pack, air 0.040 m, clipping 0.000 m (250 of 250 points over the pack)
+    FAIL minigun/m4/uzi/revolver revolver-: snug on the pack, air 0.039 m, clipping 0.000 m (250 of 250 points over the pack)
+    FAIL shotgun/aa12/revolver/ revolver+: snug on the pack, air 0.026 m, clipping 0.000 m (250 of 250 points over the pack)
+    FAIL shotgun/aa12/revolver/ revolver-: snug on the pack, air 0.026 m, clipping 0.000 m (250 of 250 points over the pack)
+    FAIL a fast sweep: 0 ticks in 504 ms of audio clock (at most one per 50 ms)
+ok    t225     21 pass   0 fail  58.8s  (real renderer)
+FAIL  t228     88 pass   7 fail  229.6s  (real renderer)
+    FAIL launcher standing: the support fist along its foregrip (180 deg)
+    FAIL launcher walking: the support fist along its foregrip (180 deg)
+    FAIL flamer standing: the support fist along its foregrip (180 deg)
+    FAIL flamer walking: the support fist along its foregrip (180 deg)
+    FAIL chainsaw standing: the firing hand closes on the grip (20.9 cm)
+    FAIL chainsaw standing: the support hand on its anchor (1.6 cm)
+    FAIL chainsaw walking: the support hand on its anchor (1.6 cm)
+FAIL  t229     70 pass   5 fail  126.5s  (real renderer)
+    FAIL revolver: support fist on the support side round the firing fingers (-0.045,-0.023,0.021, 0.055 m from the firing fist)
+    FAIL revolver aiming up: support fist on the support side round the firing fingers (-0.045,-0.023,0.020, 0.054 m from the firing fist)
+    FAIL revolver aiming down: support fist on the support side round the firing fingers (-0.045,-0.023,0.020, 0.054 m from the firing fist)
+    FAIL revolver: no pop leaving or rejoining the grip (1.69 m/s at most)
+    FAIL akimbo: wrists firm, guns in line with the forearms (1.30, 1.30 rad)
+ok    t244     20 pass   0 fail  157.3s  (real renderer)
+FAIL  t262     31 pass   1 fail  241.1s  (real renderer)
+    FAIL revolver akimbo: each hand stays on its own gun's grip (worst 0.031 m)
+ok    t267     24 pass   0 fail  96.5s  (real renderer)
+ok    t270      5 pass   0 fail  26.1s  (real renderer)
+ok    t271     10 pass   0 fail  40.8s  (real renderer)
+20 checks: 726 pass, 44 fail (real renderer)
+
+# Finished: 2026-10-22T03:35:11.127Z code=0

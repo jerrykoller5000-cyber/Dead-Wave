@@ -1,0 +1,41 @@
+# AG-116 chunk C: t132 t133 t134 t135 t136 t137 t138 t139 t140 t141 t142 t143 t144 t145 t146 t147 t148 t149 t150 t151 t152 t153 t154 t155 t156 t157 t158 t159 t160 t161 t162 t163
+# Started: 2026-10-22T00:37:21.485Z
+
+GRANT antigravity AG-116: starting one game-test command
+check-players: 304 player.position reads, all in the allowed places
+ok    t132    11 pass   0 fail  39.0s
+ok    t133     9 pass   0 fail  52.5s
+ok    t134     9 pass   0 fail  25.9s
+ok    t135     8 pass   0 fail  40.2s
+ok    t136    36 pass   0 fail  57.9s
+ok    t137     9 pass   0 fail  41.3s
+ok    t138     6 pass   0 fail  39.9s
+ok    t139    13 pass   0 fail  56.1s
+ok    t140    17 pass   0 fail  36.0s
+ok    t141     7 pass   0 fail  39.9s
+ok    t142    10 pass   0 fail  55.5s
+ok    t143    17 pass   0 fail  79.6s
+ok    t144     9 pass   0 fail  39.8s
+ok    t145    17 pass   0 fail  25.1s
+ok    t146    43 pass   0 fail  42.9s
+ok    t147    19 pass   0 fail  97.3s
+ok    t148    23 pass   0 fail  63.1s
+ok    t149    16 pass   0 fail  65.3s
+ok    t150    13 pass   0 fail  69.9s
+ok    t151     7 pass   0 fail  24.4s
+ok    t152    27 pass   0 fail  60.0s
+ok    t153    15 pass   0 fail  24.0s
+ok    t154     5 pass   0 fail  39.9s
+ok    t155     2 pass   0 fail  43.3s
+ok    t156    34 pass   0 fail  64.9s
+ok    t157     6 pass   0 fail  40.8s
+ok    t158    13 pass   0 fail  24.5s
+ok    t159    10 pass   0 fail  49.4s
+ok    t160    11 pass   0 fail  64.9s
+ok    t161     7 pass   0 fail  24.7s
+ok    t162    20 pass   0 fail  57.5s
+ok    t163    16 pass   0 fail  57.6s
+
+32 checks: 465 pass, 0 fail
+
+# Finished: 2026-10-22T01:03:08.900Z code=0

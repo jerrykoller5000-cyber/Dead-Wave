@@ -29,8 +29,8 @@
   T.openCIF(); const t0 = Date.now(); while (!T.cifDressDbg().preview && Date.now() - t0 < 8000) await wait(40); await wait(600);
   const fig = T.cifDressDbg().preview;
   if (fig) check(fig, 'CIF'); else ok(false, 'CIF preview figure');
-  T.closeCIF && T.closeCIF(); await wait(300);
-  await wait(1600);
+  T.closeCIF && T.closeCIF();
+  { const s0 = T.getSimTime(), w0 = Date.now(); while (T.getSimTime() - s0 < 1.9 && Date.now() - w0 < 15000) await wait(40); }
   let me = null; T.scene.traverse((o) => { if (!me && o.userData && o.userData.elbowRG && o.userData.weaponMount && o !== fig) me = o; });
   if (me) check(me, 'idle'); else ok(false, 'player figure found');
   return out.join('\n');

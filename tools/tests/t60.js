@@ -71,8 +71,11 @@
     ok(ms().stage === 'fight' && ms().deckTrack === nightSong(1), 'then day 1\'s own song: ' + ms().deckTrack);
     ok(ms().deckLoop === true, 'and it loops natively, gapless (CL-34)');
     ok(ms().deckLevel < 0.5, 'fading in (CL-35: over 1.5 s; the song\'s intro is the build): ' + ms().deckLevel.toFixed(2));
-    await until(() => ms().deckLevel >= 0.999, 8000);
-    ok(ms().deckLevel >= 0.999, 'and up within a few seconds: ' + ms().deckLevel.toFixed(2));
+    // CL-230: the fade runs on the game's frame time; the suite's page can manage a few frames a second (dt capped at
+    // 0.05), so "a few seconds" is counted on the sim clock, with a long wall-clock cap.
+    const sUp = T.getSimTime();
+    await until(() => ms().deckLevel >= 0.999 || T.getSimTime() - sUp > 8, 60000);
+    ok(ms().deckLevel >= 0.999 && T.getSimTime() - sUp <= 8, 'and up within a few seconds: ' + ms().deckLevel.toFixed(2) + ' after ' + (T.getSimTime() - sUp).toFixed(1) + ' s of game time');
     ok(gap < 0.5, 'the moment the alarm lets go (CL-26): ' + gap.toFixed(1) + ' s');
     await until(() => T.getAlarmShake() === 0, 15000);
     ok(T.getAlarmShake() === 0, 'and the shake stops: ' + T.getAlarmShake().toFixed(1));

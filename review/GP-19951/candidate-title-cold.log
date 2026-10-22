@@ -1,0 +1,18 @@
+run 1: visibility=visible  TT at 8.0s  title at 14.2s
+   terrain+water+sky built                  0 ms  (+     0)
+   rocks                                   53 ms  (+    53)
+   trees                                  454 ms  (+   401)
+   player+weapons+zombie types            883 ms  (+   429)
+   foliage scattered                     1446 ms  (+   563)
+   POIs+minimap+foliage chunks           2583 ms  (+  1137)
+   contact shading + rest of setup       2704 ms  (+   121)
+   post + pools + compile + warm frame    6329 ms  (+  3625)
+   ready                                 6331 ms  (+     2)
+   log: Grave Shift warm-up: 144 shader variants compiled, 38 bodies pooled, 1 warm frames, lights visible 23/23, shadows true | post 8ms pools 782ms compile 2700ms war
+   log: Grave Shift load: terrain+water+sky built 0ms | rocks 53ms | trees 454ms | player+weapons+zombie types 883ms | foliage scattered 1446ms | POIs+minimap+foliage c
+   log: Grave Shift first minute: 163 variants after 9 warm frames | load:144 a-fresh:144 a-flash:149 a-faded:150 a-kill-generic:156 a-kill-melee:158 a-kill-explosive:1
+   log: Grave Shift pre-roll: 214 shader variants compiled after 31 warm frames | load:144 a-fresh:144 a-flash:149 a-faded:150 a-kill-generic:156 a-kill-melee:158 a-kil
+   log: Grave Shift title: menu up after 31 warm frames, 214 variants | load:144 a-fresh:144 a-flash:149 a-faded:150 a-kill-generic:156 a-kill-melee:158 a-kill-explosiv
+
+title screen: best 14.2s, worst 14.2s, mean 14.2s over 1 run(s)
+budget (AGENTS.md rule 12): 15 s cold, 5 s warm — within the cold budget.

@@ -9,6 +9,7 @@
 //   node tools/bench.mjs --night 20 --gfx high --prof   and where each frame's time goes
 //   node tools/bench.mjs --night 20 --gfx high --prof --cpu   and which functions (a DevTools CPU profile)
 //   node tools/bench.mjs --night 20 --gfx high --prof --alloc   and who allocates (the garbage behind GC pauses)
+//   node tools/bench.mjs --night 20 --gfx high --prof --gc      and V8's GC on the main thread, per spike (CL-239)
 //
 // One JSON line per scenario (the line AG-82 reads): fps, 1% low, worst frame,
 // frames over 50 ms, draw calls and triangles. Draw calls and triangles come
@@ -21,7 +22,9 @@
 //   outsideMs frameMs - tickMs: the browser, the compositor, and waiting on the GPU
 //   top       the 12 heaviest sections, mean and worst ms per frame
 //   spikes    the first frames over 25 ms with their four heaviest sections, the heap they freed and the pipelines,
-//             textures and geometries they built (CL-223); spikeCauses counts all of them by which it was
+//             textures and geometries they built (CL-223), and whether the sun's shadow map was redrawn in it
+//             (`sunShadow`, CL-237) and how many render objects it made (`newRenderObjects`, CL-238); spikeCauses
+//             counts all of them by which it was
 //   pipelines every render pipeline built while measuring (CL-226): how many, how many three released, and the
 //             top groups by object < parents | material | state | camera, with the frames they came on
 //   gpuMs     the GPU time of one frame's render passes, from WebGPU timestamp
@@ -61,6 +64,9 @@ const PROF_ON = argv.includes('--prof');
 const CPU_ON = argv.includes('--cpu');
 const CENSUS_ON = CPU_ON || argv.includes('--census');
 const ALLOC_ON = argv.includes('--alloc');
+// CL-239: --gc (with --prof) traces V8's garbage collection on the page's main thread and says how much of it fell
+// inside each spike frame.
+const GC_ON = argv.includes('--gc');
 let SCENARIO = SCENARIO_ARG || 'megaswarm';
 let NIGHT = null;
 if (NIGHT_ARG !== '') {
@@ -160,12 +166,57 @@ const PROF_START = `(() => {
   // that state compiles one), textures and geometries uploaded (renderer.info.memory), counted between the frame's
   // begin and the next one and put on the spike PROF records. A spike that built nothing and freed no heap is code.
   const R = TT.renderer;
-  const counts = () => { const m = (R && R.info && R.info.memory) || {}; return [(R && R._pipelines && R._pipelines.caches && R._pipelines.caches.size) || 0, m.textures || 0, m.geometries || 0]; };
+  // CL-232: and the node builds. Since CL-229 equal shaders share a pipeline, but a material whose node graph three hasn't
+  // seen still builds it (its node builder) on the frame it is first drawn: 25-40 ms and ~10 MB with no new pipeline.
+  const JB = window.__benchBuilds = window.__benchBuilds || { made: [], n: 0, on: true };
+  JB.on = true; JB.made.length = 0; JB.n = 0;
+  const BE = R && R.backend;
+  if (BE && typeof BE.createNodeBuilder === 'function' && !BE.__cl232) {
+    const cnb = BE.createNodeBuilder;
+    BE.createNodeBuilder = function (object, renderer) {
+      const j = window.__benchBuilds;
+      if (j && j.on) { j.n++; if (j.made.length < 400) { try {
+        const path = []; for (let n = object; n && path.length < 4; n = n.parent) path.push(n.name || n.type);
+        const m = object && object.material;
+        let root = object; while (root && !root.userData?.typeKey) root = root.parent;
+        j.made.push({ frame: P.frame, obj: path.join(' < '), kind: object ? object.type : '', count: (object && object.count) || 0, mat: m ? (m.type || '') + (m.name ? ':' + m.name : '') : '',
+          zombieKind: root?.userData?.typeKey || null, zombieVariant: root?.userData?.variant ? { ...root.userData.variant } : null,
+          zombieSkinIndex: root?.userData?.skinMeshes?.indexOf(object) ?? null,
+          materialState: m && root?.userData?.typeKey ? { emissive: m.emissive?.getHex?.() ?? null,
+            emissiveIntensity: m.emissiveIntensity ?? null, transparent: !!m.transparent, side: m.side,
+            roughness: m.roughness ?? null, metalness: m.metalness ?? null, version: m.version,
+            attributes: Object.keys(object.geometry?.attributes || {}) } : null });
+      } catch (e) {} } }
+      return cnb.call(this, object, renderer);
+    };
+    BE.__cl232 = true;
+  }
+  // CL-238: and the render objects. three keeps one per object, material, render context (a pass, a shadow map) and
+  // lights node; a new one (a mesh drawn the first time in that pass, or again after its lights or material key
+  // changed) makes its bindings and finds its pipeline, which costs CPU in r:render with no build and no pipeline.
+  // AG-111's r:render 15-18 ms spikes, about 3 s apart, built nothing: this says whether they made render objects.
+  const JR = window.__benchRO = window.__benchRO || { made: [], n: 0, on: true };
+  JR.on = true; JR.made.length = 0; JR.n = 0;
+  const RO = R && R._objects;
+  if (RO && typeof RO.createRenderObject === 'function' && !RO.__cl238) {
+    const cro = RO.createRenderObject;
+    RO.createRenderObject = function (nodes, geometries, renderer, object, material, scene, camera) {
+      const j = window.__benchRO;
+      if (j && j.on) { j.n++; if (j.made.length < 4000) { try {
+        const path = []; for (let n = object; n && path.length < 3; n = n.parent) path.push(n.name || n.type);
+        const cam = !camera ? '' : camera === TT.camera ? 'scene' : camera.isOrthographicCamera ? 'ortho' : camera.type;
+        j.made.push({ frame: P.frame, obj: path.join(' < '), mat: material ? material.type : '', cam });
+      } catch (e) {} } }
+      return cro.apply(this, arguments);
+    };
+    RO.__cl238 = true;
+  }
+  const counts = () => { const m = (R && R.info && R.info.memory) || {}; return [(R && R._pipelines && R._pipelines.caches && R._pipelines.caches.size) || 0, m.textures || 0, m.geometries || 0, (window.__benchBuilds && window.__benchBuilds.n) || 0, window.__dwSunShadowN || 0, (window.__benchRO && window.__benchRO.n) || 0]; };
   if (!P.__cl223) {
-    const begin = P.begin; let last = counts();
-    P.begin = function () { const n0 = this.spikes.length; begin.call(this); const now = counts();
-      if (this.spikes.length > n0) { const sp = this.spikes[this.spikes.length - 1]; sp.newPipelines = now[0] - last[0]; sp.newTextures = now[1] - last[1]; sp.newGeometries = now[2] - last[2]; }
-      last = now; };
+    const begin = P.begin; let last = counts(), lastT = performance.now();
+    P.begin = function () { const n0 = this.spikes.length, tb = performance.now(); begin.call(this); const now = counts();
+      if (this.spikes.length > n0) { const sp = this.spikes[this.spikes.length - 1]; sp.newPipelines = now[0] - last[0]; sp.newTextures = now[1] - last[1]; sp.newGeometries = now[2] - last[2]; sp.newBuilds = now[3] - last[3]; sp.sunShadow = now[4] - last[4]; sp.newRenderObjects = now[5] - last[5]; sp.t0 = +lastT.toFixed(2); sp.t1 = +tb.toFixed(2); }
+      last = now; lastT = tb; };
     P.__cl223 = true;
   }
   // CL-226: who the new pipelines are for. AG-105 found 21-26 of a night's ~30 spikes each built one (22-48 ms in
@@ -230,7 +281,26 @@ const PROF_END = `(() => {
   const groups = new Map();
   for (const x of J.made) { const k = x.obj + ' | ' + x.mat + ' | ' + x.state + ' | ' + x.cam; const g = groups.get(k) || { k, n: 0, newShaders: 0, frames: [] }; g.n++; if (x.newShaders) g.newShaders++; if (g.frames.length < 6) g.frames.push(x.frame); groups.set(k, g); }
   const pipes = { made: J.made.length, released: J.released, withNewShaders: J.made.filter((x) => x.newShaders).length, top: [...groups.values()].sort((a, b) => b.n - a.n).slice(0, 15), first: J.made.slice(0, 12) };
-  return { rep, gpu: G.samples.slice(), pipes };
+  // CL-232: the node builds, grouped the same way.
+  const JB = window.__benchBuilds || { made: [], n: 0 };
+  JB.on = false;
+  const bg = new Map();
+  for (const x of JB.made) { const k = x.obj + ' | ' + x.kind + (x.count > 1 ? ' x' + x.count : '') + ' | ' + x.mat; const g = bg.get(k) || { k, n: 0, frames: [] }; g.n++; if (g.frames.length < 6) g.frames.push(x.frame); bg.set(k, g); }
+  const builds = { made: JB.n, top: [...bg.values()].sort((a, b) => b.n - a.n).slice(0, 15),
+    zombieAndEcho: JB.made.filter((x) => /zombie-skin|feral-motion-echo/.test(x.obj)) };
+  // CL-238: the render objects, grouped by object | material | camera, the most made first; and for each of the first
+  // eight spikes, what it made (its top five groups).
+  const JR = window.__benchRO || { made: [], n: 0 };
+  JR.on = false;
+  const rg = new Map(), byFrame = new Map();
+  for (const x of JR.made) {
+    const k = x.obj + ' | ' + x.mat + ' | ' + x.cam;
+    const g = rg.get(k) || { k, n: 0, frames: [] }; g.n++; if (g.frames.length < 6 && g.frames[g.frames.length - 1] !== x.frame) g.frames.push(x.frame); rg.set(k, g);
+    const f = byFrame.get(x.frame) || new Map(); f.set(k, (f.get(k) || 0) + 1); byFrame.set(x.frame, f);
+  }
+  const spikeRO = (rep.spikes || []).slice(0, 8).map((sp) => { const f = byFrame.get(sp.frame); return { frame: sp.frame, n: f ? [...f.values()].reduce((a, b) => a + b, 0) : 0, top: f ? [...f.entries()].sort((a, b) => b[1] - a[1]).slice(0, 5).map(([k, n]) => n + ' ' + k) : [] }; });
+  const renderObjects = { made: JR.n, perFrame: +(JR.n / Math.max(1, rep.frames || 1)).toFixed(2), top: [...rg.values()].sort((a, b) => b.n - a.n).slice(0, 15), spikes: spikeRO };
+  return { rep, gpu: G.samples.slice(), pipes, builds, renderObjects };
 })()`;
 
 // --census (CL-211; on with --cpu): what the renderer walks every frame. Every Object3D under the scene, grouped by
@@ -324,6 +394,41 @@ function cpuSummary(profile) {
     }
   }
   return { all, idle, self, total, edges };
+}
+
+// CL-239: the main thread's GC events (complete events, or begin/end pairs) by name, and their overlap with each spike
+// frame [t0, t1] (performance.now ms, put on the trace clock by the 'dw-gc-sync' mark).
+function gcSummary(tr, spikes, frames) {
+  const ev = tr.events;
+  const threadName = new Map();
+  for (const e of ev) if (e.ph === 'M' && e.name === 'thread_name') threadName.set(e.pid + ':' + e.tid, e.args && e.args.name);
+  const sync = ev.find((e) => e.name === 'dw-gc-sync' && /user_timing/.test(e.cat || ''));
+  const main = sync ? sync.pid + ':' + sync.tid : [...threadName.entries()].find(([, n]) => n === 'CrRendererMain')?.[0];
+  const off = sync && tr.sync != null ? sync.ts - tr.sync * 1000 : null;   // trace us = perf ms * 1000 + off
+  const isGc = (e) => /GC|Scavenge|Mark|Sweep|Compact|Evacuat/i.test(e.name) && /gc|v8|devtools\.timeline/.test(e.cat || '');
+  const spans = [], open = new Map();
+  for (const e of ev) {
+    if (!isGc(e) || (e.pid + ':' + e.tid) !== main) continue;
+    if (e.ph === 'X') spans.push({ name: e.name, a: e.ts, b: e.ts + (e.dur || 0) });
+    else if (e.ph === 'B') open.set(e.name, e.ts);
+    else if (e.ph === 'E' && open.has(e.name)) { spans.push({ name: e.name, a: open.get(e.name), b: e.ts }); open.delete(e.name); }
+  }
+  // Nested events (a phase inside its cycle) would count twice: the totals keep only the outermost span at each instant.
+  spans.sort((x, y) => x.a - y.a);
+  const outer = []; for (const sp of spans) { const l = outer[outer.length - 1]; if (l && sp.a < l.b) { if (sp.b > l.b) l.b = sp.b; } else outer.push({ a: sp.a, b: sp.b }); }
+  const byName = {};
+  for (const sp of spans) { const k = byName[sp.name] || (byName[sp.name] = { n: 0, ms: 0 }); k.n++; k.ms += (sp.b - sp.a) / 1000; }
+  for (const k in byName) byName[k].ms = Math.round(byName[k].ms * 10) / 10;
+  const totalMs = outer.reduce((s, o) => s + (o.b - o.a), 0) / 1000;
+  const overlap = (a, b, list) => list.reduce((s, o) => s + Math.max(0, Math.min(b, o.b) - Math.max(a, o.a)), 0) / 1000;
+  const perSpike = off == null ? [] : spikes.filter((sp) => sp.t0 != null).slice(0, 60).map((sp) => {
+    const a = sp.t0 * 1000 + off, b = sp.t1 * 1000 + off;
+    const names = {}; for (const x of spans) { const o = Math.max(0, Math.min(b, x.b) - Math.max(a, x.a)) / 1000; if (o > 0.05) names[x.name] = Math.round(((names[x.name] || 0) + o) * 10) / 10; }
+    return { frame: sp.frame, ms: sp.ms, wallMs: Math.round((sp.t1 - sp.t0) * 10) / 10, gcMs: Math.round(overlap(a, b, outer) * 10) / 10, names };
+  });
+  const withGc = perSpike.filter((x) => x.gcMs >= 1).length;
+  return { synced: off != null, mainThread: threadName.get(main) || main || null, events: ev.length, totalMs: Math.round(totalMs * 10) / 10,
+    perFrameMs: Math.round(totalMs / Math.max(1, frames) * 100) / 100, byName, spikesWithGc: withGc + '/' + perSpike.length, spikes: perSpike };
 }
 
 function median(nums) {
@@ -435,6 +540,25 @@ try {
     await page.send('Profiler.start');
     console.log('bench: CPU profile on');
   }
+  // CL-239: GB-218 found AG-111's 3-second spikes are every phase of one frame at 2.5-3x its own average at once (render,
+  // matrices, zombies, the marine), nothing built, the heap growing ~1 MB a spike and ~10 MB freed a few frames later:
+  // the look of V8 marking the heap (write barriers and marking steps on the main thread) or another process. This
+  // records the GC on the page's main thread and lines it up with the spike frames (their t0/t1, by a sync mark).
+  let gcTrace = null;
+  if (GC_ON && PROF_ON) {
+    gcTrace = { events: [], done: null };
+    gcTrace.done = new Promise((resolve) => {
+      page.conn.onEvent((msg) => {
+        if (msg.sessionId !== page.sessionId) return;
+        if (msg.method === 'Tracing.dataCollected') { for (const e of msg.params.value || []) gcTrace.events.push(e); }
+        if (msg.method === 'Tracing.tracingComplete') resolve();
+      });
+    });
+    await page.send('Tracing.start', { transferMode: 'ReportEvents', traceConfig: { recordMode: 'recordAsMuchAsPossible',
+      includedCategories: ['disabled-by-default-v8.gc', 'blink.user_timing', '__metadata'] } });
+    gcTrace.sync = await page.evaluate(`(() => { performance.mark('dw-gc-sync'); const m = performance.getEntriesByName('dw-gc-sync').pop(); return m ? m.startTime : null; })()`);
+    console.log('bench: GC trace on');
+  }
   if (ALLOC_ON) {
     await page.send('HeapProfiler.enable');
     await page.send('HeapProfiler.startSampling', { samplingInterval: 16384, includeObjectsCollectedByMajorGC: true, includeObjectsCollectedByMinorGC: true });
@@ -491,6 +615,11 @@ try {
   }
   if (PROF_ON) {
     const got = await page.evaluate(PROF_END);
+    if (gcTrace) {
+      await page.send('Tracing.end', {}, 180000);
+      await Promise.race([gcTrace.done, new Promise((r) => setTimeout(r, 120000))]);
+      got.gc = gcSummary(gcTrace, (got.rep && got.rep.spikes) || [], (got.rep && got.rep.frames) || 1);
+    }
     const r2 = (n) => Math.round(n * 100) / 100;
     const phases = (got.rep && got.rep.phases) || [];
     const tickMs = phases.reduce((s, p) => s + p.avg, 0);
@@ -505,13 +634,19 @@ try {
       spikes: ((got.rep && got.rep.spikes) || []).slice(0, 8),
       // CL-223: every spike over 25 ms (up to PROF's 60) sorted by what it did: built pipelines, uploaded textures or
       // geometry, freed 2 MB or more of heap (a garbage collection), or none of these (the game's own code).
-      spikeCauses: (() => { const all = (got.rep && got.rep.spikes) || [], c = { spikes: all.length, pipelines: 0, uploads: 0, gc: 0, code: 0 };
-        for (const sp of all) { if (sp.newPipelines > 0) c.pipelines++; else if (sp.newTextures > 0 || sp.newGeometries > 0) c.uploads++; else if (sp.freedMB >= 2) c.gc++; else c.code++; }
+      spikeCauses: (() => { const all = (got.rep && got.rep.spikes) || [], c = { spikes: all.length, pipelines: 0, builds: 0, uploads: 0, sunShadow: 0, gc: 0, code: 0 };
+        for (const sp of all) { if (sp.newPipelines > 0) c.pipelines++; else if (sp.newBuilds > 0) c.builds++; else if (sp.newTextures > 0 || sp.newGeometries > 0) c.uploads++; else if (sp.sunShadow > 0) c.sunShadow++; else if (sp.freedMB >= 2) c.gc++; else c.code++; }
         return c; })(),
       gpuMs: gpu.length ? r2(median(gpu)) : (profStart.gpu === 'on' ? 'no samples' : profStart.gpu),
       gpuSamples: gpu.length,
       // CL-226: every pipeline built while measuring, and what for (the PROF_END journal)
-      pipelines: got.pipes || null
+      pipelines: got.pipes || null,
+      // CL-232: every node build while measuring (a material's node graph compiled), grouped by object | kind | material
+      builds: got.builds || null,
+      // CL-238: every render object made while measuring (object | material | camera), and what each spike made
+      renderObjects: got.renderObjects || null,
+      // CL-239 (--gc): V8's GC on the page's main thread while measuring, and how much of it fell in each spike frame
+      gc: got.gc || null
     };
   }
   if (cpuProfile) {

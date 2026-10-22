@@ -1,0 +1,34 @@
+<!doctype html><html><body><script type="importmap">{"imports":{"three":"../../vendor/three/three.webgpu.js","three/webgpu":"../../vendor/three/three.webgpu.js","three/tsl":"../../vendor/three/three.tsl.js"}}</script>
+<script type="module">
+// CL-238: what makes three r175 make new render objects (and so new bindings) for meshes it has drawn before.
+// Ten lit meshes and two point lights; render, then change one thing at a time and count createRenderObject calls.
+import * as THREE from 'three/webgpu';
+const out = window.__out = {};
+try {
+  const renderer = new THREE.WebGPURenderer({ antialias: false });
+  await renderer.init();
+  const RO = renderer._objects; out.hasObjects = !!(RO && RO.createRenderObject);
+  let n = 0; const cro = RO.createRenderObject; RO.createRenderObject = function () { n++; return cro.apply(this, arguments); };
+  const rt = new THREE.RenderTarget(64, 32);
+  const scene = new THREE.Scene();
+  const cam = new THREE.PerspectiveCamera(50, 2, 0.1, 50); cam.position.set(0, 2, 8); cam.lookAt(0, 0, 0);
+  scene.add(new THREE.HemisphereLight(0xffffff, 0x222222, 0.5));
+  const sun = new THREE.DirectionalLight(0xffffff, 1); sun.position.set(3, 5, 2); sun.castShadow = true; scene.add(sun);
+  renderer.shadowMap.enabled = true;
+  const pl1 = new THREE.PointLight(0xffaa66, 2, 10), pl2 = new THREE.PointLight(0x66aaff, 2, 10); pl1.position.set(-2, 1, 1); pl2.position.set(2, 1, 1); scene.add(pl1, pl2);
+  const meshes = [];
+  for (let i = 0; i < 10; i++) { const m = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.5, 0.5), new THREE.MeshStandardNodeMaterial({ color: 0x888888 })); m.position.set(i - 4.5, 0, 0); m.castShadow = true; scene.add(m); meshes.push(m); }
+  renderer.setRenderTarget(rt);
+  const draw = () => { const n0 = n; renderer.render(scene, cam); return n - n0; };
+  out.first = draw(); out.second = draw();
+  pl2.visible = false; out.lightHidden = draw(); out.lightHiddenAgain = draw();
+  pl2.visible = true; out.lightShown = draw();
+  pl2.intensity = 0; out.lightZeroIntensity = draw();
+  pl2.intensity = 2; sun.shadow.needsUpdate = true; sun.shadow.autoUpdate = false; out.shadowRedraw = draw(); out.noShadow = draw();
+  meshes[0].visible = false; draw(); meshes[0].visible = true; out.meshBack = draw();
+  scene.remove(meshes[1]); draw(); scene.add(meshes[1]); out.meshReadded = draw();
+  meshes[2].castShadow = false; sun.shadow.needsUpdate = true; out.castOff = draw();
+  meshes[2].castShadow = true; sun.shadow.needsUpdate = true; out.castOn = draw();
+  out.done = true;
+} catch (e) { out.err = String(e && e.stack || e); }
+</script></body></html>

@@ -1,0 +1,11 @@
+{
+  "chunk": "C",
+  "range": "t132..t163",
+  "count": 32,
+  "summaryLine": "32 checks: 465 pass, 0 fail",
+  "initialFailed": [],
+  "flakyClearedOnRerun": [],
+  "heldReds": [],
+  "initialFailuresDetail": [],
+  "rerunFailuresDetail": []
+}

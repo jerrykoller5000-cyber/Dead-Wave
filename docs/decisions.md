@@ -4,6 +4,15 @@ Every call made for the game and the crew, in full, newest first. Claude writes 
 they stand unless Jerry overrides them. `crew/BOARD.md` lists each one on a single line; this file has the
 details. Moved here from the board on 2026-09-29 so the board stays short. Nothing was cut.
 
+- **D-85 · The title in about 14 s warm for 1.0 (Jerry, 2026-10-21; Claude, in chat).** GP-19951 measured the title at
+  14.1-15.0 s warm and about 14.3-17.7 s cold, against D-76's 6.3 s. The world builds in the same ~2.6 s as then; the
+  rest is the warm-up that compiles every shader and runs the hidden staged and live fights before the menu (CL-192,
+  CL-227, CL-229, CL-232, GP-19949), which is what keeps night 20 free of mid-fight builds (60 fps, 1 % low 55-56).
+  ChatGPT's first trim saved under a second warm and nothing cold. Claude asked: accept ~14 s, show the title early
+  with Start held until the warm-up ends, or cut the warm-up back toward 6 s (mid-night hitches return). Jerry: accept
+  ~14 s for 1.0. The loading bar keeps moving; the title budget in AGENTS.md rule 12 is now about 15 s warm and
+  18 s cold; revisit for 1.1 if the friends' notes ask for it.
+
 - **D-84 · 1.0 ships on itch.io; Steam comes with 1.1 (Jerry, 2026-10-20; Claude, in chat).** Jerry wanted Steam at
   first and asked about itch.io; Claude's view: itch.io for 1.0 (free, up in minutes, no review queue, the share is
   his to set, a safe first public release whose fixes go out the same day, and it does not stop a Steam release

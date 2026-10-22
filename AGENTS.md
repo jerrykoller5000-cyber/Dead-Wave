@@ -155,7 +155,8 @@ card in `crew/status/`, appends to `crew/LOG.md`, and writes their own handoff n
     keys there; don't hard-code copy. The loop is always: skulls, then bank at the HQ window,
     then Cash.
 12. **Budgets.**
-    - The title screen appears within 15 s cold and about 6 s warm on Jerry's PC (D-76: 6.3 s measured, and Jerry: fine).
+    - The title screen appears within about 18 s cold and 15 s warm on Jerry's PC (D-85, 2026-10-21: ~14 s warm accepted
+      for 1.0, the shader warm-up included; it was about 6 s before the warm-up, D-76).
     - 60 fps with 48 zombies, from the standard view.
     - No CDN dependencies, and no build step: the game runs straight from the folder.
 13. **Report honestly.** Say what failed and what you couldn't verify. Never skip, weaken or

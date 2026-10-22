@@ -63,8 +63,8 @@
     ok(zs.length === 5, 'five spawned inside the marine (' + zs.length + ')');
     await wait(120);
     let worst = 9, worstKind = '', samples = 0;
-    const t1 = Date.now();
-    while (Date.now() - t1 < 3500) {
+    const s1 = T.getSimTime(), t1 = Date.now();
+    while (T.getSimTime() - s1 < 3.5 && Date.now() - t1 < 25000) {
       for (const z of zs) {
         if (!z.alive || Math.abs(z.mesh.position.y - p.y) > 1.5) continue;
         const gap = Math.hypot(z.mesh.position.x - p.x, z.mesh.position.z - p.z) - (z.radius + 0.42);

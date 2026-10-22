@@ -69,7 +69,7 @@ export function motionIntensity(speed, angular) {
 export function createFeralMotion({THREE:T, scene, actors, camera, active, inDomain=()=>true}) {
   const history=new WeakMap(), records=new Map();
   const forward=new T.Vector3();
-  let enabled=true, clock=0;
+  let enabled=true, clock=0, primed=null;
   const eligible=z=>z.typeKey==='feral'&&z.alive&&z.mesh?.visible&&!z.farLod&&inDomain(z)&&
     !(z.riseT>0||z.knockT>0||z.getUpT>0||z.windowClimb||z.belowRiseT>0||z.crawling||z.hopping||z.sleeping||z.poiGuard&&!z.poiAwake);
   function release(z){
@@ -111,6 +111,16 @@ export function createFeralMotion({THREE:T, scene, actors, camera, active, inDom
     }
   }
   function clear(){for(const z of records.keys())release(z);}
+  function primeVisuals(z){
+    if(primed)return ()=>{};
+    const record=make(z);if(!record)return ()=>{};
+    records.delete(z); // The inactive loading loop clears live records between warm frames.
+    snapshot(z,record,1);
+    for(const part of record.echoes[0].parts){part.mesh.material.opacity=.12;part.mesh.visible=true;}
+    // Keep the compiled material alive after the warm frame; disposing it evicts its pipeline.
+    primed=record;
+    return ()=>{for(const echo of record.echoes)for(const part of echo.parts){part.mesh.visible=false;scene.remove(part.mesh);}};
+  }
   function update(dt){
     if(!(dt>0)||!Number.isFinite(dt))return;
     clock+=dt;
@@ -152,7 +162,7 @@ export function createFeralMotion({THREE:T, scene, actors, camera, active, inDom
       if(c.strength>.04&&record.sample<=0){snapshot(c.z,record,c.strength);record.sample=FERAL_BLUR.interval;}
     }
   }
-  return { update,clear, turn:z=>history.get(z)?.turn||0,
+  return { update,clear,primeVisuals, turn:z=>history.get(z)?.turn||0,
     setEnabled(v){enabled=!!v;if(!enabled)clear();},
     state:()=>({enabled,actors:records.size,echoes:[...records.values()].reduce((n,r)=>n+r.echoes.filter(e=>e.parts.some(p=>p.mesh.visible)).length,0)}) };
 }

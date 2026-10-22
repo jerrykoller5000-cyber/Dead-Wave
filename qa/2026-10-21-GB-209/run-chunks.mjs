@@ -1,0 +1,25 @@
+﻿import { spawnSync, spawn } from 'node:child_process';
+import fs from 'node:fs';
+import path from 'node:path';
+const r=(a,b)=>Array.from({length:b-a+1},(_,i)=>'t'+(a+i));
+const CH={'0':r(0,67),A:r(68,99),B:r(100,131),C:r(132,163),D:r(164,195),E:r(196,229),F:r(240,270)};
+const order=(process.argv[2]||'0ABCDEF').split('');
+const dir=path.join('qa','2026-10-21-GB-209');
+const run=(k)=>new Promise(res=>{
+  const tests=CH[k].filter(t=>fs.existsSync(path.join('tools','tests',t+'.js')));
+  const log=path.join(dir,`chunk-${k}.log`);
+  fs.writeFileSync(log,`# GB-209 chunk ${k}: ${tests.join(' ')}\n# Started: ${new Date().toISOString()}\n\n`);
+  const c=spawn(process.execPath,['tools/tests/run-all.mjs',...tests,'--agent','grokbot','--task','GB-209','--jobs','1','--checks',`GB-209 chunk ${k} (${tests[0]}..${tests.at(-1)})`,'--minutes','60','--all-fails'],{stdio:['ignore','pipe','pipe']});
+  const ap=b=>fs.appendFileSync(log,b);
+  c.stdout.on('data',ap);c.stderr.on('data',ap);
+  c.on('exit',code=>{ap(`\n# Finished: ${new Date().toISOString()} code=${code}\n`);
+    const L=fs.readFileSync(log,'utf8').split(/\r?\n/);
+    const sum=L.filter(l=>/\d+ pass/.test(l)).at(-1)||`exit ${code}`;
+    const fails=L.filter(l=>/^\s*(FAIL|\S+\s+FAIL)/.test(l)||/\bFAIL\b/.test(l)).map(l=>l.trim()).filter((v,i,a)=>a.indexOf(v)===i);
+    let msg=`GB-209 chunk ${k} (${tests[0]}..${tests.at(-1)}): ${sum.trim()}`+(fails.length?' | '+fails.join(' | '):' | no FAIL lines');
+    if(msg.length>3500)msg=msg.slice(0,3500)+' ... (full list in '+log+')';
+    spawnSync(process.execPath,['crew/crew.mjs','note','grokbot',msg],{stdio:'inherit'});
+    console.log('DONE '+k+' '+sum);res();});
+});
+for(const k of order) await run(k);
+console.log('ALL DONE');

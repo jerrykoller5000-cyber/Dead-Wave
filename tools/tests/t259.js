@@ -1,5 +1,7 @@
 // t259 — CU-150: Quit asks before it ends a run. Closing the tab writes the run down and
 // asks the browser to confirm. Reset profile asks, then erases the tt_ keys (D-31).
+// The run count is for the profile this page loaded. run-all clears localStorage
+// before boot, so one quit is one run. A shared profile was reporting 12.
 (async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const best = () => { try { return JSON.parse(localStorage.getItem('tt_best_run') || 'null'); } catch (_) { return null; } };

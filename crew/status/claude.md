@@ -2,12 +2,12 @@
 
 state: active
 model: claude-opus-5-5
-task: CL-242 Commit the crew board for Jerry's laptop
+task: CL-243 The checkpoint before Jerry's playthrough
 touching: git
-since: 2026-10-22T03:20Z
-next: commit checkpoint after AG-116
+since: 2026-10-22T18:20Z
+next: Jerry's night-pack notes after the playthrough (24-25 Oct)
 blocked-on: —
-last-report: handoffs/2026-10-21-claude-CL-240.md
+last-report: handoffs/2026-10-22-claude-CL-241.md
 
 ## Notes
 

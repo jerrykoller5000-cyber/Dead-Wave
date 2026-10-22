@@ -50,8 +50,11 @@
     // Standing on level ground first: how high his hips stand over the ground (both legs as they are on the flat).
     const hipOver = () => { T.player.updateMatrixWorld(true); const h = [ud.legLG, ud.legRG].map((g) => g.getWorldPosition(new V()));
       return Math.min(...h.map((w) => w.y - T.sampleHeight(w.x, w.z))); };
+    // CL-233: he settles on game time (the legs ease onto the ground), and the suite's page can run a few frames a second:
+    // the settling waits are 1.2 s of game time, with a long wall-clock cap.
+    const settle = async () => { const s0 = T.getSimTime(), w0 = Date.now(); while (T.getSimTime() - s0 < 1.2 && Date.now() - w0 < 30000) await wait(30); };
     { const fx = 18, fz = 18; T.levelGroundRect(fx - 4, fz - 4, fx + 4, fz + 4, T.sampleHeight(fx, fz), 3); p.set(fx, T.sampleHeight(fx, fz), fz); T.setAimTargetDbg(fx, fz + 8); }
-    await wait(1200);
+    await settle();
     const flatHip = hipOver();
     let flatWalk = Infinity;
     { key('KeyW', true); await wait(250); const t0 = Date.now();
@@ -60,7 +63,7 @@
     out.push('INFO on the flat, walking, the lowest sole is ' + f3(flatWalk) + ' m');
     // Calibrate: standing still on the slope, and crouched on level ground.
     p.set(best.x, T.sampleHeight(best.x, best.z), best.z); T.setAimTargetDbg(best.x + best.ux * 8, best.z + best.uz * 8);
-    await wait(1200);
+    await settle();
     { const s0 = soles(); for (const s of ['L', 'R']) ok(s0[s] > -0.04 && s0[s] < 0.06, 'standing on the hill: ' + s + ' sole on the ground under it (' + f3(s0[s]) + ' m)'); }
     { const h = hipOver(); ok(Math.abs(h - flatHip) < 0.04, 'and he stands up on it, not half crouched: hips ' + f3(h) + ' m over the lower ground (' + f3(flatHip) + ' on the flat)'); }
     // Walking on it for real (not pinned: a pinned walk is posed where the step took him, then put back, so on a hill

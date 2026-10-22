@@ -28,7 +28,9 @@
   await wait(40);
   let beepT = null; for (let i = 0; i < 40 && beepT == null; i++) { const c = calls.find(c => c[0] === 'mineBeep'); if (c) beepT = c[c.length - 1]; else await wait(40); }
   ok(beepT != null && T.builds.includes(mine), 'stepped on: it beeps and has not gone off yet');
-  await wait(500);
+  // CL-230: the fuse runs on game time; the suite's page can run a few frames a second (dt capped at 0.05), so wait
+  // for it on the sim clock, not 500 ms of wall time.
+  { const s0 = T.getSimTime(), w0 = Date.now(); while (T.builds.includes(mine) && T.getSimTime() - s0 < 2 && Date.now() - w0 < 30000) await wait(30); }
   ok(!T.builds.includes(mine), 'and then it goes off');
   // builds being attacked and destroyed
   calls.length = 0;

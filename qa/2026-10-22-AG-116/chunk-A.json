@@ -1,0 +1,91 @@
+{
+  "chunk": "A",
+  "range": "t68..t99",
+  "count": 32,
+  "summaryLine": "32 checks: 437 pass, 4 fail",
+  "initialFailed": [
+    "t74",
+    "t75",
+    "t76",
+    "t80"
+  ],
+  "flakyClearedOnRerun": [
+    "t75",
+    "t76"
+  ],
+  "heldReds": [
+    "t74",
+    "t80"
+  ],
+  "initialFailuresDetail": [
+    {
+      "status": "FAIL",
+      "name": "t74",
+      "pass": 17,
+      "fail": 1,
+      "secs": 52.6,
+      "detail": "",
+      "failLines": [
+        "FAIL and come for him (10.7 -> 11.2 m)"
+      ]
+    },
+    {
+      "status": "FAIL",
+      "name": "t75",
+      "pass": 15,
+      "fail": 1,
+      "secs": 50,
+      "detail": "",
+      "failLines": [
+        "FAIL they crowd him: 2 of 5 at arm’s length"
+      ]
+    },
+    {
+      "status": "FAIL",
+      "name": "t76",
+      "pass": 15,
+      "fail": 1,
+      "secs": 56.2,
+      "detail": "",
+      "failLines": [
+        "FAIL never in step: the closest pair differs by 0.009 rad on average"
+      ]
+    },
+    {
+      "status": "FAIL",
+      "name": "t80",
+      "pass": 13,
+      "fail": 1,
+      "secs": 171.7,
+      "detail": "",
+      "failLines": [
+        "FAIL a spider on a line that grazes the corner takes one with room (start 0.29 m clear, end 0.10 m; tight 14% of the time after 3 s; closest 6.0 m)"
+      ]
+    }
+  ],
+  "rerunFailuresDetail": [
+    {
+      "status": "FAIL",
+      "name": "t74",
+      "pass": 17,
+      "fail": 1,
+      "secs": 53.2,
+      "detail": "",
+      "failLines": [
+        "FAIL and come for him (12.9 -> 14.4 m)"
+      ]
+    },
+    {
+      "status": "FAIL",
+      "name": "t80",
+      "pass": 12,
+      "fail": 2,
+      "secs": 163.2,
+      "detail": "",
+      "failLines": [
+        "FAIL it comes round until the house is out of the line (clear after 5.7 s, in the line 55% of the time after; still behind the house)",
+        "FAIL a spider on a line that grazes the corner takes one with room (start 0.29 m clear, end 0.00 m; tight 37% of the time after 3 s; closest 6.0 m)"
+      ]
+    }
+  ]
+}

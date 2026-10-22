@@ -1,0 +1,114 @@
+# GB-209 chunk 0: t0 t1 t2 t3 t4 t5 t6 t7 t8 t9 t10 t11 t12 t13 t14 t15 t16 t17 t18 t19 t20 t21 t22 t23 t24 t25 t26 t27 t28 t29 t30 t31 t32 t33 t34 t35 t36 t37 t38 t39 t40 t41 t42 t43 t44 t45 t46 t47 t48 t49 t50 t51 t52 t53 t54 t55 t56 t57 t58 t59 t60 t61 t62 t63 t64 t65 t66 t67
+# Started: 2026-10-21T07:08:08.740Z
+
+Game-test request d3bdce84-efe1-4879-af2a-52c4303aef26 queued at position 1. Waiting...
+GRANT grokbot GB-209: starting one game-test command
+check-players: 303 player.position reads, all in the allowed places
+ok    t0       2 pass   0 fail  22.6s
+ok    t1       4 pass   0 fail  40.1s
+ok    t2       5 pass   0 fail  40.8s
+ok    t3       5 pass   0 fail  40.3s
+ok    t4       6 pass   0 fail  40.0s
+ok    t5      31 pass   0 fail  42.5s
+ok    t6      21 pass   0 fail  71.0s
+ok    t7      16 pass   0 fail  40.9s
+ok    t8       3 pass   0 fail  48.0s
+ok    t9      19 pass   0 fail  43.7s
+ok    t10     30 pass   0 fail  44.1s
+ok    t11     13 pass   0 fail  43.5s
+ok    t12     22 pass   0 fail  72.2s
+ok    t13      8 pass   0 fail  72.1s
+ok    t14     13 pass   0 fail  43.5s
+ok    t15     10 pass   0 fail  103.3s
+info  t16      0 pass   0 fail  68.7s  — 692
+ok    t17     10 pass   0 fail  72.6s
+ok    t18      7 pass   0 fail  44.0s
+ok    t19      6 pass   0 fail  101.2s
+info  t20      0 pass   0 fail  69.5s  — -5,-15 edge0 L0 yaw 0.00 rx 0.00 rz 0.00 ch 1
+ok    t21     16 pass   0 fail  98.2s
+info  t22      0 pass   0 fail  69.8s  — builds box 22,76 / -10,46 barrels before 6 after 12
+ok    t23      8 pass   0 fail  135.1s
+FAIL  t24     13 pass   1 fail  81.8s
+ok    t25     29 pass   0 fail  69.9s
+info  t26      0 pass   0 fail  71.0s  — pieces 692 failed: 
+info  t27      0 pass   0 fail  74.9s  — EMPTY WORLD visible meshes: 3460
+info  t28      0 pass   0 fail  45.2s  — shambler total 14: hips:1m/1mat torso:1m/1mat armL:1m/1mat Group:1m/1mat armR:1m/1mat Grou
+ok    t29     12 pass   0 fail  49.5s
+info  t30      0 pass   0 fail  47.3s  — turret at 4.0,-12.0 y -3.17
+ok    t31     26 pass   0 fail  49.2s
+info  t32      0 pass   0 fail  76.9s  — road pieces: wall/door@-38.0 wall/door@-24.0 wire/gate@-20.0 barricade/gate@-18.0
+ok    t33      4 pass   0 fail  48.2s
+ok    t34     20 pass   0 fail  79.6s
+ok    t35     28 pass   0 fail  94.3s
+ok    t36     22 pass   0 fail  86.9s
+FAIL  t37     16 pass   1 fail  194.1s
+ok    t38     12 pass   0 fail  95.3s
+ok    t39     15 pass   0 fail  49.9s
+ok    t40      6 pass   0 fail  62.6s
+ok    t41      9 pass   0 fail  54.8s
+           INFO root mesh 191.4 trees 192.2 hill 196.7 | shale mesh 201.3 trees 201.9 hill 210.0 | iron mesh 196.6 trees 194.2 hill 202.3 | wet mesh 199.8 trees 192.4 hill 205.0 | hill mesh 199.4 trees 197.8 hill 205.8 | chalk mesh 200.6 trees 200.0 hill 208.0
+ok    t42     18 pass   0 fail  33.2s
+ok    t43     35 pass   0 fail  54.3s
+ok    t44      6 pass   0 fail  35.6s
+ok    t45      8 pass   0 fail  34.7s
+ok    t46     11 pass   0 fail  35.8s
+ok    t47     17 pass   0 fail  34.2s
+ok    t48     22 pass   0 fail  55.0s
+ok    t49     32 pass   0 fail  58.1s
+ok    t50     18 pass   0 fail  38.7s
+ok    t51     19 pass   0 fail  58.5s
+ok    t52     17 pass   0 fail  38.0s
+ok    t53     76 pass   0 fail  81.5s
+ok    t54     32 pass   0 fail  61.1s
+FAIL  t55      6 pass   4 fail  63.3s
+ok    t56      1 pass   0 fail  40.5s
+ok    t57     10 pass   0 fail  38.9s
+ok    t58      9 pass   0 fail  70.3s
+ok    t59     48 pass   0 fail  117.6s
+FAIL  t60     41 pass   1 fail  113.2s
+FAIL  t61     17 pass   5 fail  87.7s
+ok    t62      4 pass   0 fail  71.4s
+ok    t63      6 pass   0 fail  74.0s
+ok    t64      8 pass   0 fail  73.4s
+ok    t65     12 pass   0 fail  76.9s
+           INFO largest height change across one puddle: 0.106 m
+ok    t66      4 pass   0 fail  73.5s
+FAIL  t67      8 pass   1 fail  103.2s
+
+68 checks: 952 pass, 13 fail, 8 reported no assertions
+
+no assertions (probe, or the check bailed before asserting):
+  t16    692
+  t20    -5,-15 edge0 L0 yaw 0.00 rx 0.00 rz 0.00 ch 1
+  t22    builds box 22,76 / -10,46 barrels before 6 after 12
+  t26    pieces 692 failed: 
+  t27    EMPTY WORLD visible meshes: 3460
+  t28    shambler total 14: hips:1m/1mat torso:1m/1mat armL:1m/1mat Group:1m/1mat armR:1m/1mat Group:1m/1mat 
+  t30    turret at 4.0,-12.0 y -3.17
+  t32    road pieces: wall/door@-38.0 wall/door@-24.0 wire/gate@-20.0 barricade/gate@-18.0
+
+by owner:
+  Grokbot (builds, wheel, turrets, pillars)
+    t24    1 fail  FAIL and then it goes off
+           FAIL and then it goes off
+  unassigned — triage
+    t37    1 fail  FAIL no panel: the words and button rise on their own (dwRise, dwRise, dwRiseBtn)
+           FAIL no panel: the words and button rise on their own (dwRise, dwRise, dwRiseBtn)
+  unassigned
+    t55    4 fail  FAIL too far: locked
+           FAIL too far: locked
+           FAIL at the approach: locked d=0.00
+           FAIL fuel depot hold ran: 0.00
+           FAIL walking off cancels: null
+    t60    1 fail  FAIL and up within a few seconds: 0.63
+           FAIL and up within a few seconds: 0.63
+    t61    5 fail  FAIL the shot was sampled (7 samples)
+           FAIL the shot was sampled (7 samples)
+           FAIL the fight cut dead, the relief sting alone: calm/null/null
+           FAIL every other sound cleared during the sting
+           FAIL the camera swings round the body: 70 degrees
+           FAIL then the calm music: null
+    t67    1 fail  FAIL near a cave it breathes (undefined)
+           FAIL near a cave it breathes (undefined)
+
+# Finished: 2026-10-21T08:23:07.122Z code=1

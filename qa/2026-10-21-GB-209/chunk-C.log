@@ -1,0 +1,41 @@
+# GB-209 chunk C: t132 t133 t134 t135 t136 t137 t138 t139 t140 t141 t142 t143 t144 t145 t146 t147 t148 t149 t150 t151 t152 t153 t154 t155 t156 t157 t158 t159 t160 t161 t162 t163
+# Started: 2026-10-21T09:44:11.024Z
+
+GRANT grokbot GB-209: starting one game-test command
+check-players: 303 player.position reads, all in the allowed places
+ok    t132    11 pass   0 fail  39.5s
+ok    t133     9 pass   0 fail  53.9s
+ok    t134     9 pass   0 fail  29.0s
+ok    t135     8 pass   0 fail  43.1s
+ok    t136    36 pass   0 fail  61.3s
+ok    t137     9 pass   0 fail  41.3s
+ok    t138     6 pass   0 fail  42.7s
+ok    t139    13 pass   0 fail  56.0s
+ok    t140    17 pass   0 fail  36.5s
+ok    t141     7 pass   0 fail  39.9s
+ok    t142    10 pass   0 fail  58.4s
+ok    t143    17 pass   0 fail  82.4s
+ok    t144     9 pass   0 fail  39.3s
+ok    t145    17 pass   0 fail  24.2s
+ok    t146    43 pass   0 fail  43.0s
+ok    t147    19 pass   0 fail  101.1s
+ok    t148    23 pass   0 fail  58.7s
+ok    t149    16 pass   0 fail  60.7s
+ok    t150    13 pass   0 fail  72.0s
+ok    t151     7 pass   0 fail  25.0s
+ok    t152    27 pass   0 fail  59.2s
+ok    t153    15 pass   0 fail  22.8s
+ok    t154     5 pass   0 fail  38.8s
+ok    t155     2 pass   0 fail  41.0s
+ok    t156    34 pass   0 fail  65.5s
+ok    t157     6 pass   0 fail  39.8s
+ok    t158    13 pass   0 fail  24.8s
+ok    t159    10 pass   0 fail  48.0s
+ok    t160    11 pass   0 fail  63.2s
+ok    t161     7 pass   0 fail  23.4s
+ok    t162    20 pass   0 fail  56.1s
+ok    t163    16 pass   0 fail  58.1s
+
+32 checks: 465 pass, 0 fail
+
+# Finished: 2026-10-21T10:10:05.957Z code=0

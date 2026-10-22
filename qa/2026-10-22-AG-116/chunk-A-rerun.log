@@ -1,0 +1,21 @@
+# AG-116 chunk A rerun: t74 t75 t76 t80
+# Started: 2026-10-22T00:04:56.448Z
+
+GRANT antigravity AG-116: starting one game-test command
+check-players: 304 player.position reads, all in the allowed places
+FAIL  t74     17 pass   1 fail  53.2s
+ok    t75     16 pass   0 fail  48.9s
+ok    t76     16 pass   0 fail  52.9s
+FAIL  t80     12 pass   2 fail  163.2s
+
+4 checks: 61 pass, 3 fail
+
+by owner:
+  unassigned
+    t74    1 fail  FAIL and come for him (12.9 -> 14.4 m)
+           FAIL and come for him (12.9 -> 14.4 m)
+    t80    2 fail  FAIL it comes round until the house is out of the line (clear after 5.7 s, in the line 55% of th
+           FAIL it comes round until the house is out of the line (clear after 5.7 s, in the line 55% of the time after; still behind the house)
+           FAIL a spider on a line that grazes the corner takes one with room (start 0.29 m clear, end 0.00 m; tight 37% of the time after 3 s; closest 6.0 m)
+
+# Finished: 2026-10-22T00:10:16.388Z code=1

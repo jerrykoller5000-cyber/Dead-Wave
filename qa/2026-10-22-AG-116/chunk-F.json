@@ -1,0 +1,41 @@
+{
+  "chunk": "F",
+  "range": "tinspect..t271",
+  "count": 32,
+  "summaryLine": "32 checks: 438 pass, 3 fail, 1 reported no assertions",
+  "initialFailed": [
+    "t248",
+    "t254"
+  ],
+  "flakyClearedOnRerun": [
+    "t248",
+    "t254"
+  ],
+  "heldReds": [],
+  "initialFailuresDetail": [
+    {
+      "status": "FAIL",
+      "name": "t248",
+      "pass": 11,
+      "fail": 1,
+      "secs": 42.7,
+      "detail": "",
+      "failLines": [
+        "FAIL the raised turret, with a clear line, does hit (hp 28/28)"
+      ]
+    },
+    {
+      "status": "FAIL",
+      "name": "t254",
+      "pass": 6,
+      "fail": 2,
+      "secs": 45.6,
+      "detail": "",
+      "failLines": [
+        "FAIL idle wristRG (x 0.28): palm faces the thigh, normal 0.03,0.35,0.93",
+        "FAIL idle wristRG: thumb forward, tip-palm 0.042,0.030"
+      ]
+    }
+  ],
+  "rerunFailuresDetail": []
+}

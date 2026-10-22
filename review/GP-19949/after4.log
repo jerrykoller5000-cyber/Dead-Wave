@@ -1,0 +1,29 @@
+bench: http://127.0.0.1:28200/index.html?debug=1
+bench: scenario night 20 for 30s
+
+bench: graphics high
+bench: night 20 push 2/6  out 4  spawned 214/851
+bench: night 20 push 4/6  out 2  spawned 429/851
+bench: night 20 push 5/6  out 3  spawned 640/851
+bench: night 20 push 6/6  out 48  spawned 716/851
+bench: profiler on, GPU timestamps on
+fps    60.0   (mean of last 10 s)
+low    51.3   (1% low, same windows)
+worst  28.8 ms
+hitch  0   (frames over 50 ms, whole run)
+draws  259
+tris   727048
+frame  16.67 ms = tick 10.71 ms + outside 5.96 ms   gpu 0.33 ms
+  r:render                             4.97 ms   worst 22.9
+  zombies                              1.82 ms   worst 6.4
+  r:matrices                           1.41 ms   worst 3.7
+  m:hold                               0.38 ms   worst 1.0
+  r:cull                               0.38 ms   worst 1.0
+  m:pose                               0.33 ms   worst 0.9
+  w:stairs+roof+birds+bugs+wildlife    0.17 ms   worst 0.4
+  m:idle                               0.17 ms   worst 1.7
+  hud+audio                            0.15 ms   worst 1.8
+  drops+hud                            0.13 ms   worst 2.8
+  w:minimap                            0.11 ms   worst 0.9
+  w:treeFall+leaves+batches            0.11 ms   worst 0.4
+{"scenario":"night","seconds":30,"fps":60,"low":51.3,"worst":28.8,"hitches":0,"draws":259,"triangles":727048,"zombies":48,"gfx":"high","windows":10,"night":20,"push":5,"pushes":6,"last":true,"prof":{"frames":1824,"frameMs":16.67,"tickMs":10.71,"outsideMs":5.96,"top":[{"k":"r:render","avg":4.97,"max":22.9},{"k":"zombies","avg":1.82,"max":6.4},{"k":"r:matrices","avg":1.41,"max":3.7},{"k":"m:hold","avg":0.38,"max":1},{"k":"r:cull","avg":0.38,"max":1},{"k":"m:pose","avg":0.33,"max":0.9},{"k":"w:stairs+roof+birds+bugs+wildlife","avg":0.17,"max":0.4},{"k":"m:idle","avg":0.17,"max":1.7},{"k":"hud+audio","avg":0.15,"max":1.8},{"k":"drops+hud","avg":0.13,"max":2.8},{"k":"w:minimap","avg":0.11,"max":0.9},{"k":"w:treeFall+leaves+batches","avg":0.11,"max":0.4}],"spikes":[{"frame":1315,"ms":29.1,"top":["r:render 22.9","zombies 2.4","r:matrices 1.4","m:pose 0.5"],"heapMB":855.3,"freedMB":-10.5,"newPipelines":0,"newTextures":0,"newGeometries":1,"newBuilds":1,"sunShadow":0,"newRenderObjects":1,"t0":49999.9,"t1":50029.5},{"frame":1732,"ms":28.1,"top":["r:render 7.5","zombies 6.4","r:lightPool 3.3","r:matrices 3.3"],"heapMB":881.8,"freedMB":-0.7,"newPipelines":0,"newTextures":0,"newGeometries":0,"newBuilds":0,"sunShadow":0,"newRenderObjects":0,"t0":56953.8,"t1":56982.6}],"spikeCauses":{"spikes":2,"pipelines":0,"builds":1,"uploads":0,"sunShadow":0,"gc":0,"code":1},"gpuMs":0.33,"gpuSamples":1480,"pipelines":{"made":0,"released":0,"withNewShaders":0,"top":[],"first":[]},"builds":{"made":1,"top":[{"k":"zombie-skin < Group < Scene | SkinnedMesh | MeshStandardNodeMaterial","n":1,"frames":[1315]}],"zombieAndEcho":[{"frame":1315,"obj":"zombie-skin < Group < Scene","kind":"SkinnedMesh","count":0,"mat":"MeshStandardNodeMaterial","zombieKind":"demon","zombieVariant":{"height":1.0533189854343796,"width":1.0415342231177698,"tilt":0.023214924600161713,"lean":0.009658229031436818,"shoulder":0.08232326351776416,"limp":0.6150311018149529,"gait":1.0797470072287978,"phase":5.103598050475021},"zombieSkinIndex":0,"materialState":{"emissive":12103100,"emissiveIntensity":0.14,"transparent":false,"side":0,"roughness":1,"metalness":1,"version":0,"attributes":["position","normal","color","zGlow","uv","skinIndex","skinWeight"]}}]},"renderObjects":{"made":305,"perFrame":0.17,"top":[{"k":"Mesh < Scene | MeshBasicMaterial | scene","n":239,"frames":[4,12,36,44,60,76]},{"k":"zombie-skin < Group < Scene | NodeMaterial | ortho","n":23,"frames":[791,1691]},{"k":"zombie-skin < Group < Scene | MeshStandardNodeMaterial | scene","n":21,"frames":[15,156,196,296,438,557]},{"k":"feral-motion-echo < Scene | MeshBasicMaterial | scene","n":9,"frames":[524,528,532,702,703,706]},{"k":"open-molded-holster < Group < Group | MeshStandardMaterial | scene","n":3,"frames":[1298,1308,1319]},{"k":"Mesh < zombie-fireball < Scene | MeshBasicMaterial | scene","n":2,"frames":[1268]},{"k":"zombie-skin < Group < Scene | MeshStandardMaterial | scene","n":2,"frames":[1450,1709]},{"k":"Mesh < Group < marine-idle-props | MeshStandardMaterial | scene","n":1,"frames":[1391]},{"k":"Mesh < Group < Group | MeshStandardMaterial | scene","n":1,"frames":[1410]},{"k":"Mesh < spitter-jaw < Group | MeshStandardMaterial | scene","n":1,"frames":[1426]},{"k":"open-molded-holster < Group < Group | NodeMaterial | ortho","n":1,"frames":[1691]},{"k":"Mesh < spitter-jaw < Group | NodeMaterial | ortho","n":1,"frames":[1691]},{"k":"Mesh < Group < Group | NodeMaterial | ortho","n":1,"frames":[1691]}],"spikes":[{"frame":1315,"n":1,"top":["1 zombie-skin < Group < Scene | MeshStandardNodeMaterial | scene"]},{"frame":1732,"n":0,"top":[]}]},"gc":null}}

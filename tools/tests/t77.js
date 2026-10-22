@@ -5,6 +5,10 @@
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
   const until = async (cond, ms) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (cond()) return true; await wait(40); } return cond(); };
+  // CL-231: the saw's gas, heat, starter pull and cooling all run on game time, and the suite's page can draw a few frames
+  // a second (dt capped at 0.05). From the saw on, durations are game time (gWait, gUntil), with long wall-clock caps.
+  const gWait = async (ms) => { const s0 = T.getSimTime(), w0 = Date.now(); while (T.getSimTime() - s0 < ms / 1000 && Date.now() - w0 < ms * 40) await wait(20); };
+  const gUntil = async (cond, ms) => { const s0 = T.getSimTime(), w0 = Date.now(); while (T.getSimTime() - s0 < ms / 1000 && Date.now() - w0 < ms * 40) { if (cond()) return true; await wait(20); } return cond(); };
   const errs = []; window.addEventListener('error', (e) => errs.push(String(e.message || e.error)));
   try {
     const B = T.BLADE_STATS, W = T.WEAPON_STATS;
@@ -52,12 +56,13 @@
     { const wo = T.getWeaponOwned(); wo.chainsaw = true; }
     const WO = T.WEAPON_ORDER || [];
     T.setWeapon(WO.indexOf('chainsaw'));
-    await wait(300);
+    await gWait(300);
+    await gUntil(() => !T.sawStartDbg || T.sawStartDbg().phase === 'ready', 3000);   // GP-188: the starter pull (1.02 s) before it runs
     ok(T.getCurrentWeapon() === 'chainsaw' && T.getSawFuel() > 50, 'saw in hand, ' + T.getSawFuel().toFixed(0) + ' s of gas');
     T.runDevCommand('godmode');   // no knockback: the marine stays in the ring
     const run = async (ms) => {
       const f0 = T.getSawFuel(), h0 = T.getSawHeat().heat;
-      T.setMouseFireDbg(true); await wait(ms); T.setMouseFireDbg(false);
+      T.setMouseFireDbg(true); await gWait(ms); T.setMouseFireDbg(false);
       return { fuel: f0 - T.getSawFuel(), heat: T.getSawHeat().heat - h0 };
     };
     // Running free (nothing to cut): 1 s of gas a second, heat creeps.
@@ -70,17 +75,17 @@
       b.mesh.position.set(x, T.sampleHeight(x, z), z); b.hp = 1e6; b.maxHp = 1e6;
       ring.push(b);
     }
-    await wait(150);
+    await gWait(150);
     // One tick: at most 3 bodies bitten.
     const hp0 = ring.map((b) => b.hp);
     T.setSawHeatDbg(0);
     T.setMouseFireDbg(true);
-    await until(() => ring.some((b, k) => b.hp < hp0[k]), 1500);
-    await wait(40);
+    await gUntil(() => ring.some((b, k) => b.hp < hp0[k]), 1500);
+    await gWait(40);
     T.setMouseFireDbg(false);
     const bitten = ring.filter((b, k) => b.hp < hp0[k]).length;
     ok(bitten >= 1 && bitten <= 3, 'one tick bites at most 3 of 8 (' + bitten + ')');
-    await wait(300);
+    await gWait(300);
     // In bodies: gas 2.5x as fast, heat 5x as fast (the same wall time as running free).
     T.setSawHeatDbg(0);
     const cut = await run(1500);
@@ -89,20 +94,20 @@
     // Near the top it overheats and stalls, trigger still held.
     T.setSawHeatDbg(0.93);
     T.setMouseFireDbg(true);
-    const stalled = await until(() => T.getSawHeat().overheat, 4000);
+    const stalled = await gUntil(() => T.getSawHeat().overheat, 4000);
     ok(stalled, 'overheats at 1 (heat ' + T.getSawHeat().heat.toFixed(2) + ')');
     const hpS = ring.map((b) => b.hp);
-    await wait(600);
+    await gWait(600);
     ok(ring.every((b, k) => b.hp === hpS[k]) && T.getSawHeat().overheat, 'stalled: no bites while it is hot, trigger still held');
-    const cooled = await until(() => !T.getSawHeat().overheat, 5000);
+    const cooled = await gUntil(() => !T.getSawHeat().overheat, 5000);
     ok(cooled && T.getSawHeat().heat <= 0.46, 'cools to ' + T.getSawHeat().heat.toFixed(2) + ' and can be started again');
     const fR = T.getSawFuel(), hR = T.getSawHeat().heat;
-    await wait(700);
+    await gWait(700);
     const dist = ring.map((b) => b.mesh ? Math.hypot(b.mesh.position.x - T.player.position.x, b.mesh.position.z - T.player.position.z).toFixed(1) : (b.alive ? 'nomesh' : 'dead')).join(',') + ' phase ' + T.getPhase() + ' zl ' + T.zombies.length;
     ok(ring.some((b, k) => b.hp < hpS[k]), 'and it cuts again once restarted (fuel -' + (fR - T.getSawFuel()).toFixed(2) + ', heat ' + hR.toFixed(2) + '->' + T.getSawHeat().heat.toFixed(2) + ', w ' + T.getCurrentWeapon() + ', paused ' + (T.isPaused ? T.isPaused() : '?') + ', d ' + dist + ')');
     T.setMouseFireDbg(false);
-    await wait(300);
-    const h1 = T.getSawHeat().heat; await wait(1000);
+    await gWait(300);
+    const h1 = T.getSawHeat().heat; await gWait(1000);
     ok(T.getSawHeat().heat < h1 - 0.2, 'off, it cools (' + h1.toFixed(2) + ' -> ' + T.getSawHeat().heat.toFixed(2) + ')');
     ok(errs.length === 0, 'no page errors (' + errs.slice(0, 1).join('').slice(0, 80) + ')');
     T.clearZombies();

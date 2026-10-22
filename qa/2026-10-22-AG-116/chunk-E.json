@@ -1,0 +1,53 @@
+{
+  "chunk": "E",
+  "range": "t196..t229",
+  "count": 34,
+  "summaryLine": "34 checks: 642 pass, 2 fail",
+  "initialFailed": [
+    "t206",
+    "t207"
+  ],
+  "flakyClearedOnRerun": [
+    "t207"
+  ],
+  "heldReds": [
+    "t206"
+  ],
+  "initialFailuresDetail": [
+    {
+      "status": "FAIL",
+      "name": "t206",
+      "pass": 18,
+      "fail": 1,
+      "secs": 67.9,
+      "detail": "",
+      "failLines": [
+        "FAIL it came down where the arc said: no bounce seen"
+      ]
+    },
+    {
+      "status": "FAIL",
+      "name": "t207",
+      "pass": 19,
+      "fail": 1,
+      "secs": 48.4,
+      "detail": "",
+      "failLines": [
+        "FAIL a tab: all of him again (1.88 m)"
+      ]
+    }
+  ],
+  "rerunFailuresDetail": [
+    {
+      "status": "FAIL",
+      "name": "t206",
+      "pass": 18,
+      "fail": 1,
+      "secs": 66.2,
+      "detail": "",
+      "failLines": [
+        "FAIL it came down where the arc said: no bounce seen"
+      ]
+    }
+  ]
+}

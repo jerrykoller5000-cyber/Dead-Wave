@@ -27,7 +27,11 @@
     for (const r of T.rocks) r.alive = false;
     const p = T.player.position, gx0 = T.gridIndex(p.x), gz0 = T.gridIndex(p.z);
     T.levelGroundRect(T.gridCentre(gx0 - 10), T.gridCentre(gz0 - 10), T.gridCentre(gx0 + 10), T.gridCentre(gz0 + 10), T.sampleHeight(p.x, p.z), 6);
+    const sim0 = T.getSimTime ? T.getSimTime() : 0;
     step(10);
+    // GB-210: the test page's three stand-in now has real matrices, so the check above no longer catches it, but this
+    // manual clock does not move its game (no game time passes): the poses are left to the real renderer, as intended.
+    if (T.getSimTime && T.getSimTime() === sim0) { performance.now = nowReal; window.requestAnimationFrame = rafReal; for (const cb of q) rafReal(cb); out.push('SKIP the manual clock does not drive this page (run on the real renderer)'); return out.join('\n'); }
     const m = T.getMarine(), u = m.userData, V = () => new THREE.Vector3();
     const J = { hips: u.lowerBody, head: u.headG, wristL: u.elbowLG.userData.wrist, wristR: u.elbowRG.userData.wrist, ankleL: u.ankleLG, ankleR: u.ankleRG };
     const sample = () => { m.updateMatrixWorld(true); const s = {}; for (const [k, o] of Object.entries(J)) s[k] = o.getWorldPosition(V()); return s; };

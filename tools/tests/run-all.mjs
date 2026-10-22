@@ -54,6 +54,11 @@ function buildTestPage() {
   }
   </script>`;
   let out = src.replace(map[0], fake);
+  // One browser for the whole batch, so the previous check's profile would still be
+  // here when this page boots. Quit, and closing the tab, write the run down (CU-150).
+  // t259 then counted those earlier runs (12 in a chunk) instead of the one it ended.
+  // This runs before the module, so the game loads an empty profile.
+  out = out.replace('<head>', '<head>\n  <script>try{localStorage.clear()}catch(e){}</script>');
   // test.html sits in tools/tests/, so the game's own relative paths need a root-relative
   // prefix to keep resolving against the repo root.
   out = out.replace(/(\s(?:src|href)=")(?!https?:|\/|data:|#)/g, '$1/');

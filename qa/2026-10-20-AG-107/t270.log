@@ -1,0 +1,6 @@
+ok    t270      4 pass   0 fail  17.0s  (real renderer)
+    PASS every zombie skeleton is 32 or 64 bones (32 x22)
+    PASS at most two skeleton sizes over ten kinds, two each (1)
+    PASS no vertex is weighted to the padding, and a posed vertex is finite
+    PASS no page errors
+1 checks: 4 pass, 0 fail (real renderer)

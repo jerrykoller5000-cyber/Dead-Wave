@@ -19,4 +19,5 @@ test('a round intersects the hidden rigid surface retained under a skinned zombi
   assert(hit, 'the retained collision surface remains raycastable while hidden for rendering');
   assert(hit.t > 0 && hit.t < 1);
   assert.equal(hit.headHit, false);
+
 });

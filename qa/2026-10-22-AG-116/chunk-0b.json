@@ -1,0 +1,11 @@
+{
+  "chunk": "0b",
+  "range": "tfish..t67",
+  "count": 35,
+  "summaryLine": "35 checks: 632 pass, 0 fail",
+  "initialFailed": [],
+  "flakyClearedOnRerun": [],
+  "heldReds": [],
+  "initialFailuresDetail": [],
+  "rerunFailuresDetail": []
+}

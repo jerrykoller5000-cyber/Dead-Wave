@@ -1,0 +1,55 @@
+# GB-209 chunk F: t240 t241 t242 t243 t244 t245 t246 t247 t248 t249 t250 t251 t252 t253 t254 t255 t256 t257 t258 t259 t260 t261 t262 t263 t264 t265 t266 t267 t268 t270
+# Started: 2026-10-21T11:32:53.650Z
+
+GRANT grokbot GB-209: starting one game-test command
+check-players: 303 player.position reads, all in the allowed places
+ok    t240    17 pass   0 fail  56.4s
+ok    t241     5 pass   0 fail  39.3s
+ok    t242    15 pass   0 fail  44.1s
+ok    t243    23 pass   0 fail  43.9s
+FAIL  t244     3 pass   6 fail  44.1s
+ok    t245    15 pass   0 fail  42.9s
+ok    t246    24 pass   0 fail  70.2s
+ok    t247    11 pass   0 fail  53.8s
+ok    t248    12 pass   0 fail  45.3s
+ok    t249    11 pass   0 fail  42.8s
+ok    t250    10 pass   0 fail  42.3s
+ok    t251     3 pass   0 fail  40.3s
+ok    t252    12 pass   0 fail  64.2s
+ok    t253    24 pass   0 fail  59.4s
+ok    t254     8 pass   0 fail  46.2s
+           INFO smoking pinch: solved 2.7 cm, sampled 2.7 cm, wrist miss 5.2 cm; shoulder target/actual 27.6/27.6 cm; hand offset 15.8 cm
+ok    t255     5 pass   0 fail  48.2s
+ok    t256    10 pass   0 fail  59.5s
+ok    t257     7 pass   0 fail  27.3s
+ok    t258     4 pass   0 fail  27.3s
+FAIL  t259     7 pass   1 fail  57.4s
+           INFO night 8: day 8 bloodMoon true preview.bloodMoon true silenced false quest {"runId":1,"day":8,"order":[2,1,0,4,7],"unlocked":true,"triedDay":6,"known":[false,false,false,false,false],"silencedDay":6,"silenced":false,"heart":null,"done":false} total 350
+ok    t260     9 pass   0 fail  40.2s
+ok    t261     9 pass   0 fail  43.4s
+ok    t262    24 pass   0 fail  140.5s
+ok    t263    17 pass   0 fail  46.1s
+ok    t264    22 pass   0 fail  49.5s
+ok    t265    27 pass   0 fail  41.2s
+ok    t266    32 pass   0 fail  47.7s
+FAIL  t267    23 pass   1 fail  70.3s
+ok    t268    20 pass   0 fail  40.6s
+ok    t270     1 pass   0 fail  24.3s
+
+30 checks: 410 pass, 8 fail
+
+by owner:
+  unassigned
+    t244   6 fail  FAIL mortar mount: no jump - worst frame hips@1 132.0 cm (2200% of its limit)
+           FAIL mortar mount: no jump - worst frame hips@1 132.0 cm (2200% of its limit)
+           FAIL mortar mount: the body does not teleport to the crew spot (132.0 cm on the first frame)
+           FAIL he walks in and crouches beside the tube (hips moved 132.0 cm, down 0.0 cm)
+           FAIL a round is in his hand, ready (rest)
+           FAIL the round is let go into the tube on the shot
+           FAIL threw: TypeError: Cannot read properties of null (reading 'visible')
+    t259   1 fail  FAIL ending it writes the run and returns to the menu (12)
+           FAIL ending it writes the run and returns to the menu (12)
+    t267   1 fail  FAIL a short hold puts some in (0.30 s of 3)
+           FAIL a short hold puts some in (0.30 s of 3)
+
+# Finished: 2026-10-21T11:57:58.042Z code=1

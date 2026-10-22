@@ -1,0 +1,53 @@
+# GB-209 chunk D: t164 t165 t166 t167 t168 t169 t170 t171 t172 t173 t174 t175 t176 t177 t178 t179 t180 t181 t182 t183 t184 t185 t186 t187 t188 t189 t190 t191 t192 t193 t194 t195
+# Started: 2026-10-21T10:10:06.013Z
+
+Game-test request 85f45e34-3f28-4e06-87cf-332cffe34fb5 queued at position 1. Waiting...
+GRANT grokbot GB-209: starting one game-test command
+check-players: 303 player.position reads, all in the allowed places
+ok    t164    14 pass   0 fail  43.5s
+ok    t165    11 pass   0 fail  22.4s
+ok    t166    11 pass   0 fail  43.9s
+ok    t167    20 pass   0 fail  25.7s
+ok    t168    39 pass   0 fail  65.1s
+ok    t169     8 pass   0 fail  23.4s
+ok    t170    20 pass   0 fail  114.9s
+ok    t171    23 pass   0 fail  58.5s
+ok    t172     7 pass   0 fail  43.8s
+ok    t173    12 pass   0 fail  40.6s
+ok    t174    14 pass   0 fail  78.2s
+ok    t175    12 pass   0 fail  53.4s
+ok    t176     8 pass   0 fail  56.5s
+ok    t177    10 pass   0 fail  43.9s
+ok    t178     8 pass   0 fail  48.8s
+ok    t179    27 pass   0 fail  50.1s
+ok    t180    29 pass   0 fail  76.5s
+ok    t181    23 pass   0 fail  55.1s
+ok    t182    36 pass   0 fail  73.1s
+FAIL  t183    15 pass   1 fail  50.9s
+           INFO crouch-walk slide 8.36% (at 1.71 m/s ground speed)
+ok    t184    29 pass   0 fail  55.1s
+           INFO holds: m4 2379 ms wall / 500 ms game, ak 3579 ms wall / 500 ms game, aa12 842 ms wall / 450 ms game, uzi 1330 ms wall / 400 ms game, shotgun 1227 ms wall / 300 ms game, revolver 1164 ms wall / 300 ms game, sniper 1161 ms wall / 300 ms game, pistol 1160 ms wall / 300 ms game, pistol 704 ms wall / 400 ms game
+ok    t185    36 pass   0 fail  99.1s
+ok    t186    34 pass   0 fail  77.3s
+ok    t187    75 pass   0 fail  104.9s
+ok    t188    91 pass   0 fail  126.0s
+ok    t189    21 pass   0 fail  197.5s
+ok    t190    21 pass   0 fail  44.0s
+ok    t191    16 pass   0 fail  61.6s
+ok    t192    10 pass   0 fail  47.9s
+           INFO on the flat, walking, the lowest sole is -0.029 m
+FAIL  t193    16 pass   2 fail  70.7s
+ok    t194    35 pass   0 fail  83.1s
+ok    t195    16 pass   0 fail  107.8s
+
+32 checks: 747 pass, 3 fail
+
+by owner:
+  unassigned
+    t183   1 fail  FAIL not pointing forward (0.20 m ahead of the shoulder)
+           FAIL not pointing forward (0.20 m ahead of the shoulder)
+    t193   2 fail  FAIL standing on the hill: R sole on the ground under it (0.082 m)
+           FAIL standing on the hill: R sole on the ground under it (0.082 m)
+           FAIL and he stands up on it, not half crouched: hips 0.687 m over the lower ground (0.623 on the flat)
+
+# Finished: 2026-10-21T10:46:42.794Z code=1

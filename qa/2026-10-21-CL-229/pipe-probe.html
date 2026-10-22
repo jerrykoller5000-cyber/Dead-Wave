@@ -1,0 +1,42 @@
+<!doctype html><html><body><script type="importmap">{"imports":{"three":"../../vendor/three/three.webgpu.js","three/webgpu":"../../vendor/three/three.webgpu.js"}}</script>
+<script type="module">
+import * as THREE from 'three/webgpu';
+const out = window.__out = {};
+try {
+  const renderer = new THREE.WebGPURenderer({ antialias: false });
+  await renderer.init();
+  out.webgpu = !!renderer.backend.isWebGPUBackend;
+  if (location.search.includes('patch')) {
+    const proto = Object.getPrototypeOf(renderer.backend.createNodeBuilder(new THREE.Object3D(), renderer));
+    const orig = proto.getUniformFromNode;
+    proto.getUniformFromNode = function (node, type, stage, name = null) {
+      if (name == null && (type === 'buffer' || type === 'storageBuffer' || type === 'indirectStorageBuffer')) {
+        const m = this._dwBufNames || (this._dwBufNames = new Map());
+        name = m.get(node); if (!name) { name = 'dwBuf' + m.size; m.set(node, name); }
+      }
+      return orig.call(this, node, type, stage, name);
+    };
+  }
+  const W = 64, H = 32, rt = new THREE.RenderTarget(W, H);
+  const scene = new THREE.Scene(); scene.background = new THREE.Color(0x000000);
+  const cam = new THREE.OrthographicCamera(-2, 2, 1, -1, 0.1, 10); cam.position.z = 5;
+  const geo = new THREE.PlaneGeometry(0.8, 0.8);
+  const mat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+  const M = new THREE.Matrix4();
+  const mk = (x, col, x2, col2) => { const im = new THREE.InstancedMesh(geo, mat, 2); im.setMatrixAt(0, M.makeTranslation(x, 0.45, 0)); im.setMatrixAt(1, M.makeTranslation(x2, -0.45, 0)); im.setColorAt(0, new THREE.Color(col)); im.setColorAt(1, new THREE.Color(col2)); im.frustumCulled = false; scene.add(im); return im; };
+  mk(-1.5, 0xff0000, -0.5, 0x0000ff); mk(0.5, 0x00ff00, 1.5, 0xffff00);
+  // skinned: two meshes, own materials, own skeletons posed differently
+  const sg = new THREE.PlaneGeometry(0.6, 0.6); const n = sg.attributes.position.count;
+  sg.setAttribute('skinIndex', new THREE.Uint16BufferAttribute(new Uint16Array(n * 4), 4)); const sw = new Float32Array(n * 4); for (let i = 0; i < n; i++) sw[i * 4] = 1; sg.setAttribute('skinWeight', new THREE.BufferAttribute(sw, 4));
+  const sk = (bx, col) => { const m = new THREE.SkinnedMesh(sg, new THREE.MeshBasicMaterial({ color: col })); const b = new THREE.Bone(); m.add(b); m.bind(new THREE.Skeleton([b])); b.position.set(bx, 0, 0); m.frustumCulled = false; scene.add(m); return m; };
+  sk(-1.0, 0xff00ff); sk(1.0, 0x00ffff);
+  scene.updateMatrixWorld(true);
+  renderer.setRenderTarget(rt); await renderer.renderAsync(scene, cam); renderer.setRenderTarget(null);
+  const px = await renderer.readRenderTargetPixelsAsync(rt, 0, 0, W, H);
+  const at = (x, y) => { const X = Math.floor((x + 2) / 4 * W), Y = Math.floor((1 - y) / 2 * H); const i = (Y * W + X) * 4; return [px[i], px[i + 1], px[i + 2]].map((v) => v > 128 ? 1 : 0).join(''); };
+  out.samples = { redTL: at(-1.5, 0.45), blueBL: at(-0.5, -0.45), greenTR: at(0.5, 0.45), yellowBR: at(1.5, -0.45), magenta: at(-1.0, 0), cyan: at(1.0, 0), emptyMid: at(0, 0) };
+  out.vprog = renderer._pipelines.programs.vertex.size;
+  out.ok = true;
+} catch (e) { out.err = String(e && e.stack || e); }
+out.done = true;
+</script></body></html>

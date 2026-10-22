@@ -26,7 +26,7 @@ export function stepWatchman(s, origin, target, dt) {
   return s;
 }
 export function watchmanPose(s, feedT=0, feedS=3.2, out={}) {
-  out.weight=smooth(s.age/WATCHMAN.mountS);
+  out.weight=smooth(s.age/(s.mountS||WATCHMAN.mountS));
   out.kick=Math.pow(clamp(s.kick/WATCHMAN.kickS,0,1),2);
   out.drop=WATCHMAN.drop*out.weight;
   out.lean=0.14+out.kick*0.035;

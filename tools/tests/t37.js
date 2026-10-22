@@ -126,7 +126,7 @@
   ok(win.classList.contains('show') && win.classList.contains('lake') && win.querySelectorAll('.surfaceFx .drip').length === 9, 'panel rises out of the water (ripples, drips)');
   const cs = getComputedStyle(win.querySelector('.card'));
   const an = ['h2', 'p', 'button'].map(q => getComputedStyle(win.querySelector(q)).animationName);
-  ok(cs.backgroundImage === 'none' && /rgba\(0, 0, 0, 0\)|transparent/.test(cs.backgroundColor) && an.join() === 'dwRise,dwRise,dwRiseBtn', 'no panel: the words and button rise on their own (' + an.join(', ') + ')');
+  ok(cs.backgroundImage === 'none' && /^rgba\(\d+, \d+, \d+, 0\)$|transparent/.test(cs.backgroundColor) && an.join() === 'dwRise,dwRise,dwRiseBtn', 'no panel: the words and button rise on their own (' + an.join(', ') + '; card ' + cs.backgroundColor + ')');
   ok(win.querySelector('.card .surfaceFx') && getComputedStyle(document.querySelector('#cine .skip')).display === 'none', 'ripples under the words; skip hint gone');
 
   document.getElementById('again').click(); await wait(250);

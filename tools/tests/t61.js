@@ -60,22 +60,35 @@
     const Fb = T.getWaveFinisher(); const bx = Fb ? Fb.x : kx, bz = Fb ? Fb.z : kz;
     const dur = Fb ? Fb.dur : 7.2; const t0 = Fb ? Fb.t0 : performance.now();
     const el2 = () => (performance.now() - t0) / 1000;
-    let sweep = 0, lastA = null, dMin = 99, dMax = 0, under = 0, frames = 0;
+    // CL-230: the shot runs on real time (performance.now) and the suite's page can draw only a few frames a second, so
+    // the samples are one per drawn frame and the checks don't depend on how many there are: the camera is where the
+    // shot's own orbit puts it at that moment (F.a0 + 2.4 rad eased), and the music is read during the shot, not after.
+    const frame = () => new Promise((r) => requestAnimationFrame(() => r()));
+    const ease = (u) => { u = Math.max(0, Math.min(1, u)); return u * u * (3 - 2 * u); };
+    let dMin = 99, dMax = 0, under = 0, frames = 0, offOrbit = 0, worstOff = 0, sawRelief = false, sawSolo = false, lastMusic = '';
     while (el2() < dur * 0.97) {
+      await frame();
+      const t = el2(); if (t >= dur * 0.97) break;
       const cx = T.camera.position.x - bx, cz = T.camera.position.z - bz;
-      const a = Math.atan2(cz, cx);
-      if (lastA !== null) { let da = a - lastA; while (da > Math.PI) da -= 2 * Math.PI; while (da < -Math.PI) da += 2 * Math.PI; sweep += da; }
-      lastA = a;
-      if (el2() > 0.5) { const d = Math.hypot(cx, cz); dMin = Math.min(dMin, d); dMax = Math.max(dMax, d); }
+      if (t > 0.5 && Fb && Fb.a0 != null) {
+        // The game moved the camera on its own last frame, up to one slow frame ago: it must sit on the orbit between
+        // where the shot was 0.6 s ago and where it is now, give or take 0.12 rad.
+        const at = (tt) => Fb.a0 + 2.4 * ease((tt - 0.3) / (dur - 0.3)), want = at(t), lag = at(t - 0.6) - want;
+        let da = Math.atan2(cz, cx) - want; while (da > Math.PI) da -= 2 * Math.PI; while (da < -Math.PI) da += 2 * Math.PI;
+        const off = da > 0.12 ? da - 0.12 : da < lag - 0.12 ? lag - 0.12 - da : 0;
+        worstOff = Math.max(worstOff, off); if (off > 0) offOrbit++;
+        const d = Math.hypot(cx, cz); dMin = Math.min(dMin, d); dMax = Math.max(dMax, d);
+      }
       if (T.camera.position.y < T.sampleHeight(T.camera.position.x, T.camera.position.z) + 0.3) under++;
+      const M = ms(); lastMusic = M.stage + '/' + M.sting + '/' + M.deckTrack;
+      if (M.stage === 'relief' && M.sting === 'clear' && !M.deckTrack) sawRelief = true;
+      if (M.solo === true) sawSolo = true;
       frames++;
-      await wait(20);
     }
-    ok(frames >= 8, 'the shot was sampled (' + frames + ' samples)');
-    ok(ms().stage === 'relief' && ms().sting === 'clear' && !ms().deckTrack, 'the fight cut dead, the relief sting alone: ' + ms().stage + '/' + ms().sting + '/' + ms().deckTrack);
-    ok(ms().solo === true, 'every other sound cleared during the sting');
-    const deg = Math.abs(sweep) * 180 / Math.PI;
-    ok(deg > 100 && deg < 200, 'the camera swings round the body: ' + deg.toFixed(0) + ' degrees');
+    ok(frames >= 2, 'the shot was sampled (' + frames + ' frames)');
+    ok(sawRelief, 'the fight cut dead, the relief sting alone: ' + lastMusic);
+    ok(sawSolo, 'every other sound cleared during the sting');
+    ok(frames >= 1 && offOrbit === 0, 'the camera swings round the body, on its 137-degree orbit: ' + (offOrbit ? offOrbit + ' frames off it, worst by ' + (worstOff * 180 / Math.PI).toFixed(0) + ' degrees' : 'every frame on it'));
     ok(Math.abs(T.player.rotation.y - yaw0) < 0.02, 'the marine keeps his facing: ' + (T.player.rotation.y - yaw0).toFixed(3));
     ok(dMax < 6 && dMin > 0.8, 'close around the body all the way round: ' + dMin.toFixed(1) + '-' + dMax.toFixed(1) + ' m');
     ok(under === 0, 'never in the ground (' + frames + ' samples)');

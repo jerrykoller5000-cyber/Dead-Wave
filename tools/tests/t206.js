@@ -31,27 +31,27 @@
     ok(full.t === FULL && d2 > d1 + 6, 'it grows with the hold: ' + f2(d1) + ' m at ' + f2(early.t) + ' s, ' + f2(d2) + ' m at 0.8 s (capped: ' + f2(full.t) + ')');
     const before = T.grenadesInFlight.length, want = full.hit;
     ok(T.releaseGrenadeCharge() === true, 'let go: thrown');
-    await until(() => T.grenadesInFlight.length === before + 1, 1500);   // it leaves his hand at the top of the swing
+    await until(() => T.grenadesInFlight.length === before + 1, 10000);   // it leaves his hand at the top of the swing
     const g = T.grenadesInFlight[T.grenadesInFlight.length - 1];
     ok(T.grenadesInFlight.length === before + 1 && !D().charging && !D().visible && D().n === n0 - 1, 'one grenade out, the arc gone, ' + D().n + ' left');
     ok(D().last && Math.abs(D().last.h - T.GRENADE_THROW.FAR.h) < 1e-9 && Math.abs(D().last.charge - FULL) < 1e-9, 'the longest throw: ' + JSON.stringify(D().last));
     let land = null;
-    { const c0 = Date.now(); let prevVy = g.vy;
-      while (!land && Date.now() - c0 < 4000 && T.grenadesInFlight.includes(g)) { if (g.vy > prevVy + 0.5) land = { x: g.pos.x, z: g.pos.z }; prevVy = g.vy; await wait(10); } }
+    { const s0 = T.getSimTime(), c0 = Date.now(); let prevVy = g ? g.vy : 0;
+      while (!land && T.getSimTime() - s0 < 4.0 && Date.now() - c0 < 25000 && T.grenadesInFlight.includes(g)) { if (g.vy > prevVy + 0.5) land = { x: g.pos.x, z: g.pos.z }; prevVy = g.vy; await wait(10); } }
     ok(land && Math.hypot(land.x - want.x, land.z - want.z) < 2.5, 'it came down where the arc said: ' + (land ? f2(Math.hypot(land.x - want.x, land.z - want.z)) + ' m off' : 'no bounce seen'));
     { const s0 = T.getSimTime(), w0 = Date.now(); while (T.getSimTime() - s0 < 1.6 && Date.now() - w0 < 15000) await wait(50); }   // GB-202 sweep: game time (the 0.6 s cooldown and the throw swing run on it)
     // (2) A tap lobs it short.
     ok(T.startGrenadeCharge() === true, 'G down again');
     T.releaseGrenadeCharge();
-    await until(() => D().n === n0 - 2, 1500);
+    await until(() => D().n === n0 - 2, 10000);
     ok(D().last && D().last.h <= T.GRENADE_THROW.LOB.h + 0.5 && D().last.charge < 0.1, 'a tap is a short lob: ' + JSON.stringify(D().last));
     { const s0 = T.getSimTime(), w0 = Date.now(); while (T.getSimTime() - s0 < 1.7 && Date.now() - w0 < 15000) await wait(50); }   // GB-202 sweep: game time (the 0.6 s cooldown and the throw swing run on it)
     // (3) The keys: G down holds, G up throws.
     window.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyG', key: 'g', bubbles: true }));
     const held = D().charging;
-    await wait(400);
+    { const s0 = T.getSimTime(), w0 = Date.now(); while (T.getSimTime() - s0 < 0.35 && Date.now() - w0 < 10000) await wait(20); }
     window.dispatchEvent(new KeyboardEvent('keyup', { code: 'KeyG', key: 'g', bubbles: true }));
-    await until(() => D().n === n0 - 3, 1500);
+    await until(() => D().n === n0 - 3, 10000);
     ok(held && !D().charging && D().last.charge > 0.1 && D().n === n0 - 3, 'G down holds, G up throws (held ' + f2(D().last.charge) + ' s)');
     { const s0 = T.getSimTime(), w0 = Date.now(); while (T.getSimTime() - s0 < 1.7 && Date.now() - w0 < 15000) await wait(50); }   // GB-202 sweep: game time (the 0.6 s cooldown and the throw swing run on it)
     ok(T.startGrenadeCharge() === false && !D().charging, 'none left: G does not start a hold');

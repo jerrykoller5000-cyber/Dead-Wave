@@ -1,0 +1,58 @@
+# GB-209 chunk A: t68 t69 t70 t71 t72 t73 t74 t75 t76 t77 t78 t79 t80 t81 t82 t83 t84 t85 t86 t87 t88 t89 t90 t91 t92 t93 t94 t95 t96 t97 t98 t99
+# Started: 2026-10-21T08:23:07.232Z
+
+Game-test request 3e840a14-f7aa-434e-b9b3-dde0dc9b7d9a queued at position 2. Waiting...
+GRANT grokbot GB-209: starting one game-test command
+check-players: 303 player.position reads, all in the allowed places
+ok    t68     15 pass   0 fail  39.5s
+ok    t69     18 pass   0 fail  78.6s
+ok    t70     21 pass   0 fail  71.7s
+ok    t71     16 pass   0 fail  65.4s
+ok    t72     21 pass   0 fail  69.8s
+ok    t73     12 pass   0 fail  54.8s
+ok    t74     18 pass   0 fail  57.6s
+ok    t75     16 pass   0 fail  52.9s
+ok    t76     16 pass   0 fail  55.5s
+FAIL  t77     14 pass   3 fail  53.2s
+ok    t78     18 pass   0 fail  40.6s
+ok    t79     12 pass   0 fail  69.5s
+FAIL  t80     13 pass   1 fail  175.8s
+           INFO the old drape (sampleHeight + 7 cm) went 0.37 m under the drawn bed at worst
+ok    t81      5 pass   0 fail  25.6s
+ok    t82      4 pass   0 fail  25.0s
+ok    t83     31 pass   0 fail  58.5s
+ok    t84     10 pass   0 fail  62.1s
+ok    t85     15 pass   0 fail  57.6s
+ok    t86     12 pass   0 fail  46.6s
+ok    t87     13 pass   0 fail  42.9s
+ok    t88     13 pass   0 fail  44.0s
+ok    t89     18 pass   0 fail  51.7s
+ok    t90      6 pass   0 fail  49.0s
+ok    t91      7 pass   0 fail  54.9s
+ok    t92      5 pass   0 fail  44.8s
+ok    t93     11 pass   0 fail  79.6s
+ok    t94      8 pass   0 fail  46.6s
+ok    t95      9 pass   0 fail  66.6s
+ok    t96     19 pass   0 fail  57.2s
+ok    t97     15 pass   0 fail  56.4s
+           INFO ragdoll off: 160 spawned, 160 alive at the end, 112 ticks, frame 159.62 ms avg / 1099.30 ms worst (headless)
+           INFO ragdoll on: 160 spawned, 159 alive at the end, 89 ticks, frame 207.18 ms avg / 977.60 ms worst (headless)
+ok    t98     20 pass   0 fail  93.4s
+           INFO 120 spawned, 120 alive after 117.1 s and 26 legs (650 ticks)
+           INFO jump at (1.0, -5.6, -52.2) from (-3.2, -52.0) leg 16
+FAIL  t99      5 pass   1 fail  164.5s
+
+32 checks: 436 pass, 5 fail
+
+by owner:
+  unassigned
+    t77    3 fail  FAIL one tick bites at most 3 of 8 (0)
+           FAIL one tick bites at most 3 of 8 (0)
+           FAIL gas burns faster in a body: 0.00 s vs 0.00 s running free (xNaN)
+           FAIL and heats up: +0.000 vs +0.000 (x0.0)
+    t80    1 fail  FAIL a spider blind inside its back-off range comes on round the corner (clear after 0.7 s; stil
+           FAIL a spider blind inside its back-off range comes on round the corner (clear after 0.7 s; still behind the house; 6.0 to 7.4 m)
+    t99    1 fail  FAIL nobody jumps more than 4 m in a tick (1)
+           FAIL nobody jumps more than 4 m in a tick (1)
+
+# Finished: 2026-10-21T09:13:40.746Z code=1

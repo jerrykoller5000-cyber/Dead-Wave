@@ -1,0 +1,48 @@
+run 1: visibility=visible  TT at 8.0s  title at 14.2s
+   terrain+water+sky built                  0 ms  (+     0)
+   rocks                                   52 ms  (+    52)
+   trees                                  450 ms  (+   398)
+   player+weapons+zombie types            896 ms  (+   446)
+   foliage scattered                     1441 ms  (+   545)
+   POIs+minimap+foliage chunks           2582 ms  (+  1141)
+   contact shading + rest of setup       2700 ms  (+   118)
+   post + pools + compile + warm frame    6358 ms  (+  3658)
+   ready                                 6361 ms  (+     3)
+   log: Grave Shift warm-up: 144 shader variants compiled, 38 bodies pooled, 1 warm frames, lights visible 23/23, shadows true | post 7ms pools 711ms compile 2799ms war
+   log: Grave Shift load: terrain+water+sky built 0ms | rocks 52ms | trees 450ms | player+weapons+zombie types 896ms | foliage scattered 1441ms | POIs+minimap+foliage c
+   log: Grave Shift first minute: 163 variants after 9 warm frames | load:144 a-fresh:144 a-flash:149 a-faded:150 a-kill-generic:155 a-kill-melee:157 a-kill-explosive:1
+   log: Grave Shift pre-roll: 214 shader variants compiled after 31 warm frames | load:144 a-fresh:144 a-flash:149 a-faded:150 a-kill-generic:155 a-kill-melee:157 a-kil
+   log: Grave Shift title: menu up after 31 warm frames, 214 variants | load:144 a-fresh:144 a-flash:149 a-faded:150 a-kill-generic:155 a-kill-melee:157 a-kill-explosiv
+run 2: visibility=visible  TT at 7.7s  title at 13.9s
+   terrain+water+sky built                  0 ms  (+     0)
+   rocks                                   50 ms  (+    50)
+   trees                                  446 ms  (+   396)
+   player+weapons+zombie types            841 ms  (+   395)
+   foliage scattered                     1350 ms  (+   509)
+   POIs+minimap+foliage chunks           2434 ms  (+  1084)
+   contact shading + rest of setup       2556 ms  (+   122)
+   post + pools + compile + warm frame    6003 ms  (+  3447)
+   ready                                 6006 ms  (+     3)
+   log: Grave Shift warm-up: 144 shader variants compiled, 38 bodies pooled, 1 warm frames, lights visible 23/23, shadows true | post 7ms pools 752ms compile 2552ms war
+   log: Grave Shift load: terrain+water+sky built 0ms | rocks 50ms | trees 446ms | player+weapons+zombie types 841ms | foliage scattered 1350ms | POIs+minimap+foliage c
+   log: Grave Shift first minute: 163 variants after 9 warm frames | load:144 a-fresh:144 a-flash:149 a-faded:150 a-kill-generic:155 a-kill-melee:157 a-kill-explosive:1
+   log: Grave Shift pre-roll: 214 shader variants compiled after 31 warm frames | load:144 a-fresh:144 a-flash:149 a-faded:150 a-kill-generic:155 a-kill-melee:157 a-kil
+   log: Grave Shift title: menu up after 31 warm frames, 214 variants | load:144 a-fresh:144 a-flash:149 a-faded:150 a-kill-generic:155 a-kill-melee:157 a-kill-explosiv
+run 3: visibility=visible  TT at 7.6s  title at 13.5s
+   terrain+water+sky built                  0 ms  (+     0)
+   rocks                                   49 ms  (+    49)
+   trees                                  430 ms  (+   381)
+   player+weapons+zombie types            827 ms  (+   397)
+   foliage scattered                     1328 ms  (+   501)
+   POIs+minimap+foliage chunks           2415 ms  (+  1087)
+   contact shading + rest of setup       2542 ms  (+   127)
+   post + pools + compile + warm frame    5974 ms  (+  3432)
+   ready                                 5977 ms  (+     3)
+   log: Grave Shift warm-up: 142 shader variants compiled, 38 bodies pooled, 1 warm frames, lights visible 23/23, shadows true | post 6ms pools 715ms compile 2583ms war
+   log: Grave Shift load: terrain+water+sky built 0ms | rocks 49ms | trees 430ms | player+weapons+zombie types 827ms | foliage scattered 1328ms | POIs+minimap+foliage c
+   log: Grave Shift first minute: 161 variants after 9 warm frames | load:142 a-fresh:142 a-flash:147 a-faded:148 a-kill-generic:153 a-kill-melee:155 a-kill-explosive:1
+   log: Grave Shift pre-roll: 212 shader variants compiled after 31 warm frames | load:142 a-fresh:142 a-flash:147 a-faded:148 a-kill-generic:153 a-kill-melee:155 a-kil
+   log: Grave Shift title: menu up after 31 warm frames, 212 variants | load:142 a-fresh:142 a-flash:147 a-faded:148 a-kill-generic:153 a-kill-melee:155 a-kill-explosiv
+
+title screen: best 13.5s, worst 14.2s, mean 13.9s over 3 run(s)
+budget (AGENTS.md rule 12): 15 s cold, 5 s warm — within the cold budget.

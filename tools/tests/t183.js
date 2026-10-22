@@ -30,7 +30,7 @@
     T.toggleHolster();
     ok(T.isUnarmed(), 'U: unarmed');
     await until(() => !T.drawDbg().active, 10000);
-    await wait(900);
+    { const s0 = T.getSimTime(); await until(() => T.getSimTime() - s0 >= 0.9, 20000); }   // GB-211: 0.9 s of game time (the relax eases in on game time; on a slow page 900 ms of wall clock was ~0.1 s of it)
     // The hand itself (the middle of the fist in the forearm's frame), not the grip point the gun IK aims, which sits ahead of it.
     const fist = (elbow) => { T.player.updateMatrixWorld(true); return elbow.localToWorld(new V(0, -0.25, 0.07)); };
     for (const [name, elbow, arm] of [['left', ud.elbowLG, ud.armLG], ['right', ud.elbowRG, ud.armRG]]) {
@@ -61,7 +61,7 @@
     // Armed again: the gun hold is back.
     T.toggleHolster();
     await until(() => !T.drawDbg().active, 10000);
-    await wait(900);
+    { const s0 = T.getSimTime(); await until(() => T.getSimTime() - s0 >= 0.9, 20000); }   // GB-211: 0.9 s of game time (the relax eases in on game time; on a slow page 900 ms of wall clock was ~0.1 s of it)
     const back = handIn(ud.gripR, ud.armRG);
     ok(!T.isUnarmed() && back.fwdOfShoulder > 0.2, 'U again: the gun hand is back out in front (' + f2(back.fwdOfShoulder) + ' m, was ' + f2(armedR.fwdOfShoulder) + ')');
   } catch (e) { ok(false, 'threw ' + (e && e.stack || e)); }

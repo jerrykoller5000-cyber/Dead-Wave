@@ -26,7 +26,7 @@
     const gunDriven = F.gunShown() === true;
     if (!gunDriven) out.push('INFO the gun is not shown before the can on this page (pose pass not run): gun checks left to realtest t267');
     // Hold E: it fills over 3 s; a short hold does not.
-    key('keydown'); await wait(700); key('keyup'); await wait(100);
+    key('keydown'); { const s0 = T.getSimTime(); await until(() => T.getSimTime() - s0 >= 0.7, 20000); } key('keyup'); await wait(100);   // GB-213: 0.7 s of game time, not wall clock
     ok(R().phase === 'at-pump' && R().fill > 0.3 && R().fill < 3, 'a short hold puts some in (' + R().fill.toFixed(2) + ' s of 3)');
     key('keydown'); const full = await until(() => R().phase === 'carried', 15000); key('keyup'); await wait(100);
     ok(full, 'held on, the can fills and he takes it (' + R().phase + ')');

@@ -1,0 +1,809 @@
+{
+  "t270Summary": "ok    t270      5 pass   0 fail  15.3s  (real renderer)\n    PASS every zombie skeleton is 32 or 64 bones (32 x22)\n    PASS at most two skeleton sizes over ten kinds, two each (1)\n    PASS no vertex is weighted to the padding, and a posed vertex is finite\n    PASS one shared glow graph for every glowing body, each reading its own levels (1 graphs)\n    PASS no page errors\n1 checks: 5 pass, 0 fail (real renderer)",
+  "benchRuns": [
+    {
+      "id": "run-1",
+      "fps": 54.2,
+      "low": 28.7,
+      "worst": 29.3,
+      "hitches": 0,
+      "draws": 246,
+      "triangles": 679215,
+      "frameMs": 18.45,
+      "tickMs": 15.85,
+      "outsideMs": 2.6,
+      "gpuMs": 0.3,
+      "spikeCauses": {
+        "spikes": 18,
+        "pipelines": 0,
+        "builds": 1,
+        "uploads": 0,
+        "gc": 2,
+        "code": 15
+      },
+      "spikes": [
+        {
+          "frame": 43,
+          "ms": 32.3,
+          "top": [
+            "r:render 14.4",
+            "r:matrices 4.6",
+            "zombies 3.6",
+            "m:hold 2.2"
+          ],
+          "heapMB": 887.1,
+          "freedMB": -0.8,
+          "newPipelines": 0,
+          "newTextures": 0,
+          "newGeometries": 0,
+          "newBuilds": 0
+        },
+        {
+          "frame": 222,
+          "ms": 28,
+          "top": [
+            "r:render 9.6",
+            "zombies 5.0",
+            "r:matrices 4.6",
+            "m:hold 2.2"
+          ],
+          "heapMB": 918.9,
+          "freedMB": -0.8,
+          "newPipelines": 0,
+          "newTextures": 0,
+          "newGeometries": 0,
+          "newBuilds": 0
+        },
+        {
+          "frame": 341,
+          "ms": 27.6,
+          "top": [
+            "r:render 11.0",
+            "zombies 4.7",
+            "r:matrices 4.4",
+            "m:hold 2.2"
+          ],
+          "heapMB": 908.5,
+          "freedMB": -0.7,
+          "newPipelines": 0,
+          "newTextures": 0,
+          "newGeometries": 0,
+          "newBuilds": 0
+        },
+        {
+          "frame": 398,
+          "ms": 34,
+          "top": [
+            "r:render 14.8",
+            "zombies 5.1",
+            "r:matrices 4.3",
+            "m:hold 2.3"
+          ],
+          "heapMB": 919.2,
+          "freedMB": -0.7,
+          "newPipelines": 0,
+          "newTextures": 0,
+          "newGeometries": 0,
+          "newBuilds": 0
+        },
+        {
+          "frame": 464,
+          "ms": 30.6,
+          "top": [
+            "r:render 23.1",
+            "zombies 2.0",
+            "r:matrices 1.7",
+            "m:hold 1.1"
+          ],
+          "heapMB": 869.2,
+          "freedMB": 32.3,
+          "newPipelines": 0,
+          "newTextures": 0,
+          "newGeometries": 0,
+          "newBuilds": 0
+        },
+        {
+          "frame": 753,
+          "ms": 25.1,
+          "top": [
+            "r:render 8.0",
+            "zombies 6.0",
+            "r:matrices 3.9",
+            "m:hold 2.2"
+          ],
+          "heapMB": 840.6,
+          "freedMB": -0.7,
+          "newPipelines": 0,
+          "newTextures": 0,
+          "newGeometries": 0,
+          "newBuilds": 0
+        },
+        {
+          "frame": 870,
+          "ms": 31.3,
+          "top": [
+            "r:render 16.7",
+            "zombies 4.0",
+            "r:matrices 3.9",
+            "r:cull 1.1"
+          ],
+          "heapMB": 838.4,
+          "freedMB": -0.7,
+          "newPipelines": 0,
+          "newTextures": 0,
+          "newGeometries": 0,
+          "newBuilds": 0
+        },
+        {
+          "frame": 928,
+          "ms": 31,
+          "top": [
+            "r:render 8.9",
+            "zombies 8.4",
+            "r:matrices 4.1",
+            "m:hold 2.2"
+          ],
+          "heapMB": 845.7,
+          "freedMB": -0.7,
+          "newPipelines": 0,
+          "newTextures": 0,
+          "newGeometries": 0,
+          "newBuilds": 0
+        }
+      ],
+      "builds": {
+        "made": 5,
+        "top": [
+          {
+            "k": "marine-shadow < Group < Group < Group | SkinnedMesh | MeshBasicMaterial",
+            "n": 3,
+            "frames": [
+              25,
+              1525,
+              1675
+            ]
+          },
+          {
+            "k": "feral-motion-echo < Scene | SkinnedMesh | MeshBasicMaterial",
+            "n": 1,
+            "frames": [
+              548
+            ]
+          },
+          {
+            "k": "zombie-skin < Group < Scene | SkinnedMesh | MeshStandardNodeMaterial",
+            "n": 1,
+            "frames": [
+              1240
+            ]
+          }
+        ]
+      },
+      "pipelines": {
+        "made": 4,
+        "released": 0,
+        "withNewShaders": 4,
+        "top": [
+          {
+            "k": "marine-shadow < Group < Group < Group | NodeMaterial:ShadowMaterial | opaque side0 zw | OrthographicCamera",
+            "n": 3,
+            "newShaders": 3,
+            "frames": [
+              25,
+              1525,
+              1675
+            ]
+          },
+          {
+            "k": "feral-motion-echo < Scene | MeshBasicMaterial | transparent side0 no-zw | scene",
+            "n": 1,
+            "newShaders": 1,
+            "frames": [
+              548
+            ]
+          }
+        ],
+        "first": [
+          {
+            "frame": 25,
+            "obj": "marine-shadow < Group < Group < Group",
+            "kind": "SkinnedMesh",
+            "mat": "NodeMaterial:ShadowMaterial",
+            "state": "opaque side0 zw",
+            "cam": "OrthographicCamera",
+            "newShaders": "v"
+          },
+          {
+            "frame": 548,
+            "obj": "feral-motion-echo < Scene",
+            "kind": "SkinnedMesh",
+            "mat": "MeshBasicMaterial",
+            "state": "transparent side0 no-zw",
+            "cam": "scene",
+            "newShaders": "vf"
+          },
+          {
+            "frame": 1525,
+            "obj": "marine-shadow < Group < Group < Group",
+            "kind": "SkinnedMesh",
+            "mat": "NodeMaterial:ShadowMaterial",
+            "state": "opaque side0 zw",
+            "cam": "OrthographicCamera",
+            "newShaders": "v"
+          },
+          {
+            "frame": 1675,
+            "obj": "marine-shadow < Group < Group < Group",
+            "kind": "SkinnedMesh",
+            "mat": "NodeMaterial:ShadowMaterial",
+            "state": "opaque side0 zw",
+            "cam": "OrthographicCamera",
+            "newShaders": "v"
+          }
+        ]
+      }
+    },
+    {
+      "id": "run-2",
+      "fps": 56.4,
+      "low": 39.7,
+      "worst": 24.4,
+      "hitches": 0,
+      "draws": 266,
+      "triangles": 745946,
+      "frameMs": 17.73,
+      "tickMs": 14.14,
+      "outsideMs": 3.59,
+      "gpuMs": 0.3,
+      "spikeCauses": {
+        "spikes": 10,
+        "pipelines": 0,
+        "builds": 1,
+        "uploads": 1,
+        "gc": 1,
+        "code": 7
+      },
+      "spikes": [
+        {
+          "frame": 1038,
+          "ms": 38,
+          "top": [
+            "r:render 30.4",
+            "zombies 3.2",
+            "r:matrices 1.3",
+            "m:hold 0.9"
+          ],
+          "heapMB": 833.5,
+          "freedMB": -10.3,
+          "newPipelines": 0,
+          "newTextures": 0,
+          "newGeometries": 1,
+          "newBuilds": 1
+        },
+        {
+          "frame": 1293,
+          "ms": 25.2,
+          "top": [
+            "r:render 8.6",
+            "m:hold2+arms 5.8",
+            "zombies 3.1",
+            "m:idle 2.2"
+          ],
+          "heapMB": 842.2,
+          "freedMB": -6.5,
+          "newPipelines": 0,
+          "newTextures": 0,
+          "newGeometries": 0,
+          "newBuilds": 0
+        },
+        {
+          "frame": 1419,
+          "ms": 35.4,
+          "top": [
+            "r:render 26.0",
+            "zombies 4.0",
+            "r:matrices 1.5",
+            "w:minimap 0.7"
+          ],
+          "heapMB": 825.9,
+          "freedMB": 25.5,
+          "newPipelines": 0,
+          "newTextures": 0,
+          "newGeometries": 0,
+          "newBuilds": 0
+        },
+        {
+          "frame": 1567,
+          "ms": 35.2,
+          "top": [
+            "r:render 20.2",
+            "r:matrices 6.0",
+            "zombies 3.7",
+            "r:cull 1.5"
+          ],
+          "heapMB": 846,
+          "freedMB": -1.1,
+          "newPipelines": 0,
+          "newTextures": 0,
+          "newGeometries": 0,
+          "newBuilds": 0
+        },
+        {
+          "frame": 1568,
+          "ms": 26.3,
+          "top": [
+            "r:render 9.1",
+            "zombies 5.5",
+            "m:idle 4.4",
+            "m:pose 1.8"
+          ],
+          "heapMB": 847.3,
+          "freedMB": -1.3,
+          "newPipelines": 0,
+          "newTextures": 0,
+          "newGeometries": 1,
+          "newBuilds": 0
+        },
+        {
+          "frame": 1595,
+          "ms": 31.5,
+          "top": [
+            "marine 14.5",
+            "r:render 8.3",
+            "zombies 3.4",
+            "r:matrices 1.9"
+          ],
+          "heapMB": 850.2,
+          "freedMB": -12.1,
+          "newPipelines": 0,
+          "newTextures": 0,
+          "newGeometries": -1,
+          "newBuilds": 0
+        },
+        {
+          "frame": 1617,
+          "ms": 25.9,
+          "top": [
+            "r:render 16.7",
+            "zombies 3.9",
+            "r:matrices 2.0",
+            "m:idle 0.7"
+          ],
+          "heapMB": 836.6,
+          "freedMB": -1,
+          "newPipelines": 0,
+          "newTextures": 0,
+          "newGeometries": 0,
+          "newBuilds": 0
+        },
+        {
+          "frame": 1618,
+          "ms": 33.4,
+          "top": [
+            "zombies 10.1",
+            "r:render 10.1",
+            "m:idle 4.1",
+            "r:matrices 2.3"
+          ],
+          "heapMB": 837.6,
+          "freedMB": -0.9,
+          "newPipelines": 0,
+          "newTextures": 0,
+          "newGeometries": 0,
+          "newBuilds": 0
+        }
+      ],
+      "builds": {
+        "made": 4,
+        "top": [
+          {
+            "k": "marine-shadow < Group < Group < Group | SkinnedMesh | MeshBasicMaterial",
+            "n": 2,
+            "frames": [
+              26,
+              1676
+            ]
+          },
+          {
+            "k": "feral-motion-echo < Scene | SkinnedMesh | MeshBasicMaterial",
+            "n": 1,
+            "frames": [
+              509
+            ]
+          },
+          {
+            "k": "zombie-skin < Group < Scene | SkinnedMesh | MeshStandardNodeMaterial",
+            "n": 1,
+            "frames": [
+              1038
+            ]
+          }
+        ]
+      },
+      "pipelines": {
+        "made": 3,
+        "released": 0,
+        "withNewShaders": 3,
+        "top": [
+          {
+            "k": "marine-shadow < Group < Group < Group | NodeMaterial:ShadowMaterial | opaque side0 zw | OrthographicCamera",
+            "n": 2,
+            "newShaders": 2,
+            "frames": [
+              26,
+              1676
+            ]
+          },
+          {
+            "k": "feral-motion-echo < Scene | MeshBasicMaterial | transparent side0 no-zw | scene",
+            "n": 1,
+            "newShaders": 1,
+            "frames": [
+              509
+            ]
+          }
+        ],
+        "first": [
+          {
+            "frame": 26,
+            "obj": "marine-shadow < Group < Group < Group",
+            "kind": "SkinnedMesh",
+            "mat": "NodeMaterial:ShadowMaterial",
+            "state": "opaque side0 zw",
+            "cam": "OrthographicCamera",
+            "newShaders": "v"
+          },
+          {
+            "frame": 509,
+            "obj": "feral-motion-echo < Scene",
+            "kind": "SkinnedMesh",
+            "mat": "MeshBasicMaterial",
+            "state": "transparent side0 no-zw",
+            "cam": "scene",
+            "newShaders": "vf"
+          },
+          {
+            "frame": 1676,
+            "obj": "marine-shadow < Group < Group < Group",
+            "kind": "SkinnedMesh",
+            "mat": "NodeMaterial:ShadowMaterial",
+            "state": "opaque side0 zw",
+            "cam": "OrthographicCamera",
+            "newShaders": "v"
+          }
+        ]
+      }
+    },
+    {
+      "id": "run-3",
+      "fps": 58.6,
+      "low": 40.9,
+      "worst": 22.7,
+      "hitches": 0,
+      "draws": 262,
+      "triangles": 709208,
+      "frameMs": 17.06,
+      "tickMs": 13.33,
+      "outsideMs": 3.74,
+      "gpuMs": 0.3,
+      "spikeCauses": {
+        "spikes": 10,
+        "pipelines": 1,
+        "builds": 1,
+        "uploads": 0,
+        "gc": 2,
+        "code": 6
+      },
+      "spikes": [
+        {
+          "frame": 951,
+          "ms": 29.4,
+          "top": [
+            "r:render 17.5",
+            "r:matrices 4.9",
+            "zombies 2.1",
+            "r:cull 1.4"
+          ],
+          "heapMB": 923,
+          "freedMB": -0.7,
+          "newPipelines": 0,
+          "newTextures": 0,
+          "newGeometries": 0,
+          "newBuilds": 0
+        },
+        {
+          "frame": 1130,
+          "ms": 29.7,
+          "top": [
+            "r:render 12.9",
+            "zombies 5.1",
+            "r:matrices 3.9",
+            "m:hold 1.5"
+          ],
+          "heapMB": 900.8,
+          "freedMB": -0.7,
+          "newPipelines": 0,
+          "newTextures": 0,
+          "newGeometries": 0,
+          "newBuilds": 0
+        },
+        {
+          "frame": 1444,
+          "ms": 31,
+          "top": [
+            "r:render 24.6",
+            "zombies 2.2",
+            "r:matrices 1.3",
+            "m:idle 0.8"
+          ],
+          "heapMB": 925.3,
+          "freedMB": -10.2,
+          "newPipelines": 0,
+          "newTextures": 0,
+          "newGeometries": 0,
+          "newBuilds": 1
+        },
+        {
+          "frame": 1454,
+          "ms": 27.6,
+          "top": [
+            "marine 11.3",
+            "r:render 7.9",
+            "zombies 2.9",
+            "r:matrices 2.0"
+          ],
+          "heapMB": 945,
+          "freedMB": -11.5,
+          "newPipelines": 0,
+          "newTextures": 0,
+          "newGeometries": -1,
+          "newBuilds": 0
+        },
+        {
+          "frame": 1612,
+          "ms": 27.1,
+          "top": [
+            "zombies 14.7",
+            "r:render 8.0",
+            "r:matrices 1.6",
+            "m:hold 0.8"
+          ],
+          "heapMB": 955.4,
+          "freedMB": -10.4,
+          "newPipelines": 0,
+          "newTextures": 0,
+          "newGeometries": 0,
+          "newBuilds": 0
+        },
+        {
+          "frame": 1660,
+          "ms": 30.3,
+          "top": [
+            "r:render 16.0",
+            "zombies 8.3",
+            "r:matrices 2.1",
+            "m:hold 0.6"
+          ],
+          "heapMB": 946.6,
+          "freedMB": 31.8,
+          "newPipelines": 0,
+          "newTextures": 0,
+          "newGeometries": 0,
+          "newBuilds": 0
+        },
+        {
+          "frame": 1661,
+          "ms": 37.6,
+          "top": [
+            "r:render 13.5",
+            "zombies 13.4",
+            "r:matrices 3.0",
+            "m:hold 1.8"
+          ],
+          "heapMB": 948.3,
+          "freedMB": -1.7,
+          "newPipelines": 0,
+          "newTextures": 0,
+          "newGeometries": 0,
+          "newBuilds": 0
+        },
+        {
+          "frame": 1678,
+          "ms": 29.4,
+          "top": [
+            "r:render 21.3",
+            "zombies 3.1",
+            "r:matrices 1.8",
+            "m:hold 0.5"
+          ],
+          "heapMB": 968.8,
+          "freedMB": -3.4,
+          "newPipelines": 1,
+          "newTextures": 0,
+          "newGeometries": 4,
+          "newBuilds": 1
+        }
+      ],
+      "builds": {
+        "made": 6,
+        "top": [
+          {
+            "k": "marine-shadow < Group < Group < Group | SkinnedMesh | MeshBasicMaterial",
+            "n": 3,
+            "frames": [
+              28,
+              1528,
+              1678
+            ]
+          },
+          {
+            "k": "feral-motion-echo < Scene | SkinnedMesh | MeshBasicMaterial",
+            "n": 1,
+            "frames": [
+              571
+            ]
+          },
+          {
+            "k": "zombie-skin < Group < Scene | SkinnedMesh | MeshStandardNodeMaterial",
+            "n": 1,
+            "frames": [
+              1444
+            ]
+          },
+          {
+            "k": "Mesh < Group < Scene | Mesh | MeshBasicMaterial",
+            "n": 1,
+            "frames": [
+              1646
+            ]
+          }
+        ]
+      },
+      "pipelines": {
+        "made": 5,
+        "released": 0,
+        "withNewShaders": 4,
+        "top": [
+          {
+            "k": "marine-shadow < Group < Group < Group | NodeMaterial:ShadowMaterial | opaque side0 zw | OrthographicCamera",
+            "n": 3,
+            "newShaders": 3,
+            "frames": [
+              28,
+              1528,
+              1678
+            ]
+          },
+          {
+            "k": "feral-motion-echo < Scene | MeshBasicMaterial | transparent side0 no-zw | scene",
+            "n": 1,
+            "newShaders": 1,
+            "frames": [
+              571
+            ]
+          },
+          {
+            "k": "Mesh < Group < Scene | MeshBasicMaterial | transparent side1 no-zw blend2 | scene",
+            "n": 1,
+            "newShaders": 0,
+            "frames": [
+              1646
+            ]
+          }
+        ],
+        "first": [
+          {
+            "frame": 28,
+            "obj": "marine-shadow < Group < Group < Group",
+            "kind": "SkinnedMesh",
+            "mat": "NodeMaterial:ShadowMaterial",
+            "state": "opaque side0 zw",
+            "cam": "OrthographicCamera",
+            "newShaders": "v"
+          },
+          {
+            "frame": 571,
+            "obj": "feral-motion-echo < Scene",
+            "kind": "SkinnedMesh",
+            "mat": "MeshBasicMaterial",
+            "state": "transparent side0 no-zw",
+            "cam": "scene",
+            "newShaders": "vf"
+          },
+          {
+            "frame": 1528,
+            "obj": "marine-shadow < Group < Group < Group",
+            "kind": "SkinnedMesh",
+            "mat": "NodeMaterial:ShadowMaterial",
+            "state": "opaque side0 zw",
+            "cam": "OrthographicCamera",
+            "newShaders": "v"
+          },
+          {
+            "frame": 1646,
+            "obj": "Mesh < Group < Scene",
+            "kind": "Mesh",
+            "mat": "MeshBasicMaterial",
+            "state": "transparent side1 no-zw blend2",
+            "cam": "scene",
+            "newShaders": ""
+          },
+          {
+            "frame": 1678,
+            "obj": "marine-shadow < Group < Group < Group",
+            "kind": "SkinnedMesh",
+            "mat": "NodeMaterial:ShadowMaterial",
+            "state": "opaque side0 zw",
+            "cam": "OrthographicCamera",
+            "newShaders": "v"
+          }
+        ]
+      }
+    }
+  ],
+  "nightGlowChecks": {
+    "shot1Info": {
+      "spawned": [
+        {
+          "kind": "shambler",
+          "emissiveIntensity": null
+        },
+        {
+          "kind": "feral",
+          "emissiveIntensity": null
+        },
+        {
+          "kind": "drowned",
+          "emissiveIntensity": null
+        },
+        {
+          "kind": "military",
+          "emissiveIntensity": null
+        },
+        {
+          "kind": "brute",
+          "emissiveIntensity": null
+        },
+        {
+          "kind": "spitter",
+          "emissiveIntensity": null
+        },
+        {
+          "kind": "bomber",
+          "emissiveIntensity": null
+        },
+        {
+          "kind": "screamer",
+          "emissiveIntensity": null
+        }
+      ],
+      "origCam": [
+        0,
+        6.739596952870079,
+        1.1429698708074
+      ],
+      "errs": []
+    },
+    "shot2Info": {
+      "d1": {
+        "alive": true,
+        "bodyEmissive": null,
+        "fists": {
+          "visible": true,
+          "count": 2,
+          "castShadow": false
+        }
+      },
+      "d2": {
+        "alive": true,
+        "bodyEmissive": null,
+        "fists": {
+          "visible": true,
+          "count": 2,
+          "castShadow": false
+        }
+      },
+      "errs": []
+    }
+  }
+}

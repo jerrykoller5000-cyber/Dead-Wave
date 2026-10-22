@@ -286,3 +286,84 @@ shader, and the one-draw bodies (CL-138) had skeletons of 10-17 bones and more i
 fists' shadow, all at once when the demons came close: the far-shadow toggle turned every mesh's shadow on, the
 fists' too. CL-227 pads every zombie skeleton to 32 bones (one shader per body material, warmed at load) and keeps
 each mesh's own shadow flag. AG-107 measures it.
+
+## 2026-10-21: equal shaders are equal text (AG-107, CL-229)
+
+With every zombie skeleton at 32 bones (CL-227), AG-107's first run still built 19 zombie-skin pipelines with new
+vertex shaders, though the demon fists' shadows were gone (1 % low 36.3, from 25.7; 56.5 fps). The cause was three's
+WGSL builder: it names an unnamed buffer uniform after the node's id (`NodeBuffer_<id>`), and a body's bone matrices
+and an InstancedMesh's instance matrices are such buffers. So every body with its own material and every
+InstancedMesh wrote a shader text of its own. CL-229 names them in order within each shader (`dwBuf0`...), and
+equal shaders now share one program: in a three-only probe, three InstancedMeshes went from 3 programs to 1, and
+skinned bodies render identically. AG-108 measures night 20 with it.
+
+## 2026-10-21, morning: builds without pipelines (AG-108, CL-232)
+
+With CL-229, night 20 built no new pipelines (AG-108: 53-57 fps, 1 % low 26-35), but 25-29 frames a run still took
+25-48 ms, almost all in `r:render` with ~10 MB of heap: node builds. three keys a material's compiled node state on its
+node graph's node ids, so every material with a node graph of its own is a build on its first frame, even when its
+shader text and pipeline are shared. Each zombie body had its own glow graph; CL-232 shares one (it reads the levels of
+the body it draws). bench --prof now journals the builds too (`prof.builds`, `newBuilds` on the spikes). Still to
+look at: per-body InstancedMeshes (the demon's fists, the screamer's vapour), whose builds are keyed on the object.
+
+## 2026-10-21, afternoon: the marine's shadow, then the sun's (AG-109 to AG-111, CL-234 to CL-237)
+
+AG-109 (after CL-232): 56.4 fps (best 58.6), 1 % low 39.7, no hitches. The builds left were the marine's shadow proxy
+being merged again (`marine` 11-14 ms, then a build) whenever a stowed gun, a holster shell or the smoking idle's props
+came or went. CL-234 left them out of the proxy; AG-110 found the flag was wiped on the stowed copies and missing over
+the holster shell, and that the props then cast no shadow (CL-236 fixed all three; they cast their own now).
+
+AG-111 (after CL-236), night 20 at High on the 5080, three runs: 57.4 / 59.1 / 59.4 fps, 1 % low 36.6 / 47.7 / 45.5,
+tick 13.4-13.9 ms (15.0-15.8 in AG-110), the proxy built once per run. The spikes
+left were mostly `r:render` 15-18 ms with nothing built, about 175 frames apart: CL-219's deep-night cadence redrew the
+sun's shadow map every 150 frames, a whole shadow pass (~8 ms) in one frame. CL-237 redraws it in the night proper only
+when the map's centre has moved 16 m, and every 900 frames otherwise; bench --prof marks those spikes (`sunShadow`).
+Also left: one zombie-skin node build per run (25-27 ms, ~10 MB) and the odd `zombies` 8-10 ms frame. AG-112 measures.
+
+## 2026-10-21, evening: the 3-second frames (AG-112, AG-113, GB-218, CL-239)
+
+AG-112 (after CL-237): 58.3 / 59.1 / 59.4 fps, 1 % low 42.9 / 43.3 / 45.5, worst frame 21.9-24.0 ms, no hitches; no spike
+is the sun's shadow any more. The low did not rise: AG-113 (render-object journal) and GB-218 (marks inside the
+zombies' update) found that the frames left, ~180 frames (3 s) apart, make nothing new and run every phase 2.5-3x its
+own average at once. No game code runs on that clock; V8 marking the ~900 MB heap is the suspect. CL-239 adds
+`bench --prof --gc` (the main thread's GC per spike frame); AG-114 runs it.
+
+How bench's 1 % low reads: the mean of the last ten 1-second windows' worst frames (one second keeps ~60 frames, and
+1 % of them is the worst one). To reach 50, nearly every second's worst frame has to be under 20 ms.
+
+AG-114 (`--prof --gc`): not the GC. Main-thread GC was 40 ms in 30 s (~50 scavenges of 0.7 ms) and 0 of 11 and 0 of 9
+spike frames had any. The spike frames start whole seconds apart on the wall clock (mostly 3 s, within ~5 ms), which
+nothing in the game does; with every phase slower at once, the suspect is the computer (another program on a timer,
+or the thread moved to a slower core). CL-240's `tools/steady-probe.mjs` (a fixed workload a frame, nothing else)
+asks the computer directly (AG-115). Allocation is 770 kB a frame (`updateZombies` 259 kB), under 1 ms of GC a second.
+
+## 2026-10-21, night: the night-20 budget is met (GP-19949, GP-19950, AG-115; CL-211 closed)
+
+After GP-19949 (the last first-sight builds warmed at load), night 20 at High on Jerry's 5080 reads **60.0 fps, 1 % low
+55.2 / 56.3 / 56.2, worst frame 16.8-17.0 ms, no hitches, no builds or pipelines** in three runs (tick 10.6-11.9 ms),
+against the 1.0 budget of 60 and 50. One run had one 34 ms frame: a 107 MB collection in `zombies`.
+
+Antigravity's runs of the same build read ~59 fps and 38-47, with a slow frame every 3 s on the wall clock. That was
+the seat, not the game: CL-240's steady probe (fixed arithmetic a frame) had 0 slow frames from both seats, and while
+Antigravity measures, her IDE runs `git status` without pause (100 % of a thread) and Defender scans what it reads
+(38-67 %); during ChatGPT's runs Antigravity was idle. The probe's loop lives in registers and doesn't feel memory or
+cache contention; the game does. So: measure frame time from a quiet seat (ChatGPT's), and when Jerry plays, the crew's
+apps idle or closed. The PC is a Ryzen 9 5900X (24 threads, High performance plan).
+
+## 2026-10-22, night: the marine's shadow proxy at load (GP-19952, CL-241)
+
+With night 20 at 60 fps, the one build left in a fight was the marine's shadow proxy (CL-140): GP-19951 saw it at frame
+789 of one run, GP-19952 at frames 776-784 of all three. It was built a second after he landed, but three builds a
+mesh's shader when it is first *drawn*: on the bench he lands and the night is jumped to at once, so the proxy was built
+after the night's one shadow redraw and first drawn by the next timed one, 900 frames on (CL-237). In real play its
+first draw came a second after landing, in the day (one 25-35 ms frame), and every rebuild later (a part shown or
+hidden) built its shader again: three drops a node build when its last user is disposed, and the old proxy was disposed
+before the new one was drawn; a new part count was a new bone count, and the bone count is in the shader.
+
+CL-241 builds it at load before the staged fight (whose compile and frames build its pipeline), pads its skeleton to 96
+bones, keeps the old proxy until the new one has been drawn, and redraws the night's shadow map when it is rebuilt. The
+start of a match no longer rebuilds it: the rig skin (CL-210) is baked again then, and its new skinned meshes changed
+the proxy's signature though the proxy never takes skinned meshes. In the cloud (software WebGL, Medium, 480x270),
+before / after: built after landing with a new node build / built at load, drawn at frame 10, nothing after landing; a
+part shown by day: 69 bones and a new node build / 96 bones, no new node build; a part shown at night: not drawn until
+the next timed redraw / the map redrawn once and drawn the next frame. t272 (real renderer) checks it. Jerry's PC: GP-19953. On Jerry's PC (GP-19953, GP-19954): 0 builds and 0 pipelines in night 20; from a quiet seat 59.9/60.0 fps, 1 % low 50.1/53.3, the title 14.5 s warm.

@@ -49,9 +49,10 @@
     // The zoom.
     click('[data-cif-tab="body"]'); await wait(100);
     click('[data-cif-item="boots"]');
-    await wait(900);
+    await until(() => D().frame === 'feet' && D().view.y < 0.6 && D().view.h < 1.3, 6000);
     ok(D().frame === 'feet' && D().view.y < 0.6 && D().view.h < 1.3, 'picking the boots zooms to them (centre ' + D().view.y.toFixed(2) + ' m, ' + D().view.h.toFixed(2) + ' m frame)');
-    click('[data-cif-tab="head"]'); await wait(900);
+    click('[data-cif-tab="head"]');
+    await until(() => D().frame === 'full' && D().view.h > 1.9, 6000);
     ok(D().frame === 'full' && D().view.h > 1.9, 'a tab: all of him again (' + D().view.h.toFixed(2) + ' m)');
     // The insulated boots' colour.
     click('[data-cif-tab="body"]'); await wait(50); click('[data-cif-item="boots"]'); await wait(100);
