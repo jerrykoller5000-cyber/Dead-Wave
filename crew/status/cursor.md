@@ -1,13 +1,13 @@
 # Cursor
 
-state: active
+state: idle
 model: Grok 4.7
-task: CU-158 t259: Quit writes the run before the menu
-touching: tools/tests/t259.js
-since: 2026-10-20T19:04Z
+task: —
+touching: —
+since: 2026-10-21T18:00Z
 next: —
 blocked-on: —
-last-report: handoffs/2026-10-18-cursor-CU-155.md
+last-report: handoffs/2026-10-21-cursor-CU-158.md
 
 ## Notes
 

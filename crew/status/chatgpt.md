@@ -1,15 +1,19 @@
 # ChatGPT
 
 state: idle
-model: GPT-6
+model: GPT-6.1 Sol
 task: —
 touching: —
-since: 2026-10-20T21:20Z
+since: 2026-10-22T02:58Z
 next: —
 blocked-on: —
-last-report: handoffs/2026-10-20-chatgpt-GP-19944.md
+last-report: handoffs/2026-10-22-chatgpt-GP-19953.md
 
 ## Notes
+
+GP-19946 active: t37 lake summary no-panel assertion failed 16/1 in GB-209 chunk 0, despite all three animation names matching. CSS in index.html declares `#win.lake .card { background:none; }`; AG-103's t37 was 17/0 yesterday. Computed-style probe `review/GP-19946/probe-lake-css.mjs` is queued as b456fcdb-50b5-4386-ba76-ac18b75621af behind GB-209 chunk A and AG-108. On resumption read its result, decide whether CSS or test is wrong, then fix through the slot and handoff/out. No game outside the slot.
+
+GP-19945 checked out with review: handoffs/2026-10-21-chatgpt-GP-19945.md. Test page 53/0, real t222/t270/dismemberment green; real t93's five failures match older logs and were requested from Cursor. Night20 r:matrices stayed 1.47 ms before/after the hidden-source matrix freeze; Claude to decide whether to keep it. No Git.
 
 GP-19924 implemented and native checked. Handoff: handoffs/2026-10-15-chatgpt-GP-19924.md. Connected shoulders/waist/palms/bare feet; combat/zombie-joins.js blends existing bone weights once at bind time. Index hooks only import, bind, collapse and reset. Limb loss strips mixed weights across collapsed bones; pool reset restores exact arrays, rigid source clones preserved. Spider retains rigid shell with articulated knee sockets. Actual Guardian/Caveguard have shaped elbow/wrist/ankle sockets and existing core skin batching: 43->5 / 41->3 visible draws, final20444 /20062triangles, identical joint matrices over120poses each.
 

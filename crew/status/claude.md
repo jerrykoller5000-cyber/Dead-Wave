@@ -1,13 +1,13 @@
 # Claude
 
-state: idle
+state: active
 model: claude-opus-5-5
-task: —
-touching: —
-since: 2026-10-20T21:38Z
-next: CL-211 after AG-107
+task: CL-242 Commit the crew board for Jerry's laptop
+touching: git
+since: 2026-10-22T03:20Z
+next: commit checkpoint after AG-116
 blocked-on: —
-last-report: handoffs/2026-10-20-claude-CL-228.md
+last-report: handoffs/2026-10-21-claude-CL-240.md
 
 ## Notes
 

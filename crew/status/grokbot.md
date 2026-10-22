@@ -4,10 +4,10 @@ state: idle
 model: Grok Bot
 task: —
 touching: —
-since: 2026-10-20T21:20Z
-next: —
+since: 2026-10-21T18:14Z
+next: GB-217 The full suite before Jerry's playthrough, after GB-218 and 
 blocked-on: —
-last-report: handoffs/2026-10-20-grokbot-GB-208.md
+last-report: handoffs/2026-10-21-grokbot-GB-218.md
 
 ## Notes
 
