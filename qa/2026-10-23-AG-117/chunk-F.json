@@ -1,0 +1,27 @@
+{
+  "chunk": "F",
+  "range": "tinspect..t273",
+  "count": 34,
+  "summaryLine": "34 checks: 451 pass, 1 fail, 2 reported no assertions",
+  "initialFailed": [
+    "t264"
+  ],
+  "flakyClearedOnRerun": [
+    "t264"
+  ],
+  "heldReds": [],
+  "initialFailuresDetail": [
+    {
+      "status": "FAIL",
+      "name": "t264",
+      "pass": 21,
+      "fail": 1,
+      "secs": 49.2,
+      "detail": "",
+      "failLines": [
+        "FAIL the current carries it: 0.16 m in 1.5 s"
+      ]
+    }
+  ],
+  "rerunFailuresDetail": []
+}

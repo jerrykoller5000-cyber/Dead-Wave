@@ -20,7 +20,7 @@
     const put = (kind, x, z) => {
       const zz = T.spawnZombie(x, z, kind, true, true);
       zz.mesh.position.set(x, T.sampleHeight(x, z), z);
-      zz.hp = 5000; zz.maxHp = 5000; zz.riseT = 0;
+      zz.hp = 5000; zz.maxHp = T.ZOMBIE_TYPES[kind].hp; zz.riseT = 0; // D-86: a durable fixture with the kind's real sheet base
       return zz;
     };
     const steady = (fn) => { const rnd = Math.random; Math.random = () => 0.99; try { fn(); } finally { Math.random = rnd; } };

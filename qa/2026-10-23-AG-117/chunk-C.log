@@ -1,0 +1,46 @@
+# AG-117 chunk C: t132 t133 t134 t135 t136 t137 t138 t139 t140 t141 t142 t143 t144 t145 t146 t147 t148 t149 t150 t151 t152 t153 t154 t155 t156 t157 t158 t159 t160 t161 t162 t163
+# Started: 2026-10-23T06:21:10.026Z
+
+GRANT antigravity AG-117: starting one game-test command
+check-players: 304 player.position reads, all in the allowed places
+ok    t132    11 pass   0 fail  39.6s
+ok    t133     9 pass   0 fail  54.0s
+ok    t134     9 pass   0 fail  27.3s
+ok    t135     8 pass   0 fail  39.0s
+ok    t136    36 pass   0 fail  56.5s
+ok    t137    14 pass   0 fail  42.9s
+ok    t138     6 pass   0 fail  39.3s
+ok    t139    13 pass   0 fail  54.1s
+ok    t140    17 pass   0 fail  35.7s
+ok    t141     7 pass   0 fail  40.1s
+ok    t142    10 pass   0 fail  53.0s
+ok    t143    17 pass   0 fail  80.2s
+ok    t144     9 pass   0 fail  39.0s
+ok    t145    17 pass   0 fail  24.4s
+ok    t146    43 pass   0 fail  42.1s
+ok    t147    19 pass   0 fail  96.3s
+ok    t148    23 pass   0 fail  59.1s
+ok    t149    16 pass   0 fail  62.1s
+ok    t150    13 pass   0 fail  68.1s
+ok    t151     7 pass   0 fail  24.1s
+ok    t152    27 pass   0 fail  60.0s
+ok    t153    15 pass   0 fail  23.4s
+ok    t154     5 pass   0 fail  39.4s
+FAIL  t155     1 pass   1 fail  40.2s
+ok    t156    34 pass   0 fail  64.5s
+ok    t157     6 pass   0 fail  40.4s
+ok    t158    13 pass   0 fail  24.7s
+ok    t159    10 pass   0 fail  50.3s
+ok    t160    11 pass   0 fail  63.2s
+ok    t161     7 pass   0 fail  23.8s
+ok    t162    20 pass   0 fail  57.4s
+ok    t163    16 pass   0 fail  57.0s
+
+32 checks: 469 pass, 1 fail
+
+by owner:
+  unassigned
+    t155   1 fail  FAIL a close shell knocks it down (knockT 0.00) with no reacting body
+           FAIL a close shell knocks it down (knockT 0.00) with no reacting body
+
+# Finished: 2026-10-23T06:46:36.849Z code=1

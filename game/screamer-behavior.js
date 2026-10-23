@@ -1,6 +1,6 @@
 // GP-19877: slow floating protected pursuit, anxious exposed retreat; one shield clock.
 import {shamblerLeg} from './shambler-motion.js';
-export const SCREAMER=Object.freeze({damageShare:.03,openSeconds:2.4,turnRate:2,turnAccel:4.8,stride:1.4,exposedTurnRate:3.8,exposedTurnAccel:9,retreatGap:8,protectedPace:.40});
+export const SCREAMER=Object.freeze({damageShare:.25,openSeconds:2.4,turnRate:2,turnAccel:4.8,stride:1.4,exposedTurnRate:3.8,exposedTurnAccel:9,retreatGap:8,protectedPace:.40});
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),angle=v=>Math.atan2(Math.sin(v),Math.cos(v));
 const poses=new WeakMap(),turns=new WeakMap();
 const unavailable=z=>!z.alive||z.crawling||z.hopping||z.sleeping||z.poiGuard&&!z.poiAwake||z.riseT>0||z.belowRiseT>0||z.knockT>0||z.getUpT>0||z.windowClimb||z.abilityBusy;

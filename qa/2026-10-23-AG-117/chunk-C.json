@@ -1,0 +1,39 @@
+{
+  "chunk": "C",
+  "range": "t132..t163",
+  "count": 32,
+  "summaryLine": "32 checks: 469 pass, 1 fail",
+  "initialFailed": [
+    "t155"
+  ],
+  "flakyClearedOnRerun": [],
+  "heldReds": [
+    "t155"
+  ],
+  "initialFailuresDetail": [
+    {
+      "status": "FAIL",
+      "name": "t155",
+      "pass": 1,
+      "fail": 1,
+      "secs": 40.2,
+      "detail": "",
+      "failLines": [
+        "FAIL a close shell knocks it down (knockT 0.00) with no reacting body"
+      ]
+    }
+  ],
+  "rerunFailuresDetail": [
+    {
+      "status": "FAIL",
+      "name": "t155",
+      "pass": 1,
+      "fail": 1,
+      "secs": 41.7,
+      "detail": "",
+      "failLines": [
+        "FAIL a close shell knocks it down (knockT 0.00) with no reacting body"
+      ]
+    }
+  ]
+}

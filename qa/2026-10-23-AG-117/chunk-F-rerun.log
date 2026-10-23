@@ -1,0 +1,10 @@
+# AG-117 chunk F rerun: t264
+# Started: 2026-10-23T08:42:18.275Z
+
+GRANT antigravity AG-117: starting one game-test command
+check-players: 304 player.position reads, all in the allowed places
+ok    t264    22 pass   0 fail  49.2s
+
+1 checks: 22 pass, 0 fail
+
+# Finished: 2026-10-23T08:43:08.750Z code=0

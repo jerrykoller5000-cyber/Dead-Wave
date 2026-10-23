@@ -1,0 +1,56 @@
+# AG-117 chunk A: t68 t69 t70 t71 t72 t73 t74 t75 t76 t77 t78 t79 t80 t81 t82 t83 t84 t85 t86 t87 t88 t89 t90 t91 t92 t93 t94 t95 t96 t97 t98 t99
+# Started: 2026-10-23T05:18:16.242Z
+
+GRANT antigravity AG-117: starting one game-test command
+check-players: 304 player.position reads, all in the allowed places
+ok    t68     15 pass   0 fail  40.0s
+ok    t69     18 pass   0 fail  65.1s
+ok    t70     21 pass   0 fail  69.2s
+FAIL  t71     15 pass   1 fail  63.2s
+ok    t72     21 pass   0 fail  71.2s
+ok    t73     12 pass   0 fail  54.5s
+ok    t74     18 pass   0 fail  53.2s
+ok    t75     16 pass   0 fail  51.3s
+ok    t76     16 pass   0 fail  55.0s
+FAIL  t77     16 pass   1 fail  55.6s
+ok    t78     18 pass   0 fail  40.3s
+ok    t79     12 pass   0 fail  68.1s
+ok    t80     14 pass   0 fail  169.9s
+           INFO the old drape (sampleHeight + 7 cm) went 0.37 m under the drawn bed at worst
+ok    t81      5 pass   0 fail  24.0s
+ok    t82      4 pass   0 fail  24.0s
+ok    t83     31 pass   0 fail  56.9s
+ok    t84     10 pass   0 fail  58.7s
+ok    t85     15 pass   0 fail  55.7s
+ok    t86     12 pass   0 fail  46.4s
+ok    t87     13 pass   0 fail  42.5s
+ok    t88     13 pass   0 fail  42.4s
+ok    t89     18 pass   0 fail  49.1s
+FAIL  t90      5 pass   1 fail  47.6s
+ok    t91      7 pass   0 fail  51.2s
+ok    t92      5 pass   0 fail  43.6s
+FAIL  t93     10 pass   1 fail  78.0s
+ok    t94      8 pass   0 fail  46.5s
+ok    t95      9 pass   0 fail  66.7s
+ok    t96     19 pass   0 fail  58.5s
+ok    t97     15 pass   0 fail  55.2s
+           INFO ragdoll off: 160 spawned, 160 alive at the end, 122 ticks, frame 155.68 ms avg / 1434.50 ms worst (headless)
+           INFO ragdoll on: 160 spawned, 160 alive at the end, 70 ticks, frame 210.38 ms avg / 861.10 ms worst (headless)
+ok    t98     20 pass   0 fail  93.1s
+           INFO 120 spawned, 120 alive after 115.5 s and 26 legs (650 ticks)
+ok    t99      6 pass   0 fail  161.8s
+
+32 checks: 437 pass, 4 fail
+
+by owner:
+  unassigned
+    t71    1 fail  FAIL streak fractions carry: 8 kills pay 18 in 8 skulls (want 9)
+           FAIL streak fractions carry: 8 kills pay 18 in 8 skulls (want 9)
+    t77    1 fail  FAIL and it cuts again once restarted (fuel -0.70, heat 0.44->0.46, w chainsaw, paused ?, d dead
+           FAIL and it cuts again once restarted (fuel -0.70, heat 0.44->0.46, w chainsaw, paused ?, d dead,dead,1.1,2.2,1.1,2.3,1.1,dead phase prep zl 5)
+    t90    1 fail  FAIL a shell at 1.5 m 0.00 m/s and down; an AK round 2.70 m/s and up
+           FAIL a shell at 1.5 m 0.00 m/s and down; an AK round 2.70 m/s and up
+    t93    1 fail  FAIL over 1.5 s game time, walking soles stay above -5 cm and below +20 cm (+30 cm for Screamer 
+           FAIL over 1.5 s game time, walking soles stay above -5 cm and below +20 cm (+30 cm for Screamer and Feral) (military -0.05/0.05/1.50)
+
+# Finished: 2026-10-23T05:51:01.121Z code=1

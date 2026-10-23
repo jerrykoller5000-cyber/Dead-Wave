@@ -1,13 +1,13 @@
 # Claude
 
-state: active
+state: idle
 model: claude-opus-5-5
-task: CL-243 The checkpoint before Jerry's playthrough
-touching: git
-since: 2026-10-22T18:20Z
-next: Jerry's night-pack notes after the playthrough (24-25 Oct)
+task: —
+touching: —
+since: 2026-10-23T02:40Z
+next: review AG-117 and GP-19956, then the checkpoint before the playthrough
 blocked-on: —
-last-report: handoffs/2026-10-22-claude-CL-241.md
+last-report: handoffs/2026-10-23-claude-CL-244.md
 
 ## Notes
 

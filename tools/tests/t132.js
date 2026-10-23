@@ -14,7 +14,7 @@
     for (let d = 1; d <= 40; d++) { const m = T.nightPlanFor(d).mod || null; if ((d === 14) !== (m === 'fog') || (d !== 14 && d !== 17 && m !== null)) bad.push(d + ':' + m); }   // GB-93: 17 is Swarm Night (t166)
     ok(bad.length === 0, 'nightPlanFor: mod fog on 14 and null on every other night 1-40 but 17 (Swarm Night, t166) ' + bad.join(' '));
     const p14 = T.nightPlanFor(14);
-    ok(p14.total === 600 && p14.trick === 'lake-surge' && p14.pushes === 5 && p14.rest === true, 'night 14 keeps its total 600, trick lake-surge, 5 pushes, rest');
+    ok(p14.total === 560 && p14.trick === 'lake-surge' && p14.pushes === 5 && p14.rest === true, 'night 14 keeps its total (560 since D-86), trick lake-surge, 5 pushes, rest');
     const p22 = T.nightPlanFor(22);
     ok(p22.endless === true && p22.trick === 'lake-surge' && p22.mod === null, 'night 22 reuses 14\'s trick without the fog');
     // Live: the prep of 13 says nothing, the prep of 14 names it, the wave keeps it, 15's prep clears it.
@@ -23,7 +23,7 @@
     T.startPrep();
     const pv = T.getWavePreview(14);
     ok(st().day === 14 && pv.night.mod === 'fog' && st().mod === 'fog', 'night 14 prep: named Fog Night (preview and director)');
-    ok(pv.total === 600 && pv.night.trick === 'lake-surge' && pv.night.pushes.length === 5, 'night 14 preview: total 600, lake-surge, 5 pushes (' + pv.total + ')');
+    ok(pv.total === 560 && pv.night.trick === 'lake-surge' && pv.night.pushes.length === 5, 'night 14 preview: total 560 (D-86), lake-surge, 5 pushes (' + pv.total + ')');
     T.beginWave(); T.clearZombies();
     ok(st().phase === 'wave' && st().mod === 'fog' && st().waveTotal === pv.total, 'through the wave it stays fog, total unchanged (' + st().waveTotal + ')');
     ok(T.nightKindForDay(14) === 'fog', 'night-cleared kind for 14 is fog (' + T.nightKindForDay(14) + ')');

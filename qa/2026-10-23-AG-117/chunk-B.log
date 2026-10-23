@@ -1,0 +1,43 @@
+# AG-117 chunk B: t100 t101 t102 t103 t104 t105 t106 t107 t108 t109 t110 t111 t112 t113 t114 t115 t116 t117 t119 t120 t121 t122 t123 t124 t125 t126 t127 t128 t129 t130 t131
+# Started: 2026-10-23T05:54:55.487Z
+
+GRANT antigravity AG-117: starting one game-test command
+check-players: 304 player.position reads, all in the allowed places
+ok    t100     7 pass   0 fail  41.4s
+ok    t101     9 pass   0 fail  38.7s
+ok    t102    17 pass   0 fail  44.6s
+ok    t103     8 pass   0 fail  39.7s
+ok    t104     5 pass   0 fail  39.7s
+ok    t105    15 pass   0 fail  50.9s
+ok    t106     9 pass   0 fail  116.4s
+ok    t107     8 pass   0 fail  40.9s
+ok    t108     9 pass   0 fail  40.9s
+ok    t109     5 pass   0 fail  40.0s
+ok    t110     4 pass   0 fail  40.4s
+           INFO feral head centre p10 0.723, median 0.776 of hitH (line 0.7)
+           INFO leaper head centre p10 0.633, median 0.672 of hitH (line 0.55)
+           INFO spider head centre p10 0.612, median 0.633 of hitH (line 0.6)
+ok    t111    11 pass   0 fail  53.3s
+ok    t112    13 pass   0 fail  47.7s
+ok    t113     5 pass   0 fail  74.9s
+ok    t114     8 pass   0 fail  41.9s
+ok    t115    10 pass   0 fail  43.3s
+ok    t116     7 pass   0 fail  50.5s
+ok    t117    17 pass   0 fail  45.8s
+ok    t119    20 pass   0 fail  41.1s
+ok    t120    11 pass   0 fail  42.5s
+ok    t121    31 pass   0 fail  23.9s
+ok    t122    14 pass   0 fail  40.5s
+ok    t123     6 pass   0 fail  29.2s
+ok    t124     5 pass   0 fail  50.3s
+ok    t125    10 pass   0 fail  44.0s
+ok    t126    12 pass   0 fail  53.7s
+ok    t127    28 pass   0 fail  92.8s
+ok    t128    28 pass   0 fail  116.9s
+ok    t129    22 pass   0 fail  42.6s
+ok    t130    14 pass   0 fail  41.9s
+ok    t131    18 pass   0 fail  59.0s
+
+31 checks: 386 pass, 0 fail
+
+# Finished: 2026-10-23T06:21:09.974Z code=0

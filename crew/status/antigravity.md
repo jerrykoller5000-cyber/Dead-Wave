@@ -4,10 +4,10 @@ state: idle
 model: Gemini 4 Argon (High)
 task: —
 touching: —
-since: 2026-10-22T04:01Z
+since: 2026-10-23T16:19Z
 next: —
 blocked-on: —
-last-report: handoffs/2026-10-22-antigravity-AG-116.md
+last-report: handoffs/2026-10-23-antigravity-AG-118.md
 
 ## Notes
 
@@ -32,9 +32,9 @@ a real GPU the way you can.
 - Serve the game with `npm run serve` and open http://127.0.0.1:8971/index.html?debug=1.
   With ?debug=1, window.TT is available in the DevTools console.
 
-### Status (2026-10-22)
-- **AG-86..AG-112**: DONE (see reports in `handoffs/`).
-- **AG-113**: DONE. 2x Night-20 High `--prof` with `CL-238` `renderObjects` journal (`qa/2026-10-21-AG-113/`): `59.3 / 59.7 fps`, `1% low 46.1 / 41.6 fps`, `tick 13.10 / 13.53 ms`, `hitches: 0 / 0`, `spikes: 2 / 7` (`spikeCauses.code: 0 / 6`), `renderObjects.made: 177 / 220` (`perFrame: 0.10 / 0.12`). Every ~3-second (179-180 frame) spike had `newRenderObjects: 0` (the 9-light list never changed after frame 1/8; only the single `zombie-skin` build frame had `newRenderObjects: 1`).
-- **AG-114**: DONE. 2x Night-20 High `--prof --gc` + 1x `--prof --alloc` (`CL-239`, `qa/2026-10-21-AG-114/`): `gc-1` (`56.6 fps`, `1% low 38.5`, `tick 14.87 ms`, `spikesWithGc: 0/11`, `totalMs: 40.2`, `perFrameMs: 0.02`, 50 scavenges) and `gc-2` (`58.9 fps`, `1% low 42.4`, `tick 13.52 ms`, `spikesWithGc: 0/9`, `totalMs: 39.8`, `perFrameMs: 0.02`, 54 scavenges) had `gcMs: 0` on every spike; `alloc-1` (`58.8 fps`, `1% low 41.6`, `tick 13.07 ms`) allocated `769.6 kB/frame` (`45.3 MB/s`, top self: `updateZombies` `259.4 kB/frame`).
+### Status (2026-10-23)
+- **AG-86..AG-114**: DONE (see reports in `handoffs/`).
 - **AG-115**: DONE. 2x `steady-probe.mjs` (30 s, 8 ms) + 1x `steady-probe.mjs --work 12` (`CL-240`, `qa/2026-10-21-AG-115/ag115-summary.json`) run directly from terminal through the slot: all 3 runs recorded `frames: 1800, slowFrames: 0` (`medianMs: 8 / 8.2 / 11.9`, `p99Ms: 9.1 / 9.8 / 12.9`, `maxMs: 9.3 / 11.4 / 13.5`) on `AMD Ryzen 9 5900X 12-Core Processor` (24 threads) under `High performance` power plan (`8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c`).
 - **AG-116**: DONE. Full test suite through the slot in chunks (`qa/2026-10-22-AG-116/`): Test page (`0a, 0b, A..F` + `t272`, 264 checks): `4,089 pass`, 2 held red checks (`t74`: 1 fail, `t80`: 2 fails on rerun; queued to Grokbot); 4 wall-clock tests converted to `T.getSimTime()` / frame `until` and verified green (`t75`, `t206`, `t207`, `t254`). Real renderer (`R` + `t272`, 21 checks via `tools/realtest.mjs`): `740 pass`, 7 held red checks on rerun (`t187, t188, t189, t195, t224, t228, t229`: 42 fail lines; `t222`, `t262`, and `t272` green; queued to Grokbot).
+- **AG-117**: DONE. Full test suite after D-86 balance pass (`CL-244` + `GP-19955`, `qa/2026-10-23-AG-117/`): Test page (`0a, 0b, A..F`, 265 checks incl. `t272` & `t273`): `4,070 pass`, 5 held red checks (`t71`: 1 fail [shambler skull=2], `t77`: 1 fail [3 ring brutes died before restart], `t90`: 1 fail [5000-maxHp shambler killed by 270% shotgun], `t155`: 1 fail [same], `t198`: 1 fail; `t93, t222, t225, t226, t264` cleared on rerun; `t273` 13/13 green). Real renderer (`R`, 21 checks incl. `t272`): `735 pass`, 8 held red checks (`t187, t188, t189, t195, t222, t224, t228, t229`: 43 fail lines; `t272` 14/14 green). Routed to `chatgpt` and `grokbot`.
+- **AG-118**: DONE. Replaced 150 ms wall-clock wait in `tools/tests/t198.js` (Grokbot's `GB-94`, offline) with game-time wait (`tt.hz !== undefined` and `0.2 s` of `T.getSimTime()`) and printed `hz` and both speeds (`tt.speed`/`ttSpeed`), with no check made looser. Verified 3/3 green through the slot (`12 pass, 0 fail` in `55.9s`, `54.3s`, `54.0s`). Staying out of the slot for `GP-19957`.

@@ -36,7 +36,7 @@
       hold(); T.setAimYawDbg(0); T.setKnifeCd(0); T.knifeAttack(); await wait(30);
       return 1000 - z.hp;
     };
-    const mWant = T.listedBodyDamage('machete', 'shambler'), kWant = T.listedBodyDamage('knife', 'shambler');
+    const mWant = T.listedBodyDamage('machete', 'shambler', undefined, 1000), kWant = T.listedBodyDamage('knife', 'shambler', undefined, 1000);
     const mHit = await swingAt(2.0, 0, true);
     ok(Math.abs(mHit - mWant) < 0.6, 'machete on a shambler at 2 m: ' + mHit.toFixed(1) + ' (sheet ' + mWant.toFixed(1) + ', CU-127)');
     const kHit = await swingAt(2.0, 0, false);

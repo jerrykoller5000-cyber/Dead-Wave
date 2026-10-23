@@ -34,8 +34,8 @@
       return 1000 - z.hp;
     };
     const ds = await hitOnce('shambler'), db = await hitOnce('brute');
-    // CU-127: Jerry's sheet. A knife swing is 90.5% of a shambler's 24 HP, and 8.2% of a plated brute's 85.
-    const kSh = T.listedBodyDamage('knife', 'shambler'), kBr = T.listedBodyDamage('knife', 'brute');
+    // D-86: Jerry's sheet uses each test body's own 1000 max HP.
+    const kSh = T.listedBodyDamage('knife', 'shambler', undefined, 1000), kBr = T.listedBodyDamage('knife', 'brute', undefined, 1000);
     ok(Math.abs(ds - kSh) < 0.6, 'knife on a shambler: ' + ds.toFixed(1) + ' (sheet ' + kSh.toFixed(1) + ', CU-127)');
     ok(Math.abs(db - kBr) < 0.6, 'knife on a brute: ' + db.toFixed(1) + ' (sheet ' + kBr.toFixed(1) + ', plates on)');
     // (1b) The saw no longer takes the head off anything in a second: ten saw ticks on a brute
@@ -72,7 +72,7 @@
     for (let i = 0; i < 8; i++) {
       const a = i / 8 * Math.PI * 2, x = px + Math.sin(a) * 1.6, z = pz + Math.cos(a) * 1.6;
       const b = T.spawnZombie(x, z, 'brute', true, true);
-      b.mesh.position.set(x, T.sampleHeight(x, z), z); b.hp = 1e6; b.maxHp = 1e6;
+      b.mesh.position.set(x, T.sampleHeight(x, z), z); b.hp = 1e6; b.maxHp = T.ZOMBIE_TYPES.brute.hp; // durable fixture; sheet damage uses a brute's normal max HP
       ring.push(b);
     }
     await gWait(150);
@@ -101,10 +101,20 @@
     ok(ring.every((b, k) => b.hp === hpS[k]) && T.getSawHeat().overheat, 'stalled: no bites while it is hot, trigger still held');
     const cooled = await gUntil(() => !T.getSawHeat().overheat, 5000);
     ok(cooled && T.getSawHeat().heat <= 0.46, 'cools to ' + T.getSawHeat().heat.toFixed(2) + ' and can be started again');
+    // D-86: the first three in the saw arc can lose their limbs before restart. Give the
+    // restarted chain fresh live targets in that same arc; the assertion still requires a bite.
+    const restartTargets = [0, 1, 7].map((i) => {
+      const a = i / 8 * Math.PI * 2, x = px + Math.sin(a) * 1.6, z = pz + Math.cos(a) * 1.6;
+      const b = T.spawnZombie(x, z, 'brute', true, true);
+      b.mesh.position.set(x, T.sampleHeight(x, z), z);
+      b.riseT = 0; b.speed = b.baseSpeed = 0; b.hp = 1e6; b.maxHp = T.ZOMBIE_TYPES.brute.hp;
+      return b;
+    });
+    const restartHp = restartTargets.map((b) => b.hp);
     const fR = T.getSawFuel(), hR = T.getSawHeat().heat;
     await gWait(700);
-    const dist = ring.map((b) => b.mesh ? Math.hypot(b.mesh.position.x - T.player.position.x, b.mesh.position.z - T.player.position.z).toFixed(1) : (b.alive ? 'nomesh' : 'dead')).join(',') + ' phase ' + T.getPhase() + ' zl ' + T.zombies.length;
-    ok(ring.some((b, k) => b.hp < hpS[k]), 'and it cuts again once restarted (fuel -' + (fR - T.getSawFuel()).toFixed(2) + ', heat ' + hR.toFixed(2) + '->' + T.getSawHeat().heat.toFixed(2) + ', w ' + T.getCurrentWeapon() + ', paused ' + (T.isPaused ? T.isPaused() : '?') + ', d ' + dist + ')');
+    const dist = restartTargets.map((b) => b.mesh ? Math.hypot(b.mesh.position.x - T.player.position.x, b.mesh.position.z - T.player.position.z).toFixed(1) : (b.alive ? 'nomesh' : 'dead')).join(',') + ' phase ' + T.getPhase() + ' zl ' + T.zombies.length;
+    ok(restartTargets.some((b, k) => b.hp < restartHp[k]), 'and it cuts again once restarted (fuel -' + (fR - T.getSawFuel()).toFixed(2) + ', heat ' + hR.toFixed(2) + '->' + T.getSawHeat().heat.toFixed(2) + ', w ' + T.getCurrentWeapon() + ', paused ' + (T.isPaused ? T.isPaused() : '?') + ', d ' + dist + ')');
     T.setMouseFireDbg(false);
     await gWait(300);
     const h1 = T.getSawHeat().heat; await gWait(1000);

@@ -1,0 +1,259 @@
+{
+  "chunk": "R",
+  "range": "t12..t272",
+  "count": 21,
+  "summaryLine": "21 checks: 735 pass, 41 fail (real renderer)",
+  "initialFailed": [
+    "t187",
+    "t188",
+    "t189",
+    "t195",
+    "t222",
+    "t224",
+    "t228",
+    "t229"
+  ],
+  "flakyClearedOnRerun": [],
+  "heldReds": [
+    "t187",
+    "t188",
+    "t189",
+    "t195",
+    "t222",
+    "t224",
+    "t228",
+    "t229"
+  ],
+  "initialFailuresDetail": [
+    {
+      "status": "FAIL",
+      "name": "t187",
+      "pass": 97,
+      "fail": 2,
+      "secs": 65.9,
+      "failLines": [
+        "FAIL shotgun: zoomed, on the aim (2.26 deg)",
+        "FAIL launcher: zoomed, on the aim (3.05 deg)"
+      ]
+    },
+    {
+      "status": "FAIL",
+      "name": "t188",
+      "pass": 119,
+      "fail": 2,
+      "secs": 62.2,
+      "failLines": [
+        "FAIL chainsaw: firing hand on the grip anchor (0.203)",
+        "FAIL chainsaw: support hand on its anchor (0.353)"
+      ]
+    },
+    {
+      "status": "FAIL",
+      "name": "t189",
+      "pass": 35,
+      "fail": 12,
+      "secs": 42.2,
+      "failLines": [
+        "FAIL m4@sling+: snug, gap 0.000 m, clipping 0.044 m",
+        "FAIL aa12@sling+: snug, gap 0.038 m, clipping 0.000 m",
+        "FAIL shotgun@sling-: snug, gap 0.000 m, clipping 0.040 m",
+        "FAIL launcher@sling-: snug, gap 0.000 m, clipping 0.022 m",
+        "FAIL flamer@sling+: snug, gap 0.035 m, clipping 0.000 m",
+        "FAIL chainsaw@sling-: snug, gap 0.061 m, clipping 0.000 m",
+        "FAIL ak@sling+: snug, gap 0.026 m, clipping 0.000 m",
+        "FAIL m4@sling-: snug, gap 0.045 m, clipping 0.000 m",
+        "FAIL shotgun@sling+: snug, gap 0.000 m, clipping 0.038 m",
+        "FAIL aa12@sling-: snug, gap 0.066 m, clipping 0.000 m",
+        "FAIL chainsaw@sling+: snug, gap 0.016 m, clipping 0.000 m",
+        "FAIL flamer@sling-: snug, gap 0.022 m, clipping 0.000 m"
+      ]
+    },
+    {
+      "status": "FAIL",
+      "name": "t195",
+      "pass": 17,
+      "fail": 3,
+      "secs": 83.9,
+      "failLines": [
+        "FAIL m4: the gun hand rolled onto the grip (175 -> 180 deg)",
+        "FAIL pistol: the gun hand rolled onto the grip (180 -> 180 deg)",
+        "FAIL pistol: the support hand rolled onto the gun (180 -> 180 deg)"
+      ]
+    },
+    {
+      "status": "FAIL",
+      "name": "t222",
+      "pass": 0,
+      "fail": 1,
+      "secs": 322.8,
+      "failLines": [
+        "FAIL t222 did not run: CDP timeout: Runtime.evaluate"
+      ]
+    },
+    {
+      "status": "FAIL",
+      "name": "t224",
+      "pass": 35,
+      "fail": 10,
+      "secs": 41.8,
+      "failLines": [
+        "FAIL m4/ak/uzi/revolver revolver+: snug on the pack, air 0.040 m, clipping 0.000 m (250 of 250 points over the pack)",
+        "FAIL m4/ak/uzi/revolver revolver-: snug on the pack, air 0.038 m, clipping 0.000 m (250 of 250 points over the pack)",
+        "FAIL ak/m4/revolver/pistol revolver+: snug on the pack, air 0.084 m, clipping 0.000 m (250 of 250 points over the pack)",
+        "FAIL ak/m4/revolver/pistol pistol+: snug on the pack, air 0.040 m, clipping 0.000 m (472 of 472 points over the pack)",
+        "FAIL ak/m4/revolver/pistol revolver-: snug on the pack, air 0.072 m, clipping 0.000 m (250 of 250 points over the pack)",
+        "FAIL minigun/m4/uzi/revolver revolver+: snug on the pack, air 0.040 m, clipping 0.000 m (250 of 250 points over the pack)",
+        "FAIL minigun/m4/uzi/revolver revolver-: snug on the pack, air 0.038 m, clipping 0.000 m (250 of 250 points over the pack)",
+        "FAIL shotgun/aa12/revolver/ revolver+: snug on the pack, air 0.026 m, clipping 0.000 m (250 of 250 points over the pack)",
+        "FAIL shotgun/aa12/revolver/ revolver-: snug on the pack, air 0.026 m, clipping 0.000 m (250 of 250 points over the pack)",
+        "FAIL a fast sweep: 0 ticks in 931 ms of audio clock (at most one per 50 ms)"
+      ]
+    },
+    {
+      "status": "FAIL",
+      "name": "t228",
+      "pass": 88,
+      "fail": 7,
+      "secs": 255.7,
+      "failLines": [
+        "FAIL launcher standing: the support fist along its foregrip (180 deg)",
+        "FAIL launcher walking: the support fist along its foregrip (180 deg)",
+        "FAIL flamer standing: the support fist along its foregrip (180 deg)",
+        "FAIL flamer walking: the support fist along its foregrip (180 deg)",
+        "FAIL chainsaw standing: the firing hand closes on the grip (12.2 cm)",
+        "FAIL chainsaw standing: the support hand on its anchor (1.6 cm)",
+        "FAIL chainsaw walking: the support hand on its anchor (1.6 cm)"
+      ]
+    },
+    {
+      "status": "FAIL",
+      "name": "t229",
+      "pass": 71,
+      "fail": 4,
+      "secs": 102.4,
+      "failLines": [
+        "FAIL revolver: support fist on the support side round the firing fingers (-0.045,-0.023,0.021, 0.055 m from the firing fist)",
+        "FAIL revolver aiming up: support fist on the support side round the firing fingers (-0.045,-0.023,0.021, 0.055 m from the firing fist)",
+        "FAIL revolver aiming down: support fist on the support side round the firing fingers (-0.045,-0.023,0.020, 0.054 m from the firing fist)",
+        "FAIL akimbo: wrists firm, guns in line with the forearms (1.30, 1.30 rad)"
+      ]
+    }
+  ],
+  "rerunFailuresDetail": [
+    {
+      "status": "FAIL",
+      "name": "t187",
+      "pass": 97,
+      "fail": 2,
+      "secs": 69.9,
+      "failLines": [
+        "FAIL shotgun: zoomed, on the aim (2.26 deg)",
+        "FAIL launcher: zoomed, on the aim (3.05 deg)"
+      ]
+    },
+    {
+      "status": "FAIL",
+      "name": "t188",
+      "pass": 119,
+      "fail": 2,
+      "secs": 62.9,
+      "failLines": [
+        "FAIL chainsaw: firing hand on the grip anchor (0.203)",
+        "FAIL chainsaw: support hand on its anchor (0.353)"
+      ]
+    },
+    {
+      "status": "FAIL",
+      "name": "t189",
+      "pass": 35,
+      "fail": 12,
+      "secs": 32.1,
+      "failLines": [
+        "FAIL m4@sling+: snug, gap 0.000 m, clipping 0.044 m",
+        "FAIL aa12@sling+: snug, gap 0.038 m, clipping 0.000 m",
+        "FAIL shotgun@sling-: snug, gap 0.000 m, clipping 0.039 m",
+        "FAIL launcher@sling-: snug, gap 0.000 m, clipping 0.021 m",
+        "FAIL flamer@sling+: snug, gap 0.035 m, clipping 0.000 m",
+        "FAIL chainsaw@sling-: snug, gap 0.062 m, clipping 0.000 m",
+        "FAIL ak@sling+: snug, gap 0.026 m, clipping 0.000 m",
+        "FAIL m4@sling-: snug, gap 0.046 m, clipping 0.000 m",
+        "FAIL shotgun@sling+: snug, gap 0.000 m, clipping 0.038 m",
+        "FAIL aa12@sling-: snug, gap 0.067 m, clipping 0.000 m",
+        "FAIL chainsaw@sling+: snug, gap 0.015 m, clipping 0.000 m",
+        "FAIL flamer@sling-: snug, gap 0.023 m, clipping 0.000 m"
+      ]
+    },
+    {
+      "status": "FAIL",
+      "name": "t195",
+      "pass": 17,
+      "fail": 3,
+      "secs": 56.3,
+      "failLines": [
+        "FAIL m4: the gun hand rolled onto the grip (176 -> 180 deg)",
+        "FAIL pistol: the gun hand rolled onto the grip (180 -> 180 deg)",
+        "FAIL pistol: the support hand rolled onto the gun (180 -> 180 deg)"
+      ]
+    },
+    {
+      "status": "FAIL",
+      "name": "t222",
+      "pass": 8,
+      "fail": 1,
+      "secs": 146.6,
+      "failLines": [
+        "FAIL pointing at a chest lands in the body: body 23, head 7 (bar 80 %, no miss; a head only where the head covers the chest from up here)"
+      ]
+    },
+    {
+      "status": "FAIL",
+      "name": "t224",
+      "pass": 34,
+      "fail": 11,
+      "secs": 40.3,
+      "failLines": [
+        "FAIL m4/ak/uzi/revolver revolver+: snug on the pack, air 0.040 m, clipping 0.000 m (250 of 250 points over the pack)",
+        "FAIL m4/ak/uzi/revolver revolver-: snug on the pack, air 0.037 m, clipping 0.000 m (250 of 250 points over the pack)",
+        "FAIL ak/m4/revolver/pistol revolver+: snug on the pack, air 0.081 m, clipping 0.000 m (250 of 250 points over the pack)",
+        "FAIL ak/m4/revolver/pistol pistol+: snug on the pack, air 0.040 m, clipping 0.000 m (472 of 472 points over the pack)",
+        "FAIL ak/m4/revolver/pistol revolver-: snug on the pack, air 0.069 m, clipping 0.000 m (250 of 250 points over the pack)",
+        "FAIL minigun/m4/uzi/revolver revolver+: snug on the pack, air 0.040 m, clipping 0.000 m (250 of 250 points over the pack)",
+        "FAIL minigun/m4/uzi/revolver revolver-: snug on the pack, air 0.037 m, clipping 0.000 m (250 of 250 points over the pack)",
+        "FAIL shotgun/aa12/revolver/ revolver+: snug on the pack, air 0.026 m, clipping 0.000 m (250 of 250 points over the pack)",
+        "FAIL shotgun/aa12/revolver/ revolver-: snug on the pack, air 0.026 m, clipping 0.000 m (250 of 250 points over the pack)",
+        "FAIL a quick run of ticks is softer (0.81 of a lone tick)",
+        "FAIL a fast sweep: 0 ticks in 1069 ms of audio clock (at most one per 50 ms)"
+      ]
+    },
+    {
+      "status": "FAIL",
+      "name": "t228",
+      "pass": 88,
+      "fail": 7,
+      "secs": 192.3,
+      "failLines": [
+        "FAIL launcher standing: the support fist along its foregrip (180 deg)",
+        "FAIL launcher walking: the support fist along its foregrip (180 deg)",
+        "FAIL flamer standing: the support fist along its foregrip (180 deg)",
+        "FAIL flamer walking: the support fist along its foregrip (180 deg)",
+        "FAIL chainsaw standing: the firing hand closes on the grip (22.1 cm)",
+        "FAIL chainsaw standing: the support hand on its anchor (1.6 cm)",
+        "FAIL chainsaw walking: the support hand on its anchor (1.6 cm)"
+      ]
+    },
+    {
+      "status": "FAIL",
+      "name": "t229",
+      "pass": 70,
+      "fail": 5,
+      "secs": 109.6,
+      "failLines": [
+        "FAIL revolver: support fist on the support side round the firing fingers (-0.045,-0.023,0.021, 0.055 m from the firing fist)",
+        "FAIL revolver aiming up: support fist on the support side round the firing fingers (-0.045,-0.023,0.021, 0.055 m from the firing fist)",
+        "FAIL revolver aiming down: support fist on the support side round the firing fingers (-0.045,-0.023,0.020, 0.054 m from the firing fist)",
+        "FAIL revolver: no pop leaving or rejoining the grip (1.55 m/s at most)",
+        "FAIL akimbo: wrists firm, guns in line with the forearms (1.30, 1.30 rad)"
+      ]
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 // CU-127: Jerry's New-Hit.xlsx (12 Oct 2026). Each number is the percent of that
-// zombie's listed health one shot removes. 100 is the whole bar. 1 is one percent.
+// zombie's own max health one shot removes. 100 is the whole bar. 1 is one percent.
 // A body hit, a Military chest shot, a Brute that still has its plates, a whole
 // shotgun or breacher shell, the centre of a blast, one flamethrower tick, one
 // chainsaw bite, one knife or machete swing. Rows he left alone (Watchman, launcher,
@@ -20,9 +20,11 @@ export const HIT_PERCENT = Object.freeze({
   ak:        row([110, 180, 120, 65, 70, 28, 17, 80, 90, 90, 26, 4, 6]),
   revolver:  row([220, 350, 250, 90, 125, 50, 25, 200, 170, 170, 30, 5, 7]),
   sniper:    row([400, 600, 500, 150, 200, 90, 45, 350, 150, 150, 50, 8, 15]),
-  minigun:   row([40, 70, 60, 13, 30, 10, 4, 35, 35, 35, 6, 1, 2]),
+  // D-86: Jerry's original minigun row [40, 70, 60, 13, 30, 10, 4, 35, 35, 35, 6, 1, 2], raised x1.6.
+  minigun:   row([64, 112, 96, 20.8, 48, 16, 6.4, 56, 56, 56, 9.6, 1.6, 3.2]),
   shotgun:   row([270, 580, 280, 150, 205, 55, 30, 200, 140, 220, 75, 8, 10]),
-  aa12:      row([150, 330, 170, 88, 115, 35, 15, 102.9, 75, 102.9, 40, 4, 6]),
+  // D-86: Jerry's original aa12 row [150, 330, 170, 88, 115, 35, 15, 102.9, 75, 102.9, 40, 4, 6], raised x1.4 and rounded to one decimal.
+  aa12:      row([210, 462, 238, 123.2, 161, 49, 21, 144.1, 105, 144.1, 56, 5.6, 8.4]),
   knife:     row([90.5, 173.3, 88, 45, 62.5, 36, 8.2, 47.1, 92.9, 38.2, 7, 1, 1.5]),
   machete:   row([100.3, 460, 136.7, 115.9, 165, 98, 16, 120.6, 246.4, 102.9, 14, 3.1, 4]),
   chainsaw:  row([80.5, 100, 95, 22.7, 32.5, 19.8, 4.5, 24.7, 50, 20.6, 20, 0.6, 0.8]),
@@ -33,10 +35,9 @@ export const HIT_PERCENT = Object.freeze({
 export const HIT_SHELL = Object.freeze({ shotgun: 7, aa12: 5 });
 
 // Damage of one application (one round, one pellet, one tick, one swing).
-export function listedBodyDamage(weapon, typeKey, parts) {
+export function listedBodyDamage(weapon, typeKey, parts, maxHp = ZOMBIE_HP[typeKey]) {
   const pct = HIT_PERCENT[weapon] && HIT_PERCENT[weapon][typeKey];
-  const hp = ZOMBIE_HP[typeKey];
-  if (pct == null || hp == null) return null;
+  if (pct == null || !Number.isFinite(maxHp) || maxHp <= 0) return null;
   const n = parts > 1 ? parts : (HIT_SHELL[weapon] || 1);
-  return hp * pct / 100 / n;
+  return maxHp * pct / 100 / n;
 }

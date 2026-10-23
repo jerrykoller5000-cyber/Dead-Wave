@@ -1,6 +1,7 @@
 import test from 'node:test';import assert from 'node:assert/strict';
 import {SCREAMER,screamerProtected,tickScreamerShield,steerScreamer,screamerScreamPose,resetScreamer,applyScreamerPose,restoreScreamerPose,screamerState} from './screamer-behavior.js';
 const actor=()=>({typeKey:'screamer',alive:true,partsLost:{},mesh:{rotation:{y:0},userData:{}}});
+test('D-86 protected shield passes one quarter of a hit',()=>{assert.equal(SCREAMER.damageShare,.25);assert.equal(100*SCREAMER.damageShare,25);});
 test('shield follows actual scream completion; opening lasts 2.4 seconds',()=>{const z=actor();assert(screamerProtected(z));z.screamT=1.2;tickScreamerShield(z,1/60);assert(screamerProtected(z));for(let i=0;i<30;i++){z.screamT=.7;tickScreamerShield(z,1/60);}z.screamT=0;tickScreamerShield(z,1/60);assert.equal(z.sonicOpenT,2.4);for(let i=0;i<143;i++)tickScreamerShield(z,1/60);assert(!screamerProtected(z));tickScreamerShield(z,1/60);tickScreamerShield(z,1/60);assert(screamerProtected(z));});
 test('each completed scream creates a fresh opening',()=>{const z=actor();for(let i=0;i<3;i++){z.screamT=1.2;tickScreamerShield(z,.1);z.screamT=0;tickScreamerShield(z,.1);assert.equal(z.sonicOpenT,2.4);for(let j=0;j<25;j++)tickScreamerShield(z,.1);assert(screamerProtected(z));}});
 test('head loss and death remove shield and cancel scream',()=>{for(const key of ['head','dead']){const z=actor();z.screamT=.5;tickScreamerShield(z,.1);if(key==='head')z.partsLost.head=true;else z.alive=false;tickScreamerShield(z,.1);assert(!screamerProtected(z));assert.equal(z.screamT,0);}});

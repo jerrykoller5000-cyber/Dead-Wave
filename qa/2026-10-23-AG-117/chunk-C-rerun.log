@@ -1,0 +1,30 @@
+# AG-117 chunk C rerun: t155
+# Started: 2026-10-23T06:46:36.850Z
+
+GRANT antigravity AG-117: starting one game-test command
+check-players: 304 player.position reads, all in the allowed places
+FAIL  t155     1 pass   1 fail  41.7s
+
+1 checks: 1 pass, 1 fail
+
+by owner:
+  unassigned
+    t155   1 fail  FAIL a close shell knocks it down (knockT 0.00) with no reacting body
+           FAIL a close shell knocks it down (knockT 0.00) with no reacting body
+node:fs:2427
+    return binding.writeFileUtf8(
+                   ^
+
+Error: UNKNOWN: unknown error, open 'C:\Users\Zero\Desktop\Tiny Trek\crew\tests.json'
+    at Object.writeFileSync (node:fs:2427:20)
+    at file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/tests/run-all.mjs:297:4
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5) {
+  errno: -4094,
+  code: 'UNKNOWN',
+  syscall: 'open',
+  path: 'C:\\Users\\Zero\\Desktop\\Tiny Trek\\crew\\tests.json'
+}
+
+Node.js v24.13.0
+
+# Finished: 2026-10-23T06:47:19.788Z code=1

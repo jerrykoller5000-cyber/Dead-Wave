@@ -1,0 +1,71 @@
+# AG-117 chunk R: t12 t13 t14 t187 t188 t189 t194 t195 t218 t221 t222 t224 t225 t228 t229 t244 t262 t267 t270 t271 t272
+# Started: 2026-10-23T08:43:08.803Z
+
+GRANT antigravity AG-117: starting one game-test command
+ok    t12      22 pass   0 fail  45.4s  (real renderer)
+ok    t13       8 pass   0 fail  48.1s  (real renderer)
+    meshes: wall 8 wire 1 sandbag 1 floor 2
+    why: {"level":0,"slot":"base"} refusal null cap true
+ok    t14      13 pass   0 fail  29.1s  (real renderer)
+FAIL  t187     97 pass   2 fail  65.9s  (real renderer)
+    FAIL shotgun: zoomed, on the aim (2.26 deg)
+    FAIL launcher: zoomed, on the aim (3.05 deg)
+FAIL  t188    119 pass   2 fail  62.2s  (real renderer)
+    FAIL chainsaw: firing hand on the grip anchor (0.203)
+    FAIL chainsaw: support hand on its anchor (0.353)
+FAIL  t189     35 pass  12 fail  42.2s  (real renderer)
+    FAIL m4@sling+: snug, gap 0.000 m, clipping 0.044 m
+    FAIL aa12@sling+: snug, gap 0.038 m, clipping 0.000 m
+    FAIL shotgun@sling-: snug, gap 0.000 m, clipping 0.040 m
+    FAIL launcher@sling-: snug, gap 0.000 m, clipping 0.022 m
+    FAIL flamer@sling+: snug, gap 0.035 m, clipping 0.000 m
+    FAIL chainsaw@sling-: snug, gap 0.061 m, clipping 0.000 m
+    FAIL ak@sling+: snug, gap 0.026 m, clipping 0.000 m
+    FAIL m4@sling-: snug, gap 0.045 m, clipping 0.000 m
+    FAIL shotgun@sling+: snug, gap 0.000 m, clipping 0.038 m
+    FAIL aa12@sling-: snug, gap 0.066 m, clipping 0.000 m
+    FAIL chainsaw@sling+: snug, gap 0.016 m, clipping 0.000 m
+    FAIL flamer@sling-: snug, gap 0.022 m, clipping 0.000 m
+ok    t194     41 pass   0 fail  104.5s  (real renderer)
+FAIL  t195     17 pass   3 fail  83.9s  (real renderer)
+    FAIL m4: the gun hand rolled onto the grip (175 -> 180 deg)
+    FAIL pistol: the gun hand rolled onto the grip (180 -> 180 deg)
+    FAIL pistol: the support hand rolled onto the gun (180 -> 180 deg)
+ok    t218     35 pass   0 fail  187.9s  (real renderer)
+ok    t221     28 pass   0 fail  61.4s  (real renderer)
+FAIL  t222      0 pass   1 fail  322.8s  (real renderer)
+    FAIL t222 did not run: CDP timeout: Runtime.evaluate
+FAIL  t224     35 pass  10 fail  41.8s  (real renderer)
+    FAIL m4/ak/uzi/revolver revolver+: snug on the pack, air 0.040 m, clipping 0.000 m (250 of 250 points over the pack)
+    FAIL m4/ak/uzi/revolver revolver-: snug on the pack, air 0.038 m, clipping 0.000 m (250 of 250 points over the pack)
+    FAIL ak/m4/revolver/pistol revolver+: snug on the pack, air 0.084 m, clipping 0.000 m (250 of 250 points over the pack)
+    FAIL ak/m4/revolver/pistol pistol+: snug on the pack, air 0.040 m, clipping 0.000 m (472 of 472 points over the pack)
+    FAIL ak/m4/revolver/pistol revolver-: snug on the pack, air 0.072 m, clipping 0.000 m (250 of 250 points over the pack)
+    FAIL minigun/m4/uzi/revolver revolver+: snug on the pack, air 0.040 m, clipping 0.000 m (250 of 250 points over the pack)
+    FAIL minigun/m4/uzi/revolver revolver-: snug on the pack, air 0.038 m, clipping 0.000 m (250 of 250 points over the pack)
+    FAIL shotgun/aa12/revolver/ revolver+: snug on the pack, air 0.026 m, clipping 0.000 m (250 of 250 points over the pack)
+    FAIL shotgun/aa12/revolver/ revolver-: snug on the pack, air 0.026 m, clipping 0.000 m (250 of 250 points over the pack)
+    FAIL a fast sweep: 0 ticks in 931 ms of audio clock (at most one per 50 ms)
+ok    t225     21 pass   0 fail  59.2s  (real renderer)
+FAIL  t228     88 pass   7 fail  255.7s  (real renderer)
+    FAIL launcher standing: the support fist along its foregrip (180 deg)
+    FAIL launcher walking: the support fist along its foregrip (180 deg)
+    FAIL flamer standing: the support fist along its foregrip (180 deg)
+    FAIL flamer walking: the support fist along its foregrip (180 deg)
+    FAIL chainsaw standing: the firing hand closes on the grip (12.2 cm)
+    FAIL chainsaw standing: the support hand on its anchor (1.6 cm)
+    FAIL chainsaw walking: the support hand on its anchor (1.6 cm)
+FAIL  t229     71 pass   4 fail  102.4s  (real renderer)
+    FAIL revolver: support fist on the support side round the firing fingers (-0.045,-0.023,0.021, 0.055 m from the firing fist)
+    FAIL revolver aiming up: support fist on the support side round the firing fingers (-0.045,-0.023,0.021, 0.055 m from the firing fist)
+    FAIL revolver aiming down: support fist on the support side round the firing fingers (-0.045,-0.023,0.020, 0.054 m from the firing fist)
+    FAIL akimbo: wrists firm, guns in line with the forearms (1.30, 1.30 rad)
+ok    t244     20 pass   0 fail  177.9s  (real renderer)
+ok    t262     32 pass   0 fail  292.9s  (real renderer)
+ok    t267     24 pass   0 fail  102.1s  (real renderer)
+ok    t270      5 pass   0 fail  25.0s  (real renderer)
+ok    t271     10 pass   0 fail  45.7s  (real renderer)
+ok    t272     14 pass   0 fail  82.0s  (real renderer)
+21 checks: 735 pass, 41 fail (real renderer)
+
+# Finished: 2026-10-23T09:20:28.441Z code=0

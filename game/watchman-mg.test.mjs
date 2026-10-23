@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {WATCHMAN,createWatchman,stepWatchman,watchmanPose,watchmanLeg,watchmanCarry} from './watchman-mg.js';
 const O={x:0,y:0.84,z:0};
+test('D-86 Watchman fires 10 damage rounds at its existing cadence',()=>{assert.equal(WATCHMAN.roundDamage,10);assert.equal(WATCHMAN.interval,.09);});
 test('cursor over the gun or operator never flips the last bearing',()=>{
   const s=createWatchman(.7);
   for(const t of [{x:0,y:0,z:0},{x:.01,y:0,z:-.1},{x:-.3,y:0,z:.4}])stepWatchman(s,O,t,1/60);

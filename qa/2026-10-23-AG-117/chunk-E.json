@@ -1,0 +1,77 @@
+{
+  "chunk": "E",
+  "range": "t196..t229",
+  "count": 34,
+  "summaryLine": "34 checks: 603 pass, 3 fail, 1 could not run",
+  "initialFailed": [
+    "t198",
+    "t222",
+    "t225",
+    "t226"
+  ],
+  "flakyClearedOnRerun": [
+    "t222",
+    "t225",
+    "t226"
+  ],
+  "heldReds": [
+    "t198"
+  ],
+  "initialFailuresDetail": [
+    {
+      "status": "FAIL",
+      "name": "t198",
+      "pass": 11,
+      "fail": 1,
+      "secs": 52,
+      "detail": "",
+      "failLines": [
+        "FAIL a TT spawn that does not join keeps the old walk (the older checks)"
+      ]
+    },
+    {
+      "status": "FAIL",
+      "name": "t222",
+      "pass": 7,
+      "fail": 1,
+      "secs": 190.6,
+      "detail": "",
+      "failLines": [
+        "FAIL pointing at a chest lands in the body: body 20, head 10 (bar 70 %, one miss; a head only where the head covers the chest from up here)"
+      ]
+    },
+    {
+      "status": "FAIL",
+      "name": "t225",
+      "pass": 20,
+      "fail": 1,
+      "secs": 81.5,
+      "detail": "",
+      "failLines": [
+        "FAIL a tap: out of the pouch and away in 0.20 s, a short lob"
+      ]
+    },
+    {
+      "status": "ERROR",
+      "name": "t226",
+      "pass": 0,
+      "fail": 0,
+      "secs": 211.3,
+      "detail": "— time limit: check still running after 180s",
+      "failLines": []
+    }
+  ],
+  "rerunFailuresDetail": [
+    {
+      "status": "FAIL",
+      "name": "t198",
+      "pass": 11,
+      "fail": 1,
+      "secs": 55.5,
+      "detail": "",
+      "failLines": [
+        "FAIL a TT spawn that does not join keeps the old walk (the older checks)"
+      ]
+    }
+  ]
+}

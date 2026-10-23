@@ -1,8 +1,8 @@
 import test from 'node:test';import assert from 'node:assert/strict';import {BOMBER,createBomberMotion,advanceBomber,stepBomber,resetBomber} from './bomber-behavior.js';
 const run=(s,seconds,dx=0,dz=1,speed=5,rate=60)=>{for(let i=0;i<Math.round(seconds*rate);i++)advanceBomber(s,dx,dz,speed,1/rate);return s;};
 const angle=a=>Math.atan2(Math.sin(a),Math.cos(a));
-test('starts as a slow stagger and builds pace rather than jumping to a sprint',()=>{const s=createBomberMotion(0);run(s,.25);assert(s.speed>.15&&s.speed<.35);run(s,3);assert.equal(s.speed,BOMBER.maxSpeed);});
-test('momentum keeps moving during braking and takes several seconds to stop',()=>{const s=run(createBomberMotion(0),4);run(s,.5,0,1,0);assert(s.speed>2);run(s,4,0,1,0);assert.equal(s.speed,0);});
+test('D-86: starts as a slow stagger and builds to 4 m/s rather than jumping to a sprint',()=>{assert.equal(BOMBER.maxSpeed,4);const s=createBomberMotion(0);run(s,.25);assert(s.speed>.15&&s.speed<.35);run(s,4);assert.equal(s.speed,4);});
+test('momentum keeps moving during braking and takes several seconds to stop',()=>{const s=run(createBomberMotion(0),4);run(s,.5,0,1,0);assert(s.speed>2);run(s,6,0,1,0);assert.equal(s.speed,0);});
 test('a target behind cannot instantly flip facing or cancel forward momentum',()=>{const s=run(createBomberMotion(0),4);run(s,.1,0,-1);assert(Math.abs(s.yaw)<.03);assert(s.speed>2.5);run(s,1,0,-1);assert(Math.abs(s.yaw)<1.1);assert(s.speed>1.5);});
 test('behind-target jitter keeps the chosen turn instead of flipping shoulders',()=>{const s=run(createBomberMotion(0),4);for(let i=0;i<60;i++)advanceBomber(s,i%2?.001:-.001,-1,4,1/60);assert(s.side!==0);assert(Math.abs(s.yaw)>.35);assert(Math.sign(s.yaw)===s.side);});
 test('pace and turning agree at30,60and144Hz',()=>{const a=run(createBomberMotion(0),2.5,1,.3,4,30);for(const rate of[60,144]){const b=run(createBomberMotion(0),2.5,1,.3,4,rate);assert(Math.abs(a.speed-b.speed)<.015);assert(Math.abs(angle(a.yaw-b.yaw))<.01);}});

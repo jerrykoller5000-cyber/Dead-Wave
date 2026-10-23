@@ -1,5 +1,5 @@
-// t137 - GB-113: the late payout trim (ChatGPT's GP-60 request, approved by Claude). From night 11 a kill's skulls are
-// worth LATE_CASH_FACTOR (0.67) of the table's cashDrop; nights 1-10 pay the table. The night's other multipliers
+// t137 - GB-113, D-86: kill skulls pay full value through night 8, then lose 4% per night to a 60% floor on night 18.
+// The floor holds on endless nights. The night's other multipliers
 // (blood moon, the dare) still stack on top. Measured on the skull a kill actually drops.
 (async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
@@ -9,9 +9,11 @@
     await startMatch(T, 'LateCash');
     T.clearZombies(); T.skipGrace && T.skipGrace(); T.runDevCommand('godmode');
     const P = T.player.position;
-    ok(T.LATE_CASH_NIGHT === 11 && T.LATE_CASH_FACTOR === 0.67, 'the trim: x' + T.LATE_CASH_FACTOR + ' from night ' + T.LATE_CASH_NIGHT);
-    ok(T.lateCashMul(1) === 1 && T.lateCashMul(10) === 1 && T.lateCashMul(11) === 0.67 && T.lateCashMul(20) === 0.67 && T.lateCashMul(27) === 0.67,
-      'nights 1-10 x1; 11, 20 and the endless 27 x0.67');
+    ok(T.ZOMBIE_TYPES.shambler.cashDrop === 2, 'D-86: a normal shambler carries 2 skulls');
+    ok(T.BUILD_UNLOCK_PRICE.m240 === 260, 'D-86: Watchman blueprint costs $260');
+    ok(T.LATE_CASH_NIGHT === 9 && T.LATE_CASH_FACTOR === 0.60 && T.LATE_CASH_STEP === 0.04, 'the trim: starts night ' + T.LATE_CASH_NIGHT + ', loses ' + T.LATE_CASH_STEP + ' a night to x' + T.LATE_CASH_FACTOR);
+    ok([[1, 1], [8, 1], [9, .96], [10, .92], [11, .88], [14, .76], [18, .60], [20, .60], [27, .60]].every(([n, want]) => Math.abs(T.lateCashMul(n) - want) < 1e-9),
+      'nights 1-8 x1; 9-18 ramp to x0.60; endless nights hold x0.60');
     // A shambler worth 100 killed 20 m off (past the zip) with no streak: the skull it drops, and the meter.
     const killPays = () => {
       const z = T.spawnZombie(P.x + 20, P.z + 20, 'shambler', true, true);
@@ -26,7 +28,7 @@
       T.beginWave(); T.clearZombies(); await wait(300);
       return T.getWaveDirectorState().day;
     };
-    for (const [d, want] of [[10, 100], [11, 67], [14, 67], [20, 67], [23, 67]]) {
+    for (const [d, want] of [[8, 100], [9, 96], [10, 92], [11, 88], [14, 76], [18, 60], [20, 60], [23, 60]]) {
       const got = await nightOf(d);
       const mul = T.nightPayMul();
       const k = killPays();

@@ -1,5 +1,12 @@
 # Nights 1 to 20 (GB-53)
 
+> **2026-10-23, CL-244 (D-86, Jerry's balance pass): the totals and specialist counts changed.** From night 3 the
+> nights make a steady climb: no night lighter than the one before by weight of what comes (rest nights hold level with
+> their longer breathers, where they used to be lighter than either side), night 20 the heaviest (860 + the colossus,
+> 58 % specialists). Every night keeps its act, trick, packs, caves, risers, pushes and cadences, so the tables below
+> still describe each night; the counts in them are the old ones. The new counts and the reasons:
+> `docs/specs/balance-1.0.md`. t78 holds NIGHT_PLAN to that page now.
+
 Grokbot, 2026-09-25. **This replaces the GB-29 proposal** that used to be here (per-day speed and health
 scaling, never built). The live code is `NIGHT_PLAN` / `NIGHT_TIER` / `waveComposition` / `startPrep` /
 `spawnWaveBatch` in `index.html`; `tools/tests/t78.js` holds it to this page.

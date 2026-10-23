@@ -1,0 +1,44 @@
+# AG-117 chunk E rerun: t198 t222 t225 t226
+# Started: 2026-10-23T08:05:57.191Z
+
+GRANT antigravity AG-117: starting one game-test command
+check-players: 304 player.position reads, all in the allowed places
+FAIL  t198    11 pass   1 fail  55.5s
+           INFO shambler  head: head 5, miss 1 | chest: body 6 | legs: legs 5, ground 1
+           INFO feral     head: head 4, miss 2 | chest: body 6 | legs: legs 6
+           INFO brute     head: head 4, miss 2 | chest: body 5, head 1 | legs: legs 3, ground 2, body 1
+           INFO spider    head: head 6 | chest: head 4, body 2 | legs: -
+           INFO leaper    head: head 6 | chest: body 4, head 2 | legs: -
+           INFO colossus at 90 deg 14 m: its head is covered by its own gear from the camera here (no head case)
+           INFO colossus  head: head 4, body 1 | chest: body 6 | legs: body 1, legs 5
+           INFO the reticle rings a head lined up, and not a chest (false, los-clear) (would fail; INFO on the test page)
+           INFO pistol 8 m 3 m/s +: hit, lead 0.19 m (pace x flight 0.33) at 0.61 of its height
+           INFO pistol 8 m 3 m/s -: miss, lead -0.18 m (pace x flight -0.33)
+           INFO pistol 8 m 6 m/s +: miss, lead 0.30 m (pace x flight 0.60)
+           INFO pistol 8 m 6 m/s -: miss, lead -0.30 m (pace x flight -0.60)
+           INFO pistol 18 m 3 m/s +: hit, lead 0.57 m (pace x flight 0.71) at 0.60 of its height
+           INFO pistol 18 m 3 m/s -: hit, lead -0.56 m (pace x flight -0.71) at 0.60 of its height
+           INFO pistol 18 m 6 m/s +: miss, lead 1.09 m (pace x flight 1.39)
+           INFO pistol 18 m 6 m/s -: miss, lead -1.09 m (pace x flight -1.39)
+           INFO m4 8 m 3 m/s +: hit, lead 0.10 m (pace x flight 0.23) at 0.61 of its height
+           INFO m4 8 m 3 m/s -: hit, lead -0.09 m (pace x flight -0.23) at 0.59 of its height
+           INFO m4 8 m 6 m/s +: miss, lead 0.13 m (pace x flight 0.42)
+           INFO m4 8 m 6 m/s -: miss, lead -0.13 m (pace x flight -0.42)
+           INFO m4 18 m 3 m/s +: miss, lead 0.40 m (pace x flight 0.52)
+           INFO m4 18 m 3 m/s -: hit, lead -0.38 m (pace x flight -0.52) at 0.61 of its height
+           INFO m4 18 m 6 m/s +: miss, lead 0.72 m (pace x flight 1.02)
+           INFO m4 18 m 6 m/s -: miss, lead -0.72 m (pace x flight -1.02)
+           INFO the 6 m/s runners on the test page: miss 8 (not a bar: the fake models; 1.x, CL FYI)
+           INFO launcher 12 m 6 m/s +: miss, lead -0.30 m (pace x flight 2.11)
+ok    t222     8 pass   0 fail  184.5s
+ok    t225    21 pass   0 fail  60.9s
+ok    t226    38 pass   0 fail  152.0s
+
+4 checks: 78 pass, 1 fail
+
+by owner:
+  unassigned
+    t198   1 fail  FAIL a TT spawn that does not join keeps the old walk (the older checks)
+           FAIL a TT spawn that does not join keeps the old walk (the older checks)
+
+# Finished: 2026-10-23T08:13:31.974Z code=1

@@ -16,7 +16,7 @@
     const fresh = (kind, dx) => {
       const z = T.spawnZombie(P.x + dx, P.z + 30, kind, true, true);
       z.riseT = 0; z.speed = z.baseSpeed = 0; z.hp = z.maxHp = 1e7;
-      if (kind === 'screamer') z.sonicOpenT = 1e6;   // GB-190: shielded she takes 3% (GP-19872); the table is her open share
+      if (kind === 'screamer') z.sonicOpenT = 1e6;   // D-86: shielded she takes 25%; the table is her open share
       return z;
     };
     // One hit of 10 of a type: how much came off (the head-gone x1.15 accounted for if a hit took the head).
@@ -37,6 +37,11 @@
       ok(bad.length === 0, kind + ': all six types take the table share' + (bad.length ? ': ' + bad.join(', ') : ''));
       T.clearZombies();
     }
+    const shielded = fresh('screamer', 0); shielded.sonicOpenT = 0;
+    const shieldHit = hit(shielded, 'bullet');
+    ok(Math.abs(shieldHit - W.screamer.bullet * .25) < .01,
+      'D-86: a shielded screamer takes 25% of the bullet share (' + shieldHit.toFixed(3) + ')');
+    T.clearZombies();
     // The guardian's row, through weakShare (the same function damageZombie uses).
     const g = { typeKey: 'guardian' };
     ok(Object.keys(TYPES).every((t) => Math.abs(T.weakShare(g, t) - W.guardian[t]) < 1e-9), 'guardian: weakShare gives its row');

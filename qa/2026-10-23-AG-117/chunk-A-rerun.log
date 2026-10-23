@@ -1,0 +1,22 @@
+# AG-117 chunk A rerun: t71 t77 t90 t93
+# Started: 2026-10-23T05:51:01.124Z
+
+GRANT antigravity AG-117: starting one game-test command
+check-players: 304 player.position reads, all in the allowed places
+FAIL  t71     15 pass   1 fail  61.1s
+FAIL  t77     16 pass   1 fail  55.0s
+FAIL  t90      5 pass   1 fail  45.9s
+ok    t93     11 pass   0 fail  70.8s
+
+4 checks: 47 pass, 3 fail
+
+by owner:
+  unassigned
+    t71    1 fail  FAIL streak fractions carry: 8 kills pay 18 in 8 skulls (want 9)
+           FAIL streak fractions carry: 8 kills pay 18 in 8 skulls (want 9)
+    t77    1 fail  FAIL and it cuts again once restarted (fuel -0.75, heat 0.44->0.45, w chainsaw, paused ?, d dead
+           FAIL and it cuts again once restarted (fuel -0.75, heat 0.44->0.45, w chainsaw, paused ?, d dead,dead,1.1,2.0,1.1,2.0,1.1,dead phase prep zl 5)
+    t90    1 fail  FAIL a shell at 1.5 m 0.00 m/s and down; an AK round 2.70 m/s and up
+           FAIL a shell at 1.5 m 0.00 m/s and down; an AK round 2.70 m/s and up
+
+# Finished: 2026-10-23T05:54:55.426Z code=1

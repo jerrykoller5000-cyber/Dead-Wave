@@ -1,0 +1,44 @@
+# AG-117 chunk D: t164 t165 t166 t167 t168 t169 t170 t171 t172 t173 t174 t175 t176 t177 t178 t179 t180 t181 t182 t183 t184 t185 t186 t187 t188 t189 t190 t191 t192 t193 t194 t195
+# Started: 2026-10-23T06:47:19.839Z
+
+GRANT antigravity AG-117: starting one game-test command
+check-players: 304 player.position reads, all in the allowed places
+ok    t164    14 pass   0 fail  44.8s
+ok    t165    11 pass   0 fail  22.8s
+ok    t166    11 pass   0 fail  39.6s
+ok    t167    20 pass   0 fail  22.9s
+ok    t168    39 pass   0 fail  64.2s
+ok    t169     8 pass   0 fail  23.3s
+ok    t170    20 pass   0 fail  101.1s
+ok    t171    23 pass   0 fail  59.0s
+ok    t172     7 pass   0 fail  44.1s
+ok    t173    12 pass   0 fail  40.5s
+ok    t174    14 pass   0 fail  75.0s
+ok    t175    12 pass   0 fail  51.6s
+ok    t176     8 pass   0 fail  53.0s
+ok    t177    10 pass   0 fail  41.1s
+ok    t178     8 pass   0 fail  46.1s
+ok    t179    27 pass   0 fail  49.4s
+ok    t180    29 pass   0 fail  72.9s
+ok    t181    23 pass   0 fail  54.4s
+ok    t182    36 pass   0 fail  72.0s
+ok    t183    16 pass   0 fail  50.9s
+           INFO crouch-walk slide 7.03% (at 2.04 m/s ground speed)
+ok    t184    29 pass   0 fail  54.0s
+           INFO holds: m4 4900 ms wall / 500 ms game, ak 3430 ms wall / 500 ms game, aa12 848 ms wall / 450 ms game, uzi 1323 ms wall / 400 ms game, shotgun 1215 ms wall / 300 ms game, revolver 1098 ms wall / 300 ms game, sniper 1183 ms wall / 300 ms game, pistol 414 ms wall / 300 ms game, pistol 659 ms wall / 400 ms game
+ok    t185    36 pass   0 fail  94.7s
+ok    t186    34 pass   0 fail  79.3s
+ok    t187    75 pass   0 fail  101.6s
+ok    t188    91 pass   0 fail  118.0s
+ok    t189    21 pass   0 fail  197.4s
+ok    t190    21 pass   0 fail  45.1s
+ok    t191    16 pass   0 fail  62.0s
+ok    t192    10 pass   0 fail  47.6s
+           INFO on the flat, walking, the lowest sole is -0.029 m
+ok    t193    18 pass   0 fail  75.9s
+ok    t194    35 pass   0 fail  83.3s
+ok    t195    16 pass   0 fail  113.1s
+
+32 checks: 750 pass, 0 fail
+
+# Finished: 2026-10-23T07:22:25.791Z code=0

@@ -1,5 +1,5 @@
-// t249 - CU-127: Jerry's New-Hit.xlsx. A tagged body hit deals that percent of the listed
-// health. 100 is the whole bar. A Military helmet scales up from the chest number.
+// t249 - CU-127 and D-86: Jerry's New-Hit.xlsx. A tagged body hit deals that percent of
+// this body's own max health. 100 is the whole bar. A Military helmet scales up from the chest number.
 // An untagged hit still uses the weakness table.
 (async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
@@ -23,11 +23,14 @@
       }, extra || {}));
       return h0 - z.hp;
     };
-    const want = (weapon, type) => T.listedBodyDamage(weapon, type);
+    const want = (weapon, type) => T.listedBodyDamage(weapon, type, undefined, 1e6);
     const near = (got, exp, label) => ok(Math.abs(got - exp) < 0.05, label + ': ' + got.toFixed(2) + ' (sheet ' + exp.toFixed(2) + ')');
 
     const sh = mk('shambler');
     near(hit(sh, 'pistol', 'bullet'), want('pistol', 'shambler'), 'pistol on a shambler');
+    const raised = mk('feral'); raised.maxHp = raised.hp = 73;
+    near(hit(raised, 'pistol', 'bullet'), 73, '100% pistol hit uses this feral\'s own 73 HP bar');
+    ok(!raised.alive, '100% of the body\'s own max HP kills');
     const plain0 = sh.hp;
     T.damageZombie(sh, 10, { kind: 'bullet', dir: { x: 0, z: 1 }, hitY: bodyY(sh) });
     ok(Math.abs((plain0 - sh.hp) - 10) < 0.05, 'an untagged bullet of 10 still does 10 (' + (plain0 - sh.hp).toFixed(2) + ')');

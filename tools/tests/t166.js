@@ -18,7 +18,7 @@
     }
     ok(bad.length === 0, 'nightPlanFor: swarm on 17, fog on 14, null on every other night 1-40 ' + bad.join(' '));
     const p17 = T.nightPlanFor(17);
-    ok(p17.total === 720 && p17.caves === 'all' && p17.pushes === 6 && p17.trick === 'surround-fast' && p17.kinds.feral === 90, 'night 17 keeps its total 720, every cave, 6 pushes, its 90 runners');
+    ok(p17.total === 680 && p17.caves === 'all' && p17.pushes === 6 && p17.trick === 'surround-fast' && p17.kinds.feral === 160, 'night 17 keeps its total (680 since D-86), every cave, 6 pushes, its 160 runners');
     const R = T.NIGHT_TIER.rest, pc0 = p17.pace;
     ok(!!pc0 && pc0.gap[0] < R.gap[0] && pc0.gap[1] < R.gap[1] && pc0.burst[0] > R.burst[0] && pc0.burst[1] > R.burst[1] && pc0.lull < R.lull,
       'faster pushes than a rest night: gap ' + JSON.stringify(pc0 && pc0.gap) + ' vs ' + JSON.stringify(R.gap) + ', burst ' + JSON.stringify(pc0 && pc0.burst) + ' vs ' + JSON.stringify(R.burst) + ', lull ' + (pc0 && pc0.lull) + ' vs ' + R.lull);

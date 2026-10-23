@@ -1,0 +1,82 @@
+# AG-117 chunk E: t196 t197 t198 t199 t200 t201 t202 t203 t204 t205 t206 t207 t208 t209 t210 t211 t212 t213 t214 t215 t216 t217 t218 t219 t220 t221 t222 t223 t224 t225 t226 t227 t228 t229
+# Started: 2026-10-23T07:22:25.846Z
+
+GRANT antigravity AG-117: starting one game-test command
+check-players: 304 player.position reads, all in the allowed places
+ok    t196    17 pass   0 fail  48.9s
+ok    t197     7 pass   0 fail  43.9s
+FAIL  t198    11 pass   1 fail  52.0s
+ok    t199    10 pass   0 fail  50.5s
+ok    t200     7 pass   0 fail  43.8s
+ok    t201    18 pass   0 fail  64.1s
+ok    t202    12 pass   0 fail  40.7s
+ok    t203    12 pass   0 fail  43.1s
+ok    t204    45 pass   0 fail  72.9s
+ok    t205    13 pass   0 fail  63.4s
+ok    t206    19 pass   0 fail  63.6s
+ok    t207    20 pass   0 fail  46.7s
+ok    t208    10 pass   0 fail  67.4s
+ok    t209    13 pass   0 fail  50.0s
+ok    t210     9 pass   0 fail  49.0s
+ok    t211    26 pass   0 fail  66.0s
+ok    t212    18 pass   0 fail  44.1s
+ok    t213    22 pass   0 fail  74.7s
+ok    t214    29 pass   0 fail  71.2s
+ok    t215     4 pass   0 fail  44.0s
+           INFO angular acceleration, rad/s^2: walk 222, run 787, jump 779, walk2 866, stop 571
+ok    t216    22 pass   0 fail  55.2s
+ok    t217    55 pass   0 fail  25.2s
+ok    t218    21 pass   0 fail  140.2s
+ok    t219    22 pass   0 fail  55.4s
+ok    t220    16 pass   0 fail  69.2s
+ok    t221    27 pass   0 fail  62.8s
+           INFO shambler  head: head 6 | chest: body 5, head 1 | legs: ground 1, legs 5
+           INFO feral     head: head 5, miss 1 | chest: body 5, head 1 | legs: legs 5, ground 1
+           INFO brute     head: head 5, miss 1 | chest: head 3, body 3 | legs: legs 5, ground 1
+           INFO spider    head: head 6 | chest: head 5, body 1 | legs: -
+           INFO leaper    head: head 6 | chest: body 4, head 2 | legs: -
+           INFO colossus at 90 deg 6 m: its head is covered by its own gear from the camera here (no head case)
+           INFO colossus at 90 deg 14 m: its head is covered by its own gear from the camera here (no head case)
+           INFO colossus  head: head 4 | chest: body 6 | legs: legs 6
+           INFO the reticle rings a head lined up, and not a chest (true, los-clear)
+           INFO pistol 8 m 3 m/s +: miss, lead 0.18 m (pace x flight 0.33)
+           INFO pistol 8 m 3 m/s -: hit, lead -0.20 m (pace x flight -0.33) at 0.63 of its height
+           INFO pistol 8 m 6 m/s +: miss, lead 0.30 m (pace x flight 0.60)
+           INFO pistol 8 m 6 m/s -: miss, lead -0.30 m (pace x flight -0.60)
+           INFO pistol 18 m 3 m/s +: hit, lead 0.58 m (pace x flight 0.71) at 0.63 of its height
+           INFO pistol 18 m 3 m/s -: hit, lead -0.59 m (pace x flight -0.71) at 0.64 of its height
+           INFO pistol 18 m 6 m/s +: miss, lead 1.09 m (pace x flight 1.39)
+           INFO pistol 18 m 6 m/s -: miss, lead -1.09 m (pace x flight -1.39)
+           INFO m4 8 m 3 m/s +: miss, lead 0.08 m (pace x flight 0.23)
+           INFO m4 8 m 3 m/s -: hit, lead -0.11 m (pace x flight -0.23) at 0.63 of its height
+           INFO m4 8 m 6 m/s +: miss, lead 0.13 m (pace x flight 0.42)
+           INFO m4 8 m 6 m/s -: miss, lead -0.13 m (pace x flight -0.42)
+           INFO m4 18 m 3 m/s +: miss, lead 0.37 m (pace x flight 0.52)
+           INFO m4 18 m 3 m/s -: hit, lead -0.40 m (pace x flight -0.52) at 0.65 of its height
+           INFO m4 18 m 6 m/s +: miss, lead 0.72 m (pace x flight 1.02)
+           INFO m4 18 m 6 m/s -: miss, lead -0.72 m (pace x flight -1.02)
+           INFO the 6 m/s runners on the test page: miss 8 (not a bar: the fake models; 1.x, CL FYI)
+           INFO launcher 12 m 6 m/s +: miss, lead -0.29 m (pace x flight 2.11)
+FAIL  t222     7 pass   1 fail  190.6s
+ok    t223    15 pass   0 fail  72.9s
+ok    t224    27 pass   0 fail  154.6s
+FAIL  t225    20 pass   1 fail  81.5s
+ERROR t226     0 pass   0 fail  211.3s  — time limit: check still running after 180s
+           INFO crouched: ankles bent up to 53 deg; an ankle-worn shaft top would be 13.4 cm off the shin
+ok    t227    23 pass   0 fail  66.0s
+ok    t228    13 pass   0 fail  192.1s
+ok    t229    13 pass   0 fail  128.0s
+
+34 checks: 603 pass, 3 fail, 1 could not run
+
+by owner:
+  unassigned
+    t198   1 fail  FAIL a TT spawn that does not join keeps the old walk (the older checks)
+           FAIL a TT spawn that does not join keeps the old walk (the older checks)
+    t222   1 fail  FAIL pointing at a chest lands in the body: body 20, head 10 (bar 70 %, one miss; a head only wh
+           FAIL pointing at a chest lands in the body: body 20, head 10 (bar 70 %, one miss; a head only where the head covers the chest from up here)
+    t225   1 fail  FAIL a tap: out of the pouch and away in 0.20 s, a short lob
+           FAIL a tap: out of the pouch and away in 0.20 s, a short lob
+    t226   0 fail  time limit: check still running after 180s
+
+# Finished: 2026-10-23T08:05:57.188Z code=1

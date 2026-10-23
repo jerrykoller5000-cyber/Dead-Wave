@@ -4,6 +4,20 @@ Every call made for the game and the crew, in full, newest first. Claude writes 
 they stand unless Jerry overrides them. `crew/BOARD.md` lists each one on a single line; this file has the
 details. Moved here from the board on 2026-09-29 so the board stays short. Nothing was cut.
 
+- **D-86 · A balance pass before the playthrough (Jerry, 2026-10-23; Claude, in chat).** Jerry: "a big balance pass.
+  Everything starting relatively easy and progressively getting harder by day 20 ... weapons, HP, zombies, ammo,
+  buildable items, the works." His answers: a first pass now, which his weekend playthrough then tunes; night 20
+  brutal; today it feels uneven and spiky; Grokbot's weapons and combat numbers reassigned for this pass (to ChatGPT
+  and Claude; Grokbot reviews when Jerry has restarted him). The plan and every number: `docs/specs/balance-1.0.md`
+  (from the live code at cb2e7e2, `docs/specs/balance-1.0-inventory.md`).
+  - No night lighter than the one before; rest nights hold level with their longer breathers; every night keeps its
+    trick, set pieces, caves and cadences. Zombie hits on the player x1.025 a night from 11 (x1.25 on 20).
+  - The outliers fixed: the night-11 pay cliff (a ramp instead), the rotary gun and Breacher-12 made real upgrades,
+    the Watchman MG cut to a strong emplacement, screamers killable, bombers able to run, shamblers worth 2, and a
+    "100 %" hit on Jerry's sheet always a kill (it reads this body's HP).
+  - This overrides D-71's "no simulations" for this pass only, and only for the analysis behind the curve; Jerry's
+    notes stay the judge from here.
+
 - **D-85 · The title in about 14 s warm for 1.0 (Jerry, 2026-10-21; Claude, in chat).** GP-19951 measured the title at
   14.1-15.0 s warm and about 14.3-17.7 s cold, against D-76's 6.3 s. The world builds in the same ~2.6 s as then; the
   rest is the warm-up that compiles every shader and runs the hidden staged and live fights before the menu (CL-192,

@@ -12,8 +12,8 @@
     const hqx = -5.9, hqz = -2.2;
     T.player.position.set(hqx, T.sampleHeight(hqx, hqz), hqz);
     const skulls = () => T.cashDrops.filter((c) => c.skull && !c.taken);
-    // GP-33 ledger (GB-42 amend): fractions carry. Eight quick kills: four at x1 and four at the
-    // x1.25 streak pay 1+1+1+1+1.25*4 = 9 skull value (Math.round paid 8).
+    // GP-33 ledger (GB-42 amend): fractions carry. Eight quick shambler kills:
+    // four at x1 and four at x1.25, using the current shambler skull value (D-86).
     ok(typeof T.getSkullLedger === 'function' && T.getSkullLedger().remainder() === 0, 'a new run starts with no carried fraction');
     {
       const before = new Set(skulls());
@@ -23,7 +23,8 @@
       await wait(50);
       const got = skulls().filter((c) => !before.has(c));
       const sum = got.reduce((a, c) => a + c.value, 0);
-      ok(got.length === 8 && sum === 9, 'streak fractions carry: 8 kills pay ' + sum + ' in ' + got.length + ' skulls (want 9)');
+      const want = T.ZOMBIE_TYPES.shambler.cashDrop * (4 + 4 * 1.25);
+      ok(got.length === 8 && sum === want, 'streak fractions carry: 8 kills pay ' + sum + ' in ' + got.length + ' skulls (want ' + want + ')');
       ok(Math.abs(T.getSkullLedger().remainder()) < 1e-9, 'nothing left over (' + T.getSkullLedger().remainder() + ')');
     }
     await wait(2800);   // let the streak lapse before the wave

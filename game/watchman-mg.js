@@ -2,7 +2,7 @@
 export const WATCHMAN = Object.freeze({
   crewBack: 0.56, swing: Math.PI * 0.48, minRange: 2.4,
   minPitch: -0.35, maxPitch: 0.61, follow: 22, turnRate: 5,
-  mountS: 0.6, carryS: 0.58, interval: 0.09, kickS: 0.12, drop: 0.16   // GB-156: mountS was 0.38 s, which raced his hands and feet onto the gun
+  mountS: 0.6, carryS: 0.58, interval: 0.09, roundDamage: 10, kickS: 0.12, drop: 0.16   // D-86: round was 18; GB-156: mountS was 0.38 s
 });
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 const wrap = a => Math.atan2(Math.sin(a), Math.cos(a));

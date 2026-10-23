@@ -1,7 +1,7 @@
 // GP-19884: heavy Bomber locomotion on the existing concept rig, no new draws.
 import {shamblerLeg} from './shambler-motion.js';
 import {blendBomberSkin,pulseBomberVeins,resetBomberVeins} from './bomber-appearance.js';
-export const BOMBER=Object.freeze({maxSpeed:2.8,accel:1.1,brake:.75,turn:1.3,turnAccel:2.5,response:.45,stride:1.3,stance:.62,lift:.035});
+export const BOMBER=Object.freeze({maxSpeed:4.0,accel:1.1,brake:.75,turn:1.3,turnAccel:2.5,response:.45,stride:1.3,stance:.62,lift:.035});
 const states=new WeakMap(),poses=new WeakMap(),clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),angle=a=>Math.atan2(Math.sin(a),Math.cos(a));
 const unavailable=z=>!z.alive||z.crawling||z.hopping||z.sleeping||z.poiGuard&&!z.poiAwake||z.riseT>0||z.belowRiseT>0||z.knockT>0||z.getUpT>0||z.windowClimb||z.partsLost?.legL||z.partsLost?.legR;
 export const createBomberMotion=yaw=>({yaw,speed:0,rate:0,side:0});

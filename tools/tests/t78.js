@@ -1,7 +1,9 @@
 // t78 - GB-53 (Jerry, item 1): nights 1 to 20 as fun as they can be. Every night has its own plan
 // (NIGHT_PLAN): the horde sizes stay, but the mix, the caves, the trick and the pacing change night
-// to night. Days 1-3 teach, 4-10 build, 11-20 test; rest nights are lighter than the nights either
-// side; the boss heads the last push; a night comes in pushes with a breather between them.
+// to night. Days 1-3 teach, 4-10 build, 11-20 test; the boss heads the last push; a night comes in pushes with a breather
+// between them. CL-244 (D-86, Jerry's balance pass): the totals and specialist counts make a steady climb
+// (docs/specs/balance-1.0.md): no night lighter than the one before by weight of what comes (rest nights hold level, with
+// their longer breathers, where they used to be lighter than either side), and night 20 the heaviest.
 (async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -10,10 +12,10 @@
   try {
     const P = T.NIGHT_PLAN;
     ok(Array.isArray(P) && P.length === 21 && typeof T.nightPlanFor === 'function', 'NIGHT_PLAN has nights 1 to 20');
-    const TOT = [0, 15, 50, 100, 130, 220, 213, 300, 350, 390, 430, 470, 418, 560, 600, 640, 680, 720, 631, 810, 850];
+    const TOT = [0, 15, 50, 100, 140, 185, 225, 270, 315, 360, 405, 445, 480, 520, 560, 600, 640, 680, 720, 790, 860];   // CL-244 (D-86)
     const badTot = [];
     for (let d = 1; d <= 20; d++) if (P[d].total !== TOT[d]) badTot.push(d + ':' + P[d].total);
-    ok(badTot.length === 0, 'every night keeps its horde size (15, 50, 100 ... 850) ' + badTot.join(' '));
+    ok(badTot.length === 0, 'every night has its D-86 size (15, 50, 100 ... 860) ' + badTot.join(' '));
     ok(new Set(P.slice(1).map((p) => p.trick)).size === 20, 'twenty nights, twenty different tricks');
     let actOk = true;
     for (let d = 1; d <= 20; d++) if (P[d].act !== (d <= 3 ? 'teach' : d <= 10 ? 'build' : 'test')) actOk = false;
@@ -24,7 +26,8 @@
     T.clearZombies(); T.skipGrace && T.skipGrace(); T.setHp(1e6);
     const nCaves = T.POI.caves.length;
     const chalk = T.POI.caves.findIndex((c) => c.theme === 'chalk');
-    const share = [], fails = [];
+    const share = [], fails = [], threat = [];
+    const TW = { shambler: 1, feral: 1.3, leaper: 1.8, drowned: 1.6, military: 2.5, brute: 4, spider: 2.5, spitter: 2.2, screamer: 3, bomber: 2.5, demon: 6, colossus: 40, guardian: 40 };   // CL-244: the spec's weights
     const gFails = [], gCount = [], packFails = [];   // GB-72, GB-73
     const bad = (d, m) => fails.push('n' + d + ' ' + m);
     for (let d = 1; d <= 20; d++) {
@@ -68,6 +71,7 @@
         }
       }
       share[d] = (pv.total - (c.shambler || 0) - (boss ? 1 : 0)) / p.total;
+      threat[d] = Object.entries(c).reduce((a, [k, n]) => a + n * (TW[k] || 1), 0);
       if (d === 8) { let run = 0, best = 0; for (const k of pv.queue) { if (k === 'bomber') { run++; best = Math.max(best, run); } else run = 0; } if (best < 10) bad(d, 'bomber pack ' + best); }
       if (d === 9) { let run = 0, packs = 0; for (const k of pv.queue.concat('x')) { if (k === 'feral') run++; else { if (run >= 10) packs++; run = 0; } } if (packs < 8) bad(d, 'feral packs ' + packs); }
     }
@@ -76,8 +80,10 @@
       'GB-72: the treeline rises with the last push; nights 13/15/16/17 bring ' + [13, 15, 16, 17].map((d) => gCount[d]).join('/') + ' ' + gFails.slice(0, 4).join('; '));
     ok(packFails.length === 0, 'GB-73: night 10 opens every push with six brutes from one cave ' + packFails.slice(0, 3).join('; '));
     const pct = (d) => Math.round(share[d] * 100);
-    const restOk = [7, 11, 14, 17].every((d) => share[d] < share[d - 1] && share[d] < share[d + 1]);
-    ok(restOk, 'rest nights are lighter than either side: ' + [6, 7, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18].map((d) => d + ':' + pct(d) + '%').join(' '));
+    // CL-244 (D-86): the climb. By weight of what comes, no night is lighter than the night before (a rest night holds level
+    // within 3 %), and night 20 is the heaviest.
+    const dips = []; for (let d = 2; d <= 20; d++) if (threat[d] < 0.97 * threat[d - 1]) dips.push(d + ':' + Math.round(threat[d - 1]) + '>' + Math.round(threat[d]));
+    ok(dips.length === 0 && threat[20] >= Math.max(...threat.slice(1, 20)), 'no night lighter than the one before, night 20 the heaviest: ' + threat.slice(1).map((t, i) => (i + 1) + ':' + Math.round(t)).join(' ') + ' ' + dips.join(' '));
     const avg = (a, b) => { let s = 0; for (let d = a; d <= b; d++) s += share[d]; return s / (b - a + 1); };
     ok(avg(1, 3) < avg(4, 10) && avg(4, 10) < avg(11, 20) && share[20] >= Math.max(...share.slice(1, 20)), 'the specialist share climbs: teach ' + Math.round(avg(1, 3) * 100) + '%, build ' + Math.round(avg(4, 10) * 100) + '%, test ' + Math.round(avg(11, 20) * 100) + '%, night 20 ' + pct(20) + '%');
 

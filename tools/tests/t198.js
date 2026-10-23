@@ -35,8 +35,8 @@
     const sp = T.spawnZombie(S.x + 52, S.z + 52, 'spider', true, true); H.join(sp);
     ok(sp.paceMul === 1 && sp.hz === null, 'the spider keeps its own walk');
     const tt = T.spawnZombie(S.x + 54, S.z + 52, 'shambler', true, true); const ttSpeed = tt.speed;
-    await wait(150);
-    ok(tt.hz === null && tt.speed === ttSpeed, 'a TT spawn that does not join keeps the old walk (the older checks)');
+    { const ts0 = T.getSimTime(), tw0 = Date.now(); while ((tt.hz === undefined || T.getSimTime() - ts0 < 0.2) && Date.now() - tw0 < 15000) await wait(25); }
+    ok(tt.hz === null && tt.speed === ttSpeed, 'a TT spawn that does not join keeps the old walk (the older checks; hz=' + tt.hz + ', speed=' + tt.speed.toFixed(3) + '/' + ttSpeed.toFixed(3) + ')');
     T.clearZombies(); await wait(200);
     // (2) A column of ten, single file, from 26 m: they arrive round him from several sides.
     const col = [];

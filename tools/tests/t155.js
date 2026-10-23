@@ -16,7 +16,7 @@
     await wait(200);
     const z = T.spawnZombie(px, pz + 4, 'shambler', true, true);
     z.mesh.position.set(px, T.sampleHeight(px, pz + 4), pz + 4);
-    z.hp = 5000; z.maxHp = 5000; z.riseT = 0; z.speed = 0; z.baseSpeed = 0;
+    z.hp = 5000; z.maxHp = T.ZOMBIE_TYPES.shambler.hp; z.riseT = 0; z.speed = 0; z.baseSpeed = 0; // D-86 sheet base
     const rnd = Math.random; Math.random = () => 0.99;
     try {
       T.fireShellDbg(px, z.mesh.position.y + 1.0, pz + 4 - 1.5, 0, 0, 1);
