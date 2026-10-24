@@ -136,7 +136,9 @@
           await pointAt(pts[k]);
           const r = trace(z).res;
           row[k][r] = (row[k][r] || 0) + 1; tally[k][r] = (tally[k][r] || 0) + 1;
-          if (k === 'chest' && type !== 'leaper') chestHumanoid[r] = (chestHumanoid[r] || 0) + 1;
+          // GB-224: the spider counts with the leaper: its drawn head sits 0.62 m ahead of its middle at 0.82 H, so from the camera's
+          // height the ray to the 0.56 H chest point meets the head first, 0.45-0.82 m short (qa/2026-10-23-GB-224/t222-spider-chest-*.png).
+          if (k === 'chest' && type !== 'leaper' && type !== 'spider') chestHumanoid[r] = (chestHumanoid[r] || 0) + 1;
         }
       }
       info(type.padEnd(9) + ' head: ' + fmt(row.head) + ' | chest: ' + fmt(row.chest) + ' | legs: ' + fmt(row.legs));

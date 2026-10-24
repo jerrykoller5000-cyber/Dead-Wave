@@ -1,0 +1,17 @@
+# AG-120 chunk C rerun: t143
+# Started: 2026-10-23T23:08:29.164Z
+
+Game-test request 8257f570-62e1-4760-bc42-7f7ba444c045 queued at position 1. Waiting...
+GRANT antigravity AG-120: starting one game-test command
+check-players: 303 player.position reads, all in the allowed places
+FAIL  t143    15 pass   2 fail  80.9s
+
+1 checks: 15 pass, 2 fail
+
+by owner:
+  unassigned
+    t143   2 fail  FAIL unaware, it walks 0.5 m in 20 s
+           FAIL unaware, it walks 0.5 m in 20 s
+           FAIL stuck, it turns back (repaths 5 -> 6, next point 1 -> 1)
+
+# Finished: 2026-10-23T23:12:09.373Z code=1

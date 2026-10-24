@@ -56,7 +56,9 @@
       const either = w === 'm4';
       const meas = () => {
         T.marine.updateMatrixWorld(true);
-        const chR = V(1, 0, 0).applyQuaternion(handQ(ud.elbowRG)), chL = V(1, 0, 0).applyQuaternion(handQ(ud.elbowLG));
+        // GB-220: GB-152's fingered hands put the channel's index end on -x (holdHand negates the sign), so the channel is -x here;
+        // close-ups qa/2026-10-23-GB-220/before/hold-close-m4-R-side.png, hold-close-pistol-R-side.png, hold-close-pistol-L-front.png.
+        const chR = V(-1, 0, 0).applyQuaternion(handQ(ud.elbowRG)), chL = V(-1, 0, 0).applyQuaternion(handQ(ud.elbowLG));
         const l = ang(chL, D.foreChannelDir(w, V()).applyQuaternion(gq));
         return { r: ang(chR, D.gripDownDir(V()).applyQuaternion(gq)), l: either ? Math.min(l, 180 - l) : l };
       };
@@ -64,9 +66,10 @@
       const wristed = !!ud.elbowLG.userData.wrist;
       // With the wrist, the roll is no longer all of it (the wrist takes what the roll leaves), so no before/after margin.
       handOk(after.r < 70 && (wristed || after.r < before.r - 20), w + ': the gun hand rolled onto the grip (' + before.r.toFixed(0) + ' -> ' + after.r.toFixed(0) + ' deg)');
-      // (The pistol's support hand still cups the firing fist by the roll alone.)
+      // (The pistol's support hand still cups the firing fist by the roll alone.) GB-220: with the wrist it is already on the gun
+        // without the roll (0 -> 0 deg on the real renderer), so no before/after margin there, as for the gun hand above.
       if (wristed && either) handOk(after.l < 45, w + ': the support hand turned onto the gun, along its forend (' + after.l.toFixed(0) + ' deg)');
-      else handOk(after.l < 80 && after.l < before.l - 20, w + ': the support hand rolled onto the gun (' + before.l.toFixed(0) + ' -> ' + after.l.toFixed(0) + ' deg)');
+      else handOk(after.l < 80 && (wristed || after.l < before.l - 20), w + ': the support hand rolled onto the gun (' + before.l.toFixed(0) + ' -> ' + after.l.toFixed(0) + ' deg)');
     }
     // The draw: from a gun he doesn't stow (the chainsaw) to each stowed one, held at the end of the reach.
     await take('chainsaw');

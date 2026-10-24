@@ -1,7 +1,7 @@
 // studio/marine-dive.test.mjs — CL-193: the shootdodge's state, flight, slow motion and meter, and the lie of the body.
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { DIVE, createDive, startDive, stepDive, diveTimeScale, diveLie, diveBasis, diveKill, canDive, diveBusy, endDive } from './marine-dive.js';
+import { DIVE, createDive, startDive, stepDive, diveTimeScale, diveLie, diveBasis, diveKill, canDive, diveBusy, endDive, startSlowmo, canSlowmo, slowmoOn } from './marine-dive.js';
 
 // Fly a dive over flat ground the way index.html does: game time = real time x the dive's own scale.
 function fly(d, { steer = [0, 0], frames = 2000, rdt = 1 / 60, wantUpAt = Infinity } = {}) {
@@ -103,4 +103,40 @@ test('the chest turns to the aim: sideways dive faces it, forward is belly down,
   assert.ok(fwd.f.y < -0.8, 'diving at the target: belly down ' + fwd.f.y.toFixed(2));
   const back = diveBasis(0, -1, 0, 0, 1);
   assert.ok(back.f.y > 0.8, 'diving away from it: on his back ' + back.f.y.toFixed(2));
+});
+
+// CL-248 (D-87): V slows time on its own; he stays on his feet (no flight, no lying down).
+function slowRun(d, { rdt = 1 / 60, frames = 600 } = {}) {
+  let minK = 1, slowReal = 0, real = 0, busy = false;
+  for (let i = 0; i < frames; i++) {
+    const k = diveTimeScale(d); minK = Math.min(minK, k); real += rdt;
+    if (k < 0.5) slowReal += rdt;
+    stepDive(d, rdt * k, rdt, { grounded: true });
+    if (diveBusy(d)) busy = true;
+  }
+  return { minK, slowReal, busy };
+}
+test('CL-248: V slows time for about 2.5 real seconds, on his feet, then cools down', () => {
+  const d = createDive(), m0 = d.meter;
+  assert.ok(startSlowmo(d), 'it starts');
+  assert.ok(slowmoOn(d) && !diveBusy(d) && d.phase === 'idle', 'no dive: still idle (on his feet)');
+  assert.ok(!startSlowmo(d) && !canSlowmo(d), 'not again while it runs');
+  const r = slowRun(d, { frames: 150 });
+  const m1 = d.meter;
+  assert.ok(r.minK < DIVE.slow + 0.01, 'slowed to ' + r.minK.toFixed(3));
+  assert.ok(!r.busy, 'never a dive phase');
+  const r2 = slowRun(d, { frames: 600 });
+  assert.ok(!slowmoOn(d) && diveTimeScale(d) === 1, 'over, time back to normal');
+  assert.ok(Math.abs(r.slowReal + r2.slowReal - DIVE.slowFor) < 0.25, 'slow for about ' + DIVE.slowFor + ' s: ' + (r.slowReal + r2.slowReal).toFixed(2));
+  assert.ok(m1 < m0 - DIVE.meter.cost - 0.15, 'it costs meter and drains it (' + m0 + ' -> ' + m1.toFixed(3) + ')');
+});
+test('CL-248: not with too little meter, and not in a timed drill (slow: false)', () => {
+  const d = createDive(); d.meter = DIVE.meter.min - 0.01;
+  assert.ok(!startSlowmo(d) && !slowmoOn(d), 'too little meter: nothing');
+  const e = createDive();
+  assert.ok(!startSlowmo(e, { slow: false }) && !slowmoOn(e), 'a timed drill: nothing');
+  const f = createDive(); startSlowmo(f); f.meter = 0.01;
+  slowRun(f, { frames: 120 });
+  assert.ok(!slowmoOn(f), 'it ends when the meter runs dry');
+  endDive(f); assert.ok(!slowmoOn(f) && f.w === 0, 'endDive ends it at once');
 });

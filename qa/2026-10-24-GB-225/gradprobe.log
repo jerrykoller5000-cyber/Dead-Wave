@@ -1,0 +1,3 @@
+GRANT grokbot GB-225: starting one game-test command
+headless false {"a":"none","b":"url(\"data:image/gif;base64,R0lGODlhAQABA","supports":true,"ua":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"}
+headless true {"a":"none","b":"url(\"data:image/gif;base64,R0lGODlhAQABA","supports":true,"ua":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36"}

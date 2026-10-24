@@ -1,0 +1,73 @@
+# AG-120 chunk E: t196 t197 t198 t199 t200 t201 t202 t203 t204 t205 t206 t207 t208 t209 t210 t211 t212 t213 t214 t215 t216 t217 t218 t219 t220 t221 t222 t223 t224 t225 t226 t227 t228 t229
+# Started: 2026-10-23T23:59:15.718Z
+# GB-223 file snapshot: {"t187":{"bytes":11361,"mtime":"2026-10-18T23:55:15.781Z","sha1":"0711ee8b27","head":"// t187 - GB-129 (Jerry): shoulder-fired long guns are shouldered. | //  - m4, ak, aa12, shotgun, sniper, launcher: the butt sits in the gun-side shoulder pocket (inside the | //    shoulder joint, in front of it), the firing hand is on the pistol grip and the support hand on the"},"t188":{"bytes":12667,"mtime":"2026-10-23T23:55:03.844Z","sha1":"0c039fa638","head":"// t188 - GB-130 (Jerry): every player gun at its real size for the marine, and the hands on explicit anchors. | //  - Size: TT.getWeaponSizeDbg() (MARINE_UPM = 1.655 units / 1.80 m). m = the real overall length of the gun's | //    class (in its range); look = the by-eye factor against the Uzi (Uzi 1.0, others 1-1.6). Each gun's measured"},"t189":{"bytes":11757,"mtime":"2026-10-23T20:09:38.689Z","sha1":"70e4709183","head":"// t189 - GB-130 (Jerry): the stowed guns (slings, pack holsters, the hip) at their real in-hand size and snug | // against him. For eight loadouts (every primary on both slings, the Uzi and the revolver on both pack sides, | // the hip pistol and its pair): each copy is its gun's in-hand size x CARRY_FIT s (s = 1: the same gun), and the"},"t195":{"bytes":8513,"mtime":"2026-10-23T20:16:00.655Z","sha1":"0cf5279ce1","head":"// t195 - CL-122 (GB-130, GP-128): the hands. | //  - The support anchor is inside the support arm's reach for every two-handed gun (the flamer's front grip was 2.6 cm | //    past it, the Uzi's 1.2): the gun slides toward that shoulder, and its barrel is still on the reticle."},"t222":{"bytes":20666,"mtime":"2026-10-23T23:17:12.837Z","sha1":"9e1f90bda6","head":"// t222 - CU-96 (Jerry): the aiming system. The cursor is put, through the real pointer and the real camera, on a still | // zombie's head, chest or legs (the head where its model's head really is), the game turns that into its aim, and the | // round is traced from the real muzzle along that aim against the zombie's hit column, as the bullets are: what it"},"t224":{"bytes":13447,"mtime":"2026-10-23T20:26:05.940Z","sha1":"4db396ed40","head":"// t224 - GB-148 (Jerry, 2026-10-09: \"Revolver sticks out too much from pack and is not tight when holstered. Also could | // you change the weapon wheel sound to something more pleasant?\"). | //  - The revolver's low pack holster sits in on the pack's lower corner (|x| <= 0.13 m, z >= -0.35 m in his torso's"},"t228":{"bytes":9637,"mtime":"2026-10-23T20:30:42.540Z","sha1":"1af8fe3147","head":"// t228 - CU-100 (Jerry, 2026-10-09: \"Player hand placements for weapons are not accurate. They need to be in the right | // spots for all weapons at all times.\"). The hold aimed the hand point (the face of the curled fingers) at each grip, | // so every grip and forend lay along the front of the fist; with no wrist, the support fist could not turn onto a"},"t229":{"bytes":13270,"mtime":"2026-10-23T20:30:42.540Z","sha1":"b58800b72e","head":"// t229 - GB-151 (Jerry, 2026-10-09 15:35 CT, with a photo of a 1911 held two-handed, thumbs forward: \"This picture shows | // what proper pistol grip looks like. Right now our player does not do that with the pistol or the revolver.\"). | // For the pistol and the revolver, single-wielded, standing, aiming level, a little up and a little down:"}}
+
+GRANT antigravity AG-120: starting one game-test command
+check-players: 303 player.position reads, all in the allowed places
+ok    t196    17 pass   0 fail  45.6s
+ok    t197     7 pass   0 fail  40.4s
+ok    t198    17 pass   0 fail  59.6s
+ok    t199    10 pass   0 fail  49.9s
+ok    t200     7 pass   0 fail  40.3s
+ok    t201    18 pass   0 fail  62.9s
+ok    t202    12 pass   0 fail  39.1s
+ok    t203    12 pass   0 fail  42.8s
+ok    t204    45 pass   0 fail  70.0s
+ok    t205    13 pass   0 fail  63.9s
+ok    t206    19 pass   0 fail  63.7s
+ok    t207    20 pass   0 fail  46.9s
+ok    t208    10 pass   0 fail  66.1s
+ok    t209    13 pass   0 fail  49.7s
+ok    t210     9 pass   0 fail  49.0s
+ok    t211    26 pass   0 fail  63.0s
+ok    t212    18 pass   0 fail  43.5s
+ok    t213    22 pass   0 fail  71.0s
+ok    t214    29 pass   0 fail  69.7s
+ok    t215     4 pass   0 fail  43.4s
+           INFO angular acceleration, rad/s^2: walk 222, run 748, jump 875, walk2 532, stop 394
+ok    t216    22 pass   0 fail  54.4s
+ok    t217    55 pass   0 fail  24.6s
+ok    t218    21 pass   0 fail  132.9s
+ok    t219    22 pass   0 fail  52.8s
+ok    t220    16 pass   0 fail  70.7s
+ok    t221    27 pass   0 fail  61.2s
+           INFO shambler  head: head 6 | chest: body 6 | legs: legs 5, ground 1
+           INFO feral     head: head 5, miss 1 | chest: body 6 | legs: legs 5, ground 1
+           INFO brute     head: head 5, miss 1 | chest: body 5, head 1 | legs: legs 4, ground 1, body 1
+           INFO spider    head: head 6 | chest: head 3, body 3 | legs: -
+           INFO leaper    head: head 6 | chest: body 4, head 2 | legs: -
+           INFO colossus at 90 deg 6 m: its head is covered by its own gear from the camera here (no head case)
+           INFO colossus at 90 deg 14 m: its head is covered by its own gear from the camera here (no head case)
+           INFO colossus  head: head 4 | chest: body 6 | legs: legs 6
+           INFO the reticle rings a head lined up, and not a chest (false, los-clear) (would fail; INFO on the test page)
+           INFO pistol 8 m 3 m/s +: hit, lead 0.19 m (pace x flight 0.33) at 0.59 of its height
+           INFO pistol 8 m 3 m/s -: hit, lead -0.21 m (pace x flight -0.33) at 0.64 of its height
+           INFO pistol 8 m 6 m/s +: miss, lead 0.30 m (pace x flight 0.60)
+           INFO pistol 8 m 6 m/s -: miss, lead -0.30 m (pace x flight -0.60)
+           INFO pistol 18 m 3 m/s +: miss, lead 0.56 m (pace x flight 0.71)
+           INFO pistol 18 m 3 m/s -: hit, lead -0.58 m (pace x flight -0.71) at 0.64 of its height
+           INFO pistol 18 m 6 m/s +: miss, lead 1.09 m (pace x flight 1.39)
+           INFO pistol 18 m 6 m/s -: miss, lead -1.09 m (pace x flight -1.39)
+           INFO m4 8 m 3 m/s +: hit, lead 0.10 m (pace x flight 0.23) at 0.61 of its height
+           INFO m4 8 m 3 m/s -: miss, lead -0.09 m (pace x flight -0.23)
+           INFO m4 8 m 6 m/s +: miss, lead 0.13 m (pace x flight 0.42)
+           INFO m4 8 m 6 m/s -: miss, lead -0.13 m (pace x flight -0.42)
+           INFO m4 18 m 3 m/s +: hit, lead 0.37 m (pace x flight 0.52) at 0.59 of its height
+           INFO m4 18 m 3 m/s -: hit, lead -0.39 m (pace x flight -0.52) at 0.64 of its height
+           INFO m4 18 m 6 m/s +: miss, lead 0.72 m (pace x flight 1.02)
+           INFO m4 18 m 6 m/s -: miss, lead -0.72 m (pace x flight -1.02)
+           INFO the 6 m/s runners on the test page: miss 8 (not a bar: the fake models; 1.x, CL FYI)
+           INFO launcher 12 m 6 m/s +: miss, lead -0.28 m (pace x flight 2.11)
+ok    t222     8 pass   0 fail  190.8s
+ok    t223    15 pass   0 fail  68.4s
+ok    t224    27 pass   0 fail  171.3s
+ok    t225    21 pass   0 fail  77.5s
+ok    t226    38 pass   0 fail  192.3s
+           INFO crouched: ankles bent up to 53 deg; an ankle-worn shaft top would be 13.4 cm off the shin
+ok    t227    23 pass   0 fail  59.1s
+ok    t228    13 pass   0 fail  172.8s
+ok    t229    13 pass   0 fail  109.6s
+
+34 checks: 649 pass, 0 fail
+
+# Finished: 2026-10-24T00:41:20.561Z code=0

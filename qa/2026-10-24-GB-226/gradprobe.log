@@ -1,0 +1,3 @@
+GRANT grokbot GB-226: starting one game-test command
+headless false {"a":"linear-gradient(rgb(255, 0, 0), rgb(255, 0, 0))","b":"url(\"data:image/gif;base64,R0lGODlhAQABA","forced":false,"supports":true,"ua":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"}
+headless true {"a":"linear-gradient(rgb(255, 0, 0), rgb(255, 0, 0))","b":"url(\"data:image/gif;base64,R0lGODlhAQABA","forced":false,"supports":true,"ua":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36"}

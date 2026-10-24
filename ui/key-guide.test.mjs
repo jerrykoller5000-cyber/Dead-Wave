@@ -17,15 +17,19 @@ test('lessons last eight active seconds, yield to urgent guidance and persist on
  let saved;const g=start({save:value=>{saved=value;}});ticks(g,30);assert.equal(ticks(g,20,{priority:true}),null);
  assert.equal(g.tick(frame()).id,'keyGuide.map');ticks(g,6);assert.equal(g.read(),null);
  assert.equal(ticks(g,29),null);assert.equal(g.tick(frame()).id,'keyGuide.movement');
- const next=start({load:()=>saved});assert.equal(ticks(next,30).id,'keyGuide.weapons');
+ const next=start({load:()=>saved});assert.equal(ticks(next,30).id,'keyGuide.view');
  next.handle({type:'run-reset',runId:2});assert.equal(ticks(next,40),null);next.handle({type:'controls-ready',runId:2});
- assert.equal(ticks(next,30).id,'keyGuide.support');
+ assert.equal(ticks(next,30).id,'keyGuide.weapons');
 });
 test('all lessons use keyed copy and the main player bindings have a guide or contextual coach',()=>{
  const sources=KEY_GUIDES.map(id=>STRINGS['guide.'+id+'.body']).join(' ')+' '+STRINGS['coach.bank'];
- for(const action of ['fire','aim','move','pause','map','run','jump','fullscreen','reload','rotate','melee','grenade','heal','weaponWheel','interact','buildWheel','repair','carry','scrap','nightVision','akimbo','laser','flashlight','mute','dodge','crouch'])
+ for(const action of ['fire','aim','view','move','pause','map','run','jump','fullscreen','reload','rotate','melee','grenade','heal','weaponWheel','interact','buildWheel','repair','carry','scrap','nightVision','akimbo','laser','flashlight','mute','slowTime','crouch'])
    assert(sources.includes('{'+action+'}'),action);
  for(const id of KEY_GUIDES){assert(text('guide.'+id+'.title'));assert(!text('guide.'+id+'.body').includes('{'));}
+ assert.match(text('guide.view.body'), /5.*third person.*RMB.*first person/);
+ assert.match(text('tips.movement.jump'), /V.*slow time.*feet/);
+ assert.match(text('tips.combat.scope'), /RMB.*third person.*2X.*first person.*sights/);
+ assert.equal(text('hud.slowMo'), 'Slow-mo');
  assert(text('tips.building.repair').includes('R'));assert(text('tips.waves.streak').includes('70%'));
 });
 test('all lessons eventually stop; corrupt/denied storage remains session-safe',()=>{

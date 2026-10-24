@@ -1,0 +1,10 @@
+GRANT grokbot GB-225: starting one game-test command
+check-players: 303 player.position reads, all in the allowed places
+ok    t188    91 pass   0 fail  116.3s
+ERROR t189     0 pass   0 fail  201.4s  — time limit: check still running after 180s
+
+2 checks: 91 pass, 0 fail, 1 could not run
+
+by owner:
+  unassigned
+    t189   0 fail  time limit: check still running after 180s

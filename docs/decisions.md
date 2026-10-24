@@ -4,6 +4,27 @@ Every call made for the game and the crew, in full, newest first. Claude writes 
 they stand unless Jerry overrides them. `crew/BOARD.md` lists each one on a single line; this file has the
 details. Moved here from the board on 2026-09-29 so the board stays short. Nothing was cut.
 
+- **D-87 · The playtest's fixes, all in 1.0; the aim rebuilt (Jerry, 2026-10-23, after friends played it; Claude, in
+  chat).** Jerry: "I got a few people to playtest the game and we came to a consensus ... These need to be included
+  in 1.0. Especially the aiming system." The list:
+  1. The chapel (Coldwater's church shell) has no collision: he walks through its walls.
+  2. Third-person aim is hard; rounds don't connect. The chief complaint of every player.
+  3. The slow-mo dive goes: the button slows time and he doesn't dive.
+  4. Some corpses float after death.
+  5. Ferals are too fast (they close in too near to shoot): slower again.
+  6. Shamblers are too fast from the start: slower.
+  7. Killed by a cave's guardians while running from the dead, the dead freeze; they should keep moving.
+  The aim, Jerry's design: a number key (5, the next free one) switches between third and first person; right-click no
+  longer goes to the shouldered view. In third person, right-click zooms the camera in 2x and centres it on the cursor
+  instead of on him, as Project Zomboid does. His answers: held, not toggled; first person is a true view from his
+  eyes (not the shoulder view), and there right-click aims down the sights (iron sights, or a scoped gun's scope);
+  rounds land where the cursor is on a zombie, with a light assist (a gentle pull when the cursor is just off one,
+  never a lock); shamblers slower on the early nights and back near today's speed by the late ones.
+  - This replaces CL-174's right-click shoulder view and CL-193's dive, and lowers D-77's speeds for ferals and for
+    shamblers early. The work: CL-247 (the third-person zoom, rounds and assist), CL-249 (first person and its
+    sights; GB-222 gives each gun's sight point), CL-248 (the slow-mo), AG-119 (the chapel), GP-19959 (the speeds),
+    GP-19960 (the corpses), GB-221 (the freeze).
+
 - **D-86 · A balance pass before the playthrough (Jerry, 2026-10-23; Claude, in chat).** Jerry: "a big balance pass.
   Everything starting relatively easy and progressively getting harder by day 20 ... weapons, HP, zombies, ammo,
   buildable items, the works." His answers: a first pass now, which his weekend playthrough then tunes; night 20

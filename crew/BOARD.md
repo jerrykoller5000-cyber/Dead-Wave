@@ -73,6 +73,7 @@ don't build it. **Model polish is frozen** (guns, zombies, the marine, buildable
    **2b. The day missions (D-82): done.** The medical convoy, the ranger cache, the hikers' kit, the trapper's path, the fuel depot, the utility truck (`docs/specs/day-missions.md`).
 3. **The first hour**: the goal on day 1, a pointer to the Training Ground, clean Tips. **Done.**
 4. **Night packs**: Jerry plays nights in 20-30 minute packs; his notes become tasks. **This weekend (24-25 October) he plays it through for 6-8 hours:** the build he plays is tested (GB-217), committed and pushed by Friday. His notes go in `Night Packs/Night Pack Notes.txt` (one letter a line: B broken, M mistake, F feel, P performance, I idea); "check the night pack notes" turns them into tasks.
+4b. **The playtest's fixes (D-87), before Ship.** Jerry's friends played it (2026-10-23): CL-247 (third-person aim), CL-249 (first person), CL-248, AG-119, GP-19959, GP-19960, GB-221. The aim first; then the full suite and a checkpoint.
 5. **Ship**: the desktop build, 1.0.0, budgets met on Jerry's PC, a green suite, the tag; the itch.io page ready for Jerry to publish (D-84); the music and sounds' licences listed for him to check.
 
 **New text the player reads:** add its keys to `ui/strings.js` yourself, in a block headed `// <your task id>`, English
@@ -86,7 +87,10 @@ Finish what you have in progress first (and queue its game checks); then take th
 
 ### Claude
 
-- [>] **CL-246** **The checkpoint after the balance pass (D-86).** Everything since cb2e7e2 (CL-244, GP-19955, GP-19958, AG-118, the D-86 docs), tested by AG-117 and GP-19957 (night 20 quiet seat: 59.6-60.0 fps, 1 % low 48.4/54.9/53.4). An ALL commit job in Claude outputs/commit, run by ChatGPT for me.
+- [x] **CL-247** **The aim, third person (D-87).** Right-click held: the camera zooms in 2x and centres on the cursor (Zomboid), eases back on release; no more shoulder view on right-click. Rounds land where the cursor is on a zombie (the pick, not a height), with a light assist when it is just off one. Grokbot reviews (his weapons).
+- [x] **CL-249** **First person (D-87), with CL-247.** Key 5 toggles a true first-person view from his eyes (his head hidden from that camera only, his shadow whole); right-click there aims down the sights (each gun's sight point from GB-222; the sniper's scope as today).
+- [x] **CL-248** **Slow-mo without the dive (D-87).** The shootdodge button slows time as it does now; he stays on his feet and keeps moving.
+- [x] **CL-246** **The checkpoint after the balance pass (D-86). Pushed: a30da1d9 (17:28Z).** Everything since cb2e7e2 (CL-244, GP-19955, GP-19958, AG-118, the D-86 docs), tested by AG-117 and GP-19957 (night 20 quiet seat: 59.6-60.0 fps, 1 % low 48.4/54.9/53.4). An ALL commit job in Claude outputs/commit, run by ChatGPT for me.
 - [ ] **CL-245** **Night 20's last first-use build.** GP-19957 run 1: one node build and pipeline at frame 1588, a plain `Mesh` with a transparent `MeshBasicMaterial` (no new shader), not on a spike frame; runs 2 and 3 had none. Find what it is from qa/2026-10-23-GP-19957/run-1.log and warm it at load. After Jerry's playthrough; not blocking.
 - [x] **CL-244** **The balance pass, the curve (D-86).** `docs/specs/balance-1.0.md`: the night plan's totals and specialist counts (NIGHT_PLAN), zombie hits on the player x(1 + 0.025 (n - 10)) from night 11, t78 and docs/specs/difficulty.md with them. Done 02:40Z (handoffs/2026-10-23-claude-CL-244.md).
 - [x] **CL-243** The checkpoint before Jerry's playthrough: everything since ae73015 (CL-236 to CL-241, GP-19948/19949, AG-116's test fixes, the bench tools), tested by AG-116 and GP-19954. Pushed: cb2e7e2.
@@ -131,6 +135,11 @@ Finish what you have in progress first (and queue its game checks); then take th
 
 ### ChatGPT
 
+- [ ] **GP-19964** **Night 20 from a quiet seat, again (later, when Claude prompts it).** GP-19962's runs (56.0/55.5 fps) were taken with Jerry at the PC (his Windows theme switched around run 2) and Grokbot working: every phase slower by the same share. Two runs, qa/2026-10-24-GP-19964/, against GP-19957.
+- [>] **GP-19962** **Night 20 after D-87, from a quiet seat (measurement only), after AG-120.** Not a quiet seat (Jerry at the PC, a theme switch, Grokbot working); then the checkpoint. As GP-19957: `node tools/bench.mjs --night 20 --gfx high --prof` twice, nothing else running; qa/2026-10-23-GP-19962/.
+- [x] **GP-19961** **The words for D-87's controls. Next.** 5 for first/third person, right-click (zoom in third, sights in first), V slow-mo without the dive: the key guide, Tips, the camera guide, any line that still says right-click shoulders or V dives. In the request.
+- [x] **GP-19959** **Slower ferals and early shamblers (D-87). Next.** Ferals get their own walking speeds, under his walk most of the time and never past his sprint; shamblers x0.75 on nights 1-2 rising to x1 by night 14. Numbers and tests in the request.
+- [x] **GP-19960** **Corpses that float (D-87), after GP-19959.** Find every way a body lies at the height it died, and settle it on what is under it. In the request.
 - [x] **GP-19958** **Four checks in line with D-86 (t71, t77, t90, t155). Next.** AG-117's held reds from GP-19955's rules: t90/t155 inflate maxHp with hp (keep hp high, maxHp the kind's own); t71's sum is 18 now (derive from shambler cashDrop); t77's restart check. Request in handoffs/requests.md.
 - [x] **GP-19957** **Night 20 after D-86, from a quiet seat (measurement only). Next: GP-19958 and AG-118 are in, the slot is free.** GP-19956 read 1 % lows 35.8 and 46.1 and a tick of 14.1-14.2 ms (GP-19954: 50-53, 11.3-11.4) while Antigravity was checking in. Once AG-117 has checked out and she's idle: `node tools/bench.mjs --night 20 --gfx high --prof` three times; save each run's full output (the phase table, spikes, spikeCauses) to qa/2026-10-23-GP-19957/ and report fps, 1 % low, tick and the top phases.
 - [x] **GP-19956** **Night 20 after the balance pass (measurement only). Next.** CL-244 and your GP-19955 are both in (D-86): night 20 now has 860 + the colossus, 58 % specialists. Through the slot: `node tools/bench.mjs --night 20 --gfx high --prof` twice (fps, 1 % low, tick, builds, pipelines), while Antigravity is idle between her AG-117 chunks if you can. Compare with GP-19954 (60 fps, 1 % low 50-53).
@@ -165,6 +174,13 @@ Finish what you have in progress first (and queue its game checks); then take th
 
 ### Grokbot
 
+- [>] **GB-226** **The scope after CL-252, the heavies, t189, t143. Next.** Forced colours on this PC's Chrome and the scope's page shots; the minigun and chainsaw at the first-person hip; t189's budget fix; t143 (the wanderer stuck near its first trail point here). In the request.
+- [x] **GB-225** **t188's setup, the scope overlay in the shots, the heavies.** t188's flamer/chainsaw read (the test's setup, not the holds); why #scopeOverlay is missing from the page shots (read its style at the shot); the minigun and chainsaw at the first-person hip after CL-251; t189's time limit. In the request.
+- [x] **GB-224** **First person after CL-250, and GB-223's rest.** The shotgun's (and revolver's) sight point; reshoot the first-person sheet as a page screenshot (the flamer's block, the hip carry); t222's spider chest case (Rule 13 call); t188's flamer and chainsaw anchors; the revolver's pop from frames. In the request.
+- [x] **GB-223** **The last held reds on the new aim (D-87).** Review CL-247/249 as the guns' owner; t187 and t222 on the new aim; the judged-right chainsaw and revolver holds (bars from the close-ups, t188's anchors, the akimbo axis, the revolver's pop from frames). In the request. Done in part (g1 review, g2, t228/t229 bars); the rest is GB-224.
+- [x] **GB-221** **The dead freeze after a guardian kill (D-87). First, before GB-220's fixes.** Jerry's playtest: run into a cave from the dead, die to its guardians, and the dead stop still. They keep moving. In the request.
+- [x] **GB-222** **Each gun's sight point, for CL-249's first person (D-87), after GB-221.** Where the eye sits to look down each gun's sights (or its scope), as a point and a forward on the gun. In the request.
+- [x] **GB-220** **Welcome back: your real-renderer reds, stows first. Next.** AG-117 (same seven as AG-116, plus t222): t189 and t224 (CARRY_FIT after GB-200), then the grips (t228, t188, t195, t229), then the aim (t187, t222). Rule 13, inspector shots for any bar moved. And read D-86's weapon rows (GP-19955) as their owner; look over AG-118's t198. Request in handoffs/requests.md.
 - [x] **GB-218** **The zombies mark's 3-second frames (CL-211). Next.** In AG-111's night-20 runs (`qa/2026-10-21-AG-111/run-*.json`) the `zombies` mark is 2.7 ms on average but 6-10 ms on frames about 175 frames (3 s) apart, the same frames where `r:render` is 15-18 ms with nothing built. Find what runs on a ~3 s clock in the zombies' update (a re-path, a re-target, a stuck check, a spawn burst, a body swap or LOD pass) by reading the code and, through the slot, a `bench --night 20 --prof` run with temporary `PROF.mark` lines inside updateZombies (take them out after). If the same thing also changes what is drawn (bodies shown, hidden, swapped, a light), say so: CL-238's render-object journal (AG-113) is looking at the r:render side. Then make it spread over frames, or say why it can't be.
 - [~] **GB-217** Moved to Antigravity as AG-116 (Grok Bot is waiting on an update that needs Jerry at the desktop).
 - [x] **GB-216** rerun, intermittent
@@ -199,6 +215,8 @@ Finish what you have in progress first (and queue its game checks); then take th
 
 ### Antigravity
 
+- [x] **AG-120** **The suite after D-87. Next.** Everything from the playtest is in (CL-247/248/249, GB-221, GP-19959/60/61, AG-119, GB-220's tests, CL-160's tick count). The full suite in chunks as AG-117, test page and real renderer, through the slot; route the reds. Then GP-19962's night 20 from a quiet seat, then the checkpoint.
+- [x] **AG-119** **The chapel's walls (D-87). Next.** Coldwater's church shell is placed with no solids: give it its walls (the door and the aisle to the cross open), the way the cordon checkpoint does. In the request.
 - [x] **AG-118** **t198 waits on the game, not 150 ms. Next.** AG-117's new held red: a TT spawn's `hz` is set in its own tick, and far bodies tick every 3rd frame; wait until it has ticked, then the same check. Grokbot's test, he is offline. Then stay out of the slot until GP-19957 is DONE. Request in handoffs/requests.md.
 - [x] **AG-117** **The suite after the balance pass (D-86), after CL-244 and GP-19955 (both in at 02:40Z). Next.** The full suite in chunks as AG-116, test page and real renderer, through the slot; then route the reds. Then the checkpoint before Jerry's playthrough.
 - [x] **AG-116** **The full suite before Jerry's playthrough (was GB-217), after GP-19951's cut lands.** Jerry plays the game end to end this weekend (6-8 hours, 24-25 October); the build he plays should be green. Through the slot, in chunks as GB-209 did (`qa/2026-10-22-AG-116/`): every test on the test page, then the real-renderer ones. For each red: rerun it once; if it holds, name its owner (the tests' `// tNNN - XX-n` line, or who last touched the code) and put it on their queue with a request (Grokbot's when Grok Bot is back), or fix it yourself if it is a test-timing red. Report the totals per chunk and the reds with owners.
@@ -255,6 +273,7 @@ Ideas and polish that are not 1.0. Claude adds them here when you send them (`--
 
 One line each; the full text is in `docs/decisions.md`. D-0 to D-69: `crew/archive/board-2026-10-15.md`.
 
+- **D-87** · The playtest's fixes in 1.0: the chapel's walls, the aim rebuilt (key 5 for a true first person with sights; right-click held zooms 2x on the cursor in third person; rounds land on the cursor with a light assist), slow-mo without the dive, floating corpses, slower ferals and early shamblers, the dead keep moving after a guardian kill (Jerry, 2026-10-23)
 - **D-86** · A balance pass before the playthrough: a steady climb to a brutal night 20, the outliers fixed (`docs/specs/balance-1.0.md`); Grokbot's numbers reassigned for this pass (Jerry, 2026-10-23)
 - **D-85** · The title in about 14 s warm for 1.0: the warm-up that keeps night 20 free of mid-fight builds stays (AGENTS.md rule 12: ~15 s warm, 18 s cold) (Jerry, 2026-10-21)
 - **D-84** · 1.0 ships on itch.io (the desktop download; his friends' notes feed the Steam release); Steam comes with 1.1 and co-op (Jerry, 2026-10-20)

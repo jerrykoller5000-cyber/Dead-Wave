@@ -1,0 +1,6 @@
+import { execFileSync } from 'node:child_process';
+const A = ['--agent', 'grokbot', '--task', 'GB-225'];
+const cam = (...a) => execFileSync(process.execPath, ['tools/camera.mjs', ...a, ...A], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'inherit'] });
+cam('start', '--match');
+console.log(cam('eval', `const e=document.getElementById('scopeOverlay'); const hits=[]; const walk=(rules,sheet)=>{ for (const r of rules) { if (r.cssRules && !r.selectorText) { walk(r.cssRules, sheet); continue; } if (!r.selectorText) continue; let m=false; try { m=e.matches(r.selectorText); } catch {} if (m) hits.push((sheet.href||'inline')+' | '+r.cssText.slice(0,160)); } }; for (const sh of document.styleSheets) { try { walk(sh.cssRules, sh); } catch (x) { hits.push('unreadable '+sh.href); } } const t=document.createElement('div'); t.style.cssText='position:fixed;background:linear-gradient(red,red)'; document.body.appendChild(t); const tb=getComputedStyle(t).backgroundImage; t.remove(); return 'GB225 '+JSON.stringify({inline:e.getAttribute('style'), hits, testDiv:tb, sheets:document.styleSheets.length, adopted:document.adoptedStyleSheets.length});`));
+cam('stop');

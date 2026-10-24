@@ -1,8 +1,9 @@
 // t247 - GB-158 (Jerry 2026-10-11, 2:24 AM CT, after the speed table): "let us set the baseline speed of the shambler at
 //  4.3 with a lunge speed of 5.0. Feral stays the same. Pull Military top speed down to a 6.0. Screamer and drowned stay the
 //  same. Crank demon up to 6.0 on average. Crank colossus to about 4.0. Crank guardian up to 7.0." All in m/s on the ground
-//  for a body that is not a sprinter (horde.js SPEED_TARGET; the bosses in ZOMBIE_TYPES). Sprinters keep D-77's rule; the
-//  demon's charge keeps its old pace; the untouched kinds give the D-77 numbers exactly. The deterministic numbers are in
+//  for a body that is not a sprinter (horde.js SPEED_TARGET; the bosses in ZOMBIE_TYPES). D-87 gives ferals their own slower
+//  walk and sprint and slows shamblers through night 13. The demon's charge keeps its old pace; untouched kinds keep D-77.
+//  The deterministic numbers are in
 //  game/horde.test.mjs; this checks the game uses them, and that the bosses really cover the ground at their new speeds.
 (async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
@@ -39,8 +40,12 @@
     ok(de.length > 10 && de.every((z) => z.speed >= 5.6 - 1e-6 && z.speed <= 6.4 + 1e-6) && Math.abs(mean(de) - 6.0) < 0.25, 'demons walk ' + span(de) + ' m/s (mean ' + f2(mean(de)) + ')');
     ok(de.every((z) => z.chargeBase * 3.1 >= 13.4 - 0.05 && z.chargeBase * 3.1 <= 15.1 + 0.05), 'demon charges ' + f2(Math.min(...de.map((z) => z.chargeBase * 3.1))) + '-' + f2(Math.max(...de.map((z) => z.chargeBase * 3.1))) + ' m/s (as before)');
     T.clearZombies(); await wait(100);
-    // (4) Untouched: feral, screamer, drowned give the D-77 speed exactly.
-    for (const [k, base] of [['feral', 5.4], ['screamer', 3.5], ['drowned', 2.4]]) {
+    // (4) D-87 ferals use their own target. Screamers and drowned still give the D-77 speed exactly.
+    const fe = spawnJoin('feral', 24, 10), feW = walkers(fe), feS = fe.filter((z) => z.paceBand === 'sprint');
+    ok(feW.length > 5 && feW.every((z) => z.speed >= 6 - 1e-6 && z.speed <= 7.6 + 1e-6 && z.hzCap === 8 && z.hzLungeAbs === 9), 'ferals walk ' + span(feW) + ' m/s, top 8.0, lunge 9.0');
+    ok(feS.every((z) => z.speed >= RUN * 0.85 - 1e-6 && z.speed <= RUN * 0.92 + 1e-6 && z.speed < RUN), feS.length + ' feral sprinters stay below his run');
+    T.clearZombies(); await wait(50);
+    for (const [k, base] of [['screamer', 3.5], ['drowned', 2.4]]) {
       const a = walkers(spawnJoin(k, 16, 10));
       ok(a.length > 5 && a.every((z) => Math.abs(z.speed - Math.min(CAP, base * 1.15 * z.paceMul * 1.6)) < 1e-6 && Math.abs(z.hzCap - CAP) < 1e-6 && !z.hzLungeAbs), k + ' unchanged: ' + span(a) + ' m/s');
       T.clearZombies(); await wait(50);

@@ -1,0 +1,61 @@
+{
+  "chunk": "B",
+  "range": "t100..t131",
+  "count": 31,
+  "summaryLine": "31 checks: 386 pass, 0 fail",
+  "initialFailed": [],
+  "flakyClearedOnRerun": [],
+  "heldReds": [],
+  "gb223Snapshot": {
+    "t187": {
+      "bytes": 11361,
+      "mtime": "2026-10-18T23:55:15.781Z",
+      "sha1": "0711ee8b27",
+      "head": "// t187 - GB-129 (Jerry): shoulder-fired long guns are shouldered. | //  - m4, ak, aa12, shotgun, sniper, launcher: the butt sits in the gun-side shoulder pocket (inside the | //    shoulder joint, in front of it), the firing hand is on the pistol grip and the support hand on the"
+    },
+    "t188": {
+      "bytes": 12667,
+      "mtime": "2026-10-23T20:31:29.776Z",
+      "sha1": "0c039fa638",
+      "head": "// t188 - GB-130 (Jerry): every player gun at its real size for the marine, and the hands on explicit anchors. | //  - Size: TT.getWeaponSizeDbg() (MARINE_UPM = 1.655 units / 1.80 m). m = the real overall length of the gun's | //    class (in its range); look = the by-eye factor against the Uzi (Uzi 1.0, others 1-1.6). Each gun's measured"
+    },
+    "t189": {
+      "bytes": 11757,
+      "mtime": "2026-10-23T20:09:38.689Z",
+      "sha1": "70e4709183",
+      "head": "// t189 - GB-130 (Jerry): the stowed guns (slings, pack holsters, the hip) at their real in-hand size and snug | // against him. For eight loadouts (every primary on both slings, the Uzi and the revolver on both pack sides, | // the hip pistol and its pair): each copy is its gun's in-hand size x CARRY_FIT s (s = 1: the same gun), and the"
+    },
+    "t195": {
+      "bytes": 8513,
+      "mtime": "2026-10-23T20:16:00.655Z",
+      "sha1": "0cf5279ce1",
+      "head": "// t195 - CL-122 (GB-130, GP-128): the hands. | //  - The support anchor is inside the support arm's reach for every two-handed gun (the flamer's front grip was 2.6 cm | //    past it, the Uzi's 1.2): the gun slides toward that shoulder, and its barrel is still on the reticle."
+    },
+    "t222": {
+      "bytes": 20368,
+      "mtime": "2026-10-20T21:39:16.058Z",
+      "sha1": "f4f5fe621a",
+      "head": "// t222 - CU-96 (Jerry): the aiming system. The cursor is put, through the real pointer and the real camera, on a still | // zombie's head, chest or legs (the head where its model's head really is), the game turns that into its aim, and the | // round is traced from the real muzzle along that aim against the zombie's hit column, as the bullets are: what it"
+    },
+    "t224": {
+      "bytes": 13447,
+      "mtime": "2026-10-23T20:26:05.940Z",
+      "sha1": "4db396ed40",
+      "head": "// t224 - GB-148 (Jerry, 2026-10-09: \"Revolver sticks out too much from pack and is not tight when holstered. Also could | // you change the weapon wheel sound to something more pleasant?\"). | //  - The revolver's low pack holster sits in on the pack's lower corner (|x| <= 0.13 m, z >= -0.35 m in his torso's"
+    },
+    "t228": {
+      "bytes": 9637,
+      "mtime": "2026-10-23T20:30:42.540Z",
+      "sha1": "1af8fe3147",
+      "head": "// t228 - CU-100 (Jerry, 2026-10-09: \"Player hand placements for weapons are not accurate. They need to be in the right | // spots for all weapons at all times.\"). The hold aimed the hand point (the face of the curled fingers) at each grip, | // so every grip and forend lay along the front of the fist; with no wrist, the support fist could not turn onto a"
+    },
+    "t229": {
+      "bytes": 13270,
+      "mtime": "2026-10-23T20:30:42.540Z",
+      "sha1": "b58800b72e",
+      "head": "// t229 - GB-151 (Jerry, 2026-10-09 15:35 CT, with a photo of a 1911 held two-handed, thumbs forward: \"This picture shows | // what proper pistol grip looks like. Right now our player does not do that with the pistol or the revolver.\"). | // For the pistol and the revolver, single-wielded, standing, aiming level, a little up and a little down:"
+    }
+  },
+  "initialFailuresDetail": [],
+  "rerunFailuresDetail": []
+}

@@ -1,0 +1,61 @@
+# AG-120 chunk 0a: t0 t6a t1 t2 t3 t4 t5 t6 t7 t8 t9 t10 t11 t12 t13 t14 t15 t16 t17 t18 t19 t20 t21 t22 t23 t24 t25 t26 t27 t28 t29 t30 t31 t32 t33
+# Started: 2026-10-23T20:30:02.152Z
+# GB-223 file snapshot: {"t187":{"bytes":11361,"mtime":"2026-10-18T23:55:15.781Z","sha1":"0711ee8b27","head":"// t187 - GB-129 (Jerry): shoulder-fired long guns are shouldered. | //  - m4, ak, aa12, shotgun, sniper, launcher: the butt sits in the gun-side shoulder pocket (inside the | //    shoulder joint, in front of it), the firing hand is on the pistol grip and the support hand on the"},"t188":{"bytes":12375,"mtime":"2026-10-18T15:49:30.427Z","sha1":"4f8d2dff96","head":"// t188 - GB-130 (Jerry): every player gun at its real size for the marine, and the hands on explicit anchors. | //  - Size: TT.getWeaponSizeDbg() (MARINE_UPM = 1.655 units / 1.80 m). m = the real overall length of the gun's | //    class (in its range); look = the by-eye factor against the Uzi (Uzi 1.0, others 1-1.6). Each gun's measured"},"t189":{"bytes":11757,"mtime":"2026-10-23T20:09:38.689Z","sha1":"70e4709183","head":"// t189 - GB-130 (Jerry): the stowed guns (slings, pack holsters, the hip) at their real in-hand size and snug | // against him. For eight loadouts (every primary on both slings, the Uzi and the revolver on both pack sides, | // the hip pistol and its pair): each copy is its gun's in-hand size x CARRY_FIT s (s = 1: the same gun), and the"},"t195":{"bytes":8513,"mtime":"2026-10-23T20:16:00.655Z","sha1":"0cf5279ce1","head":"// t195 - CL-122 (GB-130, GP-128): the hands. | //  - The support anchor is inside the support arm's reach for every two-handed gun (the flamer's front grip was 2.6 cm | //    past it, the Uzi's 1.2): the gun slides toward that shoulder, and its barrel is still on the reticle."},"t222":{"bytes":20368,"mtime":"2026-10-20T21:39:16.058Z","sha1":"f4f5fe621a","head":"// t222 - CU-96 (Jerry): the aiming system. The cursor is put, through the real pointer and the real camera, on a still | // zombie's head, chest or legs (the head where its model's head really is), the game turns that into its aim, and the | // round is traced from the real muzzle along that aim against the zombie's hit column, as the bullets are: what it"},"t224":{"bytes":13447,"mtime":"2026-10-23T20:26:05.940Z","sha1":"4db396ed40","head":"// t224 - GB-148 (Jerry, 2026-10-09: \"Revolver sticks out too much from pack and is not tight when holstered. Also could | // you change the weapon wheel sound to something more pleasant?\"). | //  - The revolver's low pack holster sits in on the pack's lower corner (|x| <= 0.13 m, z >= -0.35 m in his torso's"},"t228":{"bytes":9457,"mtime":"2026-10-23T20:10:30.818Z","sha1":"e8d231f0a1","head":"// t228 - CU-100 (Jerry, 2026-10-09: \"Player hand placements for weapons are not accurate. They need to be in the right | // spots for all weapons at all times.\"). The hold aimed the hand point (the face of the curled fingers) at each grip, | // so every grip and forend lay along the front of the fist; with no wrist, the support fist could not turn onto a"},"t229":{"bytes":12296,"mtime":"2026-10-09T22:30:51.050Z","sha1":"6b5ed4f107","head":"// t229 - GB-151 (Jerry, 2026-10-09 15:35 CT, with a photo of a 1911 held two-handed, thumbs forward: \"This picture shows | // what proper pistol grip looks like. Right now our player does not do that with the pistol or the revolver.\"). | // For the pistol and the revolver, single-wielded, standing, aiming level, a little up and a little down:"}}
+
+Game-test request d31f3b32-a45c-4453-a5c8-4be6baaf6729 queued at position 1. Waiting...
+GRANT antigravity AG-120: starting one game-test command
+check-players: 303 player.position reads, all in the allowed places
+ok    t0       2 pass   0 fail  23.4s
+ok    t6a      2 pass   0 fail  38.8s
+ok    t1       4 pass   0 fail  40.5s
+ok    t2       5 pass   0 fail  40.3s
+ok    t3       5 pass   0 fail  39.3s
+ok    t4       6 pass   0 fail  39.0s
+ok    t5      31 pass   0 fail  40.3s
+ok    t6      21 pass   0 fail  70.0s
+ok    t7      16 pass   0 fail  41.1s
+ok    t8       3 pass   0 fail  46.1s
+ok    t9      19 pass   0 fail  41.7s
+ok    t10     30 pass   0 fail  40.9s
+ok    t11     13 pass   0 fail  40.3s
+ok    t12     22 pass   0 fail  65.5s
+ok    t13      8 pass   0 fail  67.9s
+ok    t14     13 pass   0 fail  44.7s
+FAIL  t15      9 pass   1 fail  106.6s
+info  t16      0 pass   0 fail  65.7s  — 692
+ok    t17     10 pass   0 fail  69.0s
+ok    t18      7 pass   0 fail  41.9s
+ok    t19      6 pass   0 fail  94.6s
+info  t20      0 pass   0 fail  64.9s  — -5,-15 edge0 L0 yaw 0.00 rx 0.00 rz 0.00 ch 1
+ok    t21     16 pass   0 fail  90.5s
+info  t22      0 pass   0 fail  64.8s  — builds box 22,76 / -10,46 barrels before 6 after 12
+ok    t23      8 pass   0 fail  126.7s
+ok    t24     14 pass   0 fail  75.1s
+ok    t25     29 pass   0 fail  67.5s
+info  t26      0 pass   0 fail  66.6s  — pieces 692 failed: 
+info  t27      0 pass   0 fail  67.7s  — EMPTY WORLD visible meshes: 3697
+info  t28      0 pass   0 fail  42.1s  — shambler total 14: hips:1m/1mat torso:1m/1mat armL:1m/1mat Group:1m/1mat armR:1m/1mat Grou
+ok    t29     12 pass   0 fail  46.5s
+info  t30      0 pass   0 fail  44.2s  — turret at 4.0,-12.0 y -3.17
+ok    t31     26 pass   0 fail  44.4s
+info  t32      0 pass   0 fail  68.4s  — road pieces: wall/door@-38.0 wall/door@-24.0 wire/gate@-20.0 barricade/gate@-18.0
+ok    t33      4 pass   0 fail  44.9s
+
+35 checks: 341 pass, 1 fail, 8 reported no assertions
+
+no assertions (probe, or the check bailed before asserting):
+  t16    692
+  t20    -5,-15 edge0 L0 yaw 0.00 rx 0.00 rz 0.00 ch 1
+  t22    builds box 22,76 / -10,46 barrels before 6 after 12
+  t26    pieces 692 failed: 
+  t27    EMPTY WORLD visible meshes: 3697
+  t28    shambler total 14: hips:1m/1mat torso:1m/1mat armL:1m/1mat Group:1m/1mat armR:1m/1mat Group:1m/1mat 
+  t30    turret at 4.0,-12.0 y -3.17
+  t32    road pieces: wall/door@-38.0 wall/door@-24.0 wire/gate@-20.0 barricade/gate@-18.0
+
+by owner:
+  Grokbot (builds, wheel, turrets, pillars)
+    t15    1 fail  FAIL and close in even with nodead on (50 -> 50)
+           FAIL and close in even with nodead on (50 -> 50)
+
+# Finished: 2026-10-23T21:05:36.706Z code=1

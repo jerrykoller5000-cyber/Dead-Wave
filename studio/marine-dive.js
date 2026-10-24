@@ -6,6 +6,12 @@
 // miss him while he is in the air, everything else still hurts; on the ground he stays down and keeps shooting until a
 // move key or jump (or about 1.5 s); a slow-motion meter that the dive drains and that refills over time and with kills.
 //
+// CL-248 (D-87, Jerry after his friends' playtest, 2026-10-23: "We are going to get rid of slo-mo dive mechanic. Instead
+// it will just slow down time instead of making the player dive."): V now starts the slow motion on its own
+// (startSlowmo): he stays on his feet and moves as he likes, time slows as it did through a dive's flight (the same
+// meter, drain, ease in and out, and cooldown) for slowFor seconds of real time, or until the meter runs out. The dive
+// below stays in this module unused (nothing in the game starts one now).
+//
 // Pure state and maths, no three.js, so the feel can be tuned here and tested in node (marine-dive.test.mjs).
 // index.html feeds it each frame (game seconds, real seconds, grounded, the move keys) and applies what it says: his
 // velocity, the lift against the game's own gravity, the time scale, and the way his body lies.
@@ -27,6 +33,7 @@ export const DIVE = Object.freeze({
   slow: 0.28,        // the time scale while he flies
   slowIn: 0.08, slowOut: 0.3,   // s (real) into and out of the slow motion
   hold: 0.2,         // s (real) the slow motion holds past the landing
+  slowFor: 2.5,      // CL-248: s (real) of slow motion from one press of V, about what a dive's flight gave (0.7 s at 0.28, and the hold)
   // The meter (0..1): a dive with it slows time, without it the dive still happens, at full speed.
   meter: Object.freeze({ cost: 0.08, drain: 0.1, regen: 0.04, regenDelay: 1, kill: 0.06, min: 0.15 }),
   hip: 0.7, hipDown: 0.24,      // the body's pivot over his feet, standing and lying flat
@@ -38,11 +45,21 @@ export const smooth = (v) => { const u = clamp01(v); return u * u * (3 - 2 * u);
 
 export function createDive() {
   return { phase: 'idle', t: 0, real: 0, airT: 0, dirX: 0, dirZ: 1, vx: 0, vz: 0, slow: false, w: 0, meter: 1, cd: 0,
-    idleT: 99, pads: false, dives: 0, wallT:0, wallX:0, wallZ:0, contact:0 };
+    idleT: 99, pads: false, dives: 0, wallT:0, wallX:0, wallZ:0, contact:0, slowT: 0 };
 }
 export const diveBusy = (d) => d.phase !== 'idle';
 export const diveAirborne = (d) => d.phase === 'air';
 export const canDive = (d) => d.phase === 'idle' && d.cd <= 0;
+// CL-248: the slow motion on its own. Not while one runs or cools down; with too little meter (or slow: false, a timed
+// range drill) nothing starts. Returns whether it started.
+export const canSlowmo = (d) => d.phase === 'idle' && d.cd <= 0 && !(d.slowT > 0);
+export const slowmoOn = (d) => d.slowT > 0;
+export function startSlowmo(d, { slow = true } = {}) {
+  if (!canSlowmo(d) || slow === false || d.meter < DIVE.meter.min) return false;
+  d.meter = Math.max(0, d.meter - DIVE.meter.cost);
+  d.slow = true; d.slowT = DIVE.slowFor; d.dives++;
+  return true;
+}
 
 // Take off along (dirX, dirZ) (world, any length). Returns the upward speed to give him.
 // slow: false is a dive with no bullet time and no charge to the meter: Jerry (2026-10-14) wants none in a timed range
@@ -61,7 +78,7 @@ export function startDive(d, dirX, dirZ, { pads = false, upwardSpeed = 0, slow =
 
 // Out of it at once (water, death, a cinematic, a new run): back on his feet, the meter kept.
 export function endDive(d) {
-  d.phase = 'idle'; d.t = 0; d.real = 0; d.vx = d.vz = 0; d.slow = false; d.w = 0; d.cd = 0;
+  d.phase = 'idle'; d.t = 0; d.real = 0; d.vx = d.vz = 0; d.slow = false; d.w = 0; d.cd = 0; d.slowT = 0;
 }
 export function resetDive(d) { Object.assign(d, createDive()); }
 export function diveKill(d) { d.meter = Math.min(1, d.meter + DIVE.meter.kill); }
@@ -90,10 +107,13 @@ export function stepDive(d, dt, rdt, input = {}) {
   } else if (d.phase === 'up') {
     d.t += dt;
     if (d.t >= (d.pads ? DIVE.getUpPads : DIVE.getUp)) { d.phase = 'idle'; d.t = 0; d.cd = DIVE.cooldown; ev = 'idle'; }
+  } else if (d.slowT > 0) {   // CL-248: the slow motion on its own, on his feet; then the cooldown, as after a dive
+    d.slowT = Math.max(0, d.slowT - rdt);
+    if (d.slowT === 0 || !(d.meter > 0)) { d.slowT = 0; d.slow = false; d.cd = DIVE.cooldown; }
   } else if (d.cd > 0) d.cd = Math.max(0, d.cd - rdt);
 
   // The slow motion runs on real time: all through the flight and a breath past the landing, while there is meter.
-  const on = d.slow && d.meter > 0 && (d.phase === 'air' || (d.phase === 'down' && d.real < DIVE.hold));
+  const on = d.slow && d.meter > 0 && (d.phase === 'air' || (d.phase === 'down' && d.real < DIVE.hold) || d.slowT > 0);
   d.w = on ? Math.min(1, d.w + rdt / DIVE.slowIn) : Math.max(0, d.w - rdt / DIVE.slowOut);
   if (d.w > 0) {
     d.idleT = 0;

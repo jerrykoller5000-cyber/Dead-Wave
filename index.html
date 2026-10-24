@@ -31,6 +31,10 @@
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { width: 100%; height: 100%; overflow: hidden; background: #0a0d08; font-family: var(--font-hud); user-select: none; -webkit-user-select: none; }
+    /* CL-252 (GB-225): in the browser's forced-colours mode (Windows' contrast themes) every CSS gradient computes to none
+       (url() images stay), so the sniper's glass and crosshair (#scopeOverlay) went missing in Grokbot's shots on Jerry's PC,
+       and the vignettes and the HUD's gradients with them. The game draws its own colours, so it keeps them. */
+    html { forced-color-adjust: none; }
     canvas { display: block; }
     /* Gameplay hides OS cursor; menus/buttons keep pointer via their own rules */
     body.playing, body.playing canvas, body.playing #hud { cursor: none; }
@@ -1403,6 +1407,7 @@
     import { militaryActive, militaryCanReach, stepMilitary, restoreMilitaryPose, resetMilitary, applyMilitaryPose, militaryProjectileHit, militaryBulletShare } from './game/military-behavior.js';
     import { prepareMilitaryAppearance, cycleMilitaryCamo } from './game/military-appearance.js';
     import { BRUTE, stepBrute, bruteCanReach, restoreBrutePose, resetBrute, applyBrutePose, beginBruteBuild } from './game/brute-behavior.js'; // GP-19866
+    import { SIGHT } from './game/sight-points.js';   // GB-222: each gun's sight line, for first person's aim down the sights (CL-249)
     import { confirmedHead, canSeverHead, headSurface, zombieSurface } from './game/zombie-headshots.js'; // GP-19885
     import { prepareBomberAppearance, restoreBomberPose, resetBomber, stepBomber, applyBomberPose } from './game/bomber-behavior.js'; // GP-19884
     import { makeBruteArmor, resetBruteArmor, hitBruteArmor, bruteProjectileHit } from './game/brute-armor.js'; // GP-19867
@@ -1439,7 +1444,7 @@
     import { rotateDiveAimOffset, clearDiveGrip, frontDiveDirection, diveBladePose } from './studio/marine-dive-aim.js';
     import { constrainDiveBody, stopDiveIntoContact } from './studio/marine-dive-contact.js';
     import { rollTravel } from './studio/marine-roll.js';
-    import { DIVE, createDive, startDive, stepDive, endDive, resetDive, diveKill, diveTimeScale, diveLie, diveBasis, diveBusy, diveAirborne, canDive, smooth as diveSmooth } from './studio/marine-dive.js';   // CL-193: the shootdodge
+    import { DIVE, createDive, startDive, stepDive, endDive, resetDive, diveKill, diveTimeScale, diveLie, diveBasis, diveBusy, diveAirborne, canDive, startSlowmo, slowmoOn, smooth as diveSmooth } from './studio/marine-dive.js';   // CL-193: the shootdodge
     import * as Studio from './studio/index.js';   // CL-64: scenes (the cave drag)
     import * as PitArms from './world/pit-tentacles.js';
     import { createHeron as createExtractionBoat } from './world/heron.js';
@@ -8304,7 +8309,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         // The six player plot coordinates remain unchanged; no church/debris can occupy them.
         historyProps.taken.push({ x: gx, z: gz + 3, hx: 9.5, hz: 11, r: 15, kind: 'cemetery-clearance' });
         const ch = historyFreeSpot(gx, gz, 23, 45, 8, 1.1);
-        if (ch) put(History.buildChurchShell(THREE, rnd), ch.x, ch.z, Math.atan2(gx - ch.x, gz - ch.z), 8);
+        if (ch) { const church = put(History.buildChurchShell(THREE, rnd), ch.x, ch.z, Math.atan2(gx - ch.x, gz - ch.z), 8); church.updateMatrixWorld(true); for (const s of church.userData.solids || []) { const p = church.localToWorld(new THREE.Vector3(s.x, 0, s.z)); addSolid(p.x, p.z, s.r, church.position.y + s.y, church.position.y + s.y + s.h); } }
         for (let k = 0; k < 3; k++) {
           const f = historyFreeSpot(gx, gz, 24 + k * 4, 46, 5.5, 2.4 + k * 1.7);
           if (f) put(History.buildRuinedFoundation(THREE, rnd, { w: 5 + rnd() * 2, d: 4 + rnd() * 1.5, door: true, variant: k }), f.x, f.z, rnd() * Math.PI * 2, 5.5);
@@ -18963,27 +18968,22 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // ducking back down after a roll or a jump is not (grounded-only). Deliberately
     // not Ctrl — see the note by the crouching assignment in tick().
     let crouching = false;
-    function tryRoll() {   // CL-193: V is the dive now (the name stays: tools/check-players.mjs knows it as the marine's own move)
-      if (!gameStarted || gameOver || won || paused || playerSwimming || climbingTower || marineDown()) return;
-      if (!canDive(dive) || placeMode || buildMode || mortarMounted || mortarCarried || vault || onAnyLadder() || scriptedKill || training.wake) return;
-      const forward = (keys.ArrowUp || keys.KeyW ? 1 : 0) + (keys.ArrowDown || keys.KeyS ? -1 : 0);
-      const strafe = (keys.ArrowLeft || keys.KeyA ? 1 : 0) + (keys.ArrowRight || keys.KeyD ? -1 : 0);
-      // The same screen-relative direction as walking (shouldered, W is where he aims); with no key, along the aim.
-      const travel = rollTravel(forward, strafe, OTS.on ? OTS.yaw : camYawCurrent, aimYaw);
-      breakDrownedGrip(localPlayer); // GP-19860: the roll broke a wet grip before moving; the dive does too
-      const fromGround = grounded;
-      // Jerry (2026-10-14): no bullet time in a timed range drill (its clock runs on the slowed game time); free practice keeps it.
-      const go = startDive(dive, travel.x, travel.z, { pads: !!gearOwned.pads, upwardSpeed: fromGround ? 0 : vy, slow: !(rangeFeature && rangeFeature.ruled && rangeFeature.ruled()) });
-      vy = go.vy; grounded = false; coyoteT = 0; jumpBufferT = 0; crouching = false;
-      diveQSet = false; diveHeldAtLand = false;
-      {   // GB-101: Fleet foot, a dive (it was the roll) within 1.5 m of a zombie winding up at him or swinging
+    // CL-248 (D-87, Jerry after his friends' playtest: "We are going to get rid of slo-mo dive mechanic. Instead it will
+    // just slow down time instead of making the player dive."): V slows time (studio/marine-dive.js startSlowmo: the dive's
+    // meter, ease and cooldown, 2.5 s of real time) and he stays on his feet, moving and shooting as he likes. Nothing
+    // starts with too little meter, or in a timed range drill (Jerry, 2026-10-14: its clock runs on the slowed time).
+    // Fleet foot still pays for it within 1.5 m of a zombie winding up at him or swinging (GB-101). (The name stays:
+    // tools/check-players.mjs knows it as the marine's own move.) The dive's start is gone with it (startDive stays in the
+    // module, unused); its pose, camera and landing code below never runs now (diving() is never true).
+    function tryRoll() {
+      if (!gameStarted || gameOver || won || paused || marineDown() || scriptedKill || training.wake || cine) return;
+      if (!startSlowmo(dive, { slow: !(rangeFeature && rangeFeature.ruled && rangeFeature.ruled()) })) return;
+      {
         const P = player.position;
         if (zombies.some((o) => o.alive && !o.dying && ((o.attackWindup > 0 && o._pendingAttack && o._pendingAttack.type === 'player') || o.swingT > 0)
           && hypot(o.mesh.position.x - P.x, o.mesh.position.z - P.z) - (o.radius || 0.4) <= 1.5)) skillXp('legs', 1, 'roll');
       }
-      if (fromGround) spawnDust(player.position.x, sampleHeight(player.position.x, player.position.z), player.position.z, 3);
-      AudioSys.dodgeRoll();
-      if (go.slow && AudioSys.heartbeat) AudioSys.heartbeat(1);   // the thump of time going slow (a proper cue: asked of ChatGPT)
+      if (AudioSys.heartbeat) AudioSys.heartbeat(1);   // the thump of time going slow
     }
     // CL-193: the slow-mo meter, a thin amber gauge under health in the same instrument style (it glows while time is
     // slowed), and a dark vignette over the edges of the view in bullet time. Built on first use, touched only on change.
@@ -19078,6 +19078,16 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     const OTS_SENS = 0.0022;      // radians a pixel of mouse, times Look sensitivity
     const OTS_IN = 3.2, OTS_OUT = 2.8; // CL-175 (Jerry: "make the transition between the two a bit longer"): about a second each way (was 9 / 7)
     const OTS_SLOW = 0.5;   // CL-176 (Jerry: "slow the players walk and run speed by half when in aim mode")
+    // CL-247 (D-87, Jerry after his friends' playtest: "No more using right click to go first person. For right click
+    // in 3rd person the camera needs to zoom into double the current perspective and center on the cursor instead of
+    // player. Think the way that project zomboid handles zooms."). Right-click held: the view zooms in 2x about the
+    // point the cursor is on, which stays under the cursor, so the view centres between him and it. The point keeps its
+    // offset from him as he walks, and pushing the cursor to the zoomed view's edge slides it further that way. Let go
+    // and it eases back. The 5 key switches to first person (viewFirst: the shoulder camera, CL-174, until CL-249 puts
+    // it at his eyes), where right-click aims. Walking is halved while zoomed, as it was for the shoulder aim (CL-176).
+    const AIMZ = { on: false, w: 0, relX: 0, relZ: 0, ndcX: 0, ndcY: 0, appliedX: 0, appliedZ: 0 };
+    const AIMZ_ZOOM = 2, AIMZ_RATE = 9, AIMZ_MAX = 45, AIMZ_EDGE = 0.8, AIMZ_EDGE_SPEED = 14;
+    let viewFirst = false;
     // CL-175 (Jerry: "an aim FOV slider and tilt angle in the settings"): Settings > Aim FOV (the shouldered view's field
     // of view, 24-60 degrees, 38 as before) and Aim tilt (how far down the view is tipped when he shoulders the gun,
     // 0-30 degrees, 0 = level as before). Kept in localStorage tt_aim_fov / tt_aim_tilt.
@@ -21976,7 +21986,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     const GEAR = [
       { key: 'helmet', name: 'Combat helmet', desc: 'Ballistic helmet: +25 armor. Its rails are where the night-vision mount goes.', cost: 70, armor: 25 },
       { key: 'vest', name: 'Plate carrier', desc: 'Front and back plates with mag pouches: +50 armor.', cost: 120, armor: 50 },
-      { key: 'pads', name: 'Knee & elbow pads', desc: '+15 armor, and you are back on your feet from a dodge roll sooner.', cost: 50, armor: 15 },
+      { key: 'pads', name: 'Knee & elbow pads', desc: '+15 armor.', cost: 50, armor: 15 },   // CL-248: the dodge roll and the dive are gone (ChatGPT's GP-19961 FYI)
       { key: 'nvg', name: 'Night vision', desc: 'Flip-down NVGs (N) on the helmet rails. The nights get very dark without them.', cost: 130, needs: 'helmet', needsLabel: 'Needs the helmet' },
       { key: 'laser', name: 'Laser sight', desc: 'Aiming laser on every gun (Z). Tighter groups, easier tracking.', cost: 60 },
       { key: 'flashlight', name: 'Gun flashlight', desc: 'Weapon-mounted light (L). A cone of visibility at night.', cost: 45 }
@@ -38129,6 +38139,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         typeKey: z.typeKey,
         junk: !!(ud.gibbed || ud.dismembered),
         baseY: mesh.position.y,
+        fallVy: 0,
         lift: 0.11 * ((ZOMBIE_TYPES[z.typeKey] || ZOMBIE_TYPES.shambler).scale || 1),   // CL-136
         flashT: z.flashT || 0,   // CL-136: the killing hit's red flash finishes fading on the corpse (it stayed lit before)
         poolR: (0.7 + Math.random() * 0.85) * ((ud.hitH || 1.5) / 1.5),
@@ -38216,6 +38227,25 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     function clearCorpses() {
       for (const c of corpses.splice(0)) finishCorpse(c);
     }
+    const _corpseNearBuilds = [];
+    function corpseSupportY(c) {
+      const x = c.mesh.position.x, z = c.mesh.position.z, maxY = c.baseY + 0.08;
+      let y = sampleHeight(x, z);
+      const deck = platformHeightAt(x, z, maxY);
+      if (deck !== null && deck > y) y = deck;
+      for (const b of buildsNear(x, z, 1.5, _corpseNearBuilds)) {
+        if (b.hp <= 0 || !b.mesh || !BUILD_BLOCKS[b.type]) continue;
+        const rule = ruleFor(b.type);
+        if (rule && (rule.deck || rule.ramp)) continue;   // platformHeightAt has their real surface
+        const top = b.mesh.position.y + pieceHeight(b.type);
+        if (top <= y || top > maxY) continue;   // an overhead build is not support
+        const box = thinBoxFor(b);
+        const under = box ? Math.abs(x - box.cx) <= box.hx && Math.abs(z - box.cz) <= box.hz
+          : hypot(x - b.x, z - b.z) <= (BUILD_FOOTPRINT[b.type] || 0.45);
+        if (under) y = top;
+      }
+      return y;
+    }
     function updateCorpses(dt) {
       for (let i = corpses.length - 1; i >= 0; i--) {
         const c = corpses[i];
@@ -38232,6 +38262,17 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           const d = v0 * ((t1 - t0) - (t1 * t1 - t0 * t0) / 0.6);
           corpseMove(c, m.position.x + c.dirX * d, m.position.z + c.dirZ * d, dt);
         }
+        }
+        // GP-19960: the death pose has its own lift, but its foot height falls to the
+        // highest surface below it. Recheck after a slide or after a deck/build goes away,
+        // including for a frozen corpse whose root can still move.
+        const supportY = corpseSupportY(c);
+        if (c.baseY > supportY + 0.001) {
+          c.fallVy = (c.fallVy || 0) - 24 * dt;
+          c.baseY = Math.max(supportY, c.baseY + c.fallVy * dt);
+          if (c.baseY <= supportY + 0.001) c.fallVy = 0;
+        } else { c.baseY = supportY; c.fallVy = 0; }
+        if (!c.frozen) {
         if (c.typeKey === 'spider') { applySpiderDeath(THREE, c); } else { // GP-19857
         const bounce = (after > 0 && after < 0.32) ? Math.sin(after / 0.32 * Math.PI) * 0.07 : 0;
         const pose = DEATH_POSES[c.pose] || DEATH_POSES.sprawl;
@@ -38278,8 +38319,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         }
         } // ordinary corpse pose; Spider curl shares freeze/fade/recycling below
         // Landed and done bouncing: nothing moves any more.
-        if (after > 0.4 && c.t >= 0.3) freezeCorpse(c);
+        if (after > 0.4 && c.t >= 0.3 && c.baseY <= supportY + 0.02) freezeCorpse(c);
         }
+        m.position.y = c.baseY + (c.typeKey === 'spider' ? 0 : c.lift * (c.tip == null ? 1 : c.tip) * fall);   // CL-136 lift, even after frozen support falls
         // Eyes go dark as the body settles.
         if (ud.eyeMats && after > 0) for (const em of ud.eyeMats) em.emissiveIntensity = Math.max(0, 1.7 - after * 1.8);
         // CL-136: the hit flash it died with fades out here, as it would have on the live body.
@@ -40121,7 +40163,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // any colossus. Kill it for its own skulls plus the post's reward in the bag (bounty-done); the alarm sends it away
     // (bounty-expired, reason 'alarm'). Its days: the odd nights from 7, never a colossus night (day % 5 == 0) or a
     // guardian night, so 7, 9, 11, 13, 17, 19, ...
-    const WANDERER_FROM = 7, WANDERER_PACE = 0.6, WANDERER_HQ_CLEAR = 45, WANDERER_MIN_TRAIL = 20, WANDERER_STUCK_SECS = 3;
+    const WANDERER_FROM = 7, WANDERER_PACE = 0.6, WANDERER_HQ_CLEAR = 45, WANDERER_MIN_TRAIL = 20, WANDERER_STUCK_SECS = 3, WANDERER_SOLID_CLEAR = 1.2;
     function wandererAllowed(d) { d = d | 0; return d >= WANDERER_FROM && d % 2 === 1 && d % 5 !== 0 && !isGuardianNight(d); }
     function wandererReward(d) { return Math.max(150, bountyRewardFor(d)); }
     function wandererTrails() {
@@ -40137,8 +40179,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           }
           run = [];
         };
+        // GB-226: a trail can end inside a ruined shed (its walls are a ring of small solids round the end point): a colossus
+        // put there is boxed in and never walks (t143 on this PC: 0.7 m in 11 s). Points within a solid's reach are off the trail.
+        const clear = (x, z) => !worldSolids.some((s) => hypot(x - s.x, z - s.z) < s.radius + WANDERER_SOLID_CLEAR);
         for (const p of line) {
-          if (hypot(p.x, p.z) >= WANDERER_HQ_CLEAR && waterDepthAt(p.x, p.z) <= 0.2) run.push({ x: p.x, z: p.z });
+          if (hypot(p.x, p.z) >= WANDERER_HQ_CLEAR && waterDepthAt(p.x, p.z) <= 0.2 && clear(p.x, p.z)) run.push({ x: p.x, z: p.z });
           else flush();
         }
         flush();
@@ -44481,6 +44526,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         if (e.code === 'Digit2') { toggleFlashlight(); e.preventDefault(); }
         if (e.code === 'Digit3') { toggleLasers(); e.preventDefault(); }
         if (e.code === 'Digit4') { if (gameStarted && !gameOver && !won) toggleHolster(); e.preventDefault(); }
+        if (e.code === 'Digit5') { if (gameStarted && !gameOver && !won) toggleViewFirst(); e.preventDefault(); }   // CL-247 (D-87): first / third person
       }
       if (training.wake && e.code !== 'Escape') { e.preventDefault(); return; }
       if (e.code === 'KeyH') { useMedkit(); e.preventDefault(); }
@@ -44926,6 +44972,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     const aimHit = new THREE.Vector3();
     const aimTarget = new THREE.Vector3();
     const _pickAim = new THREE.Vector3();   // CU-96: the point on a zombie under the cursor (rayPickZombie)
+    // CL-247 (D-87: "Very difficult to aim and make rounds connect with zombies in third person"): what the cursor's aim
+    // is on: 'zombie' (the cursor on a body), 'assist' (just off one), 'ground', 'sky', 'training', or 'none' (a test or
+    // a tool set the point).
+    let aimKind = 'none';
     const _scopedNdc = new THREE.Vector2(0, 0);
     // Sniper scope. Magnification: the wheel or a middle click, 2x / 4x / 6x.
     //
@@ -45193,7 +45243,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       let next = '';
       if (gameStarted && !gameOver && !won && !paused && !placeMode && !buildMode && !mortarMounted) {
         _losFrom.copy(getMuzzleWorld());
-        if (shotBlocked(_losFrom, aimTarget)) next = 'blocked';
+        if (shotBlocked(_losFrom, shotAimTarget())) next = 'blocked';   // CL-247: where the round goes
         else if (onZombie) next = onHead ? 'head' : 'clear';
       }
       if (next === losState) return;
@@ -45282,9 +45332,51 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
 
     let aimThroughMarine = false;
+    // CL-247: guns whose round flies straight (not the launcher's lob, the flamer, the saw or a blade).
+    function directFire(w = currentWeapon) { const st = WEAPON_STATS[w]; return !!st && st.speed > 0 && !st.explosive && !st.melee && !st.flamer; }
+    // CL-247: a round aimed at open ground flies at chest height over that spot, not into the dirt: with the camera above
+    // him, the cursor just in front of a zombie's feet put the ground there under the round, and it hit the ground
+    // short; just past its head, a spot behind it, and the round dipped under its chest. Now it is a straight shot that
+    // way, as in a top-down shooter. A body under the cursor, or just off it (the assist), is aimed at as it is.
+    const AIM_CHEST = 1.15;
+    const _aimRaised = new THREE.Vector3();
+    function shotAimTarget() {
+      if (aimKind !== 'ground' || !directFire() || sniperScopingNow || OTS.w > 0.25 || placeMode || buildMode) return aimTarget;
+      return _aimRaised.set(aimTarget.x, aimTarget.y + AIM_CHEST, aimTarget.z);
+    }
+    // CL-247: the light assist. A body whose middle (0.35-0.8 of its height, its axis) passes within AIM_ASSIST_NDC of
+    // the cursor, in half screen-heights (about 30 px on a 1080 screen), within the gun's range and with a clear line
+    // from the muzzle: the nearest one's axis at the cursor's height (clamped to the chest, never the head) is the aim.
+    const AIM_ASSIST_NDC = 0.055;
+    const aimAssistLast = { n: Infinity, blocked: false };   // what the last look found (for the checks)
+    function aimAssistPick(ray, maxT, out) {
+      if (!directFire() || placeMode || buildMode || mortarMounted || grenadeCharging) return null;
+      const o = ray.origin, st = WEAPON_STATS[currentWeapon], P = localPlayer.position;
+      const dl = Math.hypot(ray.direction.x, ray.direction.y, ray.direction.z) || 1, d = { x: ray.direction.x / dl, y: ray.direction.y / dl, z: ray.direction.z / dl };
+      const tanH = Math.tan(THREE.MathUtils.degToRad(camera.fov) / 2), reach = st.range || 60, dh = d.x * d.x + d.z * d.z;
+      let best = null, bestN = AIM_ASSIST_NDC, by = 0, nearN = Infinity;
+      for (const z of zombies) {
+        if (!z.alive || !z.mesh || !(z.hp > 0)) continue;
+        const p = z.mesh.position, h = z.hitH || 1.7;
+        if (hypot(p.x - P.x, p.z - P.z) > reach) continue;
+        const sh = dh > 1e-8 ? ((p.x - o.x) * d.x + (p.z - o.z) * d.z) / dh : 0;
+        const yc = Math.max(p.y + h * 0.35, Math.min(p.y + h * 0.8, o.y + d.y * sh));
+        const vx = p.x - o.x, vy = yc - o.y, vz = p.z - o.z, s = vx * d.x + vy * d.y + vz * d.z;
+        if (!(s > 0.5) || s > maxT + 3) continue;
+        const ex = vx - d.x * s, ey = vy - d.y * s, ez = vz - d.z * s, n = Math.sqrt(ex * ex + ey * ey + ez * ez) / (s * tanH);
+        if (n < nearN) nearN = n;
+        if (n < bestN) { bestN = n; best = z; by = yc; }
+      }
+      aimAssistLast.n = nearN; aimAssistLast.blocked = false;
+      if (!best) return null;
+      out.set(best.mesh.position.x, by, best.mesh.position.z);
+      _losFrom.copy(getMuzzleWorld());
+      if (shotBlocked(_losFrom, out)) { aimAssistLast.blocked = true; return null; }
+      return best;
+    }
     const _weaponAimPoint = new THREE.Vector3(), _aimSelfEnd = new THREE.Vector3();
     function weaponAimPoint(out = _weaponAimPoint, scoped = sniperScopingNow) {
-      marineAimPoint(localPlayer.position, aimTarget, aimYaw, out,
+      marineAimPoint(localPlayer.position, shotAimTarget(), aimYaw, out,
         { self:aimThroughMarine, crouch:crouching, scoped });
       // Share the cleared aim with the gun and bullets, including near-body picks.
       if(diving()&&diveFlatW>.01){
@@ -45299,10 +45391,99 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
     // CL-174: may the shoulder aim run now? Everything but the sniper (its scope), the mounted guns, swimming, the
     // tower ladder, menus, building, cinematics and the Training Ground's wake-up. (CL-193: the dive allows it.)
-    function otsAllowed() {
-      return zoomHeld && gameStarted && !gameOver && !won && !paused && !shopOpen && !placeMode && !buildMode && !wheelIsOpen() &&
-        currentWeapon !== 'sniper' && !mortarMounted && !mortarCarried && !playerSwimming && !climbingTower &&
+    // CL-247 (D-87): the 5 key turns it on (viewFirst), no longer right-click; right-click there narrows to the Aim FOV.
+    function otsAllowedBase() {   // CL-249: the sniper too (its scope is first person's aim down the sights there)
+      return gameStarted && !gameOver && !won && !paused && !shopOpen && !placeMode && !buildMode && !wheelIsOpen() &&
+        !mortarMounted && !mortarCarried && !playerSwimming && !climbingTower &&
         !scriptedKill && !cine && !waveFinisher && !loopCine && !training.wake;
+    }
+    function otsAllowed() { return viewFirst && otsAllowedBase(); }
+    function toggleViewFirst(on = !viewFirst) {
+      viewFirst = !!on;
+      // The key press is the gesture a pointer lock needs, so it is taken here while it counts.
+      if (viewFirst && otsAllowedBase()) otsLockWanted(true); else if (!viewFirst) otsLockWanted(false);
+    }
+    // CL-249 (D-87: "a button that switches the player from 3rd person to 1st"; Jerry: a true view from his eyes, and
+    // right-click there aims down the sights): with viewFirst the shoulder camera (CL-174's machinery: the mouse turns
+    // him, the crosshair in the middle, the pointer locked) sits at his eyes instead of behind his shoulder, his head
+    // hidden (it would fill the view; its shadow goes with it). The eye follows his head with the walk's nod and sway
+    // eased out. Right-click: the eye moves onto the held gun's sight line (game/sight-points.js, GB-222) and the view
+    // narrows to the Aim FOV, the sniper's to its scope (and the scope's glass). fpAdsW is that 0..1, on the zoom's ease.
+    const FP_EYE = new THREE.Vector3(0, 0.205, 0.12);   // between his eyes, in his head's space
+    const FP_BOB_RATE = 14;
+    // Eye relief behind each long gun's sight point (GB-222's points sit 0.12-0.25 m behind the rear sight; from there the
+    // m4's carry handle filled the bottom of the view in the first shots): metres further back along the sight line.
+    const FP_RELIEF = { m4: 0.14, ak: 0.16, shotgun: 0.12, aa12: 0.12, uzi: 0.12, launcher: 0.1 };
+    const _fpEye = new THREE.Vector3(), _fpOff = new THREE.Vector3(), _fpSight = new THREE.Vector3(), _fpFwd = new THREE.Vector3();
+    let fpOffSet = false, fpAdsW = 0, fpHeadHidden = false, fpArmHidden = false;
+    // CL-250 (GB-223's shots): down the uzi's and the flamer's sights his support fist sat in front of the eye and filled
+    // the upper view; with these guns that arm is out of sight while he looks down the sights.
+    const FP_HIDE_SUPPORT = { uzi: 1, flamer: 1 };
+    function firstPersonEye(dt) {
+      const h = marine.userData.headG; if (!h) return null;
+      h.updateWorldMatrix(true, false);
+      _fpEye.copy(FP_EYE); h.localToWorld(_fpEye);
+      const P = localPlayer.position, ox = _fpEye.x - P.x, oy = _fpEye.y - P.y, oz = _fpEye.z - P.z;
+      if (!fpOffSet || hypot(ox - _fpOff.x, oz - _fpOff.z) > 1 || Math.abs(oy - _fpOff.y) > 1) { _fpOff.set(ox, oy, oz); fpOffSet = true; }
+      const k = 1 - Math.exp(-FP_BOB_RATE * dt);
+      _fpOff.x += (ox - _fpOff.x) * k; _fpOff.y += (oy - _fpOff.y) * k; _fpOff.z += (oz - _fpOff.z) * k;
+      return _fpEye.set(P.x + _fpOff.x, P.y + _fpOff.y, P.z + _fpOff.z);
+    }
+    // The held gun's sight line in the world: { pos, fwd } or null (akimbo, a blade, a gun with no entry).
+    function firstPersonSight() {
+      const s = SIGHT[currentWeapon]; if (!s || akimboOn()) return null;
+      const gun = weaponMeshes[currentWeapon]; if (!gun || !gun.visible) return null;
+      gun.updateWorldMatrix(true, false);
+      _fpSight.set(s.pos[0], s.pos[1], s.pos[2]); gun.localToWorld(_fpSight);
+      _fpFwd.set(s.fwd[0], s.fwd[1], s.fwd[2]).transformDirection(gun.matrixWorld);
+      if (FP_RELIEF[currentWeapon]) _fpSight.addScaledVector(_fpFwd, -FP_RELIEF[currentWeapon]);
+      return { pos: _fpSight, fwd: _fpFwd, kind: s.kind };
+    }
+    // His head off while the view is at his eyes. Only a head this hid comes back (the rabbit's bite takes it for good).
+    function syncFirstPersonHead() {
+      const h = marine.userData.headG; if (!h) return;
+      const hide = viewFirst && OTS.w > 0.6;
+      if (hide && !fpHeadHidden) { if (h.visible) { h.visible = false; fpHeadHidden = true; } }
+      else if (!hide && fpHeadHidden) { fpHeadHidden = false; if (!(rabbitMound && rabbitMound.headOff)) h.visible = true; }
+      const arm = marine.userData.armLG; if (!arm) return;   // CL-250
+      const hideArm = hide && fpAdsW > 0.5 && !!FP_HIDE_SUPPORT[currentWeapon] && !akimboOn();
+      if (hideArm && !fpArmHidden) { if (arm.visible) { arm.visible = false; fpArmHidden = true; } }
+      else if (!hideArm && fpArmHidden) { fpArmHidden = false; arm.visible = true; }
+    }
+    // CL-247: the third-person aim zoom (AIMZ above). Not with the sniper (its scope, until CL-249), the mounted guns,
+    // the build tools or menus, or in first person.
+    function aimZoomAllowed() {
+      return zoomHeld && !viewFirst && pointerOnCanvas && gameStarted && !gameOver && !won && !paused && !shopOpen && !placeMode && !buildMode &&
+        !wheelIsOpen() && currentWeapon !== 'sniper' && !mortarMounted && !mortarCarried && !climbingTower && !scriptedKill && !cine &&
+        !waveFinisher && !loopCine && !training.wake;
+    }
+    function aimzEase() { const w = AIMZ.w; return w * w * (3 - 2 * w); }
+    const _aimzRay = new THREE.Raycaster(), _aimzHit = new THREE.Vector3(), _aimzNdc = new THREE.Vector2();
+    function updateAimZoom(dt) {
+      const want = aimZoomAllowed();
+      if (want && !AIMZ.on) {
+        // The ground the cursor is on as right-click goes down: the zoom keeps that point under it.
+        AIMZ.ndcX = aimPointerNdc.x; AIMZ.ndcY = aimPointerNdc.y;
+        _aimzNdc.set(AIMZ.ndcX, AIMZ.ndcY); _aimzRay.setFromCamera(_aimzNdc, camera);
+        let ax = aimHit.x, az = aimHit.z;
+        if (raycastTerrain(_aimzRay.ray, _aimzHit)) { ax = _aimzHit.x; az = _aimzHit.z; }
+        const P = localPlayer.position; let rx = ax - P.x, rz = az - P.z; const l = hypot(rx, rz);
+        if (l > AIMZ_MAX) { rx *= AIMZ_MAX / l; rz *= AIMZ_MAX / l; }
+        AIMZ.relX = rx; AIMZ.relZ = rz; AIMZ.on = true;
+      } else if (!want && AIMZ.on) AIMZ.on = false;
+      const wt = AIMZ.on ? 1 : 0;
+      AIMZ.w += (wt - AIMZ.w) * (1 - Math.exp(-AIMZ_RATE * dt));
+      if (Math.abs(wt - AIMZ.w) < 0.02) AIMZ.w = wt;   // the last 2 % (a 1.02x zoom) in one step, not a long tail
+      // The cursor pushed to the zoomed view's edge slides the view that way (its own direction on the ground).
+      if (AIMZ.on && AIMZ.w > 0.9) {
+        const nx = aimPointerNdc.x, ny = aimPointerNdc.y, r = Math.max(Math.abs(nx), Math.abs(ny));
+        if (r > AIMZ_EDGE) {
+          const k = (Math.min(1, r) - AIMZ_EDGE) / (1 - AIMZ_EDGE) * AIMZ_EDGE_SPEED * dt, h = hypot(nx, ny) || 1, sx = nx / h, sy = ny / h;
+          AIMZ.relX += (-Math.cos(camYawCurrent) * sx + Math.sin(camYawCurrent) * sy) * k;
+          AIMZ.relZ += (Math.sin(camYawCurrent) * sx + Math.cos(camYawCurrent) * sy) * k;
+          const l = hypot(AIMZ.relX, AIMZ.relZ); if (l > AIMZ_MAX) { AIMZ.relX *= AIMZ_MAX / l; AIMZ.relZ *= AIMZ_MAX / l; }
+        }
+      }
     }
     function otsLockWanted(on) {
       const el = renderer.domElement, locked = document.pointerLockElement === el;
@@ -45313,13 +45494,14 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
     function updateOts(dt) {
       const want = otsAllowed();
+      syncFirstPersonHead();   // CL-249
       // CL-175: the view starts tipped down by the Aim tilt setting (0 = level); the camera rises behind the shoulder
       // as it tips, and the mouse can still look up and down from there.
       if (want && !OTS.on) { OTS.on = true; OTS.yaw = aimYaw; OTS.pitch = Math.max(OTS_PITCH[0], -THREE.MathUtils.degToRad(aimTiltDeg)); }
       else if (!want && OTS.on) { OTS.on = false; otsLockWanted(false); }
       const rate = OTS.on ? OTS_IN : OTS_OUT;
       OTS.w += ((OTS.on ? 1 : 0) - OTS.w) * (1 - Math.exp(-rate * dt));
-      if (OTS.w < 0.002 && !OTS.on) OTS.w = 0;
+      if (OTS.w < 0.002 && !OTS.on) OTS.w = 0; else if (OTS.w > 0.985 && OTS.on) OTS.w = 1;   // CL-249: settled, not a long tail
       if (OTS.on && reticleEl) {   // the crosshair sits in the middle while he aims
         const r = renderer.domElement.getBoundingClientRect();
         reticleEl.style.left = (r.left + r.width / 2) + 'px'; reticleEl.style.top = (r.top + r.height / 2) + 'px';
@@ -45356,8 +45538,16 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         aimRaycaster.ray.origin.copy(getMuzzleWorld());
         aimRaycaster.ray.direction.copy(scopeDir);
       } else {
-        if (_otsCentre) _scopedNdc.set(0, 0); else _scopedNdc.set(aimPointerNdc.x, aimPointerNdc.y);   // CL-174
-        aimRaycaster.setFromCamera(_scopedNdc, camera);
+        if (_otsCentre && viewFirst && fpOffSet) {
+          // CL-249: at his eyes the aim is where he looks (the mouse's yaw and pitch), from his eye, not the camera's
+          // middle: down the sights the camera rides the gun's sight line, and the gun follows this aim.
+          const y = OTS.yaw, p = OTS.pitch, cp = Math.cos(p);
+          aimRaycaster.ray.origin.copy(_fpEye);
+          aimRaycaster.ray.direction.set(Math.sin(y) * cp, Math.sin(p), Math.cos(y) * cp);
+        } else {
+          if (_otsCentre) _scopedNdc.set(0, 0); else _scopedNdc.set(aimPointerNdc.x, aimPointerNdc.y);   // CL-174
+          aimRaycaster.setFromCamera(_scopedNdc, camera);
+        }
       }
       const ray = aimRaycaster.ray;
       // Terrain first; a cursor above the skyline used to hit nothing and freeze the
@@ -45380,12 +45570,17 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       // Then any zombie in front of that: the reticle over a body aims at the body, not
       // the ground behind it. Same cylinders the bullets use (see updateProjectiles).
       const zt = rayPickZombie(ray, groundT, _pickAim);
-      if (zt !== Infinity) {
-        const m = getMuzzleWorld(), st = WEAPON_STATS[currentWeapon], pz = rayPick.z;
+      aimKind = zt !== Infinity ? 'zombie' : trainingHit ? 'training' : groundT === Infinity ? 'sky' : 'ground';
+      // CL-247: just off a body, a light assist puts the round on it (aimAssistPick): never a lock, the cursor and the
+      // view don't move, and only within a few pixels of it.
+      const assistZ = zt === Infinity && !scoped && !_otsCentre && !trainingHit ? aimAssistPick(ray, Math.min(groundT, AIM_SKY_DIST), _pickAim) : null;
+      if (assistZ) aimKind = 'assist';
+      if (zt !== Infinity || assistZ) {
+        const m = getMuzzleWorld(), st = WEAPON_STATS[currentWeapon], pz = assistZ || rayPick.z;
         // GB-206: a chest aim is drawn up to AIM_AXIS_PULL toward his axis, so the parallax of a surface point on a
         // runner's near side does not send the round past him. Torso band only: heads sit forward of the axis and a
-        // leg aim pulled in would land between the legs.
-        if (!rayPick.head) {
+        // leg aim pulled in would land between the legs. (An assist is on the axis already.)
+        if (!assistZ && !rayPick.head) {
           const hk = (_pickAim.y - pz.mesh.position.y) / (pz.hitH || 1.7);
           if (hk >= 0.45 && hk <= 0.85) {
             const ax = pz.mesh.position.x - _pickAim.x, az = pz.mesh.position.z - _pickAim.z, ad = hypot(ax, az);
@@ -45413,9 +45608,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const selfLength = Math.min(AIM_SKY_DIST, groundT, zt);
       _aimSelfEnd.copy(ray.origin).addScaledVector(ray.direction, selfLength);
       const pp = localPlayer.position;
-      aimThroughMarine = !scoped && segmentHitsCylinder(ray.origin.x, ray.origin.y, ray.origin.z,
+      aimThroughMarine = !scoped && !(viewFirst && OTS.w > 0.25) && segmentHitsCylinder(ray.origin.x, ray.origin.y, ray.origin.z,
         _aimSelfEnd.x, _aimSelfEnd.y, _aimSelfEnd.z, pp.x, pp.z, PLAYER_RADIUS+.15, pp.y, pp.y+PLAYER_HEAD) !== null;
-      updateShotLos(zt !== Infinity || trainingHit?.solid.target != null, zt !== Infinity && rayPick.head);
+      updateShotLos(zt !== Infinity || !!assistZ || trainingHit?.solid.target != null, zt !== Infinity && rayPick.head);
       // GB-50: a stumble throws the aim off a little, easing back over HIT_AIM_S.
       if (hitStumble.aimT > 0 && hitStumble.aimOff) {
         const off = hitStumble.aimOff * Math.pow(hitStumble.aimT / HIT_AIM_S, 2);
@@ -45460,6 +45655,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
 
     renderer.domElement.addEventListener('mousedown', (e) => {
       if (uiBlocksFire()) return;
+      if (viewFirst && OTS.on && document.pointerLockElement !== renderer.domElement) otsLockWanted(true);   // CL-247: first person lost its lock (Esc, a menu)
       if (e.button === 0) {
         if (placeMode) beginPlaceClick();
         else if (gameStarted && !gameOver && !won && !paused) mouseFireHeld = true;
@@ -46086,7 +46282,14 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       v: new THREE.Vector3(), w: new THREE.Vector3(), m: new THREE.Vector3(), n: new THREE.Vector3(), q: new THREE.Quaternion(), id: new THREE.Quaternion() };
     // How far the RMB zoom has gone in, 0..1, on the zoom's own easing: the camera
     // pull-in for most guns, the scope for the sniper.
+    // CL-250 (GB-223: from his eyes at the hip only a muzzle tip showed at the bottom edge): in first person he carries
+    // the gun up at the ready, a shouldered gun FP_READY of the way to its aimed seat (the cheek weld stays the aim's
+    // own), a handgun, the uzi, the flamer, the minigun and the saw FP_LIFT metres higher, so it sits low in the view.
+    let FP_READY = 0.7, FP_LIFT = 0.2;
+    // GB-224: the heavies hang lower (the minigun on its sling, the saw by its handles): only a sliver showed at 0.2.
+    const FP_LIFT_GUN = { minigun: 0.4, chainsaw: 0.38 };   // GB-225: 0.32/0.30 still showed only the tips
     function shoulderAds() {
+      if (viewFirst && OTS.on) return FP_READY + (1 - FP_READY) * fpAdsW;   // CL-249: first person's aim down the sights (CL-250: from the ready)
       if (currentWeapon === 'sniper') return scopeAmt;
       return _clamp01((CAM_DIST_DEFAULT - camDistCurrent) / (CAM_DIST_DEFAULT - CAM_DIST_ZOOM));
     }
@@ -46140,6 +46343,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const S = SHOULDER_HOLD, sh = H.sh, torso = ud.torsoG, armR = ud.armRG;
       const ads = shoulderAds(), a = ads * ads * (3 - 2 * ads);
       shoulderAdsW = a;
+      const weld = viewFirst && OTS.on ? fpAdsW * fpAdsW * (3 - 2 * fpAdsW) : a;   // CL-250: the ready is no cheek weld
       // The seat, in torso space, then the world.
       const P = _hv.anchor.set(S.pocket[0] + (S.adsPocket[0] - S.pocket[0]) * a, S.pocket[1] + (S.adsPocket[1] - S.pocket[1]) * a,
         S.pocket[2] + (S.adsPocket[2] - S.pocket[2]) * a);
@@ -46197,7 +46401,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       _hm.c.copy(weaponMount.parent.matrixWorld).invert().multiply(_hm.a); // mount local
       _hm.c.decompose(weaponMount.position, weaponMount.quaternion, weaponMount.scale);
       weaponMount.updateMatrixWorld(true);
-      cheekWeld(ud, gun, sh.eye, a * k);
+      cheekWeld(ud, gun, sh.eye, weld * k);
     }
 
     // CL-133: the gun's inertia. The hold's anchor lags his acceleration and his turn a little (GUN_LAG, torso space,
@@ -46409,6 +46613,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (H.sh && !aki && !vault) holdShoulderGun(ud, gun, H, k);   // GB-129
       else {
         const off = _hv.origin.set(holdX, H.hold[1], H.hold[2]).applyAxisAngle(_AXIS_X, -pitch * 0.7);
+        if (viewFirst && OTS.w > 0) off.y += (FP_LIFT_GUN[currentWeapon] != null && !aki ? FP_LIFT_GUN[currentWeapon] * FP_LIFT / 0.2 : FP_LIFT) * OTS.w;   // CL-250: up at the ready in first person (GB-224: the heavies more)
         if (aki && akimboRetreat > 0.001) off.z += akimboRetreat * AKIMBO_CARRY.retreatReach;   // CL-189: backing off, out at it
         if (carry > 0.001) off.lerp(_akAt.set(AKIMBO_CARRY.at[0], AKIMBO_CARRY.at[1], AKIMBO_CARRY.at[2]), carry);   // CL-188: up by his collarbone
         off.y += walkBob * 0.25;
@@ -52722,7 +52927,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       // GB-158: the shambler, the soldier and the demon walk at Jerry's speeds (horde.js SPEED_TARGET), their cave role's
       // speedMul on top; lunge: the absolute lunge speed (0: LUNGE_MUL); chargeBase: the demon charges at its old pace.
       const roleK = z.caveTheme && CAVE_ROLES[z.caveTheme] && CAVE_ROLES[z.caveTheme].speedMul != null ? CAVE_ROLES[z.caveTheme].speedMul : 1;
-      const sp = hordeSpeedFor(z.typeKey, z.speed * p.mul, p, PHYS.run, roleK), k = z.speed > 0 ? sp.speed / z.speed : p.mul;
+      const sp = hordeSpeedFor(z.typeKey, z.speed * p.mul, p, PHYS.run, roleK, night), k = z.speed > 0 ? sp.speed / z.speed : p.mul;
       z.speed *= k; z.baseSpeed *= k; z.hzCap = sp.cap;
       z.hzLungeAbs = sp.lunge || 0; z.chargeBase = sp.legacy || 0;
       z.gaitMul = (z.gaitMul || 1) * Math.pow(k, 0.85);   // the feet keep up with the pace
@@ -53073,6 +53278,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           if (z.hzStaggerT > 0) spd *= HORDE.STAGGER_MUL;   // GB-94 follow-up: the stagger
           // GB-135 (D-77): never past its ceiling (90% of his sprint; a sprinter its own pace), but in a lunge or a burst.
           if (z.hzCap > 0 && z.hzCap < Infinity && !(z.hzLungeT > 0) && !(z.sprintT > 0)) spd = Math.min(spd, z.hzCap * (bloodMoon ? 1.2 : 1));
+          if (z.typeKey === 'feral') spd = Math.min(spd, PHYS.run);   // D-87: even a buffed feral cannot outrun his sprint
         }
 
         const zx = z.mesh.position.x, zz = z.mesh.position.z;
@@ -56334,10 +56540,11 @@ live++;
       if (grenadeCd > 0) grenadeCd -= dt;
       // CL-193: anything that takes him over (a cinematic, a scripted death, the ladder, being knocked down) ends a dive;
       // between dives this keeps the cooldown, the meter's refill and the slow motion's ease-out going.
-      if (diving() && (!gameStarted || gameOver || won || scriptedKill || training.wake || climbingTower || marineDown())) endDive(dive);
+      if ((diving() || slowmoOn(dive)) && (!gameStarted || gameOver || won || scriptedKill || training.wake || climbingTower || marineDown())) endDive(dive);   // CL-248: the slow motion on its own too
       if (!diving()) stepDive(dive, dt, realDt, {});
 
       // FOV lerp before aim so raycast uses current zoom FOV
+      updateAimZoom(realDt);   // CL-247: real time, as the shoulder camera
       {
         const wantZoom = zoomHeld && gameStarted && !gameOver && !won && !reloading && !placeMode && !buildMode && (!mortarMounted || mortarMounted.type === 'm240');
         const sniperZoom = currentWeapon === 'sniper' && !mortarMounted;
@@ -56346,18 +56553,23 @@ live++;
         // below for the actual eye placement). Everything else keeps this same
         // zoom and drops the camera behind the gun shoulder (aimCamPose).
         const sniperScoping = wantZoom && sniperZoom && !playerSwimming && !climbingTower &&
-          !diving() && !shopOpen;
+          !diving() && !shopOpen && !(viewFirst && OTS.on);   // CL-249: in first person its scope is the aim down the sights
         if (sniperScoping !== sniperScopingNow) AudioSys.reloadCue('grab', 0.4);
         sniperScopingNow = sniperScoping;
         const fovZoom = sniperZoom ? SCOPE_ZOOM_FOV[scopeZoomLevel] : aimFov;   // CL-175: the Aim FOV setting (FOV_ZOOM 38 was fixed)
         const distZoom = sniperZoom ? CAM_DIST_DEFAULT : CAM_DIST_ZOOM;
         // A few degrees wider at a full sprint: the world opens up and the speed reads.
         const sprintKick = (!wantZoom && sprintFovKick > 0) ? sprintFovKick : 0;
-        const fovTarget = wantZoom && !sniperZoom ? fovZoom : FOV_DEFAULT + sprintKick + 6 * diveSmooth(dive.w);   // CL-193: a little wider in bullet time
+        // CL-247 (D-87): the Aim FOV is first person's now (right-click there); in third person right-click is AIMZ's 2x zoom
+        // below. camDistCurrent still eases in and out with right-click (the cheek weld reads it, shoulderAds), but the
+        // camera no longer pulls in or steps out behind his shoulder with it (CU-114): see camR and aimCamAds.
+        const fpAds = wantZoom && viewFirst && OTS.on;   // CL-249: first person's aim down the sights (the sniper's scope FOV too)
+        const fovTarget = fpAds ? fovZoom : FOV_DEFAULT + sprintKick + 6 * diveSmooth(dive.w);   // CL-193: a little wider in bullet time
         const distTarget = wantZoom ? distZoom : CAM_DIST_DEFAULT;
         const zoomLerp = sniperZoom ? 1 - Math.pow(0.00002, realDt) : 1 - Math.exp(-OTS_IN * realDt);   // CL-193: real time   // CL-175: the shoulder zoom keeps time with the shoulder camera
         camFovCurrent += (fovTarget - camFovCurrent) * zoomLerp;
         camDistCurrent += (distTarget - camDistCurrent) * zoomLerp;
+        fpAdsW += ((fpAds ? 1 : 0) - fpAdsW) * zoomLerp; if (Math.abs((fpAds ? 1 : 0) - fpAdsW) < 0.02) fpAdsW = fpAds ? 1 : 0;   // CL-249
         if (Math.abs(camera.fov - camFovCurrent) > 0.01) {
           camera.fov = camFovCurrent;
           camera.updateProjectionMatrix();
@@ -56372,7 +56584,8 @@ live++;
         // Interpolate focal length (tan of half-FOV), using the same phase as travel.
         camera.fov = THREE.MathUtils.radToDeg(2 * Math.atan(
           THREE.MathUtils.lerp(Math.tan(THREE.MathUtils.degToRad(camFovCurrent) / 2),
-            Math.tan(THREE.MathUtils.degToRad(SCOPE_ZOOM_FOV[scopeZoomLevel]) / 2), scopeEase)));
+            Math.tan(THREE.MathUtils.degToRad(SCOPE_ZOOM_FOV[scopeZoomLevel]) / 2), scopeEase)
+          / (1 + (AIMZ_ZOOM - 1) * aimzEase())));   // CL-247: the aim zoom, 2x (the view's tan, so it magnifies, not widens)
         camera.updateProjectionMatrix();
       }
 
@@ -56453,7 +56666,7 @@ live++;
           const waterMul = 1 - waterWade * PHYS.waterDrag;
           if (playerWebT > 0) playerWebT -= dt;
           targetSpeed = (crouching ? PHYS.crouch : (moveRunning ? PHYS.run : PHYS.walk)) * speedMult() * streakSpeedMult() * slopeMul * waterMul * (mortarCarried ? 0.62 : 1) * fuelSlow()
-            * Math.min(playerWebT > 0 ? SPIDER_WEB.pace : 1, 1 - OTS_SLOW * OTS.w);   // GP-19857/CL-176: stronger slow; web and shoulder do not stack
+            * Math.min(playerWebT > 0 ? SPIDER_WEB.pace : 1, 1 - OTS_SLOW * Math.max(OTS.w * (viewFirst ? fpAdsW : 1), AIMZ.w));   // GP-19857/CL-176: stronger slow; web and shoulder do not stack (CL-247: the aim zoom too)
         }
 
         targetSpeed *= drownedPace(localPlayer); // GP-19860: movement remains available during the brief grip
@@ -56681,6 +56894,7 @@ live++;
         // A tap still hops short, but allow the loaded legs a brief real push first.
         if (!keys.Space && vy > 3.2 && jumpFeel.air >= JUMP_FEEL.minRise && !diving()) vy = 3.2;
       } else if (!scriptedKill) {
+        updateOts(realDt);   // CL-249: out of first person (and its head back) when the run ends, not frozen there
         barrelSpinVel = Math.max(0, barrelSpinVel - SPIN_DECEL * dt);
         updateMastFall(dt);   // CL-179
         updateMarinePose(dt, false, false);
@@ -56689,6 +56903,9 @@ live++;
         holdWeapon(dt);
         updateLasers();
       }
+      // GB-221 (D-87): the gameplay block above stands down while a guardian's scripted kill plays, and the dead stood with it,
+      // frozen mid-chase. They keep walking (their bites, leaps and the contact ring already stand down on scriptedKill).
+      if (scriptedKill && gameStarted && !gameOver && !won && !training.wake) { updateZombies(dt); enemyAbilities.update(dt); feralMotion.update(dt); }
 
       barrelSpin += barrelSpinVel * dt;
       if (minigun.userData.barrelAssembly) minigun.userData.barrelAssembly.rotation.z = barrelSpin;
@@ -56929,7 +57146,7 @@ live++;
       // Follow cursor: slide toward where you point (see camPanX's declaration). Pure
       // pan — the same offset goes on the camera and on what it looks at, so heading and
       // angle are untouched and only the framing moves.
-      {
+      if (!(AIMZ.w > 0)) {   // CL-247: held where it was while the aim zoom is in (the zoom does its own centring)
         let panX = 0, panZ = 0;
         const r = hypot(aimPointerNdc.x, aimPointerNdc.y);
         if (!mgCamera && followCursor && gameStarted && !paused && r > PAN_DEAD) {
@@ -56946,12 +57163,11 @@ live++;
 
       // Orbit: eased distance from the wheel, elevation from auto tilt, heading from
       // middle-drag, centred on the marine (plus the cursor pan).
-      const camR = camRCurrent * (camDistCurrent / CAM_DIST_DEFAULT); // RMB zoom pulls in a touch
+      const camR = camRCurrent;   // CL-247: the RMB pull-in is gone (its zoom is AIMZ's)
       // CU-114: the zoom above is unchanged. While it is in (not the sniper scope,
       // not swimming, not the mounted gun), the orbit drops to a standing angle and
       // steps out behind the gun shoulder. scopeAmt fades that pose as the scope rises.
-      aimCamAds = (playerSwimming || mgCamera) ? 0
-        : _clamp01((CAM_DIST_DEFAULT - camDistCurrent) / (CAM_DIST_DEFAULT - CAM_DIST_ZOOM));
+      aimCamAds = 0;   // CL-247 (D-87): no standing angle behind the shoulder on right-click (CU-114); AIMZ zooms instead
       aimCamPose = aimCamAds * (1 - scopeAmt);
       const aimElev = camElevCurrent + (AIM_CAM_ELEV - camElevCurrent) * aimCamPose;
       const camH = camR * Math.cos(aimElev), camV = camR * Math.sin(aimElev);
@@ -56999,8 +57215,8 @@ live++;
       // pull the trigger. Last frame's offset comes back off first, so the lerp always
       // works on the unpanned position instead of chasing its own output.
       if (scopeOrbitPosition) camera.position.copy(scopeOrbitPosition);
-      camera.position.x -= camPanAppliedX;
-      camera.position.z -= camPanAppliedZ;
+      camera.position.x -= camPanAppliedX + AIMZ.appliedX;   // CL-247: and the aim zoom's own, put back on below
+      camera.position.z -= camPanAppliedZ + AIMZ.appliedZ;
       camera.position.lerp(desired, 1 - Math.pow(clearT < 1 ? 0.00002 : 0.002, dt));
       camera.position.x += camPanX;
       camera.position.z += camPanZ;
@@ -57034,8 +57250,9 @@ live++;
         }
       }
       // Keep the marine in frame: however the view is tipped or panned, it can't rise
-      // above the angle that puts the feet ~11° inside the bottom edge.
-      {
+      // above the angle that puts the feet ~11° inside the bottom edge. (CL-247: not while the aim zoom is in; it
+      // centres on the cursor, not on him.)
+      if (!(AIMZ.w > 0.01)) {
         const fx = camLook.x - camera.position.x, fz = camLook.z - camera.position.z;
         const fh = hypot(fx, fz);
         if (fh > 0.01) {
@@ -57045,6 +57262,29 @@ live++;
             const maxPitch = Math.atan2(player.position.y + 0.1 - camera.position.y, feetH) + halfV;
             if (Math.atan2(camLook.y - camera.position.y, fh) > maxPitch) camLook.y = camera.position.y + Math.tan(maxPitch) * fh;
           }
+        }
+      }
+
+      // CL-247: the aim zoom's centring. Camera and look point move together (heading and angle stay), so that the point
+      // the cursor was on as right-click went down (kept at its offset from him) sits at that same spot on the zoomed
+      // screen: the ray through that spot, from this frame's unmoved camera, meets the point's ground height at Q, and
+      // the camera moves by point - Q. Eased out over the first tenth of the zoom so it starts and ends at nothing.
+      AIMZ.appliedX = AIMZ.appliedZ = 0;
+      if (AIMZ.w > 0) {
+        const P = localPlayer.position, ax = P.x + AIMZ.relX, az = P.z + AIMZ.relZ, ay = sampleHeight(ax, az), c = camera.position;
+        let fx = camLook.x - c.x, fy = camLook.y - c.y, fz = camLook.z - c.z;
+        { const l = Math.hypot(fx, fy, fz) || 1; fx /= l; fy /= l; fz /= l; }
+        let rx = -fz, rz = fx;   // screen-right: forward x world up
+        { const l = hypot(rx, rz) || 1; rx /= l; rz /= l; }
+        const ux = -rz * fy, uy = rz * fx - rx * fz, uz = rx * fy;   // screen-up: right x forward
+        const t = Math.tan(THREE.MathUtils.degToRad(camera.fov) / 2), a = camera.aspect || 1, sx = AIMZ.ndcX * t * a, sy = AIMZ.ndcY * t;
+        const dx = fx + rx * sx + ux * sy, dy = fy + uy * sy, dz = fz + rz * sx + uz * sy;
+        if (dy < -1e-3) {
+          const s = (ay - c.y) / dy, k = Math.min(1, AIMZ.w / 0.1);
+          AIMZ.appliedX = (ax - (c.x + dx * s)) * k; AIMZ.appliedZ = (az - (c.z + dz * s)) * k;
+          c.x += AIMZ.appliedX; c.z += AIMZ.appliedZ; camLook.x += AIMZ.appliedX; camLook.z += AIMZ.appliedZ;
+          const floor = sampleHeight(c.x, c.z) + CAM_CLEAR;
+          if (c.y < floor) { camLook.y += floor - c.y; c.y = floor; }
         }
       }
 
@@ -57085,6 +57325,19 @@ live++;
         if (!OTS.eye) { OTS.eye = new THREE.Vector3(); OTS.look = new THREE.Vector3(); OTS.pivot = new THREE.Vector3(); }
         const y = OTS.yaw, p = OTS.pitch, cp = Math.cos(p);
         const dX = Math.sin(y) * cp, dY = Math.sin(p), dZ = Math.cos(y) * cp, rX = -Math.cos(y), rZ = Math.sin(y);
+        const fpEye = viewFirst ? firstPersonEye(realDt) : null;   // CL-249: at his eyes
+        if (fpEye) {
+          OTS.eye.copy(fpEye);
+          let lX = dX, lY = dY, lZ = dZ;
+          const sight = fpAdsW > 0 ? firstPersonSight() : null;
+          if (sight) {   // right-click: onto the gun's sight line
+            const a = fpAdsW * fpAdsW * (3 - 2 * fpAdsW);
+            OTS.eye.lerp(sight.pos, a);
+            lX += (sight.fwd.x - lX) * a; lY += (sight.fwd.y - lY) * a; lZ += (sight.fwd.z - lZ) * a;
+            const l = Math.hypot(lX, lY, lZ) || 1; lX /= l; lY /= l; lZ /= l;
+          }
+          OTS.look.set(OTS.eye.x + lX * 60, OTS.eye.y + lY * 60, OTS.eye.z + lZ * 60);
+        } else {
         const P = player.position, pv = OTS.pivot.set(P.x + rX * OTS_RIGHT, P.y + (OTS_UP - POSE.crouch * 0.45) * (1 - diveFlatW) + (diveHipY + 0.42) * diveFlatW + bobY * 0.5, P.z + rZ * OTS_RIGHT);   // CL-193: down with his body in a dive
         // pull in when the ground behind would cut across (the hill behind him, a slope)
         let back = OTS_BACK;
@@ -57095,16 +57348,21 @@ live++;
         OTS.eye.set(pv.x - dX * back, pv.y - dY * back + OTS_LIFT, pv.z - dZ * back);
         OTS.eye.y = Math.max(OTS.eye.y, sampleHeight(OTS.eye.x, OTS.eye.z) + 0.25);
         OTS.look.set(OTS.eye.x + dX * 60, OTS.eye.y + dY * 60, OTS.eye.z + dZ * 60);
+        }
         const e = OTS.w * OTS.w * (3 - 2 * OTS.w);
         camera.position.lerp(OTS.eye, e);
         camLook.lerp(OTS.look, e);
       }
-      rollPivot.visible = scopeAmt < 0.82;
-      scopeOverlayEl.style.opacity = String(scopeAmt);
-      scopeZoomLabelEl.style.opacity = String(scopeAmt > 0.6 ? Math.min(1, (scopeAmt - 0.6) * 2.5) : 0);
+      // CL-249: in first person the sniper's aim down the sights is its scope (the glass and the label), and down iron
+      // sights the crosshair goes (the sights are the aim); a sightless gun keeps it.
+      const fpKind = viewFirst && OTS.w > 0.5 && fpAdsW > 0 ? (SIGHT[currentWeapon] && !akimboOn() ? SIGHT[currentWeapon].kind : 'over') : null;
+      const glass = Math.max(scopeAmt, fpKind === 'optic' ? fpAdsW : 0);
+      rollPivot.visible = glass < 0.82;
+      scopeOverlayEl.style.opacity = String(glass);
+      scopeZoomLabelEl.style.opacity = String(glass > 0.6 ? Math.min(1, (glass - 0.6) * 2.5) : 0);
       // Crossfade the ordinary cursor-following reticle out as the scope's own
       // centred crosshair fades in, so there's never two overlapping at once.
-      reticleEl.style.opacity = String(Math.max(0, 1 - scopeAmt * 1.6));
+      reticleEl.style.opacity = String(Math.max(0, 1 - glass * 1.6) * (fpKind === 'iron' ? 1 - fpAdsW : 1));
 
       // Shake displaces the camera and its aim point together, so the world jolts
       // without the view swinging off target. Damped while scoped — at scope FOV a
@@ -57165,8 +57423,10 @@ live++;
       graceActiveDbg: () => zombieGraceActive(), restartGraceDbg: () => { hoursSinceMatchStart = 0; },   // GB-51 (t76)
       getSawHeat: () => ({ heat: sawHeat, overheat: sawOverheat, biteT: sawBiteT }), setSawHeatDbg: (v) => { sawHeat = v; sawOverheat = false; }, setMouseFireDbg: (v) => { mouseFireHeld = !!v; }, MELEE_SIZE_MUL, meleeSizeMul, WEAPON_STATS,   // GB-52
       getHitStumble: () => ({ ...hitStumble, speedK: hitStumbleSpeedK(), react: hitReaction.strength * Math.pow(hitReaction.time / hitReaction.duration, 2) }), HIT_KNEE_S, HIT_AIM_S,   // GB-50
-          otsDbg: () => ({ on: OTS.on, w: OTS.w, yaw: OTS.yaw, pitch: OTS.pitch, locked: document.pointerLockElement === renderer.domElement, fov: aimFov, tilt: aimTiltDeg }), otsLook: (dx, dy) => otsMouse({ movementX: dx, movementY: dy }),   /* CL-174 */
-          rotateBuildDbg: () => rotateBuild(), toggleStairs, nearestFoldStairs, emplacementRate, platforms, updateFoldingStairs, weaponMeshes, offhandMeshes, knifeMesh: () => knife, nightLockdown, lockdownState: () => ({ on: nightLockdown(), placeMode, buildMode, wheel: wheelKind, briefing: hqBriefingOpen, shop: shopOpen, cif: cifOpen }),   /* CU-82 */ setAmmoDbg: (k, n) => { if (isMagazineWeapon(k)) { if (!magazineStore[k]) issueWeaponMagazines(k, 0, 0); setLoadedMagazineRounds(magazineStore, k, n, dualActive && !!DUAL_CAPABLE[k] && !!dualOwned[k]); syncMagazine(k); } else ammoByWeapon[k] = n; }, getPlaceHint: () => placeHint, findRepairCandidate, findScrapCandidate, onMyStorey, refusalText, fireRoundDbg: (ox, oy, oz, dx, dy, dz, damage, speed, pierce) => { spawnProjectile(false, new THREE.Vector3(ox, oy, oz), new THREE.Vector3(dx, dy, dz), damage, 2, null, speed, 'bullet', pierce | 0); return projectiles[projectiles.length - 1]; }, stepProjectilesDbg: (dt) => { updateProjectiles(dt); flushShotHits(); }, /* GB-58 follow-up: one round, stepped by hand */ session, startDeathCine, skipDeathCine, endDeathCine, getCine: () => cine, plotSpot, nearestGrave, getCrew: () => cineCrew, tagWallDbg: { refresh: () => refreshTagWall(), wall: () => house.tagWall, tags: () => hollowTags.read().tags.slice(), TAG_TOTAL },   /* CL-206 */ burialDbg: { setRunTags: (ids) => { runTagIds = ids.slice(); }, runTags: () => runTagIds.slice(), whos: () => burialWhos(), MOUND },   /* CL-205 */ poseCrew, DIG_LEAN, drawPlaque, moundHeight, placeShovel, GRAVE_PLOTS, endGame, playerNameEl, hq, house, getSkullBag: () => skullBag, getSkullLedger: () => skullLedger, awardCash, skullSafeSpot, getSkullLife: () => ({ life: SKULL_LIFE, zipR: SKULL_ZIP_R, zipMax: SKULL_ZIP_MAX }), getSkullRecall: () => skullRecallUntil, updateHQ, HQ_WINDOW_FRONT, HQ_PANEL_FRONT, cashDrops, killZombie, KIOSK, SKULL_LOOK, makeSkullMesh, getGestureT: () => gestureT, mortarArcBlocked, mortarSolve, mountMortar, updateMortarArc, fireMortar, mortarCrewSpot, getMortarNoRoom: () => mortarNoRoom, onStairsRamp, dismountMortar, fireShellDbg, flushShotHits, setMotionEnabledDbg: () => {}, getCorpses: () => corpses, marineDown, bomberBlast, updateCorpsesDbg: (dt) => updateCorpses(dt), freezeCorpse, getMortarAim: () => mortarAimState, setAimTargetDbg: (x, z) => { aimTarget.x = x; aimTarget.z = z; aimTarget.y = sampleHeight(x, z); }, setZoomHeldDbg: (v) => { zoomHeld = !!v; }, getAimCamDbg: () => ({ ads: aimCamAds, pose: aimCamPose, elev: AIM_CAM_ELEV, shoulder: AIM_SHOULDER }) /* CU-114 */, getShoulderDbg: () => ({ aimF: _shAimDbg.f.clone(), aimT: _shAimDbg.t.clone(), kick: { ...recoilKick }, tilt: { ...reloadMountOff }, w: shoulderHoldW, ads: shoulderAdsW, rawAds: shoulderAds(), cheek: shoulderCheekAng, hold: SHOULDER_HOLD, holds: WEAPON_HOLD }), /* GB-129 */ getWeaponSizeDbg: () => ({ upm: MARINE_UPM, sizes: WEAPON_SIZE, blades: BLADE_SIZE, carry: CARRY_FIT, factors: Object.fromEntries(Object.keys(weaponMeshes).map((k) => [k, weaponSizeFactor(k)])) }), /* GB-130 */ resolveSoftBarricades, resolveHardBuildCollisions, PLAYER_RADIUS_DBG: PLAYER_RADIUS, upgradeBoxPieces, commitUpgradeDbg: (gx, gz) => { commitUpgradeDrag({ gx, gz }); }, beginUpgradeDragDbg: (gx, gz) => { upgradeDrag = { gx, gz }; }, landmarks, nearestAttackableBuild, buildsNear, getGameMode: () => gameMode, devBench, buildsNearDbg: (x, z, r) => buildsNear(x, z, r, []), upgradePlan, applyUpgrade, tryUpgrade, getRepairTarget, getRepairSnapshot, repairNearestBuild, getObjectiveProps, getObjectiveInteraction, buyUpgradeBlueprint, getUpgradeOwned: () => upgradeOwned, tierOf, buildBetween, UPGRADE_TRACKS, setShopTabDbg: (t) => { shopTab = t; renderShop(); }, pushOutOfBuild, upgradeTarget, getUpgradeHint: () => upgradeHint,
+          otsDbg: () => ({ on: OTS.on, w: OTS.w, yaw: OTS.yaw, pitch: OTS.pitch, locked: document.pointerLockElement === renderer.domElement, fov: aimFov, tilt: aimTiltDeg }),
+          aimZoomDbg: () => ({ on: AIMZ.on, w: AIMZ.w, relX: AIMZ.relX, relZ: AIMZ.relZ, ndcX: AIMZ.ndcX, ndcY: AIMZ.ndcY, panX: AIMZ.appliedX, panZ: AIMZ.appliedZ, fov: camera.fov, baseFov: camFovCurrent, first: viewFirst }),   /* CL-247 */
+          setViewFirstDbg: (on) => toggleViewFirst(on), fpTuneDbg: (o = {}) => { if (o.ready != null) FP_READY = o.ready; if (o.lift != null) FP_LIFT = o.lift; return { ready: FP_READY, lift: FP_LIFT }; },   /* CL-250 */ fpDbg: () => ({ first: viewFirst, w: OTS.w, ads: fpAdsW, headHidden: fpHeadHidden, armHidden: fpArmHidden, eye: OTS.eye ? OTS.eye.clone() : null, sight: firstPersonSight() ? { pos: _fpSight.clone(), fwd: _fpFwd.clone() } : null }),   /* CL-249 */ aimKindDbg: () => aimKind, aimAssistDbg: () => ({ ...aimAssistLast }), shotAimDbg: () => shotAimTarget().clone(), AIM_ASSIST_NDC, AIM_CHEST,   /* CL-247 */ otsLook: (dx, dy) => otsMouse({ movementX: dx, movementY: dy }),   /* CL-174 */
+          rotateBuildDbg: () => rotateBuild(), toggleStairs, nearestFoldStairs, emplacementRate, platforms, updateFoldingStairs, weaponMeshes, offhandMeshes, knifeMesh: () => knife, nightLockdown, lockdownState: () => ({ on: nightLockdown(), placeMode, buildMode, wheel: wheelKind, briefing: hqBriefingOpen, shop: shopOpen, cif: cifOpen }),   /* CU-82 */ setAmmoDbg: (k, n) => { if (isMagazineWeapon(k)) { if (!magazineStore[k]) issueWeaponMagazines(k, 0, 0); setLoadedMagazineRounds(magazineStore, k, n, dualActive && !!DUAL_CAPABLE[k] && !!dualOwned[k]); syncMagazine(k); } else ammoByWeapon[k] = n; }, getPlaceHint: () => placeHint, findRepairCandidate, findScrapCandidate, onMyStorey, refusalText, fireRoundDbg: (ox, oy, oz, dx, dy, dz, damage, speed, pierce) => { spawnProjectile(false, new THREE.Vector3(ox, oy, oz), new THREE.Vector3(dx, dy, dz), damage, 2, null, speed, 'bullet', pierce | 0); return projectiles[projectiles.length - 1]; }, stepProjectilesDbg: (dt) => { updateProjectiles(dt); flushShotHits(); }, /* GB-58 follow-up: one round, stepped by hand */ session, startDeathCine, skipDeathCine, endDeathCine, getCine: () => cine, plotSpot, nearestGrave, getCrew: () => cineCrew, tagWallDbg: { refresh: () => refreshTagWall(), wall: () => house.tagWall, tags: () => hollowTags.read().tags.slice(), TAG_TOTAL },   /* CL-206 */ burialDbg: { setRunTags: (ids) => { runTagIds = ids.slice(); }, runTags: () => runTagIds.slice(), whos: () => burialWhos(), MOUND },   /* CL-205 */ poseCrew, DIG_LEAN, drawPlaque, moundHeight, placeShovel, GRAVE_PLOTS, endGame, playerNameEl, hq, house, getSkullBag: () => skullBag, getSkullLedger: () => skullLedger, awardCash, skullSafeSpot, getSkullLife: () => ({ life: SKULL_LIFE, zipR: SKULL_ZIP_R, zipMax: SKULL_ZIP_MAX }), getSkullRecall: () => skullRecallUntil, updateHQ, HQ_WINDOW_FRONT, HQ_PANEL_FRONT, cashDrops, killZombie, KIOSK, SKULL_LOOK, makeSkullMesh, getGestureT: () => gestureT, mortarArcBlocked, mortarSolve, mountMortar, updateMortarArc, fireMortar, mortarCrewSpot, getMortarNoRoom: () => mortarNoRoom, onStairsRamp, dismountMortar, fireShellDbg, flushShotHits, setMotionEnabledDbg: () => {}, getCorpses: () => corpses, marineDown, bomberBlast, updateCorpsesDbg: (dt) => updateCorpses(dt), freezeCorpse, getMortarAim: () => mortarAimState, setAimTargetDbg: (x, z) => { aimTarget.x = x; aimTarget.z = z; aimTarget.y = sampleHeight(x, z); aimKind = 'none'; }, setZoomHeldDbg: (v) => { zoomHeld = !!v; }, getAimCamDbg: () => ({ ads: aimCamAds, pose: aimCamPose, elev: AIM_CAM_ELEV, shoulder: AIM_SHOULDER }) /* CU-114 */, getShoulderDbg: () => ({ aimF: _shAimDbg.f.clone(), aimT: _shAimDbg.t.clone(), kick: { ...recoilKick }, tilt: { ...reloadMountOff }, w: shoulderHoldW, ads: shoulderAdsW, rawAds: shoulderAds(), cheek: shoulderCheekAng, hold: SHOULDER_HOLD, holds: WEAPON_HOLD }), /* GB-129 */ getWeaponSizeDbg: () => ({ upm: MARINE_UPM, sizes: WEAPON_SIZE, blades: BLADE_SIZE, carry: CARRY_FIT, factors: Object.fromEntries(Object.keys(weaponMeshes).map((k) => [k, weaponSizeFactor(k)])) }), /* GB-130 */ resolveSoftBarricades, resolveHardBuildCollisions, PLAYER_RADIUS_DBG: PLAYER_RADIUS, upgradeBoxPieces, commitUpgradeDbg: (gx, gz) => { commitUpgradeDrag({ gx, gz }); }, beginUpgradeDragDbg: (gx, gz) => { upgradeDrag = { gx, gz }; }, landmarks, nearestAttackableBuild, buildsNear, getGameMode: () => gameMode, devBench, buildsNearDbg: (x, z, r) => buildsNear(x, z, r, []), upgradePlan, applyUpgrade, tryUpgrade, getRepairTarget, getRepairSnapshot, repairNearestBuild, getObjectiveProps, getObjectiveInteraction, buyUpgradeBlueprint, getUpgradeOwned: () => upgradeOwned, tierOf, buildBetween, UPGRADE_TRACKS, setShopTabDbg: (t) => { shopTab = t; renderShop(); }, pushOutOfBuild, upgradeTarget, getUpgradeHint: () => upgradeHint,
           knifeAttack, BLADE_STATS, bladeStats, landmarkInSquare, levelGroundRect, startReload, isReloading: () => reloading, toggleNvgDbg: () => toggleNvg(), setGearDbg: (k) => { gearOwned[k] = true; }, laserSteadies, STREAK_HEAL_CAP_FRAC, streakHealHp: () => streakHealHp(), fogCullDbg: () => ({ on: fogCullOn, far: _fcFar, margin: FOG_CULL_MARGIN, back: FOG_CULL_BACK, hidden: zombies.filter((z) => z.alive && z.fogHidden).length }), setFogCullDbg: (on) => { fogCullOn = !!on; if (!fogCullOn) for (const z of zombies) if (z.fogHidden) { z.fogHidden = false; if (z.mesh) z.mesh.visible = true; } }, fogCullDepthDbg: (z) => { fogCullPrep(); return fogCullDepth(z); }, LASER_SPREAD_MUL, setLasersDbg: (on) => { lasersEnabled = !!on; updateLasers(); }, laserAimDbg: () => laserAimReport, toggleLasers, aimDirWithSpreadDbg: (s) => aimDirWithSpread(s), getAimDirDbg: () => getAimDir().clone(), resetSprayDbg: () => { sprayHeat = 0; sprayShot = 0; }, onBoards, setAimYawDbg: (y) => { aimYaw = y; }, getKnifeCd: () => knifeCd, setKnifeCd: (v) => { knifeCd = v; },
           openWheel, closeWheelDbg: () => { wheelKind = null; wheelEl.classList.remove("show"); }, wheelTurnPage, getWheelState: () => ({ kind: wheelKind, page: wheelPage, keys: wheelItems.map((it) => it.key) }), BUILD_PAGES, BUILD_ORDER,
           applyGraphicsPreset, GFX_PRESETS, getGfx: () => gfxKey, skipPrep,
@@ -57242,7 +57502,7 @@ live++;
           // Debug-only: end the opening no-attack grace period immediately.
           skipGrace: () => { hoursSinceMatchStart = Math.max(hoursSinceMatchStart, ZOMBIE_GRACE_HOURS + 0.01); },
           getQuestState: () => quest.read(), learnQuest: place => quest.learn(place), restoreQuestDbg: state => quest.restore(state),
-          launcherBrassDbg: () => ({ thrown: launcherBrassThrown, spent: launcherSpent }),   /* GB-133 */ dismemberDbg: (z, part) => detachZombiePart(z, part, 0, 1), MAIMED_HOP_MUL, cloneLean,   /* CL-136 */ slowMoDbg, triggerSlowMo, diveDbg: () => ({ phase: dive.phase, w: dive.w, k: diveTimeScale(dive), meter: dive.meter, cd: dive.cd, vx: dive.vx, vz: dive.vz, dirX: dive.dirX, dirZ: dive.dirZ, dives: dive.dives, flat: diveFlatW,pose:divePoseFrame,contact:dive.contact }), setDiveMeterDbg: (v) => { dive.meter = Math.max(0, Math.min(1, +v || 0)); }, DIVE,   /* CL-193 */ selectorFlick,   /* GB-167 */   /* CL-137 */ trainingHideWorld, getHidWorld: () => training.hidWorld,   /* CL-138 */ profDbg: PROF, rotateCamera, cullDbg: cullStats, cullShowAll, zombiePoolDbg: () => Object.fromEntries([...zombiePool].map(([k, v]) => [k, v.length])), sunShadowDbg: () => ({ ...sunShadowStats, deep: sunShadowDeep, tick: sunShadowTick, every: SUN_SHADOW_DEEP_EVERY, move: SUN_SHADOW_DEEP_MOVE }),   /* CL-237 */ zombieHitNightMul,   /* CL-244 */ marineShadowDbg: (full) => ({ builds: marineShadowBuilds, lastDiff: marineShadowDiff, proxy: marineShadowProxy, ms: marineShadowMs, sig: marineShadowSig, bones: marineShadowProxy ? marineShadowProxy.skeleton.bones.length : 0, verts: marineShadowProxy ? marineShadowProxy.geometry.attributes.position.count : 0, warm: marineShadowWarm, retired: marineShadowRetired.length, drawnAt: marineShadowProxy ? marineShadowProxy.userData.drawnAt : null, seen: marineShadowSeen, seenAt: marineShadowSeenAt, builtAt: marineShadowBuiltAt, frame: perfFrame, now: full ? marineShadowNow() : undefined }),   /* CL-241: warm..frame, now */ skinMergeGroup, skinUnmerge,   /* CL-140 */   /* GB-136 */ grenadeArcDbg: () => ({ charging: grenadeCharging, t: grenadeChargeT, visible: grenadeArc.visible, hit: grenadeArc.userData.hit, dots: grenadeArc.userData.dots, launcher: launcherArc.visible, lhit: launcherArc.userData.hit, lstate: launcherArc.userData.state, last: lastGrenadeThrow, n: grenades, cd: grenadeCd }), startGrenadeCharge, releaseGrenadeCharge, GRENADE_THROW, grenadeThrowSpeed, flyArc,   /* GB-134 */ grenadeAnimDbg: () => ({ phase: grenadeAnim.phase, t: grenadeAnim.t, inHand: grenadeAnim.inHand, queued: grenadeAnim.queued, hand: grenadeHand, carriedShown: grenadeInHandN, simple: !!grenadeArc.userData.simple, segs: grenadeArc.userData.segs, release: grenadeReleasePoint().clone(), anim: GRENADE_ANIM, keys: GR_KEY }), holdGrenadeAnim: (phase, t) => { grenadeAnimHold = phase ? { phase, t: t || 0 } : null; if (!phase) { grenadeAnim.phase = ''; setGrenadeInHand(false); } }, setGrenadesDbg: (n) => { grenades = n | 0; updateAmmoHud(); updateCarriedGear(0, true); },   /* CU-97 */ m240Dbg: () => { const b = mortarMounted && mortarMounted.type === 'm240' ? mortarMounted : null; return { belt: b ? b.belt : null, feedT: b ? (b.feedT || 0) : 0, reserve: reserveAmmo['7.62 belt'] | 0, flash: !!(b && b.mesh.userData.flash && b.mesh.userData.flash.visible), hud: ammoDetailEl ? ammoDetailEl.textContent : '', hudName: ammoWeaponEl ? ammoWeaponEl.textContent : '' }; }, watchmanDbg: () => ({state:mortarMounted?.watchman || null,weight:_watchman.weight,ghost:ghostGroup}), crewDbg: () => ({ mortar: { w: _mcrew.w, phase: _mcrew.load.phase, roundIn: _mcrew.load.round, dropping: _mcrew.load.dropping, dropT: _mcrew.load.dropT, fired: _mcrew.load.fired, round: _mcrew.round, muzzle: _mcrew.muzzle, axis: _mcrew.axis, feet: _mcrew.plant.feet, steps: _mcrew.plant.steps }, m240: { feet: _watchman.plant.feet, steps: _watchman.plant.steps } }),   /* GB-156 */ feedM240, m240MuzzleWorld, M240_FEED_S, stockedLooseCalibers, aimPointDbg: (x, y, z) => { aimTarget.set(x, y, z); }, upgradeAvailableHint, getUpgradeAvailHint: () => upgradeAvailHint, tipOnce, tipsDbg: () => ({ seen: Object.assign({}, tipsSeen || {}), reset: () => { tipsSeen = {}; try { localStorage.removeItem(TIP_STORE); } catch (e) {} } }), placeBannerText: () => placeBannerEl.textContent, bigBannerText: () => bigBannerT.textContent + ' | ' + bigBannerS.textContent,   /* GB-139 */ m240VisDbg: () => ({ carried: carriedM240Mesh.visible, carriedMortar: carriedMortarMesh.visible, carriedGun: carriedM240Mesh, spent: { ...m240Spent }, casings: casings.length, pitchTo: m240PitchTo, muzzle: m240MuzzleWorld, CARRY_M240, CARRY_ARM, ELEV: [M240_ELEV_MIN, M240_ELEV_MAX], setDown: setDownMortar, casingsList: casings }),   /* CL-131 */ brandtGunDbg: () => { const r = roofCrew.find((c) => c.who === 'brandt'); return r && r.gun ? { gun: r.gun, flashed: !!r.gun.userData.flash, shots: r.shots } : null; },   /* GB-138 */ getSimTime: () => simTime,   /* GB-131 */ getDebugTouched: () => debugTouched, resetGame, ensureCrew,   /* CL-105 */ makeMarine,   /* CL-94 */ carryDbg, carryPreview, updateCarriedGear, CARRY_SLOTS, drawDbg, updateMarineDraw, drawPreview,   /* CL-90 */ dressMarine, DRESS, getMarine: () => marine, dressGuns, getGunFurniture: () => gunFurniture,   /* CL-97 */ buildWarren, layoutWarren, WARREN_THEMES, HOLLOW, enterHollow, leaveHollow, hollowState: () => hollow.state(), belowDbg,   /* GB-107 */ stirDbg,   /* GB-108 */ heartDbg,   /* GB-92 */ runePistolDbg,   /* GB-119 */ hordeDbg,   /* GB-94 */ getMedDropCount: () => medDrops.length,   /* GB-94 */ grantHaul, claimHollowHere, markHollowPassage: (b) => { markHollowPassage(b); return passageMark; },   /* CU-80, CU-72 */ hqLadderAt, stepHqLadder, onHqRoof: () => onHqRoof,   /* CL-99 */ pitSignal, setPitWord, setPitSilenced, updatePitSignal, setOnTowerDeckDbg: (v) => { onTowerDeck = !!v; }, /* CL-107 */ firstPeople, updateFirstPeople, caveSealSolids, /* CL-112 */ buildHeart, HEART, /* CL-81 */ letGoDbg, /* CL-116 */ lightPoolDbg: { pool: () => ensureLightPool(), update: () => updateLightPool() }, /* CL-115 */ trainingDbg: { round: (p) => trainingRound(p),   /* GB-163: a round by hand (shots, tests) */ start: () => startTraining(), enter: () => enterTraining(), leave: () => leaveTraining(), state: () => training, tg: () => training.tg,
+          launcherBrassDbg: () => ({ thrown: launcherBrassThrown, spent: launcherSpent }),   /* GB-133 */ dismemberDbg: (z, part) => detachZombiePart(z, part, 0, 1), MAIMED_HOP_MUL, cloneLean,   /* CL-136 */ slowMoDbg, triggerSlowMo, diveDbg: () => ({ phase: dive.phase, w: dive.w, k: diveTimeScale(dive), meter: dive.meter, cd: dive.cd, slowT: dive.slowT, slowing: slowmoOn(dive), vx: dive.vx, vz: dive.vz, dirX: dive.dirX, dirZ: dive.dirZ, dives: dive.dives, flat: diveFlatW,pose:divePoseFrame,contact:dive.contact }), setDiveMeterDbg: (v) => { dive.meter = Math.max(0, Math.min(1, +v || 0)); }, DIVE,   /* CL-193 */ selectorFlick,   /* GB-167 */   /* CL-137 */ trainingHideWorld, getHidWorld: () => training.hidWorld,   /* CL-138 */ profDbg: PROF, rotateCamera, cullDbg: cullStats, cullShowAll, zombiePoolDbg: () => Object.fromEntries([...zombiePool].map(([k, v]) => [k, v.length])), sunShadowDbg: () => ({ ...sunShadowStats, deep: sunShadowDeep, tick: sunShadowTick, every: SUN_SHADOW_DEEP_EVERY, move: SUN_SHADOW_DEEP_MOVE }),   /* CL-237 */ zombieHitNightMul,   /* CL-244 */ marineShadowDbg: (full) => ({ builds: marineShadowBuilds, lastDiff: marineShadowDiff, proxy: marineShadowProxy, ms: marineShadowMs, sig: marineShadowSig, bones: marineShadowProxy ? marineShadowProxy.skeleton.bones.length : 0, verts: marineShadowProxy ? marineShadowProxy.geometry.attributes.position.count : 0, warm: marineShadowWarm, retired: marineShadowRetired.length, drawnAt: marineShadowProxy ? marineShadowProxy.userData.drawnAt : null, seen: marineShadowSeen, seenAt: marineShadowSeenAt, builtAt: marineShadowBuiltAt, frame: perfFrame, now: full ? marineShadowNow() : undefined }),   /* CL-241: warm..frame, now */ skinMergeGroup, skinUnmerge,   /* CL-140 */   /* GB-136 */ grenadeArcDbg: () => ({ charging: grenadeCharging, t: grenadeChargeT, visible: grenadeArc.visible, hit: grenadeArc.userData.hit, dots: grenadeArc.userData.dots, launcher: launcherArc.visible, lhit: launcherArc.userData.hit, lstate: launcherArc.userData.state, last: lastGrenadeThrow, n: grenades, cd: grenadeCd }), startGrenadeCharge, releaseGrenadeCharge, GRENADE_THROW, grenadeThrowSpeed, flyArc,   /* GB-134 */ grenadeAnimDbg: () => ({ phase: grenadeAnim.phase, t: grenadeAnim.t, inHand: grenadeAnim.inHand, queued: grenadeAnim.queued, hand: grenadeHand, carriedShown: grenadeInHandN, simple: !!grenadeArc.userData.simple, segs: grenadeArc.userData.segs, release: grenadeReleasePoint().clone(), anim: GRENADE_ANIM, keys: GR_KEY }), holdGrenadeAnim: (phase, t) => { grenadeAnimHold = phase ? { phase, t: t || 0 } : null; if (!phase) { grenadeAnim.phase = ''; setGrenadeInHand(false); } }, setGrenadesDbg: (n) => { grenades = n | 0; updateAmmoHud(); updateCarriedGear(0, true); },   /* CU-97 */ m240Dbg: () => { const b = mortarMounted && mortarMounted.type === 'm240' ? mortarMounted : null; return { belt: b ? b.belt : null, feedT: b ? (b.feedT || 0) : 0, reserve: reserveAmmo['7.62 belt'] | 0, flash: !!(b && b.mesh.userData.flash && b.mesh.userData.flash.visible), hud: ammoDetailEl ? ammoDetailEl.textContent : '', hudName: ammoWeaponEl ? ammoWeaponEl.textContent : '' }; }, watchmanDbg: () => ({state:mortarMounted?.watchman || null,weight:_watchman.weight,ghost:ghostGroup}), crewDbg: () => ({ mortar: { w: _mcrew.w, phase: _mcrew.load.phase, roundIn: _mcrew.load.round, dropping: _mcrew.load.dropping, dropT: _mcrew.load.dropT, fired: _mcrew.load.fired, round: _mcrew.round, muzzle: _mcrew.muzzle, axis: _mcrew.axis, feet: _mcrew.plant.feet, steps: _mcrew.plant.steps }, m240: { feet: _watchman.plant.feet, steps: _watchman.plant.steps } }),   /* GB-156 */ feedM240, m240MuzzleWorld, M240_FEED_S, stockedLooseCalibers, aimPointDbg: (x, y, z) => { aimTarget.set(x, y, z); }, upgradeAvailableHint, getUpgradeAvailHint: () => upgradeAvailHint, tipOnce, tipsDbg: () => ({ seen: Object.assign({}, tipsSeen || {}), reset: () => { tipsSeen = {}; try { localStorage.removeItem(TIP_STORE); } catch (e) {} } }), placeBannerText: () => placeBannerEl.textContent, bigBannerText: () => bigBannerT.textContent + ' | ' + bigBannerS.textContent,   /* GB-139 */ m240VisDbg: () => ({ carried: carriedM240Mesh.visible, carriedMortar: carriedMortarMesh.visible, carriedGun: carriedM240Mesh, spent: { ...m240Spent }, casings: casings.length, pitchTo: m240PitchTo, muzzle: m240MuzzleWorld, CARRY_M240, CARRY_ARM, ELEV: [M240_ELEV_MIN, M240_ELEV_MAX], setDown: setDownMortar, casingsList: casings }),   /* CL-131 */ brandtGunDbg: () => { const r = roofCrew.find((c) => c.who === 'brandt'); return r && r.gun ? { gun: r.gun, flashed: !!r.gun.userData.flash, shots: r.shots } : null; },   /* GB-138 */ getSimTime: () => simTime,   /* GB-131 */ getDebugTouched: () => debugTouched, resetGame, ensureCrew,   /* CL-105 */ makeMarine,   /* CL-94 */ carryDbg, carryPreview, updateCarriedGear, CARRY_SLOTS, drawDbg, updateMarineDraw, drawPreview,   /* CL-90 */ dressMarine, DRESS, getMarine: () => marine, dressGuns, getGunFurniture: () => gunFurniture,   /* CL-97 */ buildWarren, layoutWarren, WARREN_THEMES, HOLLOW, enterHollow, leaveHollow, hollowState: () => hollow.state(), belowDbg,   /* GB-107 */ stirDbg,   /* GB-108 */ heartDbg,   /* GB-92 */ runePistolDbg,   /* GB-119 */ hordeDbg,   /* GB-94 */ getMedDropCount: () => medDrops.length,   /* GB-94 */ grantHaul, claimHollowHere, markHollowPassage: (b) => { markHollowPassage(b); return passageMark; },   /* CU-80, CU-72 */ hqLadderAt, stepHqLadder, onHqRoof: () => onHqRoof,   /* CL-99 */ pitSignal, setPitWord, setPitSilenced, updatePitSignal, setOnTowerDeckDbg: (v) => { onTowerDeck = !!v; }, /* CL-107 */ firstPeople, updateFirstPeople, caveSealSolids, /* CL-112 */ buildHeart, HEART, /* CL-81 */ letGoDbg, /* CL-116 */ lightPoolDbg: { pool: () => ensureLightPool(), update: () => updateLightPool() }, /* CL-115 */ trainingDbg: { round: (p) => trainingRound(p),   /* GB-163: a round by hand (shots, tests) */ start: () => startTraining(), enter: () => enterTraining(), leave: () => leaveTraining(), state: () => training, tg: () => training.tg,
             action: () => trainingActionTarget(), spawn: (k, n) => trainingSpawn(k, n), clear: () => trainingClear(), layout: () => trainingLayout(), clearLayout: () => trainingLayoutClear(), layoutPieces: () => training.layout || [], layoutRefused: () => training.layoutRefused || [], alive: () => trainingAlive(), blackout: () => trainingBlackout(), hitTarget: (i, pt) => trainingHitTarget(i, pt, !!pt), deployNow: (k, n) => trainingDeployNow(k, n), tunnel: () => training.tunnel, pops: () => training.pops, clearSkulls: () => trainingClearSkulls(),   /* CL-171 */
             update: (dt) => updateTraining(dt), panel: () => (ensureTrainingUi(), training.panel), openPanel: () => openTrainingPanel(), round: (p) => trainingRound(p), TRAINING,
             lights: () => ({ on: !training.lightsOff, night: isNight, room: training.tg ? training.tg.lightsOn() : null }), toggleLights: () => toggleTrainingLights() /* CU-94 */ }, /* CL-114 */ stockNoticeDbg: { arrivals: (n) => stockArrivals(n), queue: (n) => queueStockNotice(n), state: () => ({ t: stockNotice.t, hold: stockNotice.hold, guns: stockNotice.guns.slice(), shown: stockNotice.shown.slice(), visible: !!(stockNotice.el && stockNotice.el.classList.contains('show')) }), tick: (dt) => updateStockNotice(dt), show: (guns) => showStockNotice(guns), setDay: (n) => { day = n; }, NIGHT: GUN_STOCK_NIGHT }, armoryFinishDbg: { list: (k) => armoryFinishes(k), paint: (k, key) => paintArmoryGun(k, key) }, /* CL-113 */ armoryDbg: { mods: (w) => armoryMods(w), fit: (w, id, on) => fitArmoryMod(w, id, on), inReach: () => weaponsInReach(), picture: (k) => armoryPicture(k), pics: () => ({ drawn: armoryPics.drawn, cached: armoryPics.cache.size, ok: !!armoryPics.r }), rack: () => (house.armoryRack ? house.armoryRack.children.map((g) => g.userData.rackKind).filter(Boolean) : null), refreshRack: () => refreshArmoryRack(true), stored: () => armoryStoredKinds(), bigtex: () => bigtexWheel, ui: () => armoryUI, owned: () => ({ suppressor: { ...suppressorOwned }, auto: pistolAutoOwned, tank: sawTankUpgraded }) }, /* CL-83 */ nightRimDbg, /* CL-108, CL-109 */ historyProps, storyPropInReach, /* CL-111 */ runeFinishDbg: { unlocked: () => runeFinishUnlocked(), unlock: () => unlockRuneFinish(), lock: () => { runeFinish.unlocked = false; try { localStorage.removeItem(RUNE_FINISH_STORE); } catch (_) {} }, isGunFinishKey: (k) => isGunFinishKey(k), tex: () => runeFinish.tex, glow: (l) => updateRuneFinishGlow(l), state: () => runeFinish, furniture: () => gunFurniture, readWardrobe: () => readWardrobe(), KEY: RUNE_FINISH_KEY }, /* CL-78 */ guardianBossDbg: { rigOf: (z) => (z && z.mesh && z.mesh.userData.bossRig) || null, update: (dt) => updateGuardianBossRigs(dt), BOSS_RIG }, /* CL-93 */ rabbitDbg: { ensure: () => ensureRabbitMound(), state: () => rabbitMound, update: (dt) => updateRabbitMound(dt), wake: () => wakeKillerRabbit(), hit: (a, b) => rabbitMoundHit(a.x, a.y, a.z, b.x, b.y, b.z), give: () => { ensureRabbitMound(); rabbitMound.holy = true; rabbitMound.reliquary.userData.grenade.visible = false; }, ready: () => holyGrenadeReady(), throwG: () => { grenadeCd = 0; throwGrenade(); }, reset: () => resetRabbitMound(), distToPath: (x, z) => distToPath(x, z), RABBIT }, /* CL-92 */ lightningDbg: { strike: (k) => strikeLightning(k || null), update: (dt) => updateLightning(dt), state: () => lightning, odds: (o) => { lightning.odds = o || null; }, boots: () => ensureInsulatedBoots(), wear: (p) => wearInsulatedBoots(p || localPlayer), /* CL-178 */ mast: () => ({ ladder: mastLadder(), climb: mastClimb, high: onMastHigh(), perch: POI.mast ? POI.mast.perch : null, PERCH: MAST_PERCH }), climbMast: (y) => { const L = mastLadder(); if (!L) return false; mastClimb.on = true; climbingTower = true; player.position.set(L.x, Math.min(L.top, L.foot + (y || 0)), L.z); velX = 0; velZ = 0; vy = 0; return true; }, leaveMast: () => letGoOfMast(), /* CL-179 */ fall: () => mastFall, smoke: () => zapSmoke, ladderNow: () => ladderNow(), holster: () => ({ ...ladderHolster, unarmed }), /* CL-180 */ limbs: () => _lad.st, LADDER_GRIP, worn: (p) => insulatedBootsOn(p || localPlayer), reset: () => resetLightning(), marine: () => worldMarine, bolt: (x, z, hold) => { showBolt({ x, y: sampleHeight(x, z), z }); if (hold) { lightning.boltT = 1e9; lightning.flashT = 0; lightning.flashEl.style.opacity = '0'; } }, LIGHTNING, BOOTS_HEX }, /* CL-76 */ fogNightDbg: { active: () => fogNightActive(), k: () => fogNightK, force: (v) => { fogNightForce = v; }, step: (dt) => updateDayNight(dt), apply: (dt) => applyFogNight(dt), FOG_NIGHT }, /* CL-75 */ makeSurvivorFigure, SURVIVOR_LOOK, resolveTreeCollisionsDbg: (dt) => resolveTreeCollisions(dt),   /* CL-80 */ boatRig, getExtractionBoat: () => extractionBoat, /* CL-143 */ trainingBuildDbg: { refusal: (x, z, gx, gz, kind) => { const was = placeMode; if (kind) placeMode = kind; try { return placeRefusal(x, z, gx, gz); } finally { placeMode = was; } }, area: () => training.tg && training.tg.build, gridIndex }, /* CL-142 */ makeCargoPlane, insertionDbg: { begin: () => beginMarineInsertion(), rig: () => marineInsertion, ordersEl: () => ordersCardEl }, BOARD_HOLD_S, boardingDbg: () => ({ holdT: boardHoldT, pending: !!boardPending, reach: boardingReach(), won, gameOver, hot: !!matchStats.hotExtraction, state: extractionState }),   /* CL-73 */ setGunSuppressor, SUPPRESSOR,   /* CL-95 */

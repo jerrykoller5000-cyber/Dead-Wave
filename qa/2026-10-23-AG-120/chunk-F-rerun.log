@@ -1,0 +1,18 @@
+# AG-120 chunk F rerun: tinspect t277
+# Started: 2026-10-24T01:16:47.698Z
+
+GRANT antigravity AG-120: starting one game-test command
+check-players: 303 player.position reads, all in the allowed places
+FAIL  tinspect  21 pass   1 fail  95.5s
+FAIL  t277     0 pass   1 fail  38.9s
+
+2 checks: 21 pass, 2 fail
+
+by owner:
+  unassigned
+    tinspect 1 fail  FAIL a dive move dives (idle)
+           FAIL a dive move dives (idle)
+    t277   1 fail  FAIL threw: TypeError: (intermediate value).setFromPoints is not a function
+           FAIL threw: TypeError: (intermediate value).setFromPoints is not a function
+
+# Finished: 2026-10-24T01:19:03.400Z code=1

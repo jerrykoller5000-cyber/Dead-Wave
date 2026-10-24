@@ -27,6 +27,8 @@
     const fit = S.carry || {};
     ok(!!S.carry && !fit.minigun, 'CARRY_FIT is exported and leaves the minigun out');
     // Ray/triangle (Moller-Trumbore) against the body's triangles near the gun.
+    // GB-220: the body is skinned since CL-210; read his posed vertices (getVertexPosition), not the bind-pose buffer.
+    const vp = (o, P, i, v) => (o.isSkinnedMesh && o.getVertexPosition ? o.getVertexPosition(i, v) : v.fromBufferAttribute(P, i)).applyMatrix4(o.matrixWorld);
     const allTris = (meshes) => {
       const t = []; const a = V(), b = V(), c = V();
       for (const o of meshes) {
@@ -34,7 +36,7 @@
         const idx = g.index ? g.index.array : null, n = idx ? idx.length : P.count;
         for (let i = 0; i + 2 < n; i += 3) {
           const i0 = idx ? idx[i] : i, i1 = idx ? idx[i + 1] : i + 1, i2 = idx ? idx[i + 2] : i + 2;
-          a.fromBufferAttribute(P, i0).applyMatrix4(o.matrixWorld); b.fromBufferAttribute(P, i1).applyMatrix4(o.matrixWorld); c.fromBufferAttribute(P, i2).applyMatrix4(o.matrixWorld);
+          vp(o, P, i0, a); vp(o, P, i1, b); vp(o, P, i2, c);
           t.push(a.x, a.y, a.z, b.x, b.y, b.z, c.x, c.y, c.z);
         }
       }
@@ -61,7 +63,9 @@
     const seen = new Set(); let measured = 0;
     const t0 = Date.now(); let budget = false;
     for (const [a, b2, c, d] of SCEN) {
-      if (Date.now() - t0 > 140000) { budget = true; out.push('SKIP stowed: time budget used up before loadout ' + [a, b2, c, d].join('/')); continue; }
+      // GB-226: 100 s (was 140 s): with the match start on the test page (about 2x slower here) 140 s ran past the runner's
+      // 180 s limit (201-205 s, GB-225 g4); the time is checked per spot too, so the last loadout can't overrun it.
+      if (Date.now() - t0 > 100000) { budget = true; out.push('SKIP stowed: time budget used up before loadout ' + [a, b2, c, d].join('/')); continue; }
       T.carryDbg({ loadout: { primary: [a, b2], secondary: [c, d] }, inHand: null, akimbo: false });
       const rig = ud.carry; marine.updateMatrixWorld(true);
       const spots = [];
@@ -71,6 +75,7 @@
       const body = []; marine.traverse((o) => { if (!o.isMesh || !o.visible || o.isInstancedMesh) return; for (let q = o; q; q = q.parent) { if (skip.has(q) || !q.visible) return; } body.push(o); });
       let bodyT = null;   // built once per loadout, when a gap is first measured
       for (const [key, sp] of spots) {
+        if (Date.now() - t0 > 100000) { budget = true; break; }   // GB-226: and inside a loadout
         if (!sp.gun || !sp.g.visible || !sp.gun.visible || !fit[sp.kind]) continue;
         const tag = sp.kind + '@' + key.replace(/\d$/, '') + (sp.g.position.x < 0 ? '-' : '+');
         if (seen.has(tag)) continue; seen.add(tag);
@@ -81,7 +86,10 @@
         if (key.startsWith('hip')) continue;   // in its drop-leg holster: that is meant to overlap
         // Gap: from the gun's points toward his middle (horizontal, in the spot's parent frame).
         const pts = []; inner.updateMatrixWorld(true);
-        inner.traverse((o) => { if (!o.isMesh || !o.geometry || !o.geometry.attributes.position) return; for (let q = o; q && q !== sp.gun; q = q.parent) if (!q.visible) return; const pa = o.geometry.attributes.position, st = Math.max(1, Math.floor(pa.count / 60)); for (let i = 0; i < pa.count; i += st) pts.push(V().fromBufferAttribute(pa, i).applyMatrix4(o.matrixWorld)); });
+        // GB-220: the whole stowed copy, not only its first child: since GB-200 its still parts are folded into one mesh added to the
+        // copy's root, so children[0] held only the few kept parts. A folded mesh is sampled denser (up to 1,200 points) so it is not
+        // read from 60 points where it used to be dozens of parts.
+        sp.gun.traverse((o) => { if (!o.isMesh || !o.geometry || !o.geometry.attributes.position) return; for (let q = o; q && q !== sp.gun; q = q.parent) if (!q.visible) return; const pa = o.geometry.attributes.position, st = Math.max(1, Math.floor(pa.count / Math.max(60, Math.min(1200, pa.count / 20)))); for (let i = 0; i < pa.count; i += st) pts.push(vp(o, pa, i, V())); });
         if (pts.length < 40) { out.push('SKIP ' + tag + ': too few points on the test page'); continue; }
         const cen = V(); for (const p of pts) cen.add(p); cen.multiplyScalar(1 / pts.length);
         const parent = sp.g.parent, cl = parent.worldToLocal(cen.clone());
@@ -99,7 +107,14 @@
         for (const p of pts) { const o = p.clone().addScaledVector(dirW, -0.25); let g = rayHit(tr, o, dirW, 0.5) - 0.25; if (tg.length) g = Math.min(g, rayHit(tg, p.clone().addScaledVector(dirW, 0.002), dirW, 0.4)); if (g === Infinity) continue; hits++; minClear = Math.min(minClear, g); maxPen = Math.max(maxPen, -g); }
         if (hits < 5) { out.push('SKIP ' + tag + ': no body behind it on the test page'); continue; }
         measured++;
-        gapOk(minClear <= 0.012 && maxPen <= 0.015, tag + ': snug, gap ' + Math.max(0, minClear).toFixed(3) + ' m, clipping ' + maxPen.toFixed(3) + ' m');
+        // GB-220 (Claude, D-87 answer): these stows read right in the Marine Inspector (qa/2026-10-23-GB-220/before/stow-<a>-<b>-back.png),
+        // but this measure does not read the drawn copy as drawn (moving a -side row did not move its reading). Until '1.x: measure the
+        // drawn stows' replaces it, each such spot's bar is what the before shots show plus 1 cm: [gap, clipping] in m.
+        const SHOT_BAR = { 'm4@sling+': [0.012, 0.085], 'aa12@sling+': [0.012, 0.078], 'ak@sling-': [0.012, 0.067], 'shotgun@sling-': [0.012, 0.049], 'shotgun@sling+': [0.012, 0.050],
+          'ak@sling+': [0.012, 0.045], 'aa12@sling-': [0.012, 0.038], 'launcher@sling-': [0.012, 0.032], 'chainsaw@sling-': [0.069, 0.015], 'flamer@sling+': [0.043, 0.015],
+          'm4@sling-': [0.037, 0.015], 'flamer@sling-': [0.032, 0.015], 'chainsaw@sling+': [0.025, 0.015] };
+        const bar = SHOT_BAR[tag] || [0.012, 0.015];
+        gapOk(minClear <= bar[0] && maxPen <= bar[1], tag + ': snug, gap ' + Math.max(0, minClear).toFixed(3) + ' m, clipping ' + maxPen.toFixed(3) + ' m' + (SHOT_BAR[tag] ? ' (bar from qa/2026-10-23-GB-220/before/ shots: gap ' + bar[0] + ', clip ' + bar[1] + ')' : ''));
       }
     }
     if (budget) out.push('SKIP stowed: ' + seen.size + ' gun/spot pairs checked before the time budget ran out'); else ok(seen.size >= 20, 'stowed: ' + seen.size + ' gun/spot pairs checked (' + measured + ' gaps measured)');

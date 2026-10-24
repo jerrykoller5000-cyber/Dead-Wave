@@ -1,0 +1,26 @@
+# AG-120 chunk 0a rerun: t15
+# Started: 2026-10-23T21:05:36.708Z
+
+Game-test request 739fec17-b2f7-48b2-8e33-95d3548b441d queued at position 1. Waiting...
+GRANT antigravity AG-120: starting one game-test command
+check-players: 303 player.position reads, all in the allowed places
+ok    t15     10 pass   0 fail  93.3s
+
+1 checks: 10 pass, 0 fail
+node:fs:2427
+    return binding.writeFileUtf8(
+                   ^
+
+Error: UNKNOWN: unknown error, open 'C:\Users\Zero\Desktop\Tiny Trek\crew\tests.json'
+    at Object.writeFileSync (node:fs:2427:20)
+    at file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/tests/run-all.mjs:297:4
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5) {
+  errno: -4094,
+  code: 'UNKNOWN',
+  syscall: 'open',
+  path: 'C:\\Users\\Zero\\Desktop\\Tiny Trek\\crew\\tests.json'
+}
+
+Node.js v24.13.0
+
+# Finished: 2026-10-23T21:10:41.274Z code=1

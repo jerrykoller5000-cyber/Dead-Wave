@@ -1,0 +1,40 @@
+# AG-120 chunk R rerun: t188 t222 t228
+# Started: 2026-10-24T01:56:23.998Z
+
+GRANT antigravity AG-120: starting one game-test command
+FAIL  t188    116 pass   5 fail  68.4s  (real renderer)
+    FAIL flamer: firing hand on the grip anchor (0.345)
+    FAIL flamer: support hand on its anchor (0.732)
+    FAIL flamer: barrel on the reticle from the muzzle (55.09 deg)
+    FAIL chainsaw: firing hand on the grip anchor (0.201)
+    FAIL chainsaw: support hand on its anchor (0.310)
+ok    t222      9 pass   0 fail  146.1s  (real renderer)
+    INFO shambler  head: head 6 | chest: body 6 | legs: ground 1, legs 5
+    INFO feral     head: head 6 | chest: body 5, head 1 | legs: legs 5, body 1
+    INFO brute     head: head 6 | chest: body 5, head 1 | legs: legs 5, body 1
+    INFO spider    head: head 5, body 1 | chest: head 4, body 2 | legs: -
+    INFO leaper    head: head 6 | chest: body 4, head 2 | legs: -
+    INFO colossus at 90 deg 6 m: its head is covered by its own gear from the camera here (no head case)
+    INFO colossus at 90 deg 14 m: its head is covered by its own gear from the camera here (no head case)
+    INFO colossus  head: head 4 | chest: body 6 | legs: legs 5, body 1
+    INFO pistol 8 m 3 m/s +: hit, lead 0.31 m (pace x flight 0.32) at 0.60 of its height
+    INFO pistol 8 m 3 m/s -: hit, lead -0.32 m (pace x flight -0.32) at 0.64 of its height
+    INFO pistol 8 m 6 m/s +: hit, lead 0.57 m (pace x flight 0.59) at 0.58 of its height
+    INFO pistol 8 m 6 m/s -: hit, lead -0.48 m (pace x flight -0.59) at 0.64 of its height
+    INFO pistol 18 m 3 m/s +: hit, lead 0.70 m (pace x flight 0.71) at 0.62 of its height
+    INFO pistol 18 m 3 m/s -: hit, lead -0.69 m (pace x flight -0.71) at 0.59 of its height
+    INFO pistol 18 m 6 m/s +: hit, lead 1.31 m (pace x flight 1.39) at 0.62 of its height
+    INFO pistol 18 m 6 m/s -: hit, lead -1.36 m (pace x flight -1.39) at 0.59 of its height
+    INFO m4 8 m 3 m/s +: hit, lead 0.23 m (pace x flight 0.23) at 0.66 of its height
+    INFO m4 8 m 3 m/s -: hit, lead -0.22 m (pace x flight -0.23) at 0.60 of its height
+    INFO m4 8 m 6 m/s +: hit, lead 0.38 m (pace x flight 0.42) at 0.59 of its height
+    INFO m4 8 m 6 m/s -: hit, lead -0.39 m (pace x flight -0.42) at 0.59 of its height
+    INFO m4 18 m 3 m/s +: hit, lead 0.47 m (pace x flight 0.52) at 0.58 of its height
+    INFO m4 18 m 3 m/s -: hit, lead -0.52 m (pace x flight -0.52) at 0.58 of its height
+    INFO m4 18 m 6 m/s +: hit, lead 1.00 m (pace x flight 1.02) at 0.58 of its height
+    INFO m4 18 m 6 m/s -: hit, lead -0.99 m (pace x flight -1.02) at 0.59 of its height
+    INFO launcher 12 m 6 m/s +: miss, lead -0.03 m (pace x flight 2.10)
+ok    t228     95 pass   0 fail  98.7s  (real renderer)
+3 checks: 220 pass, 5 fail (real renderer)
+
+# Finished: 2026-10-24T02:01:38.400Z code=0

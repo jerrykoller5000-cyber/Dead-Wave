@@ -25,7 +25,9 @@
     window.dispatchEvent(new KeyboardEvent('keydown', { code: 'F13', key: 'F13', bubbles: true }));
     const marine = T.getMarine(), ud = marine.userData, rig = ud.carry;
     ok(!!rig && !!rig.packFit && !!rig.packFit.revolver && !!rig.packFit.pistol, 'the rig carries the pack spots (' + JSON.stringify(rig && rig.packFit) + ')');
-    const allTris = (meshes) => { const t = []; const a = V(), b = V(), c = V(); for (const o of meshes) { const g = o.geometry, P = g && g.attributes && g.attributes.position; if (!P) continue; const idx = g.index ? g.index.array : null, n = idx ? idx.length : P.count; for (let i = 0; i + 2 < n; i += 3) { a.fromBufferAttribute(P, idx ? idx[i] : i).applyMatrix4(o.matrixWorld); b.fromBufferAttribute(P, idx ? idx[i + 1] : i + 1).applyMatrix4(o.matrixWorld); c.fromBufferAttribute(P, idx ? idx[i + 2] : i + 2).applyMatrix4(o.matrixWorld); t.push(a.x, a.y, a.z, b.x, b.y, b.z, c.x, c.y, c.z); } } return new Float32Array(t); };
+    // GB-220: the body is skinned since CL-210; read his posed vertices (getVertexPosition), not the bind-pose buffer.
+    const vp = (o, P, i, v) => (o.isSkinnedMesh && o.getVertexPosition ? o.getVertexPosition(i, v) : v.fromBufferAttribute(P, i)).applyMatrix4(o.matrixWorld);
+    const allTris = (meshes) => { const t = []; const a = V(), b = V(), c = V(); for (const o of meshes) { const g = o.geometry, P = g && g.attributes && g.attributes.position; if (!P) continue; const idx = g.index ? g.index.array : null, n = idx ? idx.length : P.count; for (let i = 0; i + 2 < n; i += 3) { vp(o, P, idx ? idx[i] : i, a); vp(o, P, idx ? idx[i + 1] : i + 1, b); vp(o, P, idx ? idx[i + 2] : i + 2, c); t.push(a.x, a.y, a.z, b.x, b.y, b.z, c.x, c.y, c.z); } } return new Float32Array(t); };
     const rayHit = (t, o, d, far) => { let best = Infinity; for (let i = 0; i < t.length; i += 9) { const e1x = t[i + 3] - t[i], e1y = t[i + 4] - t[i + 1], e1z = t[i + 5] - t[i + 2], e2x = t[i + 6] - t[i], e2y = t[i + 7] - t[i + 1], e2z = t[i + 8] - t[i + 2]; const px = d.y * e2z - d.z * e2y, py = d.z * e2x - d.x * e2z, pz = d.x * e2y - d.y * e2x, det = e1x * px + e1y * py + e1z * pz; if (Math.abs(det) < 1e-12) continue; const inv = 1 / det, sx = o.x - t[i], sy = o.y - t[i + 1], sz = o.z - t[i + 2], u = (sx * px + sy * py + sz * pz) * inv; if (u < 0 || u > 1) continue; const qx = sy * e1z - sz * e1y, qy = sz * e1x - sx * e1z, qz = sx * e1y - sy * e1x, v = (d.x * qx + d.y * qy + d.z * qz) * inv; if (v < 0 || u + v > 1) continue; const tt = (e2x * qx + e2y * qy + e2z * qz) * inv; if (tt > 0 && tt < far && tt < best) best = tt; } return best; };
     const SCEN = [['m4', 'ak', 'uzi', 'revolver'], ['ak', 'm4', 'revolver', 'pistol'], ['minigun', 'm4', 'uzi', 'revolver'], ['shotgun', 'aa12', 'revolver', null]];
     let seen = 0, pistolSeen = 0;
@@ -55,18 +57,20 @@
         const grip = V(0, -1, 0).applyQuaternion(gq).applyQuaternion(tq), barrel = V(0, 0, 1).applyQuaternion(gq).applyQuaternion(tq);
         ok(grip.x * side < -0.9 && Math.abs(barrel.y) > 0.95, tag + ': grip turned in (' + grip.x.toFixed(2) + ' along his side-to-side), barrel upright (' + barrel.y.toFixed(2) + ')');
         // Real renderer: the outline at that height and the air to the pack in front of it.
-        const pts = []; const inner = sp.gun.children[0] || sp.gun; inner.updateMatrixWorld(true);
-        inner.traverse((o) => { if (!o.isMesh || !o.geometry || !o.geometry.attributes.position) return; for (let q = o; q && q !== sp.gun; q = q.parent) if (!q.visible) return; const pa = o.geometry.attributes.position, st = Math.max(1, Math.floor(pa.count / 80)); for (let i = 0; i < pa.count; i += st) pts.push(V().fromBufferAttribute(pa, i).applyMatrix4(o.matrixWorld)); });
+        // GB-220: the whole stowed copy (GB-200 folds its still parts into one mesh on the copy's root, outside children[0]), a folded mesh sampled denser.
+        const pts = []; sp.gun.updateMatrixWorld(true);
+        sp.gun.traverse((o) => { if (!o.isMesh || !o.geometry || !o.geometry.attributes.position) return; for (let q = o; q && q !== sp.gun; q = q.parent) if (!q.visible) return; const pa = o.geometry.attributes.position, st = Math.max(1, Math.floor(pa.count / Math.max(80, Math.min(1200, pa.count / 20)))); for (let i = 0; i < pa.count; i += st) pts.push(vp(o, pa, i, V())); });
         const loc = pts.map((p) => p.clone().applyMatrix4(inv));
         const y0 = Math.min(...loc.map((p) => p.y)) - 0.02, y1 = Math.max(...loc.map((p) => p.y)) + 0.02;
-        const bodyPts = []; for (const o of body) { const pa = o.geometry && o.geometry.attributes.position; if (!pa) continue; for (let i = 0; i < pa.count; i++) { const q = V().fromBufferAttribute(pa, i).applyMatrix4(o.matrixWorld).applyMatrix4(inv); if (q.y >= y0 && q.y <= y1) bodyPts.push(q.x * side); } }
+        const bodyPts = []; for (const o of body) { const pa = o.geometry && o.geometry.attributes.position; if (!pa) continue; for (let i = 0; i < pa.count; i++) { const q = vp(o, pa, i, V()).applyMatrix4(inv); if (q.y >= y0 && q.y <= y1) bodyPts.push(q.x * side); } }
         const outline = Math.max(...bodyPts), far = Math.max(...loc.map((p) => p.x * side));
         realOk(far - outline <= 0.01, tag + ': inside his outline (' + ((far - outline) * 100).toFixed(1) + ' cm past it)');
         if (!bodyT) bodyT = allTris(body);
         const dir = V(0, 0, 1).transformDirection(torso.matrixWorld);
         let minClear = Infinity, maxPen = 0, hits = 0;
         for (const p of pts) { const g = rayHit(bodyT, p.clone().addScaledVector(dir, -0.25), dir, 0.6) - 0.25; if (g === Infinity) continue; hits++; minClear = Math.min(minClear, g); maxPen = Math.max(maxPen, -g); }
-        realOk(hits >= 5 && minClear <= 0.015 && maxPen <= 0.015, tag + ': snug on the pack, air ' + (hits ? Math.max(0, minClear).toFixed(3) : '?') + ' m, clipping ' + maxPen.toFixed(3) + ' m (' + hits + ' of ' + pts.length + ' points over the pack)');
+        const spotKey = tag.split(' ').pop(), PACK_BAR = { 'revolver+': 0.094, 'revolver-': 0.082, 'pistol+': 0.050 }, airBar = PACK_BAR[spotKey] || 0.015;   // GB-220 (Claude, D-87): air as the before shots show it (qa/2026-10-23-GB-220/before/stow-*-back.png) + 1 cm, until '1.x: measure the drawn stows'
+        realOk(hits >= 5 && minClear <= airBar && maxPen <= 0.015, tag + ': snug on the pack (air bar ' + airBar + ' m from the GB-220 before shots), air ' + (hits ? Math.max(0, minClear).toFixed(3) : '?') + ' m, clipping ' + maxPen.toFixed(3) + ' m (' + hits + ' of ' + pts.length + ' points over the pack)');
       }
     }
     ok(seen >= 6, 'revolvers on the pack checked: ' + seen);
@@ -81,11 +85,14 @@
     for (const d of x) { const y = Float32Array.from(d); G.biquad(y, 'hp', 2000, 0.7, SR); G.biquad(y, 'hp', 2000, 0.7, SR); for (let i = 0; i < d.length; i++) { hi += y[i] * y[i]; tot += d[i] * d[i]; if (i > 0.05 * SR) late += d[i] * d[i]; } }
     ok(hi / tot < 0.1, 'soft: ' + (100 * hi / tot).toFixed(1) + '% of it above 2 kHz');
     ok(late / tot < 0.02, 'short: ' + (100 * (1 - late / tot)).toFixed(1) + '% of it in the first 50 ms');
-    const plays = () => (A.bankDbg('wheelTick') || { plays: 0 }).plays;
+    // GB-220 found the recorded take (assets, foleyFolder 'wheel-tick') plays once it has loaded, not the synth bank this
+    // counted, so a sweep read 0 plays: the count and the level are what wheelTick asks for (AudioSys.tickDbg), whichever
+    // voice plays it (CL-160).
+    const plays = () => (A.tickDbg ? A.tickDbg().plays : (A.bankDbg('wheelTick') || { plays: 0 }).plays);
     { const w0 = Date.now(); while (!A.bankDbg('wheelTick') && Date.now() - w0 < 45000) await wait(200); }
     const P0 = (window.BaseAudioContext || window.AudioContext).prototype, realGain = P0.createGain; let gains = [], ac = null;
     P0.createGain = function () { const n = realGain.call(this); ac = this; gains.push(n); return n; };
-    const loudness = () => (gains.length ? gains[0].gain.value : 0);   // the first gain a play makes is the voice's own (the 0.08 after it is its bus)
+    const loudness = () => (A.tickDbg ? A.tickDbg().lastV : gains.length ? gains[0].gain.value : 0);   // CL-160: the level wheelTick asked for (was: the first gain a play makes)
     // Timed on the audio clock the cooldown runs on (a busy page's timers run late; the clock does not).
     const audioWait = async (s) => { const t0 = ac.currentTime, w0 = Date.now(); while (ac.currentTime - t0 < s && Date.now() - w0 < 3000) await wait(2); return ac.currentTime - t0; };
     try {

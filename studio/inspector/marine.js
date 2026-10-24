@@ -2,7 +2,7 @@
 //
 // Nothing here poses him. A move is the input the player would give (a key pressed or held, the mouse button, the
 // right mouse button), sent to the game's own handlers, or the game's own debug hook where there is no key for it.
-// So a reload is the game's reload, a dive is the game's dive, at whatever speed the clock runs.
+// So a reload is the game's reload, V's slow time is the game's, at whatever speed the clock runs.
 //
 // Kit: weapon(key | 'none'), akimbo(key | null), blade('knife' | 'machete' | 'katana'), mods() / fit(id, on),
 //      gear(id, on) (helmet, vest, pads, nvg, laser, flashlight), wardrobe: camo(key), item(id, patch), body(patch),
@@ -51,10 +51,8 @@ export const MOVES = [
   { id: 'machete', cat: 'Combat', name: 'Machete', setup: (d) => d.blade('machete'), run: (d) => d.melee(), every: 1.4 },
   { id: 'katana', cat: 'Combat', name: 'Katana', setup: (d) => d.blade('katana'), run: (d) => d.melee(), every: 1.4 },
   { id: 'grenade', cat: 'Combat', name: 'Throw a grenade', run: (d) => d.grenade(0.4), every: 2.6, after: 0.3 },
-  { id: 'dive-forward', cat: 'Combat', name: 'Dive forward', run: (d) => d.dive('KeyW'), every: 3.6, after: 0.4 },
-  { id: 'dive-back', cat: 'Combat', name: 'Dive backward', run: (d) => d.dive('KeyS'), every: 3.6, after: 0.4 },
-  { id: 'dive-left', cat: 'Combat', name: 'Dive left', run: (d) => d.dive('KeyA'), every: 3.6, after: 0.4 },
-  { id: 'dive-right', cat: 'Combat', name: 'Dive right', run: (d) => d.dive('KeyD'), every: 3.6, after: 0.4 },
+  // CL-252: D-87 took the dive out (CL-248); V slows time with him on his feet, so the four dive moves are this one.
+  { id: 'slow-time', cat: 'Combat', name: 'Slow time (V)', setup: (d) => d.weapon(d.gunOr('m4')), run: (d) => d.slowTime(), every: 4.2, after: 0.4 },
   { id: 'vault', cat: 'Combat', name: 'Vault a sandbag wall', run: (d) => d.vault(), stop: (d) => d.clearProps(), every: 3, after: 0.3 },
   { id: 'draw', cat: 'Combat', name: 'Draw and holster', setup: (d) => d.weapon(d.gunOr('m4')), run: (d) => d.press('Digit4'), every: 1.8 },
   { id: 'medpen', cat: 'Combat', name: 'Med pen', run: (d) => d.medpen(), every: 3.2 },
@@ -189,9 +187,9 @@ export function createMarineDesk(ix) {
   }
   function melee() { if (T.setKnifeCd) T.setKnifeCd(0); press('KeyF'); }
   async function grenade(hold = 0.4) { if (host.state().akimbo) akimbo(null); if (T.setGrenadesDbg) T.setGrenadesDbg(6); holdKey('KeyG', true); await wait(hold); holdKey('KeyG', false); }
-  async function dive(dirKey = 'KeyW') {
+  function slowTime() {   // CL-252: V, as the game has it since CL-248 (a full meter first)
     if (T.setDiveMeterDbg) T.setDiveMeterDbg(1);
-    holdKey(dirKey, true); await wait(0.05); press('KeyV'); await wait(0.3); holdKey(dirKey, false);
+    press('KeyV');
   }
   function jump() { return T.airDbg ? T.airDbg.jumpNow() : (press('Space'), true); }
   function turn(deg) { T.setAimYawDbg((T.player.rotation.y || 0) + deg * DEG); }
@@ -277,7 +275,7 @@ export function createMarineDesk(ix) {
   // --- playing a move -------------------------------------------------------------------------------------------
   const desk = {
     weapon, akimbo, blade, mods, fit, gear, nvg, camo, item, body, insulated, finish, finishes, preset, gunOr, current, unarmed,
-    reload, fire, melee, grenade, dive, jump, turn, aim, vault, mount, carry, medpen, smoke, knockout, endKnockout, clearProps,
+    reload, fire, melee, grenade, slowTime, jump, turn, aim, vault, mount, carry, medpen, smoke, knockout, endKnockout, clearProps,
     press, holdKey, wait, home,
     MOVES, MOVE_CATS, PRESETS, GEAR_IDS, GUN_NAME
   };

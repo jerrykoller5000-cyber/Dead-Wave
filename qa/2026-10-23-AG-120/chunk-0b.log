@@ -1,0 +1,48 @@
+# AG-120 chunk 0b: tfish t34 t35 t36 t37 t38 t39 t40 t41 t42 t43 t44 t45 t46 t47 t48 t49 t50 t51 t52 t53 t54 t55 t56 t57 t58 t59 t60 t61 t62 t63 t64 t65 t66 t67
+# Started: 2026-10-23T21:10:41.414Z
+# GB-223 file snapshot: {"t187":{"bytes":11361,"mtime":"2026-10-18T23:55:15.781Z","sha1":"0711ee8b27","head":"// t187 - GB-129 (Jerry): shoulder-fired long guns are shouldered. | //  - m4, ak, aa12, shotgun, sniper, launcher: the butt sits in the gun-side shoulder pocket (inside the | //    shoulder joint, in front of it), the firing hand is on the pistol grip and the support hand on the"},"t188":{"bytes":12667,"mtime":"2026-10-23T20:31:29.776Z","sha1":"0c039fa638","head":"// t188 - GB-130 (Jerry): every player gun at its real size for the marine, and the hands on explicit anchors. | //  - Size: TT.getWeaponSizeDbg() (MARINE_UPM = 1.655 units / 1.80 m). m = the real overall length of the gun's | //    class (in its range); look = the by-eye factor against the Uzi (Uzi 1.0, others 1-1.6). Each gun's measured"},"t189":{"bytes":11757,"mtime":"2026-10-23T20:09:38.689Z","sha1":"70e4709183","head":"// t189 - GB-130 (Jerry): the stowed guns (slings, pack holsters, the hip) at their real in-hand size and snug | // against him. For eight loadouts (every primary on both slings, the Uzi and the revolver on both pack sides, | // the hip pistol and its pair): each copy is its gun's in-hand size x CARRY_FIT s (s = 1: the same gun), and the"},"t195":{"bytes":8513,"mtime":"2026-10-23T20:16:00.655Z","sha1":"0cf5279ce1","head":"// t195 - CL-122 (GB-130, GP-128): the hands. | //  - The support anchor is inside the support arm's reach for every two-handed gun (the flamer's front grip was 2.6 cm | //    past it, the Uzi's 1.2): the gun slides toward that shoulder, and its barrel is still on the reticle."},"t222":{"bytes":20368,"mtime":"2026-10-20T21:39:16.058Z","sha1":"f4f5fe621a","head":"// t222 - CU-96 (Jerry): the aiming system. The cursor is put, through the real pointer and the real camera, on a still | // zombie's head, chest or legs (the head where its model's head really is), the game turns that into its aim, and the | // round is traced from the real muzzle along that aim against the zombie's hit column, as the bullets are: what it"},"t224":{"bytes":13447,"mtime":"2026-10-23T20:26:05.940Z","sha1":"4db396ed40","head":"// t224 - GB-148 (Jerry, 2026-10-09: \"Revolver sticks out too much from pack and is not tight when holstered. Also could | // you change the weapon wheel sound to something more pleasant?\"). | //  - The revolver's low pack holster sits in on the pack's lower corner (|x| <= 0.13 m, z >= -0.35 m in his torso's"},"t228":{"bytes":9637,"mtime":"2026-10-23T20:30:42.540Z","sha1":"1af8fe3147","head":"// t228 - CU-100 (Jerry, 2026-10-09: \"Player hand placements for weapons are not accurate. They need to be in the right | // spots for all weapons at all times.\"). The hold aimed the hand point (the face of the curled fingers) at each grip, | // so every grip and forend lay along the front of the fist; with no wrist, the support fist could not turn onto a"},"t229":{"bytes":13270,"mtime":"2026-10-23T20:30:42.540Z","sha1":"b58800b72e","head":"// t229 - GB-151 (Jerry, 2026-10-09 15:35 CT, with a photo of a 1911 held two-handed, thumbs forward: \"This picture shows | // what proper pistol grip looks like. Right now our player does not do that with the pistol or the revolver.\"). | // For the pistol and the revolver, single-wielded, standing, aiming level, a little up and a little down:"}}
+
+Game-test request fbdebd5b-0a75-4725-ad98-975ea2a01861 queued at position 1. Waiting...
+GRANT antigravity AG-120: starting one game-test command
+check-players: 303 player.position reads, all in the allowed places
+ok    tfish    7 pass   0 fail  23.5s
+ok    t34     20 pass   0 fail  58.1s
+ok    t35     28 pass   0 fail  70.7s
+ok    t36     22 pass   0 fail  70.2s
+ok    t37     17 pass   0 fail  161.1s
+ok    t38     12 pass   0 fail  75.6s
+ok    t39     15 pass   0 fail  39.4s
+ok    t40      6 pass   0 fail  48.3s
+ok    t41      9 pass   0 fail  42.0s
+           INFO root mesh 191.4 trees 192.2 hill 196.7 | shale mesh 201.3 trees 201.9 hill 210.0 | iron mesh 196.6 trees 194.2 hill 202.3 | wet mesh 199.8 trees 192.4 hill 205.0 | hill mesh 199.4 trees 197.8 hill 205.8 | chalk mesh 200.6 trees 200.0 hill 208.0
+ok    t42     18 pass   0 fail  25.1s
+ok    t43     35 pass   0 fail  41.5s
+ok    t44      6 pass   0 fail  23.8s
+ok    t45      8 pass   0 fail  23.8s
+ok    t46     11 pass   0 fail  24.7s
+ok    t47     17 pass   0 fail  23.4s
+ok    t48     22 pass   0 fail  40.4s
+ok    t49     32 pass   0 fail  41.2s
+ok    t50     18 pass   0 fail  24.9s
+ok    t51     19 pass   0 fail  40.9s
+ok    t52     17 pass   0 fail  23.2s
+ok    t53     76 pass   0 fail  52.0s
+ok    t54     32 pass   0 fail  39.7s
+ok    t55     10 pass   0 fail  43.5s
+ok    t56      1 pass   0 fail  23.3s
+ok    t57     10 pass   0 fail  23.3s
+ok    t58      9 pass   0 fail  48.9s
+ok    t59     48 pass   0 fail  68.9s
+ok    t60     42 pass   0 fail  67.9s
+ok    t61     22 pass   0 fail  56.5s
+ok    t62      4 pass   0 fail  40.7s
+ok    t63      6 pass   0 fail  42.2s
+ok    t64      8 pass   0 fail  45.3s
+ok    t65     12 pass   0 fail  50.3s
+           INFO largest height change across one puddle: 0.261 m
+ok    t66      4 pass   0 fail  47.7s
+ok    t67      9 pass   0 fail  68.7s
+
+35 checks: 632 pass, 0 fail
+
+# Finished: 2026-10-23T21:40:19.779Z code=0

@@ -104,7 +104,7 @@ node tools/camera.mjs shot zombie.brute:statue --view three --out review/my-task
 node tools/camera.mjs turnaround weapon.m4 --n 8 --out review/my-task/m4/
 node tools/camera.mjs check --out review/inspector/          # every subject built: sheet.jpg + check.json, broken ones listed
 node tools/camera.mjs check zombie. --out review/z/          # only some
-node tools/camera.mjs eval "await DWInspect.marine.play('dive-forward'); await new Promise(r => setTimeout(r, 600)); return DWInspect.marine.state()"
+node tools/camera.mjs eval "await DWInspect.marine.play('slow-time'); await new Promise(r => setTimeout(r, 600)); return DWInspect.marine.state()"
 ```
 
 The camera's old targets work in the inspector too (`weapon:m4`, `build:wall:2`, `zombie:brute`, `survivor:pike`,

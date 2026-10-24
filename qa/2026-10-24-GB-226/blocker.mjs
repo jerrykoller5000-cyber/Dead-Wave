@@ -1,0 +1,10 @@
+// GB-226 scratch: what stands on wanderer trail line 15 between pts[0] and pts[1] (the colossus sticks there).
+import { execFileSync } from 'node:child_process';
+const A = ['--agent', 'grokbot', '--task', 'GB-226'], O = 'qa/2026-10-24-GB-226';
+const cam = (...a) => execFileSync(process.execPath, ['tools/camera.mjs', ...a, ...A], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'inherit'] });
+cam('start', '--match');
+console.log(cam('eval', `const tr=T.wandererTrails().find(t=>t.index===15); const a=tr.pts[0], b=tr.pts[1], c=tr.pts[2]; const THREE=T.THREE; const hits=[]; const bx=new THREE.Box3(), seg=(p)=>{ for(let k=0;k<=20;k++){ const x=a.x+(b.x-a.x)*k/20, z=a.z+(b.z-a.z)*k/20; if (p.min.x-2<=x&&x<=p.max.x+2&&p.min.z-2<=z&&z<=p.max.z+2) return true;} return false; }; T.scene.traverse(o=>{ if(!o.isMesh||!o.visible) return; if(o.isInstancedMesh){ const m=new THREE.Matrix4(), v=new THREE.Vector3(); for(let i=0;i<o.count;i++){ o.getMatrixAt(i,m); v.setFromMatrixPosition(m).applyMatrix4(o.matrixWorld); if (seg({min:v,max:v})) hits.push('inst '+(o.name||o.parent&&o.parent.name||'?')+' @'+v.x.toFixed(1)+','+v.z.toFixed(1)); } return; } bx.setFromObject(o); if(bx.max.x-bx.min.x>60||bx.max.z-bx.min.z>60) return; if (seg(bx)) { let n=o.name, q=o.parent; while(!n&&q){n=q.name;q=q.parent;} hits.push((n||'?')+' ['+bx.min.x.toFixed(1)+'..'+bx.max.x.toFixed(1)+', '+bx.min.z.toFixed(1)+'..'+bx.max.z.toFixed(1)+'] y'+bx.min.y.toFixed(1)+'..'+bx.max.y.toFixed(1)); } }); return 'GB226 pts '+JSON.stringify([a,b,c])+' h '+[a,b].map(p=>T.sampleHeight(p.x,p.z).toFixed(2))+'\\n'+[...new Set(hits)].slice(0,60).join('\\n');`));
+const r = JSON.parse(cam('eval', `const tr=T.wandererTrails().find(t=>t.index===15); return JSON.stringify([(tr.pts[0].x+tr.pts[1].x)/2,(tr.pts[0].z+tr.pts[1].z)/2]);`).trim().split('\n').pop().replace(/^"|"$/g,'').replace(/\\"/g,'"'));
+console.log('mid', r);
+cam('shot', `xz:${r[0].toFixed(1)},${r[1].toFixed(1)}`, '--height', '14', '--pitch', '80', '--out', `${O}/t143-line15-blocker-top.png`);
+cam('stop');

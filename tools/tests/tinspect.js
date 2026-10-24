@@ -1,6 +1,6 @@
 // CL-196 (Claude): the inspector (studio/inspector/) attaches to a running game through TT.inspectHost(), every subject
 // in its catalog builds, its clock holds and steps the game, the rewind gives frames back, and the marine's moves are
-// the game's own (a reload reloads, a dive dives). Under the suite's stand-in renderer nothing is drawn, so an empty
+// the game's own (a reload reloads, V slows time). Under the suite's stand-in renderer nothing is drawn, so an empty
 // picture is not a failure here; a builder that throws or is missing is (the real-renderer check is
 // `node tools/camera.mjs check`).
 (async () => {
@@ -37,8 +37,8 @@
     // the marine's moves go through the game
     await api.marine.play('reload-m4');
     ok(await until(() => T.isReloading(), 2000) && T.getCurrentWeapon() === 'm4', 'a reload move reloads the M4');
-    await api.marine.play('dive-forward');
-    ok(await until(() => T.diveDbg().phase !== 'idle', 3000), 'a dive move dives (' + T.diveDbg().phase + ')');
+    await api.marine.play('slow-time');   // CL-252: the dive went in D-87 (CL-248); V slows time
+    ok(await until(() => T.diveDbg().slowing, 3000) && T.diveDbg().phase === 'idle', 'the slow-time move slows time, on his feet (' + T.diveDbg().slowing + ', ' + T.diveDbg().phase + ')');
     await api.marine.play('walk');
     await wait(500);
     const P = T.player.position, c = api._ix.stage.center;

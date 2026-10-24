@@ -1122,13 +1122,16 @@ export const AudioSys = (() => {
   // GB-148: the wheel's tick is gentle (gunsynth's wheelTick) and never a rattle: at most one every 50 ms, and a pointer
   // sweeping fast over the ring (ticks under 120 ms apart) is heard softer still.
   let tickLast = -1;
+  const tickDbg = { plays: 0, lastV: 0 };   // CL-160 (GB-220's finding): what wheelTick asked for, whichever voice plays it
   function wheelTick() {
     const c = ensure(); if (!c || muted) return;
     if (c.currentTime < tickCd) return;
     tickCd = c.currentTime + 0.05;
     const quick = c.currentTime - tickLast < 0.12;
     tickLast = c.currentTime;
-    foley('wheelTick', (quick ? 0.6 : 1) * (0.92 + Math.random() * 0.08), 0, 0, 0.97 + Math.random() * 0.06);
+    const v = (quick ? 0.6 : 1) * (0.92 + Math.random() * 0.08);
+    tickDbg.plays++; tickDbg.lastV = v;
+    foley('wheelTick', v, 0, 0, 0.97 + Math.random() * 0.06);
   }
 
   // GB-167: the fire selector (X): two quick detent clicks, the second softer; full auto a touch brighter.
@@ -3732,6 +3735,7 @@ export const AudioSys = (() => {
     minigunSpin, bankStats: () => ({ banks: banks.size, buildMs: Math.round(bankBuildMs), sync: bankSyncBuilds, syncKeys: bankSyncKeys.slice(), worker: bankWorkerBuilds, misses: bankMisses, voices: activeVoices, keys: [...banks.keys()], pending: warmQueue().length }),   // CL-134
     warmBanks, GUN_KEYS: Object.keys(GUN_DEFS), FOLEY_KEYS: Object.keys(FOLEY_DEFS),
     calibPlay: W((key, o) => { const c = ensure(); if (!c || muted) return; const B = bankFor(key, true); if (B) playBank(B, o || {}); }),   // one bank, as it is (the listening page, the calibration)
+    tickDbg: () => ({ ...tickDbg }),   // CL-160
     bankDbg: (key) => { const B = banks.get(key); return B ? { gap: B.gap, lastT: B.lastT, heat: B.heat, plays: B.plays, variants: B.dry.length, tails: B.tail.length } : null; },
     emptyClick: W(emptyClick), reloadStart: W(reloadStart), reloadDone: W(reloadDone), slideRack: W(slideRack),
     shotgunPump: W(shotgunPump), revolverCylinder: W(revolverCylinder), revolverSpin: W(revolverSpin),

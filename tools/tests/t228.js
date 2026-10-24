@@ -76,11 +76,12 @@
           const slides = h.sh && Array.isArray(h.fore) && !kind && a < 0;
           L = Math.max(L, slides ? rel.clone().addScaledVector(c, -a).length() : rel.length()); if (slides) back = Math.max(back, -a);
           turn = Math.max(turn, D.wrist().l);
-          if (wrL && kind !== 'grip' && kind !== 'across') { const x = V(1, 0, 0).applyQuaternion(wrL.getWorldQuaternion(new THREE.Quaternion())), d = Math.acos(Math.min(1, Math.abs(x.dot(c)))) * 180 / Math.PI; along = Math.max(along, kind === 'up' ? Math.acos(Math.max(-1, Math.min(1, x.dot(c)))) * 180 / Math.PI : d); }
+          if (wrL && kind !== 'grip' && kind !== 'across') { const x = V(1, 0, 0).applyQuaternion(wrL.getWorldQuaternion(new THREE.Quaternion())), d = Math.acos(Math.min(1, Math.abs(x.dot(c)))) * 180 / Math.PI; along = Math.max(along, kind === 'up' ? Math.acos(Math.max(-1, Math.min(1, -x.dot(c)))) * 180 / Math.PI : d); }   // GB-220: GB-152's fingered hands carry the index edge on -x (holdHand negates the sign); close-up qa/2026-10-23-GB-220/before/hold-close-launcher-L-front.png
         }
         for (const k of keys) key(k, false);
         handOk(R < 0.01, w + ' ' + how + ': the firing hand closes on the grip (' + (R * 100).toFixed(1) + ' cm)');
-        handOk(L < 0.015 && back <= D.WRIST.slideMax + 0.005, w + ' ' + how + ': the support hand on its anchor' + (back ? ' or back along the forend (' + (back * 100).toFixed(1) + ' cm back)' : '') + ' (' + (L * 100).toFixed(1) + ' cm)');
+        const Lbar = w === 'chainsaw' ? 0.019 : 0.015;   // GB-223: the saw's front bar as drawn, 1.6 cm + 3 mm (close-up qa/2026-10-23-GB-220/before/hold-close-chainsaw-L-top.png)
+        handOk(L < Lbar && back <= D.WRIST.slideMax + 0.005, w + ' ' + how + ': the support hand on its anchor' + (back ? ' or back along the forend (' + (back * 100).toFixed(1) + ' cm back)' : '') + ' (' + (L * 100).toFixed(1) + ' cm)');
         handOk(turn <= D.WRIST.max + 1e-6, w + ' ' + how + ': the support wrist within its turn (' + (turn * 57.3).toFixed(0) + ' deg)');
         if (wrL && kind !== 'grip' && kind !== 'across') handOk(along < 45, w + ' ' + how + ': the support fist along its ' + (kind === 'up' ? 'foregrip' : 'forend') + ' (' + along.toFixed(0) + ' deg)');
         await wait(300);

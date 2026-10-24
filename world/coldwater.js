@@ -70,6 +70,7 @@ function kit(T,name,seed){
   g.userData.seatHistoryTerrain=height=>{
    if(g.userData.terrainSeated)return;const co=Math.cos(g.rotation.y),si=Math.sin(g.rotation.y),base=height(g.position.x,g.position.z);
    for(const m of g.children){const a=m.geometry.attributes.position;for(let i=0;i<a.count;i++){const x=a.getX(i),z=a.getZ(i),dy=height(g.position.x+co*x+si*z,g.position.z-si*x+co*z)-base;a.setY(i,a.getY(i)+dy);}a.needsUpdate=true;m.geometry.computeVertexNormals();m.geometry.computeBoundingBox();m.geometry.computeBoundingSphere();}
+   if(g.userData.solids)for(const s of g.userData.solids)s.y=height(g.position.x+co*s.x+si*s.z,g.position.z-si*s.x+co*s.z)-base;
    g.userData.terrainSeated=true;
   };
   g.userData.coldwaterVersion=1;return g;
@@ -104,6 +105,21 @@ export function church(T,seed){
  for(const x of [-2.2,2.3]){box(.08,.8,.04,P.iron,x,1.7,-4.68);box(.18,.045,.07,P.rust,x,1.42,-4.67);}
  ring(.19,.024,P.iron,-1.15,.055,-3.65,Math.PI/2);k.pot(1.4,-3.7,.8);rubble(32,6.4,10.4,true);
  for(const [x,z]of [[-2.7,3.9],[2.6,-3.8],[-2.6,-1.1],[2,3.5]])moss(x,z,.9,.55);
+ // AG-119 (D-87): wall solids (sill height 1.2 m under windows; front doorway and aisle to cross open).
+ const solids=[];
+ for(const s of [-1,1])for(const p of [0,1])for(let i=p;i<=25;i+=2){
+  const z=-5+i*.4,u=(z+5)/10,win=[.21,.5,.79].some(c=>Math.abs(u-c)<.065);
+  solids.push({x:s*3,z:+z.toFixed(2),r:.26,y:0,h:+(win?1.2:(s<0?3.7-.85*Math.sin(u*5.1)**2:3.9-1.8*Math.sin(u*3.8)**2)).toFixed(2)});
+ }
+ for(const p of [0,1])for(let i=1+p;i<15;i+=2){
+  const x=-3+i*.4,u=(x+3)/6,win=Math.abs(u-.5)<.11;
+  solids.push({x:+x.toFixed(2),z:-5,r:.26,y:0,h:+(win?1.2:4.1+(1-Math.abs(u-.5)*2)*1.65).toFixed(2)});
+ }
+ for(const s of [-1,1])for(const i of [5,3,1,4,2]){
+  const x=s*(3-i*.36),u=(x+3)/6;
+  solids.push({x:+x.toFixed(2),z:5,r:.26,y:0,h:+Math.max(2.22,Math.min(2.7,1.6+Math.abs(u-.5)*2.1)).toFixed(2)});
+ }
+ k.g.userData.solids=solids;
  return k.finish();
 }
 

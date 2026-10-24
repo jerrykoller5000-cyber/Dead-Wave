@@ -27,9 +27,23 @@
     ok(new Set(mul.map((m) => m.toFixed(3))).size >= 20, 'and not one pace: ' + new Set(mul.map((m) => m.toFixed(3))).size + ' different among 24');
     // GB-135 (D-77, Jerry 2026-10-06: faster dead, up to 90% of his sprint, sprinters outrun him) changed this: the pace
     // roll is the same, but the speed it gives now comes through horde.js speedFor (was: the type speed times its pace).
-    const want = (z) => H.speedFor('shambler', BASE * z.paceMul, { band: z.paceBand, u: z.paceU }, H.run()).speed;
+    const want = (z) => H.speedFor('shambler', BASE * z.paceMul, { band: z.paceBand, u: z.paceU }, H.run(), 1, z.paceNight).speed;
     ok(sh.every((z) => Math.abs(z.speed - want(z)) < 1e-6 && Math.abs(z.baseSpeed - want(z)) < 1e-6), 'its walking speed is its pace through speedFor (GB-135)');
     ok(new Set(sh.map((z) => z.paceBand)).size >= 2, 'bands among them: ' + [...new Set(sh.map((z) => z.paceBand))].join(', '));
+    // D-87: the actual join must send night through to the early shambler curve and use the feral target.
+    for (const night of [1, 2, 8, 14]) {
+      const z = T.spawnZombie(S.x + 30 + night, S.z + 64, 'shambler', true, true);
+      H.join(z, night);
+      const p = { band: z.paceBand, u: z.paceU };
+      const k = night <= 2 ? 0.75 : night >= 14 ? 1 : 0.75 + 0.25 * (night - 2) / 12;
+      const late = H.speedFor('shambler', BASE * z.paceMul, p, H.run(), 1, 14);
+      ok(z.paceNight === night && Math.abs(z.speed - late.speed * k) < 1e-6 && Math.abs(z.hzCap - late.cap * k) < 1e-6, 'night ' + night + ' shambler walk and top use x' + k.toFixed(3));
+    }
+    const fe = T.spawnZombie(S.x + 38, S.z + 64, 'feral', true, true); H.join(fe, 14);
+    ok(fe.paceBand === 'sprint'
+      ? fe.speed >= H.run() * 0.85 && fe.speed <= H.run() * 0.92 && fe.speed < H.run() && fe.hzCap === fe.speed
+      : fe.speed >= 6 && fe.speed <= 7.6 && fe.hzCap === 8 && fe.hzLungeAbs === 9,
+    'feral walks 6.0-7.6 (top 8.0, lunge 9.0) or sprints at 0.85-0.92 of his run');
     const br = []; for (let k = 0; k < 6; k++) { const z = T.spawnZombie(S.x + 40 + k * 2, S.z + 52, 'brute', true, true); if (z) { H.join(z); br.push(z); } }
     ok(br.length === 6 && br.every((z) => z.paceMul >= 0.94 && z.paceMul <= 1.06), 'a brute stays a brute (0.94-1.06)');
     const sp = T.spawnZombie(S.x + 52, S.z + 52, 'spider', true, true); H.join(sp);

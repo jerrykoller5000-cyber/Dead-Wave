@@ -105,13 +105,13 @@
     T.clearZombies();
     await wait(1600);
     // CL-193: V is the shootdodge now; a dive (flight, lying, getting up) outlasts the roll's 1.6 s, so wait it out.
-    if (T.diveDbg) await until(() => T.diveDbg().phase === 'idle' && T.diveDbg().cd <= 0, 15000);
+    if (T.diveDbg) await until(() => T.diveDbg().phase === 'idle' && T.diveDbg().cd <= 0 && !T.diveDbg().slowing, 15000);   // CL-248: V is the slow motion on its own; wait it and its cooldown out
     l0 = xp('legs'); const near = real('shambler', 0, 1.1); near.swingT = 0.6;
     key('keydown', 'KeyV'); key('keyup', 'KeyV');
     ok(xp('legs') - l0 === 1, 'a roll 1.1 m from a swinging zombie pays 1 (' + (xp('legs') - l0) + ')');
     T.clearZombies();
     await wait(1200);
-    if (T.diveDbg) await until(() => T.diveDbg().phase === 'idle', 15000);   // CL-193: in the air a zombie's damage misses him
+    if (T.diveDbg) await until(() => T.diveDbg().phase === 'idle' && !T.diveDbg().slowing, 15000);   // CL-193: in the air a zombie's damage missed him (CL-248: no dive now; the slow motion ends first)
 
     // Vitality: the comeback
     const zb = real('shambler', 0, 30);

@@ -1,0 +1,30 @@
+GRANT chatgpt GP-19962: starting one game-test command
+bench: http://127.0.0.1:41033/index.html?debug=1
+bench: scenario night 20 for 30s
+
+bench: graphics high
+bench: night 20 push 2/6  out 7  spawned 210/861
+bench: night 20 push 4/6  out 4  spawned 424/861
+bench: night 20 push 5/6  out 6  spawned 636/861
+bench: night 20 push 6/6  out 48  spawned 723/861
+bench: profiler on, GPU timestamps on
+fps    56.0   (mean of last 10 s)
+low    40.7   (1% low, same windows)
+worst  25.9 ms
+hitch  2   (frames over 50 ms, whole run)
+draws  269
+tris   760796
+frame  17.86 ms = tick 13.06 ms + outside 4.79 ms   gpu 0.24 ms
+  r:render                             5.99 ms   worst 13.3
+  zombies                              2.37 ms   worst 10.6
+  r:matrices                           1.59 ms   worst 5.4
+  m:pose                               0.48 ms   worst 2.1
+  r:cull                               0.45 ms   worst 1.3
+  m:hold                               0.41 ms   worst 1.9
+  hud+audio                            0.23 ms   worst 0.8
+  w:stairs+roof+birds+bugs+wildlife    0.21 ms   worst 0.7
+  m:idle                               0.19 ms   worst 3.4
+  drops+hud                            0.16 ms   worst 2.8
+  w:minimap                            0.13 ms   worst 1.3
+  w:treeFall+leaves+batches            0.11 ms   worst 0.6
+{"scenario":"night","seconds":30,"fps":56,"low":40.7,"worst":25.9,"hitches":2,"draws":269,"triangles":760796,"zombies":48,"gfx":"high","windows":10,"night":20,"push":5,"pushes":6,"last":true,"prof":{"frames":1778,"frameMs":17.86,"tickMs":13.06,"outsideMs":4.79,"top":[{"k":"r:render","avg":5.99,"max":13.3},{"k":"zombies","avg":2.37,"max":10.6},{"k":"r:matrices","avg":1.59,"max":5.4},{"k":"m:pose","avg":0.48,"max":2.1},{"k":"r:cull","avg":0.45,"max":1.3},{"k":"m:hold","avg":0.41,"max":1.9},{"k":"hud+audio","avg":0.23,"max":0.8},{"k":"w:stairs+roof+birds+bugs+wildlife","avg":0.21,"max":0.7},{"k":"m:idle","avg":0.19,"max":3.4},{"k":"drops+hud","avg":0.16,"max":2.8},{"k":"w:minimap","avg":0.13,"max":1.3},{"k":"w:treeFall+leaves+batches","avg":0.11,"max":0.6}],"spikes":[{"frame":1302,"ms":28.4,"top":["r:render 10.8","zombies 4.3","m:hold2+arms 3.8","r:matrices 3.4"],"heapMB":923.9,"freedMB":-6.8,"newPipelines":0,"newTextures":0,"newGeometries":0,"newBuilds":0,"sunShadow":0,"newRenderObjects":1,"t0":57432.3,"t1":57461.5},{"frame":1628,"ms":26.7,"top":["r:render 11.5","zombies 8.9","r:matrices 2.0","m:idle 0.9"],"heapMB":922,"freedMB":-1,"newPipelines":0,"newTextures":0,"newGeometries":0,"newBuilds":0,"sunShadow":0,"newRenderObjects":1,"t0":63273.2,"t1":63300.9},{"frame":1630,"ms":26.6,"top":["r:render 11.6","zombies 5.5","m:idle 3.4","r:matrices 2.3"],"heapMB":924,"freedMB":-0.9,"newPipelines":0,"newTextures":0,"newGeometries":0,"newBuilds":0,"sunShadow":0,"newRenderObjects":0,"t0":63324.9,"t1":63353},{"frame":1673,"ms":25.1,"top":["r:render 13.3","zombies 5.4","r:matrices 2.4","m:idle 0.6"],"heapMB":936.9,"freedMB":-1.5,"newPipelines":0,"newTextures":0,"newGeometries":1,"newBuilds":0,"sunShadow":1,"newRenderObjects":25,"t0":64189.3,"t1":64215.2}],"spikeCauses":{"spikes":4,"pipelines":0,"builds":0,"uploads":1,"sunShadow":0,"gc":0,"code":3},"gpuMs":0.24,"gpuSamples":1159,"pipelines":{"made":0,"released":0,"withNewShaders":0,"top":[],"first":[]},"builds":{"made":0,"top":[],"zombieAndEcho":[]},"renderObjects":{"made":319,"perFrame":0.18,"top":[{"k":"Mesh < Scene | MeshBasicMaterial | scene","n":245,"frames":[11,19,35,43,51,59]},{"k":"zombie-skin < Group < Scene | NodeMaterial | ortho","n":27,"frames":[773,1673]},{"k":"zombie-skin < Group < Scene | MeshStandardNodeMaterial | scene","n":25,"frames":[136,184,335,421,489,506]},{"k":"feral-motion-echo < Scene | MeshBasicMaterial | scene","n":12,"frames":[964,968,972,1033,1036,1039]},{"k":"open-molded-holster < Group < Group | MeshStandardMaterial | scene","n":3,"frames":[1302,1311,1322]},{"k":"zombie-skin < Group < Scene | MeshStandardMaterial | scene","n":2,"frames":[1540,1548]},{"k":"Mesh < Group < marine-idle-props | MeshStandardMaterial | scene","n":1,"frames":[1390]},{"k":"open-molded-holster < Group < Group | NodeMaterial | ortho","n":1,"frames":[1673]},{"k":"colossus-back-stone-1 < colossus-carrier-moving-parts < colossus-stone-carrier | NodeMaterial | ortho","n":1,"frames":[1673]},{"k":"colossus-back-stone-2 < colossus-carrier-moving-parts < colossus-stone-carrier | NodeMaterial | ortho","n":1,"frames":[1673]},{"k":"colossus-back-stone-0 < colossus-carrier-moving-parts < colossus-stone-carrier | NodeMaterial | ortho","n":1,"frames":[1673]}],"spikes":[{"frame":1302,"n":1,"top":["1 open-molded-holster < Group < Group | MeshStandardMaterial | scene"]},{"frame":1628,"n":1,"top":["1 zombie-skin < Group < Scene | MeshStandardNodeMaterial | scene"]},{"frame":1630,"n":0,"top":[]},{"frame":1673,"n":25,"top":["21 zombie-skin < Group < Scene | NodeMaterial | ortho","1 open-molded-holster < Group < Group | NodeMaterial | ortho","1 colossus-back-stone-1 < colossus-carrier-moving-parts < colossus-stone-carrier | NodeMaterial | ortho","1 colossus-back-stone-2 < colossus-carrier-moving-parts < colossus-stone-carrier | NodeMaterial | ortho","1 colossus-back-stone-0 < colossus-carrier-moving-parts < colossus-stone-carrier | NodeMaterial | ortho"]}]},"gc":null}}

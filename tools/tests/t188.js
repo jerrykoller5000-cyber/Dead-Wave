@@ -12,14 +12,19 @@
 //  - The barrel still points at the reticle from the muzzle; the knife's handle is in the left hand.
 //  - The stowed guns are t189.
 //  A held do-nothing key keeps the idle (smoking) from taking his hands mid-test.
+//  GB-225: but F13 is not in the game's keys{}, so only its one keydown counts as input: the smoking idle (25 s quiet game
+//    time) still took his hands from the flamer on (drawDbg().held null at sim 28.5 s). take() resets the idle per gun.
 (async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
   const THREE = T.THREE || window.THREE;
   const V = (x = 0, y = 0, z = 0) => new THREE.Vector3(x, y, z);
+  // GB-223: and the draw done (CL-90's draw outlasts the swap on the chainsaw: its hands were read mid-draw, 20-35 cm off the
+  // handles they close on; close-ups qa/2026-10-23-GB-220/before/hold-close-chainsaw-R-under.png, -L-top.png), as t228 waits.
   const take = async (w) => {
+    if (T.marineIdleDbg) T.marineIdleDbg().reset();   // GB-225: the held F13 is not a game key; 25 s quiet starts the smoke
     for (let i = 0; i < 16 && T.getCurrentWeapon() !== w; i++) T.setWeapon(i);
-    await new Promise((r) => { const t0 = Date.now(); const f = () => (T.getCurrentWeapon() === w && T.getSwapDbg().swapT <= 0) || Date.now() - t0 > 12000 ? r() : setTimeout(f, 50); f(); });
+    await new Promise((r) => { const t0 = Date.now(); const f = () => (T.getCurrentWeapon() === w && T.getSwapDbg().swapT <= 0 && !(T.drawDbg && T.drawDbg().active)) || Date.now() - t0 > 12000 ? r() : setTimeout(f, 50); f(); });
     { const s0 = T.getSimTime(), w0 = Date.now(); while (T.getSimTime() - s0 < 2.2 && Date.now() - w0 < 20000) await wait(30); }   // GB-188: 2.2 s of game time (the page runs slow)
     return T.getCurrentWeapon() === w;
   };

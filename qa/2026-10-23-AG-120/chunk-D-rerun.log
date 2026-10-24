@@ -1,0 +1,18 @@
+# AG-120 chunk D rerun: t188 t189
+# Started: 2026-10-23T23:50:23.041Z
+
+Game-test request 2af900b6-d351-4477-9fe8-55ac61c169f8 queued at position 1. Waiting...
+GRANT antigravity AG-120: starting one game-test command
+check-players: 303 player.position reads, all in the allowed places
+FAIL  t188    90 pass   1 fail  118.3s
+ERROR t189     0 pass   0 fail  202.7s  — time limit: check still running after 180s
+
+2 checks: 90 pass, 1 fail, 1 could not run
+
+by owner:
+  unassigned
+    t188   1 fail  FAIL flamer: barrel on the reticle from the muzzle (60.39 deg)
+           FAIL flamer: barrel on the reticle from the muzzle (60.39 deg)
+    t189   0 fail  time limit: check still running after 180s
+
+# Finished: 2026-10-23T23:59:15.664Z code=1

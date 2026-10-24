@@ -1,6 +1,6 @@
 import {text} from './strings.js';
 export const KEY_GUIDE_STORAGE_KEY='dw.keyGuide.v1';
-export const KEY_GUIDES=Object.freeze(['map','movement','weapons','support','gear','build','mortar','camera','menus']);
+export const KEY_GUIDES=Object.freeze(['map','movement','view','weapons','support','gear','build','mortar','camera','menus']);
 // Extra lessons only after the core loop is learned, during a quiet prep. The
 // urgent coach owns the same slot and always wins; no extra timers or HUD box.
 export function createKeyGuide({load=()=>null,save=()=>{}}={}) {

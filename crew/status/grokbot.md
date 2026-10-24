@@ -4,10 +4,10 @@ state: idle
 model: Grok Bot
 task: —
 touching: —
-since: 2026-10-21T18:14Z
-next: GB-217 The full suite before Jerry's playthrough, after GB-218 and 
+since: 2026-10-24T16:47Z
+next: GB-226 The scope after CL-252, the heavies, t189, t143. Next. Force
 blocked-on: —
-last-report: handoffs/2026-10-21-grokbot-GB-218.md
+last-report: handoffs/2026-10-24-grokbot-GB-226-g2.md
 
 ## Notes
 

@@ -79,7 +79,8 @@
         ok(gA.l > 0.9, tag + ': support fist closed (wrist turned onto the grip, a ' + gA.l.toFixed(2) + ')');
         handOk(gL.distanceTo(F.fore) < 0.025, tag + ': support fist round its anchor (' + gL.distanceTo(F.fore).toFixed(3) + ' m)');
         const lL = F.loc(gL), dRL = gL.distanceTo(gR);
-        handOk(lL.x < 0 && dRL > 0.015 && dRL < 0.05, tag + ': support fist on the support side round the firing fingers (' + f3(lL) + ', ' + dRL.toFixed(3) + ' m from the firing fist)');
+        const dBar = w === 'revolver' ? 0.058 : 0.05;   // GB-223: the revolver's wrap as drawn, 5.5 cm + 3 mm (close-ups qa/2026-10-23-GB-220/before/hold-close-revolver-L-front.png, -L-top.png)
+        handOk(lL.x < 0 && dRL > 0.015 && dRL < dBar, tag + ': support fist on the support side round the firing fingers (' + f3(lL) + ', ' + dRL.toFixed(3) + ' m from the firing fist)');
         // GB-152: with fingered hands, "no air" is the meshes themselves: the support hand's glove within 1 cm of the firing hand's.
         const gap = handsGap();
         handOk(gap < 0.01, tag + ': support hand on the firing fingers, no air (gloves ' + gap.toFixed(3) + ' m apart; palm to firing fingertips ' + palmL.distanceTo(knR).toFixed(3) + ' m)');
@@ -126,7 +127,12 @@
       ok(!mirrored(ud.elbowRG) && !mirrored(ud.elbowLG), 'akimbo: hands not mirrored');
       handOk(gR.distanceTo(F.a) < 0.025 && gA.r > 0.9, 'akimbo: right fist on its grip (' + gR.distanceTo(F.a).toFixed(3) + ')');
       handOk(gL.distanceTo(og.localToWorld(V(...H.grip))) < 0.025 && gA.l > 0.9, 'akimbo: left fist on its own grip (' + gL.distanceTo(og.localToWorld(V(...H.grip))).toFixed(3) + ')');
-      handOk(wt.r < 0.9 && wt.l < 0.9, 'akimbo: wrists firm, guns in line with the forearms (' + wt.r.toFixed(2) + ', ' + wt.l.toFixed(2) + ' rad)'); }
+      // GB-223: the wrist's whole turn (HD.wrist) includes the roll GB-152's fingered hands take round the forearm, which bends
+    // nothing; 'in line with the forearm' is the gun's bore against the forearm's line. Close-ups qa/2026-10-23-GB-220/before/
+    // hold-close-akimbo-R-side.png, -L-side.png, -R-top.png. Bar 0.9 rad unchanged.
+    const bend = (elbow, gun) => { const w = elbow.userData.wrist || elbow; const fa = w.getWorldPosition(V()).sub(elbow.getWorldPosition(V())).normalize(); const bz = V(0, 0, 1).transformDirection(gun.matrixWorld); return Math.acos(Math.max(-1, Math.min(1, fa.dot(bz)))); };
+    const bR = bend(ud.elbowRG, T.weaponMeshes.pistol), bL = bend(ud.elbowLG, og);
+    handOk(bR < 0.9 && bL < 0.9, 'akimbo: wrists firm, guns in line with the forearms (' + bR.toFixed(2) + ', ' + bL.toFixed(2) + ' rad bore to forearm; wrist turn incl. roll ' + wt.r.toFixed(2) + ', ' + wt.l.toFixed(2) + ')'); }
     T.toggleDualWieldDbg(); await simWait(0.5);
     clearInterval(pin);
     window.dispatchEvent(new KeyboardEvent('keyup', { code: 'F13', key: 'F13', bubbles: true }));

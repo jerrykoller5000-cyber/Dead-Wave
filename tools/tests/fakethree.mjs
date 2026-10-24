@@ -557,6 +557,7 @@ export class Box3 {
     return this;
   }
   makeEmpty() { this.min.set(Infinity, Infinity, Infinity); this.max.set(-Infinity, -Infinity, -Infinity); return this; }
+  setFromPoints(pts) { this.makeEmpty(); for (const p of pts) this.expandByPoint(p); return this; }   // CL-252: as three.js (t277, AG-120)
   expandByPoint(p) { this.min.min(p); this.max.max(p); return this; }
   getSize(v) { return v.subVectors(this.max, this.min); }
   getCenter(v) { return v.addVectors(this.min, this.max).multiplyScalar(0.5); }

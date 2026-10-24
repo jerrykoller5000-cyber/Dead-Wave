@@ -104,6 +104,8 @@ every gun is in the shop and the player's cash outruns the prices.
 | Bomber top speed | 2.8 m/s | 4.0 m/s | 8 | ChatGPT |
 | Watchman MG | 18 a round, blueprint $140 | 10 a round, blueprint $260 | 5 | ChatGPT |
 
+D-87 (Jerry's friends' playtest, 2026-10-23): ferals walk at 6.0-7.6 m/s, top at 8.0, lunge at 9.0, and their sprinters run at 0.85-0.92 of the player's 11.8 m/s sprint. Shamblers, including their sprinters, take x0.75 speed on nights 1-2, rise evenly to x1.0 on night 14, and stay there afterward.
+
 Not changed: the rest of Jerry's hit sheet (his New-Hit.xlsx), zombie HP, the guns' prices and stock nights, ammo
 prices, gear, builds and turrets (other than the Watchman), the alive cap (48), the cadences, the set pieces and the
 night 20 boss (one colossus; a second boss on the finale was considered and left out: the guardian's rules are tied to

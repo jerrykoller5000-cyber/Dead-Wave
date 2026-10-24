@@ -1,0 +1,12 @@
+# AG-120 chunk A rerun: t69 t76
+# Started: 2026-10-23T22:14:03.180Z
+
+Game-test request cd38a7da-00cf-4bc0-9681-b7a053934310 queued at position 1. Waiting...
+GRANT antigravity AG-120: starting one game-test command
+check-players: 303 player.position reads, all in the allowed places
+ok    t69     18 pass   0 fail  63.1s
+ok    t76     16 pass   0 fail  54.3s
+
+2 checks: 34 pass, 0 fail
+
+# Finished: 2026-10-23T22:16:33.453Z code=0
