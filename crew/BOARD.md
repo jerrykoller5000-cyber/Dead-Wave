@@ -73,7 +73,7 @@ don't build it. **Model polish is frozen** (guns, zombies, the marine, buildable
    **2b. The day missions (D-82): done.** The medical convoy, the ranger cache, the hikers' kit, the trapper's path, the fuel depot, the utility truck (`docs/specs/day-missions.md`).
 3. **The first hour**: the goal on day 1, a pointer to the Training Ground, clean Tips. **Done.**
 4. **Night packs**: Jerry plays nights in 20-30 minute packs; his notes become tasks. **This weekend (24-25 October) he plays it through for 6-8 hours:** the build he plays is tested (GB-217), committed and pushed by Friday. His notes go in `Night Packs/Night Pack Notes.txt` (one letter a line: B broken, M mistake, F feel, P performance, I idea); "check the night pack notes" turns them into tasks.
-4b. **The playtest's fixes (D-87), before Ship.** Jerry's friends played it (2026-10-23): CL-247 (third-person aim), CL-249 (first person), CL-248, AG-119, GP-19959, GP-19960, GB-221. The aim first; then the full suite and a checkpoint.
+4b. **The playtest's fixes (D-87), before Ship. Done (82d75118; night 20 met, GP-19964).** Jerry's friends played it (2026-10-23): CL-247 (third-person aim), CL-249 (first person), CL-248, AG-119, GP-19959, GP-19960, GB-221. The aim first; then the full suite and a checkpoint.
 5. **Ship**: the desktop build, 1.0.0, budgets met on Jerry's PC, a green suite, the tag; the itch.io page ready for Jerry to publish (D-84); the music and sounds' licences listed for him to check.
 
 **New text the player reads:** add its keys to `ui/strings.js` yourself, in a block headed `// <your task id>`, English
@@ -86,6 +86,9 @@ says "after XX-n" waits for it. Finished tasks leave the board (`crew.mjs tidy`)
 Finish what you have in progress first (and queue its game checks); then take the next.
 
 ### Claude
+
+- [>] **CL-254** **The 1.0.0 commit and tag, after AG-121. Next (ChatGPT runs it).** An ALL commit job with the version and the crew's work since 82d75118; ChatGPT runs it and tags v1.0.0 (`git tag -a v1.0.0`, `git push origin v1.0.0`). Then Jerry uploads AG-121's installer to the itch draft and publishes (D-84).
+- [x] **CL-253** **The version is 1.0.0 (road stage 5).** package.json 0.1.0 -> 1.0.0 (the installer's name, the exe and the title read it). Night 20 met from a quiet seat (GP-19964: 60.0/60.0 fps, 1 % lows 57.7/56.0, no hitches or builds); the checkpoint is 82d75118.
 
 - [x] **CL-247** **The aim, third person (D-87).** Right-click held: the camera zooms in 2x and centres on the cursor (Zomboid), eases back on release; no more shoulder view on right-click. Rounds land where the cursor is on a zombie (the pick, not a height), with a light assist when it is just off one. Grokbot reviews (his weapons).
 - [x] **CL-249** **First person (D-87), with CL-247.** Key 5 toggles a true first-person view from his eyes (his head hidden from that camera only, his shadow whole); right-click there aims down the sights (each gun's sight point from GB-222; the sniper's scope as today).
@@ -135,8 +138,8 @@ Finish what you have in progress first (and queue its game checks); then take th
 
 ### ChatGPT
 
-- [ ] **GP-19964** **Night 20 from a quiet seat, again (later, when Claude prompts it).** GP-19962's runs (56.0/55.5 fps) were taken with Jerry at the PC (his Windows theme switched around run 2) and Grokbot working: every phase slower by the same share. Two runs, qa/2026-10-24-GP-19964/, against GP-19957.
-- [>] **GP-19962** **Night 20 after D-87, from a quiet seat (measurement only), after AG-120.** Not a quiet seat (Jerry at the PC, a theme switch, Grokbot working); then the checkpoint. As GP-19957: `node tools/bench.mjs --night 20 --gfx high --prof` twice, nothing else running; qa/2026-10-23-GP-19962/.
+- [x] **GP-19964** **Night 20 from a quiet seat, again (later, when Claude prompts it).** GP-19962's runs (56.0/55.5 fps) were taken with Jerry at the PC (his Windows theme switched around run 2) and Grokbot working: every phase slower by the same share. Two runs, qa/2026-10-24-GP-19964/, against GP-19957.
+- [x] **GP-19962** **Night 20 after D-87, from a quiet seat (measurement only), after AG-120.** Not a quiet seat (Jerry at the PC, a theme switch, Grokbot working); then the checkpoint. As GP-19957: `node tools/bench.mjs --night 20 --gfx high --prof` twice, nothing else running; qa/2026-10-23-GP-19962/.
 - [x] **GP-19961** **The words for D-87's controls. Next.** 5 for first/third person, right-click (zoom in third, sights in first), V slow-mo without the dive: the key guide, Tips, the camera guide, any line that still says right-click shoulders or V dives. In the request.
 - [x] **GP-19959** **Slower ferals and early shamblers (D-87). Next.** Ferals get their own walking speeds, under his walk most of the time and never past his sprint; shamblers x0.75 on nights 1-2 rising to x1 by night 14. Numbers and tests in the request.
 - [x] **GP-19960** **Corpses that float (D-87), after GP-19959.** Find every way a body lies at the height it died, and settle it on what is under it. In the request.
@@ -174,7 +177,7 @@ Finish what you have in progress first (and queue its game checks); then take th
 
 ### Grokbot
 
-- [>] **GB-226** **The scope after CL-252, the heavies, t189, t143. Next.** Forced colours on this PC's Chrome and the scope's page shots; the minigun and chainsaw at the first-person hip; t189's budget fix; t143 (the wanderer stuck near its first trail point here). In the request.
+- [x] **GB-226** **The scope after CL-252, the heavies, t189, t143.** Forced colours on this PC's Chrome and the scope's page shots; the minigun and chainsaw at the first-person hip; t189's budget fix; t143 (the wanderer stuck near its first trail point here). In the request.
 - [x] **GB-225** **t188's setup, the scope overlay in the shots, the heavies.** t188's flamer/chainsaw read (the test's setup, not the holds); why #scopeOverlay is missing from the page shots (read its style at the shot); the minigun and chainsaw at the first-person hip after CL-251; t189's time limit. In the request.
 - [x] **GB-224** **First person after CL-250, and GB-223's rest.** The shotgun's (and revolver's) sight point; reshoot the first-person sheet as a page screenshot (the flamer's block, the hip carry); t222's spider chest case (Rule 13 call); t188's flamer and chainsaw anchors; the revolver's pop from frames. In the request.
 - [x] **GB-223** **The last held reds on the new aim (D-87).** Review CL-247/249 as the guns' owner; t187 and t222 on the new aim; the judged-right chainsaw and revolver holds (bars from the close-ups, t188's anchors, the akimbo axis, the revolver's pop from frames). In the request. Done in part (g1 review, g2, t228/t229 bars); the rest is GB-224.
@@ -214,6 +217,8 @@ Finish what you have in progress first (and queue its game checks); then take th
 - [~] **GB-156** **The mortar and Watchman crew.** t244's four "no jump" limits, by a hair. After GB-184.
 
 ### Antigravity
+
+- [x] **AG-121** **The 1.0.0 installer (road stage 5). Next.** package.json says 1.0.0 (CL-253). As AG-104 (3) and desktop/README.md: `npm run build` in desktop/, then `node smoke.mjs`; install it as a player would, boot, the title says v1.0.0, music and the disclosure play, a match into night 1, 0 failed loads, NOTICES.txt and NOTICES-desktop.txt in the installed game/. Report its name, size and path; it is not committed. Upload nothing (Jerry publishes, D-84). In the request.
 
 - [x] **AG-120** **The suite after D-87. Next.** Everything from the playtest is in (CL-247/248/249, GB-221, GP-19959/60/61, AG-119, GB-220's tests, CL-160's tick count). The full suite in chunks as AG-117, test page and real renderer, through the slot; route the reds. Then GP-19962's night 20 from a quiet seat, then the checkpoint.
 - [x] **AG-119** **The chapel's walls (D-87). Next.** Coldwater's church shell is placed with no solids: give it its walls (the door and the aisle to the cross open), the way the cordon checkpoint does. In the request.

@@ -1,13 +1,13 @@
 # ChatGPT
 
-state: active
+state: idle
 model: GPT-6.1-sol
-task: GP-19962 Run Claude's approved D-87 checkpoint job and record the result
-touching: git, handoffs/2026-10-24-chatgpt-GP-19962.md, Claude outputs/commit/last-run.log
-since: 2026-10-24T16:46Z
+task: —
+touching: —
+since: 2026-10-24T17:23Z
 next: —
 blocked-on: —
-last-report: handoffs/2026-10-24-chatgpt-GP-19962.md
+last-report: handoffs/2026-10-24-chatgpt-GP-19964.md
 
 ## Notes
 

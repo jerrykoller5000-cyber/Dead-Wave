@@ -1,0 +1,31 @@
+
+> dead-wave-desktop@0.0.0 build
+> node ../tools/package.mjs && tauri build
+
+package: 1448 files, 400.3 MB -> dist\dead-wave (version 1.0.0)
+  (root)     3.5 MB
+  assets     332.3 MB
+  combat     0.0 MB
+  core       0.4 MB
+  game       0.4 MB
+  studio     1.1 MB
+  ui         36.0 MB
+  vendor     3.1 MB
+  world      0.5 MB
+  z-sounds   23.0 MB
+  wavs kept: assets/audio/training/shot-timer-start.wav, assets/sfx/training/keypad-press.wav, assets/sfx/training/security-door-close.wav, assets/sfx/training/security-door-open.wav
+  z-sounds/index.json: 952 takes
+  left out, not played (the backup music, the old disclosure clips): 58 files, 167.0 MB
+check: title and a match came up from the copy; 250 files fetched; version on the title: "v1.0.0"
+package: ok
+
+        Info Looking up installed tauri packages to check mismatched versions...
+   Compiling dead-wave v0.1.0 (C:\Users\Zero\Desktop\Tiny Trek\desktop\src-tauri)
+    Finished `release` profile [optimized] target(s) in 1m 23s
+       Built application at: C:\Users\Zero\Desktop\Tiny Trek\desktop\src-tauri\target\release\dead-wave.exe
+        Info Patching C:\Users\Zero\Desktop\Tiny Trek\desktop\src-tauri\target\release\dead-wave.exe with bundle type information: nsis
+        Info Target: x64
+     Running makensis to produce C:\Users\Zero\Desktop\Tiny Trek\desktop\src-tauri\target\release\bundle\nsis\Grave Shift_1.0.0_x64-setup.exe
+    Finished 1 bundle at:
+        C:\Users\Zero\Desktop\Tiny Trek\desktop\src-tauri\target\release\bundle\nsis\Grave Shift_1.0.0_x64-setup.exe (383.48 MiB)
+

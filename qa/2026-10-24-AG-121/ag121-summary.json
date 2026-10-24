@@ -1,0 +1,187 @@
+{
+  "version": "1.0.0",
+  "installer": {
+    "fileName": "Grave Shift_1.0.0_x64-setup.exe",
+    "relativePath": "desktop/src-tauri/target/release/bundle/nsis/Grave Shift_1.0.0_x64-setup.exe",
+    "absolutePath": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\desktop\\src-tauri\\target\\release\\bundle\\nsis\\Grave Shift_1.0.0_x64-setup.exe",
+    "bytes": 402105438,
+    "mib": 383.48,
+    "mb": 402.11
+  },
+  "builtExe": {
+    "relativePath": "desktop/src-tauri/target/release/dead-wave.exe",
+    "bytes": 3243520
+  },
+  "installed": {
+    "dir": "C:\\Users\\Zero\\AppData\\Local\\Grave Shift",
+    "exePath": "C:\\Users\\Zero\\AppData\\Local\\Grave Shift\\dead-wave.exe",
+    "exeBytes": 3243520,
+    "versionJson": {
+      "version": "1.0.0",
+      "built": "2026-10-24T17:31:23.812Z"
+    },
+    "noticesTxt": {
+      "path": "C:\\Users\\Zero\\AppData\\Local\\Grave Shift\\game\\NOTICES.txt",
+      "bytes": 2286
+    },
+    "noticesDesktopTxt": {
+      "path": "C:\\Users\\Zero\\AppData\\Local\\Grave Shift\\game\\NOTICES-desktop.txt",
+      "bytes": 212624
+    },
+    "startMenuShortcut": {
+      "path": "C:\\Users\\Zero\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Grave Shift.lnk",
+      "Description": "",
+      "TargetPath": "C:\\Users\\Zero\\AppData\\Local\\Grave Shift\\dead-wave.exe",
+      "WorkingDirectory": "C:\\Users\\Zero\\AppData\\Local\\Grave Shift"
+    }
+  },
+  "buildElapsedS": 309.4,
+  "smokeElapsedS": 46.2,
+  "startMenuPlay": {
+    "openingVideoStatus": {
+      "openingPhase": "video",
+      "openingVideoReadyState": 4,
+      "openingVideoPaused": false,
+      "openingVideoTime": 1.29,
+      "openingVideoSrc": "http://dw.localhost/assets/intro/caracal.mp4",
+      "disclaimerBootState": "done"
+    },
+    "disclosureCheck": {
+      "available": true,
+      "started": true,
+      "state": "playing",
+      "readyState": 4,
+      "paused": false,
+      "currentTime": 0.24,
+      "duration": 21.83,
+      "src": "http://dw.localhost/assets/disclaimer/disclaimer.mp4?v=cl191"
+    },
+    "titleCheck": {
+      "desktopFlag": true,
+      "renderer": "WebGPURenderer",
+      "versionText": "v1.0.0",
+      "windowSize": "2560x1440",
+      "screenSize": "2560x1440",
+      "fullscreen": true
+    },
+    "prepAudioCheck": {
+      "phase": "prep",
+      "day": 1,
+      "audioContextState": "unknown",
+      "audioContextTime": 0,
+      "audioState": {
+        "started": true,
+        "over": false,
+        "won": false,
+        "phase": "prep",
+        "boss": false,
+        "night": false,
+        "paused": false,
+        "lowHp": false,
+        "shop": false,
+        "threat": 0,
+        "nearest": null,
+        "day": 1,
+        "dawn": true,
+        "dusk": false,
+        "ember": false,
+        "guardian": false,
+        "special": null,
+        "remaining": 0,
+        "spawnedAll": false,
+        "pace": null,
+        "below": null,
+        "heart": null,
+        "heartSoon": false,
+        "dread": 0
+      },
+      "ambState": {
+        "dt": 0.016599999999627472,
+        "wind": 0.5285346796109286,
+        "water": 0,
+        "night": false,
+        "rain": 0,
+        "started": true,
+        "forest": 0.0714285634044147,
+        "below": null,
+        "cave": 0,
+        "cavePan": 0,
+        "pit": 0,
+        "pitPan": 0.8057354086100501
+      }
+    },
+    "night1State": {
+      "phase": "wave",
+      "day": 1,
+      "zombieCount": 19,
+      "waveTotal": 15,
+      "waveSpawned": 15,
+      "audioState": {
+        "started": true,
+        "over": false,
+        "won": false,
+        "phase": "wave",
+        "boss": false,
+        "night": true,
+        "paused": false,
+        "lowHp": false,
+        "shop": false,
+        "threat": 15,
+        "nearest": 28.43216376544367,
+        "day": 1,
+        "dawn": false,
+        "dusk": false,
+        "ember": false,
+        "guardian": false,
+        "special": null,
+        "remaining": 15,
+        "spawnedAll": true,
+        "pace": {
+          "push": 0,
+          "pushes": 1,
+          "inLull": false,
+          "straight": false
+        },
+        "below": null,
+        "heart": null,
+        "heartSoon": false,
+        "dread": 0
+      },
+      "ambState": {
+        "dt": 0.016599999999627472,
+        "wind": 0.08883845729049981,
+        "water": 0,
+        "night": true,
+        "rain": 0,
+        "started": true,
+        "forest": 0.0714285714105545,
+        "below": null,
+        "cave": 0,
+        "cavePan": 0,
+        "pit": 0,
+        "pitPan": 0.8057354086100501
+      }
+    },
+    "loadAudit": {
+      "totalResourcesFetched": 250,
+      "failedLoadsCount": 0,
+      "failedLoads": [],
+      "pageErrorsCount": 0,
+      "pageErrors": []
+    },
+    "screenshots": {
+      "title": {
+        "path": "qa/2026-10-24-AG-121/01-title-v1.0.0.png",
+        "width": 2560,
+        "height": 1440,
+        "bytes": 2589218
+      },
+      "night1": {
+        "path": "qa/2026-10-24-AG-121/02-night-1.png",
+        "width": 2560,
+        "height": 1440,
+        "bytes": 2342750
+      }
+    }
+  }
+}

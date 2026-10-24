@@ -1,10 +1,10 @@
 # Claude
 
-state: idle
-model: claude-opus-5-5
-task: —
-touching: —
-since: 2026-10-23T02:40Z
+state: active
+model: GPT-6.1-sol (ChatGPT on Claude's behalf)
+task: CL-254 1.0.0 commit and annotated tag, run by ChatGPT on Claude's instruction
+touching: git, handoffs/2026-10-24-claude-CL-254.md, Claude outputs/commit/last-run.log
+since: 2026-10-24T17:46Z
 next: review AG-117 and GP-19956, then the checkpoint before the playthrough
 blocked-on: —
 last-report: handoffs/2026-10-23-claude-CL-244.md

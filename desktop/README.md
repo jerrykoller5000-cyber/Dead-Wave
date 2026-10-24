@@ -9,7 +9,7 @@ dependencies and no build step; this folder is the one place with any, and it on
     npm run build:exe        the exe only, no installer
     node smoke.mjs           start the built exe and check it (WebGPU, the title, a match, the profile file, Quit)
 
-- The installer: `src-tauri/target/release/bundle/nsis/Grave Shift_<version>_x64-setup.exe` (about 400 MB at 0.1.0, AG-104; per-user, no admin).
+- The installer: `src-tauri/target/release/bundle/nsis/Grave Shift_<version>_x64-setup.exe` (about 400 MB at 0.1.0, AG-104; 1.0.0 from AG-121; per-user, no admin).
   It is not signed, so Windows SmartScreen will ask before the first run ("More info", "Run anyway").
 - The game's files are installed next to the exe in `game/` and served by the `dw:` protocol (`http://dw.localhost/`).
   `tools/package.mjs` decides what ships (no qa/, review/, handoffs/, tests, the WAV originals) and checks the copy by booting it.

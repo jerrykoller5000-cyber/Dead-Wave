@@ -4,10 +4,10 @@ state: idle
 model: Gemini 4 Argon (High)
 task: —
 touching: —
-since: 2026-10-24T02:19Z
+since: 2026-10-24T17:43Z
 next: —
 blocked-on: —
-last-report: handoffs/2026-10-23-antigravity-AG-120.md
+last-report: handoffs/2026-10-24-antigravity-AG-121.md
 
 ## Notes
 
@@ -32,11 +32,7 @@ a real GPU the way you can.
 - Serve the game with `npm run serve` and open http://127.0.0.1:8971/index.html?debug=1.
   With ?debug=1, window.TT is available in the DevTools console.
 
-### Status (2026-10-23)
-- **AG-86..AG-114**: DONE (see reports in `handoffs/`).
-- **AG-115**: DONE. 2x `steady-probe.mjs` (30 s, 8 ms) + 1x `steady-probe.mjs --work 12` (`CL-240`, `qa/2026-10-21-AG-115/ag115-summary.json`) run directly from terminal through the slot: all 3 runs recorded `frames: 1800, slowFrames: 0` (`medianMs: 8 / 8.2 / 11.9`, `p99Ms: 9.1 / 9.8 / 12.9`, `maxMs: 9.3 / 11.4 / 13.5`) on `AMD Ryzen 9 5900X 12-Core Processor` (24 threads) under `High performance` power plan (`8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c`).
-- **AG-116**: DONE. Full test suite through the slot in chunks (`qa/2026-10-22-AG-116/`): Test page (`0a, 0b, A..F` + `t272`, 264 checks): `4,089 pass`, 2 held red checks (`t74`: 1 fail, `t80`: 2 fails on rerun; queued to Grokbot); 4 wall-clock tests converted to `T.getSimTime()` / frame `until` and verified green (`t75`, `t206`, `t207`, `t254`). Real renderer (`R` + `t272`, 21 checks via `tools/realtest.mjs`): `740 pass`, 7 held red checks on rerun (`t187, t188, t189, t195, t224, t228, t229`: 42 fail lines; `t222`, `t262`, and `t272` green; queued to Grokbot).
-- **AG-117**: DONE. Full test suite after D-86 balance pass (`CL-244` + `GP-19955`, `qa/2026-10-23-AG-117/`): Test page (`0a, 0b, A..F`, 265 checks incl. `t272` & `t273`): `4,070 pass`, 5 held red checks (`t71`: 1 fail [shambler skull=2], `t77`: 1 fail [3 ring brutes died before restart], `t90`: 1 fail [5000-maxHp shambler killed by 270% shotgun], `t155`: 1 fail [same], `t198`: 1 fail; `t93, t222, t225, t226, t264` cleared on rerun; `t273` 13/13 green). Real renderer (`R`, 21 checks incl. `t272`): `735 pass`, 8 held red checks (`t187, t188, t189, t195, t222, t224, t228, t229`: 43 fail lines; `t272` 14/14 green). Routed to `chatgpt` and `grokbot`.
-- **AG-118**: DONE. Replaced 150 ms wall-clock wait in `tools/tests/t198.js` (Grokbot's `GB-94`, offline) with game-time wait (`tt.hz !== undefined` and `0.2 s` of `T.getSimTime()`) and printed `hz` and both speeds (`tt.speed`/`ttSpeed`), with no check made looser. Verified 3/3 green through the slot (`12 pass, 0 fail` in `55.9s`, `54.3s`, `54.0s`). Staying out of the slot for `GP-19957`.
-- **AG-119**: DONE. Added 76 overlapping wall and window-sill collision cylinders (`userData.solids`) to Coldwater's church shell in `world/coldwater.js` (terrain-seated via `seatHistoryTerrain`, 1.2 m sill height under windows so rounds pass above and hit below, front doorway and central aisle to the cross open, two-pass circle order) and wired them to `addSolid` at `index.html:8307`. Verified `t167` (20/20 PASS), `t215` (4/4 PASS), `t241` (5/5 PASS), and new `tools/tests/t275.js` (15/15 PASS) plus 4 overlay screenshots in `qa/2026-10-23-AG-119/`.
-- **AG-120**: DONE. Full test suite after D-87 (`CL-247/248/249/250/251`, `GB-221`, `GP-19959/60/61`, `AG-119`, `GB-220`, `CL-160`, `qa/2026-10-23-AG-120/`): Test page (`0a, 0b, A..F`, 272 checks incl. `t280`): `4,171 pass`, 5 held reds (`tinspect` 21/1 `'a dive move dives (idle)'` after `CL-248`; `t143` 15/2 wanderer bounce at `pts[0]`; `t188` 90/1 flamer barrel angle; `t189` 180s timeout on test page [47/0 real]; `t277` 0/1 `fakethree.mjs` `Box3.setFromPoints` [36/0 real]; `t15, t69, t76` cleared on rerun). Real renderer (`R`, 22 checks incl. `t277`): `812 pass`, 1 held red (`t188` 116/5; `t222` 9/0 and `t228` 95/0 cleared on rerun; `t187` 99/0, `t189` 47/0, `t195` 20/0, `t224` 45/0, `t229` 75/0, `t270` 5/0, `t271` 10/0, `t272` 14/0, `t277` 36/0 passed first try). Routed to `claude`, `grokbot`, and `cursor`. Staying out of the slot for `GP-19962`.
+### Status (2026-10-24)
+- **AG-86..AG-119**: DONE (see reports in `handoffs/`).
+- **AG-120**: DONE. Full test suite after D-87 (`CL-247/248/249/250/251`, `GB-221`, `GP-19959/60/61`, `AG-119`, `GB-220`, `CL-160`, `qa/2026-10-23-AG-120/`): Test page (`0a, 0b, A..F`, 272 checks incl. `t280`): `4,171 pass`, 5 held reds (`tinspect` 21/1 `'a dive move dives (idle)'` after `CL-248`; `t143` 15/2 wanderer bounce at `pts[0]`; `t188` 90/1 flamer barrel angle; `t189` 180s timeout on test page [47/0 real]; `t277` 0/1 `fakethree.mjs` `Box3.setFromPoints` [36/0 real]; `t15, t69, t76` cleared on rerun). Real renderer (`R`, 22 checks incl. `t277`): `812 pass`, 1 held red (`t188` 116/5; `t222` 9/0 and `t228` 95/0 cleared on rerun; `t187` 99/0, `t189` 47/0, `t195` 20/0, `t224` 45/0, `t229` 75/0, `t270` 5/0, `t271` 10/0, `t272` 14/0, `t277` 36/0 passed first try). Routed to `claude`, `grokbot`, and `cursor`.
+- **AG-121**: DONE. Built the 1.0.0 desktop installer (`npm run build` in `desktop/` -> `desktop/src-tauri/target/release/bundle/nsis/Grave Shift_1.0.0_x64-setup.exe`, `402,105,438 bytes` / `383.48 MiB` / `402.11 MB`), passed `node smoke.mjs` (`13/13 PASS`, `46.2s`), installed per-user to `C:\Users\Zero\AppData\Local\Grave Shift`, verified `NOTICES.txt` (`2,286 bytes`) and `NOTICES-desktop.txt` (`212,624 bytes`) in the installed `game/` folder, and launched from the Start menu shortcut (`Grave Shift.lnk`) to verify Title `"v1.0.0"`, studio intro & AI disclosure playback (`readyState: 4`), music/ambience, Night 1 gameplay, and `0` failed loads / `0` page errors (`qa/2026-10-24-AG-121/01-title-v1.0.0.png`, `02-night-1.png`).

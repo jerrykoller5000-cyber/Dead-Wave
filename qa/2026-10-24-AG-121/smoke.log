@@ -1,0 +1,15 @@
+PASS the title comes up from the dw: protocol (window.TT)
+PASS the desktop shell's script ran first
+PASS the renderer is WebGPU (WebGPURenderer)
+PASS the version is on the title ("v1.0.0")
+PASS the window is fullscreen (2560x1440 of 2560x1440)
+PASS a match starts
+PASS the insertion plays out (video and sounds through the protocol)
+PASS no file the game asked for was missing
+PASS a key set in localStorage is in profile.json (["tt_smoke","tt_smoke2"])
+PASS no page errors
+PASS after a restart (and the webview's own data wiped) the keys come back from the file
+PASS a removal is written too
+PASS window.close() (the menu's Quit) ends the program
+desktop smoke: all passed
+
