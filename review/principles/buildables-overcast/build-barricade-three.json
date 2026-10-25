@@ -1,0 +1,34 @@
+{
+ "schema": "dw-camera-shot",
+ "schemaVersion": 2,
+ "target": "build:barricade",
+ "label": "build barricade",
+ "view": "three",
+ "cam": {
+  "x": -36.70465711529671,
+  "y": 32.1510178665867,
+  "z": -65.20276327832508,
+  "tx": -40,
+  "ty": 29.868489146232605,
+  "tz": -69.13,
+  "fov": 35
+ },
+ "time": 0.44015887999999814,
+ "size": [
+  1600,
+  900
+ ],
+ "center": {
+  "x": -40,
+  "y": 29.868489146232605,
+  "z": -69.13
+ },
+ "boxSize": {
+  "x": 2.0399999618530273,
+  "y": 2.0335652828216553,
+  "z": 0.25999999046325684
+ },
+ "mode": "title",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "at": "2026-10-25T01:39:25.394Z"
+}

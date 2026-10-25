@@ -7,6 +7,8 @@
 //    view narrows to the Aim FOV; the sniper's narrows to its scope, behind the scope's glass;
 //  - 5 again (or the run ending) puts him back in third person with his head on.
 // CL-252: the eases back get 12 s (a slow 2-core box took more than 6 s of real time at the test page's frame rate).
+// CL-260 part 2: first person's way in gets 20 s (the gun now in view at the hip is more for the 2-core box's
+// software renderer to draw; it came in at w 0.93 at 12 s).
 (async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -25,7 +27,7 @@
     ok(!F().first && head().visible, 'third person to start, his head on');
 
     T.setViewFirstDbg(true);
-    ok(await until(() => F().w > 0.95, 12000), 'the 5 key: first person (w ' + F().w.toFixed(2) + ')');
+    ok(await until(() => F().w > 0.95, 20000), 'the 5 key: first person (w ' + F().w.toFixed(2) + ')');
     await wait(900);
     const d0 = cam.position.distanceTo(eyePoint());
     ok(d0 < 0.12, 'the camera is at his eyes (' + d0.toFixed(3) + ' m from his head\'s eye point)');

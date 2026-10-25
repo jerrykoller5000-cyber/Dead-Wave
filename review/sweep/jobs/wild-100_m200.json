@@ -1,0 +1,189 @@
+{
+ "shots": [
+  {
+   "cam": {
+    "x": 100,
+    "y": 12.43,
+    "z": -175,
+    "tx": 100,
+    "ty": 11.93,
+    "tz": -200,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round 100,-200: from the north, his eye height",
+   "out": "review/sweep/wild-100_m200/wild-100_m200-from-north.png"
+  },
+  {
+   "cam": {
+    "x": 125,
+    "y": 12.43,
+    "z": -200,
+    "tx": 100,
+    "ty": 11.93,
+    "tz": -200,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round 100,-200: from the east, his eye height",
+   "out": "review/sweep/wild-100_m200/wild-100_m200-from-east.png"
+  },
+  {
+   "cam": {
+    "x": 100,
+    "y": 12.43,
+    "z": -225,
+    "tx": 100,
+    "ty": 11.93,
+    "tz": -200,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round 100,-200: from the south, his eye height",
+   "out": "review/sweep/wild-100_m200/wild-100_m200-from-south.png"
+  },
+  {
+   "cam": {
+    "x": 75,
+    "y": 12.43,
+    "z": -200,
+    "tx": 100,
+    "ty": 11.93,
+    "tz": -200,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round 100,-200: from the west, his eye height",
+   "out": "review/sweep/wild-100_m200/wild-100_m200-from-west.png"
+  },
+  {
+   "cam": {
+    "x": 115,
+    "y": 38.230000000000004,
+    "z": -185,
+    "tx": 100,
+    "ty": 10.73,
+    "tz": -200,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round 100,-200: from above",
+   "out": "review/sweep/wild-100_m200/wild-100_m200-above.png"
+  },
+  {
+   "cam": {
+    "x": 117.5,
+    "y": 16.73,
+    "z": -182.5,
+    "tx": 100,
+    "ty": 11.73,
+    "tz": -200,
+    "fov": 60
+   },
+   "time": "night",
+   "caption": "The wild round 100,-200: at night",
+   "out": "review/sweep/wild-100_m200/wild-100_m200-night.png"
+  },
+  {
+   "cam": {
+    "x": 111.41,
+    "y": 8.42,
+    "z": -207.84,
+    "tx": 108.21,
+    "ty": 7.220000000000001,
+    "tz": -211.04,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "overlap: mesh · part 2/2 and tree:oak overlap: 98.98 % of the smaller footprint, 5.84 m of height",
+   "out": "review/sweep/wild-100_m200/wild-100_m200-suspect-1.png"
+  },
+  {
+   "cam": {
+    "x": 78.08,
+    "y": 9.82,
+    "z": -189.83,
+    "tx": 74.88,
+    "ty": 8.620000000000001,
+    "tz": -193.03,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "overlap: mesh · part 1/2 and tree:birch overlap: 99 % of the smaller footprint, 7.1 m of height",
+   "out": "review/sweep/wild-100_m200/wild-100_m200-suspect-2.png"
+  },
+  {
+   "cam": {
+    "x": 111.01,
+    "y": 11.98,
+    "z": -207.79000000000002,
+    "tx": 107.81,
+    "ty": 10.780000000000001,
+    "tz": -210.99,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "overlap: mesh · part 2/2 and tree:oak overlap: 98.98 % of the smaller footprint, 5.25 m of height",
+   "out": "review/sweep/wild-100_m200/wild-100_m200-suspect-3.png"
+  },
+  {
+   "cam": {
+    "x": 111.41,
+    "y": 11.95,
+    "z": -207.84,
+    "tx": 108.21,
+    "ty": 10.75,
+    "tz": -211.04,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "branches: canopy:oak's branches through mesh · part 2/2 (99.95 % of the smaller footprint, 2.31 m of height)",
+   "out": "review/sweep/wild-100_m200/wild-100_m200-suspect-4.png"
+  },
+  {
+   "cam": {
+    "x": 78.08,
+    "y": 9.94,
+    "z": -189.83,
+    "tx": 74.88,
+    "ty": 8.74,
+    "tz": -193.03,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "branches: canopy:birch's branches through mesh · part 1/2 (97.26 % of the smaller footprint, 6.98 m of height)",
+   "out": "review/sweep/wild-100_m200/wild-100_m200-suspect-5.png"
+  },
+  {
+   "cam": {
+    "x": 111.01,
+    "y": 11.98,
+    "z": -207.79000000000002,
+    "tx": 107.81,
+    "ty": 10.780000000000001,
+    "tz": -210.99,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "branches: canopy:oak's branches through mesh · part 2/2 (99.94 % of the smaller footprint, 5.25 m of height)",
+   "out": "review/sweep/wild-100_m200/wild-100_m200-suspect-6.png"
+  },
+  {
+   "cam": {
+    "x": 97.18,
+    "y": 14.9,
+    "z": -176.74,
+    "tx": 93.98,
+    "ty": 13.700000000000001,
+    "tz": -179.94,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "invisible-wall: a collider (r 1.7 m, 13.3 to 17 m) with nothing visible there",
+   "out": "review/sweep/wild-100_m200/wild-100_m200-suspect-7.png"
+  }
+ ],
+ "out": "review/sweep/wild-100_m200/",
+ "cols": 4,
+ "size": "1280x720"
+}

@@ -4,7 +4,8 @@ export function buildConvoyVisual(THREE, TSL, foldStatic, wreck, groundAt) {
   const C = {
     shell: 0xc5c3b6, roof: 0xa9aa9e, shade: 0x818b83, red: 0x9d3735,
     fadedRed: 0x723a37, black: 0x242b2b, glass: 0x273a40, steel: 0x747a73,
-    rust: 0x795341, lamp: 0xd8c797, rubber: 0x202322, pulse: 0xffd45c
+    rust: 0x795341, lamp: 0xd8c797, rubber: 0x202322, pulse: 0xffd45c,
+    ready: 0x94ffc1, gauge: 0xe1b94e
   };
   const mats = new Map();
   const mat = (color, more = {}) => {
@@ -117,17 +118,32 @@ export function buildConvoyVisual(THREE, TSL, foldStatic, wreck, groundAt) {
   const jack = new THREE.Group(); jack.name = 'convoy-jack'; wreck.add(jack);
   const jackX = 1.72, jackZ = -2.28;
   jack.position.set(jackX, groundAt(jackX, jackZ), jackZ);
-  box(jack, .6, .08, .5, C.black, 0, .04, 0);
-  box(jack, .3, .12, .28, C.rust, 0, .14, 0);
+  // The broad foot, braced column and cradle make the load path legible. A
+  // narrow gauge faces the player (+x); it fills one eighth on each pump.
+  box(jack, .82, .09, .67, C.black, 0, .045, 0);
+  box(jack, .68, .035, .55, C.rust, 0, .11, 0);
+  for (const x of [-.29, .29]) for (const z of [-.22, .22]) cyl(jack, .035, .035, .018, C.steel, x, .137, z);
+  cyl(jack, .21, .24, .43, C.rust, 0, .35, 0);
+  box(jack, .035, .12, .59, C.black, .42, .22, 0);
+  for (let i = 1; i < 8; i++) box(jack, .045, .024, .009, C.steel, .45, .22, -.295 + i * .074);
+  const gaugeMat = new THREE.MeshStandardMaterial({ color: C.gauge, emissive: C.gauge, emissiveIntensity: .8, roughness: .55 });
+  const gauge = new THREE.Mesh(new THREE.BoxGeometry(.049, .072, .59), gaugeMat);
+  gauge.position.set(.45, .22, -.295); jack.add(gauge);
   const ram = new THREE.Group(); jack.add(ram);
-  cyl(ram, .09, .12, .52, C.steel, 0, .45, 0);
-  cyl(ram, .15, .15, .07, C.black, 0, .74, 0);
-  bar(jack, [.05, .34, 0], [.52, .72, .14], .035, C.steel);
-  box(jack, .18, .07, .1, C.rubber, .57, .75, .15);
-  // One glowing beat ring is the only constantly changing jack draw.
+  // The shaft stays nested in the housing even at full extension.
+  cyl(ram, .12, .13, 1.05, C.steel, 0, .38, 0);
+  box(ram, .48, .08, .33, C.black, -.12, .87, 0);
+  bar(ram, [-.2, .86, -.12], [-.68, .9, -.12], .045, C.steel);
+  bar(ram, [-.2, .86, .12], [-.68, .9, .12], .045, C.steel);
+  const handle = new THREE.Group(); handle.position.set(.08, .38, .03); jack.add(handle);
+  bar(handle, [0, 0, 0], [.61, .3, .12], .048, C.steel);
+  box(handle, .24, .09, .13, C.rubber, .66, .32, .12);
+  // The expanding ring and raised lamp are visible from both camera heights.
   const pulseMat = new THREE.MeshStandardMaterial({ color: C.pulse, emissive: C.pulse, emissiveIntensity: .12, roughness: .65 });
-  const pulse = new THREE.Mesh(new THREE.TorusGeometry(.25, .029, 6, 20), pulseMat);
-  pulse.rotation.x = Math.PI / 2; pulse.position.y = .17; jack.add(pulse);
+  const pulse = new THREE.Mesh(new THREE.TorusGeometry(.4, .038, 6, 24), pulseMat);
+  pulse.rotation.x = Math.PI / 2; pulse.position.y = .165; jack.add(pulse);
+  const cueLamp = new THREE.Mesh(new THREE.SphereGeometry(.095, 10, 7), pulseMat);
+  cueLamp.position.set(.31, .64, .23); jack.add(cueLamp);
   // The cooler itself is the existing objective prop, at (1.5, -1.2). A bent
   // sill above it explains why it cannot be pulled free until the jack lifts.
   const cy = groundAt(1.5, -1.2);
@@ -139,24 +155,47 @@ export function buildConvoyVisual(THREE, TSL, foldStatic, wreck, groundAt) {
   // separately because its hinge changes rotation at runtime.
   foldStatic(THREE, TSL, still);
   foldStatic(THREE, TSL, door);
-  foldStatic(THREE, TSL, jack, { skip: (o) => o === pulse || o === ram });
+  foldStatic(THREE, TSL, jack, { skip: (o) => o === pulse || o === ram || o === handle || o === gauge || o === cueLamp });
   foldStatic(THREE, TSL, ram);
+  foldStatic(THREE, TSL, handle);
   foldStatic(THREE, TSL, pin);
   wreck.updateWorldMatrix(true, true);
   const jackAt = wreck.localToWorld(new THREE.Vector3(jackX + .42, groundAt(jackX, jackZ), jackZ + .15));
   const setDoorOpen = (open) => { hinge.rotation.y = open ? 1.52 : 0; };
-  const setBeatPulse = (v) => {
+  const setBeatPulse = (v, ready = false) => {
     const t = Math.max(0, Math.min(1, Number(v) || 0));
-    pulse.scale.setScalar(1 + t * .32);
-    pulseMat.emissiveIntensity = .12 + t * 2.6;
+    pulse.scale.setScalar(1 + t * .42);
+    cueLamp.scale.setScalar(1 + t * .45);
+    pulseMat.color.setHex(ready ? C.ready : C.pulse);
+    pulseMat.emissive.setHex(ready ? C.ready : C.pulse);
+    pulseMat.emissiveIntensity = .12 + t * 2.8;
   };
   const setJackProgress = (v) => {
-    const rise = Math.max(0, Math.min(1, Number(v) || 0)) * .2;
+    const progress = Math.max(0, Math.min(1, Number(v) || 0));
+    const rise = progress * .52;
     ram.position.y = rise;
-    vehicle.position.y = 1.58 + rise;
-    pin.position.y = rise;
-    sleeperMount.position.y = sleeperRestY + rise;
+    vehicle.position.y = 1.58 + rise * .68;
+    vehicle.rotation.z = -.89 + progress * .16;
+    pin.position.y = rise * .68;
+    sleeperMount.position.y = sleeperRestY + rise * .68;
+    gauge.scale.z = Math.max(.001, progress);
+    gauge.position.z = -.295 + .295 * progress;
+  };
+  let strokeTime = 0, strokeSign = 1, coolerSlide = 0;
+  const stroke = (miss = false) => { strokeTime = .28; strokeSign = miss ? -1 : 1; };
+  const animate = (dt, cooler = null, released = false) => {
+    strokeTime = Math.max(0, strokeTime - Math.max(0, dt));
+    const motion = strokeTime / .28;
+    handle.rotation.z = strokeSign * motion * .38;
+    coolerSlide = released ? Math.min(1, coolerSlide + Math.max(0, dt) * 1.8) : 0;
+    if (cooler?.group && cooler.centre && cooler.approach) {
+      const dx = cooler.approach.x - cooler.centre.x;
+      const dz = cooler.approach.z - cooler.centre.z;
+      const d = Math.hypot(dx, dz) || 1;
+      cooler.group.position.set(cooler.centre.x + dx / d * .65 * coolerSlide,
+        cooler.centre.y, cooler.centre.z + dz / d * .65 * coolerSlide);
+    }
   };
   setDoorOpen(false); setBeatPulse(0); setJackProgress(0);
-  return { jackAt, sleeperMount, setDoorOpen, setBeatPulse, setJackProgress, vehicle, jack, door: hinge };
+  return { jackAt, sleeperMount, setDoorOpen, setBeatPulse, setJackProgress, stroke, animate, vehicle, jack, door: hinge, gauge };
 }

@@ -1,0 +1,203 @@
+{
+ "shots": [
+  {
+   "cam": {
+    "x": 0,
+    "y": 6.12,
+    "z": 275,
+    "tx": 0,
+    "ty": 5.62,
+    "tz": 250,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round 0,250: from the north, his eye height",
+   "out": "review/sweep/wild-0_250/wild-0_250-from-north.png"
+  },
+  {
+   "cam": {
+    "x": 25,
+    "y": 6.12,
+    "z": 250,
+    "tx": 0,
+    "ty": 5.62,
+    "tz": 250,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round 0,250: from the east, his eye height",
+   "out": "review/sweep/wild-0_250/wild-0_250-from-east.png"
+  },
+  {
+   "cam": {
+    "x": 0,
+    "y": 6.12,
+    "z": 225,
+    "tx": 0,
+    "ty": 5.62,
+    "tz": 250,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round 0,250: from the south, his eye height",
+   "out": "review/sweep/wild-0_250/wild-0_250-from-south.png"
+  },
+  {
+   "cam": {
+    "x": -25,
+    "y": 6.12,
+    "z": 250,
+    "tx": 0,
+    "ty": 5.62,
+    "tz": 250,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round 0,250: from the west, his eye height",
+   "out": "review/sweep/wild-0_250/wild-0_250-from-west.png"
+  },
+  {
+   "cam": {
+    "x": 15,
+    "y": 31.92,
+    "z": 265,
+    "tx": 0,
+    "ty": 4.42,
+    "tz": 250,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round 0,250: from above",
+   "out": "review/sweep/wild-0_250/wild-0_250-above.png"
+  },
+  {
+   "cam": {
+    "x": 17.5,
+    "y": 10.42,
+    "z": 267.5,
+    "tx": 0,
+    "ty": 5.42,
+    "tz": 250,
+    "fov": 60
+   },
+   "time": "night",
+   "caption": "The wild round 0,250: at night",
+   "out": "review/sweep/wild-0_250/wild-0_250-night.png"
+  },
+  {
+   "cam": {
+    "x": -12.96,
+    "y": 5.76,
+    "z": 239.14,
+    "tx": -16.16,
+    "ty": 4.5600000000000005,
+    "tz": 235.94,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "overlap: mesh · part 5/12 and tree:oak overlap: 99.41 % of the smaller footprint, 5.59 m of height",
+   "out": "review/sweep/wild-0_250/wild-0_250-suspect-1.png"
+  },
+  {
+   "cam": {
+    "x": -13.240000000000002,
+    "y": 9.26,
+    "z": 239.23999999999998,
+    "tx": -16.44,
+    "ty": 8.06,
+    "tz": 236.04,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "overlap: mesh · part 5/12 and tree:oak overlap: 99.41 % of the smaller footprint, 4.93 m of height",
+   "out": "review/sweep/wild-0_250/wild-0_250-suspect-2.png"
+  },
+  {
+   "cam": {
+    "x": 18.13,
+    "y": 5.48,
+    "z": 229.45999999999998,
+    "tx": 14.93,
+    "ty": 4.28,
+    "tz": 226.26,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "overlap: mesh · part 4/5 and tree:birch overlap: 101.82 % of the smaller footprint, 4.84 m of height",
+   "out": "review/sweep/wild-0_250/wild-0_250-suspect-3.png"
+  },
+  {
+   "cam": {
+    "x": 18.16,
+    "y": 7.970000000000001,
+    "z": 229.45999999999998,
+    "tx": 14.96,
+    "ty": 6.7700000000000005,
+    "tz": 226.26,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "overlap: mesh · part 4/5 and tree:birch overlap: 101.82 % of the smaller footprint, 3.76 m of height",
+   "out": "review/sweep/wild-0_250/wild-0_250-suspect-4.png"
+  },
+  {
+   "cam": {
+    "x": -12.96,
+    "y": 9.21,
+    "z": 239.14,
+    "tx": -16.16,
+    "ty": 8.01,
+    "tz": 235.94,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "branches: canopy:oak's branches through mesh · part 5/12 (100.04 % of the smaller footprint, 2.14 m of height)",
+   "out": "review/sweep/wild-0_250/wild-0_250-suspect-5.png"
+  },
+  {
+   "cam": {
+    "x": -13.240000000000002,
+    "y": 9.26,
+    "z": 239.23999999999998,
+    "tx": -16.44,
+    "ty": 8.06,
+    "tz": 236.04,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "branches: canopy:oak's branches through mesh · part 5/12 (96.22 % of the smaller footprint, 4.93 m of height)",
+   "out": "review/sweep/wild-0_250/wild-0_250-suspect-6.png"
+  },
+  {
+   "cam": {
+    "x": 18.13,
+    "y": 7.9399999999999995,
+    "z": 229.45999999999998,
+    "tx": 14.93,
+    "ty": 6.74,
+    "tz": 226.26,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "branches: canopy:birch's branches through mesh · part 4/5 (100.66 % of the smaller footprint, 2.38 m of height",
+   "out": "review/sweep/wild-0_250/wild-0_250-suspect-7.png"
+  },
+  {
+   "cam": {
+    "x": 18.16,
+    "y": 7.970000000000001,
+    "z": 229.45999999999998,
+    "tx": 14.96,
+    "ty": 6.7700000000000005,
+    "tz": 226.26,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "branches: canopy:birch's branches through mesh · part 4/5 (98.37 % of the smaller footprint, 3.76 m of height)",
+   "out": "review/sweep/wild-0_250/wild-0_250-suspect-8.png"
+  }
+ ],
+ "out": "review/sweep/wild-0_250/",
+ "cols": 4,
+ "size": "1280x720"
+}

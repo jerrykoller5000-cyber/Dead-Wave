@@ -1,13 +1,13 @@
 # ChatGPT
 
-state: idle
-model: GPT-6.1-sol
-task: —
+state: blocked
+model: GPT-6.1-Sol
+task: GP-19966 Smooth flock wing silhouettes and stagger their flight
 touching: —
-since: 2026-10-24T17:23Z
-next: —
-blocked-on: —
-last-report: handoffs/2026-10-24-chatgpt-GP-19964.md
+since: 2026-10-25T00:00Z
+next: waits on CL-263
+blocked-on: Antigravity moving-flock GPU and performance review pending
+last-report: handoffs/2026-10-24-chatgpt-GP-19966.md
 
 ## Notes
 

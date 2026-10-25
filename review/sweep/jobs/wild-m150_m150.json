@@ -1,0 +1,175 @@
+{
+ "shots": [
+  {
+   "cam": {
+    "x": -150,
+    "y": -4.12,
+    "z": -125,
+    "tx": -150,
+    "ty": -4.62,
+    "tz": -150,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round -150,-150: from the north, his eye height",
+   "out": "review/sweep/wild-m150_m150/wild-m150_m150-from-north.png"
+  },
+  {
+   "cam": {
+    "x": -125,
+    "y": -4.12,
+    "z": -150,
+    "tx": -150,
+    "ty": -4.62,
+    "tz": -150,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round -150,-150: from the east, his eye height",
+   "out": "review/sweep/wild-m150_m150/wild-m150_m150-from-east.png"
+  },
+  {
+   "cam": {
+    "x": -150,
+    "y": -4.12,
+    "z": -175,
+    "tx": -150,
+    "ty": -4.62,
+    "tz": -150,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round -150,-150: from the south, his eye height",
+   "out": "review/sweep/wild-m150_m150/wild-m150_m150-from-south.png"
+  },
+  {
+   "cam": {
+    "x": -175,
+    "y": -4.12,
+    "z": -150,
+    "tx": -150,
+    "ty": -4.62,
+    "tz": -150,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round -150,-150: from the west, his eye height",
+   "out": "review/sweep/wild-m150_m150/wild-m150_m150-from-west.png"
+  },
+  {
+   "cam": {
+    "x": -135,
+    "y": 21.680000000000003,
+    "z": -135,
+    "tx": -150,
+    "ty": -5.82,
+    "tz": -150,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round -150,-150: from above",
+   "out": "review/sweep/wild-m150_m150/wild-m150_m150-above.png"
+  },
+  {
+   "cam": {
+    "x": -132.5,
+    "y": 0.17999999999999972,
+    "z": -132.5,
+    "tx": -150,
+    "ty": -4.82,
+    "tz": -150,
+    "fov": 60
+   },
+   "time": "night",
+   "caption": "The wild round -150,-150: at night",
+   "out": "review/sweep/wild-m150_m150/wild-m150_m150-night.png"
+  },
+  {
+   "cam": {
+    "x": -143.96,
+    "y": -3.39,
+    "z": -124.36,
+    "tx": -147.16,
+    "ty": -4.59,
+    "tz": -127.56,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "floating: group floats 1.79 m above the ground (its whole footprint)",
+   "out": "review/sweep/wild-m150_m150/wild-m150_m150-suspect-1.png"
+  },
+  {
+   "cam": {
+    "x": -144.23000000000002,
+    "y": -3.4599999999999995,
+    "z": -125.10000000000001,
+    "tx": -147.43,
+    "ty": -4.659999999999999,
+    "tz": -128.3,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "floating: group floats 1.63 m above the ground (its whole footprint)",
+   "out": "review/sweep/wild-m150_m150/wild-m150_m150-suspect-2.png"
+  },
+  {
+   "cam": {
+    "x": -144.92000000000002,
+    "y": -2.82,
+    "z": -124.83,
+    "tx": -148.12,
+    "ty": -4.02,
+    "tz": -128.03,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "floating: group floats 2.29 m above the ground (its whole footprint)",
+   "out": "review/sweep/wild-m150_m150/wild-m150_m150-suspect-3.png"
+  },
+  {
+   "cam": {
+    "x": -136.58,
+    "y": -5.1,
+    "z": -161.58,
+    "tx": -139.78,
+    "ty": -6.3,
+    "tz": -164.78,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "floating: group floats 1.83 m above the ground (its whole footprint)",
+   "out": "review/sweep/wild-m150_m150/wild-m150_m150-suspect-4.png"
+  },
+  {
+   "cam": {
+    "x": -136.06,
+    "y": -3.86,
+    "z": -162.34,
+    "tx": -139.26,
+    "ty": -5.06,
+    "tz": -165.54,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "floating: group floats 2.96 m above the ground (its whole footprint)",
+   "out": "review/sweep/wild-m150_m150/wild-m150_m150-suspect-5.png"
+  },
+  {
+   "cam": {
+    "x": -136.56,
+    "y": -5.1,
+    "z": -162.39000000000001,
+    "tx": -139.76,
+    "ty": -6.3,
+    "tz": -165.59,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "floating: group floats 1.65 m above the ground (its whole footprint)",
+   "out": "review/sweep/wild-m150_m150/wild-m150_m150-suspect-6.png"
+  }
+ ],
+ "out": "review/sweep/wild-m150_m150/",
+ "cols": 4,
+ "size": "1280x720"
+}

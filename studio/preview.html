@@ -58,7 +58,9 @@ if (row === 'rig') dummy(-((N - 1) / 2) * spacing - 3.5, 0);
 // The reference, a row behind, at the same moments (scaled in time to the clip's length).
 const refName = q.get('ref') || clip.reference;
 if (refName && row === 'ref') {
-  const ref = loadReference(await (await fetch('../assets/anim/reference/ual.json')).json());
+  // CL-261: a cmu_ name is one of the CMU motion capture clips (studio/import-cmu.py), the rest UAL's.
+  const refFile = /^cmu_/.test(refName) ? 'cmu.json' : 'ual.json';
+  const ref = loadReference(await (await fetch('../assets/anim/reference/' + refFile)).json());
   const rc = ref.clip(refName);
   for (let i = 0; i < N; i++) {
     const man = makeMannequin(ref);

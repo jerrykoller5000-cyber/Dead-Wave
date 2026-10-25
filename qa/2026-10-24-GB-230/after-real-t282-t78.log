@@ -1,0 +1,21 @@
+GRANT grokbot GB-230: starting one game-test command
+ok    t282      4 pass   0 fail  88.6s  (real renderer)
+    LOG phase-wave at 5.8 s; grace 65.05410000000076 events alarm-started,wave-push
+    LOG spawn 6.1 s cave    d0 185 m, within 20 m at 55.1 s
+    LOG spawn 6.2 s cave    d0 185 m, within 20 m at 61.0 s
+    LOG spawn 6.3 s cave    d0 185 m, within 20 m at 61.0 s
+    LOG spawn 7.5 s cave    d0 186 m, within 20 m at 57.2 s
+    LOG spawn 7.7 s cave    d0 185 m, within 20 m at 61.4 s
+    LOG spawn 7.9 s cave    d0 186 m, within 20 m at 57.8 s
+    LOG spawn 8.0 s cave    d0 185 m, within 20 m at 61.4 s
+    LOG spawn 45.1 s claw-up d0 54 m, within 20 m at 57.0 s
+    LOG spawn 45.4 s claw-up d0 35 m, within 20 m at 51.5 s
+    LOG spawn 45.5 s claw-up d0 56 m, within 20 m at 58.9 s
+    LOG spawn 45.6 s claw-up d0 64 m, within 20 m at 61.7 s
+    LOG spawn 45.8 s claw-up d0 47 m, within 20 m at 56.2 s
+    LOG spawn 45.9 s claw-up d0 47 m, within 20 m at 49.8 s
+    LOG spawn 46.1 s claw-up d0 37 m, within 20 m at 53.6 s
+    LOG spawn 46.3 s claw-up d0 62 m, within 20 m at 62.7 s
+    LOG spawn spread 40.2 s; arrival spread 12.9 s (15 arrived)
+ok    t78      18 pass   0 fail  29.0s  (real renderer)
+2 checks: 22 pass, 0 fail (real renderer)

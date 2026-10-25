@@ -1,0 +1,91 @@
+{
+ "shots": [
+  {
+   "cam": {
+    "x": 91.37,
+    "y": 3.6799999999999997,
+    "z": -48.81999999999999,
+    "tx": 91.37,
+    "ty": 5.46,
+    "tz": -66.82,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Cabin 2: from the north, his eye height",
+   "out": "review/sweep/cabin-2/cabin-2-from-north.png"
+  },
+  {
+   "cam": {
+    "x": 109.37,
+    "y": 4.72,
+    "z": -66.82,
+    "tx": 91.37,
+    "ty": 5.46,
+    "tz": -66.82,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Cabin 2: from the east, his eye height",
+   "out": "review/sweep/cabin-2/cabin-2-from-east.png"
+  },
+  {
+   "cam": {
+    "x": 91.37,
+    "y": 8.379999999999999,
+    "z": -84.82,
+    "tx": 91.37,
+    "ty": 5.46,
+    "tz": -66.82,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Cabin 2: from the south, his eye height",
+   "out": "review/sweep/cabin-2/cabin-2-from-south.png"
+  },
+  {
+   "cam": {
+    "x": 73.37,
+    "y": 6.37,
+    "z": -66.82,
+    "tx": 91.37,
+    "ty": 5.46,
+    "tz": -66.82,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Cabin 2: from the west, his eye height",
+   "out": "review/sweep/cabin-2/cabin-2-from-west.png"
+  },
+  {
+   "cam": {
+    "x": 102.17,
+    "y": 24.060000000000002,
+    "z": -56.019999999999996,
+    "tx": 91.37,
+    "ty": 4.26,
+    "tz": -66.82,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Cabin 2: from above",
+   "out": "review/sweep/cabin-2/cabin-2-above.png"
+  },
+  {
+   "cam": {
+    "x": 103.97,
+    "y": 10.26,
+    "z": -54.21999999999999,
+    "tx": 91.37,
+    "ty": 5.26,
+    "tz": -66.82,
+    "fov": 60
+   },
+   "time": "night",
+   "caption": "Cabin 2: at night",
+   "out": "review/sweep/cabin-2/cabin-2-night.png"
+  }
+ ],
+ "out": "review/sweep/cabin-2/",
+ "cols": 4,
+ "size": "1280x720"
+}

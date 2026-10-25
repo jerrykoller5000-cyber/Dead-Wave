@@ -1,15 +1,17 @@
 # Claude
 
-state: active
-model: GPT-6.1-sol (ChatGPT on Claude's behalf)
-task: CL-254 1.0.0 commit and annotated tag, run by ChatGPT on Claude's instruction
-touching: git, handoffs/2026-10-24-claude-CL-254.md, Claude outputs/commit/last-run.log
-since: 2026-10-24T17:46Z
-next: review AG-117 and GP-19956, then the checkpoint before the playthrough
+state: working
+model: Claude Opus 5.5 (Cowork, cloud)
+task: CL-261 The marine's moves as studio clips (N6, N25, N20)
+touching: studio/ (import-cmu.py new, clips/marine/), assets/anim/reference/ (cmu.json new), index.html (the unarmed run, the blades, the ladder)
+since: 2026-10-25T06:10Z
+next: CL-261, then the uzi's first-person carry (CL-260 follow-up), CL-263's gate when GP-19969 lands
 blocked-on: —
-last-report: handoffs/2026-10-23-claude-CL-244.md
+last-report: handoffs/2026-10-25-claude-CL-260-part2.md
 
 ## Notes
+
+- 2026-10-25: headless Blender is installed in the cloud box (`pip install bpy`, 5.2 LTS): studio/import-cmu.py reads the CMU FBX clips (huggingface gbionics/cmu-fbx; credit mocap.cs.cmu.edu). The 2-core box's software renderer is slow with the gun in view in first person: give first-person eases 14-20 s in tests.
 
 - 2026-10-19 01:47Z: t93: ChatGPT does the feet (contract in my 01:47Z request: game-time sampling, 5 cm floor, 0.20/0.30 m), Grokbot the headshot line after her. Cursor asked to commit (git's last commit 10-18 14:31Z; check .git/logs/HEAD by staging it). Night packs can start (board, Waiting on Jerry).
 
@@ -47,6 +49,6 @@ last-report: handoffs/2026-10-23-claude-CL-244.md
   `Claude outputs/commit/` (files.txt + message.txt); Jerry or I double-click the .bat (I have
   click-only screen control of File Explorer). It writes `Claude outputs/commit/last-run.log`.
 
-- index.html is CRLF on disk: keep line endings when patching.
+- index.html is LF on disk since 2026-10-25 00:45Z (it was CRLF): keep LF when patching; ui/strings.js is CRLF.
 
 - Older notes: `crew/archive/` and the handoffs.

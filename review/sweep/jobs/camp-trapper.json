@@ -1,0 +1,119 @@
+{
+ "shots": [
+  {
+   "cam": {
+    "x": -33.49,
+    "y": 3.65,
+    "z": 65.81,
+    "tx": -33.49,
+    "ty": 1.69,
+    "tz": 43.81,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Trapper Camp: from the north, his eye height",
+   "out": "review/sweep/camp-trapper/camp-trapper-from-north.png"
+  },
+  {
+   "cam": {
+    "x": -11.490000000000002,
+    "y": 1.8,
+    "z": 43.81,
+    "tx": -33.49,
+    "ty": 1.69,
+    "tz": 43.81,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Trapper Camp: from the east, his eye height",
+   "out": "review/sweep/camp-trapper/camp-trapper-from-east.png"
+  },
+  {
+   "cam": {
+    "x": -33.49,
+    "y": -1.0200000000000002,
+    "z": 21.810000000000002,
+    "tx": -33.49,
+    "ty": 1.69,
+    "tz": 43.81,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Trapper Camp: from the south, his eye height",
+   "out": "review/sweep/camp-trapper/camp-trapper-from-south.png"
+  },
+  {
+   "cam": {
+    "x": -55.49,
+    "y": -0.13000000000000012,
+    "z": 43.81,
+    "tx": -33.49,
+    "ty": 1.69,
+    "tz": 43.81,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Trapper Camp: from the west, his eye height",
+   "out": "review/sweep/camp-trapper/camp-trapper-from-west.png"
+  },
+  {
+   "cam": {
+    "x": -20.290000000000003,
+    "y": 24.69,
+    "z": 57.010000000000005,
+    "tx": -33.49,
+    "ty": 0.49,
+    "tz": 43.81,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Trapper Camp: from above",
+   "out": "review/sweep/camp-trapper/camp-trapper-above.png"
+  },
+  {
+   "cam": {
+    "x": -18.090000000000003,
+    "y": 6.49,
+    "z": 59.21,
+    "tx": -33.49,
+    "ty": 1.49,
+    "tz": 43.81,
+    "fov": 60
+   },
+   "time": "night",
+   "caption": "Trapper Camp: at night",
+   "out": "review/sweep/camp-trapper/camp-trapper-night.png"
+  },
+  {
+   "cam": {
+    "x": -23.36,
+    "y": 2.52,
+    "z": 52.480000000000004,
+    "tx": -26.56,
+    "ty": 1.32,
+    "tz": 49.28,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "hangs: mesh · part 1/2: one side 0.6 m off the ground on a slope (ground 0.32 to 1.35 under it)",
+   "out": "review/sweep/camp-trapper/camp-trapper-suspect-1.png"
+  },
+  {
+   "cam": {
+    "x": -21.580000000000002,
+    "y": 1.6600000000000001,
+    "z": 43.900000000000006,
+    "tx": -24.78,
+    "ty": 0.46,
+    "tz": 40.7,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "overlap: cellar-hatch in history-props and trapper-path · part 1/5 overlap: 100.12 % of the smaller footprint,",
+   "out": "review/sweep/camp-trapper/camp-trapper-suspect-2.png"
+  }
+ ],
+ "out": "review/sweep/camp-trapper/",
+ "cols": 4,
+ "size": "1280x720"
+}

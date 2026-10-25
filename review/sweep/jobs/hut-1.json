@@ -1,0 +1,91 @@
+{
+ "shots": [
+  {
+   "cam": {
+    "x": 33.73,
+    "y": 2.81,
+    "z": 49.57,
+    "tx": 33.73,
+    "ty": 0.17999999999999994,
+    "tz": 33.57,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Hut 1: from the north, his eye height",
+   "out": "review/sweep/hut-1/hut-1-from-north.png"
+  },
+  {
+   "cam": {
+    "x": 49.73,
+    "y": 0.82,
+    "z": 33.57,
+    "tx": 33.73,
+    "ty": 0.17999999999999994,
+    "tz": 33.57,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Hut 1: from the east, his eye height",
+   "out": "review/sweep/hut-1/hut-1-from-east.png"
+  },
+  {
+   "cam": {
+    "x": 33.73,
+    "y": -1.2700000000000002,
+    "z": 17.57,
+    "tx": 33.73,
+    "ty": 0.17999999999999994,
+    "tz": 33.57,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Hut 1: from the south, his eye height",
+   "out": "review/sweep/hut-1/hut-1-from-south.png"
+  },
+  {
+   "cam": {
+    "x": 17.729999999999997,
+    "y": 0.31000000000000005,
+    "z": 33.57,
+    "tx": 33.73,
+    "ty": 0.17999999999999994,
+    "tz": 33.57,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Hut 1: from the west, his eye height",
+   "out": "review/sweep/hut-1/hut-1-from-west.png"
+  },
+  {
+   "cam": {
+    "x": 43.33,
+    "y": 16.580000000000002,
+    "z": 43.17,
+    "tx": 33.73,
+    "ty": -1.02,
+    "tz": 33.57,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Hut 1: from above",
+   "out": "review/sweep/hut-1/hut-1-above.png"
+  },
+  {
+   "cam": {
+    "x": 44.92999999999999,
+    "y": 6.51,
+    "z": 44.769999999999996,
+    "tx": 33.73,
+    "ty": -0.020000000000000018,
+    "tz": 33.57,
+    "fov": 60
+   },
+   "time": "night",
+   "caption": "Hut 1: at night",
+   "out": "review/sweep/hut-1/hut-1-night.png"
+  }
+ ],
+ "out": "review/sweep/hut-1/",
+ "cols": 4,
+ "size": "1280x720"
+}

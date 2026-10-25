@@ -1,0 +1,147 @@
+{
+ "shots": [
+  {
+   "cam": {
+    "x": 200,
+    "y": 7.11,
+    "z": -125,
+    "tx": 200,
+    "ty": 6.61,
+    "tz": -150,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round 200,-150: from the north, his eye height",
+   "out": "review/sweep/wild-200_m150/wild-200_m150-from-north.png"
+  },
+  {
+   "cam": {
+    "x": 225,
+    "y": 7.11,
+    "z": -150,
+    "tx": 200,
+    "ty": 6.61,
+    "tz": -150,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round 200,-150: from the east, his eye height",
+   "out": "review/sweep/wild-200_m150/wild-200_m150-from-east.png"
+  },
+  {
+   "cam": {
+    "x": 200,
+    "y": 7.11,
+    "z": -175,
+    "tx": 200,
+    "ty": 6.61,
+    "tz": -150,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round 200,-150: from the south, his eye height",
+   "out": "review/sweep/wild-200_m150/wild-200_m150-from-south.png"
+  },
+  {
+   "cam": {
+    "x": 175,
+    "y": 7.11,
+    "z": -150,
+    "tx": 200,
+    "ty": 6.61,
+    "tz": -150,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round 200,-150: from the west, his eye height",
+   "out": "review/sweep/wild-200_m150/wild-200_m150-from-west.png"
+  },
+  {
+   "cam": {
+    "x": 215,
+    "y": 32.910000000000004,
+    "z": -135,
+    "tx": 200,
+    "ty": 5.41,
+    "tz": -150,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round 200,-150: from above",
+   "out": "review/sweep/wild-200_m150/wild-200_m150-above.png"
+  },
+  {
+   "cam": {
+    "x": 217.5,
+    "y": 11.41,
+    "z": -132.5,
+    "tx": 200,
+    "ty": 6.41,
+    "tz": -150,
+    "fov": 60
+   },
+   "time": "night",
+   "caption": "The wild round 200,-150: at night",
+   "out": "review/sweep/wild-200_m150/wild-200_m150-night.png"
+  },
+  {
+   "cam": {
+    "x": 178.64,
+    "y": 5.4399999999999995,
+    "z": -125.33999999999999,
+    "tx": 175.44,
+    "ty": 4.24,
+    "tz": -128.54,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "floating: group floats 1.04 m above the ground (its whole footprint)",
+   "out": "review/sweep/wild-200_m150/wild-200_m150-suspect-1.png"
+  },
+  {
+   "cam": {
+    "x": 192.5,
+    "y": 6.82,
+    "z": -137.01000000000002,
+    "tx": 189.3,
+    "ty": 5.62,
+    "tz": -140.21,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "overlap: mesh · part 4/11 and tree:oak overlap: 97.71 % of the smaller footprint, 2.38 m of height",
+   "out": "review/sweep/wild-200_m150/wild-200_m150-suspect-2.png"
+  },
+  {
+   "cam": {
+    "x": 192.58999999999997,
+    "y": 8.42,
+    "z": -136.93,
+    "tx": 189.39,
+    "ty": 7.220000000000001,
+    "tz": -140.13,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "overlap: mesh · part 4/11 and tree:oak overlap: 97.71 % of the smaller footprint, 2.1 m of height",
+   "out": "review/sweep/wild-200_m150/wild-200_m150-suspect-3.png"
+  },
+  {
+   "cam": {
+    "x": 192.5,
+    "y": 8.44,
+    "z": -137.01000000000002,
+    "tx": 189.3,
+    "ty": 7.24,
+    "tz": -140.21,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "branches: canopy:oak's branches through mesh · part 4/11 (100.25 % of the smaller footprint, 0.76 m of height)",
+   "out": "review/sweep/wild-200_m150/wild-200_m150-suspect-4.png"
+  }
+ ],
+ "out": "review/sweep/wild-200_m150/",
+ "cols": 4,
+ "size": "1280x720"
+}

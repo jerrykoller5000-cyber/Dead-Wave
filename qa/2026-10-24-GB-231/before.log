@@ -1,0 +1,20 @@
+GRANT grokbot GB-231: starting one game-test command
+ok    ../../qa/2026-10-24-GB-231/night1probe    0 pass   0 fail  90.3s  (real renderer)
+    LOG phase-wave at 5.8 s; grace 66.28939999999771 events alarm-started,wave-push
+    LOG spawn 6.1 s cave    d0 180 m, within 20 m at 63.1 s
+    LOG spawn 6.2 s cave    d0 180 m, within 20 m at 57.2 s
+    LOG spawn 6.4 s cave    d0 180 m, within 20 m at 58.1 s
+    LOG spawn 7.5 s cave    d0 180 m, within 20 m at 63.8 s
+    LOG spawn 7.6 s cave    d0 180 m, within 20 m at 61.0 s
+    LOG spawn 7.7 s cave    d0 180 m, within 20 m at 60.9 s
+    LOG spawn 7.8 s cave    d0 181 m, within 20 m at 25.6 s
+    LOG spawn 49.6 s claw-up d0 48 m, within 20 m at 59.8 s
+    LOG spawn 49.7 s claw-up d0 55 m, within 20 m at 63.2 s
+    LOG spawn 50.0 s claw-up d0 46 m, within 20 m at 59.6 s
+    LOG spawn 50.1 s claw-up d0 52 m, within 20 m at 62.9 s
+    LOG spawn 50.3 s claw-up d0 39 m, within 20 m at 53.8 s
+    LOG spawn 50.6 s claw-up d0 32 m, within 20 m at 55.5 s
+    LOG spawn 50.7 s claw-up d0 55 m, within 20 m at 63.0 s
+    LOG spawn 50.8 s claw-up d0 49 m, within 20 m at 63.3 s
+    LOG spawn spread 44.7 s; arrival spread 38.2 s (15 arrived)
+1 checks: 0 pass, 0 fail (real renderer)

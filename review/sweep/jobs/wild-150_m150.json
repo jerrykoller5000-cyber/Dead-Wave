@@ -1,0 +1,105 @@
+{
+ "shots": [
+  {
+   "cam": {
+    "x": 150,
+    "y": 8.86,
+    "z": -125,
+    "tx": 150,
+    "ty": 8.36,
+    "tz": -150,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round 150,-150: from the north, his eye height",
+   "out": "review/sweep/wild-150_m150/wild-150_m150-from-north.png"
+  },
+  {
+   "cam": {
+    "x": 175,
+    "y": 8.86,
+    "z": -150,
+    "tx": 150,
+    "ty": 8.36,
+    "tz": -150,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round 150,-150: from the east, his eye height",
+   "out": "review/sweep/wild-150_m150/wild-150_m150-from-east.png"
+  },
+  {
+   "cam": {
+    "x": 150,
+    "y": 8.86,
+    "z": -175,
+    "tx": 150,
+    "ty": 8.36,
+    "tz": -150,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round 150,-150: from the south, his eye height",
+   "out": "review/sweep/wild-150_m150/wild-150_m150-from-south.png"
+  },
+  {
+   "cam": {
+    "x": 125,
+    "y": 8.86,
+    "z": -150,
+    "tx": 150,
+    "ty": 8.36,
+    "tz": -150,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round 150,-150: from the west, his eye height",
+   "out": "review/sweep/wild-150_m150/wild-150_m150-from-west.png"
+  },
+  {
+   "cam": {
+    "x": 165,
+    "y": 34.660000000000004,
+    "z": -135,
+    "tx": 150,
+    "ty": 7.16,
+    "tz": -150,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round 150,-150: from above",
+   "out": "review/sweep/wild-150_m150/wild-150_m150-above.png"
+  },
+  {
+   "cam": {
+    "x": 167.5,
+    "y": 13.16,
+    "z": -132.5,
+    "tx": 150,
+    "ty": 8.16,
+    "tz": -150,
+    "fov": 60
+   },
+   "time": "night",
+   "caption": "The wild round 150,-150: at night",
+   "out": "review/sweep/wild-150_m150/wild-150_m150-night.png"
+  },
+  {
+   "cam": {
+    "x": 168.42,
+    "y": 8.44,
+    "z": -141.70000000000002,
+    "tx": 165.22,
+    "ty": 7.24,
+    "tz": -144.9,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "hangs: mesh · part 1/4: one side 0.61 m off the ground on a slope (ground 6.23 to 7.39 under it)",
+   "out": "review/sweep/wild-150_m150/wild-150_m150-suspect-1.png"
+  }
+ ],
+ "out": "review/sweep/wild-150_m150/",
+ "cols": 4,
+ "size": "1280x720"
+}

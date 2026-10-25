@@ -90,7 +90,7 @@
   "fight_night20": 0
  },
  "stings": {
-  "alarm": "sting_alarm",
+  "alarm": "sting_alarm_metal",
   "clear": "sting_clear",
   "dawn": "sting_dawn",
   "night_falls": "sting_night_falls",
@@ -116,6 +116,7 @@
   "fight_swarm": 3.0,
   "silent_drone": 3.0,
   "sting_alarm": 2.0,
+  "sting_alarm_metal": 2.0,
   "sting_clear": 2.0,
   "sting_dawn": 2.0,
   "sting_ember": 2.0,

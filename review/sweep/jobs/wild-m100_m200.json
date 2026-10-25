@@ -1,0 +1,105 @@
+{
+ "shots": [
+  {
+   "cam": {
+    "x": -100,
+    "y": 3.49,
+    "z": -175,
+    "tx": -100,
+    "ty": 2.99,
+    "tz": -200,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round -100,-200: from the north, his eye height",
+   "out": "review/sweep/wild-m100_m200/wild-m100_m200-from-north.png"
+  },
+  {
+   "cam": {
+    "x": -75,
+    "y": 3.49,
+    "z": -200,
+    "tx": -100,
+    "ty": 2.99,
+    "tz": -200,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round -100,-200: from the east, his eye height",
+   "out": "review/sweep/wild-m100_m200/wild-m100_m200-from-east.png"
+  },
+  {
+   "cam": {
+    "x": -100,
+    "y": 3.49,
+    "z": -225,
+    "tx": -100,
+    "ty": 2.99,
+    "tz": -200,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round -100,-200: from the south, his eye height",
+   "out": "review/sweep/wild-m100_m200/wild-m100_m200-from-south.png"
+  },
+  {
+   "cam": {
+    "x": -125,
+    "y": 3.49,
+    "z": -200,
+    "tx": -100,
+    "ty": 2.99,
+    "tz": -200,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round -100,-200: from the west, his eye height",
+   "out": "review/sweep/wild-m100_m200/wild-m100_m200-from-west.png"
+  },
+  {
+   "cam": {
+    "x": -85,
+    "y": 29.290000000000003,
+    "z": -185,
+    "tx": -100,
+    "ty": 1.79,
+    "tz": -200,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round -100,-200: from above",
+   "out": "review/sweep/wild-m100_m200/wild-m100_m200-above.png"
+  },
+  {
+   "cam": {
+    "x": -82.5,
+    "y": 7.79,
+    "z": -182.5,
+    "tx": -100,
+    "ty": 2.79,
+    "tz": -200,
+    "fov": 60
+   },
+   "time": "night",
+   "caption": "The wild round -100,-200: at night",
+   "out": "review/sweep/wild-m100_m200/wild-m100_m200-night.png"
+  },
+  {
+   "cam": {
+    "x": -94,
+    "y": 1.36,
+    "z": -193.9,
+    "tx": -97.2,
+    "ty": 0.16000000000000003,
+    "tz": -197.1,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "hangs: mesh · part 1/4: one side 0.62 m off the ground on a slope (ground -0.86 to 1.06 under it)",
+   "out": "review/sweep/wild-m100_m200/wild-m100_m200-suspect-1.png"
+  }
+ ],
+ "out": "review/sweep/wild-m100_m200/",
+ "cols": 4,
+ "size": "1280x720"
+}

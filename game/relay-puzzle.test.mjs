@@ -36,7 +36,7 @@ test('tuning: static far off, clearer as the dial nears, locked after holding it
   assert.equal(p.state.stage, 'tuning', 'not clear: no lock');
   p.setDial(f);
   let r = null; for (let i = 0; i < 20 && !r; i++) r = p.step(0.1);
-  assert.equal(r, 'locked'); assert.equal(p.state.stage, 'code');
+  assert.equal(r, 'locked'); assert.equal(p.state.stage, 'lever', 'CL-257: locked in, the lever is next');
   assert.equal(p.tune(500), RELAY.BAND[1], 'the dial stops at the end of the band');
 });
 
@@ -49,11 +49,16 @@ test('the number station: a digit is that many beeps, and the code is 1-9s', () 
   assert.equal(stationPlan([0]).beeps[0].long, true);
 });
 
-test('CL-184: one press starts the reboot and it runs by itself; only the code opens the vault', () => {
+test('CL-257: the lever reboots it, then it runs by itself; only the code opens the vault', () => {
   const p = createRelayPuzzle(seeded(9));
   for (const n of RELAY.ORDER) p.flip(n);
+  assert.equal(p.pullLever(), false, 'no lever before the station is locked in');
   p.setDial(p.state.freq); for (let i = 0; i < 20; i++) p.step(0.1);
-  assert.equal(p.heardCode(), true); assert.equal(p.state.stage, 'boot');
+  assert.equal(p.state.stage, 'lever');
+  assert.equal(p.heardCode(), false, 'heardCode no longer moves anything on');
+  assert.equal(p.startBoot(30), false, 'no reboot before the lever');
+  assert.equal(p.pullLever(), true); assert.equal(p.state.stage, 'boot'); assert.equal(p.state.lever, true);
+  assert.equal(p.pullLever(), false, 'once');
   assert.equal(p.boot(5), false); assert.equal(p.bootFrac(), 0, 'nothing runs before it is started');
   assert.equal(p.startBoot(30), true); assert.equal(p.startBoot(30), false, 'once');
   p.boot(8); p.boot(4);

@@ -19,20 +19,37 @@ test('the first E starts the jack; eight beat taps unlock the cooler', () => {
   assert.equal(mission.read().sleeperAlive, true);
 });
 
-test('the 0.18 second window accepts the edge and misses just beyond it', () => {
+test('the wider key-press window accepts its early edge and rejects an early tap', () => {
   const mission = createConvoyMission(); mission.start();
-  mission.step(CONVOY.beat - CONVOY.window / 2);
+  assert.deepEqual(mission.step(CONVOY.beat - CONVOY.window / 2 - 0.001), []);
+  assert.equal(mission.read().beatReady, false);
+  assert.deepEqual(kinds(mission.step(0.001)), ['beat-cue']);
+  assert.equal(mission.read().beatReady, true);
   assert.deepEqual(kinds(mission.tap()), ['pump']);
-  mission.step(CONVOY.beat - 0.001);
+  mission.step(CONVOY.beat - CONVOY.window / 2 - 0.001);
   assert.deepEqual(kinds(mission.tap()), ['slip', 'cab-bang']);
   assert.equal(mission.read().pumps, 0);
   assert.equal(mission.read().misses, 1);
 });
 
-test('two missed beats slip the jack, warn for half a second, then spit while open', () => {
+test('unpressed beats cue again without losing progress or angering the sleeper', () => {
   const mission = createConvoyMission(); mission.start();
-  assert.deepEqual(kinds(mission.step(CONVOY.beat + CONVOY.window / 2)), ['slip', 'cab-bang']);
-  assert.deepEqual(kinds(mission.step(CONVOY.beat)), ['slip', 'cab-bang', 'heavy-thump']);
+  assert.deepEqual(kinds(mission.step(CONVOY.beat * 4)), Array(4).fill('beat-cue'));
+  assert.equal(mission.read().pumps, 0);
+  assert.equal(mission.read().misses, 0);
+  assert.deepEqual(kinds(mission.tap()), ['pump']);
+  assert.equal(mission.read().pumps, 1);
+  assert.deepEqual(kinds(mission.step(CONVOY.beat)), ['beat-cue']);
+  mission.step(CONVOY.window / 2 + 0.02);
+  assert.deepEqual(kinds(mission.tap()), ['slip', 'cab-bang']);
+  assert.equal(mission.read().pumps, 0);
+});
+
+test('two mistimed key presses slip the jack, warn for half a second, then spit while open', () => {
+  const mission = createConvoyMission(); mission.start();
+  assert.deepEqual(kinds(mission.tap()), ['slip', 'cab-bang']);
+  mission.step(0.15);
+  assert.deepEqual(kinds(mission.tap()), ['slip', 'cab-bang', 'heavy-thump']);
   assert.equal(mission.read().phase, 'warning');
   assert.deepEqual(mission.step(0.49), []);
   assert.deepEqual(kinds(mission.step(0.01)), ['door-open']);

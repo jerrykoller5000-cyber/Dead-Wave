@@ -186,6 +186,27 @@ card in `crew/status/`, appends to `crew/LOG.md`, and writes their own handoff n
       instance at a time and logs those runs. Every test on Jerry's PC, Claude's included, goes through the queue.
     - Record the rule in your handoff notes.
 
+17. **The world and quest rules** (Jerry, 2026-10-24, D-88). Before you place, move, scale or build anything in the
+    world, read `docs/world-design.md` (the placement and transition sweeps, the 15 rules of spatial world design, the
+    look). Before you design or change a quest, a day mission or a story beat, read `docs/quest-design.md` and answer
+    its five questions in the spec first. A finding or a fix names the rule it serves.
+
+18. **The animation principles** (Jerry, 2026-10-24, D-89). Before you make or change any motion (the marine, a zombie,
+    a creature, a prop, a camera), read `docs/animation-principles.md` and follow its construction protocol: define the
+    action, find a reference first (the libraries at the end of the file), key poses, construct, secondary motion,
+    test it in the game from the gameplay camera, validate. Every animation handoff carries the 0-5 score table with at
+    least 4 in each category that applies, filmstrips or shots from the gameplay camera, and the defects you couldn't
+    fix, named. Reference clips come into the repo one by one, each with its source and terms in
+    `assets/anim/reference/LICENSE.txt`.
+
+19. **The asset principles and the art direction** (Jerry, 2026-10-24, D-89). Before you make or change a model, a
+    material or a color, read `docs/art-direction.md` (the four families, how the uncanny breaks the rules, the reserved
+    colors, scale by camera) and `docs/asset-principles.md` (silhouette first, materials before textures, the protocol,
+    the 0-5 table). Never judge a model from code or numbers alone: render it and look, from several angles, in the four
+    lights (noon, overcast, dusk, night), at gameplay scale, in three passes (geometry, materials, context). The
+    handoff names the family, the shots and the scores (4 or more each). Sound and the UI have theirs too:
+    `docs/sound-principles.md` and `docs/ui-principles.md` (drafts for Jerry's review).
+
 ## Playing to strengths
 
 Five agents, each good at something different. The board gives each one tasks that fit.

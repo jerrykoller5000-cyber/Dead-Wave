@@ -1,0 +1,105 @@
+{
+ "shots": [
+  {
+   "cam": {
+    "x": -25,
+    "y": 7.11,
+    "z": -107,
+    "tx": -25,
+    "ty": 13.58,
+    "tz": -125,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Watchtower: from the north, his eye height",
+   "out": "review/sweep/tower/tower-from-north.png"
+  },
+  {
+   "cam": {
+    "x": -7,
+    "y": 11.43,
+    "z": -125,
+    "tx": -25,
+    "ty": 13.58,
+    "tz": -125,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Watchtower: from the east, his eye height",
+   "out": "review/sweep/tower/tower-from-east.png"
+  },
+  {
+   "cam": {
+    "x": -25,
+    "y": 8.66,
+    "z": -143,
+    "tx": -25,
+    "ty": 13.58,
+    "tz": -125,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Watchtower: from the south, his eye height",
+   "out": "review/sweep/tower/tower-from-south.png"
+  },
+  {
+   "cam": {
+    "x": -43,
+    "y": 12.91,
+    "z": -125,
+    "tx": -25,
+    "ty": 13.58,
+    "tz": -125,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Watchtower: from the west, his eye height",
+   "out": "review/sweep/tower/tower-from-west.png"
+  },
+  {
+   "cam": {
+    "x": -14.200000000000001,
+    "y": 32.18,
+    "z": -114.2,
+    "tx": -25,
+    "ty": 12.38,
+    "tz": -125,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Watchtower: from above",
+   "out": "review/sweep/tower/tower-above.png"
+  },
+  {
+   "cam": {
+    "x": -12.4,
+    "y": 18.380000000000003,
+    "z": -112.4,
+    "tx": -25,
+    "ty": 13.38,
+    "tz": -125,
+    "fov": 60
+   },
+   "time": "night",
+   "caption": "Watchtower: at night",
+   "out": "review/sweep/tower/tower-night.png"
+  },
+  {
+   "cam": {
+    "x": -22.220000000000002,
+    "y": 12.9,
+    "z": -122.53999999999999,
+    "tx": -25.42,
+    "ty": 11.700000000000001,
+    "tz": -125.74,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "on-trail: mesh stands on a trail (0 m from its line)",
+   "out": "review/sweep/tower/tower-suspect-1.png"
+  }
+ ],
+ "out": "review/sweep/tower/",
+ "cols": 4,
+ "size": "1280x720"
+}

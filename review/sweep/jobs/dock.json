@@ -1,0 +1,105 @@
+{
+ "shots": [
+  {
+   "cam": {
+    "x": -86.09,
+    "y": 0.17999999999999994,
+    "z": -46.879999999999995,
+    "tx": -86.09,
+    "ty": -1.72,
+    "tz": -64.88,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Dock: from the north, his eye height",
+   "out": "review/sweep/dock/dock-from-north.png"
+  },
+  {
+   "cam": {
+    "x": -68.09,
+    "y": -1.6199999999999999,
+    "z": -64.88,
+    "tx": -86.09,
+    "ty": -1.72,
+    "tz": -64.88,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Dock: from the east, his eye height",
+   "out": "review/sweep/dock/dock-from-east.png"
+  },
+  {
+   "cam": {
+    "x": -86.09,
+    "y": -4.6,
+    "z": -82.88,
+    "tx": -86.09,
+    "ty": -1.72,
+    "tz": -64.88,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Dock: from the south, his eye height",
+   "out": "review/sweep/dock/dock-from-south.png"
+  },
+  {
+   "cam": {
+    "x": -104.09,
+    "y": -2.5699999999999994,
+    "z": -64.88,
+    "tx": -86.09,
+    "ty": -1.72,
+    "tz": -64.88,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Dock: from the west, his eye height",
+   "out": "review/sweep/dock/dock-from-west.png"
+  },
+  {
+   "cam": {
+    "x": -75.29,
+    "y": 16.880000000000003,
+    "z": -54.08,
+    "tx": -86.09,
+    "ty": -2.92,
+    "tz": -64.88,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Dock: from above",
+   "out": "review/sweep/dock/dock-above.png"
+  },
+  {
+   "cam": {
+    "x": -73.49000000000001,
+    "y": 3.08,
+    "z": -52.279999999999994,
+    "tx": -86.09,
+    "ty": -1.92,
+    "tz": -64.88,
+    "fov": 60
+   },
+   "time": "night",
+   "caption": "Dock: at night",
+   "out": "review/sweep/dock/dock-night.png"
+  },
+  {
+   "cam": {
+    "x": -83.86999999999999,
+    "y": -4.5,
+    "z": -63.25999999999999,
+    "tx": -87.07,
+    "ty": -5.699999999999999,
+    "tz": -66.46,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "on-trail: group · part 14/19 stands on a trail (0 m from its line)",
+   "out": "review/sweep/dock/dock-suspect-1.png"
+  }
+ ],
+ "out": "review/sweep/dock/",
+ "cols": 4,
+ "size": "1280x720"
+}

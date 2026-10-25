@@ -1,0 +1,91 @@
+{
+ "shots": [
+  {
+   "cam": {
+    "x": -19,
+    "y": 12.69,
+    "z": 203.79,
+    "tx": -19,
+    "ty": 11.76,
+    "tz": 187.79,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "North Cave: from the north, his eye height",
+   "out": "review/sweep/cave-2/cave-2-from-north.png"
+  },
+  {
+   "cam": {
+    "x": -3,
+    "y": 7.4,
+    "z": 187.79,
+    "tx": -19,
+    "ty": 11.76,
+    "tz": 187.79,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "North Cave: from the east, his eye height",
+   "out": "review/sweep/cave-2/cave-2-from-east.png"
+  },
+  {
+   "cam": {
+    "x": -19,
+    "y": 8.56,
+    "z": 171.79,
+    "tx": -19,
+    "ty": 11.76,
+    "tz": 187.79,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "North Cave: from the south, his eye height",
+   "out": "review/sweep/cave-2/cave-2-from-south.png"
+  },
+  {
+   "cam": {
+    "x": -35,
+    "y": 7.9,
+    "z": 187.79,
+    "tx": -19,
+    "ty": 11.76,
+    "tz": 187.79,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "North Cave: from the west, his eye height",
+   "out": "review/sweep/cave-2/cave-2-from-west.png"
+  },
+  {
+   "cam": {
+    "x": -9.4,
+    "y": 28.160000000000004,
+    "z": 197.39,
+    "tx": -19,
+    "ty": 10.56,
+    "tz": 187.79,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "North Cave: from above",
+   "out": "review/sweep/cave-2/cave-2-above.png"
+  },
+  {
+   "cam": {
+    "x": -7.800000000000001,
+    "y": 16.560000000000002,
+    "z": 198.98999999999998,
+    "tx": -19,
+    "ty": 11.56,
+    "tz": 187.79,
+    "fov": 60
+   },
+   "time": "night",
+   "caption": "North Cave: at night",
+   "out": "review/sweep/cave-2/cave-2-night.png"
+  }
+ ],
+ "out": "review/sweep/cave-2/",
+ "cols": 4,
+ "size": "1280x720"
+}

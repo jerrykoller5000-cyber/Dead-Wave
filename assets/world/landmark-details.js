@@ -213,6 +213,7 @@ window.buildLandmarkDetails = (THREE, o) => {
         const px=x+side*(.65+i*.7),py=ground(px,-6.2);
         box(.055,.86,.055,C.dark,px,py+.43,-6.2);
         mesh(new THREE.ConeGeometry(.06,.15,4),C.dark,px,py+.92,-6.2);
+        solid(px,-6.2,.3,py,1);   // CL-256 batch 2 (the sweep): the railing stops him; the gate between the pillars is the way in
       }
       bar([x+side*.35,y+.7,-6.2],[x+side*4.3,ground(x+side*4.3,-6.2)+.7,-6.2],.025,C.dark);
     }

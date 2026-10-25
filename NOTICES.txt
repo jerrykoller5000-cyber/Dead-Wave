@@ -48,3 +48,10 @@ Music, sound and voices
 -----------------------
 The music was made with Suno and ElevenLabs, the sound effects and voices with ElevenLabs, under the developer's paid
 plans; the rest of the game's sounds are made by its own code.
+
+
+Motion reference
+----------------
+The marine's animation is tuned against reference motion kept in assets/anim/reference/ (the terms are in LICENSE.txt
+there): the Universal Animation Library 1 and 2 by Quaternius (https://quaternius.com), CC0 1.0; and the CMU Graphics
+Lab Motion Capture Database (http://mocap.cs.cmu.edu), created with funding from NSF EIA-0196217.

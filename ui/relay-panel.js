@@ -52,7 +52,11 @@ const CSS_SRC = `
 #relayPanel .look img,#relayPanel .strip img{display:block;width:100%;height:auto;border-radius:3px;box-shadow:0 2px 6px #0008}
 #relayPanel .strip{margin:0 0 8px}
 #relayPanel.wide{width:min(440px,calc(100vw - 32px))}
-`;
+#relayPanel{transform:translateX(-50%) scale(var(--relay-panel-scale,1));transform-origin:50% 100%}
+@media (min-width:900px) and (min-height:640px){#relayPanel{--relay-panel-scale:1.35}}
+@media (min-width:1500px) and (min-height:860px){#relayPanel{--relay-panel-scale:1.6}}
+#relayPanel .help{font-size:11px;color:#b9bfa8}
+`;   // CL-258 (Jerry's N2): bigger on a desktop screen, so its switches, dial and keys are easy to hit and read
 const CSS = CSS_SRC.replaceAll('#relayPanel', ':is(' + PANEL_IDS.map((i) => '#' + i).join(',') + ')');   // id specificity kept
 
 // CL-185 (Jerry): "Note should actually be a fuse diagram without explicitly stating what it is. Just a picture of the

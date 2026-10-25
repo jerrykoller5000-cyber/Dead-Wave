@@ -1,0 +1,91 @@
+{
+ "shots": [
+  {
+   "cam": {
+    "x": -99.91,
+    "y": 1.56,
+    "z": -25.770000000000003,
+    "tx": -99.91,
+    "ty": 1.47,
+    "tz": -41.77,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Utility truck wreck: from the north, his eye height",
+   "out": "review/sweep/wreck-2/wreck-2-from-north.png"
+  },
+  {
+   "cam": {
+    "x": -83.91,
+    "y": 0.51,
+    "z": -41.77,
+    "tx": -99.91,
+    "ty": 1.47,
+    "tz": -41.77,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Utility truck wreck: from the east, his eye height",
+   "out": "review/sweep/wreck-2/wreck-2-from-east.png"
+  },
+  {
+   "cam": {
+    "x": -99.91,
+    "y": -0.99,
+    "z": -57.77,
+    "tx": -99.91,
+    "ty": 1.47,
+    "tz": -41.77,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Utility truck wreck: from the south, his eye height",
+   "out": "review/sweep/wreck-2/wreck-2-from-south.png"
+  },
+  {
+   "cam": {
+    "x": -115.91,
+    "y": -2.4799999999999995,
+    "z": -41.77,
+    "tx": -99.91,
+    "ty": 1.47,
+    "tz": -41.77,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Utility truck wreck: from the west, his eye height",
+   "out": "review/sweep/wreck-2/wreck-2-from-west.png"
+  },
+  {
+   "cam": {
+    "x": -90.31,
+    "y": 17.84,
+    "z": -32.17,
+    "tx": -99.91,
+    "ty": 0.24,
+    "tz": -41.77,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Utility truck wreck: from above",
+   "out": "review/sweep/wreck-2/wreck-2-above.png"
+  },
+  {
+   "cam": {
+    "x": -88.71,
+    "y": 6.72,
+    "z": -30.570000000000004,
+    "tx": -99.91,
+    "ty": 1.24,
+    "tz": -41.77,
+    "fov": 60
+   },
+   "time": "night",
+   "caption": "Utility truck wreck: at night",
+   "out": "review/sweep/wreck-2/wreck-2-night.png"
+  }
+ ],
+ "out": "review/sweep/wreck-2/",
+ "cols": 4,
+ "size": "1280x720"
+}

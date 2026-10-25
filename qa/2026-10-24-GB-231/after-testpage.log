@@ -1,0 +1,15 @@
+GRANT grokbot GB-231: starting one game-test command
+check-players: 303 player.position reads, all in the allowed places
+ok    t78     18 pass   0 fail  39.9s
+ok    t95      9 pass   0 fail  57.4s
+ok    t215     4 pass   0 fail  42.1s
+FAIL  t282     3 pass   3 fail  133.3s
+
+4 checks: 34 pass, 3 fail
+
+by owner:
+  unassigned
+    t282   3 fail  FAIL one push: the 2nd to the 14th land within 29.2 s (under 20)
+           FAIL one push: the 2nd to the 14th land within 29.2 s (under 20)
+           FAIL the push lands soon: the middle arrival at 58.7 s (15-35)
+           FAIL the cave walkers start part way in, past the water if it is in the way (181, 182, 181, 181, 181, 101, 102 m; all under 120)

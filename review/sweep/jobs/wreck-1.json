@@ -1,0 +1,91 @@
+{
+ "shots": [
+  {
+   "cam": {
+    "x": -117.65,
+    "y": 2.23,
+    "z": 61.97,
+    "tx": -117.65,
+    "ty": 1.42,
+    "tz": 45.97,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Ambulance wreck (medical convoy): from the north, his eye height",
+   "out": "review/sweep/wreck-1/wreck-1-from-north.png"
+  },
+  {
+   "cam": {
+    "x": -101.65,
+    "y": 1.51,
+    "z": 45.97,
+    "tx": -117.65,
+    "ty": 1.42,
+    "tz": 45.97,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Ambulance wreck (medical convoy): from the east, his eye height",
+   "out": "review/sweep/wreck-1/wreck-1-from-east.png"
+  },
+  {
+   "cam": {
+    "x": -117.65,
+    "y": 1.46,
+    "z": 29.97,
+    "tx": -117.65,
+    "ty": 1.42,
+    "tz": 45.97,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Ambulance wreck (medical convoy): from the south, his eye height",
+   "out": "review/sweep/wreck-1/wreck-1-from-south.png"
+  },
+  {
+   "cam": {
+    "x": -133.65,
+    "y": 2.53,
+    "z": 45.97,
+    "tx": -117.65,
+    "ty": 1.42,
+    "tz": 45.97,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Ambulance wreck (medical convoy): from the west, his eye height",
+   "out": "review/sweep/wreck-1/wreck-1-from-west.png"
+  },
+  {
+   "cam": {
+    "x": -108.05000000000001,
+    "y": 17.82,
+    "z": 55.57,
+    "tx": -117.65,
+    "ty": 0.22,
+    "tz": 45.97,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Ambulance wreck (medical convoy): from above",
+   "out": "review/sweep/wreck-1/wreck-1-above.png"
+  },
+  {
+   "cam": {
+    "x": -106.45,
+    "y": 6.3,
+    "z": 57.17,
+    "tx": -117.65,
+    "ty": 1.22,
+    "tz": 45.97,
+    "fov": 60
+   },
+   "time": "night",
+   "caption": "Ambulance wreck (medical convoy): at night",
+   "out": "review/sweep/wreck-1/wreck-1-night.png"
+  }
+ ],
+ "out": "review/sweep/wreck-1/",
+ "cols": 4,
+ "size": "1280x720"
+}

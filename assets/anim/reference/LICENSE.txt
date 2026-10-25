@@ -4,3 +4,11 @@ https://creativecommons.org/publicdomain/zero/1.0/
 
 Kept here: the body's bones (no fingers) and the clips listed in catalogue.json, sampled at
 30 fps by studio/import-ual.mjs. Credit is not required; we give it anyway.
+
+The reference animations in cmu.json come from the CMU Graphics Lab Motion Capture Database
+(http://mocap.cs.cmu.edu), as converted to FBX by gbionics (huggingface.co/datasets/gbionics/cmu-fbx).
+"The motion capture data may be copied, modified, or redistributed without permission." "You may
+include this data in commercially-sold products, but you may not resell this data directly, even in
+converted form." The data in this repository was obtained from mocap.cs.cmu.edu; the database was
+created with funding from NSF EIA-0196217. Kept here: the body's bones (no fingers or eyes) and the
+clips listed in studio/import-cmu.py, sampled at 30 fps.

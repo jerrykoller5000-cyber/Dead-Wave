@@ -1,0 +1,105 @@
+{
+ "shots": [
+  {
+   "cam": {
+    "x": -200,
+    "y": -2.8599999999999994,
+    "z": -125,
+    "tx": -200,
+    "ty": -3.3599999999999994,
+    "tz": -150,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round -200,-150: from the north, his eye height",
+   "out": "review/sweep/wild-m200_m150/wild-m200_m150-from-north.png"
+  },
+  {
+   "cam": {
+    "x": -175,
+    "y": -2.8599999999999994,
+    "z": -150,
+    "tx": -200,
+    "ty": -3.3599999999999994,
+    "tz": -150,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round -200,-150: from the east, his eye height",
+   "out": "review/sweep/wild-m200_m150/wild-m200_m150-from-east.png"
+  },
+  {
+   "cam": {
+    "x": -200,
+    "y": -2.8599999999999994,
+    "z": -175,
+    "tx": -200,
+    "ty": -3.3599999999999994,
+    "tz": -150,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round -200,-150: from the south, his eye height",
+   "out": "review/sweep/wild-m200_m150/wild-m200_m150-from-south.png"
+  },
+  {
+   "cam": {
+    "x": -225,
+    "y": -2.8599999999999994,
+    "z": -150,
+    "tx": -200,
+    "ty": -3.3599999999999994,
+    "tz": -150,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round -200,-150: from the west, his eye height",
+   "out": "review/sweep/wild-m200_m150/wild-m200_m150-from-west.png"
+  },
+  {
+   "cam": {
+    "x": -185,
+    "y": 22.940000000000005,
+    "z": -135,
+    "tx": -200,
+    "ty": -4.56,
+    "tz": -150,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round -200,-150: from above",
+   "out": "review/sweep/wild-m200_m150/wild-m200_m150-above.png"
+  },
+  {
+   "cam": {
+    "x": -182.5,
+    "y": 1.4400000000000004,
+    "z": -132.5,
+    "tx": -200,
+    "ty": -3.5599999999999996,
+    "tz": -150,
+    "fov": 60
+   },
+   "time": "night",
+   "caption": "The wild round -200,-150: at night",
+   "out": "review/sweep/wild-m200_m150/wild-m200_m150-night.png"
+  },
+  {
+   "cam": {
+    "x": -190.71,
+    "y": -1.79,
+    "z": -139.16000000000003,
+    "tx": -193.91,
+    "ty": -2.99,
+    "tz": -142.36,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "floating: lily-pad floats 1.01 m above the ground (its whole footprint)",
+   "out": "review/sweep/wild-m200_m150/wild-m200_m150-suspect-1.png"
+  }
+ ],
+ "out": "review/sweep/wild-m200_m150/",
+ "cols": 4,
+ "size": "1280x720"
+}

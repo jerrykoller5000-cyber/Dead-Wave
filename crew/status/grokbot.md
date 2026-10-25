@@ -4,10 +4,10 @@ state: idle
 model: Grok Bot
 task: —
 touching: —
-since: 2026-10-24T16:59Z
-next: GB-226 The scope after CL-252, the heavies, t189, t143. Next. Force
+since: 2026-10-24T23:08Z
+next: GB-230 Night 1 all at once (N10). "Night 1 waves too staggered. Nee
 blocked-on: —
-last-report: handoffs/2026-10-24-grokbot-GB-226-g4.md
+last-report: handoffs/2026-10-24-grokbot-GB-231.md
 
 ## Notes
 

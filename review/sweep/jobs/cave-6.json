@@ -1,0 +1,105 @@
+{
+ "shots": [
+  {
+   "cam": {
+    "x": 162.24,
+    "y": 0.16999999999999993,
+    "z": -80.62,
+    "tx": 162.24,
+    "ty": 1.05,
+    "tz": -96.62,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Southwest Cave: from the north, his eye height",
+   "out": "review/sweep/cave-6/cave-6-from-north.png"
+  },
+  {
+   "cam": {
+    "x": 178.24,
+    "y": 2.35,
+    "z": -96.62,
+    "tx": 162.24,
+    "ty": 1.05,
+    "tz": -96.62,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Southwest Cave: from the east, his eye height",
+   "out": "review/sweep/cave-6/cave-6-from-east.png"
+  },
+  {
+   "cam": {
+    "x": 162.24,
+    "y": 2.55,
+    "z": -112.62,
+    "tx": 162.24,
+    "ty": 1.05,
+    "tz": -96.62,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Southwest Cave: from the south, his eye height",
+   "out": "review/sweep/cave-6/cave-6-from-south.png"
+  },
+  {
+   "cam": {
+    "x": 146.24,
+    "y": 1.71,
+    "z": -96.62,
+    "tx": 162.24,
+    "ty": 1.05,
+    "tz": -96.62,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Southwest Cave: from the west, his eye height",
+   "out": "review/sweep/cave-6/cave-6-from-west.png"
+  },
+  {
+   "cam": {
+    "x": 171.84,
+    "y": 17.450000000000003,
+    "z": -87.02000000000001,
+    "tx": 162.24,
+    "ty": -0.15,
+    "tz": -96.62,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Southwest Cave: from above",
+   "out": "review/sweep/cave-6/cave-6-above.png"
+  },
+  {
+   "cam": {
+    "x": 173.44,
+    "y": 5.85,
+    "z": -85.42,
+    "tx": 162.24,
+    "ty": 0.85,
+    "tz": -96.62,
+    "fov": 60
+   },
+   "time": "night",
+   "caption": "Southwest Cave: at night",
+   "out": "review/sweep/cave-6/cave-6-night.png"
+  },
+  {
+   "cam": {
+    "x": 168.2,
+    "y": -0.34999999999999987,
+    "z": -81.8,
+    "tx": 165,
+    "ty": -1.5499999999999998,
+    "tz": -85,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "invisible-wall: a collider (r 0.8 m, -1.95 to 57.9 m) with nothing visible there",
+   "out": "review/sweep/cave-6/cave-6-suspect-1.png"
+  }
+ ],
+ "out": "review/sweep/cave-6/",
+ "cols": 4,
+ "size": "1280x720"
+}

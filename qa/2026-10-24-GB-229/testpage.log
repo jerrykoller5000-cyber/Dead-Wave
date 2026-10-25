@@ -1,0 +1,14 @@
+GRANT grokbot GB-229: starting one game-test command
+check-players: 303 player.position reads, all in the allowed places
+ok    t23      8 pass   0 fail  122.2s
+ok    t38     12 pass   0 fail  77.5s
+ok    t95      9 pass   0 fail  58.3s
+ok    t128    28 pass   0 fail  108.6s
+ok    t133     9 pass   0 fail  50.4s
+ok    t135     8 pass   0 fail  38.6s
+           INFO holds: m4 2162 ms wall / 500 ms game, ak 3249 ms wall / 500 ms game, aa12 811 ms wall / 450 ms game, uzi 1310 ms wall / 400 ms game, shotgun 1139 ms wall / 300 ms game, revolver 1141 ms wall / 300 ms game, sniper 1158 ms wall / 300 ms game, pistol 354 ms wall / 300 ms game, pistol 650 ms wall / 400 ms game
+ok    t185    36 pass   0 fail  91.0s
+ok    t215     4 pass   0 fail  42.8s
+ok    t281    33 pass   0 fail  133.9s
+
+9 checks: 147 pass, 0 fail

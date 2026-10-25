@@ -1,0 +1,147 @@
+{
+ "shots": [
+  {
+   "cam": {
+    "x": -186.76,
+    "y": 4.7299999999999995,
+    "z": 8.780000000000001,
+    "tx": -186.76,
+    "ty": 6.430000000000001,
+    "tz": -7.22,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "East Cave: from the north, his eye height",
+   "out": "review/sweep/cave-4/cave-4-from-north.png"
+  },
+  {
+   "cam": {
+    "x": -170.76,
+    "y": 2.29,
+    "z": -7.22,
+    "tx": -186.76,
+    "ty": 6.430000000000001,
+    "tz": -7.22,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "East Cave: from the east, his eye height",
+   "out": "review/sweep/cave-4/cave-4-from-east.png"
+  },
+  {
+   "cam": {
+    "x": -186.76,
+    "y": 7.55,
+    "z": -23.22,
+    "tx": -186.76,
+    "ty": 6.430000000000001,
+    "tz": -7.22,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "East Cave: from the south, his eye height",
+   "out": "review/sweep/cave-4/cave-4-from-south.png"
+  },
+  {
+   "cam": {
+    "x": -202.76,
+    "y": 5.37,
+    "z": -7.22,
+    "tx": -186.76,
+    "ty": 6.430000000000001,
+    "tz": -7.22,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "East Cave: from the west, his eye height",
+   "out": "review/sweep/cave-4/cave-4-from-west.png"
+  },
+  {
+   "cam": {
+    "x": -177.16,
+    "y": 22.830000000000002,
+    "z": 2.38,
+    "tx": -186.76,
+    "ty": 5.23,
+    "tz": -7.22,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "East Cave: from above",
+   "out": "review/sweep/cave-4/cave-4-above.png"
+  },
+  {
+   "cam": {
+    "x": -175.56,
+    "y": 11.23,
+    "z": 3.9799999999999995,
+    "tx": -186.76,
+    "ty": 6.23,
+    "tz": -7.22,
+    "fov": 60
+   },
+   "time": "night",
+   "caption": "East Cave: at night",
+   "out": "review/sweep/cave-4/cave-4-night.png"
+  },
+  {
+   "cam": {
+    "x": -185.8,
+    "y": 4.83,
+    "z": -15.8,
+    "tx": -189,
+    "ty": 3.63,
+    "tz": -19,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "invisible-wall: a collider (r 0.8 m, 3.23 to 61.92 m) with nothing visible there",
+   "out": "review/sweep/cave-4/cave-4-suspect-1.png"
+  },
+  {
+   "cam": {
+    "x": -183.8,
+    "y": 4.550000000000001,
+    "z": -15.8,
+    "tx": -187,
+    "ty": 3.35,
+    "tz": -19,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "invisible-wall: a collider (r 0.8 m, 2.95 to 61.92 m) with nothing visible there",
+   "out": "review/sweep/cave-4/cave-4-suspect-2.png"
+  },
+  {
+   "cam": {
+    "x": -192.8,
+    "y": 4.800000000000001,
+    "z": -14.8,
+    "tx": -196,
+    "ty": 3.6,
+    "tz": -18,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "invisible-wall: a collider (r 0.8 m, 3.2 to 61.92 m) with nothing visible there",
+   "out": "review/sweep/cave-4/cave-4-suspect-3.png"
+  },
+  {
+   "cam": {
+    "x": -196.8,
+    "y": 4.68,
+    "z": -10.8,
+    "tx": -200,
+    "ty": 3.48,
+    "tz": -14,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "invisible-wall: a collider (r 0.8 m, 3.08 to 61.92 m) with nothing visible there",
+   "out": "review/sweep/cave-4/cave-4-suspect-4.png"
+  }
+ ],
+ "out": "review/sweep/cave-4/",
+ "cols": 4,
+ "size": "1280x720"
+}

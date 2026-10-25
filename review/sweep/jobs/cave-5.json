@@ -1,0 +1,91 @@
+{
+ "shots": [
+  {
+   "cam": {
+    "x": -12.42,
+    "y": 5.84,
+    "z": -171.23,
+    "tx": -12.42,
+    "ty": 4.89,
+    "tz": -187.23,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "South Cave: from the north, his eye height",
+   "out": "review/sweep/cave-5/cave-5-from-north.png"
+  },
+  {
+   "cam": {
+    "x": 3.58,
+    "y": 8.69,
+    "z": -187.23,
+    "tx": -12.42,
+    "ty": 4.89,
+    "tz": -187.23,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "South Cave: from the east, his eye height",
+   "out": "review/sweep/cave-5/cave-5-from-east.png"
+  },
+  {
+   "cam": {
+    "x": -12.42,
+    "y": 6.8500000000000005,
+    "z": -203.23,
+    "tx": -12.42,
+    "ty": 4.89,
+    "tz": -187.23,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "South Cave: from the south, his eye height",
+   "out": "review/sweep/cave-5/cave-5-from-south.png"
+  },
+  {
+   "cam": {
+    "x": -28.42,
+    "y": 4.78,
+    "z": -187.23,
+    "tx": -12.42,
+    "ty": 4.89,
+    "tz": -187.23,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "South Cave: from the west, his eye height",
+   "out": "review/sweep/cave-5/cave-5-from-west.png"
+  },
+  {
+   "cam": {
+    "x": -2.8200000000000003,
+    "y": 21.290000000000003,
+    "z": -177.63,
+    "tx": -12.42,
+    "ty": 3.69,
+    "tz": -187.23,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "South Cave: from above",
+   "out": "review/sweep/cave-5/cave-5-above.png"
+  },
+  {
+   "cam": {
+    "x": -1.2200000000000006,
+    "y": 12.77,
+    "z": -176.03,
+    "tx": -12.42,
+    "ty": 4.6899999999999995,
+    "tz": -187.23,
+    "fov": 60
+   },
+   "time": "night",
+   "caption": "South Cave: at night",
+   "out": "review/sweep/cave-5/cave-5-night.png"
+  }
+ ],
+ "out": "review/sweep/cave-5/",
+ "cols": 4,
+ "size": "1280x720"
+}

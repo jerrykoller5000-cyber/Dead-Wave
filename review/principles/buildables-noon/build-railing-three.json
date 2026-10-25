@@ -1,0 +1,34 @@
+{
+ "schema": "dw-camera-shot",
+ "schemaVersion": 2,
+ "target": "build:railing",
+ "label": "build railing",
+ "view": "three",
+ "cam": {
+  "x": -38.163480982529855,
+  "y": 30.998776673525754,
+  "z": -66.89132186306236,
+  "tx": -40,
+  "ty": 29.72670649766922,
+  "tz": -69.08,
+  "fov": 35
+ },
+ "time": 0.5001393200000017,
+ "size": [
+  1600,
+  900
+ ],
+ "center": {
+  "x": -40,
+  "y": 29.72670649766922,
+  "z": -69.08
+ },
+ "boxSize": {
+  "x": 2.055000066757202,
+  "y": 0.7500000143051153,
+  "z": 0.1550000011920929
+ },
+ "mode": "title",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "at": "2026-10-25T01:38:33.882Z"
+}

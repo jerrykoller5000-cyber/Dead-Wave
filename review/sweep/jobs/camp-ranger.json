@@ -1,0 +1,91 @@
+{
+ "shots": [
+  {
+   "cam": {
+    "x": 35.52,
+    "y": -2.76,
+    "z": -1.2399999999999984,
+    "tx": 35.52,
+    "ty": -5.49,
+    "tz": -23.24,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Ranger Camp: from the north, his eye height",
+   "out": "review/sweep/camp-ranger/camp-ranger-from-north.png"
+  },
+  {
+   "cam": {
+    "x": 57.52,
+    "y": -4.4399999999999995,
+    "z": -23.24,
+    "tx": 35.52,
+    "ty": -5.49,
+    "tz": -23.24,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Ranger Camp: from the east, his eye height",
+   "out": "review/sweep/camp-ranger/camp-ranger-from-east.png"
+  },
+  {
+   "cam": {
+    "x": 35.52,
+    "y": -0.8099999999999998,
+    "z": -45.239999999999995,
+    "tx": 35.52,
+    "ty": -5.49,
+    "tz": -23.24,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Ranger Camp: from the south, his eye height",
+   "out": "review/sweep/camp-ranger/camp-ranger-from-south.png"
+  },
+  {
+   "cam": {
+    "x": 13.520000000000003,
+    "y": -1.9200000000000002,
+    "z": -23.24,
+    "tx": 35.52,
+    "ty": -5.49,
+    "tz": -23.24,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Ranger Camp: from the west, his eye height",
+   "out": "review/sweep/camp-ranger/camp-ranger-from-west.png"
+  },
+  {
+   "cam": {
+    "x": 48.72,
+    "y": 17.500000000000004,
+    "z": -10.04,
+    "tx": 35.52,
+    "ty": -6.7,
+    "tz": -23.24,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Ranger Camp: from above",
+   "out": "review/sweep/camp-ranger/camp-ranger-above.png"
+  },
+  {
+   "cam": {
+    "x": 50.92,
+    "y": -0.7000000000000002,
+    "z": -7.84,
+    "tx": 35.52,
+    "ty": -5.7,
+    "tz": -23.24,
+    "fov": 60
+   },
+   "time": "night",
+   "caption": "Ranger Camp: at night",
+   "out": "review/sweep/camp-ranger/camp-ranger-night.png"
+  }
+ ],
+ "out": "review/sweep/camp-ranger/",
+ "cols": 4,
+ "size": "1280x720"
+}

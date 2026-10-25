@@ -1,7 +1,7 @@
-// t268 - AG-93 (D-82, docs/specs/day-missions.md §4): the trapper's safe path (game/trapper-path.js).
-// Six rows of two stepping stones in a leaf bed from the trapper's fence to his cellar hatch; a horseshoe on the post
-// beside each safe stone (a new pattern each run); a wrong step or the leaves snap a bear trap (25 damage, held 3 s,
-// 4-6 dead called); brambles close the sides. Once crossed, the cellar hatch unlocks for the run.
+// t268 - AG-93 / AG-124 (D-82, D-88, docs/specs/day-missions.md §4): the trapper's safe path (game/trapper-path.js).
+// Eight rows of two stepping stones in a leaf bed inside the trapper's fenced yard leading to his cellar hatch; a
+// horseshoe on the post beside each safe stone (a new pattern each run); a wrong step or the leaves snap a bear trap
+// (25 damage, held 3 s, 4-6 dead called); fence and brambles close the sides. Once crossed, the cellar hatch unlocks.
 (async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -13,9 +13,10 @@
     const D = T.trapperDbg, S = () => D.state(), R = D.trapper;
     await until(() => R.built, 4000);
     ok(R.built && !R.off && !!R.group, 'the trapper mission is built at campsites.2');
-    ok(R.stones.length === 12 && R.posts.length === 12 && R.horseshoes.length === 6,
-      'six rows of two stepping stones (12), twelve side posts, and six horseshoes');
-    ok(R.colliders.length >= 16, 'fence and bramble colliders close both sides of the leaf bed (' + R.colliders.length + ')');
+    const rows = D.TRAPPER.ROWS;
+    ok(rows === 8 && R.stones.length === rows * 2 && R.posts.length === rows * 2 && R.horseshoes.length === rows,
+      'eight rows of two stepping stones (' + R.stones.length + '), ' + R.posts.length + ' side posts, and ' + R.horseshoes.length + ' horseshoes');
+    ok(R.colliders.length >= 20, 'fence and bramble colliders close both sides of the leaf bed (' + R.colliders.length + ')');
     const shoesMatch = () => S().safe.every((side, row) => {
       const post = R.posts.find((p) => p.row === row && p.side === side);
       const hs = R.horseshoes[row];
@@ -54,7 +55,7 @@
       'stepping off the stones into the leaves snaps a trap (' + (snap2 && snap2.reason) + ')');
     D.stepAt(leafW.x, leafW.z, 3.1, { grounded: true, day: 1 });
 
-    // Walk all 6 safe stones in order -> unlocks the cellar hatch.
+    // Walk all 8 safe stones in order -> unlocks the cellar hatch.
     T.runDevCommand('godmode');
     D.path.reset(); D.clearSprung(); D.syncHorseshoes();
     let lastRes = null;
@@ -62,7 +63,7 @@
       const st = R.stones.find((s) => s.row === r && s.side === S().safe[r]);
       lastRes = D.stepAt(st.x, st.z, 0.016, { grounded: true, day: 1 });
     }
-    ok(lastRes && lastRes.kind === 'unlocked' && S().unlocked && !D.locked(), 'walking all six safe stones unlocks the cellar hatch');
+    ok(lastRes && lastRes.kind === 'unlocked' && S().unlocked && !D.locked(), 'walking all eight safe stones unlocks the cellar hatch');
 
     // Now at the cellar hatch, objectiveReach is reachable and trapperPromptText yields to the cache prompt.
     T.runDevCommand('site trapper hatch'); await wait(150);

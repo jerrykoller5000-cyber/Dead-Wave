@@ -1,0 +1,91 @@
+{
+ "shots": [
+  {
+   "cam": {
+    "x": -153.37,
+    "y": 2.52,
+    "z": 19.85,
+    "tx": -153.37,
+    "ty": 1.73,
+    "tz": -4.15,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Radio mast: from the north, his eye height",
+   "out": "review/sweep/mast/mast-from-north.png"
+  },
+  {
+   "cam": {
+    "x": -129.37,
+    "y": 1.5,
+    "z": -4.15,
+    "tx": -153.37,
+    "ty": 1.73,
+    "tz": -4.15,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Radio mast: from the east, his eye height",
+   "out": "review/sweep/mast/mast-from-east.png"
+  },
+  {
+   "cam": {
+    "x": -153.37,
+    "y": 6.34,
+    "z": -28.15,
+    "tx": -153.37,
+    "ty": 1.73,
+    "tz": -4.15,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Radio mast: from the south, his eye height",
+   "out": "review/sweep/mast/mast-from-south.png"
+  },
+  {
+   "cam": {
+    "x": -177.37,
+    "y": 3.62,
+    "z": -4.15,
+    "tx": -153.37,
+    "ty": 1.73,
+    "tz": -4.15,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Radio mast: from the west, his eye height",
+   "out": "review/sweep/mast/mast-from-west.png"
+  },
+  {
+   "cam": {
+    "x": -138.97,
+    "y": 26.930000000000003,
+    "z": 10.249999999999998,
+    "tx": -153.37,
+    "ty": 0.53,
+    "tz": -4.15,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Radio mast: from above",
+   "out": "review/sweep/mast/mast-above.png"
+  },
+  {
+   "cam": {
+    "x": -136.57,
+    "y": 6.53,
+    "z": 12.649999999999997,
+    "tx": -153.37,
+    "ty": 1.53,
+    "tz": -4.15,
+    "fov": 60
+   },
+   "time": "night",
+   "caption": "Radio mast: at night",
+   "out": "review/sweep/mast/mast-night.png"
+  }
+ ],
+ "out": "review/sweep/mast/",
+ "cols": 4,
+ "size": "1280x720"
+}

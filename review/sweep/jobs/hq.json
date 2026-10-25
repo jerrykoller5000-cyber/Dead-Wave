@@ -1,0 +1,91 @@
+{
+ "shots": [
+  {
+   "cam": {
+    "x": 0,
+    "y": -0.72,
+    "z": 30,
+    "tx": 0,
+    "ty": -1.97,
+    "tz": 0,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "FOB Threshold (the HQ): from the north, his eye height",
+   "out": "review/sweep/hq/hq-from-north.png"
+  },
+  {
+   "cam": {
+    "x": 30,
+    "y": -1.95,
+    "z": 0,
+    "tx": 0,
+    "ty": -1.97,
+    "tz": 0,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "FOB Threshold (the HQ): from the east, his eye height",
+   "out": "review/sweep/hq/hq-from-east.png"
+  },
+  {
+   "cam": {
+    "x": 0,
+    "y": -2.4699999999999998,
+    "z": -30,
+    "tx": 0,
+    "ty": -1.97,
+    "tz": 0,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "FOB Threshold (the HQ): from the south, his eye height",
+   "out": "review/sweep/hq/hq-from-south.png"
+  },
+  {
+   "cam": {
+    "x": -30,
+    "y": -1.36,
+    "z": 0,
+    "tx": 0,
+    "ty": -1.97,
+    "tz": 0,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "FOB Threshold (the HQ): from the west, his eye height",
+   "out": "review/sweep/hq/hq-from-west.png"
+  },
+  {
+   "cam": {
+    "x": 18,
+    "y": 29.83,
+    "z": 18,
+    "tx": 0,
+    "ty": -3.17,
+    "tz": 0,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "FOB Threshold (the HQ): from above",
+   "out": "review/sweep/hq/hq-above.png"
+  },
+  {
+   "cam": {
+    "x": 21,
+    "y": 3.22,
+    "z": 21,
+    "tx": 0,
+    "ty": -2.17,
+    "tz": 0,
+    "fov": 60
+   },
+   "time": "night",
+   "caption": "FOB Threshold (the HQ): at night",
+   "out": "review/sweep/hq/hq-night.png"
+  }
+ ],
+ "out": "review/sweep/hq/",
+ "cols": 4,
+ "size": "1280x720"
+}

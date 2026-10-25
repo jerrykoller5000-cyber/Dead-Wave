@@ -238,7 +238,7 @@ export function buildWornBoots(T) {
 // facing out (-z), slumped back against the mast: patrol cap tipped over one eye socket, jaw dropped, his jacket open
 // on the ribs with his dog tags on them, one hand fallen on the grating and one in his lap, his lanyard still clipped
 // to the leg. His trousers are tucked into the boots (their own object), and under the boots his feet are bone.
-export function buildMastPerchParts(T) {
+export function buildMastPerchParts(T, options = {}) {
   const parts = [], S = shaper(T, parts);
   const mat = (hex) => new T.MeshStandardMaterial({ color: hex, roughness: 0.85 });
   const M = { grate: mat(0x4b5155), steel: mat(0x6b7278), rust: mat(0x6e4a32), olive: mat(0x56603a), oliveDk: mat(0x434b2c),
@@ -256,6 +256,7 @@ export function buildMastPerchParts(T) {
   S.seg([-1.22, D + 0.9, -0.58], [-1.22, D + 0.9, -1.38], 0.024, 0.024, M.steel, 6);
   S.seg([-1.22, D + 0.46, -0.6], [-1.22, D + 0.46, -1.36], 0.018, 0.018, M.steel, 6);
   S.box(0.1, 0.03, 0.06, M.rust, -0.47, D - 0.03, -1.12);             // a rust bloom on the grating
+  const skelFrom = parts.length;   // CL-264: from here on, him (the yank moves him and he falls)
   // --- His torso: a frame leaning back against the mast (about 19 degrees), facing -z.
   const th = 0.33, cu = Math.cos(th), su = Math.sin(th);
   const base = [-0.78, D + 0.16, -1.18];
@@ -349,8 +350,12 @@ export function buildMastPerchParts(T) {
   }
   // --- His lanyard, still clipped to the mast's leg: why he never fell.
   S.tube([P(0.08, 0.02, 0.07), [-0.66, D + 0.42, -0.95], [-0.6, D + 0.68, -0.72], [-0.56, D + 0.8, -0.6]], 0.011, M.strap, 12);
+  const skelTo = parts.length;
   S.ring(0.025, 0.006, M.steel, -0.56, D + 0.8, -0.58, 0, 0.8, 0);                  // the carabiner on the leg
   for (const p of parts) { p.castShadow = true; p.receiveShadow = true; }
+  // CL-264 (Jerry's N16): split, for the yank: the platform and the carabiner stay on the mast; he (with his lanyard)
+  // is his own piece, turned about `pivot` (where he sits on the platform's outer edge) when he jerks and falls.
+  if (options.split) return { platform: [...parts.slice(0, skelFrom), ...parts.slice(skelTo)], skeleton: parts.slice(skelFrom, skelTo), pivot: [-0.78, D, -1.36] };
   return parts;
 }
 

@@ -12,10 +12,16 @@
 //
 //   RELAY                       the numbers
 //   createRelayPuzzle(rand)     one run's puzzle: { state, flip(n), tune(dMHz), setDial(f), clarity(), step(dt),
-//                               heardCode(), boot(dt, holding), bootFrac(), enter(digit), unlock(), reset(rand) }
+//                               pullLever(), startBoot(s), boot(dt), bootFrac(), enter(digit), unlock(), reset(rand) }
 //   stationPlan(code)           the number station's beeps: [{ t, long, digit, last }] over one full reading
 //   bootHoldSeconds(frac)       the reboot's share as the objectives' six-second hold
 //   relayDayPlan(day)           CL-184: how long the reboot runs and how hard the dead come, by the day it is done
+//
+// CL-257 (Jerry, 2026-10-24, N4): "After you get the frequency right, you should have to pull a lever to reboot the
+// relay. After the alarm for the reboot is done the morse code should play on loop regardless of if the player has the
+// panel menu open or not." The order is now: breakers, tuning (the station locked in), 'lever' (pullLever), the
+// reboot ('boot', startBoot), then 'locker': the relay is up and its mast plays the station's code on a loop for
+// everyone near it (index.html), and the vault's keypad takes it. heardCode() is kept for old callers: it does nothing.
 //
 // CL-184 (Jerry, 2026-10-12): "Make the player have to figure out about the beeps ... The beeps should play on loop
 // pause for a bit and then repeat the loop" (a longer pause between readings); "When rebooting you should just press e
@@ -75,7 +81,7 @@ export function createRelayPuzzle(rand = Math.random) {
     const freq = Math.round((lo + 4 + r() * (hi - lo - 6)) * 10) / 10;
     const code = Array.from({ length: RELAY.CODE_LEN }, () => 1 + Math.floor(r() * 9));   // 1-9: every digit is beeps
     s = { stage: 'breakers', on: Array(RELAY.BREAKERS).fill(false), step: 0, lockout: 0, trips: 0,
-      freq, dial: lo, lockT: 0, code, heard: false, bootT: 0, bootS: RELAY.BOOT_S, booting: false, entry: [], unlocked: false, wrongCodes: 0 };
+      freq, dial: lo, lockT: 0, code, heard: false, lever: false, bootT: 0, bootS: RELAY.BOOT_S, booting: false, entry: [], unlocked: false, wrongCodes: 0 };
   }
   fresh(rand);
   const api = {
@@ -108,12 +114,14 @@ export function createRelayPuzzle(rand = Math.random) {
       if (s.lockout > 0) s.lockout = Math.max(0, s.lockout - dt);
       if (s.stage === 'tuning') {
         s.lockT = api.clarity() >= 1 ? s.lockT + dt : Math.max(0, s.lockT - dt * 2);
-        if (s.lockT >= RELAY.LOCK_S) { s.stage = 'code'; s.lockT = RELAY.LOCK_S; return 'locked'; }
+        if (s.lockT >= RELAY.LOCK_S) { s.stage = 'lever'; s.lockT = RELAY.LOCK_S; return 'locked'; }   // CL-257
       }
       return null;
     },
-    // The station has read the code out once in full: the relay can be rebooted.
-    heardCode() { if (s.stage === 'code') { s.heard = true; s.stage = 'boot'; return true; } return false; },
+    // CL-257: the station locked in, the lever on the cabinet's side reboots the relay (then startBoot runs it).
+    pullLever() { if (s.stage !== 'lever') return false; s.lever = true; s.stage = 'boot'; return true; },
+    // CL-257: the code is heard after the reboot now, from the mast; this is kept for old callers and does nothing.
+    heardCode() { return false; },
     // CL-184: one press starts the reboot (its length set by the day); from then on it runs by itself.
     startBoot(seconds = RELAY.BOOT_S) {
       if (s.stage !== 'boot' || s.booting) return false;
@@ -140,7 +148,7 @@ export function createRelayPuzzle(rand = Math.random) {
       return 'wrong';
     },
     // A run restored with the radio already up (or a debug skip): straight to the end.
-    unlock() { s.on.fill(true); s.on[2] = false; s.step = RELAY.ORDER.length; s.heard = true; s.bootT = s.bootS; s.booting = false; s.unlocked = true; s.stage = 'done'; }
+    unlock() { s.on.fill(true); s.on[2] = false; s.step = RELAY.ORDER.length; s.heard = true; s.lever = true; s.bootT = s.bootS; s.booting = false; s.unlocked = true; s.stage = 'done'; }
   };
   return api;
 }

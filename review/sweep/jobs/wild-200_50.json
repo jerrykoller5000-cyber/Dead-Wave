@@ -1,0 +1,105 @@
+{
+ "shots": [
+  {
+   "cam": {
+    "x": 200,
+    "y": 5.58,
+    "z": 75,
+    "tx": 200,
+    "ty": 5.08,
+    "tz": 50,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round 200,50: from the north, his eye height",
+   "out": "review/sweep/wild-200_50/wild-200_50-from-north.png"
+  },
+  {
+   "cam": {
+    "x": 225,
+    "y": 5.58,
+    "z": 50,
+    "tx": 200,
+    "ty": 5.08,
+    "tz": 50,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round 200,50: from the east, his eye height",
+   "out": "review/sweep/wild-200_50/wild-200_50-from-east.png"
+  },
+  {
+   "cam": {
+    "x": 200,
+    "y": 5.58,
+    "z": 25,
+    "tx": 200,
+    "ty": 5.08,
+    "tz": 50,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round 200,50: from the south, his eye height",
+   "out": "review/sweep/wild-200_50/wild-200_50-from-south.png"
+  },
+  {
+   "cam": {
+    "x": 175,
+    "y": 5.58,
+    "z": 50,
+    "tx": 200,
+    "ty": 5.08,
+    "tz": 50,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round 200,50: from the west, his eye height",
+   "out": "review/sweep/wild-200_50/wild-200_50-from-west.png"
+  },
+  {
+   "cam": {
+    "x": 215,
+    "y": 31.380000000000003,
+    "z": 65,
+    "tx": 200,
+    "ty": 3.88,
+    "tz": 50,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round 200,50: from above",
+   "out": "review/sweep/wild-200_50/wild-200_50-above.png"
+  },
+  {
+   "cam": {
+    "x": 217.5,
+    "y": 9.879999999999999,
+    "z": 67.5,
+    "tx": 200,
+    "ty": 4.88,
+    "tz": 50,
+    "fov": 60
+   },
+   "time": "night",
+   "caption": "The wild round 200,50: at night",
+   "out": "review/sweep/wild-200_50/wild-200_50-night.png"
+  },
+  {
+   "cam": {
+    "x": 218.73999999999998,
+    "y": 0.51,
+    "z": 46.07,
+    "tx": 215.54,
+    "ty": -0.6900000000000001,
+    "tz": 42.87,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "hangs: mesh · part 1/2: one side 0.78 m off the ground on a slope (ground -1.87 to 0.64 under it)",
+   "out": "review/sweep/wild-200_50/wild-200_50-suspect-1.png"
+  }
+ ],
+ "out": "review/sweep/wild-200_50/",
+ "cols": 4,
+ "size": "1280x720"
+}

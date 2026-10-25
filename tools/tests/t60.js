@@ -52,13 +52,13 @@
     await until(() => ms().briefDuck > 0.94, 12000);
     ok(ms().briefDuck > 0.94, 'closing it restores the music: ' + ms().briefDuck.toFixed(2));
 
-    // The alarm, sounded for real at the HQ: the music is cut, and (D-33) no sting, just the
-    // klaxon, while the camera goes up to the sky (CL-49). The ground rumbles for three seconds
-    // (CL-29) as the camera comes down on the HQ.
+    // The alarm, sounded for real at the HQ: the music is cut, and (CL-265, Jerry's N31, revising D-33) his metal sting
+    // plays on top of the klaxon, while the camera holds the HQ. The ground rumbles for three seconds (CL-29).
     T.hqStartWave();
     await wait(300);
     const s2 = ms();
-    ok(s2.stage === 'alarm' && !s2.sting, 'D-33: the alarm is the klaxon, no sting: ' + s2.stage + '/' + s2.sting);
+    ok(s2.stage === 'alarm' && s2.lastCue && s2.lastCue.name === 'alarm', 'CL-265: the alarm plays its sting over the klaxon: ' + s2.stage + '/' + (s2.lastCue && s2.lastCue.name));
+    ok(s2.stings && s2.stings.alarm === 'sting_alarm_metal', "and it is Jerry's metal one: " + (s2.stings && s2.stings.alarm));
     ok(!s2.deckTrack, 'nothing else plays under it: ' + s2.deckTrack);
     ok(!!T.getLoopCine() && T.getLoopCine().kind === 'alarm', 'the camera holds the HQ for the alarm (D-39, was the sunset pan of CL-49)');
     await until(() => T.getAlarmShake() > 2.2, 8000);

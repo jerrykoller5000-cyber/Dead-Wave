@@ -4,6 +4,48 @@ Every call made for the game and the crew, in full, newest first. Claude writes 
 they stand unless Jerry overrides them. `crew/BOARD.md` lists each one on a single line; this file has the
 details. Moved here from the board on 2026-09-29 so the board stays short. Nothing was cut.
 
+- **D-89 · The animation and asset principles, the art direction, the motion libraries, the alarm's metal sting, the
+  storms (Jerry, 2026-10-24, in chat).** Jerry asked whether a Blender MCP would help with animation. Claude: not now; the bodies and their motion are
+  built in code, and the studio (D-40) already gives the agents keyframed clips, filmstrips and reference retargeting.
+  Jerry: "We should pull the marine's moves into the studio", and asked what most limits reliable results; Claude: the
+  agents can't watch the game in motion on his PC, so they check stand-ins they chose themselves; the fixes are
+  recordings of his exact moment replayed, targets in numbers before building, reference over adjectives, and his review
+  per stage. Jerry then sent the universal animation principles (`docs/animation-principles.md`, AGENTS.md rule 18)
+  and three libraries: the CMU motion capture database as FBX (2,548 human clips; CMU's terms: in a commercial game
+  yes, the data itself not for resale, credit mocap.cs.cmu.edu), and Quaternius' Ultimate Animated Animals and Easy
+  Enemy (CC0). "Yes. Excellent and I will try to find you guys bird references." CL-261 becomes the marine's moves
+  as studio clips (the unarmed run, the knife, machete and katana, the ladder) under the protocol. Also today, from
+  his notes: the alarm plays his metal sting again on top of the klaxon (CL-265, N31; revises D-33), and storms come
+  half as often with none before day 3, with windy spells in between (CL-262, N14, N15). Then the universal 3D asset
+  principles (`docs/asset-principles.md`, AGENTS.md rule 19) with his rule that an agent never judges a model from code
+  alone (render it, several angles and lights, gameplay scale; geometry, materials, context), and his suggestion of a
+  world-wide art direction above them: Claude wrote `docs/art-direction.md` (the four families: military, settler,
+  industrial, the uncanny; how the uncanny breaks the rules; the reserved gameplay colors; scale by camera). Bird
+  references from Jerry for the birds (N22): Sketchfab's "Animated Bird, Pigeon" by dudecon (CC Attribution; the author
+  says public domain; glide, flap, idle, takeoff, landing) and "White Eagle Animation Fast Fly" by GremorySaiyan (CC
+  Attribution); downloading them needs his Sketchfab sign-in. His answers to Claude's follow-ups: existing models and
+  moves go through a principles pass, each owner fixing only what breaks a principle ("this game is created by
+  iteration, not one-shot perfection"; CL-267, GP-19970, GB-233, AG-126); work in flight is compared to the principles
+  and changed where needed; he reviews the art direction; sound and UI principles are drafted from what the game
+  already established, UI to fit the world (CL-268); the flight recorder is wanted (CL-266, CU-160; Claude's caveat:
+  exact for his own body, camera and aim, close for the dead). "If it helps development then anything is better than
+  nothing." His UI inspirations: "Soldier of Fortune 2: Double Helix, Dead Space, Fallout. Think CRT terminal. But our
+  own unique spin on it. Readable but inspired." (`docs/ui-principles.md` §0: the Branch's field terminals.)
+- **D-88 · The road to 1.1: the sweeps lead, the notes in parallel; the world and quest rules (Jerry, 2026-10-24, after
+  his 1.0 playthrough; Claude, in chat).** Jerry sent the placement sweep (is anything blocking another object; do the
+  distances make sense; does the scale) and the transition sweep (do objects transition sensibly; what contact looks
+  like; anything floating, clipping or ugly in between), the 15 rules of spatial world design, the placement hierarchy
+  and the look (`docs/world-design.md`), the 12 rules of quest and narrative design and the five questions every quest
+  answers (`docs/quest-design.md`), and 31 notes (`docs/jerry/2026-10-24-playthrough-notes.md`). Claude asked how to
+  split it and whether he wanted to review the big designs first. Jerry: "Sweeps lead, notes in parallel" (Claude and
+  Antigravity sweep the world location by location while the others fix the notes in their areas), and "Design and
+  build, I play it after" for the story chain, the Hollows, the way into the day missions and the relay.
+  - The plan: `docs/road-to-1.1.md` (five stages; each landed stage is a 1.0.x build that Jerry uploads; 1.1 is the
+    Steam release with co-op).
+  - Every placement follows world-design.md and every quest answers quest-design.md's five questions in its spec
+    before it is built (AGENTS.md rule 17).
+  - Model polish is no longer frozen: first person shows the guns, the hands and the reloads up close.
+
 - **D-87 · The playtest's fixes, all in 1.0; the aim rebuilt (Jerry, 2026-10-23, after friends played it; Claude, in
   chat).** Jerry: "I got a few people to playtest the game and we came to a consensus ... These need to be included
   in 1.0. Especially the aiming system." The list:

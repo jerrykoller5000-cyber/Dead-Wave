@@ -2,7 +2,7 @@
 // the marine takes 70 (100 HP leaves 30; at 60 HP it ends the run as 'lightning'); under godmode, nothing; in the
 // insulated boots, nothing, and his boots turn yellow. A strike into a tree sets it burning; a strike among the dead
 // kills those round it. CL-178: the boots are on the feet of a skeleton on a platform high up the radio mast; he takes
-// them by reaching them (from the ground he can't). Up the mast a strike kills him outright, unless he has the boots.
+// them by reaching them (from the ground he can't); CL-264: and yanking them off with E. Up the mast a strike kills him outright, unless he has the boots.
 (async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const errs = []; window.addEventListener('error', (e) => errs.push(String(e.message || e.error)));
@@ -37,7 +37,10 @@
     ok(!L.worn() && boots.visible, 'from the ground under them, out of reach');
     T.player.position.set(boots.position.x, boots.position.y, boots.position.z);
     L.update(0.016);
-    ok(L.worn() && !boots.visible, 'walking over them, he wears them');
+    // CL-264 (Jerry's N16): within reach he yanks them off with E, a pull at a time (t294 has the rest).
+    ok(!L.worn() && L.yankState().inReach, 'within reach: they are still on him until he yanks');
+    for (let i = 0; i < 9 && !L.worn(); i++) { L.yank(); L.update(0.3); }
+    ok(L.worn() && !boots.visible, 'yanked off, he wears them');
     const w = L.marine() ? L.marine().userData.wardrobe : null;
     const yellow = !w || w.boots.mats.filter((m) => m.userData.dress === 'colour').every((m) => m.color.getHex() === L.BOOTS_HEX);
     ok(yellow, 'his boots are yellow rubber now');

@@ -1,0 +1,4 @@
+GRANT grokbot GB-229: starting one game-test command
+ok    t281     33 pass   0 fail  67.4s  (real renderer)
+ok    t136     36 pass   0 fail  36.7s  (real renderer)
+2 checks: 69 pass, 0 fail (real renderer)

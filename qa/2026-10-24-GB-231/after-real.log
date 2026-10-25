@@ -1,0 +1,41 @@
+Game-test request 08e7f696-6ba9-427e-bf85-790218234f0d queued at position 1. Waiting...
+GRANT grokbot GB-231: starting one game-test command
+ok    ../../qa/2026-10-24-GB-231/night1probe    0 pass   0 fail  66.0s  (real renderer)
+    LOG phase-wave at 5.9 s; grace 42.90349999999964 events alarm-started,wave-push
+    LOG spawn 6.1 s cave    d0 59 m, within 20 m at 17.8 s
+    LOG spawn 6.3 s cave    d0 73 m, within 20 m at 30.9 s
+    LOG spawn 6.4 s cave    d0 57 m, within 20 m at 19.5 s
+    LOG spawn 7.7 s cave    d0 100 m, within 20 m at 38.0 s
+    LOG spawn 7.8 s cave    d0 59 m, within 20 m at 21.6 s
+    LOG spawn 8.1 s cave    d0 104 m, within 20 m at 39.8 s
+    LOG spawn 8.2 s cave    d0 104 m, within 20 m at 40.2 s
+    LOG spawn 8.4 s cave    d0 59 m, within 20 m at 20.7 s
+    LOG spawn 8.8 s claw-up d0 66 m, within 20 m at 24.2 s
+    LOG spawn 8.9 s claw-up d0 36 m, within 20 m at 15.4 s
+    LOG spawn 9.0 s claw-up d0 37 m, within 20 m at 15.6 s
+    LOG spawn 9.2 s claw-up d0 55 m, within 20 m at 14.4 s
+    LOG spawn 9.5 s claw-up d0 57 m, within 20 m at 22.1 s
+    LOG spawn 9.7 s claw-up d0 53 m, within 20 m at 21.2 s
+    LOG spawn 9.8 s claw-up d0 40 m, within 20 m at 17.2 s
+    LOG spawn spread 3.7 s; arrival spread 25.9 s (15 arrived)
+ok    t282      6 pass   0 fail  58.4s  (real renderer)
+    LOG phase-wave at 5.8 s; grace 33.02930000000054 events alarm-started,wave-push
+    LOG spawn 6.1 s cave    d0 74 m, within 20 m at 26.9 s
+    LOG spawn 6.2 s cave    d0 78 m, within 20 m at 25.5 s
+    LOG spawn 6.4 s cave    d0 74 m, within 20 m at 24.7 s
+    LOG spawn 7.1 s cave    d0 74 m, within 20 m at 24.0 s
+    LOG spawn 7.4 s cave    d0 77 m, within 20 m at 26.7 s
+    LOG spawn 7.5 s cave    d0 74 m, within 20 m at 24.3 s
+    LOG spawn 7.7 s cave    d0 77 m, within 20 m at 30.2 s
+    LOG spawn 8.0 s cave    d0 77 m, within 20 m at 26.9 s
+    LOG spawn 13.2 s claw-up d0 48 m, within 20 m at 22.9 s
+    LOG spawn 13.4 s claw-up d0 56 m, within 20 m at 27.5 s
+    LOG spawn 13.5 s claw-up d0 48 m, within 20 m at 24.0 s
+    LOG spawn 13.8 s claw-up d0 58 m, within 20 m at 19.0 s
+    LOG spawn 13.9 s claw-up d0 47 m, within 20 m at 25.3 s
+    LOG spawn 14.0 s claw-up d0 44 m, within 20 m at 23.0 s
+    LOG spawn 14.1 s claw-up d0 41 m, within 20 m at 21.8 s
+    LOG spawn spread 8.1 s; arrival spread 11.2 s (15 arrived)
+ok    t78      18 pass   0 fail  28.8s  (real renderer)
+ok    t95       9 pass   0 fail  32.5s  (real renderer)
+4 checks: 33 pass, 0 fail (real renderer)

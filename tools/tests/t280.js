@@ -3,7 +3,10 @@
 //  - at the hip he carries the gun up at the ready (a shouldered gun FP_READY of the way to its aimed seat, the others
 //    FP_LIFT higher), so the muzzle is well above where the plain carry puts it; third person is unchanged;
 //  - down the uzi's sights his support arm is out of the view, and back when he lets go.
+// CL-260 part 2: the ready is now the ready and the hip carry (FP_HIP, FP_HIP_HAND) together, against the plain carry.
 // CL-252: the page keeps its own colours under the browser's forced colours (GB-225: the scope's glass went missing).
+// CL-260 part 2: first person's way in gets 20 s (the gun now in view at the hip is more for the 2-core box's
+// software renderer to draw; it came in at w 0.93 at 12 s).
 (async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -24,7 +27,7 @@
     const muzY = async () => { let s = 0; for (let i = 0; i < 6; i++) { s += T.getMuzzleWorld().y; await wait(60); } return s / 6; };
     const lift = async () => {
       T.fpTuneDbg(def); await wait(700); const a1 = await muzY();
-      T.fpTuneDbg({ ready: 0, lift: 0 }); await wait(700); const b = await muzY();
+      T.fpTuneDbg({ ready: 0, lift: 0, hip: { x: 0, y: 0, z: 0 }, hipHand: { x: 0, y: 0, z: 0 } }); await wait(700); const b = await muzY();   // CL-260 part 2: the plain carry is without the hip carry too
       T.fpTuneDbg(def); await wait(700); const a2 = await muzY();
       return (a1 + a2) / 2 - b;
     };
@@ -39,7 +42,7 @@
     } else ok(false, 'an m4 in hand');
 
     T.setViewFirstDbg(true);
-    ok(await until(() => F().w > 0.95, 12000), 'the 5 key: first person');
+    ok(await until(() => F().w > 0.95, 20000), 'the 5 key: first person');
     for (const g of ['m4', 'pistol']) {
       if (!(await arm(g))) { ok(false, 'a ' + g + ' in hand'); continue; }
       await wait(1200);
@@ -51,7 +54,7 @@
     if (await arm('uzi')) {
       ok(armL().visible && !F().armHidden, 'the uzi at the hip: his support arm is there');
       T.setZoomHeldDbg(true); held = true;
-      ok(await until(() => F().ads > 0.99, 9000), 'right-click: down the uzi\'s sights');
+      ok(await until(() => F().ads > 0.99, 14000), 'right-click: down the uzi\'s sights');   // CL-260 part 2: 14 s, as CL-252's eases (the 2-core box)
       await wait(200);
       ok(F().armHidden && !armL().visible, 'down the uzi\'s sights his support arm is out of the view');
       T.setZoomHeldDbg(false); held = false;

@@ -1,0 +1,119 @@
+{
+ "shots": [
+  {
+   "cam": {
+    "x": -200,
+    "y": 3.84,
+    "z": 25,
+    "tx": -200,
+    "ty": 3.34,
+    "tz": 0,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round -200,0: from the north, his eye height",
+   "out": "review/sweep/wild-m200_0/wild-m200_0-from-north.png"
+  },
+  {
+   "cam": {
+    "x": -175,
+    "y": 3.84,
+    "z": 0,
+    "tx": -200,
+    "ty": 3.34,
+    "tz": 0,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round -200,0: from the east, his eye height",
+   "out": "review/sweep/wild-m200_0/wild-m200_0-from-east.png"
+  },
+  {
+   "cam": {
+    "x": -200,
+    "y": 3.84,
+    "z": -25,
+    "tx": -200,
+    "ty": 3.34,
+    "tz": 0,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round -200,0: from the south, his eye height",
+   "out": "review/sweep/wild-m200_0/wild-m200_0-from-south.png"
+  },
+  {
+   "cam": {
+    "x": -225,
+    "y": 3.84,
+    "z": 0,
+    "tx": -200,
+    "ty": 3.34,
+    "tz": 0,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round -200,0: from the west, his eye height",
+   "out": "review/sweep/wild-m200_0/wild-m200_0-from-west.png"
+  },
+  {
+   "cam": {
+    "x": -185,
+    "y": 29.640000000000004,
+    "z": 15,
+    "tx": -200,
+    "ty": 2.14,
+    "tz": 0,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round -200,0: from above",
+   "out": "review/sweep/wild-m200_0/wild-m200_0-above.png"
+  },
+  {
+   "cam": {
+    "x": -182.5,
+    "y": 8.14,
+    "z": 17.5,
+    "tx": -200,
+    "ty": 3.14,
+    "tz": 0,
+    "fov": 60
+   },
+   "time": "night",
+   "caption": "The wild round -200,0: at night",
+   "out": "review/sweep/wild-m200_0/wild-m200_0-night.png"
+  },
+  {
+   "cam": {
+    "x": -194.24,
+    "y": 7.74,
+    "z": -19.67,
+    "tx": -197.44,
+    "ty": 6.54,
+    "tz": -22.87,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "overlap: mesh · part 1/6 and tree:oak overlap: 95 % of the smaller footprint, 1.93 m of height",
+   "out": "review/sweep/wild-m200_0/wild-m200_0-suspect-1.png"
+  },
+  {
+   "cam": {
+    "x": -194.20000000000002,
+    "y": 8.88,
+    "z": -19.580000000000002,
+    "tx": -197.4,
+    "ty": 7.680000000000001,
+    "tz": -22.78,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "overlap: mesh · part 1/6 and tree:oak overlap: 95 % of the smaller footprint, 1.74 m of height",
+   "out": "review/sweep/wild-m200_0/wild-m200_0-suspect-2.png"
+  }
+ ],
+ "out": "review/sweep/wild-m200_0/",
+ "cols": 4,
+ "size": "1280x720"
+}

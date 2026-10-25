@@ -1,0 +1,91 @@
+{
+ "shots": [
+  {
+   "cam": {
+    "x": 56.43,
+    "y": 7.03,
+    "z": 86.85,
+    "tx": 56.43,
+    "ty": 4,
+    "tz": 72.85,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Bridge 1: from the north, his eye height",
+   "out": "review/sweep/bridge-1/bridge-1-from-north.png"
+  },
+  {
+   "cam": {
+    "x": 70.43,
+    "y": 3.17,
+    "z": 72.85,
+    "tx": 56.43,
+    "ty": 4,
+    "tz": 72.85,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Bridge 1: from the east, his eye height",
+   "out": "review/sweep/bridge-1/bridge-1-from-east.png"
+  },
+  {
+   "cam": {
+    "x": 56.43,
+    "y": 5.12,
+    "z": 58.849999999999994,
+    "tx": 56.43,
+    "ty": 4,
+    "tz": 72.85,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Bridge 1: from the south, his eye height",
+   "out": "review/sweep/bridge-1/bridge-1-from-south.png"
+  },
+  {
+   "cam": {
+    "x": 42.43,
+    "y": 2.7800000000000002,
+    "z": 72.85,
+    "tx": 56.43,
+    "ty": 4,
+    "tz": 72.85,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Bridge 1: from the west, his eye height",
+   "out": "review/sweep/bridge-1/bridge-1-from-west.png"
+  },
+  {
+   "cam": {
+    "x": 64.83,
+    "y": 18.200000000000003,
+    "z": 81.25,
+    "tx": 56.43,
+    "ty": 2.8,
+    "tz": 72.85,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Bridge 1: from above",
+   "out": "review/sweep/bridge-1/bridge-1-above.png"
+  },
+  {
+   "cam": {
+    "x": 66.23,
+    "y": 11.92,
+    "z": 82.64999999999999,
+    "tx": 56.43,
+    "ty": 3.8,
+    "tz": 72.85,
+    "fov": 60
+   },
+   "time": "night",
+   "caption": "Bridge 1: at night",
+   "out": "review/sweep/bridge-1/bridge-1-night.png"
+  }
+ ],
+ "out": "review/sweep/bridge-1/",
+ "cols": 4,
+ "size": "1280x720"
+}

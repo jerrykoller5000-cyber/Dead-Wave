@@ -1638,8 +1638,12 @@ export const AudioSys = (() => {
     stage = 'alarm';
     mood = null; nextMood = null;
     // D-33 (Jerry): no alarm sting; the klaxon is the alarm. Silence under it, then the fight.
-    stopSting(); stopDeck();
+    // CL-265 (Jerry's N31: "The metal stinger for the alarm that he used to have is missing. He'd like it back"; revises
+    // D-33): his metal sting plays on top of the klaxon, and the fight comes in when it ends (update: the alarm holds
+    // while a sting is on).
+    stopDeck();
     alarmUntil = nowMs() + alarmHoldS * 1000;
+    playSting('alarm', null);
   }
   let lastState = null;
   function startFight() {
@@ -3608,7 +3612,8 @@ export const AudioSys = (() => {
     n.tg.gain.setTargetAtTime(muted ? 0 : 0.03 * k * k, t, 0.04);
     n.bp.frequency.setTargetAtTime(1900 - 900 * k, t, 0.05);
   }
-  function relayBeep(long = false) { playTone({ freq: 1380, type: 'sine', dur: long ? 0.55 : 0.16, vol: 0.11, attack: 0.006 }); }
+  // CL-257: the same beep from the mast's horn: gain 0-1 by distance, pan, and a little reverb the farther it is.
+  function relayBeep(long = false, gain = 1, pan = 0, rev = 0) { playTone({ freq: 1380, type: 'sine', dur: long ? 0.55 : 0.16, vol: Math.max(0.0003, 0.11 * gain), attack: 0.006, pan, rev }); }
   function relayBoot(on) {
     const c = ensure();
     if (!c) return;

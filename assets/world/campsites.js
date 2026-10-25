@@ -1,6 +1,7 @@
 /* Static campsite dressing. The caller merges these parts into one world mesh. */
-window.buildCampsiteDetails = (THREE, {cx, cz, gy, variant, random, height, solid}) => {
-  const parts=[], materials=new Map(), yaw=random()*Math.PI*2;
+window.buildCampsiteDetails = (THREE, {cx, cz, gy, variant, random, height, solid, yaw: turn}) => {
+  // CL-256 batch 2: the caller may turn a camp off its trail (the draw is still taken, so the rest of the layout is the same).
+  const parts=[], materials=new Map(), yaw0=random()*Math.PI*2, yaw=turn!=null?turn:yaw0;
   const palettes=[{canvas:0x687149,trim:0x39412d},{canvas:0xa7653f,trim:0x584b38},{canvas:0x80765a,trim:0x4d5038}];
   const palette=palettes[variant], wood=0x6b5034, cut=0x9e7b4b, steel=0x454d45, rope=0xb2a585, dark=0x252a23;
   const world=(x,z)=>({x:cx+Math.cos(yaw)*x+Math.sin(yaw)*z,z:cz-Math.sin(yaw)*x+Math.cos(yaw)*z});
@@ -47,10 +48,27 @@ window.buildCampsiteDetails = (THREE, {cx, cz, gy, variant, random, height, soli
   }
   function tent(x,z,width,depth,tall,color,wall=.12) {
     const angle=Math.atan2(-x,-z), c=Math.cos(angle), s=Math.sin(angle);
-    let base=-Infinity;
-    for(const u of [-width/2,width/2])for(const v of [-depth/2,depth/2])base=Math.max(base,ground(x+c*u+s*v,z-s*u+c*v));
+    let base=-Infinity,low=Infinity;
+    for(const u of [-width/2,width/2])for(const v of [-depth/2,depth/2]){const g=ground(x+c*u+s*v,z-s*u+c*v);base=Math.max(base,g);low=Math.min(low,g);}
     const p=(u,y,v)=>[x+c*u+s*v,base+y,z-s*u+c*v];
     const w=width/2,d=depth/2;
+    // CL-256 (the sweep, AG-122: the ranger's and the hikers' tents hung 0.6-0.9 m off their downhill side): on a slope
+    // the tent stands on a plank platform with posts down to the ground, as a camp on a hillside builds one
+    // (docs/world-design.md rule 13). Flat ground keeps the plain ground sheet.
+    const deck=base-low>.15;
+    if(deck){
+      const pw=width+.3,pd=depth+.3;
+      for(let i=0;i<Math.ceil(pd/.3);i++){const v=-pd/2+.15+i*.3;box(pw,.05,.27,i%2?cut:wood,...p(0,-.025,Math.min(v,pd/2-.15)),angle);}
+      // Three joists under the planks, across them, each on its posts (front, back, and the middle on a long deck).
+      const us=[-pw/2+.08,0,pw/2-.08], vs=pd>2.4?[-pd/2+.08,0,pd/2-.08]:[-pd/2+.08,pd/2-.08];
+      for(const u of us){
+        box(.1,.09,pd,wood,...p(u,-.09,0),angle);   // its top 5 mm into the planks' undersides
+        for(const v of vs){
+          const top=p(u,-.09,v),g=ground(top[0],top[2]);
+          if(base-.09-g>.03)bar([top[0],g-.1,top[2]],top,.055,wood,6);
+        }
+      }
+    }
     // Triangular rear, open entrance, and separate sewn panels along the flysheet.
     for(const side of [-1,1])for(let k=0;k<3;k++) {
       const a=-d+depth*k/3,b=-d+depth*(k+1)/3;
@@ -60,16 +78,17 @@ window.buildCampsiteDetails = (THREE, {cx, cz, gy, variant, random, height, soli
     panel([p(-w,wall,-d),p(0,tall,-d),p(w,wall,-d)],palette.trim);
     for(const side of [-1,1]) {
       const back=p(side*w,0,-d),front=p(side*w,0,d);
-      back[1]=ground(back[0],back[2])+.02;front[1]=ground(front[0],front[2])+.02;
+      if(!deck){back[1]=ground(back[0],back[2])+.02;front[1]=ground(front[0],front[2])+.02;}
       panel([back,p(side*w,wall,-d),p(side*w,wall,d),front],color);
     }
     // Entrance flaps are tied aside, leaving a clear view of the sleeping gear.
     for(const side of [-1,1])panel([p(0,tall,d+.01),p(side*w,wall,d+.01),p(side*w*.82,.08,d+.04),p(side*w*.5,.55,d+.06)],color);
-    panel([p(-w,.025,-d),p(w,.025,-d),p(w,.025,d),p(-w,.025,d)],dark);
+    const sheetY=deck?.004:.025;   // CL-256: on a deck the ground sheet lies on the planks (their tops at 0)
+    panel([p(-w,sheetY,-d),p(w,sheetY,-d),p(w,sheetY,d),p(-w,sheetY,d)],dark);
     bar(p(0,tall+.025,-d-.12),p(0,tall+.025,d+.12),.033,wood);
     for(const v of [-d,d])bar(p(0,0,v),p(0,tall+.02,v),.028,steel);
     for(const side of [-1,1])for(const v of [-d,d]) {
-      const peg=p(side*(w+.55),0,v*1.18);peg[1]=ground(peg[0],peg[2]);
+      const peg=deck?p(side*(w+.12),.02,v*1.05):p(side*(w+.55),0,v*1.18);if(!deck)peg[1]=ground(peg[0],peg[2]);   // CL-256: on a deck the lines tie to its edge
       bar([peg[0],peg[1]-.04,peg[2]],[peg[0]-.04,peg[1]+.13,peg[2]],.022,steel);
       bar(p(side*w,wall+.05,v),[peg[0],peg[1]+.06,peg[2]],.009,rope,4);
     }

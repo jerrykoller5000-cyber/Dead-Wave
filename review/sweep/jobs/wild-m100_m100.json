@@ -1,0 +1,91 @@
+{
+ "shots": [
+  {
+   "cam": {
+    "x": -100,
+    "y": -5.9399999999999995,
+    "z": -75,
+    "tx": -100,
+    "ty": -6.4399999999999995,
+    "tz": -100,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round -100,-100: from the north, his eye height",
+   "out": "review/sweep/wild-m100_m100/wild-m100_m100-from-north.png"
+  },
+  {
+   "cam": {
+    "x": -75,
+    "y": -5.9399999999999995,
+    "z": -100,
+    "tx": -100,
+    "ty": -6.4399999999999995,
+    "tz": -100,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round -100,-100: from the east, his eye height",
+   "out": "review/sweep/wild-m100_m100/wild-m100_m100-from-east.png"
+  },
+  {
+   "cam": {
+    "x": -100,
+    "y": -5.9399999999999995,
+    "z": -125,
+    "tx": -100,
+    "ty": -6.4399999999999995,
+    "tz": -100,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round -100,-100: from the south, his eye height",
+   "out": "review/sweep/wild-m100_m100/wild-m100_m100-from-south.png"
+  },
+  {
+   "cam": {
+    "x": -125,
+    "y": -5.9399999999999995,
+    "z": -100,
+    "tx": -100,
+    "ty": -6.4399999999999995,
+    "tz": -100,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round -100,-100: from the west, his eye height",
+   "out": "review/sweep/wild-m100_m100/wild-m100_m100-from-west.png"
+  },
+  {
+   "cam": {
+    "x": -85,
+    "y": 19.860000000000003,
+    "z": -85,
+    "tx": -100,
+    "ty": -7.64,
+    "tz": -100,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round -100,-100: from above",
+   "out": "review/sweep/wild-m100_m100/wild-m100_m100-above.png"
+  },
+  {
+   "cam": {
+    "x": -82.5,
+    "y": -1.6399999999999997,
+    "z": -82.5,
+    "tx": -100,
+    "ty": -6.64,
+    "tz": -100,
+    "fov": 60
+   },
+   "time": "night",
+   "caption": "The wild round -100,-100: at night",
+   "out": "review/sweep/wild-m100_m100/wild-m100_m100-night.png"
+  }
+ ],
+ "out": "review/sweep/wild-m100_m100/",
+ "cols": 4,
+ "size": "1280x720"
+}

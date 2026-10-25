@@ -1,0 +1,203 @@
+{
+ "shots": [
+  {
+   "cam": {
+    "x": -50,
+    "y": 12.879999999999999,
+    "z": 275,
+    "tx": -50,
+    "ty": 12.379999999999999,
+    "tz": 250,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round -50,250: from the north, his eye height",
+   "out": "review/sweep/wild-m50_250/wild-m50_250-from-north.png"
+  },
+  {
+   "cam": {
+    "x": -25,
+    "y": 12.879999999999999,
+    "z": 250,
+    "tx": -50,
+    "ty": 12.379999999999999,
+    "tz": 250,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round -50,250: from the east, his eye height",
+   "out": "review/sweep/wild-m50_250/wild-m50_250-from-east.png"
+  },
+  {
+   "cam": {
+    "x": -50,
+    "y": 12.879999999999999,
+    "z": 225,
+    "tx": -50,
+    "ty": 12.379999999999999,
+    "tz": 250,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round -50,250: from the south, his eye height",
+   "out": "review/sweep/wild-m50_250/wild-m50_250-from-south.png"
+  },
+  {
+   "cam": {
+    "x": -75,
+    "y": 12.879999999999999,
+    "z": 250,
+    "tx": -50,
+    "ty": 12.379999999999999,
+    "tz": 250,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round -50,250: from the west, his eye height",
+   "out": "review/sweep/wild-m50_250/wild-m50_250-from-west.png"
+  },
+  {
+   "cam": {
+    "x": -35,
+    "y": 38.68000000000001,
+    "z": 265,
+    "tx": -50,
+    "ty": 11.18,
+    "tz": 250,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round -50,250: from above",
+   "out": "review/sweep/wild-m50_250/wild-m50_250-above.png"
+  },
+  {
+   "cam": {
+    "x": -32.5,
+    "y": 17.18,
+    "z": 267.5,
+    "tx": -50,
+    "ty": 12.18,
+    "tz": 250,
+    "fov": 60
+   },
+   "time": "night",
+   "caption": "The wild round -50,250: at night",
+   "out": "review/sweep/wild-m50_250/wild-m50_250-night.png"
+  },
+  {
+   "cam": {
+    "x": -70.28,
+    "y": 13.19,
+    "z": 237.54999999999998,
+    "tx": -73.48,
+    "ty": 11.99,
+    "tz": 234.35,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "overlap: mesh · part 1/7 and tree:autumn overlap: 101.43 % of the smaller footprint, 5.32 m of height",
+   "out": "review/sweep/wild-m50_250/wild-m50_250-suspect-1.png"
+  },
+  {
+   "cam": {
+    "x": -64.64,
+    "y": 12.48,
+    "z": 237.44,
+    "tx": -67.84,
+    "ty": 11.280000000000001,
+    "tz": 234.24,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "overlap: mesh · part 5/7 and tree:pine overlap: 97.5 % of the smaller footprint, 3.8 m of height",
+   "out": "review/sweep/wild-m50_250/wild-m50_250-suspect-2.png"
+  },
+  {
+   "cam": {
+    "x": -70.58,
+    "y": 16.23,
+    "z": 237.32999999999998,
+    "tx": -73.78,
+    "ty": 15.030000000000001,
+    "tz": 234.13,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "overlap: mesh · part 1/7 and tree:autumn overlap: 101.43 % of the smaller footprint, 5.21 m of height",
+   "out": "review/sweep/wild-m50_250/wild-m50_250-suspect-3.png"
+  },
+  {
+   "cam": {
+    "x": -64.61999999999999,
+    "y": 13.15,
+    "z": 237.28,
+    "tx": -67.82,
+    "ty": 11.950000000000001,
+    "tz": 234.08,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "overlap: mesh · part 5/7 and tree:pine overlap: 97.5 % of the smaller footprint, 3.49 m of height",
+   "out": "review/sweep/wild-m50_250/wild-m50_250-suspect-4.png"
+  },
+  {
+   "cam": {
+    "x": -70.28,
+    "y": 16.28,
+    "z": 237.54999999999998,
+    "tx": -73.48,
+    "ty": 15.08,
+    "tz": 234.35,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "branches: canopy:autumn's branches through mesh · part 1/7 (99.9 % of the smaller footprint, 2.23 m of height)",
+   "out": "review/sweep/wild-m50_250/wild-m50_250-suspect-5.png"
+  },
+  {
+   "cam": {
+    "x": -64.64,
+    "y": 13.549999999999999,
+    "z": 237.44,
+    "tx": -67.84,
+    "ty": 12.35,
+    "tz": 234.24,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "branches: canopy:pine's branches through mesh · part 5/7 (99.98 % of the smaller footprint, 2.73 m of height)",
+   "out": "review/sweep/wild-m50_250/wild-m50_250-suspect-6.png"
+  },
+  {
+   "cam": {
+    "x": -70.58,
+    "y": 16.28,
+    "z": 237.32999999999998,
+    "tx": -73.78,
+    "ty": 15.08,
+    "tz": 234.13,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "branches: canopy:autumn's branches through mesh · part 1/7 (98.4 % of the smaller footprint, 5.16 m of height)",
+   "out": "review/sweep/wild-m50_250/wild-m50_250-suspect-7.png"
+  },
+  {
+   "cam": {
+    "x": -64.61999999999999,
+    "y": 13.549999999999999,
+    "z": 237.28,
+    "tx": -67.82,
+    "ty": 12.35,
+    "tz": 234.08,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "branches: canopy:pine's branches through mesh · part 5/7 (96.25 % of the smaller footprint, 3.09 m of height)",
+   "out": "review/sweep/wild-m50_250/wild-m50_250-suspect-8.png"
+  }
+ ],
+ "out": "review/sweep/wild-m50_250/",
+ "cols": 4,
+ "size": "1280x720"
+}

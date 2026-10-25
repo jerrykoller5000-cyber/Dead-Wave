@@ -1,9 +1,10 @@
-// t265 - GP-19937: medical convoy jack, sleeper and cooler.
+// t265 - GP-19937/GP-19965: medical convoy jack, sleeper and cooler.
 (async () => {
   const T = window.TT, THREE = T.THREE, out = [], ok = (v, m) => out.push((v ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise(r => setTimeout(r, ms));
   const until = async (f, ms = 4000) => { const start = Date.now(); while (Date.now() - start < ms) { if (f()) return true; await wait(40); } return !!f(); };
   const key = (type) => document.dispatchEvent(new KeyboardEvent(type, { code: 'KeyE', key: 'e', bubbles: true }));
+  const press = () => { key('keydown'); key('keyup'); };
   const tap = async () => { key('keydown'); await wait(60); key('keyup'); await wait(120); };
   const errs = []; window.addEventListener('error', e => errs.push(String(e.message || e.error)));
   try {
@@ -11,6 +12,7 @@
     T.clearZombies(); T.setHp(100); T.runDevCommand('godmode');
     const D = T.convoyDbg, S = () => D.state();
     T.runDevCommand('site convoy'); await wait(180);
+    const coolerBefore = T.getObjectiveProps()?.props?.['objective:medical-convoy']?.group?.position?.clone();
     ok(!!D.jack(), 'site convoy jumps to the jack');
     ok(D.reach()?.blockedBy === 'locked', 'the medical cache stays locked before jacking');
     ok(S().phase === 'idle' && S().pumps === 0, 'fresh mission has no pumps');
@@ -18,13 +20,15 @@
     ok(D.kill().length === 0 && S().sleeperAlive, 'sleeper cannot die behind the closed door');
     await tap();
     ok(S().phase === 'pumping', 'E starts the jack');
-    D.step(S().untilBeat); T.doAction();
-    ok(S().pumps === 1 && S().misses === 0, 'tap on the beat pumps once');
-    D.step(S().untilBeat); T.doAction();
-    ok(S().pumps === 2, 'second beat advances the jack');
-    T.doAction();
+    D.step(2.4);
+    ok(S().phase === 'pumping' && S().misses === 0 && S().pumps === 0, 'watching several cues without pressing E does not slip the jack');
+    D.step(S().untilBeat); press();
+    ok(S().pumps === 1 && S().misses === 0, 'E key press on the cue pumps once');
+    D.step(S().untilBeat); press();
+    ok(S().pumps === 2, 'second E key press advances the jack');
+    press();
     ok(S().pumps === 1 && S().misses === 1, 'offbeat E slips back a notch');
-    T.doAction();
+    press();
     ok(S().phase === 'warning' && S().pumps === 0, 'two misses start the sleeper warning');
     ok(D.kill().length === 0, 'warning keeps the sleeper protected');
     D.step(0.49);
@@ -51,11 +55,20 @@
     T.runDevCommand('godmode');
     D.step(2);
     ok(S().phase === 'pumping' && !S().sleeperAlive, 'dead sleeper stays silent when door closes');
-    // Auto-miss schedules a new beat; each successful tap is placed at the centre.
-    for (let i = 0; i < 8; i++) { D.step(S().untilBeat); T.doAction(); }
+    const pensBeforeFinish = T.getMedkits();
+    for (let i = 0; i < 8; i++) { D.step(S().untilBeat); press(); }
     ok(S().done && S().pumps === 8, 'eight good pumps release the cooler');
     await wait(70);
     ok(D.parts()?.vehicle?.position.y >= 1.77, 'eight pumps visibly raise the ambulance on the jack');
+    const afterPumpSite = D.runtime()?.read()?.sites?.find(s => s.id === 'objective:medical-convoy');
+    ok(T.getMedkits() === pensBeforeFinish && afterPumpSite?.state !== 'claimed',
+      'the last pump does not also claim the cooler (' + pensBeforeFinish + ' to ' + T.getMedkits() + '; ' + afterPumpSite?.state + ')');
+    const coolerMoved = await until(() => {
+      const at = T.getObjectiveProps()?.props?.['objective:medical-convoy']?.group?.position;
+      return !!(coolerBefore && at && at.distanceTo(coolerBefore) >= .4);
+    }, 3000);
+    const coolerAfter = T.getObjectiveProps()?.props?.['objective:medical-convoy']?.group?.position;
+    ok(coolerMoved, 'released cooler visibly slides clear of the ambulance (' + (coolerBefore && coolerAfter ? coolerAfter.distanceTo(coolerBefore).toFixed(2) : '?') + ' m)');
     ok(D.reach()?.blockedBy !== 'locked', 'medical cache unlocks');
     const cooler = T.getObjectiveProps()?.props?.['objective:medical-convoy'];
     if (cooler?.approach) {

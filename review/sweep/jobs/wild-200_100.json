@@ -1,0 +1,91 @@
+{
+ "shots": [
+  {
+   "cam": {
+    "x": 200,
+    "y": 6.0600000000000005,
+    "z": 125,
+    "tx": 200,
+    "ty": 5.5600000000000005,
+    "tz": 100,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round 200,100: from the north, his eye height",
+   "out": "review/sweep/wild-200_100/wild-200_100-from-north.png"
+  },
+  {
+   "cam": {
+    "x": 225,
+    "y": 6.0600000000000005,
+    "z": 100,
+    "tx": 200,
+    "ty": 5.5600000000000005,
+    "tz": 100,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round 200,100: from the east, his eye height",
+   "out": "review/sweep/wild-200_100/wild-200_100-from-east.png"
+  },
+  {
+   "cam": {
+    "x": 200,
+    "y": 6.0600000000000005,
+    "z": 75,
+    "tx": 200,
+    "ty": 5.5600000000000005,
+    "tz": 100,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round 200,100: from the south, his eye height",
+   "out": "review/sweep/wild-200_100/wild-200_100-from-south.png"
+  },
+  {
+   "cam": {
+    "x": 175,
+    "y": 6.0600000000000005,
+    "z": 100,
+    "tx": 200,
+    "ty": 5.5600000000000005,
+    "tz": 100,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round 200,100: from the west, his eye height",
+   "out": "review/sweep/wild-200_100/wild-200_100-from-west.png"
+  },
+  {
+   "cam": {
+    "x": 215,
+    "y": 31.860000000000003,
+    "z": 115,
+    "tx": 200,
+    "ty": 4.36,
+    "tz": 100,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round 200,100: from above",
+   "out": "review/sweep/wild-200_100/wild-200_100-above.png"
+  },
+  {
+   "cam": {
+    "x": 217.5,
+    "y": 10.36,
+    "z": 117.5,
+    "tx": 200,
+    "ty": 5.36,
+    "tz": 100,
+    "fov": 60
+   },
+   "time": "night",
+   "caption": "The wild round 200,100: at night",
+   "out": "review/sweep/wild-200_100/wild-200_100-night.png"
+  }
+ ],
+ "out": "review/sweep/wild-200_100/",
+ "cols": 4,
+ "size": "1280x720"
+}

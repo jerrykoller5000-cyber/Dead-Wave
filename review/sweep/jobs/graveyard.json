@@ -1,0 +1,91 @@
+{
+ "shots": [
+  {
+   "cam": {
+    "x": -89.96,
+    "y": 3.88,
+    "z": 111.15,
+    "tx": -89.96,
+    "ty": 1.72,
+    "tz": 89.15,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Graveyard: from the north, his eye height",
+   "out": "review/sweep/graveyard/graveyard-from-north.png"
+  },
+  {
+   "cam": {
+    "x": -67.96,
+    "y": 3.06,
+    "z": 89.15,
+    "tx": -89.96,
+    "ty": 1.72,
+    "tz": 89.15,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Graveyard: from the east, his eye height",
+   "out": "review/sweep/graveyard/graveyard-from-east.png"
+  },
+  {
+   "cam": {
+    "x": -89.96,
+    "y": 1.68,
+    "z": 67.15,
+    "tx": -89.96,
+    "ty": 1.72,
+    "tz": 89.15,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Graveyard: from the south, his eye height",
+   "out": "review/sweep/graveyard/graveyard-from-south.png"
+  },
+  {
+   "cam": {
+    "x": -111.96,
+    "y": -0.34999999999999987,
+    "z": 89.15,
+    "tx": -89.96,
+    "ty": 1.72,
+    "tz": 89.15,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Graveyard: from the west, his eye height",
+   "out": "review/sweep/graveyard/graveyard-from-west.png"
+  },
+  {
+   "cam": {
+    "x": -76.75999999999999,
+    "y": 24.620000000000005,
+    "z": 102.35000000000001,
+    "tx": -89.96,
+    "ty": 0.42,
+    "tz": 89.15,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "Graveyard: from above",
+   "out": "review/sweep/graveyard/graveyard-above.png"
+  },
+  {
+   "cam": {
+    "x": -74.56,
+    "y": 7.27,
+    "z": 104.55000000000001,
+    "tx": -89.96,
+    "ty": 1.42,
+    "tz": 89.15,
+    "fov": 60
+   },
+   "time": "night",
+   "caption": "Graveyard: at night",
+   "out": "review/sweep/graveyard/graveyard-night.png"
+  }
+ ],
+ "out": "review/sweep/graveyard/",
+ "cols": 4,
+ "size": "1280x720"
+}

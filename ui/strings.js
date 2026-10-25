@@ -598,6 +598,11 @@ const messages = {
   "settings.resetYes": "Erase it",
   "settings.resetNo": "Keep it",
 
+  // CU-159
+  "settings.brightness": "Brightness",
+  "settings.vibrancy": "Vibrancy",
+  "settings.fpFov": "First-person FOV",
+
   // pause
   "pause.title": "Paused",
   "pause.description": "Game paused. Quitting ends this run. Play starts a new run.",
@@ -965,6 +970,23 @@ const messages = {
   "shop.tabs.build": "Blueprints",
   "shop.tabs.builds": "Builds",
   "shop.tabs.fortify": "Fortify",
+  "shop.tabs.loadout": "Weapons & upgrades",
+  "shop.tabs.supplies": "Ammo & gear",
+  "shop.section.weapons": "Guns",
+  "shop.section.upgrades": "Upgrades",
+  "shop.section.ammo": "Ammo",
+  "shop.section.gear": "Gear",
+  "shop.section.build": "Blueprints",
+  "shop.section.fortify": "Fortify",
+  "shop.groupHint.loadout": "Buy a gun or improve one you own. New models unlock as nights pass.",
+  "shop.groupHint.supplies": "Restock what you carry and pick up field gear.",
+  "shop.groupHint.builds": "Buy plans here, then pay to place or upgrade each piece.",
+  "shop.compactHint.loadout": "Buy guns and upgrades. Bank skulls at HQ for Cash.",
+  "shop.compactHint.supplies": "Restock ammo and buy gear. Bank skulls at HQ for Cash.",
+  "shop.compactHint.builds": "Buy plans, then pay to place each piece. Bank skulls at HQ for Cash.",
+  "shop.requiresGear": "Requires {gear}",
+  "shop.requiresBlueprint": "Requires {name} blueprint",
+  "shop.unlocksNight": "Unlocks night {night}",
   "shop.hint.weapons": "Guns arrive with full ammo. Empty loadout slots fill first; extra guns stay at the Armory. Choose what you carry there, then use {weaponWheel} to switch.",
   "shop.weaponArrives": "Arrives night {night}",
   "shop.hint.ammo": "Buy full magazines, drums, belt boxes or tanks for each gun. Shotgun shells and launcher grenades are loose. {reload} loads from what you carry; tap twice to drop a magazine and reload faster.",
@@ -1814,6 +1836,8 @@ const messages = {
   "convoy.take": "E — Take cooler",
   "convoy.devTitle": "MEDICAL CONVOY",
   "convoy.devDetail": "At the jack",
+  // GP-19965: the light tells him when the actual key press counts.
+  "convoy.pumpOnGreen": "E — Pump on green · {count}/8",
   // GB-196: the hikers’ kit in the tree by the river.
   "hikers.grab": "E — Grab the kit",
   "hikers.devTitle": "HIKERS’ KIT",
@@ -2274,6 +2298,10 @@ const messages = {
   "range.drill.chainsaw.deep-teeth.objective": "Hold 1.1 seconds of contact on each plate, then cool before the next bite.",
   "range.drill.chainsaw.cooling-ladder.name": "Cooling Ladder",
   "range.drill.chainsaw.cooling-ladder.objective": "Growing nearby groups reward controlled cutting and heat management.",
+  // CL-257 (N4): the relay's lever, after the station is locked in.
+  "relay.lever": "{interact} — Pull the lever",
+  // CL-264 (Jerry's N16): the boots on the dead soldier up the mast, a pull at a time
+  "mast.yank": "{interact} — Yank the boots",
   // CL-216: the utility truck's day mission (docs/specs/day-missions.md §6)
   "truck.chained": "Chained shut.",
   "truck.cutters": "{interact} — Take the bolt cutters",

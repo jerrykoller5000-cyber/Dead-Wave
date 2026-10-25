@@ -1,13 +1,13 @@
 # Antigravity
 
 state: idle
-model: Gemini 4 Argon (High)
+model: Claude Opus 4.6
 task: —
 touching: —
-since: 2026-10-24T17:43Z
-next: —
+since: 2026-10-25T01:48Z
+next: waits on CL-263
 blocked-on: —
-last-report: handoffs/2026-10-24-antigravity-AG-121.md
+last-report: handoffs/2026-10-24-antigravity-AG-126.md
 
 ## Notes
 
@@ -33,6 +33,6 @@ a real GPU the way you can.
   With ?debug=1, window.TT is available in the DevTools console.
 
 ### Status (2026-10-24)
-- **AG-86..AG-119**: DONE (see reports in `handoffs/`).
-- **AG-120**: DONE. Full test suite after D-87 (`CL-247/248/249/250/251`, `GB-221`, `GP-19959/60/61`, `AG-119`, `GB-220`, `CL-160`, `qa/2026-10-23-AG-120/`): Test page (`0a, 0b, A..F`, 272 checks incl. `t280`): `4,171 pass`, 5 held reds (`tinspect` 21/1 `'a dive move dives (idle)'` after `CL-248`; `t143` 15/2 wanderer bounce at `pts[0]`; `t188` 90/1 flamer barrel angle; `t189` 180s timeout on test page [47/0 real]; `t277` 0/1 `fakethree.mjs` `Box3.setFromPoints` [36/0 real]; `t15, t69, t76` cleared on rerun). Real renderer (`R`, 22 checks incl. `t277`): `812 pass`, 1 held red (`t188` 116/5; `t222` 9/0 and `t228` 95/0 cleared on rerun; `t187` 99/0, `t189` 47/0, `t195` 20/0, `t224` 45/0, `t229` 75/0, `t270` 5/0, `t271` 10/0, `t272` 14/0, `t277` 36/0 passed first try). Routed to `claude`, `grokbot`, and `cursor`.
-- **AG-121**: DONE. Built the 1.0.0 desktop installer (`npm run build` in `desktop/` -> `desktop/src-tauri/target/release/bundle/nsis/Grave Shift_1.0.0_x64-setup.exe`, `402,105,438 bytes` / `383.48 MiB` / `402.11 MB`), passed `node smoke.mjs` (`13/13 PASS`, `46.2s`), installed per-user to `C:\Users\Zero\AppData\Local\Grave Shift`, verified `NOTICES.txt` (`2,286 bytes`) and `NOTICES-desktop.txt` (`212,624 bytes`) in the installed `game/` folder, and launched from the Start menu shortcut (`Grave Shift.lnk`) to verify Title `"v1.0.0"`, studio intro & AI disclosure playback (`readyState: 4`), music/ambience, Night 1 gameplay, and `0` failed loads / `0` page errors (`qa/2026-10-24-AG-121/01-title-v1.0.0.png`, `02-night-1.png`).
+- **AG-86..AG-124**: DONE (see reports in `handoffs/`). Completed GPU reviews (`GP-19965`, `GP-19967`, `GP-19966`, `CL-262`, `CL-260`), the 44-job GPU world sweep (`AG-122`), the trapper's path rebuild (`AG-124`), and the FOB overhaul with generator moved (`AG-123`).
+- **AG-126**: DONE. Generated all 20 four-light (`noon`, `overcast`, `dusk`, `night`) principles contact sheets across `buildables`, `turrets`, `weapons`, `zombies`, and `people` in `review/principles/<group>-<light>/sheet.jpg`, and upgraded all sub-4/5 buildables & turrets (`build:barrel`, `build:barrel:1`, `build:lure:1`, `build:lure:2`, `build:mortar:1`, `build:mortar:2`, `build:light` Mk I–III, `build:flame` Mk I–III, `build:heavy` Mk I–III) so all 36 pieces score `>= 4/5` across all 6 Rule 19 categories (`t25`, `t31`, `t215`: 59 pass, 0 fail).
+- **Next**: `AG-125` (Each remaining named place overhauled to the standard of its note in `docs/sweep/*.md`, after `CL-263`).

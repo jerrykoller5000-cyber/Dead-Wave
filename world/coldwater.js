@@ -125,9 +125,17 @@ export function church(T,seed){
 
 export function foundation(T,seed,{w=6,d=5,door=true,variant=Math.floor(w*10)%3}={}){
  const k=kit(T,'coldwater-foundation',seed),{stone,box,beam,wall,slab,ring}=k;
- wall(-w/2,-d/2,w/2,-d/2,1.25,u=>.55+.65*Math.sin(u*4)**2);
- for(const s of [-1,1])wall(s*w/2,-d/2,s*w/2,d/2,1,u=>.34+.62*Math.cos(u*3+s)**2);
+ const back=u=>.55+.65*Math.sin(u*4)**2,side=s=>u=>.34+.62*Math.cos(u*3+s)**2;
+ wall(-w/2,-d/2,w/2,-d/2,1.25,back);
+ for(const s of [-1,1])wall(s*w/2,-d/2,s*w/2,d/2,1,side(s));
  wall(-w/2,d/2,w/2,d/2,.6,()=>.45,u=>door&&Math.abs(u-.5)<.16);
+ // CL-256 (the sweep, AG-122: its walls and doorframe had no colliders, so he walked through stone): solids along the
+ // walls where they stand higher than a step (0.45 m), the doorway left open, and its two posts.
+ const solids=[],run=(x0,z0,x1,z1,hAt,gap=()=>false)=>{const L=Math.hypot(x1-x0,z1-z0),n=Math.max(2,Math.round(L/.42));for(let i=0;i<=n;i++){const u=i/n,h=hAt(u);if(h<.45||gap(u))continue;solids.push({x:+(x0+(x1-x0)*u).toFixed(2),z:+(z0+(z1-z0)*u).toFixed(2),r:.24,y:0,h:+h.toFixed(2)});}};
+ run(-w/2,-d/2,w/2,-d/2,back);
+ for(const s of [-1,1])run(s*w/2,-d/2,s*w/2,d/2,side(s));
+ if(door)for(const s of [-1,1])solids.push({x:+(s*.62).toFixed(2),z:+(d/2).toFixed(2),r:.12,y:0,h:1.9});
+ k.g.userData.solids=solids;
  slab(w-.7,d-.6,0,0,0,P.soil);for(let i=0;i<9;i++)slab(.5,.55,(k.rnd()-.5)*(w-1),(k.rnd()-.5)*(d-1),k.rnd());
  if(door){for(const s of [-1,1])box(.17,1.82,.18,P.wood,s*.62,.94,d/2,0,0,s*.035);beam([-.73,1.89,d/2],[.68,1.96,d/2],.15,.18);ring(.11,.023,P.iron,0,2.09,d/2+.11,0,0,Math.PI*.85,Math.PI*1.35);slab(1.3,.65,0,d/2+.15);}
  k.hearth(0,-d/2+.7,.85);
@@ -153,7 +161,10 @@ export function chimney(T,seed){
  // Smoke left irregular stains around the mouth, not a flat black stripe up the stack.
  for(let i=0;i<5;i++)k.rock(.21-i*.025,.32,.025,i%2?P.soot:P.mortar,(i%2-.5)*.14,1.15+i*.28,.37-i*.012);
  k.slab(1.9,1.8,0,.4,0,P.soil);k.rubble(16,2.1,1.8,true);
- k.beam([-.7,.11,.9],[.8,.12,.95],.13,.14,P.soot);return k.finish();
+ k.beam([-.7,.11,.9],[.8,.12,.95],.13,.14,P.soot);
+ // CL-256 (the sweep: he walked through the 5 m stack): three posts down its width, the hearth's height and up.
+ k.g.userData.solids=[-.36,0,.36].map(x=>({x,z:0,r:.32,y:0,h:4.9}));
+ return k.finish();
 }
 
 export function grave(T,seed,opened=false){
@@ -187,5 +198,9 @@ export function grave(T,seed,opened=false){
   for(let i=0;i<12;i++){const a=k.rnd()*6.28,r=.83+k.rnd()*.25;rock(.17+k.rnd()*.2,.13,.22,P.soil,Math.cos(a)*r,.09,Math.sin(a)*r*1.3,a);}
  }
  // A worn footstone, never a new named victim or explanatory text.
- k.stone(.36,.24,.15,-.14,.13,-1.31);return k.finish();
+ k.stone(.36,.24,.15,-.14,.13,-1.31);
+ // CL-256 batch 2 (the sweep: he walked across the open grave and through its splintered boards): two posts down its
+ // length, the boards' height; he walks round it.
+ if(opened)k.g.userData.solids=[-.55,.55].map(z=>({x:0,z,r:.62,y:0,h:.8}));
+ return k.finish();
 }

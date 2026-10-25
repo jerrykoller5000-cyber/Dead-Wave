@@ -1,0 +1,119 @@
+{
+ "shots": [
+  {
+   "cam": {
+    "x": -50,
+    "y": -1.03,
+    "z": 25,
+    "tx": -50,
+    "ty": -1.53,
+    "tz": 0,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round -50,0: from the north, his eye height",
+   "out": "review/sweep/wild-m50_0/wild-m50_0-from-north.png"
+  },
+  {
+   "cam": {
+    "x": -25,
+    "y": -1.03,
+    "z": 0,
+    "tx": -50,
+    "ty": -1.53,
+    "tz": 0,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round -50,0: from the east, his eye height",
+   "out": "review/sweep/wild-m50_0/wild-m50_0-from-east.png"
+  },
+  {
+   "cam": {
+    "x": -50,
+    "y": -1.03,
+    "z": -25,
+    "tx": -50,
+    "ty": -1.53,
+    "tz": 0,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round -50,0: from the south, his eye height",
+   "out": "review/sweep/wild-m50_0/wild-m50_0-from-south.png"
+  },
+  {
+   "cam": {
+    "x": -75,
+    "y": -1.03,
+    "z": 0,
+    "tx": -50,
+    "ty": -1.53,
+    "tz": 0,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round -50,0: from the west, his eye height",
+   "out": "review/sweep/wild-m50_0/wild-m50_0-from-west.png"
+  },
+  {
+   "cam": {
+    "x": -35,
+    "y": 24.770000000000003,
+    "z": 15,
+    "tx": -50,
+    "ty": -2.73,
+    "tz": 0,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "The wild round -50,0: from above",
+   "out": "review/sweep/wild-m50_0/wild-m50_0-above.png"
+  },
+  {
+   "cam": {
+    "x": -32.5,
+    "y": 3.27,
+    "z": 17.5,
+    "tx": -50,
+    "ty": -1.73,
+    "tz": 0,
+    "fov": 60
+   },
+   "time": "night",
+   "caption": "The wild round -50,0: at night",
+   "out": "review/sweep/wild-m50_0/wild-m50_0-night.png"
+  },
+  {
+   "cam": {
+    "x": -64.13,
+    "y": 0.52,
+    "z": 9.56,
+    "tx": -67.33,
+    "ty": -0.68,
+    "tz": 6.36,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "floating: group floats 1.54 m above the ground (its whole footprint)",
+   "out": "review/sweep/wild-m50_0/wild-m50_0-suspect-1.png"
+  },
+  {
+   "cam": {
+    "x": -29.81,
+    "y": -0.22999999999999998,
+    "z": 15.239999999999998,
+    "tx": -33.01,
+    "ty": -1.4300000000000002,
+    "tz": 12.04,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "floating: group floats 1.02 m above the ground (its whole footprint)",
+   "out": "review/sweep/wild-m50_0/wild-m50_0-suspect-2.png"
+  }
+ ],
+ "out": "review/sweep/wild-m50_0/",
+ "cols": 4,
+ "size": "1280x720"
+}

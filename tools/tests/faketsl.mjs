@@ -21,3 +21,5 @@ export const texture = makeStub(), positionWorld = makeStub(), cameraPosition = 
 export const normalWorld = makeStub(), normalLocal = makeStub(), cos = makeStub(), step = makeStub();
 // CL-196: what the screamer's appearance asks for (game/screamer-appearance.js), so the inspector's check can build one.
 export const varying = makeStub(), positionGeometry = makeStub(), uv = makeStub();
+// CU-159: the end-of-frame grade calls saturation(). The stub only has to be a node.
+export const saturation = makeStub();

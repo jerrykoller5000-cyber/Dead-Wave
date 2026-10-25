@@ -7,6 +7,8 @@
 // starts the reboot and it counts down by itself while he fights (its dead come up on open ground, away from the
 // caves); the locker is a small building (game/relay-vault.js, studio/relay-vault-model.js): the code at its keypad
 // brings the day's reward up its lift, the door rolls up, and E inside takes it.
+// CL-257 (Jerry, N4): the station locked in, a lever on the cabinet reboots the relay; when the siren stops, the mast
+// plays the code on a loop, panel or no panel. And a new run's vault is shut again (N26).
 (async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -60,17 +62,15 @@
       if (Math.abs(d) < 0.1) { await wait(80); continue; }
       await tap(d > 0 ? 'KeyD' : 'KeyA', d > 0 ? 'd' : 'a', Math.abs(d) > 1.5);
     }
-    ok(S().stage === 'code' || S().stage === 'boot', 'on the station it locks in (' + S().stage + ')');
-    const beeped = await until(() => !!D.relay.station && D.relay.station.next > 0, 60000);
-    ok(beeped && !/[1-9] [1-9] [1-9]/.test(panel.textContent) && !panel.querySelector('.lcd'), 'the station beeps; nothing on screen counts them');
-    if (S().stage !== 'boot') D.puzzle.heardCode();   // one full reading takes a while on a slow box: the test skips the rest
-    await tap(); await wait(150);
-    ok(!D.relay.mode, 'E leaves the radio');
-    ok(/reboot/i.test(R().prompt || '') && !/hold/i.test(R().prompt || ''), 'at the cabinet now: "' + R().prompt + '"');
-    // One press: the reboot runs by itself, and its siren calls the dead from open ground.
+    ok(S().stage === 'lever', 'on the station it locks in (' + S().stage + ')');
+    ok(await until(() => !D.relay.mode, 8000), 'locked in, the radio closes by itself');
+    ok(/lever/i.test(R().prompt || '') && !/hold/i.test(R().prompt || ''), 'at the cabinet now: "' + R().prompt + '"');
+    const lever = D.relay.lever;
+    ok(!!lever && lever.arm.rotation.x > 0.5, 'a lever on the cabinet, up');
+    // One press: the lever throws, then the reboot runs by itself, and its siren calls the dead from open ground.
     T.clearZombies();
-    await tap(); await wait(400);
-    ok(S().booting && S().stage === 'boot', 'one press of E starts the reboot');
+    await tap(); await until(() => S().booting, 8000); await wait(200);
+    ok(S().booting && S().stage === 'boot' && lever.arm.rotation.x < -0.5, 'E throws the lever and the reboot starts');
     const plan = D.relay.plan;
     ok(!!plan && plan.bootS >= 20, 'the day sets it: ' + (plan && plan.bootS) + ' s, ' + (plan && plan.first) + ' called at once');
     const called = T.zombies.filter((z) => z.alive && z.relayCalled);
@@ -88,6 +88,11 @@
     ok(done, 'rebooted: the radio is repaired, wherever he is (' + R().state + ')');
     await wait(300);
     ok(bar.classList.contains('restored') && /relay up/i.test(bar.querySelector('.rrb-label').textContent), 'the bar says "' + bar.querySelector('.rrb-label').textContent + '"');
+    // CL-257: the mast plays the code on a loop now, with no panel open.
+    stand(cab.centre.x + 6, P.y, cab.centre.z); P.y = T.sampleHeight(P.x, P.z);
+    const broadcast = await until(() => !!D.relay.broadcast && D.relay.broadcast.next > 0, 30000);
+    ok(broadcast && !D.relay.mode, 'the mast plays the code with no panel open (' + (D.relay.broadcast && D.relay.broadcast.next) + ' beeps)');
+    ok(!/[1-9] [1-9] [1-9]/.test(document.body.innerText.slice(0, 4000)), 'nothing on screen counts the beeps');
     ok(getComputedStyle(document.querySelector('#objectiveHud .objective-tracker') || document.body).display === 'none' || document.querySelector('#objectiveHud .objective-tracker')?.hidden, 'no tracker card for the radio');
     const snap = R().runtime.snapshot(), site = snap && snap.sites.find((s) => s.id === 'objective:radio-repair');
     ok(site && Math.hypot(site.position.x - L.centre.x, site.position.z - L.centre.z) < 0.01, 'the tracker marks the vault, not the cabinet');
@@ -130,6 +135,7 @@
     ok(took && L.phase === 'empty' && !L.vault.rewards.katanaStand.visible, 'E takes it: ' + R().state + ', vault ' + L.phase);
     ok(T.isKatanaOwned(), 'the final day: the red katana');
     ok(Math.abs(P.y - L.insideAt.y) < 0.3, 'and he is still standing on the floor (' + (P.y - L.insideAt.y).toFixed(2) + ' m)');
+    ok(!D.relay.broadcast || D.relay.broadcast.next === 0 || S().unlocked, 'the code stops once the vault is open');
     T.runDevCommand('godmode off');
     T.setKatanaOwned(false);
     ok(errs.length === 0, 'no errors' + (errs.length ? ': ' + errs[0] : ''));

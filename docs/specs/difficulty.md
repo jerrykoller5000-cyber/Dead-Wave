@@ -50,7 +50,7 @@ sinkhole. Pushes include the boss.
 
 | Night | Act | Total (boss) | Shamblers | Specialists | Caves | Ember | Boss | Pushes (bodies) | Breather | The trick |
 |---|---|---|---|---|---|---|---|---|---|---|
-| 1 | teach | 15 | 15 | - (0%) | 1 cave + 7-8 claw up |  |  | 15 | - | Fifteen shamblers; half claw up out of the ground (D-29) |
+| 1 | teach | 15 | 15 | - (0%) | 1 cave + 7-8 claw up |  |  | 15 | - | Fifteen shamblers; half claw up out of the ground (D-29); one push: the claw-ups rise as the cave's walkers close in, so all fifteen land at once (GB-230, N10) |
 | 2 | teach | 50 | 42 | **feral 8 (new)** in 2 packs (16%) | 1 cave |  |  | 19 / 31 | 9 s | Runners: the first ferals, in two packs |
 | 3 | teach | 100 | 76 | feral 10, **leaper 6 (new)**, **drowned 8 (new)** (24%) | 1 cave + lake |  |  | 26 / 32 / 42 | 9 s | The lake wakes: drowned from the sinkhole, and the first leapers |
 | 4 | build | 130 | 96 | feral 12, leaper 8, drowned 4, **soldier 8 (new)**, **brute 2 (new)** (last push) (26%) | 2 caves + lake | yes |  | 34 / 41 / 55 | 7 s | Ember Night: two caves at once, the first soldiers and brutes |

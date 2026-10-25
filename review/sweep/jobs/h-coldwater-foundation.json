@@ -1,0 +1,91 @@
+{
+ "shots": [
+  {
+   "cam": {
+    "x": -61.63,
+    "y": 4,
+    "z": 88.29,
+    "tx": -61.63,
+    "ty": 2.26,
+    "tz": 74.29,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "coldwater-foundation: from the north, his eye height",
+   "out": "review/sweep/h-coldwater-foundation/h-coldwater-foundation-from-north.png"
+  },
+  {
+   "cam": {
+    "x": -47.63,
+    "y": 3.27,
+    "z": 74.29,
+    "tx": -61.63,
+    "ty": 2.26,
+    "tz": 74.29,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "coldwater-foundation: from the east, his eye height",
+   "out": "review/sweep/h-coldwater-foundation/h-coldwater-foundation-from-east.png"
+  },
+  {
+   "cam": {
+    "x": -61.63,
+    "y": 1.48,
+    "z": 60.290000000000006,
+    "tx": -61.63,
+    "ty": 2.26,
+    "tz": 74.29,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "coldwater-foundation: from the south, his eye height",
+   "out": "review/sweep/h-coldwater-foundation/h-coldwater-foundation-from-south.png"
+  },
+  {
+   "cam": {
+    "x": -75.63,
+    "y": 2.77,
+    "z": 74.29,
+    "tx": -61.63,
+    "ty": 2.26,
+    "tz": 74.29,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "coldwater-foundation: from the west, his eye height",
+   "out": "review/sweep/h-coldwater-foundation/h-coldwater-foundation-from-west.png"
+  },
+  {
+   "cam": {
+    "x": -53.230000000000004,
+    "y": 16.46,
+    "z": 82.69000000000001,
+    "tx": -61.63,
+    "ty": 1.06,
+    "tz": 74.29,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "coldwater-foundation: from above",
+   "out": "review/sweep/h-coldwater-foundation/h-coldwater-foundation-above.png"
+  },
+  {
+   "cam": {
+    "x": -51.830000000000005,
+    "y": 8.78,
+    "z": 84.09,
+    "tx": -61.63,
+    "ty": 2.06,
+    "tz": 74.29,
+    "fov": 60
+   },
+   "time": "night",
+   "caption": "coldwater-foundation: at night",
+   "out": "review/sweep/h-coldwater-foundation/h-coldwater-foundation-night.png"
+  }
+ ],
+ "out": "review/sweep/h-coldwater-foundation/",
+ "cols": 4,
+ "size": "1280x720"
+}

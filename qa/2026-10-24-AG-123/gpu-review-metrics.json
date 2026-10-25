@@ -1,0 +1,276 @@
+{
+  "windMetrics": {
+    "fob-day": {
+      "place": "fob",
+      "night": false,
+      "spellW": 0.72,
+      "gale": 0.72,
+      "strength": 0.93,
+      "leavesActive": 85,
+      "leavesNear": 85,
+      "instancedDraw": true,
+      "fps": 51.3,
+      "low": 37,
+      "worstMs": 27
+    },
+    "fob-night": {
+      "place": "fob",
+      "night": true,
+      "spellW": 0.92,
+      "gale": 0.92,
+      "strength": 0.84,
+      "leavesActive": 88,
+      "leavesNear": 81,
+      "instancedDraw": true,
+      "fps": 60.4,
+      "low": 50.8,
+      "worstMs": 19.7
+    },
+    "forest-day": {
+      "place": "forest",
+      "night": false,
+      "spellW": 0.95,
+      "gale": 0.95,
+      "strength": 0.54,
+      "leavesActive": 87,
+      "leavesNear": 0,
+      "instancedDraw": true,
+      "fps": 49.3,
+      "low": 34.2,
+      "worstMs": 29.2
+    },
+    "forest-night": {
+      "place": "forest",
+      "night": true,
+      "spellW": 0.96,
+      "gale": 0.96,
+      "strength": 0.46,
+      "leavesActive": 88,
+      "leavesNear": 88,
+      "instancedDraw": true,
+      "fps": 54.5,
+      "low": 39.5,
+      "worstMs": 25.3
+    }
+  },
+  "flockData": {
+    "birdCount": 6,
+    "oneMeshPerWing": true,
+    "distinctRates": 6,
+    "distinctPositions": 6,
+    "changedPoseCount": 3,
+    "sample0": [
+      {
+        "phase": 0.89,
+        "rate": 5.9,
+        "glide": 0.42,
+        "x": -0.13,
+        "z": 1.08,
+        "roll": -0.038,
+        "wingAngle": -0.387,
+        "piecesPerWing": [
+          1,
+          1
+        ]
+      },
+      {
+        "phase": 1.48,
+        "rate": 4.92,
+        "glide": 0.21,
+        "x": 3.85,
+        "z": -2.91,
+        "roll": -0.009,
+        "wingAngle": -0.132,
+        "piecesPerWing": [
+          1,
+          1
+        ]
+      },
+      {
+        "phase": 1.43,
+        "rate": 6.25,
+        "glide": 0.21,
+        "x": -3.72,
+        "z": -3.72,
+        "roll": 0.001,
+        "wingAngle": -0.12,
+        "piecesPerWing": [
+          1,
+          1
+        ]
+      },
+      {
+        "phase": 4.18,
+        "rate": 5.68,
+        "glide": 0.28,
+        "x": 8.26,
+        "z": -5.79,
+        "roll": -0.033,
+        "wingAngle": -0.12,
+        "piecesPerWing": [
+          1,
+          1
+        ]
+      },
+      {
+        "phase": 3.44,
+        "rate": 6.98,
+        "glide": 0.29,
+        "x": -6.7,
+        "z": -5.24,
+        "roll": -0.011,
+        "wingAngle": -0.216,
+        "piecesPerWing": [
+          1,
+          1
+        ]
+      },
+      {
+        "phase": 5.36,
+        "rate": 6.94,
+        "glide": 0.31,
+        "x": 10.72,
+        "z": -7.92,
+        "roll": 0.029,
+        "wingAngle": -0.25,
+        "piecesPerWing": [
+          1,
+          1
+        ]
+      }
+    ],
+    "sample3": [
+      {
+        "phase": 0.89,
+        "rate": 5.9,
+        "glide": 0.42,
+        "x": -0.27,
+        "z": 1.15,
+        "roll": -0.027,
+        "wingAngle": -0.383,
+        "piecesPerWing": [
+          1,
+          1
+        ]
+      },
+      {
+        "phase": 1.48,
+        "rate": 4.92,
+        "glide": 0.21,
+        "x": 4.03,
+        "z": -2.67,
+        "roll": -0.027,
+        "wingAngle": -0.415,
+        "piecesPerWing": [
+          1,
+          1
+        ]
+      },
+      {
+        "phase": 1.43,
+        "rate": 6.25,
+        "glide": 0.21,
+        "x": -3.51,
+        "z": -3.52,
+        "roll": -0.018,
+        "wingAngle": -0.124,
+        "piecesPerWing": [
+          1,
+          1
+        ]
+      },
+      {
+        "phase": 4.18,
+        "rate": 5.68,
+        "glide": 0.28,
+        "x": 8.32,
+        "z": -5.56,
+        "roll": -0.04,
+        "wingAngle": -0.12,
+        "piecesPerWing": [
+          1,
+          1
+        ]
+      },
+      {
+        "phase": 3.44,
+        "rate": 6.98,
+        "glide": 0.29,
+        "x": -6.52,
+        "z": -4.99,
+        "roll": -0.029,
+        "wingAngle": -0.359,
+        "piecesPerWing": [
+          1,
+          1
+        ]
+      },
+      {
+        "phase": 5.36,
+        "rate": 6.94,
+        "glide": 0.31,
+        "x": 10.92,
+        "z": -7.88,
+        "roll": 0.012,
+        "wingAngle": -0.313,
+        "piecesPerWing": [
+          1,
+          1
+        ]
+      }
+    ],
+    "flockPos": {
+      "x": 47.3,
+      "y": 34.3,
+      "z": 29.6
+    },
+    "fps": 53.3,
+    "low": 34.7
+  },
+  "fpRunMetrics": {
+    "m4": {
+      "weapon": "m4",
+      "movedM": 9.87,
+      "samples": 81,
+      "camWobbleCm": 2.14,
+      "sightWobbleCm": 2.36,
+      "camPitchDeg": 0,
+      "sightPitchDeg": 0.03,
+      "fps": 56.6
+    },
+    "ak": {
+      "weapon": "ak",
+      "movedM": 10.21,
+      "samples": 72,
+      "camWobbleCm": 0.62,
+      "sightWobbleCm": 2.36,
+      "camPitchDeg": 0.01,
+      "sightPitchDeg": 0.03,
+      "fps": 50.8
+    },
+    "pistol": {
+      "weapon": "pistol",
+      "movedM": 10.26,
+      "samples": 69,
+      "camWobbleCm": 1.09,
+      "sightWobbleCm": 2.21,
+      "camPitchDeg": 0,
+      "sightPitchDeg": 0.03,
+      "fps": 50.8
+    }
+  },
+  "dropData": {
+    "state": "open",
+    "cornerText": "SUPPLY DROP · Ammo restocked · +1 MedPen",
+    "fpNoteText": "SUPPLY DROP · Ammo restocked · +1 MedPen",
+    "fpNoteOpacity": "1",
+    "fpNoteRect": {
+      "left": 652,
+      "top": 578,
+      "width": 297,
+      "height": 29,
+      "cx": 800,
+      "cy": 450
+    }
+  }
+}
