@@ -1,0 +1,758 @@
+{
+  "loadMs": 24433,
+  "pageErrors": [],
+  "conceptAudit": [
+    {
+      "kind": "shambler",
+      "eyes": [
+        {
+          "color": "74a18d",
+          "emissive": "74a18d",
+          "intensity": 0.9,
+          "baseEmissive": 0.9
+        },
+        {
+          "color": "74a18d",
+          "emissive": "74a18d",
+          "intensity": 0.9,
+          "baseEmissive": 0.9
+        }
+      ]
+    },
+    {
+      "kind": "feral",
+      "eyes": [
+        {
+          "color": "74a18d",
+          "emissive": "74a18d",
+          "intensity": 0.9,
+          "baseEmissive": 0.9
+        },
+        {
+          "color": "74a18d",
+          "emissive": "74a18d",
+          "intensity": 0.9,
+          "baseEmissive": 0.9
+        }
+      ]
+    },
+    {
+      "kind": "brute",
+      "eyes": [
+        {
+          "color": "74a18d",
+          "emissive": "74a18d",
+          "intensity": 0.9,
+          "baseEmissive": 0.9
+        },
+        {
+          "color": "74a18d",
+          "emissive": "74a18d",
+          "intensity": 0.9,
+          "baseEmissive": 0.9
+        }
+      ]
+    },
+    {
+      "kind": "military",
+      "eyes": [
+        {
+          "color": "74a18d",
+          "emissive": "74a18d",
+          "intensity": 0.9,
+          "baseEmissive": 0.9
+        },
+        {
+          "color": "74a18d",
+          "emissive": "74a18d",
+          "intensity": 0.9,
+          "baseEmissive": 0.9
+        }
+      ]
+    },
+    {
+      "kind": "spitter",
+      "eyes": [
+        {
+          "color": "74a18d",
+          "emissive": "74a18d",
+          "intensity": 0.9,
+          "baseEmissive": 0.9
+        },
+        {
+          "color": "74a18d",
+          "emissive": "74a18d",
+          "intensity": 0.9,
+          "baseEmissive": 0.9
+        }
+      ]
+    },
+    {
+      "kind": "bomber",
+      "eyes": [
+        {
+          "color": "74a18d",
+          "emissive": "74a18d",
+          "intensity": 0.9,
+          "baseEmissive": 0.9
+        },
+        {
+          "color": "74a18d",
+          "emissive": "74a18d",
+          "intensity": 0.9,
+          "baseEmissive": 0.9
+        }
+      ]
+    },
+    {
+      "kind": "screamer",
+      "eyes": [
+        {
+          "color": "74a18d",
+          "emissive": "74a18d",
+          "intensity": 0.9,
+          "baseEmissive": 0.9
+        },
+        {
+          "color": "74a18d",
+          "emissive": "74a18d",
+          "intensity": 0.9,
+          "baseEmissive": 0.9
+        }
+      ]
+    },
+    {
+      "kind": "drowned",
+      "eyes": [
+        {
+          "color": "74a18d",
+          "emissive": "74a18d",
+          "intensity": 0.9,
+          "baseEmissive": 0.9
+        },
+        {
+          "color": "74a18d",
+          "emissive": "74a18d",
+          "intensity": 0.9,
+          "baseEmissive": 0.9
+        }
+      ]
+    },
+    {
+      "kind": "leaper",
+      "eyes": [
+        {
+          "color": "74a18d",
+          "emissive": "74a18d",
+          "intensity": 0.9,
+          "baseEmissive": 0.9
+        },
+        {
+          "color": "74a18d",
+          "emissive": "74a18d",
+          "intensity": 0.9,
+          "baseEmissive": 0.9
+        }
+      ]
+    },
+    {
+      "kind": "spider",
+      "eyes": [
+        {
+          "color": "74a18d",
+          "emissive": "74a18d",
+          "intensity": 0.9,
+          "baseEmissive": 0.9
+        },
+        {
+          "color": "74a18d",
+          "emissive": "74a18d",
+          "intensity": 0.9,
+          "baseEmissive": 0.9
+        }
+      ]
+    },
+    {
+      "kind": "colossus",
+      "eyes": [
+        {
+          "color": "74a18d",
+          "emissive": "74a18d",
+          "intensity": 0.9,
+          "baseEmissive": 0.9
+        },
+        {
+          "color": "74a18d",
+          "emissive": "74a18d",
+          "intensity": 0.9,
+          "baseEmissive": 0.9
+        }
+      ]
+    },
+    {
+      "kind": "demon",
+      "eyes": [
+        {
+          "color": "74a18d",
+          "emissive": "74a18d",
+          "intensity": 0.9,
+          "baseEmissive": 0.9
+        },
+        {
+          "color": "74a18d",
+          "emissive": "74a18d",
+          "intensity": 0.9,
+          "baseEmissive": 0.9
+        }
+      ]
+    },
+    {
+      "kind": "guardian",
+      "eyes": [
+        {
+          "color": "74a18d",
+          "emissive": "74a18d",
+          "intensity": 0.9,
+          "baseEmissive": 0.9
+        },
+        {
+          "color": "74a18d",
+          "emissive": "74a18d",
+          "intensity": 0.9,
+          "baseEmissive": 0.9
+        }
+      ]
+    },
+    {
+      "kind": "caveguard",
+      "eyes": [
+        {
+          "color": "74a18d",
+          "emissive": "74a18d",
+          "intensity": 0.9,
+          "baseEmissive": 0.9
+        },
+        {
+          "color": "74a18d",
+          "emissive": "74a18d",
+          "intensity": 0.9,
+          "baseEmissive": 0.9
+        }
+      ]
+    },
+    {
+      "kind": "bluebell (convoy sleeper)",
+      "eyes": [
+        {
+          "color": "73bac8",
+          "emissive": "8beaff",
+          "intensity": 1.8,
+          "baseEmissive": 1.8
+        },
+        {
+          "color": "73bac8",
+          "emissive": "8beaff",
+          "intensity": 1.8,
+          "baseEmissive": 1.8
+        }
+      ]
+    }
+  ],
+  "poolProbe": {
+    "sameBody": true,
+    "screamerSameBody": true,
+    "firstEyes": [
+      {
+        "color": "74a18d",
+        "emissive": "74a18d",
+        "intensity": 0.9,
+        "baseEmissive": 0.9
+      },
+      {
+        "color": "74a18d",
+        "emissive": "74a18d",
+        "intensity": 0.9,
+        "baseEmissive": 0.9
+      }
+    ],
+    "reusedEyes": [
+      {
+        "color": "74a18d",
+        "emissive": "74a18d",
+        "intensity": 0.9,
+        "baseEmissive": 0.9
+      },
+      {
+        "color": "74a18d",
+        "emissive": "74a18d",
+        "intensity": 0.9,
+        "baseEmissive": 0.9
+      }
+    ],
+    "screamerReusedEyes": [
+      {
+        "color": "74a18d",
+        "emissive": "74a18d",
+        "intensity": 0.9,
+        "baseEmissive": 0.9
+      },
+      {
+        "color": "74a18d",
+        "emissive": "74a18d",
+        "intensity": 0.9,
+        "baseEmissive": 0.9
+      }
+    ],
+    "reusedRestoredTo0_9": true,
+    "reusedOverriddenTo1_7": false
+  },
+  "shots": [
+    {
+      "id": "tp-lit-lineup",
+      "label": "1. 3P Lit (5.5m): 7 archetypes @ 0.9 pale-green",
+      "render": {
+        "calls": 4370,
+        "triangles": 111067
+      },
+      "lineup": [
+        {
+          "kind": "shambler",
+          "eyes": [
+            {
+              "color": "74a18d",
+              "emissive": "74a18d",
+              "intensity": 0.9,
+              "baseEmissive": 0.9
+            },
+            {
+              "color": "74a18d",
+              "emissive": "74a18d",
+              "intensity": 0.9,
+              "baseEmissive": 0.9
+            }
+          ]
+        },
+        {
+          "kind": "feral",
+          "eyes": [
+            {
+              "color": "74a18d",
+              "emissive": "74a18d",
+              "intensity": 0.9,
+              "baseEmissive": 0.9
+            },
+            {
+              "color": "74a18d",
+              "emissive": "74a18d",
+              "intensity": 0.9,
+              "baseEmissive": 0.9
+            }
+          ]
+        },
+        {
+          "kind": "spider",
+          "eyes": [
+            {
+              "color": "74a18d",
+              "emissive": "74a18d",
+              "intensity": 0.9,
+              "baseEmissive": 0.9
+            },
+            {
+              "color": "74a18d",
+              "emissive": "74a18d",
+              "intensity": 0.9,
+              "baseEmissive": 0.9
+            }
+          ]
+        },
+        {
+          "kind": "military",
+          "eyes": [
+            {
+              "color": "74a18d",
+              "emissive": "74a18d",
+              "intensity": 0.9,
+              "baseEmissive": 0.9
+            },
+            {
+              "color": "74a18d",
+              "emissive": "74a18d",
+              "intensity": 0.9,
+              "baseEmissive": 0.9
+            }
+          ]
+        },
+        {
+          "kind": "brute",
+          "eyes": [
+            {
+              "color": "74a18d",
+              "emissive": "74a18d",
+              "intensity": 0.9,
+              "baseEmissive": 0.9
+            },
+            {
+              "color": "74a18d",
+              "emissive": "74a18d",
+              "intensity": 0.9,
+              "baseEmissive": 0.9
+            }
+          ]
+        },
+        {
+          "kind": "spitter",
+          "eyes": [
+            {
+              "color": "74a18d",
+              "emissive": "74a18d",
+              "intensity": 0.9,
+              "baseEmissive": 0.9
+            },
+            {
+              "color": "74a18d",
+              "emissive": "74a18d",
+              "intensity": 0.9,
+              "baseEmissive": 0.9
+            }
+          ]
+        },
+        {
+          "kind": "demon",
+          "eyes": [
+            {
+              "color": "74a18d",
+              "emissive": "74a18d",
+              "intensity": 0.9,
+              "baseEmissive": 0.9
+            },
+            {
+              "color": "74a18d",
+              "emissive": "74a18d",
+              "intensity": 0.9,
+              "baseEmissive": 0.9
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tp-dark-noflash",
+      "label": "2. 3P Dark (No Flashlight, 5.5m): 0.9 eyes + warning glows",
+      "render": {
+        "calls": 4400,
+        "triangles": 111097
+      }
+    },
+    {
+      "id": "tp-dark-flash",
+      "label": "3. 3P Dark (Flashlight ON, 5.5m): 0.9 eyes + flashlight beam",
+      "render": {
+        "calls": 4430,
+        "triangles": 111127
+      }
+    },
+    {
+      "id": "fp-dark-noflash",
+      "label": "4. 1P Dark (No Flashlight, 4.4m): 0.9 eye points vs warnings",
+      "render": {
+        "calls": 4460,
+        "triangles": 111157
+      },
+      "lineup": [
+        {
+          "kind": "shambler",
+          "eyes": [
+            {
+              "color": "74a18d",
+              "emissive": "74a18d",
+              "intensity": 0.9,
+              "baseEmissive": 0.9
+            },
+            {
+              "color": "74a18d",
+              "emissive": "74a18d",
+              "intensity": 0.9,
+              "baseEmissive": 0.9
+            }
+          ]
+        },
+        {
+          "kind": "drowned",
+          "eyes": [
+            {
+              "color": "74a18d",
+              "emissive": "74a18d",
+              "intensity": 0.9,
+              "baseEmissive": 0.9
+            },
+            {
+              "color": "74a18d",
+              "emissive": "74a18d",
+              "intensity": 0.9,
+              "baseEmissive": 0.9
+            }
+          ]
+        },
+        {
+          "kind": "spider",
+          "eyes": [
+            {
+              "color": "74a18d",
+              "emissive": "74a18d",
+              "intensity": 0.9,
+              "baseEmissive": 0.9
+            },
+            {
+              "color": "74a18d",
+              "emissive": "74a18d",
+              "intensity": 0.9,
+              "baseEmissive": 0.9
+            }
+          ]
+        },
+        {
+          "kind": "brute",
+          "eyes": [
+            {
+              "color": "74a18d",
+              "emissive": "74a18d",
+              "intensity": 0.9,
+              "baseEmissive": 0.9
+            },
+            {
+              "color": "74a18d",
+              "emissive": "74a18d",
+              "intensity": 0.9,
+              "baseEmissive": 0.9
+            }
+          ]
+        },
+        {
+          "kind": "spitter",
+          "eyes": [
+            {
+              "color": "74a18d",
+              "emissive": "74a18d",
+              "intensity": 0.9,
+              "baseEmissive": 0.9
+            },
+            {
+              "color": "74a18d",
+              "emissive": "74a18d",
+              "intensity": 0.9,
+              "baseEmissive": 0.9
+            }
+          ]
+        },
+        {
+          "kind": "bomber",
+          "eyes": [
+            {
+              "color": "74a18d",
+              "emissive": "74a18d",
+              "intensity": 0.9,
+              "baseEmissive": 0.9
+            },
+            {
+              "color": "74a18d",
+              "emissive": "74a18d",
+              "intensity": 0.9,
+              "baseEmissive": 0.9
+            }
+          ]
+        },
+        {
+          "kind": "demon",
+          "eyes": [
+            {
+              "color": "74a18d",
+              "emissive": "74a18d",
+              "intensity": 0.9,
+              "baseEmissive": 0.9
+            },
+            {
+              "color": "74a18d",
+              "emissive": "74a18d",
+              "intensity": 0.9,
+              "baseEmissive": 0.9
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fp-dark-flash-bluebell",
+      "label": "5. 1P Night Flashlight (3.6m): 0.9 green vs Bluebell 1.8 blue",
+      "render": {
+        "calls": 4490,
+        "triangles": 111187
+      },
+      "lineup": [
+        {
+          "kind": "shambler (0.9)",
+          "eyes": [
+            {
+              "color": "74a18d",
+              "emissive": "74a18d",
+              "intensity": 0.9,
+              "baseEmissive": 0.9
+            },
+            {
+              "color": "74a18d",
+              "emissive": "74a18d",
+              "intensity": 0.9,
+              "baseEmissive": 0.9
+            }
+          ]
+        },
+        {
+          "kind": "spider (0.9)",
+          "eyes": [
+            {
+              "color": "74a18d",
+              "emissive": "74a18d",
+              "intensity": 0.9,
+              "baseEmissive": 0.9
+            },
+            {
+              "color": "74a18d",
+              "emissive": "74a18d",
+              "intensity": 0.9,
+              "baseEmissive": 0.9
+            }
+          ]
+        },
+        {
+          "kind": "spitter (0.9 green)",
+          "eyes": [
+            {
+              "color": "74a18d",
+              "emissive": "74a18d",
+              "intensity": 0.9,
+              "baseEmissive": 0.9
+            },
+            {
+              "color": "74a18d",
+              "emissive": "74a18d",
+              "intensity": 0.9,
+              "baseEmissive": 0.9
+            }
+          ]
+        },
+        {
+          "kind": "bluebell (1.8 blue)",
+          "eyes": [
+            {
+              "color": "73bac8",
+              "emissive": "8beaff",
+              "intensity": 1.8,
+              "baseEmissive": 1.8
+            },
+            {
+              "color": "73bac8",
+              "emissive": "8beaff",
+              "intensity": 1.8,
+              "baseEmissive": 1.8
+            }
+          ]
+        },
+        {
+          "kind": "brute (0.9)",
+          "eyes": [
+            {
+              "color": "74a18d",
+              "emissive": "74a18d",
+              "intensity": 0.9,
+              "baseEmissive": 0.9
+            },
+            {
+              "color": "74a18d",
+              "emissive": "74a18d",
+              "intensity": 0.9,
+              "baseEmissive": 0.9
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fp-dark-09-vs-17",
+      "label": "6. 1P Night Flashlight (3.2m): Authored 0.9 vs Pool Reset 1.7",
+      "render": {
+        "calls": 4520,
+        "triangles": 111217
+      },
+      "lineup": [
+        {
+          "kind": "shambler 0.9 (authored)",
+          "eyes": [
+            {
+              "color": "74a18d",
+              "emissive": "74a18d",
+              "intensity": 0.9,
+              "baseEmissive": 0.9
+            },
+            {
+              "color": "74a18d",
+              "emissive": "74a18d",
+              "intensity": 0.9,
+              "baseEmissive": 0.9
+            }
+          ]
+        },
+        {
+          "kind": "shambler 1.7 (pool reset bug)",
+          "eyes": [
+            {
+              "color": "74a18d",
+              "emissive": "74a18d",
+              "intensity": 1.7,
+              "baseEmissive": 0.9
+            },
+            {
+              "color": "74a18d",
+              "emissive": "74a18d",
+              "intensity": 1.7,
+              "baseEmissive": 0.9
+            }
+          ]
+        },
+        {
+          "kind": "military 0.9 (authored)",
+          "eyes": [
+            {
+              "color": "74a18d",
+              "emissive": "74a18d",
+              "intensity": 0.9,
+              "baseEmissive": 0.9
+            },
+            {
+              "color": "74a18d",
+              "emissive": "74a18d",
+              "intensity": 0.9,
+              "baseEmissive": 0.9
+            }
+          ]
+        },
+        {
+          "kind": "military 1.7 (pool reset bug)",
+          "eyes": [
+            {
+              "color": "74a18d",
+              "emissive": "74a18d",
+              "intensity": 1.7,
+              "baseEmissive": 0.9
+            },
+            {
+              "color": "74a18d",
+              "emissive": "74a18d",
+              "intensity": 1.7,
+              "baseEmissive": 0.9
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

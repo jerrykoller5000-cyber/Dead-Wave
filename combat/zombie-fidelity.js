@@ -52,6 +52,7 @@ export function refineZombieFace(A,T,g,s,k,M) {
   if(['spider','demon','guardian','caveguard'].includes(k))return;
   const {head,eyes}=g.userData,{skin,shadow,pale,wound,mouth,teeth}=M,keep=new Set(eyes);
   for(const m of [...head.children])if(m.isMesh&&!keep.has(m))m.removeFromParent();
+  if(k==='screamer'){refineScreamerFace(A,g,M,s);return;}
   const heavy=k==='brute'||k==='colossus',scream=k==='screamer',w=heavy?.18:k==='bomber'?.17:.153;
   A.loft(head,skin,[[heavy?-.145:-.165,.055,.055,.018],[-.12,w*.60,.086,.006],[-.055,w*.85,.105,-.012],[.025,w,.135,-.023],[.10,w*.98,.137,-.028],[.167,w*.82,.111,-.032],[.205,w*.40,.065,-.033]],12);
   for(const side of [-1,1]){
@@ -81,6 +82,43 @@ export function refineZombieFace(A,T,g,s,k,M) {
     A.ribbon(head,tip,[[0,-.24,.20],[.017,-.32,.263],[.035,-.39,.33],[.023,-.43,.40],[-.015,-.40,.451]],.010);
   }
   for(const eye of eyes){eye.position.z=.153*s;eye.scale.set(.62,.38,.40);}
+}
+
+// GP-19971: drawn cheeks, inward brow and an oval mouth instead of a hanging
+// rectangular jaw. These three lower-jaw swatches survive batching as rigid-part
+// markers; prepareScreamerAppearance reads them before applying the dark palette.
+function refineScreamerFace(A,g,{skin,shadow,pale,wound,mouth,teeth},s){
+  const {head,torso,eyes}=g.userData;
+  const jawSkin=A.mat(0xb4a592),jawLip=A.mat(0x664036,false,0,'wet'),jawTeeth=A.mat(0xc7bd9f,false,0,'bone');
+  A.loft(head,skin,[[-.105,.065,.055,-.006],[-.055,.112,.085,-.014],[.025,.149,.128,-.023],[.10,.145,.132,-.028],[.165,.119,.105,-.032],[.202,.061,.060,-.033]],12);
+  for(const side of [-1,1]){
+    A.egg(head,shadow,side*.081,.034,.123,.104,.064,.027,-side*.20);
+    A.path(head,pale,[[side*.022,.058,.146],[side*.068,.080,.149],[side*.130,.064,.119]],.014);
+    A.path(head,skin,[[side*.030,.023,.148],[side*.080,.004,.151],[side*.128,.027,.129]],.009);
+    A.path(head,pale,[[side*.133,.010,.106],[side*.109,-.036,.134],[side*.087,-.100,.141]],.022);
+    A.path(head,shadow,[[side*.036,-.030,.151],[side*.067,-.056,.151],[side*.079,-.115,.147]],.006);
+    A.egg(head,skin,side*.151,-.003,-.018,.031,.070,.037,-side*.13);
+    A.path(head,jawSkin,[[side*.112,-.083,.075],[side*.104,-.155,.102],[side*.056,-.204,.119]],.019);
+    // Sternomastoid cords belong to the torso, never enlarge the head hit surface.
+    A.path(torso,skin,[[side*.070,.513,.033],[side*.052,.442,.083],[side*.116,.373,.123]],.015);
+  }
+  A.egg(head,skin,0,.002,.142,.039,.084,.045);
+  for(const side of [-1,1])A.egg(head,mouth,side*.013,-.031,.164,.014,.010,.011);
+  A.egg(head,mouth,0,-.125,.128,.151,.148,.061);
+  A.path(head,wound,[[-.071,-.080,.150],[-.041,-.063,.166],[0,-.059,.174],[.041,-.063,.166],[.071,-.080,.150]],.008);
+  A.path(head,jawLip,[[-.070,-.171,.138],[-.045,-.194,.151],[0,-.204,.157],[.045,-.194,.151],[.070,-.171,.138]],.009);
+  A.egg(head,jawSkin,0,-.207,.095,.141,.043,.099);
+  for(let i=0;i<8;i++){
+    const x=(i-3.5)*.017,z=.174-Math.abs(x)*.30,curve=Math.abs(x)*.16;
+    A.spike(head,teeth,[x,-.066-curve,z],[x*.96,-.084-curve-(i===1||i===6?.006:0),z+.002],.007);
+    A.spike(head,jawTeeth,[x,-.196+curve,z-.012],[x*.97,-.180+curve,z-.009],.006);
+  }
+  const tongue=A.mat(0xae6671,false,0,'wet'),tip=A.mat(0xd89299,false,0,'wet');
+  // One wrong proportion, restrained: the short curl stays close to the chin.
+  // No head-attached strip drags the measured head centre below its headshot slice.
+  A.path(head,tongue,[[0,-.155,.162],[.006,-.194,.189],[.012,-.224,.204],[.003,-.243,.196]],.023);
+  A.ribbon(head,tip,[[0,-.164,.184],[.007,-.197,.207],[.012,-.225,.218],[.003,-.241,.207]],.006);
+  for(const eye of eyes){eye.position.z=.140*s;eye.scale.set(.57,.27,.37);}
 }
 
 export function refineHeavyArmor(A,T,g,s,k,M) {

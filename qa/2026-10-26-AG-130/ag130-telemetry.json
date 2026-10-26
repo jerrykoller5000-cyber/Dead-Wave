@@ -1,0 +1,437 @@
+{
+  "frames": [
+    {
+      "id": "tp-lit-drift",
+      "label": "3P Lit: Drift (arms trailing)",
+      "screamerState": {
+        "open": 0,
+        "shield": true,
+        "phase": 0.07991709533216936,
+        "weight": 0.9643260066527476,
+        "exposure": 0,
+        "hover": 0.15901893389151925,
+        "rate": -0.44606881228209044,
+        "mode": "pursue",
+        "evadeSide": -1
+      },
+      "armLRot": [
+        0.355,
+        0.06,
+        -0.2793
+      ],
+      "armRRot": [
+        0.2876,
+        -0.06,
+        0.2472
+      ],
+      "headHit": true,
+      "renders": {
+        "calls": 3848,
+        "frameCalls": 63,
+        "drawCalls": 236,
+        "triangles": 110007,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    {
+      "id": "tp-lit-scream",
+      "label": "3P Lit: Scream 1.2s (arms wide)",
+      "screamerState": {
+        "open": 0,
+        "shield": true,
+        "phase": 0.15983419066433874,
+        "weight": 0.0061065985999713785,
+        "exposure": 0,
+        "hover": 0.10808597740684886,
+        "rate": 0,
+        "mode": "committed",
+        "evadeSide": 1
+      },
+      "armLRot": [
+        0.6362,
+        0.0999,
+        -0.8831
+      ],
+      "armRRot": [
+        0.5634,
+        -0.0999,
+        0.8746
+      ],
+      "headHit": true,
+      "renders": {
+        "calls": 3901,
+        "frameCalls": 53,
+        "drawCalls": 189,
+        "triangles": 89893,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    {
+      "id": "tp-lit-exposed",
+      "label": "3P Lit: Exposed 2.4s (hands at ears)",
+      "screamerState": {
+        "open": 1.7833333333333334,
+        "shield": false,
+        "phase": 0.15983419066433874,
+        "weight": 0.000033687444568469695,
+        "exposure": 0.9995902650210201,
+        "hover": 0.00003984961316484023,
+        "rate": 0,
+        "mode": "retreat",
+        "evadeSide": 1
+      },
+      "armLRot": [
+        -1.1202,
+        0.1412,
+        -0.9551
+      ],
+      "armRRot": [
+        -1.1298,
+        -0.1412,
+        0.9499
+      ],
+      "headHit": true,
+      "renders": {
+        "calls": 3954,
+        "frameCalls": 53,
+        "drawCalls": 189,
+        "triangles": 89893,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    {
+      "id": "tp-lit-recover",
+      "label": "3P Lit: Recovery -> Drift",
+      "screamerState": {
+        "open": 0,
+        "shield": true,
+        "phase": 0.2807595444695893,
+        "weight": 0.9992534393421912,
+        "exposure": 0.0007462799060561793,
+        "hover": 0.1568615198793909,
+        "rate": -0.11279934498145869,
+        "mode": "pursue",
+        "evadeSide": 1
+      },
+      "armLRot": [
+        0.1602,
+        0.0625,
+        -0.2984
+      ],
+      "armRRot": [
+        0.2232,
+        -0.0625,
+        0.3303
+      ],
+      "headHit": true,
+      "renders": {
+        "calls": 4022,
+        "frameCalls": 68,
+        "drawCalls": 204,
+        "triangles": 89908,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    {
+      "id": "fp-lit-drift",
+      "label": "1P Lit (3.6m): Drift + Shield",
+      "screamerState": {
+        "open": 0,
+        "shield": true,
+        "phase": 1.2435697807526105,
+        "weight": 0.894822708265476,
+        "exposure": 0.000002113687541985436,
+        "hover": 0.21398795547820992,
+        "rate": -0.24043379332995893,
+        "mode": "pursue",
+        "evadeSide": -1
+      },
+      "armLRot": [
+        0.2773,
+        0.0601,
+        -0.3178
+      ],
+      "armRRot": [
+        0.3484,
+        -0.0601,
+        0.3244
+      ],
+      "headHit": true,
+      "renders": {
+        "calls": 4080,
+        "frameCalls": 58,
+        "drawCalls": 194,
+        "triangles": 89898,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    {
+      "id": "fp-lit-scream",
+      "label": "1P Lit (3.6m): Scream Peak",
+      "screamerState": {
+        "open": 0,
+        "shield": true,
+        "phase": 1.3833860183491957,
+        "weight": 0.005723179176962641,
+        "exposure": 1.1660293490722156e-8,
+        "hover": 0.2217131365161404,
+        "rate": 0,
+        "mode": "committed",
+        "evadeSide": -1
+      },
+      "armLRot": [
+        0.6994,
+        0.0999,
+        -0.9618
+      ],
+      "armRRot": [
+        0.7173,
+        -0.0999,
+        0.9387
+      ],
+      "headHit": true,
+      "renders": {
+        "calls": 4133,
+        "frameCalls": 53,
+        "drawCalls": 213,
+        "triangles": 97363,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    {
+      "id": "fp-lit-exposed",
+      "label": "1P Lit (3.6m): Exposed Window",
+      "screamerState": {
+        "open": 1.6833333333333333,
+        "shield": false,
+        "phase": 1.3850416398316652,
+        "weight": 0.00003157228662127107,
+        "exposure": 0.9995902650257978,
+        "hover": 0.00007447504565935727,
+        "rate": 0.000877875857774324,
+        "mode": "retreat",
+        "evadeSide": -1
+      },
+      "armLRot": [
+        -1.1377,
+        0.1412,
+        -0.9281
+      ],
+      "armRRot": [
+        -1.1211,
+        -0.1412,
+        0.9461
+      ],
+      "headHit": true,
+      "renders": {
+        "calls": 4186,
+        "frameCalls": 53,
+        "drawCalls": 214,
+        "triangles": 97451,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    {
+      "id": "fp-lit-recover",
+      "label": "1P Lit (3.6m): Recovery Drift",
+      "screamerState": {
+        "open": 0,
+        "shield": true,
+        "phase": 1.5288904588574832,
+        "weight": 0.9985458953173157,
+        "exposure": 0.0014535547771876527,
+        "hover": 0.11312084006502125,
+        "rate": -0.18824495157115928,
+        "mode": "pursue",
+        "evadeSide": -1
+      },
+      "armLRot": [
+        0.2301,
+        0.0638,
+        -0.28
+      ],
+      "armRRot": [
+        0.1575,
+        -0.0638,
+        0.2679
+      ],
+      "headHit": true,
+      "renders": {
+        "calls": 4249,
+        "frameCalls": 63,
+        "drawCalls": 224,
+        "triangles": 97461,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    {
+      "id": "fp-dark-drift",
+      "label": "1P Night Flashlight (3.6m): Drift",
+      "screamerState": {
+        "open": 0,
+        "shield": true,
+        "phase": 1.810044443286196,
+        "weight": 0.9999958815413256,
+        "exposure": 0.00000411690117769789,
+        "hover": 0.09714729184880662,
+        "rate": -0.23858820818214443,
+        "mode": "pursue",
+        "evadeSide": 1
+      },
+      "armLRot": [
+        0.2123,
+        0.0601,
+        -0.2372
+      ],
+      "armRRot": [
+        0.1898,
+        -0.0601,
+        0.2586
+      ],
+      "headHit": true,
+      "renders": {
+        "calls": 4307,
+        "frameCalls": 58,
+        "drawCalls": 219,
+        "triangles": 97456,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    {
+      "id": "fp-dark-scream",
+      "label": "1P Night Flashlight (3.6m): Scream",
+      "screamerState": {
+        "open": 0,
+        "shield": true,
+        "phase": 1.9477574414726346,
+        "weight": 0.006303373762674699,
+        "exposure": 2.2711150560676332e-8,
+        "hover": 0.13450727181056135,
+        "rate": 0,
+        "mode": "committed",
+        "evadeSide": -1
+      },
+      "armLRot": [
+        0.5407,
+        0.0999,
+        -0.9014
+      ],
+      "armRRot": [
+        0.586,
+        -0.0999,
+        0.9364
+      ],
+      "headHit": true,
+      "renders": {
+        "calls": 4359,
+        "frameCalls": 52,
+        "drawCalls": 204,
+        "triangles": 87591,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    {
+      "id": "fp-dark-exposed",
+      "label": "1P Night Flashlight (3.6m): Exposed",
+      "screamerState": {
+        "open": 1.6833333333333333,
+        "shield": false,
+        "phase": 1.9477574414726346,
+        "weight": 0.00003477296742992824,
+        "exposure": 0.9995902650303257,
+        "hover": 0.00007848891471077568,
+        "rate": 0,
+        "mode": "retreat",
+        "evadeSide": -1
+      },
+      "armLRot": [
+        -1.1634,
+        0.1412,
+        -0.916
+      ],
+      "armRRot": [
+        -1.1666,
+        -0.1412,
+        0.9071
+      ],
+      "headHit": true,
+      "renders": {
+        "calls": 4411,
+        "frameCalls": 52,
+        "drawCalls": 204,
+        "triangles": 87591,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    {
+      "id": "fp-dark-close",
+      "label": "1P Night Flashlight (2.4m): Face Close",
+      "screamerState": {
+        "open": 0,
+        "shield": true,
+        "phase": 1.8411936300504728,
+        "weight": 0.8993285786484118,
+        "exposure": 0.020919438393083738,
+        "hover": 0.21558310930503166,
+        "rate": 0,
+        "mode": "committed",
+        "evadeSide": -1
+      },
+      "armLRot": [
+        0.245,
+        0.1101,
+        -0.9671
+      ],
+      "armRRot": [
+        0.2949,
+        -0.1101,
+        0.9665
+      ],
+      "headHit": true,
+      "renders": {
+        "calls": 4453,
+        "frameCalls": 42,
+        "drawCalls": 194,
+        "triangles": 87581,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    }
+  ],
+  "loadSec": 26.187,
+  "wallOpenSec": 26.61,
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "sweep": {
+    "minSideM": 0.12001,
+    "bodyIntersections": 0,
+    "skullIntersections": 0,
+    "vertexSamples": 1834560,
+    "sweepMs": 97.6,
+    "liveStepAvgMs": 3.04,
+    "liveStepP99Ms": 7.6
+  },
+  "pageErrors": []
+}

@@ -220,8 +220,27 @@ the reload, change the JSON: `node --test studio/marine-reload.test.mjs` checks 
 **The knife arm (CL-122): the same format.** `studio/clips/marine/knife-slash.json` is a hand path for the hand the blade
 rides in: places `rest` (where the pose has the hand that frame, so the swing starts and ends there) and `chest` (in
 front of his upper chest), keys for the wind-up out to the knife side, the cut in front at arm's length and the
-follow-through across, over the 0.26 s slash. The game's `knifeArm()` reaches it by IK after the hold; the blade's own
+follow-through across, over the 0.22 s slash. The game's `knifeArm()` reaches it by IK after the hold; the blade's own
 turn in the fist stays in `updateKnifeAnim`. Tests: `studio/marine-knife.test.mjs`.
+
+**The CMU motion capture (CL-261).** The UAL packs have no sprint arms, no blade work and no ladder, so
+`studio/import-cmu.py` brings in clips of the CMU Graphics Lab database (mocap.cs.cmu.edu, the FBX conversion
+huggingface.co/datasets/gbionics/cmu-fbx) as `assets/anim/reference/cmu.json`, the same dw-ref/1 format (22 body bones,
+30 fps; free to use and ship, never to resell; credited in NOTICES.txt and the folder's LICENSE.txt). It runs in
+Blender's Python, headless (`pip install bpy`): `python3 -I studio/import-cmu.py <folder of .fbx> [<out.json>]`. Its
+`WANT` lists each clip and what it is for; a long take can keep only a stretch of itself. The preview shows a `cmu_`
+clip as a strip like any reference (`studio/preview.html?rig=marine&clip=run&row=ref&ref=cmu_09_01`). What came of them, measured in the performer's own frame and
+tuned in `index.html` (one table each):
+- `UNARMED_RUN` (the run 09_01): the upper arm drives back more than forward (12° in front to 45° behind), the elbow
+  80-120°, the hands close by the hips and in toward his middle, the chest turning about 13° with them. t296.
+- `BLADE_BODY` (the swordplay 02_07-08, the strikes 02_05 and 144_20): a cut or a straight blow comes from the body.
+  The shoulders turn about 60° from the cock to the hit (the hips 40-50° under them) and the trunk leans 11-27° in;
+  the arm ends 92-96% straight; nobody steps. The marine's legs keep to the gait, so his chest takes the turn against
+  them: the knife 11° back at the cock and 26-30° through, the machete and katana 26°. The knife's body turns first
+  and its hand still goes to the clip's point, so the shoulder coming through is what carries the stab out; the chop's
+  arm rides the chest round.
+- `LADDER_GRIP` and `ladderLimbs` (the climbs 13_33-34): hand over hand, a foot on each rung; where rungs are too far
+  apart for a foot to go two rungs past the other (the mast's 40 cm), the feet come together on one. t297.
 
 `studio/preview.html?clip=drag&n=6&row=rig` (or `row=ref`) draws a quick strip of a clip or of its
 reference, served from the repo root: Claude's quick look, and a starting point for CU-44.

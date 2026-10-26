@@ -55,10 +55,16 @@ export function screamerScreamPose(remaining,open=0){
 export function applyScreamerPose(z,dt){
  if(z.typeKey!=='screamer')return;const u=z.mesh.userData,p=z.mesh.position,yaw=z.mesh.rotation.y;
  if(unavailable(z)||z.inWater||z.farLod||z.hitReact>0||z.hitPartT>0||z.attackWindup>0||z.swingT>0||z.partsLost?.legL||z.partsLost?.legR||z.partsLost?.head||!u.hips||!u.torso){poses.delete(z);return;}
- let s=poses.get(z);if(!s||Math.hypot(p.x-s.x,p.z-s.z)>3||dt>.15){s={x:p.x,z:p.z,yaw,hipYaw:yaw,phase:0,clock:(z.bob||0)%6,weight:0,exposure:0,hover:0,saved:null};poses.set(z,s);}
+ let s=poses.get(z);if(!s||Math.hypot(p.x-s.x,p.z-s.z)>3||dt>.15){s={x:p.x,z:p.z,yaw,hipYaw:yaw,phase:0,clock:(z.bob||0)%6,weight:0,exposure:0,guard:0,guardRate:0,call:0,hover:0,saved:null};poses.set(z,s);}
  const dx=p.x-s.x,dz=p.z-s.z,travel=Math.hypot(dx,dz),turn=angle(yaw-s.yaw),h=clamp(dt,0,.1),rest=u.rest||{},v=screamerScreamPose(z.screamT||0,z.sonicOpenT||0),sing=z.screamT>0;
  const exposed=z.sonicOpenT>0&&!z.partsLost?.head;
- s.exposure+=(Number(exposed)-s.exposure)*(1-Math.exp(-12*h));s.clock+=h;
+ s.exposure+=(Number(exposed)-s.exposure)*(1-Math.exp(-(exposed?12:8)*h));s.clock+=h;
+ // GP-19971: retain the release across the scream->exposed boundary. The chest
+ // leads the hands; ending the timer must not snap the shoulders or jaw.
+ s.call+=(v.arms-s.call)*(1-Math.exp(-(sing?10:5)*h));const call=s.call;
+ const guardTarget=Number(exposed),error=s.guard-guardTarget,velocity=s.guardRate,decay=Math.exp(-6*h);
+ s.guard=guardTarget+(error+(velocity+6*error)*h)*decay;
+ s.guardRate=(velocity-6*(velocity+6*error)*h)*decay;
  s.x=p.x;s.z=p.z;s.yaw=yaw;s.phase=(s.phase+travel*Math.PI*2/(1.8-.65*s.exposure)+Math.abs(turn)*.35)%(Math.PI*2);
  s.weight+=((travel>.0005||Math.abs(turn)>.0005?1:0)-s.weight)*(1-Math.exp(-8*h));s.hipYaw=angle(s.hipYaw+angle(yaw-s.hipYaw)*(1-Math.exp(-(4+5*s.exposure)*h)));
  const lag=clamp(angle(s.hipYaw-yaw),-.48,.48),w=s.weight,ph=s.phase,scale=z.scale||1,e=s.exposure;
@@ -71,13 +77,13 @@ export function applyScreamerPose(z,dt){
  // GP-19890: breathing stays visible while hovering or waiting, and restores before reactions.
  if(u.torso.scale){set(u.torso.scale,'x',u.torso.scale.x*(1+.018*breath));set(u.torso.scale,'y',u.torso.scale.y*(1+.028*breath));set(u.torso.scale,'z',u.torso.scale.z*(1+.055*breath));}
  set(u.torso.position,'y',u.torso.position.y+.012*scale*breath);
- set(u.torso.rotation,'x',(rest.torsoRX||0)-.055*glide-.025*breath+.19*e*w+v.arch*(sing?1:.4));
+ set(u.torso.rotation,'x',(rest.torsoRX||0)-.055*glide-.025*breath+.19*e*w-.20*call+.08*v.spent*e);
  set(u.torso.rotation,'y',(rest.torsoRY||0)-lag*.8+.065*Math.sin(flow-.6)*glide+.12*twitch);
  set(u.torso.rotation,'z',(rest.torsoRZ||0)-.035*Math.sin(flow-.6)*glide-.085*Math.sin(ph-.5)*e*w);
- if(!z.partsLost?.head){set(u.head.rotation,'x',(rest.headRX||0)+v.head*(sing?1:.45)+.035*Math.sin(flow-1)*glide+.11*twitch);
+ if(!z.partsLost?.head){set(u.head.rotation,'x',(rest.headRX||0)-.24*call+.1125*v.spent*e+.035*Math.sin(flow-1)*glide+.06*twitch);
   set(u.head.rotation,'z',(rest.headRZ||0)-.03*Math.sin(flow-1)*glide+.09*twitch);
-  set(u.screamerJaw?.rotation,'x',v.jaw+.055*e*(.5+.5*Math.sin(s.clock*11)));
-  set(u.screamerTongue?.rotation,'x',Math.sin(flow-.7)*.08*glide+.12*twitch+.15*v.arms);set(u.screamerTongue?.rotation,'z',Math.sin(flow-1)*.13*glide+.16*twitch);}
+  set(u.screamerJaw?.rotation,'x',.32*call-.08*v.spent*e+.035*e*(.5+.5*Math.sin(s.clock*11)));
+  set(u.screamerTongue?.rotation,'x',Math.sin(flow-.7)*.06*glide+.08*twitch+.12*call);set(u.screamerTongue?.rotation,'z',Math.sin(flow-1)*.09*glide+.10*twitch);}
  const direction=travel>.0005?clamp((dx*Math.sin(yaw)+dz*Math.cos(yaw))/travel,-1,1):1;
  for(const [i,leg]of [u.legLG,u.legRG].entries()){
   const shin=leg?.userData.shinG,ankle=leg?.userData.shamblerAnkle;if(!shin||!ankle)continue;
@@ -86,11 +92,19 @@ export function applyScreamerPose(z,dt){
   const lift=(stance?0:Math.sin(t*Math.PI)*.12*w)*e+(.15+.075*Math.sin(flow+i*Math.PI-.5))*glide;
   const ry=leg.userData.shamblerFootY+lift*scale-u.hips.position.y-leg.position.y-Math.sin(u.hips.rotation.z)*leg.position.x;
   const legPose=shamblerLeg(ry,footZ,.38*scale,.36*scale);set(leg.rotation,'x',legPose.thigh);set(leg.rotation,'y',-lag*.3);set(shin.rotation,'x',legPose.knee);set(ankle.rotation,'x',-(u.hips.rotation.x+legPose.thigh+legPose.knee));set(ankle.rotation,'z',-u.hips.rotation.z);
-  const arm=i?u.armRG:u.armLG,side=i?-1:1;if(!arm||z.partsLost?.[i?'armR':'armL'])continue;
-  const ribbon=Math.sin(flow+i*.9-1),flail=Math.sin(ph+i*Math.PI-.3)*w;
-  set(arm.rotation,'x',(-.30+.24*ribbon)*glide+(-.70+.32*flail+.18*twitch)*e-.65*v.arms);
-  set(arm.rotation,'z',side*(-(.56+.20*Math.sin(flow+i*.8))*glide+(.34+.16*flail)*e+.38*v.arms));set(arm.rotation,'y',-side*(.12+.18*glide*Math.sin(flow+i*.8)+.12*e+.15*v.arms));
-  set(arm.userData.elbowG?.rotation,'x',(-.48+.20*Math.sin(flow+i*.9-1.7))*glide+(-.85+.24*Math.sin(ph+i*Math.PI-.8))*e-.35*v.arms);
-  set(arm.userData.elbowG?.rotation,'z',side*(.18*Math.sin(flow+i*.8-2)*glide+.20*twitch));
+ }
+ // Independent of foot IK: barefoot concept geometry can lack an ankle helper.
+ // Left shoulder is -x, so negative z opens it away from the chest. Keep every
+ // key and every blend on its own side: trailing / voice / hands beside ears.
+ for(const [i,arm]of [u.armLG,u.armRG].entries()){
+  if(!arm||z.partsLost?.[i?'armR':'armL'])continue;
+  const side=i?-1:1,ribbon=Math.sin(flow+i*.9-1),guard=s.guard,trail=1-guard,voice=call*trail;
+  const flinch=.035*Math.sin(s.clock*8+i*.8)*guard;
+  set(arm.rotation,'x',(.28+.09*ribbon)*trail+.35*voice+(-1.30+flinch)*guard);
+  set(arm.rotation,'z',-side*((.28+.045*Math.sin(flow+i*.8))*trail+.64*voice+(1.0+flinch)*guard));
+  set(arm.rotation,'y',side*(.06*trail+.04*voice+.15*guard));
+  set(arm.userData.elbowG?.rotation,'x',(-.12+.055*Math.sin(flow+i*.9-1.7))*trail-.10*voice+(-2.30+flinch)*guard);
+  set(arm.userData.elbowG?.rotation,'y',0);
+  set(arm.userData.elbowG?.rotation,'z',side*.025*Math.sin(flow+i*.8-2)*trail);
  }
 }

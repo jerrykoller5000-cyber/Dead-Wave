@@ -6,6 +6,7 @@
 import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
+import { execFileSync } from 'node:child_process';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { handleStudioNote, handleInspectNote } from '../studio/notes-endpoint.mjs';   // D-42: the motion lab's notes; CL-196: the inspector's (Claude's)
@@ -16,6 +17,47 @@ export const INSPECTOR_SERVER_FINGERPRINT = crypto.createHash('sha256')
   .update(fs.readFileSync(fileURLToPath(import.meta.url)))
   .update(fs.readFileSync(fileURLToPath(new URL('../studio/notes-endpoint.mjs', import.meta.url))))
   .digest('hex');
+
+// CU-160: the flight recorder posts a clip here while the game is served from this folder.
+// The name is a date-time only, so the body cannot write outside qa/clips.
+function handleClipSave(req, res, base) {
+  const chunks = [];
+  let size = 0;
+  req.on('data', (c) => {
+    size += c.length;
+    if (size > 12 * 1024 * 1024) { req.destroy(); return; }
+    chunks.push(c);
+  });
+  req.on('end', () => {
+    if (req.destroyed) return;
+    try {
+      const body = JSON.parse(Buffer.concat(chunks).toString('utf8'));
+      const name = String(body.name || '').replace(/\\/g, '/');
+      if (!/^[\d]{4}-[\d]{2}-[\d]{2}-[\d]{6}\.json$/.test(name) && !/^tt-clip-[\d]{4}-[\d]{2}-[\d]{2}-[\d]{6}\.json$/.test(name)) {
+        res.writeHead(400, { 'Content-Type': 'text/plain; charset=utf-8' }).end('bad clip name');
+        return;
+      }
+      const clip = body.clip;
+      if (!clip || typeof clip !== 'object') {
+        res.writeHead(400, { 'Content-Type': 'text/plain; charset=utf-8' }).end('no clip');
+        return;
+      }
+      if (!clip.commit) {
+        try { clip.commit = execFileSync('git', ['rev-parse', '--short', 'HEAD'], { cwd: base, encoding: 'utf8' }).trim(); }
+        catch (_) { clip.commit = null; }
+      }
+      const dir = path.join(base, 'qa', 'clips');
+      fs.mkdirSync(dir, { recursive: true });
+      const file = path.join(dir, name);
+      fs.writeFileSync(file, JSON.stringify(clip));
+      const rel = 'qa/clips/' + name;
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' })
+        .end(JSON.stringify({ ok: true, file: rel }));
+    } catch (e) {
+      if (!res.destroyed) res.writeHead(400, { 'Content-Type': 'text/plain; charset=utf-8' }).end('bad clip');
+    }
+  });
+}
 
 const TYPES = {
   '.html': 'text/html; charset=utf-8',
@@ -72,6 +114,7 @@ export function serve(root, port = 0) {
     }
     if (req.method === 'POST' && pathname === '/__studio/note') { handleStudioNote(req, res, base); return; }
     if (req.method === 'POST' && pathname === '/__inspect/note') { handleInspectNote(req, res, base); return; }
+    if (req.method === 'POST' && pathname === '/__clip') { handleClipSave(req, res, base); return; }
     // GP-19919: launchers probe this identity before reusing a port. A foreign listener is never killed.
     if (req.method === 'GET' && pathname === '/__inspect/health') {
       const body = JSON.stringify({ ok: true, service: 'dead-wave-inspector', version: 1, root: base, pid: process.pid, fingerprint: INSPECTOR_SERVER_FINGERPRINT });

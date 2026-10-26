@@ -86,7 +86,7 @@ const server = await serve(ROOT, 0);
 const browser = await launch({ headless: argv.includes('--headless'), args: ['--enable-precise-memory-info'] });
 // Real animation frames. The raf=timer mode is clamped to one frame a second in a
 // throttled tab, which left every one-second window empty.
-const url = `${server.origin}/index.html?debug=1`;
+const url = `${server.origin}/index.html?debug=1${argv.includes('--flight') && argv[argv.indexOf('--flight') + 1] === 'off' ? '&flight=0' : ''}`;
 console.log(`bench: ${url}`);
 console.log(`bench: scenario ${SCENARIO}${SCENARIO === 'night' ? ' ' + NIGHT : ''} for ${SECONDS}s\n`);
 

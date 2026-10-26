@@ -1,0 +1,502 @@
+{
+  "ok": true,
+  "shots": [
+    {
+      "file": "handoffs/GP-19971/after/arms-drift-front.png",
+      "cam": {
+        "x": -27.999843470311006,
+        "y": -198.9928434807336,
+        "z": -628.5541703599828,
+        "tx": -27.999843470311006,
+        "ty": -199.23197511349744,
+        "tz": -631.9739120315611,
+        "fov": 35
+      },
+      "label": "Screamer (live)",
+      "ms": 1227,
+      "caption": "after: drift / front"
+    },
+    {
+      "file": "handoffs/GP-19971/after/arms-drift-three.png",
+      "cam": {
+        "x": -25.37703539786432,
+        "y": -197.34017314134778,
+        "z": -628.8740725121573,
+        "tx": -28,
+        "ty": -199.15697711177464,
+        "tz": -632,
+        "fov": 35
+      },
+      "label": "Screamer (live)",
+      "ms": 607,
+      "caption": "after: drift / three"
+    },
+    {
+      "file": "handoffs/GP-19971/after/arms-drift-right.png",
+      "cam": {
+        "x": -31.750547655654398,
+        "y": -199.02600510162372,
+        "z": -632,
+        "tx": -28,
+        "ty": -199.15697711177464,
+        "tz": -632,
+        "fov": 35
+      },
+      "label": "Screamer (live)",
+      "ms": 564,
+      "caption": "after: drift / right"
+    },
+    {
+      "file": "handoffs/GP-19971/after/arms-scream-front.png",
+      "cam": {
+        "x": -28,
+        "y": -198.9191559894085,
+        "z": -628.5989995002453,
+        "tx": -28,
+        "ty": -199.15697711177464,
+        "tz": -632,
+        "fov": 35
+      },
+      "label": "Screamer (live)",
+      "ms": 536,
+      "caption": "after: scream / front"
+    },
+    {
+      "file": "handoffs/GP-19971/after/arms-scream-three.png",
+      "cam": {
+        "x": -25.015584518074732,
+        "y": -197.08981315060245,
+        "z": -628.4433121276218,
+        "tx": -28,
+        "ty": -199.15697711177464,
+        "tz": -632,
+        "fov": 35
+      },
+      "label": "Screamer (live)",
+      "ms": 650,
+      "caption": "after: scream / three"
+    },
+    {
+      "file": "handoffs/GP-19971/after/arms-scream-right.png",
+      "cam": {
+        "x": -32.11366884328637,
+        "y": -199.01332463033285,
+        "z": -632,
+        "tx": -28,
+        "ty": -199.15697711177464,
+        "tz": -632,
+        "fov": 35
+      },
+      "label": "Screamer (live)",
+      "ms": 544,
+      "caption": "after: scream / right"
+    },
+    {
+      "file": "handoffs/GP-19971/after/arms-exposed-front.png",
+      "cam": {
+        "x": -28,
+        "y": -198.91629987468835,
+        "z": -628.5581551568415,
+        "tx": -28,
+        "ty": -199.15697711177464,
+        "tz": -632,
+        "fov": 35
+      },
+      "label": "Screamer (live)",
+      "ms": 513,
+      "caption": "after: exposed / front"
+    },
+    {
+      "file": "handoffs/GP-19971/after/arms-exposed-three.png",
+      "cam": {
+        "x": -25.345810058919685,
+        "y": -197.3185448205819,
+        "z": -628.8368596022901,
+        "tx": -28,
+        "ty": -199.15697711177464,
+        "tz": -632,
+        "fov": 35
+      },
+      "label": "Screamer (live)",
+      "ms": 630,
+      "caption": "after: exposed / three"
+    },
+    {
+      "file": "handoffs/GP-19971/after/arms-exposed-right.png",
+      "cam": {
+        "x": -31.830803035861504,
+        "y": -199.02320252199104,
+        "z": -632,
+        "tx": -28,
+        "ty": -199.15697711177464,
+        "tz": -632,
+        "fov": 35
+      },
+      "label": "Screamer (live)",
+      "ms": 508,
+      "caption": "after: exposed / right"
+    },
+    {
+      "file": "handoffs/GP-19971/after/face-drift-noon-front.png",
+      "cam": {
+        "fov": 35,
+        "x": -27.983859116323284,
+        "y": -198.41482059997102,
+        "z": -630.7127042045541,
+        "tx": -27.983859116323284,
+        "ty": -198.41482059997102,
+        "tz": -632.0027042045542
+      },
+      "label": null,
+      "ms": 612,
+      "caption": "after: drift / noon / front"
+    },
+    {
+      "file": "handoffs/GP-19971/after/face-drift-noon-three.png",
+      "cam": {
+        "fov": 35,
+        "x": -27.20953092724937,
+        "y": -198.41482059997102,
+        "z": -630.956848944764,
+        "tx": -27.983859116323284,
+        "ty": -198.41482059997102,
+        "tz": -632.0027042045542
+      },
+      "label": null,
+      "ms": 638,
+      "caption": "after: drift / noon / three"
+    },
+    {
+      "file": "handoffs/GP-19971/after/face-drift-noon-profile.png",
+      "cam": {
+        "fov": 35,
+        "x": -26.633859116323283,
+        "y": -198.41482059997102,
+        "z": -632.0627042045542,
+        "tx": -27.983859116323284,
+        "ty": -198.41482059997102,
+        "tz": -632.0027042045542
+      },
+      "label": null,
+      "ms": 665,
+      "caption": "after: drift / noon / profile"
+    },
+    {
+      "file": "handoffs/GP-19971/after/face-scream-noon-front.png",
+      "cam": {
+        "fov": 35,
+        "x": -27.983548834568214,
+        "y": -198.43737834629468,
+        "z": -630.8180920543175,
+        "tx": -27.983548834568214,
+        "ty": -198.43737834629468,
+        "tz": -632.1080920543176
+      },
+      "label": null,
+      "ms": 639,
+      "caption": "after: scream / noon / front"
+    },
+    {
+      "file": "handoffs/GP-19971/after/face-scream-noon-three.png",
+      "cam": {
+        "fov": 35,
+        "x": -27.2092206454943,
+        "y": -198.43737834629468,
+        "z": -631.0622367945274,
+        "tx": -27.983548834568214,
+        "ty": -198.43737834629468,
+        "tz": -632.1080920543176
+      },
+      "label": null,
+      "ms": 656,
+      "caption": "after: scream / noon / three"
+    },
+    {
+      "file": "handoffs/GP-19971/after/face-scream-noon-profile.png",
+      "cam": {
+        "fov": 35,
+        "x": -26.633548834568213,
+        "y": -198.43737834629468,
+        "z": -632.1680920543175,
+        "tx": -27.983548834568214,
+        "ty": -198.43737834629468,
+        "tz": -632.1080920543176
+      },
+      "label": null,
+      "ms": 700,
+      "caption": "after: scream / noon / profile"
+    },
+    {
+      "file": "handoffs/GP-19971/after/face-drift-overcast-front.png",
+      "cam": {
+        "fov": 35,
+        "x": -27.983859116323284,
+        "y": -198.41482059997102,
+        "z": -630.7127042045541,
+        "tx": -27.983859116323284,
+        "ty": -198.41482059997102,
+        "tz": -632.0027042045542
+      },
+      "label": null,
+      "ms": 620,
+      "caption": "after: drift / overcast / front"
+    },
+    {
+      "file": "handoffs/GP-19971/after/face-drift-overcast-three.png",
+      "cam": {
+        "fov": 35,
+        "x": -27.20953092724937,
+        "y": -198.41482059997102,
+        "z": -630.956848944764,
+        "tx": -27.983859116323284,
+        "ty": -198.41482059997102,
+        "tz": -632.0027042045542
+      },
+      "label": null,
+      "ms": 657,
+      "caption": "after: drift / overcast / three"
+    },
+    {
+      "file": "handoffs/GP-19971/after/face-drift-overcast-profile.png",
+      "cam": {
+        "fov": 35,
+        "x": -26.633859116323283,
+        "y": -198.41482059997102,
+        "z": -632.0627042045542,
+        "tx": -27.983859116323284,
+        "ty": -198.41482059997102,
+        "tz": -632.0027042045542
+      },
+      "label": null,
+      "ms": 613,
+      "caption": "after: drift / overcast / profile"
+    },
+    {
+      "file": "handoffs/GP-19971/after/face-scream-overcast-front.png",
+      "cam": {
+        "fov": 35,
+        "x": -27.983548834568214,
+        "y": -198.43737834629468,
+        "z": -630.8180920543175,
+        "tx": -27.983548834568214,
+        "ty": -198.43737834629468,
+        "tz": -632.1080920543176
+      },
+      "label": null,
+      "ms": 640,
+      "caption": "after: scream / overcast / front"
+    },
+    {
+      "file": "handoffs/GP-19971/after/face-scream-overcast-three.png",
+      "cam": {
+        "fov": 35,
+        "x": -27.2092206454943,
+        "y": -198.43737834629468,
+        "z": -631.0622367945274,
+        "tx": -27.983548834568214,
+        "ty": -198.43737834629468,
+        "tz": -632.1080920543176
+      },
+      "label": null,
+      "ms": 644,
+      "caption": "after: scream / overcast / three"
+    },
+    {
+      "file": "handoffs/GP-19971/after/face-scream-overcast-profile.png",
+      "cam": {
+        "fov": 35,
+        "x": -26.633548834568213,
+        "y": -198.43737834629468,
+        "z": -632.1680920543175,
+        "tx": -27.983548834568214,
+        "ty": -198.43737834629468,
+        "tz": -632.1080920543176
+      },
+      "label": null,
+      "ms": 609,
+      "caption": "after: scream / overcast / profile"
+    },
+    {
+      "file": "handoffs/GP-19971/after/face-drift-dusk-front.png",
+      "cam": {
+        "fov": 35,
+        "x": -27.983859116323284,
+        "y": -198.41482059997102,
+        "z": -630.7127042045541,
+        "tx": -27.983859116323284,
+        "ty": -198.41482059997102,
+        "tz": -632.0027042045542
+      },
+      "label": null,
+      "ms": 633,
+      "caption": "after: drift / dusk / front"
+    },
+    {
+      "file": "handoffs/GP-19971/after/face-drift-dusk-three.png",
+      "cam": {
+        "fov": 35,
+        "x": -27.20953092724937,
+        "y": -198.41482059997102,
+        "z": -630.956848944764,
+        "tx": -27.983859116323284,
+        "ty": -198.41482059997102,
+        "tz": -632.0027042045542
+      },
+      "label": null,
+      "ms": 649,
+      "caption": "after: drift / dusk / three"
+    },
+    {
+      "file": "handoffs/GP-19971/after/face-drift-dusk-profile.png",
+      "cam": {
+        "fov": 35,
+        "x": -26.633859116323283,
+        "y": -198.41482059997102,
+        "z": -632.0627042045542,
+        "tx": -27.983859116323284,
+        "ty": -198.41482059997102,
+        "tz": -632.0027042045542
+      },
+      "label": null,
+      "ms": 656,
+      "caption": "after: drift / dusk / profile"
+    },
+    {
+      "file": "handoffs/GP-19971/after/face-scream-dusk-front.png",
+      "cam": {
+        "fov": 35,
+        "x": -27.983548834568214,
+        "y": -198.43737834629468,
+        "z": -630.8180920543175,
+        "tx": -27.983548834568214,
+        "ty": -198.43737834629468,
+        "tz": -632.1080920543176
+      },
+      "label": null,
+      "ms": 639,
+      "caption": "after: scream / dusk / front"
+    },
+    {
+      "file": "handoffs/GP-19971/after/face-scream-dusk-three.png",
+      "cam": {
+        "fov": 35,
+        "x": -27.2092206454943,
+        "y": -198.43737834629468,
+        "z": -631.0622367945274,
+        "tx": -27.983548834568214,
+        "ty": -198.43737834629468,
+        "tz": -632.1080920543176
+      },
+      "label": null,
+      "ms": 599,
+      "caption": "after: scream / dusk / three"
+    },
+    {
+      "file": "handoffs/GP-19971/after/face-scream-dusk-profile.png",
+      "cam": {
+        "fov": 35,
+        "x": -26.633548834568213,
+        "y": -198.43737834629468,
+        "z": -632.1680920543175,
+        "tx": -27.983548834568214,
+        "ty": -198.43737834629468,
+        "tz": -632.1080920543176
+      },
+      "label": null,
+      "ms": 655,
+      "caption": "after: scream / dusk / profile"
+    },
+    {
+      "file": "handoffs/GP-19971/after/face-drift-night-front.png",
+      "cam": {
+        "fov": 35,
+        "x": -27.983859116323284,
+        "y": -198.41482059997102,
+        "z": -630.7127042045541,
+        "tx": -27.983859116323284,
+        "ty": -198.41482059997102,
+        "tz": -632.0027042045542
+      },
+      "label": null,
+      "ms": 577,
+      "caption": "after: drift / night / front"
+    },
+    {
+      "file": "handoffs/GP-19971/after/face-drift-night-three.png",
+      "cam": {
+        "fov": 35,
+        "x": -27.20953092724937,
+        "y": -198.41482059997102,
+        "z": -630.956848944764,
+        "tx": -27.983859116323284,
+        "ty": -198.41482059997102,
+        "tz": -632.0027042045542
+      },
+      "label": null,
+      "ms": 632,
+      "caption": "after: drift / night / three"
+    },
+    {
+      "file": "handoffs/GP-19971/after/face-drift-night-profile.png",
+      "cam": {
+        "fov": 35,
+        "x": -26.633859116323283,
+        "y": -198.41482059997102,
+        "z": -632.0627042045542,
+        "tx": -27.983859116323284,
+        "ty": -198.41482059997102,
+        "tz": -632.0027042045542
+      },
+      "label": null,
+      "ms": 635,
+      "caption": "after: drift / night / profile"
+    },
+    {
+      "file": "handoffs/GP-19971/after/face-scream-night-front.png",
+      "cam": {
+        "fov": 35,
+        "x": -27.983548834568214,
+        "y": -198.43737834629468,
+        "z": -630.8180920543175,
+        "tx": -27.983548834568214,
+        "ty": -198.43737834629468,
+        "tz": -632.1080920543176
+      },
+      "label": null,
+      "ms": 585,
+      "caption": "after: scream / night / front"
+    },
+    {
+      "file": "handoffs/GP-19971/after/face-scream-night-three.png",
+      "cam": {
+        "fov": 35,
+        "x": -27.2092206454943,
+        "y": -198.43737834629468,
+        "z": -631.0622367945274,
+        "tx": -27.983548834568214,
+        "ty": -198.43737834629468,
+        "tz": -632.1080920543176
+      },
+      "label": null,
+      "ms": 643,
+      "caption": "after: scream / night / three"
+    },
+    {
+      "file": "handoffs/GP-19971/after/face-scream-night-profile.png",
+      "cam": {
+        "fov": 35,
+        "x": -26.633548834568213,
+        "y": -198.43737834629468,
+        "z": -632.1680920543175,
+        "tx": -27.983548834568214,
+        "ty": -198.43737834629468,
+        "tz": -632.1080920543176
+      },
+      "label": null,
+      "ms": 619,
+      "caption": "after: scream / night / profile"
+    }
+  ],
+  "sheet": "handoffs/GP-19971/after/sheet.jpg",
+  "ms": 21132
+}

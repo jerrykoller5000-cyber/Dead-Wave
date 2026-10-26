@@ -30,7 +30,9 @@
       const s = SIGHT[k]; ok(!!s, k + ': has a sight point'); if (!s) continue;
       const p = V(...s.pos), f = V(...s.fwd).normalize(), ang = Math.acos(Math.min(1, f.z * dirZ)) * 180 / Math.PI;
       ok(p.y > mz.y && (mz.z - p.z) * dirZ > 0.1 && Math.abs(p.x - mz.x) < 0.02 && ang < 4, k + ': eye above the bore, behind the muzzle, on its centre line, along it (' + ang.toFixed(2) + ' deg)');
-      ok(s.kind === 'optic' ? p.y < bb.max.y && p.y > bb.max.y - 0.06 : p.y >= (rear ? rear.y : bb.max.y) - 0.005 && p.y <= bb.max.y + 0.08, k + ': eye clears the top line and stays near it (eye y ' + p.y.toFixed(3) + ', top ' + bb.max.y.toFixed(3) + ')');
+      // GB-233 (rule 13, Claude's ruling 2026-10-25): the M4 is aimed through its holo's window, so its eye sits below the hood top like an optic's
+      // (before/after: qa/2026-10-25-GB-233/m4-ads-check.png).
+      ok(s.kind === 'optic' || k === 'm4' ? p.y < bb.max.y && p.y > bb.max.y - 0.06 : p.y >= (rear ? rear.y : bb.max.y) - 0.005 && p.y <= bb.max.y + 0.08, k + ': eye clears the top line and stays near it (eye y ' + p.y.toFixed(3) + ', top ' + bb.max.y.toFixed(3) + ')');
     }
   } catch (e) { out.push('FAIL threw: ' + (e && (e.stack || e.message))); }
   return out.join('\n');

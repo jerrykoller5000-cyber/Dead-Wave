@@ -4,6 +4,7 @@ import * as T from '../vendor/three/three.core.js';
 import {applyZombieConcept,CONCEPT_TYPES} from './zombie-concepts.js';
 import {resetZombieAbilityVisuals} from '../game/zombie-ability-visuals.js';
 import {prepareScreamerAppearance} from '../game/screamer-appearance.js';
+import {applyScreamerPose,restoreScreamerPose} from '../game/screamer-behavior.js';
 import {prepareSpitterJaw} from '../game/spitter-motion.js';
 import {detailUV,detailMaterial,generateDetailPixels,DETAIL_SURFACES} from './zombie-detail.js';
 const rbox=(w,h,d)=>new T.BoxGeometry(w,h,d);
@@ -55,14 +56,41 @@ test('paired eyes render in one batch while their existing glow material and ref
   assert(eyes.every(e=>!e.visible),kind+' pooled source eyes remain hidden');
  }
 });
-test('live Screamer recolor keeps the animated eye batch pink and emissive',()=>{
+test('live Screamer recolor keeps the animated eye batch pale green and emissive',()=>{
  for(let copy=0;copy<2;copy++){
   const g=rig();g.userData.typeKey='screamer';applyZombieConcept({THREE:T,g,typeKey:'screamer',scale:1,rbox});
   const eye=g.userData.eyeBatch,glow=eye.material.emissive.getHex();
   prepareScreamerAppearance(T,g,1);
   assert.equal(eye.parent,g.userData.head);
-  assert(eye.visible&&eye.material.emissiveIntensity>1);
+  assert(eye.visible&&eye.material.emissiveIntensity===.9);
   assert.equal(eye.material.emissive.getHex(),glow);
+  assert.equal(glow,0x74a18d);
+ }
+});
+
+test('Screamer jaw keeps complete surfaces and a compact head envelope through scream and cache reuse',()=>{
+ for(let copy=0;copy<2;copy++){
+  const g=rig();g.userData.typeKey='screamer';applyZombieConcept({THREE:T,g,typeKey:'screamer',scale:1,rbox});prepareScreamerAppearance(T,g,1);
+  const u=g.userData;assert(u.screamerJaw.children.some(m=>m.isMesh),'authored lower jaw survives batching');
+  assert(u.screamerTongue.children.some(m=>m.isMesh),'tongue follows its own joint');
+  g.updateMatrixWorld(true);
+  for(const [arm,side]of [[u.armLG,-1],[u.armRG,1]]){
+   const hand=u.torso.worldToLocal(arm.userData.elbowG.localToWorld(new T.Vector3(0,-.36,0)));
+   assert(hand.x*side>.35&&hand.z<0,'resting and cached hands trail outside the body before an animation tick');
+  }
+  for(const angle of [0,.16,.32]){
+   u.screamerJaw.rotation.x=angle;g.updateMatrixWorld(true);const inv=u.head.matrixWorld.clone().invert(),box=new T.Box3();
+   u.head.traverse(o=>{if(!o.isMesh||!o.visible)return;const p=o.geometry.attributes.position,m=inv.clone().multiply(o.matrixWorld);for(let i=0;i<p.count;i++)box.expandByPoint(new T.Vector3().fromBufferAttribute(p,i).applyMatrix4(m));});
+   assert(box.min.y>-.29&&box.max.y<.23,'chin/tongue do not pull the measured head centre below its slice');
+   assert(box.max.z<.24,'tongue curls close to the jaw instead of projecting half a metre');
+   assert(box.getCenter(new T.Vector3()).y>-.04,'head-attached extent remains centred on the head');
+  }
+  let charcoal=0,bruise=0;const wanted=new T.Color(0x8e6f77);
+  u.head.traverse(o=>{const c=o.geometry?.attributes.color;if(!c)return;for(let i=0;i<c.count;i++){
+   if(Math.abs(c.getX(i)-wanted.r)+Math.abs(c.getY(i)-wanted.g)+Math.abs(c.getZ(i)-wanted.b)<1e-5)bruise++;
+   else if(c.getY(i)>.002&&c.getY(i)<.04)charcoal++;
+  }});
+  assert(charcoal>100&&bruise>20,'restrained face shading and bruised tongue survive the recolour');
  }
 });
 test('Spitter chin keeps a visible ooze glow after surface batching and reuse',()=>{

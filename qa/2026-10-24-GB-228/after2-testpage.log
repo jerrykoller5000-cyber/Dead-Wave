@@ -1,0 +1,9 @@
+Game-test request 8e9256d7-fc44-4f2b-b67c-c4cd99b43ef3 queued at position 1. Waiting...
+GRANT grokbot GB-228: starting one game-test command
+check-players: game logic reads the players list: nearestPlayer, playersNear or players (docs/coop.md).
+  index.html:57871  flightTakeSnap  const px = player.position.x, pz = player.position.z;
+  index.html:57890  flightTakeSnap  px, py: player.position.y, pz, vx: velX, vz: velZ, vy, grounded,
+  index.html:57920  flightRestoreSnap  player.position.set(s.px, s.py, s.pz);
+  index.html:57949  flightRecord  px: player.position.x, py: player.position.y, pz: player.position.z, vx: velX, vz: velZ, vy,
+4 read(s) in 3 function(s)
+check-players failed

@@ -1,0 +1,89 @@
+{
+  "pass": true,
+  "validation": {
+    "minSide": 0.12000847998006231,
+    "bodyIntersections": 0,
+    "samples": 1834560,
+    "ankles": [
+      true,
+      true
+    ],
+    "errors": []
+  },
+  "phases": [
+    {
+      "t": 0,
+      "headHit": true
+    },
+    {
+      "t": 0.6,
+      "exposed": 0,
+      "headHit": true
+    },
+    {
+      "t": 1.2,
+      "exposed": 0,
+      "headHit": true
+    },
+    {
+      "t": 1.8,
+      "exposed": 0,
+      "headHit": true
+    },
+    {
+      "t": 2.1,
+      "scream": 1.116666666666667,
+      "exposed": 0,
+      "headHit": true
+    },
+    {
+      "t": 2.4,
+      "scream": 0.8166666666666668,
+      "exposed": 0,
+      "headHit": true
+    },
+    {
+      "t": 2.8,
+      "scream": 0.41666666666666585,
+      "exposed": 0,
+      "headHit": true
+    },
+    {
+      "t": 3.2,
+      "scream": 0.016666666666665938,
+      "exposed": 0,
+      "headHit": true
+    },
+    {
+      "t": 3.6,
+      "scream": -7.28583859910259e-16,
+      "exposed": 2.016666666666668,
+      "headHit": true
+    },
+    {
+      "t": 4.2,
+      "scream": -7.28583859910259e-16,
+      "exposed": 1.41666666666667,
+      "headHit": true
+    },
+    {
+      "t": 4.8,
+      "scream": -7.28583859910259e-16,
+      "exposed": 0.816666666666671,
+      "headHit": true
+    },
+    {
+      "t": 5.6,
+      "scream": -7.28583859910259e-16,
+      "exposed": 0.0166666666666701,
+      "headHit": true
+    },
+    {
+      "t": 6.4,
+      "scream": -7.28583859910259e-16,
+      "exposed": 0,
+      "headHit": true
+    }
+  ],
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+}

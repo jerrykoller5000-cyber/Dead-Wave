@@ -1,0 +1,29 @@
+{
+  "states": [
+    {
+      "phase": "drift",
+      "lights": [
+        42
+      ],
+      "first": true,
+      "alive": 1
+    },
+    {
+      "phase": "scream",
+      "lights": [
+        42
+      ],
+      "first": true,
+      "alive": 1
+    },
+    {
+      "phase": "exposed",
+      "lights": [
+        42
+      ],
+      "first": true,
+      "alive": 1
+    }
+  ],
+  "errors": []
+}

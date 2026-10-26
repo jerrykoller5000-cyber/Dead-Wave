@@ -522,7 +522,7 @@ export function makeMortarModel(ctx, matOverride = null, collapsed = false) {
   if (!collapsed) g.rotation.y = Math.PI;
   root.add(g);
   const K = gunKit(g), material = (m) => matOverride || m;
-  const steel = matOverride || new THREE.MeshStandardMaterial({ color: 0x3e4a3a, metalness: 0.6, roughness: 0.5 });
+  const steel = matOverride || new THREE.MeshStandardMaterial({ color: 0x3e4a3a, metalness: 0.08, roughness: 0.7 });   // GB-233: painted
   const plate = new THREE.Mesh(new THREE.CylinderGeometry(0.42, 0.46, 0.08, 12), steel);
   if (collapsed) { plate.position.set(0, 0.16, -0.1); plate.rotation.x = Math.PI / 2; }
   else plate.position.set(0, 0.04, 0.5);
@@ -541,7 +541,7 @@ export function makeMortarModel(ctx, matOverride = null, collapsed = false) {
     rod(THREE, K, [0.074, 0.042, z], [0.067, 0.087, z], 0.009, steel, plateDetail);
     rod(THREE, K, [-0.067, 0.087, z], [0.067, 0.087, z], 0.009, steel, plateDetail);
   }
-  const tube = new THREE.Mesh(new THREE.CylinderGeometry(0.11, 0.13, 1.25, 12, 1, true), matOverride || gunMetal);
+  const tube = new THREE.Mesh(new THREE.CylinderGeometry(0.11, 0.13, 1.25, 12, 1, true), matOverride || gunOlive);   // GB-233: matte olive phosphate
   const boreMat = (matOverride || gunDark).clone(); boreMat.side = THREE.BackSide;
   const bore = new THREE.Mesh(new THREE.CylinderGeometry(0.083, 0.102, 1.22, 12, 1, true), boreMat);
   const lip = new THREE.Mesh(new THREE.RingGeometry(0.083, 0.11, 12), matOverride || gunMetal);

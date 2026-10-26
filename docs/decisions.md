@@ -4,6 +4,22 @@ Every call made for the game and the crew, in full, newest first. Claude writes 
 they stand unless Jerry overrides them. `crew/BOARD.md` lists each one on a single line; this file has the
 details. Moved here from the board on 2026-09-29 so the board stays short. Nothing was cut.
 
+- **D-92 · The sound and UI principles approved; a sound only if it's immersive or impactful (Jerry, 2026-10-26, in chat).**
+  Jerry read docs/ui-principles.md and docs/sound-principles.md: "UI is good." For sound, in place of the draft's "every
+  sound means something": "no noise unless it's: 1. Immersive 2. Impactful." Both are now in force (CL-268).
+- **D-91 · The mortar has no upgrades; the machete's teeth on its edge; the Uzi's sights clear (Jerry, 2026-10-25, in chat).**
+  Jerry: "I saw updated models for mortar upgrades. We are getting rid of upgrades for the the mortar so those extra models can dissapear." The mortar is one build: no upgrade track, no Mk II or
+  Mk III, their meshes gone (GB-234). And: "Machete serrations should be on blade not on top of machete." "Uzi sights need to be usable, right now the charging handle gets in the way." (GB-235).
+- **D-90 · The base game first: co-op on hold, a playthrough when the road is done (Jerry, 2026-10-25, in chat).**
+  Jerry: "Once you guys have finished out 1.1 let me know and I will do another play through." Claude: in the plan, 1.1
+  also holds co-op and the Steam release, after the notes, the sweep and the principles passes; better that he plays once
+  those are done, before co-op, so what he finds can still shape it. Jerry: "Yes. I was thinking the same thing. Hold off
+  on co-op. We are still quite far away from finishing the base game." So:
+  - Co-op (D-83) is on hold until the base game is finished. Nobody starts co-op work meanwhile; the players list and
+    `check-players` stay as they are (the groundwork).
+  - When the road's work is finished and tested in one build (his 31 notes, the sweep, the principles passes), Claude
+    tests it whole, then tells Jerry, and he plays it through again. His notes from that set the next stretch.
+  - The Steam release stays tied to 1.1 (D-84); when that comes is his call after the playthrough.
 - **D-89 · The animation and asset principles, the art direction, the motion libraries, the alarm's metal sting, the
   storms (Jerry, 2026-10-24, in chat).** Jerry asked whether a Blender MCP would help with animation. Claude: not now; the bodies and their motion are
   built in code, and the studio (D-40) already gives the agents keyframed clips, filmstrips and reference retargeting.

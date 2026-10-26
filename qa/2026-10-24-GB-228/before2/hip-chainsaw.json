@@ -1,0 +1,24 @@
+{
+ "schema": "dw-camera-shot",
+ "schemaVersion": 2,
+ "target": null,
+ "label": "the play camera",
+ "view": null,
+ "cam": {
+  "x": 0.0009016060543471108,
+  "y": -1.7446228155884542,
+  "z": -8.388420883097382,
+  "tx": -0.0015484381334817982,
+  "ty": -1.7446228155884542,
+  "tz": 1.611578816766789,
+  "fov": 59.999999999970214
+ },
+ "time": 0.4996581599999761,
+ "size": [
+  1600,
+  900
+ ],
+ "mode": "match",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "at": "2026-10-25T18:03:40.441Z"
+}

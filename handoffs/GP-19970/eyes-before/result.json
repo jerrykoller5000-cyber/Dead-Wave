@@ -1,0 +1,2727 @@
+{
+  "results": [
+    {
+      "light": "noon",
+      "ok": true,
+      "shots": [
+        {
+          "file": "handoffs/GP-19970/eyes-before/noon/shambler.png",
+          "cam": {
+            "x": -23.211788672065396,
+            "y": -197.1382728522764,
+            "z": -628.677139133022,
+            "tx": -26,
+            "ty": -199.06953544226948,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Shambler (statue)",
+          "ms": 1248,
+          "caption": "shambler / noon"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before/noon/feral.png",
+          "cam": {
+            "x": -23.595461989008616,
+            "y": -197.6458399019454,
+            "z": -629.1343831868717,
+            "tx": -26,
+            "ty": -199.31135006622839,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Feral (statue)",
+          "ms": 619,
+          "caption": "feral / noon"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before/noon/leaper.png",
+          "cam": {
+            "x": -23.13154167697637,
+            "y": -197.58446882908035,
+            "z": -628.5815044883299,
+            "tx": -26,
+            "ty": -199.57131473086264,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Leaper (statue)",
+          "ms": 731,
+          "caption": "leaper / noon"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before/noon/spider.png",
+          "cam": {
+            "x": -23.081821672445564,
+            "y": -197.4913421125353,
+            "z": -628.5222504943065,
+            "tx": -26,
+            "ty": -199.51262671835792,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Spider (statue)",
+          "ms": 731,
+          "caption": "spider / noon"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before/noon/drowned.png",
+          "cam": {
+            "x": -23.287287731640355,
+            "y": -197.17407835022254,
+            "z": -628.767115408508,
+            "tx": -26,
+            "ty": -199.05304629960645,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Drowned (statue)",
+          "ms": 750,
+          "caption": "drowned / noon"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before/noon/military.png",
+          "cam": {
+            "x": -22.774270778766326,
+            "y": -196.69159148136592,
+            "z": -628.1557256118587,
+            "tx": -26,
+            "ty": -198.92590209763864,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Military (statue)",
+          "ms": 712,
+          "caption": "military / noon"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before/noon/brute.png",
+          "cam": {
+            "x": -21.895013410228913,
+            "y": -195.89481585742857,
+            "z": -627.1078674840893,
+            "tx": -26,
+            "ty": -198.7381466171242,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Brute (statue)",
+          "ms": 754,
+          "caption": "brute / noon"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before/noon/spitter.png",
+          "cam": {
+            "x": -22.910846667439557,
+            "y": -196.7999593858666,
+            "z": -628.3184904178468,
+            "tx": -26,
+            "ty": -198.9396703203121,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Spitter (statue)",
+          "ms": 847,
+          "caption": "spitter / noon"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before/noon/screamer.png",
+          "cam": {
+            "x": -21.581336790118115,
+            "y": -196.0847633353425,
+            "z": -626.7340422451593,
+            "tx": -26,
+            "ty": -199.1453631075072,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Screamer (statue)",
+          "ms": 788,
+          "caption": "screamer / noon"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before/noon/bomber.png",
+          "cam": {
+            "x": -22.011666378835006,
+            "y": -196.1678677076382,
+            "z": -627.2468890785124,
+            "tx": -26,
+            "ty": -198.9303984533523,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Bomber (statue)",
+          "ms": 794,
+          "caption": "bomber / noon"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before/noon/demon.png",
+          "cam": {
+            "x": -20.68742179646224,
+            "y": -194.62830452558882,
+            "z": -625.6687158399961,
+            "tx": -26,
+            "ty": -198.30807708734272,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Demon (statue)",
+          "ms": 796,
+          "caption": "demon / noon"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before/noon/colossus.png",
+          "cam": {
+            "x": -17.42217487586796,
+            "y": -191.57388381514505,
+            "z": -621.7773460916708,
+            "tx": -26,
+            "ty": -197.51533904121305,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Colossus (statue)",
+          "ms": 808,
+          "caption": "colossus / noon"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before/noon/guardian.png",
+          "cam": {
+            "x": -20.78668427609585,
+            "y": -194.59609275360214,
+            "z": -625.7870122567093,
+            "tx": -26,
+            "ty": -198.2071108735439,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Guardian (statue)",
+          "ms": 773,
+          "caption": "guardian / noon"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before/noon/caveguard.png",
+          "cam": {
+            "x": -21.501184785362085,
+            "y": -195.40345799306203,
+            "z": -626.6385208055377,
+            "tx": -26,
+            "ty": -198.51957528168876,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Cave Guardian (statue)",
+          "ms": 768,
+          "caption": "caveguard / noon"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before/noon/cave-guardian-wet.png",
+          "cam": {
+            "x": -19.0537966811499,
+            "y": -193.09610988414585,
+            "z": -622.2844320425481,
+            "tx": -26,
+            "ty": -197.90741757728196,
+            "tz": -630.5625948026776,
+            "fov": 35
+          },
+          "label": "Cave guardian (wet)",
+          "ms": 850,
+          "caption": "Cave guardian wet / noon"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before/noon/cave-guardian-iron.png",
+          "cam": {
+            "x": -19.05373614037671,
+            "y": -193.09599656210304,
+            "z": -622.2843598928642,
+            "tx": -26,
+            "ty": -197.90734618897972,
+            "tz": -630.5625948026776,
+            "fov": 35
+          },
+          "label": "Cave guardian (iron)",
+          "ms": 701,
+          "caption": "Cave guardian iron / noon"
+        }
+      ],
+      "sheet": "handoffs/GP-19970/eyes-before/noon/sheet.jpg",
+      "ms": 12761
+    },
+    {
+      "light": "overcast",
+      "ok": false,
+      "shots": [
+        {
+          "error": "time must be a finite number",
+          "target": "zombie.shambler:statue",
+          "ms": 0,
+          "caption": "shambler / overcast"
+        },
+        {
+          "error": "time must be a finite number",
+          "target": "zombie.feral:statue",
+          "ms": 0,
+          "caption": "feral / overcast"
+        },
+        {
+          "error": "time must be a finite number",
+          "target": "zombie.leaper:statue",
+          "ms": 0,
+          "caption": "leaper / overcast"
+        },
+        {
+          "error": "time must be a finite number",
+          "target": "zombie.spider:statue",
+          "ms": 0,
+          "caption": "spider / overcast"
+        },
+        {
+          "error": "time must be a finite number",
+          "target": "zombie.drowned:statue",
+          "ms": 0,
+          "caption": "drowned / overcast"
+        },
+        {
+          "error": "time must be a finite number",
+          "target": "zombie.military:statue",
+          "ms": 0,
+          "caption": "military / overcast"
+        },
+        {
+          "error": "time must be a finite number",
+          "target": "zombie.brute:statue",
+          "ms": 0,
+          "caption": "brute / overcast"
+        },
+        {
+          "error": "time must be a finite number",
+          "target": "zombie.spitter:statue",
+          "ms": 0,
+          "caption": "spitter / overcast"
+        },
+        {
+          "error": "time must be a finite number",
+          "target": "zombie.screamer:statue",
+          "ms": 0,
+          "caption": "screamer / overcast"
+        },
+        {
+          "error": "time must be a finite number",
+          "target": "zombie.bomber:statue",
+          "ms": 0,
+          "caption": "bomber / overcast"
+        },
+        {
+          "error": "time must be a finite number",
+          "target": "zombie.demon:statue",
+          "ms": 0,
+          "caption": "demon / overcast"
+        },
+        {
+          "error": "time must be a finite number",
+          "target": "zombie.colossus:statue",
+          "ms": 0,
+          "caption": "colossus / overcast"
+        },
+        {
+          "error": "time must be a finite number",
+          "target": "zombie.guardian:statue",
+          "ms": 0,
+          "caption": "guardian / overcast"
+        },
+        {
+          "error": "time must be a finite number",
+          "target": "zombie.caveguard:statue",
+          "ms": 0,
+          "caption": "caveguard / overcast"
+        },
+        {
+          "error": "time must be a finite number",
+          "target": "person.cave-guardian:wet",
+          "ms": 0,
+          "caption": "Cave guardian wet / overcast"
+        },
+        {
+          "error": "time must be a finite number",
+          "target": "person.cave-guardian:iron",
+          "ms": 0,
+          "caption": "Cave guardian iron / overcast"
+        }
+      ],
+      "sheet": "handoffs/GP-19970/eyes-before/overcast/sheet.jpg",
+      "ms": 35
+    },
+    {
+      "light": "dusk",
+      "ok": true,
+      "shots": [
+        {
+          "file": "handoffs/GP-19970/eyes-before/dusk/shambler.png",
+          "cam": {
+            "x": -23.295309527266006,
+            "y": -197.24103279917477,
+            "z": -628.7766754122639,
+            "tx": -26,
+            "ty": -199.11444442876285,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Shambler (statue)",
+          "ms": 733,
+          "caption": "shambler / dusk"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before/dusk/feral.png",
+          "cam": {
+            "x": -23.548222319186745,
+            "y": -197.5990888004738,
+            "z": -629.0780851406485,
+            "tx": -26,
+            "ty": -199.29731965783213,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Feral (statue)",
+          "ms": 614,
+          "caption": "feral / dusk"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before/dusk/leaper.png",
+          "cam": {
+            "x": -23.239913649651797,
+            "y": -197.66645022691222,
+            "z": -628.7106571761022,
+            "tx": -26,
+            "ty": -199.57823197034506,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Leaper (statue)",
+          "ms": 750,
+          "caption": "leaper / dusk"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before/dusk/spider.png",
+          "cam": {
+            "x": -23.248051632538072,
+            "y": -197.64874865855757,
+            "z": -628.7203556464435,
+            "tx": -26,
+            "ty": -199.55489360475457,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Spider (statue)",
+          "ms": 687,
+          "caption": "spider / dusk"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before/dusk/drowned.png",
+          "cam": {
+            "x": -23.238116302875017,
+            "y": -197.14618134862636,
+            "z": -628.708515181624,
+            "tx": -26,
+            "ty": -199.05920802946997,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Drowned (statue)",
+          "ms": 717,
+          "caption": "drowned / dusk"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before/dusk/military.png",
+          "cam": {
+            "x": -22.747198898355187,
+            "y": -196.67920844318695,
+            "z": -628.1234626011204,
+            "tx": -26,
+            "ty": -198.9322704752347,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Military (statue)",
+          "ms": 737,
+          "caption": "military / dusk"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before/dusk/brute.png",
+          "cam": {
+            "x": -21.83614069348306,
+            "y": -195.80357998720376,
+            "z": -627.0377057124016,
+            "tx": -26,
+            "ty": -198.6876891033616,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Brute (statue)",
+          "ms": 629,
+          "caption": "brute / dusk"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before/dusk/spitter.png",
+          "cam": {
+            "x": -22.856718448801864,
+            "y": -196.7726003987055,
+            "z": -628.2539829188245,
+            "tx": -26,
+            "ty": -198.94980339936225,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Spitter (statue)",
+          "ms": 799,
+          "caption": "spitter / dusk"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before/dusk/screamer.png",
+          "cam": {
+            "x": -21.907477853474234,
+            "y": -196.38673782575395,
+            "z": -627.1227220291065,
+            "tx": -26,
+            "ty": -199.2214350530112,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Screamer (statue)",
+          "ms": 725,
+          "caption": "screamer / dusk"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before/dusk/bomber.png",
+          "cam": {
+            "x": -22.241055501252838,
+            "y": -196.42243301757756,
+            "z": -627.5202643892558,
+            "tx": -26,
+            "ty": -199.02607672835333,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Bomber (statue)",
+          "ms": 654,
+          "caption": "bomber / dusk"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before/dusk/demon.png",
+          "cam": {
+            "x": -20.831454939905292,
+            "y": -194.7360962476979,
+            "z": -625.840367856147,
+            "tx": -26,
+            "ty": -198.3161038386751,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Demon (statue)",
+          "ms": 771,
+          "caption": "demon / dusk"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before/dusk/colossus.png",
+          "cam": {
+            "x": -17.474647055441586,
+            "y": -191.65571319169945,
+            "z": -621.8398800001888,
+            "tx": -26,
+            "ty": -197.56082341177358,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Colossus (statue)",
+          "ms": 804,
+          "caption": "colossus / dusk"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before/dusk/guardian.png",
+          "cam": {
+            "x": -20.916067357478212,
+            "y": -194.78465754564672,
+            "z": -625.9412050087677,
+            "tx": -26,
+            "ty": -198.30605810240442,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Guardian (statue)",
+          "ms": 762,
+          "caption": "guardian / dusk"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before/dusk/caveguard.png",
+          "cam": {
+            "x": -21.697107533508678,
+            "y": -195.6464498747846,
+            "z": -626.8720124445124,
+            "tx": -26,
+            "ty": -198.62686070879892,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Cave Guardian (statue)",
+          "ms": 754,
+          "caption": "caveguard / dusk"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before/dusk/cave-guardian-wet.png",
+          "cam": {
+            "x": -19.05381320639954,
+            "y": -193.09614081258485,
+            "z": -622.2844517365738,
+            "tx": -26,
+            "ty": -197.9074370594593,
+            "tz": -630.5625948026776,
+            "fov": 35
+          },
+          "label": "Cave guardian (wet)",
+          "ms": 795,
+          "caption": "Cave guardian wet / dusk"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before/dusk/cave-guardian-iron.png",
+          "cam": {
+            "x": -19.053871092123217,
+            "y": -193.09624913715322,
+            "z": -622.2845207220929,
+            "tx": -26,
+            "ty": -197.9075052893148,
+            "tz": -630.5625948026776,
+            "fov": 35
+          },
+          "label": "Cave guardian (iron)",
+          "ms": 671,
+          "caption": "Cave guardian iron / dusk"
+        }
+      ],
+      "sheet": "handoffs/GP-19970/eyes-before/dusk/sheet.jpg",
+      "ms": 11663
+    },
+    {
+      "light": "night",
+      "ok": true,
+      "shots": [
+        {
+          "file": "handoffs/GP-19970/eyes-before/night/shambler.png",
+          "cam": {
+            "x": -23.08434491685061,
+            "y": -197.01002884879406,
+            "z": -628.5252575798911,
+            "tx": -26,
+            "ty": -199.0295657221274,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Shambler (statue)",
+          "ms": 768,
+          "caption": "shambler / night"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before/night/feral.png",
+          "cam": {
+            "x": -23.529908952297067,
+            "y": -197.5808374322107,
+            "z": -629.0562601198652,
+            "tx": -26,
+            "ty": -199.2917530957803,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Feral (statue)",
+          "ms": 670,
+          "caption": "feral / night"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before/night/leaper.png",
+          "cam": {
+            "x": -23.217898319968626,
+            "y": -197.66801347006643,
+            "z": -628.6844203278603,
+            "tx": -26,
+            "ty": -199.5950441948794,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Leaper (statue)",
+          "ms": 714,
+          "caption": "leaper / night"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before/night/spider.png",
+          "cam": {
+            "x": -23.303048168847543,
+            "y": -197.69568366047307,
+            "z": -628.7858979661705,
+            "tx": -26,
+            "ty": -199.56373509772777,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Spider (statue)",
+          "ms": 736,
+          "caption": "spider / night"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before/night/drowned.png",
+          "cam": {
+            "x": -23.307562632198774,
+            "y": -197.21146495412515,
+            "z": -628.7912780940879,
+            "tx": -26,
+            "ty": -199.07638943536443,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Drowned (statue)",
+          "ms": 721,
+          "caption": "drowned / night"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before/night/military.png",
+          "cam": {
+            "x": -22.668699659235717,
+            "y": -196.5717558243439,
+            "z": -628.0299108508839,
+            "tx": -26,
+            "ty": -198.87919057998528,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Military (statue)",
+          "ms": 766,
+          "caption": "military / night"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before/night/brute.png",
+          "cam": {
+            "x": -21.94183743032892,
+            "y": -195.94270414459643,
+            "z": -627.1636701782631,
+            "tx": -26,
+            "ty": -198.75360211219115,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Brute (statue)",
+          "ms": 623,
+          "caption": "brute / night"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before/night/spitter.png",
+          "cam": {
+            "x": -23.097946941135913,
+            "y": -197.02750258533413,
+            "z": -628.5414678411997,
+            "tx": -26,
+            "ty": -199.03761797745216,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Spitter (statue)",
+          "ms": 793,
+          "caption": "spitter / night"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before/night/screamer.png",
+          "cam": {
+            "x": -21.806750117815383,
+            "y": -196.29581848896896,
+            "z": -627.0026793882612,
+            "tx": -26,
+            "ty": -199.20028507183554,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Screamer (statue)",
+          "ms": 724,
+          "caption": "screamer / night"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before/night/bomber.png",
+          "cam": {
+            "x": -22.173531125655707,
+            "y": -196.34527070839263,
+            "z": -627.4397919720502,
+            "tx": -26,
+            "ty": -198.99568537200003,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Bomber (statue)",
+          "ms": 775,
+          "caption": "bomber / night"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before/night/demon.png",
+          "cam": {
+            "x": -20.91031637820493,
+            "y": -194.88530138314988,
+            "z": -625.9343512585579,
+            "tx": -26,
+            "ty": -198.41068537223032,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Demon (statue)",
+          "ms": 759,
+          "caption": "demon / night"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before/night/colossus.png",
+          "cam": {
+            "x": -17.455010304606866,
+            "y": -191.6151953448889,
+            "z": -621.8164778318347,
+            "tx": -26,
+            "ty": -197.53390701686737,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Colossus (statue)",
+          "ms": 844,
+          "caption": "colossus / night"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before/night/guardian.png",
+          "cam": {
+            "x": -21.04536696561852,
+            "y": -194.8723993476854,
+            "z": -626.09529828129,
+            "tx": -26,
+            "ty": -198.30424015924,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Guardian (statue)",
+          "ms": 795,
+          "caption": "guardian / night"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before/night/caveguard.png",
+          "cam": {
+            "x": -21.743079281695113,
+            "y": -195.71086954006077,
+            "z": -626.9267994405715,
+            "tx": -26,
+            "ty": -198.6594379105647,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Cave Guardian (statue)",
+          "ms": 727,
+          "caption": "caveguard / night"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before/night/cave-guardian-wet.png",
+          "cam": {
+            "x": -19.05378842078928,
+            "y": -193.0960944235178,
+            "z": -622.2844221982338,
+            "tx": -26,
+            "ty": -197.90740783821644,
+            "tz": -630.5625948026776,
+            "fov": 35
+          },
+          "label": "Cave guardian (wet)",
+          "ms": 825,
+          "caption": "Cave guardian wet / night"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before/night/cave-guardian-iron.png",
+          "cam": {
+            "x": -19.054067338643076,
+            "y": -193.09661622644117,
+            "z": -622.284754599588,
+            "tx": -26,
+            "ty": -197.90773644788672,
+            "tz": -630.5625948026776,
+            "fov": 35
+          },
+          "label": "Cave guardian (iron)",
+          "ms": 811,
+          "caption": "Cave guardian iron / night"
+        }
+      ],
+      "sheet": "handoffs/GP-19970/eyes-before/night/sheet.jpg",
+      "ms": 12123
+    }
+  ],
+  "metrics": [
+    {
+      "file": "handoffs/GP-19970/eyes-before/noon/shambler.png",
+      "subject": {
+        "id": "zombie.shambler",
+        "name": "Shambler",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -199.06953544226948,
+          "z": -632
+        },
+        "size": {
+          "x": 0.8123560169907691,
+          "y": 1.8609291154609764,
+          "z": 0.7009795804609666
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5008,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 751,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 7301,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before/noon/feral.png",
+      "subject": {
+        "id": "zombie.feral",
+        "name": "Feral",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -199.31135006622839,
+          "z": -632
+        },
+        "size": {
+          "x": 0.7299308480495021,
+          "y": 1.3772998675431722,
+          "z": 1.0432053419312979
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4780,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 1141,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 7073,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before/noon/leaper.png",
+      "subject": {
+        "id": "zombie.leaper",
+        "name": "Leaper",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -199.57131473086264,
+          "z": -632
+        },
+        "size": {
+          "x": 0.91833415960906,
+          "y": 1.462608867070884,
+          "z": 1.5719081392825274
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4594,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 1531,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 6887,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before/noon/spider.png",
+      "subject": {
+        "id": "zombie.spider",
+        "name": "Spider",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -199.51262671835792,
+          "z": -632
+        },
+        "size": {
+          "x": 1.8053741492618904,
+          "y": 1.0001083332684573,
+          "z": 1.861502063971102
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 3794,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 1906,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 6087,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before/noon/drowned.png",
+      "subject": {
+        "id": "zombie.drowned",
+        "name": "Drowned",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -199.05304629960645,
+          "z": -632
+        },
+        "size": {
+          "x": 0.7791651633344401,
+          "y": 1.8939074007871,
+          "z": 0.5216466278156986
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5684,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 2281,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 7977,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before/noon/military.png",
+      "subject": {
+        "id": "zombie.military",
+        "name": "Military",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -198.92590209763864,
+          "z": -632
+        },
+        "size": {
+          "x": 1.0248440494742788,
+          "y": 2.1481958047227465,
+          "z": 0.7492995493598755
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5952,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "render": {
+        "calls": 2656,
+        "frameCalls": 15,
+        "drawCalls": 17,
+        "triangles": 8245,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before/noon/brute.png",
+      "subject": {
+        "id": "zombie.brute",
+        "name": "Brute",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -198.7381466171242,
+          "z": -632
+        },
+        "size": {
+          "x": 1.8452260829323777,
+          "y": 2.5237067657517684,
+          "z": 0.9272099733086634
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5896,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 3046,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 8189,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before/noon/spitter.png",
+      "subject": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -198.9396703203121,
+          "z": -632
+        },
+        "size": {
+          "x": 0.8919514001749107,
+          "y": 2.120659359375793,
+          "z": 0.6635526633086783
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5228,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "render": {
+        "calls": 3436,
+        "frameCalls": 15,
+        "drawCalls": 18,
+        "triangles": 7521,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before/noon/screamer.png",
+      "subject": {
+        "id": "zombie.screamer",
+        "name": "Screamer",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -199.1453631075072,
+          "z": -632
+        },
+        "size": {
+          "x": 1.4434769452393041,
+          "y": 2.7510057358544486,
+          "z": 1.3833320725209433
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5676,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "render": {
+        "calls": 3826,
+        "frameCalls": 15,
+        "drawCalls": 18,
+        "triangles": 7969,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before/noon/bomber.png",
+      "subject": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -198.9303984533523,
+          "z": -632
+        },
+        "size": {
+          "x": 1.5689905971288667,
+          "y": 2.139203093295464,
+          "z": 1.7255086185724622
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5936,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "render": {
+        "calls": 4201,
+        "frameCalls": 15,
+        "drawCalls": 18,
+        "triangles": 8229,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before/noon/demon.png",
+      "subject": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -198.30807708734272,
+          "z": -632
+        },
+        "size": {
+          "x": 2.1313389788588424,
+          "y": 3.3838458253145802,
+          "z": 1.2041162378721992
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5672,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "render": {
+        "calls": 4576,
+        "frameCalls": 15,
+        "drawCalls": 17,
+        "triangles": 7965,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before/noon/colossus.png",
+      "subject": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -197.51533904121305,
+          "z": -632
+        },
+        "size": {
+          "x": 3.112362045049668,
+          "y": 4.969321917573922,
+          "z": 3.1807942033130985
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6800,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "render": {
+        "calls": 4951,
+        "frameCalls": 15,
+        "drawCalls": 18,
+        "triangles": 9093,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before/noon/guardian.png",
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -198.2071108735439,
+          "z": -632
+        },
+        "size": {
+          "x": 1.4310472005688375,
+          "y": 3.5857782529122346,
+          "z": 1.1680354639224788
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4180,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 5341,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 6473,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before/noon/caveguard.png",
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -198.51957528168876,
+          "z": -632
+        },
+        "size": {
+          "x": 1.3340678442231848,
+          "y": 2.9608494366225386,
+          "z": 1.196546388282286
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4180,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 5731,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 6473,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before/noon/cave-guardian-wet.png",
+      "subject": {
+        "id": "person.cave-guardian",
+        "name": "Cave guardian",
+        "kind": "model",
+        "variant": "wet",
+        "mode": null,
+        "center": {
+          "x": -26,
+          "y": -197.89917138366485,
+          "z": -630.5625948026776
+        },
+        "size": {
+          "x": 2.4780801754997803,
+          "y": 4.033866257986631,
+          "z": 2.604047342147396
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 11878,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "render": {
+        "calls": 6151,
+        "frameCalls": 15,
+        "drawCalls": 18,
+        "triangles": 14171,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before/noon/cave-guardian-iron.png",
+      "subject": {
+        "id": "person.cave-guardian",
+        "name": "Cave guardian",
+        "kind": "model",
+        "variant": "iron",
+        "mode": null,
+        "center": {
+          "x": -26,
+          "y": -197.89983920913068,
+          "z": -630.5625948026776
+        },
+        "size": {
+          "x": 2.4780700937840585,
+          "y": 4.032776916217955,
+          "z": 2.605261399916799
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 11878,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "render": {
+        "calls": 6541,
+        "frameCalls": 15,
+        "drawCalls": 18,
+        "triangles": 14171,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before/dusk/shambler.png",
+      "subject": {
+        "id": "zombie.shambler",
+        "name": "Shambler",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -199.11444442876285,
+          "z": -632
+        },
+        "size": {
+          "x": 0.8367750376080174,
+          "y": 1.7711111424742683,
+          "z": 0.7084500274996799
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5008,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 6976,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 7301,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before/dusk/feral.png",
+      "subject": {
+        "id": "zombie.feral",
+        "name": "Feral",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -199.29731965783213,
+          "z": -632
+        },
+        "size": {
+          "x": 0.7545759599171049,
+          "y": 1.4053606843357898,
+          "z": 1.0530126081190474
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4780,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 7351,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 7073,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before/dusk/leaper.png",
+      "subject": {
+        "id": "zombie.leaper",
+        "name": "Leaper",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -199.57823197034506,
+          "z": -632
+        },
+        "size": {
+          "x": 0.8431333097310691,
+          "y": 1.4284180759710239,
+          "z": 1.5036139857198805
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4594,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 7726,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 6887,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before/dusk/spider.png",
+      "subject": {
+        "id": "zombie.spider",
+        "name": "Spider",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -199.55489360475457,
+          "z": -632
+        },
+        "size": {
+          "x": 1.7323991213819347,
+          "y": 0.8842078192650149,
+          "z": 1.7759895738851128
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 3794,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 8146,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 6087,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before/dusk/drowned.png",
+      "subject": {
+        "id": "zombie.drowned",
+        "name": "Drowned",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -199.05920802946997,
+          "z": -632
+        },
+        "size": {
+          "x": 0.8535743479228586,
+          "y": 1.8815839410600574,
+          "z": 0.5755054886440121
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5684,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 8521,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 7977,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before/dusk/military.png",
+      "subject": {
+        "id": "zombie.military",
+        "name": "Military",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -198.9322704752347,
+          "z": -632
+        },
+        "size": {
+          "x": 1.0375701259247094,
+          "y": 2.135459049530681,
+          "z": 0.8147675451930354
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5952,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "render": {
+        "calls": 8896,
+        "frameCalls": 15,
+        "drawCalls": 17,
+        "triangles": 8245,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before/dusk/brute.png",
+      "subject": {
+        "id": "zombie.brute",
+        "name": "Brute",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -198.6876891033616,
+          "z": -632
+        },
+        "size": {
+          "x": 1.6955303507953836,
+          "y": 2.6246217932767593,
+          "z": 0.9565468859274233
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5896,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 9271,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 8189,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before/dusk/spitter.png",
+      "subject": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -198.94980339936225,
+          "z": -632
+        },
+        "size": {
+          "x": 0.9737684915002411,
+          "y": 2.1003932012754944,
+          "z": 0.7365614511057856
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5228,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "render": {
+        "calls": 9661,
+        "frameCalls": 15,
+        "drawCalls": 18,
+        "triangles": 7521,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before/dusk/screamer.png",
+      "subject": {
+        "id": "zombie.screamer",
+        "name": "Screamer",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -199.2214350530112,
+          "z": -632
+        },
+        "size": {
+          "x": 1.3843041109192384,
+          "y": 2.506136411516451,
+          "z": 1.326624772964351
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5676,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "render": {
+        "calls": 10036,
+        "frameCalls": 15,
+        "drawCalls": 18,
+        "triangles": 7969,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before/dusk/bomber.png",
+      "subject": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -199.02607672835333,
+          "z": -632
+        },
+        "size": {
+          "x": 1.5779049873351987,
+          "y": 1.9478465432933376,
+          "z": 1.6821703984246597
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5936,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "render": {
+        "calls": 10411,
+        "frameCalls": 15,
+        "drawCalls": 18,
+        "triangles": 8229,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before/dusk/demon.png",
+      "subject": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -198.3161038386751,
+          "z": -632
+        },
+        "size": {
+          "x": 1.8566409263857437,
+          "y": 3.367792322649791,
+          "z": 1.09614201652073
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5672,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "render": {
+        "calls": 10786,
+        "frameCalls": 15,
+        "drawCalls": 17,
+        "triangles": 7965,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before/dusk/colossus.png",
+      "subject": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -197.56082341177358,
+          "z": -632
+        },
+        "size": {
+          "x": 3.1699897050857544,
+          "y": 4.878353176452862,
+          "z": 3.220331989877309
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6800,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "render": {
+        "calls": 11161,
+        "frameCalls": 15,
+        "drawCalls": 18,
+        "triangles": 9093,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before/dusk/guardian.png",
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -198.30605810240442,
+          "z": -632
+        },
+        "size": {
+          "x": 1.587255440169315,
+          "y": 3.3878837951912146,
+          "z": 1.1999077265919595
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4180,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 11551,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 6473,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before/dusk/caveguard.png",
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -198.62686070879892,
+          "z": -632
+        },
+        "size": {
+          "x": 1.4074425812224334,
+          "y": 2.7462785824020273,
+          "z": 1.208459689194683
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4180,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 11926,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 6473,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before/dusk/cave-guardian-wet.png",
+      "subject": {
+        "id": "person.cave-guardian",
+        "name": "Cave guardian",
+        "kind": "model",
+        "variant": "wet",
+        "mode": null,
+        "center": {
+          "x": -26,
+          "y": -197.90028270755886,
+          "z": -630.5625948026776
+        },
+        "size": {
+          "x": 2.4780634125151977,
+          "y": 4.0320531495002285,
+          "z": 2.6060665259938105
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 11878,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "render": {
+        "calls": 12316,
+        "frameCalls": 15,
+        "drawCalls": 18,
+        "triangles": 14171,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before/dusk/cave-guardian-iron.png",
+      "subject": {
+        "id": "person.cave-guardian",
+        "name": "Cave guardian",
+        "kind": "model",
+        "variant": "iron",
+        "mode": null,
+        "center": {
+          "x": -26,
+          "y": -197.90044699277095,
+          "z": -630.5625948026776
+        },
+        "size": {
+          "x": 2.47806094039019,
+          "y": 4.031784975241351,
+          "z": 2.6063645421101
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 11878,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "render": {
+        "calls": 12721,
+        "frameCalls": 15,
+        "drawCalls": 18,
+        "triangles": 14171,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before/night/shambler.png",
+      "subject": {
+        "id": "zombie.shambler",
+        "name": "Shambler",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -199.0295657221274,
+          "z": -632
+        },
+        "size": {
+          "x": 0.8663812630563541,
+          "y": 1.9408685557452827,
+          "z": 0.7292690299016158
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5008,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 13126,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 7301,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before/night/feral.png",
+      "subject": {
+        "id": "zombie.feral",
+        "name": "Feral",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -199.2917530957803,
+          "z": -632
+        },
+        "size": {
+          "x": 0.750718429121541,
+          "y": 1.416493808439327,
+          "z": 1.0675495112185445
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4780,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 13516,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 7073,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before/night/leaper.png",
+      "subject": {
+        "id": "zombie.leaper",
+        "name": "Leaper",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -199.5950441948794,
+          "z": -632
+        },
+        "size": {
+          "x": 0.7997330851160278,
+          "y": 1.4655617969656305,
+          "z": 1.5052380043817948
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4594,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 13906,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 6887,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before/night/spider.png",
+      "subject": {
+        "id": "zombie.spider",
+        "name": "Spider",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -199.56373509772777,
+          "z": -632
+        },
+        "size": {
+          "x": 1.6985850187733753,
+          "y": 0.9138758893828651,
+          "z": 1.7163499014865238
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 3794,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 14281,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 6087,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before/night/drowned.png",
+      "subject": {
+        "id": "zombie.drowned",
+        "name": "Drowned",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -199.07638943536443,
+          "z": -632
+        },
+        "size": {
+          "x": 0.827696772720337,
+          "y": 1.8472211292710767,
+          "z": 0.5383744252536644
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5684,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 14656,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 7977,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before/night/military.png",
+      "subject": {
+        "id": "zombie.military",
+        "name": "Military",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -198.87919057998528,
+          "z": -632
+        },
+        "size": {
+          "x": 1.0038101185824608,
+          "y": 2.241618840029446,
+          "z": 0.7725477129882847
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5952,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "render": {
+        "calls": 15031,
+        "frameCalls": 15,
+        "drawCalls": 17,
+        "triangles": 8245,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before/night/brute.png",
+      "subject": {
+        "id": "zombie.brute",
+        "name": "Brute",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -198.75360211219115,
+          "z": -632
+        },
+        "size": {
+          "x": 1.7694696895324853,
+          "y": 2.492795775617708,
+          "z": 0.9668642952378832
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5896,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 15406,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 8189,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before/night/spitter.png",
+      "subject": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -199.03761797745216,
+          "z": -632
+        },
+        "size": {
+          "x": 0.9247087498479729,
+          "y": 1.9247640450955998,
+          "z": 0.687887222096947
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5228,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "render": {
+        "calls": 15781,
+        "frameCalls": 15,
+        "drawCalls": 18,
+        "triangles": 7521,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before/night/screamer.png",
+      "subject": {
+        "id": "zombie.screamer",
+        "name": "Screamer",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -199.20028507183554,
+          "z": -632
+        },
+        "size": {
+          "x": 1.4111286513197427,
+          "y": 2.5742164581871805,
+          "z": 1.3523316241814882
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5676,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "render": {
+        "calls": 16186,
+        "frameCalls": 15,
+        "drawCalls": 18,
+        "triangles": 7969,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before/night/bomber.png",
+      "subject": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -198.99568537200003,
+          "z": -632
+        },
+        "size": {
+          "x": 1.5632345706224413,
+          "y": 2.0086292560000345,
+          "z": 1.6959674059746703
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5936,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "render": {
+        "calls": 16561,
+        "frameCalls": 15,
+        "drawCalls": 18,
+        "triangles": 8229,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before/night/demon.png",
+      "subject": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -198.41068537223032,
+          "z": -632
+        },
+        "size": {
+          "x": 2.045158405922596,
+          "y": 3.178629255539363,
+          "z": 1.2067450629893983
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5672,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "render": {
+        "calls": 16936,
+        "frameCalls": 15,
+        "drawCalls": 17,
+        "triangles": 7965,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before/night/colossus.png",
+      "subject": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -197.53390701686737,
+          "z": -632
+        },
+        "size": {
+          "x": 3.1091026246547706,
+          "y": 4.93218596626528,
+          "z": 3.198237141329173
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6800,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "render": {
+        "calls": 17326,
+        "frameCalls": 15,
+        "drawCalls": 18,
+        "triangles": 9093,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before/night/guardian.png",
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -198.30424015924,
+          "z": -632
+        },
+        "size": {
+          "x": 1.4003950967338206,
+          "y": 3.391519681520066,
+          "z": 1.1094719813469283
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4180,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 17716,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 6473,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before/night/caveguard.png",
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -198.6594379105647,
+          "z": -632
+        },
+        "size": {
+          "x": 1.4160203549385173,
+          "y": 2.681124178870533,
+          "z": 1.2486523222797814
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4180,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 18091,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 6473,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before/night/cave-guardian-wet.png",
+      "subject": {
+        "id": "person.cave-guardian",
+        "name": "Cave guardian",
+        "kind": "model",
+        "variant": "wet",
+        "mode": null,
+        "center": {
+          "x": -26,
+          "y": -197.9004496534737,
+          "z": -630.5625948026776
+        },
+        "size": {
+          "x": 2.478060900365101,
+          "y": 4.031780631682238,
+          "z": 2.606369367660477
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 11878,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "render": {
+        "calls": 18481,
+        "frameCalls": 15,
+        "drawCalls": 18,
+        "triangles": 14171,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before/night/cave-guardian-iron.png",
+      "subject": {
+        "id": "person.cave-guardian",
+        "name": "Cave guardian",
+        "kind": "model",
+        "variant": "iron",
+        "mode": null,
+        "center": {
+          "x": -26,
+          "y": -197.90058044997085,
+          "z": -630.5625948026776
+        },
+        "size": {
+          "x": 2.478058933278735,
+          "y": 4.031567096188212,
+          "z": 2.6066065454757563
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 11878,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "render": {
+        "calls": 18871,
+        "frameCalls": 15,
+        "drawCalls": 18,
+        "triangles": 14171,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    }
+  ],
+  "pageErrors": []
+}

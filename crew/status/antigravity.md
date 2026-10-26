@@ -1,13 +1,13 @@
 # Antigravity
 
-state: idle
-model: Claude Opus 4.6
-task: —
-touching: —
-since: 2026-10-25T01:48Z
+state: active
+model: Gemini Pro (High)
+task: AG-131 GPU gameplay review of GP-19970 zombie eye palette
+touching: qa/2026-10-26-AG-131/
+since: 2026-10-26T06:13Z
 next: waits on CL-263
 blocked-on: —
-last-report: handoffs/2026-10-24-antigravity-AG-126.md
+last-report: handoffs/2026-10-26-antigravity-AG-130.md
 
 ## Notes
 
@@ -32,7 +32,7 @@ a real GPU the way you can.
 - Serve the game with `npm run serve` and open http://127.0.0.1:8971/index.html?debug=1.
   With ?debug=1, window.TT is available in the DevTools console.
 
-### Status (2026-10-24)
-- **AG-86..AG-124**: DONE (see reports in `handoffs/`). Completed GPU reviews (`GP-19965`, `GP-19967`, `GP-19966`, `CL-262`, `CL-260`), the 44-job GPU world sweep (`AG-122`), the trapper's path rebuild (`AG-124`), and the FOB overhaul with generator moved (`AG-123`).
-- **AG-126**: DONE. Generated all 20 four-light (`noon`, `overcast`, `dusk`, `night`) principles contact sheets across `buildables`, `turrets`, `weapons`, `zombies`, and `people` in `review/principles/<group>-<light>/sheet.jpg`, and upgraded all sub-4/5 buildables & turrets (`build:barrel`, `build:barrel:1`, `build:lure:1`, `build:lure:2`, `build:mortar:1`, `build:mortar:2`, `build:light` Mk I–III, `build:flame` Mk I–III, `build:heavy` Mk I–III) so all 36 pieces score `>= 4/5` across all 6 Rule 19 categories (`t25`, `t31`, `t215`: 59 pass, 0 fail).
-- **Next**: `AG-125` (Each remaining named place overhauled to the standard of its note in `docs/sweep/*.md`, after `CL-263`).
+### Status (2026-10-26)
+- **AG-86..AG-129**: DONE (see reports in `handoffs/`). Completed GPU reviews (`GP-19965`, `GP-19967`, `GP-19966`, `CL-262`, `CL-260`, `CL-264`, `CL-256 batch 2`, `CL-261 part 1`, `CL-261 part 2`), the 44-job GPU world sweep (`AG-122`), the trapper's path rebuild (`AG-124`), the FOB overhaul (`AG-123`), the 20 four-light principles contact sheets + buildables/turrets upgrade (`AG-126`), and the 6-family buildables/turrets/traps overhaul from `GB-233` group 4 (`AG-129`).
+- **AG-130**: DONE. Verified ChatGPT's `GP-19971` (Screamer arms and face) on RTX 5080 (`handoffs/2026-10-26-antigravity-AG-130.md`): all 3 arm beats (`drift`, `1.2 s scream`, `2.4 s exposed`) and transitions read cleanly with `0` torso/skull intersections across 420 frames (`minSideM = 0.1200 m`), `12/12` live `zombieRoundHit` headshots, `avg 3.04 ms` (`p99 7.60 ms`) frame time, and `4/5` night flashlight facial readability at `1280×720` (no further face-value lift needed).
+- **Next**: `AG-125` (The duty board, the radio set and the six posters, after `CL-263`).

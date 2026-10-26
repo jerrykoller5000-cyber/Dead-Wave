@@ -1,0 +1,515 @@
+{
+  "rows": [
+    {
+      "kind": "shambler",
+      "first": [
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        },
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        }
+      ],
+      "cached": [
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        },
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        }
+      ],
+      "independent": true
+    },
+    {
+      "kind": "feral",
+      "first": [
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        },
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        }
+      ],
+      "cached": [
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        },
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        }
+      ],
+      "independent": true
+    },
+    {
+      "kind": "brute",
+      "first": [
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        },
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        }
+      ],
+      "cached": [
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        },
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        }
+      ],
+      "independent": true
+    },
+    {
+      "kind": "military",
+      "first": [
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        },
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        }
+      ],
+      "cached": [
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        },
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        }
+      ],
+      "independent": true
+    },
+    {
+      "kind": "spitter",
+      "first": [
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        },
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        }
+      ],
+      "cached": [
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        },
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        }
+      ],
+      "independent": true
+    },
+    {
+      "kind": "bomber",
+      "first": [
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        },
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        }
+      ],
+      "cached": [
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        },
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        }
+      ],
+      "independent": true
+    },
+    {
+      "kind": "screamer",
+      "first": [
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        },
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        }
+      ],
+      "cached": [
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        },
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        }
+      ],
+      "independent": true
+    },
+    {
+      "kind": "drowned",
+      "first": [
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        },
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        }
+      ],
+      "cached": [
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        },
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        }
+      ],
+      "independent": true
+    },
+    {
+      "kind": "leaper",
+      "first": [
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        },
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        }
+      ],
+      "cached": [
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        },
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        }
+      ],
+      "independent": true
+    },
+    {
+      "kind": "spider",
+      "first": [
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        },
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        }
+      ],
+      "cached": [
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        },
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        }
+      ],
+      "independent": true
+    },
+    {
+      "kind": "colossus",
+      "first": [
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        },
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        }
+      ],
+      "cached": [
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        },
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        }
+      ],
+      "independent": true
+    },
+    {
+      "kind": "demon",
+      "first": [
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        },
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        }
+      ],
+      "cached": [
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        },
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        }
+      ],
+      "independent": true
+    },
+    {
+      "kind": "guardian",
+      "first": [
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        },
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        }
+      ],
+      "cached": [
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        },
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        }
+      ],
+      "independent": true
+    },
+    {
+      "kind": "caveguard",
+      "first": [
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        },
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        }
+      ],
+      "cached": [
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        },
+        {
+          "color": 7643533,
+          "glow": 7643533,
+          "intensity": 0.9,
+          "base": 0.9
+        }
+      ],
+      "independent": true
+    }
+  ],
+  "special": {
+    "bluebell": [
+      {
+        "color": 7584456,
+        "glow": 9169663,
+        "intensity": 1.8,
+        "base": 1.8
+      },
+      {
+        "color": 7584456,
+        "glow": 9169663,
+        "intensity": 1.8,
+        "base": 1.8
+      }
+    ],
+    "ordinary": [
+      {
+        "color": 7643533,
+        "glow": 7643533,
+        "intensity": 0.9,
+        "base": 0.9
+      },
+      {
+        "color": 7643533,
+        "glow": 7643533,
+        "intensity": 0.9,
+        "base": 0.9
+      }
+    ]
+  },
+  "pool": {
+    "sameBody": true,
+    "fresh": [
+      {
+        "color": 7643533,
+        "glow": 7643533,
+        "intensity": 0.9,
+        "base": 0.9
+      },
+      {
+        "color": 7643533,
+        "glow": 7643533,
+        "intensity": 0.9,
+        "base": 0.9
+      }
+    ],
+    "reused": [
+      {
+        "color": 7643533,
+        "glow": 7643533,
+        "intensity": 1.7,
+        "base": 0.9
+      },
+      {
+        "color": 7643533,
+        "glow": 7643533,
+        "intensity": 1.7,
+        "base": 0.9
+      }
+    ],
+    "restored": false
+  },
+  "materialPass": true
+}

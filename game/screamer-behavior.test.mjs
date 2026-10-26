@@ -1,4 +1,5 @@
 import test from 'node:test';import assert from 'node:assert/strict';
+import * as T from '../vendor/three/three.core.js';
 import {SCREAMER,screamerProtected,tickScreamerShield,steerScreamer,screamerScreamPose,resetScreamer,applyScreamerPose,restoreScreamerPose,screamerState} from './screamer-behavior.js';
 const actor=()=>({typeKey:'screamer',alive:true,partsLost:{},mesh:{rotation:{y:0},userData:{}}});
 test('D-86 protected shield passes one quarter of a hit',()=>{assert.equal(SCREAMER.damageShare,.25);assert.equal(100*SCREAMER.damageShare,25);});
@@ -21,3 +22,39 @@ test('protected hover blends to exposed footwork and back, with no accumulating 
 
 test('shielded travel is two fifths pace, while exposed and headless travel keep their existing speed',()=>{for(const fps of [30,60,120]){const z=actor();assert.equal(steerScreamer(z,0,1,1/fps,threat()).pace,.4);z.screamT=.5;assert.equal(steerScreamer(z,0,1,1/fps,threat()).pace,.4);z.screamT=0;z.sonicOpenT=2;const retreat=steerScreamer(z,0,1,1/fps,threat());assert(retreat.pace>=.78&&retreat.pace<=1);z.partsLost.head=true;assert.equal(steerScreamer(z,0,1,1/fps,threat()).pace,1);}});
 test('protected bob lifts the body in a smooth sustained cycle without moving its collision root',()=>{const z=rig(),ys=[];for(let i=0;i<300;i++){restoreScreamerPose(z);z.mesh.position.z+=.7/60;applyScreamerPose(z,1/60);ys.push(screamerState(z).hover);assert.equal(z.mesh.position.y,0);}assert(Math.max(...ys)-Math.min(...ys)>.12);assert(Math.min(...ys)>.09&&Math.max(...ys)<.23);assert(ys.slice(1).every((y,i)=>Math.abs(y-ys[i])<.002));restoreScreamerPose(z);assert.equal(z.mesh.userData.hips.position.y,.9);});
+
+test('arms pose even when a concept foot has no ankle helper',()=>{
+ const z=rig(),u=z.mesh.userData;
+ for(const side of ['L','R']){delete u['leg'+side+'G'].userData.shamblerAnkle;u['arm'+side+'G'].rotation.z=side==='L'?.9:-.9;}
+ for(let i=0;i<60;i++){restoreScreamerPose(z);applyScreamerPose(z,1/60);}
+ assert(u.armLG.rotation.z<0&&u.armRG.rotation.z>0,'both arms open outward from the crossed bind pose');
+ restoreScreamerPose(z);assert.equal(u.armLG.rotation.z,.9);assert.equal(u.armRG.rotation.z,-.9);
+});
+
+function spatialRig(){
+ const z=rig(),u=z.mesh.userData;z.mesh=new T.Group();z.mesh.userData=u;
+ u.hips=new T.Group();u.hips.position.y=u.baseHipsY;z.mesh.add(u.hips);
+ u.torso=new T.Group();u.torso.position.y=.28;u.hips.add(u.torso);
+ u.head=new T.Group();u.head.position.y=.58;u.torso.add(u.head);
+ for(const side of ['L','R']){const arm=new T.Group(),elbow=new T.Group();arm.position.set(side==='L'?-.32:.32,.42,0);elbow.position.y=-.34;arm.add(elbow);u.torso.add(arm);arm.userData.elbowG=elbow;u['arm'+side+'G']=arm;}
+ return z;
+}
+test('full drift, scream and retreat transitions keep each arm on its own side and outside the torso',()=>{
+ for(const fps of [30,60,120]){
+  const z=spatialRig(),u=z.mesh.userData,previous={};
+  for(let f=0;f<fps*12;f++){
+   const t=f/fps;restoreScreamerPose(z);z.screamT=t>=3&&t<4.2?4.2-t:0;z.sonicOpenT=t>=4.2&&t<6.6?6.6-t:0;
+   z.mesh.position.z+=(z.sonicOpenT?-.8:.4)/fps;applyScreamerPose(z,1/fps);z.mesh.updateMatrixWorld(true);
+   for(const side of ['L','R']){
+    const arm=u['arm'+side+'G'],elbow=arm.userData.elbowG,sign=side==='L'?-1:1;
+    for(const [bone,length] of [[arm,.34],[elbow,.46]])for(const fraction of [.25,.5,.75,1]){
+     const p=u.torso.worldToLocal(bone.localToWorld(new T.Vector3(0,-length*fraction,0)));
+     assert(p.x*sign>.16,`${fps}fps ${t.toFixed(3)} ${side}: arm crosses head/body center (${p.toArray()})`);
+     assert(p.y>.44||Math.abs(p.x)>.24||Math.abs(p.z)>.23,'limb centerline clears the torso plus flesh radius');
+    }
+    const palm=elbow.localToWorld(new T.Vector3(0,-.36,0));
+    if(previous[side])assert(palm.distanceTo(previous[side])<3.8/fps,'hand transition is continuous in world space');previous[side]=palm;
+   }
+  }
+ }
+});

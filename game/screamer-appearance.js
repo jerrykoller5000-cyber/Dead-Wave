@@ -4,7 +4,9 @@ const dark=0x000000,tongueHex=[0xae6671,0xd89299];
 const VAPOR_PUFFS=36; // same instanced draw: half cling to the body, half trail behind
 export function prepareScreamerAppearance(T,g,s=1){
  const u=g.userData;if(u.typeKey!=='screamer'||u.screamerJaw)return;
- const eyes=new Set([...(u.eyes||[]),u.eyeBatch].filter(Boolean)),materials=new Map(),tongueColors=tongueHex.map(h=>new T.Color(h)),pink=new T.Color(0xff56aa);
+ const eyes=new Set([...(u.eyes||[]),u.eyeBatch].filter(Boolean)),materials=new Map(),tongueColors=tongueHex.map(h=>new T.Color(h)),bruise=new T.Color(0x8e6f77);
+ const jawColors=[0xb4a592,0x664036,0xc7bd9f].map(h=>new T.Color(h));
+ const toothColors=[0xc8bea0,0xc7bd9f].map(h=>new T.Color(h)),bone=new T.Color(0x5e665c);
  const jaw=new T.Group(),tongue=new T.Group();jaw.name='screamer-jaw';jaw.position.set(0,-.10*s,.06*s);u.head.add(jaw);
  tongue.name='screamer-tongue';tongue.position.set(0,-.11*s,.13*s);jaw.add(tongue);
  const clone=m=>{if(!materials.has(m)){const c=m.clone();if(c.emissive)c.emissive.setHex(0);c.emissiveIntensity=0;materials.set(m,c);}return materials.get(m);};
@@ -12,17 +14,31 @@ export function prepareScreamerAppearance(T,g,s=1){
  const meshes=[];g.traverse(o=>{if(o.isMesh&&!eyes.has(o))meshes.push(o);});
  for(const m of meshes){
   const src=m.geometry.index?m.geometry.toNonIndexed():m.geometry.clone(),C=src.attributes.color,P=src.attributes.position,mat=clone(m.material);
-  const isTongue=i=>C?tongueColors.some(c=>Math.abs(C.getX(i)-c.r)+Math.abs(C.getY(i)-c.g)+Math.abs(C.getZ(i)-c.b)<.00001):tongueHex.includes(m.material.color?.getHex());
-  const mask=Array.from({length:P.count},(_,i)=>isTongue(i));
-  if(C){for(let i=0;i<C.count;i++){if(mask[i])C.setXYZ(i,pink.r,pink.g,pink.b);else C.setXYZ(i,0,0,0);}mat.color.setHex(0xffffff);mat.vertexColors=true;}
-  else mat.color.setHex(mask[0]?0xff56aa:dark);
+  const matches=(i,colors)=>colors.some(c=>C?Math.abs(C.getX(i)-c.r)+Math.abs(C.getY(i)-c.g)+Math.abs(C.getZ(i)-c.b)<.00001:m.material.color?.equals(c));
+  const mask=Array.from({length:P.count},(_,i)=>matches(i,tongueColors));
+  const jawMask=Array.from({length:P.count},(_,i)=>matches(i,jawColors));
+  const face=m.parent===u.head;
+  if(C){for(let i=0;i<C.count;i++){
+   if(mask[i])C.setXYZ(i,bruise.r,bruise.g,bruise.b);
+   else if(face&&matches(i,toothColors))C.setXYZ(i,bone.r,bone.g,bone.b);
+   else if(face){const value=(C.getX(i)+C.getY(i)+C.getZ(i))/3*.045;C.setXYZ(i,value*.85,value,value*.93);}
+   else C.setXYZ(i,0,0,0);
+  }mat.color.setHex(0xffffff);mat.vertexColors=true;}
+  else mat.color.setHex(mask[0]?0x8e6f77:dark);
   m.material=mat;
   if(m.parent!==u.head){m.geometry=src;continue;}
   m.updateMatrix();src.applyMatrix4(m.matrix);const upper=[],lower=[],tip=[];
-  for(let i=0;i<P.count;i+=3){const y=(P.getY(i)+P.getY(i+1)+P.getY(i+2))/3,z=(P.getZ(i)+P.getZ(i+1)+P.getZ(i+2))/3;
-   (mask[i]?tip:y<-.13*s&&z>.025*s?lower:upper).push(i,i+1,i+2);}
+  // Whole authored surfaces follow the hinge. A height cut through triangles tore
+  // the cheek and mouth wall open as the old jaw rotated.
+  for(let i=0;i<P.count;i+=3)(mask[i]?tip:jawMask[i]?lower:upper).push(i,i+1,i+2);
   for(const [parent,ids]of [[jaw,lower],[tongue,tip]])if(ids.length){const geo=part(src,ids),piece=new T.Mesh(geo,mat);piece.position.copy(jaw.position).multiplyScalar(-1);if(parent===tongue)piece.position.sub(tongue.position);piece.castShadow=true;parent.add(piece);}
   if(upper.length){m.geometry=part(src,upper);m.position.set(0,0,0);m.rotation.set(0,0,0);m.scale.setScalar(1);}else m.removeFromParent();src.dispose();
+ }
+ // A statue, a newly spawned body and a restored reaction also need her own
+ // resting silhouette. This runs before the game's rest snapshot and skin bind.
+ for(const [i,arm]of [u.armLG,u.armRG].entries())if(arm){
+  const side=i?-1:1;arm.rotation.set(.28,side*.06,-side*.28);
+  arm.userData.baseRotX=.28;arm.userData.elbowG?.rotation.set(-.12,0,0);
  }
  u.bodyMats=(u.bodyMats||[]).map(m=>materials.get(m)||m);u.screamerJaw=jaw;u.screamerTongue=tongue;u.concept.skin=0;u.skinColor=0;
 }
@@ -36,7 +52,7 @@ function vaporTexture(T){
 export function attachScreamerAppearance(T,N,g,s=1){
  if(g.userData.typeKey!=='screamer'||g.userData.screamerFx)return;
  const clock=N.uniform(0),strength=N.uniform(1),hit=N.uniform(0);
- const mat=new T.MeshBasicNodeMaterial({color:0xa641ff,transparent:true,depthWrite:false,toneMapped:false});
+ const mat=new T.MeshBasicNodeMaterial({color:0x8a9d90,transparent:true,depthWrite:false,toneMapped:false});
  // A loose sonic membrane: patchy arcs instead of a continuous tinted shell.
  const P=N.positionGeometry,F=N.varying(P);
  const wobble=N.sin(P.y.mul(5).add(P.x.mul(3)).sub(clock.mul(1.6)))

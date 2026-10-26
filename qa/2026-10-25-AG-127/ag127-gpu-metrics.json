@@ -1,0 +1,348 @@
+{
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "loadSec": 27.1,
+  "cl264": {
+    "setup": {
+      "inReach": true,
+      "need": 5,
+      "pulls": 0,
+      "promptText": "EYank the boots",
+      "promptOn": true,
+      "skelHome": {
+        "x": -154.148,
+        "y": 12.722,
+        "z": -5.513
+      },
+      "bootsHome": {
+        "x": -154.148,
+        "y": 12.152,
+        "z": -5.753
+      }
+    },
+    "pull1Metrics": {
+      "pullsAfter1": 1,
+      "maxPosShiftCm": 6.3,
+      "maxRotXDeg": 9.02,
+      "maxRotZDeg": 2.82,
+      "maxBootsShiftCm": 8.62
+    },
+    "landed": {
+      "phase": "down",
+      "worn": true,
+      "bootsVisible": false,
+      "distFromMastM": 3.16,
+      "minYMinusGyCm": 1,
+      "rotXRad": -1.78,
+      "rotXDeg": -102
+    }
+  },
+  "cl260": {
+    "runAimMetrics": {
+      "m4": {
+        "samples": 60,
+        "medSightGapCm": 0.036,
+        "maxSightGapCm": 5.174,
+        "camHeightWobbleCm": 0.873,
+        "sightHeightWobbleCm": 0.864,
+        "camPitchWobbleDeg": 1.313,
+        "sightPitchWobbleDeg": 0.048
+      },
+      "ak": {
+        "samples": 60,
+        "medSightGapCm": 0.034,
+        "maxSightGapCm": 0.898,
+        "camHeightWobbleCm": 0.281,
+        "sightHeightWobbleCm": 0.311,
+        "camPitchWobbleDeg": 0.01,
+        "sightPitchWobbleDeg": 0.031
+      },
+      "pistol": {
+        "samples": 60,
+        "medSightGapCm": 0.356,
+        "maxSightGapCm": 5.377,
+        "camHeightWobbleCm": 0.558,
+        "sightHeightWobbleCm": 0.837,
+        "camPitchWobbleDeg": 0.009,
+        "sightPitchWobbleDeg": 0.044
+      }
+    },
+    "windLeavesInfo": {
+      "gale": 0,
+      "leafCount": 90,
+      "meshVisible": false
+    }
+  },
+  "cl256": {
+    "campAndGraveInfo": {
+      "hikers": {
+        "x": -1.98,
+        "z": -81.68,
+        "campYawDeg": 39.2
+      },
+      "graveyard": {
+        "x": -89.96,
+        "z": 89.15
+      },
+      "openGrave": {
+        "x": -103.05,
+        "y": -0.69,
+        "z": 92.48
+      }
+    },
+    "hillRingResults": [
+      {
+        "id": "cave-1",
+        "stopPos": [
+          162.43,
+          7.43,
+          78.36
+        ],
+        "dhAtStopM": 3.99,
+        "riseNext15mM": -0.51,
+        "riseNext30mM": -2.54,
+        "slopeNext15mDeg": -18.7,
+        "slopeNext30mDeg": -40.3,
+        "playerAboveGroundCm": 0
+      },
+      {
+        "id": "cave-3",
+        "stopPos": [
+          -165.55,
+          3.46,
+          81.91
+        ],
+        "dhAtStopM": 3.67,
+        "riseNext15mM": -1.34,
+        "riseNext30mM": -2.44,
+        "slopeNext15mDeg": -41.9,
+        "slopeNext30mDeg": -39.1,
+        "playerAboveGroundCm": 0
+      },
+      {
+        "id": "cave-4",
+        "stopPos": [
+          -184.45,
+          5.22,
+          3.87
+        ],
+        "dhAtStopM": 2.44,
+        "riseNext15mM": 0.46,
+        "riseNext30mM": 0.14,
+        "slopeNext15mDeg": 16.9,
+        "slopeNext30mDeg": 2.8,
+        "playerAboveGroundCm": 0
+      },
+      {
+        "id": "cave-6",
+        "stopPos": [
+          168.57,
+          3.68,
+          -90.57
+        ],
+        "dhAtStopM": 6.49,
+        "riseNext15mM": -0.03,
+        "riseNext30mM": -0.78,
+        "slopeNext15mDeg": -1.3,
+        "slopeNext30mDeg": -14.6,
+        "playerAboveGroundCm": 0
+      }
+    ]
+  },
+  "cl261": {
+    "runBeatMetrics": [
+      {
+        "u": 0,
+        "armLDeg": 36.1,
+        "armRDeg": -0.6,
+        "elbowLDeg": 83.9,
+        "elbowRDeg": 116.5,
+        "torsoYawDeg": 11.1
+      },
+      {
+        "u": 0.25,
+        "armLDeg": -1.9,
+        "armRDeg": 37.5,
+        "elbowLDeg": 111.9,
+        "elbowRDeg": 88.6,
+        "torsoYawDeg": -12.8
+      },
+      {
+        "u": 0.5,
+        "armLDeg": -0.6,
+        "armRDeg": 36.1,
+        "elbowLDeg": 116.6,
+        "elbowRDeg": 84,
+        "torsoYawDeg": -12.3
+      },
+      {
+        "u": 0.75,
+        "armLDeg": 37.5,
+        "armRDeg": -1.9,
+        "elbowLDeg": 88.6,
+        "elbowRDeg": 111.9,
+        "torsoYawDeg": 12.2
+      }
+    ],
+    "bladeResults": {
+      "machete": [
+        {
+          "u": 0.22,
+          "torsoYawDeg": 21.9,
+          "torsoPitchDeg": 5.9,
+          "twistVal": 0.664
+        },
+        {
+          "u": 0.36,
+          "torsoYawDeg": 30.4,
+          "torsoPitchDeg": 8.1,
+          "twistVal": 1
+        },
+        {
+          "u": 0.48,
+          "torsoYawDeg": 1.1,
+          "torsoPitchDeg": 7.1,
+          "twistVal": -0.136
+        },
+        {
+          "u": 0.62,
+          "torsoYawDeg": -20.5,
+          "torsoPitchDeg": 4.4,
+          "twistVal": -0.975
+        }
+      ],
+      "knife": [
+        {
+          "u": 0.14,
+          "torsoYawDeg": 13.3,
+          "torsoPitchDeg": 1.1,
+          "twistVal": 0.479
+        },
+        {
+          "u": 0.3,
+          "torsoYawDeg": 3.5,
+          "torsoPitchDeg": 8.1,
+          "twistVal": -0.113
+        },
+        {
+          "u": 0.42,
+          "torsoYawDeg": -4.5,
+          "torsoPitchDeg": 7.5,
+          "twistVal": -0.6
+        },
+        {
+          "u": 0.58,
+          "torsoYawDeg": -9.8,
+          "torsoPitchDeg": 0,
+          "twistVal": -0.927
+        }
+      ]
+    },
+    "ladderMetrics": [
+      {
+        "h": 1.2,
+        "offLineCm": 0,
+        "footRungs": [
+          3,
+          3
+        ],
+        "feetTogether": true,
+        "footErrCm": [
+          -0.38,
+          -0.38
+        ],
+        "handRungs": [
+          5,
+          6
+        ],
+        "realFistErrCm": [
+          1.53,
+          0.3
+        ]
+      },
+      {
+        "h": 2.4,
+        "offLineCm": 0,
+        "footRungs": [
+          6,
+          6
+        ],
+        "feetTogether": true,
+        "footErrCm": [
+          -0.38,
+          -0.38
+        ],
+        "handRungs": [
+          9,
+          8
+        ],
+        "realFistErrCm": [
+          0.74,
+          1.41
+        ]
+      },
+      {
+        "h": 3,
+        "offLineCm": 0,
+        "footRungs": [
+          7,
+          8
+        ],
+        "feetTogether": false,
+        "footErrCm": [
+          -0.21,
+          0.51
+        ],
+        "handRungs": [
+          9,
+          10
+        ],
+        "realFistErrCm": [
+          1.28,
+          0.71
+        ]
+      },
+      {
+        "h": 3.2,
+        "offLineCm": 0,
+        "footRungs": [
+          8,
+          8
+        ],
+        "feetTogether": true,
+        "footErrCm": [
+          -0.38,
+          -0.38
+        ],
+        "handRungs": [
+          11,
+          10
+        ],
+        "realFistErrCm": [
+          0.74,
+          1.41
+        ]
+      },
+      {
+        "h": 4.8,
+        "offLineCm": 0,
+        "footRungs": [
+          12,
+          12
+        ],
+        "feetTogether": true,
+        "footErrCm": [
+          -0.38,
+          -0.38
+        ],
+        "handRungs": [
+          14,
+          15
+        ],
+        "realFistErrCm": [
+          1.53,
+          0.3
+        ]
+      }
+    ]
+  }
+}

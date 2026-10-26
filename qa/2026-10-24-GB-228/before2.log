@@ -1,0 +1,36 @@
+HD pistol hip R 0.001 L 0.001
+FP pistol ads 1.00 rear -0.000,-0.002 front -0.000,-0.001 muzzle -0.000,-0.158 | R 0.000 L 0.000
+RL pistol reloading true dbg {"timer":0.4985999999940394,"anim":1.35,"weapon":"pistol"} | R 0.000 L 0.069
+HD revolver hip R 0.001 L 0.000
+FP revolver ads 1.00 rear 0.000,0.003 front 0.000,0.002 muzzle 0.000,-0.150 | R 0.000 L 0.000
+RL revolver reloading true dbg {"timer":0.9669000000059602,"anim":1.8,"weapon":"revolver"} | R 0.000 L 0.095
+HD uzi hip R 0.001 L 0.000
+FP uzi ads 1.00 rear -0.000,0.000 front - muzzle -0.000,-0.382 | R 0.001 L 0.000
+RL uzi reloading true dbg {"timer":0.5387999999970197,"anim":1.4,"weapon":"uzi"} | R 0.000 L 0.186
+HD shotgun hip R 0.000 L -
+FP shotgun ads 0.00 rear -1.308,-0.261 front -0.246,-0.053 muzzle -0.235,-0.116 | R 0.000 L -
+RL shotgun reloading true dbg {"timer":0.041200000002980304,"anim":0.42,"weapon":"shotgun"} | R 0.000 L -
+HD m4 hip R 0.002 L 0.131
+FP m4 ads 1.00 rear -0.000,0.014 front -0.000,0.005 muzzle -0.000,-0.227 | R 0.000 L 0.009
+RL m4 reloading true dbg {"timer":0.7199999999999992,"anim":1.55,"weapon":"m4"} | R 0.001 L 0.309
+HD ak hip R 0.002 L 0.138
+FP ak ads 1.00 rear -0.000,0.000 front 0.000,0.000 muzzle 0.000,-0.237 | R 0.000 L 0.036
+RL ak reloading true dbg {"timer":1.16879999999702,"anim":2,"weapon":"ak"} | R 0.000 L 0.426
+HD aa12 hip R 0.000 L 0.162
+FP aa12 ads 1.00 rear -0.000,0.000 front -0.000,-0.000 muzzle -0.000,-0.327 | R 0.000 L 0.021
+RL aa12 reloading true dbg {"timer":1.7382999999970201,"anim":2.6,"weapon":"aa12"} | R 0.001 L 0.621
+HD launcher hip R 0.002 L 0.046
+FP launcher ads 1.00 rear 0.000,-0.001 front 0.000,-0.000 muzzle 0.000,-0.155 | R 0.000 L 0.000
+RL launcher reloading true dbg {"timer":0.3530999999940395,"anim":0.4,"weapon":"launcher"} | R 0.001 L 0.089
+HD sniper hip R 0.001 L 0.148
+FP sniper ads 1.00 rear - front - muzzle 0.000,-0.464 | R 0.001 L 0.064
+RL sniper reloading true dbg {"timer":1.5239000000059604,"anim":2.35,"weapon":"sniper"} | R 0.000 L 0.640
+HD minigun hip R 0.015 L 0.016
+FP minigun ads 1.00 rear - front - muzzle -0.000,-0.664 | R 0.015 L 0.016
+RL minigun reloading true dbg {"timer":0.3076999999880788,"anim":1.15,"weapon":"minigun"} | R 0.015 L 0.227
+HD flamer hip R 0.001 L 0.001
+FP flamer ads 1.00 rear - front - muzzle 0.000,-0.282 | R 0.001 L 0.001
+RL flamer reloading true dbg {"timer":1.5530000000000002,"anim":2.4,"weapon":"flamer"} | R 0.033 L 0.373
+HD chainsaw hip R 0.008 L 0.016
+FP chainsaw ads 1.00 rear - front - muzzle -0.000,-0.569 | R 0.007 L 0.016
+RL chainsaw reloading false dbg {"timer":0,"anim":2.4,"weapon":null} | R 0.006 L 0.016

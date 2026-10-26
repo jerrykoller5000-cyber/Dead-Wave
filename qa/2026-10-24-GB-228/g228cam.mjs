@@ -9,11 +9,11 @@ const cam = (...a) => execFileSync(process.execPath, ['tools/camera.mjs', ...a, 
 const ev = (js) => { try { return cam('eval', '{' + js + '}').split('\n').filter((l) => /^(FP|RL|HD) /.test(l)).join(' '); } catch (e) { return 'ERR ' + String(e.message).slice(0, 300); } };
 // rear/front sight tops in gun space (t277 / sight-points.js comments)
 const RF = { pistol: [[0,.075,.072],[0,.087,.287]], revolver: [[0,.109,.081],[0,.121,.326]], uzi: [[0,.156,-.087],null], shotgun: [[0,.087,-.129],[0,.081,.915]],
-  m4: [[0,.168,.004],[0,.138,.673]], ak: [[0,.095,.218],[0,.097,.84]], aa12: [[0,.18,-.12],[0,.175,.75]], launcher: [[0,.123,.053],[0,.102,.65]], sniper: [null,null], minigun: [null,null], flamer: [null,null], chainsaw: [null,null] };
+  m4: [[0,.134,.0455],[0,.138,.673]], ak: [[0,.095,.218],[0,.097,.84]], aa12: [[0,.18,-.12],[0,.175,.75]], launcher: [[0,.123,.053],[0,.102,.65]], sniper: [null,null], minigun: [null,null], flamer: [null,null], chainsaw: [null,null] };
 cam('start', '--match');
 ev("TT.setHp(100000); TT.clearZombies&&TT.clearZombies(); TT.grantAllWeapons(); return 'FP ok'");
 const HANDS = (w) => `const V=()=>new T.THREE.Vector3(); let hd='na'; try { const H=T.getShoulderDbg().holds['${w}'], g=T.weaponMeshes['${w}'], gp=T.handsDbg.gripPoint; const r=gp('R',V()).distanceTo(g.localToWorld(V().set(...H.grip))); const l=Array.isArray(H.fore)?gp('L',V()).distanceTo(g.localToWorld(V().set(...H.fore))):null; hd='R '+r.toFixed(3)+' L '+(l==null?'-':l.toFixed(3)); } catch(e) { hd='err '+e.message; }`;
-for (const w of Object.keys(RF)) {
+for (const w of (process.argv[3] ? process.argv[3].split(',') : Object.keys(RF))) {
   const [r, f] = RF[w];
   console.log(ev(`const T=TT; if (T.isUnarmed && T.isUnarmed()) T.toggleHolster(); for (let i = 0; i < 16 && T.getCurrentWeapon() !== '${w}'; i++) { T.setWeapon(T.WEAPON_ORDER.indexOf('${w}')); await new Promise(r=>setTimeout(r,150)); } await new Promise(r=>setTimeout(r,2000)); T.setViewFirstDbg(true); await new Promise(r=>setTimeout(r,1500)); ${HANDS(w)} return 'HD ${w} hip '+hd;`));
   cam('shot', '--live', '--ui', '--out', `${O}/hip-${w}.png`);

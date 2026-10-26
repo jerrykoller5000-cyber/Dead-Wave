@@ -17,7 +17,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = args[1] if len(args) > 1 else os.path.join(HERE, '..', 'assets', 'anim', 'reference', 'cmu.json')
 FPS = 30
 
-# The clips we keep, and what each is good for. Add a line to bring another in.
+# The clips we keep, and what each is good for. Add a line to bring another in. A tuple keeps only that stretch of a long
+# take: (what it's good for, from, to), seconds into the take.
 WANT = {
     '09_01': 'a run: arm drive, torso lean, flight phase (the unarmed run, N6)',
     '09_02': 'a run, another stride',
@@ -26,6 +27,8 @@ WANT = {
     '02_08': 'swordplay, more cuts',
     '13_33': 'climbing a ladder: hand over hand, foot on each rung (N20)',
     '13_34': 'climbing a ladder, another climb',
+    '02_05': ('punches and strikes from the back hand: the shoulders turn through, the trunk leans in (the knife stab, N25)', 6.0, 14.0),
+    '144_20': ('a boxer\'s punches from a staggered stance, quick: the body turns behind each one (the knife stab)', 4.0, 12.2),
 }
 SKIP = ('Thumb', 'Index', 'Mid', 'Ring', 'Pinky', 'Eye')
 
@@ -33,7 +36,8 @@ def r4(x): return round(x, 4)
 
 skeleton = None
 clips = {}
-for cid, good in WANT.items():
+for cid, want in WANT.items():
+    good, cut = (want[0], want[1:]) if isinstance(want, tuple) else (want, None)
     f = os.path.join(SRC, cid + '.fbx')
     if not os.path.exists(f):
         print('missing', f); continue
@@ -63,9 +67,11 @@ for cid, good in WANT.items():
             parent = names.index(b.parent.name) + 1 if b.parent and b.parent.name in names else 0
             skeleton.append({'name': b.name, 'parent': parent, 't': [r4(v * scale) for v in t], 'r': [r4(q.x), r4(q.y), r4(q.z), r4(q.w)]})
     n = int(round((f1 - f0) / src_fps * FPS)) + 1
+    k0, k1 = (int(round(cut[0] * FPS)), min(n - 1, int(round(cut[1] * FPS)))) if cut else (0, n - 1)
+    n = k1 - k0 + 1
     rot = {nm: [] for nm in names}
     pos = []
-    for k in range(n):
+    for k in range(k0, k1 + 1):
         scene.frame_set(int(round(f0 + k * src_fps / FPS)))
         for b in keep:
             pb = arm.pose.bones[b.name]
@@ -75,10 +81,10 @@ for cid, good in WANT.items():
         hip = arm.pose.bones[keep[0].name]
         L = local_rest(keep[0]) @ hip.matrix_basis
         tr = L.to_translation()
-        if k == 0: start = tr.copy()
+        if k == k0: start = tr.copy()
         pos += [r4((tr.x - start.x) * scale), r4((tr.y - start.y) * scale), r4(tr.z * scale)]   # from where he starts, his hip's height as is
     clips['cmu_' + cid] = {'pack': 'CMU', 'length': r4((n - 1) / FPS), 'loop': cid.startswith('09') or cid == '02_03', 'frames': n,
-                           'goodFor': good, 'rot': rot, 'pos': {keep[0].name: pos}}
+                           'goodFor': good + (f' ({cut[0]:g}-{cut[1]:g} s of the take)' if cut else ''), 'rot': rot, 'pos': {keep[0].name: pos}}
     print('clip', cid, n, 'frames')
 
 data = {'format': 'dw-ref/1', 'source': 'CMU Graphics Lab Motion Capture Database (mocap.cs.cmu.edu), FBX conversion by gbionics/cmu-fbx; free to use, not to resell',

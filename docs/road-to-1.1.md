@@ -75,7 +75,37 @@ transition sweep (how things meet; floating, clipping, looks), judged against th
 - **GP-19966** The birds (N22): real wings and motion, out of step.
 - **CL-265** The alarm's metal stinger back (N31).
 
+## Throughout: the principles (D-89)
+
+Every model, move, place, quest, sound and screen is held to Jerry's principles, new work from the start and existing
+work by a pass:
+- **Models and moves:** `docs/asset-principles.md` and `docs/animation-principles.md` (AGENTS.md rules 18-19: a
+  reference first, render it and look, never judge a model from code; the 0-5 score tables at 4 or more), under the art
+  direction (`docs/art-direction.md`, the military family and the rest).
+- **Places:** `docs/world-design.md` (the 15 rules of spatial design, the look): the placement and transition sweeps
+  of stage 1, and every new placement.
+- **Quests:** `docs/quest-design.md` (the 12 rules, the five questions): the story chain, the Hollows, each mission.
+- **Sound and screens:** `docs/sound-principles.md` and `docs/ui-principles.md` (CL-268, approved by
+  Jerry 2026-10-26, D-92: a sound only if it's immersive or impactful; the UI after his Soldier of Fortune 2, Dead
+  Space and Fallout: the CRT field terminals, readable first).
+
+The pass: each owner over their own work, between road items, scored, the worst first, fixing what breaks a principle
+(iteration, not rebuilding), with Antigravity's contact sheets in the four lights:
+- **AG-126** the contact sheets for every owner, then the buildables' and props' pass.
+- **GB-233** every weapon: the models, the holds, recoil and reloads.
+- **GP-19970** every zombie's look and motion, the marine's waist and balaclava, the UI's look.
+- **CL-261** the marine's moves (the unarmed run, the blades, the ladder), from motion capture.
+- **CL-267** everything else of Claude's, in parts: the marine's body, fabric, hats and gloves; all his moves (walk,
+  run, idle, crouch, jump, dive, the reloads, the falls); the people (the roof crew, Sato, the trapper, the hikers);
+  the world (the landmarks and buildings, the vehicles and wrecks, trees, rocks and ground, the river and caves, the
+  wildlife, the sky, light and weather); the history props; the studio's clips.
+
+Jerry, 2026-10-25: every current asset goes through them.
+
 ## After
 
+- When the road's work is finished and tested in one build, Claude tells Jerry and he plays it through again (Jerry,
+  2026-10-25: "Once you guys have finished out 1.1 let me know and I will do another play through").
 - 1.0.x builds as stages land (Antigravity builds the installer; ChatGPT runs the commit job).
-- Then co-op (D-83) and the Steam release (D-84): 1.1.
+- Co-op (D-83) is on hold until the base game is finished (Jerry, 2026-10-25: "Hold off on co-op. We are still quite
+  far away from finishing the base game." D-90). The Steam release stays with 1.1 (D-84), his call after the playthrough.

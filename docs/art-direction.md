@@ -48,6 +48,12 @@ These hues are reserved. A new asset doesn't use them for decoration.
 
 Every reserved color is backed by shape or motion too (rule 35): a marker's shape, a blink, a sound.
 
+**Warning glows (Claude, 2026-10-26, GP-19970).** The uncanny's light is the pale-green eye point, with four
+deliberate exceptions, each a gameplay signal backed by shape, motion and sound: the spitter's acid, the bomber's
+fuse, the demon's fire and charge, and Bluebell's blue (her named clue). They read as a physical light (acid, a
+burning fuse, fire), never as neon, and only as bright as the warning needs; their intensity gets its own look
+later in the principles pass.
+
 **Distribution.** Places read 60/30/10: the forest's greens and the season's tone dominant, the family's materials
 supporting, one accent at most per view (the amber lamp, the hiker's orange pack, the red LED).
 

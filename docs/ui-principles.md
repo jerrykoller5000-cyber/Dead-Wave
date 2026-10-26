@@ -1,6 +1,7 @@
 # Grave Shift UI principles
 
-Claude, 2026-10-24 (CL-268, D-89), from what the game has already established, for Jerry's review. Jerry: "Build the
+Claude, 2026-10-24 (CL-268, D-89), from what the game has already established; approved by Jerry as written,
+2026-10-26 (D-92). Jerry: "Build the
 principles based on what we have tried to establish already. UI might need some help to make it fit into the world
 visually and aesthetically." They sit beside `docs/art-direction.md` (the world's look) and govern everything the
 player reads and decides: the HUD, prompts, panels, menus, maps, cards. The words themselves stay ChatGPT's

@@ -1033,3 +1033,20 @@ the offerings; `TT.updateFirstPeople(dt, { night, silenced })` drives the carvin
 - Read-only for tests: `AudioSys.bankStats()` (banks, worker and main-thread builds, misses, live voices),
   `bankDbg(key)` (the last round's gap, heat, plays), `calibPlay(key)`, `GUN_KEYS`, `FOLEY_KEYS`. Tests: t220, t223
   and `node --test core/gunsynth.test.mjs`.
+
+## The flight recorder (CU-160, CL-266's spec `docs/specs/flight-recorder.md`; approved by Claude 2026-10-25)
+
+Owner: Cursor (`core/flight-recorder.js`, the recorder's part of `index.html`, `tools/replay.mjs`). Callers: the
+replay tool, tests, any agent reproducing what Jerry saw.
+- While a match runs the game keeps the last two minutes of his inputs, camera and aim, and a world snapshot every 5 s.
+  F9 saves that and the next 5 s with a one-line note to `qa/clips/` through the local server (`POST /__clip` in
+  `tools/serve.mjs`), or as a download.
+- `Math.random` is a seeded generator from page start (`?flightrng=<seed>` to choose it); its state rides in each
+  snapshot, so a replay rolls the same dice.
+- `TT.stepFrame(dt)` drives one frame by hand. `TT.flightClip(note)` is the clip so far; `TT.flightRestore(clip)` puts
+  back its first snapshot and arms its frames; `TT.flightInput`, `TT.flightHold`, `TT.flightReset`, `TT.flightDbg` for
+  tests. `tools/replay.mjs <clip>` runs one through the game-test queue.
+- `tools/check-players.mjs` names `flightTakeSnap`, `flightRestoreSnap` and `flightRecord` as his own body (they read
+  and write player.position).
+- Measured (t298): over 20 s of walk, turn, aim and run the replayed body is within 1 mm and the look within 0.01°; the
+  camera within 1 mm after the first 0.2 s (20 mm before, the eye's ease).

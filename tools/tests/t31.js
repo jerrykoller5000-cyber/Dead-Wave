@@ -10,7 +10,7 @@
   T.unlockAllBuilds(); T.addCash(500000);
   const meshCount = (b) => { let n = 0; b.mesh.traverse(o => { if (o.isMesh) n++; }); return n; };
   // every track upgrades: stats climb and the model changes
-  const spots = { barricade: [1, 0], sandbag: [2, 0], wire: [3, 0], railing: null, platform: null, pillar: null, stairs: [-2, 3], spikes: [4, 2], mine: [5, 2], lure: [-3, 3], mortar: [-4, 0] };
+  const spots = { barricade: [1, 0], sandbag: [2, 0], wire: [3, 0], railing: null, platform: null, pillar: null, stairs: [-2, 3], spikes: [4, 2], mine: [5, 2], lure: [-3, 3] };   // GB-234: the mortar has no upgrades (D-91)
   const made = {};
   made.barricade = T.placeBuildAt('barricade', gx + 1, gz, 0);
   made.sandbag = T.placeBuildAt('sandbag', gx + 2, gz, 0);
@@ -18,7 +18,9 @@
   made.spikes = T.placeBuildAt('spikes', gx + 4, gz + 2);
   made.mine = T.placeBuildAt('mine', gx + 5, gz + 2);
   made.lure = T.placeBuildAt('lure', gx - 3, gz + 3);
-  made.mortar = T.placeBuildAt('mortar', gx - 4, gz);
+  // GB-234 (Jerry, D-91): the mortar is one build: no track, the upgrade tool doesn't offer one, and it stays tier 0.
+  const mortar = T.placeBuildAt('mortar', gx - 4, gz);
+  ok(!!mortar && !T.UPGRADE_TRACKS.mortar && !(T.upgradePlan(mortar) && T.upgradePlan(mortar).track === 'mortar') && (mortar.tier | 0) === 0, 'the mortar has no upgrade track');
   T.placeBuildAt('wall', gx - 1, gz - 2, 0); T.placeBuildAt('wall', gx - 1, gz - 2, 1);
   made.platform = T.placeBuildAt('platform', gx - 1, gz - 2, 0, { lv: 1 });
   made.pillar = T.placeBuildAt('pillar', gx + 6, gz - 4);

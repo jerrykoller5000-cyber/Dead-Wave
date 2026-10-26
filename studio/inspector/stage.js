@@ -26,7 +26,11 @@ const LIGHTS = {
   top:       { dir: [0.05, 1, 0.12], sun: 2.4, sunColor: 0xfff6ea, sky: 0.9, skyColor: 0xdde8ff, ground: 0x505255, fill: 0.1 },
   rim:       { dir: [-0.4, 0.55, -1], sun: 2.8, sunColor: 0xffe7c8, sky: 0.6, skyColor: 0xbfd0ff, ground: 0x3a3c40, fill: 0.14 },
   flat:      { dir: [0.2, 1, 0.4], sun: 0.4, sunColor: 0xffffff, sky: 2.0, skyColor: 0xffffff, ground: 0xb0b0b0, fill: 0.35 },
-  night:     { dir: [-0.3, 0.8, 0.5], sun: 0.35, sunColor: 0x8fa6d8, sky: 0.25, skyColor: 0x5468a0, ground: 0x15171c, fill: 0.04 }
+  night:     { dir: [-0.3, 0.8, 0.5], sun: 0.35, sunColor: 0x8fa6d8, sky: 0.25, skyColor: 0x5468a0, ground: 0x15171c, fill: 0.04 },
+  // CU-161: the principles pass's four lights. check --time uses these names.
+  noon:      { dir: [0.12, 0.98, 0.16], sun: 3.1, sunColor: 0xfff4dc, sky: 1.25, skyColor: 0xd5e4ff, ground: 0x8d7b62, fill: 0.16 },
+  overcast:  { dir: [0.25, 1, 0.35], sun: 0.65, sunColor: 0xe6e8ee, sky: 1.85, skyColor: 0xd4d7de, ground: 0x7c7e82, fill: 0.42 },
+  dusk:      { dir: [0.9, 0.26, 0.12], sun: 1.55, sunColor: 0xffb07a, sky: 0.65, skyColor: 0xffc4a2, ground: 0x4a3428, fill: 0.1 }
 };
 export { BACKDROPS, LIGHTS };
 

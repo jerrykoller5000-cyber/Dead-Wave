@@ -284,6 +284,7 @@ class Engine {
         await this.load(); return { ok: true, status: `camera: reloaded in ${this.loadSec.toFixed(1)} s (${this.mode})` };
       case 'check': {   // CL-196: every inspector subject built and pictured, on one sheet, and what broke
         if (this.mode !== 'inspect') throw new Error('check needs the inspector: start the camera with --inspect (or a reload job with "mode": "inspect")');
+        if (req.time) await this.page.evaluate(`(async () => { const name = ${JSON.stringify(String(req.time || ''))}; const named = { midnight:0, night:0.02, dawn:0.26, morning:0.33, noon:0.5, day:0.4, afternoon:0.6, overcast:0.5, dusk:0.74, evening:0.78 }; if (window.TT && TT.setWorldTime) { const v = Object.prototype.hasOwnProperty.call(named, name) ? named[name] : +name; if (Number.isFinite(v)) TT.setWorldTime(v); } if (window.DWInspect && DWInspect.light) await DWInspect.light(name); })()`);
         const r = await this.page.evaluate(`DWInspect.contactSheet(${JSON.stringify({ only: req.only || null, cols: req.cols ?? 8, tile: req.tile ?? 260 })})`, 3600000);
         if (!r.results.length) throw new Error('check: no subjects matched ' + JSON.stringify(req.only || 'all'));
         const dir = path.resolve(ROOT, req.outDir || req.out || 'review/inspector');
@@ -729,7 +730,7 @@ else {
   else if (cmd === 'eval') req = { cmd, code: /\breturn\b/.test(pos[1] || '') ? pos[1] : 'return (' + (pos[1] || 'null') + ')' };
   else if (cmd === 'release') req = { cmd };
   else if (cmd === 'reload') req = { cmd, mode: o.inspect ? 'inspect' : o.match ? 'match' : o.training ? 'training' : o.title ? 'title' : undefined };
-  else if (cmd === 'check') { req = { cmd, only: pos[1] || null, out: o.out ? String(o.out) : undefined, cols: num(o.cols), tile: num(o.tile) }; o.inspect = true; }
+  else if (cmd === 'check') { req = { cmd, only: pos[1] || null, out: o.out ? String(o.out) : undefined, cols: num(o.cols), tile: num(o.tile), time: (o.time != null && o.time !== true) ? String(o.time) : undefined }; o.inspect = true; }
   else { console.error('camera: unknown command ' + cmd + ' (node tools/camera.mjs help)'); process.exit(2); }
   if (req.inspect) o.inspect = true;
   const s = await session();

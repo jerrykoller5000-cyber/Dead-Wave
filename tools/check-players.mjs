@@ -30,6 +30,7 @@ finishScriptedKill snd beginMarineInsertion beginHunt makeKnife updateTentacleKi
 drawFullMap mapEnemyVisible drawMapBlips currentMapMissions updateMarineIdle loopCineCamera resolveTarget ankleIntoHand nearArmory
 devBaseBuild hordeReport devSwarm pulseGuardianFailsafeForTest cineSetup getCaveChase
 stepSetA maybePreRollFromLoop stepLivePreRoll preRollFight stampDebugHooks
+flightTakeSnap flightRestoreSnap flightRecord
 dismountMortar crewFeet crewLateFeet updateMortarCrew
 onMastHigh updateMastClimb poseLadder startMastFall updateMastFall updateZapSmoke runDevCommand promptAnchor
 `.split(/\s+/).filter(Boolean));

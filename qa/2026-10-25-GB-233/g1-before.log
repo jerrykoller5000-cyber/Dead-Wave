@@ -1,0 +1,18 @@
+ERR shot weapon:pistol --view three --time overcast --out qa/2026-10-25-GB-233/before/model-pistol-overcast.png file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/camera.mjs:94
+  const n = Number(value); if (!Number.isFinite(n)) throw new Error(name + ' must be a finite number'); return n;
+                                                          ^
+
+Error: time must be a finite number
+    at finiteNumber (f
+ERR shot weapon:revolver --view three --time overcast --out qa/2026-10-25-GB-233/before/model-revolver-overcast.png file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/camera.mjs:94
+  const n = Number(value); if (!Number.isFinite(n)) throw new Error(name + ' must be a finite number'); return n;
+                                                          ^
+
+Error: time must be a finite number
+    at finiteNumber (f
+ERR shot weapon:uzi --view three --time overcast --out qa/2026-10-25-GB-233/before/model-uzi-overcast.png file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/camera.mjs:94
+  const n = Number(value); if (!Number.isFinite(n)) throw new Error(name + ' must be a finite number'); return n;
+                                                          ^
+
+Error: time must be a finite number
+    at finiteNumber (f

@@ -13,6 +13,7 @@ export const CONCEPT_TYPES = Object.freeze(['shambler','feral','brute','military
 export function prepareConvoySleeperAppearance(T, g) {
   if (!g || g.userData?.convoySleeperLook) return g;
   const clones = new Map(), blue = new T.Color(0x507f8d), glow = new T.Color(0x8beaff);
+  const eyeMaterials = new Set([...(g.userData.eyeMats || []), ...(g.userData.eyes || []).map(e => e.material)]);
   const tinted = (source) => {
     if (!source) return source;
     if (clones.has(source)) return clones.get(source);
@@ -20,7 +21,8 @@ export function prepareConvoySleeperAppearance(T, g) {
     if (m.color) m.color.lerp(blue, m.userData?.surface === 'cloth' ? 0.62 : 0.72);
     if (m.emissive && m.emissive.getHex() !== 0) {
       m.color.lerp(glow, 0.42);
-      m.emissive.copy(glow); m.emissiveIntensity = Math.max(1.5, m.emissiveIntensity || 0);
+      m.emissive.copy(glow); m.emissiveIntensity = Math.max(eyeMaterials.has(source) ? 1.8 : 1.5, m.emissiveIntensity || 0);
+      if (eyeMaterials.has(source)) m.userData.baseEmissive = m.emissiveIntensity;
     }
     return m;
   };
@@ -56,7 +58,7 @@ function remember(T,g,key){
   const parts=[];for(const [bone,p]of Object.entries(bones(u)))for(const m of p.children)if(m.isMesh&&!u.eyes.includes(m)){
     parts.push({bone,geometry:m.geometry,material:copy(m.material),position:m.position.clone(),quaternion:m.quaternion.clone(),scale:m.scale.clone(),compacted:!!m.userData.compacted});
   }
-  const tpl={parts,body:u.bodyMats.map(copy),pulse:u.pulseMats.map(copy),ember:u.emberMat?copy(u.emberMat):null,concept:{...u.concept},eyes:u.eyes.map(e=>({position:e.position.clone(),scale:e.scale.clone(),color:e.material.color.clone(),emissive:e.material.emissive.clone()}))};
+  const tpl={parts,body:u.bodyMats.map(copy),pulse:u.pulseMats.map(copy),ember:u.emberMat?copy(u.emberMat):null,concept:{...u.concept},eyes:u.eyes.map(e=>({position:e.position.clone(),scale:e.scale.clone(),color:e.material.color.clone(),emissive:e.material.emissive.clone(),emissiveIntensity:e.material.emissiveIntensity,baseEmissive:e.material.userData.baseEmissive}))};
   let map=templates.get(T);if(!map){map=new Map();templates.set(T,map);}map.set(key,tpl);
 }
 function restore(T,g,key,k){
@@ -65,7 +67,7 @@ function restore(T,g,key,k){
   stripMeshes(g,new Set(u.eyes));
   for(const p of tpl.parts){const m=new T.Mesh(p.geometry,copy(p.material));m.position.copy(p.position);m.quaternion.copy(p.quaternion);m.scale.copy(p.scale);m.castShadow=true;m.userData.compacted=p.compacted;bs[p.bone].add(m);
     if(p.compacted){if(p.bone.startsWith('leg'))bs[p.bone].userData.thigh=m;if(p.bone.startsWith('arm'))bs[p.bone].userData.upper=m;if(p.bone==='torso')bs.torso.userData.bodyMat=m.material;}}
-  tpl.eyes.forEach((e,i)=>{const eye=u.eyes[i];eye.position.copy(e.position);eye.scale.copy(e.scale);eye.material.color.copy(e.color);eye.material.emissive.copy(e.emissive);eye.material.emissiveIntensity=1.8;});
+  tpl.eyes.forEach((e,i)=>{const eye=u.eyes[i];eye.position.copy(e.position);eye.scale.copy(e.scale);eye.material.color.copy(e.color);eye.material.emissive.copy(e.emissive);eye.material.emissiveIntensity=e.emissiveIntensity;eye.material.userData.baseEmissive=e.baseEmissive;});
   u.bodyMats=tpl.body.map(copy);u.pulseMats=tpl.pulse.map(copy);if(tpl.ember)u.emberMat=copy(tpl.ember);u.concept={...tpl.concept};return true;
 }
 
@@ -197,8 +199,9 @@ export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox}) {
   const shadow=mat(skin.color.clone().multiplyScalar(.49)), pale=mat(skin.color.clone().lerp(new T.Color(0xe6dfc8),.28));
   const wound=mat(0x674137,false,0,'wet'),mouth=mat(0x201b1b),teeth=mat(0xc8bea0,false,0,'bone'),hair=mat(0x27251f,false,0,'root'),cloth=mat(0x49473f,false,0,'cloth');
   const shirt=mat(0xc6bca5,false,0,'cloth'),leather=mat(0x594834,false,0,'leather'),steel=mat(0x494a43,false,.35,'metal'),rust=mat(0x996a43,false,.2,'metal');
-  const moss=mat(k==='drowned'?0x384e35:0x526032,false,0,'root'),glowColor=({screamer:0xf373ce,spider:0xef7ab7,drowned:0xb7edee,demon:0xff991c,colossus:0xffae3b,brute:0xff4228,guardian:0xeaffd2,caveguard:0xbfe9ff})[k]||0xaffe4f;
-  for(const e of u.eyes){e.material.color.set(glowColor);e.material.emissive.set(glowColor);e.material.emissiveIntensity=1.8;e.scale.set(.68,.45,.5);}
+  // D-89: the uncanny's eyes are cold pale-green points, not archetype neon.
+  const moss=mat(k==='drowned'?0x384e35:0x526032,false,0,'root'),glowColor=0x74a18d;
+  for(const e of u.eyes){e.material.color.set(glowColor);e.material.emissive.set(glowColor);e.material.emissiveIntensity=.9;e.material.userData.baseEmissive=.9;e.scale.set(.68,.45,.5);}
   u.pulseMats=[];
   const wide=heavy?.68:acid?.65:k==='screamer'?.35:k==='feral'||k==='leaper'?.4:.48;
   const deep=heavy?.4:acid?.48:.3;
@@ -293,7 +296,14 @@ export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox}) {
     for(const side of [-1,1])path(head,pale,[[side*.135,-.07,.085],[side*.11,-.24,.089],[side*.06,-.33,.06]],.020);
   }
   refineZombieFace(A,T,g,s,k,{skin,shadow,pale,wound,mouth,teeth});
-  if(['shambler','feral','spitter','screamer','drowned'].includes(k)){
+  if(scream){
+    // GP-19971: a close scalp and wet trailing locks leave the brow readable.
+    egg(head,hair,0,.157,-.042,.268,.099,.228);
+    for(const side of [-1,1])for(let i=0;i<3;i++){
+      const x=side*(.075+i*.024),z=-.075+i*.026;
+      path(head,hair,[[x,.175,z],[side*(.124+i*.008),.085,z-.023],[side*(.126-i*.009),-.064-i*.018,z-.042]],.019);
+    }
+  }else if(['shambler','feral','spitter','drowned'].includes(k)){
     egg(head,hair,-.032,.183,-.045,.24,.040,.23);
     for(let i=0;i<(scream?13:9);i++){
       const x=(i%4-1.5)*.060,z=-.105+Math.floor(i/4)*.071;

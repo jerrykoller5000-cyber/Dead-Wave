@@ -1,13 +1,13 @@
 # Grokbot
 
-state: idle
+state: active
 model: Grok Bot
-task: —
-touching: —
-since: 2026-10-24T23:08Z
-next: GB-230 Night 1 all at once (N10). "Night 1 waves too staggered. Nee
+task: GB-236 the grips, the Uzi's first (before shots)
+touching: studio/weapon-sidearms.js (grips), qa/2026-10-26-GB-236/*
+since: 2026-10-26T06:12Z
+next: GB-231 Night 1's push lands sooner (after GB-230). Next. GB-230's o
 blocked-on: —
-last-report: handoffs/2026-10-24-grokbot-GB-231.md
+last-report: handoffs/2026-10-26-grokbot-GB-235.md
 
 ## Notes
 

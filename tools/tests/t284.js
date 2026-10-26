@@ -1,10 +1,10 @@
 // t284 - GB-228 (N11, Jerry: "first person weapon sights not FPS accurate"): aimed in first person, each iron-sighted gun's
 // rear sight top and front sight top land on the screen centre together (modern-shooter alignment). Rear/front tops in the
-// gun's own space from t277 (game/sight-points.js comments). Bar: |ndc y| <= 0.02 for both, |rear - front| <= 0.015.
+// gun's own space from t277 (game/sight-points.js comments); the m4's 'rear' is its holo dot (GB-233). Bar: |ndc y| <= 0.02 for both, |rear - front| <= 0.015.
 (async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const RF = { pistol: [[0,.075,.072],[0,.087,.287]], revolver: [[0,.109,.081],[0,.121,.326]], uzi: [[0,.156,-.087],null],
-    m4: [[0,.168,.004],[0,.138,.673]], ak: [[0,.095,.218],[0,.097,.84]], aa12: [[0,.18,-.12],[0,.175,.75]], launcher: [[0,.123,.053],[0,.102,.65]] };
+    m4: [[0,.134,.0455],[0,.138,.673]], ak: [[0,.095,.218],[0,.097,.84]], aa12: [[0,.18,-.12],[0,.175,.75]], launcher: [[0,.123,.053],[0,.102,.65]] };
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
   try {
     await startMatch(T, 'Sights');

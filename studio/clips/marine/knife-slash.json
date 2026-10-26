@@ -1,17 +1,17 @@
 {
   "format": "dw-hand-path/1",
   "name": "knife-slash",
-  "note": "CU-107: the issue knife. A short cock, a thrust at arm's length, a small cut across, then back to the pose. t is 0..1 of the knife swing (0.22 s). Offsets in his own axes (x out to the knife side, y up, z forward), metres. The arm reaches the point by IK; the blade's turn in the fist is updateKnifeAnim.",
+  "note": "CU-107: the issue knife. A short cock, a thrust at arm's length, a small cut across, then back to the pose. t is 0..1 of the knife swing (0.22 s). Offsets in his own axes (x out to the knife side, y up, z forward), metres. The arm reaches the point by IK; the blade's turn in the fist is updateKnifeAnim. CL-261 part 2, from the CMU strikes 02_05 and 144_20 (the blow lands at or a little under shoulder height, 1.05-1.25 arm lengths past the chest, the arm 92-96% straight): the cock is chambered at the chest, not by the ear; the thrust goes 18 cm further out, 14 cm lower, onto his line; the chest turns and leans into it first (BLADE_BODY), so the shoulder coming through carries the hand there.",
   "places": {
     "rest": "where the pose has the hand this frame (the swing starts and ends there)",
     "chest": "a point in front of his upper chest (torso space 0, 1.22 m, 0.12 m)"
   },
   "hand": [
     { "t": 0.00, "at": "rest" },
-    { "t": 0.14, "at": "chest", "off": [0.16, 0.06, -0.04] },
-    { "t": 0.30, "at": "chest", "off": [0.06, 0.02, 0.22] },
-    { "t": 0.40, "at": "chest", "off": [0.02, -0.01, 0.40] },
-    { "t": 0.58, "at": "chest", "off": [-0.14, -0.06, 0.20] },
+    { "t": 0.14, "at": "chest", "off": [0.16, -0.03, -0.06] },
+    { "t": 0.30, "at": "chest", "off": [0.07, -0.08, 0.32] },
+    { "t": 0.40, "at": "chest", "off": [0.05, -0.15, 0.58] },
+    { "t": 0.58, "at": "chest", "off": [-0.12, -0.14, 0.30] },
     { "t": 1.00, "at": "rest" }
   ]
 }

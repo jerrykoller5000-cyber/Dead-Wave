@@ -1,0 +1,19 @@
+Game-test request 5962fe7c-ac3e-479f-9d0d-78a33d5754c5 queued at position 1. Waiting...
+GRANT grokbot GB-233: starting one game-test command
+check-players: 307 player.position reads, all in the allowed places
+ok    t95      9 pass   0 fail  60.0s
+ok    t215     4 pass   0 fail  42.7s
+FAIL  t284     0 pass   7 fail  94.7s
+
+3 checks: 13 pass, 7 fail
+
+by owner:
+  unassigned
+    t284   7 fail  FAIL pistol aimed: rear -1.878 front -1.870 (ndc y)
+           FAIL pistol aimed: rear -1.878 front -1.870 (ndc y)
+           FAIL revolver aimed: rear -1.826 front -1.816 (ndc y)
+           FAIL uzi aimed: rear -1.925 front - (ndc y)
+           FAIL m4 aimed: rear -1.973 front -1.968 (ndc y)
+           FAIL ak aimed: rear -1.946 front -1.943 (ndc y)
+           FAIL aa12 aimed: rear -1.938 front -1.938 (ndc y)
+           FAIL launcher aimed: rear -1.984 front -1.996 (ndc y)

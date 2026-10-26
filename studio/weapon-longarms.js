@@ -122,8 +122,11 @@ export function makeM4Model(ctx) {
   K.box(0.05, 0.02, 0.11, gunDark, 0, 0.1, 0.0, 0, 0, 0, null, 0.004);
   for (const sx of [-1, 1]) K.slab([[-0.05, 0.108], [0.052, 0.108], [0.05, 0.158], [-0.042, 0.162]], 0.006, gunDark, { x: sx * 0.026, bevel: 0.002 });
   K.box(0.058, 0.01, 0.1, gunDark, 0, 0.163, 0.004, 0, 0, 0, null, 0.003);
-  K.box(0.046, 0.044, 0.003, glassMat, 0, 0.134, 0.045);
-  K.box(0.008, 0.008, 0.004, sightDotMat, 0, 0.134, 0.043);
+  // GB-233: a holographic sight's window is clear glass with a small dot (EOTech-style), not an opaque teal plate with an
+  // 8 mm square: aimed (GB-228) the plate hid the target and the square covered a zombie's head at 30 m.
+  const holoGlass = Object.assign(glassMat.clone(), { transparent: true, opacity: 0.18, depthWrite: false });
+  K.box(0.046, 0.044, 0.003, holoGlass, 0, 0.134, 0.045);
+  K.box(0.0028, 0.0028, 0.002, sightDotMat, 0, 0.134, 0.0455);
   for (const z of [-0.02, 0.0]) K.box(0.008, 0.008, 0.012, gunRubber, 0.03, 0.118, z);
   K.cyl(0.008, 0.008, 0.012, gunMid, -0.032, 0.106, 0.019, null, 10, 'x');
   for (const sx of [-1, 1]) K.cyl(0.004, 0.004, 0.003, gunMid, sx * 0.03, 0.124, 0.033, null, 6, 'x');

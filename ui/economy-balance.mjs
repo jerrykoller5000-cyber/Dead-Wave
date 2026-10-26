@@ -3,13 +3,18 @@
 import fs from 'node:fs';import vm from 'node:vm';import {fileURLToPath} from 'node:url';
 import {equipmentPrice,equipmentStocked} from '../game/economy.js';
 const source=fs.readFileSync(fileURLToPath(new URL('../index.html',import.meta.url)),'utf8');
-function literal(name){const match=source.match(new RegExp('const '+name+' = ([\\s\\S]*?);(?:[ \\t]*//[^\\r\\n]*)?\\r?\\n'));if(!match)throw Error('Missing '+name);return vm.runInNewContext('('+match[1]+')',{}, {timeout:1000});}
-const plan=literal('NIGHT_PLAN'),types=literal('ZOMBIE_TYPES'),weapons=literal('WEAPON_STATS'),ammo=literal('AMMO_PACK');
+function literal(name, extra){const match=source.match(new RegExp('const '+name+' = ([\\s\\S]*?);(?:[ \\t]*//[^\\r\\n]*)?\\r?\\n'));if(!match)throw Error('Missing '+name);return vm.runInNewContext('('+match[1]+')', extra || {}, {timeout:1000});}
+const pace=literal('ZOMBIE_PACE');
+const plan=literal('NIGHT_PLAN'),types=literal('ZOMBIE_TYPES', { ZOMBIE_PACE: pace }),weapons=literal('WEAPON_STATS'),ammo=literal('AMMO_PACK');
 const gunPrices=literal('WEAPON_PRICE'),buildPrices=literal('BUILD_UNLOCK_PRICE'),placement=literal('COST'),magPrices=literal('EXT_MAG_PRICE'),heavyPrices=literal('HEAVY_BARREL_PRICE'),suppressorPrices=literal('SUPPRESSOR_PRICE'),upgrades=literal('UPGRADE_TRACKS');
 const gear=literal('GEAR'),medicalPrice=literal('MEDKIT_PRICE');
-const lateCashRule=source.match(/const LATE_CASH_NIGHT = (\d+), LATE_CASH_FACTOR = ([\d.]+);/);
+const lateCashRule=source.match(/const LATE_CASH_NIGHT = (\d+), LATE_CASH_FACTOR = ([\d.]+)(?:, LATE_CASH_STEP = ([\d.]+))?;/);
 if(!lateCashRule)throw Error('Missing late kill-payout rule');
-const lateCashNight=Number(lateCashRule[1]),lateCashFactor=Number(lateCashRule[2]);
+const lateCashNight=Number(lateCashRule[1]),lateCashFactor=Number(lateCashRule[2]),lateCashStep=lateCashRule[3]==null?null:Number(lateCashRule[3]);
+function lateCashMul(night){
+ if(lateCashStep==null)return night>=lateCashNight?lateCashFactor:1;
+ return Math.max(lateCashFactor,1-lateCashStep*Math.max(0,night-(lateCashNight-1)));
+}
 function opportunity(n,next){
  const gun=k=>equipmentPrice(gunPrices[k],next),kit=k=>equipmentPrice(gear.find(g=>g.key===k).cost,next);
  const tier=(k,n,parts)=>upgrades[k].bp[n]+parts*upgrades[k].cost[n];
@@ -22,9 +27,9 @@ function opportunity(n,next){
   ['Launcher + M4 suppressor (with full launcher ammo)',gun('launcher')+suppressorPrices.m4,'launcher'],['AA-12 (with full ammo)',gun('aa12'),'aa12'],['Flamethrower and tank',gun('flamer')+85,'flamer'],
   ['Minigun (with full ammo)',gun('minigun'),'minigun'],['Heavy Mk III plans + four upgrades',tier('heavy',2,4)],
   ['Stone wall plans + twelve upgrades',tier('wall',2,12)],
-  ['Mortar plans + two mortars + Mk II plans and upgrades',buildPrices.mortar+2*placement.mortar+tier('mortar',1,2)],
-  ['Four mortars + eight shells + four Mk II upgrades',4*placement.mortar+2*ammo['60mm'].cost+4*upgrades.mortar.cost[1]],
-  ['Mortar Mk III plans + four upgrades; eight heavy Mk III turrets',tier('mortar',2,4)+8*(placement.heavy+upgrades.heavy.cost[2])]
+  ['Mortar plans + two mortars',buildPrices.mortar+2*placement.mortar]   /* GB-234: the mortar has no upgrades (D-91) */,
+  ['Four mortars + eight shells',4*placement.mortar+2*ammo['60mm'].cost],
+  ['Eight heavy Mk III turrets',8*(placement.heavy+upgrades.heavy.cost[2])]
  ][n];
 }
 const rows=[];let carriedCash=0;
@@ -39,7 +44,7 @@ for(let night=1;night<=20;night++){
  const bankedBeforeTrim=night===1?15:Math.floor(raw*(ember?1.5:1)*.95);
  // GB-113 trims kill skulls on nights 11+, before any other payout multipliers.
  // The exact in-game rounding is per kill; this aggregate is a planning estimate.
- const banked=night>=lateCashNight?Math.floor(bankedBeforeTrim*lateCashFactor):bankedBeforeTrim;
+ const banked=Math.floor(bankedBeforeTrim*lateCashMul(night));
  const weapon=night<7?'pistol':'ak',pack=ammo[night<7?'.45':'7.62mm'];
  // Mean health roll and toughest ordinary cave role, body hits, armour,
  // 65% accuracy. No headshots, piercing, blast/area kills, melee or earned skills.

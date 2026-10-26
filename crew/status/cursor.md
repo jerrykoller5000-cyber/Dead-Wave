@@ -4,12 +4,14 @@ state: idle
 model: Grok 4.7
 task: —
 touching: —
-since: 2026-10-25T00:04Z
+since: 2026-10-26T06:27Z
 next: —
 blocked-on: —
-last-report: handoffs/2026-10-25-cursor-CU-159.md
+last-report: handoffs/2026-10-26-cursor-CU-162.md
 
 ## Notes
+
+2026-10-25 Jerry: start the next board task and answer requests without asking him first.
 
 2026-10-09 CU-98/99/100 (Jerry, direct: the boots, turning in place, the hands): done, not committed. Files: studio/marine-body.js (shinShaft; the wrist), studio/marine-turn.js + test, studio/marine-idle.js (ud.idleSway), index.html (holdHand/fistPointW/foreDrop/WRIST in the weapon hold, solveArmIK's ease-back, restWrists in updateMarinePose), tools/posesheet.mjs, tools/realtest.mjs, tools/tests/t227.js, t228.js (new), t187/t188/t195/t218 (read the game's grip points), review/boots, review/turn, review/hands. Lessons: never sed -i index.html (it stripped its CRLF; restored with Node); the test build's three never copies a quaternion into .rotation, so a later Euler write (+=) throws an IK pose away there (that is how t226 caught the idle bug); hand/arm/foot checks need tools/realtest.mjs. Found, not fixed: the bored idle leans the torso after the hold (barrel 3-5 deg off: t188's five fails); t188's chainsaw.
 

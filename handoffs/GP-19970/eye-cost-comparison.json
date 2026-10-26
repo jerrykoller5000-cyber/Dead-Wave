@@ -1,0 +1,1291 @@
+{
+  "summary": {
+    "shots": 64,
+    "unchanged": 64,
+    "changed": [],
+    "beforeErrors": [],
+    "afterErrors": []
+  },
+  "rows": [
+    {
+      "key": "noon/shambler.png",
+      "before": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 5008,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "after": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 5008,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "same": true
+    },
+    {
+      "key": "noon/feral.png",
+      "before": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 4780,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "after": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 4780,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "same": true
+    },
+    {
+      "key": "noon/leaper.png",
+      "before": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 4594,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "after": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 4594,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "same": true
+    },
+    {
+      "key": "noon/spider.png",
+      "before": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 3794,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "after": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 3794,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "same": true
+    },
+    {
+      "key": "noon/drowned.png",
+      "before": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 5684,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "after": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 5684,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "same": true
+    },
+    {
+      "key": "noon/military.png",
+      "before": {
+        "meshes": 2,
+        "drawables": 2,
+        "tris": 5952,
+        "points": 0,
+        "segments": 0,
+        "materials": 2
+      },
+      "after": {
+        "meshes": 2,
+        "drawables": 2,
+        "tris": 5952,
+        "points": 0,
+        "segments": 0,
+        "materials": 2
+      },
+      "same": true
+    },
+    {
+      "key": "noon/brute.png",
+      "before": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 5896,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "after": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 5896,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "same": true
+    },
+    {
+      "key": "noon/spitter.png",
+      "before": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 5228,
+        "points": 0,
+        "segments": 0,
+        "materials": 2
+      },
+      "after": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 5228,
+        "points": 0,
+        "segments": 0,
+        "materials": 2
+      },
+      "same": true
+    },
+    {
+      "key": "noon/screamer.png",
+      "before": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 5676,
+        "points": 0,
+        "segments": 0,
+        "materials": 3
+      },
+      "after": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 5676,
+        "points": 0,
+        "segments": 0,
+        "materials": 3
+      },
+      "same": true
+    },
+    {
+      "key": "noon/bomber.png",
+      "before": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 5936,
+        "points": 0,
+        "segments": 0,
+        "materials": 3
+      },
+      "after": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 5936,
+        "points": 0,
+        "segments": 0,
+        "materials": 3
+      },
+      "same": true
+    },
+    {
+      "key": "noon/demon.png",
+      "before": {
+        "meshes": 2,
+        "drawables": 2,
+        "tris": 5672,
+        "points": 0,
+        "segments": 0,
+        "materials": 2
+      },
+      "after": {
+        "meshes": 2,
+        "drawables": 2,
+        "tris": 5672,
+        "points": 0,
+        "segments": 0,
+        "materials": 2
+      },
+      "same": true
+    },
+    {
+      "key": "noon/colossus.png",
+      "before": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 6800,
+        "points": 0,
+        "segments": 0,
+        "materials": 3
+      },
+      "after": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 6800,
+        "points": 0,
+        "segments": 0,
+        "materials": 3
+      },
+      "same": true
+    },
+    {
+      "key": "noon/guardian.png",
+      "before": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 4180,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "after": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 4180,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "same": true
+    },
+    {
+      "key": "noon/caveguard.png",
+      "before": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 4180,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "after": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 4180,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "same": true
+    },
+    {
+      "key": "noon/cave-guardian-wet.png",
+      "before": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 11878,
+        "points": 0,
+        "segments": 0,
+        "materials": 2
+      },
+      "after": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 11878,
+        "points": 0,
+        "segments": 0,
+        "materials": 2
+      },
+      "same": true
+    },
+    {
+      "key": "noon/cave-guardian-iron.png",
+      "before": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 11878,
+        "points": 0,
+        "segments": 0,
+        "materials": 2
+      },
+      "after": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 11878,
+        "points": 0,
+        "segments": 0,
+        "materials": 2
+      },
+      "same": true
+    },
+    {
+      "key": "overcast/shambler.png",
+      "before": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 5008,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "after": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 5008,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "same": true
+    },
+    {
+      "key": "overcast/feral.png",
+      "before": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 4780,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "after": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 4780,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "same": true
+    },
+    {
+      "key": "overcast/leaper.png",
+      "before": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 4594,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "after": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 4594,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "same": true
+    },
+    {
+      "key": "overcast/spider.png",
+      "before": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 3794,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "after": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 3794,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "same": true
+    },
+    {
+      "key": "overcast/drowned.png",
+      "before": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 5684,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "after": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 5684,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "same": true
+    },
+    {
+      "key": "overcast/military.png",
+      "before": {
+        "meshes": 2,
+        "drawables": 2,
+        "tris": 5952,
+        "points": 0,
+        "segments": 0,
+        "materials": 2
+      },
+      "after": {
+        "meshes": 2,
+        "drawables": 2,
+        "tris": 5952,
+        "points": 0,
+        "segments": 0,
+        "materials": 2
+      },
+      "same": true
+    },
+    {
+      "key": "overcast/brute.png",
+      "before": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 5896,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "after": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 5896,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "same": true
+    },
+    {
+      "key": "overcast/spitter.png",
+      "before": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 5228,
+        "points": 0,
+        "segments": 0,
+        "materials": 2
+      },
+      "after": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 5228,
+        "points": 0,
+        "segments": 0,
+        "materials": 2
+      },
+      "same": true
+    },
+    {
+      "key": "overcast/screamer.png",
+      "before": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 5676,
+        "points": 0,
+        "segments": 0,
+        "materials": 3
+      },
+      "after": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 5676,
+        "points": 0,
+        "segments": 0,
+        "materials": 3
+      },
+      "same": true
+    },
+    {
+      "key": "overcast/bomber.png",
+      "before": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 5936,
+        "points": 0,
+        "segments": 0,
+        "materials": 3
+      },
+      "after": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 5936,
+        "points": 0,
+        "segments": 0,
+        "materials": 3
+      },
+      "same": true
+    },
+    {
+      "key": "overcast/demon.png",
+      "before": {
+        "meshes": 2,
+        "drawables": 2,
+        "tris": 5672,
+        "points": 0,
+        "segments": 0,
+        "materials": 2
+      },
+      "after": {
+        "meshes": 2,
+        "drawables": 2,
+        "tris": 5672,
+        "points": 0,
+        "segments": 0,
+        "materials": 2
+      },
+      "same": true
+    },
+    {
+      "key": "overcast/colossus.png",
+      "before": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 6800,
+        "points": 0,
+        "segments": 0,
+        "materials": 3
+      },
+      "after": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 6800,
+        "points": 0,
+        "segments": 0,
+        "materials": 3
+      },
+      "same": true
+    },
+    {
+      "key": "overcast/guardian.png",
+      "before": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 4180,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "after": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 4180,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "same": true
+    },
+    {
+      "key": "overcast/caveguard.png",
+      "before": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 4180,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "after": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 4180,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "same": true
+    },
+    {
+      "key": "overcast/cave-guardian-wet.png",
+      "before": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 11878,
+        "points": 0,
+        "segments": 0,
+        "materials": 2
+      },
+      "after": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 11878,
+        "points": 0,
+        "segments": 0,
+        "materials": 2
+      },
+      "same": true
+    },
+    {
+      "key": "overcast/cave-guardian-iron.png",
+      "before": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 11878,
+        "points": 0,
+        "segments": 0,
+        "materials": 2
+      },
+      "after": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 11878,
+        "points": 0,
+        "segments": 0,
+        "materials": 2
+      },
+      "same": true
+    },
+    {
+      "key": "dusk/shambler.png",
+      "before": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 5008,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "after": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 5008,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "same": true
+    },
+    {
+      "key": "dusk/feral.png",
+      "before": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 4780,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "after": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 4780,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "same": true
+    },
+    {
+      "key": "dusk/leaper.png",
+      "before": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 4594,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "after": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 4594,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "same": true
+    },
+    {
+      "key": "dusk/spider.png",
+      "before": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 3794,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "after": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 3794,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "same": true
+    },
+    {
+      "key": "dusk/drowned.png",
+      "before": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 5684,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "after": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 5684,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "same": true
+    },
+    {
+      "key": "dusk/military.png",
+      "before": {
+        "meshes": 2,
+        "drawables": 2,
+        "tris": 5952,
+        "points": 0,
+        "segments": 0,
+        "materials": 2
+      },
+      "after": {
+        "meshes": 2,
+        "drawables": 2,
+        "tris": 5952,
+        "points": 0,
+        "segments": 0,
+        "materials": 2
+      },
+      "same": true
+    },
+    {
+      "key": "dusk/brute.png",
+      "before": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 5896,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "after": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 5896,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "same": true
+    },
+    {
+      "key": "dusk/spitter.png",
+      "before": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 5228,
+        "points": 0,
+        "segments": 0,
+        "materials": 2
+      },
+      "after": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 5228,
+        "points": 0,
+        "segments": 0,
+        "materials": 2
+      },
+      "same": true
+    },
+    {
+      "key": "dusk/screamer.png",
+      "before": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 5676,
+        "points": 0,
+        "segments": 0,
+        "materials": 3
+      },
+      "after": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 5676,
+        "points": 0,
+        "segments": 0,
+        "materials": 3
+      },
+      "same": true
+    },
+    {
+      "key": "dusk/bomber.png",
+      "before": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 5936,
+        "points": 0,
+        "segments": 0,
+        "materials": 3
+      },
+      "after": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 5936,
+        "points": 0,
+        "segments": 0,
+        "materials": 3
+      },
+      "same": true
+    },
+    {
+      "key": "dusk/demon.png",
+      "before": {
+        "meshes": 2,
+        "drawables": 2,
+        "tris": 5672,
+        "points": 0,
+        "segments": 0,
+        "materials": 2
+      },
+      "after": {
+        "meshes": 2,
+        "drawables": 2,
+        "tris": 5672,
+        "points": 0,
+        "segments": 0,
+        "materials": 2
+      },
+      "same": true
+    },
+    {
+      "key": "dusk/colossus.png",
+      "before": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 6800,
+        "points": 0,
+        "segments": 0,
+        "materials": 3
+      },
+      "after": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 6800,
+        "points": 0,
+        "segments": 0,
+        "materials": 3
+      },
+      "same": true
+    },
+    {
+      "key": "dusk/guardian.png",
+      "before": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 4180,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "after": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 4180,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "same": true
+    },
+    {
+      "key": "dusk/caveguard.png",
+      "before": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 4180,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "after": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 4180,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "same": true
+    },
+    {
+      "key": "dusk/cave-guardian-wet.png",
+      "before": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 11878,
+        "points": 0,
+        "segments": 0,
+        "materials": 2
+      },
+      "after": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 11878,
+        "points": 0,
+        "segments": 0,
+        "materials": 2
+      },
+      "same": true
+    },
+    {
+      "key": "dusk/cave-guardian-iron.png",
+      "before": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 11878,
+        "points": 0,
+        "segments": 0,
+        "materials": 2
+      },
+      "after": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 11878,
+        "points": 0,
+        "segments": 0,
+        "materials": 2
+      },
+      "same": true
+    },
+    {
+      "key": "night/shambler.png",
+      "before": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 5008,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "after": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 5008,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "same": true
+    },
+    {
+      "key": "night/feral.png",
+      "before": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 4780,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "after": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 4780,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "same": true
+    },
+    {
+      "key": "night/leaper.png",
+      "before": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 4594,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "after": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 4594,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "same": true
+    },
+    {
+      "key": "night/spider.png",
+      "before": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 3794,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "after": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 3794,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "same": true
+    },
+    {
+      "key": "night/drowned.png",
+      "before": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 5684,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "after": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 5684,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "same": true
+    },
+    {
+      "key": "night/military.png",
+      "before": {
+        "meshes": 2,
+        "drawables": 2,
+        "tris": 5952,
+        "points": 0,
+        "segments": 0,
+        "materials": 2
+      },
+      "after": {
+        "meshes": 2,
+        "drawables": 2,
+        "tris": 5952,
+        "points": 0,
+        "segments": 0,
+        "materials": 2
+      },
+      "same": true
+    },
+    {
+      "key": "night/brute.png",
+      "before": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 5896,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "after": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 5896,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "same": true
+    },
+    {
+      "key": "night/spitter.png",
+      "before": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 5228,
+        "points": 0,
+        "segments": 0,
+        "materials": 2
+      },
+      "after": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 5228,
+        "points": 0,
+        "segments": 0,
+        "materials": 2
+      },
+      "same": true
+    },
+    {
+      "key": "night/screamer.png",
+      "before": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 5676,
+        "points": 0,
+        "segments": 0,
+        "materials": 3
+      },
+      "after": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 5676,
+        "points": 0,
+        "segments": 0,
+        "materials": 3
+      },
+      "same": true
+    },
+    {
+      "key": "night/bomber.png",
+      "before": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 5936,
+        "points": 0,
+        "segments": 0,
+        "materials": 3
+      },
+      "after": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 5936,
+        "points": 0,
+        "segments": 0,
+        "materials": 3
+      },
+      "same": true
+    },
+    {
+      "key": "night/demon.png",
+      "before": {
+        "meshes": 2,
+        "drawables": 2,
+        "tris": 5672,
+        "points": 0,
+        "segments": 0,
+        "materials": 2
+      },
+      "after": {
+        "meshes": 2,
+        "drawables": 2,
+        "tris": 5672,
+        "points": 0,
+        "segments": 0,
+        "materials": 2
+      },
+      "same": true
+    },
+    {
+      "key": "night/colossus.png",
+      "before": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 6800,
+        "points": 0,
+        "segments": 0,
+        "materials": 3
+      },
+      "after": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 6800,
+        "points": 0,
+        "segments": 0,
+        "materials": 3
+      },
+      "same": true
+    },
+    {
+      "key": "night/guardian.png",
+      "before": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 4180,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "after": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 4180,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "same": true
+    },
+    {
+      "key": "night/caveguard.png",
+      "before": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 4180,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "after": {
+        "meshes": 1,
+        "drawables": 1,
+        "tris": 4180,
+        "points": 0,
+        "segments": 0,
+        "materials": 1
+      },
+      "same": true
+    },
+    {
+      "key": "night/cave-guardian-wet.png",
+      "before": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 11878,
+        "points": 0,
+        "segments": 0,
+        "materials": 2
+      },
+      "after": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 11878,
+        "points": 0,
+        "segments": 0,
+        "materials": 2
+      },
+      "same": true
+    },
+    {
+      "key": "night/cave-guardian-iron.png",
+      "before": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 11878,
+        "points": 0,
+        "segments": 0,
+        "materials": 2
+      },
+      "after": {
+        "meshes": 3,
+        "drawables": 3,
+        "tris": 11878,
+        "points": 0,
+        "segments": 0,
+        "materials": 2
+      },
+      "same": true
+    }
+  ]
+}

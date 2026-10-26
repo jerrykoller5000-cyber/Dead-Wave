@@ -212,7 +212,7 @@ function animals(c) {
 }
 
 // --- props and vehicles -------------------------------------------------------------------------------------------
-const BUILD_KINDS = ['wall', 'floor', 'barricade', 'sandbag', 'wire', 'railing', 'platform', 'pillar', 'stairs', 'spikes', 'mine', 'lure', 'light', 'flame', 'heavy', 'mortar'];
+const BUILD_KINDS = ['wall', 'floor', 'barricade', 'sandbag', 'wire', 'railing', 'platform', 'pillar', 'stairs', 'spikes', 'mine', 'lure', 'light', 'flame', 'heavy'];   // GB-234: the mortar has no tiers now; it shows as weapon.mortar
 function props(c) {
   const D = c.D, tracks = D.UPGRADE_TRACKS || {};
   const out = [];

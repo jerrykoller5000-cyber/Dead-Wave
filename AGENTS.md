@@ -205,7 +205,8 @@ card in `crew/status/`, appends to `crew/LOG.md`, and writes their own handoff n
     the 0-5 table). Never judge a model from code or numbers alone: render it and look, from several angles, in the four
     lights (noon, overcast, dusk, night), at gameplay scale, in three passes (geometry, materials, context). The
     handoff names the family, the shots and the scores (4 or more each). Sound and the UI have theirs too:
-    `docs/sound-principles.md` and `docs/ui-principles.md` (drafts for Jerry's review).
+    `docs/sound-principles.md` and `docs/ui-principles.md` (approved, D-92; a sound plays only if it's immersive or
+    impactful).
 
 ## Playing to strengths
 

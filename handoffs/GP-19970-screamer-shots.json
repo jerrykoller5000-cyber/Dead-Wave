@@ -1,0 +1,9 @@
+{
+  "shots": [
+    { "target": "zombie:screamer", "view": "three", "time": "noon", "caption": "Screamer · noon", "out": "handoffs/GP-19970-shots/screamer-noon.png" },
+    { "target": "zombie:screamer", "view": "three", "time": "dusk", "caption": "Screamer · dusk", "out": "handoffs/GP-19970-shots/screamer-dusk.png" },
+    { "target": "zombie:screamer", "view": "three", "time": "night", "caption": "Screamer · night", "out": "handoffs/GP-19970-shots/screamer-night.png" }
+  ],
+  "out": "handoffs/GP-19970-shots",
+  "cols": 3
+}

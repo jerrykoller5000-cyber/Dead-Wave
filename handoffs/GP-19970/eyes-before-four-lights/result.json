@@ -1,0 +1,3495 @@
+{
+  "results": [
+    {
+      "light": "noon",
+      "ok": true,
+      "shots": [
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/noon/shambler.png",
+          "cam": {
+            "x": -23.091559538281906,
+            "y": -197.02066379255209,
+            "z": -628.5338556309011,
+            "tx": -26,
+            "ty": -199.03520343761522,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Shambler (statue)",
+          "ms": 1125,
+          "caption": "shambler / noon"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/noon/feral.png",
+          "cam": {
+            "x": -23.538396995188997,
+            "y": -197.59607107750494,
+            "z": -629.0663757754758,
+            "tx": -26,
+            "ty": -199.30110747376966,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Feral (statue)",
+          "ms": 711,
+          "caption": "feral / noon"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/noon/leaper.png",
+          "cam": {
+            "x": -23.294206409468664,
+            "y": -197.73979674728992,
+            "z": -628.7753607676659,
+            "tx": -26,
+            "ty": -199.61397245459082,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Leaper (statue)",
+          "ms": 736,
+          "caption": "leaper / noon"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/noon/spider.png",
+          "cam": {
+            "x": -23.120993738286106,
+            "y": -197.57257260190434,
+            "z": -628.5689339445013,
+            "tx": -26,
+            "ty": -199.56672456373667,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Spider (statue)",
+          "ms": 719,
+          "caption": "spider / noon"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/noon/drowned.png",
+          "cam": {
+            "x": -23.298957901906075,
+            "y": -197.20877639854768,
+            "z": -628.7810233758483,
+            "tx": -26,
+            "ty": -199.0796609709554,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Drowned (statue)",
+          "ms": 721,
+          "caption": "drowned / noon"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/noon/military.png",
+          "cam": {
+            "x": -22.835503565367734,
+            "y": -196.77005027944793,
+            "z": -628.2287000052754,
+            "tx": -26,
+            "ty": -198.9619478300898,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Military (statue)",
+          "ms": 660,
+          "caption": "military / noon"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/noon/brute.png",
+          "cam": {
+            "x": -21.87322443462651,
+            "y": -195.86259420009074,
+            "z": -627.0819003941361,
+            "tx": -26,
+            "ty": -198.72101715636182,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Brute (statue)",
+          "ms": 784,
+          "caption": "brute / noon"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/noon/spitter.png",
+          "cam": {
+            "x": -23.091385903902733,
+            "y": -197.02354749961734,
+            "z": -628.533648701506,
+            "tx": -26,
+            "ty": -199.03820741303224,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Spitter (statue)",
+          "ms": 672,
+          "caption": "spitter / noon"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/noon/screamer.png",
+          "cam": {
+            "x": -21.81164961233103,
+            "y": -196.27666878639542,
+            "z": -627.0085183784522,
+            "tx": -26,
+            "ty": -199.1777417203039,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Screamer (statue)",
+          "ms": 651,
+          "caption": "screamer / noon"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/noon/bomber.png",
+          "cam": {
+            "x": -21.949733495705175,
+            "y": -196.10068423572983,
+            "z": -627.1730803425427,
+            "tx": -26,
+            "ty": -198.90611297094733,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Bomber (statue)",
+          "ms": 669,
+          "caption": "bomber / noon"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/noon/demon.png",
+          "cam": {
+            "x": -20.83595094302157,
+            "y": -194.7789232415722,
+            "z": -625.8457259840133,
+            "tx": -26,
+            "ty": -198.35581666306877,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Demon (statue)",
+          "ms": 809,
+          "caption": "demon / noon"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/noon/colossus.png",
+          "cam": {
+            "x": -17.455735874505045,
+            "y": -191.61767475726182,
+            "z": -621.8173425323675,
+            "tx": -26,
+            "ty": -197.53588386116496,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Colossus (statue)",
+          "ms": 851,
+          "caption": "colossus / noon"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/noon/guardian.png",
+          "cam": {
+            "x": -20.72894375720296,
+            "y": -194.53514515969954,
+            "z": -625.7181997858805,
+            "tx": -26,
+            "ty": -198.1861574160066,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Guardian (statue)",
+          "ms": 782,
+          "caption": "guardian / noon"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/noon/caveguard.png",
+          "cam": {
+            "x": -21.6569874485187,
+            "y": -195.58098363649384,
+            "z": -626.8241991890905,
+            "tx": -26,
+            "ty": -198.58918376268707,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Cave Guardian (statue)",
+          "ms": 748,
+          "caption": "caveguard / noon"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/noon/cave-guardian-wet.png",
+          "cam": {
+            "x": -19.05354405995639,
+            "y": -193.09563686670506,
+            "z": -622.2841309803332,
+            "tx": -26,
+            "ty": -197.90711953863692,
+            "tz": -630.5625948026776,
+            "fov": 35
+          },
+          "label": "Cave guardian (wet)",
+          "ms": 873,
+          "caption": "Cave guardian wet / noon"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/noon/cave-guardian-iron.png",
+          "cam": {
+            "x": -19.053771904607558,
+            "y": -193.09606350946618,
+            "z": -622.2844025150148,
+            "tx": -26,
+            "ty": -197.90738836414556,
+            "tz": -630.5625948026776,
+            "fov": 35
+          },
+          "label": "Cave guardian (iron)",
+          "ms": 832,
+          "caption": "Cave guardian iron / noon"
+        }
+      ],
+      "sheet": "handoffs/GP-19970/eyes-before-four-lights/noon/sheet.jpg",
+      "ms": 12436
+    },
+    {
+      "light": "overcast",
+      "ok": true,
+      "shots": [
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/overcast/shambler.png",
+          "cam": {
+            "x": -23.225695025875424,
+            "y": -197.1850949395509,
+            "z": -628.693712080135,
+            "tx": -26,
+            "ty": -199.10672525360872,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Shambler (statue)",
+          "ms": 608,
+          "caption": "shambler / overcast"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/overcast/feral.png",
+          "cam": {
+            "x": -23.443058725815906,
+            "y": -197.48178030068453,
+            "z": -628.9527560504387,
+            "tx": -26,
+            "ty": -199.25285302324568,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Feral (statue)",
+          "ms": 690,
+          "caption": "feral / overcast"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/overcast/leaper.png",
+          "cam": {
+            "x": -23.368781473577815,
+            "y": -197.82985815766287,
+            "z": -628.8642358682359,
+            "tx": -26,
+            "ty": -199.65237923246968,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Leaper (statue)",
+          "ms": 689,
+          "caption": "leaper / overcast"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/overcast/spider.png",
+          "cam": {
+            "x": -23.260802700787742,
+            "y": -197.65124272499173,
+            "z": -628.7355517778394,
+            "tx": -26,
+            "ty": -199.5485556071173,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Spider (statue)",
+          "ms": 704,
+          "caption": "spider / overcast"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/overcast/drowned.png",
+          "cam": {
+            "x": -23.192012095194734,
+            "y": -197.08611599759425,
+            "z": -628.6535703264873,
+            "tx": -26,
+            "ty": -199.03107689039737,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Drowned (statue)",
+          "ms": 724,
+          "caption": "drowned / overcast"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/overcast/military.png",
+          "cam": {
+            "x": -22.942604014232387,
+            "y": -196.89014251176224,
+            "z": -628.3563373499783,
+            "tx": -26,
+            "ty": -199.00785662867673,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Military (statue)",
+          "ms": 622,
+          "caption": "military / overcast"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/overcast/brute.png",
+          "cam": {
+            "x": -21.583636089973517,
+            "y": -195.57076900638887,
+            "z": -626.7367824440225,
+            "tx": -26,
+            "ty": -198.62977616190022,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Brute (statue)",
+          "ms": 734,
+          "caption": "brute / overcast"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/overcast/spitter.png",
+          "cam": {
+            "x": -23.129984009461985,
+            "y": -197.07187233242868,
+            "z": -628.5796481324735,
+            "tx": -26,
+            "ty": -199.05979715709177,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Spitter (statue)",
+          "ms": 613,
+          "caption": "spitter / overcast"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/overcast/screamer.png",
+          "cam": {
+            "x": -21.55447168892881,
+            "y": -196.04660443457027,
+            "z": -626.7020256643017,
+            "tx": -26,
+            "ty": -199.1258123962877,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Screamer (statue)",
+          "ms": 767,
+          "caption": "screamer / overcast"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/overcast/bomber.png",
+          "cam": {
+            "x": -22.106414350798268,
+            "y": -196.25238016617018,
+            "z": -627.3598053144906,
+            "tx": -26,
+            "ty": -198.94928345678534,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Bomber (statue)",
+          "ms": 745,
+          "caption": "bomber / overcast"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/overcast/demon.png",
+          "cam": {
+            "x": -20.82872105871877,
+            "y": -194.7626738422298,
+            "z": -625.8371097434214,
+            "tx": -26,
+            "ty": -198.34457506386838,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Demon (statue)",
+          "ms": 741,
+          "caption": "demon / overcast"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/overcast/colossus.png",
+          "cam": {
+            "x": -17.47095052908997,
+            "y": -191.63576501297482,
+            "z": -621.8354746516292,
+            "tx": -26,
+            "ty": -197.5434356426507,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Colossus (statue)",
+          "ms": 816,
+          "caption": "colossus / overcast"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/overcast/guardian.png",
+          "cam": {
+            "x": -20.84881542372765,
+            "y": -194.66344013180247,
+            "z": -625.8610572751115,
+            "tx": -26,
+            "ty": -198.23142293376372,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Guardian (statue)",
+          "ms": 749,
+          "caption": "guardian / overcast"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/overcast/caveguard.png",
+          "cam": {
+            "x": -21.423761348262335,
+            "y": -195.3463325211142,
+            "z": -626.5462511462232,
+            "tx": -26,
+            "ty": -198.51607737597357,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Cave Guardian (statue)",
+          "ms": 742,
+          "caption": "caveguard / overcast"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/overcast/cave-guardian-wet.png",
+          "cam": {
+            "x": -19.05378842078928,
+            "y": -193.0960944235178,
+            "z": -622.2844221982338,
+            "tx": -26,
+            "ty": -197.90740783821644,
+            "tz": -630.5625948026776,
+            "fov": 35
+          },
+          "label": "Cave guardian (wet)",
+          "ms": 781,
+          "caption": "Cave guardian wet / overcast"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/overcast/cave-guardian-iron.png",
+          "cam": {
+            "x": -19.054158829028914,
+            "y": -193.09678728124578,
+            "z": -622.284863633584,
+            "tx": -26,
+            "ty": -197.90784413161265,
+            "tz": -630.5625948026776,
+            "fov": 35
+          },
+          "label": "Cave guardian (iron)",
+          "ms": 792,
+          "caption": "Cave guardian iron / overcast"
+        }
+      ],
+      "sheet": "handoffs/GP-19970/eyes-before-four-lights/overcast/sheet.jpg",
+      "ms": 11564
+    },
+    {
+      "light": "dusk",
+      "ok": true,
+      "shots": [
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/dusk/shambler.png",
+          "cam": {
+            "x": -23.33183665208771,
+            "y": -197.27564219518,
+            "z": -628.8202067444973,
+            "tx": -26,
+            "ty": -199.1237532067764,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Shambler (statue)",
+          "ms": 686,
+          "caption": "shambler / dusk"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/dusk/feral.png",
+          "cam": {
+            "x": -23.45440878566958,
+            "y": -197.49572683874666,
+            "z": -628.9662825250455,
+            "tx": -26,
+            "ty": -199.25893790972856,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Feral (statue)",
+          "ms": 577,
+          "caption": "feral / dusk"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/dusk/leaper.png",
+          "cam": {
+            "x": -23.279755844596366,
+            "y": -197.74126984518057,
+            "z": -628.7581392550643,
+            "tx": -26,
+            "ty": -199.62545477777317,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Leaper (statue)",
+          "ms": 692,
+          "caption": "leaper / dusk"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/dusk/spider.png",
+          "cam": {
+            "x": -23.135824690364398,
+            "y": -197.51485406451138,
+            "z": -628.5866087849222,
+            "tx": -26,
+            "ty": -199.4987333247605,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Spider (statue)",
+          "ms": 678,
+          "caption": "spider / dusk"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/dusk/drowned.png",
+          "cam": {
+            "x": -23.14732565702415,
+            "y": -197.04790565899555,
+            "z": -628.6003151032572,
+            "tx": -26,
+            "ty": -199.02381874163243,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Drowned (statue)",
+          "ms": 711,
+          "caption": "drowned / dusk"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/dusk/military.png",
+          "cam": {
+            "x": -22.822954043621905,
+            "y": -196.7511942920314,
+            "z": -628.2137440676495,
+            "tx": -26,
+            "ty": -198.95178430497958,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Military (statue)",
+          "ms": 729,
+          "caption": "military / dusk"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/dusk/brute.png",
+          "cam": {
+            "x": -21.71900677286344,
+            "y": -195.73076739421697,
+            "z": -626.8981109416885,
+            "tx": -26,
+            "ty": -198.69600965715082,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Brute (statue)",
+          "ms": 699,
+          "caption": "brute / dusk"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/dusk/spitter.png",
+          "cam": {
+            "x": -22.91049459342509,
+            "y": -196.80963425622326,
+            "z": -628.3180708323752,
+            "tx": -26,
+            "ty": -198.9495890557468,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Spitter (statue)",
+          "ms": 755,
+          "caption": "spitter / dusk"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/dusk/screamer.png",
+          "cam": {
+            "x": -21.61590693093099,
+            "y": -196.10797305267644,
+            "z": -626.7752413346697,
+            "tx": -26,
+            "ty": -199.1446277174478,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Screamer (statue)",
+          "ms": 693,
+          "caption": "screamer / dusk"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/dusk/bomber.png",
+          "cam": {
+            "x": -22.288040818402614,
+            "y": -196.468650910936,
+            "z": -627.5762593097683,
+            "tx": -26,
+            "ty": -199.03975010674577,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Bomber (statue)",
+          "ms": 736,
+          "caption": "bomber / dusk"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/dusk/demon.png",
+          "cam": {
+            "x": -20.700261856920992,
+            "y": -194.59543346620336,
+            "z": -625.684018028177,
+            "tx": -26,
+            "ty": -198.2663123231764,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Demon (statue)",
+          "ms": 716,
+          "caption": "demon / dusk"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/dusk/colossus.png",
+          "cam": {
+            "x": -17.39913552099599,
+            "y": -191.54548208004198,
+            "z": -621.7498888577311,
+            "tx": -26,
+            "ty": -197.5028955814803,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Colossus (statue)",
+          "ms": 732,
+          "caption": "colossus / dusk"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/dusk/guardian.png",
+          "cam": {
+            "x": -21.035389986601484,
+            "y": -194.92039883411604,
+            "z": -626.0834081807031,
+            "tx": -26,
+            "ty": -198.359150228862,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Guardian (statue)",
+          "ms": 587,
+          "caption": "guardian / dusk"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/dusk/caveguard.png",
+          "cam": {
+            "x": -21.653962423332082,
+            "y": -195.61164005606605,
+            "z": -626.8205941044566,
+            "tx": -26,
+            "ty": -198.62193547464912,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Cave Guardian (statue)",
+          "ms": 707,
+          "caption": "caveguard / dusk"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/dusk/cave-guardian-wet.png",
+          "cam": {
+            "x": -19.053780161941507,
+            "y": -193.09607896529047,
+            "z": -622.2844123557222,
+            "tx": -26,
+            "ty": -197.90739810050377,
+            "tz": -630.5625948026776,
+            "fov": 35
+          },
+          "label": "Cave guardian (wet)",
+          "ms": 786,
+          "caption": "Cave guardian wet / dusk"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/dusk/cave-guardian-iron.png",
+          "cam": {
+            "x": -19.05367018944858,
+            "y": -193.0958730868047,
+            "z": -622.2842812956087,
+            "tx": -26,
+            "ty": -197.90726839478128,
+            "tz": -630.5625948026776,
+            "fov": 35
+          },
+          "label": "Cave guardian (iron)",
+          "ms": 761,
+          "caption": "Cave guardian iron / dusk"
+        }
+      ],
+      "sheet": "handoffs/GP-19970/eyes-before-four-lights/dusk/sheet.jpg",
+      "ms": 11286
+    },
+    {
+      "light": "night",
+      "ok": true,
+      "shots": [
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/night/shambler.png",
+          "cam": {
+            "x": -23.32805848710852,
+            "y": -197.27013769208847,
+            "z": -628.81570410281,
+            "tx": -26,
+            "ty": -199.12086566051664,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Shambler (statue)",
+          "ms": 663,
+          "caption": "shambler / night"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/night/feral.png",
+          "cam": {
+            "x": -23.49976361290212,
+            "y": -197.56890783982888,
+            "z": -629.0203343033413,
+            "tx": -26,
+            "ty": -199.3007037593722,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Feral (statue)",
+          "ms": 579,
+          "caption": "feral / night"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/night/leaper.png",
+          "cam": {
+            "x": -23.367894354246587,
+            "y": -197.81304244266084,
+            "z": -628.8631786405858,
+            "tx": -26,
+            "ty": -199.63617798322213,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Leaper (statue)",
+          "ms": 639,
+          "caption": "leaper / night"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/night/spider.png",
+          "cam": {
+            "x": -23.222347834808538,
+            "y": -197.62507403340797,
+            "z": -628.689723053156,
+            "tx": -26,
+            "ty": -199.54902278897856,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Spider (statue)",
+          "ms": 638,
+          "caption": "spider / night"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/night/drowned.png",
+          "cam": {
+            "x": -23.192195397901283,
+            "y": -197.09395413491438,
+            "z": -628.6537887781463,
+            "tx": -26,
+            "ty": -199.03878806257097,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Drowned (statue)",
+          "ms": 645,
+          "caption": "drowned / night"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/night/military.png",
+          "cam": {
+            "x": -22.936904935512736,
+            "y": -196.87083546532867,
+            "z": -628.3495454524397,
+            "tx": -26,
+            "ty": -198.99249706549827,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Military (statue)",
+          "ms": 706,
+          "caption": "military / night"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/night/brute.png",
+          "cam": {
+            "x": -21.64259758914786,
+            "y": -195.63089779691504,
+            "z": -626.8070500224883,
+            "tx": -26,
+            "ty": -198.64906510055988,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Brute (statue)",
+          "ms": 630,
+          "caption": "brute / night"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/night/spitter.png",
+          "cam": {
+            "x": -23.108636886145167,
+            "y": -197.02559675499643,
+            "z": -628.5542076215692,
+            "tx": -26,
+            "ty": -199.02830772597946,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Spitter (statue)",
+          "ms": 635,
+          "caption": "spitter / night"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/night/screamer.png",
+          "cam": {
+            "x": -21.665191268516544,
+            "y": -196.13714387844732,
+            "z": -626.8339761210458,
+            "tx": -26,
+            "ty": -199.13966160514013,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Screamer (statue)",
+          "ms": 660,
+          "caption": "screamer / night"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/night/bomber.png",
+          "cam": {
+            "x": -22.146575284109048,
+            "y": -196.32458633129468,
+            "z": -627.4076672510456,
+            "tx": -26,
+            "ty": -198.99367203602412,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Bomber (statue)",
+          "ms": 686,
+          "caption": "bomber / night"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/night/demon.png",
+          "cam": {
+            "x": -20.813442535572307,
+            "y": -194.69507547887716,
+            "z": -625.818901508572,
+            "tx": -26,
+            "ty": -198.2875594134857,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Demon (statue)",
+          "ms": 631,
+          "caption": "demon / night"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/night/colossus.png",
+          "cam": {
+            "x": -17.408327219971255,
+            "y": -191.56961902591695,
+            "z": -621.7608430980068,
+            "tx": -26,
+            "ty": -197.52066587064184,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Colossus (statue)",
+          "ms": 725,
+          "caption": "colossus / night"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/night/guardian.png",
+          "cam": {
+            "x": -20.793245773403584,
+            "y": -194.63290597695837,
+            "z": -625.7948319446987,
+            "tx": -26,
+            "ty": -198.23937925693133,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Guardian (statue)",
+          "ms": 663,
+          "caption": "guardian / night"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/night/caveguard.png",
+          "cam": {
+            "x": -21.62997792055412,
+            "y": -195.60437365027488,
+            "z": -626.7920104871043,
+            "tx": -26,
+            "ty": -198.63128200364184,
+            "tz": -632,
+            "fov": 35
+          },
+          "label": "Cave Guardian (statue)",
+          "ms": 580,
+          "caption": "caveguard / night"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/night/cave-guardian-wet.png",
+          "cam": {
+            "x": -19.05383800556739,
+            "y": -193.09618722314647,
+            "z": -622.2844812910712,
+            "tx": -26,
+            "ty": -197.90746629280605,
+            "tz": -630.5625948026776,
+            "fov": 35
+          },
+          "label": "Cave guardian (wet)",
+          "ms": 728,
+          "caption": "Cave guardian wet / night"
+        },
+        {
+          "file": "handoffs/GP-19970/eyes-before-four-lights/night/cave-guardian-iron.png",
+          "cam": {
+            "x": -19.053854545851873,
+            "y": -193.09621817541128,
+            "z": -622.2845010030146,
+            "tx": -26,
+            "ty": -197.90748578839526,
+            "tz": -630.5625948026776,
+            "fov": 35
+          },
+          "label": "Cave guardian (iron)",
+          "ms": 623,
+          "caption": "Cave guardian iron / night"
+        }
+      ],
+      "sheet": "handoffs/GP-19970/eyes-before-four-lights/night/sheet.jpg",
+      "ms": 10468
+    }
+  ],
+  "metrics": [
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/noon/shambler.png",
+      "subject": {
+        "id": "zombie.shambler",
+        "name": "Shambler",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -199.03520343761522,
+          "z": -632
+        },
+        "size": {
+          "x": 0.8451995738248428,
+          "y": 1.929593124769525,
+          "z": 0.7566184279406798
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5008,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 766,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 7301,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/noon/feral.png",
+      "subject": {
+        "id": "zombie.feral",
+        "name": "Feral",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -199.30110747376966,
+          "z": -632
+        },
+        "size": {
+          "x": 0.753090491216156,
+          "y": 1.397785052460648,
+          "z": 1.0879078317691437
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4780,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 1141,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 7073,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/noon/leaper.png",
+      "subject": {
+        "id": "zombie.leaper",
+        "name": "Leaper",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -199.61397245459082,
+          "z": -632
+        },
+        "size": {
+          "x": 0.8365291496634555,
+          "y": 1.3487902738769435,
+          "z": 1.5705807841543447
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4594,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 1546,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 6887,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/noon/spider.png",
+      "subject": {
+        "id": "zombie.spider",
+        "name": "Spider",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -199.56672456373667,
+          "z": -632
+        },
+        "size": {
+          "x": 1.7981594213416479,
+          "y": 0.9400343690760451,
+          "z": 1.8710292915355922
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 3794,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 1921,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 6087,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/noon/drowned.png",
+      "subject": {
+        "id": "zombie.drowned",
+        "name": "Drowned",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -199.0796609709554,
+          "z": -632
+        },
+        "size": {
+          "x": 0.8376942754797483,
+          "y": 1.8406780580891962,
+          "z": 0.559267938200378
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5684,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 2311,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 7977,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/noon/military.png",
+      "subject": {
+        "id": "zombie.military",
+        "name": "Military",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -198.9619478300898,
+          "z": -632
+        },
+        "size": {
+          "x": 0.9935781607919338,
+          "y": 2.0761043398203185,
+          "z": 0.8087429360426768
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5952,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "render": {
+        "calls": 2686,
+        "frameCalls": 15,
+        "drawCalls": 17,
+        "triangles": 8245,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/noon/brute.png",
+      "subject": {
+        "id": "zombie.brute",
+        "name": "Brute",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -198.72101715636182,
+          "z": -632
+        },
+        "size": {
+          "x": 1.7792459420250069,
+          "y": 2.5579656872762655,
+          "z": 0.9532346233335147
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5896,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 3061,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 8189,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/noon/spitter.png",
+      "subject": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -199.03820741303224,
+          "z": -632
+        },
+        "size": {
+          "x": 0.9440322905682059,
+          "y": 1.9235851739355212,
+          "z": 0.686242650170243
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5228,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "render": {
+        "calls": 3451,
+        "frameCalls": 15,
+        "drawCalls": 18,
+        "triangles": 7521,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/noon/screamer.png",
+      "subject": {
+        "id": "zombie.screamer",
+        "name": "Screamer",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -199.1777417203039,
+          "z": -632
+        },
+        "size": {
+          "x": 1.3238730577146995,
+          "y": 2.646781649221623,
+          "z": 1.2687116803099343
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5676,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "render": {
+        "calls": 3826,
+        "frameCalls": 15,
+        "drawCalls": 18,
+        "triangles": 7969,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/noon/bomber.png",
+      "subject": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -198.90611297094733,
+          "z": -632
+        },
+        "size": {
+          "x": 1.6209546148777072,
+          "y": 2.187774058105333,
+          "z": 1.697885570537096
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5936,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "render": {
+        "calls": 4216,
+        "frameCalls": 15,
+        "drawCalls": 18,
+        "triangles": 8229,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/noon/demon.png",
+      "subject": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -198.35581666306877,
+          "z": -632
+        },
+        "size": {
+          "x": 1.9969982926083034,
+          "y": 3.288366673862555,
+          "z": 1.1567252923398428
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5672,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "render": {
+        "calls": 4591,
+        "frameCalls": 15,
+        "drawCalls": 17,
+        "triangles": 7965,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/noon/colossus.png",
+      "subject": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -197.53588386116496,
+          "z": -632
+        },
+        "size": {
+          "x": 3.1175315558910377,
+          "y": 4.928232277670077,
+          "z": 3.1978686476163602
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6800,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "render": {
+        "calls": 4996,
+        "frameCalls": 15,
+        "drawCalls": 18,
+        "triangles": 9093,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/noon/guardian.png",
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -198.1861574160066,
+          "z": -632
+        },
+        "size": {
+          "x": 1.4970256884332045,
+          "y": 3.6276851679868116,
+          "z": 1.1344453334583022
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4180,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 5386,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 6473,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/noon/caveguard.png",
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -198.58918376268707,
+          "z": -632
+        },
+        "size": {
+          "x": 1.3338659585641608,
+          "y": 2.8216324746258863,
+          "z": 1.1911868385898288
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4180,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 5776,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 6473,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/noon/cave-guardian-wet.png",
+      "subject": {
+        "id": "person.cave-guardian",
+        "name": "Cave guardian",
+        "kind": "model",
+        "variant": "wet",
+        "mode": null,
+        "center": {
+          "x": -26,
+          "y": -197.90018005582326,
+          "z": -630.5625948026776
+        },
+        "size": {
+          "x": 2.478064957967522,
+          "y": 4.032220696133493,
+          "z": 2.6058802517885624
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 11878,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "render": {
+        "calls": 6166,
+        "frameCalls": 15,
+        "drawCalls": 18,
+        "triangles": 14171,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/noon/cave-guardian-iron.png",
+      "subject": {
+        "id": "person.cave-guardian",
+        "name": "Cave guardian",
+        "kind": "model",
+        "variant": "iron",
+        "mode": null,
+        "center": {
+          "x": -26,
+          "y": -197.9003567351471,
+          "z": -630.5625948026776
+        },
+        "size": {
+          "x": 2.4780622983770435,
+          "y": 4.03193231371111,
+          "z": 2.60620082844855
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 11878,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "render": {
+        "calls": 6586,
+        "frameCalls": 15,
+        "drawCalls": 18,
+        "triangles": 14171,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/overcast/shambler.png",
+      "subject": {
+        "id": "zombie.shambler",
+        "name": "Shambler",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -199.10672525360872,
+          "z": -632
+        },
+        "size": {
+          "x": 0.8743114609778679,
+          "y": 1.7865494927825125,
+          "z": 0.7746417693272178
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5008,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 6991,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 7301,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/overcast/feral.png",
+      "subject": {
+        "id": "zombie.feral",
+        "name": "Feral",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -199.25285302324568,
+          "z": -632
+        },
+        "size": {
+          "x": 0.7610602998392189,
+          "y": 1.4942939535086737,
+          "z": 1.0615558293230833
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4780,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 7366,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 7073,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/overcast/leaper.png",
+      "subject": {
+        "id": "zombie.leaper",
+        "name": "Leaper",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -199.65237923246968,
+          "z": -632
+        },
+        "size": {
+          "x": 0.8426187606920159,
+          "y": 1.3163133984697026,
+          "z": 1.4932732828496
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4594,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 7741,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 6887,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/overcast/spider.png",
+      "subject": {
+        "id": "zombie.spider",
+        "name": "Spider",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -199.5485556071173,
+          "z": -632
+        },
+        "size": {
+          "x": 1.724738777751142,
+          "y": 0.8935105661715568,
+          "z": 1.7651432447383968
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 3794,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 8116,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 6087,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/overcast/drowned.png",
+      "subject": {
+        "id": "zombie.drowned",
+        "name": "Drowned",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -199.03107689039737,
+          "z": -632
+        },
+        "size": {
+          "x": 0.8269671023377576,
+          "y": 1.9378462192052552,
+          "z": 0.5687921304061092
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5684,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 8491,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 7977,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/overcast/military.png",
+      "subject": {
+        "id": "zombie.military",
+        "name": "Military",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -199.00785662867673,
+          "z": -632
+        },
+        "size": {
+          "x": 0.9755087904505118,
+          "y": 1.9842867426465318,
+          "z": 0.8122009127528145
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5952,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "render": {
+        "calls": 8866,
+        "frameCalls": 15,
+        "drawCalls": 17,
+        "triangles": 8245,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/overcast/brute.png",
+      "subject": {
+        "id": "zombie.brute",
+        "name": "Brute",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -198.62977616190022,
+          "z": -632
+        },
+        "size": {
+          "x": 1.9103203822936834,
+          "y": 2.740447676199665,
+          "z": 1.008836169882784
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5896,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 9241,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 8189,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/overcast/spitter.png",
+      "subject": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -199.05979715709177,
+          "z": -632
+        },
+        "size": {
+          "x": 0.9501241230251303,
+          "y": 1.88040568581647,
+          "z": 0.6974553526980571
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5228,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "render": {
+        "calls": 9616,
+        "frameCalls": 15,
+        "drawCalls": 18,
+        "triangles": 7521,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/overcast/screamer.png",
+      "subject": {
+        "id": "zombie.screamer",
+        "name": "Screamer",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -199.1258123962877,
+          "z": -632
+        },
+        "size": {
+          "x": 1.3999121123599991,
+          "y": 2.8139378643142265,
+          "z": 1.3415824410117239
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5676,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "render": {
+        "calls": 9991,
+        "frameCalls": 15,
+        "drawCalls": 18,
+        "triangles": 7969,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/overcast/bomber.png",
+      "subject": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -198.94928345678534,
+          "z": -632
+        },
+        "size": {
+          "x": 1.555705550312993,
+          "y": 2.101433086429381,
+          "z": 1.6378185428219467
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5936,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "render": {
+        "calls": 10366,
+        "frameCalls": 15,
+        "drawCalls": 18,
+        "triangles": 8229,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/overcast/demon.png",
+      "subject": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -198.34457506386838,
+          "z": -632
+        },
+        "size": {
+          "x": 1.9518513252012042,
+          "y": 3.3108498722632476,
+          "z": 1.1668529487094474
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5672,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "render": {
+        "calls": 10741,
+        "frameCalls": 15,
+        "drawCalls": 17,
+        "triangles": 7965,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/overcast/colossus.png",
+      "subject": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -197.5434356426507,
+          "z": -632
+        },
+        "size": {
+          "x": 3.110330599546433,
+          "y": 4.913128714698615,
+          "z": 3.2064425887316474
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6800,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "render": {
+        "calls": 11116,
+        "frameCalls": 15,
+        "drawCalls": 18,
+        "triangles": 9093,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/overcast/guardian.png",
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -198.23142293376372,
+          "z": -632
+        },
+        "size": {
+          "x": 1.464551550984531,
+          "y": 3.5371541324725513,
+          "z": 1.1236825202090586
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4180,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 11506,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 6473,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/overcast/caveguard.png",
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -198.51607737597357,
+          "z": -632
+        },
+        "size": {
+          "x": 1.367687979723133,
+          "y": 2.967845248052811,
+          "z": 1.2976981104466176
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4180,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 11881,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 6473,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/overcast/cave-guardian-wet.png",
+      "subject": {
+        "id": "person.cave-guardian",
+        "name": "Cave guardian",
+        "kind": "model",
+        "variant": "wet",
+        "mode": null,
+        "center": {
+          "x": -26,
+          "y": -197.90032497550487,
+          "z": -630.5625948026776
+        },
+        "size": {
+          "x": 2.478062776331619,
+          "y": 4.031984156144063,
+          "z": 2.6061432124664634
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 11878,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "render": {
+        "calls": 12271,
+        "frameCalls": 15,
+        "drawCalls": 18,
+        "triangles": 14171,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/overcast/cave-guardian-iron.png",
+      "subject": {
+        "id": "person.cave-guardian",
+        "name": "Cave guardian",
+        "kind": "model",
+        "variant": "iron",
+        "mode": null,
+        "center": {
+          "x": -26,
+          "y": -197.90073093700173,
+          "z": -630.5625948026776
+        },
+        "size": {
+          "x": 2.478056671254315,
+          "y": 4.031321385062142,
+          "z": 2.6068793327540334
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 11878,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "render": {
+        "calls": 12661,
+        "frameCalls": 15,
+        "drawCalls": 18,
+        "triangles": 14171,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/dusk/shambler.png",
+      "subject": {
+        "id": "zombie.shambler",
+        "name": "Shambler",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -199.1237532067764,
+          "z": -632
+        },
+        "size": {
+          "x": 0.8242454580549783,
+          "y": 1.7524935864471445,
+          "z": 0.6891192257937746
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5008,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 13081,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 7301,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/dusk/feral.png",
+      "subject": {
+        "id": "zombie.feral",
+        "name": "Feral",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -199.25893790972856,
+          "z": -632
+        },
+        "size": {
+          "x": 0.753794921221143,
+          "y": 1.482124180542911,
+          "z": 1.0713785209161415
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4780,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 13456,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 7073,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/dusk/leaper.png",
+      "subject": {
+        "id": "zombie.leaper",
+        "name": "Leaper",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -199.62545477777317,
+          "z": -632
+        },
+        "size": {
+          "x": 0.8774596730814785,
+          "y": 1.3872990215745062,
+          "z": 1.4846323400379333
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4594,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 13831,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 6887,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/dusk/spider.png",
+      "subject": {
+        "id": "zombie.spider",
+        "name": "Spider",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -199.4987333247605,
+          "z": -632
+        },
+        "size": {
+          "x": 1.758722407076327,
+          "y": 1.0040719235268512,
+          "z": 1.7924115735841042
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 3794,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 14206,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 6087,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/dusk/drowned.png",
+      "subject": {
+        "id": "zombie.drowned",
+        "name": "Drowned",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -199.02381874163243,
+          "z": -632
+        },
+        "size": {
+          "x": 0.8569385783932084,
+          "y": 1.9523625167351497,
+          "z": 0.596971967866466
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5684,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 14596,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 7977,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/dusk/military.png",
+      "subject": {
+        "id": "zombie.military",
+        "name": "Military",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -198.95178430497958,
+          "z": -632
+        },
+        "size": {
+          "x": 1.020170834074765,
+          "y": 2.096431390040806,
+          "z": 0.7683186470648025
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5952,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "render": {
+        "calls": 14971,
+        "frameCalls": 15,
+        "drawCalls": 17,
+        "triangles": 8245,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/dusk/brute.png",
+      "subject": {
+        "id": "zombie.brute",
+        "name": "Brute",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -198.69600965715082,
+          "z": -632
+        },
+        "size": {
+          "x": 1.943434926687246,
+          "y": 2.607980685698408,
+          "z": 0.9996749505322668
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5896,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 15361,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 8189,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/dusk/spitter.png",
+      "subject": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -198.9495890557468,
+          "z": -632
+        },
+        "size": {
+          "x": 0.9495687542733684,
+          "y": 2.100821888506431,
+          "z": 0.6562496396026063
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5228,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "render": {
+        "calls": 15736,
+        "frameCalls": 15,
+        "drawCalls": 18,
+        "triangles": 7521,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/dusk/screamer.png",
+      "subject": {
+        "id": "zombie.screamer",
+        "name": "Screamer",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -199.1446277174478,
+          "z": -632
+        },
+        "size": {
+          "x": 1.4051216663038701,
+          "y": 2.7533728958603945,
+          "z": 1.3465749302079075
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5676,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "render": {
+        "calls": 16126,
+        "frameCalls": 15,
+        "drawCalls": 18,
+        "triangles": 7969,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/dusk/bomber.png",
+      "subject": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -199.03975010674577,
+          "z": -632
+        },
+        "size": {
+          "x": 1.511928039789197,
+          "y": 1.920499786508401,
+          "z": 1.706062556151437
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5936,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "render": {
+        "calls": 16501,
+        "frameCalls": 15,
+        "drawCalls": 18,
+        "triangles": 8229,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/dusk/demon.png",
+      "subject": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -198.2663123231764,
+          "z": -632
+        },
+        "size": {
+          "x": 1.963188020019473,
+          "y": 3.467375353647185,
+          "z": 1.154418224281585
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5672,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "render": {
+        "calls": 16876,
+        "frameCalls": 15,
+        "drawCalls": 17,
+        "triangles": 7965,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/dusk/colossus.png",
+      "subject": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -197.5028955814803,
+          "z": -632
+        },
+        "size": {
+          "x": 3.120769739151001,
+          "y": 4.994208837039423,
+          "z": 3.1658014042708373
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6800,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "render": {
+        "calls": 17251,
+        "frameCalls": 15,
+        "drawCalls": 18,
+        "triangles": 9093,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/dusk/guardian.png",
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -198.359150228862,
+          "z": -632
+        },
+        "size": {
+          "x": 1.5606536603488443,
+          "y": 3.2816995422760726,
+          "z": 1.2171069607048821
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4180,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 17626,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 6473,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/dusk/caveguard.png",
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -198.62193547464912,
+          "z": -632
+        },
+        "size": {
+          "x": 1.3904751165573082,
+          "y": 2.756129050701702,
+          "z": 1.282667085157982
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4180,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 18001,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 6473,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/dusk/cave-guardian-wet.png",
+      "subject": {
+        "id": "person.cave-guardian",
+        "name": "Cave guardian",
+        "kind": "model",
+        "variant": "wet",
+        "mode": null,
+        "center": {
+          "x": -26,
+          "y": -197.90030383033866,
+          "z": -630.5625948026776
+        },
+        "size": {
+          "x": 2.47806309457928,
+          "y": 4.032018671402113,
+          "z": 2.6061048499367416
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 11878,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "render": {
+        "calls": 18391,
+        "frameCalls": 15,
+        "drawCalls": 18,
+        "triangles": 14171,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/dusk/cave-guardian-iron.png",
+      "subject": {
+        "id": "person.cave-guardian",
+        "name": "Cave guardian",
+        "kind": "model",
+        "variant": "iron",
+        "mode": null,
+        "center": {
+          "x": -26,
+          "y": -197.90029590667058,
+          "z": -630.5625948026776
+        },
+        "size": {
+          "x": 2.4780632138418284,
+          "y": 4.032031605047138,
+          "z": 2.606090473931772
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 11878,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "render": {
+        "calls": 18781,
+        "frameCalls": 15,
+        "drawCalls": 18,
+        "triangles": 14171,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/night/shambler.png",
+      "subject": {
+        "id": "zombie.shambler",
+        "name": "Shambler",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -199.12086566051664,
+          "z": -632
+        },
+        "size": {
+          "x": 0.8227410727668172,
+          "y": 1.758268678966715,
+          "z": 0.6856308228990429
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5008,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 19186,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 7301,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/night/feral.png",
+      "subject": {
+        "id": "zombie.feral",
+        "name": "Feral",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -199.3007037593722,
+          "z": -632
+        },
+        "size": {
+          "x": 0.7945172158877902,
+          "y": 1.3985924812555197,
+          "z": 1.1231605872272894
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4780,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 19546,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 7073,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/night/leaper.png",
+      "subject": {
+        "id": "zombie.leaper",
+        "name": "Leaper",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -199.63617798322213,
+          "z": -632
+        },
+        "size": {
+          "x": 0.8472565120921374,
+          "y": 1.3095861042181411,
+          "z": 1.5047244900044916
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4594,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 19906,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 6887,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/night/spider.png",
+      "subject": {
+        "id": "zombie.spider",
+        "name": "Spider",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -199.54902278897856,
+          "z": -632
+        },
+        "size": {
+          "x": 1.722594186826278,
+          "y": 0.945025531475153,
+          "z": 1.7824651402510199
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 3794,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 20266,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 6087,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/night/drowned.png",
+      "subject": {
+        "id": "zombie.drowned",
+        "name": "Drowned",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -199.03878806257097,
+          "z": -632
+        },
+        "size": {
+          "x": 0.8352744856571306,
+          "y": 1.922423874857941,
+          "z": 0.5928825153796424
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5684,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 20626,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 7977,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/night/military.png",
+      "subject": {
+        "id": "zombie.military",
+        "name": "Military",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -198.99249706549827,
+          "z": -632
+        },
+        "size": {
+          "x": 0.9784430735607899,
+          "y": 2.015005869003346,
+          "z": 0.7577629646245896
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5952,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "render": {
+        "calls": 20986,
+        "frameCalls": 15,
+        "drawCalls": 17,
+        "triangles": 8245,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/night/brute.png",
+      "subject": {
+        "id": "zombie.brute",
+        "name": "Brute",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -198.64906510055988,
+          "z": -632
+        },
+        "size": {
+          "x": 1.8863487605108098,
+          "y": 2.7018697988801534,
+          "z": 0.9981354768208348
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5896,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 21361,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 8189,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/night/spitter.png",
+      "subject": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -199.02830772597946,
+          "z": -632
+        },
+        "size": {
+          "x": 0.8814215843931876,
+          "y": 1.9433845480409673,
+          "z": 0.666468762498198
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5228,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "render": {
+        "calls": 21721,
+        "frameCalls": 15,
+        "drawCalls": 18,
+        "triangles": 7521,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/night/screamer.png",
+      "subject": {
+        "id": "zombie.screamer",
+        "name": "Screamer",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -199.13966160514013,
+          "z": -632
+        },
+        "size": {
+          "x": 1.336155968295337,
+          "y": 2.7693584021768345,
+          "z": 1.2804828029497912
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5676,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "render": {
+        "calls": 22096,
+        "frameCalls": 15,
+        "drawCalls": 18,
+        "triangles": 7969,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/night/bomber.png",
+      "subject": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -198.99367203602412,
+          "z": -632
+        },
+        "size": {
+          "x": 1.62705453336239,
+          "y": 2.0126559279518403,
+          "z": 1.6842156597191433
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5936,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "render": {
+        "calls": 22456,
+        "frameCalls": 15,
+        "drawCalls": 18,
+        "triangles": 8229,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/night/demon.png",
+      "subject": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -198.2875594134857,
+          "z": -632
+        },
+        "size": {
+          "x": 1.9070365530850992,
+          "y": 3.4248811730286093,
+          "z": 1.0986888769998586
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5672,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "render": {
+        "calls": 22816,
+        "frameCalls": 15,
+        "drawCalls": 17,
+        "triangles": 7965,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/night/colossus.png",
+      "subject": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -197.52066587064184,
+          "z": -632
+        },
+        "size": {
+          "x": 3.163053512573242,
+          "y": 4.958668258716301,
+          "z": 3.185635576548748
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6800,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "render": {
+        "calls": 23176,
+        "frameCalls": 15,
+        "drawCalls": 18,
+        "triangles": 9093,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/night/guardian.png",
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -198.23937925693133,
+          "z": -632
+        },
+        "size": {
+          "x": 1.5503643062163874,
+          "y": 3.52124148613737,
+          "z": 1.1871480505777754
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4180,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 23536,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 6473,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/night/caveguard.png",
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "statue",
+        "center": {
+          "x": -26,
+          "y": -198.63128200364184,
+          "z": -632
+        },
+        "size": {
+          "x": 1.4417946870415506,
+          "y": 2.7374359927162857,
+          "z": 1.3221522695274643
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4180,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "render": {
+        "calls": 23911,
+        "frameCalls": 15,
+        "drawCalls": 16,
+        "triangles": 6473,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/night/cave-guardian-wet.png",
+      "subject": {
+        "id": "person.cave-guardian",
+        "name": "Cave guardian",
+        "kind": "model",
+        "variant": "wet",
+        "mode": null,
+        "center": {
+          "x": -26,
+          "y": -197.90073363394043,
+          "z": -630.5625948026776
+        },
+        "size": {
+          "x": 2.4780566307273126,
+          "y": 4.0313169812881995,
+          "z": 2.6068842205474994
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 11878,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "render": {
+        "calls": 24301,
+        "frameCalls": 15,
+        "drawCalls": 18,
+        "triangles": 14171,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "handoffs/GP-19970/eyes-before-four-lights/night/cave-guardian-iron.png",
+      "subject": {
+        "id": "person.cave-guardian",
+        "name": "Cave guardian",
+        "kind": "model",
+        "variant": "iron",
+        "mode": null,
+        "center": {
+          "x": -26,
+          "y": -197.90069052351356,
+          "z": -630.5625948026776
+        },
+        "size": {
+          "x": 2.478057278598513,
+          "y": 4.031387374183282,
+          "z": 2.6068060854679516
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 11878,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "render": {
+        "calls": 24676,
+        "frameCalls": 15,
+        "drawCalls": 18,
+        "triangles": 14171,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "errors": []
+    }
+  ],
+  "pageErrors": []
+}

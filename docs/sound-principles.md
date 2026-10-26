@@ -2,10 +2,14 @@
 
 Claude, 2026-10-24 (CL-268, D-89), from what the game has already established (core/audio.js's mix, CL-24's music
 rhythm, CL-161/168/172's takes, D-33 and its reversal), for Jerry's review. They govern every sound, music cue and
-mix change; they sit beside `docs/art-direction.md`, whose families have sounds too.
+mix change; they sit beside `docs/art-direction.md`, whose families have sounds too. Approved by Jerry, 2026-10-26
+(D-92), with his rule in place of the draft's first sentence.
 
-**The one sentence:** the world is quiet enough that every sound means something, and the loudest things are the ones
-that can kill him.
+**Jerry's rule (2026-10-26):** no sound unless it is
+1. **immersive:** it puts him in the place (the wind, a creak, the river, the generator's hum, the tone at night), or
+2. **impactful:** it hits (a shot, a blow, a sting, a threat he has to hear).
+
+A sound that is neither goes. And the loudest things are the ones that can kill him.
 
 ## 1. The mix has an order (core/audio.js)
 
@@ -55,6 +59,7 @@ that can kill him.
 
 ## 6. Checking it
 
+Every new sound passes Jerry's rule first: the handoff says which it is, immersive or impactful (or both).
 Judged by ear on Jerry's speakers and headphones, in the game, not in an editor; at night 1 and night 20 (the mix
 under load). Loudness measured (LUFS and peak) for every new take; a sound that calls the dead checked from 40 m.
 Scores: Clarity (can he hear what matters), Placement (where it is), Character (its family), Mix (it sits under or over

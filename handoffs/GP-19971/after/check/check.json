@@ -1,0 +1,20 @@
+{
+ "at": "2026-10-26T00:52:14.080Z",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "results": [
+  {
+   "id": "zombie.screamer",
+   "variant": null,
+   "mode": "statue",
+   "ok": true,
+   "ms": 115,
+   "tris": 5676,
+   "size": [
+    1.323,
+    2.6,
+    1.268
+   ],
+   "error": null
+  }
+ ]
+}

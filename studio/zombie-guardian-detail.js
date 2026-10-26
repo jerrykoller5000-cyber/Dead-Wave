@@ -12,7 +12,8 @@ export function sculptGuardian(A,T,g,kind){
   const claw=mat(cave?0x25251e:0x5b6249,false,0,'bone');
   const mouth=mat(0x241a18,false,0,'wet'),gum=mat(cave?0x494331:0x5e4f41,false,0,'wet');
   const teeth=mat(cave?0xc8bb8b:0xe3d9b6,false,0,'bone');
-  const eye=mat(cave?0xc9f0ff:0xf2ffd7,true,0,'wet');
+  const eye=mat(0x74a18d,true,0,'wet');
+  eye.emissiveIntensity=.9;eye.userData.baseEmissive=.9; // D-89: the same pale-green point as the dead.
 
   // Bundled cords wind across the host joint without making independent moving parts.
   const cords=(p,x,y,z,length,count=3,width=.025,flip=1)=>{
