@@ -1,0 +1,483 @@
+{
+ "_about": "CL-272 (D-94): both guardians from Ocular Sounds (Aberration, Sinister, Puncture, Foundation). Jerry: \"You guys can replace both guardians sounds.\" Made by tools/pack-make.py; the files are pk-ocular-*.ogg (git-ignored, in the builds). Sound rule: every one is immersive (the creature placed in the world, close, breathing) and the slam and the roar are impactful too. Family: the uncanny (docs/sound-principles.md §5): low, close, breathing.",
+ "zombies/guardian/idle": {
+  "hp": 70,
+  "takes": [
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Aberration-Designed-Construction-Kit-Ocular-Sounds\\Aberration\\Aberration - Construction Kits\\Mutant Elements\\MOVECrea_MUTANT-Growl Element 01_Ocular_Aberration.wav",
+    "start": 0.1,
+    "end": 2.4,
+    "why": "a slow raspy growl, the chest heaving"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Aberration-Designed-Construction-Kit-Ocular-Sounds\\Aberration\\Aberration - Construction Kits\\Mutant Elements\\MOVECrea_MUTANT-Growl Element 05_Ocular_Aberration.wav",
+    "start": 0.1,
+    "end": 2.4,
+    "why": "two long huffs through a torn throat"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Aberration-Designed-Construction-Kit-Ocular-Sounds\\Aberration\\Aberration - Construction Kits\\Mutant Elements\\MOVECrea_MUTANT-Growl Element 06_Ocular_Aberration.wav",
+    "start": 0.1,
+    "end": 2.3,
+    "why": "a rumbling growl with a rattle in it"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Aberration-Designed-Construction-Kit-Ocular-Sounds\\Aberration\\Aberration - Construction Kits\\Mutant Elements\\MOVECrea_MUTANT-Growl Element 08_Ocular_Aberration.wav",
+    "start": 0.1,
+    "end": 2.0,
+    "why": "a growl that catches and starts again"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Aberration-Designed-Construction-Kit-Ocular-Sounds\\Aberration\\Aberration - Construction Kits\\Mutant Elements\\MOVECrea_MUTANT-Growl Element 09_Ocular_Aberration.wav",
+    "start": 0.0,
+    "end": 2.1,
+    "why": "a broken, panting growl"
+   }
+  ]
+ },
+ "zombies/guardian/chase": {
+  "hp": 70,
+  "takes": [
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Aberration-Designed-Construction-Kit-Ocular-Sounds\\Aberration\\Aberration - Construction Kits\\Mutant Elements\\MOVECrea_MUTANT-Growl Element 02_Ocular_Aberration.wav",
+    "start": 0.0,
+    "end": 1.7,
+    "why": "a hard snarl, coming"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Aberration-Designed-Construction-Kit-Ocular-Sounds\\Aberration\\Aberration - Construction Kits\\Mutant Elements\\MOVECrea_MUTANT-Growl Element 04_Ocular_Aberration.wav",
+    "start": 0.0,
+    "end": 1.3,
+    "why": "a short barking growl"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Aberration-Designed-Construction-Kit-Ocular-Sounds\\Aberration\\Aberration - Construction Kits\\Mutant Elements\\MOVECrea_MUTANT-Growl Element 10_Ocular_Aberration.wav",
+    "start": 0.0,
+    "end": 1.0,
+    "why": "one big bark"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Aberration-Designed-Construction-Kit-Ocular-Sounds\\Aberration\\Aberration - Construction Kits\\Mutant Elements\\MOVECrea_MUTANT-Mutation Element 14_Ocular_Aberration.wav",
+    "start": 0.1,
+    "end": 1.6,
+    "why": "a throaty snarl with a pitch in it"
+   }
+  ]
+ },
+ "zombies/guardian/attack": {
+  "hp": 70,
+  "takes": [
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Aberration-Designed-Construction-Kit-Ocular-Sounds\\Aberration\\Aberration - Construction Kits\\Mutant Elements\\MOVECrea_MUTANT-Growl Element 07_Ocular_Aberration.wav",
+    "start": 0.1,
+    "end": 1.2,
+    "why": "a snapping lunge"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Aberration-Designed-Construction-Kit-Ocular-Sounds\\Aberration\\Aberration - Designed\\Mutants\\DSGNDist_MUTANT-Distorted Throat_Ocular_Aberration.wav",
+    "start": 0.15,
+    "end": 1.5,
+    "why": "the throat tearing open as it swings"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Aberration-Designed-Construction-Kit-Ocular-Sounds\\Aberration\\Aberration - Designed\\Mutants\\DSGNDist_MUTANT-Parasitic Shriek_Ocular_Aberration.wav",
+    "start": 0.0,
+    "end": 1.3,
+    "why": "a shrieking swipe"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Aberration-Designed-Construction-Kit-Ocular-Sounds\\Aberration\\Aberration - Construction Kits\\Mutant Elements\\MOVECrea_MUTANT-Mutation Element 14_Ocular_Aberration.wav",
+    "start": 1.3,
+    "end": 2.6,
+    "why": "the snarl's second half: a bite"
+   }
+  ]
+ },
+ "zombies/guardian/hurt": {
+  "hp": 70,
+  "takes": [
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Aberration-Designed-Construction-Kit-Ocular-Sounds\\Aberration\\Aberration - Construction Kits\\Mutant Elements\\MOVECrea_MUTANT-Growl Element 10_Ocular_Aberration.wav",
+    "start": 0.05,
+    "end": 0.7,
+    "why": "a grunt, cut short"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Aberration-Designed-Construction-Kit-Ocular-Sounds\\Aberration\\Aberration - Construction Kits\\Mutant Elements\\MOVECrea_MUTANT-Growl Element 04_Ocular_Aberration.wav",
+    "start": 0.05,
+    "end": 0.75,
+    "why": "a pained bark"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Aberration-Designed-Construction-Kit-Ocular-Sounds\\Aberration\\Aberration - Construction Kits\\Mutant Elements\\MOVECrea_MUTANT-Growl Element 03_Ocular_Aberration.wav",
+    "start": 0.2,
+    "end": 0.95,
+    "why": "a wet choke"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Aberration-Designed-Construction-Kit-Ocular-Sounds\\Aberration\\Aberration - Construction Kits\\Mutant Elements\\MOVECrea_MUTANT-Moan Element 04_Ocular_Aberration.wav",
+    "start": 0.0,
+    "end": 0.75,
+    "why": "a sharp moan"
+   }
+  ]
+ },
+ "zombies/guardian/death": {
+  "hp": 70,
+  "takes": [
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Aberration-Designed-Construction-Kit-Ocular-Sounds\\Aberration\\Aberration - Construction Kits\\Mutant Elements\\MOVECrea_MUTANT-Moan Element 01_Ocular_Aberration.wav",
+    "start": 0.0,
+    "end": 2.6,
+    "why": "a long sinking moan"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Aberration-Designed-Construction-Kit-Ocular-Sounds\\Aberration\\Aberration - Construction Kits\\Mutant Elements\\MOVECrea_MUTANT-Moan Element 02_Ocular_Aberration.wav",
+    "start": 0.1,
+    "end": 2.8,
+    "why": "a moan that bends down and gives out"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Aberration-Designed-Construction-Kit-Ocular-Sounds\\Aberration\\Aberration - Construction Kits\\Mutant Elements\\MOVECrea_MUTANT-Moan Element 03_Ocular_Aberration.wav",
+    "start": 0.0,
+    "end": 2.6,
+    "why": "a heavy moan, all of it going"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Aberration-Designed-Construction-Kit-Ocular-Sounds\\Aberration\\Aberration - Designed\\Mutants\\DSGNMorph_MUTANT-Somatic Lament_Ocular_Aberration.wav",
+    "start": 0.2,
+    "end": 2.9,
+    "why": "a deep bowed groan, the last breath"
+   }
+  ]
+ },
+ "zombies/guardian/roar": {
+  "hp": 80,
+  "takes": [
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Aberration-Designed-Construction-Kit-Ocular-Sounds\\Aberration\\Aberration - Designed\\Mutants\\DSGNDist_MUTANT-Distorted Throat_Ocular_Aberration.wav",
+    "start": 0.15,
+    "end": 4.0,
+    "why": "a full torn-throat roar"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Aberration-Designed-Construction-Kit-Ocular-Sounds\\Aberration\\Aberration - Designed\\Mutants\\DSGNDist_MUTANT-Aberrant Guttural_Ocular_Aberration.wav",
+    "start": 0.5,
+    "end": 4.5,
+    "why": "a guttural roar that swells"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Aberration-Designed-Construction-Kit-Ocular-Sounds\\Aberration\\Aberration - Designed\\Mutants\\DSGNErie_MUTANT-Fossilized Enigma_Ocular_Aberration.wav",
+    "start": 0.0,
+    "end": 4.0,
+    "why": "a roar with an awful voice inside it"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Aberration-Designed-Construction-Kit-Ocular-Sounds\\Aberration\\Aberration - Designed\\Mutants\\DSGNMorph_MUTANT-Spore Release_Ocular_Aberration.wav",
+    "start": 0.1,
+    "end": 3.8,
+    "why": "a wet bellow"
+   }
+  ]
+ },
+ "zombies/guardian/slam": {
+  "hp": 20,
+  "takes": [
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Sinister-Designed-Construction-Kit-Ocular-Sounds\\Sinister-Designed-ConstructionKit-Ocular-Sounds\\Sinister - Designed\\Hits\\DSGNImpt_HITS-Stomp_Ocular_SINISTER.wav",
+    "start": 0.17,
+    "end": 1.95,
+    "why": "a huge foot or fist into the floor",
+    "fadeIn": 0.002
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Sinister-Designed-Construction-Kit-Ocular-Sounds\\Sinister-Designed-ConstructionKit-Ocular-Sounds\\Sinister - Designed\\Hits\\DSGNImpt_HITS-Hammer_Ocular_SINISTER.wav",
+    "start": 0.0,
+    "end": 1.8,
+    "why": "a hammering impact with a tail",
+    "fadeIn": 0.002
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Sinister-Designed-Construction-Kit-Ocular-Sounds\\Sinister-Designed-ConstructionKit-Ocular-Sounds\\Sinister - Designed\\Hits\\DSGNImpt_HITS-Tower_Ocular_SINISTER.wav",
+    "start": 0.05,
+    "end": 1.85,
+    "why": "a falling-tower thud",
+    "fadeIn": 0.002
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Foundation-Ocular-Sounds\\Foundation-Ocular-Sounds\\Booms\\DSGNBoom_BOOM-Groundbreaking_Ocular_Foundation.wav",
+    "start": 0.03,
+    "end": 1.6,
+    "why": "the ground cracking",
+    "fadeIn": 0.002
+   }
+  ]
+ },
+ "zombies/caveguard/idle": {
+  "hp": 110,
+  "takes": [
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Sinister-Designed-Construction-Kit-Ocular-Sounds\\Sinister-Designed-ConstructionKit-Ocular-Sounds\\Sinister - Designed\\Breaths\\DSGNMisc_BREATHS-Behind You_Ocular_SINISTER.wav",
+    "start": 0.8,
+    "end": 2.04,
+    "why": "a breath drawn in just behind you"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Sinister-Designed-Construction-Kit-Ocular-Sounds\\Sinister-Designed-ConstructionKit-Ocular-Sounds\\Sinister - Designed\\Breaths\\DSGNMisc_BREATHS-Inner Ear_Ocular_SINISTER.wav",
+    "start": 0.9,
+    "end": 2.34,
+    "why": "a close, rising breath"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Sinister-Designed-Construction-Kit-Ocular-Sounds\\Sinister-Designed-ConstructionKit-Ocular-Sounds\\Sinister - Designed\\Breaths\\DSGNMisc_BREATHS-Frost_Ocular_SINISTER.wav",
+    "start": 0.4,
+    "end": 1.57,
+    "why": "a cold exhale"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Aberration-Designed-Construction-Kit-Ocular-Sounds\\Aberration\\Aberration - Construction Kits\\Vocal Elements\\HMNBrth_VOCAL-Breath Element_Ocular_Aberration.wav",
+    "start": 0.2,
+    "end": 2.1,
+    "why": "a shuddering gasp"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Sinister-Designed-Construction-Kit-Ocular-Sounds\\Sinister-Designed-ConstructionKit-Ocular-Sounds\\Sinister - Designed\\Breaths\\DSGNMisc_BREATHS-Whispers_Ocular_SINISTER.wav",
+    "start": 0.0,
+    "end": 1.3,
+    "why": "breath that almost whispers"
+   }
+  ]
+ },
+ "zombies/caveguard/chase": {
+  "hp": 250,
+  "takes": [
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Sinister-Designed-Construction-Kit-Ocular-Sounds\\Sinister-Designed-ConstructionKit-Ocular-Sounds\\Sinister - Designed\\Breaths\\DSGNMisc_BREATHS-Scratch_Ocular_SINISTER.wav",
+    "start": 0.0,
+    "end": 1.0,
+    "why": "a scraping hiss"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Sinister-Designed-Construction-Kit-Ocular-Sounds\\Sinister-Designed-ConstructionKit-Ocular-Sounds\\Sinister - Designed\\Breaths\\DSGNMisc_BREATHS-Hey_Ocular_SINISTER.wav",
+    "start": 0.0,
+    "end": 1.2,
+    "why": "a hard breathy rush"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Sinister-Designed-Construction-Kit-Ocular-Sounds\\Sinister-Designed-ConstructionKit-Ocular-Sounds\\Sinister - Designed\\Breaths\\DSGNMisc_BREATHS-Shadows_Ocular_SINISTER.wav",
+    "start": 0.0,
+    "end": 1.2,
+    "why": "a fast, low breath"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Sinister-Designed-Construction-Kit-Ocular-Sounds\\Sinister-Designed-ConstructionKit-Ocular-Sounds\\Sinister - Designed\\Strings Natural\\DSGNMisc_STRINGS NATURAL-Insect F#_Ocular_SINISTER.wav",
+    "start": 0.0,
+    "end": 0.75,
+    "why": "a clicking insect skitter"
+   }
+  ]
+ },
+ "zombies/caveguard/attack": {
+  "hp": 110,
+  "takes": [
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Sinister-Designed-Construction-Kit-Ocular-Sounds\\Sinister-Designed-ConstructionKit-Ocular-Sounds\\Sinister - Designed\\Strings Natural\\DSGNMisc_STRINGS NATURAL-Scratch A#_Ocular_SINISTER.wav",
+    "start": 0.0,
+    "end": 0.9,
+    "why": "a rasping, scraping strike"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Sinister-Designed-Construction-Kit-Ocular-Sounds\\Sinister-Designed-ConstructionKit-Ocular-Sounds\\Sinister - Designed\\Whoosh\\DSGNWhsh_WHOOSH-Chatter _Ocular_SINISTER.wav",
+    "start": 0.2,
+    "end": 1.2,
+    "why": "a whistling rasp as it grabs"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Sinister-Designed-Construction-Kit-Ocular-Sounds\\Sinister-Designed-ConstructionKit-Ocular-Sounds\\Sinister - Designed\\Strings Natural\\DSGNMisc_STRINGS NATURAL-Insect F#_Ocular_SINISTER.wav",
+    "start": 0.0,
+    "end": 0.8,
+    "why": "a sharp chittering snap"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Aberration-Designed-Construction-Kit-Ocular-Sounds\\Aberration\\Aberration - Construction Kits\\Mutant Elements\\MOVECrea_MUTANT-Mutation Element 02_Ocular_Aberration.wav",
+    "start": 0.05,
+    "end": 1.1,
+    "why": "wet clicks, lunging"
+   }
+  ]
+ },
+ "zombies/caveguard/hurt": {
+  "hp": 250,
+  "takes": [
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Sinister-Designed-Construction-Kit-Ocular-Sounds\\Sinister-Designed-ConstructionKit-Ocular-Sounds\\Sinister - Designed\\Strings Natural\\DSGNMisc_STRINGS NATURAL-Insect F#_Ocular_SINISTER.wav",
+    "start": 0.0,
+    "end": 0.45,
+    "why": "a high chitter"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Sinister-Designed-Construction-Kit-Ocular-Sounds\\Sinister-Designed-ConstructionKit-Ocular-Sounds\\Sinister - Designed\\Strings Natural\\DSGNMisc_STRINGS NATURAL-Scratch A#_Ocular_SINISTER.wav",
+    "start": 0.05,
+    "end": 0.5,
+    "why": "a raspy squeal"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Sinister-Designed-Construction-Kit-Ocular-Sounds\\Sinister-Designed-ConstructionKit-Ocular-Sounds\\Sinister - Designed\\Breaths\\DSGNMisc_BREATHS-Scratch_Ocular_SINISTER.wav",
+    "start": 0.0,
+    "end": 0.45,
+    "why": "a short scraping hiss"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Aberration-Designed-Construction-Kit-Ocular-Sounds\\Aberration\\Aberration - Construction Kits\\Mutant Elements\\MOVECrea_MUTANT-Mutation Element 04_Ocular_Aberration.wav",
+    "start": 0.1,
+    "end": 0.6,
+    "why": "a burst of wet clicks"
+   }
+  ]
+ },
+ "zombies/caveguard/death": {
+  "hp": 110,
+  "takes": [
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Sinister-Designed-Construction-Kit-Ocular-Sounds\\Sinister-Designed-ConstructionKit-Ocular-Sounds\\Sinister - Designed\\Breaths\\DSGNMisc_BREATHS-Passing Through_Ocular_SINISTER.wav",
+    "start": 1.0,
+    "end": 3.0,
+    "why": "a whistling wheeze passing out"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Aberration-Designed-Construction-Kit-Ocular-Sounds\\Aberration\\Aberration - Construction Kits\\Dark Elements\\RUBRFric_DARK-Friction Moan Element 09_Ocular_Aberration.wav",
+    "start": 0.0,
+    "end": 1.9,
+    "why": "a creaking last breath"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Sinister-Designed-Construction-Kit-Ocular-Sounds\\Sinister-Designed-ConstructionKit-Ocular-Sounds\\Sinister - Designed\\Breaths\\DSGNMisc_BREATHS-Catacomb_Ocular_SINISTER.wav",
+    "start": 0.0,
+    "end": 2.2,
+    "why": "a rattling breath in the dark"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Aberration-Designed-Construction-Kit-Ocular-Sounds\\Aberration\\Aberration - Construction Kits\\Mutant Elements\\MOVECrea_MUTANT-Moan Element 07_Ocular_Aberration.wav",
+    "start": 0.2,
+    "end": 2.5,
+    "why": "a long falling moan"
+   }
+  ]
+ },
+ "zombies/caveguard/growl": {
+  "hp": 50,
+  "takes": [
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Aberration-Designed-Construction-Kit-Ocular-Sounds\\Aberration\\Aberration - Construction Kits\\Dark Elements\\RUBRFric_DARK-Friction Moan Element 01_Ocular_Aberration.wav",
+    "start": 0.2,
+    "end": 3.6,
+    "why": "a creaking growl in the dark"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Aberration-Designed-Construction-Kit-Ocular-Sounds\\Aberration\\Aberration - Construction Kits\\Dark Elements\\RUBRFric_DARK-Friction Moan Element 02_Ocular_Aberration.wav",
+    "start": 0.0,
+    "end": 3.3,
+    "why": "a grinding growl"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Aberration-Designed-Construction-Kit-Ocular-Sounds\\Aberration\\Aberration - Construction Kits\\Dark Elements\\RUBRFric_DARK-Friction Moan Element 07_Ocular_Aberration.wav",
+    "start": 0.2,
+    "end": 3.6,
+    "why": "a growl that rises and falls"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Aberration-Designed-Construction-Kit-Ocular-Sounds\\Aberration\\Aberration - Construction Kits\\Dark Elements\\RUBRFric_DARK-Friction Moan Element 10_Ocular_Aberration.wav",
+    "start": 0.1,
+    "end": 2.9,
+    "why": "a low dragged growl"
+   }
+  ]
+ },
+ "zombies/caveguard/screech": {
+  "hp": 80,
+  "takes": [
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Puncture-Designed-Construction-Kit-Ocular-Sounds\\Puncture\\Puncture - Designed\\Jump Scares\\Stingers\\DSGNStngr_JUMP SCARE-From Below_Puncture_Ocular.wav",
+    "start": 0.0,
+    "end": 2.4,
+    "why": "a shriek tearing up from below"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Sinister-Designed-Construction-Kit-Ocular-Sounds\\Sinister-Designed-ConstructionKit-Ocular-Sounds\\Sinister - Designed\\Whoosh\\DSGNWhsh_WHOOSH-Chatter _Ocular_SINISTER.wav",
+    "start": 0.1,
+    "end": 2.3,
+    "why": "a whistling, chattering screech"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Sinister-Designed-Construction-Kit-Ocular-Sounds\\Sinister-Designed-ConstructionKit-Ocular-Sounds\\Sinister - Designed\\Breaths\\DSGNMisc_BREATHS-Supernatural_Ocular_SINISTER.wav",
+    "start": 0.8,
+    "end": 2.4,
+    "why": "a screaming breath"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Puncture-Designed-Construction-Kit-Ocular-Sounds\\Puncture\\Puncture - Designed\\Jump Scares\\Stingers\\DSGNStngr_JUMP SCARE-Cavern_Puncture_Ocular.wav",
+    "start": 0.0,
+    "end": 2.2,
+    "why": "a cavern scream with its echo"
+   }
+  ]
+ },
+ "zombies/caveguard/cave-groan": {
+  "hp": 40,
+  "takes": [
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Aberration-Designed-Construction-Kit-Ocular-Sounds\\Aberration\\Aberration - Construction Kits\\Dark Elements\\RUBRFric_DARK-Friction Moan Element 04_Ocular_Aberration.wav",
+    "start": 0.1,
+    "end": 3.3,
+    "why": "the rock groaning, deep"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Aberration-Designed-Construction-Kit-Ocular-Sounds\\Aberration\\Aberration - Construction Kits\\Dark Elements\\RUBRFric_DARK-Friction Moan Element 05_Ocular_Aberration.wav",
+    "start": 0.1,
+    "end": 3.0,
+    "why": "a deep friction moan"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Aberration-Designed-Construction-Kit-Ocular-Sounds\\Aberration\\Aberration - Construction Kits\\Dark Elements\\RUBRFric_DARK-Friction Moan Element 06_Ocular_Aberration.wav",
+    "start": 0.1,
+    "end": 3.0,
+    "why": "a groan with knocks in it"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Sinister-Designed-Construction-Kit-Ocular-Sounds\\Sinister-Designed-ConstructionKit-Ocular-Sounds\\Sinister - Designed\\Strings Natural\\DSGNMisc_STRINGS NATURAL-Moan G# G_Ocular_SINISTER.wav",
+    "start": 0.0,
+    "end": 2.6,
+    "why": "a bowed moan, far in"
+   }
+  ]
+ },
+ "zombies/caveguard/in-walls": {
+  "hp": 30,
+  "takes": [
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Sinister-Designed-Construction-Kit-Ocular-Sounds\\Sinister-Designed-ConstructionKit-Ocular-Sounds\\Sinister - Designed\\Whoosh\\DSGNWhsh_WHOOSH-In the Walls _Ocular_SINISTER.wav",
+    "start": 0.3,
+    "end": 6.5,
+    "why": "something moving inside the rock"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Sinister-Designed-Construction-Kit-Ocular-Sounds\\Sinister-Designed-ConstructionKit-Ocular-Sounds\\Sinister - Designed\\Whoosh\\DSGNWhsh_WHOOSH-Dirt _Ocular_SINISTER.wav",
+    "start": 0.6,
+    "end": 6.4,
+    "why": "earth shifting as it passes"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Sinister-Designed-Construction-Kit-Ocular-Sounds\\Sinister-Designed-ConstructionKit-Ocular-Sounds\\Sinister - Designed\\Whoosh\\DSGNWhsh_WHOOSH-Crawler _Ocular_SINISTER.wav",
+    "start": 0.0,
+    "end": 5.0,
+    "why": "a heavy crawl behind the wall"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Sinister-Designed-Construction-Kit-Ocular-Sounds\\Sinister-Designed-ConstructionKit-Ocular-Sounds\\Sinister - Designed\\Strings Natural\\DSGNGran_STRINGS NATURAL-Crawling 01_Ocular_SINISTER.wav",
+    "start": 0.1,
+    "end": 5.5,
+    "why": "a scuttling, many-legged scrape"
+   }
+  ]
+ }
+}

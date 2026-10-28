@@ -1,0 +1,42 @@
+GRANT cursor CU-164: starting one game-test command
+check-players: 308 player.position reads, all in the allowed places
+ok    t123     6 pass   0 fail  23.1s
+ok    t124     5 pass   0 fail  41.8s
+ok    t125    10 pass   0 fail  37.5s
+ok    t126    12 pass   0 fail  42.5s
+ok    t127    28 pass   0 fail  76.3s
+ok    t128    28 pass   0 fail  95.5s
+ok    t129    22 pass   0 fail  34.4s
+ok    t130    14 pass   0 fail  34.5s
+FAIL  t131    12 pass   6 fail  65.4s
+ok    t132    11 pass   0 fail  34.8s
+ok    t133     9 pass   0 fail  45.7s
+ok    t134     9 pass   0 fail  21.7s
+ok    t135     8 pass   0 fail  35.0s
+ok    t136    36 pass   0 fail  51.1s
+ok    t137    15 pass   0 fail  38.8s
+ok    t138     6 pass   0 fail  35.0s
+ok    t139    13 pass   0 fail  47.2s
+ok    t140    17 pass   0 fail  29.7s
+ok    t141     7 pass   0 fail  35.6s
+ok    t142    10 pass   0 fail  47.4s
+ok    t143    17 pass   0 fail  74.5s
+ok    t144     9 pass   0 fail  35.3s
+ok    t145    17 pass   0 fail  21.1s
+ok    t146    43 pass   0 fail  39.1s
+FAIL  t147     1 pass   2 fail  67.0s
+
+25 checks: 365 pass, 8 fail
+
+by owner:
+  unassigned
+    t131   6 fail  FAIL the request calls the boat and sounds the alarm (extraction called)
+           FAIL the request calls the boat and sounds the alarm (extraction called)
+           FAIL the alarm starts the night, still called
+           FAIL through pushes 1-5 it stays called
+           FAIL the last push (6) makes it due (extraction due, once)
+           FAIL the dawn after: the boat still waits (due, not offered again)
+           FAIL the next alarm sends it away (extraction gone)
+    t147   2 fail  FAIL the called boat is due at the last push and coming in (offered, null)
+           FAIL the called boat is due at the last push and coming in (offered, null)
+           FAIL threw: TypeError: Cannot read properties of null (reading 'state')

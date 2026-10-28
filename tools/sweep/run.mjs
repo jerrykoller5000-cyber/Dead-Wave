@@ -21,10 +21,12 @@ const soft = argv.includes('--soft'), show = argv.includes('--show'), match = ar
 const PAGE = `.sweep-${process.pid}.html`;
 {
   const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
-  const tag = '</script>\n  <script type="module">\n    import * as THREE from \'three\';';
-  if (!html.includes(tag)) { console.error('sweep: the import map / game module boundary moved; update tools/sweep/run.mjs'); process.exit(2); }
-  const patch = `</script><script type="module">import * as S from 'three'; const add = S.Object3D.prototype.add; S.Object3D.prototype.add = function (...o) { if (this.isScene) { const st = new Error().stack; for (const c of o) if (c && c.userData && !c.userData.sweepSite) c.userData.sweepSite = st; } return add.apply(this, o); };</script>`;
-  fs.writeFileSync(path.join(ROOT, PAGE), html.replace(tag, patch + tag.slice('</script>'.length)));
+  // The game's module (CL-269: something now stands between it and the import map, so the patch goes at the end of
+  // the line before the game's module, which keeps the line numbers).
+  const tag = '\n  <script type="module">\n    import * as THREE from \'three\';';
+  if (!html.includes(tag)) { console.error('sweep: the game module\'s first lines moved; update tools/sweep/run.mjs'); process.exit(2); }
+  const patch = `<script type="module">import * as S from 'three'; const add = S.Object3D.prototype.add; S.Object3D.prototype.add = function (...o) { if (this.isScene) { const st = new Error().stack; for (const c of o) if (c && c.userData && !c.userData.sweepSite) c.userData.sweepSite = st; } return add.apply(this, o); };</script>`;
+  fs.writeFileSync(path.join(ROOT, PAGE), html.replace(tag, patch + tag));
 }
 process.on('exit', () => { try { fs.unlinkSync(path.join(ROOT, PAGE)); } catch { /* gone */ } });
 const server = await serve(ROOT, 0);

@@ -1,0 +1,155 @@
+{
+  "shots": [
+    {
+      "target": "zombie.shambler:statue",
+      "view": "side",
+      "time": "noon",
+      "move": {
+        "zoom": 2.8,
+        "pan": [
+          -0.25,
+          0.62
+        ]
+      },
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-trim-after/shambler-head-side.png"
+    },
+    {
+      "target": "zombie.shambler:statue",
+      "view": "back",
+      "time": "noon",
+      "move": {
+        "zoom": 2.8,
+        "pan": [
+          0,
+          0.62
+        ]
+      },
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-trim-after/shambler-head-back.png"
+    },
+    {
+      "target": "zombie.feral:statue",
+      "view": "side",
+      "time": "noon",
+      "move": {
+        "zoom": 2.8,
+        "pan": [
+          -0.65,
+          0.43
+        ]
+      },
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-trim-after/feral-head-side.png"
+    },
+    {
+      "target": "zombie.feral:statue",
+      "view": "back",
+      "time": "noon",
+      "move": {
+        "zoom": 2.8,
+        "pan": [
+          0,
+          0.43
+        ]
+      },
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-trim-after/feral-head-back.png"
+    },
+    {
+      "target": "zombie.drowned:statue",
+      "view": "side",
+      "time": "noon",
+      "move": {
+        "zoom": 2.8,
+        "pan": [
+          -0.2,
+          0.62
+        ]
+      },
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-trim-after/drowned-head-side.png"
+    },
+    {
+      "target": "zombie.drowned:statue",
+      "view": "back",
+      "time": "noon",
+      "move": {
+        "zoom": 2.8,
+        "pan": [
+          0,
+          0.62
+        ]
+      },
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-trim-after/drowned-head-back.png"
+    },
+    {
+      "target": "zombie.spitter:statue",
+      "view": "side",
+      "time": "noon",
+      "move": {
+        "zoom": 2.8,
+        "pan": [
+          -0.15,
+          0.65
+        ]
+      },
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-trim-after/spitter-head-side.png"
+    },
+    {
+      "target": "zombie.spitter:statue",
+      "view": "back",
+      "time": "noon",
+      "move": {
+        "zoom": 2.8,
+        "pan": [
+          0,
+          0.65
+        ]
+      },
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-trim-after/spitter-head-back.png"
+    },
+    {
+      "target": "zombie.bomber:statue",
+      "view": "side",
+      "time": "noon",
+      "move": {
+        "zoom": 2.8,
+        "pan": [
+          -0.35,
+          0.75
+        ]
+      },
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-trim-after/bomber-head-side.png"
+    },
+    {
+      "target": "zombie.bomber:statue",
+      "view": "back",
+      "time": "noon",
+      "move": {
+        "zoom": 2.8,
+        "pan": [
+          0,
+          0.75
+        ]
+      },
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-trim-after/bomber-head-back.png"
+    }
+  ],
+  "out": "handoffs/GP-19970/face-trim-after"
+}

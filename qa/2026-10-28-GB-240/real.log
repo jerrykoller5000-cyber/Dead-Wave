@@ -1,0 +1,92 @@
+Game-test request 4d5d87f8-ae05-4b2a-ad72-79effe3c9c9d queued at position 4. Waiting...
+GRANT grokbot GB-240: starting one game-test command
+ok    t69      18 pass   0 fail  42.7s  (real renderer)
+    PASS GB-39 hooks exported
+    PASS a shambler stands in the mouth of cave 0
+    PASS the round hit the shambler (21 -> -3)
+    PASS a round that hits a zombie does not poke the cave (not even the warning)
+    PASS the first round of the run into an empty mouth is the warning
+    PASS the next round into an empty mouth brings the guardian out
+    PASS the wave is spawning
+    PASS phase is wave
+    PASS assault cave is busy while the wave spawns
+    PASS a round into the assault mouth mid-spawn does not poke
+    PASS nor does a grenade at the mouth
+    PASS assault cave not marked used
+    PASS a different, empty cave is not busy
+    PASS a different cave can still be poked mid-wave
+    PASS the whole wave is out
+    PASS spawned out and the mouth clear: not busy
+    PASS a zombie standing in the mouth makes it busy
+    PASS the assault cave pokes normally once its mouth is clear
+ok    t69      18 pass   0 fail  47.8s  (real renderer)
+    PASS GB-39 hooks exported
+    PASS a shambler stands in the mouth of cave 1
+    PASS the round hit the shambler (24 -> 0)
+    PASS a round that hits a zombie does not poke the cave (not even the warning)
+    PASS the first round of the run into an empty mouth is the warning
+    PASS the next round into an empty mouth brings the guardian out
+    PASS the wave is spawning
+    PASS phase is wave
+    PASS assault cave is busy while the wave spawns
+    PASS a round into the assault mouth mid-spawn does not poke
+    PASS nor does a grenade at the mouth
+    PASS assault cave not marked used
+    PASS a different, empty cave is not busy
+    PASS a different cave can still be poked mid-wave
+    PASS the whole wave is out
+    PASS spawned out and the mouth clear: not busy
+    PASS a zombie standing in the mouth makes it busy
+    PASS the assault cave pokes normally once its mouth is clear
+ok    t75      16 pass   0 fail  37.7s  (real renderer)
+    PASS GB-50 hooks exported
+    PASS knocked back along the blow (kv -2.44, 0.00)
+    PASS a stumble: lurch 0.73, aim off -0.064 rad, jolt 0.26
+    PASS a shambler does not put him on a knee
+    PASS a short slide: 0.36 m (dz 0.00)
+    PASS over within a moment (speedK 1)
+    PASS a brute puts him on one knee (0.55 s)
+    PASS slowed, never stopped: walk speed x0.45 at worst
+    PASS more for a brute: 0.92 m vs 0.36 m
+    PASS back on his feet within 0.55 s
+    PASS no knee lock: the next heavy hit within 3 s only knocks him back
+    PASS five spawned inside the marine (5)
+    PASS nobody inside him: the worst gap is 0.040 m (feral, 520 samples)
+    PASS they crowd him: 4 of 5 at arm’s length
+    PASS and their blows land from the ring (7 hits, -46 hp)
+    PASS no page errors ()
+ok    t75      16 pass   0 fail  38.7s  (real renderer)
+    PASS GB-50 hooks exported
+    PASS knocked back along the blow (kv -2.44, 0.00)
+    PASS a stumble: lurch 0.73, aim off -0.064 rad, jolt 0.26
+    PASS a shambler does not put him on a knee
+    PASS a short slide: 0.36 m (dz 0.00)
+    PASS over within a moment (speedK 1)
+    PASS a brute puts him on one knee (0.55 s)
+    PASS slowed, never stopped: walk speed x0.45 at worst
+    PASS more for a brute: 0.93 m vs 0.36 m
+    PASS back on his feet within 0.55 s
+    PASS no knee lock: the next heavy hit within 3 s only knocks him back
+    PASS five spawned inside the marine (5)
+    PASS nobody inside him: the worst gap is 0.040 m (feral, 490 samples)
+    PASS they crowd him: 4 of 5 at arm’s length
+    PASS and their blows land from the ring (5 hits, -34 hp)
+    PASS no page errors ()
+ok    t75      16 pass   0 fail  38.6s  (real renderer)
+    PASS GB-50 hooks exported
+    PASS knocked back along the blow (kv -2.44, 0.00)
+    PASS a stumble: lurch 0.73, aim off -0.064 rad, jolt 0.26
+    PASS a shambler does not put him on a knee
+    PASS a short slide: 0.36 m (dz 0.00)
+    PASS over within a moment (speedK 1)
+    PASS a brute puts him on one knee (0.55 s)
+    PASS slowed, never stopped: walk speed x0.45 at worst
+    PASS more for a brute: 0.92 m vs 0.36 m
+    PASS back on his feet within 0.55 s
+    PASS no knee lock: the next heavy hit within 3 s only knocks him back
+    PASS five spawned inside the marine (5)
+    PASS nobody inside him: the worst gap is 0.040 m (shambler, 515 samples)
+    PASS they crowd him: 3 of 5 at arm’s length
+    PASS and their blows land from the ring (6 hits, -40 hp)
+    PASS no page errors ()
+5 checks: 84 pass, 0 fail (real renderer)

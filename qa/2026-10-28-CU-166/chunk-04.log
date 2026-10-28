@@ -1,0 +1,41 @@
+Game-test request 0ad65d5d-3c37-4a47-a8f8-97469671f1ba queued at position 3. Waiting...
+GRANT cursor CU-166: starting one game-test command
+check-players: 309 player.position reads, all in the allowed places
+ok    t97     15 pass   0 fail  53.8s
+           INFO ragdoll off: 160 spawned, 160 alive at the end, 113 ticks, frame 134.34 ms avg / 708.30 ms worst (headless)
+           INFO ragdoll on: 160 spawned, 160 alive at the end, 71 ticks, frame 252.58 ms avg / 1453.30 ms worst (headless)
+ok    t98     20 pass   0 fail  88.3s
+           INFO 120 spawned, 120 alive after 106.9 s and 26 legs (650 ticks)
+ok    t99      6 pass   0 fail  149.5s
+ok    t100     7 pass   0 fail  41.3s
+ok    t101     9 pass   0 fail  41.7s
+ok    t102    17 pass   0 fail  48.7s
+ok    t103     8 pass   0 fail  43.0s
+ok    t104     5 pass   0 fail  43.4s
+ok    t105    15 pass   0 fail  55.3s
+ok    t106     9 pass   0 fail  121.8s
+ok    t107     8 pass   0 fail  40.4s
+ok    t108     9 pass   0 fail  39.9s
+ok    t109     5 pass   0 fail  41.9s
+ok    t110     4 pass   0 fail  40.5s
+           INFO feral head centre p10 0.733, median 0.791 of hitH (line 0.7)
+           INFO leaper head centre p10 0.604, median 0.630 of hitH (line 0.55)
+           INFO spider head centre p10 0.634, median 0.658 of hitH (line 0.6)
+ok    t111    11 pass   0 fail  53.0s
+ok    t112    13 pass   0 fail  48.1s
+ok    t113     5 pass   0 fail  76.9s
+ok    t114     8 pass   0 fail  46.1s
+ok    t115    10 pass   0 fail  44.9s
+FAIL  t116     6 pass   1 fail  53.3s
+ok    t117    17 pass   0 fail  47.7s
+ok    t119    20 pass   0 fail  44.6s
+ok    t120    11 pass   0 fail  45.7s
+ok    t121    31 pass   0 fail  26.0s
+ok    t122    14 pass   0 fail  45.1s
+
+25 checks: 283 pass, 1 fail
+
+by owner:
+  unassigned
+    t116   1 fail  FAIL a campfire drops to embers in the rain and comes back: 2.06 -> 0.73 -> 2.49
+           FAIL a campfire drops to embers in the rain and comes back: 2.06 -> 0.73 -> 2.49

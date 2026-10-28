@@ -565,7 +565,10 @@ export const AudioSys = (() => {
   const BED_K = { 'world/wind-day': 0.008, 'world/wind-night': 0.008, 'world/crickets-night': 0.008, 'world/frogs-night': 0.01, 'world/river': 0.016, 'world/lake-shore': 0.016,
     'world/rain': 0.02, 'world/campfire': 0.006, 'world/fire-burning': 0.008, 'world/cave-mouth': 0.018, 'below/warren-ambience': 0.012,
     'player/nvg-hum': 0.006, 'weapon-foley/chainsaw-idle': 0.03, 'builds/lure': 0.036, 'vehicles/floatplane-idle': 0.04, 'training/ventilation': 0.01,
-    'world/graveyard-ambience': 0.03 };
+    'world/graveyard-ambience': 0.03, 'hq/generator': 0.014,
+    // CL-272 (GB-239): the rotary gun from the pack: its roar while it fires sits where one synthesized round does (the
+    // rounds still play over it, like the other guns' layered takes); its barrels at speed where the synth's motor did
+    'weapons/rotary-gun-loop': 0.03, 'weapons/rotary-spin-loop': 0.012 };
   function bed(key, id, vol, o = {}) {
     const c = ctx; if (!c) return false;
     let b = beds.get(key);
@@ -621,6 +624,7 @@ export const AudioSys = (() => {
     shotCount[id] = (shotCount[id] || 0) + 1;
     const c = ensure();
     if (!c || muted) return;
+    if (id === 'minigun' && !opts.accent) minigunRoar(opts.v != null ? opts.v : 1);   // CL-272: the pack's roar under the rounds
     if (!GUN_DEFS[id]) { fire(); return; }
     const B = bankFor(opts.suppressed ? id + ':s' : id) || (opts.suppressed ? bankFor(id) : null);
     if (!B) { fire(); return; }
@@ -727,6 +731,7 @@ export const AudioSys = (() => {
     [523, 659, 784, 1047].forEach((f, i) => playTone({ freq: f, type: 'square', dur: 0.12, vol: 0.1, when: i * 0.1 }));
   }
   function resetBlip() {
+    if (tk('ui/reset-blip')) return;   // CL-272: the terminal's blip from the packs
     playTone({ freq: 360, type: 'square', dur: 0.06, vol: 0.1 });
     playTone({ freq: 480, type: 'square', dur: 0.07, vol: 0.09, when: 0.05 });
   }
@@ -1003,7 +1008,9 @@ export const AudioSys = (() => {
     playTone({ freq: 62, type: 'sine', dur: 0.12, vol: 0.14 * vol, slideTo: 40 });
     playTone({ freq: 58, type: 'sine', dur: 0.1, vol: 0.1 * vol, slideTo: 36, when: 0.16 });
   }
-  function footstep(wet, running) {
+  // CL-272: ground ('stone' | 'metal' | 'leaves', batch 3's folders, from CU-164's picks) once the page knows it
+  function footstep(wet, running, ground = null) {
+    if (!wet && (ground === 'stone' || ground === 'metal' || ground === 'leaves') && tk('player/footstep-' + ground, running ? 1 : 0.85)) return;
     if (tk(wet ? 'player/footstep-water' : running ? 'player/footstep-run-dirt' : 'player/footstep-dirt', running ? 1 : 0.85)) return;   // CL-161
     const p = 0.85 + Math.random() * 0.3;
     if (wet) {
@@ -1919,15 +1926,28 @@ export const AudioSys = (() => {
   // the page: barrelSpinVel / SPIN_MAX). A motor (two detuned saws, darkened), a gear whine an octave and a half up,
   // and the barrels' rattle (noise through a band, chopped at the barrel rate). It winds up and down with k and goes
   // away entirely a second after it stops.
-  let spinV = null, spinIdleT = 0;
+  // CL-272 (GB-239): with the pack's takes, the barrels at speed are a recorded loop whose pitch and level follow k (it
+  // winds up and down with them; the synthesized motor rests), and while the gun fires its recorded roar runs under the
+  // rounds (minigunRoar, from fireWeapon), gone 0.2 s after the last round (a slow frame isn't a gap) or as soon as the
+  // barrels stop.
+  let spinV = null, spinIdleT = 0, roarAt = -9;
+  function minigunRoar(v = 1) {
+    const c = ctx; if (!c) return false;
+    if (!bed('minigun-roar', 'weapons/rotary-gun-loop', v * LAYER_TAKE_V, { bus: weapBus, tc: 0.012 })) return false;
+    roarAt = c.currentTime;
+    return true;
+  }
   function minigunSpin(k = 0) {
     const c = ctx;
     if (!c) return;
     k = Math.max(0, Math.min(1, +k || 0));
     if (muted) k = 0;
     const t = c.currentTime;
+    if (beds.has('minigun-roar') && (k < 0.02 || t - roarAt > 0.2)) stopBed('minigun-roar', 0.12);
+    const rec = (k >= 0.02 || beds.has('minigun-spin')) &&
+      bed('minigun-spin', 'weapons/rotary-spin-loop', Math.pow(k, 0.8), { bus: weapBus, rate: 0.55 + 0.45 * k, tc: 0.06 });
     if (!spinV) {
-      if (k < 0.02) return;
+      if (k < 0.02 || rec) return;
       const g = c.createGain(); g.gain.value = 0;
       const lp = c.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 900; lp.Q.value = 0.9;
       const o1 = c.createOscillator(); o1.type = 'sawtooth';
@@ -1952,7 +1972,7 @@ export const AudioSys = (() => {
     spinV.wh.frequency.setTargetAtTime(f * 5.6, t, 0.05);
     spinV.lfo.frequency.setTargetAtTime(4 + 52 * k, t, 0.05);
     spinV.lp.frequency.setTargetAtTime(500 + 1600 * k, t, 0.08);
-    spinV.g.gain.setTargetAtTime(0.016 * Math.pow(k, 0.8), t, 0.06);
+    spinV.g.gain.setTargetAtTime(rec ? 0 : 0.016 * Math.pow(k, 0.8), t, 0.06);
     if (k < 0.02) {
       if (!spinIdleT) spinIdleT = t;
       else if (t - spinIdleT > 1.2) { for (const o of [spinV.o1, spinV.o2, spinV.wh, spinV.lfo, spinV.ns]) { try { o.stop(); } catch (_) {} } for (const nd of spinV.nodes) { try { nd.disconnect(); } catch (_) {} } spinV = null; spinIdleT = 0; }
@@ -2080,6 +2100,12 @@ export const AudioSys = (() => {
     if (ctx && ctx.currentTime < (fireHiss.next || 0)) return;
     fireHiss.next = (ctx ? ctx.currentTime : 0) + 0.22;
     playNoise({ dur: 0.35, vol: 0.06 * volume, filterFreq: 3600, filterType: 'highpass', attack: 0.025, pan });
+  }
+  // CL-263 (docs/specs/story-chain.md §4, day 2): the HQ's generator running, Jerry's take as a bed while he's near it
+  // (felt more than heard, on the ambience bus). Nothing synthesized stands in: no take, no hum.
+  function generatorHum(volume = 1, pan = 0) {
+    if (volume < 0.02) return false;
+    return pulse('hq-generator', 'hq/generator', volume, pan, 0.8, ambBus);
   }
   function fireCrackle(volume = 1, pan = 0) {
     if (volume < 0.025) return;
@@ -3543,7 +3569,8 @@ export const AudioSys = (() => {
   const A = (fn) => onBus('amb', fn);
   // CL-161: the Training Ground's cues Jerry recorded (the rest stay ui/training-audio.js's tones)
   const TRAIN_TAKE = { step: 'player/footstep-tile', target: 'training/target-hit', reset: 'training/target-rise', impact: 'training/wall-impact',
-    open: 'training/panel-beep', spawn: 'training/gate-open', clear: 'training/clear-all', wake: 'training/infirmary-wake' };
+    open: 'training/panel-beep', spawn: 'training/gate-open', clear: 'training/clear-all', wake: 'training/infirmary-wake',
+    enter: 'training/panel-enter' };   // CL-272: the way in, from the packs
   function setTraining(on){
     on=!!on;if(on===trainingMode)return;trainingMode=on;
     try { if (on) setTimeout(() => { if (trainingMode) bed('vent', 'training/ventilation', 1, { bus: fxBus || sfxGain, tc: 1.5 }); }, 400); else stopBed('vent', 0.8); } catch (_) {}   // CL-161
@@ -3553,7 +3580,7 @@ export const AudioSys = (() => {
         trainingFacility=createTrainingFacilityAudio({clock:()=>c.currentTime,
           move:up=>trainingSound.cue('door:'+(up?1:.9)+':0'),
           bump:()=>tk('build-attacks/wire-hit',.6),
-          shot:()=>fireWeapon('minigun',{v:1}),
+          shot:()=>fireWeapon('minigun',{v:1,accent:true}),   // CL-272: an accent over its own rotary bed, not the player's roar
           motor:on=>on?bed('training-containment','weapons/rotary-gun',1.4,{bus:weapBus,tc:.08}):stopBed('training-containment',.15)});
         takes.init().then(()=>takes.preload(['build-attacks/wire-hit','weapons/rotary-gun'])).catch(()=>{});
       }
@@ -3578,6 +3605,7 @@ export const AudioSys = (() => {
   // the number station's beeps; the reboot's two-tone siren, loud on purpose (it calls the dead); the keypad.
   let relayStaticNodes = null, relayBootNodes = null;
   function relayClunk() {
+    if (tk('story/relay-clunk')) return;   // CL-272: a latch from the packs
     playNoise({ dur: 0.07, vol: 0.24, filterFreq: 900, filterType: 'lowpass', attack: 0.002 });
     playTone({ freq: 118, type: 'square', dur: 0.06, vol: 0.05 });
   }
@@ -3636,11 +3664,13 @@ export const AudioSys = (() => {
     relayBootNodes = { osc, lfo, g };
   }
   function relayKey(ok = true) {
+    if (tk(ok ? 'ui/panel-key' : 'ui/panel-deny', ok ? 0.8 : 1)) return;   // CL-272: the panel's keys and its deny
     if (ok) playTone({ freq: 1180, type: 'square', dur: 0.05, vol: 0.05 });
     else playTone({ freq: 140, type: 'square', dur: 0.38, vol: 0.09 });
   }
   function relayOpen() {
     relayClunk();
+    if (tk('ui/panel-open', 1, 0, 0.08)) return;   // CL-272: the chime from the packs; the clunk is the hatch's own
     playTone({ freq: 880, type: 'sine', dur: 0.18, vol: 0.08, when: 0.08 });
     playTone({ freq: 1320, type: 'sine', dur: 0.3, vol: 0.07, when: 0.2 });
   }
@@ -3701,6 +3731,7 @@ export const AudioSys = (() => {
     playTone({ freq: 4350, type: 'sine', dur: 0.9, vol: 0.015, attack: 0.35 });
   }
   function vaultDoor() {
+    if (tk('story/vault-door', 1, 0, 0, 0.35)) return;   // CL-272: a vault's bolts from the packs
     for (let i = 0; i < 9; i++) playNoise({ dur: 0.07, vol: 0.09, filterFreq: 700 + i * 60, filterType: 'bandpass', when: i * 0.11, attack: 0.003 });
     playTone({ freq: 90, type: 'square', dur: 1.0, vol: 0.03, slideTo: 70 });
     relayClunk();
@@ -3728,7 +3759,13 @@ export const AudioSys = (() => {
     osc.start(); osc2.start();
     vaultLiftNodes = { osc, osc2, g };
   }
+  // CL-272: the hikers' camera (GP-19974's clip): its screen flipped open or its power switch, from the packs; a tick without them
+  function cameraClick() {
+    if (tk('story/camera', 0.9)) return;
+    playNoise({ dur: 0.03, vol: 0.05, filterFreq: 3000, filterType: 'bandpass', attack: 0.002 });
+  }
   function paperRustle() {
+    if (tk('story/paper')) return;   // CL-272: a note sheet from the packs
     playNoise({ dur: 0.18, vol: 0.06, filterFreq: 3800, filterType: 'highpass', attack: 0.01 });
     playNoise({ dur: 0.12, vol: 0.04, filterFreq: 2600, filterType: 'bandpass', when: 0.14, attack: 0.01 });
   }
@@ -3737,7 +3774,8 @@ export const AudioSys = (() => {
     trainingState:()=>({enabled:trainingMode,...trainingSound?.state(),facility:trainingFacility?.state()}),
     unlock, toggleMute, isMuted, setMuted,
     fire: W(fire, [0.5, 0.75]), fireWeapon: W(fireWeapon, (id) => SHOT_DUCK[id] || [0.45, 0.7]),
-    minigunSpin, bankStats: () => ({ banks: banks.size, buildMs: Math.round(bankBuildMs), sync: bankSyncBuilds, syncKeys: bankSyncKeys.slice(), worker: bankWorkerBuilds, misses: bankMisses, voices: activeVoices, keys: [...banks.keys()], pending: warmQueue().length }),   // CL-134
+    minigunSpin, minigunState: () => ({ roar: beds.has('minigun-roar'), spin: beds.has('minigun-spin') }),   // CL-272: the pack's loops, for the checks
+    bankStats: () => ({ banks: banks.size, buildMs: Math.round(bankBuildMs), sync: bankSyncBuilds, syncKeys: bankSyncKeys.slice(), worker: bankWorkerBuilds, misses: bankMisses, voices: activeVoices, keys: [...banks.keys()], pending: warmQueue().length }),   // CL-134
     warmBanks, GUN_KEYS: Object.keys(GUN_DEFS), FOLEY_KEYS: Object.keys(FOLEY_DEFS),
     calibPlay: W((key, o) => { const c = ensure(); if (!c || muted) return; const B = bankFor(key, true); if (B) playBank(B, o || {}); }),   // one bank, as it is (the listening page, the calibration)
     tickDbg: () => ({ ...tickDbg }),   // CL-160
@@ -3757,7 +3795,7 @@ export const AudioSys = (() => {
     chainsawEngine: W(chainsawEngine), chainsawDryPull: W(chainsawDryPull), reloadCue: W(reloadCue),
     turretServos, mineBeep: W(mineBeep), buildHit: W(buildHit), buildBreak: W(buildBreak), buildSound,
     zombieVoice, nvgToggle, nvgHum, klaxon: W(klaxon, [0.3, 0.6, 0.3]), alarmRumble, caveScreech, caveGroan, pitRumble, flareWhistle, flareBurst, hqMachine, hqDing, bagThrow, skullPickup, kioskBuy, kioskTab, doorSound, footstepWood,
-    spit, acidHit, scream, bossSlam: W(bossSlam, BIG), bossRoar, guardianGrowl, spikeSnap, flameBurst: W(flameBurst, [0.6, 0.82]), stopFlames, fireHiss, fireCrackle, lighterStrike,
+    spit, acidHit, scream, bossSlam: W(bossSlam, BIG), bossRoar, guardianGrowl, spikeSnap, flameBurst: W(flameBurst, [0.6, 0.82]), stopFlames, fireHiss, fireCrackle, generatorHum, lighterStrike,
     crateLand, pickup, repairClank, sellChime,
     bulletImpact: W(bulletImpact), knifeHit: W(knifeHit), gore: W(gore), grenadeThrow: W(grenadeThrow),
     grenadeBounce: W(grenadeBounce), heavyStep, emerge, shutter, medkit, medPen, playerBreath, deadVoice, DEAD_VOICES, voiceCount, deadStep, stepCount, shotCount, planeFlyover, chuteOpen, gravePat, chisel, heave, bigSplash, graveAmbience, surface,
@@ -3771,7 +3809,7 @@ export const AudioSys = (() => {
     trainingAlarm,   // CL-159
     relayClunk, relaySpark, relayStatic, relayBeep, relayBoot, relayKey, relayOpen,   // CL-183
     boltCuttersTake, boltCutterBite, chainSnap, truckAlarm,   // CL-216
-    katanaSwing: W(katanaSwing), katanaHit: W(katanaHit), katanaDraw, vaultDoor, vaultLift, paperRustle,   // CL-184
+    katanaSwing: W(katanaSwing), katanaHit: W(katanaHit), katanaDraw, vaultDoor, vaultLift, paperRustle, cameraClick,   // CL-184; cameraClick CL-272
     knockout, knockoutEnd, knockoutDbg: () => ({ gain: koGain ? koGain.gain.value : null, ringing: !!koRing }),   // CL-171
     take: playTake, takesInit: () => takes.init(), takesRefresh: () => takes.refresh(), takesState: () => takes.state(), takesPreload: (ids) => takes.preload(ids),   // CL-148
     // CL-161: the sounds the game had none of (index.html and world/heron.js call these; each is true if a take played)

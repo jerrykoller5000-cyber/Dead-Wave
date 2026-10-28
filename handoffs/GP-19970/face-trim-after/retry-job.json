@@ -1,0 +1,82 @@
+{
+  "shots": [
+    {
+      "target": "zombie.shambler:statue",
+      "view": "side",
+      "time": "dusk",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-trim-after/shambler-dusk-side.png"
+    },
+    {
+      "target": "zombie.shambler:walk",
+      "view": "side",
+      "time": "noon",
+      "wait": 500,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-trim-after/shambler-walk-side.png"
+    },
+    {
+      "target": "zombie.drowned:statue",
+      "view": "side",
+      "time": "dusk",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-trim-after/drowned-dusk-side.png"
+    },
+    {
+      "target": "zombie.spitter:statue",
+      "view": "side",
+      "time": "noon",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-trim-after/spitter-noon-side.png"
+    },
+    {
+      "target": "zombie.bomber:statue",
+      "view": "back",
+      "time": "noon",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-trim-after/bomber-noon-back.png"
+    },
+    {
+      "target": "zombie.bomber:statue",
+      "view": "back",
+      "time": "dusk",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-trim-after/bomber-dusk-back.png"
+    },
+    {
+      "target": "zombie.shambler:statue",
+      "view": "side",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-trim-after/shambler-overcast-side.png"
+    },
+    {
+      "target": "zombie.spitter:statue",
+      "view": "back",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-trim-after/spitter-overcast-back.png"
+    },
+    {
+      "target": "zombie.spitter:statue",
+      "view": "back",
+      "time": "noon",
+      "move": {
+        "zoom": 2.8,
+        "pan": [
+          0,
+          0.65
+        ]
+      },
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-trim-after/spitter-head-back.png"
+    }
+  ],
+  "out": "handoffs/GP-19970/face-trim-after/"
+}

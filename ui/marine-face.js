@@ -16,6 +16,11 @@ export function weldSeam(geo, cols, pole = false) {
   N.needsUpdate = true;
   return geo;
 }
+// GP-19970: a narrow cloth pocket clears the existing sculpted nose.
+// Only the upper/front mask moves; eye-opening height and cheek/collar fit stay fixed.
+function balaclavaNoseRoom(y,c) {
+  return .018*Math.max(0,Math.min(1,(y-1.326)/.029))*Math.max(0,c)**16;
+}
 function surface(T, rings, {opening = false, frontOnly = false, wrap = false, cloth = false} = {}) {
   const segments = 32, positions = [], uv = [], indices = [];
   for (let r = 0; r < rings.length; r++) {
@@ -30,12 +35,12 @@ function surface(T, rings, {opening = false, frontOnly = false, wrap = false, cl
       let x = width * s, z = c >= 0 ? front * c ** .55 : -back * (-c) ** .8;
       if (cloth) {
         // Shallow tension folds tuck beneath the nose and run toward the ears.
-        // Keep the top edge and collar fixed so existing eyewear still clears it.
+        // Preserve the opening height and collar; ease the front over the nose.
         const edgeWeight = Math.sin(r / (rings.length - 1) * Math.PI) ** 2;
         const a1 = (y - (1.274 + .016 * Math.abs(s))) / .013;
         const a2 = (y - (1.312 + .019 * Math.abs(s))) / .011;
         const fold = edgeWeight * (.0034 * Math.exp(-a1*a1) - .0020 * Math.exp(-a2*a2)) * (.30 + .70 * Math.max(0,c));
-        x += s * fold; z += c * fold;
+        x += s * fold; z += c * fold + balaclavaNoseRoom(y,c);
       }
       positions.push(x, yy - 1.22, z);
       uv.push(j / segments, (y - 1.2) * 3);
@@ -160,7 +165,7 @@ export function buildBalaclava(T, material) {
   hoodGeo.setIndex(ix);hoodGeo.computeVertexNormals();
   const hood=new T.Mesh(hoodGeo,material);hood.name='balaclava-fitted-hood';hood.castShadow=hood.receiveShadow=true;group.add(hood);
   const edge=[];for(let j=0;j<32;j++){const a=-Math.PI+j/32*Math.PI*2,c=Math.cos(a);
-    edge.push(new T.Vector3(.123*Math.sin(a),1.355+.046*Math.max(0,c)**5-1.22,c>=0?.167*c**.55:-.124*(-c)**.8));}
+    edge.push(new T.Vector3(.123*Math.sin(a),1.355+.046*Math.max(0,c)**5-1.22,c>=0?.167*c**.55+balaclavaNoseRoom(1.355,c):-.124*(-c)**.8));}
   const hem=new T.Mesh(new T.TubeGeometry(new T.CatmullRomCurve3(edge,true),48,.0014,4,true),material);
   hem.castShadow=hem.receiveShadow=true;group.add(hem);
   const parts=[front,hem].map(mesh=>({mesh,rest:Float32Array.from(mesh.geometry.attributes.position.array)}));

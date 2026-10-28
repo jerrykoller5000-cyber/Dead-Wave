@@ -3,7 +3,8 @@
 // cock his chest has drawn the knife's shoulder back; at the stab it has turned the shoulder through and leans in;
 // the hand's point is straight out along his line, past where the arm alone reached (0.52 m in front of his chest), and
 // it is in the arm's reach only because the shoulder came through: with the turn and lean off, the same point is out of
-// reach. The machete's chop is as it was (its arm rides the chest round). Measured on the arm's target and the shoulder,
+// reach. The machete's chop is as it was (its arm rides the chest round). CL-269: from his eyes, the stab and the chop
+// cross the lower middle of the view, the cock keeps clear of the near plane and the gun dips out of the way. Measured on the arm's target and the shoulder,
 // not the fist: headless, tools/tests/fakethree.mjs's Matrix4.transpose() is a no-op and the arm IK lands short.
 (async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
@@ -43,6 +44,38 @@
     ok(dist <= REACH && distFlat > REACH, 'the shoulder coming through is what puts it in reach (' + dist.toFixed(3) + ' m with the body, ' + distFlat.toFixed(3) + ' m without, reach ' + REACH.toFixed(3) + ')');
     ok(Math.abs(aheadFlat - ahead) < 0.01, 'the point is laid out before the turn, so the turn doesn\'t move it (' + (aheadFlat - ahead).toFixed(3) + ' m)');
     D.knifeHold(null);
+
+    // CL-269 (AG-128): from his eyes the stab and the chop cross the lower middle of the view toward the crosshair,
+    // the cock keeps his arm clear of the near plane, and the gun dips out of the way while a blade swings. Measured
+    // on the arm's target in the view (screen x right, y up; -1..1 is the edge), from the eye and the look.
+    if (D.FP_BLADE_PATH && T.setViewFirstDbg && T.fpDbg) {
+      T.setViewFirstDbg(true);
+      { const s0 = T.getSimTime(); while (T.getSimTime() - s0 < 20 && T.fpDbg().w < 0.999) await wait(60); }
+      const cam = T.camera, view = (p) => {
+        const o = T.otsDbg(), y = o.yaw, pi = o.pitch, cp = Math.cos(pi), E = T.fpDbg().eye;
+        const F = new THREE.Vector3(Math.sin(y) * cp, Math.sin(pi), Math.cos(y) * cp), R = new THREE.Vector3(-Math.cos(y), 0, Math.sin(y)), U = new THREE.Vector3().crossVectors(R, F).normalize();
+        const v = p.clone().sub(E), z = v.dot(F), t = Math.tan((cam.fov || 60) * Math.PI / 360);
+        return { x: v.dot(R) / z / (t * (cam.aspect || 16 / 9)), y: v.dot(U) / z / t, dist: v.length() };
+      };
+      ok(T.fpDbg().w > 0.99, 'first person is on (' + T.fpDbg().w.toFixed(2) + ')');
+      ok(D.fpBladeDip() === 0, 'no blade swinging, the gun has no dip (' + D.fpBladeDip() + ')');
+      await hold(0.40);
+      const st = view(target()), dipStab = D.fpBladeDip(), shF = shoulder(), dS = target().distanceTo(shF);
+      await hold(0.14);
+      const ck = view(target()), nearCk = Math.min(ck.dist, ...[0, 0.25, 0.5, 0.75, 1].map((a) => shoulder().lerp(target(), a).distanceTo(T.fpDbg().eye)));
+      T.setMacheteOwned && T.setMacheteOwned(true); await wait(300);
+      await hold(0.47);
+      const ch = view(target());
+      D.knifeHold(null); T.setMacheteOwned && T.setMacheteOwned(false);
+      out.push('INFO first person: the stab at (' + st.x.toFixed(2) + ', ' + st.y.toFixed(2) + ') ' + st.dist.toFixed(2) + ' m from the eye, ' + dS.toFixed(3) +
+        ' m from the shoulder; the cock (' + ck.x.toFixed(2) + ', ' + ck.y.toFixed(2) + '), its arm ' + nearCk.toFixed(2) + ' m from the eye at the nearest; the chop mid-cut (' + ch.x.toFixed(2) + ', ' + ch.y.toFixed(2) + '); the gun\'s dip at the stab ' + dipStab.toFixed(2));
+      ok(Math.abs(st.x) < 0.3 && st.y < -0.2 && st.y > -0.8, 'from his eyes the stab lands in the lower middle of the view (' + st.x.toFixed(2) + ', ' + st.y.toFixed(2) + ')');
+      ok(dS <= REACH + 0.01, 'and in his arm\'s reach (' + dS.toFixed(3) + ' m, reach ' + REACH.toFixed(3) + ')');
+      ok(nearCk > 0.2, 'the cock keeps his arm clear of the near plane (' + nearCk.toFixed(2) + ' m from the eye)');
+      ok(Math.abs(ch.x) < 0.45 && ch.y < 0 && ch.y > -0.75, 'the chop crosses the lower middle of the view (' + ch.x.toFixed(2) + ', ' + ch.y.toFixed(2) + ')');
+      ok(dipStab > 0.9, 'the gun dips out of the way while the blade swings (' + dipStab.toFixed(2) + ')');
+      T.setViewFirstDbg(false);
+    } else ok(false, 'the first-person blade hooks are there');
     ok(errs.length === 0, 'no page errors' + (errs.length ? ': ' + errs[0] : ''));
   } catch (e) { out.push('FAIL threw: ' + (e && e.stack || e)); }
   return out.join('\n');

@@ -1,0 +1,33 @@
+Game-test request 29f011ef-6301-4b12-aae7-b84422c51a61 queued at position 3. Waiting...
+GRANT cursor CU-166: starting one game-test command
+check-players: 309 player.position reads, all in the allowed places
+ok    t173    12 pass   0 fail  44.9s
+ok    t174    14 pass   0 fail  79.7s
+ok    t175    12 pass   0 fail  56.2s
+ok    t176     8 pass   0 fail  56.3s
+ok    t177    10 pass   0 fail  45.2s
+ok    t178     8 pass   0 fail  49.1s
+ok    t179    27 pass   0 fail  53.0s
+ok    t180    29 pass   0 fail  79.1s
+ok    t181    23 pass   0 fail  55.2s
+ok    t182    36 pass   0 fail  71.3s
+ok    t183    16 pass   0 fail  52.5s
+           INFO crouch-walk slide 7.81% (at 1.95 m/s ground speed)
+ok    t184    29 pass   0 fail  57.8s
+           INFO holds: m4 1890 ms wall / 500 ms game, ak 1687 ms wall / 500 ms game, aa12 1937 ms wall / 450 ms game, uzi 2151 ms wall / 400 ms game, shotgun 1554 ms wall / 300 ms game, revolver 1109 ms wall / 300 ms game, sniper 1196 ms wall / 300 ms game, pistol 408 ms wall / 300 ms game, pistol 778 ms wall / 400 ms game
+ok    t185    36 pass   0 fail  102.3s
+ok    t186    34 pass   0 fail  78.7s
+ok    t187    75 pass   0 fail  108.9s
+ok    t188    91 pass   0 fail  130.1s
+ok    t189     8 pass   0 fail  154.3s
+ok    t190    21 pass   0 fail  46.0s
+ok    t191    16 pass   0 fail  62.3s
+ok    t192    10 pass   0 fail  47.0s
+           INFO on the flat, walking, the lowest sole is -0.029 m
+ok    t193    18 pass   0 fail  77.3s
+ok    t194    35 pass   0 fail  85.0s
+ok    t195    16 pass   0 fail  112.0s
+ok    t196    17 pass   0 fail  50.9s
+ok    t197     7 pass   0 fail  46.2s
+
+25 checks: 608 pass, 0 fail

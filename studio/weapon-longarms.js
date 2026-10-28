@@ -66,7 +66,7 @@ export function makeM4Model(ctx) {
   K.slab([[-0.226, 0.058], [-0.206, 0.058], [-0.2, 0.077], [-0.226, 0.077]], 0.09, gunDark, { bevel: 0.004 });
   K.slab([[-0.165, 0.092], [-0.115, 0.092], [-0.12, 0.108], [-0.16, 0.108]], 0.034, gunDark, { bevel: 0.003 });
   // Lower receiver: the trigger housing, the flared magwell, the pins and controls.
-  K.slab([[-0.172, 0.0], [0.13, 0.0], [0.13, -0.028], [0.118, -0.042], [0.117, -0.116], [0.124, -0.128], [-0.008, -0.128], [-0.004, -0.116],
+  K.slab([[-0.172, 0.0], [0.13, 0.0], [0.13, -0.028], [0.118, -0.042], [0.117, -0.112], [0.132, -0.13], [-0.016, -0.13], [-0.004, -0.112],   /* GB-233 r4: the magwell flares at its mouth */
           [-0.006, -0.064], [-0.03, -0.058], [-0.1, -0.058], [-0.16, -0.05], [-0.172, -0.03]], 0.07, gunBody, { bevel: 0.006 });
   for (const z of [-0.15, 0.115]) K.cyl(0.0055, 0.0055, 0.074, gunDark, 0, -0.012, z, null, 8, 'x');
   K.box(0.006, 0.03, 0.016, gunDark, -0.037, -0.03, 0.112);
@@ -74,7 +74,7 @@ export function makeM4Model(ctx) {
   K.cyl(0.008, 0.008, 0.006, gunDark, 0.037, -0.05, 0.0, null, 8, 'x');
   // Trigger guard, a trigger with its tip curling forward, an A2 grip.
   // Grip centre line is still gripOutline(-0.08, -0.12, 0.18, …, 0.3): the palm stays at the hold.
-  K.slab(gunBand([[0.016, -0.05], [0.028, -0.09], [0.004, -0.122], [-0.028, -0.132], [-0.052, -0.112], [-0.048, -0.078]], 0.007), 0.03, gunBody, { bevel: 0.004 });   // GB-180: a moulded guard, not a wire (pass 4: as wide as a real guard)
+  K.slab(gunBand([[0.016, -0.05], [0.028, -0.09], [0.004, -0.122], [-0.028, -0.132], [-0.052, -0.112], [-0.048, -0.078]], 0.0095), 0.032, gunDark, { bevel: 0.004 });   /* GB-233 r4: thicker and darker so it reads against the lower */   // GB-180: a moulded guard, not a wire (pass 4: as wide as a real guard)
   // GB-175: trigger face toward the grip, tip curling forward (the convention Jerry set on the revolver and sniper).
   // GB-180: a solid trigger blade (wide at the root, tapering to the curled tip), not a wire.
   K.slab([[-0.0103, -0.0525], [-0.0187, -0.0689], [-0.0179, -0.0843], [-0.0092, -0.0957], [-0.0148, -0.1003], [-0.0261, -0.0877], [-0.0293, -0.0671], [-0.0217, -0.0475]], 0.012, gunDark, { bevel: 0.002 });
@@ -136,13 +136,13 @@ export function makeM4Model(ctx) {
   K.disc(0.014, gaugeFace, 0.066, 0.02, 0.5615, 0);
   // Magazine: a polymer mag with its curve, the grip ribs, a floorplate.
   const mag = K.group(0, -0.16, 0.05);
-  K.slab([[-0.046, 0.108], ...profileCurve([-0.046, 0.03], [-0.042, -0.05], [-0.024, -0.104], 5), ...profileCurve([0.072, -0.098], [0.05, -0.04], [0.046, 0.03], 5), [0.046, 0.108]],
+  K.slab([[-0.046, 0.108], ...profileCurve([-0.046, 0.03], [-0.04, -0.05], [-0.01, -0.104], 5), ...profileCurve([0.086, -0.096], [0.054, -0.04], [0.046, 0.03], 5), [0.046, 0.108]],   /* GB-233 r4: a slight STANAG curve */
     0.058, magPoly, { bevel: 0.006, parent: mag });
   for (const sx of [-1, 1]) for (const z of [-0.027, 0, 0.027]) {
     K.slab(gunBand([[z, 0.053], [z + 0.004, -0.012], [z + 0.012, -0.07], [z + 0.019, -0.095]], 0.003), 0.003, gunDark, { x: sx * 0.0295, bevel: 0, parent: mag });   // GB-189: no 1 mm bevel on a 3 mm rib
   }
   for (const y of [-0.018, -0.049, -0.08]) K.box(0.061, 0.004, 0.082, magPoly, 0, y, 0.011 - y * 0.15, 0, 0, 0, mag, 0.001);
-  K.slab([[-0.03, -0.1], [0.078, -0.094], [0.08, -0.112], [-0.03, -0.118]], 0.066, magPoly, { bevel: 0.005, parent: mag });
+  K.slab([[-0.016, -0.1], [0.092, -0.092], [0.094, -0.11], [-0.016, -0.118]], 0.066, magPoly, { bevel: 0.005, parent: mag });
   gun.userData.mag = mag;
   gun.userData.baseMagPos = mag.position.clone();
   gun.userData.baseMagRot = mag.rotation.clone();
@@ -208,19 +208,19 @@ export function makeAkModel(ctx) {
   }
   K.tor(0.014, 0.004, gunDark, 0, -0.122, -0.45, 0, Math.PI / 2, 0);
   // Handguards: the lower with its palm swell and grooves, the upper over the gas tube, the steel bands.
-  K.slab([[0.244, 0.03], [0.53, 0.03], [0.535, 0.0], [0.53, -0.048], [0.45, -0.062], [0.33, -0.063], [0.262, -0.055], [0.244, -0.04]], 0.086, woodMat, { bevel: 0.016, segs: 3 });
+  K.slab([[0.244, 0.03], [0.53, 0.03], [0.535, 0.0], [0.53, -0.04], [0.45, -0.052], [0.33, -0.053], [0.262, -0.047], [0.244, -0.034]], 0.074, woodMat, { bevel: 0.014, segs: 3 });   // GB-233 r4: slimmer (was 0.086 wide, -0.063 deep)
   for (const sx of [-1, 1]) {
-    K.slab(gunBand([[0.28, -0.005], [0.34, -0.014], [0.43, -0.012], [0.498, -0.003]], 0.0022), 0.002, woodDark, { x: sx * 0.043, bevel: 0.001 });
-    K.slab(gunBand([[0.29, -0.033], [0.36, -0.04], [0.466, -0.036]], 0.0014), 0.002, woodDark, { x: sx * 0.043, bevel: 0.001 });
+    K.slab(gunBand([[0.28, -0.005], [0.34, -0.014], [0.43, -0.012], [0.498, -0.003]], 0.0022), 0.002, woodDark, { x: sx * 0.037, bevel: 0.001 });
+    K.slab(gunBand([[0.29, -0.03], [0.36, -0.036], [0.466, -0.032]], 0.0014), 0.002, woodDark, { x: sx * 0.037, bevel: 0.001 });
   }
   K.slab([[0.155, 0.054], [0.505, 0.050], [0.512, 0.064], [0.49, 0.082], [0.20, 0.084], [0.155, 0.072]], 0.054, woodMat, { bevel: 0.004, segs: 2 });
   for (const z of [0.236, 0.512]) K.box(0.086, 0.078, 0.014, gunDark, 0, -0.008, z, 0, 0, 0, null, 0.004);
-  K.lathe([[0, 0.42], [0.013, 0.42], [0.013, 0.52], [0, 0.52]], gunDark, { y: 0.058, seg: 10 });
+  K.lathe([[0, 0.42], [0.013, 0.42], [0.013, 0.66], [0, 0.66]], gunDark, { y: 0.058, seg: 10 });   // GB-233 r4: the gas tube shows over the barrel to the block
   K.lathe([[0, 0.24], [0.010, 0.24], [0.010, 0.43], [0, 0.43]], gunAccent, { y: 0.046, seg: 10 });
   for (const sx of [-1, 1]) for (const z of [0.275, 0.325, 0.375, 0.425]) K.box(0.003, 0.008, 0.016, gunDark, sx * 0.022, 0.058, z, 0, 0, 0, null, 0.001);
   K.cyl(0.0035, 0.0035, 0.04, gunAccent, 0, 0.064, 0.47, null, 8, 'x');
   K.slab(gunBand([[0.455, 0.058], [0.49, 0.062], [0.52, 0.056]], 0.0022), 0.005, gunDark, { x: 0.018, bevel: 0.001 });
-  K.slab([[0.515, 0.068], [0.595, 0.06], [0.595, -0.018], [0.515, -0.02]], 0.04, gunMid, { bevel: 0.004 });
+  K.slab([[0.655, 0.076], [0.705, 0.07], [0.705, -0.02], [0.655, -0.022]], 0.04, gunMid, { bevel: 0.004 });   // GB-233 r4: the gas block about two-thirds down (was 0.515-0.595)
   // Barrel and cleaning rod; the front sight tower with its hood; the bayonet lug; the slant brake.
   K.lathe([[0, 0.5], [0.0155, 0.5], [0.0155, 0.6], [0.0135, 0.608], [0.0135, 0.92], [0, 0.92]], gunAccent, { y: -0.005, seg: 12 });
   K.lathe([[0, 0.53], [0.0035, 0.53], [0.0035, 0.832], [0.006, 0.836], [0.006, 0.846], [0, 0.846]], gunDark, { y: -0.032, seg: 6 });
@@ -233,13 +233,13 @@ export function makeAkModel(ctx) {
   K.box(0.025, 0.01, 0.04, gunRubber, 0, 0.012, 0.965, -0.35);
   // Banana mag: the deep curve, two pressed ribs down each side, the floorplate.
   const mag = K.group(0, -0.06, 0.04);
-  const magB = profileCurve([-0.046, 0.012], [-0.042, -0.13], [0.032, -0.262], 7), magF = profileCurve([0.056, 0.012], [0.062, -0.11], [0.136, -0.238], 7);
+  const magB = profileCurve([-0.046, 0.012], [-0.04, -0.13], [0.052, -0.258], 7), magF = profileCurve([0.056, 0.012], [0.066, -0.11], [0.156, -0.232], 7);   // GB-233 r4: a deeper curve
   K.slab([...magB, ...magF.slice().reverse()], 0.06, gunAccent, { bevel: 0.006, parent: mag });
   for (const w of [0.23, 0.5, 0.77]) K.slab(gunBand(magB.map((b, i) => [b[0] * (1 - w) + magF[i][0] * w, b[1] * (1 - w) + magF[i][1] * w]).slice(1, 7), 0.004), 0.065, gunBody, { bevel: 0.002, parent: mag });
   K.slab(gunBand(magB.slice(0, 8), 0.0025), 0.061, gunDark, { bevel: 0.001, parent: mag });
   K.slab(gunBand(magF.slice(0, 8), 0.0025), 0.061, gunDark, { bevel: 0.001, parent: mag });
   K.box(0.064, 0.022, 0.1, gunDark, 0, -0.016, 0.007, 0, 0, 0, mag, 0.002);
-  K.slab([[0.028, -0.258], [0.14, -0.232], [0.144, -0.247], [0.03, -0.275]], 0.066, gunDark, { bevel: 0.004, parent: mag });
+  K.slab([[0.048, -0.254], [0.16, -0.226], [0.164, -0.241], [0.05, -0.271]], 0.066, gunDark, { bevel: 0.004, parent: mag });
   gun.userData.mag = mag;
   gun.userData.baseMagPos = mag.position.clone();
   gun.userData.baseMagRot = mag.rotation.clone();

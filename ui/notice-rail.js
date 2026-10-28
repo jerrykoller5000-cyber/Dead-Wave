@@ -1,6 +1,6 @@
 // GP-139: one presentation stack. Existing owners keep their nodes, timers and events.
 const mounted = new WeakMap();
-const selectors = '#bigBanner, #stockNotice, #dawnCard, #hollowPickup, .prop-note-card';
+const selectors = '#bigBanner, #stockNotice, #dawnCard, #storyLeadCard, #hollowPickup, .prop-note-card';
 
 export function mountNoticeRail(doc = document) {
   if (mounted.has(doc)) return mounted.get(doc);

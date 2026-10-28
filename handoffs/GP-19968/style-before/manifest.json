@@ -1,0 +1,32 @@
+[
+  {
+    "path": "ui/assets/hikers/ellis-byrne.jpg",
+    "hash": "80a5c1b62c79a80e400a8992fbad14d3a71653005c020799aa4844da7365ca94",
+    "bytes": 34696
+  },
+  {
+    "path": "ui/assets/hikers/jonas-weber.jpg",
+    "hash": "011e103df58e36babfbd8af53dccebbf8a27ab8e2fddb3465f49e4bfc8bd3e09",
+    "bytes": 33380
+  },
+  {
+    "path": "ui/assets/hikers/maya-costa.jpg",
+    "hash": "aef8d448f74cff563ec1d4c4dfc88b497a8d83354a9ae1abdaca42eb66ef9bfe",
+    "bytes": 38505
+  },
+  {
+    "path": "ui/assets/hikers/priya-raman.jpg",
+    "hash": "15c44b3062fe5eb3f6e73654c7df22aaa9d3880c724af5f014f5c1a27eeced92",
+    "bytes": 36822
+  },
+  {
+    "path": "ui/assets/hikers/sam-marsh.jpg",
+    "hash": "bc0c576a9a9aaed0c016901a9c605d0fe9aeef19f4e583ff97d28c9ae522243a",
+    "bytes": 33547
+  },
+  {
+    "path": "ui/assets/hikers/theo-marsh.jpg",
+    "hash": "ce10b48be63548fa77087da83955485c14e933ccc8994dce77058eda408d39ce",
+    "bytes": 36175
+  }
+]

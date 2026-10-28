@@ -3,10 +3,10 @@
   {
    "cam": {
     "x": 50,
-    "y": 1.26,
+    "y": -4.97,
     "z": -25,
     "tx": 50,
-    "ty": 0.76,
+    "ty": 1.38,
     "tz": -50,
     "fov": 60
    },
@@ -17,10 +17,10 @@
   {
    "cam": {
     "x": 75,
-    "y": 1.26,
+    "y": 1.3399999999999999,
     "z": -50,
     "tx": 50,
-    "ty": 0.76,
+    "ty": 1.38,
     "tz": -50,
     "fov": 60
    },
@@ -31,10 +31,10 @@
   {
    "cam": {
     "x": 50,
-    "y": 1.26,
+    "y": 8.74,
     "z": -75,
     "tx": 50,
-    "ty": 0.76,
+    "ty": 1.38,
     "tz": -50,
     "fov": 60
    },
@@ -45,10 +45,10 @@
   {
    "cam": {
     "x": 25,
-    "y": 1.26,
+    "y": -1.99,
     "z": -50,
     "tx": 50,
-    "ty": 0.76,
+    "ty": 1.38,
     "tz": -50,
     "fov": 60
    },
@@ -59,10 +59,10 @@
   {
    "cam": {
     "x": 65,
-    "y": 27.060000000000002,
+    "y": 27.130000000000003,
     "z": -35,
     "tx": 50,
-    "ty": -0.44,
+    "ty": -0.37,
     "tz": -50,
     "fov": 60
    },
@@ -73,16 +73,44 @@
   {
    "cam": {
     "x": 67.5,
-    "y": 5.56,
+    "y": 5.63,
     "z": -32.5,
     "tx": 50,
-    "ty": 0.56,
+    "ty": 0.63,
     "tz": -50,
     "fov": 60
    },
    "time": "night",
    "caption": "The wild round 50,-50: at night",
    "out": "review/sweep/wild-50_m50/wild-50_m50-night.png"
+  },
+  {
+   "cam": {
+    "x": 60.35,
+    "y": 4.720000000000001,
+    "z": -51.83,
+    "tx": 57.15,
+    "ty": 3.52,
+    "tz": -55.03,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "floating: group floats 2.18 m above the ground (its whole footprint)",
+   "out": "review/sweep/wild-50_m50/wild-50_m50-suspect-1.png"
+  },
+  {
+   "cam": {
+    "x": 53.220000000000006,
+    "y": 4.78,
+    "z": -51.269999999999996,
+    "tx": 50.02,
+    "ty": 3.58,
+    "tz": -54.47,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "floating: group floats 2.38 m above the ground (its whole footprint)",
+   "out": "review/sweep/wild-50_m50/wild-50_m50-suspect-2.png"
   },
   {
    "cam": {
@@ -96,34 +124,6 @@
    },
    "time": "noon",
    "caption": "overlap: mesh · part 7/10 and tree:birch overlap: 94.87 % of the smaller footprint, 3.9 m of height",
-   "out": "review/sweep/wild-50_m50/wild-50_m50-suspect-1.png"
-  },
-  {
-   "cam": {
-    "x": 71.36,
-    "y": 1.26,
-    "z": -38.73,
-    "tx": 68.16,
-    "ty": 0.06,
-    "tz": -41.93,
-    "fov": 50
-   },
-   "time": "noon",
-   "caption": "overlap: mesh · part 7/10 and tree:birch overlap: 94.87 % of the smaller footprint, 3.42 m of height",
-   "out": "review/sweep/wild-50_m50/wild-50_m50-suspect-2.png"
-  },
-  {
-   "cam": {
-    "x": 71.35000000000001,
-    "y": 1.2200000000000002,
-    "z": -38.69,
-    "tx": 68.15,
-    "ty": 0.020000000000000018,
-    "tz": -41.89,
-    "fov": 50
-   },
-   "time": "noon",
-   "caption": "branches: canopy:birch's branches through mesh · part 7/10 (100.23 % of the smaller footprint, 1.83 m of heigh",
    "out": "review/sweep/wild-50_m50/wild-50_m50-suspect-3.png"
   },
   {
@@ -137,8 +137,36 @@
     "fov": 50
    },
    "time": "noon",
-   "caption": "branches: canopy:birch's branches through mesh · part 7/10 (99.75 % of the smaller footprint, 3.42 m of height",
+   "caption": "overlap: mesh · part 7/10 and tree:birch overlap: 94.87 % of the smaller footprint, 3.42 m of height",
    "out": "review/sweep/wild-50_m50/wild-50_m50-suspect-4.png"
+  },
+  {
+   "cam": {
+    "x": 71.35000000000001,
+    "y": 1.2200000000000002,
+    "z": -38.69,
+    "tx": 68.15,
+    "ty": 0.020000000000000018,
+    "tz": -41.89,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "branches: canopy:birch's branches through mesh · part 7/10 (100.23 % of the smaller footprint, 1.83 m of heigh",
+   "out": "review/sweep/wild-50_m50/wild-50_m50-suspect-5.png"
+  },
+  {
+   "cam": {
+    "x": 71.36,
+    "y": 1.26,
+    "z": -38.73,
+    "tx": 68.16,
+    "ty": 0.06,
+    "tz": -41.93,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "branches: canopy:birch's branches through mesh · part 7/10 (99.75 % of the smaller footprint, 3.42 m of height",
+   "out": "review/sweep/wild-50_m50/wild-50_m50-suspect-6.png"
   }
  ],
  "out": "review/sweep/wild-50_m50/",

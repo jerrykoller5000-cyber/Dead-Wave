@@ -63,7 +63,8 @@ export const PLANNED_FOLDERS_3 = Object.freeze([
 // CL-161: batch 2 folders the game doesn't play: their prompts recorded bursts or a loop, which can't play round by round
 // (batch 3 has single shots for them). They can still be heard on the listen page.
 export const NOT_WIRED = Object.freeze(['weapons/machine-gun', 'weapons/rotary-gun', 'weapons/rotary-spin', 'weapons/flamethrower',
-  'turrets/light-turret-fire', 'turrets/heavy-turret-fire', 'vehicles/cargo-plane-interior']);   // (the drop-in has no scene inside the plane)
+  'turrets/light-turret-fire', 'turrets/heavy-turret-fire', 'vehicles/cargo-plane-interior',   // (the drop-in has no scene inside the plane)
+  'weapons/rotary-spin-end', 'bullet-impacts/whiz']);   // CL-272: the packs' (the barrels winding down: the loop's pitch does it; nothing shoots at him)
 // CL-161: the gunfire was Jerry's to compare (the TRY prompts): a recorded gun played only once he switched it on.
 // CL-164: he has picked and replaced the gun takes himself (2026-10-11), so the guns play like everything else now. Only
 // the single shots that were never generated stay opt-in. Any folder can still be switched off on the listen page.
@@ -82,7 +83,15 @@ export const LAYER_TAKE_V = 0.8;
 // CL-172 (Jerry: "I like the old HQ Alarm and Flares better. Please switch just that back."): these play only the game's
 // original synthesized sound, never a take (even one switched on at the listen page). Their takes stay on disk.
 export const ORIGINAL_ONLY = Object.freeze(['hq/alarm-klaxon', 'hq/alarm-rumble', 'hq/flare-launch', 'hq/flare-burst']);
-const FOLDER_SET = new Set([...TAKE_FOLDERS, ...PLANNED_FOLDERS, ...PLANNED_FOLDERS_3]);
+// CL-272: folders made for the sound packs' takes, where the game had only its synthesized sound and no prompt
+// (the reset blip; the relay panel's keys, its deny and its opening chime; the Training Ground's way in; the relay
+// vault's door, the relay hatch's latch, the field notes' paper; the hikers' camera, for GP-19974's clip). Wired.
+export const PACK_FOLDERS = Object.freeze(['ui/reset-blip', 'ui/panel-key', 'ui/panel-deny', 'ui/panel-open', 'training/panel-enter',
+  'story/vault-door', 'story/relay-clunk', 'story/paper', 'story/camera',
+  // GB-239: the rotary gun's barrels at speed (a loop under AudioSys.minigunSpin), their wind-down and a round passing
+  // close (heard on the listen page: NOT_WIRED)
+  'weapons/rotary-spin-loop', 'weapons/rotary-spin-end', 'bullet-impacts/whiz']);
+const FOLDER_SET = new Set([...TAKE_FOLDERS, ...PLANNED_FOLDERS, ...PLANNED_FOLDERS_3, ...PACK_FOLDERS]);
 export const AUDIO_FILE = /\.(mp3|wav|ogg|oga|opus|m4a|aac|flac|webm)$/i;
 
 const TYPE_WORD = Object.fromEntries([...TYPES.map((t) => [t, t]), ['cave guardian', 'caveguard'], ['cave guard', 'caveguard']]);
@@ -169,16 +178,65 @@ export function writeUse(map, storage = (typeof localStorage !== 'undefined' ? l
   try { if (storage) storage.setItem(USE_KEY, JSON.stringify(map)); } catch (_) {}
 }
 // Whether the game plays a folder's takes: Jerry's switch if he has set one, else on (off for the gunfire to compare).
-export const usesTakes = (id, use) => (use && typeof use[id] === 'boolean' ? use[id] : !OPT_IN_SET.has(id));
+// CL-272: an opt-in folder that has the packs' takes (pack) plays them like any other: the opt-in was for shots never made.
+export const usesTakes = (id, use, pack = false) => (use && typeof use[id] === 'boolean' ? use[id] : (pack || !OPT_IN_SET.has(id)));
 // CL-162: the batch-3 folders the game plays (the rest wait for the roof crew, the burial, the story beats and the new screens)
 export const WIRED_3 = Object.freeze(['story/hush-dying', 'story/heart-fall', 'ui/expand', 'world/graveyard-ambience', 'world/chapel-choir',
   'world/heavenly-choir', 'world/holy-blast', 'world/tree-crown-fire', 'world/trunk-bump', 'world/frogs-night', 'player/medkit',
   'player/grenade-throw', 'player/ammo-pickup', 'weapon-foley/chainsaw-dry-pull', 'weapon-foley/laser-click', 'weapon-foley/suppressor-on',
   'weapons/pistol-suppressed', 'weapons/carbine-suppressed', 'weapons/machine-gun-shot', 'turrets/light-turret-shot', 'turrets/heavy-turret-shot',
+  'weapons/rotary-gun-loop',   // CL-272 (GB-239): the rotary gun's roar while it fires, from the pack, under its rounds
   'training/alarm', 'training/keypad-press', 'training/keypad-accept', 'training/keypad-deny', 'training/hangar-door',
-  'ui/badge', 'ui/dawn-card']);   // CL-164: a badge earned; the dawn card sliding in
+  'ui/badge', 'ui/dawn-card', 'hq/generator',
+  'player/footstep-stone', 'player/footstep-metal', 'player/footstep-leaves']);   // CL-164: a badge earned; the dawn card sliding in. CL-263: the HQ's generator running. CU-165: the ground under the boot
 const WIRED_3_SET = new Set(WIRED_3);
 export const isWired = (id) => !NOT_WIRED_SET.has(id) && FOLDER_SET.has(id) && (!PLANNED_FOLDERS_3.includes(id) || WIRED_3_SET.has(id));
+
+// CL-272 (D-94): takes made from Jerry's sound packs are named pk-<pack>-<name> (tools/pack-make.py; git-ignored, in
+// the builds). In a folder that has any, they play and his takes rest, in place: his switch "mine" for that folder
+// (the listen page) plays his again. A clone without the pack files (GitHub) plays his takes as before.
+export const isPackTake = (rel) => typeof rel === 'string' && /^pk-/i.test(rel.split(/[\\/]+/).pop() || '');
+const MINE_KEY = 'tt.takeMine';
+export function readMine(storage = (typeof localStorage !== 'undefined' ? localStorage : null)) {
+  try { const j = JSON.parse(storage && storage.getItem(MINE_KEY) || '{}'); return j && typeof j === 'object' ? j : {}; } catch (_) { return {}; }
+}
+export function writeMine(map, storage = (typeof localStorage !== 'undefined' ? localStorage : null)) {
+  try { if (storage) storage.setItem(MINE_KEY, JSON.stringify(map)); } catch (_) {}
+}
+// The takes a folder plays: its pack takes if it has any (unless he chose his own), else all of them.
+export function chosenTakes(id, list, mine) {
+  const all = list || [], pk = all.filter(isPackTake), his = all.filter((f) => !isPackTake(f));
+  if (!pk.length || !his.length) return all;
+  return mine && mine[id] === true ? his : pk;
+}
+// A pack take is evened like the take it replaces, then trimmed where the ear hears it differently at the same RMS:
+// K-weighted loudness (BS.1770) of each folder's takes after the evening, his against the pack's (2026-10-26/27). The
+// cave guardian's breathy chase came 3 dB under his hissier takes, its squeals and the cave's groan 2 dB; the heart
+// guardian's slams 3.5 dB over his. The terminal's clicks came 3-4.5 dB over his softer ones (click, hover, the kiosk's
+// tab), its chimes 2.5-4.5 dB under (the objective, the panel's beep). The day's wind: his breeze is almost all rumble,
+// the field's wind is leaves and air, 20 dB louder to the ear at one RMS, so it comes in that far down; the crickets
+// 2.4 dB under his. Within 1.5 dB: no trim. levels.json still sits on top of this.
+export const PACK_TRIM = Object.freeze({ 'zombies/caveguard/chase': 1.45, 'zombies/caveguard/hurt': 1.25,
+  'zombies/caveguard/cave-groan': 1.2, 'zombies/guardian/slam': 0.65,
+  'ui/click': 0.6, 'ui/hover': 0.7, 'hq/kiosk-tab': 0.64, 'ui/objective': 1.6, 'training/panel-beep': 1.35,
+  'world/wind-day': 0.1, 'world/crickets-night': 1.3,
+  // GB-239 / CU-164 (2026-10-27): by the loudest moment (short-term, K-weighted) after the evening, his against the
+  // pack's. Most of his shots and bullet hits carry 80-97% of their energy below 100 Hz, where the evening counts it and
+  // the ear doesn't; the pack's are high-passed. So most come in down: the bullets in wood 10 dB, sand 7, the mag release
+  // 7, the auto shotgun and the carbine 6.5, the brass 6. The SMG, the drum going in, the ladder's rung, wading and the
+  // leaves come up.
+  'weapons/auto-shotgun': 0.46, 'weapons/carbine': 0.47, 'weapons/carbine-suppressed': 0.77, 'weapons/explosion': 0.74,
+  'weapons/grenade-launcher': 0.67, 'weapons/pistol-suppressed': 0.7, 'weapons/revolver': 0.81, 'weapons/smg': 1.42,
+  'weapons/sniper': 0.69,
+  'weapon-foley/bolt-cycle': 0.79, 'weapon-foley/brass': 0.48, 'weapon-foley/brass-concrete': 0.82,
+  'weapon-foley/cylinder-open': 0.53, 'weapon-foley/cylinder-spin': 0.6, 'weapon-foley/drum-in': 1.38,
+  'weapon-foley/drum-out': 0.65, 'weapon-foley/launcher-open': 0.5, 'weapon-foley/launcher-shell': 0.57,
+  'weapon-foley/mag-in': 0.8, 'weapon-foley/mag-release': 0.45, 'weapon-foley/shell-insert': 0.67,
+  'weapon-foley/slide-forward': 0.81,
+  'bullet-impacts/metal': 0.8, 'bullet-impacts/rock': 0.57, 'bullet-impacts/sand': 0.44, 'bullet-impacts/wood': 0.3,
+  'player/footstep-dirt': 0.55, 'player/footstep-leaves': 1.61, 'player/footstep-stone': 0.74, 'player/footstep-tile': 0.62,
+  'player/footstep-water': 1.72, 'player/footstep-wood': 0.82, 'player/ladder-climb': 1.44 });
+export const packTrim = (id, rel) => (isPackTake(rel) && Number.isFinite(PACK_TRIM[id]) ? PACK_TRIM[id] : 1);
 
 export function createTakeBank({ getCtx, connect, track = () => {}, fetchJson, fetchBytes, root = 'z-sounds/', listUrls = null, storage }) {
   let listed = null, listing = null, levels = {};
@@ -186,15 +244,21 @@ export function createTakeBank({ getCtx, connect, track = () => {}, fetchJson, f
   const rates = new WeakMap();
   const playing = new Map();   // folder -> [{ src, g, at }] oldest first
   let active = 0, activeFx = 0, failed = 0;
-  let use = readUse(storage);
+  let use = readUse(storage), picked = readMine(storage);   // picked: his "mine" switches (CL-272)
   const urlFor = (rel) => root + rel.split(/[\\/]+/).map(encodeURIComponent).join('/');
+  const hasPack = (id) => (files.get(id) || []).some(isPackTake);   // CL-272: an opt-in folder with the packs' takes plays
 
   function init() {
     if (listing) return listing;
     listing = (async () => {
-      let list = null;
+      let list = null, from = null;
       for (const u of listUrls || ['__zsounds', root + 'index.json']) {
-        try { const j = await fetchJson(u); if (j && Array.isArray(j.files)) { list = j.files; break; } } catch (_) { /* next */ }
+        try { const j = await fetchJson(u); if (j && Array.isArray(j.files)) { list = j.files; from = u; break; } } catch (_) { /* next */ }
+      }
+      // CL-272: the committed index leaves the pack takes out (they're git-ignored); tools/zsounds-index.mjs lists them
+      // beside it in index-packs.json. (The local servers and a build's index list everything.)
+      if (list && /(^|\/)index\.json$/.test(from)) {
+        try { const p = await fetchJson(from.replace(/index\.json$/, 'index-packs.json')); if (p && Array.isArray(p.files)) list = [...new Set([...list, ...p.files])]; } catch (_) { /* none */ }
       }
       try { const l = await fetchJson(root + 'levels.json'); if (l && typeof l === 'object') levels = l; } catch (_) { levels = {}; }
       // a fresh look (refresh): a folder whose takes changed is decoded again; one emptied goes back to the synth
@@ -203,7 +267,10 @@ export function createTakeBank({ getCtx, connect, track = () => {}, fetchJson, f
       for (const [id, fs] of next) files.set(id, fs);
       listed = { folders: files.size, takes: [...files.values()].reduce((n, l) => n + l.length, 0), source: list ? 'ok' : 'none' };
       use = readUse(storage);
-      for (const id of files.keys()) if (EARLY.test(id) && usesTakes(id, use)) load(id);
+      // his "mine" switches changed (the listen page): those folders decode again from the other set
+      const was = picked; picked = readMine(storage);
+      for (const id of new Set([...Object.keys(was), ...Object.keys(picked)])) if (!!was[id] !== !!picked[id]) { bufs.delete(id); loads.delete(id); }
+      for (const id of files.keys()) if (EARLY.test(id) && usesTakes(id, use, hasPack(id))) load(id);
       return listed;
     })();
     return listing;
@@ -212,7 +279,7 @@ export function createTakeBank({ getCtx, connect, track = () => {}, fetchJson, f
   // Decode every take of a folder, folded to mono (the game pans it), each evened to the folder's target loudness.
   function load(id) {
     if (loads.has(id)) return loads.get(id);
-    const ctx = getCtx(), all = files.get(id);
+    const ctx = getCtx(), all = files.has(id) ? chosenTakes(id, files.get(id), picked) : null;
     if (!ctx || !all) return Promise.resolve(null);
     // a bed loops one take for minutes: two are variety enough, and a decoded 10 s take is 2 MB
     const fs = BED_FOLDERS.has(id) ? all.slice(0, 2) : all;
@@ -220,7 +287,7 @@ export function createTakeBank({ getCtx, connect, track = () => {}, fetchJson, f
       try {
         const ab = await fetchBytes(urlFor(rel));
         const buf = await new Promise((res, rej) => { const q = ctx.decodeAudioData(ab, res, rej); if (q && q.catch) q.catch(rej); });
-        return evened(ctx, buf, takeTarget(id));
+        return evened(ctx, buf, takeTarget(id) * packTrim(id, rel));
       } catch (_) { failed++; return null; }
     })).then((list) => { const ok = list.filter(Boolean); bufs.set(id, ok.length ? ok : null); return bufs.get(id); });
     loads.set(id, p);
@@ -246,7 +313,7 @@ export function createTakeBank({ getCtx, connect, track = () => {}, fetchJson, f
   // The takes of `id`, ready to play, or undefined (asked for: loading now) / null (none, or switched off).
   function ready(id) {
     if (!listed) { init(); return undefined; }
-    if (!files.has(id) || !usesTakes(id, use)) return null;
+    if (!files.has(id) || !usesTakes(id, use, hasPack(id))) return null;
     const list = bufs.get(id);
     if (list === undefined) { load(id); return undefined; }
     return list;
@@ -349,8 +416,16 @@ export function createTakeBank({ getCtx, connect, track = () => {}, fetchJson, f
     ready: (id) => !!ready(id),
     preload: (ids) => { for (const id of ids || files.keys()) if (files.has(id)) load(id); },
     // Jerry's switch for a folder (true, false, or null for the default); kept in this browser
-    setUse(id, on) { use = readUse(storage); if (on === null || on === undefined) delete use[id]; else use[id] = !!on; writeUse(use, storage); if (on) load(id); return usesTakes(id, use); },
-    uses: (id) => usesTakes(id, use),
-    state: () => ({ listed, loaded: [...bufs].filter(([, b]) => b).map(([id, b]) => [id, b.length]), failed, active, activeFx, plays: { ...plays }, levels, use: { ...use } }),
+    setUse(id, on) { use = readUse(storage); if (on === null || on === undefined) delete use[id]; else use[id] = !!on; writeUse(use, storage); if (on) load(id); return usesTakes(id, use, hasPack(id)); },
+    uses: (id) => usesTakes(id, use, hasPack(id)),
+    // CL-272: a folder's pack takes and his: how many of each, and his switch to play his own (true) or the pack's
+    packs: (id) => { const l = files.get(id) || []; const pk = l.filter(isPackTake).length; return { pack: pk, mine: l.length - pk }; },
+    mine: (id) => picked[id] === true,
+    setMine(id, on) {
+      picked = readMine(storage); if (on) picked[id] = true; else delete picked[id]; writeMine(picked, storage);
+      bufs.delete(id); loads.delete(id); if (files.has(id)) load(id);
+      return picked[id] === true;
+    },
+    state: () => ({ listed, loaded: [...bufs].filter(([, b]) => b).map(([id, b]) => [id, b.length]), failed, active, activeFx, plays: { ...plays }, levels, use: { ...use }, mine: { ...picked } }),
   };
 }

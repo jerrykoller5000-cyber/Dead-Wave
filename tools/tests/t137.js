@@ -1,4 +1,5 @@
-// t137 - GB-113, D-86: kill skulls pay full value through night 8, then lose 4% per night to a 60% floor on night 18.
+// t137 - GB-113, D-86, D-93: kill skulls pay full value through night 7, then lose 6% per night to a 40% floor from
+// night 17 (D-93, Jerry 2026-10-26: "Money ending at roughly $4,200"; D-86's was 4% from night 9 to 60%).
 // The floor holds on endless nights. The night's other multipliers
 // (blood moon, the dare) still stack on top. Measured on the skull a kill actually drops.
 (async () => {
@@ -11,9 +12,9 @@
     const P = T.player.position;
     ok(T.ZOMBIE_TYPES.shambler.cashDrop === 2, 'D-86: a normal shambler carries 2 skulls');
     ok(T.BUILD_UNLOCK_PRICE.m240 === 260, 'D-86: Watchman blueprint costs $260');
-    ok(T.LATE_CASH_NIGHT === 9 && T.LATE_CASH_FACTOR === 0.60 && T.LATE_CASH_STEP === 0.04, 'the trim: starts night ' + T.LATE_CASH_NIGHT + ', loses ' + T.LATE_CASH_STEP + ' a night to x' + T.LATE_CASH_FACTOR);
-    ok([[1, 1], [8, 1], [9, .96], [10, .92], [11, .88], [14, .76], [18, .60], [20, .60], [27, .60]].every(([n, want]) => Math.abs(T.lateCashMul(n) - want) < 1e-9),
-      'nights 1-8 x1; 9-18 ramp to x0.60; endless nights hold x0.60');
+    ok(T.LATE_CASH_NIGHT === 8 && T.LATE_CASH_FACTOR === 0.40 && T.LATE_CASH_STEP === 0.06, 'the trim: starts night ' + T.LATE_CASH_NIGHT + ', loses ' + T.LATE_CASH_STEP + ' a night to x' + T.LATE_CASH_FACTOR);
+    ok([[1, 1], [7, 1], [8, .94], [9, .88], [10, .82], [11, .76], [14, .58], [17, .40], [20, .40], [27, .40]].every(([n, want]) => Math.abs(T.lateCashMul(n) - want) < 1e-9),
+      'nights 1-7 x1; 8-17 ramp to x0.40 (D-93); endless nights hold x0.40');
     // A shambler worth 100 killed 20 m off (past the zip) with no streak: the skull it drops, and the meter.
     const killPays = () => {
       const z = T.spawnZombie(P.x + 20, P.z + 20, 'shambler', true, true);
@@ -28,7 +29,7 @@
       T.beginWave(); T.clearZombies(); await wait(300);
       return T.getWaveDirectorState().day;
     };
-    for (const [d, want] of [[8, 100], [9, 96], [10, 92], [11, 88], [14, 76], [18, 60], [20, 60], [23, 60]]) {
+    for (const [d, want] of [[7, 100], [8, 94], [9, 88], [10, 82], [11, 76], [14, 58], [18, 40], [20, 40], [23, 40]]) {   // D-93
       const got = await nightOf(d);
       const mul = T.nightPayMul();
       const k = killPays();

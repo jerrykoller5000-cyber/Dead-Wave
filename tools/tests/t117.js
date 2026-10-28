@@ -64,7 +64,9 @@
     await toWave();
     ok(Math.abs(T.nightPayMul() - T.DARE_PAY_CAP) < 1e-9 && T.DARE_PAY_CAP === 1.75, 'blood moon and dare together pay x' + T.nightPayMul() + ' (not 1.875)');
     const capV = killPays();
-    ok(capV === 70, 'a 40 shambler drops a 70 skull on a blood moon with the dare (' + capV + ')');
+    // D-93 (CL-270): the late cash starts at night 8 now, so night 8 pays 0.94 of it (65.8: a 65 skull, the 0.8 carried).
+    const lateMul = Math.max(T.LATE_CASH_FACTOR, 1 - T.LATE_CASH_STEP * Math.max(0, 8 - (T.LATE_CASH_NIGHT - 1)));
+    ok(capV === Math.floor(40 * 1.75 * lateMul), 'a 40 shambler drops a ' + Math.floor(40 * 1.75 * lateMul) + ' skull on a blood moon with the dare, night 8\'s late cash x' + lateMul.toFixed(2) + ' (' + capV + ')');
     T.clearZombies(); T.startPrep();
     ok(errs.length === 0, 'no page errors' + (errs.length ? ': ' + errs[0] : ''));
   } catch (e) {

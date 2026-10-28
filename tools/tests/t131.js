@@ -4,6 +4,9 @@
 // last push starts it becomes 'due' (dw-game 'extraction'). A due boat waits through the dawn and is 'gone' at the
 // next alarm. Not calling is "stay": the alarm starts an ordinary night and the next prep offers the boat again.
 (async () => {
+  // GB-240 (rule 13): the boat is called from the radio now (GP-19969 / CL-263: the alarm panel keeps only the alarm; requestExtraction
+  // wants the 'radio' panel open at the radio set and confirmed: true, as ui/wave-preview.js's confirm sends). Before: the alarm
+  // panel at HQ_PANEL_FRONT, no confirm (qa/2026-10-27-CU-164/chunk logs: 'state' of null). The bars are unchanged.
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
   const until = async (cond, ms) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (cond()) return true; await wait(50); } return cond(); };
@@ -12,14 +15,14 @@
   const st = () => T.getWaveDirectorState();
   const ex = () => st().extraction.state;
   const pv = () => { const p = T.getWavePreview(st().day); return p && p.night ? p.night.extraction : undefined; };
-  const ask = (day, runId) => window.dispatchEvent(new CustomEvent('dw-game', { detail: { type: 'extraction-request', day, runId } }));
+  const ask = (day, runId) => window.dispatchEvent(new CustomEvent('dw-game', { detail: { type: 'extraction-request', day, runId, confirmed: true } }));
   const up = () => T.zombies.filter((z) => z.alive && !z.dying).length;
   try {
     await startMatch(T, 'Boat');
     T.clearZombies(); T.skipGrace && T.skipGrace(); T.runDevCommand('godmode');
     const runId = T.dareDbg().runId;
     const P = T.player.position;
-    const toPanel = () => P.set(T.HQ_PANEL_FRONT.x, T.sampleHeight(T.HQ_PANEL_FRONT.x, T.HQ_PANEL_FRONT.z), T.HQ_PANEL_FRONT.z);
+    const toPanel = () => P.set(T.HQ_RADIO_FRONT.x, T.sampleHeight(T.HQ_RADIO_FRONT.x, T.HQ_RADIO_FRONT.z), T.HQ_RADIO_FRONT.z);
     ok(T.EXTRACTION_NIGHT === 20, 'the goal night is 20');
     // Offered only from 20, with the relay up.
     T.setRelayUpDbg(true); T.setDay(18); T.startPrep();
@@ -33,7 +36,7 @@
     toPanel(); await wait(100);
     ask(20, runId);
     ok(ex() === 'offered' && !T.hq.seq, 'with the briefing shut the request does nothing');
-    T.openHQBriefingDbg();
+    T.openHQBriefingDbg({ panel: 'radio' });
     ask(19, runId); ask(20, runId + 999);
     ok(ex() === 'offered' && !T.hq.seq && st().phase === 'prep', 'a request for another day or run does nothing');
     ask(20, runId);

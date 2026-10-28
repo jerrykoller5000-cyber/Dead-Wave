@@ -1,0 +1,9 @@
+{
+  "shots": [
+    {"target":"zombie.leaper:statue","view":"side","wait":300,"size":"1280x720","out":"handoffs/GP-19970/leaper-spine-after/overcast-side.png"},
+    {"target":"zombie.leaper:statue","view":"back","wait":300,"size":"1280x720","out":"handoffs/GP-19970/leaper-spine-after/overcast-back.png"}
+  ],
+  "out":"handoffs/GP-19970/leaper-spine-after",
+  "sheet":true,
+  "cols":2
+}

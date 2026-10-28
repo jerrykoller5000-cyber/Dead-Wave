@@ -1,0 +1,20 @@
+{
+ "at": "2026-10-27T22:04:32.362Z",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "results": [
+  {
+   "id": "zombie.bomber",
+   "variant": null,
+   "mode": "statue",
+   "ok": true,
+   "ms": 217,
+   "tris": 6240,
+   "size": [
+    1.572,
+    2.019,
+    1.698
+   ],
+   "error": null
+  }
+ ]
+}

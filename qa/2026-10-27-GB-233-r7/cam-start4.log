@@ -1,0 +1,4 @@
+GRANT grokbot GB-233: starting one game-test command
+camera: loading the game.............................
+camera: ready in 29 s on port 9208: training, ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11), 1600x900
+Game-test lease transferred to the command daemon; it will release on shutdown.

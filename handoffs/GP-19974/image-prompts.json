@@ -1,0 +1,49 @@
+{
+  "tool": "built-in image_gen",
+  "jobs": [
+    {
+      "id": "camp",
+      "prompt": "Asset: one widescreen 16:9 still frame for an eight-second recovered camera recording inside the low-poly 3D game Grave Shift. Match simple faceted game geometry, matte surfaces, chunky polygon forms and restrained olive/gray/rust colors. It must look like an in-game character/world render, not a photograph, painting, cinematic realism or a polished cartoon. Dark but shapes must remain readable on a small handheld camera screen. No words, UI, captions, borders, watermarks, glowing eyes, monster, ghost, gore or supernatural figure. Edit the first reference game screenshot into a close handheld eye-level shot of its hikers' camp at night. Remove all game HUD and interface. A worn triangular canvas tent occupies the left and centre background, a weak warm camp light in front of it. Two young adult male hikers stand in the foreground beside the tent laughing naturally, both face the person holding the camera. Second reference is Theo Marsh, bearded, hiking shell; third reference is his younger brother Sam Marsh, clean-shaven and smiling. Translate those same visibly polygonal faces into the scene with simple hiking clothes and packs. Keep a dark forest and a suggestion of lake shore at far right. Ordinary friends on a camping trip, nothing threatening shown.",
+      "referenced_image_paths": [
+        "C:/Users/Zero/Desktop/Tiny Trek/handoffs/GP-19968/stylized-production/hikers-dusk-tp.png",
+        "C:/Users/Zero/Desktop/Tiny Trek/ui/assets/hikers/theo-marsh.jpg",
+        "C:/Users/Zero/Desktop/Tiny Trek/ui/assets/hikers/sam-marsh.jpg"
+      ],
+      "source": "C:\\Users\\Zero\\.codex\\generated_images\\01a16ec2-6bec-73f1-a414-3f710c524ae2\\exec-2831b2e9-88b4-4766-b4d6-3348c9683946.png",
+      "final": "ui/assets/story/camp.jpg"
+    },
+    {
+      "id": "lake",
+      "prompt": "Asset: one widescreen 16:9 still frame for an eight-second recovered camera recording inside the low-poly 3D game Grave Shift. Match simple faceted game geometry, matte surfaces, chunky polygon forms and restrained olive/gray/rust colors. It must look like an in-game character/world render, not a photograph, painting, cinematic realism or a polished cartoon. Dark but shapes must remain readable on a small handheld camera screen. No words, UI, captions, borders, watermarks, glowing eyes, monster, ghost, gore or supernatural figure. The camera has turned away from a nearby tent toward a still mountain lake at night. Eye-level handheld view from the bank: a few chunky low-poly pine trunks and dark reeds at the edges, faceted stones close to the lens, black-blue water across the middle, a quiet pale moon reflection and angular hills beyond. Empty water, empty shore; nothing is revealed. A small edge of canvas and backpack strap at extreme left joins the camp shot. Moody quiet footage, legible subtle midtones and obvious coarse polygon shading. No realistic textures.",
+      "source": "C:\\Users\\Zero\\.codex\\generated_images\\01a16ec2-6bec-73f1-a414-3f710c524ae2\\exec-38ade6ee-4533-48f7-9bfb-5c4970291827.png",
+      "final": "ui/assets/story/lake.jpg"
+    },
+    {
+      "id": "mine",
+      "prompt": "Asset: one widescreen 16:9 still frame for an eight-second recovered camera recording inside the low-poly 3D game Grave Shift. Match simple faceted game geometry, matte surfaces, chunky polygon forms and restrained olive/gray/rust colors. It must look like an in-game character/world render, not a photograph, painting, cinematic realism or a polished cartoon. Dark but shapes must remain readable on a small handheld camera screen. No words, UI, captions, borders, watermarks, glowing eyes, monster, ghost, gore or supernatural figure. A recovered final camera frame looking DOWN at a pair of large bolt cutters lying diagonally on faceted gravel beside the mouth of an abandoned iron mine. Clearly recognizable RED-ORANGE handled bolt cutters with two long handles joined to dark steel jaws, not scissors and not pliers. A thick coil of climbing rope lies beside them. Two old iron gate bars with freshly cut ends at the edge of the timber-and-stone mine entrance explain the cutters' use. Close low handheld angle, tools large and readable, entrance dark and empty. One weak torch lights dull steel, rusted iron, warm handles and coarse gravel. Match basic low-poly game assets, no photographic detail. No person or creature.",
+      "source": "handoffs/GP-19974/source/mine-reframe-g.png",
+      "final": "ui/assets/story/mine.jpg",
+      "nativeCapture": {
+        "id": "g",
+        "file": "handoffs/GP-19974/source/mine-reframe-g.png",
+        "pose": {
+          "x": -159.9322554200304,
+          "y": 2.0266644720176927,
+          "z": 85.90306548427766,
+          "tx": -161.39285957073324,
+          "ty": 1.2766644878877293,
+          "tz": 89.84218156722693,
+          "fov": 100
+        },
+        "worldTime": 0.69,
+        "rollRadians": 0.055,
+        "warningEyesDetachedForPastRecording": true,
+        "final": "ui/assets/story/mine.jpg",
+        "bytes": 85097,
+        "sha256": "e3496d71d5201f9538fbf2938d2d83677c07e0a8359c779e8e80cb7d9de72ca7",
+        "operation": "Native capture, JPEG format conversion only"
+      }
+    }
+  ],
+  "note": "Final mine frame recaptured natively per Claude 2026-10-27: chest-height view with timber mouth above and existing cutters in foreground, slight camera roll. Live warning-eye rig detached only in disposable capture scene; this past recording reveals no creature. No game layout or source geometry changed. JPEG format conversion only."
+}

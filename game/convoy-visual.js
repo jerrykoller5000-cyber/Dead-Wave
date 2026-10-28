@@ -50,14 +50,18 @@ export function buildConvoyVisual(THREE, TSL, foldStatic, wreck, groundAt) {
     box(still, .025, .17, 3.26, C.red, x + Math.sign(x) * .077, .12, 1.02);
     box(still, .035, .035, 3.2, C.fadedRed, x + Math.sign(x) * .09, -.56, 1.02);
   }
-  box(still, 2.24, 1.78, .14, C.shell, 0, .02, 2.71);
+  // GP-19974: a real rear opening, so the doors can remain open after the cooler leaves.
+  box(still, 2.24, .12, .14, C.shell, 0, .91, 2.71);
+  box(still, 2.24, .12, .14, C.shell, 0, -.87, 2.71);
   box(still, 2.22, 1.72, .12, C.shade, 0, .01, -.66);
-  // Rear medical doors, broad crosses and their damaged centre seam.
-  box(still, .055, 1.56, .025, C.black, 0, .03, 2.81);
-  for (const x of [-.52, .52]) {
-    box(still, .6, .12, .026, C.red, x, .17, 2.805);
-    box(still, .12, .59, .026, C.red, x, .17, 2.81);
-    box(still, .12, .05, .07, C.steel, x * .32, -.14, 2.84);
+  const rearDoors=[];
+  for(const side of [-1,1]){
+    const pivot=new THREE.Group();pivot.position.set(side*1.12,.02,2.74);vehicle.add(pivot);
+    const leaf=new THREE.Group();pivot.add(leaf);const x=-side*.55;
+    box(leaf,1.08,1.64,.10,C.shell,x,0,0);
+    box(leaf,.6,.12,.026,C.red,x,.15,.065);box(leaf,.12,.59,.026,C.red,x,.15,.07);
+    box(leaf,.12,.05,.07,C.steel,-side*.99,-.16,.09);
+    foldStatic(THREE,TSL,leaf);rearDoors.push({pivot,side});
   }
   box(still, 2.17, .17, 1.92, C.shell, 0, -.89, -1.6);
   box(still, 2.18, .16, 1.96, C.roof, 0, .88, -1.59);
@@ -161,7 +165,20 @@ export function buildConvoyVisual(THREE, TSL, foldStatic, wreck, groundAt) {
   foldStatic(THREE, TSL, pin);
   wreck.updateWorldMatrix(true, true);
   const jackAt = wreck.localToWorld(new THREE.Vector3(jackX + .42, groundAt(jackX, jackZ), jackZ + .15));
-  const setDoorOpen = (open) => { hinge.rotation.y = open ? 1.52 : 0; };
+  let taken=false;
+  const setDoorOpen = (open) => { hinge.rotation.y = open || taken ? 1.52 : 0; };
+  const setAftermath = (value) => {
+    const next=value===true;if(next===taken)return;
+    taken=next;setDoorOpen(false);
+    for(const {pivot,side} of rearDoors)pivot.rotation.y=taken?side*1.32:0;
+  };
+  // A small dash receiver uses existing materials; its centre is exported for real E reach.
+  const radio=new THREE.Group();radio.name='convoy-cab-radio';vehicle.add(radio);radio.position.set(.72,.03,-2.32);
+  box(radio,.32,.15,.13,C.black,0,0,0);
+  box(radio,.17,.055,.012,C.glass,-.035,.025,.071);
+  for(const x of [-.12,.12])cyl(radio,.025,.025,.025,C.steel,x,-.035,.082,Math.PI/2);
+  foldStatic(THREE,TSL,radio);
+  const radioAt=()=>radio.getWorldPosition(new THREE.Vector3());
   const setBeatPulse = (v, ready = false) => {
     const t = Math.max(0, Math.min(1, Number(v) || 0));
     pulse.scale.setScalar(1 + t * .42);
@@ -197,5 +214,5 @@ export function buildConvoyVisual(THREE, TSL, foldStatic, wreck, groundAt) {
     }
   };
   setDoorOpen(false); setBeatPulse(0); setJackProgress(0);
-  return { jackAt, sleeperMount, setDoorOpen, setBeatPulse, setJackProgress, stroke, animate, vehicle, jack, door: hinge, gauge };
+  return { jackAt, sleeperMount, setDoorOpen, setAftermath, radioAt, radio, rearDoors, setBeatPulse, setJackProgress, stroke, animate, vehicle, jack, door: hinge, gauge };
 }

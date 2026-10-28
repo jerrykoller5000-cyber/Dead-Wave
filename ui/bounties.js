@@ -41,7 +41,7 @@ export function createBountyIntel() {
       if(runId===null||event?.runId!==runId)return;
       if(event.type==='alarm-started'){known.clear();return;}
       if(event.type==='bounty-done'||event.type==='bounty-expired'){known.delete(identity(event));return;}
-      if(event.type!=='briefing-open'||event.phase!=='prep'||event.alarmActive)return;
+      if(event.type!=='briefing-open'||event.panel!=='duty'||event.phase!=='prep'||event.alarmActive)return;
       known.clear();readDay=event.day;
       for(const b of Array.isArray(event.bounties)?event.bounties:[]) {
         if(validPost(b,event.day)&&b.state==='open'&&Number.isFinite(b.x)&&Number.isFinite(b.z))

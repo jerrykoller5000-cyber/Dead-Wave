@@ -1,0 +1,93 @@
+{
+  "_about": "CU-164 (D-94): the player from Ocular Stride. Boots where Stride has that surface (concrete, glass, metal, wood, water). Boots have no dirt, mud, leaves or grass, so packed dirt and the run are generic gravel and leaves are generic grass, and the why says so. Sound rule: immersive, except the landing, which is impactful. A step is one take, cut short so it can repeat. Not picked, because the packs do not have the thing and Jerry's take is the better one: mud (no squelch), jump and the roll and the vault (no gear and no hands), the swim stroke (the packs' water is the sea or a boot splash), breath and both hurts (no soldier's voice; Foundation's breaths are designed and several seconds), and every builds folder (no hammer, sandbag, drill, wire, door, mine beep or spike; Utility's wood is a piece set on a desk, Foundation's hits are trailer booms). Claude makes these; Jerry's ear decides.",
+  "player/footstep-dirt": {
+    "hp": 80,
+    "takes": [
+      { "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Stride-Ocular-Sounds\\Stride\\Generic Footwear\\FEETHmn_GENERIC-Generic Footwear Gravel Single Step 01_Ocular_Stride.wav", "start": 0, "end": 0.45, "name": "gravel-step-01", "why": "Immersive. Stride's boots have no dirt; this is the packed-ground step, gravel, one footfall." },
+      { "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Stride-Ocular-Sounds\\Stride\\Generic Footwear\\FEETHmn_GENERIC-Generic Footwear Gravel Single Step 02_Ocular_Stride.wav", "start": 0, "end": 0.45, "name": "gravel-step-02", "why": "Immersive. A second gravel step so the dirt walk does not repeat." },
+      { "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Stride-Ocular-Sounds\\Stride\\Generic Footwear\\FEETHmn_GENERIC-Generic Footwear Gravel Single Step 03_Ocular_Stride.wav", "start": 0, "end": 0.45, "name": "gravel-step-03", "why": "Immersive. A third gravel step." },
+      { "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Stride-Ocular-Sounds\\Stride\\Generic Footwear\\FEETHmn_GENERIC-Generic Footwear Gravel Single Step 04_Ocular_Stride.wav", "start": 0, "end": 0.45, "name": "gravel-step-04", "why": "Immersive. A fourth gravel step." }
+    ]
+  },
+  "player/footstep-run-dirt": {
+    "hp": 70,
+    "takes": [
+      { "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Stride-Ocular-Sounds\\Stride\\Generic Footwear\\FEETHmn_GENERIC-Generic Footwear Gravel Stomp 01_Ocular_Stride.wav", "start": 0, "end": 0.4, "name": "gravel-stomp-01", "why": "Immersive. The heavier gravel hit, cut to the attack, for a running step. Boots have no dirt run." },
+      { "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Stride-Ocular-Sounds\\Stride\\Generic Footwear\\FEETHmn_GENERIC-Generic Footwear Gravel Stomp 02_Ocular_Stride.wav", "start": 0, "end": 0.4, "name": "gravel-stomp-02", "why": "Immersive. A second running step." },
+      { "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Stride-Ocular-Sounds\\Stride\\Generic Footwear\\FEETHmn_GENERIC-Generic Footwear Gravel Stomp 03_Ocular_Stride.wav", "start": 0, "end": 0.4, "name": "gravel-stomp-03", "why": "Immersive. A third running step." },
+      { "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Stride-Ocular-Sounds\\Stride\\Generic Footwear\\FEETHmn_GENERIC-Generic Footwear Gravel Stomp 04_Ocular_Stride.wav", "start": 0, "end": 0.4, "name": "gravel-stomp-04", "why": "Immersive. A fourth running step." }
+    ]
+  },
+  "player/footstep-stone": {
+    "hp": 100,
+    "takes": [
+      { "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Stride-Ocular-Sounds\\Stride\\Boots\\FEETHmn_BOOTS-Boots Concrete Single Step 01_Ocular_Stride.wav", "start": 0, "end": 0.28, "name": "boot-concrete-01", "why": "Immersive. A combat boot on hard ground, the cave rock. Stride has no rock; concrete is the hard boot." },
+      { "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Stride-Ocular-Sounds\\Stride\\Boots\\FEETHmn_BOOTS-Boots Concrete Single Step 02_Ocular_Stride.wav", "start": 0, "end": 0.28, "name": "boot-concrete-02", "why": "Immersive. A second boot on concrete." },
+      { "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Stride-Ocular-Sounds\\Stride\\Boots\\FEETHmn_BOOTS-Boots Concrete Single Step 03_Ocular_Stride.wav", "start": 0, "end": 0.28, "name": "boot-concrete-03", "why": "Immersive. A third boot on concrete." },
+      { "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Stride-Ocular-Sounds\\Stride\\Boots\\FEETHmn_BOOTS-Boots Concrete Single Step 04_Ocular_Stride.wav", "start": 0, "end": 0.24, "name": "boot-concrete-04", "why": "Immersive. A fourth boot on concrete." }
+    ]
+  },
+  "player/footstep-tile": {
+    "hp": 120,
+    "takes": [
+      { "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Stride-Ocular-Sounds\\Stride\\Boots\\FEETHmn_BOOTS-Boots Glass Single Step 01_Ocular_Stride.wav", "start": 0, "end": 0.4, "name": "boot-glass-01", "why": "Immersive. A boot on a hard smooth floor. Stride has no tile; glass is the crisp tap, cut before it rings." },
+      { "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Stride-Ocular-Sounds\\Stride\\Boots\\FEETHmn_BOOTS-Boots Glass Single Step 02_Ocular_Stride.wav", "start": 0, "end": 0.4, "name": "boot-glass-02", "why": "Immersive. A second smooth-floor step." },
+      { "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Stride-Ocular-Sounds\\Stride\\Boots\\FEETHmn_BOOTS-Boots Glass Single Step 03_Ocular_Stride.wav", "start": 0, "end": 0.4, "name": "boot-glass-03", "why": "Immersive. A third smooth-floor step." },
+      { "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Stride-Ocular-Sounds\\Stride\\Boots\\FEETHmn_BOOTS-Boots Glass Single Step 04_Ocular_Stride.wav", "start": 0, "end": 0.4, "name": "boot-glass-04", "why": "Immersive. A fourth smooth-floor step." }
+    ]
+  },
+  "player/footstep-metal": {
+    "hp": 120,
+    "takes": [
+      { "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Stride-Ocular-Sounds\\Stride\\Boots\\FEETHmn_BOOTS-Boots Metal Single Step 01_Ocular_Stride.wav", "start": 0, "end": 0.23, "name": "boot-metal-01", "why": "Immersive. A combat boot on a steel plate, one clank." },
+      { "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Stride-Ocular-Sounds\\Stride\\Boots\\FEETHmn_BOOTS-Boots Metal Single Step 02_Ocular_Stride.wav", "start": 0, "end": 0.23, "name": "boot-metal-02", "why": "Immersive. A second metal step." },
+      { "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Stride-Ocular-Sounds\\Stride\\Boots\\FEETHmn_BOOTS-Boots Metal Single Step 03_Ocular_Stride.wav", "start": 0, "end": 0.25, "name": "boot-metal-03", "why": "Immersive. A third metal step." },
+      { "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Stride-Ocular-Sounds\\Stride\\Boots\\FEETHmn_BOOTS-Boots Metal Single Step 04_Ocular_Stride.wav", "start": 0, "end": 0.23, "name": "boot-metal-04", "why": "Immersive. A fourth metal step." }
+    ]
+  },
+  "player/footstep-wood": {
+    "hp": 80,
+    "takes": [
+      { "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Stride-Ocular-Sounds\\Stride\\Boots\\FEETHmn_BOOTS-Boots Wood Single Step 01_Ocular_Stride.wav", "start": 0, "end": 0.22, "name": "boot-wood-01", "why": "Immersive. A combat boot on a wooden floor, one knock." },
+      { "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Stride-Ocular-Sounds\\Stride\\Boots\\FEETHmn_BOOTS-Boots Wood Single Step 02_Ocular_Stride.wav", "start": 0, "end": 0.22, "name": "boot-wood-02", "why": "Immersive. A second wood step." },
+      { "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Stride-Ocular-Sounds\\Stride\\Boots\\FEETHmn_BOOTS-Boots Wood Single Step 03_Ocular_Stride.wav", "start": 0, "end": 0.22, "name": "boot-wood-03", "why": "Immersive. A third wood step." },
+      { "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Stride-Ocular-Sounds\\Stride\\Boots\\FEETHmn_BOOTS-Boots Wood Single Step 04_Ocular_Stride.wav", "start": 0, "end": 0.28, "name": "boot-wood-04", "why": "Immersive. A fourth wood step." }
+    ]
+  },
+  "player/footstep-water": {
+    "hp": 80,
+    "takes": [
+      { "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Stride-Ocular-Sounds\\Stride\\Boots\\FEETHmn_BOOTS-Boots Water Single Step 01_Ocular_Stride.wav", "start": 0, "end": 0.25, "name": "boot-water-01", "why": "Immersive. A boot in shallow water, one splash." },
+      { "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Stride-Ocular-Sounds\\Stride\\Boots\\FEETHmn_BOOTS-Boots Water Single Step 02_Ocular_Stride.wav", "start": 0, "end": 0.26, "name": "boot-water-02", "why": "Immersive. A second splash." },
+      { "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Stride-Ocular-Sounds\\Stride\\Boots\\FEETHmn_BOOTS-Boots Water Single Step 03_Ocular_Stride.wav", "start": 0, "end": 0.23, "name": "boot-water-03", "why": "Immersive. A third splash." },
+      { "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Stride-Ocular-Sounds\\Stride\\Boots\\FEETHmn_BOOTS-Boots Water Single Step 04_Ocular_Stride.wav", "start": 0, "end": 0.38, "name": "boot-water-04", "why": "Immersive. A fourth splash." }
+    ]
+  },
+  "player/footstep-leaves": {
+    "hp": 100,
+    "takes": [
+      { "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Stride-Ocular-Sounds\\Stride\\Generic Footwear\\FEETHmn_GENERIC-Generic Footwear Grass Single Step 01_Ocular_Stride.wav", "start": 0, "end": 0.45, "name": "grass-step-01", "why": "Immersive. Stride has no leaves. Dry grass is the rustle; it is not a twig crunch." },
+      { "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Stride-Ocular-Sounds\\Stride\\Generic Footwear\\FEETHmn_GENERIC-Generic Footwear Grass Single Step 02_Ocular_Stride.wav", "start": 0, "end": 0.45, "name": "grass-step-02", "why": "Immersive. A second grass step." },
+      { "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Stride-Ocular-Sounds\\Stride\\Generic Footwear\\FEETHmn_GENERIC-Generic Footwear Grass Single Step 03_Ocular_Stride.wav", "start": 0, "end": 0.45, "name": "grass-step-03", "why": "Immersive. A third grass step." },
+      { "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Stride-Ocular-Sounds\\Stride\\Generic Footwear\\FEETHmn_GENERIC-Generic Footwear Grass Single Step 04_Ocular_Stride.wav", "start": 0, "end": 0.45, "name": "grass-step-04", "why": "Immersive. A fourth grass step." }
+    ]
+  },
+  "player/land": {
+    "hp": 50,
+    "takes": [
+      { "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Stride-Ocular-Sounds\\Stride\\Boots\\FEETHmn_BOOTS-Boots Concrete Stomp 01_Ocular_Stride.wav", "start": 0, "end": 0.27, "name": "boot-stomp-01", "why": "Impactful. A heavy boot landing. No gear rattle in the take." },
+      { "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Stride-Ocular-Sounds\\Stride\\Boots\\FEETHmn_BOOTS-Boots Concrete Stomp 02_Ocular_Stride.wav", "start": 0, "end": 0.3, "name": "boot-stomp-02", "why": "Impactful. A second landing." },
+      { "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Stride-Ocular-Sounds\\Stride\\Boots\\FEETHmn_BOOTS-Boots Concrete Stomp 03_Ocular_Stride.wav", "start": 0, "end": 0.3, "name": "boot-stomp-03", "why": "Impactful. A third landing." },
+      { "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Stride-Ocular-Sounds\\Stride\\Boots\\FEETHmn_BOOTS-Boots Concrete Stomp 04_Ocular_Stride.wav", "start": 0, "end": 0.3, "name": "boot-stomp-04", "why": "Impactful. A fourth landing." }
+    ]
+  },
+  "player/ladder-climb": {
+    "hp": 100,
+    "takes": [
+      { "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Stride-Ocular-Sounds\\Stride\\Boots\\FEETHmn_BOOTS-Boots Metal Stomp 01_Ocular_Stride.wav", "start": 0, "end": 0.34, "name": "boot-rung-01", "why": "Immersive. A boot set on a steel rung, heavier than the floor step. No hand on the rail in the take." },
+      { "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Stride-Ocular-Sounds\\Stride\\Boots\\FEETHmn_BOOTS-Boots Metal Stomp 02_Ocular_Stride.wav", "start": 0, "end": 0.35, "name": "boot-rung-02", "why": "Immersive. A second rung." },
+      { "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Stride-Ocular-Sounds\\Stride\\Boots\\FEETHmn_BOOTS-Boots Metal Stomp 03_Ocular_Stride.wav", "start": 0, "end": 0.35, "name": "boot-rung-03", "why": "Immersive. A third rung." },
+      { "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Stride-Ocular-Sounds\\Stride\\Boots\\FEETHmn_BOOTS-Boots Metal Stomp 04_Ocular_Stride.wav", "start": 0, "end": 0.31, "name": "boot-rung-04", "why": "Immersive. A fourth rung." }
+    ]
+  }
+}

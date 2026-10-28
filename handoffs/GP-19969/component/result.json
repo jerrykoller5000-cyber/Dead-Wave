@@ -1,0 +1,43 @@
+{
+  "scope": "Presentation only; substituted panel mode over real game data",
+  "results": [
+    {
+      "file": "handoffs/GP-19969/component/alarm-1280.png",
+      "mode": "alarm",
+      "open": true,
+      "overflow": false
+    },
+    {
+      "file": "handoffs/GP-19969/component/duty-1280.png",
+      "mode": "duty",
+      "open": true,
+      "overflow": false
+    },
+    {
+      "file": "handoffs/GP-19969/component/radio-1280.png",
+      "mode": "radio",
+      "open": true,
+      "overflow": false
+    },
+    {
+      "file": "handoffs/GP-19969/component/alarm-390.png",
+      "mode": "alarm",
+      "open": true,
+      "overflow": false
+    },
+    {
+      "file": "handoffs/GP-19969/component/duty-390.png",
+      "mode": "duty",
+      "open": true,
+      "overflow": false
+    },
+    {
+      "file": "handoffs/GP-19969/component/radio-390.png",
+      "mode": "radio",
+      "open": true,
+      "overflow": false
+    }
+  ],
+  "errors": [],
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+}

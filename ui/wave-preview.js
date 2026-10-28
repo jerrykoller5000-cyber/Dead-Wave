@@ -6,6 +6,7 @@ import { buildScoutingReport, scoutingSpecialNight } from './scouting.js';
 import { buildBountyBoard } from './bounties.js';
 import { buildRadioCallView } from './radio-call.js';
 import { nightTitle } from './night-names.js';
+import { buildStoryBoard } from './story-leads.js';
 
 export const FIELD_INTEL_PRICE = 120;
 const CAVE_KEYS = Object.keys(STRINGS).filter(key => key.startsWith('world.cave.'));
@@ -90,14 +91,10 @@ export function mountBriefing({ doc = document, bus = window } = {}) {
   const close = doc.createElement('button'); close.type = 'button'; close.className = 'briefing-close'; close.textContent = text('common.close');
   header.append(identity,close);
   const status = doc.createElement('p'); status.className = 'briefing-status'; status.setAttribute('role','status');
-  const nav = doc.createElement('nav'); nav.className = 'briefing-nav'; nav.setAttribute('aria-label',text('alarm.title'));
   const content = doc.createElement('div'); content.className = 'briefing-content';
-  const pages = {}, tabs = {};
-  const select = key => { for(const id of Object.keys(pages)){pages[id].hidden=id!==key;tabs[id].setAttribute('aria-pressed',String(id===key));} content.scrollTop=0; };
+  const pages = {};
   for(const key of ['report','fieldwork','relay']) {
-    const tab = doc.createElement('button'); tab.type='button'; tab.textContent=text('alarm.'+key); tabs[key]=tab;
     const page = doc.createElement('div'); page.className='briefing-page'; page.id='briefing-'+key; pages[key]=page;
-    tab.setAttribute('aria-controls',page.id); tab.addEventListener('click',()=>select(key)); nav.append(tab); content.append(page);
   }
   const footer = doc.createElement('footer'), actions = doc.createElement('div'), alarm = doc.createElement('button'), boat = doc.createElement('button');
   actions.className='briefing-actions'; alarm.className='briefing-alarm'; boat.className='briefing-extraction';
@@ -105,19 +102,28 @@ export function mountBriefing({ doc = document, bus = window } = {}) {
   const consequence=doc.createElement('p'); consequence.className='briefing-consequence'; consequence.textContent=text('alarm.consequence');
   const prep = doc.createElement('details'), prepHeading = doc.createElement('summary'), prepRows = doc.createElement('ul');
   prep.className = 'briefing-prep'; prepRows.className = 'prep-goals'; prep.hidden = true; prep.append(prepHeading,prepRows);
-  actions.append(alarm,boat); footer.append(consequence,actions); dialog.append(header,status,nav,content,prep,footer); doc.body.append(dialog);
-  select('report');
-  let returnFocus = null, currentData = null;
+  actions.append(alarm,boat); footer.append(consequence,actions); dialog.append(header,status,content,prep,footer); doc.body.append(dialog);
+  const confirm=doc.createElement('section');confirm.className='heron-confirm';confirm.hidden=true;
+  const confirmTitle=doc.createElement('h3'),confirmNote=doc.createElement('p'),cancelBoat=doc.createElement('button'),confirmBoat=doc.createElement('button');
+  confirmTitle.textContent=text('story.heron.confirm');confirmNote.textContent=text('story.heron.warning');
+  cancelBoat.type=confirmBoat.type='button';cancelBoat.textContent=text('story.heron.cancel');confirmBoat.textContent=text('wavePreview.callBoat');
+  confirm.append(confirmTitle,confirmNote,cancelBoat,confirmBoat);dialog.append(confirm);
+  let returnFocus = null, currentData = null, mode='alarm', prepView=null;
   const line = (parent, tag, value, cls) => { const el=doc.createElement(tag); el.textContent=value; if(cls)el.className=cls; parent.append(el); return el; };
   function render(data) {
     currentData = data;
-    const view = buildBriefing(data); subtitle.textContent = view.title;
+    mode=['duty','radio'].includes(data.panel)?data.panel:'alarm';dialog.dataset.panel=mode;
+    heading.textContent=text(mode==='alarm'?'alarm.title':`story.${mode}.title`);
+    station.textContent=text(mode==='alarm'?'alarm.station':`story.${mode}.station`);
+    const view = buildBriefing(data); subtitle.textContent = mode==='alarm'?view.title:text('story.panel.day',{day:data.day});
     for(const page of Object.values(pages))page.replaceChildren();
     const reportPage=pages.report, fieldPage=pages.fieldwork, relayPage=pages.relay;
+    content.replaceChildren(pages[{alarm:'report',duty:'fieldwork',radio:'relay'}[mode]]);
+    content.hidden=false;confirm.hidden=true;prep.hidden=mode!=='alarm'||!prepView?.visible;
     const state=data.disabled?'locked':data.alarmActive?'active':data.phase!=='prep'?'inProgress':data.canSoundAlarm===false?'remote':'ready';
-    status.textContent=text('alarm.'+state); status.dataset.state=state;
+    status.textContent=mode==='alarm'?text('alarm.'+state):text(data.canUsePanel===false?'story.panel.remote':mode==='duty'?'story.duty.status':data.relayReady?'story.radio.ready':'story.radio.down'); status.dataset.state=state;
     if(data.orders?.head && Array.isArray(data.orders.lines)) {
-      const orders=doc.createElement('section');orders.className='briefing-orders';reportPage.append(orders);
+      const orders=doc.createElement('section');orders.className='briefing-orders';fieldPage.append(orders);
       line(orders,'h3',data.orders.head);
       for(const entry of data.orders.lines) if(typeof entry==='string' && entry) line(orders,'p',entry);
     }
@@ -126,8 +132,8 @@ export function mountBriefing({ doc = document, bus = window } = {}) {
       line(relay,'h3',text('story.relay.title'));
       const dispatches = data.relayStory.lines?.length ? data.relayStory.lines : [{ line: data.relayStory.line }];
       for (const dispatch of dispatches) line(relay,'p',dispatch.line,'relay-story-line');
-      renderQuestPanel(relay,data,{doc,send});
     }
+    renderQuestPanel(relayPage,{...data,canUsePanel:data.canUsePanel===true},{doc,send});
     const scouting = view.available ? buildScoutingReport(data) : null;
     if(scouting) {
       const report=doc.createElement('section');report.className='briefing-scouting';reportPage.append(report);
@@ -148,10 +154,24 @@ export function mountBriefing({ doc = document, bus = window } = {}) {
       const cards=doc.createElement('div');cards.className='radio-call-cards';section.append(cards);
       for(const card of radio.cards) {
         const button=doc.createElement('button');button.type='button';button.className='radio-call-card';button.dataset.card=card.id;
-        button.disabled=!card.enabled || data.disabled === true || data.canSoundAlarm === false;line(button,'strong',card.name);line(button,'span',card.description);
+        button.disabled=!card.enabled || data.disabled === true || data.canUsePanel !== true;line(button,'strong',card.name);line(button,'span',card.description);
         button.addEventListener('click',()=>send('radio-call-request',{card:card.id,day:data.day,runId:data.runId}));
         cards.append(button);
       }
+    }
+    const leads=doc.createElement('div');leads.className='story-leads';fieldPage.prepend(leads);
+    const leadRows=buildStoryBoard(data.story);
+    if(!leadRows.length)line(leads,'p',text('story.duty.empty'),'briefing-empty');
+    for(const lead of [...leadRows].sort((a,b)=>Number(a.state==='done')-Number(b.state==='done'))) {
+      const card=doc.createElement('article');card.className='story-lead';card.dataset.lead=lead.id;card.dataset.state=lead.state;
+      line(card,'p',lead.state==='done'?`✓ ${lead.status}`:lead.status,'story-lead-state');
+      line(card,'h3',lead.title);line(card,'p',lead.line,'story-lead-line');line(card,'p',lead.location,'story-lead-location');
+      if(lead.canTrack){
+        const track=line(card,'button',text('objectives.track'));track.type='button';track.dataset.track=lead.id;
+        track.setAttribute('aria-label',text('story.lead.track',{lead:lead.title}));track.disabled=data.canUsePanel!==true;
+        track.addEventListener('click',()=>send('story-track-request',{runId:data.runId,day:data.day,id:lead.id,site:lead.site}));
+      }
+      leads.append(card);
     }
     if(data.restocks?.length) {
       const caches=doc.createElement('section');caches.className='briefing-restocks';fieldPage.append(caches);
@@ -160,7 +180,7 @@ export function mountBriefing({ doc = document, bus = window } = {}) {
         site:row.name,reward:row.collected?text('cache.collected'):row.reward}));
       if(data.restocks.some(row=>!row.collected))line(caches,'p',text('cache.mapLegend'),'briefing-muted');
     }
-    renderHollowBoard(fieldPage, data, doc);
+    if(leadRows.some(lead=>lead.id==='below'))renderHollowBoard(fieldPage, data, doc);
     const bounties = buildBountyBoard(data);
     if(bounties) {
       const board=doc.createElement('section');board.className='briefing-bounties';fieldPage.append(board);
@@ -188,10 +208,12 @@ export function mountBriefing({ doc = document, bus = window } = {}) {
     if(data.phase!=='prep')line(reportPage,'p',text('wavePreview.inProgress'),'briefing-warning');
     if(data.disabled)line(reportPage,'p',text('hq.disabled'),'briefing-warning');
     if(data.canSoundAlarm === false)line(reportPage,'p',text('wavePreview.atHQ'),'briefing-muted');
-    alarm.disabled = data.phase !== 'prep' || data.alarmActive || data.disabled || data.canSoundAlarm === false;
-    const boatView=boatCallView(data);
-    boat.hidden=!boatView.offered;boat.disabled=!boatView.enabled;
-    if(boatView.relayDown)line(reportPage,'p',text('wavePreview.relayDown'),'briefing-warning');
+    alarm.hidden=mode!=='alarm';alarm.disabled = mode!=='alarm' || data.phase !== 'prep' || data.alarmActive || data.disabled || data.canSoundAlarm === false;
+    const boatView=boatCallView({...data,canSoundAlarm:data.canUsePanel===true});
+    boat.hidden=mode!=='radio'||!boatView.offered;boat.disabled=!boatView.enabled;
+    if(boatView.relayDown)line(relayPage,'p',text('wavePreview.relayDown'),'briefing-warning');
+    consequence.textContent=text(mode==='alarm'?'alarm.consequence':'story.heron.warning');
+    footer.hidden=mode==='duty'||(mode==='radio'&&!boatView.offered);
     if(!fieldPage.childElementCount)line(fieldPage,'p',text('alarm.fieldworkEmpty'),'briefing-empty');
     if(!relayPage.childElementCount)line(relayPage,'p',text(data.relayReady?'alarm.relayQuiet':'alarm.relaySilent'),'briefing-empty');
     // Missing optional intelligence must never prevent a valid wave start.
@@ -202,7 +224,10 @@ export function mountBriefing({ doc = document, bus = window } = {}) {
     if(returnFocus?.isConnected) returnFocus.focus({preventScroll:true});
   }
   alarm.addEventListener('click',()=>send('alarm-request'));
-  boat.addEventListener('click',()=>{if(currentData)send('extraction-request',{runId:currentData.runId,day:currentData.day});});
+  const cancelConfirm=()=>{confirm.hidden=true;content.hidden=false;footer.hidden=false;boat.focus();};
+  boat.addEventListener('click',()=>{if(mode!=='radio'||boat.disabled)return;content.hidden=true;footer.hidden=true;confirm.hidden=false;cancelBoat.focus();});
+  cancelBoat.addEventListener('click',cancelConfirm);
+  confirmBoat.addEventListener('click',()=>{if(mode==='radio'&&currentData&&!confirm.hidden&&!boat.disabled)send('extraction-request',{runId:currentData.runId,day:currentData.day,confirmed:true});});
   close.addEventListener('click',()=>send('briefing-close-request'));
   dialog.addEventListener('cancel',e=>{e.preventDefault();send('briefing-close-request');});
   // Capture input before the game's global bindings. Native Tab/Enter and button clicks
@@ -211,7 +236,7 @@ export function mountBriefing({ doc = document, bus = window } = {}) {
     if(!dialog.open)return;
     e.stopImmediatePropagation();
     if(e.type==='keydown' && (e.code==='Escape'||e.code==='KeyE')) {
-      e.preventDefault(); if(!e.repeat)send('briefing-close-request');
+      e.preventDefault(); if(!e.repeat){if(!confirm.hidden&&e.code==='Escape')cancelConfirm();else send('briefing-close-request');}
     }
   };
   bus.addEventListener('keydown',keys,true); bus.addEventListener('keyup',keys,true);
@@ -219,13 +244,14 @@ export function mountBriefing({ doc = document, bus = window } = {}) {
   const receive = ({detail:data}) => {
     if(!data)return;
     if(data.type==='briefing-open') {
+      if(data.panel&&!['alarm','duty','radio'].includes(data.panel))return;
       const cardHadFocus = dialog.open && doc.activeElement?.classList.contains('radio-call-card');
-      if(!dialog.open)select('report');
+      if(!dialog.open)content.scrollTop=0;
       render(data);
       if(cardHadFocus)close.focus();
       if(!dialog.open){returnFocus=doc.activeElement;doc.body.classList.add('briefing');dialog.showModal();close.focus();}
     } else if(data.type==='prep-checklist-view') {
-      prep.hidden = !data.view.visible; prepHeading.textContent = data.view.summary; renderPrepRows(prepRows,data.view,doc);
+      prepView=data.view;prep.hidden = mode!=='alarm'||!data.view.visible; prepHeading.textContent = data.view.summary; renderPrepRows(prepRows,data.view,doc);
     } else if(data.type==='briefing-closed'||data.type==='run-reset') shut();
     else if(data.type==='hq-prompt') { if(data.element)data.element.textContent=text(data.alarm?'hq.alarmSounding':'wavePreview.prompt'); }
     else if(data.type==='prep-label') data.element.textContent=text(data.alarm?'prep.alarmSounding':data.intelOwned?'prep.day':'wavePreview.prepDay',{day:data.day,count:data.total});

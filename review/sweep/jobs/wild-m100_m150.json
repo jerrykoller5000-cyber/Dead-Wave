@@ -3,10 +3,10 @@
   {
    "cam": {
     "x": -100,
-    "y": -0.9000000000000001,
+    "y": -1.7,
     "z": -125,
     "tx": -100,
-    "ty": -1.4000000000000001,
+    "ty": -2.2,
     "tz": -150,
     "fov": 60
    },
@@ -17,10 +17,10 @@
   {
    "cam": {
     "x": -75,
-    "y": -0.9000000000000001,
+    "y": 0.30000000000000004,
     "z": -150,
     "tx": -100,
-    "ty": -1.4000000000000001,
+    "ty": -2.2,
     "tz": -150,
     "fov": 60
    },
@@ -31,10 +31,10 @@
   {
    "cam": {
     "x": -100,
-    "y": -0.9000000000000001,
+    "y": -1.7,
     "z": -175,
     "tx": -100,
-    "ty": -1.4000000000000001,
+    "ty": -2.2,
     "tz": -150,
     "fov": 60
    },
@@ -45,10 +45,10 @@
   {
    "cam": {
     "x": -125,
-    "y": -0.9000000000000001,
+    "y": -1.7,
     "z": -150,
     "tx": -100,
-    "ty": -1.4000000000000001,
+    "ty": -2.2,
     "tz": -150,
     "fov": 60
    },
@@ -59,10 +59,10 @@
   {
    "cam": {
     "x": -85,
-    "y": 24.900000000000002,
+    "y": 23.510000000000005,
     "z": -135,
     "tx": -100,
-    "ty": -2.6,
+    "ty": -3.99,
     "tz": -150,
     "fov": 60
    },
@@ -73,16 +73,30 @@
   {
    "cam": {
     "x": -82.5,
-    "y": 3.4,
+    "y": 2.6,
     "z": -132.5,
     "tx": -100,
-    "ty": -1.6,
+    "ty": -2.99,
     "tz": -150,
     "fov": 60
    },
    "time": "night",
    "caption": "The wild round -100,-150: at night",
    "out": "review/sweep/wild-m100_m150/wild-m100_m150-night.png"
+  },
+  {
+   "cam": {
+    "x": -79.39999999999999,
+    "y": -1.79,
+    "z": -131.09,
+    "tx": -82.6,
+    "ty": -2.99,
+    "tz": -134.29,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "floating: lily-pad floats 0.76 m above the ground (its whole footprint)",
+   "out": "review/sweep/wild-m100_m150/wild-m100_m150-suspect-1.png"
   },
   {
    "cam": {
@@ -96,7 +110,7 @@
    },
    "time": "noon",
    "caption": "overlap: mesh · part 2/6 and tree:oak overlap: 98.05 % of the smaller footprint, 2.52 m of height",
-   "out": "review/sweep/wild-m100_m150/wild-m100_m150-suspect-1.png"
+   "out": "review/sweep/wild-m100_m150/wild-m100_m150-suspect-2.png"
   },
   {
    "cam": {
@@ -110,7 +124,7 @@
    },
    "time": "noon",
    "caption": "overlap: mesh · part 6/6 and tree:autumn overlap: 99.1 % of the smaller footprint, 3.6 m of height",
-   "out": "review/sweep/wild-m100_m150/wild-m100_m150-suspect-2.png"
+   "out": "review/sweep/wild-m100_m150/wild-m100_m150-suspect-3.png"
   },
   {
    "cam": {
@@ -124,7 +138,7 @@
    },
    "time": "noon",
    "caption": "overlap: mesh · part 2/6 and tree:oak overlap: 98.05 % of the smaller footprint, 2.12 m of height",
-   "out": "review/sweep/wild-m100_m150/wild-m100_m150-suspect-3.png"
+   "out": "review/sweep/wild-m100_m150/wild-m100_m150-suspect-4.png"
   },
   {
    "cam": {
@@ -138,7 +152,7 @@
    },
    "time": "noon",
    "caption": "overlap: mesh · part 6/6 and tree:autumn overlap: 99.1 % of the smaller footprint, 3.54 m of height",
-   "out": "review/sweep/wild-m100_m150/wild-m100_m150-suspect-4.png"
+   "out": "review/sweep/wild-m100_m150/wild-m100_m150-suspect-5.png"
   },
   {
    "cam": {
@@ -152,7 +166,7 @@
    },
    "time": "noon",
    "caption": "branches: canopy:oak's branches through mesh · part 2/6 (99.84 % of the smaller footprint, 0.89 m of height)",
-   "out": "review/sweep/wild-m100_m150/wild-m100_m150-suspect-5.png"
+   "out": "review/sweep/wild-m100_m150/wild-m100_m150-suspect-6.png"
   },
   {
    "cam": {
@@ -166,7 +180,7 @@
    },
    "time": "noon",
    "caption": "branches: canopy:autumn's branches through mesh · part 6/6 (100.18 % of the smaller footprint, 0.83 m of heigh",
-   "out": "review/sweep/wild-m100_m150/wild-m100_m150-suspect-6.png"
+   "out": "review/sweep/wild-m100_m150/wild-m100_m150-suspect-7.png"
   },
   {
    "cam": {
@@ -180,7 +194,7 @@
    },
    "time": "noon",
    "caption": "branches: canopy:autumn's branches through mesh · part 6/6 (99.89 % of the smaller footprint, 3.54 m of height",
-   "out": "review/sweep/wild-m100_m150/wild-m100_m150-suspect-7.png"
+   "out": "review/sweep/wild-m100_m150/wild-m100_m150-suspect-8.png"
   }
  ],
  "out": "review/sweep/wild-m100_m150/",

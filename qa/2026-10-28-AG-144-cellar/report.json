@@ -1,0 +1,166 @@
+{
+  "task": "AG-144",
+  "renderer": "WebGPU",
+  "cellarTelemetry": {
+    "cy0": 0.098,
+    "capMeshCount": 21,
+    "groupDraws": 12,
+    "clearedSolidsCount": 1,
+    "cellarSpot": {
+      "x": -28.422545488097423,
+      "y": -2.052251299517119,
+      "z": 43.42379416011851,
+      "yaw": 2.4444
+    }
+  },
+  "sweepRuns": [
+    {
+      "run": 1,
+      "campTrapperFindingsCount": 0,
+      "campTrapperStrongCount": 0,
+      "campTrapperFindings": [],
+      "trapperReachFindings": [],
+      "cacheObjectiveReach": {
+        "approach": {
+          "x": -24.239490555947476,
+          "y": 0.06066414858473324,
+          "z": 40.48906224142202
+        },
+        "distance": 5.109853226854955,
+        "reachable": false,
+        "blockedBy": "locked"
+      }
+    },
+    {
+      "run": 2,
+      "campTrapperFindingsCount": 0,
+      "campTrapperStrongCount": 0,
+      "campTrapperFindings": [],
+      "trapperReachFindings": [],
+      "cacheObjectiveReach": {
+        "approach": {
+          "x": -24.239490555947476,
+          "y": 0.06066414858473324,
+          "z": 40.48906224142202
+        },
+        "distance": 54.6578550778,
+        "reachable": false,
+        "blockedBy": "locked"
+      }
+    },
+    {
+      "run": 3,
+      "campTrapperFindingsCount": 0,
+      "campTrapperStrongCount": 0,
+      "campTrapperFindings": [],
+      "trapperReachFindings": [],
+      "cacheObjectiveReach": {
+        "approach": {
+          "x": -24.239490555947476,
+          "y": 0.06066414858473324,
+          "z": 40.48906224142202
+        },
+        "distance": 54.6578550778,
+        "reachable": false,
+        "blockedBy": "locked"
+      }
+    }
+  ],
+  "tests": {
+    "t268": {
+      "pass": 25,
+      "fail": 0,
+      "fails": [],
+      "lines": [
+        "PASS the trapper mission is built at campsites.2",
+        "PASS eight rows of two stepping stones (16), 16 side posts, and 8 horseshoes",
+        "PASS fence and bramble colliders close both sides of the leaf bed (50)",
+        "PASS each row's horseshoe sits on the post beside that row's safe stone (0,1,1,1,0,1,0,0)",
+        "PASS the trapper cache is locked before crossing the safe path",
+        "PASS AG-135: cellar doors start shut with iron locking bar and door collider in place",
+        "PASS objectives cannot reach the hatch while locked (locked)",
+        "PASS at the locked hatch: \"Trapped path.\"",
+        "PASS wrong stone snaps a bear trap (snap)",
+        "PASS bear trap deals 25 damage (100 -> 75)",
+        "PASS bear trap holds the marine for 3 s (3.00s)",
+        "PASS bear trap calls 4-6 dead (4 spawned)",
+        "PASS sprung bear trap mesh appears at the foot (1)",
+        "PASS held prompt shows bear trap timer: \"Bear trap! (3s)\"",
+        "PASS row 0 safe stone advances progress to 1",
+        "PASS stepping off the stones into the leaves snaps a trap (leaves)",
+        "PASS walking all eight safe stones unlocks the cellar hatch",
+        "PASS AG-135: unlocking folds open both iron-lined cellar door leaves and clears the stair collider",
+        "PASS cellar hatch is now reachable (null)",
+        "PASS trapper lock prompt clears once unlocked",
+        "PASS AG-135: trapper.cellarSpot is exposed inside the underground cellar (-2.05)",
+        "PASS AG-135: marine stands on the iron-lined cellar floor (-2.05 vs -2.05)",
+        "PASS AG-135: dead on the cellar roof walk straight past overhead (moved 1.56m at dy=2.21m)",
+        "PASS reset deals a new safe pattern, re-closes the cellar doors, and re-syncs horseshoes (01010010 -> 01001011)",
+        "PASS no uncaught errors"
+      ]
+    },
+    "t52": {
+      "pass": 17,
+      "fail": 0,
+      "fails": [],
+      "lines": [
+        "PASS props file loads: seven sites",
+        "PASS sites match the CL-6 centres and approaches and GP-8 facings",
+        "PASS the world builds the props at load (CL-15)",
+        "PASS seven props, in the scene",
+        "PASS colliders on the radio cabinet and the fuel stand only (fuel,radio)",
+        "PASS no ground cover within 1.3 m of any prop (0)",
+        "PASS two draws a prop (three for the radio): 3,2,2,2,2,2,2",
+        "PASS every state within GP-8's footprint",
+        "PASS every prop sits on the lowest ground under it",
+        "PASS every approach point has 0.75 m clear",
+        "PASS radio starts broken, light amber",
+        "PASS repaired: connectors seated, light green",
+        "PASS a cache goes closed → open → empty (closed,open,empty)",
+        "PASS fuel: a partial claim shows partial",
+        "PASS unavailable and unknown ids leave a prop alone",
+        "PASS an unknown state is refused",
+        "info: 4495 triangles drawn for all seven",
+        "PASS cheap: under 8,000 triangles for all seven"
+      ]
+    },
+    "t167": {
+      "pass": 20,
+      "fail": 0,
+      "fails": [],
+      "lines": [
+        "PASS a survey board at each of the five warren caves (survey-board:hill, survey-board:iron, survey-board:root, survey-board:shale, survey-board:wet)",
+        "PASS survey-board:hill by its cave, on dry ground",
+        "PASS survey-board:iron by its cave, on dry ground",
+        "PASS survey-board:root by its cave, on dry ground",
+        "PASS survey-board:shale by its cave, on dry ground",
+        "PASS survey-board:wet by its cave, on dry ground",
+        "PASS the old mine: timbers, cut bars, IRON BELOW, the hikers' packs",
+        "PASS FOB Threshold's lockdown door, and no motto on the back wall (GP-104)",
+        "PASS the Cordon's gate on the wall (220 m out)",
+        "PASS the trailhead board with three missing posters",
+        "PASS the rangers' truck at their camp",
+        "PASS the trapper's cellar hatch at his camp",
+        "PASS Coldwater's church by the old cemetery, behind the burial yard (23.0 m)",
+        "PASS its footings and a chimney",
+        "PASS the iron-banded graves and the one open from below",
+        "PASS the fall at the sandbags: drag marks, a helmet",
+        "PASS nothing stands in water ()",
+        "PASS E by the iron warren's board reads its note",
+        "PASS and by the open grave, the graveyard's",
+        "PASS no errors"
+      ]
+    },
+    "t215": {
+      "pass": 4,
+      "fail": 0,
+      "fails": [],
+      "lines": [
+        "PASS read index.html and the scripts and styles the game loaded (228 files)",
+        "PASS no broken characters in them",
+        "PASS the HUD reads clean: timeLine \"Daylight · 08:20 · Grace\", tacticalLine \"NVG — · Laser — · Light —\", grenadeChips \"G×3H×0\", ammoDetail \"12 / 12  ·  50 Bullets  ·  SEMI\", hpNum \"100 / 100\"",
+        "PASS and shows its dots and times signs (NVG — · Laser — · Light — / G×3H×0)"
+      ]
+    }
+  }
+}

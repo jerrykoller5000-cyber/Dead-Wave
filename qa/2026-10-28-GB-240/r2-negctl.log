@@ -1,0 +1,6 @@
+Game-test request a7d3bb6c-ac91-40f7-84de-c98f331f396e queued at position 2. Waiting...
+GRANT grokbot GB-240: starting one game-test command
+    PASS a wave that never comes out fails the wait (returned false)
+    PASS it waited the full 30 s of GAME time (30.1 s game / 30.1 s wall)
+    PASS a wave that is already out returns at once
+ok   negctl  (negative control)

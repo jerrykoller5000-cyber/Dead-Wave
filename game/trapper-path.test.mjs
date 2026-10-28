@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { TRAPPER, rowZ, sideSign, sideName, calledForDay, createTrapperPath, buildTrapperYardParts } from './trapper-path.js';
+import { TRAPPER, rowZ, sideSign, sideName, calledForDay, createTrapperPath, buildTrapperYardParts, setupTrapperMission } from './trapper-path.js';
 
 test('trapper-path deals 8 rows of left/right safe stones and horseshoes, new each run', () => {
   let s = 17;
@@ -117,6 +117,8 @@ test('buildTrapperYardParts constructs 8-row trapper yard with 16 stones, 16 pos
   class Node3D {
     constructor() { this.children = []; this.position = mkVec(); this.rotation = mkVec(); this.scale = mkVec(); this.userData = {}; }
     add(...kids) { this.children.push(...kids); return this; }
+    updateMatrix() {}
+    updateMatrixWorld() {}
   }
   class Geo {
     constructor() {
@@ -125,6 +127,7 @@ test('buildTrapperYardParts constructs 8-row trapper yard with 16 stones, 16 pos
     clone() { return new Geo(); }
     setAttribute() {}
     computeVertexNormals() {}
+    dispose() {}
   }
   const THREE = {
     DoubleSide: 2,
@@ -165,7 +168,11 @@ test('buildTrapperYardParts constructs 8-row trapper yard with 16 stones, 16 pos
   assert.equal(built.stones.length, 16);
   assert.equal(built.posts.length, 16);
   assert.ok(built.colliderSpots.length >= 20);
-  assert.ok(built.parts.length > 200);
+  assert.ok(built.parts.length > 350, 'includes iron-lined cellar room, stairs, skylight grate, bunk & shelves');
+  assert.ok(built.doorLeftParts.length > 15, 'hinged left cellar door leaf with iron underside liner');
+  assert.ok(built.doorRightParts.length > 15, 'hinged right cellar door leaf with iron underside liner');
+  assert.ok(built.doorBarParts.length >= 4, 'iron crossbar & padlock when shut');
+  assert.ok(built.roofCapParts.length >= 10, 'turf/stone cellar roof cap for 3P cutaway');
   for (let r = 0; r < TRAPPER.ROWS; r++) {
     const rowStones = built.stones.filter((s) => s.row === r);
     const rowPosts = built.posts.filter((p) => p.row === r);
@@ -174,4 +181,118 @@ test('buildTrapperYardParts constructs 8-row trapper yard with 16 stones, 16 pos
     assert.equal(rowPosts[0].side, 0);
     assert.equal(rowPosts[1].side, 1);
   }
+
+  // Verify setupTrapperMission wires shut/open cellar doors, colliders, platforms, inCellar, and cellarSpot (AG-135):
+  THREE.PointLight = class extends Node3D { constructor(c, i, d, dec) { super(); this.color = c; this.intensity = i; this.distance = d; this.decay = dec; } };
+  const trapper = {};
+  const worldSolids = [];
+  const platforms = [];
+  const path = createTrapperPath(Math.random);
+  let excavated = false;
+  const prop = {
+    centre: { x: 0, y: 0, z: 0 },
+    approach: { x: 0, y: 0, z: 0 },
+    facing: 0,
+    group: Object.assign(new Node3D(), { updateMatrixWorld() {} })
+  };
+  setupTrapperMission(THREE, {
+    prop,
+    camp: { x: -24.5, z: 48.8, style: 'trapper' },
+    trapper,
+    sampleHeight: () => 2.1,
+    addSolid: (x, z, radius, y0, y1) => { const s = { x, z, radius, y0, y1 }; worldSolids.push(s); return s; },
+    mergeParts: () => Object.assign(new THREE.Mesh(new Geo(), {}), { updateMatrix() {}, updateMatrixWorld() {} }),
+    scene: Object.assign(new Node3D(), { remove() {} }),
+    historyProps: { parts: { 'cellar-hatch': Object.assign(new Node3D(), { visible: true, updateMatrixWorld() {} }) } },
+    foliage: [], windSwayables: [], clearFoliageInSquare: () => {}, trees: [], rocks: [],
+    worldSolids,
+    platforms,
+    excavateCellar: () => { excavated = true; },
+    trapperPath: path,
+    trapperPart,
+    trapperBar,
+    syncTrapperHorseshoes: () => {}
+  });
+  assert.equal(excavated, true, 'excavates cellar terrain');
+  assert.equal(trapper.doorsOpen(), false, 'cellar doors start shut before trapperPath.unlocked()');
+  assert.equal(trapper.doorL.rotation.z, 0);
+  assert.equal(trapper.doorR.rotation.z, 0);
+  assert.equal(trapper.doorBar.visible, true);
+  assert.ok(worldSolids.includes(trapper.doorCollider), 'shut door collider blocks stairwell');
+  assert.ok(platforms.includes(trapper.shutDoorDeck), 'shut door deck active while locked');
+  assert.ok(trapper.cellarSpot && Math.abs(trapper.cellarSpot.y - (2.1 + TRAPPER.CELLAR_FLOOR_Y)) < 1e-6, 'exposes trapper.cellarSpot at cellar floor');
+  assert.equal(trapper.inCellar(trapper.cellarSpot.x, trapper.cellarSpot.y, trapper.cellarSpot.z), true, 'inCellar detects cellarSpot');
+  assert.equal(trapper.inCellar(trapper.cellarSpot.x, 2.1, trapper.cellarSpot.z), false, 'surface above cellar is not inCellar');
+
+  // Unlocking opens both cellar door leaves and removes the door collider & shutDoorDeck:
+  path.unlock();
+  trapper.syncCellar(path.unlocked());
+  assert.equal(trapper.doorsOpen(), true);
+  assert.ok(trapper.doorL.rotation.z > 1.5);
+  assert.ok(trapper.doorR.rotation.z < -1.5);
+  assert.equal(trapper.doorBar.visible, false);
+  assert.equal(worldSolids.includes(trapper.doorCollider), false, 'door collider removed when open');
+  assert.equal(platforms.includes(trapper.shutDoorDeck), false, 'shut door deck removed when open');
+
+  // Re-locking (run reset) shuts the doors again:
+  path.reset();
+  trapper.syncCellar(path.unlocked());
+  assert.equal(trapper.doorsOpen(), false);
+  assert.equal(trapper.doorL.rotation.z, 0);
+  assert.equal(trapper.doorR.rotation.z, 0);
+  assert.equal(trapper.doorBar.visible, true);
+  assert.equal(worldSolids.includes(trapper.doorCollider), true);
+
+  // AG-140: verify setupTrapperMission strips a camp piece's mesh triangles AND removes its collider from
+  // worldSolids, lm.colliders, and lm.spawnColliders when a camp piece lands on objective:trapper-cache's approach:
+  const campX = -33.49, campZ = 43.81;
+  // Two triangles in camp-local space: one at (-4.94, +1.92) (= world (-38.43, 45.73), curing frame 0.78 m from approach (-38.06, 46.42)),
+  // and one at (-2.90, -2.60) (trapper cabin, far from approach):
+  const rawPos = new Float32Array([
+    -4.94, 0.5, 1.92, -4.90, 1.5, 1.90, -4.98, 1.5, 1.94,
+    -2.90, 0.5, -2.60, -2.80, 1.5, -2.60, -3.00, 1.5, -2.60
+  ]);
+  const rawNrm = new Float32Array(18);
+  const rawCol = new Float32Array(18);
+  const campGeo = {
+    attributes: {
+      position: { array: rawPos, count: 6 },
+      normal: { array: rawNrm, count: 6 },
+      color: { array: rawCol, count: 6 }
+    },
+    setAttribute(name, attr) { this.attributes[name] = attr; },
+    computeBoundingSphere() {},
+    computeBoundingBox() {}
+  };
+  THREE.BufferAttribute = class { constructor(arr, itemSize) { this.array = arr; this.itemSize = itemSize; this.count = (arr.length / itemSize) | 0; } };
+  const campLm = { x: campX, z: campZ, mesh: { geometry: campGeo }, colliders: [], spawnColliders: [] };
+  const curingSolid = { x: -38.43, z: 45.73, radius: 0.48, y0: 0.44, y1: 2.09, landmark: campLm };
+  const cabinSolid = { x: campX - 2.90, z: campZ - 2.60, radius: 1.0, y0: 0.44, y1: 1.54, landmark: campLm };
+  campLm.colliders.push(curingSolid, cabinSolid);
+  campLm.spawnColliders.push(curingSolid, cabinSolid);
+  const ws2 = [curingSolid, cabinSolid];
+  setupTrapperMission(THREE, {
+    prop: { centre: { x: 0, y: 0, z: 0 }, approach: { x: 0, y: 0, z: 0 }, facing: 0, group: Object.assign(new Node3D(), { updateMatrixWorld() {} }) },
+    camp: { x: campX, z: campZ, style: 'trapper' },
+    trapper: {},
+    sampleHeight: () => 0.44,
+    addSolid: (x, z, radius, y0, y1) => { const s = { x, z, radius, y0, y1 }; ws2.push(s); return s; },
+    mergeParts: () => Object.assign(new THREE.Mesh(new Geo(), {}), { updateMatrix() {}, updateMatrixWorld() {} }),
+    scene: Object.assign(new Node3D(), { remove() {} }),
+    historyProps: {},
+    foliage: [], windSwayables: [], clearFoliageInSquare: () => {}, trees: [], rocks: [],
+    worldSolids: ws2,
+    platforms: [],
+    excavateCellar: () => {},
+    trapperPath: createTrapperPath(Math.random),
+    trapperPart,
+    trapperBar,
+    syncTrapperHorseshoes: () => {}
+  });
+  assert.equal(ws2.includes(curingSolid), false, 'curing frame collider removed from worldSolids');
+  assert.equal(campLm.colliders.includes(curingSolid), false, 'curing frame collider removed from lm.colliders');
+  assert.equal(campLm.spawnColliders.includes(curingSolid), false, 'curing frame collider removed from lm.spawnColliders');
+  assert.equal(ws2.includes(cabinSolid), true, 'cabin collider preserved');
+  assert.equal(campLm.spawnColliders.includes(cabinSolid), true, 'cabin spawnCollider preserved');
+  assert.equal(campGeo.attributes.position.array.length, 9, 'curing frame triangle stripped from camp mesh while cabin triangle kept');
 });

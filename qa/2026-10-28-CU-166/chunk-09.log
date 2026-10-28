@@ -1,0 +1,35 @@
+Game-test request da5251ac-7932-412e-84c0-6874b1aa933e queued at position 2. Waiting...
+GRANT cursor CU-166: starting one game-test command
+check-players: 309 player.position reads, all in the allowed places
+ok    t223    15 pass   0 fail  69.1s
+ok    t224    27 pass   0 fail  149.6s
+ok    t225    21 pass   0 fail  66.1s
+ok    t226    38 pass   0 fail  160.2s
+           INFO crouched: ankles bent up to 53 deg; an ankle-worn shaft top would be 13.4 cm off the shin
+ok    t227    23 pass   0 fail  49.7s
+ok    t228    13 pass   0 fail  149.8s
+ok    t229    13 pass   0 fail  94.4s
+ok    t240    17 pass   0 fail  62.4s
+ok    t241     5 pass   0 fail  42.4s
+ok    t242    15 pass   0 fail  40.7s
+ok    t243    23 pass   0 fail  41.6s
+info  t244     0 pass   0 fail  42.6s  — SKIP the manual clock does not drive this page (run on the real renderer)
+ok    t245    15 pass   0 fail  43.1s
+ok    t246    24 pass   0 fail  76.9s
+ok    t247    12 pass   0 fail  57.3s
+ok    t248    12 pass   0 fail  47.2s
+ok    t249    13 pass   0 fail  44.8s
+ok    t250    10 pass   0 fail  45.8s
+ok    t251     3 pass   0 fail  44.3s
+ok    t252    12 pass   0 fail  66.3s
+ok    t253    15 pass   0 fail  65.6s
+ok    t254     8 pass   0 fail  55.2s
+           INFO smoking pinch: solved 2.6 cm, sampled 2.6 cm, wrist miss 5.2 cm; shoulder target/actual 27.7/27.7 cm; hand offset 15.8 cm
+ok    t255     5 pass   0 fail  59.1s
+ok    t256    10 pass   0 fail  72.8s
+ok    t257     7 pass   0 fail  34.0s
+
+25 checks: 356 pass, 0 fail, 1 reported no assertions
+
+no assertions (probe, or the check bailed before asserting):
+  t244   SKIP the manual clock does not drive this page (run on the real renderer)

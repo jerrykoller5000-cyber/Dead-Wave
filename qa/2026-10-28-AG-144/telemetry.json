@@ -1,0 +1,214 @@
+{
+  "strip": {
+    "gx": 8,
+    "gz": -8,
+    "hx": 16
+  },
+  "ground": {
+    "beside": [
+      {
+        "file": "qa/2026-10-28-AG-144/ground-beside-1.png",
+        "label": "Ground Beside #1 (HP: 200/200/200)",
+        "turretFlashT": 0,
+        "turretFireCd": -0.591,
+        "walkerHp": [
+          200,
+          200,
+          200
+        ]
+      },
+      {
+        "file": "qa/2026-10-28-AG-144/ground-beside-2.png",
+        "label": "Ground Beside #2 (HP: 200/200/200)",
+        "turretFlashT": 0,
+        "turretFireCd": -1.514,
+        "walkerHp": [
+          200,
+          200,
+          200
+        ]
+      },
+      {
+        "file": "qa/2026-10-28-AG-144/ground-beside-3.png",
+        "label": "Ground Beside #3 (HP: 200/200/200)",
+        "turretFlashT": 0,
+        "turretFireCd": -2.489,
+        "walkerHp": [
+          200,
+          200,
+          200
+        ]
+      },
+      {
+        "file": "qa/2026-10-28-AG-144/ground-beside-4.png",
+        "label": "Ground Beside #4 (HP: 200/200/200)",
+        "turretFlashT": 0,
+        "turretFireCd": -3.409,
+        "walkerHp": [
+          200,
+          200,
+          200
+        ]
+      }
+    ],
+    "behindWalkers": [
+      {
+        "file": "qa/2026-10-28-AG-144/ground-behind-walkers-1.png",
+        "label": "Ground Behind Walkers #1 (HP: 200/200/200)",
+        "turretFlashT": 0,
+        "turretFireCd": -4.593,
+        "walkerHp": [
+          200,
+          200,
+          200
+        ]
+      },
+      {
+        "file": "qa/2026-10-28-AG-144/ground-behind-walkers-2.png",
+        "label": "Ground Behind Walkers #2 (HP: 200/200/200)",
+        "turretFlashT": 0,
+        "turretFireCd": -5.547,
+        "walkerHp": [
+          200,
+          200,
+          200
+        ]
+      },
+      {
+        "file": "qa/2026-10-28-AG-144/ground-behind-walkers-3.png",
+        "label": "Ground Behind Walkers #3 (HP: 200/200/200)",
+        "turretFlashT": 0,
+        "turretFireCd": -6.505,
+        "walkerHp": [
+          200,
+          200,
+          200
+        ]
+      },
+      {
+        "file": "qa/2026-10-28-AG-144/ground-behind-walkers-4.png",
+        "label": "Ground Behind Walkers #4 (HP: 200/200/200)",
+        "turretFlashT": 0,
+        "turretFireCd": -7.427,
+        "walkerHp": [
+          200,
+          200,
+          200
+        ]
+      }
+    ],
+    "setup": {
+      "cx": 16,
+      "cz0": -16,
+      "cz2": -12,
+      "cz4": -8,
+      "muzzleY": -2.065274772644043,
+      "wallTopY": -1
+    }
+  },
+  "raised": {
+    "beside": [
+      {
+        "file": "qa/2026-10-28-AG-144/raised-beside-1.png",
+        "label": "Raised Beside #1 (HP: 884/900/900)",
+        "turretFlashT": 0.06,
+        "turretRecoil": 1,
+        "walkerHp": [
+          884,
+          900,
+          900
+        ]
+      },
+      {
+        "file": "qa/2026-10-28-AG-144/raised-beside-2.png",
+        "label": "Raised Beside #2 (HP: 860/900/900)",
+        "turretFlashT": 0.06,
+        "turretRecoil": 1,
+        "walkerHp": [
+          860,
+          900,
+          900
+        ]
+      },
+      {
+        "file": "qa/2026-10-28-AG-144/raised-beside-3.png",
+        "label": "Raised Beside #3 (HP: 836/900/900)",
+        "turretFlashT": 0.06,
+        "turretRecoil": 1,
+        "walkerHp": [
+          836,
+          900,
+          900
+        ]
+      },
+      {
+        "file": "qa/2026-10-28-AG-144/raised-beside-4.png",
+        "label": "Raised Beside #4 (HP: 812/900/900)",
+        "turretFlashT": 0.06,
+        "turretRecoil": 1,
+        "walkerHp": [
+          812,
+          900,
+          900
+        ]
+      }
+    ],
+    "behindWalkers": [
+      {
+        "file": "qa/2026-10-28-AG-144/raised-behind-walkers-1.png",
+        "label": "Raised Behind Walkers #1 (HP: 780/900/900)",
+        "turretFlashT": 0.06,
+        "turretRecoil": 1,
+        "walkerHp": [
+          780,
+          900,
+          900
+        ]
+      },
+      {
+        "file": "qa/2026-10-28-AG-144/raised-behind-walkers-2.png",
+        "label": "Raised Behind Walkers #2 (HP: 764/900/900)",
+        "turretFlashT": 0.06,
+        "turretRecoil": 1,
+        "walkerHp": [
+          764,
+          900,
+          900
+        ]
+      },
+      {
+        "file": "qa/2026-10-28-AG-144/raised-behind-walkers-3.png",
+        "label": "Raised Behind Walkers #3 (HP: 740/900/900)",
+        "turretFlashT": 0.038,
+        "turretRecoil": 0.806,
+        "walkerHp": [
+          740,
+          900,
+          900
+        ]
+      },
+      {
+        "file": "qa/2026-10-28-AG-144/raised-behind-walkers-4.png",
+        "label": "Raised Behind Walkers #4 (HP: 724/900/900)",
+        "turretFlashT": 0.06,
+        "turretRecoil": 1,
+        "walkerHp": [
+          724,
+          900,
+          900
+        ]
+      }
+    ],
+    "setup": {
+      "cx": 32,
+      "cz0": -16,
+      "cz2": -12,
+      "cz4": -8,
+      "platLevel": 1,
+      "gunLevel": 1,
+      "muzzleY": -1.77,
+      "wallTopY": -3,
+      "clearanceM": 1.23
+    }
+  }
+}

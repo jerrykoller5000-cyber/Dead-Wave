@@ -1,0 +1,343 @@
+{
+ "shots": [
+  {
+   "cam": {
+    "x": 154.69,
+    "y": 6.21,
+    "z": 67.61,
+    "tx": 164.48,
+    "ty": 6.71,
+    "tz": 69.65,
+    "fov": 55
+   },
+   "time": "noon",
+   "caption": "cave-1 front noon",
+   "out": "review/sweep/cave-mouths/gpu-cave-1-front-noon.png"
+  },
+  {
+   "cam": {
+    "x": 154.69,
+    "y": 6.21,
+    "z": 67.61,
+    "tx": 164.48,
+    "ty": 6.71,
+    "tz": 69.65,
+    "fov": 55
+   },
+   "time": "night",
+   "caption": "cave-1 front night",
+   "out": "review/sweep/cave-mouths/gpu-cave-1-front-night.png"
+  },
+  {
+   "cam": {
+    "x": 154.24,
+    "y": 7.21,
+    "z": 74.67,
+    "tx": 164.17,
+    "ty": 6.71,
+    "tz": 71.12,
+    "fov": 55
+   },
+   "time": "noon",
+   "caption": "cave-1 slant noon",
+   "out": "review/sweep/cave-mouths/gpu-cave-1-slant-noon.png"
+  },
+  {
+   "cam": {
+    "x": 154.24,
+    "y": 7.21,
+    "z": 74.67,
+    "tx": 164.17,
+    "ty": 6.71,
+    "tz": 71.12,
+    "fov": 55
+   },
+   "time": "night",
+   "caption": "cave-1 slant night",
+   "out": "review/sweep/cave-mouths/gpu-cave-1-slant-night.png"
+  },
+  {
+   "cam": {
+    "x": -19.59,
+    "y": 6.45,
+    "z": 177.81,
+    "tx": -19.0,
+    "ty": 6.95,
+    "tz": 187.79,
+    "fov": 55
+   },
+   "time": "noon",
+   "caption": "cave-2 front noon",
+   "out": "review/sweep/cave-mouths/gpu-cave-2-front-noon.png"
+  },
+  {
+   "cam": {
+    "x": -19.59,
+    "y": 6.45,
+    "z": 177.81,
+    "tx": -19.0,
+    "ty": 6.95,
+    "tz": 187.79,
+    "fov": 55
+   },
+   "time": "night",
+   "caption": "cave-2 front night",
+   "out": "review/sweep/cave-mouths/gpu-cave-2-front-night.png"
+  },
+  {
+   "cam": {
+    "x": -26.52,
+    "y": 7.45,
+    "z": 179.22,
+    "tx": -20.5,
+    "ty": 6.95,
+    "tz": 187.88,
+    "fov": 55
+   },
+   "time": "noon",
+   "caption": "cave-2 slant noon",
+   "out": "review/sweep/cave-mouths/gpu-cave-2-slant-noon.png"
+  },
+  {
+   "cam": {
+    "x": -26.52,
+    "y": 7.45,
+    "z": 179.22,
+    "tx": -20.5,
+    "ty": 6.95,
+    "tz": 187.88,
+    "fov": 55
+   },
+   "time": "night",
+   "caption": "cave-2 slant night",
+   "out": "review/sweep/cave-mouths/gpu-cave-2-slant-night.png"
+  },
+  {
+   "cam": {
+    "x": -152.82,
+    "y": 3.18,
+    "z": 85.08,
+    "tx": -161.35,
+    "ty": 3.68,
+    "tz": 90.29,
+    "fov": 55
+   },
+   "time": "noon",
+   "caption": "cave-3 front noon",
+   "out": "review/sweep/cave-mouths/gpu-cave-3-front-noon.png"
+  },
+  {
+   "cam": {
+    "x": -152.82,
+    "y": 3.18,
+    "z": 85.08,
+    "tx": -161.35,
+    "ty": 3.68,
+    "tz": 90.29,
+    "fov": 55
+   },
+   "time": "night",
+   "caption": "cave-3 front night",
+   "out": "review/sweep/cave-mouths/gpu-cave-3-front-night.png"
+  },
+  {
+   "cam": {
+    "x": -157.32,
+    "y": 4.18,
+    "z": 79.63,
+    "tx": -162.13,
+    "ty": 3.68,
+    "tz": 89.01,
+    "fov": 55
+   },
+   "time": "noon",
+   "caption": "cave-3 slant noon",
+   "out": "review/sweep/cave-mouths/gpu-cave-3-slant-noon.png"
+  },
+  {
+   "cam": {
+    "x": -157.32,
+    "y": 4.18,
+    "z": 79.63,
+    "tx": -162.13,
+    "ty": 3.68,
+    "tz": 89.01,
+    "fov": 55
+   },
+   "time": "night",
+   "caption": "cave-3 slant night",
+   "out": "review/sweep/cave-mouths/gpu-cave-3-slant-night.png"
+  },
+  {
+   "cam": {
+    "x": -176.88,
+    "y": 4.42,
+    "z": -8.79,
+    "tx": -186.76,
+    "ty": 4.92,
+    "tz": -7.22,
+    "fov": 55
+   },
+   "time": "noon",
+   "caption": "cave-4 front noon",
+   "out": "review/sweep/cave-mouths/gpu-cave-4-front-noon.png"
+  },
+  {
+   "cam": {
+    "x": -176.88,
+    "y": 4.42,
+    "z": -8.79,
+    "tx": -186.76,
+    "ty": 4.92,
+    "tz": -7.22,
+    "fov": 55
+   },
+   "time": "night",
+   "caption": "cave-4 front night",
+   "out": "review/sweep/cave-mouths/gpu-cave-4-front-night.png"
+  },
+  {
+   "cam": {
+    "x": -178.97,
+    "y": 5.42,
+    "z": -15.54,
+    "tx": -186.99,
+    "ty": 4.92,
+    "tz": -8.7,
+    "fov": 55
+   },
+   "time": "noon",
+   "caption": "cave-4 slant noon",
+   "out": "review/sweep/cave-mouths/gpu-cave-4-slant-noon.png"
+  },
+  {
+   "cam": {
+    "x": -178.97,
+    "y": 5.42,
+    "z": -15.54,
+    "tx": -186.99,
+    "ty": 4.92,
+    "tz": -8.7,
+    "fov": 55
+   },
+   "time": "night",
+   "caption": "cave-4 slant night",
+   "out": "review/sweep/cave-mouths/gpu-cave-4-slant-night.png"
+  },
+  {
+   "cam": {
+    "x": -12.37,
+    "y": 6.14,
+    "z": -177.23,
+    "tx": -12.42,
+    "ty": 6.64,
+    "tz": -187.23,
+    "fov": 55
+   },
+   "time": "noon",
+   "caption": "cave-5 front noon",
+   "out": "review/sweep/cave-mouths/gpu-cave-5-front-noon.png"
+  },
+  {
+   "cam": {
+    "x": -12.37,
+    "y": 6.14,
+    "z": -177.23,
+    "tx": -12.42,
+    "ty": 6.64,
+    "tz": -187.23,
+    "fov": 55
+   },
+   "time": "night",
+   "caption": "cave-5 front night",
+   "out": "review/sweep/cave-mouths/gpu-cave-5-front-night.png"
+  },
+  {
+   "cam": {
+    "x": -5.38,
+    "y": 7.14,
+    "z": -178.27,
+    "tx": -10.92,
+    "ty": 6.64,
+    "tz": -187.24,
+    "fov": 55
+   },
+   "time": "noon",
+   "caption": "cave-5 slant noon",
+   "out": "review/sweep/cave-mouths/gpu-cave-5-slant-noon.png"
+  },
+  {
+   "cam": {
+    "x": -5.38,
+    "y": 7.14,
+    "z": -178.27,
+    "tx": -10.92,
+    "ty": 6.64,
+    "tz": -187.24,
+    "fov": 55
+   },
+   "time": "night",
+   "caption": "cave-5 slant night",
+   "out": "review/sweep/cave-mouths/gpu-cave-5-slant-night.png"
+  },
+  {
+   "cam": {
+    "x": 154.0,
+    "y": 0.4,
+    "z": -90.96,
+    "tx": 162.24,
+    "ty": 0.9,
+    "tz": -96.62,
+    "fov": 55
+   },
+   "time": "noon",
+   "caption": "cave-6 front noon",
+   "out": "review/sweep/cave-mouths/gpu-cave-6-front-noon.png"
+  },
+  {
+   "cam": {
+    "x": 154.0,
+    "y": 0.4,
+    "z": -90.96,
+    "tx": 162.24,
+    "ty": 0.9,
+    "tz": -96.62,
+    "fov": 55
+   },
+   "time": "night",
+   "caption": "cave-6 front night",
+   "out": "review/sweep/cave-mouths/gpu-cave-6-front-night.png"
+  },
+  {
+   "cam": {
+    "x": 158.78,
+    "y": 1.4,
+    "z": -85.75,
+    "tx": 163.09,
+    "ty": 0.9,
+    "tz": -95.38,
+    "fov": 55
+   },
+   "time": "noon",
+   "caption": "cave-6 slant noon",
+   "out": "review/sweep/cave-mouths/gpu-cave-6-slant-noon.png"
+  },
+  {
+   "cam": {
+    "x": 158.78,
+    "y": 1.4,
+    "z": -85.75,
+    "tx": 163.09,
+    "ty": 0.9,
+    "tz": -95.38,
+    "fov": 55
+   },
+   "time": "night",
+   "caption": "cave-6 slant night",
+   "out": "review/sweep/cave-mouths/gpu-cave-6-slant-night.png"
+  }
+ ],
+ "out": "review/sweep/cave-mouths/",
+ "cols": 4,
+ "size": "1280x720"
+}

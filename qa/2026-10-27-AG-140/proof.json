@@ -1,0 +1,82 @@
+{
+  "runs": [
+    {
+      "run": 1,
+      "trapperUse": {
+        "name": "objective:trapper-cache",
+        "place": "camp-trapper",
+        "x": -37.49,
+        "z": 47.81,
+        "openOf12": 12,
+        "ring": 0.95,
+        "standClear": true,
+        "crowd": []
+      },
+      "liveCheck": {
+        "solidsNearCount": 0,
+        "reach": {
+          "approach": {
+            "x": -24.239490555947476,
+            "y": 0.06069035616342174,
+            "z": 40.48906224142202
+          },
+          "distance": 54.6578550778,
+          "reachable": false,
+          "blockedBy": "locked"
+        }
+      }
+    },
+    {
+      "run": 2,
+      "trapperUse": {
+        "name": "objective:trapper-cache",
+        "place": "camp-trapper",
+        "x": -37.49,
+        "z": 47.81,
+        "openOf12": 12,
+        "ring": 0.95,
+        "standClear": true,
+        "crowd": []
+      },
+      "liveCheck": {
+        "solidsNearCount": 0,
+        "reach": {
+          "approach": {
+            "x": -24.239490555947476,
+            "y": 0.06069035616342174,
+            "z": 40.48906224142202
+          },
+          "distance": 54.6578550778,
+          "reachable": false,
+          "blockedBy": "locked"
+        }
+      }
+    },
+    {
+      "run": 3,
+      "trapperUse": {
+        "name": "objective:trapper-cache",
+        "place": "camp-trapper",
+        "x": -37.49,
+        "z": 47.81,
+        "openOf12": 12,
+        "ring": 0.95,
+        "standClear": true,
+        "crowd": []
+      },
+      "liveCheck": {
+        "solidsNearCount": 0,
+        "reach": {
+          "approach": {
+            "x": -24.239490555947476,
+            "y": 0.06069035616342174,
+            "z": 40.48906224142202
+          },
+          "distance": 54.6578550778,
+          "reachable": false,
+          "blockedBy": "locked"
+        }
+      }
+    }
+  ]
+}

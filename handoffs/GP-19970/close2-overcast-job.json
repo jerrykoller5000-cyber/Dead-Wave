@@ -1,0 +1,35 @@
+{
+  "shots": [
+    {
+      "target": "zombie.spitter:statue",
+      "view": "front",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/spitter-close2-after/overcast-front.png"
+    },
+    {
+      "target": "zombie.spitter:statue",
+      "view": "side",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/spitter-close2-after/overcast-side.png"
+    },
+    {
+      "target": "zombie.bomber:statue",
+      "view": "front",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/bomber-close2-after/overcast-front.png"
+    },
+    {
+      "target": "zombie.bomber:statue",
+      "view": "side",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/bomber-close2-after/overcast-side.png"
+    }
+  ],
+  "out": "handoffs/GP-19970/close2-sheet",
+  "sheet": true,
+  "cols": 4
+}

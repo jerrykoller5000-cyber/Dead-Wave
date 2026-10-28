@@ -38,3 +38,17 @@ services' own.
   check (the title and a match from the copy) passes.
 - Not done: a full list of the Rust libraries inside the desktop exe (`cargo about` on Jerry's PC, when the build is
   final).
+
+## The sound packs (D-94, CL-272, 2026-10-26)
+
+Jerry bought three packs (`F:\Sound_Effects`, docs/audio/packs.md) and the game now ships takes made from them, all
+named `pk-*` in `z-sounds/` and in the build only (git-ignored: they never go to GitHub).
+
+| What | Where in the build | Made from | What has to be true |
+| --- | --- | --- | --- |
+| Both guardians' voices, roars, slams, the cave's groan and the thing in the walls | `z-sounds/zombies/guardian/*/pk-ocular-*.ogg`, `z-sounds/zombies/caveguard/*/pk-ocular-*.ogg` (66) | Ocular Sounds: Aberration, Sinister, Puncture, Foundation | Ocular's licence (from the store he bought it at; there's no licence file in the folders) allows the sounds in a sold game. |
+| The UI (GP-19975 picks, 26 takes) | `z-sounds/ui/*/pk-bc3-*.ogg`, `z-sounds/hq/kiosk-tab/`, `z-sounds/training/*` | Sound Response, Binary Code 3 - Interface Multiverse | Its `Docs\License Agreement.pdf`: royalty-free in a video game, single user, never on a server or shared on their own. Read 2026-10-26. |
+| The weapons (GB-239 picks, 117 takes) | `z-sounds/weapons/*`, `weapon-foley/*`, `bullet-impacts/*`, `turrets/*-shot`, `turrets/light-turret-fire` (`pk-rfs-*`) | Real Firearms Sounds | Its store licence (no file in the folder). |
+| The world (22 takes) and the player's footsteps, landing and ladder (CU-164 picks, 40 takes) | `z-sounds/world/*`, `z-sounds/story/*`, `z-sounds/player/*` (`pk-ocular-*`) | Ocular Sounds: The Provence, Countryside, Puncture, Mechanica, Utility, Aperture, Stride | As for the guardians: Ocular's licence. |
+
+`NOTICES.txt` names the packs. None of them asks for credit that Claude has seen; the line is there anyway.

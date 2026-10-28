@@ -1,0 +1,14 @@
+# grokbot - GB-232 The survivors' places (Okafor's cellar, Brandt's truck door, Pike's fire); t75 and t69 - 2026-10-27
+Changed:          With the story gate on, a survivor found at a thread's end now waits at her place: Okafor on trapper.cellarSpot (its floor height and facing, used as is so AG-137's cheek walls and rear mound can't push her out), Brandt at the rangers' truck door (ranger.clues 'truck' spot.approach), Pike at the fire as before. E skips a waiting survivor more than 1.6 m above or below him, so the yard over the cellar doesn't reach Okafor. survivorDbg.waiting() now reports y. One slip, caught by the new test: the plan read the truck clue's spot as {x,z}, but rangerSpot is {approach, centre}; fixed to approach before checkout.
+Files:            index.html (part: survivor places: survivorPlace(), survivorsAtThreadEnd, placeSurvivor(post, d, spot), survivorInReach, survivorDbg.waiting), tools/tests/t304.js (new)
+Tests:            Test page (qa/2026-10-27-GB-232-places/run.log): t95 9/0, t148 23/0, t215 4/0, t292 15/0, t75 16/0, t304 6/1 (Brandt, before the fix), t69 17/1. Real renderer (real.log): t215 4/0, t95 9/0, t148 23/0, t75 16/0, t304 6/1 (same), t69 15/3. After the Brandt fix, real renderer (real2.log): t304 7/0, t215 4/0, t95 9/0, t75 16/0. Page load: clean (t215/t304 no errors). node --check on the page script: clean; survivorPlace/placeSurvivor each defined once. new tests: t304
+Screenshots:      none. tools/shoot.mjs shoots from the title screen and the survivors only exist in a match; t304 checks the place by numbers (Okafor 0.00 m from cellarSpot at y -2.05, Brandt 0.00 m from the door).
+Not verified:     Pike's spot (stays at the fire until the hikers' lead has one). Okafor's facing is cellarSpot.yaw, not looked at on screen.
+Requests:         none
+Contract changes: survivorDbg.waiting() rows gain y.
+
+## t75 (the crowd)
+Green this time on both renderers (4/5 at arm's length; bar 3). Diagnostic (qa/2026-10-27-GB-232-places/diag75.log, real renderer): his knockback carries him about 2 m over the 3.5 s window; the feral and one shambler hold the ring, the brute sits 0.6-0.9 m out, and two shamblers fall back to 1.8-2.2 m with their attack cooldown idle. So the count swings with how many blows land and where he slides: 1-2/5 on CU-164's runs, 4/5 here. No single change found; not a clear game bug. Bar untouched. Worth Claude's look: should idle shamblers drift off while he's being knocked back?
+
+## t69 (the assault cave)
+Still red. Test page 17/1 ("the assault cave pokes normally once its mouth is clear"). Real renderer 15/3: "the whole wave is out" times out at 30 s wall clock, then the two checks after it fail. Red twice running and the cause isn't proven (looks like the real renderer's slower wave spawn against a wall-clock wait, plus the poke after it). Reported, not changed.

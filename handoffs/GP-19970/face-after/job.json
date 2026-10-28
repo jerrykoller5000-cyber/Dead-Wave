@@ -1,0 +1,599 @@
+{
+  "shots": [
+    {
+      "target": "zombie.shambler:statue",
+      "view": "front",
+      "time": "noon",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/shambler-noon-front.png"
+    },
+    {
+      "target": "zombie.shambler:statue",
+      "view": "side",
+      "time": "noon",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/shambler-noon-side.png"
+    },
+    {
+      "target": "zombie.shambler:statue",
+      "view": "front",
+      "time": "dusk",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/shambler-dusk-front.png"
+    },
+    {
+      "target": "zombie.shambler:statue",
+      "view": "side",
+      "time": "dusk",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/shambler-dusk-side.png"
+    },
+    {
+      "target": "zombie.shambler:statue",
+      "view": "front",
+      "time": "night",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/shambler-night-front.png"
+    },
+    {
+      "target": "zombie.shambler:statue",
+      "view": "side",
+      "time": "night",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/shambler-night-side.png"
+    },
+    {
+      "target": "zombie.shambler:statue",
+      "view": "side",
+      "time": "noon",
+      "wait": 300,
+      "size": "1280x720",
+      "dist": 8,
+      "fov": 65,
+      "out": "handoffs/GP-19970/face-after/shambler-gameplay-distance.png"
+    },
+    {
+      "target": "zombie.shambler:walk",
+      "view": "side",
+      "time": "noon",
+      "wait": 500,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/shambler-walk-side.png"
+    },
+    {
+      "target": "zombie.feral:statue",
+      "view": "front",
+      "time": "noon",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/feral-noon-front.png"
+    },
+    {
+      "target": "zombie.feral:statue",
+      "view": "side",
+      "time": "noon",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/feral-noon-side.png"
+    },
+    {
+      "target": "zombie.feral:statue",
+      "view": "front",
+      "time": "dusk",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/feral-dusk-front.png"
+    },
+    {
+      "target": "zombie.feral:statue",
+      "view": "side",
+      "time": "dusk",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/feral-dusk-side.png"
+    },
+    {
+      "target": "zombie.feral:statue",
+      "view": "front",
+      "time": "night",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/feral-night-front.png"
+    },
+    {
+      "target": "zombie.feral:statue",
+      "view": "side",
+      "time": "night",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/feral-night-side.png"
+    },
+    {
+      "target": "zombie.feral:statue",
+      "view": "side",
+      "time": "noon",
+      "wait": 300,
+      "size": "1280x720",
+      "dist": 8,
+      "fov": 65,
+      "out": "handoffs/GP-19970/face-after/feral-gameplay-distance.png"
+    },
+    {
+      "target": "zombie.feral:walk",
+      "view": "side",
+      "time": "noon",
+      "wait": 500,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/feral-walk-side.png"
+    },
+    {
+      "target": "zombie.leaper:statue",
+      "view": "front",
+      "time": "noon",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/leaper-noon-front.png"
+    },
+    {
+      "target": "zombie.leaper:statue",
+      "view": "side",
+      "time": "noon",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/leaper-noon-side.png"
+    },
+    {
+      "target": "zombie.leaper:statue",
+      "view": "front",
+      "time": "dusk",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/leaper-dusk-front.png"
+    },
+    {
+      "target": "zombie.leaper:statue",
+      "view": "side",
+      "time": "dusk",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/leaper-dusk-side.png"
+    },
+    {
+      "target": "zombie.leaper:statue",
+      "view": "front",
+      "time": "night",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/leaper-night-front.png"
+    },
+    {
+      "target": "zombie.leaper:statue",
+      "view": "side",
+      "time": "night",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/leaper-night-side.png"
+    },
+    {
+      "target": "zombie.leaper:statue",
+      "view": "side",
+      "time": "noon",
+      "wait": 300,
+      "size": "1280x720",
+      "dist": 8,
+      "fov": 65,
+      "out": "handoffs/GP-19970/face-after/leaper-gameplay-distance.png"
+    },
+    {
+      "target": "zombie.leaper:walk",
+      "view": "side",
+      "time": "noon",
+      "wait": 500,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/leaper-walk-side.png"
+    },
+    {
+      "target": "zombie.drowned:statue",
+      "view": "front",
+      "time": "noon",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/drowned-noon-front.png"
+    },
+    {
+      "target": "zombie.drowned:statue",
+      "view": "side",
+      "time": "noon",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/drowned-noon-side.png"
+    },
+    {
+      "target": "zombie.drowned:statue",
+      "view": "front",
+      "time": "dusk",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/drowned-dusk-front.png"
+    },
+    {
+      "target": "zombie.drowned:statue",
+      "view": "side",
+      "time": "dusk",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/drowned-dusk-side.png"
+    },
+    {
+      "target": "zombie.drowned:statue",
+      "view": "front",
+      "time": "night",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/drowned-night-front.png"
+    },
+    {
+      "target": "zombie.drowned:statue",
+      "view": "side",
+      "time": "night",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/drowned-night-side.png"
+    },
+    {
+      "target": "zombie.drowned:statue",
+      "view": "side",
+      "time": "noon",
+      "wait": 300,
+      "size": "1280x720",
+      "dist": 8,
+      "fov": 65,
+      "out": "handoffs/GP-19970/face-after/drowned-gameplay-distance.png"
+    },
+    {
+      "target": "zombie.drowned:walk",
+      "view": "side",
+      "time": "noon",
+      "wait": 500,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/drowned-walk-side.png"
+    },
+    {
+      "target": "zombie.military:statue",
+      "view": "front",
+      "time": "noon",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/military-noon-front.png"
+    },
+    {
+      "target": "zombie.military:statue",
+      "view": "side",
+      "time": "noon",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/military-noon-side.png"
+    },
+    {
+      "target": "zombie.military:statue",
+      "view": "front",
+      "time": "dusk",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/military-dusk-front.png"
+    },
+    {
+      "target": "zombie.military:statue",
+      "view": "side",
+      "time": "dusk",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/military-dusk-side.png"
+    },
+    {
+      "target": "zombie.military:statue",
+      "view": "front",
+      "time": "night",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/military-night-front.png"
+    },
+    {
+      "target": "zombie.military:statue",
+      "view": "side",
+      "time": "night",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/military-night-side.png"
+    },
+    {
+      "target": "zombie.military:statue",
+      "view": "side",
+      "time": "noon",
+      "wait": 300,
+      "size": "1280x720",
+      "dist": 8,
+      "fov": 65,
+      "out": "handoffs/GP-19970/face-after/military-gameplay-distance.png"
+    },
+    {
+      "target": "zombie.military:walk",
+      "view": "side",
+      "time": "noon",
+      "wait": 500,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/military-walk-side.png"
+    },
+    {
+      "target": "zombie.spitter:statue",
+      "view": "front",
+      "time": "noon",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/spitter-noon-front.png"
+    },
+    {
+      "target": "zombie.spitter:statue",
+      "view": "side",
+      "time": "noon",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/spitter-noon-side.png"
+    },
+    {
+      "target": "zombie.spitter:statue",
+      "view": "front",
+      "time": "dusk",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/spitter-dusk-front.png"
+    },
+    {
+      "target": "zombie.spitter:statue",
+      "view": "side",
+      "time": "dusk",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/spitter-dusk-side.png"
+    },
+    {
+      "target": "zombie.spitter:statue",
+      "view": "front",
+      "time": "night",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/spitter-night-front.png"
+    },
+    {
+      "target": "zombie.spitter:statue",
+      "view": "side",
+      "time": "night",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/spitter-night-side.png"
+    },
+    {
+      "target": "zombie.spitter:statue",
+      "view": "side",
+      "time": "noon",
+      "wait": 300,
+      "size": "1280x720",
+      "dist": 8,
+      "fov": 65,
+      "out": "handoffs/GP-19970/face-after/spitter-gameplay-distance.png"
+    },
+    {
+      "target": "zombie.spitter:walk",
+      "view": "side",
+      "time": "noon",
+      "wait": 500,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/spitter-walk-side.png"
+    },
+    {
+      "target": "zombie.bomber:statue",
+      "view": "front",
+      "time": "noon",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/bomber-noon-front.png"
+    },
+    {
+      "target": "zombie.bomber:statue",
+      "view": "side",
+      "time": "noon",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/bomber-noon-side.png"
+    },
+    {
+      "target": "zombie.bomber:statue",
+      "view": "front",
+      "time": "dusk",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/bomber-dusk-front.png"
+    },
+    {
+      "target": "zombie.bomber:statue",
+      "view": "side",
+      "time": "dusk",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/bomber-dusk-side.png"
+    },
+    {
+      "target": "zombie.bomber:statue",
+      "view": "front",
+      "time": "night",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/bomber-night-front.png"
+    },
+    {
+      "target": "zombie.bomber:statue",
+      "view": "side",
+      "time": "night",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/bomber-night-side.png"
+    },
+    {
+      "target": "zombie.bomber:statue",
+      "view": "side",
+      "time": "noon",
+      "wait": 300,
+      "size": "1280x720",
+      "dist": 8,
+      "fov": 65,
+      "out": "handoffs/GP-19970/face-after/bomber-gameplay-distance.png"
+    },
+    {
+      "target": "zombie.bomber:walk",
+      "view": "side",
+      "time": "noon",
+      "wait": 500,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/bomber-walk-side.png"
+    },
+    {
+      "target": "zombie.brute:statue",
+      "view": "front",
+      "time": "noon",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/brute-noon-front.png"
+    },
+    {
+      "target": "zombie.brute:statue",
+      "view": "side",
+      "time": "noon",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/brute-noon-side.png"
+    },
+    {
+      "target": "zombie.brute:statue",
+      "view": "front",
+      "time": "dusk",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/brute-dusk-front.png"
+    },
+    {
+      "target": "zombie.brute:statue",
+      "view": "side",
+      "time": "dusk",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/brute-dusk-side.png"
+    },
+    {
+      "target": "zombie.brute:statue",
+      "view": "front",
+      "time": "night",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/brute-night-front.png"
+    },
+    {
+      "target": "zombie.brute:statue",
+      "view": "side",
+      "time": "night",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/brute-night-side.png"
+    },
+    {
+      "target": "zombie.brute:statue",
+      "view": "side",
+      "time": "noon",
+      "wait": 300,
+      "size": "1280x720",
+      "dist": 8,
+      "fov": 65,
+      "out": "handoffs/GP-19970/face-after/brute-gameplay-distance.png"
+    },
+    {
+      "target": "zombie.brute:walk",
+      "view": "side",
+      "time": "noon",
+      "wait": 500,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/brute-walk-side.png"
+    },
+    {
+      "target": "zombie.colossus:statue",
+      "view": "front",
+      "time": "noon",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/colossus-noon-front.png"
+    },
+    {
+      "target": "zombie.colossus:statue",
+      "view": "side",
+      "time": "noon",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/colossus-noon-side.png"
+    },
+    {
+      "target": "zombie.colossus:statue",
+      "view": "front",
+      "time": "dusk",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/colossus-dusk-front.png"
+    },
+    {
+      "target": "zombie.colossus:statue",
+      "view": "side",
+      "time": "dusk",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/colossus-dusk-side.png"
+    },
+    {
+      "target": "zombie.colossus:statue",
+      "view": "front",
+      "time": "night",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/colossus-night-front.png"
+    },
+    {
+      "target": "zombie.colossus:statue",
+      "view": "side",
+      "time": "night",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/colossus-night-side.png"
+    },
+    {
+      "target": "zombie.colossus:statue",
+      "view": "side",
+      "time": "noon",
+      "wait": 300,
+      "size": "1280x720",
+      "dist": 8,
+      "fov": 65,
+      "out": "handoffs/GP-19970/face-after/colossus-gameplay-distance.png"
+    },
+    {
+      "target": "zombie.colossus:walk",
+      "view": "side",
+      "time": "noon",
+      "wait": 500,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/colossus-walk-side.png"
+    }
+  ],
+  "out": "handoffs/GP-19970/face-after"
+}

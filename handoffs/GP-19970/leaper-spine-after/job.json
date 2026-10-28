@@ -1,0 +1,14 @@
+{
+  "shots": [
+    {"target":"zombie.leaper:statue","view":"side","time":"noon","wait":300,"size":"1280x720","out":"handoffs/GP-19970/leaper-spine-after/noon-side.png"},
+    {"target":"zombie.leaper:statue","view":"back","time":"noon","wait":300,"size":"1280x720","out":"handoffs/GP-19970/leaper-spine-after/noon-back.png"},
+    {"target":"zombie.leaper:statue","view":"side","time":"dusk","wait":300,"size":"1280x720","out":"handoffs/GP-19970/leaper-spine-after/dusk-side.png"},
+    {"target":"zombie.leaper:statue","view":"back","time":"dusk","wait":300,"size":"1280x720","out":"handoffs/GP-19970/leaper-spine-after/dusk-back.png"},
+    {"target":"zombie.leaper:statue","view":"side","time":"night","wait":300,"size":"1280x720","out":"handoffs/GP-19970/leaper-spine-after/night-side.png"},
+    {"target":"zombie.leaper:statue","view":"back","time":"night","wait":300,"size":"1280x720","out":"handoffs/GP-19970/leaper-spine-after/night-back.png"},
+    {"target":"zombie.leaper:statue","view":"side","time":"noon","dist":8,"fov":65,"wait":300,"size":"1280x720","out":"handoffs/GP-19970/leaper-spine-after/gameplay-distance.png"}
+  ],
+  "out":"handoffs/GP-19970/leaper-spine-after",
+  "sheet":true,
+  "cols":4
+}

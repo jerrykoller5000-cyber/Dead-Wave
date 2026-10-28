@@ -118,7 +118,13 @@
         const d = Math.hypot(caves[i].x - zx, caves[i].z - zz);
         if (d < best) { best = d; bestIdx = i; }
       }
-      if (best < 10 && planC.includes(bestIdx)) near++;
+      // GB-240 (rule 13): GB-231 starts night 1's cave walkers part way along their cave's line to the HQ (day1ForwardSpot:
+      // 60-110 m out, within +-0.45 rad of the cave's bearing), so on night 1 a body there counts for its planned cave.
+      // Before: only within 10 m of a mouth (0/4 in qa/2026-10-27-CU-164/chunk-01.log). Other nights: the mouth, unchanged.
+      let fwd = false;
+      if (T.getWaveDirectorState().day === 1) { const r = Math.hypot(zx, zz), az = Math.atan2(zz, zx);
+        fwd = r <= 112 && planC.some((ci) => { const c = caves[ci]; if (!c || Math.hypot(c.x, c.z) <= 120) return false; let da = Math.abs(Math.atan2(c.z, c.x) - az); if (da > Math.PI) da = 2 * Math.PI - da; return da <= 0.47; }); }
+      if ((best < 10 && planC.includes(bestIdx)) || fwd) near++;
     }
     if (checked === 0) ok(true, 'spawn mouth check skipped (only drowned / none)');
     else ok(near >= 1, 'spawned bodies near planned caves (' + near + '/' + checked + ')');

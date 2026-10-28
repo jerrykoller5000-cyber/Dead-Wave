@@ -1,0 +1,37 @@
+GRANT cursor CU-164: starting one game-test command
+check-players: 308 player.position reads, all in the allowed places
+ok    t148    23 pass   0 fail  50.5s
+ok    t149    16 pass   0 fail  54.7s
+ok    t150    13 pass   0 fail  56.6s
+ok    t151     7 pass   0 fail  18.4s
+ok    t152    27 pass   0 fail  52.6s
+ok    t153    15 pass   0 fail  19.0s
+ok    t154     5 pass   0 fail  34.1s
+ok    t155     2 pass   0 fail  34.8s
+ok    t156    34 pass   0 fail  55.5s
+ok    t157     6 pass   0 fail  33.8s
+ok    t158    13 pass   0 fail  19.3s
+ok    t159    10 pass   0 fail  41.4s
+FAIL  t160     1 pass   4 fail  67.7s
+ok    t161     7 pass   0 fail  19.3s
+ok    t162    21 pass   0 fail  50.4s
+ok    t163    16 pass   0 fail  50.5s
+ok    t164    14 pass   0 fail  39.4s
+ok    t165    11 pass   0 fail  19.3s
+ok    t166    11 pass   0 fail  34.9s
+ok    t167    20 pass   0 fail  19.8s
+ok    t168    39 pass   0 fail  58.2s
+ok    t169     8 pass   0 fail  19.6s
+ok    t170    20 pass   0 fail  96.1s
+ok    t171    23 pass   0 fail  50.6s
+ok    t172     7 pass   0 fail  44.1s
+
+25 checks: 369 pass, 4 fail
+
+by owner:
+  unassigned
+    t160   4 fail  FAIL called from the board on night 20
+           FAIL called from the board on night 20
+           FAIL due at the last push: the craft is coming in (null)
+           FAIL it is Heron (CL-110's rig: timeline, berth, offshore)
+           FAIL threw: TypeError: Cannot read properties of null (reading 'update')

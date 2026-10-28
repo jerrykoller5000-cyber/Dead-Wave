@@ -1,0 +1,58 @@
+{
+  "shots": [
+    {
+      "target": "zombie.bomber:statue",
+      "view": "side",
+      "time": "noon",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-close2-after/bomber-noon-head-side.png",
+      "move": {
+        "zoom": 2.8,
+        "pan": [
+          -0.35,
+          0.75
+        ]
+      }
+    },
+    {
+      "target": "zombie.brute:statue",
+      "view": "side",
+      "time": "noon",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-close2-after/brute-noon-head-side.png",
+      "move": {
+        "zoom": 2.8,
+        "pan": [
+          -0.6,
+          0.91
+        ]
+      }
+    },
+    {
+      "target": "zombie.brute:statue",
+      "view": "front",
+      "time": "noon",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-close2-after/brute-noon-front.png"
+    },
+    {
+      "target": "zombie.colossus:statue",
+      "view": "side",
+      "time": "noon",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-close2-after/colossus-noon-head-side.png",
+      "move": {
+        "zoom": 2.8,
+        "pan": [
+          -1.1,
+          1.28
+        ]
+      }
+    }
+  ],
+  "out": "handoffs/GP-19970/face-close2-after"
+}

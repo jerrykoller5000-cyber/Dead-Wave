@@ -3,6 +3,9 @@
 // says Heron, holding E boards, and the win screen says Heron took him out, never "boat". Survivors on the roof
 // (GB-116) are counted aboard. Heron's own path and timing are t158/t145's; boarding's rules are t147's.
 (async () => {
+  // GB-240 (rule 13): the boat is called from the radio now (GP-19969 / CL-263: the alarm panel keeps only the alarm; requestExtraction
+  // wants the 'radio' panel open at the radio set and confirmed: true, as ui/wave-preview.js's confirm sends). Before: the alarm
+  // panel at HQ_PANEL_FRONT, no confirm (qa/2026-10-27-CU-164/chunk logs: 'state' of null). The bars are unchanged.
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
   const until = async (cond, ms) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (cond()) return true; await wait(50); } return cond(); };
@@ -20,9 +23,9 @@
     const runId = T.dareDbg().runId;
     const P = T.player.position;
     T.setRelayUpDbg(true); T.setDay(19); T.startPrep();
-    P.set(T.HQ_PANEL_FRONT.x, T.sampleHeight(T.HQ_PANEL_FRONT.x, T.HQ_PANEL_FRONT.z), T.HQ_PANEL_FRONT.z); await wait(100);
-    T.openHQBriefingDbg();
-    window.dispatchEvent(new CustomEvent('dw-game', { detail: { type: 'extraction-request', day: 20, runId } }));
+    P.set(T.HQ_RADIO_FRONT.x, T.sampleHeight(T.HQ_RADIO_FRONT.x, T.HQ_RADIO_FRONT.z), T.HQ_RADIO_FRONT.z); await wait(100);
+    T.openHQBriefingDbg({ panel: 'radio' });
+    window.dispatchEvent(new CustomEvent('dw-game', { detail: { type: 'extraction-request', day: 20, runId, confirmed: true } }));
     await until(() => st().phase === 'wave', 30000);
     ok(ex() === 'called', 'called from the board on night 20');
     T.clearZombies();

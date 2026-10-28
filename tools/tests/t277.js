@@ -32,6 +32,21 @@
       ok(p.y > mz.y && (mz.z - p.z) * dirZ > 0.1 && Math.abs(p.x - mz.x) < 0.02 && ang < 4, k + ': eye above the bore, behind the muzzle, on its centre line, along it (' + ang.toFixed(2) + ' deg)');
       // GB-233 (rule 13, Claude's ruling 2026-10-25): the M4 is aimed through its holo's window, so its eye sits below the hood top like an optic's
       // (before/after: qa/2026-10-25-GB-233/m4-ads-check.png).
+      // GB-233 (rule 13, Claude's ruling 2026-10-26): iron sights with a notch and tip in the table are measured as sighted: the eye
+      // within 3 mm of the line through the rear notch and the front post's tip, the notch and tip checked against the gun's own
+      // geometry (3 mm). Before/after: qa/2026-10-26-GB-233-t277/{before,after}/ads-{pistol,revolver}.png.
+      if (s.notch && s.tip) {
+        // The notch floor is a surface between the ears, so its vertices sit off the centre line: the notch is on the gun when a
+        // vertex within 2.5 cm of the centre line lies at its height near its z, and nothing on the centre line stands above it.
+        const near = (z, dz, hx) => pts.filter((q) => Math.abs(q.z - z) < dz && Math.abs(q.x - mz.x) < hx);
+        const nPts = near(s.notch[0], 0.02, 0.025), nHit = nPts.some((q) => Math.abs(q.y - s.notch[1]) <= 0.003);
+        const nBlock = near(s.notch[0], 0.02, 0.003).some((q) => q.y > s.notch[1] + 0.003);
+        const tY = near(s.tip[0], 0.008, 0.006).reduce((m, q) => Math.max(m, q.y), -1);
+        ok(nHit && !nBlock && Math.abs(tY - s.tip[1]) <= 0.003, k + ': notch and tip are on the gun (notch ' + (nHit ? 'found' : 'missing') + (nBlock ? ', blocked' : '') + ', tip y ' + tY.toFixed(3) + ')');
+        const lineY = s.notch[1] + (p.z - s.notch[0]) * (s.tip[1] - s.notch[1]) / (s.tip[0] - s.notch[0]);
+        ok(Math.abs(p.y - lineY) <= 0.003, k + ': eye on the notch-to-tip line within 3 mm (eye y ' + p.y.toFixed(4) + ', line ' + lineY.toFixed(4) + ')');
+        continue;
+      }
       ok(s.kind === 'optic' || k === 'm4' ? p.y < bb.max.y && p.y > bb.max.y - 0.06 : p.y >= (rear ? rear.y : bb.max.y) - 0.005 && p.y <= bb.max.y + 0.08, k + ': eye clears the top line and stays near it (eye y ' + p.y.toFixed(3) + ', top ' + bb.max.y.toFixed(3) + ')');
     }
   } catch (e) { out.push('FAIL threw: ' + (e && (e.stack || e.message))); }

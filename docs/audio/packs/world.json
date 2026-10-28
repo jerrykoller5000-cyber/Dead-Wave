@@ -1,0 +1,205 @@
+{
+ "_about": "CL-272 (D-94): the world's beds from Ocular's field recordings (The Provence, Countryside Vol.1), each made a seamless 24 s loop (tools/pack-make.py, loop). Picked from the libraries' descriptions (no traffic, dogs, people or bells) and the steadiest stretch of each recording (no event that would repeat every 24 s). Sound rule: immersive (the valley around him). Kept as they are: his night wind, the lake shore (the packs' water is the sea), the frogs (the packs' are a rainforest's). The vault's door, the relay hatch's latch and the field notes' paper were only synthesized: Puncture's metal-slam mechanism stems, Mechanica's latches, Utility's note sheets. The hikers' camera (GP-19974's clip): Aperture's Canon EOS T7i, the screen flipped open and the power switch.",
+ "world/wind-day": {
+  "hp": 40,
+  "takes": [
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\The-Provence-Ocular-Sounds\\The Provence\\The Provence - Ambience Loops\\AMBGras_FIELD-Day Ambience Field Loop 10_Ocular_The Provence.wav",
+    "start": 2,
+    "loop": 24,
+    "xfade": 2.0,
+    "why": "a constant wind through trees and leaves over a field, birds and grasshoppers far off",
+    "name": "field-wind-a"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\The-Provence-Ocular-Sounds\\The Provence\\The Provence - Ambience Loops\\AMBGras_FIELD-Day Ambience Field Loop 10_Ocular_The Provence.wav",
+    "start": 28,
+    "loop": 24,
+    "xfade": 2.0,
+    "why": "the same wind, another stretch",
+    "name": "field-wind-b"
+   }
+  ]
+ },
+ "world/crickets-night": {
+  "hp": 80,
+  "takes": [
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\The-Provence-Ocular-Sounds\\The Provence\\The Provence - Ambience Loops\\AMBForst_WOODS-Night Ambience Woodland Loop 01_Ocular_The Provence.wav",
+    "start": 171,
+    "loop": 24,
+    "xfade": 2.0,
+    "why": "crickets in a wood at night, leaves moving in a light wind",
+    "name": "night-wood-a"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\The-Provence-Ocular-Sounds\\The Provence\\The Provence - Ambience Loops\\AMBForst_WOODS-Night Ambience Woodland Loop 01_Ocular_The Provence.wav",
+    "start": 93,
+    "loop": 24,
+    "xfade": 2.0,
+    "why": "the same night, quieter",
+    "name": "night-wood-b"
+   }
+  ]
+ },
+ "world/river": {
+  "hp": 40,
+  "takes": [
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\The-Provence-Ocular-Sounds\\The Provence\\The Provence - Ambience Loops\\WATRFlow_RIVER-Stream Ambience Loop 01_Ocular_The Provence.wav",
+    "start": 2,
+    "loop": 24,
+    "xfade": 2.0,
+    "why": "a stream running over stones",
+    "name": "stream-a"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\The-Provence-Ocular-Sounds\\The Provence\\The Provence - Ambience Loops\\WATRFlow_RIVER-Stream Ambience Loop 02_Ocular_The Provence.wav",
+    "start": 3,
+    "loop": 24,
+    "xfade": 2.0,
+    "why": "a deeper stream, low bubbles",
+    "name": "stream-b"
+   }
+  ]
+ },
+ "world/rain": {
+  "hp": 60,
+  "takes": [
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\The-Provence-Ocular-Sounds\\The Provence\\The Provence - Ambience Loops\\RAIN_STORM-Rain Storm Ambience Loop 02_Ocular_The Provence.wav",
+    "start": 40,
+    "loop": 24,
+    "xfade": 2.0,
+    "why": "steady rain on trees and stone, dripping",
+    "name": "rain-a"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\The-Provence-Ocular-Sounds\\The Provence\\The Provence - Ambience Loops\\RAIN_STORM-Rain Storm Ambience Loop 02_Ocular_The Provence.wav",
+    "start": 70,
+    "loop": 24,
+    "xfade": 2.0,
+    "why": "the same rain, another stretch",
+    "name": "rain-b"
+   }
+  ]
+ },
+ "story/vault-door": {
+  "hp": 40,
+  "takes": [
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Puncture-Designed-Construction-Kit-Ocular-Sounds\\Puncture\\Puncture - Construction Kits\\Metal Slam Stems\\Vault\\DSGNSrce_METAL SLAM-Vault Mechanism Stem_Puncture_Ocular.wav",
+    "start": 0.0,
+    "end": 3.6,
+    "why": "a vault's bolts drawing back, heavy and geared",
+    "name": "vault-mechanism"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Puncture-Designed-Construction-Kit-Ocular-Sounds\\Puncture\\Puncture - Construction Kits\\Metal Slam Stems\\Bolted\\DSGNSrce_METAL SLAM-Bolted Mechanism Stem_Puncture_Ocular.wav",
+    "start": 0.12,
+    "end": 3.6,
+    "why": "bolts and a wheel turning in steel",
+    "name": "bolted-mechanism"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Puncture-Designed-Construction-Kit-Ocular-Sounds\\Puncture\\Puncture - Construction Kits\\Metal Slam Stems\\Lockup\\DSGNSrce_METAL SLAM-Lockup Mechanism Stem_Puncture_Ocular.wav",
+    "start": 0.0,
+    "end": 3.0,
+    "why": "a lock's mechanism giving, a long settle",
+    "name": "lockup-mechanism"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Puncture-Designed-Construction-Kit-Ocular-Sounds\\Puncture\\Puncture - Designed\\Metal Slams\\DSGNImpt_METAL SLAM-Catacomb_Puncture_Ocular.wav",
+    "start": 0.2,
+    "end": 3.6,
+    "why": "a reinforced door's mechanism engaging",
+    "name": "catacomb"
+   }
+  ]
+ },
+ "story/relay-clunk": {
+  "hp": 60,
+  "takes": [
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Mechanica-Ocular-Sounds\\Mechanica-Ocular-Sounds\\Singular\\MECHGear_SINGULAR-Small Gears 21_Ocular_Mechanica.wav",
+    "start": 0.0,
+    "end": 0.6,
+    "why": "a latch and its ratchet",
+    "name": "latch-21"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Mechanica-Ocular-Sounds\\Mechanica-Ocular-Sounds\\Singular\\MECHGear_SINGULAR-Small Gears 23_Ocular_Mechanica.wav",
+    "start": 0.0,
+    "end": 0.5,
+    "why": "a heavier latch catching",
+    "name": "latch-23"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Mechanica-Ocular-Sounds\\Mechanica-Ocular-Sounds\\Singular\\MECHGear_SINGULAR-Small Gears 19_Ocular_Mechanica.wav",
+    "start": 0.0,
+    "end": 0.75,
+    "why": "a lever and its pawl",
+    "name": "latch-19"
+   }
+  ]
+ },
+ "story/paper": {
+  "hp": 150,
+  "takes": [
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Utility-Ocular-Sounds\\Utility-Ocular-Sounds\\Utility - Designed\\Books and Notes\\PAPRHndl_BOOKS AND NOTES-Note Sheet Turn 01_Ocular_Utility.wav",
+    "start": 0.0,
+    "end": 0.55,
+    "why": "a sheet of paper turned over",
+    "name": "sheet-01"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Utility-Ocular-Sounds\\Utility-Ocular-Sounds\\Utility - Designed\\Books and Notes\\PAPRHndl_BOOKS AND NOTES-Note Sheet Turn 05_Ocular_Utility.wav",
+    "start": 0.0,
+    "end": 0.35,
+    "why": "a quick sheet turn",
+    "name": "sheet-05"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Utility-Ocular-Sounds\\Utility-Ocular-Sounds\\Utility - Designed\\Books and Notes\\PAPRHndl_BOOKS AND NOTES-Note Sheet Turn 10_Ocular_Utility.wav",
+    "start": 0.0,
+    "end": 0.8,
+    "why": "a note unfolded and turned",
+    "name": "sheet-10"
+   }
+  ]
+ },
+ "story/camera": {
+  "hp": 120,
+  "takes": [
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Aperture-Ocular-Sounds\\Aperture-Ocular-Sounds\\Aperture - Singular\\Digital Camera\\COMCam_DIGITAL CAMERA-Canon EOS T7i Open And Close View Screen 01_Ocular_Aperture.wav",
+    "start": 0.0,
+    "end": 0.45,
+    "why": "the camera's screen flipped open",
+    "name": "screen-open-a"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Aperture-Ocular-Sounds\\Aperture-Ocular-Sounds\\Aperture - Singular\\Digital Camera\\COMCam_DIGITAL CAMERA-Canon EOS T7i Open And Close View Screen 02_Ocular_Aperture.wav",
+    "start": 0.0,
+    "end": 0.45,
+    "why": "the screen flipped open, another",
+    "name": "screen-open-b"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Aperture-Ocular-Sounds\\Aperture-Ocular-Sounds\\Aperture - Singular\\Digital Camera\\COMCam_DIGITAL CAMERA-Canon EOS T7i Power On And Off Sequence 01_Ocular_Aperture.wav",
+    "start": 0.0,
+    "end": 0.25,
+    "why": "its power switch",
+    "name": "power-a"
+   },
+   {
+    "src": "F:\\Sound_Effects\\OCULAR_SOUNDS\\Ocular_Sounds (1)\\Aperture-Ocular-Sounds\\Aperture-Ocular-Sounds\\Aperture - Singular\\Digital Camera\\COMCam_DIGITAL CAMERA-Canon EOS T7i Power On And Off Sequence 03_Ocular_Aperture.wav",
+    "start": 0.0,
+    "end": 0.25,
+    "why": "its power switch, another",
+    "name": "power-b"
+   }
+  ]
+ }
+}

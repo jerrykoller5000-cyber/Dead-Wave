@@ -83,20 +83,6 @@
    "time": "night",
    "caption": "Watchtower: at night",
    "out": "review/sweep/tower/tower-night.png"
-  },
-  {
-   "cam": {
-    "x": -22.220000000000002,
-    "y": 12.9,
-    "z": -122.53999999999999,
-    "tx": -25.42,
-    "ty": 11.700000000000001,
-    "tz": -125.74,
-    "fov": 50
-   },
-   "time": "noon",
-   "caption": "on-trail: mesh stands on a trail (0 m from its line)",
-   "out": "review/sweep/tower/tower-suspect-1.png"
   }
  ],
  "out": "review/sweep/tower/",

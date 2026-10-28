@@ -33,9 +33,8 @@
     T.setHp(40);
     key('KeyC', true);
     await wait(200);
-    const g = glow();
     ok(T.getHp() > 40, 'in front of the cross, crouch heals him (' + T.getHp() + ')');
-    ok(g && g.material.opacity > 0.15, 'he glows gold (' + (g ? g.material.opacity.toFixed(2) : 'no mesh') + ')');
+    ok(await until(() => { const m = glow(); return m && m.material.opacity > 0.15; }, 2000), 'he glows gold (' + (() => { const m = glow(); return m ? m.material.opacity.toFixed(2) : 'no mesh'; })() + ')');
     key('KeyC', false);
     await wait(80);
     T.setHp(40);

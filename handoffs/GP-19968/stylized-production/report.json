@@ -1,0 +1,148 @@
+{
+  "task": "GP-19968 Jerry character-style revision",
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "loadSec": 33.807,
+  "prodCheck": {
+    "boardPainted": 6,
+    "rangerPainted": 6,
+    "hikersPainted": 6,
+    "boardYaw": 2.894,
+    "posters": [
+      {
+        "id": "maya-costa",
+        "sameTexture": true,
+        "sameCanvas": true,
+        "liveSize": [
+          192,
+          256
+        ],
+        "canvasSize": [
+          192,
+          256
+        ],
+        "roughness": 1,
+        "metalness": 0,
+        "readablePaper": true
+      },
+      {
+        "id": "theo-marsh",
+        "sameTexture": true,
+        "sameCanvas": true,
+        "liveSize": [
+          192,
+          256
+        ],
+        "canvasSize": [
+          192,
+          256
+        ],
+        "roughness": 1,
+        "metalness": 0,
+        "readablePaper": true
+      },
+      {
+        "id": "sam-marsh",
+        "sameTexture": true,
+        "sameCanvas": true,
+        "liveSize": [
+          192,
+          256
+        ],
+        "canvasSize": [
+          192,
+          256
+        ],
+        "roughness": 1,
+        "metalness": 0,
+        "readablePaper": true
+      },
+      {
+        "id": "priya-raman",
+        "sameTexture": true,
+        "sameCanvas": true,
+        "liveSize": [
+          192,
+          256
+        ],
+        "canvasSize": [
+          192,
+          256
+        ],
+        "roughness": 1,
+        "metalness": 0,
+        "readablePaper": true
+      },
+      {
+        "id": "jonas-weber",
+        "sameTexture": true,
+        "sameCanvas": true,
+        "liveSize": [
+          192,
+          256
+        ],
+        "canvasSize": [
+          192,
+          256
+        ],
+        "roughness": 1,
+        "metalness": 0,
+        "readablePaper": true
+      },
+      {
+        "id": "ellis-byrne",
+        "sameTexture": true,
+        "sameCanvas": true,
+        "liveSize": [
+          192,
+          256
+        ],
+        "canvasSize": [
+          192,
+          256
+        ],
+        "roughness": 1,
+        "metalness": 0,
+        "readablePaper": true
+      }
+    ],
+    "rangerRoster": {
+      "pos": [
+        40.09,
+        -5.88,
+        -24.73
+      ],
+      "liveSize": [
+        1152,
+        1120
+      ],
+      "canvasSize": [
+        1152,
+        1120
+      ],
+      "sameTexture": true,
+      "sameCanvas": true,
+      "searchLogPresent": true,
+      "searchLogDist": 0.687
+    },
+    "hikersRoster": {
+      "pos": [
+        1.35,
+        1.82,
+        -82.2
+      ],
+      "liveSize": [
+        1152,
+        1120
+      ],
+      "canvasSize": [
+        1152,
+        1120
+      ],
+      "sameTexture": true,
+      "sameCanvas": true
+    }
+  },
+  "tests": {},
+  "frames": 40,
+  "errors": []
+}

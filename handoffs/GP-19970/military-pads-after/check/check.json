@@ -1,0 +1,20 @@
+{
+ "at": "2026-10-28T03:57:35.642Z",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "results": [
+  {
+   "id": "zombie.military",
+   "variant": null,
+   "mode": "statue",
+   "ok": true,
+   "ms": 233,
+   "tris": 5952,
+   "size": [
+    1.021,
+    2.021,
+    0.789
+   ],
+   "error": null
+  }
+ ]
+}

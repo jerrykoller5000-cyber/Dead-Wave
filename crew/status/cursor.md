@@ -1,13 +1,13 @@
 # Cursor
 
-state: idle
+state: active
 model: Grok 4.7
-task: —
-touching: —
-since: 2026-10-26T06:27Z
+task: CU-167 The checkpoint commit
+touching: git
+since: 2026-10-28T19:39Z
 next: —
 blocked-on: —
-last-report: handoffs/2026-10-26-cursor-CU-162.md
+last-report: handoffs/2026-10-28-cursor-CU-166.md
 
 ## Notes
 

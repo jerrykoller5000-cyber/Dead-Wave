@@ -1,0 +1,1 @@
+Set-Location 'C:\Users\Zero\Desktop\Tiny Trek'; node crew/crew.mjs slot run grokbot GB-232 --checks 't215 t95 page-load; test-page t282' -- cmd /c qa\2026-10-26-GB-239\gb232-run.cmd *> qa\2026-10-26-GB-239\gb232-tests.log

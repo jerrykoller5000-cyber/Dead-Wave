@@ -1,5 +1,5 @@
 {
-  "loadMs": 24433,
+  "loadMs": 28420,
   "pageErrors": [],
   "conceptAudit": [
     {
@@ -311,8 +311,8 @@
       "id": "tp-lit-lineup",
       "label": "1. 3P Lit (5.5m): 7 archetypes @ 0.9 pale-green",
       "render": {
-        "calls": 4370,
-        "triangles": 111067
+        "calls": 4217,
+        "triangles": 140619
       },
       "lineup": [
         {
@@ -440,24 +440,24 @@
       "id": "tp-dark-noflash",
       "label": "2. 3P Dark (No Flashlight, 5.5m): 0.9 eyes + warning glows",
       "render": {
-        "calls": 4400,
-        "triangles": 111097
+        "calls": 4342,
+        "triangles": 130997
       }
     },
     {
       "id": "tp-dark-flash",
       "label": "3. 3P Dark (Flashlight ON, 5.5m): 0.9 eyes + flashlight beam",
       "render": {
-        "calls": 4430,
-        "triangles": 111127
+        "calls": 4466,
+        "triangles": 131301
       }
     },
     {
       "id": "fp-dark-noflash",
       "label": "4. 1P Dark (No Flashlight, 4.4m): 0.9 eye points vs warnings",
       "render": {
-        "calls": 4460,
-        "triangles": 111157
+        "calls": 4631,
+        "triangles": 119100
       },
       "lineup": [
         {
@@ -585,8 +585,8 @@
       "id": "fp-dark-flash-bluebell",
       "label": "5. 1P Night Flashlight (3.6m): 0.9 green vs Bluebell 1.8 blue",
       "render": {
-        "calls": 4490,
-        "triangles": 111187
+        "calls": 4797,
+        "triangles": 107036
       },
       "lineup": [
         {
@@ -678,14 +678,14 @@
     },
     {
       "id": "fp-dark-09-vs-17",
-      "label": "6. 1P Night Flashlight (3.2m): Authored 0.9 vs Pool Reset 1.7",
+      "label": "6. 1P Night (3.2m): Reused 0.9 (CU-162) vs Old 1.7 Ref",
       "render": {
-        "calls": 4520,
-        "triangles": 111217
+        "calls": 4962,
+        "triangles": 103800
       },
       "lineup": [
         {
-          "kind": "shambler 0.9 (authored)",
+          "kind": "shambler (reused 0.9 CU-162)",
           "eyes": [
             {
               "color": "74a18d",
@@ -702,7 +702,7 @@
           ]
         },
         {
-          "kind": "shambler 1.7 (pool reset bug)",
+          "kind": "shambler (old 1.7 ref)",
           "eyes": [
             {
               "color": "74a18d",
@@ -719,7 +719,7 @@
           ]
         },
         {
-          "kind": "military 0.9 (authored)",
+          "kind": "military (reused 0.9 CU-162)",
           "eyes": [
             {
               "color": "74a18d",
@@ -736,7 +736,7 @@
           ]
         },
         {
-          "kind": "military 1.7 (pool reset bug)",
+          "kind": "military (old 1.7 ref)",
           "eyes": [
             {
               "color": "74a18d",

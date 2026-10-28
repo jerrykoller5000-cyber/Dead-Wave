@@ -27,8 +27,8 @@ function opportunity(n,next){
   ['Launcher + M4 suppressor (with full launcher ammo)',gun('launcher')+suppressorPrices.m4,'launcher'],['AA-12 (with full ammo)',gun('aa12'),'aa12'],['Flamethrower and tank',gun('flamer')+85,'flamer'],
   ['Minigun (with full ammo)',gun('minigun'),'minigun'],['Heavy Mk III plans + four upgrades',tier('heavy',2,4)],
   ['Stone wall plans + twelve upgrades',tier('wall',2,12)],
-  ['Mortar plans + two mortars',buildPrices.mortar+2*placement.mortar]   /* GB-234: the mortar has no upgrades (D-91) */,
-  ['Four mortars + eight shells',4*placement.mortar+2*ammo['60mm'].cost],
+  ['Mortar plans + two mortars + two heavy Mk III turrets',buildPrices.mortar+2*placement.mortar+2*(placement.heavy+upgrades.heavy.cost[2])]   /* GB-234: the mortar has no upgrades (D-91); GB-237: the turrets keep a late sink */,
+  ['Four mortars + eight shells + two heavy Mk III turrets',4*placement.mortar+2*ammo['60mm'].cost+2*(placement.heavy+upgrades.heavy.cost[2])],
   ['Eight heavy Mk III turrets',8*(placement.heavy+upgrades.heavy.cost[2])]
  ][n];
 }

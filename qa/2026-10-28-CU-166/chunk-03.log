@@ -1,0 +1,37 @@
+GRANT cursor CU-166: starting one game-test command
+check-players: 309 player.position reads, all in the allowed places
+ok    t72     21 pass   0 fail  71.8s
+ok    t73     12 pass   0 fail  58.2s
+ok    t74     18 pass   0 fail  54.3s
+ok    t75     16 pass   0 fail  50.7s
+FAIL  t76     15 pass   1 fail  57.7s
+ok    t77     17 pass   0 fail  60.7s
+ok    t78     18 pass   0 fail  44.3s
+ok    t79     12 pass   0 fail  75.5s
+FAIL  t80     13 pass   1 fail  183.7s
+           INFO the old drape (sampleHeight + 7 cm) went 0.37 m under the drawn bed at worst
+ok    t81      5 pass   0 fail  23.6s
+ok    t82      4 pass   0 fail  24.3s
+ok    t83     31 pass   0 fail  62.6s
+ok    t84     10 pass   0 fail  63.9s
+ok    t85     15 pass   0 fail  61.8s
+ok    t86     12 pass   0 fail  48.6s
+ok    t87     13 pass   0 fail  41.9s
+ok    t88     13 pass   0 fail  41.7s
+ok    t89     18 pass   0 fail  50.4s
+ok    t90      6 pass   0 fail  47.7s
+ok    t91      7 pass   0 fail  54.2s
+ok    t92      5 pass   0 fail  44.0s
+ok    t93     11 pass   0 fail  80.7s
+ok    t94      8 pass   0 fail  46.0s
+ok    t95      9 pass   0 fail  69.9s
+ok    t96     19 pass   0 fail  62.5s
+
+25 checks: 328 pass, 2 fail
+
+by owner:
+  unassigned
+    t76    1 fail  FAIL a walker walks (phase +1.8, idle 0.00)
+           FAIL a walker walks (phase +1.8, idle 0.00)
+    t80    1 fail  FAIL three wall pieces between them stop his rounds (3 walls; 0 damage; trigger held 32 ticks, 0
+           FAIL three wall pieces between them stop his rounds (3 walls; 0 damage; trigger held 32 ticks, 0 with his gun not by him)

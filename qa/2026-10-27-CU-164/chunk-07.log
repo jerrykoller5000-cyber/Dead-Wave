@@ -1,0 +1,32 @@
+GRANT cursor CU-164: starting one game-test command
+check-players: 308 player.position reads, all in the allowed places
+ok    t173    12 pass   0 fail  37.5s
+ok    t174    14 pass   0 fail  69.6s
+ok    t175    12 pass   0 fail  45.7s
+ok    t176     8 pass   0 fail  45.8s
+ok    t177    10 pass   0 fail  36.5s
+ok    t178     8 pass   0 fail  41.3s
+ok    t179    27 pass   0 fail  43.2s
+ok    t180    29 pass   0 fail  63.9s
+ok    t181    23 pass   0 fail  49.9s
+ok    t182    36 pass   0 fail  60.9s
+ok    t183    16 pass   0 fail  45.3s
+           INFO crouch-walk slide 10.64% (at 2.17 m/s ground speed)
+ok    t184    29 pass   0 fail  47.2s
+           INFO holds: m4 1560 ms wall / 500 ms game, ak 2585 ms wall / 500 ms game, aa12 735 ms wall / 500 ms game, uzi 1122 ms wall / 400 ms game, shotgun 968 ms wall / 300 ms game, revolver 930 ms wall / 300 ms game, sniper 998 ms wall / 300 ms game, pistol 370 ms wall / 300 ms game, pistol 606 ms wall / 400 ms game
+ok    t185    36 pass   0 fail  81.2s
+ok    t186    34 pass   0 fail  70.2s
+ok    t187    75 pass   0 fail  90.5s
+ok    t188    91 pass   0 fail  107.4s
+ok    t189    11 pass   0 fail  140.8s
+ok    t190    21 pass   0 fail  39.8s
+ok    t191    16 pass   0 fail  56.5s
+ok    t192    10 pass   0 fail  41.9s
+           INFO on the flat, walking, the lowest sole is -0.029 m
+ok    t193    18 pass   0 fail  67.5s
+ok    t194    35 pass   0 fail  75.6s
+ok    t195    16 pass   0 fail  95.5s
+ok    t196    17 pass   0 fail  43.3s
+ok    t197     7 pass   0 fail  40.2s
+
+25 checks: 611 pass, 0 fail

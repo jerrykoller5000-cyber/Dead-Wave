@@ -1,13 +1,13 @@
 # Antigravity
 
 state: active
-model: Gemini Pro (High)
-task: AG-131 GPU gameplay review of GP-19970 zombie eye palette
-touching: qa/2026-10-26-AG-131/
-since: 2026-10-26T06:13Z
-next: waits on CL-263
+model: Gemini 3.1 Pro
+task: AG-148 Walk the trails (CL-256) and score GP-19970 seven-face maxilla close3
+touching: review/sweep/jobs/trails.json, review/sweep/trails/, qa/2026-10-28-AG-148/
+since: 2026-10-28T19:17Z
+next: —
 blocked-on: —
-last-report: handoffs/2026-10-26-antigravity-AG-130.md
+last-report: handoffs/2026-10-28-antigravity-AG-147.md
 
 ## Notes
 
@@ -32,7 +32,8 @@ a real GPU the way you can.
 - Serve the game with `npm run serve` and open http://127.0.0.1:8971/index.html?debug=1.
   With ?debug=1, window.TT is available in the DevTools console.
 
-### Status (2026-10-26)
-- **AG-86..AG-129**: DONE (see reports in `handoffs/`). Completed GPU reviews (`GP-19965`, `GP-19967`, `GP-19966`, `CL-262`, `CL-260`, `CL-264`, `CL-256 batch 2`, `CL-261 part 1`, `CL-261 part 2`), the 44-job GPU world sweep (`AG-122`), the trapper's path rebuild (`AG-124`), the FOB overhaul (`AG-123`), the 20 four-light principles contact sheets + buildables/turrets upgrade (`AG-126`), and the 6-family buildables/turrets/traps overhaul from `GB-233` group 4 (`AG-129`).
-- **AG-130**: DONE. Verified ChatGPT's `GP-19971` (Screamer arms and face) on RTX 5080 (`handoffs/2026-10-26-antigravity-AG-130.md`): all 3 arm beats (`drift`, `1.2 s scream`, `2.4 s exposed`) and transitions read cleanly with `0` torso/skull intersections across 420 frames (`minSideM = 0.1200 m`), `12/12` live `zombieRoundHit` headshots, `avg 3.04 ms` (`p99 7.60 ms`) frame time, and `4/5` night flashlight facial readability at `1280×720` (no further face-value lift needed).
-- **Next**: `AG-125` (The duty board, the radio set and the six posters, after `CL-263`).
+### Status (2026-10-28)
+- **AG-86..AG-145**: DONE (see `handoffs/`). Completed GPU world sweeps, `camp-trapper` yard & iron-lined cellar (`AG-124`, `AG-135`, `AG-137`, `AG-140`, `AG-141`), HQ Duty Board/Radio Set & trailhead posters (`AG-125`, `AG-132`), 6-family buildables overhaul (`AG-129`), raised vs ground turret wall-clearance GPU shots (`AG-144`, `qa/2026-10-28-AG-144/`), and `GP-19970`/`GP-19977` visual reviews (`AG-138`, `AG-141`, `AG-142`, `AG-143`, `AG-145`).
+- **AG-144 (trapper cellar's ground)**: DONE (`handoffs/2026-10-28-antigravity-AG-144-cellar.md`, `qa/2026-10-28-AG-144-cellar/report.md`). Replaced flat mound slab over `camp-trapper` cellar with `buildTrapperCellarCap` vertex-colored terrain cap + concrete hatch collar (`0` sweep findings, `66/66` browser checks PASS).
+- **AG-146**: DONE (`handoffs/2026-10-28-antigravity-AG-146.md`, `qa/2026-10-28-AG-146/report.md`, `qa/2026-10-28-AG-146/gp-19970-reviews.md`). Ran `review/sweep/jobs/cave-mouths.json` on the real GPU (24 shots + `sheet.jpg`, all 6 cave mouths PASS `4.2/5`–`5.0/5` day & night) and scored all 3 `GP-19970` follow-up close-up batches.
+- **Next**: Queue empty; ready for next visual review or GPU sweep.

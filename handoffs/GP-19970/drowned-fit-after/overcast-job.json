@@ -1,0 +1,10 @@
+{
+  "shots": [
+    {"target":"zombie.drowned:statue","view":"front","wait":300,"size":"1280x720","out":"handoffs/GP-19970/drowned-fit-after/overcast-front.png"},
+    {"target":"zombie.drowned:statue","view":"side","wait":300,"size":"1280x720","out":"handoffs/GP-19970/drowned-fit-after/overcast-side.png"},
+    {"target":"zombie.drowned:statue","view":"back","wait":300,"size":"1280x720","out":"handoffs/GP-19970/drowned-fit-after/overcast-back.png"}
+  ],
+  "out":"handoffs/GP-19970/drowned-fit-after",
+  "sheet":true,
+  "cols":3
+}

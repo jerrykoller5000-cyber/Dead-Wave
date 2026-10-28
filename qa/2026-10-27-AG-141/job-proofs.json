@@ -1,0 +1,32 @@
+{
+  "out": "qa/2026-10-27-AG-141",
+  "sheet": true,
+  "sheetFile": "qa/2026-10-27-AG-141/camp-4sides-sheet.jpg",
+  "shots": [
+    {
+      "caption": "camp-north",
+      "out": "qa/2026-10-27-AG-141/camp-north.png",
+      "cam": { "x": -33.49, "y": 5.2, "z": 30.3, "tx": -33.49, "ty": 1.2, "tz": 43.81, "fov": 55 }
+    },
+    {
+      "caption": "camp-east",
+      "out": "qa/2026-10-27-AG-141/camp-east.png",
+      "cam": { "x": -20.0, "y": 5.2, "z": 43.81, "tx": -33.49, "ty": 1.2, "tz": 43.81, "fov": 55 }
+    },
+    {
+      "caption": "camp-south",
+      "out": "qa/2026-10-27-AG-141/camp-south.png",
+      "cam": { "x": -33.49, "y": 5.2, "z": 57.3, "tx": -33.49, "ty": 1.2, "tz": 43.81, "fov": 55 }
+    },
+    {
+      "caption": "camp-west",
+      "out": "qa/2026-10-27-AG-141/camp-west.png",
+      "cam": { "x": -47.0, "y": 5.2, "z": 43.81, "tx": -33.49, "ty": 1.2, "tz": 43.81, "fov": 55 }
+    },
+    {
+      "caption": "yard-head-ag140",
+      "out": "qa/2026-10-27-AG-141/yard-head-ag140.png",
+      "cam": { "x": -22.37, "y": 2.45, "z": 39.41, "tx": -26.18, "ty": 0.35, "tz": 41.61, "fov": 50 }
+    }
+  ]
+}

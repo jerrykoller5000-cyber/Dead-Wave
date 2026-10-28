@@ -1,0 +1,20 @@
+{
+ "at": "2026-10-27T17:51:17.903Z",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "results": [
+  {
+   "id": "zombie.brute",
+   "variant": null,
+   "mode": "statue",
+   "ok": true,
+   "ms": 141,
+   "tris": 5896,
+   "size": [
+    1.755,
+    2.495,
+    0.948
+   ],
+   "error": null
+  }
+ ]
+}

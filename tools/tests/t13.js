@@ -59,13 +59,18 @@
   const roof = T.placeBuildAt('floor', gx, gz + 1, 0, { forceLv: 1 });
   const tur = T.placeBuildAt('light', gx, gz + 1, 0, { lv: 1 });
   p.set(T.gridCentre(gx), T.sampleHeight(T.gridCentre(gx), T.gridCentre(gz + 1)), T.gridCentre(gz + 1));
-  // Give cutaway time to ease toward FADE_DEFAULT / FADE_TURRET (~0.2s at FADE_RATE 5).
-  await wait(500);
-  let op = 1; roof.mesh.traverse(o => { if (o.isMesh && o.material) op = Math.min(op, o.material.opacity); });
-  let top = 1; for (const m of (tur && tur._fadeMats) || []) top = Math.min(top, m.opacity);
+  // Give cutaway time to ease toward FADE_DEFAULT / FADE_TURRET (~0.2 s of game time at FADE_RATE 5). CL-273: wait on the
+  // fade itself, up to 6 s of wall clock: the ease runs on the game's dt, and on a loaded run 0.5 s of wall clock was only
+  // 0.1 s of game time (CU-164's rerun: roof 0.5, turret 0.55, the roof halfway down). The bars are unchanged.
+  const roofOp = () => { let v = 1; roof.mesh.traverse(o => { if (o.isMesh && o.material) v = Math.min(v, o.material.opacity); }); return v; };
+  const turOp = () => { let v = 1; for (const m of (tur && tur._fadeMats) || []) v = Math.min(v, m.opacity); return v; };
+  for (let t0 = Date.now(); Date.now() - t0 < 6000 && roofOp() > 0.26; ) await wait(100);
+  let op = roofOp();
+  let top = turOp();
   ok(roof && roof.level === 1 && op < 0.5 && tur && tur.mesh.visible && top >= 0.5 && top < 0.9, 'roof over the marine goes see-through, turret up there stays mostly solid (roof ' + op + ', turret ' + top + ')');
-  p.set(T.gridCentre(gx) + 8, T.sampleHeight(T.gridCentre(gx) + 8, T.gridCentre(gz + 1)), T.gridCentre(gz + 1)); await wait(500);
-  op = 1; roof.mesh.traverse(o => { if (o.isMesh && o.material) op = Math.min(op, o.material.opacity); });
+  p.set(T.gridCentre(gx) + 8, T.sampleHeight(T.gridCentre(gx) + 8, T.gridCentre(gz + 1)), T.gridCentre(gz + 1));
+  for (let t0 = Date.now(); Date.now() - t0 < 6000 && roofOp() < 1; ) await wait(100);   // CL-273: the same wait, back up
+  op = roofOp();
   ok(op === 1 && tur.mesh.visible, 'and solid again once he walks out');
   // #4: house
   const h = T.house;

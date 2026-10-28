@@ -1,0 +1,14 @@
+Game-test request 78708ec5-bcb9-436b-b3bf-3e08016fb362 queued at position 2. Waiting...
+GRANT grokbot GB-243: starting one game-test command
+check-players: 309 player.position reads, all in the allowed places
+ok    t15     10 pass   0 fail  126.1s
+ok    t76     16 pass   0 fail  54.6s
+FAIL  t80     12 pass   2 fail  171.1s
+
+3 checks: 38 pass, 2 fail
+
+by owner:
+  unassigned
+    t80    2 fail  FAIL it comes round until the house is out of the line (clear after 4.9 s, in the line 79% of th
+           FAIL it comes round until the house is out of the line (clear after 4.9 s, in the line 79% of the time after; still behind the house)
+           FAIL a spitter behind the house keeps creeping in (moved 6.9 m, 13.0 to 13.3 m)

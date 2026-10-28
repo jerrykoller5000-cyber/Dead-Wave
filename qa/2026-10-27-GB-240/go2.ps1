@@ -1,0 +1,1 @@
+Set-Location 'C:\Users\Zero\Desktop\Tiny Trek'; node crew/crew.mjs slot run grokbot GB-240 --checks 'test page t43 t211 t284 after the fixes' -- cmd /c qa\2026-10-27-GB-240\run2.cmd *> qa\2026-10-27-GB-240\rerun2.log

@@ -2,6 +2,7 @@ import * as Coldwater from './coldwater.js';
 import * as Trapper from './trapper.js';
 import * as Mine from './mine-props.js';
 import { text } from '../ui/strings.js';
+import { paintHikerPosters, loadHikerPortraits, drawHikerPoster, drawHikerRoster } from '../ui/hikers.js';
 // world/history-props.js — the valley's history in things, not words (CL-108, CL-109, D-70, docs/story.md §2, §6, §7).
 // Claude's. What's left of everyone who came here: the PGB's stencils and the fall of FOB Threshold (CL-109); the
 // hikers and the rangers (CL-109); Coldwater the ghost town, the old mine and the trapper (CL-108). Each builder returns
@@ -48,6 +49,25 @@ const texMat = (T, canvas, fallback, rough = 0.85) => {
   const t = new T.CanvasTexture(canvas);
   if (T.SRGBColorSpace) t.colorSpace = T.SRGBColorSpace;
   return new T.MeshStandardMaterial({ color: 0xffffff, map: t, roughness: rough });
+};
+// AG-132: matte, non-glossy paper material for hiker posters and rosters; carries baseHex so close-range night
+// flashlight attenuation keeps paper and photocopied portraits readable without blowing out.
+const paperTexMat = (T, canvasOrTex, fallback = 0xdad4c6, rough = 1.0) => {
+  if (!canvasOrTex) return std(T, fallback, rough, 0);
+  const t = canvasOrTex.isTexture ? canvasOrTex : new T.CanvasTexture(canvasOrTex);
+  if (T.SRGBColorSpace) t.colorSpace = T.SRGBColorSpace;
+  t.anisotropy = 4;
+  const mat = new T.MeshStandardMaterial({
+    color: fallback,
+    map: t,
+    emissive: 0x000000,
+    emissiveMap: t,
+    emissiveIntensity: 0,
+    roughness: rough,
+    metalness: 0
+  });
+  mat.userData = { readablePaper: true, baseHex: fallback };
+  return mat;
 };
 
 // --- painted signs -----------------------------------------------------------------------------------------------
@@ -166,29 +186,170 @@ export function buildCordonGate(T, doc, { w = 4.2, h = 4.4 } = {}) {
 
 export function buildTrailheadBoard(T, doc) {
   const g = new T.Group(); g.name = 'trailhead-board';
-  const wood = std(T, 0x6b5034), roof = std(T, 0x4a3a28);
-  box(T, g, 1.7, 1.1, 0.06, std(T, 0x8a6e4a), 0, 1.45, 0);
-  for (const sx of [-0.8, 0.8]) box(T, g, 0.1, 2.2, 0.1, wood, sx, 1.1, -0.05);
-  box(T, g, 1.95, 0.06, 0.45, roof, 0, 2.15, 0.05, 0.25);
-  // Three posters, weathered: MISSING, a blank where a photo was, the words under it.
-  for (let k = 0; k < 3; k++) {
+  const wood = std(T, 0x6b5034, 0.92), roof = std(T, 0x4a3a28, 0.94), frameWood = std(T, 0x523c26, 0.92), brass = std(T, 0xb5954a, 0.46, 0.68);
+  const backMat = std(T, 0x685036, 0.96, 0);
+  backMat.userData = { readablePaper: true, baseHex: 0x685036, isWood: true };
+  // AG-125 / AG-132 (story-chain.md §5, GP-19968): expanded trailhead board holding all six hikers' missing-person posters and frames.
+  const backSlab = box(T, g, 1.94, 1.32, 0.06, backMat, 0, 1.44, 0);
+  backSlab.name = 'trailhead-board-slab';
+  box(T, g, 1.98, 0.05, 0.08, wood, 0, 2.10, 0.01);
+  box(T, g, 1.98, 0.05, 0.08, wood, 0, 0.78, 0.01);
+  for (const sx of [-0.9, 0.9]) box(T, g, 0.11, 2.26, 0.11, wood, sx, 1.13, -0.05);
+  box(T, g, 2.18, 0.06, 0.5, roof, 0, 2.22, 0.06, 0.25);
+  const hikers = [
+    { id: 'maya-costa', name: 'MAYA COSTA, 27', lastSeen: 'LAST SEEN: COLDWATER RIDGE', paper: '#efe9d4', tilt: -0.032 },
+    { id: 'theo-marsh', name: 'THEO MARSH, 31', lastSeen: 'LAST SEEN: COLDWATER MINE', paper: '#e7dec3', tilt: 0.018 },
+    { id: 'sam-marsh', name: 'SAM MARSH, 22', lastSeen: 'LAST SEEN: COLDWATER MINE', paper: '#efe7cf', tilt: -0.024 },
+    { id: 'priya-raman', name: 'PRIYA RAMAN, 24', lastSeen: 'LAST SEEN: SWITCHBACK TRAIL', paper: '#e6dcc0', tilt: 0.028 },
+    { id: 'jonas-weber', name: 'JONAS WEBER, 29', lastSeen: 'LAST SEEN: NORTH CREEK SPUR', paper: '#eee6ce', tilt: -0.016 },
+    { id: 'ellis-byrne', name: 'ELLIS BYRNE, 34', lastSeen: 'LAST SEEN: OLD MILL SPUR', paper: '#e3d8ba', tilt: 0.034 }
+  ];
+  const framesGroup = new T.Group(); framesGroup.name = 'missing-poster-frames'; g.add(framesGroup);
+  const lowerRow = new T.Group(); lowerRow.name = 'missing-poster-row'; g.add(lowerRow);
+  const posters = [];
+  for (let k = 0; k < 6; k++) {
+    const h = hikers[k], col = k % 3, row = (k / 3) | 0;
+    const px = -0.58 + col * 0.58, py = (row === 0 ? 1.72 : 1.14) + (col === 1 ? 0.018 : -0.012);
+    // Individual weathered wooden frame + brass corner tacks for each of the six posters
+    const fg = new T.Group(); fg.name = 'missing-poster-frame'; fg.position.set(px, py, 0.032); fg.rotation.z = h.tilt;
+    box(T, fg, 0.44, 0.54, 0.01, frameWood, 0, 0, -0.003);
+    for (const sy of [-0.26, 0.26]) box(T, fg, 0.45, 0.022, 0.018, wood, 0, sy, 0.002);
+    for (const sx of [-0.215, 0.215]) box(T, fg, 0.022, 0.54, 0.018, wood, sx, 0, 0.002);
+    for (const sx of [-0.185, 0.185]) for (const sy of [-0.23, 0.23]) cyl(T, fg, 0.009, 0.009, 0.014, brass, sx, sy, 0.009, Math.PI / 2, 0, 0, 6);
+    framesGroup.add(fg);
+    const portraitBox = { x: 36, y: 37, w: 120, h: 120 };
     const cv = (() => {
       if (!doc || !doc.createElement) return null;
       const p = doc.createElement('canvas'); p.width = 192; p.height = 256;
       const c = p.getContext('2d'); if (!c) return null;
-      c.fillStyle = k === 1 ? '#e9e2c6' : '#efe9d4'; c.fillRect(0, 0, 192, 256);
-      c.fillStyle = '#b3241a'; c.font = 'bold 34px Arial, sans-serif'; c.textAlign = 'center'; c.fillText('MISSING', 96, 40);
-      c.fillStyle = '#9d9785'; c.fillRect(36, 56, 120, 110);   // the photo, faded to nothing
-      c.fillStyle = '#c9c3ae'; c.beginPath(); c.arc(96, 98, 22, 0, Math.PI * 2); c.fill(); c.fillRect(66, 124, 60, 42);
-      c.fillStyle = '#2a2a26'; c.font = 'bold 15px Arial, sans-serif';
-      c.fillText(['HIKER, 24', 'HIKER, 31', 'HIKER, 27'][k], 96, 188);
-      c.font = '12px Arial, sans-serif'; c.fillText('LAST SEEN: COLDWATER MINE', 96, 210); c.fillText('CALL THE RANGER STATION', 96, 228);
-      c.fillStyle = 'rgba(90,70,40,0.25)'; c.fillRect(0, 230, 192, 26);
+      if (!drawHikerPoster(c, h.id, { w: 192, h: 256 }, null)) {
+        c.fillStyle = h.paper; c.fillRect(0, 0, 192, 256);
+        c.strokeStyle = 'rgba(72,54,32,0.38)'; c.lineWidth = 3; c.strokeRect(4, 4, 184, 248);
+        c.fillStyle = '#b3241a'; c.fillRect(14, 10, 164, 32);
+        c.fillStyle = '#f5eedc'; c.font = 'bold 28px Arial, sans-serif'; c.textAlign = 'center'; c.fillText('MISSING', 96, 35);
+        c.fillStyle = '#9b9481'; c.fillRect(portraitBox.x, portraitBox.y, portraitBox.w, portraitBox.h);
+        c.strokeStyle = '#4c4538'; c.lineWidth = 2; c.strokeRect(portraitBox.x, portraitBox.y, portraitBox.w, portraitBox.h);
+        c.fillStyle = '#262521'; c.font = 'bold 14.5px Arial, sans-serif';
+        c.fillText(h.name, 96, 184);
+      }
       return p;
     })();
-    const m = new T.Mesh(new T.PlaneGeometry(0.42, 0.56), cv ? texMat(T, cv, 0xefe9d4, 0.95) : std(T, 0xefe9d4));
-    m.position.set(-0.52 + k * 0.52, 1.45 + (k === 1 ? 0.04 : -0.02), 0.035); m.rotation.z = (k - 1) * 0.05; m.name = 'missing-poster'; g.add(m);
+    const mat = cv ? paperTexMat(T, cv, 0xdad4c6, 1.0) : std(T, 0xdad4c6, 1.0);
+    const m = new T.Mesh(new T.PlaneGeometry(0.39, 0.49), mat);
+    m.position.set(px, py, 0.041); m.rotation.z = h.tilt; m.name = 'missing-poster';
+    m.userData = {
+      index: k,
+      hiker: h,
+      portraitBox,
+      canvas: cv,
+      tex: mat.map || null,
+      drawPortrait: (paintFn) => {
+        if (!cv || typeof paintFn !== 'function') return false;
+        const c = cv.getContext('2d'); if (!c) return false;
+        c.save(); c.beginPath(); c.rect(portraitBox.x, portraitBox.y, portraitBox.w, portraitBox.h); c.clip();
+        paintFn(c, portraitBox, h);
+        c.restore();
+        if (mat.map) mat.map.needsUpdate = true;
+        return true;
+      }
+    };
+    if (k < 3) g.add(m); else lowerRow.add(m);
+    posters.push(m);
   }
+  g.userData.posters = posters;
+  g.userData.hikers = hikers;
+  g.userData.backSlab = backSlab;
+  if (doc && typeof globalThis.Image === 'function') {
+    g.userData.portraitsReady = paintHikerPosters(posters);
+    g.userData.portraitsReady.catch((err) => console.warn('Hiker posters:', err));
+  } else {
+    g.userData.portraitsReady = Promise.resolve(0);
+  }
+  return g;
+}
+
+// AG-132 (GP-19968): shared 1152x1120 contact-sheet canvas/texture for the rangers' search board and hikers' camp.
+// Allocated at its final dimensions before CanvasTexture creation so WebGPU never sees a post-upload resize.
+let _sharedHikerRoster = null;
+export function ensureHikerRosterTexture(T, doc) {
+  if (!doc || !doc.createElement) return null;
+  if (_sharedHikerRoster && _sharedHikerRoster.doc === doc && _sharedHikerRoster.T === T) return _sharedHikerRoster;
+  const cv = doc.createElement('canvas');
+  cv.width = 1152;
+  cv.height = 1120;
+  const ctx = cv.getContext('2d');
+  if (ctx) drawHikerRoster(ctx, { w: 1152, h: 1120 }, null);
+  const tex = new T.CanvasTexture(cv);
+  if (T.SRGBColorSpace) tex.colorSpace = T.SRGBColorSpace;
+  tex.anisotropy = 4;
+  const ready = (ctx && typeof globalThis.Image === 'function')
+    ? loadHikerPortraits().then((portraits) => {
+        drawHikerRoster(ctx, { w: 1152, h: 1120 }, portraits);
+        tex.needsUpdate = true;
+        return portraits.size;
+      }).catch((err) => { console.warn('Hiker roster:', err); return 0; })
+    : Promise.resolve(0);
+  _sharedHikerRoster = { T, doc, canvas: cv, tex, ready };
+  return _sharedHikerRoster;
+}
+
+// AG-132: the 3x2 hiker roster pinned on the rangers' search board beside the lockbox search log.
+export function buildRangerHikerRoster(T, doc) {
+  const g = new T.Group(); g.name = 'ranger-hiker-roster';
+  const roster = ensureHikerRosterTexture(T, doc);
+  const wood = std(T, 0x523e29, 0.96, 0), noteBacking = std(T, 0x3b2e20, 0.98, 0), noteScrap = std(T, 0x3e4236, 0.98, 0), brass = std(T, 0xb5954a, 0.46, 0.68);
+  box(T, g, 0.76, 0.72, 0.012, wood, 0, 0, -0.006);
+  // Cover the upper-right pale board patch above the search log with a dark weathered field-card backing so close night flashlights do not bloom on bare pale board geometry.
+  const upperCard = box(T, g, 0.31, 0.31, 0.012, noteBacking, 0.64, 0.12, -0.016);
+  upperCard.rotation.z = -0.08;
+  const upperNote = box(T, g, 0.24, 0.18, 0.014, noteScrap, 0.64, 0.12, -0.014);
+  upperNote.rotation.z = -0.08;
+  const mat = roster ? paperTexMat(T, roster.tex, 0xdad4c6, 1.0) : std(T, 0xdad4c6, 1.0);
+  const sheet = new T.Mesh(new T.PlaneGeometry(0.72, 0.695), mat);
+  sheet.name = 'ranger-hiker-roster-sheet';
+  sheet.position.set(0, 0, 0.002);
+  g.add(sheet);
+  for (const sx of [-0.33, 0.33]) for (const sy of [-0.32, 0.32]) {
+    cyl(T, g, 0.009, 0.009, 0.012, brass, sx, sy, 0.005, Math.PI / 2, 0, 0, 6);
+  }
+  g.userData = {
+    sheet,
+    canvas: roster ? roster.canvas : null,
+    tex: roster ? roster.tex : null,
+    portraitsReady: roster ? roster.ready : Promise.resolve(0)
+  };
+  return g;
+}
+
+// AG-132: physical paper copy of the 3x2 hiker roster clipped to a weathered field board on the hikers' camp supply chest,
+// propped against a rolled map tube over a dark oilskin groundcloth so both first-person and standard third-person views read it cleanly (rules 8, 12, 13).
+export function buildHikerCampRoster(T, doc) {
+  const g = new T.Group(); g.name = 'hikers-camp-roster';
+  const roster = ensureHikerRosterTexture(T, doc);
+  const oilskin = std(T, 0x484234, 0.98, 0), boardWood = std(T, 0x5c442c, 0.94, 0), clipSteel = std(T, 0x464d48, 0.55, 0.5), canvasRoll = std(T, 0x7b755b, 0.95, 0), strap = std(T, 0x3b3328, 0.9, 0);
+  // Dark weathered oilskin mat covering the pale chest lid so close-range night flashlights do not bloom around the roster
+  box(T, g, 0.75, 0.012, 0.49, oilskin, 0, 0.004, 0);
+  // Rolled map tube resting on the back of the chest lid, supporting the tilted clipboard (world-design rule 13)
+  cyl(T, g, 0.048, 0.048, 0.44, canvasRoll, 0, 0.054, -0.10, 0, 0, Math.PI / 2, 10);
+  for (const sx of [-0.14, 0.14]) cyl(T, g, 0.051, 0.051, 0.022, strap, sx, 0.054, -0.10, 0, 0, Math.PI / 2, 10);
+  // Tilted clipboard assembly resting on the chest lid and leaning against the map roll
+  const tilt = new T.Group(); tilt.name = 'hikers-camp-roster-board';
+  tilt.position.set(0, 0.104, 0.01);
+  tilt.rotation.x = -Math.PI / 2 + 0.50; // ~29 deg above horizontal toward +z
+  g.add(tilt);
+  box(T, tilt, 0.46, 0.45, 0.014, boardWood, 0, 0, -0.008);
+  box(T, tilt, 0.14, 0.032, 0.022, clipSteel, 0, 0.21, 0.005);
+  const mat = roster ? paperTexMat(T, roster.tex, 0xdad4c6, 1.0) : std(T, 0xdad4c6, 1.0);
+  const sheet = new T.Mesh(new T.PlaneGeometry(0.42, 0.408), mat);
+  sheet.name = 'hikers-camp-roster-sheet';
+  sheet.position.set(0, -0.006, 0.002);
+  tilt.add(sheet);
+  g.userData = {
+    sheet,
+    canvas: roster ? roster.canvas : null,
+    tex: roster ? roster.tex : null,
+    portraitsReady: roster ? roster.ready : Promise.resolve(0)
+  };
   return g;
 }
 

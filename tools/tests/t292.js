@@ -3,7 +3,8 @@
 //  - day 1 opens no lead; day 2's dawn opens the generator and says so ('story-lead');
 //  - a lead's mission done in play marks it done (the relay, by its own puzzle) and says so;
 //  - the next dawn opens the next lead;
-//  - with the gate on, a site whose lead isn't open is locked ('story') and an open one isn't; off, nothing changes;
+//  - with the gate on (as it is in play), a site whose lead isn't open is locked ('story') and an open one isn't; off
+//    (an automated check's start), nothing changes;
 //  - a new run starts the chain again.
 (async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
@@ -18,7 +19,7 @@
     const S = T.storyDbg, R = () => S.read();
     S.sync();
     ok(R().day === 1 && R().open.length === 0, 'day 1: no lead (' + R().open.join(',') + ')');
-    ok(R().gate === false, 'the gate is off until the way in lands (GP-19969)');
+    ok(R().gate === false && R().gatePlay === true, 'in play the gate is on (since GP-19969 and AG-125, 2026-10-26); an automated check starts with it off (' + R().gate + ', in play ' + R().gatePlay + ')');
 
     T.setDay(2); S.sync();
     ok(R().open.join() === 'generator', "day 2's dawn: the generator (" + R().open.join(',') + ')');

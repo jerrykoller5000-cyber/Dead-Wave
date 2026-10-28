@@ -3,7 +3,9 @@ export const BRUTE_ARMOR=Object.freeze({front:45,back:40,left:30,right:30,protec
 const partitions=new WeakMap(); // concept templates share their source geometry
 export function makeBruteArmor(T,g,s){
   const u=g.userData,plates={};
-  const colors=new Map([[0x494a43,'steel'],[0x996a43,'rust'],[0x8e3027,'sign'],[0xc3a253,'stripe']].map(([hex,name])=>{const c=new T.Color(hex);return [name,[c.r,c.g,c.b]];}));
+  // Match both the original plates and the GP-19970 material pass. Color changes
+  // must not silently remove breakable geometry from the combat partition.
+  const colors=[[0x494a43,'steel'],[0x7d817d,'steel'],[0x996a43,'rust'],[0x8e3027,'sign'],[0x424746,'sign'],[0xc3a253,'stripe']].map(([hex,name])=>{const c=new T.Color(hex);return [name,[c.r,c.g,c.b]];});
   const matches=(a,c)=>Math.abs(a[0]-c[0])+Math.abs(a[1]-c[1])+Math.abs(a[2]-c[2])<.0001;
   for(const [bone,shoulder]of[[u.torso,null],[u.armLG,'left'],[u.armRG,'right']]){
     for(const src of [...bone.children]){
@@ -33,7 +35,8 @@ export function makeBruteArmor(T,g,s){
 }
 export function resetBruteArmor(mesh){
   const u=mesh.userData;if(!u.brutePlates)return;
-  u.bruteArmor={front:BRUTE_ARMOR.front,back:BRUTE_ARMOR.back,left:BRUTE_ARMOR.left,right:BRUTE_ARMOR.right};
+  // A recipe can omit a plate. It then has no durability or protection.
+  u.bruteArmor={front:u.brutePlates.front?BRUTE_ARMOR.front:0,back:u.brutePlates.back?BRUTE_ARMOR.back:0,left:u.brutePlates.left?BRUTE_ARMOR.left:0,right:u.brutePlates.right?BRUTE_ARMOR.right:0};
   for(const group of Object.values(u.brutePlates)){group.scale.set(1,1,1);group.rotation.set(0,0,0);group.visible=true;group.userData._skinCollapsed=false;}
 }
 export function bruteArmorZone(z,info={}){
@@ -53,7 +56,8 @@ export function hitBruteArmor(z,amount,kind,info){
   const wear=ballistic?1:blade?.7:kind==='explosive'?.6:kind==='crush'?1:0,broken=[];
   if(!(amount>0)||!wear)return {factor,broken};
   for(const key of kind==='explosive'||kind==='crush'?Object.keys(a):[zone]){
-    if(!(a[key]>0))continue;a[key]=Math.max(0,a[key]-amount*wear);const group=u.brutePlates[key];
+    if(!(a[key]>0))continue;const group=u.brutePlates[key];if(!group){a[key]=0;continue;}
+    a[key]=Math.max(0,a[key]-amount*wear);
     if(!a[key]){z.mesh.updateMatrixWorld(true);broken.push({group,matrix:group.matrixWorld.clone()});group.scale.setScalar(1e-4);group.userData._skinCollapsed=true;group.updateMatrix?.();group.updateMatrixWorld?.(true);}
     else {const wearK=1-a[key]/BRUTE_ARMOR[key];group.rotation.x=wearK*.055;group.rotation.z=(key==='left'?-1:1)*wearK*.035;group.updateMatrix?.();group.updateMatrixWorld?.(true);}
   }

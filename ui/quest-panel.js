@@ -12,7 +12,7 @@ export function renderQuestPanel(parent, data, {doc, send}) {
   if(q.silenced)line(text('quest.silenced'),'quest-success');
   if(data.day>=20){line(text('quest.extraction'));return;}
   const tried=q.triedDay===data.day;
-  const locked=tried||data.phase!=='prep'||data.alarmActive||data.disabled||data.canSoundAlarm===false;
+  const locked=tried||data.phase!=='prep'||data.alarmActive||data.disabled||data.canUsePanel!==true;
   const details=doc.createElement('details'),summary=doc.createElement('summary');summary.textContent=text('quest.tune');details.append(summary);details.open=tried;section.append(details);
   const hint=doc.createElement('p');hint.textContent=text('quest.hint');details.append(hint);
   const slots=doc.createElement('div');slots.className='quest-marks quest-entry'+(tried&&!q.silenced?' quest-entry-failed':'');details.append(slots);

@@ -4,6 +4,10 @@
 //  there are rounds; the HUD shows the belt while he is on it. (t141 keeps the buy/mount/carry basics; t156 Brandt.)
 (async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
+  // GB-240: the 16 m hit check is real-renderer only, marked as t222's and t282's are (the test page's stand-in three has no working
+  // Matrix4.transpose; there 2-4 of 16 rounds land, qa/2026-10-27-CU-164/chunk-08.log and qa/2026-10-27-GB-240/rerun.log; real: 26/0). INFO there; the bar is unchanged.
+  const real = (() => { const m = new window.TT.THREE.Matrix4().makeRotationX(0.3), e = m.elements.slice(); m.transpose(); return m.elements[6] === e[9] && m.elements[9] === e[6] && e[6] !== e[9]; })();
+  const okReal = real ? ok : (c, m) => out.push('INFO ' + m + (c ? '' : ' (would fail; INFO on the test page)'));
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
   const until = async (f, ms) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (f()) return true; await wait(30); } return !!f(); };
   const simWait = async (s) => { const t0 = T.getSimTime(); while (T.getSimTime() - t0 < s) await wait(30); };
@@ -55,7 +59,7 @@
     // The reticle over a body aims at the body (updateMouseAim's rayPickZombie): at its chest.
     const zp = z.mesh.position.clone(); let gone = -1;
     for (let i = 0; i < 25; i++) { if (!z.mesh || !z.alive) { gone = i; break; } T.aimPointDbg(zp.x, zp.y + 1.0, zp.z); T.fireMortar(); await wait(110); }
-    ok(z.hp < 1e6 - 50, 'aimed at a zombie 16 m out, it hits it: ' + Math.round(1e6 - z.hp) + ' damage from ' + (499 - gun.belt) + ' rounds (zombie ' + f2(Math.hypot(zp.x - mz.x, zp.z - mz.z)) + ' m' + (gone >= 0 ? ', gone after ' + gone + ' rounds, alive ' + z.alive : '') + ')');
+    okReal(z.hp < 1e6 - 50, 'aimed at a zombie 16 m out, it hits it: ' + Math.round(1e6 - z.hp) + ' damage from ' + (499 - gun.belt) + ' rounds (zombie ' + f2(Math.hypot(zp.x - mz.x, zp.z - mz.z)) + ' m' + (gone >= 0 ? ', gone after ' + gone + ' rounds, alive ' + z.alive : '') + ')');
     T.clearZombies && T.clearZombies();
     // (5) R changes the belt: no fire meanwhile, then the belt fills from the reserve.
     const beltNow = gun.belt, res1 = R['7.62 belt'] | 0;

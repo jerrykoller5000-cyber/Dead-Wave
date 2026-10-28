@@ -1,0 +1,1055 @@
+{
+  "task": "AG-134",
+  "renderer": "WebGPU",
+  "hushProps": {
+    "checks": {
+      "noneState": {
+        "carriedVis": false,
+        "wiredVis": false
+      },
+      "carriedState": {
+        "carriedVis": true,
+        "wiredVis": false,
+        "carriedDraws": 1
+      },
+      "wiredState": {
+        "board": "wired",
+        "carriedVis": false,
+        "wiredVis": true,
+        "wiredDraws": 2
+      }
+    },
+    "shots": [
+      {
+        "kind": "carried",
+        "light": "noon",
+        "file": "qa/2026-10-26-AG-134/hush-carried-belt-noon.png"
+      },
+      {
+        "kind": "wired-close",
+        "light": "noon",
+        "file": "qa/2026-10-26-AG-134/hush-wired-radio-noon.png"
+      },
+      {
+        "kind": "carried",
+        "light": "overcast",
+        "file": "qa/2026-10-26-AG-134/hush-carried-belt-overcast.png"
+      },
+      {
+        "kind": "wired-close",
+        "light": "overcast",
+        "file": "qa/2026-10-26-AG-134/hush-wired-radio-overcast.png"
+      },
+      {
+        "kind": "carried",
+        "light": "dusk",
+        "file": "qa/2026-10-26-AG-134/hush-carried-belt-dusk.png"
+      },
+      {
+        "kind": "wired-close",
+        "light": "dusk",
+        "file": "qa/2026-10-26-AG-134/hush-wired-radio-dusk.png"
+      },
+      {
+        "kind": "carried",
+        "light": "night",
+        "file": "qa/2026-10-26-AG-134/hush-carried-belt-night.png"
+      },
+      {
+        "kind": "wired-close",
+        "light": "night",
+        "file": "qa/2026-10-26-AG-134/hush-wired-radio-night.png"
+      }
+    ]
+  },
+  "warrenWalk": {
+    "plan": {
+      "entry": {
+        "x": 51,
+        "y": -400,
+        "z": 1.2,
+        "yaw": 0
+      },
+      "ramps": [
+        12,
+        22
+      ],
+      "chambers": [
+        3,
+        8,
+        17
+      ],
+      "deep": [
+        23,
+        24,
+        25,
+        26
+      ],
+      "strongbox": {
+        "x": 75.8,
+        "y": -408,
+        "z": 39.2
+      },
+      "runeDoor": {
+        "x": 78,
+        "y": -408,
+        "z": 41.3,
+        "yaw": -3.141592653589793
+      },
+      "passage": {
+        "x": 81.2,
+        "y": -408,
+        "z": 39.8,
+        "r": 1.6
+      },
+      "routeCells": [
+        {
+          "id": 0,
+          "kind": "mouth",
+          "depth": 1,
+          "i": 8,
+          "j": 0,
+          "x": 51,
+          "z": 3,
+          "y": -400,
+          "roof": -396.6,
+          "open": [
+            false,
+            false,
+            true,
+            false
+          ]
+        },
+        {
+          "id": 1,
+          "kind": "tunnel",
+          "depth": 1,
+          "i": 8,
+          "j": 1,
+          "x": 51,
+          "z": 9,
+          "y": -400,
+          "roof": -396.6,
+          "open": [
+            true,
+            false,
+            true,
+            false
+          ]
+        },
+        {
+          "id": 2,
+          "kind": "tunnel",
+          "depth": 1,
+          "i": 8,
+          "j": 2,
+          "x": 51,
+          "z": 15,
+          "y": -400,
+          "roof": -396.6,
+          "open": [
+            true,
+            false,
+            false,
+            true
+          ]
+        },
+        {
+          "id": 3,
+          "kind": "chamber",
+          "depth": 1,
+          "i": 7,
+          "j": 2,
+          "x": 45,
+          "z": 15,
+          "y": -400,
+          "roof": -393.5,
+          "open": [
+            true,
+            true,
+            true,
+            false
+          ]
+        },
+        {
+          "id": 4,
+          "kind": "tunnel",
+          "depth": 1,
+          "i": 7,
+          "j": 3,
+          "x": 45,
+          "z": 21,
+          "y": -400,
+          "roof": -396.6,
+          "open": [
+            true,
+            true,
+            false,
+            true
+          ]
+        },
+        {
+          "id": 5,
+          "kind": "tunnel",
+          "depth": 1,
+          "i": 8,
+          "j": 3,
+          "x": 51,
+          "z": 21,
+          "y": -400,
+          "roof": -396.6,
+          "open": [
+            false,
+            true,
+            false,
+            true
+          ]
+        },
+        {
+          "id": 8,
+          "kind": "chamber",
+          "depth": 1,
+          "i": 9,
+          "j": 3,
+          "x": 57,
+          "z": 21,
+          "y": -400,
+          "roof": -393.5,
+          "open": [
+            false,
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "id": 10,
+          "kind": "tunnel",
+          "depth": 1,
+          "i": 10,
+          "j": 3,
+          "x": 63,
+          "z": 21,
+          "y": -400,
+          "roof": -396.6,
+          "open": [
+            true,
+            false,
+            false,
+            true
+          ]
+        },
+        {
+          "id": 12,
+          "kind": "ramp",
+          "depth": 1,
+          "i": 10,
+          "j": 2,
+          "x": 63,
+          "z": 15,
+          "y": -402,
+          "roof": -396.6,
+          "open": [
+            true,
+            false,
+            true,
+            false
+          ]
+        },
+        {
+          "id": 13,
+          "kind": "tunnel",
+          "depth": 2,
+          "i": 10,
+          "j": 1,
+          "x": 63,
+          "z": 9,
+          "y": -404,
+          "roof": -400.6,
+          "open": [
+            false,
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "id": 14,
+          "kind": "tunnel",
+          "depth": 2,
+          "i": 11,
+          "j": 1,
+          "x": 69,
+          "z": 9,
+          "y": -404,
+          "roof": -400.6,
+          "open": [
+            false,
+            true,
+            false,
+            true
+          ]
+        },
+        {
+          "id": 16,
+          "kind": "tunnel",
+          "depth": 2,
+          "i": 12,
+          "j": 1,
+          "x": 75,
+          "z": 9,
+          "y": -404,
+          "roof": -400.6,
+          "open": [
+            false,
+            false,
+            true,
+            true
+          ]
+        },
+        {
+          "id": 17,
+          "kind": "chamber",
+          "depth": 2,
+          "i": 12,
+          "j": 2,
+          "x": 75,
+          "z": 15,
+          "y": -404,
+          "roof": -397.5,
+          "open": [
+            true,
+            true,
+            true,
+            false
+          ]
+        },
+        {
+          "id": 18,
+          "kind": "tunnel",
+          "depth": 2,
+          "i": 12,
+          "j": 3,
+          "x": 75,
+          "z": 21,
+          "y": -404,
+          "roof": -400.6,
+          "open": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        {
+          "id": 19,
+          "kind": "tunnel",
+          "depth": 2,
+          "i": 13,
+          "j": 3,
+          "x": 81,
+          "z": 21,
+          "y": -404,
+          "roof": -400.6,
+          "open": [
+            false,
+            false,
+            true,
+            true
+          ]
+        },
+        {
+          "id": 22,
+          "kind": "ramp",
+          "depth": 2,
+          "i": 13,
+          "j": 4,
+          "x": 81,
+          "z": 27,
+          "y": -406,
+          "roof": -400.6,
+          "open": [
+            true,
+            false,
+            true,
+            false
+          ]
+        },
+        {
+          "id": 24,
+          "kind": "deep",
+          "depth": 3,
+          "i": 13,
+          "j": 5,
+          "x": 81,
+          "z": 33,
+          "y": -408,
+          "roof": -401.5,
+          "open": [
+            true,
+            false,
+            true,
+            true
+          ]
+        }
+      ]
+    },
+    "walk3P": {
+      "totalRouteCells": 17,
+      "minCamDist": 0.4,
+      "maxCamDist": 8.28,
+      "minRoofMargin": 0.7,
+      "maxCamJumpWithinCell": 4.623,
+      "outOfOpenCount": 0,
+      "poppedUpCount": 0,
+      "cornerTurnMaxDistStepM": 0.31,
+      "turnSamples": [
+        {
+          "deg": 0,
+          "camDist": 4.2,
+          "open": true
+        },
+        {
+          "deg": 60,
+          "camDist": 3.88,
+          "open": true
+        },
+        {
+          "deg": 120,
+          "camDist": 2.52,
+          "open": true
+        },
+        {
+          "deg": 180,
+          "camDist": 2.58,
+          "open": true
+        },
+        {
+          "deg": 240,
+          "camDist": 1.68,
+          "open": true
+        },
+        {
+          "deg": 300,
+          "camDist": 0.84,
+          "open": true
+        }
+      ],
+      "samples": [
+        {
+          "cellId": 0,
+          "kind": "mouth",
+          "depth": 1,
+          "playerY": -400,
+          "cam": [
+            51,
+            -397.71,
+            0.1
+          ],
+          "camDist": 2.9,
+          "camAboveFloor": 2.29,
+          "roofMargin": 1.11,
+          "open": true
+        },
+        {
+          "cellId": 1,
+          "kind": "tunnel",
+          "depth": 1,
+          "playerY": -400,
+          "cam": [
+            51,
+            -397.43,
+            1.65
+          ],
+          "camDist": 6.85,
+          "camAboveFloor": 2.57,
+          "roofMargin": 0.83,
+          "open": true
+        },
+        {
+          "cellId": 2,
+          "kind": "tunnel",
+          "depth": 1,
+          "playerY": -400,
+          "cam": [
+            51,
+            -397.34,
+            6.28
+          ],
+          "camDist": 8.22,
+          "camAboveFloor": 2.66,
+          "roofMargin": 0.74,
+          "open": true
+        },
+        {
+          "cellId": 3,
+          "kind": "chamber",
+          "depth": 1,
+          "playerY": -400,
+          "cam": [
+            45.95,
+            -397.3,
+            10.8
+          ],
+          "camDist": 4.22,
+          "camAboveFloor": 2.7,
+          "roofMargin": 0.7,
+          "open": true
+        },
+        {
+          "cellId": 4,
+          "kind": "tunnel",
+          "depth": 1,
+          "playerY": -400,
+          "cam": [
+            45.27,
+            -397.3,
+            13.18
+          ],
+          "camDist": 7.32,
+          "camAboveFloor": 2.7,
+          "roofMargin": 3.8,
+          "open": true
+        },
+        {
+          "cellId": 5,
+          "kind": "tunnel",
+          "depth": 1,
+          "playerY": -400,
+          "cam": [
+            50.08,
+            -397.96,
+            19.32
+          ],
+          "camDist": 1.73,
+          "camAboveFloor": 2.04,
+          "roofMargin": 1.36,
+          "open": true
+        },
+        {
+          "cellId": 8,
+          "kind": "chamber",
+          "depth": 1,
+          "playerY": -400,
+          "cam": [
+            55.73,
+            -397.96,
+            19.32
+          ],
+          "camDist": 1.85,
+          "camAboveFloor": 2.04,
+          "roofMargin": 4.46,
+          "open": true
+        },
+        {
+          "cellId": 10,
+          "kind": "tunnel",
+          "depth": 1,
+          "playerY": -400,
+          "cam": [
+            62.05,
+            -397.3,
+            16.8
+          ],
+          "camDist": 4.22,
+          "camAboveFloor": 2.7,
+          "roofMargin": 0.7,
+          "open": true
+        },
+        {
+          "cellId": 12,
+          "kind": "ramp",
+          "depth": 1,
+          "playerY": -401.84,
+          "cam": [
+            62.76,
+            -398.03,
+            14.2
+          ],
+          "camDist": 1.32,
+          "camAboveFloor": 3.81,
+          "roofMargin": 1.43,
+          "open": true
+        },
+        {
+          "cellId": 13,
+          "kind": "tunnel",
+          "depth": 2,
+          "playerY": -404,
+          "cam": [
+            63,
+            -401.5,
+            7.58
+          ],
+          "camDist": 1.92,
+          "camAboveFloor": 2.5,
+          "roofMargin": 0.9,
+          "open": true
+        },
+        {
+          "cellId": 14,
+          "kind": "tunnel",
+          "depth": 2,
+          "playerY": -404,
+          "cam": [
+            68.08,
+            -401.96,
+            7.32
+          ],
+          "camDist": 1.73,
+          "camAboveFloor": 2.04,
+          "roofMargin": 1.36,
+          "open": true
+        },
+        {
+          "cellId": 16,
+          "kind": "tunnel",
+          "depth": 2,
+          "playerY": -404,
+          "cam": [
+            74.08,
+            -401.96,
+            7.32
+          ],
+          "camDist": 1.73,
+          "camAboveFloor": 2.04,
+          "roofMargin": 1.36,
+          "open": true
+        },
+        {
+          "cellId": 17,
+          "kind": "chamber",
+          "depth": 2,
+          "playerY": -404,
+          "cam": [
+            74.82,
+            -401.54,
+            8.21
+          ],
+          "camDist": 6.29,
+          "camAboveFloor": 2.46,
+          "roofMargin": 0.94,
+          "open": true
+        },
+        {
+          "cellId": 18,
+          "kind": "tunnel",
+          "depth": 2,
+          "playerY": -404,
+          "cam": [
+            74.95,
+            -401.37,
+            12.44
+          ],
+          "camDist": 8.06,
+          "camAboveFloor": 2.63,
+          "roofMargin": 3.87,
+          "open": true
+        },
+        {
+          "cellId": 19,
+          "kind": "tunnel",
+          "depth": 2,
+          "playerY": -404,
+          "cam": [
+            80.08,
+            -401.96,
+            19.32
+          ],
+          "camDist": 1.73,
+          "camAboveFloor": 2.04,
+          "roofMargin": 1.36,
+          "open": true
+        },
+        {
+          "cellId": 22,
+          "kind": "ramp",
+          "depth": 2,
+          "playerY": -405.84,
+          "cam": [
+            80.82,
+            -402.02,
+            20.21
+          ],
+          "camDist": 6.29,
+          "camAboveFloor": 3.82,
+          "roofMargin": 1.42,
+          "open": true
+        },
+        {
+          "cellId": 24,
+          "kind": "deep",
+          "depth": 3,
+          "playerY": -408,
+          "cam": [
+            80.97,
+            -403.8,
+            25.43
+          ],
+          "camDist": 7.07,
+          "camAboveFloor": 4.2,
+          "roofMargin": 3.2,
+          "open": true
+        }
+      ]
+    }
+  },
+  "warrenStops": [
+    {
+      "view": "3p",
+      "stop": "1-mouth-entry",
+      "label": "Depth 1 Mouth (entry)",
+      "playerPos": [
+        51,
+        -400,
+        1.2
+      ],
+      "camPos": [
+        51.01,
+        -398.18,
+        0.36
+      ],
+      "camDistM": 0.84,
+      "camAboveFloorM": 1.82,
+      "roofY": -396.6,
+      "open": true,
+      "file": "qa/2026-10-26-AG-134/warren-3p-1-mouth-entry.png"
+    },
+    {
+      "view": "1p",
+      "stop": "1-mouth-entry",
+      "label": "Depth 1 Mouth (entry)",
+      "playerPos": [
+        51,
+        -400,
+        1.2
+      ],
+      "camPos": [
+        51,
+        -398.56,
+        1.27
+      ],
+      "camDistM": 0.07,
+      "camAboveFloorM": 1.44,
+      "roofY": -396.6,
+      "open": true,
+      "file": "qa/2026-10-26-AG-134/warren-1p-1-mouth-entry.png"
+    },
+    {
+      "view": "3p",
+      "stop": "2-tunnel-nearwall",
+      "label": "Depth 1 Tunnel Near Wall",
+      "playerPos": [
+        52.05,
+        -400,
+        7.2
+      ],
+      "camPos": [
+        51.97,
+        -397.4,
+        3.05
+      ],
+      "camDistM": 4.15,
+      "camAboveFloorM": 2.6,
+      "roofY": -396.6,
+      "open": true,
+      "file": "qa/2026-10-26-AG-134/warren-3p-2-tunnel-nearwall.png"
+    },
+    {
+      "view": "1p",
+      "stop": "2-tunnel-nearwall",
+      "label": "Depth 1 Tunnel Near Wall",
+      "playerPos": [
+        52.05,
+        -400,
+        7.2
+      ],
+      "camPos": [
+        52.09,
+        -398.53,
+        7.12
+      ],
+      "camDistM": 0.09,
+      "camAboveFloorM": 1.47,
+      "roofY": -396.6,
+      "open": true,
+      "file": "qa/2026-10-26-AG-134/warren-1p-2-tunnel-nearwall.png"
+    },
+    {
+      "view": "3p",
+      "stop": "3-gallery-chamber",
+      "label": "Depth 1 Gallery Chamber",
+      "playerPos": [
+        45,
+        -400,
+        15
+      ],
+      "camPos": [
+        44.88,
+        -397.38,
+        11.03
+      ],
+      "camDistM": 3.97,
+      "camAboveFloorM": 2.62,
+      "roofY": -396.6,
+      "open": true,
+      "file": "qa/2026-10-26-AG-134/warren-3p-3-gallery-chamber.png"
+    },
+    {
+      "view": "1p",
+      "stop": "3-gallery-chamber",
+      "label": "Depth 1 Gallery Chamber",
+      "playerPos": [
+        45,
+        -400,
+        15
+      ],
+      "camPos": [
+        44.97,
+        -398.52,
+        14.92
+      ],
+      "camDistM": 0.09,
+      "camAboveFloorM": 1.48,
+      "roofY": -393.5,
+      "open": true,
+      "file": "qa/2026-10-26-AG-134/warren-1p-3-gallery-chamber.png"
+    },
+    {
+      "view": "3p",
+      "stop": "4-ramp-d1-d2",
+      "label": "Ramp 1 (Depth 1 -> 2)",
+      "playerPos": [
+        63,
+        -402.17,
+        15
+      ],
+      "camPos": [
+        62.95,
+        -399.85,
+        12.06
+      ],
+      "camDistM": 2.94,
+      "camAboveFloorM": 2.32,
+      "roofY": -396.6,
+      "open": true,
+      "file": "qa/2026-10-26-AG-134/warren-3p-4-ramp-d1-d2.png"
+    },
+    {
+      "view": "1p",
+      "stop": "4-ramp-d1-d2",
+      "label": "Ramp 1 (Depth 1 -> 2)",
+      "playerPos": [
+        63,
+        -402.17,
+        15
+      ],
+      "camPos": [
+        63.02,
+        -400.59,
+        14.75
+      ],
+      "camDistM": 0.25,
+      "camAboveFloorM": 1.58,
+      "roofY": -396.6,
+      "open": true,
+      "file": "qa/2026-10-26-AG-134/warren-1p-4-ramp-d1-d2.png"
+    },
+    {
+      "view": "3p",
+      "stop": "5-narrows-chamber",
+      "label": "Depth 2 Narrows Chamber",
+      "playerPos": [
+        75,
+        -404,
+        15
+      ],
+      "camPos": [
+        75.05,
+        -401.37,
+        11.39
+      ],
+      "camDistM": 3.61,
+      "camAboveFloorM": 2.63,
+      "roofY": -400.6,
+      "open": true,
+      "file": "qa/2026-10-26-AG-134/warren-3p-5-narrows-chamber.png"
+    },
+    {
+      "view": "1p",
+      "stop": "5-narrows-chamber",
+      "label": "Depth 2 Narrows Chamber",
+      "playerPos": [
+        75,
+        -404,
+        15
+      ],
+      "camPos": [
+        75,
+        -402.51,
+        14.9
+      ],
+      "camDistM": 0.1,
+      "camAboveFloorM": 1.49,
+      "roofY": -397.5,
+      "open": true,
+      "file": "qa/2026-10-26-AG-134/warren-1p-5-narrows-chamber.png"
+    },
+    {
+      "view": "3p",
+      "stop": "6-ramp-d2-d3",
+      "label": "Ramp 2 (Depth 2 -> 3)",
+      "playerPos": [
+        81,
+        -406.17,
+        27
+      ],
+      "camPos": [
+        80.95,
+        -403.03,
+        23
+      ],
+      "camDistM": 4,
+      "camAboveFloorM": 3.15,
+      "roofY": -400.6,
+      "open": true,
+      "file": "qa/2026-10-26-AG-134/warren-3p-6-ramp-d2-d3.png"
+    },
+    {
+      "view": "1p",
+      "stop": "6-ramp-d2-d3",
+      "label": "Ramp 2 (Depth 2 -> 3)",
+      "playerPos": [
+        81,
+        -406.17,
+        27
+      ],
+      "camPos": [
+        81.01,
+        -404.55,
+        26.91
+      ],
+      "camDistM": 0.09,
+      "camAboveFloorM": 1.62,
+      "roofY": -400.6,
+      "open": true,
+      "file": "qa/2026-10-26-AG-134/warren-1p-6-ramp-d2-d3.png"
+    },
+    {
+      "view": "3p",
+      "stop": "7-deep-chamber",
+      "label": "Depth 3 The Deep (Rune Door & Strongbox)",
+      "playerPos": [
+        78,
+        -408,
+        36
+      ],
+      "camPos": [
+        77.95,
+        -405.38,
+        31.91
+      ],
+      "camDistM": 4.09,
+      "camAboveFloorM": 2.62,
+      "roofY": -401.5,
+      "open": true,
+      "file": "qa/2026-10-26-AG-134/warren-3p-7-deep-chamber.png"
+    },
+    {
+      "view": "1p",
+      "stop": "7-deep-chamber",
+      "label": "Depth 3 The Deep (Rune Door & Strongbox)",
+      "playerPos": [
+        78,
+        -408,
+        36
+      ],
+      "camPos": [
+        78.03,
+        -406.52,
+        35.91
+      ],
+      "camDistM": 0.09,
+      "camAboveFloorM": 1.48,
+      "roofY": -401.5,
+      "open": true,
+      "file": "qa/2026-10-26-AG-134/warren-1p-7-deep-chamber.png"
+    }
+  ],
+  "worldChanges": {
+    "hqUnpowered": {
+      "powered": false,
+      "bay": 0.04,
+      "flood": 0,
+      "beacon": 0,
+      "file": "qa/2026-10-26-AG-134/cl263-night2-hq-unpowered.png"
+    },
+    "hqPowered": {
+      "powered": true,
+      "bay": 1.85,
+      "flood": 2.4,
+      "file": "qa/2026-10-26-AG-134/cl263-night2-hq-powered.png"
+    },
+    "truck": {
+      "unlocked": true,
+      "lampOn": true,
+      "beforeFile": "qa/2026-10-26-AG-134/cl263-truck-night-chained-dark.png",
+      "afterFile": "qa/2026-10-26-AG-134/cl263-truck-night-cut-headlamp.png"
+    }
+  },
+  "tests": {
+    "t302": {
+      "pass": 17,
+      "fail": 0,
+      "lines": [
+        "PASS down into the iron warren",
+        "PASS west of the mouth is rock (no cell)",
+        "PASS the ground in the rock is his last floor (-400.00, floor -400.00), not the valley 400 m up",
+        "PASS walked into the rock, he is back on the floor (51.00, -400.00, 1.70)",
+        "PASS thrown out past every cell, he is put back on the floor, not popped up (-400.0)",
+        "PASS the mouth at eye height is open",
+        "PASS the rock and over the roof are not",
+        "PASS the third-person camera is in the warren, under the roof (51.0, -398.2, 0.4; roof -396.6)",
+        "PASS up again",
+        "PASS no board: no Hush",
+        "PASS a mouth with no Hush: no way down yet (hush.none)",
+        "PASS the vault's first lift carries the spare board (carried)",
+        "PASS and only the first",
+        "PASS wired at the radio set",
+        "PASS not his until the dawn",
+        "PASS the next dawn: the Hush, charged",
+        "PASS no page errors"
+      ]
+    },
+    "t303": {
+      "pass": 13,
+      "fail": 0,
+      "lines": [
+        "PASS the story gate off: the HQ has power and the mast is live, as every other check expects",
+        "PASS the first day and night: the generator still runs",
+        "PASS the second dawn, no can poured: no power (bay lamps 0.04, the fans still)",
+        "PASS the relay not up: the mast is dead",
+        "PASS the night came",
+        "PASS night with no power and no relay: the flood dark, the mast dark (0, 0)",
+        "PASS the can poured: power",
+        "PASS the lamps stutter as it comes back (1.30 s of it left)",
+        "PASS then the bay lamps and the flood are on (1.6968187773034609, 2.4)",
+        "PASS the relay up: the mast's light blinks at night (0 to 3.2)",
+        "PASS chained: the truck is dark",
+        "PASS cut: its headlamp burns at night",
+        "PASS no page errors"
+      ]
+    },
+    "t215": {
+      "pass": 4,
+      "fail": 0,
+      "lines": [
+        "PASS read index.html and the scripts and styles the game loaded (229 files)",
+        "PASS no broken characters in them",
+        "PASS the HUD reads clean: timeLine \"Daylight · 08:22 · Grace\", tacticalLine \"NVG — · Laser — · Light —\", grenadeChips \"G×5H×0\", ammoDetail \"12 / 12  ·  50 Bullets  ·  SEMI\", hpNum \"100 / 100\"",
+        "PASS and shows its dots and times signs (NVG — · Laser — · Light — / G×5H×0)"
+      ]
+    }
+  },
+  "errors": []
+}

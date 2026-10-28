@@ -1,0 +1,14 @@
+{
+  "shots": [
+    {"target":"zombie.military:statue","view":"front","time":"noon","wait":300,"size":"1280x720","out":"handoffs/GP-19970/military-chest-after/noon-front.png"},
+    {"target":"zombie.military:statue","view":"side","time":"noon","wait":300,"size":"1280x720","out":"handoffs/GP-19970/military-chest-after/noon-side.png"},
+    {"target":"zombie.military:statue","view":"front","time":"dusk","wait":300,"size":"1280x720","out":"handoffs/GP-19970/military-chest-after/dusk-front.png"},
+    {"target":"zombie.military:statue","view":"side","time":"dusk","wait":300,"size":"1280x720","out":"handoffs/GP-19970/military-chest-after/dusk-side.png"},
+    {"target":"zombie.military:statue","view":"front","time":"night","wait":300,"size":"1280x720","out":"handoffs/GP-19970/military-chest-after/night-front.png"},
+    {"target":"zombie.military:statue","view":"side","time":"night","wait":300,"size":"1280x720","out":"handoffs/GP-19970/military-chest-after/night-side.png"},
+    {"target":"zombie.military:statue","view":"front","time":"noon","dist":8,"fov":65,"wait":300,"size":"1280x720","out":"handoffs/GP-19970/military-chest-after/gameplay-distance.png"}
+  ],
+  "out":"handoffs/GP-19970/military-chest-after",
+  "sheet":true,
+  "cols":4
+}

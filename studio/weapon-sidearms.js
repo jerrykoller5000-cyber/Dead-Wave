@@ -223,7 +223,7 @@ export function makePistolModel(ctx) {
 }
 
 export function makeRevolverModel(ctx) {
-  const { THREE, gunKit, gunBand, gunEffects, finishGun, steelMat, woodMat, woodDark, gunDark, gunAccent, gunRubber } = ctx;
+  const { THREE, gunKit, gunBand, gunEffects, finishGun, revolverSteel: steelMat, woodMat, woodDark, gunDark, gunAccent, gunRubber } = ctx;   // GB-233: its own steel
   const gun = new THREE.Group();
   const K = gunKit(gun);
   // Stainless frame round the cylinder's window: the recoil shield and hammer housing, the top strap, the
@@ -234,7 +234,7 @@ export function makeRevolverModel(ctx) {
   K.lathe([[0, -.03], [.047, -.03], [.05, -.027], [.047, -.022], [0, -.022]], steelMat, {y: .05, seg: 28});   // recoil shield (GB-177: to the slimmer cylinder)
   // Keep the thin bridges' bevels below half their height so their inset caps
   // cannot fold through themselves into pointed ears at the barrel lug.
-  K.slab([[-.049, .106], [-.042, .111], [.057, .111], [.069, .109], [.077, .103], [.073, .098], [-.041, .098], [-.049, .101]], .044, steelMat, {bevel: .0025, segs: 3});
+  K.slab([[-.049, .108], [-.042, .114], [.057, .114], [.069, .112], [.077, .105], [.073, .097], [-.041, .097], [-.049, .101]], .04, steelMat, {bevel: .0025, segs: 3});   // GB-233 r4: the top strap a little taller, standing clear over the cylinder
   K.slab([[-.031, .003], [.075, .003], [.083, -.006], [.072, -.012], [.011, -.014], [-.015, -.012], [-.031, -.005]], .066, steelMat, {bevel: .003, segs: 3});
   // GB-173: the frame's front starts 6 mm ahead of the cylinder, so the barrel's forcing cone shows in the gap.
   K.slab([[.066, .111], [.072, .11], [.087, .098], [.095, .084], [.095, .013], [.09, -.002], [.075, -.011], [.066, -.012]], .06, steelMat, {bevel: .008, segs: 4});
@@ -279,9 +279,12 @@ export function makeRevolverModel(ctx) {
   // GB-177 (pass 2: barrel and cylinder too heavy): a slimmer barrel, underlug and rib; the bore stays at y 0.083.
   // GB-180 (close-up: the barrel read as a thin tube): a heavier barrel and a full-width underlug and rib, one piece.
   // GB-180 pass 6 (vs a real 6-inch revolver the barrel ran ~3x the cylinder): 50 mm shorter; rib, lug, sight, muzzle follow.
-  K.lathe([[0, .09], [.023, .09], [.023, .11], [.021, .134], [.021, .17], [.021, .321], [.0195, .328], [.017, .332], [0, .332]], steelMat, {y: .083, seg: 24});
-  K.slab([[.09, .09], [.32, .09], [.329, .084], [.331, .066], [.328, .052], [.315, .044], [.15, .042], [.125, .039], [.105, .034], [.09, .035]], .04, steelMat, {bevel: .009, segs: 4});
-  K.slab([[.081, .109], [.102, .106], [.133, .104], [.322, .104], [.328, .1], [.325, .092], [.15, .092], [.105, .094], [.085, .1]], .022, steelMat, {bevel: .004, segs: 3});
+  K.lathe([[0, .09], [.02, .09], [.02, .11], [.017, .134], [.017, .17], [.017, .321], [.0158, .328], [.0138, .332], [0, .332]], steelMat, {y: .083, seg: 24});   // GB-233 r4: thinner (was .021)
+  K.slab([[.09, .086], [.32, .086], [.329, .08], [.331, .066], [.328, .054], [.315, .048], [.15, .046], [.125, .042], [.105, .036], [.09, .036]], .032, steelMat, {bevel: .008, segs: 4});   // GB-233 r4: underlug slimmer with the barrel
+  K.slab([[.081, .109], [.102, .104], [.133, .101], [.322, .101], [.328, .098], [.325, .092], [.15, .092], [.105, .094], [.085, .1]], .016, steelMat, {bevel: .003, segs: 3});
+  // GB-233 r4: the crane, on his left of the window's front, the arm the cylinder swings out on, and its pivot screw.
+  K.slab([[.04, .03], [.066, .028], [.066, -.01], [.04, -.006]], .006, steelMat, {x: -.0335, bevel: .0015});
+  K.cyl(.0032, .0032, .0016, gunAccent, -.0368, .002, .058, null, 10, 'x');
   // GB-173 (Jerry: the sights did not line up): the front blade's top is level with the rear notch (y 0.121) on x 0.
   K.slab([[0.298, 0.097], [0.326, 0.097], [0.326, 0.121], [0.31, 0.121]], 0.005, gunDark, { bevel: 0.001 });
   // the ejector rod on the cylinder's axis, inside the underlug
@@ -319,9 +322,11 @@ export function makeUziModel(ctx) {
     for (const z of [-.112, .073]) K.cyl(.0038, .0038, .002, gunAccent, sx * .0514, -.025, z, null, 12, 'x');
   }
   K.slab([[-.13, .074], [.2, .074], [.2, .09], [.192, .098], [-.11, .104], [-.123, .1], [-.13, .092]], .09, gunMid, {bevel: .009, segs: 3});
-  K.cyl(0.014, 0.014, 0.03, gunDark, 0, 0.114, 0.11, null, 8, 'y');
-  K.cyl(.016, .016, .014, gunDark, 0, .131, .11, null, 20, 'y');
-  for (let j = 0; j < 16; j++) {const a = j / 16 * Math.PI * 2; flatDetail(THREE, gun, gunAccent, .002, .011, .002, Math.cos(a) * .0157, .131, .11 + Math.sin(a) * .0157);}
+  // GB-235 (Jerry: "Uzi sights need to be usable, right now the charging handle gets in the way"): the knob sits low in the
+  // top cover's groove like the real one, its top at y .122, 7 mm under the line from the rear aperture to the post (.129 here); was .138.
+  K.cyl(0.014, 0.014, 0.03, gunDark, 0, 0.098, 0.11, null, 8, 'y');
+  K.cyl(.016, .016, .014, gunDark, 0, .115, .11, null, 20, 'y');
+  for (let j = 0; j < 16; j++) {const a = j / 16 * Math.PI * 2; flatDetail(THREE, gun, gunAccent, .002, .011, .002, Math.cos(a) * .0157, .115, .11 + Math.sin(a) * .0157);}
   // Sights: slim ears, a rear aperture you can look through, a hooded front post.
   for (const sx of [-1, 1]) {
     K.slab([[-.096, .100], [-.096, .142], [-.088, .158], [-.072, .158], [-.064, .142], [-.064, .100]], .006, gunDark, {x: sx * .018, bevel: .0015, segs: 2});
@@ -345,26 +350,30 @@ export function makeUziModel(ctx) {
   K.slab([[-.177, .019], [-.147, .019], [-.131, .032], [-.142, .049], [-.163, .054], [-.182, .04]], .03498504, gunMid, {x: .06, bevel: .005, segs: 2});
   // Grip. The safety is the same polymer as the grip and follows the backstrap.
   // Centre line is still gripOutline(-0.02, -0.1, 0.16, …, 0.22): the palm stays at the hold.
-  K.slab(shapedGrip(-0.02, -0.1, 0.16, 0.072, 0.22, [
+  // GB-236 (Jerry: "way too skinny and not proportionate to the gun"): the real Uzi's grip is a block the magazine runs
+  // up through, about 3/4 the receiver's width and deeper front to back than a pistol's. Width 56 -> 76 mm, depth
+  // 56 -> 88 mm (d 0.072 -> 0.12), grown mostly rearward (centre 10 mm back) so the trigger keeps 21 mm of finger room.
+  const UZI_GZ = -0.030, UZI_GD = 0.12;
+  K.slab(shapedGrip(UZI_GZ, -0.1, 0.16, UZI_GD, 0.22, [
     [-0.04, 0.014], [0.12, 0.026], [0.36, 0.020], [0.62, 0.028], [0.86, 0.020], [1.0, 0.006],
     [1.02, -0.010], [0.90, -0.028], [0.60, -0.034], [0.30, -0.024], [0.08, -0.016], [-0.04, -0.028], [-0.07, -0.006]
-  ]), 0.056, gunPoly, { bevel: 0.008, segs: 3 });
-  K.slab(shapedGrip(-0.02, -0.1, 0.16, 0.072, 0.22, [
+  ]), 0.078, gunPoly, { bevel: 0.010, segs: 3 });   // GB-236: 78 mm across (was 56) under the 98 mm receiver
+  K.slab(shapedGrip(UZI_GZ, -0.1, 0.16, UZI_GD, 0.22, [
     [0.10, -0.020], [0.28, -0.026], [0.55, -0.032], [0.78, -0.026],
     [0.78, -0.016], [0.55, -0.020], [0.28, -0.014], [0.10, -0.010]
-  ]), 0.046, gunPoly, { bevel: 0.004, segs: 2 });
+  ]), 0.068, gunPoly, { bevel: 0.004, segs: 2 });
   K.slab(gunBand([[0.09, -0.036], [0.094, -0.064], [0.072, -0.078], [0.028, -0.078], [0.014, -0.062]], 0.007), 0.03, gunDark, { bevel: 0.004 });   // GB-180: a moulded guard, not a wire (pass 4: as wide as a real guard)
   // GB-175: trigger face toward the grip, tip curling forward (the convention Jerry set on the revolver and sniper).
   // GB-180: a solid trigger blade (wide at the root, tapering to the curled tip), not a wire, moved to mid-guard.
   K.slab([[0.0574, -0.0411], [0.0492, -0.0532], [0.0498, -0.0617], [0.0582, -0.0692], [0.0538, -0.0748], [0.0422, -0.0663], [0.0388, -0.0508], [0.0466, -0.0349]], 0.011, gunAccent, { bevel: 0.002 });
   K.box(0.006, 0.02, 0.02, gunDark, -0.052, -0.02, 0.0);
   for (const sx of [-1, 1]) {
-    const panel = shapedGrip(-0.02, -0.1, 0.16, 0.072, 0.22, [[0.22, 0.010], [0.48, 0.012], [0.76, 0.008], [0.80, -0.008], [0.62, -0.018], [0.36, -0.012], [0.18, -0.002]]);
-    K.slab(panel, .0016, gunPoly, {x: sx * .0282, bevel: .0006});
-    for (let i = 0; i < 6; i++) K.slab(gunBand(shapedGrip(-0.02, -0.1, 0.16, 0.072, 0.22, [[0.30 + i * 0.08, 0.006], [0.34 + i * 0.08, -0.008]]), .0008), .001, gunDark, {x: sx * .029, bevel: .0003});
+    const panel = shapedGrip(UZI_GZ, -0.1, 0.16, UZI_GD, 0.22, [[0.22, 0.010], [0.48, 0.012], [0.76, 0.008], [0.80, -0.008], [0.62, -0.018], [0.36, -0.012], [0.18, -0.002]]);
+    K.slab(panel, .0016, gunPoly, {x: sx * .0392, bevel: .0006});
+    for (let i = 0; i < 6; i++) K.slab(gunBand(shapedGrip(UZI_GZ, -0.1, 0.16, UZI_GD, 0.22, [[0.30 + i * 0.08, 0.006], [0.34 + i * 0.08, -0.008]]), .0008), .001, gunDark, {x: sx * .040, bevel: .0003});
     for (const [u, v] of [[0.32, -0.004], [0.72, -0.006]]) {
-      const [z, y] = shapedGrip(-0.02, -0.1, 0.16, 0.072, 0.22, [[u, v]])[0];
-      K.cyl(.0026, .0026, .0016, gunAccent, sx * .0292, y, z, null, 8, 'x');
+      const [z, y] = shapedGrip(UZI_GZ, -0.1, 0.16, UZI_GD, 0.22, [[u, v]])[0];
+      K.cyl(.0026, .0026, .0016, gunAccent, sx * .0402, y, z, null, 8, 'x');
     }
   }
   K.cyl(.01, .01, .003, gunAccent, -.0515, .033, .006, null, 16, 'x');
@@ -439,14 +448,17 @@ export function makeKnifeModel(ctx) {
   for (const z of [-0.11, -0.07, -0.03]) M.cyl(.005, .005, .036, brassMat, 0, 0, z, mc, 14, 'x');
   M.box(0.05, 0.075, 0.02, gunDark, 0, 0, 0.03, 0, 0, 0, mc, 0.006);
   groundBlade(THREE, mc, gunAccent, edgeMat, [[.035, .031, -.031, 0], [.08, .0307, -.0346, 0], [.1, .0306, -.038, 1], [.44, .0283, -.08, 1], [.48, .028, -.086, 0], [.5, .026, -.088, 0], [.56, .02, -.078, 0], [.6, .012, -.062, 0], [.63, .004, -.04, 0], [.655, -.004, -.018, 0], [.67, -.008, -.008, 0]], {fuller: .019, edgeWidth: .012});   // GB-180 pass 7: a swept point, not a squared end
-  // Sawback serrated edge along the upper spine of the machete (16 raked double-bevelled teeth).
+  // GB-235 (Jerry: "Machete serrations should be on blade not on top of machete"): the 16 raked teeth run along the cutting
+  // edge (the lower edge groundBlade grinds, z 0.14-0.54), pointing down from it; the spine is plain.
   {
-    const sawPos = [], sawUv = [], teeth = 16, zStart = 0.14, zEnd = 0.54, step = (zEnd - zStart) / teeth, halfX = 0.0038;
-    const spineY = (z) => z <= 0.44 ? 0.0306 - (z - 0.1) * (0.0023 / 0.34) : z <= 0.48 ? 0.0283 - (z - 0.44) * (0.0003 / 0.04) : z <= 0.5 ? 0.028 - (z - 0.48) * (0.002 / 0.02) : 0.026 - (z - 0.5) * (0.006 / 0.06);
-    const addTri = (a, b, c) => { sawPos.push(...a, ...b, ...c); sawUv.push(a[2] * 4, a[1] * 4, b[2] * 4, b[1] * 4, c[2] * 4, c[1] * 4); };
+    const sawPos = [], sawUv = [], teeth = 16, zStart = 0.14, zEnd = 0.54, step = (zEnd - zStart) / teeth, halfX = 0.0024;
+    const EDGE = [[.1, -.038], [.44, -.08], [.48, -.086], [.5, -.088], [.56, -.078]];   // groundBlade's bottom line above
+    const edgeY = (z) => { for (let k = 0; k + 1 < EDGE.length; k++) if (z <= EDGE[k + 1][0]) return EDGE[k][1] + (z - EDGE[k][0]) / (EDGE[k + 1][0] - EDGE[k][0]) * (EDGE[k + 1][1] - EDGE[k][1]); return EDGE[EDGE.length - 1][1]; };
+    const addTri = (a, c, b) => { sawPos.push(...a, ...b, ...c);   // wound the other way: the teeth are mirrored downward
+ sawUv.push(a[2] * 4, a[1] * 4, b[2] * 4, b[1] * 4, c[2] * 4, c[1] * 4); };
     for (let i = 0; i < teeth; i++) {
       const z0 = zStart + i * step, zPeak = z0 + step * 0.28, zGullet = z0 + step * 0.86, z1 = z0 + step;
-      const y0 = spineY(z0) - 0.0032, yPeak = spineY(zPeak) + 0.0082, yGullet = spineY(zGullet) - 0.0018, y1 = spineY(z1) - 0.0032;
+      const y0 = edgeY(z0) + 0.0032, yPeak = edgeY(zPeak) - 0.0060, yGullet = edgeY(zGullet) + 0.0018, y1 = edgeY(z1) + 0.0032;
       const L0 = [halfX, y0, z0], R0 = [-halfX, y0, z0], L1 = [halfX, y1, z1], R1 = [-halfX, y1, z1];
       const P = [0, yPeak, zPeak], G = [0, yGullet, zGullet], LG = [halfX * 0.7, yGullet, zGullet], RG = [-halfX * 0.7, yGullet, zGullet];
       // Left bevel faces (+x)

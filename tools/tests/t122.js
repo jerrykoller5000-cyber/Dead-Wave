@@ -32,10 +32,8 @@
     T.buySuppressor('m4');
     ok(T.getBank() === bank - spent, 'buying it again does not charge');
     T.openShop(true);
-    const weapons = document.querySelector('[data-shop-page="weapons"]');
-    if (weapons) weapons.click();
-    const tab = document.querySelector('[data-shop-page="upgrades"]');
-    if (tab) tab.click();
+    const loadout = document.querySelector('#shopTabs [data-shop-page="loadout"]');
+    if (loadout) loadout.click();
     const text = (document.getElementById('shopList') || {}).innerText || '';
     ok(/suppressor/i.test(text), 'the upgrades tab lists a suppressor');
     ok(!/AA-?12[^\n]*suppressor/i.test(text), 'the AA-12 has no suppressor row');

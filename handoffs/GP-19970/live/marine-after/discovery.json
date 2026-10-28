@@ -1,0 +1,316 @@
+{
+  "capabilities": {
+    "apiVersion": 1,
+    "sessionSchemaVersion": 1,
+    "modelControls": true,
+    "cancellableJobs": true,
+    "allVariantChecks": true,
+    "realGame": true,
+    "rewind": "rig transforms; resume returns to the present",
+    "speed": {
+      "min": 0.05,
+      "max": 2
+    }
+  },
+  "moves": [
+    {
+      "id": "stand",
+      "name": "Standing, unarmed",
+      "cat": "Poses & holds"
+    },
+    {
+      "id": "stand-armed",
+      "name": "Standing, the gun ready",
+      "cat": "Poses & holds"
+    },
+    {
+      "id": "aim",
+      "name": "Shoulder aim (right mouse)",
+      "cat": "Poses & holds"
+    },
+    {
+      "id": "akimbo-pistol",
+      "name": "Akimbo pistols",
+      "cat": "Poses & holds"
+    },
+    {
+      "id": "akimbo-uzi",
+      "name": "Akimbo Uzis",
+      "cat": "Poses & holds"
+    },
+    {
+      "id": "akimbo-revolver",
+      "name": "Akimbo revolvers",
+      "cat": "Poses & holds"
+    },
+    {
+      "id": "smoke",
+      "name": "Bored: the cigarette (idle)",
+      "cat": "Poses & holds"
+    },
+    {
+      "id": "walk",
+      "name": "Walk forward",
+      "cat": "Locomotion"
+    },
+    {
+      "id": "walk-back",
+      "name": "Walk backward",
+      "cat": "Locomotion"
+    },
+    {
+      "id": "strafe-left",
+      "name": "Strafe left",
+      "cat": "Locomotion"
+    },
+    {
+      "id": "strafe-right",
+      "name": "Strafe right",
+      "cat": "Locomotion"
+    },
+    {
+      "id": "run",
+      "name": "Run (sprint)",
+      "cat": "Locomotion"
+    },
+    {
+      "id": "crouch",
+      "name": "Crouch",
+      "cat": "Locomotion"
+    },
+    {
+      "id": "crouch-walk",
+      "name": "Crouch walk",
+      "cat": "Locomotion"
+    },
+    {
+      "id": "turn-left",
+      "name": "Turn in place, left",
+      "cat": "Locomotion"
+    },
+    {
+      "id": "turn-right",
+      "name": "Turn in place, right",
+      "cat": "Locomotion"
+    },
+    {
+      "id": "jump",
+      "name": "Jump, standing",
+      "cat": "Locomotion"
+    },
+    {
+      "id": "jump-run",
+      "name": "Jump, running",
+      "cat": "Locomotion"
+    },
+    {
+      "id": "reload-m4",
+      "name": "Reload: M4",
+      "cat": "Reloads"
+    },
+    {
+      "id": "reload-ak",
+      "name": "Reload: AK",
+      "cat": "Reloads"
+    },
+    {
+      "id": "reload-aa12",
+      "name": "Reload: AA-12",
+      "cat": "Reloads"
+    },
+    {
+      "id": "reload-pistol",
+      "name": "Reload: Pistol",
+      "cat": "Reloads"
+    },
+    {
+      "id": "reload-uzi",
+      "name": "Reload: Uzi",
+      "cat": "Reloads"
+    },
+    {
+      "id": "reload-revolver",
+      "name": "Reload: Revolver",
+      "cat": "Reloads"
+    },
+    {
+      "id": "reload-sniper",
+      "name": "Reload: Sniper",
+      "cat": "Reloads"
+    },
+    {
+      "id": "reload-shotgun",
+      "name": "Reload: Shotgun",
+      "cat": "Reloads"
+    },
+    {
+      "id": "reload-launcher",
+      "name": "Reload: Launcher",
+      "cat": "Reloads"
+    },
+    {
+      "id": "reload-minigun",
+      "name": "Reload: Minigun",
+      "cat": "Reloads"
+    },
+    {
+      "id": "reload-flamer",
+      "name": "Reload: Flamer",
+      "cat": "Reloads"
+    },
+    {
+      "id": "saw-start",
+      "name": "Chainsaw: the pull start",
+      "cat": "Reloads"
+    },
+    {
+      "id": "fire",
+      "name": "Fire a burst (this gun)",
+      "cat": "Combat"
+    },
+    {
+      "id": "fire-aimed",
+      "name": "Fire, shouldered",
+      "cat": "Combat"
+    },
+    {
+      "id": "knife",
+      "name": "Knife",
+      "cat": "Combat"
+    },
+    {
+      "id": "machete",
+      "name": "Machete",
+      "cat": "Combat"
+    },
+    {
+      "id": "katana",
+      "name": "Katana",
+      "cat": "Combat"
+    },
+    {
+      "id": "grenade",
+      "name": "Throw a grenade",
+      "cat": "Combat"
+    },
+    {
+      "id": "slow-time",
+      "name": "Slow time (V)",
+      "cat": "Combat"
+    },
+    {
+      "id": "vault",
+      "name": "Vault a sandbag wall",
+      "cat": "Combat"
+    },
+    {
+      "id": "draw",
+      "name": "Draw and holster",
+      "cat": "Combat"
+    },
+    {
+      "id": "medpen",
+      "name": "Med pen",
+      "cat": "Combat"
+    },
+    {
+      "id": "m240",
+      "name": "Man the M240",
+      "cat": "Crew-served"
+    },
+    {
+      "id": "m240-carry",
+      "name": "Carry the M240",
+      "cat": "Crew-served"
+    },
+    {
+      "id": "mortar",
+      "name": "Man the mortar",
+      "cat": "Crew-served"
+    },
+    {
+      "id": "mortar-carry",
+      "name": "Carry the mortar",
+      "cat": "Crew-served"
+    },
+    {
+      "id": "knockout",
+      "name": "Knocked out, up from the bed (the room shows)",
+      "cat": "Crew-served"
+    }
+  ],
+  "subjects": [
+    {
+      "id": "marine",
+      "name": "The marine (live)",
+      "group": "Marine",
+      "kind": "marine",
+      "owner": "claude",
+      "source": "index.html: makeMarine, updateMarinePose, holdWeapon (the player himself)",
+      "variants": []
+    },
+    {
+      "id": "marine.fresh",
+      "name": "Marine, fresh (default kit)",
+      "group": "Marine",
+      "kind": "model",
+      "owner": "claude",
+      "source": "index.html: makeMarine()",
+      "variants": []
+    },
+    {
+      "id": "person.skeletal-marine",
+      "name": "Skeletal marine (the pit)",
+      "group": "Animals & people",
+      "kind": "model",
+      "owner": "claude",
+      "source": "index.html: makeSkeletalMarine()",
+      "variants": []
+    }
+  ],
+  "wardrobe": {
+    "version": 1,
+    "items": {
+      "cap": {
+        "camo": "m81",
+        "style": "cover"
+      },
+      "helmet": {
+        "camo": "m81"
+      },
+      "mask": {
+        "camo": "coyoteBrown"
+      },
+      "shirt": {
+        "camo": "m81",
+        "sleeves": "down"
+      },
+      "trousers": {
+        "camo": "m81",
+        "cut": "trousers"
+      },
+      "gloves": {
+        "camo": "m81",
+        "worn": true
+      },
+      "carrier": {},
+      "pads": {},
+      "holster": {},
+      "belt": {},
+      "pack": {},
+      "eyewear": {
+        "style": "none"
+      },
+      "boots": {
+        "colour": "black",
+        "rubber": "yellow"
+      }
+    },
+    "guns": {},
+    "body": {
+      "hair": "darkBrown",
+      "eyes": "brown",
+      "skin": 3
+    }
+  }
+}

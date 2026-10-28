@@ -1,0 +1,91 @@
+{
+ "shots": [
+  {
+   "cam": {
+    "x": -178.97,
+    "y": 5.42,
+    "z": -15.54,
+    "tx": -186.99,
+    "ty": 4.92,
+    "tz": -8.7,
+    "fov": 55
+   },
+   "time": "noon",
+   "caption": "East Cave mouth: front-left oblique (its local +x flank)",
+   "out": "review/sweep/cave-4-flank/cave4-oblique.png"
+  },
+  {
+   "cam": {
+    "x": -187.0,
+    "y": 5.42,
+    "z": -18.32,
+    "tx": -186.58,
+    "ty": 4.92,
+    "tz": -9.27,
+    "fov": 55
+   },
+   "time": "noon",
+   "caption": "East Cave mouth: square to its +x flank",
+   "out": "review/sweep/cave-4-flank/cave4-side.png"
+  },
+  {
+   "cam": {
+    "x": -184.74,
+    "y": 4.92,
+    "z": -13.62,
+    "tx": -187.15,
+    "ty": 4.92,
+    "tz": -9.69,
+    "fov": 55
+   },
+   "time": "noon",
+   "caption": "East Cave mouth: +x flank close",
+   "out": "review/sweep/cave-4-flank/cave4-side-close.png"
+  },
+  {
+   "cam": {
+    "x": -183.91,
+    "y": 10.92,
+    "z": -14.76,
+    "tx": -186.92,
+    "ty": 3.92,
+    "tz": -8.21,
+    "fov": 55
+   },
+   "time": "noon",
+   "caption": "East Cave mouth: +x flank from above",
+   "out": "review/sweep/cave-4-flank/cave4-high.png"
+  },
+  {
+   "cam": {
+    "x": -183.56,
+    "y": 5.42,
+    "z": 3.41,
+    "tx": -185.95,
+    "ty": 4.92,
+    "tz": -5.32,
+    "fov": 55
+   },
+   "time": "noon",
+   "caption": "East Cave mouth: square to its -x flank",
+   "out": "review/sweep/cave-4-flank/cave4-other-side.png"
+  },
+  {
+   "cam": {
+    "x": -176.88,
+    "y": 4.42,
+    "z": -8.79,
+    "tx": -186.76,
+    "ty": 4.92,
+    "tz": -7.22,
+    "fov": 55
+   },
+   "time": "noon",
+   "caption": "East Cave mouth: front",
+   "out": "review/sweep/cave-4-flank/cave4-front.png"
+  }
+ ],
+ "out": "review/sweep/cave-4-flank/",
+ "cols": 3,
+ "size": "1280x720"
+}

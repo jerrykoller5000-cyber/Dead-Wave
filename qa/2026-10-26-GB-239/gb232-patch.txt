@@ -1,0 +1,19 @@
+      if (STORY_GATE && SURVIVOR_LEAD[POI.campsites[post?.index]?.style]) return false;   // GB-232: theirs is the thread's end
+      return !!post && post.kind === 'campsite' && (d | 0) >= SURVIVOR_FROM && !survivorCampsUsed.has(post.index);
+    }
+    // GB-232 (docs/specs/story-chain.md 6): with the chain's gate on, the three are found where they hid as the thread
+    // that leads there ends (Pike: the missing hikers, Brandt: the search, Okafor: the old man), not by a camp bounty.
+    // Still from night SURVIVOR_FROM, and E only once the camp's dead are down (an open bounty's guards there). They wait
+    // there until taken (no new-day or alarm drop). The spot is the camp's fire for now (the hikers' shelf, the rangers'
+    // truck and the cellar are each mission's owner's to place: s.x/s.z).
+    const SURVIVOR_LEAD = { hikers: 'missing', ranger: 'search', trapper: 'oldman' };
+    function survivorsAtThreadEnd() {
+      if (!STORY_GATE || (day | 0) < SURVIVOR_FROM) return;
+      for (let i = 0; i < POI.campsites.length; i++) {
+        const c = POI.campsites[i], lead = SURVIVOR_LEAD[c?.style];
+        if (!lead || survivorCampsUsed.has(i) || storyChain.stateOf(lead) !== 'done') continue;
+        const open = zombies.find((o) => o.alive && o.poiGuard && o.poiGuard.kind === 'campsite' && o.poiGuard.index === i)?.poiGuard;
+        const s = placeSurvivor(open || { kind: 'campsite', index: i, x: c.x, z: c.z }, day);
+        s.thread = lead;
+      }
+    }

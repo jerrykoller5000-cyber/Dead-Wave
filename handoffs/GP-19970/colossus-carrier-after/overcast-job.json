@@ -1,0 +1,28 @@
+{
+  "shots": [
+    {
+      "target": "zombie.colossus:statue",
+      "view": "front",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/colossus-carrier-after/overcast-front.png"
+    },
+    {
+      "target": "zombie.colossus:statue",
+      "view": "side",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/colossus-carrier-after/overcast-side.png"
+    },
+    {
+      "target": "zombie.colossus:statue",
+      "view": "back",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/colossus-carrier-after/overcast-back.png"
+    }
+  ],
+  "out": "handoffs/GP-19970/colossus-carrier-after",
+  "sheet": true,
+  "cols": 3
+}

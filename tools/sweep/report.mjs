@@ -41,10 +41,14 @@ const jobFor = (id, p, list) => {
   const g = (() => { const near = (D.byPlace[id] || []).map((i) => I[i]).filter((it) => !it.canopy); if (!near.length) return 0; const gs = near.map((it) => it.gC).sort((a, b) => a - b); return gs[gs.length >> 1]; })();
   const r = Math.max(10, Math.min(p.r || 20, 30));
   const dirs = [['north', 0, 1], ['east', 1, 0], ['south', 0, -1], ['west', -1, 0]];
-  const G = p.camG || {}, gAt = (k) => (Number.isFinite(G[k]) ? G[k] : g), gc = Number.isFinite(G.centre) ? G.centre : g;
-  for (const [n, dx, dz] of dirs) shots.push({ cam: { x: p.x + dx * r, y: gAt(n) + EYE, z: p.z + dz * r, tx: p.x, ty: Math.max(gc, g) + 1.2, tz: p.z, fov: FOV }, time: 'noon', caption: `${p.name}: from the ${n}, his eye height`, out: `review/sweep/${slug(id)}/${slug(id)}-from-${n}.png` });
+  // CL-256 batch 3: the sweep says where each camera stands (inside the land, at the water's surface); older sweeps
+  // only gave the ground.
+  const C = (D.cams || {})[id] || {};
+  const G = p.camG || {}, gAt = (k) => (C[k] && Number.isFinite(C[k].g) ? C[k].g : Number.isFinite(G[k]) ? G[k] : g), gc = Number.isFinite(C.centre) ? C.centre : Number.isFinite(G.centre) ? G.centre : g;
+  const cx = (k, dx) => (C[k] ? C[k].x : p.x + dx * r), cz = (k, dz) => (C[k] ? C[k].z : p.z + dz * r);
+  for (const [n, dx, dz] of dirs) shots.push({ cam: { x: cx(n, dx), y: gAt(n) + EYE, z: cz(n, dz), tx: p.x, ty: Math.max(gc, g) + 1.2, tz: p.z, fov: FOV }, time: 'noon', caption: `${p.name}: from the ${n}, his eye height`, out: `review/sweep/${slug(id)}/${slug(id)}-from-${n}.png` });
   shots.push({ cam: { x: p.x + r * 0.6, y: g + r * 1.1, z: p.z + r * 0.6, tx: p.x, ty: g, tz: p.z, fov: FOV }, time: 'noon', caption: `${p.name}: from above`, out: `review/sweep/${slug(id)}/${slug(id)}-above.png` });
-  shots.push({ cam: { x: p.x + r * 0.7, y: Math.max(g, gAt('night')) + 6, z: p.z + r * 0.7, tx: p.x, ty: g + 1, tz: p.z, fov: FOV }, time: 'night', caption: `${p.name}: at night`, out: `review/sweep/${slug(id)}/${slug(id)}-night.png` });
+  shots.push({ cam: { x: cx('night', 0.7), y: Math.max(g, gAt('night')) + 6, z: cz('night', 0.7), tx: p.x, ty: g + 1, tz: p.z, fov: FOV }, time: 'night', caption: `${p.name}: at night`, out: `review/sweep/${slug(id)}/${slug(id)}-night.png` });
   let k = 0;
   for (const f of list.filter((f) => f.sev >= 2 && f.at && !(f.a != null && I[f.a] && I[f.a].area > 60)).slice(0, 14)) {
     const [x, y, z] = f.at;

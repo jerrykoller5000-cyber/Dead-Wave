@@ -1,0 +1,38 @@
+GRANT grokbot GB-233: starting one game-test command
+ok    t215      4 pass   0 fail  27.6s  (real renderer)
+ok    t95       9 pass   0 fail  27.4s  (real renderer)
+ok    t188    121 pass   0 fail  61.8s  (real renderer)
+ok    t189     47 pass   0 fail  34.3s  (real renderer)
+FAIL  t277     33 pass   3 fail  26.1s  (real renderer)
+    INFO minigun muzzle 0.000,0.000,1.010 box -0.164,-0.262,-0.450 / 0.283,0.320,1.000
+    INFO minigun dir 1 rearTop -0.000,0.280,-0.072 frontTop -0.000,0.108,0.938
+    INFO m4 muzzle 0.000,0.020,0.980 box -0.046,-0.278,-0.569 / 0.085,0.168,0.978
+    INFO m4 dir 1 rearTop 0.000,0.168,0.004 frontTop 0.000,0.138,0.673
+    INFO ak muzzle 0.000,-0.005,1.020 box -0.048,-0.331,-0.597 / 0.095,0.097,0.994
+    INFO ak dir 1 rearTop -0.000,0.095,0.218 frontTop -0.000,0.097,0.840
+    INFO aa12 muzzle 0.000,0.015,0.980 box -0.155,-0.415,-0.579 / 0.155,0.180,0.976
+    INFO aa12 dir 1 rearTop 0.000,0.180,-0.120 frontTop -0.014,0.175,0.750
+    INFO pistol muzzle 0.000,0.050,0.320 box -0.027,-0.181,-0.104 / 0.027,0.092,0.312
+    INFO pistol dir 1 rearTop -0.000,0.075,0.072 frontTop -0.002,0.087,0.287
+    FAIL pistol: eye above the bore, behind the muzzle, on its centre line, along it (3.19 deg)
+    FAIL pistol: eye clears the top line and stays near it (eye y 0.049, top 0.092)
+    INFO uzi muzzle 0.000,0.030,0.480 box -0.055,-0.327,-0.338 / 0.077,0.158,0.478
+    INFO uzi dir 1 rearTop -0.015,0.156,-0.087 frontTop 0.001,0.067,0.354
+    INFO shotgun muzzle 0.000,0.030,0.970 box -0.056,-0.179,-0.496 / 0.056,0.091,0.952
+    INFO shotgun dir 1 rearTop -0.000,0.087,-0.129 frontTop 0.000,0.081,0.915
+    INFO revolver muzzle 0.000,0.083,0.350 box -0.051,-0.166,-0.115 / 0.051,0.123,0.333
+    INFO revolver dir 1 rearTop -0.005,0.109,0.081 frontTop -0.002,0.121,0.326
+    FAIL revolver: eye clears the top line and stays near it (eye y 0.085, top 0.123)
+    INFO sniper muzzle 0.000,0.040,1.220 box -0.147,-0.203,-0.640 / 0.068,0.209,1.205
+    INFO sniper dir 1 rearTop 0.000,0.209,0.069 frontTop 0.012,0.067,0.780
+    INFO launcher muzzle 0.000,0.040,0.720 box -0.143,-0.184,-0.504 / 0.143,0.123,0.682
+    INFO launcher dir 1 rearTop 0.000,0.123,0.053 frontTop 0.000,0.102,0.650
+    INFO flamer muzzle 0.000,0.050,0.780 box -0.085,-0.175,-0.277 / 0.178,0.112,0.792
+    INFO flamer dir 1 rearTop 0.000,0.085,0.290 frontTop -0.000,0.112,0.786
+    INFO chainsaw muzzle 0.000,0.040,0.820 box -0.159,-0.185,-0.317 / 0.218,0.220,0.830
+    INFO chainsaw dir 1 rearTop -0.004,0.220,0.024 frontTop -0.010,0.090,0.760
+ok    t284      7 pass   0 fail  108.4s  (real renderer)
+ok    t133      9 pass   0 fail  52.3s  (real renderer)
+ok    t136     36 pass   0 fail  58.9s  (real renderer)
+ok    t196     17 pass   0 fail  51.1s  (real renderer)
+9 checks: 283 pass, 3 fail (real renderer)

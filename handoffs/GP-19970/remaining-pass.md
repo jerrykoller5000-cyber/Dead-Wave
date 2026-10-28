@@ -1,47 +1,27 @@
-# GP-19970 — pass map after the Screamer work
+# GP-19970 — remaining pass, updated 2026-10-28 UTC
 
-This is an inventory of evidence and remaining work, not an acceptance report.
+This is the work map and evidence boundary, not a full-model acceptance report.
 
-## Zombie appearance
+## Completed dependencies
 
-Viewed AG-126's fourteen-zombie sheets in noon, overcast, dusk and night. The
-shared eye palette is the next concrete family-consistency correction. Its fresh
-inspector proof is separate from the older sheets, whose time-setting path was
-subsequently repaired by Cursor (CU-161).
+The pale-green eye iteration is accepted after CU-162 restored authored brightness during pool reuse/death and AG-131 inspected the native gameplay result. Ordinary/cave-guardian eyes retain 0.9; Bluebell retains 1.8 for her named blue clue. The board's earlier dependency on those jobs is resolved. GP-19971's Screamer arms/face remain accepted after AG-130; do not raise the face value or change its drift arms without the playthrough decision.
 
-- Shambler, feral, leaper and military: yellow-green eye accents.
-- Spider: pink eye accents.
-- Drowned and caveguard: cyan/white accents.
-- Brute, demon and colossus: red/orange accents.
-- Spitter and bomber: yellow-green eyes alongside gameplay emission on acid/fuse
-  surfaces. The material iteration changes eyes only; the warning surfaces need a
-  separate decision about the art-direction exception.
-- Guardian and the independently built cave guardians: white/yellow/cyan eyes;
-  include both construction paths in the material iteration.
-- Screamer: retain GP-19971. AG-130 independently passed its arm transitions,
-  headshots and night facial readability. Its pooled-eye reset still needs Cursor.
+## Completed local iteration: the supply terminal
 
-Body silhouette, anatomy, materials, texture scale and behavior need individual
-close views and live cycles before assigning full-model acceptance scores. The
-static sheets do not validate attacks, foot contact or reactions. Existing
-guardian grab/throw review notes are assigned to Claude on the board.
+The earlier supplies image and current authored styles show a flat field-green plate, teal secondary controls and narrow text below 11 px. They do not yet carry UI-principles section 0's amber CRT glass and olive bezel. This is the clearest remaining documented mismatch. Provisional Consistency 2 and narrow Readability 3 identify this scope; these are not fresh native acceptance scores or a ranking of unviewed motion.
 
-## Marine helpers
+Prepared ui/supply-terminal.css is scoped to #shop: black glass, an olive bezel, amber phosphor, scanlines under the content, one opening cursor blink, and at least 11 px text. It preserves the three tabs, item copy, prices and handlers. The native comparison in crt/native.mjs captures 24 before and 24 after views (three tabs, fp/tp, day/night, 1280/390) and checks content/button-state parity, bounds and pointer release. The first native run captured 24 before and 12 third-person after shots, then exposed the first-person paused-shop pointer-lock defect. The narrow shop open/close and panel-pointer guard fix now passes the full native retry: 48 shots, unchanged content/disabled state, >=11 px, bounds/hit targets, held menu yaw and FP lock restored by the actual close click, zero errors. Antigravity accepted the full48-shot retry in AG-136: Readability, Hierarchy, Consistency, Feedback, Restraint and Both views each5/5. Claude applied/accepted the link and pointer guard. The final production batch in crt/integrated/report.json passes all48 comparisons with integrated:true and zero page errors.
 
-Viewed `review/principles/people-noon/marine-three.png`: fitted mask, waist and
-webbing are present and readable. This is a staged unarmed view, so a floating
-grip cannot be diagnosed from it. A fresh kit/turn/crouch cycle in both player
-views is needed before changing helpers; Claude's CL-261 motion work is active.
+## Next reviews after that correction
 
-## UI
+- Warning lights: the acid, fuse, demon fire/charge and Bluebell blue are deliberate gameplay exceptions approved by Claude in art-direction section 3. Their physical appearance and intensity need their own active-effect views. Do not erase their warning signal merely to unify eye colors.
+- Zombie bodies and motion: `live/zombie-motion/report.json` has 14 live types, 252 original front/side walk/body-hit captures, 14/14 real-builder checks and no inspector/page errors. AG-138 ranked the floating face assemblies first. Claude assigned `refineZombieFace` in `combat/zombie-fidelity.js` to ChatGPT with no contract change; the nine ordinary humanoid faces now have a 14/0 native build check and 99 nonblank four-light/gameplay/close PNGs in `face-after/`. AG-145 accepted brute/colossus face Construction/Integration (5 gameplay, 4 close) but scored the seven smaller humanoids 4 gameplay and 2.5 close because their lower jaw/cheek rig still overhangs, with floating nostril dots and several hair/neck pegs; these must be fixed in another face slice. Screamer uses a separate helper, still outside the assigned edit pending Claude's scope answer. The brute/demon hide palette, brute chest, spitter/bomber belly and close refinements, colossus rear carrier, military backpack/chest, drowned kelp/washboard, and leaper dorsal ridge have scoped native four-light proofs and AG scores at least 4/5; see the GP-19970 handoff and AG-141/142/143. AG-143 scored the leaper spine Construction/Integration 5/5 at gameplay distance and 4.5/5 close, with a small lateral scapula tip slit left separate. The military knee/wrist pad edit is syntax-clean but native validation is queued. Next independent construction defects from AG-138: colossus shoulder/limb plates; shambler/feral/leaper forearm and pelvis strips; guardian/caveguard loincloth gap. The full attack/death loops, active warning effects, gameplay context and full-model/animation scores remain open. Prior guardian grab/throw notes stay with Claude.
+- Marine helpers: the staged unarmed marine picture shows the fitted mask, waist and webbing, but cannot prove held-weapon contact or cloth fit while turning/crouching. CL-261's motion is now in. live/marine-review.mjs completed88 captures without runtime errors. The inspected waist samples show no obvious gap; head close-ups expose nose skin through the balaclava (Construction3/local Integration3). The narrow cloth/hem nose clearance correction in ui/marine-face.js passes the final90-capture batch and3/3 actual marine build checks in live/marine-after-clean/report.json. AG accepted local Construction5/5 and Integration5/5. Collector smoke carry-over between kits was corrected with the existing idle reset API; all16 standing shots assert smoke props absent. Original88 and first90 after captures are retained. See live/balaclava-fit.md; broader helper/motion acceptance remains bounded to the sampled cases. Do not diagnose a floating grip from the staged picture alone.
 
-Viewed `handoffs/GP-19967-shots/supplies.png`: prices, affordance and locked rows
-are clearly grouped, but the flat green plate/teal exit treatment has not yet
-adopted the new amber CRT glass/bezel direction in `docs/ui-principles.md` section
-0. That is the next scoped UI iteration, preserving the three-tab supply flow,
-prices, keyboard handling and 390 px layout. The archived shot is software
-rendered, so fresh native day/night, first/third-person and narrow-width captures
-are required. The radio/duty-board panels remain behind the CL-263 dependency.
+The alarm/radio/duty panels and story entry stations already have GP-19969/AG-125 acceptance; the old CL-263 way-in dependency is resolved. Their communication-green/paper distinction should be retained. The supply terminal's scoped CRT pass is accepted; no global panel restyle is assigned.
 
-No new animation, marine geometry or UI changes are claimed by this eye-material
-iteration. GP-19970 stays open until those areas have their own proof.
+## Gate and ownership
+
+2026-10-28 04:51 UTC update to the zombie status above: the military knee/wrist pad pass now has a native 1/0 build check and 12 nonblank four-light/gameplay/walk/close PNGs in `military-pads-after/`; AG's close score is pending. The seven smaller humanoids' second lower-face pass has a native 14/0 check and 18 nonblank close/front PNGs in `face-close2-after/`; AG's rescore is pending. Crown hair on four types and rear skull pegs on four types were separately fitted in `studio/zombie-concepts.js` and have a native 14/0 check plus 60 nonblank four-light/gameplay/walk/close PNGs in `face-trim-after/`; AG's score is pending. These later proof sets supersede the earlier "queued" status in the zombie bullet. Screamer helper scope remains with Claude. None of the three pending slices has an independent acceptance score yet.
+
+Every new game run uses the native machine-wide slot, one instance and one worker. Native shots and Antigravity's visual review gate a changed look. Full suite/load/frame budgets remain the coordinated integration job. GP-19970 stays open until the remaining owned areas have their own proof; unknown categories must not be assigned passing scores from static images.

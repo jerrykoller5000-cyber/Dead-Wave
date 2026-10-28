@@ -1,0 +1,5868 @@
+{
+  "task": "AG-133",
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "fpHeld": {
+    "knife_pistol": [
+      {
+        "blade": "knife",
+        "gun": "pistol",
+        "u": "rest",
+        "liveU": -1,
+        "knifeVisible": false,
+        "fpW": 1,
+        "fpBladeDip": 0,
+        "fistScreen": {
+          "x": -0.203,
+          "y": -1.166,
+          "z": 0.298,
+          "dist": 0.364
+        },
+        "tipScreen": {
+          "x": -0.203,
+          "y": -1.166,
+          "z": 0.298,
+          "dist": 0.364
+        },
+        "armNearEyeM": 0.339,
+        "armStraightPct": 97,
+        "gunBounds": {
+          "topY": -0.124,
+          "botY": -1.419,
+          "leftX": -0.32,
+          "rightX": -0.066
+        },
+        "shOutM": 0.064,
+        "fistOutM": 0.414,
+        "fistRightM": -0.065,
+        "fistUpM": 1.222,
+        "torsoYawDeg": 6.9,
+        "torsoPitchDeg": 0.6,
+        "chestTurnDeg": 0,
+        "chestLeanDeg": -0.1,
+        "file": "qa/2026-10-26-AG-133/fp-held-knife-pistol-0-rest.png"
+      },
+      {
+        "blade": "knife",
+        "gun": "pistol",
+        "u": 0.14,
+        "liveU": 0.14,
+        "knifeVisible": true,
+        "fpW": 1,
+        "fpBladeDip": 1,
+        "fistScreen": {
+          "x": 0.452,
+          "y": -1.506,
+          "z": 0.443,
+          "dist": 0.622
+        },
+        "tipScreen": {
+          "x": 0.299,
+          "y": -0.409,
+          "z": 0.728,
+          "dist": 0.781
+        },
+        "armNearEyeM": 0.478,
+        "armStraightPct": 97.5,
+        "gunBounds": {
+          "topY": -0.607,
+          "botY": -2.698,
+          "leftX": -0.641,
+          "rightX": -0.149
+        },
+        "shOutM": 0.042,
+        "fistOutM": 0.563,
+        "fistRightM": 0.21,
+        "fistUpM": 1.035,
+        "torsoYawDeg": 3.2,
+        "torsoPitchDeg": 0.5,
+        "chestTurnDeg": -3.6,
+        "chestLeanDeg": 0.5,
+        "file": "qa/2026-10-26-AG-133/fp-held-knife-pistol-1-cock.png"
+      },
+      {
+        "blade": "knife",
+        "gun": "pistol",
+        "u": 0.3,
+        "liveU": 0.3,
+        "knifeVisible": true,
+        "fpW": 1,
+        "fpBladeDip": 1,
+        "fistScreen": {
+          "x": 0.243,
+          "y": -0.903,
+          "z": 0.395,
+          "dist": 0.456
+        },
+        "tipScreen": {
+          "x": 0.136,
+          "y": -0.062,
+          "z": 0.702,
+          "dist": 0.71
+        },
+        "armNearEyeM": 0.431,
+        "armStraightPct": 97.4,
+        "gunBounds": {
+          "topY": -0.747,
+          "botY": -3.352,
+          "leftX": -0.929,
+          "rightX": -0.301
+        },
+        "shOutM": 0.11,
+        "fistOutM": 0.558,
+        "fistRightM": 0.091,
+        "fistUpM": 1.205,
+        "torsoYawDeg": 10.5,
+        "torsoPitchDeg": 4.2,
+        "chestTurnDeg": 4,
+        "chestLeanDeg": 3.7,
+        "file": "qa/2026-10-26-AG-133/fp-held-knife-pistol-2-drive.png"
+      },
+      {
+        "blade": "knife",
+        "gun": "pistol",
+        "u": 0.4,
+        "liveU": 0.4,
+        "knifeVisible": true,
+        "fpW": 1,
+        "fpBladeDip": 1,
+        "fistScreen": {
+          "x": 0.098,
+          "y": -0.583,
+          "z": 0.322,
+          "dist": 0.341
+        },
+        "tipScreen": {
+          "x": -0.087,
+          "y": 0.187,
+          "z": 0.62,
+          "dist": 0.626
+        },
+        "armNearEyeM": 0.335,
+        "armStraightPct": 97.7,
+        "gunBounds": {
+          "topY": -0.754,
+          "botY": -3.442,
+          "leftX": -1.044,
+          "rightX": -0.375
+        },
+        "shOutM": 0.126,
+        "fistOutM": 0.476,
+        "fistRightM": 0.021,
+        "fistUpM": 1.307,
+        "torsoYawDeg": 13.8,
+        "torsoPitchDeg": 3.8,
+        "chestTurnDeg": 7.7,
+        "chestLeanDeg": 3.4,
+        "file": "qa/2026-10-26-AG-133/fp-held-knife-pistol-3-stab.png"
+      },
+      {
+        "blade": "knife",
+        "gun": "pistol",
+        "u": 0.58,
+        "liveU": 0.58,
+        "knifeVisible": true,
+        "fpW": 1,
+        "fpBladeDip": 1,
+        "fistScreen": {
+          "x": -0.298,
+          "y": -0.89,
+          "z": 0.237,
+          "dist": 0.276
+        },
+        "tipScreen": {
+          "x": -0.707,
+          "y": -0.317,
+          "z": 0.469,
+          "dist": 0.586
+        },
+        "armNearEyeM": 0.273,
+        "armStraightPct": 98.3,
+        "gunBounds": {
+          "topY": -0.638,
+          "botY": -3.012,
+          "leftX": -0.995,
+          "rightX": -0.388
+        },
+        "shOutM": 0.106,
+        "fistOutM": 0.346,
+        "fistRightM": -0.083,
+        "fistUpM": 1.303,
+        "torsoYawDeg": 14.5,
+        "torsoPitchDeg": 0.2,
+        "chestTurnDeg": 8.9,
+        "chestLeanDeg": 0.1,
+        "file": "qa/2026-10-26-AG-133/fp-held-knife-pistol-4-cut.png"
+      }
+    ],
+    "machete_pistol": [
+      {
+        "blade": "machete",
+        "gun": "pistol",
+        "u": 0.16,
+        "liveU": 0.16,
+        "knifeVisible": true,
+        "fpW": 1,
+        "fpBladeDip": 1,
+        "fistScreen": {
+          "x": 0.677,
+          "y": -0.479,
+          "z": 0.388,
+          "dist": 0.485
+        },
+        "tipScreen": {
+          "x": 0.906,
+          "y": 1.74,
+          "z": 0.477,
+          "dist": 0.809
+        },
+        "armNearEyeM": 0.425,
+        "armStraightPct": 96.6,
+        "gunBounds": {
+          "topY": -0.705,
+          "botY": -2.924,
+          "leftX": -0.684,
+          "rightX": -0.164
+        },
+        "shOutM": 0.057,
+        "fistOutM": 0.544,
+        "fistRightM": 0.3,
+        "fistUpM": 1.306,
+        "torsoYawDeg": 1.9,
+        "torsoPitchDeg": 4,
+        "chestTurnDeg": -3.3,
+        "chestLeanDeg": 3.3,
+        "file": "qa/2026-10-26-AG-133/fp-held-machete-pistol-1-wind.png"
+      },
+      {
+        "blade": "machete",
+        "gun": "pistol",
+        "u": 0.36,
+        "liveU": 0.36,
+        "knifeVisible": true,
+        "fpW": 1,
+        "fpBladeDip": 1,
+        "fistScreen": {
+          "x": 0.626,
+          "y": 0.093,
+          "z": 0.259,
+          "dist": 0.308
+        },
+        "tipScreen": {
+          "x": -1.357,
+          "y": -12.784,
+          "z": -0.072,
+          "dist": 0.546
+        },
+        "armNearEyeM": 0.265,
+        "armStraightPct": 98.1,
+        "gunBounds": {
+          "topY": -0.828,
+          "botY": -3.228,
+          "leftX": -0.643,
+          "rightX": -0.086
+        },
+        "shOutM": 0.051,
+        "fistOutM": 0.459,
+        "fistRightM": 0.231,
+        "fistUpM": 1.413,
+        "torsoYawDeg": -3,
+        "torsoPitchDeg": 8.1,
+        "chestTurnDeg": -7.8,
+        "chestLeanDeg": 8,
+        "file": "qa/2026-10-26-AG-133/fp-held-machete-pistol-2-cock.png"
+      },
+      {
+        "blade": "machete",
+        "gun": "pistol",
+        "u": 0.47,
+        "liveU": 0.47,
+        "knifeVisible": true,
+        "fpW": 1,
+        "fpBladeDip": 1,
+        "fistScreen": {
+          "x": 0.409,
+          "y": -0.141,
+          "z": 0.248,
+          "dist": 0.27
+        },
+        "tipScreen": {
+          "x": -0.501,
+          "y": 0.837,
+          "z": 0.594,
+          "dist": 0.727
+        },
+        "armNearEyeM": 0.231,
+        "armStraightPct": 97.5,
+        "gunBounds": {
+          "topY": -0.822,
+          "botY": -3.431,
+          "leftX": -0.843,
+          "rightX": -0.22
+        },
+        "shOutM": 0.095,
+        "fistOutM": 0.449,
+        "fistRightM": 0.149,
+        "fistUpM": 1.379,
+        "torsoYawDeg": 4.6,
+        "torsoPitchDeg": 7.4,
+        "chestTurnDeg": 0,
+        "chestLeanDeg": 7.1,
+        "file": "qa/2026-10-26-AG-133/fp-held-machete-pistol-3-chop.png"
+      },
+      {
+        "blade": "machete",
+        "gun": "pistol",
+        "u": 0.58,
+        "liveU": 0.58,
+        "knifeVisible": true,
+        "fpW": 1,
+        "fpBladeDip": 1,
+        "fistScreen": {
+          "x": -0.446,
+          "y": -0.839,
+          "z": 0.182,
+          "dist": 0.219
+        },
+        "tipScreen": {
+          "x": -0.592,
+          "y": -0.919,
+          "z": 0.65,
+          "dist": 0.835
+        },
+        "armNearEyeM": 0.203,
+        "armStraightPct": 96.4,
+        "gunBounds": {
+          "topY": -0.807,
+          "botY": -3.563,
+          "leftX": -0.943,
+          "rightX": -0.341
+        },
+        "shOutM": 0.125,
+        "fistOutM": 0.349,
+        "fistRightM": -0.107,
+        "fistUpM": 1.322,
+        "torsoYawDeg": 12.3,
+        "torsoPitchDeg": 5.3,
+        "chestTurnDeg": 7.7,
+        "chestLeanDeg": 4.7,
+        "file": "qa/2026-10-26-AG-133/fp-held-machete-pistol-4-cut.png"
+      }
+    ],
+    "katana_pistol": [
+      {
+        "blade": "katana",
+        "gun": "pistol",
+        "u": 0.36,
+        "liveU": 0.36,
+        "knifeVisible": true,
+        "fpW": 1,
+        "fpBladeDip": 1,
+        "fistScreen": {
+          "x": 0.628,
+          "y": 0.091,
+          "z": 0.258,
+          "dist": 0.307
+        },
+        "tipScreen": {
+          "x": -0.389,
+          "y": -7.158,
+          "z": -0.191,
+          "dist": 0.817
+        },
+        "armNearEyeM": 0.267,
+        "armStraightPct": 98.1,
+        "gunBounds": {
+          "topY": -0.838,
+          "botY": -3.194,
+          "leftX": -0.577,
+          "rightX": -0.063
+        },
+        "shOutM": 0.051,
+        "fistOutM": 0.453,
+        "fistRightM": 0.224,
+        "fistUpM": 1.417,
+        "torsoYawDeg": -3,
+        "torsoPitchDeg": 8,
+        "chestTurnDeg": -7.7,
+        "chestLeanDeg": 8,
+        "file": "qa/2026-10-26-AG-133/fp-held-katana-pistol-1-cock.png"
+      },
+      {
+        "blade": "katana",
+        "gun": "pistol",
+        "u": 0.47,
+        "liveU": 0.47,
+        "knifeVisible": true,
+        "fpW": 1,
+        "fpBladeDip": 1,
+        "fistScreen": {
+          "x": 0.415,
+          "y": -0.144,
+          "z": 0.246,
+          "dist": 0.268
+        },
+        "tipScreen": {
+          "x": -0.63,
+          "y": 1.088,
+          "z": 0.738,
+          "dist": 0.993
+        },
+        "armNearEyeM": 0.233,
+        "armStraightPct": 97.5,
+        "gunBounds": {
+          "topY": -0.836,
+          "botY": -3.42,
+          "leftX": -0.792,
+          "rightX": -0.204
+        },
+        "shOutM": 0.1,
+        "fistOutM": 0.444,
+        "fistRightM": 0.14,
+        "fistUpM": 1.382,
+        "torsoYawDeg": 5.1,
+        "torsoPitchDeg": 7.6,
+        "chestTurnDeg": 0,
+        "chestLeanDeg": 7.1,
+        "file": "qa/2026-10-26-AG-133/fp-held-katana-pistol-2-chop.png"
+      },
+      {
+        "blade": "katana",
+        "gun": "pistol",
+        "u": 0.58,
+        "liveU": 0.58,
+        "knifeVisible": true,
+        "fpW": 1,
+        "fpBladeDip": 1,
+        "fistScreen": {
+          "x": -0.445,
+          "y": -0.839,
+          "z": 0.182,
+          "dist": 0.219
+        },
+        "tipScreen": {
+          "x": -0.607,
+          "y": -0.838,
+          "z": 0.878,
+          "dist": 1.119
+        },
+        "armNearEyeM": 0.204,
+        "armStraightPct": 97,
+        "gunBounds": {
+          "topY": -0.799,
+          "botY": -3.581,
+          "leftX": -0.937,
+          "rightX": -0.335
+        },
+        "shOutM": 0.129,
+        "fistOutM": 0.346,
+        "fistRightM": -0.119,
+        "fistUpM": 1.322,
+        "torsoYawDeg": 13.3,
+        "torsoPitchDeg": 5,
+        "chestTurnDeg": 7.8,
+        "chestLeanDeg": 4.6,
+        "file": "qa/2026-10-26-AG-133/fp-held-katana-pistol-3-cut.png"
+      }
+    ],
+    "knife_m4": [
+      {
+        "blade": "knife",
+        "gun": "m4",
+        "u": "rest",
+        "liveU": -1,
+        "knifeVisible": false,
+        "fpW": 1,
+        "fpBladeDip": 0,
+        "fistScreen": {
+          "x": -0.589,
+          "y": -0.495,
+          "z": 0.437,
+          "dist": 0.525
+        },
+        "tipScreen": {
+          "x": -0.589,
+          "y": -0.495,
+          "z": 0.437,
+          "dist": 0.525
+        },
+        "armNearEyeM": 0.4,
+        "armStraightPct": 97.5,
+        "gunBounds": {
+          "topY": 0.018,
+          "botY": -3.433,
+          "leftX": -5.28,
+          "rightX": -0.225
+        },
+        "shOutM": 0.283,
+        "fistOutM": 0.556,
+        "fistRightM": -0.275,
+        "fistUpM": 1.296,
+        "torsoYawDeg": 46.3,
+        "torsoPitchDeg": 0.4,
+        "chestTurnDeg": 0.2,
+        "chestLeanDeg": 0.3,
+        "file": "qa/2026-10-26-AG-133/fp-held-knife-m4-0-rest.png"
+      },
+      {
+        "blade": "knife",
+        "gun": "m4",
+        "u": 0.14,
+        "liveU": 0.14,
+        "knifeVisible": true,
+        "fpW": 1,
+        "fpBladeDip": 1,
+        "fistScreen": {
+          "x": 0.451,
+          "y": -1.503,
+          "z": 0.635,
+          "dist": 0.891
+        },
+        "tipScreen": {
+          "x": 0.33,
+          "y": -0.635,
+          "z": 0.92,
+          "dist": 1.028
+        },
+        "armNearEyeM": 0.413,
+        "armStraightPct": 95.9,
+        "gunBounds": {
+          "topY": -0.312,
+          "botY": -5.419,
+          "leftX": -3.974,
+          "rightX": -0.183
+        },
+        "shOutM": 0.278,
+        "fistOutM": 0.761,
+        "fistRightM": 0.292,
+        "fistUpM": 0.869,
+        "torsoYawDeg": 43.1,
+        "torsoPitchDeg": 1.1,
+        "chestTurnDeg": -3.5,
+        "chestLeanDeg": 0.5,
+        "file": "qa/2026-10-26-AG-133/fp-held-knife-m4-1-cock.png"
+      },
+      {
+        "blade": "knife",
+        "gun": "m4",
+        "u": 0.3,
+        "liveU": 0.3,
+        "knifeVisible": true,
+        "fpW": 1,
+        "fpBladeDip": 1,
+        "fistScreen": {
+          "x": 0.222,
+          "y": -0.865,
+          "z": 0.693,
+          "dist": 0.791
+        },
+        "tipScreen": {
+          "x": 0.154,
+          "y": -0.286,
+          "z": 1,
+          "dist": 1.026
+        },
+        "armNearEyeM": 0.414,
+        "armStraightPct": 97.5,
+        "gunBounds": {
+          "topY": -0.424,
+          "botY": -8.188,
+          "leftX": -5.92,
+          "rightX": -0.331
+        },
+        "shOutM": 0.316,
+        "fistOutM": 0.845,
+        "fistRightM": 0.148,
+        "fistUpM": 1.07,
+        "torsoYawDeg": 51,
+        "torsoPitchDeg": 3.6,
+        "chestTurnDeg": 4,
+        "chestLeanDeg": 3.6,
+        "file": "qa/2026-10-26-AG-133/fp-held-knife-m4-2-drive.png"
+      },
+      {
+        "blade": "knife",
+        "gun": "m4",
+        "u": 0.4,
+        "liveU": 0.4,
+        "knifeVisible": true,
+        "fpW": 1,
+        "fpBladeDip": 1,
+        "fistScreen": {
+          "x": 0.137,
+          "y": -0.335,
+          "z": 0.628,
+          "dist": 0.646
+        },
+        "tipScreen": {
+          "x": 0.001,
+          "y": 0.1,
+          "z": 0.926,
+          "dist": 0.928
+        },
+        "armNearEyeM": 0.412,
+        "armStraightPct": 98.3,
+        "gunBounds": {
+          "topY": -0.43,
+          "botY": -8.368,
+          "leftX": -6.52,
+          "rightX": -0.409
+        },
+        "shOutM": 0.327,
+        "fistOutM": 0.787,
+        "fistRightM": 0.075,
+        "fistUpM": 1.291,
+        "torsoYawDeg": 54.8,
+        "torsoPitchDeg": 4.1,
+        "chestTurnDeg": 7.8,
+        "chestLeanDeg": 3.6,
+        "file": "qa/2026-10-26-AG-133/fp-held-knife-m4-3-stab.png"
+      },
+      {
+        "blade": "knife",
+        "gun": "m4",
+        "u": 0.58,
+        "liveU": 0.58,
+        "knifeVisible": true,
+        "fpW": 1,
+        "fpBladeDip": 1,
+        "fistScreen": {
+          "x": -0.338,
+          "y": -0.825,
+          "z": 0.584,
+          "dist": 0.678
+        },
+        "tipScreen": {
+          "x": -0.561,
+          "y": -0.515,
+          "z": 0.817,
+          "dist": 0.973
+        },
+        "armNearEyeM": 0.406,
+        "armStraightPct": 98.3,
+        "gunBounds": {
+          "topY": -0.32,
+          "botY": -8.124,
+          "leftX": -6.403,
+          "rightX": -0.427
+        },
+        "shOutM": 0.303,
+        "fistOutM": 0.701,
+        "fistRightM": -0.216,
+        "fistUpM": 1.142,
+        "torsoYawDeg": 55.8,
+        "torsoPitchDeg": 0.3,
+        "chestTurnDeg": 8.9,
+        "chestLeanDeg": -0.1,
+        "file": "qa/2026-10-26-AG-133/fp-held-knife-m4-4-cut.png"
+      }
+    ],
+    "machete_m4": [
+      {
+        "blade": "machete",
+        "gun": "m4",
+        "u": 0.16,
+        "liveU": 0.16,
+        "knifeVisible": true,
+        "fpW": 1,
+        "fpBladeDip": 1,
+        "fistScreen": {
+          "x": 0.681,
+          "y": -0.48,
+          "z": 0.558,
+          "dist": 0.698
+        },
+        "tipScreen": {
+          "x": 0.849,
+          "y": 1.155,
+          "z": 0.647,
+          "dist": 0.961
+        },
+        "armNearEyeM": 0.41,
+        "armStraightPct": 92.9,
+        "gunBounds": {
+          "topY": -0.426,
+          "botY": -6.2,
+          "leftX": -4.705,
+          "rightX": -0.201
+        },
+        "shOutM": 0.3,
+        "fistOutM": 0.723,
+        "fistRightM": 0.415,
+        "fistUpM": 1.256,
+        "torsoYawDeg": 43.3,
+        "torsoPitchDeg": 3.5,
+        "chestTurnDeg": -3.3,
+        "chestLeanDeg": 3.4,
+        "file": "qa/2026-10-26-AG-133/fp-held-machete-m4-1-wind.png"
+      },
+      {
+        "blade": "machete",
+        "gun": "m4",
+        "u": 0.36,
+        "liveU": 0.36,
+        "knifeVisible": true,
+        "fpW": 1,
+        "fpBladeDip": 1,
+        "fistScreen": {
+          "x": 0.623,
+          "y": 0.105,
+          "z": 0.435,
+          "dist": 0.517
+        },
+        "tipScreen": {
+          "x": 1.987,
+          "y": 9.074,
+          "z": 0.104,
+          "dist": 0.593
+        },
+        "armNearEyeM": 0.359,
+        "armStraightPct": 94.5,
+        "gunBounds": {
+          "topY": -0.609,
+          "botY": -5.574,
+          "leftX": -3.984,
+          "rightX": -0.129
+        },
+        "shOutM": 0.321,
+        "fistOutM": 0.667,
+        "fistRightM": 0.337,
+        "fistUpM": 1.416,
+        "torsoYawDeg": 38.3,
+        "torsoPitchDeg": 8.7,
+        "chestTurnDeg": -7.8,
+        "chestLeanDeg": 8,
+        "file": "qa/2026-10-26-AG-133/fp-held-machete-m4-2-cock.png"
+      },
+      {
+        "blade": "machete",
+        "gun": "m4",
+        "u": 0.47,
+        "liveU": 0.47,
+        "knifeVisible": true,
+        "fpW": 1,
+        "fpBladeDip": 1,
+        "fistScreen": {
+          "x": 0.108,
+          "y": -0.333,
+          "z": 0.559,
+          "dist": 0.573
+        },
+        "tipScreen": {
+          "x": -0.374,
+          "y": 0.382,
+          "z": 0.906,
+          "dist": 0.99
+        },
+        "armNearEyeM": 0.386,
+        "armStraightPct": 94.3,
+        "gunBounds": {
+          "topY": -0.581,
+          "botY": -8.787,
+          "leftX": -6.548,
+          "rightX": -0.27
+        },
+        "shOutM": 0.335,
+        "fistOutM": 0.773,
+        "fistRightM": 0.102,
+        "fistUpM": 1.291,
+        "torsoYawDeg": 45.6,
+        "torsoPitchDeg": 7.1,
+        "chestTurnDeg": -0.1,
+        "chestLeanDeg": 7,
+        "file": "qa/2026-10-26-AG-133/fp-held-machete-m4-3-chop.png"
+      },
+      {
+        "blade": "machete",
+        "gun": "m4",
+        "u": 0.58,
+        "liveU": 0.58,
+        "knifeVisible": true,
+        "fpW": 1,
+        "fpBladeDip": 1,
+        "fistScreen": {
+          "x": -0.449,
+          "y": -0.85,
+          "z": 0.475,
+          "dist": 0.572
+        },
+        "tipScreen": {
+          "x": -0.549,
+          "y": -0.9,
+          "z": 0.943,
+          "dist": 1.187
+        },
+        "armNearEyeM": 0.41,
+        "armStraightPct": 87.1,
+        "gunBounds": {
+          "topY": -0.444,
+          "botY": -7.495,
+          "leftX": -5.963,
+          "rightX": -0.405
+        },
+        "shOutM": 0.322,
+        "fistOutM": 0.631,
+        "fistRightM": -0.232,
+        "fistUpM": 1.181,
+        "torsoYawDeg": 52.9,
+        "torsoPitchDeg": 5.2,
+        "chestTurnDeg": 7.7,
+        "chestLeanDeg": 4.8,
+        "file": "qa/2026-10-26-AG-133/fp-held-machete-m4-4-cut.png"
+      }
+    ],
+    "katana_m4": [
+      {
+        "blade": "katana",
+        "gun": "m4",
+        "u": 0.36,
+        "liveU": 0.36,
+        "knifeVisible": true,
+        "fpW": 1,
+        "fpBladeDip": 1,
+        "fistScreen": {
+          "x": 0.622,
+          "y": 0.104,
+          "z": 0.435,
+          "dist": 0.516
+        },
+        "tipScreen": {
+          "x": -3.655,
+          "y": -27.829,
+          "z": -0.014,
+          "dist": 0.825
+        },
+        "armNearEyeM": 0.36,
+        "armStraightPct": 94.7,
+        "gunBounds": {
+          "topY": -0.6,
+          "botY": -5.384,
+          "leftX": -3.784,
+          "rightX": -0.12
+        },
+        "shOutM": 0.316,
+        "fistOutM": 0.67,
+        "fistRightM": 0.327,
+        "fistUpM": 1.414,
+        "torsoYawDeg": 37.1,
+        "torsoPitchDeg": 8.5,
+        "chestTurnDeg": -7.8,
+        "chestLeanDeg": 7.9,
+        "file": "qa/2026-10-26-AG-133/fp-held-katana-m4-1-cock.png"
+      },
+      {
+        "blade": "katana",
+        "gun": "m4",
+        "u": 0.47,
+        "liveU": 0.47,
+        "knifeVisible": true,
+        "fpW": 1,
+        "fpBladeDip": 1,
+        "fistScreen": {
+          "x": 0.105,
+          "y": -0.339,
+          "z": 0.549,
+          "dist": 0.563
+        },
+        "tipScreen": {
+          "x": -0.489,
+          "y": 0.626,
+          "z": 1.041,
+          "dist": 1.224
+        },
+        "armNearEyeM": 0.384,
+        "armStraightPct": 94.6,
+        "gunBounds": {
+          "topY": -0.572,
+          "botY": -8.576,
+          "leftX": -6.509,
+          "rightX": -0.26
+        },
+        "shOutM": 0.334,
+        "fistOutM": 0.77,
+        "fistRightM": 0.084,
+        "fistUpM": 1.287,
+        "torsoYawDeg": 44.7,
+        "torsoPitchDeg": 7.1,
+        "chestTurnDeg": 0,
+        "chestLeanDeg": 7.1,
+        "file": "qa/2026-10-26-AG-133/fp-held-katana-m4-2-chop.png"
+      },
+      {
+        "blade": "katana",
+        "gun": "m4",
+        "u": 0.58,
+        "liveU": 0.58,
+        "knifeVisible": true,
+        "fpW": 1,
+        "fpBladeDip": 1,
+        "fistScreen": {
+          "x": -0.449,
+          "y": -0.85,
+          "z": 0.467,
+          "dist": 0.563
+        },
+        "tipScreen": {
+          "x": -0.569,
+          "y": -0.843,
+          "z": 1.163,
+          "dist": 1.461
+        },
+        "armNearEyeM": 0.413,
+        "armStraightPct": 86.9,
+        "gunBounds": {
+          "topY": -0.442,
+          "botY": -7.463,
+          "leftX": -5.882,
+          "rightX": -0.4
+        },
+        "shOutM": 0.324,
+        "fistOutM": 0.629,
+        "fistRightM": -0.239,
+        "fistUpM": 1.183,
+        "torsoYawDeg": 52.5,
+        "torsoPitchDeg": 5.4,
+        "chestTurnDeg": 7.8,
+        "chestLeanDeg": 4.8,
+        "file": "qa/2026-10-26-AG-133/fp-held-katana-m4-3-cut.png"
+      }
+    ]
+  },
+  "fpPlaySpeed": {
+    "knife_pistol": {
+      "durSec": 0.22,
+      "minArmNearEyeM": 0.322,
+      "maxFpBladeDip": 1,
+      "minGunTopY": -0.595,
+      "maxGunTopY": -0.113,
+      "frames": [
+        {
+          "frame": 1,
+          "tMs": 16.7,
+          "blade": "knife",
+          "gun": "pistol",
+          "u": "frame-1",
+          "liveU": 0.12,
+          "knifeVisible": true,
+          "fpW": 1,
+          "fpBladeDip": 1,
+          "fistScreen": {
+            "x": 0.45,
+            "y": -1.506,
+            "z": 0.438,
+            "dist": 0.614
+          },
+          "tipScreen": {
+            "x": 0.296,
+            "y": -0.4,
+            "z": 0.722,
+            "dist": 0.773
+          },
+          "armNearEyeM": 0.482,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": -0.595,
+            "botY": -2.601,
+            "leftX": -0.55,
+            "rightX": -0.12
+          },
+          "shOutM": 0.031,
+          "fistOutM": 0.549,
+          "fistRightM": 0.199,
+          "fistUpM": 1.044,
+          "torsoYawDeg": 1.5,
+          "torsoPitchDeg": 0.3,
+          "file": "qa/2026-10-26-AG-133/fp-play-knife-pistol-f01.png"
+        },
+        {
+          "frame": 2,
+          "tMs": 33.3,
+          "blade": "knife",
+          "gun": "pistol",
+          "u": "frame-2",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.166,
+            "y": -1.127,
+            "z": 0.303,
+            "dist": 0.365
+          },
+          "tipScreen": {
+            "x": -0.166,
+            "y": -1.127,
+            "z": 0.303,
+            "dist": 0.365
+          },
+          "armNearEyeM": 0.339,
+          "armStraightPct": 97.1,
+          "gunBounds": {
+            "topY": -0.116,
+            "botY": -1.383,
+            "leftX": -0.271,
+            "rightX": -0.046
+          },
+          "shOutM": 0.05,
+          "fistOutM": 0.412,
+          "fistRightM": -0.056,
+          "fistUpM": 1.228,
+          "torsoYawDeg": 5,
+          "torsoPitchDeg": 0.1,
+          "file": null
+        },
+        {
+          "frame": 3,
+          "tMs": 50,
+          "blade": "knife",
+          "gun": "pistol",
+          "u": "frame-3",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.167,
+            "y": -1.131,
+            "z": 0.304,
+            "dist": 0.366
+          },
+          "tipScreen": {
+            "x": -0.167,
+            "y": -1.131,
+            "z": 0.304,
+            "dist": 0.366
+          },
+          "armNearEyeM": 0.339,
+          "armStraightPct": 97.3,
+          "gunBounds": {
+            "topY": -0.116,
+            "botY": -1.382,
+            "leftX": -0.272,
+            "rightX": -0.046
+          },
+          "shOutM": 0.05,
+          "fistOutM": 0.412,
+          "fistRightM": -0.056,
+          "fistUpM": 1.226,
+          "torsoYawDeg": 5,
+          "torsoPitchDeg": 0.1,
+          "file": "qa/2026-10-26-AG-133/fp-play-knife-pistol-f03.png"
+        },
+        {
+          "frame": 4,
+          "tMs": 66.7,
+          "blade": "knife",
+          "gun": "pistol",
+          "u": "frame-4",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.053,
+            "y": -0.849,
+            "z": 0.308,
+            "dist": 0.343
+          },
+          "tipScreen": {
+            "x": -0.053,
+            "y": -0.849,
+            "z": 0.308,
+            "dist": 0.343
+          },
+          "armNearEyeM": 0.327,
+          "armStraightPct": 96.3,
+          "gunBounds": {
+            "topY": -0.114,
+            "botY": -1.378,
+            "leftX": -0.276,
+            "rightX": -0.048
+          },
+          "shOutM": 0.05,
+          "fistOutM": 0.416,
+          "fistRightM": -0.021,
+          "fistUpM": 1.274,
+          "torsoYawDeg": 5.1,
+          "torsoPitchDeg": 0,
+          "file": null
+        },
+        {
+          "frame": 5,
+          "tMs": 83.3,
+          "blade": "knife",
+          "gun": "pistol",
+          "u": "frame-5",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.054,
+            "y": -0.849,
+            "z": 0.308,
+            "dist": 0.343
+          },
+          "tipScreen": {
+            "x": -0.054,
+            "y": -0.849,
+            "z": 0.308,
+            "dist": 0.343
+          },
+          "armNearEyeM": 0.327,
+          "armStraightPct": 96.3,
+          "gunBounds": {
+            "topY": -0.114,
+            "botY": -1.378,
+            "leftX": -0.276,
+            "rightX": -0.048
+          },
+          "shOutM": 0.05,
+          "fistOutM": 0.416,
+          "fistRightM": -0.021,
+          "fistUpM": 1.274,
+          "torsoYawDeg": 5.1,
+          "torsoPitchDeg": 0,
+          "file": "qa/2026-10-26-AG-133/fp-play-knife-pistol-f05.png"
+        },
+        {
+          "frame": 6,
+          "tMs": 100,
+          "blade": "knife",
+          "gun": "pistol",
+          "u": "frame-6",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.056,
+            "y": -0.851,
+            "z": 0.307,
+            "dist": 0.342
+          },
+          "tipScreen": {
+            "x": -0.056,
+            "y": -0.851,
+            "z": 0.307,
+            "dist": 0.342
+          },
+          "armNearEyeM": 0.326,
+          "armStraightPct": 96.3,
+          "gunBounds": {
+            "topY": -0.113,
+            "botY": -1.382,
+            "leftX": -0.279,
+            "rightX": -0.049
+          },
+          "shOutM": 0.051,
+          "fistOutM": 0.417,
+          "fistRightM": -0.021,
+          "fistUpM": 1.273,
+          "torsoYawDeg": 5.2,
+          "torsoPitchDeg": 0.1,
+          "file": null
+        },
+        {
+          "frame": 7,
+          "tMs": 116.7,
+          "blade": "knife",
+          "gun": "pistol",
+          "u": "frame-7",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.056,
+            "y": -0.852,
+            "z": 0.307,
+            "dist": 0.342
+          },
+          "tipScreen": {
+            "x": -0.056,
+            "y": -0.852,
+            "z": 0.307,
+            "dist": 0.342
+          },
+          "armNearEyeM": 0.326,
+          "armStraightPct": 96.3,
+          "gunBounds": {
+            "topY": -0.113,
+            "botY": -1.383,
+            "leftX": -0.28,
+            "rightX": -0.049
+          },
+          "shOutM": 0.051,
+          "fistOutM": 0.417,
+          "fistRightM": -0.021,
+          "fistUpM": 1.273,
+          "torsoYawDeg": 5.2,
+          "torsoPitchDeg": 0.1,
+          "file": "qa/2026-10-26-AG-133/fp-play-knife-pistol-f07.png"
+        },
+        {
+          "frame": 8,
+          "tMs": 133.3,
+          "blade": "knife",
+          "gun": "pistol",
+          "u": "frame-8",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.058,
+            "y": -0.857,
+            "z": 0.305,
+            "dist": 0.341
+          },
+          "tipScreen": {
+            "x": -0.058,
+            "y": -0.857,
+            "z": 0.305,
+            "dist": 0.341
+          },
+          "armNearEyeM": 0.325,
+          "armStraightPct": 96.3,
+          "gunBounds": {
+            "topY": -0.115,
+            "botY": -1.393,
+            "leftX": -0.284,
+            "rightX": -0.05
+          },
+          "shOutM": 0.053,
+          "fistOutM": 0.418,
+          "fistRightM": -0.022,
+          "fistUpM": 1.272,
+          "torsoYawDeg": 5.3,
+          "torsoPitchDeg": 0.2,
+          "file": null
+        },
+        {
+          "frame": 9,
+          "tMs": 150,
+          "blade": "knife",
+          "gun": "pistol",
+          "u": "frame-9",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.058,
+            "y": -0.858,
+            "z": 0.305,
+            "dist": 0.341
+          },
+          "tipScreen": {
+            "x": -0.058,
+            "y": -0.858,
+            "z": 0.305,
+            "dist": 0.341
+          },
+          "armNearEyeM": 0.325,
+          "armStraightPct": 96.3,
+          "gunBounds": {
+            "topY": -0.115,
+            "botY": -1.394,
+            "leftX": -0.285,
+            "rightX": -0.051
+          },
+          "shOutM": 0.053,
+          "fistOutM": 0.418,
+          "fistRightM": -0.022,
+          "fistUpM": 1.272,
+          "torsoYawDeg": 5.3,
+          "torsoPitchDeg": 0.3,
+          "file": "qa/2026-10-26-AG-133/fp-play-knife-pistol-f09.png"
+        },
+        {
+          "frame": 10,
+          "tMs": 166.7,
+          "blade": "knife",
+          "gun": "pistol",
+          "u": "frame-10",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.061,
+            "y": -0.866,
+            "z": 0.303,
+            "dist": 0.339
+          },
+          "tipScreen": {
+            "x": -0.061,
+            "y": -0.866,
+            "z": 0.303,
+            "dist": 0.339
+          },
+          "armNearEyeM": 0.324,
+          "armStraightPct": 96.2,
+          "gunBounds": {
+            "topY": -0.117,
+            "botY": -1.408,
+            "leftX": -0.29,
+            "rightX": -0.052
+          },
+          "shOutM": 0.055,
+          "fistOutM": 0.42,
+          "fistRightM": -0.022,
+          "fistUpM": 1.27,
+          "torsoYawDeg": 5.4,
+          "torsoPitchDeg": 0.5,
+          "file": null
+        },
+        {
+          "frame": 11,
+          "tMs": 183.3,
+          "blade": "knife",
+          "gun": "pistol",
+          "u": "frame-11",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.062,
+            "y": -0.867,
+            "z": 0.303,
+            "dist": 0.339
+          },
+          "tipScreen": {
+            "x": -0.062,
+            "y": -0.867,
+            "z": 0.303,
+            "dist": 0.339
+          },
+          "armNearEyeM": 0.323,
+          "armStraightPct": 96.2,
+          "gunBounds": {
+            "topY": -0.117,
+            "botY": -1.41,
+            "leftX": -0.291,
+            "rightX": -0.052
+          },
+          "shOutM": 0.056,
+          "fistOutM": 0.421,
+          "fistRightM": -0.022,
+          "fistUpM": 1.27,
+          "torsoYawDeg": 5.4,
+          "torsoPitchDeg": 0.5,
+          "file": null
+        },
+        {
+          "frame": 12,
+          "tMs": 200,
+          "blade": "knife",
+          "gun": "pistol",
+          "u": "frame-12",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.062,
+            "y": -0.867,
+            "z": 0.303,
+            "dist": 0.339
+          },
+          "tipScreen": {
+            "x": -0.062,
+            "y": -0.867,
+            "z": 0.303,
+            "dist": 0.339
+          },
+          "armNearEyeM": 0.323,
+          "armStraightPct": 96.2,
+          "gunBounds": {
+            "topY": -0.117,
+            "botY": -1.411,
+            "leftX": -0.292,
+            "rightX": -0.053
+          },
+          "shOutM": 0.056,
+          "fistOutM": 0.421,
+          "fistRightM": -0.022,
+          "fistUpM": 1.269,
+          "torsoYawDeg": 5.5,
+          "torsoPitchDeg": 0.5,
+          "file": "qa/2026-10-26-AG-133/fp-play-knife-pistol-f12.png"
+        },
+        {
+          "frame": 13,
+          "tMs": 216.7,
+          "blade": "knife",
+          "gun": "pistol",
+          "u": "frame-13",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.065,
+            "y": -0.872,
+            "z": 0.301,
+            "dist": 0.337
+          },
+          "tipScreen": {
+            "x": -0.065,
+            "y": -0.872,
+            "z": 0.301,
+            "dist": 0.337
+          },
+          "armNearEyeM": 0.322,
+          "armStraightPct": 96.2,
+          "gunBounds": {
+            "topY": -0.117,
+            "botY": -1.421,
+            "leftX": -0.298,
+            "rightX": -0.055
+          },
+          "shOutM": 0.057,
+          "fistOutM": 0.422,
+          "fistRightM": -0.023,
+          "fistUpM": 1.268,
+          "torsoYawDeg": 5.6,
+          "torsoPitchDeg": 0.7,
+          "file": null
+        },
+        {
+          "frame": 14,
+          "tMs": 233.3,
+          "blade": "knife",
+          "gun": "pistol",
+          "u": "frame-14",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.065,
+            "y": -0.872,
+            "z": 0.301,
+            "dist": 0.337
+          },
+          "tipScreen": {
+            "x": -0.065,
+            "y": -0.872,
+            "z": 0.301,
+            "dist": 0.337
+          },
+          "armNearEyeM": 0.322,
+          "armStraightPct": 96.2,
+          "gunBounds": {
+            "topY": -0.117,
+            "botY": -1.422,
+            "leftX": -0.298,
+            "rightX": -0.055
+          },
+          "shOutM": 0.058,
+          "fistOutM": 0.422,
+          "fistRightM": -0.023,
+          "fistUpM": 1.268,
+          "torsoYawDeg": 5.6,
+          "torsoPitchDeg": 0.7,
+          "file": null
+        },
+        {
+          "frame": 15,
+          "tMs": 250,
+          "blade": "knife",
+          "gun": "pistol",
+          "u": "frame-15",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.066,
+            "y": -0.873,
+            "z": 0.3,
+            "dist": 0.337
+          },
+          "tipScreen": {
+            "x": -0.066,
+            "y": -0.873,
+            "z": 0.3,
+            "dist": 0.337
+          },
+          "armNearEyeM": 0.322,
+          "armStraightPct": 96.2,
+          "gunBounds": {
+            "topY": -0.117,
+            "botY": -1.423,
+            "leftX": -0.299,
+            "rightX": -0.055
+          },
+          "shOutM": 0.058,
+          "fistOutM": 0.422,
+          "fistRightM": -0.023,
+          "fistUpM": 1.268,
+          "torsoYawDeg": 5.6,
+          "torsoPitchDeg": 0.7,
+          "file": null
+        }
+      ]
+    },
+    "knife_m4": {
+      "durSec": 0.22,
+      "minArmNearEyeM": 0.397,
+      "maxFpBladeDip": 1,
+      "minGunTopY": -0.294,
+      "maxGunTopY": 0.018,
+      "frames": [
+        {
+          "frame": 1,
+          "tMs": 16.7,
+          "blade": "knife",
+          "gun": "m4",
+          "u": "frame-1",
+          "liveU": 0.108,
+          "knifeVisible": true,
+          "fpW": 1,
+          "fpBladeDip": 1,
+          "fistScreen": {
+            "x": 0.448,
+            "y": -1.502,
+            "z": 0.635,
+            "dist": 0.89
+          },
+          "tipScreen": {
+            "x": 0.328,
+            "y": -0.635,
+            "z": 0.92,
+            "dist": 1.028
+          },
+          "armNearEyeM": 0.411,
+          "armStraightPct": 96,
+          "gunBounds": {
+            "topY": -0.294,
+            "botY": -5.305,
+            "leftX": -3.882,
+            "rightX": -0.186
+          },
+          "shOutM": 0.273,
+          "fistOutM": 0.755,
+          "fistRightM": 0.291,
+          "fistUpM": 0.869,
+          "torsoYawDeg": 42.9,
+          "torsoPitchDeg": 0.5,
+          "file": "qa/2026-10-26-AG-133/fp-play-knife-m4-f01.png"
+        },
+        {
+          "frame": 2,
+          "tMs": 33.3,
+          "blade": "knife",
+          "gun": "m4",
+          "u": "frame-2",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.598,
+            "y": -0.494,
+            "z": 0.438,
+            "dist": 0.529
+          },
+          "tipScreen": {
+            "x": -0.598,
+            "y": -0.494,
+            "z": 0.438,
+            "dist": 0.529
+          },
+          "armNearEyeM": 0.397,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": 0.018,
+            "botY": -3.411,
+            "leftX": -5.342,
+            "rightX": -0.23
+          },
+          "shOutM": 0.28,
+          "fistOutM": 0.555,
+          "fistRightM": -0.27,
+          "fistUpM": 1.296,
+          "torsoYawDeg": 46.1,
+          "torsoPitchDeg": 0.3,
+          "file": null
+        },
+        {
+          "frame": 3,
+          "tMs": 50,
+          "blade": "knife",
+          "gun": "m4",
+          "u": "frame-3",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.6,
+            "y": -0.494,
+            "z": 0.437,
+            "dist": 0.529
+          },
+          "tipScreen": {
+            "x": -0.6,
+            "y": -0.494,
+            "z": 0.437,
+            "dist": 0.529
+          },
+          "armNearEyeM": 0.397,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": 0.018,
+            "botY": -3.4,
+            "leftX": -5.327,
+            "rightX": -0.23
+          },
+          "shOutM": 0.28,
+          "fistOutM": 0.554,
+          "fistRightM": -0.271,
+          "fistUpM": 1.296,
+          "torsoYawDeg": 46.1,
+          "torsoPitchDeg": 0.2,
+          "file": "qa/2026-10-26-AG-133/fp-play-knife-m4-f03.png"
+        },
+        {
+          "frame": 4,
+          "tMs": 66.7,
+          "blade": "knife",
+          "gun": "m4",
+          "u": "frame-4",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.583,
+            "y": -0.485,
+            "z": 0.445,
+            "dist": 0.533
+          },
+          "tipScreen": {
+            "x": -0.583,
+            "y": -0.485,
+            "z": 0.445,
+            "dist": 0.533
+          },
+          "armNearEyeM": 0.398,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": 0.017,
+            "botY": -3.354,
+            "leftX": -5.265,
+            "rightX": -0.231
+          },
+          "shOutM": 0.279,
+          "fistOutM": 0.559,
+          "fistRightM": -0.267,
+          "fistUpM": 1.297,
+          "torsoYawDeg": 46.3,
+          "torsoPitchDeg": 0.1,
+          "file": null
+        },
+        {
+          "frame": 5,
+          "tMs": 83.3,
+          "blade": "knife",
+          "gun": "m4",
+          "u": "frame-5",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.583,
+            "y": -0.485,
+            "z": 0.445,
+            "dist": 0.533
+          },
+          "tipScreen": {
+            "x": -0.583,
+            "y": -0.485,
+            "z": 0.445,
+            "dist": 0.533
+          },
+          "armNearEyeM": 0.398,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": 0.016,
+            "botY": -3.349,
+            "leftX": -5.259,
+            "rightX": -0.231
+          },
+          "shOutM": 0.279,
+          "fistOutM": 0.559,
+          "fistRightM": -0.267,
+          "fistUpM": 1.297,
+          "torsoYawDeg": 46.3,
+          "torsoPitchDeg": 0.1,
+          "file": "qa/2026-10-26-AG-133/fp-play-knife-m4-f05.png"
+        },
+        {
+          "frame": 6,
+          "tMs": 100,
+          "blade": "knife",
+          "gun": "m4",
+          "u": "frame-6",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.584,
+            "y": -0.484,
+            "z": 0.447,
+            "dist": 0.536
+          },
+          "tipScreen": {
+            "x": -0.584,
+            "y": -0.484,
+            "z": 0.447,
+            "dist": 0.536
+          },
+          "armNearEyeM": 0.399,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": 0.014,
+            "botY": -3.325,
+            "leftX": -5.22,
+            "rightX": -0.232
+          },
+          "shOutM": 0.279,
+          "fistOutM": 0.558,
+          "fistRightM": -0.267,
+          "fistUpM": 1.297,
+          "torsoYawDeg": 46.4,
+          "torsoPitchDeg": 0,
+          "file": null
+        },
+        {
+          "frame": 7,
+          "tMs": 116.7,
+          "blade": "knife",
+          "gun": "m4",
+          "u": "frame-7",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.584,
+            "y": -0.484,
+            "z": 0.447,
+            "dist": 0.536
+          },
+          "tipScreen": {
+            "x": -0.584,
+            "y": -0.484,
+            "z": 0.447,
+            "dist": 0.536
+          },
+          "armNearEyeM": 0.399,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": 0.014,
+            "botY": -3.323,
+            "leftX": -5.217,
+            "rightX": -0.232
+          },
+          "shOutM": 0.279,
+          "fistOutM": 0.558,
+          "fistRightM": -0.267,
+          "fistUpM": 1.297,
+          "torsoYawDeg": 46.4,
+          "torsoPitchDeg": 0,
+          "file": "qa/2026-10-26-AG-133/fp-play-knife-m4-f07.png"
+        },
+        {
+          "frame": 8,
+          "tMs": 133.3,
+          "blade": "knife",
+          "gun": "m4",
+          "u": "frame-8",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.586,
+            "y": -0.485,
+            "z": 0.448,
+            "dist": 0.538
+          },
+          "tipScreen": {
+            "x": -0.586,
+            "y": -0.485,
+            "z": 0.448,
+            "dist": 0.538
+          },
+          "armNearEyeM": 0.4,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": 0.01,
+            "botY": -3.327,
+            "leftX": -5.216,
+            "rightX": -0.234
+          },
+          "shOutM": 0.279,
+          "fistOutM": 0.559,
+          "fistRightM": -0.267,
+          "fistUpM": 1.297,
+          "torsoYawDeg": 46.5,
+          "torsoPitchDeg": 0.1,
+          "file": null
+        },
+        {
+          "frame": 9,
+          "tMs": 150,
+          "blade": "knife",
+          "gun": "m4",
+          "u": "frame-9",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.586,
+            "y": -0.486,
+            "z": 0.448,
+            "dist": 0.538
+          },
+          "tipScreen": {
+            "x": -0.586,
+            "y": -0.486,
+            "z": 0.448,
+            "dist": 0.538
+          },
+          "armNearEyeM": 0.4,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": 0.01,
+            "botY": -3.33,
+            "leftX": -5.218,
+            "rightX": -0.234
+          },
+          "shOutM": 0.28,
+          "fistOutM": 0.559,
+          "fistRightM": -0.267,
+          "fistUpM": 1.297,
+          "torsoYawDeg": 46.5,
+          "torsoPitchDeg": 0.1,
+          "file": "qa/2026-10-26-AG-133/fp-play-knife-m4-f09.png"
+        },
+        {
+          "frame": 10,
+          "tMs": 166.7,
+          "blade": "knife",
+          "gun": "m4",
+          "u": "frame-10",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.589,
+            "y": -0.488,
+            "z": 0.448,
+            "dist": 0.539
+          },
+          "tipScreen": {
+            "x": -0.589,
+            "y": -0.488,
+            "z": 0.448,
+            "dist": 0.539
+          },
+          "armNearEyeM": 0.4,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": 0.006,
+            "botY": -3.363,
+            "leftX": -5.258,
+            "rightX": -0.235
+          },
+          "shOutM": 0.281,
+          "fistOutM": 0.561,
+          "fistRightM": -0.267,
+          "fistUpM": 1.296,
+          "torsoYawDeg": 46.6,
+          "torsoPitchDeg": 0.3,
+          "file": null
+        },
+        {
+          "frame": 11,
+          "tMs": 183.3,
+          "blade": "knife",
+          "gun": "m4",
+          "u": "frame-11",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.589,
+            "y": -0.489,
+            "z": 0.448,
+            "dist": 0.539
+          },
+          "tipScreen": {
+            "x": -0.589,
+            "y": -0.489,
+            "z": 0.448,
+            "dist": 0.539
+          },
+          "armNearEyeM": 0.4,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": 0.005,
+            "botY": -3.368,
+            "leftX": -5.264,
+            "rightX": -0.235
+          },
+          "shOutM": 0.281,
+          "fistOutM": 0.561,
+          "fistRightM": -0.267,
+          "fistUpM": 1.296,
+          "torsoYawDeg": 46.6,
+          "torsoPitchDeg": 0.3,
+          "file": null
+        },
+        {
+          "frame": 12,
+          "tMs": 200,
+          "blade": "knife",
+          "gun": "m4",
+          "u": "frame-12",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.589,
+            "y": -0.489,
+            "z": 0.448,
+            "dist": 0.539
+          },
+          "tipScreen": {
+            "x": -0.589,
+            "y": -0.489,
+            "z": 0.448,
+            "dist": 0.539
+          },
+          "armNearEyeM": 0.4,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": 0.004,
+            "botY": -3.375,
+            "leftX": -5.272,
+            "rightX": -0.235
+          },
+          "shOutM": 0.281,
+          "fistOutM": 0.561,
+          "fistRightM": -0.267,
+          "fistUpM": 1.296,
+          "torsoYawDeg": 46.6,
+          "torsoPitchDeg": 0.3,
+          "file": "qa/2026-10-26-AG-133/fp-play-knife-m4-f12.png"
+        },
+        {
+          "frame": 13,
+          "tMs": 216.7,
+          "blade": "knife",
+          "gun": "m4",
+          "u": "frame-13",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.593,
+            "y": -0.492,
+            "z": 0.448,
+            "dist": 0.54
+          },
+          "tipScreen": {
+            "x": -0.593,
+            "y": -0.492,
+            "z": 0.448,
+            "dist": 0.54
+          },
+          "armNearEyeM": 0.401,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": 0,
+            "botY": -3.429,
+            "leftX": -5.343,
+            "rightX": -0.237
+          },
+          "shOutM": 0.283,
+          "fistOutM": 0.563,
+          "fistRightM": -0.267,
+          "fistUpM": 1.295,
+          "torsoYawDeg": 46.7,
+          "torsoPitchDeg": 0.6,
+          "file": null
+        },
+        {
+          "frame": 14,
+          "tMs": 233.3,
+          "blade": "knife",
+          "gun": "m4",
+          "u": "frame-14",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.593,
+            "y": -0.493,
+            "z": 0.448,
+            "dist": 0.54
+          },
+          "tipScreen": {
+            "x": -0.593,
+            "y": -0.493,
+            "z": 0.448,
+            "dist": 0.54
+          },
+          "armNearEyeM": 0.401,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": 0,
+            "botY": -3.434,
+            "leftX": -5.35,
+            "rightX": -0.237
+          },
+          "shOutM": 0.283,
+          "fistOutM": 0.563,
+          "fistRightM": -0.267,
+          "fistUpM": 1.294,
+          "torsoYawDeg": 46.7,
+          "torsoPitchDeg": 0.6,
+          "file": null
+        },
+        {
+          "frame": 15,
+          "tMs": 250,
+          "blade": "knife",
+          "gun": "m4",
+          "u": "frame-15",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.594,
+            "y": -0.493,
+            "z": 0.448,
+            "dist": 0.54
+          },
+          "tipScreen": {
+            "x": -0.594,
+            "y": -0.493,
+            "z": 0.448,
+            "dist": 0.54
+          },
+          "armNearEyeM": 0.401,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": -0.001,
+            "botY": -3.439,
+            "leftX": -5.357,
+            "rightX": -0.237
+          },
+          "shOutM": 0.283,
+          "fistOutM": 0.563,
+          "fistRightM": -0.267,
+          "fistUpM": 1.294,
+          "torsoYawDeg": 46.8,
+          "torsoPitchDeg": 0.6,
+          "file": null
+        }
+      ]
+    },
+    "machete_pistol": {
+      "durSec": 0.4,
+      "minArmNearEyeM": 0.321,
+      "maxFpBladeDip": 1,
+      "minGunTopY": -0.687,
+      "maxGunTopY": -0.112,
+      "frames": [
+        {
+          "frame": 1,
+          "tMs": 16.7,
+          "blade": "machete",
+          "gun": "pistol",
+          "u": "frame-1",
+          "liveU": 0.054,
+          "knifeVisible": true,
+          "fpW": 1,
+          "fpBladeDip": 0.562,
+          "fistScreen": {
+            "x": 0.467,
+            "y": -0.916,
+            "z": 0.347,
+            "dist": 0.426
+          },
+          "tipScreen": {
+            "x": 0.104,
+            "y": 0.757,
+            "z": 0.708,
+            "dist": 0.777
+          },
+          "armNearEyeM": 0.426,
+          "armStraightPct": 85,
+          "gunBounds": {
+            "topY": -0.407,
+            "botY": -2.106,
+            "leftX": -0.513,
+            "rightX": -0.138
+          },
+          "shOutM": 0.065,
+          "fistOutM": 0.464,
+          "fistRightM": 0.17,
+          "fistUpM": 1.239,
+          "torsoYawDeg": 6.3,
+          "torsoPitchDeg": 1.1,
+          "file": null
+        },
+        {
+          "frame": 2,
+          "tMs": 33.3,
+          "blade": "machete",
+          "gun": "pistol",
+          "u": "frame-2",
+          "liveU": 0.149,
+          "knifeVisible": true,
+          "fpW": 1,
+          "fpBladeDip": 1,
+          "fistScreen": {
+            "x": 0.658,
+            "y": -0.587,
+            "z": 0.44,
+            "dist": 0.551
+          },
+          "tipScreen": {
+            "x": 0.786,
+            "y": 1.191,
+            "z": 0.604,
+            "dist": 0.881
+          },
+          "armNearEyeM": 0.465,
+          "armStraightPct": 96.5,
+          "gunBounds": {
+            "topY": -0.687,
+            "botY": -2.699,
+            "leftX": -0.575,
+            "rightX": -0.139
+          },
+          "shOutM": 0.067,
+          "fistOutM": 0.568,
+          "fistRightM": 0.308,
+          "fistUpM": 1.271,
+          "torsoYawDeg": 3.9,
+          "torsoPitchDeg": 3.6,
+          "file": "qa/2026-10-26-AG-133/fp-play-machete-pistol-f02.png"
+        },
+        {
+          "frame": 3,
+          "tMs": 50,
+          "blade": "machete",
+          "gun": "pistol",
+          "u": "frame-3",
+          "liveU": 1,
+          "knifeVisible": true,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": 0.041,
+            "y": -5.587,
+            "z": 0.209,
+            "dist": 0.705
+          },
+          "tipScreen": {
+            "x": -0.821,
+            "y": -2.538,
+            "z": 0.552,
+            "dist": 1.084
+          },
+          "armNearEyeM": 0.482,
+          "armStraightPct": 93.5,
+          "gunBounds": {
+            "topY": -0.118,
+            "botY": -1.45,
+            "leftX": -0.341,
+            "rightX": -0.072
+          },
+          "shOutM": 0.063,
+          "fistOutM": 0.331,
+          "fistRightM": 0.009,
+          "fistUpM": 0.748,
+          "torsoYawDeg": 6.8,
+          "torsoPitchDeg": 0.4,
+          "file": null
+        },
+        {
+          "frame": 4,
+          "tMs": 66.7,
+          "blade": "machete",
+          "gun": "pistol",
+          "u": "frame-4",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.183,
+            "y": -1.165,
+            "z": 0.297,
+            "dist": 0.362
+          },
+          "tipScreen": {
+            "x": -0.183,
+            "y": -1.165,
+            "z": 0.297,
+            "dist": 0.362
+          },
+          "armNearEyeM": 0.35,
+          "armStraightPct": 94.5,
+          "gunBounds": {
+            "topY": -0.12,
+            "botY": -1.431,
+            "leftX": -0.34,
+            "rightX": -0.074
+          },
+          "shOutM": 0.063,
+          "fistOutM": 0.414,
+          "fistRightM": -0.054,
+          "fistUpM": 1.223,
+          "torsoYawDeg": 6.8,
+          "torsoPitchDeg": 0.4,
+          "file": null
+        },
+        {
+          "frame": 5,
+          "tMs": 83.3,
+          "blade": "machete",
+          "gun": "pistol",
+          "u": "frame-5",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.206,
+            "y": -1.127,
+            "z": 0.295,
+            "dist": 0.357
+          },
+          "tipScreen": {
+            "x": -0.206,
+            "y": -1.127,
+            "z": 0.295,
+            "dist": 0.357
+          },
+          "armNearEyeM": 0.34,
+          "armStraightPct": 95.8,
+          "gunBounds": {
+            "topY": -0.121,
+            "botY": -1.42,
+            "leftX": -0.339,
+            "rightX": -0.075
+          },
+          "shOutM": 0.063,
+          "fistOutM": 0.41,
+          "fistRightM": -0.06,
+          "fistUpM": 1.232,
+          "torsoYawDeg": 6.8,
+          "torsoPitchDeg": 0.4,
+          "file": null
+        },
+        {
+          "frame": 6,
+          "tMs": 100,
+          "blade": "machete",
+          "gun": "pistol",
+          "u": "frame-6",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.214,
+            "y": -1.137,
+            "z": 0.297,
+            "dist": 0.361
+          },
+          "tipScreen": {
+            "x": -0.214,
+            "y": -1.137,
+            "z": 0.297,
+            "dist": 0.361
+          },
+          "armNearEyeM": 0.338,
+          "armStraightPct": 96.5,
+          "gunBounds": {
+            "topY": -0.121,
+            "botY": -1.413,
+            "leftX": -0.339,
+            "rightX": -0.075
+          },
+          "shOutM": 0.063,
+          "fistOutM": 0.41,
+          "fistRightM": -0.062,
+          "fistUpM": 1.229,
+          "torsoYawDeg": 6.8,
+          "torsoPitchDeg": 0.4,
+          "file": "qa/2026-10-26-AG-133/fp-play-machete-pistol-f06.png"
+        },
+        {
+          "frame": 7,
+          "tMs": 116.7,
+          "blade": "machete",
+          "gun": "pistol",
+          "u": "frame-7",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.102,
+            "y": -0.863,
+            "z": 0.305,
+            "dist": 0.342
+          },
+          "tipScreen": {
+            "x": -0.102,
+            "y": -0.863,
+            "z": 0.305,
+            "dist": 0.342
+          },
+          "armNearEyeM": 0.327,
+          "armStraightPct": 95.9,
+          "gunBounds": {
+            "topY": -0.118,
+            "botY": -1.398,
+            "leftX": -0.339,
+            "rightX": -0.076
+          },
+          "shOutM": 0.061,
+          "fistOutM": 0.414,
+          "fistRightM": -0.029,
+          "fistUpM": 1.273,
+          "torsoYawDeg": 6.9,
+          "torsoPitchDeg": 0.2,
+          "file": null
+        },
+        {
+          "frame": 8,
+          "tMs": 133.3,
+          "blade": "machete",
+          "gun": "pistol",
+          "u": "frame-8",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.102,
+            "y": -0.862,
+            "z": 0.305,
+            "dist": 0.342
+          },
+          "tipScreen": {
+            "x": -0.102,
+            "y": -0.862,
+            "z": 0.305,
+            "dist": 0.342
+          },
+          "armNearEyeM": 0.327,
+          "armStraightPct": 95.9,
+          "gunBounds": {
+            "topY": -0.117,
+            "botY": -1.397,
+            "leftX": -0.339,
+            "rightX": -0.076
+          },
+          "shOutM": 0.061,
+          "fistOutM": 0.414,
+          "fistRightM": -0.029,
+          "fistUpM": 1.273,
+          "torsoYawDeg": 6.9,
+          "torsoPitchDeg": 0.1,
+          "file": null
+        },
+        {
+          "frame": 9,
+          "tMs": 150,
+          "blade": "machete",
+          "gun": "pistol",
+          "u": "frame-9",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.102,
+            "y": -0.861,
+            "z": 0.305,
+            "dist": 0.342
+          },
+          "tipScreen": {
+            "x": -0.102,
+            "y": -0.861,
+            "z": 0.305,
+            "dist": 0.342
+          },
+          "armNearEyeM": 0.327,
+          "armStraightPct": 95.9,
+          "gunBounds": {
+            "topY": -0.117,
+            "botY": -1.396,
+            "leftX": -0.339,
+            "rightX": -0.076
+          },
+          "shOutM": 0.061,
+          "fistOutM": 0.414,
+          "fistRightM": -0.029,
+          "fistUpM": 1.273,
+          "torsoYawDeg": 6.9,
+          "torsoPitchDeg": 0.1,
+          "file": "qa/2026-10-26-AG-133/fp-play-machete-pistol-f09.png"
+        },
+        {
+          "frame": 10,
+          "tMs": 166.7,
+          "blade": "machete",
+          "gun": "pistol",
+          "u": "frame-10",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.102,
+            "y": -0.857,
+            "z": 0.304,
+            "dist": 0.341
+          },
+          "tipScreen": {
+            "x": -0.102,
+            "y": -0.857,
+            "z": 0.304,
+            "dist": 0.341
+          },
+          "armNearEyeM": 0.326,
+          "armStraightPct": 95.9,
+          "gunBounds": {
+            "topY": -0.114,
+            "botY": -1.392,
+            "leftX": -0.34,
+            "rightX": -0.076
+          },
+          "shOutM": 0.06,
+          "fistOutM": 0.413,
+          "fistRightM": -0.029,
+          "fistUpM": 1.274,
+          "torsoYawDeg": 6.9,
+          "torsoPitchDeg": 0,
+          "file": null
+        },
+        {
+          "frame": 11,
+          "tMs": 183.3,
+          "blade": "machete",
+          "gun": "pistol",
+          "u": "frame-11",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.102,
+            "y": -0.857,
+            "z": 0.304,
+            "dist": 0.341
+          },
+          "tipScreen": {
+            "x": -0.102,
+            "y": -0.857,
+            "z": 0.304,
+            "dist": 0.341
+          },
+          "armNearEyeM": 0.326,
+          "armStraightPct": 95.9,
+          "gunBounds": {
+            "topY": -0.113,
+            "botY": -1.392,
+            "leftX": -0.34,
+            "rightX": -0.076
+          },
+          "shOutM": 0.06,
+          "fistOutM": 0.413,
+          "fistRightM": -0.029,
+          "fistUpM": 1.274,
+          "torsoYawDeg": 6.9,
+          "torsoPitchDeg": 0,
+          "file": "qa/2026-10-26-AG-133/fp-play-machete-pistol-f11.png"
+        },
+        {
+          "frame": 12,
+          "tMs": 200,
+          "blade": "machete",
+          "gun": "pistol",
+          "u": "frame-12",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.101,
+            "y": -0.857,
+            "z": 0.303,
+            "dist": 0.34
+          },
+          "tipScreen": {
+            "x": -0.101,
+            "y": -0.857,
+            "z": 0.303,
+            "dist": 0.34
+          },
+          "armNearEyeM": 0.325,
+          "armStraightPct": 95.9,
+          "gunBounds": {
+            "topY": -0.112,
+            "botY": -1.393,
+            "leftX": -0.34,
+            "rightX": -0.076
+          },
+          "shOutM": 0.061,
+          "fistOutM": 0.413,
+          "fistRightM": -0.03,
+          "fistUpM": 1.274,
+          "torsoYawDeg": 6.9,
+          "torsoPitchDeg": 0,
+          "file": null
+        },
+        {
+          "frame": 13,
+          "tMs": 216.7,
+          "blade": "machete",
+          "gun": "pistol",
+          "u": "frame-13",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.101,
+            "y": -0.857,
+            "z": 0.303,
+            "dist": 0.34
+          },
+          "tipScreen": {
+            "x": -0.101,
+            "y": -0.857,
+            "z": 0.303,
+            "dist": 0.34
+          },
+          "armNearEyeM": 0.325,
+          "armStraightPct": 95.9,
+          "gunBounds": {
+            "topY": -0.112,
+            "botY": -1.394,
+            "leftX": -0.34,
+            "rightX": -0.076
+          },
+          "shOutM": 0.061,
+          "fistOutM": 0.413,
+          "fistRightM": -0.03,
+          "fistUpM": 1.274,
+          "torsoYawDeg": 6.9,
+          "torsoPitchDeg": 0,
+          "file": null
+        },
+        {
+          "frame": 14,
+          "tMs": 233.3,
+          "blade": "machete",
+          "gun": "pistol",
+          "u": "frame-14",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.101,
+            "y": -0.857,
+            "z": 0.303,
+            "dist": 0.34
+          },
+          "tipScreen": {
+            "x": -0.101,
+            "y": -0.857,
+            "z": 0.303,
+            "dist": 0.34
+          },
+          "armNearEyeM": 0.325,
+          "armStraightPct": 95.9,
+          "gunBounds": {
+            "topY": -0.112,
+            "botY": -1.394,
+            "leftX": -0.34,
+            "rightX": -0.075
+          },
+          "shOutM": 0.061,
+          "fistOutM": 0.413,
+          "fistRightM": -0.03,
+          "fistUpM": 1.273,
+          "torsoYawDeg": 6.9,
+          "torsoPitchDeg": 0.1,
+          "file": "qa/2026-10-26-AG-133/fp-play-machete-pistol-f14.png"
+        },
+        {
+          "frame": 15,
+          "tMs": 250,
+          "blade": "machete",
+          "gun": "pistol",
+          "u": "frame-15",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.1,
+            "y": -0.861,
+            "z": 0.302,
+            "dist": 0.339
+          },
+          "tipScreen": {
+            "x": -0.1,
+            "y": -0.861,
+            "z": 0.302,
+            "dist": 0.339
+          },
+          "armNearEyeM": 0.324,
+          "armStraightPct": 95.9,
+          "gunBounds": {
+            "topY": -0.112,
+            "botY": -1.402,
+            "leftX": -0.34,
+            "rightX": -0.075
+          },
+          "shOutM": 0.062,
+          "fistOutM": 0.415,
+          "fistRightM": -0.03,
+          "fistUpM": 1.273,
+          "torsoYawDeg": 6.8,
+          "torsoPitchDeg": 0.2,
+          "file": null
+        },
+        {
+          "frame": 16,
+          "tMs": 266.7,
+          "blade": "machete",
+          "gun": "pistol",
+          "u": "frame-16",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.1,
+            "y": -0.862,
+            "z": 0.302,
+            "dist": 0.338
+          },
+          "tipScreen": {
+            "x": -0.1,
+            "y": -0.862,
+            "z": 0.302,
+            "dist": 0.338
+          },
+          "armNearEyeM": 0.323,
+          "armStraightPct": 95.9,
+          "gunBounds": {
+            "topY": -0.113,
+            "botY": -1.403,
+            "leftX": -0.34,
+            "rightX": -0.075
+          },
+          "shOutM": 0.062,
+          "fistOutM": 0.415,
+          "fistRightM": -0.03,
+          "fistUpM": 1.272,
+          "torsoYawDeg": 6.8,
+          "torsoPitchDeg": 0.2,
+          "file": null
+        },
+        {
+          "frame": 17,
+          "tMs": 283.3,
+          "blade": "machete",
+          "gun": "pistol",
+          "u": "frame-17",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.1,
+            "y": -0.862,
+            "z": 0.302,
+            "dist": 0.338
+          },
+          "tipScreen": {
+            "x": -0.1,
+            "y": -0.862,
+            "z": 0.302,
+            "dist": 0.338
+          },
+          "armNearEyeM": 0.323,
+          "armStraightPct": 95.9,
+          "gunBounds": {
+            "topY": -0.113,
+            "botY": -1.404,
+            "leftX": -0.34,
+            "rightX": -0.075
+          },
+          "shOutM": 0.062,
+          "fistOutM": 0.415,
+          "fistRightM": -0.03,
+          "fistUpM": 1.272,
+          "torsoYawDeg": 6.8,
+          "torsoPitchDeg": 0.2,
+          "file": null
+        },
+        {
+          "frame": 18,
+          "tMs": 300,
+          "blade": "machete",
+          "gun": "pistol",
+          "u": "frame-18",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.1,
+            "y": -0.863,
+            "z": 0.301,
+            "dist": 0.338
+          },
+          "tipScreen": {
+            "x": -0.1,
+            "y": -0.863,
+            "z": 0.301,
+            "dist": 0.338
+          },
+          "armNearEyeM": 0.323,
+          "armStraightPct": 95.9,
+          "gunBounds": {
+            "topY": -0.113,
+            "botY": -1.406,
+            "leftX": -0.34,
+            "rightX": -0.075
+          },
+          "shOutM": 0.062,
+          "fistOutM": 0.415,
+          "fistRightM": -0.03,
+          "fistUpM": 1.272,
+          "torsoYawDeg": 6.8,
+          "torsoPitchDeg": 0.2,
+          "file": null
+        },
+        {
+          "frame": 19,
+          "tMs": 316.7,
+          "blade": "machete",
+          "gun": "pistol",
+          "u": "frame-19",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.099,
+            "y": -0.864,
+            "z": 0.301,
+            "dist": 0.338
+          },
+          "tipScreen": {
+            "x": -0.099,
+            "y": -0.864,
+            "z": 0.301,
+            "dist": 0.338
+          },
+          "armNearEyeM": 0.323,
+          "armStraightPct": 95.9,
+          "gunBounds": {
+            "topY": -0.113,
+            "botY": -1.407,
+            "leftX": -0.34,
+            "rightX": -0.075
+          },
+          "shOutM": 0.062,
+          "fistOutM": 0.416,
+          "fistRightM": -0.03,
+          "fistUpM": 1.272,
+          "torsoYawDeg": 6.8,
+          "torsoPitchDeg": 0.3,
+          "file": "qa/2026-10-26-AG-133/fp-play-machete-pistol-f19.png"
+        },
+        {
+          "frame": 20,
+          "tMs": 333.3,
+          "blade": "machete",
+          "gun": "pistol",
+          "u": "frame-20",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.098,
+            "y": -0.871,
+            "z": 0.3,
+            "dist": 0.337
+          },
+          "tipScreen": {
+            "x": -0.098,
+            "y": -0.871,
+            "z": 0.3,
+            "dist": 0.337
+          },
+          "armNearEyeM": 0.322,
+          "armStraightPct": 95.9,
+          "gunBounds": {
+            "topY": -0.115,
+            "botY": -1.419,
+            "leftX": -0.34,
+            "rightX": -0.074
+          },
+          "shOutM": 0.063,
+          "fistOutM": 0.418,
+          "fistRightM": -0.03,
+          "fistUpM": 1.27,
+          "torsoYawDeg": 6.8,
+          "torsoPitchDeg": 0.5,
+          "file": null
+        },
+        {
+          "frame": 21,
+          "tMs": 350,
+          "blade": "machete",
+          "gun": "pistol",
+          "u": "frame-21",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.098,
+            "y": -0.871,
+            "z": 0.299,
+            "dist": 0.336
+          },
+          "tipScreen": {
+            "x": -0.098,
+            "y": -0.871,
+            "z": 0.299,
+            "dist": 0.336
+          },
+          "armNearEyeM": 0.322,
+          "armStraightPct": 95.9,
+          "gunBounds": {
+            "topY": -0.115,
+            "botY": -1.42,
+            "leftX": -0.34,
+            "rightX": -0.074
+          },
+          "shOutM": 0.063,
+          "fistOutM": 0.418,
+          "fistRightM": -0.03,
+          "fistUpM": 1.27,
+          "torsoYawDeg": 6.8,
+          "torsoPitchDeg": 0.5,
+          "file": null
+        },
+        {
+          "frame": 22,
+          "tMs": 366.7,
+          "blade": "machete",
+          "gun": "pistol",
+          "u": "frame-22",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.098,
+            "y": -0.872,
+            "z": 0.299,
+            "dist": 0.336
+          },
+          "tipScreen": {
+            "x": -0.098,
+            "y": -0.872,
+            "z": 0.299,
+            "dist": 0.336
+          },
+          "armNearEyeM": 0.322,
+          "armStraightPct": 95.9,
+          "gunBounds": {
+            "topY": -0.115,
+            "botY": -1.421,
+            "leftX": -0.34,
+            "rightX": -0.073
+          },
+          "shOutM": 0.063,
+          "fistOutM": 0.418,
+          "fistRightM": -0.03,
+          "fistUpM": 1.27,
+          "torsoYawDeg": 6.8,
+          "torsoPitchDeg": 0.5,
+          "file": null
+        },
+        {
+          "frame": 23,
+          "tMs": 383.3,
+          "blade": "machete",
+          "gun": "pistol",
+          "u": "frame-23",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.098,
+            "y": -0.872,
+            "z": 0.299,
+            "dist": 0.336
+          },
+          "tipScreen": {
+            "x": -0.098,
+            "y": -0.872,
+            "z": 0.299,
+            "dist": 0.336
+          },
+          "armNearEyeM": 0.321,
+          "armStraightPct": 95.9,
+          "gunBounds": {
+            "topY": -0.115,
+            "botY": -1.422,
+            "leftX": -0.34,
+            "rightX": -0.073
+          },
+          "shOutM": 0.063,
+          "fistOutM": 0.418,
+          "fistRightM": -0.03,
+          "fistUpM": 1.27,
+          "torsoYawDeg": 6.8,
+          "torsoPitchDeg": 0.5,
+          "file": null
+        },
+        {
+          "frame": 24,
+          "tMs": 400,
+          "blade": "machete",
+          "gun": "pistol",
+          "u": "frame-24",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.097,
+            "y": -0.873,
+            "z": 0.299,
+            "dist": 0.336
+          },
+          "tipScreen": {
+            "x": -0.097,
+            "y": -0.873,
+            "z": 0.299,
+            "dist": 0.336
+          },
+          "armNearEyeM": 0.321,
+          "armStraightPct": 95.9,
+          "gunBounds": {
+            "topY": -0.115,
+            "botY": -1.423,
+            "leftX": -0.34,
+            "rightX": -0.073
+          },
+          "shOutM": 0.064,
+          "fistOutM": 0.418,
+          "fistRightM": -0.03,
+          "fistUpM": 1.269,
+          "torsoYawDeg": 6.8,
+          "torsoPitchDeg": 0.5,
+          "file": null
+        },
+        {
+          "frame": 25,
+          "tMs": 416.7,
+          "blade": "machete",
+          "gun": "pistol",
+          "u": "frame-25",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.097,
+            "y": -0.874,
+            "z": 0.299,
+            "dist": 0.336
+          },
+          "tipScreen": {
+            "x": -0.097,
+            "y": -0.874,
+            "z": 0.299,
+            "dist": 0.336
+          },
+          "armNearEyeM": 0.321,
+          "armStraightPct": 95.9,
+          "gunBounds": {
+            "topY": -0.115,
+            "botY": -1.424,
+            "leftX": -0.34,
+            "rightX": -0.073
+          },
+          "shOutM": 0.064,
+          "fistOutM": 0.419,
+          "fistRightM": -0.03,
+          "fistUpM": 1.269,
+          "torsoYawDeg": 6.8,
+          "torsoPitchDeg": 0.6,
+          "file": null
+        }
+      ]
+    },
+    "machete_m4": {
+      "durSec": 0.4,
+      "minArmNearEyeM": 0.348,
+      "maxFpBladeDip": 1,
+      "minGunTopY": -0.425,
+      "maxGunTopY": 0.034,
+      "frames": [
+        {
+          "frame": 1,
+          "tMs": 16.7,
+          "blade": "machete",
+          "gun": "m4",
+          "u": "frame-1",
+          "liveU": 0.054,
+          "knifeVisible": true,
+          "fpW": 1,
+          "fpBladeDip": 0.562,
+          "fistScreen": {
+            "x": 0.248,
+            "y": -0.878,
+            "z": 0.513,
+            "dist": 0.589
+          },
+          "tipScreen": {
+            "x": 0.101,
+            "y": 0.461,
+            "z": 0.882,
+            "dist": 0.917
+          },
+          "armNearEyeM": 0.413,
+          "armStraightPct": 66.5,
+          "gunBounds": {
+            "topY": -0.204,
+            "botY": -5.581,
+            "leftX": -5.373,
+            "rightX": -0.23
+          },
+          "shOutM": 0.288,
+          "fistOutM": 0.637,
+          "fistRightM": 0.127,
+          "fistUpM": 1.159,
+          "torsoYawDeg": 46.2,
+          "torsoPitchDeg": 1.1,
+          "file": null
+        },
+        {
+          "frame": 2,
+          "tMs": 33.3,
+          "blade": "machete",
+          "gun": "m4",
+          "u": "frame-2",
+          "liveU": 0.162,
+          "knifeVisible": true,
+          "fpW": 1,
+          "fpBladeDip": 1,
+          "fistScreen": {
+            "x": 0.688,
+            "y": -0.467,
+            "z": 0.58,
+            "dist": 0.727
+          },
+          "tipScreen": {
+            "x": 0.859,
+            "y": 1.138,
+            "z": 0.658,
+            "dist": 0.978
+          },
+          "armNearEyeM": 0.433,
+          "armStraightPct": 93,
+          "gunBounds": {
+            "topY": -0.425,
+            "botY": -4.703,
+            "leftX": -3.328,
+            "rightX": -0.179
+          },
+          "shOutM": 0.304,
+          "fistOutM": 0.723,
+          "fistRightM": 0.413,
+          "fistUpM": 1.258,
+          "torsoYawDeg": 43.4,
+          "torsoPitchDeg": 4,
+          "file": "qa/2026-10-26-AG-133/fp-play-machete-m4-f02.png"
+        },
+        {
+          "frame": 3,
+          "tMs": 50,
+          "blade": "machete",
+          "gun": "m4",
+          "u": "frame-3",
+          "liveU": 1,
+          "knifeVisible": true,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.972,
+            "y": -0.384,
+            "z": 0.293,
+            "dist": 0.419
+          },
+          "tipScreen": {
+            "x": -2.917,
+            "y": 2.566,
+            "z": 0.24,
+            "dist": 0.837
+          },
+          "armNearEyeM": 0.348,
+          "armStraightPct": 94.6,
+          "gunBounds": {
+            "topY": 0.034,
+            "botY": -3.811,
+            "leftX": -5.815,
+            "rightX": -0.233
+          },
+          "shOutM": 0.284,
+          "fistOutM": 0.424,
+          "fistRightM": -0.299,
+          "fistUpM": 1.352,
+          "torsoYawDeg": 46.6,
+          "torsoPitchDeg": 0.5,
+          "file": null
+        },
+        {
+          "frame": 4,
+          "tMs": 66.7,
+          "blade": "machete",
+          "gun": "m4",
+          "u": "frame-4",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.662,
+            "y": -0.517,
+            "z": 0.415,
+            "dist": 0.517
+          },
+          "tipScreen": {
+            "x": -0.662,
+            "y": -0.517,
+            "z": 0.415,
+            "dist": 0.517
+          },
+          "armNearEyeM": 0.393,
+          "armStraightPct": 97,
+          "gunBounds": {
+            "topY": 0.027,
+            "botY": -3.507,
+            "leftX": -5.604,
+            "rightX": -0.233
+          },
+          "shOutM": 0.284,
+          "fistOutM": 0.541,
+          "fistRightM": -0.288,
+          "fistUpM": 1.295,
+          "torsoYawDeg": 46.6,
+          "torsoPitchDeg": 0.5,
+          "file": null
+        },
+        {
+          "frame": 5,
+          "tMs": 83.3,
+          "blade": "machete",
+          "gun": "m4",
+          "u": "frame-5",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.633,
+            "y": -0.498,
+            "z": 0.426,
+            "dist": 0.523
+          },
+          "tipScreen": {
+            "x": -0.633,
+            "y": -0.498,
+            "z": 0.426,
+            "dist": 0.523
+          },
+          "armNearEyeM": 0.394,
+          "armStraightPct": 97.4,
+          "gunBounds": {
+            "topY": 0.024,
+            "botY": -3.375,
+            "leftX": -5.37,
+            "rightX": -0.232
+          },
+          "shOutM": 0.284,
+          "fistOutM": 0.55,
+          "fistRightM": -0.282,
+          "fistUpM": 1.297,
+          "torsoYawDeg": 46.6,
+          "torsoPitchDeg": 0.4,
+          "file": null
+        },
+        {
+          "frame": 6,
+          "tMs": 100,
+          "blade": "machete",
+          "gun": "m4",
+          "u": "frame-6",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.604,
+            "y": -0.49,
+            "z": 0.437,
+            "dist": 0.528
+          },
+          "tipScreen": {
+            "x": -0.604,
+            "y": -0.49,
+            "z": 0.437,
+            "dist": 0.528
+          },
+          "armNearEyeM": 0.396,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": 0.022,
+            "botY": -3.694,
+            "leftX": -5.847,
+            "rightX": -0.232
+          },
+          "shOutM": 0.284,
+          "fistOutM": 0.559,
+          "fistRightM": -0.275,
+          "fistUpM": 1.296,
+          "torsoYawDeg": 46.6,
+          "torsoPitchDeg": 0.4,
+          "file": "qa/2026-10-26-AG-133/fp-play-machete-m4-f06.png"
+        },
+        {
+          "frame": 7,
+          "tMs": 116.7,
+          "blade": "machete",
+          "gun": "m4",
+          "u": "frame-7",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.585,
+            "y": -0.484,
+            "z": 0.443,
+            "dist": 0.532
+          },
+          "tipScreen": {
+            "x": -0.585,
+            "y": -0.484,
+            "z": 0.443,
+            "dist": 0.532
+          },
+          "armNearEyeM": 0.398,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": 0.02,
+            "botY": -3.508,
+            "leftX": -5.539,
+            "rightX": -0.232
+          },
+          "shOutM": 0.282,
+          "fistOutM": 0.562,
+          "fistRightM": -0.271,
+          "fistUpM": 1.297,
+          "torsoYawDeg": 46.5,
+          "torsoPitchDeg": 0.2,
+          "file": null
+        },
+        {
+          "frame": 8,
+          "tMs": 133.3,
+          "blade": "machete",
+          "gun": "m4",
+          "u": "frame-8",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.585,
+            "y": -0.484,
+            "z": 0.444,
+            "dist": 0.532
+          },
+          "tipScreen": {
+            "x": -0.585,
+            "y": -0.484,
+            "z": 0.444,
+            "dist": 0.532
+          },
+          "armNearEyeM": 0.398,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": 0.02,
+            "botY": -3.494,
+            "leftX": -5.516,
+            "rightX": -0.232
+          },
+          "shOutM": 0.282,
+          "fistOutM": 0.562,
+          "fistRightM": -0.271,
+          "fistUpM": 1.297,
+          "torsoYawDeg": 46.5,
+          "torsoPitchDeg": 0.2,
+          "file": null
+        },
+        {
+          "frame": 9,
+          "tMs": 150,
+          "blade": "machete",
+          "gun": "m4",
+          "u": "frame-9",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.585,
+            "y": -0.484,
+            "z": 0.444,
+            "dist": 0.532
+          },
+          "tipScreen": {
+            "x": -0.585,
+            "y": -0.484,
+            "z": 0.444,
+            "dist": 0.532
+          },
+          "armNearEyeM": 0.399,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": 0.02,
+            "botY": -3.476,
+            "leftX": -5.488,
+            "rightX": -0.232
+          },
+          "shOutM": 0.282,
+          "fistOutM": 0.561,
+          "fistRightM": -0.271,
+          "fistUpM": 1.297,
+          "torsoYawDeg": 46.5,
+          "torsoPitchDeg": 0.2,
+          "file": "qa/2026-10-26-AG-133/fp-play-machete-m4-f09.png"
+        },
+        {
+          "frame": 10,
+          "tMs": 166.7,
+          "blade": "machete",
+          "gun": "m4",
+          "u": "frame-10",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.583,
+            "y": -0.483,
+            "z": 0.445,
+            "dist": 0.533
+          },
+          "tipScreen": {
+            "x": -0.583,
+            "y": -0.483,
+            "z": 0.445,
+            "dist": 0.533
+          },
+          "armNearEyeM": 0.399,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": 0.019,
+            "botY": -3.372,
+            "leftX": -5.315,
+            "rightX": -0.231
+          },
+          "shOutM": 0.281,
+          "fistOutM": 0.56,
+          "fistRightM": -0.271,
+          "fistUpM": 1.297,
+          "torsoYawDeg": 46.4,
+          "torsoPitchDeg": 0,
+          "file": null
+        },
+        {
+          "frame": 11,
+          "tMs": 183.3,
+          "blade": "machete",
+          "gun": "m4",
+          "u": "frame-11",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.583,
+            "y": -0.483,
+            "z": 0.445,
+            "dist": 0.533
+          },
+          "tipScreen": {
+            "x": -0.583,
+            "y": -0.483,
+            "z": 0.445,
+            "dist": 0.533
+          },
+          "armNearEyeM": 0.399,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": 0.019,
+            "botY": -3.36,
+            "leftX": -5.294,
+            "rightX": -0.231
+          },
+          "shOutM": 0.281,
+          "fistOutM": 0.56,
+          "fistRightM": -0.271,
+          "fistUpM": 1.297,
+          "torsoYawDeg": 46.4,
+          "torsoPitchDeg": 0,
+          "file": "qa/2026-10-26-AG-133/fp-play-machete-m4-f11.png"
+        },
+        {
+          "frame": 12,
+          "tMs": 200,
+          "blade": "machete",
+          "gun": "m4",
+          "u": "frame-12",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.583,
+            "y": -0.485,
+            "z": 0.446,
+            "dist": 0.534
+          },
+          "tipScreen": {
+            "x": -0.583,
+            "y": -0.485,
+            "z": 0.446,
+            "dist": 0.534
+          },
+          "armNearEyeM": 0.4,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": 0.016,
+            "botY": -3.278,
+            "leftX": -5.148,
+            "rightX": -0.231
+          },
+          "shOutM": 0.281,
+          "fistOutM": 0.56,
+          "fistRightM": -0.271,
+          "fistUpM": 1.297,
+          "torsoYawDeg": 46.3,
+          "torsoPitchDeg": 0,
+          "file": null
+        },
+        {
+          "frame": 13,
+          "tMs": 216.7,
+          "blade": "machete",
+          "gun": "m4",
+          "u": "frame-13",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.583,
+            "y": -0.485,
+            "z": 0.446,
+            "dist": 0.534
+          },
+          "tipScreen": {
+            "x": -0.583,
+            "y": -0.485,
+            "z": 0.446,
+            "dist": 0.534
+          },
+          "armNearEyeM": 0.4,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": 0.016,
+            "botY": -3.27,
+            "leftX": -5.132,
+            "rightX": -0.231
+          },
+          "shOutM": 0.281,
+          "fistOutM": 0.56,
+          "fistRightM": -0.271,
+          "fistUpM": 1.297,
+          "torsoYawDeg": 46.2,
+          "torsoPitchDeg": 0,
+          "file": null
+        },
+        {
+          "frame": 14,
+          "tMs": 233.3,
+          "blade": "machete",
+          "gun": "m4",
+          "u": "frame-14",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.583,
+            "y": -0.485,
+            "z": 0.446,
+            "dist": 0.534
+          },
+          "tipScreen": {
+            "x": -0.583,
+            "y": -0.485,
+            "z": 0.446,
+            "dist": 0.534
+          },
+          "armNearEyeM": 0.401,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": 0.015,
+            "botY": -3.263,
+            "leftX": -5.118,
+            "rightX": -0.231
+          },
+          "shOutM": 0.281,
+          "fistOutM": 0.56,
+          "fistRightM": -0.271,
+          "fistUpM": 1.297,
+          "torsoYawDeg": 46.2,
+          "torsoPitchDeg": 0,
+          "file": "qa/2026-10-26-AG-133/fp-play-machete-m4-f14.png"
+        },
+        {
+          "frame": 15,
+          "tMs": 250,
+          "blade": "machete",
+          "gun": "m4",
+          "u": "frame-15",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.583,
+            "y": -0.489,
+            "z": 0.445,
+            "dist": 0.534
+          },
+          "tipScreen": {
+            "x": -0.583,
+            "y": -0.489,
+            "z": 0.445,
+            "dist": 0.534
+          },
+          "armNearEyeM": 0.401,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": 0.012,
+            "botY": -3.225,
+            "leftX": -5.031,
+            "rightX": -0.231
+          },
+          "shOutM": 0.281,
+          "fistOutM": 0.56,
+          "fistRightM": -0.271,
+          "fistUpM": 1.297,
+          "torsoYawDeg": 46.1,
+          "torsoPitchDeg": 0.2,
+          "file": null
+        },
+        {
+          "frame": 16,
+          "tMs": 266.7,
+          "blade": "machete",
+          "gun": "m4",
+          "u": "frame-16",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.584,
+            "y": -0.489,
+            "z": 0.445,
+            "dist": 0.534
+          },
+          "tipScreen": {
+            "x": -0.584,
+            "y": -0.489,
+            "z": 0.445,
+            "dist": 0.534
+          },
+          "armNearEyeM": 0.401,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": 0.011,
+            "botY": -3.222,
+            "leftX": -5.023,
+            "rightX": -0.231
+          },
+          "shOutM": 0.282,
+          "fistOutM": 0.561,
+          "fistRightM": -0.271,
+          "fistUpM": 1.297,
+          "torsoYawDeg": 46.1,
+          "torsoPitchDeg": 0.2,
+          "file": null
+        },
+        {
+          "frame": 17,
+          "tMs": 283.3,
+          "blade": "machete",
+          "gun": "m4",
+          "u": "frame-17",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.584,
+            "y": -0.49,
+            "z": 0.445,
+            "dist": 0.534
+          },
+          "tipScreen": {
+            "x": -0.584,
+            "y": -0.49,
+            "z": 0.445,
+            "dist": 0.534
+          },
+          "armNearEyeM": 0.401,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": 0.011,
+            "botY": -3.22,
+            "leftX": -5.017,
+            "rightX": -0.231
+          },
+          "shOutM": 0.282,
+          "fistOutM": 0.561,
+          "fistRightM": -0.271,
+          "fistUpM": 1.296,
+          "torsoYawDeg": 46.1,
+          "torsoPitchDeg": 0.2,
+          "file": null
+        },
+        {
+          "frame": 18,
+          "tMs": 300,
+          "blade": "machete",
+          "gun": "m4",
+          "u": "frame-18",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.584,
+            "y": -0.49,
+            "z": 0.445,
+            "dist": 0.534
+          },
+          "tipScreen": {
+            "x": -0.584,
+            "y": -0.49,
+            "z": 0.445,
+            "dist": 0.534
+          },
+          "armNearEyeM": 0.401,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": 0.01,
+            "botY": -3.218,
+            "leftX": -5.01,
+            "rightX": -0.231
+          },
+          "shOutM": 0.282,
+          "fistOutM": 0.561,
+          "fistRightM": -0.271,
+          "fistUpM": 1.296,
+          "torsoYawDeg": 46.1,
+          "torsoPitchDeg": 0.3,
+          "file": null
+        },
+        {
+          "frame": 19,
+          "tMs": 316.7,
+          "blade": "machete",
+          "gun": "m4",
+          "u": "frame-19",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.584,
+            "y": -0.491,
+            "z": 0.445,
+            "dist": 0.534
+          },
+          "tipScreen": {
+            "x": -0.584,
+            "y": -0.491,
+            "z": 0.445,
+            "dist": 0.534
+          },
+          "armNearEyeM": 0.402,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": 0.01,
+            "botY": -3.217,
+            "leftX": -5.004,
+            "rightX": -0.231
+          },
+          "shOutM": 0.282,
+          "fistOutM": 0.561,
+          "fistRightM": -0.271,
+          "fistUpM": 1.296,
+          "torsoYawDeg": 46,
+          "torsoPitchDeg": 0.3,
+          "file": "qa/2026-10-26-AG-133/fp-play-machete-m4-f19.png"
+        },
+        {
+          "frame": 20,
+          "tMs": 333.3,
+          "blade": "machete",
+          "gun": "m4",
+          "u": "frame-20",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.585,
+            "y": -0.495,
+            "z": 0.444,
+            "dist": 0.533
+          },
+          "tipScreen": {
+            "x": -0.585,
+            "y": -0.495,
+            "z": 0.444,
+            "dist": 0.533
+          },
+          "armNearEyeM": 0.402,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": 0.006,
+            "botY": -3.212,
+            "leftX": -4.97,
+            "rightX": -0.231
+          },
+          "shOutM": 0.283,
+          "fistOutM": 0.561,
+          "fistRightM": -0.271,
+          "fistUpM": 1.295,
+          "torsoYawDeg": 45.9,
+          "torsoPitchDeg": 0.5,
+          "file": null
+        },
+        {
+          "frame": 21,
+          "tMs": 350,
+          "blade": "machete",
+          "gun": "m4",
+          "u": "frame-21",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.586,
+            "y": -0.495,
+            "z": 0.444,
+            "dist": 0.533
+          },
+          "tipScreen": {
+            "x": -0.586,
+            "y": -0.495,
+            "z": 0.444,
+            "dist": 0.533
+          },
+          "armNearEyeM": 0.402,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": 0.006,
+            "botY": -3.212,
+            "leftX": -4.967,
+            "rightX": -0.231
+          },
+          "shOutM": 0.283,
+          "fistOutM": 0.562,
+          "fistRightM": -0.27,
+          "fistUpM": 1.295,
+          "torsoYawDeg": 45.9,
+          "torsoPitchDeg": 0.5,
+          "file": null
+        },
+        {
+          "frame": 22,
+          "tMs": 366.7,
+          "blade": "machete",
+          "gun": "m4",
+          "u": "frame-22",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.586,
+            "y": -0.496,
+            "z": 0.443,
+            "dist": 0.533
+          },
+          "tipScreen": {
+            "x": -0.586,
+            "y": -0.496,
+            "z": 0.443,
+            "dist": 0.533
+          },
+          "armNearEyeM": 0.402,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": 0.005,
+            "botY": -3.212,
+            "leftX": -4.963,
+            "rightX": -0.231
+          },
+          "shOutM": 0.283,
+          "fistOutM": 0.562,
+          "fistRightM": -0.27,
+          "fistUpM": 1.295,
+          "torsoYawDeg": 45.9,
+          "torsoPitchDeg": 0.5,
+          "file": null
+        },
+        {
+          "frame": 23,
+          "tMs": 383.3,
+          "blade": "machete",
+          "gun": "m4",
+          "u": "frame-23",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.586,
+            "y": -0.497,
+            "z": 0.443,
+            "dist": 0.533
+          },
+          "tipScreen": {
+            "x": -0.586,
+            "y": -0.497,
+            "z": 0.443,
+            "dist": 0.533
+          },
+          "armNearEyeM": 0.402,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": 0.005,
+            "botY": -3.211,
+            "leftX": -4.959,
+            "rightX": -0.231
+          },
+          "shOutM": 0.283,
+          "fistOutM": 0.562,
+          "fistRightM": -0.27,
+          "fistUpM": 1.295,
+          "torsoYawDeg": 45.9,
+          "torsoPitchDeg": 0.6,
+          "file": null
+        },
+        {
+          "frame": 24,
+          "tMs": 400,
+          "blade": "machete",
+          "gun": "m4",
+          "u": "frame-24",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.586,
+            "y": -0.497,
+            "z": 0.443,
+            "dist": 0.533
+          },
+          "tipScreen": {
+            "x": -0.586,
+            "y": -0.497,
+            "z": 0.443,
+            "dist": 0.533
+          },
+          "armNearEyeM": 0.402,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": 0.005,
+            "botY": -3.21,
+            "leftX": -4.955,
+            "rightX": -0.231
+          },
+          "shOutM": 0.283,
+          "fistOutM": 0.562,
+          "fistRightM": -0.27,
+          "fistUpM": 1.295,
+          "torsoYawDeg": 45.9,
+          "torsoPitchDeg": 0.6,
+          "file": null
+        },
+        {
+          "frame": 25,
+          "tMs": 416.7,
+          "blade": "machete",
+          "gun": "m4",
+          "u": "frame-25",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.586,
+            "y": -0.497,
+            "z": 0.443,
+            "dist": 0.532
+          },
+          "tipScreen": {
+            "x": -0.586,
+            "y": -0.497,
+            "z": 0.443,
+            "dist": 0.532
+          },
+          "armNearEyeM": 0.402,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": 0.004,
+            "botY": -3.209,
+            "leftX": -4.95,
+            "rightX": -0.231
+          },
+          "shOutM": 0.283,
+          "fistOutM": 0.562,
+          "fistRightM": -0.27,
+          "fistUpM": 1.294,
+          "torsoYawDeg": 45.8,
+          "torsoPitchDeg": 0.6,
+          "file": null
+        }
+      ]
+    },
+    "katana_pistol": {
+      "durSec": 0.3,
+      "minArmNearEyeM": 0.321,
+      "maxFpBladeDip": 1,
+      "minGunTopY": -0.755,
+      "maxGunTopY": -0.109,
+      "frames": [
+        {
+          "frame": 1,
+          "tMs": 16.7,
+          "blade": "katana",
+          "gun": "pistol",
+          "u": "frame-1",
+          "liveU": 0.085,
+          "knifeVisible": true,
+          "fpW": 1,
+          "fpBladeDip": 0.941,
+          "fistScreen": {
+            "x": 0.608,
+            "y": -0.925,
+            "z": 0.442,
+            "dist": 0.572
+          },
+          "tipScreen": {
+            "x": 0.547,
+            "y": 0.783,
+            "z": 0.974,
+            "dist": 1.201
+          },
+          "armNearEyeM": 0.487,
+          "armStraightPct": 93.9,
+          "gunBounds": {
+            "topY": -0.607,
+            "botY": -2.588,
+            "leftX": -0.572,
+            "rightX": -0.151
+          },
+          "shOutM": 0.058,
+          "fistOutM": 0.561,
+          "fistRightM": 0.272,
+          "fistUpM": 1.186,
+          "torsoYawDeg": 4.4,
+          "torsoPitchDeg": 1.7,
+          "file": null
+        },
+        {
+          "frame": 2,
+          "tMs": 33.3,
+          "blade": "katana",
+          "gun": "pistol",
+          "u": "frame-2",
+          "liveU": 0.234,
+          "knifeVisible": true,
+          "fpW": 1,
+          "fpBladeDip": 1,
+          "fistScreen": {
+            "x": 0.709,
+            "y": -0.204,
+            "z": 0.36,
+            "dist": 0.447
+          },
+          "tipScreen": {
+            "x": 2.231,
+            "y": 7.743,
+            "z": 0.185,
+            "dist": 0.948
+          },
+          "armNearEyeM": 0.391,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": -0.755,
+            "botY": -2.701,
+            "leftX": -0.432,
+            "rightX": -0.055
+          },
+          "shOutM": 0.059,
+          "fistOutM": 0.505,
+          "fistRightM": 0.275,
+          "fistUpM": 1.374,
+          "torsoYawDeg": -0.1,
+          "torsoPitchDeg": 6.3,
+          "file": "qa/2026-10-26-AG-133/fp-play-katana-pistol-f02.png"
+        },
+        {
+          "frame": 3,
+          "tMs": 50,
+          "blade": "katana",
+          "gun": "pistol",
+          "u": "frame-3",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.154,
+            "y": -1.213,
+            "z": 0.295,
+            "dist": 0.363
+          },
+          "tipScreen": {
+            "x": -0.154,
+            "y": -1.213,
+            "z": 0.295,
+            "dist": 0.363
+          },
+          "armNearEyeM": 0.351,
+          "armStraightPct": 94.8,
+          "gunBounds": {
+            "topY": -0.119,
+            "botY": -1.428,
+            "leftX": -0.282,
+            "rightX": -0.047
+          },
+          "shOutM": 0.055,
+          "fistOutM": 0.415,
+          "fistRightM": -0.053,
+          "fistUpM": 1.216,
+          "torsoYawDeg": 5.3,
+          "torsoPitchDeg": 0.4,
+          "file": null
+        },
+        {
+          "frame": 4,
+          "tMs": 66.7,
+          "blade": "katana",
+          "gun": "pistol",
+          "u": "frame-4",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.165,
+            "y": -1.131,
+            "z": 0.297,
+            "dist": 0.358
+          },
+          "tipScreen": {
+            "x": -0.165,
+            "y": -1.131,
+            "z": 0.297,
+            "dist": 0.358
+          },
+          "armNearEyeM": 0.338,
+          "armStraightPct": 96.5,
+          "gunBounds": {
+            "topY": -0.12,
+            "botY": -1.414,
+            "leftX": -0.279,
+            "rightX": -0.047
+          },
+          "shOutM": 0.054,
+          "fistOutM": 0.413,
+          "fistRightM": -0.056,
+          "fistUpM": 1.229,
+          "torsoYawDeg": 5.3,
+          "torsoPitchDeg": 0.4,
+          "file": null
+        },
+        {
+          "frame": 5,
+          "tMs": 83.3,
+          "blade": "katana",
+          "gun": "pistol",
+          "u": "frame-5",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.168,
+            "y": -1.138,
+            "z": 0.299,
+            "dist": 0.362
+          },
+          "tipScreen": {
+            "x": -0.168,
+            "y": -1.138,
+            "z": 0.299,
+            "dist": 0.362
+          },
+          "armNearEyeM": 0.338,
+          "armStraightPct": 96.9,
+          "gunBounds": {
+            "topY": -0.12,
+            "botY": -1.407,
+            "leftX": -0.278,
+            "rightX": -0.047
+          },
+          "shOutM": 0.054,
+          "fistOutM": 0.414,
+          "fistRightM": -0.058,
+          "fistUpM": 1.227,
+          "torsoYawDeg": 5.3,
+          "torsoPitchDeg": 0.4,
+          "file": "qa/2026-10-26-AG-133/fp-play-katana-pistol-f05.png"
+        },
+        {
+          "frame": 6,
+          "tMs": 100,
+          "blade": "katana",
+          "gun": "pistol",
+          "u": "frame-6",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.05,
+            "y": -0.857,
+            "z": 0.307,
+            "dist": 0.342
+          },
+          "tipScreen": {
+            "x": -0.05,
+            "y": -0.857,
+            "z": 0.307,
+            "dist": 0.342
+          },
+          "armNearEyeM": 0.327,
+          "armStraightPct": 96.3,
+          "gunBounds": {
+            "topY": -0.116,
+            "botY": -1.39,
+            "leftX": -0.273,
+            "rightX": -0.046
+          },
+          "shOutM": 0.052,
+          "fistOutM": 0.418,
+          "fistRightM": -0.021,
+          "fistUpM": 1.272,
+          "torsoYawDeg": 5.2,
+          "torsoPitchDeg": 0.2,
+          "file": null
+        },
+        {
+          "frame": 7,
+          "tMs": 116.7,
+          "blade": "katana",
+          "gun": "pistol",
+          "u": "frame-7",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.05,
+            "y": -0.856,
+            "z": 0.307,
+            "dist": 0.342
+          },
+          "tipScreen": {
+            "x": -0.05,
+            "y": -0.856,
+            "z": 0.307,
+            "dist": 0.342
+          },
+          "armNearEyeM": 0.327,
+          "armStraightPct": 96.3,
+          "gunBounds": {
+            "topY": -0.116,
+            "botY": -1.389,
+            "leftX": -0.272,
+            "rightX": -0.046
+          },
+          "shOutM": 0.052,
+          "fistOutM": 0.418,
+          "fistRightM": -0.021,
+          "fistUpM": 1.272,
+          "torsoYawDeg": 5.2,
+          "torsoPitchDeg": 0.2,
+          "file": "qa/2026-10-26-AG-133/fp-play-katana-pistol-f07.png"
+        },
+        {
+          "frame": 8,
+          "tMs": 133.3,
+          "blade": "katana",
+          "gun": "pistol",
+          "u": "frame-8",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.048,
+            "y": -0.85,
+            "z": 0.306,
+            "dist": 0.341
+          },
+          "tipScreen": {
+            "x": -0.048,
+            "y": -0.85,
+            "z": 0.306,
+            "dist": 0.341
+          },
+          "armNearEyeM": 0.326,
+          "armStraightPct": 96.3,
+          "gunBounds": {
+            "topY": -0.112,
+            "botY": -1.383,
+            "leftX": -0.27,
+            "rightX": -0.044
+          },
+          "shOutM": 0.05,
+          "fistOutM": 0.416,
+          "fistRightM": -0.02,
+          "fistUpM": 1.273,
+          "torsoYawDeg": 5.1,
+          "torsoPitchDeg": 0,
+          "file": null
+        },
+        {
+          "frame": 9,
+          "tMs": 150,
+          "blade": "katana",
+          "gun": "pistol",
+          "u": "frame-9",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.047,
+            "y": -0.85,
+            "z": 0.306,
+            "dist": 0.341
+          },
+          "tipScreen": {
+            "x": -0.047,
+            "y": -0.85,
+            "z": 0.306,
+            "dist": 0.341
+          },
+          "armNearEyeM": 0.326,
+          "armStraightPct": 96.3,
+          "gunBounds": {
+            "topY": -0.111,
+            "botY": -1.383,
+            "leftX": -0.27,
+            "rightX": -0.044
+          },
+          "shOutM": 0.05,
+          "fistOutM": 0.416,
+          "fistRightM": -0.02,
+          "fistUpM": 1.273,
+          "torsoYawDeg": 5.1,
+          "torsoPitchDeg": 0,
+          "file": "qa/2026-10-26-AG-133/fp-play-katana-pistol-f09.png"
+        },
+        {
+          "frame": 10,
+          "tMs": 166.7,
+          "blade": "katana",
+          "gun": "pistol",
+          "u": "frame-10",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.046,
+            "y": -0.848,
+            "z": 0.305,
+            "dist": 0.34
+          },
+          "tipScreen": {
+            "x": -0.046,
+            "y": -0.848,
+            "z": 0.305,
+            "dist": 0.34
+          },
+          "armNearEyeM": 0.325,
+          "armStraightPct": 96.3,
+          "gunBounds": {
+            "topY": -0.109,
+            "botY": -1.383,
+            "leftX": -0.268,
+            "rightX": -0.043
+          },
+          "shOutM": 0.05,
+          "fistOutM": 0.416,
+          "fistRightM": -0.019,
+          "fistUpM": 1.274,
+          "torsoYawDeg": 5,
+          "torsoPitchDeg": 0,
+          "file": null
+        },
+        {
+          "frame": 11,
+          "tMs": 183.3,
+          "blade": "katana",
+          "gun": "pistol",
+          "u": "frame-11",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.046,
+            "y": -0.848,
+            "z": 0.305,
+            "dist": 0.34
+          },
+          "tipScreen": {
+            "x": -0.046,
+            "y": -0.848,
+            "z": 0.305,
+            "dist": 0.34
+          },
+          "armNearEyeM": 0.324,
+          "armStraightPct": 96.3,
+          "gunBounds": {
+            "topY": -0.109,
+            "botY": -1.383,
+            "leftX": -0.268,
+            "rightX": -0.043
+          },
+          "shOutM": 0.05,
+          "fistOutM": 0.416,
+          "fistRightM": -0.019,
+          "fistUpM": 1.274,
+          "torsoYawDeg": 5,
+          "torsoPitchDeg": 0,
+          "file": "qa/2026-10-26-AG-133/fp-play-katana-pistol-f11.png"
+        },
+        {
+          "frame": 12,
+          "tMs": 200,
+          "blade": "katana",
+          "gun": "pistol",
+          "u": "frame-12",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.044,
+            "y": -0.852,
+            "z": 0.304,
+            "dist": 0.339
+          },
+          "tipScreen": {
+            "x": -0.044,
+            "y": -0.852,
+            "z": 0.304,
+            "dist": 0.339
+          },
+          "armNearEyeM": 0.323,
+          "armStraightPct": 96.3,
+          "gunBounds": {
+            "topY": -0.109,
+            "botY": -1.39,
+            "leftX": -0.267,
+            "rightX": -0.042
+          },
+          "shOutM": 0.05,
+          "fistOutM": 0.418,
+          "fistRightM": -0.018,
+          "fistUpM": 1.273,
+          "torsoYawDeg": 4.9,
+          "torsoPitchDeg": 0.2,
+          "file": null
+        },
+        {
+          "frame": 13,
+          "tMs": 216.7,
+          "blade": "katana",
+          "gun": "pistol",
+          "u": "frame-13",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.044,
+            "y": -0.852,
+            "z": 0.304,
+            "dist": 0.339
+          },
+          "tipScreen": {
+            "x": -0.044,
+            "y": -0.852,
+            "z": 0.304,
+            "dist": 0.339
+          },
+          "armNearEyeM": 0.323,
+          "armStraightPct": 96.3,
+          "gunBounds": {
+            "topY": -0.109,
+            "botY": -1.391,
+            "leftX": -0.267,
+            "rightX": -0.042
+          },
+          "shOutM": 0.05,
+          "fistOutM": 0.418,
+          "fistRightM": -0.018,
+          "fistUpM": 1.272,
+          "torsoYawDeg": 4.9,
+          "torsoPitchDeg": 0.2,
+          "file": null
+        },
+        {
+          "frame": 14,
+          "tMs": 233.3,
+          "blade": "katana",
+          "gun": "pistol",
+          "u": "frame-14",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.044,
+            "y": -0.853,
+            "z": 0.303,
+            "dist": 0.339
+          },
+          "tipScreen": {
+            "x": -0.044,
+            "y": -0.853,
+            "z": 0.303,
+            "dist": 0.339
+          },
+          "armNearEyeM": 0.323,
+          "armStraightPct": 96.3,
+          "gunBounds": {
+            "topY": -0.109,
+            "botY": -1.392,
+            "leftX": -0.267,
+            "rightX": -0.042
+          },
+          "shOutM": 0.05,
+          "fistOutM": 0.418,
+          "fistRightM": -0.018,
+          "fistUpM": 1.272,
+          "torsoYawDeg": 4.9,
+          "torsoPitchDeg": 0.2,
+          "file": null
+        },
+        {
+          "frame": 15,
+          "tMs": 250,
+          "blade": "katana",
+          "gun": "pistol",
+          "u": "frame-15",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.044,
+            "y": -0.854,
+            "z": 0.303,
+            "dist": 0.338
+          },
+          "tipScreen": {
+            "x": -0.044,
+            "y": -0.854,
+            "z": 0.303,
+            "dist": 0.338
+          },
+          "armNearEyeM": 0.323,
+          "armStraightPct": 96.3,
+          "gunBounds": {
+            "topY": -0.11,
+            "botY": -1.393,
+            "leftX": -0.267,
+            "rightX": -0.042
+          },
+          "shOutM": 0.05,
+          "fistOutM": 0.418,
+          "fistRightM": -0.018,
+          "fistUpM": 1.272,
+          "torsoYawDeg": 4.8,
+          "torsoPitchDeg": 0.2,
+          "file": "qa/2026-10-26-AG-133/fp-play-katana-pistol-f15.png"
+        },
+        {
+          "frame": 16,
+          "tMs": 266.7,
+          "blade": "katana",
+          "gun": "pistol",
+          "u": "frame-16",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.043,
+            "y": -0.86,
+            "z": 0.302,
+            "dist": 0.337
+          },
+          "tipScreen": {
+            "x": -0.043,
+            "y": -0.86,
+            "z": 0.302,
+            "dist": 0.337
+          },
+          "armNearEyeM": 0.322,
+          "armStraightPct": 96.4,
+          "gunBounds": {
+            "topY": -0.112,
+            "botY": -1.405,
+            "leftX": -0.268,
+            "rightX": -0.041
+          },
+          "shOutM": 0.051,
+          "fistOutM": 0.42,
+          "fistRightM": -0.017,
+          "fistUpM": 1.27,
+          "torsoYawDeg": 4.8,
+          "torsoPitchDeg": 0.4,
+          "file": null
+        },
+        {
+          "frame": 17,
+          "tMs": 283.3,
+          "blade": "katana",
+          "gun": "pistol",
+          "u": "frame-17",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.043,
+            "y": -0.861,
+            "z": 0.302,
+            "dist": 0.337
+          },
+          "tipScreen": {
+            "x": -0.043,
+            "y": -0.861,
+            "z": 0.302,
+            "dist": 0.337
+          },
+          "armNearEyeM": 0.322,
+          "armStraightPct": 96.4,
+          "gunBounds": {
+            "topY": -0.112,
+            "botY": -1.406,
+            "leftX": -0.268,
+            "rightX": -0.041
+          },
+          "shOutM": 0.051,
+          "fistOutM": 0.42,
+          "fistRightM": -0.017,
+          "fistUpM": 1.27,
+          "torsoYawDeg": 4.8,
+          "torsoPitchDeg": 0.4,
+          "file": null
+        },
+        {
+          "frame": 18,
+          "tMs": 300,
+          "blade": "katana",
+          "gun": "pistol",
+          "u": "frame-18",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.043,
+            "y": -0.862,
+            "z": 0.302,
+            "dist": 0.337
+          },
+          "tipScreen": {
+            "x": -0.043,
+            "y": -0.862,
+            "z": 0.302,
+            "dist": 0.337
+          },
+          "armNearEyeM": 0.321,
+          "armStraightPct": 96.4,
+          "gunBounds": {
+            "topY": -0.112,
+            "botY": -1.407,
+            "leftX": -0.268,
+            "rightX": -0.041
+          },
+          "shOutM": 0.051,
+          "fistOutM": 0.421,
+          "fistRightM": -0.016,
+          "fistUpM": 1.27,
+          "torsoYawDeg": 4.8,
+          "torsoPitchDeg": 0.5,
+          "file": null
+        },
+        {
+          "frame": 19,
+          "tMs": 316.7,
+          "blade": "katana",
+          "gun": "pistol",
+          "u": "frame-19",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.043,
+            "y": -0.863,
+            "z": 0.302,
+            "dist": 0.337
+          },
+          "tipScreen": {
+            "x": -0.043,
+            "y": -0.863,
+            "z": 0.302,
+            "dist": 0.337
+          },
+          "armNearEyeM": 0.321,
+          "armStraightPct": 96.4,
+          "gunBounds": {
+            "topY": -0.112,
+            "botY": -1.408,
+            "leftX": -0.268,
+            "rightX": -0.041
+          },
+          "shOutM": 0.051,
+          "fistOutM": 0.421,
+          "fistRightM": -0.016,
+          "fistUpM": 1.27,
+          "torsoYawDeg": 4.7,
+          "torsoPitchDeg": 0.5,
+          "file": null
+        }
+      ]
+    },
+    "katana_m4": {
+      "durSec": 0.3,
+      "minArmNearEyeM": 0.395,
+      "maxFpBladeDip": 1,
+      "minGunTopY": -0.489,
+      "maxGunTopY": 0.017,
+      "frames": [
+        {
+          "frame": 1,
+          "tMs": 16.7,
+          "blade": "katana",
+          "gun": "m4",
+          "u": "frame-1",
+          "liveU": 0.08,
+          "knifeVisible": true,
+          "fpW": 1,
+          "fpBladeDip": 0.898,
+          "fistScreen": {
+            "x": 0.566,
+            "y": -0.923,
+            "z": 0.603,
+            "dist": 0.768
+          },
+          "tipScreen": {
+            "x": 0.521,
+            "y": 0.512,
+            "z": 1.154,
+            "dist": 1.353
+          },
+          "armNearEyeM": 0.419,
+          "armStraightPct": 86.3,
+          "gunBounds": {
+            "topY": -0.308,
+            "botY": -4.943,
+            "leftX": -3.835,
+            "rightX": -0.217
+          },
+          "shOutM": 0.285,
+          "fistOutM": 0.728,
+          "fistRightM": 0.349,
+          "fistUpM": 1.097,
+          "torsoYawDeg": 43.7,
+          "torsoPitchDeg": 1.7,
+          "file": null
+        },
+        {
+          "frame": 2,
+          "tMs": 33.3,
+          "blade": "katana",
+          "gun": "m4",
+          "u": "frame-2",
+          "liveU": 0.217,
+          "knifeVisible": true,
+          "fpW": 1,
+          "fpBladeDip": 1,
+          "fistScreen": {
+            "x": 0.726,
+            "y": -0.235,
+            "z": 0.532,
+            "dist": 0.667
+          },
+          "tipScreen": {
+            "x": 1.449,
+            "y": 3.542,
+            "z": 0.391,
+            "dist": 1.063
+          },
+          "armNearEyeM": 0.443,
+          "armStraightPct": 93.2,
+          "gunBounds": {
+            "topY": -0.489,
+            "botY": -9.648,
+            "leftX": -6.112,
+            "rightX": -0.137
+          },
+          "shOutM": 0.306,
+          "fistOutM": 0.686,
+          "fistRightM": 0.407,
+          "fistUpM": 1.339,
+          "torsoYawDeg": 39.7,
+          "torsoPitchDeg": 5.9,
+          "file": "qa/2026-10-26-AG-133/fp-play-katana-m4-f02.png"
+        },
+        {
+          "frame": 3,
+          "tMs": 50,
+          "blade": "katana",
+          "gun": "m4",
+          "u": "frame-3",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.597,
+            "y": -0.508,
+            "z": 0.43,
+            "dist": 0.52
+          },
+          "tipScreen": {
+            "x": -0.597,
+            "y": -0.508,
+            "z": 0.43,
+            "dist": 0.52
+          },
+          "armNearEyeM": 0.395,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": 0.017,
+            "botY": -3.14,
+            "leftX": -4.856,
+            "rightX": -0.226
+          },
+          "shOutM": 0.278,
+          "fistOutM": 0.552,
+          "fistRightM": -0.264,
+          "fistUpM": 1.293,
+          "torsoYawDeg": 44.7,
+          "torsoPitchDeg": 0.5,
+          "file": null
+        },
+        {
+          "frame": 4,
+          "tMs": 66.7,
+          "blade": "katana",
+          "gun": "m4",
+          "u": "frame-4",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.597,
+            "y": -0.508,
+            "z": 0.431,
+            "dist": 0.521
+          },
+          "tipScreen": {
+            "x": -0.597,
+            "y": -0.508,
+            "z": 0.431,
+            "dist": 0.521
+          },
+          "armNearEyeM": 0.396,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": 0.016,
+            "botY": -3.099,
+            "leftX": -4.789,
+            "rightX": -0.226
+          },
+          "shOutM": 0.278,
+          "fistOutM": 0.551,
+          "fistRightM": -0.264,
+          "fistUpM": 1.293,
+          "torsoYawDeg": 44.7,
+          "torsoPitchDeg": 0.5,
+          "file": null
+        },
+        {
+          "frame": 5,
+          "tMs": 83.3,
+          "blade": "katana",
+          "gun": "m4",
+          "u": "frame-5",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.599,
+            "y": -0.509,
+            "z": 0.43,
+            "dist": 0.521
+          },
+          "tipScreen": {
+            "x": -0.599,
+            "y": -0.509,
+            "z": 0.43,
+            "dist": 0.521
+          },
+          "armNearEyeM": 0.396,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": 0.015,
+            "botY": -4.248,
+            "leftX": -5.649,
+            "rightX": -0.226
+          },
+          "shOutM": 0.278,
+          "fistOutM": 0.55,
+          "fistRightM": -0.265,
+          "fistUpM": 1.293,
+          "torsoYawDeg": 44.7,
+          "torsoPitchDeg": 0.5,
+          "file": "qa/2026-10-26-AG-133/fp-play-katana-m4-f05.png"
+        },
+        {
+          "frame": 6,
+          "tMs": 100,
+          "blade": "katana",
+          "gun": "m4",
+          "u": "frame-6",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.583,
+            "y": -0.498,
+            "z": 0.438,
+            "dist": 0.525
+          },
+          "tipScreen": {
+            "x": -0.583,
+            "y": -0.498,
+            "z": 0.438,
+            "dist": 0.525
+          },
+          "armNearEyeM": 0.398,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": 0.013,
+            "botY": -4.343,
+            "leftX": -5.715,
+            "rightX": -0.226
+          },
+          "shOutM": 0.276,
+          "fistOutM": 0.554,
+          "fistRightM": -0.26,
+          "fistUpM": 1.295,
+          "torsoYawDeg": 44.7,
+          "torsoPitchDeg": 0.3,
+          "file": null
+        },
+        {
+          "frame": 7,
+          "tMs": 116.7,
+          "blade": "katana",
+          "gun": "m4",
+          "u": "frame-7",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.583,
+            "y": -0.498,
+            "z": 0.438,
+            "dist": 0.526
+          },
+          "tipScreen": {
+            "x": -0.583,
+            "y": -0.498,
+            "z": 0.438,
+            "dist": 0.526
+          },
+          "armNearEyeM": 0.398,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": 0.013,
+            "botY": -4.323,
+            "leftX": -5.691,
+            "rightX": -0.226
+          },
+          "shOutM": 0.276,
+          "fistOutM": 0.554,
+          "fistRightM": -0.26,
+          "fistUpM": 1.295,
+          "torsoYawDeg": 44.7,
+          "torsoPitchDeg": 0.3,
+          "file": "qa/2026-10-26-AG-133/fp-play-katana-m4-f07.png"
+        },
+        {
+          "frame": 8,
+          "tMs": 133.3,
+          "blade": "katana",
+          "gun": "m4",
+          "u": "frame-8",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.583,
+            "y": -0.497,
+            "z": 0.44,
+            "dist": 0.528
+          },
+          "tipScreen": {
+            "x": -0.583,
+            "y": -0.497,
+            "z": 0.44,
+            "dist": 0.528
+          },
+          "armNearEyeM": 0.398,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": 0.011,
+            "botY": -4.186,
+            "leftX": -5.527,
+            "rightX": -0.227
+          },
+          "shOutM": 0.275,
+          "fistOutM": 0.552,
+          "fistRightM": -0.26,
+          "fistUpM": 1.296,
+          "torsoYawDeg": 44.7,
+          "torsoPitchDeg": 0.1,
+          "file": null
+        },
+        {
+          "frame": 9,
+          "tMs": 150,
+          "blade": "katana",
+          "gun": "m4",
+          "u": "frame-9",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.583,
+            "y": -0.496,
+            "z": 0.441,
+            "dist": 0.529
+          },
+          "tipScreen": {
+            "x": -0.583,
+            "y": -0.496,
+            "z": 0.441,
+            "dist": 0.529
+          },
+          "armNearEyeM": 0.398,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": 0.011,
+            "botY": -4.17,
+            "leftX": -5.507,
+            "rightX": -0.228
+          },
+          "shOutM": 0.274,
+          "fistOutM": 0.552,
+          "fistRightM": -0.26,
+          "fistUpM": 1.296,
+          "torsoYawDeg": 44.7,
+          "torsoPitchDeg": 0.1,
+          "file": "qa/2026-10-26-AG-133/fp-play-katana-m4-f09.png"
+        },
+        {
+          "frame": 10,
+          "tMs": 166.7,
+          "blade": "katana",
+          "gun": "m4",
+          "u": "frame-10",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.585,
+            "y": -0.496,
+            "z": 0.443,
+            "dist": 0.531
+          },
+          "tipScreen": {
+            "x": -0.585,
+            "y": -0.496,
+            "z": 0.443,
+            "dist": 0.531
+          },
+          "armNearEyeM": 0.399,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": 0.008,
+            "botY": -4.064,
+            "leftX": -5.38,
+            "rightX": -0.229
+          },
+          "shOutM": 0.274,
+          "fistOutM": 0.552,
+          "fistRightM": -0.259,
+          "fistUpM": 1.296,
+          "torsoYawDeg": 44.7,
+          "torsoPitchDeg": 0,
+          "file": null
+        },
+        {
+          "frame": 11,
+          "tMs": 183.3,
+          "blade": "katana",
+          "gun": "m4",
+          "u": "frame-11",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.585,
+            "y": -0.496,
+            "z": 0.443,
+            "dist": 0.532
+          },
+          "tipScreen": {
+            "x": -0.585,
+            "y": -0.496,
+            "z": 0.443,
+            "dist": 0.532
+          },
+          "armNearEyeM": 0.399,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": 0.007,
+            "botY": -4.055,
+            "leftX": -5.369,
+            "rightX": -0.229
+          },
+          "shOutM": 0.274,
+          "fistOutM": 0.552,
+          "fistRightM": -0.259,
+          "fistUpM": 1.296,
+          "torsoYawDeg": 44.7,
+          "torsoPitchDeg": 0,
+          "file": "qa/2026-10-26-AG-133/fp-play-katana-m4-f11.png"
+        },
+        {
+          "frame": 12,
+          "tMs": 200,
+          "blade": "katana",
+          "gun": "m4",
+          "u": "frame-12",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.588,
+            "y": -0.498,
+            "z": 0.444,
+            "dist": 0.534
+          },
+          "tipScreen": {
+            "x": -0.588,
+            "y": -0.498,
+            "z": 0.444,
+            "dist": 0.534
+          },
+          "armNearEyeM": 0.4,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": 0.004,
+            "botY": -4.021,
+            "leftX": -5.961,
+            "rightX": -0.231
+          },
+          "shOutM": 0.274,
+          "fistOutM": 0.552,
+          "fistRightM": -0.259,
+          "fistUpM": 1.296,
+          "torsoYawDeg": 44.8,
+          "torsoPitchDeg": 0.1,
+          "file": null
+        },
+        {
+          "frame": 13,
+          "tMs": 216.7,
+          "blade": "katana",
+          "gun": "m4",
+          "u": "frame-13",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.588,
+            "y": -0.498,
+            "z": 0.444,
+            "dist": 0.534
+          },
+          "tipScreen": {
+            "x": -0.588,
+            "y": -0.498,
+            "z": 0.444,
+            "dist": 0.534
+          },
+          "armNearEyeM": 0.4,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": 0.003,
+            "botY": -4.021,
+            "leftX": -5.961,
+            "rightX": -0.231
+          },
+          "shOutM": 0.275,
+          "fistOutM": 0.552,
+          "fistRightM": -0.259,
+          "fistUpM": 1.296,
+          "torsoYawDeg": 44.8,
+          "torsoPitchDeg": 0.1,
+          "file": null
+        },
+        {
+          "frame": 14,
+          "tMs": 233.3,
+          "blade": "katana",
+          "gun": "m4",
+          "u": "frame-14",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.589,
+            "y": -0.498,
+            "z": 0.444,
+            "dist": 0.534
+          },
+          "tipScreen": {
+            "x": -0.589,
+            "y": -0.498,
+            "z": 0.444,
+            "dist": 0.534
+          },
+          "armNearEyeM": 0.4,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": 0.003,
+            "botY": -4.022,
+            "leftX": -5.962,
+            "rightX": -0.231
+          },
+          "shOutM": 0.275,
+          "fistOutM": 0.553,
+          "fistRightM": -0.259,
+          "fistUpM": 1.296,
+          "torsoYawDeg": 44.8,
+          "torsoPitchDeg": 0.1,
+          "file": null
+        },
+        {
+          "frame": 15,
+          "tMs": 250,
+          "blade": "katana",
+          "gun": "m4",
+          "u": "frame-15",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.589,
+            "y": -0.499,
+            "z": 0.444,
+            "dist": 0.534
+          },
+          "tipScreen": {
+            "x": -0.589,
+            "y": -0.499,
+            "z": 0.444,
+            "dist": 0.534
+          },
+          "armNearEyeM": 0.4,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": 0.002,
+            "botY": -4.023,
+            "leftX": -5.964,
+            "rightX": -0.231
+          },
+          "shOutM": 0.275,
+          "fistOutM": 0.553,
+          "fistRightM": -0.259,
+          "fistUpM": 1.296,
+          "torsoYawDeg": 44.8,
+          "torsoPitchDeg": 0.1,
+          "file": "qa/2026-10-26-AG-133/fp-play-katana-m4-f15.png"
+        },
+        {
+          "frame": 16,
+          "tMs": 266.7,
+          "blade": "katana",
+          "gun": "m4",
+          "u": "frame-16",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.592,
+            "y": -0.501,
+            "z": 0.444,
+            "dist": 0.535
+          },
+          "tipScreen": {
+            "x": -0.592,
+            "y": -0.501,
+            "z": 0.444,
+            "dist": 0.535
+          },
+          "armNearEyeM": 0.4,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": -0.001,
+            "botY": -4.054,
+            "leftX": -6.012,
+            "rightX": -0.233
+          },
+          "shOutM": 0.276,
+          "fistOutM": 0.554,
+          "fistRightM": -0.259,
+          "fistUpM": 1.295,
+          "torsoYawDeg": 44.8,
+          "torsoPitchDeg": 0.3,
+          "file": null
+        },
+        {
+          "frame": 17,
+          "tMs": 283.3,
+          "blade": "katana",
+          "gun": "m4",
+          "u": "frame-17",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.593,
+            "y": -0.502,
+            "z": 0.444,
+            "dist": 0.535
+          },
+          "tipScreen": {
+            "x": -0.593,
+            "y": -0.502,
+            "z": 0.444,
+            "dist": 0.535
+          },
+          "armNearEyeM": 0.4,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": -0.001,
+            "botY": -4.062,
+            "leftX": -5.385,
+            "rightX": -0.233
+          },
+          "shOutM": 0.276,
+          "fistOutM": 0.554,
+          "fistRightM": -0.259,
+          "fistUpM": 1.295,
+          "torsoYawDeg": 44.8,
+          "torsoPitchDeg": 0.3,
+          "file": null
+        },
+        {
+          "frame": 18,
+          "tMs": 300,
+          "blade": "katana",
+          "gun": "m4",
+          "u": "frame-18",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.593,
+            "y": -0.502,
+            "z": 0.443,
+            "dist": 0.535
+          },
+          "tipScreen": {
+            "x": -0.593,
+            "y": -0.502,
+            "z": 0.443,
+            "dist": 0.535
+          },
+          "armNearEyeM": 0.4,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": -0.002,
+            "botY": -4.07,
+            "leftX": -5.395,
+            "rightX": -0.233
+          },
+          "shOutM": 0.276,
+          "fistOutM": 0.554,
+          "fistRightM": -0.259,
+          "fistUpM": 1.295,
+          "torsoYawDeg": 44.8,
+          "torsoPitchDeg": 0.4,
+          "file": null
+        },
+        {
+          "frame": 19,
+          "tMs": 316.7,
+          "blade": "katana",
+          "gun": "m4",
+          "u": "frame-19",
+          "liveU": -1,
+          "knifeVisible": false,
+          "fpW": 1,
+          "fpBladeDip": 0,
+          "fistScreen": {
+            "x": -0.594,
+            "y": -0.502,
+            "z": 0.443,
+            "dist": 0.535
+          },
+          "tipScreen": {
+            "x": -0.594,
+            "y": -0.502,
+            "z": 0.443,
+            "dist": 0.535
+          },
+          "armNearEyeM": 0.4,
+          "armStraightPct": 97.5,
+          "gunBounds": {
+            "topY": -0.002,
+            "botY": -4.079,
+            "leftX": -5.406,
+            "rightX": -0.233
+          },
+          "shOutM": 0.277,
+          "fistOutM": 0.554,
+          "fistRightM": -0.26,
+          "fistUpM": 1.295,
+          "torsoYawDeg": 44.8,
+          "torsoPitchDeg": 0.4,
+          "file": null
+        }
+      ]
+    }
+  },
+  "tpVerify": {
+    "knife": [
+      {
+        "blade": "knife",
+        "gun": "pistol",
+        "u": 0.14,
+        "liveU": 0.14,
+        "knifeVisible": true,
+        "fpW": 0.106,
+        "fpBladeDip": 1,
+        "fistScreen": {
+          "x": -0.151,
+          "y": -0.347,
+          "z": 2.97,
+          "dist": 3.064
+        },
+        "tipScreen": {
+          "x": -0.145,
+          "y": -0.17,
+          "z": 2.947,
+          "dist": 2.994
+        },
+        "armNearEyeM": 2.995,
+        "armStraightPct": 39.8,
+        "gunBounds": {
+          "topY": -0.366,
+          "botY": -0.473,
+          "leftX": -0.181,
+          "rightX": -0.141
+        },
+        "shOutM": -0.005,
+        "fistOutM": 0.07,
+        "fistRightM": 0.16,
+        "fistUpM": 1.205,
+        "torsoYawDeg": -7,
+        "torsoPitchDeg": 2.4,
+        "chestTurnDeg": -11.9,
+        "chestLeanDeg": 1.8,
+        "frontFile": "qa/2026-10-26-AG-133/tp-knife-front-0-cock.png",
+        "rightFile": "qa/2026-10-26-AG-133/tp-knife-right-0-cock.png"
+      },
+      {
+        "blade": "knife",
+        "gun": "pistol",
+        "u": 0.3,
+        "liveU": 0.3,
+        "knifeVisible": true,
+        "fpW": 0,
+        "fpBladeDip": 1,
+        "fistScreen": {
+          "x": -0.173,
+          "y": -0.333,
+          "z": 3.342,
+          "dist": 3.454
+        },
+        "tipScreen": {
+          "x": -0.197,
+          "y": -0.182,
+          "z": 3.477,
+          "dist": 3.566
+        },
+        "armNearEyeM": 3.209,
+        "armStraightPct": 66.5,
+        "gunBounds": {
+          "topY": -0.413,
+          "botY": -0.507,
+          "leftX": -0.233,
+          "rightX": -0.217
+        },
+        "shOutM": 0.205,
+        "fistOutM": 0.442,
+        "fistRightM": 0.026,
+        "fistUpM": 1.158,
+        "torsoYawDeg": 18.8,
+        "torsoPitchDeg": 12.1,
+        "chestTurnDeg": 13.5,
+        "chestLeanDeg": 11.9,
+        "frontFile": "qa/2026-10-26-AG-133/tp-knife-front-1-drive.png",
+        "rightFile": "qa/2026-10-26-AG-133/tp-knife-right-1-drive.png"
+      },
+      {
+        "blade": "knife",
+        "gun": "pistol",
+        "u": 0.4,
+        "liveU": 0.4,
+        "knifeVisible": true,
+        "fpW": 0,
+        "fpBladeDip": 1,
+        "fistScreen": {
+          "x": -0.176,
+          "y": -0.346,
+          "z": 3.611,
+          "dist": 3.739
+        },
+        "tipScreen": {
+          "x": -0.19,
+          "y": -0.268,
+          "z": 3.913,
+          "dist": 4.032
+        },
+        "armNearEyeM": 3.282,
+        "armStraightPct": 90.9,
+        "gunBounds": {
+          "topY": -0.415,
+          "botY": -0.509,
+          "leftX": -0.273,
+          "rightX": -0.245
+        },
+        "shOutM": 0.272,
+        "fistOutM": 0.711,
+        "fistRightM": -0.031,
+        "fistUpM": 1.079,
+        "torsoYawDeg": 31.8,
+        "torsoPitchDeg": 12.2,
+        "chestTurnDeg": 26,
+        "chestLeanDeg": 11.8,
+        "frontFile": "qa/2026-10-26-AG-133/tp-knife-front-2-stab.png",
+        "rightFile": "qa/2026-10-26-AG-133/tp-knife-right-2-stab.png"
+      },
+      {
+        "blade": "knife",
+        "gun": "pistol",
+        "u": 0.58,
+        "liveU": 0.58,
+        "knifeVisible": true,
+        "fpW": 0,
+        "fpBladeDip": 1,
+        "fistScreen": {
+          "x": -0.235,
+          "y": -0.37,
+          "z": 3.304,
+          "dist": 3.472
+        },
+        "tipScreen": {
+          "x": -0.31,
+          "y": -0.306,
+          "z": 3.415,
+          "dist": 3.635
+        },
+        "armNearEyeM": 3.222,
+        "armStraightPct": 80.5,
+        "gunBounds": {
+          "topY": -0.368,
+          "botY": -0.479,
+          "leftX": -0.291,
+          "rightX": -0.259
+        },
+        "shOutM": 0.22,
+        "fistOutM": 0.404,
+        "fistRightM": -0.179,
+        "fistUpM": 1.094,
+        "torsoYawDeg": 36.2,
+        "torsoPitchDeg": 0.3,
+        "chestTurnDeg": 29.8,
+        "chestLeanDeg": -0.1,
+        "frontFile": "qa/2026-10-26-AG-133/tp-knife-front-3-cut.png",
+        "rightFile": "qa/2026-10-26-AG-133/tp-knife-right-3-cut.png"
+      }
+    ],
+    "machete": [
+      {
+        "blade": "machete",
+        "gun": "pistol",
+        "u": 0.16,
+        "liveU": 0.16,
+        "knifeVisible": true,
+        "fpW": 0,
+        "fpBladeDip": 1,
+        "fistScreen": {
+          "x": -0.124,
+          "y": -0.288,
+          "z": 2.964,
+          "dist": 3.028
+        },
+        "tipScreen": {
+          "x": -0.31,
+          "y": -0.408,
+          "z": 2.812,
+          "dist": 3.025
+        },
+        "armNearEyeM": 2.913,
+        "armStraightPct": 44.9,
+        "gunBounds": {
+          "topY": -0.372,
+          "botY": -0.476,
+          "leftX": -0.187,
+          "rightX": -0.147
+        },
+        "shOutM": 0.018,
+        "fistOutM": 0.064,
+        "fistRightM": 0.243,
+        "fistUpM": 1.307,
+        "torsoYawDeg": -4,
+        "torsoPitchDeg": 3.6,
+        "chestTurnDeg": -10.7,
+        "chestLeanDeg": 3.4,
+        "frontFile": "qa/2026-10-26-AG-133/tp-machete-front-0-wind1.png",
+        "rightFile": "qa/2026-10-26-AG-133/tp-machete-right-0-wind1.png"
+      },
+      {
+        "blade": "machete",
+        "gun": "pistol",
+        "u": 0.36,
+        "liveU": 0.36,
+        "knifeVisible": true,
+        "fpW": 0,
+        "fpBladeDip": 1,
+        "fistScreen": {
+          "x": -0.112,
+          "y": -0.14,
+          "z": 3.151,
+          "dist": 3.182
+        },
+        "tipScreen": {
+          "x": -0.277,
+          "y": -0.187,
+          "z": 3.237,
+          "dist": 3.383
+        },
+        "armNearEyeM": 2.959,
+        "armStraightPct": 96.1,
+        "gunBounds": {
+          "topY": -0.399,
+          "botY": -0.495,
+          "leftX": -0.155,
+          "rightX": -0.101
+        },
+        "shOutM": -0.046,
+        "fistOutM": 0.251,
+        "fistRightM": 0.258,
+        "fistUpM": 1.545,
+        "torsoYawDeg": -18.9,
+        "torsoPitchDeg": 8.6,
+        "chestTurnDeg": -25.8,
+        "chestLeanDeg": 8,
+        "frontFile": "qa/2026-10-26-AG-133/tp-machete-front-1-windPeak.png",
+        "rightFile": "qa/2026-10-26-AG-133/tp-machete-right-1-windPeak.png"
+      },
+      {
+        "blade": "machete",
+        "gun": "pistol",
+        "u": 0.48,
+        "liveU": 0.48,
+        "knifeVisible": true,
+        "fpW": 0,
+        "fpBladeDip": 1,
+        "fistScreen": {
+          "x": -0.183,
+          "y": -0.316,
+          "z": 3.458,
+          "dist": 3.575
+        },
+        "tipScreen": {
+          "x": -0.279,
+          "y": -0.245,
+          "z": 3.835,
+          "dist": 4.026
+        },
+        "armNearEyeM": 3.13,
+        "armStraightPct": 99.1,
+        "gunBounds": {
+          "topY": -0.39,
+          "botY": -0.488,
+          "leftX": -0.211,
+          "rightX": -0.185
+        },
+        "shOutM": 0.127,
+        "fistOutM": 0.558,
+        "fistRightM": -0.029,
+        "fistUpM": 1.17,
+        "torsoYawDeg": 10.2,
+        "torsoPitchDeg": 6.9,
+        "chestTurnDeg": 3.5,
+        "chestLeanDeg": 6.9,
+        "frontFile": "qa/2026-10-26-AG-133/tp-machete-front-2-midChop.png",
+        "rightFile": "qa/2026-10-26-AG-133/tp-machete-right-2-midChop.png"
+      },
+      {
+        "blade": "machete",
+        "gun": "pistol",
+        "u": 0.58,
+        "liveU": 0.58,
+        "knifeVisible": true,
+        "fpW": 0,
+        "fpBladeDip": 1,
+        "fistScreen": {
+          "x": -0.285,
+          "y": -0.399,
+          "z": 3.194,
+          "dist": 3.408
+        },
+        "tipScreen": {
+          "x": -0.399,
+          "y": -0.598,
+          "z": 3.288,
+          "dist": 3.73
+        },
+        "armNearEyeM": 3.231,
+        "armStraightPct": 99.1,
+        "gunBounds": {
+          "topY": -0.387,
+          "botY": -0.491,
+          "leftX": -0.277,
+          "rightX": -0.25
+        },
+        "shOutM": 0.228,
+        "fistOutM": 0.294,
+        "fistRightM": -0.313,
+        "fistUpM": 1.064,
+        "torsoYawDeg": 32.2,
+        "torsoPitchDeg": 5.4,
+        "chestTurnDeg": 25.7,
+        "chestLeanDeg": 4.7,
+        "frontFile": "qa/2026-10-26-AG-133/tp-machete-front-3-chopEnd.png",
+        "rightFile": "qa/2026-10-26-AG-133/tp-machete-right-3-chopEnd.png"
+      }
+    ]
+  },
+  "tests": {
+    "t299": {
+      "pass": 13,
+      "fail": 0,
+      "lines": [
+        "INFO chest turn from rest at the cock -0.21, at the stab 0.45 rad (+ the knife's shoulder forward), lean 0.20; the stab's point 0.70 m ahead of him, 0.01 m to his left; shoulder to it 0.527 m (reach 0.575), with the turn and lean off 0.739 m (the point 0.70 m ahead)",
+        "PASS at the cock his chest is turned the knife's shoulder back (-0.21 rad)",
+        "PASS at the stab it has turned the shoulder through and leans in (0.45, lean 0.20 rad)",
+        "PASS the stab goes straight out along his line, past where the arm alone reached (0.70 m ahead, 0.01 m to the side)",
+        "PASS the shoulder coming through is what puts it in reach (0.527 m with the body, 0.739 m without, reach 0.575)",
+        "PASS the point is laid out before the turn, so the turn doesn't move it (-0.001 m)",
+        "PASS first person is on (1.00)",
+        "PASS no blade swinging, the gun has no dip (0)",
+        "INFO first person: the stab at (0.06, -0.50) 0.33 m from the eye, 0.540 m from the shoulder; the cock (0.45, -1.50), its arm 0.46 m from the eye at the nearest; the chop mid-cut (0.10, -0.35); the gun's dip at the stab 1.00",
+        "PASS from his eyes the stab lands in the lower middle of the view (0.06, -0.50)",
+        "PASS and in his arm's reach (0.540 m, reach 0.575)",
+        "PASS the cock keeps his arm clear of the near plane (0.46 m from the eye)",
+        "PASS the chop crosses the lower middle of the view (0.10, -0.35)",
+        "PASS the gun dips out of the way while the blade swings (1.00)",
+        "PASS no page errors"
+      ]
+    },
+    "t195": {
+      "pass": 19,
+      "fail": 1,
+      "lines": [
+        "PASS TT.handsDbg is exported (roll cap 0.85 rad, support reach 0.520 m)",
+        "PASS flamer: the support anchor within the support arm's reach (0.520 m, reach 0.520)",
+        "PASS flamer: the barrel still on the reticle (0.00 deg)",
+        "PASS uzi: the support anchor within the support arm's reach (0.520 m, reach 0.520)",
+        "FAIL uzi: the barrel still on the reticle (6.94 deg)",
+        "PASS chainsaw: the support anchor within the support arm's reach (0.520 m, reach 0.520)",
+        "PASS m4: the gun hand rolled onto the grip (5 -> 0 deg)",
+        "PASS m4: the support hand turned onto the gun, along its forend (22 deg)",
+        "PASS pistol: the gun hand rolled onto the grip (0 -> 0 deg)",
+        "PASS pistol: the support hand rolled onto the gun (0 -> 0 deg)",
+        "PASS stowed guns to draw: m4@back@1, uzi@chest@0, revolver@chest@1, pistol@hip@0",
+        "PASS m4 (back1): the fitted copy is found",
+        "PASS m4: at the end of the reach the hand goes to the gun on him (0.000 m from it; reach+raise)",
+        "PASS uzi (chest0): the fitted copy is found",
+        "PASS uzi: at the end of the reach the hand goes to the gun on him (0.000 m from it; reach+raise)",
+        "PASS revolver (chest1): the fitted copy is found",
+        "PASS revolver: at the end of the reach the hand goes to the gun on him (0.000 m from it; reach+raise)",
+        "PASS the knife arm's slash clip is loaded (studio/clips/marine/knife-slash.json)",
+        "PASS the slash holds at the cut (u 0.40)",
+        "PASS at the cut the knife hand's target is out in front of his chest (0.58 m ahead)"
+      ]
+    },
+    "t296": {
+      "pass": 9,
+      "fail": 0,
+      "lines": [
+        "PASS unarmed",
+        "INFO run: arm 36 17 -2 -9 -1 19 37 45 deg (+ back); elbow 84 97 112 120 117 104 89 80",
+        "PASS the arc sits behind him (its middle 18 deg back)",
+        "PASS and comes only a little in front (9 deg at most)",
+        "PASS a full swing (54 deg)",
+        "PASS the elbow bent like a runner's (80-120 deg)",
+        "PASS more bent forward than back (120 against 80)",
+        "PASS the arms close beside him, not flared (11 deg out at most)",
+        "INFO walk: arm 19 0 -22 -3; elbow 11 15 21 17",
+        "PASS the walk is as it was (its middle -1 deg, elbows under 21)",
+        "PASS no page errors"
+      ]
+    },
+    "t297": {
+      "pass": 4,
+      "fail": 0,
+      "lines": [
+        "INFO off the ladder's line at most 0.0 cm ; feet 78, worst sole 0.5 cm off its rung at 1.00 m, rung 3; hands 78, worst target 0.0 cm , farthest reach 56.1 cm of 57.5 at 5.16 m, rung 16 (150 cm over his feet); headless fist (fakethree) worst 1.6 cm",
+        "PASS he stays on the ladder's line (worst 0.0 cm off it)",
+        "PASS every standing boot on its rung's top (worst 0.5 cm)",
+        "PASS every gripping hand goes round its rung, in his reach (worst 0.0 cm, reach 56.1 cm)",
+        "PASS no page errors"
+      ]
+    }
+  },
+  "errors": [
+    "TypeError: Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'.\n    at http://127.0.0.1:47845/ui/prep-checklist.js:116:15\n    at <anonymous>:31:12"
+  ]
+}

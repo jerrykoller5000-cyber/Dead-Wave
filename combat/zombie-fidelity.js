@@ -54,34 +54,53 @@ export function refineZombieFace(A,T,g,s,k,M) {
   for(const m of [...head.children])if(m.isMesh&&!keep.has(m))m.removeFromParent();
   if(k==='screamer'){refineScreamerFace(A,g,M,s);return;}
   const heavy=k==='brute'||k==='colossus',scream=k==='screamer',w=heavy?.18:k==='bomber'?.17:.153;
-  A.loft(head,skin,[[heavy?-.145:-.165,.055,.055,.018],[-.12,w*.60,.086,.006],[-.055,w*.85,.105,-.012],[.025,w,.135,-.023],[.10,w*.98,.137,-.028],[.167,w*.82,.111,-.032],[.205,w*.40,.065,-.033]],12);
+  const faceRings=[[heavy?-.145:-.165,.055,.055,.018],[-.12,w*.60,.086,.006],[-.055,w*.85,.105,-.012],[.025,w,.135,-.023],[.10,w*.98,.137,-.028],[.167,w*.82,.111,-.032],[.205,w*.40,.065,-.033]];
+  A.loft(head,skin,faceRings,12);
+  // Project facial attachments onto the smoothed head instead of the old flat
+  // front plane. A little overlap prevents a side-view slit at the octagonal loft.
+  const front=(x,y)=>{
+    let lo=faceRings[0],hi=faceRings.at(-1);
+    for(let i=1;i<faceRings.length;i++)if(y<=faceRings[i][0]){lo=faceRings[i-1];hi=faceRings[i];break;}
+    const t=Math.max(0,Math.min(1,(y-lo[0])/(hi[0]-lo[0]))),rx=lo[1]+(hi[1]-lo[1])*t,rz=lo[2]+(hi[2]-lo[2])*t,cz=lo[3]+(hi[3]-lo[3])*t;
+    return cz+rz*Math.sqrt(Math.max(0,1-(x/rx)**2));
+  };
+  const onSkin=(pts,lift=0)=>pts.map(([x,y])=>[x,y,front(x,y)+lift]);
   for(const side of [-1,1]){
-    A.egg(head,shadow,side*.085,.038,.126,.105,.075,.026,-side*.17);
-    A.path(head,pale,[[side*.026,.071,.145],[side*.079,.091,.148],[side*.137,.067,.112]],.013);
+    A.egg(head,shadow,side*.085,.038,front(.085,.038)+.009,.105,.075,.026,-side*.17);
+    A.path(head,pale,onSkin([[side*.026,.071],[side*.079,.091],[side*.137,.067]],.006),.013);
     // Cheek ridge merges into the jaw, replacing separate ball-shaped cheeks.
-    A.path(head,skin,[[side*.135,.012,.102],[side*.119,-.041,.123],[side*.090,-.113,.103]],.022);
+    A.path(head,skin,onSkin([[side*.135,.012],[side*.119,-.041],[side*.090,-.113]],.012),.022);
+    if(!heavy)A.egg(head,skin,side*.065,-.108,front(.065,-.108)+.017,.085,.105,.160,-side*.17);
     A.egg(head,skin,side*(w+.004),-.003,-.019,.034,.079,.042,-side*.13);
     A.egg(head,shadow,side*(w+.016),-.003,.001,.010,.044,.014);
-    A.path(head,wound,[[side*.13,.024,.125],[side*.125,-.04,.129],[side*.091,-.098,.137]],.004);
+    A.path(head,wound,onSkin([[side*.13,.024],[side*.125,-.04],[side*.091,-.098]],.004),.004);
   }
-  A.egg(head,skin,0,.006,.146,.040,.093,.047);
-  for(const side of [-1,1])A.egg(head,mouth,side*.012,-.033,.166,.013,.009,.011);
+  A.egg(head,skin,0,.006,front(0,.006)+(heavy?.019:-.004),.040,.093,heavy?.047:.080);
+  // A recessed maxilla joins the small heads' nose and upper teeth to the loft.
+  if(!heavy)A.egg(head,skin,0,-.055,front(0,-.055)-.015,.140,.095,.125);
+  // The old black nostril beads hover below the small heads' nose wedge.
+  if(heavy)for(const side of [-1,1])A.egg(head,mouth,side*.012,-.033,front(.012,-.033)+.005,.013,.009,.011);
   const mouthY=scream?-.175:-.104,mouthH=scream?.235:.065;
-  A.egg(head,mouth,0,mouthY,.126,.174,mouthH,.055);
-  for(const side of [-1,1])A.path(head,skin,[[side*.09,-.062,.127],[side*(scream?.106:.083),scream?-.22:-.125,.139],[side*.052,scream?-.308:-.147,.119]],.016);
-  A.egg(head,skin,0,scream?-.304:-.144,.091,scream?.172:.168,.040,.103);
-  A.path(head,wound,[[-.077,-.066,.15],[0,-.065,.169],[.077,-.067,.15]],.007);
-  A.path(head,wound,[[-.07,scream?-.283:-.132,.145],[0,scream?-.298:-.141,.154],[.07,scream?-.283:-.132,.145]],.006);
+  const mouthZ=front(0,mouthY)+.023,jawY=scream?-.304:-.144,jawZ=front(0,jawY)+.045;
+  const mouthDepth=heavy?.055:.079,mouthCenter=heavy?mouthZ:mouthZ-.012;
+  const jawDepth=heavy?.103:.148,jawCenter=heavy?jawZ:jawZ-.0225;
+  const mouthEdge=x=>mouthCenter+mouthDepth*.5*Math.sqrt(Math.max(0,1-(x/.087)**2));
+  const jawEdge=x=>jawCenter+jawDepth*.5*Math.sqrt(Math.max(0,1-(x/.084)**2));
+  A.egg(head,mouth,0,mouthY,mouthCenter,.174,mouthH,mouthDepth);
+  for(const side of [-1,1])A.path(head,skin,heavy?[[side*.09,-.062,front(.09,-.062)+.01],[side*.083,-.125,jawEdge(.083)+.01],[side*.052,-.147,jawEdge(.052)+.01]]:[[side*.082,-.062,front(.082,-.062)+.006],[side*.074,-.112,front(.074,-.112)+.040],[side*.052,-.145,jawEdge(.052)-.002]],heavy?.016:.021);
+  A.egg(head,skin,0,jawY,jawCenter,scream?.172:.168,.040,jawDepth);
+  A.path(head,wound,onSkin([[-.077,-.066],[0,-.065],[.077,-.067]],.006),.007);
+  A.path(head,wound,[[-.07,scream?-.283:-.132,jawEdge(.07)+.004],[0,scream?-.298:-.141,jawEdge(0)+.004],[.07,scream?-.283:-.132,jawEdge(.07)+.004]],.006);
   for(let i=0;i<8;i++){
-    const x=(i-3.5)*.019,z=.168-Math.abs(x)*.17,long=i===1||i===6;
+    const x=(i-3.5)*.019,z=mouthEdge(x)+.004,lowerZ=jawEdge(x)+.004,long=i===1||i===6;
     A.spike(head,teeth,[x,-.07,z],[x*.96,-.089-(long?.012:0),z+.004],.008);
-    A.spike(head,teeth,[x,scream?-.286:-.134,z-.005],[x*.96,scream?-.265:-.118,z],.007);
+    A.spike(head,teeth,[x,scream?-.286:-.134,lowerZ-.005],[x*.96,scream?-.265:-.118,lowerZ],.007);
   }
   if(scream){const tongue=A.mat(0xae6671,false,0,'wet'),tip=A.mat(0xd89299,false,0,'wet');
     A.path(head,tongue,[[0,-.21,.165],[.012,-.30,.22],[.037,-.39,.30],[.025,-.435,.38],[-.015,-.40,.445]],.033);
     A.ribbon(head,tip,[[0,-.24,.20],[.017,-.32,.263],[.035,-.39,.33],[.023,-.43,.40],[-.015,-.40,.451]],.010);
   }
-  for(const eye of eyes){eye.position.z=.153*s;eye.scale.set(.62,.38,.40);}
+  for(const eye of eyes){eye.position.z=(front(eye.position.x/s,eye.position.y/s)+.018)*s;eye.scale.set(.62,.38,.40);}
 }
 
 // GP-19971: drawn cheeks, inward brow and an oval mouth instead of a hanging
@@ -145,11 +164,11 @@ export function refineHeavyArmor(A,T,g,s,k,M) {
     A.plate(u.torso,fire,[[.153,.224,.256],[.187,.253,.264]],.004);
     A.sweep(u.armLG,steel,[[-.07,.095,0],[-.18,.24,-.01],[-.29,.37,-.03]],.105,0);
   }else{
-    // Keep the industrial shoulder shield and hazard identity; fit its lower corners.
+    // Keep the industrial hazard shield on the outer shoulder, clear of the face.
     const hazard=A.mat(0xc39648,false,.2,'metal');
-    const shield=A.plate(u.armLG,hazard,[[-.07,.19,.20],[.02,.255,.255],[.24,.245,.24],[.30,.15,.18]],.07);shield.position.x=-.085*s;
-    for(let j=0;j<3;j++){const stripe=A.plate(u.armLG,hair,[[.015,.018,.265],[.25,.018,.246]],.004);stripe.position.x=(-.24+j*.14)*s;stripe.rotation.z=-.30;}
-    for(const x of [-.20,-.025])A.path(u.armLG,rust,[[x,.28,.10],[x-.02,.43,.06],[x+.07,.45,.06],[x+.09,.29,.10]],.014);
+    const shield=A.plate(u.armLG,hazard,[[-.14,.155,.165],[-.06,.195,.225],[.10,.19,.224],[.18,.13,.17]],.055);shield.position.x=-.20*s;
+    for(let j=0;j<3;j++){const stripe=A.plate(u.armLG,hair,[[-.09,.014,.231],[.115,.014,.226]],.004);stripe.position.x=(-.33+j*.12)*s;stripe.rotation.z=-.25;}
+    for(const x of [-.31,-.13])A.path(u.armLG,rust,[[x,.13,.10],[x-.02,.27,.06],[x+.07,.29,.06],[x+.09,.14,.10]],.014);
     for(let j=0;j<3;j++)A.plate(u.torso,steel,[[.145+j*.083,.19,.275],[.205+j*.083,.21,.274]],.008);
     for(let i=0;i<3;i++)A.egg(u.torso,fire,(i-1)*.105,.078,.21,.045,.077,.026);
     // A narrow brow follows the skull; no slab across the eye openings.

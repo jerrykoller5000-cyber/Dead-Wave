@@ -1,0 +1,75 @@
+{
+  "shots": [
+    {
+      "target": "zombie.shambler:statue",
+      "view": "side",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-trim-after/shambler-overcast-side.png"
+    },
+    {
+      "target": "zombie.shambler:statue",
+      "view": "back",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-trim-after/shambler-overcast-back.png"
+    },
+    {
+      "target": "zombie.feral:statue",
+      "view": "side",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-trim-after/feral-overcast-side.png"
+    },
+    {
+      "target": "zombie.feral:statue",
+      "view": "back",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-trim-after/feral-overcast-back.png"
+    },
+    {
+      "target": "zombie.drowned:statue",
+      "view": "side",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-trim-after/drowned-overcast-side.png"
+    },
+    {
+      "target": "zombie.drowned:statue",
+      "view": "back",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-trim-after/drowned-overcast-back.png"
+    },
+    {
+      "target": "zombie.spitter:statue",
+      "view": "side",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-trim-after/spitter-overcast-side.png"
+    },
+    {
+      "target": "zombie.spitter:statue",
+      "view": "back",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-trim-after/spitter-overcast-back.png"
+    },
+    {
+      "target": "zombie.bomber:statue",
+      "view": "side",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-trim-after/bomber-overcast-side.png"
+    },
+    {
+      "target": "zombie.bomber:statue",
+      "view": "back",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-trim-after/bomber-overcast-back.png"
+    }
+  ],
+  "out": "handoffs/GP-19970/face-trim-after"
+}

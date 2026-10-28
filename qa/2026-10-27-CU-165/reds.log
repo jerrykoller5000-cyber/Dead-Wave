@@ -1,0 +1,15 @@
+GRANT cursor CU-165: starting one game-test command
+check-players: 309 player.position reads, all in the allowed places
+ok    t122    14 pass   0 fail  42.6s
+ok    t241     5 pass   0 fail  41.1s
+FAIL  t248    11 pass   1 fail  41.5s
+FAIL  t298     9 pass   1 fail  118.8s
+
+4 checks: 39 pass, 2 fail
+
+by owner:
+  unassigned
+    t248   1 fail  FAIL the raised turret, with a clear line, does hit (hp 26/26)
+           FAIL the raised turret, with a clear line, does hit (hp 26/26)
+    t298   1 fail  FAIL after the eye ease the camera position matches within 1 mm (0.0019 m)
+           FAIL after the eye ease the camera position matches within 1 mm (0.0019 m)

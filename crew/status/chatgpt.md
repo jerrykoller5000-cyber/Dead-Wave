@@ -1,24 +1,26 @@
 # ChatGPT
 
-state: active
-model: GPT-6 (variant not exposed)
-task: GP-19972 Run Claude prepared checkpoint commit job on his behalf
-touching: git, handoffs/2026-10-26-chatgpt-GP-19972.md (new)
-since: 2026-10-26T06:33Z
-next: waits on CL-263
-blocked-on: —
-last-report: handoffs/2026-10-26-chatgpt-GP-19970.md
+state: blocked
+model: GPT-6
+task: GP-19970 Arc the rear crown hair ribbon across four small humanoid skulls
+touching: studio/zombie-concepts.js (rear crown hair ribbon)
+since: 2026-10-28T19:31Z
+next: GP-19970 The principles pass on ChatGPT's areas (D-89). Every zombie'
+blocked-on: game-test slot · changes ready: Changes ready; waiting for testing slot. GP-19970 rear crown row is syntax-clean; matched 28-view Inspector job prepared at handoffs/GP-19970/face-hair-crown-after/job.json. Resume through native slot, retake black frames, check zombie 14/0, stop camera, then seek AG score. My queued request was canceled; no game remains owned.
+last-report: handoffs/2026-10-28-chatgpt-GP-19970.md
 
 ## Notes
 
-GP-19970 eye-material iteration: handoffs/2026-10-26-chatgpt-GP-19970.md. Ordinary/cave-guardian eyes are pale green at 0.9; Bluebell stays blue at 1.8. 56 focused tests pass; 64 before and 64 after four-light captures pass; model counters unchanged. Fresh/cache/Bluebell material probe passes. ACTUAL POOL REUSE FAILS: same body returns at 1.7 despite baseEmissive 0.9. Cursor owns index.html reset/death and has the exact evidence. Await that repair, then Antigravity gameplay/flashlight review. Not done.
+GP-19974 DONE (2026-10-27): Claude's accepted 1.1 format, both final fixes complete. Native mine-reframe-g with mouth/timbers and foreground cutters saved (85,097-byte JPG); radio has no empty screen at 1280/390; cameraClick guarded on play/put-down. Native t265 30/30 + 21 assertions, 20 Node, zero errors. Final report handoffs/2026-10-26-chatgpt-GP-19974.md; AG-136 accepts both final visual deltas5/5. Full suite/budgets delegated to Cursor.
 
-GP-19971 accepted and ticked by Claude (2026-10-26): AG-130 and his review establish night flashlight readability 4/5 in context. Keep the current face value; the shroud intentionally dims the shielded beats. Any drift-arm adjustment waits for Jerry's playthrough feedback. The separate GP-19970 pooled-brightness repair also affects Screamer.
+GP-19973 DONE: Claude adapter/contract applied; native WebGPU dawn-to-radio proof passes, 19 Node pass, 12 shots at 1280/390, errors []. Handoff finalized and checked out 2026-10-27. No premature board line; carried guidance once; catch-up/boat lines retained.
 
-Final sheets: handoffs/GP-19971/after/sheet.jpg, live/sheet.jpg and live/night-sheet.jpg. All game runs through the machine-wide slot, serially. Run native slot commands elevated on this host because sandbox temporary storage reports a different queue. No owned test process remains. Never restore archived baselines; capture.mjs defaults to after.
+GP-19975 done: 60 candidate trims, 30 destinations, 54 WAVs; all 16 UI folders. docs/audio/packs/ui.json + measured proof. Not human-auditioned. Claude converts/levels/wires; no licensed audio copied. Preserve relayBeep's shared world timing.
 
-Remaining GP-19970 scope: handoffs/GP-19970/remaining-pass.md. Motion, marine helpers and CRT UI still need their passes; eyes are not the whole task. Claude approved acid/fuse/demon fire and charge/Bluebell blue as physical warning-light exceptions (art-direction section 3); review their intensity after eyes. D-92 approves the UI and sound principles. Accepted baseline is eyes-before-four-lights; initial eyes-before used invalid light routing. GP-19968/69 follow the board's CL-263 dependency. Latest next command: nothing startable; GP-19969 waits on CL-263. CU-162 and AG-131 are active.
+GP-19968 done: six stylized portraits accepted by AG; production 6/6/6 painters, 40 shots, zero errors. GP-19969 accepted by Claude/AG. GP-19972 historical commit 28737f17 RESULT:PUSHED. Later broad Claude commit job still pending: never commit active/unfinished files; inspect current owners and prepared batch first.
 
-Cursor's CU-160 note-box words are still LATER for a separate scoped task after the pass: clip.note = What happened?; clip.saved = Clip saved. No changes to ui/strings.js in GP-19971.
+GP-19970 open: CRT/balaclava, hides, brute chest, spitter/bomber close2, colossus carrier, military backpack/chest, drowned fit, leaper ridge, military knee/wrist pads and rear neck pegs accepted by AG-141/142/143/146. Brute/colossus faces pass AG-145 (5 gameplay, 4 close). Seven smaller faces still 3/5 close after jaw/nose pass: a gap remains behind the nose/upper teeth; crown hair front loop also 3/5 close. Claude assigned Screamer face and all zombie-look refine* builders in combat/zombie-fidelity.js to ChatGPT for visual fixes; notify Grokbot and preserve combat-read shapes. Colossus shield now lower/outboard, native Inspector 1/0 and 14 nonblank four-light/gameplay/walk shots; AG score pending. All cameras stopped. Next: fix remaining 3/5 face/hair gaps, Screamer face, then independent limb plates/forearm/pelvis strips and guardian/caveguard loincloth; broad motion remains. Full history in handoffs/2026-10-27-chatgpt-GP-19970.md.
 
-No git/GitHub actions: Cursor/Claude own integration. Full older notes archived at handoffs/GP-19971/previous-card.md; prior proof and reports remain in place.
+GP-19977 DONE: Claude accepted z._tp fallback with no contract change; AG-141 scored all applicable motion categories at least 4/5. Native t75 test/real each16/0, 48-body stress60.375fps. Handoff handoffs/2026-10-27-chatgpt-GP-19977.md.
+
+All game checks use native machine-wide slot, serially (elevation avoids sandbox's different temporary queue). No owned game remains. CU-160 note-box wording remains LATER as a separate task. Earlier detail preserved in handoffs/GP-19974/previous-card-before-native-review.md.

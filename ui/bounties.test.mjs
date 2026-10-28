@@ -2,9 +2,14 @@ import test from 'node:test';import assert from 'node:assert/strict';
 import {buildBountyBoard,createBountyIntel,drawBountyMarks} from './bounties.js';
 import {createCampNotice} from './camp-cleared.js';
 const post={kind:'campsite',index:2,labelKey:'world.trapper',day:8,x:90,z:60,guards:6,alive:5,reward:150,state:'open'};
-const open=(bounties=[post])=>({type:'briefing-open',runId:1,day:8,phase:'prep',bounties});
+const open=(bounties=[post])=>({type:'briefing-open',panel:'duty',runId:1,day:8,phase:'prep',bounties});
 const setup=()=>{const m=createBountyIntel();m.receive({type:'run-reset',runId:1});return m;};
 const context={day:8,phase:'prep'};
+
+test('alarm and radio visits do not reveal the duty board bounties',()=>{
+ const m=setup();for(const panel of ['alarm','radio',undefined]){m.receive({...open(),panel});assert.deepEqual(m.markers(context),[]);}
+ m.receive(open());assert.equal(m.markers(context).length,1);
+});
 test('HQ bounty board uses authoritative guard counts and reward, with a banking reminder',()=>{
  const snapshot=JSON.stringify(post),v=buildBountyBoard(open());assert.equal(v.rows.length,1);assert.equal(v.rows[0].name,"Trapper Camp");assert.equal(v.rows[0].guards,'5 guards remaining');assert.equal(v.rows[0].reward,'150 skull value');assert.equal(v.rows[0].deadline,'Before the alarm');assert(v.note.includes('HQ window'));assert.equal(JSON.stringify(post),snapshot);
  for(const [day,reward]of [[2,25],[4,60],[8,150],[14,300]])assert.equal(buildBountyBoard({...open([{...post,day,reward}]),day}).rows[0].reward,`${reward} skull value`);
@@ -59,7 +64,7 @@ test('wandering colossus uses its current trail side on the board and one keyed 
  for(const [x,z,side] of [[70,5,'west'],[2,80,'north'],[2,-80,'south']])
   assert.equal(buildBountyBoard({day:9,phase:'prep',bounties:[{...wanderer,x,z}]}).rows[0].name,`A colossus is walking the ${side} trail`);
  assert.equal(buildBountyBoard({day:9,phase:'prep',bounties:[{...wanderer,x:NaN}]}).rows.length,0);
- const map=setup();map.receive({type:'briefing-open',runId:1,day:9,phase:'prep',bounties:[wanderer]});
+ const map=setup();map.receive({type:'briefing-open',panel:'duty',runId:1,day:9,phase:'prep',bounties:[wanderer]});
  assert.deepEqual(map.markers({day:9,phase:'prep'}).map(m=>[m.x,m.z]),[[-90,22]]);
  map.receive({type:'bounty-done',runId:1,day:9,kind:'wanderer',index:3});
  assert.equal(map.markers({day:9,phase:'prep'}).length,0);

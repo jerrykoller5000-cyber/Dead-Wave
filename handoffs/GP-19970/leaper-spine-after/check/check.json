@@ -1,0 +1,20 @@
+{
+ "at": "2026-10-28T01:44:12.424Z",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "results": [
+  {
+   "id": "zombie.leaper",
+   "variant": null,
+   "mode": "statue",
+   "ok": true,
+   "ms": 131,
+   "tris": 4594,
+   "size": [
+    0.788,
+    1.449,
+    1.482
+   ],
+   "error": null
+  }
+ ]
+}

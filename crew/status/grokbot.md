@@ -2,12 +2,12 @@
 
 state: active
 model: Grok Bot
-task: GB-236 the grips, the Uzi's first (before shots)
-touching: studio/weapon-sidearms.js (grips), qa/2026-10-26-GB-236/*
-since: 2026-10-26T06:12Z
-next: GB-231 Night 1's push lands sooner (after GB-230). Next. GB-230's o
+task: GB-243 t15, t76, t80 (t116 left alone: Jerry's standing order). The suite's other reds: game or test, rule 13
+touching: tools/tests/t15.js, tools/tests/t76.js, tools/tests/t80.js
+since: 2026-10-28T19:15Z
+next: GB-240 Your reds from the chunked rerun. Next, before GB-232's plac
 blocked-on: —
-last-report: handoffs/2026-10-26-grokbot-GB-235.md
+last-report: handoffs/2026-10-28-grokbot-GB-240-t69.md
 
 ## Notes
 

@@ -1,0 +1,128 @@
+[
+  {
+    "target": "zombie.shambler:statue",
+    "from": "handoffs/GP-19970/face-close2-after/shambler-noon-head-side.json",
+    "pre": "await DWInspect.light(\"noon\")",
+    "wait": 500,
+    "out": "handoffs/GP-19970/face-close3-after/shambler-noon-head-side.png"
+  },
+  {
+    "target": "zombie.shambler:statue",
+    "from": "handoffs/GP-19970/face-close2-after/shambler-noon-front.json",
+    "pre": "await DWInspect.light(\"noon\")",
+    "wait": 500,
+    "out": "handoffs/GP-19970/face-close3-after/shambler-noon-front.png"
+  },
+  {
+    "target": "zombie.feral:statue",
+    "from": "handoffs/GP-19970/face-close2-after/feral-noon-head-side.json",
+    "pre": "await DWInspect.light(\"noon\")",
+    "wait": 500,
+    "out": "handoffs/GP-19970/face-close3-after/feral-noon-head-side.png"
+  },
+  {
+    "target": "zombie.feral:statue",
+    "from": "handoffs/GP-19970/face-close2-after/feral-noon-front.json",
+    "pre": "await DWInspect.light(\"noon\")",
+    "wait": 500,
+    "out": "handoffs/GP-19970/face-close3-after/feral-noon-front.png"
+  },
+  {
+    "target": "zombie.leaper:statue",
+    "from": "handoffs/GP-19970/face-close2-after/leaper-noon-head-side.json",
+    "pre": "await DWInspect.light(\"noon\")",
+    "wait": 500,
+    "out": "handoffs/GP-19970/face-close3-after/leaper-noon-head-side.png"
+  },
+  {
+    "target": "zombie.leaper:statue",
+    "from": "handoffs/GP-19970/face-close2-after/leaper-noon-front.json",
+    "pre": "await DWInspect.light(\"noon\")",
+    "wait": 500,
+    "out": "handoffs/GP-19970/face-close3-after/leaper-noon-front.png"
+  },
+  {
+    "target": "zombie.drowned:statue",
+    "from": "handoffs/GP-19970/face-close2-after/drowned-noon-head-side.json",
+    "pre": "await DWInspect.light(\"noon\")",
+    "wait": 500,
+    "out": "handoffs/GP-19970/face-close3-after/drowned-noon-head-side.png"
+  },
+  {
+    "target": "zombie.drowned:statue",
+    "from": "handoffs/GP-19970/face-close2-after/drowned-noon-front.json",
+    "pre": "await DWInspect.light(\"noon\")",
+    "wait": 500,
+    "out": "handoffs/GP-19970/face-close3-after/drowned-noon-front.png"
+  },
+  {
+    "target": "zombie.military:statue",
+    "from": "handoffs/GP-19970/face-close2-after/military-noon-head-side.json",
+    "pre": "await DWInspect.light(\"noon\")",
+    "wait": 500,
+    "out": "handoffs/GP-19970/face-close3-after/military-noon-head-side.png"
+  },
+  {
+    "target": "zombie.military:statue",
+    "from": "handoffs/GP-19970/face-close2-after/military-noon-front.json",
+    "pre": "await DWInspect.light(\"noon\")",
+    "wait": 500,
+    "out": "handoffs/GP-19970/face-close3-after/military-noon-front.png"
+  },
+  {
+    "target": "zombie.spitter:statue",
+    "from": "handoffs/GP-19970/face-close2-after/spitter-noon-head-side.json",
+    "pre": "await DWInspect.light(\"noon\")",
+    "wait": 500,
+    "out": "handoffs/GP-19970/face-close3-after/spitter-noon-head-side.png"
+  },
+  {
+    "target": "zombie.spitter:statue",
+    "from": "handoffs/GP-19970/face-close2-after/spitter-noon-front.json",
+    "pre": "await DWInspect.light(\"noon\")",
+    "wait": 500,
+    "out": "handoffs/GP-19970/face-close3-after/spitter-noon-front.png"
+  },
+  {
+    "target": "zombie.bomber:statue",
+    "from": "handoffs/GP-19970/face-close2-after/bomber-noon-head-side.json",
+    "pre": "await DWInspect.light(\"noon\")",
+    "wait": 500,
+    "out": "handoffs/GP-19970/face-close3-after/bomber-noon-head-side.png"
+  },
+  {
+    "target": "zombie.bomber:statue",
+    "from": "handoffs/GP-19970/face-close2-after/bomber-noon-front.json",
+    "pre": "await DWInspect.light(\"noon\")",
+    "wait": 500,
+    "out": "handoffs/GP-19970/face-close3-after/bomber-noon-front.png"
+  },
+  {
+    "target": "zombie.brute:statue",
+    "from": "handoffs/GP-19970/face-close2-after/brute-noon-head-side.json",
+    "pre": "await DWInspect.light(\"noon\")",
+    "wait": 500,
+    "out": "handoffs/GP-19970/face-close3-after/brute-noon-head-side.png"
+  },
+  {
+    "target": "zombie.brute:statue",
+    "from": "handoffs/GP-19970/face-close2-after/brute-noon-front.json",
+    "pre": "await DWInspect.light(\"noon\")",
+    "wait": 500,
+    "out": "handoffs/GP-19970/face-close3-after/brute-noon-front.png"
+  },
+  {
+    "target": "zombie.colossus:statue",
+    "from": "handoffs/GP-19970/face-close2-after/colossus-noon-head-side.json",
+    "pre": "await DWInspect.light(\"noon\")",
+    "wait": 500,
+    "out": "handoffs/GP-19970/face-close3-after/colossus-noon-head-side.png"
+  },
+  {
+    "target": "zombie.colossus:statue",
+    "from": "handoffs/GP-19970/face-close2-after/colossus-noon-front.json",
+    "pre": "await DWInspect.light(\"noon\")",
+    "wait": 500,
+    "out": "handoffs/GP-19970/face-close3-after/colossus-noon-front.png"
+  }
+]

@@ -1,0 +1,25 @@
+✔ six distinct local portraits cover the approved roster without fate spoilers (3.9673ms)
+✔ concurrent poster surfaces load only one shared copy of each portrait (0.4451ms)
+✔ failed portrait loading reports the identity and allows an explicit retry (0.6469ms)
+✔ banking distinguishes carried skull value from spendable Cash (1.5324ms)
+✔ plural counts handle zero, one and many without fragments (0.1666ms)
+✔ bad counts are rejected instead of silently selecting a plural (0.398ms)
+✔ remapped inputs replace only their action and zero is preserved (0.1591ms)
+✔ parameters remain literal text: no recursive replacement or dollar expansion (0.1376ms)
+✔ missing keys and required values are actionable caller errors (0.3304ms)
+✔ prototype properties cannot become keys or supplied placeholders (0.1802ms)
+✔ catalogue, plural records and default controls cannot be changed by callers (0.2286ms)
+✔ every catalogue entry formats completely, including both plural branches (7.2416ms)
+✔ source cannot silently replace an earlier duplicate key (2.1951ms)
+✔ existing weapon, build, death and approved loading IDs have copy (0.2368ms)
+✔ HQ copy never calls the base a cabin, while landmark cabins keep their name (0.2099ms)
+✔ Ridgeline has twenty ordered dispatches and the site and survivor notes (0.2185ms)
+✔ Story v2 keeps narrative names and both sides of the skull-to-Cash loop (1.3726ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 133.7421

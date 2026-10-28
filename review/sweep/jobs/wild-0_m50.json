@@ -3,7 +3,7 @@
   {
    "cam": {
     "x": 0,
-    "y": -3.9799999999999995,
+    "y": -1.6900000000000002,
     "z": -25,
     "tx": 0,
     "ty": -4.4799999999999995,
@@ -17,7 +17,7 @@
   {
    "cam": {
     "x": 25,
-    "y": -3.9799999999999995,
+    "y": -1.99,
     "z": -50,
     "tx": 0,
     "ty": -4.4799999999999995,
@@ -31,7 +31,7 @@
   {
    "cam": {
     "x": 0,
-    "y": -3.9799999999999995,
+    "y": 1.67,
     "z": -75,
     "tx": 0,
     "ty": -4.4799999999999995,
@@ -45,7 +45,7 @@
   {
    "cam": {
     "x": -25,
-    "y": -3.9799999999999995,
+    "y": -6.95,
     "z": -50,
     "tx": 0,
     "ty": -4.4799999999999995,
@@ -73,7 +73,7 @@
   {
    "cam": {
     "x": 17.5,
-    "y": 0.3200000000000003,
+    "y": 1.0700000000000003,
     "z": -32.5,
     "tx": 0,
     "ty": -4.68,
@@ -86,16 +86,16 @@
   },
   {
    "cam": {
-    "x": -2.9399999999999995,
-    "y": -2.47,
-    "z": -43.29,
-    "tx": -6.14,
-    "ty": -3.6700000000000004,
-    "tz": -46.49,
+    "x": -19.79,
+    "y": -2.36,
+    "z": -30.84,
+    "tx": -22.99,
+    "ty": -3.56,
+    "tz": -34.04,
     "fov": 50
    },
    "time": "noon",
-   "caption": "floating: group floats 2.43 m above the ground (its whole footprint)",
+   "caption": "floating: group floats 1.33 m above the ground (its whole footprint)",
    "out": "review/sweep/wild-0_m50/wild-0_m50-suspect-1.png"
   },
   {
@@ -125,20 +125,6 @@
    "time": "noon",
    "caption": "branches: canopy:birch's branches through mesh · part 3/9 (93.69 % of the smaller footprint, 3.87 m of height)",
    "out": "review/sweep/wild-0_m50/wild-0_m50-suspect-3.png"
-  },
-  {
-   "cam": {
-    "x": -5.04,
-    "y": -3.36,
-    "z": -55.059999999999995,
-    "tx": -8.24,
-    "ty": -4.56,
-    "tz": -58.26,
-    "fov": 50
-   },
-   "time": "noon",
-   "caption": "invisible-wall: a collider (r 0.61 m, -4.96 to -4.01 m) with nothing visible there",
-   "out": "review/sweep/wild-0_m50/wild-0_m50-suspect-4.png"
   }
  ],
  "out": "review/sweep/wild-0_m50/",

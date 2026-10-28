@@ -1,0 +1,29 @@
+GB-232 places: patch to apply to index.html once it's free (grokbot, 2026-10-27). Exact-line edits:
+
+1. In survivorsAtThreadEnd(), replace
+        const s = placeSurvivor(open || { kind: 'campsite', index: i, x: c.x, z: c.z }, day);
+   with
+        const s = placeSurvivor(open || { kind: 'campsite', index: i, x: c.x, z: c.z }, day, survivorPlace(c.style));
+   and add before the function:
+    // GB-232 (places): Okafor in the trapper's cellar (AG-135's trapper.cellarSpot), Brandt by the rangers' truck's door
+    // (ranger.clues' 'truck' spot), Pike at the fire until the hikers' lead has a spot. null: the fire.
+    function survivorPlace(style) {
+      if (style === 'trapper' && trapper?.cellarSpot) { const c = trapper.cellarSpot; return { x: c.x, y: c.y, z: c.z, yaw: c.yaw }; }
+      if (style === 'ranger') { const t = ranger?.clues?.find((q) => q.source === 'truck')?.spot; if (t) return { x: t.x, z: t.z }; }
+      return null;
+    }
+
+2. placeSurvivor(post, d)  ->  placeSurvivor(post, d, spot = null), and its position lines become:
+      const a = Math.random() * Math.PI * 2;
+      const p = spot ? resolveStaticProps(spot.x, spot.z, 0.5) : resolveStaticProps(post.x + Math.cos(a) * SURVIVOR_FIRE_R, post.z + Math.sin(a) * SURVIVOR_FIRE_R, 0.5);
+      ...
+      const y = spot && Number.isFinite(spot.y) ? spot.y : sampleHeight(p.x, p.z);
+      root.position.set(p.x, y, p.z);
+      root.rotation.y = spot && Number.isFinite(spot.yaw) ? spot.yaw : Math.atan2(post.x - p.x, post.z - p.z);
+      const s = { ..., x: p.x, y, z: p.z, ... };
+   (In the cellar, resolveStaticProps may push the spot out of the walls; if so, use spot.x/z directly when spot.y is set.)
+
+3. survivorInReach(): skip a survivor more than 1.6 m above or below him (the cellar under the yard):
+        if (Number.isFinite(s.y) && Math.abs(s.y - p.y) > 1.6) continue;
+
+Tests: t215, t95, page load; and a check that day 3, 'story done oldman' (gate on) puts Okafor at cellarSpot (within 0.5 m).

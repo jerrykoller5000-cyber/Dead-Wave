@@ -1,0 +1,27 @@
+    function renderShop() {
+      if (!shopListEl) return;
+      shopCashEl.textContent = devInfiniteCash || training.active ? '∞' : String(bank);
+      shopListEl.innerHTML = '';
+      const group = SHOP_TABS.find(([key, pages]) => key === shopTab || pages.includes(shopTab)) || SHOP_TABS[1];
+      const pages = shopTab === group[0] ? group[1] : [shopTab];
+      if (shopTabsEl) {
+        const sub = document.getElementById('shopSubtabs');
+        shopTabsEl.replaceChildren(); sub.replaceChildren(); sub.hidden = true;
+        const addTab = (parent, key, label, selected) => {
+          const b = document.createElement('button');
+          b.type = 'button'; b.textContent = label; b.dataset.shopPage = key;
+          b.setAttribute('aria-pressed', String(selected));
+          if (selected) b.classList.add('on');
+          b.addEventListener('click', () => { if (shopTab !== key) AudioSys.kioskTab(); shopTab = key; shopListEl.scrollTop = 0; renderShop();
+            document.querySelector('#' + parent.id + ' [data-shop-page="' + key + '"]')?.focus(); });
+          parent.appendChild(b);
+        };
+        for (const [key] of SHOP_TABS) addTab(shopTabsEl, key, dwText('shop.tabs.' + key), group[0] === key);
+      }
+      if (shopHintEl) {
+        const fullHint = (SHOP_GROUP_HINT[group[0]] || '') + (day === 1 ? ' ' + dwText('economy.dayOne') : '');
+        shopHintEl.textContent = matchMedia('(max-width: 480px)').matches ? dwText('shop.compactHint.' + group[0]) : fullHint;
+        shopHintEl.title = fullHint;
+      }
+      for (const category of pages) {
+      shopRenderCategory =

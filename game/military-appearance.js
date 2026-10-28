@@ -66,7 +66,7 @@ function wornCarrier(T,u,mat,s,gearMat){
   const rod=(bone,col,a,b,r=.003)=>{const A=new T.Vector3(...a).multiplyScalar(s),B=new T.Vector3(...b).multiplyScalar(s),d=B.clone().sub(A),m=put(bone,new T.CylinderGeometry(r*s,r*s,d.length(),5),col);m.position.copy(A).add(B).multiplyScalar(.5);m.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),d.normalize());return m;};
   // Bevelled carrier border follows clipped shoulders rather than another flat box.
   const outline=[[-.16,.22],[-.178,.267],[-.16,.378],[-.12,.428],[.105,.435],[.161,.386],[.178,.27],[.151,.225]],inner=outline.map(([x,y])=>[x*.9,.325+(y-.325)*.87]);
-  for(const [z,direction]of[[.225,1],[-.324,-1]]){
+  for(const [z,direction]of[[.195,1],[-.264,-1]]){
     const v=[],colors=[];const tri=(a,b,c,tint)=>{for(const p of[a,b,c]){v.push(p[0]*s,p[1]*s,p[2]*s);const C=new T.Color(tint);colors.push(C.r,C.g,C.b);}};
     for(let i=0;i<outline.length;i++){const j=(i+1)%outline.length,A=[...outline[i],z],B=[...outline[j],z],C=[...inner[i],z+direction*.012],D=[...inner[j],z+direction*.012];if(direction>0){tri(A,C,B,0xbcb498);tri(B,C,D,0xaaa68b);}else{tri(A,B,C,0xbcb498);tri(B,D,C,0xaaa68b);}}
     const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(v,3));geo.computeVertexNormals();const m=put(u.torso,geo,0xffffff);m.geometry.setAttribute('color',new T.Float32BufferAttribute(colors,3));
@@ -76,10 +76,10 @@ function wornCarrier(T,u,mat,s,gearMat){
   }
   for(const side of[-1,1]){
     // Overlaid padded shoulders have frayed ends and a scratched buckle.
-    const strap=box(u.torso,0xa8a185,side*.174,.407,.221,.037,.136,.022);strap.rotation.z=side*.07;
-    box(u.torso,0x454738,side*.174,.356,.24,.046,.027,.012);box(u.torso,0xc6bfaa,side*.174,.365,.247,.031,.004,.003);
+    const strap=box(u.torso,0xa8a185,side*.174,.407,.181,.037,.136,.022);strap.rotation.z=side*.07;
+    box(u.torso,0x454738,side*.174,.356,.20,.046,.027,.012);box(u.torso,0xc6bfaa,side*.174,.365,.207,.031,.004,.003);
     // Pocket seams, worn flap corners and a torn lower tie.
-    for(let j=0;j<2;j++){const x=side*(.048+j*.1);box(u.torso,0x555842,x,.116,.273,.066,.0025,.003);box(u.torso,0xbab196,x,.189,.284,.048,.0025,.003);}
+    for(let j=0;j<2;j++){const x=side*(.048+j*.1),z=.1725*Math.sqrt(Math.max(.08,1-(x/.255)**2-((.14-.25)/.255)**2));box(u.torso,0x555842,x,.116,z+.074,.066,.0025,.003);box(u.torso,0xbab196,x,.189,z+.085,.048,.0025,.003);}
     const pts=[[side*.2,.047,.181],[side*.21,.014,.186],[side*.195,-.036,.216],[side*.215,-.059,.21]],v=[];
     for(let i=0;i<pts.length-1;i++){const a=pts[i],b=pts[i+1],w=.009*(1-i*.2);for(const p of[[a[0]-w,a[1],a[2]],[b[0]-w,b[1],b[2]],[a[0]+w,a[1],a[2]],[a[0]+w,a[1],a[2]],[b[0]-w,b[1],b[2]],[b[0]+w,b[1],b[2]]])v.push(...p.map(n=>n*s));}
     const faces=[...v];for(let i=0;i<v.length;i+=9)faces.push(...v.slice(i+6,i+9),...v.slice(i+3,i+6),...v.slice(i,i+3));

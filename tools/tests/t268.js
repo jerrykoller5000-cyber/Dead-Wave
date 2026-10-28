@@ -24,6 +24,8 @@
     });
     ok(shoesMatch(), 'each row\'s horseshoe sits on the post beside that row\'s safe stone (' + S().safe.join(',') + ')');
     ok(D.locked(), 'the trapper cache is locked before crossing the safe path');
+    ok(!D.doorsOpen() && R.doorL && R.doorR && R.doorBar && R.doorL.rotation.z === 0 && R.doorR.rotation.z === 0 && R.doorBar.visible && T.worldSolids.includes(R.doorCollider),
+      'AG-135: cellar doors start shut with iron locking bar and door collider in place');
 
     // At the cellar hatch before crossing: locked and shows the trapped path prompt.
     T.runDevCommand('site trapper hatch'); await wait(150);
@@ -64,13 +66,41 @@
       lastRes = D.stepAt(st.x, st.z, 0.016, { grounded: true, day: 1 });
     }
     ok(lastRes && lastRes.kind === 'unlocked' && S().unlocked && !D.locked(), 'walking all eight safe stones unlocks the cellar hatch');
+    ok(D.doorsOpen() && R.doorL.rotation.z > 1.5 && R.doorR.rotation.z < -1.5 && !R.doorBar.visible && !T.worldSolids.includes(R.doorCollider),
+      'AG-135: unlocking folds open both iron-lined cellar door leaves and clears the stair collider');
 
     // Now at the cellar hatch, objectiveReach is reachable and trapperPromptText yields to the cache prompt.
     T.runDevCommand('site trapper hatch'); await wait(150);
     ok(D.reach() && D.reach().reachable && !D.reach().blockedBy, 'cellar hatch is now reachable (' + (D.reach() && D.reach().blockedBy) + ')');
     ok(!D.prompt(), 'trapper lock prompt clears once unlocked');
 
-    // Reset deals a new pattern and re-locks, and horseshoes follow the new pattern.
+    // AG-135: Walk down the stairs into the iron-lined cellar and verify cellarSpot + zombies walking straight past overhead.
+    const cs = D.cellarSpot();
+    ok(cs && Number.isFinite(cs.x) && Number.isFinite(cs.y) && Number.isFinite(cs.z) && D.inCellar(cs.x, cs.y, cs.z),
+      'AG-135: trapper.cellarSpot is exposed inside the underground cellar (' + (cs && cs.y.toFixed(2)) + ')');
+    T.runDevCommand('site trapper cellar'); await wait(120);
+    D.update(0.05);
+    const pPos = T.player.position;
+    ok(D.inCellar(pPos.x, pPos.y, pPos.z) && Math.abs(pPos.y - cs.y) < 0.25,
+      'AG-135: marine stands on the iron-lined cellar floor (' + pPos.y.toFixed(2) + ' vs ' + cs.y.toFixed(2) + ')');
+
+    // Spawn a zombie on the cellar roof directly overhead and verify it walks straight past overhead without hitting the marine:
+    T.clearZombies();
+    const roofW = R.toWorld(0, -3.50);
+    const roofY = R.cy0 + D.TRAPPER.CELLAR_ROOF_Y;
+    const zOver = T.spawnZombie(roofW.x, roofW.z, null, true, true);
+    const zm = zOver && (zOver.mesh || zOver.group);
+    if (zm) {
+      zm.position.set(roofW.x, roofY, roofW.z);
+    }
+    const startX = zm ? zm.position.x : 0, startZ = zm ? zm.position.z : 0;
+    for (let k = 0; k < 10; k++) D.update(0.05);
+    const movedDist = zm ? Math.hypot(zm.position.x - startX, zm.position.z - startZ) : 0;
+    ok(zm && movedDist > 0.15 && zm.position.y > pPos.y + 1.8,
+      'AG-135: dead on the cellar roof walk straight past overhead (moved ' + movedDist.toFixed(2) + 'm at dy=' + (zm ? (zm.position.y - pPos.y).toFixed(2) : 'n/a') + 'm)');
+    T.clearZombies();
+
+    // Reset deals a new pattern and re-locks, re-closing the cellar doors, and horseshoes follow the new pattern.
     const prevPattern = S().safe.join('');
     let differs = false;
     for (let i = 0; i < 8 && !differs; i++) {
@@ -78,7 +108,9 @@
       D.syncHorseshoes();
       differs = S().safe.join('') !== prevPattern;
     }
-    ok(differs && D.locked() && shoesMatch(), 'reset deals a new safe pattern and re-syncs horseshoes (' + prevPattern + ' -> ' + S().safe.join('') + ')');
+    D.syncCellar(false);
+    ok(differs && D.locked() && !D.doorsOpen() && R.doorL.rotation.z === 0 && T.worldSolids.includes(R.doorCollider) && shoesMatch(),
+      'reset deals a new safe pattern, re-closes the cellar doors, and re-syncs horseshoes (' + prevPattern + ' -> ' + S().safe.join('') + ')');
 
     T.runDevCommand('godmode off');
     ok(errs.length === 0, 'no uncaught errors' + (errs.length ? ': ' + errs[0] : ''));

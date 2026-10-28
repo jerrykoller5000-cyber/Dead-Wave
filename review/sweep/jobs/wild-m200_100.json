@@ -3,10 +3,10 @@
   {
    "cam": {
     "x": -200,
-    "y": 1.96,
+    "y": 4.37,
     "z": 125,
     "tx": -200,
-    "ty": 1.46,
+    "ty": 3.58,
     "tz": 100,
     "fov": 60
    },
@@ -17,10 +17,10 @@
   {
    "cam": {
     "x": -175,
-    "y": 1.96,
+    "y": 3.6799999999999997,
     "z": 100,
     "tx": -200,
-    "ty": 1.46,
+    "ty": 3.58,
     "tz": 100,
     "fov": 60
    },
@@ -31,10 +31,10 @@
   {
    "cam": {
     "x": -200,
-    "y": 1.96,
+    "y": -0.24,
     "z": 75,
     "tx": -200,
-    "ty": 1.46,
+    "ty": 3.58,
     "tz": 100,
     "fov": 60
    },
@@ -45,10 +45,10 @@
   {
    "cam": {
     "x": -225,
-    "y": 1.96,
+    "y": 10.209999999999999,
     "z": 100,
     "tx": -200,
-    "ty": 1.46,
+    "ty": 3.58,
     "tz": 100,
     "fov": 60
    },
@@ -59,10 +59,10 @@
   {
    "cam": {
     "x": -185,
-    "y": 27.760000000000005,
+    "y": 29.880000000000003,
     "z": 115,
     "tx": -200,
-    "ty": 0.26,
+    "ty": 2.38,
     "tz": 100,
     "fov": 60
    },
@@ -73,10 +73,10 @@
   {
    "cam": {
     "x": -182.5,
-    "y": 6.26,
+    "y": 8.379999999999999,
     "z": 117.5,
     "tx": -200,
-    "ty": 1.26,
+    "ty": 3.38,
     "tz": 100,
     "fov": 60
    },
@@ -251,6 +251,34 @@
    "time": "noon",
    "caption": "branches: canopy:birch's branches through mesh · part 4/4 (98.02 % of the smaller footprint, 5.71 m of height)",
    "out": "review/sweep/wild-m200_100/wild-m200_100-suspect-12.png"
+  },
+  {
+   "cam": {
+    "x": -179.46,
+    "y": 1.7000000000000002,
+    "z": 125.25,
+    "tx": -182.66,
+    "ty": 0.5,
+    "tz": 122.05,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "invisible-wall: a collider (r 0.48 m, 0.1 to 4.97 m) with nothing visible there",
+   "out": "review/sweep/wild-m200_100/wild-m200_100-suspect-13.png"
+  },
+  {
+   "cam": {
+    "x": -193.83,
+    "y": -0.07999999999999985,
+    "z": 100.36,
+    "tx": -197.03,
+    "ty": -1.2799999999999998,
+    "tz": 97.16,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "invisible-wall: a collider (r 0.48 m, -1.68 to 3.17 m) with nothing visible there",
+   "out": "review/sweep/wild-m200_100/wild-m200_100-suspect-14.png"
   }
  ],
  "out": "review/sweep/wild-m200_100/",

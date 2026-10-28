@@ -134,7 +134,10 @@ test('Ridgeline has twenty ordered dispatches and the site and survivor notes', 
   assert.match(text('story.relay.8'), /It's not the first one we've heard/);
   assert.match(text('story.relay.12'), /one night in twenty/);
   assert.match(text('story.relay.15'), /contrail at dawn/);
-  assert.match(text('story.relay.hushOrigin'), /spare board in the mast locker/);
+  assert.match(text('story.relay.hushOrigin'), /spare board the vault lift brought up/);
+  assert.match(text('story.relay.hushOrigin'), /HQ radio set/);
+  assert.match(text('story.relay.hushOriginWired'), /You've got it wired/);
+  assert.equal(text('hush.wirePrompt', {interact:'Gamepad A'}), "Gamepad A — Wire the relay's spare board");
   assert.notEqual(text('story.prop.convoy'),text('story.prop.utilityTruck'));
   assert.notEqual(text('story.prop.utilityTruck'),text('story.prop.fuel'));
   assert.match(text('reward.guardianFirstBlood'), /driven back/);

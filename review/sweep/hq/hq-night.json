@@ -13,14 +13,14 @@
   "ty": -2.17,
   "tz": 0
  },
- "time": 0.020251519999997337,
+ "time": 0.020256800000000023,
  "size": [
   1600,
   900
  ],
  "center": null,
  "boxSize": null,
- "mode": "title",
+ "mode": "match",
  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
- "at": "2026-10-25T00:56:56.759Z"
+ "at": "2026-10-27T18:11:41.894Z"
 }

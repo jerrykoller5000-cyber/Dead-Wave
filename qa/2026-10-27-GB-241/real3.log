@@ -1,0 +1,19 @@
+GRANT grokbot GB-241: starting one game-test command
+FAIL  t75      15 pass   1 fail  38.3s  (real renderer)
+    PASS GB-50 hooks exported
+    PASS knocked back along the blow (kv -2.44, 0.00)
+    PASS a stumble: lurch 0.73, aim off -0.064 rad, jolt 0.26
+    PASS a shambler does not put him on a knee
+    PASS a short slide: 0.36 m (dz 0.00)
+    PASS over within a moment (speedK 1)
+    PASS a brute puts him on one knee (0.55 s)
+    PASS slowed, never stopped: walk speed x0.45 at worst
+    PASS more for a brute: 0.92 m vs 0.36 m
+    PASS back on his feet within 0.55 s
+    PASS no knee lock: the next heavy hit within 3 s only knocks him back
+    PASS five spawned inside the marine (5)
+    PASS nobody inside him: the worst gap is 0.040 m (shambler, 530 samples)
+    FAIL they crowd him: 2 of 5 at arm’s length
+    PASS and their blows land from the ring (4 hits, -28 hp)
+    PASS no page errors ()
+1 checks: 15 pass, 1 fail (real renderer)

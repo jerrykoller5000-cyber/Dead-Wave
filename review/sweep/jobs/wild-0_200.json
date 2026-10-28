@@ -3,10 +3,10 @@
   {
    "cam": {
     "x": 0,
-    "y": 5.09,
+    "y": 5.79,
     "z": 225,
     "tx": 0,
-    "ty": 4.59,
+    "ty": 5.06,
     "tz": 200,
     "fov": 60
    },
@@ -17,10 +17,10 @@
   {
    "cam": {
     "x": 25,
-    "y": 5.09,
+    "y": 5.56,
     "z": 200,
     "tx": 0,
-    "ty": 4.59,
+    "ty": 5.06,
     "tz": 200,
     "fov": 60
    },
@@ -31,10 +31,10 @@
   {
    "cam": {
     "x": 0,
-    "y": 5.09,
+    "y": 9.379999999999999,
     "z": 175,
     "tx": 0,
-    "ty": 4.59,
+    "ty": 5.06,
     "tz": 200,
     "fov": 60
    },
@@ -45,10 +45,10 @@
   {
    "cam": {
     "x": -25,
-    "y": 5.09,
+    "y": 15.02,
     "z": 200,
     "tx": 0,
-    "ty": 4.59,
+    "ty": 5.06,
     "tz": 200,
     "fov": 60
    },
@@ -59,10 +59,10 @@
   {
    "cam": {
     "x": 15,
-    "y": 30.890000000000004,
+    "y": 31.350000000000005,
     "z": 215,
     "tx": 0,
-    "ty": 3.39,
+    "ty": 3.85,
     "tz": 200,
     "fov": 60
    },
@@ -73,10 +73,10 @@
   {
    "cam": {
     "x": 17.5,
-    "y": 9.39,
+    "y": 9.85,
     "z": 217.5,
     "tx": 0,
-    "ty": 4.390000000000001,
+    "ty": 4.85,
     "tz": 200,
     "fov": 60
    },
@@ -237,6 +237,34 @@
    "time": "noon",
    "caption": "branches: canopy:birch's branches through mesh · part 4/12 (98.85 % of the smaller footprint, 4.99 m of height",
    "out": "review/sweep/wild-0_200/wild-0_200-suspect-11.png"
+  },
+  {
+   "cam": {
+    "x": 17.57,
+    "y": 4.74,
+    "z": 222.41,
+    "tx": 14.37,
+    "ty": 3.54,
+    "tz": 219.21,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "invisible-wall: a collider (r 0.48 m, 3.14 to 8.12 m) with nothing visible there",
+   "out": "review/sweep/wild-0_200/wild-0_200-suspect-12.png"
+  },
+  {
+   "cam": {
+    "x": -11.169999999999998,
+    "y": 4.300000000000001,
+    "z": 222.41,
+    "tx": -14.37,
+    "ty": 3.1,
+    "tz": 219.21,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "invisible-wall: a collider (r 0.48 m, 2.7 to 7.66 m) with nothing visible there",
+   "out": "review/sweep/wild-0_200/wild-0_200-suspect-13.png"
   }
  ],
  "out": "review/sweep/wild-0_200/",

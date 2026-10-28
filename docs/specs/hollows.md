@@ -37,11 +37,18 @@ stands after R4.
 ("THE HUSH · CHARGED") from the dawn after the relay is repaired (`radioCall.repaired`); the relay's line that day says
 where it came from (CL-100).
 
+**How he gets it (CL-259, N30: "How you get the Hush isn't specified"; `docs/specs/story-chain.md` §4).** The relay
+vault's lift, the first time it comes up, carries the relay's spare board with that day's tier (`board: 'carried'`).
+E at the HQ's radio set wires it (`'wired'`; "THE HUSH", the board wired to play the signal back out of step), and the
+Hush is his from the next dawn (`owned`, then charged at each dawn as below). Before the board there is no Hush: at a
+mouth the line is "The dead come up from here. No way down. Not yet." (`hush.none`) and nothing else.
+
 **The state** (contract `hush-state`, Grokbot's):
 
 | Field | Meaning |
 | --- | --- |
-| `owned` | from the dawn after the relay is repaired, for the rest of the run |
+| `owned` | from the dawn after the spare board is wired (CL-259), for the rest of the run |
+| `board` | `'none'`, `'carried'` (the vault's first lift brought it up), `'wired'` (E at the HQ radio set) (CL-259) |
 | `charged` | true at each `startPrep` once owned; spent when he goes below |
 | `lit` | true while it is on at a mouth or below |
 | `cave` | the cave index he went down at, or -1 |
@@ -76,6 +83,14 @@ warren's floor; `worldSolids` and the build solids are the warren's walls; the z
 nav grid. Build mode, placing, the shovel, the tripods and the mortar are refused with "No building down here." The
 map (Tab) shows only the explored part of this warren, cell by cell.
 
+**Below, he and the camera stay in the warren (CL-259, N30).** The rock stops him: a step into a wall or off every
+cell slides him along whichever axis is open, back to where he last stood on the floor, and the ground off a cell is
+that floor, never the valley's 400 m up (which is what popped him up through the ground and threw the camera to the
+surface). The third-person camera comes down under the roof, about 4 m behind him and 1.4 m over his shoulders (the
+usual one's place, 9 m up, is in the rock over the warren), and is pulled in toward his head wherever the rock or the
+roof would cut across; the heading is still his to turn, and the cursor pan and the aim zoom's shift are off below.
+First person needs nothing: his eyes are in the tunnel.
+
 **Where it lives.** Each warren is its own group far below the valley (y around -400) with its own lights and fog;
 only one is ever built at a time, when he goes down, and thrown away when he comes up. It takes under a second to
 build (CL-99's budget).
@@ -87,6 +102,8 @@ buildWarren(theme, seed) -> {
   group,                        // the meshes, lights and glow, to add below
   cells,                        // [{ i, j, depth, kind: 'tunnel' | 'chamber' | 'shaft' | 'drop' | 'deep', open: [n,e,s,w] }]
   groundAt(x, z) -> y,          // the floor under a point, or null outside
+  roofAt(x, z) -> y,            // the roof over a point, or null outside (CL-259)
+  openAt(x, y, z, pad) -> bool, // in a cell, over its floor, under its roof, off its rock: the camera below (CL-259)
   solids,                       // wall boxes for the colliders and the rounds
   nav,                          // { cell: 1.5, w, h, ox, oz, walkable: Uint8Array } for the flow field
   entry: { x, y, z, yaw },      // where he stands on the way in

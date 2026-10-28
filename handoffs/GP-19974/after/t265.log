@@ -1,0 +1,30 @@
+PASS site convoy jumps to the jack
+PASS the medical cache stays locked before jacking
+PASS fresh mission has no pumps
+PASS jack interaction is available
+PASS sleeper cannot die behind the closed door
+PASS E starts the jack
+PASS watching several cues without pressing E does not slip the jack
+PASS E key press on the cue pumps once
+PASS second E key press advances the jack
+PASS offbeat E slips back a notch
+PASS two misses start the sleeper warning
+PASS warning keeps the sleeper protected
+PASS door remains shut during the half-second thump
+PASS door opens after the warning
+PASS sleeper spit takes 75% health (25)
+PASS the exposed sleeper has a bullet surface on the open-door side
+PASS a live round hits the visible sleeper through the open door (14 HP)
+PASS a second live round kills the sleeper only with the door open
+PASS dead sleeper stays silent when door closes
+PASS eight good pumps release the cooler
+PASS eight pumps visibly raise the ambulance on the jack
+PASS the last pump does not also claim the cooler (0 to 0; available)
+PASS released cooler visibly slides clear of the ambulance (0.46 m)
+PASS medical cache unlocks
+PASS released cooler is reachable (null)
+PASS cooler awards exactly two medpens (0 to 2; claimed)
+PASS jack noise calls the dead (12 spawned)
+PASS called dead spawn in the 30–40 m ring or its cave-safe 22–48 m fallback (35.2,32.2,37.6,35.8,32.0,36.4,32.6,32.5,35.4,39.3,32.5,32.0)
+PASS called dead stay clear of cave mouths
+PASS no uncaught errors ()

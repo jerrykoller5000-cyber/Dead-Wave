@@ -1,0 +1,49 @@
+GRANT grokbot GB-242: starting one game-test command
+ok    t13       8 pass   0 fail  50.0s  (real renderer)
+    PASS match reached prep after Play
+    meshes: wall 8 wire 2 sandbag 1 floor 2
+    PASS pieces baked into a few meshes
+    why: {"level":0,"slot":"base"} refusal ground too rough cap true
+    PASS on the ground: floor goes down beside a wired wall (lv 0)
+    PASS on the ground in a walled square: ground floor (0)
+    PASS standing upstairs: floor goes on the walls (1)
+    PASS roof over the marine goes see-through, turret up there stays mostly solid (roof 0.25, turret 0.55)
+    PASS and solid again once he walks out
+    PASS no floor inside the cabin: that is the cabin
+ok    t215      4 pass   0 fail  36.0s  (real renderer)
+    PASS read index.html and the scripts and styles the game loaded (228 files)
+    PASS no broken characters in them
+    PASS the HUD reads clean: timeLine "Daylight · 08:15 · Grace", tacticalLine "NVG — · Laser — · Light —", grenadeChips "G×3H×0", ammoDetail "12 / 12  ·  50 Bullets  ·  SEMI", hpNum "100 / 100"
+    PASS and shows its dots and times signs (NVG — · Laser — · Light — / G×3H×0)
+ok    t95       9 pass   0 fail  35.5s  (real renderer)
+    PASS the pick is x0.8 (0.8)
+    PASS laser off: the cone is the gun's own
+    PASS every gun with a laser, 200 draws each: x0.8 within 5% (minigun 0.800 m4 0.800 ak 0.800 pistol 0.800 uzi 0.800 shotgun 0.801 aa12 0.801 revolver 0.800 sniper 0.800 launcher 0.800)
+    PASS AK, 2000 free draws each: 6.116 -> 4.806 mrad (x0.786)
+    PASS Z (toggleLasers) with the laser sight bought: on, and it steadies
+    PASS Z again: off
+    PASS no laser sight owned: no change (6.033 vs 6.033 mrad)
+    PASS the chainsaw has no laser: nothing to steady
+    PASS no page errors
+3 checks: 21 pass, 0 fail (real renderer)
+check-players: 309 player.position reads, all in the allowed places
+ok    t13      8 pass   0 fail  65.6s
+ok    t95      9 pass   0 fail  57.7s
+ok    t215     4 pass   0 fail  44.6s
+
+3 checks: 21 pass, 0 fail
+node:fs:2427
+    return binding.writeFileUtf8(
+                   ^
+
+Error: UNKNOWN: unknown error, open 'C:\Users\Zero\Desktop\Tiny Trek\crew\tests.json'
+    at Object.writeFileSync (node:fs:2427:20)
+    at file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/tests/run-all.mjs:297:4
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5) {
+  errno: -4094,
+  code: 'UNKNOWN',
+  syscall: 'open',
+  path: 'C:\\Users\\Zero\\Desktop\\Tiny Trek\\crew\\tests.json'
+}
+
+Node.js v24.13.0

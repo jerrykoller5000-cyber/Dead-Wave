@@ -1,0 +1,223 @@
+{
+  "task": "AG-132",
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "loadSec": 25.774,
+  "prodCheck": {
+    "boardPainted": 6,
+    "rangerPainted": 6,
+    "hikersPainted": 6,
+    "boardYaw": 2.894,
+    "posters": [
+      {
+        "id": "maya-costa",
+        "sameTexture": true,
+        "sameCanvas": true,
+        "liveSize": [
+          192,
+          256
+        ],
+        "canvasSize": [
+          192,
+          256
+        ],
+        "roughness": 1,
+        "metalness": 0,
+        "readablePaper": true
+      },
+      {
+        "id": "theo-marsh",
+        "sameTexture": true,
+        "sameCanvas": true,
+        "liveSize": [
+          192,
+          256
+        ],
+        "canvasSize": [
+          192,
+          256
+        ],
+        "roughness": 1,
+        "metalness": 0,
+        "readablePaper": true
+      },
+      {
+        "id": "sam-marsh",
+        "sameTexture": true,
+        "sameCanvas": true,
+        "liveSize": [
+          192,
+          256
+        ],
+        "canvasSize": [
+          192,
+          256
+        ],
+        "roughness": 1,
+        "metalness": 0,
+        "readablePaper": true
+      },
+      {
+        "id": "priya-raman",
+        "sameTexture": true,
+        "sameCanvas": true,
+        "liveSize": [
+          192,
+          256
+        ],
+        "canvasSize": [
+          192,
+          256
+        ],
+        "roughness": 1,
+        "metalness": 0,
+        "readablePaper": true
+      },
+      {
+        "id": "jonas-weber",
+        "sameTexture": true,
+        "sameCanvas": true,
+        "liveSize": [
+          192,
+          256
+        ],
+        "canvasSize": [
+          192,
+          256
+        ],
+        "roughness": 1,
+        "metalness": 0,
+        "readablePaper": true
+      },
+      {
+        "id": "ellis-byrne",
+        "sameTexture": true,
+        "sameCanvas": true,
+        "liveSize": [
+          192,
+          256
+        ],
+        "canvasSize": [
+          192,
+          256
+        ],
+        "roughness": 1,
+        "metalness": 0,
+        "readablePaper": true
+      }
+    ],
+    "rangerRoster": {
+      "pos": [
+        40.09,
+        -5.88,
+        -24.73
+      ],
+      "liveSize": [
+        1152,
+        1120
+      ],
+      "canvasSize": [
+        1152,
+        1120
+      ],
+      "sameTexture": true,
+      "sameCanvas": true,
+      "searchLogPresent": true,
+      "searchLogDist": 0.687
+    },
+    "hikersRoster": {
+      "pos": [
+        1.35,
+        1.82,
+        -82.2
+      ],
+      "liveSize": [
+        1152,
+        1120
+      ],
+      "canvasSize": [
+        1152,
+        1120
+      ],
+      "sameTexture": true,
+      "sameCanvas": true
+    }
+  },
+  "tests": {
+    "t167": {
+      "pass": 20,
+      "fail": 0,
+      "lines": [
+        "PASS a survey board at each of the five warren caves (survey-board:hill, survey-board:iron, survey-board:root, survey-board:shale, survey-board:wet)",
+        "PASS survey-board:hill by its cave, on dry ground",
+        "PASS survey-board:iron by its cave, on dry ground",
+        "PASS survey-board:root by its cave, on dry ground",
+        "PASS survey-board:shale by its cave, on dry ground",
+        "PASS survey-board:wet by its cave, on dry ground",
+        "PASS the old mine: timbers, cut bars, IRON BELOW, the hikers' packs",
+        "PASS FOB Threshold's lockdown door, and no motto on the back wall (GP-104)",
+        "PASS the Cordon's gate on the wall (220 m out)",
+        "PASS the trailhead board with three missing posters",
+        "PASS the rangers' truck at their camp",
+        "PASS the trapper's cellar hatch at his camp",
+        "PASS Coldwater's church by the old cemetery, behind the burial yard (23.0 m)",
+        "PASS its footings and a chimney",
+        "PASS the iron-banded graves and the one open from below",
+        "PASS the fall at the sandbags: drag marks, a helmet",
+        "PASS nothing stands in water ()",
+        "PASS E by the iron warren's board reads its note",
+        "PASS and by the open grave, the graveyard's",
+        "PASS no errors"
+      ]
+    },
+    "t266": {
+      "pass": 32,
+      "fail": 0,
+      "lines": [
+        "PASS the mission is built (the rangers' camp and truck are on the map)",
+        "PASS three digits 1-9 and an order of the three things: board radio truck = 877",
+        "PASS four places to look: the radio, the board, both doors",
+        "PASS the radio's display is painted with its channel",
+        "PASS \"UNIT n\" on both doors (2)",
+        "PASS the search log is pinned on the board",
+        "PASS the keypad and the lid's three pictures are on the lockbox",
+        "PASS the site is locked until the right digits go in",
+        "PASS at the lockbox: \"E — Lockbox\"",
+        "PASS the objectives cannot reach it (locked)",
+        "PASS E opens its keypad",
+        "PASS with the lid's pictures over the display",
+        "PASS nothing on it says \"code\" or \"clue\": \"Ranger lockbox_ _ _1234567891-9 · E leave\"",
+        "PASS a wrong code flashes WRONG",
+        "PASS no penalty, still shut, the entry cleared",
+        "PASS E leaves the keypad",
+        "PASS radio: \"E — Look\"",
+        "PASS radio: E shows it big (mode look, look radio, panel on, .look true, img data:image/png;base64,, canvas true, html 33945)",
+        "PASS radio: E steps back",
+        "PASS board: \"E — Look\"",
+        "PASS board: E shows it big (mode look, look board, panel on, .look true, img data:image/png;base64,, canvas true, html 67585)",
+        "PASS board: E steps back",
+        "PASS truck: \"E — Look\"",
+        "PASS truck: E shows it big (mode look, look truck, panel on, .look true, img data:image/png;base64,, canvas true, html 10473)",
+        "PASS truck: E steps back",
+        "PASS the right code: OPEN",
+        "PASS the keypad shuts by itself after",
+        "PASS the site is open to the objectives now (null)",
+        "PASS and the lockbox says nothing of its own any more",
+        "PASS its lamp is green",
+        "PASS reset deals new digits and shuts it",
+        "PASS no errors"
+      ]
+    },
+    "t215": {
+      "pass": 4,
+      "fail": 0,
+      "lines": [
+        "PASS read index.html and the scripts and styles the game loaded (226 files)",
+        "PASS no broken characters in them",
+        "PASS the HUD reads clean: timeLine \"Daylight · 08:16 · Grace\", tacticalLine \"NVG — · Laser — · Light —\", grenadeChips \"G×3H×0\", ammoDetail \"12 / 12  ·  50 Bullets  ·  SEMI\", hpNum \"100 / 100\"",
+        "PASS and shows its dots and times signs (NVG — · Laser — · Light — / G×3H×0)"
+      ]
+    }
+  },
+  "frames": 40,
+  "errors": []
+}

@@ -1,0 +1,83 @@
+Game-test request d6739087-0fa8-413b-8401-8194486541af queued at position 2. Waiting...
+GRANT grokbot GB-241: starting one game-test command
+ok    t75      16 pass   0 fail  38.4s  (real renderer)
+    PASS GB-50 hooks exported
+    PASS knocked back along the blow (kv -2.44, 0.00)
+    PASS a stumble: lurch 0.73, aim off -0.064 rad, jolt 0.26
+    PASS a shambler does not put him on a knee
+    PASS a short slide: 0.37 m (dz 0.00)
+    PASS over within a moment (speedK 1)
+    PASS a brute puts him on one knee (0.55 s)
+    PASS slowed, never stopped: walk speed x0.45 at worst
+    PASS more for a brute: 0.92 m vs 0.37 m
+    PASS back on his feet within 0.55 s
+    PASS no knee lock: the next heavy hit within 3 s only knocks him back
+    PASS five spawned inside the marine (5)
+    PASS nobody inside him: the worst gap is 0.040 m (shambler, 535 samples)
+    PASS they crowd him: 3 of 5 at arm’s length
+    PASS and their blows land from the ring (4 hits, -28 hp)
+    PASS no page errors ()
+ok    t69      18 pass   0 fail  55.1s  (real renderer)
+    PASS GB-39 hooks exported
+    PASS a shambler stands in the mouth of cave 0
+    PASS the round hit the shambler (22 -> -2)
+    PASS a round that hits a zombie does not poke the cave (not even the warning)
+    PASS the first round of the run into an empty mouth is the warning
+    PASS the next round into an empty mouth brings the guardian out
+    PASS the wave is spawning
+    PASS phase is wave
+    PASS assault cave is busy while the wave spawns
+    PASS a round into the assault mouth mid-spawn does not poke
+    PASS nor does a grenade at the mouth
+    PASS assault cave not marked used
+    PASS a different, empty cave is not busy
+    PASS a different cave can still be poked mid-wave
+    PASS the whole wave is out
+    PASS spawned out and the mouth clear: not busy
+    PASS a zombie standing in the mouth makes it busy
+    PASS the assault cave pokes normally once its mouth is clear
+ok    t215      4 pass   0 fail  36.0s  (real renderer)
+    PASS read index.html and the scripts and styles the game loaded (228 files)
+    PASS no broken characters in them
+    PASS the HUD reads clean: timeLine "Daylight · 08:15 · Grace", tacticalLine "NVG — · Laser — · Light —", grenadeChips "G×3H×0", ammoDetail "12 / 12  ·  50 Bullets  ·  SEMI", hpNum "100 / 100"
+    PASS and shows its dots and times signs (NVG — · Laser — · Light — / G×3H×0)
+ok    t95       9 pass   0 fail  36.2s  (real renderer)
+    PASS the pick is x0.8 (0.8)
+    PASS laser off: the cone is the gun's own
+    PASS every gun with a laser, 200 draws each: x0.8 within 5% (minigun 0.800 m4 0.800 ak 0.800 pistol 0.800 uzi 0.800 shotgun 0.801 aa12 0.801 revolver 0.800 sniper 0.800 launcher 0.800)
+    PASS AK, 2000 free draws each: 5.981 -> 4.821 mrad (x0.806)
+    PASS Z (toggleLasers) with the laser sight bought: on, and it steadies
+    PASS Z again: off
+    PASS no laser sight owned: no change (6.033 vs 6.033 mrad)
+    PASS the chainsaw has no laser: nothing to steady
+    PASS no page errors
+ok    t98      20 pass   0 fail  92.9s  (real renderer)
+    PASS a river within 160 m of the swarm (116.00 m away)
+    INFO ragdoll off: 160 spawned, 160 alive at the end, 60 ticks, frame 119.43 ms avg / 1343.80 ms worst (headless)
+    PASS ragdoll off: no NaN positions (0)
+    PASS ragdoll off: nobody hidden while inside the fog (0 sightings)
+    PASS ragdoll off: nobody under the ground on dry land (0 sightings)
+    PASS ragdoll off: nobody floating over dry land (0 sightings)
+    PASS ragdoll off: no frozen limbs within 35 m (0 sightings)
+    PASS ragdoll off: nobody jumps more than 4 m in 100 ms (0)
+    PASS ragdoll off: nobody stands still for 8 s with a way to go (0)
+    PASS ragdoll off: no live body awake for 9 s (0)
+    INFO ragdoll on: 160 spawned, 159 alive at the end, 53 ticks, frame 142.39 ms avg / 1960.20 ms worst (headless)
+    PASS ragdoll on: no NaN positions (0)
+    PASS ragdoll on: nobody hidden while inside the fog (0 sightings)
+    PASS ragdoll on: nobody under the ground on dry land (0 sightings)
+    PASS ragdoll on: nobody floating over dry land (0 sightings)
+    PASS ragdoll on: no frozen limbs within 35 m (0 sightings)
+    PASS ragdoll on: nobody jumps more than 4 m in 100 ms (0)
+    PASS ragdoll on: nobody stands still for 8 s with a way to go (0)
+    PASS ragdoll on: no live body awake for 9 s (0)
+    PASS pooled meshes come back with live limbs (0 of 60 frozen while near)
+    PASS pooled meshes come back with their hips over their feet (0 off)
+    PASS no page errors
+ok    t92       5 pass   0 fail  44.6s  (real renderer)
+    PASS settings has no Ragdoll control
+    PASS a shambler stumbles him and does not knee him
+    PASS a brute still puts him on one knee
+    PASS he is not held by a reacting body
+    PASS no page errors
+6 checks: 72 pass, 0 fail (real renderer)

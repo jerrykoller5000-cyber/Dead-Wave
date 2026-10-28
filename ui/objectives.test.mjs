@@ -4,6 +4,13 @@ import { OBJECTIVE_SITES,createObjectiveTracker,projectObjectiveMarkers } from '
 const radio='objective:radio-repair',ranger='objective:ranger-cache';
 const site=(id=radio,extra={})=>({id,state:'available',reachable:true,position:{x:30,z:40},reward:{key:'supply.medpens',params:{count:2}},...extra});
 const snapshot=(extra={})=>({runId:'one',sequence:0,active:true,player:{x:0,z:0},sites:[site()],...extra});
+
+test('a story lead can be tracked remotely without granting an interaction; closed leads stay hidden',()=>{
+ const c=createObjectiveTracker();c.update(snapshot({sites:[site(ranger,{reachable:false,navigable:true})]}));
+ assert(c.track(ranger));assert.equal(c.read().tracker.distance,50);assert.equal(c.read().tracker.prompt,'');
+ c.update(snapshot({sequence:1,sites:[site(ranger,{reachable:true,navigable:true,storyClosed:true})]}));
+ assert.equal(c.track(ranger),false);assert.deepEqual(c.read().markers,[]);assert.equal(c.read().tracker,null);
+});
 test('seven canonical keyed sites; only discovered nonterminal sites get markers',()=>{
   assert.equal(OBJECTIVE_SITES.length,7);assert.equal(new Set(OBJECTIVE_SITES.map(s=>s.id)).size,7);
   const c=createObjectiveTracker();c.update(snapshot({sites:[site(),site(ranger,{state:'undiscovered'}),site('objective:fuel-depot',{state:'claimed'}),site('objective:invented')]}));

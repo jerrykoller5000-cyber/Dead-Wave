@@ -1,0 +1,329 @@
+{
+  "scope": "Runtime painter preview; not production consumer wiring",
+  "painted": 6,
+  "frames": [
+    {
+      "light": "noon",
+      "view": "front",
+      "first": false,
+      "position": [
+        -213.287715639806,
+        3.7731580746669047,
+        -8.366867457668851
+      ],
+      "flashlight": true,
+      "render": {
+        "calls": 12619,
+        "frameCalls": 15,
+        "drawCalls": 313,
+        "triangles": 410920,
+        "points": 0,
+        "lines": 8,
+        "timestamp": 0
+      }
+    },
+    {
+      "light": "noon",
+      "view": "angle",
+      "first": false,
+      "position": [
+        -213.287715639806,
+        3.7731580746669047,
+        -8.366867457668851
+      ],
+      "flashlight": true,
+      "render": {
+        "calls": 13444,
+        "frameCalls": 15,
+        "drawCalls": 331,
+        "triangles": 429365,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    {
+      "light": "noon",
+      "view": "fp",
+      "first": true,
+      "position": [
+        -213.287715639806,
+        3.7731580746669047,
+        -8.366867457668851
+      ],
+      "flashlight": true,
+      "render": {
+        "calls": 14269,
+        "frameCalls": 15,
+        "drawCalls": 286,
+        "triangles": 408317,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    {
+      "light": "noon",
+      "view": "tp",
+      "first": false,
+      "position": [
+        -213.287715639806,
+        3.7731580746669047,
+        -8.366867457668851
+      ],
+      "flashlight": true,
+      "render": {
+        "calls": 15124,
+        "frameCalls": 15,
+        "drawCalls": 353,
+        "triangles": 505890,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    {
+      "light": "overcast",
+      "view": "front",
+      "first": false,
+      "position": [
+        -213.287715639806,
+        3.7731580746669047,
+        -8.366867457668851
+      ],
+      "flashlight": true,
+      "render": {
+        "calls": 16024,
+        "frameCalls": 15,
+        "drawCalls": 316,
+        "triangles": 412071,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    {
+      "light": "overcast",
+      "view": "angle",
+      "first": false,
+      "position": [
+        -213.287715639806,
+        3.7731580746669047,
+        -8.366867457668851
+      ],
+      "flashlight": true,
+      "render": {
+        "calls": 16864,
+        "frameCalls": 15,
+        "drawCalls": 335,
+        "triangles": 430516,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    {
+      "light": "overcast",
+      "view": "fp",
+      "first": true,
+      "position": [
+        -213.287715639806,
+        3.7731580746669047,
+        -8.366867457668851
+      ],
+      "flashlight": true,
+      "render": {
+        "calls": 17704,
+        "frameCalls": 15,
+        "drawCalls": 281,
+        "triangles": 407288,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    {
+      "light": "overcast",
+      "view": "tp",
+      "first": false,
+      "position": [
+        -213.287715639806,
+        3.7731580746669047,
+        -8.366867457668851
+      ],
+      "flashlight": true,
+      "render": {
+        "calls": 18544,
+        "frameCalls": 15,
+        "drawCalls": 358,
+        "triangles": 507369,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    {
+      "light": "dusk",
+      "view": "front",
+      "first": false,
+      "position": [
+        -213.287715639806,
+        3.7731580746669047,
+        -8.366867457668851
+      ],
+      "flashlight": true,
+      "render": {
+        "calls": 19459,
+        "frameCalls": 15,
+        "drawCalls": 323,
+        "triangles": 419943,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    {
+      "light": "dusk",
+      "view": "angle",
+      "first": false,
+      "position": [
+        -213.287715639806,
+        3.7731580746669047,
+        -8.366867457668851
+      ],
+      "flashlight": true,
+      "render": {
+        "calls": 20314,
+        "frameCalls": 15,
+        "drawCalls": 345,
+        "triangles": 438436,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    {
+      "light": "dusk",
+      "view": "fp",
+      "first": true,
+      "position": [
+        -213.287715639806,
+        3.7731580746669047,
+        -8.366867457668851
+      ],
+      "flashlight": true,
+      "render": {
+        "calls": 21154,
+        "frameCalls": 15,
+        "drawCalls": 291,
+        "triangles": 415044,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    {
+      "light": "dusk",
+      "view": "tp",
+      "first": false,
+      "position": [
+        -213.287715639806,
+        3.7731580746669047,
+        -8.366867457668851
+      ],
+      "flashlight": true,
+      "render": {
+        "calls": 21994,
+        "frameCalls": 15,
+        "drawCalls": 366,
+        "triangles": 517327,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    {
+      "light": "night",
+      "view": "front",
+      "first": false,
+      "position": [
+        -213.287715639806,
+        3.7731580746669047,
+        -8.366867457668851
+      ],
+      "flashlight": true,
+      "render": {
+        "calls": 22851,
+        "frameCalls": 14,
+        "drawCalls": 159,
+        "triangles": 256224,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    {
+      "light": "night",
+      "view": "angle",
+      "first": false,
+      "position": [
+        -213.287715639806,
+        3.7731580746669047,
+        -8.366867457668851
+      ],
+      "flashlight": true,
+      "render": {
+        "calls": 23635,
+        "frameCalls": 14,
+        "drawCalls": 180,
+        "triangles": 274701,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    {
+      "light": "night",
+      "view": "fp",
+      "first": true,
+      "position": [
+        -213.287715639806,
+        3.7731580746669047,
+        -8.366867457668851
+      ],
+      "flashlight": true,
+      "render": {
+        "calls": 24405,
+        "frameCalls": 14,
+        "drawCalls": 131,
+        "triangles": 252401,
+        "points": 0,
+        "lines": 8,
+        "timestamp": 0
+      }
+    },
+    {
+      "light": "night",
+      "view": "tp",
+      "first": false,
+      "position": [
+        -213.287715639806,
+        3.7731580746669047,
+        -8.366867457668851
+      ],
+      "flashlight": true,
+      "render": {
+        "calls": 25175,
+        "frameCalls": 14,
+        "drawCalls": 204,
+        "triangles": 353700,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    }
+  ],
+  "errors": [],
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "loadSec": 26.27
+}

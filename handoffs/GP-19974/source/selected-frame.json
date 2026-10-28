@@ -1,0 +1,20 @@
+{
+  "id": "g",
+  "file": "handoffs/GP-19974/source/mine-reframe-g.png",
+  "pose": {
+    "x": -159.9322554200304,
+    "y": 2.0266644720176927,
+    "z": 85.90306548427766,
+    "tx": -161.39285957073324,
+    "ty": 1.2766644878877293,
+    "tz": 89.84218156722693,
+    "fov": 100
+  },
+  "worldTime": 0.69,
+  "rollRadians": 0.055,
+  "warningEyesDetachedForPastRecording": true,
+  "final": "ui/assets/story/mine.jpg",
+  "bytes": 85097,
+  "sha256": "e3496d71d5201f9538fbf2938d2d83677c07e0a8359c779e8e80cb7d9de72ca7",
+  "operation": "Native capture, JPEG format conversion only"
+}

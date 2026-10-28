@@ -1,0 +1,1 @@
+const L=(T.getBuilds?T.getBuilds():(T.builds||[]));return {n:L.length,mines:L.filter(b=>(b.type||b.kind)==='mine').map(b=>({x:b.x,z:b.z,r:b.radius,trip:b.tripT,age:+(b.age||0).toFixed(1),hp:b.hp})),keys:Object.keys(T).filter(k=>/build/i.test(k)).slice(0,20)};

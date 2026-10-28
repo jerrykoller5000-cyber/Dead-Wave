@@ -1,0 +1,40 @@
+GRANT grokbot GB-240: starting one game-test command
+ok    t69      18 pass   0 fail  41.1s  (real renderer)
+    PASS GB-39 hooks exported
+    PASS a shambler stands in the mouth of cave 0
+    PASS the round hit the shambler (22 -> -2)
+    PASS a round that hits a zombie does not poke the cave (not even the warning)
+    PASS the first round of the run into an empty mouth is the warning
+    PASS the next round into an empty mouth brings the guardian out
+    PASS the wave is spawning
+    PASS phase is wave
+    PASS assault cave is busy while the wave spawns
+    PASS a round into the assault mouth mid-spawn does not poke
+    PASS nor does a grenade at the mouth
+    PASS assault cave not marked used
+    PASS a different, empty cave is not busy
+    PASS a different cave can still be poked mid-wave
+    PASS the whole wave is out
+    PASS spawned out and the mouth clear: not busy
+    PASS a zombie standing in the mouth makes it busy
+    PASS the assault cave pokes normally once its mouth is clear
+ok    t69      18 pass   0 fail  48.8s  (real renderer)
+    PASS GB-39 hooks exported
+    PASS a shambler stands in the mouth of cave 0
+    PASS the round hit the shambler (22 -> -2)
+    PASS a round that hits a zombie does not poke the cave (not even the warning)
+    PASS the first round of the run into an empty mouth is the warning
+    PASS the next round into an empty mouth brings the guardian out
+    PASS the wave is spawning
+    PASS phase is wave
+    PASS assault cave is busy while the wave spawns
+    PASS a round into the assault mouth mid-spawn does not poke
+    PASS nor does a grenade at the mouth
+    PASS assault cave not marked used
+    PASS a different, empty cave is not busy
+    PASS a different cave can still be poked mid-wave
+    PASS the whole wave is out
+    PASS spawned out and the mouth clear: not busy
+    PASS a zombie standing in the mouth makes it busy
+    PASS the assault cave pokes normally once its mouth is clear
+2 checks: 36 pass, 0 fail (real renderer)

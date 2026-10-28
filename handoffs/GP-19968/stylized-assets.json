@@ -1,0 +1,35 @@
+{
+  "files": [
+    {
+      "path": "ui/assets/hikers/ellis-byrne.jpg",
+      "bytes": 30601,
+      "sha256": "eede528283039f70daaa6c265b3d7c1071417736747ec48d73d239116aec6798"
+    },
+    {
+      "path": "ui/assets/hikers/jonas-weber.jpg",
+      "bytes": 28133,
+      "sha256": "37b9f8b6392ee2dd15290dd0c8d34affff6ea0c3808ffcff1d7efeef8d76042b"
+    },
+    {
+      "path": "ui/assets/hikers/maya-costa.jpg",
+      "bytes": 29511,
+      "sha256": "f22f96f81f5d853faed0e8b58e050395b341cfb4d3133073d208ca39ed07cd19"
+    },
+    {
+      "path": "ui/assets/hikers/priya-raman.jpg",
+      "bytes": 31160,
+      "sha256": "e9882d35430b6a6f7826d1c19c628573ee00f52be370dd95f69c897af6b0abdb"
+    },
+    {
+      "path": "ui/assets/hikers/sam-marsh.jpg",
+      "bytes": 28830,
+      "sha256": "87532c8628204559f458beb08fcbc03d2a8b0c1c8745c5264027f9af41e8dd35"
+    },
+    {
+      "path": "ui/assets/hikers/theo-marsh.jpg",
+      "bytes": 29574,
+      "sha256": "aaac4ef3ca400f7643245a9187aff98cf4eed0328b4b0f87fa5d11425c121e3b"
+    }
+  ],
+  "totalBytes": 177809
+}

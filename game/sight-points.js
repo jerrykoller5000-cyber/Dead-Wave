@@ -6,8 +6,8 @@
 // top, see note), 'over' a sightless gun looked over its top line. Eye relief: long guns ~0.12-0.25 m behind the rear
 // sight (cheek on the stock), handguns ~0.4 m (arms out). Fine-tune in CL-249; t277 guards that each stays on its gun.
 export const SIGHT = Object.freeze({
-  pistol:   { kind: 'iron',  pos: [0, 0.049, -0.40], fwd: [0, 0.0557, 0.9984] },     // GB-228: on the rear-front line (was .090 flat: rear sat 4.6% of the screen below the post)
-  revolver: { kind: 'iron',  pos: [0, 0.085, -0.40], fwd: [0, 0.0489, 0.9988] },     // GB-228: on the rear-front line (was .123 flat)
+  pistol:   { kind: 'iron',  pos: [0, 0.0772, -0.40], fwd: [0, 0.01425, 0.9999], notch: [-0.064, 0.082], tip: [0.282, 0.087] },   // GB-233 (rule 13, Claude 2026-10-26): through the rear notch (0.082 @ -0.064) to the post tip (0.087 @ 0.282); was .049 / slope .0557 on the slide's mid-top, below the bore
+  revolver: { kind: 'iron',  pos: [0, 0.1073, -0.40], fwd: [0, 0.01902, 0.9998], notch: [-0.05, 0.114], tip: [0.318, 0.121] },   // GB-233 (rule 13): through the notch on the top strap (0.114 @ -0.05) to the blade tip (0.121 @ 0.318); was .085 / slope .0489 on the rib
   uzi:      { kind: 'iron',  pos: [0, 0.156, -0.25], fwd: [0, 0, 1] },                // GB-228: level with the rear tower top (was .160)
   shotgun:  { kind: 'iron',  pos: [0, 0.105, -0.25], fwd: [0, -0.0206, 1] },          // receiver 0.087 @ -0.129, bead 0.081 @ 0.915; GB-224: was .092 (the receiver hid the bead, GB-223 fp-ads-shotgun.png), eye on the bead
   m4:       { kind: 'iron',  pos: [0, 0.134, -0.12], fwd: [0, 0, 1] },                // GB-233: through the holo's dot (0.134 @ 0.045), co-witnessed with the front post 0.138 @ 0.673 (was the iron line over the hood, .172 sloping)

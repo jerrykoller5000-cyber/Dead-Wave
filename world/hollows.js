@@ -9,7 +9,7 @@
 // API:
 //   WARREN_THEMES                  ['root', 'shale', 'iron', 'wet', 'hill']
 //   layoutWarren(theme)         -> the plan, pure data (no three.js): cells, links, points, doors, exits
-//   buildWarren(theme, opts?)   -> { group, cells, groundAt, solids, nav, entry, exits, points, doors, lamps, plan, dispose }
+//   buildWarren(theme, opts?)   -> { group, cells, groundAt, roofAt, openAt, solids, nav, entry, exits, points, doors, lamps, plan, dispose }
 //                                  the contract in docs/specs/hollows.md §2. opts.origin: { x, y, z } (default 0, -400, 0)
 //
 // Coordinates: the plan's cell (i, j) spans x in [i*6, i*6+6), z in [j*6, j*6+6) relative to the origin; he comes in
@@ -263,6 +263,30 @@ function planSolids(plan) {
     }
   }
   return out;
+}
+
+// CL-259 (N30): is a point in the open (in a cell, over its floor, under its roof, outside its rock)? For the
+// third-person camera below, which used to ask the valley's ground 400 m up whenever it swung outside a cell. Local
+// plan coordinates; pad keeps it off the rock. roofAt is the cell's roof (a ramp's is its upper depth's).
+function planOpen(plan, solids, groundAt) {
+  const C = HOLLOW.CELL, cells = new Map(), byCell = new Map();
+  for (const c of plan.cells) cells.set(c.i + ',' + c.j, c);
+  for (const s of solids) { if (!byCell.has(s.cell)) byCell.set(s.cell, []); byCell.get(s.cell).push(s); }
+  const floorY = (d) => -(d - 1) * HOLLOW.DEPTH_DROP;
+  const roofOf = (c) => (c.kind === 'tunnel' || c.kind === 'ramp' || c.kind === 'mouth' || c.kind === 'pocket' ? HOLLOW.TUNNEL_ROOF : HOLLOW.CHAMBER_ROOF);
+  const cellAt = (x, z) => cells.get(Math.floor(x / C) + ',' + Math.floor(z / C));
+  const roofAt = (x, z) => { const c = cellAt(x, z); return c ? floorY(c.depth) + roofOf(c) : null; };
+  function openAt(x, y, z, pad = 0.2) {
+    const c = cellAt(x, z); if (!c) return false;
+    const f = groundAt(x, z), r = floorY(c.depth) + roofOf(c);
+    if (f == null || y < f + pad || y > r - pad) return false;
+    for (let di = -1; di <= 1; di++) for (let dj = -1; dj <= 1; dj++) {
+      const n = cells.get((c.i + di) + ',' + (c.j + dj)); if (!n) continue;
+      for (const b of byCell.get(n.id) || []) if (x > b.minX - pad && x < b.maxX + pad && z > b.minZ - pad && z < b.maxZ + pad && y > b.minY && y < b.maxY) return false;
+    }
+    return true;
+  }
+  return { openAt, roofAt };
 }
 
 // The zombies' flow field: 1.5 m squares, walkable where a floor is and no solid stands.
@@ -539,6 +563,7 @@ export function buildWarren(theme, opts = {}) {
   if (!mats.stencil.map) mats.stencil.color.setHex(0x4c5232);
   const solids = planSolids(plan);
   const groundAt = planGround(plan);
+  const open = planOpen(plan, solids, groundAt);   // CL-259
   // Floors (a ramp is a tilted slab), roofs, and the walls.
   const floors = [], roofs = [];
   for (const c of plan.cells) {
@@ -652,6 +677,8 @@ export function buildWarren(theme, opts = {}) {
     theme, plan, group,
     cells: plan.cells,
     groundAt: (x, z) => { const y = groundAt(x - origin.x, z - origin.z); return y == null ? null : y + origin.y; },
+    roofAt: (x, z) => { const y = open.roofAt(x - origin.x, z - origin.z); return y == null ? null : y + origin.y; },   // CL-259
+    openAt: (x, y, z, pad) => open.openAt(x - origin.x, y - origin.y, z - origin.z, pad),   // CL-259: the camera below
     solids: worldSolids, nav,
     entry: W(plan.entry),
     exits: { mouth: W(plan.exits.mouth), boltHoles: plan.exits.boltHoles.map(W), deep: W(plan.exits.deep) },

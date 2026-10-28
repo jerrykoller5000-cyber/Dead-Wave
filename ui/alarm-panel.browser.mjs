@@ -28,7 +28,8 @@ try {
   await page.screenshot({path:path.join(shots,`${prefix}-menu-${width}.png`)});
   const box=await page.locator('#hqBriefing').boundingBox();assert(box.x>=0&&box.x+box.width<=width);
   if(!before) {
-   for(const name of ['Fieldwork','Relay','Threat report'])await page.getByRole('button',{name,exact:true}).click();
+   assert.equal(await page.locator('.briefing-nav').count(),0);
+   assert.equal(await page.locator('.briefing-radio,.story-lead').count(),0);
    assert(await page.locator('.briefing-alarm').isVisible());
    assert.equal(await page.locator('#hqBriefing').evaluate(el=>el.scrollWidth>el.clientWidth),false);
   }
@@ -56,17 +57,17 @@ try {
   await component.waitForSelector('#hqBriefing',{state:'attached'});
   await component.evaluate(()=>{
    window.receipts=[];addEventListener('dw-game',e=>receipts.push(e.detail));
-   window.fixture={type:'briefing-open',day:4,runId:101,phase:'prep',canSoundAlarm:true,relayReady:true,
+   window.fixture={type:'briefing-open',panel:'duty',day:4,runId:101,phase:'prep',canUsePanel:true,canSoundAlarm:true,relayReady:true,
     relayStory:{line:'Ridgeline. Hold where you are.'},
     radioCall:{status:'available',cards:[{id:'ammo',enabled:true},{id:'medical',enabled:true},{id:'intel',enabled:true}]},
     restocks:[{name:'Ranger camp',reward:'Supplies',collected:false}],
     bounties:[{day:4,kind:'campsite',index:0,labelKey:'world.trapper',reward:25,guards:4,alive:3,state:'open'}]};
    dispatchEvent(new CustomEvent('dw-game',{detail:fixture}));
   });
-  await component.getByRole('button',{name:'Fieldwork',exact:true}).click();
   assert(await component.locator('.bounty-post').isVisible());assert(await component.locator('.briefing-restocks').isVisible());
+  assert(await component.locator('.briefing-alarm').isHidden());
   await component.screenshot({path:path.join(shots,'after-fieldwork.png')});
-  await component.getByRole('button',{name:'Relay',exact:true}).click();
+  await component.evaluate(()=>{fixture.panel='radio';dispatchEvent(new CustomEvent('dw-game',{detail:fixture}));});
   await component.locator('.radio-call-card').first().click();
   assert.deepEqual(await component.evaluate(()=>receipts.find(e=>e.type==='radio-call-request')),{type:'radio-call-request',card:'ammo',day:4,runId:101});
   await component.evaluate(()=>{fixture.radioCall={status:'picked',picked:'ammo'};dispatchEvent(new CustomEvent('dw-game',{detail:fixture}));});
@@ -74,7 +75,10 @@ try {
   await component.screenshot({path:path.join(shots,'after-relay.png')});
   await component.evaluate(()=>{fixture.day=20;fixture.goalNight=20;fixture.extraction='offered';dispatchEvent(new CustomEvent('dw-game',{detail:fixture}));});
   await component.locator('.briefing-extraction').click();
-  assert.deepEqual(await component.evaluate(()=>receipts.find(e=>e.type==='extraction-request')),{type:'extraction-request',day:20,runId:101});
+  assert.equal(await component.evaluate(()=>receipts.some(e=>e.type==='extraction-request')),false);
+  await component.locator('.heron-confirm button').last().click();
+  assert.deepEqual(await component.evaluate(()=>receipts.find(e=>e.type==='extraction-request')),{type:'extraction-request',day:20,runId:101,confirmed:true});
+  await component.evaluate(()=>{fixture.panel='alarm';dispatchEvent(new CustomEvent('dw-game',{detail:fixture}));});
   for(const patch of [{canSoundAlarm:false},{canSoundAlarm:true,alarmActive:true},{alarmActive:false,phase:'wave'},{phase:'prep',disabled:true}]) {
    await component.evaluate(patch=>{Object.assign(fixture,patch);dispatchEvent(new CustomEvent('dw-game',{detail:fixture}));},patch);
    assert(await component.locator('.briefing-alarm').isDisabled());

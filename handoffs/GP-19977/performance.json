@@ -1,0 +1,10 @@
+{
+  "loadSec": 24.16,
+  "performance": {
+    "count": 48,
+    "fps": 60.3753333221414,
+    "p95Ms": 17.59999999962747,
+    "maxActive": 48
+  },
+  "errors": []
+}

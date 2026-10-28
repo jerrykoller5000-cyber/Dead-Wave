@@ -1,0 +1,7 @@
+PASS radio stale run refused
+PASS radio stale day refused
+PASS radio remote request refused
+PASS radio request from duty mode refused
+PASS actual offered radio choice accepted by owner
+PASS second different radio choice refused
+PASS choice refresh stays at the radio

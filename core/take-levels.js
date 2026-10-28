@@ -27,6 +27,7 @@ export const TAKE_LEVELS = {
   'bullet-impacts/rock': 0.0098,
   'bullet-impacts/sand': 0.0064,
   'bullet-impacts/water': 0.0063,
+  'bullet-impacts/whiz': 0.01,   // ~
   'bullet-impacts/wood': 0.0198,
   'hq/alarm-klaxon': 0.082,
   'hq/alarm-rumble': 0.0956,
@@ -75,13 +76,18 @@ export const TAKE_LEVELS = {
   'player/nvg-on': 0.0122,
   'player/swim-stroke': 0.006,   // ~
   'player/vault': 0.008,   // ~
+  'story/camera': 0.015,   // ~ CL-272: like the paper, a small thing in his hands
   'story/hush-dying': 0.0089,
+  'story/paper': 0.012,   // ~ CL-272: paperRustle's two hisses
+  'story/relay-clunk': 0.04,   // ~ CL-272: relayClunk's low thump
+  'story/vault-door': 0.035,   // ~ CL-272: vaultDoor's bolts and drone
   'training/alarm': 0.069,
   'training/clear-all': 0.025,   // ~
   'training/gate-open': 0.03,   // ~
   'training/infirmary-wake': 0.025,   // ~
   'training/light-switch': 0.02,   // ~
   'training/panel-beep': 0.02,   // ~
+  'training/panel-enter': 0.02,   // ~ CL-272: the way in, like the panel's beep
   'training/target-fall': 0.03,   // ~
   'training/target-hit': 0.04,   // ~
   'training/target-rise': 0.02,   // ~
@@ -95,6 +101,10 @@ export const TAKE_LEVELS = {
   'turrets/mortar-round-drop': 0.012,   // ~
   'turrets/servo': 0.012,   // ~
   'ui/back': 0.012,   // ~
+  'ui/panel-deny': 0.025,   // ~ CL-272: relayKey(false)'s low square
+  'ui/panel-key': 0.014,   // ~ CL-272: relayKey's click
+  'ui/panel-open': 0.02,   // ~ CL-272: relayOpen's two chimes
+  'ui/reset-blip': 0.025,   // ~ CL-272: resetBlip's two squares
   'ui/click': 0.012,   // ~
   'ui/day-cleared': 0.0177,
   'ui/expand': 0.0226,
@@ -157,6 +167,7 @@ export const TAKE_LEVELS = {
   'weapons/pistol-suppressed': 0.0212,
   'weapons/revolver': 0.0321,
   'weapons/rifle': 0.0325,
+  'weapons/rotary-spin-end': 0.012,   // ~
   'weapons/shotgun': 0.0332,
   'weapons/smg': 0.0432,
   'weapons/sniper': 0.0306,
@@ -190,6 +201,7 @@ export const TAKE_LEVELS = {
   'weapon-foley/chainsaw-idle': 0.05,
   'weapons/flamethrower': 0.05,
   'weapons/rotary-gun-loop': 0.05,
+  'weapons/rotary-spin-loop': 0.05,
   'world/campfire': 0.05,
   'world/cave-mouth': 0.05,
   'world/crickets-night': 0.05,
@@ -205,4 +217,4 @@ export const TAKE_LEVELS = {
   'world/wind-night': 0.05,
 };
 // The beds (looping takes): loaded two takes at most.
-export const BEDS = Object.freeze(["below/warren-ambience", "builds/lure", "hq/generator", "player/nvg-hum", "story/hush-hum", "story/rune-door-hum", "story/the-tone", "training/ventilation", "vehicles/cargo-plane-interior", "vehicles/floatplane-idle", "weapon-foley/chainsaw-idle", "weapons/flamethrower", "weapons/rotary-gun-loop", "world/campfire", "world/cave-mouth", "world/crickets-night", "world/fire-burning", "world/fog-wind", "world/frogs-night", "world/graveyard-ambience", "world/lake-shore", "world/rain", "world/river", "world/underwater", "world/wind-day", "world/wind-night"]);
+export const BEDS = Object.freeze(["below/warren-ambience", "builds/lure", "hq/generator", "player/nvg-hum", "story/hush-hum", "story/rune-door-hum", "story/the-tone", "training/ventilation", "vehicles/cargo-plane-interior", "vehicles/floatplane-idle", "weapon-foley/chainsaw-idle", "weapons/flamethrower", "weapons/rotary-gun-loop", "weapons/rotary-spin-loop", "world/campfire", "world/cave-mouth", "world/crickets-night", "world/fire-burning", "world/fog-wind", "world/frogs-night", "world/graveyard-ambience", "world/lake-shore", "world/rain", "world/river", "world/underwater", "world/wind-day", "world/wind-night"]);

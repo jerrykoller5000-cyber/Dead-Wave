@@ -1,0 +1,135 @@
+Game-test request 10a8e19e-21bf-4ced-8121-ed559f8fb6aa queued at position 2. Waiting...
+GRANT grokbot GB-243: starting one game-test command
+ok    t15      10 pass   0 fail  60.0s  (real renderer)
+    PASS match reached prep after Play
+    built 674: {"floor":80,"wall":108,"stairs":1,"railing":11,"sandbag":28,"platform":12,"heavy":7,"flame":3,"mortar":5,"light":6,"pillar":2,"barricade":102,"spikes":78,"wire":130,"mine":100,"lure":1}
+    PASS basebuild uses every piece: missing
+    PASS with a door
+    PASS and windows
+    PASS three floors (a roof at level 2)
+    PASS stairs on the ground floor reaching up (lv 1, rise 2.20)
+    PASS swarm spawned 100
+    PASS every kind: shambler,feral,leaper,spider,drowned,military,brute,spitter,screamer,bomber,demon,colossus,guardian
+    PASS they start out on the ring (nearest 46m)
+    PASS and close in even with nodead on (50 -> 35)
+FAIL  t76      15 pass   1 fail  44.2s  (real renderer)
+    PASS guards asleep at their post (3)
+    PASS drawn close up, not the far LOD (false/false/false)
+    FAIL sampled 60 frames
+    PASS each one sways (torso roll ranges 0.047/0.120/0.069)
+    PASS each one breathes (hips 12.0/26.6/19.5 mm)
+    PASS each one looks about (head turn ranges 0.96/0.81/0.27 rad)
+    PASS never in step: the closest pair differs by 0.012 rad on average
+    PASS own breathing rates (2.35/2.14/1.87)
+    PASS they hold the post (moved at most 0.11 m)
+    PASS shuffles a step: leg lift 0.35 rad, turn -0.38 rad
+    PASS and is still at its post
+    PASS a zombie held in the grace idles (amt 1.00, grace true)
+    PASS it stands instead of walking on the spot
+    PASS and looks about (0.11 rad)
+    PASS a walker walks (phase +5.2, idle 0.00)
+    PASS no page errors ()
+ok    t80      14 pass   0 fail  134.7s  (real renderer)
+    PASS the HQ house is there
+    PASS the spider starts with the house between them
+    PASS it comes round until the house is out of the line (clear after 5.6 s, in the line 100% of the time after; clear of the house)
+    PASS and it stays at range: never closer than 6.4 m
+    PASS a spitter behind the house keeps creeping in (moved 7.3 m, 13.0 to 8.0 m)
+    PASS a spider in the open holds its band (6.5 to 7.0 m)
+    PASS a flanker behind the house comes round to him (closest 0.9 m in 30 s; ended at -5.4,-4.5)
+    PASS a spider blind inside its back-off range comes on round the corner (clear after 5.3 s; clear of the house; 6.0 to 8.0 m)
+    PASS a spider on a line that grazes the corner takes one with room (start 0.29 m clear, end 1.32 m; tight 0% of the time after 3 s; closest 6.0 m)
+    PASS the night-12 spot, the line 0.91 m from the ammo kiosk: the spider reads a line and his AK kills it (line true, dead)
+    PASS three wall pieces between them stop his rounds (3 walls; 0 damage; trigger held 145 ticks, 0 with his gun not by him)
+    PASS a spider behind his wall reads no line (line false)
+    PASS and comes on round the wall instead of holding behind it (closest 6.5 m, ended at -12.3,-9.3)
+    PASS one 13 m step that spans his wall and the spider: the wall stops it (plain stopped, piercing stopped; control from past the wall hits)
+ok    t15      10 pass   0 fail  62.6s  (real renderer)
+    PASS match reached prep after Play
+    built 674: {"floor":80,"wall":108,"stairs":1,"railing":11,"sandbag":28,"platform":12,"heavy":7,"flame":3,"mortar":5,"light":6,"pillar":2,"barricade":102,"spikes":78,"wire":130,"mine":100,"lure":1}
+    PASS basebuild uses every piece: missing
+    PASS with a door
+    PASS and windows
+    PASS three floors (a roof at level 2)
+    PASS stairs on the ground floor reaching up (lv 1, rise 2.20)
+    PASS swarm spawned 100
+    PASS every kind: shambler,feral,leaper,spider,drowned,military,brute,spitter,screamer,bomber,demon,colossus,guardian
+    PASS they start out on the ring (nearest 46m)
+    PASS and close in even with nodead on (50 -> 34)
+FAIL  t76      15 pass   1 fail  45.6s  (real renderer)
+    PASS guards asleep at their post (3)
+    PASS drawn close up, not the far LOD (false/false/false)
+    FAIL sampled 59 frames
+    PASS each one sways (torso roll ranges 0.094/0.119/0.075)
+    PASS each one breathes (hips 15.0/27.0/15.9 mm)
+    PASS each one looks about (head turn ranges 0.55/0.60/0.11 rad)
+    PASS never in step: the closest pair differs by 0.047 rad on average
+    PASS own breathing rates (2.13/1.80/2.28)
+    PASS they hold the post (moved at most 0.11 m)
+    PASS shuffles a step: leg lift 0.35 rad, turn -0.39 rad
+    PASS and is still at its post
+    PASS a zombie held in the grace idles (amt 1.00, grace true)
+    PASS it stands instead of walking on the spot
+    PASS and looks about (0.51 rad)
+    PASS a walker walks (phase +7.8, idle 0.00)
+    PASS no page errors ()
+ok    t80      14 pass   0 fail  231.7s  (real renderer)
+    PASS the HQ house is there
+    PASS the spider starts with the house between them
+    PASS it comes round until the house is out of the line (clear after 4.9 s, in the line 100% of the time after; clear of the house)
+    PASS and it stays at range: never closer than 6.4 m
+    PASS a spitter behind the house keeps creeping in (moved 7.9 m, 13.0 to 7.4 m)
+    PASS a spider in the open holds its band (11.0 to 11.5 m)
+    PASS a flanker behind the house comes round to him (closest 0.9 m in 30 s; ended at -4.7,-5.4)
+    PASS a spider blind inside its back-off range comes on round the corner (clear after 9.7 s; clear of the house; 6.0 to 7.7 m)
+    PASS a spider on a line that grazes the corner takes one with room (start 0.29 m clear, end 3.74 m; tight 0% of the time after 3 s; closest 6.0 m)
+    PASS the night-12 spot, the line 0.91 m from the ammo kiosk: the spider reads a line and his AK kills it (line true, dead)
+    PASS three wall pieces between them stop his rounds (3 walls; 0 damage; trigger held 40 ticks, 0 with his gun not by him)
+    PASS a spider behind his wall reads no line (line false)
+    PASS and comes on round the wall instead of holding behind it (closest 6.4 m, ended at -9.8,-9.8)
+    PASS one 13 m step that spans his wall and the spider: the wall stops it (plain stopped, piercing stopped; control from past the wall hits)
+ok    t15      10 pass   0 fail  93.5s  (real renderer)
+    PASS match reached prep after Play
+    built 674: {"floor":80,"wall":108,"stairs":1,"railing":11,"sandbag":28,"platform":12,"heavy":7,"flame":3,"mortar":5,"light":6,"pillar":2,"barricade":102,"spikes":78,"wire":130,"mine":100,"lure":1}
+    PASS basebuild uses every piece: missing
+    PASS with a door
+    PASS and windows
+    PASS three floors (a roof at level 2)
+    PASS stairs on the ground floor reaching up (lv 1, rise 2.20)
+    PASS swarm spawned 100
+    PASS every kind: shambler,feral,leaper,spider,drowned,military,brute,spitter,screamer,bomber,demon,colossus,guardian
+    PASS they start out on the ring (nearest 46m)
+    PASS and close in even with nodead on (50 -> 35)
+FAIL  t76      15 pass   1 fail  54.5s  (real renderer)
+    PASS guards asleep at their post (2)
+    PASS drawn close up, not the far LOD (false/false)
+    FAIL sampled 56 frames
+    PASS each one sways (torso roll ranges 0.112/0.120)
+    PASS each one breathes (hips 12.0/12.0 mm)
+    PASS each one looks about (head turn ranges 0.98/0.36 rad)
+    PASS never in step: the closest pair differs by 0.075 rad on average
+    PASS own breathing rates (2.37/1.66)
+    PASS they hold the post (moved at most 0.00 m)
+    PASS shuffles a step: leg lift 0.35 rad, turn -0.37 rad
+    PASS and is still at its post
+    PASS a zombie held in the grace idles (amt 1.00, grace true)
+    PASS it stands instead of walking on the spot
+    PASS and looks about (0.17 rad)
+    PASS a walker walks (phase +7.9, idle 0.00)
+    PASS no page errors ()
+ok    t80      14 pass   0 fail  199.5s  (real renderer)
+    PASS the HQ house is there
+    PASS the spider starts with the house between them
+    PASS it comes round until the house is out of the line (clear after 4.9 s, in the line 100% of the time after; clear of the house)
+    PASS and it stays at range: never closer than 6.4 m
+    PASS a spitter behind the house keeps creeping in (moved 7.3 m, 13.0 to 8.0 m)
+    PASS a spider in the open holds its band (9.1 to 9.3 m)
+    PASS a flanker behind the house comes round to him (closest 0.9 m in 30 s; ended at -4.7,-5.4)
+    PASS a spider blind inside its back-off range comes on round the corner (clear after 9.6 s; clear of the house; 6.0 to 7.5 m)
+    PASS a spider on a line that grazes the corner takes one with room (start 0.29 m clear, end 3.66 m; tight 0% of the time after 3 s; closest 6.0 m)
+    PASS the night-12 spot, the line 0.91 m from the ammo kiosk: the spider reads a line and his AK kills it (line true, dead)
+    PASS three wall pieces between them stop his rounds (3 walls; 0 damage; trigger held 40 ticks, 0 with his gun not by him)
+    PASS a spider behind his wall reads no line (line false)
+    PASS and comes on round the wall instead of holding behind it (closest 6.5 m, ended at -12.4,-7.7)
+    PASS one 13 m step that spans his wall and the spider: the wall stops it (plain stopped, piercing stopped; control from past the wall hits)
+9 checks: 117 pass, 3 fail (real renderer)

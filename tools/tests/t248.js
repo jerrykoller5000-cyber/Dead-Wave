@@ -19,11 +19,24 @@
     const p = T.player.position;
     const pgx = T.gridIndex(p.x), pgz = T.gridIndex(p.z);
     const free = (gx, gz) => T.placeRefusalFor('wall', gx, gz) === null && T.placeRefusalFor('light', gx, gz) === null;
+    // The cabin is a 10 m square and it stops rounds (CU-165: a strip beside him
+    // put the raised gun's first step through that box, so the zombie never got hit).
+    const hq = T.house && T.house.group ? T.house.group.position : null;
+    const hqHalf = (T.house && T.house.half) || 5;
+    const clearOfHq = (x, z) => !hq || Math.abs(x - hq.x) > hqHalf + 1.2 || Math.abs(z - hq.z) > hqHalf + 1.2;
+    const laneClear = (hx, gz0) => {
+      for (let i = 0; i <= 4; i++) if (!clearOfHq(T.gridCentre(hx), T.gridCentre(gz0 + i))) return false;
+      return true;
+    };
     let gx = null, gz = null;
-    for (const dx of [6, -6, 8, -8, 10]) {
-      for (const dz of [0, 2, -2]) {
+    const offs = [];
+    for (let d = 8; d <= 18; d += 2) offs.push(d, -d);
+    for (const dx of offs) {
+      for (const dz of [0, 4, -4, 8, -8]) {
         const a = pgx + dx, b = pgz + dz;
-        if ([0, 1, 2, 3, 4].every((i) => free(a, b + i)) && free(a + 8, b)) { gx = a; gz = b; break; }
+        if (![0, 1, 2, 3, 4].every((i) => free(a, b + i)) || !free(a + 8, b)) continue;
+        if (!laneClear(a, b) || !laneClear(a + 8, b)) continue;
+        gx = a; gz = b; break;
       }
       if (gx !== null) break;
     }

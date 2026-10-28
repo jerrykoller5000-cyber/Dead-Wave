@@ -1,0 +1,89 @@
+{
+  "shots": [
+    {
+      "target": "zombie.colossus:statue",
+      "view": "front",
+      "time": "noon",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/colossus-carrier-after/noon-front.png"
+    },
+    {
+      "target": "zombie.colossus:statue",
+      "view": "side",
+      "time": "noon",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/colossus-carrier-after/noon-side.png"
+    },
+    {
+      "target": "zombie.colossus:statue",
+      "view": "back",
+      "time": "noon",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/colossus-carrier-after/noon-back.png"
+    },
+    {
+      "target": "zombie.colossus:statue",
+      "view": "front",
+      "time": "dusk",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/colossus-carrier-after/dusk-front.png"
+    },
+    {
+      "target": "zombie.colossus:statue",
+      "view": "side",
+      "time": "dusk",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/colossus-carrier-after/dusk-side.png"
+    },
+    {
+      "target": "zombie.colossus:statue",
+      "view": "back",
+      "time": "dusk",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/colossus-carrier-after/dusk-back.png"
+    },
+    {
+      "target": "zombie.colossus:statue",
+      "view": "front",
+      "time": "night",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/colossus-carrier-after/night-front.png"
+    },
+    {
+      "target": "zombie.colossus:statue",
+      "view": "side",
+      "time": "night",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/colossus-carrier-after/night-side.png"
+    },
+    {
+      "target": "zombie.colossus:statue",
+      "view": "back",
+      "time": "night",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/colossus-carrier-after/night-back.png"
+    },
+    {
+      "target": "zombie.colossus:statue",
+      "view": "front",
+      "time": "noon",
+      "dist": 8,
+      "fov": 65,
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/colossus-carrier-after/gameplay-distance.png"
+    }
+  ],
+  "out": "handoffs/GP-19970/colossus-carrier-after",
+  "sheet": true,
+  "cols": 4
+}

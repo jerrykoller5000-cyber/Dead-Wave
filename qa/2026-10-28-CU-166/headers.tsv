@@ -1,0 +1,296 @@
+t0	GB-45	// t0 - GB-45 (GB-A9): the page's test hooks are up. (() => { const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m); co
+t1	GB-45	// t1 - build stacking probe. GB-45 (GB-A9): walls go down on the ground, platforms stack on them. // GB-46: the light / cabin reading, and 
+t10		 (async () => { const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m); const wait = (ms) => new Pr
+t100		// t100 - The guardian's stuck failsafe and the horde going NaN (Jerry, 2026-09-28: "running around shooting a // horde, at some point they 
+t101	CU-60	// t101 - CU-60 (Jerry direct): the kiosk doesn't show an upgrade until the tier under it is owned. // Fortify lists a track only once its p
+t102	CU-61	// t102 - CU-61 (Jerry direct): the CIF at the HQ swaps the marine's camo, free. E at the window // opens it; every pattern is a button; a c
+t103	CU-109	// t103 - CU-109 (Jerry): the flashlight and the laser start locked. 2 does nothing until the // light is bought; the gear kiosk sells it ag
+t104	CU-59	// t104 - CU-59 (P-55): a TT debug hook marks the run, so it earns no badge. A fresh start // clears the flag. A read-only Dbg hook does not
+t105	GB-78	// t105 - GB-78 (P-32, D-46): the run's first guardian catch can be kicked free. Five E presses while it // hauls him and he's loose: no scr
+t106	CL-69	// t106 — CL-69 (P-19): the score follows the night's shape. The wave director's breather (GB-71's // pace.inLull) switches the song to its 
+t107	GB-75	// t107 - GB-75 (P-26): brutes wear plates. Bullets, pellets, blades and the saw do 0.45 of their damage; // a blast or the flame's own hit 
+t108	GB-76	// t108 - GB-76 (P-27): kill the screamer first. With the field at the cap (48), its howl pulls up to three // far shamblers or ferals (60 m
+t109	GB-77	// t109 - GB-77 (P-28): shoot a bomber in the crowd and the chain is his: every kill of its blast (and of the // bombers it sets off) feeds 
+t11		(async () => { const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m); const wait = (ms) => new Pro
+t110	GB-96	// t110 - GB-96 (P-100): the shotgun earns its place against spiders on a wall: its pellets do a quarter // more to a spider (at least 20% m
+t111	GB-99	// t111 - GB-99 (P-20 on the board): each kind has its own head line in its hit column. The brute's is 0.74 of // hitH (its head sits low in
+t112	GB-103	// t112 - GB-103 (P-117, D-62): the horde fights the defences. A turret that fires on a zombie draws it and its pack // (within 6 m) onto th
+t113	CL-62	// t113 — CL-62 (Jerry 2026-09-29): the guardian never stands on the hill over its cave, and it comes out of // the dark. The walk-in grab a
+t114	GB-111	// t114 - GB-111 (P-120): dw-game 'enemy-first-seen' { kind } once a run per kind, the first time one comes within // 60 m of the marine. No
+t115	CL-72	// t115 — CL-72 (P-43): fuel drums back on the map at the wrecks, the sheds and the mast: 6-8 of them, none near a // cave mouth (30 m), the
+t116	GB-102	// t116 - GB-102 (P-109, D-60): rain puts fires out. In full rain a burning shambler burns out at least twice as fast // as in the dry and l
+t117	GB-82	// t117 - GB-82 (P-39): the Lights out dare. On day 5, picking Tonight's call 'blackout' in prep marks the night // (wavePreview.night.order
+t119	GB-104	// t119 - GB-104 (P-119, D-62): every kind has a weakness. One hit of each damage type (bullet, pellet, fire, blast, // blade, crush) on eac
+t12		(async () => { const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m); const wait = (ms) => new Pro
+t120	CU-63	// t120 - CU-63 (P-102): one marine plays as before. A dummy on a skull leaves it. // A blast counts on the dummy and misses the marine. A d
+t121	CL-95	// t121 — CL-95 (P-126, D-65): six guns each carry a suppressor that belongs on them. Built hidden; fitted, it shows and // the muzzle point
+t122	CU-68	// t122 - CU-68 (P-127): a suppressor in the kiosk for each gun that has a can. // Buying it shows the can and moves the muzzle. The AA-12 h
+t123	CL-205	// t123 — CL-205 (story v3, Jerry): the burial detail is the survivors he rescued, as themselves; nobody rescued, nobody // comes. (Was CL-1
+t124	CL-104	// t124 — CL-104 (Jerry 2026-09-29: "the marine is never grabbed in the creature's hand realistically"). Walking into a // cave mouth: once 
+t125	CL-103	// t125 — CL-103 and CL-103b (Jerry 2026-09-29): the CIF and the Armory side by side on the HQ's east face, the wall opposite the // kiosk a
+t126	GB-100	// t126 - GB-100 (P-103): zombies go for the nearest living player. With a dummy 40 m off, the flow field // has a destination under the dum
+t127	GB-112	// t127 - GB-112 (P-32): after an escape the guardian can catch him again, and each escape in a run takes // more E presses: 5, then 8, then
+t128	GB-101	// t128 - GB-101 (P-106, D-59, docs/skills.md): the combat counters feed addSkillXp, and the farms don't. // Stopping power: a headshot kill
+t129	GB-81	// t129 - GB-81 (P-38, D-49): drops are earned. With the relay down: no random crate by day, and exactly one in a // night's wave however lo
+t13		 (async () => { const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m); const wait = (ms) => new Pr
+t130	GB-83	// t130 - GB-83 (P-45): the breather crate. With the relay up, from night 3, the night's first breather drops one // crate 28-40 m out from 
+t131	GB-85	// t131 - GB-85 (P-50, D-45): the boat call. The boat is offered only from night 20 with the relay up (not on 19, not // with the relay down
+t132	GB-87	// t132 - GB-87 (P-56, D-54): Fog Night. Night 14's plan carries mod 'fog'; it shows in wavePreview.night.mod and // getWaveDirectorState().
+t133	CU-69	// t133 - CU-69 (P-128): the fire selector (K) on the M4, AK and AA-12; GB-127 (Jerry): they START on AUTO. // The pistol stays semi until t
+t134	CL-94	// t134 — CL-94 (D-64, D-66): the fidelity pass on the marine. A fresh marine from makeMarine(): // every wearable item has its own material
+t135	CU-64	// t135 - CU-64 (P-111): U holsters the gun. Unarmed, nothing fires and he is 10% faster, // and Fleet foot plus unarmed never passes ×1.30.
+t136	GB-84	// t136 - GB-84 (P-48): one mod per gun. The extended mag (x1.5 rounds, reload x1.25) or, on the M4, AK, Uzi and // minigun, a heavy barrel 
+t137	GB-113	// t137 - GB-113, D-86, D-93: kill skulls pay full value through night 7, then lose 6% per night to a 40% floor from // night 17 (D-93, Jerr
+t138	CU-65	// t138 - CU-65 (P-113): a gun handed in at the Armory comes back with the same magazines. // Once a loadout is applied, the weapon wheel sh
+t139	GB-105	// t139 - GB-105 (P-129, D-65): the hearing rule and the suppressor's cost. A shot is heard within its gun's radius; // a sleeping post with
+t14		(async () => { const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m); const wait = (ms) => new Pro
+t140	CL-90	// t140 — CL-90 (P-116, D-61): what he carries shows on him. The loadout's two primaries hang slung on his // back and its two secondaries s
+t141	CU-67	// t141 - CU-67 (P-121): the M240B is a tripod gun beside the mortar. // It arrives with 500 rounds and will not fire until he mounts it. //
+t142	CU-52	// t142 - CU-52 (P-44): Space beside a sandbag, wire, barricade or unbarred window // hops him over in about 0.5 s. A plain wall does not. A
+t143	GB-89	// t143 - GB-89 (P-61): a colossus walks a trail by day, the 'wanderer' bounty. On the odd nights from 7 (never a // colossus night or a gua
+t144	CU-70	// t144 - CU-70 (P-131): the dressing room. A shirt can wear its own camo, the boots // their own colour, and the profile keeps both. (async
+t145	CL-73	// t145 — CL-73 (P-52, D-45): the boat comes in. On GB-85's 'extraction' 'due' three flares go up from the end of the // dock and the boat s
+t146	CL-97	// t146 - CL-97 (P-132, D-66): the wardrobe on the rig. Every hat, every eyewear, sleeves rolled, shorts, bare hands, // hair, eyes and skin
+t147	GB-86	// t147 - GB-86 (P-53, D-45): boarding the boat. Once the called boat is due and waits at the dock (CL-73), he boards by // holding E for 2 
+t148	GB-90	// t148 - GB-90 (P-64): survivor bounties. From night 3 a campsite bounty can hold a survivor (at most once per camp per // run) who waits b
+t149	GB-91	// t149 - GB-91 (P-65, D-52) as GB-116 (story v2) replaced it: what the survivors (GB-90) do for the rest of the run. // GB-116 moved the tr
+t15		 (async () => { const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m); const wait = (ms) => new Pr
+t150	CL-90	// t150 - CL-90 part 2 (P-116, D-61): the draw and holster moves. A switch puts the gun in his hand back where it // lives and draws the nex
+t151	CL-80	// t151 - CL-80 (P-95, docs/specs/secret-quest.md §2, §4): the stones carry the eight glyphs; with a word set, at night, // from the tower's
+t152	GB-106	// t152 - GB-106 (P-135, D-67; docs/specs/hollows.md A1): the Hush. Owned from the dawn after the relay is repaired and // charged at each p
+t153	CL-107	// t153 - CL-107 (D-70, docs/story.md §7): the first people. Standing stones on high clear ground, the ring stone, // the barrow's offerings
+t154	CU-79	// t154 - CU-79: a ladder up the HQ. The roof holds him; the walls still do below. (async () => { const T = window.TT; const out = []; const
+t155		// t155 - the ragdoll pile-up hops are gone with the feature (Jerry, 2026-10-09). A close shell // still knocks a shambler down with today's
+t156	GB-116	// t156 - GB-116 (story v2, D-70, docs/story.md 5): the survivors on the roof, in place of GB-91's helps. The camp says // who: the trapper'
+t157	CU-80	// t157 - CU-80: a strongbox pays only if every piece fits, and E opens the one in the warren. (async () => { const T = window.TT; const out
+t158	CL-110	// t158 - CL-110 (D-70, docs/story.md §1, §3): Heron, the PGB's floatplane, is the way out. It comes in through the // air over the hills, s
+t159	CL-75	// t159 - CL-75 (D-70, docs/story.md §5): the three who lived, as themselves: Okafor (medic, aid bag), Brandt (gunner, // a belt of 7.62, bo
+t16		(async () => { const T = window.TT; const wait = (ms) => new Promise(r => setTimeout(r, ms)); await startMatch(T, 'TestMarine'); const r = T
+t160	GB-117	// t160 - GB-117 (story v2): Heron in the extraction, checked through GB-85/86/114's flow with CL-110's craft. Called from // the board on n
+t161	CL-76	// t161 - CL-76 (P-57, D-54): Fog Night. While night 14's wave is on, the mist closes in to about 30 m, with the // goggles down or not; it 
+t162	CL-92	// t162 - CL-92 (P-122, D-63): lightning in storms. A shower brings five strikes. With the odds forced: a strike on // the marine takes 70 (
+t163	CL-93	// t163 - CL-93 (P-123, D-63): the rabbit mound. One mound far out from the trails, bones and a skull round it. A round // into another burr
+t164	CL-78	// t164 - CL-78 (P-67, D-55): the guardian boss wears the cave guardian's rig. Its zombie body is hidden, the rig rides // on it, coming on 
+t165	CL-111	// t165 - CL-111 (docs/specs/secret-quest.md §6): the rune finish. Locked until the true ending; the quest's 'ending' // grants it for good;
+t166	GB-93	// t166 - GB-93 (P-98): Swarm Night. Night 17's plan carries mod 'swarm': its runners from every cave (the plan's own // 'all' caves and kin
+t167	CL-108	// t167 - CL-108, CL-109 (updated CL-119 for Jerry's GP-104 and GP-122) (D-70, docs/story.md §6, §7): the valley's history in things. The PG
+t168	GB-107	// t168 - GB-107 (P-138): fighting below. In the iron warren: the sleepers lie in their alcoves until a shot is heard, // he walks up to one
+t169	CL-112	// t169 - CL-112 (docs/specs/secret-quest.md §5): the heart in the Marrow builds in the game (its carvings drawn on // canvases), stands whe
+t17		 (async () => { const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m); const wait = (ms) => new Pr
+t170	GB-108	// t170 - GB-108 (P-139): the stir. Below, in the iron warren with its dead put down: his shots fill the meter (the // rifle 3.5 a shot, the
+t171	GB-92	// t171 - GB-92 (P-97): the secret's fight. On a silenced day the rune door of a cleared warren opens (E) into the // heart (CL-112): the gu
+t172	CL-77	// t172 — CL-77 (P-58): Fog Night's own sectioned score. On the fog night the fight plays fight_fognight (tools/fog.py), // cut into the sam
+t173	GB-119	// t173 - GB-119 (P-96): the true ending in the world. Once the ending has come (CL-111's rune finish unlocked), a // rune-etched pistol lie
+t174	CL-101	// t174 - CL-101 (P-144): the Hollows sound alive. Below, the topside's wind goes quiet and the warren's own sound comes // up: the room, dr
+t175	CL-81	// t175 - CL-81 (P-68): the kick-free's let-go. Hauled by the guardian, the last E press: the rules are done at once (no // scripted kill, 5
+t176	CL-82	// t176 - CL-82 (P-84): the caves and the pit sound alive. Standing at a cave mouth the cave breathes (a rush of air in // and out, a low hu
+t177	CL-83	// t177 - CL-83 (P-85, D-68): night stays dark but the dangerous kinds can be picked out. At night, a brute 25 m off // glows faintly in its
+t178	CL-85	// t178 - CL-85 (P-99): the guardian's last fight has its own music. A silenced day below loads it; through the rune door // the heart's son
+t179	CU-82	// t179 - CU-82 (Jerry): the HQ is locked down at night. From the alarm to the morning E at the kiosk, the Armory, the // CIF and the HQ pan
+t18		 (async () => { const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m); const wait = (ms) => new Pr
+t180	CL-113	// t180 - CL-113 (Jerry): the Armory overhaul. // - The kiosk sells attachments; buying one doesn't put it on. The Armory's workbench does (
+t181	CL-114	// t181 - CL-114 (Jerry): a gun's camo is chosen in the Armory, not the CIF; the supply terminal sells only guns in stock // tonight, and on
+t182	CL-115	// t182 - CL-115 (Jerry): the Training Ground. From the title menu straight into the range (no insertion): five // pop-up targets past a yel
+t183	GB-124	// t183 - GB-124 (Jerry): unarmed, his arms hang at his sides instead of sticking straight out in front of him. // - Standing unarmed: each 
+t184	GB-125	// t184 - GB-125 (Jerry): a natural tactical crouch. // - Crouched (hold C), armed: the hips are clearly lower, both boots are on the ground
+t185	GB-127	// t185 - GB-127 (Jerry): every gun that can fire full auto starts on AUTO. // - A new run: the M4, AK and AA-12 (fire selector) show AUTO a
+t186	GB-128	// t186 - GB-128 (Jerry): the new key layout. // - 1 night vision, 2 flashlight, 3 laser, 4 holster/draw, X fire selector (SEMI / AUTO). One
+t187	GB-129	// t187 - GB-129 (Jerry): shoulder-fired long guns are shouldered. // - m4, ak, aa12, shotgun, sniper, launcher: the butt sits in the gun-si
+t188	GB-130	// t188 - GB-130 (Jerry): every player gun at its real size for the marine, and the hands on explicit anchors. // - Size: TT.getWeaponSizeDb
+t189	GB-130	// t189 - GB-130 (Jerry): the stowed guns (slings, pack holsters, the hip) at their real in-hand size and snug // against him. For eight loa
+t19		 (async () => { const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m); const wait = (ms) => new Pr
+t190	CU-86	// t190 - CU-86 (P-141, for GP-84): the Hollows' snapshot and pickup receipts. state() gives his live depth from where // he stands and ever
+t191	CU-72	// t191 - CU-72 (P-143): passages. A cleared warren opens a passage at its Deep for the rest of the run: E there takes him // up out of the 
+t192	CU-87	// t192 - CU-87: while he is on the M240B the mortar's dotted arc stays off and the reticle keeps no mortar line-of-fire // colour; the gun 
+t193	CL-120	// t193 - CL-120 (Jerry, through Antigravity): the crouch keeps his boots on the ground on a slope too. // Crouched on a hillside, facing up
+t194	CL-84	// t194 - CL-84 part 2: the magazine change through the studio (studio/clips/marine/reload-rifle.json, a hand path clip). // For the GW-4 (m
+t195	CL-122	// t195 - CL-122 (GB-130, GP-128): the hands. // - The support anchor is inside the support arm's reach for every two-handed gun (the flamer
+t196	GB-94	// t196 - GB-94 follow-up (Jerry, 2026-10-05 8:27 PM; written as t194, moved here after CL-84 part 2 took t194): "1. Rarer on 1, progressive
+t197	GB-132	// t197 - GB-132 (ChatGPT's GP-72 request, 2026-10-05): the pistol's no-sear banner on X (toggleFireMode) takes its // second line from the 
+t198	GB-94	// t198 - GB-94 (written as t193, then t195; moved here 2026-10-05 after CL-120 took t193 and CL-122 took t195) (P-79, Jerry 2026-10-05): th
+t199	CL-84	// t199 - CL-84 (Jerry's "good", 2026-10-05): the marine's walk and run are the studio's clips. // - Both clips load (studio/clips/marine/wa
+t2	GB-45	// t2 - deck placement probe. GB-45 (GB-A9): three wall+platform cells give a deck well above the // ground. GB-46: in a started match (tryP
+t20		(async () => { const T = window.TT; const wait = (ms) => new Promise(r => setTimeout(r, ms)); const out = []; await startMatch(T, 'TestMarin
+t200		// t200 - the "night N" console cheat (Jerry, 2026-10-06): jump a run to a night for a playthrough. // - "night 5": day 5's prep (the day be
+t201	GB-133	// t201 - GB-133 (Jerry's playthrough 1, 2026-10-06): two bugs. // (1) "When you reload the launcher, 6 casings come out for every 1." The 4
+t202	GB-136	// t202 - GB-136 (D-77, Jerry's playthrough 1): the maimed dead. One leg off: it hops at 75% of its speed. Both legs off: // it crawls (35%,
+t203	CU-88	// t203 - CU-88: charge the Hush, E at a cave mouth goes down for real, and the alarm still // sounds once he is back up. Jerry: the second 
+t204	CL-127	// t204 - CL-127 (Jerry's playthrough 1, 2026-10-06): the radio mast. "Make it more obvious how to repair it, the repair // bar more noticea
+t205	GB-135	// t205 - GB-135 (D-77, Jerry 2026-10-06, playthrough 1): the horde, faster and a mass. (Reserved as t204 in the GB-135 // check-in; CL-127 
+t206	GB-134	// t206 - GB-134 (Jerry's playthrough 1, 2026-10-06): the grenade's arc. Hold G: an arc grows from a // short lob (a tap) to the longest thr
+t207	CL-125	// t207 - CL-125 (Jerry's playthrough 1, 2026-10-06): the CIF's Gravewalker. // - He opens still (no turning until you ask: GP-138) with the
+t208	CL-126	// t208 - CL-126 (Jerry's playthrough 1, 2026-10-06): the walk and the run, and his breath after a run. // - "He kinda bobs back and forth i
+t209	CL-129	// t209 - CL-129 (Jerry's playthrough 1, D-77): the maimed dead move like it. // - One leg off (GB-136: z.hopping): it hops on the leg it ha
+t21		 (async () => { const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m); const wait = (ms) => new Pr
+t210	CL-130	// t210 - CL-130 (Jerry's playthrough 1: "We need unique sounds for the different zombies"). // - Every walker kind has its own throat (core
+t211	GB-138	// t211 - GB-138 (Jerry's playthrough 1: "Watchmen MG never got created"): the Watchman made real. Its rounds leave // its own muzzle (not t
+t212	GB-139	// t212 - GB-139 (GB-133 and GB-134's follow-up, GP-142's lines): build upgrades are findable and the hold-G throw is // told. While he plac
+t213	CL-131	// t213 - CL-131 (from GB-138): the Watchman MG, carried and fired. // - Manned, the gun tips with the aim on its own hinge (the tripod stay
+t214	GB-137	// t214 - GB-137 (Jerry's playthrough 1: "True Magazine and reload system never got implemented"): a reload swaps a // real magazine. R pock
+t215	CL-132	// t215 - CL-132 (Jerry, 2026-10-07: "whats the deal with all these alien like symbols?"): no mojibake. On 2026-10-06 // index.html was once
+t216	CL-133	// t216 - CL-133 (Jerry, 2026-10-08: "make all of the player's movements and animations smooth and fluid"). // - The eases are frame-rate fr
+t217	GB-144	// t217 - GB-144 (Jerry, 2026-10-08: "look at all the suppressors. Make them fit the guns better"). // Each of the six cans (CL-95) is measu
+t218	GB-145	// t218 - GB-145 (GB-188: the single magazine guns; the rest is t262) (Jerry, 2026-10-08: "work on all the reload animations. Especially in 
+t219	CU-94	// t219 - CU-94 (Jerry): a switch in the Training Ground that turns the lights off. It is on the range side of the // doorway to the build r
+t22		(async () => { const T = window.TT; const out = []; const wait = (ms) => new Promise(r => setTimeout(r, ms)); await startMatch(T, 'TestMarin
+t220	CL-134	// t220 - CL-134 (Jerry, 2026-10-09: "overhaul all weapons sounds ... impactful and fun to hear"). The guns are played // from banks built b
+t221	GB-146	// t221 - GB-146 (Jerry, 2026-10-09: "The sniper bolt is on the wrong side. Move it to the other side of the gun and make // an animation fo
+t222	CU-96	// t222 - CU-96 (Jerry): the aiming system. The cursor is put, through the real pointer and the real camera, on a still // zombie's head, ch
+t223	CL-135	// t223 - CL-135 (Jerry, 2026-10-09: "Good job on the low end. Definitely keep that. The reloads though sound like bones // clinking togethe
+t224	GB-148	// t224 - GB-148 (Jerry, 2026-10-09: "Revolver sticks out too much from pack and is not tight when holstered. Also could // you change the w
+t225	CU-97	// t225 - CU-97 (Jerry, 2026-10-09): the grenade. "The grenade arc needs to be distinct and also faster and more simple // than the mortar. 
+t226	GB-149	// t226 - GB-149 (Jerry, 2026-10-09: "the top half of the players body moves faster than his legs can keep up on rotation. // I need them to
+t227	CU-98	// t227 - CU-98 (Jerry, 2026-10-09: "Players ankles become detached from boots during crouch, player looks like his // ankles are sliding ou
+t228	CU-100	// t228 - CU-100 (Jerry, 2026-10-09: "Player hand placements for weapons are not accurate. They need to be in the right // spots for all wea
+t229	GB-151	// t229 - GB-151 (Jerry, 2026-10-09 15:35 CT, with a photo of a 1911 held two-handed, thumbs forward: "This picture shows // what proper pis
+t23		 (async () => { const T = window.TT; const A = T.AudioSys; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m); const
+t24		 (async () => { const T = window.TT; const A = T.AudioSys; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m); const
+t240	GB-152	// t240 - GB-152 Phase A (Jerry, 2026-10-09 16:57 CT: "Make hands that have real finger."): the fingered hands. // - Each of the player's wr
+t241	CU-103	// t241 - CU-103: crouch in front of the parish cross. He is healed, he glows gold, and it works once this day. (async () => { const T = win
+t242	GB-154	// t242 - GB-154 (Jerry, 2026-10-09: "the pistol['s] slide and frame are too short and do not reach the muzzle like a // pistol should. The 
+t243	CU-105	// t243 - CU-105 (Jerry): the Watchman MG was sinking into the platform, and neither it nor // the mortar could be set on that mount. A set-
+t244	GB-156	// t244 - GB-156 (Jerry, 2026-10-09: "Could you make the animation for mounting both the mortar and the Watchman MG a // little more realist
+t245	CU-106	// t245 - CU-106 (Jerry: corpses all sprawl the same way). Ten death poses, chosen from how // he died: a chest shot sprawls on his back, a 
+t246	CU-114	// t246 - CU-114 (Jerry: right-click aim tilts the camera). Same zoom as before, but on // every weapon except the sniper the rig drops to a
+t247	GB-158	// t247 - GB-158 (Jerry 2026-10-11, 2:24 AM CT, after the speed table): "let us set the baseline speed of the shambler at // 4.3 with a lung
+t248	CU-116	// t248 - CU-116 (Jerry: turrets shoot through built walls). A light turret on the // ground does not hurt a zombie on the far side of a wal
+t249	CU-127	// t249 - CU-127 and D-86: Jerry's New-Hit.xlsx. A tagged body hit deals that percent of // this body's own max health. 100 is the whole bar
+t25		 (async () => { const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m); const wait = (ms) => new Pr
+t250	CU-128	// t250 - CU-128: camp fires start out. Lighting one makes it burn. The next daybreak puts it out. // Lighting every camp is only counted, f
+t251	CU-129	// t251 - CU-129: hugging the lip of a cave mouth still wakes the guardian. The grab used // to cover only 80% of the opening, so the ragged
+t252	GB-167	// t252 - GB-167 (Jerry, 2026-10-13): "The X button to switch between semi and full auto needs a little click sound. // Also a small little 
+t253	CL-193	// t253 - CL-193 (Jerry, 2026-10-14) made V a Max Payne shootdodge: a dive in slow motion, with a meter the dive drained // and that refille
+t254	GB-170	// t254 - GB-170 (Jerry, 2026-10-14): the relaxed hang. Arms straight down, palms against the outer thigh (the palm // faces the leg, the ba
+t255	CU-147	// t255 - CU-147: the smoking idle holds the filter at the lips and points the ember away from the face. (async () => { const T = window.TT,
+t256	CL-205	// t256 — CL-205 (story v3, Jerry): nobody rescued, nobody pats the earth down: the grave fills on its own while the camera // holds, and th
+t257	CL-204	// t257 — CL-204 (story.md §3, v3): the orders card at the drop. In his hand while he drops (from 0.7 s to 5.4 s of the // insertion), the P
+t258	CL-206	// t258 — CL-206 (story.md §5, v3): the wall of tags. Nine nails under the HQ mural; one tag hangs for each tag brought up // (the profile's
+t259	CU-150	// t259 — CU-150: Quit asks before it ends a run. Closing the tab writes the run down and // asks the browser to confirm. Reset profile asks
+t26		(async () => { const T = window.TT; const wait = (ms) => new Promise(r => setTimeout(r, ms)); const out = []; await startMatch(T, 'TestMarin
+t260	GB-183	// t260 - GB-183 (docs/specs/secret-quest.md 4): the night after a silenced day. A right send in the prep (the quest's // 'silenced') plans 
+t261	GB-182	// t261 - GB-182 (road-to-1.0 #2: "Winning has a hidden condition"): Heron only comes on the relay, and now the game // says so. From the mo
+t262	GB-188	// t262 - GB-188: t218 split for the 180 s limit; this half is akimbo, the revolver and launcher parts, the shotgun. GB-145 (Jerry, 2026-10-
+t263	CL-216	// t263 - CL-216 (D-82, docs/specs/day-missions.md §6): the utility truck's day mission (game/truck-mission.js). // Jerry: "This one is good
+t264	GB-196	// t264 - GB-196 (D-82, docs/specs/day-missions.md section 3): the hikers' first-aid kit. The bag hangs on a rope over a // bough by the riv
+t265	GP-19937	// t265 - GP-19937/GP-19965: medical convoy jack, sleeper and cooler. (async () => { const T = window.TT, THREE = T.THREE, out = [], ok = (v
+t266	CL-217	// t266 - CL-217 (D-82, docs/specs/day-missions.md §2): the ranger cache's day mission (game/ranger-cache.js). // Jerry: "make sure players 
+t267	GB-197	// t267 - GB-197 (D-82, docs/specs/day-missions.md section 5): the fuel depot, carry it home. Hold E at the depot's pump // fills a jerrycan
+t268	AG-93	// t268 - AG-93 / AG-124 (D-82, D-88, docs/specs/day-missions.md §4): the trapper's safe path (game/trapper-path.js). // Eight rows of two s
+t27		(async () => { const T = window.TT; const wait = (ms) => new Promise(r => setTimeout(r, ms)); const out = []; await startMatch(T, 'TestMarin
+t270	CL-227	// t270 - CL-227: every zombie body's skeleton is one fixed size. three writes a skeleton's length into the skinning // vertex shader, so ea
+t271	CL-237	// t271 - CL-237: in the night proper the sun's shadow map is redrawn as the night comes, when he walks 16 m from // where it was drawn, and
+t272	CL-241	// t272 - CL-241: the marine's shadow proxy (CL-140) is built at load and kept. GP-19952 found its node build and shadow // pipeline in nigh
+t273	CL-244	// t273 - CL-244 (D-86, Jerry's balance pass): from night 11 a zombie's hit on the player lands harder, +2.5 % a night // (x1.25 on night 20
+t274	GB-221	// t274 - GB-221 (D-87, friends' playtest 2026-10-23): killed by a cave's guardians while running from the dead, the // dead froze. While th
+t275	AG-119	// t275 - AG-119 (D-87): Coldwater's church shell has wall solids (sill height under windows, front door and aisle to // the cross open). He
+t276	CL-247	// t276 - CL-247 (D-87, Jerry after his friends' playtest: "The aiming system is not working well and frustrates the // players ... No more 
+t277	GB-222	// t277 - GB-222 (D-87, for CL-249 true first person): each gun's sight point (game/sight-points.js) sits on its own // gun: above the bore,
+t278	GP-19960	// t278 — GP-19960 / D-87: a corpse falls from the height where its zombie died, // rests on a deck or build top, and falls again if that su
+t279	CL-249	// t279 - CL-249 (D-87, Jerry after his friends' playtest: "We are going to assign a button that switches the player from 3rd // person to 1
+t28		(async () => { const T = window.TT; const wait = (ms) => new Promise(r => setTimeout(r, ms)); const out = []; await startMatch(T, 'TestMarin
+t280	CL-250	// t280 - CL-250 (GB-223, Grokbot's first-person review of CL-249 as the guns' owner): from his eyes at the hip only a // muzzle tip showed 
+t281	GB-229	// t281 - GB-229 (N9, Jerry: "Instead of having the player reload, let's have them auto-reload on empty. I've heard that // complaint too ma
+t282	GB-230	// t282 - GB-230 (N10, Jerry: "Night 1 waves too staggered. Need them to all come at once."): night 1 is one push. All // fifteen come (D-29
+t283	GB-227	// t283 - GB-227 (N12, Jerry: "a circle appears around the muzzle and the water disappears inside it"): a gun's muzzle flash // ball is alwa
+t284	GB-228	// t284 - GB-228 (N11, Jerry: "first person weapon sights not FPS accurate"): aimed in first person, each iron-sighted gun's // rear sight t
+t285	GP-19967	// t285 - GP-19967: the player sees three supply views with prices and unlock paths. (async () => { const T = window.TT, out = []; const ok 
+t286	CL-257	// t286 - CL-257 (Jerry's N26, his second playthrough): "after rebooting the relay the door to the storage facility was // already open with
+t287	CL-258	// t287 - CL-258 (Jerry's N2): "Very difficult to interact with mini-game menus. For instance the puzzles like the breaker // in 3rd person 
+t288	CU-159	// t288 — CU-159: brightness, vibrancy, and the first-person field of view. // Brightness is the renderer's exposure (1 = today). Vibrancy i
+t289	CL-260	// t289 - CL-260 (Jerry's N17): "In first person you can't see the information you usually do in third person. For instance, // if you grab 
+t29		 (async () => { const T = window.TT; const A = T.AudioSys; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m); const
+t290	CL-262	// t290 - CL-262 (Jerry's N14 and N15). // N14: "Storms and rain happen a bit too often: about half as often. A grace period with no storms 
+t291	CL-260	// t291 - CL-260 (Jerry's N5): "Right click and run while in first person causes the camera to rapidly shift up and down." // Down the sight
+t292	CL-263	// t292 - CL-263 (docs/specs/story-chain.md; Jerry's N24: "They should chain together in one elegant story that plays out // and becomes ava
+t293	CL-260	// t293 - CL-260 (Jerry, 2026-10-25: "The cursor cross-hairs need to contract upon zoom not get further apart."). Aiming // steadies the gun
+t294	CL-264	// t294 - CL-264 (Jerry's N16: "Collecting the boots off the skeleton is one of the funniest things ever. The player should // have to yank 
+t295	CL-256	// t295 - CL-256 batch 2 (the sweep's findings against docs/world-design.md): // - rule 8: no camp's tent stands on its trail (the hikers' c
+t296	CL-261	// t296 - CL-261 (Jerry's N6: "Player model motions and especially arm and body movements while unarmed running look // pretty goofy"). The 
+t297	CL-261	// t297 - CL-261 (Jerry's N20: "Ladder climbing still does not land accurately with hands and feet on actual rungs"). // Up the radio mast's
+t298	CU-160	// t298 — CU-160: twenty seconds of walking, turning and aiming, saved and replayed. // The player's path and the camera match the recording
+t299	CL-261	// t299 - CL-261 part 2 (Jerry's N25: "Knife animations and body movement while using knife, machete, katana sucks"). // The knife's stab ge
+t3	GB-45	// t3 - stack rules probe. GB-45 (GB-A9): the supported stacks all go up, and a platform // won't sit on sandbags. GB-46: what the turret an
+t30		(async () => { const T = window.TT; const out = []; const wait = (ms) => new Promise(r => setTimeout(r, ms)); await startMatch(T, 'TestMarin
+t300	CU-162	// t300 — CU-162: pooled eyes come back at their authored brightness, and a death fades from it. (async () => { const T = window.TT; const o
+t301	GP-19969	// GP-19969: the actual HQ stations, lead flow, reach/run guards and alarm separation. (async () => { const T=window.TT,out=[],ok=(c,m)=>out
+t302	CL-259	// t302 - CL-259 (Jerry's N30: "The Hollows are completely broken ... the camera freaks out and clips rapidly in and out // of the ground, n
+t303	CL-263	// t303 - CL-263 part 2 (docs/specs/story-chain.md §4: each lead's "what changes"): the world answers what he's done. // The generator (day 
+t304	GB-232	// t304 - GB-232 (places; docs/specs/story-chain.md 6): with the gate on, day 3, 'story done oldman' finds Okafor in the // trapper's cellar
+t31		(async () => { const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m); const wait = (ms) => new Pro
+t32		(async () => { const T = window.TT; const out = []; const wait = (ms) => new Promise(r => setTimeout(r, ms)); await startMatch(T, 'TestMarin
+t33		(async () => { const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m); const wait = (ms) => new Pro
+t34	GB-34	(async () => { const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m); const wait = (ms) => new Pro
+t35		(async () => { const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m); const wait = (ms) => new Pro
+t36		 (async () => { const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m); const wait = (ms) => new Pr
+t37		 (async () => { const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m); const wait = (ms) => new Pr
+t38		(async () => { const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m); const wait = (ms) => new Pro
+t39		(async () => { const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m); const wait = (ms) => new Pro
+t4	GB-45	// t4 - aiming at a wall run's decks. GB-45 (GB-A9): the run stands, and the camera is the // third-person one, up and behind the marine. GB
+t40		(async () => { const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m); const wait = (ms) => new Pro
+t41		(async () => { const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m); const wait = (ms) => new Pro
+t42		(async () => { const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m); const caves = T.POI.caves; c
+t43		 (async () => { const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m); const wait = (ms) => new Pr
+t44		(async () => { const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m); for (const c of T.POI.caves)
+t45		(async () => { const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m); // One water surface; river 
+t46	CL-4	// t46 — caveWarn(cave, level): the wave director's hook for a cave about to open (CL-4). (async () => { const T = window.TT; const out = []
+t47	CL-5	// t47 — waterAt(x, z) and felled trees as colliders (CL-5). (async () => { const T = window.TT; const out = []; const ok = (c, m) => out.pu
+t48	GB-4	// t48 — GB-4: wave director caveWarn levels (1 prep / 2 beginWave / 0 on clear) + cave roles stamp. (async () => { const T = window.TT; con
+t49	GB-5	// t49 — GB-5: floors / stairs / bridges / cover match visuals (walk, collide, block) (async () => { const T = window.TT; const out = []; co
+t5		(async () => { const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m); const wait = (ms) => new Pro
+t50	CL-10	// t50 — tree batches (CL-10): far trees draw from merged cells, anything near or changed draws itself. (async () => { const T = window.TT; 
+t51	GP-7	// t51 - GP-7: getRepairSnapshot full-HP vs gone; getRepairTarget damaged-only; reportPurchase on paid repair. (async () => { const T = wind
+t52	CL-12	// t52 — the seven objective props (CL-12): where they stand, what they look like per state, and // that the player's approach stays clear. 
+t53	GB-14	// t53 — GB-14: guardian night acceptance (combat-phase2 §4 + D-13) (async () => { const T = window.TT; const out = []; const ok = (c, m) =>
+t54	GB-16	 // t54 — GB-16: objectives combat side (radio defenders, grants, player-damaged) (async () => { const T = window.TT; const out = []; const 
+t55	CU-11	// t55 — CU-11: getObjectiveInteraction reach, press, and hold on one site. (async () => { const T = window.TT; const out = []; const ok = (
+t56	GB-22	 // RETIRED GB-22 / D-20: death replay withdrawn (Jerry); combat helpers and t56 checks removed. Live cave/pit deaths stay (t36/t37). (async
+t57	GP-41	(async () => { const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m); try { ok(typeof T.caliberOf 
+t58	GB-49	 (async () => { const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m); const wait = (ms) => new Pr
+t59		(async () => { const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m); const wait = (ms) => new Pro
+t6		(async () => { const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m); const wait = (ms) => new Pro
+t60	CL-24	// t60 — CL-24/25: the music director, Jerry's rhythm. One piece of music at a time: the alarm // cuts the music and its sting plays alone; 
+t61	CL-26	// t61 — CL-26: the wave finisher. The last kill of a wave: a red pulse, the fight music cut // dead and the relief sting alone with every o
+t62	CU-31	// t62 — CU-31 (D-30, D-31): no morning save, and the ways-to-die collection lasts across runs. (async () => { const T = window.TT; const ou
+t63		 (async () => { const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m); const wait = (ms) => new Pr
+t64	CL-19	// t64 — CL-19: the watchtower's railings stop the marine. On the deck he can walk up to the // rails but not through them; the ladder gap o
+t65	CL-20	// t65 — CL-20: the pit. Bubbles rise over the hole and pop on the surface while the marine // is anywhere near; far away they sleep. The te
+t66	CL-18	// t66 — CL-18: puddles lie on the ground. Each is draped over the terrain under it, so no // half of it sinks into a slope, and they only g
+t67	CL-22	// t67 — CL-22: the world's voices. A poked cave's guardian screeches (D-25 'aggro'), the pit // rumbles when the grab starts and now and th
+t68	GB-36	// t68 - GB-36: a bought gun comes with full ammo; spare capacity and the starting spare are x1.4. (async () => { const T = window.TT; const
+t69	GB-39	// t69 - GB-39 (GB-A1): fighting the wave at its own cave mouth doesn't poke the cave, and a // round that hits a zombie doesn't count. A cl
+t6a	GB-45	// t6a - drag-placing a wall row. GB-45 (GB-A9): the drag starts and ends on the cells aimed at, // and every cell of the row is placeable. 
+t7		 (async () => { const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m); const wait = (ms) => new Pr
+t70	GB-40	// t70 - GB-40 (D-29, GB-A7): day 1 is 15 shamblers. 7 or 8 claw up out of the ground in the // treeline 35-60 m from the HQ, out of the cam
+t71	GB-42	// t71 - GB-42 (GP-A1, GB-A3): day-1 skulls you can see and keep. Every day-1 kill drops a skull // (no 8-value pooling), skulls don't expir
+t72	CL-45	// t72 — CL-45 / D-28, CL-41 and D-39 (CL-56): the sky follows the loop. Prep is daylight and // holds before dusk; the alarm brings the nig
+t73	CL-42	// t73 — CL-42: day 1's song follows the wave. Its sections sit in one Opus file played by the // Web Audio section player: stalk while the 
+t74	GB-43	// t74 - GB-43 (D-32): day 1, two or three shamblers guard the POI nearest the HQ. They hold // their post until the marine comes close, one
+t75	GB-50	// t75 - GB-50 (Jerry, item 6): zombies hold a contact ring round the marine (they crowd him, // they never stand inside him) and a hit land
+t76	GB-51	// t76 - GB-51 (Jerry): zombies need an idle. A zombie with nothing to chase (the POI guards, // one waiting) sways, breathes, turns its hea
+t77	GB-52	// t77 - GB-52 (Jerry): the knife and the chainsaw are a bit too strong. Less per hit on the // bigger kinds, a longer knife recovery, and t
+t78	GB-53	// t78 - GB-53 (Jerry, item 1): nights 1 to 20 as fun as they can be. Every night has its own plan // (NIGHT_PLAN): the horde sizes stay, bu
+t79	GB-54	// t79 - GB-54 (Jerry, item 3): the guardian's grab, drag and chase, and the pit's tentacles, as // polished as they can be. No snapping or 
+t8	GB-45	// t8 - builds and an open door with railing place mode on through the start of a wave. GB-45 // (GB-A9): every piece stands and the door is
+t80	GB-56	// t80 - GB-56 (the 20 nights played through): a spit holder (the spider, the only kind with 'spit' // tactics) holds its firing line only w
+t81	CL-55	// t81 — CL-55 (CU-39): the rune bands in the pit are never under the drawn lake bed. The black // specks cutting the runes were bed triangl
+t82	CL-53	// t82 (was t80) — CL-53 (Jerry): no fish over the pit. The black specks over the runes were fish that had // swum over the sinkhole and dow
+t83	GB-57	// t83 - GB-57 (D-37, D-38): the day's bounties, the combat side. From night 2 each prep posts // guards at one POI (two from night 8): neve
+t84	CL-64	// t84 - CL-64 (D-41): the cave drag is a studio scene (studio/scenes/guardian-grab-drag.json) played // on the game's own guardian and mari
+t85	GB-60	// t85 - GB-60 (P-1): the skulls you earn reach the bag, every night. At the last kill of any night // the skulls still on the field fly int
+t86	GB-61	// t86 - GB-61 (P-2): from night 2 a skull within 4 m zips into the bag; skulls last 45 s instead of // 30; a big drop (100 or more) still n
+t87	GB-62	// t87 - GB-62 (P-3): a build refusal says why, on the place banner while he aims and on the banner // when he clicks. Four cases: short of 
+t88	GB-63	// t88 - GB-63 (P-4): T and X act on his own storey only, never through a floor. Two storeys: three // walls with platforms on them. From th
+t89	GB-64	// t89 - GB-64 (P-5): a mortar at a deck's rim keeps him on the deck, and folding stairs won't fold from // under him. A mortar in the middl
+t9		 (async () => { const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m); const wait = (ms) => new Pr
+t90		// t90 - hits still flinch, stagger and knock down (the reaction that played with Ragdoll off). // A close shell's pellets are one hit: at 1
+t91		// t91 - deaths still topple (the path that played with Ragdoll off). A close shell slides the // corpse 1-2 m and knocks the zombie behind 
+t92	GB-50	// t92 - the marine has no reacting body (Jerry, 2026-10-09). A shambler's swipe is GB-50's // stumble, and a brute still puts him on one kn
+t93	GB-68	// t93 - GB-68 (P-73): zombies stand on their feet. The legs hang about 0.81*s under the hips but the hips sat at // 0.55*s, so every walker
+t94	CU-50	// t94 - CU-50 (P-23): damageBuild publishes dw-game build-hit. One event when a wall // drops to about 40%, silence for the next hit inside
+t95	GB-69	// t95 - GB-69 (P-8): the laser does what the kiosk sells ("Tighter groups"). While it's on and the gun in hand // carries one, aimDirWithSp
+t96	GB-59	// t96 - GB-59 (CU-42 brought back): the fog cull. A zombie past the fog's far edge (+8 m) along the camera's view // axis is not drawn (mes
+t97	GB-74	// t97 - GB-74 (P-22, D-52): streaks heal. From the 5th kill of a streak, each of the marine's own kills gives // back 1 HP (2 from the 20th
+t98	GB-59	// t98 - The megaswarm as the benchmark for hordes (Jerry, 2026-09-27). A horde of shamblers spawned by the // `megaswarm` dev command walks
+t99		// t99 - Leading the megaswarm round the map (Jerry, 2026-09-27: "the entire remaining horde teleports // somewhere when leading them around
+tfish		(async () => { const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m); const wait = (ms) => new Pro
+tinspect	CL-196	// CL-196 (Claude): the inspector (studio/inspector/) attaches to a running game through TT.inspectHost(), every subject // in its catalog b

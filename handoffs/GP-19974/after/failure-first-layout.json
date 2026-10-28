@@ -1,0 +1,21 @@
+{
+  "error": "Error: camera layout fp/day/1280\n    at must (file:///C:/Users/Zero/Desktop/Tiny%20Trek/handoffs/GP-19974/verify.mjs:6:73)\n    at file:///C:/Users/Zero/Desktop/Tiny%20Trek/handoffs/GP-19974/verify.mjs:74:3",
+  "logs": [
+    "PASS recordings are unavailable before actual recovery",
+    "PASS existing native convoy behavior check passes all 30 assertions",
+    "PASS actual cooler claim leaves no empty cooler behind",
+    "PASS cab and rear doors remain open after claim",
+    "PASS cab radio opens only within its real prop reach",
+    "PASS stale/wrong-device close refused and first-person pointer released",
+    "PASS eight-second radio log becomes learned evidence",
+    "PASS the real recovered kit places its camera on the camp pouch",
+    "PASS recovered camera is built and visible in the actual world",
+    "PASS full camera playback records its clue after eight seconds",
+    "PASS camera layout tp/day/1280",
+    "PASS camera layout tp/day/390",
+    "PASS camera layout tp/night/1280",
+    "PASS camera layout tp/night/390",
+    "FAIL camera layout fp/day/1280"
+  ],
+  "errors": []
+}

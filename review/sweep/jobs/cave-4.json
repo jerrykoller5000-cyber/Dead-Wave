@@ -4,7 +4,7 @@
    "cam": {
     "x": -186.76,
     "y": 4.7299999999999995,
-    "z": 8.780000000000001,
+    "z": 8.78,
     "tx": -186.76,
     "ty": 6.430000000000001,
     "tz": -7.22,
@@ -74,7 +74,7 @@
    "cam": {
     "x": -175.56,
     "y": 11.23,
-    "z": 3.9799999999999995,
+    "z": 3.98,
     "tx": -186.76,
     "ty": 6.23,
     "tz": -7.22,
@@ -83,62 +83,6 @@
    "time": "night",
    "caption": "East Cave: at night",
    "out": "review/sweep/cave-4/cave-4-night.png"
-  },
-  {
-   "cam": {
-    "x": -185.8,
-    "y": 4.83,
-    "z": -15.8,
-    "tx": -189,
-    "ty": 3.63,
-    "tz": -19,
-    "fov": 50
-   },
-   "time": "noon",
-   "caption": "invisible-wall: a collider (r 0.8 m, 3.23 to 61.92 m) with nothing visible there",
-   "out": "review/sweep/cave-4/cave-4-suspect-1.png"
-  },
-  {
-   "cam": {
-    "x": -183.8,
-    "y": 4.550000000000001,
-    "z": -15.8,
-    "tx": -187,
-    "ty": 3.35,
-    "tz": -19,
-    "fov": 50
-   },
-   "time": "noon",
-   "caption": "invisible-wall: a collider (r 0.8 m, 2.95 to 61.92 m) with nothing visible there",
-   "out": "review/sweep/cave-4/cave-4-suspect-2.png"
-  },
-  {
-   "cam": {
-    "x": -192.8,
-    "y": 4.800000000000001,
-    "z": -14.8,
-    "tx": -196,
-    "ty": 3.6,
-    "tz": -18,
-    "fov": 50
-   },
-   "time": "noon",
-   "caption": "invisible-wall: a collider (r 0.8 m, 3.2 to 61.92 m) with nothing visible there",
-   "out": "review/sweep/cave-4/cave-4-suspect-3.png"
-  },
-  {
-   "cam": {
-    "x": -196.8,
-    "y": 4.68,
-    "z": -10.8,
-    "tx": -200,
-    "ty": 3.48,
-    "tz": -14,
-    "fov": 50
-   },
-   "time": "noon",
-   "caption": "invisible-wall: a collider (r 0.8 m, 3.08 to 61.92 m) with nothing visible there",
-   "out": "review/sweep/cave-4/cave-4-suspect-4.png"
   }
  ],
  "out": "review/sweep/cave-4/",

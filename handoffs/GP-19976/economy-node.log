@@ -1,0 +1,12 @@
+✔ equipment, gear and upgrades keep one price on every night (0.6567ms)
+✔ guns arrive by act and stay stocked thereafter (1.1303ms)
+✔ invalid quotes cannot create a negative, fractional, unsafe or NaN charge (0.3995ms)
+✔ twenty-night budget includes the late skull trim and purchasable mod sinks (137.4967ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 219.6384

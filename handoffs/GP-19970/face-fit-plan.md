@@ -1,0 +1,11 @@
+# GP-19970 — nine humanoid face fittings
+
+Family: uncanny. Source/reference: AG-138 §3 rank 1, the 252 original `live/zombie-motion/` walk/body-hit images, and the smoothed head loft authored in `refineZombieFace`. Standard gameplay view is 6–9 m; close Inspector side view exposes the attachment gaps.
+
+Claude authorized only `combat/zombie-fidelity.js (refineZombieFace)` on 2026-10-28, with no contract change, and Grokbot received an FYI. That function handles Shambler, Feral, Leaper, Drowned, Military, Spitter, Bomber, Brute and Colossus. Screamer branches to `refineScreamerFace`, so its scope is separately requested from Claude. Spider, Demon, Guardian and Caveguard are excluded by the function.
+
+The current head loft front at eye height is about z 0.09–0.10 at x ±0.09, but each glowing eye's transformed back surface sits near z 0.135 (`position.z = 0.153 × scale`, sphere radius 0.045 × scale and z scale 0.40). This leaves roughly 3–5 cm of empty space. The socket at x ±0.085, y 0.038 has center z 0.126 and half depth 0.013, leaving another 1–3 cm gap; brows, cheek ridges and facial wounds use one fixed z plane while the loft turns away at the sides. Fit those anchors to the loft front surface, with slight overlap, and move the glowing eye centers to about z 0.105–0.11. Keep eyes visible, mouth/teeth legible, ears on the sides, and the headshot group unchanged. Preserve all materials and public function signatures.
+
+After the source is writable and CU-166 has completed its current chunk: change only `refineZombieFace`, run `node --check`, run native Inspector builder checks for the nine types, and capture front/side under noon, overcast, dusk and night, plus gameplay distance and a walk side pose. Compare each against its `live/zombie-motion/zombie.<type>-walk-f20-side.jpg`, inspect the back/side contact at close scale and have Antigravity score Construction/Integration. Current-tree load/fps and attack/death motion remain separate evidence. Rule 16 applies to every native run.
+
+At 2026-10-28 03:18 UTC, Cursor's CU-166 chunk still held the shared game-test slot. The earlier `studio/zombie-concepts.js` write for military pads was rejected while that chunk ran, so the face source should be re-read and hashed immediately before any edit. No face source change or after shot exists yet.

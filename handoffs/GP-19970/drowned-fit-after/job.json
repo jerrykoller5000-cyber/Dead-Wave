@@ -1,0 +1,17 @@
+{
+  "shots": [
+    {"target":"zombie.drowned:statue","view":"front","time":"noon","wait":300,"size":"1280x720","out":"handoffs/GP-19970/drowned-fit-after/noon-front.png"},
+    {"target":"zombie.drowned:statue","view":"side","time":"noon","wait":300,"size":"1280x720","out":"handoffs/GP-19970/drowned-fit-after/noon-side.png"},
+    {"target":"zombie.drowned:statue","view":"back","time":"noon","wait":300,"size":"1280x720","out":"handoffs/GP-19970/drowned-fit-after/noon-back.png"},
+    {"target":"zombie.drowned:statue","view":"front","time":"dusk","wait":300,"size":"1280x720","out":"handoffs/GP-19970/drowned-fit-after/dusk-front.png"},
+    {"target":"zombie.drowned:statue","view":"side","time":"dusk","wait":300,"size":"1280x720","out":"handoffs/GP-19970/drowned-fit-after/dusk-side.png"},
+    {"target":"zombie.drowned:statue","view":"back","time":"dusk","wait":300,"size":"1280x720","out":"handoffs/GP-19970/drowned-fit-after/dusk-back.png"},
+    {"target":"zombie.drowned:statue","view":"front","time":"night","wait":300,"size":"1280x720","out":"handoffs/GP-19970/drowned-fit-after/night-front.png"},
+    {"target":"zombie.drowned:statue","view":"side","time":"night","wait":300,"size":"1280x720","out":"handoffs/GP-19970/drowned-fit-after/night-side.png"},
+    {"target":"zombie.drowned:statue","view":"back","time":"night","wait":300,"size":"1280x720","out":"handoffs/GP-19970/drowned-fit-after/night-back.png"},
+    {"target":"zombie.drowned:statue","view":"side","time":"noon","dist":8,"fov":65,"wait":300,"size":"1280x720","out":"handoffs/GP-19970/drowned-fit-after/gameplay-distance.png"}
+  ],
+  "out":"handoffs/GP-19970/drowned-fit-after",
+  "sheet":true,
+  "cols":4
+}

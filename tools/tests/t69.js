@@ -5,6 +5,21 @@
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
   const until = async (cond, ms) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (cond()) return true; await wait(100); } return cond(); };
+  // GB-240 (rule 13): the wave wait measures the game's own clock, not the wall clock. A loaded page runs game time at a
+  // fraction of real time, so a wall-clock cap can expire while the wave is still legitimately coming out (CU-166 chunk-02
+  // went red at 179.6 s that way). The stall guard is only for a frozen page: no game time at all for 20 s of wall clock
+  // fails the check instead of running out the runner's 180 s limit.
+  const untilGame = async (cond, gameS, stallMs = 20000) => {
+    const g0 = T.getSimTime();
+    let lastG = g0, lastWall = Date.now();
+    while (T.getSimTime() - g0 < gameS) {
+      if (cond()) return true;
+      await wait(100);
+      const g = T.getSimTime();
+      if (g > lastG + 1e-6) { lastG = g; lastWall = Date.now(); } else if (Date.now() - lastWall > stallMs) return false;
+    }
+    return cond();
+  };
   try {
     ok(typeof T.caveBusyWithWave === 'function' && typeof T.spawnPlayerRound === 'function', 'GB-39 hooks exported');
     await startMatch(T, 'MouthFight');
@@ -79,8 +94,18 @@
     T.abortCaveChase();
     await wait(150);
 
+    // GB-240 (rule 13): night 1 holds its claw-ups until half its cave walkers are within DAY1_RISE_SYNC (60 m) of the HQ,
+    // or DAY1_RISE_MAX (75 s of game time). Standing out at the cave (~180 m from the HQ) for the wait leaves them held, so
+    // the wave never reads as all out before the check's own time runs out. He waits it out at the HQ; the wave is the same 15.
+    T.player.position.set(0, T.sampleHeight(0, 8), 8);   // beside the HQ, clear of its footprint
+    await wait(250);
+
     // Once the wave has all spawned and the mouth is clear, the assault cave is pokeable again.
-    const allOut = await until(() => T.zombies.filter((z) => z.alive).length >= (pv.total || 20), 30000);
+    // GB-241 (rule 13, Claude 2026-10-27): the wave's own state is the condition: every body spawned (waveSpawned >= waveTotal)
+    // or the old body count (either, since the test page's director count can lag the bodies).
+    // GB-240 (rule 13): the cap is 30 s of GAME time, not 120 s of wall clock. Night 1's fifteen need about four seconds of
+    // game time, so 30 s is a wide margin that a stalled wave still misses (the check then fails, as before).
+    const allOut = await untilGame(() => { const w = T.getWaveDirectorState(); return (w.waveTotal > 0 && w.waveSpawned >= w.waveTotal) || T.zombies.filter((z) => z.alive).length >= (pv.total || 20); }, 30);
     ok(allOut, 'the whole wave is out');
     const far = front(ca, 70);
     for (const z of T.zombies) if (z.alive) z.mesh.position.set(far.x + (Math.random() - 0.5) * 6, far.y, far.z + (Math.random() - 0.5) * 6);

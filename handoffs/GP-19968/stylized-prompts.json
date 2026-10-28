@@ -1,0 +1,72 @@
+{
+  "tool": "built-in image_gen",
+  "requestedBy": "Jerry, 2026-10-26: Make those hikers look more like game characters that exist not realist people.",
+  "jobs": [
+    {
+      "id": "maya-costa",
+      "prompt": "Use case: style-transfer.\nAsset type: one square portrait texture for the Grave Shift game's missing-hiker posters.\nInput 1 is the portrait to replace; keep its broad character identity, hairstyle, expression and hiking clothing. Input 2 is a reference screenshot of the game's EXISTING stylized 3D human characters; match that simple game-model visual language.\nPrimary request from the game creator: make these hikers look like game characters that exist in this world, rather than realistic people.\nCompletely redraw the first image as a rendered LOW-POLY 3D GAME CHARACTER, with an obviously constructed angular head, large simple facial planes, blocky nose, simple geometric eyes and eyebrows, chunky polygon hair masses, clean matte untextured surfaces and faceted clothing. Face anatomy must be visibly stylized and simplified, comparable to the simple character models in image 2. No photographic skin, pores, individual hair strands, photographic eyes, or realistic stubble. Do not merely put a polygon filter over a photograph. Do not draw a realistic portrait or a smooth cinematic character.\nSubject: Maya Costa, 27, woman with dark curly hair represented as a handful of chunky polygon clumps, fleece jacket and backpack straps, relaxed smile.\nComposition: one centered head and shoulders, face large and readable, full top of hair within frame, slight natural head angle. Background is a few simple low-poly mountain/forest shapes, very subdued.\nFinish: monochrome charcoal-gray on warm gray paper, as a photocopy OF A GAME CHARACTER RENDER; retain crisp polygon shading, controlled midtones and clear features, only minimal paper grain. All six should feel part of the same game and same poster series. No military gear, masks, weapons, horror changes, captions, letters, poster border, logos, watermarks or extra people. Square image.",
+      "referenced_image_paths": [
+        "C:/Users/Zero/Desktop/Tiny Trek/ui/assets/hikers/maya-costa.jpg",
+        "C:/Users/Zero/Desktop/Tiny Trek/qa/shots/2026-10-05-AG-50/survivors.png"
+      ],
+      "transparent_background": false,
+      "generatedSource": "C:\\Users\\Zero\\.codex\\generated_images\\01a16ec2-6bec-73f1-a414-3f710c524ae2\\exec-4cd7fcdd-26f1-4691-bd38-103995f1b9e6.png",
+      "finalPath": "ui/assets/hikers/maya-costa.jpg"
+    },
+    {
+      "id": "theo-marsh",
+      "prompt": "Use case: style-transfer.\nAsset type: one square portrait texture for the Grave Shift game's missing-hiker posters.\nInput 1 is the portrait to replace; keep its broad character identity, hairstyle, expression and hiking clothing. Input 2 is a reference screenshot of the game's EXISTING stylized 3D human characters; match that simple game-model visual language.\nPrimary request from the game creator: make these hikers look like game characters that exist in this world, rather than realistic people.\nCompletely redraw the first image as a rendered LOW-POLY 3D GAME CHARACTER, with an obviously constructed angular head, large simple facial planes, blocky nose, simple geometric eyes and eyebrows, chunky polygon hair masses, clean matte untextured surfaces and faceted clothing. Face anatomy must be visibly stylized and simplified, comparable to the simple character models in image 2. No photographic skin, pores, individual hair strands, photographic eyes, or realistic stubble. Do not merely put a polygon filter over a photograph. Do not draw a realistic portrait or a smooth cinematic character.\nSubject: Theo Marsh, 31, angular face, short wavy hair in chunky polygon clumps, a simple solid beard shape, hiking shell and backpack straps.\nComposition: one centered head and shoulders, face large and readable, full top of hair within frame, slight natural head angle. Background is a few simple low-poly mountain/forest shapes, very subdued.\nFinish: monochrome charcoal-gray on warm gray paper, as a photocopy OF A GAME CHARACTER RENDER; retain crisp polygon shading, controlled midtones and clear features, only minimal paper grain. All six should feel part of the same game and same poster series. No military gear, masks, weapons, horror changes, captions, letters, poster border, logos, watermarks or extra people. Square image.",
+      "referenced_image_paths": [
+        "C:/Users/Zero/Desktop/Tiny Trek/ui/assets/hikers/theo-marsh.jpg",
+        "C:/Users/Zero/Desktop/Tiny Trek/qa/shots/2026-10-05-AG-50/survivors.png"
+      ],
+      "transparent_background": false,
+      "generatedSource": "C:\\Users\\Zero\\.codex\\generated_images\\01a16ec2-6bec-73f1-a414-3f710c524ae2\\exec-25d26b5d-c78e-4106-a590-7f575282c8f1.png",
+      "finalPath": "ui/assets/hikers/theo-marsh.jpg"
+    },
+    {
+      "id": "sam-marsh",
+      "prompt": "Use case: style-transfer.\nAsset type: one square portrait texture for the Grave Shift game's missing-hiker posters.\nInput 1 is the portrait to replace; keep its broad character identity, hairstyle, expression and hiking clothing. Input 2 is a reference screenshot of the game's EXISTING stylized 3D human characters; match that simple game-model visual language.\nPrimary request from the game creator: make these hikers look like game characters that exist in this world, rather than realistic people.\nCompletely redraw the first image as a rendered LOW-POLY 3D GAME CHARACTER, with an obviously constructed angular head, large simple facial planes, blocky nose, simple geometric eyes and eyebrows, chunky polygon hair masses, clean matte untextured surfaces and faceted clothing. Face anatomy must be visibly stylized and simplified, comparable to the simple character models in image 2. No photographic skin, pores, individual hair strands, photographic eyes, or realistic stubble. Do not merely put a polygon filter over a photograph. Do not draw a realistic portrait or a smooth cinematic character.\nSubject: Sam Marsh, 22, Theo's younger brother, a similar but more youthful angular face, wavy chunky polygon hair, clean-shaven, laughing broad smile, hiking shirt and backpack straps.\nComposition: one centered head and shoulders, face large and readable, full top of hair within frame, slight natural head angle. Background is a few simple low-poly mountain/forest shapes, very subdued.\nFinish: monochrome charcoal-gray on warm gray paper, as a photocopy OF A GAME CHARACTER RENDER; retain crisp polygon shading, controlled midtones and clear features, only minimal paper grain. All six should feel part of the same game and same poster series. No military gear, masks, weapons, horror changes, captions, letters, poster border, logos, watermarks or extra people. Square image.",
+      "referenced_image_paths": [
+        "C:/Users/Zero/Desktop/Tiny Trek/ui/assets/hikers/sam-marsh.jpg",
+        "C:/Users/Zero/Desktop/Tiny Trek/qa/shots/2026-10-05-AG-50/survivors.png"
+      ],
+      "transparent_background": false,
+      "generatedSource": "C:\\Users\\Zero\\.codex\\generated_images\\01a16ec2-6bec-73f1-a414-3f710c524ae2\\exec-bc2d8071-cf0c-4570-8efb-183e991eebb2.png",
+      "finalPath": "ui/assets/hikers/sam-marsh.jpg"
+    },
+    {
+      "id": "priya-raman",
+      "prompt": "Use case: style-transfer.\nAsset type: one square portrait texture for the Grave Shift game's missing-hiker posters.\nInput 1 is the portrait to replace; keep its broad character identity, hairstyle, expression and hiking clothing. Input 2 is a reference screenshot of the game's EXISTING stylized 3D human characters; match that simple game-model visual language.\nPrimary request from the game creator: make these hikers look like game characters that exist in this world, rather than realistic people.\nCompletely redraw the first image as a rendered LOW-POLY 3D GAME CHARACTER, with an obviously constructed angular head, large simple facial planes, blocky nose, simple geometric eyes and eyebrows, chunky polygon hair masses, clean matte untextured surfaces and faceted clothing. Face anatomy must be visibly stylized and simplified, comparable to the simple character models in image 2. No photographic skin, pores, individual hair strands, photographic eyes, or realistic stubble. Do not merely put a polygon filter over a photograph. Do not draw a realistic portrait or a smooth cinematic character.\nSubject: Priya Raman, 24, woman with tied-back dark polygon hair, distinctive round glasses built as simple rings, fleece and backpack straps, calm smile.\nComposition: one centered head and shoulders, face large and readable, full top of hair within frame, slight natural head angle. Background is a few simple low-poly mountain/forest shapes, very subdued.\nFinish: monochrome charcoal-gray on warm gray paper, as a photocopy OF A GAME CHARACTER RENDER; retain crisp polygon shading, controlled midtones and clear features, only minimal paper grain. All six should feel part of the same game and same poster series. No military gear, masks, weapons, horror changes, captions, letters, poster border, logos, watermarks or extra people. Square image.",
+      "referenced_image_paths": [
+        "C:/Users/Zero/Desktop/Tiny Trek/ui/assets/hikers/priya-raman.jpg",
+        "C:/Users/Zero/Desktop/Tiny Trek/qa/shots/2026-10-05-AG-50/survivors.png"
+      ],
+      "transparent_background": false,
+      "generatedSource": "C:\\Users\\Zero\\.codex\\generated_images\\01a16ec2-6bec-73f1-a414-3f710c524ae2\\exec-e7d57454-9dda-481a-b768-a7c3e9a85d0c.png",
+      "finalPath": "ui/assets/hikers/priya-raman.jpg"
+    },
+    {
+      "id": "jonas-weber",
+      "prompt": "Use case: style-transfer.\nAsset type: one square portrait texture for the Grave Shift game's missing-hiker posters.\nInput 1 is the portrait to replace; keep its broad character identity, hairstyle, expression and hiking clothing. Input 2 is a reference screenshot of the game's EXISTING stylized 3D human characters; match that simple game-model visual language.\nPrimary request from the game creator: make these hikers look like game characters that exist in this world, rather than realistic people.\nCompletely redraw the first image as a rendered LOW-POLY 3D GAME CHARACTER, with an obviously constructed angular head, large simple facial planes, blocky nose, simple geometric eyes and eyebrows, chunky polygon hair masses, clean matte untextured surfaces and faceted clothing. Face anatomy must be visibly stylized and simplified, comparable to the simple character models in image 2. No photographic skin, pores, individual hair strands, photographic eyes, or realistic stubble. Do not merely put a polygon filter over a photograph. Do not draw a realistic portrait or a smooth cinematic character.\nSubject: Jonas Weber, 29, narrow angular face, short dark polygon hair, a simple short beard shape, open hiking overshirt and backpack straps, slight smile.\nComposition: one centered head and shoulders, face large and readable, full top of hair within frame, slight natural head angle. Background is a few simple low-poly mountain/forest shapes, very subdued.\nFinish: monochrome charcoal-gray on warm gray paper, as a photocopy OF A GAME CHARACTER RENDER; retain crisp polygon shading, controlled midtones and clear features, only minimal paper grain. All six should feel part of the same game and same poster series. No military gear, masks, weapons, horror changes, captions, letters, poster border, logos, watermarks or extra people. Square image.",
+      "referenced_image_paths": [
+        "C:/Users/Zero/Desktop/Tiny Trek/ui/assets/hikers/jonas-weber.jpg",
+        "C:/Users/Zero/Desktop/Tiny Trek/qa/shots/2026-10-05-AG-50/survivors.png"
+      ],
+      "transparent_background": false,
+      "generatedSource": "C:\\Users\\Zero\\.codex\\generated_images\\01a16ec2-6bec-73f1-a414-3f710c524ae2\\exec-b1865e84-1bae-44a4-8709-e47975aa6e3f.png",
+      "finalPath": "ui/assets/hikers/jonas-weber.jpg"
+    },
+    {
+      "id": "ellis-byrne",
+      "prompt": "Use case: style-transfer.\nAsset type: one square portrait texture for the Grave Shift game's missing-hiker posters.\nInput 1 is the portrait to replace; keep its broad character identity, hairstyle, expression and hiking clothing. Input 2 is a reference screenshot of the game's EXISTING stylized 3D human characters; match that simple game-model visual language.\nPrimary request from the game creator: make these hikers look like game characters that exist in this world, rather than realistic people.\nCompletely redraw the first image as a rendered LOW-POLY 3D GAME CHARACTER, with an obviously constructed angular head, large simple facial planes, blocky nose, simple geometric eyes and eyebrows, chunky polygon hair masses, clean matte untextured surfaces and faceted clothing. Face anatomy must be visibly stylized and simplified, comparable to the simple character models in image 2. No photographic skin, pores, individual hair strands, photographic eyes, or realistic stubble. Do not merely put a polygon filter over a photograph. Do not draw a realistic portrait or a smooth cinematic character.\nSubject: Ellis Byrne, 34, broad square face, receding short polygon hair, simple stubble color patch, hiking shell and backpack straps, warm slight smile.\nComposition: one centered head and shoulders, face large and readable, full top of hair within frame, slight natural head angle. Background is a few simple low-poly mountain/forest shapes, very subdued.\nFinish: monochrome charcoal-gray on warm gray paper, as a photocopy OF A GAME CHARACTER RENDER; retain crisp polygon shading, controlled midtones and clear features, only minimal paper grain. All six should feel part of the same game and same poster series. No military gear, masks, weapons, horror changes, captions, letters, poster border, logos, watermarks or extra people. Square image.",
+      "referenced_image_paths": [
+        "C:/Users/Zero/Desktop/Tiny Trek/ui/assets/hikers/ellis-byrne.jpg",
+        "C:/Users/Zero/Desktop/Tiny Trek/qa/shots/2026-10-05-AG-50/survivors.png"
+      ],
+      "transparent_background": false,
+      "generatedSource": "C:\\Users\\Zero\\.codex\\generated_images\\01a16ec2-6bec-73f1-a414-3f710c524ae2\\exec-6ad5e3c2-a793-49d9-9baf-91d11a2e2b2c.png",
+      "finalPath": "ui/assets/hikers/ellis-byrne.jpg"
+    }
+  ]
+}

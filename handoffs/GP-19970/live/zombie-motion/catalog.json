@@ -1,0 +1,128 @@
+[
+  {
+    "id": "zombie.shambler",
+    "name": "Shambler",
+    "group": "Zombies",
+    "kind": "zombie",
+    "owner": "grokbot",
+    "source": "index.html: makeZombieMesh(\"shambler\"), updateZombies, game/*-motion.js",
+    "variants": []
+  },
+  {
+    "id": "zombie.feral",
+    "name": "Feral",
+    "group": "Zombies",
+    "kind": "zombie",
+    "owner": "grokbot",
+    "source": "index.html: makeZombieMesh(\"feral\"), updateZombies, game/*-motion.js",
+    "variants": []
+  },
+  {
+    "id": "zombie.leaper",
+    "name": "Leaper",
+    "group": "Zombies",
+    "kind": "zombie",
+    "owner": "grokbot",
+    "source": "index.html: makeZombieMesh(\"leaper\"), updateZombies, game/*-motion.js",
+    "variants": []
+  },
+  {
+    "id": "zombie.spider",
+    "name": "Spider",
+    "group": "Zombies",
+    "kind": "zombie",
+    "owner": "grokbot",
+    "source": "index.html: makeZombieMesh(\"spider\"), updateZombies, game/*-motion.js",
+    "variants": []
+  },
+  {
+    "id": "zombie.drowned",
+    "name": "Drowned",
+    "group": "Zombies",
+    "kind": "zombie",
+    "owner": "grokbot",
+    "source": "index.html: makeZombieMesh(\"drowned\"), updateZombies, game/*-motion.js",
+    "variants": []
+  },
+  {
+    "id": "zombie.military",
+    "name": "Military",
+    "group": "Zombies",
+    "kind": "zombie",
+    "owner": "grokbot",
+    "source": "index.html: makeZombieMesh(\"military\"), updateZombies, game/*-motion.js",
+    "variants": []
+  },
+  {
+    "id": "zombie.brute",
+    "name": "Brute",
+    "group": "Zombies",
+    "kind": "zombie",
+    "owner": "grokbot",
+    "source": "index.html: makeZombieMesh(\"brute\"), updateZombies, game/*-motion.js",
+    "variants": []
+  },
+  {
+    "id": "zombie.spitter",
+    "name": "Spitter",
+    "group": "Zombies",
+    "kind": "zombie",
+    "owner": "grokbot",
+    "source": "index.html: makeZombieMesh(\"spitter\"), updateZombies, game/*-motion.js",
+    "variants": []
+  },
+  {
+    "id": "zombie.screamer",
+    "name": "Screamer",
+    "group": "Zombies",
+    "kind": "zombie",
+    "owner": "grokbot",
+    "source": "index.html: makeZombieMesh(\"screamer\"), updateZombies, game/*-motion.js",
+    "variants": []
+  },
+  {
+    "id": "zombie.bomber",
+    "name": "Bomber",
+    "group": "Zombies",
+    "kind": "zombie",
+    "owner": "grokbot",
+    "source": "index.html: makeZombieMesh(\"bomber\"), updateZombies, game/*-motion.js",
+    "variants": []
+  },
+  {
+    "id": "zombie.demon",
+    "name": "Demon",
+    "group": "Zombies",
+    "kind": "zombie",
+    "owner": "grokbot",
+    "source": "index.html: makeZombieMesh(\"demon\"), updateZombies, game/*-motion.js",
+    "variants": []
+  },
+  {
+    "id": "zombie.colossus",
+    "name": "Colossus",
+    "group": "Zombies",
+    "kind": "zombie",
+    "owner": "grokbot",
+    "source": "index.html: makeZombieMesh(\"colossus\"), updateZombies, game/*-motion.js",
+    "variants": []
+  },
+  {
+    "id": "zombie.guardian",
+    "name": "Guardian",
+    "group": "Zombies",
+    "kind": "zombie",
+    "owner": "grokbot",
+    "source": "index.html: makeZombieMesh(\"guardian\"), updateZombies, game/*-motion.js",
+    "variants": []
+  },
+  {
+    "id": "zombie.caveguard",
+    "name": "Cave Guardian",
+    "group": "Zombies",
+    "kind": "zombie",
+    "owner": "grokbot",
+    "source": "index.html: makeZombieMesh(\"caveguard\"), updateZombies, game/*-motion.js",
+    "variants": []
+  }
+]

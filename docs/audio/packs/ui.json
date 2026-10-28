@@ -1,0 +1,422 @@
+{
+  "ui/click": [
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\1. Neutral (Simple)\\Interface_Neutral_Simple_050.wav",
+      "why": "Immersive; military terminal / 1. Neutral (Simple): close military terminal button. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 0.24
+    },
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\1. Neutral (Simple)\\Interface_Neutral_Simple_106.wav",
+      "why": "Immersive; military terminal / 1. Neutral (Simple): close military terminal button. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 0.24
+    }
+  ],
+  "ui/hover": [
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\1. Neutral (Simple)\\Interface_Neutral_Simple_016.wav",
+      "why": "Immersive; military terminal / 1. Neutral (Simple): quiet military terminal focus. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 0.18
+    },
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\1. Neutral (Simple)\\Interface_Neutral_Simple_102.wav",
+      "why": "Immersive; military terminal / 1. Neutral (Simple): quiet military terminal focus. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 0.18
+    }
+  ],
+  "ui/back": [
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\1. Neutral (Simple)\\Interface_Neutral_Simple_010.wav",
+      "why": "Immersive; military terminal / 1. Neutral (Simple): military terminal cancel key. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 0.24
+    },
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\1. Neutral (Simple)\\Interface_Neutral_Simple_028.wav",
+      "why": "Immersive; military terminal / 1. Neutral (Simple): military terminal cancel key. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 0.24
+    }
+  ],
+  "ui/map-open": [
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\1. Neutral (Simple)\\Interface_Neutral_Simple_023.wav",
+      "why": "Immersive; military terminal / 1. Neutral (Simple): military map display opening. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 0.32
+    },
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\1. Neutral (Simple)\\Interface_Neutral_Simple_041.wav",
+      "why": "Immersive; military terminal / 1. Neutral (Simple): military map display opening. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 0.234
+    }
+  ],
+  "ui/map-close": [
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\1. Neutral (Simple)\\Interface_Neutral_Simple_004.wav",
+      "why": "Immersive; military terminal / 1. Neutral (Simple): military map display closing. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 0.28
+    },
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\1. Neutral (Simple)\\Interface_Neutral_Simple_022.wav",
+      "why": "Immersive; military terminal / 1. Neutral (Simple): military map display closing. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 0.28
+    }
+  ],
+  "ui/expand": [
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\1. Neutral (Simple)\\Interface_Neutral_Simple_069.wav",
+      "why": "Immersive; military terminal / 1. Neutral (Simple): military panel expansion. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 0.3
+    },
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\1. Neutral (Simple)\\Interface_Neutral_Simple_093.wav",
+      "why": "Immersive; military terminal / 1. Neutral (Simple): military panel expansion. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 0.3
+    }
+  ],
+  "ui/objective": [
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\3. Confirmed (Access Granted)\\Interface_Access_Granted_083.wav",
+      "why": "Impactful; military terminal / 3. Confirmed (Access Granted): objective confirmed by the military terminal. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 1.076
+    },
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\3. Confirmed (Access Granted)\\Interface_Access_Granted_092.wav",
+      "why": "Impactful; military terminal / 3. Confirmed (Access Granted): objective confirmed by the military terminal. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 0.855
+    }
+  ],
+  "ui/badge": [
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\3. Confirmed (Access Granted)\\Interface_Access_Granted_062.wav",
+      "why": "Impactful; military terminal / 3. Confirmed (Access Granted): distinct military commendation confirmation. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 0.943
+    },
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\3. Confirmed (Access Granted)\\Interface_Access_Granted_013.wav",
+      "why": "Impactful; military terminal / 3. Confirmed (Access Granted): distinct military commendation confirmation. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 0.923
+    }
+  ],
+  "ui/dawn-card": [
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\3. Confirmed (Access Granted)\\Interface_Access_Granted_023.wav",
+      "why": "Impactful; military terminal / 3. Confirmed (Access Granted): dawn duty report from the military terminal. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 1.162
+    },
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\3. Confirmed (Access Granted)\\Interface_Access_Granted_051.wav",
+      "why": "Impactful; military terminal / 3. Confirmed (Access Granted): dawn duty report from the military terminal. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 0.96
+    }
+  ],
+  "ui/victory": [
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\3. Confirmed (Access Granted)\\Interface_Access_Granted_081.wav",
+      "why": "Impactful; military terminal / 3. Confirmed (Access Granted): final extraction confirmation on the military terminal. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 1.004
+    },
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\3. Confirmed (Access Granted)\\Interface_Access_Granted_084.wav",
+      "why": "Impactful; military terminal / 3. Confirmed (Access Granted): final extraction confirmation on the military terminal. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 1.102
+    }
+  ],
+  "ui/day-cleared": [
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\3. Confirmed (Access Granted)\\Interface_Access_Granted_026.wav",
+      "why": "Impactful; military terminal / 3. Confirmed (Access Granted): distinct military all-clear confirmation. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 0.885
+    },
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\3. Confirmed (Access Granted)\\Interface_Access_Granted_034.wav",
+      "why": "Impactful; military terminal / 3. Confirmed (Access Granted): distinct military all-clear confirmation. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 0.897
+    }
+  ],
+  "ui/streak": [
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\3. Confirmed (Access Granted)\\Interface_Access_Granted_069.wav",
+      "why": "Impactful; military terminal / 3. Confirmed (Access Granted): short military streak confirmation. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 0.98
+    },
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\3. Confirmed (Access Granted)\\Interface_Access_Granted_030.wav",
+      "why": "Impactful; military terminal / 3. Confirmed (Access Granted): short military streak confirmation. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 1.065
+    }
+  ],
+  "ui/wave-start": [
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\4. Denied (Access Denied)\\Interface_Access_Denied_117.wav",
+      "why": "Impactful; military terminal / 4. Denied (Access Denied): military terminal threat warning, below weapons and HQ alarm. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 1.219
+    },
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\4. Denied (Access Denied)\\Interface_Access_Denied_090.wav",
+      "why": "Impactful; military terminal / 4. Denied (Access Denied): military terminal threat warning, below weapons and HQ alarm. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 1.105
+    }
+  ],
+  "ui/game-over": [
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\4. Denied (Access Denied)\\Interface_Access_Denied_111.wav",
+      "why": "Impactful; military terminal / 4. Denied (Access Denied): distinct low military terminal loss report. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 1.126
+    },
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\4. Denied (Access Denied)\\Interface_Access_Denied_033.wav",
+      "why": "Impactful; military terminal / 4. Denied (Access Denied): distinct low military terminal loss report. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 1.331
+    }
+  ],
+  "ui/missing-in-action": [
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\4. Denied (Access Denied)\\Interface_Access_Denied_021.wav",
+      "why": "Impactful; military terminal / 4. Denied (Access Denied): distinct military terminal missing-person report. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 1.24
+    },
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\4. Denied (Access Denied)\\Interface_Access_Denied_011.wav",
+      "why": "Impactful; military terminal / 4. Denied (Access Denied): distinct military terminal missing-person report. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 1.276
+    }
+  ],
+  "ui/deja-vu": [
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\4. Denied (Access Denied)\\Interface_Access_Denied_098.wav",
+      "why": "Impactful; military terminal / 4. Denied (Access Denied): low electrical unease inside the military terminal family. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 1.149
+    },
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\4. Denied (Access Denied)\\Interface_Access_Denied_041.wav",
+      "why": "Impactful; military terminal / 4. Denied (Access Denied): low electrical unease inside the military terminal family. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 1.096
+    }
+  ],
+  "ui/reset-blip": [
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\1. Neutral (Simple)\\Interface_Neutral_Simple_045.wav",
+      "why": "Immersive; military terminal / 1. Neutral (Simple): military terminal reset acknowledgement. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 0.3
+    },
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\1. Neutral (Simple)\\Interface_Neutral_Simple_040.wav",
+      "why": "Immersive; military terminal / 1. Neutral (Simple): military terminal reset acknowledgement. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 0.285
+    }
+  ],
+  "ui/kiosk-tab": [
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\1. Neutral (Simple)\\Interface_Neutral_Simple_046.wav",
+      "why": "Immersive; military terminal / 1. Neutral (Simple): close military requisition kiosk tab. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 0.24
+    },
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\1. Neutral (Simple)\\Interface_Neutral_Simple_052.wav",
+      "why": "Immersive; military terminal / 1. Neutral (Simple): close military requisition kiosk tab. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 0.24
+    }
+  ],
+  "ui/shop-tab": [
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\1. Neutral (Simple)\\Interface_Neutral_Simple_060.wav",
+      "why": "Immersive; military terminal / 1. Neutral (Simple): close military shop tab. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 0.24
+    },
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\1. Neutral (Simple)\\Interface_Neutral_Simple_086.wav",
+      "why": "Immersive; military terminal / 1. Neutral (Simple): close military shop tab. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 0.24
+    }
+  ],
+  "ui/panel-key": [
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\9. Typing\\Interface_Typing_072.wav",
+      "why": "Immersive; military terminal / 9. Typing: single isolated military terminal keystroke, not the typing loop. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 0.14
+    },
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\9. Typing\\Interface_Typing_022.wav",
+      "why": "Immersive; military terminal / 9. Typing: single isolated military terminal keystroke, not the typing loop. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 0.14
+    }
+  ],
+  "ui/panel-beep": [
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\1. Neutral (Simple)\\Interface_Neutral_Simple_050.wav",
+      "why": "Immersive; military terminal / 1. Neutral (Simple): short military terminal feedback, not the mast signal. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 0.24
+    },
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\1. Neutral (Simple)\\Interface_Neutral_Simple_106.wav",
+      "why": "Immersive; military terminal / 1. Neutral (Simple): short military terminal feedback, not the mast signal. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 0.24
+    }
+  ],
+  "ui/panel-open": [
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\3. Confirmed (Access Granted)\\Interface_Access_Granted_027.wav",
+      "why": "Immersive; military terminal / 3. Confirmed (Access Granted): military relay panel responding to power. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 0.942
+    },
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\3. Confirmed (Access Granted)\\Interface_Access_Granted_053.wav",
+      "why": "Immersive; military terminal / 3. Confirmed (Access Granted): military relay panel responding to power. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 1.039
+    }
+  ],
+  "ui/panel-deny": [
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\4. Denied (Access Denied)\\Interface_Access_Denied_067.wav",
+      "why": "Impactful; military terminal / 4. Denied (Access Denied): military relay rejects an input. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 0.777
+    },
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\4. Denied (Access Denied)\\Interface_Access_Denied_017.wav",
+      "why": "Impactful; military terminal / 4. Denied (Access Denied): military relay rejects an input. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 0.8
+    }
+  ],
+  "training/keypad-press": [
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\1. Neutral (Simple)\\Interface_Neutral_Simple_016.wav",
+      "why": "Immersive; military terminal / 1. Neutral (Simple): close military keypad switch. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 0.18
+    },
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\1. Neutral (Simple)\\Interface_Neutral_Simple_102.wav",
+      "why": "Immersive; military terminal / 1. Neutral (Simple): close military keypad switch. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 0.18
+    }
+  ],
+  "training/keypad-accept": [
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\3. Confirmed (Access Granted)\\Interface_Access_Granted_036.wav",
+      "why": "Impactful; military terminal / 3. Confirmed (Access Granted): military keypad accepts the code. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 0.961
+    },
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\3. Confirmed (Access Granted)\\Interface_Access_Granted_056.wav",
+      "why": "Impactful; military terminal / 3. Confirmed (Access Granted): military keypad accepts the code. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 0.992
+    }
+  ],
+  "training/keypad-deny": [
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\4. Denied (Access Denied)\\Interface_Access_Denied_004.wav",
+      "why": "Impactful; military terminal / 4. Denied (Access Denied): military keypad rejects the code. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 1.578
+    },
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\4. Denied (Access Denied)\\Interface_Access_Denied_075.wav",
+      "why": "Impactful; military terminal / 4. Denied (Access Denied): military keypad rejects the code. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 1.086
+    }
+  ],
+  "training/panel-beep": [
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\1. Neutral (Simple)\\Interface_Neutral_Simple_010.wav",
+      "why": "Immersive; military terminal / 1. Neutral (Simple): Training Ground military control panel. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 0.24
+    },
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\1. Neutral (Simple)\\Interface_Neutral_Simple_028.wav",
+      "why": "Immersive; military terminal / 1. Neutral (Simple): Training Ground military control panel. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 0.24
+    }
+  ],
+  "training/panel-enter": [
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\3. Confirmed (Access Granted)\\Interface_Access_Granted_091.wav",
+      "why": "Immersive; military terminal / 3. Confirmed (Access Granted): Training Ground military terminal ready. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 1.124
+    },
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\3. Confirmed (Access Granted)\\Interface_Access_Granted_071.wav",
+      "why": "Immersive; military terminal / 3. Confirmed (Access Granted): Training Ground military terminal ready. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 1.151
+    }
+  ],
+  "training/panel-clear": [
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\3. Confirmed (Access Granted)\\Interface_Access_Granted_104.wav",
+      "why": "Impactful; military terminal / 3. Confirmed (Access Granted): Training Ground clear-all command accepted. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 1.218
+    },
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\3. Confirmed (Access Granted)\\Interface_Access_Granted_082.wav",
+      "why": "Impactful; military terminal / 3. Confirmed (Access Granted): Training Ground clear-all command accepted. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 1.002
+    }
+  ],
+  "training/panel-blackout": [
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\4. Denied (Access Denied)\\Interface_Access_Denied_003.wav",
+      "why": "Impactful; military terminal / 4. Denied (Access Denied): Training Ground military terminal loses power. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 1.247
+    },
+    {
+      "src": "F:\\Sound_Effects\\UI\\Binary_Code_3_Interface_Multiverse\\Binary Code 3 - Interface Multiverse\\4. Denied (Access Denied)\\Interface_Access_Denied_105.wav",
+      "why": "Impactful; military terminal / 4. Denied (Access Denied): Training Ground military terminal loses power. Candidate pending in-game listening; fade trim edges 5-10 ms.",
+      "start": 0.0,
+      "end": 1.265
+    }
+  ]
+}

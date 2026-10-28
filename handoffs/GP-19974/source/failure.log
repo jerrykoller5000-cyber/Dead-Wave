@@ -1,0 +1,7 @@
+Native queue run: node handoffs/GP-19974/capture-mine.mjs
+Slot granted 2026-10-26T23:49:00Z. Browser closed in finally after the startup timeout.
+Error: the game never finished loading: ReferenceError: glow is not defined
+    at makeHouse (index.html?debug=1&raf=timer:24936:32)
+    at index.html?debug=1&raf=timer:25448:5
+Owner notified: Antigravity (active in AG-134 HQ radio/Hush prop part).
+No native mine frame, story-playback screenshots or acceptance results were produced.

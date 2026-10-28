@@ -1,0 +1,161 @@
+GRANT cursor CU-163: starting one game-test command
+check-players: 307 player.position reads, all in the allowed places
+ok    t0       2 pass   0 fail  26.5s
+ok    t6a      2 pass   0 fail  42.5s
+ok    tfish    7 pass   0 fail  25.2s
+ok    tinspect  22 pass   0 fail  99.1s
+ok    t1       4 pass   0 fail  42.3s
+ok    t2       5 pass   0 fail  46.3s
+ok    t3       5 pass   0 fail  47.3s
+ok    t4       6 pass   0 fail  47.7s
+ok    t5      31 pass   0 fail  45.3s
+ok    t6      21 pass   0 fail  76.9s
+ok    t7      16 pass   0 fail  44.4s
+ok    t8       3 pass   0 fail  49.6s
+ok    t9      19 pass   0 fail  44.7s
+ok    t10     30 pass   0 fail  44.4s
+ok    t11     13 pass   0 fail  45.0s
+ok    t12     22 pass   0 fail  72.9s
+FAIL  t13      7 pass   1 fail  75.6s
+ok    t14     13 pass   0 fail  46.2s
+ok    t15     10 pass   0 fail  120.6s
+info  t16      0 pass   0 fail  88.2s  — 692
+ok    t17     10 pass   0 fail  76.4s
+ok    t18      7 pass   0 fail  45.8s
+ok    t19      6 pass   0 fail  118.5s
+info  t20      0 pass   0 fail  86.5s  — -5,-15 edge0 L0 yaw 0.00 rx 0.00 rz 0.00 ch 1
+ok    t21     16 pass   0 fail  110.0s
+info  t22      0 pass   0 fail  85.7s  — builds box 22,76 / -10,46 barrels before 6 after 12
+ok    t23      8 pass   0 fail  138.8s
+ok    t24     14 pass   0 fail  84.7s
+ok    t25     29 pass   0 fail  73.3s
+info  t26      0 pass   0 fail  91.4s  — pieces 692 failed: 
+info  t27      0 pass   0 fail  93.9s  — EMPTY WORLD visible meshes: 3705
+info  t28      0 pass   0 fail  50.6s  — shambler total 14: hips:1m/1mat torso:1m/1mat armL:1m/1mat Group:1m/1mat armR:1m/1mat Grou
+ok    t29     12 pass   0 fail  55.0s
+info  t30      0 pass   0 fail  50.5s  — turret at 4.0,-12.0 y -3.17
+ok    t31     26 pass   0 fail  51.6s
+info  t32      0 pass   0 fail  96.2s  — road pieces: wall/door@-38.0 wall/door@-24.0 wire/gate@-20.0 barricade/gate@-18.0
+ok    t33      4 pass   0 fail  51.1s
+ok    t34     20 pass   0 fail  81.1s
+ok    t35     28 pass   0 fail  96.6s
+ok    t36     22 pass   0 fail  89.2s
+ok    t37     17 pass   0 fail  201.4s
+ok    t38     12 pass   0 fail  101.9s
+ok    t39     15 pass   0 fail  51.3s
+ok    t40      6 pass   0 fail  62.6s
+ok    t41      9 pass   0 fail  56.5s
+           INFO root mesh 191.4 trees 192.2 hill 196.7 | shale mesh 201.3 trees 201.9 hill 210.0 | iron mesh 196.6 trees 194.2 hill 202.3 | wet mesh 199.8 trees 192.4 hill 205.0 | hill mesh 199.4 trees 197.8 hill 205.8 | chalk mesh 200.6 trees 200.0 hill 208.0
+ok    t42     18 pass   0 fail  33.6s
+ok    t43     35 pass   0 fail  56.7s
+ok    t44      6 pass   0 fail  34.5s
+ok    t45      8 pass   0 fail  35.5s
+ok    t46     11 pass   0 fail  37.9s
+ok    t47     17 pass   0 fail  35.5s
+ok    t48     22 pass   0 fail  59.1s
+ok    t49     32 pass   0 fail  64.6s
+ok    t50     18 pass   0 fail  41.3s
+ok    t51     19 pass   0 fail  63.0s
+ok    t52     17 pass   0 fail  39.5s
+ok    t53     76 pass   0 fail  81.3s
+ok    t54     32 pass   0 fail  63.6s
+ok    t55     10 pass   0 fail  67.3s
+ok    t56      1 pass   0 fail  41.5s
+FAIL  t57      6 pass   1 fail  42.5s
+ok    t58      9 pass   0 fail  74.5s
+ok    t59     48 pass   0 fail  124.4s
+FAIL  t60     42 pass   1 fail  123.7s
+FAIL  t61     21 pass   1 fail  91.8s
+ok    t62      4 pass   0 fail  74.7s
+ok    t63      6 pass   0 fail  74.7s
+ok    t64      8 pass   0 fail  78.6s
+ok    t65     12 pass   0 fail  81.4s
+           INFO largest height change across one puddle: 0.016 m
+ok    t66      4 pass   0 fail  79.7s
+FAIL  t67      8 pass   1 fail  117.1s
+ok    t68     15 pass   0 fail  73.2s
+FAIL  t69      7 pass  11 fail  143.5s
+FAIL  t70     17 pass   4 fail  146.9s
+FAIL  t71      9 pass   7 fail  152.5s
+FAIL  t72     14 pass   7 fail  125.8s
+FAIL  t73      8 pass   4 fail  139.3s
+FAIL  t74     16 pass   2 fail  204.6s
+ERROR t75      0 pass   0 fail  121.8s  — window.TT never appeared: no page error reported
+ERROR t76      0 pass   0 fail  121.7s  — window.TT never appeared: no page error reported
+ok    t77     17 pass   0 fail  205.2s
+ERROR t78      0 pass   0 fail  122.1s  — window.TT never appeared: no page error reported
+FAIL  t79      9 pass   3 fail  176.2s
+ERROR t80      0 pass   0 fail  122.2s  — window.TT never appeared: no page error reported
+ERROR t81      0 pass   0 fail  121.6s  — window.TT never appeared: no page error reported
+ERROR t82      0 pass   0 fail  121.6s  — window.TT never appeared: no page error reported
+ERROR t83      0 pass   0 fail  121.9s  — window.TT never appeared: no page error reported
+FAIL  t84      2 pass   2 fail  186.4s
+FAIL  t85      7 pass   8 fail  167.5s
+ERROR t86      0 pass   0 fail  126.5s  — window.TT never appeared: no page error reported
+ERROR t87      0 pass   0 fail  121.9s  — window.TT never appeared: no page error reported
+ERROR t88      0 pass   0 fail  121.7s  — window.TT never appeared: no page error reported
+ok    t89     18 pass   0 fail  196.7s
+ERROR t90      0 pass   0 fail  129.1s  — window.TT never appeared: no page error reported
+ERROR t91      0 pass   0 fail  122.0s  — window.TT never appeared: no page error reported
+ERROR t92      0 pass   0 fail  126.8s  — window.TT never appeared: no page error reported
+ERROR t93      0 pass   0 fail  131.3s  — window.TT never appeared: no page error reported
+ok    t94      8 pass   0 fail  184.4s
+ERROR t95      0 pass   0 fail  124.4s  — window.TT never appeared: no page error reported
+ok    t96     19 pass   0 fail  180.5s
+ERROR t97      0 pass   0 fail  129.8s  — window.TT never appeared: no page error reported
+ERROR t98      0 pass   0 fail  133.1s  — window.TT never appeared: no page error reported
+ERROR t99      0 pass   0 fail  122.7s  — window.TT never appeared: no page error reported
+ok    t100     7 pass   0 fail  136.4s
+ERROR t101     0 pass   0 fail  122.2s  — window.TT never appeared: no page error reported
+ERROR t102     0 pass   0 fail  123.3s  — window.TT never appeared: no page error reported
+ok    t103     8 pass   0 fail  176.8s
+ERROR t104     0 pass   0 fail  122.3s  — window.TT never appeared: no page error reported
+ERROR t105     0 pass   0 fail  123.5s  — window.TT never appeared: no page error reported
+ERROR t106     0 pass   0 fail  122.1s  — window.TT never appeared: no page error reported
+ERROR t107     0 pass   0 fail  123.2s  — window.TT never appeared: no page error reported
+ERROR t108     0 pass   0 fail  122.9s  — window.TT never appeared: no page error reported
+ERROR t109     0 pass   0 fail  125.1s  — window.TT never appeared: no page error reported
+ok    t110     4 pass   0 fail  148.8s
+ERROR t111     0 pass   0 fail  127.7s  — window.TT never appeared: no page error reported
+FAIL  t112    12 pass   1 fail  173.7s
+ERROR t113     0 pass   0 fail  127.9s  — window.TT never appeared: no page error reported
+ERROR t114     0 pass   0 fail  132.7s  — window.TT never appeared: no page error reported
+ok    t115    10 pass   0 fail  182.7s
+ERROR t116     0 pass   0 fail  195.0s  — window.TT never appeared: no page error reported
+ERROR t117     0 pass   0 fail  169.2s  — window.TT never appeared: no page error reported
+ERROR t119     0 pass   0 fail  126.2s  — window.TT never appeared: no page error reported
+ERROR t120     0 pass   0 fail  122.8s  — window.TT never appeared: no page error reported
+ERROR t121     0 pass   0 fail  122.1s  — window.TT never appeared: no page error reported
+FAIL  t122    13 pass   1 fail  170.9s
+ERROR t123     0 pass   0 fail  125.4s  — window.TT never appeared: no page error reported
+ERROR t124     0 pass   0 fail  123.0s  — window.TT never appeared: no page error reported
+ok    t125    10 pass   0 fail  202.7s
+ERROR t126     0 pass   0 fail  122.5s  — window.TT never appeared: no page error reported
+ERROR t127     0 pass   0 fail  122.4s  — window.TT never appeared: no page error reported
+ERROR t128     0 pass   0 fail  122.9s  — window.TT never appeared: no page error reported
+ERROR t129     0 pass   0 fail  123.2s  — window.TT never appeared: no page error reported
+ERROR t130     0 pass   0 fail  122.2s  — window.TT never appeared: no page error reported
+FAIL  t131    12 pass   6 fail  221.3s
+ERROR t132     0 pass   0 fail  124.5s  — window.TT never appeared: no page error reported
+ERROR t133     0 pass   0 fail  122.0s  — window.TT never appeared: no page error reported
+ERROR t134     0 pass   0 fail  121.7s  — window.TT never appeared: no page error reported
+ERROR t135     0 pass   0 fail  121.8s  — window.TT never appeared: no page error reported
+ERROR t136     0 pass   0 fail  122.2s  — window.TT never appeared: no page error reported
+ERROR t137     0 pass   0 fail  121.9s  — window.TT never appeared: no page error reported
+ok    t138     6 pass   0 fail  159.3s
+ERROR t139     0 pass   0 fail  122.6s  — window.TT never appeared: no page error reported
+ERROR t140     0 pass   0 fail  122.1s  — window.TT never appeared: no page error reported
+ERROR t141     0 pass   0 fail  121.9s  — window.TT never appeared: no page error reported
+ERROR t142     0 pass   0 fail  122.0s  — window.TT never appeared: no page error reported
+ERROR t143     0 pass   0 fail  122.5s  — window.TT never appeared: no page error reported
+ERROR t144     0 pass   0 fail  121.9s  — window.TT never appeared: no page error reported
+ok    t145    17 pass   0 fail  102.8s
+ERROR t146     0 pass   0 fail  122.3s  — window.TT never appeared: no page error reported
+ERROR t147     0 pass   0 fail  122.2s  — window.TT never appeared: no page error reported
+ERROR t148     0 pass   0 fail  122.3s  — window.TT never appeared: no page error reported
+ERROR t149     0 pass   0 fail  121.9s  — window.TT never appeared: no page error reported
+ERROR t150     0 pass   0 fail  329.9s  — time limit: check still running after 180s
+ERROR t151     0 pass   0 fail  122.4s  — window.TT never appeared: no page error reported
+ERROR t152     0 pass   0 fail  121.9s  — window.TT never appeared: no page error reported
+ERROR t153     0 pass   0 fail  123.8s  — window.TT never appeared: no page error reported
+ERROR t154     0 pass   0 fail  123.6s  — window.TT never appeared: no page error reported

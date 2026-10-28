@@ -1,0 +1,17 @@
+Game-test request 92186a17-85eb-4d49-a97a-767da383d58b queued at position 2. Waiting...
+GRANT grokbot GB-232: starting one game-test command
+check-players: 308 player.position reads, all in the allowed places
+FAIL  t69     17 pass   1 fail  67.2s
+ok    t75     16 pass   0 fail  51.5s
+ok    t95      9 pass   0 fail  58.2s
+ok    t148    23 pass   0 fail  59.9s
+ok    t215     4 pass   0 fail  41.2s
+ok    t292    15 pass   0 fail  56.7s
+FAIL  t304     6 pass   1 fail  45.2s
+
+7 checks: 90 pass, 2 fail
+
+by owner:
+  unassigned
+    t69    1 fail  FAIL the assault cave pokes normally once its mouth is clear
+    t304   1 fail  FAIL Brandt by the truck door (NaN m)

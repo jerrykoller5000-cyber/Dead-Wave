@@ -1,0 +1,155 @@
+{
+  "shots": [
+    {
+      "target": "zombie.spitter:statue",
+      "view": "front",
+      "time": "noon",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/spitter-bomber-after/spitter-noon-front.png"
+    },
+    {
+      "target": "zombie.spitter:statue",
+      "view": "side",
+      "time": "noon",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/spitter-bomber-after/spitter-noon-side.png"
+    },
+    {
+      "target": "zombie.bomber:statue",
+      "view": "front",
+      "time": "noon",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/spitter-bomber-after/bomber-noon-front.png"
+    },
+    {
+      "target": "zombie.bomber:statue",
+      "view": "side",
+      "time": "noon",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/spitter-bomber-after/bomber-noon-side.png"
+    },
+    {
+      "target": "zombie.spitter:statue",
+      "view": "front",
+      "time": "overcast",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/spitter-bomber-after/spitter-overcast-front.png"
+    },
+    {
+      "target": "zombie.spitter:statue",
+      "view": "side",
+      "time": "overcast",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/spitter-bomber-after/spitter-overcast-side.png"
+    },
+    {
+      "target": "zombie.bomber:statue",
+      "view": "front",
+      "time": "overcast",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/spitter-bomber-after/bomber-overcast-front.png"
+    },
+    {
+      "target": "zombie.bomber:statue",
+      "view": "side",
+      "time": "overcast",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/spitter-bomber-after/bomber-overcast-side.png"
+    },
+    {
+      "target": "zombie.spitter:statue",
+      "view": "front",
+      "time": "dusk",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/spitter-bomber-after/spitter-dusk-front.png"
+    },
+    {
+      "target": "zombie.spitter:statue",
+      "view": "side",
+      "time": "dusk",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/spitter-bomber-after/spitter-dusk-side.png"
+    },
+    {
+      "target": "zombie.bomber:statue",
+      "view": "front",
+      "time": "dusk",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/spitter-bomber-after/bomber-dusk-front.png"
+    },
+    {
+      "target": "zombie.bomber:statue",
+      "view": "side",
+      "time": "dusk",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/spitter-bomber-after/bomber-dusk-side.png"
+    },
+    {
+      "target": "zombie.spitter:statue",
+      "view": "front",
+      "time": "night",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/spitter-bomber-after/spitter-night-front.png"
+    },
+    {
+      "target": "zombie.spitter:statue",
+      "view": "side",
+      "time": "night",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/spitter-bomber-after/spitter-night-side.png"
+    },
+    {
+      "target": "zombie.bomber:statue",
+      "view": "front",
+      "time": "night",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/spitter-bomber-after/bomber-night-front.png"
+    },
+    {
+      "target": "zombie.bomber:statue",
+      "view": "side",
+      "time": "night",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/spitter-bomber-after/bomber-night-side.png"
+    },
+    {
+      "target": "zombie.spitter:statue",
+      "view": "front",
+      "time": "noon",
+      "dist": 8,
+      "fov": 65,
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/spitter-bomber-after/spitter-gameplay-distance.png"
+    },
+    {
+      "target": "zombie.bomber:statue",
+      "view": "front",
+      "time": "noon",
+      "dist": 8,
+      "fov": 65,
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/spitter-bomber-after/bomber-gameplay-distance.png"
+    }
+  ],
+  "out": "handoffs/GP-19970/spitter-bomber-after",
+  "sheet": true,
+  "cols": 4
+}

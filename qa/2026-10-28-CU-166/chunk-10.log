@@ -1,0 +1,60 @@
+Game-test request 7058565b-f026-4e39-95fb-f14cf384bd17 queued at position 4. Waiting...
+GRANT cursor CU-166: starting one game-test command
+check-players: 309 player.position reads, all in the allowed places
+ok    t258     4 pass   0 fail  27.1s
+ok    t259     8 pass   0 fail  55.3s
+           INFO night 8: day 8 bloodMoon true preview.bloodMoon true silenced false quest {"runId":1,"day":8,"order":[3,6,1,7,0],"unlocked":true,"triedDay":6,"known":[false,false,false,false,false],"silencedDay":6,"silenced":false,"heart":null,"done":false} total 315
+ok    t260     9 pass   0 fail  39.3s
+ok    t261     9 pass   0 fail  43.0s
+ok    t262    24 pass   0 fail  144.1s
+ok    t263    17 pass   0 fail  48.6s
+ok    t264    22 pass   0 fail  49.6s
+ok    t265    30 pass   0 fail  43.1s
+ok    t266    32 pass   0 fail  49.2s
+ok    t267    24 pass   0 fail  72.8s
+ok    t268    25 pass   0 fail  40.4s
+ok    t270     1 pass   0 fail  24.1s
+ok    t271    10 pass   0 fail  57.0s
+info  t272     0 pass   0 fail  23.6s  — SKIP no SkinnedMesh in this three (the test page): run it with tools/realtest.mjs --soft
+ok    t273     9 pass   0 fail  40.3s
+ok    t274     3 pass   0 fail  51.8s
+ok    t275    15 pass   0 fail  61.3s
+ok    t276    20 pass   0 fail  69.9s
+           INFO minigun muzzle 0.000,0.000,1.010 box -0.164,-0.262,-0.450 / 0.283,0.320,1.000
+           INFO minigun dir 1 rearTop 0.000,0.280,-0.072 frontTop -0.000,0.108,0.938
+           INFO m4 muzzle 0.000,0.020,0.980 box -0.046,-0.278,-0.569 / 0.085,0.168,0.978
+           INFO m4 dir 1 rearTop 0.000,0.168,0.004 frontTop 0.000,0.138,0.673
+           INFO ak muzzle 0.000,-0.005,1.020 box -0.048,-0.331,-0.597 / 0.095,0.096,0.994
+           INFO ak dir 1 rearTop -0.000,0.095,0.218 frontTop 0.008,0.096,0.840
+           INFO aa12 muzzle 0.000,0.015,0.980 box -0.155,-0.415,-0.579 / 0.155,0.180,0.976
+           INFO aa12 dir 1 rearTop 0.000,0.180,-0.120 frontTop -0.014,0.175,0.750
+           INFO pistol muzzle 0.000,0.050,0.320 box -0.027,-0.175,-0.104 / 0.027,0.092,0.311
+           INFO pistol dir 1 rearTop -0.000,0.075,0.072 frontTop -0.002,0.087,0.287
+           INFO uzi muzzle 0.000,0.030,0.480 box -0.055,-0.324,-0.338 / 0.077,0.158,0.478
+           INFO uzi dir 1 rearTop -0.015,0.156,-0.073 frontTop -0.001,0.067,0.354
+           INFO shotgun muzzle 0.000,0.030,0.970 box -0.056,-0.179,-0.496 / 0.056,0.091,0.952
+           INFO shotgun dir 1 rearTop -0.000,0.087,-0.129 frontTop -0.000,0.081,0.915
+           INFO revolver muzzle 0.000,0.083,0.350 box -0.051,-0.166,-0.115 / 0.051,0.123,0.332
+           INFO revolver dir 1 rearTop -0.005,0.109,0.081 frontTop -0.002,0.121,0.326
+           INFO sniper muzzle 0.000,0.040,1.220 box -0.147,-0.203,-0.640 / 0.068,0.209,1.205
+           INFO sniper dir 1 rearTop -0.000,0.209,0.069 frontTop 0.012,0.067,0.780
+           INFO launcher muzzle 0.000,0.040,0.720 box -0.143,-0.184,-0.504 / 0.143,0.123,0.682
+           INFO launcher dir 1 rearTop 0.000,0.123,0.053 frontTop -0.000,0.102,0.650
+           INFO flamer muzzle 0.000,0.050,0.780 box -0.085,-0.175,-0.277 / 0.178,0.112,0.792
+           INFO flamer dir 1 rearTop 0.000,0.085,0.290 frontTop 0.000,0.112,0.786
+           INFO chainsaw muzzle 0.000,0.040,0.820 box -0.159,-0.185,-0.317 / 0.218,0.220,0.830
+           INFO chainsaw dir 1 rearTop -0.004,0.220,0.024 frontTop -0.010,0.090,0.760
+ok    t277    38 pass   0 fail  42.2s
+ok    t278    18 pass   0 fail  40.9s
+ok    t279    17 pass   0 fail  67.5s
+ok    t280    13 pass   0 fail  79.8s
+ok    t281    33 pass   0 fail  145.1s
+           INFO the push lands soon: the middle arrival at 25.9 s (15-35)
+           INFO the cave walkers start part way in, past the water if it is in the way (99, 73, 77, 75, 104, 99, 78 m; all under 120)
+ok    t282     4 pass   0 fail  116.7s
+ok    t283     3 pass   0 fail  49.0s
+
+25 checks: 388 pass, 0 fail, 1 reported no assertions
+
+no assertions (probe, or the check bailed before asserting):
+  t272   SKIP no SkinnedMesh in this three (the test page): run it with tools/realtest.mjs --soft

@@ -12,7 +12,7 @@ Jerry's yes).
   the new way into the day missions and the relay are designed and built without waiting for his review; he judges
   them when he plays.
 - **Updates on itch:** Jerry wants the itch.io build updated as development goes on. When a stage lands, tested, it is a
-  1.0.x build (1.0.1, 1.0.2 ...); Jerry uploads it (D-84). 1.1 is the Steam release with co-op (D-83, D-84).
+  1.0.x build (1.0.1, 1.0.2 ...); Jerry uploads it (D-84). Steam is not 1.1 any more: no date, after co-op (D-96).
 - **The rules apply to everything:** a placement follows world-design.md; a quest answers quest-design.md's five
   questions in its spec before it's built. Model polish is no longer frozen: first person shows the guns, hands and
   reloads up close, so they are this road's work.
@@ -108,4 +108,6 @@ Jerry, 2026-10-25: every current asset goes through them.
   2026-10-25: "Once you guys have finished out 1.1 let me know and I will do another play through").
 - 1.0.x builds as stages land (Antigravity builds the installer; ChatGPT runs the commit job).
 - Co-op (D-83) is on hold until the base game is finished (Jerry, 2026-10-25: "Hold off on co-op. We are still quite
-  far away from finishing the base game." D-90). The Steam release stays with 1.1 (D-84), his call after the playthrough.
+  far away from finishing the base game." D-90). 2026-10-27 (D-96): the base game through as many passes as it takes,
+  until he is completely satisfied; then co-op; then the last polish and hard testing; then Steam, with no date.
+- 1.2 is the forest groupings and his notes from the 1.1 playthrough, nothing more (D-95).

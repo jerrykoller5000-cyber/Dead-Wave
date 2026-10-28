@@ -575,8 +575,12 @@ the relay-down line and the dock blink), Claude (CL-73, P-52: the boat comes in 
 
 ## The Hush (GB-106, P-135, D-67; proposed by Grokbot 2026-09-30, from docs/specs/hollows.md A1)
 
-- `hush-state` on `'dw-game'`, and `getHushState()` (plain and on `window.TT`): `{ owned, charged, lit, cave, battery, below }`.
+- `hush-state` on `'dw-game'`, and `getHushState()` (plain and on `window.TT`): `{ owned, charged, lit, cave, battery, below, board }`.
   Published when any of them changes (the battery only when it hits 0); read `getHushState()` for the live battery.
+- `board` (CL-259): the relay's spare board, `'none'` | `'carried'` (the vault's lift brought it up) | `'wired'` (E at the
+  HQ radio set); `owned` follows from `'wired'`. GP-19973: the Ridgeline dawn dispatch reads it, read-only:
+  `relayStory.morning({ runId, day, repaired, board })` (`board` optional, default `'none'`) picks the once-only line
+  that tells him to bring the board to the radio set, or acknowledges it wired.
 - `owned`: from the first `startPrep` with the relay repaired (`relayUp()`), so the dawn after the repair, for the run.
   `charged`: set at each `startPrep` once owned, spent on going down. `battery`: `HUSH_SECONDS` (480), counting only while `below`.
 - At a mouth, in prep, within 5 m (`HUSH_MOUTH_R`), `hushPrompt()` gives what it says and whether E acts:
@@ -1050,3 +1054,44 @@ replay tool, tests, any agent reproducing what Jerry saw.
   and write player.position).
 - Measured (t298): over 20 s of walk, turn, aim and run the replayed body is within 1 mm and the look within 0.01°; the
   camera within 1 mm after the first 0.2 s (20 mm before, the eye's ease).
+
+## Story entry stations (GP-19969 / CL-263 / AG-125; approved by Claude 2026-10-26)
+
+Owner of the chain: Claude (`game/story-chain.js`). UI and the approved narrow briefing/objective adapter:
+ChatGPT. Station props and placement: Antigravity. The story gate remains Claude's activation step after the
+panels work end to end.
+
+- AG-125 exports `house.dutyBoard`, `house.radioSet`, `HQ_DUTY_BOARD_FRONT`/`REACH` and
+  `HQ_RADIO_FRONT`/`REACH`. Fronts are world `{x,z}` positions; interaction height is HQ origin plus 1.
+  The adapter uses each prop's world position for its floating E prompt and the exported front/reach for
+  local-player reach. It also accepts `house.storyStations[panel]` as an optional normalized
+  `{centre:{x,y,z}, approach:{x,y,z}, reach}` record. Missing stations cannot open.
+- `dw-game` `briefing-open` retains its existing fields and gains `panel: 'alarm' | 'duty' | 'radio'`
+  (omitted means alarm), `story: storyChain.read()` and `canUsePanel: boolean` from actual prop reach.
+  The single modal host presents only that station's content. Alarm has the threat report and Sound alarm;
+  duty has orders, open/done lead cards, restocks and bounties; radio has Ridgeline, Tonight's call, the word
+  and the separately confirmed Call Heron. Existing close events remain unchanged.
+- `story-track-request {runId, day, id, site}`: accepted only at the open duty board in the current prep/run/day,
+  when that canonical lead is open and its canonical site matches. The owner closes the panel and calls
+  `objectiveRuntime.track(site)`; no supplies or progress are granted by tracking.
+- `mountObjectiveRuntime` gains `getStory()` and returns `track(site)`. Open leads are navigable remotely, but
+  interaction reach is still supplied by the owner. Closed leads are absent from markers and restock rows,
+  including after relay repair; ordinary objective behavior is retained when no story snapshot is supplied.
+- `story-lead {phase: 'open' | 'done', id, site, by, thread, day}` includes the bus's `runId` and `eventId`.
+  Open events show one dawn lead card per lead per run and select its objective. `run-reset` clears notices.
+- Radio/word requests require the open radio mode and radio reach. `alarm-request` requires alarm mode and
+  alarm reach. `extraction-request` additionally requires `{runId, day, confirmed: true}` after the explicit
+  Heron confirmation; no action is sent on the first Call Heron click. All existing gameplay guards remain.
+- Every station pauses the game, releases the first-person pointer lock and holds the camera while open.
+  Close restores the previous pause state and pointer-lock intent. No new audio is added.
+
+
+## Recovered story recordings (GP-19974; Claude approved 2026-10-26)
+
+- The convoy/hikers owner opens its private playback only after actual recovery: a claimed medical cooler unlocks the cab radio; the recovered hikers kit unlocks Maya's camera. It revalidates active run, life/game state, physical prop distance/height and modal state at every open. Neither a lead's done flag nor a UI message grants recovery or a reward.
+- Owner publication: dw-game story-recording { runId, kind: 'convoy-radio' | 'hiker-camera' }. This is a notification after owner validation, not a remote-open request.
+- UI close: dw-game story-recording-close-request { runId, kind }; the owner accepts only its currently open kind and run. The view also closes safely on E/Escape, death or run reset. First person releases its pointer and holds the view; the previous pause state is restored.
+- The recording lasts eight seconds. A private finish callback is accepted only for the same live playback after its duration; it records evidence, never completion, inventory, Cash or a new lead. Closing early records no viewed evidence. Replay stays local.
+- Its sound (CL-272, Claude's, core/audio.js): `AudioSys.cameraClick()` plays the camera's screen or power switch from z-sounds/story/camera/ (a short noise tick without a take). The camera's owner calls it once when the clip opens and once when it is put down. It holds no state and returns nothing.
+- ui/story-aftermath.js derives retained, per-run medical/kit/search evidence from owner facts. ui/hikers.js paintHikerPosters accepts optional notes { [canonicalHikerId]: stringKey } and repaints existing canvases without resizing GPU textures. Radio/camera evidence and the searched ranger cache select the pencil keys. Closed leads reveal no new evidence.
+- game/convoy-visual.js adds setAftermath(taken), radioAt(), radio and rearDoors. setAftermath changes only on a taken-state transition, so polling cannot interrupt the sleeper's temporary door opening. The cooler disappears after a complete claim; existing later restocks retain their normal availability.

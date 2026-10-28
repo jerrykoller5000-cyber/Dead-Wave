@@ -1,0 +1,13 @@
+    function stockedCalibers() {
+      const out = [];
+      for (const c of CALIBER_ORDER) {
+        if (c === '60mm') { if (buildUnlocked.mortar) out.push(c); continue; }
+        if (c === '7.62 belt' && buildUnlocked.m240) { out.push(c); continue; }   // GB-138: the Watchman's feed
+        if (WEAPON_ORDER.some((w) => weaponOwned[w] && caliberOf(w) === c)) out.push(c);
+      }
+      return out;
+    }
+    function stockedLooseCalibers() {
+      return stockedCalibers().filter(c => c === '60mm' || (c === '7.62 belt' && buildUnlocked.m240) || WEAPON_ORDER.some(w => weaponOwned[w] && !isMagazineWeapon(w) && caliberOf(w) === c));
+    }
+

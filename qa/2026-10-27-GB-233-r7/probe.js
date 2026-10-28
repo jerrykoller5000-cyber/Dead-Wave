@@ -1,0 +1,1 @@
+const tg=T.trainingDbg&&T.trainingDbg.tg();const o={};for(const k of Object.keys(tg||{})){const v=tg[k];o[k]=(v&&typeof v==='object')?Object.keys(v).slice(0,8).join(','):v;}return {keys:o,st:Object.keys(T.trainingDbg||{})};

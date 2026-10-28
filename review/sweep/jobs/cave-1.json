@@ -32,7 +32,7 @@
    "cam": {
     "x": 164.48,
     "y": 5.29,
-    "z": 53.650000000000006,
+    "z": 53.65,
     "tx": 164.48,
     "ty": 11.37,
     "tz": 69.65,
@@ -72,9 +72,9 @@
   },
   {
    "cam": {
-    "x": 175.67999999999998,
+    "x": 175.68,
     "y": 16.17,
-    "z": 80.85000000000001,
+    "z": 80.85,
     "tx": 164.48,
     "ty": 11.17,
     "tz": 69.65,
@@ -83,62 +83,6 @@
    "time": "night",
    "caption": "Northwest Cave: at night",
    "out": "review/sweep/cave-1/cave-1-night.png"
-  },
-  {
-   "cam": {
-    "x": 166.2,
-    "y": 3.73,
-    "z": 58.2,
-    "tx": 163,
-    "ty": 2.53,
-    "tz": 55,
-    "fov": 50
-   },
-   "time": "noon",
-   "caption": "invisible-wall: a collider (r 0.8 m, 2.13 to 63.71 m) with nothing visible there",
-   "out": "review/sweep/cave-1/cave-1-suspect-1.png"
-  },
-  {
-   "cam": {
-    "x": 165.2,
-    "y": 3.99,
-    "z": 59.2,
-    "tx": 162,
-    "ty": 2.79,
-    "tz": 56,
-    "fov": 50
-   },
-   "time": "noon",
-   "caption": "invisible-wall: a collider (r 0.8 m, 2.39 to 63.71 m) with nothing visible there",
-   "out": "review/sweep/cave-1/cave-1-suspect-2.png"
-  },
-  {
-   "cam": {
-    "x": 164.2,
-    "y": 4.02,
-    "z": 60.2,
-    "tx": 161,
-    "ty": 2.82,
-    "tz": 57,
-    "fov": 50
-   },
-   "time": "noon",
-   "caption": "invisible-wall: a collider (r 0.8 m, 2.42 to 63.71 m) with nothing visible there",
-   "out": "review/sweep/cave-1/cave-1-suspect-3.png"
-  },
-  {
-   "cam": {
-    "x": 165.2,
-    "y": 4.63,
-    "z": 62.2,
-    "tx": 162,
-    "ty": 3.4299999999999997,
-    "tz": 59,
-    "fov": 50
-   },
-   "time": "noon",
-   "caption": "invisible-wall: a collider (r 0.8 m, 3.03 to 63.71 m) with nothing visible there",
-   "out": "review/sweep/cave-1/cave-1-suspect-4.png"
   }
  ],
  "out": "review/sweep/cave-1/",

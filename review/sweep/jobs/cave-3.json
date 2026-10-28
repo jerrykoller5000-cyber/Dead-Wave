@@ -74,7 +74,7 @@
    "cam": {
     "x": -150.15,
     "y": 7.05,
-    "z": 101.49000000000001,
+    "z": 101.49,
     "tx": -161.35,
     "ty": 1.6800000000000002,
     "tz": 90.29,
@@ -83,76 +83,6 @@
    "time": "night",
    "caption": "Northeast Cave: at night",
    "out": "review/sweep/cave-3/cave-3-night.png"
-  },
-  {
-   "cam": {
-    "x": -158.8,
-    "y": 0.08000000000000007,
-    "z": 78.2,
-    "tx": -162,
-    "ty": -1.12,
-    "tz": 75,
-    "fov": 50
-   },
-   "time": "noon",
-   "caption": "invisible-wall: a collider (r 0.8 m, -1.52 to 60.68 m) with nothing visible there",
-   "out": "review/sweep/cave-3/cave-3-suspect-1.png"
-  },
-  {
-   "cam": {
-    "x": -157.8,
-    "y": 0.25,
-    "z": 79.2,
-    "tx": -161,
-    "ty": -0.9500000000000001,
-    "tz": 76,
-    "fov": 50
-   },
-   "time": "noon",
-   "caption": "invisible-wall: a collider (r 0.8 m, -1.35 to 60.68 m) with nothing visible there",
-   "out": "review/sweep/cave-3/cave-3-suspect-2.png"
-  },
-  {
-   "cam": {
-    "x": -157.8,
-    "y": 0.68,
-    "z": 81.2,
-    "tx": -161,
-    "ty": -0.52,
-    "tz": 78,
-    "fov": 50
-   },
-   "time": "noon",
-   "caption": "invisible-wall: a collider (r 0.8 m, -0.92 to 60.68 m) with nothing visible there",
-   "out": "review/sweep/cave-3/cave-3-suspect-3.png"
-  },
-  {
-   "cam": {
-    "x": -152.8,
-    "y": 0.28,
-    "z": 81.2,
-    "tx": -156,
-    "ty": -0.92,
-    "tz": 78,
-    "fov": 50
-   },
-   "time": "noon",
-   "caption": "invisible-wall: a collider (r 0.8 m, -1.32 to 60.68 m) with nothing visible there",
-   "out": "review/sweep/cave-3/cave-3-suspect-4.png"
-  },
-  {
-   "cam": {
-    "x": -147.8,
-    "y": 1.31,
-    "z": 103.2,
-    "tx": -151,
-    "ty": 0.11000000000000004,
-    "tz": 100,
-    "fov": 50
-   },
-   "time": "noon",
-   "caption": "invisible-wall: a collider (r 0.8 m, -0.29 to 60.68 m) with nothing visible there",
-   "out": "review/sweep/cave-3/cave-3-suspect-5.png"
   },
   {
    "cam": {
@@ -166,7 +96,7 @@
    },
    "time": "noon",
    "caption": "reach: bolt-cutters: 1 of 12 ways in are open at 0.95 m",
-   "out": "review/sweep/cave-3/cave-3-suspect-6.png"
+   "out": "review/sweep/cave-3/cave-3-suspect-1.png"
   }
  ],
  "out": "review/sweep/cave-3/",

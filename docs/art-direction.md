@@ -60,6 +60,13 @@ supporting, one accent at most per view (the amber lamp, the hiker's orange pack
 **Saturation.** Natural and worn surfaces stay below about 45% saturation in the base color; only the reserved colors,
 signage and the hikers' gear go above it.
 
+**The dead's hides: two type colors (Claude, 2026-10-27, GP-19970).** The uncanny's palette (bone, bruise gray, drained
+family colors) is every zombie's, with two kept identities: the brute's and the demon's red-brown hides. They are how
+the two heaviest types read at a distance and have been since 1.0, and red means the dead on this game's map, so the
+hue stays. They follow the rest of the rules: the base color under the 45% cap and a step darker and grayer than
+today (brute #985548 is 53%, demon #8b3e32 64%), wet-organic roughness, no glow in the hide. The demon's fire and charge
+stay its warning exception; nothing else of either changes. No other zombie gets a saturated hide.
+
 ## 4. Scale and detail by camera
 
 - **The world's measure is the marine:** 1.8 m standing, a doorway 2.0-2.1 m by 0.9 m, a step 0.18 m, a table 0.75 m, a

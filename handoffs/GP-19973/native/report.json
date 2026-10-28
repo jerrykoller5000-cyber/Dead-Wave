@@ -1,0 +1,13 @@
+{
+  "renderer": "WebGPU",
+  "errors": [],
+  "checks": [
+    "unrepaired relay silent",
+    "repair without board has numbered lines only",
+    "carried board guidance names vault lift and HQ radio",
+    "guidance appears once",
+    "catch-up preserved",
+    "boat dispatches 18–20 preserved",
+    "radio panel at 1280 and 390 within viewport"
+  ]
+}

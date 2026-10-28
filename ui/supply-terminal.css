@@ -1,0 +1,92 @@
+/* GP-19970: the Branch's amber field terminal (UI principles §0).
+   Glass and scanlines sit behind the text; no post-filter or text distortion. */
+#shop {
+  --ink: #eddfbb;
+  --ink-dim: #c1b18c;
+  --accent: #e7bc65;
+  --accent-ink: #211807;
+  --accent-2: #a2b899;
+  --accent-2-ink: #182117;
+  color: var(--ink);
+  background: rgba(5, 7, 5, .78);
+}
+#shop .card {
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100dvh - 24px);
+  padding: 28px 30px 24px;
+  border: 2px solid #68705a;
+  background: linear-gradient(145deg, #3a4232, #20281e 55%, #303829);
+  box-shadow: 0 20px 60px #0009, inset 0 1px #a2a88b66, inset 0 -3px #11160f;
+}
+#shop .card::before {
+  inset: 12px;
+  width: auto;
+  height: auto;
+  z-index: -1;
+  border: 2px solid #0a0e09;
+  border-radius: 4px;
+  background:
+    repeating-linear-gradient(0deg, #f3c97408 0 1px, transparent 1px 4px),
+    radial-gradient(ellipse at 45% 0, #dca94b0a, transparent 75%),
+    #0c100b;
+  box-shadow: inset 0 4px 12px #000a, 0 1px #8b92714d;
+  pointer-events: none;
+}
+#shop h2 {
+  color: var(--accent);
+  padding-bottom: 10px;
+  margin-bottom: 0;
+  border-bottom: 1px solid #9c804a66;
+  text-shadow: 0 0 5px #dca94b24;
+}
+#shop h2 span:not(.shop-heading) { color: var(--ink-dim); }
+#shop #shopCash { color: #f7e5af; font-style: normal; font-variant-numeric: tabular-nums; }
+#shop .shop-heading::after {
+  content: '';
+  display: inline-block;
+  width: .25em;
+  height: .7em;
+  margin-left: .4em;
+  background: currentColor;
+  opacity: .8;
+}
+#shop.show .shop-heading::after { animation: supply-cursor .6s step-end 1; }
+@keyframes supply-cursor { 0%, 70% { opacity: .8; } 35% { opacity: 0; } }
+#shop #shopTabs button {
+  background: #161c12;
+  border-color: #6f694a;
+  color: #d2c49d;
+}
+#shop #shopTabs button.on {
+  background: #e7bc65;
+  border-color: #f1d89d;
+  color: #211807;
+  box-shadow: inset 0 -3px #a17636;
+}
+#shop #shopSubtabs button { font-size: 11px; }
+#shop p.hint { color: var(--ink-dim); opacity: 1; line-height: 1.4; }
+#shop #shopList { min-height: 0; scrollbar-color: #887348 #11160f; }
+#shop .perk { background: #11170f; border-color: #6a63413d; }
+#shop .perk .shop-icon { background: #b5903810; border-color: #a58b4b4d; }
+#shop .perk .name { color: #eedbad; }
+#shop .perk .desc { color: #c7bc9c; opacity: 1; }
+#shop .perk .shop-status { font-size: 11px; color: #dfbf7e; }
+#shop .perk .pips i { background: #b7b18c24; }
+#shop .perk .pips i.on { background: var(--accent-2); }
+#shop .perk button:disabled { background: #303428; color: #c1b696; }
+#shop .modes button { background: #1a2216; border: 1px solid #a38950; color: var(--accent); }
+#shop button:focus-visible { outline: 2px solid #f5d694; outline-offset: 3px; }
+#shop button:not(:disabled):hover { filter: brightness(1.1); }
+@media (max-width: 480px) {
+  #shop .card { padding: 24px 20px 20px; }
+  #shop .card::before { inset: 9px; }
+  #shop #shopTabs button { font-size: 11px; letter-spacing: 0; }
+  #shop .perk .desc, #shop .perk .weapon-actions button { font-size: 11px; }
+  #shop .perk .name { font-size: 12px; }
+  #shop h2 { gap: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #shop.show .shop-heading::after { animation: none; }
+}

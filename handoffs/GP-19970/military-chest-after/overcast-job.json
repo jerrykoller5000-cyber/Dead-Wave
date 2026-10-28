@@ -1,0 +1,9 @@
+{
+  "shots": [
+    {"target":"zombie.military:statue","view":"front","wait":300,"size":"1280x720","out":"handoffs/GP-19970/military-chest-after/overcast-front.png"},
+    {"target":"zombie.military:statue","view":"side","wait":300,"size":"1280x720","out":"handoffs/GP-19970/military-chest-after/overcast-side.png"}
+  ],
+  "out":"handoffs/GP-19970/military-chest-after",
+  "sheet":true,
+  "cols":2
+}

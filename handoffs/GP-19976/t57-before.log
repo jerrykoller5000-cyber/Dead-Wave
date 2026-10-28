@@ -1,0 +1,11 @@
+Game-test request f741f443-d248-4e59-8be6-1dcdea72448f queued at position 2. Waiting...
+GRANT chatgpt GP-19976: starting one game-test command
+check-players: 308 player.position reads, all in the allowed places
+FAIL  t57      6 pass   1 fail  23.7s
+
+1 checks: 6 pass, 1 fail
+
+by owner:
+  unassigned
+    t57    1 fail  FAIL threw: TypeError: Invalid equipment night
+           FAIL threw: TypeError: Invalid equipment night

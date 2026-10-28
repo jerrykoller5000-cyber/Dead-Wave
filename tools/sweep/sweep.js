@@ -119,7 +119,7 @@
   };
   // What isn't placed scenery: wildlife and effects that move or are parked in pools, the batches the trees and the
   // ground cover are drawn from (the trees come from their records), the grass.
-  const NOT_SCENERY = /makeOutlineBox|makeGrenadeArc|buildCellMark|^mark@|ensureRabbitMound@index.html:1010[0-9]|spawnOne|spawnSchool|spawnBugs|spawnWildlife|acquireEffectMesh|acquireMoteMesh|warmEffectPools|spawnChunks|spawnGib|spawnFlame|spawnMote|bakeFoliageChunks|buildTreeBatches|scatterWaterLife/;
+  const NOT_SCENERY = /spawnZombie|makeOutlineBox|makeGrenadeArc|buildCellMark|^mark@|ensureRabbitMound@index.html:1010[0-9]|spawnOne|spawnSchool|spawnBugs|spawnWildlife|acquireEffectMesh|acquireMoteMesh|warmEffectPools|spawnChunks|spawnGib|spawnFlame|spawnMote|bakeFoliageChunks|buildTreeBatches|scatterWaterLife/;
   // A placed thing is split into the objects it is made of: its meshes' pieces (vertices welded by position, then
   // connected), clustered by touch. A campsite baked into one mesh comes out as its tents, its logs and its fire ring;
   // a cabin, whose walls, roof and door all touch, stays one object.
@@ -222,6 +222,12 @@
     addItem('rock', 'rock:' + (r.kind || ''), ['rock records'], circle(r.x, r.z, r.radius / 0.88, 8), y, y + r.height, { rock: true });
   }
 
+  // CL-256 batch 3: the land's edge. He is held inside the boundary wall's inner face (the page clamps him to it), so
+  // what stands past it (the wall's outer foot, the river's grates, the cordon checkpoint's outer face) is never walked
+  // through or seen from below. Read from the wall's own pieces, so the sweep needs no extra hook.
+  const landR = (() => { let r = Infinity; for (const it of items) if (/buildBoundaryWall/.test(it.site.join(' '))) for (const [x, z] of it.poly) r = Math.min(r, Math.hypot(x, z)); return r; })();
+  const beyond = (it) => Math.hypot(it.cx, it.cz) > landR - 0.3;
+
   // ---- spatial index ----------------------------------------------------------------------------------------------
   const CELL = 8, grid = new Map();
   const key = (i, j) => i + ',' + j;
@@ -240,7 +246,7 @@
 
   // ---- 1. floating, hanging, buried ------------------------------------------------------------------------------
   for (const it of items) {
-    if (it.canopy || airborne(it)) continue;
+    if (it.canopy || airborne(it) || beyond(it)) continue;
     const float = it.y0 - it.gMax, hang = it.y0 - it.gMin, buried = it.gMin - it.y0;
     const onDeck = it.deck != null && Math.abs(it.deck - it.y0) < 0.3;
     // What it stands on, if anything: something under its underside with at least minA of shared footprint.
@@ -293,8 +299,13 @@
       const canopyHit = a.canopy || b.canopy;
       const other = a.canopy ? b : a, can = a.canopy ? a : b;
       if (canopyHit && other.h < 2.2) continue;   // a canopy over something low is shade, not a clip
-      const sev = share > 0.6 && yo > 0.5 ? 2 : 1;
-      const msg = canopyHit ? `${can.label}'s branches through ${other.label} (${r2(share * 100)} % of the smaller footprint, ${r2(yo)} m of height)`
+      // CL-256 batch 3: the smaller one wholly inside the bigger (footprint and height) is built into it, hidden, like
+      // a gate's post in the concrete pier cast round it: still listed, not strong.
+      const [sm, bg] = a.area <= b.area ? [a, b] : [b, a];
+      const inside = !canopyHit && share > 0.95 && sm.y0 >= bg.y0 - 0.3 && sm.y1 <= bg.y1 + 0.3;
+      const sev = share > 0.6 && yo > 0.5 && !inside ? 2 : 1;
+      const msg = inside ? `${sm.label} sits inside ${bg.label} (${r2(share * 100)} % of its footprint, within its height): built into it?`
+        : canopyHit ? `${can.label}'s branches through ${other.label} (${r2(share * 100)} % of the smaller footprint, ${r2(yo)} m of height)`
         : `${a.label} and ${b.label} overlap: ${r2(share * 100)} % of the smaller footprint, ${r2(yo)} m of height`;
       note(canopyHit ? 'branches' : 'overlap', sev, msg, { a: a.i, b: b.i, place: a.place, at: [r2((a.cx + b.cx) / 2), r2(Math.max(a.y0, b.y0)), r2((a.cz + b.cz) / 2)] });
     }
@@ -321,7 +332,8 @@
   for (const s of solids) { const k = key(Math.floor(s.x / CELL), Math.floor(s.z / CELL)); if (!sgrid.has(k)) sgrid.set(k, []); sgrid.get(k).push(s); }
   const solidsNear = (x, z, r) => { const out = []; for (let i = Math.floor((x - r - 3) / CELL); i <= Math.floor((x + r + 3) / CELL); i++) for (let j = Math.floor((z - r - 3) / CELL); j <= Math.floor((z + r + 3) / CELL); j++) for (const s of sgrid.get(key(i, j)) || []) out.push(s); return out; };
   for (const it of items) {
-    if (it.canopy || it.tree || it.rock || it.inst || airborne(it) || it.h < 1.2 || it.area < 0.5 || it.deck != null) continue;
+    if (it.canopy || it.tree || it.rock || it.inst || airborne(it) || it.h < 1.2 || it.area < 0.5 || it.deck != null || beyond(it)) continue;
+    if (it.water != null && it.y1 < it.gC + it.water - 0.1) continue;   // CL-256 batch 3: under the water he swims over it
     const hit = solidsNear(it.cx, it.cz, 3).some((s) => s.y1 > it.y0 && s.y0 < it.y1 && polyDist(s.x, s.z, it.poly) <= s.radius);
     if (!hit && it.place !== 'hq') note('no-collider', 1, `${it.label} (${r2(it.h)} m tall, ${it.area} m²) has no collider: he walks through it`, { a: it.i, place: it.place, at: at(it) });
   }
@@ -330,16 +342,25 @@
   const paths = T.PATHS || [];
   for (const it of items) {
     if (it.canopy || airborne(it) || it.h < 0.4 || it.inst) continue;
-    let d = Infinity;
+    // CL-256 batch 3: a bridge's or a dock's deck carries the trail.
+    if (it.deck != null || /buildBridge|buildDock|bridge|dock|pier|boardwalk/i.test(it.label + ' ' + it.site.join(' '))) continue;
+    // Its colliders, if it has any: a thing whose solids all stand clear of the trail's line straddles it (a tower's
+    // legs either side, an arch): he walks under it.
+    const own = solidsNear(it.cx, it.cz, 6).filter((s) => s.y1 > it.y0 && s.y0 < it.y1 && polyDist(s.x, s.z, it.poly) <= s.radius);
+    let d = Infinity, sd = Infinity;
     // A trail ends at the place it leads to: its last few metres at either end don't count.
     for (const pl of paths) for (let k = 0; k + 1 < pl.length; k++) {
       const a = pl[k], b = pl[k + 1];
       const end = (q) => Math.min(Math.hypot(q.x - pl[0].x, q.z - pl[0].z), Math.hypot(q.x - pl[pl.length - 1].x, q.z - pl[pl.length - 1].z));
       if (end(a) < 6 && end(b) < 6) continue;
+      // A trail that ends inside it leads to it (the HQ's door): not on it.
+      if (inPoly(pl[0].x, pl[0].z, it.poly) || inPoly(pl[pl.length - 1].x, pl[pl.length - 1].z, it.poly)) continue;
       if (Math.max(a.x, b.x) < it.bb[0] - 2 || Math.min(a.x, b.x) > it.bb[2] + 2 || Math.max(a.z, b.z) < it.bb[1] - 2 || Math.min(a.z, b.z) > it.bb[3] + 2) continue;
       for (const [x, z] of it.poly.concat([[it.cx, it.cz]])) d = Math.min(d, segDist(x, z, a.x, a.z, b.x, b.z));
       if (inPoly(a.x, a.z, it.poly) || inPoly(b.x, b.z, it.poly)) d = 0;
+      for (const s of own) sd = Math.min(sd, segDist(s.x, s.z, a.x, a.z, b.x, b.z) - s.radius);
     }
+    if (d < 0.6 && own.length && sd > 0.45) continue;
     if (d < 0.6) note('on-trail', it.h > 1 ? 2 : 1, `${it.label} stands on a trail (${r2(d)} m from its line)`, { a: it.i, place: it.place, at: at(it) });
   }
 
@@ -354,13 +375,18 @@
   const useRows = [];
   for (const u of uses) {
     const blocked = (x, z) => solidsNear(x, z, 0.5).some((s) => Math.hypot(s.x - x, s.z - z) < s.radius + 0.42);
+    // CL-256 batch 3: a thing he uses that stands inside its own collider (the fuel depot's tank) is reached from that
+    // collider's edge, so the ring is tried just outside it; past 2.2 m it says so (weak: a clue read from its own
+    // spot, like the ranger's radio from the truck's nose, is judged by eye).
+    let ring = 0.95;
+    for (const s of solidsNear(u.x, u.z, 0.5)) { const d0 = Math.hypot(s.x - u.x, s.z - u.z); if (d0 < s.radius) ring = Math.max(ring, d0 + s.radius + 0.47); }
     let open = 0; const dirs = 12;
-    for (let k = 0; k < dirs; k++) { const a = k / dirs * Math.PI * 2; if (!blocked(u.x + Math.cos(a) * 0.95, u.z + Math.sin(a) * 0.95)) open++; }
+    for (let k = 0; k < dirs; k++) { const a = k / dirs * Math.PI * 2; if (!blocked(u.x + Math.cos(a) * ring, u.z + Math.sin(a) * ring)) open++; }
     const stand = u.ax != null ? !blocked(u.ax, u.az) : null;
     const crowd = [...near(u.x - 1.2, u.z - 1.2, u.x + 1.2, u.z + 1.2)].filter((it) => !it.canopy && it.h > 0.5 && polyDist(u.x, u.z, it.poly) < 1.0).map((it) => it.label);
-    const row = { name: u.name, place: placeOf(u.x, u.z), x: r2(u.x), z: r2(u.z), openOf12: open, standClear: stand, crowd: crowd.slice(0, 8) };
+    const row = { name: u.name, place: placeOf(u.x, u.z), x: r2(u.x), z: r2(u.z), openOf12: open, ring: r2(ring), standClear: stand, crowd: crowd.slice(0, 8) };
     useRows.push(row);
-    if (open <= 3 || stand === false) note('reach', open <= 1 || stand === false ? 2 : 1, `${u.name}: ${open} of 12 ways in are open at 0.95 m${stand === false ? '; the spot he stands on is inside a collider' : ''}`, { place: row.place, at: [row.x, r2(H(u.x, u.z)), row.z] });
+    if (open <= 3 || stand === false || ring > 2.2) note('reach', open <= 1 || stand === false ? 2 : 1, `${u.name}: ${open} of 12 ways in are open at ${r2(ring)} m${ring > 2.2 ? ' (inside its own collider: he can get no closer)' : ''}${stand === false ? '; the spot he stands on is inside a collider' : ''}`, { place: row.place, at: [row.x, r2(H(u.x, u.z)), row.z] });
   }
 
   // ---- 6. spacing: the trees (Clark-Evans: about 1 random, under 1 clustered, well over 1 evenly spaced) ---------
@@ -383,8 +409,22 @@
   // ---- 7. the places to each other -----------------------------------------------------------------------------
   const gaps = places.map((p) => { let best = null, bd = Infinity; for (const q of places) { if (q === p) continue; const d = Math.hypot(p.x - q.x, p.z - q.z); if (d < bd) { bd = d; best = q; } } return { place: p.id, nearest: best && best.id, d: r2(bd) }; });
 
+  // CL-256 batch 3: where the report's cameras stand, for every place and every wild square with a suspect: pulled
+  // inside the land (a camera past the wall saw the world's underside) and at the water's surface where there is
+  // water (one on the lakebed saw the surface from below), as he would stand or swim.
+  const surf = (x, z) => H(x, z) + Math.max(0, T.waterDepthAt ? T.waterDepthAt(x, z) || 0 : 0);
+  const inLand = (x, z) => { const d = Math.hypot(x, z), m = landR - 2; return d > m ? [x * m / d, z * m / d] : [x, z]; };
+  const cams = {};
+  const camsFor = (id, x, z, r0) => {
+    const r = Math.max(10, Math.min(r0 || 20, 30)), c = {};
+    for (const [n, dx, dz] of [['north', 0, 1], ['east', 1, 0], ['south', 0, -1], ['west', -1, 0], ['night', 0.7, 0.7]]) { const [px, pz] = inLand(x + dx * r, z + dz * r); c[n] = { x: r2(px), z: r2(pz), g: r2(surf(px, pz)) }; }
+    c.centre = r2(surf(x, z)); cams[id] = c;
+  };
+  for (const p of places) camsFor(p.id, p.x, p.z, p.r);
+  for (const f of findings) { const m = /^wild:(-?\d+),(-?\d+)$/.exec(f.place || ''); if (m && !cams[f.place]) camsFor(f.place, +m[1], +m[2], 25); }
+
   const byPlace = {};
   for (const it of items) (byPlace[it.place] = byPlace[it.place] || []).push(it.i);
   for (const it of items) { delete it.pc; delete it.bb; }
-  return JSON.stringify({ when: new Date().toISOString(), places, gaps, items, findings, uses: useRows, spacing, byPlace, stats: { items: items.length, parts, hidden, skipped, solids: solids.length, trees: trees.length, rocks: rocks.length, paths: paths.length } });
+  return JSON.stringify({ when: new Date().toISOString(), landR: r2(landR), cams, places, gaps, items, findings, uses: useRows, spacing, byPlace, stats: { items: items.length, parts, hidden, skipped, solids: solids.length, trees: trees.length, rocks: rocks.length, paths: paths.length } });
 })()

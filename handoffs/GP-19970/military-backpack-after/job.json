@@ -1,0 +1,73 @@
+{
+  "shots": [
+    {
+      "target": "zombie.military:statue",
+      "view": "side",
+      "time": "noon",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/military-backpack-after/noon-side.png"
+    },
+    {
+      "target": "zombie.military:statue",
+      "view": "back",
+      "time": "noon",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/military-backpack-after/noon-back.png"
+    },
+    {
+      "target": "zombie.military:statue",
+      "view": "side",
+      "time": "dusk",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/military-backpack-after/dusk-side.png"
+    },
+    {
+      "target": "zombie.military:statue",
+      "view": "back",
+      "time": "dusk",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/military-backpack-after/dusk-back.png"
+    },
+    {
+      "target": "zombie.military:statue",
+      "view": "side",
+      "time": "night",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/military-backpack-after/night-side.png"
+    },
+    {
+      "target": "zombie.military:statue",
+      "view": "back",
+      "time": "night",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/military-backpack-after/night-back.png"
+    },
+    {
+      "target": "zombie.military:statue",
+      "view": "front",
+      "time": "noon",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/military-backpack-after/noon-front.png"
+    },
+    {
+      "target": "zombie.military:statue",
+      "view": "side",
+      "time": "noon",
+      "dist": 8,
+      "fov": 65,
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/military-backpack-after/gameplay-distance.png"
+    }
+  ],
+  "out": "handoffs/GP-19970/military-backpack-after",
+  "sheet": true,
+  "cols": 4
+}

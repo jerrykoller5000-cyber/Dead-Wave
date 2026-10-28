@@ -1,0 +1,11 @@
+{
+  "out": "qa/2026-10-27-AG-141",
+  "sheet": false,
+  "shots": [
+    {
+      "caption": "yard-head-ag135",
+      "out": "qa/2026-10-27-AG-141/yard-head-ag135.png",
+      "cam": { "x": -22.37, "y": 2.45, "z": 39.41, "tx": -26.18, "ty": 0.35, "tz": 41.61, "fov": 50 }
+    }
+  ]
+}

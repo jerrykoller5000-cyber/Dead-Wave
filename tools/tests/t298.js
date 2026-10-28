@@ -47,7 +47,11 @@
       if (dp > worstP) worstP = dp;
       if (da > worstA) worstA = da;
       if (dc > worstC) { worstC = dc; at = i; }
-      if (i >= 8 && dc > lateC) lateC = dc;
+      // CU-165: with the minigun's hold (GB-238) the eye is still catching the head at
+      // frame 8 (1.9 mm, almost all vertical). Frame 30 was already 0.02 mm and the
+      // rest of the clip matched to noise, so the settled check starts at frame 16.
+      // The frames before that stay on the 20 mm opening allowance below.
+      if (i >= 16 && dc > lateC) lateC = dc;
     }
     ok(worstP < 0.001, 'the player matches within 1 mm (' + worstP.toFixed(5) + ' m)');
     ok(worstA < 0.01, 'the camera direction matches within 0.01 deg (' + worstA.toFixed(4) + ')');

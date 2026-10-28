@@ -1,0 +1,47 @@
+{
+  "task": "AG-135",
+  "renderer": "WebGPU",
+  "cellarChecks": {
+    "shutState": {
+      "doorsOpen": false,
+      "doorLRotZ": 0,
+      "doorRRotZ": 0,
+      "doorBarVisible": true,
+      "hasDoorCollider": true
+    },
+    "openState": {
+      "doorsOpen": true,
+      "doorLRotZ": 1.92,
+      "doorRRotZ": -1.92,
+      "doorBarVisible": false,
+      "hasDoorCollider": false
+    },
+    "cellarSpot": {
+      "x": -28.42,
+      "y": -2.05,
+      "z": 43.42,
+      "yaw": 2.44
+    },
+    "cellarSpotInCellar": true,
+    "groupDraws": 11
+  },
+  "stairWalk": {
+    "startRelY": -0.07,
+    "midStairRelY": -0.88,
+    "bottomRelY": -2.15,
+    "bottomActualLz": -3.85,
+    "bottomInCellar": true,
+    "expectedFloorRelY": -2.15,
+    "traceCount": 29
+  },
+  "overheadZombies": {
+    "zombieCount": 3,
+    "zombieYs": [
+      0.06,
+      0.06,
+      0.06
+    ],
+    "playerRelY": -2.13,
+    "roofCapVisibleIn1P": true
+  }
+}

@@ -120,6 +120,9 @@ function resources(THREE) {
   rockGeo.computeVertexNormals();
   rockGeo.computeBoundingSphere();
   const rackPieces = [], strapPieces = [];
+  // Seat the stone carrier against the rounded upper back. The old rear plane
+  // left a visible gap at colossus scale; front strap anchors stay on the chest.
+  const rearInset = .12;
   const rod = (into, a, b, width) => {
     const av = new THREE.Vector3(...a), bv = new THREE.Vector3(...b);
     const geo = into === strapPieces
@@ -129,21 +132,21 @@ function resources(THREE) {
     geo.translate(...av.add(bv).multiplyScalar(.5).toArray()); into.push(geo);
   };
   for (const side of [-1, 1]) {
-    rod(rackPieces, [side * .48, .08, -.43], [side * .48, .88, -.43], .025);
-    rod(rackPieces, [side * .48, .08, -.43], [side * .48, .08, -.81], .025);
+    rod(rackPieces, [side * .48, .08, -.43 + rearInset], [side * .48, .88, -.43 + rearInset], .025);
+    rod(rackPieces, [side * .48, .08, -.43 + rearInset], [side * .48, .08, -.81 + rearInset], .025);
     // Broad straps run over the shoulders, out to the pack and down its face.
-    const points = [[side * .28, .30, .23], [side * .30, .55, .12], [side * .31, .63, -.30], [side * .43, .66, -.84], [side * .43, .12, -.86]];
+    const points = [[side * .28, .30, .23], [side * .30, .55, .12], [side * .31, .63, -.30 + rearInset], [side * .43, .66, -.84 + rearInset], [side * .43, .12, -.86 + rearInset]];
     for (let i = 1; i < points.length; i++) rod(strapPieces, points[i - 1], points[i], .032);
   }
-  for (const y of [.10, .43, .80]) rod(rackPieces, [-.48, y, -.43], [.48, y, -.43], .026);
-  for (const y of [.18, .51]) rod(strapPieces, [-.44, y, -.84], [.44, y, -.84], .026);
+  for (const y of [.10, .43, .80]) rod(rackPieces, [-.48, y, -.43 + rearInset], [.48, y, -.43 + rearInset], .026);
+  for (const y of [.18, .51]) rod(strapPieces, [-.44, y, -.84 + rearInset], [.44, y, -.84 + rearInset], .026);
   const flameGeo = flameGeometry(THREE);
   flameGeo.boundingSphere.radius += .85; // includes rising embers and curling tips
   const rackGeo = mergedGeometry(THREE, rackPieces), strapGeo = mergedGeometry(THREE, strapPieces);
   const rockMat = new THREE.MeshStandardMaterial({ color: 0x77756c, roughness: 1, flatShading: true });
   const rackMat = new THREE.MeshStandardMaterial({ color: 0x302b25, roughness: .82, metalness: .5 });
   const strapMat = new THREE.MeshStandardMaterial({ color: 0x34261b, roughness: .97 });
-  const stonePositions = [[-.28, .30, -.60], [0, .71, -.60], [.28, .30, -.60]];
+  const stonePositions = [[-.28, .30, -.60 + rearInset], [0, .71, -.60 + rearInset], [.28, .30, -.60 + rearInset]];
   const entries = [{ geometry: rackGeo, color: rackMat.color }, { geometry: strapGeo, color: strapMat.color }];
   for (let i = 0; i < stonePositions.length; i++) {
     const matrix = new THREE.Matrix4().compose(new THREE.Vector3(...stonePositions[i]),

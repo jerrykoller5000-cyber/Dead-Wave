@@ -1,0 +1,42 @@
+{
+  "generator": "built-in image_gen",
+  "purpose": "Six fictional portraits; CL-263 story-chain specification section 5",
+  "images": [
+    {
+      "id": "maya-costa",
+      "prompt": "Use case: photorealistic-natural. Asset type: a single square portrait texture for a fictional missing hiker poster in the Grave Shift game. Primary request: a believable candid photograph reproduced on a slightly washed-out black-and-white photocopier, restrained naturalism, early autumn hiking trip before anything went wrong. One person only, head and shoulders, full hair visible with comfortable margins, face large and clearly recognizable, neutral pale gray indistinct outdoor background. Clean rectangular image filling the whole square, no poster border. Ordinary person rather than a glamour model, natural asymmetry, distinct facial features, soft overcast light. Grayscale charcoal ink and warm off-white paper tone, subtle copier grain, readable eyes and face at 124 pixels wide; no heavy damage or stains across face. No text, no letters, no labels, no numbers, no watermark, no logos, no graphic symbols, no horror features, no weapons. Subject: Maya Costa, a fictional 27-year-old woman with dark shoulder-length curly hair, a relaxed half-smile, an ordinary fleece and backpack straps. She plans ghost-town hiking trips.",
+      "source": "C:\\Users\\Zero\\.codex\\generated_images\\01a16ec2-6bec-73f1-a414-3f710c524ae2\\exec-ad3a5a95-d034-4051-8ee7-1c78e2a589f3.png",
+      "output": "ui/assets/hikers/maya-costa.jpg"
+    },
+    {
+      "id": "theo-marsh",
+      "prompt": "Use case: photorealistic-natural. Asset type: a single square portrait texture for a fictional missing hiker poster in the Grave Shift game. Primary request: a believable candid photograph reproduced on a slightly washed-out black-and-white photocopier, restrained naturalism, early autumn hiking trip before anything went wrong. One person only, head and shoulders, full hair visible with comfortable margins, face large and clearly recognizable, neutral pale gray indistinct outdoor background. Clean rectangular image filling the whole square, no poster border. Ordinary person rather than a glamour model, natural asymmetry, distinct facial features, soft overcast light. Grayscale charcoal ink and warm off-white paper tone, subtle copier grain, readable eyes and face at 124 pixels wide; no heavy damage or stains across face. No text, no letters, no labels, no numbers, no watermark, no logos, no graphic symbols, no horror features, no weapons. Subject: Theo Marsh, a fictional 31-year-old male climber with a broad angular face, short wavy hair and a short beard, wearing a nylon shell jacket (red in the original photo, grayscale in this copy).",
+      "source": "C:\\Users\\Zero\\.codex\\generated_images\\01a16ec2-6bec-73f1-a414-3f710c524ae2\\exec-6bf88e0a-a8fb-4ed7-b430-d3b6c72491e9.png",
+      "output": "ui/assets/hikers/theo-marsh.jpg"
+    },
+    {
+      "id": "sam-marsh",
+      "prompt": "Use case: photorealistic-natural. Asset type: a single square portrait texture for a fictional missing hiker poster in the Grave Shift game. Primary request: a believable candid photograph reproduced on a slightly washed-out black-and-white photocopier, restrained naturalism, early autumn hiking trip before anything went wrong. One person only, head and shoulders, full hair visible with comfortable margins, face large and clearly recognizable, neutral pale gray indistinct outdoor background. Clean rectangular image filling the whole square, no poster border. Ordinary person rather than a glamour model, natural asymmetry, distinct facial features, soft overcast light. Grayscale charcoal ink and warm off-white paper tone, subtle copier grain, readable eyes and face at 124 pixels wide; no heavy damage or stains across face. No text, no letters, no labels, no numbers, no watermark, no logos, no graphic symbols, no horror features, no weapons. Subject: Sam Marsh, a fictional 22-year-old man, Theo's younger brother: broad angular face, tousled short wavy hair, clean-shaven, open laughing smile, plain hiking sweatshirt.",
+      "source": "C:\\Users\\Zero\\.codex\\generated_images\\01a16ec2-6bec-73f1-a414-3f710c524ae2\\exec-99468411-6609-48cb-8837-4c31b2e85ad3.png",
+      "output": "ui/assets/hikers/sam-marsh.jpg"
+    },
+    {
+      "id": "priya-raman",
+      "prompt": "Use case: photorealistic-natural. Asset type: a single square portrait texture for a fictional missing hiker poster in the Grave Shift game. Primary request: a believable candid photograph reproduced on a slightly washed-out black-and-white photocopier, restrained naturalism, early autumn hiking trip before anything went wrong. One person only, head and shoulders, full hair visible with comfortable margins, face large and clearly recognizable, neutral pale gray indistinct outdoor background. Clean rectangular image filling the whole square, no poster border. Ordinary person rather than a glamour model, natural asymmetry, distinct facial features, soft overcast light. Grayscale charcoal ink and warm off-white paper tone, subtle copier grain, readable eyes and face at 124 pixels wide; no heavy damage or stains across face. No text, no letters, no labels, no numbers, no watermark, no logos, no graphic symbols, no horror features, no weapons. Subject: Priya Raman, a fictional 24-year-old female geology student with dark hair tied back, oval face, round glasses, and a calm slightly amused expression, wearing a practical outdoor fleece.",
+      "source": "C:\\Users\\Zero\\.codex\\generated_images\\01a16ec2-6bec-73f1-a414-3f710c524ae2\\exec-441e66f7-3689-4f8d-8dbe-5577fac9726c.png",
+      "output": "ui/assets/hikers/priya-raman.jpg"
+    },
+    {
+      "id": "jonas-weber",
+      "prompt": "Use case: photorealistic-natural. Asset type: a single square portrait texture for a fictional missing hiker poster in the Grave Shift game. Primary request: a believable candid photograph reproduced on a slightly washed-out black-and-white photocopier, restrained naturalism, early autumn hiking trip before anything went wrong. One person only, head and shoulders, full hair visible with comfortable margins, face large and clearly recognizable, neutral pale gray indistinct outdoor background. Clean rectangular image filling the whole square, no poster border. Ordinary person rather than a glamour model, natural asymmetry, distinct facial features, soft overcast light. Grayscale charcoal ink and warm off-white paper tone, subtle copier grain, readable eyes and face at 124 pixels wide; no heavy damage or stains across face. No text, no letters, no labels, no numbers, no watermark, no logos, no graphic symbols, no horror features, no weapons. Subject: Jonas Weber, a fictional 29-year-old male hiker with close-cropped dark hair, a narrow face, a short beard, and a lopsided casual grin, wearing a worn work shirt over a T-shirt.",
+      "source": "C:\\Users\\Zero\\.codex\\generated_images\\01a16ec2-6bec-73f1-a414-3f710c524ae2\\exec-accf04d8-991a-4ec9-8b06-cf3420b9c019.png",
+      "output": "ui/assets/hikers/jonas-weber.jpg"
+    },
+    {
+      "id": "ellis-byrne",
+      "prompt": "Use case: photorealistic-natural. Asset type: a single square portrait texture for a fictional missing hiker poster in the Grave Shift game. Primary request: a believable candid photograph reproduced on a slightly washed-out black-and-white photocopier, restrained naturalism, early autumn hiking trip before anything went wrong. One person only, head and shoulders, full hair visible with comfortable margins, face large and clearly recognizable, neutral pale gray indistinct outdoor background. Clean rectangular image filling the whole square, no poster border. Ordinary person rather than a glamour model, natural asymmetry, distinct facial features, soft overcast light. Grayscale charcoal ink and warm off-white paper tone, subtle copier grain, readable eyes and face at 124 pixels wide; no heavy damage or stains across face. No text, no letters, no labels, no numbers, no watermark, no logos, no graphic symbols, no horror features, no weapons. Subject: Ellis Byrne, a fictional 34-year-old male hiker with a broad round face, receding short hair and light stubble, a small friendly smile, wearing an outdoor windbreaker.",
+      "source": "C:\\Users\\Zero\\.codex\\generated_images\\01a16ec2-6bec-73f1-a414-3f710c524ae2\\exec-6758b551-d095-43c9-9ac7-89884237f5a6.png",
+      "output": "ui/assets/hikers/ellis-byrne.jpg"
+    }
+  ]
+}

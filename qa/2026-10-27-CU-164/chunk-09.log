@@ -1,0 +1,42 @@
+Game-test request 1d6c3ac3-8767-41c5-887d-bf3091412697 queued at position 2. Waiting...
+GRANT cursor CU-164: starting one game-test command
+check-players: 308 player.position reads, all in the allowed places
+ok    t223    15 pass   0 fail  61.3s
+ok    t224    27 pass   0 fail  127.8s
+ok    t225    21 pass   0 fail  57.7s
+ok    t226    38 pass   0 fail  134.8s
+           INFO crouched: ankles bent up to 53 deg; an ankle-worn shaft top would be 13.4 cm off the shin
+ok    t227    23 pass   0 fail  46.8s
+ok    t228    13 pass   0 fail  144.2s
+ok    t229    13 pass   0 fail  83.8s
+ok    t240    17 pass   0 fail  56.5s
+FAIL  t241     4 pass   1 fail  39.5s
+ok    t242    15 pass   0 fail  37.8s
+ok    t243    23 pass   0 fail  38.3s
+info  t244     0 pass   0 fail  39.2s  — SKIP the manual clock does not drive this page (run on the real renderer)
+ok    t245    15 pass   0 fail  39.4s
+ok    t246    24 pass   0 fail  66.1s
+ok    t247    12 pass   0 fail  48.6s
+FAIL  t248    11 pass   1 fail  40.3s
+ok    t249    13 pass   0 fail  37.9s
+ok    t250    10 pass   0 fail  38.8s
+ok    t251     3 pass   0 fail  38.9s
+ok    t252    12 pass   0 fail  56.4s
+ok    t253    15 pass   0 fail  52.9s
+ok    t254     8 pass   0 fail  45.5s
+           INFO smoking pinch: solved 2.7 cm, sampled 2.7 cm, wrist miss 5.2 cm; shoulder target/actual 27.6/27.6 cm; hand offset 15.8 cm
+ok    t255     5 pass   0 fail  46.8s
+ok    t256    10 pass   0 fail  60.9s
+ok    t257     7 pass   0 fail  27.7s
+
+25 checks: 354 pass, 2 fail, 1 reported no assertions
+
+no assertions (probe, or the check bailed before asserting):
+  t244   SKIP the manual clock does not drive this page (run on the real renderer)
+
+by owner:
+  unassigned
+    t241   1 fail  FAIL he glows gold (0.00)
+           FAIL he glows gold (0.00)
+    t248   1 fail  FAIL the raised turret, with a clear line, does hit (hp 28/28)
+           FAIL the raised turret, with a clear line, does hit (hp 28/28)

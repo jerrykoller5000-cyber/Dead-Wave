@@ -1,0 +1,21 @@
+GRANT grokbot GB-242: starting one game-test command
+camera: no camera running, loading the game for this one call (`node tools/camera.mjs start` keeps it loaded)
+sheet: qa/2026-10-27-GB-242/after/noon/sheet.jpg
+check: 3 subjects, 0 broken
+qa/2026-10-27-GB-242/after/noon/check.json
+(0.7 s)
+camera: no camera running, loading the game for this one call (`node tools/camera.mjs start` keeps it loaded)
+sheet: qa/2026-10-27-GB-242/after/dusk/sheet.jpg
+check: 3 subjects, 0 broken
+qa/2026-10-27-GB-242/after/dusk/check.json
+(0.7 s)
+camera: no camera running, loading the game for this one call (`node tools/camera.mjs start` keeps it loaded)
+sheet: qa/2026-10-27-GB-242/after/night/sheet.jpg
+check: 3 subjects, 0 broken
+qa/2026-10-27-GB-242/after/night/check.json
+(0.6 s)
+camera: no camera running, loading the game for this one call (`node tools/camera.mjs start` keeps it loaded)
+sheet: qa/2026-10-27-GB-242/after/overcast/sheet.jpg
+check: 3 subjects, 0 broken
+qa/2026-10-27-GB-242/after/overcast/check.json
+(0.6 s)

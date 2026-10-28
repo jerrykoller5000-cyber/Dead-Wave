@@ -11,6 +11,7 @@ export const OBJECTIVE_SITES = Object.freeze([
 const DEFS = new Map(OBJECTIVE_SITES.map(site=>[site.id,site]));
 const STATES = new Set(['undiscovered','available','active','ready-to-claim','claimed','unavailable']);
 const OPEN = new Set(['available','active','ready-to-claim']);
+const canTrack = site => site && OPEN.has(site.state) && !site.storyClosed && (site.reachable || site.navigable);
 const point = p => p && Number.isFinite(p.x) && Number.isFinite(p.z);
 const run = id => (typeof id==='string'&&id.length>0)||(Number.isSafeInteger(id)&&id>=0);
 function rewardLabel(reward) {
@@ -33,7 +34,8 @@ export function createObjectiveTracker() {
       if(!site||!DEFS.has(site.id)||!STATES.has(site.state)||!point(site.position))continue;
       if(next.has(site.id)){duplicates.add(site.id);continue;}
       next.set(site.id,{id:site.id,state:site.state,position:{x:site.position.x,z:site.position.z},
-        reachable:site.reachable===true,progress:Number.isFinite(site.progress)?Math.max(0,Math.min(1,site.progress)):null,
+        reachable:site.reachable===true,navigable:site.navigable===true,storyClosed:site.storyClosed===true,
+        progress:Number.isFinite(site.progress)?Math.max(0,Math.min(1,site.progress)):null,
         feedback:['full','partial','interrupted'].includes(site.feedback)?site.feedback:null,
         reward:rewardLabel(site.reward),remaining:rewardLabel(site.remaining),
         choices:(Array.isArray(site.choices)?site.choices:[]).filter(c=>c&&typeof c.id==='string'&&rewardLabel(c.reward)).map(c=>({id:c.id,label:rewardLabel(c.reward)})),
@@ -41,18 +43,18 @@ export function createObjectiveTracker() {
     }
     for(const id of duplicates)next.delete(id);
     sequence=snapshot.sequence;active=snapshot.active===true;player=point(snapshot.player)?{x:snapshot.player.x,z:snapshot.player.z}:null;sites=next;
-    if(trackedId&&!OPEN.has(sites.get(trackedId)?.state)) {
+    if(trackedId&&(!OPEN.has(sites.get(trackedId)?.state)||sites.get(trackedId)?.storyClosed)) {
       notice='';trackedId=null;
     }
     return true;
   }
   function track(id) {
-    if(!active||!OPEN.has(sites.get(id)?.state)||!sites.get(id)?.reachable)return false;
+    if(!active||!canTrack(sites.get(id)))return false;
     trackedId=id;notice='';return true;
   }
   function untrack(){trackedId=null;notice='';}
   function read() {
-    const markers=[...sites.values()].filter(s=>OPEN.has(s.state)&&s.reachable).map(site=>{
+    const markers=[...sites.values()].filter(canTrack).map(site=>{
       const def=DEFS.get(site.id),title=text(def.titleKey);
       const distance=player?Math.round(Math.hypot(site.position.x-player.x,site.position.z-player.z)):null;
       return {id:site.id,icon:def.icon,title,position:{...site.position},selected:site.id===trackedId,distance,

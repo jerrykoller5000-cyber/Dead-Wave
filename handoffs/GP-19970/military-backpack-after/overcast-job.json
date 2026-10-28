@@ -1,0 +1,21 @@
+{
+  "shots": [
+    {
+      "target": "zombie.military:statue",
+      "view": "side",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/military-backpack-after/overcast-side.png"
+    },
+    {
+      "target": "zombie.military:statue",
+      "view": "back",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/military-backpack-after/overcast-back.png"
+    }
+  ],
+  "out": "handoffs/GP-19970/military-backpack-after",
+  "sheet": true,
+  "cols": 2
+}

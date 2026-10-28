@@ -1,7 +1,9 @@
 // core/takes.test.mjs — CL-148: reading where a take belongs, the folder list, levels, and the bank with a fake context.
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { TAKE_FOLDERS, takeFolderFor, groupTakes, levelFor, createTakeBank, PLANNED_FOLDERS_3, OPT_IN, NOT_WIRED, usesTakes, isWired, takeTarget, WIRED_3, LAYERED, LAYER_TAKE_V, ORIGINAL_ONLY } from './takes.js';
+import { TAKE_FOLDERS, takeFolderFor, groupTakes, levelFor, createTakeBank, PLANNED_FOLDERS_3, OPT_IN, NOT_WIRED, usesTakes, isWired, takeTarget, WIRED_3, LAYERED, LAYER_TAKE_V, ORIGINAL_ONLY,
+  isPackTake, chosenTakes, PACK_TRIM, packTrim, PACK_FOLDERS } from './takes.js';
+import { TAKE_LEVELS } from './take-levels.js';
 
 test('the folder list is z-sounds/: 112 folders, each once', () => {
   assert.equal(TAKE_FOLDERS.length, 112);
@@ -212,4 +214,60 @@ test('CL-172: the HQ alarm and the flares are the original sound alone', () => {
     assert.ok(ORIGINAL_ONLY.includes(id), id); assert.ok(!LAYERED.includes(id), id + ' is not layered');
   }
   assert.ok(LAYERED.includes('hq/skull-pickup') && LAYERED.includes('hq/hq-machine'), 'the rest of HQ stays layered');
+});
+
+test('CL-272: a folder\'s pack takes play in place of his; his switch brings his back; trims are the pack\'s alone', async () => {
+  assert.equal(isPackTake('zombies/guardian/roar/pk-ocular-distorted-throat.ogg'), true);
+  assert.equal(isPackTake('zombies/guardian/roar/guardian-roar-1.ogg'), false);
+  assert.equal(isPackTake('pk-x/guardian-roar-1.ogg'), false, 'the file, not a folder');
+  const l = ['zombies/guardian/roar/guardian-roar-1.ogg', 'zombies/guardian/roar/pk-ocular-a.ogg', 'zombies/guardian/roar/pk-ocular-b.ogg'];
+  assert.deepEqual(chosenTakes('zombies/guardian/roar', l, {}), l.slice(1));
+  assert.deepEqual(chosenTakes('zombies/guardian/roar', l, { 'zombies/guardian/roar': true }), l.slice(0, 1));
+  assert.deepEqual(chosenTakes('ui/click', ['ui/click/pk-a.ogg'], { 'ui/click': true }), ['ui/click/pk-a.ogg'], 'only pack takes: those');
+  assert.deepEqual(chosenTakes('ui/click', ['ui/click/a.ogg'], {}), ['ui/click/a.ogg']);
+  assert.equal(packTrim('zombies/guardian/slam', 'zombies/guardian/slam/pk-ocular-stomp.ogg'), PACK_TRIM['zombies/guardian/slam']);
+  assert.equal(packTrim('zombies/guardian/slam', 'zombies/guardian/slam/guardian-slam-1.ogg'), 1, 'his take is not trimmed');
+  // a trim is for a folder the bank knows (GB-239/CU-164: some are batch 3's, not wired yet, still heard on the listen page)
+  for (const [id, v] of Object.entries(PACK_TRIM)) { assert.equal(takeFolderFor(id + '/pk-x.ogg'), id, id); assert.ok(v >= 0.1 && v < 2, id); }
+  // the folders made for pack takes: known, wired unless NOT_WIRED says why not, read from a path, levelled
+  for (const id of PACK_FOLDERS) {
+    assert.equal(isWired(id), !NOT_WIRED.includes(id), id); assert.equal(takeFolderFor(id + '/pk-bc3-x.ogg'), id);
+    assert.ok(Number.isFinite(TAKE_LEVELS[id]), id + ' has a level');
+  }
+
+  const ctx = fakeCtx2(), store = memStore(); let fetched = [];
+  const bank = createTakeBank({ getCtx: () => ctx, connect: () => {}, storage: store,
+    // the committed index (his) and index-packs.json (the pack's) beside it
+    fetchJson: async (u) => {
+      if (u === 'z-sounds/index.json') return { files: ['zombies/guardian/roar/guardian-roar-1.ogg', 'zombies/caveguard/idle/a.ogg', 'turrets/heavy-turret-shot/a.ogg'] };
+      if (u === 'z-sounds/index-packs.json') return { files: ['zombies/guardian/roar/pk-ocular-a.ogg', 'weapons/machine-gun-shot/pk-rfs-a.ogg'] };
+      throw new Error('404');
+    },
+    fetchBytes: async (u) => { fetched.push(u); return { level: 0.2 }; } });
+  await bank.init();
+  assert.deepEqual(bank.packs('zombies/guardian/roar'), { pack: 1, mine: 1 });
+  await bank.load('zombies/guardian/roar');
+  assert.deepEqual(fetched, ['z-sounds/zombies/guardian/roar/pk-ocular-a.ogg'], 'the pack take, not his');
+  assert.equal(bank.play('zombies/guardian/roar'), true);
+  fetched = [];
+  assert.equal(bank.setMine('zombies/guardian/roar', true), true);
+  await bank.load('zombies/guardian/roar');
+  assert.deepEqual(fetched, ['z-sounds/zombies/guardian/roar/guardian-roar-1.ogg'], 'his take again');
+  assert.equal(JSON.parse(store.getItem('tt.takeMine'))['zombies/guardian/roar'], true, 'kept in the browser');
+  assert.equal(bank.mine('zombies/guardian/roar'), true);
+  bank.setMine('zombies/guardian/roar', false);
+  assert.equal(bank.mine('zombies/guardian/roar'), false);
+  assert.deepEqual(bank.packs('zombies/caveguard/idle'), { pack: 0, mine: 1 });
+  // switched on the listen page (another tab): the game's next look decodes his again
+  await bank.load('zombies/guardian/roar'); fetched = [];
+  store.setItem('tt.takeMine', JSON.stringify({ 'zombies/guardian/roar': true }));
+  await bank.refresh(); await bank.load('zombies/guardian/roar');
+  assert.deepEqual(fetched, ['z-sounds/zombies/guardian/roar/guardian-roar-1.ogg'], 'refresh picks up his switch');
+  // GB-239: an opt-in folder (shots never made) plays the packs' takes like any other; one without them stays off
+  assert.equal(usesTakes('weapons/machine-gun-shot', {}, true), true);
+  assert.equal(usesTakes('weapons/machine-gun-shot', { 'weapons/machine-gun-shot': false }, true), false, 'still his to switch off');
+  assert.equal(bank.uses('weapons/machine-gun-shot'), true);
+  assert.equal(bank.uses('turrets/heavy-turret-shot'), false, 'opt-in without the pack: off as before');
+  assert.equal(bank.setUse('weapons/machine-gun-shot', false), false);
+  assert.ok(OPT_IN.includes('weapons/rotary-gun-loop') && WIRED_3.includes('weapons/rotary-gun-loop'), 'the rotary gun\'s roar: the pack\'s, played');
 });

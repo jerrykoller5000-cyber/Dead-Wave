@@ -1,0 +1,52 @@
+GRANT cursor CU-166: starting one game-test command
+check-players: 309 player.position reads, all in the allowed places
+ok    t47     17 pass   0 fail  24.6s
+ok    t48     22 pass   0 fail  42.1s
+ok    t49     32 pass   0 fail  41.6s
+ok    t50     18 pass   0 fail  25.6s
+ok    t51     19 pass   0 fail  39.8s
+ok    t52     17 pass   0 fail  23.1s
+ok    t53     76 pass   0 fail  54.1s
+ok    t54     32 pass   0 fail  39.9s
+ok    t55     10 pass   0 fail  42.6s
+ok    t56      1 pass   0 fail  24.5s
+ok    t57     10 pass   0 fail  24.0s
+ok    t58      9 pass   0 fail  48.4s
+ok    t59     48 pass   0 fail  68.7s
+ok    t60     43 pass   0 fail  74.5s
+ok    t61     22 pass   0 fail  56.5s
+ok    t62      4 pass   0 fail  39.4s
+ok    t63      6 pass   0 fail  39.8s
+ok    t64      8 pass   0 fail  43.5s
+ok    t65     12 pass   0 fail  49.9s
+           INFO largest height change across one puddle: 0.114 m
+ok    t66      4 pass   0 fail  47.6s
+ok    t67      9 pass   0 fail  63.4s
+ok    t68     15 pass   0 fail  40.6s
+FAIL  t69     15 pass   3 fail  179.6s
+ok    t70     21 pass   0 fail  75.1s
+ok    t71     16 pass   0 fail  65.5s
+
+25 checks: 486 pass, 3 fail
+
+by owner:
+  unassigned
+    t69    3 fail  FAIL the whole wave is out
+           FAIL the whole wave is out
+           FAIL spawned out and the mouth clear: not busy
+           FAIL the assault cave pokes normally once its mouth is clear
+node:fs:2427
+    return binding.writeFileUtf8(
+                   ^
+
+Error: UNKNOWN: unknown error, open 'C:\Users\Zero\Desktop\Tiny Trek\crew\tests.json'
+    at Object.writeFileSync (node:fs:2427:20)
+    at file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/tests/run-all.mjs:297:4
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5) {
+  errno: -4094,
+  code: 'UNKNOWN',
+  syscall: 'open',
+  path: 'C:\\Users\\Zero\\Desktop\\Tiny Trek\\crew\\tests.json'
+}
+
+Node.js v24.13.0

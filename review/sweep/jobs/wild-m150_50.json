@@ -3,7 +3,7 @@
   {
    "cam": {
     "x": -150,
-    "y": 1.83,
+    "y": 0.85,
     "z": 75,
     "tx": -150,
     "ty": 1.33,
@@ -17,7 +17,7 @@
   {
    "cam": {
     "x": -125,
-    "y": 1.83,
+    "y": 3.24,
     "z": 50,
     "tx": -150,
     "ty": 1.33,
@@ -31,7 +31,7 @@
   {
    "cam": {
     "x": -150,
-    "y": 1.83,
+    "y": 3.0700000000000003,
     "z": 25,
     "tx": -150,
     "ty": 1.33,
@@ -45,7 +45,7 @@
   {
    "cam": {
     "x": -175,
-    "y": 1.83,
+    "y": 0.48,
     "z": 50,
     "tx": -150,
     "ty": 1.33,
@@ -83,20 +83,6 @@
    "time": "night",
    "caption": "The wild round -150,50: at night",
    "out": "review/sweep/wild-m150_50/wild-m150_50-night.png"
-  },
-  {
-   "cam": {
-    "x": -159.8,
-    "y": -0.25,
-    "z": 77.2,
-    "tx": -163,
-    "ty": -1.4500000000000002,
-    "tz": 74,
-    "fov": 50
-   },
-   "time": "noon",
-   "caption": "invisible-wall: a collider (r 0.8 m, -1.85 to 60.68 m) with nothing visible there",
-   "out": "review/sweep/wild-m150_50/wild-m150_50-suspect-1.png"
   }
  ],
  "out": "review/sweep/wild-m150_50/",

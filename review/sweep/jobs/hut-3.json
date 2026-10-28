@@ -4,7 +4,7 @@
    "cam": {
     "x": -48.13,
     "y": -1.3099999999999998,
-    "z": -0.33999999999999986,
+    "z": -0.34,
     "tx": -48.13,
     "ty": -1.7900000000000003,
     "tz": -16.34,
@@ -72,9 +72,9 @@
   },
   {
    "cam": {
-    "x": -36.93000000000001,
+    "x": -36.93,
     "y": 3,
-    "z": -5.140000000000001,
+    "z": -5.14,
     "tx": -48.13,
     "ty": -2,
     "tz": -16.34,
@@ -83,20 +83,6 @@
    "time": "night",
    "caption": "Hut 3 (fuel depot): at night",
    "out": "review/sweep/hut-3/hut-3-night.png"
-  },
-  {
-   "cam": {
-    "x": -40.93,
-    "y": -1.52,
-    "z": -15.14,
-    "tx": -44.13,
-    "ty": -2.72,
-    "tz": -18.34,
-    "fov": 50
-   },
-   "time": "noon",
-   "caption": "reach: objective:fuel-depot: 0 of 12 ways in are open at 0.95 m",
-   "out": "review/sweep/hut-3/hut-3-suspect-1.png"
   }
  ],
  "out": "review/sweep/hut-3/",

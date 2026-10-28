@@ -3,7 +3,7 @@
   {
    "cam": {
     "x": 0,
-    "y": 8.25,
+    "y": 1.67,
     "z": -75,
     "tx": 0,
     "ty": 7.75,
@@ -17,7 +17,7 @@
   {
    "cam": {
     "x": 25,
-    "y": 8.25,
+    "y": 8.83,
     "z": -100,
     "tx": 0,
     "ty": 7.75,
@@ -31,7 +31,7 @@
   {
    "cam": {
     "x": 0,
-    "y": 8.25,
+    "y": 9.91,
     "z": -125,
     "tx": 0,
     "ty": 7.75,
@@ -45,7 +45,7 @@
   {
    "cam": {
     "x": -25,
-    "y": 8.25,
+    "y": 6.03,
     "z": -100,
     "tx": 0,
     "ty": 7.75,
@@ -237,6 +237,34 @@
    "time": "noon",
    "caption": "branches: canopy:oak's branches through mesh · part 3/3 (98.65 % of the smaller footprint, 4.57 m of height)",
    "out": "review/sweep/wild-0_m100/wild-0_m100-suspect-11.png"
+  },
+  {
+   "cam": {
+    "x": -20.67,
+    "y": 3.1,
+    "z": -84.77,
+    "tx": -23.87,
+    "ty": 1.9,
+    "tz": -87.97,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "invisible-wall: a collider (r 1.2 m, 1.5 to 3.53 m) with nothing visible there",
+   "out": "review/sweep/wild-0_m100/wild-0_m100-suspect-12.png"
+  },
+  {
+   "cam": {
+    "x": -19.84,
+    "y": 3.54,
+    "z": -85.53,
+    "tx": -23.04,
+    "ty": 2.34,
+    "tz": -88.73,
+    "fov": 50
+   },
+   "time": "noon",
+   "caption": "invisible-wall: a collider (r 0.72 m, 1.94 to 2.9 m) with nothing visible there",
+   "out": "review/sweep/wild-0_m100/wild-0_m100-suspect-13.png"
   }
  ],
  "out": "review/sweep/wild-0_m100/",

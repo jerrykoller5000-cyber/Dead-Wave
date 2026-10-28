@@ -1,0 +1,10 @@
+PASS pistol calibre is .45
+PASS uzi calibre stays 9mm
+PASS .45 pack 36/$8 (GP-41 cut it from $12)
+PASS 9mm pack still present
+PASS starting .45 reserve is 50 (GB-36: 36 x1.4)
+PASS starting 9mm reserve is 0 (no Uzi yet)
+PASS buyAmmo(.45) succeeds
+PASS .45 reserve grew by one pack
+PASS listOwnedAmmoPackChoices includes .45
+PASS 9mm absent until Uzi owned

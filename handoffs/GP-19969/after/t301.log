@@ -1,0 +1,44 @@
+PASS AG-125 exports both real station centres
+PASS E at the real duty board opens its panel
+PASS day 1 has no lead cards
+PASS day 2 shows the generator dawn card
+PASS open generator gets a remote marker
+PASS closed medical lead has no marker
+PASS day 2: only earned cards, open generator first
+PASS day 2: no alarm control beside leads
+PASS stale-run Track refused
+PASS mismatched lead/site Track refused
+PASS remote Track refused
+PASS alarm request from duty mode refused
+PASS Track closes board and selects actual objective
+PASS day 3: only earned cards, open relay first
+PASS day 3: no alarm control beside leads
+PASS day 4: only earned cards, open medical first
+PASS day 4: no alarm control beside leads
+PASS day 5: only earned cards, open missing first
+PASS day 5: no alarm control beside leads
+PASS day 6: only earned cards, open truck first
+PASS day 6: no alarm control beside leads
+PASS day 7: only earned cards, open search first
+PASS day 7: no alarm control beside leads
+PASS day 8: only earned cards, open oldman first
+PASS day 8: no alarm control beside leads
+PASS day 9: only earned cards, open below first
+PASS day 9: no alarm control beside leads
+PASS 3P E at alarm opens alarm mode
+PASS alarm DOM contains only its report/actions
+PASS Heron is absent from alarm
+PASS 3P E at radio opens radio mode
+PASS radio has no alarm or duty cards
+PASS open station holds camera and frees pointer
+PASS 1P E at alarm opens alarm mode
+PASS alarm DOM contains only its report/actions
+PASS Heron is absent from alarm
+PASS 1P E at radio opens radio mode
+PASS radio has no alarm or duty cards
+PASS open station holds camera and frees pointer
+PASS Heron offered at radio on night 20
+PASS unconfirmed extraction refused
+PASS first Heron click only opens confirmation
+PASS cancel keeps preparations
+PASS confirmed Heron call accepted once and closes radio

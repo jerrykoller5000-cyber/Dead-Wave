@@ -1,0 +1,42 @@
+GRANT grokbot GB-232: starting one game-test command
+ok    t304      7 pass   0 fail  33.9s  (real renderer)
+    PASS day 3, the old man done: Okafor waits (trapper)
+    PASS the trapper exposes cellarSpot
+    PASS Okafor at cellarSpot: 0.00 m, y -2.05 vs -2.05
+    PASS from the yard above (2.21 m up): not in reach
+    PASS on the cellar floor beside her: in reach
+    PASS Brandt by the truck door (0.00 m)
+    PASS no errors
+ok    t215      4 pass   0 fail  40.5s  (real renderer)
+    PASS read index.html and the scripts and styles the game loaded (229 files)
+    PASS no broken characters in them
+    PASS the HUD reads clean: timeLine "Daylight · 08:21 · Grace", tacticalLine "NVG — · Laser — · Light —", grenadeChips "G×3H×0", ammoDetail "12 / 12  ·  50 Bullets  ·  SEMI", hpNum "100 / 100"
+    PASS and shows its dots and times signs (NVG — · Laser — · Light — / G×3H×0)
+ok    t95       9 pass   0 fail  38.1s  (real renderer)
+    PASS the pick is x0.8 (0.8)
+    PASS laser off: the cone is the gun's own
+    PASS every gun with a laser, 200 draws each: x0.8 within 5% (minigun 0.800 m4 0.800 ak 0.800 pistol 0.800 uzi 0.800 shotgun 0.801 aa12 0.801 revolver 0.800 sniper 0.800 launcher 0.800)
+    PASS AK, 2000 free draws each: 6.031 -> 4.826 mrad (x0.800)
+    PASS Z (toggleLasers) with the laser sight bought: on, and it steadies
+    PASS Z again: off
+    PASS no laser sight owned: no change (6.033 vs 6.033 mrad)
+    PASS the chainsaw has no laser: nothing to steady
+    PASS no page errors
+ok    t75      16 pass   0 fail  42.3s  (real renderer)
+    PASS GB-50 hooks exported
+    PASS knocked back along the blow (kv -2.44, 0.00)
+    PASS a stumble: lurch 0.73, aim off -0.064 rad, jolt 0.26
+    PASS a shambler does not put him on a knee
+    PASS a short slide: 0.36 m (dz 0.00)
+    PASS over within a moment (speedK 1)
+    PASS a brute puts him on one knee (0.55 s)
+    PASS slowed, never stopped: walk speed x0.45 at worst
+    PASS more for a brute: 0.92 m vs 0.36 m
+    PASS back on his feet within 0.55 s
+    PASS no knee lock: the next heavy hit within 3 s only knocks him back
+    PASS five spawned inside the marine (5)
+    PASS nobody inside him: the worst gap is 0.040 m (feral, 515 samples)
+    PASS they crowd him: 4 of 5 at arm’s length
+    PASS and their blows land from the ring (8 hits, -53 hp)
+    PASS no page errors ()
+4 checks: 36 pass, 0 fail (real renderer)

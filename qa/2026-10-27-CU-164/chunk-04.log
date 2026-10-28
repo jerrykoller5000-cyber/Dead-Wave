@@ -1,0 +1,41 @@
+Game-test request b9b2e377-03a8-483d-8e13-060e47eb9cfc queued at position 2. Waiting...
+GRANT cursor CU-164: starting one game-test command
+check-players: 308 player.position reads, all in the allowed places
+ok    t97     15 pass   0 fail  42.3s
+           INFO ragdoll off: 160 spawned, 160 alive at the end, 128 ticks, frame 93.87 ms avg / 622.10 ms worst (headless)
+           INFO ragdoll on: 160 spawned, 160 alive at the end, 104 ticks, frame 130.76 ms avg / 899.90 ms worst (headless)
+ok    t98     20 pass   0 fail  80.4s
+           INFO 120 spawned, 120 alive after 94.2 s and 26 legs (650 ticks)
+ok    t99      6 pass   0 fail  130.0s
+ok    t100     7 pass   0 fail  37.6s
+ok    t101     9 pass   0 fail  33.8s
+ok    t102    17 pass   0 fail  41.5s
+ok    t103     8 pass   0 fail  35.8s
+ok    t104     5 pass   0 fail  35.1s
+ok    t105    15 pass   0 fail  45.6s
+ok    t106     9 pass   0 fail  113.0s
+ok    t107     8 pass   0 fail  35.9s
+ok    t108     9 pass   0 fail  35.2s
+ok    t109     5 pass   0 fail  35.5s
+ok    t110     4 pass   0 fail  34.8s
+           INFO feral head centre p10 0.736, median 0.814 of hitH (line 0.7)
+           INFO leaper head centre p10 0.611, median 0.636 of hitH (line 0.55)
+           INFO spider head centre p10 0.665, median 0.694 of hitH (line 0.6)
+ok    t111    11 pass   0 fail  45.1s
+ok    t112    13 pass   0 fail  42.0s
+ok    t113     5 pass   0 fail  67.5s
+ok    t114     8 pass   0 fail  37.8s
+ok    t115    10 pass   0 fail  37.0s
+ok    t116     7 pass   0 fail  45.8s
+ok    t117    17 pass   0 fail  39.9s
+ok    t119    20 pass   0 fail  35.7s
+ok    t120    11 pass   0 fail  38.7s
+ok    t121    31 pass   0 fail  20.7s
+FAIL  t122    13 pass   1 fail  36.5s
+
+25 checks: 283 pass, 1 fail
+
+by owner:
+  unassigned
+    t122   1 fail  FAIL the upgrades tab lists a suppressor
+           FAIL the upgrades tab lists a suppressor

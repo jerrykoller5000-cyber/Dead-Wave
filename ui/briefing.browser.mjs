@@ -15,8 +15,8 @@ const source = fs.readFileSync(path.join(root, 'index.html'), 'utf8')
     '<script type="importmap">{"imports":{"three":"/tools/tests/fakethree.mjs","three/webgpu":"/tools/tests/fakethree.mjs","three/tsl":"/tools/tests/faketsl.mjs","three/addons/":"/tools/tests/addons/"}}</script>')
   .replace('window.TT = stampDebugHooks({', `window.gp63Probe={
     setup:(n,up)=>{day=n;phase='prep';hq.seq=null;relayUpDbg=up;
-      player.position.set(HQ_PANEL_FRONT.x,house.group.position.y+1,HQ_PANEL_FRONT.z);},
-    open:()=>openHQBriefing(),due:()=>{extractionState='due';extractionDay=day;hq.seq=null;phase='prep';},
+      const p=hqStation('radio').approach;player.position.set(p.x,p.y,p.z);},
+    open:()=>openHQBriefing({panel:'radio'}),due:()=>{extractionState='due';extractionDay=day;hq.seq=null;phase='prep';},
     dockPixel:()=>{minimapTick=0;drawMinimap(1);
       const p=projectScoutCave(POI.dock,{x:player.position.x,z:player.position.z,yaw:camYawCurrent,
         center:MAP_PX/2,scale:(MAP_PX/2-4)/MINI_R,rim:MAP_PX/2-7-8-28});
@@ -49,7 +49,7 @@ try {
   await page.evaluate(() => {gp63Probe.setup(20,false);gp63Probe.open();});
   assert(await page.getByRole('button',{name:'Call Heron'}).isHidden());
   assert(await page.getByText('Relay down — repair the radio mast to call Heron.').isVisible());
-  assert(await page.getByRole('button',{name:'Sound alarm'}).isEnabled());
+  assert(await page.locator('.briefing-alarm').isHidden());
   await page.screenshot({path:path.join(shots,'relay-down-1280.png')});
   await page.getByRole('button',{name:'Close',exact:true}).click();
 
@@ -61,6 +61,8 @@ try {
   await page.setViewportSize({width:390,height:844});
   await page.screenshot({path:path.join(shots,'boat-offered-390.png')});
   await boat.click();
+  assert.equal(await page.evaluate(()=>gp63Events.length),0);
+  await page.locator('.heron-confirm button').last().click();
   assert.deepEqual(await page.evaluate(() => gp63Events.map(e=>[e.phase,e.day])),[['called',20]]);
   assert.equal(await page.evaluate(() => TT.getWaveDirectorState().extraction.state),'called');
   assert.equal(await page.evaluate(() => document.getElementById('hqBriefing').open),false);

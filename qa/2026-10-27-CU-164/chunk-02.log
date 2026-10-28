@@ -1,0 +1,40 @@
+Game-test request 97c9e028-6b36-47ee-a953-4ce11299986a queued at position 2. Waiting...
+GRANT cursor CU-164: starting one game-test command
+check-players: 308 player.position reads, all in the allowed places
+ok    t47     17 pass   0 fail  23.8s
+ok    t48     22 pass   0 fail  40.4s
+ok    t49     32 pass   0 fail  41.5s
+ok    t50     18 pass   0 fail  25.3s
+ok    t51     19 pass   0 fail  41.3s
+ok    t52     17 pass   0 fail  23.0s
+ok    t53     76 pass   0 fail  49.4s
+ok    t54     32 pass   0 fail  39.7s
+ok    t55     10 pass   0 fail  40.9s
+ok    t56      1 pass   0 fail  22.7s
+FAIL  t57      6 pass   1 fail  24.6s
+ok    t58      9 pass   0 fail  46.0s
+ok    t59     48 pass   0 fail  66.9s
+ok    t60     43 pass   0 fail  71.1s
+ok    t61     22 pass   0 fail  54.3s
+ok    t62      4 pass   0 fail  38.5s
+ok    t63      6 pass   0 fail  39.7s
+ok    t64      8 pass   0 fail  42.6s
+ok    t65     12 pass   0 fail  47.3s
+           INFO largest height change across one puddle: 0.139 m
+ok    t66      4 pass   0 fail  44.7s
+ok    t67      9 pass   0 fail  65.5s
+ok    t68     15 pass   0 fail  40.6s
+FAIL  t69     15 pass   3 fail  88.8s
+ok    t70     21 pass   0 fail  91.7s
+ok    t71     16 pass   0 fail  64.4s
+
+25 checks: 482 pass, 4 fail
+
+by owner:
+  unassigned
+    t57    1 fail  FAIL threw: TypeError: Invalid equipment night
+           FAIL threw: TypeError: Invalid equipment night
+    t69    3 fail  FAIL the whole wave is out
+           FAIL the whole wave is out
+           FAIL spawned out and the mouth clear: not busy
+           FAIL the assault cave pokes normally once its mouth is clear

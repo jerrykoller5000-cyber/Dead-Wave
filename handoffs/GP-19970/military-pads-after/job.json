@@ -1,0 +1,17 @@
+{
+  "shots": [
+    {"target":"zombie.military:statue","view":"front","time":"noon","wait":300,"size":"1280x720","out":"handoffs/GP-19970/military-pads-after/noon-front.png"},
+    {"target":"zombie.military:statue","view":"side","time":"noon","wait":300,"size":"1280x720","out":"handoffs/GP-19970/military-pads-after/noon-side.png"},
+    {"target":"zombie.military:statue","view":"front","time":"dusk","wait":300,"size":"1280x720","out":"handoffs/GP-19970/military-pads-after/dusk-front.png"},
+    {"target":"zombie.military:statue","view":"side","time":"dusk","wait":300,"size":"1280x720","out":"handoffs/GP-19970/military-pads-after/dusk-side.png"},
+    {"target":"zombie.military:statue","view":"front","time":"night","wait":300,"size":"1280x720","out":"handoffs/GP-19970/military-pads-after/night-front.png"},
+    {"target":"zombie.military:statue","view":"side","time":"night","wait":300,"size":"1280x720","out":"handoffs/GP-19970/military-pads-after/night-side.png"},
+    {"target":"zombie.military:statue","view":"side","time":"noon","dist":8,"fov":65,"wait":300,"size":"1280x720","out":"handoffs/GP-19970/military-pads-after/gameplay-distance.png"},
+    {"target":"zombie.military:walk","view":"side","time":"noon","wait":500,"size":"1280x720","out":"handoffs/GP-19970/military-pads-after/walk-side.png"},
+    {"target":"zombie.military:statue","view":"side","time":"noon","move":{"zoom":2.5,"pan":[0,-0.2]},"wait":300,"size":"1280x720","out":"handoffs/GP-19970/military-pads-after/wrist-close-side.png"},
+    {"target":"zombie.military:statue","view":"side","time":"noon","move":{"zoom":2.5,"pan":[0,-0.6]},"wait":300,"size":"1280x720","out":"handoffs/GP-19970/military-pads-after/knee-close-side.png"}
+  ],
+  "out":"handoffs/GP-19970/military-pads-after",
+  "sheet":true,
+  "cols":4
+}

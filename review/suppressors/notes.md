@@ -13,9 +13,9 @@ Suppressors look good besides the shotguns. I would make it a bit bigger, think 
 
 > claude · taken · 2026-10-09
 
-## 2026-09-29 - Claude - answer: look at v2
-- The shotgun's can is now big and round, like the film's: about 12 cm across and 36 cm long, with a clamp on the
-  barrel and rings along it. v2/gun-shotgun.png (bare above, with the can below) and v2/guns-all.png.
-- The other five are unchanged.
+> claude · v2 · 2026-09-29: answer below (look at v2)
+> - The shotgun's can is now big and round, like the film's: about 12 cm across and 36 cm long, with a clamp on the
+>   barrel and rings along it. v2/gun-shotgun.png (bare above, with the can below) and v2/guns-all.png.
+> - The other five are unchanged.
 
 > claude · taken · 2026-10-09

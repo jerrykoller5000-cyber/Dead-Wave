@@ -4,6 +4,42 @@ Every call made for the game and the crew, in full, newest first. Claude writes 
 they stand unless Jerry overrides them. `crew/BOARD.md` lists each one on a single line; this file has the
 details. Moved here from the board on 2026-09-29 so the board stays short. Nothing was cut.
 
+- **D-96 · No Steam date: the base game first, through as many passes as it takes; then co-op; then the last polish and heavy testing; then Steam (Jerry, 2026-10-27, in chat).**
+  Jerry: "I would really hold off on any steam release ideas. This is going to probably be a lengthy project with many
+  passes. Co-op will go in way later as well. Basically once I'm satisfied completely with the base game, then we do
+  co-op. Last polish and test the hell out of it. Finally steam release. No real date set for that." So the order is:
+  (1) the base game, version by version (1.1, 1.2, ...), until Jerry is completely satisfied with it; (2) co-op;
+  (3) the last polish and testing it hard; (4) the Steam release, with no date. Nobody works on or plans Steam (the
+  store page, the trailer, Steamworks, achievements) or co-op until Jerry says the base game is done. This replaces
+  D-84's "Steam comes with 1.1 and co-op" and D-90's "co-op on hold until the base game is finished" says the same
+  for co-op. The itch.io builds go on as before (D-84).
+
+- **D-95 · The forest's clumping moves to 1.2; the rest of the sweep stays in 1.1; 1.2 is the forest and his 1.1 notes, nothing more (Claude's call, Jerry's scope, 2026-10-27, in chat).**
+  The valley's trees are spread too evenly (world-design rule 3: real woods clump; the sweep measured Clark-Evans R
+  1.46-1.87 in nine places). Making them clump moves every tree in the valley, and the missions, the clearings and many
+  tests lean on where trees stand (the hikers' kit tree, the holy grenade's tree, the cave trees). Done last before the
+  final suite, it is the one change that could break things all over the game for a look, so it waits for 1.2 with its
+  own test pass. 1.1 keeps the rest of CL-256: the six supply sites, the landmarks, the river and the bridge, the cave
+  mouths, the trails. Jerry: "I'm fine with trucking through or breaking it up." Then: "Let's slate it for 1.2. For
+  that next update it will just be 1.2 forest groupings and whatever is on my notes I found from the 1.1 play through."
+  So 1.2 is those two things only; the rest of the 1.x list waits for after it.
+  docs/sweep/fixes-batch2.md; CL-256; the 1.x list.
+
+- **D-94 · The sound packs: hands off most zombie sounds and the HQ alarm; both guardians replaced; the UI, the world and the weapons open (Jerry, 2026-10-26, in chat).**
+  Jerry bought three packs (F:\Sound_Effects: Real Firearms Sounds, Binary Code 3 - Interface Multiverse, Ocular
+  Sounds' 20 libraries): "see what you can use/replace sound effects with. Let's get our monies worth." He keeps most of
+  the zombie sounds (his batch-1 takes) and the HQ alarm sequence; both guardians' sounds are replaced; everything else
+  (the UI, the world, the weapons) takes the pack sound wherever it's better, his take or the synthesized one ("there are
+  a ton of material to work with in the packs"). Replaced takes stay in their folders: a folder with pack takes plays
+  those, and his "your takes" tick on the listen page brings his back. The UI pack's licence allows the game but not
+  the files on a server (Ocular's and the guns' terms are their stores'): every pack file is `pk-*`, git-ignored, and
+  ships only inside the builds.
+  docs/audio/packs.md; CL-272, GP-19975, GB-239, CU-164.
+- **D-93 · The late-game cash ends at about $4,200 (Jerry, 2026-10-26, in chat).**
+  The economy model (ui/economy-balance.mjs) ended night 20 with 10.9k against GB-53's 2-3k aim after D-86 doubled the
+  shambler skull (GB-237). Of the measured options Jerry chose "Money ending at roughly $4,200": the late kill pay falls
+  6 % a night from night 8 to a 0.40 floor from night 17 (LATE_CASH_NIGHT 8, FACTOR 0.40, STEP 0.06); the model ends
+  night 20 at 4,206. CL-270.
 - **D-92 · The sound and UI principles approved; a sound only if it's immersive or impactful (Jerry, 2026-10-26, in chat).**
   Jerry read docs/ui-principles.md and docs/sound-principles.md: "UI is good." For sound, in place of the draft's "every
   sound means something": "no noise unless it's: 1. Immersive 2. Impactful." Both are now in force (CL-268).

@@ -24,12 +24,16 @@ test('invalid quotes cannot create a negative, fractional, unsafe or NaN charge'
 test('twenty-night budget includes the late skull trim and purchasable mod sinks',()=>{
  const rows=JSON.parse(execFileSync(process.execPath,[fileURLToPath(new URL('./economy-balance.mjs',import.meta.url))],{encoding:'utf8'}));
  assert.equal(rows.length,20);
- const raw=[15,74,200,308,666,709,522,1008,1122,1498,1056,1574,1833,1526,2358,2416,1874,2565,3096,3766];
+ // GB-237 (rule 13): reset to the live roster. D-86 (CL-244/GP-19955) doubled the shambler's skull (cashDrop 1 -> 2) and
+ // retuned NIGHT_PLAN's totals, and GB-230 reshaped night 1; the old list (15,74,200,...,3766) predates both.
+ const raw=[30,116,270,424,742,945,862,1185,1249,1752,1736,2154,2188,2129,2769,2947,3049,3716,3993,4877];
  for(const r of rows){
   assert.equal(r.raw,raw[r.night-1],'GB-53 rewards are unchanged');
   const beforeTrim=r.night===1?15:Math.floor(r.raw*(r.night%4===0?1.5:1)*.95);
   assert.equal(r.bankedBeforeTrim,beforeTrim,'GB-61 skull recovery is modelled');
-  assert.equal(r.banked,r.night>=11?Math.floor(beforeTrim*.67):beforeTrim,'GB-113 late kill payout is modelled');
+  // GB-237 (rule 13): D-86 replaced GB-113's flat x0.67 from night 11 with x(1 - 0.04 (n - 8)) from night 9, floor 0.60;
+  // D-93 (Jerry, 2026-10-26) made it x(1 - 0.06 (n - 7)) from night 8, floor 0.40.
+  assert.equal(r.banked,r.night>=8?Math.floor(beforeTrim*Math.max(.4,1-.06*(r.night-7))):beforeTrim,'D-93 late kill payout is modelled');
   assert(r.cost>0);assert(r.available>=r.cost,'Night '+r.night+' cannot fund '+r.purchase);
   assert.equal(r.openingCash,r.night===1?0:rows[r.night-2].afterPurchase);
   assert.equal(r.available,r.openingCash+r.standaloneAvailable);
@@ -46,6 +50,7 @@ test('twenty-night budget includes the late skull trim and purchasable mod sinks
  assert.equal(rows[11].cost,565,'the launcher and second suppressor are both counted');
  for(const night of [11,13,15,16,17,18,19,20])assert(rows[night-1].cost>=500,'Night '+night+' needs a useful late sink');
  assert.match(rows[19].purchase,/Mk III/);
- assert.equal(rows[19].afterPurchase,2311,'late payout and owned mod sinks target a 2–3k final reserve');
- for(const r of rows.slice(10))assert(r.afterPurchase>=2000&&r.afterPurchase<=3000,'night '+r.night+' stays near the target reserve');
+ assert.equal(rows[19].afterPurchase,4206,'D-93 (Jerry): the late payout and the owned sinks end night 20 at about $4,200');
+ // D-93: from night 11 the reserve holds near Jerry's ~$4,200 (it was GB-53's 2-3k band).
+ for(const r of rows.slice(10))assert(r.afterPurchase>=3500&&r.afterPurchase<=5000,'night '+r.night+' stays near the D-93 reserve');
 });

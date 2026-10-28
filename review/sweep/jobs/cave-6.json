@@ -83,20 +83,6 @@
    "time": "night",
    "caption": "Southwest Cave: at night",
    "out": "review/sweep/cave-6/cave-6-night.png"
-  },
-  {
-   "cam": {
-    "x": 168.2,
-    "y": -0.34999999999999987,
-    "z": -81.8,
-    "tx": 165,
-    "ty": -1.5499999999999998,
-    "tz": -85,
-    "fov": 50
-   },
-   "time": "noon",
-   "caption": "invisible-wall: a collider (r 0.8 m, -1.95 to 57.9 m) with nothing visible there",
-   "out": "review/sweep/cave-6/cave-6-suspect-1.png"
   }
  ],
  "out": "review/sweep/cave-6/",

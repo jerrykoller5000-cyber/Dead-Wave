@@ -1,0 +1,244 @@
+{
+  "hqFrames": [
+    {
+      "id": "duty-noon",
+      "label": "Duty Board: Noon",
+      "promptText": "",
+      "promptVisible": false,
+      "renders": {
+        "calls": 2640,
+        "frameCalls": 22,
+        "drawCalls": 625,
+        "triangles": 811970,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    {
+      "id": "duty-overcast",
+      "label": "Duty Board: Overcast",
+      "promptText": "",
+      "promptVisible": false,
+      "renders": {
+        "calls": 2696,
+        "frameCalls": 22,
+        "drawCalls": 326,
+        "triangles": 806450,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    {
+      "id": "duty-dusk",
+      "label": "Duty Board: Dusk",
+      "promptText": "",
+      "promptVisible": false,
+      "renders": {
+        "calls": 2752,
+        "frameCalls": 22,
+        "drawCalls": 654,
+        "triangles": 845062,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    {
+      "id": "duty-night",
+      "label": "Duty Board: Night + Lamp",
+      "promptText": "",
+      "promptVisible": false,
+      "renders": {
+        "calls": 2808,
+        "frameCalls": 22,
+        "drawCalls": 654,
+        "triangles": 844646,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    {
+      "id": "radio-noon",
+      "label": "HQ Radio Set: Noon",
+      "promptText": "",
+      "promptVisible": false,
+      "renders": {
+        "calls": 2864,
+        "frameCalls": 22,
+        "drawCalls": 610,
+        "triangles": 799765,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    {
+      "id": "radio-overcast",
+      "label": "HQ Radio Set: Overcast",
+      "promptText": "",
+      "promptVisible": false,
+      "renders": {
+        "calls": 2920,
+        "frameCalls": 22,
+        "drawCalls": 297,
+        "triangles": 783251,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    {
+      "id": "radio-dusk",
+      "label": "HQ Radio Set: Dusk",
+      "promptText": "",
+      "promptVisible": false,
+      "renders": {
+        "calls": 2976,
+        "frameCalls": 22,
+        "drawCalls": 627,
+        "triangles": 820639,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    {
+      "id": "radio-night",
+      "label": "HQ Radio Set: Night + Dial",
+      "promptText": "",
+      "promptVisible": false,
+      "renders": {
+        "calls": 3032,
+        "frameCalls": 22,
+        "drawCalls": 627,
+        "triangles": 820223,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    {
+      "id": "south-facade-overview",
+      "label": "South Wall Context (All Stations)",
+      "promptText": "",
+      "promptVisible": false,
+      "renders": {
+        "calls": 3088,
+        "frameCalls": 22,
+        "drawCalls": 726,
+        "triangles": 879015,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    {
+      "id": "duty-gameplay-3p",
+      "label": "Duty Board: 3P Gameplay + E",
+      "promptText": "EDuty board",
+      "promptVisible": false,
+      "renders": {
+        "calls": 9668,
+        "frameCalls": 22,
+        "drawCalls": 902,
+        "triangles": 1098857,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    {
+      "id": "duty-gameplay-1p",
+      "label": "Duty Board: 1P Gameplay + E",
+      "promptText": "EDuty board",
+      "promptVisible": false,
+      "renders": {
+        "calls": 9774,
+        "frameCalls": 22,
+        "drawCalls": 1025,
+        "triangles": 1183746,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    {
+      "id": "radio-gameplay-1p",
+      "label": "HQ Radio Set: 1P Gameplay + E",
+      "promptText": "ERadio",
+      "promptVisible": false,
+      "renders": {
+        "calls": 9880,
+        "frameCalls": 22,
+        "drawCalls": 1148,
+        "triangles": 1224162,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    }
+  ],
+  "loadSec": 16.581,
+  "wallOpenSec": 16.99,
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "init": {
+    "storyStations": {
+      "duty": {
+        "centre": {
+          "x": -1.62,
+          "y": -1.6086761379241943,
+          "z": -5.22
+        },
+        "approach": {
+          "x": -1.62,
+          "y": -3.1686761379241943,
+          "z": -5.9
+        },
+        "reach": 1.45
+      },
+      "radio": {
+        "centre": {
+          "x": 1.62,
+          "y": -1.7086761379241944,
+          "z": -5.22
+        },
+        "approach": {
+          "x": 1.62,
+          "y": -3.1686761379241943,
+          "z": -5.9
+        },
+        "reach": 1.25
+      }
+    },
+    "hqDutyBoardFront": {
+      "x": -1.62,
+      "z": -5.9
+    },
+    "hqDutyBoardReach": 1.45,
+    "hqRadioFront": {
+      "x": 1.62,
+      "z": -5.9
+    },
+    "hqRadioReach": 1.25,
+    "hqPanelFront": {
+      "x": 3.2,
+      "z": -5.9
+    },
+    "hasDutyBoardMesh": true,
+    "hasRadioSetMesh": true,
+    "trailheadPosterCountDirect": 3,
+    "trailheadPosterCountTotal": 6,
+    "trailheadHikers": [
+      "MAYA COSTA, 27",
+      "THEO MARSH, 31",
+      "SAM MARSH, 22",
+      "PRIYA RAMAN, 24",
+      "JONAS WEBER, 29",
+      "ELLIS BYRNE, 34"
+    ]
+  },
+  "pageErrors": []
+}

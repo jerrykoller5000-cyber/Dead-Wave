@@ -31,6 +31,18 @@ export const TRAPPER = Object.freeze({
   YARD_OFF_Z: -2.6,
   YARD_YAW: 2.0944,   // 120 deg: yard runs from the root cellar behind his cabin out toward the trail from HQ
   HATCH_APPROACH_Z: 1.44,
+  // AG-135 (story-chain.md §4 day 8, CL-263): the trapper's iron-lined cellar under the bulkhead doors:
+  CELLAR_FLOOR_Y: -2.15,
+  CELLAR_CEIL_UNDER_Y: -0.14,
+  CELLAR_ROOF_Y: 0.06,
+  STAIR_Z_TOP: -0.34,
+  STAIR_Z_BOT: -1.86,
+  STAIR_HALF_W: 0.62,
+  ROOM_Z_FRONT: -2.28,
+  ROOM_Z_BACK: -5.06,
+  ROOM_HALF_W: 1.62,
+  CELLAR_SPOT_X: -0.45,
+  CELLAR_SPOT_Z: -3.65,
 });
 
 export function rowZ(row, rule = TRAPPER) {
@@ -273,7 +285,8 @@ function hash01(a, b) {
 
 // Builds the static geometry parts, stepping-stone descriptors, fence-post descriptors, and solid collider spots
 // for the rebuilt trapper's yard (AG-124, N28; docs/world-design.md rules 1, 2, 9, 12).
-export function buildTrapperYardParts(THREE, { groundAtLocal, toWorld, cy0 = 0, trapperPart, trapperBar, rule = TRAPPER }) {
+export function buildTrapperYardParts(THREE, { groundAtLocal, surfAtLocal, doorPivotY = 0.18, toWorld, cy0 = 0, trapperPart, trapperBar, rule = TRAPPER }) {
+  const surfY = typeof surfAtLocal === 'function' ? surfAtLocal : () => 0;
   const parts = [];
   const stones = [];
   const posts = [];
@@ -291,8 +304,8 @@ export function buildTrapperYardParts(THREE, { groundAtLocal, toWorld, cy0 = 0, 
 
   // 1. Dark forest humus base & organic multi-layered autumn leaf bed (no checkerboard grid).
   const nx = 10, nz = 28;
-  const x0 = -rule.BED_HALF_W - 0.08, x1 = rule.BED_HALF_W + 0.08;
-  const z0 = rule.BED_Z_MIN - 0.22, z1 = rule.BED_Z_MAX + 0.14;
+  const x0 = -1.00, x1 = 1.00;
+  const z0 = 1.24, z1 = 8.68;
   for (let ix = 0; ix < nx; ix++) {
     for (let iz = 0; iz < nz; iz++) {
       const u0 = ix / nx, u1 = (ix + 1) / nx;
@@ -320,11 +333,11 @@ export function buildTrapperYardParts(THREE, { groundAtLocal, toWorld, cy0 = 0, 
       const driftCount = edgeFade > 0.35 ? 2 : 1;
       for (let d = 0; d < driftCount; d++) {
         const hd = hash01(ix * 41 + d * 13, iz * 53 + d * 7);
-        const jx = mx + (hd - 0.5) * 0.22;
-        const jz = mz + (hash01(ix * 19 + d, iz * 37 + d) - 0.5) * 0.22;
+        const jx = Math.max(-0.96, Math.min(0.96, mx + (hd - 0.5) * 0.18));
+        const jz = Math.max(1.26, Math.min(8.66, mz + (hash01(ix * 19 + d, iz * 37 + d) - 0.5) * 0.18));
         const ly = groundAtLocal(jx, jz) + 0.026 + (hd * 0.014);
-        const rx = 0.11 + hd * 0.09;
-        const rz = 0.09 + h2 * 0.08;
+        const rx = 0.10 + hd * 0.07;
+        const rz = 0.08 + h2 * 0.07;
         const col = leafPalette[Math.floor((hd + h2) * 7) % leafPalette.length];
         parts.push(trapperPart(
           new THREE.DodecahedronGeometry(0.085, 0),
@@ -335,7 +348,8 @@ export function buildTrapperYardParts(THREE, { groundAtLocal, toWorld, cy0 = 0, 
         ));
       }
       if (h2 > 0.68) {
-        const tx = mx + (h1 - 0.5) * 0.16, tz = mz + (h2 - 0.5) * 0.16;
+        const tx = Math.max(-0.92, Math.min(0.92, mx + (h1 - 0.5) * 0.14));
+        const tz = Math.max(1.28, Math.min(8.64, mz + (h2 - 0.5) * 0.14));
         const ty = groundAtLocal(tx, tz) + 0.032;
         const ang = h1 * Math.PI * 2, tLen = 0.16 + h2 * 0.14;
         trapperBar(parts,
@@ -350,9 +364,9 @@ export function buildTrapperYardParts(THREE, { groundAtLocal, toWorld, cy0 = 0, 
   const hiddenTrapSpots = [];
   for (let r = 0; r < rule.ROWS; r++) {
     const lz = rowZ(r, rule);
-    hiddenTrapSpots.push([-0.92, lz + 0.14, r * 1.1 + 0.3]);
-    hiddenTrapSpots.push([0.0, lz - 0.38, r * 0.85 - 0.4]);
-    hiddenTrapSpots.push([0.92, lz - 0.12, r * 1.3 + 0.9]);
+    hiddenTrapSpots.push([-0.84, lz + 0.12, r * 1.1 + 0.3]);
+    hiddenTrapSpots.push([0.0, lz - 0.34, r * 0.85 - 0.4]);
+    hiddenTrapSpots.push([0.84, lz - 0.10, r * 1.3 + 0.9]);
   }
   for (let i = 0; i < hiddenTrapSpots.length; i++) {
     const [tx, tz, rot] = hiddenTrapSpots[i];
@@ -424,10 +438,10 @@ export function buildTrapperYardParts(THREE, { groundAtLocal, toWorld, cy0 = 0, 
       stones.push({ row: r, side, lx, lz, x: w.x, y: cy0 + gy + 0.082, z: w.z });
     }
   }
-  // Threshold flagstones at the cellar apron (z = 1.42) and yard gate entrance (z = 9.02):
+  // Threshold flagstones at the cellar apron (z = 1.42) and yard gate entrance (z = 8.68):
   for (const [az, aw, ad] of [
-    [1.42, 0.36, 0.28],
-    [9.02, 0.40, 0.30],
+    [1.42, 0.36, 0.26],
+    [8.68, 0.38, 0.26],
   ]) {
     for (const sx of [-0.30, 0.30]) {
       const gy = groundAtLocal(sx, az);
@@ -455,23 +469,23 @@ export function buildTrapperYardParts(THREE, { groundAtLocal, toWorld, cy0 = 0, 
       parts.push(trapperPart(postCap.clone(), barkPalette[0], lx, gy + 1.29, lz));
       parts.push(trapperPart(postBand.clone(), ironDark, lx, gy + 1.12, lz));
       // Pale weathered backing board facing the approach (+z) and slightly inward toward the path:
-      parts.push(trapperPart(postPlaque.clone(), 0xc8b68e, lx - sgn * 0.015, gy + 0.88, lz + 0.068, 0, -sgn * 0.24, 0));
+      parts.push(trapperPart(postPlaque.clone(), 0xc8b68e, lx - sgn * 0.005, gy + 0.88, lz + 0.068, 0, -sgn * 0.20, 0));
       const w = toWorld(lx, lz);
       posts.push({ row: r, side, lx, lz, x: w.x, y: cy0 + gy, z: w.z });
     }
   }
 
-  // Heavy gate posts at the yard entrance (lz = rule.BED_Z_MAX + 0.08 = 9.03) and cellar bulkhead posts (lz = 0.42):
+  // Heavy gate posts at the yard entrance (lz = rule.BED_Z_MAX + 0.08 = 9.03) and cellar bulkhead posts (lz = 0.68):
   const gateZ = rule.BED_Z_MAX + 0.08;
   const gatePostGeo = new THREE.BoxGeometry(0.22, 2.25, 0.22);
   const gateCapGeo = new THREE.BoxGeometry(0.26, 0.06, 0.26);
   for (const side of [0, 1]) {
     const sgn = sideSign(side);
     const lx = sgn * rule.POST_X;
-    // Cellar end anchor post (lz = 0.42):
-    const gy0 = groundAtLocal(lx, 0.42);
-    parts.push(trapperPart(postBox.clone(), woodPalette[side], lx, gy0 + 0.62, 0.42));
-    parts.push(trapperPart(postCap.clone(), barkPalette[0], lx, gy0 + 1.27, 0.42));
+    // Cellar end anchor post (lz = 0.68):
+    const gy0 = groundAtLocal(lx, 0.68);
+    parts.push(trapperPart(postBox.clone(), woodPalette[side], lx, gy0 + 0.62, 0.68));
+    parts.push(trapperPart(postCap.clone(), barkPalette[0], lx, gy0 + 1.27, 0.68));
 
     // Tall entrance gate post (lz = gateZ):
     const gyG = groundAtLocal(lx, gateZ);
@@ -479,10 +493,10 @@ export function buildTrapperYardParts(THREE, { groundAtLocal, toWorld, cy0 = 0, 
     parts.push(trapperPart(gateCapGeo.clone(), barkPalette[0], lx, gyG + 2.26, gateZ));
     parts.push(trapperPart(new THREE.BoxGeometry(0.235, 0.036, 0.235), ironDark, lx, gyG + 1.95, gateZ));
 
-    // Three split-log fence rails + diagonal bracing connecting all posts from z = 0.42 to gateZ:
-    const zList = [0.42];
+    // Three split-log fence rails + diagonal bracing connecting posts from z = 0.68 to gateZ - 0.18:
+    const zList = [0.68];
     for (let r = rule.ROWS - 1; r >= 0; r--) zList.push(rowZ(r, rule));
-    zList.push(gateZ);
+    zList.push(gateZ - 0.18);
     for (let i = 0; i < zList.length - 1; i++) {
       const za = zList[i], zb = zList[i + 1];
       const ya = groundAtLocal(lx, za), yb = groundAtLocal(lx, zb);
@@ -494,7 +508,7 @@ export function buildTrapperYardParts(THREE, { groundAtLocal, toWorld, cy0 = 0, 
       }
     }
 
-    // Flared wing fence at the yard gate (z = gateZ -> gateZ + 0.45, x = ±1.34 -> ±1.92):
+    // Flared wing fence at the yard gate (z = gateZ -> gateZ + 0.36, x = ±1.34 -> ±1.92):
     const wxOut = sgn * (rule.POST_X + 0.58), wzOut = gateZ + 0.36;
     const gyOut = groundAtLocal(wxOut, wzOut);
     parts.push(trapperPart(postBox.clone(), woodPalette[2], wxOut, gyOut + 0.60, wzOut));
@@ -524,23 +538,21 @@ export function buildTrapperYardParts(THREE, { groundAtLocal, toWorld, cy0 = 0, 
     parts.push(trapperPart(new THREE.CylinderGeometry(0.042, 0.042, 0.09, 7), 0xd9a84e, lxLan, lyLan, gateZ + 0.22));
   }
 
-  // 5. Trapper's drying frame, stacked firewood, and thorny deadfall hedge flanking the outside of the fence:
+  // 5. Trapper's drying frame, stacked firewood, and thorny deadfall hedge flanking the outside of the fence
+  //    and behind the cellar mound:
   const brambleSpots = [];
   for (const sgn of [-1, 1]) {
-    for (let lz = -1.45; lz <= gateZ - 0.15; lz += 0.58) {
-      brambleSpots.push([sgn * (rule.POST_X + 0.34), lz]);
+    for (let lz = 0.96; lz <= gateZ - 0.75; lz += 0.64) {
+      brambleSpots.push([sgn * (rule.POST_X + 0.42), lz]);
     }
     // Stacked split logs along the outer base of the fence rails:
     for (let k = 0; k < 5; k++) {
-      const lzA = 1.2 + k * 1.55, lzB = lzA + 1.25;
+      const lzA = 1.2 + k * 1.45, lzB = lzA + 1.15;
       const lxLog = sgn * (rule.POST_X + 0.18);
       const ya = groundAtLocal(lxLog, lzA), yb = groundAtLocal(lxLog, lzB);
       trapperBar(parts, [lxLog, ya + 0.09, lzA], [lxLog, yb + 0.09, lzB], 0.085, barkPalette[k % barkPalette.length], 6);
       trapperBar(parts, [lxLog + sgn * 0.06, ya + 0.21, lzA + 0.08], [lxLog + sgn * 0.06, yb + 0.21, lzB - 0.08], 0.072, woodPalette[k % woodPalette.length], 6);
     }
-  }
-  for (const lx of [-1.25, -0.75, -0.25, 0.25, 0.75, 1.25]) {
-    brambleSpots.push([lx, -1.92]);
   }
   for (let i = 0; i < brambleSpots.length; i++) {
     const [bx, bz] = brambleSpots[i];
@@ -557,43 +569,389 @@ export function buildTrapperYardParts(THREE, { groundAtLocal, toWorld, cy0 = 0, 
     }
   }
 
-  // Solid colliders closing both sides and behind the root cellar (keeping prop.approach at (0, 1.44) completely clear):
+  // Solid colliders closing both fence sides (keeping prop.approach at (0, 1.44), (0, 0), and the cellar stairwell clear):
   for (const sgn of [-1, 1]) {
-    for (let lz = -1.50; lz <= gateZ; lz += 0.72) {
-      colliderSpots.push({ lx: sgn * (rule.POST_X + 0.24), lz, r: 0.44 });
+    for (let lz = 0.42; lz <= gateZ; lz += 0.72) {
+      colliderSpots.push({ lx: sgn * (rule.POST_X + 0.34), lz, r: 0.34 });
     }
   }
-  for (const lx of [-0.88, 0, 0.88]) {
-    colliderSpots.push({ lx, lz: -1.85, r: 0.44 });
-  }
 
-  // 6. Stacked fieldstone root-cellar bulkhead cheeks & heavy timber framing around objective:trapper-cache (0, 0)
-  //    and the iron-strapped cellar hatch seated immediately behind it (0, -0.82):
-  for (const sgn of [-1, 1]) {
-    for (let c = 0; c < 4; c++) {
-      const zS = -1.28 + c * 0.42;
-      const gyS = groundAtLocal(sgn * 0.90, zS);
-      parts.push(trapperPart(new THREE.BoxGeometry(0.28, 0.24 - c * 0.03, 0.42), stonePalette[(c + (sgn > 0 ? 1 : 0)) % stonePalette.length],
-        sgn * 0.90, gyS + 0.11 - c * 0.015, zS, 0, sgn * 0.04, 0));
+  // 6. AG-135 / AG-144 (story-chain.md §4 Day 8, docs/art-direction.md §2 Iron rule):
+  //    The trapper's iron-lined root cellar under the bulkhead doors at the head of the yard.
+  //    - Roof is the natural ground (buildCaveCap style in index.html); no box aprons or protruding slabs
+  //    - Sloped fieldstone & timber bulkhead cheek walls + forged-iron sill liner set into the ground at grade
+  //    - Hinged double cellar doors (wood + iron strap hinges on top; riveted dark-iron plates on the underside) + iron locking bar
+  //    - 8-step timber-and-iron stairwell descending from the threshold to y = -2.15
+  //    - Underground iron-lined cellar room (lx in [-1.62, +1.62], lz in [-5.06, -2.28], y = -2.15 .. -0.14):
+  //      riveted dark-iron walls (#363b37, #2d322e, #404540) with iron battens (#262a27), rivet heads (#5c615b),
+  //      downward rust streaks (#795438), timber stanchions (#4b3a28), nailed horseshoes (horns up),
+  //      ceiling beams + 1.20m x 1.20m open iron bar grate skylight overhead, Okafor's bunk & lantern, and storage shelves.
+  const ironPlateA = 0x363b37;
+  const ironPlateB = 0x2d322e;
+  const ironPlateC = 0x404540;
+  const ironStrap  = 0x262a27;
+  const ironRivet  = 0x5c615b;
+  const rustStreak = 0x795438;
+
+  // Helper to stamp an upward-pointing forged-iron horseshoe onto a wall or lintel:
+  const addWallHorseshoe = (targetArr, hx, hy, hz, rotY = 0) => {
+    const c = Math.cos(rotY), s = Math.sin(rotY);
+    const arc = trapperPart(new THREE.TorusGeometry(0.068, 0.015, 5, 12, Math.PI * 1.38), ironPlateC, hx, hy, hz, 0, rotY, Math.PI * 0.81);
+    targetArr.push(arc);
+    for (const sgn of [-1, 1]) {
+      const ox = sgn * 0.055;
+      targetArr.push(trapperPart(new THREE.BoxGeometry(0.024, 0.022, 0.020), ironRivet,
+        hx + ox * c, hy + 0.042, hz - ox * s, 0, rotY, 0));
+      targetArr.push(trapperPart(new THREE.BoxGeometry(0.012, 0.012, 0.014), 0x9aa0a6,
+        hx + ox * c + s * 0.01, hy + 0.016, hz - ox * s + c * 0.01, 0, rotY, 0));
     }
-    const gyD = groundAtLocal(sgn * 0.56, 0.02);
-    parts.push(trapperPart(new THREE.BoxGeometry(0.26, 0.04, 0.56), stonePalette[2], sgn * 0.56, gyD + 0.02, 0.02, 0, 0, 0));
-  }
-  const gyBack = groundAtLocal(0, -1.54);
-  parts.push(trapperPart(new THREE.BoxGeometry(2.04, 0.30, 0.30), stonePalette[1], 0, gyBack + 0.15, -1.54));
-  parts.push(trapperPart(new THREE.BoxGeometry(1.90, 0.12, 0.24), woodPalette[1], 0, gyBack + 0.34, -1.54));
+  };
 
-  return { parts, stones, posts, colliderSpots };
+  // 6a. Bulkhead stone cheeks, sill beam & rear headwall set into the hillside ground at grade (lz = -2.28 .. -0.30):
+  const dY = doorPivotY - 0.18;
+  for (const sgn of [-1, 1]) {
+    for (let c = 0; c < 5; c++) {
+      const zS = -0.46 - c * 0.38;
+      const topY = dY + 0.16 + c * 0.055;
+      const botY = -0.25;
+      const hS = topY - botY;
+      parts.push(trapperPart(new THREE.BoxGeometry(0.28, hS, 0.36), stonePalette[(c + (sgn > 0 ? 1 : 0)) % stonePalette.length],
+        sgn * 0.84, (topY + botY) * 0.5, zS, 0, sgn * 0.02, 0));
+    }
+    // Sloped weathered timber sill beam capping each cheek wall (-0.162 rad tilt):
+    parts.push(trapperPart(new THREE.BoxGeometry(0.22, 0.10, 1.86), woodPalette[0],
+      sgn * 0.80, dY + 0.21, -1.23, -0.162, 0, 0));
+    // Forged-iron sill liner & rivet studs along the inner lip of the bulkhead opening:
+    parts.push(trapperPart(new THREE.BoxGeometry(0.06, 0.09, 1.84), ironPlateB,
+      sgn * 0.69, dY + 0.18, -1.23, -0.162, 0, 0));
+    for (let r = 0; r < 5; r++) {
+      const rz = -0.46 - r * 0.38;
+      const ry = dY + 0.09 + r * 0.06;
+      parts.push(trapperPart(new THREE.BoxGeometry(0.022, 0.022, 0.022), ironRivet, sgn * 0.66, ry, rz));
+    }
+  }
+  // Bulkhead front stone threshold sill at lz = -0.30:
+  parts.push(trapperPart(new THREE.BoxGeometry(1.68, 0.16, 0.18), stonePalette[2], 0, dY + 0.01, -0.30));
+  // Compact weathered stone plinth on the right of the threshold for objective:trapper-cache at (0.58, 0.20):
+  const cacheGroundY = surfY(0.58, 0.20);
+  parts.push(trapperPart(new THREE.BoxGeometry(0.60, 0.15, 0.44), stonePalette[1], 0.58, cacheGroundY + 0.075, 0.20, 0, -0.18, 0));
+  // Bulkhead rear masonry headwall & heavy timber header at lz = -2.18:
+  const hwTop = dY + 0.40, hwBot = -0.05;
+  parts.push(trapperPart(new THREE.BoxGeometry(2.04, hwTop - hwBot, 0.28), stonePalette[1], 0, (hwTop + hwBot) * 0.5, -2.18));
+  parts.push(trapperPart(new THREE.BoxGeometry(1.94, 0.12, 0.24), woodPalette[3], 0, dY + 0.42, -2.18));
+  parts.push(trapperPart(new THREE.BoxGeometry(1.62, 0.08, 0.05), ironStrap, 0, dY + 0.34, -2.04));
+  addWallHorseshoe(parts, 0, dY + 0.33, -2.01, 0);
+
+  // 6b. Hinged double cellar door leaves (doorLeftParts pivot at (-0.72, doorPivotY, -1.23), doorRightParts pivot at (+0.72, doorPivotY, -1.23)):
+  //     Each door mesh has rotation.x = -0.162 (matching the bulkhead sill slope) so rotating around local Z (rotation.z)
+  //     swings the leaf cleanly around its sloped hinge line without any front-to-back skew.
+  const doorLeftParts = [];
+  const doorRightParts = [];
+  const addDoorPart = (arr, geo, color, lx, ly, lz, rx = 0, ry = 0, rz = 0) => {
+    arr.push(trapperPart(geo, color, lx, ly, lz, rx, ry, rz));
+  };
+  for (const sgn of [-1, 1]) {
+    const arr = sgn < 0 ? doorLeftParts : doorRightParts;
+    const inDir = -sgn; // +1 for left leaf (extends +x toward 0), -1 for right leaf (extends -x toward 0)
+    // Four weathered longitudinal timber planks on the upper face:
+    for (let p = 0; p < 4; p++) {
+      const px = inDir * (0.095 + p * 0.172);
+      const col = woodPalette[(p + (sgn > 0 ? 2 : 0)) % woodPalette.length];
+      addDoorPart(arr, new THREE.BoxGeometry(0.158, 0.042, 1.84), col, px, 0.022, 0);
+    }
+    // Mismatched repair board & split grain detail (Rule 4 of asset-principles.md):
+    if (sgn < 0) {
+      addDoorPart(arr, new THREE.BoxGeometry(0.32, 0.016, 0.64), 0x8a7054, inDir * 0.35, 0.048, 0.28, 0, 0.02, 0);
+    } else {
+      addDoorPart(arr, new THREE.BoxGeometry(0.28, 0.016, 0.52), 0x3e2f20, inDir * 0.52, 0.048, -0.34, 0, -0.02, 0);
+    }
+    // Two transverse wooden battens on top:
+    for (const bz of [-0.58, 0.58]) {
+      addDoorPart(arr, new THREE.BoxGeometry(0.68, 0.028, 0.09), woodPalette[3], inDir * 0.35, 0.052, bz);
+      // Heavy forged-iron strap hinges with rust halos & rivet studs:
+      addDoorPart(arr, new THREE.BoxGeometry(0.64, 0.018, 0.055), ironStrap, inDir * 0.33, 0.068, bz);
+      addDoorPart(arr, new THREE.CylinderGeometry(0.022, 0.022, 0.09, 6), ironPlateB, inDir * 0.02, 0.055, bz, 0, 0, Math.PI * 0.5);
+      addDoorPart(arr, new THREE.BoxGeometry(0.12, 0.008, 0.085), rustStreak, inDir * 0.52, 0.066, bz);
+      for (let r = 0; r < 3; r++) {
+        addDoorPart(arr, new THREE.BoxGeometry(0.020, 0.022, 0.020), ironRivet, inDir * (0.14 + r * 0.21), 0.076, bz);
+      }
+    }
+    // Centre seam iron edge strip & pull ring on the upper face:
+    addDoorPart(arr, new THREE.BoxGeometry(0.035, 0.052, 1.84), ironStrap, inDir * 0.695, 0.022, 0);
+    addDoorPart(arr, new THREE.TorusGeometry(0.048, 0.010, 5, 10), ironPlateC, inDir * 0.61, 0.068, 0.34, Math.PI * 0.35, 0, 0);
+
+    // Underside of each door leaf: full riveted dark-iron liner plate (exposed when the doors fold open on Day 8):
+    addDoorPart(arr, new THREE.BoxGeometry(0.68, 0.024, 1.80), ironPlateA, inDir * 0.35, -0.012, 0);
+    addDoorPart(arr, new THREE.BoxGeometry(0.62, 0.016, 0.82), ironPlateB, inDir * 0.35, -0.024, -0.44);
+    addDoorPart(arr, new THREE.BoxGeometry(0.62, 0.016, 0.82), ironPlateC, inDir * 0.35, -0.024, 0.44);
+    // Iron framing battens, rust streaks & rivet heads on the underside:
+    for (const bz of [-0.82, 0, 0.82]) {
+      addDoorPart(arr, new THREE.BoxGeometry(0.68, 0.020, 0.05), ironStrap, inDir * 0.35, -0.030, bz);
+    }
+    addDoorPart(arr, new THREE.BoxGeometry(0.18, 0.008, 0.55), rustStreak, inDir * 0.24, -0.032, -0.22);
+    for (const rx of [0.12, 0.35, 0.58]) {
+      for (const rz of [-0.72, -0.24, 0.24, 0.72]) {
+        addDoorPart(arr, new THREE.BoxGeometry(0.022, 0.022, 0.022), ironRivet, inDir * rx, -0.036, rz);
+      }
+    }
+  }
+
+  // Heavy forged-iron locking bar & padlock across the shut cellar doors (hidden once unlocked):
+  const doorBarParts = [];
+  addDoorPart(doorBarParts, new THREE.BoxGeometry(1.32, 0.032, 0.065), ironStrap, 0, 0.078, 0.38);
+  addDoorPart(doorBarParts, new THREE.BoxGeometry(0.09, 0.045, 0.14), ironPlateB, 0, 0.088, 0.38);
+  addDoorPart(doorBarParts, new THREE.BoxGeometry(0.075, 0.095, 0.038), ironPlateA, 0, 0.065, 0.46);
+  addDoorPart(doorBarParts, new THREE.BoxGeometry(0.055, 0.055, 0.042), rustStreak, 0, 0.058, 0.462);
+
+  // 6c. 8-step timber-and-iron stairwell (lz = -0.34 .. -1.86, descending from y = dY to y = -2.15):
+  const numSteps = 8;
+  const stairTopY = dY;
+  for (let s = 0; s < numSteps; s++) {
+    const t0 = s / numSteps, t1 = (s + 1) / numSteps;
+    const zStep = rule.STAIR_Z_TOP + (rule.STAIR_Z_BOT - rule.STAIR_Z_TOP) * (t0 + t1) * 0.5;
+    const yStep = stairTopY + (rule.CELLAR_FLOOR_Y - stairTopY) * (s + 0.82) / numSteps;
+    // Heavy timber tread plank + forged-iron nosing bar + iron riser plate:
+    parts.push(trapperPart(new THREE.BoxGeometry(1.24, 0.055, 0.23), woodPalette[s % woodPalette.length], 0, yStep, zStep));
+    parts.push(trapperPart(new THREE.BoxGeometry(1.24, 0.058, 0.035), ironPlateB, 0, yStep + 0.002, zStep - 0.10));
+    parts.push(trapperPart(new THREE.BoxGeometry(1.22, 0.29, 0.035), ironStrap, 0, yStep - 0.14, zStep + 0.09));
+    for (const rx of [-0.46, 0, 0.46]) {
+      parts.push(trapperPart(new THREE.BoxGeometry(0.018, 0.018, 0.018), ironRivet, rx, yStep + 0.032, zStep - 0.09));
+    }
+  }
+  // Sloped solid underside carriage of the stairs so nothing ever shows under the treads:
+  parts.push(trapperPart(new THREE.BoxGeometry(1.28, 0.24, 1.95), ironStrap, 0, -1.22 + dY * 0.5, -1.12, -0.94, 0, 0));
+  // Front retaining wall under the top step (lz = -0.34, y = -2.20 .. dY):
+  const retH = 2.22 + dY;
+  parts.push(trapperPart(new THREE.BoxGeometry(1.48, retH, 0.12), stonePalette[0], 0, -2.22 + retH * 0.5, -0.34));
+
+  // Left and right stairwell walls (lx = +-0.68, lz = -0.30 .. -2.26, y = -2.22 .. dY + 0.18):
+  const swWallH = 2.40 + dY;
+  const swWallMidY = -2.22 + swWallH * 0.5;
+  for (const sgn of [-1, 1]) {
+    // Backing stone wall:
+    parts.push(trapperPart(new THREE.BoxGeometry(0.24, swWallH, 1.96), stonePalette[1], sgn * 0.74, swWallMidY, -1.28));
+    // Inner riveted iron wall liner plates inside the stairwell:
+    const linerH = 2.18 + dY;
+    const linerMidY = -2.13 + linerH * 0.5;
+    for (let k = 0; k < 3; k++) {
+      const pz = -0.62 - k * 0.64;
+      const col = k === 1 ? ironPlateB : ironPlateA;
+      parts.push(trapperPart(new THREE.BoxGeometry(0.035, linerH, 0.62), col, sgn * 0.62, linerMidY, pz));
+      parts.push(trapperPart(new THREE.BoxGeometry(0.048, linerH + 0.02, 0.045), ironStrap, sgn * 0.61, linerMidY, pz - 0.31));
+      parts.push(trapperPart(new THREE.BoxGeometry(0.042, 0.38, 0.16), rustStreak, sgn * 0.605, -0.45 - k * 0.25, pz + 0.08));
+      for (let ry = -1.85; ry <= -0.25 + dY; ry += 0.40) {
+        parts.push(trapperPart(new THREE.BoxGeometry(0.022, 0.022, 0.022), ironRivet, sgn * 0.595, ry, pz - 0.31));
+      }
+    }
+  }
+  // Forged-iron handrail along the right stairwell wall:
+  trapperBar(parts, [0.55, -0.05 + dY, -0.44], [0.55, -1.48, -1.88], 0.020, ironPlateC, 6);
+  trapperBar(parts, [0.62, -0.18 + dY, -0.48], [0.55, -0.05 + dY, -0.44], 0.016, ironStrap, 5);
+  trapperBar(parts, [0.62, -1.58, -1.84], [0.55, -1.48, -1.88], 0.016, ironStrap, 5);
+
+  // Doorway header / lintel between stairwell and cellar room (lz = -1.96 .. -2.28, y = -0.14 .. dY + 0.24):
+  parts.push(trapperPart(new THREE.BoxGeometry(1.44, 0.42 + dY, 0.36), ironPlateB, 0, 0.05 + dY * 0.5, -2.12));
+  parts.push(trapperPart(new THREE.BoxGeometry(1.36, 0.12, 0.38), woodPalette[3], 0, -0.10, -2.12));
+  parts.push(trapperPart(new THREE.BoxGeometry(1.38, 0.05, 0.40), ironStrap, 0, -0.14, -2.12));
+  addWallHorseshoe(parts, 0, -0.01, -1.92, 0);
+
+  // 6d. Underground Iron-Lined Cellar Room (lx in [-1.62, +1.62], lz in [-5.06, -2.28], y = -2.15 .. -0.14):
+  const floorY = rule.CELLAR_FLOOR_Y;       // -2.15
+  const ceilY  = rule.CELLAR_CEIL_UNDER_Y;  // -0.14
+  const roomH  = ceilY - floorY;            // 2.01 m
+  const roomMidY = (floorY + ceilY) * 0.5;  // -1.145
+
+  // Heavy flagstone & riveted iron floor slab (extending under bottom of stairs from lz = -1.72 to -5.16):
+  parts.push(trapperPart(new THREE.BoxGeometry(3.56, 0.18, 3.52), stonePalette[0], 0, floorY - 0.09, -3.44));
+  for (let ix = -1; ix <= 1; ix++) {
+    for (let iz = 0; iz < 3; iz++) {
+      const px = ix * 1.04, pz = -2.52 - iz * 0.96;
+      const pCol = (ix + iz) % 2 === 0 ? ironPlateB : ironPlateA;
+      parts.push(trapperPart(new THREE.BoxGeometry(1.00, 0.024, 0.92), pCol, px, floorY + 0.004, pz));
+      parts.push(trapperPart(new THREE.BoxGeometry(1.02, 0.028, 0.04), ironStrap, px, floorY + 0.006, pz - 0.46));
+    }
+  }
+  // Slatted wooden duckboard walkway along the centre aisle (lx = -0.35 .. +0.35, lz = -2.05 .. -4.65):
+  for (let d = 0; d < 10; d++) {
+    const dz = -2.10 - d * 0.27;
+    parts.push(trapperPart(new THREE.BoxGeometry(0.76, 0.024, 0.19), woodPalette[d % woodPalette.length], -0.05, floorY + 0.020, dz));
+  }
+
+  // Outer containment stone shell around all 4 underground cellar walls (kept strictly below y = -0.09 so it never pokes through downhill ground):
+  const shellH = roomH + 0.14;
+  const shellMidY = floorY - 0.09 + shellH * 0.5;
+  parts.push(trapperPart(new THREE.BoxGeometry(3.72, shellH, 0.26), stonePalette[0], 0, shellMidY, -5.20));
+  for (const sgn of [-1, 1]) {
+    parts.push(trapperPart(new THREE.BoxGeometry(0.26, shellH, 3.12), stonePalette[0], sgn * 1.76, shellMidY, -3.68));
+    parts.push(trapperPart(new THREE.BoxGeometry(1.16, shellH, 0.26), stonePalette[0], sgn * 1.18, shellMidY, -2.16));
+  }
+
+  // Riveted dark-iron wall plates, batten straps, rivet studs, rust streaks, and timber stanchions on all 4 cellar walls:
+  // Back wall (lz = -5.06, lx in [-1.62, +1.62]):
+  for (let k = -2; k <= 2; k++) {
+    const wx = k * 0.64;
+    const col = Math.abs(k) % 2 === 0 ? ironPlateA : ironPlateB;
+    parts.push(trapperPart(new THREE.BoxGeometry(0.62, roomH, 0.04), col, wx, roomMidY, -5.05));
+    parts.push(trapperPart(new THREE.BoxGeometry(0.05, roomH, 0.055), ironStrap, wx + 0.31, roomMidY, -5.03));
+    parts.push(trapperPart(new THREE.BoxGeometry(0.22, 0.48, 0.045), rustStreak, wx - 0.06, ceilY - 0.32, -5.035));
+    for (let ry = floorY + 0.22; ry <= ceilY - 0.12; ry += 0.38) {
+      parts.push(trapperPart(new THREE.BoxGeometry(0.022, 0.022, 0.022), ironRivet, wx + 0.31, ry, -5.00));
+      parts.push(trapperPart(new THREE.BoxGeometry(0.022, 0.022, 0.022), ironRivet, wx - 0.24, ry, -5.00));
+    }
+  }
+  // Horizontal iron waist band across the back wall:
+  parts.push(trapperPart(new THREE.BoxGeometry(3.24, 0.06, 0.055), ironStrap, 0, roomMidY + 0.12, -5.03));
+  // Back wall timber stanchions & central horseshoe:
+  for (const tx of [-1.54, 0, 1.54]) {
+    parts.push(trapperPart(new THREE.BoxGeometry(0.11, roomH, 0.11), woodPalette[3], tx, roomMidY, -4.98));
+  }
+  addWallHorseshoe(parts, 0, floorY + 1.38, -4.91, 0);
+
+  // Left and right iron walls (lx = +-1.62, lz in [-5.06, -2.28]):
+  for (const sgn of [-1, 1]) {
+    for (let k = 0; k < 4; k++) {
+      const wz = -2.62 - k * 0.69;
+      const col = (k + (sgn > 0 ? 1 : 0)) % 2 === 0 ? ironPlateA : ironPlateC;
+      parts.push(trapperPart(new THREE.BoxGeometry(0.04, roomH, 0.67), col, sgn * 1.62, roomMidY, wz));
+      parts.push(trapperPart(new THREE.BoxGeometry(0.055, roomH, 0.05), ironStrap, sgn * 1.60, roomMidY, wz - 0.34));
+      parts.push(trapperPart(new THREE.BoxGeometry(0.045, 0.42, 0.22), rustStreak, sgn * 1.605, ceilY - 0.28 - (k % 2) * 0.35, wz + 0.08));
+      for (let ry = floorY + 0.22; ry <= ceilY - 0.12; ry += 0.38) {
+        parts.push(trapperPart(new THREE.BoxGeometry(0.022, 0.022, 0.022), ironRivet, sgn * 1.57, ry, wz - 0.34));
+      }
+    }
+    // Horizontal iron waist band along each side wall:
+    parts.push(trapperPart(new THREE.BoxGeometry(0.055, 0.06, 2.78), ironStrap, sgn * 1.60, roomMidY + 0.12, -3.67));
+    // Mid-wall timber stanchion & nailed horseshoe on each side wall:
+    parts.push(trapperPart(new THREE.BoxGeometry(0.11, roomH, 0.11), woodPalette[3], sgn * 1.54, roomMidY, -3.65));
+    addWallHorseshoe(parts, sgn * 1.47, floorY + 1.38, -3.65, -sgn * Math.PI * 0.5);
+
+    // Front wall iron wings (lz = -2.28, lx in [+-0.62 .. +-1.62]):
+    parts.push(trapperPart(new THREE.BoxGeometry(1.02, roomH, 0.04), ironPlateB, sgn * 1.12, roomMidY, -2.28));
+    parts.push(trapperPart(new THREE.BoxGeometry(0.05, roomH, 0.06), ironStrap, sgn * 0.64, roomMidY, -2.28));
+    parts.push(trapperPart(new THREE.BoxGeometry(0.24, 0.44, 0.045), rustStreak, sgn * 1.08, ceilY - 0.34, -2.30));
+    for (let ry = floorY + 0.24; ry <= ceilY - 0.14; ry += 0.40) {
+      parts.push(trapperPart(new THREE.BoxGeometry(0.022, 0.022, 0.022), ironRivet, sgn * 0.66, ry, -2.31));
+      parts.push(trapperPart(new THREE.BoxGeometry(0.022, 0.022, 0.022), ironRivet, sgn * 1.14, ry, -2.31));
+    }
+    parts.push(trapperPart(new THREE.BoxGeometry(0.11, roomH, 0.11), woodPalette[3], sgn * 1.54, roomMidY, -2.36));
+  }
+  addWallHorseshoe(parts, 0, ceilY - 0.14, -2.31, Math.PI);
+
+  // 6e. Ceiling timber joists & central 1.20m x 1.20m open forged-iron bar grate skylight (lx in [-0.60, +0.60], lz in [-4.10, -2.90]):
+  for (const jz of [-2.42, -2.88, -4.12, -4.88]) {
+    parts.push(trapperPart(new THREE.BoxGeometry(3.26, 0.13, 0.13), woodPalette[3], 0, ceilY - 0.04, jz));
+    parts.push(trapperPart(new THREE.BoxGeometry(3.26, 0.03, 0.15), ironStrap, 0, ceilY - 0.10, jz));
+  }
+  const skySlopeX = (surfY(0.60, -3.50) - surfY(-0.60, -3.50)) / 1.20;
+  const skySlopeZ = (surfY(0, -2.90) - surfY(0, -4.10)) / 1.20;
+  const skyRotZ = Math.atan(skySlopeX);
+  const skyRotX = -Math.atan(skySlopeZ);
+  // 9 longitudinal forged-iron grate bars + 3 transverse cross-bars + thin iron rim seated at grade across the 1.20m x 1.20m skylight opening:
+  for (const sgn of [-1, 1]) {
+    const zRim = -3.50 + sgn * 0.61;
+    parts.push(trapperPart(new THREE.BoxGeometry(1.26, 0.04, 0.04), ironStrap, 0, surfY(0, zRim) + 0.01, zRim, 0, 0, skyRotZ));
+    const xRim = sgn * 0.61;
+    parts.push(trapperPart(new THREE.BoxGeometry(0.04, 0.04, 1.22), ironStrap, xRim, surfY(xRim, -3.50) + 0.01, -3.50, skyRotX, 0, 0));
+  }
+  for (let b = -4; b <= 4; b++) {
+    const bx = b * 0.135;
+    parts.push(trapperPart(new THREE.BoxGeometry(0.024, 0.038, 1.22), ironStrap, bx, surfY(bx, -3.50) + 0.01, -3.50, skyRotX, 0, 0));
+  }
+  for (const czBar of [-3.90, -3.50, -3.10]) {
+    parts.push(trapperPart(new THREE.BoxGeometry(1.22, 0.028, 0.032), ironPlateC, 0, surfY(0, czBar), czBar, 0, 0, skyRotZ));
+  }
+
+  // 6f. Cellar interior props (Okafor's survival refuge, leaving trapper.cellarSpot at (-0.45, -2.15, -3.65) clear):
+  // Left wall: timber cot/bunk (lx = -1.20, lz = -3.92) with olive blanket & canvas bedroll:
+  parts.push(trapperPart(new THREE.BoxGeometry(0.68, 0.06, 1.56), woodPalette[0], -1.20, floorY + 0.36, -3.92));
+  for (const [lxLeg, lzLeg] of [[-1.48, -3.18], [-0.92, -3.18], [-1.48, -4.66], [-0.92, -4.66]]) {
+    parts.push(trapperPart(new THREE.BoxGeometry(0.07, 0.36, 0.07), woodPalette[3], lxLeg, floorY + 0.18, lzLeg));
+  }
+  parts.push(trapperPart(new THREE.BoxGeometry(0.62, 0.055, 1.46), 0x4a5239, -1.20, floorY + 0.41, -3.92)); // olive wool blanket
+  parts.push(trapperPart(new THREE.CylinderGeometry(0.095, 0.095, 0.54, 8), 0x8b7759, -1.20, floorY + 0.48, -4.48, 0, 0, Math.PI * 0.5)); // bedroll pillow
+
+  // Small wooden crate table beside the cot (lx = -1.14, lz = -2.75) with warm oil lantern & enamel mug:
+  parts.push(trapperPart(new THREE.BoxGeometry(0.46, 0.48, 0.46), woodPalette[1], -1.14, floorY + 0.24, -2.75, 0, 0.08, 0));
+  parts.push(trapperPart(new THREE.BoxGeometry(0.48, 0.03, 0.48), ironStrap, -1.14, floorY + 0.47, -2.75, 0, 0.08, 0));
+  parts.push(trapperPart(new THREE.CylinderGeometry(0.075, 0.095, 0.06, 8), ironPlateB, -1.12, floorY + 0.51, -2.75));
+  parts.push(trapperPart(new THREE.CylinderGeometry(0.055, 0.065, 0.14, 8), 0xffb84d, -1.12, floorY + 0.60, -2.75));
+  parts.push(trapperPart(new THREE.CylinderGeometry(0.075, 0.050, 0.05, 8), ironPlateB, -1.12, floorY + 0.69, -2.75));
+  parts.push(trapperPart(new THREE.CylinderGeometry(0.042, 0.042, 0.085, 7), 0x7b8488, -0.98, floorY + 0.52, -2.62));
+
+  // Right wall: two-tier storage shelving (lx = +1.28, lz = -3.65) with crocks, ration tins, water pail & spare iron traps:
+  for (const lzPost of [-2.78, -3.65, -4.52]) {
+    parts.push(trapperPart(new THREE.BoxGeometry(0.07, 1.48, 0.07), woodPalette[3], 1.04, floorY + 0.74, lzPost));
+    parts.push(trapperPart(new THREE.BoxGeometry(0.07, 1.48, 0.07), woodPalette[3], 1.50, floorY + 0.74, lzPost));
+  }
+  for (const sy of [0.46, 1.02]) {
+    parts.push(trapperPart(new THREE.BoxGeometry(0.50, 0.045, 1.84), woodPalette[0], 1.27, floorY + sy, -3.65));
+  }
+  // Stoneware preserve crocks & ration tins on upper shelf:
+  for (let c = 0; c < 3; c++) {
+    parts.push(trapperPart(new THREE.CylinderGeometry(0.09, 0.095, 0.24, 8), 0x8c7a64, 1.26, floorY + 1.16, -3.02 - c * 0.34));
+    parts.push(trapperPart(new THREE.CylinderGeometry(0.075, 0.075, 0.03, 8), woodPalette[2], 1.26, floorY + 1.29, -3.02 - c * 0.34));
+  }
+  for (let t = 0; t < 3; t++) {
+    parts.push(trapperPart(new THREE.BoxGeometry(0.16, 0.14, 0.20), 0x525852, 1.25, floorY + 1.11, -4.02 - t * 0.22, 0, t * 0.15, 0));
+  }
+  // Spare iron leghold traps & wooden water bucket on lower shelf / floor:
+  for (const tz of [-3.15, -3.65]) {
+    parts.push(trapperPart(new THREE.TorusGeometry(0.11, 0.018, 5, 10), ironPlateB, 1.24, floorY + 0.50, tz, Math.PI * 0.5, 0, 0));
+    parts.push(trapperPart(new THREE.BoxGeometry(0.24, 0.018, 0.04), ironStrap, 1.24, floorY + 0.49, tz));
+  }
+  parts.push(trapperPart(new THREE.CylinderGeometry(0.16, 0.13, 0.32, 9), woodPalette[1], 1.24, floorY + 0.16, -4.22));
+  parts.push(trapperPart(new THREE.TorusGeometry(0.15, 0.012, 5, 9), ironStrap, 1.24, floorY + 0.24, -4.22, Math.PI * 0.5, 0, 0));
+
+  // Back right corner: iron-hooped supply barrel & stacked split firewood (lx = +0.72, lz = -4.68):
+  parts.push(trapperPart(new THREE.CylinderGeometry(0.24, 0.21, 0.68, 10), woodPalette[0], 0.78, floorY + 0.34, -4.68));
+  parts.push(trapperPart(new THREE.TorusGeometry(0.235, 0.015, 5, 10), ironStrap, 0.78, floorY + 0.52, -4.68, Math.PI * 0.5, 0, 0));
+  parts.push(trapperPart(new THREE.TorusGeometry(0.225, 0.015, 5, 10), ironStrap, 0.78, floorY + 0.18, -4.68, Math.PI * 0.5, 0, 0));
+
+  // 6g. Underground Cellar Ceiling Liner & Skylight Shaft/Curb (roofCapParts -> trapper.cellarRoofCap):
+  //     The exterior surface over the cellar is the natural ground (buildTrapperCellarCap in index.html).
+  //     roofCapParts provides the interior riveted dark-iron ceiling liner (y = -0.14 .. -0.09, strictly below the ground)
+  //     and the riveted iron shaft + low fieldstone curb framing the 1.20m x 1.20m skylight at grade.
+  const roofCapParts = [];
+  for (const sgn of [-1, 1]) {
+    const zShaft = -3.50 + sgn * 0.62;
+    const hZ = Math.max(0.18, surfY(0, zShaft) + 0.02 - ceilY);
+    roofCapParts.push(trapperPart(new THREE.BoxGeometry(1.36, hZ, 0.08), ironPlateB, 0, ceilY + hZ * 0.5, zShaft, 0, 0, skyRotZ));
+    const xShaft = sgn * 0.64;
+    const hX = Math.max(0.18, surfY(xShaft, -3.50) + 0.02 - ceilY);
+    roofCapParts.push(trapperPart(new THREE.BoxGeometry(0.08, hX, 1.28), ironPlateB, xShaft, ceilY + hX * 0.5, -3.50, skyRotX, 0, 0));
+    // Low fieldstone curb stones seated at grade around the skylight opening:
+    for (let s = 0; s < 3; s++) {
+      const sx = (s - 1) * 0.44;
+      const cz = -3.50 + sgn * 0.68;
+      roofCapParts.push(trapperPart(new THREE.BoxGeometry(0.42, 0.10, 0.12), stonePalette[(s + (sgn > 0 ? 1 : 0)) % stonePalette.length],
+        sx, surfY(sx, cz) - 0.01, cz, skyRotX, 0, skyRotZ));
+      const sz = -3.50 + (s - 1) * 0.44;
+      const cxCurb = sgn * 0.68;
+      roofCapParts.push(trapperPart(new THREE.BoxGeometry(0.12, 0.10, 0.42), stonePalette[(s + (sgn > 0 ? 2 : 1)) % stonePalette.length],
+        cxCurb, surfY(cxCurb, sz) - 0.01, sz, skyRotX, 0, skyRotZ));
+    }
+  }
+  // Four underground iron ceiling liner plates framing the skylight opening at y = ceilY + 0.025 = -0.115:
+  roofCapParts.push(trapperPart(new THREE.BoxGeometry(3.32, 0.05, 0.66), ironPlateB, 0, ceilY + 0.025, -2.57));
+  roofCapParts.push(trapperPart(new THREE.BoxGeometry(3.32, 0.05, 1.00), ironPlateB, 0, ceilY + 0.025, -4.60));
+  for (const sgn of [-1, 1]) {
+    roofCapParts.push(trapperPart(new THREE.BoxGeometry(1.06, 0.05, 1.24), ironPlateA, sgn * 1.13, ceilY + 0.025, -3.50));
+  }
+
+  return { parts, roofCapParts, doorLeftParts, doorRightParts, doorBarParts, stones, posts, colliderSpots };
 }
 
 /**
- * AG-124 (N28, D-88; docs/world-design.md rules 1, 2, 8, 9, 12):
- * Relocate and build the trapper's 8-row fenced yard in the flat wooded clearing behind his cabin and workbench
- * (17-25.4 m away from bridges[1]), seating objective:trapper-cache and P['cellar-hatch'] together at the head of the yard.
+ * AG-124 / AG-135 / AG-144 (N28, D-88; story-chain.md §4 Day 8; docs/world-design.md rules 1, 2, 8, 9, 12):
+ * Relocate and build the trapper's 8-row fenced yard and iron-lined root cellar in the flat wooded clearing behind his
+ * cabin and workbench (17-25.4 m away from bridges[1]), seating objective:trapper-cache and the cellar bulkhead at the
+ * head of the yard, with the cellar roof formed by the ground itself (buildCaveCap style) and hinged cellar doors that
+ * stay shut until trapperPath.unlocked() and open into the underground iron-lined cellar where Okafor shelters.
  */
 export function setupTrapperMission(THREE, {
-  prop, camp, trapper, sampleHeight, addSolid, mergeParts, scene,
+  prop, camp, trapper, sampleHeight, sampleNaturalHeight, addSolid, mergeParts, scene,
   historyProps, foliage, windSwayables, clearFoliageInSquare, trees, rocks, worldSolids,
+  platforms, excavateCellar, buildCellarTerrainCap, trapperPath,
   trapperPart, trapperBar, syncTrapperHorseshoes, rule = TRAPPER
 }) {
   const cx = camp.x + rule.YARD_OFF_X, cz = camp.z + rule.YARD_OFF_Z;
@@ -605,82 +963,88 @@ export function setupTrapperMission(THREE, {
   const cosY = Math.cos(yaw), sinY = Math.sin(yaw);
   const toWorld = (lx, lz) => ({ x: cx + lx * cosY + lz * sinY, z: cz - lx * sinY + lz * cosY });
   const toLocal = (wx, wz) => { const dx = wx - cx, dz = wz - cz; return { x: dx * cosY - dz * sinY, z: dx * sinY + dz * cosY }; };
+  const natAtLocal = (lx, lz) => {
+    const w = toWorld(lx, lz);
+    const fn = typeof sampleNaturalHeight === 'function' ? sampleNaturalHeight : sampleHeight;
+    return fn(w.x, w.z) - cy0;
+  };
+  const yFront0 = natAtLocal(0, -0.32);
+  const yBack0 = natAtLocal(0, -2.18);
+  const ySky0 = Math.max(0.02, natAtLocal(0, -3.50));
+  const doorPivotY = Math.max(0.18, Math.min(0.42, (yFront0 + yBack0) * 0.5 + 0.02));
+  const s01 = (t) => { const c = Math.max(0, Math.min(1, t)); return c * c * (3 - 2 * c); };
+  const surfLocalY = (lx, lz) => {
+    const nat = natAtLocal(lx, lz);
+    const wRoom = s01((2.35 - Math.abs(lx)) / 0.55) * s01((lz + 5.75) / 0.55) * s01((-1.80 - lz) / 0.45);
+    let h = Math.max(nat, -0.01 * wRoom + nat * (1 - wRoom));
+    const wSkyX = s01((1.65 - Math.abs(lx)) / 0.90);
+    const wSkyZ = s01((1.45 - Math.abs(lz + 3.50)) / 0.72);
+    const wSky = wSkyX * wSkyZ;
+    if (wSky > 0) {
+      const skyGradeY = ySky0 + (-3.50 - Math.max(-4.20, Math.min(-2.80, lz))) * 0.06;
+      h = h + (skyGradeY - h) * wSky;
+    }
+    const wBulkX = s01((2.05 - Math.abs(lx)) / 0.95);
+    const wBulkZ = s01((lz + 2.85) / 0.65) * s01((0.55 - lz) / 0.83);
+    const wBulk = wBulkX * wBulkZ;
+    if (wBulk > 0) {
+      const lzClamped = Math.max(-2.18, Math.min(-0.30, lz));
+      const gradeY = doorPivotY - 0.06 + (-1.23 - lzClamped) * 0.162;
+      h = h + (gradeY - h) * wBulk;
+    }
+    return h;
+  };
   const groundAtLocal = (lx, lz) => { const w = toWorld(lx, lz); return sampleHeight(w.x, w.z) - cy0; };
   trapper.toWorld = toWorld;
   trapper.toLocal = toLocal;
   trapper.groundAtLocal = groundAtLocal;
+  trapper.surfLocalY = surfLocalY;
+  trapper.cy0 = cy0;
 
-  // Seat objective:trapper-cache at the head of the yard (0, 0) with approach at (0, HATCH_APPROACH_Z):
-  const appW = toWorld(0, rule.HATCH_APPROACH_Z);
-  const appY = sampleHeight(appW.x, appW.z);
-  prop.centre.x = cx; prop.centre.y = cy0; prop.centre.z = cz;
-  prop.approach.x = appW.x; prop.approach.y = appY; prop.approach.z = appW.z;
-  prop.facing = Math.atan2(cx - appW.x, cz - appW.z);
-  if (prop.group) {
-    prop.group.position.set(cx, cy0, cz);
-    prop.group.rotation.y = yaw;
-    prop.group.updateMatrixWorld(true);
-  }
-
-  // Seat historyProps' cellar hatch right behind the cache inside the bulkhead (7.73 m < 12 m from camp),
-  // undoing its old riverbank slope warp and re-seating its vertices to the flat yard ground:
+  // Seat historyProps' cellar hatch at (0, -0.82) for t167 compatibility, then hide its old flat surface mesh
+  // because trapper.doorL / trapper.doorR / trapper.doorBar render the real 3D hinged bulkhead doors:
   const ch = historyProps?.parts?.['cellar-hatch'];
   if (ch) {
-    const oldX = ch.position.x, oldZ = ch.position.z, oldYaw = ch.rotation.y;
-    const oldC = Math.cos(oldYaw), oldS = Math.sin(oldYaw), oldBase = sampleHeight(oldX, oldZ);
-    const oldDy = (x, z) => sampleHeight(oldX + oldC * x + oldS * z, oldZ - oldS * x + oldC * z) - oldBase;
     const hw = toWorld(0, -0.82), newBase = sampleHeight(hw.x, hw.z);
-    const newDy = (x, z) => sampleHeight(hw.x + cosY * x + sinY * z, hw.z - sinY * x + cosY * z) - newBase;
-    if (ch.userData.terrainSeated && ch.children) {
-      for (const child of ch.children) {
-        if (child.name === 'cellar-ring') {
-          child.position.y += newDy(child.position.x, child.position.z) - oldDy(child.position.x, child.position.z);
-        } else if (child.isMesh && child.geometry?.attributes?.position) {
-          const a = child.geometry.attributes.position;
-          for (let i = 0; i < a.count; i++) {
-            const x = a.getX(i), z = a.getZ(i);
-            a.setY(i, a.getY(i) - oldDy(x, z) + newDy(x, z));
-          }
-          a.needsUpdate = true;
-          child.geometry.computeVertexNormals();
-          child.geometry.computeBoundingBox();
-          child.geometry.computeBoundingSphere();
-        }
-      }
-    }
     ch.position.set(hw.x, newBase, hw.z);
     ch.rotation.y = yaw;
+    ch.visible = false;
     ch.updateMatrixWorld(true);
   }
   if (historyProps?.group?.children) {
-    const gatePostW = toWorld(-(rule.POST_X + 0.56), rule.BED_Z_MAX + 0.34);
+    const gatePostW = toWorld(-(rule.POST_X + 1.15), rule.BED_Z_MAX + 0.70);
     const gatePostY = sampleHeight(gatePostW.x, gatePostW.z);
-    const gateTrapsW = toWorld(rule.POST_X + 0.48, rule.BED_Z_MAX + 0.24);
+    const gateTrapsW = toWorld(rule.POST_X + 1.15, rule.BED_Z_MAX + 0.70);
     let hsIdx = 0;
     for (const child of historyProps.group.children) {
       if (child.name === 'trapper-post') {
         child.position.set(gatePostW.x, gatePostY + 0.8, gatePostW.z);
-        child.rotation.y = yaw;
+        child.rotation.y = 0;
+        child.updateMatrixWorld(true);
       } else if (child.name === 'horseshoe') {
-        child.position.set(gatePostW.x + sinY * 0.08, gatePostY + 0.75 + (hsIdx % 3) * 0.28, gatePostW.z + cosY * 0.08);
-        child.rotation.y = yaw;
+        child.position.set(gatePostW.x, gatePostY + 0.75 + (hsIdx % 3) * 0.28, gatePostW.z + 0.08);
+        child.rotation.y = 0;
+        child.updateMatrixWorld(true);
         hsIdx++;
       } else if (child.name === 'leghold-traps') {
         child.position.set(gateTrapsW.x, sampleHeight(gateTrapsW.x, gateTrapsW.z), gateTrapsW.z);
         child.rotation.y = yaw;
+        child.updateMatrixWorld(true);
       }
     }
   }
 
-  // Clear scattered trees, rocks, and foliage tufts inside the fenced yard and around the approach:
+  // Clear scattered trees, rocks, and foliage tufts inside the fenced yard, over the cellar mound, and around the CL-6 cache site:
+  const cl6X = camp.x - 4.0, cl6Z = camp.z + 4.0, cl6Ax = cl6X - 0.57, cl6Az = cl6Z - 1.39;
+  const nearCl6 = (wx, wz, pad = 0) => Math.hypot(wx - cl6X, wz - cl6Z) < 1.35 + pad || Math.hypot(wx - cl6Ax, wz - cl6Az) < 1.15 + pad;
   const inYard = (wx, wz, pad = 0) => {
     const loc = toLocal(wx, wz);
-    return Math.abs(loc.x) < rule.POST_X + 0.92 + pad && loc.z > -1.75 - pad && loc.z < rule.ENTRY_Z + 0.85 + pad;
+    return (Math.abs(loc.x) < Math.max(rule.POST_X + 1.35, 2.70) + pad && loc.z > -5.75 - pad && loc.z < rule.ENTRY_Z + 1.05 + pad) || nearCl6(wx, wz, pad);
   };
   if (typeof clearFoliageInSquare === 'function') {
-    for (let lz = -1.2; lz <= rule.ENTRY_Z + 0.6; lz += 1.8) {
+    for (let lz = -5.2; lz <= rule.ENTRY_Z + 0.6; lz += 1.8) {
       const fw = toWorld(0, lz);
-      clearFoliageInSquare(fw.x, fw.z, 2.3);
+      clearFoliageInSquare(fw.x, fw.z, 2.7);
     }
   }
   if (Array.isArray(foliage)) {
@@ -712,11 +1076,82 @@ export function setupTrapperMission(THREE, {
       }
     }
   }
+  trapper.clearedSolids = [];
   if (Array.isArray(worldSolids)) {
     for (let i = worldSolids.length - 1; i >= 0; i--) {
       const s = worldSolids[i];
       const loc = toLocal(s.x, s.z);
-      if (Math.abs(loc.x) < rule.POST_X + 0.25 && loc.z > -0.8 && loc.z < rule.ENTRY_Z + 0.6) {
+      const inYardBox = Math.abs(loc.x) < Math.max(rule.POST_X + 0.25, 2.2) && loc.z > -5.5 && loc.z < rule.ENTRY_Z + 0.6;
+      const isNearCl6 = nearCl6(s.x, s.z, s.radius || 0);
+      if (inYardBox || isNearCl6) {
+        let trianglesBefore = 0;
+        let trianglesRemoved = 0;
+        let trianglesAfter = 0;
+        if (s.landmark) {
+          // AG-140 / AG-141 (CL-256 batch 3): strip the offending camp piece's merged mesh triangles together with its
+          // collider when it sits on the CL_6 cache stand (e.g. the r=0.48 m curing frame rotated to (-38.43, 45.73),
+          // 0.78 m from (-38.06, 46.42)), and remove the collider from spawnColliders/colliders so startMatch() never restores it.
+          const geo = s.landmark.mesh?.geometry;
+          const posAttr = geo?.attributes?.position;
+          if (isNearCl6 && posAttr?.array && !geo.index) {
+            const pos = posAttr.array;
+            const nrm = geo.attributes.normal?.array || null;
+            const col = geo.attributes.color?.array || null;
+            const lx0 = s.x - (s.landmark.x || 0), lz0 = s.z - (s.landmark.z || 0);
+            const cutR = (s.radius || 0.48) + 0.43;
+            const triCount = (pos.length / 9) | 0;
+            trianglesBefore = triCount;
+            const keepTris = [];
+            for (let t = 0; t < triCount; t++) {
+              const b = t * 9;
+              const cxTri = (pos[b] + pos[b + 3] + pos[b + 6]) / 3;
+              const czTri = (pos[b + 2] + pos[b + 5] + pos[b + 8]) / 3;
+              if (Math.hypot(cxTri - lx0, czTri - lz0) > cutR) keepTris.push(t);
+            }
+            trianglesAfter = keepTris.length;
+            trianglesRemoved = triCount - keepTris.length;
+            if (keepTris.length < triCount && THREE?.BufferAttribute) {
+              const nextPos = new Float32Array(keepTris.length * 9);
+              const nextNrm = nrm ? new Float32Array(keepTris.length * 9) : null;
+              const nextCol = col ? new Float32Array(keepTris.length * 9) : null;
+              for (let k = 0; k < keepTris.length; k++) {
+                const src = keepTris[k] * 9, dst = k * 9;
+                for (let j = 0; j < 9; j++) {
+                  nextPos[dst + j] = pos[src + j];
+                  if (nextNrm) nextNrm[dst + j] = nrm[src + j];
+                  if (nextCol) nextCol[dst + j] = col[src + j];
+                }
+              }
+              geo.setAttribute('position', new THREE.BufferAttribute(nextPos, 3));
+              if (nextNrm) geo.setAttribute('normal', new THREE.BufferAttribute(nextNrm, 3));
+              if (nextCol) geo.setAttribute('color', new THREE.BufferAttribute(nextCol, 3));
+              if (typeof geo.computeBoundingSphere === 'function') geo.computeBoundingSphere();
+              if (typeof geo.computeBoundingBox === 'function') geo.computeBoundingBox();
+            }
+          }
+          if (Array.isArray(s.landmark.colliders)) {
+            const ci = s.landmark.colliders.indexOf(s);
+            if (ci >= 0) s.landmark.colliders.splice(ci, 1);
+          }
+          if (Array.isArray(s.landmark.spawnColliders)) {
+            const si = s.landmark.spawnColliders.indexOf(s);
+            if (si >= 0) s.landmark.spawnColliders.splice(si, 1);
+          }
+        }
+        trapper.clearedSolids.push({
+          x: Number(s.x.toFixed(3)),
+          z: Number(s.z.toFixed(3)),
+          localX: Number(loc.x.toFixed(3)),
+          localZ: Number(loc.z.toFixed(3)),
+          radius: Number((s.radius || 0).toFixed(3)),
+          inYardBox,
+          nearCl6: isNearCl6,
+          landmark: s.landmark ? (s.landmark.kind || s.landmark.type || s.landmark.id || s.landmark.mesh?.name || 'camp-trapper') : null,
+          landmarkPos: s.landmark ? [Number((s.landmark.x || 0).toFixed(2)), Number((s.landmark.z || 0).toFixed(2))] : null,
+          trianglesBefore,
+          trianglesRemoved,
+          trianglesAfter
+        });
         worldSolids.splice(i, 1);
       }
     }
@@ -731,8 +1166,9 @@ export function setupTrapperMission(THREE, {
   scene.add(group);
   trapper.group = group;
 
+  // Build yard & cellar parts before excavateCellar so surface props sample natural clearing terrain:
   const built = buildTrapperYardParts(THREE, {
-    groundAtLocal, toWorld, cy0, trapperPart, trapperBar, rule
+    groundAtLocal, surfAtLocal: surfLocalY, doorPivotY, toWorld, cy0, trapperPart, trapperBar, rule
   });
   trapper.stones = built.stones;
   trapper.posts = built.posts;
@@ -742,7 +1178,7 @@ export function setupTrapperMission(THREE, {
     trapper.colliders.push(addSolid(w.x, w.z, col.r, wy - 0.1, wy + 1.65));
   }
 
-  const staticMat = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.88, metalness: 0.06 });
+  const staticMat = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.86, metalness: 0.14 });
   const staticMesh = mergeParts(built.parts, staticMat, { castShadow: true, receiveShadow: true });
   for (const p of built.parts) p.geometry.dispose();
   staticMesh.name = 'trapper-path-static';
@@ -750,6 +1186,223 @@ export function setupTrapperMission(THREE, {
   staticMesh.updateMatrix();
   group.add(staticMesh);
   trapper.staticMesh = staticMesh;
+
+  // Cellar roof cap (underground ceiling liner + skylight curb + caveCapMat natural terrain cap).
+  // Built BEFORE excavateCellar so terrainColorAt samples the uncut natural hillside slope and heights:
+  const roofCapMesh = mergeParts(built.roofCapParts, staticMat, { castShadow: true, receiveShadow: true });
+  for (const p of built.roofCapParts) p.geometry.dispose();
+  roofCapMesh.name = 'trapper-cellar-roof-liner';
+  roofCapMesh.matrixAutoUpdate = false;
+  roofCapMesh.updateMatrix();
+  let capPatchDecks = [];
+  if (typeof buildCellarTerrainCap === 'function') {
+    const roofCapGroup = new THREE.Group();
+    roofCapGroup.name = 'trapper-cellar-roof-cap';
+    roofCapGroup.matrixAutoUpdate = false;
+    roofCapGroup.updateMatrix();
+    roofCapGroup.add(roofCapMesh);
+    const rawDecks = buildCellarTerrainCap({ toWorld, cy0, surfLocalY, targetGroup: roofCapGroup }) || [];
+    capPatchDecks = rawDecks.map((d) => {
+      const wc = toWorld(d.lx, d.lz);
+      return {
+        x: wc.x, z: wc.z, hw: d.hw, hl: d.hl, yaw,
+        deckY: cy0 + d.yMin + 0.05, under: cy0 + rule.CELLAR_CEIL_UNDER_Y, landmark: true
+      };
+    });
+    group.add(roofCapGroup);
+    trapper.cellarRoofCap = roofCapGroup;
+  } else {
+    roofCapMesh.name = 'trapper-cellar-roof-cap';
+    group.add(roofCapMesh);
+    trapper.cellarRoofCap = roofCapMesh;
+  }
+  trapper.cellarCapDecks = capPatchDecks;
+
+  // Excavate terrain heightField & ground mesh under the stairwell and cellar footprint AFTER buildCellarTerrainCap
+  // so playerGroundY prefers the stair ramp and cellar floor decks over natural surface height:
+  if (typeof excavateCellar === 'function') {
+    excavateCellar(toLocal, cy0, surfLocalY);
+  }
+
+  // Seat objective:trapper-cache centre at (cx, cz) with approach at (0, HATCH_APPROACH_Z), and place the visual
+  // cache box on the right stone threshold plinth (0.58, 0.20) so the stair entrance at lx = 0 is clear:
+  const appW = toWorld(0, rule.HATCH_APPROACH_Z);
+  const appY = sampleHeight(appW.x, appW.z);
+  const centreGroundY = Math.min(cy0, sampleHeight(cx, cz));
+  prop.centre.x = cx; prop.centre.y = centreGroundY; prop.centre.z = cz;
+  prop.approach.x = appW.x; prop.approach.y = appY; prop.approach.z = appW.z;
+  prop.facing = Math.atan2(cx - appW.x, cz - appW.z);
+  if (prop.group) {
+    const cacheW = toWorld(0.58, 0.20);
+    prop.group.position.set(cacheW.x, cy0 + surfLocalY(0.58, 0.20) + 0.15, cacheW.z);
+    prop.group.rotation.y = yaw - 0.18;
+    prop.group.updateMatrixWorld(true);
+  }
+
+  // Hinged cellar door leaves & locking bar:
+  const doorMat = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.72, metalness: 0.28 });
+  const doorLMesh = mergeParts(built.doorLeftParts, doorMat, { castShadow: true, receiveShadow: true });
+  for (const p of built.doorLeftParts) p.geometry.dispose();
+  doorLMesh.name = 'trapper-cellar-door-left';
+  doorLMesh.position.set(-0.72, doorPivotY, -1.23);
+  doorLMesh.rotation.set(-0.162, 0, 0);
+  group.add(doorLMesh);
+  trapper.doorL = doorLMesh;
+
+  const doorRMesh = mergeParts(built.doorRightParts, doorMat, { castShadow: true, receiveShadow: true });
+  for (const p of built.doorRightParts) p.geometry.dispose();
+  doorRMesh.name = 'trapper-cellar-door-right';
+  doorRMesh.position.set(0.72, doorPivotY, -1.23);
+  doorRMesh.rotation.set(-0.162, 0, 0);
+  group.add(doorRMesh);
+  trapper.doorR = doorRMesh;
+
+  const doorBarMesh = mergeParts(built.doorBarParts, doorMat, { castShadow: true, receiveShadow: true });
+  for (const p of built.doorBarParts) p.geometry.dispose();
+  doorBarMesh.name = 'trapper-cellar-door-bar';
+  doorBarMesh.position.set(0, doorPivotY, -1.23);
+  doorBarMesh.rotation.set(-0.162, 0, 0);
+  group.add(doorBarMesh);
+  trapper.doorBar = doorBarMesh;
+
+  // Warm interior oil lantern light inside the cellar:
+  const cellarLight = new THREE.PointLight(0xffa84a, 1.35, 6.5, 1.5);
+  cellarLight.position.set(-1.05, rule.CELLAR_FLOOR_Y + 0.75, -2.75);
+  group.add(cellarLight);
+  trapper.cellarLight = cellarLight;
+
+  // Register cellar platforms (floor, stair ramp, overhead skylight/roof decks, surface aprons, and shut-door cover):
+  const dY = doorPivotY - 0.18;
+  const floorC = toWorld(0, -3.44);
+  trapper.cellarFloorDeck = {
+    x: floorC.x, z: floorC.z, hw: 1.68, hl: 1.68, yaw,
+    deckY: cy0 + rule.CELLAR_FLOOR_Y, under: cy0 + rule.CELLAR_FLOOR_Y - 0.25, landmark: true
+  };
+  const stairMidZ = (rule.STAIR_Z_TOP + rule.STAIR_Z_BOT) * 0.5;
+  const stairHL = (rule.STAIR_Z_TOP - rule.STAIR_Z_BOT) * 0.5;
+  const stairC = toWorld(0, stairMidZ);
+  trapper.cellarStairRamp = {
+    x: stairC.x, z: stairC.z, hw: rule.STAIR_HALF_W, hl: stairHL, yaw,
+    deckY: cy0 + rule.CELLAR_FLOOR_Y, rise: (dY - rule.CELLAR_FLOOR_Y), landmark: true
+  };
+  const roofC = toWorld(0, -3.50);
+  trapper.cellarRoofDeck = {
+    x: roofC.x, z: roofC.z,
+    hw: capPatchDecks.length ? 0.62 : 2.10,
+    hl: capPatchDecks.length ? 0.62 : 1.51,
+    yaw,
+    deckY: cy0 + (capPatchDecks.length ? surfLocalY(0, -3.50) : rule.CELLAR_ROOF_Y),
+    under: cy0 + rule.CELLAR_CEIL_UNDER_Y,
+    landmark: true
+  };
+  const frontApronC = toWorld(0, -0.20);
+  trapper.cellarFrontApronDeck = {
+    x: frontApronC.x, z: frontApronC.z, hw: 0.72, hl: 0.12, yaw,
+    deckY: cy0 + surfLocalY(0, -0.20), under: cy0 + rule.CELLAR_FLOOR_Y - 0.25, landmark: true
+  };
+  const leftApronC = toWorld(-0.84, -1.23);
+  trapper.cellarLeftApronDeck = {
+    x: leftApronC.x, z: leftApronC.z, hw: 0.16, hl: 0.90, yaw,
+    deckY: cy0 + surfLocalY(-0.84, -1.23), under: cy0 + rule.CELLAR_FLOOR_Y - 0.25, landmark: true
+  };
+  const rightApronC = toWorld(0.84, -1.23);
+  trapper.cellarRightApronDeck = {
+    x: rightApronC.x, z: rightApronC.z, hw: 0.16, hl: 0.90, yaw,
+    deckY: cy0 + surfLocalY(0.84, -1.23), under: cy0 + rule.CELLAR_FLOOR_Y - 0.25, landmark: true
+  };
+  const shutDoorC = toWorld(0, -1.23);
+  trapper.shutDoorDeck = {
+    x: shutDoorC.x, z: shutDoorC.z, hw: 0.78, hl: 0.92, yaw,
+    deckY: cy0 + doorPivotY - 0.04, under: cy0 + rule.CELLAR_FLOOR_Y - 0.25, landmark: true
+  };
+  if (Array.isArray(platforms)) {
+    platforms.push(
+      trapper.cellarFloorDeck,
+      trapper.cellarStairRamp,
+      trapper.cellarRoofDeck,
+      trapper.cellarFrontApronDeck,
+      trapper.cellarLeftApronDeck,
+      trapper.cellarRightApronDeck,
+      ...capPatchDecks
+    );
+  }
+
+  // Register stairwell and underground cellar colliders:
+  // 1) Stairwell side cheek walls (surface + stairwell depth):
+  for (const sgn of [-1, 1]) {
+    for (const lz of [-0.65, -1.04, -1.44, -1.84]) {
+      const w = toWorld(sgn * 0.92, lz);
+      trapper.colliders.push(addSolid(w.x, w.z, 0.22, cy0 + rule.CELLAR_FLOOR_Y - 0.15, cy0 + 1.35));
+    }
+  }
+  // 2) Stairwell rear headwall lintel (surface ONLY: y0 = cy0 + 0.10 so the player at y = cy0 - 2.15 walks right under it,
+  //    while zombies on the roof at y = cy0 + 0.06 are blocked from dropping into the stairwell):
+  for (const lx of [-0.36, 0, 0.36]) {
+    const w = toWorld(lx, -2.14);
+    trapper.colliders.push(addSolid(w.x, w.z, 0.24, cy0 + 0.10, cy0 + 1.35));
+  }
+  // 3) Underground cellar room walls (underground ONLY: y1 = cy0 - 0.05 so zombies on the roof at y = cy0 + 0.06
+  //    have footY > y1 - 0.3 and walk straight across the cellar roof unhindered):
+  const wallY0 = cy0 + rule.CELLAR_FLOOR_Y - 0.15;
+  const wallY1 = cy0 - 0.05;
+  for (const sgn of [-1, 1]) {
+    const fw = toWorld(sgn * 1.25, -2.02);
+    trapper.colliders.push(addSolid(fw.x, fw.z, 0.28, wallY0, wallY1));
+    for (const lz of [-2.60, -3.25, -3.90, -4.55]) {
+      const sw = toWorld(sgn * 1.88, lz);
+      trapper.colliders.push(addSolid(sw.x, sw.z, 0.28, wallY0, wallY1));
+    }
+  }
+  for (const lx of [-1.30, -0.65, 0, 0.65, 1.30]) {
+    const bw = toWorld(lx, -5.32);
+    trapper.colliders.push(addSolid(bw.x, bw.z, 0.28, wallY0, wallY1));
+  }
+
+  // 4) Shut-door collider (blocks entry into the stairwell until trapperPath.unlocked()):
+  const doorColW = toWorld(0, -0.78);
+  trapper.doorCollider = addSolid(doorColW.x, doorColW.z, 0.52, cy0 - 1.50, cy0 + 1.50);
+
+  // Sync cellar doors & colliders with unlocked state:
+  trapper.cutaway = false;
+  trapper.setCutaway = (cut) => {
+    const next = !!cut;
+    if (trapper.cutaway === next) return;
+    trapper.cutaway = next;
+    if (trapper.cellarRoofCap) trapper.cellarRoofCap.visible = !next;
+  };
+  trapper.syncCellar = (unlocked) => {
+    const open = !!unlocked;
+    trapper._doorsOpen = open;
+    if (trapper.doorL) {
+      trapper.doorL.rotation.z = open ? 1.92 : 0;
+      trapper.doorL.updateMatrixWorld(true);
+    }
+    if (trapper.doorR) {
+      trapper.doorR.rotation.z = open ? -1.92 : 0;
+      trapper.doorR.updateMatrixWorld(true);
+    }
+    if (trapper.doorBar) {
+      trapper.doorBar.visible = !open;
+    }
+    if (Array.isArray(worldSolids) && trapper.doorCollider) {
+      const idx = worldSolids.indexOf(trapper.doorCollider);
+      if (open && idx >= 0) worldSolids.splice(idx, 1);
+      else if (!open && idx < 0) worldSolids.push(trapper.doorCollider);
+    }
+    if (Array.isArray(platforms) && trapper.shutDoorDeck) {
+      const idx = platforms.indexOf(trapper.shutDoorDeck);
+      if (open && idx >= 0) platforms.splice(idx, 1);
+      else if (!open && idx < 0) platforms.push(trapper.shutDoorDeck);
+    }
+  };
+  trapper.doorsOpen = () => !!trapper._doorsOpen;
+  trapper.inCellar = (wx, wy, wz) => {
+    const loc = toLocal(wx, wz);
+    if (Math.abs(loc.x) > rule.ROOM_HALF_W + 0.15) return false;
+    if (loc.z < rule.ROOM_Z_BACK - 0.15 || loc.z > -1.45) return false;
+    return wy < cy0 - 0.35;
+  };
+  trapper.syncCellar(trapperPath?.unlocked?.() || false);
 
   // Eight forged iron horseshoes (one per row, moved to the safe post on each run reset):
   const hsMat = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.42, metalness: 0.68 });
@@ -781,4 +1434,11 @@ export function setupTrapperMission(THREE, {
 
   const entryW = toWorld(0, rule.ENTRY_Z);
   trapper.entrySpot = { x: entryW.x, y: sampleHeight(entryW.x, entryW.z), z: entryW.z };
+  const cellarSpotW = toWorld(rule.CELLAR_SPOT_X, rule.CELLAR_SPOT_Z);
+  trapper.cellarSpot = {
+    x: cellarSpotW.x,
+    y: cy0 + rule.CELLAR_FLOOR_Y,
+    z: cellarSpotW.z,
+    yaw: yaw + 0.35
+  };
 }

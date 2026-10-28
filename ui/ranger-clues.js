@@ -3,17 +3,21 @@
 // views in the panel, so what the player reads up close is what is out there. Nothing says "code" or "clue".
 //
 //   paintRadioLcd(ctx, w, h, ch, words)     the radio's little display, still on its channel: "CH 7"
-//   paintSearchLog(ctx, w, h, day, words)   the search log pinned on their board: day 1 to `day`, the last ringed in red
+//   paintSearchLog(ctx, w, h, day, words)   the search log pinned on their board: day 1 to `day`, the last ringed in red;
+//                                           above the days, its last entry (words.last, CL-263)
 //   paintUnit(ctx, w, h, unit, words)       "UNIT 2", stencilled on the truck's doors (transparent round it)
 //   paintLid(ctx, w, h, order[, col, clear]) the lockbox lid's three pictures (a radio, a board, a truck) in `order`,
 //                                           left to right, one, two and three pips under them (transparent round them)
 //   paintKeypad(ctx, w, h)                  the hangar keypad's face (CL-146's look)
 //   lookImage(doc, kind, value, words)      a data: URL of the big view: kind 'radio' | 'board' | 'truck' | 'lid'
 //
-// words: { log, day, ch, unit, areas: [9 place names] } (index.html passes ui/strings.js's); English if left out.
+// words: { log, day, ch, unit, last, areas: [9 place names] } (index.html passes ui/strings.js's); English if left out.
 
 export const RANGER_WORDS = Object.freeze({
   log: 'SEARCH LOG', day: 'DAY', ch: 'CH', unit: 'UNIT',
+  // CL-263 (docs/specs/story-chain.md §4, day 7 to day 8): the log's last entry, scrawled in above the days: the lead to
+  // the old man's.
+  last: 'Trapper ran us off. Horseshoes on everything. Said IRON.',
   areas: Object.freeze(['Ridge', 'Creek', 'North trail', 'Lake shore', 'Old mine', 'Quarry', 'Pines', 'Dock road', 'Tower'])
 });
 const W = (w) => ({ ...RANGER_WORDS, ...(w || {}) });
@@ -47,8 +51,20 @@ export function paintSearchLog(c, w, h, day, words) {
   c.fillStyle = '#2b2618'; c.textBaseline = 'alphabetic'; c.textAlign = 'center';
   c.font = `700 ${Math.round(h * 0.085)}px ${TYPE}`; c.fillText(t.log, w / 2, h * 0.12);
   c.fillRect(w * 0.1, h * 0.145, w * 0.8, Math.max(1, h * 0.006));
-  const rowH = h * 0.088, top = h * 0.235;
+  // CL-263: with its last entry the days sit a little closer, under it.
+  const rowH = h * (t.last ? 0.081 : 0.088), top = h * (t.last ? 0.29 : 0.235);
   c.textAlign = 'left';
+  if (t.last) {   // CL-263: the last entry, added in red pencil between the title and the days, two lines at most
+    c.fillStyle = '#9c2a20';
+    let size = Math.round(h * 0.04), lines = null;
+    for (; size >= 8; size--) {
+      c.font = `${size}px ${HAND}`;
+      const words = String(t.last).split(' '); lines = [''];
+      for (const wd of words) { const tryL = lines[lines.length - 1] ? lines[lines.length - 1] + ' ' + wd : wd; if (c.measureText(tryL).width <= w * 0.82 || !lines[lines.length - 1]) lines[lines.length - 1] = tryL; else lines.push(wd); }
+      if (lines.length <= 2) break;
+    }
+    lines.slice(0, 2).forEach((ln, k) => c.fillText(ln, w * 0.09 + j(1), h * 0.195 + k * size * 1.12 + j(0.8)));
+  }
   for (let i = 1; i <= 9; i++) {
     const y = top + (i - 1) * rowH;
     c.fillStyle = 'rgba(70,90,120,.35)'; c.fillRect(w * 0.08, y + rowH * 0.28, w * 0.84, 1);   // ruled line

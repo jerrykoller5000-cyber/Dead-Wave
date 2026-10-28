@@ -1,0 +1,15 @@
+GRANT grokbot GB-241: starting one game-test command
+check-players: 309 player.position reads, all in the allowed places
+FAIL  t69     15 pass   3 fail  184.8s
+FAIL  t75     15 pass   1 fail  52.6s
+ok    t92      5 pass   0 fail  45.0s
+ok    t95      9 pass   0 fail  64.5s
+ok    t98     20 pass   0 fail  92.0s
+ok    t215     4 pass   0 fail  45.8s
+
+6 checks: 68 pass, 4 fail
+
+by owner:
+  unassigned
+    t69    3 fail  FAIL the whole wave is out
+    t75    1 fail  FAIL they crowd him: 2 of 5 at arm’s length

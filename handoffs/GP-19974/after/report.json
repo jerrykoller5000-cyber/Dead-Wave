@@ -1,0 +1,93 @@
+{
+  "logs": [
+    "PASS recordings are unavailable before actual recovery",
+    "PASS existing native convoy behavior check passes all 30 assertions",
+    "PASS actual cooler claim leaves no empty cooler behind",
+    "PASS cab and rear doors remain open after claim",
+    "PASS cab radio opens only within its real prop reach",
+    "PASS radio log has no empty screen above its words",
+    "PASS stale/wrong-device close refused and first-person pointer released",
+    "PASS eight-second radio log becomes learned evidence",
+    "PASS the real recovered kit places its camera on the camp pouch",
+    "PASS recovered camera is built and visible in the actual world",
+    "PASS switching from radio to camera restores the loaded picture",
+    "PASS full camera playback records its clue after eight seconds",
+    "PASS camera layout tp/day/1280",
+    "PASS camera layout tp/day/390",
+    "PASS camera layout tp/night/1280",
+    "PASS camera layout tp/night/390",
+    "PASS camera layout fp/day/1280",
+    "PASS camera layout fp/day/390",
+    "PASS camera layout fp/night/1280",
+    "PASS camera layout fp/night/390",
+    "PASS six learned pencil lines repaint the existing poster textures"
+  ],
+  "convoyPass": 30,
+  "cameraModel": {
+    "meshes": 5,
+    "triangles": 132,
+    "position": [
+      2.0238368057170026,
+      0.8020119579276538,
+      -77.68351246786395
+    ],
+    "parent": "objective:hikers-cache",
+    "visible": true
+  },
+  "posters": [
+    {
+      "id": "maya-costa",
+      "note": "story.pencil.camera.maya-costa",
+      "sameTexture": true,
+      "sameCanvas": true
+    },
+    {
+      "id": "theo-marsh",
+      "note": "story.pencil.camera.theo-marsh",
+      "sameTexture": true,
+      "sameCanvas": true
+    },
+    {
+      "id": "sam-marsh",
+      "note": "story.pencil.camera.sam-marsh",
+      "sameTexture": true,
+      "sameCanvas": true
+    },
+    {
+      "id": "priya-raman",
+      "note": "story.pencil.camera.priya-raman",
+      "sameTexture": true,
+      "sameCanvas": true
+    },
+    {
+      "id": "jonas-weber",
+      "note": "story.pencil.camera.jonas-weber",
+      "sameTexture": true,
+      "sameCanvas": true
+    },
+    {
+      "id": "ellis-byrne",
+      "note": "story.pencil.camera.ellis-byrne",
+      "sameTexture": true,
+      "sameCanvas": true
+    }
+  ],
+  "end": {
+    "runId": 2,
+    "medicalTaken": true,
+    "kitRecovered": true,
+    "rangerSearched": false,
+    "radioHeard": true,
+    "cameraViewed": true,
+    "notes": {
+      "maya-costa": "story.pencil.camera.maya-costa",
+      "theo-marsh": "story.pencil.camera.theo-marsh",
+      "sam-marsh": "story.pencil.camera.sam-marsh",
+      "priya-raman": "story.pencil.camera.priya-raman",
+      "jonas-weber": "story.pencil.camera.jonas-weber",
+      "ellis-byrne": "story.pencil.camera.ellis-byrne"
+    }
+  },
+  "errors": [],
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+}

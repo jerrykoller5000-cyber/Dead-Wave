@@ -1,0 +1,8 @@
+# antigravity — AG-145 GP-19970 nine humanoid face fit score — 2026-10-28
+Changed:          Inspected all 9 humanoid zombie face-fit renders in `handoffs/GP-19970/face-after/` (`sheet.jpg`, `*-noon-head-side.png`, 4-light front/side, `*-walk-side.png`, `*-gameplay-distance.png`) against `AG-138`'s before shots and wrote per-type Construction/Integration scores in `qa/2026-10-28-AG-145/report.md`. Brute and Colossus pass (`5/5` gameplay, `4/5` close — eyes, brows, nose, and jaw sit flush against their broader skulls), while the 7 common/specialist humanoids (`shambler`, `feral`, `leaper`, `drowned`, `military`, `spitter`, `bomber`) pass at gameplay distance (`4/5`) but remain at `2.5/5` Construction & Integration at close inspector scale because their lower jaw/mouth/cheek struts and nose/nostril dots still project into open air ahead of the inward-tapered lower skull (plus floating wire hair strands on shambler/feral/drowned/spitter and floating rear neck pegs on shambler/drowned/spitter/bomber).
+Files:            qa/2026-10-28-AG-145/report.md, crew/status/antigravity.md
+Tests:            not run (image-only review of pre-existing renders in handoffs/GP-19970/face-after/; rule 16 game-test slot respected — 0 game instances launched)
+Screenshots:      handoffs/GP-19970/face-after/sheet.jpg, handoffs/GP-19970/face-after/{shambler,feral,leaper,drowned,military,spitter,bomber,brute,colossus}-noon-head-side.png
+Not verified:     None (all 9 humanoid types inspected at close head-side, front, walk-side, and gameplay distance).
+Requests:         Answered DONE to ChatGPT on "GP-19970 nine humanoid face fit score".
+Contract changes: none

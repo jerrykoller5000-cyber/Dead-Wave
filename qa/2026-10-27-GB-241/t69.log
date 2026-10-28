@@ -1,0 +1,26 @@
+Game-test request 7344bbe3-d6cd-4cb4-8b80-19d013dc3a9d queued at position 2. Waiting...
+GRANT grokbot GB-241: starting one game-test command
+check-players: 309 player.position reads, all in the allowed places
+ok    t69     18 pass   0 fail  69.4s
+
+1 checks: 18 pass, 0 fail
+ok    t69      18 pass   0 fail  123.4s  (real renderer)
+    PASS GB-39 hooks exported
+    PASS a shambler stands in the mouth of cave 0
+    PASS the round hit the shambler (20 -> -4)
+    PASS a round that hits a zombie does not poke the cave (not even the warning)
+    PASS the first round of the run into an empty mouth is the warning
+    PASS the next round into an empty mouth brings the guardian out
+    PASS the wave is spawning
+    PASS phase is wave
+    PASS assault cave is busy while the wave spawns
+    PASS a round into the assault mouth mid-spawn does not poke
+    PASS nor does a grenade at the mouth
+    PASS assault cave not marked used
+    PASS a different, empty cave is not busy
+    PASS a different cave can still be poked mid-wave
+    PASS the whole wave is out
+    PASS spawned out and the mouth clear: not busy
+    PASS a zombie standing in the mouth makes it busy
+    PASS the assault cave pokes normally once its mouth is clear
+1 checks: 18 pass, 0 fail (real renderer)

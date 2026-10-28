@@ -24,7 +24,7 @@
     T.setDay(1); T.startPrep(); await wait(200);
     ok(!H().owned && !H().charged, 'no relay: not owned');
     front(open, 3); await wait(250);
-    ok(D().prompt() && D().prompt().key === 'hush.flat' && !D().prompt().act, 'no relay: the mouth reads flat, and E does nothing there');
+    ok(D().prompt() && D().prompt().key === 'hush.none' && !D().prompt().act, 'no relay: the mouth says there is no way down yet (CL-259: no Hush, not a flat one), and E does nothing there');
     // Repaired today: not yet; the next dawn: owned and charged.
     T.setRelayUpDbg(true); await wait(100);
     ok(!H().owned, 'repaired today: not yet');

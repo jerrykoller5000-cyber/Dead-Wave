@@ -1,0 +1,131 @@
+{
+  "shots": [
+    {
+      "target": "zombie.shambler:statue",
+      "view": "front",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/shambler-overcast-front.png"
+    },
+    {
+      "target": "zombie.shambler:statue",
+      "view": "side",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/shambler-overcast-side.png"
+    },
+    {
+      "target": "zombie.feral:statue",
+      "view": "front",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/feral-overcast-front.png"
+    },
+    {
+      "target": "zombie.feral:statue",
+      "view": "side",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/feral-overcast-side.png"
+    },
+    {
+      "target": "zombie.leaper:statue",
+      "view": "front",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/leaper-overcast-front.png"
+    },
+    {
+      "target": "zombie.leaper:statue",
+      "view": "side",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/leaper-overcast-side.png"
+    },
+    {
+      "target": "zombie.drowned:statue",
+      "view": "front",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/drowned-overcast-front.png"
+    },
+    {
+      "target": "zombie.drowned:statue",
+      "view": "side",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/drowned-overcast-side.png"
+    },
+    {
+      "target": "zombie.military:statue",
+      "view": "front",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/military-overcast-front.png"
+    },
+    {
+      "target": "zombie.military:statue",
+      "view": "side",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/military-overcast-side.png"
+    },
+    {
+      "target": "zombie.spitter:statue",
+      "view": "front",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/spitter-overcast-front.png"
+    },
+    {
+      "target": "zombie.spitter:statue",
+      "view": "side",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/spitter-overcast-side.png"
+    },
+    {
+      "target": "zombie.bomber:statue",
+      "view": "front",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/bomber-overcast-front.png"
+    },
+    {
+      "target": "zombie.bomber:statue",
+      "view": "side",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/bomber-overcast-side.png"
+    },
+    {
+      "target": "zombie.brute:statue",
+      "view": "front",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/brute-overcast-front.png"
+    },
+    {
+      "target": "zombie.brute:statue",
+      "view": "side",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/brute-overcast-side.png"
+    },
+    {
+      "target": "zombie.colossus:statue",
+      "view": "front",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/colossus-overcast-front.png"
+    },
+    {
+      "target": "zombie.colossus:statue",
+      "view": "side",
+      "wait": 300,
+      "size": "1280x720",
+      "out": "handoffs/GP-19970/face-after/colossus-overcast-side.png"
+    }
+  ],
+  "out": "handoffs/GP-19970/face-after"
+}

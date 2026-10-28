@@ -5,7 +5,7 @@ const NAMES=Object.freeze({'objective:medical-convoy':'cache.medicalConvoy','obj
 const open=s=>['available','ready-to-claim'].includes(s.state);
 export function restockRows(snapshot,day) {
   if(!Number.isSafeInteger(day)||day<2)return [];
-  return (snapshot?.sites||[]).filter(s=>NAMES[s.id]&&s.restockDay===day&&s.state!=='unavailable').map(s=>{
+  return (snapshot?.sites||[]).filter(s=>!s.storyClosed&&NAMES[s.id]&&s.restockDay===day&&s.state!=='unavailable').map(s=>{
     const reward=s.remaining||s.reward;let label='';
     try { label=text(reward.key,reward.params); } catch { return null; }
     return {id:s.id,day,name:text(NAMES[s.id]),reward:label,collected:s.state==='claimed',
@@ -17,13 +17,13 @@ export function createCacheIntel() {
   return {
     receive(event) {
       if(event?.type==='run-reset'){runId=event.runId;readDay=0;known.clear();return;}
-      if(event?.type!=='briefing-open'||runId===null||event.runId!==runId||!Number.isSafeInteger(event.day)||event.day<2)return;
+      if(event?.type!=='briefing-open'||event.panel!=='duty'||runId===null||event.runId!==runId||!Number.isSafeInteger(event.day)||event.day<2)return;
       readDay=event.day;known.clear();
       for(const row of event.restocks||[])if(NAMES[row.id]&&row.day===readDay&&!row.collected)known.add(row.id);
     },
     markers({runId:currentRun,day,sites=[]}={}) {
       if(currentRun!==runId||day!==readDay)return [];
-      return sites.filter(s=>known.has(s.id)&&s.restockDay===day&&open(s)&&Number.isFinite(s.position?.x)&&Number.isFinite(s.position?.z))
+      return sites.filter(s=>!s.storyClosed&&known.has(s.id)&&s.restockDay===day&&open(s)&&Number.isFinite(s.position?.x)&&Number.isFinite(s.position?.z))
         .map(s=>({id:s.id,x:s.position.x,z:s.position.z}));
     }
   };

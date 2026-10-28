@@ -21,7 +21,7 @@ test('an early repair catches up before 18 and keeps both lines on the board, ne
     const dispatch = story.morning({runId:7,day,repaired:true});
     const numbers = dispatch.lines.map(entry => entry.number).filter(Number.isInteger);
     assert.deepEqual(numbers, day <= 6 ? [2*(day-3), 2*(day-3)-1] : [day]);
-    if (day === 4) assert.equal(dispatch.lines[0].line,text('story.relay.hushOrigin'));
+    assert(!dispatch.lines.some(entry=>entry.line===text('story.relay.hushOrigin')),'repair alone has not recovered the board');
     heard.push(...numbers.toReversed());
     for (const entry of dispatch.lines) if(Number.isInteger(entry.number)) assert.equal(entry.line,text(`story.relay.${entry.number}`));
     assert.equal(dispatch.line, dispatch.lines[0].line);
@@ -48,11 +48,32 @@ test('boat dispatches belong to mornings 18–20 even after a late repair', () =
   story.reset('late');
   for(let day=1;day<=18;day++)story.morning({runId:'late',day,repaired:false});
   const lateFirst=story.morning({runId:'late',day:19,repaired:true});
-  assert.equal(lateFirst.lines[0].line,text('story.relay.hushOrigin'));
-  assert.equal(lateFirst.lines[1].number,19);
+  assert.equal(lateFirst.lines[0].number,19);
   assert.equal(story.morning({runId:'late',day:20,repaired:true}).number,20);
   assert.equal(story.morning({runId:'run',day:20,repaired:true}),null,'old run cannot advance new story');
   story.reset('fresh');assert.equal(story.read(true).status,'awaiting');
+});
+
+test('Hush guidance waits for the actual spare board and does not replace numbered dispatches', () => {
+  const story=createRelayStory();story.reset('board');
+  for(let day=1;day<=3;day++) {
+    const dispatch=story.morning({runId:'board',day,repaired:true});
+    assert(dispatch.lines.every(entry=>entry.number!==null));
+  }
+  assert.equal(story.morning({runId:'old',day:4,repaired:true,board:'carried'}),null);
+  const first=story.morning({runId:'board',day:4,repaired:true,board:'carried'});
+  assert.deepEqual(first.lines.map(entry=>entry.number),[null,4]);
+  assert.equal(first.lines[0].line,text('story.relay.hushOrigin'));
+  assert.match(first.lines[0].line,/vault lift/);
+  assert.match(first.lines[0].line,/HQ radio set/);
+  assert.equal(story.morning({runId:'board',day:4,repaired:true,board:'wired'}),null);
+  assert.deepEqual(story.morning({runId:'board',day:5,repaired:true,board:'wired'}).lines.map(entry=>entry.number),[5]);
+  story.reset('wired');
+  const wired=story.morning({runId:'wired',day:19,repaired:true,board:'wired'});
+  assert.deepEqual(wired.lines.map(entry=>entry.number),[null,19]);
+  assert.equal(wired.line,text('story.relay.hushOriginWired'));
+  assert.doesNotMatch(wired.line,/Bring it/);
+  assert.equal(story.morning({runId:'wired',day:20,repaired:true,board:'wired'}).number,20);
 });
 
 test('first delve replaces unheard line eight or adds a dispatch next morning once', () => {
