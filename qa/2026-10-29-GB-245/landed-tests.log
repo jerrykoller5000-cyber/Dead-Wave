@@ -1,0 +1,266 @@
+GRANT grokbot GB-245: starting one game-test command
+ok    t215      4 pass   0 fail  34.6s  (real renderer)
+    PASS read index.html and the scripts and styles the game loaded (227 files)
+    PASS no broken characters in them
+    PASS the HUD reads clean: timeLine "Daylight · 08:21 · Grace", tacticalLine "NVG — · Laser — · Light —", grenadeChips "G×3H×0", ammoDetail "12 / 12  ·  50 Bullets  ·  SEMI", hpNum "100 / 100"
+    PASS and shows its dots and times signs (NVG — · Laser — · Light — / G×3H×0)
+ok    t95       9 pass   0 fail  33.3s  (real renderer)
+    PASS the pick is x0.8 (0.8)
+    PASS laser off: the cone is the gun's own
+    PASS every gun with a laser, 200 draws each: x0.8 within 5% (minigun 0.800 m4 0.800 ak 0.800 pistol 0.800 uzi 0.800 shotgun 0.801 aa12 0.801 revolver 0.800 sniper 0.800 launcher 0.800)
+    PASS AK, 2000 free draws each: 6.026 -> 4.799 mrad (x0.796)
+    PASS Z (toggleLasers) with the laser sight bought: on, and it steadies
+    PASS Z again: off
+    PASS no laser sight owned: no change (6.033 vs 6.033 mrad)
+    PASS the chainsaw has no laser: nothing to steady
+    PASS no page errors
+ok    t222      9 pass   0 fail  150.1s  (real renderer)
+    INFO shambler  head: head 6 | chest: body 6 | legs: legs 6
+    INFO feral     head: head 6 | chest: body 4, head 2 | legs: legs 6
+    INFO brute     head: head 6 | chest: body 6 | legs: legs 6
+    INFO spider    head: head 5, body 1 | chest: head 4, body 2 | legs: -
+    INFO leaper    head: head 6 | chest: body 4, head 2 | legs: -
+    INFO colossus at 90 deg 6 m: its head is covered by its own gear from the camera here (no head case)
+    INFO colossus at 90 deg 14 m: its head is covered by its own gear from the camera here (no head case)
+    INFO colossus  head: head 4 | chest: body 6 | legs: legs 6
+    PASS pointing at a head is a headshot: 33/34 (bar 90 %; was 17/64)
+    PASS pointing at a chest lands in the body: body 22, head 2 (bar 80 %, no miss; a head only where the head covers the chest from up here)
+    PASS pointing at the legs lands low: 24/24 (bar 60 %)
+    PASS no round aimed at a body goes into the ground or past it (0; bar 4)
+    PASS the reticle rings a head lined up, and not a chest (true, los-clear)
+    PASS his round into the head flashes the gold X on the reticle (rgb(255, 210, 74))
+    PASS the ticks show the spread: pistol 7.0 px, shotgun 38.6 px
+    INFO pistol 8 m 3 m/s +: hit, lead 0.31 m (pace x flight 0.32) at 0.63 of its height
+    INFO pistol 8 m 3 m/s -: hit, lead -0.31 m (pace x flight -0.32) at 0.60 of its height
+    INFO pistol 8 m 6 m/s +: hit, lead 0.59 m (pace x flight 0.59) at 0.58 of its height
+    INFO pistol 8 m 6 m/s -: hit, lead -0.49 m (pace x flight -0.59) at 0.68 of its height
+    INFO pistol 18 m 3 m/s +: hit, lead 0.71 m (pace x flight 0.71) at 0.58 of its height
+    INFO pistol 18 m 3 m/s -: hit, lead -0.70 m (pace x flight -0.71) at 0.64 of its height
+    INFO pistol 18 m 6 m/s +: hit, lead 1.37 m (pace x flight 1.39) at 0.58 of its height
+    INFO pistol 18 m 6 m/s -: hit, lead -1.35 m (pace x flight -1.39) at 0.60 of its height
+    INFO m4 8 m 3 m/s +: hit, lead 0.24 m (pace x flight 0.23) at 0.68 of its height
+    INFO m4 8 m 3 m/s -: hit, lead -0.22 m (pace x flight -0.23) at 0.61 of its height
+    INFO m4 8 m 6 m/s +: hit, lead 0.38 m (pace x flight 0.42) at 0.60 of its height
+    INFO m4 8 m 6 m/s -: hit, lead -0.42 m (pace x flight -0.42) at 0.57 of its height
+    INFO m4 18 m 3 m/s +: hit, lead 0.51 m (pace x flight 0.52) at 0.64 of its height
+    INFO m4 18 m 3 m/s -: hit, lead -0.51 m (pace x flight -0.52) at 0.60 of its height
+    INFO m4 18 m 6 m/s +: hit, lead 1.01 m (pace x flight 1.02) at 0.57 of its height
+    INFO m4 18 m 6 m/s -: hit, lead -0.98 m (pace x flight -1.02) at 0.60 of its height
+    PASS a runner crossing in front of him at 3-6 m/s, the cursor on it, is hit: hit 16 (bar 14/16; was 7/36)
+    INFO launcher 12 m 6 m/s +: miss, lead -0.03 m (pace x flight 2.10)
+    PASS the launcher is not led (it lobs): -0.03 m off the body
+ok    t225     21 pass   0 fail  39.2s  (real renderer)
+    PASS hooks: grenadeAnimDbg, holdGrenadeAnim, setGrenadesDbg
+    PASS the longest throw is held 0.8 s (was 1.6)
+    PASS the grab goes to the pouch on his hip, in front at his belt (0.84 m up)
+    PASS the wind-up holds it behind his head on his off side (1.5 up, -0.24 forward)
+    PASS on the way up the hand comes out in front of his shoulder, not through his chest
+    PASS the release is over his shoulder, a little forward, and it is where the grenade leaves (1.61 m up)
+    PASS the follow-through ends down across his front
+    PASS reaching: nothing in his hand yet
+    PASS out of the pouch: one in his hand, and the pouch on his hip shows one fewer
+    PASS held behind his head: still in his hand
+    PASS past the release: his hand empty
+    PASS let go of the hold: nothing in his hand
+    PASS G down: the grab
+    PASS then held behind his head, and the arc shows: one line of 24 pieces (not the mortar's dots)
+    PASS full at 0.8 s (0.80)
+    PASS G up: the arm comes over (the grenade not out yet)
+    PASS it leaves at the top of the swing, 0.11 s after G up (game time)
+    PASS from his hand, where the arc started (0.00 m off it)
+    PASS then the hand goes back to the gun
+    PASS a tap: out of the pouch and away in 0.20 s, a short lob
+    PASS a hold cut off (the window loses focus): it goes back, none thrown (2 left)
+ok    t228     95 pass   0 fail  106.7s  (real renderer)
+    PASS gun hand: its forearm has a wrist
+    PASS gun hand: the glove and the bare hand hang on it, built where they were (2 parts)
+    PASS gun hand: at rest the wrist does not turn the hand
+    PASS gun hand: its grip point is inside the fist (-0.010, -0.262, 0.078)
+    PASS support hand: its forearm has a wrist
+    PASS support hand: the glove and the bare hand hang on it, built where they were (2 parts)
+    PASS support hand: at rest the wrist does not turn the hand
+    PASS support hand: its grip point is inside the fist (0.020, -0.262, 0.088)
+    PASS TT.handsDbg has the wrist (max 1.3 rad) and the support reach to the fist (0.52 m)
+    PASS pistol standing: the firing hand closes on the grip (0.0 cm)
+    PASS pistol standing: the support hand on its anchor (0.1 cm)
+    PASS pistol standing: the support wrist within its turn (26 deg)
+    PASS pistol walking: the firing hand closes on the grip (0.1 cm)
+    PASS pistol walking: the support hand on its anchor (0.1 cm)
+    PASS pistol walking: the support wrist within its turn (28 deg)
+    PASS revolver standing: the firing hand closes on the grip (0.0 cm)
+    PASS revolver standing: the support hand on its anchor (0.1 cm)
+    PASS revolver standing: the support wrist within its turn (26 deg)
+    PASS revolver walking: the firing hand closes on the grip (0.1 cm)
+    PASS revolver walking: the support hand on its anchor (0.1 cm)
+    PASS revolver walking: the support wrist within its turn (27 deg)
+    PASS uzi standing: the firing hand closes on the grip (0.0 cm)
+    PASS uzi standing: the support hand on its anchor (0.1 cm)
+    PASS uzi standing: the support wrist within its turn (74 deg)
+    PASS uzi standing: the support fist along its forend (38 deg)
+    PASS uzi walking: the firing hand closes on the grip (0.1 cm)
+    PASS uzi walking: the support hand on its anchor (0.0 cm)
+    PASS uzi walking: the support wrist within its turn (74 deg)
+    PASS uzi walking: the support fist along its forend (40 deg)
+    PASS m4 standing: the firing hand closes on the grip (0.0 cm)
+    PASS m4 standing: the support hand on its anchor or back along the forend (0.0 cm back) (0.0 cm)
+    PASS m4 standing: the support wrist within its turn (74 deg)
+    PASS m4 standing: the support fist along its forend (21 deg)
+    PASS m4 walking: the firing hand closes on the grip (0.0 cm)
+    PASS m4 walking: the support hand on its anchor or back along the forend (0.0 cm back) (0.1 cm)
+    PASS m4 walking: the support wrist within its turn (74 deg)
+    PASS m4 walking: the support fist along its forend (24 deg)
+    PASS ak standing: the firing hand closes on the grip (0.0 cm)
+    PASS ak standing: the support hand on its anchor or back along the forend (0.0 cm back) (0.0 cm)
+    PASS ak standing: the support wrist within its turn (74 deg)
+    PASS ak standing: the support fist along its forend (28 deg)
+    PASS ak walking: the firing hand closes on the grip (0.0 cm)
+    PASS ak walking: the support hand on its anchor or back along the forend (0.8 cm back) (0.2 cm)
+    PASS ak walking: the support wrist within its turn (74 deg)
+    PASS ak walking: the support fist along its forend (34 deg)
+    PASS aa12 standing: the firing hand closes on the grip (0.0 cm)
+    PASS aa12 standing: the support hand on its anchor or back along the forend (0.1 cm back) (0.0 cm)
+    PASS aa12 standing: the support wrist within its turn (74 deg)
+    PASS aa12 standing: the support fist along its forend (36 deg)
+    PASS aa12 walking: the firing hand closes on the grip (0.0 cm)
+    PASS aa12 walking: the support hand on its anchor or back along the forend (0.1 cm back) (0.1 cm)
+    PASS aa12 walking: the support wrist within its turn (74 deg)
+    PASS aa12 walking: the support fist along its forend (32 deg)
+    PASS shotgun standing: the firing hand closes on the grip (0.0 cm)
+    PASS shotgun standing: the support hand on its anchor (0.0 cm)
+    PASS shotgun standing: the support wrist within its turn (74 deg)
+    PASS shotgun standing: the support fist along its forend (26 deg)
+    PASS shotgun walking: the firing hand closes on the grip (0.0 cm)
+    PASS shotgun walking: the support hand on its anchor (0.1 cm)
+    PASS shotgun walking: the support wrist within its turn (74 deg)
+    PASS shotgun walking: the support fist along its forend (26 deg)
+    PASS sniper standing: the firing hand closes on the grip (0.0 cm)
+    PASS sniper standing: the support hand on its anchor or back along the forend (2.8 cm back) (0.1 cm)
+    PASS sniper standing: the support wrist within its turn (74 deg)
+    PASS sniper standing: the support fist along its forend (34 deg)
+    PASS sniper walking: the firing hand closes on the grip (0.0 cm)
+    PASS sniper walking: the support hand on its anchor or back along the forend (4.7 cm back) (0.2 cm)
+    PASS sniper walking: the support wrist within its turn (74 deg)
+    PASS sniper walking: the support fist along its forend (34 deg)
+    PASS launcher standing: the firing hand closes on the grip (0.0 cm)
+    PASS launcher standing: the support hand on its anchor (0.0 cm)
+    PASS launcher standing: the support wrist within its turn (20 deg)
+    PASS launcher standing: the support fist along its foregrip (0 deg)
+    PASS launcher walking: the firing hand closes on the grip (0.0 cm)
+    PASS launcher walking: the support hand on its anchor (0.1 cm)
+    PASS launcher walking: the support wrist within its turn (23 deg)
+    PASS launcher walking: the support fist along its foregrip (0 deg)
+    PASS flamer standing: the firing hand closes on the grip (0.0 cm)
+    PASS flamer standing: the support hand on its anchor (0.0 cm)
+    PASS flamer standing: the support wrist within its turn (21 deg)
+    PASS flamer standing: the support fist along its foregrip (0 deg)
+    PASS flamer walking: the firing hand closes on the grip (0.0 cm)
+    PASS flamer walking: the support hand on its anchor (0.1 cm)
+    PASS flamer walking: the support wrist within its turn (24 deg)
+    PASS flamer walking: the support fist along its foregrip (0 deg)
+    PASS chainsaw standing: the firing hand closes on the grip (0.0 cm)
+    PASS chainsaw standing: the support hand on its anchor (1.6 cm)
+    PASS chainsaw standing: the support wrist within its turn (0 deg)
+    PASS chainsaw walking: the firing hand closes on the grip (0.1 cm)
+    PASS chainsaw walking: the support hand on its anchor (1.6 cm)
+    PASS chainsaw walking: the support wrist within its turn (0 deg)
+    PASS m4: the reload runs
+    PASS through a reload the support hand is back to its hand point, the wrist at rest (grip 0.00)
+    PASS with the knife out the support wrist is at rest
+    PASS holstered, both wrists are at rest or in the GB-170 hang (y -1.15, 1.15)
+ok    t246     24 pass   0 fail  71.7s  (real renderer)
+    PASS aim camera debug is on the page
+    PASS no shoulder pose before aiming (pose 0.00)
+    PASS the ordinary view looks down (pitch -0.80)
+    PASS the ordinary camera sits well above him (9.9 m)
+    PASS m4 in hand
+    PASS third person, right-click: no shoulder pose and no shoulder camera (pose 0.00, ots 0.00)
+    PASS the view still looks down on him from above (pitch -0.80, 9.9 m up)
+    PASS and it zooms 2x (fov 32.2, was 60.0)
+    PASS m4 aim keeps the same zoom (fov 38.3, was 60 → 38)
+    PASS m4, the 5 key: first person (CL-249)
+    PASS m4 down the sights: at his own head height, on him (1.23 m from his feet, 1.20 m up; was 13.0 m)
+    PASS m4 aim levels the view (pitch 0.00, was -0.80)
+    PASS the mouse turns the view while aiming (-2.13 -> -1.74)
+    PASS letting go restores the high camera (9.9 m up)
+    PASS letting go looks down again (pitch -0.80)
+    PASS pistol in hand
+    PASS pistol aim: down the sights at his head height, same zoom (height 1.29, 1.30 m from his feet, fov 38.4)
+    PASS shotgun in hand
+    PASS shotgun aim: down the sights at his head height, same zoom (height 1.21, 1.23 m from his feet, fov 38.5)
+    PASS sniper in hand
+    PASS sniper aim is not the shoulder camera (CL-174)
+    PASS sniper aim does not use the shoulder pose (pose 0.00)
+    PASS sniper aim is still the scope (fov 25.9)
+    PASS sniper aim stays at the glass (1.69 m), not the standing rig
+ok    t277     38 pass   0 fail  41.2s  (real renderer)
+    INFO minigun muzzle 0.000,0.000,1.010 box -0.164,-0.262,-0.450 / 0.283,0.320,1.000
+    INFO minigun dir 1 rearTop 0.000,0.280,-0.072 frontTop 0.000,0.108,0.938
+    PASS minigun: has a sight point
+    PASS minigun: eye above the bore, behind the muzzle, on its centre line, along it (0.00 deg)
+    PASS minigun: eye clears the top line and stays near it (eye y 0.300, top 0.320)
+    INFO m4 muzzle 0.000,0.020,0.980 box -0.046,-0.278,-0.569 / 0.085,0.168,0.978
+    INFO m4 dir 1 rearTop 0.000,0.168,0.004 frontTop 0.000,0.138,0.673
+    PASS m4: has a sight point
+    PASS m4: eye above the bore, behind the muzzle, on its centre line, along it (0.00 deg)
+    PASS m4: eye clears the top line and stays near it (eye y 0.134, top 0.168)
+    INFO ak muzzle 0.000,-0.005,1.020 box -0.048,-0.331,-0.597 / 0.095,0.097,0.994
+    INFO ak dir 1 rearTop -0.000,0.095,0.218 frontTop -0.000,0.097,0.840
+    PASS ak: has a sight point
+    PASS ak: eye above the bore, behind the muzzle, on its centre line, along it (0.18 deg)
+    PASS ak: eye clears the top line and stays near it (eye y 0.094, top 0.097)
+    INFO aa12 muzzle 0.000,0.015,0.980 box -0.155,-0.415,-0.579 / 0.155,0.180,0.976
+    INFO aa12 dir 1 rearTop 0.000,0.180,-0.120 frontTop -0.014,0.175,0.750
+    PASS aa12: has a sight point
+    PASS aa12: eye above the bore, behind the muzzle, on its centre line, along it (0.33 deg)
+    PASS aa12: eye clears the top line and stays near it (eye y 0.181, top 0.180)
+    INFO pistol muzzle 0.000,0.050,0.320 box -0.027,-0.181,-0.104 / 0.027,0.092,0.312
+    INFO pistol dir 1 rearTop 0.000,0.075,0.072 frontTop -0.002,0.087,0.287
+    PASS pistol: has a sight point
+    PASS pistol: eye above the bore, behind the muzzle, on its centre line, along it (0.82 deg)
+    PASS pistol: notch and tip are on the gun (notch found, tip y 0.087)
+    PASS pistol: eye on the notch-to-tip line within 3 mm (eye y 0.0772, line 0.0771)
+    INFO uzi muzzle 0.000,0.030,0.480 box -0.055,-0.327,-0.338 / 0.077,0.158,0.478
+    INFO uzi dir 1 rearTop -0.015,0.156,-0.087 frontTop 0.001,0.067,0.354
+    PASS uzi: has a sight point
+    PASS uzi: eye above the bore, behind the muzzle, on its centre line, along it (0.00 deg)
+    PASS uzi: eye clears the top line and stays near it (eye y 0.156, top 0.158)
+    INFO shotgun muzzle 0.000,0.030,0.970 box -0.056,-0.179,-0.496 / 0.056,0.091,0.952
+    INFO shotgun dir 1 rearTop -0.000,0.087,-0.129 frontTop 0.000,0.081,0.915
+    PASS shotgun: has a sight point
+    PASS shotgun: eye above the bore, behind the muzzle, on its centre line, along it (1.18 deg)
+    PASS shotgun: eye clears the top line and stays near it (eye y 0.105, top 0.091)
+    INFO revolver muzzle 0.000,0.083,0.350 box -0.051,-0.166,-0.115 / 0.051,0.123,0.333
+    INFO revolver dir 1 rearTop -0.005,0.109,0.081 frontTop -0.002,0.121,0.326
+    PASS revolver: has a sight point
+    PASS revolver: eye above the bore, behind the muzzle, on its centre line, along it (1.09 deg)
+    PASS revolver: notch and tip are on the gun (notch found, tip y 0.121)
+    PASS revolver: eye on the notch-to-tip line within 3 mm (eye y 0.1073, line 0.1073)
+    INFO sniper muzzle 0.000,0.040,1.220 box -0.147,-0.203,-0.640 / 0.068,0.209,1.205
+    INFO sniper dir 1 rearTop 0.000,0.209,0.069 frontTop 0.012,0.067,0.780
+    PASS sniper: has a sight point
+    PASS sniper: eye above the bore, behind the muzzle, on its centre line, along it (0.00 deg)
+    PASS sniper: eye clears the top line and stays near it (eye y 0.180, top 0.209)
+    INFO launcher muzzle 0.000,0.040,0.720 box -0.143,-0.184,-0.504 / 0.143,0.123,0.682
+    INFO launcher dir 1 rearTop 0.000,0.123,0.053 frontTop 0.000,0.102,0.650
+    PASS launcher: has a sight point
+    PASS launcher: eye above the bore, behind the muzzle, on its centre line, along it (2.02 deg)
+    PASS launcher: eye clears the top line and stays near it (eye y 0.134, top 0.123)
+    INFO flamer muzzle 0.000,0.050,0.780 box -0.085,-0.175,-0.277 / 0.178,0.112,0.792
+    INFO flamer dir 1 rearTop 0.000,0.085,0.290 frontTop -0.000,0.112,0.786
+    PASS flamer: has a sight point
+    PASS flamer: eye above the bore, behind the muzzle, on its centre line, along it (0.00 deg)
+    PASS flamer: eye clears the top line and stays near it (eye y 0.150, top 0.112)
+    INFO chainsaw muzzle 0.000,0.040,0.820 box -0.159,-0.185,-0.317 / 0.218,0.220,0.830
+    INFO chainsaw dir 1 rearTop -0.004,0.220,0.024 frontTop -0.010,0.090,0.760
+    PASS chainsaw: has a sight point
+    PASS chainsaw: eye above the bore, behind the muzzle, on its centre line, along it (0.00 deg)
+    PASS chainsaw: eye clears the top line and stays near it (eye y 0.250, top 0.220)
+ok    t284      7 pass   0 fail  102.7s  (real renderer)
+    PASS pistol aimed: rear 0.000 front 0.000 (ndc y)
+    PASS revolver aimed: rear 0.000 front 0.000 (ndc y)
+    PASS uzi aimed: rear -0.000 front - (ndc y)
+    PASS m4 aimed: rear 0.000 front 0.012 (ndc y)
+    PASS ak aimed: rear 0.000 front 0.000 (ndc y)
+    PASS aa12 aimed: rear 0.000 front 0.000 (ndc y)
+    PASS launcher aimed: rear -0.001 front -0.000 (ndc y)
+8 checks: 207 pass, 0 fail (real renderer)

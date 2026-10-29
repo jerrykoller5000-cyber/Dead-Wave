@@ -341,16 +341,60 @@ export function buildHolyGrenade(T) {
 }
 
 // Where it waits: a little stone box with its lid off, tucked in the dead tree's roots.
+// CL-267 (docs/asset-principles.md: a story object reads at a glance): a carved casket, not four slabs: a plinth with
+// corner feet, walls with a moulded lip, a dark well with a faded red cloth the grenade lies on, and the lid (a cross
+// raised on it) pushed off and leaning on the box's side; moss in the joins and on the lid's top, the stone darker
+// toward the ground. All of it one vertex-coloured mesh (one draw, was eight); the grenade stays its own (it's taken).
 export function buildReliquary(T) {
   const g = new T.Group();
   g.name = 'holy-reliquary';
-  const stone = new T.MeshStandardMaterial({ color: 0x7d7a72, roughness: 0.95 });
-  const moss = new T.MeshStandardMaterial({ color: 0x4d5a32, roughness: 1 });
-  box(T, g, 0.42, 0.04, 0.3, stone, 0, 0.02, 0);
-  for (const s of [-1, 1]) { box(T, g, 0.04, 0.16, 0.3, stone, s * 0.19, 0.1, 0); box(T, g, 0.42, 0.16, 0.04, stone, 0, 0.1, s * 0.13); }
-  box(T, g, 0.46, 0.05, 0.34, stone, 0.34, 0.03, 0.08, 0, 0.5, 0.1);     // the lid, pushed off
-  box(T, g, 0.2, 0.012, 0.12, moss, 0.36, 0.06, 0.1, 0, 0.5, 0.1);
-  const grenade = buildHolyGrenade(T); grenade.position.set(0, 0.04, 0); grenade.rotation.z = 0.25; g.add(grenade);
+  const parts = new T.Group();
+  const col = (hex) => new T.MeshBasicMaterial({ color: hex });   // only their colours are kept (the bake)
+  const stone = col(0x86827a), stoneDk = col(0x6c6961), well = col(0x2b2925), cloth = col(0x5e3030), moss = col(0x4f5c34), mossLt = col(0x66703f);
+  box(T, parts, 0.46, 0.035, 0.34, stoneDk, 0, 0.0175, 0);                       // the plinth
+  for (const sx of [-1, 1]) for (const sz of [-1, 1]) box(T, parts, 0.07, 0.03, 0.07, stoneDk, sx * 0.2, 0.012, sz * 0.14);   // corner feet
+  for (const s of [-1, 1]) {
+    box(T, parts, 0.045, 0.15, 0.3, stone, s * 0.19, 0.11, 0);                    // the end walls
+    box(T, parts, 0.42, 0.15, 0.045, stone, 0, 0.11, s * 0.1275);                 // the side walls
+    box(T, parts, 0.06, 0.025, 0.33, stoneDk, s * 0.19, 0.192, 0);                // the moulded lip
+    box(T, parts, 0.44, 0.025, 0.06, stoneDk, 0, 0.192, s * 0.1275);
+  }
+  box(T, parts, 0.34, 0.01, 0.22, well, 0, 0.04, 0);                              // the dark well
+  box(T, parts, 0.3, 0.018, 0.19, cloth, 0, 0.052, 0, 0, 0, 0.03);                // the cloth, faded
+  box(T, parts, 0.08, 0.012, 0.19, cloth, 0.17, 0.11, 0, 0, 0, -1.2);             // its end hanging over the rim
+  // The lid, pushed off: one long edge on the ground, leaning on the box's side, the cross on its face.
+  // Its frame: lying askew on the ground beside the box (its near edge 4 cm off the plinth), a little sunk at its far end.
+  const lid = new T.Group(); lid.position.set(0.06, 0, 0.21); lid.rotation.set(0.03, 0.3, 0); parts.add(lid);
+  box(T, lid, 0.46, 0.045, 0.34, stone, 0, 0.0225, 0.17);
+  box(T, lid, 0.4, 0.012, 0.28, stoneDk, 0, 0.051, 0.17);                         // a sunk panel's border
+  box(T, lid, 0.05, 0.012, 0.22, stone, 0, 0.063, 0.17);                          // the raised cross: the upright
+  box(T, lid, 0.17, 0.012, 0.05, stone, 0, 0.063, 0.125);                         // and the arms, toward its head
+  // Moss: low cushions in the joins and on top.
+  const cushion = (r, c, x, y, z, sy = 0.3) => { const m = new T.Mesh(new T.SphereGeometry(r, 8, 5), c); m.position.set(x, y, z); m.scale.set(1, sy, 1); parts.add(m); };
+  cushion(0.05, moss, -0.22, 0.04, 0.15); cushion(0.035, mossLt, -0.2, 0.2, -0.13, 0.35); cushion(0.04, moss, 0.23, 0.035, -0.16);
+  cushion(0.03, mossLt, 0.12, 0.2, 0.13, 0.35); cushion(0.045, moss, 0.2, 0.03, 0.2);
+  // Bake: one mesh, the stone a little darker toward the ground.
+  parts.updateMatrixWorld(true);
+  const pos = [], nor = [], cl = [], c = new T.Color();
+  parts.traverse((o) => {
+    if (!o.isMesh) return;
+    const geo = (o.geometry.index ? o.geometry.toNonIndexed() : o.geometry.clone()).applyMatrix4(o.matrixWorld);
+    const P = geo.attributes.position.array, N = geo.attributes.normal.array;
+    for (let i = 0; i < P.length; i += 3) {
+      const k = 0.78 + 0.22 * Math.min(1, Math.max(0, P[i + 1] / 0.2));
+      c.copy(o.material.color).multiplyScalar(k);
+      pos.push(P[i], P[i + 1], P[i + 2]); nor.push(N[i], N[i + 1], N[i + 2]); cl.push(c.r, c.g, c.b);
+    }
+    geo.dispose(); o.geometry.dispose();
+  });
+  const geo = new T.BufferGeometry();
+  geo.setAttribute('position', new T.Float32BufferAttribute(pos, 3));
+  geo.setAttribute('normal', new T.Float32BufferAttribute(nor, 3));
+  geo.setAttribute('color', new T.Float32BufferAttribute(cl, 3));
+  const mesh = new T.Mesh(geo, new T.MeshStandardMaterial({ vertexColors: true, roughness: 0.93 }));
+  mesh.name = 'holy-reliquary-stone'; mesh.castShadow = true; mesh.receiveShadow = true;
+  g.add(mesh);
+  const grenade = buildHolyGrenade(T); grenade.position.set(0, 0.07, 0); grenade.rotation.z = 0.25; g.add(grenade);
   g.userData.grenade = grenade;
   return g;
 }

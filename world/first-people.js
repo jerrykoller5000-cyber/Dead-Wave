@@ -52,31 +52,73 @@ export function mulberry(seed) {
 
 // ---------------------------------------------------------------------------------------------------------------
 // Textures.
+// CL-267 (docs/asset-principles.md: breakup at three scales; docs/art-direction.md §3: natural surfaces under 45%
+// saturation): the stone mottled in broad soft patches, its grain, the rain's streaks; the lichen in colonies, not
+// confetti: a few rosettes of fine grey-green specks, heaviest on the weather-beaten top (the canvas's top is the
+// stone's), a rare muted ochre one, and moss darkening the foot. (Before: 70 opaque blots of four colours, spread evenly.)
 export function makeLichenTexture(doc, seed = 0x11c4e) {
   const rnd = mulberry(seed);
+  const W = 256, H = 512;
   const cv = doc.createElement('canvas');
-  cv.width = 128; cv.height = 256;
+  cv.width = W; cv.height = H;
   const g = cv.getContext('2d');
-  g.fillStyle = '#8d8a7e'; g.fillRect(0, 0, 128, 256);
-  for (let i = 0; i < 420; i++) {        // the grain of the stone
-    const v = 110 + Math.floor(rnd() * 60);
-    g.fillStyle = `rgba(${v},${v - 4},${v - 14},0.35)`;
-    g.fillRect(rnd() * 128, rnd() * 256, 2 + rnd() * 6, 1 + rnd() * 3);
+  g.fillStyle = '#8b887c'; g.fillRect(0, 0, W, H);
+  const blob = (x, y, r, fill) => {   // a soft-edged patch
+    const gr = g.createRadialGradient(x, y, 0, x, y, r);
+    gr.addColorStop(0, fill); gr.addColorStop(1, 'rgba(0,0,0,0)');
+    g.fillStyle = gr; g.fillRect(x - r, y - r, r * 2, r * 2);
+  };
+  for (let i = 0; i < 26; i++) {          // broad mottling, lighter and darker
+    const v = rnd() < 0.5 ? 'rgba(160,156,142,0.22)' : 'rgba(84,82,74,0.2)';
+    blob(rnd() * W, rnd() * H, 30 + rnd() * 70, v);
   }
-  for (let i = 0; i < 26; i++) {         // rain streaks, darker toward the foot
-    g.fillStyle = 'rgba(60,58,50,0.18)';
-    g.fillRect(rnd() * 128, rnd() * 80, 1 + rnd() * 2, 60 + rnd() * 170);
+  for (let i = 0; i < 1400; i++) {        // the grain of the stone
+    const v = 105 + Math.floor(rnd() * 70);
+    g.fillStyle = `rgba(${v},${v - 4},${v - 13},0.28)`;
+    g.fillRect(rnd() * W, rnd() * H, 1 + rnd() * 4, 1 + rnd() * 2);
   }
-  const lichen = ['rgba(176,182,94,0.85)', 'rgba(196,140,62,0.8)', 'rgba(210,212,190,0.8)', 'rgba(120,140,78,0.75)'];
-  for (let i = 0; i < 70; i++) {         // the lichen: blotches of yellow-green, rust and pale grey
-    const x = rnd() * 128, y = rnd() * 256, r = 2 + rnd() * 9;
-    g.fillStyle = lichen[Math.floor(rnd() * lichen.length)];
-    g.beginPath();
-    for (let k = 0; k < 9; k++) {
-      const a = (k / 9) * Math.PI * 2, rr = r * (0.6 + rnd() * 0.6);
-      if (k === 0) g.moveTo(x + Math.cos(a) * rr, y + Math.sin(a) * rr); else g.lineTo(x + Math.cos(a) * rr, y + Math.sin(a) * rr);
+  for (let i = 0; i < 16; i++) {          // rain streaks from the top, wandering a little, fading toward the foot
+    let x = rnd() * W; const y0 = rnd() * 140, len = 90 + rnd() * 300, w = 0.8 + rnd() * 2.2, a = 0.05 + rnd() * 0.08;
+    for (let y = y0; y < y0 + len; y += 6) {
+      x += (rnd() - 0.5) * 1.6;
+      g.fillStyle = `rgba(58,56,48,${(a * (1 - (y - y0) / len)).toFixed(3)})`; g.fillRect(x, y, w, 6);
     }
-    g.closePath(); g.fill();
+  }
+  const foot = g.createLinearGradient(0, H * 0.72, 0, H);   // damp and moss at the foot
+  foot.addColorStop(0, 'rgba(62,70,44,0)'); foot.addColorStop(1, 'rgba(62,70,44,0.55)');
+  g.fillStyle = foot; g.fillRect(0, H * 0.72, W, H * 0.28);
+  // The colonies: each a rosette of fine specks round a centre, denser in the middle, fringed at the edge.
+  const kinds = [
+    { c: [140, 144, 118], n: 9 },          // grey-green crust, the common one
+    { c: [162, 162, 148], n: 5 },          // pale grey
+    { c: [116, 124, 92], n: 3 },           // a darker leafy green
+    { c: [150, 120, 76], n: 1.2, small: true },   // a muted ochre, rare and small
+  ];
+  const total = kinds.reduce((a, k) => a + k.n, 0);
+  const colonies = 18 + Math.floor(rnd() * 6);
+  for (let i = 0; i < colonies; i++) {
+    let pick = rnd() * total, kind = kinds[0];
+    for (const k of kinds) { if ((pick -= k.n) <= 0) { kind = k; break; } }
+    const cx = rnd() * W, cy = Math.pow(rnd(), 1.8) * H * 0.9;   // most near the top
+    const R = (kind.small ? 5 : 9) + rnd() * (kind.small ? 8 : 24), [r, gg, b] = kind.c;
+    // the crust: a flat, ragged-edged patch, a darker rim where it grows outward
+    const edge = []; for (let k = 0; k < 22; k++) edge.push(R * (0.7 + rnd() * 0.45));
+    const ring = (sc) => { g.beginPath(); for (let k = 0; k < 22; k++) { const a = (k / 22) * Math.PI * 2, d = edge[k] * sc; const x = cx + Math.cos(a) * d, y = cy + Math.sin(a) * d * 0.85; if (k) g.lineTo(x, y); else g.moveTo(x, y); } g.closePath(); };
+    ring(1); g.fillStyle = `rgba(${r - 22},${gg - 22},${b - 20},0.4)`; g.fill();
+    ring(0.86); g.fillStyle = `rgba(${r},${gg},${b},0.55)`; g.fill();
+    const specks = Math.floor(R * 6);
+    for (let k = 0; k < specks; k++) {   // its surface: fine flecks a shade either side
+      const a = rnd() * Math.PI * 2, d = R * 0.85 * Math.sqrt(rnd());
+      const x = cx + Math.cos(a) * d, y = cy + Math.sin(a) * d * 0.85, s = 0.6 + rnd() * 1.6;
+      const v = Math.floor((rnd() - 0.5) * 26);
+      g.fillStyle = `rgba(${r + v},${gg + v},${b + v},${0.3 + rnd() * 0.3})`;
+      g.beginPath(); g.arc(x, y, s, 0, Math.PI * 2); g.fill();
+    }
+    for (let k = 0; k < 5; k++) {        // and a few outliers starting beyond it
+      const a = rnd() * Math.PI * 2, d = R * (1.1 + rnd() * 0.6);
+      g.fillStyle = `rgba(${r},${gg},${b},0.45)`;
+      g.beginPath(); g.arc(cx + Math.cos(a) * d, cy + Math.sin(a) * d * 0.85, 1 + rnd() * 2.2, 0, Math.PI * 2); g.fill();
+    }
   }
   return cv;
 }
@@ -95,12 +137,17 @@ export function makeGlyphCarving(doc, k, px = 128) {
 // counter-clockwise seen from above; on a carving, east is to the right and the turn runs up). Two canvases:
 // `color` (stone with dark grooves; `stone` sets the stone colour, or null for clear) and `glow` (the grooves in
 // white on clear, the dark disc faint: the overlay that turns from groove to light at night).
-export function makeRingCarving(doc, { px = 512, stone = '#d3cdb9', groove = '#5b574d' } = {}) {
+// CL-267: `base` (a canvas, tiled `tiles` across, full height) paints the stone instead of the flat `stone` colour, and
+// `scale` shrinks the ring inside a canvas that covers more than the ring (the Marrow door's whole face).
+export function makeRingCarving(doc, { px = 512, stone = '#d3cdb9', groove = '#5b574d', base = null, tiles = 2, scale = 1 } = {}) {
   const mk = () => { const c = doc.createElement('canvas'); c.width = c.height = px; return c; };
   const color = mk(), glow = mk();
   const C = color.getContext('2d'), G = glow.getContext('2d');
-  const m = px / 2, R = px * 0.34, gs = px * 0.15;
-  if (stone) {
+  const m = px / 2, R = px * 0.34 * scale, gs = px * 0.15 * scale;
+  if (base) {
+    const tw = px / tiles;
+    for (let i = 0; i < tiles; i++) C.drawImage(base, i * tw, 0, tw, px);
+  } else if (stone) {
     C.fillStyle = stone; C.fillRect(0, 0, px, px);
     const rnd = mulberry(0x51e7);
     for (let i = 0; i < 500; i++) {
@@ -119,8 +166,8 @@ export function makeRingCarving(doc, { px = 512, stone = '#d3cdb9', groove = '#5
       drawGlyph(g, k, x, y, gs, { color: col, width: 2.4 });
     }
   };
-  paint(C, groove, px / 90);
-  paint(G, '#ffffff', px / 90);
+  paint(C, groove, (px / 90) * scale);
+  paint(G, '#ffffff', (px / 90) * scale);
   // The dark at the middle: what the ring holds down.
   C.fillStyle = '#26241f'; C.beginPath(); C.arc(m, m, R * 0.62, 0, Math.PI * 2); C.fill();
   G.fillStyle = 'rgba(255,255,255,0.05)'; G.beginPath(); G.arc(m, m, R * 0.62, 0, Math.PI * 2); G.fill();
@@ -247,10 +294,21 @@ function crackAt(crack, y) {
 }
 // A leaf as rows of [x0, x1] spans from the floor to the top: its face (+Z, uv = x, y in metres, for the carving)
 // and its body (the back and the two edges: the crack's edge is what you see down the crack).
-export function leafGeometries(T, rows, depth) {
+// CL-267: `cols` splits each row of the face, and `relief(x, y)` pushes it out and in (metres; 0 at the leaf's edges,
+// so the face still meets its sides): a hewn face, not a sheet of glass.
+export function leafGeometries(T, rows, depth, cols = 1, relief = null) {
   const fp = [], fu = [], fi = [], bp = [], bi = [];
-  rows.forEach(({ y, x0, x1 }) => { fp.push(x0, y, depth, x1, y, depth); fu.push(x0, y, x1, y); });
-  for (let r = 0; r + 1 < rows.length; r++) { const a = r * 2, b = a + 2; fi.push(a, a + 1, b + 1, a, b + 1, b); }
+  rows.forEach(({ y, x0, x1 }) => {
+    for (let c = 0; c <= cols; c++) {
+      const x = x0 + (x1 - x0) * (c / cols), edge = Math.min(x - x0, x1 - x, y) / 0.18;
+      const dz = relief ? relief(x, y) * Math.max(0, Math.min(1, edge)) : 0;
+      fp.push(x, y, depth + dz); fu.push(x, y);
+    }
+  });
+  for (let r = 0; r + 1 < rows.length; r++) for (let c = 0; c < cols; c++) {
+    const a = r * (cols + 1) + c, b = a + cols + 1;
+    fi.push(a, a + 1, b + 1, a, b + 1, b);
+  }
   // body: per row four corners: front x0, back x0, back x1, front x1
   rows.forEach(({ y, x0, x1 }) => bp.push(x0, y, depth, x0, y, 0, x1, y, 0, x1, y, depth));
   for (let r = 0; r + 1 < rows.length; r++) {
@@ -293,9 +351,11 @@ export function buildMarrowDoor(T, { doc, rnd, edge, height }) {
   }
 
   // The ring carved across both leaves, centred over the hole.
-  const ring = makeRingCarving(doc, { px: 512 });
+  // CL-267: the canvas covers the whole face (the stone the menhirs are, weathered, damp at the foot), not just the
+  // ring's square (outside it the face was one flat colour, pale as plaster); the ring the same size as before.
+  const Rc = Math.max(4.5, topY * 0.6);
+  const ring = makeRingCarving(doc, { px: 1024, base: makeLichenTexture(doc, 0x3a77), tiles: 2, scale: 2.0 / Rc, groove: '#3f3c34' });
   const ringCy = Math.min(topY - 2.1, Math.max(D.crackTop + 0.4, topY * 0.55));
-  const Rc = 2.0;
   const colorTex = new T.CanvasTexture(ring.color), glowTex = new T.CanvasTexture(ring.glow);
   for (const tex of [colorTex, glowTex]) {
     tex.wrapS = tex.wrapT = T.ClampToEdgeWrapping;
@@ -304,11 +364,12 @@ export function buildMarrowDoor(T, { doc, rnd, edge, height }) {
   }
   const face = new T.MeshStandardMaterial({ color: 0xffffff, map: colorTex, roughness: 0.95 });
   const overlay = carvingMaterial(T, glowTex);   // the grooves again, unlit: dark by day, cold light at night
-  const side = new T.MeshStandardMaterial({ color: 0xb9b3a0, roughness: 0.98, side: T.DoubleSide });
+  const side = new T.MeshStandardMaterial({ color: 0x8a8678, roughness: 0.98, side: T.DoubleSide });
+  const relief = (x, y) => 0.035 * Math.sin(x * 1.7 + y * 0.9) * Math.sin(y * 2.3 - x * 0.6) + 0.012 * Math.sin(x * 7.1 + y * 5.3);
   const group = new T.Group();
   group.name = 'marrow-door';
   for (const [rows, name] of [[rowsR, 'marrow-door-right'], [rowsL, 'marrow-door-left']]) {
-    const { face: fg, body: bg } = leafGeometries(T, rows, D.depth);
+    const { face: fg, body: bg } = leafGeometries(T, rows, D.depth, 10, relief);
     const leaf = new T.Group();
     leaf.name = name;
     leaf.position.z = D.z;
@@ -321,9 +382,13 @@ export function buildMarrowDoor(T, { doc, rnd, edge, height }) {
   // Its brightness is its colour (black by day, cold light at night), so it reads as a dark gap until the dark comes.
   const lightMat = new T.MeshBasicMaterial({ color: RUNE_LIGHT, side: T.DoubleSide, fog: true });
   lightMat.color.multiplyScalar(0.005);
-  const sheet = new T.Mesh(new T.PlaneGeometry(1.4, topY), lightMat);
+  // CL-267 (AG-152: a rectangle, its top corners showed above the arch's apex): the door's own outline, a little in.
+  const outline = new T.Shape();
+  big.forEach(([x, y], i) => { const px = x * 0.92, py = Math.max(0, y * 0.97); if (i) outline.lineTo(px, py); else outline.moveTo(px, py); });
+  outline.closePath();
+  const sheet = new T.Mesh(new T.ShapeGeometry(outline), lightMat);
   sheet.name = 'marrow-crack-light';
-  sheet.position.set(0, topY / 2, D.z - 0.35);
+  sheet.position.set(0, 0, D.z - 0.35);
   group.add(sheet);
   return { group, glow: [overlay], light: lightMat, crack, ringCy, topY, rows: { left: rowsL, right: rowsR } };
 }

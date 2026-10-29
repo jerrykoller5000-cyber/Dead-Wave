@@ -2216,7 +2216,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // The object's own `visible` stays its owner's: the hide is an accessor laid over it that answers false to the
     // renderer and remembers what the owner sets, applied when the object comes back. Objects whose visibility is
     // game state (trees, bugs, the dead, builds, rocks, effect pools, the sky) are left alone.
-    const _cullFrustum = new THREE.Frustum(), _cullM = new THREE.Matrix4(), _cullBox = new THREE.Box3();
+    const _cullFrustum = new THREE.Frustum(), _cullM = new THREE.Matrix4(), _cullBox = new THREE.Box3(), _cullUnits = [];
     const _cullS = new THREE.Sphere(), _cullC = new THREE.Vector3();
     let cullFrame = 0, cullSkip = null, cullSkipAt = -1e9;
     const cullStats = { hidden: 0, tested: 0, spheres: 0, ms: 0, on: urlParams.get('cull') !== '0' };
@@ -2263,7 +2263,13 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const px = player.position.x, pz = player.position.z;
       const shadowR = sun.castShadow ? SHADOW_HALF + 10 : 0;   // (CL-211 tried 0 at night: no faster, worse lows)
       let spheres = 0, hidden = 0, tested = 0;
-      const kids = scene.children;
+      // CL-277 (AG-151: night 20's 287 history props walked and frustum-tested every frame from anywhere): a group that
+      // spans the map (userData.cullKids, at the world's origin and unrotated) is culled piece by piece, its children
+      // standing for top-level things here and in updateSceneMatrices.
+      const kids = _cullUnits; kids.length = 0;
+      for (const o of scene.children) {
+        if (o.userData.cullKids && o.visible !== false) { for (const k of o.children) kids.push(k); } else kids.push(o);
+      }
       for (let i = 0; i < kids.length; i++) {
         const o = kids[i];
         if (o.isLight || o.isCamera) continue;
@@ -2302,7 +2308,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       }
       cullStats.hidden = hidden; cullStats.tested = tested; cullStats.spheres = spheres; cullStats.ms = performance.now() - t0;
     }
-    function cullShowAll() { for (const o of scene.children) { const c = o.userData && o.userData._cull; if (c && c.hidden) cullShow(o, c); } }
+    function cullShowAll() {
+      const show = (o) => { const c = o.userData && o.userData._cull; if (c && c.hidden) cullShow(o, c); };
+      for (const o of scene.children) { show(o); if (o.userData && o.userData.cullKids) for (const k of o.children) show(k); }
+    }
     // CL-211: the sun's shadow pass draws the scene a second time: 7.8 ms of CPU in a 30 ms night frame on Jerry's
     // 5080 (AG-86's --cpu run). At night the sun is 0.025-0.1 strong under a 0.15 sky and its shadows can't be
     // seen, so there its map is redrawn every SUN_SHADOW_NIGHT_EVERY frames; by day, every frame as before.
@@ -2349,6 +2358,13 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         // update what they read themselves.
         if (c.visible === false) continue;
         if (ud.walkSkip === true) continue;   // frozen while drawn from somewhere else (a batched tree, CL-28)
+        if (ud.cullKids === true) {   // CL-277: its own matrix, then only the children sceneCull left showing
+          if (c.matrixAutoUpdate) c.updateMatrix();
+          const f = force || c.matrixWorldNeedsUpdate;
+          if (f) { c.matrixWorld.multiplyMatrices(scene.matrixWorld, c.matrix); c.matrixWorldNeedsUpdate = false; }
+          for (const k of c.children) { const kc = k.userData._cull; if ((kc !== undefined && kc.hidden) || k.visible === false) continue; k.updateMatrixWorld(f); }
+          continue;
+        }
         c.updateMatrixWorld(force);
       }
     }
@@ -3450,6 +3466,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       let best = null;
       for (const p of platforms) {
         const dx = x - p.x, dz = z - p.z;
+        // CL-277 (CU-173: night 20's decks went 5 to 32 with the trapper's cellar, and this ran the trig on every one
+        // for every zombie every frame): a deck can't hold a point farther from its middle than hw + hl on either axis
+        // (its half-diagonal is less), so those are skipped before the trig. Exact: no deck that holds the point is.
+        const R = p.hw + p.hl;
+        if (dx > R || dx < -R || dz > R || dz < -R) continue;
         // World -> deck-local. This has to be the exact inverse of the transform three
         // puts on the deck mesh (rotation.y = yaw, i.e. worldX = lx*cos + lz*sin,
         // worldZ = -lx*sin + lz*cos), which means transposing it:
@@ -3765,7 +3786,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       }
       // Join (tx, tz) to the network at the cheapest point that doesn't ford the river
       // or wade the lake. Returns the new leg, or null when nothing qualifies.
-      function joinNetwork(tx, tz) {
+      function joinNetwork(tx, tz, round = null) {
         let best = null, bestCost = Infinity;
         const consider = (leg, k, x, z, cum) => {
           const d = hypot(tx - x, tz - z);
@@ -3783,7 +3804,26 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         if (!best) return null;
         const parent = best.leg ? splitLeg(best.leg, best.k) : null;
         if (best.d < 3) return parent || ROOT; // already standing on a trail
+        if (round) { const rp = roundTowerLeg(round, best.x, best.z, tx, tz); if (rp) return addLeg(parent, rp); }
         return addLeg(parent, wavyLeg(best.x, best.z, tx, tz));
+      }
+      // CL-256 batch 3 (docs/world-design.md rule 11): the watchtower's spur comes round to its ladder. Aimed straight at
+      // the ladder's foot from the far side, it ran its last 3 m under the tower through the base collider (r 1.75). When
+      // the straight line passes inside the tower, the wavy leg ends 4.5 m out on its own bearing and the trail goes round
+      // at that radius, the short way, to the ladder's side, then in to its foot. One wavyLeg as before, so every other
+      // trail's bends (pathTag) are the same.
+      function roundTowerLeg(tower, ax, az, fx, fz) {
+        const cx = tower.x, cz = tower.z, R = 4.5, dx = fx - ax, dz = fz - az, L2 = dx * dx + dz * dz || 1;
+        const t = Math.max(0, Math.min(1, ((cx - ax) * dx + (cz - az) * dz) / L2));
+        if (hypot(cx - ax - t * dx, cz - az - t * dz) > 1.75 + TRAIL_HW + 0.3) return null;   // already clear of it
+        if (hypot(ax - cx, az - cz) < R + 1.5) return null;
+        const aJ = Math.atan2(ax - cx, az - cz), aL = Math.atan2(fx - cx, fz - cz);
+        let da = aL - aJ; while (da > Math.PI) da -= 2 * Math.PI; while (da < -Math.PI) da += 2 * Math.PI;
+        const pts = wavyLeg(ax, az, cx + Math.sin(aJ) * R, cz + Math.cos(aJ) * R);
+        const steps = Math.max(1, Math.ceil(Math.abs(da) / (Math.PI / 6)));
+        for (let i = 1; i <= steps; i++) { const a = aJ + da * i / steps; pts.push({ x: cx + Math.sin(a) * R, z: cz + Math.cos(a) * R }); }
+        pts.push({ x: fx, z: fz });
+        return pts;
       }
       const bridgeLeg = new Map(); // bridge -> the leg over its deck, once walked
       function crossAt(bridge, tx, tz) {
@@ -3802,15 +3842,15 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         bridgeLeg.set(bridge, deck);
         return deck;
       }
-      function addPath(tx, tz) {
-        if (joinNetwork(tx, tz)) return;
+      function addPath(tx, tz, round = null) {
+        if (joinNetwork(tx, tz, round)) return;
         // Nothing reaches it on this bank: go by the bridge nearest the landmark.
         let bridge = null, bd = 1e9;
         for (const b of POI.bridges) {
           const d = hypot(b.x - tx, b.z - tz);
           if (d < bd) { bd = d; bridge = b; }
         }
-        if (bridge && crossAt(bridge, tx, tz)) joinNetwork(tx, tz);
+        if (bridge && crossAt(bridge, tx, tz)) joinNetwork(tx, tz, round);
       }
       const dests = [];
       for (const c of POI.campsites) dests.push(c);
@@ -3820,13 +3860,13 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       // collision cylinder (radius 1.75) sits between the two, so a trail aimed at
       // the centre dead-ends into the wall on whichever side you approach from
       // instead of leading you around to the one spot you can actually climb.
-      if (POI.tower) dests.push({ x: POI.tower.x, z: POI.tower.z - TOWER_LADDER_OUT });
+      if (POI.tower) dests.push({ x: POI.tower.x, z: POI.tower.z - TOWER_LADDER_OUT, round: POI.tower });
       // One worn track each toward the new landmarks (keeps path count reasonable).
       if (POI.sheds[0]) dests.push(POI.sheds[0]);
       if (POI.wrecks[0]) dests.push(POI.wrecks[0]);
       if (POI.mast) dests.push(POI.mast);
       dests.sort((a, b) => hypot(a.x, a.z) - hypot(b.x, b.z));
-      for (const d of dests) addPath(d.x, d.z);
+      for (const d of dests) addPath(d.x, d.z, d.round || null);
       // A bridge nobody's trail happens to cross still gets walked to: a crossing
       // with worn approaches and no path to it looks like it was dropped there.
       for (const b of POI.bridges) {
@@ -5551,6 +5591,12 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       let best = y0, bc = cost(y0);
       for (let i = 1; i <= 12; i++) for (const sg of [1, -1]) {
         const y = y0 + sg * i * Math.PI / 12, k = cost(y);
+        if (k < bc - 0.01) { bc = k; best = y; }
+      }
+      // CL-267: no 15 degree turn clear of every trail (two leave the hikers' camp since CL-272's tower trail starts
+      // there): try the turns between them too. A camp that found a clear turn above keeps it.
+      if (bc > 0.01) for (let i = 0; i < 12; i++) for (const sg of [1, -1]) {
+        const y = y0 + sg * (i + 0.5) * Math.PI / 12, k = cost(y);
         if (k < bc - 0.01) { bc = k; best = y; }
       }
       return best === y0 ? null : best;
@@ -7558,12 +7604,18 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       // Stone triangles, faceted, coloured by where they are.
       const P = (i, j) => pts[i * (ns + 1) + j];
       const strata = d.face.strata || 2.2;
+      // CL-256 batch 3: a triangle that faces into the hill gets its normal turned out to the front (shadeFlip), and
+      // now its winding too. The rock is two-sided, so with only the normal turned the renderer saw the triangle's back
+      // from the front and turned the normal round again: those went dark, and where the hill's clamp twists a ring's
+      // quads (the East Cave's +x cheek) every other triangle did, a sawtooth down the cheek.
+      let shadeFlip = false;
       const shade = (A, B, C, j) => {
         let fx = (B[1] - A[1]) * (C[2] - A[2]) - (B[2] - A[2]) * (C[1] - A[1]);
         let fy = (B[2] - A[2]) * (C[0] - A[0]) - (B[0] - A[0]) * (C[2] - A[2]);
         let fz = (B[0] - A[0]) * (C[1] - A[1]) - (B[1] - A[1]) * (C[0] - A[0]);
         const fl = hypot(fx, fy, fz) || 1; fx /= fl; fy /= fl; fz /= fl;
-        if (fz < -0.2 && fy < 0.5) { fx = -fx; fy = -fy; fz = -fz; }
+        shadeFlip = fz < -0.2 && fy < 0.5;
+        if (shadeFlip) { fx = -fx; fy = -fy; fz = -fz; }
         const mx = (A[0] + B[0] + C[0]) / 3, my = (A[1] + B[1] + C[1]) / 3, mz = (A[2] + B[2] + C[2]) / 3;
         const band = Math.sin(my * strata + vnoise3(mx * 0.4, my * 0.2, seed) * 3);
         _rc.set(d.rock).lerp(_rc2.set(d.dark), 0.22 + band * 0.18 + (hash3(Math.round(mx * 7), Math.round(my * 7), seed) - 0.5) * 0.15);
@@ -7591,7 +7643,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           const a = P(i, j), b = P(i + 1, j), cc = P(i + 1, j + 1), dd = P(i, j + 1);
           for (const tri of [[a, b, cc], [a, cc, dd]]) {
             const n = shade(tri[0], tri[1], tri[2], j + 0.5);
-            for (const q of tri) accVert(stone, q[0], q[1], q[2], n[0], n[1], n[2], _rc.r, _rc.g, _rc.b);
+            for (const q of shadeFlip ? [tri[0], tri[2], tri[1]] : tri) accVert(stone, q[0], q[1], q[2], n[0], n[1], n[2], _rc.r, _rc.g, _rc.b);
           }
         }
       }
@@ -7913,7 +7965,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (T === 'hill') plant(0.8, D.pz - 1.5, 'oak', 1.5);
       if (T === 'root') plant(0.4, -CAVE_DEPTH - 3.2, 'oak', 2.7);
       if (T === 'iron') plant(-2.5, D.pz - 2, 'autumn', 1.3, true);
-      if (T === 'wet') { plant(-4, D.pz - 1, 'birch', 1.2); plant(5, D.pz + 1, 'birch', 1.0); }
+      // CL-256 batch 3: the wet cave's left birch stood by the tunnel's back corner (local -4, -4.5), its canopy's foot
+      // (5.7 m up, 1.8 m round) inside the tunnel's 6 m roof: a leaf clump in the dark of the mouth. Back past the
+      // tunnel's end, on higher hill, it grows over the roof instead.
+      if (T === 'wet') { plant(-4, D.pz - 3, 'birch', 1.2); plant(5, D.pz + 1, 'birch', 1.0); }
       if (T === 'chalk') plant(4, D.pz - 3, 'pine', 1.2);
       if (T === 'shale') { plant(-3, D.pz - 6, 'pine', 1.4); plant(-10.5, D.pz - 1.5, 'pine', 0.95); plant(9.5, D.pz - 3.5, 'birch', 0.9); }
 
@@ -8568,6 +8623,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       historyProps.taken = (POI.signs || []).map((sg) => ({ x: sg.x, z: sg.z, r: 1.2 }));   // the warning signs aren't solids
       if (POI.graveyard) historyProps.taken.push({ x: POI.graveyard.x - 3.95, z: POI.graveyard.z - 3.3, r: 3.5 });   // the holy grenade's tree stays quiet (CL-93)
       const G = new THREE.Group(); G.name = 'history-props'; scene.add(G); historyProps.group = G;
+      G.userData.cullKids = true;   // CL-277: each prop culled on its own (they lie all over the map)
       const doc = typeof document !== 'undefined' ? document : null;
       const rnd = mulberry32(0xC1D0);
       const put = (obj, x, z, yaw, r, dy = 0) => { obj.position.set(x, sampleHeight(x, z) + dy, z); obj.rotation.y = yaw; obj.userData.seatHistoryTerrain?.(sampleHeight); G.add(obj); historyProps.taken.push({ x, z, r }); historyProps.parts[obj.name] = obj; return obj; };
@@ -8604,7 +8660,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         const sb = POI.sandbags;
         const brass = History.buildBrass(THREE, 36, rnd, 1.8); brass.position.set(sb.x, sampleHeight(sb.x, sb.z) + 0.01, sb.z); G.add(brass);
         const hs = historyFreeSpot(sb.x, sb.z, 2.5, 6, 0.6, 0.5);
-        if (hs) put(History.buildDroppedHelmet(THREE), hs.x, hs.z, rnd() * 6, 0.4);
+        if (hs) put(History.buildDroppedHelmet(THREE, { cover: coverMat, helmet: helmetMat, nvg: nvgMat, pouch: pouchMat }), hs.x, hs.z, rnd() * 6, 0.4);   // CL-267: his own helmet
         let best = null, bd = Infinity;
         for (const c of POI.caves) { const d = hypot(c.x - sb.x, c.z - sb.z); if (d < bd) { bd = d; best = c; } }
         if (best) {
@@ -8661,6 +8717,37 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
             historyProps.parts['hikers-camp-roster'] = hRoster;
             hLm.hikerRoster = hRoster;
             registerReadablePaper(hRoster);
+          }
+          // CL-263 (docs/specs/story-chain.md §6): where Pike hid, beyond the hikers' camp, on its far side from the HQ:
+          // behind a tree 9 to 22 m out (AG-152: in the open grass he read as a man in a field, not one in hiding), the
+          // trunk between him and the camp; with no tree there, the first clear, dry, gentle spot 10 to 16 m out within
+          // 70 degrees of straight out. GB-232's survivorPlace stands him there, facing back at the camp, once the
+          // hikers' lead is done.
+          const out = Math.atan2(camp.z, camp.x);
+          // AG-154: on this map no tree stood in that sector, so the search widens: any side but the HQ's (within 125
+          // degrees of straight out), out to 30 m, a tree first, then a rock big enough to crouch behind.
+          let treeHide = null, treeScore = Infinity;
+          const coverAt = (cx2, cz2, r0, kind) => {
+            const dx = cx2 - camp.x, dz = cz2 - camp.z, d = hypot(dx, dz);
+            if (d < 9 || d > 30) return;
+            const da = Math.atan2(Math.sin(Math.atan2(dz, dx) - out), Math.cos(Math.atan2(dz, dx) - out));
+            if (Math.abs(da) > 2.2) return;
+            const back = r0 + 0.75, x = cx2 + (dx / d) * back, z = cz2 + (dz / d) * back;   // behind it, as seen from the fire
+            if (hypot(x, z) < hypot(camp.x, camp.z) + 2) return;   // still beyond the camp, as seen from the HQ
+            if (!historyFreeSpot(x, z, 0, 0, 0.45) || waterDepthAt(x, z) > 0) return;
+            const score = d + Math.abs(da) * 6 + (kind === 'rock' ? 8 : 0);
+            if (score < treeScore) { treeScore = score; treeHide = { x, z }; }
+          };
+          for (const tr of trees) if (tr.alive) coverAt(tr.x, tr.z, 0.35, 'tree');
+          if (!treeHide) for (const rk of rocks) if (rk.alive && (rk.radius || rk.r || rk.size || 0) >= 0.5) coverAt(rk.x, rk.z, rk.radius || rk.r || rk.size, 'rock');
+          if (treeHide) { historyProps.pikeHide = treeHide; historyProps.taken.push({ x: treeHide.x, z: treeHide.z, r: 0.8 }); spot('pike-hide', treeHide.x, treeHide.z, 0.8); }
+          else hide: for (const r of [10, 12, 14, 16]) for (const da of [0, 0.4, -0.4, 0.8, -0.8, 1.2, -1.2]) {
+            const x = camp.x + Math.cos(out + da) * r, z = camp.z + Math.sin(out + da) * r;
+            if (!historyFreeSpot(x, z, 0, 0, 1.1)) continue;
+            historyProps.pikeHide = { x, z };
+            historyProps.taken.push({ x, z, r: 1.0 });
+            spot('pike-hide', x, z, 1.0);
+            break hide;
           }
         } else if (camp.style === 'trapper') {
           const h = historyFreeSpot(camp.x, camp.z, 5.5, 10, 1.2, 2.2);
@@ -11389,7 +11476,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     });
     const butteBodyMat = new THREE.MeshStandardMaterial({ color: 0x241e16, roughness: 0.78 });
     const butteSpotMat = new THREE.MeshStandardMaterial({ color: 0xfff8e6, roughness: 0.5, side: THREE.DoubleSide });
-    const BUTTE_WING_COLORS = [0xff8c2a, 0x3a7cff, 0xffe066, 0xb44dff, 0xff5577, 0x44ddaa];
+    // CL-267 (docs/art-direction.md §3, natural things under ~45% saturation): a valley's meadow butterflies, not candy:
+    // cabbage white, brimstone, meadow brown, a fritillary's orange, a common blue gone dusty, a tortoiseshell's rust.
+    const BUTTE_WING_COLORS = [0xe6e2d2, 0xd6d08c, 0x7a5a3a, 0xae7442, 0x7d8fb8, 0x9c5a3c];
 
     function listFlowerPads() {
       const pads = [];
@@ -11988,7 +12077,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     const rabbitEyeMat = new THREE.MeshStandardMaterial({ color: 0x16100c, roughness: 0.35 });
     const rabbitNoseMat = new THREE.MeshStandardMaterial({ color: 0x8c5a56, roughness: 0.6 });
     const rabbitTailMat = new THREE.MeshStandardMaterial({ color: 0xf0ece1, roughness: 0.95 });
-    const frogBodyMat = new THREE.MeshStandardMaterial({ color: 0x3d8b4a, roughness: 0.7 });
+    const frogBodyMat = new THREE.MeshStandardMaterial({ color: 0x56693c, roughness: 0.7 });   // CL-267: a pond frog's olive, not a toy's green
     const frogEyeMat = new THREE.MeshStandardMaterial({ color: 0x1a1a12, roughness: 0.5 });
     const frogThroatMat = new THREE.MeshStandardMaterial({ color: 0xd8c878, roughness: 0.6 });
     const burrowMoundMat = new THREE.MeshStandardMaterial({ color: 0x5a4530, roughness: 0.95 });
@@ -12011,11 +12100,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     const turtleSkinMat = new THREE.MeshStandardMaterial({ color: 0x5a7a48, roughness: 0.75 });
     const turtlePlastronMat = new THREE.MeshStandardMaterial({ color: 0xc8b272, roughness: 0.82 });
     const turtleScuteMat = new THREE.MeshStandardMaterial({ color: 0x2c4223, roughness: 0.85 });
-    const turtleStripeMat = new THREE.MeshStandardMaterial({ color: 0xc84a28, roughness: 0.7 });
+    const turtleStripeMat = new THREE.MeshStandardMaterial({ color: 0x9c573c, roughness: 0.7 });   // CL-267: the ear patch, dulled under the cap
     const birdBibMat = new THREE.MeshStandardMaterial({ color: 0x8a5236, roughness: 0.86 });
     const critterEyeShineMat = new THREE.MeshStandardMaterial({ color: 0xfaf8f2, roughness: 0.25 });
-    const frogRidgeMat = new THREE.MeshStandardMaterial({ color: 0x6ba852, roughness: 0.68 });
-    const frogSpotMat = new THREE.MeshStandardMaterial({ color: 0x244e2a, roughness: 0.78 });
+    const frogRidgeMat = new THREE.MeshStandardMaterial({ color: 0x7a8248, roughness: 0.68 });
+    const frogSpotMat = new THREE.MeshStandardMaterial({ color: 0x2f3a22, roughness: 0.78 });
     const frogIrisMat = new THREE.MeshStandardMaterial({ color: 0xd4a838, roughness: 0.45 });
     const lilyRimMat = new THREE.MeshStandardMaterial({ color: 0x458644, roughness: 0.72 });
     const lilySepalMat = new THREE.MeshStandardMaterial({ color: 0x386e38, roughness: 0.75 });
@@ -12802,23 +12891,47 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         g.add(cheek, eyeRing, eye, shine, ear, earInner, earTuft, haunch, shin, hindFoot, foreArm, forePaw);
       }
 
-      // Voluminous S-curved bushy plume tail arching up and forward over the back
+      // Voluminous S-curved bushy plume tail arching up and forward over the back. CL-267 (docs/asset-principles.md:
+      // silhouette): one plume swept along the S, flattened side to side, its edge ragged like fur, the tip a shade
+      // lighter; it was seven balls in three colours, a caterpillar.
       const tail = new THREE.Group();
-      const tailSpec = [
-        { pos: [0, 0.008, -0.105], r: 0.042, sx: 0.95, sy: 0.95, sz: 1.15, rx: 0.4, mat: squirrelBodyMat },
-        { pos: [0, 0.042, -0.148], r: 0.054, sx: 1.05, sy: 1.05, sz: 1.15, rx: 0.15, mat: squirrelTailMat },
-        { pos: [0, 0.092, -0.168], r: 0.064, sx: 1.12, sy: 1.1,  sz: 1.08, rx: -0.15, mat: squirrelTailMat },
-        { pos: [0, 0.148, -0.155], r: 0.068, sx: 1.16, sy: 1.08, sz: 1.05, rx: -0.45, mat: squirrelTailMat },
-        { pos: [0, 0.198, -0.118], r: 0.062, sx: 1.14, sy: 1.0,  sz: 1.05, rx: -0.75, mat: squirrelBodyMat },
-        { pos: [0, 0.228, -0.068], r: 0.048, sx: 1.05, sy: 0.88, sz: 1.12, rx: -1.05, mat: squirrelTailMat },
-        { pos: [0, 0.236, -0.022], r: 0.032, sx: 0.92, sy: 0.72, sz: 1.18, rx: -1.25, mat: squirrelBellyMat }
-      ];
-      for (const ts of tailSpec) {
-        const seg = new THREE.Mesh(new THREE.SphereGeometry(ts.r, 10, 8), ts.mat);
-        seg.scale.set(ts.sx, ts.sy, ts.sz);
-        seg.position.set(ts.pos[0], ts.pos[1], ts.pos[2]);
-        seg.rotation.x = ts.rx;
-        tail.add(seg);
+      {
+        const pts = [[0, 0.008, -0.105], [0, 0.042, -0.148], [0, 0.092, -0.168], [0, 0.148, -0.155], [0, 0.198, -0.118], [0, 0.228, -0.068], [0, 0.236, -0.022]];
+        const radii = [0.03, 0.05, 0.062, 0.066, 0.06, 0.046, 0.024];
+        // Catmull-Rom through the points by hand (the tests' stand-in three has no curves); the plume lies in the
+        // y-z plane, so its frame is the side (x) and the side crossed with the way it runs.
+        const N = 32, S = 12, P = [], Tg = [];
+        const cr = (a, b, c, d, u) => 0.5 * (2 * b + (c - a) * u + (2 * a - 5 * b + 4 * c - d) * u * u + (3 * b - a - 3 * c + d) * u * u * u);
+        for (let i = 0; i <= N; i++) {
+          const f = (i / N) * (pts.length - 1), k = Math.min(pts.length - 2, Math.floor(f)), u = f - k;
+          const q = (o) => pts[Math.max(0, Math.min(pts.length - 1, k + o))];
+          P.push([0, 1, 2].map((ax) => cr(q(-1)[ax], q(0)[ax], q(1)[ax], q(2)[ax], u)));
+        }
+        for (let i = 0; i <= N; i++) { const a0 = P[Math.max(0, i - 1)], a1 = P[Math.min(N, i + 1)]; const dy = a1[1] - a0[1], dz = a1[2] - a0[2], l = Math.hypot(dy, dz) || 1; Tg.push([dy / l, dz / l]); }
+        const pos = [], col = [], idx = [], base = new THREE.Color(squirrelTailMat.color), tip = new THREE.Color(squirrelBellyMat.color), c = new THREE.Color();
+        for (let i = 0; i <= N; i++) {
+          const u = i / N, f = u * (radii.length - 1), k = Math.min(radii.length - 2, Math.floor(f));
+          const r0 = radii[k] + (radii[k + 1] - radii[k]) * (f - k);
+          c.copy(base).lerp(tip, Math.max(0, (u - 0.8) / 0.2) * 0.25);
+          for (let j = 0; j < S; j++) {
+            const a = (j / S) * Math.PI * 2, fur = 1 + 0.09 * Math.sin(j * 5.3 + i * 0.9) + 0.05 * Math.sin(j * 2.1 - i * 0.4);   // ragged round the plume, smooth along it
+            const r = r0 * (i === N ? 0.15 : fur), [ty, tz] = Tg[i];
+            // side (1,0,0) and up-across (0, -tz, ty): round the tangent (0, ty, tz), side toward up-across
+            const x = P[i][0] + r * Math.cos(a) * 1.15, y = P[i][1] + r * Math.sin(a) * -tz, z = P[i][2] + r * Math.sin(a) * ty;
+            pos.push(x, y, z); col.push(c.r, c.g, c.b);
+          }
+        }
+        for (let i = 0; i < N; i++) for (let j = 0; j < S; j++) {
+          const a = i * S + j, b = i * S + (j + 1) % S, a2 = a + S, b2 = b + S;
+          idx.push(a, a2, b, b, a2, b2);   // outward: the ring runs side toward up-across, clockwise round the tangent
+        }
+        const geo = new THREE.BufferGeometry();
+        geo.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+        geo.setIndex(idx); geo.computeVertexNormals();
+        const plume = new THREE.Mesh(geo, new THREE.MeshStandardMaterial({ color: 0xffffff, vertexColors: true, roughness: 0.9 }));   // front-sided like the rest, so it merges
+        geo.setAttribute('color', new THREE.Float32BufferAttribute(col, 3));
+        plume.name = 'squirrel-tail';
+        tail.add(plume);
       }
 
       g.add(body, neck, belly, head, muzzle, chin, nose, tail);
@@ -23554,6 +23667,12 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const elbowR = marine.userData.elbowRG;
       const elbowL = marine.userData.elbowLG;
       decayRecoil(dt);
+      // GB-245: the reload lift's envelope. In as the reload starts, out as it ends, and 0 the rest of the time, so a
+      // reload looks the same length and the holds on either side of it do not move.
+      if (reloading && viewFirst && !akimboOn()) {
+        const ru = _clamp01(1 - reloadTimer / Math.max(0.05, reloadAnimDuration || 1));
+        fpReloadLiftW = _seg(ru, 0.0, 0.18) * (1 - _seg(ru, 0.88, 1.0));
+      } else fpReloadLiftW = 0;
 
       const FP_RELOAD_CANT = 0.40;   // GB-228: the long guns' cant on a reload in first person (rad)
       const FP_RELOAD_CANT_DEEP = 0.62;   // GB-233: the AK, AA12 and sniper cant deeper (and dip) so the magazine is seen going in
@@ -23700,8 +23819,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
 
         reloadMountOff.rx = -0.20 * tilt;
         reloadMountOff.rz = 0.05 * tilt;
-        if (viewFirst) { reloadMountOff.rx = -0.06 * tilt; reloadMountOff.rz = FP_RELOAD_CANT * tilt; reloadMountOff.y = -0.03 * tilt; }   // GB-233: the handguns cant like the long guns
         reloadMountOff.y = 0;
+        if (viewFirst) { reloadMountOff.rx = -0.06 * tilt; reloadMountOff.rz = FP_RELOAD_CANT * tilt; reloadMountOff.y = -0.03 * tilt; }   // GB-233: the handguns cant like the long guns; GB-228: the zero goes first or it wipes the dip
         reloadArmOff.x = reloadArmOff.y = reloadArmOff.z = 0;
         reloadElbowOffR.x = reloadElbowOffR.y = reloadElbowOffR.z = 0;
 
@@ -23813,8 +23932,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         // Slight tip-back only (no big arm/elbow deltas — those caused a full spin on gripR)
         reloadMountOff.rx = -0.22 * tilt;  // muzzle tips up a little
         reloadMountOff.rz = 0.05 * tilt;   // tiny magwell roll toward LH
-        if (viewFirst) { reloadMountOff.rx = -0.06 * tilt; reloadMountOff.rz = FP_RELOAD_CANT * tilt; reloadMountOff.y = -0.03 * tilt; }   // GB-233: the handguns cant like the long guns
         reloadMountOff.y = 0;
+        if (viewFirst) { reloadMountOff.rx = -0.06 * tilt; reloadMountOff.rz = FP_RELOAD_CANT * tilt; reloadMountOff.y = -0.03 * tilt; }   // GB-233: the handguns cant like the long guns; GB-228: the zero goes first or it wipes the dip
         reloadArmOff.x = reloadArmOff.y = reloadArmOff.z = 0;
         reloadElbowOffR.x = reloadElbowOffR.y = reloadElbowOffR.z = 0;
 
@@ -23956,8 +24075,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         // Modest mount tip-back only — zero RH arm/elbow tumble
         reloadMountOff.rx = -0.16 * tip;
         reloadMountOff.rz = 0.05 * tip;
-        if (viewFirst) { reloadMountOff.rx = -0.06 * tip; reloadMountOff.rz = FP_RELOAD_CANT * tip; reloadMountOff.y = -0.03 * tip; }   // GB-233: the handguns cant like the long guns
         reloadMountOff.y = 0.008 * tip;
+        if (viewFirst) { reloadMountOff.rx = -0.06 * tip; reloadMountOff.rz = FP_RELOAD_CANT * tip; reloadMountOff.y = -0.03 * tip; }   // GB-233: the handguns cant like the long guns; GB-228: the zero goes first or it wipes the dip
         reloadArmOff.x = reloadArmOff.y = reloadArmOff.z = 0;
         reloadElbowOffR.x = reloadElbowOffR.y = reloadElbowOffR.z = 0;
 
@@ -24060,8 +24179,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         // Slight tip-back only — zero RH arm/elbow tumble
         reloadMountOff.rx = -0.20 * tilt;
         reloadMountOff.rz = 0.04 * tilt;
-        if (viewFirst) { reloadMountOff.rx = -0.08 * tilt; reloadMountOff.rz = FP_RELOAD_CANT_DEEP * tilt; reloadMountOff.y = -0.07 * tilt; }   // GB-233: deeper cant and a dip, the magazine seen going in
         reloadMountOff.y = 0;
+        if (viewFirst) { reloadMountOff.rx = -0.08 * tilt; reloadMountOff.rz = FP_RELOAD_CANT_DEEP * tilt; reloadMountOff.y = -0.07 * tilt; }   // GB-233: deeper cant and a dip, the magazine seen going in; GB-228: the zero goes first
         reloadArmOff.x = reloadArmOff.y = reloadArmOff.z = 0;
         reloadElbowOffR.x = reloadElbowOffR.y = reloadElbowOffR.z = 0;
 
@@ -24702,6 +24821,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         house.damagedTerminal=terminal;
         // AG-125 (story-chain.md §2, story.md §11): the HQ duty board (west of the wall of tags) and the HQ radio set
         // (east of the wall of tags, west of the +2.2 pilaster), built in the military family.
+        // AG-153: static parts merged in one mesh per station (vertex colours via mergeParts), keeping readable
+        // canvases and glowing lamps separate.
         {
           const m = (hex, r = 0.72, met = 0.25, em = 0, emI = 0) => new THREE.MeshStandardMaterial({ color: hex, roughness: r, metalness: met, ...(em ? { emissive: em, emissiveIntensity: emI } : {}) });
           const iron = m(0x2c3036, 0.5, 0.62), steelM = m(0x4a5058, 0.42, 0.68), olive = m(0x3d4636, 0.74, 0.18),
@@ -24709,46 +24830,72 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
             paperA = m(0xdfd5be, 0.9, 0.02), paperB = m(0xd4c8ae, 0.92, 0.02), paperY = m(0xd9c693, 0.9, 0.02),
             pinRed = m(0xa82820, 0.48, 0.15), cordRed = m(0x98241d, 0.82, 0.05), dark = m(0x181b1e, 0.84, 0.2),
             bakelite = m(0x1d2023, 0.36, 0.18), lampGlow = m(0xffcc77, 0.3, 0.1, 0xffaa38, 1.35);
-          const putB = (p, w, h, d, mat, x, y, z, rx = 0, ry = 0, rz = 0) => {
+          const putPartB = (arr, w, h, d, mat, x, y, z, rx = 0, ry = 0, rz = 0) => {
             const o = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat);
-            o.position.set(x, y, z); o.rotation.set(rx, ry, rz); o.castShadow = true; o.receiveShadow = true; p.add(o); return o;
+            o.position.set(x, y, z); o.rotation.set(rx, ry, rz); o.updateMatrix();
+            arr.push(o); return o;
           };
-          const putC = (p, rt, rb, h, mat, x, y, z, seg = 10, rx = 0, ry = 0, rz = 0) => {
+          const putPartC = (arr, rt, rb, h, mat, x, y, z, seg = 10, rx = 0, ry = 0, rz = 0) => {
             const o = new THREE.Mesh(new THREE.CylinderGeometry(rt, rb, h, seg), mat);
-            o.position.set(x, y, z); o.rotation.set(rx, ry, rz); o.castShadow = true; o.receiveShadow = true; p.add(o); return o;
+            o.position.set(x, y, z); o.rotation.set(rx, ry, rz); o.updateMatrix();
+            arr.push(o); return o;
           };
+          const stationMat = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.72, metalness: 0.25 });
+
           // 1. HQ Duty Board ('hq-duty-board') at x = -1.62, y = 1.56 (inside Center Bay, clear of -2.2 pilaster and tagWall)
           const db = new THREE.Group(); db.name = 'hq-duty-board';
           db.position.set(HQ_DUTY_BOARD_X, 1.56, -(W + 0.08)); db.rotation.y = Math.PI;
+          const dbParts = [];
           // Standoffs & heavy olive/angle-iron backing frame (0.68 m × 0.66 m)
-          for (const sx of [-0.30, 0.30]) for (const sy of [-0.28, 0.28]) putB(db, 0.055, 0.055, 0.05, iron, sx, sy, -0.022);
-          putB(db, 0.66, 0.63, 0.026, oliveDark, 0, 0, 0);
-          putB(db, 0.61, 0.58, 0.016, cork, 0, 0, 0.015);
-          for (const sy of [-0.315, 0.315]) putB(db, 0.68, 0.038, 0.044, iron, 0, sy, 0.014);
-          for (const sx of [-0.325, 0.325]) putB(db, 0.038, 0.66, 0.044, iron, sx, 0, 0.014);
+          for (const sx of [-0.30, 0.30]) for (const sy of [-0.28, 0.28]) putPartB(dbParts, 0.055, 0.055, 0.05, iron, sx, sy, -0.022);
+          putPartB(dbParts, 0.66, 0.63, 0.026, oliveDark, 0, 0, 0);
+          putPartB(dbParts, 0.61, 0.58, 0.016, cork, 0, 0, 0.015);
+          for (const sy of [-0.315, 0.315]) putPartB(dbParts, 0.68, 0.038, 0.044, iron, 0, sy, 0.014);
+          for (const sx of [-0.325, 0.325]) putPartB(dbParts, 0.038, 0.66, 0.044, iron, sx, 0, 0.014);
           for (const sx of [-0.30, 0.30]) for (const sy of [-0.29, 0.29]) {
-            putB(db, 0.068, 0.068, 0.012, steelM, sx, sy, 0.033);
-            putC(db, 0.010, 0.010, 0.016, brass, sx, sy, 0.041, 6, Math.PI / 2, 0, 0);
+            putPartB(dbParts, 0.068, 0.068, 0.012, steelM, sx, sy, 0.033);
+            putPartC(dbParts, 0.010, 0.010, 0.016, brass, sx, sy, 0.041, 6, Math.PI / 2, 0, 0);
           }
-          // Sloped rain hood + sodium-amber tubular map lamp across the top
-          putB(db, 0.72, 0.024, 0.14, olive, 0, 0.348, 0.054, 0.24, 0, 0);
-          for (const sx of [-0.335, 0.335]) putB(db, 0.02, 0.062, 0.12, iron, sx, 0.33, 0.046, 0.15, 0, 0);
-          putC(db, 0.015, 0.015, 0.48, steelM, 0, 0.326, 0.082, 10, 0, 0, Math.PI / 2);
-          putC(db, 0.010, 0.010, 0.42, lampGlow, 0, 0.316, 0.080, 8, 0, 0, Math.PI / 2);
+          // Sloped rain hood + tubular map lamp fixture housing across the top
+          putPartB(dbParts, 0.72, 0.024, 0.14, olive, 0, 0.348, 0.054, 0.24, 0, 0);
+          for (const sx of [-0.335, 0.335]) putPartB(dbParts, 0.02, 0.062, 0.12, iron, sx, 0.33, 0.046, 0.15, 0, 0);
+          putPartC(dbParts, 0.015, 0.015, 0.48, steelM, 0, 0.326, 0.082, 10, 0, 0, Math.PI / 2);
           // Lower chalk ledge & pulled-out empty spare-fuse drawer (story.md §11: "Radio fuse: spare in the drawer.")
-          putB(db, 0.66, 0.024, 0.085, iron, 0, -0.336, 0.036);
-          putB(db, 0.21, 0.058, 0.075, oliveDark, 0.18, -0.372, 0.034);
+          putPartB(dbParts, 0.66, 0.024, 0.085, iron, 0, -0.336, 0.036);
+          putPartB(dbParts, 0.21, 0.058, 0.075, oliveDark, 0.18, -0.372, 0.034);
           // Pulled-out drawer tray (empty inside — the last spare fuse is gone)
-          putB(db, 0.185, 0.044, 0.088, steelM, 0.18, -0.372, 0.074);
-          putB(db, 0.162, 0.032, 0.070, dark, 0.18, -0.363, 0.074);
-          putB(db, 0.058, 0.014, 0.016, brass, 0.18, -0.372, 0.124);
+          putPartB(dbParts, 0.185, 0.044, 0.088, steelM, 0.18, -0.372, 0.074);
+          putPartB(dbParts, 0.162, 0.032, 0.070, dark, 0.18, -0.363, 0.074);
+          putPartB(dbParts, 0.058, 0.014, 0.016, brass, 0.18, -0.372, 0.124);
           // Chalk stub & carpenter's pencil on the left ledge
-          putC(db, 0.006, 0.006, 0.058, paperA, -0.19, -0.318, 0.054, 6, 0, 0.18, Math.PI / 2);
-          putB(db, 0.085, 0.008, 0.011, pinRed, -0.05, -0.319, 0.052, 0, -0.12, 0);
+          putPartC(dbParts, 0.006, 0.006, 0.058, paperA, -0.19, -0.318, 0.054, 6, 0, 0.18, Math.PI / 2);
+          putPartB(dbParts, 0.085, 0.008, 0.011, pinRed, -0.05, -0.319, 0.052, 0, -0.12, 0);
           // 3D paper relief backing slabs behind the painted canvas (z = 0.019) so edges cast subtle shadow
-          putB(db, 0.21, 0.20, 0.006, paperA, -0.17, 0.02, 0.019, 0, 0, -0.025);
-          putB(db, 0.20, 0.14, 0.006, paperB, -0.17, -0.18, 0.019, 0, 0, 0.02);
-          putB(db, 0.32, 0.18, 0.006, paperB, 0.12, 0.12, 0.019, 0, 0, 0.008);
+          putPartB(dbParts, 0.21, 0.20, 0.006, paperA, -0.17, 0.02, 0.019, 0, 0, -0.025);
+          putPartB(dbParts, 0.20, 0.14, 0.006, paperB, -0.17, -0.18, 0.019, 0, 0, 0.02);
+          putPartB(dbParts, 0.32, 0.18, 0.006, paperB, 0.12, 0.12, 0.019, 0, 0, 0.008);
+          // 3D pushpins & red string segments in front of the canvas at the card/map pin positions
+          for (let idx = 0; idx < 8; idx++) {
+            const col = idx % 4, row = (idx / 4) | 0;
+            const cx = -0.01 + col * 0.081, cy = -0.015 - row * 0.135;
+            putPartC(dbParts, 0.007, 0.005, 0.014, (idx === 0 || idx === 7) ? pinRed : brass, cx, cy, 0.032, 6, Math.PI / 2, 0, 0);
+          }
+          for (const [x1, y1, x2, y2] of [[-0.01, 0.15, 0.08, 0.17], [0.08, 0.17, 0.17, 0.14], [0.02, 0.08, 0.12, 0.09], [0.12, 0.09, 0.22, 0.11]]) {
+            const dx = x2 - x1, dy = y2 - y1, len = Math.hypot(dx, dy);
+            putPartB(dbParts, len, 0.004, 0.004, cordRed, (x1 + x2) * 0.5, (y1 + y2) * 0.5, 0.030, 0, 0, Math.atan2(dy, dx));
+          }
+          // Merge static parts into one mesh (AG-153)
+          const dbStatic = mergeParts(dbParts, stationMat, { castShadow: true, receiveShadow: true });
+          dbStatic.name = 'hq-duty-board-static';
+          db.add(dbStatic);
+          for (const p of dbParts) p.geometry.dispose();
+
+          // Sodium-amber tubular map lamp (kept separate: glows with lampGlow)
+          const lamp = new THREE.Mesh(new THREE.CylinderGeometry(0.010, 0.010, 0.42, 8), lampGlow);
+          lamp.position.set(0, 0.316, 0.080); lamp.rotation.set(0, 0, Math.PI / 2);
+          lamp.castShadow = true; lamp.receiveShadow = true;
+          db.add(lamp);
+
           // Canvas texture for the cork board: header stencil, Hale's tally marks, the twelve's handwritten duty notes,
           // valley sketch map, and the 8 pinned lead cards
           {
@@ -24845,52 +24992,73 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
             const face = new THREE.Mesh(new THREE.PlaneGeometry(0.61, 0.58), faceMat);
             face.position.set(0, 0, 0.026); face.receiveShadow = true; db.add(face);
           }
-          // 3D pushpins & red string segments in front of the canvas at the card/map pin positions
-          for (let idx = 0; idx < 8; idx++) {
-            const col = idx % 4, row = (idx / 4) | 0;
-            const cx = -0.01 + col * 0.081, cy = -0.015 - row * 0.135;
-            putC(db, 0.007, 0.005, 0.014, (idx === 0 || idx === 7) ? pinRed : brass, cx, cy, 0.032, 6, Math.PI / 2, 0, 0);
-          }
-          for (const [x1, y1, x2, y2] of [[-0.01, 0.15, 0.08, 0.17], [0.08, 0.17, 0.17, 0.14], [0.02, 0.08, 0.12, 0.09], [0.12, 0.09, 0.22, 0.11]]) {
-            const dx = x2 - x1, dy = y2 - y1, len = Math.hypot(dx, dy);
-            putB(db, len, 0.004, 0.004, cordRed, (x1 + x2) * 0.5, (y1 + y2) * 0.5, 0.030, 0, 0, Math.atan2(dy, dx));
-          }
           g.add(db);
           house.dutyBoard = db;
 
           // 2. HQ Radio Set ('hq-radio-set') at x = +1.62, y = 1.46 (inside Center Bay, clear of +2.2 pilaster and tagWall)
           const rs = new THREE.Group(); rs.name = 'hq-radio-set';
           rs.position.set(HQ_RADIO_X, 1.46, -(W + 0.12)); rs.rotation.y = Math.PI;
+          const rsParts = [];
           // Bolted steel wall shelf (0.50 m × 0.30 m) & diagonal knee struts
-          putB(rs, 0.50, 0.030, 0.30, iron, 0, -0.15, 0.11);
-          putB(rs, 0.50, 0.075, 0.024, iron, 0, -0.175, -0.02);
+          putPartB(rsParts, 0.50, 0.030, 0.30, iron, 0, -0.15, 0.11);
+          putPartB(rsParts, 0.50, 0.075, 0.024, iron, 0, -0.175, -0.02);
           for (const sx of [-0.19, 0.19]) {
-            putB(rs, 0.034, 0.26, 0.026, iron, sx, -0.27, -0.02);
-            putB(rs, 0.026, 0.31, 0.026, steelM, sx, -0.27, 0.10, -0.68, 0, 0);
-            putC(rs, 0.009, 0.009, 0.018, brass, sx, -0.36, 0.0, 6, Math.PI / 2, 0, 0);
+            putPartB(rsParts, 0.034, 0.26, 0.026, iron, sx, -0.27, -0.02);
+            putPartB(rsParts, 0.026, 0.31, 0.026, steelM, sx, -0.27, 0.10, -0.68, 0, 0);
+            putPartC(rsParts, 0.009, 0.009, 0.018, brass, sx, -0.36, 0.0, 6, Math.PI / 2, 0, 0);
           }
           // Under-shelf 24V field battery box & braided power lead
-          putB(rs, 0.28, 0.13, 0.19, oliveDark, -0.02, -0.235, 0.085);
-          putB(rs, 0.29, 0.018, 0.20, iron, -0.02, -0.235, 0.085);
-          putC(rs, 0.011, 0.011, 0.15, dark, 0.14, -0.17, 0.11, 8, 0, 0, -0.25);
+          putPartB(rsParts, 0.28, 0.13, 0.19, oliveDark, -0.02, -0.235, 0.085);
+          putPartB(rsParts, 0.29, 0.018, 0.20, iron, -0.02, -0.235, 0.085);
+          putPartC(rsParts, 0.011, 0.011, 0.15, dark, 0.14, -0.17, 0.11, 8, 0, 0, -0.25);
           // Main military transceiver cabinet (RT-524 / AN-VRC style, 0.44 m × 0.27 m × 0.24 m)
-          putB(rs, 0.44, 0.27, 0.24, olive, 0, 0.01, 0.10);
-          putB(rs, 0.42, 0.25, 0.018, iron, 0, 0.01, 0.222);
+          putPartB(rsParts, 0.44, 0.27, 0.24, olive, 0, 0.01, 0.10);
+          putPartB(rsParts, 0.42, 0.25, 0.018, iron, 0, 0.01, 0.222);
           // Top cooling fins & upper auxiliary squelch/speaker unit (CH-09 monitor)
-          for (let k = -4; k <= 4; k++) putB(rs, 0.015, 0.015, 0.20, oliveDark, k * 0.042, 0.152, 0.10);
-          putB(rs, 0.26, 0.105, 0.19, oliveDark, -0.065, 0.202, 0.095);
-          putB(rs, 0.24, 0.085, 0.016, iron, -0.065, 0.202, 0.192);
+          for (let k = -4; k <= 4; k++) putPartB(rsParts, 0.015, 0.015, 0.20, oliveDark, k * 0.042, 0.152, 0.10);
+          putPartB(rsParts, 0.26, 0.105, 0.19, oliveDark, -0.065, 0.202, 0.095);
+          putPartB(rsParts, 0.24, 0.085, 0.016, iron, -0.065, 0.202, 0.192);
           // Protective front steel grab handles on left and right of faceplate
           for (const sx of [-0.188, 0.188]) {
-            for (const sy of [-0.075, 0.085]) putC(rs, 0.008, 0.008, 0.042, steelM, sx, sy, 0.242, 8, Math.PI / 2, 0, 0);
-            putC(rs, 0.008, 0.008, 0.17, steelM, sx, 0.005, 0.262, 8);
+            for (const sy of [-0.075, 0.085]) putPartC(rsParts, 0.008, 0.008, 0.042, steelM, sx, sy, 0.242, 8, Math.PI / 2, 0, 0);
+            putPartC(rsParts, 0.008, 0.008, 0.17, steelM, sx, 0.005, 0.262, 8);
           }
           // 3D rotary selector knobs & brass handset jack along the lower control strip
           for (const [kx, ky, r] of [[-0.115, -0.068, 0.024], [-0.038, -0.068, 0.024], [0.038, -0.068, 0.020], [0.115, -0.068, 0.020]]) {
-            putC(rs, r, r * 1.08, 0.024, bakelite, kx, ky, 0.244, 12, Math.PI / 2, 0, 0);
-            putB(rs, 0.005, r * 1.45, 0.028, paperA, kx, ky, 0.246, 0, 0, kx * 3.2);
+            putPartC(rsParts, r, r * 1.08, 0.024, bakelite, kx, ky, 0.244, 12, Math.PI / 2, 0, 0);
+            putPartB(rsParts, 0.005, r * 1.45, 0.028, paperA, kx, ky, 0.246, 0, 0, kx * 3.2);
           }
-          putC(rs, 0.013, 0.013, 0.028, brass, -0.155, -0.075, 0.244, 8, Math.PI / 2, 0, 0);
+          putPartC(rsParts, 0.013, 0.013, 0.028, brass, -0.155, -0.075, 0.244, 8, Math.PI / 2, 0, 0);
+          // H-250 Field Handset on left cradle hook + 3D coiled cord
+          putPartB(rsParts, 0.038, 0.085, 0.055, steelM, -0.232, 0.03, 0.13);
+          const hsM = new THREE.Matrix4().compose(
+            new THREE.Vector3(-0.252, 0.02, 0.145),
+            new THREE.Quaternion().setFromEuler(new THREE.Euler(0.12, 0, 0.16)),
+            new THREE.Vector3(1, 1, 1)
+          );
+          const putHsC = (rt, rb, h, mat, lx, ly, lz, seg = 10, rx = 0, ry = 0, rz = 0) => {
+            const o = new THREE.Mesh(new THREE.CylinderGeometry(rt, rb, h, seg), mat);
+            o.position.set(lx, ly, lz); o.rotation.set(rx, ry, rz); o.updateMatrix();
+            o.applyMatrix4(hsM); o.updateMatrix();
+            rsParts.push(o); return o;
+          };
+          putHsC(0.013, 0.013, 0.16, bakelite, 0, 0, 0, 8);
+          putHsC(0.030, 0.024, 0.034, bakelite, 0, 0.080, 0.013, 10, Math.PI / 2, 0, 0);
+          putHsC(0.028, 0.022, 0.034, bakelite, 0, -0.080, 0.013, 10, Math.PI / 2, 0, 0);
+          for (let k = 0; k < 6; k++) {
+            putPartC(rsParts, 0.015, 0.015, 0.011, dark, -0.22 + k * 0.013, -0.095 - Math.sin((k / 5) * Math.PI) * 0.05, 0.18 + k * 0.01, 8, 0.4, 0, 0.5);
+          }
+          // Right-side whip antenna mount, heavy coil spring & tapered fibreglass whip antenna
+          putPartB(rsParts, 0.05, 0.075, 0.06, iron, 0.238, 0.06, 0.085);
+          putPartC(rsParts, 0.020, 0.024, 0.07, steelM, 0.246, 0.125, 0.085, 10);
+          putPartC(rsParts, 0.005, 0.011, 0.54, oliveDark, 0.246, 0.42, 0.085, 8, -0.04, 0, -0.03);
+          putPartC(rsParts, 0.008, 0.008, 0.020, brass, 0.254, 0.69, 0.074, 8);
+          // Merge static parts into one mesh (AG-153)
+          const rsStatic = mergeParts(rsParts, stationMat, { castShadow: true, receiveShadow: true });
+          rsStatic.name = 'hq-radio-set-static';
+          rs.add(rsStatic);
+          for (const p of rsParts) p.geometry.dispose();
+
           // Illuminated frequency drum dial & VU meter faceplate texture
           {
             const cv = document.createElement('canvas'); cv.width = 512; cv.height = 320;
@@ -24933,28 +25101,18 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
             const rFace = new THREE.Mesh(new THREE.PlaneGeometry(0.40, 0.23), rMat);
             rFace.position.set(0, 0.01, 0.235); rs.add(rFace);
           }
-          // H-250 Field Handset on left cradle hook + 3D coiled cord
-          putB(rs, 0.038, 0.085, 0.055, steelM, -0.232, 0.03, 0.13);
-          const hs = new THREE.Group(); hs.position.set(-0.252, 0.02, 0.145); hs.rotation.set(0.12, 0, 0.16);
-          putC(hs, 0.013, 0.013, 0.16, bakelite, 0, 0, 0, 8);
-          putC(hs, 0.030, 0.024, 0.034, bakelite, 0, 0.080, 0.013, 10, Math.PI / 2, 0, 0);
-          putC(hs, 0.028, 0.022, 0.034, bakelite, 0, -0.080, 0.013, 10, Math.PI / 2, 0, 0);
-          rs.add(hs);
-          for (let k = 0; k < 6; k++) {
-            putC(rs, 0.015, 0.015, 0.011, dark, -0.22 + k * 0.013, -0.095 - Math.sin((k / 5) * Math.PI) * 0.05, 0.18 + k * 0.01, 8, 0.4, 0, 0.5);
-          }
-          // Right-side whip antenna mount, heavy coil spring & tapered fibreglass whip antenna
-          putB(rs, 0.05, 0.075, 0.06, iron, 0.238, 0.06, 0.085);
-          putC(rs, 0.020, 0.024, 0.07, steelM, 0.246, 0.125, 0.085, 10);
-          putC(rs, 0.005, 0.011, 0.54, oliveDark, 0.246, 0.42, 0.085, 8, -0.04, 0, -0.03);
-          putC(rs, 0.008, 0.008, 0.020, brass, 0.254, 0.69, 0.074, 8);
           // AG-134 (CL-259): the relay's spare board wired into the HQ radio set ('hq-hush-board'). Mounted on a steel
           // L-bracket atop the right side of the transceiver deck with coaxial and phase-inversion jumper leads down to
           // the signal jack and 24V battery box. Hidden until hush.board === 'wired' || hush.owned.
           {
             const hb = new THREE.Group(); hb.name = 'hq-hush-board';
-            putB(hb, 0.18, 0.014, 0.13, iron, 0.125, 0.156, 0.115);
-            putB(hb, 0.18, 0.045, 0.014, steelM, 0.125, 0.175, 0.055);
+            const putHbB = (w, h, d, mat, x, y, z) => {
+              const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat);
+              m.position.set(x, y, z); m.castShadow = m.receiveShadow = true;
+              hb.add(m); return m;
+            };
+            putHbB(0.18, 0.014, 0.13, iron, 0.125, 0.156, 0.115);
+            putHbB(0.18, 0.045, 0.014, steelM, 0.125, 0.175, 0.055);
             const card = makeHushSpareBoardMesh(true);
             card.name = '';
             card.position.set(0.125, 0.195, 0.118);
@@ -24976,7 +25134,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
               hb.add(wire);
             }
             const hushLedMat = new THREE.MeshStandardMaterial({ color: 0x7fd4ff, emissive: 0x4bb8ff, emissiveIntensity: 1.35, roughness: 0.28 });
-            putC(hb, 0.008, 0.008, 0.014, hushLedMat, 0.175, 0.188, 0.168, 8, Math.PI / 2, 0, 0);
+            const hushLed = new THREE.Mesh(new THREE.CylinderGeometry(0.008, 0.008, 0.014, 8), hushLedMat);
+            hushLed.position.set(0.175, 0.188, 0.168); hushLed.rotation.set(Math.PI / 2, 0, 0);
+            hushLed.castShadow = hushLed.receiveShadow = true;
+            hb.add(hushLed);
             rs.add(hb);
             house.hushWiredBoard = hb;
             house.hushLedMat = hushLedMat;
@@ -25330,7 +25491,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         const moving = new Set([shutter, intakeTray, house.hushWiredBoard, ...fans, ...muzzles.map((m) => m.cap)].filter(Boolean));
         const baked = bakeStatic(THREE, g, { skip: (o) => moving.has(o) });
         // Each hatch baked within itself (the Training Ground clones them by name).
-        for (const name of ['hq-cif', 'hq-armory', 'hq-skull-intake', 'hq-alarm-cabinet', 'hq-duty-board', 'hq-radio-set']) {
+        for (const name of ['hq-cif', 'hq-armory', 'hq-skull-intake', 'hq-alarm-cabinet']) {
           const h = g.getObjectByName(name);
           if (h) { const r = bakeStatic(THREE, h, { skip: (o) => moving.has(o) || o === house.armoryRack }); baked.merged += r.merged; baked.removed += r.removed; }
         }
@@ -25349,7 +25510,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           // they're earned, so they stay their own.)
           const dressing = new Set(['hq-damaged-terminal', 'tag-wall', 'fob-lockdown-door']);
           sum(foldStatic(THREE, TSL, g, { skip: (o) => moving.has(o), enter: (o) => dressing.has(o.name), hold }));
-          for (const name of ['hq-cif', 'hq-armory', 'hq-skull-intake', 'hq-alarm-cabinet', 'hq-duty-board', 'hq-radio-set']) {
+          for (const name of ['hq-cif', 'hq-armory', 'hq-skull-intake', 'hq-alarm-cabinet']) {
             const h = g.getObjectByName(name);
             if (h) sum(foldStatic(THREE, TSL, h, { skip: (o) => moving.has(o) || o === house.armoryRack, hold }));
           }
@@ -25543,6 +25704,17 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         landmarks.push(lm);
         return lm;
       };
+      // The flat things on the ground (the ruts, the generator's pad) go into one mesh in world space: their parts are
+      // unrotated boxes, so each moves to its place and takes its set's yaw (AG-151 counted three draws for them).
+      const wear = [];
+      const groundWear = (list, cx, cy, cz, yaw) => {
+        const c = Math.cos(yaw), s = Math.sin(yaw);
+        for (const m of list) {
+          const { x, y, z } = m.position;
+          m.position.set(cx + x * c + z * s, cy + y, cz - x * s + z * c); m.rotation.y += yaw;
+          wear.push(m);
+        }
+      };
       // 1. Tyre ruts in from the south trail into the packed-gravel apron (h < 0.08 m so sweep.js treats as ground wear).
       for (const [nm, cx, cz, yaw, len] of [['fob-tyre-ruts-1', 5.45, -10.8, -0.42, 3.0], ['fob-tyre-ruts-2', 3.95, -7.75, -0.48, 3.0]]) {
         const rp = [], gy = groundMinAround(cx, cz, 1.7), cy = Math.cos(yaw), sy = Math.sin(yaw);
@@ -25555,16 +25727,16 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
             B(rp, 0.11, 0.038, len / 6.5, 0x786e5d, lx + 0.21, ly + 0.014, lz);
           }
         }
-        const rg = mergeParts(rp, poiMat, { castShadow: false, receiveShadow: true });
-        rg.name = nm; rg.position.set(cx, gy, cz); rg.rotation.y = yaw; scene.add(rg);
+        groundWear(rp, cx, gy, cz, yaw);   // CL-267 (night 20's draws, AG-151): with the generator's pad, one draw
       }
       // 2. North utility yard: generator pallet pad under (-3.0, 6.7) and two fuel drums on a pallet west of it at (-4.55, 6.65).
       {
         const gp = [], gy = groundMinAround(-3.0, 6.7, 0.72);
         for (const dz of [-0.42, 0, 0.42]) B(gp, 1.28, 0.035, 0.12, 0x54412c, 0, 0.012, dz);
         for (let i = -3; i <= 3; i++) B(gp, 0.14, 0.024, 1.08, 0x6b5338, i * 0.18, 0.038, 0);
-        const gm = mergeParts(gp, poiMat, { castShadow: false, receiveShadow: true });
-        gm.name = 'fob-gen-pad'; gm.position.set(-3.0, gy, 6.7); scene.add(gm);
+        groundWear(gp, -3.0, gy, 6.7, 0);
+        const gm = mergeParts(wear, poiMat, { castShadow: false, receiveShadow: true });
+        gm.name = 'fob-ground-wear'; scene.add(gm);   // the tyre ruts and the generator's pallet pad: flat, never broken
       }
       {
         const dp = [];
@@ -42094,10 +42266,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // truck and the cellar are each mission's owner's to place: s.x/s.z).
     const SURVIVOR_LEAD = { hikers: 'missing', ranger: 'search', trapper: 'oldman' };
     // GB-232 (places): Okafor in the trapper's cellar (AG-135's trapper.cellarSpot), Brandt by the rangers' truck's door
-    // (ranger.clues' 'truck' spot), Pike at the fire until the hikers' lead has a spot. null: the fire.
+    // (ranger.clues' 'truck' spot), Pike where he hid beyond the hikers' camp (CL-263, historyProps.pikeHide). null: the fire.
     function survivorPlace(style) {
       if (style === 'trapper' && trapper?.cellarSpot) { const c = trapper.cellarSpot; return { x: c.x, y: c.y, z: c.z, yaw: c.yaw }; }
       if (style === 'ranger') { const t = ranger?.clues?.find((q) => q.source === 'truck')?.spot?.approach; if (t) return { x: t.x, z: t.z }; }   // rangerSpot: { approach, centre }
+      if (style === 'hikers' && historyProps.pikeHide) return { x: historyProps.pikeHide.x, z: historyProps.pikeHide.z };   // CL-263: beyond the hikers' camp
       return null;
     }
     function survivorsAtThreadEnd() {
@@ -42268,10 +42441,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         face(.041, .008, .01, d.mats.skin, 0, 1.338, .153);
         if (who === 'brandt') {
           const beard = buildSurvivorBeard(THREE, d.mats.hair);headG.add(beard);geos.push(beard.geometry);
-          for (const sx of [-1, 1]) {
-            const moustache = face(.038, .011, .011, d.mats.hair, sx * .023, 1.36, .155);
-            moustache.rotation.z = -sx * .16;
-          }
+          // GP-19981: the fitted beard has its own moustache on the lip; the two flat bars that stood for it are gone.
         }
       }
       m.userData.survivorWho = who;
@@ -42595,7 +42765,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     const day1FwdEye = new THREE.Vector3(), day1FwdAt = new THREE.Vector3();
     function day1FwdOk(x, z) {
       const s = resolveStaticProps(x, z, 0.8), gy = sampleHeight(s.x, s.z);
-      if (gy < waterLevelAt(s.x, s.z) + 0.15) return null;
+      // GB-244 (rule 13): waterLevelAt returns NULL where there is no water at all, and null + 0.15 is 0.15, so this
+      // used to reject every dry candidate below 0.15 m elevation as if it were underwater (caves 3/4/5 kept 0/3/18 of
+      // 200 candidates and fell through to the 181 m cave mouth). Only an actual water level can reject a spot.
+      const wl = waterLevelAt(s.x, s.z);
+      if (wl !== null && gy < wl + 0.15) return null;
       const pp = nearestPlayer(s.x, s.z, { alive: true }).position, dp = hypot(pp.x - s.x, pp.z - s.z);
       if (dp < 30) return null;
       day1FwdEye.set(pp.x, pp.y + 1.6, pp.z); day1FwdAt.set(s.x, gy + 1.2, s.z);
@@ -48742,6 +48916,37 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     const FP_BLADE_DIP = { x: 0.07, y: -0.13, z: -0.03 };
     let fpBladeDip = 0;
     const FP_HIP_HAND_GUNS = { pistol: 1, revolver: 1, uzi: 1 };
+    // GB-245 (Claude, 2026-10-29: option (b)). Every long gun's first-person mount dropped his hands out of the frame
+    // for the whole reload (0 glove pixels mid-reload). In first person a reload now lifts the gun in toward his eye
+    // as it goes, so the firing hand stays on the grip in view and the support hand works the magazine where he can
+    // see it; the cant he already had turns the magwell up toward the camera. Torso space, metres, on top of the hip
+    // carry. fpReloadLiftW is the reload's own envelope (updateReloadAnim): 0 whenever he is not reloading, so the
+    // rest hold and the aimed hold are untouched.
+    // GB-245: first-person reload framing. up/in/side move the gun in camera space (m), tip dips the muzzle (rad), turn is how much of
+    // the reload's own mount tilt (GB-233's reloadMountOff.rx) first person keeps, cant how much of its roll, hip the carry (off).
+    // turn 0 is the finding: that tilt is what dropped the firing hand out of frame (0 glove px mid-reload); with it off the glove holds
+    // the grip the whole reload (per-hand px, qa/2026-10-29-GB-245 rfocus2-rfocus5). Third person keeps the tilt untouched.
+    const FP_RELOAD_LIFT = { up: 0.02, in: 0.04, side: 0, tip: 0, turn: 0, cant: 0.4, hip: 0 };
+    // The two that read only a sliver of glove at cant 0.4 (aa12 ~970 px, launcher ~1.2k) carry a little more lift and cant.
+    // The uzi has no sh block (it rides the hip path), so the shoulder lift never reached it and it read 0 glove px in every
+    // frame of every sweep, at rest included. It takes the hip path's own side/up/fwd and the reload's own tip instead: up 0.19
+    // and tip -0.6 measured its strongest firing hand (40k px from u0.25 through u0.85, qa/2026-10-29-GB-245 rfocus12 row g3).
+    // GB-245 part 2 (Claude's ruling (a)): at the base lift the rifles sat at the frame's left edge with the magwell below it, so the
+    // support hand read 0 px from u0.10 to u0.70, the seat included. side carries the gun in toward the middle and tip dips the muzzle,
+    // which brings the well up: m4 R 30-44k all reload, L 9-45k except u0.22-0.40 (the pouch trip); ak R 18-28k, L 23-46k except
+    // u0.22-0.40 (seat3 row g2, seat4 row g3). The aa12's drum hides the palm under it at any framing that keeps the firing hand
+    // (seat5, seat6): it takes the row with the strongest firing hand, R 10-24k, its palm a sliver at the seat (0.7-3.7k).
+    const FP_RELOAD_LIFT_GUN = { m4: { up: 0.10, side: 0.10, tip: -0.25 }, ak: { up: 0.08, side: 0.12, tip: -0.30 },
+      aa12: { up: 0.12, side: 0.12, tip: -0.25 }, launcher: { up: 0.06, cant: 0.6 }, uzi: { up: 0.19, tip: -0.6 } };
+    const _fpRlOut = { up: 0, in: 0, side: 0, fwd: 0, tip: 0, turn: 0, cant: 0, hip: 0 };
+    function fpReloadSet() {   // GB-245: the live reload framing for the gun in hand
+      const o = _fpRlOut, b = FP_RELOAD_LIFT, g = FP_RELOAD_LIFT_GUN[currentWeapon];
+      o.up = b.up; o.in = b.in; o.side = b.side; o.fwd = b.fwd; o.tip = b.tip; o.turn = b.turn; o.cant = b.cant; o.hip = b.hip;   // fwd reset every call: a per-gun fwd must not leak to the next gun
+      if (g) for (const k in g) if (g[k] != null) o[k] = g[k];
+      return o;
+    }
+    const _rlBasis = { p: null };
+    let fpReloadLiftW = 0;
     const FP_HAND_REACH = 0.55, _fpReachV = new THREE.Vector3();   // the gun arm's reach to its grip (IK_UPPER + the hand point, 0.566, less a little)
     // GB-224: the heavies hang lower (the minigun on its sling, the saw by its handles): only a sliver showed at 0.2.
     const FP_LIFT_GUN = { minigun: 0.4, chainsaw: 0.38 };   // GB-225: 0.32/0.30 still showed only the tips
@@ -48817,6 +49022,14 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         S.pocket[2] + (S.adsPocket[2] - S.pocket[2]) * a);
       if (viewFirst && OTS.w > 0) { const hw = OTS.w * (1 - weld); P.x += FP_HIP.x * hw; P.y += FP_HIP.y * hw; P.z += FP_HIP.z * hw; }   // CL-260: the first-person hip carry
       if (viewFirst && OTS.w > 0 && fpBladeDip > 0) { const bw = OTS.w * fpBladeDip; P.x += FP_BLADE_DIP.x * bw; P.y += FP_BLADE_DIP.y * bw; P.z += FP_BLADE_DIP.z * bw; }   // CL-269: out of the blade's way
+      if (viewFirst && fpReloadLiftW > 0) {   // GB-245: the reload lifts the hold into his view, in camera space so it is the same raise for every gun
+        const rw = fpReloadLiftW, rls = fpReloadSet();
+        if (!_rlBasis.p) _rlBasis.p = new THREE.Vector3();
+        const e = camera.matrixWorld.elements;
+        P.x += (e[0] * rls.side + e[4] * rls.up + e[8] * rls.in) * rw;
+        P.y += (e[5] * rls.up + e[9] * rls.in) * rw;
+        P.z += (e[2] * rls.side + e[6] * rls.up + e[10] * rls.in) * rw;
+      }
       P.y += walkBob * 0.25;
       P.z += bodyRecoil.gripR * 0.5;
       P.x += gunLag.x * 0.6; P.y += gunLag.y * 0.6; P.z += gunLag.z * 0.6;   // CL-133: the gun's inertia (less: the butt is in the shoulder)
@@ -48848,7 +49061,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const fx = f.x, fy = f.y, fz = f.z;
       _shAimDbg.f.set(fx, fy, fz).normalize(); _shAimDbg.t.copy(target);   // GB-188: what it aimed at (getShoulderDbg)
       // Reload tilt and recoil kick in the gun's frame, about the butt.
-      _hE.set(reloadMountOff.rx + recoilKick.rx, reloadMountOff.ry + recoilKick.ry, reloadMountOff.rz + recoilKick.rz);
+      const _rls = fpReloadSet();
+      const rlT = viewFirst ? 1 + (_rls.turn - 1) * fpReloadLiftW : 1;   // GB-245: first person keeps this much of the reload's tilt
+      const rlTip = viewFirst ? _rls.tip * fpReloadLiftW : 0;   // GB-245: the muzzle dips, which brings the grip and the magwell up to him
+      const rlCant = viewFirst ? 1 + (_rls.cant - 1) * fpReloadLiftW : 1;   // GB-245: the roll, tunable
+      _hE.set(reloadMountOff.rx * rlT + rlTip + recoilKick.rx, reloadMountOff.ry * rlT + recoilKick.ry, reloadMountOff.rz * rlT * rlCant + recoilKick.rz);
       _hq.gun.multiply(_hq.a.setFromEuler(_hE));
       const origin = _hv.origin.copy(butt).multiplyScalar(-s).applyQuaternion(_hq.gun).add(P);
       origin.x += fx * recoilKick.z; origin.y += fy * recoilKick.z; origin.z += fz * recoilKick.z; // negative = back into the shoulder
@@ -49081,12 +49298,19 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       // GB-145: akimbo reloads one gun at a time, each down to its own pouch (akimboReloadAnchor); was one shared dip.
       const reloadU = reloading ? _clamp01(1 - reloadTimer / Math.max(0.05, reloadAnimDuration || 1)) : 0;
       const dipR = aki && reloading ? akimboReloadDip(reloadU, 0) : 0, dipL = aki && reloading ? akimboReloadDip(reloadU, 1) : 0;
-      if (H.sh && !aki && !vault) holdShoulderGun(ud, gun, H, k);   // GB-129
+      // GB-245: in first person a reload brings the gun forward off the shoulder onto the carry the handguns use, so
+      // the grip, the magwell and both hands stay in his view; the shoulder itself is unchanged at rest and aimed.
+      const fpReloadHipW = viewFirst && reloading && fpReloadSet().hip ? Math.min(1, fpReloadLiftW * 4) : 0;
+      if (H.sh && !aki && !vault && fpReloadHipW < 0.5) holdShoulderGun(ud, gun, H, k);   // GB-129
       else {
         const off = _hv.origin.set(holdX, H.hold[1], H.hold[2]).applyAxisAngle(_AXIS_X, -pitch * 0.7);
         if (viewFirst && OTS.w > 0) off.y += (FP_LIFT_GUN[currentWeapon] != null && !aki ? FP_LIFT_GUN[currentWeapon] * FP_LIFT / 0.2 : FP_LIFT) * OTS.w;   // CL-250: up at the ready in first person (GB-224: the heavies more)
         if (viewFirst && OTS.w > 0 && !aki && FP_HEAVY_HIP[currentWeapon]) { const hh = FP_HEAVY_HIP[currentWeapon], hw = OTS.w * (1 - fpAdsW * fpAdsW * (3 - 2 * fpAdsW)); off.x += hh.x * hw; off.y += hh.y * hw; off.z += hh.z * hw; }   // GB-233 r5
         if (viewFirst && OTS.w > 0 && !aki && FP_HIP_HAND_GUNS[currentWeapon]) { const hw = OTS.w * (1 - fpAdsW * fpAdsW * (3 - 2 * fpAdsW)); off.x += FP_HIP_HAND.x * hw; off.y += FP_HIP_HAND.y * hw; off.z += FP_HIP_HAND.z * hw; }   // CL-260: the first-person hip carry
+        // GB-245: the reload lifts the hands into view. This path is torso space (+x the gun side, +y up, +z forward), so a gun
+        // that never takes the shoulder path (the uzi has no sh block) can carry a reload-only side/up/fwd of its own; an
+        // undefined read adds nothing, so every gun without them moves exactly as it did before.
+        if (viewFirst && OTS.w > 0 && !aki && fpReloadLiftW > 0) { const rl = fpReloadSet(), rw = fpReloadLiftW; off.x += (rl.side || 0) * rw; off.y += (rl.up || 0) * rw; off.z += (rl.fwd || 0) * rw; }
         if (viewFirst && OTS.w > 0 && !aki && fpBladeDip > 0) { const bw = OTS.w * fpBladeDip; off.x += FP_BLADE_DIP.x * bw; off.y += FP_BLADE_DIP.y * bw; off.z += FP_BLADE_DIP.z * bw; }   // CL-269: out of the blade's way
         if (aki && akimboRetreat > 0.001) off.z += akimboRetreat * AKIMBO_CARRY.retreatReach;   // CL-189: backing off, out at it
         if (carry > 0.001) off.lerp(_akAt.set(AKIMBO_CARRY.at[0], AKIMBO_CARRY.at[1], AKIMBO_CARRY.at[2]), carry);   // CL-188: up by his collarbone
@@ -49137,7 +49361,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
             f.copy(nf).normalize();
           }
           // Reload tilt and recoil kick, in the gun's own frame (the old mount's offsets).
-          _hE.set(reloadMountOff.rx - 0.5 * dipR + recoilKick.rx * mainKick, reloadMountOff.ry + recoilKick.ry * mainKick, reloadMountOff.rz + recoilKick.rz * mainKick);
+          // GB-245: the reload's own muzzle-down tip turns the grip about the anchor, which lifts a magwell that sits under the
+          // grip (the uzi's magazine is in the grip) up to his eye without asking the arm for more reach. tip is 0 unless a
+          // gun's entry sets it, so every other gun's orientation is unchanged.
+          const _rlt = viewFirst && fpReloadLiftW > 0 ? (fpReloadSet().tip || 0) * fpReloadLiftW : 0;
+          _hE.set(reloadMountOff.rx + _rlt - 0.5 * dipR + recoilKick.rx * mainKick, reloadMountOff.ry + recoilKick.ry * mainKick, reloadMountOff.rz + recoilKick.rz * mainKick);
           _hq.gun.multiply(_hq.a.setFromEuler(_hE));
         };
         aimGun();
@@ -56123,17 +56351,24 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
             // spider hold where every round he fired hit the corner (224 rounds, no kill).
             const lx = -(tz - zz), lz = tx - zx, ll = zHyp(lx, lz) || 1, ox = lx / ll * 0.45, oz = lz / ll * 0.45;
             const fy = z.mesh.position.y + (z.hitH || 1) * 0.5, gy = tyy + 1.3;
+            const hadLine = z.lineClear;
             z.lineClear = !shotBlocked({ x: zx + ox, y: fy, z: zz + oz }, { x: tx + ox, y: gy, z: tz + oz }) &&
               !shotBlocked({ x: zx - ox, y: fy, z: zz - oz }, { x: tx - ox, y: gy, z: tz - oz });
-            if (!z.lineClear) z.lineGo = 1.2;
+            if (!z.lineClear) { z.lineSawBlock = true; z.lineGo = 1.2; }
+            else if (hadLine === false && z.lineSawBlock) z.lineGo = 1.2;
           }
-          // Backing off too only with a line: backing off blind took it out past `near`, walking
-          // in blind brought it back, and it rocked there (spiders lost at 6 to 8 m, played through).
-          // Straight away from him, not back along the flow field: reversing the field's
-          // heading at a corner took it back round the corner it had just come round.
-          if (dist < near && z.lineClear !== false) { sx = -nx; sz = -nz; spd = z.baseSpeed * 0.85; }
-          else if (dist < hold && z.lineClear !== false && !(z.lineGo > 0)) {
-            if (z.spider) { z.strafeT = (z.strafeT || 0) - dt; if (z.strafeT <= 0) { z.strafeT = 1.2 + Math.random(); z.strafeDir = Math.random() < 0.5 ? -1 : 1; } const d0 = z.strafeDir || 1; sx = -nz * d0; sz = nx * d0; spd = z.baseSpeed * 0.6; }
+          // GP-19979: once a blocked hunter wins a firing line, commit straight into
+          // it for lineGo, then hold that spot. A back-off or random skitter at the
+          // corner put it behind the house again; an open-field spider still strafes.
+          // If a push or a moving target blocks the line later, the ordinary chase
+          // resumes until the two offset lines are clear again.
+          if (dist < hold && z.lineSawBlock && z.lineClear !== false && z.lineGo > 0) {
+            sx = nx; sz = nz; spd = Math.min(spd, z.baseSpeed * 0.55);
+          } else if (dist < near && z.lineClear !== false) {
+            if (z.lineSawBlock) spd = 0;
+            else { sx = -nx; sz = -nz; spd = z.baseSpeed * 0.85; }
+          } else if (dist < hold && z.lineClear !== false && !(z.lineGo > 0)) {
+            if (z.spider && !z.lineSawBlock) { z.strafeT = (z.strafeT || 0) - dt; if (z.strafeT <= 0) { z.strafeT = 1.2 + Math.random(); z.strafeDir = Math.random() < 0.5 ? -1 : 1; } const d0 = z.strafeDir || 1; sx = -nz * d0; sz = nx * d0; spd = z.baseSpeed * 0.6; }
             else spd = 0;
           }
           if (z.spider) {
@@ -56997,6 +57232,16 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           if (!z.farLod && ud.legLG && !parts.legL && ud.legLG.userData.shinG) ud.legLG.userData.shinG.rotation.x += 0.35 * snap;
         } else if (ud.hips && ud.hips.position.z) ud.hips.position.z *= Math.max(0, 1 - 10 * dt);
 
+        if (false) {} else if (ud.torso && rest && z.attackWindup <= 0 && !(z.swingT > 0) && !(z.slamWind > 0)) {
+          ud.torso.rotation.x = (rest.torsoRX || 0) + gaitLean;
+          ud.torso.rotation.z = (rest.torsoRZ || 0) + gaitSway;
+          ud.torso.rotation.y = (rest.torsoRY || 0) + gaitTwist;
+          // (a screaming screamer, or a spitter winding up, owns its head this frame)
+          if (ud.head && !parts.head && !(z.screamT > 0) && !(z.spitWind > 0 || z.spitSnap > 0)) {
+            ud.head.rotation.x = (rest.headRX || 0) + headBob;
+            ud.head.rotation.z = (rest.headRZ || 0) + headLoll;
+          }
+        }
         if (z.hitReact > 0) {
           z.hitReact = Math.max(0, z.hitReact - dt);
           const t = z.hitReact / 0.35;
@@ -57024,17 +57269,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
             if (leg && !lost) { leg.rotation.x -= 0.35 * k; if (leg.userData.shinG) leg.userData.shinG.rotation.x += 1.45 * k; }
             if (ud.hips) { ud.hips.position.y -= 0.22 * k; ud.hips.rotation.z += (part === 'legL' ? 1 : -1) * 0.16 * k; }
             if (ud.torso) ud.torso.rotation.x += 0.2 * k;
-          } else if (ud.torso) { ud.torso.rotation.y += -side * 0.7 * k; ud.torso.rotation.x -= 0.12 * k; ud.torso.rotation.z += side * 0.15 * k; }
-        }
-        if (false) {} else if (ud.torso && rest && z.attackWindup <= 0 && !(z.swingT > 0) && !(z.slamWind > 0)) {
-          ud.torso.rotation.x = (rest.torsoRX || 0) + gaitLean;
-          ud.torso.rotation.z = (rest.torsoRZ || 0) + gaitSway;
-          ud.torso.rotation.y = (rest.torsoRY || 0) + gaitTwist;
-          // (a screaming screamer, or a spitter winding up, owns its head this frame)
-          if (ud.head && !parts.head && !(z.screamT > 0) && !(z.spitWind > 0 || z.spitSnap > 0)) {
-            ud.head.rotation.x = (rest.headRX || 0) + headBob;
-            ud.head.rotation.z = (rest.headRZ || 0) + headLoll;
-          }
+          } else if (ud.torso) { const twist = kind === 'colossus' ? 0.32 : 0.7; ud.torso.rotation.y += -side * twist * k; ud.torso.rotation.x -= 0.12 * k; ud.torso.rotation.z += side * 0.15 * k; }
         }
         // Clawing up out of the ground: arms reach for the sky, head back, until the
         // body is fully up.
@@ -60433,7 +60668,7 @@ live++;
           setWeapon, getCurrentWeapon: () => currentWeapon,
           // Debug-only: economy hooks. grantAllWeapons hands over the arsenal so the older
           // weapon probes keep working; the rest let probes drive the kiosk directly.
-          grantAllWeapons, KIOSK, openShop, closeShop, buyWeapon, buyAmmo, buyGear, buyBuild, skullValueDbg: () => skullValueTotal, siegeNightDbg: () => siegeNightNow, LATE_CASH_NIGHT, LATE_CASH_FACTOR, LATE_CASH_STEP, lateCashMul, buyExtMag, buyHeavyBarrel, fitWeaponMod, weaponMods, HEAVY_BARREL_PRICE, EXT_MAG_RELOAD_MUL, HEAVY_CLIMB_MUL, HEAVY_SWAP_DUR, HEAVY_MOVE_SPREAD_MUL, recoilClimb, getReloadDbg: () => ({ timer: reloadTimer, anim: reloadAnimDuration, weapon: reloadWeapon }), /* CL-84 */ akimboDbg: { AKIMBO_CARRY, carry: () => akimboCarryW, retreat: () => akimboRetreat },   /* CL-188 */ airDbg: { AIR, pose: () => POSE.airPose, jumpNow: () => { if (!grounded) return false; vy = PHYS.jumpVel; grounded = false; coyoteT = 0; return true; } },   /* CL-210 */ rigSkinDbg: { info: (r) => rigSkinInfo(r || marine), count: () => rigSkinCount(), sync: () => syncRigSkins() },   /* CL-189 */ aoDbg: { AO_DEFAULTS, info: () => marine.userData.aoInfo, bake: (o) => (marine.userData.aoInfo = bakeMarineAO(THREE, marine, { ...marine.userData.ao, ...(o || {}) })) },   /* CL-186 */ zombieFeetDbg: { ZFEET, ZLEAN },   /* CL-187 */ gaitDbg: { GAIT, GAIT_FEEL, GAIT_WEIGHT, UNARMED_ARMS, UNARMED_RUN, WINDED, winded: () => POSE.winded || 0, setWinded: (v) => { POSE.winded = v; }, breaths: () => POSE.breaths || 0, pose: () => POSE, clips: () => MARINE_GAIT, w: () => POSE.gaitW || 0, run: () => POSE.gaitRun || 0, sample: (u, r) => { const g = marineGait(u, r); return g && { ...g }; } },   /* CL-84 */ smoothDbg: { MOVE_FEEL, GUN_LAG, xfade: () => XFADE, gunLag: () => gunLag, wish: () => ({ x: wishVX, z: wishVZ }), vel: () => ({ x: velX, z: velZ, y: vy }), lookY: () => camLookYS, pose: () => POSE, phase: () => walkPhase, lerpK: _lerpK, decayK: _decayK },   /* CL-133 */ handsDbg: { HANDS, roll: () => ({ r: handRollR, l: handRollL }), WRIST, HAND_R: _HAND_R, HAND_L: _HAND_L, wrist: () => ({ r: wristTurnR, l: wristTurnL, needR: wristNeedR, needL: wristNeedL }), gripPoint: (side, out = new THREE.Vector3()) => side === 'L' ? fistPointW(marine.userData.elbowLG, _HAND_L, gripAL, out) : fistPointW(marine.userData.elbowRG, _HAND_R, gripAR, out), gripA: () => ({ r: gripAR, l: gripAL }),   /* CU-100: where each hand closes now (the hand point while it isn't holding) */ knife: () => ({ u: knifeArmU, clip: KNIFE_CLIP, chop: MACHETE_CLIP, dur: knifeSwingDur, places: _kp }), FP_BLADE_PATH, FP_BLADE_AIM, FP_BLADE_DIP, fpBladeDip: () => fpBladeDip, BLADE_BODY, bladeTwist: (u, h) => bladeTwist(u, h),   /* CL-261 */ knifeHold: (u) => { knifeHoldU = u == null ? null : _clamp01(u); if (u != null) { knifeSwingDur = bladeSwingDur(); knifeAnimT = knifeSwingDur * (1 - knifeHoldU) || 0.0001; } }, drawHold: (t) => { drawHoldT = t == null ? null : Math.max(0, t); }, knifeClip: (on) => { if (!on) { _kc = KNIFE_CLIP || _kc; KNIFE_CLIP = null; } else if (_kc) KNIFE_CLIP = _kc; }, drawPlace, gripDownDir, foreChannelDir },   /* CL-122 */ reloadClipDbg: { clip: () => RELOAD_CLIP, places: () => _rlP, hold: (u) => { reloadHoldU = u == null ? null : _clamp01(u); if (reloading && u != null) reloadTimer = Math.max(0.001, (reloadAnimDuration || 1) * (1 - reloadHoldU)); }, mag: () => (RELOAD_CLIP ? Studio.magAt(RELOAD_CLIP, _clamp01(1 - reloadTimer / Math.max(0.05, reloadAnimDuration || 1))) : null) }, getSwapDbg: () => ({ swapT, swapDur, fireCooldown }), setSprayDbg: (h, n) => { sprayHeat = h; sprayShot = n | 0; sprayWeapon = currentWeapon; }, setVelDbg: (x, z) => { velX = x; velZ = z; }, resetEconomyDbg: () => resetEconomy(), WEAPON_ORDER, buySuppressor, SUPPRESSOR_PRICE, SHOT_HEARING, SUPPRESSED_HEARING_MUL, SUPPRESSED_DAMAGE_MUL, shotHearingRadius, suppressedDamageMul, heardShotDbg: () => ({ shotsHeard, lastShotNoise }), buyPistolAuto, PISTOL_AUTO_PRICE, toggleFireMode, toggleHolster, isUnarmed: () => unarmed, setSpareMags, handInGun, takeOutGun, spareMagCount: (w) => (magazineStore[w] && magazineStore[w].spare ? magazineStore[w].spare.length : 0), magazinesDbg: (w) => (magazineStore[w] ? magazineSnapshot(magazineStore, w) : null), setMagazinesDbg: (w, loaded, spare, loaded2 = null) => { const e = magazineStore[w]; if (!e) return false; e.loaded[0].rounds = Math.min(e.size, loaded | 0); if (loaded2 != null && e.loaded[1]) e.loaded[1].rounds = Math.min(e.size, loaded2 | 0); e.spare = spare.slice(0, e.maxSpare).map((r) => ({ rounds: Math.min(e.size, r | 0), size: e.size })); syncMagazine(w); updateAmmoHud(); return true; }, reloadGainsMagazine, toggleDualWieldDbg: () => toggleDualWield(), setDualOwnedDbg: (w, on = true) => { dualOwned[w] = !!on; if (on && isMagazineWeapon(w) && magazineStore[w]) { issueSecondGun(magazineStore, w); syncMagazine(w); } return !!dualOwned[w]; },   /* CL-188 */   /* GB-137 */ stepFireDbg: (dt) => tryFire(dt), recoilSpan, GEAR, WEAPON_PRICE, AMMO_PACK, caliberOf, RESERVE_CAP, RESERVE_CAP_BASE, SPARE_CAP_MULT, START_RESERVE_45, reserveCap, BUILD_UNLOCK_PRICE,
+          grantAllWeapons, KIOSK, openShop, closeShop, buyWeapon, buyAmmo, buyGear, buyBuild, skullValueDbg: () => skullValueTotal, siegeNightDbg: () => siegeNightNow, LATE_CASH_NIGHT, LATE_CASH_FACTOR, LATE_CASH_STEP, lateCashMul, buyExtMag, buyHeavyBarrel, fitWeaponMod, weaponMods, HEAVY_BARREL_PRICE, EXT_MAG_RELOAD_MUL, HEAVY_CLIMB_MUL, HEAVY_SWAP_DUR, HEAVY_MOVE_SPREAD_MUL, recoilClimb, getReloadDbg: () => ({ timer: reloadTimer, anim: reloadAnimDuration, weapon: reloadWeapon }), /* CL-84 */ akimboDbg: { AKIMBO_CARRY, carry: () => akimboCarryW, retreat: () => akimboRetreat },   /* CL-188 */ airDbg: { AIR, pose: () => POSE.airPose, jumpNow: () => { if (!grounded) return false; vy = PHYS.jumpVel; grounded = false; coyoteT = 0; return true; } },   /* CL-210 */ rigSkinDbg: { info: (r) => rigSkinInfo(r || marine), count: () => rigSkinCount(), sync: () => syncRigSkins() },   /* CL-189 */ aoDbg: { AO_DEFAULTS, info: () => marine.userData.aoInfo, bake: (o) => (marine.userData.aoInfo = bakeMarineAO(THREE, marine, { ...marine.userData.ao, ...(o || {}) })) },   /* CL-186 */ zombieFeetDbg: { ZFEET, ZLEAN },   /* CL-187 */ gaitDbg: { GAIT, GAIT_FEEL, GAIT_WEIGHT, UNARMED_ARMS, UNARMED_RUN, WINDED, winded: () => POSE.winded || 0, setWinded: (v) => { POSE.winded = v; }, breaths: () => POSE.breaths || 0, pose: () => POSE, clips: () => MARINE_GAIT, w: () => POSE.gaitW || 0, run: () => POSE.gaitRun || 0, sample: (u, r) => { const g = marineGait(u, r); return g && { ...g }; } },   /* CL-84 */ smoothDbg: { MOVE_FEEL, GUN_LAG, xfade: () => XFADE, gunLag: () => gunLag, wish: () => ({ x: wishVX, z: wishVZ }), vel: () => ({ x: velX, z: velZ, y: vy }), lookY: () => camLookYS, pose: () => POSE, phase: () => walkPhase, lerpK: _lerpK, decayK: _decayK },   /* CL-133 */ handsDbg: { HANDS, roll: () => ({ r: handRollR, l: handRollL }), WRIST, HAND_R: _HAND_R, HAND_L: _HAND_L, wrist: () => ({ r: wristTurnR, l: wristTurnL, needR: wristNeedR, needL: wristNeedL }), gripPoint: (side, out = new THREE.Vector3()) => side === 'L' ? fistPointW(marine.userData.elbowLG, _HAND_L, gripAL, out) : fistPointW(marine.userData.elbowRG, _HAND_R, gripAR, out), gripA: () => ({ r: gripAR, l: gripAL }),   /* CU-100: where each hand closes now (the hand point while it isn't holding) */ knife: () => ({ u: knifeArmU, clip: KNIFE_CLIP, chop: MACHETE_CLIP, dur: knifeSwingDur, places: _kp }), FP_BLADE_PATH, FP_BLADE_AIM, FP_BLADE_DIP, fpBladeDip: () => fpBladeDip, BLADE_BODY, bladeTwist: (u, h) => bladeTwist(u, h),   /* CL-261 */ knifeHold: (u) => { knifeHoldU = u == null ? null : _clamp01(u); if (u != null) { knifeSwingDur = bladeSwingDur(); knifeAnimT = knifeSwingDur * (1 - knifeHoldU) || 0.0001; } }, drawHold: (t) => { drawHoldT = t == null ? null : Math.max(0, t); }, knifeClip: (on) => { if (!on) { _kc = KNIFE_CLIP || _kc; KNIFE_CLIP = null; } else if (_kc) KNIFE_CLIP = _kc; }, drawPlace, gripDownDir, foreChannelDir },   /* CL-122 */ fpReloadLiftDbg: () => FP_RELOAD_LIFT, fpReloadLiftGunDbg: () => FP_RELOAD_LIFT_GUN, fpReloadSetDbg: () => ({ ...fpReloadSet() }),   /* GB-245 */ reloadClipDbg: { clip: () => RELOAD_CLIP, places: () => _rlP, hold: (u) => { reloadHoldU = u == null ? null : _clamp01(u); if (reloading && u != null) reloadTimer = Math.max(0.001, (reloadAnimDuration || 1) * (1 - reloadHoldU)); }, mag: () => (RELOAD_CLIP ? Studio.magAt(RELOAD_CLIP, _clamp01(1 - reloadTimer / Math.max(0.05, reloadAnimDuration || 1))) : null) }, getSwapDbg: () => ({ swapT, swapDur, fireCooldown }), setSprayDbg: (h, n) => { sprayHeat = h; sprayShot = n | 0; sprayWeapon = currentWeapon; }, setVelDbg: (x, z) => { velX = x; velZ = z; }, resetEconomyDbg: () => resetEconomy(), WEAPON_ORDER, buySuppressor, SUPPRESSOR_PRICE, SHOT_HEARING, SUPPRESSED_HEARING_MUL, SUPPRESSED_DAMAGE_MUL, shotHearingRadius, suppressedDamageMul, heardShotDbg: () => ({ shotsHeard, lastShotNoise }), buyPistolAuto, PISTOL_AUTO_PRICE, toggleFireMode, toggleHolster, isUnarmed: () => unarmed, setSpareMags, handInGun, takeOutGun, spareMagCount: (w) => (magazineStore[w] && magazineStore[w].spare ? magazineStore[w].spare.length : 0), magazinesDbg: (w) => (magazineStore[w] ? magazineSnapshot(magazineStore, w) : null), setMagazinesDbg: (w, loaded, spare, loaded2 = null) => { const e = magazineStore[w]; if (!e) return false; e.loaded[0].rounds = Math.min(e.size, loaded | 0); if (loaded2 != null && e.loaded[1]) e.loaded[1].rounds = Math.min(e.size, loaded2 | 0); e.spare = spare.slice(0, e.maxSpare).map((r) => ({ rounds: Math.min(e.size, r | 0), size: e.size })); syncMagazine(w); updateAmmoHud(); return true; }, reloadGainsMagazine, toggleDualWieldDbg: () => toggleDualWield(), setDualOwnedDbg: (w, on = true) => { dualOwned[w] = !!on; if (on && isMagazineWeapon(w) && magazineStore[w]) { issueSecondGun(magazineStore, w); syncMagazine(w); } return !!dualOwned[w]; },   /* CL-188 */   /* GB-137 */ stepFireDbg: (dt) => tryFire(dt), recoilSpan, GEAR, WEAPON_PRICE, AMMO_PACK, caliberOf, RESERVE_CAP, RESERVE_CAP_BASE, SPARE_CAP_MULT, START_RESERVE_45, reserveCap, BUILD_UNLOCK_PRICE,
           getWeaponOwned: () => weaponOwned, getReserve: () => reserveAmmo, getGearOwned: () => gearOwned, getBuildUnlocked: () => buildUnlocked,
           getAmmo: () => ammoByWeapon, getPhase: () => phase, setPhase: (p) => { phase = p; }, isShopOpen: () => shopOpen, getSawFuel: () => sawFuel, sawStartDbg: () => ({ ...sawStart, ...sawStartPose(sawStart) }),
           // Debug-only: survival-rules hooks (health cap, medkits, cash decay, self-damage).
@@ -61018,7 +61253,23 @@ live++;
         for (const w of Object.keys(CASING_WEAPONS || {})) { try { spawnCasing(w); } catch (e) {} }
         try { spawnShotgunShell(); } catch (e) {}
         try { spawnDroppedMag(); } catch (e) {}
-        try { spawnGroundFire(px + 2, pz + 2); } catch (e) {}
+        try {
+          // CL-245: the ground-fire disc is a transparent double-sided additive MeshBasicMaterial. Three draws the
+          // back face as its own pipeline. The disc is created after the scene-wide uncull, so a warm camera that
+          // is not looking at it never compiles that pass, and the first real fire pays for it mid-night.
+          const fire = spawnGroundFire(px + 2, pz + 2);
+          let root = fire && fire.mesh;
+          if (!root) {
+            root = new THREE.Group();
+            const d = new THREE.Mesh(groundFireDiscGeo, groundFireBedMat());
+            d.rotation.x = -Math.PI / 2; d.position.y = 0.04;
+            root.add(d); root.add(makeFireTongues(5, 0.8, 1.2));
+            root.position.set(px, sampleHeight(px, pz) + 1, pz);
+            scene.add(root);
+            _warmNightFx.push(() => { scene.remove(root); });
+          }
+          showToCompiler(root);
+        } catch (e) {}
         try { if (!_warmAbilityRestore) _warmAbilityRestore = enemyAbilities.primeVisuals(px, sampleHeight(px, pz) + 2, pz + 5); } catch (e) { console.info('Grave Shift: ability warm-up skipped.', e); }
         try {
           const glob = acquireAcidGlob(acidGlobMat);

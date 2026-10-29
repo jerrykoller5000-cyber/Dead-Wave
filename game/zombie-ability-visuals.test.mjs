@@ -65,6 +65,21 @@ test('a 48-body mixed crowd adds at most 36 idle ability draws', () => {
   assert(draws <= 36, `extra crowd draw budget exceeded: ${draws}`);
 });
 
+test('new demon flames are on both palms before the first animation tick', () => {
+  const { z, rig, scale } = zombie('demon', 1.15);
+  z.mesh.position.set(8, 2, -4);
+  z.mesh.rotation.y = 1.2;
+  z.mesh.updateMatrixWorld(true);
+  for (let i = 0; i < 2; i++) {
+    const instance = new THREE.Matrix4();
+    rig.flameBatch.getMatrixAt(i, instance);
+    const actual = new THREE.Vector3().setFromMatrixPosition(instance.premultiply(z.mesh.matrixWorld));
+    const expected = new THREE.Vector3(0, -.354 * scale, .02 * scale);
+    rig.elbows[i].localToWorld(expected);
+    pointNear(actual, expected, 1e-6);
+  }
+});
+
 test('flame fists use a single transparent pass and stay attached while casting', () => {
   const { z, rig, scale } = zombie('demon', 1.15);
   z.mesh.position.set(8, 2, -4); z.mesh.rotation.set(.13, 1.2, -.05);

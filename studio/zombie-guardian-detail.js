@@ -45,6 +45,13 @@ export function sculptGuardian(A,T,g,kind){
   egg(R.chest,shadow,0,-.235,.26,.58,.20,.58);
   egg(R.chest,skin,0,.205,.27,1.31,.38,.53);
   egg(R.neck,tendon,0,-.015,.21,.36,.31,.54);
+  // Seat the rear jaw basket against the throat without filling the open maw.
+  // These neck-local roots remain behind the hinged jaw as it opens.
+  for(const side of [-1,1]){
+    egg(R.neck,cave?tendon:skin,side*.13,-.16,.41,.18,.26,.30,side*.12);
+    path(R.neck,cave?edge:plate,[[side*.16,-.29,.32],[side*.18,-.20,.47],
+      [side*.17,-.10,.56]],.047,.020);
+  }
   // The quadruped pose exposes the underside: an inset sternum breaks up the old ball.
   rock(R.chest,cave?plate:edge,0,-.325,.29,.23,.15,.58,.04);
   for(const p of [R.spine1,R.spine2])for(const side of [-1,1]){
@@ -64,12 +71,14 @@ export function sculptGuardian(A,T,g,kind){
         [side*.42,-.19,z+.072],[side*.26,-.31,z+.035]],cave?.033:.038);
     }
     if(cave){
-      cords(R.chest,side*.20,.30,.55,.72,3,.035,side);
+      // The caveguard's front splinters root into the chest instead of
+      // standing ahead of its sternum in the walking side profile.
+      cords(R.chest,side*.20,.30,.47,.60,3,.035,side);
       path(R.chest,skin,[[side*.08,.36,-.12],[side*.38,.19,-.05],
         [side*.43,-.08,.02],[side*.29,-.37,.16]],.056);
       rock(R.chest,plate,side*.26,.34,.31,.39,.24,.45,side*.32);
-      rock(R.chest,edge,side*.40,-.02,.47,.31,.39,.16,-side*.19);
-      rock(R.chest,plate,side*.24,-.16,.52,.26,.30,.16,side*.41);
+      rock(R.chest,edge,side*.40,-.02,.43,.31,.39,.16,-side*.19);
+      rock(R.chest,plate,side*.24,-.16,.45,.26,.30,.16,side*.41);
       rock(R.chest,plate,side*.27,-.235,.22,.32,.23,.43,side*.24);
       rock(R.chest,edge,side*.20,-.30,.025,.25,.16,.29,-side*.18);
       path(R.chest,tendon,[[side*.08,-.36,.05],[side*.23,-.33,.23],

@@ -1,0 +1,1681 @@
+{
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "frames": [
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/brute/brute-idle-f00.jpg",
+      "phase": "idle",
+      "n": 0,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0,
+        "hipsY": 1.1369399732431125,
+        "armL": -0.14,
+        "armR": -0.14
+      },
+      "subject": {
+        "id": "zombie.brute",
+        "name": "Brute",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999908044412702,
+          "y": -198.7846607979506,
+          "z": -631.9783635214947
+        },
+        "size": {
+          "x": 1.8024066154137905,
+          "y": 2.469576770780378,
+          "z": 0.905116800046585
+        },
+        "yaw": 0.00425,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5944,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -24.009713322266187,
+        "y": -197.6712759902701,
+        "z": -625.1344815566022,
+        "tx": -27.999908044412702,
+        "ty": -198.7846607979506,
+        "tz": -631.9783635214947,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/brute/brute-attack-f01.jpg",
+      "phase": "attack",
+      "n": 1,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.20333333333333334,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.007575757575757569,
+        "hipsY": 1.1423680748938712,
+        "armL": -1.4333333333333333,
+        "armR": -1.4333333333333333
+      },
+      "subject": {
+        "id": "zombie.brute",
+        "name": "Brute",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99985326567912,
+          "y": -198.7846607979506,
+          "z": -631.9711135329532
+        },
+        "size": {
+          "x": 1.834043278606881,
+          "y": 2.4649354284634057,
+          "z": 1.7978290883637555
+        },
+        "yaw": 0.007555555555555555,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5944,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.987057552486334,
+        "y": -197.6712759902701,
+        "z": -625.1404587448521,
+        "tx": -27.99985326567912,
+        "ty": -198.7846607979506,
+        "tz": -631.9711135329532,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/brute/brute-attack-f02.jpg",
+      "phase": "attack",
+      "n": 2,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.18666666666666668,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.01515151515151515,
+        "hipsY": 1.1430610021299497,
+        "armL": -1.5166666666666668,
+        "armR": -1.5166666666666668
+      },
+      "subject": {
+        "id": "zombie.brute",
+        "name": "Brute",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99976647260885,
+          "y": -198.7846607979506,
+          "z": -631.9637619909038
+        },
+        "size": {
+          "x": 1.870853196819116,
+          "y": 2.4639065749590543,
+          "z": 1.756493218612718
+        },
+        "yaw": 0.011805555555555554,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5944,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.957976804466536,
+        "y": -197.6712759902701,
+        "z": -625.1502232225013,
+        "tx": -27.99976647260885,
+        "ty": -198.7846607979506,
+        "tz": -631.9637619909038,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/brute/brute-attack-f03.jpg",
+      "phase": "attack",
+      "n": 3,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.17,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.02272727272727272,
+        "hipsY": 1.1438244563966706,
+        "armL": -1.6,
+        "armR": -1.6
+      },
+      "subject": {
+        "id": "zombie.brute",
+        "name": "Brute",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999639311321246,
+          "y": -198.7846607979506,
+          "z": -631.9562826357568
+        },
+        "size": {
+          "x": 1.9056851760098148,
+          "y": 2.463254745928708,
+          "z": 1.6916900022400796
+        },
+        "yaw": 0.016999999999999998,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5944,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.922511781911233,
+        "y": -197.6712759902701,
+        "z": -625.163830546934,
+        "tx": -27.999639311321246,
+        "ty": -198.7846607979506,
+        "tz": -631.9562826357568,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/brute/brute-attack-f04.jpg",
+      "phase": "attack",
+      "n": 4,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.15333333333333335,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.0303030303030303,
+        "hipsY": 1.1446523350892992,
+        "armL": -1.6833333333333333,
+        "armR": -1.6833333333333333
+      },
+      "subject": {
+        "id": "zombie.brute",
+        "name": "Brute",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.9994626555231,
+          "y": -198.7846607979506,
+          "z": -631.9486494140315
+        },
+        "size": {
+          "x": 1.9381130966911542,
+          "y": 2.463186005237503,
+          "z": 1.6183076019925693
+        },
+        "yaw": 0.023138888888888886,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5944,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.88071410434641,
+        "y": -197.6712759902701,
+        "z": -625.1813541905167,
+        "tx": -27.9994626555231,
+        "ty": -198.7846607979506,
+        "tz": -631.9486494140315,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/brute/brute-attack-f05.jpg",
+      "phase": "attack",
+      "n": 5,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.1366666666666667,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.03787878787878787,
+        "hipsY": 1.1455398133242178,
+        "armL": -1.7666666666666666,
+        "armR": -1.7666666666666666
+      },
+      "subject": {
+        "id": "zombie.brute",
+        "name": "Brute",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999226460579848,
+          "y": -198.7846607979506,
+          "z": -631.9408365197642
+        },
+        "size": {
+          "x": 1.968759043801949,
+          "y": 2.462618084132828,
+          "z": 1.5791471491126003
+        },
+        "yaw": 0.030222222222222213,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5944,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.832646628226343,
+        "y": -197.6712759902701,
+        "z": -625.202885290299,
+        "tx": -27.999226460579848,
+        "ty": -198.7846607979506,
+        "tz": -631.9408365197642,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/brute/brute-attack-f06.jpg",
+      "phase": "attack",
+      "n": 6,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.12000000000000002,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.04545454545454545,
+        "hipsY": 1.146483122452516,
+        "armL": -1.85,
+        "armR": -1.85
+      },
+      "subject": {
+        "id": "zombie.brute",
+        "name": "Brute",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.998919619539382,
+          "y": -198.7846607979506,
+          "z": -631.932818444383
+        },
+        "size": {
+          "x": 1.9954827719515151,
+          "y": 2.5811119043586075,
+          "z": 1.5217613267137722
+        },
+        "yaw": 0.03824999999999999,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5944,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.778383850366023,
+        "y": -197.6712759902701,
+        "z": -625.2285323458372,
+        "tx": -27.998919619539382,
+        "ty": -198.7846607979506,
+        "tz": -631.932818444383,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/brute/brute-attack-f07.jpg",
+      "phase": "attack",
+      "n": 7,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.10333333333333336,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.05303030303030302,
+        "hipsY": 1.1474793588388572,
+        "armL": -1.9333333333333333,
+        "armR": -1.9333333333333333
+      },
+      "subject": {
+        "id": "zombie.brute",
+        "name": "Brute",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99852982159713,
+          "y": -198.7846607979506,
+          "z": -631.9245700363442
+        },
+        "size": {
+          "x": 2.0176443173059155,
+          "y": 2.698964487276328,
+          "z": 1.45367485975612
+        },
+        "yaw": 0.04722222222222222,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5944,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.718012391808102,
+        "y": -197.6712759902701,
+        "z": -625.2584208628484,
+        "tx": -27.99852982159713,
+        "ty": -198.7846607979506,
+        "tz": -631.9245700363442,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/brute/brute-attack-f08.jpg",
+      "phase": "attack",
+      "n": 8,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.0866666666666667,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.0606060606060606,
+        "hipsY": 1.1485263184920869,
+        "armL": -2.0166666666666666,
+        "armR": -2.0166666666666666
+      },
+      "subject": {
+        "id": "zombie.brute",
+        "name": "Brute",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99804341361526,
+          "y": -198.7846607979506,
+          "z": -631.9160665717872
+        },
+        "size": {
+          "x": 2.0345457569855725,
+          "y": 2.8024804142618507,
+          "z": 1.3774626748352148
+        },
+        "yaw": 0.057138888888888885,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5944,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.651631559908843,
+        "y": -197.6712759902701,
+        "z": -625.2926929398692,
+        "tx": -27.99804341361526,
+        "ty": -198.7846607979506,
+        "tz": -631.9160665717872,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/brute/brute-attack-f09.jpg",
+      "phase": "attack",
+      "n": 9,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.07000000000000003,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.06818181818181816,
+        "hipsY": 1.1496223537593164,
+        "armL": -2.1,
+        "armR": -2.1
+      },
+      "subject": {
+        "id": "zombie.brute",
+        "name": "Brute",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.997445265448043,
+          "y": -198.7846607979506,
+          "z": -631.9072838374169
+        },
+        "size": {
+          "x": 2.0471046705726614,
+          "y": 2.8898035065057286,
+          "z": 1.3181292584646371
+        },
+        "yaw": 0.068,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5944,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.579353986083717,
+        "y": -197.6712759902701,
+        "z": -625.3315067945701,
+        "tx": -27.997445265448043,
+        "ty": -198.7846607979506,
+        "tz": -631.9072838374169,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/brute/brute-attack-f10.jpg",
+      "phase": "attack",
+      "n": 10,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.05333333333333337,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.07575757575757575,
+        "hipsY": 1.1507662488372274,
+        "armL": -2.183333333333333,
+        "armR": -2.183333333333333
+      },
+      "subject": {
+        "id": "zombie.brute",
+        "name": "Brute",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.996718639979076,
+          "y": -198.7846607979506,
+          "z": -631.8981982267671
+        },
+        "size": {
+          "x": 2.0540120479771637,
+          "y": 2.959459445587896,
+          "z": 1.25803424099297
+        },
+        "yaw": 0.07980555555555556,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5944,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.50130633628622,
+        "y": -197.6712759902701,
+        "z": -625.3750362258788,
+        "tx": -27.996718639979076,
+        "ty": -198.7846607979506,
+        "tz": -631.8981982267671,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/brute/brute-attack-f12.jpg",
+      "phase": "attack",
+      "n": 12,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.020000000000000042,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.0909090909090909,
+        "hipsY": 1.1531942774415307,
+        "armL": -2.35,
+        "armR": -2.35
+      },
+      "subject": {
+        "id": "zombie.brute",
+        "name": "Brute",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99480423577824,
+          "y": -198.7846607979506,
+          "z": -631.8790276646978
+        },
+        "size": {
+          "x": 2.0565843060087268,
+          "y": 3.0419328597981234,
+          "z": 1.2045471304055582
+        },
+        "yaw": 0.10625000000000001,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5944,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.328482390272477,
+        "y": -197.6712759902701,
+        "z": -625.4770112085972,
+        "tx": -27.99480423577824,
+        "ty": -198.7846607979506,
+        "tz": -631.8790276646978,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/brute/brute-attack-f14.jpg",
+      "phase": "attack",
+      "n": 14,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.28,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.1,
+        "hipsY": 1.155805519769944,
+        "armL": -2.45,
+        "armR": -2.45
+      },
+      "subject": {
+        "id": "zombie.brute",
+        "name": "Brute",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99212963344228,
+          "y": -198.7846607979506,
+          "z": -631.8583827712143
+        },
+        "size": {
+          "x": 2.0615693672011055,
+          "y": 3.0542638116201886,
+          "z": 1.235573952539653
+        },
+        "yaw": 0.13647222222222224,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5944,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.13448498327321,
+        "y": -197.6712759902701,
+        "z": -625.6002949863786,
+        "tx": -27.99212963344228,
+        "ty": -198.7846607979506,
+        "tz": -631.8583827712143,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/brute/brute-attack-f16.jpg",
+      "phase": "attack",
+      "n": 16,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.2466666666666667,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.13083521591645728,
+        "hipsY": 1.1420769465374772,
+        "armL": -1.7994365481516044,
+        "armR": -1.7994365481516044
+      },
+      "subject": {
+        "id": "zombie.brute",
+        "name": "Brute",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.98849147276398,
+          "y": -198.7846607979506,
+          "z": -631.8361099073859
+        },
+        "size": {
+          "x": 2.2197184750053474,
+          "y": 2.4772145215537478,
+          "z": 1.8736597294576995
+        },
+        "yaw": 0.17047222222222225,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5944,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -22.920920278329447,
+        "y": -197.6712759902701,
+        "z": -625.7467670479828,
+        "tx": -27.98849147276398,
+        "ty": -198.7846607979506,
+        "tz": -631.8361099073859,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/brute/brute-attack-f18.jpg",
+      "phase": "attack",
+      "n": 18,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.21333333333333337,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.23134685680847852,
+        "hipsY": 1.1299503240587379,
+        "armL": -1.1997246201889593,
+        "armR": -1.1997246201889593
+      },
+      "subject": {
+        "id": "zombie.brute",
+        "name": "Brute",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.98365108748201,
+          "y": -198.7846607979506,
+          "z": -631.8120798800641
+        },
+        "size": {
+          "x": 2.157575516553468,
+          "y": 2.466911717536078,
+          "z": 2.0517453963441312
+        },
+        "yaw": 0.20825000000000002,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5944,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -22.689708454218636,
+        "y": -197.6712759902701,
+        "z": -625.9184777840838,
+        "tx": -27.98365108748201,
+        "ty": -198.7846607979506,
+        "tz": -631.8120798800641,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/brute/brute-attack-f20.jpg",
+      "phase": "attack",
+      "n": 20,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.18000000000000005,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.27823941877010794,
+        "hipsY": 1.1206115800863121,
+        "armL": -0.6977409125245613,
+        "armR": -0.6977409125245613
+      },
+      "subject": {
+        "id": "zombie.brute",
+        "name": "Brute",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.977333041092614,
+          "y": -198.7846607979506,
+          "z": -631.7861950767451
+        },
+        "size": {
+          "x": 1.9810526950300442,
+          "y": 2.481775287214191,
+          "z": 1.6611162297510873
+        },
+        "yaw": 0.2498055555555556,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5944,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -22.443119282940266,
+        "y": -197.6712759902701,
+        "z": -626.1176103901497,
+        "tx": -27.977333041092614,
+        "ty": -198.7846607979506,
+        "tz": -631.7861950767451,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/brute/brute-attack-f22.jpg",
+      "phase": "attack",
+      "n": 22,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.14666666666666672,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.2606446496203773,
+        "hipsY": 1.111571273841817,
+        "armL": -0.3327231604293151,
+        "armR": -0.3327231604293151
+      },
+      "subject": {
+        "id": "zombie.brute",
+        "name": "Brute",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.969804439553318,
+          "y": -198.7846607979506,
+          "z": -631.7603035578345
+        },
+        "size": {
+          "x": 1.9201537188538715,
+          "y": 2.5891642376872994,
+          "z": 1.5169361505046481
+        },
+        "yaw": 0.2951388888888889,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5944,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -22.184388590472466,
+        "y": -197.6712759902701,
+        "z": -626.3483410927734,
+        "tx": -27.969804439553318,
+        "ty": -198.7846607979506,
+        "tz": -631.7603035578345,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/brute/brute-attack-f24.jpg",
+      "phase": "attack",
+      "n": 24,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.1133333333333334,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.182640475157874,
+        "hipsY": 1.1101096551267462,
+        "armL": -0.133203106482146,
+        "armR": -0.133203106482146
+      },
+      "subject": {
+        "id": "zombie.brute",
+        "name": "Brute",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.960875871202582,
+          "y": -198.7846607979506,
+          "z": -631.7344062622308
+        },
+        "size": {
+          "x": 1.9158709733237878,
+          "y": 2.616547525968201,
+          "z": 1.6384809802183327
+        },
+        "yaw": 0.34425,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5944,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -21.91675488510542,
+        "y": -197.6712759902701,
+        "z": -626.6129830444673,
+        "tx": -27.960875871202582,
+        "ty": -198.7846607979506,
+        "tz": -631.7344062622308,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/brute/brute-attack-f26.jpg",
+      "phase": "attack",
+      "n": 26,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.08000000000000007,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.06230586150776819,
+        "hipsY": 1.1127474864651081,
+        "armL": -0.09999999999999992,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.brute",
+        "name": "Brute",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.949760927362057,
+          "y": -198.7846607979506,
+          "z": -631.7068801941332
+        },
+        "size": {
+          "x": 1.9486197722447471,
+          "y": 2.618408997514223,
+          "z": 1.7378054541713936
+        },
+        "yaw": 0.3968333333333332,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5944,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -21.644816616386052,
+        "y": -197.6712759902701,
+        "z": -626.9102093167936,
+        "tx": -27.949760927362057,
+        "ty": -198.7846607979506,
+        "tz": -631.7068801941332,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/brute/brute-attack-f30.jpg",
+      "phase": "attack",
+      "n": 30,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.1187239006346485,
+        "armL": -0.09999999999999992,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.brute",
+        "name": "Brute",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.9204950673156,
+          "y": -198.7846607979506,
+          "z": -631.6484638065189
+        },
+        "size": {
+          "x": 1.9889005681848246,
+          "y": 2.6152942818513907,
+          "z": 1.8349973525764653
+        },
+        "yaw": 0.5034999999999995,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5944,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -21.140709673502002,
+        "y": -197.6712759902701,
+        "z": -627.5503076011189,
+        "tx": -27.9204950673156,
+        "ty": -198.7846607979506,
+        "tz": -631.6484638065189,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/brute/brute-death-f00.jpg",
+      "phase": "death",
+      "n": 0,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.1187239006346485,
+        "armL": -0.09999999999999992,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.brute",
+        "name": "Brute",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.9204950673156,
+          "y": -198.7846607979506,
+          "z": -631.6484638065189
+        },
+        "size": {
+          "x": 1.9889005681848246,
+          "y": 2.6152942818513907,
+          "z": 1.8349973525764653
+        },
+        "yaw": 0.5034999999999995,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5992,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -21.140709673502002,
+        "y": -197.6712759902701,
+        "z": -627.5503076011189,
+        "tx": -27.9204950673156,
+        "ty": -198.7846607979506,
+        "tz": -631.6484638065189,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/brute/brute-death-f01.jpg",
+      "phase": "death",
+      "n": 1,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.016666666666666666,
+        "corpseRX": 0.11941405925549158,
+        "corpseRZ": -0.06896280389695963,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.1187239006346485,
+        "armL": -0.1944174337978729,
+        "armR": -0.0866902585942177
+      },
+      "subject": {
+        "id": "zombie.brute",
+        "name": "Brute",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.9204950673156,
+          "y": -198.7737724810113,
+          "z": -631.6484638065189
+        },
+        "size": {
+          "x": 2.107517717314927,
+          "y": 2.506721348492846,
+          "z": 1.7189103334399078
+        },
+        "yaw": 0.49807661210542425,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5992,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -21.140709673502002,
+        "y": -197.66038767333077,
+        "z": -627.5503076011189,
+        "tx": -27.9204950673156,
+        "ty": -198.7737724810113,
+        "tz": -631.6484638065189,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/brute/brute-death-f02.jpg",
+      "phase": "death",
+      "n": 2,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.03333333333333333,
+        "corpseRX": 0.23220546475227832,
+        "corpseRZ": -0.13353207989628763,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.1187239006346485,
+        "armL": -0.3701168730751383,
+        "armR": -0.1609024600529074
+      },
+      "subject": {
+        "id": "zombie.brute",
+        "name": "Brute",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.9204950673156,
+          "y": -198.76337853260614,
+          "z": -631.6484638065189
+        },
+        "size": {
+          "x": 2.3086517681957623,
+          "y": 2.5512879660894043,
+          "z": 2.006877956458993
+        },
+        "yaw": 0.486235357887641,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5992,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -21.140709673502002,
+        "y": -197.64999372492562,
+        "z": -627.5503076011189,
+        "tx": -27.9204950673156,
+        "ty": -198.76337853260614,
+        "tz": -631.6484638065189,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/brute/brute-death-f03.jpg",
+      "phase": "death",
+      "n": 3,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.05,
+        "corpseRX": 0.3378932152834083,
+        "corpseRZ": -0.1930174284608448,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.1187239006346485,
+        "armL": -0.5276627003142632,
+        "armR": -0.22305939103027433
+      },
+      "subject": {
+        "id": "zombie.brute",
+        "name": "Brute",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.9204950673156,
+          "y": -198.75347028739412,
+          "z": -631.6484638065189
+        },
+        "size": {
+          "x": 2.5053634196788934,
+          "y": 2.595712020517425,
+          "z": 2.3047686826355402
+        },
+        "yaw": 0.46909433353181546,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5992,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -21.140709673502002,
+        "y": -197.6400854797136,
+        "z": -627.5503076011189,
+        "tx": -27.9204950673156,
+        "ty": -198.75347028739412,
+        "tz": -631.6484638065189,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/brute/brute-death-f04.jpg",
+      "phase": "death",
+      "n": 4,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.06666666666666667,
+        "corpseRX": 0.43630678950731067,
+        "corpseRZ": -0.24708338807795388,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.1187239006346485,
+        "armL": -0.667780781799194,
+        "armR": -0.2737225232427981
+      },
+      "subject": {
+        "id": "zombie.brute",
+        "name": "Brute",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.9204950673156,
+          "y": -198.74403897570076,
+          "z": -631.6484638065189
+        },
+        "size": {
+          "x": 2.6921742896152523,
+          "y": 2.6567527715549204,
+          "z": 2.6039142184627053
+        },
+        "yaw": 0.44773684858848767,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5992,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -21.140709673502002,
+        "y": -197.63065416802024,
+        "z": -627.5503076011189,
+        "tx": -27.9204950673156,
+        "ty": -198.74403897570076,
+        "tz": -631.6484638065189,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/brute/brute-death-f06.jpg",
+      "phase": "death",
+      "n": 6,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.09999999999999999,
+        "corpseRX": 0.6118021841534167,
+        "corpseRZ": -0.33896872553631696,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.1187239006346485,
+        "armL": -0.8993068862657486,
+        "armR": -0.34338757063610675
+      },
+      "subject": {
+        "id": "zombie.brute",
+        "name": "Brute",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.9204950673156,
+          "y": -198.72657152494895,
+          "z": -631.6484638065189
+        },
+        "size": {
+          "x": 2.9410083531720836,
+          "y": 2.7666125449684955,
+          "z": 3.023986072250068
+        },
+        "yaw": 0.3962795882489845,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5992,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -21.140709673502002,
+        "y": -197.61318671726843,
+        "z": -627.5503076011189,
+        "tx": -27.9204950673156,
+        "ty": -198.72657152494895,
+        "tz": -631.6484638065189,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/brute/brute-death-f08.jpg",
+      "phase": "death",
+      "n": 8,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.13333333333333333,
+        "corpseRX": 0.7610573911525664,
+        "corpseRZ": -0.4108814010440387,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.1187239006346485,
+        "armL": -1.0728510998909497,
+        "armR": -0.37640112612271753
+      },
+      "subject": {
+        "id": "zombie.brute",
+        "name": "Brute",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.9204950673156,
+          "y": -198.71090375493552,
+          "z": -631.6484638065189
+        },
+        "size": {
+          "x": 3.09429687003583,
+          "y": 2.9164541756274502,
+          "z": 3.306193697926915
+        },
+        "yaw": 0.3385627760309,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5992,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -21.140709673502002,
+        "y": -197.597518947255,
+        "z": -627.5503076011189,
+        "tx": -27.9204950673156,
+        "ty": -198.71090375493552,
+        "tz": -631.6484638065189,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/brute/brute-death-f12.jpg",
+      "phase": "death",
+      "n": 12,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.19999999999999998,
+        "corpseRX": 0.9943140222133263,
+        "corpseRZ": -0.5072717067918295,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.1187239006346485,
+        "armL": -1.2833486426153313,
+        "armR": -0.36249771393344915
+      },
+      "subject": {
+        "id": "zombie.brute",
+        "name": "Brute",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.9204950673156,
+          "y": -198.68466734995465,
+          "z": -631.6484638065189
+        },
+        "size": {
+          "x": 3.170333782341224,
+          "y": 3.0234809588551173,
+          "z": 3.5332016667186963
+        },
+        "yaw": 0.22235612121216417,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5992,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -21.140709673502002,
+        "y": -197.57128254227413,
+        "z": -627.5503076011189,
+        "tx": -27.9204950673156,
+        "ty": -198.68466734995465,
+        "tz": -631.6484638065189,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/brute/brute-death-f20.jpg",
+      "phase": "death",
+      "n": 20,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.3333333333333333,
+        "corpseRX": 1.2750314818473631,
+        "corpseRZ": -0.5879876416066651,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.1187239006346485,
+        "armL": -1.4070823596298043,
+        "armR": -0.21340592129620184
+      },
+      "subject": {
+        "id": "zombie.brute",
+        "name": "Brute",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.9204950673156,
+          "y": -198.6503526274615,
+          "z": -631.6484638065189
+        },
+        "size": {
+          "x": 2.9861298424497846,
+          "y": 2.8293088609944164,
+          "z": 3.4465910038879883
+        },
+        "yaw": 0.04469592242558128,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5992,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -21.140709673502002,
+        "y": -197.53696781978098,
+        "z": -627.5503076011189,
+        "tx": -27.9204950673156,
+        "ty": -198.6503526274615,
+        "tz": -631.6484638065189,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/brute/brute-death-f40.jpg",
+      "phase": "death",
+      "n": 40,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.6666666666666671,
+        "corpseRX": 1.4507628890374658,
+        "corpseRZ": -0.6137243546597492,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.1187239006346485,
+        "armL": -1.45,
+        "armR": -0.12
+      },
+      "subject": {
+        "id": "zombie.brute",
+        "name": "Brute",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.9204950673156,
+          "y": -198.6328607979506,
+          "z": -631.6484638065189
+        },
+        "size": {
+          "x": 3.075659703116706,
+          "y": 2.4799828432948345,
+          "z": 3.2080739353025365
+        },
+        "yaw": -0.07962808571188312,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5992,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -21.140709673502002,
+        "y": -197.5194776157796,
+        "z": -627.5503076011189,
+        "tx": -27.9204950673156,
+        "ty": -198.63286242346013,
+        "tz": -631.6484638065189,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/brute/brute-death-f80.jpg",
+      "phase": "death",
+      "n": 80,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 1.3333333333333335,
+        "corpseRX": 1.4120931926185327,
+        "corpseRZ": -0.6099178794831854,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.1187239006346485,
+        "armL": -1.45,
+        "armR": -0.12
+      },
+      "subject": {
+        "id": "zombie.brute",
+        "name": "Brute",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.9204950673156,
+          "y": -198.6328607979506,
+          "z": -631.6484638065189
+        },
+        "size": {
+          "x": 3.0209628599690816,
+          "y": 2.577961915890711,
+          "z": 3.272609659401951
+        },
+        "yaw": -0.052551180614256336,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5992,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -21.140709673502002,
+        "y": -197.5194776157796,
+        "z": -627.5503076011189,
+        "tx": -27.9204950673156,
+        "ty": -198.63286242346013,
+        "tz": -631.6484638065189,
+        "fov": 40
+      }
+    }
+  ],
+  "errors": [],
+  "pageErrors": []
+}

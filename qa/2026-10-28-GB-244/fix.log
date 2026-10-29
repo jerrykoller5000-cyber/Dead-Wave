@@ -1,0 +1,65 @@
+GRANT grokbot GB-244: starting one game-test command
+ok    t282      6 pass   0 fail  54.5s  (real renderer)
+    LOG phase-wave at 5.8 s; grace 31.2607999999988 events alarm-started,wave-push
+    LOG spawn 6.1 s cave    d0 68 m, within 20 m at 23.3 s
+    LOG spawn 6.2 s cave    d0 75 m, within 20 m at 24.9 s
+    LOG spawn 6.4 s cave    d0 70 m, within 20 m at 23.3 s
+    LOG spawn 7.7 s cave    d0 78 m, within 20 m at 27.6 s
+    LOG spawn 8.0 s cave    d0 73 m, within 20 m at 26.8 s
+    LOG spawn 8.1 s cave    d0 79 m, within 20 m at 28.7 s
+    LOG spawn 8.2 s cave    d0 68 m, within 20 m at 23.6 s
+    LOG spawn 8.4 s cave    d0 70 m, within 20 m at 25.8 s
+    LOG spawn 9.8 s claw-up d0 48 m, within 20 m at 19.9 s
+    LOG spawn 10.0 s claw-up d0 54 m, within 20 m at 21.9 s
+    LOG spawn 10.2 s claw-up d0 45 m, within 20 m at 19.1 s
+    LOG spawn 10.3 s claw-up d0 44 m, within 20 m at 19.7 s
+    LOG spawn 10.5 s claw-up d0 48 m, within 20 m at 20.5 s
+    LOG spawn 10.7 s claw-up d0 57 m, within 20 m at 22.5 s
+    LOG spawn 10.9 s claw-up d0 47 m, within 20 m at 22.7 s
+    PASS night 1: 15 come (15)
+    PASS 7 claw up, all after the cave is out (last walker out at 8.4 s, first riser 9.8 s)
+    PASS all 15 reach 20 m of the HQ within 100 s (last 28.7 s)
+    PASS one push: the 2nd to the 14th land within 7.9 s (under 20)
+    PASS the push lands soon: the middle arrival at 23.3 s (15-35)
+    PASS the cave walkers start part way in, past the water if it is in the way (68, 75, 70, 78, 73, 79, 68, 70 m; all under 120)
+    LOG spawn spread 4.9 s; arrival spread 9.6 s (15 arrived)
+ok    t282      6 pass   0 fail  60.8s  (real renderer)
+    LOG phase-wave at 5.9 s; grace 33.523699999999025 events alarm-started,wave-push
+    LOG spawn 6.1 s cave    d0 74 m, within 20 m at 25.9 s
+    LOG spawn 6.2 s cave    d0 74 m, within 20 m at 29.4 s
+    LOG spawn 6.3 s cave    d0 71 m, within 20 m at 25.0 s
+    LOG spawn 7.4 s cave    d0 73 m, within 20 m at 28.8 s
+    LOG spawn 7.5 s cave    d0 71 m, within 20 m at 26.8 s
+    LOG spawn 7.7 s cave    d0 77 m, within 20 m at 26.6 s
+    LOG spawn 8.0 s cave    d0 78 m, within 20 m at 29.3 s
+    LOG spawn 8.1 s cave    d0 66 m, within 20 m at 25.0 s
+    LOG spawn 13.7 s claw-up d0 36 m, within 20 m at 19.6 s
+    LOG spawn 13.8 s claw-up d0 35 m, within 20 m at 19.3 s
+    LOG spawn 14.0 s claw-up d0 44 m, within 20 m at 22.9 s
+    LOG spawn 14.2 s claw-up d0 34 m, within 20 m at 20.9 s
+    LOG spawn 14.3 s claw-up d0 57 m, within 20 m at 27.1 s
+    LOG spawn 14.5 s claw-up d0 40 m, within 20 m at 22.2 s
+    LOG spawn 14.7 s claw-up d0 64 m, within 20 m at 30.8 s
+    PASS night 1: 15 come (15)
+    PASS 7 claw up, all after the cave is out (last walker out at 8.1 s, first riser 13.7 s)
+    PASS all 15 reach 20 m of the HQ within 100 s (last 30.8 s)
+    PASS one push: the 2nd to the 14th land within 9.8 s (under 20)
+    PASS the push lands soon: the middle arrival at 25.9 s (15-35)
+    PASS the cave walkers start part way in, past the water if it is in the way (74, 74, 71, 73, 71, 77, 78, 66 m; all under 120)
+    LOG spawn spread 8.6 s; arrival spread 11.5 s (15 arrived)
+ok    t215      4 pass   0 fail  32.0s  (real renderer)
+    PASS read index.html and the scripts and styles the game loaded (228 files)
+    PASS no broken characters in them
+    PASS the HUD reads clean: timeLine "Daylight · 08:16 · Grace", tacticalLine "NVG — · Laser — · Light —", grenadeChips "G×3H×0", ammoDetail "12 / 12  ·  50 Bullets  ·  SEMI", hpNum "100 / 100"
+    PASS and shows its dots and times signs (NVG — · Laser — · Light — / G×3H×0)
+ok    t95       9 pass   0 fail  30.7s  (real renderer)
+    PASS the pick is x0.8 (0.8)
+    PASS laser off: the cone is the gun's own
+    PASS every gun with a laser, 200 draws each: x0.8 within 5% (minigun 0.800 m4 0.800 ak 0.800 pistol 0.800 uzi 0.800 shotgun 0.801 aa12 0.801 revolver 0.800 sniper 0.800 launcher 0.800)
+    PASS AK, 2000 free draws each: 6.042 -> 4.780 mrad (x0.791)
+    PASS Z (toggleLasers) with the laser sight bought: on, and it steadies
+    PASS Z again: off
+    PASS no laser sight owned: no change (6.033 vs 6.033 mrad)
+    PASS the chainsaw has no laser: nothing to steady
+    PASS no page errors
+4 checks: 25 pass, 0 fail (real renderer)

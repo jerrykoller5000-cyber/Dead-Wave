@@ -12,3 +12,21 @@ Changed:          The black slab beside the East Cave was its own tunnel seen th
 Files:            index.html (buildCaveFace, the tunnel's first ring), docs/sweep/fixes-batch3.md, review/sweep/cave-mouths/ (before, the magenta test, after: the East Cave from the side, close, at a slant and in front; the South and North caves at a slant)
 Tests:            t41 9/0, t42 18/0 (cloud, one game, the cloud's own slot): six caves, stone and tunnel meshes, the triangle budget, the interiors take the fog, the mesh inside the wall's clearance. Cloud renders (SwiftShader, the camera tool) before and after.
 Not verified:     The six mouths on the GPU, by day and at night (Antigravity, AG-146). The East Cave's sawtooth on its +x cheek and one hanging leaf clump are left (noted in the write-up).
+
+## Addendum, 2026-10-28: the trapper's curing frame, the watchtower's trail, the trails walked
+Changed:          The trapper camp's curing frame stands against the cabin's side wall, its hide to the fire, instead of out by the bench on the cache's approach (0.78 m off; AG-140/141 had cut it out there). The watchtower's trail comes round the tower at 4.5 m to the ladder instead of running under it. AG-148's 44 trail shots looked at: nothing else at fault.
+Files:            assets/world/landmark-details.js (the trapper set's frame), index.html (the trails: roundTowerLeg, the tower's dest), docs/sweep/fixes-batch3.md, review/sweep/trapper-frame/ (3 shots), review/sweep/tower-trail/ (4 shots), review/sweep/jobs/trapper-frame.json, tower-trail.json
+Tests:            Cloud, one game at a time (the cloud's own slot): t167 20/0, t215 4/0 after the frame; t64 8/0, t151 7/0, t11 13/0 after the trail. Probes: the frame 5.35 m from the cache's approach, 2.75 m off the trail, its only neighbour the cabin's collider (1.66 m centre to centre); the tower trail's nearest point to the centre 0.74 m -> 2.25 m, the other 15 trails' signatures (points, a weighted sum, width) identical before and after.
+Screenshots:      review/sweep/trapper-frame/from-fire.jpg, close.jpg, from-cache.jpg; review/sweep/tower-trail/above.jpg, coming-in.jpg, round.jpg, ladder-side.jpg (cloud, SwiftShader). Before: AG-148's review/sweep/trails/trail-13-0052.png (the tower) and AG-139's camp sheet.
+Not verified:     Both on the GPU, by day and night (Antigravity, AG-149). The worn ground's coarse texture makes the bend read softly from above.
+Requests:         Antigravity, AG-149: the two camera jobs on the GPU, and the triangle cut out of game/trapper-path.js (nothing stands by the cache now).
+Contract changes: None.
+
+## Addendum 2, 2026-10-28: the East Cave's leaf clump and its cheek (CL-256's last)
+Changed:          The leaf clump hanging in the dark of the East Cave's mouth was the wet cave's left birch, whose canopy reached inside the tunnel's roof: it is planted 2 m further back, over the roof. The sawtooth of black triangles down its +x cheek was the two-sided rock showing the back of triangles whose normals had been turned to the front: their winding turns with them now (all six caves). CL-256 is done; AG-149 looks at it on the GPU.
+Files:            index.html (buildCaveFace: shadeFlip and the winding; the wet cave's birch), docs/sweep/fixes-batch3.md, review/sweep/cave-4-cheek/ (before, the birch alone, both: close, oblique, front), review/sweep/jobs/cave-4-cheek.json
+Tests:            Cloud, one game (the cloud's own slot): t41 9/0, t42 18/0. A probe: the birch now at local (-4, -6.5) on 7.63 m of hill, canopy foot 9.8 m against the tunnel's 6 m roof; a ray through the clump's pixel had hit the birch's canopy 0.2 m in front of the tunnel's black. Renders before and after from the same cameras (SwiftShader).
+Screenshots:      review/sweep/cave-4-cheek/before-after-close.jpg; after-oblique.jpg, after-front.jpg; birch-only-close.jpg (the sawtooth still there before the winding).
+Not verified:     On the GPU (AG-149). The other five caves' faces by eye after the winding (their shading only changes where a triangle faced into the hill).
+Requests:         Antigravity: the cave job added to AG-149.
+Contract changes: None.

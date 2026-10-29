@@ -18,7 +18,9 @@ export function hatRing(y, clearance, holdY) {
   const [w, f, b] = headRadiusAt(Math.min(y, holdY == null ? y : holdY));
   return [y, w + clearance, f + clearance, b + clearance];
 }
-function loft(T, rings, mat, addCast, { side = false, closeTop = true } = {}) {
+// CL-267: `vExtra` (one per ring) adds to the texture's v, for a flat loft like a brim whose rings share almost one
+// height (v from y alone sampled a single row of the camo: the boonie's brim came out one plain cream).
+function loft(T, rings, mat, addCast, { side = false, closeTop = true, vExtra = null } = {}) {
   const p = [], uv = [], ix = [];
   rings.forEach(([y, w, f, b, oct = 0], r) => {
     for (let j = 0; j <= SEG; j++) {
@@ -26,7 +28,7 @@ function loft(T, rings, mat, addCast, { side = false, closeTop = true } = {}) {
       let [x, z] = planPoint(w, f, b, a);
       // CL-198: `oct` draws the ring toward an octagon (the 8-point cover's crown), flats front, back and sides
       if (oct) { const q = ((a + Math.PI / 8) % (Math.PI / 4) + Math.PI / 4) % (Math.PI / 4) - Math.PI / 8, k = Math.cos(Math.PI / 8) / Math.cos(q); x *= 1 + oct * (k - 1); z *= 1 + oct * (k - 1); }
-      p.push(x, y, z); uv.push(j / SEG, y * 4);
+      p.push(x, y, z); uv.push(j / SEG, y * 4 + (vExtra ? vExtra[r] : 0));
     }
   });
   for (let r = 0; r < rings.length - 1; r++) for (let j = 0; j < SEG; j++) {
@@ -90,7 +92,7 @@ export function buildMarineHats(T, { hatG, part, dress, mats, addCast, rmesh, cy
   boonie.add(loft(T, [R(1.492, .0166, 1.5), R(1.52, .0166, 1.5)], capW, addCast, { closeTop: false }));   // the foliage band, the hat's own cloth
   {
     const base = R(1.4915, .0135), rows = [[1.4915, 0], [1.4875, .045], [1.4785, .092]];
-    const brim = loft(T, rows.map(([y, d]) => [y, base[1] + d, base[2] + d * 1.05, base[3] + d * .95]), capW, addCast, { closeTop: false });
+    const brim = loft(T, rows.map(([y, d]) => [y, base[1] + d, base[2] + d * 1.05, base[3] + d * .95]), capW, addCast, { closeTop: false, vExtra: rows.map(([, d]) => d * 4) });
     capW.side = T.DoubleSide; boonie.add(brim);
   }
   for (const sx of [-1, 1]) for (const z of [-.05, .05]) {

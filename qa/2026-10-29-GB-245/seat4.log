@@ -1,0 +1,18 @@
+GRANT grokbot GB-245: starting one game-test command
+camera: camera: loading the game.............................
+camera: ready in 29 s on port 61699: match, ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11), 1600x900
+help: ok
+setup: pistol
+ak: warm-up done
+ak {"up":0.1,"in":0.04,"side":0.1,"fwd":0,"tip":-0.25,"turn":0,"cant":0.4,"hip":0} u10 R  3252 L 26867 | u16 R     0 L 23554 | u22 R     0 L     0 MERGED | u40 R     0 L     0 MERGED | u48 R     0 L 26332 | u55 R     0 L 41112 | u62 R     0 L 33515 | u70 R     0 L 49314
+ak {"up":0.1,"in":0.04,"side":0.1,"fwd":0,"tip":-0.25,"turn":0,"cant":0.6,"hip":0} u10 R  5036 L 27144 | u16 R   610 L 24270 | u22 R   600 L     0 | u40 R  1039 L     0 | u48 R  1786 L 26999 | u55 R  2723 L 41484 | u62 R  1296 L 34173 | u70 R  1654 L 49021
+ak {"up":0.12,"in":0.04,"side":0.12,"fwd":0,"tip":-0.25,"turn":0,"cant":0.4,"hip":0} u10 R 10487 L 31199 | u16 R   617 L 27849 | u22 R     0 L     0 MERGED | u40 R   160 L     0 | u48 R   403 L 31025 | u55 R   703 L 44334 | u62 R   392 L 35509 | u70 R   520 L 51199
+ak {"up":0.08,"in":0.04,"side":0.12,"fwd":0,"tip":-0.3,"turn":0,"cant":0.4,"hip":0} u10 R 22820 L 27677 | u16 R 28253 L 23688 | u22 R 28479 L     0 | u40 R 28685 L     0 | u48 R 28277 L 27429 | u55 R 27086 L 38930 | u62 R 18935 L 32472 | u70 R 18183 L 45986
+ak {"up":0.14,"in":0.04,"side":0.1,"fwd":0,"tip":-0.15,"turn":0,"cant":0.6,"hip":0} u10 R  9007 L 21648 | u16 R  1181 L 21479 | u22 R    10 L     0 | u40 R     0 L     0 MERGED | u48 R     0 L 20038 | u55 R     0 L 38256 | u62 R     0 L 39867 | u70 R     0 L 57074
+aa12: warm-up done
+aa12 {"up":0.1,"in":0.04,"side":0.1,"fwd":0,"tip":-0.25,"turn":0,"cant":0.4,"hip":0} u10 R 10116 L     0 | u16 R 17286 L     0 | u22 R 17555 L     0 | u40 R 17492 L     0 | u48 R 17455 L     0 | u55 R 18280 L     0 | u62 R 17734 L   674 | u70 R 17764 L  2269
+aa12 {"up":0.1,"in":0.04,"side":0.1,"fwd":0,"tip":-0.25,"turn":0,"cant":0.6,"hip":0} u10 R  9553 L     0 | u16 R 16710 L     0 | u22 R 17620 L     0 | u40 R 18074 L     0 | u48 R 18560 L     0 | u55 R 19253 L     0 | u62 R 19270 L   539 | u70 R 19589 L  2177
+aa12 {"up":0.12,"in":0.04,"side":0.12,"fwd":0,"tip":-0.25,"turn":0,"cant":0.4,"hip":0} u10 R 10753 L     0 | u16 R 22579 L     0 | u22 R 23521 L     0 | u40 R 23743 L     0 | u48 R 24014 L     0 | u55 R 24036 L     0 | u62 R 23797 L   702 | u70 R 23792 L  3723
+aa12 {"up":0.08,"in":0.04,"side":0.12,"fwd":0,"tip":-0.3,"turn":0,"cant":0.4,"hip":0} u10 R  9213 L     0 | u16 R 17742 L     0 | u22 R 19024 L     0 | u40 R 18996 L     0 | u48 R 18349 L     0 | u55 R 18711 L     0 | u62 R 19179 L    90 | u70 R 19440 L  2120
+aa12 {"up":0.14,"in":0.04,"side":0.1,"fwd":0,"tip":-0.15,"turn":0,"cant":0.6,"hip":0} u10 R 10530 L     0 | u16 R 18555 L     0 | u22 R 18439 L     0 | u40 R 17838 L     0 | u48 R 17199 L     0 | u55 R 17640 L     0 | u62 R 16874 L   338 | u70 R 16388 L   401
+camera stop: camera: stopped

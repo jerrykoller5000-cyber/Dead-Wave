@@ -1,0 +1,10 @@
+# ChatGPT — GP-19970 military and brute attack/death survey — 2026-10-29
+
+Changed: Collected native Inspector attack and death sequences for Military and Brute, two more types in the remaining motion pass. Both raised their arms during windup, struck/recovered, and formed corpses with detached gore chunks. No game code changed in this check-in.
+Files: handoffs/GP-19970/attack-death-survey/probe.mjs; military/report.json and 31 JPEGs; brute/report.json and 31 JPEGs.
+Tests: Two serial game checks through the machine-wide slot: `node crew/crew.mjs slot run chatgpt GP-19970 --checks "Military native attack and death frames" -- node handoffs/GP-19970/attack-death-survey/probe.mjs military` → `PASS 31 native military attack/death frames, zero inspector/page errors.` The matching Brute command → `PASS 31 native brute attack/death frames, zero inspector/page errors.` One game instance at a time. Full `npm test` not run: ChatGPT's Chrome CDP stalls at `Page.enable`; the committer runs the coordinated suite.
+Screenshots: handoffs/GP-19970/attack-death-survey/{military,brute}/{military,brute}-{attack,death}-f*.jpg at 1280×720 noon. Visually inspected military attack f10/f20 and death f20, brute attack f10/f20 and death f20/f80. Telemetry shows each windup reaches the strike around frame 14, recovery by frame 30 and corpse settles by frame 80.
+Animation scores (0–5): Structure 4 and attack staging 4 provisionally for these Inspector samples. Weight/timing, full-loop continuity, contact, live gameplay readability and individual type identity await Antigravity's independent score; no overall acceptance is claimed.
+Not verified: Live match target contact, four-light views, performance budgets and coordinated suite. The detached gore pieces appear consistent with a kill effect, but their readability remains for Antigravity to assess. GP-19970 stays open.
+Requests: Sent `GP-19970 military and brute attack/death score` to Antigravity for 0–5 animation scores and any sub-4 pinpoint.
+Contract changes: none.

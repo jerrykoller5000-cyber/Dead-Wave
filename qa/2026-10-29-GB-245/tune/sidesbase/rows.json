@@ -1,0 +1,128 @@
+[
+ {
+  "gun": "m4",
+  "state": "rest",
+  "u": "-",
+  "R": 0,
+  "L": 0
+ },
+ {
+  "gun": "m4",
+  "state": "reload",
+  "u": 0.5,
+  "R": 0,
+  "L": 0
+ },
+ {
+  "gun": "ak",
+  "state": "rest",
+  "u": "-",
+  "R": 8933,
+  "L": 29594
+ },
+ {
+  "gun": "ak",
+  "state": "reload",
+  "u": 0.5,
+  "R": 0,
+  "L": 0
+ },
+ {
+  "gun": "aa12",
+  "state": "rest",
+  "u": "-",
+  "R": 95,
+  "L": 12746
+ },
+ {
+  "gun": "aa12",
+  "state": "reload",
+  "u": 0.5,
+  "R": 0,
+  "L": 0
+ },
+ {
+  "gun": "shotgun",
+  "state": "rest",
+  "u": "-",
+  "R": 4680,
+  "L": 16433
+ },
+ {
+  "gun": "shotgun",
+  "state": "reload",
+  "u": 0.5,
+  "R": 0,
+  "L": 21307
+ },
+ {
+  "gun": "sniper",
+  "state": "rest",
+  "u": "-",
+  "R": 7076,
+  "L": 22613
+ },
+ {
+  "gun": "sniper",
+  "state": "reload",
+  "u": 0.5,
+  "R": 0,
+  "L": 6699
+ },
+ {
+  "gun": "launcher",
+  "state": "rest",
+  "u": "-",
+  "R": 123,
+  "L": 11439
+ },
+ {
+  "gun": "launcher",
+  "state": "reload",
+  "u": 0.5,
+  "R": 0,
+  "L": 12438
+ },
+ {
+  "gun": "pistol",
+  "state": "rest",
+  "u": "-",
+  "R": 25435,
+  "L": 54528
+ },
+ {
+  "gun": "pistol",
+  "state": "reload",
+  "u": 0.5,
+  "R": 43665,
+  "L": 43665
+ },
+ {
+  "gun": "revolver",
+  "state": "rest",
+  "u": "-",
+  "R": 27272,
+  "L": 58098
+ },
+ {
+  "gun": "revolver",
+  "state": "reload",
+  "u": 0.5,
+  "R": 36554,
+  "L": 76521
+ },
+ {
+  "gun": "uzi",
+  "state": "rest",
+  "u": "-",
+  "R": 0,
+  "L": 2062
+ },
+ {
+  "gun": "uzi",
+  "state": "reload",
+  "u": 0.5,
+  "R": 0,
+  "L": 0
+ }
+]

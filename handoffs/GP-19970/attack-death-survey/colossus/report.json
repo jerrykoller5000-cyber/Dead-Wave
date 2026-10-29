@@ -1,0 +1,1897 @@
+{
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "frames": [
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/colossus/colossus-idle-f00.jpg",
+      "phase": "idle",
+      "n": 0,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0,
+        "hipsY": 1.8199037522379444,
+        "armL": 0.14872626016952578,
+        "armR": -1.0487262601695257
+      },
+      "subject": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.8,
+          "y": -197.5263184241018,
+          "z": -632
+        },
+        "size": {
+          "x": 4.1793006482638155,
+          "y": 4.989122766657516,
+          "z": 3.24358506692829
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6976,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -20.939221567305964,
+        "y": -196.41293361642127,
+        "z": -635.9610722749662,
+        "tx": -27.8,
+        "ty": -197.5263184241018,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/colossus/colossus-attack-f01.jpg",
+      "phase": "attack",
+      "n": 1,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.20333333333333334,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.007575757575757569,
+        "hipsY": 1.8835732801108365,
+        "armL": -1.4333333333333333,
+        "armR": -1.4333333333333333
+      },
+      "subject": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.733333333333334,
+          "y": -197.5263184241018,
+          "z": -632
+        },
+        "size": {
+          "x": 4.261938777440854,
+          "y": 4.8582391926833,
+          "z": 3.256661758332598
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6976,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -20.872554900639294,
+        "y": -196.41293361642127,
+        "z": -635.9610722749662,
+        "tx": -27.733333333333334,
+        "ty": -197.5263184241018,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/colossus/colossus-attack-f02.jpg",
+      "phase": "attack",
+      "n": 2,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.18666666666666668,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.01515151515151515,
+        "hipsY": 1.8871616039196435,
+        "armL": -1.5166666666666668,
+        "armR": -1.5166666666666668
+      },
+      "subject": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.666666666666668,
+          "y": -197.5263184241018,
+          "z": -632
+        },
+        "size": {
+          "x": 4.325496307715884,
+          "y": 4.815967473888691,
+          "z": 3.258548747791451
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6976,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -20.80588823397263,
+        "y": -196.41293361642127,
+        "z": -635.9610722749662,
+        "tx": -27.666666666666668,
+        "ty": -197.5263184241018,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/colossus/colossus-attack-f03.jpg",
+      "phase": "attack",
+      "n": 3,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.17,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.02272727272727272,
+        "hipsY": 1.890568008584312,
+        "armL": -1.6,
+        "armR": -1.6
+      },
+      "subject": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.6,
+          "y": -197.5263184241018,
+          "z": -632
+        },
+        "size": {
+          "x": 4.357347445580523,
+          "y": 4.817341390650768,
+          "z": 3.271064346729645
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6976,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -20.73922156730596,
+        "y": -196.41293361642127,
+        "z": -635.9610722749662,
+        "tx": -27.6,
+        "ty": -197.5263184241018,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/colossus/colossus-attack-f04.jpg",
+      "phase": "attack",
+      "n": 4,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.15333333333333335,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.0303030303030303,
+        "hipsY": 1.8936974895579457,
+        "armL": -1.6833333333333333,
+        "armR": -1.6833333333333333
+      },
+      "subject": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.533333333333335,
+          "y": -197.5263184241018,
+          "z": -632
+        },
+        "size": {
+          "x": 4.346865929608555,
+          "y": 4.836113027347267,
+          "z": 3.289638809578719
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6976,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -20.672554900639298,
+        "y": -196.41293361642127,
+        "z": -635.9610722749662,
+        "tx": -27.533333333333335,
+        "ty": -197.5263184241018,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/colossus/colossus-attack-f05.jpg",
+      "phase": "attack",
+      "n": 5,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.1366666666666667,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.03787878787878787,
+        "hipsY": 1.8964627402267036,
+        "armL": -1.7666666666666666,
+        "armR": -1.7666666666666666
+      },
+      "subject": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.46666666666667,
+          "y": -197.5263184241018,
+          "z": -632
+        },
+        "size": {
+          "x": 4.293993131476832,
+          "y": 4.853439155607418,
+          "z": 3.301704981044736
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6976,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -20.605888233972628,
+        "y": -196.41293361642127,
+        "z": -635.9610722749662,
+        "tx": -27.46666666666667,
+        "ty": -197.5263184241018,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/colossus/colossus-attack-f06.jpg",
+      "phase": "attack",
+      "n": 6,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.12000000000000002,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.04545454545454545,
+        "hipsY": 1.8987859781351322,
+        "armL": -1.85,
+        "armR": -1.85
+      },
+      "subject": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.400000000000002,
+          "y": -197.5263184241018,
+          "z": -632
+        },
+        "size": {
+          "x": 4.2003862999458015,
+          "y": 4.866457334971784,
+          "z": 3.307268033550372
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6976,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -20.539221567305965,
+        "y": -196.41293361642127,
+        "z": -635.9610722749662,
+        "tx": -27.400000000000002,
+        "ty": -197.5263184241018,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/colossus/colossus-attack-f07.jpg",
+      "phase": "attack",
+      "n": 7,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.10333333333333336,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.05303030303030302,
+        "hipsY": 1.9006005684506024,
+        "armL": -1.9333333333333333,
+        "armR": -1.9333333333333333
+      },
+      "subject": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.333333333333336,
+          "y": -197.5263184241018,
+          "z": -632
+        },
+        "size": {
+          "x": 4.0685687389492635,
+          "y": 4.872460679532338,
+          "z": 3.3109071489202506
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6976,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -20.472554900639295,
+        "y": -196.41293361642127,
+        "z": -635.9610722749662,
+        "tx": -27.333333333333336,
+        "ty": -197.5263184241018,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/colossus/colossus-attack-f08.jpg",
+      "phase": "attack",
+      "n": 8,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.0866666666666667,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.0606060606060606,
+        "hipsY": 1.9018524076715042,
+        "armL": -2.0166666666666666,
+        "armR": -2.0166666666666666
+      },
+      "subject": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.26666666666667,
+          "y": -197.5263184241018,
+          "z": -632
+        },
+        "size": {
+          "x": 3.902067762749329,
+          "y": 4.917487220212649,
+          "z": 3.3402094164686105
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6976,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -20.405888233972632,
+        "y": -196.41293361642127,
+        "z": -635.9610722749662,
+        "tx": -27.26666666666667,
+        "ty": -197.5263184241018,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/colossus/colossus-attack-f09.jpg",
+      "phase": "attack",
+      "n": 9,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.07000000000000003,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.06818181818181816,
+        "hipsY": 1.9025010359947738,
+        "armL": -2.1,
+        "armR": -2.1
+      },
+      "subject": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.200000000000003,
+          "y": -197.5263184241018,
+          "z": -632
+        },
+        "size": {
+          "x": 3.7228581864716297,
+          "y": 5.124159665043749,
+          "z": 3.395251659933251
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6976,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -20.339221567305962,
+        "y": -196.41293361642127,
+        "z": -635.9610722749662,
+        "tx": -27.200000000000003,
+        "ty": -197.5263184241018,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/colossus/colossus-attack-f10.jpg",
+      "phase": "attack",
+      "n": 10,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.05333333333333337,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.07575757575757575,
+        "hipsY": 1.9026228146354764,
+        "armL": -2.183333333333333,
+        "armR": -2.183333333333333
+      },
+      "subject": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.133333333333336,
+          "y": -197.5263184241018,
+          "z": -632
+        },
+        "size": {
+          "x": 3.5228243691094754,
+          "y": 5.295378319121653,
+          "z": 3.4604549195114487
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6976,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -20.2725549006393,
+        "y": -196.41293361642127,
+        "z": -635.9610722749662,
+        "tx": -27.133333333333336,
+        "ty": -197.5263184241018,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/colossus/colossus-attack-f12.jpg",
+      "phase": "attack",
+      "n": 12,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.020000000000000042,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.0909090909090909,
+        "hipsY": 1.901183466050249,
+        "armL": -2.35,
+        "armR": -2.35
+      },
+      "subject": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.000000000000004,
+          "y": -197.5263184241018,
+          "z": -632
+        },
+        "size": {
+          "x": 3.284670034073759,
+          "y": 5.511476794914699,
+          "z": 3.5744239354013416
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6976,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -20.139221567305967,
+        "y": -196.41293361642127,
+        "z": -635.9610722749662,
+        "tx": -27.000000000000004,
+        "ty": -197.5263184241018,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/colossus/colossus-attack-f14.jpg",
+      "phase": "attack",
+      "n": 14,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.28,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.1,
+        "hipsY": 1.8974871455686666,
+        "armL": -2.45,
+        "armR": -2.45
+      },
+      "subject": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.86666666666667,
+          "y": -197.5263184241018,
+          "z": -632
+        },
+        "size": {
+          "x": 3.2726927772728835,
+          "y": 5.5350455996625385,
+          "z": 3.634709057734426
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6976,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -20.005888233972634,
+        "y": -196.41293361642127,
+        "z": -635.9610722749662,
+        "tx": -26.86666666666667,
+        "ty": -197.5263184241018,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/colossus/colossus-attack-f16.jpg",
+      "phase": "attack",
+      "n": 16,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.2466666666666667,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.13083521591645728,
+        "hipsY": 1.8751461888611636,
+        "armL": -1.7994365481516044,
+        "armR": -1.7994365481516044
+      },
+      "subject": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.733333333333338,
+          "y": -197.5263184241018,
+          "z": -632
+        },
+        "size": {
+          "x": 4.336159450391406,
+          "y": 5.210025700910904,
+          "z": 3.452532988965345
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6976,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -19.8725549006393,
+        "y": -196.41293361642127,
+        "z": -635.9610722749662,
+        "tx": -26.733333333333338,
+        "ty": -197.5263184241018,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/colossus/colossus-attack-f18.jpg",
+      "phase": "attack",
+      "n": 18,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.21333333333333337,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.23134685680847852,
+        "hipsY": 1.852523397590839,
+        "armL": -1.1997246201889593,
+        "armR": -1.1997246201889593
+      },
+      "subject": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.600000000000005,
+          "y": -197.5263184241018,
+          "z": -632
+        },
+        "size": {
+          "x": 4.2153196317884,
+          "y": 5.213665751665076,
+          "z": 3.47229059238407
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6976,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -19.739221567305968,
+        "y": -196.41293361642127,
+        "z": -635.9610722749662,
+        "tx": -26.600000000000005,
+        "ty": -197.5263184241018,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/colossus/colossus-attack-f20.jpg",
+      "phase": "attack",
+      "n": 20,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.18000000000000005,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.27823941877010794,
+        "hipsY": 1.8314445252144036,
+        "armL": -0.6977409125245613,
+        "armR": -0.6977409125245613
+      },
+      "subject": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.466666666666672,
+          "y": -197.5263184241018,
+          "z": -632
+        },
+        "size": {
+          "x": 3.757625416198998,
+          "y": 5.15782113822678,
+          "z": 3.744827709594915
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6976,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -19.605888233972635,
+        "y": -196.41293361642127,
+        "z": -635.9610722749662,
+        "tx": -26.466666666666672,
+        "ty": -197.5263184241018,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/colossus/colossus-attack-f22.jpg",
+      "phase": "attack",
+      "n": 22,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.14666666666666672,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.2606446496203773,
+        "hipsY": 1.8262775726218183,
+        "armL": -0.3327231604293151,
+        "armR": -0.3327231604293151
+      },
+      "subject": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.334183925285828,
+          "y": -197.5263184241018,
+          "z": -631.9893845040783
+        },
+        "size": {
+          "x": 4.16843544134796,
+          "y": 5.261969977864538,
+          "z": 4.232823172830308
+        },
+        "yaw": 1.4108832036366785,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6976,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -18.93021013772834,
+        "y": -196.41293361642127,
+        "z": -634.8074594539667,
+        "tx": -26.334183925285828,
+        "ty": -197.5263184241018,
+        "tz": -631.9893845040783,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/colossus/colossus-attack-f24.jpg",
+      "phase": "attack",
+      "n": 24,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.1133333333333334,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.182640475157874,
+        "hipsY": 1.8299296996922458,
+        "armL": -0.133203106482146,
+        "armR": -0.133203106482146
+      },
+      "subject": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.202551775857472,
+          "y": -197.5263184241018,
+          "z": -631.968153512235
+        },
+        "size": {
+          "x": 4.231872675346619,
+          "y": 5.377418654440163,
+          "z": 4.311259283787422
+        },
+        "yaw": 1.4108832036367078,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6976,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -18.798577988300067,
+        "y": -196.41293361642127,
+        "z": -634.7862284621234,
+        "tx": -26.202551775857472,
+        "ty": -197.5263184241018,
+        "tz": -631.968153512235,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/colossus/colossus-attack-f26.jpg",
+      "phase": "attack",
+      "n": 26,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.08000000000000007,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.06230586150776819,
+        "hipsY": 1.8365309826287304,
+        "armL": -0.09999999999999992,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.07041626497544,
+          "y": -197.5263184241018,
+          "z": -631.9503521721065
+        },
+        "size": {
+          "x": 4.221745346342566,
+          "y": 5.46786487651832,
+          "z": 4.25673900732852
+        },
+        "yaw": 1.4447370790748173,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6976,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -18.766069399526444,
+        "y": -196.41293361642127,
+        "z": -635.0174177304589,
+        "tx": -26.07041626497544,
+        "ty": -197.5263184241018,
+        "tz": -631.9503521721065,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/colossus/colossus-attack-f30.jpg",
+      "phase": "attack",
+      "n": 30,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.845123462542902,
+        "armL": -0.09999999999999992,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -25.805000924776003,
+          "y": -197.5263184241018,
+          "z": -631.9247339989414
+        },
+        "size": {
+          "x": 4.188495514306375,
+          "y": 5.608552327075273,
+          "z": 4.141917480280199
+        },
+        "yaw": 1.4893558145750798,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6976,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -18.644726899624622,
+        "y": -196.41293361642127,
+        "z": -635.3145496509745,
+        "tx": -25.805000924776003,
+        "ty": -197.5263184241018,
+        "tz": -631.9247339989414,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/colossus/colossus-death-f00.jpg",
+      "phase": "death",
+      "n": 0,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.845123462542902,
+        "armL": -0.09999999999999992,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -25.805000924776003,
+          "y": -197.5263184241018,
+          "z": -631.9247339989414
+        },
+        "size": {
+          "x": 4.188495514306375,
+          "y": 5.608552327075273,
+          "z": 3.6655550543353
+        },
+        "yaw": 1.4893558145750798,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 7072,
+          "points": 0,
+          "segments": 0,
+          "materials": 5
+        }
+      },
+      "camera": {
+        "x": -18.644726899624622,
+        "y": -196.41293361642127,
+        "z": -635.3145496509745,
+        "tx": -25.805000924776003,
+        "ty": -197.5263184241018,
+        "tz": -631.9247339989414,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/colossus/colossus-death-f01.jpg",
+      "phase": "death",
+      "n": 1,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.005333333333333333,
+        "corpseRX": -0.31951843852264306,
+        "corpseRZ": 0.3121823241261627,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.845123462542902,
+        "armL": -0.09999999999999992,
+        "armR": -0.023086065341819603
+      },
+      "subject": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -25.805000924776003,
+          "y": -197.5215016846847,
+          "z": -631.9247339989414
+        },
+        "size": {
+          "x": 2.8392258869873217,
+          "y": 4.858168308426457,
+          "z": 2.860333161281801
+        },
+        "yaw": 1.4837680379276807,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 7072,
+          "points": 0,
+          "segments": 0,
+          "materials": 5
+        }
+      },
+      "camera": {
+        "x": -18.644726899624622,
+        "y": -196.40811687700418,
+        "z": -635.3145496509745,
+        "tx": -25.805000924776003,
+        "ty": -197.5215016846847,
+        "tz": -631.9247339989414,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/colossus/colossus-death-f02.jpg",
+      "phase": "death",
+      "n": 2,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.010666666666666666,
+        "corpseRX": -0.5766729346278333,
+        "corpseRZ": 0.5621185252250834,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.845123462542902,
+        "armL": -0.09999999999999992,
+        "armR": -0.04531571977522485
+      },
+      "subject": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -25.805000924776003,
+          "y": -197.51674179537997,
+          "z": -631.9247339989414
+        },
+        "size": {
+          "x": 2.9663530002609946,
+          "y": 4.8842366758950675,
+          "z": 2.847211521634108
+        },
+        "yaw": 1.4710851094765918,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 7072,
+          "points": 0,
+          "segments": 0,
+          "materials": 5
+        }
+      },
+      "camera": {
+        "x": -18.644726899624622,
+        "y": -196.40335698769945,
+        "z": -635.3145496509745,
+        "tx": -25.805000924776003,
+        "ty": -197.51674179537997,
+        "tz": -631.9247339989414,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/colossus/colossus-death-f03.jpg",
+      "phase": "death",
+      "n": 3,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.016,
+        "corpseRX": -0.7657735369316472,
+        "corpseRZ": 0.7441146419939595,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.845123462542902,
+        "armL": -0.09999999999999992,
+        "armR": -0.06669335192569034
+      },
+      "subject": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -25.805000924776003,
+          "y": -197.51203850269613,
+          "z": -631.9247339989414
+        },
+        "size": {
+          "x": 3.0906957581862287,
+          "y": 4.910570701132087,
+          "z": 2.8661137484305073
+        },
+        "yaw": 1.4538004797709476,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 7072,
+          "points": 0,
+          "segments": 0,
+          "materials": 5
+        }
+      },
+      "camera": {
+        "x": -18.644726899624622,
+        "y": -196.3986536950156,
+        "z": -635.3145496509745,
+        "tx": -25.805000924776003,
+        "ty": -197.51203850269613,
+        "tz": -631.9247339989414,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/colossus/colossus-death-f04.jpg",
+      "phase": "death",
+      "n": 4,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.021333333333333333,
+        "corpseRX": -0.9024550551668821,
+        "corpseRZ": 0.8738016845401989,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.845123462542902,
+        "armL": -0.09999999999999992,
+        "armR": -0.0872241225141016
+      },
+      "subject": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -25.805000924776003,
+          "y": -197.50739155238244,
+          "z": -631.9247339989414
+        },
+        "size": {
+          "x": 3.2122100668676374,
+          "y": 4.943063017344656,
+          "z": 2.88419740021925
+        },
+        "yaw": 1.4338217610675603,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 7072,
+          "points": 0,
+          "segments": 0,
+          "materials": 5
+        }
+      },
+      "camera": {
+        "x": -18.644726899624622,
+        "y": -196.39400674470193,
+        "z": -635.3145496509745,
+        "tx": -25.805000924776003,
+        "ty": -197.50739155238244,
+        "tz": -631.9247339989414,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/colossus/colossus-death-f06.jpg",
+      "phase": "death",
+      "n": 6,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.032,
+        "corpseRX": -1.0790534948241566,
+        "corpseRZ": 1.0367269876281113,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.845123462542902,
+        "armL": -0.09999999999999992,
+        "armR": -0.1257694515923728
+      },
+      "subject": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -25.805000924776003,
+          "y": -197.49826565801825,
+          "z": -631.9247339989414
+        },
+        "size": {
+          "x": 3.4466064869941277,
+          "y": 4.996939373272255,
+          "z": 2.9343819335300623
+        },
+        "yaw": 1.3899573964296106,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 7072,
+          "points": 0,
+          "segments": 0,
+          "materials": 5
+        }
+      },
+      "camera": {
+        "x": -18.644726899624622,
+        "y": -196.38488085033774,
+        "z": -635.3145496509745,
+        "tx": -25.805000924776003,
+        "ty": -197.49826565801825,
+        "tz": -631.9247339989414,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/colossus/colossus-death-f08.jpg",
+      "phase": "death",
+      "n": 8,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.04266666666666667,
+        "corpseRX": -1.185700652496694,
+        "corpseRZ": 1.1301002278654577,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.845123462542902,
+        "armL": -0.09999999999999992,
+        "armR": -0.16100759903142664
+      },
+      "subject": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -25.805000924776003,
+          "y": -197.48936206278938,
+          "z": -631.9247339989414
+        },
+        "size": {
+          "x": 3.6693054447183755,
+          "y": 5.036574722998722,
+          "z": 3.000319196755868
+        },
+        "yaw": 1.3441082006957699,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 7072,
+          "points": 0,
+          "segments": 0,
+          "materials": 5
+        }
+      },
+      "camera": {
+        "x": -18.644726899624622,
+        "y": -196.37597725510886,
+        "z": -635.3145496509745,
+        "tx": -25.805000924776003,
+        "ty": -197.48936206278938,
+        "tz": -631.9247339989414,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/colossus/colossus-death-f12.jpg",
+      "phase": "death",
+      "n": 12,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.06400000000000002,
+        "corpseRX": -1.3082826479607035,
+        "corpseRZ": 1.2272389141737396,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.845123462542902,
+        "armL": -0.09999999999999992,
+        "armR": -0.22183978465476084
+      },
+      "subject": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -25.805000924776003,
+          "y": -197.47221350808766,
+          "z": -631.9247339989414
+        },
+        "size": {
+          "x": 4.154233218984405,
+          "y": 5.076030091423718,
+          "z": 3.1150748397940333
+        },
+        "yaw": 1.2521384971628338,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 7072,
+          "points": 0,
+          "segments": 0,
+          "materials": 5
+        }
+      },
+      "camera": {
+        "x": -18.644726899624622,
+        "y": -196.35882870040714,
+        "z": -635.3145496509745,
+        "tx": -25.805000924776003,
+        "ty": -197.47221350808766,
+        "tz": -631.9247339989414,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/colossus/colossus-death-f20.jpg",
+      "phase": "death",
+      "n": 20,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.10666666666666665,
+        "corpseRX": -1.4263203596787146,
+        "corpseRZ": 1.298280799811649,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.845123462542902,
+        "armL": -0.09999999999999992,
+        "armR": -0.30739650934664636
+      },
+      "subject": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -25.805000924776003,
+          "y": -197.44049236818034,
+          "z": -631.9247339989414
+        },
+        "size": {
+          "x": 4.909640631764379,
+          "y": 5.017383240305662,
+          "z": 3.2832528838155213
+        },
+        "yaw": 1.0772825276449272,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 7072,
+          "points": 0,
+          "segments": 0,
+          "materials": 5
+        }
+      },
+      "camera": {
+        "x": -18.644726899624622,
+        "y": -196.32710756049983,
+        "z": -635.3145496509745,
+        "tx": -25.805000924776003,
+        "ty": -197.44049236818034,
+        "tz": -631.9247339989414,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/colossus/colossus-death-f40.jpg",
+      "phase": "death",
+      "n": 40,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.21333333333333324,
+        "corpseRX": -1.5514850928693222,
+        "corpseRZ": 1.3241994444487237,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.845123462542902,
+        "armL": -0.09999999999999992,
+        "armR": -0.35401599701909664
+      },
+      "subject": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -25.805000924776003,
+          "y": -197.37541213589938,
+          "z": -631.9247339989414
+        },
+        "size": {
+          "x": 5.8186097814045326,
+          "y": 4.357490190249109,
+          "z": 3.745267693324422
+        },
+        "yaw": 0.71344956566031,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 7072,
+          "points": 0,
+          "segments": 0,
+          "materials": 5
+        }
+      },
+      "camera": {
+        "x": -18.644726899624622,
+        "y": -196.26202732821886,
+        "z": -635.3145496509745,
+        "tx": -25.805000924776003,
+        "ty": -197.37541213589938,
+        "tz": -631.9247339989414,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/colossus/colossus-death-f80.jpg",
+      "phase": "death",
+      "n": 80,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.5853333333333339,
+        "corpseRX": -1.6869418609878246,
+        "corpseRZ": 1.2834871492013185,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.845123462542902,
+        "armL": -0.09999999999999992,
+        "armR": -0.08623753631266691
+      },
+      "subject": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -25.805000924776003,
+          "y": -197.27676465245034,
+          "z": -631.9247339989414
+        },
+        "size": {
+          "x": 5.768110914074146,
+          "y": 3.103904533585137,
+          "z": 4.42922150872073
+        },
+        "yaw": 0.16087898839064838,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 7072,
+          "points": 0,
+          "segments": 0,
+          "materials": 5
+        }
+      },
+      "camera": {
+        "x": -18.644726899624622,
+        "y": -196.16337984476982,
+        "z": -635.3145496509745,
+        "tx": -25.805000924776003,
+        "ty": -197.27676465245034,
+        "tz": -631.9247339989414,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/colossus/colossus-death-f120.jpg",
+      "phase": "death",
+      "n": 120,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 1.252000000000001,
+        "corpseRX": -1.6917428350510435,
+        "corpseRZ": 1.281067171685726,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.845123462542902,
+        "armL": -0.09999999999999992,
+        "armR": -0.08
+      },
+      "subject": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -25.805000924776003,
+          "y": -197.2733184241018,
+          "z": -631.9247339989414
+        },
+        "size": {
+          "x": 5.737795333667538,
+          "y": 3.073062244546975,
+          "z": 4.441920121518933
+        },
+        "yaw": 0.1416482835028386,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 7072,
+          "points": 0,
+          "segments": 0,
+          "materials": 5
+        }
+      },
+      "camera": {
+        "x": -18.644726899624622,
+        "y": -196.15993435980732,
+        "z": -635.3145496509745,
+        "tx": -25.805000924776003,
+        "ty": -197.27331916748784,
+        "tz": -631.9247339989414,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/colossus/colossus-death-f160.jpg",
+      "phase": "death",
+      "n": 160,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 1.9186666666666652,
+        "corpseRX": -1.6917428350510435,
+        "corpseRZ": 1.281067171685726,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.845123462542902,
+        "armL": -0.09999999999999992,
+        "armR": -0.08
+      },
+      "subject": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -25.805000924776003,
+          "y": -197.2733184241018,
+          "z": -631.9247339989414
+        },
+        "size": {
+          "x": 5.737795333667538,
+          "y": 3.073062244546975,
+          "z": 4.441920121518933
+        },
+        "yaw": 0.1416482835028386,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 7072,
+          "points": 0,
+          "segments": 0,
+          "materials": 5
+        }
+      },
+      "camera": {
+        "x": -18.644726899624622,
+        "y": -196.15993435980732,
+        "z": -635.3145496509745,
+        "tx": -25.805000924776003,
+        "ty": -197.27331916748784,
+        "tz": -631.9247339989414,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/colossus/colossus-death-f200.jpg",
+      "phase": "death",
+      "n": 200,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 2.5853333333333297,
+        "corpseRX": -1.6917428350510435,
+        "corpseRZ": 1.281067171685726,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.845123462542902,
+        "armL": -0.09999999999999992,
+        "armR": -0.08
+      },
+      "subject": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -25.805000924776003,
+          "y": -197.2733184241018,
+          "z": -631.9247339989414
+        },
+        "size": {
+          "x": 5.737795333667538,
+          "y": 3.073062244546975,
+          "z": 4.441920121518933
+        },
+        "yaw": 0.1416482835028386,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 7072,
+          "points": 0,
+          "segments": 0,
+          "materials": 5
+        }
+      },
+      "camera": {
+        "x": -18.644726899624622,
+        "y": -196.15993435980732,
+        "z": -635.3145496509745,
+        "tx": -25.805000924776003,
+        "ty": -197.27331916748784,
+        "tz": -631.9247339989414,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/colossus/colossus-death-f240.jpg",
+      "phase": "death",
+      "n": 240,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 3.251999999999994,
+        "corpseRX": -1.6917428350510435,
+        "corpseRZ": 1.281067171685726,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.845123462542902,
+        "armL": -0.09999999999999992,
+        "armR": -0.08
+      },
+      "subject": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -25.805000924776003,
+          "y": -197.2733184241018,
+          "z": -631.9247339989414
+        },
+        "size": {
+          "x": 5.737795333667538,
+          "y": 3.073062244546975,
+          "z": 4.441920121518933
+        },
+        "yaw": 0.1416482835028386,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 7072,
+          "points": 0,
+          "segments": 0,
+          "materials": 5
+        }
+      },
+      "camera": {
+        "x": -18.644726899624622,
+        "y": -196.15993435980732,
+        "z": -635.3145496509745,
+        "tx": -25.805000924776003,
+        "ty": -197.27331916748784,
+        "tz": -631.9247339989414,
+        "fov": 40
+      }
+    }
+  ],
+  "errors": [],
+  "pageErrors": []
+}

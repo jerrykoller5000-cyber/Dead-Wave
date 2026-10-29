@@ -275,6 +275,10 @@ export function attachZombieAbilityVisuals(THREE, g, typeKey, scale = 1) {
     rig.pack = pack; rig.packDetails = details; rig.idlePack = idlePack;
   }
   g.userData.abilityVisuals = rig;
+  // The Inspector can render the build before its first animation tick. Seed
+  // palm matrices now; otherwise the InstancedMesh defaults to the body's
+  // origin and both flames appear at the shins on frame zero.
+  if (typeKey === 'demon') updateZombieAbilityVisuals({ mesh: g, alive: true }, Number.isFinite(cache.flameTime) ? cache.flameTime : 0);
   return rig;
 }
 

@@ -1,0 +1,41 @@
+{
+  "cpuPct": 21.5,
+  "top": [
+    {
+      "Name": "git#1",
+      "PercentProcessorTime": 101
+    },
+    {
+      "Name": "powershell",
+      "PercentProcessorTime": 95
+    },
+    {
+      "Name": "node#7",
+      "PercentProcessorTime": 45
+    },
+    {
+      "Name": "dwm",
+      "PercentProcessorTime": 22
+    },
+    {
+      "Name": "msedge#2",
+      "PercentProcessorTime": 16
+    },
+    {
+      "Name": "Grok Bot#4",
+      "PercentProcessorTime": 16
+    }
+  ],
+  "counts": {
+    "msedge": 17,
+    "wslhost": 3,
+    "Cursor": 17,
+    "vmmem": 1,
+    "wsl": 1,
+    "ChatGPT": 17,
+    "chrome": 0,
+    "node": 9,
+    "vmmemWSL": 1,
+    "Antigravity": 6
+  }
+}

@@ -1,0 +1,6663 @@
+{
+  "at": "2026-10-29T11:08:44.072Z",
+  "kinds": [
+    "shambler",
+    "feral",
+    "leaper",
+    "spider",
+    "drowned",
+    "military",
+    "brute",
+    "spitter",
+    "screamer",
+    "bomber",
+    "demon",
+    "colossus",
+    "guardian",
+    "caveguard"
+  ],
+  "shots": [
+    {
+      "file": "shambler-rest-noon-front.jpg",
+      "kind": "shambler",
+      "light": "noon",
+      "view": "front",
+      "label": "rest",
+      "bytes": 77976,
+      "current": {
+        "id": "zombie.shambler",
+        "name": "Shambler",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99962346051772,
+          "y": -199.03720407632272,
+          "z": -631.93904558469
+        },
+        "size": {
+          "x": 0.8796686738756918,
+          "y": 1.92744175556615,
+          "z": 1.2577241512672117
+        },
+        "yaw": 0.012026777777777775,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5048,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -27.97820309447131,
+        "y": -198.78013808871145,
+        "z": -628.2628930959424,
+        "tx": -27.99962346051772,
+        "ty": -199.03720407632272,
+        "tz": -631.93904558469,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "shambler",
+      "inspectorErrors": []
+    },
+    {
+      "file": "shambler-rest-noon-side.jpg",
+      "kind": "shambler",
+      "light": "noon",
+      "view": "side",
+      "label": "rest",
+      "bytes": 70258,
+      "current": {
+        "id": "zombie.shambler",
+        "name": "Shambler",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999235355172384,
+          "y": -199.03720407632272,
+          "z": -631.920069045646
+        },
+        "size": {
+          "x": 0.8896823773338021,
+          "y": 1.9247042697670054,
+          "z": 1.2610895949707128
+        },
+        "yaw": 0.020449,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5048,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -24.308218491444343,
+        "y": -198.90830160490188,
+        "z": -631.964462225654,
+        "tx": -27.999235355172384,
+        "ty": -199.03720407632272,
+        "tz": -631.920069045646,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "shambler",
+      "inspectorErrors": []
+    },
+    {
+      "file": "shambler-rest-overcast-front.jpg",
+      "kind": "shambler",
+      "light": "overcast",
+      "view": "front",
+      "label": "rest",
+      "bytes": 76941,
+      "current": {
+        "id": "zombie.shambler",
+        "name": "Shambler",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.998633415840853,
+          "y": -199.03720407632272,
+          "z": -631.9007162417242
+        },
+        "size": {
+          "x": 0.9022199073106876,
+          "y": 1.9213129607757367,
+          "z": 1.2662977813597536
+        },
+        "yaw": 0.031093444444444444,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5048,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -27.923306929849268,
+        "y": -198.77960183962813,
+        "z": -628.2176028302675,
+        "tx": -27.998633415840853,
+        "ty": -199.03720407632272,
+        "tz": -631.9007162417242,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "shambler",
+      "inspectorErrors": []
+    },
+    {
+      "file": "shambler-rest-overcast-side.jpg",
+      "kind": "shambler",
+      "light": "overcast",
+      "view": "side",
+      "label": "rest",
+      "bytes": 68431,
+      "current": {
+        "id": "zombie.shambler",
+        "name": "Shambler",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99776164598264,
+          "y": -199.03720407632272,
+          "z": -631.8808980883744
+        },
+        "size": {
+          "x": 0.9171598166914201,
+          "y": 1.919006088587338,
+          "z": 1.2723198294171425
+        },
+        "yaw": 0.04396011111111111,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5048,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -24.300709503404274,
+        "y": -198.90803773652675,
+        "z": -631.9958892340675,
+        "tx": -27.99776164598264,
+        "ty": -199.03720407632272,
+        "tz": -631.8808980883744,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "shambler",
+      "inspectorErrors": []
+    },
+    {
+      "file": "shambler-rest-dusk-front.jpg",
+      "kind": "shambler",
+      "light": "dusk",
+      "view": "front",
+      "label": "rest",
+      "bytes": 66600,
+      "current": {
+        "id": "zombie.shambler",
+        "name": "Shambler",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99655742369016,
+          "y": -199.03720407632272,
+          "z": -631.8605281863294
+        },
+        "size": {
+          "x": 0.9341086679965045,
+          "y": 1.916298939523898,
+          "z": 1.2747169622854244
+        },
+        "yaw": 0.05904899999999999,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5048,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -27.834132819996128,
+        "y": -198.77875400856362,
+        "z": -628.1680907001385,
+        "tx": -27.99655742369016,
+        "ty": -199.03720407632272,
+        "tz": -631.8605281863294,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "shambler",
+      "inspectorErrors": []
+    },
+    {
+      "file": "shambler-rest-dusk-side.jpg",
+      "kind": "shambler",
+      "light": "dusk",
+      "view": "side",
+      "label": "rest",
+      "bytes": 61088,
+      "current": {
+        "id": "zombie.shambler",
+        "name": "Shambler",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99495038398464,
+          "y": -199.03720407632272,
+          "z": -631.8395235676967
+        },
+        "size": {
+          "x": 0.9530233337625909,
+          "y": 1.9140358385829472,
+          "z": 1.2779397691778058
+        },
+        "yaw": 0.0763601111111111,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5048,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -24.291822822327433,
+        "y": -198.9076622357233,
+        "z": -632.0584440490903,
+        "tx": -27.99495038398464,
+        "ty": -199.03720407632272,
+        "tz": -631.8395235676967,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "shambler",
+      "inspectorErrors": []
+    },
+    {
+      "file": "shambler-rest-night-front.jpg",
+      "kind": "shambler",
+      "light": "night",
+      "view": "front",
+      "label": "rest",
+      "bytes": 38038,
+      "current": {
+        "id": "zombie.shambler",
+        "name": "Shambler",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.992861366846608,
+          "y": -199.03720407632272,
+          "z": -631.8178056077375
+        },
+        "size": {
+          "x": 0.9736802392908253,
+          "y": 1.9127726085490906,
+          "z": 1.2817215982100834
+        },
+        "yaw": 0.09589344444444442,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5048,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -27.70966592908194,
+        "y": -198.7776155076113,
+        "z": -628.1163337969639,
+        "tx": -27.992861366846608,
+        "ty": -199.03720407632272,
+        "tz": -631.8178056077375,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "shambler",
+      "inspectorErrors": []
+    },
+    {
+      "file": "shambler-rest-night-side.jpg",
+      "kind": "shambler",
+      "light": "night",
+      "view": "side",
+      "label": "rest",
+      "bytes": 36466,
+      "current": {
+        "id": "zombie.shambler",
+        "name": "Shambler",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99020145318836,
+          "y": -199.03720407632272,
+          "z": -631.795301123131
+        },
+        "size": {
+          "x": 0.9957865848335494,
+          "y": 1.9152526682655377,
+          "z": 1.2855199941648152
+        },
+        "yaw": 0.11764899999999999,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5048,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -24.28414645019267,
+        "y": -198.90718845904811,
+        "z": -632.1517808491409,
+        "tx": -27.99020145318836,
+        "ty": -199.03720407632272,
+        "tz": -631.795301123131,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "shambler",
+      "inspectorErrors": []
+    },
+    {
+      "file": "shambler-rest-noon-gameplay.jpg",
+      "kind": "shambler",
+      "light": "noon",
+      "view": "gameplay",
+      "label": "rest",
+      "bytes": 68520,
+      "current": {
+        "id": "zombie.shambler",
+        "name": "Shambler",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.986871116391953,
+          "y": -199.03720407632272,
+          "z": -631.7719436746028
+        },
+        "size": {
+          "x": 1.0190152823179233,
+          "y": 1.9200314853760574,
+          "z": 1.2890103250626908
+        },
+        "yaw": 0.14162677777777777,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5048,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.247877426805484,
+        "y": -197.9238192686422,
+        "z": -625.4235333948488,
+        "tx": -27.986871116391953,
+        "ty": -199.03720407632272,
+        "tz": -631.7719436746028,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "shambler",
+      "inspectorErrors": []
+    },
+    {
+      "file": "shambler-walk-f20-noon-side.jpg",
+      "kind": "shambler",
+      "light": "noon",
+      "view": "side",
+      "label": "walk-f20",
+      "bytes": 71156,
+      "current": {
+        "id": "zombie.shambler",
+        "name": "Shambler",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.663567435297008,
+          "y": -199.03720407632272,
+          "z": -631.2264326978415
+        },
+        "size": {
+          "x": 1.3580900680599477,
+          "y": 1.8883316240749934,
+          "z": 1.3253227803046457
+        },
+        "yaw": 0.9071378888888887,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5048,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -25.19287013294035,
+        "y": -198.90359197574168,
+        "z": -634.1479183318755,
+        "tx": -27.663567435297008,
+        "ty": -199.03720407632272,
+        "tz": -631.2264326978415,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "shambler",
+      "inspectorErrors": []
+    },
+    {
+      "file": "feral-rest-noon-front.jpg",
+      "kind": "feral",
+      "light": "noon",
+      "view": "front",
+      "label": "rest",
+      "bytes": 79824,
+      "current": {
+        "id": "zombie.feral",
+        "name": "Feral",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.81839620667273,
+          "y": -199.28455392823085,
+          "z": -631.9006579730345
+        },
+        "size": {
+          "x": 1.8792358365480695,
+          "y": 1.425375856275707,
+          "z": 1.7612723236173906
+        },
+        "yaw": 1.0725251956308932,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4820,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -25.088354514879345,
+        "y": -199.06668170051896,
+        "z": -630.3991350425482,
+        "tx": -27.81839620667273,
+        "ty": -199.28455392823085,
+        "tz": -631.9006579730345,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "feral",
+      "inspectorErrors": []
+    },
+    {
+      "file": "feral-rest-noon-side.jpg",
+      "kind": "feral",
+      "light": "noon",
+      "view": "side",
+      "label": "rest",
+      "bytes": 73885,
+      "current": {
+        "id": "zombie.feral",
+        "name": "Feral",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.72725368284024,
+          "y": -199.28455392823085,
+          "z": -631.8516142134984
+        },
+        "size": {
+          "x": 1.8484183208496816,
+          "y": 1.3737834644825,
+          "z": 1.7390117371818405
+        },
+        "yaw": 1.077135552244251,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4820,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -26.24254962337695,
+        "y": -199.17606641208465,
+        "z": -634.5805498237905,
+        "tx": -27.72725368284024,
+        "ty": -199.28455392823085,
+        "tz": -631.8516142134984,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "feral",
+      "inspectorErrors": []
+    },
+    {
+      "file": "feral-rest-overcast-front.jpg",
+      "kind": "feral",
+      "light": "overcast",
+      "view": "front",
+      "label": "rest",
+      "bytes": 79146,
+      "current": {
+        "id": "zombie.feral",
+        "name": "Feral",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.635884126748056,
+          "y": -199.28455392823085,
+          "z": -631.8029947295488
+        },
+        "size": {
+          "x": 1.8104898972772006,
+          "y": 1.3085455089999414,
+          "z": 1.7133324468277351
+        },
+        "yaw": 1.0817848315970504,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4820,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -24.89508812872704,
+        "y": -199.06691341597642,
+        "z": -630.3281733814838,
+        "tx": -27.635884126748056,
+        "ty": -199.28455392823085,
+        "tz": -631.8029947295488,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "feral",
+      "inspectorErrors": []
+    },
+    {
+      "file": "feral-rest-overcast-side.jpg",
+      "kind": "feral",
+      "light": "overcast",
+      "view": "side",
+      "label": "rest",
+      "bytes": 72501,
+      "current": {
+        "id": "zombie.feral",
+        "name": "Feral",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.544287605719305,
+          "y": -199.28455392823085,
+          "z": -631.7548041979536
+        },
+        "size": {
+          "x": 1.7646097077045795,
+          "y": 1.2360593326363585,
+          "z": 1.6841039112462113
+        },
+        "yaw": 1.0864736960593855,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4820,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -26.08527254236703,
+        "y": -199.1760929328982,
+        "z": -634.4966999944767,
+        "tx": -27.544287605719305,
+        "ty": -199.28455392823085,
+        "tz": -631.7548041979536,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "feral",
+      "inspectorErrors": []
+    },
+    {
+      "file": "feral-rest-dusk-front.jpg",
+      "kind": "feral",
+      "light": "dusk",
+      "view": "front",
+      "label": "rest",
+      "bytes": 69359,
+      "current": {
+        "id": "zombie.feral",
+        "name": "Feral",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.452464210560805,
+          "y": -199.28455392823085,
+          "z": -631.707047375388
+        },
+        "size": {
+          "x": 1.7731081962952295,
+          "y": 1.179112578818632,
+          "z": 1.68387697701462
+        },
+        "yaw": 1.0912028250468127,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4820,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -24.701052864594754,
+        "y": -199.06715338576046,
+        "z": -630.2594817483313,
+        "tx": -27.452464210560805,
+        "ty": -199.28455392823085,
+        "tz": -631.707047375388,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "feral",
+      "inspectorErrors": []
+    },
+    {
+      "file": "feral-rest-dusk-side.jpg",
+      "kind": "feral",
+      "light": "dusk",
+      "view": "side",
+      "label": "rest",
+      "bytes": 66949,
+      "current": {
+        "id": "zombie.feral",
+        "name": "Feral",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.360414056559506,
+          "y": -199.28455392823085,
+          "z": -631.6597291003948
+        },
+        "size": {
+          "x": 1.8219910379279192,
+          "y": 1.2229303040491573,
+          "z": 1.7044535461667465
+        },
+        "yaw": 1.095972915610041,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4820,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -25.927672317912474,
+        "y": -199.17612213408208,
+        "z": -634.4145022146871,
+        "tx": -27.360414056559506,
+        "ty": -199.28455392823085,
+        "tz": -631.6597291003948,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "feral",
+      "inspectorErrors": []
+    },
+    {
+      "file": "feral-rest-night-front.jpg",
+      "kind": "feral",
+      "light": "night",
+      "view": "front",
+      "label": "rest",
+      "bytes": 41483,
+      "current": {
+        "id": "zombie.feral",
+        "name": "Feral",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.268137284523288,
+          "y": -199.28455392823085,
+          "z": -631.6128542954077
+        },
+        "size": {
+          "x": 1.8598158108660137,
+          "y": 1.2697377658441553,
+          "z": 1.7189436824119184
+        },
+        "yaw": 1.1007846830504107,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4820,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -24.506260913823894,
+        "y": -199.06740194832457,
+        "z": -630.1931149476138,
+        "tx": -27.268137284523288,
+        "ty": -199.28455392823085,
+        "tz": -631.6128542954077,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "feral",
+      "inspectorErrors": []
+    },
+    {
+      "file": "feral-rest-night-side.jpg",
+      "kind": "feral",
+      "light": "night",
+      "view": "side",
+      "label": "rest",
+      "bytes": 48348,
+      "current": {
+        "id": "zombie.feral",
+        "name": "Feral",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.175634061868447,
+          "y": -199.28455392823085,
+          "z": -631.5664279688411
+        },
+        "size": {
+          "x": 1.886452114196075,
+          "y": 1.309420487617075,
+          "z": 1.7274491532634784
+        },
+        "yaw": 1.105638861562388,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4820,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -25.769768697289873,
+        "y": -199.17615414532284,
+        "z": -634.3339854615417,
+        "tx": -27.175634061868447,
+        "ty": -199.28455392823085,
+        "tz": -631.5664279688411,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "feral",
+      "inspectorErrors": []
+    },
+    {
+      "file": "feral-rest-noon-gameplay.jpg",
+      "kind": "feral",
+      "light": "noon",
+      "view": "gameplay",
+      "label": "rest",
+      "bytes": 68204,
+      "current": {
+        "id": "zombie.feral",
+        "name": "Feral",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.08290458375627,
+          "y": -199.28455392823085,
+          "z": -631.520455217248
+        },
+        "size": {
+          "x": 1.903043689346351,
+          "y": 1.3357607864444674,
+          "z": 1.7306918808499177
+        },
+        "yaw": 1.1105362049046053,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4820,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -19.17428477760621,
+        "y": -198.17116912055033,
+        "z": -631.9831722277385,
+        "tx": -27.08290458375627,
+        "ty": -199.28455392823085,
+        "tz": -631.520455217248,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "feral",
+      "inspectorErrors": []
+    },
+    {
+      "file": "feral-walk-f20-noon-side.jpg",
+      "kind": "feral",
+      "light": "noon",
+      "view": "side",
+      "label": "walk-f20",
+      "bytes": 77085,
+      "current": {
+        "id": "zombie.feral",
+        "name": "Feral",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -25.08403532400848,
+          "y": -199.28455392823085,
+          "z": -630.6698991795149
+        },
+        "size": {
+          "x": 1.8814513223746445,
+          "y": 1.3931385704312333,
+          "z": 1.672960440386646
+        },
+        "yaw": 1.2249381190412916,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4820,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -24.019909074338614,
+        "y": -199.17673818246914,
+        "z": -633.5681598519202,
+        "tx": -25.08403532400848,
+        "ty": -199.28455392823085,
+        "tz": -630.6698991795149,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "feral",
+      "inspectorErrors": []
+    },
+    {
+      "file": "leaper-rest-noon-front.jpg",
+      "kind": "leaper",
+      "light": "noon",
+      "view": "front",
+      "label": "rest",
+      "bytes": 78411,
+      "current": {
+        "id": "zombie.leaper",
+        "name": "Leaper",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.87998853903816,
+          "y": -199.62802991554696,
+          "z": -631.9866653932265
+        },
+        "size": {
+          "x": 1.2017763249751106,
+          "y": 1.1037445759601212,
+          "z": 0.9108704556828116
+        },
+        "yaw": 1.4601391056209956,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4650,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -25.15389522476014,
+        "y": -199.4362298006265,
+        "z": -631.6837661360845,
+        "tx": -27.87998853903816,
+        "ty": -199.62802991554696,
+        "tz": -631.9866653932265,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "leaper",
+      "inspectorErrors": []
+    },
+    {
+      "file": "leaper-rest-noon-side.jpg",
+      "kind": "leaper",
+      "light": "noon",
+      "view": "side",
+      "label": "rest",
+      "bytes": 67047,
+      "current": {
+        "id": "zombie.leaper",
+        "name": "Leaper",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.81998280855724,
+          "y": -199.62802991554696,
+          "z": -631.9799980898398
+        },
+        "size": {
+          "x": 1.2152246660051809,
+          "y": 1.1038563018498166,
+          "z": 0.9123054394639212
+        },
+        "yaw": 1.4601391056209854,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4650,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -27.490216077760316,
+        "y": -199.5237507445392,
+        "z": -634.9478986670119,
+        "tx": -27.81998280855724,
+        "ty": -199.62802991554696,
+        "tz": -631.9799980898398,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "leaper",
+      "inspectorErrors": []
+    },
+    {
+      "file": "leaper-rest-overcast-front.jpg",
+      "kind": "leaper",
+      "light": "overcast",
+      "view": "front",
+      "label": "rest",
+      "bytes": 73478,
+      "current": {
+        "id": "zombie.leaper",
+        "name": "Leaper",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.759977078076318,
+          "y": -199.62802991554696,
+          "z": -631.9733307864531
+        },
+        "size": {
+          "x": 1.2334817646852088,
+          "y": 1.1029017475333376,
+          "z": 0.9142463476421199
+        },
+        "yaw": 1.46013910562097,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4650,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -25.03388376379829,
+        "y": -199.4362298006265,
+        "z": -631.670431529311,
+        "tx": -27.759977078076318,
+        "ty": -199.62802991554696,
+        "tz": -631.9733307864531,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "leaper",
+      "inspectorErrors": []
+    },
+    {
+      "file": "leaper-rest-overcast-side.jpg",
+      "kind": "leaper",
+      "light": "overcast",
+      "view": "side",
+      "label": "rest",
+      "bytes": 63621,
+      "current": {
+        "id": "zombie.leaper",
+        "name": "Leaper",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.699971347595397,
+          "y": -199.62802991554696,
+          "z": -631.9666634830663
+        },
+        "size": {
+          "x": 1.254049472957906,
+          "y": 1.100513461183965,
+          "z": 0.9187996090646493
+        },
+        "yaw": 1.4601391056209496,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4650,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -27.3702046167984,
+        "y": -199.5237507445392,
+        "z": -634.9345640602385,
+        "tx": -27.699971347595397,
+        "ty": -199.62802991554696,
+        "tz": -631.9666634830663,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "leaper",
+      "inspectorErrors": []
+    },
+    {
+      "file": "leaper-rest-dusk-front.jpg",
+      "kind": "leaper",
+      "light": "dusk",
+      "view": "front",
+      "label": "rest",
+      "bytes": 66955,
+      "current": {
+        "id": "zombie.leaper",
+        "name": "Leaper",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.639965617114477,
+          "y": -199.62802991554696,
+          "z": -631.9599961796796
+        },
+        "size": {
+          "x": 1.2750481760999683,
+          "y": 1.0968566327098301,
+          "z": 0.9237847425913515
+        },
+        "yaw": 1.4601391056209239,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4650,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -24.91387230283643,
+        "y": -199.4362298006265,
+        "z": -631.6570969225374,
+        "tx": -27.639965617114477,
+        "ty": -199.62802991554696,
+        "tz": -631.9599961796796,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "leaper",
+      "inspectorErrors": []
+    },
+    {
+      "file": "leaper-rest-dusk-side.jpg",
+      "kind": "leaper",
+      "light": "dusk",
+      "view": "side",
+      "label": "rest",
+      "bytes": 59457,
+      "current": {
+        "id": "zombie.leaper",
+        "name": "Leaper",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.579959886633556,
+          "y": -199.62802991554696,
+          "z": -631.9533288762929
+        },
+        "size": {
+          "x": 1.2943184140472503,
+          "y": 1.0925261856394002,
+          "z": 0.9283019835860387
+        },
+        "yaw": 1.4601391056208923,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4650,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -27.25019315583642,
+        "y": -199.5237507445392,
+        "z": -634.921229453465,
+        "tx": -27.579959886633556,
+        "ty": -199.62802991554696,
+        "tz": -631.9533288762929,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "leaper",
+      "inspectorErrors": []
+    },
+    {
+      "file": "leaper-rest-night-front.jpg",
+      "kind": "leaper",
+      "light": "night",
+      "view": "front",
+      "label": "rest",
+      "bytes": 40889,
+      "current": {
+        "id": "zombie.leaper",
+        "name": "Leaper",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.519954156152636,
+          "y": -199.62802991554696,
+          "z": -631.9466615729061
+        },
+        "size": {
+          "x": 1.3100304541476682,
+          "y": 1.0883416113503586,
+          "z": 0.9319749716757997
+        },
+        "yaw": 1.4601391056208544,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4650,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -24.793860841874558,
+        "y": -199.43622980062648,
+        "z": -631.6437623157639,
+        "tx": -27.519954156152636,
+        "ty": -199.62802991554696,
+        "tz": -631.9466615729061,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "leaper",
+      "inspectorErrors": []
+    },
+    {
+      "file": "leaper-rest-night-side.jpg",
+      "kind": "leaper",
+      "light": "night",
+      "view": "side",
+      "label": "rest",
+      "bytes": 37103,
+      "current": {
+        "id": "zombie.leaper",
+        "name": "Leaper",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.45994842567172,
+          "y": -199.62802991554696,
+          "z": -631.9399942695194
+        },
+        "size": {
+          "x": 1.3210408708731372,
+          "y": 1.0850570928956813,
+          "z": 0.9345579363814522
+        },
+        "yaw": 1.4601391056208086,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4650,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -27.130181694874373,
+        "y": -199.5237507445392,
+        "z": -634.9078948466915,
+        "tx": -27.45994842567172,
+        "ty": -199.62802991554696,
+        "tz": -631.9399942695194,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "leaper",
+      "inspectorErrors": []
+    },
+    {
+      "file": "leaper-rest-noon-gameplay.jpg",
+      "kind": "leaper",
+      "light": "noon",
+      "view": "gameplay",
+      "label": "rest",
+      "bytes": 69152,
+      "current": {
+        "id": "zombie.leaper",
+        "name": "Leaper",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.399863834598026,
+          "y": -199.62802991554696,
+          "z": -631.9340796655168
+        },
+        "size": {
+          "x": 1.3169616258050496,
+          "y": 1.0778051116031122,
+          "z": 0.9227985019709877
+        },
+        "yaw": 1.4726744959522478,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4650,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -20.143620486925958,
+        "y": -198.51464510786644,
+        "z": -635.1132787390873,
+        "tx": -27.399863834598026,
+        "ty": -199.62802991554696,
+        "tz": -631.9340796655168,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "leaper",
+      "inspectorErrors": []
+    },
+    {
+      "file": "leaper-walk-f20-noon-side.jpg",
+      "kind": "leaper",
+      "light": "noon",
+      "view": "side",
+      "label": "walk-f20",
+      "bytes": 68802,
+      "current": {
+        "id": "zombie.leaper",
+        "name": "Leaper",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.133283093298417,
+          "y": -199.62802991554696,
+          "z": -631.8825470295322
+        },
+        "size": {
+          "x": 1.225528390014599,
+          "y": 1.0794223167386576,
+          "z": 0.8193180195393097
+        },
+        "yaw": 1.5529733814930105,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4650,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -26.072996871734947,
+        "y": -199.5250237279223,
+        "z": -634.8316421785843,
+        "tx": -26.133283093298417,
+        "ty": -199.62802991554696,
+        "tz": -631.8825470295322,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "leaper",
+      "inspectorErrors": []
+    },
+    {
+      "file": "spider-rest-noon-front.jpg",
+      "kind": "spider",
+      "light": "noon",
+      "view": "front",
+      "label": "rest",
+      "bytes": 85536,
+      "current": {
+        "id": "zombie.spider",
+        "name": "Spider",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999998809349023,
+          "y": -199.54368504717038,
+          "z": -631.9688582279695
+        },
+        "size": {
+          "x": 2.1833875572252843,
+          "y": 0.9294959388619191,
+          "z": 1.9130710883425763
+        },
+        "yaw": 0.004999999999999999,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 3794,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -27.996732779493335,
+        "y": -199.3609785551742,
+        "z": -629.3560357042663,
+        "tx": -27.999998809349023,
+        "ty": -199.54368504717038,
+        "tz": -631.9688582279695,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "spider",
+      "inspectorErrors": []
+    },
+    {
+      "file": "spider-rest-noon-side.jpg",
+      "kind": "spider",
+      "light": "noon",
+      "view": "side",
+      "label": "rest",
+      "bytes": 89268,
+      "current": {
+        "id": "zombie.spider",
+        "name": "Spider",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99999489045543,
+          "y": -199.54368504717038,
+          "z": -631.9531734810153
+        },
+        "size": {
+          "x": 2.1696264675530585,
+          "y": 0.9373530675613608,
+          "z": 1.9275856800151132
+        },
+        "yaw": 0.011250000000000001,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 3794,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -25.478715819950494,
+        "y": -199.45563894135088,
+        "z": -631.9657799814221,
+        "tx": -27.99999489045543,
+        "ty": -199.54368504717038,
+        "tz": -631.9531734810153,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "spider",
+      "inspectorErrors": []
+    },
+    {
+      "file": "spider-rest-overcast-front.jpg",
+      "kind": "spider",
+      "light": "overcast",
+      "view": "front",
+      "label": "rest",
+      "bytes": 78754,
+      "current": {
+        "id": "zombie.spider",
+        "name": "Spider",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999986757386747,
+          "y": -199.54368504717038,
+          "z": -631.9373497707396
+        },
+        "size": {
+          "x": 2.1533135873224545,
+          "y": 0.9438778448708831,
+          "z": 1.9462489124290414
+        },
+        "yaw": 0.02,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 3794,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -27.970475505751413,
+        "y": -199.36024760062708,
+        "z": -629.3142380712817,
+        "tx": -27.999986757386747,
+        "ty": -199.54368504717038,
+        "tz": -631.9373497707396,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "spider",
+      "inspectorErrors": []
+    },
+    {
+      "file": "spider-rest-overcast-side.jpg",
+      "kind": "spider",
+      "light": "overcast",
+      "view": "side",
+      "label": "rest",
+      "bytes": 81138,
+      "current": {
+        "id": "zombie.spider",
+        "name": "Spider",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99997294086659,
+          "y": -199.54368504717038,
+          "z": -631.9213399313328
+        },
+        "size": {
+          "x": 2.1343835714763486,
+          "y": 0.9493365261153315,
+          "z": 1.9770964707568055
+        },
+        "yaw": 0.03125,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 3794,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -25.44254334987636,
+        "y": -199.4543597734728,
+        "z": -631.9724953440561,
+        "tx": -27.99997294086659,
+        "ty": -199.54368504717038,
+        "tz": -631.9213399313328,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "spider",
+      "inspectorErrors": []
+    },
+    {
+      "file": "spider-rest-dusk-front.jpg",
+      "kind": "spider",
+      "light": "dusk",
+      "view": "front",
+      "label": "rest",
+      "bytes": 70471,
+      "current": {
+        "id": "zombie.spider",
+        "name": "Spider",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99995195633886,
+          "y": -199.54368504717038,
+          "z": -631.9050969279898
+        },
+        "size": {
+          "x": 2.1115326862360995,
+          "y": 0.9539458956476494,
+          "z": 2.0097863682700563
+        },
+        "yaw": 0.045,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 3794,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -27.917344923194413,
+        "y": -199.35880867098268,
+        "z": -629.2625324133227,
+        "tx": -27.99995195633886,
+        "ty": -199.54368504717038,
+        "tz": -631.9050969279898,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "spider",
+      "inspectorErrors": []
+    },
+    {
+      "file": "spider-rest-dusk-side.jpg",
+      "kind": "spider",
+      "light": "dusk",
+      "view": "side",
+      "label": "rest",
+      "bytes": 77288,
+      "current": {
+        "id": "zombie.spider",
+        "name": "Spider",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99992227478264,
+          "y": -199.54368504717038,
+          "z": -631.8885739011258
+        },
+        "size": {
+          "x": 2.0829424234795617,
+          "y": 0.9578814671626219,
+          "z": 2.043133354133147
+        },
+        "yaw": 0.06125,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 3794,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -25.384855133274,
+        "y": -199.45227235057868,
+        "z": -632.0063314195514,
+        "tx": -27.99992227478264,
+        "ty": -199.54368504717038,
+        "tz": -631.8885739011258,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "spider",
+      "inspectorErrors": []
+    },
+    {
+      "file": "spider-rest-night-front.jpg",
+      "kind": "spider",
+      "light": "night",
+      "view": "front",
+      "label": "rest",
+      "bytes": 40706,
+      "current": {
+        "id": "zombie.spider",
+        "name": "Spider",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99988229589753,
+          "y": -199.54368504717038,
+          "z": -631.8717242318302
+        },
+        "size": {
+          "x": 2.0477373563969223,
+          "y": 0.9612840371645177,
+          "z": 2.0757490515140944
+        },
+        "yaw": 0.08000000000000002,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 3794,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -27.836209227029855,
+        "y": -199.35670879850508,
+        "z": -629.2028533571128,
+        "tx": -27.99988229589753,
+        "ty": -199.54368504717038,
+        "tz": -631.8717242318302,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "spider",
+      "inspectorErrors": []
+    },
+    {
+      "file": "spider-rest-night-side.jpg",
+      "kind": "spider",
+      "light": "night",
+      "view": "side",
+      "label": "rest",
+      "bytes": 45996,
+      "current": {
+        "id": "zombie.spider",
+        "name": "Spider",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999830323371746,
+          "y": -199.54368504717038,
+          "z": -631.8545016326435
+        },
+        "size": {
+          "x": 2.005397682498831,
+          "y": 0.9642649316085112,
+          "z": 2.106045618174562
+        },
+        "yaw": 0.10125,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 3794,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -25.30979784852184,
+        "y": -199.44944563788206,
+        "z": -632.0701645078528,
+        "tx": -27.999830323371746,
+        "ty": -199.54368504717038,
+        "tz": -631.8545016326435,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "spider",
+      "inspectorErrors": []
+    },
+    {
+      "file": "spider-rest-noon-gameplay.jpg",
+      "kind": "spider",
+      "light": "noon",
+      "view": "gameplay",
+      "label": "rest",
+      "bytes": 71745,
+      "current": {
+        "id": "zombie.spider",
+        "name": "Spider",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99976454203982,
+          "y": -199.54368504717038,
+          "z": -631.8368602676238
+        },
+        "size": {
+          "x": 1.9558165824521332,
+          "y": 0.9669088520442131,
+          "z": 2.1322472752116255
+        },
+        "yaw": 0.12500000000000003,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 3794,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.365510974340935,
+        "y": -198.43030023948987,
+        "z": -625.4115923245497,
+        "tx": -27.99976454203982,
+        "ty": -199.54368504717038,
+        "tz": -631.8368602676238,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "spider",
+      "inspectorErrors": []
+    },
+    {
+      "file": "spider-walk-f20-noon-side.jpg",
+      "kind": "spider",
+      "light": "noon",
+      "view": "side",
+      "label": "walk-f20",
+      "bytes": 81012,
+      "current": {
+        "id": "zombie.spider",
+        "name": "Spider",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.990464022573978,
+          "y": -199.54368504717038,
+          "z": -631.3223310160895
+        },
+        "size": {
+          "x": 2.6495704859159765,
+          "y": 0.9516864540398728,
+          "z": 2.6010185964489665
+        },
+        "yaw": 0.9789583333333337,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 3794,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -25.91948966697073,
+        "y": -199.42193131318862,
+        "z": -634.1271912468138,
+        "tx": -27.990464022573978,
+        "ty": -199.54368504717038,
+        "tz": -631.3223310160895,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "spider",
+      "inspectorErrors": []
+    },
+    {
+      "file": "drowned-rest-noon-front.jpg",
+      "kind": "drowned",
+      "light": "noon",
+      "view": "front",
+      "label": "rest",
+      "bytes": 79899,
+      "current": {
+        "id": "zombie.drowned",
+        "name": "Drowned",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99997284273791,
+          "y": -199.08055021637298,
+          "z": -631.9755506350164
+        },
+        "size": {
+          "x": 0.7862871054364611,
+          "y": 1.833354150202922,
+          "z": 0.565835099488254
+        },
+        "yaw": 0.001777777777777778,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5708,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -27.99846268992007,
+        "y": -198.84294982132766,
+        "z": -628.5777070186,
+        "tx": -27.99997284273791,
+        "ty": -199.08055021637298,
+        "tz": -631.9755506350164,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "drowned",
+      "inspectorErrors": []
+    },
+    {
+      "file": "drowned-rest-noon-side.jpg",
+      "kind": "drowned",
+      "light": "noon",
+      "view": "side",
+      "label": "rest",
+      "bytes": 67380,
+      "current": {
+        "id": "zombie.drowned",
+        "name": "Drowned",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999924091568076,
+          "y": -199.08055021637298,
+          "z": -631.9633629075594
+        },
+        "size": {
+          "x": 0.7875042076332441,
+          "y": 1.8177554001925103,
+          "z": 0.5691437482305446
+        },
+        "yaw": 0.004,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5708,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -24.50089741370334,
+        "y": -198.9583613192212,
+        "z": -631.9695834059844,
+        "tx": -27.999924091568076,
+        "ty": -199.08055021637298,
+        "tz": -631.9633629075594,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "drowned",
+      "inspectorErrors": []
+    },
+    {
+      "file": "drowned-rest-overcast-front.jpg",
+      "kind": "drowned",
+      "light": "overcast",
+      "view": "front",
+      "label": "rest",
+      "bytes": 77550,
+      "current": {
+        "id": "zombie.drowned",
+        "name": "Drowned",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999837711132177,
+          "y": -199.08055021637298,
+          "z": -631.9512158635154
+        },
+        "size": {
+          "x": 0.7894073509727804,
+          "y": 1.8037904673583114,
+          "z": 0.5998889549656496
+        },
+        "yaw": 0.007111111111111112,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5708,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -27.986239521062352,
+        "y": -198.8428300625069,
+        "z": -628.5516864769986,
+        "tx": -27.999837711132177,
+        "ty": -199.08055021637298,
+        "tz": -631.9512158635154,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "drowned",
+      "inspectorErrors": []
+    },
+    {
+      "file": "drowned-rest-overcast-side.jpg",
+      "kind": "drowned",
+      "light": "overcast",
+      "view": "side",
+      "label": "rest",
+      "bytes": 67933,
+      "current": {
+        "id": "zombie.drowned",
+        "name": "Drowned",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999703239058693,
+          "y": -199.08055021637298,
+          "z": -631.9391138749505
+        },
+        "size": {
+          "x": 0.7920356926137408,
+          "y": 1.7923182323657159,
+          "z": 0.6324483222786057
+        },
+        "yaw": 0.011111111111111113,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5708,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -24.49923225223921,
+        "y": -198.9583079851762,
+        "z": -631.9640065326703,
+        "tx": -27.999703239058693,
+        "ty": -199.08055021637298,
+        "tz": -631.9391138749505,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "drowned",
+      "inspectorErrors": []
+    },
+    {
+      "file": "drowned-rest-dusk-front.jpg",
+      "kind": "drowned",
+      "light": "dusk",
+      "view": "front",
+      "label": "rest",
+      "bytes": 65683,
+      "current": {
+        "id": "zombie.drowned",
+        "name": "Drowned",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999510303208012,
+          "y": -199.08055021637298,
+          "z": -631.9270564132917
+        },
+        "size": {
+          "x": 0.795456234222371,
+          "y": 1.782026963178879,
+          "z": 0.6656110710849816
+        },
+        "yaw": 0.016,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5708,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -27.961700306450716,
+        "y": -198.84259139217622,
+        "z": -628.5242967433127,
+        "tx": -27.999510303208012,
+        "ty": -199.08055021637298,
+        "tz": -631.9270564132917,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "drowned",
+      "inspectorErrors": []
+    },
+    {
+      "file": "drowned-rest-dusk-side.jpg",
+      "kind": "drowned",
+      "light": "dusk",
+      "view": "side",
+      "label": "rest",
+      "bytes": 58642,
+      "current": {
+        "id": "zombie.drowned",
+        "name": "Drowned",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999248547244974,
+          "y": -199.08055021637298,
+          "z": -631.9150389070401
+        },
+        "size": {
+          "x": 0.7997342873884712,
+          "y": 1.7729203021379476,
+          "z": 0.6992571699906875
+        },
+        "yaw": 0.021777777777777778,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5708,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -24.496619841416383,
+        "y": -198.95822006879672,
+        "z": -631.9710857490788,
+        "tx": -27.999248547244974,
+        "ty": -199.08055021637298,
+        "tz": -631.9150389070401,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "drowned",
+      "inspectorErrors": []
+    },
+    {
+      "file": "drowned-rest-night-front.jpg",
+      "kind": "drowned",
+      "light": "night",
+      "view": "front",
+      "label": "rest",
+      "bytes": 37343,
+      "current": {
+        "id": "zombie.drowned",
+        "name": "Drowned",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.998907536494258,
+          "y": -199.08055021637298,
+          "z": -631.9030534812966
+        },
+        "size": {
+          "x": 0.8048437483293931,
+          "y": 1.7646203628084152,
+          "z": 0.7302768382547811
+        },
+        "yaw": 0.028444444444444442,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5708,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -27.924693455263807,
+        "y": -198.84223552755984,
+        "z": -628.4958027933322,
+        "tx": -27.998907536494258,
+        "ty": -199.08055021637298,
+        "tz": -631.9030534812966,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "drowned",
+      "inspectorErrors": []
+    },
+    {
+      "file": "drowned-rest-night-side.jpg",
+      "kind": "drowned",
+      "light": "night",
+      "view": "side",
+      "label": "rest",
+      "bytes": 35268,
+      "current": {
+        "id": "zombie.drowned",
+        "name": "Drowned",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.998476650515247,
+          "y": -199.08055021637298,
+          "z": -631.8910895974027
+        },
+        "size": {
+          "x": 0.8107680256748822,
+          "y": 1.7571700620288198,
+          "z": 0.758523281848511
+        },
+        "yaw": 0.036,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5708,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -24.493352266384676,
+        "y": -198.9580990422637,
+        "z": -631.9908178109166,
+        "tx": -27.998476650515247,
+        "ty": -199.08055021637298,
+        "tz": -631.8910895974027,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "drowned",
+      "inspectorErrors": []
+    },
+    {
+      "file": "drowned-rest-noon-gameplay.jpg",
+      "kind": "drowned",
+      "light": "noon",
+      "view": "gameplay",
+      "label": "rest",
+      "bytes": 68057,
+      "current": {
+        "id": "zombie.drowned",
+        "name": "Drowned",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.997944967540572,
+          "y": -199.08055021637298,
+          "z": -631.8791346082949
+        },
+        "size": {
+          "x": 0.8175380136257822,
+          "y": 1.751807712507798,
+          "z": 0.7854614125183161
+        },
+        "yaw": 0.04444444444444444,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5708,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.792504512587932,
+        "y": -197.96716540869247,
+        "z": -625.1653692824979,
+        "tx": -27.997944967540572,
+        "ty": -199.08055021637298,
+        "tz": -631.8791346082949,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "drowned",
+      "inspectorErrors": []
+    },
+    {
+      "file": "drowned-walk-f20-noon-side.jpg",
+      "kind": "drowned",
+      "light": "noon",
+      "view": "side",
+      "label": "walk-f20",
+      "bytes": 69712,
+      "current": {
+        "id": "zombie.drowned",
+        "name": "Drowned",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.935691224749576,
+          "y": -199.08055021637298,
+          "z": -631.6043035367894
+        },
+        "size": {
+          "x": 1.0669330604021994,
+          "y": 1.7632380474080094,
+          "z": 1.106180955515356
+        },
+        "yaw": 0.4206249999999997,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5708,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -24.6372275243837,
+        "y": -198.95567966731346,
+        "z": -632.9851218778952,
+        "tx": -27.935691224749576,
+        "ty": -199.08055021637298,
+        "tz": -631.6043035367894,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "drowned",
+      "inspectorErrors": []
+    },
+    {
+      "file": "military-rest-noon-front.jpg",
+      "kind": "military",
+      "light": "noon",
+      "view": "front",
+      "label": "rest",
+      "bytes": 80543,
+      "current": {
+        "id": "zombie.military",
+        "name": "Military",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.94886488404306,
+          "y": -198.92134844960626,
+          "z": -631.9943183204492
+        },
+        "size": {
+          "x": 0.964664279043923,
+          "y": 2.1545967076520753,
+          "z": 1.001176877844614
+        },
+        "yaw": 0.01,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5976,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -27.935271960060703,
+        "y": -198.63619496982153,
+        "z": -627.916456229002,
+        "tx": -27.94886488404306,
+        "ty": -198.92134844960626,
+        "tz": -631.9943183204492,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "military",
+      "inspectorErrors": []
+    },
+    {
+      "file": "military-rest-noon-side.jpg",
+      "kind": "military",
+      "light": "noon",
+      "view": "side",
+      "label": "rest",
+      "bytes": 75378,
+      "current": {
+        "id": "zombie.military",
+        "name": "Military",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.922781247272734,
+          "y": -198.92134844960626,
+          "z": -631.9914201385859
+        },
+        "size": {
+          "x": 0.971583380636428,
+          "y": 2.145877635236104,
+          "z": 1.016244262508394
+        },
+        "yaw": 0.020000000000000004,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5976,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -23.780616011408682,
+        "y": -198.7766936195267,
+        "z": -632.0328431717215,
+        "tx": -27.922781247272734,
+        "ty": -198.92134844960626,
+        "tz": -631.9914201385859,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "military",
+      "inspectorErrors": []
+    },
+    {
+      "file": "military-rest-overcast-front.jpg",
+      "kind": "military",
+      "light": "overcast",
+      "view": "front",
+      "label": "rest",
+      "bytes": 80247,
+      "current": {
+        "id": "zombie.military",
+        "name": "Military",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.896182460462548,
+          "y": -198.92134844960626,
+          "z": -631.9884647178292
+        },
+        "size": {
+          "x": 0.9811683596508338,
+          "y": 2.138052626443425,
+          "z": 1.0728310700883412
+        },
+        "yaw": 0.03333333333333334,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5976,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -27.814430962982243,
+        "y": -198.63549831379137,
+        "z": -627.9014348683313,
+        "tx": -27.896182460462548,
+        "ty": -198.92134844960626,
+        "tz": -631.9884647178292,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "military",
+      "inspectorErrors": []
+    },
+    {
+      "file": "military-rest-overcast-side.jpg",
+      "kind": "military",
+      "light": "overcast",
+      "view": "side",
+      "label": "rest",
+      "bytes": 74744,
+      "current": {
+        "id": "zombie.military",
+        "name": "Military",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.86894114599262,
+          "y": -198.92134844960626,
+          "z": -631.9854379051103
+        },
+        "size": {
+          "x": 0.9931288734995718,
+          "y": 2.1299786560291523,
+          "z": 1.1279017151052813
+        },
+        "yaw": 0.05,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5976,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -23.71935375820616,
+        "y": -198.77636112389513,
+        "z": -632.123808736956,
+        "tx": -27.86894114599262,
+        "ty": -198.92134844960626,
+        "tz": -631.9854379051103,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "military",
+      "inspectorErrors": []
+    },
+    {
+      "file": "military-rest-dusk-front.jpg",
+      "kind": "military",
+      "light": "dusk",
+      "view": "front",
+      "label": "rest",
+      "bytes": 67002,
+      "current": {
+        "id": "zombie.military",
+        "name": "Military",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.840931101697137,
+          "y": -198.92134844960626,
+          "z": -631.9823256779664
+        },
+        "size": {
+          "x": 1.009530915090572,
+          "y": 2.1390982099092923,
+          "z": 1.2115964732885232
+        },
+        "yaw": 0.07,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5976,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -27.63574428817252,
+        "y": -198.63426765310646,
+        "z": -627.8820097577986,
+        "tx": -27.840931101697137,
+        "ty": -198.92134844960626,
+        "tz": -631.9823256779664,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "military",
+      "inspectorErrors": []
+    },
+    {
+      "file": "military-rest-dusk-side.jpg",
+      "kind": "military",
+      "light": "dusk",
+      "view": "side",
+      "label": "rest",
+      "bytes": 64531,
+      "current": {
+        "id": "zombie.military",
+        "name": "Military",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.812027770302233,
+          "y": -198.92134844960626,
+          "z": -631.9791141967003
+        },
+        "size": {
+          "x": 1.0302025551384304,
+          "y": 2.1238245912238938,
+          "z": 1.2787822902973858
+        },
+        "yaw": 0.09333333333333334,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5976,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -23.65599531287406,
+        "y": -198.77586029771305,
+        "z": -632.2705125749545,
+        "tx": -27.812027770302233,
+        "ty": -198.92134844960626,
+        "tz": -631.9791141967003,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "military",
+      "inspectorErrors": []
+    },
+    {
+      "file": "military-rest-night-front.jpg",
+      "kind": "military",
+      "light": "night",
+      "view": "front",
+      "label": "rest",
+      "bytes": 36218,
+      "current": {
+        "id": "zombie.military",
+        "name": "Military",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.782108834928447,
+          "y": -198.92134844960626,
+          "z": -631.9757898705476
+        },
+        "size": {
+          "x": 1.05678035034326,
+          "y": 2.11528947389084,
+          "z": 1.3320914735492124
+        },
+        "yaw": 0.12,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5976,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -27.397193826037096,
+        "y": -198.6325449096606,
+        "z": -627.8636825834014,
+        "tx": -27.782108834928447,
+        "ty": -198.92134844960626,
+        "tz": -631.9757898705476,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "military",
+      "inspectorErrors": []
+    },
+    {
+      "file": "military-rest-night-side.jpg",
+      "kind": "military",
+      "light": "night",
+      "view": "side",
+      "label": "rest",
+      "bytes": 38125,
+      "current": {
+        "id": "zombie.military",
+        "name": "Military",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.75105495981476,
+          "y": -198.92134844960626,
+          "z": -631.9723394399795
+        },
+        "size": {
+          "x": 1.0904543081351328,
+          "y": 2.1156583169530165,
+          "z": 1.3781104613431125
+        },
+        "yaw": 0.15,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5976,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -23.596607847775427,
+        "y": -198.7752211046921,
+        "z": -632.4732799192286,
+        "tx": -27.75105495981476,
+        "ty": -198.92134844960626,
+        "tz": -631.9723394399795,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "military",
+      "inspectorErrors": []
+    },
+    {
+      "file": "military-rest-noon-gameplay.jpg",
+      "kind": "military",
+      "light": "noon",
+      "view": "gameplay",
+      "label": "rest",
+      "bytes": 70257,
+      "current": {
+        "id": "zombie.military",
+        "name": "Military",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.71875069415371,
+          "y": -198.92134844960626,
+          "z": -631.9687500771282
+        },
+        "size": {
+          "x": 1.1294551658290537,
+          "y": 2.1188260247454593,
+          "z": 1.4161772897780338
+        },
+        "yaw": 0.18333333333333332,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5976,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -22.776895074755785,
+        "y": -197.80796364192574,
+        "z": -625.7769460341169,
+        "tx": -27.71875069415371,
+        "ty": -198.92134844960626,
+        "tz": -631.9687500771282,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "military",
+      "inspectorErrors": []
+    },
+    {
+      "file": "military-walk-f20-noon-side.jpg",
+      "kind": "military",
+      "light": "noon",
+      "view": "side",
+      "label": "walk-f20",
+      "bytes": 76009,
+      "current": {
+        "id": "zombie.military",
+        "name": "Military",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.703385453403754,
+          "y": -198.92134844960626,
+          "z": -631.9011582191397
+        },
+        "size": {
+          "x": 1.5418808328903992,
+          "y": 2.106473292630284,
+          "z": 1.3034323509326668
+        },
+        "yaw": 1.236573144117241,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5976,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -25.20454616119974,
+        "y": -198.775433057652,
+        "z": -635.8015547804612,
+        "tx": -26.703385453403754,
+        "ty": -198.92134844960626,
+        "tz": -631.9011582191397,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "military",
+      "inspectorErrors": []
+    },
+    {
+      "file": "brute-rest-noon-front.jpg",
+      "kind": "brute",
+      "light": "noon",
+      "view": "front",
+      "label": "rest",
+      "bytes": 81933,
+      "current": {
+        "id": "zombie.brute",
+        "name": "Brute",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999975832422823,
+          "y": -198.6102018541335,
+          "z": -631.9795272480028
+        },
+        "size": {
+          "x": 1.8211587235511821,
+          "y": 2.8144818951747936,
+          "z": 0.8563392793266758
+        },
+        "yaw": 0.0018888888888888887,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5944,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -27.997512712566913,
+        "y": -198.24546229454754,
+        "z": -626.7635091173139,
+        "tx": -27.999975832422823,
+        "ty": -198.6102018541335,
+        "tz": -631.9795272480028,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "brute",
+      "inspectorErrors": []
+    },
+    {
+      "file": "brute-rest-noon-side.jpg",
+      "kind": "brute",
+      "light": "noon",
+      "view": "side",
+      "label": "rest",
+      "bytes": 65591,
+      "current": {
+        "id": "zombie.brute",
+        "name": "Brute",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999932379640345,
+          "y": -198.6102018541335,
+          "z": -631.9693031254482
+        },
+        "size": {
+          "x": 1.8281945546139404,
+          "y": 2.7960221889198635,
+          "z": 0.8425104374133525
+        },
+        "yaw": 0.00425,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5944,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -22.391208036864136,
+        "y": -198.41434053480984,
+        "z": -631.9798973951398,
+        "tx": -27.999932379640345,
+        "ty": -198.6102018541335,
+        "tz": -631.9693031254482,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "brute",
+      "inspectorErrors": []
+    },
+    {
+      "file": "brute-rest-overcast-front.jpg",
+      "kind": "brute",
+      "light": "overcast",
+      "view": "front",
+      "label": "rest",
+      "bytes": 82260,
+      "current": {
+        "id": "zombie.brute",
+        "name": "Brute",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999855235053747,
+          "y": -198.6102018541335,
+          "z": -631.959093006807
+        },
+        "size": {
+          "x": 1.8351721936886776,
+          "y": 2.7778785457342963,
+          "z": 0.8339784425111247
+        },
+        "yaw": 0.007555555555555555,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5944,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -27.97766989539856,
+        "y": -198.24517720844145,
+        "z": -626.7390445172084,
+        "tx": -27.999855235053747,
+        "ty": -198.6102018541335,
+        "tz": -631.959093006807,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "brute",
+      "inspectorErrors": []
+    },
+    {
+      "file": "brute-rest-overcast-side.jpg",
+      "kind": "brute",
+      "light": "overcast",
+      "view": "side",
+      "label": "rest",
+      "bytes": 65120,
+      "current": {
+        "id": "zombie.brute",
+        "name": "Brute",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999734836436925,
+          "y": -198.6102018541335,
+          "z": -631.9488950095305
+        },
+        "size": {
+          "x": 1.8421673698472603,
+          "y": 2.7623439843001734,
+          "z": 0.8303700681277633
+        },
+        "yaw": 0.011805555555555554,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5944,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -22.38830607244835,
+        "y": -198.41424085041743,
+        "z": -631.9912932780943,
+        "tx": -27.999734836436925,
+        "ty": -198.6102018541335,
+        "tz": -631.9488950095305,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "brute",
+      "inspectorErrors": []
+    },
+    {
+      "file": "brute-rest-dusk-front.jpg",
+      "kind": "brute",
+      "light": "dusk",
+      "view": "front",
+      "label": "rest",
+      "bytes": 70228,
+      "current": {
+        "id": "zombie.brute",
+        "name": "Brute",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999561560484846,
+          "y": -198.6102018541335,
+          "z": -631.938703288383
+        },
+        "size": {
+          "x": 1.8492746076401403,
+          "y": 2.7487786384425306,
+          "z": 0.8331337108868411
+        },
+        "yaw": 0.016999999999999998,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5944,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -27.937840890075705,
+        "y": -198.24460872751422,
+        "z": -626.7108423264862,
+        "tx": -27.999561560484846,
+        "ty": -198.6102018541335,
+        "tz": -631.938703288383,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "brute",
+      "inspectorErrors": []
+    },
+    {
+      "file": "brute-rest-dusk-side.jpg",
+      "kind": "brute",
+      "light": "dusk",
+      "view": "side",
+      "label": "rest",
+      "bytes": 56437,
+      "current": {
+        "id": "zombie.brute",
+        "name": "Brute",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999325628445686,
+          "y": -198.6102018541335,
+          "z": -631.9285087655543
+        },
+        "size": {
+          "x": 1.8566178857246847,
+          "y": 2.7367162532693783,
+          "z": 0.8435520304620923
+        },
+        "yaw": 0.023138888888888886,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5944,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -22.38386102322194,
+        "y": -198.41407716973103,
+        "z": -632.0239808611655,
+        "tx": -27.999325628445686,
+        "ty": -198.6102018541335,
+        "tz": -631.9285087655543,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "brute",
+      "inspectorErrors": []
+    },
+    {
+      "file": "brute-rest-night-front.jpg",
+      "kind": "brute",
+      "light": "night",
+      "view": "front",
+      "label": "rest",
+      "bytes": 38653,
+      "current": {
+        "id": "zombie.brute",
+        "name": "Brute",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99901699569406,
+          "y": -198.6102018541335,
+          "z": -631.9182997618276
+        },
+        "size": {
+          "x": 1.8647743345264338,
+          "y": 2.726054225042361,
+          "z": 0.8763846100717956
+        },
+        "yaw": 0.030222222222222213,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5944,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -27.877771744018435,
+        "y": -198.24376029512322,
+        "z": -626.6793441266259,
+        "tx": -27.99901699569406,
+        "ty": -198.6102018541335,
+        "tz": -631.9182997618276,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "brute",
+      "inspectorErrors": []
+    },
+    {
+      "file": "brute-rest-night-side.jpg",
+      "kind": "brute",
+      "light": "night",
+      "view": "side",
+      "label": "rest",
+      "bytes": 32730,
+      "current": {
+        "id": "zombie.brute",
+        "name": "Brute",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99862523105197,
+          "y": -198.6102018541335,
+          "z": -631.908062544449
+        },
+        "size": {
+          "x": 1.8734634965149546,
+          "y": 2.7166888206918998,
+          "z": 0.911073272344197
+        },
+        "yaw": 0.03824999999999999,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5944,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -22.378503282208445,
+        "y": -198.41385320713727,
+        "z": -632.0779668512722,
+        "tx": -27.99862523105197,
+        "ty": -198.6102018541335,
+        "tz": -631.908062544449,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "brute",
+      "inspectorErrors": []
+    },
+    {
+      "file": "brute-rest-noon-gameplay.jpg",
+      "kind": "brute",
+      "light": "noon",
+      "view": "gameplay",
+      "label": "rest",
+      "bytes": 75005,
+      "current": {
+        "id": "zombie.brute",
+        "name": "Brute",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99813939051095,
+          "y": -198.6102018541335,
+          "z": -631.8977818051486
+        },
+        "size": {
+          "x": 1.8827395322690705,
+          "y": 2.7085201855143453,
+          "z": 0.947536248401434
+        },
+        "yaw": 0.04722222222222222,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5944,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.77760362133759,
+        "y": -197.49681704645297,
+        "z": -625.1934957066028,
+        "tx": -27.99813939051095,
+        "ty": -198.6102018541335,
+        "tz": -631.8977818051486,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "brute",
+      "inspectorErrors": []
+    },
+    {
+      "file": "brute-walk-f20-noon-side.jpg",
+      "kind": "brute",
+      "light": "noon",
+      "view": "side",
+      "label": "walk-f20",
+      "bytes": 67075,
+      "current": {
+        "id": "zombie.brute",
+        "name": "Brute",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.935816544345105,
+          "y": -198.6102018541335,
+          "z": -631.6449369979962
+        },
+        "size": {
+          "x": 2.1412029243058655,
+          "y": 2.691412139069996,
+          "z": 1.8219792038504465
+        },
+        "yaw": 0.4501666666666664,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5944,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -22.712132899038096,
+        "y": -198.4101099174129,
+        "z": -633.9996541189805,
+        "tx": -27.935816544345105,
+        "ty": -198.6102018541335,
+        "tz": -631.6449369979962,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "brute",
+      "inspectorErrors": []
+    },
+    {
+      "file": "spitter-rest-noon-front.jpg",
+      "kind": "spitter",
+      "light": "noon",
+      "view": "front",
+      "label": "rest",
+      "bytes": 79487,
+      "current": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999985187886267,
+          "y": -198.95498479325528,
+          "z": -631.9911193584162
+        },
+        "size": {
+          "x": 0.9060734084775639,
+          "y": 2.083281841532113,
+          "z": 0.7190839097178241
+        },
+        "yaw": 0.002666666666666667,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5088,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -27.997383923069027,
+        "y": -198.68213753950863,
+        "z": -628.0892227106135,
+        "tx": -27.999985187886267,
+        "ty": -198.95498479325528,
+        "tz": -631.9911193584162,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "spitter",
+      "inspectorErrors": []
+    },
+    {
+      "file": "spitter-rest-noon-side.jpg",
+      "kind": "spitter",
+      "light": "noon",
+      "view": "side",
+      "label": "rest",
+      "bytes": 68598,
+      "current": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999958408094255,
+          "y": -198.95498479325528,
+          "z": -631.986656113307
+        },
+        "size": {
+          "x": 0.9025753557480165,
+          "y": 2.0743683616862256,
+          "z": 0.7135240207235256
+        },
+        "yaw": 0.006,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5088,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -24.013080043525445,
+        "y": -198.81575943787135,
+        "z": -631.997287814147,
+        "tx": -27.999958408094255,
+        "ty": -198.95498479325528,
+        "tz": -631.986656113307,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "spitter",
+      "inspectorErrors": []
+    },
+    {
+      "file": "spitter-rest-overcast-front.jpg",
+      "kind": "spitter",
+      "light": "overcast",
+      "view": "front",
+      "label": "rest",
+      "bytes": 77383,
+      "current": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999910537355554,
+          "y": -198.95498479325528,
+          "z": -631.9821684017621
+        },
+        "size": {
+          "x": 0.9012503618421874,
+          "y": 2.0660504830490822,
+          "z": 0.7167448260486253
+        },
+        "yaw": 0.010666666666666666,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5088,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -27.976481452676467,
+        "y": -198.6819296218667,
+        "z": -628.0773678135293,
+        "tx": -27.999910537355554,
+        "ty": -198.95498479325528,
+        "tz": -631.9821684017621,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "spitter",
+      "inspectorErrors": []
+    },
+    {
+      "file": "spitter-rest-overcast-side.jpg",
+      "kind": "spitter",
+      "light": "overcast",
+      "view": "side",
+      "label": "rest",
+      "bytes": 67151,
+      "current": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999835201697987,
+          "y": -198.95498479325528,
+          "z": -631.9776486808474
+        },
+        "size": {
+          "x": 0.9021960653028493,
+          "y": 2.058186640991522,
+          "z": 0.7373614277008755
+        },
+        "yaw": 0.016666666666666666,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5088,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -24.010284972847614,
+        "y": -198.81565870330655,
+        "z": -632.0202054973074,
+        "tx": -27.999835201697987,
+        "ty": -198.95498479325528,
+        "tz": -631.9776486808474,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "spitter",
+      "inspectorErrors": []
+    },
+    {
+      "file": "spitter-rest-dusk-front.jpg",
+      "kind": "spitter",
+      "light": "dusk",
+      "view": "front",
+      "label": "rest",
+      "bytes": 67313,
+      "current": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999725749637758,
+          "y": -198.95498479325528,
+          "z": -631.973089053988
+        },
+        "size": {
+          "x": 0.9051951222686867,
+          "y": 2.050862521081939,
+          "z": 0.7576585901073258
+        },
+        "yaw": 0.024,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5088,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -27.93454904919925,
+        "y": -198.68151620036838,
+        "z": -628.0628491271633,
+        "tx": -27.999725749637758,
+        "ty": -198.95498479325528,
+        "tz": -631.973089053988,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "spitter",
+      "inspectorErrors": []
+    },
+    {
+      "file": "spitter-rest-dusk-side.jpg",
+      "kind": "spitter",
+      "light": "dusk",
+      "view": "side",
+      "label": "rest",
+      "bytes": 58970,
+      "current": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999575179274984,
+          "y": -198.95498479325528,
+          "z": -631.968481396829
+        },
+        "size": {
+          "x": 0.910134846700398,
+          "y": 2.044100753643704,
+          "z": 0.7778035015232945
+        },
+        "yaw": 0.03266666666666666,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5088,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -24.006213502618795,
+        "y": -198.81549335904282,
+        "z": -632.06434048272,
+        "tx": -27.999575179274984,
+        "ty": -198.95498479325528,
+        "tz": -631.968481396829,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "spitter",
+      "inspectorErrors": []
+    },
+    {
+      "file": "spitter-rest-night-front.jpg",
+      "kind": "spitter",
+      "light": "night",
+      "view": "front",
+      "label": "rest",
+      "bytes": 40083,
+      "current": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999376064366025,
+          "y": -198.95498479325528,
+          "z": -631.9638174733506
+        },
+        "size": {
+          "x": 0.9169017090193243,
+          "y": 2.0379291502943033,
+          "z": 0.7979377747119543
+        },
+        "yaw": 0.042666666666666665,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5088,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -27.871359750116593,
+        "y": -198.680902190608,
+        "z": -628.0463447652118,
+        "tx": -27.999376064366025,
+        "ty": -198.95498479325528,
+        "tz": -631.9638174733506,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "spitter",
+      "inspectorErrors": []
+    },
+    {
+      "file": "spitter-rest-night-side.jpg",
+      "kind": "spitter",
+      "light": "night",
+      "view": "side",
+      "label": "rest",
+      "bytes": 34700,
+      "current": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999120480782967,
+          "y": -198.95498479325528,
+          "z": -631.9590890454338
+        },
+        "size": {
+          "x": 0.9254154118339883,
+          "y": 2.032318161531606,
+          "z": 0.8187905587207069
+        },
+        "yaw": 0.054,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5088,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -24.001775453733234,
+        "y": -198.8152672742877,
+        "z": -632.1297460029948,
+        "tx": -27.999120480782967,
+        "ty": -198.95498479325528,
+        "tz": -631.9590890454338,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "spitter",
+      "inspectorErrors": []
+    },
+    {
+      "file": "spitter-rest-noon-gameplay.jpg",
+      "kind": "spitter",
+      "light": "noon",
+      "view": "gameplay",
+      "label": "rest",
+      "bytes": 69643,
+      "current": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.9987999346433,
+          "y": -198.95498479325528,
+          "z": -631.9542879786978
+        },
+        "size": {
+          "x": 0.9355713494399645,
+          "y": 2.0272299944489305,
+          "z": 0.8402307203176633
+        },
+        "yaw": 0.06666666666666667,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5088,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -23.6731994924598,
+        "y": -197.84159998557476,
+        "z": -625.3173040940852,
+        "tx": -27.9987999346433,
+        "ty": -198.95498479325528,
+        "tz": -631.9542879786978,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "spitter",
+      "inspectorErrors": []
+    },
+    {
+      "file": "spitter-walk-f20-noon-side.jpg",
+      "kind": "spitter",
+      "light": "noon",
+      "view": "side",
+      "label": "walk-f20",
+      "bytes": 70837,
+      "current": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.95507338747384,
+          "y": -198.95498479325528,
+          "z": -631.8298769378579
+        },
+        "size": {
+          "x": 1.266771776175549,
+          "y": 2.0294752347221845,
+          "z": 1.2546150990032174
+        },
+        "yaw": 0.5992916666666668,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5088,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -24.498246583162548,
+        "y": -198.8117422614475,
+        "z": -634.0380828670851,
+        "tx": -27.95507338747384,
+        "ty": -198.95498479325528,
+        "tz": -631.8298769378579,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "spitter",
+      "inspectorErrors": []
+    },
+    {
+      "file": "screamer-rest-noon-front.jpg",
+      "kind": "screamer",
+      "light": "noon",
+      "view": "front",
+      "label": "rest",
+      "bytes": 71961,
+      "current": {
+        "id": "zombie.screamer",
+        "name": "Screamer",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.9999645992888,
+          "y": -199.20854708899023,
+          "z": -631.978764438009
+        },
+        "size": {
+          "x": 1.9324569624343049,
+          "y": 2.498597596778268,
+          "z": 1.5122786778914588
+        },
+        "yaw": 0.002666666666666667,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5724,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -27.996559747129428,
+        "y": -198.85141137757026,
+        "z": -626.8714869555891,
+        "tx": -27.9999645992888,
+        "ty": -199.20854708899023,
+        "tz": -631.978764438009,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "screamer",
+      "inspectorErrors": []
+    },
+    {
+      "file": "screamer-rest-noon-side.jpg",
+      "kind": "screamer",
+      "light": "noon",
+      "view": "side",
+      "label": "rest",
+      "bytes": 61600,
+      "current": {
+        "id": "zombie.screamer",
+        "name": "Screamer",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99990081649959,
+          "y": -199.20854708899023,
+          "z": -631.9681341007065
+        },
+        "size": {
+          "x": 1.903625050285644,
+          "y": 2.5642779368751007,
+          "z": 1.3840913388185072
+        },
+        "yaw": 0.006,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5724,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -22.962796709697823,
+        "y": -199.03264691214818,
+        "z": -631.9815664101642,
+        "tx": -27.99990081649959,
+        "ty": -199.20854708899023,
+        "tz": -631.9681341007065,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "screamer",
+      "inspectorErrors": []
+    },
+    {
+      "file": "screamer-rest-overcast-front.jpg",
+      "kind": "screamer",
+      "light": "overcast",
+      "view": "front",
+      "label": "rest",
+      "bytes": 72675,
+      "current": {
+        "id": "zombie.screamer",
+        "name": "Screamer",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999787285906653,
+          "y": -199.20854708899023,
+          "z": -631.9574910112859
+        },
+        "size": {
+          "x": 1.451516578595907,
+          "y": 2.5773399820238296,
+          "z": 1.5992746790270758
+        },
+        "yaw": 0.010666666666666666,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5724,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -27.96911588023018,
+        "y": -198.85108600809733,
+        "z": -626.8456514081661,
+        "tx": -27.999787285906653,
+        "ty": -199.20854708899023,
+        "tz": -631.9574910112859,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "screamer",
+      "inspectorErrors": []
+    },
+    {
+      "file": "screamer-rest-overcast-side.jpg",
+      "kind": "screamer",
+      "light": "overcast",
+      "view": "side",
+      "label": "rest",
+      "bytes": 62927,
+      "current": {
+        "id": "zombie.screamer",
+        "name": "Screamer",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999609551693908,
+          "y": -199.20854708899023,
+          "z": -631.9468279459519
+        },
+        "size": {
+          "x": 1.9213403174588883,
+          "y": 2.5880269484174505,
+          "z": 1.4029507688469494
+        },
+        "yaw": 0.016666666666666666,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5724,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -22.9567139339051,
+        "y": -199.03243527484005,
+        "z": -632.0006208727036,
+        "tx": -27.999609551693908,
+        "ty": -199.20854708899023,
+        "tz": -631.9468279459519,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "screamer",
+      "inspectorErrors": []
+    },
+    {
+      "file": "screamer-rest-dusk-front.jpg",
+      "kind": "screamer",
+      "light": "dusk",
+      "view": "front",
+      "label": "rest",
+      "bytes": 62398,
+      "current": {
+        "id": "zombie.screamer",
+        "name": "Screamer",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99935287861378,
+          "y": -199.20854708899023,
+          "z": -631.9361352877435
+        },
+        "size": {
+          "x": 1.4732450827892691,
+          "y": 2.601093798526989,
+          "z": 1.6299564803001658
+        },
+        "yaw": 0.024,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5724,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -27.914004072331466,
+        "y": -198.85044031461277,
+        "z": -626.8156810796204,
+        "tx": -27.99935287861378,
+        "ty": -199.20854708899023,
+        "tz": -631.9361352877435,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "screamer",
+      "inspectorErrors": []
+    },
+    {
+      "file": "screamer-rest-dusk-side.jpg",
+      "kind": "screamer",
+      "light": "dusk",
+      "view": "side",
+      "label": "rest",
+      "bytes": 53334,
+      "current": {
+        "id": "zombie.screamer",
+        "name": "Screamer",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999002118809116,
+          "y": -199.20854708899023,
+          "z": -631.9254015623591
+        },
+        "size": {
+          "x": 1.9036025341518155,
+          "y": 2.611752209188552,
+          "z": 1.4290907569018145
+        },
+        "yaw": 0.03266666666666666,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5724,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -22.947288570222064,
+        "y": -199.03208654642478,
+        "z": -632.0466659711858,
+        "tx": -27.999002118809116,
+        "ty": -199.20854708899023,
+        "tz": -631.9254015623591,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "screamer",
+      "inspectorErrors": []
+    },
+    {
+      "file": "screamer-rest-night-front.jpg",
+      "kind": "screamer",
+      "light": "night",
+      "view": "front",
+      "label": "rest",
+      "bytes": 38942,
+      "current": {
+        "id": "zombie.screamer",
+        "name": "Screamer",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.998541566110006,
+          "y": -199.20854708899023,
+          "z": -631.9146139093516
+        },
+        "size": {
+          "x": 1.5017501141421832,
+          "y": 2.492062352169711,
+          "z": 1.6011880412166875
+        },
+        "yaw": 0.042666666666666665,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5724,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -27.830833490046096,
+        "y": -198.84948452542508,
+        "z": -626.7825194980509,
+        "tx": -27.998541566110006,
+        "ty": -199.20854708899023,
+        "tz": -631.9146139093516,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "screamer",
+      "inspectorErrors": []
+    },
+    {
+      "file": "screamer-rest-night-side.jpg",
+      "kind": "screamer",
+      "light": "night",
+      "view": "side",
+      "label": "rest",
+      "bytes": 33761,
+      "current": {
+        "id": "zombie.screamer",
+        "name": "Screamer",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99795480363198,
+          "y": -199.20854708899023,
+          "z": -631.9037585013147
+        },
+        "size": {
+          "x": 1.8627659884009873,
+          "y": 2.5027774602069712,
+          "z": 1.4621489010457935
+        },
+        "yaw": 0.054,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5724,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -22.935660082222725,
+        "y": -199.0316068314013,
+        "z": -632.1198809049569,
+        "tx": -27.99795480363198,
+        "ty": -199.20854708899023,
+        "tz": -631.9037585013147,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "screamer",
+      "inspectorErrors": []
+    },
+    {
+      "file": "screamer-rest-noon-gameplay.jpg",
+      "kind": "screamer",
+      "light": "noon",
+      "view": "gameplay",
+      "label": "rest",
+      "bytes": 70446,
+      "current": {
+        "id": "zombie.screamer",
+        "name": "Screamer",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.997224549499816,
+          "y": -199.20854708899023,
+          "z": -631.8928209220121
+        },
+        "size": {
+          "x": 1.5365805184756454,
+          "y": 2.5157508049087483,
+          "z": 1.6574147135354451
+        },
+        "yaw": 0.06666666666666667,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5724,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.671624107316315,
+        "y": -198.0951622813097,
+        "z": -625.2558370373995,
+        "tx": -27.997224549499816,
+        "ty": -199.20854708899023,
+        "tz": -631.8928209220121,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "screamer",
+      "inspectorErrors": []
+    },
+    {
+      "file": "screamer-walk-f20-noon-side.jpg",
+      "kind": "screamer",
+      "light": "noon",
+      "view": "side",
+      "label": "walk-f20",
+      "bytes": 64249,
+      "current": {
+        "id": "zombie.screamer",
+        "name": "Screamer",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.904750903489187,
+          "y": -199.20854708899023,
+          "z": -631.6293194910216
+        },
+        "size": {
+          "x": 2.277546682647415,
+          "y": 2.5764473636908747,
+          "z": 2.028317258516836
+        },
+        "yaw": 0.6166666666666671,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5724,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.461463408072028,
+        "y": -199.0226410177938,
+        "z": -634.561636174931,
+        "tx": -27.904750903489187,
+        "ty": -199.20854708899023,
+        "tz": -631.6293194910216,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "screamer",
+      "inspectorErrors": []
+    },
+    {
+      "file": "bomber-rest-noon-front.jpg",
+      "kind": "bomber",
+      "light": "noon",
+      "view": "front",
+      "label": "rest",
+      "bytes": 85130,
+      "current": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999999045139166,
+          "y": -199.0271574489596,
+          "z": -631.9990833339411
+        },
+        "size": {
+          "x": 1.8500196529103583,
+          "y": 1.9447546681036272,
+          "z": 1.76429147327201
+        },
+        "yaw": 0.001388888888888889,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6328,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -27.998493499069358,
+        "y": -198.72395669660713,
+        "z": -627.6631108271441,
+        "tx": -27.999999045139166,
+        "ty": -199.0271574489596,
+        "tz": -631.9990833339411,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "bomber",
+      "inspectorErrors": []
+    },
+    {
+      "file": "bomber-rest-noon-side.jpg",
+      "kind": "bomber",
+      "light": "noon",
+      "view": "side",
+      "label": "rest",
+      "bytes": 77220,
+      "current": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999996180560494,
+          "y": -199.0271574489596,
+          "z": -631.9981666717504
+        },
+        "size": {
+          "x": 1.8510645634944112,
+          "y": 1.9396238137705666,
+          "z": 1.7696725308495616
+        },
+        "yaw": 0.003125,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6328,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.919207994167603,
+        "y": -198.88465304791157,
+        "z": -632.0038344367648,
+        "tx": -27.999996180560494,
+        "ty": -199.0271574489596,
+        "tz": -631.9981666717504,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "bomber",
+      "inspectorErrors": []
+    },
+    {
+      "file": "bomber-rest-overcast-front.jpg",
+      "kind": "bomber",
+      "light": "overcast",
+      "view": "front",
+      "label": "rest",
+      "bytes": 87124,
+      "current": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999989390471967,
+          "y": -199.0271574489596,
+          "z": -631.9969444683895
+        },
+        "size": {
+          "x": 1.8531593883027675,
+          "y": 1.9344981269404116,
+          "z": 1.773663828766189
+        },
+        "yaw": 0.005555555555555556,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6328,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -27.98643147808469,
+        "y": -198.72377724642436,
+        "z": -627.658426627295,
+        "tx": -27.999989390471967,
+        "ty": -199.0271574489596,
+        "tz": -631.9969444683895,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "bomber",
+      "inspectorErrors": []
+    },
+    {
+      "file": "bomber-rest-overcast-side.jpg",
+      "kind": "bomber",
+      "light": "overcast",
+      "view": "side",
+      "label": "rest",
+      "bytes": 73097,
+      "current": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999976128678643,
+          "y": -199.0271574489596,
+          "z": -631.995416748172
+        },
+        "size": {
+          "x": 1.856286139415289,
+          "y": 1.929729379833418,
+          "z": 1.7762793865886124
+        },
+        "yaw": 0.008680555555555556,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6328,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.91518104241068,
+        "y": -198.88451106000352,
+        "z": -632.01811028768,
+        "tx": -27.999976128678643,
+        "ty": -199.0271574489596,
+        "tz": -631.995416748172,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "bomber",
+      "inspectorErrors": []
+    },
+    {
+      "file": "bomber-rest-dusk-front.jpg",
+      "kind": "bomber",
+      "light": "dusk",
+      "view": "front",
+      "label": "rest",
+      "bytes": 75106,
+      "current": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99995321260876,
+          "y": -199.0271574489596,
+          "z": -631.993583558066
+        },
+        "size": {
+          "x": 1.8604136594741263,
+          "y": 1.9254315694128934,
+          "z": 1.777530508628729
+        },
+        "yaw": 0.012499999999999999,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6328,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -27.962248421006645,
+        "y": -198.72342009401217,
+        "z": -627.6501006655632,
+        "tx": -27.99995321260876,
+        "ty": -199.0271574489596,
+        "tz": -631.993583558066,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "bomber",
+      "inspectorErrors": []
+    },
+    {
+      "file": "bomber-rest-dusk-side.jpg",
+      "kind": "bomber",
+      "light": "dusk",
+      "view": "side",
+      "label": "rest",
+      "bytes": 66800,
+      "current": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99991682354652,
+          "y": -199.0271574489596,
+          "z": -631.9914449787443
+        },
+        "size": {
+          "x": 1.865512729050085,
+          "y": 1.921644411085424,
+          "z": 1.7806838088064296
+        },
+        "yaw": 0.017013888888888887,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6328,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.908634409784433,
+        "y": -198.88427555636045,
+        "z": -632.0425886726781,
+        "tx": -27.99991682354652,
+        "ty": -199.0271574489596,
+        "tz": -631.9914449787443,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "bomber",
+      "inspectorErrors": []
+    },
+    {
+      "file": "bomber-rest-night-front.jpg",
+      "kind": "bomber",
+      "light": "night",
+      "view": "front",
+      "label": "rest",
+      "bytes": 42846,
+      "current": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99986250702962,
+          "y": -199.0271574489596,
+          "z": -631.9890011378416
+        },
+        "size": {
+          "x": 1.8715519578763598,
+          "y": 1.9183762013198873,
+          "z": 1.7872549470184822
+        },
+        "yaw": 0.02222222222222222,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6328,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -27.92583447916557,
+        "y": -198.7228887559119,
+        "z": -627.6383858737127,
+        "tx": -27.99986250702962,
+        "ty": -199.0271574489596,
+        "tz": -631.9890011378416,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "bomber",
+      "inspectorErrors": []
+    },
+    {
+      "file": "bomber-rest-night-side.jpg",
+      "kind": "bomber",
+      "light": "night",
+      "view": "side",
+      "label": "rest",
+      "bytes": 39295,
+      "current": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.9997851734759,
+          "y": -199.0271574489596,
+          "z": -631.9862522254164
+        },
+        "size": {
+          "x": 1.8784977737989799,
+          "y": 1.9157164182790893,
+          "z": 1.7947415778081677
+        },
+        "yaw": 0.028124999999999997,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6328,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.899823406805467,
+        "y": -198.88394827034483,
+        "z": -632.0773774874349,
+        "tx": -27.9997851734759,
+        "ty": -199.0271574489596,
+        "tz": -631.9862522254164,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "bomber",
+      "inspectorErrors": []
+    },
+    {
+      "file": "bomber-rest-noon-gameplay.jpg",
+      "kind": "bomber",
+      "light": "noon",
+      "view": "gameplay",
+      "label": "rest",
+      "bytes": 74010,
+      "current": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99967909911434,
+          "y": -199.0271574489596,
+          "z": -631.9831985116147
+        },
+        "size": {
+          "x": 1.8863143834833274,
+          "y": 1.9134491712644603,
+          "z": 1.8031603052394303
+        },
+        "yaw": 0.03472222222222222,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6328,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.847239400468908,
+        "y": -197.91377264127908,
+        "z": -625.2365238626384,
+        "tx": -27.99967909911434,
+        "ty": -199.0271574489596,
+        "tz": -631.9831985116147,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "bomber",
+      "inspectorErrors": []
+    },
+    {
+      "file": "bomber-walk-f20-noon-side.jpg",
+      "kind": "bomber",
+      "light": "noon",
+      "view": "side",
+      "label": "walk-f20",
+      "bytes": 77495,
+      "current": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.974215803634888,
+          "y": -199.0271574489596,
+          "z": -631.8514019394735
+        },
+        "size": {
+          "x": 2.239576757396005,
+          "y": 1.934812266982334,
+          "z": 2.1830300930788553
+        },
+        "yaw": 0.3295462498817922,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6328,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.84344494796376,
+        "y": -198.87566351703038,
+        "z": -633.1768727265832,
+        "tx": -27.974215803634888,
+        "ty": -199.0271574489596,
+        "tz": -631.8514019394735,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "bomber",
+      "inspectorErrors": []
+    },
+    {
+      "file": "demon-rest-noon-front.jpg",
+      "kind": "demon",
+      "light": "noon",
+      "view": "front",
+      "label": "rest",
+      "bytes": 81404,
+      "current": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.904752808760442,
+          "y": -198.41936767931418,
+          "z": -631.9894169787513
+        },
+        "size": {
+          "x": 2.4432516267398015,
+          "y": 3.031314423253633,
+          "z": 2.1978683756062765
+        },
+        "yaw": 1.460139105620994,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5672,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -21.343075653187356,
+        "y": -197.9577068748515,
+        "z": -631.2603417392431,
+        "tx": -27.904752808760442,
+        "ty": -198.41936767931418,
+        "tz": -631.9894169787513,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "demon",
+      "inspectorErrors": []
+    },
+    {
+      "file": "demon-rest-noon-side.jpg",
+      "kind": "demon",
+      "light": "noon",
+      "view": "side",
+      "label": "rest",
+      "bytes": 75396,
+      "current": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.857129213140663,
+          "y": -198.41936767931418,
+          "z": -631.9841254681269
+        },
+        "size": {
+          "x": 2.436942875651134,
+          "y": 3.0837465929840278,
+          "z": 2.190954117926367
+        },
+        "yaw": 1.4601391056209807,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5672,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -27.197277289417812,
+        "y": -198.21070863288034,
+        "z": -637.9227927816322,
+        "tx": -27.857129213140663,
+        "ty": -198.41936767931418,
+        "tz": -631.9841254681269,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "demon",
+      "inspectorErrors": []
+    },
+    {
+      "file": "demon-rest-overcast-front.jpg",
+      "kind": "demon",
+      "light": "overcast",
+      "view": "front",
+      "label": "rest",
+      "bytes": 82988,
+      "current": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.809505617520884,
+          "y": -198.41936767931418,
+          "z": -631.9788339575025
+        },
+        "size": {
+          "x": 2.4162567761192726,
+          "y": 3.126688573189085,
+          "z": 2.1815701450437928
+        },
+        "yaw": 1.4601391056209612,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5672,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -21.247828461947798,
+        "y": -197.9577068748515,
+        "z": -631.2497587179943,
+        "tx": -27.809505617520884,
+        "ty": -198.41936767931418,
+        "tz": -631.9788339575025,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "demon",
+      "inspectorErrors": []
+    },
+    {
+      "file": "demon-rest-overcast-side.jpg",
+      "kind": "demon",
+      "light": "overcast",
+      "view": "side",
+      "label": "rest",
+      "bytes": 75606,
+      "current": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.76188202190111,
+          "y": -198.41936767931418,
+          "z": -631.9735424468781
+        },
+        "size": {
+          "x": 2.3800165388244956,
+          "y": 3.1630728905693104,
+          "z": 2.169785526325313
+        },
+        "yaw": 1.4601391056209359,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5672,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -27.10203009817806,
+        "y": -198.21070863288034,
+        "z": -637.9122097603835,
+        "tx": -27.76188202190111,
+        "ty": -198.41936767931418,
+        "tz": -631.9735424468781,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "demon",
+      "inspectorErrors": []
+    },
+    {
+      "file": "demon-rest-dusk-front.jpg",
+      "kind": "demon",
+      "light": "dusk",
+      "view": "front",
+      "label": "rest",
+      "bytes": 72603,
+      "current": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.714258426281333,
+          "y": -198.41936767931418,
+          "z": -631.9682509362538
+        },
+        "size": {
+          "x": 2.3274063817260213,
+          "y": 3.1915767095844387,
+          "z": 2.1558019773933665
+        },
+        "yaw": 1.4601391056209045,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5672,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -21.152581270708257,
+        "y": -197.9577068748515,
+        "z": -631.2391756967452,
+        "tx": -27.714258426281333,
+        "ty": -198.41936767931418,
+        "tz": -631.9682509362538,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "demon",
+      "inspectorErrors": []
+    },
+    {
+      "file": "demon-rest-dusk-side.jpg",
+      "kind": "demon",
+      "light": "dusk",
+      "view": "side",
+      "label": "rest",
+      "bytes": 66350,
+      "current": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.666634830661557,
+          "y": -198.41936767931418,
+          "z": -631.9629594256294
+        },
+        "size": {
+          "x": 2.2580808034101025,
+          "y": 3.2120731061436345,
+          "z": 2.140061855822296
+        },
+        "yaw": 1.4601391056208675,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5672,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -27.006782906938163,
+        "y": -198.21070863288034,
+        "z": -637.9016267391347,
+        "tx": -27.666634830661557,
+        "ty": -198.41936767931418,
+        "tz": -631.9629594256294,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "demon",
+      "inspectorErrors": []
+    },
+    {
+      "file": "demon-rest-night-front.jpg",
+      "kind": "demon",
+      "light": "night",
+      "view": "front",
+      "label": "rest",
+      "bytes": 48751,
+      "current": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.619011235041782,
+          "y": -198.41936767931418,
+          "z": -631.957667915005
+        },
+        "size": {
+          "x": 2.1723175877186662,
+          "y": 3.2256855340637287,
+          "z": 2.1223977239799297
+        },
+        "yaw": 1.460139105620824,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5672,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -21.057334079468724,
+        "y": -197.9577068748515,
+        "z": -631.228592675496,
+        "tx": -27.619011235041782,
+        "ty": -198.41936767931418,
+        "tz": -631.957667915005,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "demon",
+      "inspectorErrors": []
+    },
+    {
+      "file": "demon-rest-night-side.jpg",
+      "kind": "demon",
+      "light": "night",
+      "view": "side",
+      "label": "rest",
+      "bytes": 43032,
+      "current": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.571387639422007,
+          "y": -198.41936767931418,
+          "z": -631.9523764043806
+        },
+        "size": {
+          "x": 2.0709699979198675,
+          "y": 3.233263170628419,
+          "z": 2.1033878645504274
+        },
+        "yaw": 1.4601391056207733,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5672,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -26.911535715698125,
+        "y": -198.21070863288034,
+        "z": -637.891043717886,
+        "tx": -27.571387639422007,
+        "ty": -198.41936767931418,
+        "tz": -631.9523764043806,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "demon",
+      "inspectorErrors": []
+    },
+    {
+      "file": "demon-rest-noon-gameplay.jpg",
+      "kind": "demon",
+      "light": "noon",
+      "view": "gameplay",
+      "label": "rest",
+      "bytes": 80367,
+      "current": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.52376404380223,
+          "y": -198.41936767931418,
+          "z": -631.9470848937561
+        },
+        "size": {
+          "x": 1.9671848843958983,
+          "y": 3.2334233471689515,
+          "z": 2.087876034934993
+        },
+        "yaw": 1.4601391056207151,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5672,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -20.26752069613005,
+        "y": -197.30598287163366,
+        "z": -635.1262839673263,
+        "tx": -27.52376404380223,
+        "ty": -198.41936767931418,
+        "tz": -631.9470848937561,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "demon",
+      "inspectorErrors": []
+    },
+    {
+      "file": "demon-walk-f20-noon-side.jpg",
+      "kind": "demon",
+      "light": "noon",
+      "view": "side",
+      "label": "walk-f20",
+      "bytes": 75320,
+      "current": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.519136952529927,
+          "y": -198.41936767931418,
+          "z": -631.8954314257886
+        },
+        "size": {
+          "x": 2.3875780188990348,
+          "y": 3.0095147077657316,
+          "z": 2.0713748035713024
+        },
+        "yaw": 1.543923581187752,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5672,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -26.35650980509304,
+        "y": -198.21385478832656,
+        "z": -637.7783032074958,
+        "tx": -26.519136952529927,
+        "ty": -198.41936767931418,
+        "tz": -631.8954314257886,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "demon",
+      "inspectorErrors": []
+    },
+    {
+      "file": "colossus-rest-noon-front.jpg",
+      "kind": "colossus",
+      "light": "noon",
+      "view": "front",
+      "label": "rest",
+      "bytes": 75145,
+      "current": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.867482168710183,
+          "y": -197.47431226971827,
+          "z": -631.9852757965234
+        },
+        "size": {
+          "x": 3.9875341313794053,
+          "y": 5.200008965436751,
+          "z": 3.598294701803866
+        },
+        "yaw": 1.4601391056209965,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6976,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -17.30410771811517,
+        "y": -196.7311035090495,
+        "z": -630.8115675242351,
+        "tx": -27.867482168710183,
+        "ty": -197.47431226971827,
+        "tz": -631.9852757965234,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "colossus",
+      "inspectorErrors": []
+    },
+    {
+      "file": "colossus-rest-noon-side.jpg",
+      "kind": "colossus",
+      "light": "noon",
+      "view": "side",
+      "label": "rest",
+      "bytes": 69515,
+      "current": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.801223253065274,
+          "y": -197.47431226971827,
+          "z": -631.9779136947851
+        },
+        "size": {
+          "x": 4.136377217845482,
+          "y": 5.180437509705854,
+          "z": 3.6126514485654297
+        },
+        "yaw": 1.4601391056209878,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6976,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -26.67667962518111,
+        "y": -197.11870793997153,
+        "z": -642.0988063457422,
+        "tx": -27.801223253065274,
+        "ty": -197.47431226971827,
+        "tz": -631.9779136947851,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "colossus",
+      "inspectorErrors": []
+    },
+    {
+      "file": "colossus-rest-overcast-front.jpg",
+      "kind": "colossus",
+      "light": "overcast",
+      "view": "front",
+      "label": "rest",
+      "bytes": 73957,
+      "current": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.734964337420365,
+          "y": -197.47431226971827,
+          "z": -631.9705515930468
+        },
+        "size": {
+          "x": 4.251713736692032,
+          "y": 5.159178909819815,
+          "z": 3.6210020266312313
+        },
+        "yaw": 1.460139105620975,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6976,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -17.17158988682535,
+        "y": -196.7311035090495,
+        "z": -630.7968433207584,
+        "tx": -27.734964337420365,
+        "ty": -197.47431226971827,
+        "tz": -631.9705515930468,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "colossus",
+      "inspectorErrors": []
+    },
+    {
+      "file": "colossus-rest-overcast-side.jpg",
+      "kind": "colossus",
+      "light": "overcast",
+      "view": "side",
+      "label": "rest",
+      "bytes": 68499,
+      "current": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.668705421775456,
+          "y": -197.47431226971827,
+          "z": -631.9631894913085
+        },
+        "size": {
+          "x": 4.336792120123544,
+          "y": 5.13034116639875,
+          "z": 3.623667895936478
+        },
+        "yaw": 1.4601391056209574,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6976,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -26.54416179389107,
+        "y": -197.11870793997153,
+        "z": -642.0840821422656,
+        "tx": -27.668705421775456,
+        "ty": -197.47431226971827,
+        "tz": -631.9631894913085,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "colossus",
+      "inspectorErrors": []
+    },
+    {
+      "file": "colossus-rest-dusk-front.jpg",
+      "kind": "colossus",
+      "light": "dusk",
+      "view": "front",
+      "label": "rest",
+      "bytes": 63966,
+      "current": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.602446506130548,
+          "y": -197.47431226971827,
+          "z": -631.9558273895702
+        },
+        "size": {
+          "x": 4.396313247737094,
+          "y": 5.104670839672821,
+          "z": 3.631393736074415
+        },
+        "yaw": 1.4601391056209352,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6976,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -17.03907205553552,
+        "y": -196.7311035090495,
+        "z": -630.7821191172815,
+        "tx": -27.602446506130548,
+        "ty": -197.47431226971827,
+        "tz": -631.9558273895702,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "colossus",
+      "inspectorErrors": []
+    },
+    {
+      "file": "colossus-rest-dusk-side.jpg",
+      "kind": "colossus",
+      "light": "dusk",
+      "view": "side",
+      "label": "rest",
+      "bytes": 62056,
+      "current": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.53618759048564,
+          "y": -197.47431226971827,
+          "z": -631.9484652878319
+        },
+        "size": {
+          "x": 4.435438844297504,
+          "y": 5.081691030910861,
+          "z": 3.6481988471015256
+        },
+        "yaw": 1.4601391056209077,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6976,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -26.41164396260084,
+        "y": -197.11870793997153,
+        "z": -642.069357938789,
+        "tx": -27.53618759048564,
+        "ty": -197.47431226971827,
+        "tz": -631.9484652878319,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "colossus",
+      "inspectorErrors": []
+    },
+    {
+      "file": "colossus-rest-night-front.jpg",
+      "kind": "colossus",
+      "light": "night",
+      "view": "front",
+      "label": "rest",
+      "bytes": 36914,
+      "current": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.46992867484073,
+          "y": -197.47431226971827,
+          "z": -631.9411031860936
+        },
+        "size": {
+          "x": 4.459103297825443,
+          "y": 5.063241035116107,
+          "z": 3.661920344669511
+        },
+        "yaw": 1.4601391056208737,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6976,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -16.90655422424569,
+        "y": -196.7311035090495,
+        "z": -630.7673949138043,
+        "tx": -27.46992867484073,
+        "ty": -197.47431226971827,
+        "tz": -631.9411031860936,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "colossus",
+      "inspectorErrors": []
+    },
+    {
+      "file": "colossus-rest-night-side.jpg",
+      "kind": "colossus",
+      "light": "night",
+      "view": "side",
+      "label": "rest",
+      "bytes": 39163,
+      "current": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.403583125137075,
+          "y": -197.47431226971827,
+          "z": -631.9345677076135
+        },
+        "size": {
+          "x": 4.442044754498625,
+          "y": 5.063193730666171,
+          "z": 3.6255576253525987
+        },
+        "yaw": 1.4726064467294289,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6976,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -26.279039497251645,
+        "y": -197.11870793997153,
+        "z": -642.0554603585706,
+        "tx": -27.403583125137075,
+        "ty": -197.47431226971827,
+        "tz": -631.9345677076135,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "colossus",
+      "inspectorErrors": []
+    },
+    {
+      "file": "colossus-rest-noon-gameplay.jpg",
+      "kind": "colossus",
+      "light": "noon",
+      "view": "gameplay",
+      "label": "rest",
+      "bytes": 94031,
+      "current": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.337170953445163,
+          "y": -197.47431226971827,
+          "z": -631.9287480946016
+        },
+        "size": {
+          "x": 4.416813811930659,
+          "y": 5.092001245748577,
+          "z": 3.592478260108578
+        },
+        "yaw": 1.4833908820530752,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6976,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -20.121126666594385,
+        "y": -196.36092746203775,
+        "z": -635.1981638100215,
+        "tx": -27.337170953445163,
+        "ty": -197.47431226971827,
+        "tz": -631.9287480946016,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "colossus",
+      "inspectorErrors": []
+    },
+    {
+      "file": "colossus-walk-f20-noon-side.jpg",
+      "kind": "colossus",
+      "light": "noon",
+      "view": "side",
+      "label": "walk-f20",
+      "bytes": 70762,
+      "current": {
+        "id": "zombie.colossus",
+        "name": "Colossus",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -25.938309408173808,
+          "y": -197.47431226971827,
+          "z": -631.8786718996873
+        },
+        "size": {
+          "x": 4.205303552613266,
+          "y": 5.158047464039299,
+          "z": 3.3575579578958923
+        },
+        "yaw": 1.5592302662416144,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6976,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -25.804738077242575,
+        "y": -197.12449623388895,
+        "z": -641.8952019508426,
+        "tx": -25.938309408173808,
+        "ty": -197.47431226971827,
+        "tz": -631.8786718996873,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "colossus",
+      "inspectorErrors": []
+    },
+    {
+      "file": "guardian-rest-noon-front.jpg",
+      "kind": "guardian",
+      "light": "noon",
+      "view": "front",
+      "label": "rest",
+      "bytes": 88059,
+      "current": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.76809379524282,
+          "y": -199.01898004660612,
+          "z": -631.9742326439159
+        },
+        "size": {
+          "x": 3.4312725321503237,
+          "y": 3.4887618823353534,
+          "z": 2.657652906864314
+        },
+        "yaw": 1.4601391056209976,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 9160,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -19.491847849446863,
+        "y": -198.43668709456384,
+        "z": -631.0546497610497,
+        "tx": -27.76809379524282,
+        "ty": -199.01898004660612,
+        "tz": -631.9742326439159,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "guardian",
+      "inspectorErrors": []
+    },
+    {
+      "file": "guardian-rest-noon-side.jpg",
+      "kind": "guardian",
+      "light": "noon",
+      "view": "side",
+      "label": "rest",
+      "bytes": 81509,
+      "current": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.65214069286423,
+          "y": -199.01898004660612,
+          "z": -631.9613489658739
+        },
+        "size": {
+          "x": 3.510367300655698,
+          "y": 3.50067339220692,
+          "z": 2.68122467480066
+        },
+        "yaw": 1.4601391056209903,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 9160,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -26.69627663474457,
+        "y": -198.71671574196887,
+        "z": -640.5641254889505,
+        "tx": -27.65214069286423,
+        "ty": -199.01898004660612,
+        "tz": -631.9613489658739,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "guardian",
+      "inspectorErrors": []
+    },
+    {
+      "file": "guardian-rest-overcast-front.jpg",
+      "kind": "guardian",
+      "light": "overcast",
+      "view": "front",
+      "label": "rest",
+      "bytes": 80339,
+      "current": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.53618759048564,
+          "y": -199.01898004660612,
+          "z": -631.9484652878318
+        },
+        "size": {
+          "x": 3.6324021810360705,
+          "y": 3.533444962479848,
+          "z": 2.7165024135797466
+        },
+        "yaw": 1.4601391056209785,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 9160,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -19.25994164468967,
+        "y": -198.43668709456384,
+        "z": -631.0288824049655,
+        "tx": -27.53618759048564,
+        "ty": -199.01898004660612,
+        "tz": -631.9484652878318,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "guardian",
+      "inspectorErrors": []
+    },
+    {
+      "file": "guardian-rest-overcast-side.jpg",
+      "kind": "guardian",
+      "light": "overcast",
+      "view": "side",
+      "label": "rest",
+      "bytes": 74023,
+      "current": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.420234488107052,
+          "y": -199.01898004660612,
+          "z": -631.9355816097898
+        },
+        "size": {
+          "x": 3.7476690902632193,
+          "y": 3.543372264515426,
+          "z": 2.750559205776881
+        },
+        "yaw": 1.460139105620961,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 9160,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -26.464370429987227,
+        "y": -198.71671574196887,
+        "z": -640.5383581328664,
+        "tx": -27.420234488107052,
+        "ty": -199.01898004660612,
+        "tz": -631.9355816097898,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "guardian",
+      "inspectorErrors": []
+    },
+    {
+      "file": "guardian-rest-dusk-front.jpg",
+      "kind": "guardian",
+      "light": "dusk",
+      "view": "front",
+      "label": "rest",
+      "bytes": 74864,
+      "current": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.30412582199092,
+          "y": -199.01898004660612,
+          "z": -631.9241847346109
+        },
+        "size": {
+          "x": 3.823694072674389,
+          "y": 3.536366544202906,
+          "z": 2.7353364860673537
+        },
+        "yaw": 1.4729527847506498,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 9160,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -19.027879876194913,
+        "y": -198.43668709456384,
+        "z": -631.0046018517444,
+        "tx": -27.30412582199092,
+        "ty": -199.01898004660612,
+        "tz": -631.9241847346109,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "guardian",
+      "inspectorErrors": []
+    },
+    {
+      "file": "guardian-rest-dusk-side.jpg",
+      "kind": "guardian",
+      "light": "dusk",
+      "view": "side",
+      "label": "rest",
+      "bytes": 70065,
+      "current": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.18789452102266,
+          "y": -199.01898004660612,
+          "z": -631.9141151871366
+        },
+        "size": {
+          "x": 3.87401713031581,
+          "y": 3.513045429551852,
+          "z": 2.7140207995897754
+        },
+        "yaw": 1.4843783976714924,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 9160,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -26.343918595317774,
+        "y": -198.71728035836077,
+        "z": -640.5123421071852,
+        "tx": -27.18789452102266,
+        "ty": -199.01898004660612,
+        "tz": -631.9141151871366,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "guardian",
+      "inspectorErrors": []
+    },
+    {
+      "file": "guardian-rest-night-front.jpg",
+      "kind": "guardian",
+      "light": "night",
+      "view": "front",
+      "label": "rest",
+      "bytes": 45845,
+      "current": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.07156625004989,
+          "y": -199.01898004660612,
+          "z": -631.9052357455103
+        },
+        "size": {
+          "x": 3.9054332584807767,
+          "y": 3.460271713720118,
+          "z": 2.689897316024144
+        },
+        "yaw": 1.4946131555808926,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 9160,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -18.827132006293876,
+        "y": -198.44031363073415,
+        "z": -631.1909899156478,
+        "tx": -27.07156625004989,
+        "ty": -199.01898004660612,
+        "tz": -631.9052357455103,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "guardian",
+      "inspectorErrors": []
+    },
+    {
+      "file": "guardian-rest-night-side.jpg",
+      "kind": "guardian",
+      "light": "night",
+      "view": "side",
+      "label": "rest",
+      "bytes": 44454,
+      "current": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.955161073649055,
+          "y": -199.01898004660612,
+          "z": -631.8974289524298
+        },
+        "size": {
+          "x": 3.922231878654241,
+          "y": 3.387180172406289,
+          "z": 2.665377996047596
+        },
+        "yaw": 1.5038309191902688,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 9160,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -26.299753013570758,
+        "y": -198.7182639219078,
+        "z": -640.4838344515705,
+        "tx": -26.955161073649055,
+        "ty": -199.01898004660612,
+        "tz": -631.8974289524298,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "guardian",
+      "inspectorErrors": []
+    },
+    {
+      "file": "guardian-rest-noon-gameplay.jpg",
+      "kind": "guardian",
+      "light": "noon",
+      "view": "gameplay",
+      "label": "rest",
+      "bytes": 98395,
+      "current": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.838694734088403,
+          "y": -199.01898004660612,
+          "z": -631.8905950033186
+        },
+        "size": {
+          "x": 3.9250760780776837,
+          "y": 3.3679384685019613,
+          "z": 2.6421989861009934
+        },
+        "yaw": 1.512186069934181,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 9160,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -19.728237059811363,
+        "y": -197.9055952389256,
+        "z": -635.3836976259653,
+        "tx": -26.838694734088403,
+        "ty": -199.01898004660612,
+        "tz": -631.8905950033186,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "guardian",
+      "inspectorErrors": []
+    },
+    {
+      "file": "guardian-walk-f20-noon-side.jpg",
+      "kind": "guardian",
+      "light": "noon",
+      "view": "side",
+      "label": "walk-f20",
+      "bytes": 82064,
+      "current": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -24.38920546738221,
+          "y": -199.01898004660612,
+          "z": -631.8675990849011
+        },
+        "size": {
+          "x": 2.990030241379195,
+          "y": 3.716948118223911,
+          "z": 3.1055932375622888
+        },
+        "yaw": 1.5775618180913715,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 9160,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -24.44823035826478,
+        "y": -198.72164903274714,
+        "z": -640.3818407143723,
+        "tx": -24.38920546738221,
+        "ty": -199.01898004660612,
+        "tz": -631.8675990849011,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "guardian",
+      "inspectorErrors": []
+    },
+    {
+      "file": "caveguard-rest-noon-front.jpg",
+      "kind": "caveguard",
+      "light": "noon",
+      "view": "front",
+      "label": "rest",
+      "bytes": 93947,
+      "current": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.46661572905849,
+          "y": -199.17844305870523,
+          "z": -631.9407350810066
+        },
+        "size": {
+          "x": 2.52363345280871,
+          "y": 3.036534848535098,
+          "z": 2.0734028798902955
+        },
+        "yaw": 1.460139105620996,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 12022,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -20.867576990358174,
+        "y": -198.71415360030034,
+        "z": -631.2075085544843,
+        "tx": -27.46661572905849,
+        "ty": -199.17844305870523,
+        "tz": -631.9407350810066,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "caveguard",
+      "inspectorErrors": []
+    },
+    {
+      "file": "caveguard-rest-noon-side.jpg",
+      "kind": "caveguard",
+      "light": "noon",
+      "view": "side",
+      "label": "rest",
+      "bytes": 86375,
+      "current": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.199574299513333,
+          "y": -199.17844305870523,
+          "z": -631.9144357904408
+        },
+        "size": {
+          "x": 2.6145578023460807,
+          "y": 3.0460722979811123,
+          "z": 2.07879971478485
+        },
+        "yaw": 1.4726289538122281,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 12022,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -26.454886396012675,
+        "y": -198.9429570924621,
+        "z": -638.6166269219465,
+        "tx": -27.199574299513333,
+        "ty": -199.17844305870523,
+        "tz": -631.9144357904408,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "caveguard",
+      "inspectorErrors": []
+    },
+    {
+      "file": "caveguard-rest-overcast-front.jpg",
+      "kind": "caveguard",
+      "light": "overcast",
+      "view": "front",
+      "label": "rest",
+      "bytes": 90565,
+      "current": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.932232226692367,
+          "y": -199.17844305870523,
+          "z": -631.8913924860432
+        },
+        "size": {
+          "x": 2.7008056964872473,
+          "y": 3.0451371714068785,
+          "z": 2.074190408580762
+        },
+        "yaw": 1.4848147561892988,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 12022,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -20.34281101513539,
+        "y": -198.71543667423663,
+        "z": -631.2424403612832,
+        "tx": -26.932232226692367,
+        "ty": -199.17844305870523,
+        "tz": -631.8913924860432,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "caveguard",
+      "inspectorErrors": []
+    },
+    {
+      "file": "caveguard-rest-overcast-side.jpg",
+      "kind": "caveguard",
+      "light": "overcast",
+      "view": "side",
+      "label": "rest",
+      "bytes": 82839,
+      "current": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.66462810939832,
+          "y": -199.17844305870523,
+          "z": -631.8716234652012
+        },
+        "size": {
+          "x": 2.7927669973797826,
+          "y": 3.0317226975112987,
+          "z": 2.062335497942854
+        },
+        "yaw": 1.4970561469238706,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 12022,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -26.087671998979868,
+        "y": -198.9438276935391,
+        "z": -638.5653093977296,
+        "tx": -26.66462810939832,
+        "ty": -199.17844305870523,
+        "tz": -631.8716234652012,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "caveguard",
+      "inspectorErrors": []
+    },
+    {
+      "file": "caveguard-rest-dusk-front.jpg",
+      "kind": "caveguard",
+      "light": "dusk",
+      "view": "front",
+      "label": "rest",
+      "bytes": 79926,
+      "current": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.396792313636595,
+          "y": -199.17844305870523,
+          "z": -631.8552905448726
+        },
+        "size": {
+          "x": 2.85198315691132,
+          "y": 2.9798004772080446,
+          "z": 2.040829036173591
+        },
+        "yaw": 1.5098906527642844,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 12022,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -19.829913779292056,
+        "y": -198.71799086486865,
+        "z": -631.3701681187871,
+        "tx": -26.396792313636595,
+        "ty": -199.17844305870523,
+        "tz": -631.8552905448726,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "caveguard",
+      "inspectorErrors": []
+    },
+    {
+      "file": "caveguard-rest-dusk-side.jpg",
+      "kind": "caveguard",
+      "light": "dusk",
+      "view": "side",
+      "label": "rest",
+      "bytes": 75279,
+      "current": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.128748966424684,
+          "y": -199.17844305870523,
+          "z": -631.8428189053167
+        },
+        "size": {
+          "x": 2.872418191571626,
+          "y": 2.911765143221942,
+          "z": 2.0100798654278833
+        },
+        "yaw": 1.5243014168346392,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 12022,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -25.721408120903465,
+        "y": -198.94474637607007,
+        "z": -638.5226077802338,
+        "tx": -26.128748966424684,
+        "ty": -199.17844305870523,
+        "tz": -631.8428189053167,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "caveguard",
+      "inspectorErrors": []
+    },
+    {
+      "file": "caveguard-rest-night-front.jpg",
+      "kind": "caveguard",
+      "light": "night",
+      "view": "front",
+      "label": "rest",
+      "bytes": 46672,
+      "current": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -25.860586400757292,
+          "y": -199.17844305870523,
+          "z": -631.8332472726211
+        },
+        "size": {
+          "x": 2.86441405981531,
+          "y": 2.9444137406896402,
+          "z": 1.9877512675976732
+        },
+        "yaw": 1.5351180770598774,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 12022,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -19.324602487820602,
+        "y": -198.72090808563308,
+        "z": -631.5291381188094,
+        "tx": -25.860586400757292,
+        "ty": -199.17844305870523,
+        "tz": -631.8332472726211,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "caveguard",
+      "inspectorErrors": []
+    },
+    {
+      "file": "caveguard-rest-night-side.jpg",
+      "kind": "caveguard",
+      "light": "night",
+      "view": "side",
+      "label": "rest",
+      "bytes": 47432,
+      "current": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -25.592337179386984,
+          "y": -199.17844305870523,
+          "z": -631.8265291618746
+        },
+        "size": {
+          "x": 2.7791948134520865,
+          "y": 2.9702303498270055,
+          "z": 1.965338303263593
+        },
+        "yaw": 1.5457572729225455,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 12022,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -25.354600715861785,
+        "y": -198.94570457309175,
+        "z": -638.4870459241905,
+        "tx": -25.592337179386984,
+        "ty": -199.17844305870523,
+        "tz": -631.8265291618746,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "caveguard",
+      "inspectorErrors": []
+    },
+    {
+      "file": "caveguard-rest-noon-gameplay.jpg",
+      "kind": "caveguard",
+      "light": "noon",
+      "view": "gameplay",
+      "label": "rest",
+      "bytes": 88924,
+      "current": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -25.324030987136965,
+          "y": -199.17844305870523,
+          "z": -631.8227127528199
+        },
+        "size": {
+          "x": 2.6207543313931367,
+          "y": 2.982897940476164,
+          "z": 1.9483563126813124
+        },
+        "yaw": 1.5565732048103094,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 12022,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -18.366232000371117,
+        "y": -198.0650582510247,
+        "z": -635.6107739362998,
+        "tx": -25.324030987136965,
+        "ty": -199.17844305870523,
+        "tz": -631.8227127528199,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "caveguard",
+      "inspectorErrors": []
+    },
+    {
+      "file": "caveguard-walk-f20-noon-side.jpg",
+      "kind": "caveguard",
+      "light": "noon",
+      "view": "side",
+      "label": "walk-f20",
+      "bytes": 83355,
+      "current": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -19.689594245737236,
+          "y": -199.17844305870523,
+          "z": -631.8832285982832
+        },
+        "size": {
+          "x": 1.9786048969128345,
+          "y": 3.413345655448751,
+          "z": 2.0459909997082377
+        },
+        "yaw": 1.567469507473323,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 12022,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -19.669731613461625,
+        "y": -198.94699554230118,
+        "z": -638.5109885367888,
+        "tx": -19.689594245737236,
+        "ty": -199.17844305870523,
+        "tz": -631.8832285982832,
+        "fov": 40
+      },
+      "alive": true,
+      "type": "caveguard",
+      "inspectorErrors": []
+    }
+  ],
+  "errors": [],
+  "pageErrors": [],
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "loadSec": 12.379,
+  "checks": [
+    {
+      "id": "zombie.shambler",
+      "variant": null,
+      "mode": "statue",
+      "ok": true,
+      "ms": 320,
+      "tris": 5048,
+      "size": [
+        0.83,
+        1.906,
+        0.742
+      ],
+      "error": null
+    },
+    {
+      "id": "zombie.feral",
+      "variant": null,
+      "mode": "statue",
+      "ok": true,
+      "ms": 121,
+      "tris": 4820,
+      "size": [
+        0.798,
+        1.347,
+        1.13
+      ],
+      "error": null
+    },
+    {
+      "id": "zombie.leaper",
+      "variant": null,
+      "mode": "statue",
+      "ok": true,
+      "ms": 123,
+      "tris": 4650,
+      "size": [
+        0.818,
+        1.306,
+        1.475
+      ],
+      "error": null
+    },
+    {
+      "id": "zombie.spider",
+      "variant": null,
+      "mode": "statue",
+      "ok": true,
+      "ms": 108,
+      "tris": 3794,
+      "size": [
+        1.816,
+        0.952,
+        1.856
+      ],
+      "error": null
+    },
+    {
+      "id": "zombie.drowned",
+      "variant": null,
+      "mode": "statue",
+      "ok": true,
+      "ms": 116,
+      "tris": 5708,
+      "size": [
+        0.844,
+        1.81,
+        0.551
+      ],
+      "error": null
+    },
+    {
+      "id": "zombie.military",
+      "variant": null,
+      "mode": "statue",
+      "ok": true,
+      "ms": 141,
+      "tris": 5976,
+      "size": [
+        1.003,
+        2.235,
+        0.67
+      ],
+      "error": null
+    },
+    {
+      "id": "zombie.brute",
+      "variant": null,
+      "mode": "statue",
+      "ok": true,
+      "ms": 117,
+      "tris": 5944,
+      "size": [
+        1.804,
+        2.439,
+        0.928
+      ],
+      "error": null
+    },
+    {
+      "id": "zombie.spitter",
+      "variant": null,
+      "mode": "statue",
+      "ok": true,
+      "ms": 136,
+      "tris": 5088,
+      "size": [
+        0.917,
+        1.816,
+        0.665
+      ],
+      "error": null
+    },
+    {
+      "id": "zombie.screamer",
+      "variant": null,
+      "mode": "statue",
+      "ok": true,
+      "ms": 119,
+      "tris": 5724,
+      "size": [
+        1.329,
+        2.495,
+        1.273
+      ],
+      "error": null
+    },
+    {
+      "id": "zombie.bomber",
+      "variant": null,
+      "mode": "statue",
+      "ok": true,
+      "ms": 156,
+      "tris": 6328,
+      "size": [
+        1.554,
+        1.988,
+        1.616
+      ],
+      "error": null
+    },
+    {
+      "id": "zombie.demon",
+      "variant": null,
+      "mode": "statue",
+      "ok": true,
+      "ms": 123,
+      "tris": 5672,
+      "size": [
+        2.131,
+        3.353,
+        1.125
+      ],
+      "error": null
+    },
+    {
+      "id": "zombie.colossus",
+      "variant": null,
+      "mode": "statue",
+      "ok": true,
+      "ms": 145,
+      "tris": 6976,
+      "size": [
+        3.174,
+        4.949,
+        2.906
+      ],
+      "error": null
+    },
+    {
+      "id": "zombie.guardian",
+      "variant": null,
+      "mode": "statue",
+      "ok": true,
+      "ms": 93,
+      "tris": 4180,
+      "size": [
+        1.619,
+        3.596,
+        1.243
+      ],
+      "error": null
+    },
+    {
+      "id": "zombie.caveguard",
+      "variant": null,
+      "mode": "statue",
+      "ok": true,
+      "ms": 96,
+      "tris": 4180,
+      "size": [
+        1.481,
+        2.684,
+        1.321
+      ],
+      "error": null
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+ "shots": [
+  {"cam": {"x": -35.07, "y": 1.76, "z": 42.49, "tx": -32.71, "ty": 1.6, "tz": 46.45, "fov": 55}, "time": "night", "caption": "Trapper camp: the curing frame against the cabin's side, from across the fire (night)", "out": "review/sweep/trapper-frame/from-fire-night.png"},
+  {"cam": {"x": -34.15, "y": 2.0, "z": 44.09, "tx": -32.71, "ty": 1.5, "tz": 46.45, "fov": 50}, "time": "night", "caption": "Trapper camp: the curing frame close (night)", "out": "review/sweep/trapper-frame/close-night.png"},
+  {"cam": {"x": -38.06, "y": 2.11, "z": 46.42, "tx": -33.49, "ty": 1.1, "tz": 43.81, "fov": 60}, "time": "night", "caption": "Trapper camp: from where he opens the cache, toward the fire (night)", "out": "review/sweep/trapper-frame/from-cache-night.png"},
+  {"cam": {"x": -17.0, "y": 19.7, "z": -119.0, "tx": -24.0, "ty": 11.0, "tz": -126.0, "fov": 55}, "time": "night", "caption": "Watchtower: the trail comes round the tower to the ladder (from above, night)", "out": "review/sweep/tower-trail/above-night.png"},
+  {"cam": {"x": -18.19, "y": 9.71, "z": -115.76, "tx": -20.59, "ty": 11.8, "tz": -124.12, "fov": 55}, "time": "night", "caption": "Watchtower: walking in along the trail (night)", "out": "review/sweep/tower-trail/coming-in-night.png"},
+  {"cam": {"x": -20.59, "y": 13.0, "z": -124.12, "tx": -24.5, "ty": 11.5, "tz": -128.5, "fov": 55}, "time": "night", "caption": "Watchtower: on the bend round the tower, the ladder ahead (night)", "out": "review/sweep/tower-trail/round-night.png"},
+  {"cam": {"x": -25.0, "y": 11.1, "z": -132.0, "tx": -21.0, "ty": 12.0, "tz": -126.0, "fov": 55}, "time": "night", "caption": "Watchtower: from the ladder's side, back along the bend (night)", "out": "review/sweep/tower-trail/ladder-side-night.png"}
+ ],
+ "cols": 4,
+ "out": "qa/2026-10-28-AG-149/night-sheet.jpg"
+}

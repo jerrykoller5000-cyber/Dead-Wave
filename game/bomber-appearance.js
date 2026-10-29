@@ -6,7 +6,11 @@ export function pulseBomberVeins(z,dt,target){
  const h=Math.min(dt,.1),p=z.mesh.position,d=target&&Number.isFinite(target.x+target.y+target.z)&&Math.abs(target.y-p.y)<1.6?Math.hypot(target.x-p.x,target.z-p.z):Infinity,near=Math.max(0,Math.min(1,(10-d)/7.2));
  let s=pulses.get(z);if(!s){s={phase:((z.bob||0)*Math.PI*2)%(Math.PI*2),near:0};pulses.set(z,s);}
  s.near+=(near-s.near)*(1-Math.exp(-4*h));s.phase=(s.phase+h*Math.PI*2*(.35+1.25*s.near))%(Math.PI*2);
- mat.emissiveIntensity=.42+(.38+.32*s.near)*(.5-.5*Math.cos(s.phase));
+ const ambient=.42+(.38+.32*s.near)*(.5-.5*Math.cos(s.phase));
+ // The bomb tactic lights the fuse earlier in the frame. Keep that warning
+ // visible when this pose update runs, while retaining the idle vein pulse.
+ const fuse=z.fuseT>0 ? .5+(.55+.45*Math.sin(z.fuseT*(d<14?9:4)))*1.2 : 0;
+ mat.emissiveIntensity=Math.max(ambient,fuse);
 }
 export function resetBomberVeins(z){pulses.delete(z);const mat=z.mesh?.userData?.pulseMats?.[1];if(mat)mat.emissiveIntensity=.5;}
 export function blendBomberSkin(T,u,scale){

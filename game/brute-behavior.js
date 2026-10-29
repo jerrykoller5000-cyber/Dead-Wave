@@ -1,6 +1,6 @@
 // GP-19866: planted weight, committed close-range smash and angry miss recovery.
 import {shamblerLeg} from './shambler-motion.js';
-export const BRUTE=Object.freeze({turnRate:1.6,turnAccel:3.4,response:.34,stride:2,stance:.6,lift:.085,wind:.78,strike:.24,impact:.105,missRecover:1.15,hitRecover:.65,cooldown:2.65,buildCooldown:1.8,startRange:1.95,reach:1.72,reachY:1.2});
+export const BRUTE=Object.freeze({turnRate:1.6,turnAccel:3.4,response:.34,stride:2,stance:.6,lift:.085,wind:.78,strike:.24,impact:.105,missRecover:1.15,hitRecover:.65,cooldown:2.65,buildCooldown:1.8,startRange:1.6,reach:1.72,reachY:1.2}); // GB-246: start inside reach so a still target is hit
 let states=new WeakMap(),poses=new WeakMap(),enabled=true;
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),angle=v=>Math.atan2(Math.sin(v),Math.cos(v));
 const ease=v=>{const t=clamp(v,0,1);return t*t*(3-2*t);};

@@ -7,6 +7,8 @@
 //   node tools/bench.mjs --night 20 --gfx high   same, on the High preset
 //   node tools/bench.mjs --seconds 8 --headless  short run
 //   node tools/bench.mjs --night 20 --gfx high --prof   and where each frame's time goes
+//   node tools/bench.mjs --night 20 --gfx high --prof-all   --prof with every PROF section listed (CU-171)
+//   node tools/bench.mjs --night 20 --gfx high --eval <file.js>   and run that JavaScript in the page after the seconds (CU-173)
 //   node tools/bench.mjs --night 20 --gfx high --prof --cpu   and which functions (a DevTools CPU profile)
 //   node tools/bench.mjs --night 20 --gfx high --prof --alloc   and who allocates (the garbage behind GC pauses)
 //   node tools/bench.mjs --night 20 --gfx high --prof --gc      and V8's GC on the main thread, per spike (CL-239)
@@ -40,6 +42,7 @@
 // --alloc (CL-219): a DevTools allocation-sampling profile over the measured seconds, the garbage included, and the line
 // gets `alloc`: kB a frame allocated, by function (self) and by the function and its two callers (the 25 heaviest
 // each), so the night's garbage collections (the 40-70 ms frames GP-19940 traced) can be traced to who makes garbage.
+import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { serve } from './serve.mjs';
@@ -60,7 +63,11 @@ const COUNT = num('--count', 500);
 const GFX = flag('--gfx');
 const NIGHT_ARG = flag('--night');
 const SCENARIO_ARG = flag('--scenario');
-const PROF_ON = argv.includes('--prof');
+// CU-171: --prof-all is --prof with every PROF section in the line's `prof.top`, not the heaviest 12 (what grew outside the top).
+// CU-173: --eval <file> runs that JavaScript in the page after the measured seconds (the JSON it returns goes in the line as `eval`).
+const EVAL_FILE = flag('--eval');
+const PROF_ALL = argv.includes('--prof-all');
+const PROF_ON = argv.includes('--prof') || PROF_ALL;
 const CPU_ON = argv.includes('--cpu');
 const CENSUS_ON = CPU_ON || argv.includes('--census');
 const ALLOC_ON = argv.includes('--alloc');
@@ -630,7 +637,7 @@ try {
       frameMs: r2(frameMs),
       tickMs: r2(tickMs),
       outsideMs: r2(frameMs - tickMs),
-      top: phases.slice(0, 12).map((p) => ({ k: p.k, avg: r2(p.avg), max: r2(p.max) })),
+      top: phases.slice(0, PROF_ALL ? phases.length : 12).map((p) => ({ k: p.k, avg: r2(p.avg), max: r2(p.max) })),
       spikes: ((got.rep && got.rep.spikes) || []).slice(0, 8),
       // CL-223: every spike over 25 ms (up to PROF's 60) sorted by what it did: built pipelines, uploaded textures or
       // geometry, freed 2 MB or more of heap (a garbage collection), or none of these (the game's own code).
@@ -703,6 +710,7 @@ try {
     for (const a of line.alloc.self.slice(0, 15)) console.log(`  ${String(a.kb).padStart(7)} kB  ${a.k}`);
   }
   if (CENSUS_ON) { line.census = await page.evaluate(CENSUS); line.census.draws = await page.evaluate(CENSUS_DRAWS, 20000); }
+  if (EVAL_FILE) line.eval = await page.evaluate(fs.readFileSync(EVAL_FILE, 'utf8'));
   if (SCENARIO === 'megaswarm') line.count = COUNT;
   if (SCENARIO === 'build') line.placed = placed;
   console.log(`fps    ${line.fps.toFixed(1)}   (mean of last ${use.length} s)`);

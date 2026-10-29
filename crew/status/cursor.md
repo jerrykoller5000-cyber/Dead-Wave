@@ -1,13 +1,13 @@
 # Cursor
 
 state: active
-model: Grok 4.7
-task: CU-167 The checkpoint commit
+model: Claude Sonnet 5.5
+task: CU-175 The checkpoint commit and push
 touching: git
-since: 2026-10-28T19:39Z
-next: —
+since: 2026-10-29T17:15Z
+next: waits on GB-245
 blocked-on: —
-last-report: handoffs/2026-10-28-cursor-CU-166.md
+last-report: handoffs/2026-10-29-cursor-CU-174.md
 
 ## Notes
 

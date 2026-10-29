@@ -1,0 +1,72 @@
+GRANT grokbot GB-245: starting one game-test command
+camera: camera: loading the game.................................................
+camera: ready in 50 s on port 16053: match, ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11), 1600x900
+setup: pistol
+help: {"L":1,"R":1,"lift":"{\"x\":0.02,\"y\":0.3,\"z\":0.04,\"turn\":1}"}
+s0 {"x":0.02,"y":0,"z":0.04,"turn":1} m4       u=0.35  support(L) 0       firing(R) 0
+s0 {"x":0.02,"y":0,"z":0.04,"turn":1} m4       u=0.65  support(L) 332     firing(R) 0
+s0 {"x":0.02,"y":0,"z":0.04,"turn":1} sniper   u=0.35  support(L) 0       firing(R) 0
+s0 {"x":0.02,"y":0,"z":0.04,"turn":1} sniper   u=0.65  support(L) 50836   firing(R) 0
+s0 {"x":0.02,"y":0,"z":0.04,"turn":1} aa12     u=0.35  support(L) 0       firing(R) 0
+s0 {"x":0.02,"y":0,"z":0.04,"turn":1} aa12     u=0.65  support(L) 0       firing(R) 0
+s1 {"x":0.02,"y":0.08,"z":0.04,"turn":1} m4       u=0.35  support(L) 16866   firing(R) 5927
+s1 {"x":0.02,"y":0.08,"z":0.04,"turn":1} m4       u=0.65  support(L) 16807   firing(R) 5945
+s1 {"x":0.02,"y":0.08,"z":0.04,"turn":1} sniper   u=0.35  support(L) 0       firing(R) 0
+s1 {"x":0.02,"y":0.08,"z":0.04,"turn":1} sniper   u=0.65  support(L) 21501   firing(R) 0
+s1 {"x":0.02,"y":0.08,"z":0.04,"turn":1} aa12     u=0.35  support(L) 0       firing(R) 0
+s1 {"x":0.02,"y":0.08,"z":0.04,"turn":1} aa12     u=0.65  support(L) 0       firing(R) 0
+s2 {"x":0.02,"y":0.15,"z":0.04,"turn":1} m4       u=0.35  support(L) 0       firing(R) 0
+s2 {"x":0.02,"y":0.15,"z":0.04,"turn":1} m4       u=0.65  support(L) 107     firing(R) 0
+s2 {"x":0.02,"y":0.15,"z":0.04,"turn":1} sniper   u=0.35  support(L) 0       firing(R) 0
+s2 {"x":0.02,"y":0.15,"z":0.04,"turn":1} sniper   u=0.65  support(L) 0       firing(R) 0
+s2 {"x":0.02,"y":0.15,"z":0.04,"turn":1} aa12     u=0.35  support(L) 0       firing(R) 0
+s2 {"x":0.02,"y":0.15,"z":0.04,"turn":1} aa12     u=0.65  support(L) 633     firing(R) 0
+s3 {"x":0.02,"y":0,"z":0.04,"turn":0.4} m4       u=0.35  support(L) 0       firing(R) 1440
+s3 {"x":0.02,"y":0,"z":0.04,"turn":0.4} m4       u=0.65  support(L) 0       firing(R) 1743
+s3 {"x":0.02,"y":0,"z":0.04,"turn":0.4} sniper   u=0.35  support(L) 0       firing(R) 18
+s3 {"x":0.02,"y":0,"z":0.04,"turn":0.4} sniper   u=0.65  support(L) 66558   firing(R) 0
+s3 {"x":0.02,"y":0,"z":0.04,"turn":0.4} aa12     u=0.35  support(L) 0       firing(R) 0
+s3 {"x":0.02,"y":0,"z":0.04,"turn":0.4} aa12     u=0.65  support(L) 0       firing(R) 0
+s4 {"x":0.02,"y":0.08,"z":0.04,"turn":0.4} m4       u=0.35  support(L) 16876   firing(R) 6170
+s4 {"x":0.02,"y":0.08,"z":0.04,"turn":0.4} m4       u=0.65  support(L) 16886   firing(R) 6014
+s4 {"x":0.02,"y":0.08,"z":0.04,"turn":0.4} sniper   u=0.35  support(L) 0       firing(R) 0
+s4 {"x":0.02,"y":0.08,"z":0.04,"turn":0.4} sniper   u=0.65  support(L) 22118   firing(R) 0
+s4 {"x":0.02,"y":0.08,"z":0.04,"turn":0.4} aa12     u=0.35  support(L) 0       firing(R) 0
+s4 {"x":0.02,"y":0.08,"z":0.04,"turn":0.4} aa12     u=0.65  support(L) 0       firing(R) 0
+s5 {"x":0.02,"y":0.15,"z":0.04,"turn":0.4} m4       u=0.35  support(L) 0       firing(R) 0
+s5 {"x":0.02,"y":0.15,"z":0.04,"turn":0.4} m4       u=0.65  support(L) 4628    firing(R) 0
+s5 {"x":0.02,"y":0.15,"z":0.04,"turn":0.4} sniper   u=0.35  support(L) 0       firing(R) 0
+s5 {"x":0.02,"y":0.15,"z":0.04,"turn":0.4} sniper   u=0.65  support(L) 4840    firing(R) 0
+s5 {"x":0.02,"y":0.15,"z":0.04,"turn":0.4} aa12     u=0.35  support(L) 0       firing(R) 0
+s5 {"x":0.02,"y":0.15,"z":0.04,"turn":0.4} aa12     u=0.65  support(L) 0       firing(R) 0
+s6 {"x":0.02,"y":0,"z":0.04,"turn":0} m4       u=0.35  support(L) 0       firing(R) 3977
+s6 {"x":0.02,"y":0,"z":0.04,"turn":0} m4       u=0.65  support(L) 0       firing(R) 3908
+s6 {"x":0.02,"y":0,"z":0.04,"turn":0} sniper   u=0.35  support(L) 0       firing(R) 1673
+s6 {"x":0.02,"y":0,"z":0.04,"turn":0} sniper   u=0.65  support(L) 54522   firing(R) 0
+s6 {"x":0.02,"y":0,"z":0.04,"turn":0} aa12     u=0.35  support(L) 0       firing(R) 51
+s6 {"x":0.02,"y":0,"z":0.04,"turn":0} aa12     u=0.65  support(L) 0       firing(R) 21
+s7 {"x":0.02,"y":0.08,"z":0.04,"turn":0} m4       u=0.35  support(L) 0       firing(R) 0
+s7 {"x":0.02,"y":0.08,"z":0.04,"turn":0} m4       u=0.65  support(L) 4056    firing(R) 0
+s7 {"x":0.02,"y":0.08,"z":0.04,"turn":0} sniper   u=0.35  support(L) 0       firing(R) 0
+s7 {"x":0.02,"y":0.08,"z":0.04,"turn":0} sniper   u=0.65  support(L) 19856   firing(R) 0
+s7 {"x":0.02,"y":0.08,"z":0.04,"turn":0} aa12     u=0.35  support(L) 0       firing(R) 0
+s7 {"x":0.02,"y":0.08,"z":0.04,"turn":0} aa12     u=0.65  support(L) 0       firing(R) 0
+s8 {"x":0.02,"y":0.15,"z":0.04,"turn":0} m4       u=0.35  support(L) 0       firing(R) 0
+s8 {"x":0.02,"y":0.15,"z":0.04,"turn":0} m4       u=0.65  support(L) 19520   firing(R) 0
+s8 {"x":0.02,"y":0.15,"z":0.04,"turn":0} sniper   u=0.35  support(L) 0       firing(R) 0
+s8 {"x":0.02,"y":0.15,"z":0.04,"turn":0} sniper   u=0.65  support(L) 9650    firing(R) 0
+s8 {"x":0.02,"y":0.15,"z":0.04,"turn":0} aa12     u=0.35  support(L) 0       firing(R) 0
+s8 {"x":0.02,"y":0.15,"z":0.04,"turn":0} aa12     u=0.65  support(L) 0       firing(R) 0
+s9 {"x":0.02,"y":0.08,"z":0.15,"turn":0.4} m4       u=0.35  support(L) 0       firing(R) 0
+s9 {"x":0.02,"y":0.08,"z":0.15,"turn":0.4} m4       u=0.65  support(L) 0       firing(R) 0
+s9 {"x":0.02,"y":0.08,"z":0.15,"turn":0.4} sniper   u=0.35  support(L) 0       firing(R) 0
+s9 {"x":0.02,"y":0.08,"z":0.15,"turn":0.4} sniper   u=0.65  support(L) 0       firing(R) 0
+s9 {"x":0.02,"y":0.08,"z":0.15,"turn":0.4} aa12     u=0.35  support(L) 0       firing(R) 0
+s9 {"x":0.02,"y":0.08,"z":0.15,"turn":0.4} aa12     u=0.65  support(L) 0       firing(R) 0
+s10 {"x":0.02,"y":0.08,"z":0.15,"turn":0} m4       u=0.35  support(L) 0       firing(R) 0
+s10 {"x":0.02,"y":0.08,"z":0.15,"turn":0} m4       u=0.65  support(L) 0       firing(R) 0
+s10 {"x":0.02,"y":0.08,"z":0.15,"turn":0} sniper   u=0.35  support(L) 0       firing(R) 0
+s10 {"x":0.02,"y":0.08,"z":0.15,"turn":0} sniper   u=0.65  support(L) 0       firing(R) 0
+s10 {"x":0.02,"y":0.08,"z":0.15,"turn":0} aa12     u=0.35  support(L) 0       firing(R) 0
+s10 {"x":0.02,"y":0.08,"z":0.15,"turn":0} aa12     u=0.65  support(L) 0       firing(R) 0
+camera stop: camera: stopped

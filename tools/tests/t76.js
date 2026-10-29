@@ -26,15 +26,24 @@
     const p0 = G.map((z) => ({ x: z.mesh.position.x, z: z.mesh.position.z }));
     const S = G.map(() => ({ head: [], sway: [], hips: [], moved: 0 }));
     const t0 = T.getSimTime(), w0 = Date.now();   // GB-187: four seconds of game time
+    // GB-243 (rule 13): one sample per 0.04 s of GAME time, so the sample count no longer depends on how many awaits a
+    // loaded page fits in (it managed only 56-60, tripping the >60 data guard). 0.04 s is exactly the cadence the check
+    // had on an unloaded page, where 40 ms of wall clock was 40 ms of game time, so the ranges and the in-step figure are
+    // measured the same way they always were; only a slow page's aliasing is gone. No bar changed.
+    let nextSample = 0;
     while (T.getSimTime() - t0 < 4 && Date.now() - w0 < 30000) {
-      G.forEach((z, k) => {
-        const ud = z.mesh.userData;
-        S[k].head.push(ud.head ? ud.head.rotation.y : 0);
-        S[k].sway.push(ud.torso ? ud.torso.rotation.z : 0);
-        S[k].hips.push(ud.hips ? ud.hips.position.y : 0);
-        S[k].moved = Math.max(S[k].moved, Math.hypot(z.mesh.position.x - p0[k].x, z.mesh.position.z - p0[k].z));
-      });
-      await wait(40);
+      const gNow = T.getSimTime() - t0;
+      if (gNow >= nextSample) {
+        nextSample = gNow + 0.04;
+        G.forEach((z, k) => {
+          const ud = z.mesh.userData;
+          S[k].head.push(ud.head ? ud.head.rotation.y : 0);
+          S[k].sway.push(ud.torso ? ud.torso.rotation.z : 0);
+          S[k].hips.push(ud.hips ? ud.hips.position.y : 0);
+          S[k].moved = Math.max(S[k].moved, Math.hypot(z.mesh.position.x - p0[k].x, z.mesh.position.z - p0[k].z));
+        });
+      }
+      await wait(16);
     }
     const n = S[0].sway.length;
     ok(n > 60, 'sampled ' + n + ' frames');
@@ -81,7 +90,9 @@
     await wait(200);
     const w = T.spawnZombie(px + 25, pz, 'shambler', true, true);
     const wp1 = w.walkPhase || 0;
-    await wait(1200);
+    // GB-243 (rule 13): 1.2 s of GAME time, not wall clock: a loaded page advanced the walk only a fraction of
+    // that, so the phase bar (+3) read +1.8. Same 1.2 s of walking, same bar.
+    { const g0 = T.getSimTime(), w0 = Date.now(); while (T.getSimTime() - g0 < 1.2 && Date.now() - w0 < 30000) await wait(30); }
     ok((w.walkPhase || 0) > wp1 + 3 && (!w.idle || w.idle.amt < 0.05), 'a walker walks (phase +' + ((w.walkPhase || 0) - wp1).toFixed(1) + ', idle ' + (w.idle ? w.idle.amt.toFixed(2) : 0) + ')');
     ok(errs.length === 0, 'no page errors (' + errs.slice(0, 1).join('').slice(0, 80) + ')');
     T.clearZombies && T.clearZombies();

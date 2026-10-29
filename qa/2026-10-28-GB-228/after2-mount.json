@@ -1,0 +1,20 @@
+ERR camera: CDP timeout: Runtime.evaluate
+
+ERR camera: CDP timeout: Runtime.evaluate
+
+ERR camera: CDP timeout: Runtime.evaluate
+
+ERR node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+Error: read ECONNRESET
+    at TCP.onStreamR
+Game-test request 66e05831-538e-4a3b-b19e-0dda3d2a0feb queued at position 2. Waiting...
+GRANT grokbot GB-228: starting one game-test command
+{"gun":"pistol","rest":0.02206,"lo":0.02125,"hi":0.02206,"dip":-0.00081,"rise":0,"rzAtDip":-0.0031,"n":45}
+Game-test request 3e20eba3-0e18-475a-a085-f898c4909143 queued at position 2. Waiting...
+GRANT grokbot GB-228: starting one game-test command
+{"gun":"pistol","rest":0.02206,"lo":0.02125,"hi":0.02206,"dip":-0.00081,"rise":0,"rzAtDip":-0.0031,"n":45}
+GRANT grokbot GB-228: starting one game-test command
+{"gun":"pistol","rest":0.02204,"lo":0.02125,"hi":0.02204,"dip":-0.00079,"rise":0,"rzAtDip":-0.003,"n":45}

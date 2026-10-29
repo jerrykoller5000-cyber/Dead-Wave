@@ -1,0 +1,1063 @@
+{
+  "at": "2026-10-29T10:40:39.463Z",
+  "subjects": {
+    "spitter": {
+      "samples": [
+        {
+          "t": 27.171,
+          "phase": "wave",
+          "alive": true,
+          "wind": 0,
+          "snap": 0,
+          "cd": 0.122,
+          "projectiles": 0,
+          "projectile": null,
+          "groundEffects": [],
+          "player": {
+            "x": 0,
+            "z": 8
+          },
+          "banner": "NIGHT 2 | Here they come"
+        },
+        {
+          "t": 27.221,
+          "phase": "wave",
+          "alive": true,
+          "wind": 0,
+          "snap": 0,
+          "cd": 0.067,
+          "projectiles": 0,
+          "projectile": null,
+          "groundEffects": [],
+          "player": {
+            "x": 0,
+            "z": 8
+          },
+          "banner": "NIGHT 2 | Here they come"
+        },
+        {
+          "t": 27.269,
+          "phase": "wave",
+          "alive": true,
+          "wind": 0,
+          "snap": 0,
+          "cd": 0.017,
+          "projectiles": 0,
+          "projectile": null,
+          "groundEffects": [],
+          "player": {
+            "x": 0,
+            "z": 8
+          },
+          "banner": "NIGHT 2 | Here they come"
+        },
+        {
+          "t": 27.31,
+          "phase": "wave",
+          "alive": true,
+          "wind": 0.6,
+          "snap": 0,
+          "cd": 4.158,
+          "projectiles": 0,
+          "projectile": null,
+          "groundEffects": [],
+          "player": {
+            "x": 0,
+            "z": 8
+          },
+          "banner": "NIGHT 2 | Here they come"
+        },
+        {
+          "t": 27.759,
+          "phase": "wave",
+          "alive": true,
+          "wind": 0.166,
+          "snap": 0,
+          "cd": 3.724,
+          "projectiles": 0,
+          "projectile": null,
+          "groundEffects": [],
+          "player": {
+            "x": 0,
+            "z": 8
+          },
+          "banner": "NIGHT 2 | Here they come"
+        },
+        {
+          "t": 27.808,
+          "phase": "wave",
+          "alive": true,
+          "wind": 0.099,
+          "snap": 0,
+          "cd": 3.657,
+          "projectiles": 0,
+          "projectile": null,
+          "groundEffects": [],
+          "player": {
+            "x": 0,
+            "z": 8
+          },
+          "banner": "NIGHT 2 | Here they come"
+        },
+        {
+          "t": 27.86,
+          "phase": "wave",
+          "alive": true,
+          "wind": 0.048,
+          "snap": 0,
+          "cd": 3.606,
+          "projectiles": 0,
+          "projectile": null,
+          "groundEffects": [],
+          "player": {
+            "x": 0,
+            "z": 8
+          },
+          "banner": "NIGHT 2 | Here they come"
+        },
+        {
+          "t": 27.912,
+          "phase": "wave",
+          "alive": true,
+          "wind": 0,
+          "snap": 0.234,
+          "cd": 3.558,
+          "projectiles": 1,
+          "projectile": {
+            "x": 0.02,
+            "y": -1.705,
+            "z": 16.296,
+            "age": 0.016
+          },
+          "groundEffects": [],
+          "player": {
+            "x": 0,
+            "z": 8
+          },
+          "banner": "NIGHT 2 | Here they come"
+        },
+        {
+          "t": 27.962,
+          "phase": "wave",
+          "alive": true,
+          "wind": 0,
+          "snap": 0.182,
+          "cd": 3.506,
+          "projectiles": 1,
+          "projectile": {
+            "x": 0.019,
+            "y": -1.313,
+            "z": 15.927,
+            "age": 0.068
+          },
+          "groundEffects": [],
+          "player": {
+            "x": 0,
+            "z": 5.42
+          },
+          "banner": "NIGHT 2 | Here they come"
+        },
+        {
+          "t": 27.993,
+          "phase": "wave",
+          "alive": true,
+          "wind": 0,
+          "snap": 0.15,
+          "cd": 3.473,
+          "projectiles": 1,
+          "projectile": {
+            "x": 0.019,
+            "y": -1.092,
+            "z": 15.698,
+            "age": 0.101
+          },
+          "groundEffects": [],
+          "player": {
+            "x": 0,
+            "z": 5.42
+          },
+          "banner": "NIGHT 2 | Here they come"
+        },
+        {
+          "t": 28.026,
+          "phase": "wave",
+          "alive": true,
+          "wind": 0,
+          "snap": 0.116,
+          "cd": 3.44,
+          "projectiles": 1,
+          "projectile": {
+            "x": 0.018,
+            "y": -0.879,
+            "z": 15.461,
+            "age": 0.134
+          },
+          "groundEffects": [],
+          "player": {
+            "x": 0,
+            "z": 5.42
+          },
+          "banner": "NIGHT 2 | Here they come"
+        },
+        {
+          "t": 28.072,
+          "phase": "wave",
+          "alive": true,
+          "wind": 0,
+          "snap": 0.067,
+          "cd": 3.391,
+          "projectiles": 1,
+          "projectile": {
+            "x": 0.017,
+            "y": -0.601,
+            "z": 15.113,
+            "age": 0.183
+          },
+          "groundEffects": [],
+          "player": {
+            "x": 0,
+            "z": 5.42
+          },
+          "banner": "NIGHT 2 | Here they come"
+        },
+        {
+          "t": 28.125,
+          "phase": "wave",
+          "alive": true,
+          "wind": 0,
+          "snap": 0.018,
+          "cd": 3.342,
+          "projectiles": 1,
+          "projectile": {
+            "x": 0.017,
+            "y": -0.358,
+            "z": 14.763,
+            "age": 0.232
+          },
+          "groundEffects": [],
+          "player": {
+            "x": 0,
+            "z": 5.42
+          },
+          "banner": "NIGHT 2 | Here they come"
+        },
+        {
+          "t": 28.175,
+          "phase": "wave",
+          "alive": true,
+          "wind": 0,
+          "snap": -0.015,
+          "cd": 3.292,
+          "projectiles": 1,
+          "projectile": {
+            "x": 0.016,
+            "y": -0.156,
+            "z": 14.413,
+            "age": 0.282
+          },
+          "groundEffects": [],
+          "player": {
+            "x": 0,
+            "z": 5.42
+          },
+          "banner": "NIGHT 2 | Here they come"
+        },
+        {
+          "t": 28.634,
+          "phase": "wave",
+          "alive": true,
+          "wind": 0,
+          "snap": -0.015,
+          "cd": 2.855,
+          "projectiles": 1,
+          "projectile": {
+            "x": 0.008,
+            "y": -0.063,
+            "z": 11.309,
+            "age": 0.719
+          },
+          "groundEffects": [],
+          "player": {
+            "x": 0,
+            "z": 5.42
+          },
+          "banner": "NIGHT 2 | Here they come"
+        },
+        {
+          "t": 28.68,
+          "phase": "wave",
+          "alive": true,
+          "wind": 0,
+          "snap": -0.015,
+          "cd": 2.785,
+          "projectiles": 1,
+          "projectile": {
+            "x": 0.007,
+            "y": -0.339,
+            "z": 10.811,
+            "age": 0.789
+          },
+          "groundEffects": [],
+          "player": {
+            "x": 0,
+            "z": 5.42
+          },
+          "banner": "NIGHT 2 | Here they come"
+        },
+        {
+          "t": 28.726,
+          "phase": "wave",
+          "alive": true,
+          "wind": 0,
+          "snap": -0.015,
+          "cd": 2.736,
+          "projectiles": 1,
+          "projectile": {
+            "x": 0.006,
+            "y": -0.571,
+            "z": 10.466,
+            "age": 0.838
+          },
+          "groundEffects": [],
+          "player": {
+            "x": 0,
+            "z": 5.42
+          },
+          "banner": "NIGHT 2 | Here they come"
+        },
+        {
+          "t": 28.78,
+          "phase": "wave",
+          "alive": true,
+          "wind": 0,
+          "snap": -0.015,
+          "cd": 2.685,
+          "projectiles": 1,
+          "projectile": {
+            "x": 0.005,
+            "y": -0.86,
+            "z": 10.1,
+            "age": 0.889
+          },
+          "groundEffects": [],
+          "player": {
+            "x": 0,
+            "z": 5.42
+          },
+          "banner": "NIGHT 2 | Here they come"
+        },
+        {
+          "t": 28.819,
+          "phase": "wave",
+          "alive": true,
+          "wind": 0,
+          "snap": -0.015,
+          "cd": 2.648,
+          "projectiles": 1,
+          "projectile": {
+            "x": 0.005,
+            "y": -1.089,
+            "z": 9.842,
+            "age": 0.925
+          },
+          "groundEffects": [],
+          "player": {
+            "x": 0,
+            "z": 5.42
+          },
+          "banner": "NIGHT 2 | Here they come"
+        },
+        {
+          "t": 28.85,
+          "phase": "wave",
+          "alive": true,
+          "wind": 0,
+          "snap": -0.015,
+          "cd": 2.614,
+          "projectiles": 1,
+          "projectile": {
+            "x": 0.004,
+            "y": -1.325,
+            "z": 9.598,
+            "age": 0.96
+          },
+          "groundEffects": [],
+          "player": {
+            "x": 0,
+            "z": 5.42
+          },
+          "banner": "NIGHT 2 | Here they come"
+        },
+        {
+          "t": 28.883,
+          "phase": "wave",
+          "alive": true,
+          "wind": 0,
+          "snap": -0.015,
+          "cd": 2.58,
+          "projectiles": 1,
+          "projectile": {
+            "x": 0.003,
+            "y": -1.574,
+            "z": 9.36,
+            "age": 0.993
+          },
+          "groundEffects": [],
+          "player": {
+            "x": 0,
+            "z": 5.42
+          },
+          "banner": "NIGHT 2 | Here they come"
+        },
+        {
+          "t": 28.931,
+          "phase": "wave",
+          "alive": true,
+          "wind": 0,
+          "snap": -0.015,
+          "cd": 2.531,
+          "projectiles": 1,
+          "projectile": {
+            "x": 0.002,
+            "y": -1.974,
+            "z": 9.008,
+            "age": 1.043
+          },
+          "groundEffects": [],
+          "player": {
+            "x": 0,
+            "z": 5.42
+          },
+          "banner": "NIGHT 2 | Here they come"
+        },
+        {
+          "t": 28.982,
+          "phase": "wave",
+          "alive": true,
+          "wind": 0,
+          "snap": -0.015,
+          "cd": 2.481,
+          "projectiles": 1,
+          "projectile": {
+            "x": 0.002,
+            "y": -2.414,
+            "z": 8.655,
+            "age": 1.093
+          },
+          "groundEffects": [],
+          "player": {
+            "x": 0,
+            "z": 5.42
+          },
+          "banner": "NIGHT 2 | Here they come"
+        },
+        {
+          "t": 29.032,
+          "phase": "wave",
+          "alive": true,
+          "wind": 0,
+          "snap": -0.015,
+          "cd": 2.432,
+          "projectiles": 1,
+          "projectile": {
+            "x": 0.001,
+            "y": -2.885,
+            "z": 8.308,
+            "age": 1.142
+          },
+          "groundEffects": [],
+          "player": {
+            "x": 0,
+            "z": 5.42
+          },
+          "banner": "NIGHT 2 | Here they come"
+        },
+        {
+          "t": 29.418,
+          "phase": "wave",
+          "alive": true,
+          "wind": 0,
+          "snap": -0.015,
+          "cd": 2.047,
+          "projectiles": 0,
+          "projectile": null,
+          "groundEffects": [
+            {
+              "x": 0,
+              "z": 8.061
+            }
+          ],
+          "player": {
+            "x": 0,
+            "z": 5.42
+          },
+          "banner": "NIGHT 2 | Here they come"
+        }
+      ],
+      "shots": [
+        {
+          "file": "spitter-01-wind.png",
+          "stage": "wind",
+          "elapsed": 160,
+          "state": {
+            "t": 27.31,
+            "phase": "wave",
+            "alive": true,
+            "wind": 0.6,
+            "snap": 0,
+            "cd": 4.158,
+            "projectiles": 0,
+            "projectile": null,
+            "groundEffects": [],
+            "player": {
+              "x": 0,
+              "z": 8
+            },
+            "banner": "NIGHT 2 | Here they come"
+          }
+        },
+        {
+          "file": "spitter-02-flight.png",
+          "stage": "flight",
+          "elapsed": 1026,
+          "state": {
+            "t": 28.175,
+            "phase": "wave",
+            "alive": true,
+            "wind": 0,
+            "snap": -0.015,
+            "cd": 3.292,
+            "projectiles": 1,
+            "projectile": {
+              "x": 0.016,
+              "y": -0.156,
+              "z": 14.413,
+              "age": 0.282
+            },
+            "groundEffects": [],
+            "player": {
+              "x": 0,
+              "z": 5.42
+            },
+            "banner": "NIGHT 2 | Here they come"
+          }
+        },
+        {
+          "file": "spitter-03-flight.png",
+          "stage": "flight",
+          "elapsed": 1882,
+          "state": {
+            "t": 29.032,
+            "phase": "wave",
+            "alive": true,
+            "wind": 0,
+            "snap": -0.015,
+            "cd": 2.432,
+            "projectiles": 1,
+            "projectile": {
+              "x": 0.001,
+              "y": -2.885,
+              "z": 8.308,
+              "age": 1.142
+            },
+            "groundEffects": [],
+            "player": {
+              "x": 0,
+              "z": 5.42
+            },
+            "banner": "NIGHT 2 | Here they come"
+          }
+        },
+        {
+          "file": "spitter-04-impact.png",
+          "stage": "impact",
+          "elapsed": 2268,
+          "state": {
+            "t": 29.418,
+            "phase": "wave",
+            "alive": true,
+            "wind": 0,
+            "snap": -0.015,
+            "cd": 2.047,
+            "projectiles": 0,
+            "projectile": null,
+            "groundEffects": [
+              {
+                "x": 0,
+                "z": 8.061
+              }
+            ],
+            "player": {
+              "x": 0,
+              "z": 5.42
+            },
+            "banner": "NIGHT 2 | Here they come"
+          }
+        }
+      ],
+      "launched": true,
+      "landed": true,
+      "spawn": {
+        "type": "spitter",
+        "position": [
+          0,
+          -3.1686761379241943,
+          17
+        ],
+        "cooldown": 0.15
+      },
+      "movedPlayer": true,
+      "impact": {
+        "x": 0,
+        "z": 8.061
+      },
+      "lastProjectile": {
+        "x": 0.001,
+        "y": -2.885,
+        "z": 8.308,
+        "age": 1.142
+      }
+    },
+    "spider": {
+      "samples": [
+        {
+          "t": 29.751,
+          "phase": "wave",
+          "alive": true,
+          "wind": 0,
+          "snap": 0,
+          "cd": 0.15,
+          "projectiles": 0,
+          "projectile": null,
+          "groundEffects": [],
+          "player": {
+            "x": 0,
+            "z": 8
+          },
+          "banner": "NIGHT 2 | Here they come"
+        },
+        {
+          "t": 29.797,
+          "phase": "wave",
+          "alive": true,
+          "wind": 0,
+          "snap": 0,
+          "cd": 0.1,
+          "projectiles": 0,
+          "projectile": null,
+          "groundEffects": [],
+          "player": {
+            "x": 0,
+            "z": 8
+          },
+          "banner": "NIGHT 2 | Here they come"
+        },
+        {
+          "t": 29.847,
+          "phase": "wave",
+          "alive": true,
+          "wind": 0,
+          "snap": 0,
+          "cd": 0.051,
+          "projectiles": 0,
+          "projectile": null,
+          "groundEffects": [],
+          "player": {
+            "x": 0,
+            "z": 8
+          },
+          "banner": "NIGHT 2 | Here they come"
+        },
+        {
+          "t": 29.882,
+          "phase": "wave",
+          "alive": true,
+          "wind": 0,
+          "snap": 0,
+          "cd": 0.018,
+          "projectiles": 0,
+          "projectile": null,
+          "groundEffects": [],
+          "player": {
+            "x": 0,
+            "z": 8
+          },
+          "banner": "NIGHT 2 | Here they come"
+        },
+        {
+          "t": 29.93,
+          "phase": "wave",
+          "alive": true,
+          "wind": 0.362,
+          "snap": 0,
+          "cd": -0.033,
+          "projectiles": 0,
+          "projectile": null,
+          "groundEffects": [],
+          "player": {
+            "x": 0,
+            "z": 8
+          },
+          "banner": "NIGHT 2 | Here they come"
+        },
+        {
+          "t": 30.301,
+          "phase": "wave",
+          "alive": true,
+          "wind": 0,
+          "snap": 0.22,
+          "cd": 5.251,
+          "projectiles": 1,
+          "projectile": {
+            "x": -0.437,
+            "y": -2.502,
+            "z": 15.822,
+            "age": 0.017
+          },
+          "groundEffects": [],
+          "player": {
+            "x": 0,
+            "z": 8
+          },
+          "banner": "NIGHT 2 | Here they come"
+        },
+        {
+          "t": 30.336,
+          "phase": "wave",
+          "alive": true,
+          "wind": 0,
+          "snap": 0.188,
+          "cd": 5.219,
+          "projectiles": 1,
+          "projectile": {
+            "x": -0.406,
+            "y": -2.515,
+            "z": 15.27,
+            "age": 0.05
+          },
+          "groundEffects": [],
+          "player": {
+            "x": 0,
+            "z": 5.42
+          },
+          "banner": "NIGHT 2 | Here they come"
+        },
+        {
+          "t": 30.367,
+          "phase": "wave",
+          "alive": true,
+          "wind": 0,
+          "snap": 0.154,
+          "cd": 5.186,
+          "projectiles": 1,
+          "projectile": {
+            "x": -0.375,
+            "y": -2.535,
+            "z": 14.709,
+            "age": 0.083
+          },
+          "groundEffects": [],
+          "player": {
+            "x": 0,
+            "z": 5.42
+          },
+          "banner": "NIGHT 2 | Here they come"
+        },
+        {
+          "t": 30.399,
+          "phase": "wave",
+          "alive": true,
+          "wind": 0,
+          "snap": 0.121,
+          "cd": 5.153,
+          "projectiles": 1,
+          "projectile": {
+            "x": -0.343,
+            "y": -2.56,
+            "z": 14.145,
+            "age": 0.116
+          },
+          "groundEffects": [],
+          "player": {
+            "x": 0,
+            "z": 5.42
+          },
+          "banner": "NIGHT 2 | Here they come"
+        },
+        {
+          "t": 30.456,
+          "phase": "wave",
+          "alive": true,
+          "wind": 0,
+          "snap": 0.07,
+          "cd": 5.102,
+          "projectiles": 1,
+          "projectile": {
+            "x": -0.295,
+            "y": -2.608,
+            "z": 13.281,
+            "age": 0.167
+          },
+          "groundEffects": [],
+          "player": {
+            "x": 0,
+            "z": 5.42
+          },
+          "banner": "NIGHT 2 | Here they come"
+        },
+        {
+          "t": 30.499,
+          "phase": "wave",
+          "alive": true,
+          "wind": 0,
+          "snap": 0.02,
+          "cd": 5.051,
+          "projectiles": 1,
+          "projectile": {
+            "x": -0.247,
+            "y": -2.67,
+            "z": 12.426,
+            "age": 0.217
+          },
+          "groundEffects": [],
+          "player": {
+            "x": 0,
+            "z": 5.42
+          },
+          "banner": "NIGHT 2 | Here they come"
+        },
+        {
+          "t": 30.549,
+          "phase": "wave",
+          "alive": true,
+          "wind": 0,
+          "snap": 0,
+          "cd": 5.002,
+          "projectiles": 1,
+          "projectile": {
+            "x": -0.201,
+            "y": -2.741,
+            "z": 11.592,
+            "age": 0.266
+          },
+          "groundEffects": [],
+          "player": {
+            "x": 0,
+            "z": 5.42
+          },
+          "banner": "NIGHT 2 | Here they come"
+        },
+        {
+          "t": 30.587,
+          "phase": "wave",
+          "alive": true,
+          "wind": 0,
+          "snap": 0,
+          "cd": 4.968,
+          "projectiles": 1,
+          "projectile": {
+            "x": -0.169,
+            "y": -2.798,
+            "z": 11.02,
+            "age": 0.3
+          },
+          "groundEffects": [],
+          "player": {
+            "x": 0,
+            "z": 5.42
+          },
+          "banner": "NIGHT 2 | Here they come"
+        },
+        {
+          "t": 30.619,
+          "phase": "wave",
+          "alive": true,
+          "wind": 0,
+          "snap": 0,
+          "cd": 4.933,
+          "projectiles": 1,
+          "projectile": {
+            "x": -0.135,
+            "y": -2.864,
+            "z": 10.413,
+            "age": 0.336
+          },
+          "groundEffects": [],
+          "player": {
+            "x": 0,
+            "z": 5.42
+          },
+          "banner": "NIGHT 2 | Here they come"
+        },
+        {
+          "t": 30.654,
+          "phase": "wave",
+          "alive": true,
+          "wind": 0,
+          "snap": 0,
+          "cd": 4.899,
+          "projectiles": 1,
+          "projectile": {
+            "x": -0.103,
+            "y": -2.931,
+            "z": 9.847,
+            "age": 0.369
+          },
+          "groundEffects": [],
+          "player": {
+            "x": 0,
+            "z": 5.42
+          },
+          "banner": "NIGHT 2 | Here they come"
+        },
+        {
+          "t": 30.703,
+          "phase": "wave",
+          "alive": true,
+          "wind": 0,
+          "snap": 0,
+          "cd": 4.851,
+          "projectiles": 1,
+          "projectile": {
+            "x": -0.057,
+            "y": -3.039,
+            "z": 9.021,
+            "age": 0.418
+          },
+          "groundEffects": [],
+          "player": {
+            "x": 0,
+            "z": 5.42
+          },
+          "banner": "NIGHT 2 | Here they come"
+        },
+        {
+          "t": 31.064,
+          "phase": "wave",
+          "alive": true,
+          "wind": 0,
+          "snap": 0,
+          "cd": 4.485,
+          "projectiles": 0,
+          "projectile": null,
+          "groundEffects": [
+            {
+              "x": -0.042,
+              "z": 8.747
+            }
+          ],
+          "player": {
+            "x": 0,
+            "z": 5.42
+          },
+          "banner": "NIGHT 2 | Here they come"
+        }
+      ],
+      "shots": [
+        {
+          "file": "spider-01-wind.png",
+          "stage": "wind",
+          "elapsed": 181,
+          "state": {
+            "t": 29.93,
+            "phase": "wave",
+            "alive": true,
+            "wind": 0.362,
+            "snap": 0,
+            "cd": -0.033,
+            "projectiles": 0,
+            "projectile": null,
+            "groundEffects": [],
+            "player": {
+              "x": 0,
+              "z": 8
+            },
+            "banner": "NIGHT 2 | Here they come"
+          }
+        },
+        {
+          "file": "spider-02-flight.png",
+          "stage": "flight",
+          "elapsed": 954,
+          "state": {
+            "t": 30.703,
+            "phase": "wave",
+            "alive": true,
+            "wind": 0,
+            "snap": 0,
+            "cd": 4.851,
+            "projectiles": 1,
+            "projectile": {
+              "x": -0.057,
+              "y": -3.039,
+              "z": 9.021,
+              "age": 0.418
+            },
+            "groundEffects": [],
+            "player": {
+              "x": 0,
+              "z": 5.42
+            },
+            "banner": "NIGHT 2 | Here they come"
+          }
+        },
+        {
+          "file": "spider-03-impact.png",
+          "stage": "impact",
+          "elapsed": 1316,
+          "state": {
+            "t": 31.064,
+            "phase": "wave",
+            "alive": true,
+            "wind": 0,
+            "snap": 0,
+            "cd": 4.485,
+            "projectiles": 0,
+            "projectile": null,
+            "groundEffects": [
+              {
+                "x": -0.042,
+                "z": 8.747
+              }
+            ],
+            "player": {
+              "x": 0,
+              "z": 5.42
+            },
+            "banner": "NIGHT 2 | Here they come"
+          }
+        }
+      ],
+      "launched": true,
+      "landed": true,
+      "spawn": {
+        "type": "spider",
+        "position": [
+          0,
+          -3.1686761379241943,
+          17
+        ],
+        "cooldown": 0.15
+      },
+      "movedPlayer": true,
+      "impact": {
+        "x": -0.042,
+        "z": 8.747
+      },
+      "lastProjectile": {
+        "x": -0.057,
+        "y": -3.039,
+        "z": 9.021,
+        "age": 0.418
+      }
+    }
+  },
+  "errors": [],
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "loadSec": 27.102,
+  "setup": {
+    "jumped": true,
+    "phase": "wave",
+    "grace": false
+  }
+}

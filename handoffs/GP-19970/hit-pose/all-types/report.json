@@ -1,0 +1,760 @@
+{
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "checks": [
+    {
+      "id": "zombie.shambler",
+      "variant": null,
+      "mode": "statue",
+      "ok": true,
+      "ms": 284,
+      "tris": 5048,
+      "size": [
+        0.792,
+        1.894,
+        0.695
+      ],
+      "error": null
+    },
+    {
+      "id": "zombie.feral",
+      "variant": null,
+      "mode": "statue",
+      "ok": true,
+      "ms": 107,
+      "tris": 4820,
+      "size": [
+        0.744,
+        1.336,
+        1.041
+      ],
+      "error": null
+    },
+    {
+      "id": "zombie.leaper",
+      "variant": null,
+      "mode": "statue",
+      "ok": true,
+      "ms": 99,
+      "tris": 4650,
+      "size": [
+        0.948,
+        1.437,
+        1.579
+      ],
+      "error": null
+    },
+    {
+      "id": "zombie.spider",
+      "variant": null,
+      "mode": "statue",
+      "ok": true,
+      "ms": 97,
+      "tris": 3794,
+      "size": [
+        1.67,
+        0.921,
+        1.719
+      ],
+      "error": null
+    },
+    {
+      "id": "zombie.drowned",
+      "variant": null,
+      "mode": "statue",
+      "ok": true,
+      "ms": 101,
+      "tris": 5708,
+      "size": [
+        0.854,
+        1.752,
+        0.572
+      ],
+      "error": null
+    },
+    {
+      "id": "zombie.military",
+      "variant": null,
+      "mode": "statue",
+      "ok": true,
+      "ms": 129,
+      "tris": 5976,
+      "size": [
+        0.95,
+        2.076,
+        0.713
+      ],
+      "error": null
+    },
+    {
+      "id": "zombie.brute",
+      "variant": null,
+      "mode": "statue",
+      "ok": true,
+      "ms": 108,
+      "tris": 5944,
+      "size": [
+        1.925,
+        2.584,
+        0.976
+      ],
+      "error": null
+    },
+    {
+      "id": "zombie.spitter",
+      "variant": null,
+      "mode": "statue",
+      "ok": true,
+      "ms": 126,
+      "tris": 5088,
+      "size": [
+        0.965,
+        2.039,
+        0.653
+      ],
+      "error": null
+    },
+    {
+      "id": "zombie.screamer",
+      "variant": null,
+      "mode": "statue",
+      "ok": true,
+      "ms": 116,
+      "tris": 5724,
+      "size": [
+        1.322,
+        2.701,
+        1.267
+      ],
+      "error": null
+    },
+    {
+      "id": "zombie.bomber",
+      "variant": null,
+      "mode": "statue",
+      "ok": true,
+      "ms": 141,
+      "tris": 6328,
+      "size": [
+        1.604,
+        1.968,
+        1.672
+      ],
+      "error": null
+    },
+    {
+      "id": "zombie.demon",
+      "variant": null,
+      "mode": "statue",
+      "ok": true,
+      "ms": 108,
+      "tris": 5672,
+      "size": [
+        1.936,
+        3.141,
+        1.099
+      ],
+      "error": null
+    },
+    {
+      "id": "zombie.colossus",
+      "variant": null,
+      "mode": "statue",
+      "ok": true,
+      "ms": 134,
+      "tris": 6976,
+      "size": [
+        3.164,
+        4.879,
+        2.938
+      ],
+      "error": null
+    },
+    {
+      "id": "zombie.guardian",
+      "variant": null,
+      "mode": "statue",
+      "ok": true,
+      "ms": 89,
+      "tris": 4180,
+      "size": [
+        1.539,
+        3.469,
+        1.216
+      ],
+      "error": null
+    },
+    {
+      "id": "zombie.caveguard",
+      "variant": null,
+      "mode": "statue",
+      "ok": true,
+      "ms": 89,
+      "tris": 4180,
+      "size": [
+        1.472,
+        3.033,
+        1.327
+      ],
+      "error": null
+    }
+  ],
+  "records": [
+    {
+      "id": "zombie.shambler",
+      "frame": 5,
+      "file": "handoffs/GP-19970/hit-pose/all-types/zombie.shambler-body-hit-f5-gameplay.jpg",
+      "alive": true,
+      "hp": 15,
+      "hitReact": 0.13266666666666668,
+      "hitPart": "torso",
+      "hitPartT": 0.3666666666666667,
+      "torso": [
+        0.15622173057115118,
+        -0.6013190995617186,
+        0.16475269743455975
+      ],
+      "head": [
+        -0.2040899588838583,
+        0.05674230602235348,
+        0.4959101022943573
+      ]
+    },
+    {
+      "id": "zombie.shambler",
+      "frame": 20,
+      "file": "handoffs/GP-19970/hit-pose/all-types/zombie.shambler-body-hit-f20-gameplay.jpg",
+      "alive": true,
+      "hp": 15,
+      "hitReact": 0,
+      "hitPart": "torso",
+      "hitPartT": 0.11666666666666675,
+      "torso": [
+        0.34903257027960366,
+        -0.16413166329200862,
+        0.042101706259608795
+      ],
+      "head": [
+        -0.23662661553418665,
+        0.18074737871340854,
+        0.059220437686146446
+      ]
+    },
+    {
+      "id": "zombie.feral",
+      "frame": 5,
+      "file": "handoffs/GP-19970/hit-pose/all-types/zombie.feral-body-hit-f5-gameplay.jpg",
+      "alive": true,
+      "hp": 4,
+      "hitReact": 0.13266666666666668,
+      "hitPart": "torso",
+      "hitPartT": 0.3666666666666667,
+      "torso": [
+        0.3321979623332911,
+        0.6790123456790124,
+        -0.1455026455026455
+      ],
+      "head": [
+        -0.4191271689846202,
+        0.005054785131969391,
+        0.3558781707801671
+      ]
+    },
+    {
+      "id": "zombie.feral",
+      "frame": 20,
+      "file": "handoffs/GP-19970/hit-pose/all-types/zombie.feral-body-hit-f20-gameplay.jpg",
+      "alive": true,
+      "hp": 4,
+      "hitReact": 0,
+      "hitPart": "torso",
+      "hitPartT": 0.11666666666666675,
+      "torso": [
+        0.43807826871106387,
+        0.21604938271604962,
+        -0.04629629629629635
+      ],
+      "head": [
+        -0.5789965180435235,
+        0.0719802650958579,
+        0.09634527780557343
+      ]
+    },
+    {
+      "id": "zombie.leaper",
+      "frame": 5,
+      "file": "handoffs/GP-19970/hit-pose/all-types/zombie.leaper-body-hit-f5-gameplay.jpg",
+      "alive": true,
+      "hp": 14.399999999999999,
+      "hitReact": 0.1614666666666667,
+      "hitPart": "torso",
+      "hitPartT": 0.3666666666666667,
+      "torso": [
+        0.1841858840479247,
+        0.7643919154823778,
+        -0.1455026455026455
+      ],
+      "head": [
+        -1.1804414546989062,
+        -0.04256410065298289,
+        0.3918766956714237
+      ]
+    },
+    {
+      "id": "zombie.leaper",
+      "frame": 20,
+      "file": "handoffs/GP-19970/hit-pose/all-types/zombie.leaper-body-hit-f20-gameplay.jpg",
+      "alive": true,
+      "hp": 14.399999999999999,
+      "hitReact": 0,
+      "hitPart": "torso",
+      "hitPartT": 0.11666666666666675,
+      "torso": [
+        0.375251287363601,
+        0.14115985831883499,
+        -0.013269762474334333
+      ],
+      "head": [
+        -1.228276785857914,
+        -0.23141667488854994,
+        -0.04620915769312355
+      ]
+    },
+    {
+      "id": "zombie.spider",
+      "frame": 5,
+      "file": "handoffs/GP-19970/hit-pose/all-types/zombie.spider-body-hit-f5-gameplay.jpg",
+      "alive": true,
+      "hp": 41.6,
+      "hitReact": 0.10386666666666666,
+      "hitPart": "torso",
+      "hitPartT": 0.3666666666666667,
+      "torso": [
+        -0.09887959492673055,
+        0.73695734102603,
+        -0.1455026455026455
+      ],
+      "head": [
+        -0.17781288327033454,
+        0.1038007106486962,
+        0.08377777476524832
+      ]
+    },
+    {
+      "id": "zombie.spider",
+      "frame": 20,
+      "file": "handoffs/GP-19970/hit-pose/all-types/zombie.spider-body-hit-f20-gameplay.jpg",
+      "alive": true,
+      "hp": 41.6,
+      "hitReact": 0,
+      "hitPart": "torso",
+      "hitPartT": 0.11666666666666675,
+      "torso": [
+        0.019923062800070418,
+        0.2308841873253103,
+        -0.07369648878583626
+      ],
+      "head": [
+        -0.24679817649658153,
+        0.6475479732727343,
+        -0.026414160410397212
+      ]
+    },
+    {
+      "id": "zombie.drowned",
+      "frame": 5,
+      "file": "handoffs/GP-19970/hit-pose/all-types/zombie.drowned-body-hit-f5-gameplay.jpg",
+      "alive": true,
+      "hp": 30.48,
+      "hitReact": 0.12882666666666667,
+      "hitPart": "armL",
+      "hitPartT": 0.3666666666666667,
+      "torso": [
+        0.221093254398684,
+        0.32017971643084,
+        0.00006845016146566988
+      ],
+      "head": [
+        -0.22284293143090728,
+        0.11732823475260619,
+        0.4355642604999519
+      ]
+    },
+    {
+      "id": "zombie.drowned",
+      "frame": 20,
+      "file": "handoffs/GP-19970/hit-pose/all-types/zombie.drowned-body-hit-f20-gameplay.jpg",
+      "alive": true,
+      "hp": 30.48,
+      "hitReact": 0,
+      "hitPart": "armL",
+      "hitPartT": 0.11666666666666675,
+      "torso": [
+        0.220412809626848,
+        0.1122501742282189,
+        -0.01745348821572476
+      ],
+      "head": [
+        -0.2545859468177341,
+        0.6834815957091447,
+        0.07504526940220538
+      ]
+    },
+    {
+      "id": "zombie.military",
+      "frame": 5,
+      "file": "handoffs/GP-19970/hit-pose/all-types/zombie.military-body-hit-f5-gameplay.jpg",
+      "alive": true,
+      "hp": 37,
+      "hitReact": 0.08466666666666667,
+      "hitPart": "torso",
+      "hitPartT": 0.3666666666666667,
+      "torso": [
+        0.053820036169527706,
+        0.7050732463491445,
+        -0.16629649986808617
+      ],
+      "head": [
+        -0.1789593716753991,
+        0.10322672189835264,
+        0.3170788170912028
+      ]
+    },
+    {
+      "id": "zombie.military",
+      "frame": 20,
+      "file": "handoffs/GP-19970/hit-pose/all-types/zombie.military-body-hit-f20-gameplay.jpg",
+      "alive": true,
+      "hp": 37,
+      "hitReact": 0,
+      "hitPart": "torso",
+      "hitPartT": 0.11666666666666675,
+      "torso": [
+        0.16947158236726884,
+        0.3058567673547006,
+        -0.13747424198797834
+      ],
+      "head": [
+        -0.2411917692561214,
+        0.4118521506828013,
+        -0.029745701012779256
+      ]
+    },
+    {
+      "id": "zombie.brute",
+      "frame": 5,
+      "file": "handoffs/GP-19970/hit-pose/all-types/zombie.brute-body-hit-f5-gameplay.jpg",
+      "alive": true,
+      "hp": 89.6,
+      "hitReact": 0.0798666666666667,
+      "hitPart": "torso",
+      "hitPartT": 0.3666666666666667,
+      "torso": [
+        -0.11906730388539108,
+        0.6790123456790124,
+        -0.14544561929848387
+      ],
+      "head": [
+        -0.046116249292840146,
+        0.10695888090643468,
+        0.4348837636183322
+      ]
+    },
+    {
+      "id": "zombie.brute",
+      "frame": 20,
+      "file": "handoffs/GP-19970/hit-pose/all-types/zombie.brute-body-hit-f20-gameplay.jpg",
+      "alive": true,
+      "hp": 89.6,
+      "hitReact": 0,
+      "hitPart": "torso",
+      "hitPartT": 0.11666666666666675,
+      "torso": [
+        -0.05918498096498037,
+        0.21604938271604962,
+        -0.052717986057659164
+      ],
+      "head": [
+        -0.012838677375365556,
+        0.6478773729421515,
+        0.1368607503632442
+      ]
+    },
+    {
+      "id": "zombie.spitter",
+      "frame": 5,
+      "file": "handoffs/GP-19970/hit-pose/all-types/zombie.spitter-body-hit-f5-gameplay.jpg",
+      "alive": true,
+      "hp": 13.399999999999999,
+      "hitReact": 0.1614666666666667,
+      "hitPart": "armL",
+      "hitPartT": 0.3666666666666667,
+      "torso": [
+        0.2774667601389196,
+        0.3002176109659031,
+        0.00013130027962485058
+      ],
+      "head": [
+        -0.2544312765460589,
+        0.11732823475260619,
+        0.184969451547703
+      ]
+    },
+    {
+      "id": "zombie.spitter",
+      "frame": 20,
+      "file": "handoffs/GP-19970/hit-pose/all-types/zombie.spitter-body-hit-f20-gameplay.jpg",
+      "alive": true,
+      "hp": 13.399999999999999,
+      "hitReact": 0,
+      "hitPart": "armL",
+      "hitPartT": 0.11666666666666675,
+      "torso": [
+        0.28564323584179985,
+        0.09900556931371497,
+        -0.008732526760144348
+      ],
+      "head": [
+        -0.24778299534378717,
+        0.6834815957091447,
+        -0.18929942486580156
+      ]
+    },
+    {
+      "id": "zombie.screamer",
+      "frame": 5,
+      "file": "handoffs/GP-19970/hit-pose/all-types/zombie.screamer-body-hit-f5-gameplay.jpg",
+      "alive": true,
+      "hp": 21.8,
+      "hitReact": 0,
+      "torso": [
+        -0.04480459427531473,
+        0.004699149418216619,
+        0.003465759439329201
+      ],
+      "head": [
+        -0.24688377154318786,
+        0.11732823475260619,
+        -0.13718548163857455
+      ]
+    },
+    {
+      "id": "zombie.screamer",
+      "frame": 20,
+      "file": "handoffs/GP-19970/hit-pose/all-types/zombie.screamer-body-hit-f20-gameplay.jpg",
+      "alive": true,
+      "hp": 21.8,
+      "hitReact": 0,
+      "torso": [
+        -0.04655135408429707,
+        0.11008402124572857,
+        0.013381621081972307
+      ],
+      "head": [
+        -0.2596914980130367,
+        0.6834815957091447,
+        -0.12682094008377395
+      ]
+    },
+    {
+      "id": "zombie.bomber",
+      "frame": 5,
+      "file": "handoffs/GP-19970/hit-pose/all-types/zombie.bomber-body-hit-f5-gameplay.jpg",
+      "alive": true,
+      "hp": 17,
+      "hitReact": 0.13266666666666668,
+      "hitPart": "armL",
+      "hitPartT": 0.3666666666666667,
+      "torso": [
+        0.26856799773494217,
+        0.29325618282611327,
+        0.00006358465861524355
+      ],
+      "head": [
+        -0.22687864008687877,
+        0.11732823475260619,
+        0.33384134268271015
+      ]
+    },
+    {
+      "id": "zombie.bomber",
+      "frame": 20,
+      "file": "handoffs/GP-19970/hit-pose/all-types/zombie.bomber-body-hit-f20-gameplay.jpg",
+      "alive": true,
+      "hp": 17,
+      "hitReact": 0,
+      "hitPart": "armL",
+      "hitPartT": 0.11666666666666675,
+      "torso": [
+        0.2696799614303552,
+        0.09615441743552357,
+        -0.006551401278893086
+      ],
+      "head": [
+        -0.23328755198013224,
+        0.6834815957091447,
+        0.0018201302879559816
+      ]
+    },
+    {
+      "id": "zombie.demon",
+      "frame": 5,
+      "file": "handoffs/GP-19970/hit-pose/all-types/zombie.demon-body-hit-f5-gameplay.jpg",
+      "alive": true,
+      "hp": 108.6,
+      "hitReact": 0.15186666666666668,
+      "hitPart": "torso",
+      "hitPartT": 0.3666666666666667,
+      "torso": [
+        0.023146902894034246,
+        0.6790123456790124,
+        -0.1279080075601393
+      ],
+      "head": [
+        -0.35667002612747745,
+        -0.036643557861261944,
+        0.19043345232046555
+      ]
+    },
+    {
+      "id": "zombie.demon",
+      "frame": 20,
+      "file": "handoffs/GP-19970/hit-pose/all-types/zombie.demon-body-hit-f20-gameplay.jpg",
+      "alive": true,
+      "hp": 108.6,
+      "hitReact": 0,
+      "hitPart": "torso",
+      "hitPartT": 0.11666666666666675,
+      "torso": [
+        0.22469395919982765,
+        0.21604938271604962,
+        -0.054300739823703176
+      ],
+      "head": [
+        -0.24799710923557466,
+        -0.23827252571919744,
+        -0.11924782422889749
+      ]
+    },
+    {
+      "id": "zombie.colossus",
+      "frame": 5,
+      "file": "handoffs/GP-19970/hit-pose/all-types/zombie.colossus-body-hit-f5-gameplay.jpg",
+      "alive": true,
+      "hp": 491,
+      "hitReact": 0.08466666666666667,
+      "hitPart": "torso",
+      "hitPartT": 0.3666666666666667,
+      "torso": [
+        -0.10817590420280472,
+        0.6790123456790124,
+        -0.13254082199581504
+      ],
+      "head": [
+        -0.050270026127477406,
+        -0.03596176499648112,
+        0.32217146611629804
+      ]
+    },
+    {
+      "id": "zombie.colossus",
+      "frame": 20,
+      "file": "handoffs/GP-19970/hit-pose/all-types/zombie.colossus-body-hit-f20-gameplay.jpg",
+      "alive": true,
+      "hp": 491,
+      "hitReact": 0,
+      "hitPart": "torso",
+      "hitPartT": 0.11666666666666675,
+      "torso": [
+        0.08325119504360257,
+        0.21604938271604962,
+        0.045125460427505155
+      ],
+      "head": [
+        0.038249997756120396,
+        -0.22601899493364594,
+        0.011897622658827432
+      ]
+    },
+    {
+      "id": "zombie.guardian",
+      "frame": 5,
+      "file": "handoffs/GP-19970/hit-pose/all-types/zombie.guardian-body-hit-f5-gameplay.jpg",
+      "alive": true,
+      "hp": 468.8,
+      "hitReact": 0.09426666666666667,
+      "hitPart": "torso",
+      "hitPartT": 0.3666666666666667,
+      "torso": [
+        0.08998301192904934,
+        0.7169694854835826,
+        -0.13213365685703646
+      ],
+      "head": [
+        -0.05404145469890598,
+        -0.04262709197936845,
+        0.6547507159230915
+      ]
+    },
+    {
+      "id": "zombie.guardian",
+      "frame": 20,
+      "file": "handoffs/GP-19970/hit-pose/all-types/zombie.guardian-body-hit-f20-gameplay.jpg",
+      "alive": true,
+      "hp": 468.8,
+      "hitReact": 0,
+      "hitPart": "torso",
+      "hitPartT": 0.11666666666666675,
+      "torso": [
+        0.2850907993549582,
+        0.09637715149567215,
+        0.03691083843096081
+      ],
+      "head": [
+        -0.05629309360909751,
+        -0.19123309094390775,
+        0.3036849510611813
+      ]
+    },
+    {
+      "id": "zombie.caveguard",
+      "frame": 5,
+      "file": "handoffs/GP-19970/hit-pose/all-types/zombie.caveguard-body-hit-f5-gameplay.jpg",
+      "alive": true,
+      "hp": 1042745.2,
+      "hitReact": 0.07506666666666667,
+      "hitPart": "armL",
+      "hitPartT": 0.3666666666666667,
+      "torso": [
+        -0.05549355060586707,
+        0.18896066698602298,
+        0.010985764581950433
+      ],
+      "head": [
+        -0.046498597556048835,
+        0.0002542315865079999,
+        0.2180861052479029
+      ]
+    },
+    {
+      "id": "zombie.caveguard",
+      "frame": 20,
+      "file": "handoffs/GP-19970/hit-pose/all-types/zombie.caveguard-body-hit-f20-gameplay.jpg",
+      "alive": true,
+      "hp": 1042745.2,
+      "hitReact": 0,
+      "hitPart": "armL",
+      "hitPartT": 0.11666666666666675,
+      "torso": [
+        0.06816312105600125,
+        0.17265093621442257,
+        -0.05685951486100266
+      ],
+      "head": [
+        0.051996911875638104,
+        -0.11476298174037618,
+        0.04443333010513445
+      ]
+    }
+  ],
+  "pageErrors": []
+}

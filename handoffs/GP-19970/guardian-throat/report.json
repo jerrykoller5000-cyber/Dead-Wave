@@ -1,0 +1,807 @@
+{
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "shots": [
+    {
+      "file": "handoffs/GP-19970/guardian-throat/guardian-rest-noon-throat.jpg",
+      "kind": "guardian",
+      "label": "rest",
+      "light": "noon",
+      "view": "throat",
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.65,
+          "y": -199.08407666823027,
+          "z": -632
+        },
+        "size": {
+          "x": 3.6359321311001054,
+          "y": 3.1981083838488473,
+          "z": 2.3354020106608004
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 9160,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -24.48158187401036,
+        "y": -197.50247290033874,
+        "z": -631.8349402432696,
+        "tx": -27.48158187401036,
+        "ty": -197.50247290033874,
+        "tz": -631.8349402432696,
+        "fov": 35
+      },
+      "actor": {
+        "alive": true,
+        "headWorld": [
+          -26.97964487686688,
+          -197.1248759609177,
+          -631.852379275115
+        ]
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/guardian-throat/guardian-rest-overcast-throat.jpg",
+      "kind": "guardian",
+      "label": "rest",
+      "light": "overcast",
+      "view": "throat",
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.65,
+          "y": -199.08407666823027,
+          "z": -632
+        },
+        "size": {
+          "x": 3.6359321311001054,
+          "y": 3.1981083838488473,
+          "z": 2.3354020106608004
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 9160,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -24.48158187401036,
+        "y": -197.50247290033874,
+        "z": -631.8349402432696,
+        "tx": -27.48158187401036,
+        "ty": -197.50247290033874,
+        "tz": -631.8349402432696,
+        "fov": 35
+      },
+      "actor": {
+        "alive": true,
+        "headWorld": [
+          -26.97964487686688,
+          -197.1248759609177,
+          -631.852379275115
+        ]
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/guardian-throat/guardian-rest-dusk-throat.jpg",
+      "kind": "guardian",
+      "label": "rest",
+      "light": "dusk",
+      "view": "throat",
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.65,
+          "y": -199.08407666823027,
+          "z": -632
+        },
+        "size": {
+          "x": 3.6359321311001054,
+          "y": 3.1981083838488473,
+          "z": 2.3354020106608004
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 9160,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -24.48158187401036,
+        "y": -197.50247290033874,
+        "z": -631.8349402432696,
+        "tx": -27.48158187401036,
+        "ty": -197.50247290033874,
+        "tz": -631.8349402432696,
+        "fov": 35
+      },
+      "actor": {
+        "alive": true,
+        "headWorld": [
+          -26.97964487686688,
+          -197.1248759609177,
+          -631.852379275115
+        ]
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/guardian-throat/guardian-rest-night-throat.jpg",
+      "kind": "guardian",
+      "label": "rest",
+      "light": "night",
+      "view": "throat",
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.65,
+          "y": -199.08407666823027,
+          "z": -632
+        },
+        "size": {
+          "x": 3.6359321311001054,
+          "y": 3.1981083838488473,
+          "z": 2.3354020106608004
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 9160,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -24.48158187401036,
+        "y": -197.50247290033874,
+        "z": -631.8349402432696,
+        "tx": -27.48158187401036,
+        "ty": -197.50247290033874,
+        "tz": -631.8349402432696,
+        "fov": 35
+      },
+      "actor": {
+        "alive": true,
+        "headWorld": [
+          -26.97964487686688,
+          -197.1248759609177,
+          -631.852379275115
+        ]
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/guardian-throat/guardian-rest-noon-gameplay.jpg",
+      "kind": "guardian",
+      "label": "rest",
+      "light": "noon",
+      "view": "gameplay",
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.65,
+          "y": -199.08407666823027,
+          "z": -632
+        },
+        "size": {
+          "x": 3.6359321311001054,
+          "y": 3.1981083838488473,
+          "z": 2.3354020106608004
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 9160,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -20.789221567305958,
+        "y": -197.97069186054975,
+        "z": -635.9610722749662,
+        "tx": -27.65,
+        "ty": -199.08407666823027,
+        "tz": -632,
+        "fov": 35
+      },
+      "actor": {
+        "alive": true,
+        "headWorld": [
+          -26.97964487686688,
+          -197.1248759609177,
+          -631.852379275115
+        ]
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/guardian-throat/guardian-walk-f0-noon-throat.jpg",
+      "kind": "guardian",
+      "label": "walk-f0",
+      "light": "noon",
+      "view": "throat",
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.65,
+          "y": -199.08407666823027,
+          "z": -632
+        },
+        "size": {
+          "x": 3.6359321311001054,
+          "y": 3.1981083838488473,
+          "z": 2.3354020106608004
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 9160,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -24.48158187401036,
+        "y": -197.50247290033874,
+        "z": -631.8349402432696,
+        "tx": -27.48158187401036,
+        "ty": -197.50247290033874,
+        "tz": -631.8349402432696,
+        "fov": 35
+      },
+      "actor": {
+        "alive": true,
+        "headWorld": [
+          -26.97964487686688,
+          -197.1248759609177,
+          -631.852379275115
+        ]
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/guardian-throat/guardian-walk-f20-noon-throat.jpg",
+      "kind": "guardian",
+      "label": "walk-f20",
+      "light": "noon",
+      "view": "throat",
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -25.316666666666656,
+          "y": -199.08407666823027,
+          "z": -632
+        },
+        "size": {
+          "x": 2.6904339203600003,
+          "y": 3.614110091233158,
+          "z": 2.5543695639066755
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 9160,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -22.254575714668672,
+        "y": -197.26869033549775,
+        "z": -631.7981214797685,
+        "tx": -25.254575714668672,
+        "ty": -197.26869033549775,
+        "tz": -631.7981214797685,
+        "fov": 35
+      },
+      "actor": {
+        "alive": true,
+        "headWorld": [
+          -24.760979572297288,
+          -196.87164974752793,
+          -631.7974012777829
+        ]
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/guardian-throat/guardian-walk-f40-noon-throat.jpg",
+      "kind": "guardian",
+      "label": "walk-f40",
+      "light": "noon",
+      "view": "throat",
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -22.990418043531214,
+          "y": -199.08407666823027,
+          "z": -631.8577523692246
+        },
+        "size": {
+          "x": 2.926180955241115,
+          "y": 3.424565485204141,
+          "z": 2.5745630040842116
+        },
+        "yaw": 1.5669133497979866,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 9160,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -19.9281421528645,
+        "y": -197.49695532541605,
+        "z": -631.7170405812752,
+        "tx": -22.9281421528645,
+        "ty": -197.49695532541605,
+        "tz": -631.7170405812752,
+        "fov": 35
+      },
+      "actor": {
+        "alive": true,
+        "headWorld": [
+          -22.434689414206556,
+          -197.1071121436184,
+          -631.7124144715746
+        ]
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/guardian-throat/caveguard-rest-noon-throat.jpg",
+      "kind": "caveguard",
+      "label": "rest",
+      "light": "noon",
+      "view": "throat",
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -28,
+          "y": -199.04892269330958,
+          "z": -632
+        },
+        "size": {
+          "x": 2.3714835136861474,
+          "y": 3.6106782227967926,
+          "z": 2.9957065171165596
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 12022,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -25,
+        "y": -198.4199820960997,
+        "z": -631.0164659731712,
+        "tx": -28,
+        "ty": -198.4199820960997,
+        "tz": -631.0164659731712,
+        "fov": 35
+      },
+      "actor": {
+        "alive": true,
+        "headWorld": [
+          -28,
+          -198.05460999053395,
+          -630.6973955374017
+        ]
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/guardian-throat/caveguard-rest-overcast-throat.jpg",
+      "kind": "caveguard",
+      "label": "rest",
+      "light": "overcast",
+      "view": "throat",
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -28,
+          "y": -199.04892269330958,
+          "z": -632
+        },
+        "size": {
+          "x": 2.3714835136861474,
+          "y": 3.6106782227967926,
+          "z": 2.9957065171165596
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 12022,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -25,
+        "y": -198.4199820960997,
+        "z": -631.0164659731712,
+        "tx": -28,
+        "ty": -198.4199820960997,
+        "tz": -631.0164659731712,
+        "fov": 35
+      },
+      "actor": {
+        "alive": true,
+        "headWorld": [
+          -28,
+          -198.05460999053395,
+          -630.6973955374017
+        ]
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/guardian-throat/caveguard-rest-dusk-throat.jpg",
+      "kind": "caveguard",
+      "label": "rest",
+      "light": "dusk",
+      "view": "throat",
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -28,
+          "y": -199.04892269330958,
+          "z": -632
+        },
+        "size": {
+          "x": 2.3714835136861474,
+          "y": 3.6106782227967926,
+          "z": 2.9957065171165596
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 12022,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -25,
+        "y": -198.4199820960997,
+        "z": -631.0164659731712,
+        "tx": -28,
+        "ty": -198.4199820960997,
+        "tz": -631.0164659731712,
+        "fov": 35
+      },
+      "actor": {
+        "alive": true,
+        "headWorld": [
+          -28,
+          -198.05460999053395,
+          -630.6973955374017
+        ]
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/guardian-throat/caveguard-rest-night-throat.jpg",
+      "kind": "caveguard",
+      "label": "rest",
+      "light": "night",
+      "view": "throat",
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -28,
+          "y": -199.04892269330958,
+          "z": -632
+        },
+        "size": {
+          "x": 2.3714835136861474,
+          "y": 3.6106782227967926,
+          "z": 2.9957065171165596
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 12022,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -25,
+        "y": -198.4199820960997,
+        "z": -631.0164659731712,
+        "tx": -28,
+        "ty": -198.4199820960997,
+        "tz": -631.0164659731712,
+        "fov": 35
+      },
+      "actor": {
+        "alive": true,
+        "headWorld": [
+          -28,
+          -198.05460999053395,
+          -630.6973955374017
+        ]
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/guardian-throat/caveguard-rest-noon-gameplay.jpg",
+      "kind": "caveguard",
+      "label": "rest",
+      "light": "noon",
+      "view": "gameplay",
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -28,
+          "y": -199.04892269330958,
+          "z": -632
+        },
+        "size": {
+          "x": 2.3714835136861474,
+          "y": 3.6106782227967926,
+          "z": 2.9957065171165596
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 12022,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -24.03892772503372,
+        "y": -197.93553788562906,
+        "z": -625.139221567306,
+        "tx": -28,
+        "ty": -199.04892269330958,
+        "tz": -632,
+        "fov": 35
+      },
+      "actor": {
+        "alive": true,
+        "headWorld": [
+          -28,
+          -198.05460999053395,
+          -630.6973955374017
+        ]
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/guardian-throat/caveguard-walk-f0-noon-throat.jpg",
+      "kind": "caveguard",
+      "label": "walk-f0",
+      "light": "noon",
+      "view": "throat",
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -28,
+          "y": -199.04892269330958,
+          "z": -632
+        },
+        "size": {
+          "x": 2.3714835136861474,
+          "y": 3.6106782227967926,
+          "z": 2.9957065171165596
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 12022,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -25,
+        "y": -198.4199820960997,
+        "z": -631.0164659731712,
+        "tx": -28,
+        "ty": -198.4199820960997,
+        "tz": -631.0164659731712,
+        "fov": 35
+      },
+      "actor": {
+        "alive": true,
+        "headWorld": [
+          -28,
+          -198.05460999053395,
+          -630.6973955374017
+        ]
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/guardian-throat/caveguard-walk-f20-noon-throat.jpg",
+      "kind": "caveguard",
+      "label": "walk-f20",
+      "light": "noon",
+      "view": "throat",
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -22.641149051813894,
+          "y": -199.04892269330958,
+          "z": -631.8676005632618
+        },
+        "size": {
+          "x": 2.35478273355794,
+          "y": 3.6984225612405055,
+          "z": 2.6392733187351496
+        },
+        "yaw": 1.5896526064025591,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 12022,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -19.56119958788867,
+        "y": -197.3347758709839,
+        "z": -631.6782222918733,
+        "tx": -22.56119958788867,
+        "ty": -197.3347758709839,
+        "tz": -631.6782222918733,
+        "fov": 35
+      },
+      "actor": {
+        "alive": true,
+        "headWorld": [
+          -22.08387359930733,
+          -196.9706403992535,
+          -631.7961465496489
+        ]
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/guardian-throat/caveguard-walk-f40-noon-throat.jpg",
+      "kind": "caveguard",
+      "label": "walk-f40",
+      "light": "noon",
+      "view": "throat",
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -20.493563660831498,
+          "y": -199.04892269330958,
+          "z": -631.8665518102353
+        },
+        "size": {
+          "x": 2.899786062446747,
+          "y": 3.6910052454716435,
+          "z": 2.4730997499723344
+        },
+        "yaw": -1.5874814027396158,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 12022,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -17.585465298020182,
+        "y": -197.65820961261358,
+        "z": -631.699709797499,
+        "tx": -20.585465298020182,
+        "ty": -197.65820961261358,
+        "tz": -631.699709797499,
+        "fov": 35
+      },
+      "actor": {
+        "alive": true,
+        "headWorld": [
+          -21.049822639406003,
+          -197.22477104100065,
+          -631.7970919669959
+        ]
+      }
+    }
+  ],
+  "errors": [],
+  "pageErrors": []
+}

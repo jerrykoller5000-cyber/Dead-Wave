@@ -1,0 +1,15 @@
+GRANT grokbot GB-245: starting one game-test command
+camera: camera: loading the game..............................
+camera: ready in 30 s on port 16594: match, ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11), 1600x900
+help: ok
+setup: pistol
+{"up":0.06,"in":0.04,"side":0,"fwd":0,"tip":0,"turn":0,"cant":0.4,"hip":0} u10 R     0 L     0 MERGED | u25 R     0 L     0 MERGED | u40 R     0 L     0 MERGED | u55 R     0 L     0 MERGED | u70 R     0 L     0 MERGED | u85 R     0 L  1755
+{"up":0.1,"in":0.04,"side":0,"fwd":0,"tip":0,"turn":0,"cant":0.4,"hip":0} u10 R     0 L     0 MERGED | u25 R  2368 L     0 | u40 R  2887 L     0 | u55 R  3064 L     0 | u70 R  2828 L     0 | u85 R  2270 L  2613
+{"up":0.14,"in":0.04,"side":0,"fwd":0,"tip":0,"turn":0,"cant":0.4,"hip":0} u10 R     0 L     0 MERGED | u25 R 39241 L     0 | u40 R 38639 L     0 | u55 R 38007 L     0 | u70 R 36494 L     0 | u85 R 31890 L  3507
+{"up":0.06,"in":0.04,"side":0,"fwd":0.1,"tip":0,"turn":0,"cant":0.4,"hip":0} u10 R     0 L     0 MERGED | u25 R     0 L     0 MERGED | u40 R     0 L     0 MERGED | u55 R     0 L     0 MERGED | u70 R     0 L     0 MERGED | u85 R     0 L  2284
+{"up":0.1,"in":0.04,"side":0,"fwd":0.1,"tip":0,"turn":0,"cant":0.4,"hip":0} u10 R     0 L     0 MERGED | u25 R   478 L     0 | u40 R   888 L     0 | u55 R  1417 L     0 | u70 R  1833 L     0 | u85 R  1850 L  4070
+{"up":0.06,"in":0.04,"side":0,"fwd":0.2,"tip":0,"turn":0,"cant":0.4,"hip":0} u10 R     0 L     0 MERGED | u25 R     0 L     0 MERGED | u40 R     0 L     0 MERGED | u55 R     0 L     0 MERGED | u70 R     0 L     0 MERGED | u85 R     0 L   334
+{"up":0.1,"in":0.04,"side":0.08,"fwd":0,"tip":0,"turn":0,"cant":0.4,"hip":0} u10 R     0 L     0 MERGED | u25 R     0 L     0 MERGED | u40 R     0 L     0 MERGED | u55 R     0 L     0 MERGED | u70 R     0 L     0 MERGED | u85 R     0 L  1237
+{"up":0.1,"in":0.04,"side":-0.08,"fwd":0,"tip":0,"turn":0,"cant":0.4,"hip":0} u10 R   261 L     0 | u25 R 22110 L     0 | u40 R 22326 L     0 | u55 R 22561 L     0 | u70 R 22730 L     0 | u85 R 22195 L  2867
+{"up":0.18,"in":0.04,"side":0,"fwd":0.1,"tip":0,"turn":0,"cant":0.4,"hip":0} u10 R  5630 L     0 | u25 R 22093 L     0 | u40 R 21569 L     0 | u55 R 20636 L     0 | u70 R 19750 L     0 | u85 R 19330 L  2301
+camera stop: camera: stopped

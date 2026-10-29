@@ -1,0 +1,1390 @@
+{
+  "shots": [
+    {
+      "target": "zombie.leaper:statue",
+      "cam": {
+        "x": -23.10810543024809,
+        "y": -199.52305055958425,
+        "z": -632,
+        "tx": -26,
+        "ty": -199.624037743249,
+        "tz": -632,
+        "fov": 35
+      },
+      "inspect": {
+        "schema": "dw-inspector-session",
+        "schemaVersion": 1,
+        "inspectorVersion": "1.1.0",
+        "view": {
+          "follow": false,
+          "bookmark": null,
+          "offset": {
+            "dx": 0,
+            "dy": 0,
+            "dz": 0
+          }
+        },
+        "subject": {
+          "id": "zombie.leaper",
+          "variant": null,
+          "mode": "statue"
+        },
+        "camera": {
+          "x": -23.10810543024809,
+          "y": -199.52305055958425,
+          "z": -632,
+          "tx": -26,
+          "ty": -199.624037743249,
+          "tz": -632,
+          "fov": 35
+        },
+        "display": {
+          "backdrop": "studio",
+          "light": "overcast",
+          "overlays": {
+            "bounds": false,
+            "axes": false,
+            "stick": false,
+            "joints": false,
+            "wire": false,
+            "grid": true,
+            "labels": true
+          }
+        },
+        "clock": {
+          "speed": 1,
+          "paused": false
+        },
+        "marine": {
+          "weapon": "none",
+          "akimbo": false,
+          "blade": "machete",
+          "camo": "m81",
+          "gear": {
+            "helmet": true,
+            "vest": true,
+            "pads": true,
+            "nvg": true,
+            "laser": true,
+            "flashlight": true
+          },
+          "wardrobe": {
+            "version": 1,
+            "items": {
+              "cap": {
+                "camo": "m81",
+                "style": "cover"
+              },
+              "helmet": {
+                "camo": "m81"
+              },
+              "mask": {
+                "camo": "coyoteBrown"
+              },
+              "shirt": {
+                "camo": "m81",
+                "sleeves": "down"
+              },
+              "trousers": {
+                "camo": "m81",
+                "cut": "trousers"
+              },
+              "gloves": {
+                "camo": "m81",
+                "worn": true
+              },
+              "carrier": {},
+              "pads": {},
+              "holster": {},
+              "belt": {},
+              "pack": {},
+              "eyewear": {
+                "style": "none"
+              },
+              "boots": {
+                "colour": "black",
+                "rubber": "yellow"
+              }
+            },
+            "guns": {},
+            "body": {
+              "hair": "darkBrown",
+              "eyes": "brown",
+              "skin": 3
+            }
+          },
+          "mods": {
+            "minigun": {
+              "ext": false,
+              "heavy": false
+            },
+            "m4": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "ak": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "pistol": {
+              "ext": false,
+              "suppressor": false,
+              "auto": false
+            },
+            "uzi": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "shotgun": {
+              "ext": false,
+              "suppressor": false
+            },
+            "aa12": {
+              "ext": false
+            },
+            "revolver": {},
+            "sniper": {
+              "ext": false,
+              "suppressor": false
+            },
+            "launcher": {},
+            "flamer": {
+              "ext": false
+            },
+            "chainsaw": {
+              "tank": false
+            }
+          },
+          "move": null,
+          "loop": true,
+          "holds": {}
+        }
+      },
+      "size": [
+        1600,
+        900
+      ],
+      "view": "side",
+      "time": 0.5,
+      "wait": 700,
+      "out": "handoffs/GP-19970/leaper-strips-after/noon-side.png",
+      "caption": "noon-side"
+    },
+    {
+      "target": "zombie.leaper:statue",
+      "cam": {
+        "x": -23.10810543024809,
+        "y": -199.52305055958425,
+        "z": -632,
+        "tx": -26,
+        "ty": -199.624037743249,
+        "tz": -632,
+        "fov": 35
+      },
+      "inspect": {
+        "schema": "dw-inspector-session",
+        "schemaVersion": 1,
+        "inspectorVersion": "1.1.0",
+        "view": {
+          "follow": false,
+          "bookmark": null,
+          "offset": {
+            "dx": 0,
+            "dy": 0,
+            "dz": 0
+          }
+        },
+        "subject": {
+          "id": "zombie.leaper",
+          "variant": null,
+          "mode": "statue"
+        },
+        "camera": {
+          "x": -23.10810543024809,
+          "y": -199.52305055958425,
+          "z": -632,
+          "tx": -26,
+          "ty": -199.624037743249,
+          "tz": -632,
+          "fov": 35
+        },
+        "display": {
+          "backdrop": "studio",
+          "light": "overcast",
+          "overlays": {
+            "bounds": false,
+            "axes": false,
+            "stick": false,
+            "joints": false,
+            "wire": false,
+            "grid": true,
+            "labels": true
+          }
+        },
+        "clock": {
+          "speed": 1,
+          "paused": false
+        },
+        "marine": {
+          "weapon": "none",
+          "akimbo": false,
+          "blade": "machete",
+          "camo": "m81",
+          "gear": {
+            "helmet": true,
+            "vest": true,
+            "pads": true,
+            "nvg": true,
+            "laser": true,
+            "flashlight": true
+          },
+          "wardrobe": {
+            "version": 1,
+            "items": {
+              "cap": {
+                "camo": "m81",
+                "style": "cover"
+              },
+              "helmet": {
+                "camo": "m81"
+              },
+              "mask": {
+                "camo": "coyoteBrown"
+              },
+              "shirt": {
+                "camo": "m81",
+                "sleeves": "down"
+              },
+              "trousers": {
+                "camo": "m81",
+                "cut": "trousers"
+              },
+              "gloves": {
+                "camo": "m81",
+                "worn": true
+              },
+              "carrier": {},
+              "pads": {},
+              "holster": {},
+              "belt": {},
+              "pack": {},
+              "eyewear": {
+                "style": "none"
+              },
+              "boots": {
+                "colour": "black",
+                "rubber": "yellow"
+              }
+            },
+            "guns": {},
+            "body": {
+              "hair": "darkBrown",
+              "eyes": "brown",
+              "skin": 3
+            }
+          },
+          "mods": {
+            "minigun": {
+              "ext": false,
+              "heavy": false
+            },
+            "m4": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "ak": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "pistol": {
+              "ext": false,
+              "suppressor": false,
+              "auto": false
+            },
+            "uzi": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "shotgun": {
+              "ext": false,
+              "suppressor": false
+            },
+            "aa12": {
+              "ext": false
+            },
+            "revolver": {},
+            "sniper": {
+              "ext": false,
+              "suppressor": false
+            },
+            "launcher": {},
+            "flamer": {
+              "ext": false
+            },
+            "chainsaw": {
+              "tank": false
+            }
+          },
+          "move": null,
+          "loop": true,
+          "holds": {}
+        }
+      },
+      "size": [
+        1280,
+        720
+      ],
+      "view": "side",
+      "time": 0.5,
+      "wait": 700,
+      "out": "handoffs/GP-19970/leaper-strips-after/overcast-side.png",
+      "caption": "overcast-side"
+    },
+    {
+      "target": "zombie.leaper:statue",
+      "cam": {
+        "x": -23.10810543024809,
+        "y": -199.52305055958425,
+        "z": -632,
+        "tx": -26,
+        "ty": -199.624037743249,
+        "tz": -632,
+        "fov": 35
+      },
+      "inspect": {
+        "schema": "dw-inspector-session",
+        "schemaVersion": 1,
+        "inspectorVersion": "1.1.0",
+        "view": {
+          "follow": false,
+          "bookmark": null,
+          "offset": {
+            "dx": 0,
+            "dy": 0,
+            "dz": 0
+          }
+        },
+        "subject": {
+          "id": "zombie.leaper",
+          "variant": null,
+          "mode": "statue"
+        },
+        "camera": {
+          "x": -23.10810543024809,
+          "y": -199.52305055958425,
+          "z": -632,
+          "tx": -26,
+          "ty": -199.624037743249,
+          "tz": -632,
+          "fov": 35
+        },
+        "display": {
+          "backdrop": "studio",
+          "light": "studio",
+          "overlays": {
+            "bounds": false,
+            "axes": false,
+            "stick": false,
+            "joints": false,
+            "wire": false,
+            "grid": true,
+            "labels": true
+          }
+        },
+        "clock": {
+          "speed": 1,
+          "paused": false
+        },
+        "marine": {
+          "weapon": "none",
+          "akimbo": false,
+          "blade": "machete",
+          "camo": "m81",
+          "gear": {
+            "helmet": true,
+            "vest": true,
+            "pads": true,
+            "nvg": true,
+            "laser": true,
+            "flashlight": true
+          },
+          "wardrobe": {
+            "version": 1,
+            "items": {
+              "cap": {
+                "camo": "m81",
+                "style": "cover"
+              },
+              "helmet": {
+                "camo": "m81"
+              },
+              "mask": {
+                "camo": "coyoteBrown"
+              },
+              "shirt": {
+                "camo": "m81",
+                "sleeves": "down"
+              },
+              "trousers": {
+                "camo": "m81",
+                "cut": "trousers"
+              },
+              "gloves": {
+                "camo": "m81",
+                "worn": true
+              },
+              "carrier": {},
+              "pads": {},
+              "holster": {},
+              "belt": {},
+              "pack": {},
+              "eyewear": {
+                "style": "none"
+              },
+              "boots": {
+                "colour": "black",
+                "rubber": "yellow"
+              }
+            },
+            "guns": {},
+            "body": {
+              "hair": "darkBrown",
+              "eyes": "brown",
+              "skin": 3
+            }
+          },
+          "mods": {
+            "minigun": {
+              "ext": false,
+              "heavy": false
+            },
+            "m4": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "ak": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "pistol": {
+              "ext": false,
+              "suppressor": false,
+              "auto": false
+            },
+            "uzi": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "shotgun": {
+              "ext": false,
+              "suppressor": false
+            },
+            "aa12": {
+              "ext": false
+            },
+            "revolver": {},
+            "sniper": {
+              "ext": false,
+              "suppressor": false
+            },
+            "launcher": {},
+            "flamer": {
+              "ext": false
+            },
+            "chainsaw": {
+              "tank": false
+            }
+          },
+          "move": null,
+          "loop": true,
+          "holds": {}
+        }
+      },
+      "size": [
+        1280,
+        720
+      ],
+      "view": "side",
+      "time": 0.5,
+      "wait": 700,
+      "out": "handoffs/GP-19970/leaper-strips-after/dusk-side.png",
+      "caption": "dusk-side"
+    },
+    {
+      "target": "zombie.leaper:statue",
+      "cam": {
+        "x": -23.10810543024809,
+        "y": -199.52305055958425,
+        "z": -632,
+        "tx": -26,
+        "ty": -199.624037743249,
+        "tz": -632,
+        "fov": 35
+      },
+      "inspect": {
+        "schema": "dw-inspector-session",
+        "schemaVersion": 1,
+        "inspectorVersion": "1.1.0",
+        "view": {
+          "follow": false,
+          "bookmark": null,
+          "offset": {
+            "dx": 0,
+            "dy": 0,
+            "dz": 0
+          }
+        },
+        "subject": {
+          "id": "zombie.leaper",
+          "variant": null,
+          "mode": "statue"
+        },
+        "camera": {
+          "x": -23.10810543024809,
+          "y": -199.52305055958425,
+          "z": -632,
+          "tx": -26,
+          "ty": -199.624037743249,
+          "tz": -632,
+          "fov": 35
+        },
+        "display": {
+          "backdrop": "studio",
+          "light": "studio",
+          "overlays": {
+            "bounds": false,
+            "axes": false,
+            "stick": false,
+            "joints": false,
+            "wire": false,
+            "grid": true,
+            "labels": true
+          }
+        },
+        "clock": {
+          "speed": 1,
+          "paused": false
+        },
+        "marine": {
+          "weapon": "none",
+          "akimbo": false,
+          "blade": "machete",
+          "camo": "m81",
+          "gear": {
+            "helmet": true,
+            "vest": true,
+            "pads": true,
+            "nvg": true,
+            "laser": true,
+            "flashlight": true
+          },
+          "wardrobe": {
+            "version": 1,
+            "items": {
+              "cap": {
+                "camo": "m81",
+                "style": "cover"
+              },
+              "helmet": {
+                "camo": "m81"
+              },
+              "mask": {
+                "camo": "coyoteBrown"
+              },
+              "shirt": {
+                "camo": "m81",
+                "sleeves": "down"
+              },
+              "trousers": {
+                "camo": "m81",
+                "cut": "trousers"
+              },
+              "gloves": {
+                "camo": "m81",
+                "worn": true
+              },
+              "carrier": {},
+              "pads": {},
+              "holster": {},
+              "belt": {},
+              "pack": {},
+              "eyewear": {
+                "style": "none"
+              },
+              "boots": {
+                "colour": "black",
+                "rubber": "yellow"
+              }
+            },
+            "guns": {},
+            "body": {
+              "hair": "darkBrown",
+              "eyes": "brown",
+              "skin": 3
+            }
+          },
+          "mods": {
+            "minigun": {
+              "ext": false,
+              "heavy": false
+            },
+            "m4": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "ak": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "pistol": {
+              "ext": false,
+              "suppressor": false,
+              "auto": false
+            },
+            "uzi": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "shotgun": {
+              "ext": false,
+              "suppressor": false
+            },
+            "aa12": {
+              "ext": false
+            },
+            "revolver": {},
+            "sniper": {
+              "ext": false,
+              "suppressor": false
+            },
+            "launcher": {},
+            "flamer": {
+              "ext": false
+            },
+            "chainsaw": {
+              "tank": false
+            }
+          },
+          "move": null,
+          "loop": true,
+          "holds": {}
+        }
+      },
+      "size": [
+        1280,
+        720
+      ],
+      "view": "side",
+      "time": 0.5,
+      "wait": 700,
+      "out": "handoffs/GP-19970/leaper-strips-after/night-side.png",
+      "caption": "night-side"
+    },
+    {
+      "target": "zombie.leaper:statue",
+      "cam": {
+        "x": -26,
+        "y": -199.3897846440382,
+        "z": -635.349975391414,
+        "tx": -26,
+        "ty": -199.624037743249,
+        "tz": -632,
+        "fov": 35
+      },
+      "inspect": {
+        "schema": "dw-inspector-session",
+        "schemaVersion": 1,
+        "inspectorVersion": "1.1.0",
+        "view": {
+          "follow": false,
+          "bookmark": null,
+          "offset": {
+            "dx": 0,
+            "dy": 0,
+            "dz": 0
+          }
+        },
+        "subject": {
+          "id": "zombie.leaper",
+          "variant": null,
+          "mode": "statue"
+        },
+        "camera": {
+          "x": -26,
+          "y": -199.3897846440382,
+          "z": -635.349975391414,
+          "tx": -26,
+          "ty": -199.624037743249,
+          "tz": -632,
+          "fov": 35
+        },
+        "display": {
+          "backdrop": "studio",
+          "light": "studio",
+          "overlays": {
+            "bounds": false,
+            "axes": false,
+            "stick": false,
+            "joints": false,
+            "wire": false,
+            "grid": true,
+            "labels": true
+          }
+        },
+        "clock": {
+          "speed": 1,
+          "paused": false
+        },
+        "marine": {
+          "weapon": "none",
+          "akimbo": false,
+          "blade": "machete",
+          "camo": "m81",
+          "gear": {
+            "helmet": true,
+            "vest": true,
+            "pads": true,
+            "nvg": true,
+            "laser": true,
+            "flashlight": true
+          },
+          "wardrobe": {
+            "version": 1,
+            "items": {
+              "cap": {
+                "camo": "m81",
+                "style": "cover"
+              },
+              "helmet": {
+                "camo": "m81"
+              },
+              "mask": {
+                "camo": "coyoteBrown"
+              },
+              "shirt": {
+                "camo": "m81",
+                "sleeves": "down"
+              },
+              "trousers": {
+                "camo": "m81",
+                "cut": "trousers"
+              },
+              "gloves": {
+                "camo": "m81",
+                "worn": true
+              },
+              "carrier": {},
+              "pads": {},
+              "holster": {},
+              "belt": {},
+              "pack": {},
+              "eyewear": {
+                "style": "none"
+              },
+              "boots": {
+                "colour": "black",
+                "rubber": "yellow"
+              }
+            },
+            "guns": {},
+            "body": {
+              "hair": "darkBrown",
+              "eyes": "brown",
+              "skin": 3
+            }
+          },
+          "mods": {
+            "minigun": {
+              "ext": false,
+              "heavy": false
+            },
+            "m4": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "ak": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "pistol": {
+              "ext": false,
+              "suppressor": false,
+              "auto": false
+            },
+            "uzi": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "shotgun": {
+              "ext": false,
+              "suppressor": false
+            },
+            "aa12": {
+              "ext": false
+            },
+            "revolver": {},
+            "sniper": {
+              "ext": false,
+              "suppressor": false
+            },
+            "launcher": {},
+            "flamer": {
+              "ext": false
+            },
+            "chainsaw": {
+              "tank": false
+            }
+          },
+          "move": null,
+          "loop": true,
+          "holds": {}
+        }
+      },
+      "size": [
+        1280,
+        720
+      ],
+      "view": "back",
+      "time": 0.5,
+      "wait": 700,
+      "out": "handoffs/GP-19970/leaper-strips-after/noon-back.png",
+      "caption": "noon-back"
+    },
+    {
+      "target": "zombie.leaper:statue",
+      "cam": {
+        "x": -18.004873383847233,
+        "y": -199.344841769629,
+        "z": -632,
+        "tx": -26,
+        "ty": -199.624037743249,
+        "tz": -632,
+        "fov": 65
+      },
+      "inspect": {
+        "schema": "dw-inspector-session",
+        "schemaVersion": 1,
+        "inspectorVersion": "1.1.0",
+        "view": {
+          "follow": false,
+          "bookmark": null,
+          "offset": {
+            "dx": 0,
+            "dy": 0,
+            "dz": 0
+          }
+        },
+        "subject": {
+          "id": "zombie.leaper",
+          "variant": null,
+          "mode": "statue"
+        },
+        "camera": {
+          "x": -18.004873383847233,
+          "y": -199.344841769629,
+          "z": -632,
+          "tx": -26,
+          "ty": -199.624037743249,
+          "tz": -632,
+          "fov": 65
+        },
+        "display": {
+          "backdrop": "studio",
+          "light": "studio",
+          "overlays": {
+            "bounds": false,
+            "axes": false,
+            "stick": false,
+            "joints": false,
+            "wire": false,
+            "grid": true,
+            "labels": true
+          }
+        },
+        "clock": {
+          "speed": 1,
+          "paused": false
+        },
+        "marine": {
+          "weapon": "none",
+          "akimbo": false,
+          "blade": "machete",
+          "camo": "m81",
+          "gear": {
+            "helmet": true,
+            "vest": true,
+            "pads": true,
+            "nvg": true,
+            "laser": true,
+            "flashlight": true
+          },
+          "wardrobe": {
+            "version": 1,
+            "items": {
+              "cap": {
+                "camo": "m81",
+                "style": "cover"
+              },
+              "helmet": {
+                "camo": "m81"
+              },
+              "mask": {
+                "camo": "coyoteBrown"
+              },
+              "shirt": {
+                "camo": "m81",
+                "sleeves": "down"
+              },
+              "trousers": {
+                "camo": "m81",
+                "cut": "trousers"
+              },
+              "gloves": {
+                "camo": "m81",
+                "worn": true
+              },
+              "carrier": {},
+              "pads": {},
+              "holster": {},
+              "belt": {},
+              "pack": {},
+              "eyewear": {
+                "style": "none"
+              },
+              "boots": {
+                "colour": "black",
+                "rubber": "yellow"
+              }
+            },
+            "guns": {},
+            "body": {
+              "hair": "darkBrown",
+              "eyes": "brown",
+              "skin": 3
+            }
+          },
+          "mods": {
+            "minigun": {
+              "ext": false,
+              "heavy": false
+            },
+            "m4": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "ak": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "pistol": {
+              "ext": false,
+              "suppressor": false,
+              "auto": false
+            },
+            "uzi": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "shotgun": {
+              "ext": false,
+              "suppressor": false
+            },
+            "aa12": {
+              "ext": false
+            },
+            "revolver": {},
+            "sniper": {
+              "ext": false,
+              "suppressor": false
+            },
+            "launcher": {},
+            "flamer": {
+              "ext": false
+            },
+            "chainsaw": {
+              "tank": false
+            }
+          },
+          "move": null,
+          "loop": true,
+          "holds": {}
+        }
+      },
+      "size": [
+        1280,
+        720
+      ],
+      "view": "side",
+      "time": 0.5,
+      "wait": 700,
+      "out": "handoffs/GP-19970/leaper-strips-after/gameplay-distance.png",
+      "caption": "gameplay-distance"
+    },
+    {
+      "target": "zombie.leaper:walk",
+      "cam": {
+        "x": -27.207292794562107,
+        "y": -199.37462841937926,
+        "z": -634.8821806474539,
+        "tx": -27.569156065675095,
+        "ty": -199.4774183864933,
+        "tz": -631.9609887305361,
+        "fov": 35
+      },
+      "inspect": {
+        "schema": "dw-inspector-session",
+        "schemaVersion": 1,
+        "inspectorVersion": "1.1.0",
+        "view": {
+          "follow": false,
+          "bookmark": null,
+          "offset": {
+            "dx": 0,
+            "dy": 0,
+            "dz": 0
+          }
+        },
+        "subject": {
+          "id": "zombie.leaper",
+          "variant": null,
+          "mode": "walk"
+        },
+        "camera": {
+          "x": -27.207292794562107,
+          "y": -199.37462841937926,
+          "z": -634.8821806474539,
+          "tx": -27.569156065675095,
+          "ty": -199.4774183864933,
+          "tz": -631.9609887305361,
+          "fov": 35
+        },
+        "display": {
+          "backdrop": "studio",
+          "light": "overcast",
+          "overlays": {
+            "bounds": false,
+            "axes": false,
+            "stick": false,
+            "joints": false,
+            "wire": false,
+            "grid": true,
+            "labels": true
+          }
+        },
+        "clock": {
+          "speed": 1,
+          "paused": false
+        },
+        "marine": {
+          "weapon": "none",
+          "akimbo": false,
+          "blade": "machete",
+          "camo": "m81",
+          "gear": {
+            "helmet": true,
+            "vest": true,
+            "pads": true,
+            "nvg": true,
+            "laser": true,
+            "flashlight": true
+          },
+          "wardrobe": {
+            "version": 1,
+            "items": {
+              "cap": {
+                "camo": "m81",
+                "style": "cover"
+              },
+              "helmet": {
+                "camo": "m81"
+              },
+              "mask": {
+                "camo": "coyoteBrown"
+              },
+              "shirt": {
+                "camo": "m81",
+                "sleeves": "down"
+              },
+              "trousers": {
+                "camo": "m81",
+                "cut": "trousers"
+              },
+              "gloves": {
+                "camo": "m81",
+                "worn": true
+              },
+              "carrier": {},
+              "pads": {},
+              "holster": {},
+              "belt": {},
+              "pack": {},
+              "eyewear": {
+                "style": "none"
+              },
+              "boots": {
+                "colour": "black",
+                "rubber": "yellow"
+              }
+            },
+            "guns": {},
+            "body": {
+              "hair": "darkBrown",
+              "eyes": "brown",
+              "skin": 3
+            }
+          },
+          "mods": {
+            "minigun": {
+              "ext": false,
+              "heavy": false
+            },
+            "m4": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "ak": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "pistol": {
+              "ext": false,
+              "suppressor": false,
+              "auto": false
+            },
+            "uzi": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "shotgun": {
+              "ext": false,
+              "suppressor": false
+            },
+            "aa12": {
+              "ext": false
+            },
+            "revolver": {},
+            "sniper": {
+              "ext": false,
+              "suppressor": false
+            },
+            "launcher": {},
+            "flamer": {
+              "ext": false
+            },
+            "chainsaw": {
+              "tank": false
+            }
+          },
+          "move": null,
+          "loop": true,
+          "holds": {}
+        }
+      },
+      "size": [
+        1600,
+        900
+      ],
+      "view": "side",
+      "time": 0.5,
+      "wait": 700,
+      "out": "handoffs/GP-19970/leaper-strips-after/walk-side.png",
+      "caption": "walk-side"
+    },
+    {
+      "target": "zombie.leaper:statue",
+      "cam": {
+        "x": -24.1781064210563,
+        "y": -199.56041581754022,
+        "z": -632,
+        "tx": -26,
+        "ty": -199.624037743249,
+        "tz": -632,
+        "fov": 35
+      },
+      "inspect": {
+        "schema": "dw-inspector-session",
+        "schemaVersion": 1,
+        "inspectorVersion": "1.1.0",
+        "view": {
+          "follow": false,
+          "bookmark": null,
+          "offset": {
+            "dx": 0,
+            "dy": 0,
+            "dz": 0
+          }
+        },
+        "subject": {
+          "id": "zombie.leaper",
+          "variant": null,
+          "mode": "statue"
+        },
+        "camera": {
+          "x": -24.1781064210563,
+          "y": -199.56041581754022,
+          "z": -632,
+          "tx": -26,
+          "ty": -199.624037743249,
+          "tz": -632,
+          "fov": 35
+        },
+        "display": {
+          "backdrop": "studio",
+          "light": "overcast",
+          "overlays": {
+            "bounds": false,
+            "axes": false,
+            "stick": false,
+            "joints": false,
+            "wire": false,
+            "grid": true,
+            "labels": true
+          }
+        },
+        "clock": {
+          "speed": 1,
+          "paused": false
+        },
+        "marine": {
+          "weapon": "none",
+          "akimbo": false,
+          "blade": "machete",
+          "camo": "m81",
+          "gear": {
+            "helmet": true,
+            "vest": true,
+            "pads": true,
+            "nvg": true,
+            "laser": true,
+            "flashlight": true
+          },
+          "wardrobe": {
+            "version": 1,
+            "items": {
+              "cap": {
+                "camo": "m81",
+                "style": "cover"
+              },
+              "helmet": {
+                "camo": "m81"
+              },
+              "mask": {
+                "camo": "coyoteBrown"
+              },
+              "shirt": {
+                "camo": "m81",
+                "sleeves": "down"
+              },
+              "trousers": {
+                "camo": "m81",
+                "cut": "trousers"
+              },
+              "gloves": {
+                "camo": "m81",
+                "worn": true
+              },
+              "carrier": {},
+              "pads": {},
+              "holster": {},
+              "belt": {},
+              "pack": {},
+              "eyewear": {
+                "style": "none"
+              },
+              "boots": {
+                "colour": "black",
+                "rubber": "yellow"
+              }
+            },
+            "guns": {},
+            "body": {
+              "hair": "darkBrown",
+              "eyes": "brown",
+              "skin": 3
+            }
+          },
+          "mods": {
+            "minigun": {
+              "ext": false,
+              "heavy": false
+            },
+            "m4": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "ak": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "pistol": {
+              "ext": false,
+              "suppressor": false,
+              "auto": false
+            },
+            "uzi": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "shotgun": {
+              "ext": false,
+              "suppressor": false
+            },
+            "aa12": {
+              "ext": false
+            },
+            "revolver": {},
+            "sniper": {
+              "ext": false,
+              "suppressor": false
+            },
+            "launcher": {},
+            "flamer": {
+              "ext": false
+            },
+            "chainsaw": {
+              "tank": false
+            }
+          },
+          "move": null,
+          "loop": true,
+          "holds": {}
+        }
+      },
+      "size": [
+        1600,
+        900
+      ],
+      "view": "side",
+      "time": 0.5,
+      "wait": 700,
+      "out": "handoffs/GP-19970/leaper-strips-after/noon-close-side.png",
+      "caption": "noon close side"
+    }
+  ],
+  "out": "handoffs/GP-19970/leaper-strips-after",
+  "cols": 4
+}

@@ -1,0 +1,21 @@
+GRANT grokbot GB-245: starting one game-test command
+camera: camera: loading the game..............................
+camera: ready in 30 s on port 14602: match, ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11), 1600x900
+setup: pistol
+help: ok
+aa12     {"up":0.06,"in":0,"tip":0,"turn":1,"hip":0}               0      0      0      0   (u 0.2 0.35 0.5 0.65)
+aa12     {"up":0,"in":0,"tip":0,"turn":1,"hip":1}                  0      0      0      0   (u 0.2 0.35 0.5 0.65)
+aa12     {"up":0.04,"in":0,"tip":0,"turn":1,"hip":1}               0      0      0      0   (u 0.2 0.35 0.5 0.65)
+aa12     {"up":0.08,"in":0,"tip":0,"turn":1,"hip":1}               0      0      0      0   (u 0.2 0.35 0.5 0.65)
+aa12     {"up":0.14,"in":0,"tip":0,"turn":1,"hip":1}               0      0      0      0   (u 0.2 0.35 0.5 0.65)
+sniper   {"up":0.06,"in":0,"tip":0,"turn":1,"hip":0}               0      0   7216  81637   (u 0.2 0.35 0.5 0.65)
+sniper   {"up":0,"in":0,"tip":0,"turn":1,"hip":1}                  0      0      0      0   (u 0.2 0.35 0.5 0.65)
+sniper   {"up":0.04,"in":0,"tip":0,"turn":1,"hip":1}               0      0      0      0   (u 0.2 0.35 0.5 0.65)
+sniper   {"up":0.08,"in":0,"tip":0,"turn":1,"hip":1}               0      0      0      0   (u 0.2 0.35 0.5 0.65)
+sniper   {"up":0.14,"in":0,"tip":0,"turn":1,"hip":1}               0      0      0      0   (u 0.2 0.35 0.5 0.65)
+m4       {"up":0.06,"in":0,"tip":0,"turn":1,"hip":0}             205    187    184   7853   (u 0.2 0.35 0.5 0.65)
+m4       {"up":0,"in":0,"tip":0,"turn":1,"hip":1}                  0      0      0      0   (u 0.2 0.35 0.5 0.65)
+m4       {"up":0.04,"in":0,"tip":0,"turn":1,"hip":1}               0      0      0      0   (u 0.2 0.35 0.5 0.65)
+m4       {"up":0.08,"in":0,"tip":0,"turn":1,"hip":1}               0      0      0      0   (u 0.2 0.35 0.5 0.65)
+m4       {"up":0.14,"in":0,"tip":0,"turn":1,"hip":1}               0      0      0      0   (u 0.2 0.35 0.5 0.65)
+camera stop: camera: stopped

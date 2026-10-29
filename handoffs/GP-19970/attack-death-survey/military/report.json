@@ -1,0 +1,1681 @@
+{
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "frames": [
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/military/military-idle-f00.jpg",
+      "phase": "idle",
+      "n": 0,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0,
+        "hipsY": 0.8862539767557511,
+        "armL": -0.3,
+        "armR": -0.3
+      },
+      "subject": {
+        "id": "zombie.military",
+        "name": "Military",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.933074842266784,
+          "y": -198.9242238386268,
+          "z": -632
+        },
+        "size": {
+          "x": 0.9946033006399233,
+          "y": 2.153325158316676,
+          "z": 1.014642971835201
+        },
+        "yaw": 0.030000000000000006,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5976,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -23.767992435274905,
+        "y": -197.81083903094628,
+        "z": -625.2611230302822,
+        "tx": -27.933074842266784,
+        "ty": -198.9242238386268,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/military/military-attack-f01.jpg",
+      "phase": "attack",
+      "n": 1,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.20333333333333334,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.007575757575757569,
+        "hipsY": 0.8822589322368373,
+        "armL": -1.2333333333333332,
+        "armR": -1.2333333333333332
+      },
+      "subject": {
+        "id": "zombie.military",
+        "name": "Military",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.910243561929896,
+          "y": -198.9242238386268,
+          "z": -632
+        },
+        "size": {
+          "x": 1.0850268314720033,
+          "y": 2.1709205164144407,
+          "z": 1.3847098614794504
+        },
+        "yaw": 0.043333333333333335,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5976,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -23.655682348319605,
+        "y": -197.81083903094628,
+        "z": -625.3172548193374,
+        "tx": -27.910243561929896,
+        "ty": -198.9242238386268,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/military/military-attack-f02.jpg",
+      "phase": "attack",
+      "n": 2,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.18666666666666668,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.01515151515151515,
+        "hipsY": 0.8831243810485021,
+        "armL": -1.3166666666666667,
+        "armR": -1.3166666666666667
+      },
+      "subject": {
+        "id": "zombie.military",
+        "name": "Military",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.886759099450618,
+          "y": -198.9242238386268,
+          "z": -632
+        },
+        "size": {
+          "x": 1.0528375746540526,
+          "y": 2.1707580446934287,
+          "z": 1.4416669631822288
+        },
+        "yaw": 0.06,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5976,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -23.52141485346481,
+        "y": -197.81083903094628,
+        "z": -625.3890890276706,
+        "tx": -27.886759099450618,
+        "ty": -198.9242238386268,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/military/military-attack-f03.jpg",
+      "phase": "attack",
+      "n": 3,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.17,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.02272727272727272,
+        "hipsY": 0.8840472626633773,
+        "armL": -1.4,
+        "armR": -1.4
+      },
+      "subject": {
+        "id": "zombie.military",
+        "name": "Military",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.862491697179166,
+          "y": -198.9242238386268,
+          "z": -632
+        },
+        "size": {
+          "x": 1.0562532834712002,
+          "y": 2.1700714397655645,
+          "z": 1.484362882142932
+        },
+        "yaw": 0.08,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5976,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -23.365811085865737,
+        "y": -197.81083903094628,
+        "z": -625.4777122303701,
+        "tx": -27.862491697179166,
+        "ty": -198.9242238386268,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/military/military-attack-f04.jpg",
+      "phase": "attack",
+      "n": 4,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.15333333333333335,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.0303030303030303,
+        "hipsY": 0.8850403926923134,
+        "armL": -1.4833333333333332,
+        "armR": -1.4833333333333332
+      },
+      "subject": {
+        "id": "zombie.military",
+        "name": "Military",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.83731247255904,
+          "y": -198.9242238386268,
+          "z": -632
+        },
+        "size": {
+          "x": 1.0766488474078422,
+          "y": 2.168959864340991,
+          "z": 1.5139486144132661
+        },
+        "yaw": 0.10333333333333333,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5976,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -23.189682996632143,
+        "y": -197.81083903094628,
+        "z": -625.5844006885933,
+        "tx": -27.83731247255904,
+        "ty": -198.9242238386268,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/military/military-attack-f05.jpg",
+      "phase": "attack",
+      "n": 5,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.1366666666666667,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.03787878787878787,
+        "hipsY": 0.8861164122903775,
+        "armL": -1.5666666666666664,
+        "armR": -1.5666666666666664
+      },
+      "subject": {
+        "id": "zombie.military",
+        "name": "Military",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.81109389267461,
+          "y": -198.9242238386268,
+          "z": -632
+        },
+        "size": {
+          "x": 1.1022193584047706,
+          "y": 2.168906177591083,
+          "z": 1.527363578751192
+        },
+        "yaw": 0.13,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5976,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -22.994054436741912,
+        "y": -197.81083903094628,
+        "z": -625.7106037531403,
+        "tx": -27.81109389267461,
+        "ty": -198.9242238386268,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/military/military-attack-f06.jpg",
+      "phase": "attack",
+      "n": 6,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.12000000000000002,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.04545454545454545,
+        "hipsY": 0.8872874328489909,
+        "armL": -1.65,
+        "armR": -1.65
+      },
+      "subject": {
+        "id": "zombie.military",
+        "name": "Military",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.78371039880379,
+          "y": -198.9242238386268,
+          "z": -632
+        },
+        "size": {
+          "x": 1.1280522572189184,
+          "y": 2.168268629252225,
+          "z": 1.523975397898198
+        },
+        "yaw": 0.16,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5976,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -22.780184861659805,
+        "y": -197.81083903094628,
+        "z": -625.8579232771664,
+        "tx": -27.78371039880379,
+        "ty": -198.9242238386268,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/military/military-attack-f07.jpg",
+      "phase": "attack",
+      "n": 7,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.10333333333333336,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.05303030303030302,
+        "hipsY": 0.8885646017733103,
+        "armL": -1.7333333333333332,
+        "armR": -1.7333333333333332
+      },
+      "subject": {
+        "id": "zombie.military",
+        "name": "Military",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.75503920052807,
+          "y": -198.9242238386268,
+          "z": -632
+        },
+        "size": {
+          "x": 1.1554454260695444,
+          "y": 2.167022621922655,
+          "z": 1.5043295870702877
+        },
+        "yaw": 0.19333333333333336,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5976,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -22.549595163606583,
+        "y": -197.81083903094628,
+        "z": -626.0280885264009,
+        "tx": -27.75503920052807,
+        "ty": -198.9242238386268,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/military/military-attack-f08.jpg",
+      "phase": "attack",
+      "n": 8,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.0866666666666667,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.0606060606060606,
+        "hipsY": 0.8899575581570964,
+        "armL": -1.8166666666666664,
+        "armR": -1.8166666666666664
+      },
+      "subject": {
+        "id": "zombie.military",
+        "name": "Military",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.724961257588838,
+          "y": -198.9242238386268,
+          "z": -632
+        },
+        "size": {
+          "x": 1.1779516562550079,
+          "y": 2.1651443001239272,
+          "z": 1.4694082292713802
+        },
+        "yaw": 0.23,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5976,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -22.304095018657463,
+        "y": -197.81083903094628,
+        "z": -626.2229260442989,
+        "tx": -27.724961257588838,
+        "ty": -198.9242238386268,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/military/military-attack-f09.jpg",
+      "phase": "attack",
+      "n": 9,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.07000000000000003,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.06818181818181816,
+        "hipsY": 0.8914737520156416,
+        "armL": -1.9,
+        "armR": -1.9
+      },
+      "subject": {
+        "id": "zombie.military",
+        "name": "Military",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.69336246577028,
+          "y": -198.9242238386268,
+          "z": -632
+        },
+        "size": {
+          "x": 1.1933099098087396,
+          "y": 2.229404959160007,
+          "z": 1.420620416224324
+        },
+        "yaw": 0.27,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5976,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -22.045811000599723,
+        "y": -197.81083903094628,
+        "z": -626.4443239188847,
+        "tx": -27.69336246577028,
+        "ty": -198.9242238386268,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/military/military-attack-f10.jpg",
+      "phase": "attack",
+      "n": 10,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.05333333333333337,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.07575757575757575,
+        "hipsY": 0.8931176083792001,
+        "armL": -1.983333333333333,
+        "armR": -1.983333333333333
+      },
+      "subject": {
+        "id": "zombie.military",
+        "name": "Military",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.660135060511017,
+          "y": -198.9242238386268,
+          "z": -632
+        },
+        "size": {
+          "x": 1.199302478215401,
+          "y": 2.307326728541227,
+          "z": 1.3597757862304434
+        },
+        "yaw": 0.31333333333333335,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5976,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -21.77721456296278,
+        "y": -197.81083903094628,
+        "z": -626.6941899120349,
+        "tx": -27.660135060511017,
+        "ty": -198.9242238386268,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/military/military-attack-f12.jpg",
+      "phase": "attack",
+      "n": 12,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.020000000000000042,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.0909090909090909,
+        "hipsY": 0.896784744705563,
+        "armL": -2.15,
+        "armR": -2.15
+      },
+      "subject": {
+        "id": "zombie.military",
+        "name": "Military",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.588405073753837,
+          "y": -198.9242238386268,
+          "z": -632
+        },
+        "size": {
+          "x": 1.1915807666664833,
+          "y": 2.424910235066278,
+          "z": 1.222604591933191
+        },
+        "yaw": 0.41000000000000003,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5976,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -21.22085292919453,
+        "y": -197.81083903094628,
+        "z": -627.2867575962673,
+        "tx": -27.588405073753837,
+        "ty": -198.9242238386268,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/military/military-attack-f14.jpg",
+      "phase": "attack",
+      "n": 14,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.28,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.1,
+        "hipsY": 0.9008924668402991,
+        "armL": -2.25,
+        "armR": -2.25
+      },
+      "subject": {
+        "id": "zombie.military",
+        "name": "Military",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.509103827461182,
+          "y": -198.9242238386268,
+          "z": -632
+        },
+        "size": {
+          "x": 1.2109900913661775,
+          "y": 2.466427956526786,
+          "z": 1.2295535562980149
+        },
+        "yaw": 0.52,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5976,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -20.662624801803712,
+        "y": -197.81083903094628,
+        "z": -628.0142630265836,
+        "tx": -27.509103827461182,
+        "ty": -198.9242238386268,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/military/military-attack-f16.jpg",
+      "phase": "attack",
+      "n": 16,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.2466666666666667,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.13083521591645728,
+        "hipsY": 0.887679421754213,
+        "armL": -1.5994365481516044,
+        "armR": -1.5994365481516044
+      },
+      "subject": {
+        "id": "zombie.military",
+        "name": "Military",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.42179383073364,
+          "y": -198.9242238386268,
+          "z": -632
+        },
+        "size": {
+          "x": 1.6479755688646414,
+          "y": 2.1395713475215246,
+          "z": 1.7703830965369889
+        },
+        "yaw": 0.6433333333333334,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5976,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -20.136991167449644,
+        "y": -197.81083903094628,
+        "z": -628.8867983638967,
+        "tx": -27.42179383073364,
+        "ty": -198.9242238386268,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/military/military-attack-f18.jpg",
+      "phase": "attack",
+      "n": 18,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.21333333333333337,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.23134685680847852,
+        "hipsY": 0.8747164853576547,
+        "armL": -0.9997246201889594,
+        "armR": -0.9997246201889594
+      },
+      "subject": {
+        "id": "zombie.military",
+        "name": "Military",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.326731317053635,
+          "y": -198.9242238386268,
+          "z": -632
+        },
+        "size": {
+          "x": 1.626827108311172,
+          "y": 2.114395378029741,
+          "z": 1.6347779338103692
+        },
+        "yaw": 0.7700000000000001,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5976,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -19.707005636342362,
+        "y": -197.81083903094628,
+        "z": -629.8320159546862,
+        "tx": -27.326731317053635,
+        "ty": -198.9242238386268,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/military/military-attack-f20.jpg",
+      "phase": "attack",
+      "n": 20,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.18000000000000005,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.27823941877010794,
+        "hipsY": 0.8635129568202972,
+        "armL": -0.4977409125245613,
+        "armR": -0.4977409125245613
+      },
+      "subject": {
+        "id": "zombie.military",
+        "name": "Military",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.224808362033222,
+          "y": -198.9242238386268,
+          "z": -632
+        },
+        "size": {
+          "x": 1.5748198659983927,
+          "y": 2.120878985331615,
+          "z": 1.506394444516559
+        },
+        "yaw": 0.8947885827884638,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5976,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -19.39449558816147,
+        "y": -197.81083903094628,
+        "z": -630.7972630656012,
+        "tx": -27.224808362033222,
+        "ty": -198.9242238386268,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/military/military-attack-f22.jpg",
+      "phase": "attack",
+      "n": 22,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.14666666666666672,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.2606446496203773,
+        "hipsY": 0.8547144573271719,
+        "armL": -0.1327231604293151,
+        "armR": -0.1327231604293151
+      },
+      "subject": {
+        "id": "zombie.military",
+        "name": "Military",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.115975318058766,
+          "y": -198.9242238386268,
+          "z": -631.9954973169018
+        },
+        "size": {
+          "x": 1.4987170852449587,
+          "y": 2.111920762199844,
+          "z": 1.4187783515321826
+        },
+        "yaw": 1.0076990816987244,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5976,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -19.20000974882393,
+        "y": -197.81083903094628,
+        "z": -631.6826660896965,
+        "tx": -27.115975318058766,
+        "ty": -198.9242238386268,
+        "tz": -631.9954973169018,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/military/military-attack-f24.jpg",
+      "phase": "attack",
+      "n": 24,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.1133333333333334,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.182640475157874,
+        "hipsY": 0.848940091164246,
+        "armL": 0.066796893517854,
+        "armR": 0.066796893517854
+      },
+      "subject": {
+        "id": "zombie.military",
+        "name": "Military",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.002027238184915,
+          "y": -198.9242238386268,
+          "z": -631.9862882859242
+        },
+        "size": {
+          "x": 1.4866924468758604,
+          "y": 2.0968712542722017,
+          "z": 1.33628595171308
+        },
+        "yaw": 1.1072762472756514,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5976,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -19.09417567954749,
+        "y": -197.81083903094628,
+        "z": -632.4619541314311,
+        "tx": -27.002027238184915,
+        "ty": -198.9242238386268,
+        "tz": -631.9862882859242,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/military/military-attack-f26.jpg",
+      "phase": "attack",
+      "n": 26,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.08000000000000007,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.06230586150776819,
+        "hipsY": 0.8462409292115225,
+        "armL": 0.10000000000000009,
+        "armR": 0.10000000000000009
+      },
+      "subject": {
+        "id": "zombie.military",
+        "name": "Military",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.885592382863734,
+          "y": -198.9242238386268,
+          "z": -631.9768782792727
+        },
+        "size": {
+          "x": 1.4766886661118939,
+          "y": 2.0832419956990407,
+          "z": 1.2703200744261949
+        },
+        "yaw": 1.193520079519245,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5976,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -19.048104303452302,
+        "y": -197.81083903094628,
+        "z": -633.1319345008957,
+        "tx": -26.885592382863734,
+        "ty": -198.9242238386268,
+        "tz": -631.9768782792727,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/military/military-attack-f30.jpg",
+      "phase": "attack",
+      "n": 30,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.8390283582353982,
+        "armL": 0.10000000000000009,
+        "armR": 0.10000000000000009
+      },
+      "subject": {
+        "id": "zombie.military",
+        "name": "Military",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.648398411563733,
+          "y": -198.9242238386268,
+          "z": -631.9577087888185
+        },
+        "size": {
+          "x": 1.4355616251937242,
+          "y": 2.0560224840144485,
+          "z": 1.1606040373939095
+        },
+        "yaw": 1.3260077440064326,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5976,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -19.032178818601977,
+        "y": -197.81083903094628,
+        "z": -634.1379778964774,
+        "tx": -26.648398411563733,
+        "ty": -198.9242238386268,
+        "tz": -631.9577087888185,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/military/military-death-f00.jpg",
+      "phase": "death",
+      "n": 0,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.8390283582353982,
+        "armL": 0.10000000000000009,
+        "armR": 0.10000000000000009
+      },
+      "subject": {
+        "id": "zombie.military",
+        "name": "Military",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.648398411563733,
+          "y": -198.9242238386268,
+          "z": -631.9577087888185
+        },
+        "size": {
+          "x": 1.2079390643200938,
+          "y": 2.0362324348981247,
+          "z": 1.0107194460208575
+        },
+        "yaw": 1.3260077440064326,
+        "info": {
+          "meshes": 4,
+          "drawables": 4,
+          "tris": 6072,
+          "points": 0,
+          "segments": 0,
+          "materials": 4
+        }
+      },
+      "camera": {
+        "x": -19.032178818601977,
+        "y": -197.81083903094628,
+        "z": -634.1379778964774,
+        "tx": -26.648398411563733,
+        "ty": -198.9242238386268,
+        "tz": -631.9577087888185,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/military/military-death-f01.jpg",
+      "phase": "death",
+      "n": 1,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.016666666666666666,
+        "corpseRX": -0.0017389622087831975,
+        "corpseRZ": 0.1080959551184092,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.8390283582353982,
+        "armL": 0.10000000000000009,
+        "armR": -0.1546550526281611
+      },
+      "subject": {
+        "id": "zombie.military",
+        "name": "Military",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.648398411563733,
+          "y": -198.9156305897251,
+          "z": -631.9577087888185
+        },
+        "size": {
+          "x": 0.7828548195821305,
+          "y": 2.220351046154377,
+          "z": 1.1841450543357723
+        },
+        "yaw": 1.3825588454928337,
+        "info": {
+          "meshes": 4,
+          "drawables": 4,
+          "tris": 6072,
+          "points": 0,
+          "segments": 0,
+          "materials": 4
+        }
+      },
+      "camera": {
+        "x": -19.032178818601977,
+        "y": -197.8022457820446,
+        "z": -634.1379778964774,
+        "tx": -26.648398411563733,
+        "ty": -198.9156305897251,
+        "tz": -631.9577087888185,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/military/military-death-f02.jpg",
+      "phase": "death",
+      "n": 2,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.03333333333333333,
+        "corpseRX": -0.08692005546675148,
+        "corpseRZ": 0.29369724992628443,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.8390283582353982,
+        "armL": 0.10000000000000009,
+        "armR": -0.29353783895178387
+      },
+      "subject": {
+        "id": "zombie.military",
+        "name": "Military",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.648398411563733,
+          "y": -198.9074308957142,
+          "z": -631.9577087888185
+        },
+        "size": {
+          "x": 0.8263261070402415,
+          "y": 2.2923619823763772,
+          "z": 1.3673025586610947
+        },
+        "yaw": 1.4348215623307954,
+        "info": {
+          "meshes": 4,
+          "drawables": 4,
+          "tris": 6072,
+          "points": 0,
+          "segments": 0,
+          "materials": 4
+        }
+      },
+      "camera": {
+        "x": -19.032178818601977,
+        "y": -197.7940460880337,
+        "z": -634.1379778964774,
+        "tx": -26.648398411563733,
+        "ty": -198.9074308957142,
+        "tz": -631.9577087888185,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/military/military-death-f03.jpg",
+      "phase": "death",
+      "n": 3,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.05,
+        "corpseRX": -0.35495973617287224,
+        "corpseRZ": 0.6564843720932355,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.8390283582353982,
+        "armL": 0.10000000000000009,
+        "armR": -0.4171386179501823
+      },
+      "subject": {
+        "id": "zombie.military",
+        "name": "Military",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.648398411563733,
+          "y": -198.8996177965779,
+          "z": -631.9577087888185
+        },
+        "size": {
+          "x": 0.9989686125196116,
+          "y": 2.33546789646806,
+          "z": 1.5325464834417062
+        },
+        "yaw": 1.477227198460003,
+        "info": {
+          "meshes": 4,
+          "drawables": 4,
+          "tris": 6072,
+          "points": 0,
+          "segments": 0,
+          "materials": 4
+        }
+      },
+      "camera": {
+        "x": -19.032178818601977,
+        "y": -197.78623298889738,
+        "z": -634.1379778964774,
+        "tx": -26.648398411563733,
+        "ty": -198.8996177965779,
+        "tz": -631.9577087888185,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/military/military-death-f04.jpg",
+      "phase": "death",
+      "n": 4,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.06666666666666667,
+        "corpseRX": -0.9231344339170044,
+        "corpseRZ": 1.3139929209426084,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.8390283582353982,
+        "armL": 0.10000000000000009,
+        "armR": -0.526091503605145
+      },
+      "subject": {
+        "id": "zombie.military",
+        "name": "Military",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.648398411563733,
+          "y": -198.89218424772585,
+          "z": -631.9577087888185
+        },
+        "size": {
+          "x": 1.1403707834638581,
+          "y": 2.3568321562828487,
+          "z": 1.6551086001816202
+        },
+        "yaw": 1.4947810978527343,
+        "info": {
+          "meshes": 4,
+          "drawables": 4,
+          "tris": 6072,
+          "points": 0,
+          "segments": 0,
+          "materials": 4
+        }
+      },
+      "camera": {
+        "x": -19.032178818601977,
+        "y": -197.77879944004533,
+        "z": -634.1379778964774,
+        "tx": -26.648398411563733,
+        "ty": -198.89218424772585,
+        "tz": -631.9577087888185,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/military/military-death-f06.jpg",
+      "phase": "death",
+      "n": 6,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.09999999999999999,
+        "corpseRX": -1.7135917348677678,
+        "corpseRZ": 2.267860206348366,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.8390283582353982,
+        "armL": 0.10000000000000009,
+        "armR": -0.7031850474073732
+      },
+      "subject": {
+        "id": "zombie.military",
+        "name": "Military",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.648398411563733,
+          "y": -198.87842717709015,
+          "z": -631.9577087888185
+        },
+        "size": {
+          "x": 1.4996827482129191,
+          "y": 2.4111975243641552,
+          "z": 1.8797295147164732
+        },
+        "yaw": 1.4372217179845344,
+        "info": {
+          "meshes": 4,
+          "drawables": 4,
+          "tris": 6072,
+          "points": 0,
+          "segments": 0,
+          "materials": 4
+        }
+      },
+      "camera": {
+        "x": -19.032178818601977,
+        "y": -197.76504236940963,
+        "z": -634.1379778964774,
+        "tx": -26.648398411563733,
+        "ty": -198.87842717709015,
+        "tz": -631.9577087888185,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/military/military-death-f08.jpg",
+      "phase": "death",
+      "n": 8,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.13333333333333333,
+        "corpseRX": -1.839800545862691,
+        "corpseRZ": 2.5386314116362536,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.8390283582353982,
+        "armL": 0.10000000000000009,
+        "armR": -0.8319737859186774
+      },
+      "subject": {
+        "id": "zombie.military",
+        "name": "Military",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.648398411563733,
+          "y": -198.8661014871221,
+          "z": -631.9577087888185
+        },
+        "size": {
+          "x": 1.770637767182052,
+          "y": 2.4339745030944187,
+          "z": 2.1117932999075038
+        },
+        "yaw": 1.3479988786814054,
+        "info": {
+          "meshes": 4,
+          "drawables": 4,
+          "tris": 6072,
+          "points": 0,
+          "segments": 0,
+          "materials": 4
+        }
+      },
+      "camera": {
+        "x": -19.032178818601977,
+        "y": -197.7527166794416,
+        "z": -634.1379778964774,
+        "tx": -26.648398411563733,
+        "ty": -198.8661014871221,
+        "tz": -631.9577087888185,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/military/military-death-f12.jpg",
+      "phase": "death",
+      "n": 12,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.19999999999999998,
+        "corpseRX": -1.775769880506386,
+        "corpseRZ": 2.713274699836791,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.8390283582353982,
+        "armL": 0.10000000000000009,
+        "armR": -0.9773835144892207
+      },
+      "subject": {
+        "id": "zombie.military",
+        "name": "Military",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.648398411563733,
+          "y": -198.84550317296996,
+          "z": -631.9577087888185
+        },
+        "size": {
+          "x": 2.051456404148368,
+          "y": 2.394047683847049,
+          "z": 2.341169027396404
+        },
+        "yaw": 1.1823273939680397,
+        "info": {
+          "meshes": 4,
+          "drawables": 4,
+          "tris": 6072,
+          "points": 0,
+          "segments": 0,
+          "materials": 4
+        }
+      },
+      "camera": {
+        "x": -19.032178818601977,
+        "y": -197.73211836528944,
+        "z": -634.1379778964774,
+        "tx": -26.648398411563733,
+        "ty": -198.84550317296996,
+        "tz": -631.9577087888185,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/military/military-death-f20.jpg",
+      "phase": "death",
+      "n": 20,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.3333333333333333,
+        "corpseRX": -1.5728066969683414,
+        "corpseRZ": 2.8180648479324417,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.8390283582353982,
+        "armL": 0.10000000000000009,
+        "armR": -1.0362998407364943
+      },
+      "subject": {
+        "id": "zombie.military",
+        "name": "Military",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.648398411563733,
+          "y": -198.81871801636544,
+          "z": -631.9577087888185
+        },
+        "size": {
+          "x": 2.219769731042984,
+          "y": 2.186433652792715,
+          "z": 2.2797775224617
+        },
+        "yaw": 0.9554840694096713,
+        "info": {
+          "meshes": 4,
+          "drawables": 4,
+          "tris": 6072,
+          "points": 0,
+          "segments": 0,
+          "materials": 4
+        }
+      },
+      "camera": {
+        "x": -19.032178818601977,
+        "y": -197.70533320868492,
+        "z": -634.1379778964774,
+        "tx": -26.648398411563733,
+        "ty": -198.81871801636544,
+        "tz": -631.9577087888185,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/military/military-death-f40.jpg",
+      "phase": "death",
+      "n": 40,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.6666666666666671,
+        "corpseRX": -1.4079917050147028,
+        "corpseRZ": 2.8559428278989127,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.8390283582353982,
+        "armL": 0.10000000000000009,
+        "armR": -1.05
+      },
+      "subject": {
+        "id": "zombie.military",
+        "name": "Military",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.648398411563733,
+          "y": -198.8054238386268,
+          "z": -631.9577087888185
+        },
+        "size": {
+          "x": 2.2222869261288842,
+          "y": 1.894156976524414,
+          "z": 2.374683256256617
+        },
+        "yaw": 0.8313662423640692,
+        "info": {
+          "meshes": 4,
+          "drawables": 4,
+          "tris": 6072,
+          "points": 0,
+          "segments": 0,
+          "materials": 4
+        }
+      },
+      "camera": {
+        "x": -19.032178818601977,
+        "y": -197.6920390881989,
+        "z": -634.1379778964774,
+        "tx": -26.648398411563733,
+        "ty": -198.80542389587941,
+        "tz": -631.9577087888185,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/military/military-death-f80.jpg",
+      "phase": "death",
+      "n": 80,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 1.3333333333333335,
+        "corpseRX": -1.4556762089842896,
+        "corpseRZ": 2.853976672242354,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.8390283582353982,
+        "armL": 0.10000000000000009,
+        "armR": -1.05
+      },
+      "subject": {
+        "id": "zombie.military",
+        "name": "Military",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.648398411563733,
+          "y": -198.8054238386268,
+          "z": -631.9577087888185
+        },
+        "size": {
+          "x": 2.2251218777801256,
+          "y": 1.991486694484621,
+          "z": 2.3446981337947363
+        },
+        "yaw": 0.8407902154591868,
+        "info": {
+          "meshes": 4,
+          "drawables": 4,
+          "tris": 6072,
+          "points": 0,
+          "segments": 0,
+          "materials": 4
+        }
+      },
+      "camera": {
+        "x": -19.032178818601977,
+        "y": -197.6920390881989,
+        "z": -634.1379778964774,
+        "tx": -26.648398411563733,
+        "ty": -198.80542389587941,
+        "tz": -631.9577087888185,
+        "fov": 40
+      }
+    }
+  ],
+  "errors": [],
+  "pageErrors": []
+}

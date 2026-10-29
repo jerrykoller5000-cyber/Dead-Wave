@@ -1,0 +1,1681 @@
+{
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "frames": [
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spitter/spitter-idle-f00.jpg",
+      "phase": "idle",
+      "n": 0,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0,
+        "hipsY": 0.8592262506054398,
+        "armL": -0.45,
+        "armR": -0.45
+      },
+      "subject": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999935719128512,
+          "y": -199.067246849083,
+          "z": -631.9892866499807
+        },
+        "size": {
+          "x": 0.9417063039641143,
+          "y": 1.8682781673544753,
+          "z": 0.7325971897655563
+        },
+        "yaw": 0.006,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5088,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -23.997770319640697,
+        "y": -197.9538620414025,
+        "z": -625.1523980019795,
+        "tx": -27.999935719128512,
+        "ty": -199.067246849083,
+        "tz": -631.9892866499807,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spitter/spitter-attack-f01.jpg",
+      "phase": "attack",
+      "n": 1,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.20333333333333334,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.007575757575757569,
+        "hipsY": 0.8666353474885455,
+        "armL": -1.4333333333333333,
+        "armR": -1.4333333333333333
+      },
+      "subject": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999865282051136,
+          "y": -199.067246849083,
+          "z": -631.9775472779593
+        },
+        "size": {
+          "x": 0.9422027448042201,
+          "y": 1.8854946700788275,
+          "z": 1.335107367238038
+        },
+        "yaw": 0.006,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5088,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -23.99769988256332,
+        "y": -197.9538620414025,
+        "z": -625.140658629958,
+        "tx": -27.999865282051136,
+        "ty": -199.067246849083,
+        "tz": -631.9775472779593,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spitter/spitter-attack-f02.jpg",
+      "phase": "attack",
+      "n": 2,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.18666666666666668,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.01515151515151515,
+        "hipsY": 0.8657772129132328,
+        "armL": -1.5166666666666668,
+        "armR": -1.5166666666666668
+      },
+      "subject": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99979484497376,
+          "y": -199.067246849083,
+          "z": -631.9658079059378
+        },
+        "size": {
+          "x": 0.9337990349037781,
+          "y": 1.887229377301054,
+          "z": 1.3694213154518593
+        },
+        "yaw": 0.006,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5088,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -23.997629445485945,
+        "y": -197.9538620414025,
+        "z": -625.1289192579366,
+        "tx": -27.99979484497376,
+        "ty": -199.067246849083,
+        "tz": -631.9658079059378,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spitter/spitter-attack-f03.jpg",
+      "phase": "attack",
+      "n": 3,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.17,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.02272727272727272,
+        "hipsY": 0.8649884548255634,
+        "armL": -1.6,
+        "armR": -1.6
+      },
+      "subject": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999724407896384,
+          "y": -199.067246849083,
+          "z": -631.9540685339164
+        },
+        "size": {
+          "x": 0.923722161566161,
+          "y": 1.8888058112276553,
+          "z": 1.3861045243818353
+        },
+        "yaw": 0.006,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5088,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -23.99755900840857,
+        "y": -197.9538620414025,
+        "z": -625.1171798859151,
+        "tx": -27.999724407896384,
+        "ty": -199.067246849083,
+        "tz": -631.9540685339164,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spitter/spitter-attack-f04.jpg",
+      "phase": "attack",
+      "n": 4,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.15333333333333335,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.0303030303030303,
+        "hipsY": 0.864255668742292,
+        "armL": -1.6833333333333333,
+        "armR": -1.6833333333333333
+      },
+      "subject": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999653970819008,
+          "y": -199.067246849083,
+          "z": -631.9423291618949
+        },
+        "size": {
+          "x": 0.9113634958933083,
+          "y": 1.8901635110140376,
+          "z": 1.3852609328298513
+        },
+        "yaw": 0.006,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5088,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -23.997488571331193,
+        "y": -197.9538620414025,
+        "z": -625.1054405138937,
+        "tx": -27.999653970819008,
+        "ty": -199.067246849083,
+        "tz": -631.9423291618949,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spitter/spitter-attack-f05.jpg",
+      "phase": "attack",
+      "n": 5,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.1366666666666667,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.03787878787878787,
+        "hipsY": 0.8635676484911046,
+        "armL": -1.7666666666666666,
+        "armR": -1.7666666666666666
+      },
+      "subject": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99958353374163,
+          "y": -199.067246849083,
+          "z": -631.9305897898735
+        },
+        "size": {
+          "x": 0.9056246845050531,
+          "y": 1.8912558883021973,
+          "z": 1.3673420284937947
+        },
+        "yaw": 0.006,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5088,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -23.997418134253817,
+        "y": -197.9538620414025,
+        "z": -625.0937011418722,
+        "tx": -27.99958353374163,
+        "ty": -199.067246849083,
+        "tz": -631.9305897898735,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spitter/spitter-attack-f06.jpg",
+      "phase": "attack",
+      "n": 6,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.12000000000000002,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.04545454545454545,
+        "hipsY": 0.8629150643679032,
+        "armL": -1.85,
+        "armR": -1.85
+      },
+      "subject": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999513096664256,
+          "y": -199.067246849083,
+          "z": -631.918850417852
+        },
+        "size": {
+          "x": 0.9002896346852971,
+          "y": 1.8920484521295577,
+          "z": 1.332080477095019
+        },
+        "yaw": 0.006,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5088,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -23.99734769717644,
+        "y": -197.9538620414025,
+        "z": -625.0819617698507,
+        "tx": -27.999513096664256,
+        "ty": -199.067246849083,
+        "tz": -631.918850417852,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spitter/spitter-attack-f07.jpg",
+      "phase": "attack",
+      "n": 7,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.10333333333333336,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.05303030303030302,
+        "hipsY": 0.8622901873140805,
+        "armL": -1.9333333333333333,
+        "armR": -1.9333333333333333
+      },
+      "subject": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99944265958688,
+          "y": -199.067246849083,
+          "z": -631.9071110458306
+        },
+        "size": {
+          "x": 0.8940239183719214,
+          "y": 1.8925170590307516,
+          "z": 1.2803918936687069
+        },
+        "yaw": 0.006,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5088,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -23.997277260099064,
+        "y": -197.9538620414025,
+        "z": -625.0702223978293,
+        "tx": -27.99944265958688,
+        "ty": -199.067246849083,
+        "tz": -631.9071110458306,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spitter/spitter-attack-f08.jpg",
+      "phase": "attack",
+      "n": 8,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.0866666666666667,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.0606060606060606,
+        "hipsY": 0.8616866525932808,
+        "armL": -2.0166666666666666,
+        "armR": -2.0166666666666666
+      },
+      "subject": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999372222509503,
+          "y": -199.067246849083,
+          "z": -631.8953716738091
+        },
+        "size": {
+          "x": 0.8873921776743572,
+          "y": 1.9462219511111698,
+          "z": 1.2135849259838096
+        },
+        "yaw": 0.006,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5088,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -23.99720682302169,
+        "y": -197.9538620414025,
+        "z": -625.0584830258078,
+        "tx": -27.999372222509503,
+        "ty": -199.067246849083,
+        "tz": -631.8953716738091,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spitter/spitter-attack-f09.jpg",
+      "phase": "attack",
+      "n": 9,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.07000000000000003,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.06818181818181816,
+        "hipsY": 0.8610992573643235,
+        "armL": -2.1,
+        "armR": -2.1
+      },
+      "subject": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999301785432127,
+          "y": -199.067246849083,
+          "z": -631.8836323017877
+        },
+        "size": {
+          "x": 0.8826532532695026,
+          "y": 2.0274225115771287,
+          "z": 1.1333191512679832
+        },
+        "yaw": 0.006,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5088,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -23.997136385944312,
+        "y": -197.9538620414025,
+        "z": -625.0467436537864,
+        "tx": -27.999301785432127,
+        "ty": -199.067246849083,
+        "tz": -631.8836323017877,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spitter/spitter-attack-f10.jpg",
+      "phase": "attack",
+      "n": 10,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.05333333333333337,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.07575757575757575,
+        "hipsY": 0.8605237873356938,
+        "armL": -2.183333333333333,
+        "armR": -2.183333333333333
+      },
+      "subject": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99923134835475,
+          "y": -199.067246849083,
+          "z": -631.8718929297662
+        },
+        "size": {
+          "x": 0.8779940486643341,
+          "y": 2.098137499517918,
+          "z": 1.0440736065863803
+        },
+        "yaw": 0.006,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5088,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -23.997065948866936,
+        "y": -197.9538620414025,
+        "z": -625.0350042817649,
+        "tx": -27.99923134835475,
+        "ty": -199.067246849083,
+        "tz": -631.8718929297662,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spitter/spitter-attack-f12.jpg",
+      "phase": "attack",
+      "n": 12,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.020000000000000042,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.0909090909090909,
+        "hipsY": 0.8593958394518586,
+        "armL": -2.35,
+        "armR": -2.35
+      },
+      "subject": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.9990904742,
+          "y": -199.067246849083,
+          "z": -631.8484141857233
+        },
+        "size": {
+          "x": 0.865008899496722,
+          "y": 2.203230516663325,
+          "z": 0.8488337631534932
+        },
+        "yaw": 0.006,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5088,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -23.996925074712184,
+        "y": -197.9538620414025,
+        "z": -625.011525537722,
+        "tx": -27.9990904742,
+        "ty": -199.067246849083,
+        "tz": -631.8484141857233,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spitter/spitter-attack-f14.jpg",
+      "phase": "attack",
+      "n": 14,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.28,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.1,
+        "hipsY": 0.8582837372082062,
+        "armL": -2.45,
+        "armR": -2.45
+      },
+      "subject": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.998949600045247,
+          "y": -199.067246849083,
+          "z": -631.8249354416804
+        },
+        "size": {
+          "x": 0.8553395142459124,
+          "y": 2.2407933535794484,
+          "z": 0.8100033213301003
+        },
+        "yaw": 0.006,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5088,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -23.996784200557432,
+        "y": -197.9538620414025,
+        "z": -624.9880467936791,
+        "tx": -27.998949600045247,
+        "ty": -199.067246849083,
+        "tz": -631.8249354416804,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spitter/spitter-attack-f16.jpg",
+      "phase": "attack",
+      "n": 16,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.2466666666666667,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.13083521591645728,
+        "hipsY": 0.8405665706484339,
+        "armL": -1.7994365481516044,
+        "armR": -1.7994365481516044
+      },
+      "subject": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.998808725890495,
+          "y": -199.067246849083,
+          "z": -631.8014566976375
+        },
+        "size": {
+          "x": 0.8994312269596989,
+          "y": 1.8479920100239724,
+          "z": 1.4430443927884653
+        },
+        "yaw": 0.006,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5088,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -23.99664332640268,
+        "y": -197.9538620414025,
+        "z": -624.9645680496362,
+        "tx": -27.998808725890495,
+        "ty": -199.067246849083,
+        "tz": -631.8014566976375,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spitter/spitter-attack-f18.jpg",
+      "phase": "attack",
+      "n": 18,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.21333333333333337,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.23134685680847852,
+        "hipsY": 0.8242834318919617,
+        "armL": -1.1997246201889593,
+        "armR": -1.1997246201889593
+      },
+      "subject": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.998667851735743,
+          "y": -199.067246849083,
+          "z": -631.7779779535946
+        },
+        "size": {
+          "x": 0.9097386774565734,
+          "y": 1.8223397730479292,
+          "z": 1.3989342388971409
+        },
+        "yaw": 0.006,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5088,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -23.996502452247928,
+        "y": -197.9538620414025,
+        "z": -624.9410893055933,
+        "tx": -27.998667851735743,
+        "ty": -199.067246849083,
+        "tz": -631.7779779535946,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spitter/spitter-attack-f20.jpg",
+      "phase": "attack",
+      "n": 20,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.18000000000000005,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.27823941877010794,
+        "hipsY": 0.812830611654622,
+        "armL": -0.6977409125245613,
+        "armR": -0.6977409125245613
+      },
+      "subject": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99852697758099,
+          "y": -199.067246849083,
+          "z": -631.7544992095517
+        },
+        "size": {
+          "x": 0.9310322024737197,
+          "y": 1.7907176869177306,
+          "z": 1.0353291750086555
+        },
+        "yaw": 0.006,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5088,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -23.996361578093175,
+        "y": -197.9538620414025,
+        "z": -624.9176105615504,
+        "tx": -27.99852697758099,
+        "ty": -199.067246849083,
+        "tz": -631.7544992095517,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spitter/spitter-attack-f22.jpg",
+      "phase": "attack",
+      "n": 22,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.14666666666666672,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.2606446496203773,
+        "hipsY": 0.8048618065830089,
+        "armL": -0.3327231604293151,
+        "armR": -0.3327231604293151
+      },
+      "subject": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99838610342624,
+          "y": -199.067246849083,
+          "z": -631.7310204655088
+        },
+        "size": {
+          "x": 0.9208821751297478,
+          "y": 1.7646341612655476,
+          "z": 1.080119524888687
+        },
+        "yaw": 0.006,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5088,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -23.996220703938423,
+        "y": -197.9538620414025,
+        "z": -624.8941318175075,
+        "tx": -27.99838610342624,
+        "ty": -199.067246849083,
+        "tz": -631.7310204655088,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spitter/spitter-attack-f24.jpg",
+      "phase": "attack",
+      "n": 24,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.1133333333333334,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.182640475157874,
+        "hipsY": 0.8010958246821609,
+        "armL": -0.133203106482146,
+        "armR": -0.133203106482146
+      },
+      "subject": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.998245229271486,
+          "y": -199.067246849083,
+          "z": -631.7075417214659
+        },
+        "size": {
+          "x": 0.8718889218330759,
+          "y": 1.748501825536863,
+          "z": 1.1018568905745951
+        },
+        "yaw": 0.006,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5088,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -23.99607982978367,
+        "y": -197.9538620414025,
+        "z": -624.8706530734646,
+        "tx": -27.998245229271486,
+        "ty": -199.067246849083,
+        "tz": -631.7075417214659,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spitter/spitter-attack-f26.jpg",
+      "phase": "attack",
+      "n": 26,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.08000000000000007,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.06230586150776819,
+        "hipsY": 0.8015453664392366,
+        "armL": -0.09999999999999992,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.998104355116734,
+          "y": -199.067246849083,
+          "z": -631.684062977423
+        },
+        "size": {
+          "x": 0.8608132847293142,
+          "y": 1.7458240637825497,
+          "z": 1.1043861288594599
+        },
+        "yaw": 0.006,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5088,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -23.99593895562892,
+        "y": -197.9538620414025,
+        "z": -624.8471743294217,
+        "tx": -27.998104355116734,
+        "ty": -199.067246849083,
+        "tz": -631.684062977423,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spitter/spitter-attack-f30.jpg",
+      "phase": "attack",
+      "n": 30,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.8040193297548126,
+        "armL": -0.09999999999999992,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99782260680723,
+          "y": -199.067246849083,
+          "z": -631.6371054893372
+        },
+        "size": {
+          "x": 0.8611841769484343,
+          "y": 1.7472392347584957,
+          "z": 1.0987300601482275
+        },
+        "yaw": 0.006,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5088,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -23.995657207319415,
+        "y": -197.9538620414025,
+        "z": -624.8002168413359,
+        "tx": -27.99782260680723,
+        "ty": -199.067246849083,
+        "tz": -631.6371054893372,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spitter/spitter-death-f00.jpg",
+      "phase": "death",
+      "n": 0,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.8040193297548126,
+        "armL": -0.09999999999999992,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99782260680723,
+          "y": -199.067246849083,
+          "z": -631.6371054893372
+        },
+        "size": {
+          "x": 0.8533412328096794,
+          "y": 1.6090132103863084,
+          "z": 1.0027555760585756
+        },
+        "yaw": 0.006,
+        "info": {
+          "meshes": 4,
+          "drawables": 4,
+          "tris": 5088,
+          "points": 0,
+          "segments": 0,
+          "materials": 4
+        }
+      },
+      "camera": {
+        "x": -23.995657207319415,
+        "y": -197.9538620414025,
+        "z": -624.8002168413359,
+        "tx": -27.99782260680723,
+        "ty": -199.067246849083,
+        "tz": -631.6371054893372,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spitter/spitter-death-f01.jpg",
+      "phase": "death",
+      "n": 1,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.016666666666666666,
+        "corpseRX": 0.020442926051365693,
+        "corpseRZ": -0.0860437719472775,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.8040193297548126,
+        "armL": -0.1353214646539126,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99782260680723,
+          "y": -199.06045857106403,
+          "z": -631.6371054893372
+        },
+        "size": {
+          "x": 1.0281519170941422,
+          "y": 1.7660245410831124,
+          "z": 0.7466429595149293
+        },
+        "yaw": 0.09908782654722324,
+        "info": {
+          "meshes": 4,
+          "drawables": 4,
+          "tris": 5088,
+          "points": 0,
+          "segments": 0,
+          "materials": 4
+        }
+      },
+      "camera": {
+        "x": -23.995657207319415,
+        "y": -197.94707376338351,
+        "z": -624.8002168413359,
+        "tx": -27.99782260680723,
+        "ty": -199.06045857106403,
+        "tz": -631.6371054893372,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spitter/spitter-death-f02.jpg",
+      "phase": "death",
+      "n": 2,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.03333333333333333,
+        "corpseRX": 0.05529127105773405,
+        "corpseRZ": -0.1707353542849937,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.8040193297548126,
+        "armL": -0.25737211861725273,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99782260680723,
+          "y": -199.0539439351518,
+          "z": -631.6371054893372
+        },
+        "size": {
+          "x": 1.2150475092525035,
+          "y": 1.8420852703116282,
+          "z": 0.8609519443807585
+        },
+        "yaw": 0.18548974580724195,
+        "info": {
+          "meshes": 4,
+          "drawables": 4,
+          "tris": 5088,
+          "points": 0,
+          "segments": 0,
+          "materials": 4
+        }
+      },
+      "camera": {
+        "x": -23.995657207319415,
+        "y": -197.9405591274713,
+        "z": -624.8002168413359,
+        "tx": -27.99782260680723,
+        "ty": -199.0539439351518,
+        "tz": -631.6371054893372,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spitter/spitter-death-f03.jpg",
+      "phase": "death",
+      "n": 3,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.05,
+        "corpseRX": 0.10294967017596564,
+        "corpseRZ": -0.25554709138486686,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.8040193297548126,
+        "armL": -0.3665036117175563,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99782260680723,
+          "y": -199.04769869704188,
+          "z": -631.6371054893372
+        },
+        "size": {
+          "x": 1.3937653480379915,
+          "y": 1.9044789914636624,
+          "z": 1.0125266628400595
+        },
+        "yaw": 0.2638283305649187,
+        "info": {
+          "meshes": 4,
+          "drawables": 4,
+          "tris": 5088,
+          "points": 0,
+          "segments": 0,
+          "materials": 4
+        }
+      },
+      "camera": {
+        "x": -23.995657207319415,
+        "y": -197.93431388936136,
+        "z": -624.8002168413359,
+        "tx": -27.99782260680723,
+        "ty": -199.04769869704188,
+        "tz": -631.6371054893372,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spitter/spitter-death-f04.jpg",
+      "phase": "death",
+      "n": 4,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.06666666666666667,
+        "corpseRX": 0.16191356458911071,
+        "corpseRZ": -0.341340013770688,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.8040193297548126,
+        "armL": -0.4631710416597664,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99782260680723,
+          "y": -199.04171856736835,
+          "z": -631.6371054893372
+        },
+        "size": {
+          "x": 1.56272586110898,
+          "y": 1.9587133898049274,
+          "z": 1.1739333579379263
+        },
+        "yaw": 0.3330554256879759,
+        "info": {
+          "meshes": 4,
+          "drawables": 4,
+          "tris": 5088,
+          "points": 0,
+          "segments": 0,
+          "materials": 4
+        }
+      },
+      "camera": {
+        "x": -23.995657207319415,
+        "y": -197.92833375968783,
+        "z": -624.8002168413359,
+        "tx": -27.99782260680723,
+        "ty": -199.04171856736835,
+        "tz": -631.6371054893372,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spitter/spitter-death-f06.jpg",
+      "phase": "death",
+      "n": 6,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.09999999999999999,
+        "corpseRX": 0.30726168893624073,
+        "corpseRZ": -0.5163432353814524,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.8040193297548126,
+        "armL": -0.6213758157887008,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99782260680723,
+          "y": -199.0305362401211,
+          "z": -631.6371054893372
+        },
+        "size": {
+          "x": 1.8591388918929077,
+          "y": 2.06949596037353,
+          "z": 1.4309786943309746
+        },
+        "yaw": 0.4415118878954179,
+        "info": {
+          "meshes": 4,
+          "drawables": 4,
+          "tris": 5088,
+          "points": 0,
+          "segments": 0,
+          "materials": 4
+        }
+      },
+      "camera": {
+        "x": -23.995657207319415,
+        "y": -197.9171514324406,
+        "z": -624.8002168413359,
+        "tx": -27.99782260680723,
+        "ty": -199.0305362401211,
+        "tz": -631.6371054893372,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spitter/spitter-death-f08.jpg",
+      "phase": "death",
+      "n": 8,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.13333333333333333,
+        "corpseRX": 0.4763817640078395,
+        "corpseRZ": -0.691396151096659,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.8040193297548126,
+        "armL": -0.7372122682745008,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99782260680723,
+          "y": -199.0203616688882,
+          "z": -631.6371054893372
+        },
+        "size": {
+          "x": 2.062847213526407,
+          "y": 2.1650337574855314,
+          "z": 1.5633809870173536
+        },
+        "yaw": 0.5087421417658566,
+        "info": {
+          "meshes": 4,
+          "drawables": 4,
+          "tris": 5088,
+          "points": 0,
+          "segments": 0,
+          "materials": 4
+        }
+      },
+      "camera": {
+        "x": -23.995657207319415,
+        "y": -197.90697686120768,
+        "z": -624.8002168413359,
+        "tx": -27.99782260680723,
+        "ty": -199.0203616688882,
+        "tz": -631.6371054893372,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spitter/spitter-death-f12.jpg",
+      "phase": "death",
+      "n": 12,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.19999999999999998,
+        "corpseRX": 0.8197173634044105,
+        "corpseRZ": -1.0012800889008397,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.8040193297548126,
+        "armL": -0.8664226605007712,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99782260680723,
+          "y": -199.00289036009417,
+          "z": -631.6371054893372
+        },
+        "size": {
+          "x": 2.2498600461703973,
+          "y": 2.2402510975623215,
+          "z": 1.629538304792959
+        },
+        "yaw": 0.5363926404280047,
+        "info": {
+          "meshes": 4,
+          "drawables": 4,
+          "tris": 5088,
+          "points": 0,
+          "segments": 0,
+          "materials": 4
+        }
+      },
+      "camera": {
+        "x": -23.995657207319415,
+        "y": -197.88950555241365,
+        "z": -624.8002168413359,
+        "tx": -27.99782260680723,
+        "ty": -199.00289036009417,
+        "tz": -631.6371054893372,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spitter/spitter-death-f20.jpg",
+      "phase": "death",
+      "n": 20,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.3333333333333333,
+        "corpseRX": 1.2951400389639671,
+        "corpseRZ": -1.3331276204910931,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.8040193297548126,
+        "armL": -0.8909292435572116,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99782260680723,
+          "y": -198.97838417547365,
+          "z": -631.6371054893372
+        },
+        "size": {
+          "x": 2.170447229051188,
+          "y": 1.9585629489639587,
+          "z": 1.48662385096452
+        },
+        "yaw": 0.3964678148688497,
+        "info": {
+          "meshes": 4,
+          "drawables": 4,
+          "tris": 5088,
+          "points": 0,
+          "segments": 0,
+          "materials": 4
+        }
+      },
+      "camera": {
+        "x": -23.995657207319415,
+        "y": -197.86499936779313,
+        "z": -624.8002168413359,
+        "tx": -27.99782260680723,
+        "ty": -198.97838417547365,
+        "tz": -631.6371054893372,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spitter/spitter-death-f40.jpg",
+      "phase": "death",
+      "n": 40,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.6666666666666671,
+        "corpseRX": 1.5851581405953619,
+        "corpseRZ": -1.439280602570132,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.8040193297548126,
+        "armL": -0.85,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99782260680723,
+          "y": -198.960986849083,
+          "z": -631.6371054893372
+        },
+        "size": {
+          "x": 1.9997759746303316,
+          "y": 1.6188932921187984,
+          "z": 1.2562920478425212
+        },
+        "yaw": 0.2203564197400726,
+        "info": {
+          "meshes": 4,
+          "drawables": 4,
+          "tris": 5088,
+          "points": 0,
+          "segments": 0,
+          "materials": 4
+        }
+      },
+      "camera": {
+        "x": -23.995657207319415,
+        "y": -197.8476073938723,
+        "z": -624.8002168413359,
+        "tx": -27.99782260680723,
+        "ty": -198.9609922015528,
+        "tz": -631.6371054893372,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spitter/spitter-death-f80.jpg",
+      "phase": "death",
+      "n": 80,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 1.3333333333333335,
+        "corpseRX": 1.5849979853155158,
+        "corpseRZ": -1.4392978963106722,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.8040193297548126,
+        "armL": -0.85,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99782260680723,
+          "y": -198.960986849083,
+          "z": -631.6371054893372
+        },
+        "size": {
+          "x": 2.0007465361977452,
+          "y": 1.6204810318158138,
+          "z": 1.2560409493657971
+        },
+        "yaw": 0.22153780195306552,
+        "info": {
+          "meshes": 4,
+          "drawables": 4,
+          "tris": 5088,
+          "points": 0,
+          "segments": 0,
+          "materials": 4
+        }
+      },
+      "camera": {
+        "x": -23.995657207319415,
+        "y": -197.8476073938723,
+        "z": -624.8002168413359,
+        "tx": -27.99782260680723,
+        "ty": -198.9609922015528,
+        "tz": -631.6371054893372,
+        "fov": 40
+      }
+    }
+  ],
+  "errors": [],
+  "pageErrors": []
+}

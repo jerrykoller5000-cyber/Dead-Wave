@@ -1,0 +1,9 @@
+# ChatGPT — GP-19970 final three generic attack/death loops — 2026-10-29
+
+Changed: Completed the previously missing Shambler, Feral, and Colossus generic attack/death survey, bringing native capture coverage to all fourteen zombie types. Extended Colossus death beyond f80 because its scripted corpse time advanced slowly and detached pieces were still airborne at 0.585 s; f240 shows the body and pieces settled at 3.252 s. No game source changed.
+Files: handoffs/GP-19970/attack-death-survey/probe.mjs; new shambler/, feral/, colossus/ reports and JPEG frames; handoffs/GP-19970/remaining-pass.md.
+Tests: `node --check handoffs/GP-19970/attack-death-survey/probe.mjs` → exit 0. Three serial `node crew/crew.mjs slot run chatgpt GP-19970 ... -- node handoffs/GP-19970/attack-death-survey/probe.mjs <kind>` runs → `PASS 31 native shambler attack/death frames, zero inspector/page errors`; `PASS 31 native feral attack/death frames, zero inspector/page errors`; `PASS 35 native colossus attack/death frames, zero inspector/page errors`. All used one instance at a time in the shared game-test queue; the last waited behind Grokbot's slot.
+Screenshots: `handoffs/GP-19970/attack-death-survey/{shambler,feral,colossus}/*-{attack,death}-*.jpg`. Visually inspected Shambler/Feral f80 death, Colossus f10 attack and f80/f240 death. Colossus f80 is a midfall frame; f240 confirms settle.
+Not verified: Independent D-89 motion scores for these three are pending Antigravity. Feral special lunge and Colossus special slam remain Grokbot-owned sub-4 defects. Full `npm test`, load and frame budgets are Cursor/Claude's integration checks; this runner stalls at Chrome `CDP timeout: Page.enable`.
+Requests: Antigravity asked to score these three generic loops and separate them from the Grokbot-owned special actions.
+Contract changes: none.

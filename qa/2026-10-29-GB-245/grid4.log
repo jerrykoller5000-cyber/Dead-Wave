@@ -1,0 +1,45 @@
+GRANT grokbot GB-245: starting one game-test command
+camera: camera: loading the game...............................
+camera: ready in 31 s on port 58337: match, ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11), 1600x900
+setup: pistol
+help: ok
+m4       {"up":0.06,"in":-0.08,"side":0.06,"tip":0,"turn":1,"cant":1,"hip":0}      0   2872
+m4       {"up":0.06,"in":-0.08,"side":0.14,"tip":0,"turn":1,"cant":1,"hip":0}   7418  12483
+m4       {"up":0.06,"in":-0.16,"side":0.06,"tip":0,"turn":1,"cant":1,"hip":0}      0      0
+m4       {"up":0.06,"in":-0.16,"side":0.14,"tip":0,"turn":1,"cant":1,"hip":0}      0   3306
+m4       {"up":0.06,"in":-0.24,"side":0.06,"tip":0,"turn":1,"cant":1,"hip":0}      0      0
+m4       {"up":0.06,"in":-0.24,"side":0.14,"tip":0,"turn":1,"cant":1,"hip":0}      0      3
+m4       {"up":0.12,"in":-0.08,"side":0.06,"tip":0,"turn":1,"cant":1,"hip":0}      0   5740
+m4       {"up":0.12,"in":-0.08,"side":0.14,"tip":0,"turn":1,"cant":1,"hip":0}      0  22495
+m4       {"up":0.12,"in":-0.16,"side":0.06,"tip":0,"turn":1,"cant":1,"hip":0}      0    968
+m4       {"up":0.12,"in":-0.16,"side":0.14,"tip":0,"turn":1,"cant":1,"hip":0}      0   8146
+m4       {"up":0.12,"in":-0.24,"side":0.06,"tip":0,"turn":1,"cant":1,"hip":0}      0      0
+m4       {"up":0.12,"in":-0.24,"side":0.14,"tip":0,"turn":1,"cant":1,"hip":0}      0   1143
+-- m4 best: {"gun":"m4","S":{"up":0.06,"in":-0.08,"side":0.14,"tip":0,"turn":1,"cant":1,"hip":0},"frames":[{"u":0.35,"n":7418},{"u":0.6,"n":12483}]}
+aa12     {"up":0.06,"in":-0.08,"side":0.06,"tip":0,"turn":1,"cant":1,"hip":0}      0      0
+aa12     {"up":0.06,"in":-0.08,"side":0.14,"tip":0,"turn":1,"cant":1,"hip":0}   2114   1264
+aa12     {"up":0.06,"in":-0.16,"side":0.06,"tip":0,"turn":1,"cant":1,"hip":0}      0      0
+aa12     {"up":0.06,"in":-0.16,"side":0.14,"tip":0,"turn":1,"cant":1,"hip":0}      0      0
+aa12     {"up":0.06,"in":-0.24,"side":0.06,"tip":0,"turn":1,"cant":1,"hip":0}      0      0
+aa12     {"up":0.06,"in":-0.24,"side":0.14,"tip":0,"turn":1,"cant":1,"hip":0}      0      0
+aa12     {"up":0.12,"in":-0.08,"side":0.06,"tip":0,"turn":1,"cant":1,"hip":0}      0   1066
+aa12     {"up":0.12,"in":-0.08,"side":0.14,"tip":0,"turn":1,"cant":1,"hip":0}      0      0
+aa12     {"up":0.12,"in":-0.16,"side":0.06,"tip":0,"turn":1,"cant":1,"hip":0}      0      0
+aa12     {"up":0.12,"in":-0.16,"side":0.14,"tip":0,"turn":1,"cant":1,"hip":0}      0    646
+aa12     {"up":0.12,"in":-0.24,"side":0.06,"tip":0,"turn":1,"cant":1,"hip":0}      0      0
+aa12     {"up":0.12,"in":-0.24,"side":0.14,"tip":0,"turn":1,"cant":1,"hip":0}      0      0
+-- aa12 best: {"gun":"aa12","S":{"up":0.06,"in":-0.08,"side":0.14,"tip":0,"turn":1,"cant":1,"hip":0},"frames":[{"u":0.35,"n":2114},{"u":0.6,"n":1264}]}
+sniper   {"up":0.06,"in":-0.08,"side":0.06,"tip":0,"turn":1,"cant":1,"hip":0}      0  17849
+sniper   {"up":0.06,"in":-0.08,"side":0.14,"tip":0,"turn":1,"cant":1,"hip":0}    150  47190
+sniper   {"up":0.06,"in":-0.16,"side":0.06,"tip":0,"turn":1,"cant":1,"hip":0}      0      0
+sniper   {"up":0.06,"in":-0.16,"side":0.14,"tip":0,"turn":1,"cant":1,"hip":0}      0  17240
+sniper   {"up":0.06,"in":-0.24,"side":0.06,"tip":0,"turn":1,"cant":1,"hip":0}      0      0
+sniper   {"up":0.06,"in":-0.24,"side":0.14,"tip":0,"turn":1,"cant":1,"hip":0}      0      0
+sniper   {"up":0.12,"in":-0.08,"side":0.06,"tip":0,"turn":1,"cant":1,"hip":0}      0   3477
+sniper   {"up":0.12,"in":-0.08,"side":0.14,"tip":0,"turn":1,"cant":1,"hip":0}      0  35920
+sniper   {"up":0.12,"in":-0.16,"side":0.06,"tip":0,"turn":1,"cant":1,"hip":0}      0      0
+sniper   {"up":0.12,"in":-0.16,"side":0.14,"tip":0,"turn":1,"cant":1,"hip":0}      0   6413
+sniper   {"up":0.12,"in":-0.24,"side":0.06,"tip":0,"turn":1,"cant":1,"hip":0}      0      0
+sniper   {"up":0.12,"in":-0.24,"side":0.14,"tip":0,"turn":1,"cant":1,"hip":0}      0      0
+-- sniper best: {"gun":"sniper","S":{"up":0.06,"in":-0.08,"side":0.14,"tip":0,"turn":1,"cant":1,"hip":0},"frames":[{"u":0.35,"n":150},{"u":0.6,"n":47190}]}
+camera stop: camera: stopped

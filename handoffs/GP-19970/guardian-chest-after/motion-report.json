@@ -1,0 +1,727 @@
+{
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "shots": [
+    {
+      "file": "handoffs/GP-19970/guardian-chest-after/zombie.guardian-walk-f0-front.jpg",
+      "id": "guardian",
+      "frame": 0,
+      "view": "front",
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.65,
+          "y": -198.9483620000396,
+          "z": -632
+        },
+        "size": {
+          "x": 3.771093727157112,
+          "y": 3.71130454982611,
+          "z": 2.502898019305462
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 9016,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "time": {
+        "k": 1,
+        "paused": true,
+        "step": 0,
+        "gameTime": 0.27480000000074506,
+        "frames": 6,
+        "rewind": {
+          "nodes": 118,
+          "capacity": 900,
+          "frames": 1,
+          "mb": 4.564
+        },
+        "span": 0,
+        "scrubbing": false
+      },
+      "camera": {
+        "x": -19.007182352379083,
+        "y": -198.34399731573237,
+        "z": -632,
+        "tx": -27.65,
+        "ty": -198.9483620000396,
+        "tz": -632,
+        "fov": 40
+      },
+      "actor": {
+        "alive": true,
+        "hp": 391
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/guardian-chest-after/zombie.guardian-walk-f0-side.jpg",
+      "id": "guardian",
+      "frame": 0,
+      "view": "side",
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.65,
+          "y": -198.9483620000396,
+          "z": -632
+        },
+        "size": {
+          "x": 3.771093727157112,
+          "y": 3.71130454982611,
+          "z": 2.502898019305462
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 9016,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "time": {
+        "k": 1,
+        "paused": true,
+        "step": 0,
+        "gameTime": 0.27480000000074506,
+        "frames": 6,
+        "rewind": {
+          "nodes": 118,
+          "capacity": 900,
+          "frames": 1,
+          "mb": 4.564
+        },
+        "span": 0,
+        "scrubbing": false
+      },
+      "camera": {
+        "x": -27.65,
+        "y": -198.63113322054454,
+        "z": -641.0842436782506,
+        "tx": -27.65,
+        "ty": -198.9483620000396,
+        "tz": -632,
+        "fov": 40
+      },
+      "actor": {
+        "alive": true,
+        "hp": 391
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/guardian-chest-after/zombie.guardian-walk-f20-front.jpg",
+      "id": "guardian",
+      "frame": 20,
+      "view": "front",
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -25.316666666666656,
+          "y": -198.9483620000396,
+          "z": -632
+        },
+        "size": {
+          "x": 2.7973527493270964,
+          "y": 4.21082307604533,
+          "z": 2.737949668013357
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 9016,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "time": {
+        "k": 1,
+        "paused": true,
+        "step": 0,
+        "gameTime": 0.6081333333340787,
+        "frames": 26,
+        "rewind": {
+          "nodes": 118,
+          "capacity": 900,
+          "frames": 21,
+          "mb": 4.564
+        },
+        "span": 0.33333333333333365,
+        "scrubbing": false
+      },
+      "camera": {
+        "x": -16.67384901904574,
+        "y": -198.34399731573237,
+        "z": -632,
+        "tx": -25.316666666666656,
+        "ty": -198.9483620000396,
+        "tz": -632,
+        "fov": 40
+      },
+      "actor": {
+        "alive": true,
+        "hp": 391
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/guardian-chest-after/zombie.guardian-walk-f20-side.jpg",
+      "id": "guardian",
+      "frame": 20,
+      "view": "side",
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -25.316666666666656,
+          "y": -198.9483620000396,
+          "z": -632
+        },
+        "size": {
+          "x": 2.7973527493270964,
+          "y": 4.21082307604533,
+          "z": 2.737949668013357
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 9016,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "time": {
+        "k": 1,
+        "paused": true,
+        "step": 0,
+        "gameTime": 0.6081333333340787,
+        "frames": 26,
+        "rewind": {
+          "nodes": 118,
+          "capacity": 900,
+          "frames": 21,
+          "mb": 4.564
+        },
+        "span": 0.33333333333333365,
+        "scrubbing": false
+      },
+      "camera": {
+        "x": -25.316666666666656,
+        "y": -198.63113322054454,
+        "z": -641.0842436782506,
+        "tx": -25.316666666666656,
+        "ty": -198.9483620000396,
+        "tz": -632,
+        "fov": 40
+      },
+      "actor": {
+        "alive": true,
+        "hp": 391
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/guardian-chest-after/zombie.guardian-walk-f40-front.jpg",
+      "id": "guardian",
+      "frame": 40,
+      "view": "front",
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -22.990418043531214,
+          "y": -198.9483620000396,
+          "z": -631.8577523692246
+        },
+        "size": {
+          "x": 2.9521192327808237,
+          "y": 3.9370803897746782,
+          "z": 2.684540526338651
+        },
+        "yaw": 1.5669133497979866,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 9016,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "time": {
+        "k": 1,
+        "paused": true,
+        "step": 0,
+        "gameTime": 0.9414666666674131,
+        "frames": 46,
+        "rewind": {
+          "nodes": 118,
+          "capacity": 900,
+          "frames": 41,
+          "mb": 4.564
+        },
+        "span": 0.6666666666666681,
+        "scrubbing": false
+      },
+      "camera": {
+        "x": -14.338270074883273,
+        "y": -198.34334031502388,
+        "z": -631.824156108839,
+        "tx": -22.990418043531214,
+        "ty": -198.9483620000396,
+        "tz": -631.8577523692246,
+        "fov": 40
+      },
+      "actor": {
+        "alive": true,
+        "hp": 391
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/guardian-chest-after/zombie.guardian-walk-f40-side.jpg",
+      "id": "guardian",
+      "frame": 40,
+      "view": "side",
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -22.990418043531214,
+          "y": -198.9483620000396,
+          "z": -631.8577523692246
+        },
+        "size": {
+          "x": 2.9521192327808237,
+          "y": 3.9370803897746782,
+          "z": 2.684540526338651
+        },
+        "yaw": 1.5669133497979866,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 9016,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "time": {
+        "k": 1,
+        "paused": true,
+        "step": 0,
+        "gameTime": 0.9414666666674131,
+        "frames": 46,
+        "rewind": {
+          "nodes": 118,
+          "capacity": 900,
+          "frames": 41,
+          "mb": 4.564
+        },
+        "span": 0.6666666666666681,
+        "scrubbing": false
+      },
+      "camera": {
+        "x": -22.955120762303522,
+        "y": -198.63092223156613,
+        "z": -640.9479694519493,
+        "tx": -22.990418043531214,
+        "ty": -198.9483620000396,
+        "tz": -631.8577523692246,
+        "fov": 40
+      },
+      "actor": {
+        "alive": true,
+        "hp": 391
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/guardian-chest-after/zombie.caveguard-walk-f0-front.jpg",
+      "id": "caveguard",
+      "frame": 0,
+      "view": "front",
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -28,
+          "y": -199.0905353271088,
+          "z": -632
+        },
+        "size": {
+          "x": 2.2231730771678393,
+          "y": 3.445643809292278,
+          "z": 2.8083577378945392
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 11878,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "time": {
+        "k": 1,
+        "paused": true,
+        "step": 0,
+        "gameTime": 0.9414666666674131,
+        "frames": 46,
+        "rewind": {
+          "nodes": 0,
+          "capacity": 900,
+          "frames": 0,
+          "mb": 0.007
+        },
+        "span": 0,
+        "scrubbing": false
+      },
+      "camera": {
+        "x": -28,
+        "y": -198.56665462406608,
+        "z": -624.5081569074543,
+        "tx": -28,
+        "ty": -199.0905353271088,
+        "tz": -632,
+        "fov": 40
+      },
+      "actor": {
+        "alive": true,
+        "hp": 976911
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/guardian-chest-after/zombie.caveguard-walk-f0-side.jpg",
+      "id": "caveguard",
+      "frame": 0,
+      "view": "side",
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -28,
+          "y": -199.0905353271088,
+          "z": -632
+        },
+        "size": {
+          "x": 2.2231730771678393,
+          "y": 3.445643809292278,
+          "z": 2.8083577378945392
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 11878,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "time": {
+        "k": 1,
+        "paused": true,
+        "step": 0,
+        "gameTime": 0.9414666666674131,
+        "frames": 46,
+        "rewind": {
+          "nodes": 0,
+          "capacity": 900,
+          "frames": 0,
+          "mb": 0.007
+        },
+        "span": 0,
+        "scrubbing": false
+      },
+      "camera": {
+        "x": -21.02867520578069,
+        "y": -198.84709130091775,
+        "z": -632,
+        "tx": -28,
+        "ty": -199.0905353271088,
+        "tz": -632,
+        "fov": 40
+      },
+      "actor": {
+        "alive": true,
+        "hp": 976911
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/guardian-chest-after/zombie.caveguard-walk-f20-front.jpg",
+      "id": "caveguard",
+      "frame": 20,
+      "view": "front",
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -22.641149051813894,
+          "y": -199.0905353271088,
+          "z": -631.8676005632618
+        },
+        "size": {
+          "x": 2.2047990700716475,
+          "y": 3.5368072407096065,
+          "z": 2.471976195455909
+        },
+        "yaw": 1.5896526064025591,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 11878,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "time": {
+        "k": 1,
+        "paused": true,
+        "step": 0,
+        "gameTime": 1.2748000000007456,
+        "frames": 66,
+        "rewind": {
+          "nodes": 116,
+          "capacity": 900,
+          "frames": 20,
+          "mb": 4.487
+        },
+        "span": 0.31666666666666576,
+        "scrubbing": false
+      },
+      "camera": {
+        "x": -15.476696952786314,
+        "y": -198.58945895396386,
+        "z": -632.0027114889709,
+        "tx": -22.641149051813894,
+        "ty": -199.0905353271088,
+        "tz": -631.8676005632618,
+        "fov": 40
+      },
+      "actor": {
+        "alive": true,
+        "hp": 976911
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/guardian-chest-after/zombie.caveguard-walk-f20-side.jpg",
+      "id": "caveguard",
+      "frame": 20,
+      "view": "side",
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -22.641149051813894,
+          "y": -199.0905353271088,
+          "z": -631.8676005632618
+        },
+        "size": {
+          "x": 2.2047990700716475,
+          "y": 3.5368072407096065,
+          "z": 2.471976195455909
+        },
+        "yaw": 1.5896526064025591,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 11878,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "time": {
+        "k": 1,
+        "paused": true,
+        "step": 0,
+        "gameTime": 1.2748000000007456,
+        "frames": 66,
+        "rewind": {
+          "nodes": 116,
+          "capacity": 900,
+          "frames": 20,
+          "mb": 4.487
+        },
+        "span": 0.31666666666666576,
+        "scrubbing": false
+      },
+      "camera": {
+        "x": -22.779173976122408,
+        "y": -198.8349057805122,
+        "z": -639.1865716493568,
+        "tx": -22.641149051813894,
+        "ty": -199.0905353271088,
+        "tz": -631.8676005632618,
+        "fov": 40
+      },
+      "actor": {
+        "alive": true,
+        "hp": 976911
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/guardian-chest-after/zombie.caveguard-walk-f40-front.jpg",
+      "id": "caveguard",
+      "frame": 40,
+      "view": "front",
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -20.493563660831498,
+          "y": -199.0905353271088,
+          "z": -631.8665518102353
+        },
+        "size": {
+          "x": 2.709550575043597,
+          "y": 3.5321529149731816,
+          "z": 2.314411406210411
+        },
+        "yaw": -1.5874814027396158,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 11878,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "time": {
+        "k": 1,
+        "paused": true,
+        "step": 0,
+        "gameTime": 1.6081333333340777,
+        "frames": 86,
+        "rewind": {
+          "nodes": 116,
+          "capacity": 900,
+          "frames": 40,
+          "mb": 4.487
+        },
+        "span": 0.6499999999999979,
+        "scrubbing": false
+      },
+      "camera": {
+        "x": -27.65461246152129,
+        "y": -198.58971630397744,
+        "z": -631.9860455422145,
+        "tx": -20.493563660831498,
+        "ty": -199.0905353271088,
+        "tz": -631.8665518102353,
+        "fov": 40
+      },
+      "actor": {
+        "alive": true,
+        "hp": 976911
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/guardian-chest-after/zombie.caveguard-walk-f40-side.jpg",
+      "id": "caveguard",
+      "frame": 40,
+      "view": "side",
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -20.493563660831498,
+          "y": -199.0905353271088,
+          "z": -631.8665518102353
+        },
+        "size": {
+          "x": 2.709550575043597,
+          "y": 3.5321529149731816,
+          "z": 2.314411406210411
+        },
+        "yaw": -1.5874814027396158,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 11878,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "time": {
+        "k": 1,
+        "paused": true,
+        "step": 0,
+        "gameTime": 1.6081333333340777,
+        "frames": 86,
+        "rewind": {
+          "nodes": 116,
+          "capacity": 900,
+          "frames": 40,
+          "mb": 4.487
+        },
+        "span": 0.6499999999999979,
+        "scrubbing": false
+      },
+      "camera": {
+        "x": -20.615653460640953,
+        "y": -198.83499752817207,
+        "z": -624.5499252389453,
+        "tx": -20.493563660831498,
+        "ty": -199.0905353271088,
+        "tz": -631.8665518102353,
+        "fov": 40
+      },
+      "actor": {
+        "alive": true,
+        "hp": 976911
+      }
+    }
+  ],
+  "errors": [],
+  "pageErrors": []
+}

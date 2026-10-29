@@ -1,7 +1,7 @@
 # AGENTS.md — how the Grave Shift crew works
 
-Every agent reads this first, every session: Cursor, ChatGPT, Grokbot, Claude and
-Antigravity. Jerry has the final say. Claude leads.
+Every agent reads this first, every session: Cursor, ChatGPT, Grokbot, Claude,
+Antigravity and Muse. Jerry has the final say. Claude leads.
 
 Jerry moves agents between models, so no model is written into this file. The model each
 agent runs on is on its card (`crew/status/<you>.md`) and on the panel, and every check-in
@@ -84,7 +84,7 @@ in `tools/cdp.mjs`, even with one worker. That is his environment, not a failing
 He writes "not run" and whoever commits runs the suite for him at commit time.
 
 Agent names for the commands: `claude`, `cursor`, `chatgpt`, `grokbot`,
-`antigravity`. Task ids: `CL-`, `CU-`, `GP-`, `GB-`, `AG-`.
+`antigravity`, `muse`. Task ids: `CL-`, `CU-`, `GP-`, `GB-`, `AG-`, `MU-`.
 
 ## Who owns what
 
@@ -97,6 +97,7 @@ The current split (Jerry, 2026-10-15) is on the board under **Who owns what**; i
 | ChatGPT | Every zombie's look; the marine's fitted helpers, waist and balaclava; what the player reads and decides | `studio/zombie-*.js`, `combat/demon-visual.js`, `combat/zombie-joins.js`, `ui/*`, `game/*` |
 | Grokbot | Every weapon (sole owner); combat: the director, builds' behaviour, scripted deaths | `studio/weapon-*.js`, `combat/*` (not the zombie looks) |
 | Antigravity | The look of buildables and props; eyes on Jerry's GPU (screenshots and reports) | `index.html` (build meshes), `qa/*` |
+| Muse | Claude's assistant (Jerry, 2026-10-29): the MU-n tasks Claude writes, in Claude's areas; Node-only checks; never starts the game, never uses git | only the files its task names |
 
 A file not in this table: ask Claude before you start. Until the split lands, "files" means the matching sections of `index.html`. Several agents
 can work in it at once, one per part: name your part in `--touch`, for example

@@ -1,0 +1,60 @@
+{
+ "shots": [
+  {
+   "cam": {
+    "x": -178.97,
+    "y": 5.42,
+    "z": -15.54,
+    "tx": -186.99,
+    "ty": 4.92,
+    "tz": -8.7,
+    "fov": 55
+   },
+   "time": "noon",
+   "caption": "East Cave mouth: front-left oblique (its local +x flank)",
+   "out": "review/sweep/cave-4-cheek/gpu-cave4-oblique.png"
+  },
+  {
+   "cam": {
+    "x": -184.74,
+    "y": 4.92,
+    "z": -13.62,
+    "tx": -187.15,
+    "ty": 4.92,
+    "tz": -9.69,
+    "fov": 55
+   },
+   "time": "noon",
+   "caption": "East Cave mouth: +x flank close",
+   "out": "review/sweep/cave-4-cheek/gpu-cave4-side-close.png"
+  },
+  {
+   "cam": {
+    "x": -178.97,
+    "y": 5.42,
+    "z": -15.54,
+    "tx": -186.99,
+    "ty": 4.92,
+    "tz": -8.7,
+    "fov": 55
+   },
+   "time": "night",
+   "caption": "East Cave mouth: front-left oblique (its local +x flank) (night)",
+   "out": "review/sweep/cave-4-cheek/gpu-cave4-oblique-night.png"
+  },
+  {
+   "cam": {
+    "x": -184.74,
+    "y": 4.92,
+    "z": -13.62,
+    "tx": -187.15,
+    "ty": 4.92,
+    "tz": -9.69,
+    "fov": 55
+   },
+   "time": "night",
+   "caption": "East Cave mouth: +x flank close (night)",
+   "out": "review/sweep/cave-4-cheek/gpu-cave4-side-close-night.png"
+  }
+ ]
+}

@@ -1,0 +1,13 @@
+Game-test request 1632a6a3-28f8-4504-8822-78e2cdc5014d queued at position 2. Waiting...
+GRANT grokbot GB-245: starting one game-test command
+camera: camera: loading the game..............................
+camera: ready in 30 s on port 17180: match, ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11), 1600x900
+help: ok
+setup: pistol
+m4: warm-up done
+m4 {"up":0.02,"in":0.04,"side":0,"tip":0,"turn":0,"cant":0.4,"hip":0}       u10 R 26198 L  8164 | u16 R 29277 L 16217 | u25 R 29511 L     0 | u40 R 30623 L     0 | u48 R 31796 L 15945 | u55 R 33173 L 27831 | u62 R 32512 L 31333 | u70 R 34046 L 46488 | u85 R 35670 L 19022
+ak: warm-up done
+ak {"up":0.02,"in":0.04,"side":0,"tip":0,"turn":0,"cant":0.4,"hip":0}       u10 R 22706 L 28043 | u16 R 27791 L 24146 | u25 R 28303 L     0 | u40 R 28519 L     0 | u48 R 28464 L 27120 | u55 R 28170 L 39000 | u62 R 20371 L 32630 | u70 R 19709 L 46223 | u85 R 18975 L 24464
+aa12: warm-up done
+aa12 {"up":0.02,"in":0.04,"side":0,"tip":0,"turn":0,"cant":0.4,"hip":0}       u10 R 10753 L     0 | u16 R 17496 L     0 | u25 R 16645 L     0 | u40 R 16495 L     0 | u48 R 16215 L     0 | u55 R 18492 L     0 | u62 R 17990 L   380 | u70 R 17873 L  3401 | u85 R 17626 L 10270
+camera stop: camera: stopped

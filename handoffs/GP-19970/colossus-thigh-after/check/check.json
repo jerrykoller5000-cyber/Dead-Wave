@@ -1,0 +1,20 @@
+{
+ "at": "2026-10-29T03:57:05.892Z",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "results": [
+  {
+   "id": "zombie.colossus",
+   "variant": null,
+   "mode": "statue",
+   "ok": true,
+   "ms": 240,
+   "tris": 6976,
+   "size": [
+    3.173,
+    5.041,
+    2.854
+   ],
+   "error": null
+  }
+ ]
+}

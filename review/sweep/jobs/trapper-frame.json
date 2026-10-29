@@ -1,0 +1,9 @@
+{
+ "shots": [
+  {"cam": {"x": -35.07, "y": 1.76, "z": 42.49, "tx": -32.71, "ty": 1.6, "tz": 46.45, "fov": 55}, "time": "noon", "caption": "Trapper camp: the curing frame against the cabin's side, from across the fire", "out": "review/sweep/trapper-frame/from-fire.png"},
+  {"cam": {"x": -34.15, "y": 2.0, "z": 44.09, "tx": -32.71, "ty": 1.5, "tz": 46.45, "fov": 50}, "time": "noon", "caption": "Trapper camp: the curing frame close", "out": "review/sweep/trapper-frame/close.png"},
+  {"cam": {"x": -38.06, "y": 2.11, "z": 46.42, "tx": -33.49, "ty": 1.1, "tz": 43.81, "fov": 60}, "time": "noon", "caption": "Trapper camp: from where he opens the cache, toward the fire (the frame's old spot, 0.78 m off, is clear)", "out": "review/sweep/trapper-frame/from-cache.png"}
+ ],
+ "cols": 3,
+ "out": "review/sweep/trapper-frame/sheet.jpg"
+}

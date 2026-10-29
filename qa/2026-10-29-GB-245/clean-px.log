@@ -1,0 +1,25 @@
+Game-test request ef7e8b35-6858-4583-943b-45828ac4873f queued at position 3. Waiting...
+GRANT grokbot GB-245: starting one game-test command
+camera: camera: loading the game...............................
+camera: ready in 31 s on port 16149: match, ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11), 1600x900
+help: ok
+setup: pistol
+m4: warm-up done
+m4 {"up":0.02,"in":0.04,"side":0,"tip":0,"turn":0,"cant":0.4,"hip":0}       u10 R 11910 L     0 | u25 R 13710 L     0 | u40 R 13774 L     0 | u55 R 13890 L     0 | u70 R 14038 L     0 | u85 R 14154 L 12300
+ak: warm-up done
+ak {"up":0.02,"in":0.04,"side":0,"tip":0,"turn":0,"cant":0.4,"hip":0}       u10 R 13643 L     0 | u25 R 22762 L     0 | u40 R 22841 L     0 | u55 R 19114 L     0 | u70 R 16936 L     0 | u85 R 16854 L 12899
+aa12: warm-up done
+aa12 {"up":0.02,"in":0.04,"side":0,"tip":0,"turn":0,"cant":0.4,"hip":0}       u10 R  2601 L     0 | u25 R  7009 L     0 | u40 R  7035 L     0 | u55 R  6762 L     0 | u70 R  7025 L     0 | u85 R  7055 L  9752
+shotgun: warm-up done
+shotgun {"up":0.02,"in":0.04,"side":0,"tip":0,"turn":0,"cant":0.4,"hip":0}       u10 R 10159 L 14304 | u25 R  8363 L     0 | u40 R  8307 L     0 | u55 R  8187 L  9588 | u70 R  8099 L  9463 | u85 R  8048 L  6071
+sniper: warm-up done
+sniper {"up":0.02,"in":0.04,"side":0,"tip":0,"turn":0,"cant":0.4,"hip":0}       u10 R 10208 L   958 | u25 R 12839 L     0 | u40 R 12926 L     0 | u55 R 12687 L   565 | u70 R 12672 L 66170 | u85 R  2043 L 62517
+launcher: warm-up done
+launcher {"up":0.02,"in":0.04,"side":0,"tip":0,"turn":0,"cant":0.4,"hip":0}       u10 R  8181 L 11884 | u25 R 10773 L     0 | u40 R 10636 L     0 | u55 R  9801 L    55 | u70 R  9848 L   129 | u85 R 10472 L  7158
+pistol: warm-up done
+pistol {"up":0.02,"in":0.04,"side":0,"tip":0,"turn":0,"cant":0.4,"hip":0}       u10 R 34778 L     0 | u25 R 38878 L     0 | u40 R 39078 L     0 | u55 R 39316 L     0 | u70 R 35873 L 31366 | u85 R 13513 L 54872
+revolver: warm-up done
+revolver {"up":0.02,"in":0.04,"side":0,"tip":0,"turn":0,"cant":0.4,"hip":0}       u10 R 31217 L 16228 | u25 R 36683 L     0 | u40 R 36420 L     0 | u55 R 29858 L 15748 | u70 R 29763 L 15809 | u85 R 34273 L 15268
+uzi: warm-up done
+uzi {"up":0.02,"in":0.04,"side":0,"tip":0,"turn":0,"cant":0.4,"hip":0}       u10 R  2332 L     0 | u25 R 58110 L     0 | u40 R 55116 L     0 | u55 R 50988 L     0 | u70 R 40839 L     0 | u85 R 40744 L 10684
+camera stop: camera: stopped

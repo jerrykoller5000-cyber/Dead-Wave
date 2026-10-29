@@ -1,0 +1,128 @@
+{
+ "shots": [
+  {
+   "target": "animal.rabbit",
+   "view": "three",
+   "out": "review/principles/claude/animals/animal.rabbit-three.png"
+  },
+  {
+   "target": "animal.rabbit",
+   "view": "front",
+   "out": "review/principles/claude/animals/animal.rabbit-front.png"
+  },
+  {
+   "target": "animal.killer-rabbit",
+   "view": "three",
+   "out": "review/principles/claude/animals/animal.killer-rabbit-three.png"
+  },
+  {
+   "target": "animal.killer-rabbit",
+   "view": "front",
+   "out": "review/principles/claude/animals/animal.killer-rabbit-front.png"
+  },
+  {
+   "target": "animal.bird",
+   "view": "three",
+   "out": "review/principles/claude/animals/animal.bird-three.png"
+  },
+  {
+   "target": "animal.bird",
+   "view": "front",
+   "out": "review/principles/claude/animals/animal.bird-front.png"
+  },
+  {
+   "target": "animal.bee",
+   "view": "three",
+   "out": "review/principles/claude/animals/animal.bee-three.png"
+  },
+  {
+   "target": "animal.bee",
+   "view": "front",
+   "out": "review/principles/claude/animals/animal.bee-front.png"
+  },
+  {
+   "target": "animal.butterfly",
+   "view": "three",
+   "out": "review/principles/claude/animals/animal.butterfly-three.png"
+  },
+  {
+   "target": "animal.butterfly",
+   "view": "front",
+   "out": "review/principles/claude/animals/animal.butterfly-front.png"
+  },
+  {
+   "target": "animal.frog",
+   "view": "three",
+   "out": "review/principles/claude/animals/animal.frog-three.png"
+  },
+  {
+   "target": "animal.frog",
+   "view": "front",
+   "out": "review/principles/claude/animals/animal.frog-front.png"
+  },
+  {
+   "target": "animal.squirrel",
+   "view": "three",
+   "out": "review/principles/claude/animals/animal.squirrel-three.png"
+  },
+  {
+   "target": "animal.squirrel",
+   "view": "front",
+   "out": "review/principles/claude/animals/animal.squirrel-front.png"
+  },
+  {
+   "target": "animal.turtle",
+   "view": "three",
+   "out": "review/principles/claude/animals/animal.turtle-three.png"
+  },
+  {
+   "target": "animal.turtle",
+   "view": "front",
+   "out": "review/principles/claude/animals/animal.turtle-front.png"
+  },
+  {
+   "target": "animal.fish",
+   "view": "three",
+   "out": "review/principles/claude/animals/animal.fish-three.png"
+  },
+  {
+   "target": "animal.fish",
+   "view": "front",
+   "out": "review/principles/claude/animals/animal.fish-front.png"
+  },
+  {
+   "target": "animal.lily-pad",
+   "view": "three",
+   "out": "review/principles/claude/animals/animal.lily-pad-three.png"
+  },
+  {
+   "target": "animal.lily-pad",
+   "view": "front",
+   "out": "review/principles/claude/animals/animal.lily-pad-front.png"
+  },
+  {
+   "target": "animal.nest",
+   "view": "three",
+   "out": "review/principles/claude/animals/animal.nest-three.png"
+  },
+  {
+   "target": "animal.nest",
+   "view": "front",
+   "out": "review/principles/claude/animals/animal.nest-front.png"
+  },
+  {
+   "target": "animal.burrow",
+   "view": "three",
+   "out": "review/principles/claude/animals/animal.burrow-three.png"
+  },
+  {
+   "target": "animal.burrow",
+   "view": "front",
+   "out": "review/principles/claude/animals/animal.burrow-front.png"
+  }
+ ],
+ "out": "review/principles/claude/animals/",
+ "sheet": true,
+ "cols": 4,
+ "tile": 480
+}

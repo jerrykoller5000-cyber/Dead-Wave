@@ -1,0 +1,1681 @@
+{
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "frames": [
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/bomber/bomber-idle-f00.jpg",
+      "phase": "idle",
+      "n": 0,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0,
+        "hipsY": 0.8981499993801118,
+        "armL": -0.24,
+        "armR": -0.24
+      },
+      "subject": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999991406263987,
+          "y": -198.96830233510792,
+          "z": -631.9972500134277
+        },
+        "size": {
+          "x": 1.8559550221410106,
+          "y": 2.0610888035992048,
+          "z": 1.6959523164350685
+        },
+        "yaw": 0.003125,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6328,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -24.01749857474872,
+        "y": -197.8549175274274,
+        "z": -625.1488834113132,
+        "tx": -27.999991406263987,
+        "ty": -198.96830233510792,
+        "tz": -631.9972500134277,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/bomber/bomber-attack-f01.jpg",
+      "phase": "attack",
+      "n": 1,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.20333333333333334,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.007575757575757569,
+        "hipsY": 0.8855416150887142,
+        "armL": -0.24164533245343972,
+        "armR": -0.24164533245343972
+      },
+      "subject": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99998461617546,
+          "y": -198.96830233510792,
+          "z": -631.9960278100668
+        },
+        "size": {
+          "x": 1.8578395003588746,
+          "y": 2.0563459959508634,
+          "z": 1.7011629293215265
+        },
+        "yaw": 0.005555555555555556,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6328,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -24.000858229040087,
+        "y": -197.8549175274274,
+        "z": -625.1573610971948,
+        "tx": -27.99998461617546,
+        "ty": -198.96830233510792,
+        "tz": -631.9960278100668,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/bomber/bomber-attack-f02.jpg",
+      "phase": "attack",
+      "n": 2,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.18666666666666668,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.01515151515151515,
+        "hipsY": 0.8741280882527488,
+        "armL": -0.24308063866638246,
+        "armR": -0.24308063866638246
+      },
+      "subject": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999971354382136,
+          "y": -198.96830233510792,
+          "z": -631.9945000898493
+        },
+        "size": {
+          "x": 1.86083470481897,
+          "y": 2.0478407818823143,
+          "z": 1.7069328553516243
+        },
+        "yaw": 0.008680555555555556,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6328,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.9794936955207,
+        "y": -197.8549175274274,
+        "z": -625.1683640184966,
+        "tx": -27.999971354382136,
+        "ty": -198.96830233510792,
+        "tz": -631.9945000898493,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/bomber/bomber-attack-f03.jpg",
+      "phase": "attack",
+      "n": 3,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.17,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.02272727272727272,
+        "hipsY": 0.8637980140686532,
+        "armL": -0.24431244346516875,
+        "armR": -0.24431244346516875
+      },
+      "subject": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999948438312252,
+          "y": -198.96830233510792,
+          "z": -631.9926668997433
+        },
+        "size": {
+          "x": 1.8649108749138144,
+          "y": 2.0394020476535957,
+          "z": 1.7133404828323364
+        },
+        "yaw": 0.012499999999999999,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6328,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.953428120988253,
+        "y": -197.8549175274274,
+        "z": -625.1819365724208,
+        "tx": -27.999948438312252,
+        "ty": -198.96830233510792,
+        "tz": -631.9926668997433,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/bomber/bomber-attack-f04.jpg",
+      "phase": "attack",
+      "n": 4,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.15333333333333335,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.0303030303030303,
+        "hipsY": 0.8544513233419779,
+        "armL": -0.24534763507228552,
+        "armR": -0.24534763507228552
+      },
+      "subject": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999912049250014,
+          "y": -198.96830233510792,
+          "z": -631.9905283204216
+        },
+        "size": {
+          "x": 1.8700365113180055,
+          "y": 2.0313754008156195,
+          "z": 1.7204506937332553
+        },
+        "yaw": 0.017013888888888887,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6328,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.922690180620897,
+        "y": -197.8549175274274,
+        "z": -625.1981328590252,
+        "tx": -27.999912049250014,
+        "ty": -198.96830233510792,
+        "tz": -631.9905283204216,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/bomber/bomber-attack-f05.jpg",
+      "phase": "attack",
+      "n": 5,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.1366666666666667,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.03787878787878787,
+        "hipsY": 0.8459982989689497,
+        "armL": -0.246193272014753,
+        "armR": -0.246193272014753
+      },
+      "subject": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999857732733112,
+          "y": -198.96830233510792,
+          "z": -631.9880844795189
+        },
+        "size": {
+          "x": 1.8761783827076357,
+          "y": 2.023860860684863,
+          "z": 1.7283162836749852
+        },
+        "yaw": 0.02222222222222222,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6328,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.88731426508887,
+        "y": -197.8549175274274,
+        "z": -625.2170165802313,
+        "tx": -27.999857732733112,
+        "ty": -198.96830233510792,
+        "tz": -631.9880844795189,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/bomber/bomber-attack-f06.jpg",
+      "phase": "attack",
+      "n": 6,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.12000000000000002,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.04545454545454545,
+        "hipsY": 0.838358665788964,
+        "armL": -0.24685643424392284,
+        "armR": -0.24685643424392284
+      },
+      "subject": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999780399179393,
+          "y": -198.96830233510792,
+          "z": -631.9853355670937
+        },
+        "size": {
+          "x": 1.8833014996878745,
+          "y": 2.0168839902361526,
+          "z": 1.736979183875519
+        },
+        "yaw": 0.028124999999999997,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6328,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.847340700533962,
+        "y": -197.8549175274274,
+        "z": -625.2386609181174,
+        "tx": -27.999780399179393,
+        "ty": -198.96830233510792,
+        "tz": -631.9853355670937,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/bomber/bomber-attack-f07.jpg",
+      "phase": "attack",
+      "n": 7,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.10333333333333336,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.05303030303030302,
+        "hipsY": 0.8314607493518403,
+        "armL": -0.24734411149700938,
+        "armR": -0.24734411149700938
+      },
+      "subject": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999674324817832,
+          "y": -198.96830233510792,
+          "z": -631.982281853292
+        },
+        "size": {
+          "x": 1.8913690568123833,
+          "y": 2.0104404238071822,
+          "z": 1.7464714998874342
+        },
+        "yaw": 0.03472222222222222,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6328,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.802816000813877,
+        "y": -197.8549175274274,
+        "z": -625.2631483914336,
+        "tx": -27.999674324817832,
+        "ty": -198.96830233510792,
+        "tz": -631.982281853292,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/bomber/bomber-attack-f08.jpg",
+      "phase": "attack",
+      "n": 8,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.0866666666666667,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.0606060606060606,
+        "hipsY": 0.8252406985966984,
+        "armL": -0.24766312295187537,
+        "armR": -0.24766312295187537
+      },
+      "subject": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999533153009587,
+          "y": -198.96830233510792,
+          "z": -631.9789237082055
+        },
+        "size": {
+          "x": 1.900342351436656,
+          "y": 2.004512360586972,
+          "z": 1.7568163835202313
+        },
+        "yaw": 0.042013888888888885,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6328,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.753793151296946,
+        "y": -197.8549175274274,
+        "z": -625.290570689122,
+        "tx": -27.999533153009587,
+        "ty": -198.96830233510792,
+        "tz": -631.9789237082055,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/bomber/bomber-attack-f09.jpg",
+      "phase": "attack",
+      "n": 9,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.07000000000000003,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.06818181818181816,
+        "hipsY": 0.819641767068996,
+        "armL": -0.24782006311537638,
+        "armR": -0.24782006311537638
+      },
+      "subject": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999349896055595,
+          "y": -198.96830233510792,
+          "z": -631.9752616239174
+        },
+        "size": {
+          "x": 1.910180685613863,
+          "y": 1.9990759205091422,
+          "z": 1.7680287548522529
+        },
+        "yaw": 0.049999999999999996,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6328,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.700331923373504,
+        "y": -197.8549175274274,
+        "z": -625.321028479476,
+        "tx": -27.999349896055595,
+        "ty": -198.96830233510792,
+        "tz": -631.9752616239174,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/bomber/bomber-attack-f10.jpg",
+      "phase": "attack",
+      "n": 10,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.05333333333333337,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.07575757575757575,
+        "hipsY": 0.8146136470791974,
+        "armL": -0.2478212696551136,
+        "armR": -0.2478212696551136
+      },
+      "subject": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999116937597687,
+          "y": -198.96830233510792,
+          "z": -631.9712962387231
+        },
+        "size": {
+          "x": 1.920841255546545,
+          "y": 1.994104798462189,
+          "z": 1.7801158910532422
+        },
+        "yaw": 0.05868055555555555,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6328,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.642499218722865,
+        "y": -197.8549175274274,
+        "z": -625.3546311934293,
+        "tx": -27.999116937597687,
+        "ty": -198.96830233510792,
+        "tz": -631.9712962387231,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/bomber/bomber-attack-f12.jpg",
+      "phase": "attack",
+      "n": 12,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.020000000000000042,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.0909090909090909,
+        "hipsY": 0.806097134764266,
+        "armL": -0.24738048048817013,
+        "armR": -0.24738048048817013
+      },
+      "subject": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.998468326953514,
+          "y": -198.96830233510792,
+          "z": -631.9624590102889
+        },
+        "size": {
+          "x": 1.944446634402027,
+          "y": 1.9915989282198439,
+          "z": 1.806908080993594
+        },
+        "yaw": 0.07812499999999997,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6328,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.514024902361612,
+        "y": -197.8549175274274,
+        "z": -625.4317514344085,
+        "tx": -27.998468326953514,
+        "ty": -198.96830233510792,
+        "tz": -631.9624590102889,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/bomber/bomber-attack-f14.jpg",
+      "phase": "attack",
+      "n": 14,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.28,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.1,
+        "hipsY": 0.7993949631797985,
+        "armL": -0.24638615494946692,
+        "armR": -0.24638615494946692
+      },
+      "subject": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.997513957375627,
+          "y": -198.96830233510792,
+          "z": -631.9524211093303
+        },
+        "size": {
+          "x": 1.9730478549042303,
+          "y": 1.9915591207621048,
+          "z": 1.8371138094079242
+        },
+        "yaw": 0.10034722222222217,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6328,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.369062866480178,
+        "y": -197.8549175274274,
+        "z": -625.5229720840082,
+        "tx": -27.997513957375627,
+        "ty": -198.96830233510792,
+        "tz": -631.9524211093303,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/bomber/bomber-attack-f16.jpg",
+      "phase": "attack",
+      "n": 16,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.2466666666666667,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.13083521591645728,
+        "hipsY": 0.7942782021657308,
+        "armL": -0.24488007324644293,
+        "armR": -0.24488007324644293
+      },
+      "subject": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.996170705588536,
+          "y": -198.96830233510792,
+          "z": -631.9411958703148
+        },
+        "size": {
+          "x": 2.005528075499768,
+          "y": 1.992904483002377,
+          "z": 1.8705524826610826
+        },
+        "yaw": 0.12534722222222217,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6328,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.20844644752826,
+        "y": -197.8549175274274,
+        "z": -625.6294551675603,
+        "tx": -27.996170705588536,
+        "ty": -198.96830233510792,
+        "tz": -631.9411958703148,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/bomber/bomber-attack-f18.jpg",
+      "phase": "attack",
+      "n": 18,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.21333333333333337,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.23134685680847852,
+        "hipsY": 0.7905699229105891,
+        "armL": -0.24290155444931028,
+        "armR": -0.24290155444931028
+      },
+      "subject": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.994345949434976,
+          "y": -198.96830233510792,
+          "z": -631.9288020196624
+        },
+        "size": {
+          "x": 2.0410567250547125,
+          "y": 1.9955930345149113,
+          "z": 1.906946159913332
+        },
+        "yaw": 0.15312499999999996,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6328,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.033165104030523,
+        "y": -197.8549175274274,
+        "z": -625.7524714837197,
+        "tx": -27.994345949434976,
+        "ty": -198.96830233510792,
+        "tz": -631.9288020196624,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/bomber/bomber-attack-f20.jpg",
+      "phase": "attack",
+      "n": 20,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.18000000000000005,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.27823941877010794,
+        "hipsY": 0.7881309935068208,
+        "armL": -0.24048899960981537,
+        "armR": -0.24048899960981537
+      },
+      "subject": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.991937933092892,
+          "y": -198.96830233510792,
+          "z": -631.915264943768
+        },
+        "size": {
+          "x": 2.0792097526536466,
+          "y": 1.9993247404036651,
+          "z": 1.945921158323813
+        },
+        "yaw": 0.1836805555555556,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6328,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -22.844381044993977,
+        "y": -197.8549175274274,
+        "z": -625.8933854735517,
+        "tx": -27.991937933092892,
+        "ty": -198.96830233510792,
+        "tz": -631.915264943768,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/bomber/bomber-attack-f22.jpg",
+      "phase": "attack",
+      "n": 22,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.14666666666666672,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.2606446496203773,
+        "hipsY": 0.7868464875874521,
+        "armL": -0.2376816839448956,
+        "armR": -0.2376816839448956
+      },
+      "subject": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.988836261001385,
+          "y": -198.96830233510792,
+          "z": -631.9006180719831
+        },
+        "size": {
+          "x": 2.1194893011194473,
+          "y": 2.0038417017101153,
+          "z": 1.9870084707617934
+        },
+        "yaw": 0.217013888888889,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6328,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -22.643446716303536,
+        "y": -197.8549175274274,
+        "z": -626.0536372369314,
+        "tx": -27.988836261001385,
+        "ty": -198.96830233510792,
+        "tz": -631.9006180719831,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/bomber/bomber-attack-f24.jpg",
+      "phase": "attack",
+      "n": 24,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.1133333333333334,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.182640475157874,
+        "hipsY": 0.7866124353606355,
+        "armL": -0.23452169268547354,
+        "armR": -0.23452169268547354
+      },
+      "subject": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.984922546614737,
+          "y": -198.96830233510792,
+          "z": -631.8849043622141
+        },
+        "size": {
+          "x": 2.1612943741267756,
+          "y": 2.008737210878081,
+          "z": 2.029644183514847
+        },
+        "yaw": 0.25312500000000016,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6328,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -22.431922760996454,
+        "y": -197.8549175274274,
+        "z": -626.2347213872168,
+        "tx": -27.984922546614737,
+        "ty": -198.96830233510792,
+        "tz": -631.8849043622141,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/bomber/bomber-attack-f26.jpg",
+      "phase": "attack",
+      "n": 26,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.08000000000000007,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.06230586150776819,
+        "hipsY": 0.7873140409267371,
+        "armL": -0.23106632684508036,
+        "armR": -0.23106632684508036
+      },
+      "subject": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.980077093544903,
+          "y": -198.96830233510792,
+          "z": -631.8681761253389
+        },
+        "size": {
+          "x": 2.2032691735347925,
+          "y": 2.0129369570772155,
+          "z": 2.0726898859248877
+        },
+        "yaw": 0.2913738748613809,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6328,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -22.215078315964494,
+        "y": -197.8549175274274,
+        "z": -626.4344698980459,
+        "tx": -27.980077093544903,
+        "ty": -198.96830233510792,
+        "tz": -631.8681761253389,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/bomber/bomber-attack-f30.jpg",
+      "phase": "attack",
+      "n": 30,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.7909096820762181,
+        "armL": -0.22359918695745898,
+        "armR": -0.22359918695745898
+      },
+      "subject": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.96724991641435,
+          "y": -198.96830233510792,
+          "z": -631.8318849735887
+        },
+        "size": {
+          "x": 2.279095637123696,
+          "y": 2.0071289009357542,
+          "z": 2.184976263361591
+        },
+        "yaw": 0.3674128530490696,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6328,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -21.80613408083906,
+        "y": -197.8549175274274,
+        "z": -626.8518221295425,
+        "tx": -27.96724991641435,
+        "ty": -198.96830233510792,
+        "tz": -631.8318849735887,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/bomber/bomber-death-f00.jpg",
+      "phase": "death",
+      "n": 0,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": null,
+        "corpseRZ": null,
+        "hipsZ": null,
+        "hipsY": null,
+        "armL": null,
+        "armR": null
+      },
+      "subject": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.96724991641435,
+          "y": -198.96830233510792,
+          "z": -631.8318849735887
+        },
+        "size": {
+          "x": 1.7547479676326105,
+          "y": 2.0489079952239706,
+          "z": 1.8434808413657038
+        },
+        "yaw": 0.3674128530490696,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6328,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -21.80613408083906,
+        "y": -197.8549175274274,
+        "z": -626.8518221295425,
+        "tx": -27.96724991641435,
+        "ty": -198.96830233510792,
+        "tz": -631.8318849735887,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/bomber/bomber-death-f01.jpg",
+      "phase": "death",
+      "n": 1,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": null,
+        "corpseRZ": null,
+        "hipsZ": null,
+        "hipsY": null,
+        "armL": null,
+        "armR": null
+      },
+      "subject": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.96724991641435,
+          "y": -198.96830233510792,
+          "z": -631.8318849735887
+        },
+        "size": {
+          "x": 1.7547479676326105,
+          "y": 2.0489079952239706,
+          "z": 1.8434808413657038
+        },
+        "yaw": 0.3674128530490696,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6328,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -21.80613408083906,
+        "y": -197.8549175274274,
+        "z": -626.8518221295425,
+        "tx": -27.96724991641435,
+        "ty": -198.96830233510792,
+        "tz": -631.8318849735887,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/bomber/bomber-death-f02.jpg",
+      "phase": "death",
+      "n": 2,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": null,
+        "corpseRZ": null,
+        "hipsZ": null,
+        "hipsY": null,
+        "armL": null,
+        "armR": null
+      },
+      "subject": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.96724991641435,
+          "y": -198.96830233510792,
+          "z": -631.8318849735887
+        },
+        "size": {
+          "x": 1.7547479676326105,
+          "y": 2.0489079952239706,
+          "z": 1.8434808413657038
+        },
+        "yaw": 0.3674128530490696,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6328,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -21.80613408083906,
+        "y": -197.8549175274274,
+        "z": -626.8518221295425,
+        "tx": -27.96724991641435,
+        "ty": -198.96830233510792,
+        "tz": -631.8318849735887,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/bomber/bomber-death-f03.jpg",
+      "phase": "death",
+      "n": 3,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": null,
+        "corpseRZ": null,
+        "hipsZ": null,
+        "hipsY": null,
+        "armL": null,
+        "armR": null
+      },
+      "subject": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.96724991641435,
+          "y": -198.96830233510792,
+          "z": -631.8318849735887
+        },
+        "size": {
+          "x": 1.7547479676326105,
+          "y": 2.0489079952239706,
+          "z": 1.8434808413657038
+        },
+        "yaw": 0.3674128530490696,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6328,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -21.80613408083906,
+        "y": -197.8549175274274,
+        "z": -626.8518221295425,
+        "tx": -27.96724991641435,
+        "ty": -198.96830233510792,
+        "tz": -631.8318849735887,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/bomber/bomber-death-f04.jpg",
+      "phase": "death",
+      "n": 4,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": null,
+        "corpseRZ": null,
+        "hipsZ": null,
+        "hipsY": null,
+        "armL": null,
+        "armR": null
+      },
+      "subject": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.96724991641435,
+          "y": -198.96830233510792,
+          "z": -631.8318849735887
+        },
+        "size": {
+          "x": 1.7547479676326105,
+          "y": 2.0489079952239706,
+          "z": 1.8434808413657038
+        },
+        "yaw": 0.3674128530490696,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6328,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -21.80613408083906,
+        "y": -197.8549175274274,
+        "z": -626.8518221295425,
+        "tx": -27.96724991641435,
+        "ty": -198.96830233510792,
+        "tz": -631.8318849735887,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/bomber/bomber-death-f06.jpg",
+      "phase": "death",
+      "n": 6,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": null,
+        "corpseRZ": null,
+        "hipsZ": null,
+        "hipsY": null,
+        "armL": null,
+        "armR": null
+      },
+      "subject": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.96724991641435,
+          "y": -198.96830233510792,
+          "z": -631.8318849735887
+        },
+        "size": {
+          "x": 1.7547479676326105,
+          "y": 2.0489079952239706,
+          "z": 1.8434808413657038
+        },
+        "yaw": 0.3674128530490696,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6328,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -21.80613408083906,
+        "y": -197.8549175274274,
+        "z": -626.8518221295425,
+        "tx": -27.96724991641435,
+        "ty": -198.96830233510792,
+        "tz": -631.8318849735887,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/bomber/bomber-death-f08.jpg",
+      "phase": "death",
+      "n": 8,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": null,
+        "corpseRZ": null,
+        "hipsZ": null,
+        "hipsY": null,
+        "armL": null,
+        "armR": null
+      },
+      "subject": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.96724991641435,
+          "y": -198.96830233510792,
+          "z": -631.8318849735887
+        },
+        "size": {
+          "x": 1.7547479676326105,
+          "y": 2.0489079952239706,
+          "z": 1.8434808413657038
+        },
+        "yaw": 0.3674128530490696,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6328,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -21.80613408083906,
+        "y": -197.8549175274274,
+        "z": -626.8518221295425,
+        "tx": -27.96724991641435,
+        "ty": -198.96830233510792,
+        "tz": -631.8318849735887,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/bomber/bomber-death-f12.jpg",
+      "phase": "death",
+      "n": 12,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": null,
+        "corpseRZ": null,
+        "hipsZ": null,
+        "hipsY": null,
+        "armL": null,
+        "armR": null
+      },
+      "subject": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.96724991641435,
+          "y": -198.96830233510792,
+          "z": -631.8318849735887
+        },
+        "size": {
+          "x": 1.7547479676326105,
+          "y": 2.0489079952239706,
+          "z": 1.8434808413657038
+        },
+        "yaw": 0.3674128530490696,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6328,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -21.80613408083906,
+        "y": -197.8549175274274,
+        "z": -626.8518221295425,
+        "tx": -27.96724991641435,
+        "ty": -198.96830233510792,
+        "tz": -631.8318849735887,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/bomber/bomber-death-f20.jpg",
+      "phase": "death",
+      "n": 20,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": null,
+        "corpseRZ": null,
+        "hipsZ": null,
+        "hipsY": null,
+        "armL": null,
+        "armR": null
+      },
+      "subject": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.96724991641435,
+          "y": -198.96830233510792,
+          "z": -631.8318849735887
+        },
+        "size": {
+          "x": 1.7547479676326105,
+          "y": 2.0489079952239706,
+          "z": 1.8434808413657038
+        },
+        "yaw": 0.3674128530490696,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6328,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -21.80613408083906,
+        "y": -197.8549175274274,
+        "z": -626.8518221295425,
+        "tx": -27.96724991641435,
+        "ty": -198.96830233510792,
+        "tz": -631.8318849735887,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/bomber/bomber-death-f40.jpg",
+      "phase": "death",
+      "n": 40,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": null,
+        "corpseRZ": null,
+        "hipsZ": null,
+        "hipsY": null,
+        "armL": null,
+        "armR": null
+      },
+      "subject": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.96724991641435,
+          "y": -198.96830233510792,
+          "z": -631.8318849735887
+        },
+        "size": {
+          "x": 1.7547479676326105,
+          "y": 2.0489079952239706,
+          "z": 1.8434808413657038
+        },
+        "yaw": 0.3674128530490696,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6328,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -21.80613408083906,
+        "y": -197.8549175274274,
+        "z": -626.8518221295425,
+        "tx": -27.96724991641435,
+        "ty": -198.96830233510792,
+        "tz": -631.8318849735887,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/bomber/bomber-death-f80.jpg",
+      "phase": "death",
+      "n": 80,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": null,
+        "corpseRZ": null,
+        "hipsZ": null,
+        "hipsY": null,
+        "armL": null,
+        "armR": null
+      },
+      "subject": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.96724991641435,
+          "y": -198.96830233510792,
+          "z": -631.8318849735887
+        },
+        "size": {
+          "x": 1.7547479676326105,
+          "y": 2.0489079952239706,
+          "z": 1.8434808413657038
+        },
+        "yaw": 0.3674128530490696,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6328,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -21.80613408083906,
+        "y": -197.8549175274274,
+        "z": -626.8518221295425,
+        "tx": -27.96724991641435,
+        "ty": -198.96830233510792,
+        "tz": -631.8318849735887,
+        "fov": 40
+      }
+    }
+  ],
+  "errors": [],
+  "pageErrors": []
+}

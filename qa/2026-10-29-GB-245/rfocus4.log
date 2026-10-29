@@ -1,0 +1,20 @@
+GRANT grokbot GB-245: starting one game-test command
+camera: camera: loading the game..............................
+camera: ready in 30 s on port 31506: match, ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11), 1600x900
+help: ok
+setup: pistol
+{"up":0.02,"in":0.04,"side":0,"tip":0,"turn":0,"cant":0.4,"hip":0}       u20 R     0 L     0 MERGED | u35 R 13750 L     0 | u50 R 13691 L     0 | u65 R 13677 L     0 | u80 R 13727 L 15959
+{"up":0.02,"in":0.08,"side":0,"tip":0,"turn":0,"cant":0.5,"hip":0}       u20 R 13246 L     0 | u35 R 13466 L     0 | u50 R 13684 L     0 | u65 R 13722 L     0 | u80 R 13739 L 18567
+{"up":0.02,"in":0.04,"side":0,"tip":0,"turn":0,"cant":0.4,"hip":0}       u20 R 22703 L     0 | u35 R 22832 L     0 | u50 R 22864 L     0 | u65 R 16938 L   126 | u80 R 16866 L 12651
+{"up":0.02,"in":0.08,"side":0,"tip":0,"turn":0,"cant":0.5,"hip":0}       u20 R 29293 L     0 | u35 R 29541 L     0 | u50 R 29537 L     0 | u65 R 22389 L     0 | u80 R 22598 L 15169
+{"up":0.02,"in":0.04,"side":0,"tip":0,"turn":0,"cant":0.4,"hip":0}       u20 R   950 L     0 | u35 R   973 L     0 | u50 R   990 L     0 | u65 R   990 L     0 | u80 R   974 L   698
+{"up":0.02,"in":0.08,"side":0,"tip":0,"turn":0,"cant":0.5,"hip":0}       u20 R   669 L     0 | u35 R   637 L     0 | u50 R   633 L     0 | u65 R   663 L     0 | u80 R   716 L   529
+{"up":0.02,"in":0.04,"side":0,"tip":0,"turn":0,"cant":0.4,"hip":0}       u20 R  8137 L     0 | u35 R  8203 L     0 | u50 R  8277 L 25136 | u65 R  8336 L  9666 | u80 R  8368 L  8865
+{"up":0.02,"in":0.08,"side":0,"tip":0,"turn":0,"cant":0.5,"hip":0}       u20 R  7543 L     0 | u35 R  7528 L     0 | u50 R  7572 L 25465 | u65 R  7580 L  7912 | u80 R  7591 L  6776
+{"up":0.02,"in":0.04,"side":0,"tip":0,"turn":0,"cant":0.4,"hip":0}       u20 R 12606 L     0 | u35 R 12745 L     0 | u50 R 12485 L     0 | u65 R 12075 L 84455 | u80 R     0 L 36085
+{"up":0.02,"in":0.08,"side":0,"tip":0,"turn":0,"cant":0.5,"hip":0}       u20 R 12505 L     0 | u35 R 12523 L     0 | u50 R 12499 L     0 | u65 R 12739 L 85085 | u80 R     0 L 69755
+{"up":0.02,"in":0.04,"side":0,"tip":0,"turn":0,"cant":0.4,"hip":0}       u20 R  1209 L     0 | u35 R  1536 L     0 | u50 R  1131 L  2692 | u65 R  1492 L     0 | u80 R  1642 L   477
+{"up":0.02,"in":0.08,"side":0,"tip":0,"turn":0,"cant":0.5,"hip":0}       u20 R   726 L     0 | u35 R   872 L     0 | u50 R   605 L  1543 | u65 R  1348 L     0 | u80 R   938 L   542
+{"up":0.02,"in":0.04,"side":0,"tip":0,"turn":0,"cant":0.4,"hip":0}       u20 R     0 L     0 MERGED | u35 R     0 L     0 MERGED | u50 R     0 L     0 MERGED | u65 R     0 L     0 MERGED | u80 R     0 L   314
+{"up":0.02,"in":0.08,"side":0,"tip":0,"turn":0,"cant":0.5,"hip":0}       u20 R     0 L     0 MERGED | u35 R     0 L     0 MERGED | u50 R     0 L     0 MERGED | u65 R     0 L     0 MERGED | u80 R     0 L   475
+camera stop: camera: stopped

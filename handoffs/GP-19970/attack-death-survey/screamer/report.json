@@ -1,0 +1,1681 @@
+{
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "frames": [
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/screamer/screamer-idle-f00.jpg",
+      "phase": "idle",
+      "n": 0,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0,
+        "hipsY": 0.9718058304412247,
+        "armL": 0.36952064464373907,
+        "armR": 0.3429134879885006
+      },
+      "subject": {
+        "id": "zombie.screamer",
+        "name": "Screamer",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999843470311006,
+          "y": -199.19912104092097,
+          "z": -631.9739120315611
+        },
+        "size": {
+          "x": 1.7855924897403348,
+          "y": 2.5840376162255154,
+          "z": 1.3448805435809845
+        },
+        "yaw": 0.006,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5724,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.99767807082319,
+        "y": -198.08573623324045,
+        "z": -625.1370233835598,
+        "tx": -27.999843470311006,
+        "ty": -199.19912104092097,
+        "tz": -631.9739120315611,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/screamer/screamer-attack-f01.jpg",
+      "phase": "attack",
+      "n": 1,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.20333333333333334,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.007575757575757569,
+        "hipsY": 0.7985867185288279,
+        "armL": -0.7033333333333333,
+        "armR": -0.7033333333333333
+      },
+      "subject": {
+        "id": "zombie.screamer",
+        "name": "Screamer",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999682471277005,
+          "y": -199.19912104092097,
+          "z": -631.9470791812263
+        },
+        "size": {
+          "x": 1.7832025793028343,
+          "y": 2.5943150118056337,
+          "z": 1.3643669808558343
+        },
+        "yaw": 0.006,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5724,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.99751707178919,
+        "y": -198.08573623324045,
+        "z": -625.110190533225,
+        "tx": -27.999682471277005,
+        "ty": -199.19912104092097,
+        "tz": -631.9470791812263,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/screamer/screamer-attack-f02.jpg",
+      "phase": "attack",
+      "n": 2,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.18666666666666668,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.01515151515151515,
+        "hipsY": 0.797179673799698,
+        "armL": -0.7866666666666666,
+        "armR": -0.7866666666666666
+      },
+      "subject": {
+        "id": "zombie.screamer",
+        "name": "Screamer",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999521472243003,
+          "y": -199.19912104092097,
+          "z": -631.9202463308915
+        },
+        "size": {
+          "x": 1.7875135305884413,
+          "y": 2.6062112335907557,
+          "z": 1.4320004794494707
+        },
+        "yaw": 0.006,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5724,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.99735607275519,
+        "y": -198.08573623324045,
+        "z": -625.0833576828902,
+        "tx": -27.999521472243003,
+        "ty": -199.19912104092097,
+        "tz": -631.9202463308915,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/screamer/screamer-attack-f03.jpg",
+      "phase": "attack",
+      "n": 3,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.17,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.02272727272727272,
+        "hipsY": 0.7957970413590655,
+        "armL": -0.8699999999999999,
+        "armR": -0.8699999999999999
+      },
+      "subject": {
+        "id": "zombie.screamer",
+        "name": "Screamer",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999360473209002,
+          "y": -199.19912104092097,
+          "z": -631.8934134805567
+        },
+        "size": {
+          "x": 1.7546389094803558,
+          "y": 2.6181014719594486,
+          "z": 1.4897406286760315
+        },
+        "yaw": 0.006,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5724,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.997195073721187,
+        "y": -198.08573623324045,
+        "z": -625.0565248325554,
+        "tx": -27.999360473209002,
+        "ty": -199.19912104092097,
+        "tz": -631.8934134805567,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/screamer/screamer-attack-f04.jpg",
+      "phase": "attack",
+      "n": 4,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.15333333333333335,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.0303030303030303,
+        "hipsY": 0.7945399560923171,
+        "armL": -0.9533333333333334,
+        "armR": -0.9533333333333334
+      },
+      "subject": {
+        "id": "zombie.screamer",
+        "name": "Screamer",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999199474175,
+          "y": -199.19912104092097,
+          "z": -631.8665806302218
+        },
+        "size": {
+          "x": 1.7586664157215601,
+          "y": 2.62998456642822,
+          "z": 1.536168816585132
+        },
+        "yaw": 0.006,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5724,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.997034074687186,
+        "y": -198.08573623324045,
+        "z": -625.0296919822206,
+        "tx": -27.999199474175,
+        "ty": -199.19912104092097,
+        "tz": -631.8665806302218,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/screamer/screamer-attack-f05.jpg",
+      "phase": "attack",
+      "n": 5,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.1366666666666667,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.03787878787878787,
+        "hipsY": 0.7933827020312533,
+        "armL": -1.0366666666666666,
+        "armR": -1.0366666666666666
+      },
+      "subject": {
+        "id": "zombie.screamer",
+        "name": "Screamer",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999038475141,
+          "y": -199.19912104092097,
+          "z": -631.839747779887
+        },
+        "size": {
+          "x": 1.6973186747569322,
+          "y": 2.5089714021017926,
+          "z": 1.5674338936486265
+        },
+        "yaw": 0.006,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5724,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.996873075653184,
+        "y": -198.08573623324045,
+        "z": -625.0028591318858,
+        "tx": -27.999038475141,
+        "ty": -199.19912104092097,
+        "tz": -631.839747779887,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/screamer/screamer-attack-f06.jpg",
+      "phase": "attack",
+      "n": 6,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.12000000000000002,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.04545454545454545,
+        "hipsY": 0.7923039023675301,
+        "armL": -1.1199999999999999,
+        "armR": -1.1199999999999999
+      },
+      "subject": {
+        "id": "zombie.screamer",
+        "name": "Screamer",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.998877476106998,
+          "y": -199.19912104092097,
+          "z": -631.8129149295522
+        },
+        "size": {
+          "x": 1.7015327327473173,
+          "y": 2.520836808771122,
+          "z": 1.5821668702628813
+        },
+        "yaw": 0.006,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5724,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.996712076619183,
+        "y": -198.08573623324045,
+        "z": -624.976026281551,
+        "tx": -27.998877476106998,
+        "ty": -199.19912104092097,
+        "tz": -631.8129149295522,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/screamer/screamer-attack-f07.jpg",
+      "phase": "attack",
+      "n": 7,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.10333333333333336,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.05303030303030302,
+        "hipsY": 0.7912858859186086,
+        "armL": -1.2033333333333331,
+        "armR": -1.2033333333333331
+      },
+      "subject": {
+        "id": "zombie.screamer",
+        "name": "Screamer",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.998716477072996,
+          "y": -199.19912104092097,
+          "z": -631.7860820792174
+        },
+        "size": {
+          "x": 1.7055946159969082,
+          "y": 2.532691720021944,
+          "z": 1.5795798139889712
+        },
+        "yaw": 0.006,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5724,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.99655107758518,
+        "y": -198.08573623324045,
+        "z": -624.9491934312161,
+        "tx": -27.998716477072996,
+        "ty": -199.19912104092097,
+        "tz": -631.7860820792174,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/screamer/screamer-attack-f08.jpg",
+      "phase": "attack",
+      "n": 8,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.0866666666666667,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.0606060606060606,
+        "hipsY": 0.7903141438642987,
+        "armL": -1.2866666666666666,
+        "armR": -1.2866666666666666
+      },
+      "subject": {
+        "id": "zombie.screamer",
+        "name": "Screamer",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.998555478038995,
+          "y": -199.19912104092097,
+          "z": -631.7592492288826
+        },
+        "size": {
+          "x": 1.6422669360732236,
+          "y": 2.544535072199892,
+          "z": 1.5844174049560706
+        },
+        "yaw": 0.006,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5724,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.99639007855118,
+        "y": -198.08573623324045,
+        "z": -624.9223605808813,
+        "tx": -27.998555478038995,
+        "ty": -199.19912104092097,
+        "tz": -631.7592492288826,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/screamer/screamer-attack-f09.jpg",
+      "phase": "attack",
+      "n": 9,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.07000000000000003,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.06818181818181816,
+        "hipsY": 0.7893768639456247,
+        "armL": -1.3699999999999999,
+        "armR": -1.3699999999999999
+      },
+      "subject": {
+        "id": "zombie.screamer",
+        "name": "Screamer",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.998394479004993,
+          "y": -199.19912104092097,
+          "z": -631.7324163785478
+        },
+        "size": {
+          "x": 1.6489797293352098,
+          "y": 2.556365833333274,
+          "z": 1.5728924825555168
+        },
+        "yaw": 0.006,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5724,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.996229079517178,
+        "y": -198.08573623324045,
+        "z": -624.8955277305465,
+        "tx": -27.998394479004993,
+        "ty": -199.19912104092097,
+        "tz": -631.7324163785478,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/screamer/screamer-attack-f10.jpg",
+      "phase": "attack",
+      "n": 10,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.05333333333333337,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.07575757575757575,
+        "hipsY": 0.788464531121435,
+        "armL": -1.4533333333333331,
+        "armR": -1.4533333333333331
+      },
+      "subject": {
+        "id": "zombie.screamer",
+        "name": "Screamer",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99823347997099,
+          "y": -199.19912104092097,
+          "z": -631.705583528213
+        },
+        "size": {
+          "x": 1.6555130452491582,
+          "y": 2.568182889588769,
+          "z": 1.5448788106565416
+        },
+        "yaw": 0.006,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5724,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.996068080483177,
+        "y": -198.08573623324045,
+        "z": -624.8686948802117,
+        "tx": -27.99823347997099,
+        "ty": -199.19912104092097,
+        "tz": -631.705583528213,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/screamer/screamer-attack-f12.jpg",
+      "phase": "attack",
+      "n": 12,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.020000000000000042,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.0909090909090909,
+        "hipsY": 0.7866861275304853,
+        "armL": -1.6199999999999999,
+        "armR": -1.6199999999999999
+      },
+      "subject": {
+        "id": "zombie.screamer",
+        "name": "Screamer",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99791148190299,
+          "y": -199.19912104092097,
+          "z": -631.6519178275433
+        },
+        "size": {
+          "x": 1.6680102023105654,
+          "y": 2.5917726683454703,
+          "z": 1.492186671042532
+        },
+        "yaw": 0.006,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5724,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.995746082415174,
+        "y": -198.08573623324045,
+        "z": -624.8150291795421,
+        "tx": -27.99791148190299,
+        "ty": -199.19912104092097,
+        "tz": -631.6519178275433,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/screamer/screamer-attack-f14.jpg",
+      "phase": "attack",
+      "n": 14,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.28,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.1,
+        "hipsY": 0.7849369155428984,
+        "armL": -1.7200000000000002,
+        "armR": -1.7200000000000002
+      },
+      "subject": {
+        "id": "zombie.screamer",
+        "name": "Screamer",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.997589483834986,
+          "y": -199.19912104092097,
+          "z": -631.5982521268737
+        },
+        "size": {
+          "x": 1.679699383145394,
+          "y": 2.6152970457313245,
+          "z": 1.5467530252826691
+        },
+        "yaw": 0.006,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5724,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.99542408434717,
+        "y": -198.08573623324045,
+        "z": -624.7613634788725,
+        "tx": -27.997589483834986,
+        "ty": -199.19912104092097,
+        "tz": -631.5982521268737,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/screamer/screamer-attack-f16.jpg",
+      "phase": "attack",
+      "n": 16,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.2466666666666667,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.13083521591645728,
+        "hipsY": 0.7665841021145666,
+        "armL": -1.0694365481516044,
+        "armR": -1.0694365481516044
+      },
+      "subject": {
+        "id": "zombie.screamer",
+        "name": "Screamer",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.997267485766983,
+          "y": -199.19912104092097,
+          "z": -631.5445864262041
+        },
+        "size": {
+          "x": 1.6905261774104297,
+          "y": 2.460461710953041,
+          "z": 2.004358371704029
+        },
+        "yaw": 0.006,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5724,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.995102086279168,
+        "y": -198.08573623324045,
+        "z": -624.7076977782028,
+        "tx": -27.997267485766983,
+        "ty": -199.19912104092097,
+        "tz": -631.5445864262041,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/screamer/screamer-attack-f18.jpg",
+      "phase": "attack",
+      "n": 18,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.21333333333333337,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.23134685680847852,
+        "hipsY": 0.7495272890644064,
+        "armL": -0.46972462018895933,
+        "armR": -0.46972462018895933
+      },
+      "subject": {
+        "id": "zombie.screamer",
+        "name": "Screamer",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99694548769898,
+          "y": -199.19912104092097,
+          "z": -631.4909207255345
+        },
+        "size": {
+          "x": 1.7004413544970234,
+          "y": 2.492101381786483,
+          "z": 1.7880798190091127
+        },
+        "yaw": 0.006,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5724,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.994780088211165,
+        "y": -198.08573623324045,
+        "z": -624.6540320775332,
+        "tx": -27.99694548769898,
+        "ty": -199.19912104092097,
+        "tz": -631.4909207255345,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/screamer/screamer-attack-f20.jpg",
+      "phase": "attack",
+      "n": 20,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.18000000000000005,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.27823941877010794,
+        "hipsY": 0.7385598499230259,
+        "armL": 0.03225908747543871,
+        "armR": 0.03225908747543871
+      },
+      "subject": {
+        "id": "zombie.screamer",
+        "name": "Screamer",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.996623489630977,
+          "y": -199.19912104092097,
+          "z": -631.4372550248648
+        },
+        "size": {
+          "x": 1.709401466277292,
+          "y": 2.5182542773434022,
+          "z": 1.7244481905245266
+        },
+        "yaw": 0.006,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5724,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.994458090143162,
+        "y": -198.08573623324045,
+        "z": -624.6003663768636,
+        "tx": -27.996623489630977,
+        "ty": -199.19912104092097,
+        "tz": -631.4372550248648,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/screamer/screamer-attack-f22.jpg",
+      "phase": "attack",
+      "n": 22,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.14666666666666672,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.2606446496203773,
+        "hipsY": 0.731515867543004,
+        "armL": 0.39727683957068494,
+        "armR": 0.39727683957068494
+      },
+      "subject": {
+        "id": "zombie.screamer",
+        "name": "Screamer",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.996301491562974,
+          "y": -199.19912104092097,
+          "z": -631.3835893241952
+        },
+        "size": {
+          "x": 1.717368870474516,
+          "y": 2.540085011281775,
+          "z": 1.785912098177846
+        },
+        "yaw": 0.006,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5724,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.99413609207516,
+        "y": -198.08573623324045,
+        "z": -624.546700676194,
+        "tx": -27.996301491562974,
+        "ty": -199.19912104092097,
+        "tz": -631.3835893241952,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/screamer/screamer-attack-f24.jpg",
+      "phase": "attack",
+      "n": 24,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.1133333333333334,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.182640475157874,
+        "hipsY": 0.728644581765005,
+        "armL": 0.596796893517854,
+        "armR": 0.596796893517854
+      },
+      "subject": {
+        "id": "zombie.screamer",
+        "name": "Screamer",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99597949349497,
+          "y": -199.19912104092097,
+          "z": -631.3299236235256
+        },
+        "size": {
+          "x": 1.7341536808603095,
+          "y": 2.560355774218692,
+          "z": 1.8586603407979965
+        },
+        "yaw": 0.006,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5724,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.993814094007156,
+        "y": -198.08573623324045,
+        "z": -624.4930349755243,
+        "tx": -27.99597949349497,
+        "ty": -199.19912104092097,
+        "tz": -631.3299236235256,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/screamer/screamer-attack-f26.jpg",
+      "phase": "attack",
+      "n": 26,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.08000000000000007,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.06230586150776819,
+        "hipsY": 0.729945057492803,
+        "armL": 0.6300000000000001,
+        "armR": 0.6300000000000001
+      },
+      "subject": {
+        "id": "zombie.screamer",
+        "name": "Screamer",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99565749542697,
+          "y": -199.19912104092097,
+          "z": -631.276257922856
+        },
+        "size": {
+          "x": 1.7539243308853223,
+          "y": 2.5806202822237196,
+          "z": 1.9075726774535724
+        },
+        "yaw": 0.006,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5724,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.993492095939153,
+        "y": -198.08573623324045,
+        "z": -624.4393692748547,
+        "tx": -27.99565749542697,
+        "ty": -199.19912104092097,
+        "tz": -631.276257922856,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/screamer/screamer-attack-f30.jpg",
+      "phase": "attack",
+      "n": 30,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.7339427712908311,
+        "armL": 0.6300000000000001,
+        "armR": 0.6300000000000001
+      },
+      "subject": {
+        "id": "zombie.screamer",
+        "name": "Screamer",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.995013499290962,
+          "y": -199.19912104092097,
+          "z": -631.1689265215167
+        },
+        "size": {
+          "x": 1.7912350383224371,
+          "y": 2.626788558342156,
+          "z": 1.9957224782327785
+        },
+        "yaw": 0.006,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5724,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.992848099803147,
+        "y": -198.08573623324045,
+        "z": -624.3320378735154,
+        "tx": -27.995013499290962,
+        "ty": -199.19912104092097,
+        "tz": -631.1689265215167,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/screamer/screamer-death-f00.jpg",
+      "phase": "death",
+      "n": 0,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.7339427712908311,
+        "armL": 0.6300000000000001,
+        "armR": 0.6300000000000001
+      },
+      "subject": {
+        "id": "zombie.screamer",
+        "name": "Screamer",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.995013499290962,
+          "y": -199.19912104092097,
+          "z": -631.1689265215167
+        },
+        "size": {
+          "x": 1.113965420976065,
+          "y": 1.7189830706843736,
+          "z": 1.1572167400988747
+        },
+        "yaw": 0.006,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5532,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -23.992848099803147,
+        "y": -198.08573623324045,
+        "z": -624.3320378735154,
+        "tx": -27.995013499290962,
+        "ty": -199.19912104092097,
+        "tz": -631.1689265215167,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/screamer/screamer-death-f01.jpg",
+      "phase": "death",
+      "n": 1,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.016666666666666666,
+        "corpseRX": 0.08386415153424666,
+        "corpseRZ": -0.0007189959528143988,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.7339427712908311,
+        "armL": -0.07954264247788373,
+        "armR": -0.06734817035627326
+      },
+      "subject": {
+        "id": "zombie.screamer",
+        "name": "Screamer",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.995013499290962,
+          "y": -199.19309971689034,
+          "z": -631.1689265215167
+        },
+        "size": {
+          "x": 0.813519264014392,
+          "y": 1.7975155853329738,
+          "z": 0.5268147146995261
+        },
+        "yaw": 0.0031325448379543,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5532,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -23.992848099803147,
+        "y": -198.07971490920983,
+        "z": -624.3320378735154,
+        "tx": -27.995013499290962,
+        "ty": -199.19309971689034,
+        "tz": -631.1689265215167,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/screamer/screamer-death-f02.jpg",
+      "phase": "death",
+      "n": 2,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.03333333333333333,
+        "corpseRX": 0.16471522587093598,
+        "corpseRZ": -0.0014074585390652578,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.7339427712908311,
+        "armL": -0.1500264491533537,
+        "armR": -0.12692115993347255
+      },
+      "subject": {
+        "id": "zombie.screamer",
+        "name": "Screamer",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.995013499290962,
+          "y": -199.18729444702896,
+          "z": -631.1689265215167
+        },
+        "size": {
+          "x": 0.811093500704164,
+          "y": 1.8223306175970606,
+          "z": 0.7151646355224557
+        },
+        "yaw": 0.0003110511925394813,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5532,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -23.992848099803147,
+        "y": -198.07390963934844,
+        "z": -624.3320378735154,
+        "tx": -27.995013499290962,
+        "ty": -199.18729444702896,
+        "tz": -631.1689265215167,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/screamer/screamer-death-f03.jpg",
+      "phase": "death",
+      "n": 3,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.05,
+        "corpseRX": 0.24259508243653174,
+        "corpseRZ": -0.0020620167683226558,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.7339427712908311,
+        "armL": -0.21166665601092927,
+        "armR": -0.17890418862136528
+      },
+      "subject": {
+        "id": "zombie.screamer",
+        "name": "Screamer",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.995013499290962,
+          "y": -199.18170225704563,
+          "z": -631.1689265215167
+        },
+        "size": {
+          "x": 0.8093481245826695,
+          "y": 1.8406290313975262,
+          "z": 0.8862588792801489
+        },
+        "yaw": -0.002459199749304749,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5532,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -23.992848099803147,
+        "y": -198.0683174493651,
+        "z": -624.3320378735154,
+        "tx": -27.995013499290962,
+        "ty": -199.18170225704563,
+        "tz": -631.1689265215167,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/screamer/screamer-death-f04.jpg",
+      "phase": "death",
+      "n": 4,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.06666666666666667,
+        "corpseRX": 0.31754598757883973,
+        "corpseRZ": -0.002680249260885269,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.7339427712908311,
+        "armL": -0.2647450777116738,
+        "armR": -0.2235399698214742
+      },
+      "subject": {
+        "id": "zombie.screamer",
+        "name": "Screamer",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.995013499290962,
+          "y": -199.17632014470664,
+          "z": -631.1689265215167
+        },
+        "size": {
+          "x": 0.8069084414036567,
+          "y": 1.8508471152024697,
+          "z": 1.0371600127389229
+        },
+        "yaw": -0.005173095109556442,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5532,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -23.992848099803147,
+        "y": -198.06293533702612,
+        "z": -624.3320378735154,
+        "tx": -27.995013499290962,
+        "ty": -199.17632014470664,
+        "tz": -631.1689265215167,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/screamer/screamer-death-f06.jpg",
+      "phase": "death",
+      "n": 6,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.09999999999999999,
+        "corpseRX": 0.45883203813059004,
+        "corpseRZ": -0.003802174364205593,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.7339427712908311,
+        "armL": -0.3466347767591989,
+        "armR": -0.29199188795155406
+      },
+      "subject": {
+        "id": "zombie.screamer",
+        "name": "Screamer",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.995013499290962,
+          "y": -199.16617399861212,
+          "z": -631.1689265215167
+        },
+        "size": {
+          "x": 0.8020510126809128,
+          "y": 1.843194124913765,
+          "z": 1.279401797417563
+        },
+        "yaw": -0.010412738380120957,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5532,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -23.992848099803147,
+        "y": -198.0527891909316,
+        "z": -624.3320378735154,
+        "tx": -27.995013499290962,
+        "ty": -199.16617399861212,
+        "tz": -631.1689265215167,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/screamer/screamer-death-f08.jpg",
+      "phase": "death",
+      "n": 8,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.13333333333333333,
+        "corpseRX": 0.5889196733663513,
+        "corpseRZ": -0.004768916328327454,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.7339427712908311,
+        "armL": -0.39901262597826936,
+        "armR": -0.3351361556464511
+      },
+      "subject": {
+        "id": "zombie.screamer",
+        "name": "Screamer",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.995013499290962,
+          "y": -199.1568313948345,
+          "z": -631.1689265215167
+        },
+        "size": {
+          "x": 0.8087410368798373,
+          "y": 1.8071879783895497,
+          "z": 1.468964444917674
+        },
+        "yaw": -0.015373314297986539,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5532,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -23.992848099803147,
+        "y": -198.043446587154,
+        "z": -624.3320378735154,
+        "tx": -27.995013499290962,
+        "ty": -199.1568313948345,
+        "tz": -631.1689265215167,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/screamer/screamer-death-f12.jpg",
+      "phase": "death",
+      "n": 12,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.19999999999999998,
+        "corpseRX": 0.8169190660827128,
+        "corpseRZ": -0.0062604533214954865,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.7339427712908311,
+        "armL": -0.43129087703565705,
+        "armR": -0.3593474797983822
+      },
+      "subject": {
+        "id": "zombie.screamer",
+        "name": "Screamer",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.995013499290962,
+          "y": -199.1404557512734,
+          "z": -631.1689265215167
+        },
+        "size": {
+          "x": 0.8486530659384428,
+          "y": 1.644929546422901,
+          "z": 1.692038470140801
+        },
+        "yaw": -0.024352304900104097,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5532,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -23.992848099803147,
+        "y": -198.0270709435929,
+        "z": -624.3320378735154,
+        "tx": -27.995013499290962,
+        "ty": -199.1404557512734,
+        "tz": -631.1689265215167,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/screamer/screamer-death-f20.jpg",
+      "phase": "death",
+      "n": 20,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.3333333333333333,
+        "corpseRX": 1.154588359843812,
+        "corpseRZ": -0.007857402886045098,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.7339427712908311,
+        "armL": -0.32716013475815486,
+        "armR": -0.2639875912173667
+      },
+      "subject": {
+        "id": "zombie.screamer",
+        "name": "Screamer",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.995013499290962,
+          "y": -199.1162015746468,
+          "z": -631.1689265215167
+        },
+        "size": {
+          "x": 1.0768448893077718,
+          "y": 1.1778288141404971,
+          "z": 1.829140403910401
+        },
+        "yaw": -0.03818658702221607,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5532,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -23.992848099803147,
+        "y": -198.00281676696628,
+        "z": -624.3320378735154,
+        "tx": -27.995013499290962,
+        "ty": -199.1162015746468,
+        "tz": -631.1689265215167,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/screamer/screamer-death-f40.jpg",
+      "phase": "death",
+      "n": 40,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.6666666666666671,
+        "corpseRX": 1.4659613680738839,
+        "corpseRZ": -0.008547892942249285,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.7339427712908311,
+        "armL": -0.12072418152372778,
+        "armR": -0.08069602432718524
+      },
+      "subject": {
+        "id": "zombie.screamer",
+        "name": "Screamer",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.995013499290962,
+          "y": -199.09383643689733,
+          "z": -631.1689265215167
+        },
+        "size": {
+          "x": 1.2109248136750068,
+          "y": 0.6755394976285913,
+          "z": 1.8331220939825243
+        },
+        "yaw": -0.05129788619623825,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5532,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -23.992848099803147,
+        "y": -197.98045162921682,
+        "z": -624.3320378735154,
+        "tx": -27.995013499290962,
+        "ty": -199.09383643689733,
+        "tz": -631.1689265215167,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/screamer/screamer-death-f80.jpg",
+      "phase": "death",
+      "n": 80,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 1.3333333333333335,
+        "corpseRX": 1.4703525689758685,
+        "corpseRZ": -0.00855182661690234,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.7339427712908311,
+        "armL": -0.12,
+        "armR": -0.08
+      },
+      "subject": {
+        "id": "zombie.screamer",
+        "name": "Screamer",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.995013499290962,
+          "y": -199.09352104092096,
+          "z": -631.1689265215167
+        },
+        "size": {
+          "x": 1.2126354725853545,
+          "y": 0.6684679399708955,
+          "z": 1.8323712821172649
+        },
+        "yaw": -0.05148400390601564,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5532,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -23.992848099803147,
+        "y": -197.98013911961897,
+        "z": -624.3320378735154,
+        "tx": -27.995013499290962,
+        "ty": -199.0935239272995,
+        "tz": -631.1689265215167,
+        "fov": 40
+      }
+    }
+  ],
+  "errors": [],
+  "pageErrors": []
+}

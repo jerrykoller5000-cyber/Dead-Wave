@@ -1,0 +1,62 @@
+{
+  "task": "AG-156 / GP-19981",
+  "date": "2026-10-29",
+  "reviewer": "Antigravity (Gemini 4 Argon (High))",
+  "hardware": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "resolution": [
+    1600,
+    900
+  ],
+  "triangles": {
+    "before": 40322,
+    "after11": 40458,
+    "after13": 40762,
+    "delta_vs_before": 440,
+    "delta_vs_after11": 304
+  },
+  "draws": {
+    "before": 16,
+    "after11": 16,
+    "after13": 16,
+    "delta": 0
+  },
+  "saturation": {
+    "target_cap": 45.0,
+    "before_chin_mean_sat": 83.8,
+    "base_hex": "0x765247",
+    "base_hex_sat": 39.8,
+    "after11_chin_mean_sat": 44.4,
+    "after13_chin_mean_sat": 44.4,
+    "after13_overcast_chin_mean_sat": 41.2,
+    "after13_moustache_mean_sat": 30.4,
+    "after13_moustache_95th_sat": 37.3
+  },
+  "defect_resolution": {
+    "type": "detached_floating_ribbon",
+    "previous_state_after11": {
+      "sliver_pixels_y577_602_x492_495": 72,
+      "daylight_gap_span_px": 19,
+      "daylight_gap_sky_pixels": 487,
+      "status": "SUB-4 DEFECT (3.5/5)"
+    },
+    "current_state_after13": {
+      "sliver_pixels_y577_602_x492_495": 0,
+      "daylight_gap_span_px": 0,
+      "daylight_gap_sky_pixels_in_gap": 0,
+      "profile_mesh_span": "x=506..549 (continuous solid connection to face/lip)",
+      "status": "RESOLVED (4.5/5 PASS)"
+    }
+  },
+  "scores": {
+    "silhouette_gameplay": 4.5,
+    "readability_gameplay": 4.5,
+    "material_color": 4.5,
+    "construction_front": 4.5,
+    "integration_jaw": 4.5,
+    "integration_close_side_profile": 4.5,
+    "geometry_efficiency": 5.0,
+    "legacy_bar_masking": 4.5,
+    "overall": 4.5
+  },
+  "verdict": "PASS"
+}

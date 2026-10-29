@@ -1,0 +1,1681 @@
+{
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "frames": [
+    {
+      "file": "handoffs/GP-19970/attack-death/shambler-idle-f00.jpg",
+      "phase": "idle",
+      "n": 0,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0,
+        "hipsY": 0.817887798548675,
+        "armL": -0.7489807011296826,
+        "armR": -0.8010192988703173
+      },
+      "subject": {
+        "id": "zombie.shambler",
+        "name": "Shambler",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99943689484919,
+          "y": -199.07731140061816,
+          "z": -631.9436913619487
+        },
+        "size": {
+          "x": 0.8082975065653528,
+          "y": 1.8430074835426353,
+          "z": 1.1115560722064401
+        },
+        "yaw": 0.009999999999999998,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5048,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.96995603097663,
+        "y": -197.96392659293764,
+        "z": -625.1228660278919,
+        "tx": -27.99943689484919,
+        "ty": -199.07731140061816,
+        "tz": -631.9436913619487,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/shambler-attack-f01.jpg",
+      "phase": "attack",
+      "n": 1,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.20333333333333334,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.007575757575757569,
+        "hipsY": 0.8377714178429227,
+        "armL": -1.8333333333333333,
+        "armR": -1.6833333333333333
+      },
+      "subject": {
+        "id": "zombie.shambler",
+        "name": "Shambler",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99882548837275,
+          "y": -199.07731140061816,
+          "z": -631.8825527523398
+        },
+        "size": {
+          "x": 0.8087468905894006,
+          "y": 1.874621454302826,
+          "z": 1.2693911639534008
+        },
+        "yaw": 0.009999999999999998,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5048,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.969344624500188,
+        "y": -197.96392659293764,
+        "z": -625.061727418283,
+        "tx": -27.99882548837275,
+        "ty": -199.07731140061816,
+        "tz": -631.8825527523398,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/shambler-attack-f02.jpg",
+      "phase": "attack",
+      "n": 2,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.18666666666666668,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.01515151515151515,
+        "hipsY": 0.8345138598604629,
+        "armL": -1.9166666666666667,
+        "armR": -1.7666666666666668
+      },
+      "subject": {
+        "id": "zombie.shambler",
+        "name": "Shambler",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.998214081896307,
+          "y": -199.07731140061816,
+          "z": -631.821414142731
+        },
+        "size": {
+          "x": 0.8062600267617483,
+          "y": 1.8711772658584493,
+          "z": 1.285889238320351
+        },
+        "yaw": 0.009999999999999998,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5048,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.968733218023747,
+        "y": -197.96392659293764,
+        "z": -625.0005888086741,
+        "tx": -27.998214081896307,
+        "ty": -199.07731140061816,
+        "tz": -631.821414142731,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/shambler-attack-f03.jpg",
+      "phase": "attack",
+      "n": 3,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.17,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.02272727272727272,
+        "hipsY": 0.831041352513906,
+        "armL": -2,
+        "armR": -1.85
+      },
+      "subject": {
+        "id": "zombie.shambler",
+        "name": "Shambler",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.997602675419866,
+          "y": -199.07731140061816,
+          "z": -631.7602755331221
+        },
+        "size": {
+          "x": 0.8029499022507629,
+          "y": 1.867350269476617,
+          "z": 1.288004106993185
+        },
+        "yaw": 0.009999999999999998,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5048,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.968121811547306,
+        "y": -197.96392659293764,
+        "z": -624.9394501990653,
+        "tx": -27.997602675419866,
+        "ty": -199.07731140061816,
+        "tz": -631.7602755331221,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/shambler-attack-f04.jpg",
+      "phase": "attack",
+      "n": 4,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.15333333333333335,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.0303030303030303,
+        "hipsY": 0.8273886952814516,
+        "armL": -2.0833333333333335,
+        "armR": -1.9333333333333333
+      },
+      "subject": {
+        "id": "zombie.shambler",
+        "name": "Shambler",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.996991268943425,
+          "y": -199.07731140061816,
+          "z": -631.6991369235133
+        },
+        "size": {
+          "x": 0.7988310131612941,
+          "y": 1.8637118049271066,
+          "z": 1.2747246878661826
+        },
+        "yaw": 0.009999999999999998,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5048,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.967510405070865,
+        "y": -197.96392659293764,
+        "z": -624.8783115894564,
+        "tx": -27.996991268943425,
+        "ty": -199.07731140061816,
+        "tz": -631.6991369235133,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/shambler-attack-f05.jpg",
+      "phase": "attack",
+      "n": 5,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.1366666666666667,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.03787878787878787,
+        "hipsY": 0.823594281188963,
+        "armL": -2.1666666666666665,
+        "armR": -2.0166666666666666
+      },
+      "subject": {
+        "id": "zombie.shambler",
+        "name": "Shambler",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.996379862466984,
+          "y": -199.07731140061816,
+          "z": -631.6379983139044
+        },
+        "size": {
+          "x": 0.7962501606142389,
+          "y": 1.887719134272686,
+          "z": 1.2465202905270871
+        },
+        "yaw": 0.009999999999999998,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5048,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.966898998594424,
+        "y": -197.96392659293764,
+        "z": -624.8171729798476,
+        "tx": -27.996379862466984,
+        "ty": -199.07731140061816,
+        "tz": -631.6379983139044,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/shambler-attack-f06.jpg",
+      "phase": "attack",
+      "n": 6,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.12000000000000002,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.04545454545454545,
+        "hipsY": 0.8196994753782937,
+        "armL": -2.25,
+        "armR": -2.1
+      },
+      "subject": {
+        "id": "zombie.shambler",
+        "name": "Shambler",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.995768455990543,
+          "y": -199.07731140061816,
+          "z": -631.5768597042955
+        },
+        "size": {
+          "x": 0.7953434497226368,
+          "y": 1.9558769516511347,
+          "z": 1.204118692223119
+        },
+        "yaw": 0.009999999999999998,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5048,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.966287592117983,
+        "y": -197.96392659293764,
+        "z": -624.7560343702387,
+        "tx": -27.995768455990543,
+        "ty": -199.07731140061816,
+        "tz": -631.5768597042955,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/shambler-attack-f07.jpg",
+      "phase": "attack",
+      "n": 7,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.10333333333333336,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.05303030303030302,
+        "hipsY": 0.8157479592145986,
+        "armL": -2.333333333333333,
+        "armR": -2.1833333333333336
+      },
+      "subject": {
+        "id": "zombie.shambler",
+        "name": "Shambler",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.995157049514102,
+          "y": -199.07731140061816,
+          "z": -631.5157210946867
+        },
+        "size": {
+          "x": 0.7933683646278276,
+          "y": 2.01679883516087,
+          "z": 1.1484635744703837
+        },
+        "yaw": 0.009999999999999998,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5048,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.96567618564154,
+        "y": -197.96392659293764,
+        "z": -624.6948957606298,
+        "tx": -27.995157049514102,
+        "ty": -199.07731140061816,
+        "tz": -631.5157210946867,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/shambler-attack-f08.jpg",
+      "phase": "attack",
+      "n": 8,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.0866666666666667,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.0606060606060606,
+        "hipsY": 0.8118725644637199,
+        "armL": -2.4166666666666665,
+        "armR": -2.2666666666666666
+      },
+      "subject": {
+        "id": "zombie.shambler",
+        "name": "Shambler",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99454564303766,
+          "y": -199.07731140061816,
+          "z": -631.4545824850778
+        },
+        "size": {
+          "x": 0.7902565503682801,
+          "y": 2.0695518309593126,
+          "z": 1.0810138194453884
+        },
+        "yaw": 0.009999999999999998,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5048,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.9650647791651,
+        "y": -197.96392659293764,
+        "z": -624.633757151021,
+        "tx": -27.99454564303766,
+        "ty": -199.07731140061816,
+        "tz": -631.4545824850778,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/shambler-attack-f09.jpg",
+      "phase": "attack",
+      "n": 9,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.07000000000000003,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.06818181818181816,
+        "hipsY": 0.8150712062048276,
+        "armL": -2.5,
+        "armR": -2.35
+      },
+      "subject": {
+        "id": "zombie.shambler",
+        "name": "Shambler",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99393423656122,
+          "y": -199.07731140061816,
+          "z": -631.393443875469
+        },
+        "size": {
+          "x": 0.7861466392696457,
+          "y": 2.109272491973684,
+          "z": 1.0245624172569023
+        },
+        "yaw": 0.009999999999999998,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5048,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.96445337268866,
+        "y": -197.96392659293764,
+        "z": -624.5726185414121,
+        "tx": -27.99393423656122,
+        "ty": -199.07731140061816,
+        "tz": -631.393443875469,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/shambler-attack-f10.jpg",
+      "phase": "attack",
+      "n": 10,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.05333333333333337,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.07575757575757575,
+        "hipsY": 0.8183455625903538,
+        "armL": -2.583333333333333,
+        "armR": -2.433333333333333
+      },
+      "subject": {
+        "id": "zombie.shambler",
+        "name": "Shambler",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99332283008478,
+          "y": -199.07731140061816,
+          "z": -631.3323052658601
+        },
+        "size": {
+          "x": 0.7807567168417044,
+          "y": 2.1383185065053,
+          "z": 0.9594421576449577
+        },
+        "yaw": 0.009999999999999998,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5048,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.963841966212218,
+        "y": -197.96392659293764,
+        "z": -624.5114799318033,
+        "tx": -27.99332283008478,
+        "ty": -199.07731140061816,
+        "tz": -631.3323052658601,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/shambler-attack-f12.jpg",
+      "phase": "attack",
+      "n": 12,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.020000000000000042,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.0909090909090909,
+        "hipsY": 0.8248373433885448,
+        "armL": -2.75,
+        "armR": -2.6
+      },
+      "subject": {
+        "id": "zombie.shambler",
+        "name": "Shambler",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.992100017131897,
+          "y": -199.07731140061816,
+          "z": -631.2100280466424
+        },
+        "size": {
+          "x": 0.7661240561705966,
+          "y": 2.162693015113092,
+          "z": 0.8256037473582865
+        },
+        "yaw": 0.009999999999999998,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5048,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.962619153259336,
+        "y": -197.96392659293764,
+        "z": -624.3892027125855,
+        "tx": -27.992100017131897,
+        "ty": -199.07731140061816,
+        "tz": -631.2100280466424,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/shambler-attack-f14.jpg",
+      "phase": "attack",
+      "n": 14,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.28,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.1,
+        "hipsY": 0.830832194180152,
+        "armL": -2.85,
+        "armR": -2.7
+      },
+      "subject": {
+        "id": "zombie.shambler",
+        "name": "Shambler",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.990877204179014,
+          "y": -199.07731140061816,
+          "z": -631.0877508274247
+        },
+        "size": {
+          "x": 0.7552020546788647,
+          "y": 2.1579218617716833,
+          "z": 0.785261576507196
+        },
+        "yaw": 0.009999999999999998,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5048,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.961396340306454,
+        "y": -197.96392659293764,
+        "z": -624.2669254933678,
+        "tx": -27.990877204179014,
+        "ty": -199.07731140061816,
+        "tz": -631.0877508274247,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/shambler-attack-f16.jpg",
+      "phase": "attack",
+      "n": 16,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.2466666666666667,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.13083521591645728,
+        "hipsY": 0.8192911334821105,
+        "armL": -2.1994365481516045,
+        "armR": -2.049436548151604
+      },
+      "subject": {
+        "id": "zombie.shambler",
+        "name": "Shambler",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.989654391226132,
+          "y": -199.07731140061816,
+          "z": -630.9654736082069
+        },
+        "size": {
+          "x": 0.7970050377507754,
+          "y": 1.8304478246417375,
+          "z": 1.2825338789864418
+        },
+        "yaw": 0.009999999999999998,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5048,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.96017352735357,
+        "y": -197.96392659293764,
+        "z": -624.1446482741501,
+        "tx": -27.989654391226132,
+        "ty": -199.07731140061816,
+        "tz": -630.9654736082069,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/shambler-attack-f18.jpg",
+      "phase": "attack",
+      "n": 18,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.21333333333333337,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.23134685680847852,
+        "hipsY": 0.8077861652798536,
+        "armL": -1.5997246201889594,
+        "armR": -1.4497246201889593
+      },
+      "subject": {
+        "id": "zombie.shambler",
+        "name": "Shambler",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.98843157827325,
+          "y": -199.07731140061816,
+          "z": -630.8431963889892
+        },
+        "size": {
+          "x": 0.7950268975596302,
+          "y": 1.7996662226383364,
+          "z": 1.315321851351996
+        },
+        "yaw": 0.009999999999999998,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5048,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.95895071440069,
+        "y": -197.96392659293764,
+        "z": -624.0223710549324,
+        "tx": -27.98843157827325,
+        "ty": -199.07731140061816,
+        "tz": -630.8431963889892,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/shambler-attack-f20.jpg",
+      "phase": "attack",
+      "n": 20,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.18000000000000005,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.27823941877010794,
+        "hipsY": 0.7972756484762021,
+        "armL": -1.0977409125245612,
+        "armR": -0.9477409125245613
+      },
+      "subject": {
+        "id": "zombie.shambler",
+        "name": "Shambler",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.987208765320368,
+          "y": -199.07731140061816,
+          "z": -630.7209191697715
+        },
+        "size": {
+          "x": 0.7719806649018892,
+          "y": 1.7906095502791572,
+          "z": 0.9905842003083762
+        },
+        "yaw": 0.009999999999999998,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5048,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.957727901447807,
+        "y": -197.96392659293764,
+        "z": -623.9000938357146,
+        "tx": -27.987208765320368,
+        "ty": -199.07731140061816,
+        "tz": -630.7209191697715,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/shambler-attack-f22.jpg",
+      "phase": "attack",
+      "n": 22,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.14666666666666672,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.2606446496203773,
+        "hipsY": 0.7852926587195448,
+        "armL": -0.7327231604293151,
+        "armR": -0.582723160429315
+      },
+      "subject": {
+        "id": "zombie.shambler",
+        "name": "Shambler",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.985985952367486,
+          "y": -199.07731140061816,
+          "z": -630.5986419505538
+        },
+        "size": {
+          "x": 0.7434587382197719,
+          "y": 1.7796058972348305,
+          "z": 0.7869842709790191
+        },
+        "yaw": 0.009999999999999998,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5048,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.956505088494925,
+        "y": -197.96392659293764,
+        "z": -623.7778166164969,
+        "tx": -27.985985952367486,
+        "ty": -199.07731140061816,
+        "tz": -630.5986419505538,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/shambler-attack-f24.jpg",
+      "phase": "attack",
+      "n": 24,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.1133333333333334,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.182640475157874,
+        "hipsY": 0.770010263400185,
+        "armL": -0.533203106482146,
+        "armR": -0.38320310648214595
+      },
+      "subject": {
+        "id": "zombie.shambler",
+        "name": "Shambler",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.984763139414603,
+          "y": -199.07731140061816,
+          "z": -630.476364731336
+        },
+        "size": {
+          "x": 0.7292352819111692,
+          "y": 1.7707404221123397,
+          "z": 0.8297998361338159
+        },
+        "yaw": 0.009999999999999998,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5048,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.955282275542043,
+        "y": -197.96392659293764,
+        "z": -623.6555393972792,
+        "tx": -27.984763139414603,
+        "ty": -199.07731140061816,
+        "tz": -630.476364731336,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/shambler-attack-f26.jpg",
+      "phase": "attack",
+      "n": 26,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.08000000000000007,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.06230586150776819,
+        "hipsY": 0.7580645902535073,
+        "armL": -0.4999999999999999,
+        "armR": -0.34999999999999987
+      },
+      "subject": {
+        "id": "zombie.shambler",
+        "name": "Shambler",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.98354032646172,
+          "y": -199.07731140061816,
+          "z": -630.3540875121183
+        },
+        "size": {
+          "x": 0.7313152973244179,
+          "y": 1.7665875958374215,
+          "z": 0.8695923267927128
+        },
+        "yaw": 0.009999999999999998,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5048,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.95405946258916,
+        "y": -197.96392659293764,
+        "z": -623.5332621780615,
+        "tx": -27.98354032646172,
+        "ty": -199.07731140061816,
+        "tz": -630.3540875121183,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/shambler-attack-f30.jpg",
+      "phase": "attack",
+      "n": 30,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.7356816393166976,
+        "armL": -0.4999999999999999,
+        "armR": -0.34999999999999987
+      },
+      "subject": {
+        "id": "zombie.shambler",
+        "name": "Shambler",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.981094700555957,
+          "y": -199.07731140061816,
+          "z": -630.1095330736829
+        },
+        "size": {
+          "x": 0.7405062093365729,
+          "y": 1.7567061047274706,
+          "z": 0.9216569804601704
+        },
+        "yaw": 0.009999999999999998,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5048,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.951613836683396,
+        "y": -197.96392659293764,
+        "z": -623.288707739626,
+        "tx": -27.981094700555957,
+        "ty": -199.07731140061816,
+        "tz": -630.1095330736829,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/shambler-death-f00.jpg",
+      "phase": "death",
+      "n": 0,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.7356816393166976,
+        "armL": -0.4999999999999999,
+        "armR": -0.34999999999999987
+      },
+      "subject": {
+        "id": "zombie.shambler",
+        "name": "Shambler",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.981094700555957,
+          "y": -199.07731140061816,
+          "z": -630.1095330736829
+        },
+        "size": {
+          "x": 0.7271641485674287,
+          "y": 1.7567061047274706,
+          "z": 0.9210940019307827
+        },
+        "yaw": 0.009999999999999998,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5144,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.951613836683396,
+        "y": -197.96392659293764,
+        "z": -623.288707739626,
+        "tx": -27.981094700555957,
+        "ty": -199.07731140061816,
+        "tz": -630.1095330736829,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/shambler-death-f01.jpg",
+      "phase": "death",
+      "n": 1,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.016666666666666666,
+        "corpseRX": 0.10182130919427493,
+        "corpseRZ": -0.02719849324159521,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.7356816393166976,
+        "armL": -0.4999999999999999,
+        "armR": -0.0835001113026219
+      },
+      "subject": {
+        "id": "zombie.shambler",
+        "name": "Shambler",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.981094700555957,
+          "y": -199.06945320808273,
+          "z": -630.1095330736829
+        },
+        "size": {
+          "x": 0.7829398456431136,
+          "y": 1.9439543593859412,
+          "z": 0.5897668691026183
+        },
+        "yaw": 0.011714364333342003,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5144,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.951613836683396,
+        "y": -197.95606840040222,
+        "z": -623.288707739626,
+        "tx": -27.981094700555957,
+        "ty": -199.06945320808273,
+        "tz": -630.1095330736829,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/shambler-death-f02.jpg",
+      "phase": "death",
+      "n": 2,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.03333333333333333,
+        "corpseRX": 0.19912368881731446,
+        "corpseRZ": -0.05290905377950401,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.7356816393166976,
+        "armL": -0.4999999999999999,
+        "armR": -0.15475284577583295
+      },
+      "subject": {
+        "id": "zombie.shambler",
+        "name": "Shambler",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.981094700555957,
+          "y": -199.0619503219716,
+          "z": -630.1095330736829
+        },
+        "size": {
+          "x": 0.8178089561269388,
+          "y": 1.9736629180896443,
+          "z": 0.774004876187746
+        },
+        "yaw": 0.01077432994675763,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5144,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.951613836683396,
+        "y": -197.9485655142911,
+        "z": -623.288707739626,
+        "tx": -27.981094700555957,
+        "ty": -199.0619503219716,
+        "tz": -630.1095330736829,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/shambler-death-f03.jpg",
+      "phase": "death",
+      "n": 3,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.05,
+        "corpseRX": 0.29191318851826475,
+        "corpseRZ": -0.07696068970899202,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.7356816393166976,
+        "armL": -0.4999999999999999,
+        "armR": -0.21417262087379033
+      },
+      "subject": {
+        "id": "zombie.shambler",
+        "name": "Shambler",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.981094700555957,
+          "y": -199.05479654110187,
+          "z": -630.1095330736829
+        },
+        "size": {
+          "x": 0.8594953851591747,
+          "y": 1.9844071339787774,
+          "z": 0.9509603628815739
+        },
+        "yaw": 0.0075645888502162825,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5144,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.951613836683396,
+        "y": -197.94141173342135,
+        "z": -623.288707739626,
+        "tx": -27.981094700555957,
+        "ty": -199.05479654110187,
+        "tz": -630.1095330736829,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/shambler-death-f04.jpg",
+      "phase": "death",
+      "n": 4,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.06666666666666667,
+        "corpseRX": 0.38021930042873614,
+        "corpseRZ": -0.09924673772656208,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.7356816393166976,
+        "armL": -0.4999999999999999,
+        "armR": -0.26231039066851125
+      },
+      "subject": {
+        "id": "zombie.shambler",
+        "name": "Shambler",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.981094700555957,
+          "y": -199.04798558995594,
+          "z": -630.1095330736829
+        },
+        "size": {
+          "x": 0.8958978394941042,
+          "y": 1.986845472404525,
+          "z": 1.1346909242373613
+        },
+        "yaw": 0.0024566872635437783,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5144,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.951613836683396,
+        "y": -197.93460078227542,
+        "z": -623.288707739626,
+        "tx": -27.981094700555957,
+        "ty": -199.04798558995594,
+        "tz": -630.1095330736829,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/shambler-death-f06.jpg",
+      "phase": "death",
+      "n": 6,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.09999999999999999,
+        "corpseRX": 0.5436028064391162,
+        "corpseRZ": -0.13836400224888928,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.7356816393166976,
+        "armL": -0.4999999999999999,
+        "armR": -0.3275097551068931
+      },
+      "subject": {
+        "id": "zombie.shambler",
+        "name": "Shambler",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.981094700555957,
+          "y": -199.03536668354874,
+          "z": -630.1095330736829
+        },
+        "size": {
+          "x": 0.9662406296405308,
+          "y": 1.9580134193120386,
+          "z": 1.4451153528748364
+        },
+        "yaw": -0.012076731682451335,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5144,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.951613836683396,
+        "y": -197.92198187586823,
+        "z": -623.288707739626,
+        "tx": -27.981094700555957,
+        "ty": -199.03536668354874,
+        "tz": -630.1095330736829,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/shambler-death-f08.jpg",
+      "phase": "death",
+      "n": 8,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.13333333333333333,
+        "corpseRX": 0.6898749975314067,
+        "corpseRZ": -0.1703562161119746,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.7356816393166976,
+        "armL": -0.4999999999999999,
+        "armR": -0.35674311885360227
+      },
+      "subject": {
+        "id": "zombie.shambler",
+        "name": "Shambler",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.981094700555957,
+          "y": -199.02404178332532,
+          "z": -630.1095330736829
+        },
+        "size": {
+          "x": 1.0365647558940374,
+          "y": 1.8785575148260705,
+          "z": 1.6621431499850132
+        },
+        "yaw": -0.030351348111976942,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5144,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.951613836683396,
+        "y": -197.9106569756448,
+        "z": -623.288707739626,
+        "tx": -27.981094700555957,
+        "ty": -199.02404178332532,
+        "tz": -630.1095330736829,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/shambler-death-f12.jpg",
+      "phase": "death",
+      "n": 12,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.19999999999999998,
+        "corpseRX": 0.9342484081242667,
+        "corpseRZ": -0.21550107514508288,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.7356816393166976,
+        "armL": -0.4999999999999999,
+        "armR": -0.33686274069912014
+      },
+      "subject": {
+        "id": "zombie.shambler",
+        "name": "Shambler",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.981094700555957,
+          "y": -199.0050594596014,
+          "z": -630.1095330736829
+        },
+        "size": {
+          "x": 1.1717857179136608,
+          "y": 1.6254136993105135,
+          "z": 1.9131707216536142
+        },
+        "yaw": -0.07064634856201876,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5144,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.951613836683396,
+        "y": -197.89167465192088,
+        "z": -623.288707739626,
+        "tx": -27.981094700555957,
+        "ty": -199.0050594596014,
+        "tz": -630.1095330736829,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/shambler-death-f20.jpg",
+      "phase": "death",
+      "n": 20,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.3333333333333333,
+        "corpseRX": 1.2541202977629682,
+        "corpseRZ": -0.254893117070247,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.7356816393166976,
+        "armL": -0.4999999999999999,
+        "armR": -0.17954753056964814
+      },
+      "subject": {
+        "id": "zombie.shambler",
+        "name": "Shambler",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.981094700555957,
+          "y": -198.9801640279848,
+          "z": -630.1095330736829
+        },
+        "size": {
+          "x": 1.3577962943910507,
+          "y": 1.1656576947089548,
+          "z": 2.102938150176101
+        },
+        "yaw": -0.13746348443695264,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5144,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.951613836683396,
+        "y": -197.8667792203043,
+        "z": -623.288707739626,
+        "tx": -27.981094700555957,
+        "ty": -198.9801640279848,
+        "tz": -630.1095330736829,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/shambler-death-f40.jpg",
+      "phase": "death",
+      "n": 40,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.6666666666666671,
+        "corpseRX": 1.4642592000406507,
+        "corpseRZ": -0.26669449473142504,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.7356816393166976,
+        "armL": -0.4999999999999999,
+        "armR": -0.08
+      },
+      "subject": {
+        "id": "zombie.shambler",
+        "name": "Shambler",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.981094700555957,
+          "y": -198.96731140061814,
+          "z": -630.1095330736829
+        },
+        "size": {
+          "x": 1.4209855725839518,
+          "y": 0.7821876469316749,
+          "z": 2.109867610739798
+        },
+        "yaw": -0.18776776462545236,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5144,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.951613836683396,
+        "y": -197.85392908153455,
+        "z": -623.288707739626,
+        "tx": -27.981094700555957,
+        "ty": -198.96731388921506,
+        "tz": -630.1095330736829,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/shambler-death-f80.jpg",
+      "phase": "death",
+      "n": 80,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 1.3333333333333335,
+        "corpseRX": 1.419812331142365,
+        "corpseRZ": -0.26512684492283184,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.7356816393166976,
+        "armL": -0.4999999999999999,
+        "armR": -0.08
+      },
+      "subject": {
+        "id": "zombie.shambler",
+        "name": "Shambler",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.981094700555957,
+          "y": -198.96731140061814,
+          "z": -630.1095330736829
+        },
+        "size": {
+          "x": 1.4154285216278062,
+          "y": 0.868036208904357,
+          "z": 2.1174392102751654
+        },
+        "yaw": -0.17585969255935105,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5144,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.951613836683396,
+        "y": -197.85392908153455,
+        "z": -623.288707739626,
+        "tx": -27.981094700555957,
+        "ty": -198.96731388921506,
+        "tz": -630.1095330736829,
+        "fov": 40
+      }
+    }
+  ],
+  "errors": [],
+  "pageErrors": []
+}

@@ -15,13 +15,13 @@
   :root {
     --bg: #f3f2ee; --panel: #fff; --ink: #1c1e1b; --muted: #676b63; --faint: #9a9d95; --line: #e0ded6;
     --chip: #efeee8; --accent: #b4452f; --danger: #c0392b; --warn: #b8710c; --ok: #2f8a4c;
-    --claude: #c0673a; --cursor: #3867d6; --chatgpt: #1f9d7a; --grokbot: #8e44ad; --opencode: #a88408; --antigravity: #c93d74;
+    --claude: #c0673a; --cursor: #3867d6; --chatgpt: #1f9d7a; --grokbot: #8e44ad; --opencode: #a88408; --antigravity: #c93d74; --muse: #2f8fa8;
   }
   @media (prefers-color-scheme: dark) {
     :root {
       --bg: #111310; --panel: #1a1d19; --ink: #e8e9e3; --muted: #9da196; --faint: #6f7369; --line: #2c302a;
       --chip: #252922; --accent: #e27a61; --danger: #ef6b5b; --warn: #e4a23d; --ok: #53c47a;
-      --claude: #e08a5c; --cursor: #6f95f0; --chatgpt: #3fc79f; --grokbot: #b57bd0; --opencode: #e0bd3c; --antigravity: #ee7aa6;
+      --claude: #e08a5c; --cursor: #6f95f0; --chatgpt: #3fc79f; --grokbot: #b57bd0; --opencode: #e0bd3c; --antigravity: #ee7aa6; --muse: #5cc2dc;
     }
   }
   * { box-sizing: border-box; }
@@ -270,7 +270,7 @@
   </ul></details></section>
 </main>
 <script>
-const AGENTS = [['claude', 'Claude', 'CL'], ['cursor', 'Cursor', 'CU'], ['chatgpt', 'ChatGPT', 'GP'], ['grokbot', 'Grokbot', 'GB'], ['antigravity', 'Antigravity', 'AG']];
+const AGENTS = [['claude', 'Claude', 'CL'], ['cursor', 'Cursor', 'CU'], ['chatgpt', 'ChatGPT', 'GP'], ['grokbot', 'Grokbot', 'GB'], ['antigravity', 'Antigravity', 'AG'], ['muse', 'Muse', 'MU']];
 const NAME = Object.fromEntries(AGENTS.map(([a, n]) => [a, n]));
 const BY_NAME = Object.fromEntries(AGENTS.map(([a, n]) => [n.toLowerCase(), a]));
 const STALE_HOURS = 8;

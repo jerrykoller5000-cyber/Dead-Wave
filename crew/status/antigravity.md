@@ -1,15 +1,19 @@
 # Antigravity
 
-state: active
-model: Gemini 3.1 Pro
-task: AG-148 Walk the trails (CL-256) and score GP-19970 seven-face maxilla close3
-touching: review/sweep/jobs/trails.json, review/sweep/trails/, qa/2026-10-28-AG-148/
-since: 2026-10-28T19:17Z
+state: idle
+model: Gemini 4 Argon (High)
+task: —
+touching: —
+since: 2026-10-29T16:11Z
 next: —
 blocked-on: —
-last-report: handoffs/2026-10-28-antigravity-AG-147.md
+last-report: handoffs/2026-10-29-antigravity-AG-156.md
 
 ## Notes
+
+### Your model (Jerry, 2026-10-29)
+You run on **Gemini 4 Argon (High)**, not Gemini 3.1 Pro: check in with `--model "Gemini 4 Argon (High)"`.
+
 
 ### STANDING RULE (Jerry, 2026-10-15, effective immediately): ONE active game-testing session per computer
 1. Do NOT launch the game without owning the shared testing slot (includes Marine Inspector, screenshots, `tools/camera.mjs`, `tools/shoot.mjs`, automated browser tests, and hidden/headless game instances).
@@ -32,8 +36,12 @@ a real GPU the way you can.
 - Serve the game with `npm run serve` and open http://127.0.0.1:8971/index.html?debug=1.
   With ?debug=1, window.TT is available in the DevTools console.
 
-### Status (2026-10-28)
-- **AG-86..AG-145**: DONE (see `handoffs/`). Completed GPU world sweeps, `camp-trapper` yard & iron-lined cellar (`AG-124`, `AG-135`, `AG-137`, `AG-140`, `AG-141`), HQ Duty Board/Radio Set & trailhead posters (`AG-125`, `AG-132`), 6-family buildables overhaul (`AG-129`), raised vs ground turret wall-clearance GPU shots (`AG-144`, `qa/2026-10-28-AG-144/`), and `GP-19970`/`GP-19977` visual reviews (`AG-138`, `AG-141`, `AG-142`, `AG-143`, `AG-145`).
-- **AG-144 (trapper cellar's ground)**: DONE (`handoffs/2026-10-28-antigravity-AG-144-cellar.md`, `qa/2026-10-28-AG-144-cellar/report.md`). Replaced flat mound slab over `camp-trapper` cellar with `buildTrapperCellarCap` vertex-colored terrain cap + concrete hatch collar (`0` sweep findings, `66/66` browser checks PASS).
-- **AG-146**: DONE (`handoffs/2026-10-28-antigravity-AG-146.md`, `qa/2026-10-28-AG-146/report.md`, `qa/2026-10-28-AG-146/gp-19970-reviews.md`). Ran `review/sweep/jobs/cave-mouths.json` on the real GPU (24 shots + `sheet.jpg`, all 6 cave mouths PASS `4.2/5`–`5.0/5` day & night) and scored all 3 `GP-19970` follow-up close-up batches.
-- **Next**: Queue empty; ready for next visual review or GPU sweep.
+### Status (2026-10-29)
+- **AG-86..AG-150**: DONE (see `handoffs/`). Completed GPU world/trail/cave sweeps (`AG-146`, `AG-148`, `AG-149`), Claude's inspector principle shots (`AG-150`), and `GP-19970` visual reviews (`qa/2026-10-29-gp-19970-scores/report.md`).
+- **AG-151**: DONE (`handoffs/2026-10-29-antigravity-AG-151.md`, `docs/perf/2026-10-29-night20-owners.md`, `qa/2026-10-29-AG-151/probe-b.json`). Measured Night-20 draws and triangles by owner on `82d75118` vs `HEAD` (`landmarks` `+16` draws / `+6,250` tris, `houses` `+5` draws / `+3,828` tris, `zombies` `+0` draws / `+1,636` tris).
+- **AG-152**: DONE (`handoffs/2026-10-29-antigravity-AG-152.md`). Captured and verified all 24 inspector after-shots + `sheet.jpg` (`review/principles/claude/after/`) and Pike's hiding spot match shots (`review/sweep/pike-hide/`) on the RTX 5080.
+- **AG-153**: DONE (`handoffs/2026-10-29-antigravity-AG-153.md`). Merged HQ south-wall duty board (3 draws -> 1) and radio set (2 draws -> 1) into static vertex-colored meshes; verified standard & close views.
+- **AG-155**: DONE (`handoffs/2026-10-29-antigravity-AG-155.md`, `qa/2026-10-29-AG-155/report.md`). Evaluated ChatGPT's GP-19981 Brandt beard after11; scored 4.5/5 gameplay, flagged 3.5/5 sub-4 profile defect (72px floating sliver and 19px daylight gap).
+- **AG-156**: DONE (`handoffs/2026-10-29-antigravity-AG-156.md`, `qa/2026-10-29-AG-156/report.md`). Rescored ChatGPT's GP-19981 Brandt beard after13; verified profile defect 100% resolved (0px sliver/gap, solid lip return); all categories score >= 4.0/5 (overall 4.5/5 PASS).
+- **GP-19970 Reviews**: DONE (`qa/2026-10-29-gp-19970-scores/report.md`). Evaluated and answered all 35 requests from ChatGPT, including today's final 9 (Colossus mass rescore, Screamer howl structure, acid/web impacts, marine waist helper, live Drowned grab, live Brute smash, live Military bash, final 14-zombie atlas rescore, and final 3 generic attack/death surveys). All 9 passed D-89 standards.
+- **Next**: Queue empty; 0 requests waiting; ready for next visual review or GPU sweep.

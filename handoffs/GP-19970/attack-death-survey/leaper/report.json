@@ -1,0 +1,1681 @@
+{
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "frames": [
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/leaper/leaper-idle-f00.jpg",
+      "phase": "idle",
+      "n": 0,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0,
+        "hipsY": 0.5704,
+        "armL": -0.6388289086815298,
+        "armR": -0.6388289086815298
+      },
+      "subject": {
+        "id": "zombie.leaper",
+        "name": "Leaper",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.818875,
+          "y": -199.60424380792625,
+          "z": -632
+        },
+        "size": {
+          "x": 1.1699124684741022,
+          "y": 1.2239920119983765,
+          "z": 0.8311300593580881
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4650,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -20.958096567305958,
+        "y": -198.49085900024573,
+        "z": -635.9610722749662,
+        "tx": -27.818875,
+        "ty": -199.60424380792625,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/leaper/leaper-attack-f01.jpg",
+      "phase": "attack",
+      "n": 1,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.20333333333333334,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.007575757575757569,
+        "hipsY": 0.57805652348338,
+        "armL": -2.333333333333333,
+        "armR": -2.333333333333333
+      },
+      "subject": {
+        "id": "zombie.leaper",
+        "name": "Leaper",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.758499999999998,
+          "y": -199.60424380792625,
+          "z": -632
+        },
+        "size": {
+          "x": 2.295557517897926,
+          "y": 1.2327884564789713,
+          "z": 0.9060675591073277
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4650,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -20.897721567305958,
+        "y": -198.49085900024573,
+        "z": -635.9610722749662,
+        "tx": -27.758499999999998,
+        "ty": -199.60424380792625,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/leaper/leaper-attack-f02.jpg",
+      "phase": "attack",
+      "n": 2,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.18666666666666668,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.01515151515151515,
+        "hipsY": 0.5819756546149746,
+        "armL": -2.4166666666666665,
+        "armR": -2.4166666666666665
+      },
+      "subject": {
+        "id": "zombie.leaper",
+        "name": "Leaper",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.698124999999997,
+          "y": -199.60424380792625,
+          "z": -632
+        },
+        "size": {
+          "x": 2.3328913760993437,
+          "y": 1.2296701819400937,
+          "z": 0.8656171533237966
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4650,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -20.837346567305957,
+        "y": -198.49085900024573,
+        "z": -635.9610722749662,
+        "tx": -27.698124999999997,
+        "ty": -199.60424380792625,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/leaper/leaper-attack-f03.jpg",
+      "phase": "attack",
+      "n": 3,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.17,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.02272727272727272,
+        "hipsY": 0.58559512733677,
+        "armL": -2.5,
+        "armR": -2.5
+      },
+      "subject": {
+        "id": "zombie.leaper",
+        "name": "Leaper",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.637749999999997,
+          "y": -199.60424380792625,
+          "z": -632
+        },
+        "size": {
+          "x": 2.364894961399088,
+          "y": 1.2239209627660728,
+          "z": 0.8275862377571457
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4650,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -20.776971567305957,
+        "y": -198.49085900024573,
+        "z": -635.9610722749662,
+        "tx": -27.637749999999997,
+        "ty": -199.60424380792625,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/leaper/leaper-attack-f04.jpg",
+      "phase": "attack",
+      "n": 4,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.15333333333333335,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.0303030303030303,
+        "hipsY": 0.5887939188514651,
+        "armL": -2.5833333333333335,
+        "armR": -2.5833333333333335
+      },
+      "subject": {
+        "id": "zombie.leaper",
+        "name": "Leaper",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.577374999999996,
+          "y": -199.60424380792625,
+          "z": -632
+        },
+        "size": {
+          "x": 2.381374444727687,
+          "y": 1.214882431388304,
+          "z": 0.8118270159411622
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4650,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -20.716596567305956,
+        "y": -198.49085900024573,
+        "z": -635.9610722749662,
+        "tx": -27.577374999999996,
+        "ty": -199.60424380792625,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/leaper/leaper-attack-f05.jpg",
+      "phase": "attack",
+      "n": 5,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.1366666666666667,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.03787878787878787,
+        "hipsY": 0.5914642655974219,
+        "armL": -2.6666666666666665,
+        "armR": -2.6666666666666665
+      },
+      "subject": {
+        "id": "zombie.leaper",
+        "name": "Leaper",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.516999999999996,
+          "y": -199.60424380792625,
+          "z": -632
+        },
+        "size": {
+          "x": 2.3807154566408,
+          "y": 1.20196000372934,
+          "z": 0.8085973185617377
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4650,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -20.656221567305955,
+        "y": -198.49085900024573,
+        "z": -635.9610722749662,
+        "tx": -27.516999999999996,
+        "ty": -199.60424380792625,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/leaper/leaper-attack-f06.jpg",
+      "phase": "attack",
+      "n": 6,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.12000000000000002,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.04545454545454545,
+        "hipsY": 0.5935144619336098,
+        "armL": -2.75,
+        "armR": -2.75
+      },
+      "subject": {
+        "id": "zombie.leaper",
+        "name": "Leaper",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.456624999999995,
+          "y": -199.60424380792625,
+          "z": -632
+        },
+        "size": {
+          "x": 2.361412334264518,
+          "y": 1.1847471193023296,
+          "z": 0.8045817125457688
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4650,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -20.595846567305955,
+        "y": -198.49085900024573,
+        "z": -635.9610722749662,
+        "tx": -27.456624999999995,
+        "ty": -199.60424380792625,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/leaper/leaper-attack-f07.jpg",
+      "phase": "attack",
+      "n": 7,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.10333333333333336,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.05303030303030302,
+        "hipsY": 0.5948712319697738,
+        "armL": -2.833333333333333,
+        "armR": -2.833333333333333
+      },
+      "subject": {
+        "id": "zombie.leaper",
+        "name": "Leaper",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.396249999999995,
+          "y": -199.60424380792625,
+          "z": -632
+        },
+        "size": {
+          "x": 2.32291245352539,
+          "y": 1.1731877564818944,
+          "z": 0.7997696818640634
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4650,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -20.535471567305954,
+        "y": -198.49085900024573,
+        "z": -635.9610722749662,
+        "tx": -27.396249999999995,
+        "ty": -199.60424380792625,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/leaper/leaper-attack-f08.jpg",
+      "phase": "attack",
+      "n": 8,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.0866666666666667,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.0606060606060606,
+        "hipsY": 0.5954816089046274,
+        "armL": -2.9166666666666665,
+        "armR": -2.9166666666666665
+      },
+      "subject": {
+        "id": "zombie.leaper",
+        "name": "Leaper",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.335874999999994,
+          "y": -199.60424380792625,
+          "z": -632
+        },
+        "size": {
+          "x": 2.265188924922313,
+          "y": 1.254244572151606,
+          "z": 0.7941481724095638
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4650,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -20.475096567305954,
+        "y": -198.49085900024573,
+        "z": -635.9610722749662,
+        "tx": -27.335874999999994,
+        "ty": -199.60424380792625,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/leaper/leaper-attack-f09.jpg",
+      "phase": "attack",
+      "n": 9,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.07000000000000003,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.06818181818181816,
+        "hipsY": 0.5953819166781178,
+        "armL": -3,
+        "armR": -3
+      },
+      "subject": {
+        "id": "zombie.leaper",
+        "name": "Leaper",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.275499999999994,
+          "y": -199.60424380792625,
+          "z": -632
+        },
+        "size": {
+          "x": 2.1921952443009864,
+          "y": 1.3222456028477438,
+          "z": 0.7877034925602402
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4650,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -20.414721567305953,
+        "y": -198.49085900024573,
+        "z": -635.9610722749662,
+        "tx": -27.275499999999994,
+        "ty": -199.60424380792625,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/leaper/leaper-attack-f10.jpg",
+      "phase": "attack",
+      "n": 10,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.05333333333333337,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.07575757575757575,
+        "hipsY": 0.5945876675467169,
+        "armL": -3.083333333333333,
+        "armR": -3.083333333333333
+      },
+      "subject": {
+        "id": "zombie.leaper",
+        "name": "Leaper",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.215124999999993,
+          "y": -199.60424380792625,
+          "z": -632
+        },
+        "size": {
+          "x": 2.115174936789664,
+          "y": 1.3922878702704793,
+          "z": 0.7804196803349441
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4650,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -20.354346567305953,
+        "y": -198.49085900024573,
+        "z": -635.9610722749662,
+        "tx": -27.215124999999993,
+        "ty": -199.60424380792625,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/leaper/leaper-attack-f12.jpg",
+      "phase": "attack",
+      "n": 12,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.020000000000000042,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.0909090909090909,
+        "hipsY": 0.590911862835693,
+        "armL": -3.25,
+        "armR": -3.25
+      },
+      "subject": {
+        "id": "zombie.leaper",
+        "name": "Leaper",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.094374999999992,
+          "y": -199.60424380792625,
+          "z": -632
+        },
+        "size": {
+          "x": 1.970387933279369,
+          "y": 1.6458674772367772,
+          "z": 0.7663458632765696
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4650,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -20.233596567305952,
+        "y": -198.49085900024573,
+        "z": -635.9610722749662,
+        "tx": -27.094374999999992,
+        "ty": -199.60424380792625,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/leaper/leaper-attack-f14.jpg",
+      "phase": "attack",
+      "n": 14,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.28,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.1,
+        "hipsY": 0.5846933684202615,
+        "armL": -3.35,
+        "armR": -3.35
+      },
+      "subject": {
+        "id": "zombie.leaper",
+        "name": "Leaper",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.97362499999999,
+          "y": -199.60424380792625,
+          "z": -632
+        },
+        "size": {
+          "x": 1.8655836448895613,
+          "y": 1.7871312576996559,
+          "z": 0.7613218555426329
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4650,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -20.11284656730595,
+        "y": -198.49085900024573,
+        "z": -635.9610722749662,
+        "tx": -26.97362499999999,
+        "ty": -199.60424380792625,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/leaper/leaper-attack-f16.jpg",
+      "phase": "attack",
+      "n": 16,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.2466666666666667,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.13083521591645728,
+        "hipsY": 0.5599090054831867,
+        "armL": -2.6994365481516045,
+        "armR": -2.6994365481516045
+      },
+      "subject": {
+        "id": "zombie.leaper",
+        "name": "Leaper",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.85287499999999,
+          "y": -199.60424380792625,
+          "z": -632
+        },
+        "size": {
+          "x": 2.3450962197546623,
+          "y": 1.159065130560009,
+          "z": 0.8062955164988352
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4650,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -19.99209656730595,
+        "y": -198.49085900024573,
+        "z": -635.9610722749662,
+        "tx": -26.85287499999999,
+        "ty": -199.60424380792625,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/leaper/leaper-attack-f18.jpg",
+      "phase": "attack",
+      "n": 18,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.21333333333333337,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.23134685680847852,
+        "hipsY": 0.5353149172393178,
+        "armL": -2.0997246201889594,
+        "armR": -2.0997246201889594
+      },
+      "subject": {
+        "id": "zombie.leaper",
+        "name": "Leaper",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.73212499999999,
+          "y": -199.60424380792625,
+          "z": -632
+        },
+        "size": {
+          "x": 2.0378225343928484,
+          "y": 1.1395541781628253,
+          "z": 0.8048786085270194
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4650,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -19.87134656730595,
+        "y": -198.49085900024573,
+        "z": -635.9610722749662,
+        "tx": -26.73212499999999,
+        "ty": -199.60424380792625,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/leaper/leaper-attack-f20.jpg",
+      "phase": "attack",
+      "n": 20,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.18000000000000005,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.27823941877010794,
+        "hipsY": 0.529998996717256,
+        "armL": -1.5977409125245614,
+        "armR": -1.5977409125245614
+      },
+      "subject": {
+        "id": "zombie.leaper",
+        "name": "Leaper",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.61137499999999,
+          "y": -199.60424380792625,
+          "z": -632
+        },
+        "size": {
+          "x": 1.5899049203564815,
+          "y": 1.4108382684463834,
+          "z": 1.0740829802475673
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4650,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -19.750596567305948,
+        "y": -198.49085900024573,
+        "z": -635.9610722749662,
+        "tx": -26.61137499999999,
+        "ty": -199.60424380792625,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/leaper/leaper-attack-f22.jpg",
+      "phase": "attack",
+      "n": 22,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.14666666666666672,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.2606446496203773,
+        "hipsY": 0.5299753694647847,
+        "armL": -1.2327231604293152,
+        "armR": -1.2327231604293152
+      },
+      "subject": {
+        "id": "zombie.leaper",
+        "name": "Leaper",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.491167673845393,
+          "y": -199.60424380792625,
+          "z": -631.9919232821065
+        },
+        "size": {
+          "x": 1.7335999834882934,
+          "y": 1.3440512599826206,
+          "z": 1.4516786726859436
+        },
+        "yaw": 1.4366182047022114,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4650,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -19.162160697782717,
+        "y": -198.49085900024573,
+        "z": -634.99958533341,
+        "tx": -26.491167673845393,
+        "ty": -199.60424380792625,
+        "tz": -631.9919232821065,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/leaper/leaper-attack-f24.jpg",
+      "phase": "attack",
+      "n": 24,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.1133333333333334,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.182640475157874,
+        "hipsY": 0.5322782355026173,
+        "armL": -1.033203106482146,
+        "armR": -1.033203106482146
+      },
+      "subject": {
+        "id": "zombie.leaper",
+        "name": "Leaper",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.371503021536203,
+          "y": -199.60424380792625,
+          "z": -631.9757698463196
+        },
+        "size": {
+          "x": 1.726859381614588,
+          "y": 1.2133305310005653,
+          "z": 1.4857291822918341
+        },
+        "yaw": 1.436618204702223,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4650,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -19.042496045473563,
+        "y": -198.49085900024573,
+        "z": -634.9834318976232,
+        "tx": -26.371503021536203,
+        "ty": -199.60424380792625,
+        "tz": -631.9757698463196,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/leaper/leaper-attack-f26.jpg",
+      "phase": "attack",
+      "n": 26,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.08000000000000007,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.06230586150776819,
+        "hipsY": 0.5361760509316508,
+        "armL": -1,
+        "armR": -1
+      },
+      "subject": {
+        "id": "zombie.leaper",
+        "name": "Leaper",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.251838369227013,
+          "y": -199.60424380792625,
+          "z": -631.9596164105327
+        },
+        "size": {
+          "x": 1.7113516231869532,
+          "y": 1.191097615437485,
+          "z": 1.47674558686424
+        },
+        "yaw": 1.43661820470225,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4650,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -18.92283139316445,
+        "y": -198.49085900024573,
+        "z": -634.9672784618364,
+        "tx": -26.251838369227013,
+        "ty": -199.60424380792625,
+        "tz": -631.9596164105327,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/leaper/leaper-attack-f30.jpg",
+      "phase": "attack",
+      "n": 30,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.536122625705238,
+        "armL": -1,
+        "armR": -1
+      },
+      "subject": {
+        "id": "zombie.leaper",
+        "name": "Leaper",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.011910968661578,
+          "y": -199.60424380792625,
+          "z": -631.9323380769268
+        },
+        "size": {
+          "x": 1.6696078926439455,
+          "y": 1.2026364535035157,
+          "z": 1.3998439845343
+        },
+        "yaw": 1.4766012228982934,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4650,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -18.808984808654177,
+        "y": -198.49085900024573,
+        "z": -635.2305541104073,
+        "tx": -26.011910968661578,
+        "ty": -199.60424380792625,
+        "tz": -631.9323380769268,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/leaper/leaper-death-f00.jpg",
+      "phase": "death",
+      "n": 0,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.536122625705238,
+        "armL": -1,
+        "armR": -1
+      },
+      "subject": {
+        "id": "zombie.leaper",
+        "name": "Leaper",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.011910968661578,
+          "y": -199.60424380792625,
+          "z": -631.9323380769268
+        },
+        "size": {
+          "x": 1.6640730312455538,
+          "y": 0.8793780092510701,
+          "z": 1.3412583285402206
+        },
+        "yaw": 1.4766012228982934,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 4746,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -18.808984808654177,
+        "y": -198.49085900024573,
+        "z": -635.2305541104073,
+        "tx": -26.011910968661578,
+        "ty": -199.60424380792625,
+        "tz": -631.9323380769268,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/leaper/leaper-death-f01.jpg",
+      "phase": "death",
+      "n": 1,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.016666666666666666,
+        "corpseRX": -0.7634113728388844,
+        "corpseRZ": 0.7860902499889155,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.536122625705238,
+        "armL": -0.17232139477814162,
+        "armR": -1
+      },
+      "subject": {
+        "id": "zombie.leaper",
+        "name": "Leaper",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.011910968661578,
+          "y": -199.59633154705597,
+          "z": -631.9323380769268
+        },
+        "size": {
+          "x": 1.7385221221534337,
+          "y": 1.367990258518745,
+          "z": 0.9030427686449229
+        },
+        "yaw": 1.4095366674606102,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 4746,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -18.808984808654177,
+        "y": -198.48294673937545,
+        "z": -635.2305541104073,
+        "tx": -26.011910968661578,
+        "ty": -199.59633154705597,
+        "tz": -631.9323380769268,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/leaper/leaper-death-f02.jpg",
+      "phase": "death",
+      "n": 2,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.03333333333333333,
+        "corpseRX": -0.9965942665592811,
+        "corpseRZ": 1.0432098830337626,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.536122625705238,
+        "armL": -0.32430607238884906,
+        "armR": -1
+      },
+      "subject": {
+        "id": "zombie.leaper",
+        "name": "Leaper",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.011910968661578,
+          "y": -199.58881188827266,
+          "z": -631.9323380769268
+        },
+        "size": {
+          "x": 1.8647945192966695,
+          "y": 1.5521244893282358,
+          "z": 0.9559203716486309
+        },
+        "yaw": 1.3130756948711348,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 4746,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -18.808984808654177,
+        "y": -198.47542708059214,
+        "z": -635.2305541104073,
+        "tx": -26.011910968661578,
+        "ty": -199.58881188827266,
+        "tz": -631.9323380769268,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/leaper/leaper-death-f03.jpg",
+      "phase": "death",
+      "n": 3,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.05,
+        "corpseRX": -1.0891962002712254,
+        "corpseRZ": 1.1608186019332045,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.536122625705238,
+        "armL": -0.45668250848606884,
+        "armR": -1
+      },
+      "subject": {
+        "id": "zombie.leaper",
+        "name": "Leaper",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.011910968661578,
+          "y": -199.58167729019186,
+          "z": -631.9323380769268
+        },
+        "size": {
+          "x": 1.9799107863202714,
+          "y": 1.7573380996799983,
+          "z": 1.0102571654566646
+        },
+        "yaw": 1.2155946021480941,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 4746,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -18.808984808654177,
+        "y": -198.46829248251134,
+        "z": -635.2305541104073,
+        "tx": -26.011910968661578,
+        "ty": -199.58167729019186,
+        "tz": -631.9323380769268,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/leaper/leaper-death-f04.jpg",
+      "phase": "death",
+      "n": 4,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.06666666666666667,
+        "corpseRX": -1.1338567364948644,
+        "corpseRZ": 1.231373647106206,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.536122625705238,
+        "armL": -0.5704026180748243,
+        "armR": -1
+      },
+      "subject": {
+        "id": "zombie.leaper",
+        "name": "Leaper",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.011910968661578,
+          "y": -199.5749201116288,
+          "z": -631.9323380769268
+        },
+        "size": {
+          "x": 2.0725043296312897,
+          "y": 1.9174396170930947,
+          "z": 1.0636319315382252
+        },
+        "yaw": 1.121758854125579,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 4746,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -18.808984808654177,
+        "y": -198.4615353039483,
+        "z": -635.2305541104073,
+        "tx": -26.011910968661578,
+        "ty": -199.5749201116288,
+        "tz": -631.9323380769268,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/leaper/leaper-death-f06.jpg",
+      "phase": "death",
+      "n": 6,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.09999999999999999,
+        "corpseRX": -1.1689661926849455,
+        "corpseRZ": 1.3202153469577873,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.536122625705238,
+        "armL": -0.7465830100593982,
+        "armR": -1
+      },
+      "subject": {
+        "id": "zombie.leaper",
+        "name": "Leaper",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.011910968661578,
+          "y": -199.56250692021376,
+          "z": -631.9323380769268
+        },
+        "size": {
+          "x": 2.1834502587179294,
+          "y": 2.1278230724979608,
+          "z": 1.163151203060238
+        },
+        "yaw": 0.9487957225345707,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 4746,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -18.808984808654177,
+        "y": -198.44912211253325,
+        "z": -635.2305541104073,
+        "tx": -26.011910968661578,
+        "ty": -199.56250692021376,
+        "tz": -631.9323380769268,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/leaper/leaper-death-f08.jpg",
+      "phase": "death",
+      "n": 8,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.13333333333333333,
+        "corpseRX": -1.1751366471513505,
+        "corpseRZ": 1.3815045308037965,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.536122625705238,
+        "armL": -0.863554487718009,
+        "armR": -1
+      },
+      "subject": {
+        "id": "zombie.leaper",
+        "name": "Leaper",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.011910968661578,
+          "y": -199.55150899622217,
+          "z": -631.9323380769268
+        },
+        "size": {
+          "x": 2.210007158429452,
+          "y": 2.231361340764721,
+          "z": 1.250276412774383
+        },
+        "yaw": 0.7964625168465935,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 4746,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -18.808984808654177,
+        "y": -198.43812418854165,
+        "z": -635.2305541104073,
+        "tx": -26.011910968661578,
+        "ty": -199.55150899622217,
+        "tz": -631.9323380769268,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/leaper/leaper-death-f12.jpg",
+      "phase": "death",
+      "n": 12,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.19999999999999998,
+        "corpseRX": -1.158569428008205,
+        "corpseRZ": 1.4734873441578742,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.536122625705238,
+        "armL": -0.9678788864589503,
+        "armR": -1
+      },
+      "subject": {
+        "id": "zombie.leaper",
+        "name": "Leaper",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.011910968661578,
+          "y": -199.5334957008391,
+          "z": -631.9323380769268
+        },
+        "size": {
+          "x": 2.1110451199157083,
+          "y": 2.2514764039501642,
+          "z": 1.385936345185769
+        },
+        "yaw": 0.5510041307595563,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 4746,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -18.808984808654177,
+        "y": -198.42011089315858,
+        "z": -635.2305541104073,
+        "tx": -26.011910968661578,
+        "ty": -199.5334957008391,
+        "tz": -631.9323380769268,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/leaper/leaper-death-f20.jpg",
+      "phase": "death",
+      "n": 20,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.3333333333333333,
+        "corpseRX": -1.1066714692391237,
+        "corpseRZ": 1.5943502131269403,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.536122625705238,
+        "armL": -0.9563798693790921,
+        "armR": -1
+      },
+      "subject": {
+        "id": "zombie.leaper",
+        "name": "Leaper",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.011910968661578,
+          "y": -199.51141690153278,
+          "z": -631.9323380769268
+        },
+        "size": {
+          "x": 1.810768912519979,
+          "y": 2.0535091818679234,
+          "z": 1.5368700113210707
+        },
+        "yaw": 0.26069566227736635,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 4746,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -18.808984808654177,
+        "y": -198.39803209385227,
+        "z": -635.2305541104073,
+        "tx": -26.011910968661578,
+        "ty": -199.51141690153278,
+        "tz": -631.9323380769268,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/leaper/leaper-death-f40.jpg",
+      "phase": "death",
+      "n": 40,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.6666666666666671,
+        "corpseRX": -1.0731199363571464,
+        "corpseRZ": 1.6776352898709652,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.536122625705238,
+        "armL": -0.95,
+        "armR": -1
+      },
+      "subject": {
+        "id": "zombie.leaper",
+        "name": "Leaper",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.011910968661578,
+          "y": -199.50304380792625,
+          "z": -631.9323380769268
+        },
+        "size": {
+          "x": 1.6396144260032166,
+          "y": 1.8334336569228071,
+          "z": 1.5984605442764632
+        },
+        "yaw": 0.09716994842179785,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 4746,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -18.808984808654177,
+        "y": -198.38966040811346,
+        "z": -635.2305541104073,
+        "tx": -26.011910968661578,
+        "ty": -199.50304521579397,
+        "tz": -631.9323380769268,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/leaper/leaper-death-f80.jpg",
+      "phase": "death",
+      "n": 80,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 1.3333333333333335,
+        "corpseRX": -1.078429641511813,
+        "corpseRZ": 1.6462811580929906,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.536122625705238,
+        "armL": -0.95,
+        "armR": -1
+      },
+      "subject": {
+        "id": "zombie.leaper",
+        "name": "Leaper",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.011910968661578,
+          "y": -199.50304380792625,
+          "z": -631.9323380769268
+        },
+        "size": {
+          "x": 1.7052076636471085,
+          "y": 1.9191586578871522,
+          "z": 1.5874424654895165
+        },
+        "yaw": 0.15480105737906874,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 4746,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -18.808984808654177,
+        "y": -198.38966040811346,
+        "z": -635.2305541104073,
+        "tx": -26.011910968661578,
+        "ty": -199.50304521579397,
+        "tz": -631.9323380769268,
+        "fov": 40
+      }
+    }
+  ],
+  "errors": [],
+  "pageErrors": []
+}

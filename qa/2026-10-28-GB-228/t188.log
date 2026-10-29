@@ -1,0 +1,13 @@
+file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/game-test-slot.mjs:431
+        throw new Error(
+              ^
+
+Error: grokbot already holds the game-test slot for GB-228; nested launches are blocked
+    at result.#mutate.prePromote (file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/game-test-slot.mjs:431:15)
+    at #mutate (file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/game-test-slot.mjs:396:21)
+    at async GameTestSlot.request (file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/game-test-slot.mjs:429:20)
+    at async runQueuedCommand (file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/game-test-slot.mjs:880:18)
+    at async main (file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/game-test-slot.mjs:991:5)
+    at async file:///C:/Users/Zero/Desktop/Tiny%20Trek/crew/crew.mjs:676:3
+
+Node.js v24.13.0

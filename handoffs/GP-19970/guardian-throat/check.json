@@ -1,0 +1,35 @@
+{
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "rows": [
+    {
+      "id": "zombie.guardian",
+      "variant": null,
+      "mode": "statue",
+      "ok": true,
+      "ms": 470,
+      "tris": 4180,
+      "size": [
+        1.519,
+        3.224,
+        1.25
+      ],
+      "error": null
+    },
+    {
+      "id": "zombie.caveguard",
+      "variant": null,
+      "mode": "statue",
+      "ok": true,
+      "ms": 170,
+      "tris": 4180,
+      "size": [
+        1.457,
+        2.923,
+        1.43
+      ],
+      "error": null
+    }
+  ],
+  "errors": [],
+  "pageErrors": []
+}

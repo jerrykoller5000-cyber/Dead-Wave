@@ -1,6 +1,7 @@
 import * as Coldwater from './coldwater.js';
 import * as Trapper from './trapper.js';
 import * as Mine from './mine-props.js';
+import { buildMarineHelmet } from '../studio/marine-headgear.js';
 import { text } from '../ui/strings.js';
 import { paintHikerPosters, loadHikerPortraits, drawHikerPoster, drawHikerRoster } from '../ui/hikers.js';
 // world/history-props.js — the valley's history in things, not words (CL-108, CL-109, D-70, docs/story.md §2, §6, §7).
@@ -559,13 +560,72 @@ export function buildBrass(T, n = 30, rnd = Math.random, spread = 1.4) {
   return g;
 }
 
-export function buildDroppedHelmet(T) {
+// CL-267 (docs/asset-principles.md: one object, one look): the fallen marine's own helmet (studio/marine-headgear.js,
+// GP-163's high-cut shell, cover, rails, shroud and counterweight), off his head and in the dirt: rolled onto its side,
+// the brim dug in, the chin strap unclipped and lying out from under the rim, the dark pad liner inside. Two draws, as
+// before (night 20's budget): the camo cover, and everything else baked into one vertex-coloured mesh.
+// mats: the marine's own (index.html passes them); plain ones otherwise.
+export function buildDroppedHelmet(T, mats = {}) {
   const g = new T.Group(); g.name = 'dropped-helmet';
-  const m = std(T, 0x3f4430, 0.7, 0.15);
-  const shell = new T.Mesh(new T.SphereGeometry(0.17, 12, 8, 0, Math.PI * 2, 0, Math.PI / 2), m);
-  shell.rotation.set(1.9, 0, 0.3); shell.position.y = 0.12; shell.castShadow = true; g.add(shell);
-  box(T, g, 0.25, 0.015, 0.04, std(T, 0x2a2a22), 0.08, 0.02, 0.15, 0, 0.6, 0);
+  const M = {
+    shellW: mats.cover || std(T, 0x66654a, 0.9, 0.05), helmetMat: mats.helmet || std(T, 0x4f5740, 0.55, 0.45),
+    nvgMat: mats.nvg || std(T, 0x2c3038, 0.4, 0.7), strapMat: mats.strap || std(T, 0x2b2e24, 0.9, 0.05),
+    pouchMat: mats.pouch || std(T, 0x34382c, 0.92, 0.08), buckleMat: mats.buckle || std(T, 0x7a7c74, 0.45, 0.6),
+  };
+  const pivot = new T.Group(), rig = new T.Group(); pivot.add(rig); g.add(pivot);
+  const built = buildMarineHelmet(T, { add: (o, x, y, z) => { o.position.set(x, y, z); rig.add(o); return o; }, mats: M });
+  for (const o of rig.children.slice()) if (o.position.y < 1.45) rig.remove(o);   // the chin cup, the straps under his jaw, the headset's ear-cup washers
+  // The inside: on the marine nobody sees into the shell; on the ground you can. The shell turned inside out, a shade in.
+  const lg = built.shell.geometry.toNonIndexed(), lp = lg.attributes.position.array;
+  for (let i = 0; i < lp.length; i += 9) for (let k = 0; k < 3; k++) { const a = lp[i + 3 + k]; lp[i + 3 + k] = lp[i + 6 + k]; lp[i + 6 + k] = a; }
+  lg.computeVertexNormals();
+  const liner = new T.Mesh(lg, std(T, 0x24261f, 0.95)); liner.position.copy(built.shell.position); liner.scale.setScalar(0.97); rig.add(liner);
+  rig.position.y = -1.53;   // the shell's middle at the pivot
+  pivot.rotation.set(0.22, 0.4, 1.32);   // on its side, the crown out, the brim's front corner down
+  // The chin strap, unclipped: out from under the rim and lying in the dirt, a little curl at its free end.
+  const strapPts = [[0.02, 0.05, 0.05], [0.05, 0.012, 0.13], [0.12, 0.006, 0.2], [0.2, 0.006, 0.22], [0.24, 0.008, 0.18]];
+  g.updateMatrixWorld(true);
+  const inv = g.matrixWorld.clone().invert(), cover = [], coloured = [];
+  rig.traverse((o) => {
+    if (!o.isMesh) return;
+    const geo = o.geometry.index ? o.geometry.toNonIndexed() : o.geometry.clone();
+    if (!geo.attributes.normal) geo.computeVertexNormals();
+    geo.applyMatrix4(new T.Matrix4().multiplyMatrices(inv, o.matrixWorld));
+    if (o.material === M.shellW) cover.push(geo); else coloured.push({ geo, color: o.material.color });
+  });
+  g.remove(pivot);
+  let low = Infinity;
+  for (const q of [...cover, ...coloured.map((c) => c.geo)]) { const a = q.attributes.position.array; for (let i = 1; i < a.length; i += 3) low = Math.min(low, a[i]); }
+  for (const q of [...cover, ...coloured.map((c) => c.geo)]) q.translate(0, -low - 0.012, 0);
+  const strap = new T.TubeGeometry(new T.CatmullRomCurve3(strapPts.map(([x, y, z]) => new T.Vector3(x, y, z))), 16, 0.009, 4, false).toNonIndexed();
+  strap.scale(1, 0.45, 1); strap.computeVertexNormals();
+  coloured.push({ geo: strap, color: M.strapMat.color });
+  const shell = new T.Mesh(joinGeometries(T, cover, null), M.shellW);
+  const rest = new T.Mesh(joinGeometries(T, coloured.map((c) => c.geo), coloured.map((c) => c.color)), new T.MeshStandardMaterial({ vertexColors: true, roughness: 0.82, metalness: 0.2 }));
+  for (const m of [shell, rest]) { m.castShadow = true; m.receiveShadow = true; m.geometry.computeBoundingSphere(); g.add(m); }
+  shell.name = 'dropped-helmet-cover'; rest.name = 'dropped-helmet-hardware';
   return g;
+}
+
+// Non-indexed geometries in one frame into one: positions and normals; uv where every piece has it; a colour per piece
+// (colours: one T.Color per geometry) as vertex colours.
+function joinGeometries(T, geos, colours) {
+  const uv = !colours && geos.every((q) => q.attributes.uv);
+  let n = 0; for (const q of geos) n += q.attributes.position.count;
+  const P = new Float32Array(n * 3), N = new Float32Array(n * 3), U = uv ? new Float32Array(n * 2) : null, C = colours ? new Float32Array(n * 3) : null;
+  let at = 0;
+  geos.forEach((q, i) => {
+    const c = q.attributes.position.count;
+    P.set(q.attributes.position.array, at * 3); N.set(q.attributes.normal.array, at * 3);
+    if (U) U.set(q.attributes.uv.array, at * 2);
+    if (C) for (let k = 0; k < c; k++) { C[(at + k) * 3] = colours[i].r; C[(at + k) * 3 + 1] = colours[i].g; C[(at + k) * 3 + 2] = colours[i].b; }
+    at += c;
+  });
+  const geo = new T.BufferGeometry();
+  geo.setAttribute('position', new T.BufferAttribute(P, 3)); geo.setAttribute('normal', new T.BufferAttribute(N, 3));
+  if (U) geo.setAttribute('uv', new T.BufferAttribute(U, 2));
+  if (C) geo.setAttribute('color', new T.BufferAttribute(C, 3));
+  return geo;
 }
 
 // Two furrows a hand's width apart, following pts ([{ x, z }], world) with groundAt(x, z): heels dragged to a cave.

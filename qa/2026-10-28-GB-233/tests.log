@@ -1,0 +1,112 @@
+GRANT grokbot GB-233: starting one game-test command
+ok    t215      4 pass   0 fail  31.3s  (real renderer)
+    PASS read index.html and the scripts and styles the game loaded (229 files)
+    PASS no broken characters in them
+    PASS the HUD reads clean: timeLine "Daylight · 08:21 · Grace", tacticalLine "NVG — · Laser — · Light —", grenadeChips "G×3H×0", ammoDetail "12 / 12  ·  50 Bullets  ·  SEMI", hpNum "100 / 100"
+    PASS and shows its dots and times signs (NVG — · Laser — · Light — / G×3H×0)
+ok    t95       9 pass   0 fail  32.0s  (real renderer)
+    PASS the pick is x0.8 (0.8)
+    PASS laser off: the cone is the gun's own
+    PASS every gun with a laser, 200 draws each: x0.8 within 5% (minigun 0.800 m4 0.800 ak 0.800 pistol 0.800 uzi 0.800 shotgun 0.801 aa12 0.801 revolver 0.800 sniper 0.800 launcher 0.800)
+    PASS AK, 2000 free draws each: 6.048 -> 4.736 mrad (x0.783)
+    PASS Z (toggleLasers) with the laser sight bought: on, and it steadies
+    PASS Z again: off
+    PASS no laser sight owned: no change (6.033 vs 6.033 mrad)
+    PASS the chainsaw has no laser: nothing to steady
+    PASS no page errors
+ok    t277     38 pass   0 fail  29.3s  (real renderer)
+    INFO minigun muzzle 0.000,0.000,1.010 box -0.164,-0.262,-0.450 / 0.283,0.320,1.000
+    INFO minigun dir 1 rearTop -0.000,0.280,-0.072 frontTop 0.000,0.108,0.938
+    PASS minigun: has a sight point
+    PASS minigun: eye above the bore, behind the muzzle, on its centre line, along it (0.00 deg)
+    PASS minigun: eye clears the top line and stays near it (eye y 0.300, top 0.320)
+    INFO m4 muzzle 0.000,0.020,0.980 box -0.046,-0.278,-0.569 / 0.085,0.168,0.978
+    INFO m4 dir 1 rearTop 0.000,0.168,0.004 frontTop 0.000,0.138,0.673
+    PASS m4: has a sight point
+    PASS m4: eye above the bore, behind the muzzle, on its centre line, along it (0.00 deg)
+    PASS m4: eye clears the top line and stays near it (eye y 0.134, top 0.168)
+    INFO ak muzzle 0.000,-0.005,1.020 box -0.048,-0.331,-0.597 / 0.095,0.097,0.994
+    INFO ak dir 1 rearTop -0.000,0.095,0.218 frontTop -0.000,0.097,0.840
+    PASS ak: has a sight point
+    PASS ak: eye above the bore, behind the muzzle, on its centre line, along it (0.18 deg)
+    PASS ak: eye clears the top line and stays near it (eye y 0.094, top 0.097)
+    INFO aa12 muzzle 0.000,0.015,0.980 box -0.155,-0.415,-0.579 / 0.155,0.180,0.976
+    INFO aa12 dir 1 rearTop 0.000,0.180,-0.120 frontTop -0.014,0.175,0.750
+    PASS aa12: has a sight point
+    PASS aa12: eye above the bore, behind the muzzle, on its centre line, along it (0.33 deg)
+    PASS aa12: eye clears the top line and stays near it (eye y 0.181, top 0.180)
+    INFO pistol muzzle 0.000,0.050,0.320 box -0.027,-0.181,-0.104 / 0.027,0.092,0.311
+    INFO pistol dir 1 rearTop 0.000,0.075,0.072 frontTop -0.002,0.087,0.287
+    PASS pistol: has a sight point
+    PASS pistol: eye above the bore, behind the muzzle, on its centre line, along it (0.82 deg)
+    PASS pistol: notch and tip are on the gun (notch found, tip y 0.087)
+    PASS pistol: eye on the notch-to-tip line within 3 mm (eye y 0.0772, line 0.0771)
+    INFO uzi muzzle 0.000,0.030,0.480 box -0.055,-0.327,-0.338 / 0.077,0.158,0.478
+    INFO uzi dir 1 rearTop -0.015,0.156,-0.087 frontTop 0.001,0.067,0.354
+    PASS uzi: has a sight point
+    PASS uzi: eye above the bore, behind the muzzle, on its centre line, along it (0.00 deg)
+    PASS uzi: eye clears the top line and stays near it (eye y 0.156, top 0.158)
+    INFO shotgun muzzle 0.000,0.030,0.970 box -0.056,-0.179,-0.496 / 0.056,0.091,0.952
+    INFO shotgun dir 1 rearTop 0.000,0.087,-0.129 frontTop 0.000,0.081,0.915
+    PASS shotgun: has a sight point
+    PASS shotgun: eye above the bore, behind the muzzle, on its centre line, along it (1.18 deg)
+    PASS shotgun: eye clears the top line and stays near it (eye y 0.105, top 0.091)
+    INFO revolver muzzle 0.000,0.083,0.350 box -0.051,-0.166,-0.115 / 0.051,0.123,0.333
+    INFO revolver dir 1 rearTop -0.005,0.109,0.081 frontTop -0.002,0.121,0.326
+    PASS revolver: has a sight point
+    PASS revolver: eye above the bore, behind the muzzle, on its centre line, along it (1.09 deg)
+    PASS revolver: notch and tip are on the gun (notch found, tip y 0.121)
+    PASS revolver: eye on the notch-to-tip line within 3 mm (eye y 0.1073, line 0.1073)
+    INFO sniper muzzle 0.000,0.040,1.220 box -0.147,-0.203,-0.640 / 0.068,0.209,1.205
+    INFO sniper dir 1 rearTop 0.000,0.209,0.069 frontTop 0.012,0.067,0.780
+    PASS sniper: has a sight point
+    PASS sniper: eye above the bore, behind the muzzle, on its centre line, along it (0.00 deg)
+    PASS sniper: eye clears the top line and stays near it (eye y 0.180, top 0.209)
+    INFO launcher muzzle 0.000,0.040,0.720 box -0.143,-0.184,-0.504 / 0.143,0.123,0.682
+    INFO launcher dir 1 rearTop 0.000,0.123,0.053 frontTop 0.000,0.102,0.650
+    PASS launcher: has a sight point
+    PASS launcher: eye above the bore, behind the muzzle, on its centre line, along it (2.02 deg)
+    PASS launcher: eye clears the top line and stays near it (eye y 0.134, top 0.123)
+    INFO flamer muzzle 0.000,0.050,0.780 box -0.085,-0.175,-0.277 / 0.178,0.112,0.792
+    INFO flamer dir 1 rearTop 0.000,0.085,0.290 frontTop -0.000,0.112,0.786
+    PASS flamer: has a sight point
+    PASS flamer: eye above the bore, behind the muzzle, on its centre line, along it (0.00 deg)
+    PASS flamer: eye clears the top line and stays near it (eye y 0.150, top 0.112)
+    INFO chainsaw muzzle 0.000,0.040,0.820 box -0.159,-0.185,-0.317 / 0.218,0.220,0.830
+    INFO chainsaw dir 1 rearTop -0.004,0.220,0.024 frontTop -0.010,0.090,0.760
+    PASS chainsaw: has a sight point
+    PASS chainsaw: eye above the bore, behind the muzzle, on its centre line, along it (0.00 deg)
+    PASS chainsaw: eye clears the top line and stays near it (eye y 0.250, top 0.220)
+ok    t284      7 pass   0 fail  68.5s  (real renderer)
+    PASS pistol aimed: rear 0.000 front 0.000 (ndc y)
+    PASS revolver aimed: rear 0.000 front 0.000 (ndc y)
+    PASS uzi aimed: rear -0.000 front - (ndc y)
+    PASS m4 aimed: rear 0.000 front 0.012 (ndc y)
+    PASS ak aimed: rear 0.000 front 0.000 (ndc y)
+    PASS aa12 aimed: rear 0.000 front -0.000 (ndc y)
+    PASS launcher aimed: rear -0.001 front -0.000 (ndc y)
+ok    t282      6 pass   0 fail  56.3s  (real renderer)
+    LOG phase-wave at 5.8 s; grace 29.78370000000098 events alarm-started,wave-push
+    LOG spawn 6.0 s cave    d0 70 m, within 20 m at 21.6 s
+    LOG spawn 6.1 s cave    d0 77 m, within 20 m at 25.6 s
+    LOG spawn 6.4 s cave    d0 72 m, within 20 m at 24.3 s
+    LOG spawn 7.2 s cave    d0 69 m, within 20 m at 23.2 s
+    LOG spawn 7.4 s cave    d0 75 m, within 20 m at 27.1 s
+    LOG spawn 7.5 s cave    d0 68 m, within 20 m at 23.7 s
+    LOG spawn 7.8 s cave    d0 78 m, within 20 m at 26.5 s
+    LOG spawn 7.9 s cave    d0 65 m, within 20 m at 14.6 s
+    LOG spawn 9.3 s claw-up d0 65 m, within 20 m at 25.7 s
+    LOG spawn 9.5 s claw-up d0 55 m, within 20 m at 21.8 s
+    LOG spawn 9.6 s claw-up d0 62 m, within 20 m at 23.6 s
+    LOG spawn 9.8 s claw-up d0 57 m, within 20 m at 22.4 s
+    LOG spawn 10.0 s claw-up d0 56 m, within 20 m at 23.3 s
+    LOG spawn 10.1 s claw-up d0 31 m, within 20 m at 14.7 s
+    LOG spawn 10.2 s claw-up d0 37 m, within 20 m at 17.1 s
+    PASS night 1: 15 come (15)
+    PASS 7 claw up, all after the cave is out (last walker out at 7.9 s, first riser 9.3 s)
+    PASS all 15 reach 20 m of the HQ within 100 s (last 27.1 s)
+    PASS one push: the 2nd to the 14th land within 11.8 s (under 20)
+    PASS the push lands soon: the middle arrival at 23.3 s (15-35)
+    PASS the cave walkers start part way in, past the water if it is in the way (70, 77, 72, 69, 75, 68, 78, 65 m; all under 120)
+    LOG spawn spread 4.2 s; arrival spread 12.5 s (15 arrived)
+5 checks: 64 pass, 0 fail (real renderer)

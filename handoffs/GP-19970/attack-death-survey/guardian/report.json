@@ -1,0 +1,1681 @@
+{
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "frames": [
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/guardian/guardian-idle-f00.jpg",
+      "phase": "idle",
+      "n": 0,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0,
+        "hipsY": 1.6505015627851005,
+        "armL": -0.2224629760805707,
+        "armR": -0.6775370239194294
+      },
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.65,
+          "y": -198.98207270147176,
+          "z": -632
+        },
+        "size": {
+          "x": 3.7613580053136353,
+          "y": 3.584851319078183,
+          "z": 2.4776963808923256
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 9160,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -20.789221567305958,
+        "y": -197.86868789379125,
+        "z": -635.9610722749662,
+        "tx": -27.65,
+        "ty": -198.98207270147176,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/guardian/guardian-attack-f01.jpg",
+      "phase": "attack",
+      "n": 1,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.20333333333333334,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.007575757575757569,
+        "hipsY": 1.647679726621631,
+        "armL": -1.4333333333333333,
+        "armR": -1.4333333333333333
+      },
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.53333333333333,
+          "y": -198.98207270147176,
+          "z": -632
+        },
+        "size": {
+          "x": 3.737516277708064,
+          "y": 3.636950216229849,
+          "z": 2.674083288965221
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 9160,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -20.67255490063929,
+        "y": -197.86868789379125,
+        "z": -635.9610722749662,
+        "tx": -27.53333333333333,
+        "ty": -198.98207270147176,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/guardian/guardian-attack-f02.jpg",
+      "phase": "attack",
+      "n": 2,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.18666666666666668,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.01515151515151515,
+        "hipsY": 1.6445599841680438,
+        "armL": -1.5166666666666668,
+        "armR": -1.5166666666666668
+      },
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.416666666666664,
+          "y": -198.98207270147176,
+          "z": -632
+        },
+        "size": {
+          "x": 3.7917875432549657,
+          "y": 3.666403420973353,
+          "z": 2.7897034638524474
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 9160,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -20.555888233972624,
+        "y": -197.86868789379125,
+        "z": -635.9610722749662,
+        "tx": -27.416666666666664,
+        "ty": -198.98207270147176,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/guardian/guardian-attack-f03.jpg",
+      "phase": "attack",
+      "n": 3,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.17,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.02272727272727272,
+        "hipsY": 1.641173819549689,
+        "armL": -1.6,
+        "armR": -1.6
+      },
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.299999999999997,
+          "y": -198.98207270147176,
+          "z": -632
+        },
+        "size": {
+          "x": 3.846670755757863,
+          "y": 3.6830933066179057,
+          "z": 2.9109635862810137
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 9160,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -20.439221567305957,
+        "y": -197.86868789379125,
+        "z": -635.9610722749662,
+        "tx": -27.299999999999997,
+        "ty": -198.98207270147176,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/guardian/guardian-attack-f04.jpg",
+      "phase": "attack",
+      "n": 4,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.15333333333333335,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.0303030303030303,
+        "hipsY": 1.637557977695036,
+        "armL": -1.6833333333333333,
+        "armR": -1.6833333333333333
+      },
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.18333333333333,
+          "y": -198.98207270147176,
+          "z": -632
+        },
+        "size": {
+          "x": 3.9089769033917285,
+          "y": 3.693059502420141,
+          "z": 3.0180515878899996
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 9160,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -20.32255490063929,
+        "y": -197.86868789379125,
+        "z": -635.9610722749662,
+        "tx": -27.18333333333333,
+        "ty": -198.98207270147176,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/guardian/guardian-attack-f05.jpg",
+      "phase": "attack",
+      "n": 5,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.1366666666666667,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.03787878787878787,
+        "hipsY": 1.633753810857124,
+        "armL": -1.7666666666666666,
+        "armR": -1.7666666666666666
+      },
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.066666666666663,
+          "y": -198.98207270147176,
+          "z": -632
+        },
+        "size": {
+          "x": 3.9615532023961713,
+          "y": 3.7000961750088095,
+          "z": 3.08819606324073
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 9160,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -20.205888233972622,
+        "y": -197.86868789379125,
+        "z": -635.9610722749662,
+        "tx": -27.066666666666663,
+        "ty": -198.98207270147176,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/guardian/guardian-attack-f06.jpg",
+      "phase": "attack",
+      "n": 6,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.12000000000000002,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.04545454545454545,
+        "hipsY": 1.6298065636171333,
+        "armL": -1.85,
+        "armR": -1.85
+      },
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.949999999999996,
+          "y": -198.98207270147176,
+          "z": -632
+        },
+        "size": {
+          "x": 4.006449240815588,
+          "y": 3.706121212782051,
+          "z": 3.1307588967483753
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 9160,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -20.089221567305955,
+        "y": -197.86868789379125,
+        "z": -635.9610722749662,
+        "tx": -26.949999999999996,
+        "ty": -198.98207270147176,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/guardian/guardian-attack-f07.jpg",
+      "phase": "attack",
+      "n": 7,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.10333333333333336,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.05303030303030302,
+        "hipsY": 1.6257646065150055,
+        "armL": -1.9333333333333333,
+        "armR": -1.9333333333333333
+      },
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.83333333333333,
+          "y": -198.98207270147176,
+          "z": -632
+        },
+        "size": {
+          "x": 4.038509530896498,
+          "y": 3.7119617483171226,
+          "z": 3.148578455808888
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 9160,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -19.972554900639288,
+        "y": -197.86868789379125,
+        "z": -635.9610722749662,
+        "tx": -26.83333333333333,
+        "ty": -198.98207270147176,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/guardian/guardian-attack-f08.jpg",
+      "phase": "attack",
+      "n": 8,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.0866666666666667,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.0606060606060606,
+        "hipsY": 1.621678629277465,
+        "armL": -2.0166666666666666,
+        "armR": -2.0166666666666666
+      },
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.71666666666666,
+          "y": -198.98207270147176,
+          "z": -632
+        },
+        "size": {
+          "x": 4.0592437479057395,
+          "y": 3.717837133943277,
+          "z": 3.144421967671633
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 9160,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -19.85588823397262,
+        "y": -197.86868789379125,
+        "z": -635.9610722749662,
+        "tx": -26.71666666666666,
+        "ty": -198.98207270147176,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/guardian/guardian-attack-f09.jpg",
+      "phase": "attack",
+      "n": 9,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.07000000000000003,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.06818181818181816,
+        "hipsY": 1.6215070077307052,
+        "armL": -2.1,
+        "armR": -2.1
+      },
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.599999999999994,
+          "y": -198.98207270147176,
+          "z": -632
+        },
+        "size": {
+          "x": 4.070469728938164,
+          "y": 3.723647250984982,
+          "z": 3.1246683374160966
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 9160,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -19.739221567305954,
+        "y": -197.86868789379125,
+        "z": -635.9610722749662,
+        "tx": -26.599999999999994,
+        "ty": -198.98207270147176,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/guardian/guardian-attack-f10.jpg",
+      "phase": "attack",
+      "n": 10,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.05333333333333337,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.07575757575757575,
+        "hipsY": 1.6247987215168787,
+        "armL": -2.183333333333333,
+        "armR": -2.183333333333333
+      },
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.483333333333327,
+          "y": -198.98207270147176,
+          "z": -632
+        },
+        "size": {
+          "x": 4.073994201374287,
+          "y": 3.7291410151110256,
+          "z": 3.0949953387269034
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 9160,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -19.622554900639287,
+        "y": -197.86868789379125,
+        "z": -635.9610722749662,
+        "tx": -26.483333333333327,
+        "ty": -198.98207270147176,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/guardian/guardian-attack-f12.jpg",
+      "phase": "attack",
+      "n": 12,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.020000000000000042,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.0909090909090909,
+        "hipsY": 1.6311593337076422,
+        "armL": -2.35,
+        "armR": -2.35
+      },
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.249999999999993,
+          "y": -198.98207270147176,
+          "z": -632
+        },
+        "size": {
+          "x": 4.06645869494065,
+          "y": 3.7379583229400453,
+          "z": 3.0239578884841194
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 9160,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -19.389221567305952,
+        "y": -197.86868789379125,
+        "z": -635.9610722749662,
+        "tx": -26.249999999999993,
+        "ty": -198.98207270147176,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/guardian/guardian-attack-f14.jpg",
+      "phase": "attack",
+      "n": 14,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.28,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.1,
+        "hipsY": 1.6370126668195044,
+        "armL": -2.45,
+        "armR": -2.45
+      },
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.01666666666666,
+          "y": -198.98207270147176,
+          "z": -632
+        },
+        "size": {
+          "x": 4.096321677332448,
+          "y": 3.7422621808022143,
+          "z": 2.9564882335037055
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 9160,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -19.155888233972618,
+        "y": -197.86868789379125,
+        "z": -635.9610722749662,
+        "tx": -26.01666666666666,
+        "ty": -198.98207270147176,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/guardian/guardian-attack-f16.jpg",
+      "phase": "attack",
+      "n": 16,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.2466666666666667,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.13083521591645728,
+        "hipsY": 1.6255256505406679,
+        "armL": -1.7994365481516044,
+        "armR": -1.7994365481516044
+      },
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -25.783333333333324,
+          "y": -198.98207270147176,
+          "z": -632
+        },
+        "size": {
+          "x": 4.162988391626897,
+          "y": 3.74300915127543,
+          "z": 2.8981636236322856
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 9160,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -18.922554900639284,
+        "y": -197.86868789379125,
+        "z": -635.9610722749662,
+        "tx": -25.783333333333324,
+        "ty": -198.98207270147176,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/guardian/guardian-attack-f18.jpg",
+      "phase": "attack",
+      "n": 18,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.21333333333333337,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.23134685680847852,
+        "hipsY": 1.614149089025529,
+        "armL": -1.1997246201889593,
+        "armR": -1.1997246201889593
+      },
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -25.54999999999999,
+          "y": -198.98207270147176,
+          "z": -632
+        },
+        "size": {
+          "x": 4.2433842703922195,
+          "y": 3.741703895987996,
+          "z": 2.8359797514883667
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 9160,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -18.68922156730595,
+        "y": -197.86868789379125,
+        "z": -635.9610722749662,
+        "tx": -25.54999999999999,
+        "ty": -198.98207270147176,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/guardian/guardian-attack-f20.jpg",
+      "phase": "attack",
+      "n": 20,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.18000000000000005,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.27823941877010794,
+        "hipsY": 1.6037548103746633,
+        "armL": -0.6977409125245613,
+        "armR": -0.6977409125245613
+      },
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -25.316666666666656,
+          "y": -198.98207270147176,
+          "z": -632
+        },
+        "size": {
+          "x": 4.315771593949567,
+          "y": 3.7394380478624214,
+          "z": 2.7688371100879294
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 9160,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -18.455888233972615,
+        "y": -197.86868789379125,
+        "z": -635.9610722749662,
+        "tx": -25.316666666666656,
+        "ty": -198.98207270147176,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/guardian/guardian-attack-f22.jpg",
+      "phase": "attack",
+      "n": 22,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.14666666666666672,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.2606446496203773,
+        "hipsY": 1.5951039495944286,
+        "armL": -0.3327231604293151,
+        "armR": -0.3327231604293151
+      },
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -25.084649857840432,
+          "y": -198.98207270147176,
+          "z": -631.9825227057333
+        },
+        "size": {
+          "x": 4.736600437293106,
+          "y": 3.7292019357396384,
+          "z": 3.3959859808295505
+        },
+        "yaw": 1.4204248987877601,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 9160,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -17.707901915291902,
+        "y": -197.86868789379125,
+        "z": -634.8711147610662,
+        "tx": -25.084649857840432,
+        "ty": -198.98207270147176,
+        "tz": -631.9825227057333,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/guardian/guardian-attack-f24.jpg",
+      "phase": "attack",
+      "n": 24,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.1133333333333334,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.182640475157874,
+        "hipsY": 1.5889009672175247,
+        "armL": -0.133203106482146,
+        "armR": -0.133203106482146
+      },
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -24.853670462095373,
+          "y": -198.98207270147176,
+          "z": -631.9495216610702
+        },
+        "size": {
+          "x": 4.739202150562644,
+          "y": 3.7142307948249993,
+          "z": 3.369511245644617
+        },
+        "yaw": 1.4373398039949634,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 9160,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -17.526835720780586,
+        "y": -197.86868789379125,
+        "z": -634.9624715351121,
+        "tx": -24.853670462095373,
+        "ty": -198.98207270147176,
+        "tz": -631.9495216610702,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/guardian/guardian-attack-f26.jpg",
+      "phase": "attack",
+      "n": 26,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.08000000000000007,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.06230586150776819,
+        "hipsY": 1.585284375354335,
+        "armL": -0.09999999999999992,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -24.621795589461335,
+          "y": -198.98207270147176,
+          "z": -631.9235212650776
+        },
+        "size": {
+          "x": 4.701395475901474,
+          "y": 3.704613486239225,
+          "z": 3.2434545810356212
+        },
+        "yaw": 1.465863508403604,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 9160,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -17.38387004724244,
+        "y": -197.86868789379125,
+        "z": -635.1442056822973,
+        "tx": -24.621795589461335,
+        "ty": -198.98207270147176,
+        "tz": -631.9235212650776,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/guardian/guardian-attack-f30.jpg",
+      "phase": "attack",
+      "n": 30,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.5754800617943676,
+        "armL": -0.09999999999999992,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -24.156554468619966,
+          "y": -198.98207270147176,
+          "z": -631.8874488469905
+        },
+        "size": {
+          "x": 4.616657250965041,
+          "y": 3.695767162262058,
+          "z": 2.9940537569251546
+        },
+        "yaw": 1.507972428067182,
+        "info": {
+          "meshes": 5,
+          "drawables": 5,
+          "tris": 9160,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -17.06062444804524,
+        "y": -197.86868789379125,
+        "z": -635.409969452059,
+        "tx": -24.156554468619966,
+        "ty": -198.98207270147176,
+        "tz": -631.8874488469905,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/guardian/guardian-death-f00.jpg",
+      "phase": "death",
+      "n": 0,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.5754800617943676,
+        "armL": -0.09999999999999992,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -24.156554468619966,
+          "y": -198.98207270147176,
+          "z": -631.8874488469905
+        },
+        "size": {
+          "x": 4.616657250965041,
+          "y": 3.695767162262058,
+          "z": 2.9940537569251546
+        },
+        "yaw": 1.507972428067182,
+        "info": {
+          "meshes": 6,
+          "drawables": 6,
+          "tris": 9208,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -17.06062444804524,
+        "y": -197.86868789379125,
+        "z": -635.409969452059,
+        "tx": -24.156554468619966,
+        "ty": -198.98207270147176,
+        "tz": -631.8874488469905,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/guardian/guardian-death-f01.jpg",
+      "phase": "death",
+      "n": 1,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.005333333333333333,
+        "corpseRX": -0.5274129808432945,
+        "corpseRZ": 0.5267513708767775,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.5754800617943676,
+        "armL": -0.06701075818894436,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -24.156554468619966,
+          "y": -198.97752665262723,
+          "z": -631.8874488469905
+        },
+        "size": {
+          "x": 4.355113351123542,
+          "y": 3.809479012696869,
+          "z": 3.0708440813219795
+        },
+        "yaw": 1.4997143884811912,
+        "info": {
+          "meshes": 6,
+          "drawables": 6,
+          "tris": 9208,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -17.06062444804524,
+        "y": -197.86414184494672,
+        "z": -635.409969452059,
+        "tx": -24.156554468619966,
+        "ty": -198.97752665262723,
+        "tz": -631.8874488469905,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/guardian/guardian-death-f02.jpg",
+      "phase": "death",
+      "n": 2,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.010666666666666666,
+        "corpseRX": -0.8691929802456342,
+        "corpseRZ": 0.8678310068587285,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.5754800617943676,
+        "armL": -0.13190323298450451,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -24.156554468619966,
+          "y": -198.97304925759485,
+          "z": -631.8874488469905
+        },
+        "size": {
+          "x": 4.326090368116553,
+          "y": 3.7712763533452573,
+          "z": 3.1168471143028
+        },
+        "yaw": 1.4778281346450313,
+        "info": {
+          "meshes": 6,
+          "drawables": 6,
+          "tris": 9208,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -17.06062444804524,
+        "y": -197.85966444991433,
+        "z": -635.409969452059,
+        "tx": -24.156554468619966,
+        "ty": -198.97304925759485,
+        "tz": -631.8874488469905,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/guardian/guardian-death-f03.jpg",
+      "phase": "death",
+      "n": 3,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.016,
+        "corpseRX": -1.0648049495089944,
+        "corpseRZ": 1.0627055508329253,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.5754800617943676,
+        "armL": -0.19469169087990063,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -24.156554468619966,
+          "y": -198.96864012385905,
+          "z": -631.8874488469905
+        },
+        "size": {
+          "x": 4.323197190625642,
+          "y": 3.731299714013545,
+          "z": 3.2060669822435557
+        },
+        "yaw": 1.4499471663096006,
+        "info": {
+          "meshes": 6,
+          "drawables": 6,
+          "tris": 9208,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -17.06062444804524,
+        "y": -197.85525531617853,
+        "z": -635.409969452059,
+        "tx": -24.156554468619966,
+        "ty": -198.96864012385905,
+        "tz": -631.8874488469905,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/guardian/guardian-death-f04.jpg",
+      "phase": "death",
+      "n": 4,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.021333333333333333,
+        "corpseRX": -1.1830601169932884,
+        "corpseRZ": 1.1801878570654862,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.5754800617943676,
+        "armL": -0.2553927642493995,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -24.156554468619966,
+          "y": -198.96429885739363,
+          "z": -631.8874488469905
+        },
+        "size": {
+          "x": 4.326767314065787,
+          "y": 3.688858350346237,
+          "z": 3.310084035194336
+        },
+        "yaw": 1.419713952238743,
+        "info": {
+          "meshes": 6,
+          "drawables": 6,
+          "tris": 9208,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -17.06062444804524,
+        "y": -197.8509140497131,
+        "z": -635.409969452059,
+        "tx": -24.156554468619966,
+        "ty": -198.96429885739363,
+        "tz": -631.8874488469905,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/guardian/guardian-death-f06.jpg",
+      "phase": "death",
+      "n": 6,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.032,
+        "corpseRX": -1.3143365275141807,
+        "corpseRZ": 1.3098184476779353,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.5754800617943676,
+        "armL": -0.3706105918126702,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -24.156554468619966,
+          "y": -198.95581834249307,
+          "z": -631.8874488469905
+        },
+        "size": {
+          "x": 4.325489750745003,
+          "y": 3.609806176970949,
+          "z": 3.526993050662668
+        },
+        "yaw": 1.3572151220762179,
+        "info": {
+          "meshes": 6,
+          "drawables": 6,
+          "tris": 9208,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -17.06062444804524,
+        "y": -197.84243353481256,
+        "z": -635.409969452059,
+        "tx": -24.156554468619966,
+        "ty": -198.95581834249307,
+        "tz": -631.8874488469905,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/guardian/guardian-death-f08.jpg",
+      "phase": "death",
+      "n": 8,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.04266666666666667,
+        "corpseRX": -1.384335541856575,
+        "corpseRZ": 1.378048016151503,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.5754800617943676,
+        "armL": -0.4777337354298016,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -24.156554468619966,
+          "y": -198.9476045296806,
+          "z": -631.8874488469905
+        },
+        "size": {
+          "x": 4.302122105727669,
+          "y": 3.545081014826451,
+          "z": 3.718991580016791
+        },
+        "yaw": 1.294791857877575,
+        "info": {
+          "meshes": 6,
+          "drawables": 6,
+          "tris": 9208,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -17.06062444804524,
+        "y": -197.83421972200009,
+        "z": -635.409969452059,
+        "tx": -24.156554468619966,
+        "ty": -198.9476045296806,
+        "tz": -631.8874488469905,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/guardian/guardian-death-f12.jpg",
+      "phase": "death",
+      "n": 12,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.06400000000000002,
+        "corpseRX": -1.4572396077155254,
+        "corpseRZ": 1.4470864680690718,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.5754800617943676,
+        "armL": -0.6685614966480666,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -24.156554468619966,
+          "y": -198.93196414906316,
+          "z": -631.8874488469905
+        },
+        "size": {
+          "x": 4.23709679900843,
+          "y": 3.4722449130613313,
+          "z": 4.1020962218520935
+        },
+        "yaw": 1.173984678063412,
+        "info": {
+          "meshes": 6,
+          "drawables": 6,
+          "tris": 9208,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -17.06062444804524,
+        "y": -197.81857934138264,
+        "z": -635.409969452059,
+        "tx": -24.156554468619966,
+        "ty": -198.93196414906316,
+        "tz": -631.8874488469905,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/guardian/guardian-death-f20.jpg",
+      "phase": "death",
+      "n": 20,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.10666666666666665,
+        "corpseRX": -1.5190215741572686,
+        "corpseRZ": 1.5001116390582632,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.5754800617943676,
+        "armL": -0.9640559569562719,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -24.156554468619966,
+          "y": -198.90374082397156,
+          "z": -631.8874488469905
+        },
+        "size": {
+          "x": 4.505590283119272,
+          "y": 3.424510061393306,
+          "z": 4.608534867835488
+        },
+        "yaw": 0.9537854577359974,
+        "info": {
+          "meshes": 6,
+          "drawables": 6,
+          "tris": 9208,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -17.06062444804524,
+        "y": -197.79035601629104,
+        "z": -635.409969452059,
+        "tx": -24.156554468619966,
+        "ty": -198.90374082397156,
+        "tz": -631.8874488469905,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/guardian/guardian-death-f40.jpg",
+      "phase": "death",
+      "n": 40,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.21333333333333324,
+        "corpseRX": -1.5728155072702987,
+        "corpseRZ": 1.5293608624661315,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.5754800617943676,
+        "armL": -1.3238897131972565,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -24.156554468619966,
+          "y": -198.84974887302522,
+          "z": -631.8874488469905
+        },
+        "size": {
+          "x": 5.339201715590409,
+          "y": 3.604718574349846,
+          "z": 4.7008415260863785
+        },
+        "yaw": 0.5306418876431882,
+        "info": {
+          "meshes": 6,
+          "drawables": 6,
+          "tris": 9208,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -17.06062444804524,
+        "y": -197.7363640653447,
+        "z": -635.409969452059,
+        "tx": -24.156554468619966,
+        "ty": -198.84974887302522,
+        "tz": -631.8874488469905,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/guardian/guardian-death-f80.jpg",
+      "phase": "death",
+      "n": 80,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.653333333333334,
+        "corpseRX": -1.6117464252424811,
+        "corpseRZ": 1.5236082150493417,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.5754800617943676,
+        "armL": -1.45,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.guardian",
+        "name": "Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -24.156554468619966,
+          "y": -198.79507270147175,
+          "z": -631.8874488469905
+        },
+        "size": {
+          "x": 6.323230141161108,
+          "y": 4.234178224106699,
+          "z": 3.6134662548620327
+        },
+        "yaw": 0.04914868099994213,
+        "info": {
+          "meshes": 6,
+          "drawables": 6,
+          "tris": 9208,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -17.06062444804524,
+        "y": -197.68169768677905,
+        "z": -635.409969452059,
+        "tx": -24.156554468619966,
+        "ty": -198.79508249445956,
+        "tz": -631.8874488469905,
+        "fov": 40
+      }
+    }
+  ],
+  "errors": [],
+  "pageErrors": []
+}

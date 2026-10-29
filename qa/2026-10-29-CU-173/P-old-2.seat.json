@@ -1,0 +1,41 @@
+{
+  "cpuPct": 22.2,
+  "top": [
+    {
+      "Name": "git",
+      "PercentProcessorTime": 99
+    },
+    {
+      "Name": "git#1",
+      "PercentProcessorTime": 99
+    },
+    {
+      "Name": "powershell",
+      "PercentProcessorTime": 99
+    },
+    {
+      "Name": "MsMpEng",
+      "PercentProcessorTime": 55
+    },
+    {
+      "Name": "WmiPrvSE",
+      "PercentProcessorTime": 49
+    },
+    {
+      "Name": "svchost#44",
+      "PercentProcessorTime": 44
+    }
+  ],
+  "counts": {
+    "msedge": 17,
+    "wslhost": 3,
+    "Cursor": 17,
+    "vmmem": 1,
+    "wsl": 1,
+    "ChatGPT": 17,
+    "chrome": 0,
+    "node": 8,
+    "vmmemWSL": 1,
+    "Antigravity": 6
+  }
+}

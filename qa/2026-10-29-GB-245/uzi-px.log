@@ -1,0 +1,10 @@
+Game-test request 531e2da6-356e-4efc-80f4-72927f2d723b queued at position 3. Waiting...
+GRANT grokbot GB-245: starting one game-test command
+camera: camera: loading the game...............................
+camera: ready in 31 s on port 65306: match, ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11), 1600x900
+help: ok
+setup: pistol
+{"up":0.02,"in":0.04,"side":0,"tip":0,"turn":0,"cant":0.4,"hip":0}       u10 R     0 L     0 MERGED | u25 R 37267 L     0 | u40 R 38587 L     0 | u55 R 41840 L     0 | u70 R 41552 L     0 | u85 R 49850 L  9574
+{"up":0.02,"in":0.04,"side":0,"tip":0,"turn":0,"cant":0.4,"hip":0}       u10 R 35872 L     0 | u25 R 38060 L     0 | u40 R 37806 L     0 | u55 R 37561 L     0 | u70 R 34701 L 32243 | u85 R 16354 L 56583
+{"up":0.02,"in":0.04,"side":0,"tip":0,"turn":0,"cant":0.4,"hip":0}       u10 R 31885 L 16942 | u25 R 37806 L     0 | u40 R 37755 L     0 | u55 R 31402 L 16603 | u70 R 31278 L 16448 | u85 R 35088 L 15663
+camera stop: camera: stopped

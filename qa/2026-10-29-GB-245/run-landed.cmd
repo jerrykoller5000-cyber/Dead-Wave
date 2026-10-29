@@ -1,0 +1,5 @@
+@echo off
+cd /d "C:\Users\Zero\Desktop\Tiny Trek"
+node crew/crew.mjs slot run grokbot GB-245 --checks "GB-245 landed: t215 t95 page load + rule 13 t222 t225 t228 t246 t277 t284 on the real renderer" --minutes 90 -- node tools/realtest.mjs t215 t95 t222 t225 t228 t246 t277 t284 --all > "C:\Users\Zero\Desktop\Tiny Trek\qa\2026-10-29-GB-245\landed-tests.log" 2>&1
+node crew/crew.mjs slot run grokbot GB-245 --checks "GB-245 landed: per-hand glove pixels, nine guns, six frames per reload" --minutes 40 -- node qa/2026-10-29-GB-245/rfocus2.mjs m4,ak,aa12,shotgun,sniper,launcher,uzi,pistol,revolver 0.1,0.25,0.4,0.55,0.7,0.85 qa/2026-10-29-GB-245/landed.json landed > "C:\Users\Zero\Desktop\Tiny Trek\qa\2026-10-29-GB-245\landed-px.log" 2>&1
+echo DONE >> "C:\Users\Zero\Desktop\Tiny Trek\qa\2026-10-29-GB-245\ran-landed.txt"

@@ -1,0 +1,8 @@
+{
+ "shots": [
+  {"cam": {"x": -17.0, "y": 19.7, "z": -119.0, "tx": -24.0, "ty": 11.0, "tz": -126.0, "fov": 55}, "time": "noon", "caption": "Watchtower: the trail comes round the tower to the ladder (from above)", "out": "review/sweep/tower-trail/above.png"},
+  {"cam": {"x": -18.19, "y": 9.71, "z": -115.76, "tx": -20.59, "ty": 11.8, "tz": -124.12, "fov": 55}, "time": "noon", "caption": "Watchtower: walking in along the trail", "out": "review/sweep/tower-trail/coming-in.png"},
+  {"cam": {"x": -20.59, "y": 13.0, "z": -124.12, "tx": -24.5, "ty": 11.5, "tz": -128.5, "fov": 55}, "time": "noon", "caption": "Watchtower: on the bend round the tower, the ladder ahead", "out": "review/sweep/tower-trail/round.png"},
+  {"cam": {"x": -25.0, "y": 11.1, "z": -132.0, "tx": -21.0, "ty": 12.0, "tz": -126.0, "fov": 55}, "time": "noon", "caption": "Watchtower: from the ladder's side, back along the bend", "out": "review/sweep/tower-trail/ladder-side.png"}
+ ]
+}

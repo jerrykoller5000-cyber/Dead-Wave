@@ -1,0 +1,10 @@
+GRANT grokbot GB-228: starting one game-test command
+ERR reload --match camera: not running; move and release need `node tools/camera.mjs start` first
+
+uzi        no reading: 
+pistol     no reading: 
+revolver   no reading: 
+ak         no reading: 
+aa12       no reading: 
+sniper     no reading: 
+m4         no reading: 

@@ -1,0 +1,36 @@
+GRANT grokbot GB-245: starting one game-test command
+camera: camera: loading the game.................................
+camera: ready in 33 s on port 43896: match, ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11), 1600x900
+setup: pistol
+help: ok
+m4       u=0.25  in-frame combos: 0/40
+m4       u=0.45  in-frame combos: 0/80
+m4       u=0.7  in-frame combos: 0/120
+ak       u=0.25  in-frame combos: 0/40
+ak       u=0.45  in-frame combos: 0/80
+ak       u=0.7  in-frame combos: 0/120
+aa12     u=0.25  in-frame combos: 0/40
+aa12     u=0.45  in-frame combos: 0/80
+aa12     u=0.7  in-frame combos: 0/120
+shotgun  u=0.25  in-frame combos: 0/40
+shotgun  u=0.45  in-frame combos: 0/80
+shotgun  u=0.7  in-frame combos: 0/120
+sniper   u=0.25  in-frame combos: 0/40
+sniper   u=0.45  in-frame combos: 0/80
+sniper   u=0.7  in-frame combos: 0/120
+launcher u=0.25  in-frame combos: 0/40
+launcher u=0.45  in-frame combos: 0/80
+launcher u=0.7  in-frame combos: 0/120
+uzi      u=0.25  in-frame combos: 0/40
+uzi      u=0.45  in-frame combos: 0/80
+uzi      u=0.7  in-frame combos: 0/120
+
+per gun: settings whose every sampled frame keeps both wrists inside |x|,|y| < 0.8:
+m4      (none)
+ak      (none)
+aa12    (none)
+shotgun (none)
+sniper  (none)
+launcher(none)
+uzi     (none)
+camera stop: camera: stopped

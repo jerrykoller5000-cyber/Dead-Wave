@@ -36,3 +36,11 @@ z-music/**/*.mp3
 # Leftovers from "Tidy up Tiny Trek.bat" and a crashed shell (CL-202)
 _DELETE ME/
 bash.exe.stackdump
+
+# D-94: files made from Jerry's paid sound packs (F:\Sound_Effects): the licences allow them in the game but not on a
+# server, so they stay on his PC and ship only inside the builds (docs/audio/packs.md).
+z-sounds/**/pk-*
+z-sounds/index-packs.json
+# D-97 (Claude, 2026-10-29): the 1.2 score is made from Jerry's Ghosthack packs (F:\Music); their licence forbids a public server,
+# so the files made from them live on his PC and in the builds only.
+assets/soundtrack/**/gh-*

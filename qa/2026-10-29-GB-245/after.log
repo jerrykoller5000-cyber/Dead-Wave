@@ -1,0 +1,81 @@
+Game-test request 6e1e1a94-6195-4009-849e-9b0fe0ef949d queued at position 2. Waiting...
+GRANT grokbot GB-245: starting one game-test command
+camera: camera: loading the game................................
+camera: ready in 32 s on port 56879: match, ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11), 1600x900
+help: {"groupsL":1,"groupsR":1}
+setup: {"fp":true,"idle":"ready","weapon":"pistol","skin":11}
+m4        {"want":"m4","w":"m4","reloading":true,"dbg":{"timer":0.7491000000014898,"anim":0.9299999999999999,"weapon":"m4"}}
+   control (no change at all): 0 pixel(s)
+   u=0.05  glove pixels 21657  box 0,657,393,896
+   u=0.2   glove pixels 0      
+   u=0.35  glove pixels 0      
+   u=0.5   glove pixels 0      
+   u=0.65  glove pixels 0      
+   u=0.8   glove pixels 19101  box 0,222,219,523
+ak        {"want":"ak","w":"ak","reloading":true,"dbg":{"timer":0.9685999999977647,"anim":1.2,"weapon":"ak"}}
+   control (no change at all): 0 pixel(s)
+   u=0.05  glove pixels 16163  box 1,623,422,853
+   u=0.2   glove pixels 0      
+   u=0.35  glove pixels 0      
+   u=0.5   glove pixels 0      
+   u=0.65  glove pixels 0      
+   u=0.8   glove pixels 32016  box 0,158,263,491
+aa12      {"want":"aa12","w":"aa12","reloading":true,"dbg":{"timer":1.336800000000745,"anim":1.56,"weapon":"aa12"}}
+   control (no change at all): 0 pixel(s)
+   u=0.05  glove pixels 4983   box 0,778,467,899
+   u=0.2   glove pixels 0      
+   u=0.35  glove pixels 0      
+   u=0.5   glove pixels 0      
+   u=0.65  glove pixels 0      
+   u=0.8   glove pixels 42377  box 0,346,293,669
+shotgun   {"want":"shotgun","w":"shotgun","reloading":true,"dbg":{"timer":0.1825,"anim":0.42,"weapon":"shotgun"}}
+   control (no change at all): 0 pixel(s)
+   u=0.05  glove pixels 17892  box 0,523,498,753
+   u=0.2   glove pixels 0      
+   u=0.35  glove pixels 0      
+   u=0.5   glove pixels 12588  box 0,102,152,354
+   u=0.65  glove pixels 29896  box 0,8,256,370
+   u=0.8   glove pixels 43634  box 0,0,288,400
+sniper    {"want":"sniper","w":"sniper","reloading":true,"dbg":{"timer":1.1784000000022352,"anim":1.41,"weapon":"sniper"}}
+   control (no change at all): 0 pixel(s)
+   u=0.05  glove pixels 18700  box 186,603,409,832
+   u=0.2   glove pixels 0      
+   u=0.35  glove pixels 0      
+   u=0.5   glove pixels 0      
+   u=0.65  glove pixels 0      
+   u=0.8   glove pixels 0      
+launcher  {"want":"launcher","w":"launcher","reloading":true,"dbg":{"timer":0.12180000000074509,"anim":0.4,"weapon":"launcher"}}
+   control (no change at all): 0 pixel(s)
+   u=0.05  glove pixels 15373  box 0,589,544,845
+   u=0.2   glove pixels 0      
+   u=0.35  glove pixels 0      
+   u=0.5   glove pixels 0      
+   u=0.65  glove pixels 0      
+   u=0.8   glove pixels 122    box 0,377,11,396
+pistol    {"want":"pistol","w":"pistol","reloading":true,"dbg":{"timer":0.6099999999999999,"anim":0.81,"weapon":"pistol"}}
+   control (no change at all): 0 pixel(s)
+   u=0.05  glove pixels 57599  box 390,582,842,899
+   u=0.2   glove pixels 68956  box 0,95,473,899
+   u=0.35  glove pixels 68046  box 0,93,472,549
+   u=0.5   glove pixels 74818  box 0,89,470,899
+   u=0.65  glove pixels 181365 box 0,85,662,899
+   u=0.8   glove pixels 205961 box 0,82,894,748
+revolver  {"want":"revolver","w":"revolver","reloading":true,"dbg":{"timer":0.8652000000029803,"anim":1.08,"weapon":"revolver"}}
+   control (no change at all): 0 pixel(s)
+   u=0.05  glove pixels 76578  box 346,568,881,899
+   u=0.2   glove pixels 160259 box 0,76,738,899
+   u=0.35  glove pixels 56865  box 0,82,426,541
+   u=0.5   glove pixels 176320 box 0,90,800,876
+   u=0.65  glove pixels 176599 box 0,98,797,880
+   u=0.8   glove pixels 176501 box 0,103,794,882
+uzi       {"want":"uzi","w":"uzi","reloading":true,"dbg":{"timer":0.6162000000029801,"anim":0.84,"weapon":"uzi"}}
+   control (no change at all): 0 pixel(s)
+   u=0.05  glove pixels 0      
+   u=0.2   glove pixels 127697 box 162,622,905,899
+   u=0.35  glove pixels 136613 box 158,621,911,899
+   u=0.5   glove pixels 137784 box 166,620,915,899
+   u=0.65  glove pixels 133101 box 185,620,919,899
+   u=0.8   glove pixels 156609 box 211,485,922,899
+wrote qa/2026-10-29-GB-245/after/counts.json
+detach: detached
+camera stop: camera: stopped

@@ -185,10 +185,58 @@ export function buildBalaclava(T, material) {
 }
 
 export function buildSurvivorBeard(T, material) {
-  const mesh = new T.Mesh(surface(T, [
-    [1.273,.036,.098,.05], [1.291,.069,.134,.07],
-    [1.323,.098,.155,.09], [1.341,.125,.156,.1]
-  ], {frontOnly:true}), material);
+  // GP-19981: one sculpted jaw, two lip-following moustache lobes. Both are
+  // in the same draw and seated against the actual tapered head. The lower
+  // edge is fuller at the chin and tapers up the cheeks.
+  const positions=[],uv=[],indices=[];
+  const addGrid=(rows,cols,point)=>{
+    const base=positions.length/3;
+    for(let r=0;r<=rows;r++)for(let j=0;j<=cols;j++){
+      const v=r/rows,u=j/cols,p=point(u,v);
+      positions.push(p[0],p[1]-1.22,p[2]);uv.push(u,v);
+    }
+    for(let r=0;r<rows;r++)for(let j=0;j<cols;j++){
+      const a=base+r*(cols+1)+j,b=a+cols+1;
+      indices.push(a,a+1,b,a+1,b+1,b);
+    }
+  };
+  const jaw=surface(T,[
+    [1.273,.039,.108,.050],[1.282,.058,.129,.060],
+    [1.296,.076,.147,.075],[1.311,.094,.159,.088],
+    [1.327,.108,.166,.101],[1.341,.118,.166,.109]
+  ],{frontOnly:true});
+  positions.push(...jaw.attributes.position.array);
+  uv.push(...jaw.attributes.uv.array);
+  indices.push(...jaw.index.array);
+  jaw.dispose();
+  // A few short lower tufts break the old smooth helmet-like hem.
+  for(let j=0;j<=32;j++){
+    const a=-Math.PI+j/32*Math.PI*2;
+    if(Math.abs(a)>1.45)continue;
+    positions[j*3+1]+=(.0028*Math.sin(a*13+.4)+.0013*Math.sin(a*23-.6))*(1-Math.abs(a)/1.45);
+  }
+  // Solid shallow lobes close the front and rear silhouette at a pure profile
+  // view. The back of each oval sinks into the upper lip, while its outer tip
+  // meets the cheek rather than leaving a detached hair ribbon.
+  for(const side of [-1,1])addGrid(8,12,(u,v)=>{
+    const x=side<0?-.063+.059*u:.004+.059*u;
+    const p=(Math.abs(x)-.004)/.059;
+    const tip=1-sstep(.45,1,p);
+    const lower=1.350+.0015*(1-p),upper=lower+(.018-.007*p)*tip;
+    const a=v*Math.PI*2,cy=(lower+upper)*.5,ry=(upper-lower)*.5;
+    const front=.169-.012*p*p,back=.146+.006*p;
+    const y=cy+ry*Math.sin(a);
+    const z=(front+back)*.5+(front-back)*.5*Math.cos(a);
+    return [x,y,z];
+  });
+  const geo=new T.BufferGeometry();
+  geo.setAttribute('position',new T.Float32BufferAttribute(positions,3));
+  geo.setAttribute('uv',new T.Float32BufferAttribute(uv,2));
+  geo.setIndex(indices);geo.computeVertexNormals();geo.computeBoundingSphere();
+  const beardMaterial=material.clone();
+  beardMaterial.color.setHex(0x765247); // muted auburn-brown: 40% HSV saturation
+  beardMaterial.roughness=.86;beardMaterial.metalness=0;
+  const mesh = new T.Mesh(geo,beardMaterial);
   mesh.name = 'survivor-fitted-beard';mesh.castShadow = true;mesh.receiveShadow = true;
   return mesh;
 }

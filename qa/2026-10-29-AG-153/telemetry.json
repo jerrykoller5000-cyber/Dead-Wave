@@ -1,0 +1,113 @@
+{
+  "frames": [
+    {
+      "id": "duty-noon",
+      "label": "Duty Board: Noon Close-up",
+      "time": 0.5005600000000006,
+      "triangles": 841650,
+      "calls": 2265
+    },
+    {
+      "id": "duty-night",
+      "label": "Duty Board: Night Close-up",
+      "time": 0.9205600000000005,
+      "triangles": 893060,
+      "calls": 2321
+    },
+    {
+      "id": "radio-noon",
+      "label": "Radio Set: Noon Close-up",
+      "time": 0.5005600000000006,
+      "triangles": 823017,
+      "calls": 2377
+    },
+    {
+      "id": "radio-night",
+      "label": "Radio Set: Night Close-up",
+      "time": 0.9205600000000005,
+      "triangles": 861115,
+      "calls": 2433
+    },
+    {
+      "id": "south-facade-overview",
+      "label": "South Facade Overview",
+      "time": 0.5005600000000006,
+      "triangles": 912867,
+      "calls": 2489
+    }
+  ],
+  "loadSec": 17.613,
+  "wallOpenSec": 18.25,
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "init": {
+    "dutyBoard": {
+      "name": "hq-duty-board",
+      "childCount": 3,
+      "children": [
+        {
+          "name": "hq-duty-board-static",
+          "type": "Mesh",
+          "triangles": 712,
+          "material": "MeshStandardMaterial",
+          "hasVertexColors": true
+        },
+        {
+          "name": "Mesh",
+          "type": "Mesh",
+          "triangles": 32,
+          "material": "MeshStandardMaterial",
+          "hasVertexColors": false
+        },
+        {
+          "name": "Mesh",
+          "type": "Mesh",
+          "triangles": 2,
+          "material": "MeshStandardMaterial",
+          "hasVertexColors": false
+        }
+      ]
+    },
+    "radioSet": {
+      "name": "hq-radio-set",
+      "childCount": 3,
+      "children": [
+        {
+          "name": "hq-radio-set-static",
+          "type": "Mesh",
+          "triangles": 1228,
+          "material": "MeshStandardMaterial",
+          "hasVertexColors": true
+        },
+        {
+          "name": "Mesh",
+          "type": "Mesh",
+          "triangles": 2,
+          "material": "MeshStandardMaterial",
+          "hasVertexColors": false
+        },
+        {
+          "name": "hq-hush-board",
+          "type": "Group",
+          "triangles": 0,
+          "material": "none",
+          "hasVertexColors": false
+        }
+      ]
+    },
+    "hqDutyBoardFront": {
+      "x": -1.62,
+      "z": -5.9
+    },
+    "hqDutyBoardReach": 1.45,
+    "hqRadioFront": {
+      "x": 1.62,
+      "z": -5.9
+    },
+    "hqRadioReach": 1.25,
+    "houseFolded": {
+      "folded": 11,
+      "removed": 95
+    }
+  },
+  "pageErrors": []
+}

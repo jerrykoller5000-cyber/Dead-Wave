@@ -1,0 +1,16 @@
+GRANT grokbot GB-245: starting one game-test command
+camera: camera: loading the game..............................
+camera: ready in 30 s on port 54687: match, ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11), 1600x900
+help: ok
+setup: pistol
+{"up":0.06,"in":0,"side":0,"tip":0,"turn":1,"cant":0,"hip":0}          u35 R     0 L     0 | u50 R     0 L     0 | u65 R     0 L 17121
+{"up":0.06,"in":0,"side":0,"tip":0,"turn":1,"cant":-0.5,"hip":0}       u35 R   146 L   146 | u50 R   235 L   235 | u65 R    99 L 19958
+{"up":0.06,"in":0,"side":0,"tip":0,"turn":1,"cant":-1,"hip":0}         u35 R  8729 L  8729 | u50 R  9828 L 12372 | u65 R  5694 L 32881
+{"up":0.06,"in":0,"side":0,"tip":-0.15,"turn":1,"cant":1,"hip":0}      u35 R     0 L     0 | u50 R     0 L  8305 | u65 R     0 L 19258
+{"up":0.06,"in":0,"side":0,"tip":-0.3,"turn":1,"cant":1,"hip":0}       u35 R     0 L     0 | u50 R     0 L 11559 | u65 R     0 L 19764
+{"up":0.06,"in":0,"side":0,"tip":-0.15,"turn":1,"cant":-0.5,"hip":0}   u35 R     0 L     0 | u50 R     0 L 18636 | u65 R     0 L 29350
+{"up":0.06,"in":0,"side":0.14,"tip":0,"turn":1,"cant":-0.5,"hip":0}    u35 R 48283 L 48283 | u50 R 48117 L 48117 | u65 R 35389 L 51084
+{"up":0.06,"in":0,"side":0.14,"tip":-0.15,"turn":1,"cant":-0.5,"hip":0} u35 R 47468 L 47468 | u50 R 47435 L 63475 | u65 R 37194 L 59208
+{"up":0.02,"in":0,"side":0,"tip":0,"turn":0,"cant":0,"hip":0}          u35 R 17165 L 17165 | u50 R 17129 L 17129 | u65 R 12305 L 12482
+{"up":0.06,"in":-0.1,"side":0,"tip":0,"turn":1,"cant":0,"hip":0}       u35 R     0 L     0 | u50 R     0 L     0 | u65 R     0 L 11726
+camera stop: camera: stopped

@@ -1,0 +1,1062 @@
+{
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "checks": [
+    {
+      "id": "zombie.colossus",
+      "variant": null,
+      "mode": "statue",
+      "ok": true,
+      "ms": 344,
+      "tris": 6976,
+      "size": [
+        3.167,
+        4.997,
+        2.877
+      ],
+      "error": null
+    }
+  ],
+  "records": [
+    {
+      "kind": "colossus",
+      "light": "noon",
+      "condition": "baseline",
+      "frame": 5,
+      "view": "front",
+      "file": "handoffs/GP-19970/hit-pose/colossus-mass-after/colossus-noon-baseline-f5-front.jpg",
+      "alive": true,
+      "hp": 537,
+      "hitReact": 0,
+      "torso": [
+        0.21326269088011718,
+        0,
+        -0.11827389610880529
+      ],
+      "head": [
+        0.004011928499435095,
+        0,
+        0.4076736297133211
+      ],
+      "armL": [
+        -0.9953335348124666,
+        0,
+        -0.022140525028582554
+      ],
+      "armR": [
+        0.09533353481246648,
+        0,
+        -0.15428800744364202
+      ]
+    },
+    {
+      "kind": "colossus",
+      "light": "noon",
+      "condition": "baseline",
+      "frame": 5,
+      "view": "gameplay",
+      "file": "handoffs/GP-19970/hit-pose/colossus-mass-after/colossus-noon-baseline-f5-gameplay.jpg",
+      "alive": true,
+      "hp": 537,
+      "hitReact": 0,
+      "torso": [
+        0.21326269088011718,
+        0,
+        -0.11827389610880529
+      ],
+      "head": [
+        0.004011928499435095,
+        0,
+        0.4076736297133211
+      ],
+      "armL": [
+        -0.9953335348124666,
+        0,
+        -0.022140525028582554
+      ],
+      "armR": [
+        0.09533353481246648,
+        0,
+        -0.15428800744364202
+      ]
+    },
+    {
+      "kind": "colossus",
+      "light": "noon",
+      "condition": "body-hit",
+      "frame": 5,
+      "view": "front",
+      "file": "handoffs/GP-19970/hit-pose/colossus-mass-after/colossus-noon-body-hit-f5-front.jpg",
+      "alive": true,
+      "hp": 562,
+      "hitReact": 0.08466666666666667,
+      "hitPartT": 0.3666666666666667,
+      "hitPart": "torso",
+      "torso": [
+        0.001636940006568277,
+        0.3104056437389771,
+        -0.13230952845466454
+      ],
+      "head": [
+        -0.050270026127477406,
+        -0.02103104450105521,
+        0.3371502805312777
+      ],
+      "armL": [
+        -1.0308247541903308,
+        0,
+        -0.01918292341376053
+      ],
+      "armR": [
+        0.13082475419033085,
+        0,
+        -0.16024911313823542
+      ]
+    },
+    {
+      "kind": "colossus",
+      "light": "noon",
+      "condition": "body-hit",
+      "frame": 5,
+      "view": "gameplay",
+      "file": "handoffs/GP-19970/hit-pose/colossus-mass-after/colossus-noon-body-hit-f5-gameplay.jpg",
+      "alive": true,
+      "hp": 562,
+      "hitReact": 0.08466666666666667,
+      "hitPartT": 0.3666666666666667,
+      "hitPart": "torso",
+      "torso": [
+        0.001636940006568277,
+        0.3104056437389771,
+        -0.13230952845466454
+      ],
+      "head": [
+        -0.050270026127477406,
+        -0.02103104450105521,
+        0.3371502805312777
+      ],
+      "armL": [
+        -1.0308247541903308,
+        0,
+        -0.01918292341376053
+      ],
+      "armR": [
+        0.13082475419033085,
+        0,
+        -0.16024911313823542
+      ]
+    },
+    {
+      "kind": "colossus",
+      "light": "noon",
+      "condition": "body-hit",
+      "frame": 10,
+      "view": "front",
+      "file": "handoffs/GP-19970/hit-pose/colossus-mass-after/colossus-noon-body-hit-f10-front.jpg",
+      "alive": true,
+      "hp": 562,
+      "hitReact": 0.001333333333333346,
+      "hitPartT": 0.2833333333333334,
+      "hitPart": "torso",
+      "torso": [
+        0.10322507073486101,
+        0.23985890652557323,
+        -0.10314085016036002
+      ],
+      "head": [
+        -0.032181816359348636,
+        -0.07197816566877215,
+        0.438588931483469
+      ],
+      "armL": [
+        -0.8405882628889841,
+        0,
+        -0.03503596435553943
+      ],
+      "armR": [
+        -0.059411737111015994,
+        0,
+        -0.13575036001913626
+      ]
+    },
+    {
+      "kind": "colossus",
+      "light": "noon",
+      "condition": "body-hit",
+      "frame": 10,
+      "view": "gameplay",
+      "file": "handoffs/GP-19970/hit-pose/colossus-mass-after/colossus-noon-body-hit-f10-gameplay.jpg",
+      "alive": true,
+      "hp": 562,
+      "hitReact": 0.001333333333333346,
+      "hitPartT": 0.2833333333333334,
+      "hitPart": "torso",
+      "torso": [
+        0.10322507073486101,
+        0.23985890652557323,
+        -0.10314085016036002
+      ],
+      "head": [
+        -0.032181816359348636,
+        -0.07197816566877215,
+        0.438588931483469
+      ],
+      "armL": [
+        -0.8405882628889841,
+        0,
+        -0.03503596435553943
+      ],
+      "armR": [
+        -0.059411737111015994,
+        0,
+        -0.13575036001913626
+      ]
+    },
+    {
+      "kind": "colossus",
+      "light": "noon",
+      "condition": "body-hit",
+      "frame": 20,
+      "view": "front",
+      "file": "handoffs/GP-19970/hit-pose/colossus-mass-after/colossus-noon-body-hit-f20-front.jpg",
+      "alive": true,
+      "hp": 562,
+      "hitReact": 0,
+      "hitPartT": 0.11666666666666675,
+      "hitPart": "torso",
+      "torso": [
+        0.1721527308732346,
+        0.09876543209876555,
+        -0.06000446833454669
+      ],
+      "head": [
+        0.0810917057110305,
+        -0.105376881642256,
+        0.0755280161578141
+      ],
+      "armL": [
+        -0.15815612664740658,
+        0,
+        -0.09190530904233757
+      ],
+      "armR": [
+        -0.7418438733525935,
+        0,
+        -0.08113811489345453
+      ]
+    },
+    {
+      "kind": "colossus",
+      "light": "noon",
+      "condition": "body-hit",
+      "frame": 20,
+      "view": "gameplay",
+      "file": "handoffs/GP-19970/hit-pose/colossus-mass-after/colossus-noon-body-hit-f20-gameplay.jpg",
+      "alive": true,
+      "hp": 562,
+      "hitReact": 0,
+      "hitPartT": 0.11666666666666675,
+      "hitPart": "torso",
+      "torso": [
+        0.1721527308732346,
+        0.09876543209876555,
+        -0.06000446833454669
+      ],
+      "head": [
+        0.0810917057110305,
+        -0.105376881642256,
+        0.0755280161578141
+      ],
+      "armL": [
+        -0.15815612664740658,
+        0,
+        -0.09190530904233757
+      ],
+      "armR": [
+        -0.7418438733525935,
+        0,
+        -0.08113811489345453
+      ]
+    },
+    {
+      "kind": "colossus",
+      "light": "overcast",
+      "condition": "baseline",
+      "frame": 5,
+      "view": "front",
+      "file": "handoffs/GP-19970/hit-pose/colossus-mass-after/colossus-overcast-baseline-f5-front.jpg",
+      "alive": true,
+      "hp": 477,
+      "hitReact": 0,
+      "torso": [
+        0.2193666551090423,
+        0,
+        -0.11286794107422748
+      ],
+      "head": [
+        0.0039039764879085018,
+        0.011483644720103714,
+        0.34543464560981013
+      ],
+      "armL": [
+        -1.0308247541903308,
+        0,
+        -0.01918292341376053
+      ],
+      "armR": [
+        0.13082475419033085,
+        0,
+        -0.16024911313823542
+      ]
+    },
+    {
+      "kind": "colossus",
+      "light": "overcast",
+      "condition": "baseline",
+      "frame": 5,
+      "view": "gameplay",
+      "file": "handoffs/GP-19970/hit-pose/colossus-mass-after/colossus-overcast-baseline-f5-gameplay.jpg",
+      "alive": true,
+      "hp": 477,
+      "hitReact": 0,
+      "torso": [
+        0.2193666551090423,
+        0,
+        -0.11286794107422748
+      ],
+      "head": [
+        0.0039039764879085018,
+        0.011483644720103714,
+        0.34543464560981013
+      ],
+      "armL": [
+        -1.0308247541903308,
+        0,
+        -0.01918292341376053
+      ],
+      "armR": [
+        0.13082475419033085,
+        0,
+        -0.16024911313823542
+      ]
+    },
+    {
+      "kind": "colossus",
+      "light": "overcast",
+      "condition": "body-hit",
+      "frame": 5,
+      "view": "front",
+      "file": "handoffs/GP-19970/hit-pose/colossus-mass-after/colossus-overcast-body-hit-f5-front.jpg",
+      "alive": true,
+      "hp": 571,
+      "hitReact": 0.08466666666666667,
+      "hitPartT": 0.3666666666666667,
+      "hitPart": "torso",
+      "torso": [
+        0.001636940006568277,
+        0.3104056437389771,
+        -0.13254082199581504
+      ],
+      "head": [
+        -0.050270026127477406,
+        -0.010987399651478064,
+        0.32993571700720103
+      ],
+      "armL": [
+        -1.0308247541903308,
+        0,
+        -0.01918292341376053
+      ],
+      "armR": [
+        0.13082475419033085,
+        0,
+        -0.16024911313823542
+      ]
+    },
+    {
+      "kind": "colossus",
+      "light": "overcast",
+      "condition": "body-hit",
+      "frame": 5,
+      "view": "gameplay",
+      "file": "handoffs/GP-19970/hit-pose/colossus-mass-after/colossus-overcast-body-hit-f5-gameplay.jpg",
+      "alive": true,
+      "hp": 571,
+      "hitReact": 0.08466666666666667,
+      "hitPartT": 0.3666666666666667,
+      "hitPart": "torso",
+      "torso": [
+        0.001636940006568277,
+        0.3104056437389771,
+        -0.13254082199581504
+      ],
+      "head": [
+        -0.050270026127477406,
+        -0.010987399651478064,
+        0.32993571700720103
+      ],
+      "armL": [
+        -1.0308247541903308,
+        0,
+        -0.01918292341376053
+      ],
+      "armR": [
+        0.13082475419033085,
+        0,
+        -0.16024911313823542
+      ]
+    },
+    {
+      "kind": "colossus",
+      "light": "overcast",
+      "condition": "body-hit",
+      "frame": 10,
+      "view": "front",
+      "file": "handoffs/GP-19970/hit-pose/colossus-mass-after/colossus-overcast-body-hit-f10-front.jpg",
+      "alive": true,
+      "hp": 571,
+      "hitReact": 0.001333333333333346,
+      "hitPartT": 0.2833333333333334,
+      "hitPart": "torso",
+      "torso": [
+        0.10322507073486101,
+        0.23985890652557323,
+        -0.10502521019185952
+      ],
+      "head": [
+        -0.032181816359348636,
+        -0.055620144980597454,
+        0.41326542531951743
+      ],
+      "armL": [
+        -0.8405882628889841,
+        0,
+        -0.03503596435553943
+      ],
+      "armR": [
+        -0.059411737111015994,
+        0,
+        -0.13575036001913626
+      ]
+    },
+    {
+      "kind": "colossus",
+      "light": "overcast",
+      "condition": "body-hit",
+      "frame": 10,
+      "view": "gameplay",
+      "file": "handoffs/GP-19970/hit-pose/colossus-mass-after/colossus-overcast-body-hit-f10-gameplay.jpg",
+      "alive": true,
+      "hp": 571,
+      "hitReact": 0.001333333333333346,
+      "hitPartT": 0.2833333333333334,
+      "hitPart": "torso",
+      "torso": [
+        0.10322507073486101,
+        0.23985890652557323,
+        -0.10502521019185952
+      ],
+      "head": [
+        -0.032181816359348636,
+        -0.055620144980597454,
+        0.41326542531951743
+      ],
+      "armL": [
+        -0.8405882628889841,
+        0,
+        -0.03503596435553943
+      ],
+      "armR": [
+        -0.059411737111015994,
+        0,
+        -0.13575036001913626
+      ]
+    },
+    {
+      "kind": "colossus",
+      "light": "overcast",
+      "condition": "body-hit",
+      "frame": 20,
+      "view": "front",
+      "file": "handoffs/GP-19970/hit-pose/colossus-mass-after/colossus-overcast-body-hit-f20-front.jpg",
+      "alive": true,
+      "hp": 571,
+      "hitReact": 0,
+      "hitPartT": 0.11666666666666675,
+      "hitPart": "torso",
+      "torso": [
+        0.17252032791242553,
+        0.09876543209876555,
+        -0.06502608376311424
+      ],
+      "head": [
+        0.08087227937800312,
+        -0.10288087652957156,
+        0.019738135594444872
+      ],
+      "armL": [
+        -0.15815612664740658,
+        0,
+        -0.09190530904233757
+      ],
+      "armR": [
+        -0.7418438733525935,
+        0,
+        -0.08113811489345453
+      ]
+    },
+    {
+      "kind": "colossus",
+      "light": "overcast",
+      "condition": "body-hit",
+      "frame": 20,
+      "view": "gameplay",
+      "file": "handoffs/GP-19970/hit-pose/colossus-mass-after/colossus-overcast-body-hit-f20-gameplay.jpg",
+      "alive": true,
+      "hp": 571,
+      "hitReact": 0,
+      "hitPartT": 0.11666666666666675,
+      "hitPart": "torso",
+      "torso": [
+        0.17252032791242553,
+        0.09876543209876555,
+        -0.06502608376311424
+      ],
+      "head": [
+        0.08087227937800312,
+        -0.10288087652957156,
+        0.019738135594444872
+      ],
+      "armL": [
+        -0.15815612664740658,
+        0,
+        -0.09190530904233757
+      ],
+      "armR": [
+        -0.7418438733525935,
+        0,
+        -0.08113811489345453
+      ]
+    },
+    {
+      "kind": "colossus",
+      "light": "dusk",
+      "condition": "baseline",
+      "frame": 5,
+      "view": "front",
+      "file": "handoffs/GP-19970/hit-pose/colossus-mass-after/colossus-dusk-baseline-f5-front.jpg",
+      "alive": true,
+      "hp": 510,
+      "hitReact": 0,
+      "torso": [
+        0.2193666551090423,
+        0,
+        -0.11286794107422748
+      ],
+      "head": [
+        0.0039039764879085018,
+        0.011483644720103714,
+        0.3111784186301306
+      ],
+      "armL": [
+        -1.0308247541903308,
+        0,
+        -0.01918292341376053
+      ],
+      "armR": [
+        0.13082475419033085,
+        0,
+        -0.16024911313823542
+      ]
+    },
+    {
+      "kind": "colossus",
+      "light": "dusk",
+      "condition": "baseline",
+      "frame": 5,
+      "view": "gameplay",
+      "file": "handoffs/GP-19970/hit-pose/colossus-mass-after/colossus-dusk-baseline-f5-gameplay.jpg",
+      "alive": true,
+      "hp": 510,
+      "hitReact": 0,
+      "torso": [
+        0.2193666551090423,
+        0,
+        -0.11286794107422748
+      ],
+      "head": [
+        0.0039039764879085018,
+        0.011483644720103714,
+        0.3111784186301306
+      ],
+      "armL": [
+        -1.0308247541903308,
+        0,
+        -0.01918292341376053
+      ],
+      "armR": [
+        0.13082475419033085,
+        0,
+        -0.16024911313823542
+      ]
+    },
+    {
+      "kind": "colossus",
+      "light": "dusk",
+      "condition": "body-hit",
+      "frame": 5,
+      "view": "front",
+      "file": "handoffs/GP-19970/hit-pose/colossus-mass-after/colossus-dusk-body-hit-f5-front.jpg",
+      "alive": true,
+      "hp": 510,
+      "hitReact": 0.08466666666666667,
+      "hitPartT": 0.3666666666666667,
+      "hitPart": "torso",
+      "torso": [
+        0.001636940006568277,
+        0.3104056437389771,
+        -0.13254082199581504
+      ],
+      "head": [
+        -0.050270026127477406,
+        -0.010987399651478064,
+        0.3299628397859992
+      ],
+      "armL": [
+        -1.0308247541903308,
+        0,
+        -0.01918292341376053
+      ],
+      "armR": [
+        0.13082475419033085,
+        0,
+        -0.16024911313823542
+      ]
+    },
+    {
+      "kind": "colossus",
+      "light": "dusk",
+      "condition": "body-hit",
+      "frame": 5,
+      "view": "gameplay",
+      "file": "handoffs/GP-19970/hit-pose/colossus-mass-after/colossus-dusk-body-hit-f5-gameplay.jpg",
+      "alive": true,
+      "hp": 510,
+      "hitReact": 0.08466666666666667,
+      "hitPartT": 0.3666666666666667,
+      "hitPart": "torso",
+      "torso": [
+        0.001636940006568277,
+        0.3104056437389771,
+        -0.13254082199581504
+      ],
+      "head": [
+        -0.050270026127477406,
+        -0.010987399651478064,
+        0.3299628397859992
+      ],
+      "armL": [
+        -1.0308247541903308,
+        0,
+        -0.01918292341376053
+      ],
+      "armR": [
+        0.13082475419033085,
+        0,
+        -0.16024911313823542
+      ]
+    },
+    {
+      "kind": "colossus",
+      "light": "dusk",
+      "condition": "body-hit",
+      "frame": 10,
+      "view": "front",
+      "file": "handoffs/GP-19970/hit-pose/colossus-mass-after/colossus-dusk-body-hit-f10-front.jpg",
+      "alive": true,
+      "hp": 510,
+      "hitReact": 0.001333333333333346,
+      "hitPartT": 0.2833333333333334,
+      "hitPart": "torso",
+      "torso": [
+        0.10322507073486101,
+        0.23985890652557323,
+        -0.10502521019185952
+      ],
+      "head": [
+        -0.032181816359348636,
+        -0.055620144980597454,
+        0.41329361912289425
+      ],
+      "armL": [
+        -0.8405882628889841,
+        0,
+        -0.03503596435553943
+      ],
+      "armR": [
+        -0.059411737111015994,
+        0,
+        -0.13575036001913626
+      ]
+    },
+    {
+      "kind": "colossus",
+      "light": "dusk",
+      "condition": "body-hit",
+      "frame": 10,
+      "view": "gameplay",
+      "file": "handoffs/GP-19970/hit-pose/colossus-mass-after/colossus-dusk-body-hit-f10-gameplay.jpg",
+      "alive": true,
+      "hp": 510,
+      "hitReact": 0.001333333333333346,
+      "hitPartT": 0.2833333333333334,
+      "hitPart": "torso",
+      "torso": [
+        0.10322507073486101,
+        0.23985890652557323,
+        -0.10502521019185952
+      ],
+      "head": [
+        -0.032181816359348636,
+        -0.055620144980597454,
+        0.41329361912289425
+      ],
+      "armL": [
+        -0.8405882628889841,
+        0,
+        -0.03503596435553943
+      ],
+      "armR": [
+        -0.059411737111015994,
+        0,
+        -0.13575036001913626
+      ]
+    },
+    {
+      "kind": "colossus",
+      "light": "dusk",
+      "condition": "body-hit",
+      "frame": 20,
+      "view": "front",
+      "file": "handoffs/GP-19970/hit-pose/colossus-mass-after/colossus-dusk-body-hit-f20-front.jpg",
+      "alive": true,
+      "hp": 510,
+      "hitReact": 0,
+      "hitPartT": 0.11666666666666675,
+      "hitPart": "torso",
+      "torso": [
+        0.17252032791242553,
+        0.09876543209876555,
+        -0.06502608376311424
+      ],
+      "head": [
+        0.08087227937800312,
+        -0.10288087652957156,
+        0.019763254983637717
+      ],
+      "armL": [
+        -0.15815612664740658,
+        0,
+        -0.09190530904233757
+      ],
+      "armR": [
+        -0.7418438733525935,
+        0,
+        -0.08113811489345453
+      ]
+    },
+    {
+      "kind": "colossus",
+      "light": "dusk",
+      "condition": "body-hit",
+      "frame": 20,
+      "view": "gameplay",
+      "file": "handoffs/GP-19970/hit-pose/colossus-mass-after/colossus-dusk-body-hit-f20-gameplay.jpg",
+      "alive": true,
+      "hp": 510,
+      "hitReact": 0,
+      "hitPartT": 0.11666666666666675,
+      "hitPart": "torso",
+      "torso": [
+        0.17252032791242553,
+        0.09876543209876555,
+        -0.06502608376311424
+      ],
+      "head": [
+        0.08087227937800312,
+        -0.10288087652957156,
+        0.019763254983637717
+      ],
+      "armL": [
+        -0.15815612664740658,
+        0,
+        -0.09190530904233757
+      ],
+      "armR": [
+        -0.7418438733525935,
+        0,
+        -0.08113811489345453
+      ]
+    },
+    {
+      "kind": "colossus",
+      "light": "night",
+      "condition": "baseline",
+      "frame": 5,
+      "view": "front",
+      "file": "handoffs/GP-19970/hit-pose/colossus-mass-after/colossus-night-baseline-f5-front.jpg",
+      "alive": true,
+      "hp": 551,
+      "hitReact": 0,
+      "torso": [
+        0.2193666551090423,
+        0,
+        -0.11286794107422748
+      ],
+      "head": [
+        0.0039039764879085018,
+        0.011483644720103714,
+        0.33721493181027445
+      ],
+      "armL": [
+        -1.0308247541903308,
+        0,
+        -0.01918292341376053
+      ],
+      "armR": [
+        0.13082475419033085,
+        0,
+        -0.16024911313823542
+      ]
+    },
+    {
+      "kind": "colossus",
+      "light": "night",
+      "condition": "baseline",
+      "frame": 5,
+      "view": "gameplay",
+      "file": "handoffs/GP-19970/hit-pose/colossus-mass-after/colossus-night-baseline-f5-gameplay.jpg",
+      "alive": true,
+      "hp": 551,
+      "hitReact": 0,
+      "torso": [
+        0.2193666551090423,
+        0,
+        -0.11286794107422748
+      ],
+      "head": [
+        0.0039039764879085018,
+        0.011483644720103714,
+        0.33721493181027445
+      ],
+      "armL": [
+        -1.0308247541903308,
+        0,
+        -0.01918292341376053
+      ],
+      "armR": [
+        0.13082475419033085,
+        0,
+        -0.16024911313823542
+      ]
+    },
+    {
+      "kind": "colossus",
+      "light": "night",
+      "condition": "body-hit",
+      "frame": 5,
+      "view": "front",
+      "file": "handoffs/GP-19970/hit-pose/colossus-mass-after/colossus-night-body-hit-f5-front.jpg",
+      "alive": true,
+      "hp": 437,
+      "hitReact": 0.08466666666666667,
+      "hitPartT": 0.3666666666666667,
+      "hitPart": "armL",
+      "torso": [
+        0.11803905640868469,
+        0.291005291005291,
+        0.01296182350683045
+      ],
+      "head": [
+        -0.050270026127477406,
+        -0.009672959370162111,
+        0.33902339286140704
+      ],
+      "armL": [
+        -2.2918476818799256,
+        0,
+        0.5628276585968215
+      ],
+      "armR": [
+        0.13082475419033085,
+        0,
+        -0.16024911313823542
+      ]
+    },
+    {
+      "kind": "colossus",
+      "light": "night",
+      "condition": "body-hit",
+      "frame": 5,
+      "view": "gameplay",
+      "file": "handoffs/GP-19970/hit-pose/colossus-mass-after/colossus-night-body-hit-f5-gameplay.jpg",
+      "alive": true,
+      "hp": 437,
+      "hitReact": 0.08466666666666667,
+      "hitPartT": 0.3666666666666667,
+      "hitPart": "armL",
+      "torso": [
+        0.11803905640868469,
+        0.291005291005291,
+        0.01296182350683045
+      ],
+      "head": [
+        -0.050270026127477406,
+        -0.009672959370162111,
+        0.33902339286140704
+      ],
+      "armL": [
+        -2.2918476818799256,
+        0,
+        0.5628276585968215
+      ],
+      "armR": [
+        0.13082475419033085,
+        0,
+        -0.16024911313823542
+      ]
+    },
+    {
+      "kind": "colossus",
+      "light": "night",
+      "condition": "body-hit",
+      "frame": 10,
+      "view": "front",
+      "file": "handoffs/GP-19970/hit-pose/colossus-mass-after/colossus-night-body-hit-f10-front.jpg",
+      "alive": true,
+      "hp": 437,
+      "hitReact": 0.001333333333333346,
+      "hitPartT": 0.2833333333333334,
+      "hitPart": "armL",
+      "torso": [
+        0.19317216068195098,
+        0.2248677248677249,
+        0.007408652242002927
+      ],
+      "head": [
+        -0.032181816359348636,
+        -0.051121509626299196,
+        0.4401516722583446
+      ],
+      "armL": [
+        -1.8150150706491255,
+        0,
+        0.4146994853799104
+      ],
+      "armR": [
+        -0.059411737111015994,
+        0,
+        -0.13575036001913626
+      ]
+    },
+    {
+      "kind": "colossus",
+      "light": "night",
+      "condition": "body-hit",
+      "frame": 10,
+      "view": "gameplay",
+      "file": "handoffs/GP-19970/hit-pose/colossus-mass-after/colossus-night-body-hit-f10-gameplay.jpg",
+      "alive": true,
+      "hp": 437,
+      "hitReact": 0.001333333333333346,
+      "hitPartT": 0.2833333333333334,
+      "hitPart": "armL",
+      "torso": [
+        0.19317216068195098,
+        0.2248677248677249,
+        0.007408652242002927
+      ],
+      "head": [
+        -0.032181816359348636,
+        -0.051121509626299196,
+        0.4401516722583446
+      ],
+      "armL": [
+        -1.8150150706491255,
+        0,
+        0.4146994853799104
+      ],
+      "armR": [
+        -0.059411737111015994,
+        0,
+        -0.13575036001913626
+      ]
+    },
+    {
+      "kind": "colossus",
+      "light": "night",
+      "condition": "body-hit",
+      "frame": 20,
+      "view": "front",
+      "file": "handoffs/GP-19970/hit-pose/colossus-mass-after/colossus-night-body-hit-f20-front.jpg",
+      "alive": true,
+      "hp": 437,
+      "hitReact": 0,
+      "hitPartT": 0.11666666666666675,
+      "hitPart": "armL",
+      "torso": [
+        0.20955736494946262,
+        0.0925925925925927,
+        -0.018729787466817895
+      ],
+      "head": [
+        0.08087227937800312,
+        -0.09639992292935709,
+        0.07620386143041828
+      ],
+      "armL": [
+        -0.5593906945486417,
+        0,
+        0.09327987614284783
+      ],
+      "armR": [
+        -0.7418438733525935,
+        0,
+        -0.08113811489345453
+      ]
+    },
+    {
+      "kind": "colossus",
+      "light": "night",
+      "condition": "body-hit",
+      "frame": 20,
+      "view": "gameplay",
+      "file": "handoffs/GP-19970/hit-pose/colossus-mass-after/colossus-night-body-hit-f20-gameplay.jpg",
+      "alive": true,
+      "hp": 437,
+      "hitReact": 0,
+      "hitPartT": 0.11666666666666675,
+      "hitPart": "armL",
+      "torso": [
+        0.20955736494946262,
+        0.0925925925925927,
+        -0.018729787466817895
+      ],
+      "head": [
+        0.08087227937800312,
+        -0.09639992292935709,
+        0.07620386143041828
+      ],
+      "armL": [
+        -0.5593906945486417,
+        0,
+        0.09327987614284783
+      ],
+      "armR": [
+        -0.7418438733525935,
+        0,
+        -0.08113811489345453
+      ]
+    }
+  ],
+  "pageErrors": []
+}

@@ -1,0 +1,44 @@
+[
+ {
+  "name": "m4-fp-hip",
+  "gun": "m4",
+  "R": 0,
+  "L": 0,
+  "info": "{\"L\":[\"\"],\"R\":[\"\"],\"armL\":true,\"armR\":true,\"head\":false}"
+ },
+ {
+  "name": "m4-tp-shoulder",
+  "gun": "m4",
+  "R": 16,
+  "L": 36,
+  "info": "{\"L\":[\"\"],\"R\":[\"\"],\"armL\":true,\"armR\":true,\"head\":true}"
+ },
+ {
+  "name": "pistol-fp-hip",
+  "gun": "pistol",
+  "R": 25405,
+  "L": 55189,
+  "info": "{\"L\":[\"\"],\"R\":[\"\"],\"armL\":true,\"armR\":true,\"head\":false}"
+ },
+ {
+  "name": "pistol-tp-shoulder",
+  "gun": "pistol",
+  "R": 0,
+  "L": 0,
+  "info": "{\"L\":[\"\"],\"R\":[\"\"],\"armL\":true,\"armR\":true,\"head\":true}"
+ },
+ {
+  "name": "sniper-fp-hip",
+  "gun": "sniper",
+  "R": 8027,
+  "L": 24028,
+  "info": "{\"L\":[\"\"],\"R\":[\"\"],\"armL\":true,\"armR\":true,\"head\":false}"
+ },
+ {
+  "name": "sniper-tp-shoulder",
+  "gun": "sniper",
+  "R": 12,
+  "L": 28,
+  "info": "{\"L\":[\"\"],\"R\":[\"\"],\"armL\":true,\"armR\":true,\"head\":true}"
+ }
+]

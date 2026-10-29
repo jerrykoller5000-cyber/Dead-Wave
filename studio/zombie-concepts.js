@@ -164,9 +164,11 @@ function sculpt(T, s, rbox) {
     for(let i=0;i<rim.length;i++){const a=rim[i],b=rim[(i+1)%rim.length];idx.push(a,a+count,b,b,a+count,b+count);}
     const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(pos,3));geo.setIndex(idx);geo.computeVertexNormals();return put(p,geo,m);
   };
-  const ribbon=(p,m,pts,w=.025)=>{
+  const ribbon=(p,m,pts,w=.025,surface=null)=>{
     const pos=[],uv=[],idx=[];
-    for(let i=0;i<pts.length;i++){const [x,y,z]=pts[i],rw=w*(1-i/(pts.length+1));pos.push((x-rw)*s,y*s,z*s,(x+rw)*s,y*s,(z+.005)*s);uv.push(0,i/(pts.length-1),1,i/(pts.length-1));if(i){const a=(i-1)*2;idx.push(a,a+2,a+1,a+1,a+2,a+3,a+1,a+2,a,a+3,a+2,a+1);}}
+    for(let i=0;i<pts.length;i++){const [x,y,z]=pts[i],rw=w*(1-i/(pts.length+1)),lift=surface?z-surface(x,y):0;
+      pos.push((x-rw)*s,y*s,(surface?surface(x-rw,y)+lift:z)*s,(x+rw)*s,y*s,(surface?surface(x+rw,y)+lift:z+.005)*s);
+      uv.push(0,i/(pts.length-1),1,i/(pts.length-1));if(i){const a=(i-1)*2;idx.push(a,a+2,a+1,a+1,a+2,a+3,a+1,a+2,a,a+3,a+2,a+1);}}
     const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(pos,3));geo.setAttribute('uv',new T.Float32BufferAttribute(uv,2));geo.setIndex(idx);const flat=geo.toNonIndexed();flat.computeVertexNormals();return put(p,flat,m);
   };
   const rag = (p,m,x,y,z,w,h,rz=0) => {
@@ -190,15 +192,16 @@ export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox}) {
   if(!CONCEPT_TYPES.includes(k))return false;
   const cacheKey=k+':'+s;if(restore(T,g,cacheKey,k)){mergeEyes(T,g);return true;}
   const u=g.userData, {hips,torso,head,armLG,armRG,legLG,legRG}=u;
-  const A=sculpt(T,s,rbox),{mat,egg,rock,box,rod,path,spike,rag,loft,ribbon}=A;
+  const A=sculpt(T,s,rbox),{mat,egg,rock,box,rod,path,spike,rag,loft,plate,ribbon}=A;
   stripMeshes(g,new Set(u.eyes));
   const heavy=['brute','colossus','demon'].includes(k), acid=['spitter','bomber'].includes(k);
-  const skin=mat(({shambler:0xb4ad96,feral:0xa4a789,brute:0x985548,military:0xa5a08b,
+  const hideSurface=k==='brute'||k==='demon'?'wet':'skin';
+  const skin=mat(({shambler:0xb4ad96,feral:0xa4a789,brute:0x86574c,military:0xa5a08b,
     spitter:0xb0ab77,bomber:0x9fa54e,screamer:0xc5b6a4,drowned:0x729194,leaper:0xb2b0b2,
-    spider:0xbabdb1,colossus:0x855245,demon:0x8b3e32,guardian:0xc3c6b3,caveguard:0x55584f})[k]);
-  const shadow=mat(skin.color.clone().multiplyScalar(.49)), pale=mat(skin.color.clone().lerp(new T.Color(0xe6dfc8),.28));
+    spider:0xbabdb1,colossus:0x855245,demon:0x784b43,guardian:0xc3c6b3,caveguard:0x55584f})[k],false,0,hideSurface);
+  const shadow=mat(skin.color.clone().multiplyScalar(.49),false,0,hideSurface), pale=mat(skin.color.clone().lerp(new T.Color(0xe6dfc8),.28),false,0,hideSurface);
   const wound=mat(0x674137,false,0,'wet'),mouth=mat(0x201b1b),teeth=mat(0xc8bea0,false,0,'bone'),hair=mat(0x27251f,false,0,'root'),cloth=mat(0x49473f,false,0,'cloth');
-  const shirt=mat(0xc6bca5,false,0,'cloth'),leather=mat(0x594834,false,0,'leather'),steel=mat(0x494a43,false,.35,'metal'),rust=mat(0x996a43,false,.2,'metal');
+  const shirt=mat(0xc6bca5,false,0,'cloth'),leather=mat(0x594834,false,0,'leather'),steel=mat(k==='brute'?0x7d817d:0x494a43,false,.35,'metal'),rust=mat(0x996a43,false,.2,'metal');
   // D-89: the uncanny's eyes are cold pale-green points, not archetype neon.
   const moss=mat(k==='drowned'?0x384e35:0x526032,false,0,'root'),glowColor=0x74a18d;
   for(const e of u.eyes){e.material.color.set(glowColor);e.material.emissive.set(glowColor);e.material.emissiveIntensity=.9;e.material.userData.baseEmissive=.9;e.scale.set(.68,.45,.5);}
@@ -243,7 +246,12 @@ export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox}) {
     egg(shin,pale,0,-.015,.03,.15,.13,.16);
     const bareFoot=['feral','leaper','demon','guardian','caveguard'].includes(k);
     loft(shin,skin,[...(bareFoot?[[-.405,.065*lm,.102,.055],[-.375,.092*lm,.139,.043],[-.34,.061*lm,.080,.016],[-.29,.048*lm,.057]]:[[-.34,.048*lm,.051,.01]]),[-.23,.054*lm,.066,-.015],[-.12,.083*lm,.085,-.02],[-.045,.067*lm,.069],[.018,.063*lm,.07]],10);
-    rod(shin,shadow,[.02,-.06,.066],[.008,-.31,.052],.015,.01);
+    // On lean types the straight shin rod bridges the concave calf.
+    if(['shambler','feral','leaper'].includes(k)){
+      const inset=k==='feral'?.005:0;
+      path(shin,shadow,[[.02,-.06,.064],[.018,-.14,.054-inset],[.013,-.23,.048-inset],[.008,-.31,.052-inset]],.010,.006);
+    }
+    else rod(shin,shadow,[.02,-.06,.066],[.008,-.31,.052],.015,.01);
     const booted=!['feral','leaper','demon','guardian','caveguard'].includes(k);
     if(booted)egg(shin,leather,0,-.355,.043,.185*(heavy?1.35:1),.114,.278);
     if(booted){
@@ -254,11 +262,28 @@ export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox}) {
       for(const sign of [-1,1])path(shin,pale,[[sign*.065,-.374,-.055],[sign*.077,-.384,.065],[sign*.061,-.379,.160]],.003);
     }
     else for(let f=0;f<3;f++)spike(shin,hair,[(f-1)*.055,-.37,.15],[(f-1)*.065,-.395,.245],.021);
-    if(legcloth)for(let j=0;j<3;j++)rag(leg,cloth,(j-1)*.052,-.23,.104,.064,.1+(j%2)*.05,(j-1)*.15);
+    if(legcloth)for(let j=0;j<3;j++){
+      const fittedHem=k==='shambler'||k==='feral';
+      rag(leg,cloth,(j-1)*.052,-.23,fittedHem?.074:.104,fittedHem?.056:.064,fittedHem?.08+(j%2)*.025:.1+(j%2)*.05,(j-1)*.15);
+    }
     // Torn muscle and mottling: surface chips, not floating decals.
     egg(arm,shadow,side*.042,-.16,.069*muscle,.05,.14,.018,-side*.35);
-    ribbon(el,wound,[[-side*.020,-.105,.074*muscle],[-side*.046,-.143,.075*muscle],[-side*.018,-.21,.066*muscle]],.017);
-    path(el,pale,[[-side*.022,-.11,.078*muscle],[-side*.040,-.15,.079*muscle],[-side*.024,-.201,.071*muscle]],.004);
+    if(k==='leaper'||k==='shambler'||k==='feral'){
+      const rings=[[-.26,.055*muscle,.058*muscle,0],[-.17,.077*muscle,.070*muscle,-.01],[-.07,.082*muscle,.075*muscle,0]];
+      const forearmFront=(x,y)=>{
+        const i=y<rings[1][0]?0:1,lo=rings[i],hi=rings[i+1],t=(y-lo[0])/(hi[0]-lo[0]);
+        const rx=lo[1]+(hi[1]-lo[1])*t,rz=lo[2]+(hi[2]-lo[2])*t,cz=lo[3]+(hi[3]-lo[3])*t;
+        return cz+rz*Math.sqrt(Math.max(0,1-(x/rx)**2));
+      };
+      const onForearm=(pts,lift)=>pts.map(([x,y])=>[x,y,forearmFront(x,y)+lift]);
+      const slash=[[-side*.020,-.105],[-side*.046,-.143],[-side*.018,-.21]];
+      const ribbonPoints=k==='leaper'?slash.flatMap((p,i)=>i<slash.length-1?[p,[(p[0]+slash[i+1][0])/2,(p[1]+slash[i+1][1])/2]]:[p]):slash;
+      ribbon(el,wound,onForearm(ribbonPoints,k==='leaper'?.004:.003),k==='leaper'?.013:.017,k==='leaper'?forearmFront:null);
+      path(el,pale,onForearm([[-side*.022,-.11],[-side*.040,-.15],[-side*.024,-.201]],.006),.004);
+    }else{
+      ribbon(el,wound,[[-side*.020,-.105,.074*muscle],[-side*.046,-.143,.075*muscle],[-side*.018,-.21,.066*muscle]],.017);
+      path(el,pale,[[-side*.022,-.11,.078*muscle],[-side*.040,-.15,.079*muscle],[-side*.024,-.201,.071*muscle]],.004);
+    }
   }
   const hw=heavy?.39:.32;
   const snarl=k==='feral'||k==='leaper'||heavy;
@@ -296,6 +321,16 @@ export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox}) {
     for(const side of [-1,1])path(head,pale,[[side*.135,-.07,.085],[side*.11,-.24,.089],[side*.06,-.33,.06]],.020);
   }
   refineZombieFace(A,T,g,s,k,{skin,shadow,pale,wound,mouth,teeth});
+  // These secondary attachments are added after refineZombieFace rebuilds the
+  // skull. Match that function's common-head loft so roots and rear pegs seat.
+  const faceW=k==='bomber'?.17:.153;
+  const faceRings=[[-.165,.055,.055,.018],[-.12,faceW*.60,.086,.006],[-.055,faceW*.85,.105,-.012],[.025,faceW,.135,-.023],[.10,faceW*.98,.137,-.028],[.167,faceW*.82,.111,-.032],[.205,faceW*.40,.065,-.033]];
+  const headDepth=(x,y,phase)=>{
+    let lo=faceRings[0],hi=faceRings.at(-1);
+    for(let i=1;i<faceRings.length;i++)if(y<=faceRings[i][0]){lo=faceRings[i-1];hi=faceRings[i];break;}
+    const t=Math.max(0,Math.min(1,(y-lo[0])/(hi[0]-lo[0]))),rx=lo[1]+(hi[1]-lo[1])*t,rz=lo[2]+(hi[2]-lo[2])*t,cz=lo[3]+(hi[3]-lo[3])*t;
+    return cz+phase*rz*Math.sqrt(Math.max(0,1-(x/rx)**2));
+  };
   if(scream){
     // GP-19971: a close scalp and wet trailing locks leave the brow readable.
     egg(head,hair,0,.157,-.042,.268,.099,.228);
@@ -305,14 +340,37 @@ export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox}) {
     }
   }else if(['shambler','feral','spitter','drowned'].includes(k)){
     egg(head,hair,-.032,.183,-.045,.24,.040,.23);
-    for(let i=0;i<(scream?13:9);i++){
-      const x=(i%4-1.5)*.060,z=-.105+Math.floor(i/4)*.071;
-      hairLock(A,T,head,hair,s,[[x,.195,z],[x-.039,.217+(i%3)*.009,z+.04],[x-.062,.13-(i%3)*.015,z+.090]],.029+(i%3)*.005);
-      if(scream&&i%3===0)hairLock(A,T,head,hair,s,[[x,.17,-.07],[x*1.4,.015,-.14],[x*1.2,-.17,-.1]],.025);
+    for(let i=0;i<9;i++){
+      const row=Math.floor(i/4),x=(i%4-1.5)*.050;
+      // Bend the rear row down at the temples instead of bridging level across the dome.
+      const crownDrop=row===0?.025*(x/.075)**2:0,rootY=.175-crownDrop;
+      const z=headDepth(x,rootY,[-.95,0,.83][row]);
+      if(row===2){
+        // The single forehead lock follows the skull instead of arching in air.
+        const roots=[[-.060,.175],[-.075,.145],[-.068,.095]];
+        hairLock(A,T,head,hair,s,roots.map(([hx,hy])=>[hx,hy,headDepth(hx,hy,1)+.003]),.018);
+        continue;
+      }
+      if(row===0){
+        // Keep both bends against the rear skull and draw the outer tips in.
+        const inward=Math.sign(x),midX=x-inward*.012;
+        const midY=.193+(i%3)*.004-crownDrop*.5;
+        const tipX=x-inward*.021,tipY=.135-(i%3)*.011-crownDrop*.65;
+        hairLock(A,T,head,hair,s,[[x,rootY,headDepth(x,rootY,-1)-.003],
+          [midX,midY,headDepth(midX,midY,-1)-.010],
+          [tipX,tipY,headDepth(tipX,tipY,-1)-.004]],.021+(i%3)*.003);
+        continue;
+      }
+      const lift=.015,tip=.028;
+      hairLock(A,T,head,hair,s,[[x,rootY,z],[x-.025,.205+(i%3)*.007-crownDrop,z+lift],[x-.043,.13-(i%3)*.015-crownDrop,z+tip]],.021+(i%3)*.003);
     }
   }
   // Dirt patches follow the skin's contours and repeat deterministically per type.
-  for(let i=0;i<5;i++)egg(head,i%2?shadow:pale,(i%3-1)*.077,-.03+Math.floor(i/3)*.15,-.148,.065,.067,.016,i*.8);
+  for(let i=0;i<5;i++){
+    const x=(i%3-1)*.077,y=-.03+Math.floor(i/3)*.15;
+    const z=['shambler','drowned','spitter','bomber'].includes(k)?headDepth(x,y,-1)-.004:-.148;
+    egg(head,i%2?shadow:pale,x,y,z,.065,.067,.016,i*.8);
+  }
 
   if(['shambler','feral','screamer'].includes(k)){
     buildTank(A,T,torso,s,wide,shirt,k);
@@ -328,43 +386,62 @@ export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox}) {
     box(head,camDark,0,.223,.127,.073,.040,.01);box(head,camLight,0,.226,.134,.053,.012,.008);
     for(let i=0;i<3;i++){const x=(i-1)*.099;rock(head,i%2?camDark:camLight,x,.202+(i%2)*.031,.136,.075,.04,.012,i*.6);}
     egg(torso,olive,0,.25,0,.51,.51,.345);
+    // The vest shell is an ellipsoid; use its front depth to seat each pouch
+    // instead of leaving the outer columns on the old flat chest plane.
+    const vestFront=(x,y)=>.1725*Math.sqrt(Math.max(.08,1-(x/.255)**2-((y-.25)/.255)**2));
     for(const side of [-1,1]){
       const arm=side<0?armLG:armRG,leg=side<0?legLG:legRG,shin=leg.userData.shinG;
       egg(arm,olive,0,-.025,.006,.245,.32,.244);egg(leg,olive,0,-.19,0,.217,.41,.246);
-      egg(shin,olive,0,-.10,0,.16,.25,.18);box(shin,steel,0,-.025,.092,.15,.14,.065);
+      egg(shin,olive,0,-.10,0,.16,.25,.18);box(shin,steel,0,-.055,.075,.15,.11,.045);
       // The shared camo texture carries the pattern; extra raised spots cost four limbs' worth of triangles.
       rag(arm,olive,0,-.135,.092,.059,.095,side*.2);
-      box(torso,leather,side*.185,.29,.186,.047,.41,.035,side*.04);
-      for(let j=0;j<2;j++){box(torso,olive,side*(.048+j*.1),.14,.23,.084,.15,.08);box(torso,camLight,side*(.048+j*.1),.19,.276,.075,.021,.012);}
+      box(torso,leather,side*.185,.29,vestFront(.185,.29)+.018,.047,.41,.035,side*.04);
+      for(let j=0;j<2;j++){const x=side*(.048+j*.1),z=vestFront(x,.14);box(torso,olive,x,.14,z+.034,.084,.15,.08);box(torso,camLight,x,.19,z+.079,.075,.021,.012);}
       box(torso,camDark,side*.206,.08,.139,.081,.16,.075,side*.13);
-      box(torso,steel,side*.185,.34,.213,.063,.048,.02);
+      box(torso,steel,side*.185,.34,vestFront(.185,.34)+.02,.063,.048,.02);
       box(leg,olive,side*.105,-.135,.005,.06,.14,.14);
-      const el=arm.userData.elbowG;egg(el,leather,0,-.365,.035,.14,.135,.086);box(el,camDark,0,-.31,.042,.149,.028,.085);
+      const el=arm.userData.elbowG;egg(el,leather,0,-.365,.025,.12,.11,.075);box(el,camDark,0,-.33,.035,.12,.025,.07);
       for(let j=0;j<2;j++)path(shin,camLight,[[-.052,-.24-j*.037,.09],[.050,-.25-j*.037,.093]],.005);
     }
-    box(torso,olive,0,.3,.177,.36,.21,.06);box(torso,olive,0,.25,-.245,.36,.4,.14);
-    box(torso,camDark,.14,.44,-.24,.1,.12,.075);rod(torso,hair,[.14,.48,-.24],[.14,.82,-.25],.01,.006);
+    box(torso,olive,0,.3,.177,.36,.21,.06);
+    // Seat the radio pack into the rounded back instead of leaving a side-view gap.
+    box(torso,olive,0,.25,-.185,.36,.4,.14);
+    box(torso,camDark,.14,.44,-.18,.1,.12,.075);rod(torso,hair,[.14,.48,-.18],[.14,.82,-.19],.01,.006);
     for(let i=0;i<3;i++)box(torso,camLight,0,.235+i*.027,.216,.30,.009,.009);
-    for(let i=0;i<3;i++){const x=(i-1)*.12,y=.10;rock(torso,i%2?camDark:camLight,x,y,-.32,.13,.073,.012,i*.5);}
+    for(let i=0;i<3;i++){const x=(i-1)*.12,y=.10;rock(torso,i%2?camDark:camLight,x,y,-.26,.13,.073,.012,i*.5);}
     box(torso,camLight,-.076,.357,.221,.10,.046,.013);box(torso,wound,-.059,.349,.230,.041,.014,.006);
     box(torso,hair,.123,.382,.220,.067,.104,.030);for(let j=0;j<3;j++)box(torso,steel,.123,.406-j*.019,.240,.04,.005,.008);
     path(torso,hair,[[.123,.43,.215],[.21,.455,.14],[.22,.37,.0],[.15,.46,-.21]],.009);
   }
   if(acid){
     const acidMat=mat(k==='bomber'?0xb5b757:0xb8b18b,false,0,'wet'),sac=mat(0xc4c573,false,0,'wet'),ooze=mat(0xb6cb38,true);
-    if(k==='bomber')egg(torso,acidMat,0,.095,.12,.83,.72,.67);
-    else loft(torso,acidMat,[[-.20,.11,.11,.13],[-.13,.245,.21,.14],[0,.325,.262,.10],[.15,.312,.246,.08],[.32,.23,.185,.055],[.43,.15,.12,.015]],16);
+    const spitterRings=[[-.20,.11,.11,.13],[-.13,.245,.21,.14],[0,.325,.262,.10],[.15,.312,.246,.08],[.32,.23,.185,.055],[.43,.15,.12,.015]];
+    const bellyZ=(x,y)=>{
+      if(k==='bomber')return .12+.335*Math.sqrt(Math.max(0,1-(x/.415)**2-((y-.095)/.36)**2));
+      const n=spitterRings.findIndex((r,i)=>i&&y<=r[0]),hi=Math.max(1,n<0?spitterRings.length-1:n),lo=hi-1;
+      const a=spitterRings[lo],b=spitterRings[hi],f=Math.max(0,Math.min(1,(y-a[0])/(b[0]-a[0])));
+      const rx=a[1]+(b[1]-a[1])*f,rz=a[2]+(b[2]-a[2])*f,cz=a[3]+(b[3]-a[3])*f;
+      return cz+rz*Math.sqrt(Math.max(0,1-(x/rx)**2));
+    };
+    if(k==='bomber'){
+      // The old eight-by-four sphere made an angular belly cone in the gameplay silhouette.
+      const belly=A.put(torso,new T.SphereGeometry(1,16,10),acidMat,0,.095,.12);
+      belly.scale.set(.415*s,.36*s,.335*s);
+    }else loft(torso,acidMat,spitterRings,16);
     for(let i=0;i<12;i++){
       const a=i*2.399,r=.12+(i%3)*.055,x=Math.cos(a)*r,y=.12+Math.sin(a)*r;
-      egg(torso,i%3?shadow:sac,x,y,.34-Math.abs(x)*.15,.036+(i%3)*.014,.04+(i%2)*.02,.023);
-      if(k==='spitter'&&i%3===0){egg(torso,wound,x,y,.357-Math.abs(x)*.15,.047,.043,.012);egg(torso,mouth,x,y,.365-Math.abs(x)*.15,.023,.025,.008);}
+      const z=bellyZ(x,y);
+      egg(torso,i%3?shadow:sac,x,y,z+.005,.036+(i%3)*.014,.04+(i%2)*.02,.023);
+      if(k==='spitter'&&i%3===0){egg(torso,wound,x,y,z+.012,.047,.043,.012);egg(torso,mouth,x,y,z+.019,.023,.025,.008);}
     }
     if(k==='spitter'){
-      for(const side of [-1,1]){box(torso,cloth,side*.245,.30,.17,.10,.36,.06,-side*.12);rag(torso,cloth,side*.25,.15,.19,.11,.18,-side*.1);}
-      box(torso,cloth,0,.29,-.205,.50,.37,.045);for(let j=0;j<5;j++)rag(torso,cloth,(j-2)*.075,.14,-.23,.09,.15+(j%3)*.024,(j-2)*.05);
-      for(const side of [-1,1]){path(torso,wound,[[side*.06,.43,.13],[side*.16,.39,.19],[side*.24,.27,.18]],.025);rag(torso,cloth,side*.24,.42,.196,.072,.18,-side*.25);}
-      for(let i=0;i<4;i++)path(head,ooze,[[(i-1.5)*.037,-.15,.185],[(i-1.5)*.04,-.24-(i%2)*.07,.20],[(i-1.5)*.03,-.29-(i%2)*.07,.17]],.009);
-      path(torso,ooze,[[.04,.26,.307],[.02,.13,.342],[.05,-.02,.36],[.045,-.17,.315],[.015,-.24,.20]],.009);
+      for(const side of [-1,1])ribbon(torso,cloth,[[side*.22,.46,.11],[side*.26,.35,.15],[side*.27,.24,.18],[side*.27,.11,.17],[side*.25,.04,.15]],.047);
+      const vestBack=A.plate(torso,cloth,[[.10,.15,.16,.04],[.25,.235,.20,.085],[.42,.21,.17,.07]],.014);
+      vestBack.rotation.y=Math.PI;
+      for(const side of [-1,1])path(torso,wound,[[side*.06,.43,.13],[side*.16,.39,.19],[side*.24,.27,.18]],.025);
+      // End the chin drips against the upper chest rather than spanning its throat hollow.
+      for(let i=0;i<4;i++)path(head,ooze,[[(i-1.5)*.037,-.15,.185],[(i-1.5)*.04,-.21-(i%2)*.025,.172],[(i-1.5)*.03,-.25-(i%2)*.03,.153]],.009);
+      path(torso,ooze,[[.04,.26],[.02,.13],[.05,-.02],[.045,-.14],[.015,-.19]].map(([x,y])=>[x,y,bellyZ(x,y)+.009]),.009);
     }else{
       // The existing fuse animation drives a belly material and a separate vein material.
       acidMat.emissive.setHex(0x758c21);acidMat.emissiveIntensity=.3;u.pulseMats=[acidMat,ooze];
@@ -372,20 +449,25 @@ export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox}) {
         const side=i%2?1:-1,sz=.15+(i%3)*.065;egg(torso,shadow,side*(.13+(i%3)*.09),.35+Math.floor(i/2)*.055,-.20,sz+.027,sz+.04,sz+.03);egg(torso,sac,side*(.13+(i%3)*.09),.37+Math.floor(i/2)*.055,-.22,sz,sz*1.08,sz);egg(torso,acidMat,side*(.13+(i%3)*.09),.42+Math.floor(i/2)*.055,-.26,sz*.58,sz*.45,sz*.58);
       }
       for(const side of [-1,1]){
-        const fissure=[[side*.08,.39,.31],[side*.13,.27,.40],[side*.08,.15,.454],[side*.2,.03,.414],[side*.16,-.12,.345]];path(torso,wound,fissure,.020);path(torso,ooze,fissure.map(([x,y,z])=>[x,y,z+.009]),.008);
-        path(torso,ooze,[[side*.13,.27,.38],[side*.27,.21,.333],[side*.31,.11,.29]],.008);
-        box(torso,leather,side*.24,.35,.18,.05,.26,.035,side*.35);
+        const fissure=[[side*.08,.39],[side*.13,.27],[side*.08,.15],[side*.2,.03],[side*.16,-.12]].map(([x,y])=>[x,y,bellyZ(x,y)+.01]);path(torso,wound,fissure,.020);path(torso,ooze,fissure.map(([x,y,z])=>[x,y,z+.009]),.008);
+        path(torso,ooze,[[side*.13,.27],[side*.27,.21],[side*.31,.11]].map(([x,y])=>[x,y,bellyZ(x,y)+.012]),.008);
+        // The centerline sits just under the faceted sphere; the tube's outer face
+        // stays visible without a daylight gap along the upper and lower sac.
+        const strap=(x,y)=>[side*x,y,bellyZ(side*x,y)-.020];
+        path(torso,leather,[[side*.20,.44,.11],strap(.23,.38),strap(.26,.34),strap(.30,.28),strap(.34,.22),strap(.37,.14),strap(.39,.08),strap(.37,0),strap(.32,-.08)],.023);
       }
       for(let j=0;j<7;j++)rag(hips,leather,(j-3)*.067,.11,.245,.075,.18+(j%2)*.05);
     }
   }
   if(k==='drowned'){
     egg(torso,cloth,0,.24,0,.46,.46,.32);
-    for(const side of [-1,1])box(torso,leather,side*.14,.25,.167,.032,.42,.025,side*.09);
-    for(let i=0;i<4;i++){box(torso,rust,0,.37-i*.072,.196,.278,.052,.069,(i%2?1:-1)*.03);for(const side of [-1,1])egg(torso,steel,side*.107,.37-i*.072,.233,.022,.022,.009);}
+    // Lay the washboard into the rounded chest, clear of the lowered chin.
+    for(const side of [-1,1])box(torso,leather,side*.14,.23,.135,.032,.42,.025,side*.09);
+    for(let i=0;i<4;i++){box(torso,rust,0,.35-i*.072,.171,.278,.052,.069,(i%2?1:-1)*.03);for(const side of [-1,1])egg(torso,steel,side*.107,.35-i*.072,.208,.022,.022,.009);}
     for(let i=0;i<9;i++){
-      const side=i%2?1:-1,p=i<4?head:torso,x=side*(i<4?.13:.21),y=i<4?.19:.47,z=i<4?-.06:-.15;
-      path(p,moss,[[x,y,z],[x+side*.025,y-.16,z+.01],[x-side*.028,y-.34-(i%3)*.08,z+.05]],.017);
+      const side=i%2?1:-1,p=i<4?head:torso,x=side*(i<4?.13:.14),y=i<4?.19:.43,z=i<4?-.06:-.075;
+      // The torso strands root on the tapered upper back before trailing down it.
+      path(p,moss,[[x,y,z],[x+side*.025,y-.16,z-.025],[x-side*.028,y-.34-(i%3)*.08,z-.035]],.017);
     }
     for(let i=0;i<8;i++){
       const p=i<4?armLG:head,x=i<4?-.07:(i-5)*.045,y=i<4?-.05-(i%4)*.047:.09,z=i<4?.08:-.14;
@@ -399,13 +481,22 @@ export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox}) {
     for(let i=0;i<5;i++)rag(torso,cloth,(i-2)*.064,.055,-.153,.056,.12+(i%2)*.05,i*.1);
   }
   if(k==='leaper'){
-    for(let i=0;i<7;i++)spike(torso,pale,[0,.02+i*.065,-.135],[0,.06+i*.065,-.25-(i%2)*.045],.038);
+    // Root the dorsal ridge on the taper of the hunched back; the older fixed
+    // z plane left its lower vertebrae and attachment pegs in open air.
+    const backRings=[[.02,.116],[.17,.141],[.31,.150],[.42,.126],[.48,.084]];
+    const backDepth=y=>{for(let j=1;j<backRings.length;j++)if(y<=backRings[j][0]){const [y0,z0]=backRings[j-1],[y1,z1]=backRings[j];return z0+(z1-z0)*Math.max(0,(y-y0)/(y1-y0));}return backRings.at(-1)[1];};
+    for(let i=0;i<7;i++){const y=.02+i*.065,z=-backDepth(y)+.008;spike(torso,pale,[0,y,z],[0,y+.04,z-.115-(i%2)*.045],.038);}
     for(const side of [-1,1]){
       egg(side<0?armLG:armRG,pale,0,-.14,.01,.19,.3,.19);
       for(let i=0;i<4;i++)rod(torso,pale,[side*.04,.33-i*.065,.14],[side*.17,.29-i*.065,.10],.015,.009);
     }
-    for(let j=0;j<5;j++)rag(hips,wound,(j-2)*.06,.1,.135,.073,.20-(j%2)*.05);
-    for(let i=0;i<6;i++){egg(torso,wound,0,.07+i*.062,-.147,.09,.073,.022);egg(torso,pale,0,.07+i*.062,-.17,.07,.044,.054);}
+    // Short strips root into the rounded waistband; long flat tabs projected
+    // backward when the Leaper pitched its hips into the four-footed walk.
+    for(let j=0;j<5;j++){
+      const x=(j-2)*.045,rx=wide*.405,z=deep*.43*Math.sqrt(Math.max(0,1-(x/rx)**2))-.015;
+      rag(hips,wound,x,.1,z,.045,.10-(j%2)*.02);
+    }
+    for(let i=0;i<6;i++){const y=.07+i*.062,z=-backDepth(y);egg(torso,wound,0,y,z-.004,.09,.073,.022);egg(torso,pale,0,y,z-.014,.07,.044,.054);}
     for(const side of [-1,1])path(torso,shadow,[[side*.18,.4,-.07],[side*.10,.24,-.14],[side*.07,.03,-.11]],.014);
   }
   if(heavy){
@@ -423,7 +514,8 @@ export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox}) {
     }
     for(const side of [-1,1]){
       const arm=side<0?armLG:armRG,el=arm.userData.elbowG,shin=(side<0?legLG:legRG).userData.shinG;
-      box(torso,leather,side*.265,.27,.23,.058,.47,.04,side*.12);
+      if(k==='brute')path(torso,leather,[[side*.205,.47,.172],[side*.227,.39,.211],[side*.239,.29,.225],[side*.222,.18,.204],[side*.151,.105,.177]],.025,.023);
+      else box(torso,leather,side*.265,.27,.23,.058,.47,.04,side*.12);
       box(torso,rust,side*.264,.34,.263,.083,.062,.024);
       box(torso,hair,side*.264,.341,.28,.047,.029,.009);box(torso,rust,side*.263,.341,.289,.007,.041,.008);
       rock(arm,armor,side*.04,.055,0,.34,.16,.36,-side*.2);
@@ -435,12 +527,11 @@ export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox}) {
       if(k!=='brute')for(let j=0;j<3;j++)spike(arm,rust,[side*.06,.09,-.1+j*.09],[side*(.15+j*.015),.28+(j%2)*.1,-.16+j*.1],.047);
     }
     if(k==='brute'){
-      const redPaint=mat(0x8e3027,false,.25,'metal');fire.userData.surface='metal';
-      box(torso,redPaint,0,.255,.284,.51,.13,.015);box(torso,fire,0,.155,.284,.49,.049,.015);
+      fire.userData.surface='metal';
       spike(armLG,steel,[-.08,.06,0],[-.29,.37,-.03],.12);
       for(let i=0;i<4;i++)egg(torso,shadow,(i%2?1:-1)*(.16+(i%3)*.04),.08+Math.floor(i/2)*.13,-.2,.13,.16,.07);
       box(torso,steel,0,.29,-.223,.52,.33,.09,-.06);
-      for(const side of [-1,1]){path(torso,leather,[[side*.24,.48,.16],[side*.27,.51,-.04],[side*.25,.43,-.25],[side*.22,.11,-.267]],.039);box(torso,rust,side*.21,.35,-.281,.04,.045,.019);}
+      for(const side of [-1,1]){path(torso,leather,[[side*.205,.47,.172],[side*.233,.49,-.035],[side*.228,.40,-.203],[side*.192,.26,-.216],[side*.148,.12,-.164]],.027,.023);box(torso,rust,side*.21,.35,-.281,.04,.045,.019);}
       for(let j=0;j<3;j++)rock(head,skin,(j-1)*.09,.10,-.06+(j%2)*.10,.077,.07,.07,j*.8);
       for(let i=0;i<5;i++)box(head,steel,(i-2)*.04,-.145,.159,.032,.062,.026,(i-2)*.08);
     }else{
@@ -455,7 +546,11 @@ export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox}) {
         for(let j=0;j<3;j++)box(torso,j%2?rust:steel,.025,.18+j*.081,.29+j*.014,.42-(j%2)*.05,.10,.037,(j%2?1:-1)*.065);
         for(let j=0;j<4;j++)box(torso,steel,(j-1.5)*.13,.32,-.25,.11,.4,.09,(j-1.5)*.06);
         for(const side of [-1,1]){
-          const leg=side<0?legLG:legRG;for(let j=0;j<2;j++)box(leg,rust,0,-.09-j*.11,.119,.20,.14,.07,side*.09);
+          const leg=side<0?legLG:legRG;
+          // Two lapped scrap plates follow the heavy thigh loft. The old flat
+          // boxes hung several centimeters ahead of its curved outer edges.
+          plate(leg,rust,[[-.16,.098,.155,.052],[-.09,.100,.150,.053],[-.02,.090,.132,.042]],.022);
+          plate(leg,rust,[[-.27,.089,.143,.047],[-.20,.095,.151,.051],[-.13,.098,.158,.052]],.022);
           path(torso,hair,[[side*.22,.42,-.26],[side*.29,.29,-.29],[side*.21,.04,-.26]],.021);
         }
       }else{
@@ -475,6 +570,10 @@ export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox}) {
     }
   }
   if(k==='brute'||k==='colossus')refineHeavyArmor(A,T,g,s,k,{steel,rust,hair,leather,wound,cloth});
+  if(k==='brute')for(const m of A.mats)if(m.color.getHex()===0x8e3027&&m.userData.surface==='metal'){
+    // The shared metal tile has little diffuse response; painted charcoal must keep a visible value floor.
+    m.color.set(0x424746);m.userData.surface='leather';
+  }
   if(k==='guardian'||k==='caveguard'){
     const stone=k==='caveguard';
     for(const side of [-1,1]){rock(side<0?armLG:armRG,stone?pale:skin,0,-.12,.015,.28,.4,.26);rock(torso,pale,side*.24,.40,0,.27,.2,.29);}

@@ -685,8 +685,9 @@ window.buildLandmarkDetails = (THREE, o) => {
       }
       const mug=cyl(.07,.12,C.pale,2.38,ground(2.38,2.1)+.07,2.1,8);mug.rotation.z=1.4;
     }else{
-      // Curing frame and stored traps sit outside the sleeping shelter and hearth.
-      const x=4.5,z=-2.8,y=ground(x,z);
+      // Curing frame and stored traps sit outside the sleeping shelter and hearth. The frame stands against the cabin's
+      // side wall, its hide to the fire (CL-256 batch 3: out by the bench it stood on the cache's approach, 0.78 m off).
+      const x=-1.25,z=-2.45,y=ground(x,z);
       for(const dz of [-.85,.85])bar([x,y,z+dz],[x,y+1.65,z+dz],.048,C.old);
       for(const yy of [.1,1.6])bar([x,y+yy,z-.85],[x,y+yy,z+.85],.04,C.cut);
       panel([[x+.015,y+1.4,z-.65],[x+.015,y+1.48,z+.5],[x+.035,y+1.14,z+.62],[x+.045,y+.5,z+.45],[x+.02,y+.28,z-.12],[x+.035,y+.57,z-.62]],0x9a8a62);

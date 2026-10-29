@@ -1,0 +1,446 @@
+{
+  "at": "2026-10-29T15:03:35.715Z",
+  "stage": "after11",
+  "shots": [
+    {
+      "file": "brandt-noon-close-front.jpg",
+      "light": "noon",
+      "view": "close-front",
+      "bytes": 116281,
+      "current": {
+        "id": "person.brandt",
+        "name": "Brandt (survivor)",
+        "kind": "model",
+        "variant": null,
+        "mode": null,
+        "center": {
+          "x": -26,
+          "y": -199.21026251155027,
+          "z": -632.0194942802191
+        },
+        "size": {
+          "x": 0.8058117628097534,
+          "y": 1.579474976899462,
+          "z": 0.6000114381313324
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 16,
+          "drawables": 16,
+          "tris": 40458,
+          "points": 0,
+          "segments": 0,
+          "materials": 16
+        }
+      },
+      "camera": {
+        "x": -26,
+        "y": -198.5626777710215,
+        "z": -631.0194942802191,
+        "tx": -26,
+        "ty": -198.5626777710215,
+        "tz": -632.0194942802191,
+        "fov": 31
+      },
+      "errors": []
+    },
+    {
+      "file": "brandt-noon-close-side.jpg",
+      "light": "noon",
+      "view": "close-side",
+      "bytes": 116362,
+      "current": {
+        "id": "person.brandt",
+        "name": "Brandt (survivor)",
+        "kind": "model",
+        "variant": null,
+        "mode": null,
+        "center": {
+          "x": -26,
+          "y": -199.21026251155027,
+          "z": -632.0194942802191
+        },
+        "size": {
+          "x": 0.8058117628097534,
+          "y": 1.579474976899462,
+          "z": 0.6000114381313324
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 16,
+          "drawables": 16,
+          "tris": 40458,
+          "points": 0,
+          "segments": 0,
+          "materials": 16
+        }
+      },
+      "camera": {
+        "x": -25,
+        "y": -198.5626777710215,
+        "z": -632.0194942802191,
+        "tx": -26,
+        "ty": -198.5626777710215,
+        "tz": -632.0194942802191,
+        "fov": 31
+      },
+      "errors": []
+    },
+    {
+      "file": "brandt-overcast-close-front.jpg",
+      "light": "overcast",
+      "view": "close-front",
+      "bytes": 116895,
+      "current": {
+        "id": "person.brandt",
+        "name": "Brandt (survivor)",
+        "kind": "model",
+        "variant": null,
+        "mode": null,
+        "center": {
+          "x": -26,
+          "y": -199.21026251155027,
+          "z": -632.0194942802191
+        },
+        "size": {
+          "x": 0.8058117628097534,
+          "y": 1.579474976899462,
+          "z": 0.6000114381313324
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 16,
+          "drawables": 16,
+          "tris": 40458,
+          "points": 0,
+          "segments": 0,
+          "materials": 16
+        }
+      },
+      "camera": {
+        "x": -26,
+        "y": -198.5626777710215,
+        "z": -631.0194942802191,
+        "tx": -26,
+        "ty": -198.5626777710215,
+        "tz": -632.0194942802191,
+        "fov": 31
+      },
+      "errors": []
+    },
+    {
+      "file": "brandt-overcast-close-side.jpg",
+      "light": "overcast",
+      "view": "close-side",
+      "bytes": 112776,
+      "current": {
+        "id": "person.brandt",
+        "name": "Brandt (survivor)",
+        "kind": "model",
+        "variant": null,
+        "mode": null,
+        "center": {
+          "x": -26,
+          "y": -199.21026251155027,
+          "z": -632.0194942802191
+        },
+        "size": {
+          "x": 0.8058117628097534,
+          "y": 1.579474976899462,
+          "z": 0.6000114381313324
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 16,
+          "drawables": 16,
+          "tris": 40458,
+          "points": 0,
+          "segments": 0,
+          "materials": 16
+        }
+      },
+      "camera": {
+        "x": -25,
+        "y": -198.5626777710215,
+        "z": -632.0194942802191,
+        "tx": -26,
+        "ty": -198.5626777710215,
+        "tz": -632.0194942802191,
+        "fov": 31
+      },
+      "errors": []
+    },
+    {
+      "file": "brandt-dusk-close-front.jpg",
+      "light": "dusk",
+      "view": "close-front",
+      "bytes": 102568,
+      "current": {
+        "id": "person.brandt",
+        "name": "Brandt (survivor)",
+        "kind": "model",
+        "variant": null,
+        "mode": null,
+        "center": {
+          "x": -26,
+          "y": -199.21026251155027,
+          "z": -632.0194942802191
+        },
+        "size": {
+          "x": 0.8058117628097534,
+          "y": 1.579474976899462,
+          "z": 0.6000114381313324
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 16,
+          "drawables": 16,
+          "tris": 40458,
+          "points": 0,
+          "segments": 0,
+          "materials": 16
+        }
+      },
+      "camera": {
+        "x": -26,
+        "y": -198.5626777710215,
+        "z": -631.0194942802191,
+        "tx": -26,
+        "ty": -198.5626777710215,
+        "tz": -632.0194942802191,
+        "fov": 31
+      },
+      "errors": []
+    },
+    {
+      "file": "brandt-dusk-close-side.jpg",
+      "light": "dusk",
+      "view": "close-side",
+      "bytes": 101681,
+      "current": {
+        "id": "person.brandt",
+        "name": "Brandt (survivor)",
+        "kind": "model",
+        "variant": null,
+        "mode": null,
+        "center": {
+          "x": -26,
+          "y": -199.21026251155027,
+          "z": -632.0194942802191
+        },
+        "size": {
+          "x": 0.8058117628097534,
+          "y": 1.579474976899462,
+          "z": 0.6000114381313324
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 16,
+          "drawables": 16,
+          "tris": 40458,
+          "points": 0,
+          "segments": 0,
+          "materials": 16
+        }
+      },
+      "camera": {
+        "x": -25,
+        "y": -198.5626777710215,
+        "z": -632.0194942802191,
+        "tx": -26,
+        "ty": -198.5626777710215,
+        "tz": -632.0194942802191,
+        "fov": 31
+      },
+      "errors": []
+    },
+    {
+      "file": "brandt-night-close-front.jpg",
+      "light": "night",
+      "view": "close-front",
+      "bytes": 60050,
+      "current": {
+        "id": "person.brandt",
+        "name": "Brandt (survivor)",
+        "kind": "model",
+        "variant": null,
+        "mode": null,
+        "center": {
+          "x": -26,
+          "y": -199.21026251155027,
+          "z": -632.0194942802191
+        },
+        "size": {
+          "x": 0.8058117628097534,
+          "y": 1.579474976899462,
+          "z": 0.6000114381313324
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 16,
+          "drawables": 16,
+          "tris": 40458,
+          "points": 0,
+          "segments": 0,
+          "materials": 16
+        }
+      },
+      "camera": {
+        "x": -26,
+        "y": -198.5626777710215,
+        "z": -631.0194942802191,
+        "tx": -26,
+        "ty": -198.5626777710215,
+        "tz": -632.0194942802191,
+        "fov": 31
+      },
+      "errors": []
+    },
+    {
+      "file": "brandt-night-close-side.jpg",
+      "light": "night",
+      "view": "close-side",
+      "bytes": 59183,
+      "current": {
+        "id": "person.brandt",
+        "name": "Brandt (survivor)",
+        "kind": "model",
+        "variant": null,
+        "mode": null,
+        "center": {
+          "x": -26,
+          "y": -199.21026251155027,
+          "z": -632.0194942802191
+        },
+        "size": {
+          "x": 0.8058117628097534,
+          "y": 1.579474976899462,
+          "z": 0.6000114381313324
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 16,
+          "drawables": 16,
+          "tris": 40458,
+          "points": 0,
+          "segments": 0,
+          "materials": 16
+        }
+      },
+      "camera": {
+        "x": -25,
+        "y": -198.5626777710215,
+        "z": -632.0194942802191,
+        "tx": -26,
+        "ty": -198.5626777710215,
+        "tz": -632.0194942802191,
+        "fov": 31
+      },
+      "errors": []
+    },
+    {
+      "file": "brandt-noon-full-front.jpg",
+      "light": "noon",
+      "view": "full-front",
+      "bytes": 123855,
+      "current": {
+        "id": "person.brandt",
+        "name": "Brandt (survivor)",
+        "kind": "model",
+        "variant": null,
+        "mode": null,
+        "center": {
+          "x": -26,
+          "y": -199.21026251155027,
+          "z": -632.0194942802191
+        },
+        "size": {
+          "x": 0.8058117628097534,
+          "y": 1.579474976899462,
+          "z": 0.6000114381313324
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 16,
+          "drawables": 16,
+          "tris": 40458,
+          "points": 0,
+          "segments": 0,
+          "materials": 16
+        }
+      },
+      "camera": {
+        "x": -26,
+        "y": -199.21026251155027,
+        "z": -628.5194942802191,
+        "tx": -26,
+        "ty": -199.21026251155027,
+        "tz": -632.0194942802191,
+        "fov": 35
+      },
+      "errors": []
+    },
+    {
+      "file": "brandt-noon-gameplay.jpg",
+      "light": "noon",
+      "view": "gameplay",
+      "bytes": 125083,
+      "current": {
+        "id": "person.brandt",
+        "name": "Brandt (survivor)",
+        "kind": "model",
+        "variant": null,
+        "mode": null,
+        "center": {
+          "x": -26,
+          "y": -199.21026251155027,
+          "z": -632.0194942802191
+        },
+        "size": {
+          "x": 0.8058117628097534,
+          "y": 1.579474976899462,
+          "z": 0.6000114381313324
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 16,
+          "drawables": 16,
+          "tris": 40458,
+          "points": 0,
+          "segments": 0,
+          "materials": 16
+        }
+      },
+      "camera": {
+        "x": -22.03892772503372,
+        "y": -198.09687770386975,
+        "z": -625.1587158475251,
+        "tx": -26,
+        "ty": -199.21026251155027,
+        "tz": -632.0194942802191,
+        "fov": 35
+      },
+      "errors": []
+    }
+  ],
+  "errors": [],
+  "pageErrors": [],
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "loadSec": 11.617,
+  "check": [
+    {
+      "id": "person.brandt",
+      "variant": null,
+      "mode": null,
+      "ok": true,
+      "ms": 353,
+      "tris": 40458,
+      "size": [
+        0.806,
+        1.579,
+        0.6
+      ],
+      "error": null
+    }
+  ]
+}

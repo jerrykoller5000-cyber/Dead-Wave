@@ -68,11 +68,27 @@ cache (open).
   before and after in review/sweep/cave-mouths/. From square to the side a dark sliver still shows: that is the
   far wall through the opening, as a real mouth shows it. Left: the sawtooth shading on the East Cave's +x cheek
   (the face's outer rings folding where the hill is low) and one leaf clump hanging in front of its opening.
-- **The trapper's cache** (fixed by Antigravity, AG-140 and AG-141): the camp's curing frame, which the match start
-  put back, stood 0.78 m from the cache's approach; it's taken out with its collider (one collider and 152 of the camp's
-  7,344 triangles, nothing else), and the cache stands clear three runs of three. The frame should simply not be drawn
-  there (landmark-details.js, Claude's, with the world pass). Their comparison also found the cellar's roof is a slab
-  in a hole since AG-135: AG-144 makes it the ground.
-- **The watchtower's trail** comes in from the far side and runs its last 3 m under the tower, through its 1.75 m
-  base collider, to the ladder: rule 11 says it should come round to the ladder's side. With the trails, the last of
-  CL-256's order.
+- **The trapper's cache** (fixed by Antigravity, AG-140 and AG-141, then at the source 2026-10-28): the camp's curing
+  frame stood 0.78 m from the cache's approach. AG-140/141 took it out with its collider (152 of the camp's 7,344
+  triangles); now it isn't drawn there at all. In the trapper's story set (assets/world/landmark-details.js) it stands
+  against the cabin's side wall, its hide to the fire: 5.35 m from the approach, 2.75 m off the trail, clear of the
+  cabin's collider (review/sweep/trapper-frame/). Its spot out by the bench, 5.3 m from the fire, was on the cache's ring
+  for this camp's turn. Their comparison also found the cellar's roof was a slab in a hole since AG-135: AG-144 made it
+  the ground.
+- **The watchtower's trail** (fixed 2026-10-28): it came in from the far side and ran its last 3 m under the tower,
+  through its 1.75 m base collider, to the ladder (AG-148's trail 13, the end); rule 11 says a trail leads to the way
+  in. Now, when the straight line to the ladder's foot passes inside the tower, the spur's wavy leg ends 4.5 m out on
+  its own bearing and the trail goes round at that radius, the short way, to the ladder's side, then in to its foot
+  (index.html `roundTowerLeg`). The trail's nearest point to the tower's centre: 0.74 m before, 2.25 m after (the
+  ladder's foot). One wavyLeg as before, so the other 15 trails are point for point the same (their signatures
+  compared in the cloud). review/sweep/tower-trail/.
+- **The trails walked** (AG-148, 44 GPU shots every 35 m along the 16 trails and at each end): nothing else at fault.
+  The 0 m shots inside the HQ are the trails' roots in its yard.
+- **The East Cave's leaf clump and its +x cheek** (fixed 2026-10-28). The clump in the dark of the mouth was the
+  wet cave's left birch: planted at the tunnel's back corner (local -4, -4.5) on 3.3 m of hill, its canopy's foot
+  (5.7 m up, 1.8 m round) sat inside the tunnel's 6 m roof. It is planted 2 m further back (-4, -6.5), on 7.6 m of
+  hill, its canopy over the roof. The cheek's sawtooth was the face's two-sided rock: a triangle facing into the hill
+  had its normal turned to the front but not its winding, so the renderer saw its back from the front and turned the
+  normal round again; where the hill's clamp twists a ring's quads every other triangle went dark. Its winding turns
+  with the normal now (index.html `buildCaveFace`, all six caves; the faces' look elsewhere unchanged by eye).
+  t41 9/0, t42 18/0 (cloud); review/sweep/cave-4-cheek/ (before, the birch alone, both).

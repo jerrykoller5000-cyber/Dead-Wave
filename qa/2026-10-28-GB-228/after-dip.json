@@ -1,0 +1,37 @@
+[
+  {
+    "gun": "pistol",
+    "pick": "{\"w\":\"pistol\",\"vis\":true}",
+    "dip": "{\"base\":{\"y\":0.0425,\"rz\":-0.9541},\"dip\":{\"y\":0,\"rz\":0,\"rx\":0,\"n\":145},\"reloading\":false}"
+  },
+  {
+    "gun": "revolver",
+    "pick": "{\"w\":\"pistol\",\"vis\":true}",
+    "dip": "{\"base\":{\"y\":0.0421,\"rz\":-0.9488},\"dip\":{\"y\":0,\"rz\":0,\"rx\":0,\"n\":124},\"reloading\":false}"
+  },
+  {
+    "gun": "uzi",
+    "pick": "{\"w\":\"pistol\",\"vis\":true}",
+    "dip": "{\"base\":{\"y\":0.0421,\"rz\":-0.9336},\"dip\":{\"y\":0,\"rz\":0,\"rx\":0,\"n\":109},\"reloading\":false}"
+  },
+  {
+    "gun": "ak",
+    "pick": "{\"w\":\"pistol\",\"vis\":true}",
+    "dip": "{\"base\":{\"y\":0.0425,\"rz\":-0.9313},\"dip\":{\"y\":0,\"rz\":0,\"rx\":0,\"n\":115},\"reloading\":false}"
+  },
+  {
+    "gun": "aa12",
+    "pick": "{\"w\":\"pistol\",\"vis\":true}",
+    "dip": "{\"base\":{\"y\":0.0423,\"rz\":-0.946},\"dip\":{\"y\":0,\"rz\":0,\"rx\":0,\"n\":110},\"reloading\":false}"
+  },
+  {
+    "gun": "sniper",
+    "pick": "{\"w\":\"pistol\",\"vis\":true}",
+    "dip": "{\"base\":{\"y\":0.0422,\"rz\":-0.9553},\"dip\":{\"y\":0,\"rz\":0,\"rx\":0,\"n\":117},\"reloading\":false}"
+  },
+  {
+    "gun": "m4",
+    "pick": "{\"w\":\"pistol\",\"vis\":true}",
+    "dip": "{\"base\":{\"y\":0.0423,\"rz\":-0.9457},\"dip\":{\"y\":0,\"rz\":0,\"rx\":0,\"n\":113},\"reloading\":false}"
+  }
+]

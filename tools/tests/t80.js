@@ -130,7 +130,9 @@
     const muzzleBy = (stand) => { const m = T.getMuzzleWorld(); return Math.hypot(m.x - stand.x, m.z - stand.z) < 2.5; };
     const shootAt = async (zz, ms, stand, hold, need = 0) => {
       const hp0 = zz.hp; const t0 = Date.now(); let fired = 0, held = 0;
-      while ((Date.now() - t0 < ms || (fired < need && Date.now() - t0 < ms + 3000)) && zz.alive && zz.mesh) {
+      // GB-243 (rule 13): reaching `need` trigger ticks is a real count, not a time bar, so a loaded page gets a
+      // wider allowance to produce them (it managed 32 of 40 in the old +3 s). The 40 itself is unchanged.
+      while ((Date.now() - t0 < ms || (fired < need && Date.now() - t0 < ms + 20000)) && zz.alive && zz.mesh) {
         p.set(stand.x, T.sampleHeight(stand.x, stand.z), stand.z);
         if (hold) zz.mesh.position.set(hold.x, T.sampleHeight(hold.x, hold.z), hold.z);
         T.setAimTargetDbg(zz.mesh.position.x, zz.mesh.position.z); T.aimTarget.y = zz.mesh.position.y + (zz.hitH || 1.45) * 0.7;

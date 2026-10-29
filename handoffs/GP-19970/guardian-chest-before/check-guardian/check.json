@@ -1,0 +1,20 @@
+{
+ "at": "2026-10-29T07:08:55.305Z",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "results": [
+  {
+   "id": "zombie.guardian",
+   "variant": null,
+   "mode": "statue",
+   "ok": true,
+   "ms": 176,
+   "tris": 4180,
+   "size": [
+    1.532,
+    3.332,
+    1.28
+   ],
+   "error": null
+  }
+ ]
+}

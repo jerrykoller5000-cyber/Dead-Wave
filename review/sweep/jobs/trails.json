@@ -1,0 +1,641 @@
+{
+ "shots": [
+  {
+   "cam": {
+    "x": -1.32,
+    "y": -1.47,
+    "z": 1.5,
+    "tx": 7.93,
+    "ty": -2.17,
+    "tz": -9.01,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "trail 0 at 0 m",
+   "out": "review/sweep/trails/trail-00-0000.png"
+  },
+  {
+   "cam": {
+    "x": -0.48,
+    "y": -1.47,
+    "z": 0.47,
+    "tx": 8.88,
+    "ty": -2.17,
+    "tz": -9.94,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "trail 0 at 7 m (the end)",
+   "out": "review/sweep/trails/trail-00-0007.png"
+  },
+  {
+   "cam": {
+    "x": -1.62,
+    "y": -1.47,
+    "z": -1.17,
+    "tx": 9.73,
+    "ty": -2.17,
+    "tz": 7.03,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "trail 1 at 0 m",
+   "out": "review/sweep/trails/trail-01-0000.png"
+  },
+  {
+   "cam": {
+    "x": 22.21,
+    "y": -0.89,
+    "z": 23.14,
+    "tx": 33.13,
+    "ty": -0.61,
+    "tz": 31.9,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "trail 1 at 35 m",
+   "out": "review/sweep/trails/trail-01-0035.png"
+  },
+  {
+   "cam": {
+    "x": 29.62,
+    "y": -0.52,
+    "z": 26.71,
+    "tx": 36.82,
+    "ty": 0.44,
+    "tz": 38.71,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "trail 1 at 49 m (the end)",
+   "out": "review/sweep/trails/trail-01-0049.png"
+  },
+  {
+   "cam": {
+    "x": 1.86,
+    "y": -1.47,
+    "z": -0.73,
+    "tx": -11.17,
+    "ty": -2.17,
+    "tz": 4.39,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "trail 2 at 0 m",
+   "out": "review/sweep/trails/trail-02-0000.png"
+  },
+  {
+   "cam": {
+    "x": -0.29,
+    "y": -1.47,
+    "z": 0.65,
+    "tx": -13.91,
+    "ty": -2.17,
+    "tz": 3.89,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "trail 2 at 8 m (the end)",
+   "out": "review/sweep/trails/trail-02-0008.png"
+  },
+  {
+   "cam": {
+    "x": 3.27,
+    "y": -1.47,
+    "z": -4.28,
+    "tx": 14.48,
+    "ty": -2.17,
+    "tz": -12.67,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "trail 3 at 0 m",
+   "out": "review/sweep/trails/trail-03-0000.png"
+  },
+  {
+   "cam": {
+    "x": 32.93,
+    "y": -4.4,
+    "z": -22.39,
+    "tx": 46.24,
+    "ty": -5.65,
+    "tz": -26.75,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "trail 3 at 35 m",
+   "out": "review/sweep/trails/trail-03-0035.png"
+  },
+  {
+   "cam": {
+    "x": 27.92,
+    "y": -3.23,
+    "z": -20.75,
+    "tx": 41.22,
+    "ty": -6.05,
+    "tz": -25.11,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "trail 3 at 36 m (the end)",
+   "out": "review/sweep/trails/trail-03-0036.png"
+  },
+  {
+   "cam": {
+    "x": 4.77,
+    "y": -1.47,
+    "z": -3.48,
+    "tx": 5.45,
+    "ty": -2.17,
+    "tz": -17.46,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "trail 4 at 0 m",
+   "out": "review/sweep/trails/trail-04-0000.png"
+  },
+  {
+   "cam": {
+    "x": 4.46,
+    "y": -3.94,
+    "z": -37.85,
+    "tx": 2.07,
+    "ty": -4.75,
+    "tz": -51.64,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "trail 4 at 35 m",
+   "out": "review/sweep/trails/trail-04-0035.png"
+  },
+  {
+   "cam": {
+    "x": 2.86,
+    "y": 1.47,
+    "z": -72.67,
+    "tx": -1.49,
+    "ty": 3.03,
+    "tz": -85.98,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "trail 4 at 70 m",
+   "out": "review/sweep/trails/trail-04-0070.png"
+  },
+  {
+   "cam": {
+    "x": 0.95,
+    "y": 1.66,
+    "z": -74.24,
+    "tx": -4.17,
+    "ty": 3.52,
+    "tz": -87.27,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "trail 4 at 78 m (the end)",
+   "out": "review/sweep/trails/trail-04-0078.png"
+  },
+  {
+   "cam": {
+    "x": -7.07,
+    "y": -1.47,
+    "z": 0.77,
+    "tx": -14.1,
+    "ty": -2.17,
+    "tz": 12.88,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "trail 5 at 0 m",
+   "out": "review/sweep/trails/trail-05-0000.png"
+  },
+  {
+   "cam": {
+    "x": -25.88,
+    "y": -0.53,
+    "z": 29.57,
+    "tx": -35.96,
+    "ty": 0.58,
+    "tz": 39.29,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "trail 5 at 35 m",
+   "out": "review/sweep/trails/trail-05-0035.png"
+  },
+  {
+   "cam": {
+    "x": -28.95,
+    "y": -0.02,
+    "z": 33.17,
+    "tx": -34.49,
+    "ty": 1.67,
+    "tz": 46.03,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "trail 5 at 46 m (the end)",
+   "out": "review/sweep/trails/trail-05-0046.png"
+  },
+  {
+   "cam": {
+    "x": -6.67,
+    "y": -1.47,
+    "z": 3.93,
+    "tx": -16.51,
+    "ty": -2.17,
+    "tz": -6.03,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "trail 6 at 0 m",
+   "out": "review/sweep/trails/trail-06-0000.png"
+  },
+  {
+   "cam": {
+    "x": -33.47,
+    "y": -1.86,
+    "z": -17.48,
+    "tx": -41.66,
+    "ty": -3.09,
+    "tz": -28.84,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "trail 6 at 35 m",
+   "out": "review/sweep/trails/trail-06-0035.png"
+  },
+  {
+   "cam": {
+    "x": -60.4,
+    "y": -1.89,
+    "z": -39.16,
+    "tx": -70.13,
+    "ty": -3.72,
+    "tz": -49.22,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "trail 6 at 70 m",
+   "out": "review/sweep/trails/trail-06-0070.png"
+  },
+  {
+   "cam": {
+    "x": -80.26,
+    "y": -0.81,
+    "z": -59.41,
+    "tx": -90.47,
+    "ty": -4.44,
+    "tz": -68.98,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "trail 6 at 104 m (the end)",
+   "out": "review/sweep/trails/trail-06-0104.png"
+  },
+  {
+   "cam": {
+    "x": -31.34,
+    "y": 1.04,
+    "z": 38.68,
+    "tx": -36.74,
+    "ty": 0.92,
+    "tz": 51.59,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "trail 7 at 0 m",
+   "out": "review/sweep/trails/trail-07-0000.png"
+  },
+  {
+   "cam": {
+    "x": -30.4,
+    "y": 0.63,
+    "z": 36.43,
+    "tx": -35.8,
+    "ty": 1.6,
+    "tz": 49.35,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "trail 7 at 4 m (the end)",
+   "out": "review/sweep/trails/trail-07-0004.png"
+  },
+  {
+   "cam": {
+    "x": -30.29,
+    "y": 1.23,
+    "z": 39.71,
+    "tx": -43.08,
+    "ty": 0.85,
+    "tz": 45.4,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "trail 8 at 0 m",
+   "out": "review/sweep/trails/trail-08-0000.png"
+  },
+  {
+   "cam": {
+    "x": -33.05,
+    "y": 1.79,
+    "z": 42.68,
+    "tx": -46.81,
+    "ty": 1.1,
+    "tz": 40.09,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "trail 8 at 9 m (the end)",
+   "out": "review/sweep/trails/trail-08-0009.png"
+  },
+  {
+   "cam": {
+    "x": -39.8,
+    "y": 1.65,
+    "z": 39.53,
+    "tx": -47.57,
+    "ty": -0.34,
+    "tz": 51.18,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "trail 9 at 0 m",
+   "out": "review/sweep/trails/trail-09-0000.png"
+  },
+  {
+   "cam": {
+    "x": -48.35,
+    "y": 1.31,
+    "z": 52.35,
+    "tx": -56.11,
+    "ty": 1.64,
+    "tz": 64,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "trail 9 at 21 m (the end)",
+   "out": "review/sweep/trails/trail-09-0021.png"
+  },
+  {
+   "cam": {
+    "x": -50.78,
+    "y": 2.41,
+    "z": 58.93,
+    "tx": -64.77,
+    "ty": 0.35,
+    "tz": 59.47,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "trail 10 at 0 m",
+   "out": "review/sweep/trails/trail-10-0000.png"
+  },
+  {
+   "cam": {
+    "x": -55.77,
+    "y": 2.19,
+    "z": 59.6,
+    "tx": -69.69,
+    "ty": -0.14,
+    "tz": 61.06,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "trail 10 at 11 m (the end)",
+   "out": "review/sweep/trails/trail-10-0011.png"
+  },
+  {
+   "cam": {
+    "x": -61.75,
+    "y": 1.47,
+    "z": 60.77,
+    "tx": -75.55,
+    "ty": -0.6,
+    "tz": 58.38,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "trail 11 at 0 m",
+   "out": "review/sweep/trails/trail-11-0000.png"
+  },
+  {
+   "cam": {
+    "x": -94.96,
+    "y": 2.43,
+    "z": 50.08,
+    "tx": -108.79,
+    "ty": 0.54,
+    "tz": 47.9,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "trail 11 at 35 m",
+   "out": "review/sweep/trails/trail-11-0035.png"
+  },
+  {
+   "cam": {
+    "x": -111.12,
+    "y": 1.42,
+    "z": 50.59,
+    "tx": -122.54,
+    "ty": 1.7,
+    "tz": 42.51,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "trail 11 at 58 m (the end)",
+   "out": "review/sweep/trails/trail-11-0058.png"
+  },
+  {
+   "cam": {
+    "x": -63.17,
+    "y": 1.29,
+    "z": 58.51,
+    "tx": -67.08,
+    "ty": 1.17,
+    "tz": 71.95,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "trail 12 at 0 m",
+   "out": "review/sweep/trails/trail-12-0000.png"
+  },
+  {
+   "cam": {
+    "x": -84.31,
+    "y": 2.34,
+    "z": 84.95,
+    "tx": -93.63,
+    "ty": 1.5,
+    "tz": 95.39,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "trail 12 at 35 m",
+   "out": "review/sweep/trails/trail-12-0035.png"
+  },
+  {
+   "cam": {
+    "x": -82.79,
+    "y": 2.49,
+    "z": 85.61,
+    "tx": -95.34,
+    "ty": 0.95,
+    "tz": 91.81,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "trail 12 at 40 m (the end)",
+   "out": "review/sweep/trails/trail-12-0040.png"
+  },
+  {
+   "cam": {
+    "x": -0.5,
+    "y": 2.77,
+    "z": -80.33,
+    "tx": -10.82,
+    "ty": 4.84,
+    "tz": -89.79,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "trail 13 at 0 m",
+   "out": "review/sweep/trails/trail-13-0000.png"
+  },
+  {
+   "cam": {
+    "x": -15.08,
+    "y": 8.28,
+    "z": -111.05,
+    "tx": -21.47,
+    "ty": 12.11,
+    "tz": -123.51,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "trail 13 at 35 m",
+   "out": "review/sweep/trails/trail-13-0035.png"
+  },
+  {
+   "cam": {
+    "x": -22.38,
+    "y": 11,
+    "z": -119.69,
+    "tx": -26.96,
+    "ty": 10.41,
+    "tz": -132.92,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "trail 13 at 52 m (the end)",
+   "out": "review/sweep/trails/trail-13-0052.png"
+  },
+  {
+   "cam": {
+    "x": -116.7,
+    "y": 1.88,
+    "z": 47.73,
+    "tx": -123.32,
+    "ty": 1.17,
+    "tz": 35.4,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "trail 14 at 0 m",
+   "out": "review/sweep/trails/trail-14-0000.png"
+  },
+  {
+   "cam": {
+    "x": -136.19,
+    "y": 1.76,
+    "z": 20.09,
+    "tx": -144.87,
+    "ty": 1.25,
+    "tz": 9.11,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "trail 14 at 35 m",
+   "out": "review/sweep/trails/trail-14-0035.png"
+  },
+  {
+   "cam": {
+    "x": -150.51,
+    "y": 2.16,
+    "z": 3.32,
+    "tx": -155.51,
+    "ty": 1.79,
+    "tz": -9.76,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "trail 14 at 63 m (the end)",
+   "out": "review/sweep/trails/trail-14-0063.png"
+  },
+  {
+   "cam": {
+    "x": 31.91,
+    "y": 0.32,
+    "z": 32.75,
+    "tx": 44.69,
+    "ty": 0.84,
+    "tz": 38.46,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "trail 15 at 0 m",
+   "out": "review/sweep/trails/trail-15-0000.png"
+  },
+  {
+   "cam": {
+    "x": 56.48,
+    "y": 4.44,
+    "z": 57.06,
+    "tx": 58.5,
+    "ty": 2.54,
+    "tz": 70.91,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "trail 15 at 35 m",
+   "out": "review/sweep/trails/trail-15-0035.png"
+  },
+  {
+   "cam": {
+    "x": 56.07,
+    "y": 3.68,
+    "z": 54.26,
+    "tx": 58.09,
+    "ty": 3.6,
+    "tz": 68.11,
+    "fov": 60
+   },
+   "time": "noon",
+   "caption": "trail 15 at 38 m (the end)",
+   "out": "review/sweep/trails/trail-15-0038.png"
+  }
+ ],
+ "out": "review/sweep/trails/",
+ "cols": 4,
+ "size": "960x540",
+ "lengths": [
+  7,
+  49,
+  8,
+  36,
+  78,
+  46,
+  104,
+  4,
+  9,
+  21,
+  11,
+  58,
+  40,
+  52,
+  63,
+  38
+ ]
+}

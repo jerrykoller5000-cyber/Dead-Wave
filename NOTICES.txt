@@ -55,3 +55,9 @@ Motion reference
 The marine's animation is tuned against reference motion kept in assets/anim/reference/ (the terms are in LICENSE.txt
 there): the Universal Animation Library 1 and 2 by Quaternius (https://quaternius.com), CC0 1.0; and the CMU Graphics
 Lab Motion Capture Database (http://mocap.cs.cmu.edu), created with funding from NSF EIA-0196217.
+
+Sound effect libraries
+----------------------
+Some of the game's sound effects are made from commercial sound libraries, licensed for use in this game and not
+for redistribution on their own: Ocular Sounds (Aberration, Sinister, Puncture, Foundation and others), Sound
+Response's Binary Code 3 - Interface Multiverse, and Real Firearms Sounds.

@@ -1,0 +1,853 @@
+{
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "shots": [
+    {
+      "file": "handoffs/GP-19970/active-warnings/spitter-idle-noon-gameplay.jpg",
+      "subject": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999935719128512,
+          "y": -198.97176331557523,
+          "z": -631.9892866499807
+        },
+        "size": {
+          "x": 0.9146938170921857,
+          "y": 2.0597129514242454,
+          "z": 0.703920827378056
+        },
+        "yaw": 0.006,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5088,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -23.997770319640697,
+        "y": -197.8583785078947,
+        "z": -625.1523980019795,
+        "tx": -27.999935719128512,
+        "ty": -198.97176331557523,
+        "tz": -631.9892866499807,
+        "fov": 40
+      },
+      "state": {
+        "type": "spitter",
+        "spitWind": 0,
+        "fuseT": 0,
+        "chargeWind": 0,
+        "belly": null,
+        "vein": null,
+        "fire": null
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/active-warnings/spitter-active-noon-side.jpg",
+      "subject": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999935719128512,
+          "y": -198.97176331557523,
+          "z": -631.9892866499807
+        },
+        "size": {
+          "x": 0.9476651899277826,
+          "y": 1.9904279197687345,
+          "z": 0.9692354646248305
+        },
+        "yaw": 0.09599999999999999,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5088,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -24.01835356770045,
+        "y": -198.97176331557523,
+        "z": -632.372697097712,
+        "tx": -27.999935719128512,
+        "ty": -198.97176331557523,
+        "tz": -631.9892866499807,
+        "fov": 40
+      },
+      "state": {
+        "type": "spitter",
+        "spitWind": 0.39999999999999997,
+        "fuseT": 0,
+        "chargeWind": 0,
+        "belly": null,
+        "vein": null,
+        "fire": null
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/active-warnings/spitter-active-overcast-side.jpg",
+      "subject": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999935719128512,
+          "y": -198.97176331557523,
+          "z": -631.9892866499807
+        },
+        "size": {
+          "x": 0.9476651899277826,
+          "y": 1.9904279197687345,
+          "z": 0.9692354646248305
+        },
+        "yaw": 0.09599999999999999,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5088,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -24.01835356770045,
+        "y": -198.97176331557523,
+        "z": -632.372697097712,
+        "tx": -27.999935719128512,
+        "ty": -198.97176331557523,
+        "tz": -631.9892866499807,
+        "fov": 40
+      },
+      "state": {
+        "type": "spitter",
+        "spitWind": 0.39999999999999997,
+        "fuseT": 0,
+        "chargeWind": 0,
+        "belly": null,
+        "vein": null,
+        "fire": null
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/active-warnings/spitter-active-dusk-side.jpg",
+      "subject": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999935719128512,
+          "y": -198.97176331557523,
+          "z": -631.9892866499807
+        },
+        "size": {
+          "x": 0.9476651899277826,
+          "y": 1.9904279197687345,
+          "z": 0.9692354646248305
+        },
+        "yaw": 0.09599999999999999,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5088,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -24.01835356770045,
+        "y": -198.97176331557523,
+        "z": -632.372697097712,
+        "tx": -27.999935719128512,
+        "ty": -198.97176331557523,
+        "tz": -631.9892866499807,
+        "fov": 40
+      },
+      "state": {
+        "type": "spitter",
+        "spitWind": 0.39999999999999997,
+        "fuseT": 0,
+        "chargeWind": 0,
+        "belly": null,
+        "vein": null,
+        "fire": null
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/active-warnings/spitter-active-night-side.jpg",
+      "subject": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999935719128512,
+          "y": -198.97176331557523,
+          "z": -631.9892866499807
+        },
+        "size": {
+          "x": 0.9476651899277826,
+          "y": 1.9904279197687345,
+          "z": 0.9692354646248305
+        },
+        "yaw": 0.09599999999999999,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5088,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -24.01835356770045,
+        "y": -198.97176331557523,
+        "z": -632.372697097712,
+        "tx": -27.999935719128512,
+        "ty": -198.97176331557523,
+        "tz": -631.9892866499807,
+        "fov": 40
+      },
+      "state": {
+        "type": "spitter",
+        "spitWind": 0.39999999999999997,
+        "fuseT": 0,
+        "chargeWind": 0,
+        "belly": null,
+        "vein": null,
+        "fire": null
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/active-warnings/spitter-active-noon-gameplay.jpg",
+      "subject": {
+        "id": "zombie.spitter",
+        "name": "Spitter",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999935719128512,
+          "y": -198.97176331557523,
+          "z": -631.9892866499807
+        },
+        "size": {
+          "x": 0.9476651899277826,
+          "y": 1.9904279197687345,
+          "z": 0.9692354646248305
+        },
+        "yaw": 0.09599999999999999,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5088,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -23.399478518831877,
+        "y": -197.8583785078947,
+        "z": -625.5397775354617,
+        "tx": -27.999935719128512,
+        "ty": -198.97176331557523,
+        "tz": -631.9892866499807,
+        "fov": 40
+      },
+      "state": {
+        "type": "spitter",
+        "spitWind": 0.39999999999999997,
+        "fuseT": 0,
+        "chargeWind": 0,
+        "belly": null,
+        "vein": null,
+        "fire": null
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/active-warnings/bomber-idle-noon-gameplay.jpg",
+      "subject": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -28,
+          "y": -198.91076506681281,
+          "z": -632
+        },
+        "size": {
+          "x": 1.5230519890785246,
+          "y": 2.178469866374485,
+          "z": 1.65974024912623
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6328,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -24.03892772503372,
+        "y": -197.7973802591323,
+        "z": -625.139221567306,
+        "tx": -28,
+        "ty": -198.91076506681281,
+        "tz": -632,
+        "fov": 40
+      },
+      "state": {
+        "type": "bomber",
+        "spitWind": 0,
+        "fuseT": 0,
+        "chargeWind": 0,
+        "belly": 0,
+        "vein": 0.5,
+        "fire": null
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/active-warnings/bomber-active-noon-side.jpg",
+      "subject": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.9993546703521,
+          "y": -198.91076506681281,
+          "z": -631.9761782822401
+        },
+        "size": {
+          "x": 1.9067485130353496,
+          "y": 2.1056633382266057,
+          "z": 1.7445101147211517
+        },
+        "yaw": 0.049999999999999996,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6328,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -24.004353628772236,
+        "y": -198.91076506681281,
+        "z": -632.1760949593228,
+        "tx": -27.9993546703521,
+        "ty": -198.91076506681281,
+        "tz": -631.9761782822401,
+        "fov": 40
+      },
+      "state": {
+        "type": "bomber",
+        "spitWind": 0,
+        "fuseT": 0.6,
+        "chargeWind": 0,
+        "belly": 0.42135358835988335,
+        "vein": 0.5233112689082468,
+        "fire": null
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/active-warnings/bomber-active-overcast-side.jpg",
+      "subject": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.9993546703521,
+          "y": -198.91076506681281,
+          "z": -631.9761782822401
+        },
+        "size": {
+          "x": 1.9067485130353496,
+          "y": 2.1056633382266057,
+          "z": 1.7445101147211517
+        },
+        "yaw": 0.049999999999999996,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6328,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -24.004353628772236,
+        "y": -198.91076506681281,
+        "z": -632.1760949593228,
+        "tx": -27.9993546703521,
+        "ty": -198.91076506681281,
+        "tz": -631.9761782822401,
+        "fov": 40
+      },
+      "state": {
+        "type": "bomber",
+        "spitWind": 0,
+        "fuseT": 0.6,
+        "chargeWind": 0,
+        "belly": 0.42135358835988335,
+        "vein": 0.5233112689082468,
+        "fire": null
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/active-warnings/bomber-active-dusk-side.jpg",
+      "subject": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.9993546703521,
+          "y": -198.91076506681281,
+          "z": -631.9761782822401
+        },
+        "size": {
+          "x": 1.9067485130353496,
+          "y": 2.1056633382266057,
+          "z": 1.7445101147211517
+        },
+        "yaw": 0.049999999999999996,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6328,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -24.004353628772236,
+        "y": -198.91076506681281,
+        "z": -632.1760949593228,
+        "tx": -27.9993546703521,
+        "ty": -198.91076506681281,
+        "tz": -631.9761782822401,
+        "fov": 40
+      },
+      "state": {
+        "type": "bomber",
+        "spitWind": 0,
+        "fuseT": 0.6,
+        "chargeWind": 0,
+        "belly": 0.42135358835988335,
+        "vein": 0.5233112689082468,
+        "fire": null
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/active-warnings/bomber-active-night-side.jpg",
+      "subject": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.9993546703521,
+          "y": -198.91076506681281,
+          "z": -631.9761782822401
+        },
+        "size": {
+          "x": 1.9067485130353496,
+          "y": 2.1056633382266057,
+          "z": 1.7445101147211517
+        },
+        "yaw": 0.049999999999999996,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6328,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -24.004353628772236,
+        "y": -198.91076506681281,
+        "z": -632.1760949593228,
+        "tx": -27.9993546703521,
+        "ty": -198.91076506681281,
+        "tz": -631.9761782822401,
+        "fov": 40
+      },
+      "state": {
+        "type": "bomber",
+        "spitWind": 0,
+        "fuseT": 0.6,
+        "chargeWind": 0,
+        "belly": 0.42135358835988335,
+        "vein": 0.5233112689082468,
+        "fire": null
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/active-warnings/bomber-active-noon-gameplay.jpg",
+      "subject": {
+        "id": "zombie.bomber",
+        "name": "Bomber",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.9993546703521,
+          "y": -198.91076506681281,
+          "z": -631.9761782822401
+        },
+        "size": {
+          "x": 1.9067485130353496,
+          "y": 2.1056633382266057,
+          "z": 1.7445101147211517
+        },
+        "yaw": 0.049999999999999996,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 6328,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -23.70033669767001,
+        "y": -197.7973802591323,
+        "z": -625.3219451377987,
+        "tx": -27.9993546703521,
+        "ty": -198.91076506681281,
+        "tz": -631.9761782822401,
+        "fov": 40
+      },
+      "state": {
+        "type": "bomber",
+        "spitWind": 0,
+        "fuseT": 0.6,
+        "chargeWind": 0,
+        "belly": 0.42135358835988335,
+        "vein": 0.5233112689082468,
+        "fire": null
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/active-warnings/demon-idle-noon-gameplay.jpg",
+      "subject": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -28,
+          "y": -198.49987818562084,
+          "z": -632
+        },
+        "size": {
+          "x": 1.8814516195868123,
+          "y": 3.2694378594462705,
+          "z": 1.216854865924006
+        },
+        "yaw": 0,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5672,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -24.03892772503372,
+        "y": -197.38649337794033,
+        "z": -625.139221567306,
+        "tx": -28,
+        "ty": -198.49987818562084,
+        "tz": -632,
+        "fov": 40
+      },
+      "state": {
+        "type": "demon",
+        "spitWind": 0,
+        "fuseT": 0,
+        "chargeWind": 0,
+        "belly": null,
+        "vein": null,
+        "fire": 1.5
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/active-warnings/demon-active-noon-side.jpg",
+      "subject": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -28,
+          "y": -198.49987818562084,
+          "z": -632
+        },
+        "size": {
+          "x": 2.1301615610739546,
+          "y": 3.2277348116636233,
+          "z": 2.1421302563600193
+        },
+        "yaw": 1.460139105621001,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5672,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -27.558273895700612,
+        "y": -198.49987818562084,
+        "z": -635.9755349386945,
+        "tx": -28,
+        "ty": -198.49987818562084,
+        "tz": -632,
+        "fov": 40
+      },
+      "state": {
+        "type": "demon",
+        "spitWind": 0,
+        "fuseT": 0,
+        "chargeWind": 0.35,
+        "belly": null,
+        "vein": null,
+        "fire": 3.7
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/active-warnings/demon-active-overcast-side.jpg",
+      "subject": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -28,
+          "y": -198.49987818562084,
+          "z": -632
+        },
+        "size": {
+          "x": 2.1301615610739546,
+          "y": 3.2277348116636233,
+          "z": 2.1421302563600193
+        },
+        "yaw": 1.460139105621001,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5672,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -27.558273895700612,
+        "y": -198.49987818562084,
+        "z": -635.9755349386945,
+        "tx": -28,
+        "ty": -198.49987818562084,
+        "tz": -632,
+        "fov": 40
+      },
+      "state": {
+        "type": "demon",
+        "spitWind": 0,
+        "fuseT": 0,
+        "chargeWind": 0.35,
+        "belly": null,
+        "vein": null,
+        "fire": 3.7
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/active-warnings/demon-active-dusk-side.jpg",
+      "subject": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -28,
+          "y": -198.49987818562084,
+          "z": -632
+        },
+        "size": {
+          "x": 2.1301615610739546,
+          "y": 3.2277348116636233,
+          "z": 2.1421302563600193
+        },
+        "yaw": 1.460139105621001,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5672,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -27.558273895700612,
+        "y": -198.49987818562084,
+        "z": -635.9755349386945,
+        "tx": -28,
+        "ty": -198.49987818562084,
+        "tz": -632,
+        "fov": 40
+      },
+      "state": {
+        "type": "demon",
+        "spitWind": 0,
+        "fuseT": 0,
+        "chargeWind": 0.35,
+        "belly": null,
+        "vein": null,
+        "fire": 3.7
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/active-warnings/demon-active-night-side.jpg",
+      "subject": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -28,
+          "y": -198.49987818562084,
+          "z": -632
+        },
+        "size": {
+          "x": 2.1301615610739546,
+          "y": 3.2277348116636233,
+          "z": 2.1421302563600193
+        },
+        "yaw": 1.460139105621001,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5672,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -27.558273895700612,
+        "y": -198.49987818562084,
+        "z": -635.9755349386945,
+        "tx": -28,
+        "ty": -198.49987818562084,
+        "tz": -632,
+        "fov": 40
+      },
+      "state": {
+        "type": "demon",
+        "spitWind": 0,
+        "fuseT": 0,
+        "chargeWind": 0.35,
+        "belly": null,
+        "vein": null,
+        "fire": 3.7
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/active-warnings/demon-active-noon-gameplay.jpg",
+      "subject": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -28,
+          "y": -198.49987818562084,
+          "z": -632
+        },
+        "size": {
+          "x": 2.1301615610739546,
+          "y": 3.2277348116636233,
+          "z": 2.1421302563600193
+        },
+        "yaw": 1.460139105621001,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5672,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -20.743756652328543,
+        "y": -197.38649337794033,
+        "z": -635.1791990735718,
+        "tx": -28,
+        "ty": -198.49987818562084,
+        "tz": -632,
+        "fov": 40
+      },
+      "state": {
+        "type": "demon",
+        "spitWind": 0,
+        "fuseT": 0,
+        "chargeWind": 0.35,
+        "belly": null,
+        "vein": null,
+        "fire": 3.7
+      }
+    }
+  ],
+  "errors": [],
+  "pageErrors": []
+}

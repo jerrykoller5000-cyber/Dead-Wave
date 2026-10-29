@@ -1,0 +1,63 @@
+{
+  "task": "AG-155 / GP-19981",
+  "date": "2026-10-29",
+  "reviewer": "Antigravity (Gemini 4 Argon (High))",
+  "hardware": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "resolution": [
+    1600,
+    900
+  ],
+  "triangles": {
+    "before": 40322,
+    "after11": 40458,
+    "delta": 136
+  },
+  "draws": {
+    "before": 16,
+    "after11": 16,
+    "delta": 0
+  },
+  "saturation": {
+    "target_cap": 45.0,
+    "before_chin_mean_sat": 83.8,
+    "after_chin_mean_sat": 48.8,
+    "after_hex_base_sat": 39.8,
+    "after_overcast_chin_mean_sat": 41.6
+  },
+  "defect": {
+    "type": "detached_floating_ribbon",
+    "view": "close-side (90-deg orthographic profile)",
+    "location": {
+      "x": [
+        492,
+        495
+      ],
+      "y": [
+        577,
+        602
+      ]
+    },
+    "pixel_count": 72,
+    "daylight_gap": {
+      "x": [
+        496,
+        514
+      ],
+      "span_px": 19
+    },
+    "face_surface_x": [
+      515,
+      531
+    ],
+    "cause": "ui/marine-face.js addGrid moustache lobe at z=0.174 lacks lateral/rear depth return to face surface at z=0.155"
+  },
+  "scores": {
+    "silhouette_gameplay": 4.5,
+    "readability_gameplay": 4.5,
+    "material_color": 4.5,
+    "construction_front": 4.0,
+    "integration_jaw": 4.0,
+    "integration_close_side_profile": 3.5,
+    "overall": 4.0
+  }
+}

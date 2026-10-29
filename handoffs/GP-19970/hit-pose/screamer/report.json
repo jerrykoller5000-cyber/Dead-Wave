@@ -1,0 +1,82 @@
+{
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "checks": [
+    {
+      "id": "zombie.screamer",
+      "variant": null,
+      "mode": "statue",
+      "ok": true,
+      "ms": 330,
+      "tris": 5724,
+      "size": [
+        1.374,
+        2.568,
+        1.317
+      ],
+      "error": null
+    }
+  ],
+  "records": [
+    {
+      "mode": "protected",
+      "frame": 5,
+      "file": "handoffs/GP-19970/hit-pose/screamer/screamer-protected-body-hit-f5-gameplay.jpg",
+      "hp": 21.8,
+      "alive": true,
+      "hitReact": 0,
+      "sonicOpenT": 0,
+      "torso": [
+        0.007756841825534851,
+        0.0292341847064118,
+        -0.005320380989573447
+      ]
+    },
+    {
+      "mode": "protected",
+      "frame": 20,
+      "file": "handoffs/GP-19970/hit-pose/screamer/screamer-protected-body-hit-f20-gameplay.jpg",
+      "hp": 21.8,
+      "alive": true,
+      "hitReact": 0,
+      "sonicOpenT": 0,
+      "torso": [
+        0.016932040038283195,
+        0.1901731262975674,
+        -0.0188343813946778
+      ]
+    },
+    {
+      "mode": "exposed",
+      "frame": 5,
+      "file": "handoffs/GP-19970/hit-pose/screamer/screamer-exposed-body-hit-f5-gameplay.jpg",
+      "hp": 15.200000000000003,
+      "alive": true,
+      "hitReact": 0.17106666666666664,
+      "hitPart": "torso",
+      "hitPartT": 0.3666666666666667,
+      "sonicOpenT": 2.316666666666667,
+      "torso": [
+        -0.12539674163157502,
+        0.6790123456790124,
+        -0.1452343708886525
+      ]
+    },
+    {
+      "mode": "exposed",
+      "frame": 20,
+      "file": "handoffs/GP-19970/hit-pose/screamer/screamer-exposed-body-hit-f20-gameplay.jpg",
+      "hp": 15.200000000000003,
+      "alive": true,
+      "hitReact": 0,
+      "hitPart": "torso",
+      "hitPartT": 0.11666666666666675,
+      "sonicOpenT": 2.0666666666666678,
+      "torso": [
+        -0.03717681631534059,
+        0.21992162421046085,
+        -0.04267005332860165
+      ]
+    }
+  ],
+  "pageErrors": []
+}

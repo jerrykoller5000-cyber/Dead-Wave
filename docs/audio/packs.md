@@ -115,6 +115,20 @@ bought them (to check before selling, with docs/audio/licences.md). Until then t
   (batch 3's folders: the game doesn't tell its footsteps which ground they're on yet). Left as his: mud, jump, the
   roll, the vault, the swim, breath, both hurts, and every builds folder (the packs have none of them).
 
+- **The rest of the world, searched (CL-272, 2026-10-28): his takes stay.** The catalogues (every Ocular library's
+  metadata, the files on F:\) have nothing better for what's left: **the vehicles** (the floatplane, the cargo plane,
+  the chute: the packs' only engines are city traffic in Cityscapes' street beds); **the HQ's machines** (the
+  generator, hq-machine, the radios: no generators, fans or radios, only a standing desk's servo and a computer's
+  plugs in Utility); **below** (the warren's air, the drips, the rock: Aberration's drones are cosmic sci-fi, its low-end
+  rumbles designed; the one recording of water drips, Carnage's `Water Drips 192kHz`, isn't on the drive: its folder,
+  `Source Recordings\Soap and Water\192kHz`, is empty); **the cave mouths** (his, moved to their folder in part 3);
+  **the story's other sounds** (the heart's fall, the Hush dying: designed for their moments). **Still only
+  synthesized, nothing that fits:** the relay's boot, spark and static (the packs' static is Puncture's jump-scare stems
+  and Aberration's distorted signal, both designed to startle), the vault's lift (Mechanica is small gears), the bolt
+  cutters' pick-up and bite and the chain's snap (Foundation's `WHOOSH HIT-Chains` is a cinematic hit, not a chain
+  parting), the truck's alarm, the lighter. Candidates for Jerry's ear if he wants them: the chains hit for the snap,
+  the distorted signal under the relay's static.
+
 - **Levels:** the bank evens a pack take like the take it replaces, then `PACK_TRIM` (core/takes.js) sets it where
   the ear hears his: K-weighted loudness after the evening, his against the pack's, folder by folder. 44 folders are
   trimmed so far (11 from the first three, 33 from the weapons and the player), from 0.1 (the day's wind) to 1.72

@@ -1,0 +1,20 @@
+{
+ "at": "2026-10-29T07:16:03.819Z",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "results": [
+  {
+   "id": "zombie.caveguard",
+   "variant": null,
+   "mode": "statue",
+   "ok": true,
+   "ms": 150,
+   "tris": 4180,
+   "size": [
+    1.438,
+    2.764,
+    1.242
+   ],
+   "error": null
+  }
+ ]
+}

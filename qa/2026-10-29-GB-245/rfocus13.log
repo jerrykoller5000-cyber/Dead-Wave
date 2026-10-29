@@ -1,0 +1,13 @@
+Game-test request 28cb3926-266b-43c5-a494-3ea14e467b7c queued at position 2. Waiting...
+GRANT grokbot GB-245: starting one game-test command
+camera: camera: loading the game................................
+camera: ready in 32 s on port 54461: match, ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11), 1600x900
+help: ok
+setup: pistol
+{"up":0.28,"in":0.04,"side":0.12,"fwd":-0.05,"tip":-0.4,"turn":0,"cant":0.4,"hip":0} u10 R     0 L     0 MERGED | u25 R 42740 L     0 | u40 R 40173 L     0 | u55 R 36714 L     0 | u70 R 33670 L   886 | u85 R 30165 L143105
+{"up":0.32,"in":0.04,"side":0.15,"fwd":-0.1,"tip":-0.4,"turn":0,"cant":0.4,"hip":0} u10 R     0 L     0 MERGED | u25 R 41056 L     0 | u40 R 41306 L     0 | u55 R 41177 L     0 | u70 R 40476 L     0 | u85 R 31583 L318734
+{"up":0.28,"in":0.04,"side":0.18,"fwd":-0.1,"tip":-0.4,"turn":0,"cant":0.4,"hip":0} u10 R     0 L     0 MERGED | u25 R  4152 L     0 | u40 R  4117 L     0 | u55 R  5109 L     0 | u70 R  6409 L     0 | u85 R  9239 L234148
+{"up":0.32,"in":0.04,"side":0.12,"fwd":-0.1,"tip":-0.6,"turn":0,"cant":0.4,"hip":0} u10 R 16625 L     0 | u25 R     0 L     0 MERGED | u40 R     0 L     0 MERGED | u55 R     0 L     0 MERGED | u70 R     0 L 24088 | u85 R     0 L336360
+{"up":0.28,"in":0.04,"side":0.15,"fwd":-0.05,"tip":-0.3,"turn":0,"cant":0.4,"hip":0} u10 R     0 L     0 MERGED | u25 R 42109 L     0 | u40 R 45246 L     0 | u55 R 48108 L     0 | u70 R 49703 L     0 | u85 R 44159 L148895
+{"up":0.24,"in":0.04,"side":0.15,"fwd":-0.1,"tip":-0.6,"turn":0,"cant":0.4,"hip":0} u10 R     0 L     0 MERGED | u25 R     0 L     0 MERGED | u40 R     0 L     0 MERGED | u55 R     0 L     0 MERGED | u70 R     0 L     0 MERGED | u85 R     0 L240928
+camera stop: camera: stopped

@@ -1,0 +1,38 @@
+{
+ "shots": [
+  {
+   "target": "vehicle.cargo-plane",
+   "view": "three",
+   "out": "review/principles/claude/vehicles/vehicle.cargo-plane-three.png"
+  },
+  {
+   "target": "vehicle.cargo-plane",
+   "view": "front",
+   "out": "review/principles/claude/vehicles/vehicle.cargo-plane-front.png"
+  },
+  {
+   "target": "vehicle.cargo-plane",
+   "view": "side",
+   "out": "review/principles/claude/vehicles/vehicle.cargo-plane-side.png"
+  },
+  {
+   "target": "vehicle.heron",
+   "view": "three",
+   "out": "review/principles/claude/vehicles/vehicle.heron-three.png"
+  },
+  {
+   "target": "vehicle.heron",
+   "view": "front",
+   "out": "review/principles/claude/vehicles/vehicle.heron-front.png"
+  },
+  {
+   "target": "vehicle.heron",
+   "view": "side",
+   "out": "review/principles/claude/vehicles/vehicle.heron-side.png"
+  }
+ ],
+ "out": "review/principles/claude/vehicles/",
+ "sheet": true,
+ "cols": 4,
+ "tile": 480
+}

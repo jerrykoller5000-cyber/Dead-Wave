@@ -1,0 +1,23 @@
+{
+ "shots": [
+  {
+   "target": "place:camp:hikers",
+   "view": "three",
+   "time": "day",
+   "pre": "T.clearZombies(); T.survivorDbg.setChance(0); T.storyDbg.chain.reset(); T.storyDbg.gate(true); T.setDay(3); T.runDevCommand('story done missing'); T.storyDbg.sync(); await wait(600);",
+   "caption": "The hikers camp, Pike beyond it (CL-263)",
+   "out": "review/sweep/pike-hide/camp-three.png",
+   "dist": 34
+  },
+  {
+   "target": "place:camp:hikers",
+   "view": "top",
+   "time": "day",
+   "caption": "From above: the camp and his hiding place",
+   "out": "review/sweep/pike-hide/camp-top.png",
+   "dist": 48
+  }
+ ],
+ "out": "review/sweep/pike-hide/",
+ "cols": 2
+}

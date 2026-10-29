@@ -1,0 +1,18 @@
+GRANT grokbot GB-245: starting one game-test command
+camera: camera: loading the game.............................
+camera: ready in 29 s on port 64133: match, ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11), 1600x900
+help: ok
+setup: pistol
+{"up":0.02,"in":0.04,"side":0,"tip":0,"turn":0,"cant":0.4,"hip":0}       u20 R     0 L     0 MERGED | u35 R  1283 L     0 | u50 R  1270 L     0 | u65 R  1223 L     0 | u80 R  1199 L   338
+{"up":0.06,"in":0.04,"side":0,"tip":0,"turn":0,"cant":0.6,"hip":0}       u20 R  7338 L     0 | u35 R  7371 L     0 | u50 R  7411 L     0 | u65 R  7337 L     0 | u80 R  7331 L    94
+{"up":0.1,"in":0.02,"side":0,"tip":0,"turn":0,"cant":0.8,"hip":0}        u20 R 10497 L     0 | u35 R 10591 L     0 | u50 R 10593 L     0 | u65 R  9539 L     0 | u80 R  9592 L   136
+{"up":0.02,"in":0.1,"side":0,"tip":0,"turn":0,"cant":0.6,"hip":0}        u20 R   829 L     0 | u35 R   821 L     0 | u50 R   832 L     0 | u65 R   841 L     0 | u80 R   858 L   269
+{"up":0.04,"in":-0.04,"side":0,"tip":0,"turn":0,"cant":0.5,"hip":0}      u20 R  4210 L     0 | u35 R  4177 L     0 | u50 R  4099 L     0 | u65 R  3946 L     0 | u80 R  3837 L  2138
+{"up":0.02,"in":0.04,"side":0,"tip":0,"turn":0,"cant":1,"hip":0}         u20 R   978 L     0 | u35 R   983 L     0 | u50 R   993 L     0 | u65 R  1016 L     0 | u80 R  1048 L   285
+{"up":0.02,"in":0.04,"side":0,"tip":0,"turn":0,"cant":0.4,"hip":0}       u20 R   557 L     0 | u35 R  1131 L     0 | u50 R   742 L  2569 | u65 R  1583 L     0 | u80 R  1282 L   490
+{"up":0.06,"in":0.04,"side":0,"tip":0,"turn":0,"cant":0.6,"hip":0}       u20 R  9454 L     0 | u35 R  9856 L     0 | u50 R  9385 L 10805 | u65 R  9575 L     4 | u80 R  9934 L  1223
+{"up":0.1,"in":0.02,"side":0,"tip":0,"turn":0,"cant":0.8,"hip":0}        u20 R  1733 L     0 | u35 R  1783 L     0 | u50 R  1777 L 17986 | u65 R  1882 L  6588 | u80 R  1825 L 12565
+{"up":0.02,"in":0.1,"side":0,"tip":0,"turn":0,"cant":0.6,"hip":0}        u20 R   858 L     0 | u35 R   297 L     0 | u50 R   114 L  1151 | u65 R  1233 L     0 | u80 R   823 L   523
+{"up":0.04,"in":-0.04,"side":0,"tip":0,"turn":0,"cant":0.5,"hip":0}      u20 R  1154 L     0 | u35 R  1413 L     0 | u50 R  1534 L  9566 | u65 R  1661 L  9043 | u80 R  1823 L 13227
+{"up":0.02,"in":0.04,"side":0,"tip":0,"turn":0,"cant":1,"hip":0}         u20 R   775 L     0 | u35 R  1297 L     0 | u50 R   863 L  2915 | u65 R  1791 L     5 | u80 R  1741 L   622
+camera stop: camera: stopped

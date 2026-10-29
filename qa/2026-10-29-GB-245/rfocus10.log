@@ -1,0 +1,12 @@
+GRANT grokbot GB-245: starting one game-test command
+camera: camera: loading the game..............................
+camera: ready in 30 s on port 27651: match, ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11), 1600x900
+help: ok
+setup: pistol
+{"up":0.04,"in":0.04,"side":0.06,"fwd":0,"tip":0,"turn":0,"cant":0.4,"hip":0} u10 R     0 L     0 MERGED | u25 R     0 L     0 MERGED | u40 R     0 L     0 MERGED | u55 R     0 L     0 MERGED | u70 R     0 L     0 MERGED | u85 R     0 L     0 MERGED
+{"up":0.04,"in":0.04,"side":0.1,"fwd":0,"tip":0,"turn":0,"cant":0.4,"hip":0} u10 R     0 L     0 MERGED | u25 R     0 L     0 MERGED | u40 R     0 L     0 MERGED | u55 R     0 L     0 MERGED | u70 R     0 L     0 MERGED | u85 R     0 L     0 MERGED
+{"up":0.1,"in":0.04,"side":0.1,"fwd":0,"tip":0,"turn":0,"cant":0.4,"hip":0} u10 R     0 L     0 MERGED | u25 R     0 L     0 MERGED | u40 R     0 L     0 MERGED | u55 R     0 L     0 MERGED | u70 R     0 L     0 MERGED | u85 R     0 L   355
+{"up":0.04,"in":0.04,"side":0.1,"fwd":0.08,"tip":0,"turn":0,"cant":0.4,"hip":0} u10 R     0 L     0 MERGED | u25 R     0 L     0 MERGED | u40 R     0 L     0 MERGED | u55 R     0 L     0 MERGED | u70 R     0 L     0 MERGED | u85 R     0 L     0 MERGED
+{"up":0.04,"in":0.04,"side":0.14,"fwd":0,"tip":0,"turn":0,"cant":0.4,"hip":0} u10 R     0 L     0 MERGED | u25 R     0 L     0 MERGED | u40 R     0 L     0 MERGED | u55 R     0 L     0 MERGED | u70 R     0 L     0 MERGED | u85 R     0 L     0 MERGED
+{"up":0.1,"in":0.04,"side":0.06,"fwd":0.04,"tip":0,"turn":0,"cant":0.4,"hip":0} u10 R     0 L     0 MERGED | u25 R     0 L     0 MERGED | u40 R     0 L     0 MERGED | u55 R     0 L     0 MERGED | u70 R     0 L     0 MERGED | u85 R     0 L  1788
+camera stop: camera: stopped

@@ -1,0 +1,1681 @@
+{
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "frames": [
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/caveguard/caveguard-idle-f00.jpg",
+      "phase": "idle",
+      "n": 0,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0,
+        "hipsY": 1.2529282863265885,
+        "armL": -0.5446915061797889,
+        "armR": -0.3553084938202114
+      },
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.195,
+          "y": -199.04237687845261,
+          "z": -632
+        },
+        "size": {
+          "x": 3.339734001279968,
+          "y": 3.3736172528071506,
+          "z": 2.0544525742826636
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 12022,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -20.33422156730596,
+        "y": -197.9289920707721,
+        "z": -635.9610722749662,
+        "tx": -27.195,
+        "ty": -199.04237687845261,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/caveguard/caveguard-attack-f01.jpg",
+      "phase": "attack",
+      "n": 1,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.20333333333333334,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.007575757575757569,
+        "hipsY": 1.251181560259747,
+        "armL": -1.4333333333333333,
+        "armR": -1.4333333333333333
+      },
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.926666666666666,
+          "y": -199.04237687845261,
+          "z": -632
+        },
+        "size": {
+          "x": 3.3109986508982523,
+          "y": 3.5102234109797337,
+          "z": 2.2071593759354755
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 12022,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -20.06588823397263,
+        "y": -197.9289920707721,
+        "z": -635.9610722749662,
+        "tx": -26.926666666666666,
+        "ty": -199.04237687845261,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/caveguard/caveguard-attack-f02.jpg",
+      "phase": "attack",
+      "n": 2,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.18666666666666668,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.01515151515151515,
+        "hipsY": 1.249079742805634,
+        "armL": -1.5166666666666668,
+        "armR": -1.5166666666666668
+      },
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.65833333333333,
+          "y": -199.04237687845261,
+          "z": -632
+        },
+        "size": {
+          "x": 3.3087649869595097,
+          "y": 3.5772806231405525,
+          "z": 2.3049695530897907
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 12022,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -19.79755490063929,
+        "y": -197.9289920707721,
+        "z": -635.9610722749662,
+        "tx": -26.65833333333333,
+        "ty": -199.04237687845261,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/caveguard/caveguard-attack-f03.jpg",
+      "phase": "attack",
+      "n": 3,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.17,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.02272727272727272,
+        "hipsY": 1.2466384292418737,
+        "armL": -1.6,
+        "armR": -1.6
+      },
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.389999999999997,
+          "y": -199.04237687845261,
+          "z": -632
+        },
+        "size": {
+          "x": 3.319373422932376,
+          "y": 3.5840812697112767,
+          "z": 2.403956577584495
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 12022,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -19.52922156730596,
+        "y": -197.9289920707721,
+        "z": -635.9610722749662,
+        "tx": -26.389999999999997,
+        "ty": -199.04237687845261,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/caveguard/caveguard-attack-f04.jpg",
+      "phase": "attack",
+      "n": 4,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.15333333333333335,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.0303030303030303,
+        "hipsY": 1.2438794240542355,
+        "armL": -1.6833333333333333,
+        "armR": -1.6833333333333333
+      },
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.121666666666663,
+          "y": -199.04237687845261,
+          "z": -632
+        },
+        "size": {
+          "x": 3.338328738007487,
+          "y": 3.579990788401062,
+          "z": 2.4956354567520975
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 12022,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -19.260888233972622,
+        "y": -197.9289920707721,
+        "z": -635.9610722749662,
+        "tx": -26.121666666666663,
+        "ty": -199.04237687845261,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/caveguard/caveguard-attack-f05.jpg",
+      "phase": "attack",
+      "n": 5,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.1366666666666667,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.03787878787878787,
+        "hipsY": 1.240830322924875,
+        "armL": -1.7666666666666666,
+        "armR": -1.7666666666666666
+      },
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -25.853333333333328,
+          "y": -199.04237687845261,
+          "z": -632
+        },
+        "size": {
+          "x": 3.353730896199032,
+          "y": 3.5739303917179086,
+          "z": 2.555987951245129
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 12022,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -18.99255490063929,
+        "y": -197.9289920707721,
+        "z": -635.9610722749662,
+        "tx": -25.853333333333328,
+        "ty": -199.04237687845261,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/caveguard/caveguard-attack-f06.jpg",
+      "phase": "attack",
+      "n": 6,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.12000000000000002,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.04545454545454545,
+        "hipsY": 1.2375240174560815,
+        "armL": -1.85,
+        "armR": -1.85
+      },
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -25.584999999999994,
+          "y": -199.04237687845261,
+          "z": -632
+        },
+        "size": {
+          "x": 3.365143134273307,
+          "y": 3.5669093258554483,
+          "z": 2.5958237847729606
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 12022,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -18.724221567305953,
+        "y": -197.9289920707721,
+        "z": -635.9610722749662,
+        "tx": -25.584999999999994,
+        "ty": -199.04237687845261,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/caveguard/caveguard-attack-f07.jpg",
+      "phase": "attack",
+      "n": 7,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.10333333333333336,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.05303030303030302,
+        "hipsY": 1.2339981292808446,
+        "armL": -1.9333333333333333,
+        "armR": -1.9333333333333333
+      },
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -25.31666666666666,
+          "y": -199.04237687845261,
+          "z": -632
+        },
+        "size": {
+          "x": 3.373686275045504,
+          "y": 3.560869721667842,
+          "z": 2.6113062892893595
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 12022,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -18.455888233972622,
+        "y": -197.9289920707721,
+        "z": -635.9610722749662,
+        "tx": -25.31666666666666,
+        "ty": -199.04237687845261,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/caveguard/caveguard-attack-f08.jpg",
+      "phase": "attack",
+      "n": 8,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.0866666666666667,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.0606060606060606,
+        "hipsY": 1.2302943812988394,
+        "armL": -2.0166666666666666,
+        "armR": -2.0166666666666666
+      },
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -25.048333333333325,
+          "y": -199.04237687845261,
+          "z": -632
+        },
+        "size": {
+          "x": 3.376784599649188,
+          "y": 3.5563650174213706,
+          "z": 2.6078890659669014
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 12022,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -18.187554900639284,
+        "y": -197.9289920707721,
+        "z": -635.9610722749662,
+        "tx": -25.048333333333325,
+        "ty": -199.04237687845261,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/caveguard/caveguard-attack-f09.jpg",
+      "phase": "attack",
+      "n": 9,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.07000000000000003,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.06818181818181816,
+        "hipsY": 1.2264579147460255,
+        "armL": -2.1,
+        "armR": -2.1
+      },
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -24.77999999999999,
+          "y": -199.04237687845261,
+          "z": -632
+        },
+        "size": {
+          "x": 3.375062502707408,
+          "y": 3.5532254205607217,
+          "z": 2.590836837657207
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 12022,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -17.919221567305954,
+        "y": -197.9289920707721,
+        "z": -635.9610722749662,
+        "tx": -24.77999999999999,
+        "ty": -199.04237687845261,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/caveguard/caveguard-attack-f10.jpg",
+      "phase": "attack",
+      "n": 10,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.05333333333333337,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.07575757575757575,
+        "hipsY": 1.2225365616440578,
+        "armL": -2.183333333333333,
+        "armR": -2.183333333333333
+      },
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -24.511666666666656,
+          "y": -199.04237687845261,
+          "z": -632
+        },
+        "size": {
+          "x": 3.3692379880474697,
+          "y": 3.5510756371330388,
+          "z": 2.5648336112935795
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 12022,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -17.650888233972616,
+        "y": -197.9289920707721,
+        "z": -635.9610722749662,
+        "tx": -24.511666666666656,
+        "ty": -199.04237687845261,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/caveguard/caveguard-attack-f12.jpg",
+      "phase": "attack",
+      "n": 12,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.020000000000000042,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.0909090909090909,
+        "hipsY": 1.2204238824241886,
+        "armL": -2.35,
+        "armR": -2.35
+      },
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -23.974999999999987,
+          "y": -199.04237687845261,
+          "z": -632
+        },
+        "size": {
+          "x": 3.373403100299555,
+          "y": 3.5467947510191777,
+          "z": 2.5009878532955554
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 12022,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -17.114221567305947,
+        "y": -197.9289920707721,
+        "z": -635.9610722749662,
+        "tx": -23.974999999999987,
+        "ty": -199.04237687845261,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/caveguard/caveguard-attack-f14.jpg",
+      "phase": "attack",
+      "n": 14,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.28,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.1,
+        "hipsY": 1.2269690593433196,
+        "armL": -2.45,
+        "armR": -2.45
+      },
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -23.43833333333332,
+          "y": -199.04237687845261,
+          "z": -632
+        },
+        "size": {
+          "x": 3.3944162105320963,
+          "y": 3.5393403489240143,
+          "z": 2.43778184278176
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 12022,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -16.577554900639278,
+        "y": -197.9289920707721,
+        "z": -635.9610722749662,
+        "tx": -23.43833333333332,
+        "ty": -199.04237687845261,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/caveguard/caveguard-attack-f16.jpg",
+      "phase": "attack",
+      "n": 16,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.2466666666666667,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.13083521591645728,
+        "hipsY": 1.2164030712571618,
+        "armL": -1.7994365481516044,
+        "armR": -1.7994365481516044
+      },
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -22.90166666666665,
+          "y": -199.04237687845261,
+          "z": -632
+        },
+        "size": {
+          "x": 3.4417171980180115,
+          "y": 3.5284103682230636,
+          "z": 2.383999706836221
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 12022,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -16.04088823397261,
+        "y": -197.9289920707721,
+        "z": -635.9610722749662,
+        "tx": -22.90166666666665,
+        "ty": -199.04237687845261,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/caveguard/caveguard-attack-f18.jpg",
+      "phase": "attack",
+      "n": 18,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.21333333333333337,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.23134685680847852,
+        "hipsY": 1.2062408771144875,
+        "armL": -1.1997246201889593,
+        "armR": -1.1997246201889593
+      },
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -22.36499999999998,
+          "y": -199.04237687845261,
+          "z": -632
+        },
+        "size": {
+          "x": 3.50382749781787,
+          "y": 3.5146485032809665,
+          "z": 2.32586710407827
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 12022,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -15.504221567305942,
+        "y": -197.9289920707721,
+        "z": -635.9610722749662,
+        "tx": -22.36499999999998,
+        "ty": -199.04237687845261,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/caveguard/caveguard-attack-f20.jpg",
+      "phase": "attack",
+      "n": 20,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.18000000000000005,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.27823941877010794,
+        "hipsY": 1.197582016199825,
+        "armL": -0.6977409125245613,
+        "armR": -0.6977409125245613
+      },
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -21.828333333333312,
+          "y": -199.04237687845261,
+          "z": -632
+        },
+        "size": {
+          "x": 3.551234030047482,
+          "y": 3.4982132124267196,
+          "z": 2.2617669031380956
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 12022,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -14.967554900639273,
+        "y": -197.9289920707721,
+        "z": -635.9610722749662,
+        "tx": -21.828333333333312,
+        "ty": -199.04237687845261,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/caveguard/caveguard-attack-f22.jpg",
+      "phase": "attack",
+      "n": 22,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.14666666666666672,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.2606446496203773,
+        "hipsY": 1.1911293418241575,
+        "armL": -0.3327231604293151,
+        "armR": -0.3327231604293151
+      },
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -21.294032951324063,
+          "y": -199.04237687845261,
+          "z": -631.964442907931
+        },
+        "size": {
+          "x": 3.845758886505635,
+          "y": 3.4822177113136092,
+          "z": 2.696652660692962
+        },
+        "yaw": 1.4378945318155205,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 12022,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -13.96887070435822,
+        "y": -197.9289920707721,
+        "z": -634.9814567172551,
+        "tx": -21.294032951324063,
+        "ty": -199.04237687845261,
+        "tz": -631.964442907931,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/caveguard/caveguard-attack-f24.jpg",
+      "phase": "attack",
+      "n": 24,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.1133333333333334,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.182640475157874,
+        "hipsY": 1.1873871965409986,
+        "armL": -0.133203106482146,
+        "armR": -0.133203106482146
+      },
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -20.761542049269078,
+          "y": -199.04237687845261,
+          "z": -631.8977761170889
+        },
+        "size": {
+          "x": 3.820609750769396,
+          "y": 3.4752156898153146,
+          "z": 2.6453326915608386
+        },
+        "yaw": 1.4545982534043334,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 12022,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -13.487794706334599,
+        "y": -197.9289920707721,
+        "z": -635.03672082211,
+        "tx": -20.761542049269078,
+        "ty": -199.04237687845261,
+        "tz": -631.8977761170889,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/caveguard/caveguard-attack-f26.jpg",
+      "phase": "attack",
+      "n": 26,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.08000000000000007,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.06230586150776819,
+        "hipsY": 1.1863261743671814,
+        "armL": -0.09999999999999992,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -20.22711495198379,
+          "y": -199.04237687845261,
+          "z": -631.8490160569426
+        },
+        "size": {
+          "x": 3.73832185552849,
+          "y": 3.4771589759788526,
+          "z": 2.5002298836175214
+        },
+        "yaw": 1.4883990349334284,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 12022,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -13.063600898077276,
+        "y": -197.9289920707721,
+        "z": -635.2319793540403,
+        "tx": -20.22711495198379,
+        "ty": -199.04237687845261,
+        "tz": -631.8490160569426,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/caveguard/caveguard-attack-f30.jpg",
+      "phase": "attack",
+      "n": 30,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.181052899357385,
+        "armL": -0.09999999999999992,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -19.154866897330212,
+          "y": -199.04237687845261,
+          "z": -631.8039146780172
+        },
+        "size": {
+          "x": 2.6137862559939578,
+          "y": 3.720811421770975,
+          "z": 2.8288685648728915
+        },
+        "yaw": 1.550158212288108,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 12022,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -12.213806264477675,
+        "y": -197.9289920707721,
+        "z": -635.6225599300786,
+        "tx": -19.154866897330212,
+        "ty": -199.04237687845261,
+        "tz": -631.8039146780172,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/caveguard/caveguard-death-f00.jpg",
+      "phase": "death",
+      "n": 0,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.181052899357385,
+        "armL": -0.09999999999999992,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -19.154866897330212,
+          "y": -199.04237687845261,
+          "z": -631.8039146780172
+        },
+        "size": {
+          "x": 2.6137862559939578,
+          "y": 3.720811421770975,
+          "z": 2.8288685648728915
+        },
+        "yaw": 1.550158212288108,
+        "info": {
+          "meshes": 4,
+          "drawables": 4,
+          "tris": 12070,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -12.213806264477675,
+        "y": -197.9289920707721,
+        "z": -635.6225599300786,
+        "tx": -19.154866897330212,
+        "ty": -199.04237687845261,
+        "tz": -631.8039146780172,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/caveguard/caveguard-death-f01.jpg",
+      "phase": "death",
+      "n": 1,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.016666666666666666,
+        "corpseRX": 2.8406075735570564,
+        "corpseRZ": -2.7202996191641033,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.181052899357385,
+        "armL": -0.09999999999999992,
+        "armR": -0.17579846241975705
+      },
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -19.154866897330212,
+          "y": -199.0285721705882,
+          "z": -631.8039146780172
+        },
+        "size": {
+          "x": 2.4605566088488118,
+          "y": 3.9362846335936013,
+          "z": 3.0902691444447328
+        },
+        "yaw": 1.5234459068013801,
+        "info": {
+          "meshes": 4,
+          "drawables": 4,
+          "tris": 12070,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -12.213806264477675,
+        "y": -197.9151873629077,
+        "z": -635.6225599300786,
+        "tx": -19.154866897330212,
+        "ty": -199.0285721705882,
+        "tz": -631.8039146780172,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/caveguard/caveguard-death-f02.jpg",
+      "phase": "death",
+      "n": 2,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.03333333333333333,
+        "corpseRX": 3.0231867850611844,
+        "corpseRZ": -2.7877161501707564,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.181052899357385,
+        "armL": -0.09999999999999992,
+        "armR": -0.3309958457260256
+      },
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -19.154866897330212,
+          "y": -199.01549209871925,
+          "z": -631.8039146780172
+        },
+        "size": {
+          "x": 2.3744722613342475,
+          "y": 3.7386358573845087,
+          "z": 2.9437446353159658
+        },
+        "yaw": 1.4625501918090629,
+        "info": {
+          "meshes": 4,
+          "drawables": 4,
+          "tris": 12070,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -12.213806264477675,
+        "y": -197.90210729103873,
+        "z": -635.6225599300786,
+        "tx": -19.154866897330212,
+        "ty": -199.01549209871925,
+        "tz": -631.8039146780172,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/caveguard/caveguard-death-f03.jpg",
+      "phase": "death",
+      "n": 3,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.05,
+        "corpseRX": -3.1337926744282796,
+        "corpseRZ": -2.803978818563197,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.181052899357385,
+        "armL": -0.09999999999999992,
+        "armR": -0.46637708567471325
+      },
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -19.154866897330212,
+          "y": -199.0031219098261,
+          "z": -631.8039146780172
+        },
+        "size": {
+          "x": 2.4626597772417433,
+          "y": 3.574894940021778,
+          "z": 3.082810922434078
+        },
+        "yaw": 1.4067741353349206,
+        "info": {
+          "meshes": 4,
+          "drawables": 4,
+          "tris": 12070,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -12.213806264477675,
+        "y": -197.88973710214557,
+        "z": -635.6225599300786,
+        "tx": -19.154866897330212,
+        "ty": -199.0031219098261,
+        "tz": -631.8039146780172,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/caveguard/caveguard-death-f04.jpg",
+      "phase": "death",
+      "n": 4,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.06666666666666667,
+        "corpseRX": -3.0220534685502947,
+        "corpseRZ": -2.8110661509683728,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.181052899357385,
+        "armL": -0.09999999999999992,
+        "armR": -0.582964355935202
+      },
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -19.154866897330212,
+          "y": -198.99144664353918,
+          "z": -631.8039146780172
+        },
+        "size": {
+          "x": 2.6062120103700437,
+          "y": 3.4231339178117253,
+          "z": 3.2355211730292694
+        },
+        "yaw": 1.3558695290065546,
+        "info": {
+          "meshes": 4,
+          "drawables": 4,
+          "tris": 12070,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -12.213806264477675,
+        "y": -197.87806183585866,
+        "z": -635.6225599300786,
+        "tx": -19.154866897330212,
+        "ty": -198.99144664353918,
+        "tz": -631.8039146780172,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/caveguard/caveguard-death-f06.jpg",
+      "phase": "death",
+      "n": 6,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.09999999999999999,
+        "corpseRX": -2.8212854190190204,
+        "corpseRZ": -2.8186273894639258,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.181052899357385,
+        "armL": -0.09999999999999992,
+        "armR": -0.7647845895584896
+      },
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -19.154866897330212,
+          "y": -198.970119936143,
+          "z": -631.8039146780172
+        },
+        "size": {
+          "x": 2.8509470553924743,
+          "y": 3.1844276393582334,
+          "z": 3.6282115801526515
+        },
+        "yaw": 1.2672641921412418,
+        "info": {
+          "meshes": 4,
+          "drawables": 4,
+          "tris": 12070,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -12.213806264477675,
+        "y": -197.85673512846247,
+        "z": -635.6225599300786,
+        "tx": -19.154866897330212,
+        "ty": -198.970119936143,
+        "tz": -631.8039146780172,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/caveguard/caveguard-death-f08.jpg",
+      "phase": "death",
+      "n": 8,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.13333333333333333,
+        "corpseRX": -2.6436540377069786,
+        "corpseRZ": -2.824682648118387,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.181052899357385,
+        "armL": -0.09999999999999992,
+        "armR": -0.8878027509314093
+      },
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -19.154866897330212,
+          "y": -198.95138771965466,
+          "z": -631.8039146780172
+        },
+        "size": {
+          "x": 3.0483401517356086,
+          "y": 3.131447111789413,
+          "z": 3.868446079695218
+        },
+        "yaw": 1.193976405156823,
+        "info": {
+          "meshes": 4,
+          "drawables": 4,
+          "tris": 12070,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -12.213806264477675,
+        "y": -197.83800291197414,
+        "z": -635.6225599300786,
+        "tx": -19.154866897330212,
+        "ty": -198.95138771965466,
+        "tz": -631.8039146780172,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/caveguard/caveguard-death-f12.jpg",
+      "phase": "death",
+      "n": 12,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.19999999999999998,
+        "corpseRX": -2.3511449576745567,
+        "corpseRZ": -2.838003280517882,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.181052899357385,
+        "armL": -0.09999999999999992,
+        "armR": -1.0073576646296767
+      },
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -19.154866897330212,
+          "y": -198.9211886799471,
+          "z": -631.8039146780172
+        },
+        "size": {
+          "x": 3.365607292777117,
+          "y": 3.263939723126242,
+          "z": 4.170858725815037
+        },
+        "yaw": 1.0839398128898083,
+        "info": {
+          "meshes": 4,
+          "drawables": 4,
+          "tris": 12070,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -12.213806264477675,
+        "y": -197.8078038722666,
+        "z": -635.6225599300786,
+        "tx": -19.154866897330212,
+        "ty": -198.9211886799471,
+        "tz": -631.8039146780172,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/caveguard/caveguard-death-f20.jpg",
+      "phase": "death",
+      "n": 20,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.3333333333333333,
+        "corpseRX": -1.9992613674973365,
+        "corpseRZ": -2.8624762690434027,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.181052899357385,
+        "armL": -0.09999999999999992,
+        "armR": -1.0367400302360426
+      },
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -19.154866897330212,
+          "y": -198.88592516095406,
+          "z": -631.8039146780172
+        },
+        "size": {
+          "x": 3.9038462601051016,
+          "y": 3.6062439084418543,
+          "z": 4.819094266105253
+        },
+        "yaw": 0.9654571763998824,
+        "info": {
+          "meshes": 4,
+          "drawables": 4,
+          "tris": 12070,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -12.213806264477675,
+        "y": -197.77254035327354,
+        "z": -635.6225599300786,
+        "tx": -19.154866897330212,
+        "ty": -198.88592516095406,
+        "tz": -631.8039146780172,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/caveguard/caveguard-death-f40.jpg",
+      "phase": "death",
+      "n": 40,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.6666666666666671,
+        "corpseRX": -1.825362708767263,
+        "corpseRZ": -2.8667850978638287,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.181052899357385,
+        "armL": -0.09999999999999992,
+        "armR": -1.05
+      },
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -19.154866897330212,
+          "y": -198.8751768784526,
+          "z": -631.8039146780172
+        },
+        "size": {
+          "x": 4.1704864574149845,
+          "y": 3.639323541099145,
+          "z": 5.432873287848679
+        },
+        "yaw": 0.9415019532626986,
+        "info": {
+          "meshes": 4,
+          "drawables": 4,
+          "tris": 12070,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -12.213806264477675,
+        "y": -197.76180026406516,
+        "z": -635.6225599300786,
+        "tx": -19.154866897330212,
+        "ty": -198.87518507174568,
+        "tz": -631.8039146780172,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/caveguard/caveguard-death-f80.jpg",
+      "phase": "death",
+      "n": 80,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 1.3333333333333335,
+        "corpseRX": -1.8900998162070979,
+        "corpseRZ": -2.872117777375614,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.181052899357385,
+        "armL": -0.09999999999999992,
+        "armR": -1.05
+      },
+      "subject": {
+        "id": "zombie.caveguard",
+        "name": "Cave Guardian",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -19.154866897330212,
+          "y": -198.8751768784526,
+          "z": -631.8039146780172
+        },
+        "size": {
+          "x": 4.0328856533067885,
+          "y": 3.332811376795007,
+          "z": 5.411185507609503
+        },
+        "yaw": 0.9307869716446223,
+        "info": {
+          "meshes": 4,
+          "drawables": 4,
+          "tris": 12070,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -12.213806264477675,
+        "y": -197.76180026406516,
+        "z": -635.6225599300786,
+        "tx": -19.154866897330212,
+        "ty": -198.87518507174568,
+        "tz": -631.8039146780172,
+        "fov": 40
+      }
+    }
+  ],
+  "errors": [],
+  "pageErrors": []
+}

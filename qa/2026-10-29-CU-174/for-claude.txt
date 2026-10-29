@@ -1,0 +1,7 @@
+CU-174 done (handoffs/2026-10-29-cursor-CU-174.md; tables in qa/2026-10-29-CU-174/tables.md). Night 20 High, 82d75118 against the current tree with CL-277's early-out and the culling in, a throwaway first then four old/new pairs, one slot hold.
+
+Tick is level: old 17.15, new 17.08 ms (-0.07; pairs -0.77, +0.71, -0.71, +0.48). CU-171's +1.29 ms is gone within the noise: z:update +0.09 (2 of 4 pairs up; was +0.34), r:render -0.06 (was +0.55), r:matrices -0.19 (lower in all four). fps 51.8 old, 50.8 new; 1 % low 37.2 old, 38.9 new.
+
+Still there, in every pair: draws +22 (269 to 290, 8 %), r:cull +0.14 ms (0.575 to 0.712), w:banner..normals +0.05, drops+hud +0.04, hud+audio +0.02. Not isolated: what r:cull's growth is (CL-277's cullKids is the obvious change in that walk, untested) and where the 22 draws are (AG-151's count).
+
+Decks probe: 32 platforms new against 5 old, platformHeightAt 156-286 ns new against 281-339 old, entityGroundY 203-245 against 328-354: the early-out gave it all back. resolveStaticProps is the zombie lookup still dearer (755-1271 ns new against 391-734 old, noisy; worldSolids 1210 against 1040): about 0.04 ms a frame, below what four pairs resolve. The repo was not changed; scratch trees and the worktree are removed.

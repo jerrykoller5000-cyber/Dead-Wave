@@ -1084,51 +1084,8 @@ export function setupTrapperMission(THREE, {
       const inYardBox = Math.abs(loc.x) < Math.max(rule.POST_X + 0.25, 2.2) && loc.z > -5.5 && loc.z < rule.ENTRY_Z + 0.6;
       const isNearCl6 = nearCl6(s.x, s.z, s.radius || 0);
       if (inYardBox || isNearCl6) {
-        let trianglesBefore = 0;
-        let trianglesRemoved = 0;
-        let trianglesAfter = 0;
         if (s.landmark) {
-          // AG-140 / AG-141 (CL-256 batch 3): strip the offending camp piece's merged mesh triangles together with its
-          // collider when it sits on the CL_6 cache stand (e.g. the r=0.48 m curing frame rotated to (-38.43, 45.73),
-          // 0.78 m from (-38.06, 46.42)), and remove the collider from spawnColliders/colliders so startMatch() never restores it.
-          const geo = s.landmark.mesh?.geometry;
-          const posAttr = geo?.attributes?.position;
-          if (isNearCl6 && posAttr?.array && !geo.index) {
-            const pos = posAttr.array;
-            const nrm = geo.attributes.normal?.array || null;
-            const col = geo.attributes.color?.array || null;
-            const lx0 = s.x - (s.landmark.x || 0), lz0 = s.z - (s.landmark.z || 0);
-            const cutR = (s.radius || 0.48) + 0.43;
-            const triCount = (pos.length / 9) | 0;
-            trianglesBefore = triCount;
-            const keepTris = [];
-            for (let t = 0; t < triCount; t++) {
-              const b = t * 9;
-              const cxTri = (pos[b] + pos[b + 3] + pos[b + 6]) / 3;
-              const czTri = (pos[b + 2] + pos[b + 5] + pos[b + 8]) / 3;
-              if (Math.hypot(cxTri - lx0, czTri - lz0) > cutR) keepTris.push(t);
-            }
-            trianglesAfter = keepTris.length;
-            trianglesRemoved = triCount - keepTris.length;
-            if (keepTris.length < triCount && THREE?.BufferAttribute) {
-              const nextPos = new Float32Array(keepTris.length * 9);
-              const nextNrm = nrm ? new Float32Array(keepTris.length * 9) : null;
-              const nextCol = col ? new Float32Array(keepTris.length * 9) : null;
-              for (let k = 0; k < keepTris.length; k++) {
-                const src = keepTris[k] * 9, dst = k * 9;
-                for (let j = 0; j < 9; j++) {
-                  nextPos[dst + j] = pos[src + j];
-                  if (nextNrm) nextNrm[dst + j] = nrm[src + j];
-                  if (nextCol) nextCol[dst + j] = col[src + j];
-                }
-              }
-              geo.setAttribute('position', new THREE.BufferAttribute(nextPos, 3));
-              if (nextNrm) geo.setAttribute('normal', new THREE.BufferAttribute(nextNrm, 3));
-              if (nextCol) geo.setAttribute('color', new THREE.BufferAttribute(nextCol, 3));
-              if (typeof geo.computeBoundingSphere === 'function') geo.computeBoundingSphere();
-              if (typeof geo.computeBoundingBox === 'function') geo.computeBoundingBox();
-            }
-          }
+          // AG-149 (CL-256): keep collider clearing (colliders/spawnColliders) without cutting landmark mesh triangles.
           if (Array.isArray(s.landmark.colliders)) {
             const ci = s.landmark.colliders.indexOf(s);
             if (ci >= 0) s.landmark.colliders.splice(ci, 1);
@@ -1147,10 +1104,7 @@ export function setupTrapperMission(THREE, {
           inYardBox,
           nearCl6: isNearCl6,
           landmark: s.landmark ? (s.landmark.kind || s.landmark.type || s.landmark.id || s.landmark.mesh?.name || 'camp-trapper') : null,
-          landmarkPos: s.landmark ? [Number((s.landmark.x || 0).toFixed(2)), Number((s.landmark.z || 0).toFixed(2))] : null,
-          trianglesBefore,
-          trianglesRemoved,
-          trianglesAfter
+          landmarkPos: s.landmark ? [Number((s.landmark.x || 0).toFixed(2)), Number((s.landmark.z || 0).toFixed(2))] : null
         });
         worldSolids.splice(i, 1);
       }

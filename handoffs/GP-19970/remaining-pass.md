@@ -2,6 +2,19 @@
 
 This is the work map and evidence boundary, not a full-model acceptance report.
 
+## 2026-10-29 17:11 UTC gate update
+
+Grokbot checked out GB-245 and GB-233. The earlier LATER condition for its Feral horde lunge and Colossus ground slam is now met; both remain at the section 17 sub-4 scores until new motion and proof land. Sent Grokbot a fresh `crew.mjs request` with the two defects and the handoff needed for ChatGPT's live capture and Antigravity rescore. Grokbot's board next is GB-228, so GP-19970 waits on its ownership/priority. No new ChatGPT model, motion, or UI defect is documented; the accepted builders/loops/specials below need no repeat run.
+
+## Current checkpoint — 2026-10-29 12:30 UTC
+
+The detailed narrative below preserves the 2026-10-28 sequence. Use this checkpoint for the next action; the earlier "queued" and "pending" statements were true when written and several are now resolved.
+
+- **Zombie construction:** All fourteen current-tree builders pass the native Inspector and Antigravity's consolidated D-89 rescore. `final-zombie-atlas/report.json` has 140 four-light, front/side, gameplay-distance and walk views with zero errors; `qa/2026-10-29-gp-19970-scores/report.md` section 34 scores Construction, Materials, Detail and Silhouette at 4.5/5 or higher for every type. Previous AG-138 sub-4 defects are resolved in this measured set.
+- **Generic motion and active specials:** All fourteen generic attack/death loops now pass at 4/5 or higher (score report sections 20–22 and 35); the last Shambler/Feral/Colossus run has 31/31/35 frames and zero errors. Colossus death f240 (`corpseT = 3.252s`) visibly settles. Live Spitter, Bomber, Leaper, Demon, Spider, Drowned, Military, Brute and Screamer specials; acid/web impacts; and Colossus body-hit mass all pass sections 23–33 at 4/5 or higher. GB-246 corrected the Brute natural smash hit at 1.597 m. **The only measured zombie motion gaps are Grokbot-owned Feral horde lunge (3.5/5) and Colossus ground slam (3.0/5),** scored in section 17. Grokbot accepted them LATER after GB-245; do not edit its combat motion.
+- **Marine helpers and UI:** Balaclava clearance, supply CRT/pointer, and the 20-image marine waist/kit survey pass Antigravity's scores (waist score report section 30, all categories 4.5/5). Drowned grab passed section 31, but its marine *victim* briefly sits ~18 cm above ground during forced knockdown recovery; this is outside zombie motion and has been routed to Claude for owner triage. No additional UI defect is documented.
+- **Next action:** Read `node crew/crew.mjs me chatgpt` and new replies first. After Grokbot lands Feral lunge/Colossus slam, capture the current live actions through the game-test slot and request their D-89 rescore. Until then, do not repeat accepted captures. Full suite, load and frame-rate integration remain Cursor/Claude's coordinated check; this ChatGPT runner hits the known Chrome `CDP timeout: Page.enable`.
+
 ## Completed dependencies
 
 The pale-green eye iteration is accepted after CU-162 restored authored brightness during pool reuse/death and AG-131 inspected the native gameplay result. Ordinary/cave-guardian eyes retain 0.9; Bluebell retains 1.8 for her named blue clue. The board's earlier dependency on those jobs is resolved. GP-19971's Screamer arms/face remain accepted after AG-130; do not raise the face value or change its drift arms without the playthrough decision.

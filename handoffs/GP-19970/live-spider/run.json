@@ -1,0 +1,223 @@
+{
+  "at": "2026-10-29T10:19:44.220Z",
+  "samples": [
+    {
+      "t": 27.466,
+      "alive": true,
+      "wind": 0,
+      "snap": 0,
+      "cooldown": 0.125,
+      "shot": false,
+      "lineClear": true,
+      "distance": 9,
+      "xyz": [
+        0.051128999990746375,
+        -3.1686761379241943,
+        17
+      ],
+      "yaw": 3.141592653589793,
+      "head": -0.12
+    },
+    {
+      "t": 27.503,
+      "alive": true,
+      "wind": 0,
+      "snap": 0,
+      "cooldown": 0.082,
+      "shot": false,
+      "lineClear": true,
+      "distance": 9.001,
+      "xyz": [
+        0.13972353664733872,
+        -3.1686761379241943,
+        16.99992688320363
+      ],
+      "yaw": -3.1403225280624003,
+      "head": -0.12000137122917491
+    },
+    {
+      "t": 27.537,
+      "alive": true,
+      "wind": 0,
+      "snap": 0,
+      "cooldown": 0.047,
+      "shot": false,
+      "lineClear": true,
+      "distance": 9.002,
+      "xyz": [
+        0.21258287773961893,
+        -3.1686761379241943,
+        16.999715166739207
+      ],
+      "yaw": -3.138063958734655,
+      "head": -0.1200125861439333
+    },
+    {
+      "t": 27.593,
+      "alive": true,
+      "wind": 0.38,
+      "snap": 0,
+      "cooldown": -0.005,
+      "shot": false,
+      "lineClear": true,
+      "distance": 9.005,
+      "xyz": [
+        0.32000034376447506,
+        -3.1686761379241943,
+        16.99899937692838
+      ],
+      "yaw": -3.1331802370568944,
+      "head": -0.12006430508117753
+    },
+    {
+      "t": 27.989,
+      "alive": true,
+      "wind": 0.001,
+      "snap": 0,
+      "cooldown": -0.384,
+      "shot": false,
+      "lineClear": true,
+      "distance": 9.007,
+      "xyz": [
+        0.4611512762455356,
+        -3.1686761379241943,
+        16.99532104491054
+      ],
+      "yaw": -3.103351318361128,
+      "head": -0.36028906409151235
+    },
+    {
+      "t": 28.049,
+      "alive": true,
+      "wind": 0,
+      "snap": 0.191,
+      "cooldown": 7.453,
+      "shot": false,
+      "lineClear": true,
+      "distance": 9.008,
+      "xyz": [
+        0.528169866761389,
+        -3.1686761379241943,
+        16.99259687813243
+      ],
+      "yaw": -3.1008135235834593,
+      "head": 0.0012257086765287552
+    },
+    {
+      "t": 28.512,
+      "alive": true,
+      "wind": 0,
+      "snap": 0,
+      "cooldown": 6.978,
+      "shot": false,
+      "lineClear": true,
+      "distance": 9.045,
+      "xyz": [
+        1.508627563860174,
+        -3.1686761379241943,
+        16.91859541573754
+      ],
+      "yaw": -3.023881979835004,
+      "head": -0.12160277577873477
+    },
+    {
+      "t": 28.547,
+      "alive": true,
+      "wind": 0,
+      "snap": 0,
+      "cooldown": 6.942,
+      "shot": false,
+      "lineClear": true,
+      "distance": 9.049,
+      "xyz": [
+        1.5825371744289891,
+        -3.1686761379241943,
+        16.9094268439463
+      ],
+      "yaw": -3.016260675911787,
+      "head": -0.1217311590967203
+    }
+  ],
+  "shots": [
+    {
+      "file": "spider-01.png",
+      "elapsed": 153,
+      "state": {
+        "t": 27.593,
+        "alive": true,
+        "wind": 0.38,
+        "snap": 0,
+        "cooldown": -0.005,
+        "shot": false,
+        "lineClear": true,
+        "distance": 9.005,
+        "xyz": [
+          0.32000034376447506,
+          -3.1686761379241943,
+          16.99899937692838
+        ],
+        "yaw": -3.1331802370568944,
+        "head": -0.12006430508117753
+      }
+    },
+    {
+      "file": "spider-02.png",
+      "elapsed": 609,
+      "state": {
+        "t": 28.049,
+        "alive": true,
+        "wind": 0,
+        "snap": 0.191,
+        "cooldown": 7.453,
+        "shot": false,
+        "lineClear": true,
+        "distance": 9.008,
+        "xyz": [
+          0.528169866761389,
+          -3.1686761379241943,
+          16.99259687813243
+        ],
+        "yaw": -3.1008135235834593,
+        "head": 0.0012257086765287552
+      }
+    },
+    {
+      "file": "spider-03.png",
+      "elapsed": 1107,
+      "state": {
+        "t": 28.547,
+        "alive": true,
+        "wind": 0,
+        "snap": 0,
+        "cooldown": 6.942,
+        "shot": false,
+        "lineClear": true,
+        "distance": 9.049,
+        "xyz": [
+          1.5825371744289891,
+          -3.1686761379241943,
+          16.9094268439463
+        ],
+        "yaw": -3.016260675911787,
+        "head": -0.1217311590967203
+      }
+    }
+  ],
+  "errors": [],
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "loadSec": 27.42,
+  "setup": {
+    "jumped": true,
+    "spawned": true,
+    "phase": "wave",
+    "grace": false,
+    "type": "spider",
+    "tactics": "spit",
+    "spider": true,
+    "position": [
+      0,
+      -3.1686761379241943,
+      17
+    ]
+  }
+}

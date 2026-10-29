@@ -1,0 +1,358 @@
+{
+ "shots": [
+  {
+   "target": "weapon.holy-grenade",
+   "view": "three",
+   "out": "review/principles/claude/props/weapon.holy-grenade-three.png"
+  },
+  {
+   "target": "weapon.holy-grenade",
+   "view": "front",
+   "out": "review/principles/claude/props/weapon.holy-grenade-front.png"
+  },
+  {
+   "target": "weapon.shovel",
+   "view": "three",
+   "out": "review/principles/claude/props/weapon.shovel-three.png"
+  },
+  {
+   "target": "weapon.shovel",
+   "view": "front",
+   "out": "review/principles/claude/props/weapon.shovel-front.png"
+  },
+  {
+   "target": "prop.parachute",
+   "view": "three",
+   "out": "review/principles/claude/props/prop.parachute-three.png"
+  },
+  {
+   "target": "prop.parachute",
+   "view": "front",
+   "out": "review/principles/claude/props/prop.parachute-front.png"
+  },
+  {
+   "target": "prop.tree",
+   "view": "three",
+   "out": "review/principles/claude/props/prop.tree-three.png"
+  },
+  {
+   "target": "prop.tree",
+   "view": "front",
+   "out": "review/principles/claude/props/prop.tree-front.png"
+  },
+  {
+   "target": "prop.fire",
+   "view": "three",
+   "out": "review/principles/claude/props/prop.fire-three.png"
+  },
+  {
+   "target": "prop.fire",
+   "view": "front",
+   "out": "review/principles/claude/props/prop.fire-front.png"
+  },
+  {
+   "target": "prop.bone-raft",
+   "view": "three",
+   "out": "review/principles/claude/props/prop.bone-raft-three.png"
+  },
+  {
+   "target": "prop.bone-raft",
+   "view": "front",
+   "out": "review/principles/claude/props/prop.bone-raft-front.png"
+  },
+  {
+   "target": "prop.insulated-boots",
+   "view": "three",
+   "out": "review/principles/claude/props/prop.insulated-boots-three.png"
+  },
+  {
+   "target": "prop.insulated-boots",
+   "view": "front",
+   "out": "review/principles/claude/props/prop.insulated-boots-front.png"
+  },
+  {
+   "target": "prop.rubber-boot",
+   "view": "three",
+   "out": "review/principles/claude/props/prop.rubber-boot-three.png"
+  },
+  {
+   "target": "prop.rubber-boot",
+   "view": "front",
+   "out": "review/principles/claude/props/prop.rubber-boot-front.png"
+  },
+  {
+   "target": "prop.worn-boots",
+   "view": "three",
+   "out": "review/principles/claude/props/prop.worn-boots-three.png"
+  },
+  {
+   "target": "prop.worn-boots",
+   "view": "front",
+   "out": "review/principles/claude/props/prop.worn-boots-front.png"
+  },
+  {
+   "target": "prop.rabbit-mound",
+   "view": "three",
+   "out": "review/principles/claude/props/prop.rabbit-mound-three.png"
+  },
+  {
+   "target": "prop.rabbit-mound",
+   "view": "front",
+   "out": "review/principles/claude/props/prop.rabbit-mound-front.png"
+  },
+  {
+   "target": "prop.reliquary",
+   "view": "three",
+   "out": "review/principles/claude/props/prop.reliquary-three.png"
+  },
+  {
+   "target": "prop.reliquary",
+   "view": "front",
+   "out": "review/principles/claude/props/prop.reliquary-front.png"
+  },
+  {
+   "target": "prop.relay-vault",
+   "view": "three",
+   "out": "review/principles/claude/props/prop.relay-vault-three.png"
+  },
+  {
+   "target": "prop.relay-vault",
+   "view": "front",
+   "out": "review/principles/claude/props/prop.relay-vault-front.png"
+  },
+  {
+   "target": "prop.pit-tentacles",
+   "view": "three",
+   "out": "review/principles/claude/props/prop.pit-tentacles-three.png"
+  },
+  {
+   "target": "prop.pit-tentacles",
+   "view": "front",
+   "out": "review/principles/claude/props/prop.pit-tentacles-front.png"
+  },
+  {
+   "target": "prop.survey-board",
+   "view": "three",
+   "out": "review/principles/claude/props/prop.survey-board-three.png"
+  },
+  {
+   "target": "prop.survey-board",
+   "view": "front",
+   "out": "review/principles/claude/props/prop.survey-board-front.png"
+  },
+  {
+   "target": "prop.lockdown-door",
+   "view": "three",
+   "out": "review/principles/claude/props/prop.lockdown-door-three.png"
+  },
+  {
+   "target": "prop.lockdown-door",
+   "view": "front",
+   "out": "review/principles/claude/props/prop.lockdown-door-front.png"
+  },
+  {
+   "target": "prop.cordon-gate",
+   "view": "three",
+   "out": "review/principles/claude/props/prop.cordon-gate-three.png"
+  },
+  {
+   "target": "prop.cordon-gate",
+   "view": "front",
+   "out": "review/principles/claude/props/prop.cordon-gate-front.png"
+  },
+  {
+   "target": "prop.trailhead-board",
+   "view": "three",
+   "out": "review/principles/claude/props/prop.trailhead-board-three.png"
+  },
+  {
+   "target": "prop.trailhead-board",
+   "view": "front",
+   "out": "review/principles/claude/props/prop.trailhead-board-front.png"
+  },
+  {
+   "target": "prop.hikers-cache",
+   "view": "three",
+   "out": "review/principles/claude/props/prop.hikers-cache-three.png"
+  },
+  {
+   "target": "prop.hikers-cache",
+   "view": "front",
+   "out": "review/principles/claude/props/prop.hikers-cache-front.png"
+  },
+  {
+   "target": "prop.ranger-truck",
+   "view": "three",
+   "out": "review/principles/claude/props/prop.ranger-truck-three.png"
+  },
+  {
+   "target": "prop.ranger-truck",
+   "view": "front",
+   "out": "review/principles/claude/props/prop.ranger-truck-front.png"
+  },
+  {
+   "target": "prop.brass",
+   "view": "three",
+   "out": "review/principles/claude/props/prop.brass-three.png"
+  },
+  {
+   "target": "prop.brass",
+   "view": "front",
+   "out": "review/principles/claude/props/prop.brass-front.png"
+  },
+  {
+   "target": "prop.dropped-helmet",
+   "view": "three",
+   "out": "review/principles/claude/props/prop.dropped-helmet-three.png"
+  },
+  {
+   "target": "prop.dropped-helmet",
+   "view": "front",
+   "out": "review/principles/claude/props/prop.dropped-helmet-front.png"
+  },
+  {
+   "target": "prop.iron-below-boards",
+   "view": "three",
+   "out": "review/principles/claude/props/prop.iron-below-boards-three.png"
+  },
+  {
+   "target": "prop.iron-below-boards",
+   "view": "front",
+   "out": "review/principles/claude/props/prop.iron-below-boards-front.png"
+  },
+  {
+   "target": "prop.mine-timbers",
+   "view": "three",
+   "out": "review/principles/claude/props/prop.mine-timbers-three.png"
+  },
+  {
+   "target": "prop.mine-timbers",
+   "view": "front",
+   "out": "review/principles/claude/props/prop.mine-timbers-front.png"
+  },
+  {
+   "target": "prop.cut-bars",
+   "view": "three",
+   "out": "review/principles/claude/props/prop.cut-bars-three.png"
+  },
+  {
+   "target": "prop.cut-bars",
+   "view": "front",
+   "out": "review/principles/claude/props/prop.cut-bars-front.png"
+  },
+  {
+   "target": "prop.horseshoe",
+   "view": "three",
+   "out": "review/principles/claude/props/prop.horseshoe-three.png"
+  },
+  {
+   "target": "prop.horseshoe",
+   "view": "front",
+   "out": "review/principles/claude/props/prop.horseshoe-front.png"
+  },
+  {
+   "target": "prop.ruined-foundation",
+   "view": "three",
+   "out": "review/principles/claude/props/prop.ruined-foundation-three.png"
+  },
+  {
+   "target": "prop.ruined-foundation",
+   "view": "front",
+   "out": "review/principles/claude/props/prop.ruined-foundation-front.png"
+  },
+  {
+   "target": "prop.chimney",
+   "view": "three",
+   "out": "review/principles/claude/props/prop.chimney-three.png"
+  },
+  {
+   "target": "prop.chimney",
+   "view": "front",
+   "out": "review/principles/claude/props/prop.chimney-front.png"
+  },
+  {
+   "target": "prop.church",
+   "view": "three",
+   "out": "review/principles/claude/props/prop.church-three.png"
+  },
+  {
+   "target": "prop.church",
+   "view": "front",
+   "out": "review/principles/claude/props/prop.church-front.png"
+  },
+  {
+   "target": "prop.iron-banded-grave",
+   "view": "three",
+   "out": "review/principles/claude/props/prop.iron-banded-grave-three.png"
+  },
+  {
+   "target": "prop.iron-banded-grave",
+   "view": "front",
+   "out": "review/principles/claude/props/prop.iron-banded-grave-front.png"
+  },
+  {
+   "target": "prop.open-grave",
+   "view": "three",
+   "out": "review/principles/claude/props/prop.open-grave-three.png"
+  },
+  {
+   "target": "prop.open-grave",
+   "view": "front",
+   "out": "review/principles/claude/props/prop.open-grave-front.png"
+  },
+  {
+   "target": "prop.traps",
+   "view": "three",
+   "out": "review/principles/claude/props/prop.traps-three.png"
+  },
+  {
+   "target": "prop.traps",
+   "view": "front",
+   "out": "review/principles/claude/props/prop.traps-front.png"
+  },
+  {
+   "target": "prop.cellar-hatch",
+   "view": "three",
+   "out": "review/principles/claude/props/prop.cellar-hatch-three.png"
+  },
+  {
+   "target": "prop.cellar-hatch",
+   "view": "front",
+   "out": "review/principles/claude/props/prop.cellar-hatch-front.png"
+  },
+  {
+   "target": "prop.standing-stone",
+   "view": "three",
+   "out": "review/principles/claude/props/prop.standing-stone-three.png"
+  },
+  {
+   "target": "prop.standing-stone",
+   "view": "front",
+   "out": "review/principles/claude/props/prop.standing-stone-front.png"
+  },
+  {
+   "target": "prop.ring-stone",
+   "view": "three",
+   "out": "review/principles/claude/props/prop.ring-stone-three.png"
+  },
+  {
+   "target": "prop.ring-stone",
+   "view": "front",
+   "out": "review/principles/claude/props/prop.ring-stone-front.png"
+  },
+  {
+   "target": "prop.marrow-door",
+   "view": "three",
+   "out": "review/principles/claude/props/prop.marrow-door-three.png"
+  },
+  {
+   "target": "prop.marrow-door",
+   "view": "front",
+   "out": "review/principles/claude/props/prop.marrow-door-front.png"
+  }
+ ],
+ "out": "review/principles/claude/props/",
+ "sheet": true,
+ "cols": 4,
+ "tile": 480
+}

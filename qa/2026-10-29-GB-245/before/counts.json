@@ -1,0 +1,554 @@
+[
+  {
+    "gun": "m4",
+    "pick": "{\"want\":\"m4\",\"w\":\"m4\",\"reloading\":true,\"dbg\":{\"timer\":0.7345999999977647,\"anim\":0.9299999999999999,\"weapon\":\"m4\"}}",
+    "switched": true,
+    "frames": [
+      {
+        "u": 0.05,
+        "glovePixels": 23395,
+        "box": [
+          0,
+          731,
+          428,
+          899
+        ]
+      },
+      {
+        "u": 0.2,
+        "glovePixels": 3544,
+        "box": [
+          0,
+          783,
+          58,
+          899
+        ]
+      },
+      {
+        "u": 0.35,
+        "glovePixels": 3601,
+        "box": [
+          0,
+          783,
+          58,
+          899
+        ]
+      },
+      {
+        "u": 0.5,
+        "glovePixels": 3602,
+        "box": [
+          0,
+          784,
+          59,
+          899
+        ]
+      },
+      {
+        "u": 0.65,
+        "glovePixels": 3630,
+        "box": [
+          0,
+          785,
+          142,
+          899
+        ]
+      },
+      {
+        "u": 0.8,
+        "glovePixels": 20280,
+        "box": [
+          0,
+          662,
+          420,
+          899
+        ]
+      }
+    ],
+    "noise": 0
+  },
+  {
+    "gun": "ak",
+    "pick": "{\"want\":\"ak\",\"w\":\"ak\",\"reloading\":true,\"dbg\":{\"timer\":0.9761999999992547,\"anim\":1.2,\"weapon\":\"ak\"}}",
+    "switched": true,
+    "frames": [
+      {
+        "u": 0.05,
+        "glovePixels": 20931,
+        "box": [
+          0,
+          694,
+          449,
+          899
+        ]
+      },
+      {
+        "u": 0.2,
+        "glovePixels": 4878,
+        "box": [
+          0,
+          700,
+          65,
+          840
+        ]
+      },
+      {
+        "u": 0.35,
+        "glovePixels": 5021,
+        "box": [
+          0,
+          699,
+          67,
+          843
+        ]
+      },
+      {
+        "u": 0.5,
+        "glovePixels": 5197,
+        "box": [
+          0,
+          701,
+          68,
+          846
+        ]
+      },
+      {
+        "u": 0.65,
+        "glovePixels": 7052,
+        "box": [
+          0,
+          701,
+          223,
+          899
+        ]
+      },
+      {
+        "u": 0.8,
+        "glovePixels": 16875,
+        "box": [
+          0,
+          621,
+          465,
+          839
+        ]
+      }
+    ],
+    "noise": 0
+  },
+  {
+    "gun": "aa12",
+    "pick": "{\"want\":\"aa12\",\"w\":\"aa12\",\"reloading\":true,\"dbg\":{\"timer\":1.3248000000007456,\"anim\":1.56,\"weapon\":\"aa12\"}}",
+    "switched": true,
+    "frames": [
+      {
+        "u": 0.05,
+        "glovePixels": 86,
+        "box": [
+          476,
+          875,
+          487,
+          889
+        ]
+      },
+      {
+        "u": 0.2,
+        "glovePixels": 0,
+        "box": null
+      },
+      {
+        "u": 0.35,
+        "glovePixels": 0,
+        "box": null
+      },
+      {
+        "u": 0.5,
+        "glovePixels": 0,
+        "box": null
+      },
+      {
+        "u": 0.65,
+        "glovePixels": 0,
+        "box": null
+      },
+      {
+        "u": 0.8,
+        "glovePixels": 9977,
+        "box": [
+          317,
+          715,
+          472,
+          899
+        ]
+      }
+    ],
+    "noise": 0
+  },
+  {
+    "gun": "shotgun",
+    "pick": "{\"want\":\"shotgun\",\"w\":\"shotgun\",\"reloading\":true,\"dbg\":{\"timer\":0.17469999999925495,\"anim\":0.42,\"weapon\":\"shotgun\"}}",
+    "switched": true,
+    "frames": [
+      {
+        "u": 0.05,
+        "glovePixels": 18301,
+        "box": [
+          0,
+          586,
+          511,
+          899
+        ]
+      },
+      {
+        "u": 0.2,
+        "glovePixels": 6286,
+        "box": [
+          0,
+          686,
+          74,
+          863
+        ]
+      },
+      {
+        "u": 0.35,
+        "glovePixels": 5011,
+        "box": [
+          0,
+          666,
+          62,
+          839
+        ]
+      },
+      {
+        "u": 0.5,
+        "glovePixels": 32433,
+        "box": [
+          0,
+          579,
+          420,
+          837
+        ]
+      },
+      {
+        "u": 0.65,
+        "glovePixels": 23981,
+        "box": [
+          0,
+          524,
+          432,
+          850
+        ]
+      },
+      {
+        "u": 0.8,
+        "glovePixels": 23732,
+        "box": [
+          0,
+          535,
+          450,
+          874
+        ]
+      }
+    ],
+    "noise": 0
+  },
+  {
+    "gun": "sniper",
+    "pick": "{\"want\":\"sniper\",\"w\":\"sniper\",\"reloading\":true,\"dbg\":{\"timer\":1.1490999999977645,\"anim\":1.41,\"weapon\":\"sniper\"}}",
+    "switched": true,
+    "frames": [
+      {
+        "u": 0.05,
+        "glovePixels": 21672,
+        "box": [
+          0,
+          675,
+          438,
+          899
+        ]
+      },
+      {
+        "u": 0.2,
+        "glovePixels": 0,
+        "box": null
+      },
+      {
+        "u": 0.35,
+        "glovePixels": 0,
+        "box": null
+      },
+      {
+        "u": 0.5,
+        "glovePixels": 580,
+        "box": [
+          32,
+          873,
+          75,
+          899
+        ]
+      },
+      {
+        "u": 0.65,
+        "glovePixels": 63972,
+        "box": [
+          0,
+          579,
+          340,
+          899
+        ]
+      },
+      {
+        "u": 0.8,
+        "glovePixels": 25495,
+        "box": [
+          0,
+          569,
+          148,
+          862
+        ]
+      }
+    ],
+    "noise": 0
+  },
+  {
+    "gun": "launcher",
+    "pick": "{\"want\":\"launcher\",\"w\":\"launcher\",\"reloading\":true,\"dbg\":{\"timer\":0.16800000000000004,\"anim\":0.4,\"weapon\":\"launcher\"}}",
+    "switched": true,
+    "frames": [
+      {
+        "u": 0.05,
+        "glovePixels": 12478,
+        "box": [
+          50,
+          647,
+          562,
+          899
+        ]
+      },
+      {
+        "u": 0.2,
+        "glovePixels": 5297,
+        "box": [
+          0,
+          747,
+          90,
+          899
+        ]
+      },
+      {
+        "u": 0.35,
+        "glovePixels": 5192,
+        "box": [
+          0,
+          746,
+          94,
+          899
+        ]
+      },
+      {
+        "u": 0.5,
+        "glovePixels": 14053,
+        "box": [
+          0,
+          714,
+          219,
+          899
+        ]
+      },
+      {
+        "u": 0.65,
+        "glovePixels": 15408,
+        "box": [
+          0,
+          677,
+          254,
+          899
+        ]
+      },
+      {
+        "u": 0.8,
+        "glovePixels": 22260,
+        "box": [
+          0,
+          625,
+          308,
+          899
+        ]
+      }
+    ],
+    "noise": 0
+  },
+  {
+    "gun": "pistol",
+    "pick": "{\"want\":\"pistol\",\"w\":\"pistol\",\"reloading\":true,\"dbg\":{\"timer\":0.576,\"anim\":0.81,\"weapon\":\"pistol\"}}",
+    "switched": true,
+    "frames": [
+      {
+        "u": 0.05,
+        "glovePixels": 33844,
+        "box": [
+          452,
+          692,
+          801,
+          899
+        ]
+      },
+      {
+        "u": 0.2,
+        "glovePixels": 30118,
+        "box": [
+          471,
+          681,
+          801,
+          899
+        ]
+      },
+      {
+        "u": 0.35,
+        "glovePixels": 30293,
+        "box": [
+          470,
+          676,
+          800,
+          899
+        ]
+      },
+      {
+        "u": 0.5,
+        "glovePixels": 30555,
+        "box": [
+          468,
+          673,
+          799,
+          899
+        ]
+      },
+      {
+        "u": 0.65,
+        "glovePixels": 30800,
+        "box": [
+          466,
+          673,
+          797,
+          899
+        ]
+      },
+      {
+        "u": 0.8,
+        "glovePixels": 64237,
+        "box": [
+          463,
+          543,
+          924,
+          899
+        ]
+      }
+    ],
+    "noise": 0
+  },
+  {
+    "gun": "revolver",
+    "pick": "{\"want\":\"revolver\",\"w\":\"revolver\",\"reloading\":true,\"dbg\":{\"timer\":0.845699999999255,\"anim\":1.08,\"weapon\":\"revolver\"}}",
+    "switched": true,
+    "frames": [
+      {
+        "u": 0.05,
+        "glovePixels": 46412,
+        "box": [
+          417,
+          662,
+          865,
+          899
+        ]
+      },
+      {
+        "u": 0.2,
+        "glovePixels": 34753,
+        "box": [
+          430,
+          671,
+          792,
+          899
+        ]
+      },
+      {
+        "u": 0.35,
+        "glovePixels": 32389,
+        "box": [
+          428,
+          673,
+          771,
+          899
+        ]
+      },
+      {
+        "u": 0.5,
+        "glovePixels": 37420,
+        "box": [
+          427,
+          651,
+          832,
+          899
+        ]
+      },
+      {
+        "u": 0.65,
+        "glovePixels": 37113,
+        "box": [
+          425,
+          654,
+          830,
+          899
+        ]
+      },
+      {
+        "u": 0.8,
+        "glovePixels": 36917,
+        "box": [
+          424,
+          658,
+          828,
+          899
+        ]
+      }
+    ],
+    "noise": 0
+  },
+  {
+    "gun": "uzi",
+    "pick": "{\"want\":\"uzi\",\"w\":\"uzi\",\"reloading\":true,\"dbg\":{\"timer\":0.5619000000022352,\"anim\":0.84,\"weapon\":\"uzi\"}}",
+    "switched": true,
+    "frames": [
+      {
+        "u": 0.05,
+        "glovePixels": 0,
+        "box": null
+      },
+      {
+        "u": 0.2,
+        "glovePixels": 0,
+        "box": null
+      },
+      {
+        "u": 0.35,
+        "glovePixels": 0,
+        "box": null
+      },
+      {
+        "u": 0.5,
+        "glovePixels": 0,
+        "box": null
+      },
+      {
+        "u": 0.65,
+        "glovePixels": 0,
+        "box": null
+      },
+      {
+        "u": 0.8,
+        "glovePixels": 0,
+        "box": null
+      }
+    ],
+    "noise": 0
+  }
+]

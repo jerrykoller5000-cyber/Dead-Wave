@@ -1,0 +1,11 @@
+const fs = require('fs'); const d = 'qa/2026-10-29-GB-245/';
+let s = fs.readFileSync(d + 'montage2.mjs', 'utf8');
+const r = (a, b) => { if (s.split(a).length !== 2) throw new Error('miss ' + a); s = s.replace(a, () => b); };
+r("// montage2.mjs: GB-245's final before/after filmstrips, six frames per gun, before above / after below.", "// montage3.mjs: GB-245 part 2 filmstrips for the rifles: before above (part 1 landed, tune/clean/f), after below (patch14, tune/p14/f).");
+r("const GUNS = ['m4', 'ak', 'aa12', 'shotgun', 'sniper', 'launcher', 'pistol', 'revolver', 'uzi'];", "const GUNS = ['m4', 'ak', 'aa12'];");
+r("const US_B = [5, 20, 35, 50, 65, 80]", "const US_B = [10, 25, 40, 55, 70, 85]");
+r("${B}/before/strips/${g}-u${u}.png", "${B}/tune/clean/f/${g}-g0-u${u}-both.png");
+r("const dir = 'clean';", "const dir = 'p14';");
+r("compare-${g}.png`, s.w", "compare-${g}-part2.png`, s.w");
+r("final/compare-${g}.png ${s.w}", "final/compare-${g}-part2.png ${s.w}");
+fs.writeFileSync(d + 'montage3.mjs', s);

@@ -1,0 +1,81 @@
+// montage.mjs: the filmstrips. Six frames per gun laid out 3 across, 2 down at half size; a before/after pair puts
+// the before on top. PNG in and out through zlib, so nothing is installed (AGENTS.md rule 12).
+//   node qa/2026-10-29-GB-245/montage.mjs
+import fs from 'node:fs';
+import zlib from 'node:zlib';
+import { readPng } from './png.mjs';
+
+const GUNS = ['m4', 'ak', 'aa12', 'shotgun', 'sniper', 'launcher', 'pistol', 'revolver', 'uzi'];
+const US = [5, 20, 35, 50, 65, 80];
+const PH = ['before', 'after'];
+
+function writePng(file, w, h, rgb) {
+  const stride = w * 3, raw = Buffer.alloc((stride + 1) * h);
+  for (let y = 0; y < h; y++) {
+    raw[y * (stride + 1)] = 0;
+    rgb.copy(raw, y * (stride + 1) + 1, y * stride, (y + 1) * stride);
+  }
+  const chunks = [];
+  const chunk = (type, data) => {
+    const len = Buffer.alloc(4); len.writeUInt32BE(data.length);
+    const body = Buffer.concat([Buffer.from(type, 'ascii'), data]);
+    const crc = Buffer.alloc(4); crc.writeUInt32BE(crc32(body) >>> 0);
+    return Buffer.concat([len, body, crc]);
+  };
+  const ihdr = Buffer.alloc(13);
+  ihdr.writeUInt32BE(w, 0); ihdr.writeUInt32BE(h, 4); ihdr[8] = 8; ihdr[9] = 2; ihdr[10] = 0; ihdr[11] = 0; ihdr[12] = 0;
+  chunks.push(Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]), chunk('IHDR', ihdr), chunk('IDAT', zlib.deflateSync(raw, { level: 9 })), chunk('IEND', Buffer.alloc(0)));
+  fs.writeFileSync(file, Buffer.concat(chunks));
+}
+let CRC_T = null;
+function crc32(buf) {
+  if (!CRC_T) {
+    CRC_T = new Int32Array(256);
+    for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1; CRC_T[n] = c; }
+  }
+  let c = -1;
+  for (let i = 0; i < buf.length; i++) c = CRC_T[(c ^ buf[i]) & 255] ^ (c >>> 8);
+  return c ^ -1;
+}
+// Half size, two pixels to one so the lines stay crisp.
+function half(img) {
+  const w = img.width >> 1, h = img.height >> 1, out = Buffer.alloc(w * h * 3);
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
+      const s = ((y * 2) * img.width + x * 2) * 3, d = (y * w + x) * 3;
+      out[d] = img.data[s]; out[d + 1] = img.data[s + 1]; out[d + 2] = img.data[s + 2];
+    }
+  }
+  return { width: w, height: h, data: out };
+}
+function grid(files, cols) {
+  const tiles = files.map((f) => half(readPng(f)));
+  const tw = tiles[0].width, th = tiles[0].height, rows = Math.ceil(tiles.length / cols);
+  const w = tw * cols, h = th * rows, out = Buffer.alloc(w * h * 3, 12);
+  tiles.forEach((t, i) => {
+    const ox = (i % cols) * tw, oy = Math.floor(i / cols) * th;
+    for (let y = 0; y < t.height; y++) t.data.copy(out, ((oy + y) * w + ox) * 3, y * t.width * 3, (y + 1) * t.width * 3);
+  });
+  return { w, h, data: out };
+}
+function stack(top, bot) {
+  const w = Math.max(top.w, bot.w), out = Buffer.alloc(w * (top.h + bot.h) * 3, 12);
+  for (let y = 0; y < top.h; y++) top.data.copy(out, y * w * 3, y * top.w * 3, (y + 1) * top.w * 3);
+  for (let y = 0; y < bot.h; y++) bot.data.copy(out, (top.h + y) * w * 3, y * bot.w * 3, (y + 1) * bot.w * 3);
+  return { w, h: top.h + bot.h, data: out };
+}
+const has = (f) => { try { return fs.statSync(f).size > 1000; } catch { return false; } };
+for (const g of GUNS) {
+  const per = {};
+  for (const ph of PH) {
+    const files = US.map((u) => `qa/2026-10-29-GB-245/${ph}/${g}-u${u}.png`);
+    if (!files.every(has)) { console.log(g + ' ' + ph + ': frames missing, skipped'); continue; }
+    per[ph] = grid(files, 3);
+    writePng(`qa/2026-10-29-GB-245/${ph}/${g}-strip.png`, per[ph].w, per[ph].h, per[ph].data);
+  }
+  if (per.before && per.after) {
+    const s = stack(per.before, per.after);
+    writePng(`qa/2026-10-29-GB-245/compare-${g}.png`, s.w, s.h, s.data);
+    console.log(g + ': compare-' + g + '.png ' + s.w + 'x' + s.h + ' (before above, after below)');
+  }
+}

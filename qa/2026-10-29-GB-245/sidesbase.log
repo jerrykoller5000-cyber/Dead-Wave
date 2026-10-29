@@ -1,0 +1,24 @@
+GRANT grokbot GB-245: starting one game-test command
+camera: camera: loading the game.............................
+camera: ready in 29 s on port 17654: match, ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11), 1600x900
+help: ok
+setup: pistol
+m4        rest     u=-     R       0  L       0
+m4        reload   u=0.5   R       0  L       0
+ak        rest     u=-     R    8933  L   29594
+ak        reload   u=0.5   R       0  L       0
+aa12      rest     u=-     R      95  L   12746
+aa12      reload   u=0.5   R       0  L       0
+shotgun   rest     u=-     R    4680  L   16433
+shotgun   reload   u=0.5   R       0  L   21307
+sniper    rest     u=-     R    7076  L   22613
+sniper    reload   u=0.5   R       0  L    6699
+launcher  rest     u=-     R     123  L   11439
+launcher  reload   u=0.5   R       0  L   12438
+pistol    rest     u=-     R   25435  L   54528
+pistol    reload   u=0.5   R   43665  L   43665
+revolver  rest     u=-     R   27272  L   58098
+revolver  reload   u=0.5   R   36554  L   76521
+uzi       rest     u=-     R       0  L    2062
+uzi       reload   u=0.5   R       0  L       0
+camera stop: camera: stopped

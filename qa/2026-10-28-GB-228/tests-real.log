@@ -1,0 +1,234 @@
+GRANT grokbot GB-228: starting one game-test command
+ok    t215      4 pass   0 fail  36.0s  (real renderer)
+    PASS read index.html and the scripts and styles the game loaded (227 files)
+    PASS no broken characters in them
+    PASS the HUD reads clean: timeLine "Daylight · 08:21 · Grace", tacticalLine "NVG — · Laser — · Light —", grenadeChips "G×3H×0", ammoDetail "12 / 12  ·  50 Bullets  ·  SEMI", hpNum "100 / 100"
+    PASS and shows its dots and times signs (NVG — · Laser — · Light — / G×3H×0)
+ok    t95       9 pass   0 fail  32.9s  (real renderer)
+    PASS the pick is x0.8 (0.8)
+    PASS laser off: the cone is the gun's own
+    PASS every gun with a laser, 200 draws each: x0.8 within 5% (minigun 0.800 m4 0.800 ak 0.800 pistol 0.800 uzi 0.800 shotgun 0.801 aa12 0.801 revolver 0.800 sniper 0.800 launcher 0.800)
+    PASS AK, 2000 free draws each: 5.978 -> 4.797 mrad (x0.802)
+    PASS Z (toggleLasers) with the laser sight bought: on, and it steadies
+    PASS Z again: off
+    PASS no laser sight owned: no change (6.033 vs 6.033 mrad)
+    PASS the chainsaw has no laser: nothing to steady
+    PASS no page errors
+ok    t277     38 pass   0 fail  31.2s  (real renderer)
+    INFO minigun muzzle 0.000,0.000,1.010 box -0.164,-0.262,-0.450 / 0.283,0.320,1.000
+    INFO minigun dir 1 rearTop 0.000,0.280,-0.072 frontTop -0.000,0.108,0.938
+    PASS minigun: has a sight point
+    PASS minigun: eye above the bore, behind the muzzle, on its centre line, along it (0.00 deg)
+    PASS minigun: eye clears the top line and stays near it (eye y 0.300, top 0.320)
+    INFO m4 muzzle 0.000,0.020,0.980 box -0.046,-0.278,-0.569 / 0.085,0.168,0.978
+    INFO m4 dir 1 rearTop 0.000,0.168,0.004 frontTop 0.000,0.138,0.673
+    PASS m4: has a sight point
+    PASS m4: eye above the bore, behind the muzzle, on its centre line, along it (0.00 deg)
+    PASS m4: eye clears the top line and stays near it (eye y 0.134, top 0.168)
+    INFO ak muzzle 0.000,-0.005,1.020 box -0.048,-0.331,-0.597 / 0.095,0.097,0.994
+    INFO ak dir 1 rearTop -0.000,0.095,0.218 frontTop -0.000,0.097,0.840
+    PASS ak: has a sight point
+    PASS ak: eye above the bore, behind the muzzle, on its centre line, along it (0.18 deg)
+    PASS ak: eye clears the top line and stays near it (eye y 0.094, top 0.097)
+    INFO aa12 muzzle 0.000,0.015,0.980 box -0.155,-0.415,-0.579 / 0.155,0.180,0.976
+    INFO aa12 dir 1 rearTop 0.000,0.180,-0.120 frontTop -0.014,0.175,0.750
+    PASS aa12: has a sight point
+    PASS aa12: eye above the bore, behind the muzzle, on its centre line, along it (0.33 deg)
+    PASS aa12: eye clears the top line and stays near it (eye y 0.181, top 0.180)
+    INFO pistol muzzle 0.000,0.050,0.320 box -0.027,-0.181,-0.104 / 0.027,0.092,0.312
+    INFO pistol dir 1 rearTop 0.000,0.075,0.072 frontTop -0.002,0.087,0.287
+    PASS pistol: has a sight point
+    PASS pistol: eye above the bore, behind the muzzle, on its centre line, along it (0.82 deg)
+    PASS pistol: notch and tip are on the gun (notch found, tip y 0.087)
+    PASS pistol: eye on the notch-to-tip line within 3 mm (eye y 0.0772, line 0.0771)
+    INFO uzi muzzle 0.000,0.030,0.480 box -0.055,-0.327,-0.338 / 0.077,0.158,0.478
+    INFO uzi dir 1 rearTop -0.015,0.156,-0.087 frontTop 0.001,0.067,0.354
+    PASS uzi: has a sight point
+    PASS uzi: eye above the bore, behind the muzzle, on its centre line, along it (0.00 deg)
+    PASS uzi: eye clears the top line and stays near it (eye y 0.156, top 0.158)
+    INFO shotgun muzzle 0.000,0.030,0.970 box -0.056,-0.179,-0.496 / 0.056,0.091,0.952
+    INFO shotgun dir 1 rearTop 0.000,0.087,-0.129 frontTop -0.000,0.081,0.915
+    PASS shotgun: has a sight point
+    PASS shotgun: eye above the bore, behind the muzzle, on its centre line, along it (1.18 deg)
+    PASS shotgun: eye clears the top line and stays near it (eye y 0.105, top 0.091)
+    INFO revolver muzzle 0.000,0.083,0.350 box -0.051,-0.166,-0.115 / 0.051,0.123,0.333
+    INFO revolver dir 1 rearTop -0.005,0.109,0.081 frontTop -0.002,0.121,0.326
+    PASS revolver: has a sight point
+    PASS revolver: eye above the bore, behind the muzzle, on its centre line, along it (1.09 deg)
+    PASS revolver: notch and tip are on the gun (notch found, tip y 0.121)
+    PASS revolver: eye on the notch-to-tip line within 3 mm (eye y 0.1073, line 0.1073)
+    INFO sniper muzzle 0.000,0.040,1.220 box -0.147,-0.203,-0.640 / 0.068,0.209,1.205
+    INFO sniper dir 1 rearTop 0.000,0.209,0.069 frontTop 0.012,0.067,0.780
+    PASS sniper: has a sight point
+    PASS sniper: eye above the bore, behind the muzzle, on its centre line, along it (0.00 deg)
+    PASS sniper: eye clears the top line and stays near it (eye y 0.180, top 0.209)
+    INFO launcher muzzle 0.000,0.040,0.720 box -0.143,-0.184,-0.504 / 0.143,0.123,0.682
+    INFO launcher dir 1 rearTop 0.000,0.123,0.053 frontTop 0.000,0.102,0.650
+    PASS launcher: has a sight point
+    PASS launcher: eye above the bore, behind the muzzle, on its centre line, along it (2.02 deg)
+    PASS launcher: eye clears the top line and stays near it (eye y 0.134, top 0.123)
+    INFO flamer muzzle 0.000,0.050,0.780 box -0.085,-0.175,-0.277 / 0.178,0.112,0.792
+    INFO flamer dir 1 rearTop -0.000,0.085,0.290 frontTop -0.000,0.112,0.786
+    PASS flamer: has a sight point
+    PASS flamer: eye above the bore, behind the muzzle, on its centre line, along it (0.00 deg)
+    PASS flamer: eye clears the top line and stays near it (eye y 0.150, top 0.112)
+    INFO chainsaw muzzle 0.000,0.040,0.820 box -0.159,-0.185,-0.317 / 0.218,0.220,0.830
+    INFO chainsaw dir 1 rearTop -0.004,0.220,0.024 frontTop -0.010,0.090,0.760
+    PASS chainsaw: has a sight point
+    PASS chainsaw: eye above the bore, behind the muzzle, on its centre line, along it (0.00 deg)
+    PASS chainsaw: eye clears the top line and stays near it (eye y 0.250, top 0.220)
+ok    t284      7 pass   0 fail  70.7s  (real renderer)
+    PASS pistol aimed: rear 0.000 front 0.000 (ndc y)
+    PASS revolver aimed: rear 0.000 front 0.000 (ndc y)
+    PASS uzi aimed: rear -0.000 front - (ndc y)
+    PASS m4 aimed: rear 0.000 front 0.012 (ndc y)
+    PASS ak aimed: rear 0.000 front 0.000 (ndc y)
+    PASS aa12 aimed: rear 0.000 front 0.000 (ndc y)
+    PASS launcher aimed: rear -0.001 front -0.000 (ndc y)
+FAIL  t282      3 pass   3 fail  95.3s  (real renderer)
+    LOG phase-wave at 5.8 s; grace 68.93989999999951 events alarm-started,wave-push
+    LOG spawn 6.1 s cave    d0 181 m, within 20 m at 56.2 s
+    LOG spawn 6.2 s cave    d0 102 m, within 20 m at 32.4 s
+    LOG spawn 6.3 s cave    d0 181 m, within 20 m at 60.8 s
+    LOG spawn 7.3 s cave    d0 181 m, within 20 m at 64.8 s
+    LOG spawn 7.4 s cave    d0 102 m, within 20 m at 38.0 s
+    LOG spawn 7.6 s cave    d0 181 m, within 20 m at 60.4 s
+    LOG spawn 7.7 s cave    d0 181 m, within 20 m at 61.2 s
+    LOG spawn 7.9 s cave    d0 181 m, within 20 m at 60.7 s
+    LOG spawn 48.9 s claw-up d0 65 m, within 20 m at 66.2 s
+    LOG spawn 49.2 s claw-up d0 43 m, within 20 m at 57.1 s
+    LOG spawn 49.4 s claw-up d0 37 m, within 20 m at 55.8 s
+    LOG spawn 49.6 s claw-up d0 48 m, within 20 m at 60.8 s
+    LOG spawn 49.7 s claw-up d0 43 m, within 20 m at 58.4 s
+    LOG spawn 49.9 s claw-up d0 56 m, within 20 m at 62.7 s
+    LOG spawn 50.0 s claw-up d0 43 m, within 20 m at 59.8 s
+    PASS night 1: 15 come (15)
+    PASS 7 claw up, all after the cave is out (last walker out at 7.9 s, first riser 48.9 s)
+    PASS all 15 reach 20 m of the HQ within 100 s (last 66.2 s)
+    FAIL one push: the 2nd to the 14th land within 26.9 s (under 20)
+    FAIL the push lands soon: the middle arrival at 60.4 s (15-35)
+    FAIL the cave walkers start part way in, past the water if it is in the way (181, 102, 181, 181, 102, 181, 181, 181 m; all under 120)
+    LOG spawn spread 43.9 s; arrival spread 33.8 s (15 arrived)
+ok    t188    121 pass   0 fail  155.9s  (real renderer)
+    PASS TT.getWeaponSizeDbg is exported
+    PASS marine scale: 1.655 units = 1.80 m (0.919 units/m)
+    PASS minigun: size untouched (0.88)
+    PASS pistol: real length 0.195 m in the class range 0.18-0.21
+    PASS pistol: look 1.45 (1-1.6 against the Uzi)
+    PASS pistol: model scale 0.633 = 1.05 x 0.603
+    PASS pistol: the akimbo copy is the same size
+    PASS revolver: real length 0.27 m in the class range 0.24-0.31
+    PASS revolver: look 1.4 (1-1.6 against the Uzi)
+    PASS revolver: model scale 0.776 = 1.08 x 0.718
+    PASS revolver: the akimbo copy is the same size
+    PASS uzi: real length 0.47 m in the class range 0.42-0.52
+    PASS uzi: look 1 (the reference)
+    PASS uzi: model scale 0.530 = 1 x 0.530
+    PASS uzi: the akimbo copy is the same size
+    PASS m4: real length 0.84 m in the class range 0.8-0.9
+    PASS m4: look 1.35 (1-1.6 against the Uzi)
+    PASS m4: model scale 0.674 = 0.92 x 0.733
+    PASS ak: real length 0.88 m in the class range 0.84-0.93
+    PASS ak: look 1.35 (1-1.6 against the Uzi)
+    PASS ak: model scale 0.686 = 0.92 x 0.746
+    PASS aa12: real length 0.96 m in the class range 0.92-1
+    PASS aa12: look 1.2 (1-1.6 against the Uzi)
+    PASS aa12: model scale 0.684 = 0.9 x 0.760
+    PASS shotgun: real length 1 m in the class range 0.95-1.06
+    PASS shotgun: look 1.25 (1-1.6 against the Uzi)
+    PASS shotgun: model scale 0.793 = 0.95 x 0.835
+    PASS sniper: real length 1.15 m in the class range 1.08-1.22
+    PASS sniper: look 1.25 (1-1.6 against the Uzi)
+    PASS sniper: model scale 0.723 = 0.88 x 0.822
+    PASS launcher: real length 0.75 m in the class range 0.68-0.82
+    PASS launcher: look 1.2 (1-1.6 against the Uzi)
+    PASS launcher: model scale 0.698 = 0.92 x 0.758
+    PASS flamer: real length 0.95 m in the class range 0.85-1.05
+    PASS flamer: look 1.05 (1-1.6 against the Uzi)
+    PASS flamer: model scale 0.838 = 1 x 0.838
+    PASS chainsaw: real length 0.85 m in the class range 0.75-0.95
+    PASS chainsaw: look 1.2 (1-1.6 against the Uzi)
+    PASS chainsaw: model scale 0.804 = 1.18 x 0.682
+    PASS knifeModel: 0.3 m (model scale 0.595)
+    PASS macheteModel: 0.62 m (model scale 0.713)
+    PASS pistol: measured 0.286 m long next to him (m x look 0.283)
+    PASS pistol: grip anchor on the grip (0.013 m to its surface at the glove scale)
+    PASS pistol: trigger a finger ahead of the grip anchor (0.043 m)
+    PASS pistol: support fist wrapped round the firing fingers from the support side (0.044 m over; GB-151, was a hand's width beside it)
+    PASS pistol: firing hand on the grip anchor (0.000)
+    PASS pistol: support hand on its anchor (0.001)
+    PASS pistol: barrel on the reticle from the muzzle (0.00 deg)
+    PASS revolver: measured 0.377 m long next to him (m x look 0.378)
+    PASS revolver: grip anchor on the grip (0.020 m to its surface at the glove scale)
+    PASS revolver: trigger a finger ahead of the grip anchor (0.054 m)
+    PASS revolver: support fist wrapped round the firing fingers from the support side (0.055 m over; GB-151, was a hand's width beside it)
+    PASS revolver: firing hand on the grip anchor (0.000)
+    PASS revolver: support hand on its anchor (0.001)
+    PASS revolver: barrel on the reticle from the muzzle (0.00 deg)
+    PASS uzi: measured 0.470 m long next to him (m x look 0.470)
+    PASS uzi: grip anchor on the grip (0.011 m to its surface at the glove scale)
+    PASS uzi: trigger a finger ahead of the grip anchor (0.048 m)
+    PASS uzi: support anchor on the gun (0.016 m to it, 0.114 m ahead of the grip)
+    PASS uzi: firing hand on the grip anchor (0.000)
+    PASS uzi: support hand on its anchor (0.001)
+    PASS uzi: barrel on the reticle from the muzzle (0.00 deg)
+    PASS m4: measured 1.134 m long next to him (m x look 1.134)
+    PASS m4: grip anchor on the grip (0.012 m to its surface at the glove scale)
+    PASS m4: trigger a finger ahead of the grip anchor (0.038 m)
+    PASS m4: support anchor on the gun (0.015 m to it, 0.302 m ahead of the grip)
+    PASS m4: firing hand on the grip anchor (0.000)
+    PASS m4: support hand on its anchor (0.000, 0.000 back along the forend)
+    PASS m4: barrel on the reticle from the muzzle (0.00 deg)
+    PASS ak: measured 1.188 m long next to him (m x look 1.188)
+    PASS ak: grip anchor on the grip (0.016 m to its surface at the glove scale)
+    PASS ak: trigger a finger ahead of the grip anchor (0.055 m)
+    PASS ak: support anchor on the gun (0.028 m to it, 0.327 m ahead of the grip)
+    PASS ak: firing hand on the grip anchor (0.000)
+    PASS ak: support hand on its anchor (0.001, 0.015 back along the forend)
+    PASS ak: barrel on the reticle from the muzzle (0.00 deg)
+    PASS aa12: measured 1.158 m long next to him (m x look 1.152)
+    PASS aa12: grip anchor on the grip (0.025 m to its surface at the glove scale)
+    PASS aa12: trigger a finger ahead of the grip anchor (0.056 m)
+    PASS aa12: support anchor on the gun (0.022 m to it, 0.368 m ahead of the grip)
+    PASS aa12: firing hand on the grip anchor (0.000)
+    PASS aa12: support hand on its anchor (0.001, 0.001 back along the forend)
+    PASS aa12: barrel on the reticle from the muzzle (0.00 deg)
+    PASS shotgun: measured 1.250 m long next to him (m x look 1.250)
+    PASS shotgun: grip anchor on the grip (0.022 m to its surface at the glove scale)
+    PASS shotgun: trigger a finger ahead of the grip anchor (0.058 m)
+    PASS shotgun: support hand on the pump (0.029 m)
+    PASS shotgun: firing hand on the grip anchor (0.000)
+    PASS shotgun: support hand on its anchor (0.000)
+    PASS shotgun: barrel on the reticle from the muzzle (0.00 deg)
+    PASS sniper: measured 1.451 m long next to him (m x look 1.438)
+    PASS sniper: grip anchor on the grip (0.020 m to its surface at the glove scale)
+    PASS sniper: trigger a finger ahead of the grip anchor (0.044 m)
+    PASS sniper: support anchor on the gun (0.029 m to it, 0.343 m ahead of the grip)
+    PASS sniper: firing hand on the grip anchor (0.000)
+    PASS sniper: support hand on its anchor (0.001, 0.028 back along the forend)
+    PASS sniper: barrel on the reticle from the muzzle (0.00 deg)
+    PASS launcher: measured 0.900 m long next to him (m x look 0.900)
+    PASS launcher: grip anchor on the grip (0.023 m to its surface at the glove scale)
+    PASS launcher: trigger a finger ahead of the grip anchor (0.039 m)
+    PASS launcher: support anchor on the gun (0.022 m to it, 0.325 m ahead of the grip)
+    PASS launcher: firing hand on the grip anchor (0.000)
+    PASS launcher: support hand on its anchor (0.000)
+    PASS launcher: barrel on the reticle from the muzzle (0.00 deg)
+    PASS flamer: measured 0.975 m long next to him (m x look 0.997)
+    PASS flamer: grip anchor on the grip (0.022 m to its surface at the glove scale)
+    PASS flamer: trigger a finger ahead of the grip anchor (0.064 m)
+    PASS flamer: support anchor on the gun (0.023 m to it, 0.366 m ahead of the grip)
+    PASS flamer: firing hand on the grip anchor (0.000)
+    PASS flamer: support hand on its anchor (0.000)
+    PASS flamer: barrel on the reticle from the muzzle (0.00 deg)
+    PASS chainsaw: measured 1.003 m long next to him (m x look 1.020)
+    PASS chainsaw: grip anchor on the grip (0.024 m to its surface at the glove scale)
+    PASS chainsaw: trigger a finger ahead of the grip anchor (0.045 m)
+    PASS chainsaw: support anchor on the gun (0.005 m to it, 0.266 m ahead of the grip)
+    PASS chainsaw: firing hand on the grip anchor (0.000)
+    PASS chainsaw: support hand on its anchor (0.016)
+    PASS uzi-akimbo: firing hand on the grip anchor (0.001)
+    PASS uzi-akimbo: the other hand on the second gun's grip
+    PASS uzi-akimbo: barrel on the reticle from the muzzle (0.00 deg)
+    PASS knife: handle in the left hand (0.020 m from the handle centre; the hand closes on the handle off-centre)
+6 checks: 182 pass, 3 fail (real renderer)

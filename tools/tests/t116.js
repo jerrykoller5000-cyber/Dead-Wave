@@ -41,13 +41,24 @@
     else {
       T.lightCampfire(cf);   // CU-128: camps start cold; the rain check is about a fire he has lit
       T.runDevCommand('night ops');
-      rain(false); await wait(400);
-      const lit = cf.light.intensity;
-      rain(true); await wait(400);
-      const wet = cf.light.intensity;
-      rain(false); await wait(400);
-      const back = cf.light.intensity;
-      ok(lit > 1 && wet < lit * 0.35 && back > 1, 'a campfire drops to embers in the rain and comes back: ' + lit.toFixed(2) + ' -> ' + wet.toFixed(2) + ' -> ' + back.toFixed(2));
+      // CL-274 (rule 13: the bar is the same, what it reads changed): the fire flickers (night light 2.8 +/- 1, x0.2 in
+      // the rain), so one sample against another could catch a low flicker dry and a high one wet (2.06 -> 0.73 on the
+      // suite's slow page). Each phase is now its mean over 1.2 s of GAME time, after 0.2 s to settle.
+      const meanLight = async () => {
+        let t0 = T.getSimTime(), w0 = Date.now();
+        while (T.getSimTime() - t0 < 0.2 && Date.now() - w0 < 8000) await wait(30);
+        t0 = T.getSimTime(); w0 = Date.now();
+        let sum = 0, n = 0;
+        while (T.getSimTime() - t0 < 1.2 && Date.now() - w0 < 20000) { sum += cf.light.intensity; n++; await wait(30); }
+        return n ? sum / n : cf.light.intensity;
+      };
+      rain(false);
+      const lit = await meanLight();
+      rain(true);
+      const wet = await meanLight();
+      rain(false);
+      const back = await meanLight();
+      ok(lit > 1 && wet < lit * 0.35 && back > 1, 'a campfire drops to embers in the rain and comes back (mean over 1.2 s of game time): ' + lit.toFixed(2) + ' -> ' + wet.toFixed(2) + ' -> ' + back.toFixed(2));
     }
     // A butt in the rain leaves no ember; in the dry it does.
     const gx = P.x + 3, gz = P.z + 3;

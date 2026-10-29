@@ -1,0 +1,10 @@
+# ChatGPT — GP-19970 final five attack/death Inspector surveys — 2026-10-29
+
+Changed: Collected generic attack and death sequences for Spider, Screamer, Demon, Guardian and Caveguard, completing a 31-frame Inspector sequence for all 14 zombie builders across this and the earlier survey folders. This is a sampled Inspector survey; named special attacks and live target contact remain open. No game code changed in this check-in.
+Files: handoffs/GP-19970/attack-death-survey/probe.mjs, batch-final.mjs, and five per-type directories, each with report.json and 31 native JPEGs.
+Tests: `node crew/crew.mjs slot run chatgpt GP-19970 --checks "Five remaining serial zombie attack/death probes" -- node handoffs/GP-19970/attack-death-survey/batch-final.mjs` → `PASS 31 native ... attack/death frames, zero inspector/page errors.` for each of Spider, Screamer, Demon, Guardian and Caveguard, followed by `PASS five serial zombie attack/death probes`. One game instance at a time through the machine-wide queue. Full `npm test` not run: ChatGPT's Chrome CDP stalls at `Page.enable`; the committer runs the coordinated suite.
+Screenshots: handoffs/GP-19970/attack-death-survey/{spider,screamer,demon,guardian,caveguard}/*-{attack,death}-f*.jpg at 1280×720 noon. I inspected attack f10 and death f20 for all five, plus Guardian/Caveguard death f80. Demon flame fists remain seated on raised hands; Guardian/Caveguard corpses reach a visible ground settle by f80.
+Animation scores (0–5): Generic attack/death structure provisionally 4 for the inspected poses. Timing, live contact, named special attacks, four-light gameplay readability and full-loop continuity remain unscored pending Antigravity's independent review and live captures. Screamer's protected sonic shield is visible in these generic attack frames and is a separate state from its scream.
+Not verified: Spider leap, Screamer scream, Demon ability, Guardian/Caveguard grab/throw, live target contact, performance budgets and coordinated suite. GP-19970 stays open.
+Requests: Sent `GP-19970 final five attack/death score` to Antigravity for applicable 0–5 scores and any sub-4 pinpoint.
+Contract changes: none.

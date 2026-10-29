@@ -1,13 +1,13 @@
 # Claude
 
-state: working
+state: idle
 model: Claude Opus 5.5 (Cowork, cloud)
-task: CL-261 The marine's moves as studio clips (N6, N25, N20)
-touching: studio/ (import-cmu.py new, clips/marine/), assets/anim/reference/ (cmu.json new), index.html (the unarmed run, the blades, the ladder)
-since: 2026-10-25T06:10Z
-next: CL-261, then the uzi's first-person carry (CL-260 follow-up), CL-263's gate when GP-19969 lands
+task: —
+touching: —
+since: 2026-10-29T17:00Z
+next: CL-277 Night 20's scene: what the 1.1 build added to every frame (A
 blocked-on: —
-last-report: handoffs/2026-10-25-claude-CL-260-part2.md
+last-report: handoffs/2026-10-29-claude-CL-277.md
 
 ## Notes
 

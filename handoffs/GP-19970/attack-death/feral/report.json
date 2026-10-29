@@ -1,0 +1,1681 @@
+{
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "frames": [
+    {
+      "file": "handoffs/GP-19970/attack-death/feral/feral-idle-f00.jpg",
+      "phase": "idle",
+      "n": 0,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0,
+        "hipsY": 0.8234015513419504,
+        "armL": -0.40503482800076573,
+        "armR": -0.7349651719992343
+      },
+      "subject": {
+        "id": "zombie.feral",
+        "name": "Feral",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.7279349603559,
+          "y": -199.29409529969416,
+          "z": -632.1496357718042
+        },
+        "size": {
+          "x": 1.9930566536187477,
+          "y": 1.4024405760219736,
+          "z": 1.8410361388097272
+        },
+        "yaw": 2.0736395377227543,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4820,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.625326750232627,
+        "y": -198.18071049201365,
+        "z": -638.9267280792953,
+        "tx": -27.7279349603559,
+        "ty": -199.29409529969416,
+        "tz": -632.1496357718042,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/feral/feral-attack-f01.jpg",
+      "phase": "attack",
+      "n": 1,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.20333333333333334,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.007575757575757569,
+        "hipsY": 0.8066421263604214,
+        "armL": -0.4438569738862949,
+        "armR": -0.7446278745985534
+      },
+      "subject": {
+        "id": "zombie.feral",
+        "name": "Feral",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.636559783678603,
+          "y": -199.29409529969416,
+          "z": -632.1982446916359
+        },
+        "size": {
+          "x": 2.0069679023777915,
+          "y": 1.4142221995064972,
+          "z": 1.8479170525745303
+        },
+        "yaw": 2.05969220587878,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4820,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.439831312468364,
+        "y": -198.18071049201365,
+        "z": -638.9174592594972,
+        "tx": -27.636559783678603,
+        "ty": -199.29409529969416,
+        "tz": -632.1982446916359,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/feral/feral-attack-f02.jpg",
+      "phase": "attack",
+      "n": 2,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.18666666666666668,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.01515151515151515,
+        "hipsY": 0.8086070518075705,
+        "armL": -0.4870238899562936,
+        "armR": -0.7499458070134032
+      },
+      "subject": {
+        "id": "zombie.feral",
+        "name": "Feral",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.54495770649438,
+          "y": -199.29409529969416,
+          "z": -632.2464246610789
+        },
+        "size": {
+          "x": 1.9807783639418588,
+          "y": 1.427901761386579,
+          "z": 1.8411664267216565
+        },
+        "yaw": 2.0550036493104513,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4820,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.3167720604477,
+        "y": -198.18071049201365,
+        "z": -638.9458888495489,
+        "tx": -27.54495770649438,
+        "ty": -199.29409529969416,
+        "tz": -632.2464246610789,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/feral/feral-attack-f03.jpg",
+      "phase": "attack",
+      "n": 3,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.17,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.02272727272727272,
+        "hipsY": 0.8102337431628308,
+        "armL": -0.5339888307134149,
+        "armR": -0.7514657147411306
+      },
+      "subject": {
+        "id": "zombie.feral",
+        "name": "Feral",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.453128820146308,
+          "y": -199.29409529969416,
+          "z": -632.2941709240957
+        },
+        "size": {
+          "x": 1.9499154793773634,
+          "y": 1.4376909518916818,
+          "z": 1.8314562491800643
+        },
+        "yaw": 2.050274833524032,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4820,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.193310034774985,
+        "y": -198.18071049201365,
+        "z": -638.973565970492,
+        "tx": -27.453128820146308,
+        "ty": -199.29409529969416,
+        "tz": -632.2941709240957,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/feral/feral-attack-f04.jpg",
+      "phase": "attack",
+      "n": 4,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.15333333333333335,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.0303030303030303,
+        "hipsY": 0.811451917698957,
+        "armL": -0.5840953223296698,
+        "armR": -0.7498440716097241
+      },
+      "subject": {
+        "id": "zombie.feral",
+        "name": "Feral",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.361073240462147,
+          "y": -199.29409529969416,
+          "z": -632.3414786428001
+        },
+        "size": {
+          "x": 1.941314201840651,
+          "y": 1.4409371447341641,
+          "z": 1.8326530975040214
+        },
+        "yaw": 2.0455050616071118,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4820,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.069443841868814,
+        "y": -198.18071049201365,
+        "z": -639.0004794218327,
+        "tx": -27.361073240462147,
+        "ty": -199.29409529969416,
+        "tz": -632.3414786428001,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/feral/feral-attack-f05.jpg",
+      "phase": "attack",
+      "n": 5,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.1366666666666667,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.03787878787878787,
+        "hipsY": 0.8122049569635009,
+        "armL": -0.6365961287625498,
+        "armR": -0.7458281136616925
+      },
+      "subject": {
+        "id": "zombie.feral",
+        "name": "Feral",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.268791108795103,
+          "y": -199.29409529969416,
+          "z": -632.3883428954346
+        },
+        "size": {
+          "x": 1.9357277409599085,
+          "y": 1.4356584274702016,
+          "z": 1.8345467254789583
+        },
+        "yaw": 2.040693618401561,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4820,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -22.945172105250034,
+        "y": -198.18071049201365,
+        "z": -639.0266177452891,
+        "tx": -27.268791108795103,
+        "ty": -199.29409529969416,
+        "tz": -632.3883428954346,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/feral/feral-attack-f06.jpg",
+      "phase": "attack",
+      "n": 6,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.12000000000000002,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.04545454545454545,
+        "hipsY": 0.8124513936705668,
+        "armL": -0.6906748400727178,
+        "armR": -0.7402342508363728
+      },
+      "subject": {
+        "id": "zombie.feral",
+        "name": "Feral",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.176282593111267,
+          "y": -199.29409529969416,
+          "z": -632.4347586742815
+        },
+        "size": {
+          "x": 1.9333545319377556,
+          "y": 1.4208893699509417,
+          "z": 1.8371835660391298
+        },
+        "yaw": 2.035839769861169,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4820,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -22.820493467194567,
+        "y": -198.18071049201365,
+        "z": -639.0519692165396,
+        "tx": -27.176282593111267,
+        "ty": -199.29409529969416,
+        "tz": -632.4347586742815,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/feral/feral-attack-f07.jpg",
+      "phase": "attack",
+      "n": 7,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.10333333333333336,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.05303030303030302,
+        "hipsY": 0.8121659727644774,
+        "armL": -0.7454694592374553,
+        "armR": -0.733924480156484
+      },
+      "subject": {
+        "id": "zombie.feral",
+        "name": "Feral",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.083547889126116,
+          "y": -199.29409529969416,
+          "z": -632.4807208835059
+        },
+        "size": {
+          "x": 1.9322590807152409,
+          "y": 1.3968915129239576,
+          "z": 1.8395849329983776
+        },
+        "yaw": 2.0309427623808447,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4820,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -22.695406590491874,
+        "y": -198.18071049201365,
+        "z": -639.0765218366311,
+        "tx": -27.083547889126116,
+        "ty": -199.29409529969416,
+        "tz": -632.4807208835059,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/feral/feral-attack-f08.jpg",
+      "phase": "attack",
+      "n": 8,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.0866666666666667,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.0606060606060606,
+        "hipsY": 0.8113402550485895,
+        "armL": -0.8000973060157268,
+        "armR": -0.727781481863061
+      },
+      "subject": {
+        "id": "zombie.feral",
+        "name": "Feral",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.990587221492632,
+          "y": -199.29409529969416,
+          "z": -632.5262243369258
+        },
+        "size": {
+          "x": 1.9283628803647979,
+          "y": 1.3651553362178674,
+          "z": 1.8398090101942444
+        },
+        "yaw": 2.0260018220957168,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4820,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -22.56991016031515,
+        "y": -198.18071049201365,
+        "z": -639.100263323029,
+        "tx": -26.990587221492632,
+        "ty": -199.29409529969416,
+        "tz": -632.5262243369258,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/feral/feral-attack-f09.jpg",
+      "phase": "attack",
+      "n": 9,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.07000000000000003,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.06818181818181816,
+        "hipsY": 0.8099827450642897,
+        "armL": -0.853680518369924,
+        "armR": -0.7226831179937122
+      },
+      "subject": {
+        "id": "zombie.feral",
+        "name": "Feral",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.897400845043727,
+          "y": -199.29409529969416,
+          "z": -632.571263755709
+        },
+        "size": {
+          "x": 1.9157937637933635,
+          "y": 1.3279670997479798,
+          "z": 1.8351843264953231
+        },
+        "yaw": 2.02101615414872,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4820,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -22.444002886212118,
+        "y": -198.18071049201365,
+        "z": -639.123181100296,
+        "tx": -26.897400845043727,
+        "ty": -199.29409529969416,
+        "tz": -632.571263755709,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/feral/feral-attack-f10.jpg",
+      "phase": "attack",
+      "n": 10,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.05333333333333337,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.07575757575757575,
+        "hipsY": 0.8081185387200478,
+        "armL": -0.9053714146854027,
+        "armR": -0.7194770701630818
+      },
+      "subject": {
+        "id": "zombie.feral",
+        "name": "Feral",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.803989046091854,
+          "y": -199.29409529969416,
+          "z": -632.6158337659914
+        },
+        "size": {
+          "x": 1.9676818950920705,
+          "y": 1.2883704906068658,
+          "z": 1.8609121064527017
+        },
+        "yaw": 2.015984941924581,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4820,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -22.31768350422207,
+        "y": -198.18071049201365,
+        "z": -639.1452622903735,
+        "tx": -26.803989046091854,
+        "ty": -199.29409529969416,
+        "tz": -632.6158337659914,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/feral/feral-attack-f12.jpg",
+      "phase": "attack",
+      "n": 12,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.020000000000000042,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.0909090909090909,
+        "hipsY": 0.8030493135063226,
+        "armL": -0.9999817970516542,
+        "armR": -0.7218363847665275
+      },
+      "subject": {
+        "id": "zombie.feral",
+        "name": "Feral",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.61649049154904,
+          "y": -199.29409529969416,
+          "z": -632.703543575582
+        },
+        "size": {
+          "x": 2.0698097452505806,
+          "y": 1.3666953236694894,
+          "z": 1.908690268082978
+        },
+        "yaw": 2.0057825045487463,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4820,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -22.063803506865682,
+        "y": -198.18071049201365,
+        "z": -639.1868618223998,
+        "tx": -26.61649049154904,
+        "ty": -199.29409529969416,
+        "tz": -632.703543575582,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/feral/feral-attack-f14.jpg",
+      "phase": "attack",
+      "n": 14,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.28,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.1,
+        "hipsY": 0.7969184196898368,
+        "armL": -0.89,
+        "armR": -0.89
+      },
+      "subject": {
+        "id": "zombie.feral",
+        "name": "Feral",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.428094531241097,
+          "y": -199.29409529969416,
+          "z": -632.7893087784486
+        },
+        "size": {
+          "x": 2.111349700155312,
+          "y": 1.4689307532141527,
+          "z": 1.966488498745207
+        },
+        "yaw": 1.9953875104914747,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4820,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -21.808260675758184,
+        "y": -198.18071049201365,
+        "z": -639.2249524461605,
+        "tx": -26.428094531241097,
+        "ty": -199.29409529969416,
+        "tz": -632.7893087784486,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/feral/feral-attack-f16.jpg",
+      "phase": "attack",
+      "n": 16,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.2466666666666667,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.13083521591645728,
+        "hipsY": 0.7737365952424984,
+        "armL": -0.7484071300249169,
+        "armR": -0.609638823036163
+      },
+      "subject": {
+        "id": "zombie.feral",
+        "name": "Feral",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.23880473615318,
+          "y": -199.29409529969416,
+          "z": -632.8730827001514
+        },
+        "size": {
+          "x": 1.964494639856948,
+          "y": 1.3343381404296224,
+          "z": 1.799551581745959
+        },
+        "yaw": 1.9847925568116265,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4820,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -21.551046102552245,
+        "y": -198.18071049201365,
+        "z": -639.2594191509756,
+        "tx": -26.23880473615318,
+        "ty": -199.29409529969416,
+        "tz": -632.8730827001514,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/feral/feral-attack-f18.jpg",
+      "phase": "attack",
+      "n": 18,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.21333333333333337,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.23134685680847852,
+        "hipsY": 0.7651305954585425,
+        "armL": -0.6283704909609775,
+        "armR": -0.39425673541040324
+      },
+      "subject": {
+        "id": "zombie.feral",
+        "name": "Feral",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.048625328521016,
+          "y": -199.29409529969416,
+          "z": -632.9548168870805
+        },
+        "size": {
+          "x": 1.885247538972962,
+          "y": 1.3372585952486418,
+          "z": 1.6557700712838823
+        },
+        "yaw": 1.9739898054990836,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4820,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -21.292151559018958,
+        "y": -198.18071049201365,
+        "z": -639.2901409948169,
+        "tx": -26.048625328521016,
+        "ty": -199.29409529969416,
+        "tz": -632.9548168870805,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/feral/feral-attack-f20.jpg",
+      "phase": "attack",
+      "n": 20,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.18000000000000005,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.27823941877010794,
+        "hipsY": 0.7586727642320237,
+        "armL": -0.548164572970824,
+        "armR": -0.2937726740640545
+      },
+      "subject": {
+        "id": "zombie.feral",
+        "name": "Feral",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -25.857561240789025,
+          "y": -199.29409529969416,
+          "z": -633.0344610077814
+        },
+        "size": {
+          "x": 1.7687655696518618,
+          "y": 1.3648893068295536,
+          "z": 1.5244439613495615
+        },
+        "yaw": 1.9629709487146407,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4820,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -21.031569606075166,
+        "y": -198.18071049201365,
+        "z": -639.3169906743805,
+        "tx": -25.857561240789025,
+        "ty": -199.29409529969416,
+        "tz": -633.0344610077814,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/feral/feral-attack-f22.jpg",
+      "phase": "attack",
+      "n": 22,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.14666666666666672,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.2606446496203773,
+        "hipsY": 0.7543380472486078,
+        "armL": -0.52,
+        "armR": -0.33147575081347724
+      },
+      "subject": {
+        "id": "zombie.feral",
+        "name": "Feral",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -25.66561818050217,
+          "y": -199.29409529969416,
+          "z": -633.1119627469687
+        },
+        "size": {
+          "x": 1.689426533992961,
+          "y": 1.3623209045575209,
+          "z": 1.454515085722278
+        },
+        "yaw": 1.951727170488845,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4820,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -20.769293717779846,
+        "y": -198.18071049201365,
+        "z": -639.339834054709,
+        "tx": -25.66561818050217,
+        "ty": -199.29409529969416,
+        "tz": -633.1119627469687,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/feral/feral-attack-f24.jpg",
+      "phase": "attack",
+      "n": 24,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.1133333333333334,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.182640475157874,
+        "hipsY": 0.7522975124564748,
+        "armL": -0.5481645729708238,
+        "armR": -0.49862755323312724
+      },
+      "subject": {
+        "id": "zombie.feral",
+        "name": "Feral",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -25.472802701833558,
+          "y": -199.29409529969416,
+          "z": -633.1872676915443
+        },
+        "size": {
+          "x": 1.6864686207123043,
+          "y": 1.31727994894689,
+          "z": 1.4723814467290595
+        },
+        "yaw": 1.9402491044377645,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4820,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -20.505318422534025,
+        "y": -198.18071049201365,
+        "z": -639.3585296536505,
+        "tx": -25.472802701833558,
+        "ty": -199.29409529969416,
+        "tz": -633.1872676915443,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/feral/feral-attack-f26.jpg",
+      "phase": "attack",
+      "n": 26,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.08000000000000007,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.06230586150776819,
+        "hipsY": 0.7522527316664989,
+        "armL": -0.6283704909609772,
+        "armR": -0.756487439626211
+      },
+      "subject": {
+        "id": "zombie.feral",
+        "name": "Feral",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -25.279122284547388,
+          "y": -199.29409529969416,
+          "z": -633.260319207856
+        },
+        "size": {
+          "x": 1.7303023584582853,
+          "y": 1.2327961459523635,
+          "z": 1.5708753589851767
+        },
+        "yaw": 1.9285267869885365,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4820,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -20.239639464098754,
+        "y": -198.18071049201365,
+        "z": -639.3729280757968,
+        "tx": -25.279122284547388,
+        "ty": -199.29409529969416,
+        "tz": -633.260319207856,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/feral/feral-attack-f30.jpg",
+      "phase": "attack",
+      "n": 30,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.7464557132153192,
+        "armL": -0.8899999999999997,
+        "armR": -0.8899999999999999
+      },
+      "subject": {
+        "id": "zombie.feral",
+        "name": "Feral",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -24.9061988113044,
+          "y": -199.29409529969416,
+          "z": -633.300860718257
+        },
+        "size": {
+          "x": 2.0956654619207917,
+          "y": 1.227617577341789,
+          "z": 2.0556235696759586
+        },
+        "yaw": 0.89574679321727,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 4820,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -17.07473715730336,
+        "y": -198.18071049201365,
+        "z": -632.1056274222275,
+        "tx": -24.9061988113044,
+        "ty": -199.29409529969416,
+        "tz": -633.300860718257,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/feral/feral-death-f00.jpg",
+      "phase": "death",
+      "n": 0,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.7464557132153192,
+        "armL": -0.8899999999999997,
+        "armR": -0.8899999999999999
+      },
+      "subject": {
+        "id": "zombie.feral",
+        "name": "Feral",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -24.9061988113044,
+          "y": -199.29409529969416,
+          "z": -633.300860718257
+        },
+        "size": {
+          "x": 1.796586126333498,
+          "y": 1.213194850364573,
+          "z": 1.6820108105805502
+        },
+        "yaw": 0.89574679321727,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 4868,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -17.07473715730336,
+        "y": -198.18071049201365,
+        "z": -632.1056274222275,
+        "tx": -24.9061988113044,
+        "ty": -199.29409529969416,
+        "tz": -633.300860718257,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/feral/feral-death-f01.jpg",
+      "phase": "death",
+      "n": 1,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.016666666666666666,
+        "corpseRX": -0.16138577664397707,
+        "corpseRZ": 0.1199147242159437,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.7464557132153192,
+        "armL": -0.8899999999999997,
+        "armR": -0.09047247645495976
+      },
+      "subject": {
+        "id": "zombie.feral",
+        "name": "Feral",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -24.9061988113044,
+          "y": -199.28741471570717,
+          "z": -633.300860718257
+        },
+        "size": {
+          "x": 1.4117293876047547,
+          "y": 1.6830829123395858,
+          "z": 1.4056059396243654
+        },
+        "yaw": 0.8898121277938038,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 4868,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -17.07473715730336,
+        "y": -198.17402990802665,
+        "z": -632.1056274222275,
+        "tx": -24.9061988113044,
+        "ty": -199.28741471570717,
+        "tz": -633.300860718257,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/feral/feral-death-f02.jpg",
+      "phase": "death",
+      "n": 2,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.03333333333333333,
+        "corpseRX": -0.3115449939187747,
+        "corpseRZ": 0.2302357008215713,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.7464557132153192,
+        "armL": -0.8899999999999997,
+        "armR": -0.1690992154084297
+      },
+      "subject": {
+        "id": "zombie.feral",
+        "name": "Feral",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -24.9061988113044,
+          "y": -199.2810256599953,
+          "z": -633.300860718257
+        },
+        "size": {
+          "x": 1.5666333190767752,
+          "y": 1.7520109434896654,
+          "z": 1.5324748318753336
+        },
+        "yaw": 0.8730363540074021,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 4868,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -17.07473715730336,
+        "y": -198.16764085231478,
+        "z": -632.1056274222275,
+        "tx": -24.9061988113044,
+        "ty": -199.2810256599953,
+        "tz": -633.300860718257,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/feral/feral-death-f03.jpg",
+      "phase": "death",
+      "n": 3,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.05,
+        "corpseRX": -0.44808794082495784,
+        "corpseRZ": 0.3284180466438116,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.7464557132153192,
+        "armL": -0.8899999999999997,
+        "armR": -0.23625336654608367
+      },
+      "subject": {
+        "id": "zombie.feral",
+        "name": "Feral",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -24.9061988113044,
+          "y": -199.27492322698174,
+          "z": -633.300860718257
+        },
+        "size": {
+          "x": 1.700735074810801,
+          "y": 1.8317460913081618,
+          "z": 1.640906047625208
+        },
+        "yaw": 0.8476004810730874,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 4868,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -17.07473715730336,
+        "y": -198.16153841930122,
+        "z": -632.1056274222275,
+        "tx": -24.9061988113044,
+        "ty": -199.27492322698174,
+        "tz": -633.300860718257,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/feral/feral-death-f04.jpg",
+      "phase": "death",
+      "n": 4,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.06666666666666667,
+        "corpseRX": -0.5703379623394778,
+        "corpseRZ": 0.41366379659391184,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.7464557132153192,
+        "armL": -0.8899999999999997,
+        "armR": -0.2924278655084953
+      },
+      "subject": {
+        "id": "zombie.feral",
+        "name": "Feral",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -24.9061988113044,
+          "y": -199.26910245445652,
+          "z": -633.300860718257
+        },
+        "size": {
+          "x": 1.8126166944574784,
+          "y": 1.9031775002278266,
+          "z": 1.7298583748818146
+        },
+        "yaw": 0.8156622843714847,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 4868,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -17.07473715730336,
+        "y": -198.155717646776,
+        "z": -632.1056274222275,
+        "tx": -24.9061988113044,
+        "ty": -199.26910245445652,
+        "tz": -633.300860718257,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/feral/feral-death-f06.jpg",
+      "phase": "death",
+      "n": 6,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.09999999999999999,
+        "corpseRX": -0.7747836976971165,
+        "corpseRZ": 0.5478227193155252,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.7464557132153192,
+        "armL": -0.8899999999999997,
+        "armR": -0.3743110943207392
+      },
+      "subject": {
+        "id": "zombie.feral",
+        "name": "Feral",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -24.9061988113044,
+          "y": -199.25828574455042,
+          "z": -633.300860718257
+        },
+        "size": {
+          "x": 1.9760266119026433,
+          "y": 2.014799512289102,
+          "z": 1.8563367731637754
+        },
+        "yaw": 0.739682298991519,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 4868,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -17.07473715730336,
+        "y": -198.1449009368699,
+        "z": -632.1056274222275,
+        "tx": -24.9061988113044,
+        "ty": -199.25828574455042,
+        "tz": -633.300860718257,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/feral/feral-death-f08.jpg",
+      "phase": "death",
+      "n": 8,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.13333333333333333,
+        "corpseRX": -0.9348767070139486,
+        "corpseRZ": 0.6422325256638254,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.7464557132153192,
+        "armL": -0.8899999999999997,
+        "armR": -0.4204641816843529
+      },
+      "subject": {
+        "id": "zombie.feral",
+        "name": "Feral",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -24.9061988113044,
+          "y": -199.24853460588386,
+          "z": -633.300860718257
+        },
+        "size": {
+          "x": 2.067964349593993,
+          "y": 2.0798983002092655,
+          "z": 1.9217834258214452
+        },
+        "yaw": 0.6567502602626649,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 4868,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -17.07473715730336,
+        "y": -198.13514979820334,
+        "z": -632.1056274222275,
+        "tx": -24.9061988113044,
+        "ty": -199.24853460588386,
+        "tz": -633.300860718257,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/feral/feral-death-f12.jpg",
+      "phase": "death",
+      "n": 12,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.19999999999999998,
+        "corpseRX": -1.1634806204054506,
+        "corpseRZ": 0.7527157381773084,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.7464557132153192,
+        "armL": -0.8899999999999997,
+        "armR": -0.43220460367938224
+      },
+      "subject": {
+        "id": "zombie.feral",
+        "name": "Feral",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -24.9061988113044,
+          "y": -199.23205985459597,
+          "z": -633.300860718257
+        },
+        "size": {
+          "x": 2.10498306363203,
+          "y": 2.0815768665359826,
+          "z": 1.9302231553245974
+        },
+        "yaw": 0.4957398668554211,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 4868,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -17.07473715730336,
+        "y": -198.11867504691546,
+        "z": -632.1056274222275,
+        "tx": -24.9061988113044,
+        "ty": -199.23205985459597,
+        "tz": -633.300860718257,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/feral/feral-death-f20.jpg",
+      "phase": "death",
+      "n": 20,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.3333333333333333,
+        "corpseRX": -1.4170569543019587,
+        "corpseRZ": 0.8268126509173085,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.7464557132153192,
+        "armL": -0.8899999999999997,
+        "armR": -0.31441321069370737
+      },
+      "subject": {
+        "id": "zombie.feral",
+        "name": "Feral",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -24.9061988113044,
+          "y": -199.2099620939642,
+          "z": -633.300860718257
+        },
+        "size": {
+          "x": 1.9578763641280474,
+          "y": 1.8192131606935789,
+          "z": 1.775572681188578
+        },
+        "yaw": 0.2567009188808981,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 4868,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -17.07473715730336,
+        "y": -198.0965772862837,
+        "z": -632.1056274222275,
+        "tx": -24.9061988113044,
+        "ty": -199.2099620939642,
+        "tz": -633.300860718257,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/feral/feral-death-f40.jpg",
+      "phase": "death",
+      "n": 40,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.6666666666666671,
+        "corpseRX": -1.5716693776221402,
+        "corpseRZ": 0.8398922339089148,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.7464557132153192,
+        "armL": -0.8899999999999997,
+        "armR": -0.22
+      },
+      "subject": {
+        "id": "zombie.feral",
+        "name": "Feral",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -24.9061988113044,
+          "y": -199.19729529969416,
+          "z": -633.300860718257
+        },
+        "size": {
+          "x": 1.7719423270152497,
+          "y": 1.496971576417394,
+          "z": 1.5987689086042565
+        },
+        "yaw": 0.08893898658579145,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 4868,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -17.07473715730336,
+        "y": -198.0839160219846,
+        "z": -632.1056274222275,
+        "tx": -24.9061988113044,
+        "ty": -199.19730082966512,
+        "tz": -633.300860718257,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death/feral/feral-death-f80.jpg",
+      "phase": "death",
+      "n": 80,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 1.3333333333333335,
+        "corpseRX": -1.5486242660626806,
+        "corpseRZ": 0.8396185487560636,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.7464557132153192,
+        "armL": -0.8899999999999997,
+        "armR": -0.22
+      },
+      "subject": {
+        "id": "zombie.feral",
+        "name": "Feral",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -24.9061988113044,
+          "y": -199.19729529969416,
+          "z": -633.300860718257
+        },
+        "size": {
+          "x": 1.8019848251253592,
+          "y": 1.5459877608394947,
+          "z": 1.625548506778273
+        },
+        "yaw": 0.11450520169359162,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 4868,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -17.07473715730336,
+        "y": -198.0839160219846,
+        "z": -632.1056274222275,
+        "tx": -24.9061988113044,
+        "ty": -199.19730082966512,
+        "tz": -633.300860718257,
+        "fov": 40
+      }
+    }
+  ],
+  "errors": [],
+  "pageErrors": []
+}

@@ -1,0 +1,80 @@
+Game-test request c4b9cff9-2ea1-4d20-b4c2-969c42c7d1e3 queued at position 4. Waiting...
+GRANT grokbot GB-245: starting one game-test command
+camera: camera: loading the game.....................................
+camera: ready in 37 s on port 36923: match, ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11), 1600x900
+help: {"groupsL":1,"groupsR":1}
+setup: {"fp":true,"idle":"ready","weapon":"pistol","skin":11}
+m4        {"want":"m4","w":"m4","reloading":true,"dbg":{"timer":0.734800000000745,"anim":0.9299999999999999,"weapon":"m4"}}
+   control (no change at all): 36829 pixel(s)
+   u=0.05  glove pixels 55896  box 0,0,1599,899
+   u=0.2   glove pixels 61660  box 0,0,1599,899
+   u=0.35  glove pixels 60113  box 0,0,1599,899
+   u=0.5   glove pixels 42368  box 0,0,1599,899
+   u=0.65  glove pixels 53828  box 0,0,1599,899
+   u=0.8   glove pixels 63979  box 0,0,1599,899
+ak        {"want":"ak","w":"ak","reloading":true,"dbg":{"timer":0.9571000000014903,"anim":1.2,"weapon":"ak"}}
+   control (no change at all): 50288 pixel(s)
+   u=0.05  glove pixels 66372  box 0,0,1599,899
+   u=0.2   glove pixels 53760  box 0,0,1599,849
+   u=0.35  glove pixels 45275  box 0,0,1599,817
+   u=0.5   glove pixels 46444  box 0,0,1599,899
+   u=0.65  glove pixels 47718  box 0,0,1599,899
+   u=0.8   glove pixels 68859  box 0,0,1599,899
+aa12      {"want":"aa12","w":"aa12","reloading":true,"dbg":{"timer":1.3189000000022353,"anim":1.56,"weapon":"aa12"}}
+   control (no change at all): 59612 pixel(s)
+   u=0.05  glove pixels 58251  box 0,0,1599,899
+   u=0.2   glove pixels 42337  box 0,0,1599,894
+   u=0.35  glove pixels 54288  box 0,0,1599,899
+   u=0.5   glove pixels 83617  box 0,0,1599,899
+   u=0.65  glove pixels 30630  box 0,7,1599,899
+   u=0.8   glove pixels 63146  box 0,0,1599,899
+shotgun   {"want":"shotgun","w":"shotgun","reloading":true,"dbg":{"timer":0.1696999999992549,"anim":0.42,"weapon":"shotgun"}}
+   control (no change at all): 25014 pixel(s)
+   u=0.05  glove pixels 86365  box 0,0,1599,899
+   u=0.2   glove pixels 38455  box 0,0,1599,866
+   u=0.35  glove pixels 51803  box 0,0,1599,837
+   u=0.5   glove pixels 79774  box 0,0,1599,899
+   u=0.65  glove pixels 74681  box 0,0,1599,899
+   u=0.8   glove pixels 116550 box 0,0,1599,899
+sniper    {"want":"sniper","w":"sniper","reloading":true,"dbg":{"timer":1.1289999999999998,"anim":1.41,"weapon":"sniper"}}
+   control (no change at all): 61983 pixel(s)
+   u=0.05  glove pixels 80213  box 0,0,1599,899
+   u=0.2   glove pixels 50935  box 0,0,1599,899
+   u=0.35  glove pixels 89201  box 0,0,1599,848
+   u=0.5   glove pixels 74461  box 0,0,1599,899
+   u=0.65  glove pixels 154255 box 0,0,1599,899
+   u=0.8   glove pixels 109907 box 0,0,1599,899
+launcher  {"want":"launcher","w":"launcher","reloading":true,"dbg":{"timer":0.13789999999850988,"anim":0.4,"weapon":"launcher"}}
+   control (no change at all): 72730 pixel(s)
+   u=0.05  glove pixels 60899  box 0,0,1599,899
+   u=0.2   glove pixels 47582  box 0,0,1599,899
+   u=0.35  glove pixels 74105  box 0,0,1599,899
+   u=0.5   glove pixels 63401  box 0,0,1599,899
+   u=0.65  glove pixels 70876  box 0,0,1599,899
+   u=0.8   glove pixels 64422  box 0,9,1599,899
+pistol    {"want":"pistol","w":"pistol","reloading":true,"dbg":{"timer":0.5581999999992551,"anim":0.81,"weapon":"pistol"}}
+   control (no change at all): 57591 pixel(s)
+   u=0.05  glove pixels 83856  box 0,0,1599,899
+   u=0.2   glove pixels 75357  box 0,0,1599,899
+   u=0.35  glove pixels 83012  box 0,0,1599,899
+   u=0.5   glove pixels 89561  box 0,0,1599,899
+   u=0.65  glove pixels 101361 box 0,0,1599,899
+   u=0.8   glove pixels 109602 box 0,0,1599,899
+revolver  {"want":"revolver","w":"revolver","reloading":true,"dbg":{"timer":0.8135,"anim":1.08,"weapon":"revolver"}}
+   control (no change at all): 59231 pixel(s)
+   u=0.05  glove pixels 97870  box 0,0,1599,899
+   u=0.2   glove pixels 76828  box 0,0,1599,899
+   u=0.35  glove pixels 92182  box 0,0,1599,899
+   u=0.5   glove pixels 114174 box 0,0,1599,899
+   u=0.65  glove pixels 108925 box 0,0,1599,899
+   u=0.8   glove pixels 98543  box 0,0,1599,899
+uzi       {"want":"uzi","w":"uzi","reloading":true,"dbg":{"timer":0.592300000000745,"anim":0.84,"weapon":"uzi"}}
+   control (no change at all): 17245 pixel(s)
+   u=0.05  glove pixels 31578  box 0,0,1599,899
+   u=0.2   glove pixels 24867  box 0,0,1599,899
+   u=0.35  glove pixels 10707  box 0,1,1599,899
+   u=0.5   glove pixels 47172  box 0,0,1599,899
+   u=0.65  glove pixels 28435  box 0,0,1599,899
+   u=0.8   glove pixels 39734  box 0,0,1599,899
+wrote qa/2026-10-29-GB-245/before/counts.json
+camera stop: camera: stopped

@@ -1,0 +1,126 @@
+{
+ "shots": [
+  {
+   "target": "prop.dropped-helmet",
+   "view": "three",
+   "out": "review/principles/claude/after/prop.dropped-helmet-three.png"
+  },
+  {
+   "target": "prop.dropped-helmet",
+   "view": "front",
+   "out": "review/principles/claude/after/prop.dropped-helmet-front.png"
+  },
+  {
+   "target": "prop.insulated-boots",
+   "view": "three",
+   "out": "review/principles/claude/after/prop.insulated-boots-three.png"
+  },
+  {
+   "target": "prop.insulated-boots",
+   "view": "front",
+   "out": "review/principles/claude/after/prop.insulated-boots-front.png"
+  },
+  {
+   "target": "prop.rubber-boot",
+   "view": "three",
+   "out": "review/principles/claude/after/prop.rubber-boot-three.png"
+  },
+  {
+   "target": "prop.rubber-boot",
+   "view": "front",
+   "out": "review/principles/claude/after/prop.rubber-boot-front.png"
+  },
+  {
+   "target": "prop.worn-boots",
+   "view": "three",
+   "out": "review/principles/claude/after/prop.worn-boots-three.png"
+  },
+  {
+   "target": "prop.worn-boots",
+   "view": "front",
+   "out": "review/principles/claude/after/prop.worn-boots-front.png"
+  },
+  {
+   "target": "prop.standing-stone",
+   "view": "three",
+   "out": "review/principles/claude/after/prop.standing-stone-three.png"
+  },
+  {
+   "target": "prop.standing-stone",
+   "view": "front",
+   "out": "review/principles/claude/after/prop.standing-stone-front.png"
+  },
+  {
+   "target": "prop.ring-stone",
+   "view": "three",
+   "out": "review/principles/claude/after/prop.ring-stone-three.png"
+  },
+  {
+   "target": "prop.ring-stone",
+   "view": "front",
+   "out": "review/principles/claude/after/prop.ring-stone-front.png"
+  },
+  {
+   "target": "prop.marrow-door",
+   "view": "three",
+   "out": "review/principles/claude/after/prop.marrow-door-three.png"
+  },
+  {
+   "target": "prop.marrow-door",
+   "view": "front",
+   "out": "review/principles/claude/after/prop.marrow-door-front.png"
+  },
+  {
+   "target": "prop.reliquary",
+   "view": "three",
+   "out": "review/principles/claude/after/prop.reliquary-three.png"
+  },
+  {
+   "target": "prop.reliquary",
+   "view": "front",
+   "out": "review/principles/claude/after/prop.reliquary-front.png"
+  },
+  {
+   "target": "animal.squirrel",
+   "view": "three",
+   "out": "review/principles/claude/after/animal.squirrel-three.png"
+  },
+  {
+   "target": "animal.squirrel",
+   "view": "front",
+   "out": "review/principles/claude/after/animal.squirrel-front.png"
+  },
+  {
+   "target": "animal.butterfly",
+   "view": "three",
+   "out": "review/principles/claude/after/animal.butterfly-three.png"
+  },
+  {
+   "target": "animal.butterfly",
+   "view": "front",
+   "out": "review/principles/claude/after/animal.butterfly-front.png"
+  },
+  {
+   "target": "animal.frog",
+   "view": "three",
+   "out": "review/principles/claude/after/animal.frog-three.png"
+  },
+  {
+   "target": "animal.frog",
+   "view": "front",
+   "out": "review/principles/claude/after/animal.frog-front.png"
+  },
+  {
+   "target": "animal.turtle",
+   "view": "three",
+   "out": "review/principles/claude/after/animal.turtle-three.png"
+  },
+  {
+   "target": "animal.turtle",
+   "view": "front",
+   "out": "review/principles/claude/after/animal.turtle-front.png"
+  }
+ ],
+ "out": "review/principles/claude/after/",
+ "cols": 4
+}

@@ -1,0 +1,98 @@
+{
+ "shots": [
+  {
+   "target": "marine.fresh",
+   "view": "three",
+   "out": "review/principles/claude/people/marine.fresh-three.png"
+  },
+  {
+   "target": "marine.fresh",
+   "view": "front",
+   "out": "review/principles/claude/people/marine.fresh-front.png"
+  },
+  {
+   "target": "marine.fresh",
+   "view": "side",
+   "out": "review/principles/claude/people/marine.fresh-side.png"
+  },
+  {
+   "target": "person.okafor",
+   "view": "three",
+   "out": "review/principles/claude/people/person.okafor-three.png"
+  },
+  {
+   "target": "person.okafor",
+   "view": "front",
+   "out": "review/principles/claude/people/person.okafor-front.png"
+  },
+  {
+   "target": "person.okafor",
+   "view": "side",
+   "out": "review/principles/claude/people/person.okafor-side.png"
+  },
+  {
+   "target": "person.brandt",
+   "view": "three",
+   "out": "review/principles/claude/people/person.brandt-three.png"
+  },
+  {
+   "target": "person.brandt",
+   "view": "front",
+   "out": "review/principles/claude/people/person.brandt-front.png"
+  },
+  {
+   "target": "person.brandt",
+   "view": "side",
+   "out": "review/principles/claude/people/person.brandt-side.png"
+  },
+  {
+   "target": "person.pike",
+   "view": "three",
+   "out": "review/principles/claude/people/person.pike-three.png"
+  },
+  {
+   "target": "person.pike",
+   "view": "front",
+   "out": "review/principles/claude/people/person.pike-front.png"
+  },
+  {
+   "target": "person.pike",
+   "view": "side",
+   "out": "review/principles/claude/people/person.pike-side.png"
+  },
+  {
+   "target": "person.skeletal-marine",
+   "view": "three",
+   "out": "review/principles/claude/people/person.skeletal-marine-three.png"
+  },
+  {
+   "target": "person.skeletal-marine",
+   "view": "front",
+   "out": "review/principles/claude/people/person.skeletal-marine-front.png"
+  },
+  {
+   "target": "person.skeletal-marine",
+   "view": "side",
+   "out": "review/principles/claude/people/person.skeletal-marine-side.png"
+  },
+  {
+   "target": "person.cave-guardian",
+   "view": "three",
+   "out": "review/principles/claude/people/person.cave-guardian-three.png"
+  },
+  {
+   "target": "person.cave-guardian",
+   "view": "front",
+   "out": "review/principles/claude/people/person.cave-guardian-front.png"
+  },
+  {
+   "target": "person.cave-guardian",
+   "view": "side",
+   "out": "review/principles/claude/people/person.cave-guardian-side.png"
+  }
+ ],
+ "out": "review/principles/claude/people/",
+ "sheet": true,
+ "cols": 4,
+ "tile": 480
+}

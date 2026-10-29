@@ -1,0 +1,9 @@
+[
+{"up":0.10,"in":0.04,"side":0.06,"fwd":0,"tip":0,"turn":0,"cant":0.4,"hip":0},
+{"up":0.10,"in":0.04,"side":0.12,"fwd":0,"tip":0,"turn":0,"cant":0.4,"hip":0},
+{"up":0.10,"in":0.04,"side":-0.06,"fwd":0,"tip":0,"turn":0,"cant":0.4,"hip":0},
+{"up":0.10,"in":0.04,"side":0.08,"fwd":0,"tip":-0.15,"turn":0,"cant":0.4,"hip":0},
+{"up":0.06,"in":0.04,"side":0.10,"fwd":0,"tip":-0.15,"turn":0,"cant":0.4,"hip":0},
+{"up":0.14,"in":0.04,"side":0.10,"fwd":0,"tip":0,"turn":0,"cant":0.4,"hip":0},
+{"up":0.10,"in":-0.04,"side":0.10,"fwd":0,"tip":0,"turn":0,"cant":0.4,"hip":0}
+]

@@ -1,0 +1,1681 @@
+{
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "frames": [
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/drowned/drowned-idle-f00.jpg",
+      "phase": "idle",
+      "n": 0,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0,
+        "hipsY": 0.8061487686180809,
+        "armL": -0.1518824954209953,
+        "armR": -0.7481175045790047
+      },
+      "subject": {
+        "id": "zombie.drowned",
+        "name": "Drowned",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999889990671427,
+          "y": -199.13780177876347,
+          "z": -631.9724978145363
+        },
+        "size": {
+          "x": 0.8522978036590771,
+          "y": 1.7278317655016053,
+          "z": 0.8891046625508352
+        },
+        "yaw": 0.004,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5708,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -24.011406363691897,
+        "y": -198.02441697108296,
+        "z": -625.1276185148449,
+        "tx": -27.999889990671427,
+        "ty": -199.13780177876347,
+        "tz": -631.9724978145363,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/drowned/drowned-attack-f01.jpg",
+      "phase": "attack",
+      "n": 1,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.20333333333333334,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.007575757575757569,
+        "hipsY": 0.8039121969903051,
+        "armL": -1.4333333333333333,
+        "armR": -1.4333333333333333
+      },
+      "subject": {
+        "id": "zombie.drowned",
+        "name": "Drowned",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999739111073772,
+          "y": -199.13780177876347,
+          "z": -631.9347781162959
+        },
+        "size": {
+          "x": 0.8494346986167791,
+          "y": 1.7284091422405652,
+          "z": 1.3627361874008557
+        },
+        "yaw": 0.004,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5708,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -24.011255484094242,
+        "y": -198.02441697108296,
+        "z": -625.0898988166045,
+        "tx": -27.999739111073772,
+        "ty": -199.13780177876347,
+        "tz": -631.9347781162959,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/drowned/drowned-attack-f02.jpg",
+      "phase": "attack",
+      "n": 2,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.18666666666666668,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.01515151515151515,
+        "hipsY": 0.800036363261644,
+        "armL": -1.5166666666666668,
+        "armR": -1.5166666666666668
+      },
+      "subject": {
+        "id": "zombie.drowned",
+        "name": "Drowned",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999588231476118,
+          "y": -199.13780177876347,
+          "z": -631.8970584180555
+        },
+        "size": {
+          "x": 0.8470703272116857,
+          "y": 1.7284762434615857,
+          "z": 1.3778668740982312
+        },
+        "yaw": 0.004,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5708,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -24.011104604496587,
+        "y": -198.02441697108296,
+        "z": -625.0521791183642,
+        "tx": -27.999588231476118,
+        "ty": -199.13780177876347,
+        "tz": -631.8970584180555,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/drowned/drowned-attack-f03.jpg",
+      "phase": "attack",
+      "n": 3,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.17,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.02272727272727272,
+        "hipsY": 0.7998910542802892,
+        "armL": -1.6,
+        "armR": -1.6
+      },
+      "subject": {
+        "id": "zombie.drowned",
+        "name": "Drowned",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999437351878463,
+          "y": -199.13780177876347,
+          "z": -631.8593387198151
+        },
+        "size": {
+          "x": 0.8438836111228447,
+          "y": 1.728314104289666,
+          "z": 1.3847522369632088
+        },
+        "yaw": 0.004,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5708,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -24.010953724898933,
+        "y": -198.02441697108296,
+        "z": -625.0144594201238,
+        "tx": -27.999437351878463,
+        "ty": -199.13780177876347,
+        "tz": -631.8593387198151,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/drowned/drowned-attack-f04.jpg",
+      "phase": "attack",
+      "n": 4,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.15333333333333335,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.0303030303030303,
+        "hipsY": 0.8024572142008142,
+        "armL": -1.6833333333333333,
+        "armR": -1.6833333333333333
+      },
+      "subject": {
+        "id": "zombie.drowned",
+        "name": "Drowned",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999286472280808,
+          "y": -199.13780177876347,
+          "z": -631.8216190215747
+        },
+        "size": {
+          "x": 0.8398565101363538,
+          "y": 1.7276115872600997,
+          "z": 1.3807796476279464
+        },
+        "yaw": 0.004,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5708,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -24.010802845301278,
+        "y": -198.02441697108296,
+        "z": -624.9767397218834,
+        "tx": -27.999286472280808,
+        "ty": -199.13780177876347,
+        "tz": -631.8216190215747,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/drowned/drowned-attack-f05.jpg",
+      "phase": "attack",
+      "n": 5,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.1366666666666667,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.03787878787878787,
+        "hipsY": 0.805014722952213,
+        "armL": -1.7666666666666666,
+        "armR": -1.7666666666666666
+      },
+      "subject": {
+        "id": "zombie.drowned",
+        "name": "Drowned",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999135592683153,
+          "y": -199.13780177876347,
+          "z": -631.7838993233344
+        },
+        "size": {
+          "x": 0.8351552869903145,
+          "y": 1.7271414616650986,
+          "z": 1.35818059317171
+        },
+        "yaw": 0.004,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5708,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -24.010651965703623,
+        "y": -198.02441697108296,
+        "z": -624.939020023643,
+        "tx": -27.999135592683153,
+        "ty": -199.13780177876347,
+        "tz": -631.7838993233344,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/drowned/drowned-attack-f06.jpg",
+      "phase": "attack",
+      "n": 6,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.12000000000000002,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.04545454545454545,
+        "hipsY": 0.8076065067812151,
+        "armL": -1.85,
+        "armR": -1.85
+      },
+      "subject": {
+        "id": "zombie.drowned",
+        "name": "Drowned",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.9989847130855,
+          "y": -199.13780177876347,
+          "z": -631.746179625094
+        },
+        "size": {
+          "x": 0.8334547381717705,
+          "y": 1.7272176639973225,
+          "z": 1.3166971942503096
+        },
+        "yaw": 0.004,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5708,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -24.01050108610597,
+        "y": -198.02441697108296,
+        "z": -624.9013003254026,
+        "tx": -27.9989847130855,
+        "ty": -199.13780177876347,
+        "tz": -631.746179625094,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/drowned/drowned-attack-f07.jpg",
+      "phase": "attack",
+      "n": 7,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.10333333333333336,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.05303030303030302,
+        "hipsY": 0.8102022768246865,
+        "armL": -1.9333333333333333,
+        "armR": -1.9333333333333333
+      },
+      "subject": {
+        "id": "zombie.drowned",
+        "name": "Drowned",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.998833833487843,
+          "y": -199.13780177876347,
+          "z": -631.7084599268536
+        },
+        "size": {
+          "x": 0.8320802597468315,
+          "y": 1.727963109255711,
+          "z": 1.2570540793317377
+        },
+        "yaw": 0.004,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5708,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -24.010350206508313,
+        "y": -198.02441697108296,
+        "z": -624.8635806271623,
+        "tx": -27.998833833487843,
+        "ty": -199.13780177876347,
+        "tz": -631.7084599268536,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/drowned/drowned-attack-f08.jpg",
+      "phase": "attack",
+      "n": 8,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.0866666666666667,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.0606060606060606,
+        "hipsY": 0.8127457993349412,
+        "armL": -2.0166666666666666,
+        "armR": -2.0166666666666666
+      },
+      "subject": {
+        "id": "zombie.drowned",
+        "name": "Drowned",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99868295389019,
+          "y": -199.13780177876347,
+          "z": -631.6707402286132
+        },
+        "size": {
+          "x": 0.8295121535678156,
+          "y": 1.769996375584526,
+          "z": 1.1805831879753441
+        },
+        "yaw": 0.004,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5708,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -24.01019932691066,
+        "y": -198.02441697108296,
+        "z": -624.8258609289219,
+        "tx": -27.99868295389019,
+        "ty": -199.13780177876347,
+        "tz": -631.6707402286132,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/drowned/drowned-attack-f09.jpg",
+      "phase": "attack",
+      "n": 9,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.07000000000000003,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.06818181818181816,
+        "hipsY": 0.8151863665956778,
+        "armL": -2.1,
+        "armR": -2.1
+      },
+      "subject": {
+        "id": "zombie.drowned",
+        "name": "Drowned",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.998532074292534,
+          "y": -199.13780177876347,
+          "z": -631.6330205303728
+        },
+        "size": {
+          "x": 0.8257063501560822,
+          "y": 1.8395372068986262,
+          "z": 1.0927604498767778
+        },
+        "yaw": 0.004,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5708,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -24.010048447313004,
+        "y": -198.02441697108296,
+        "z": -624.7881412306815,
+        "tx": -27.998532074292534,
+        "ty": -199.13780177876347,
+        "tz": -631.6330205303728,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/drowned/drowned-attack-f10.jpg",
+      "phase": "attack",
+      "n": 10,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.05333333333333337,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.07575757575757575,
+        "hipsY": 0.8174785864124512,
+        "armL": -2.183333333333333,
+        "armR": -2.183333333333333
+      },
+      "subject": {
+        "id": "zombie.drowned",
+        "name": "Drowned",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99838119469488,
+          "y": -199.13780177876347,
+          "z": -631.5953008321325
+        },
+        "size": {
+          "x": 0.8206186113809899,
+          "y": 1.9004569260145274,
+          "z": 0.9955298895267788
+        },
+        "yaw": 0.004,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5708,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -24.00989756771535,
+        "y": -198.02441697108296,
+        "z": -624.7504215324411,
+        "tx": -27.99838119469488,
+        "ty": -199.13780177876347,
+        "tz": -631.5953008321325,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/drowned/drowned-attack-f12.jpg",
+      "phase": "attack",
+      "n": 12,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.020000000000000042,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.0909090909090909,
+        "hipsY": 0.8214621103032869,
+        "armL": -2.35,
+        "armR": -2.35
+      },
+      "subject": {
+        "id": "zombie.drowned",
+        "name": "Drowned",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99807943549957,
+          "y": -199.13780177876347,
+          "z": -631.5198614356517
+        },
+        "size": {
+          "x": 0.8065696840773953,
+          "y": 1.9907796697110598,
+          "z": 0.7981540909385103
+        },
+        "yaw": 0.004,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5708,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -24.00959580852004,
+        "y": -198.02441697108296,
+        "z": -624.6749821359604,
+        "tx": -27.99807943549957,
+        "ty": -199.13780177876347,
+        "tz": -631.5198614356517,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/drowned/drowned-attack-f14.jpg",
+      "phase": "attack",
+      "n": 14,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.28,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.1,
+        "hipsY": 0.8244346268227731,
+        "armL": -2.45,
+        "armR": -2.45
+      },
+      "subject": {
+        "id": "zombie.drowned",
+        "name": "Drowned",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99777767630426,
+          "y": -199.13780177876347,
+          "z": -631.444422039171
+        },
+        "size": {
+          "x": 0.7960290660523519,
+          "y": 2.025777057916457,
+          "z": 0.7031615611459756
+        },
+        "yaw": 0.004,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5708,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -24.00929404932473,
+        "y": -198.02441697108296,
+        "z": -624.5995427394796,
+        "tx": -27.99777767630426,
+        "ty": -199.13780177876347,
+        "tz": -631.444422039171,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/drowned/drowned-attack-f16.jpg",
+      "phase": "attack",
+      "n": 16,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.2466666666666667,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.13083521591645728,
+        "hipsY": 0.8096026801494417,
+        "armL": -1.7994365481516044,
+        "armR": -1.7994365481516044
+      },
+      "subject": {
+        "id": "zombie.drowned",
+        "name": "Drowned",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99747591710895,
+          "y": -199.13780177876347,
+          "z": -631.3689826426902
+        },
+        "size": {
+          "x": 0.8347616227744865,
+          "y": 1.7335746234231806,
+          "z": 1.2027288318300862
+        },
+        "yaw": 0.004,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5708,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -24.00899229012942,
+        "y": -198.02441697108296,
+        "z": -624.5241033429988,
+        "tx": -27.99747591710895,
+        "ty": -199.13780177876347,
+        "tz": -631.3689826426902,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/drowned/drowned-attack-f18.jpg",
+      "phase": "attack",
+      "n": 18,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.21333333333333337,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.23134685680847852,
+        "hipsY": 0.7947677554319039,
+        "armL": -1.1997246201889593,
+        "armR": -1.1997246201889593
+      },
+      "subject": {
+        "id": "zombie.drowned",
+        "name": "Drowned",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99717415791364,
+          "y": -199.13780177876347,
+          "z": -631.2935432462094
+        },
+        "size": {
+          "x": 0.8416608853120877,
+          "y": 1.7135142154260734,
+          "z": 1.0920650641957081
+        },
+        "yaw": 0.004,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5708,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -24.00869053093411,
+        "y": -198.02441697108296,
+        "z": -624.4486639465181,
+        "tx": -27.99717415791364,
+        "ty": -199.13780177876347,
+        "tz": -631.2935432462094,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/drowned/drowned-attack-f20.jpg",
+      "phase": "attack",
+      "n": 20,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.18000000000000005,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.27823941877010794,
+        "hipsY": 0.7810935030026087,
+        "armL": -0.6977409125245613,
+        "armR": -0.6977409125245613
+      },
+      "subject": {
+        "id": "zombie.drowned",
+        "name": "Drowned",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99687239871833,
+          "y": -199.13780177876347,
+          "z": -631.2181038497287
+        },
+        "size": {
+          "x": 0.8211563130157948,
+          "y": 1.6870603464936949,
+          "z": 0.8281245671167881
+        },
+        "yaw": 0.004,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5708,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -24.0083887717388,
+        "y": -198.02441697108296,
+        "z": -624.3732245500373,
+        "tx": -27.99687239871833,
+        "ty": -199.13780177876347,
+        "tz": -631.2181038497287,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/drowned/drowned-attack-f22.jpg",
+      "phase": "attack",
+      "n": 22,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.14666666666666672,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.2606446496203773,
+        "hipsY": 0.769618578771461,
+        "armL": -0.3327231604293151,
+        "armR": -0.3327231604293151
+      },
+      "subject": {
+        "id": "zombie.drowned",
+        "name": "Drowned",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99657063952302,
+          "y": -199.13780177876347,
+          "z": -631.1426644532479
+        },
+        "size": {
+          "x": 0.7988889768790983,
+          "y": 1.6553228897753627,
+          "z": 0.9307111629112796
+        },
+        "yaw": 0.004,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5708,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -24.00808701254349,
+        "y": -198.02441697108296,
+        "z": -624.2977851535566,
+        "tx": -27.99657063952302,
+        "ty": -199.13780177876347,
+        "tz": -631.1426644532479,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/drowned/drowned-attack-f24.jpg",
+      "phase": "attack",
+      "n": 24,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.1133333333333334,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.182640475157874,
+        "hipsY": 0.7611730009679765,
+        "armL": -0.133203106482146,
+        "armR": -0.133203106482146
+      },
+      "subject": {
+        "id": "zombie.drowned",
+        "name": "Drowned",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99626888032771,
+          "y": -199.13780177876347,
+          "z": -631.0672250567671
+        },
+        "size": {
+          "x": 0.7886426470779391,
+          "y": 1.6300932850762706,
+          "z": 1.0002525342513309
+        },
+        "yaw": 0.004,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5708,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -24.00778525334818,
+        "y": -198.02441697108296,
+        "z": -624.2223457570758,
+        "tx": -27.99626888032771,
+        "ty": -199.13780177876347,
+        "tz": -631.0672250567671,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/drowned/drowned-attack-f26.jpg",
+      "phase": "attack",
+      "n": 26,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.08000000000000007,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.06230586150776819,
+        "hipsY": 0.7559368154862454,
+        "armL": -0.09999999999999992,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.drowned",
+        "name": "Drowned",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.995967121132402,
+          "y": -199.13780177876347,
+          "z": -630.9917856602864
+        },
+        "size": {
+          "x": 0.7871135996567773,
+          "y": 1.6147476513069137,
+          "z": 1.0401360564884499
+        },
+        "yaw": 0.004,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5708,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -24.007483494152872,
+        "y": -198.02441697108296,
+        "z": -624.146906360595,
+        "tx": -27.995967121132402,
+        "ty": -199.13780177876347,
+        "tz": -630.9917856602864,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/drowned/drowned-attack-f30.jpg",
+      "phase": "attack",
+      "n": 30,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.7449182668441702,
+        "armL": -0.09999999999999992,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.drowned",
+        "name": "Drowned",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.995363602741783,
+          "y": -199.13780177876347,
+          "z": -630.8409068673249
+        },
+        "size": {
+          "x": 0.7882606688531197,
+          "y": 1.598283143659728,
+          "z": 1.0776595303353815
+        },
+        "yaw": 0.004,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 5708,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -24.006879975762253,
+        "y": -198.02441697108296,
+        "z": -623.9960275676335,
+        "tx": -27.995363602741783,
+        "ty": -199.13780177876347,
+        "tz": -630.8409068673249,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/drowned/drowned-death-f00.jpg",
+      "phase": "death",
+      "n": 0,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.7449182668441702,
+        "armL": -0.09999999999999992,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.drowned",
+        "name": "Drowned",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.995363602741783,
+          "y": -199.13780177876347,
+          "z": -630.8409068673249
+        },
+        "size": {
+          "x": 0.7851547957781584,
+          "y": 1.5968181844830838,
+          "z": 0.783201769963739
+        },
+        "yaw": 0.004,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5804,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -24.006879975762253,
+        "y": -198.02441697108296,
+        "z": -623.9960275676335,
+        "tx": -27.995363602741783,
+        "ty": -199.13780177876347,
+        "tz": -630.8409068673249,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/drowned/drowned-death-f01.jpg",
+      "phase": "death",
+      "n": 1,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.016666666666666666,
+        "corpseRX": 0.09362668139711344,
+        "corpseRZ": 0.024991536772229865,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.7449182668441702,
+        "armL": -0.14572996290141207,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.drowned",
+        "name": "Drowned",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.995363602741783,
+          "y": -199.13071386507892,
+          "z": -630.8409068673249
+        },
+        "size": {
+          "x": 0.8359903887792157,
+          "y": 1.7921050859575587,
+          "z": 0.6123330981663457
+        },
+        "yaw": -0.007844228103432199,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5804,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -24.006879975762253,
+        "y": -198.0173290573984,
+        "z": -623.9960275676335,
+        "tx": -27.995363602741783,
+        "ty": -199.13071386507892,
+        "tz": -630.8409068673249,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/drowned/drowned-death-f02.jpg",
+      "phase": "death",
+      "n": 2,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.03333333333333333,
+        "corpseRX": 0.18391854921893366,
+        "corpseRZ": 0.04874901624264203,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.7449182668441702,
+        "armL": -0.27712215928755446,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.drowned",
+        "name": "Drowned",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.995363602741783,
+          "y": -199.12392024201824,
+          "z": -630.8409068673249
+        },
+        "size": {
+          "x": 0.8486813281901959,
+          "y": 1.8344811550557836,
+          "z": 0.8211435191427654
+        },
+        "yaw": -0.01699402954545547,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5804,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -24.006879975762253,
+        "y": -198.01053543433773,
+        "z": -623.9960275676335,
+        "tx": -27.995363602741783,
+        "ty": -199.12392024201824,
+        "tz": -630.8409068673249,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/drowned/drowned-death-f03.jpg",
+      "phase": "death",
+      "n": 3,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.05,
+        "corpseRX": 0.2708098894457976,
+        "corpseRZ": 0.07113622679186882,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.7449182668441702,
+        "armL": -0.394570283362604,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.drowned",
+        "name": "Drowned",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.995363602741783,
+          "y": -199.11741620439358,
+          "z": -630.8409068673249
+        },
+        "size": {
+          "x": 0.8899741203053466,
+          "y": 1.8748495487653827,
+          "z": 1.042392201446205
+        },
+        "yaw": -0.023740940116188738,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5804,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -24.006879975762253,
+        "y": -198.00403139671306,
+        "z": -623.9960275676335,
+        "tx": -27.995363602741783,
+        "ty": -199.11741620439358,
+        "tz": -630.8409068673249,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/drowned/drowned-death-f04.jpg",
+      "phase": "death",
+      "n": 4,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.06666666666666667,
+        "corpseRX": 0.3542513574245198,
+        "corpseRZ": 0.09205806279520595,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.7449182668441702,
+        "armL": -0.4985836073786648,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.drowned",
+        "name": "Drowned",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.995363602741783,
+          "y": -199.11119699548055,
+          "z": -630.8409068673249
+        },
+        "size": {
+          "x": 0.9290149561516685,
+          "y": 1.906954831726324,
+          "z": 1.2360280221573703
+        },
+        "yaw": -0.028373182223911515,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5804,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -24.006879975762253,
+        "y": -197.99781218780004,
+        "z": -623.9960275676335,
+        "tx": -27.995363602741783,
+        "ty": -199.11119699548055,
+        "tz": -630.8409068673249,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/drowned/drowned-death-f06.jpg",
+      "phase": "death",
+      "n": 6,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.09999999999999999,
+        "corpseRX": 0.5106755475190304,
+        "corpseRZ": 0.12931083993099346,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.7449182668441702,
+        "armL": -0.6688331418222069,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.drowned",
+        "name": "Drowned",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.995363602741783,
+          "y": -199.09959376687863,
+          "z": -630.8409068673249
+        },
+        "size": {
+          "x": 0.9953901317664702,
+          "y": 1.9438612373958506,
+          "z": 1.5486797947741024
+        },
+        "yaw": -0.03239629084632716,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5804,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -24.006879975762253,
+        "y": -197.9862089591981,
+        "z": -623.9960275676335,
+        "tx": -27.995363602741783,
+        "ty": -199.09959376687863,
+        "tz": -630.8409068673249,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/drowned/drowned-death-f08.jpg",
+      "phase": "death",
+      "n": 8,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.13333333333333333,
+        "corpseRX": 0.6531416150059897,
+        "corpseRZ": 0.1604302532207937,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.7449182668441702,
+        "armL": -0.7936948495745919,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.drowned",
+        "name": "Drowned",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.995363602741783,
+          "y": -199.089071390833,
+          "z": -630.8409068673249
+        },
+        "size": {
+          "x": 1.046953668686065,
+          "y": 1.948330874050555,
+          "z": 1.7760997268002257
+        },
+        "yaw": -0.031111787032942796,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5804,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -24.006879975762253,
+        "y": -197.97568658315248,
+        "z": -623.9960275676335,
+        "tx": -27.995363602741783,
+        "ty": -199.089071390833,
+        "tz": -630.8409068673249,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/drowned/drowned-death-f12.jpg",
+      "phase": "death",
+      "n": 12,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.19999999999999998,
+        "corpseRX": 0.8971148102874587,
+        "corpseRZ": 0.20580232033043577,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.7449182668441702,
+        "armL": -0.9345414155193817,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.drowned",
+        "name": "Drowned",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.995363602741783,
+          "y": -199.07110759171272,
+          "z": -630.8409068673249
+        },
+        "size": {
+          "x": 1.1116368539950443,
+          "y": 1.8555391502343639,
+          "z": 2.020263964863261
+        },
+        "yaw": -0.019261766472025883,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5804,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -24.006879975762253,
+        "y": -197.9577227840322,
+        "z": -623.9960275676335,
+        "tx": -27.995363602741783,
+        "ty": -199.07110759171272,
+        "tz": -630.8409068673249,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/drowned/drowned-death-f20.jpg",
+      "phase": "death",
+      "n": 20,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.3333333333333333,
+        "corpseRX": 1.2345649341006677,
+        "corpseRZ": 0.24801273545602584,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.7449182668441702,
+        "armL": -0.9724673831102655,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.drowned",
+        "name": "Drowned",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.995363602741783,
+          "y": -199.04630670704887,
+          "z": -630.8409068673249
+        },
+        "size": {
+          "x": 1.171417444318891,
+          "y": 1.5291726405746147,
+          "z": 2.0905967134201546
+        },
+        "yaw": 0.012668299270324195,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5804,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -24.006879975762253,
+        "y": -197.93292189936835,
+        "z": -623.9960275676335,
+        "tx": -27.995363602741783,
+        "ty": -199.04630670704887,
+        "tz": -630.8409068673249,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/drowned/drowned-death-f40.jpg",
+      "phase": "death",
+      "n": 40,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.6666666666666671,
+        "corpseRX": 1.4706320936520194,
+        "corpseRZ": 0.26104824258143083,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.7449182668441702,
+        "armL": -0.95,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.drowned",
+        "name": "Drowned",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.995363602741783,
+          "y": -199.03000177876348,
+          "z": -630.8409068673249
+        },
+        "size": {
+          "x": 1.2176301759872636,
+          "y": 1.1803895603821104,
+          "z": 1.9590522068341443
+        },
+        "yaw": 0.04341682924083368,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5804,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -24.006879975762253,
+        "y": -197.91662051572533,
+        "z": -623.9960275676335,
+        "tx": -27.995363602741783,
+        "ty": -199.03000532340585,
+        "tz": -630.8409068673249,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/drowned/drowned-death-f80.jpg",
+      "phase": "death",
+      "n": 80,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 1.3333333333333335,
+        "corpseRX": 1.456707759892715,
+        "corpseRZ": 0.2606485358973447,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.7449182668441702,
+        "armL": -0.95,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.drowned",
+        "name": "Drowned",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.995363602741783,
+          "y": -199.03000177876348,
+          "z": -630.8409068673249
+        },
+        "size": {
+          "x": 1.213557112174275,
+          "y": 1.2039420257413553,
+          "z": 1.9697716483822205
+        },
+        "yaw": 0.039703151711082865,
+        "info": {
+          "meshes": 3,
+          "drawables": 3,
+          "tris": 5804,
+          "points": 0,
+          "segments": 0,
+          "materials": 3
+        }
+      },
+      "camera": {
+        "x": -24.006879975762253,
+        "y": -197.91662051572533,
+        "z": -623.9960275676335,
+        "tx": -27.995363602741783,
+        "ty": -199.03000532340585,
+        "tz": -630.8409068673249,
+        "fov": 40
+      }
+    }
+  ],
+  "errors": [],
+  "pageErrors": []
+}

@@ -1,0 +1,191 @@
+[
+  {
+    "n": 1,
+    "code": 0,
+    "fps": 58.9,
+    "low": 38.1,
+    "worst": 32.5,
+    "hitches": 0,
+    "tick": 13.75,
+    "builds": 0,
+    "pipelines": 0,
+    "spikeCauses": {
+      "spikes": 16,
+      "pipelines": 0,
+      "builds": 0,
+      "uploads": 0,
+      "sunShadow": 0,
+      "gc": 0,
+      "code": 16
+    },
+    "spikes": [
+      {
+        "frame": 23,
+        "ms": 35,
+        "top": [
+          "r:render 16.9",
+          "r:matrices 4.7",
+          "zombies 4.0",
+          "w:minimap 2.5"
+        ],
+        "heapMB": 881.5,
+        "freedMB": -1.1,
+        "newPipelines": 0,
+        "newTextures": 0,
+        "newGeometries": 0,
+        "newBuilds": 0,
+        "sunShadow": 0,
+        "newRenderObjects": 1,
+        "t0": 33257.6,
+        "t1": 33293.3
+      },
+      {
+        "frame": 24,
+        "ms": 30.8,
+        "top": [
+          "r:render 16.9",
+          "r:matrices 4.1",
+          "zombies 3.9",
+          "r:cull 1.3"
+        ],
+        "heapMB": 882.3,
+        "freedMB": -0.8,
+        "newPipelines": 0,
+        "newTextures": 0,
+        "newGeometries": 0,
+        "newBuilds": 0,
+        "sunShadow": 0,
+        "newRenderObjects": 0,
+        "t0": 33293.3,
+        "t1": 33324.9
+      },
+      {
+        "frame": 241,
+        "ms": 25.6,
+        "top": [
+          "r:render 13.3",
+          "r:matrices 2.4",
+          "zombies 2.3",
+          "m:pose 1.3"
+        ],
+        "heapMB": 887.3,
+        "freedMB": -0.8,
+        "newPipelines": 0,
+        "newTextures": 0,
+        "newGeometries": 0,
+        "newBuilds": 0,
+        "sunShadow": 0,
+        "newRenderObjects": 0,
+        "t0": 36927.1,
+        "t1": 36953.5
+      },
+      {
+        "frame": 260,
+        "ms": 27.1,
+        "top": [
+          "r:render 8.4",
+          "r:matrices 4.5",
+          "zombies 4.3",
+          "w:minimap 2.2"
+        ],
+        "heapMB": 874.7,
+        "freedMB": -0.8,
+        "newPipelines": 0,
+        "newTextures": 0,
+        "newGeometries": 0,
+        "newBuilds": 0,
+        "sunShadow": 0,
+        "newRenderObjects": 0,
+        "t0": 37257.5,
+        "t1": 37285.2
+      },
+      {
+        "frame": 1340,
+        "ms": 25.6,
+        "top": [
+          "r:render 12.3",
+          "r:matrices 3.9",
+          "zombies 3.6",
+          "m:idle 1.0"
+        ],
+        "heapMB": 909,
+        "freedMB": -0.9,
+        "newPipelines": 0,
+        "newTextures": 0,
+        "newGeometries": 0,
+        "newBuilds": 0,
+        "sunShadow": 0,
+        "newRenderObjects": 0,
+        "t0": 55257.3,
+        "t1": 55283.6
+      },
+      {
+        "frame": 1400,
+        "ms": 34.9,
+        "top": [
+          "r:render 18.8",
+          "zombies 6.1",
+          "r:matrices 3.7",
+          "w:minimap 1.2"
+        ],
+        "heapMB": 921,
+        "freedMB": -1.1,
+        "newPipelines": 0,
+        "newTextures": 0,
+        "newGeometries": 0,
+        "newBuilds": 0,
+        "sunShadow": 0,
+        "newRenderObjects": 0,
+        "t0": 56257.3,
+        "t1": 56294
+      },
+      {
+        "frame": 1461,
+        "ms": 25.6,
+        "top": [
+          "r:render 8.3",
+          "r:matrices 5.5",
+          "zombies 5.1",
+          "r:cull 1.8"
+        ],
+        "heapMB": 918.3,
+        "freedMB": -0.9,
+        "newPipelines": 0,
+        "newTextures": 0,
+        "newGeometries": 0,
+        "newBuilds": 0,
+        "sunShadow": 0,
+        "newRenderObjects": 0,
+        "t0": 57290.8,
+        "t1": 57317.2
+      },
+      {
+        "frame": 1518,
+        "ms": 25.9,
+        "top": [
+          "r:render 13.0",
+          "zombies 4.4",
+          "r:matrices 2.9",
+          "m:pose 1.1"
+        ],
+        "heapMB": 945.9,
+        "freedMB": -0.9,
+        "newPipelines": 0,
+        "newTextures": 0,
+        "newGeometries": 0,
+        "newBuilds": 0,
+        "sunShadow": 0,
+        "newRenderObjects": 0,
+        "t0": 58290.4,
+        "t1": 58317.1
+      }
+    ],
+    "pipes": {
+      "made": 0,
+      "released": 0,
+      "withNewShaders": 0,
+      "top": [],
+      "first": []
+    }
+  }
+]

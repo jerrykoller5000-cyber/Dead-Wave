@@ -1,0 +1,31 @@
+@@ -53466,0 +56317 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
++            const hadLine = z.lineClear;
+@@ -53469,9 +56320,15 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
+-            if (!z.lineClear) z.lineGo = 1.2;
+-          }
+-          // Backing off too only with a line: backing off blind took it out past `near`, walking
+-          // in blind brought it back, and it rocked there (spiders lost at 6 to 8 m, played through).
+-          // Straight away from him, not back along the flow field: reversing the field's
+-          // heading at a corner took it back round the corner it had just come round.
+-          if (dist < near && z.lineClear !== false) { sx = -nx; sz = -nz; spd = z.baseSpeed * 0.85; }
+-          else if (dist < hold && z.lineClear !== false && !(z.lineGo > 0)) {
+-            if (z.spider) { z.strafeT = (z.strafeT || 0) - dt; if (z.strafeT <= 0) { z.strafeT = 1.2 + Math.random(); z.strafeDir = Math.random() < 0.5 ? -1 : 1; } const d0 = z.strafeDir || 1; sx = -nz * d0; sz = nx * d0; spd = z.baseSpeed * 0.6; }
++            if (!z.lineClear) { z.lineSawBlock = true; z.lineGo = 1.2; }
++            else if (hadLine === false && z.lineSawBlock) z.lineGo = 1.2;
++          }
++          // GP-19979: once a blocked hunter wins a firing line, commit straight into
++          // it for lineGo, then hold that spot. A back-off or random skitter at the
++          // corner put it behind the house again; an open-field spider still strafes.
++          // If a push or a moving target blocks the line later, the ordinary chase
++          // resumes until the two offset lines are clear again.
++          if (dist < hold && z.lineSawBlock && z.lineClear !== false && z.lineGo > 0) {
++            sx = nx; sz = nz; spd = Math.min(spd, z.baseSpeed * 0.55);
++          } else if (dist < near && z.lineClear !== false) {
++            if (z.lineSawBlock) spd = 0;
++            else { sx = -nx; sz = -nz; spd = z.baseSpeed * 0.85; }
++          } else if (dist < hold && z.lineClear !== false && !(z.lineGo > 0)) {
++            if (z.spider && !z.lineSawBlock) { z.strafeT = (z.strafeT || 0) - dt; if (z.strafeT <= 0) { z.strafeT = 1.2 + Math.random(); z.strafeDir = Math.random() < 0.5 ? -1 : 1; } const d0 = z.strafeDir || 1; sx = -nz * d0; sz = nx * d0; spd = z.baseSpeed * 0.6; }
+@@ -53690,0 +56548,3 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
++        // GB-241 (Claude, t75): close to him and still facing away (knocked clear, or turned by a whiffed lunge's stumble),
++        // a shambler turns on the spot instead of walking its arc away at minPace, then shuffles back in to arm's length.
++        if (shamblerTurn && !shamblerRecovering) { const tdx = px0 - zx, tdz = pz0 - zz, td = zHyp(tdx, tdz); if (td > 1e-4 && td < 3 && (Math.sin(shamblerTurn.yaw) * tdx + Math.cos(shamblerTurn.yaw) * tdz) / td < 0.3) spd = 0; }

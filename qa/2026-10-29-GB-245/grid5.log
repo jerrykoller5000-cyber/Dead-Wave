@@ -1,0 +1,42 @@
+GRANT grokbot GB-245: starting one game-test command
+camera: camera: loading the game...............................
+camera: ready in 31 s on port 10537: match, ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11), 1600x900
+setup: pistol
+help: ok
+m4       {"up":0.06,"in":0.06,"side":0,"tip":0.1,"turn":1,"cant":1,"hip":0}      0  10339  10413  24565
+m4       {"up":0.06,"in":0.06,"side":0,"tip":0.18,"turn":1,"cant":1,"hip":0}   5730   5764   5749  23621
+m4       {"up":0.06,"in":0.06,"side":0,"tip":0.25,"turn":1,"cant":1,"hip":0}   1805   1799   1813  18183
+m4       {"up":0.04,"in":0.1,"side":0,"tip":0.14,"turn":1,"cant":1,"hip":0}   4996   5049   5128  22077
+m4       {"up":0.04,"in":0.1,"side":0,"tip":0.22,"turn":1,"cant":1,"hip":0}    518    500    457  16160
+m4       {"up":0.1,"in":0.04,"side":0,"tip":0.14,"turn":1,"cant":1,"hip":0}   7022   7127   9279  24471
+m4       {"up":0.06,"in":0.12,"side":0.06,"tip":0.18,"turn":1,"cant":1,"hip":0}  10038  10754  11383  30163
+m4       {"up":0.02,"in":0.08,"side":0.1,"tip":0.2,"turn":1,"cant":1,"hip":0}      0      0      0  11118
+-- m4 best: {"gun":"m4","S":{"up":0.06,"in":0.12,"side":0.06,"tip":0.18,"turn":1,"cant":1,"hip":0},"frames":[{"u":0.35,"n":10038},{"u":0.5,"n":10754},{"u":0.65,"n":11383},{"u":0.8,"n":30163}]}
+aa12     {"up":0.06,"in":0.06,"side":0,"tip":0.1,"turn":1,"cant":1,"hip":0}   1246   1184    816   5521
+aa12     {"up":0.06,"in":0.06,"side":0,"tip":0.18,"turn":1,"cant":1,"hip":0}      0      0      0   4862
+aa12     {"up":0.06,"in":0.06,"side":0,"tip":0.25,"turn":1,"cant":1,"hip":0}      0      0      0   4478
+aa12     {"up":0.04,"in":0.1,"side":0,"tip":0.14,"turn":1,"cant":1,"hip":0}      0      0      0   2726
+aa12     {"up":0.04,"in":0.1,"side":0,"tip":0.22,"turn":1,"cant":1,"hip":0}      0      0      0   2675
+aa12     {"up":0.1,"in":0.04,"side":0,"tip":0.14,"turn":1,"cant":1,"hip":0}      0      0      0   6268
+aa12     {"up":0.06,"in":0.12,"side":0.06,"tip":0.18,"turn":1,"cant":1,"hip":0}      0      0      0   2457
+aa12     {"up":0.02,"in":0.08,"side":0.1,"tip":0.2,"turn":1,"cant":1,"hip":0}      0      0      0   2240
+-- aa12 best: {"gun":"aa12","S":{"up":0.06,"in":0.06,"side":0,"tip":0.1,"turn":1,"cant":1,"hip":0},"frames":[{"u":0.35,"n":1246},{"u":0.5,"n":1184},{"u":0.65,"n":816},{"u":0.8,"n":5521}]}
+sniper   {"up":0.06,"in":0.06,"side":0,"tip":0.1,"turn":1,"cant":1,"hip":0}   5865   7735 105743  98011
+sniper   {"up":0.06,"in":0.06,"side":0,"tip":0.18,"turn":1,"cant":1,"hip":0}   6042   5587  85247 110040
+sniper   {"up":0.06,"in":0.06,"side":0,"tip":0.25,"turn":1,"cant":1,"hip":0}   1728   1602  61542 103552
+sniper   {"up":0.04,"in":0.1,"side":0,"tip":0.14,"turn":1,"cant":1,"hip":0}   5548   4748  75736 123202
+sniper   {"up":0.04,"in":0.1,"side":0,"tip":0.22,"turn":1,"cant":1,"hip":0}     88     59  49971  99403
+sniper   {"up":0.1,"in":0.04,"side":0,"tip":0.14,"turn":1,"cant":1,"hip":0}   1402   6553 113521  87533
+sniper   {"up":0.06,"in":0.12,"side":0.06,"tip":0.18,"turn":1,"cant":1,"hip":0}   4963   4264  66294 114726
+sniper   {"up":0.02,"in":0.08,"side":0.1,"tip":0.2,"turn":1,"cant":1,"hip":0}      0      0  44068  97350
+-- sniper best: {"gun":"sniper","S":{"up":0.06,"in":0.06,"side":0,"tip":0.1,"turn":1,"cant":1,"hip":0},"frames":[{"u":0.35,"n":5865},{"u":0.5,"n":7735},{"u":0.65,"n":105743},{"u":0.8,"n":98011}]}
+launcher {"up":0.06,"in":0.06,"side":0,"tip":0.1,"turn":1,"cant":1,"hip":0}  12924  28843  13035  13868
+launcher {"up":0.06,"in":0.06,"side":0,"tip":0.18,"turn":1,"cant":1,"hip":0}   7482  19083   8154  10102
+launcher {"up":0.06,"in":0.06,"side":0,"tip":0.25,"turn":1,"cant":1,"hip":0}   3706   8910   3697   4727
+launcher {"up":0.04,"in":0.1,"side":0,"tip":0.14,"turn":1,"cant":1,"hip":0}   4314   9771   4902   4902
+launcher {"up":0.04,"in":0.1,"side":0,"tip":0.22,"turn":1,"cant":1,"hip":0}    495   2076   1202   1276
+launcher {"up":0.1,"in":0.04,"side":0,"tip":0.14,"turn":1,"cant":1,"hip":0}   5360  23862  12791  15685
+launcher {"up":0.06,"in":0.12,"side":0.06,"tip":0.18,"turn":1,"cant":1,"hip":0}   4393   4424   1958   2287
+launcher {"up":0.02,"in":0.08,"side":0.1,"tip":0.2,"turn":1,"cant":1,"hip":0}      0      0      0      0
+-- launcher best: {"gun":"launcher","S":{"up":0.06,"in":0.06,"side":0,"tip":0.1,"turn":1,"cant":1,"hip":0},"frames":[{"u":0.35,"n":12924},{"u":0.5,"n":28843},{"u":0.65,"n":13035},{"u":0.8,"n":13868}]}
+camera stop: camera: stopped

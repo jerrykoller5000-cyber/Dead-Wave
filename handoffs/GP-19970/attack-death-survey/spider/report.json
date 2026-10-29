@@ -1,0 +1,1681 @@
+{
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "frames": [
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spider/spider-idle-f00.jpg",
+      "phase": "idle",
+      "n": 0,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0,
+        "hipsY": 0.5120557299951701,
+        "armL": -0.669998057879947,
+        "armR": -0.23000194212005295
+      },
+      "subject": {
+        "id": "zombie.spider",
+        "name": "Spider",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -28,
+          "y": -199.51089249131067,
+          "z": -632.0472153927415
+        },
+        "size": {
+          "x": 2.066782525837045,
+          "y": 1.0131611514649421,
+          "z": 2.0070592511671066
+        },
+        "yaw": 0.011250000000000001,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 3794,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.961996254711707,
+        "y": -198.39750768363015,
+        "z": -625.231432237222,
+        "tx": -28,
+        "ty": -199.51089249131067,
+        "tz": -632.0472153927415,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spider/spider-attack-f01.jpg",
+      "phase": "attack",
+      "n": 1,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.20333333333333334,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.007575757575757569,
+        "hipsY": 0.5105843772563862,
+        "armL": -1.4333333333333333,
+        "armR": -1.4333333333333333
+      },
+      "subject": {
+        "id": "zombie.spider",
+        "name": "Spider",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99999629338877,
+          "y": -199.51089249131067,
+          "z": -632.0632012930301
+        },
+        "size": {
+          "x": 2.1161360289348075,
+          "y": 1.0079357905246695,
+          "z": 2.018236941031546
+        },
+        "yaw": 0.02,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 3794,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.902509785338427,
+        "y": -198.39750768363015,
+        "z": -625.28301113446,
+        "tx": -27.99999629338877,
+        "ty": -199.51089249131067,
+        "tz": -632.0632012930301,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spider/spider-attack-f02.jpg",
+      "phase": "attack",
+      "n": 2,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.18666666666666668,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.01515151515151515,
+        "hipsY": 0.5091611482826786,
+        "armL": -1.5166666666666668,
+        "armR": -1.5166666666666668
+      },
+      "subject": {
+        "id": "zombie.spider",
+        "name": "Spider",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999986481358874,
+          "y": -199.51089249131067,
+          "z": -632.0794281197603
+        },
+        "size": {
+          "x": 2.1930246961149464,
+          "y": 1.0121259683281494,
+          "z": 2.012287846785739
+        },
+        "yaw": 0.03125,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 3794,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.8264837343187,
+        "y": -198.39750768363015,
+        "z": -625.3457627664424,
+        "tx": -27.999986481358874,
+        "ty": -199.51089249131067,
+        "tz": -632.0794281197603,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spider/spider-attack-f03.jpg",
+      "phase": "attack",
+      "n": 3,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.17,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.02272727272727272,
+        "hipsY": 0.5077833126773621,
+        "armL": -1.6,
+        "armR": -1.6
+      },
+      "subject": {
+        "id": "zombie.spider",
+        "name": "Spider",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999969024368493,
+          "y": -199.51089249131067,
+          "z": -632.0959435465327
+        },
+        "size": {
+          "x": 2.2687643075767774,
+          "y": 1.016152949435991,
+          "z": 2.0059589075217445
+        },
+        "yaw": 0.045,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 3794,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.73427581639163,
+        "y": -198.39750768363015,
+        "z": -625.4202985795316,
+        "tx": -27.999969024368493,
+        "ty": -199.51089249131067,
+        "tz": -632.0959435465327,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spider/spider-attack-f04.jpg",
+      "phase": "attack",
+      "n": 4,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.15333333333333335,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.0303030303030303,
+        "hipsY": 0.5064318800824803,
+        "armL": -1.6833333333333333,
+        "armR": -1.6833333333333333
+      },
+      "subject": {
+        "id": "zombie.spider",
+        "name": "Spider",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99994231624827,
+          "y": -199.51089249131067,
+          "z": -632.1127951598364
+        },
+        "size": {
+          "x": 2.342477984566866,
+          "y": 1.0200964791376919,
+          "z": 1.9988652101732214
+        },
+        "yaw": 0.06125,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 3794,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.626337844123785,
+        "y": -198.39750768363015,
+        "z": -625.507346031167,
+        "tx": -27.99994231624827,
+        "ty": -199.51089249131067,
+        "tz": -632.1127951598364,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spider/spider-attack-f05.jpg",
+      "phase": "attack",
+      "n": 5,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.1366666666666667,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.03787878787878787,
+        "hipsY": 0.5050909554795888,
+        "armL": -1.7666666666666666,
+        "armR": -1.7666666666666666
+      },
+      "subject": {
+        "id": "zombie.spider",
+        "name": "Spider",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999904657286645,
+          "y": -199.51089249131067,
+          "z": -632.1300303604709
+        },
+        "size": {
+          "x": 2.4147548967834283,
+          "y": 1.0240229150441849,
+          "z": 2.010594705094036
+        },
+        "yaw": 0.08000000000000002,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 3794,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.503224045973216,
+        "y": -198.39750768363015,
+        "z": -625.607742590841,
+        "tx": -27.999904657286645,
+        "ty": -199.51089249131067,
+        "tz": -632.1300303604709,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spider/spider-attack-f06.jpg",
+      "phase": "attack",
+      "n": 6,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.12000000000000002,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.04545454545454545,
+        "hipsY": 0.5037166932661143,
+        "armL": -1.85,
+        "armR": -1.85
+      },
+      "subject": {
+        "id": "zombie.spider",
+        "name": "Spider",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999854229491014,
+          "y": -199.51089249131067,
+          "z": -632.1476962323305
+        },
+        "size": {
+          "x": 2.489410688131265,
+          "y": 1.0280180364551939,
+          "z": 2.0756013070091512
+        },
+        "yaw": 0.10125,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 3794,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.36560066179213,
+        "y": -198.39750768363015,
+        "z": -625.7224282892564,
+        "tx": -27.999854229491014,
+        "ty": -199.51089249131067,
+        "tz": -632.1476962323305,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spider/spider-attack-f07.jpg",
+      "phase": "attack",
+      "n": 7,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.10333333333333336,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.05303030303030302,
+        "hipsY": 0.5022902509098451,
+        "armL": -1.9333333333333333,
+        "armR": -1.9333333333333333
+      },
+      "subject": {
+        "id": "zombie.spider",
+        "name": "Spider",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999789073615187,
+          "y": -199.51089249131067,
+          "z": -632.1658393738975
+        },
+        "size": {
+          "x": 2.5691124184556777,
+          "y": 1.0321363024308425,
+          "z": 2.1964681950406657
+        },
+        "yaw": 0.12500000000000003,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 3794,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.21425668075562,
+        "y": -198.39750768363015,
+        "z": -625.8524366474022,
+        "tx": -27.999789073615187,
+        "ty": -199.51089249131067,
+        "tz": -632.1658393738975,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spider/spider-attack-f08.jpg",
+      "phase": "attack",
+      "n": 8,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.0866666666666667,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.0606060606060606,
+        "hipsY": 0.5007963256651319,
+        "armL": -2.0166666666666666,
+        "armR": -2.0166666666666666
+      },
+      "subject": {
+        "id": "zombie.spider",
+        "name": "Spider",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999707067973624,
+          "y": -199.51089249131067,
+          "z": -632.1845056878966
+        },
+        "size": {
+          "x": 2.648513747114464,
+          "y": 1.0364116309935412,
+          "z": 2.319494318113925
+        },
+        "yaw": 0.15125000000000002,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 3794,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -23.050115556361696,
+        "y": -198.39750768363015,
+        "z": -625.9988838001472,
+        "tx": -27.999707067973624,
+        "ty": -199.51089249131067,
+        "tz": -632.1845056878966,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spider/spider-attack-f09.jpg",
+      "phase": "attack",
+      "n": 9,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.07000000000000003,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.06818181818181816,
+        "hipsY": 0.49922236361415434,
+        "armL": -2.1,
+        "armR": -2.1
+      },
+      "subject": {
+        "id": "zombie.spider",
+        "name": "Spider",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999605909178083,
+          "y": -199.51089249131067,
+          "z": -632.2037401247514
+        },
+        "size": {
+          "x": 2.7254099846523836,
+          "y": 1.0408544157581616,
+          "z": 2.442056476020184
+        },
+        "yaw": 0.18000000000000002,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 3794,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -22.874247698600303,
+        "y": -198.39750768363015,
+        "z": -626.1629556158247,
+        "tx": -27.999605909178083,
+        "ty": -199.51089249131067,
+        "tz": -632.2037401247514,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spider/spider-attack-f10.jpg",
+      "phase": "attack",
+      "n": 10,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.05333333333333337,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.07575757575757575,
+        "hipsY": 0.49755890892462334,
+        "armL": -2.183333333333333,
+        "armR": -2.183333333333333
+      },
+      "subject": {
+        "id": "zombie.spider",
+        "name": "Spider",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999483095054075,
+          "y": -199.51089249131067,
+          "z": -632.2235863757564
+        },
+        "size": {
+          "x": 2.79578785289862,
+          "y": 1.0454478950057364,
+          "z": 2.558330215702199
+        },
+        "yaw": 0.21125000000000002,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 3794,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -22.68788350474794,
+        "y": -198.39750768363015,
+        "z": -626.3458926050428,
+        "tx": -27.999483095054075,
+        "ty": -199.51089249131067,
+        "tz": -632.2235863757564,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spider/spider-attack-f12.jpg",
+      "phase": "attack",
+      "n": 12,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.020000000000000042,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.0909090909090909,
+        "hipsY": 0.5008346971006854,
+        "armL": -2.35,
+        "armR": -2.35
+      },
+      "subject": {
+        "id": "zombie.spider",
+        "name": "Spider",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.999161414171496,
+          "y": -199.51089249131067,
+          "z": -632.2652805677815
+        },
+        "size": {
+          "x": 2.8963536218410297,
+          "y": 1.0548695877049,
+          "z": 2.758349118847377
+        },
+        "yaw": 0.28125000000000006,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 3794,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -22.28946729181491,
+        "y": -198.39750768363015,
+        "z": -626.7734896668865,
+        "tx": -27.999161414171496,
+        "ty": -199.51089249131067,
+        "tz": -632.2652805677815,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spider/spider-attack-f14.jpg",
+      "phase": "attack",
+      "n": 14,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.28,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.1,
+        "hipsY": 0.5047878810841002,
+        "armL": -2.45,
+        "armR": -2.45
+      },
+      "subject": {
+        "id": "zombie.spider",
+        "name": "Spider",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.998717563129226,
+          "y": -199.51089249131067,
+          "z": -632.3098974537704
+        },
+        "size": {
+          "x": 2.879249643692013,
+          "y": 1.0613298045876434,
+          "z": 2.8324496662205547
+        },
+        "yaw": 0.36125,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 3794,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -21.868409930310435,
+        "y": -198.39750768363015,
+        "z": -627.2919593715468,
+        "tx": -27.998717563129226,
+        "ty": -199.51089249131067,
+        "tz": -632.3098974537704,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spider/spider-attack-f16.jpg",
+      "phase": "attack",
+      "n": 16,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.2466666666666667,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.13083521591645728,
+        "hipsY": 0.4924336785043423,
+        "armL": -1.7994365481516044,
+        "armR": -1.7994365481516044
+      },
+      "subject": {
+        "id": "zombie.spider",
+        "name": "Spider",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.998123901844593,
+          "y": -199.51089249131067,
+          "z": -632.3576547117726
+        },
+        "size": {
+          "x": 2.550038856507207,
+          "y": 1.0540062346880177,
+          "z": 2.5508364732518203
+        },
+        "yaw": 0.44895833333333335,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 3794,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -21.451829703915806,
+        "y": -198.39750768363015,
+        "z": -627.8959950940754,
+        "tx": -27.998123901844593,
+        "ty": -199.51089249131067,
+        "tz": -632.3576547117726,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spider/spider-attack-f18.jpg",
+      "phase": "attack",
+      "n": 18,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.21333333333333337,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.23134685680847852,
+        "hipsY": 0.481388744265015,
+        "armL": -1.1997246201889593,
+        "armR": -1.1997246201889593
+      },
+      "subject": {
+        "id": "zombie.spider",
+        "name": "Spider",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99735280659412,
+          "y": -199.51089249131067,
+          "z": -632.4084924134503
+        },
+        "size": {
+          "x": 2.42309966778409,
+          "y": 1.112571883998129,
+          "z": 2.45321176353184
+        },
+        "yaw": 0.5372916666666667,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 3794,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -21.082980709309002,
+        "y": -198.39750768363015,
+        "z": -628.5417324299096,
+        "tx": -27.99735280659412,
+        "ty": -199.51089249131067,
+        "tz": -632.4084924134503,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spider/spider-attack-f20.jpg",
+      "phase": "attack",
+      "n": 20,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.18000000000000005,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.27823941877010794,
+        "hipsY": 0.4724753491677114,
+        "armL": -0.6977409125245613,
+        "armR": -0.6977409125245613
+      },
+      "subject": {
+        "id": "zombie.spider",
+        "name": "Spider",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.996376427472217,
+          "y": -199.51089249131067,
+          "z": -632.4622479468286
+        },
+        "size": {
+          "x": 2.7303765934487174,
+          "y": 1.1121254308898472,
+          "z": 2.6483515530584327
+        },
+        "yaw": 0.6256250000000001,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 3794,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -20.767842668062208,
+        "y": -198.39750768363015,
+        "z": -629.2205394529791,
+        "tx": -27.996376427472217,
+        "ty": -199.51089249131067,
+        "tz": -632.4622479468286,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spider/spider-attack-f22.jpg",
+      "phase": "attack",
+      "n": 22,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.14666666666666672,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.2606446496203773,
+        "hipsY": 0.4662645714558141,
+        "armL": -0.3327231604293151,
+        "armR": -0.3327231604293151
+      },
+      "subject": {
+        "id": "zombie.spider",
+        "name": "Spider",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.99516663190157,
+          "y": -199.51089249131067,
+          "z": -632.5187311688926
+        },
+        "size": {
+          "x": 3.0516150829602218,
+          "y": 1.1074114573945337,
+          "z": 3.0170281406680033
+        },
+        "yaw": 0.7139583333333335,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 3794,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -20.508837187714164,
+        "y": -198.39750768363015,
+        "z": -629.927352052839,
+        "tx": -27.99516663190157,
+        "ty": -199.51089249131067,
+        "tz": -632.5187311688926,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spider/spider-attack-f24.jpg",
+      "phase": "attack",
+      "n": 24,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.1133333333333334,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.182640475157874,
+        "hipsY": 0.46304360087928115,
+        "armL": -0.133203106482146,
+        "armR": -0.133203106482146
+      },
+      "subject": {
+        "id": "zombie.spider",
+        "name": "Spider",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.993695744974616,
+          "y": -199.51089249131067,
+          "z": -632.5777257523687
+        },
+        "size": {
+          "x": 3.2411009920722087,
+          "y": 1.1010864489210235,
+          "z": 3.247145415149703
+        },
+        "yaw": 0.802291666666667,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 3794,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -20.30794680818264,
+        "y": -198.39750768363015,
+        "z": -630.656882825259,
+        "tx": -27.993695744974616,
+        "ty": -199.51089249131067,
+        "tz": -632.5777257523687,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spider/spider-attack-f26.jpg",
+      "phase": "attack",
+      "n": 26,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.08000000000000007,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.06230586150776819,
+        "hipsY": 0.4624454622049589,
+        "armL": -0.09999999999999992,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.spider",
+        "name": "Spider",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.991937355565987,
+          "y": -199.51089249131067,
+          "z": -632.6389908716499
+        },
+        "size": {
+          "x": 3.310103999475949,
+          "y": 1.0954336198902297,
+          "z": 3.337566716521451
+        },
+        "yaw": 0.8906250000000003,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 3794,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -20.166700132813638,
+        "y": -198.39750768363015,
+        "z": -631.4036623009137,
+        "tx": -27.991937355565987,
+        "ty": -199.51089249131067,
+        "tz": -632.6389908716499,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spider/spider-attack-f30.jpg",
+      "phase": "attack",
+      "n": 30,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.4571848251765925,
+        "armL": -0.09999999999999992,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.spider",
+        "name": "Spider",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.98747087115893,
+          "y": -199.51089249131067,
+          "z": -632.7670694178172
+        },
+        "size": {
+          "x": 3.0884021279820857,
+          "y": 1.0840008460126,
+          "z": 3.093474814406136
+        },
+        "yaw": 1.0538092127225112,
+        "info": {
+          "meshes": 1,
+          "drawables": 1,
+          "tris": 3794,
+          "points": 0,
+          "segments": 0,
+          "materials": 1
+        }
+      },
+      "camera": {
+        "x": -20.065499475178903,
+        "y": -198.39750768363015,
+        "z": -632.8194475745283,
+        "tx": -27.98747087115893,
+        "ty": -199.51089249131067,
+        "tz": -632.7670694178172,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spider/spider-death-f00.jpg",
+      "phase": "death",
+      "n": 0,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.4571848251765925,
+        "armL": -0.09999999999999992,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.spider",
+        "name": "Spider",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.98747087115893,
+          "y": -199.51089249131067,
+          "z": -632.7670694178172
+        },
+        "size": {
+          "x": 3.0884021279820857,
+          "y": 1.0840008460126,
+          "z": 3.093474814406136
+        },
+        "yaw": 1.0538092127225112,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 3842,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -20.065499475178903,
+        "y": -198.39750768363015,
+        "z": -632.8194475745283,
+        "tx": -27.98747087115893,
+        "ty": -199.51089249131067,
+        "tz": -632.7670694178172,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spider/spider-death-f01.jpg",
+      "phase": "death",
+      "n": 1,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.016666666666666666,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.4570468374895689,
+        "armL": -0.09999999999999992,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.spider",
+        "name": "Spider",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.98747087115893,
+          "y": -199.51089249131067,
+          "z": -632.7670694178172
+        },
+        "size": {
+          "x": 3.086104847829226,
+          "y": 1.0843308684278838,
+          "z": 3.0909530269439074
+        },
+        "yaw": 1.0538092127225112,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 3842,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -20.065499475178903,
+        "y": -198.39750768363015,
+        "z": -632.8194475745283,
+        "tx": -27.98747087115893,
+        "ty": -199.51089249131067,
+        "tz": -632.7670694178172,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spider/spider-death-f02.jpg",
+      "phase": "death",
+      "n": 2,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.03333333333333333,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.45664152569414235,
+        "armL": -0.09999999999999992,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.spider",
+        "name": "Spider",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.98747087115893,
+          "y": -199.51089249131067,
+          "z": -632.7670694178172
+        },
+        "size": {
+          "x": 3.0793022127956142,
+          "y": 1.0852229544129273,
+          "z": 3.083446260448909
+        },
+        "yaw": 1.0538092127225112,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 3842,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -20.065499475178903,
+        "y": -198.39750768363015,
+        "z": -632.8194475745283,
+        "tx": -27.98747087115893,
+        "ty": -199.51089249131067,
+        "tz": -632.7670694178172,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spider/spider-death-f03.jpg",
+      "phase": "death",
+      "n": 3,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.05,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.4559818666887789,
+        "armL": -0.09999999999999992,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.spider",
+        "name": "Spider",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.98747087115893,
+          "y": -199.51089249131067,
+          "z": -632.7670694178172
+        },
+        "size": {
+          "x": 3.06805974970516,
+          "y": 1.086427302946305,
+          "z": 3.0709148526823355
+        },
+        "yaw": 1.0538092127225112,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 3842,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -20.065499475178903,
+        "y": -198.39750768363015,
+        "z": -632.8194475745283,
+        "tx": -27.98747087115893,
+        "ty": -199.51089249131067,
+        "tz": -632.7670694178172,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spider/spider-death-f04.jpg",
+      "phase": "death",
+      "n": 4,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.06666666666666667,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.45508083737194477,
+        "armL": -0.09999999999999992,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.spider",
+        "name": "Spider",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.98747087115893,
+          "y": -199.51089249131067,
+          "z": -632.7670694178172
+        },
+        "size": {
+          "x": 3.052374102677966,
+          "y": 1.0875739358194494,
+          "z": 3.0531815777433167
+        },
+        "yaw": 1.0538092127225112,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 3842,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -20.065499475178903,
+        "y": -198.39750768363015,
+        "z": -632.8194475745283,
+        "tx": -27.98747087115893,
+        "ty": -199.51089249131067,
+        "tz": -632.7670694178172,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spider/spider-death-f06.jpg",
+      "phase": "death",
+      "n": 6,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.09999999999999999,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.4526065753977291,
+        "armL": -0.09999999999999992,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.spider",
+        "name": "Spider",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.98747087115893,
+          "y": -199.51089249131067,
+          "z": -632.7670694178172
+        },
+        "size": {
+          "x": 3.0074877472355332,
+          "y": 1.0877363779395637,
+          "z": 3.000965388634995
+        },
+        "yaw": 1.0538092127225112,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 3842,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -20.065499475178903,
+        "y": -198.39750768363015,
+        "z": -632.8194475745283,
+        "tx": -27.98747087115893,
+        "ty": -199.51089249131067,
+        "tz": -632.7670694178172,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spider/spider-death-f08.jpg",
+      "phase": "death",
+      "n": 8,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.13333333333333333,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.44932255495922463,
+        "armL": -0.09999999999999992,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.spider",
+        "name": "Spider",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.98747087115893,
+          "y": -199.51089249131067,
+          "z": -632.7670694178172
+        },
+        "size": {
+          "x": 2.9442827167788437,
+          "y": 1.0811450490991774,
+          "z": 2.924214672204812
+        },
+        "yaw": 1.0538092127225112,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 3842,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -20.065499475178903,
+        "y": -198.39750768363015,
+        "z": -632.8194475745283,
+        "tx": -27.98747087115893,
+        "ty": -199.51089249131067,
+        "tz": -632.7670694178172,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spider/spider-death-f12.jpg",
+      "phase": "death",
+      "n": 12,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.19999999999999998,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.4407404994402667,
+        "armL": -0.09999999999999992,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.spider",
+        "name": "Spider",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.98747087115893,
+          "y": -199.51089249131067,
+          "z": -632.7670694178172
+        },
+        "size": {
+          "x": 2.7832076727608452,
+          "y": 1.0607606776752618,
+          "z": 2.7240313934588585
+        },
+        "yaw": 1.0538092127225112,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 3842,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -20.065499475178903,
+        "y": -198.39750768363015,
+        "z": -632.8194475745283,
+        "tx": -27.98747087115893,
+        "ty": -199.51089249131067,
+        "tz": -632.7670694178172,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spider/spider-death-f20.jpg",
+      "phase": "death",
+      "n": 20,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.3333333333333333,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.4184271550909763,
+        "armL": -0.09999999999999992,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.spider",
+        "name": "Spider",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.98747087115893,
+          "y": -199.51089249131067,
+          "z": -632.7670694178172
+        },
+        "size": {
+          "x": 2.4250181762531113,
+          "y": 1.0670755711216202,
+          "z": 2.2995343532695642
+        },
+        "yaw": 1.0538092127225112,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 3842,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -20.065499475178903,
+        "y": -198.39750768363015,
+        "z": -632.8194475745283,
+        "tx": -27.98747087115893,
+        "ty": -199.51089249131067,
+        "tz": -632.7670694178172,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spider/spider-death-f40.jpg",
+      "phase": "death",
+      "n": 40,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.6666666666666671,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.37136426998701366,
+        "armL": -0.09999999999999992,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.spider",
+        "name": "Spider",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.98747087115893,
+          "y": -199.51089249131067,
+          "z": -632.7670694178172
+        },
+        "size": {
+          "x": 1.955982658657721,
+          "y": 0.880343009445653,
+          "z": 1.8479249838193255
+        },
+        "yaw": 1.0538092127225112,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 3842,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -20.065499475178903,
+        "y": -198.39750768363015,
+        "z": -632.8194475745283,
+        "tx": -27.98747087115893,
+        "ty": -199.51089249131067,
+        "tz": -632.7670694178172,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/spider/spider-death-f80.jpg",
+      "phase": "death",
+      "n": 80,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 1.3333333333333335,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 0.37,
+        "armL": -0.09999999999999992,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.spider",
+        "name": "Spider",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.98747087115893,
+          "y": -199.51089249131067,
+          "z": -632.7670694178172
+        },
+        "size": {
+          "x": 1.947019139935005,
+          "y": 0.8873752956217515,
+          "z": 1.8339505395287006
+        },
+        "yaw": 1.0538092127225112,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 3842,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -20.065499475178903,
+        "y": -198.39750768363015,
+        "z": -632.8194475745283,
+        "tx": -27.98747087115893,
+        "ty": -199.51089249131067,
+        "tz": -632.7670694178172,
+        "fov": 40
+      }
+    }
+  ],
+  "errors": [],
+  "pageErrors": []
+}

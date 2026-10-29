@@ -1,0 +1,63 @@
+import fs from 'fs';
+const p = 'index.html';
+let s = fs.readFileSync(p, 'utf8');
+if (s.charCodeAt(0) === 0xFEFF) throw new Error('BOM at start');
+const before = s.length;
+function rep(a, b, label) {
+  const n = s.split(a).length - 1;
+  if (n !== 1) throw new Error(label + ': expected 1, found ' + n);
+  s = s.replace(a, b);
+  console.log('ok ' + label);
+}
+
+// 1. the constant: per-gun table, defaults measured with rfocus4/rfocus5
+rep(
+  "    const FP_RELOAD_LIFT = { up: 0.06, in: 0, side: 0, tip: 0, turn: 1, cant: 1, hip: 0 };",
+  "    // GB-245: the base is the long-gun set (measured per hand, rfocus2/rfocus4/rfocus5); turn 0 is the finding - the reload's\n" +
+  "    // own mount tilt is what dropped the firing hand out of frame, and turning it off in first person holds the glove on the\n" +
+  "    // grip for the whole reload. Third person keeps the tilt untouched (the rlT below is first person only).\n" +
+  "    const FP_RELOAD_LIFT = { up: 0.02, in: 0.04, side: 0, tip: 0, turn: 0, cant: 0.4, hip: 0 };\n" +
+  "    // The two that read only a sliver of glove at cant 0.4 (aa12 ~970 px, launcher ~1.2k) carry a little more lift and cant.\n" +
+  "    const FP_RELOAD_LIFT_GUN = { aa12: { up: 0.06, cant: 0.6 }, launcher: { up: 0.06, cant: 0.6 } };\n" +
+  "    const _fpRlOut = { up: 0, in: 0, side: 0, tip: 0, turn: 0, cant: 0, hip: 0 };\n" +
+  "    function fpReloadSet() {   // the live reload framing for the gun in hand\n" +
+  "      const o = _fpRlOut, b = FP_RELOAD_LIFT, g = FP_RELOAD_LIFT_GUN[currentWeapon];\n" +
+  "      o.up = b.up; o.in = b.in; o.side = b.side; o.tip = b.tip; o.turn = b.turn; o.cant = b.cant; o.hip = b.hip;\n" +
+  "      if (g) for (const k in g) if (g[k] != null) o[k] = g[k];\n" +
+  "      return o;\n" +
+  "    }",
+  'constant + table'
+);
+
+// 2. the camera-space lift
+rep(
+  "        const rw = fpReloadLiftW;\n        if (!_rlBasis.p) _rlBasis.p = new THREE.Vector3();\n        const e = camera.matrixWorld.elements;\n        P.x += (e[0] * FP_RELOAD_LIFT.side + e[4] * FP_RELOAD_LIFT.up + e[8] * FP_RELOAD_LIFT.in) * rw;\n        P.y += (e[5] * FP_RELOAD_LIFT.up + e[9] * FP_RELOAD_LIFT.in) * rw;\n        P.z += (e[2] * FP_RELOAD_LIFT.side + e[6] * FP_RELOAD_LIFT.up + e[10] * FP_RELOAD_LIFT.in) * rw;",
+  "        const rw = fpReloadLiftW, rls = fpReloadSet();\n        if (!_rlBasis.p) _rlBasis.p = new THREE.Vector3();\n        const e = camera.matrixWorld.elements;\n        P.x += (e[0] * rls.side + e[4] * rls.up + e[8] * rls.in) * rw;\n        P.y += (e[5] * rls.up + e[9] * rls.in) * rw;\n        P.z += (e[2] * rls.side + e[6] * rls.up + e[10] * rls.in) * rw;",
+  'camera-space lift'
+);
+
+// 3. the mount tilt / tip / cant
+rep(
+  "      const rlT = viewFirst ? 1 + (FP_RELOAD_LIFT.turn - 1) * fpReloadLiftW : 1;\n      const rlTip = viewFirst ? FP_RELOAD_LIFT.tip * fpReloadLiftW : 0;\n      const rlCant = viewFirst ? 1 + (FP_RELOAD_LIFT.cant - 1) * fpReloadLiftW : 1;",
+  "      const _rls = fpReloadSet();\n      const rlT = viewFirst ? 1 + (_rls.turn - 1) * fpReloadLiftW : 1;\n      const rlTip = viewFirst ? _rls.tip * fpReloadLiftW : 0;\n      const rlCant = viewFirst ? 1 + (_rls.cant - 1) * fpReloadLiftW : 1;",
+  'tilt/tip/cant'
+);
+
+// 4. the hip path's lift
+rep(
+  "        if (viewFirst && OTS.w > 0 && !aki && fpReloadLiftW > 0) { off.y += FP_RELOAD_LIFT.up * fpReloadLiftW; }",
+  "        if (viewFirst && OTS.w > 0 && !aki && fpReloadLiftW > 0) { off.y += fpReloadSet().up * fpReloadLiftW; }",
+  'hip lift'
+);
+
+// 5. the door reports both tables
+rep(
+  "fpReloadLiftDbg: () => FP_RELOAD_LIFT,   /* GB-245 */",
+  "fpReloadLiftDbg: () => FP_RELOAD_LIFT, fpReloadLiftGunDbg: () => FP_RELOAD_LIFT_GUN, fpReloadSetDbg: () => ({ ...fpReloadSet() }),   /* GB-245 */",
+  'tuning door'
+);
+
+if (/^\uFEFF/.test(s)) throw new Error('BOM written');
+if (s.includes('\r\n')) throw new Error('CRLF in file');
+fs.writeFileSync(p, s, 'utf8');
+console.log('written ' + before + ' -> ' + Buffer.byteLength(s, 'utf8'));

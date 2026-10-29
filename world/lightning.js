@@ -127,25 +127,14 @@ export function buildBoltGeometry(T, paths, w = 0.5) {
   return g;
 }
 
-// The boots on the ground: a pair of tall yellow rubber boots, black soles, one stood up and one fallen on its side.
+// The boots on the ground: a pair of tall yellow rubber boots, one stood up and one fallen on its side (CL-267: the
+// same boot as on the mast, buildRubberBoot, not the boxes they were before CL-179).
 export function buildInsulatedBoots(T) {
   const g = new T.Group();
   g.name = 'insulated-boots';
-  const rubber = new T.MeshStandardMaterial({ color: BOOTS_HEX, roughness: 0.55 });
-  const sole = new T.MeshStandardMaterial({ color: 0x161512, roughness: 0.9 });
-  const band = new T.MeshStandardMaterial({ color: 0x1d1d1a, roughness: 0.6 });
-  const boot = () => {
-    const b = new T.Group();
-    const add = (geo, mat, x, y, z) => { const m = new T.Mesh(geo, mat); m.position.set(x, y, z); m.castShadow = true; b.add(m); return m; };
-    add(new T.BoxGeometry(0.13, 0.36, 0.14), rubber, 0, 0.21, -0.02);     // the shaft
-    add(new T.BoxGeometry(0.135, 0.03, 0.145), band, 0, 0.36, -0.02);     // a black band at the top
-    add(new T.BoxGeometry(0.13, 0.1, 0.26), rubber, 0, 0.07, 0.04);       // the foot
-    add(new T.BoxGeometry(0.14, 0.03, 0.28), sole, 0, 0.015, 0.04);       // the sole
-    return b;
-  };
-  const a = boot(); a.position.set(-0.1, 0, 0); a.rotation.y = 0.2; g.add(a);
-  const b = boot(); b.position.set(0.16, 0.07, 0.05); b.rotation.set(0, -0.5, Math.PI / 2); g.add(b);
-  g.userData.mats = [rubber, sole, band];
+  const a = buildRubberBoot(T); a.position.set(-0.1, 0, 0); a.rotation.y = 0.2; g.add(a);
+  const b = buildRubberBoot(T); b.position.set(0.2, 0.07, 0.02); b.rotation.set(0, -0.5, Math.PI / 2); g.add(b);
+  g.userData.mats = [a.material, b.material];
   return g;
 }
 
@@ -200,23 +189,45 @@ function shaper(T, out) {
 
 // One lineman's rubber boot, toe toward +z, sole at y 0: a tapered shaft with creases at the ankle, a black top band
 // and pull loops, a rounded foot and toe bumper, a thick sole with a heel and tread lugs. One mesh.
+// CL-267 (docs/asset-principles.md: silhouette, wear): the sole and heel follow the foot's outline (narrow heel, wide
+// ball, round toe, bevelled edges) instead of two boxes that stood out past the boot, the boxy heel counter is gone,
+// and weeks up the mast show: mud and dust up from the sole, rubber gone matte.
+const SOLE_OUTLINE = [[0, -0.112], [0.042, -0.108], [0.052, -0.08], [0.054, -0.02], [0.062, 0.06], [0.064, 0.11],
+  [0.055, 0.155], [0.032, 0.178], [0, 0.183]];
+function soleGeometry(T, z0, z1, depth, inset = 0) {
+  const pts = SOLE_OUTLINE.filter(([, z]) => z >= z0 - 1e-6 && z <= z1 + 1e-6).map(([x, z]) => [Math.max(0.01, x - inset), z]);
+  const shape = new T.Shape();
+  const ring = [...pts.map(([x, z]) => [x, z]), ...pts.slice().reverse().map(([x, z]) => [-x, z])];
+  ring.forEach(([x, z], i) => (i ? shape.lineTo(x, -z) : shape.moveTo(x, -z)));
+  const b = Math.min(0.006, depth * 0.3);
+  const geo = new T.ExtrudeGeometry(shape, { depth: depth - 2 * b, bevelEnabled: true, bevelThickness: b, bevelSize: b, bevelSegments: 2, curveSegments: 4 });
+  geo.rotateX(-Math.PI / 2); geo.translate(0, b, 0);
+  return geo;
+}
 export function buildRubberBoot(T) {
   const parts = [], S = shaper(T, parts);
   const mat = (hex) => new T.MeshStandardMaterial({ color: hex });
   const Y = mat(BOOTS_HEX), Yd = mat(0xb98f12), K = mat(0x151412), Kb = mat(0x232220);
-  S.box(0.128, 0.03, 0.29, K, 0, 0.015, 0.035);                                 // the sole
-  S.box(0.122, 0.035, 0.085, K, 0, 0.022, -0.075);                              // the heel
-  for (let i = 0; i < 5; i++) S.box(0.13, 0.012, 0.022, Kb, 0, -0.004, -0.085 + i * 0.058);   // tread lugs
+  const sole = new T.Mesh(soleGeometry(T, -1, 1, 0.03), K); parts.push(sole);                          // the sole
+  const heel = new T.Mesh(soleGeometry(T, -1, -0.03, 0.036, 0.004), K); parts.push(heel);              // the heel
+  const lugW = (z) => { let w = 0.05; for (let i = 1; i < SOLE_OUTLINE.length; i++) { const [xa, za] = SOLE_OUTLINE[i - 1], [xb, zb] = SOLE_OUTLINE[i]; if (z >= za && z <= zb) w = xa + (xb - xa) * (z - za) / (zb - za); } return 2 * w - 0.016; };
+  for (let i = 0; i < 5; i++) { const z = -0.085 + i * 0.058; S.box(lugW(z), 0.012, 0.022, Kb, 0, -0.004, z); }   // tread lugs
   S.cylAt(0.058, 0.058, 0.15, Y, 0, 0.072, 0.05, Math.PI / 2, 0, 0, [1, 1, 0.8], 12);          // the foot
   S.ball(0.058, Y, 0, 0.072, 0.125, [1, 0.8, 1.05]);                            // the rounded toe
   S.ball(0.061, K, 0, 0.058, 0.138, [1.02, 0.62, 0.95]);                        // the black toe bumper
   S.ball(0.058, Y, 0, 0.075, -0.03, [1, 0.85, 1]);                              // the heel's round
-  S.box(0.112, 0.07, 0.02, K, 0, 0.065, -0.088);                                // the heel counter
   S.cylAt(0.067, 0.061, 0.29, Y, 0, 0.235, -0.015, 0, 0, 0, [1, 1, 1.12], 14);  // the shaft
   for (const y of [0.125, 0.152]) S.ring(0.063, 0.006, Yd, 0, y, -0.012, Math.PI / 2, 0, 0, [1, 1.14, 1]);   // ankle creases
   S.cylAt(0.07, 0.069, 0.032, K, 0, 0.375, -0.015, 0, 0, 0, [1, 1, 1.12], 14);  // the top band
   for (const x of [-0.07, 0.07]) S.ring(0.016, 0.0045, K, x, 0.4, -0.015, 0, Math.PI / 2, 0);   // pull loops
-  const boot = mergeColoured(T, parts, 0.5);
+  const boot = mergeColoured(T, parts, 0.68);
+  // Mud up from the sole (heaviest at the welt, gone by the ankle), and a little dust over the rest.
+  const P = boot.geometry.attributes.position.array, C = boot.geometry.attributes.color.array, mud = new T.Color(0x4a3d2c);
+  for (let i = 0; i < P.length; i += 3) {
+    const y = P[i + 1], k = Math.max(0, Math.min(1, (0.13 - y) / 0.1)) * 0.6 + 0.06;
+    C[i] += (mud.r - C[i]) * k; C[i + 1] += (mud.g - C[i + 1]) * k; C[i + 2] += (mud.b - C[i + 2]) * k;
+  }
+  boot.geometry.attributes.color.needsUpdate = true;
   boot.name = 'rubber-boot';
   return boot;
 }

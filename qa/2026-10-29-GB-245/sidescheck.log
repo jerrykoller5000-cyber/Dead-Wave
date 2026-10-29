@@ -1,0 +1,12 @@
+GRANT grokbot GB-245: starting one game-test command
+camera: camera: loading the game.............................
+camera: ready in 29 s on port 1507: match, ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11), 1600x900
+help: {"L":[""],"R":[""],"armL":true,"armR":true,"head":true}
+setup: 1
+m4-fp-hip              R       0  L       0  {"L":[""],"R":[""],"armL":true,"armR":true,"head":false}
+m4-tp-shoulder         R      16  L      36  {"L":[""],"R":[""],"armL":true,"armR":true,"head":true}
+pistol-fp-hip          R   25405  L   55189  {"L":[""],"R":[""],"armL":true,"armR":true,"head":false}
+pistol-tp-shoulder     R       0  L       0  {"L":[""],"R":[""],"armL":true,"armR":true,"head":true}
+sniper-fp-hip          R    8027  L   24028  {"L":[""],"R":[""],"armL":true,"armR":true,"head":false}
+sniper-tp-shoulder     R      12  L      28  {"L":[""],"R":[""],"armL":true,"armR":true,"head":true}
+camera stop: camera: stopped

@@ -39,7 +39,9 @@
   ok(types.size >= 10, 'every kind: ' + [...types].join(','));
   const d = zs.map(z => Math.hypot(z.mesh.position.x - p.x, z.mesh.position.z - p.z));
   ok(Math.min(...d) > 30, 'they start out on the ring (nearest ' + Math.min(...d).toFixed(0) + 'm)');
-  await wait(5000);
+  // GB-243 (rule 13): 5 s of GAME time, not wall clock. A loaded page runs game time slowly, so a 5 s wall
+  // wait left the swarm where it started and the ring read 50 -> 50. Same 5 s threshold, same bar.
+  { const g0 = T.getSimTime(), w0 = Date.now(); while (T.getSimTime() - g0 < 5 && Date.now() - w0 < 30000) await wait(100); }
   const d2 = T.zombies.filter(z => z.alive).map(z => Math.hypot(z.mesh.position.x - p.x, z.mesh.position.z - p.z));
   const avg = (a) => a.reduce((x, y) => x + y, 0) / a.length;
   ok(avg(d2) < avg(d), 'and close in even with nodead on (' + avg(d).toFixed(0) + ' -> ' + avg(d2).toFixed(0) + ')');

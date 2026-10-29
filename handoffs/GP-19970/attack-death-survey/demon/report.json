@@ -1,0 +1,1681 @@
+{
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "frames": [
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/demon/demon-idle-f00.jpg",
+      "phase": "idle",
+      "n": 0,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0,
+        "hipsY": 1.2379690768899176,
+        "armL": -0.7140627461061626,
+        "armR": -0.18593725389383736
+      },
+      "subject": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.85625,
+          "y": -198.37299896054242,
+          "z": -632
+        },
+        "size": {
+          "x": 1.851747802442734,
+          "y": 3.2385770827692397,
+          "z": 1.9827622473991369
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5672,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -20.995471567305962,
+        "y": -197.2596141528619,
+        "z": -635.9610722749662,
+        "tx": -27.85625,
+        "ty": -198.37299896054242,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/demon/demon-attack-f01.jpg",
+      "phase": "attack",
+      "n": 1,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.20333333333333334,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.007575757575757569,
+        "hipsY": 1.2351356263384372,
+        "armL": -1.4333333333333333,
+        "armR": -1.4333333333333333
+      },
+      "subject": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.808333333333334,
+          "y": -198.37299896054242,
+          "z": -632
+        },
+        "size": {
+          "x": 2.398312441198133,
+          "y": 3.2537585649606626,
+          "z": 1.9518310364155695
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5672,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -20.947554900639297,
+        "y": -197.2596141528619,
+        "z": -635.9610722749662,
+        "tx": -27.808333333333334,
+        "ty": -198.37299896054242,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/demon/demon-attack-f02.jpg",
+      "phase": "attack",
+      "n": 2,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.18666666666666668,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.01515151515151515,
+        "hipsY": 1.2320981424770316,
+        "armL": -1.5166666666666668,
+        "armR": -1.5166666666666668
+      },
+      "subject": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.760416666666668,
+          "y": -198.37299896054242,
+          "z": -632
+        },
+        "size": {
+          "x": 2.4349089552605463,
+          "y": 3.2591590862150497,
+          "z": 1.981450646655162
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5672,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -20.89963823397263,
+        "y": -197.2596141528619,
+        "z": -635.9610722749662,
+        "tx": -27.760416666666668,
+        "ty": -198.37299896054242,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/demon/demon-attack-f03.jpg",
+      "phase": "attack",
+      "n": 3,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.17,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.02272727272727272,
+        "hipsY": 1.2288795566580721,
+        "armL": -1.6,
+        "armR": -1.6
+      },
+      "subject": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.712500000000002,
+          "y": -198.37299896054242,
+          "z": -632
+        },
+        "size": {
+          "x": 2.5085187692876083,
+          "y": 3.2592053128499288,
+          "z": 2.0141086475027805
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5672,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -20.851721567305965,
+        "y": -197.2596141528619,
+        "z": -635.9610722749662,
+        "tx": -27.712500000000002,
+        "ty": -198.37299896054242,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/demon/demon-attack-f04.jpg",
+      "phase": "attack",
+      "n": 4,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.15333333333333335,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.0303030303030303,
+        "hipsY": 1.2255060294160118,
+        "armL": -1.6833333333333333,
+        "armR": -1.6833333333333333
+      },
+      "subject": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.664583333333336,
+          "y": -198.37299896054242,
+          "z": -632
+        },
+        "size": {
+          "x": 2.5726126772676565,
+          "y": 3.2971248568603073,
+          "z": 2.0453777823834116
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5672,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -20.8038049006393,
+        "y": -197.2596141528619,
+        "z": -635.9610722749662,
+        "tx": -27.664583333333336,
+        "ty": -198.37299896054242,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/demon/demon-attack-f05.jpg",
+      "phase": "attack",
+      "n": 5,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.1366666666666667,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.03787878787878787,
+        "hipsY": 1.222006552797667,
+        "armL": -1.7666666666666666,
+        "armR": -1.7666666666666666
+      },
+      "subject": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.61666666666667,
+          "y": -198.37299896054242,
+          "z": -632
+        },
+        "size": {
+          "x": 2.603027803606114,
+          "y": 3.4322836391978058,
+          "z": 2.0751034469429896
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5672,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -20.755888233972634,
+        "y": -197.2596141528619,
+        "z": -635.9610722749662,
+        "tx": -27.61666666666667,
+        "ty": -198.37299896054242,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/demon/demon-attack-f06.jpg",
+      "phase": "attack",
+      "n": 6,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.12000000000000002,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.04545454545454545,
+        "hipsY": 1.2184125256994407,
+        "armL": -1.85,
+        "armR": -1.85
+      },
+      "subject": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.568750000000005,
+          "y": -198.37299896054242,
+          "z": -632
+        },
+        "size": {
+          "x": 2.5994941370515825,
+          "y": 3.5373645435994376,
+          "z": 2.103134091723291
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5672,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -20.707971567305968,
+        "y": -197.2596141528619,
+        "z": -635.9610722749662,
+        "tx": -27.568750000000005,
+        "ty": -198.37299896054242,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/demon/demon-attack-f07.jpg",
+      "phase": "attack",
+      "n": 7,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.10333333333333336,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.05303030303030302,
+        "hipsY": 1.2147750373360802,
+        "armL": -1.9333333333333333,
+        "armR": -1.9333333333333333
+      },
+      "subject": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.52083333333334,
+          "y": -198.37299896054242,
+          "z": -632
+        },
+        "size": {
+          "x": 2.5622138975228594,
+          "y": 3.652091447566704,
+          "z": 2.129326030800712
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5672,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -20.660054900639302,
+        "y": -197.2596141528619,
+        "z": -635.9610722749662,
+        "tx": -27.52083333333334,
+        "ty": -198.37299896054242,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/demon/demon-attack-f08.jpg",
+      "phase": "attack",
+      "n": 8,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.0866666666666667,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.0606060606060606,
+        "hipsY": 1.211214240176031,
+        "armL": -2.0166666666666666,
+        "armR": -2.0166666666666666
+      },
+      "subject": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.472916666666674,
+          "y": -198.37299896054242,
+          "z": -632
+        },
+        "size": {
+          "x": 2.4988138535940934,
+          "y": 3.759564478619069,
+          "z": 2.153562066088739
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5672,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -20.612138233972637,
+        "y": -197.2596141528619,
+        "z": -635.9610722749662,
+        "tx": -27.472916666666674,
+        "ty": -198.37299896054242,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/demon/demon-attack-f09.jpg",
+      "phase": "attack",
+      "n": 9,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.07000000000000003,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.06818181818181816,
+        "hipsY": 1.2101597112088374,
+        "armL": -2.1,
+        "armR": -2.1
+      },
+      "subject": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.425000000000008,
+          "y": -198.37299896054242,
+          "z": -632
+        },
+        "size": {
+          "x": 2.4191171518334684,
+          "y": 3.865349556030509,
+          "z": 2.1757003637801517
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5672,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -20.56422156730597,
+        "y": -197.2596141528619,
+        "z": -635.9610722749662,
+        "tx": -27.425000000000008,
+        "ty": -198.37299896054242,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/demon/demon-attack-f10.jpg",
+      "phase": "attack",
+      "n": 10,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.05333333333333337,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.07575757575757575,
+        "hipsY": 1.2133229542009853,
+        "armL": -2.183333333333333,
+        "armR": -2.183333333333333
+      },
+      "subject": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.377083333333342,
+          "y": -198.37299896054242,
+          "z": -632
+        },
+        "size": {
+          "x": 2.3426043077825973,
+          "y": 4.004521869193127,
+          "z": 2.1955951206932696
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5672,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -20.516304900639305,
+        "y": -197.2596141528619,
+        "z": -635.9610722749662,
+        "tx": -27.377083333333342,
+        "ty": -198.37299896054242,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/demon/demon-attack-f12.jpg",
+      "phase": "attack",
+      "n": 12,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": 0.020000000000000042,
+        "swingT": 0,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.0909090909090909,
+        "hipsY": 1.2196595164119393,
+        "armL": -2.35,
+        "armR": -2.35
+      },
+      "subject": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.28125000000001,
+          "y": -198.37299896054242,
+          "z": -632
+        },
+        "size": {
+          "x": 2.117148821482907,
+          "y": 4.265130035043001,
+          "z": 2.2280368882833272
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5672,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -20.420471567305974,
+        "y": -197.2596141528619,
+        "z": -635.9610722749662,
+        "tx": -27.28125000000001,
+        "ty": -198.37299896054242,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/demon/demon-attack-f14.jpg",
+      "phase": "attack",
+      "n": 14,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.28,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": -0.1,
+        "hipsY": 1.225670440583487,
+        "armL": -2.45,
+        "armR": -2.45
+      },
+      "subject": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.18541666666668,
+          "y": -198.37299896054242,
+          "z": -632
+        },
+        "size": {
+          "x": 1.9702579262227466,
+          "y": 4.427292274934615,
+          "z": 2.242610345776484
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5672,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -20.324638233972642,
+        "y": -197.2596141528619,
+        "z": -635.9610722749662,
+        "tx": -27.18541666666668,
+        "ty": -198.37299896054242,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/demon/demon-attack-f16.jpg",
+      "phase": "attack",
+      "n": 16,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.2466666666666667,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.13083521591645728,
+        "hipsY": 1.2143905167425737,
+        "armL": -1.7994365481516044,
+        "armR": -1.7994365481516044
+      },
+      "subject": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -27.089583333333348,
+          "y": -198.37299896054242,
+          "z": -632
+        },
+        "size": {
+          "x": 2.7616877412412784,
+          "y": 3.5943134566593358,
+          "z": 2.2004866784617434
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5672,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -20.22880490063931,
+        "y": -197.2596141528619,
+        "z": -635.9610722749662,
+        "tx": -27.089583333333348,
+        "ty": -198.37299896054242,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/demon/demon-attack-f18.jpg",
+      "phase": "attack",
+      "n": 18,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.21333333333333337,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.23134685680847852,
+        "hipsY": 1.2034355759011082,
+        "armL": -1.1997246201889593,
+        "armR": -1.1997246201889593
+      },
+      "subject": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.993750000000016,
+          "y": -198.37299896054242,
+          "z": -632
+        },
+        "size": {
+          "x": 2.5043993160012015,
+          "y": 3.0905060496959322,
+          "z": 2.1048306619977666
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5672,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -20.13297156730598,
+        "y": -197.2596141528619,
+        "z": -635.9610722749662,
+        "tx": -26.993750000000016,
+        "ty": -198.37299896054242,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/demon/demon-attack-f20.jpg",
+      "phase": "attack",
+      "n": 20,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.18000000000000005,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.27823941877010794,
+        "hipsY": 1.1937765592584093,
+        "armL": -0.6977409125245613,
+        "armR": -0.6977409125245613
+      },
+      "subject": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.897916666666685,
+          "y": -198.37299896054242,
+          "z": -632
+        },
+        "size": {
+          "x": 2.0441492214725585,
+          "y": 3.100233067819147,
+          "z": 2.203097413305727
+        },
+        "yaw": 1.5707963267948966,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5672,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -20.037138233972648,
+        "y": -197.2596141528619,
+        "z": -635.9610722749662,
+        "tx": -26.897916666666685,
+        "ty": -198.37299896054242,
+        "tz": -632,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/demon/demon-attack-f22.jpg",
+      "phase": "attack",
+      "n": 22,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.14666666666666672,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.2606446496203773,
+        "hipsY": 1.1862508718102036,
+        "armL": -0.3327231604293151,
+        "armR": -0.3327231604293151
+      },
+      "subject": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.80233086400373,
+          "y": -198.37299896054242,
+          "z": -631.9951358024493
+        },
+        "size": {
+          "x": 2.3289971266820046,
+          "y": 3.103789047233903,
+          "z": 2.3371034349343063
+        },
+        "yaw": 1.4691074750318212,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5672,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -19.574891179698124,
+        "y": -197.2596141528619,
+        "z": -635.2392828212743,
+        "tx": -26.80233086400373,
+        "ty": -198.37299896054242,
+        "tz": -631.9951358024493,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/demon/demon-attack-f24.jpg",
+      "phase": "attack",
+      "n": 24,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.1133333333333334,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.182640475157874,
+        "hipsY": 1.1815105283673433,
+        "armL": -0.133203106482146,
+        "armR": -0.133203106482146
+      },
+      "subject": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.706992592011147,
+          "y": -198.37299896054242,
+          "z": -631.985407407348
+        },
+        "size": {
+          "x": 2.4475920847666686,
+          "y": 3.099027501602876,
+          "z": 2.207606594974095
+        },
+        "yaw": 1.4691074750318285,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5672,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -19.479552907705568,
+        "y": -197.2596141528619,
+        "z": -635.229554426173,
+        "tx": -26.706992592011147,
+        "ty": -198.37299896054242,
+        "tz": -631.985407407348,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/demon/demon-attack-f26.jpg",
+      "phase": "attack",
+      "n": 26,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.08000000000000007,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 0.06230586150776819,
+        "hipsY": 1.1795770440684523,
+        "armL": -0.09999999999999992,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.611654320018566,
+          "y": -198.37299896054242,
+          "z": -631.9756790122467
+        },
+        "size": {
+          "x": 2.4984302042839666,
+          "y": 3.089246294531307,
+          "z": 2.1991124405079745
+        },
+        "yaw": 1.4691074750318447,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5672,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -19.384214635713036,
+        "y": -197.2596141528619,
+        "z": -635.2198260310718,
+        "tx": -26.611654320018566,
+        "ty": -198.37299896054242,
+        "tz": -631.9756790122467,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/demon/demon-attack-f30.jpg",
+      "phase": "attack",
+      "n": 30,
+      "state": {
+        "alive": true,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": null,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.173400930736845,
+        "armL": -0.09999999999999992,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.420977776033403,
+          "y": -198.37299896054242,
+          "z": -631.9562222220441
+        },
+        "size": {
+          "x": 2.48797393307159,
+          "y": 3.0487566718298638,
+          "z": 2.228807884789603
+        },
+        "yaw": 1.4691074750319018,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5672,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -19.193538091728062,
+        "y": -197.2596141528619,
+        "z": -635.2003692408696,
+        "tx": -26.420977776033403,
+        "ty": -198.37299896054242,
+        "tz": -631.9562222220441,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/demon/demon-death-f00.jpg",
+      "phase": "death",
+      "n": 0,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0,
+        "corpseRX": 0,
+        "corpseRZ": 0,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.173400930736845,
+        "armL": -0.09999999999999992,
+        "armR": -0.09999999999999992
+      },
+      "subject": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.420977776033403,
+          "y": -198.37299896054242,
+          "z": -631.9562222220441
+        },
+        "size": {
+          "x": 2.226938636622915,
+          "y": 2.854465164668568,
+          "z": 2.2021716300499747
+        },
+        "yaw": 1.4691074750319018,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5200,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -19.193538091728062,
+        "y": -197.2596141528619,
+        "z": -635.2003692408696,
+        "tx": -26.420977776033403,
+        "ty": -198.37299896054242,
+        "tz": -631.9562222220441,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/demon/demon-death-f01.jpg",
+      "phase": "death",
+      "n": 1,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.016666666666666666,
+        "corpseRX": -0.7158917231620102,
+        "corpseRZ": 0.7173003871195903,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.173400930736845,
+        "armL": -0.1403811617818284,
+        "armR": -0.11678080291911828
+      },
+      "subject": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.420977776033403,
+          "y": -198.3628382223571,
+          "z": -631.9562222220441
+        },
+        "size": {
+          "x": 1.2625463094295348,
+          "y": 2.8706898844362456,
+          "z": 2.032006104848506
+        },
+        "yaw": 1.4290727852347531,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5200,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -19.193538091728062,
+        "y": -197.2494534146766,
+        "z": -635.2003692408696,
+        "tx": -26.420977776033403,
+        "ty": -198.3628382223571,
+        "tz": -631.9562222220441,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/demon/demon-death-f02.jpg",
+      "phase": "death",
+      "n": 2,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.03333333333333333,
+        "corpseRX": -1.0199378520528772,
+        "corpseRZ": 1.0231670195416454,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.173400930736845,
+        "armL": -0.2674959726401388,
+        "armR": -0.22228221049041505
+      },
+      "subject": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.420977776033403,
+          "y": -198.3530830219557,
+          "z": -631.9562222220441
+        },
+        "size": {
+          "x": 1.5366855559446577,
+          "y": 2.919901498716712,
+          "z": 2.0748285399209863
+        },
+        "yaw": 1.3568728121758424,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5200,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -19.193538091728062,
+        "y": -197.2396982142752,
+        "z": -635.2003692408696,
+        "tx": -26.420977776033403,
+        "ty": -198.3530830219557,
+        "tz": -631.9562222220441,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/demon/demon-death-f03.jpg",
+      "phase": "death",
+      "n": 3,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.05,
+        "corpseRX": -1.1594413106703763,
+        "corpseRZ": 1.164856888095464,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.173400930736845,
+        "armL": -0.38168813235218224,
+        "armR": -0.31679832292031146
+      },
+      "subject": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.420977776033403,
+          "y": -198.34372713311183,
+          "z": -631.9562222220441
+        },
+        "size": {
+          "x": 1.8093781162510894,
+          "y": 2.954873963308472,
+          "z": 2.1155986556300377
+        },
+        "yaw": 1.278560530193668,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5200,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -19.193538091728062,
+        "y": -197.2303423254313,
+        "z": -635.2003692408696,
+        "tx": -26.420977776033403,
+        "ty": -198.34372713311183,
+        "tz": -631.9562222220441,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/demon/demon-death-f04.jpg",
+      "phase": "death",
+      "n": 4,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.06666666666666667,
+        "corpseRX": -1.2362307482437298,
+        "corpseRZ": 1.2441570346689648,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.173400930736845,
+        "armL": -0.48340104946586304,
+        "armR": -0.4007093238382299
+      },
+      "subject": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.420977776033403,
+          "y": -198.33476426418443,
+          "z": -631.9562222220441
+        },
+        "size": {
+          "x": 2.1148561995327064,
+          "y": 2.997679765561088,
+          "z": 2.15956675767211
+        },
+        "yaw": 1.200457865150623,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5200,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -19.193538091728062,
+        "y": -197.2213794565039,
+        "z": -635.2003692408696,
+        "tx": -26.420977776033403,
+        "ty": -198.33476426418443,
+        "tz": -631.9562222220441,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/demon/demon-death-f06.jpg",
+      "phase": "death",
+      "n": 6,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.09999999999999999,
+        "corpseRX": -1.3163442701151367,
+        "corpseRZ": 1.3301147951215844,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.173400930736845,
+        "armL": -0.6515895213062661,
+        "armR": -0.5386051161904901
+      },
+      "subject": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.420977776033403,
+          "y": -198.3179920774523,
+          "z": -631.9562222220441
+        },
+        "size": {
+          "x": 2.612467756077418,
+          "y": 3.068689347311448,
+          "z": 2.233719625833828
+        },
+        "yaw": 1.0510228716391268,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5200,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -19.193538091728062,
+        "y": -197.20460726977177,
+        "z": -635.2003692408696,
+        "tx": -26.420977776033403,
+        "ty": -198.3179920774523,
+        "tz": -631.9562222220441,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/demon/demon-death-f08.jpg",
+      "phase": "death",
+      "n": 8,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.13333333333333333,
+        "corpseRX": -1.3565072588568703,
+        "corpseRZ": 1.3769926720680314,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.173400930736845,
+        "armL": -0.7771426637777564,
+        "armR": -0.6403352640181661
+      },
+      "subject": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.420977776033403,
+          "y": -198.30271472220534,
+          "z": -631.9562222220441
+        },
+        "size": {
+          "x": 2.9541990603803576,
+          "y": 3.109451446491761,
+          "z": 2.2887239393438676
+        },
+        "yaw": 0.913300451857918,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5200,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -19.193538091728062,
+        "y": -197.18932991452482,
+        "z": -635.2003692408696,
+        "tx": -26.420977776033403,
+        "ty": -198.30271472220534,
+        "tz": -631.9562222220441,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/demon/demon-death-f12.jpg",
+      "phase": "death",
+      "n": 12,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.19999999999999998,
+        "corpseRX": -1.3942822704232816,
+        "corpseRZ": 1.4298325381093568,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.173400930736845,
+        "armL": -0.9243282554461137,
+        "armR": -0.7559196765236763
+      },
+      "subject": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.420977776033403,
+          "y": -198.27643132339736,
+          "z": -631.9562222220441
+        },
+        "size": {
+          "x": 3.257842403523032,
+          "y": 3.064507174476489,
+          "z": 2.346918023283365
+        },
+        "yaw": 0.6750170724645412,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5200,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -19.193538091728062,
+        "y": -197.16304651571684,
+        "z": -635.2003692408696,
+        "tx": -26.420977776033403,
+        "ty": -198.27643132339736,
+        "tz": -631.9562222220441,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/demon/demon-death-f20.jpg",
+      "phase": "death",
+      "n": 20,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.3333333333333333,
+        "corpseRX": -1.4166120426810267,
+        "corpseRZ": 1.4828067343030147,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.173400930736845,
+        "armL": -0.9751845464143546,
+        "armR": -0.7835846933489272
+      },
+      "subject": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.420977776033403,
+          "y": -198.2393752919048,
+          "z": -631.9562222220441
+        },
+        "size": {
+          "x": 3.171574706843437,
+          "y": 2.6570379260120376,
+          "z": 2.3474505545127613
+        },
+        "yaw": 0.33825069887256065,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5200,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -19.193538091728062,
+        "y": -197.12599048422427,
+        "z": -635.2003692408696,
+        "tx": -26.420977776033403,
+        "ty": -198.2393752919048,
+        "tz": -631.9562222220441,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/demon/demon-death-f40.jpg",
+      "phase": "death",
+      "n": 40,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 0.6666666666666671,
+        "corpseRX": -1.420040383621269,
+        "corpseRZ": 1.5180463145920515,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.173400930736845,
+        "armL": -0.9499976596705146,
+        "armR": -0.7499981569290742
+      },
+      "subject": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.420977776033403,
+          "y": -198.21239936657028,
+          "z": -631.9562222220441
+        },
+        "size": {
+          "x": 2.8706642306140395,
+          "y": 2.177002684316193,
+          "z": 2.318577778051349
+        },
+        "yaw": 0.09323754915738344,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5200,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -19.193538091728062,
+        "y": -197.09901455888976,
+        "z": -635.2003692408696,
+        "tx": -26.420977776033403,
+        "ty": -198.21239936657028,
+        "tz": -631.9562222220441,
+        "fov": 40
+      }
+    },
+    {
+      "file": "handoffs/GP-19970/attack-death-survey/demon/demon-death-f80.jpg",
+      "phase": "death",
+      "n": 80,
+      "state": {
+        "alive": false,
+        "dying": false,
+        "attackWindup": -0.01333333333333329,
+        "swingT": 0.013333333333333412,
+        "deathT": 0,
+        "corpseT": 1.3333333333333335,
+        "corpseRX": -1.4200403678359304,
+        "corpseRZ": 1.5180468554678372,
+        "hipsZ": 3.4290110376125894e-17,
+        "hipsY": 1.173400930736845,
+        "armL": -0.95,
+        "armR": -0.75
+      },
+      "subject": {
+        "id": "zombie.demon",
+        "name": "Demon",
+        "kind": "zombie",
+        "variant": null,
+        "mode": "walk",
+        "center": {
+          "x": -26.420977776033403,
+          "y": -198.21239896054243,
+          "z": -631.9562222220441
+        },
+        "size": {
+          "x": 2.8706578444864768,
+          "y": 2.176997029947387,
+          "z": 2.318578503667368
+        },
+        "yaw": 0.09323386450968404,
+        "info": {
+          "meshes": 2,
+          "drawables": 2,
+          "tris": 5200,
+          "points": 0,
+          "segments": 0,
+          "materials": 2
+        }
+      },
+      "camera": {
+        "x": -19.193538091728062,
+        "y": -197.09901455888976,
+        "z": -635.2003692408696,
+        "tx": -26.420977776033403,
+        "ty": -198.21239936657028,
+        "tz": -631.9562222220441,
+        "fov": 40
+      }
+    }
+  ],
+  "errors": [],
+  "pageErrors": []
+}

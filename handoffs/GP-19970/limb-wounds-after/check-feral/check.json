@@ -1,0 +1,20 @@
+{
+ "at": "2026-10-29T02:32:27.820Z",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "results": [
+  {
+   "id": "zombie.feral",
+   "variant": null,
+   "mode": "statue",
+   "ok": true,
+   "ms": 131,
+   "tris": 4804,
+   "size": [
+    0.758,
+    1.543,
+    1.068
+   ],
+   "error": null
+  }
+ ]
+}

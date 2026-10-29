@@ -1,0 +1,1736 @@
+{
+  "shots": [
+    {
+      "target": "zombie.screamer:statue",
+      "cam": {
+        "x": -24.531796804957935,
+        "y": -198.32558244789544,
+        "z": -631.75,
+        "tx": -26.021637687955554,
+        "ty": -198.37760883795,
+        "tz": -631.75,
+        "fov": 35
+      },
+      "inspect": {
+        "schema": "dw-inspector-session",
+        "schemaVersion": 1,
+        "inspectorVersion": "1.1.0",
+        "view": {
+          "follow": false,
+          "bookmark": null,
+          "offset": {
+            "dx": 0,
+            "dy": 0,
+            "dz": 0
+          }
+        },
+        "subject": {
+          "id": "zombie.screamer",
+          "variant": null,
+          "mode": "statue"
+        },
+        "camera": {
+          "x": -24.531796804957935,
+          "y": -198.32558244789544,
+          "z": -631.75,
+          "tx": -26.021637687955554,
+          "ty": -198.37760883795,
+          "tz": -631.75,
+          "fov": 35
+        },
+        "display": {
+          "backdrop": "studio",
+          "light": "noon",
+          "overlays": {
+            "bounds": false,
+            "axes": false,
+            "stick": false,
+            "joints": false,
+            "wire": false,
+            "grid": true,
+            "labels": true
+          }
+        },
+        "clock": {
+          "speed": 1,
+          "paused": false
+        },
+        "marine": {
+          "weapon": "none",
+          "akimbo": false,
+          "blade": "machete",
+          "camo": "m81",
+          "gear": {
+            "helmet": true,
+            "vest": true,
+            "pads": true,
+            "nvg": true,
+            "laser": true,
+            "flashlight": true
+          },
+          "wardrobe": {
+            "version": 1,
+            "items": {
+              "cap": {
+                "camo": "m81",
+                "style": "cover"
+              },
+              "helmet": {
+                "camo": "m81"
+              },
+              "mask": {
+                "camo": "coyoteBrown"
+              },
+              "shirt": {
+                "camo": "m81",
+                "sleeves": "down"
+              },
+              "trousers": {
+                "camo": "m81",
+                "cut": "trousers"
+              },
+              "gloves": {
+                "camo": "m81",
+                "worn": true
+              },
+              "carrier": {},
+              "pads": {},
+              "holster": {},
+              "belt": {},
+              "pack": {},
+              "eyewear": {
+                "style": "none"
+              },
+              "boots": {
+                "colour": "black",
+                "rubber": "yellow"
+              }
+            },
+            "guns": {},
+            "body": {
+              "hair": "darkBrown",
+              "eyes": "brown",
+              "skin": 3
+            }
+          },
+          "mods": {
+            "minigun": {
+              "ext": false,
+              "heavy": false
+            },
+            "m4": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "ak": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "pistol": {
+              "ext": false,
+              "suppressor": false,
+              "auto": false
+            },
+            "uzi": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "shotgun": {
+              "ext": false,
+              "suppressor": false
+            },
+            "aa12": {
+              "ext": false
+            },
+            "revolver": {},
+            "sniper": {
+              "ext": false,
+              "suppressor": false
+            },
+            "launcher": {},
+            "flamer": {
+              "ext": false
+            },
+            "chainsaw": {
+              "tank": false
+            }
+          },
+          "move": null,
+          "loop": true,
+          "holds": {}
+        }
+      },
+      "size": [
+        1280,
+        720
+      ],
+      "view": "side",
+      "time": 0.5,
+      "wait": 700,
+      "out": "handoffs/GP-19970/screamer-face-after/screamer-noon-head-side.png",
+      "caption": "noon side"
+    },
+    {
+      "target": "zombie.screamer:statue",
+      "cam": {
+        "x": -26,
+        "y": -198.32558244789544,
+        "z": -630.51,
+        "tx": -26,
+        "ty": -198.37760883795,
+        "tz": -632,
+        "fov": 35
+      },
+      "inspect": {
+        "schema": "dw-inspector-session",
+        "schemaVersion": 1,
+        "inspectorVersion": "1.1.0",
+        "view": {
+          "follow": false,
+          "bookmark": null,
+          "offset": {
+            "dx": 0,
+            "dy": 0,
+            "dz": 0
+          }
+        },
+        "subject": {
+          "id": "zombie.screamer",
+          "variant": null,
+          "mode": "statue"
+        },
+        "camera": {
+          "x": -26,
+          "y": -198.32558244789544,
+          "z": -630.51,
+          "tx": -26,
+          "ty": -198.37760883795,
+          "tz": -632,
+          "fov": 35
+        },
+        "display": {
+          "backdrop": "studio",
+          "light": "noon",
+          "overlays": {
+            "bounds": false,
+            "axes": false,
+            "stick": false,
+            "joints": false,
+            "wire": false,
+            "grid": true,
+            "labels": true
+          }
+        },
+        "clock": {
+          "speed": 1,
+          "paused": false
+        },
+        "marine": {
+          "weapon": "none",
+          "akimbo": false,
+          "blade": "machete",
+          "camo": "m81",
+          "gear": {
+            "helmet": true,
+            "vest": true,
+            "pads": true,
+            "nvg": true,
+            "laser": true,
+            "flashlight": true
+          },
+          "wardrobe": {
+            "version": 1,
+            "items": {
+              "cap": {
+                "camo": "m81",
+                "style": "cover"
+              },
+              "helmet": {
+                "camo": "m81"
+              },
+              "mask": {
+                "camo": "coyoteBrown"
+              },
+              "shirt": {
+                "camo": "m81",
+                "sleeves": "down"
+              },
+              "trousers": {
+                "camo": "m81",
+                "cut": "trousers"
+              },
+              "gloves": {
+                "camo": "m81",
+                "worn": true
+              },
+              "carrier": {},
+              "pads": {},
+              "holster": {},
+              "belt": {},
+              "pack": {},
+              "eyewear": {
+                "style": "none"
+              },
+              "boots": {
+                "colour": "black",
+                "rubber": "yellow"
+              }
+            },
+            "guns": {},
+            "body": {
+              "hair": "darkBrown",
+              "eyes": "brown",
+              "skin": 3
+            }
+          },
+          "mods": {
+            "minigun": {
+              "ext": false,
+              "heavy": false
+            },
+            "m4": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "ak": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "pistol": {
+              "ext": false,
+              "suppressor": false,
+              "auto": false
+            },
+            "uzi": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "shotgun": {
+              "ext": false,
+              "suppressor": false
+            },
+            "aa12": {
+              "ext": false
+            },
+            "revolver": {},
+            "sniper": {
+              "ext": false,
+              "suppressor": false
+            },
+            "launcher": {},
+            "flamer": {
+              "ext": false
+            },
+            "chainsaw": {
+              "tank": false
+            }
+          },
+          "move": null,
+          "loop": true,
+          "holds": {}
+        }
+      },
+      "size": [
+        1280,
+        720
+      ],
+      "view": "front",
+      "time": 0.5,
+      "wait": 700,
+      "out": "handoffs/GP-19970/screamer-face-after/screamer-noon-head-front.png",
+      "caption": "noon front"
+    },
+    {
+      "target": "zombie.screamer:statue",
+      "cam": {
+        "x": -24.531796804957935,
+        "y": -198.32558244789544,
+        "z": -631.75,
+        "tx": -26.021637687955554,
+        "ty": -198.37760883795,
+        "tz": -631.75,
+        "fov": 35
+      },
+      "inspect": {
+        "schema": "dw-inspector-session",
+        "schemaVersion": 1,
+        "inspectorVersion": "1.1.0",
+        "view": {
+          "follow": false,
+          "bookmark": null,
+          "offset": {
+            "dx": 0,
+            "dy": 0,
+            "dz": 0
+          }
+        },
+        "subject": {
+          "id": "zombie.screamer",
+          "variant": null,
+          "mode": "statue"
+        },
+        "camera": {
+          "x": -24.531796804957935,
+          "y": -198.32558244789544,
+          "z": -631.75,
+          "tx": -26.021637687955554,
+          "ty": -198.37760883795,
+          "tz": -631.75,
+          "fov": 35
+        },
+        "display": {
+          "backdrop": "studio",
+          "light": "overcast",
+          "overlays": {
+            "bounds": false,
+            "axes": false,
+            "stick": false,
+            "joints": false,
+            "wire": false,
+            "grid": true,
+            "labels": true
+          }
+        },
+        "clock": {
+          "speed": 1,
+          "paused": false
+        },
+        "marine": {
+          "weapon": "none",
+          "akimbo": false,
+          "blade": "machete",
+          "camo": "m81",
+          "gear": {
+            "helmet": true,
+            "vest": true,
+            "pads": true,
+            "nvg": true,
+            "laser": true,
+            "flashlight": true
+          },
+          "wardrobe": {
+            "version": 1,
+            "items": {
+              "cap": {
+                "camo": "m81",
+                "style": "cover"
+              },
+              "helmet": {
+                "camo": "m81"
+              },
+              "mask": {
+                "camo": "coyoteBrown"
+              },
+              "shirt": {
+                "camo": "m81",
+                "sleeves": "down"
+              },
+              "trousers": {
+                "camo": "m81",
+                "cut": "trousers"
+              },
+              "gloves": {
+                "camo": "m81",
+                "worn": true
+              },
+              "carrier": {},
+              "pads": {},
+              "holster": {},
+              "belt": {},
+              "pack": {},
+              "eyewear": {
+                "style": "none"
+              },
+              "boots": {
+                "colour": "black",
+                "rubber": "yellow"
+              }
+            },
+            "guns": {},
+            "body": {
+              "hair": "darkBrown",
+              "eyes": "brown",
+              "skin": 3
+            }
+          },
+          "mods": {
+            "minigun": {
+              "ext": false,
+              "heavy": false
+            },
+            "m4": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "ak": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "pistol": {
+              "ext": false,
+              "suppressor": false,
+              "auto": false
+            },
+            "uzi": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "shotgun": {
+              "ext": false,
+              "suppressor": false
+            },
+            "aa12": {
+              "ext": false
+            },
+            "revolver": {},
+            "sniper": {
+              "ext": false,
+              "suppressor": false
+            },
+            "launcher": {},
+            "flamer": {
+              "ext": false
+            },
+            "chainsaw": {
+              "tank": false
+            }
+          },
+          "move": null,
+          "loop": true,
+          "holds": {}
+        }
+      },
+      "size": [
+        1280,
+        720
+      ],
+      "view": "side",
+      "time": 0.5,
+      "wait": 700,
+      "out": "handoffs/GP-19970/screamer-face-after/screamer-overcast-head-side.png",
+      "caption": "overcast side"
+    },
+    {
+      "target": "zombie.screamer:statue",
+      "cam": {
+        "x": -26,
+        "y": -198.32558244789544,
+        "z": -630.51,
+        "tx": -26,
+        "ty": -198.37760883795,
+        "tz": -632,
+        "fov": 35
+      },
+      "inspect": {
+        "schema": "dw-inspector-session",
+        "schemaVersion": 1,
+        "inspectorVersion": "1.1.0",
+        "view": {
+          "follow": false,
+          "bookmark": null,
+          "offset": {
+            "dx": 0,
+            "dy": 0,
+            "dz": 0
+          }
+        },
+        "subject": {
+          "id": "zombie.screamer",
+          "variant": null,
+          "mode": "statue"
+        },
+        "camera": {
+          "x": -26,
+          "y": -198.32558244789544,
+          "z": -630.51,
+          "tx": -26,
+          "ty": -198.37760883795,
+          "tz": -632,
+          "fov": 35
+        },
+        "display": {
+          "backdrop": "studio",
+          "light": "overcast",
+          "overlays": {
+            "bounds": false,
+            "axes": false,
+            "stick": false,
+            "joints": false,
+            "wire": false,
+            "grid": true,
+            "labels": true
+          }
+        },
+        "clock": {
+          "speed": 1,
+          "paused": false
+        },
+        "marine": {
+          "weapon": "none",
+          "akimbo": false,
+          "blade": "machete",
+          "camo": "m81",
+          "gear": {
+            "helmet": true,
+            "vest": true,
+            "pads": true,
+            "nvg": true,
+            "laser": true,
+            "flashlight": true
+          },
+          "wardrobe": {
+            "version": 1,
+            "items": {
+              "cap": {
+                "camo": "m81",
+                "style": "cover"
+              },
+              "helmet": {
+                "camo": "m81"
+              },
+              "mask": {
+                "camo": "coyoteBrown"
+              },
+              "shirt": {
+                "camo": "m81",
+                "sleeves": "down"
+              },
+              "trousers": {
+                "camo": "m81",
+                "cut": "trousers"
+              },
+              "gloves": {
+                "camo": "m81",
+                "worn": true
+              },
+              "carrier": {},
+              "pads": {},
+              "holster": {},
+              "belt": {},
+              "pack": {},
+              "eyewear": {
+                "style": "none"
+              },
+              "boots": {
+                "colour": "black",
+                "rubber": "yellow"
+              }
+            },
+            "guns": {},
+            "body": {
+              "hair": "darkBrown",
+              "eyes": "brown",
+              "skin": 3
+            }
+          },
+          "mods": {
+            "minigun": {
+              "ext": false,
+              "heavy": false
+            },
+            "m4": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "ak": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "pistol": {
+              "ext": false,
+              "suppressor": false,
+              "auto": false
+            },
+            "uzi": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "shotgun": {
+              "ext": false,
+              "suppressor": false
+            },
+            "aa12": {
+              "ext": false
+            },
+            "revolver": {},
+            "sniper": {
+              "ext": false,
+              "suppressor": false
+            },
+            "launcher": {},
+            "flamer": {
+              "ext": false
+            },
+            "chainsaw": {
+              "tank": false
+            }
+          },
+          "move": null,
+          "loop": true,
+          "holds": {}
+        }
+      },
+      "size": [
+        1280,
+        720
+      ],
+      "view": "front",
+      "time": 0.5,
+      "wait": 700,
+      "out": "handoffs/GP-19970/screamer-face-after/screamer-overcast-head-front.png",
+      "caption": "overcast front"
+    },
+    {
+      "target": "zombie.screamer:statue",
+      "cam": {
+        "x": -24.531796804957935,
+        "y": -198.32558244789544,
+        "z": -631.75,
+        "tx": -26.021637687955554,
+        "ty": -198.37760883795,
+        "tz": -631.75,
+        "fov": 35
+      },
+      "inspect": {
+        "schema": "dw-inspector-session",
+        "schemaVersion": 1,
+        "inspectorVersion": "1.1.0",
+        "view": {
+          "follow": false,
+          "bookmark": null,
+          "offset": {
+            "dx": 0,
+            "dy": 0,
+            "dz": 0
+          }
+        },
+        "subject": {
+          "id": "zombie.screamer",
+          "variant": null,
+          "mode": "statue"
+        },
+        "camera": {
+          "x": -24.531796804957935,
+          "y": -198.32558244789544,
+          "z": -631.75,
+          "tx": -26.021637687955554,
+          "ty": -198.37760883795,
+          "tz": -631.75,
+          "fov": 35
+        },
+        "display": {
+          "backdrop": "studio",
+          "light": "dusk",
+          "overlays": {
+            "bounds": false,
+            "axes": false,
+            "stick": false,
+            "joints": false,
+            "wire": false,
+            "grid": true,
+            "labels": true
+          }
+        },
+        "clock": {
+          "speed": 1,
+          "paused": false
+        },
+        "marine": {
+          "weapon": "none",
+          "akimbo": false,
+          "blade": "machete",
+          "camo": "m81",
+          "gear": {
+            "helmet": true,
+            "vest": true,
+            "pads": true,
+            "nvg": true,
+            "laser": true,
+            "flashlight": true
+          },
+          "wardrobe": {
+            "version": 1,
+            "items": {
+              "cap": {
+                "camo": "m81",
+                "style": "cover"
+              },
+              "helmet": {
+                "camo": "m81"
+              },
+              "mask": {
+                "camo": "coyoteBrown"
+              },
+              "shirt": {
+                "camo": "m81",
+                "sleeves": "down"
+              },
+              "trousers": {
+                "camo": "m81",
+                "cut": "trousers"
+              },
+              "gloves": {
+                "camo": "m81",
+                "worn": true
+              },
+              "carrier": {},
+              "pads": {},
+              "holster": {},
+              "belt": {},
+              "pack": {},
+              "eyewear": {
+                "style": "none"
+              },
+              "boots": {
+                "colour": "black",
+                "rubber": "yellow"
+              }
+            },
+            "guns": {},
+            "body": {
+              "hair": "darkBrown",
+              "eyes": "brown",
+              "skin": 3
+            }
+          },
+          "mods": {
+            "minigun": {
+              "ext": false,
+              "heavy": false
+            },
+            "m4": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "ak": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "pistol": {
+              "ext": false,
+              "suppressor": false,
+              "auto": false
+            },
+            "uzi": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "shotgun": {
+              "ext": false,
+              "suppressor": false
+            },
+            "aa12": {
+              "ext": false
+            },
+            "revolver": {},
+            "sniper": {
+              "ext": false,
+              "suppressor": false
+            },
+            "launcher": {},
+            "flamer": {
+              "ext": false
+            },
+            "chainsaw": {
+              "tank": false
+            }
+          },
+          "move": null,
+          "loop": true,
+          "holds": {}
+        }
+      },
+      "size": [
+        1280,
+        720
+      ],
+      "view": "side",
+      "time": 0.72,
+      "wait": 700,
+      "out": "handoffs/GP-19970/screamer-face-after/screamer-dusk-head-side.png",
+      "caption": "dusk side"
+    },
+    {
+      "target": "zombie.screamer:statue",
+      "cam": {
+        "x": -26,
+        "y": -198.32558244789544,
+        "z": -630.51,
+        "tx": -26,
+        "ty": -198.37760883795,
+        "tz": -632,
+        "fov": 35
+      },
+      "inspect": {
+        "schema": "dw-inspector-session",
+        "schemaVersion": 1,
+        "inspectorVersion": "1.1.0",
+        "view": {
+          "follow": false,
+          "bookmark": null,
+          "offset": {
+            "dx": 0,
+            "dy": 0,
+            "dz": 0
+          }
+        },
+        "subject": {
+          "id": "zombie.screamer",
+          "variant": null,
+          "mode": "statue"
+        },
+        "camera": {
+          "x": -26,
+          "y": -198.32558244789544,
+          "z": -630.51,
+          "tx": -26,
+          "ty": -198.37760883795,
+          "tz": -632,
+          "fov": 35
+        },
+        "display": {
+          "backdrop": "studio",
+          "light": "dusk",
+          "overlays": {
+            "bounds": false,
+            "axes": false,
+            "stick": false,
+            "joints": false,
+            "wire": false,
+            "grid": true,
+            "labels": true
+          }
+        },
+        "clock": {
+          "speed": 1,
+          "paused": false
+        },
+        "marine": {
+          "weapon": "none",
+          "akimbo": false,
+          "blade": "machete",
+          "camo": "m81",
+          "gear": {
+            "helmet": true,
+            "vest": true,
+            "pads": true,
+            "nvg": true,
+            "laser": true,
+            "flashlight": true
+          },
+          "wardrobe": {
+            "version": 1,
+            "items": {
+              "cap": {
+                "camo": "m81",
+                "style": "cover"
+              },
+              "helmet": {
+                "camo": "m81"
+              },
+              "mask": {
+                "camo": "coyoteBrown"
+              },
+              "shirt": {
+                "camo": "m81",
+                "sleeves": "down"
+              },
+              "trousers": {
+                "camo": "m81",
+                "cut": "trousers"
+              },
+              "gloves": {
+                "camo": "m81",
+                "worn": true
+              },
+              "carrier": {},
+              "pads": {},
+              "holster": {},
+              "belt": {},
+              "pack": {},
+              "eyewear": {
+                "style": "none"
+              },
+              "boots": {
+                "colour": "black",
+                "rubber": "yellow"
+              }
+            },
+            "guns": {},
+            "body": {
+              "hair": "darkBrown",
+              "eyes": "brown",
+              "skin": 3
+            }
+          },
+          "mods": {
+            "minigun": {
+              "ext": false,
+              "heavy": false
+            },
+            "m4": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "ak": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "pistol": {
+              "ext": false,
+              "suppressor": false,
+              "auto": false
+            },
+            "uzi": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "shotgun": {
+              "ext": false,
+              "suppressor": false
+            },
+            "aa12": {
+              "ext": false
+            },
+            "revolver": {},
+            "sniper": {
+              "ext": false,
+              "suppressor": false
+            },
+            "launcher": {},
+            "flamer": {
+              "ext": false
+            },
+            "chainsaw": {
+              "tank": false
+            }
+          },
+          "move": null,
+          "loop": true,
+          "holds": {}
+        }
+      },
+      "size": [
+        1280,
+        720
+      ],
+      "view": "front",
+      "time": 0.72,
+      "wait": 700,
+      "out": "handoffs/GP-19970/screamer-face-after/screamer-dusk-head-front.png",
+      "caption": "dusk front"
+    },
+    {
+      "target": "zombie.screamer:statue",
+      "cam": {
+        "x": -24.531796804957935,
+        "y": -198.32558244789544,
+        "z": -631.75,
+        "tx": -26.021637687955554,
+        "ty": -198.37760883795,
+        "tz": -631.75,
+        "fov": 35
+      },
+      "inspect": {
+        "schema": "dw-inspector-session",
+        "schemaVersion": 1,
+        "inspectorVersion": "1.1.0",
+        "view": {
+          "follow": false,
+          "bookmark": null,
+          "offset": {
+            "dx": 0,
+            "dy": 0,
+            "dz": 0
+          }
+        },
+        "subject": {
+          "id": "zombie.screamer",
+          "variant": null,
+          "mode": "statue"
+        },
+        "camera": {
+          "x": -24.531796804957935,
+          "y": -198.32558244789544,
+          "z": -631.75,
+          "tx": -26.021637687955554,
+          "ty": -198.37760883795,
+          "tz": -631.75,
+          "fov": 35
+        },
+        "display": {
+          "backdrop": "studio",
+          "light": "night",
+          "overlays": {
+            "bounds": false,
+            "axes": false,
+            "stick": false,
+            "joints": false,
+            "wire": false,
+            "grid": true,
+            "labels": true
+          }
+        },
+        "clock": {
+          "speed": 1,
+          "paused": false
+        },
+        "marine": {
+          "weapon": "none",
+          "akimbo": false,
+          "blade": "machete",
+          "camo": "m81",
+          "gear": {
+            "helmet": true,
+            "vest": true,
+            "pads": true,
+            "nvg": true,
+            "laser": true,
+            "flashlight": true
+          },
+          "wardrobe": {
+            "version": 1,
+            "items": {
+              "cap": {
+                "camo": "m81",
+                "style": "cover"
+              },
+              "helmet": {
+                "camo": "m81"
+              },
+              "mask": {
+                "camo": "coyoteBrown"
+              },
+              "shirt": {
+                "camo": "m81",
+                "sleeves": "down"
+              },
+              "trousers": {
+                "camo": "m81",
+                "cut": "trousers"
+              },
+              "gloves": {
+                "camo": "m81",
+                "worn": true
+              },
+              "carrier": {},
+              "pads": {},
+              "holster": {},
+              "belt": {},
+              "pack": {},
+              "eyewear": {
+                "style": "none"
+              },
+              "boots": {
+                "colour": "black",
+                "rubber": "yellow"
+              }
+            },
+            "guns": {},
+            "body": {
+              "hair": "darkBrown",
+              "eyes": "brown",
+              "skin": 3
+            }
+          },
+          "mods": {
+            "minigun": {
+              "ext": false,
+              "heavy": false
+            },
+            "m4": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "ak": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "pistol": {
+              "ext": false,
+              "suppressor": false,
+              "auto": false
+            },
+            "uzi": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "shotgun": {
+              "ext": false,
+              "suppressor": false
+            },
+            "aa12": {
+              "ext": false
+            },
+            "revolver": {},
+            "sniper": {
+              "ext": false,
+              "suppressor": false
+            },
+            "launcher": {},
+            "flamer": {
+              "ext": false
+            },
+            "chainsaw": {
+              "tank": false
+            }
+          },
+          "move": null,
+          "loop": true,
+          "holds": {}
+        }
+      },
+      "size": [
+        1280,
+        720
+      ],
+      "view": "side",
+      "time": 0.9,
+      "wait": 700,
+      "out": "handoffs/GP-19970/screamer-face-after/screamer-night-head-side.png",
+      "caption": "night side"
+    },
+    {
+      "target": "zombie.screamer:statue",
+      "cam": {
+        "x": -26,
+        "y": -198.32558244789544,
+        "z": -630.51,
+        "tx": -26,
+        "ty": -198.37760883795,
+        "tz": -632,
+        "fov": 35
+      },
+      "inspect": {
+        "schema": "dw-inspector-session",
+        "schemaVersion": 1,
+        "inspectorVersion": "1.1.0",
+        "view": {
+          "follow": false,
+          "bookmark": null,
+          "offset": {
+            "dx": 0,
+            "dy": 0,
+            "dz": 0
+          }
+        },
+        "subject": {
+          "id": "zombie.screamer",
+          "variant": null,
+          "mode": "statue"
+        },
+        "camera": {
+          "x": -26,
+          "y": -198.32558244789544,
+          "z": -630.51,
+          "tx": -26,
+          "ty": -198.37760883795,
+          "tz": -632,
+          "fov": 35
+        },
+        "display": {
+          "backdrop": "studio",
+          "light": "night",
+          "overlays": {
+            "bounds": false,
+            "axes": false,
+            "stick": false,
+            "joints": false,
+            "wire": false,
+            "grid": true,
+            "labels": true
+          }
+        },
+        "clock": {
+          "speed": 1,
+          "paused": false
+        },
+        "marine": {
+          "weapon": "none",
+          "akimbo": false,
+          "blade": "machete",
+          "camo": "m81",
+          "gear": {
+            "helmet": true,
+            "vest": true,
+            "pads": true,
+            "nvg": true,
+            "laser": true,
+            "flashlight": true
+          },
+          "wardrobe": {
+            "version": 1,
+            "items": {
+              "cap": {
+                "camo": "m81",
+                "style": "cover"
+              },
+              "helmet": {
+                "camo": "m81"
+              },
+              "mask": {
+                "camo": "coyoteBrown"
+              },
+              "shirt": {
+                "camo": "m81",
+                "sleeves": "down"
+              },
+              "trousers": {
+                "camo": "m81",
+                "cut": "trousers"
+              },
+              "gloves": {
+                "camo": "m81",
+                "worn": true
+              },
+              "carrier": {},
+              "pads": {},
+              "holster": {},
+              "belt": {},
+              "pack": {},
+              "eyewear": {
+                "style": "none"
+              },
+              "boots": {
+                "colour": "black",
+                "rubber": "yellow"
+              }
+            },
+            "guns": {},
+            "body": {
+              "hair": "darkBrown",
+              "eyes": "brown",
+              "skin": 3
+            }
+          },
+          "mods": {
+            "minigun": {
+              "ext": false,
+              "heavy": false
+            },
+            "m4": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "ak": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "pistol": {
+              "ext": false,
+              "suppressor": false,
+              "auto": false
+            },
+            "uzi": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "shotgun": {
+              "ext": false,
+              "suppressor": false
+            },
+            "aa12": {
+              "ext": false
+            },
+            "revolver": {},
+            "sniper": {
+              "ext": false,
+              "suppressor": false
+            },
+            "launcher": {},
+            "flamer": {
+              "ext": false
+            },
+            "chainsaw": {
+              "tank": false
+            }
+          },
+          "move": null,
+          "loop": true,
+          "holds": {}
+        }
+      },
+      "size": [
+        1280,
+        720
+      ],
+      "view": "front",
+      "time": 0.9,
+      "wait": 700,
+      "out": "handoffs/GP-19970/screamer-face-after/screamer-night-head-front.png",
+      "caption": "night front"
+    },
+    {
+      "target": "zombie.screamer:statue",
+      "cam": {
+        "x": -26,
+        "y": -198.5,
+        "z": -623.5,
+        "tx": -26,
+        "ty": -199,
+        "tz": -632,
+        "fov": 65
+      },
+      "inspect": {
+        "schema": "dw-inspector-session",
+        "schemaVersion": 1,
+        "inspectorVersion": "1.1.0",
+        "view": {
+          "follow": false,
+          "bookmark": null,
+          "offset": {
+            "dx": 0,
+            "dy": 0,
+            "dz": 0
+          }
+        },
+        "subject": {
+          "id": "zombie.screamer",
+          "variant": null,
+          "mode": "statue"
+        },
+        "camera": {
+          "x": -26,
+          "y": -198.5,
+          "z": -623.5,
+          "tx": -26,
+          "ty": -199,
+          "tz": -632,
+          "fov": 65
+        },
+        "display": {
+          "backdrop": "studio",
+          "light": "noon",
+          "overlays": {
+            "bounds": false,
+            "axes": false,
+            "stick": false,
+            "joints": false,
+            "wire": false,
+            "grid": true,
+            "labels": true
+          }
+        },
+        "clock": {
+          "speed": 1,
+          "paused": false
+        },
+        "marine": {
+          "weapon": "none",
+          "akimbo": false,
+          "blade": "machete",
+          "camo": "m81",
+          "gear": {
+            "helmet": true,
+            "vest": true,
+            "pads": true,
+            "nvg": true,
+            "laser": true,
+            "flashlight": true
+          },
+          "wardrobe": {
+            "version": 1,
+            "items": {
+              "cap": {
+                "camo": "m81",
+                "style": "cover"
+              },
+              "helmet": {
+                "camo": "m81"
+              },
+              "mask": {
+                "camo": "coyoteBrown"
+              },
+              "shirt": {
+                "camo": "m81",
+                "sleeves": "down"
+              },
+              "trousers": {
+                "camo": "m81",
+                "cut": "trousers"
+              },
+              "gloves": {
+                "camo": "m81",
+                "worn": true
+              },
+              "carrier": {},
+              "pads": {},
+              "holster": {},
+              "belt": {},
+              "pack": {},
+              "eyewear": {
+                "style": "none"
+              },
+              "boots": {
+                "colour": "black",
+                "rubber": "yellow"
+              }
+            },
+            "guns": {},
+            "body": {
+              "hair": "darkBrown",
+              "eyes": "brown",
+              "skin": 3
+            }
+          },
+          "mods": {
+            "minigun": {
+              "ext": false,
+              "heavy": false
+            },
+            "m4": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "ak": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "pistol": {
+              "ext": false,
+              "suppressor": false,
+              "auto": false
+            },
+            "uzi": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "shotgun": {
+              "ext": false,
+              "suppressor": false
+            },
+            "aa12": {
+              "ext": false
+            },
+            "revolver": {},
+            "sniper": {
+              "ext": false,
+              "suppressor": false
+            },
+            "launcher": {},
+            "flamer": {
+              "ext": false
+            },
+            "chainsaw": {
+              "tank": false
+            }
+          },
+          "move": null,
+          "loop": true,
+          "holds": {}
+        }
+      },
+      "size": [
+        1280,
+        720
+      ],
+      "view": "front",
+      "time": 0.5,
+      "wait": 700,
+      "out": "handoffs/GP-19970/screamer-face-after/screamer-noon-gameplay.png",
+      "caption": "noon gameplay 8m"
+    },
+    {
+      "target": "zombie.screamer:statue",
+      "cam": {
+        "x": -24.531796804957935,
+        "y": -198.32558244789544,
+        "z": -631.75,
+        "tx": -26.021637687955554,
+        "ty": -198.37760883795,
+        "tz": -631.75,
+        "fov": 35
+      },
+      "inspect": {
+        "schema": "dw-inspector-session",
+        "schemaVersion": 1,
+        "inspectorVersion": "1.1.0",
+        "view": {
+          "follow": false,
+          "bookmark": null,
+          "offset": {
+            "dx": 0,
+            "dy": 0,
+            "dz": 0
+          }
+        },
+        "subject": {
+          "id": "zombie.screamer",
+          "variant": null,
+          "mode": "walk"
+        },
+        "camera": {
+          "x": -24.531796804957935,
+          "y": -198.32558244789544,
+          "z": -631.75,
+          "tx": -26.021637687955554,
+          "ty": -198.37760883795,
+          "tz": -631.75,
+          "fov": 35
+        },
+        "display": {
+          "backdrop": "studio",
+          "light": "noon",
+          "overlays": {
+            "bounds": false,
+            "axes": false,
+            "stick": false,
+            "joints": false,
+            "wire": false,
+            "grid": true,
+            "labels": true
+          }
+        },
+        "clock": {
+          "speed": 1,
+          "paused": false
+        },
+        "marine": {
+          "weapon": "none",
+          "akimbo": false,
+          "blade": "machete",
+          "camo": "m81",
+          "gear": {
+            "helmet": true,
+            "vest": true,
+            "pads": true,
+            "nvg": true,
+            "laser": true,
+            "flashlight": true
+          },
+          "wardrobe": {
+            "version": 1,
+            "items": {
+              "cap": {
+                "camo": "m81",
+                "style": "cover"
+              },
+              "helmet": {
+                "camo": "m81"
+              },
+              "mask": {
+                "camo": "coyoteBrown"
+              },
+              "shirt": {
+                "camo": "m81",
+                "sleeves": "down"
+              },
+              "trousers": {
+                "camo": "m81",
+                "cut": "trousers"
+              },
+              "gloves": {
+                "camo": "m81",
+                "worn": true
+              },
+              "carrier": {},
+              "pads": {},
+              "holster": {},
+              "belt": {},
+              "pack": {},
+              "eyewear": {
+                "style": "none"
+              },
+              "boots": {
+                "colour": "black",
+                "rubber": "yellow"
+              }
+            },
+            "guns": {},
+            "body": {
+              "hair": "darkBrown",
+              "eyes": "brown",
+              "skin": 3
+            }
+          },
+          "mods": {
+            "minigun": {
+              "ext": false,
+              "heavy": false
+            },
+            "m4": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "ak": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "pistol": {
+              "ext": false,
+              "suppressor": false,
+              "auto": false
+            },
+            "uzi": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "shotgun": {
+              "ext": false,
+              "suppressor": false
+            },
+            "aa12": {
+              "ext": false
+            },
+            "revolver": {},
+            "sniper": {
+              "ext": false,
+              "suppressor": false
+            },
+            "launcher": {},
+            "flamer": {
+              "ext": false
+            },
+            "chainsaw": {
+              "tank": false
+            }
+          },
+          "move": null,
+          "loop": true,
+          "holds": {}
+        }
+      },
+      "size": [
+        1280,
+        720
+      ],
+      "view": "side",
+      "time": 0.5,
+      "wait": 700,
+      "out": "handoffs/GP-19970/screamer-face-after/screamer-noon-walk-head-side.png",
+      "caption": "walk head side"
+    }
+  ],
+  "out": "handoffs/GP-19970/screamer-face-after",
+  "cols": 4
+}

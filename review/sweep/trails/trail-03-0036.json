@@ -1,0 +1,26 @@
+{
+ "schema": "dw-camera-shot",
+ "schemaVersion": 2,
+ "target": null,
+ "label": null,
+ "view": null,
+ "cam": {
+  "fov": 60,
+  "x": 27.92,
+  "y": -3.23,
+  "z": -20.75,
+  "tx": 41.22,
+  "ty": -6.05,
+  "tz": -25.11
+ },
+ "time": 0.5002430000000001,
+ "size": [
+  1600,
+  900
+ ],
+ "center": null,
+ "boxSize": null,
+ "mode": "title",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "at": "2026-10-28T19:39:41.427Z"
+}

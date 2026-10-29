@@ -1,0 +1,8 @@
+# antigravity — AG-151 Night 20: draws and triangles by owner, old against new (probe B, from MU-2) — 2026-10-29
+Changed:          Ran the Night-20 peak (`--night 20 --gfx high`, 48 zombies) scene walk and per-zombie-type mesh/triangle probe in both `82d75118` (temporary detached worktree outside the repo, removed immediately after) and `HEAD` through the game-test slot (Rule 16), reconciled against `renderer.info.render`, and wrote the owner, named-child, and per-zombie-type comparison tables to `docs/perf/2026-10-29-night20-owners.md`. `landmarks` (`+16` draws, `+6,250` triangles in frustum) and `houses` (`+4` to `+5` draws, `+3,792` to `+3,828` triangles in frustum) account for `+20` to `+21` in-frustum draws and `+10,042` to `+10,078` in-frustum triangles at HQ, while all 48 Night-20 zombies account for `+0` drawn meshes and `+1,636` visible triangles (`bomber +392`, `colossus +176`, `brute +48`, `leaper +40`, `shambler/feral/military/drowned +24`, `screamer -44`, `spitter -140`).
+Files:            docs/perf/2026-10-29-night20-owners.md, qa/2026-10-29-AG-151/probe-b.mjs, qa/2026-10-29-AG-151/probe-b.json
+Tests:            not run (GPU performance/scene-walk probe only; `node crew/crew.mjs slot run antigravity AG-151 --checks "Night 20 draws and triangles by owner old vs new" -- node qa/2026-10-29-AG-151/probe-b.mjs` passed and reconciled to the exact triangle against `renderer.info.render`)
+Screenshots:      none (data/perf probe; raw JSON in `qa/2026-10-29-AG-151/probe-b.json`, full tables in `docs/perf/2026-10-29-night20-owners.md`)
+Not verified:     Full `npm test` suite not run (left to the committer per Rule 6 / Rule 16).
+Requests:         none
+Contract changes: none
