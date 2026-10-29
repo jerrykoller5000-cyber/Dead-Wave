@@ -36,6 +36,10 @@
   .use input { vertical-align: -2px; }
   .use.on { color: var(--ok); }
   .use.gun { color: var(--warn); }
+  /* CL-272: takes made from Jerry's sound packs (pk-*), and his switch to play his own instead */
+  button.pk { border-color: #6a5a8e; }
+  .use.mine { margin-left: 14px; }
+  .use.mine.on { color: #b9a6f0; }
   @media (max-width: 700px) { .row { grid-template-columns: 1fr 50px; } .row > div:last-child { grid-column: 1 / -1; } }
 </style>
 </head>
@@ -47,10 +51,16 @@
 </header>
 <main id="main"></main>
 <script type="module">
-import { TAKE_FOLDERS, PLANNED_FOLDERS, PLANNED_FOLDERS_3, OPT_IN, groupTakes, takeFolderFor, levelFor, createTakeBank, isWired, usesTakes, readUse, writeUse } from '../core/takes.js';
-const ALL = [...TAKE_FOLDERS, ...PLANNED_FOLDERS, ...PLANNED_FOLDERS_3], GUNS = new Set(OPT_IN);
+import { TAKE_FOLDERS, PLANNED_FOLDERS, PLANNED_FOLDERS_3, OPT_IN, groupTakes, takeFolderFor, levelFor, createTakeBank, isWired, usesTakes, readUse, writeUse, isPackTake, readMine, PACK_FOLDERS } from '../core/takes.js';
+const GROUP = (id) => (id.startsWith('zombies/') ? id.split('/').slice(0, 2).join('/') : id.split('/')[0]);
+const BASE = [...TAKE_FOLDERS, ...PLANNED_FOLDERS, ...PLANNED_FOLDERS_3], FIRST = new Map();
+BASE.forEach((id, i) => { if (!FIRST.has(GROUP(id))) FIRST.set(GROUP(id), i); });
+// CL-272: the packs' own folders too, each shown with its group
+const ALL = [...BASE, ...PACK_FOLDERS].map((id, i) => [id, FIRST.has(GROUP(id)) ? FIRST.get(GROUP(id)) : 1e6, i]).sort((x, y) => x[1] - y[1] || x[2] - y[2]).map((x) => x[0]), GUNS = new Set(OPT_IN);
 // CL-161: this page's own bank hears every folder (the gunfire too, which the game leaves off until it's switched on)
-const allOn = { getItem: () => JSON.stringify(Object.fromEntries(ALL.map((f) => [f, true]))), setItem() {} };
+// (CL-272: only the on/off switches; his pack-or-mine choice is the real one, shared with the game)
+const allOn = { getItem: (k) => (k === 'tt.takeUse' ? JSON.stringify(Object.fromEntries(ALL.map((f) => [f, true]))) : localStorage.getItem(k)),
+  setItem: (k, v) => { if (k !== 'tt.takeUse') localStorage.setItem(k, v); } };
 const $ = (s) => document.querySelector(s);
 const getJson = (u) => fetch(u, { cache: 'no-store' }).then((r) => (r.ok ? r.json() : Promise.reject(new Error(r.status))));
 let ctx = null;
@@ -61,13 +71,14 @@ const bank = createTakeBank({
 });
 let use = readUse();
 let files = [], manifest = {}, levels = {};
-for (const u of ['/__zsounds', 'index.json']) { try { const j = await getJson(u); if (Array.isArray(j.files)) { files = j.files; break; } } catch (_) {} }
+for (const u of ['/__zsounds', 'index.json']) { try { const j = await getJson(u); if (Array.isArray(j.files)) { files = j.files; if (u === 'index.json') try { files = [...new Set([...files, ...(await getJson('index-packs.json')).files])]; } catch (_) {} break; } } catch (_) {} }
 for (const f of ['manifest.json', 'manifest-2.json', 'manifest-3.json']) { try { for (const m of (await getJson(f)).sounds) manifest[m.folder] = m; } catch (_) {} }
 try { levels = await getJson('levels.json'); } catch (_) { levels = {}; }
-const grouped = groupTakes(files), unplaced = files.filter((f) => !takeFolderFor(f));
+const grouped = groupTakes(files), unplaced = files.filter((f) => !takeFolderFor(f)), packCount = files.filter(isPackTake).length;
 const filled = TAKE_FOLDERS.filter((f) => grouped.has(f)).length, filled2 = PLANNED_FOLDERS.filter((f) => grouped.has(f)).length, filled3 = PLANNED_FOLDERS_3.filter((f) => grouped.has(f)).length;
 $('#sum').innerHTML = `<b>${files.length - unplaced.length}</b> takes. Zombies: <b>${filled}</b> of ${TAKE_FOLDERS.length} folders. Batch 2: <b>${filled2}</b> of ${PLANNED_FOLDERS.length}. Batch 3: <b>${filled3}</b> of ${PLANNED_FOLDERS_3.length} (not wired yet: tell Claude when it's in). ` +
   `Folders with no takes keep the game's own sound. Untick "in the game" to hear the game's own sound again; the gunfire stays the game's until you tick it.` + (unplaced.length ? ` <b style="color:var(--warn)">${unplaced.length} file(s) in no folder the game knows</b> (below).` : '') +
+  (packCount ? ` <b>${packCount}</b> takes are from the sound packs (purple, P): in a folder that has them they play instead of yours; tick "your takes" to hear yours in the game again.` : '') +
   (files.length ? '' : ' <b style="color:var(--warn)">No list from the server: open this through "Listen to Z-Sounds.bat".</b>');
 const url = (rel) => './' + rel.split('/').map(encodeURIComponent).join('/');
 const raw = (rel) => { audio(); const a = new Audio(url(rel)); a.play(); };
@@ -92,14 +103,24 @@ function render() {
       <div class="count ${list.length >= 3 ? 'ok' : list.length ? 'few' : ''}">${list.length}</div><div></div>`;
     const cell = row.lastElementChild;
     if (list.length && isWired(id)) {
-      const on = usesTakes(id, use), l = document.createElement('label');
+      const on = usesTakes(id, use, list.some(isPackTake)), l = document.createElement('label');
       l.className = 'use' + (on ? ' on' : '') + (GUNS.has(id) ? ' gun' : '');
       l.innerHTML = `<input type="checkbox"${on ? ' checked' : ''}> in the game${GUNS.has(id) ? ' (gunfire: compare it with the game\'s own)' : ''}`;
       l.firstChild.onchange = (e) => { use = readUse(); use[id] = e.target.checked; writeUse(use); l.className = 'use' + (e.target.checked ? ' on' : '') + (GUNS.has(id) ? ' gun' : ''); };
       cell.append(l);
-    } else if (!isWired(id)) { const n = document.createElement('div'); n.className = 'use'; n.textContent = PLANNED_FOLDERS_3.includes(id) ? 'batch 3: wired once its takes are in' : 'not played by the game: a burst or a loop (batch 3 has a single shot for it)'; cell.append(n); }
+      // CL-272: a folder with pack takes and his: which the game plays
+      const pk = list.filter(isPackTake).length;
+      if (pk && pk < list.length) {
+        const mine = readMine()[id] === true, k = document.createElement('label');
+        k.className = 'use mine' + (mine ? ' on' : '');
+        k.innerHTML = `<input type="checkbox"${mine ? ' checked' : ''}> your takes, not the pack's`;
+        k.firstChild.onchange = (e) => { bank.setMine(id, e.target.checked); k.className = 'use mine' + (e.target.checked ? ' on' : ''); };
+        cell.append(k);
+      }
+    } else if (!isWired(id)) { const n = document.createElement('div'); n.className = 'use'; n.textContent = PLANNED_FOLDERS_3.includes(id) ? 'batch 3: wired once its takes are in' : PACK_FOLDERS.includes(id) ? 'from the packs: the game has no place for it yet' : 'not played by the game: a burst or a loop (batch 3 has a single shot for it)'; cell.append(n); }
     if (m) { const p = document.createElement('div'); p.className = 'prompt'; p.textContent = m.prompt; cell.append(p); }
-    list.forEach((rel, i) => { const b = document.createElement('button'); b.textContent = '▶ ' + (i + 1); b.title = rel; b.onclick = () => raw(rel); cell.append(b); });
+    let nh = 0, np = 0;
+    list.forEach((rel) => { const b = document.createElement('button'), p = isPackTake(rel); b.textContent = '▶ ' + (p ? 'P' + ++np : ++nh); b.title = rel; if (p) b.className = 'pk'; b.onclick = () => raw(rel); cell.append(b); });
     if (list.length) { const b = document.createElement('button'); b.className = 'game'; b.textContent = '▶ as in the game'; b.title = 'a take, evened and at its level, the way the game plays it'; b.onclick = () => asGame(id, b); cell.append(b); }
     main.append(row);
   }

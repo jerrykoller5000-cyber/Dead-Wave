@@ -9,6 +9,12 @@
 > `weapons/rotary-gun-loop`, `turrets/light-turret-shot`, `turrets/heavy-turret-shot` (the 16 pending jobs in the
 > batch-3 tool).
 
+> **CL-272 (2026-10-26): takes from Jerry's sound packs.** Files named `pk-<pack>-<name>.ogg` are made from the packs
+> in `F:\Sound_Effects` (docs/audio/packs.md, `tools/pack-make.py`). In a folder that has them they play instead of
+> the ElevenLabs takes, which stay right there: on the listen page tick **"your takes, not the pack's"** for that
+> folder to hear yours in the game again. They're git-ignored (the licences don't allow them on GitHub) and ship in the
+> builds. First in: both guardians (`zombies/guardian/*`, `zombies/caveguard/*`).
+
 **Three sets of folders in here:** the zombies (`zombies/`, `footsteps/`, `impacts/`, `horde/`, `build-attacks/`;
 prompts in `PROMPTS.md`), the rest of the game (`player/`, `weapon-foley/`, `weapons/`, `bullet-impacts/`, `builds/`,
 `turrets/`, `hq/`, `world/`, `below/`, `vehicles/`, `ui/`, `training/`; prompts in `PROMPTS-2.md`), and since CL-161
