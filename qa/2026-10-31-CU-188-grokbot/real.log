@@ -1,0 +1,35 @@
+Game-test request 50ce0d73-7d54-4a2d-9c3e-302fcb65bd0e queued at position 2. Waiting...
+GRANT grokbot CU-188: starting one game-test command
+FAIL  t76      15 pass   1 fail  40.0s  (real renderer)
+    PASS guards asleep at their post (3)
+    PASS drawn close up, not the far LOD (false/false/false)
+    PASS sampled 81 frames
+    PASS each one sways (torso roll ranges 0.120/0.118/0.115)
+    PASS each one breathes (hips 12.0/12.0/12.0 mm)
+    PASS each one looks about (head turn ranges 0.63/0.40/0.65 rad)
+    FAIL never in step: the closest pair differs by 0.010 rad on average
+    PASS own breathing rates (1.99/1.65/1.64)
+    PASS they hold the post (moved at most 0.00 m)
+    PASS shuffles a step: leg lift 0.35 rad, turn -0.43 rad
+    PASS and is still at its post
+    PASS a zombie held in the grace idles (amt 1.00, grace true)
+    PASS it stands instead of walking on the spot
+    PASS and looks about (0.08 rad)
+    PASS a walker walks (phase +7.6, idle 0.00)
+    PASS no page errors ()
+FAIL  t80      13 pass   1 fail  132.2s  (real renderer)
+    PASS the HQ house is there
+    PASS the spider starts with the house between them
+    PASS it comes round until the house is out of the line (clear after 4.8 s, in the line 100% of the time after; clear of the house)
+    PASS and it stays at range: never closer than 5.3 m
+    FAIL a spitter behind the house keeps creeping in (moved 6.8 m, 13.0 to 13.4 m)
+    PASS a spider in the open holds its band (7.0 to 7.0 m)
+    PASS a flanker behind the house comes round to him (closest 0.9 m in 30 s; ended at -4.7,-5.4)
+    PASS a spider blind inside its back-off range comes on round the corner (clear after 7.4 s; clear of the house; 4.9 to 4.9 m)
+    PASS a spider on a line that grazes the corner takes one with room (start 0.29 m clear, end 2.24 m; tight 0% of the time after 3 s; closest 4.2 m)
+    PASS the night-12 spot, the line 0.91 m from the ammo kiosk: the spider reads a line and his AK kills it (line true, dead)
+    PASS three wall pieces between them stop his rounds (3 walls; 0 damage; trigger held 157 ticks, 0 with his gun not by him)
+    PASS a spider behind his wall reads no line (line false)
+    PASS and comes on round the wall instead of holding behind it (closest 5.3 m, ended at -11.9,-6.6)
+    PASS one 13 m step that spans his wall and the spider: the wall stops it (plain stopped, piercing stopped; control from past the wall hits)
+2 checks: 28 pass, 2 fail (real renderer)

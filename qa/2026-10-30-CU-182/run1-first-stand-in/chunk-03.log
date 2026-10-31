@@ -1,0 +1,37 @@
+GRANT cursor CU-182: starting one game-test command
+check-players: 309 player.position reads, all in the allowed places
+ok    t72     21 pass   0 fail  57.7s
+ok    t73     12 pass   0 fail  52.4s
+FAIL  t74     17 pass   1 fail  46.1s
+ok    t75     16 pass   0 fail  42.2s
+FAIL  t76     15 pass   1 fail  46.5s
+ok    t77     17 pass   0 fail  47.7s
+ok    t78     18 pass   0 fail  36.2s
+ok    t79     12 pass   0 fail  58.5s
+ok    t80     14 pass   0 fail  146.7s
+           INFO the old drape (sampleHeight + 7 cm) went 0.37 m under the drawn bed at worst
+ok    t81      5 pass   0 fail  23.4s
+ok    t82      4 pass   0 fail  25.4s
+ok    t83     31 pass   0 fail  53.1s
+ok    t84     10 pass   0 fail  49.4s
+ok    t85     15 pass   0 fail  45.6s
+ok    t86     12 pass   0 fail  39.0s
+ok    t87     13 pass   0 fail  35.9s
+ok    t88     13 pass   0 fail  36.4s
+ok    t89     18 pass   0 fail  42.9s
+ok    t90      6 pass   0 fail  41.6s
+ok    t91      7 pass   0 fail  42.8s
+ok    t92      5 pass   0 fail  37.4s
+ok    t93     11 pass   0 fail  61.9s
+ok    t94      8 pass   0 fail  39.7s
+ok    t95      9 pass   0 fail  55.7s
+ok    t96     19 pass   0 fail  47.5s
+
+25 checks: 328 pass, 2 fail
+
+by owner:
+  unassigned
+    t74    1 fail  FAIL and come for him (12.4 -> 14.1 m)
+           FAIL and come for him (12.4 -> 14.1 m)
+    t76    1 fail  FAIL never in step: the closest pair differs by 0.001 rad on average
+           FAIL never in step: the closest pair differs by 0.001 rad on average

@@ -1,0 +1,30 @@
+GRANT cursor CU-188: starting one game-test command
+check-players: 309 player.position reads, all in the allowed places
+ok    t46     11 pass   0 fail  24.5s
+ok    t47     17 pass   0 fail  22.7s
+ok    t48     22 pass   0 fail  36.3s
+ok    t49     32 pass   0 fail  36.9s
+ok    t50     18 pass   0 fail  25.0s
+ok    t51     19 pass   0 fail  36.6s
+ok    t52     17 pass   0 fail  23.4s
+ok    t53     76 pass   0 fail  45.9s
+ok    t54     32 pass   0 fail  37.6s
+ok    t55     10 pass   0 fail  36.9s
+ok    t56      1 pass   0 fail  24.4s
+ok    t57     10 pass   0 fail  24.3s
+ok    t58      9 pass   0 fail  40.0s
+ok    t59     48 pass   0 fail  56.4s
+ok    t60     43 pass   0 fail  62.6s
+ok    t61     22 pass   0 fail  54.8s
+ok    t62      4 pass   0 fail  37.1s
+ok    t63      6 pass   0 fail  37.7s
+ok    t64      8 pass   0 fail  40.2s
+ok    t65     12 pass   0 fail  42.7s
+           INFO largest height change across one puddle: 0.181 m
+ok    t66      4 pass   0 fail  40.6s
+ok    t67      9 pass   0 fail  51.4s
+ok    t68     15 pass   0 fail  37.8s
+ok    t69     18 pass   0 fail  54.6s
+ok    t70     21 pass   0 fail  62.9s
+
+25 checks: 484 pass, 0 fail

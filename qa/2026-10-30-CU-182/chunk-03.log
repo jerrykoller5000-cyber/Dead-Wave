@@ -1,0 +1,31 @@
+Game-test request b56c0d7e-5669-4299-966a-2503abc092a1 queued at position 2. Waiting...
+GRANT cursor CU-182: starting one game-test command
+check-players: 309 player.position reads, all in the allowed places
+ok    t72     21 pass   0 fail  58.7s
+ok    t73     12 pass   0 fail  53.2s
+ok    t74     18 pass   0 fail  45.8s
+ok    t75     16 pass   0 fail  41.9s
+ok    t76     16 pass   0 fail  46.5s
+ok    t77     17 pass   0 fail  46.5s
+ok    t78     18 pass   0 fail  34.6s
+ok    t79     12 pass   0 fail  54.2s
+ok    t80     14 pass   0 fail  143.0s
+           INFO the old drape (sampleHeight + 7 cm) went 0.37 m under the drawn bed at worst
+ok    t81      5 pass   0 fail  22.7s
+ok    t82      4 pass   0 fail  21.7s
+ok    t83     31 pass   0 fail  47.6s
+ok    t84     10 pass   0 fail  48.5s
+ok    t85     15 pass   0 fail  44.9s
+ok    t86     12 pass   0 fail  38.3s
+ok    t87     13 pass   0 fail  35.6s
+ok    t88     13 pass   0 fail  35.9s
+ok    t89     18 pass   0 fail  40.7s
+ok    t90      6 pass   0 fail  40.3s
+ok    t91      7 pass   0 fail  41.5s
+ok    t92      5 pass   0 fail  36.6s
+ok    t93     11 pass   0 fail  59.6s
+ok    t94      8 pass   0 fail  38.2s
+ok    t95      9 pass   0 fail  54.0s
+ok    t96     19 pass   0 fail  44.6s
+
+25 checks: 330 pass, 0 fail

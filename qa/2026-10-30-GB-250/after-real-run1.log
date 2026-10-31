@@ -1,0 +1,81 @@
+Game-test request dd23127c-7da6-44cb-881f-cfa1bc53114d queued at position 2. Waiting...
+GRANT grokbot GB-250: starting one game-test command
+ok    t112     13 pass   0 fail  29.6s  (real renderer)
+    PASS a light turret is up at 10.0 m
+    PASS the turret fires and draws its target within 2 s (0.08 s of game time)
+    PASS its pack comes too: target true, packmate 2.5 m off true
+    PASS a zombie 16 m off is not drawn
+    PASS the drawn zombie heads for the turret (moved 2.51 m, cos to turret 1.00, to marine 0.62)
+    PASS its blow on the turret is 1.5x: 8 (a plain blow 5, damage 5)
+    PASS held 6 s without headway it gives the turret up (for 9.0 s more)
+    PASS brutes and demons are defence seekers
+    PASS bombers, spiders and screamers are not
+    PASS a quarter of the rest are: 3 of 12
+    PASS a seeker (and the brute) picks the turret first
+    PASS a plain one has no defence target (goes for the marine)
+    PASS no page errors
+ok    t168     39 pass   0 fail  49.5s  (real renderer)
+    PASS the debug handle is there
+    PASS he is down in the iron warren
+    PASS every alcove has its sleeper, lying down (11 of 11)
+    PASS each takes the iron cave role
+    PASS the roster pays half the night between them (15 of 30, 16 bodies)
+    PASS each sleeper carries its share
+    PASS at the mouth, nobody stirs
+    PASS walking within 2.5 m of one wakes it (after 72 ms)
+    PASS and it gets up
+    PASS its neighbours within 4 m wake too (3 of 3)
+    PASS it closes and swings at him
+    PASS it never stands in the rock (0 of 52 samples)
+    PASS the gun light held on one 6 m off wakes it after 1.5 s, not 1.4 s
+    PASS his pistol shot wakes the 5 within 35 m and not the 0 beyond
+    PASS never more than 24 awake (5 at most, 11 sleepers)
+    PASS the warren has its nests (1)
+    PASS near it, the nest sends one of its own (1)
+    PASS a nest's dead pay nothing (they keep coming)
+    PASS a round into it stops there and takes 150 of its 400 (250 left)
+    PASS a grenade on it, weak to blasts, blows it (and it is gone)
+    PASS the nest-blown event goes out
+    PASS blown, it sends no more
+    PASS stepping into the Deep brings the mine crew: a brute foreman and four soldiers (brute, military, military, military, military)
+    PASS one set-piece event
+    PASS the crew carries the rest of the pay (6)
+    PASS stepping in again brings no second crew
+    PASS the crew dead, the box shut: not yet cleared
+    PASS the box open too: the Deep is cleared
+    PASS topside's body stood where it was while he was below
+    PASS coming up takes the warren's dead away (0 were still lying there)
+    PASS and is still there after
+    PASS down again the same run: the dead he killed stay dead, the crew does not come back
+    PASS the shale Deep: feral,feral,feral,feral,shambler,shambler,shambler,shambler
+    PASS one sleeper killed in the shale warren: down again, the other 10 still lie there
+    PASS the wet Deep: drowned,drowned,drowned,drowned,drowned,drowned
+    PASS the drowned have risen to the floor
+    PASS the hill Deep: colossus,military,military,shambler,shambler
+    PASS the root Deep: nothing comes when he walks in
+    PASS the box opened, the climbers' knot drops and lands (6)
+ok    t171     23 pass   0 fail  43.7s  (real renderer)
+    PASS the debug handle is there; the guardian has 3400 here (3400)
+    PASS he can stand at the rune door with E on it (not the strongbox's)
+    PASS an ordinary day: shut ("It's warm. It's singing.")
+    PASS silenced, the warren not cleared: "It's open. Somewhere."
+    PASS cleared and silenced: open
+    PASS E at the open door: he is in the heart (y -455)
+    PASS the guardian is there, on its rig
+    PASS 'heart' enter and the quest's heart { entered, phase 1, 3400 }
+    PASS it comes at him (38.5 -> 34.6 m)
+    PASS 1200 damage: 2200 left, the second phase, its body untouched (2200)
+    PASS its reach grows: 4.2 m
+    PASS the dead come up out of the source (3)
+    PASS a third: the last phase
+    PASS a white column comes down
+    PASS its lunge takes hold: the kick-free is open, 5 presses
+    PASS five E presses: free, 50 HP less (50)
+    PASS the Hush flat: it cannot be hurt (1000)
+    PASS up the tunnel he is back in his warren by the rune door
+    PASS the heart's guardian and its dead are gone
+    PASS in again: it has healed, a fresh fight
+    PASS it dies: 'heart' dead, then he is up and the quest's ending goes out
+    PASS the dead topside dropped where they stood
+    PASS the run is won, or (CL-207) Heron is due at the dock for the true ending (won false, extraction due)
+3 checks: 75 pass, 0 fail (real renderer)

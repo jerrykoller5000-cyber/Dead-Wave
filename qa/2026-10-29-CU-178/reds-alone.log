@@ -1,0 +1,23 @@
+GRANT cursor CU-178: starting one game-test command
+check-players: 309 player.position reads, all in the allowed places
+FAIL  t72     17 pass   4 fail  78.3s
+ok    t74     18 pass   0 fail  64.2s
+FAIL  t112    12 pass   1 fail  56.3s
+FAIL  t168    38 pass   1 fail  69.5s
+FAIL  t171    22 pass   1 fail  71.6s
+
+5 checks: 107 pass, 7 fail
+
+by owner:
+  unassigned
+    t72    4 fail  FAIL the alarm starts the wave
+           FAIL the alarm starts the wave
+           FAIL the last kill starts the finisher
+           FAIL the next prep waits for it: prep, day 2
+           FAIL still day 1 halfway through the finisher
+    t112   1 fail  FAIL its blow on the turret is 1.5x: 0 (a plain blow 6, damage 6)
+           FAIL its blow on the turret is 1.5x: 0 (a plain blow 6, damage 6)
+    t168   1 fail  FAIL it closes and swings at him
+           FAIL it closes and swings at him
+    t171   1 fail  FAIL the dead come up out of the source (0)
+           FAIL the dead come up out of the source (0)

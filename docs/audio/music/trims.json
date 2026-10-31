@@ -1,0 +1,3640 @@
+{
+ "version": 1,
+ "task": "MU-8: maker trims from MU-3 downbeats",
+ "source": "docs/audio/music/score.json + analysis.json",
+ "rule": "numbers and catalogue paths only; no audio copied or moved",
+ "records": [
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Scarecrow 105bpm Emin/Stems/Ghosthack-HS3_Scarecrow_Bass Guitar_105bpm.wav",
+   "moment": "night-01",
+   "role": "bass",
+   "trim_head_s": 0.093,
+   "bars": 15,
+   "cut_s": 34.379
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Scarecrow 105bpm Emin/Stems/Ghosthack-HS3_Scarecrow_Crash Transition FX_105bpm.wav",
+   "moment": "night-01",
+   "role": "drums",
+   "trim_head_s": 0.163,
+   "bars": 15,
+   "cut_s": 34.449
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Scarecrow 105bpm Emin/Stems/Ghosthack-HS3_Scarecrow_Hit FX_105bpm.wav",
+   "moment": "night-01",
+   "role": "fx",
+   "trim_head_s": 0.43,
+   "bars": 15,
+   "cut_s": 34.716
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Scarecrow 105bpm Emin/Stems/Ghosthack-HS3_Scarecrow_Kick Drum_105bpm.wav",
+   "moment": "night-01",
+   "role": "kick",
+   "trim_head_s": 3.402,
+   "bars": 14,
+   "cut_s": 35.402
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Scarecrow 105bpm Emin/Stems/Ghosthack-HS3_Scarecrow_Lead Guitar_105bpm.wav",
+   "moment": "night-01",
+   "role": "lead",
+   "trim_head_s": 0.975,
+   "bars": 15,
+   "cut_s": 35.261
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Scarecrow 105bpm Emin/Stems/Ghosthack-HS3_Scarecrow_Open Hat_105bpm.wav",
+   "moment": "night-01",
+   "role": "hats",
+   "trim_head_s": 1.846,
+   "bars": 15,
+   "cut_s": 36.132
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Scarecrow 105bpm Emin/Stems/Ghosthack-HS3_Scarecrow_Rhythm Guitar_105bpm.wav",
+   "moment": "night-01",
+   "role": "rhythm guitar",
+   "trim_head_s": 3.541,
+   "bars": 14,
+   "cut_s": 35.541
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Scarecrow 105bpm Emin/Stems/Ghosthack-HS3_Scarecrow_Snare Drum_105bpm.wav",
+   "moment": "night-01",
+   "role": "snare",
+   "trim_head_s": 1.834,
+   "bars": 15,
+   "cut_s": 36.12
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Revenge 100bpm Emin/Stems/Ghosthack-HS3_Revenge_Sub Drop FX_100bpm.wav",
+   "moment": "night-01",
+   "role": "fx",
+   "trim_head_s": 0.139,
+   "bars": 15,
+   "cut_s": 36.139
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Revenge 100bpm Emin/Stems/Ghosthack-HS3_Revenge_Open Hat_100bpm.wav",
+   "moment": "night-01",
+   "role": "hats",
+   "trim_head_s": 0.569,
+   "bars": 15,
+   "cut_s": 36.569
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Revenge 100bpm Emin/Stems/Ghosthack-HS3_Revenge_Rhythm Guitar_100bpm.wav",
+   "moment": "night-01",
+   "role": "rhythm guitar",
+   "trim_head_s": 1.8,
+   "bars": 15,
+   "cut_s": 37.8
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Revenge 100bpm Emin/Stems/Ghosthack-HS3_Revenge_Snare Drum_100bpm.wav",
+   "moment": "night-01",
+   "role": "snare",
+   "trim_head_s": 3.088,
+   "bars": 14,
+   "cut_s": 36.688
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Revenge 100bpm Emin/Stems/Ghosthack-HS3_Revenge_Bass Guitar_100bpm.wav",
+   "moment": "night-01",
+   "role": "bass",
+   "trim_head_s": 1.625,
+   "bars": 15,
+   "cut_s": 37.625
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Revenge 100bpm Emin/Stems/Ghosthack-HS3_Revenge_Kick Drum_100bpm.wav",
+   "moment": "night-01",
+   "role": "kick",
+   "trim_head_s": 0.766,
+   "bars": 15,
+   "cut_s": 36.766
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Revenge 100bpm Emin/Stems/Ghosthack-HS3_Revenge_Lead Guitar_100bpm.wav",
+   "moment": "night-01",
+   "role": "lead",
+   "trim_head_s": 3.796,
+   "bars": 14,
+   "cut_s": 37.396
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Basilisk 100bpm Emin/Stems/Ghosthack-HS_Basilisk_Synth_100bpm Emin.wav",
+   "moment": "night-01",
+   "role": "synth",
+   "trim_head_s": 0.418,
+   "bars": 15,
+   "cut_s": 36.418
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Basilisk 100bpm Emin/Stems/Ghosthack-HS_Basilisk_Bass Guitar_100bpm Emin.wav",
+   "moment": "night-01",
+   "role": "bass",
+   "trim_head_s": 0.046,
+   "bars": 16,
+   "cut_s": 38.446
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Basilisk 100bpm Emin/Stems/Ghosthack-HS_Basilisk_Hi Hat_100bpm.wav",
+   "moment": "night-01",
+   "role": "hats",
+   "trim_head_s": 0.116,
+   "bars": 15,
+   "cut_s": 36.116
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Basilisk 100bpm Emin/Stems/Ghosthack-HS_Basilisk_Kick Drum_100bpm.wav",
+   "moment": "night-01",
+   "role": "kick",
+   "trim_head_s": 1.312,
+   "bars": 15,
+   "cut_s": 37.312
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Basilisk 100bpm Emin/Stems/Ghosthack-HS_Basilisk_Rhythm Guitar_100bpm Emin.wav",
+   "moment": "night-01",
+   "role": "rhythm guitar",
+   "trim_head_s": 3.704,
+   "bars": 14,
+   "cut_s": 37.304
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Basilisk 100bpm Emin/Stems/Ghosthack-HS_Basilisk_Snare_100bpm.wav",
+   "moment": "night-01",
+   "role": "snare",
+   "trim_head_s": 3.088,
+   "bars": 14,
+   "cut_s": 36.688
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Surge 110bpm Fmin/Stems/Ghosthack-HS2_Surge_Bass Guitar_110bpm.wav",
+   "moment": "night-02",
+   "role": "bass",
+   "trim_head_s": 1.486,
+   "bars": 15,
+   "cut_s": 34.213
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Surge 110bpm Fmin/Stems/Ghosthack-HS2_Surge_Crash Transition FX_110bpm.wav",
+   "moment": "night-02",
+   "role": "drums",
+   "trim_head_s": 0.848,
+   "bars": 15,
+   "cut_s": 33.575
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Surge 110bpm Fmin/Stems/Ghosthack-HS2_Surge_Impact_FX_110bpm.wav",
+   "moment": "night-02",
+   "role": "fx",
+   "trim_head_s": 0.372,
+   "bars": 15,
+   "cut_s": 33.099
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Surge 110bpm Fmin/Stems/Ghosthack-HS2_Surge_Kick Drum_110bpm.wav",
+   "moment": "night-02",
+   "role": "kick",
+   "trim_head_s": 3.425,
+   "bars": 14,
+   "cut_s": 33.97
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Surge 110bpm Fmin/Stems/Ghosthack-HS2_Surge_Noise Energy Texture_110bpm.wav",
+   "moment": "night-02",
+   "role": "other",
+   "trim_head_s": 0.789,
+   "bars": 15,
+   "cut_s": 33.516
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Surge 110bpm Fmin/Stems/Ghosthack-HS2_Surge_Synth_110bpm.wav",
+   "moment": "night-02",
+   "role": "synth",
+   "trim_head_s": 2.148,
+   "bars": 15,
+   "cut_s": 34.875
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Surge 110bpm Fmin/Stems/Ghosthack-HS2_Surge_Open Hat_110bpm.wav",
+   "moment": "night-02",
+   "role": "hats",
+   "trim_head_s": 0.534,
+   "bars": 15,
+   "cut_s": 33.261
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Surge 110bpm Fmin/Stems/Ghosthack-HS2_Surge_Rhythm Guitar_110bpm.wav",
+   "moment": "night-02",
+   "role": "rhythm guitar",
+   "trim_head_s": 0.65,
+   "bars": 15,
+   "cut_s": 33.377
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Surge 110bpm Fmin/Stems/Ghosthack-HS2_Surge_Snare Drum_110bpm.wav",
+   "moment": "night-02",
+   "role": "snare",
+   "trim_head_s": 0.522,
+   "bars": 15,
+   "cut_s": 33.249
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Viper 110bpm Fmin/Stems/Ghosthack-HS3_Viper_Bass Guitar_110bpm.wav",
+   "moment": "night-02",
+   "role": "bass",
+   "trim_head_s": 0.023,
+   "bars": 16,
+   "cut_s": 34.932
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Viper 110bpm Fmin/Stems/Ghosthack-HS3_Viper_Impact_& Atmosphere FX_110bpm.wav",
+   "moment": "night-02",
+   "role": "fx",
+   "trim_head_s": 0.604,
+   "bars": 15,
+   "cut_s": 33.331
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Viper 110bpm Fmin/Stems/Ghosthack-HS3_Viper_Kick Drum_110bpm.wav",
+   "moment": "night-02",
+   "role": "kick",
+   "trim_head_s": 1.881,
+   "bars": 15,
+   "cut_s": 34.608
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Viper 110bpm Fmin/Stems/Ghosthack-HS3_Viper_Lead Guitar_110bpm.wav",
+   "moment": "night-02",
+   "role": "lead",
+   "trim_head_s": 0.418,
+   "bars": 15,
+   "cut_s": 33.145
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Viper 110bpm Fmin/Stems/Ghosthack-HS3_Viper_Open Hat_110bpm.wav",
+   "moment": "night-02",
+   "role": "hats",
+   "trim_head_s": 1.614,
+   "bars": 15,
+   "cut_s": 34.341
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Viper 110bpm Fmin/Stems/Ghosthack-HS3_Viper_Rhythm Guitar_110bpm.wav",
+   "moment": "night-02",
+   "role": "rhythm guitar",
+   "trim_head_s": 1.416,
+   "bars": 15,
+   "cut_s": 34.143
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Viper 110bpm Fmin/Stems/Ghosthack-HS3_Viper_Snare Drum_110bpm.wav",
+   "moment": "night-02",
+   "role": "snare",
+   "trim_head_s": 3.785,
+   "bars": 14,
+   "cut_s": 34.33
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Phobia 105bpm Fmin/Stems/Ghosthack-HS3_Phobia_Riser FX_105bpm.wav",
+   "moment": "night-02",
+   "role": "fx",
+   "trim_head_s": 0.302,
+   "bars": 15,
+   "cut_s": 34.588
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Phobia 105bpm Fmin/Stems/Ghosthack-HS3_Phobia_Snare Drum_105bpm.wav",
+   "moment": "night-02",
+   "role": "snare",
+   "trim_head_s": 2.961,
+   "bars": 14,
+   "cut_s": 34.961
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Phobia 105bpm Fmin/Stems/Ghosthack-HS3_Phobia_Bass Guitar_105bpm.wav",
+   "moment": "night-02",
+   "role": "bass",
+   "trim_head_s": 1.138,
+   "bars": 15,
+   "cut_s": 35.424
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Phobia 105bpm Fmin/Stems/Ghosthack-HS3_Phobia_Kick Drum_105bpm.wav",
+   "moment": "night-02",
+   "role": "kick",
+   "trim_head_s": 0.244,
+   "bars": 15,
+   "cut_s": 34.53
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Phobia 105bpm Fmin/Stems/Ghosthack-HS3_Phobia_Lead Guitar_105bpm.wav",
+   "moment": "night-02",
+   "role": "lead",
+   "trim_head_s": 0.859,
+   "bars": 15,
+   "cut_s": 35.145
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Phobia 105bpm Fmin/Stems/Ghosthack-HS3_Phobia_Open Hat_105bpm.wav",
+   "moment": "night-02",
+   "role": "hats",
+   "trim_head_s": 0.139,
+   "bars": 15,
+   "cut_s": 34.425
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Phobia 105bpm Fmin/Stems/Ghosthack-HS3_Phobia_Rhythm Guitar_105bpm.wav",
+   "moment": "night-02",
+   "role": "rhythm guitar",
+   "trim_head_s": 1.068,
+   "bars": 15,
+   "cut_s": 35.354
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Tyrant 100bpm Dmin/Stems/Ghosthack-HS3_Tyrant_Bass Guitar_100bpm.wav",
+   "moment": "night-03",
+   "role": "bass",
+   "trim_head_s": 0.116,
+   "bars": 15,
+   "cut_s": 36.116
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Tyrant 100bpm Dmin/Stems/Ghosthack-HS3_Tyrant_Riser FX_100bpm.wav",
+   "moment": "night-03",
+   "role": "fx",
+   "trim_head_s": 0.163,
+   "bars": 15,
+   "cut_s": 36.163
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Tyrant 100bpm Dmin/Stems/Ghosthack-HS3_Tyrant_Snare Drum_100bpm.wav",
+   "moment": "night-03",
+   "role": "snare",
+   "trim_head_s": 3.077,
+   "bars": 14,
+   "cut_s": 36.677
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Tyrant 100bpm Dmin/Stems/Ghosthack-HS3_Tyrant_Synth FX_100bpm.wav",
+   "moment": "night-03",
+   "role": "synth",
+   "trim_head_s": 0.488,
+   "bars": 15,
+   "cut_s": 36.488
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Tyrant 100bpm Dmin/Stems/Ghosthack-HS3_Tyrant_Kick Drum_100bpm.wav",
+   "moment": "night-03",
+   "role": "kick",
+   "trim_head_s": 2.635,
+   "bars": 14,
+   "cut_s": 36.235
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Tyrant 100bpm Dmin/Stems/Ghosthack-HS3_Tyrant_Lead Guitar_100bpm.wav",
+   "moment": "night-03",
+   "role": "lead",
+   "trim_head_s": 0.522,
+   "bars": 15,
+   "cut_s": 36.522
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Tyrant 100bpm Dmin/Stems/Ghosthack-HS3_Tyrant_Open Hat_100bpm.wav",
+   "moment": "night-03",
+   "role": "hats",
+   "trim_head_s": 1.173,
+   "bars": 15,
+   "cut_s": 37.173
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Tyrant 100bpm Dmin/Stems/Ghosthack-HS3_Tyrant_Rhythm Guitar_100bpm.wav",
+   "moment": "night-03",
+   "role": "rhythm guitar",
+   "trim_head_s": 0.012,
+   "bars": 16,
+   "cut_s": 38.412
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Realm 105bpm Dmin/Stems/Ghosthack-HS3_Realm_Alarm FX_105bpm.wav",
+   "moment": "night-03",
+   "role": "fx",
+   "trim_head_s": 2.113,
+   "bars": 15,
+   "cut_s": 36.399
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Realm 105bpm Dmin/Stems/Ghosthack-HS3_Realm_Bass Guitar_105bpm.wav",
+   "moment": "night-03",
+   "role": "bass",
+   "trim_head_s": 1.683,
+   "bars": 15,
+   "cut_s": 35.969
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Realm 105bpm Dmin/Stems/Ghosthack-HS3_Realm_Rhythm Guitar_105bpm.wav",
+   "moment": "night-03",
+   "role": "rhythm guitar",
+   "trim_head_s": 0.569,
+   "bars": 15,
+   "cut_s": 34.855
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Realm 105bpm Dmin/Stems/Ghosthack-HS3_Realm_Snare Drum_105bpm.wav",
+   "moment": "night-03",
+   "role": "snare",
+   "trim_head_s": 1.811,
+   "bars": 15,
+   "cut_s": 36.097
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Realm 105bpm Dmin/Stems/Ghosthack-HS3_Realm_Kick Drum_105bpm.wav",
+   "moment": "night-03",
+   "role": "kick",
+   "trim_head_s": 1.242,
+   "bars": 15,
+   "cut_s": 35.528
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Realm 105bpm Dmin/Stems/Ghosthack-HS3_Realm_Lead Guitar_105bpm.wav",
+   "moment": "night-03",
+   "role": "lead",
+   "trim_head_s": 0.36,
+   "bars": 15,
+   "cut_s": 34.646
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Realm 105bpm Dmin/Stems/Ghosthack-HS3_Realm_Open Hat_105bpm.wav",
+   "moment": "night-03",
+   "role": "hats",
+   "trim_head_s": 1.265,
+   "bars": 15,
+   "cut_s": 35.551
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Cleanse 115bpm Dmin/Stems/Ghosthack-HS3_Cleanse_Alarm FX_115bpm.wav",
+   "moment": "night-03",
+   "role": "fx",
+   "trim_head_s": 1.509,
+   "bars": 15,
+   "cut_s": 32.813
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Cleanse 115bpm Dmin/Stems/Ghosthack-HS3_Cleanse_Snare Drum_115bpm.wav",
+   "moment": "night-03",
+   "role": "snare",
+   "trim_head_s": 0.488,
+   "bars": 15,
+   "cut_s": 31.792
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Cleanse 115bpm Dmin/Stems/Ghosthack-HS3_Cleanse_Bass Guitar_115bpm.wav",
+   "moment": "night-03",
+   "role": "bass",
+   "trim_head_s": 0.244,
+   "bars": 15,
+   "cut_s": 31.548
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Cleanse 115bpm Dmin/Stems/Ghosthack-HS3_Cleanse_Hi Hat_115bpm.wav",
+   "moment": "night-03",
+   "role": "hats",
+   "trim_head_s": 0.255,
+   "bars": 15,
+   "cut_s": 31.559
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Cleanse 115bpm Dmin/Stems/Ghosthack-HS3_Cleanse_Kick Drum_115bpm.wav",
+   "moment": "night-03",
+   "role": "kick",
+   "trim_head_s": 0.232,
+   "bars": 15,
+   "cut_s": 31.536
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Cleanse 115bpm Dmin/Stems/Ghosthack-HS3_Cleanse_Lead Guitar_115bpm.wav",
+   "moment": "night-03",
+   "role": "lead",
+   "trim_head_s": 0.639,
+   "bars": 15,
+   "cut_s": 31.943
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Cleanse 115bpm Dmin/Stems/Ghosthack-HS3_Cleanse_Rhythm Guitar_115bpm.wav",
+   "moment": "night-03",
+   "role": "rhythm guitar",
+   "trim_head_s": 1.358,
+   "bars": 15,
+   "cut_s": 32.662
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Trauma 110bpm F#min/Stems/Ghosthack-HS2_Trauma_Bass Guitar_110bpm.wav",
+   "moment": "night-04",
+   "role": "bass",
+   "trim_head_s": 1.811,
+   "bars": 15,
+   "cut_s": 34.538
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Trauma 110bpm F#min/Stems/Ghosthack-HS2_Trauma_Crash FX_110bpm.wav",
+   "moment": "night-04",
+   "role": "drums",
+   "trim_head_s": 0.012,
+   "bars": 16,
+   "cut_s": 34.921
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Trauma 110bpm F#min/Stems/Ghosthack-HS2_Trauma_Kick Drum_110bpm.wav",
+   "moment": "night-04",
+   "role": "kick",
+   "trim_head_s": 1.01,
+   "bars": 15,
+   "cut_s": 33.737
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Trauma 110bpm F#min/Stems/Ghosthack-HS2_Trauma_Lead Guitar_110bpm.wav",
+   "moment": "night-04",
+   "role": "lead",
+   "trim_head_s": 0.004,
+   "bars": 16,
+   "cut_s": 34.913
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Trauma 110bpm F#min/Stems/Ghosthack-HS2_Trauma_Open Hat_110bpm.wav",
+   "moment": "night-04",
+   "role": "hats",
+   "trim_head_s": 1.068,
+   "bars": 15,
+   "cut_s": 33.795
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Trauma 110bpm F#min/Stems/Ghosthack-HS2_Trauma_Rhythm Guitar_110bpm.wav",
+   "moment": "night-04",
+   "role": "rhythm guitar",
+   "trim_head_s": 1.521,
+   "bars": 15,
+   "cut_s": 34.248
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Trauma 110bpm F#min/Stems/Ghosthack-HS2_Trauma_Snare Drum_110bpm.wav",
+   "moment": "night-04",
+   "role": "snare",
+   "trim_head_s": 3.785,
+   "bars": 14,
+   "cut_s": 34.33
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Trauma 110bpm F#min/Stems/Ghosthack-HS2_Trauma_Vinyl FX_110bpm.wav",
+   "moment": "night-04",
+   "role": "fx",
+   "trim_head_s": 0.255,
+   "bars": 15,
+   "cut_s": 32.982
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Gloom 110bpm F#min/Stems/Ghosthack-HS3_Gloom_Atmosphere FX_110bpm.wav",
+   "moment": "night-04",
+   "role": "fx",
+   "trim_head_s": 4.342,
+   "bars": 14,
+   "cut_s": 34.887
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Gloom 110bpm F#min/Stems/Ghosthack-HS3_Gloom_Bass Guitar_110bpm.wav",
+   "moment": "night-04",
+   "role": "bass",
+   "trim_head_s": 0.418,
+   "bars": 15,
+   "cut_s": 33.145
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Gloom 110bpm F#min/Stems/Ghosthack-HS3_Gloom_Crash Transition FX_110bpm.wav",
+   "moment": "night-04",
+   "role": "drums",
+   "trim_head_s": 1.184,
+   "bars": 15,
+   "cut_s": 33.911
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Gloom 110bpm F#min/Stems/Ghosthack-HS3_Gloom_Rhythm Guitar_110bpm.wav",
+   "moment": "night-04",
+   "role": "rhythm guitar",
+   "trim_head_s": 0.174,
+   "bars": 15,
+   "cut_s": 32.901
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Gloom 110bpm F#min/Stems/Ghosthack-HS3_Gloom_Snare Drum_110bpm.wav",
+   "moment": "night-04",
+   "role": "snare",
+   "trim_head_s": 0.557,
+   "bars": 15,
+   "cut_s": 33.284
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Gloom 110bpm F#min/Stems/Ghosthack-HS3_Gloom_Kick Drum_110bpm.wav",
+   "moment": "night-04",
+   "role": "kick",
+   "trim_head_s": 4.737,
+   "bars": 13,
+   "cut_s": 33.101
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Gloom 110bpm F#min/Stems/Ghosthack-HS3_Gloom_Lead Guitar_110bpm.wav",
+   "moment": "night-04",
+   "role": "lead",
+   "trim_head_s": 0.94,
+   "bars": 15,
+   "cut_s": 33.667
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Gloom 110bpm F#min/Stems/Ghosthack-HS3_Gloom_Open Hat_110bpm.wav",
+   "moment": "night-04",
+   "role": "hats",
+   "trim_head_s": 0.522,
+   "bars": 15,
+   "cut_s": 33.249
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Sin 110bpm F#min/Stems/Ghosthack-HS3_Sin_Bass Guitar_110bpm.wav",
+   "moment": "night-04",
+   "role": "bass",
+   "trim_head_s": 0.592,
+   "bars": 15,
+   "cut_s": 33.319
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Sin 110bpm F#min/Stems/Ghosthack-HS3_Sin_Hi Hat_110bpm.wav",
+   "moment": "night-04",
+   "role": "hats",
+   "trim_head_s": 1.95,
+   "bars": 15,
+   "cut_s": 34.677
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Sin 110bpm F#min/Stems/Ghosthack-HS3_Sin_Impact_FX_110bpm.wav",
+   "moment": "night-04",
+   "role": "fx",
+   "trim_head_s": 0.058,
+   "bars": 15,
+   "cut_s": 32.785
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Sin 110bpm F#min/Stems/Ghosthack-HS3_Sin_Kick Drum_110bpm.wav",
+   "moment": "night-04",
+   "role": "kick",
+   "trim_head_s": 1.881,
+   "bars": 15,
+   "cut_s": 34.608
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Sin 110bpm F#min/Stems/Ghosthack-HS3_Sin_Lead Guitar_110bpm.wav",
+   "moment": "night-04",
+   "role": "lead",
+   "trim_head_s": 0.546,
+   "bars": 15,
+   "cut_s": 33.273
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Sin 110bpm F#min/Stems/Ghosthack-HS3_Sin_Rhythm Guitar_110bpm.wav",
+   "moment": "night-04",
+   "role": "rhythm guitar",
+   "trim_head_s": 0.464,
+   "bars": 15,
+   "cut_s": 33.191
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Sin 110bpm F#min/Stems/Ghosthack-HS3_Sin_Snare Drum_110bpm.wav",
+   "moment": "night-04",
+   "role": "snare",
+   "trim_head_s": 0.522,
+   "bars": 15,
+   "cut_s": 33.249
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Deadweight 110bpm Emin/Stems/Ghosthack-HS2_Deadweight_Bass Guitar_150bpm.wav",
+   "moment": "night-05",
+   "role": "bass",
+   "trim_head_s": 0.395,
+   "bars": 15,
+   "cut_s": 33.122
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Deadweight 110bpm Emin/Stems/Ghosthack-HS2_Deadweight_Impact_FX_110bpm.wav",
+   "moment": "night-05",
+   "role": "fx",
+   "trim_head_s": 0.708,
+   "bars": 15,
+   "cut_s": 33.435
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Deadweight 110bpm Emin/Stems/Ghosthack-HS2_Deadweight_Snare Drum_110bpm.wav",
+   "moment": "night-05",
+   "role": "snare",
+   "trim_head_s": 2.694,
+   "bars": 14,
+   "cut_s": 33.239
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Deadweight 110bpm Emin/Stems/Ghosthack-HS2_Deadweight_Kick Drum_110bpm.wav",
+   "moment": "night-05",
+   "role": "kick",
+   "trim_head_s": 0.383,
+   "bars": 15,
+   "cut_s": 33.11
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Deadweight 110bpm Emin/Stems/Ghosthack-HS2_Deadweight_Lead Guitar_110bpm.wav",
+   "moment": "night-05",
+   "role": "lead",
+   "trim_head_s": 0.824,
+   "bars": 15,
+   "cut_s": 33.551
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Deadweight 110bpm Emin/Stems/Ghosthack-HS2_Deadweight_Open Hat_110bpm.wav",
+   "moment": "night-05",
+   "role": "hats",
+   "trim_head_s": 1.08,
+   "bars": 15,
+   "cut_s": 33.807
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Deadweight 110bpm Emin/Stems/Ghosthack-HS2_Deadweight_Rhythm Guitar_110bpm.wav",
+   "moment": "night-05",
+   "role": "rhythm guitar",
+   "trim_head_s": 2.009,
+   "bars": 15,
+   "cut_s": 34.736
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Mental 100bpm Emin/Stems/Ghosthack-HS3_Mental_Siren FX_100bpm.wav",
+   "moment": "night-05",
+   "role": "fx",
+   "trim_head_s": 0.604,
+   "bars": 15,
+   "cut_s": 36.604
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Mental 100bpm Emin/Stems/Ghosthack-HS3_Mental_Snare Drum_100bpm.wav",
+   "moment": "night-05",
+   "role": "snare",
+   "trim_head_s": 0.685,
+   "bars": 15,
+   "cut_s": 36.685
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Mental 100bpm Emin/Stems/Ghosthack-HS3_Mental_Bass Guitar_100bpm.wav",
+   "moment": "night-05",
+   "role": "bass",
+   "trim_head_s": 1.625,
+   "bars": 15,
+   "cut_s": 37.625
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Mental 100bpm Emin/Stems/Ghosthack-HS3_Mental_Kick Drum_100bpm.wav",
+   "moment": "night-05",
+   "role": "kick",
+   "trim_head_s": 2.113,
+   "bars": 15,
+   "cut_s": 38.113
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Mental 100bpm Emin/Stems/Ghosthack-HS3_Mental_Lead Guitar_100bpm.wav",
+   "moment": "night-05",
+   "role": "lead",
+   "trim_head_s": 0.499,
+   "bars": 15,
+   "cut_s": 36.499
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Mental 100bpm Emin/Stems/Ghosthack-HS3_Mental_Open Hat_100bpm.wav",
+   "moment": "night-05",
+   "role": "hats",
+   "trim_head_s": 2.38,
+   "bars": 15,
+   "cut_s": 38.38
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Mental 100bpm Emin/Stems/Ghosthack-HS3_Mental_Rhythm Guitar_100bpm.wav",
+   "moment": "night-05",
+   "role": "rhythm guitar",
+   "trim_head_s": 0.557,
+   "bars": 15,
+   "cut_s": 36.557
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Decay 130bpm Emin/Stems/Ghosthack-HS2_Decay_Bass Guitar_130bpm.wav",
+   "moment": "night-06",
+   "role": "bass",
+   "trim_head_s": 0.383,
+   "bars": 15,
+   "cut_s": 28.075
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Decay 130bpm Emin/Stems/Ghosthack-HS2_Decay_Crash Hit & Downlifter_FX_130bpm.wav",
+   "moment": "night-06",
+   "role": "drums",
+   "trim_head_s": 0.441,
+   "bars": 15,
+   "cut_s": 28.133
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Decay 130bpm Emin/Stems/Ghosthack-HS2_Decay_White Noise Riser FX_130bpm.wav",
+   "moment": "night-06",
+   "role": "fx",
+   "trim_head_s": 0.244,
+   "bars": 15,
+   "cut_s": 27.936
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Decay 130bpm Emin/Stems/Ghosthack-HS2_Decay_Hi Hat 1_130bpm.wav",
+   "moment": "night-06",
+   "role": "hats",
+   "trim_head_s": 0.418,
+   "bars": 15,
+   "cut_s": 28.11
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Decay 130bpm Emin/Stems/Ghosthack-HS2_Decay_Kick Drum_130bpm.wav",
+   "moment": "night-06",
+   "role": "kick",
+   "trim_head_s": 0.418,
+   "bars": 15,
+   "cut_s": 28.11
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Decay 130bpm Emin/Stems/Ghosthack-HS2_Decay_Lead Guitar_130bpm.wav",
+   "moment": "night-06",
+   "role": "lead",
+   "trim_head_s": 0.174,
+   "bars": 15,
+   "cut_s": 27.866
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Decay 130bpm Emin/Stems/Ghosthack-HS2_Decay_Rhythm Guitar_130bpm.wav",
+   "moment": "night-06",
+   "role": "rhythm guitar",
+   "trim_head_s": 0.081,
+   "bars": 15,
+   "cut_s": 27.773
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Decay 130bpm Emin/Stems/Ghosthack-HS2_Decay_Snare Drum_130bpm.wav",
+   "moment": "night-06",
+   "role": "snare",
+   "trim_head_s": 0.418,
+   "bars": 15,
+   "cut_s": 28.11
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Decay 130bpm Emin/Stems/Ghosthack-HS2_Decay_Synth_130bpm.wav",
+   "moment": "night-06",
+   "role": "synth",
+   "trim_head_s": 0.708,
+   "bars": 15,
+   "cut_s": 28.4
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Flux 130bpm Emin/Stems/Ghosthack-HS2_Flux_Synth_130bpm.wav",
+   "moment": "night-06",
+   "role": "synth",
+   "trim_head_s": 0.917,
+   "bars": 15,
+   "cut_s": 28.609
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Flux 130bpm Emin/Stems/Ghosthack-HS2_Flux_Bass Guitar_130bpm.wav",
+   "moment": "night-06",
+   "role": "bass",
+   "trim_head_s": 2.345,
+   "bars": 14,
+   "cut_s": 28.191
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Flux 130bpm Emin/Stems/Ghosthack-HS2_Flux_Impact_Downlifter_FX_130bpm.wav",
+   "moment": "night-06",
+   "role": "fx",
+   "trim_head_s": 0.441,
+   "bars": 15,
+   "cut_s": 28.133
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Flux 130bpm Emin/Stems/Ghosthack-HS2_Flux_Kick Drum_130bpm.wav",
+   "moment": "night-06",
+   "role": "kick",
+   "trim_head_s": 1.405,
+   "bars": 15,
+   "cut_s": 29.097
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Flux 130bpm Emin/Stems/Ghosthack-HS2_Flux_Open Hat 1_130bpm.wav",
+   "moment": "night-06",
+   "role": "hats",
+   "trim_head_s": 1.358,
+   "bars": 15,
+   "cut_s": 29.05
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Flux 130bpm Emin/Stems/Ghosthack-HS2_Flux_Rhythm Guitar_130bpm.wav",
+   "moment": "night-06",
+   "role": "rhythm guitar",
+   "trim_head_s": 0.081,
+   "bars": 15,
+   "cut_s": 27.773
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Flux 130bpm Emin/Stems/Ghosthack-HS2_Flux_Snare Drum_130bpm.wav",
+   "moment": "night-06",
+   "role": "snare",
+   "trim_head_s": 1.01,
+   "bars": 15,
+   "cut_s": 28.702
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Grave 130bpm Gmin/Stems/Ghosthack-HS_Grave_Bass Guitar_130bpm Gmin.wav",
+   "moment": "night-07",
+   "role": "bass",
+   "trim_head_s": 0.035,
+   "bars": 16,
+   "cut_s": 29.573
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Grave 130bpm Gmin/Stems/Ghosthack-HS_Grave_Kick Drum_130bpm.wav",
+   "moment": "night-07",
+   "role": "kick",
+   "trim_head_s": 1.637,
+   "bars": 15,
+   "cut_s": 29.329
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Grave 130bpm Gmin/Stems/Ghosthack-HS_Grave_Lead Guitar_130bpm Gmin.wav",
+   "moment": "night-07",
+   "role": "lead",
+   "trim_head_s": 0.65,
+   "bars": 15,
+   "cut_s": 28.342
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Grave 130bpm Gmin/Stems/Ghosthack-HS_Grave_Open Hat_130bpm.wav",
+   "moment": "night-07",
+   "role": "hats",
+   "trim_head_s": 1.37,
+   "bars": 15,
+   "cut_s": 29.062
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Grave 130bpm Gmin/Stems/Ghosthack-HS_Grave_Rhythm Guitar_130bpm Gmin.wav",
+   "moment": "night-07",
+   "role": "rhythm guitar",
+   "trim_head_s": 0.023,
+   "bars": 16,
+   "cut_s": 29.561
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Grave 130bpm Gmin/Stems/Ghosthack-HS_Grave_Snare_130bpm.wav",
+   "moment": "night-07",
+   "role": "snare",
+   "trim_head_s": 0.418,
+   "bars": 15,
+   "cut_s": 28.11
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Deathmark 130bpm Gmin/Stems/Ghosthack-HS_Deathmark_Rhythm Guitar_130bpm Gmin.wav",
+   "moment": "night-07",
+   "role": "rhythm guitar",
+   "trim_head_s": 0.035,
+   "bars": 16,
+   "cut_s": 29.573
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Deathmark 130bpm Gmin/Stems/Ghosthack-HS_Deathmark_Snare_130bpm.wav",
+   "moment": "night-07",
+   "role": "snare",
+   "trim_head_s": 0.894,
+   "bars": 15,
+   "cut_s": 28.586
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Deathmark 130bpm Gmin/Stems/Ghosthack-HS_Deathmark_Bass Guitar_130bpm Gmin.wav",
+   "moment": "night-07",
+   "role": "bass",
+   "trim_head_s": 1.37,
+   "bars": 15,
+   "cut_s": 29.062
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Deathmark 130bpm Gmin/Stems/Ghosthack-HS_Deathmark_Kick Drum_130bpm.wav",
+   "moment": "night-07",
+   "role": "kick",
+   "trim_head_s": 0.639,
+   "bars": 15,
+   "cut_s": 28.331
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Deathmark 130bpm Gmin/Stems/Ghosthack-HS_Deathmark_Lead Guitar_130bpm Gmin.wav",
+   "moment": "night-07",
+   "role": "lead",
+   "trim_head_s": 3.332,
+   "bars": 14,
+   "cut_s": 29.178
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Deathmark 130bpm Gmin/Stems/Ghosthack-HS_Deathmark_Open Hat_130bpm.wav",
+   "moment": "night-07",
+   "role": "hats",
+   "trim_head_s": 0.441,
+   "bars": 15,
+   "cut_s": 28.133
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Ironclad 130bpm Emin/Stems/Ghosthack-HS2_Ironclad_Bass Guitar_130bpm.wav",
+   "moment": "night-08",
+   "role": "bass",
+   "trim_head_s": 0.871,
+   "bars": 15,
+   "cut_s": 28.563
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Ironclad 130bpm Emin/Stems/Ghosthack-HS2_Ironclad_Downlifter_FX_130bpm.wav",
+   "moment": "night-08",
+   "role": "fx",
+   "trim_head_s": 0.453,
+   "bars": 15,
+   "cut_s": 28.145
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Ironclad 130bpm Emin/Stems/Ghosthack-HS2_Ironclad_Snare Drum_130bpm.wav",
+   "moment": "night-08",
+   "role": "snare",
+   "trim_head_s": 0.627,
+   "bars": 15,
+   "cut_s": 28.319
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Ironclad 130bpm Emin/Stems/Ghosthack-HS2_Ironclad_Synth_130bpm.wav",
+   "moment": "night-08",
+   "role": "synth",
+   "trim_head_s": 0.685,
+   "bars": 15,
+   "cut_s": 28.377
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Ironclad 130bpm Emin/Stems/Ghosthack-HS2_Ironclad_Kick Drum_130bpm.wav",
+   "moment": "night-08",
+   "role": "kick",
+   "trim_head_s": 3.913,
+   "bars": 13,
+   "cut_s": 27.913
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Ironclad 130bpm Emin/Stems/Ghosthack-HS2_Ironclad_Open Hat_130bpm.wav",
+   "moment": "night-08",
+   "role": "hats",
+   "trim_head_s": 0.906,
+   "bars": 15,
+   "cut_s": 28.598
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Ironclad 130bpm Emin/Stems/Ghosthack-HS2_Ironclad_Rhythm Guitar_130bpm.wav",
+   "moment": "night-08",
+   "role": "rhythm guitar",
+   "trim_head_s": 2.299,
+   "bars": 14,
+   "cut_s": 28.145
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Babylon 140bpm Emin/Stems/Ghosthack-HS3_Babylon_Bass Guitar_140bpm.wav",
+   "moment": "night-08",
+   "role": "bass",
+   "trim_head_s": 0.186,
+   "bars": 15,
+   "cut_s": 25.9
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Babylon 140bpm Emin/Stems/Ghosthack-HS3_Babylon_Gunshot FX_140bpm.wav",
+   "moment": "night-08",
+   "role": "fx",
+   "trim_head_s": 0.081,
+   "bars": 15,
+   "cut_s": 25.795
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Babylon 140bpm Emin/Stems/Ghosthack-HS3_Babylon_Kick Drum_140bpm.wav",
+   "moment": "night-08",
+   "role": "kick",
+   "trim_head_s": 1.324,
+   "bars": 15,
+   "cut_s": 27.038
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Babylon 140bpm Emin/Stems/Ghosthack-HS3_Babylon_Lead Guitar_140bpm.wav",
+   "moment": "night-08",
+   "role": "lead",
+   "trim_head_s": 0.139,
+   "bars": 15,
+   "cut_s": 25.853
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Babylon 140bpm Emin/Stems/Ghosthack-HS3_Babylon_Open Hat_140bpm.wav",
+   "moment": "night-08",
+   "role": "hats",
+   "trim_head_s": 1.695,
+   "bars": 15,
+   "cut_s": 27.409
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Babylon 140bpm Emin/Stems/Ghosthack-HS3_Babylon_Rhythm Guitar_140bpm.wav",
+   "moment": "night-08",
+   "role": "rhythm guitar",
+   "trim_head_s": 0.592,
+   "bars": 15,
+   "cut_s": 26.306
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Babylon 140bpm Emin/Stems/Ghosthack-HS3_Babylon_Snare Drum_140bpm.wav",
+   "moment": "night-08",
+   "role": "snare",
+   "trim_head_s": 1.451,
+   "bars": 15,
+   "cut_s": 27.165
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Despair 130bpm Dmin/Stems/Ghosthack-HS3_Despair_Alarm FX_130bpm.wav",
+   "moment": "night-09",
+   "role": "fx",
+   "trim_head_s": 1.161,
+   "bars": 15,
+   "cut_s": 28.853
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Despair 130bpm Dmin/Stems/Ghosthack-HS3_Despair_Bass Guitar_130bpm.wav",
+   "moment": "night-09",
+   "role": "bass",
+   "trim_head_s": 3.146,
+   "bars": 14,
+   "cut_s": 28.992
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Despair 130bpm Dmin/Stems/Ghosthack-HS3_Despair_Kick Drum_130bpm.wav",
+   "moment": "night-09",
+   "role": "kick",
+   "trim_head_s": 1.567,
+   "bars": 15,
+   "cut_s": 29.259
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Despair 130bpm Dmin/Stems/Ghosthack-HS3_Despair_Lead Guitar_130bpm.wav",
+   "moment": "night-09",
+   "role": "lead",
+   "trim_head_s": 0.778,
+   "bars": 15,
+   "cut_s": 28.47
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Despair 130bpm Dmin/Stems/Ghosthack-HS3_Despair_Open Hat_130bpm.wav",
+   "moment": "night-09",
+   "role": "hats",
+   "trim_head_s": 0.441,
+   "bars": 15,
+   "cut_s": 28.133
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Despair 130bpm Dmin/Stems/Ghosthack-HS3_Despair_Rhythm Guitar_130bpm.wav",
+   "moment": "night-09",
+   "role": "rhythm guitar",
+   "trim_head_s": 0.128,
+   "bars": 15,
+   "cut_s": 27.82
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Despair 130bpm Dmin/Stems/Ghosthack-HS3_Despair_Snare Drum_130bpm.wav",
+   "moment": "night-09",
+   "role": "snare",
+   "trim_head_s": 0.894,
+   "bars": 15,
+   "cut_s": 28.586
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Consume 155bpm Dmin/Stems/Ghosthack-HS3_Consume_Snare Drum_155bpm.wav",
+   "moment": "night-09",
+   "role": "snare",
+   "trim_head_s": 4.876,
+   "bars": 12,
+   "cut_s": 23.457
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Consume 155bpm Dmin/Stems/Ghosthack-HS3_Consume_Alarm FX_155bpm.wav",
+   "moment": "night-09",
+   "role": "fx",
+   "trim_head_s": 4.621,
+   "bars": 13,
+   "cut_s": 24.75
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Consume 155bpm Dmin/Stems/Ghosthack-HS3_Consume_Bass Guitar_155bpm.wav",
+   "moment": "night-09",
+   "role": "bass",
+   "trim_head_s": 1.149,
+   "bars": 15,
+   "cut_s": 24.375
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Consume 155bpm Dmin/Stems/Ghosthack-HS3_Consume_Kick Drum_155bpm.wav",
+   "moment": "night-09",
+   "role": "kick",
+   "trim_head_s": 1.138,
+   "bars": 15,
+   "cut_s": 24.364
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Consume 155bpm Dmin/Stems/Ghosthack-HS3_Consume_Lead Guitar_155bpm.wav",
+   "moment": "night-09",
+   "role": "lead",
+   "trim_head_s": 0.012,
+   "bars": 16,
+   "cut_s": 24.786
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Consume 155bpm Dmin/Stems/Ghosthack-HS3_Consume_Open Hat_155bpm.wav",
+   "moment": "night-09",
+   "role": "hats",
+   "trim_head_s": 0.221,
+   "bars": 15,
+   "cut_s": 23.447
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Consume 155bpm Dmin/Stems/Ghosthack-HS3_Consume_Rhythm Guitar_155bpm.wav",
+   "moment": "night-09",
+   "role": "rhythm guitar",
+   "trim_head_s": 0.163,
+   "bars": 15,
+   "cut_s": 23.389
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Disruptor 140bpm Bmin/Stems/Ghosthack-HS2_Disruptor_Atmosphere FX_140bpm.wav",
+   "moment": "night-10",
+   "role": "fx",
+   "trim_head_s": 0.685,
+   "bars": 15,
+   "cut_s": 26.399
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Disruptor 140bpm Bmin/Stems/Ghosthack-HS2_Disruptor_Bass Guitar_140bpm.wav",
+   "moment": "night-10",
+   "role": "bass",
+   "trim_head_s": 0.789,
+   "bars": 15,
+   "cut_s": 26.503
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Disruptor 140bpm Bmin/Stems/Ghosthack-HS2_Disruptor_Rhythm Guitar_140bpm.wav",
+   "moment": "night-10",
+   "role": "rhythm guitar",
+   "trim_head_s": 0.592,
+   "bars": 15,
+   "cut_s": 26.306
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Disruptor 140bpm Bmin/Stems/Ghosthack-HS2_Disruptor_Snare Drum_140bpm.wav",
+   "moment": "night-10",
+   "role": "snare",
+   "trim_head_s": 0.081,
+   "bars": 15,
+   "cut_s": 25.795
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Disruptor 140bpm Bmin/Stems/Ghosthack-HS2_Disruptor_Hi Hat_140bpm.wav",
+   "moment": "night-10",
+   "role": "hats",
+   "trim_head_s": 0.813,
+   "bars": 15,
+   "cut_s": 26.527
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Disruptor 140bpm Bmin/Stems/Ghosthack-HS2_Disruptor_Kick Drum_140bpm.wav",
+   "moment": "night-10",
+   "role": "kick",
+   "trim_head_s": 2.368,
+   "bars": 14,
+   "cut_s": 26.368
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Disruptor 140bpm Bmin/Stems/Ghosthack-HS2_Disruptor_Lead Guitar_140bpm.wav",
+   "moment": "night-10",
+   "role": "lead",
+   "trim_head_s": 0.395,
+   "bars": 15,
+   "cut_s": 26.109
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Binary 150bpm Bmin/Stems/Ghosthack-HS2_Binary_Bass Guitar_150bpm.wav",
+   "moment": "night-10",
+   "role": "bass",
+   "trim_head_s": 1.974,
+   "bars": 14,
+   "cut_s": 24.374
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Binary 150bpm Bmin/Stems/Ghosthack-HS2_Binary_Crash Transition FX_150bpm.wav",
+   "moment": "night-10",
+   "role": "drums",
+   "trim_head_s": 0.511,
+   "bars": 15,
+   "cut_s": 24.511
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Binary 150bpm Bmin/Stems/Ghosthack-HS2_Binary_Hi Hat_150bpm.wav",
+   "moment": "night-10",
+   "role": "hats",
+   "trim_head_s": 0.406,
+   "bars": 15,
+   "cut_s": 24.406
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Binary 150bpm Bmin/Stems/Ghosthack-HS2_Binary_Hit FX_150bpm.wav",
+   "moment": "night-10",
+   "role": "fx",
+   "trim_head_s": 0.708,
+   "bars": 15,
+   "cut_s": 24.708
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Binary 150bpm Bmin/Stems/Ghosthack-HS2_Binary_Synth_150bpm.wav",
+   "moment": "night-10",
+   "role": "synth",
+   "trim_head_s": 0.906,
+   "bars": 15,
+   "cut_s": 24.906
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Binary 150bpm Bmin/Stems/Ghosthack-HS2_Binary_Kick Drum_150bpm.wav",
+   "moment": "night-10",
+   "role": "kick",
+   "trim_head_s": 1.544,
+   "bars": 15,
+   "cut_s": 25.544
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Binary 150bpm Bmin/Stems/Ghosthack-HS2_Binary_Rhythm Guitar_150bpm.wav",
+   "moment": "night-10",
+   "role": "rhythm guitar",
+   "trim_head_s": 0.406,
+   "bars": 15,
+   "cut_s": 24.406
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Binary 150bpm Bmin/Stems/Ghosthack-HS2_Binary_Snare Drum_150bpm.wav",
+   "moment": "night-10",
+   "role": "snare",
+   "trim_head_s": 1.37,
+   "bars": 15,
+   "cut_s": 25.37
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Hellmouth 150bpm D#min/Stems/Ghosthack-HS2_Hellmouth_Bass Guitar_150bpm.wav",
+   "moment": "night-11",
+   "role": "bass",
+   "trim_head_s": 1.207,
+   "bars": 15,
+   "cut_s": 25.207
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Hellmouth 150bpm D#min/Stems/Ghosthack-HS2_Hellmouth_Crash Looped FX_150bpm.wav",
+   "moment": "night-11",
+   "role": "drums",
+   "trim_head_s": 1.184,
+   "bars": 15,
+   "cut_s": 25.184
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Hellmouth 150bpm D#min/Stems/Ghosthack-HS2_Hellmouth_Kick Drum_150bpm.wav",
+   "moment": "night-11",
+   "role": "kick",
+   "trim_head_s": 1.196,
+   "bars": 15,
+   "cut_s": 25.196
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Hellmouth 150bpm D#min/Stems/Ghosthack-HS2_Hellmouth_Lead Guitar_150bpm.wav",
+   "moment": "night-11",
+   "role": "lead",
+   "trim_head_s": 1.173,
+   "bars": 15,
+   "cut_s": 25.173
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Hellmouth 150bpm D#min/Stems/Ghosthack-HS2_Hellmouth_Open Hat_150bpm.wav",
+   "moment": "night-11",
+   "role": "hats",
+   "trim_head_s": 0.372,
+   "bars": 15,
+   "cut_s": 24.372
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Hellmouth 150bpm D#min/Stems/Ghosthack-HS2_Hellmouth_Rhythm Guitar_150bpm.wav",
+   "moment": "night-11",
+   "role": "rhythm guitar",
+   "trim_head_s": 0.046,
+   "bars": 15,
+   "cut_s": 24.046
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Hellmouth 150bpm D#min/Stems/Ghosthack-HS2_Hellmouth_Riser FX_150bpm.wav",
+   "moment": "night-11",
+   "role": "fx",
+   "trim_head_s": 0.488,
+   "bars": 15,
+   "cut_s": 24.488
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Hellmouth 150bpm D#min/Stems/Ghosthack-HS2_Hellmouth_Snare Drum_150bpm.wav",
+   "moment": "night-11",
+   "role": "snare",
+   "trim_head_s": 2.113,
+   "bars": 14,
+   "cut_s": 24.513
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Hellmouth 150bpm D#min/Stems/Ghosthack-HS2_Hellmouth_White Noise Energy_150bpm.wav",
+   "moment": "night-11",
+   "role": "other",
+   "trim_head_s": 1.509,
+   "bars": 15,
+   "cut_s": 25.509
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Voltage 150bpm D#min/Stems/Ghosthack-HS2_Voltage_Bass Guitar_150bpm.wav",
+   "moment": "night-11",
+   "role": "bass",
+   "trim_head_s": 0.697,
+   "bars": 15,
+   "cut_s": 24.697
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Voltage 150bpm D#min/Stems/Ghosthack-HS2_Voltage_Downlifter_FX_150bpm.wav",
+   "moment": "night-11",
+   "role": "fx",
+   "trim_head_s": 0.372,
+   "bars": 15,
+   "cut_s": 24.372
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Voltage 150bpm D#min/Stems/Ghosthack-HS2_Voltage_Kick Drum_150bpm.wav",
+   "moment": "night-11",
+   "role": "kick",
+   "trim_head_s": 1.173,
+   "bars": 15,
+   "cut_s": 25.173
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Voltage 150bpm D#min/Stems/Ghosthack-HS2_Voltage_Open Hat_150bpm.wav",
+   "moment": "night-11",
+   "role": "hats",
+   "trim_head_s": 0.766,
+   "bars": 15,
+   "cut_s": 24.766
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Voltage 150bpm D#min/Stems/Ghosthack-HS2_Voltage_Rhythm Guitar_150bpm.wav",
+   "moment": "night-11",
+   "role": "rhythm guitar",
+   "trim_head_s": 0.685,
+   "bars": 15,
+   "cut_s": 24.685
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Voltage 150bpm D#min/Stems/Ghosthack-HS2_Voltage_Snare Drum_150bpm.wav",
+   "moment": "night-11",
+   "role": "snare",
+   "trim_head_s": 1.741,
+   "bars": 14,
+   "cut_s": 24.141
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Voltage 150bpm D#min/Stems/Ghosthack-HS2_Voltage_Synth_150bpm.wav",
+   "moment": "night-11",
+   "role": "synth",
+   "trim_head_s": 2.368,
+   "bars": 14,
+   "cut_s": 24.768
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Exterminate 150bpm D#min/Stems/Ghosthack-HS2_Exterminate_Bass Guitar_150bpm.wav",
+   "moment": "night-12",
+   "role": "bass",
+   "trim_head_s": 0.708,
+   "bars": 15,
+   "cut_s": 24.708
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Exterminate 150bpm D#min/Stems/Ghosthack-HS2_Exterminate_Harsh Riser FX_150bpm.wav",
+   "moment": "night-12",
+   "role": "fx",
+   "trim_head_s": 0.081,
+   "bars": 15,
+   "cut_s": 24.081
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Exterminate 150bpm D#min/Stems/Ghosthack-HS2_Exterminate_Kick Drum_150bpm.wav",
+   "moment": "night-12",
+   "role": "kick",
+   "trim_head_s": 1.892,
+   "bars": 14,
+   "cut_s": 24.292
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Exterminate 150bpm D#min/Stems/Ghosthack-HS2_Exterminate_Lead Guitar_150bpm.wav",
+   "moment": "night-12",
+   "role": "lead",
+   "trim_head_s": 1.161,
+   "bars": 15,
+   "cut_s": 25.161
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Exterminate 150bpm D#min/Stems/Ghosthack-HS2_Exterminate_Open Hat_150bpm.wav",
+   "moment": "night-12",
+   "role": "hats",
+   "trim_head_s": 1.579,
+   "bars": 15,
+   "cut_s": 25.579
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Exterminate 150bpm D#min/Stems/Ghosthack-HS2_Exterminate_Rhythm Guitar_150bpm.wav",
+   "moment": "night-12",
+   "role": "rhythm guitar",
+   "trim_head_s": 0.72,
+   "bars": 15,
+   "cut_s": 24.72
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Exterminate 150bpm D#min/Stems/Ghosthack-HS2_Exterminate_Snare Drum_150bpm.wav",
+   "moment": "night-12",
+   "role": "snare",
+   "trim_head_s": 1.869,
+   "bars": 14,
+   "cut_s": 24.269
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Cursed 150bpm D#min/Stems/Ghosthack-HS2_Cursed_Bass Guitar_150bpm.wav",
+   "moment": "night-12",
+   "role": "bass",
+   "trim_head_s": 3.402,
+   "bars": 13,
+   "cut_s": 24.202
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Cursed 150bpm D#min/Stems/Ghosthack-HS2_Cursed_Clock FX_150bpm.wav",
+   "moment": "night-12",
+   "role": "fx",
+   "trim_head_s": 0.755,
+   "bars": 15,
+   "cut_s": 24.755
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Cursed 150bpm D#min/Stems/Ghosthack-HS2_Cursed_Rhythm Guitar_150bpm.wav",
+   "moment": "night-12",
+   "role": "rhythm guitar",
+   "trim_head_s": 0.081,
+   "bars": 15,
+   "cut_s": 24.081
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Cursed 150bpm D#min/Stems/Ghosthack-HS2_Cursed_Snare Drum_150bpm.wav",
+   "moment": "night-12",
+   "role": "snare",
+   "trim_head_s": 0.778,
+   "bars": 15,
+   "cut_s": 24.778
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Cursed 150bpm D#min/Stems/Ghosthack-HS2_Cursed_Synth_150bpm.wav",
+   "moment": "night-12",
+   "role": "synth",
+   "trim_head_s": 0.313,
+   "bars": 15,
+   "cut_s": 24.313
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Cursed 150bpm D#min/Stems/Ghosthack-HS2_Cursed_Kick Drum_150bpm.wav",
+   "moment": "night-12",
+   "role": "kick",
+   "trim_head_s": 1.207,
+   "bars": 15,
+   "cut_s": 25.207
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Cursed 150bpm D#min/Stems/Ghosthack-HS2_Cursed_Open Hat_150bpm.wav",
+   "moment": "night-12",
+   "role": "hats",
+   "trim_head_s": 1.184,
+   "bars": 15,
+   "cut_s": 25.184
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Ruin 150bpm Fmin/Stems/Ghosthack-HS_Ruin_Bass Guitar_150bpm Fmin.wav",
+   "moment": "night-13",
+   "role": "bass",
+   "trim_head_s": 1.962,
+   "bars": 14,
+   "cut_s": 24.362
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Ruin 150bpm Fmin/Stems/Ghosthack-HS_Ruin_Hi Hat_150bpm.wav",
+   "moment": "night-13",
+   "role": "hats",
+   "trim_head_s": 0.766,
+   "bars": 15,
+   "cut_s": 24.766
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Ruin 150bpm Fmin/Stems/Ghosthack-HS_Ruin_Kick Drum_150bpm.wav",
+   "moment": "night-13",
+   "role": "kick",
+   "trim_head_s": 2.554,
+   "bars": 14,
+   "cut_s": 24.954
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Ruin 150bpm Fmin/Stems/Ghosthack-HS_Ruin_Lead Guitar_150bpm Fmin.wav",
+   "moment": "night-13",
+   "role": "lead",
+   "trim_head_s": 0.104,
+   "bars": 15,
+   "cut_s": 24.104
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Ruin 150bpm Fmin/Stems/Ghosthack-HS_Ruin_Rhythm Guitar_150bpm Fmin.wav",
+   "moment": "night-13",
+   "role": "rhythm guitar",
+   "trim_head_s": 0.151,
+   "bars": 15,
+   "cut_s": 24.151
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Ruin 150bpm Fmin/Stems/Ghosthack-HS_Ruin_Snare_150bpm.wav",
+   "moment": "night-13",
+   "role": "snare",
+   "trim_head_s": 0.07,
+   "bars": 15,
+   "cut_s": 24.07
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Onslaught 150bpm Fmin/Stems/Ghosthack-HS_Onslaught_Bass Guitar_150bpm Fmin.wav",
+   "moment": "night-13",
+   "role": "bass",
+   "trim_head_s": 1.01,
+   "bars": 15,
+   "cut_s": 25.01
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Onslaught 150bpm Fmin/Stems/Ghosthack-HS_Onslaught_Snare_150bpm.wav",
+   "moment": "night-13",
+   "role": "snare",
+   "trim_head_s": 0.255,
+   "bars": 15,
+   "cut_s": 24.255
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Onslaught 150bpm Fmin/Stems/Ghosthack-HS_Onslaught_Synth_150bpm Fmin.wav",
+   "moment": "night-13",
+   "role": "synth",
+   "trim_head_s": 3.17,
+   "bars": 14,
+   "cut_s": 25.57
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Onslaught 150bpm Fmin/Stems/Ghosthack-HS_Onslaught_Hi Hat_150bpm.wav",
+   "moment": "night-13",
+   "role": "hats",
+   "trim_head_s": 0.766,
+   "bars": 15,
+   "cut_s": 24.766
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Onslaught 150bpm Fmin/Stems/Ghosthack-HS_Onslaught_Kick Drum_150bpm.wav",
+   "moment": "night-13",
+   "role": "kick",
+   "trim_head_s": 1.765,
+   "bars": 14,
+   "cut_s": 24.165
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Onslaught 150bpm Fmin/Stems/Ghosthack-HS_Onslaught_Rhythm Guitar_150bpm Fmin.wav",
+   "moment": "night-13",
+   "role": "rhythm guitar",
+   "trim_head_s": 0.221,
+   "bars": 15,
+   "cut_s": 24.221
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Tremor 150bpm Fmin/Stems/Ghosthack-HS2_Tremor_Bass Guitar_150bpm.wav",
+   "moment": "night-13",
+   "role": "bass",
+   "trim_head_s": 0.255,
+   "bars": 15,
+   "cut_s": 24.255
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Tremor 150bpm Fmin/Stems/Ghosthack-HS2_Tremor_Siren Stabs FX_150bpm.wav",
+   "moment": "night-13",
+   "role": "fx",
+   "trim_head_s": 5.526,
+   "bars": 12,
+   "cut_s": 24.726
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Tremor 150bpm Fmin/Stems/Ghosthack-HS2_Tremor_Snare Drum_150bpm.wav",
+   "moment": "night-13",
+   "role": "snare",
+   "trim_head_s": 4.087,
+   "bars": 13,
+   "cut_s": 24.887
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Tremor 150bpm Fmin/Stems/Ghosthack-HS2_Tremor_Kick Drum_150bpm.wav",
+   "moment": "night-13",
+   "role": "kick",
+   "trim_head_s": 0.998,
+   "bars": 15,
+   "cut_s": 24.998
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Tremor 150bpm Fmin/Stems/Ghosthack-HS2_Tremor_Open Hat_150bpm.wav",
+   "moment": "night-13",
+   "role": "hats",
+   "trim_head_s": 1.985,
+   "bars": 14,
+   "cut_s": 24.385
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Tremor 150bpm Fmin/Stems/Ghosthack-HS2_Tremor_Rhythm Guitar_150bpm.wav",
+   "moment": "night-13",
+   "role": "rhythm guitar",
+   "trim_head_s": 0.163,
+   "bars": 15,
+   "cut_s": 24.163
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Chamber 150bpm D#min/Stems/Ghosthack-HS3_Chamber_Hi Hat_150bpm.wav",
+   "moment": "night-14",
+   "role": "hats",
+   "trim_head_s": 0.372,
+   "bars": 15,
+   "cut_s": 24.372
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Chamber 150bpm D#min/Stems/Ghosthack-HS3_Chamber_Impact_FX_150bpm.wav",
+   "moment": "night-14",
+   "role": "fx",
+   "trim_head_s": 0.104,
+   "bars": 15,
+   "cut_s": 24.104
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Chamber 150bpm D#min/Stems/Ghosthack-HS3_Chamber_Kick Drum_150bpm.wav",
+   "moment": "night-14",
+   "role": "kick",
+   "trim_head_s": 1.37,
+   "bars": 15,
+   "cut_s": 25.37
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Chamber 150bpm D#min/Stems/Ghosthack-HS3_Chamber_Lead Guitar_150bpm.wav",
+   "moment": "night-14",
+   "role": "lead",
+   "trim_head_s": 0.639,
+   "bars": 15,
+   "cut_s": 24.639
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Chamber 150bpm D#min/Stems/Ghosthack-HS3_Chamber_Rhythm Guitar_150bpm.wav",
+   "moment": "night-14",
+   "role": "rhythm guitar",
+   "trim_head_s": 1.66,
+   "bars": 14,
+   "cut_s": 24.06
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Chamber 150bpm D#min/Stems/Ghosthack-HS3_Chamber_Snare Drum_150bpm.wav",
+   "moment": "night-14",
+   "role": "snare",
+   "trim_head_s": 6.026,
+   "bars": 12,
+   "cut_s": 25.226
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Chamber 150bpm D#min/Stems/Ghosthack-HS3_Chamber_Bass Guitar_150bpm.wav",
+   "moment": "night-14",
+   "role": "bass",
+   "trim_head_s": 1.382,
+   "bars": 15,
+   "cut_s": 25.382
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Crypt 150bpm D#min/Stems/Ghosthack-HS2_Crypt_Bass Guitar_150bpm.wav",
+   "moment": "night-14",
+   "role": "bass",
+   "trim_head_s": 1.045,
+   "bars": 15,
+   "cut_s": 25.045
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Crypt 150bpm D#min/Stems/Ghosthack-HS2_Crypt_Hi Hat_150bpm.wav",
+   "moment": "night-14",
+   "role": "hats",
+   "trim_head_s": 3.193,
+   "bars": 14,
+   "cut_s": 25.593
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Crypt 150bpm D#min/Stems/Ghosthack-HS2_Crypt_Hit FX_150bpm.wav",
+   "moment": "night-14",
+   "role": "fx",
+   "trim_head_s": 0.522,
+   "bars": 15,
+   "cut_s": 24.522
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Crypt 150bpm D#min/Stems/Ghosthack-HS2_Crypt_Kick Drum_150bpm.wav",
+   "moment": "night-14",
+   "role": "kick",
+   "trim_head_s": 1.834,
+   "bars": 14,
+   "cut_s": 24.234
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Crypt 150bpm D#min/Stems/Ghosthack-HS2_Crypt_Synth 2_150bpm.wav",
+   "moment": "night-14",
+   "role": "synth",
+   "trim_head_s": 2.264,
+   "bars": 14,
+   "cut_s": 24.664
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Crypt 150bpm D#min/Stems/Ghosthack-HS2_Crypt_Rhythm Guitar_150bpm.wav",
+   "moment": "night-14",
+   "role": "rhythm guitar",
+   "trim_head_s": 0.36,
+   "bars": 15,
+   "cut_s": 24.36
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Crypt 150bpm D#min/Stems/Ghosthack-HS2_Crypt_Snare Drum_150bpm.wav",
+   "moment": "night-14",
+   "role": "snare",
+   "trim_head_s": 1.022,
+   "bars": 15,
+   "cut_s": 25.022
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Purgatory 150bpm Emin/Stems/Ghosthack-HS3_Purgatory_Bass Guitar_150bpm.wav",
+   "moment": "night-15",
+   "role": "bass",
+   "trim_head_s": 0.418,
+   "bars": 15,
+   "cut_s": 24.418
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Purgatory 150bpm Emin/Stems/Ghosthack-HS3_Purgatory_Hi Hat_150bpm.wav",
+   "moment": "night-15",
+   "role": "hats",
+   "trim_head_s": 0.197,
+   "bars": 15,
+   "cut_s": 24.197
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Purgatory 150bpm Emin/Stems/Ghosthack-HS3_Purgatory_Rhythm Guitar_150bpm.wav",
+   "moment": "night-15",
+   "role": "rhythm guitar",
+   "trim_head_s": 2.171,
+   "bars": 14,
+   "cut_s": 24.571
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Purgatory 150bpm Emin/Stems/Ghosthack-HS3_Purgatory_Riser FX_150bpm.wav",
+   "moment": "night-15",
+   "role": "fx",
+   "trim_head_s": 0.07,
+   "bars": 15,
+   "cut_s": 24.07
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Purgatory 150bpm Emin/Stems/Ghosthack-HS3_Purgatory_Snare Drum_150bpm.wav",
+   "moment": "night-15",
+   "role": "snare",
+   "trim_head_s": 3.019,
+   "bars": 14,
+   "cut_s": 25.419
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Purgatory 150bpm Emin/Stems/Ghosthack-HS3_Purgatory_Kick Drum_150bpm.wav",
+   "moment": "night-15",
+   "role": "kick",
+   "trim_head_s": 2.995,
+   "bars": 14,
+   "cut_s": 25.395
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Purgatory 150bpm Emin/Stems/Ghosthack-HS3_Purgatory_Lead Guitar_150bpm.wav",
+   "moment": "night-15",
+   "role": "lead",
+   "trim_head_s": 0.197,
+   "bars": 15,
+   "cut_s": 24.197
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Rusted 156bpm Emin/Stems/Ghosthack-HS2_Rusted_Bass Guitar_156bpm.wav",
+   "moment": "night-15",
+   "role": "bass",
+   "trim_head_s": 0.836,
+   "bars": 15,
+   "cut_s": 23.913
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Rusted 156bpm Emin/Stems/Ghosthack-HS2_Rusted_Impact_FX_156bpm.wav",
+   "moment": "night-15",
+   "role": "fx",
+   "trim_head_s": 0.546,
+   "bars": 15,
+   "cut_s": 23.623
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Rusted 156bpm Emin/Stems/Ghosthack-HS2_Rusted_Rhythm Guitar_156bpm.wav",
+   "moment": "night-15",
+   "role": "rhythm guitar",
+   "trim_head_s": 0.035,
+   "bars": 15,
+   "cut_s": 23.112
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Rusted 156bpm Emin/Stems/Ghosthack-HS2_Rusted_Snare Drum_156bpm.wav",
+   "moment": "night-15",
+   "role": "snare",
+   "trim_head_s": 2.798,
+   "bars": 14,
+   "cut_s": 24.336
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Rusted 156bpm Emin/Stems/Ghosthack-HS2_Rusted_Kick Drum_156bpm.wav",
+   "moment": "night-15",
+   "role": "kick",
+   "trim_head_s": 0.046,
+   "bars": 15,
+   "cut_s": 23.123
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Rusted 156bpm Emin/Stems/Ghosthack-HS2_Rusted_Lead Guitar_156bpm.wav",
+   "moment": "night-15",
+   "role": "lead",
+   "trim_head_s": 0.139,
+   "bars": 15,
+   "cut_s": 23.216
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Rusted 156bpm Emin/Stems/Ghosthack-HS2_Rusted_Open Hat_156bpm.wav",
+   "moment": "night-15",
+   "role": "hats",
+   "trim_head_s": 0.07,
+   "bars": 15,
+   "cut_s": 23.147
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Hellforged 170bpm Fmin/Stems/Ghosthack-HS_Hellforged_Bass Guitar_170bpm Fmin.wav",
+   "moment": "night-16",
+   "role": "bass",
+   "trim_head_s": 4.063,
+   "bars": 13,
+   "cut_s": 22.416
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Hellforged 170bpm Fmin/Stems/Ghosthack-HS_Hellforged_Hi Hat 1_170bpm.wav",
+   "moment": "night-16",
+   "role": "hats",
+   "trim_head_s": 1.033,
+   "bars": 15,
+   "cut_s": 22.209
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Hellforged 170bpm Fmin/Stems/Ghosthack-HS_Hellforged_Snare_170bpm.wav",
+   "moment": "night-16",
+   "role": "snare",
+   "trim_head_s": 2.09,
+   "bars": 14,
+   "cut_s": 21.855
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Hellforged 170bpm Fmin/Stems/Ghosthack-HS_Hellforged_Synth_170bpm Fmin.wav",
+   "moment": "night-16",
+   "role": "synth",
+   "trim_head_s": 0.685,
+   "bars": 15,
+   "cut_s": 21.861
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Hellforged 170bpm Fmin/Stems/Ghosthack-HS_Hellforged_Kick Drum_170bpm.wav",
+   "moment": "night-16",
+   "role": "kick",
+   "trim_head_s": 0.221,
+   "bars": 15,
+   "cut_s": 21.397
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Hellforged 170bpm Fmin/Stems/Ghosthack-HS_Hellforged_Lead Guitar_170bpm Fmin.wav",
+   "moment": "night-16",
+   "role": "lead",
+   "trim_head_s": 0.325,
+   "bars": 15,
+   "cut_s": 21.501
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Hellforged 170bpm Fmin/Stems/Ghosthack-HS_Hellforged_Rhythm Guitar_170bpm Fmin.wav",
+   "moment": "night-16",
+   "role": "rhythm guitar",
+   "trim_head_s": 0.778,
+   "bars": 15,
+   "cut_s": 21.954
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Cult 160bpm Fmin/Stems/Ghosthack-HS3_Cult_Snare Drum_160bpm.wav",
+   "moment": "night-16",
+   "role": "snare",
+   "trim_head_s": 0.743,
+   "bars": 15,
+   "cut_s": 23.243
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Cult 160bpm Fmin/Stems/Ghosthack-HS3_Cult_Bass Guitar_160bpm.wav",
+   "moment": "night-16",
+   "role": "bass",
+   "trim_head_s": 1.846,
+   "bars": 14,
+   "cut_s": 22.846
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Cult 160bpm Fmin/Stems/Ghosthack-HS3_Cult_Gunshot FX_160bpm.wav",
+   "moment": "night-16",
+   "role": "fx",
+   "trim_head_s": 1.115,
+   "bars": 15,
+   "cut_s": 23.615
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Cult 160bpm Fmin/Stems/Ghosthack-HS3_Cult_Kick Drum_160bpm.wav",
+   "moment": "night-16",
+   "role": "kick",
+   "trim_head_s": 4.122,
+   "bars": 13,
+   "cut_s": 23.622
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Cult 160bpm Fmin/Stems/Ghosthack-HS3_Cult_Lead Guitar_160bpm.wav",
+   "moment": "night-16",
+   "role": "lead",
+   "trim_head_s": 1.091,
+   "bars": 15,
+   "cut_s": 23.591
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Cult 160bpm Fmin/Stems/Ghosthack-HS3_Cult_Open Hat_160bpm.wav",
+   "moment": "night-16",
+   "role": "hats",
+   "trim_head_s": 0.557,
+   "bars": 15,
+   "cut_s": 23.057
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Cult 160bpm Fmin/Stems/Ghosthack-HS3_Cult_Rhythm Guitar_160bpm.wav",
+   "moment": "night-16",
+   "role": "rhythm guitar",
+   "trim_head_s": 0.163,
+   "bars": 15,
+   "cut_s": 22.663
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Rampage 170bpm Fmin/Stems/Ghosthack-HS_Rampage_Bass Guitar_170bpm Fmin.wav",
+   "moment": "night-16",
+   "role": "bass",
+   "trim_head_s": 0.801,
+   "bars": 15,
+   "cut_s": 21.977
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Rampage 170bpm Fmin/Stems/Ghosthack-HS_Rampage_Kick Drum_170bpm.wav",
+   "moment": "night-16",
+   "role": "kick",
+   "trim_head_s": 5.271,
+   "bars": 12,
+   "cut_s": 22.212
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Rampage 170bpm Fmin/Stems/Ghosthack-HS_Rampage_Lead Guitar_170bpm Fmin.wav",
+   "moment": "night-16",
+   "role": "lead",
+   "trim_head_s": 0.348,
+   "bars": 15,
+   "cut_s": 21.524
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Rampage 170bpm Fmin/Stems/Ghosthack-HS_Rampage_Open Hat_170bpm.wav",
+   "moment": "night-16",
+   "role": "hats",
+   "trim_head_s": 1.741,
+   "bars": 14,
+   "cut_s": 21.506
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Rampage 170bpm Fmin/Stems/Ghosthack-HS_Rampage_Rhythm Guitar_170bpm Fmin.wav",
+   "moment": "night-16",
+   "role": "rhythm guitar",
+   "trim_head_s": 0.476,
+   "bars": 15,
+   "cut_s": 21.652
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Rampage 170bpm Fmin/Stems/Ghosthack-HS_Rampage_Snare_170bpm.wav",
+   "moment": "night-16",
+   "role": "snare",
+   "trim_head_s": 0.662,
+   "bars": 15,
+   "cut_s": 21.838
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Nightmare 170bpm Fmin/Stems/Ghosthack-HS_Nightmare_Bass Guitar_170bpm Fmin.wav",
+   "moment": "night-17",
+   "role": "bass",
+   "trim_head_s": 1.173,
+   "bars": 15,
+   "cut_s": 22.349
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Nightmare 170bpm Fmin/Stems/Ghosthack-HS_Nightmare_Crash 1_170bpm.wav",
+   "moment": "night-17",
+   "role": "drums",
+   "trim_head_s": 1.382,
+   "bars": 15,
+   "cut_s": 22.558
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Nightmare 170bpm Fmin/Stems/Ghosthack-HS_Nightmare_Hi Hat_170bpm.wav",
+   "moment": "night-17",
+   "role": "hats",
+   "trim_head_s": 0.859,
+   "bars": 15,
+   "cut_s": 22.035
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Nightmare 170bpm Fmin/Stems/Ghosthack-HS_Nightmare_Kick Drum_170bpm.wav",
+   "moment": "night-17",
+   "role": "kick",
+   "trim_head_s": 2.426,
+   "bars": 14,
+   "cut_s": 22.191
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Nightmare 170bpm Fmin/Stems/Ghosthack-HS_Nightmare_Rhythm Guitar_170bpm Fmin.wav",
+   "moment": "night-17",
+   "role": "rhythm guitar",
+   "trim_head_s": 1.161,
+   "bars": 15,
+   "cut_s": 22.337
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Nightmare 170bpm Fmin/Stems/Ghosthack-HS_Nightmare_Snare_170bpm.wav",
+   "moment": "night-17",
+   "role": "snare",
+   "trim_head_s": 2.09,
+   "bars": 14,
+   "cut_s": 21.855
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Nightmare 170bpm Fmin/Stems/Ghosthack-HS_Nightmare_Synth_170bpm Fmin.wav",
+   "moment": "night-17",
+   "role": "synth",
+   "trim_head_s": 0.151,
+   "bars": 15,
+   "cut_s": 21.327
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Vortex 170bpm Fmin/Stems/Ghosthack-HS_Vortex_Bass Guitar_170bpm Fmin.wav",
+   "moment": "night-17",
+   "role": "bass",
+   "trim_head_s": 0.221,
+   "bars": 15,
+   "cut_s": 21.397
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Vortex 170bpm Fmin/Stems/Ghosthack-HS_Vortex_Kick Drum_170bpm.wav",
+   "moment": "night-17",
+   "role": "kick",
+   "trim_head_s": 0.848,
+   "bars": 15,
+   "cut_s": 22.024
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Vortex 170bpm Fmin/Stems/Ghosthack-HS_Vortex_Open Hat_170bpm.wav",
+   "moment": "night-17",
+   "role": "hats",
+   "trim_head_s": 1.045,
+   "bars": 15,
+   "cut_s": 22.221
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Vortex 170bpm Fmin/Stems/Ghosthack-HS_Vortex_Rhythm Guitar_170bpm Fmin.wav",
+   "moment": "night-17",
+   "role": "rhythm guitar",
+   "trim_head_s": 1.463,
+   "bars": 14,
+   "cut_s": 21.228
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Vortex 170bpm Fmin/Stems/Ghosthack-HS_Vortex_Snare_170bpm.wav",
+   "moment": "night-17",
+   "role": "snare",
+   "trim_head_s": 2.09,
+   "bars": 14,
+   "cut_s": 21.855
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Vortex 170bpm Fmin/Stems/Ghosthack-HS_Vortex_Synth_170bpm Fmin.wav",
+   "moment": "night-17",
+   "role": "synth",
+   "trim_head_s": 1.045,
+   "bars": 15,
+   "cut_s": 22.221
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Hellfire 160bpm Fmin/Stems/Ghosthack-HS_Hellfire_Bass Guitar_160bpm Fmin.wav",
+   "moment": "night-17",
+   "role": "bass",
+   "trim_head_s": 0.766,
+   "bars": 15,
+   "cut_s": 23.266
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Hellfire 160bpm Fmin/Stems/Ghosthack-HS_Hellfire_Hi Hat_160bpm.wav",
+   "moment": "night-17",
+   "role": "hats",
+   "trim_head_s": 1.277,
+   "bars": 15,
+   "cut_s": 23.777
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Hellfire 160bpm Fmin/Stems/Ghosthack-HS_Hellfire_Kick Drum_160bpm.wav",
+   "moment": "night-17",
+   "role": "kick",
+   "trim_head_s": 1.277,
+   "bars": 15,
+   "cut_s": 23.777
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Hellfire 160bpm Fmin/Stems/Ghosthack-HS_Hellfire_Rhythm Guitar_160bpm Fmin.wav",
+   "moment": "night-17",
+   "role": "rhythm guitar",
+   "trim_head_s": 0.975,
+   "bars": 15,
+   "cut_s": 23.475
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Hellfire 160bpm Fmin/Stems/Ghosthack-HS_Hellfire_Snare_160bpm.wav",
+   "moment": "night-17",
+   "role": "snare",
+   "trim_head_s": 5.248,
+   "bars": 12,
+   "cut_s": 23.248
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Hellfire 160bpm Fmin/Stems/Ghosthack-HS_Hellfire_Synth_160bpm Fmin.wav",
+   "moment": "night-17",
+   "role": "synth",
+   "trim_head_s": 0.012,
+   "bars": 16,
+   "cut_s": 24.012
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Havoc 160bpm Fmin/Stems/Ghosthack-HS_Havoc_Bass Guitar_160bpm Fmin.wav",
+   "moment": "night-18",
+   "role": "bass",
+   "trim_head_s": 0.221,
+   "bars": 31,
+   "cut_s": 46.721
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Havoc 160bpm Fmin/Stems/Ghosthack-HS_Havoc_Snare_160bpm.wav",
+   "moment": "night-18",
+   "role": "snare",
+   "trim_head_s": 5.283,
+   "bars": 28,
+   "cut_s": 47.283
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Havoc 160bpm Fmin/Stems/Ghosthack-HS_Havoc_Kick Drum_160bpm.wav",
+   "moment": "night-18",
+   "role": "kick",
+   "trim_head_s": 1.08,
+   "bars": 31,
+   "cut_s": 47.58
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Havoc 160bpm Fmin/Stems/Ghosthack-HS_Havoc_Lead Guitar_160bpm Fmin.wav",
+   "moment": "night-18",
+   "role": "lead",
+   "trim_head_s": 0.174,
+   "bars": 31,
+   "cut_s": 46.674
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Havoc 160bpm Fmin/Stems/Ghosthack-HS_Havoc_Open Hat_160bpm.wav",
+   "moment": "night-18",
+   "role": "hats",
+   "trim_head_s": 0.348,
+   "bars": 31,
+   "cut_s": 46.848
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Havoc 160bpm Fmin/Stems/Ghosthack-HS_Havoc_Rhythm Guitar_160bpm Fmin.wav",
+   "moment": "night-18",
+   "role": "rhythm guitar",
+   "trim_head_s": 1.858,
+   "bars": 30,
+   "cut_s": 46.858
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Exile 175bpm Fmin/Stems/Ghosthack-HS_Exile_Bass Guitar_175bpm Fmin.wav",
+   "moment": "night-18",
+   "role": "bass",
+   "trim_head_s": 0.151,
+   "bars": 15,
+   "cut_s": 20.722
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Exile 175bpm Fmin/Stems/Ghosthack-HS_Exile_Hi Hat_175bpm.wav",
+   "moment": "night-18",
+   "role": "hats",
+   "trim_head_s": 0.673,
+   "bars": 15,
+   "cut_s": 21.244
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Exile 175bpm Fmin/Stems/Ghosthack-HS_Exile_Synth_175bpm Fmin.wav",
+   "moment": "night-18",
+   "role": "synth",
+   "trim_head_s": 0.755,
+   "bars": 15,
+   "cut_s": 21.326
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Exile 175bpm Fmin/Stems/Ghosthack-HS_Exile_Kick Drum_175bpm.wav",
+   "moment": "night-18",
+   "role": "kick",
+   "trim_head_s": 0.476,
+   "bars": 15,
+   "cut_s": 21.047
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Exile 175bpm Fmin/Stems/Ghosthack-HS_Exile_Rhythm Guitar_175bpm Fmin.wav",
+   "moment": "night-18",
+   "role": "rhythm guitar",
+   "trim_head_s": 0.685,
+   "bars": 15,
+   "cut_s": 21.256
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Exile 175bpm Fmin/Stems/Ghosthack-HS_Exile_Snare_175bpm.wav",
+   "moment": "night-18",
+   "role": "snare",
+   "trim_head_s": 4.783,
+   "bars": 12,
+   "cut_s": 21.24
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Warlord 170bpm Fmin/Stems/Ghosthack-HS_Warlord_Rhythm Guitar_170bpm Fmin.wav",
+   "moment": "night-19",
+   "role": "rhythm guitar",
+   "trim_head_s": 0.592,
+   "bars": 15,
+   "cut_s": 21.768
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Warlord 170bpm Fmin/Stems/Ghosthack-HS_Warlord_Snare_170bpm.wav",
+   "moment": "night-19",
+   "role": "snare",
+   "trim_head_s": 3.506,
+   "bars": 13,
+   "cut_s": 21.859
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Warlord 170bpm Fmin/Stems/Ghosthack-HS_Warlord_Synth_170bpm Fmin.wav",
+   "moment": "night-19",
+   "role": "synth",
+   "trim_head_s": 0.499,
+   "bars": 15,
+   "cut_s": 21.675
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Warlord 170bpm Fmin/Stems/Ghosthack-HS_Warlord_Bass Guitar_170bpm Fmin.wav",
+   "moment": "night-19",
+   "role": "bass",
+   "trim_head_s": 1.567,
+   "bars": 14,
+   "cut_s": 21.332
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Warlord 170bpm Fmin/Stems/Ghosthack-HS_Warlord_Hi Hat_170bpm.wav",
+   "moment": "night-19",
+   "role": "hats",
+   "trim_head_s": 0.859,
+   "bars": 15,
+   "cut_s": 22.035
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Warlord 170bpm Fmin/Stems/Ghosthack-HS_Warlord_Kick Drum_170bpm.wav",
+   "moment": "night-19",
+   "role": "kick",
+   "trim_head_s": 5.271,
+   "bars": 12,
+   "cut_s": 22.212
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Abyss 170bpm Fmin/Stems/Ghosthack-HS_Abyss_Bass Guitar_170bpm Fmin.wav",
+   "moment": "night-19",
+   "role": "bass",
+   "trim_head_s": 2.055,
+   "bars": 14,
+   "cut_s": 21.82
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Abyss 170bpm Fmin/Stems/Ghosthack-HS_Abyss_Hi Hat 1_170bpm.wav",
+   "moment": "night-19",
+   "role": "hats",
+   "trim_head_s": 2.45,
+   "bars": 14,
+   "cut_s": 22.215
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Abyss 170bpm Fmin/Stems/Ghosthack-HS_Abyss_Snare_170bpm.wav",
+   "moment": "night-19",
+   "role": "snare",
+   "trim_head_s": 2.09,
+   "bars": 14,
+   "cut_s": 21.855
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Abyss 170bpm Fmin/Stems/Ghosthack-HS_Abyss_Synth_170bpm Fmin.wav",
+   "moment": "night-19",
+   "role": "synth",
+   "trim_head_s": 2.601,
+   "bars": 14,
+   "cut_s": 22.366
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Abyss 170bpm Fmin/Stems/Ghosthack-HS_Abyss_Kick Drum_170bpm.wav",
+   "moment": "night-19",
+   "role": "kick",
+   "trim_head_s": 0.859,
+   "bars": 15,
+   "cut_s": 22.035
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Abyss 170bpm Fmin/Stems/Ghosthack-HS_Abyss_Rhythm Guitar_170bpm Fmin.wav",
+   "moment": "night-19",
+   "role": "rhythm guitar",
+   "trim_head_s": 0.43,
+   "bars": 15,
+   "cut_s": 21.606
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Annihilation 165bpm C#min/Stems/Ghosthack-HS3_Annihilation_Atmosphere FX_165bpm.wav",
+   "moment": "night-20",
+   "role": "fx",
+   "trim_head_s": 0.743,
+   "bars": 15,
+   "cut_s": 22.561
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Annihilation 165bpm C#min/Stems/Ghosthack-HS3_Annihilation_Bass Guitar_165bpm.wav",
+   "moment": "night-20",
+   "role": "bass",
+   "trim_head_s": 0.395,
+   "bars": 15,
+   "cut_s": 22.213
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Annihilation 165bpm C#min/Stems/Ghosthack-HS3_Annihilation_Crash Transition FX_165bpm.wav",
+   "moment": "night-20",
+   "role": "drums",
+   "trim_head_s": 0.824,
+   "bars": 15,
+   "cut_s": 22.642
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Annihilation 165bpm C#min/Stems/Ghosthack-HS3_Annihilation_Hi Hat_165bpm.wav",
+   "moment": "night-20",
+   "role": "hats",
+   "trim_head_s": 0.882,
+   "bars": 15,
+   "cut_s": 22.7
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Annihilation 165bpm C#min/Stems/Ghosthack-HS3_Annihilation_Kick Drum_165bpm.wav",
+   "moment": "night-20",
+   "role": "kick",
+   "trim_head_s": 0.882,
+   "bars": 15,
+   "cut_s": 22.7
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Annihilation 165bpm C#min/Stems/Ghosthack-HS3_Annihilation_Lead Guitar_165bpm.wav",
+   "moment": "night-20",
+   "role": "lead",
+   "trim_head_s": 0.708,
+   "bars": 15,
+   "cut_s": 22.526
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Annihilation 165bpm C#min/Stems/Ghosthack-HS3_Annihilation_Rhythm Guitar_165bpm.wav",
+   "moment": "night-20",
+   "role": "rhythm guitar",
+   "trim_head_s": 0.163,
+   "bars": 15,
+   "cut_s": 21.981
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Annihilation 165bpm C#min/Stems/Ghosthack-HS3_Annihilation_Snare Drum_165bpm.wav",
+   "moment": "night-20",
+   "role": "snare",
+   "trim_head_s": 3.646,
+   "bars": 13,
+   "cut_s": 22.555
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Epitah 170bpm C#min/Stems/Ghosthack-HS3_Epitah_Bass Guitar_170bpm.wav",
+   "moment": "night-20",
+   "role": "bass",
+   "trim_head_s": 0.163,
+   "bars": 31,
+   "cut_s": 43.928
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Epitah 170bpm C#min/Stems/Ghosthack-HS3_Epitah_Hi Hat_170bpm.wav",
+   "moment": "night-20",
+   "role": "hats",
+   "trim_head_s": 2.078,
+   "bars": 30,
+   "cut_s": 44.431
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Epitah 170bpm C#min/Stems/Ghosthack-HS3_Epitah_Impact_FX_170bpm.wav",
+   "moment": "night-20",
+   "role": "fx",
+   "trim_head_s": 0.546,
+   "bars": 31,
+   "cut_s": 44.311
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Epitah 170bpm C#min/Stems/Ghosthack-HS3_Epitah_Kick Drum_170bpm.wav",
+   "moment": "night-20",
+   "role": "kick",
+   "trim_head_s": 1.625,
+   "bars": 30,
+   "cut_s": 43.978
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Epitah 170bpm C#min/Stems/Ghosthack-HS3_Epitah_Lead Guitar_170bpm.wav",
+   "moment": "night-20",
+   "role": "lead",
+   "trim_head_s": 0.673,
+   "bars": 31,
+   "cut_s": 44.438
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Epitah 170bpm C#min/Stems/Ghosthack-HS3_Epitah_Rhythm Guitar_170bpm.wav",
+   "moment": "night-20",
+   "role": "rhythm guitar",
+   "trim_head_s": 0.302,
+   "bars": 31,
+   "cut_s": 44.067
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Epitah 170bpm C#min/Stems/Ghosthack-HS3_Epitah_Snare Drum_170bpm.wav",
+   "moment": "night-20",
+   "role": "snare",
+   "trim_head_s": 0.662,
+   "bars": 31,
+   "cut_s": 44.427
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Rotten 125bpm D#min/Stems/Ghosthack-HS2_Rotten_Bass Guitar_125bpm.wav",
+   "moment": "motif-shambler",
+   "role": "bass",
+   "trim_head_s": 0.592,
+   "bars": 15,
+   "cut_s": 29.392
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Rotten 125bpm D#min/Stems/Ghosthack-HS2_Rotten_Downlifter_FX_125bpm.wav",
+   "moment": "motif-shambler",
+   "role": "fx",
+   "trim_head_s": 0.697,
+   "bars": 15,
+   "cut_s": 29.497
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Rotten 125bpm D#min/Stems/Ghosthack-HS2_Rotten_Rhythm Guitar_125bpm.wav",
+   "moment": "motif-shambler",
+   "role": "rhythm guitar",
+   "trim_head_s": 0.348,
+   "bars": 15,
+   "cut_s": 29.148
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Rotten 125bpm D#min/Stems/Ghosthack-HS2_Rotten_Snare Drum_125bpm.wav",
+   "moment": "motif-shambler",
+   "role": "snare",
+   "trim_head_s": 2.148,
+   "bars": 14,
+   "cut_s": 29.028
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Rotten 125bpm D#min/Stems/Ghosthack-HS2_Rotten_Synth_125bpm.wav",
+   "moment": "motif-shambler",
+   "role": "synth",
+   "trim_head_s": 0.36,
+   "bars": 15,
+   "cut_s": 29.16
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Rotten 125bpm D#min/Stems/Ghosthack-HS2_Rotten_Kick Drum_125bpm.wav",
+   "moment": "motif-shambler",
+   "role": "kick",
+   "trim_head_s": 3.123,
+   "bars": 14,
+   "cut_s": 30.003
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Rotten 125bpm D#min/Stems/Ghosthack-HS2_Rotten_Open Hat_125bpm.wav",
+   "moment": "motif-shambler",
+   "role": "hats",
+   "trim_head_s": 1.057,
+   "bars": 15,
+   "cut_s": 29.857
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Frenzy 160bpm Fmin/Stems/Ghosthack-HS_Frenzy_Bass Guitar_160bpm Fmin.wav",
+   "moment": "motif-feral",
+   "role": "bass",
+   "trim_head_s": 4.145,
+   "bars": 13,
+   "cut_s": 23.645
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Frenzy 160bpm Fmin/Stems/Ghosthack-HS_Frenzy_Hi Hat_160bpm.wav",
+   "moment": "motif-feral",
+   "role": "hats",
+   "trim_head_s": 3.727,
+   "bars": 13,
+   "cut_s": 23.227
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Frenzy 160bpm Fmin/Stems/Ghosthack-HS_Frenzy_Kick Drum_160bpm.wav",
+   "moment": "motif-feral",
+   "role": "kick",
+   "trim_head_s": 0.093,
+   "bars": 15,
+   "cut_s": 22.593
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Frenzy 160bpm Fmin/Stems/Ghosthack-HS_Frenzy_Lead Guitar_160bpm Fmin.wav",
+   "moment": "motif-feral",
+   "role": "lead",
+   "trim_head_s": 1.3,
+   "bars": 15,
+   "cut_s": 23.8
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Frenzy 160bpm Fmin/Stems/Ghosthack-HS_Frenzy_Rhythm Guitar_160bpm Fmin.wav",
+   "moment": "motif-feral",
+   "role": "rhythm guitar",
+   "trim_head_s": 0.209,
+   "bars": 15,
+   "cut_s": 22.709
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Frenzy 160bpm Fmin/Stems/Ghosthack-HS_Frenzy_Snare_160bpm.wav",
+   "moment": "motif-feral",
+   "role": "snare",
+   "trim_head_s": 0.743,
+   "bars": 15,
+   "cut_s": 23.243
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Frenzy 160bpm Fmin/Stems/Ghosthack-HS_Frenzy_Synth_160bpm Fmin.wav",
+   "moment": "motif-feral",
+   "role": "synth",
+   "trim_head_s": 1.521,
+   "bars": 15,
+   "cut_s": 24.021
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Sledgehammer 150bpm Cmin/Stems/Ghosthack-HS2_Sledgehammer_Bass Guitar_150bpm.wav",
+   "moment": "motif-brute",
+   "role": "bass",
+   "trim_head_s": 1.207,
+   "bars": 15,
+   "cut_s": 25.207
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Sledgehammer 150bpm Cmin/Stems/Ghosthack-HS2_Sledgehammer_Hi Hat_150bpm.wav",
+   "moment": "motif-brute",
+   "role": "hats",
+   "trim_head_s": 0.395,
+   "bars": 15,
+   "cut_s": 24.395
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Sledgehammer 150bpm Cmin/Stems/Ghosthack-HS2_Sledgehammer_Rhythm Guitar_150bpm.wav",
+   "moment": "motif-brute",
+   "role": "rhythm guitar",
+   "trim_head_s": 0.731,
+   "bars": 15,
+   "cut_s": 24.731
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Sledgehammer 150bpm Cmin/Stems/Ghosthack-HS2_Sledgehammer_Snare Drum_150bpm.wav",
+   "moment": "motif-brute",
+   "role": "snare",
+   "trim_head_s": 2.09,
+   "bars": 14,
+   "cut_s": 24.49
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Sledgehammer 150bpm Cmin/Stems/Ghosthack-HS2_Sledgehammer_Synth_150bpm.wav",
+   "moment": "motif-brute",
+   "role": "synth",
+   "trim_head_s": 1.579,
+   "bars": 15,
+   "cut_s": 25.579
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Sledgehammer 150bpm Cmin/Stems/Ghosthack-HS2_Sledgehammer_Downlifter_& Uplifter FX_150bpm.wav",
+   "moment": "motif-brute",
+   "role": "fx",
+   "trim_head_s": 0.848,
+   "bars": 15,
+   "cut_s": 24.848
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Sledgehammer 150bpm Cmin/Stems/Ghosthack-HS2_Sledgehammer_Kick Drum_150bpm.wav",
+   "moment": "motif-brute",
+   "role": "kick",
+   "trim_head_s": 1.544,
+   "bars": 15,
+   "cut_s": 25.544
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Titan 130bpm Emin/Stems/Ghosthack-HS2_Titan_Bass Guitar_130bpm.wav",
+   "moment": "motif-colossus",
+   "role": "bass",
+   "trim_head_s": 1.382,
+   "bars": 15,
+   "cut_s": 29.074
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Titan 130bpm Emin/Stems/Ghosthack-HS2_Titan_Deep Hit FX_130bpm.wav",
+   "moment": "motif-colossus",
+   "role": "fx",
+   "trim_head_s": 0.441,
+   "bars": 15,
+   "cut_s": 28.133
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Titan 130bpm Emin/Stems/Ghosthack-HS2_Titan_Kick Drum_130bpm.wav",
+   "moment": "motif-colossus",
+   "role": "kick",
+   "trim_head_s": 0.395,
+   "bars": 15,
+   "cut_s": 28.087
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Titan 130bpm Emin/Stems/Ghosthack-HS2_Titan_Lead Guitar_130bpm.wav",
+   "moment": "motif-colossus",
+   "role": "lead",
+   "trim_head_s": 0.012,
+   "bars": 16,
+   "cut_s": 29.55
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Titan 130bpm Emin/Stems/Ghosthack-HS2_Titan_Open Hat_130bpm.wav",
+   "moment": "motif-colossus",
+   "role": "hats",
+   "trim_head_s": 0.894,
+   "bars": 15,
+   "cut_s": 28.586
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Titan 130bpm Emin/Stems/Ghosthack-HS2_Titan_Rhythm Guitar_130bpm.wav",
+   "moment": "motif-colossus",
+   "role": "rhythm guitar",
+   "trim_head_s": 3.123,
+   "bars": 14,
+   "cut_s": 28.969
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Titan 130bpm Emin/Stems/Ghosthack-HS2_Titan_Snare Drum_130bpm.wav",
+   "moment": "motif-colossus",
+   "role": "snare",
+   "trim_head_s": 0.627,
+   "bars": 15,
+   "cut_s": 28.319
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Titan 130bpm Emin/Stems/Ghosthack-HS2_Titan_White Noise Ambience_130bpm.wav",
+   "moment": "motif-colossus",
+   "role": "other",
+   "trim_head_s": 0.592,
+   "bars": 15,
+   "cut_s": 28.284
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Venom 130bpm Gmin/Stems/Ghosthack-HS_Venom_Bass Guitar_130bpm Gmin.wav",
+   "moment": "motif-spitter",
+   "role": "bass",
+   "trim_head_s": 0.116,
+   "bars": 15,
+   "cut_s": 27.808
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Venom 130bpm Gmin/Stems/Ghosthack-HS_Venom_Kick Drum_130bpm.wav",
+   "moment": "motif-spitter",
+   "role": "kick",
+   "trim_head_s": 0.116,
+   "bars": 15,
+   "cut_s": 27.808
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Venom 130bpm Gmin/Stems/Ghosthack-HS_Venom_Lead Guitar_130bpm Gmin.wav",
+   "moment": "motif-spitter",
+   "role": "lead",
+   "trim_head_s": 0.441,
+   "bars": 15,
+   "cut_s": 28.133
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Venom 130bpm Gmin/Stems/Ghosthack-HS_Venom_Open Hat_130bpm.wav",
+   "moment": "motif-spitter",
+   "role": "hats",
+   "trim_head_s": 0.441,
+   "bars": 15,
+   "cut_s": 28.133
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Venom 130bpm Gmin/Stems/Ghosthack-HS_Venom_Rhythm Guitar_130bpm Gmin.wav",
+   "moment": "motif-spitter",
+   "role": "rhythm guitar",
+   "trim_head_s": 1.567,
+   "bars": 15,
+   "cut_s": 29.259
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Venom 130bpm Gmin/Stems/Ghosthack-HS_Venom_Snare_130bpm.wav",
+   "moment": "motif-spitter",
+   "role": "snare",
+   "trim_head_s": 1.01,
+   "bars": 15,
+   "cut_s": 28.702
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Glitchform 130bpm D#min/Stems/Ghosthack-HS2_Glitchform_Snare Drum_130bpm.wav",
+   "moment": "motif-spider",
+   "role": "snare",
+   "trim_head_s": 0.929,
+   "bars": 15,
+   "cut_s": 28.621
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Glitchform 130bpm D#min/Stems/Ghosthack-HS2_Glitchform_Synth_130bpm.wav",
+   "moment": "motif-spider",
+   "role": "synth",
+   "trim_head_s": 0.871,
+   "bars": 15,
+   "cut_s": 28.563
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Glitchform 130bpm D#min/Stems/Ghosthack-HS2_Glitchform_Kick Drum_130bpm.wav",
+   "moment": "motif-spider",
+   "role": "kick",
+   "trim_head_s": 0.418,
+   "bars": 15,
+   "cut_s": 28.11
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Glitchform 130bpm D#min/Stems/Ghosthack-HS2_Glitchform_Open Hat_130bpm.wav",
+   "moment": "motif-spider",
+   "role": "hats",
+   "trim_head_s": 0.441,
+   "bars": 15,
+   "cut_s": 28.133
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Glitchform 130bpm D#min/Stems/Ghosthack-HS2_Glitchform_Rhythm Guitar_130bpm.wav",
+   "moment": "motif-spider",
+   "role": "rhythm guitar",
+   "trim_head_s": 0.255,
+   "bars": 15,
+   "cut_s": 27.947
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Glitchform 130bpm D#min/Stems/Ghosthack-HS2_Glitchform_Bass Guitar_130bpm.wav",
+   "moment": "motif-spider",
+   "role": "bass",
+   "trim_head_s": 1.741,
+   "bars": 15,
+   "cut_s": 29.433
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Glitchform 130bpm D#min/Stems/Ghosthack-HS2_Glitchform_Deep Hit FX_130bpm.wav",
+   "moment": "motif-spider",
+   "role": "fx",
+   "trim_head_s": 0.116,
+   "bars": 15,
+   "cut_s": 27.808
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Glitchform 130bpm D#min/Stems/Ghosthack-HS2_Glitchform_Heartbeat_130bpm.wav",
+   "moment": "motif-spider",
+   "role": "other",
+   "trim_head_s": 1.811,
+   "bars": 15,
+   "cut_s": 29.503
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Chimera 110bpm Emin/Stems/Ghosthack-HS3_Chimera_Alarm FX_110bpm.wav",
+   "moment": "motif-leaper",
+   "role": "fx",
+   "trim_head_s": 0.07,
+   "bars": 11,
+   "cut_s": 24.07
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Chimera 110bpm Emin/Stems/Ghosthack-HS3_Chimera_Rhythm Guitar_110bpm.wav",
+   "moment": "motif-leaper",
+   "role": "rhythm guitar",
+   "trim_head_s": 1.312,
+   "bars": 11,
+   "cut_s": 25.312
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Chimera 110bpm Emin/Stems/Ghosthack-HS3_Chimera_Snare Drum_110bpm.wav",
+   "moment": "motif-leaper",
+   "role": "snare",
+   "trim_head_s": 3.785,
+   "bars": 10,
+   "cut_s": 25.603
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Chimera 110bpm Emin/Stems/Ghosthack-HS3_Chimera_Bass Guitar_110bpm.wav",
+   "moment": "motif-leaper",
+   "role": "bass",
+   "trim_head_s": 1.939,
+   "bars": 11,
+   "cut_s": 25.939
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Chimera 110bpm Emin/Stems/Ghosthack-HS3_Chimera_Kick Drum_110bpm.wav",
+   "moment": "motif-leaper",
+   "role": "kick",
+   "trim_head_s": 1.881,
+   "bars": 11,
+   "cut_s": 25.881
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Chimera 110bpm Emin/Stems/Ghosthack-HS3_Chimera_Lead Guitar_110bpm.wav",
+   "moment": "motif-leaper",
+   "role": "lead",
+   "trim_head_s": 0.627,
+   "bars": 11,
+   "cut_s": 24.627
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Chimera 110bpm Emin/Stems/Ghosthack-HS3_Chimera_Open Hat_110bpm.wav",
+   "moment": "motif-leaper",
+   "role": "hats",
+   "trim_head_s": 0.522,
+   "bars": 11,
+   "cut_s": 24.522
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Haunted 150bpm Emin/Stems/Ghosthack-HS2_Haunted_Atmosphere Dark FX_150bpm.wav",
+   "moment": "motif-screamer",
+   "role": "fx",
+   "trim_head_s": 0.116,
+   "bars": 15,
+   "cut_s": 24.116
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Haunted 150bpm Emin/Stems/Ghosthack-HS2_Haunted_Bass Guitar_150bpm.wav",
+   "moment": "motif-screamer",
+   "role": "bass",
+   "trim_head_s": 0.058,
+   "bars": 15,
+   "cut_s": 24.058
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Haunted 150bpm Emin/Stems/Ghosthack-HS2_Haunted_Hi Hat 1_150bpm.wav",
+   "moment": "motif-screamer",
+   "role": "hats",
+   "trim_head_s": 2.392,
+   "bars": 14,
+   "cut_s": 24.792
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Haunted 150bpm Emin/Stems/Ghosthack-HS2_Haunted_Snare Drum_150bpm.wav",
+   "moment": "motif-screamer",
+   "role": "snare",
+   "trim_head_s": 2.844,
+   "bars": 14,
+   "cut_s": 25.244
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Haunted 150bpm Emin/Stems/Ghosthack-HS2_Haunted_Synth_150bpm.wav",
+   "moment": "motif-screamer",
+   "role": "synth",
+   "trim_head_s": 0.023,
+   "bars": 16,
+   "cut_s": 25.623
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Haunted 150bpm Emin/Stems/Ghosthack-HS2_Haunted_Kick Drum_150bpm.wav",
+   "moment": "motif-screamer",
+   "role": "kick",
+   "trim_head_s": 4.423,
+   "bars": 13,
+   "cut_s": 25.223
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Haunted 150bpm Emin/Stems/Ghosthack-HS2_Haunted_Rhythm Guitar_150bpm.wav",
+   "moment": "motif-screamer",
+   "role": "rhythm guitar",
+   "trim_head_s": 0.023,
+   "bars": 16,
+   "cut_s": 25.623
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Carnage 130bpm Emin/Stems/Ghosthack-HS2_Carnage_Bass Guitar_130bpm.wav",
+   "moment": "motif-bomber",
+   "role": "bass",
+   "trim_head_s": 3.262,
+   "bars": 14,
+   "cut_s": 29.108
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Carnage 130bpm Emin/Stems/Ghosthack-HS2_Carnage_Snare Drum_130bpm.wav",
+   "moment": "motif-bomber",
+   "role": "snare",
+   "trim_head_s": 1.01,
+   "bars": 15,
+   "cut_s": 28.702
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Carnage 130bpm Emin/Stems/Ghosthack-HS2_Carnage_Synth_130bpm.wav",
+   "moment": "motif-bomber",
+   "role": "synth",
+   "trim_head_s": 1.73,
+   "bars": 15,
+   "cut_s": 29.422
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Carnage 130bpm Emin/Stems/Ghosthack-HS2_Carnage_Transition FX_130bpm.wav",
+   "moment": "motif-bomber",
+   "role": "fx",
+   "trim_head_s": 0.848,
+   "bars": 15,
+   "cut_s": 28.54
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Carnage 130bpm Emin/Stems/Ghosthack-HS2_Carnage_Kick Drum_130bpm.wav",
+   "moment": "motif-bomber",
+   "role": "kick",
+   "trim_head_s": 0.882,
+   "bars": 15,
+   "cut_s": 28.574
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Carnage 130bpm Emin/Stems/Ghosthack-HS2_Carnage_Lead Guitar_130bpm.wav",
+   "moment": "motif-bomber",
+   "role": "lead",
+   "trim_head_s": 0.894,
+   "bars": 15,
+   "cut_s": 28.586
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Carnage 130bpm Emin/Stems/Ghosthack-HS2_Carnage_Open Hat 1_130bpm.wav",
+   "moment": "motif-bomber",
+   "role": "hats",
+   "trim_head_s": 1.823,
+   "bars": 15,
+   "cut_s": 29.515
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Carnage 130bpm Emin/Stems/Ghosthack-HS2_Carnage_Rhythm Guitar_130bpm.wav",
+   "moment": "motif-bomber",
+   "role": "rhythm guitar",
+   "trim_head_s": 0.151,
+   "bars": 15,
+   "cut_s": 27.843
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Gutter 150bpm Fmin/Stems/Ghosthack-HS2_Gutter_Atmosphere FX_150bpm.wav",
+   "moment": "motif-drowned",
+   "role": "fx",
+   "trim_head_s": 0.522,
+   "bars": 15,
+   "cut_s": 24.522
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Gutter 150bpm Fmin/Stems/Ghosthack-HS2_Gutter_Bass Guitar_150bpm.wav",
+   "moment": "motif-drowned",
+   "role": "bass",
+   "trim_head_s": 3.808,
+   "bars": 13,
+   "cut_s": 24.608
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Gutter 150bpm Fmin/Stems/Ghosthack-HS2_Gutter_Crash FX_150bpm.wav",
+   "moment": "motif-drowned",
+   "role": "drums",
+   "trim_head_s": 1.08,
+   "bars": 15,
+   "cut_s": 25.08
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Gutter 150bpm Fmin/Stems/Ghosthack-HS2_Gutter_Hi Hat_150bpm.wav",
+   "moment": "motif-drowned",
+   "role": "hats",
+   "trim_head_s": 1.393,
+   "bars": 15,
+   "cut_s": 25.393
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Gutter 150bpm Fmin/Stems/Ghosthack-HS2_Gutter_Kick Drum_150bpm.wav",
+   "moment": "motif-drowned",
+   "role": "kick",
+   "trim_head_s": 3.796,
+   "bars": 13,
+   "cut_s": 24.596
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Gutter 150bpm Fmin/Stems/Ghosthack-HS2_Gutter_Lead Guitar_150bpm.wav",
+   "moment": "motif-drowned",
+   "role": "lead",
+   "trim_head_s": 0.221,
+   "bars": 15,
+   "cut_s": 24.221
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Gutter 150bpm Fmin/Stems/Ghosthack-HS2_Gutter_Rhythm Guitar_150bpm.wav",
+   "moment": "motif-drowned",
+   "role": "rhythm guitar",
+   "trim_head_s": 1.428,
+   "bars": 15,
+   "cut_s": 25.428
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Gutter 150bpm Fmin/Stems/Ghosthack-HS2_Gutter_Snare Drum_150bpm.wav",
+   "moment": "motif-drowned",
+   "role": "snare",
+   "trim_head_s": 3.065,
+   "bars": 14,
+   "cut_s": 25.465
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Inferno 160bpm Gmin/Stems/Ghosthack-HS_Inferno_Bass Guitar_160bpm Gmin.wav",
+   "moment": "motif-demon",
+   "role": "bass",
+   "trim_head_s": 0.046,
+   "bars": 15,
+   "cut_s": 22.546
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Inferno 160bpm Gmin/Stems/Ghosthack-HS_Inferno_Kick Drum_160bpm.wav",
+   "moment": "motif-demon",
+   "role": "kick",
+   "trim_head_s": 0.906,
+   "bars": 15,
+   "cut_s": 23.406
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Inferno 160bpm Gmin/Stems/Ghosthack-HS_Inferno_Lead Guitar_160bpm Gmin.wav",
+   "moment": "motif-demon",
+   "role": "lead",
+   "trim_head_s": 0.012,
+   "bars": 16,
+   "cut_s": 24.012
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Inferno 160bpm Gmin/Stems/Ghosthack-HS_Inferno_Open Hat_160bpm.wav",
+   "moment": "motif-demon",
+   "role": "hats",
+   "trim_head_s": 0.348,
+   "bars": 15,
+   "cut_s": 22.848
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Inferno 160bpm Gmin/Stems/Ghosthack-HS_Inferno_Rhythm Guitar_160bpm Gmin.wav",
+   "moment": "motif-demon",
+   "role": "rhythm guitar",
+   "trim_head_s": 0.046,
+   "bars": 15,
+   "cut_s": 22.546
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Inferno 160bpm Gmin/Stems/Ghosthack-HS_Inferno_Snare_160bpm.wav",
+   "moment": "motif-demon",
+   "role": "snare",
+   "trim_head_s": 3.75,
+   "bars": 13,
+   "cut_s": 23.25
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Hell Knight 105bpm Dmin/Stems/Ghosthack-HS3_Hell Knight_Bass Guitar_105bpm.wav",
+   "moment": "motif-guardians",
+   "role": "bass",
+   "trim_head_s": 3.564,
+   "bars": 14,
+   "cut_s": 35.564
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Hell Knight 105bpm Dmin/Stems/Ghosthack-HS3_Hell Knight_Impact_FX_105bpm.wav",
+   "moment": "motif-guardians",
+   "role": "fx",
+   "trim_head_s": 0.615,
+   "bars": 15,
+   "cut_s": 34.901
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Hell Knight 105bpm Dmin/Stems/Ghosthack-HS3_Hell Knight_Snare Drum_105bpm.wav",
+   "moment": "motif-guardians",
+   "role": "snare",
+   "trim_head_s": 0.685,
+   "bars": 15,
+   "cut_s": 34.971
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Hell Knight 105bpm Dmin/Stems/Ghosthack-HS3_Hell Knight_Kick Drum_105bpm.wav",
+   "moment": "motif-guardians",
+   "role": "kick",
+   "trim_head_s": 3.158,
+   "bars": 14,
+   "cut_s": 35.158
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Hell Knight 105bpm Dmin/Stems/Ghosthack-HS3_Hell Knight_Lead Guitar_105bpm.wav",
+   "moment": "motif-guardians",
+   "role": "lead",
+   "trim_head_s": 2.694,
+   "bars": 14,
+   "cut_s": 34.694
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Hell Knight 105bpm Dmin/Stems/Ghosthack-HS3_Hell Knight_Open Hat_105bpm.wav",
+   "moment": "motif-guardians",
+   "role": "hats",
+   "trim_head_s": 0.128,
+   "bars": 15,
+   "cut_s": 34.414
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Hell Knight 105bpm Dmin/Stems/Ghosthack-HS3_Hell Knight_Rhythm Guitar_105bpm.wav",
+   "moment": "motif-guardians",
+   "role": "rhythm guitar",
+   "trim_head_s": 1.741,
+   "bars": 15,
+   "cut_s": 36.027
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Hell Knight 105bpm Dmin/Stems/Ghosthack-HS3_Hell Knight_Bass Guitar_105bpm.wav",
+   "moment": "special-guardian",
+   "role": "bass",
+   "trim_head_s": 3.564,
+   "bars": 14,
+   "cut_s": 35.564
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Hell Knight 105bpm Dmin/Stems/Ghosthack-HS3_Hell Knight_Impact_FX_105bpm.wav",
+   "moment": "special-guardian",
+   "role": "fx",
+   "trim_head_s": 0.615,
+   "bars": 15,
+   "cut_s": 34.901
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Hell Knight 105bpm Dmin/Stems/Ghosthack-HS3_Hell Knight_Snare Drum_105bpm.wav",
+   "moment": "special-guardian",
+   "role": "snare",
+   "trim_head_s": 0.685,
+   "bars": 15,
+   "cut_s": 34.971
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Hell Knight 105bpm Dmin/Stems/Ghosthack-HS3_Hell Knight_Kick Drum_105bpm.wav",
+   "moment": "special-guardian",
+   "role": "kick",
+   "trim_head_s": 3.158,
+   "bars": 14,
+   "cut_s": 35.158
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Hell Knight 105bpm Dmin/Stems/Ghosthack-HS3_Hell Knight_Lead Guitar_105bpm.wav",
+   "moment": "special-guardian",
+   "role": "lead",
+   "trim_head_s": 2.694,
+   "bars": 14,
+   "cut_s": 34.694
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Hell Knight 105bpm Dmin/Stems/Ghosthack-HS3_Hell Knight_Open Hat_105bpm.wav",
+   "moment": "special-guardian",
+   "role": "hats",
+   "trim_head_s": 0.128,
+   "bars": 15,
+   "cut_s": 34.414
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Hell Knight 105bpm Dmin/Stems/Ghosthack-HS3_Hell Knight_Rhythm Guitar_105bpm.wav",
+   "moment": "special-guardian",
+   "role": "rhythm guitar",
+   "trim_head_s": 1.741,
+   "bars": 15,
+   "cut_s": 36.027
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Wraith 170bpm Fmin/Stems/Ghosthack-HS_Wraith_Bass Guitar_170bpm Fmin.wav",
+   "moment": "special-guardian-b",
+   "role": "bass",
+   "trim_head_s": 2.287,
+   "bars": 14,
+   "cut_s": 22.052
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Wraith 170bpm Fmin/Stems/Ghosthack-HS_Wraith_Hi Hat 1_170bpm.wav",
+   "moment": "special-guardian-b",
+   "role": "hats",
+   "trim_head_s": 1.033,
+   "bars": 15,
+   "cut_s": 22.209
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Wraith 170bpm Fmin/Stems/Ghosthack-HS_Wraith_Kick Drum_170bpm.wav",
+   "moment": "special-guardian-b",
+   "role": "kick",
+   "trim_head_s": 0.197,
+   "bars": 15,
+   "cut_s": 21.373
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Wraith 170bpm Fmin/Stems/Ghosthack-HS_Wraith_Lead Guitar_170bpm Fmin.wav",
+   "moment": "special-guardian-b",
+   "role": "lead",
+   "trim_head_s": 0.116,
+   "bars": 15,
+   "cut_s": 21.292
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Wraith 170bpm Fmin/Stems/Ghosthack-HS_Wraith_Rhythm Guitar_170bpm Fmin.wav",
+   "moment": "special-guardian-b",
+   "role": "rhythm guitar",
+   "trim_head_s": 0.186,
+   "bars": 15,
+   "cut_s": 21.362
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Wraith 170bpm Fmin/Stems/Ghosthack-HS_Wraith_Snare_170bpm.wav",
+   "moment": "special-guardian-b",
+   "role": "snare",
+   "trim_head_s": 3.506,
+   "bars": 13,
+   "cut_s": 21.859
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Doom 103bpm F#min/Stems/Ghosthack-HS_Doom_Bass Guitar_103bpm F#min.wav",
+   "moment": "special-heart",
+   "role": "bass",
+   "trim_head_s": 1.892,
+   "bars": 15,
+   "cut_s": 36.843
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Doom 103bpm F#min/Stems/Ghosthack-HS_Doom_Rhythm Guitar_103bpm F#min.wav",
+   "moment": "special-heart",
+   "role": "rhythm guitar",
+   "trim_head_s": 1.858,
+   "bars": 15,
+   "cut_s": 36.809
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Doom 103bpm F#min/Stems/Ghosthack-HS_Doom_Snare_103bpm.wav",
+   "moment": "special-heart",
+   "role": "snare",
+   "trim_head_s": 2.984,
+   "bars": 14,
+   "cut_s": 35.605
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Doom 103bpm F#min/Stems/Ghosthack-HS_Doom_Hi Hat 1_103bpm.wav",
+   "moment": "special-heart",
+   "role": "hats",
+   "trim_head_s": 0.662,
+   "bars": 15,
+   "cut_s": 35.613
+  },
+  {
+   "path": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Doom 103bpm F#min/Stems/Ghosthack-HS_Doom_Kick Drum_103bpm.wav",
+   "moment": "special-heart",
+   "role": "kick",
+   "trim_head_s": 2.844,
+   "bars": 14,
+   "cut_s": 35.465
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Titan 130bpm Emin/Stems/Ghosthack-HS2_Titan_Bass Guitar_130bpm.wav",
+   "moment": "special-colossus",
+   "role": "bass",
+   "trim_head_s": 1.382,
+   "bars": 15,
+   "cut_s": 29.074
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Titan 130bpm Emin/Stems/Ghosthack-HS2_Titan_Deep Hit FX_130bpm.wav",
+   "moment": "special-colossus",
+   "role": "fx",
+   "trim_head_s": 0.441,
+   "bars": 15,
+   "cut_s": 28.133
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Titan 130bpm Emin/Stems/Ghosthack-HS2_Titan_Kick Drum_130bpm.wav",
+   "moment": "special-colossus",
+   "role": "kick",
+   "trim_head_s": 0.395,
+   "bars": 15,
+   "cut_s": 28.087
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Titan 130bpm Emin/Stems/Ghosthack-HS2_Titan_Lead Guitar_130bpm.wav",
+   "moment": "special-colossus",
+   "role": "lead",
+   "trim_head_s": 0.012,
+   "bars": 16,
+   "cut_s": 29.55
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Titan 130bpm Emin/Stems/Ghosthack-HS2_Titan_Open Hat_130bpm.wav",
+   "moment": "special-colossus",
+   "role": "hats",
+   "trim_head_s": 0.894,
+   "bars": 15,
+   "cut_s": 28.586
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Titan 130bpm Emin/Stems/Ghosthack-HS2_Titan_Rhythm Guitar_130bpm.wav",
+   "moment": "special-colossus",
+   "role": "rhythm guitar",
+   "trim_head_s": 3.123,
+   "bars": 14,
+   "cut_s": 28.969
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Titan 130bpm Emin/Stems/Ghosthack-HS2_Titan_Snare Drum_130bpm.wav",
+   "moment": "special-colossus",
+   "role": "snare",
+   "trim_head_s": 0.627,
+   "bars": 15,
+   "cut_s": 28.319
+  },
+  {
+   "path": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Titan 130bpm Emin/Stems/Ghosthack-HS2_Titan_White Noise Ambience_130bpm.wav",
+   "moment": "special-colossus",
+   "role": "other",
+   "trim_head_s": 0.592,
+   "bars": 15,
+   "cut_s": 28.284
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Flame 170bpm D#min/Stems/Ghosthack-HS3_Flame_Riser FX_170bpm.wav",
+   "moment": "special-red-sky",
+   "role": "fx",
+   "trim_head_s": 0.116,
+   "bars": 15,
+   "cut_s": 21.292
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Flame 170bpm D#min/Stems/Ghosthack-HS3_Flame_Snare Drum_170bpm.wav",
+   "moment": "special-red-sky",
+   "role": "snare",
+   "trim_head_s": 3.506,
+   "bars": 13,
+   "cut_s": 21.859
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Flame 170bpm D#min/Stems/Ghosthack-HS3_Flame_Bass Guitar_170bpm.wav",
+   "moment": "special-red-sky",
+   "role": "bass",
+   "trim_head_s": 1.567,
+   "bars": 14,
+   "cut_s": 21.332
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Flame 170bpm D#min/Stems/Ghosthack-HS3_Flame_Hi Hat_170bpm.wav",
+   "moment": "special-red-sky",
+   "role": "hats",
+   "trim_head_s": 0.313,
+   "bars": 15,
+   "cut_s": 21.489
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Flame 170bpm D#min/Stems/Ghosthack-HS3_Flame_Kick Drum_170bpm.wav",
+   "moment": "special-red-sky",
+   "role": "kick",
+   "trim_head_s": 0.894,
+   "bars": 15,
+   "cut_s": 22.07
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Flame 170bpm D#min/Stems/Ghosthack-HS3_Flame_Lead Guitar_170bpm.wav",
+   "moment": "special-red-sky",
+   "role": "lead",
+   "trim_head_s": 0.046,
+   "bars": 15,
+   "cut_s": 21.222
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Flame 170bpm D#min/Stems/Ghosthack-HS3_Flame_Rhythm Guitar_170bpm.wav",
+   "moment": "special-red-sky",
+   "role": "rhythm guitar",
+   "trim_head_s": 2.612,
+   "bars": 14,
+   "cut_s": 22.377
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Rude 160bpm Emin/Stems/Ghosthack-HS3_Rude_Bass Guitar_160bpm.wav",
+   "moment": "special-wanderer",
+   "role": "bass",
+   "trim_head_s": 3.553,
+   "bars": 13,
+   "cut_s": 23.053
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Rude 160bpm Emin/Stems/Ghosthack-HS3_Rude_Glitch FX_160bpm.wav",
+   "moment": "special-wanderer",
+   "role": "fx",
+   "trim_head_s": 0.998,
+   "bars": 15,
+   "cut_s": 23.498
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Rude 160bpm Emin/Stems/Ghosthack-HS3_Rude_Hi Hat_160bpm.wav",
+   "moment": "special-wanderer",
+   "role": "hats",
+   "trim_head_s": 0.906,
+   "bars": 15,
+   "cut_s": 23.406
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Rude 160bpm Emin/Stems/Ghosthack-HS3_Rude_Snare Drum_160bpm.wav",
+   "moment": "special-wanderer",
+   "role": "snare",
+   "trim_head_s": 5.248,
+   "bars": 12,
+   "cut_s": 23.248
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Rude 160bpm Emin/Stems/Ghosthack-HS3_Rude_Kick Drum_160bpm.wav",
+   "moment": "special-wanderer",
+   "role": "kick",
+   "trim_head_s": 0.36,
+   "bars": 15,
+   "cut_s": 22.86
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Rude 160bpm Emin/Stems/Ghosthack-HS3_Rude_Lead Guitar_160bpm.wav",
+   "moment": "special-wanderer",
+   "role": "lead",
+   "trim_head_s": 0.232,
+   "bars": 15,
+   "cut_s": 22.732
+  },
+  {
+   "path": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Rude 160bpm Emin/Stems/Ghosthack-HS3_Rude_Rhythm Guitar_160bpm.wav",
+   "moment": "special-wanderer",
+   "role": "rhythm guitar",
+   "trim_head_s": 0.186,
+   "bars": 15,
+   "cut_s": 22.686
+  }
+ ]
+}

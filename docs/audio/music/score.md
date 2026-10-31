@@ -93,6 +93,7 @@ Why: tempo follows the plan's ramp (100-115 heavy, 125-140 driving, 147-156 rele
 - **Shared kit:** special-colossus shares Titan with the colossus Training motif (plan). First draft keeps the plan's pairing; split only if play shows the clash.
 - **Night fill:** night-09: Consume 155bpm Dmin (155 BPM): borrowed from outside the tempo band. Band 125-140 fragments by key (four single-kit keys), so two nights borrow.
 - **Night fill:** night-10: Binary 150bpm Bmin (150 BPM): borrowed from outside the tempo band. Band 125-140 fragments by key (four single-kit keys), so two nights borrow.
+- **Borrow flags (MU-8):** both borrowed kits carry `"borrow": true` in score.json; the checker reports them as INFO, not mistakes. Jerry's ear judges them at the listen page (step 6) — if a borrow jars, its night falls back to its in-band kit alone.
 - **No lead/synth layer loop:** Tremor 150bpm Fmin — their peak layer must borrow the kit's fx stems or stay at rhythm (maker's call, step 4). All other night kits loop a lead or synth.
 - **Anomaly tempo reads:** only 35/281 Anomaly files agree with their named tempo (beatless material; MU-3 `tempo_conf` median 0.57). Place beds loop on duration, not bars — the maker should loop the longest DRY stems by ear-free crossfade, not the bar grid.
 - **Wet tails:** 21 kits (mostly Anomaly) have stems off the bar (MU-3 list); WET variants are excluded from loop picks wherever a DRY twin exists.

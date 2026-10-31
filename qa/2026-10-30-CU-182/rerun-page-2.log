@@ -1,0 +1,11 @@
+GRANT cursor CU-182: starting one game-test command
+check-players: 309 player.position reads, all in the allowed places
+FAIL  t178     7 pass   1 fail  49.8s
+ok    t248    12 pass   0 fail  38.0s
+
+2 checks: 19 pass, 1 fail
+
+by owner:
+  unassigned
+    t178   1 fail  FAIL back up the tunnel: the calm again (dayfight, 5 dead up)
+           FAIL back up the tunnel: the calm again (dayfight, 5 dead up)

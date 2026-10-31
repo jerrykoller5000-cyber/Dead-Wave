@@ -1,0 +1,9 @@
+@echo off
+cd /d "C:\Users\Zero\Desktop\Tiny Trek"
+copy /y "C:\Users\Zero\Desktop\Tiny Trek\qa\2026-10-30-GB-249c\tgbprobe111b.js" "C:\Users\Zero\Desktop\Tiny Trek\tools\tests\tgbprobe111b.js" >nul
+node crew/crew.mjs slot run grokbot GB-249 --checks "GB-249 follow-up run 2: edited t111 (head read as headSurface reads it), test page, run A" --minutes 15 -- node tools/tests/run-all.mjs t111 --jobs 1 --all-fails --no-retry --agent grokbot --task GB-249 > "C:\Users\Zero\Desktop\Tiny Trek\qa\2026-10-30-GB-249c\page-t111-A.log" 2>&1
+node crew/crew.mjs slot run grokbot GB-249 --checks "GB-249 follow-up run 2: edited t111, test page, run B" --minutes 15 -- node tools/tests/run-all.mjs t111 --jobs 1 --all-fails --no-retry --agent grokbot --task GB-249 > "C:\Users\Zero\Desktop\Tiny Trek\qa\2026-10-30-GB-249c\page-t111-B.log" 2>&1
+node crew/crew.mjs slot run grokbot GB-249 --checks "GB-249 follow-up probe 2: why roundInfoDbg('head') misses a still head (temporary tgbprobe111b, lines print as FAIL PROBE), test page" --minutes 15 -- node tools/tests/run-all.mjs tgbprobe111b --jobs 1 --all-fails --no-retry --agent grokbot --task GB-249 > "C:\Users\Zero\Desktop\Tiny Trek\qa\2026-10-30-GB-249c\page-probe2.log" 2>&1
+node crew/crew.mjs slot run grokbot GB-249 --checks "GB-249 follow-up run 2: edited t111 plus probe 2, real renderer" --minutes 30 -- node tools/realtest.mjs t111 tgbprobe111b --all > "C:\Users\Zero\Desktop\Tiny Trek\qa\2026-10-30-GB-249c\real-run2.log" 2>&1
+del "C:\Users\Zero\Desktop\Tiny Trek\tools\tests\tgbprobe111b.js"
+echo DONE > "C:\Users\Zero\Desktop\Tiny Trek\qa\2026-10-30-GB-249c\run2.done"

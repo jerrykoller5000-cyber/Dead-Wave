@@ -249,13 +249,17 @@ export async function launch({ headless = true, args = [] } = {}) {
     // CHROME_ARGS: extra flags for a box that needs them (a cloud container running as
     // root needs --no-sandbox, say). Space-separated.
     ...(process.env.CHROME_ARGS ? process.env.CHROME_ARGS.split(/\s+/).filter(Boolean) : []),
+    // CU-187: CHROME_JS_FLAGS is one --js-flags value, spaces kept (CHROME_ARGS splits on them): V8's own switches, e.g. '--trace-opt --trace-deopt'.
+    ...(process.env.CHROME_JS_FLAGS ? ['--js-flags=' + process.env.CHROME_JS_FLAGS] : []),
     ...args,
     'about:blank'
   ];
   let proc;
   let registered = false;
   try {
-    proc = spawn(exe, flags, { stdio: ['ignore', 'ignore', 'pipe'] });
+    // CU-187: CHROME_STDOUT_FILE sends the browser's (and, with --no-sandbox, its renderers') stdout to a file: where V8's --trace-opt writes.
+    const outFd = process.env.CHROME_STDOUT_FILE ? fs.openSync(process.env.CHROME_STDOUT_FILE, 'w') : 'ignore';
+    proc = spawn(exe, flags, { stdio: ['ignore', outFd, 'pipe'] });
     await new Promise((resolve, reject) => {
       proc.once('spawn', resolve);
       proc.once('error', reject);

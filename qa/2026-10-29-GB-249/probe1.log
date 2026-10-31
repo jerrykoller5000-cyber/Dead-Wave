@@ -1,0 +1,22 @@
+Game-test request e344f5ae-cc4b-4985-9d87-a776cb30a10b queued at position 2. Waiting...
+GRANT grokbot GB-249: starting one game-test command
+page: index.html (3664766 bytes) served as /index.html
+ok    qa/2026-10-29-GB-249/probe.js    0 pass   0 fail  26.8s  (real renderer, index.html)
+    three undefined
+    shambler rootY -3.169 rootScale 1.066 headWorldY-root 1.738 hitH 2.063
+    (a) sources under head: 3770 v, 1.540..1.983
+    skin zombie-skin bindMode attached bones 32 headBones 4:Group parentIsRoot true visible true
+    verts 3551 bind 1.540..1.983 getVP 4.722..5.195 hand 4.722..5.195
+    colossus rootY -3.169 rootScale 1.000 headWorldY-root 3.852 hitH 4.715
+    (a) sources under head: 3314 v, 3.457..4.341
+    skin zombie-skin bindMode attached bones 32 headBones 4:Group parentIsRoot true visible true
+    verts 3047 bind 3.470..4.341 getVP 8.420..9.291 hand 8.420..9.291
+    demon rootY -3.169 rootScale 0.937 headWorldY-root 2.378 hitH 3.207
+    (a) sources under head: 3278 v, 2.124..3.090
+    skin zombie-skin bindMode attached bones 32 headBones 4:Group parentIsRoot true visible true
+    verts 3088 bind 2.173..3.090 getVP 5.189..6.048 hand 5.189..6.048
+    feral rootY -3.169 rootScale 1.045 headWorldY-root 1.296 hitH 1.583
+    (a) sources under head: 3770 v, 1.106..1.513
+    skin zombie-skin bindMode attached bones 32 headBones 4:Group parentIsRoot true visible true
+    verts 3406 bind 1.106..1.513 getVP -2.156..-1.730 hand -2.156..-1.730
+1 checks: 0 pass, 0 fail (real renderer, index.html)

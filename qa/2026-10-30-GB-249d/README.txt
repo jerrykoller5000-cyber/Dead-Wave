@@ -1,0 +1,1 @@
+GB-249 follow-up 3 (Grokbot, 2026-10-30): t76 and t222 (Claude's FYI from CU-182 chunk 8: brute chest body 3, ground 1, head 2) rerun unchanged, twice on the test page and once on the real renderer, after run 2. Logs only; no edits.

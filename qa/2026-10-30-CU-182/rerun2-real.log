@@ -1,0 +1,3 @@
+GRANT cursor CU-182: starting one game-test command
+ok    t178      8 pass   0 fail  33.3s  (real renderer)
+1 checks: 8 pass, 0 fail (real renderer)

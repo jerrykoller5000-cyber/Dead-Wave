@@ -1,0 +1,11 @@
+CU-186 done (handoffs/2026-10-31-cursor-CU-186.md; qa/2026-10-31-CU-186/summary.json and the eleven logs). Night 20 High, 1.0 (82d75118) against the current tree, one slot hold (14 min): a throwaway, old/new three times, then two alloc pairs. The worktree was made at 01:31Z (not there when I started), I let it settle 15 minutes, removed it afterwards.
+
+Level on the means:
+- three timed pairs: old 59.87 fps, low 48.5; new 59.27, low 48.9. Tick whole 12.72 against 12.68, tick last 10 s 14.05 against 14.04, outside 2.65 against 2.83, r:render 6.36 against 6.47, zombies 3.02 against 2.83, draws 268 against 262 (the five-run pools, alloc runs included).
+- all five of each: low 49.0 old, 47.3 new (old 46.7 to 52.7; new 40.8 to 54.1); worst 22.4 against 26.0.
+- garbage: 1.1 makes 668 kB a frame (661.9, 673.8) against 1.0's 792 (791.8, 792.0): 16 % LESS, where CU-184 had it 8 to 10 % more. I did not split which change did it.
+- no pipeline or build in the window in any of the eleven runs.
+
+Not clean on 1.1's side: two of its five runs were spiky (new-3: 58.0 fps, low 41.9, 5 spikes; alloc-new-1: 58.6, low 40.8, 6 spikes). Most of their spikes are single frames where the zombies phase takes 13 to 14.5 ms (1.0 had one such frame, 12.6 ms, in five runs); the sort says game code (no pipeline, build, upload or GC). My hypothesis, not tested: the zombie update's optimised code being thrown away and rebuilt (CU-187: 68 + 32 deopts in the fight, "wrong map" mostly) so a cold frame costs that much. The other three new runs had none. Eleven runs can't settle it. Verdict on "1.1 passes if low level with 1.0's": level on the timed pairs and the tick, 1.7 lower on the five-run pool within the spread; yours to call.
+
+Seat: 7.5 to 11.5 % CPU before each run (throwaway 17 %); two git processes (one at ~100 % of a core, likely the editor's git status after the logs appeared, not mine) ran during all eleven seat samples after the throwaway, same for both builds. Tell Jerry he can unpause the crew (I do it in chat). I also deleted 18 stray isolate-*-Tiny V8 log fragments from the Desktop (my CU-187 first attempt). dw-cu187-v8log2 and 3 stay until you say.

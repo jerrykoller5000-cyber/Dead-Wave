@@ -1,0 +1,10 @@
+@echo off
+cd /d "C:\Users\Zero\Desktop\Tiny Trek"
+node crew/crew.mjs slot run grokbot GB-249 --checks "GB-249 ruling (a): t111 and t222 aim on a clear head frame, test page, run A" --minutes 20 -- node tools/tests/run-all.mjs t111 t222 --jobs 1 --all-fails --no-retry --agent grokbot --task GB-249 > "C:\Users\Zero\Desktop\Tiny Trek\qa\2026-10-30-GB-249e\page-A.log" 2>&1
+node crew/crew.mjs slot run grokbot GB-249 --checks "GB-249 ruling (a): t111 and t222 aim on a clear head frame, test page, run B" --minutes 20 -- node tools/tests/run-all.mjs t111 t222 --jobs 1 --all-fails --no-retry --agent grokbot --task GB-249 > "C:\Users\Zero\Desktop\Tiny Trek\qa\2026-10-30-GB-249e\page-B.log" 2>&1
+node crew/crew.mjs slot run grokbot GB-249 --checks "GB-249 ruling (a): t111 alone on a clear head frame, real renderer, run 1" --minutes 20 -- node tools/realtest.mjs t111 --all > "C:\Users\Zero\Desktop\Tiny Trek\qa\2026-10-30-GB-249e\real-t111-1.log" 2>&1
+node crew/crew.mjs slot run grokbot GB-249 --checks "GB-249 ruling (a): t111 alone on a clear head frame, real renderer, run 2" --minutes 20 -- node tools/realtest.mjs t111 --all > "C:\Users\Zero\Desktop\Tiny Trek\qa\2026-10-30-GB-249e\real-t111-2.log" 2>&1
+node crew/crew.mjs slot run grokbot GB-249 --checks "GB-249 ruling (a): t222 alone (gold X on a clear frame; chest strays), real renderer, run 1 of 3" --minutes 20 -- node tools/realtest.mjs t222 --all > "C:\Users\Zero\Desktop\Tiny Trek\qa\2026-10-30-GB-249e\real-t222-1.log" 2>&1
+node crew/crew.mjs slot run grokbot GB-249 --checks "GB-249 ruling (a): t222 alone (gold X on a clear frame; chest strays), real renderer, run 2 of 3" --minutes 20 -- node tools/realtest.mjs t222 --all > "C:\Users\Zero\Desktop\Tiny Trek\qa\2026-10-30-GB-249e\real-t222-2.log" 2>&1
+node crew/crew.mjs slot run grokbot GB-249 --checks "GB-249 ruling (a): t222 alone (gold X on a clear frame; chest strays), real renderer, run 3 of 3" --minutes 20 -- node tools/realtest.mjs t222 --all > "C:\Users\Zero\Desktop\Tiny Trek\qa\2026-10-30-GB-249e\real-t222-3.log" 2>&1
+echo DONE > "C:\Users\Zero\Desktop\Tiny Trek\qa\2026-10-30-GB-249e\run.done"

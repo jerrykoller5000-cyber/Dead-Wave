@@ -1,0 +1,18 @@
+Game-test request 65e96bdc-3696-492c-ae23-8738b878127f queued at position 2. Waiting...
+GRANT cursor CU-182: starting one game-test command
+swap-run: tools/tests/fakethree.mjs is the CU-181 "before" for this run
+check-players: 309 player.position reads, all in the allowed places
+ok    t76     16 pass   0 fail  56.0s
+           INFO feral head centre p10 0.736, median 0.808 of hitH (line 0.7)
+           INFO leaper head centre p10 0.612, median 0.631 of hitH (line 0.55)
+           INFO spider head centre p10 0.607, median 0.661 of hitH (line 0.6)
+ok    t111    11 pass   0 fail  48.5s
+FAIL  t178     7 pass   1 fail  51.8s
+
+3 checks: 34 pass, 1 fail
+
+by owner:
+  unassigned
+    t178   1 fail  FAIL back up the tunnel: the calm again (dayfight)
+           FAIL back up the tunnel: the calm again (dayfight)
+swap-run: the new fakethree.mjs is back (61058 bytes)

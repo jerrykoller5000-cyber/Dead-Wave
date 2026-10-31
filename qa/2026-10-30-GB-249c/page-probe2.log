@@ -1,0 +1,30 @@
+Game-test request 249397c2-7707-4d84-93bb-8bad894a9222 queued at position 2. Waiting...
+GRANT grokbot GB-249: starting one game-test command
+check-players: 309 player.position reads, all in the allowed places
+FAIL  tgbprobe111b   0 pass  20 fail  71.9s
+
+1 checks: 0 pass, 20 fail
+
+by owner:
+  unassigned
+    tgbprobe111b 20 fail  FAIL PROBE feral: hook headHit 16/16
+           FAIL PROBE feral: hook headHit 16/16
+           FAIL PROBE leaper miss #3 state undefined idle na anim 4.807 headScale na root vis true collapsed false partsLost {"armL":false,"armR":false,"legL":false,"legR":false,"head":false}
+           FAIL PROBE   box y -2.586..-2.218 x -1.092..-0.779 z 22.116..22.409 dir -0.033,0.999 root world -0.934,-2.420,22.266
+           FAIL PROBE   centre shot: hit t 0.387 head false point -0.912,-2.402,21.583 head-local 0.082,-0.103,-0.687 (OUTSIDE head box: body in front?)
+           FAIL PROBE   arms rx L -1.350 R -1.350 torso 0.325 head -1.100 head ry 0.000
+           FAIL PROBE   grid (k -0.6..0.6 of hh, per side offset): sk-0.6:Hbbbbbb sk-0.3:bbbbbbb sk0:bbbbbbb sk0.3:bbbbbbb sk0.6:bbbbbbb
+           FAIL PROBE leaper miss #6 state undefined idle na anim 4.807 headScale na root vis true collapsed false partsLost {"armL":false,"armR":false,"legL":false,"legR":false,"head":false}
+           FAIL PROBE   box y -2.541..-2.172 x 7.302..7.619 z 21.876..22.192 dir 0.258,0.966 root world 7.453,-2.375,22.040
+           FAIL PROBE   centre shot: hit t 0.429 head false point 7.351,-2.357,21.621 head-local -0.379,-0.022,-0.227 (OUTSIDE head box: body in front?)
+           FAIL PROBE   arms rx L -1.350 R -1.350 torso 0.325 head -1.100 head ry 0.000
+           FAIL PROBE   grid (k -0.6..0.6 of hh, per side offset): sk-0.6:bbbbbbb sk-0.3:bbbbbbb sk0:bbbbbbb sk0.3:bbbbbbb sk0.6:HHHHHHH
+           FAIL PROBE leaper miss #9 state undefined idle na anim 4.807 headScale na root vis true collapsed false partsLost {"armL":false,"armR":false,"legL":false,"legR":false,"head":false}
+           FAIL PROBE   box y -2.549..-2.181 x -7.849..-7.546 z 21.643..21.940 dir -0.227,0.974 root world -7.711,-2.383,21.794
+           FAIL PROBE   centre shot: hit t 0.428 head false point -7.599,-2.365,21.371 head-local -0.356,-0.029,-0.269 (OUTSIDE head box: body in front?)
+           FAIL PROBE   arms rx L -1.350 R -1.350 torso 0.325 head -1.100 head ry 0.000
+           FAIL PROBE   grid (k -0.6..0.6 of hh, per side offset): sk-0.6:.Hbbbbb sk-0.3:bbbbbbb sk0:bbbbbbb sk0.3:bbbbbbb sk0.6:bbbbbbb
+           FAIL PROBE leaper: hook headHit 13/16
+           FAIL PROBE spider: hook headHit 16/16
+           FAIL PROBE shambler: hook headHit 16/16
+           FAIL PROBE brute: hook headHit 16/16

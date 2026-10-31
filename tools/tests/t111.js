@@ -13,17 +13,21 @@
     let k = 0;
     const fresh = (type) => { const z = T.spawnZombie(P.x - 10 + (k++ % 8) * 3, P.z + 30, type, true, true); z.riseT = 0; z.hp = z.maxHp = 1e6; z.speed = z.baseSpeed = 0; return z; };
     // Chance is held high for the shot, so no random limb or head comes off: each shot is judged on its hit line alone.
-    const at = (type, frac) => { const z = fresh(type); const h0 = z.hp; const rnd = Math.random; Math.random = () => 0.999; try { T.damageZombie(z, 20, { kind: 'bullet', dir: { x: 0, z: 1 }, ...T.roundInfoDbg(z, frac === 'head' ? 'head' : z.mesh.position.y + z.hitH * frac) }); } finally { Math.random = rnd; } const d = h0 - z.hp; T.clearZombies(); return d; };
+    // GB-249 (Claude's ruling (a), 2026-10-30): an arm in front of the face takes the round, as in 1.0 (the round's own ray decides, GB-185). So a head round
+    // is fired on the first frame of the fresh zombie's anim (stepped on game time, cap 3 s) where roundInfoDbg finds its head clear; no clear frame is a FAIL,
+    // never an empty pass. The INFO line counts the blocked checks, so an anim that hides the face for good shows up.
+    const at = async (type, frac) => { const z = fresh(type); const h0 = z.hp; let ri = null; if (frac === 'head') { let blocked = 0, seen = 0; const s0 = T.getSimTime(), w0 = Date.now(); for (;;) { const r = T.roundInfoDbg(z, 'head'); seen++; if (r.headHit) { ri = r; break; } blocked++; if (T.getSimTime() - s0 > 3 || Date.now() - w0 > 60000) break; await wait(30); } out.push('INFO ' + type + ' head round: ' + blocked + ' of ' + seen + ' checks blocked before a clear frame (' + (T.getSimTime() - s0).toFixed(2) + ' s of game time)'); if (!ri) { out.push('FAIL ' + type + ': no frame in 3 s of game time where a round at its head centre reaches the head (' + blocked + ' blocked)'); T.clearZombies(); return 0; } } const rnd = Math.random; Math.random = () => 0.999; try { T.damageZombie(z, 20, { kind: 'bullet', dir: { x: 0, z: 1 }, ...(ri || T.roundInfoDbg(z, z.mesh.position.y + z.hitH * frac)) }); } finally { Math.random = rnd; } const d = h0 - z.hp; T.clearZombies(); return d; };
     // GB-185: since GP-19885 the round's own ray decides a headshot (confirmedHead), not a height line: a round
     // through its head is a headshot, one through its chest a body hit.
-    const b50 = at('brute', 0.5), b40 = at('brute', 0.4), bH = at('brute', 'head'), bH2 = at('brute', 'head');
+    const b50 = await at('brute', 0.5), b40 = await at('brute', 0.4), bH = await at('brute', 'head'), bH2 = await at('brute', 'head');
     ok(Math.abs(b40 - b50) < 1e-6, 'a brute hit in the chest is a body hit: ' + b40.toFixed(2) + ' vs ' + b50.toFixed(2));
     // A headshot at full health can also take the head off (damage 999999, by chance), so each shot is judged on its own.
     ok(bH > b50 * 1.5 && bH2 > b50 * 1.5, 'a round through its head is a headshot: ' + bH.toFixed(2) + ', ' + bH2.toFixed(2) + ' (body ' + b50.toFixed(2) + ')');
-    const s50 = at('shambler', 0.5), s40 = at('shambler', 0.4), sH = at('shambler', 'head');
+    const s50 = await at('shambler', 0.5), s40 = await at('shambler', 0.4), sH = await at('shambler', 'head');
     ok(Math.abs(s40 - s50) < 1e-6 && sH > s50 * 1.5, 'a shambler: chest a body hit (' + s40.toFixed(2) + '), its head a headshot (' + sH.toFixed(2) + ')');
     T.clearZombies();
     // Where a walking brute's head really is: the centre of its head, sampled while it walks at him.
+    // GB-249 (2026-10-30): the head is read as the game reads it (headSurface): its rigid meshes and skin sources, which the real renderer hides behind the skinned mesh it draws.
     const zs = [0, 1, 2].map((i) => { const z = T.spawnZombie(P.x - 6 + i * 6, P.z + 35, 'brute', true, true); z.riseT = 0; z.hp = z.maxHp = 1e6; return z; });
     const mids = [];
     for (let t = 0; t < 20; t++) {
@@ -32,7 +36,7 @@
         if (!z.alive || !z.mesh.userData.head) continue;
         z.mesh.updateMatrixWorld(true);
         let lo = Infinity, hi = -Infinity;
-        z.mesh.userData.head.traverse((m) => { const pa = m.isMesh && m.visible !== false && m.geometry && m.geometry.attributes && m.geometry.attributes.position; if (!pa) return; const e = m.matrixWorld.elements, arr = pa.array, st = pa.itemSize || 3; for (let i = 0; i < pa.count; i++) { const y = e[1] * arr[i * st] + e[5] * arr[i * st + 1] + e[9] * arr[i * st + 2] + e[13]; if (y < lo) lo = y; if (y > hi) hi = y; } });
+        z.mesh.userData.head.traverse((m) => { const pa = m.isMesh && !m.isSkinnedMesh && !m.userData.stump && (m.userData.skinSrc || m.visible !== false) && m.geometry && m.geometry.attributes && m.geometry.attributes.position; if (!pa) return; const e = m.matrixWorld.elements, arr = pa.array, st = pa.itemSize || 3; for (let i = 0; i < pa.count; i++) { const y = e[1] * arr[i * st] + e[5] * arr[i * st + 1] + e[9] * arr[i * st + 2] + e[13]; if (y < lo) lo = y; if (y > hi) hi = y; } });
         mids.push(((lo + hi) / 2 - z.mesh.position.y) / z.hitH);
       }
     }
@@ -43,7 +47,7 @@
     // Feral 0.70, leaper 0.55, spider 0.60 (Claude): just under the line is a body hit, just over is a head,
     // and the head's centre, sampled while they come at him, sits above the line.
     for (const [type, line] of [['feral', 0.70], ['leaper', 0.55], ['spider', 0.60]]) {
-      const chest = at(type, line - 0.15), hi = at(type, 'head');
+      const chest = await at(type, line - 0.15), hi = await at(type, 'head');
       ok(hi > chest * 1.5, type + ': a round through its head is a headshot (' + hi.toFixed(2) + ' vs chest ' + chest.toFixed(2) + ')');
       const ws = [0, 1, 2].map((i) => { const z = T.spawnZombie(P.x - 6 + i * 6, P.z + 35, type, true, true); z.riseT = 0; z.hp = z.maxHp = 1e6; return z; });
       const hm = [];
@@ -53,7 +57,7 @@
           if (!z.alive || !z.mesh.userData.head || z.leapT > 0) continue;
           z.mesh.updateMatrixWorld(true);
           let a = Infinity, b = -Infinity;
-          z.mesh.userData.head.traverse((m) => { const pa = m.isMesh && m.visible !== false && m.geometry && m.geometry.attributes && m.geometry.attributes.position; if (!pa) return; const e = m.matrixWorld.elements, arr = pa.array, st = pa.itemSize || 3; for (let i = 0; i < pa.count; i++) { const y = e[1] * arr[i * st] + e[5] * arr[i * st + 1] + e[9] * arr[i * st + 2] + e[13]; if (y < a) a = y; if (y > b) b = y; } });
+          z.mesh.userData.head.traverse((m) => { const pa = m.isMesh && !m.isSkinnedMesh && !m.userData.stump && (m.userData.skinSrc || m.visible !== false) && m.geometry && m.geometry.attributes && m.geometry.attributes.position; if (!pa) return; const e = m.matrixWorld.elements, arr = pa.array, st = pa.itemSize || 3; for (let i = 0; i < pa.count; i++) { const y = e[1] * arr[i * st] + e[5] * arr[i * st + 1] + e[9] * arr[i * st + 2] + e[13]; if (y < a) a = y; if (y > b) b = y; } });
           hm.push(((a + b) / 2 - z.mesh.position.y) / z.hitH);
         }
       }

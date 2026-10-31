@@ -1,0 +1,32 @@
+Game-test request dad4d40f-7ce3-421c-94f2-2c0278db9dbc queued at position 2. Waiting...
+GRANT cursor CU-188: starting one game-test command
+check-players: 309 player.position reads, all in the allowed places
+ok    t197     7 pass   0 fail  40.2s
+ok    t198    17 pass   0 fail  54.8s
+ok    t199    10 pass   0 fail  49.2s
+ok    t200     7 pass   0 fail  38.4s
+ok    t201    18 pass   0 fail  57.4s
+ok    t202    12 pass   0 fail  36.3s
+ok    t203    12 pass   0 fail  39.1s
+ok    t204    48 pass   0 fail  62.7s
+ok    t205    13 pass   0 fail  57.6s
+ok    t206    19 pass   0 fail  56.5s
+ok    t207    20 pass   0 fail  42.0s
+ok    t208    10 pass   0 fail  63.7s
+ok    t209    13 pass   0 fail  46.5s
+ok    t210     9 pass   0 fail  41.6s
+           INFO aimed at a zombie 16 m out, it hits it: 70 damage from 19 rounds (zombie 15.21 m)
+ok    t211    25 pass   0 fail  58.8s
+ok    t212    18 pass   0 fail  41.0s
+ok    t213    22 pass   0 fail  70.0s
+ok    t214    29 pass   0 fail  65.2s
+ok    t215     4 pass   0 fail  40.5s
+           INFO angular acceleration, rad/s^2: walk 222, run 787, jump 779, walk2 866, stop 571
+ok    t216    22 pass   0 fail  47.6s
+ok    t217    55 pass   0 fail  24.8s
+ok    t218    21 pass   0 fail  119.5s
+ok    t219    22 pass   0 fail  28.1s
+ok    t220    16 pass   0 fail  59.2s
+ok    t221    27 pass   0 fail  57.7s
+
+25 checks: 476 pass, 0 fail

@@ -168,5 +168,5 @@ export function createObjectives(initialRunId) {
     runId=blob.runId;revealed=blob.revealed;sites=next;sequence++;active=false;reachable.clear();damageRevision=null;
     return true;
   }
-  return {reset,update,beginClaim,settleClaim,restock,setRadioDay,beginRadioCall,snapshot,save,restore};
+  return {reset,update,beginClaim,settleClaim,restock,setRadioDay,beginRadioCall,snapshot,revision:()=>sequence,save,restore};
 }

@@ -1,0 +1,372 @@
+[
+  {
+    "name": "throwaway-new",
+    "code": 0,
+    "cpuBefore": 15.7,
+    "loadBefore": 70,
+    "fps": 52.1,
+    "low": 36.1,
+    "worst": 31.9,
+    "hitches": 0,
+    "tick": 15.5,
+    "frameMs": 19.19,
+    "outside": 3.69,
+    "gpuMs": 0.25,
+    "draws": 289,
+    "triangles": 697473,
+    "zombies": 48,
+    "builds": 0,
+    "pipelines": 0,
+    "spikeCauses": {
+      "spikes": 27,
+      "pipelines": 0,
+      "builds": 0,
+      "uploads": 2,
+      "sunShadow": 0,
+      "gc": 2,
+      "code": 23
+    },
+    "render": 7.23,
+    "zombieMark": 2.78,
+    "matrices": 1.7,
+    "cull": 0.64,
+    "top": [
+      {
+        "k": "r:render",
+        "avg": 7.23,
+        "max": 27.2
+      },
+      {
+        "k": "zombies",
+        "avg": 2.78,
+        "max": 15.5
+      },
+      {
+        "k": "r:matrices",
+        "avg": 1.7,
+        "max": 6.1
+      },
+      {
+        "k": "m:hold",
+        "avg": 0.64,
+        "max": 2.4
+      },
+      {
+        "k": "r:cull",
+        "avg": 0.64,
+        "max": 2.2
+      },
+      {
+        "k": "m:pose",
+        "avg": 0.52,
+        "max": 1.6
+      },
+      {
+        "k": "hud+audio",
+        "avg": 0.26,
+        "max": 1.1
+      },
+      {
+        "k": "w:stairs+roof+birds+bugs+wildlife",
+        "avg": 0.21,
+        "max": 1.3
+      }
+    ]
+  },
+  {
+    "name": "old-1",
+    "code": 0,
+    "cpuBefore": 23.9,
+    "loadBefore": 87,
+    "fps": 57.5,
+    "low": 45.4,
+    "worst": 22.1,
+    "hitches": 0,
+    "tick": 14.9,
+    "frameMs": 17.39,
+    "outside": 2.49,
+    "gpuMs": 0.24,
+    "draws": 282,
+    "triangles": 715398,
+    "zombies": 48,
+    "builds": 0,
+    "pipelines": 0,
+    "spikeCauses": {
+      "spikes": 1,
+      "pipelines": 0,
+      "builds": 0,
+      "uploads": 1,
+      "sunShadow": 0,
+      "gc": 0,
+      "code": 0
+    },
+    "render": 7.06,
+    "zombieMark": 2.52,
+    "matrices": 1.87,
+    "cull": 0.49,
+    "top": [
+      {
+        "k": "r:render",
+        "avg": 7.06,
+        "max": 14
+      },
+      {
+        "k": "zombies",
+        "avg": 2.52,
+        "max": 8.7
+      },
+      {
+        "k": "r:matrices",
+        "avg": 1.87,
+        "max": 4.1
+      },
+      {
+        "k": "m:hold",
+        "avg": 0.58,
+        "max": 1.6
+      },
+      {
+        "k": "r:cull",
+        "avg": 0.49,
+        "max": 2.3
+      },
+      {
+        "k": "m:pose",
+        "avg": 0.49,
+        "max": 1
+      },
+      {
+        "k": "m:idle",
+        "avg": 0.24,
+        "max": 1.7
+      },
+      {
+        "k": "hud+audio",
+        "avg": 0.22,
+        "max": 0.9
+      }
+    ]
+  },
+  {
+    "name": "new-1",
+    "code": 0,
+    "cpuBefore": 13.8,
+    "loadBefore": 73,
+    "fps": 55.9,
+    "low": 39.5,
+    "worst": 21.1,
+    "hitches": 0,
+    "tick": 14.37,
+    "frameMs": 17.89,
+    "outside": 3.52,
+    "gpuMs": 0.25,
+    "draws": 273,
+    "triangles": 728106,
+    "zombies": 48,
+    "builds": 0,
+    "pipelines": 0,
+    "spikeCauses": {
+      "spikes": 6,
+      "pipelines": 0,
+      "builds": 0,
+      "uploads": 0,
+      "sunShadow": 0,
+      "gc": 1,
+      "code": 5
+    },
+    "render": 6.9,
+    "zombieMark": 2.32,
+    "matrices": 1.62,
+    "cull": 0.56,
+    "top": [
+      {
+        "k": "r:render",
+        "avg": 6.9,
+        "max": 18.5
+      },
+      {
+        "k": "zombies",
+        "avg": 2.32,
+        "max": 10.8
+      },
+      {
+        "k": "r:matrices",
+        "avg": 1.62,
+        "max": 4.4
+      },
+      {
+        "k": "r:cull",
+        "avg": 0.56,
+        "max": 1.9
+      },
+      {
+        "k": "m:pose",
+        "avg": 0.51,
+        "max": 2.5
+      },
+      {
+        "k": "m:hold",
+        "avg": 0.5,
+        "max": 1.3
+      },
+      {
+        "k": "hud+audio",
+        "avg": 0.25,
+        "max": 1.1
+      },
+      {
+        "k": "drops+hud",
+        "avg": 0.2,
+        "max": 1
+      }
+    ]
+  },
+  {
+    "name": "old-2",
+    "code": 0,
+    "cpuBefore": 14.9,
+    "loadBefore": 44,
+    "fps": 59.8,
+    "low": 49.1,
+    "worst": 17.6,
+    "hitches": 0,
+    "tick": 14.17,
+    "frameMs": 16.72,
+    "outside": 2.55,
+    "gpuMs": 0.23,
+    "draws": 248,
+    "triangles": 657004,
+    "zombies": 48,
+    "builds": 0,
+    "pipelines": 0,
+    "spikeCauses": {
+      "spikes": 2,
+      "pipelines": 0,
+      "builds": 0,
+      "uploads": 0,
+      "sunShadow": 0,
+      "gc": 2,
+      "code": 0
+    },
+    "render": 6.77,
+    "zombieMark": 2.26,
+    "matrices": 1.76,
+    "cull": 0.49,
+    "top": [
+      {
+        "k": "r:render",
+        "avg": 6.77,
+        "max": 26.4
+      },
+      {
+        "k": "zombies",
+        "avg": 2.26,
+        "max": 8.7
+      },
+      {
+        "k": "r:matrices",
+        "avg": 1.76,
+        "max": 4.1
+      },
+      {
+        "k": "m:hold",
+        "avg": 0.52,
+        "max": 1.5
+      },
+      {
+        "k": "m:pose",
+        "avg": 0.51,
+        "max": 1.1
+      },
+      {
+        "k": "r:cull",
+        "avg": 0.49,
+        "max": 1.7
+      },
+      {
+        "k": "hud+audio",
+        "avg": 0.22,
+        "max": 3.1
+      },
+      {
+        "k": "w:stairs+roof+birds+bugs+wildlife",
+        "avg": 0.22,
+        "max": 1
+      }
+    ]
+  },
+  {
+    "name": "new-2",
+    "code": 0,
+    "cpuBefore": 8.9,
+    "loadBefore": 31,
+    "fps": 58.1,
+    "low": 39.8,
+    "worst": 18.3,
+    "hitches": 0,
+    "tick": 13.19,
+    "frameMs": 17.21,
+    "outside": 4.02,
+    "gpuMs": 0.25,
+    "draws": 299,
+    "triangles": 767288,
+    "zombies": 48,
+    "builds": 0,
+    "pipelines": 0,
+    "spikeCauses": {
+      "spikes": 5,
+      "pipelines": 0,
+      "builds": 0,
+      "uploads": 0,
+      "sunShadow": 0,
+      "gc": 1,
+      "code": 4
+    },
+    "render": 6.1,
+    "zombieMark": 2.25,
+    "matrices": 1.38,
+    "cull": 0.54,
+    "top": [
+      {
+        "k": "r:render",
+        "avg": 6.1,
+        "max": 20.8
+      },
+      {
+        "k": "zombies",
+        "avg": 2.25,
+        "max": 7.8
+      },
+      {
+        "k": "r:matrices",
+        "avg": 1.38,
+        "max": 7.3
+      },
+      {
+        "k": "m:hold",
+        "avg": 0.58,
+        "max": 1.8
+      },
+      {
+        "k": "r:cull",
+        "avg": 0.54,
+        "max": 2.2
+      },
+      {
+        "k": "m:pose",
+        "avg": 0.51,
+        "max": 1.8
+      },
+      {
+        "k": "hud+audio",
+        "avg": 0.23,
+        "max": 5.7
+      },
+      {
+        "k": "m:idle",
+        "avg": 0.21,
+        "max": 2
+      }
+    ]
+  }
+]

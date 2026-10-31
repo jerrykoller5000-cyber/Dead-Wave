@@ -1,0 +1,38 @@
+GRANT cursor CU-182: starting one game-test command
+check-players: 309 player.position reads, all in the allowed places
+info  t22      0 pass   0 fail  62.0s  — builds box 22,76 / -10,46 barrels before 6 after 12
+ok    t23      8 pass   0 fail  96.5s
+ok    t24     14 pass   0 fail  61.2s
+ok    t25     29 pass   0 fail  55.0s
+info  t26      0 pass   0 fail  63.6s  — pieces 692 failed: 
+info  t27      0 pass   0 fail  69.9s  — EMPTY WORLD visible meshes: 3689
+info  t28      0 pass   0 fail  35.8s  — shambler total 14: hips:1m/1mat torso:1m/1mat armL:1m/1mat Group:1m/1mat armR:1m/1mat Grou
+ok    t29     12 pass   0 fail  40.6s
+info  t30      0 pass   0 fail  38.2s  — turret at 4.0,-12.0 y -3.17
+ok    t31     26 pass   0 fail  38.5s
+info  t32      0 pass   0 fail  72.9s  — road pieces: wall/door@-38.0 wall/door@-24.0 wire/gate@-20.0 barricade/gate@-18.0
+ok    t33      4 pass   0 fail  40.0s
+ok    t34     20 pass   0 fail  55.1s
+ok    t35     28 pass   0 fail  62.0s
+ok    t36     22 pass   0 fail  56.2s
+ok    t37     17 pass   0 fail  131.6s
+ok    t38     12 pass   0 fail  72.0s
+ok    t39     15 pass   0 fail  39.7s
+ok    t40      6 pass   0 fail  40.8s
+ok    t41      9 pass   0 fail  36.4s
+           INFO root mesh 191.4 trees 192.2 hill 196.7 | shale mesh 201.3 trees 201.9 hill 210.0 | iron mesh 196.6 trees 194.2 hill 202.3 | wet mesh 199.8 trees 194.4 hill 205.0 | hill mesh 199.4 trees 197.8 hill 205.8 | chalk mesh 200.6 trees 200.0 hill 208.0
+ok    t42     18 pass   0 fail  23.0s
+ok    t43     35 pass   0 fail  41.9s
+ok    t44      6 pass   0 fail  27.2s
+ok    t45      8 pass   0 fail  26.8s
+ok    t46     11 pass   0 fail  28.3s
+
+25 checks: 300 pass, 0 fail, 6 reported no assertions
+
+no assertions (probe, or the check bailed before asserting):
+  t22    builds box 22,76 / -10,46 barrels before 6 after 12
+  t26    pieces 692 failed: 
+  t27    EMPTY WORLD visible meshes: 3689
+  t28    shambler total 14: hips:1m/1mat torso:1m/1mat armL:1m/1mat Group:1m/1mat armR:1m/1mat Group:1m/1mat 
+  t30    turret at 4.0,-12.0 y -3.17
+  t32    road pieces: wall/door@-38.0 wall/door@-24.0 wire/gate@-20.0 barricade/gate@-18.0

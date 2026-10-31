@@ -1,0 +1,41 @@
+Game-test request 5366b128-3a63-47bb-a572-9f401069e631 queued at position 3. Waiting...
+GRANT cursor CU-178: starting one game-test command
+check-players: 309 player.position reads, all in the allowed places
+ok    t97     15 pass   0 fail  62.6s
+           INFO ragdoll off: 160 spawned, 160 alive at the end, 115 ticks, frame 170.84 ms avg / 727.80 ms worst (headless)
+           INFO ragdoll on: 160 spawned, 159 alive at the end, 103 ticks, frame 155.87 ms avg / 1137.60 ms worst (headless)
+ok    t98     20 pass   0 fail  96.0s
+           INFO 120 spawned, 120 alive after 115.3 s and 26 legs (650 ticks)
+ok    t99      6 pass   0 fail  165.6s
+ok    t100     7 pass   0 fail  47.8s
+ok    t101     9 pass   0 fail  46.1s
+ok    t102    17 pass   0 fail  55.6s
+ok    t103     8 pass   0 fail  46.8s
+ok    t104     5 pass   0 fail  47.4s
+ok    t105    15 pass   0 fail  62.3s
+ok    t106     9 pass   0 fail  124.6s
+ok    t107     8 pass   0 fail  47.6s
+ok    t108     9 pass   0 fail  47.7s
+ok    t109     5 pass   0 fail  46.6s
+ok    t110     4 pass   0 fail  45.5s
+           INFO feral head centre p10 0.730, median 0.791 of hitH (line 0.7)
+           INFO leaper head centre p10 0.634, median 0.645 of hitH (line 0.55)
+           INFO spider head centre p10 0.584, median 0.624 of hitH (line 0.6)
+ok    t111    11 pass   0 fail  60.1s
+FAIL  t112    12 pass   1 fail  55.7s
+ok    t113     5 pass   0 fail  80.8s
+ok    t114     8 pass   0 fail  47.6s
+ok    t115    10 pass   0 fail  46.3s
+ok    t116     7 pass   0 fail  64.4s
+ok    t117    17 pass   0 fail  51.7s
+ok    t119    20 pass   0 fail  47.9s
+ok    t120    11 pass   0 fail  48.4s
+ok    t121    31 pass   0 fail  27.9s
+ok    t122    14 pass   0 fail  47.0s
+
+25 checks: 283 pass, 1 fail
+
+by owner:
+  unassigned
+    t112   1 fail  FAIL its blow on the turret is 1.5x: 0 (a plain blow 6, damage 5)
+           FAIL its blow on the turret is 1.5x: 0 (a plain blow 6, damage 5)

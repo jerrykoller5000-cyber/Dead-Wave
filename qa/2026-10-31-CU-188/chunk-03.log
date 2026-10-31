@@ -1,0 +1,40 @@
+GRANT cursor CU-188: starting one game-test command
+check-players: 309 player.position reads, all in the allowed places
+ok    t71     16 pass   0 fail  59.5s
+ok    t72     21 pass   0 fail  60.3s
+ok    t73     12 pass   0 fail  54.1s
+ok    t74     18 pass   0 fail  48.7s
+ok    t75     16 pass   0 fail  44.3s
+FAIL  t76     15 pass   1 fail  48.4s
+ok    t77     17 pass   0 fail  48.4s
+ok    t78     18 pass   0 fail  38.0s
+ok    t79     12 pass   0 fail  58.8s
+FAIL  t80     13 pass   1 fail  146.9s
+           INFO the old drape (sampleHeight + 7 cm) went 0.37 m under the drawn bed at worst
+ok    t81      5 pass   0 fail  25.0s
+FAIL  t82      2 pass   2 fail  24.4s
+ok    t83     31 pass   0 fail  50.9s
+ok    t84     10 pass   0 fail  52.8s
+ok    t85     15 pass   0 fail  47.8s
+ok    t86     12 pass   0 fail  41.3s
+ok    t87     13 pass   0 fail  37.9s
+ok    t88     13 pass   0 fail  38.1s
+ok    t89     18 pass   0 fail  43.6s
+ok    t90      6 pass   0 fail  43.6s
+ok    t91      7 pass   0 fail  43.9s
+ok    t92      5 pass   0 fail  38.8s
+ok    t93     11 pass   0 fail  62.1s
+ok    t94      8 pass   0 fail  40.7s
+ok    t95      9 pass   0 fail  58.8s
+
+25 checks: 323 pass, 4 fail
+
+by owner:
+  unassigned
+    t76    1 fail  FAIL a walker walks (phase +2.6, idle 0.00)
+           FAIL a walker walks (phase +2.6, idle 0.00)
+    t80    1 fail  FAIL a spitter behind the house keeps creeping in (moved 6.9 m, 13.0 to 13.3 m)
+           FAIL a spitter behind the house keeps creeping in (moved 6.9 m, 13.0 to 13.3 m)
+    t82    2 fail  FAIL none over the pit once the schools have settled (2 s)
+           FAIL none over the pit once the schools have settled (2 s)
+           FAIL no fish over the pit in two minutes, even sent at it (240/3360, closest 13.4 m from the middle; clear is 13.5)

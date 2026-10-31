@@ -1,0 +1,29 @@
+GRANT cursor CU-188: starting one game-test command
+check-players: 309 player.position reads, all in the allowed places
+ok    t147    19 pass   0 fail  89.5s
+ok    t148    23 pass   0 fail  52.5s
+ok    t149    16 pass   0 fail  53.4s
+ok    t150    13 pass   0 fail  56.5s
+ok    t151     7 pass   0 fail  23.5s
+ok    t152    27 pass   0 fail  53.5s
+ok    t153    15 pass   0 fail  22.9s
+ok    t154     5 pass   0 fail  35.6s
+ok    t155     2 pass   0 fail  36.4s
+ok    t156    34 pass   0 fail  53.7s
+ok    t157     6 pass   0 fail  36.4s
+ok    t158    13 pass   0 fail  24.0s
+ok    t159    10 pass   0 fail  44.4s
+ok    t160    11 pass   0 fail  53.0s
+ok    t161     7 pass   0 fail  24.4s
+ok    t162    21 pass   0 fail  48.6s
+ok    t163    16 pass   0 fail  48.3s
+ok    t164    14 pass   0 fail  41.3s
+ok    t165    11 pass   0 fail  23.6s
+ok    t166    11 pass   0 fail  35.9s
+ok    t167    20 pass   0 fail  23.5s
+ok    t168    39 pass   0 fail  56.8s
+ok    t169     8 pass   0 fail  23.2s
+ok    t170    20 pass   0 fail  86.5s
+ok    t171    23 pass   0 fail  49.5s
+
+25 checks: 391 pass, 0 fail

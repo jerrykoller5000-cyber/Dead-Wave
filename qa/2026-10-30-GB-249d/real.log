@@ -1,0 +1,55 @@
+Game-test request d06a9cac-716e-47a8-84ef-4beb03860401 queued at position 2. Waiting...
+GRANT grokbot GB-249: starting one game-test command
+ok    t76      16 pass   0 fail  37.6s  (real renderer)
+    PASS guards asleep at their post (2)
+    PASS drawn close up, not the far LOD (false/false)
+    PASS sampled 80 frames
+    PASS each one sways (torso roll ranges 0.111/0.120)
+    PASS each one breathes (hips 19.1/23.4 mm)
+    PASS each one looks about (head turn ranges 1.07/0.44 rad)
+    PASS never in step: the closest pair differs by 0.036 rad on average
+    PASS own breathing rates (2.37/1.78)
+    PASS they hold the post (moved at most 0.11 m)
+    PASS shuffles a step: leg lift 0.35 rad, turn -0.22 rad
+    PASS and is still at its post
+    PASS a zombie held in the grace idles (amt 1.00, grace true)
+    PASS it stands instead of walking on the spot
+    PASS and looks about (0.08 rad)
+    PASS a walker walks (phase +6.1, idle 0.00)
+    PASS no page errors ()
+FAIL  t222      7 pass   2 fail  147.5s  (real renderer)
+    INFO shambler  head: head 6 | chest: body 6 | legs: legs 5, body 1
+    INFO feral     head: head 6 | chest: body 5, head 1 | legs: legs 6
+    INFO brute     head: head 6 | chest: body 3, miss 1, head 2 | legs: ground 1, legs 3, body 2
+    INFO spider    head: head 5, body 1 | chest: head 4, body 2 | legs: -
+    INFO leaper    head: head 6 | chest: body 4, head 2 | legs: -
+    INFO colossus at 90 deg 6 m: its head is covered by its own gear from the camera here (no head case)
+    INFO colossus at 90 deg 14 m: its head is covered by its own gear from the camera here (no head case)
+    INFO colossus  head: head 4 | chest: body 6 | legs: legs 5, body 1
+    PASS pointing at a head is a headshot: 33/34 (bar 90 %; was 17/64)
+    FAIL pointing at a chest lands in the body: body 20, head 3, miss 1 (bar 80 %, no miss; a head only where the head covers the chest from up here)
+    PASS pointing at the legs lands low: 19/24 (bar 60 %)
+    PASS no round aimed at a body goes into the ground or past it (2; bar 4)
+    PASS the reticle rings a head lined up, and not a chest (true, los-clear)
+    FAIL his round into the head flashes the gold X on the reticle (rgb(255, 255, 255))
+    PASS the ticks show the spread: pistol 7.0 px, shotgun 38.2 px
+    INFO pistol 8 m 3 m/s +: hit, lead 0.32 m (pace x flight 0.32) at 0.60 of its height
+    INFO pistol 8 m 3 m/s -: hit, lead -0.31 m (pace x flight -0.32) at 0.66 of its height
+    INFO pistol 8 m 6 m/s +: hit, lead 0.51 m (pace x flight 0.59) at 0.67 of its height
+    INFO pistol 8 m 6 m/s -: hit, lead -0.51 m (pace x flight -0.59) at 0.65 of its height
+    INFO pistol 18 m 3 m/s +: hit, lead 0.69 m (pace x flight 0.71) at 0.63 of its height
+    INFO pistol 18 m 3 m/s -: hit, lead -0.70 m (pace x flight -0.71) at 0.60 of its height
+    INFO pistol 18 m 6 m/s +: hit, lead 1.34 m (pace x flight 1.39) at 0.59 of its height
+    INFO pistol 18 m 6 m/s -: hit, lead -1.36 m (pace x flight -1.39) at 0.59 of its height
+    INFO m4 8 m 3 m/s +: hit, lead 0.23 m (pace x flight 0.23) at 0.65 of its height
+    INFO m4 8 m 3 m/s -: hit, lead -0.23 m (pace x flight -0.23) at 0.67 of its height
+    INFO m4 8 m 6 m/s +: hit, lead 0.39 m (pace x flight 0.42) at 0.59 of its height
+    INFO m4 8 m 6 m/s -: hit, lead -0.32 m (pace x flight -0.42) at 0.61 of its height
+    INFO m4 18 m 3 m/s +: hit, lead 0.48 m (pace x flight 0.52) at 0.60 of its height
+    INFO m4 18 m 3 m/s -: hit, lead -0.50 m (pace x flight -0.52) at 0.60 of its height
+    INFO m4 18 m 6 m/s +: hit, lead 0.93 m (pace x flight 1.02) at 0.62 of its height
+    INFO m4 18 m 6 m/s -: hit, lead -0.98 m (pace x flight -1.02) at 0.59 of its height
+    PASS a runner crossing in front of him at 3-6 m/s, the cursor on it, is hit: hit 16 (bar 14/16; was 7/36)
+    INFO launcher 12 m 6 m/s +: miss, lead -0.06 m (pace x flight 2.10)
+    PASS the launcher is not led (it lobs): -0.06 m off the body
+2 checks: 23 pass, 2 fail (real renderer)

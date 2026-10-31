@@ -1,0 +1,40 @@
+GRANT cursor CU-182: starting one game-test command
+check-players: 309 player.position reads, all in the allowed places
+ok    t97     15 pass   0 fail  39.3s
+           INFO ragdoll off: 160 spawned, 160 alive at the end, 127 ticks, frame 83.09 ms avg / 120.00 ms worst (headless)
+           INFO ragdoll on: 160 spawned, 159 alive at the end, 102 ticks, frame 118.77 ms avg / 868.40 ms worst (headless)
+ok    t98     20 pass   0 fail  78.8s
+           INFO 120 spawned, 120 alive after 84.3 s and 26 legs (650 ticks)
+ok    t99      6 pass   0 fail  119.5s
+ok    t100     7 pass   0 fail  36.6s
+ok    t101     9 pass   0 fail  34.1s
+ok    t102    17 pass   0 fail  41.2s
+ok    t103     8 pass   0 fail  34.5s
+ok    t104     5 pass   0 fail  34.2s
+ok    t105    15 pass   0 fail  42.8s
+ok    t106     9 pass   0 fail  112.2s
+ok    t107     8 pass   0 fail  35.5s
+ok    t108     9 pass   0 fail  34.7s
+ok    t109     5 pass   0 fail  35.2s
+ok    t110     4 pass   0 fail  34.7s
+           INFO feral head centre p10 0.738, median 0.787 of hitH (line 0.7)
+           INFO leaper head centre p10 0.619, median 0.634 of hitH (line 0.55)
+           INFO spider head centre p10 0.611, median 0.648 of hitH (line 0.6)
+FAIL  t111    10 pass   1 fail  44.8s
+ok    t112    13 pass   0 fail  40.0s
+ok    t113     5 pass   0 fail  58.7s
+ok    t114     8 pass   0 fail  37.3s
+ok    t115    10 pass   0 fail  36.2s
+ok    t116     7 pass   0 fail  45.1s
+ok    t117    17 pass   0 fail  38.6s
+ok    t119    20 pass   0 fail  36.4s
+ok    t120    11 pass   0 fail  37.5s
+ok    t121    31 pass   0 fail  23.5s
+ok    t122    14 pass   0 fail  35.5s
+
+25 checks: 283 pass, 1 fail
+
+by owner:
+  unassigned
+    t111   1 fail  FAIL feral: a round through its head is a headshot (20.00 vs chest 20.00)
+           FAIL feral: a round through its head is a headshot (20.00 vs chest 20.00)

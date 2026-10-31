@@ -1,0 +1,14 @@
+CU-188: 298 checks, 12 chunks
+CU-188 chunk 00/11: 25 checks: 272 pass, 0 fail, 2 reported no assertions
+CU-188 chunk 01/11: 25 checks: 305 pass, 0 fail, 6 reported no assertions
+CU-188 chunk 02/11: 25 checks: 484 pass, 0 fail
+CU-188 chunk 03/11: 25 checks: 323 pass, 4 fail
+CU-188 chunk 04/11: 25 checks: 289 pass, 0 fail
+CU-188 chunk 05/11: 25 checks: 384 pass, 0 fail
+CU-188 chunk 06/11: 25 checks: 391 pass, 0 fail
+CU-188 chunk 07/11: 25 checks: 608 pass, 0 fail
+CU-188 chunk 08/11: 25 checks: 476 pass, 0 fail
+CU-188 chunk 09/11: 25 checks: 357 pass, 0 fail, 1 reported no assertions
+CU-188 chunk 10/11: 25 checks: 392 pass, 0 fail, 1 reported no assertions
+CU-188 chunk 11/11: 23 checks: 284 pass, 0 fail, 1 reported no assertions
+CU-188: all chunks done.

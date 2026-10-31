@@ -1,0 +1,36 @@
+GRANT cursor CU-178: starting one game-test command
+check-players: 309 player.position reads, all in the allowed places
+ok    t148    23 pass   0 fail  71.5s
+ok    t149    16 pass   0 fail  72.8s
+ok    t150    13 pass   0 fail  78.4s
+ok    t151     7 pass   0 fail  26.4s
+ok    t152    27 pass   0 fail  66.4s
+ok    t153    15 pass   0 fail  26.3s
+ok    t154     5 pass   0 fail  46.7s
+ok    t155     2 pass   0 fail  48.3s
+ok    t156    34 pass   0 fail  80.1s
+ok    t157     6 pass   0 fail  48.2s
+ok    t158    13 pass   0 fail  28.7s
+ok    t159    10 pass   0 fail  58.4s
+ok    t160    11 pass   0 fail  76.8s
+ok    t161     7 pass   0 fail  28.0s
+ok    t162    21 pass   0 fail  65.8s
+ok    t163    16 pass   0 fail  65.6s
+ok    t164    14 pass   0 fail  50.8s
+ok    t165    11 pass   0 fail  27.3s
+ok    t166    11 pass   0 fail  49.2s
+ok    t167    20 pass   0 fail  27.5s
+FAIL  t168    38 pass   1 fail  70.1s
+ok    t169     8 pass   0 fail  28.1s
+ok    t170    20 pass   0 fail  128.7s
+FAIL  t171    22 pass   1 fail  68.0s
+ok    t172     7 pass   0 fail  55.8s
+
+25 checks: 377 pass, 2 fail
+
+by owner:
+  unassigned
+    t168   1 fail  FAIL it closes and swings at him
+           FAIL it closes and swings at him
+    t171   1 fail  FAIL the dead come up out of the source (0)
+           FAIL the dead come up out of the source (0)

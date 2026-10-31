@@ -1,0 +1,15 @@
+Game-test request 7c94e291-dc30-4496-93a1-c08d124dcdc7 queued at position 2. Waiting...
+GRANT grokbot GB-249: starting one game-test command
+ok    t93      11 pass   0 fail  44.9s  (real renderer)
+    PASS at rest every walker's soles are on the ground, within 3 cm (shambler 0.00 feral 0.00 drowned 0.00 military 0.00 brute 0.00 spitter 0.00 screamer -0.00 colossus -0.00 demon 0.00 bomber -0.00)
+    PASS over 1.5 s game time, walking soles stay above -5 cm and below +20 cm (+30 cm for Screamer and Feral) (deepest -0.05)
+    PASS every head is inside its hit column, give or take 4 cm of pose (shambler 1.89<1.97 feral 1.46<1.53 drowned 1.95<2.03 military 2.21<2.30 brute 2.74<2.85 spitter 1.81<1.90 screamer 1.84<1.92 colossus 4.35<4.71 demon 3.38<3.50 bomber 2.12<2.21)
+    PASS and its centre is in the headshot slice, above 0.78 of hitH, brute aside (shambler 0.85 feral 0.82 drowned 0.83 military 0.85 brute 0.87 spitter 0.82 screamer 0.86 colossus 0.83 demon 0.82 bomber 0.86)
+    PASS a bullet at the head's centre is a headshot (e.g. shambler 18.50 vs 10.00)
+    PASS hitH (about) unchanged where the head already fitted (brute 2.85, colossus 4.71)
+    PASS two pellets do not give it a reacting body
+    PASS its feet stay on the ground (deepest -0.03 m) and find a planted stance after recovery (0.01 m)
+    PASS a crawling shambler's hips stay where they were (0.25-0.28 m, before 0.25)
+    PASS leaper and spider hips unchanged (0.57, 0.50)
+    PASS no page errors
+1 checks: 11 pass, 0 fail (real renderer)

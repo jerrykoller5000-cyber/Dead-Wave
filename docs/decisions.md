@@ -4,6 +4,19 @@ Every call made for the game and the crew, in full, newest first. Claude writes 
 they stand unless Jerry overrides them. `crew/BOARD.md` lists each one on a single line; this file has the
 details. Moved here from the board on 2026-09-29 so the board stays short. Nothing was cut.
 
+- **D-100 · 1.1 passes D-99; the tree is frozen for the release (Claude's call, 2026-10-31).** CU-186, one quiet seat, 1.0 (82d75118) against the candidate: the three timed pairs' 1 % low 48.9 against 48.5, 
+  the tick level (12.68 against 12.72, last 10 s 14.04 against 14.05), 16 % less garbage (668 against 792 kB a frame), no builds or pipelines. Two of 1.1's five runs had single 13-14 ms zombie frames
+  (deopts, CU-187): GB-253 gives the zombie its whole shape when it's made, in 1.1.1 with its own A/B. Until CU-180's tag nobody edits game files but the owners' fixes for CU-188's reds, through Claude.
+- **D-99 · 1.1 ships no slower than 1.0 (Jerry, 2026-10-30, in chat).** "No. We are not going into this with worse performance. We need to find and correct." 
+  CU-183 had 1.1 level with 1.0 on fps and lighter on the tick at night 20 on one seat, but its 1 % lows 39.6 against 47.3. No test build before the fix: CU-184 and AG-162 trace it,
+  the owners fix it, and CU-185 (the quiet A/B again) must show the lows level before the version, the installer and the tag (CL-279).
+- **D-98 · Four more for 1.2 (Jerry, 2026-10-29: "All four great ideas!").** Claude proposed and Jerry took all four, beside
+  the forest's groves (D-95), his 1.1 notes and the score (D-97): (1) master, music and ambience volume sliders, pulled forward from
+  the 1.x list because the new score makes them needed (key rebinding stays later); (2) a speed check in the suite: AG-151's draws and
+  triangles by owner at night 20 as a test that fails when an owner grows past its budget, so a slowdown like 2026-10-29's (the
+  cellar's decks, the uncullable history props) is caught the day it lands; (3) the wildlife and the hiding places follow the groves
+  (squirrels and birds at grove edges, frogs by water, Pike's hide on a grove's edge); (4) each grove its own night sound: the score's
+  dark-forest cue inside a grove at night, fading out in the clearings.
 - **D-97 · The 1.2 score: all the game's music from F:\Music (Jerry, 2026-10-29).** "For 1.2 we are going to do yet another Music overhaul ... score everything from the individual zombies coming out in training to every night having a unique track. Locations and events as well as cues getting close to things, completing missions ... We are going to scrap all other music ... this is the final direction. All the hellshots are fight music." Six Ghosthack packs (Hellshot 1-3 for every fight; Anomaly, Cinematic Orchestra 2 and Mystery Nightfall for the days, places, tension and cues); the Suno, chiptune and ElevenLabs music retire from the game (his files stay on disk until he says); his heavy-metal stingers stay (the alarm's, CL-265, and the ui/* ones; Jerry, 2026-10-29), and the new cues never replace them. The licence: in the game only, never on GitHub (`gh-*.ogg`, git-ignored, as D-94). The plan: docs/audio/music-1.2.md; CL-275. 1.2, after the 1.1 playthrough.
 - **D-96 · No Steam date: the base game first, through as many passes as it takes; then co-op; then the last polish and heavy testing; then Steam (Jerry, 2026-10-27, in chat).**
   Jerry: "I would really hold off on any steam release ideas. This is going to probably be a lengthy project with many

@@ -1,0 +1,35 @@
+GRANT cursor CU-188: starting one game-test command
+check-players: 309 player.position reads, all in the allowed places
+ok    t0       2 pass   0 fail  22.2s
+ok    t6a      2 pass   0 fail  32.6s
+           INFO chunk 0 matrix scale 0.00, debris 42
+           INFO spawnDust not exported
+ok    tcl280  10 pass   0 fail  35.7s
+ok    tfish    7 pass   0 fail  20.5s
+ok    tinspect  22 pass   0 fail  60.1s
+ok    t1       4 pass   0 fail  31.8s
+ok    t2       5 pass   0 fail  36.1s
+ok    t3       5 pass   0 fail  35.5s
+ok    t4       6 pass   0 fail  35.2s
+ok    t5      31 pass   0 fail  35.5s
+ok    t6      21 pass   0 fail  58.9s
+ok    t7      16 pass   0 fail  36.4s
+ok    t8       3 pass   0 fail  40.8s
+ok    t9      19 pass   0 fail  37.6s
+ok    t10     30 pass   0 fail  36.3s
+ok    t11     13 pass   0 fail  35.1s
+ok    t12     22 pass   0 fail  56.7s
+ok    t13      8 pass   0 fail  56.4s
+ok    t14     13 pass   0 fail  36.5s
+ok    t15     10 pass   0 fail  118.7s
+info  t16      0 pass   0 fail  66.1s  — 692
+ok    t17     10 pass   0 fail  61.2s
+ok    t18      7 pass   0 fail  40.6s
+ok    t19      6 pass   0 fail  102.4s
+info  t20      0 pass   0 fail  74.8s  — -5,-15 edge0 L0 yaw 0.00 rx 0.00 rz 0.00 ch 1
+
+25 checks: 272 pass, 0 fail, 2 reported no assertions
+
+no assertions (probe, or the check bailed before asserting):
+  t16    692
+  t20    -5,-15 edge0 L0 yaw 0.00 rx 0.00 rz 0.00 ch 1

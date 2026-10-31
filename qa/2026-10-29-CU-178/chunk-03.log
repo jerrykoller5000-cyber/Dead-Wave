@@ -1,0 +1,42 @@
+Game-test request b4ccc8aa-fdce-49be-ab8f-7c5bcbadac48 queued at position 3. Waiting...
+GRANT cursor CU-178: starting one game-test command
+check-players: 309 player.position reads, all in the allowed places
+FAIL  t72     17 pass   4 fail  81.8s
+ok    t73     12 pass   0 fail  69.8s
+FAIL  t74     17 pass   1 fail  67.9s
+ok    t75     16 pass   0 fail  63.5s
+ok    t76     16 pass   0 fail  66.5s
+ok    t77     17 pass   0 fail  69.1s
+ok    t78     18 pass   0 fail  48.6s
+ok    t79     12 pass   0 fail  78.1s
+ERROR t80      0 pass   0 fail  208.2s  — time limit: check still running after 180s
+           INFO the old drape (sampleHeight + 7 cm) went 0.37 m under the drawn bed at worst
+ok    t81      5 pass   0 fail  28.6s
+ok    t82      4 pass   0 fail  28.4s
+ok    t83     31 pass   0 fail  71.2s
+ok    t84     10 pass   0 fail  72.9s
+ok    t85     15 pass   0 fail  65.4s
+ok    t86     12 pass   0 fail  51.4s
+ok    t87     13 pass   0 fail  48.7s
+ok    t88     13 pass   0 fail  48.3s
+ok    t89     18 pass   0 fail  54.6s
+ok    t90      6 pass   0 fail  53.8s
+ok    t91      7 pass   0 fail  57.5s
+ok    t92      5 pass   0 fail  49.6s
+ok    t93     11 pass   0 fail  90.0s
+ok    t94      8 pass   0 fail  54.5s
+ok    t95      9 pass   0 fail  77.4s
+ok    t96     19 pass   0 fail  65.0s
+
+25 checks: 311 pass, 5 fail, 1 could not run
+
+by owner:
+  unassigned
+    t72    4 fail  FAIL the alarm starts the wave
+           FAIL the alarm starts the wave
+           FAIL the last kill starts the finisher
+           FAIL the next prep waits for it: prep, day 1
+           FAIL still day 1 halfway through the finisher
+    t74    1 fail  FAIL and come for him (8.8 -> 7.8 m)
+           FAIL and come for him (8.8 -> 7.8 m)
+    t80    0 fail  time limit: check still running after 180s

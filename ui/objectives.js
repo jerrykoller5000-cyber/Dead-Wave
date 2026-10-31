@@ -112,14 +112,15 @@ export function mountObjectives({mapRoot,hudRoot,project,onTrack=()=>{},onChoose
   const stop=doc.createElement('button');stop.type='button';stop.textContent=text('objectives.untrack');
   const choiceLabel=doc.createElement('label'),choice=doc.createElement('select');
   choiceLabel.className='objective-choice';choiceLabel.append(doc.createTextNode(text('objectives.choosePack')),choice);choiceLabel.hidden=true;
-  let choiceSignature='';
+  let choiceSignature='',trackedId=null;
   choice.addEventListener('change',()=>{const t=model.read().tracker;if(t&&!t.choiceLocked)onChoose(t.id,choice.value);});
   const announcement=doc.createElement('p');announcement.className='objective-notice';announcement.setAttribute('role','status');
   status.className='objective-status';prompt.className='objective-prompt';distance.className='objective-distance';
   card.append(title,distance,choiceLabel,reward,status,progress,prompt,stop);mapRoot.append(layer);hudRoot.append(card,announcement);
-  function label(el,value){if(el.textContent!==value)el.textContent=value;el.hidden=!value;}
+  function label(el,value){if(el.textContent!==value)el.textContent=value;if(el.hidden===!!value)el.hidden=!value;}
   function paint() {
     const view=model.read(), markers=projectObjectiveMarkers(view.markers,project), ids=new Set(markers.map(m=>m.id));
+    trackedId=view.tracker?.id||null;
     for(const [id,button] of buttons)if(!ids.has(id)) {
       if(button===doc.activeElement)layer.focus({preventScroll:true});button.remove();buttons.delete(id);
     }
@@ -130,18 +131,28 @@ export function mountObjectives({mapRoot,hudRoot,project,onTrack=()=>{},onChoose
         button.append(icon(doc,marker.icon));button.addEventListener('click',()=>{if(model.track(marker.id)){paint();onTrack(marker.id);}});
         layer.append(button);buttons.set(marker.id,button);
       }
-      button.title=marker.label;button.setAttribute('aria-label',marker.label);button.setAttribute('aria-pressed',String(marker.selected));
-      button.style.left=`${marker.mapX*100}%`;button.style.top=`${marker.mapY*100}%`;
+      if(button.title!==marker.label)button.title=marker.label;
+      if(button.getAttribute('aria-label')!==marker.label)button.setAttribute('aria-label',marker.label);
+      const pressed=String(marker.selected);
+      if(button.getAttribute('aria-pressed')!==pressed)button.setAttribute('aria-pressed',pressed);
+      const left=`${marker.mapX*100}%`,top=`${marker.mapY*100}%`;
+      if(button.style.left!==left)button.style.left=left;
+      if(button.style.top!==top)button.style.top=top;
     }
-    layer.hidden=!view.active;card.hidden=!view.tracker;
+    if(layer.hidden===view.active)layer.hidden=!view.active;
+    if(card.hidden===!!view.tracker)card.hidden=!view.tracker;
     if(view.tracker) {
       const t=view.tracker;label(title,t.title);label(distance,t.distance===null?'':text('objectives.distance',{distance:t.distance}));
-      choiceLabel.hidden=!t.choices.length;
+      if(choiceLabel.hidden===!!t.choices.length)choiceLabel.hidden=!t.choices.length;
       const signature=JSON.stringify(t.choices);
       if(signature!==choiceSignature){choiceSignature=signature;choice.replaceChildren(...t.choices.map(c=>{const option=doc.createElement('option');option.value=c.id;option.textContent=c.label;return option;}));}
-      choice.value=t.choiceId||'';choice.disabled=t.choiceLocked||t.busy;
-      label(reward,t.reward);label(status,t.status);label(prompt,t.prompt);progress.hidden=!t.busy;
-      if(t.progress===null)progress.removeAttribute('value');else progress.value=t.progress;
+      const choiceId=t.choiceId||'',disabled=t.choiceLocked||t.busy;
+      if(choice.value!==choiceId)choice.value=choiceId;
+      if(choice.disabled!==disabled)choice.disabled=disabled;
+      label(reward,t.reward);label(status,t.status);label(prompt,t.prompt);
+      if(progress.hidden===t.busy)progress.hidden=!t.busy;
+      if(t.progress===null){if(progress.hasAttribute('value'))progress.removeAttribute('value');}
+      else if(progress.value!==t.progress)progress.value=t.progress;
     }
     label(announcement,view.notice);
     return view;
@@ -160,6 +171,7 @@ export function mountObjectives({mapRoot,hudRoot,project,onTrack=()=>{},onChoose
   for(const parent of [layer,card])for(const type of ['keydown','keyup','mousedown','mouseup','pointerdown','pointerup','wheel','contextmenu'])parent.addEventListener(type,guard);
   paint();
   return {
+    tracked:()=>trackedId,
     update:s=>{const accepted=model.update(s);if(accepted)paint();return accepted;},
     reset:id=>{model.reset(id);paint();},
     track:id=>{const accepted=model.track(id);if(accepted){paint();onTrack(id);}return accepted;},

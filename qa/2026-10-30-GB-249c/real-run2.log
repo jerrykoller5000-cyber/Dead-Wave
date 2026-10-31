@@ -1,0 +1,59 @@
+Game-test request 8db043e0-3af9-4d1f-a8aa-be1cf98b0e7f queued at position 2. Waiting...
+GRANT grokbot GB-249: starting one game-test command
+FAIL  t111     10 pass   1 fail  39.2s  (real renderer)
+    PASS a brute hit in the chest is a body hit: 18.00 vs 18.00
+    PASS a round through its head is a headshot: 33.30, 33.30 (body 18.00)
+    PASS a shambler: chest a body hit (20.00), its head a headshot (37.00)
+    PASS a walking brute's head centre sits above its line with a margin: p10 0.822 (line 0.74, 60 samples)
+    PASS feral: a round through its head is a headshot (37.00 vs chest 20.00)
+    PASS feral's head centre sits above its line while it walks: median 0.823 (line 0.7, 45 samples)
+    INFO feral head centre p10 0.750, median 0.823 of hitH (line 0.7)
+    FAIL leaper: a round through its head is a headshot (26.00 vs chest 26.00)
+    PASS leaper's head centre sits above its line while it walks: median 0.652 (line 0.55, 45 samples)
+    INFO leaper head centre p10 0.623, median 0.652 of hitH (line 0.55)
+    PASS spider: a round through its head is a headshot (25.90 vs chest 14.00)
+    PASS spider's head centre sits above its line while it walks: median 0.698 (line 0.6, 45 samples)
+    INFO spider head centre p10 0.666, median 0.698 of hitH (line 0.6)
+    PASS no page errors
+FAIL  tgbprobe111b    0 pass  40 fail  35.2s  (real renderer)
+    FAIL PROBE feral miss #10 state undefined idle na anim 2.290 headScale na root vis true collapsed false partsLost {"armL":false,"armR":false,"legL":false,"legR":false,"head":false}
+    FAIL PROBE   box y -2.065..-1.679 x -4.245..-3.949 z 21.883..22.158 dir -0.132,0.991 root world -4.098,-1.886,22.032
+    FAIL PROBE   centre shot: hit t 0.425 head false point -4.038,-1.872,21.576 head-local -0.023,-0.168,-0.440 (OUTSIDE head box: body in front?)
+    FAIL PROBE   arms rx L -1.150 R -1.150 torso 0.394 head -0.350 head ry 0.000
+    FAIL PROBE   grid (k -0.6..0.6 of hh, per side offset): sk-0.6:bbbbbbb sk-0.3:bbbbbbb sk0:bbbbbbb sk0.3:bbbbbbb sk0.6:bbbbbbb
+    FAIL PROBE feral miss #11 state undefined idle na anim 2.290 headScale na root vis true collapsed false partsLost {"armL":false,"armR":false,"legL":false,"legR":false,"head":false}
+    FAIL PROBE   box y -2.075..-1.689 x -1.078..-0.781 z 21.890..22.162 dir -0.033,0.999 root world -0.929,-1.896,22.036
+    FAIL PROBE   centre shot: hit t 0.427 head false point -0.915,-1.882,21.590 head-local 0.075,-0.160,-0.423 (OUTSIDE head box: body in front?)
+    FAIL PROBE   arms rx L -1.150 R -1.150 torso 0.394 head -0.350 head ry 0.000
+    FAIL PROBE   grid (k -0.6..0.6 of hh, per side offset): sk-0.6:bbbbbbb sk-0.3:bbbbbbb sk0:bbbbbbb sk0.3:bbbbbbb sk0.6:bbbbbbb
+    FAIL PROBE feral miss #13 state undefined idle na anim 2.290 headScale na root vis true collapsed false partsLost {"armL":false,"armR":false,"legL":false,"legR":false,"head":false}
+    FAIL PROBE   box y -2.061..-1.675 x 4.871..5.170 z 21.901..22.165 dir 0.164,0.986 root world 5.021,-1.882,22.041
+    FAIL PROBE   centre shot: hit t 0.426 head false point 4.947,-1.868,21.595 head-local -0.057,-0.164,-0.429 (OUTSIDE head box: body in front?)
+    FAIL PROBE   arms rx L -1.150 R -1.150 torso 0.394 head -0.350 head ry 0.000
+    FAIL PROBE   grid (k -0.6..0.6 of hh, per side offset): sk-0.6:bbbbbbb sk-0.3:bbbbbbb sk0:bbbbbbb sk0.3:bbbbbbb sk0.6:bbbbbbb
+    FAIL PROBE feral miss #15 state undefined idle na anim 2.290 headScale na root vis true collapsed false partsLost {"armL":false,"armR":false,"legL":false,"legR":false,"head":false}
+    FAIL PROBE   box y -1.974..-1.588 x 10.909..11.207 z 21.893..22.164 dir 0.344,0.939 root world 11.058,-1.795,22.038
+    FAIL PROBE   centre shot: hit t 0.429 head false point 10.910,-1.781,21.627 head-local -0.105,-0.155,-0.408 (OUTSIDE head box: body in front?)
+    FAIL PROBE   arms rx L -1.150 R -1.150 torso 0.394 head -0.350 head ry 0.000
+    FAIL PROBE   grid (k -0.6..0.6 of hh, per side offset): sk-0.6:bbbbbbb sk-0.3:bbbbbbb sk0:bbbbbbb sk0.3:bbbbbbb sk0.6:bbbbbbH
+    FAIL PROBE feral: hook headHit 12/16
+    FAIL PROBE leaper miss #3 state undefined idle na anim 2.537 headScale na root vis true collapsed false partsLost {"armL":false,"armR":false,"legL":false,"legR":false,"head":false}
+    FAIL PROBE   box y -2.595..-2.201 x -0.566..-0.256 z 21.798..22.106 dir -0.033,0.999 root world -0.401,-2.416,21.956
+    FAIL PROBE   centre shot: hit t 0.429 head false point -0.397,-2.398,21.527 head-local 0.359,-0.043,-0.264 (OUTSIDE head box: body in front?)
+    FAIL PROBE   arms rx L -1.350 R -1.350 torso 0.373 head -1.100 head ry 0.000
+    FAIL PROBE   grid (k -0.6..0.6 of hh, per side offset): sk-0.6:bbbbbbb sk-0.3:bbbbbbb sk0:bbbbbbb sk0.3:bbbbbbb sk0.6:.HHbbbb
+    FAIL PROBE leaper miss #8 state undefined idle na anim 2.537 headScale na root vis true collapsed false partsLost {"armL":false,"armR":false,"legL":false,"legR":false,"head":false}
+    FAIL PROBE   box y -2.511..-2.117 x -10.275..-9.971 z 22.089..22.375 dir -0.316,0.949 root world -10.124,-2.332,22.242
+    FAIL PROBE   centre shot: hit t 0.386 head false point -9.907,-2.314,21.585 head-local 0.110,-0.142,-0.700 (OUTSIDE head box: body in front?)
+    FAIL PROBE   arms rx L -1.350 R -1.350 torso 0.373 head -1.100 head ry 0.000
+    FAIL PROBE   grid (k -0.6..0.6 of hh, per side offset): sk-0.6:HHbbbbb sk-0.3:bbbbbbb sk0:bbbbbbb sk0.3:bbbbbbb sk0.6:bbbbbbb
+    FAIL PROBE leaper miss #15 state undefined idle na anim 2.537 headScale na root vis true collapsed false partsLost {"armL":false,"armR":false,"legL":false,"legR":false,"head":false}
+    FAIL PROBE   box y -2.494..-2.100 x 11.002..11.305 z 22.081..22.369 dir 0.344,0.939 root world 11.155,-2.315,22.236
+    FAIL PROBE   centre shot: hit t 0.384 head false point 10.913,-2.297,21.569 head-local -0.103,-0.146,-0.719 (OUTSIDE head box: body in front?)
+    FAIL PROBE   arms rx L -1.350 R -1.350 torso 0.373 head -1.100 head ry 0.000
+    FAIL PROBE   grid (k -0.6..0.6 of hh, per side offset): sk-0.6:bbbbbbb sk-0.3:bbbbbbb sk0:bbbbbbb sk0.3:bbbbbbb sk0.6:HHbbbbb
+    FAIL PROBE leaper: hook headHit 13/16
+    FAIL PROBE spider: hook headHit 16/16
+    FAIL PROBE shambler: hook headHit 16/16
+    FAIL PROBE brute: hook headHit 16/16
+2 checks: 10 pass, 41 fail (real renderer)

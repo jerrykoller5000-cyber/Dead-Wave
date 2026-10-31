@@ -1,0 +1,38 @@
+Game-test request 35ed6856-3b45-45e4-af25-d61fffef31f0 queued at position 2. Waiting...
+GRANT cursor CU-182: starting one game-test command
+FAIL  t74      17 pass   1 fail  44.0s  (real renderer)
+    FAIL and come for him (8.8 -> 8.5 m)
+ok    t76      16 pass   0 fail  48.1s  (real renderer)
+ok    t111     11 pass   0 fail  44.9s  (real renderer)
+    INFO feral head centre p10 0.739, median 0.824 of hitH (line 0.7)
+    INFO leaper head centre p10 0.642, median 0.671 of hitH (line 0.55)
+    INFO spider head centre p10 0.623, median 0.689 of hitH (line 0.6)
+FAIL  t178      7 pass   1 fail  49.9s  (real renderer)
+    FAIL back up the tunnel: the calm again (dayfight)
+ok    t222      9 pass   0 fail  157.4s  (real renderer)
+    INFO shambler  head: head 6 | chest: body 6 | legs: legs 6
+    INFO feral     head: head 6 | chest: body 5, head 1 | legs: legs 5, body 1
+    INFO brute     head: head 6 | chest: body 6 | legs: ground 1, legs 3, body 2
+    INFO spider    head: head 6 | chest: head 4, body 2 | legs: -
+    INFO leaper    head: head 6 | chest: body 4, head 2 | legs: -
+    INFO colossus at 90 deg 6 m: its head is covered by its own gear from the camera here (no head case)
+    INFO colossus at 90 deg 14 m: its head is covered by its own gear from the camera here (no head case)
+    INFO colossus  head: head 4 | chest: body 6 | legs: legs 6
+    INFO pistol 8 m 3 m/s +: hit, lead 0.32 m (pace x flight 0.31) at 0.60 of its height
+    INFO pistol 8 m 3 m/s -: hit, lead -0.30 m (pace x flight -0.32) at 0.67 of its height
+    INFO pistol 8 m 6 m/s +: hit, lead 0.50 m (pace x flight 0.59) at 0.66 of its height
+    INFO pistol 8 m 6 m/s -: hit, lead -0.50 m (pace x flight -0.59) at 0.68 of its height
+    INFO pistol 18 m 3 m/s +: hit, lead 0.66 m (pace x flight 0.70) at 0.63 of its height
+    INFO pistol 18 m 3 m/s -: hit, lead -0.68 m (pace x flight -0.70) at 0.60 of its height
+    INFO pistol 18 m 6 m/s +: hit, lead 1.38 m (pace x flight 1.39) at 0.58 of its height
+    INFO pistol 18 m 6 m/s -: hit, lead -1.32 m (pace x flight -1.39) at 0.59 of its height
+    INFO m4 8 m 3 m/s +: hit, lead 0.22 m (pace x flight 0.23) at 0.59 of its height
+    INFO m4 8 m 3 m/s -: hit, lead -0.23 m (pace x flight -0.23) at 0.68 of its height
+    INFO m4 8 m 6 m/s +: hit, lead 0.31 m (pace x flight 0.42) at 0.66 of its height
+    INFO m4 8 m 6 m/s -: hit, lead -0.38 m (pace x flight -0.42) at 0.58 of its height
+    INFO m4 18 m 3 m/s +: hit, lead 0.48 m (pace x flight 0.52) at 0.63 of its height
+    INFO m4 18 m 3 m/s -: hit, lead -0.48 m (pace x flight -0.52) at 0.60 of its height
+    INFO m4 18 m 6 m/s +: hit, lead 0.97 m (pace x flight 1.02) at 0.56 of its height
+    INFO m4 18 m 6 m/s -: hit, lead -1.00 m (pace x flight -1.02) at 0.59 of its height
+    INFO launcher 12 m 6 m/s +: miss, lead -0.08 m (pace x flight 2.09)
+5 checks: 60 pass, 2 fail (real renderer)

@@ -1,0 +1,17 @@
+Game-test request b060e34e-20e2-426d-b7ba-0cbf9f25446e queued at position 2. Waiting...
+GRANT grokbot GB-249: starting one game-test command
+check-players: 309 player.position reads, all in the allowed places
+FAIL  t76     15 pass   1 fail  48.9s
+           INFO feral head centre p10 0.735, median 0.796 of hitH (line 0.7)
+           INFO leaper head centre p10 0.626, median 0.642 of hitH (line 0.55)
+           INFO spider head centre p10 0.634, median 0.659 of hitH (line 0.6)
+FAIL  t111    10 pass   1 fail  43.4s
+
+2 checks: 25 pass, 2 fail
+
+by owner:
+  unassigned
+    t76    1 fail  FAIL a walker walks (phase +2.7, idle 0.00)
+           FAIL a walker walks (phase +2.7, idle 0.00)
+    t111   1 fail  FAIL leaper: a round through its head is a headshot (26.00 vs chest 26.00)
+           FAIL leaper: a round through its head is a headshot (26.00 vs chest 26.00)

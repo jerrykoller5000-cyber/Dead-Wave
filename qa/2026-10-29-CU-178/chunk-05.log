@@ -1,0 +1,30 @@
+Game-test request 3151946b-1636-42bc-b210-6554df79bfd9 queued at position 3. Waiting...
+GRANT cursor CU-178: starting one game-test command
+check-players: 309 player.position reads, all in the allowed places
+ok    t123     6 pass   0 fail  33.9s
+ok    t124     5 pass   0 fail  59.4s
+ok    t125    10 pass   0 fail  51.2s
+ok    t126    12 pass   0 fail  62.5s
+ok    t127    28 pass   0 fail  104.1s
+ok    t128    28 pass   0 fail  124.6s
+ok    t129    22 pass   0 fail  46.4s
+ok    t130    14 pass   0 fail  46.6s
+ok    t131    18 pass   0 fail  65.9s
+ok    t132    11 pass   0 fail  46.5s
+ok    t133     9 pass   0 fail  60.0s
+ok    t134     9 pass   0 fail  31.2s
+ok    t135     8 pass   0 fail  45.8s
+ok    t136    36 pass   0 fail  58.2s
+ok    t137    15 pass   0 fail  43.8s
+ok    t138     6 pass   0 fail  40.9s
+ok    t139    13 pass   0 fail  54.2s
+ok    t140    17 pass   0 fail  35.5s
+ok    t141     7 pass   0 fail  40.0s
+ok    t142    10 pass   0 fail  54.5s
+ok    t143    17 pass   0 fail  78.8s
+ok    t144     9 pass   0 fail  40.8s
+ok    t145    17 pass   0 fail  27.7s
+ok    t146    43 pass   0 fail  49.0s
+ok    t147    19 pass   0 fail  120.9s
+
+25 checks: 389 pass, 0 fail

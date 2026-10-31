@@ -1,0 +1,32 @@
+Game-test request 8b16b4ef-b798-4c9b-99b8-f56b6f56c5d0 queued at position 2. Waiting...
+GRANT grokbot GB-249: starting one game-test command
+check-players: 309 player.position reads, all in the allowed places
+ok    t76     16 pass   0 fail  46.5s
+           INFO shambler  head: head 6 | chest: body 6 | legs: legs 5, body 1
+           INFO feral     head: head 6 | chest: body 5, head 1 | legs: legs 6
+           INFO brute     head: body 2, head 4 | chest: body 6 | legs: legs 6
+           INFO spider    head: head 6 | chest: head 6 | legs: -
+           INFO leaper    head: head 6 | chest: body 4, head 2 | legs: -
+           INFO colossus  head: head 4, body 2 | chest: body 6 | legs: legs 5, ground 1
+           INFO the reticle rings a head lined up, and not a chest (false, los-clear) (would fail; INFO on the test page)
+           INFO pistol 8 m 3 m/s +: hit, lead 0.20 m (pace x flight 0.33) at 0.63 of its height
+           INFO pistol 8 m 3 m/s -: hit, lead -0.20 m (pace x flight -0.33) at 0.62 of its height
+           INFO pistol 8 m 6 m/s +: miss, lead 0.30 m (pace x flight 0.60)
+           INFO pistol 8 m 6 m/s -: miss, lead -0.30 m (pace x flight -0.60)
+           INFO pistol 18 m 3 m/s +: miss, lead 0.59 m (pace x flight 0.71)
+           INFO pistol 18 m 3 m/s -: hit, lead -0.59 m (pace x flight -0.71) at 0.65 of its height
+           INFO pistol 18 m 6 m/s +: miss, lead 1.09 m (pace x flight 1.39)
+           INFO pistol 18 m 6 m/s -: miss, lead -1.09 m (pace x flight -1.39)
+           INFO m4 8 m 3 m/s +: hit, lead 0.09 m (pace x flight 0.23) at 0.59 of its height
+           INFO m4 8 m 3 m/s -: hit, lead -0.13 m (pace x flight -0.23) at 0.66 of its height
+           INFO m4 8 m 6 m/s +: miss, lead 0.13 m (pace x flight 0.42)
+           INFO m4 8 m 6 m/s -: miss, lead -0.13 m (pace x flight -0.42)
+           INFO m4 18 m 3 m/s +: hit, lead 0.38 m (pace x flight 0.52) at 0.60 of its height
+           INFO m4 18 m 3 m/s -: hit, lead -0.40 m (pace x flight -0.52) at 0.65 of its height
+           INFO m4 18 m 6 m/s +: miss, lead 0.72 m (pace x flight 1.02)
+           INFO m4 18 m 6 m/s -: miss, lead -0.72 m (pace x flight -1.02)
+           INFO the 6 m/s runners on the test page: miss 8 (not a bar: the fake models; 1.x, CL FYI)
+           INFO launcher 12 m 6 m/s +: miss, lead -0.29 m (pace x flight 2.10)
+ok    t222     8 pass   0 fail  163.8s
+
+2 checks: 24 pass, 0 fail

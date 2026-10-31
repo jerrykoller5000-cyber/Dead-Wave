@@ -1,0 +1,15 @@
+Game-test request d4d7fa0f-9162-442e-8bc8-ef9295be691f queued at position 2. Waiting...
+GRANT grokbot GB-249: starting one game-test command
+FAIL  t93       6 pass   5 fail  45.8s  (real renderer)
+    FAIL at rest every walker's soles are on the ground, within 3 cm (shambler 1000000003.17, feral 1000000003.17, drowned 1000000003.17, military 1000000003.17, brute 1000000003.17, spitter 1000000003.17, screamer 1000000003.17, colossus 1000000003.17, demon 1000000003.17, bomber 1000000003.17)
+    FAIL over 1.5 s game time, walking soles stay above -5 cm and below +20 cm (+30 cm for Screamer and Feral) (shambler 1000000000.00/1000000003.17/1.51, feral 1000000000.00/1000000003.17/1.51, drowned 1000000000.00/1000000003.17/1.51, military 1000000000.00/1000000003.17/1.52, brute 1000000000.00/1000000003.17/1.53, spitter 1000000000.00/1000000003.17/1.53, screamer 1000000000.00/1000000003.17/1.54, colossus 1000000000.00/1000000003.17/1.51, demon 1000000000.00/1000000003.17/1.52, bomber 1000000000.00/1000000003.17/1.53)
+    PASS every head is inside its hit column, give or take 4 cm of pose (shambler -999999996.83<1.86 feral -999999996.83<1.45 drowned -999999996.83<1.82 military -999999996.83<2.18 brute -999999996.83<2.83 spitter 1.47<1.96 screamer -999999996.83<1.88 colossus -999999996.83<4.71 demon -999999996.83<3.21 bomber -999999996.83<2.22)
+    FAIL and its centre is in the headshot slice, above 0.78 of hitH, brute aside (spitter 1.47/1.96/0.72, colossus -999999996.83/4.71/0.67)
+    FAIL a bullet at the head's centre is a headshot (demon 12.00/12.00)
+    PASS hitH (about) unchanged where the head already fitted (brute 2.83, colossus 4.71)
+    PASS two pellets do not give it a reacting body
+    FAIL its feet stay on the ground (deepest 9.00 m) and find a planted stance after recovery (9.00 m)
+    PASS a crawling shambler's hips stay where they were (0.24-0.26 m, before 0.25)
+    PASS leaper and spider hips unchanged (0.57, 0.50)
+    PASS no page errors
+1 checks: 6 pass, 5 fail (real renderer)

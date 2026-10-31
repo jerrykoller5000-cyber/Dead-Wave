@@ -169,7 +169,11 @@
     // A round of his into that head flashes the gold X.
     const marks = []; const rx = ret.querySelector('.rx'); const realAnimate = rx.animate.bind(rx);
     rx.animate = (k, o) => { marks.push(rx.style.color); return realAnimate(k, o); };
-    await pointAt(headCentre(zr)); await wait(60);
+    // GB-249 (Claude's ruling (a), 2026-10-30): an arm in front of the face takes the round (white X = body). The gold-X round goes on a frame where the line
+    // from the muzzle along the aim reaches the head: the shambler's anim steps on game time (cap 3 s) until it does; none clear is a FAIL, never an empty pass.
+    let xClear = false, xBlocked = 0; { const s0 = T.getSimTime(), w0 = Date.now(); while (T.getSimTime() - s0 <= 3 && Date.now() - w0 < 60000) { await pointAt(headCentre(zr)); await wait(60); const M0 = T.getMuzzleWorld().clone(), d0 = T.aimTarget.clone().sub(M0), L0 = d0.length() + 3, h0 = T.zombieRoundHit(zr, M0.clone(), M0.clone().addScaledVector(d0.normalize(), L0)); if (h0 && h0.headHit) { xClear = true; break; } xBlocked++; } }
+    info('the gold-X round: ' + xBlocked + ' aim(s) blocked before a clear line to the head' + (xClear ? '' : ', none clear in 3 s of game time'));
+    if (!xClear) ok(false, 'a clear line from the muzzle to the shambler\'s head within 3 s of game time (' + xBlocked + ' blocked)');
     const M = T.getMuzzleWorld().clone(), dir = T.aimTarget.clone().sub(M).normalize();
     T.fireRoundDbg(M.x, M.y, M.z, dir.x, dir.y, dir.z, 20, 90, 0);
     for (let i = 0; i < 20 && !marks.length; i++) { T.stepProjectilesDbg(0.016); }

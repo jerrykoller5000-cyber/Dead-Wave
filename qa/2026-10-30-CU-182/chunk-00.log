@@ -1,0 +1,34 @@
+Game-test request 3caa987f-57c1-4f53-abcc-891aad325b34 queued at position 2. Waiting...
+GRANT cursor CU-182: starting one game-test command
+check-players: 309 player.position reads, all in the allowed places
+ok    t0       2 pass   0 fail  23.6s
+ok    t6a      2 pass   0 fail  35.4s
+ok    tfish    7 pass   0 fail  24.9s
+ok    tinspect  22 pass   0 fail  63.8s
+ok    t1       4 pass   0 fail  35.2s
+ok    t2       5 pass   0 fail  35.7s
+ok    t3       5 pass   0 fail  34.9s
+ok    t4       6 pass   0 fail  35.9s
+ok    t5      31 pass   0 fail  36.8s
+ok    t6      21 pass   0 fail  60.0s
+ok    t7      16 pass   0 fail  36.8s
+ok    t8       3 pass   0 fail  41.4s
+ok    t9      19 pass   0 fail  37.3s
+ok    t10     30 pass   0 fail  37.3s
+ok    t11     13 pass   0 fail  35.3s
+ok    t12     22 pass   0 fail  56.0s
+ok    t13      8 pass   0 fail  56.5s
+ok    t14     13 pass   0 fail  36.5s
+ok    t15     10 pass   0 fail  105.6s
+info  t16      0 pass   0 fail  66.6s  — 692
+ok    t17     10 pass   0 fail  59.4s
+ok    t18      7 pass   0 fail  36.0s
+ok    t19      6 pass   0 fail  90.7s
+info  t20      0 pass   0 fail  66.2s  — -5,-15 edge0 L0 yaw 0.00 rx 0.00 rz 0.00 ch 1
+ok    t21     16 pass   0 fail  88.6s
+
+25 checks: 278 pass, 0 fail, 2 reported no assertions
+
+no assertions (probe, or the check bailed before asserting):
+  t16    692
+  t20    -5,-15 edge0 L0 yaw 0.00 rx 0.00 rz 0.00 ch 1

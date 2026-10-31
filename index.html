@@ -2216,7 +2216,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // The object's own `visible` stays its owner's: the hide is an accessor laid over it that answers false to the
     // renderer and remembers what the owner sets, applied when the object comes back. Objects whose visibility is
     // game state (trees, bugs, the dead, builds, rocks, effect pools, the sky) are left alone.
-    const _cullFrustum = new THREE.Frustum(), _cullM = new THREE.Matrix4(), _cullBox = new THREE.Box3(), _cullUnits = [];
+    const _cullFrustum = new THREE.Frustum(), _cullM = new THREE.Matrix4(), _cullBox = new THREE.Box3(), _cullUnits = [];   // CL-280: filled in place to _cullUnitsN
+    let _cullUnitsN = 0;
     const _cullS = new THREE.Sphere(), _cullC = new THREE.Vector3();
     let cullFrame = 0, cullSkip = null, cullSkipAt = -1e9;
     const cullStats = { hidden: 0, tested: 0, spheres: 0, ms: 0, on: urlParams.get('cull') !== '0' };
@@ -2266,11 +2267,16 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       // CL-277 (AG-151: night 20's 287 history props walked and frustum-tested every frame from anywhere): a group that
       // spans the map (userData.cullKids, at the world's origin and unrotated) is culled piece by piece, its children
       // standing for top-level things here and in updateSceneMatrices.
-      const kids = _cullUnits; kids.length = 0;
-      for (const o of scene.children) {
-        if (o.userData.cullKids && o.visible !== false) { for (const k of o.children) kids.push(k); } else kids.push(o);
+      // CL-280 (CU-184: 21 kB of garbage a frame): the list is refilled in place, never emptied with length = 0, which
+      // let V8 drop its store and grow it again every frame; what left the scene is cleared past the count, not kept.
+      const kids = _cullUnits, sc = scene.children; let nU = 0;
+      for (let j = 0; j < sc.length; j++) {
+        const o = sc[j];
+        if (o.userData.cullKids && o.visible !== false) { const ch = o.children; for (let q = 0; q < ch.length; q++) kids[nU++] = ch[q]; } else kids[nU++] = o;
       }
-      for (let i = 0; i < kids.length; i++) {
+      for (let i = nU; i < _cullUnitsN; i++) kids[i] = null;
+      _cullUnitsN = nU;
+      for (let i = 0; i < nU; i++) {
         const o = kids[i];
         if (o.isLight || o.isCamera) continue;
         const ud = o.userData;
@@ -8890,11 +8896,55 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (lm.hp <= 0) { lm.byMarine = !!byMarine; destroyLandmark(lm); }   // GB-101: who finished it (a drum he set off is his blast)
     }
 
+    // CL-280 (CU-183/CU-184: 1.1 draws about 22 more than 1.0 at night 20; AG-151: 13 of them the FOB yard's landmarks,
+    // one mesh each): while they stand, the yard's landmark bodies draw as one mesh in world space. Each landmark keeps its
+    // group (its colliders, hp and rubble, the sign's plate) with its body hidden; one that falls or stands again rebuilds
+    // the batch (a few thousand triangles, well under a millisecond, and only then).
+    function batchLandmarks(list, name) {
+      const batch = { list: [], name, mesh: null, dirty: false };
+      for (const lm of list) {
+        const body = lm.mesh && lm.mesh.children[0], a = body && body.geometry && body.geometry.attributes;
+        if (!a || !a.position || !a.normal || !a.color || body.geometry.index) continue;   // only mergeParts' plain bodies
+        lm.batch = batch; lm.batchBody = body; body.visible = false; batch.list.push(lm);
+      }
+      rebuildLandmarkBatch(batch);
+      return batch;
+    }
+    function rebuildLandmarkBatch(batch) {
+      batch.dirty = false;
+      if (batch.mesh) { scene.remove(batch.mesh); batch.mesh.geometry.dispose(); batch.mesh = null; }
+      let total = 0;
+      for (const lm of batch.list) if (lm.alive) total += lm.batchBody.geometry.attributes.position.count;
+      if (!total) return;
+      const P = new Float32Array(total * 3), N = new Float32Array(total * 3), C = new Float32Array(total * 3);
+      let o = 0;
+      for (const lm of batch.list) {
+        if (!lm.alive) continue;
+        const g = lm.mesh; g.updateMatrix();
+        const e = g.matrix.elements, a = lm.batchBody.geometry.attributes, pa = a.position.array, na = a.normal.array, ca = a.color.array, n = a.position.count;
+        for (let i = 0; i < n; i++) {
+          const r = i * 3, w = (o + i) * 3, x = pa[r], y = pa[r + 1], z = pa[r + 2], nx = na[r], ny = na[r + 1], nz = na[r + 2];
+          P[w] = e[0] * x + e[4] * y + e[8] * z + e[12]; P[w + 1] = e[1] * x + e[5] * y + e[9] * z + e[13]; P[w + 2] = e[2] * x + e[6] * y + e[10] * z + e[14];
+          N[w] = e[0] * nx + e[4] * ny + e[8] * nz; N[w + 1] = e[1] * nx + e[5] * ny + e[9] * nz; N[w + 2] = e[2] * nx + e[6] * ny + e[10] * nz;
+          C[w] = ca[r]; C[w + 1] = ca[r + 1]; C[w + 2] = ca[r + 2];
+        }
+        o += n;
+      }
+      const geo = new THREE.BufferGeometry();
+      geo.setAttribute('position', new THREE.BufferAttribute(P, 3));
+      geo.setAttribute('normal', new THREE.BufferAttribute(N, 3));
+      geo.setAttribute('color', new THREE.BufferAttribute(C, 3));
+      geo.computeBoundingSphere();
+      const m = new THREE.Mesh(geo, batch.list[0].batchBody.material);
+      m.name = batch.name; m.castShadow = true; m.receiveShadow = true;
+      scene.add(m); batch.mesh = m;
+    }
     function destroyLandmark(lm) {
       if (!lm || !lm.alive) return;
       lm.alive = false;
       lm.hp = 0;
       if (lm.mesh) lm.mesh.visible = false;
+      if (lm.batch) rebuildLandmarkBatch(lm.batch);   // CL-280
       if (lm.hikerRoster) lm.hikerRoster.visible = false;
       if (lm.light) lm.light.intensity = 0;
       if (lm.bar) lm.bar.visible = false;
@@ -9013,6 +9063,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (lm.alive) {
         lm.alive = false; lm.hp = 0;
         if (lm.mesh) lm.mesh.visible = false;
+        if (lm.batch) rebuildLandmarkBatch(lm.batch);   // CL-280
         if (lm.light) lm.light.intensity = 0;
         if (lm.bar) lm.bar.visible = false;
         if (lm.emberMesh) lm.emberMesh.visible = false;
@@ -15072,7 +15123,36 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       return mesh;
     }
 
+    // CL-280 (AG-151: at night 20's peak 36 motes in view, each its own mesh and draw): dust, splash and embers, nearly all
+    // of them, draw as one instanced mesh each, built here so the load's warm-up compiles them; the rarer motes (acid,
+    // mist, smoke, flares, the med pen) keep their own meshes. A mote's record holds a small stand-in with its position.
+    const _moteInst = new Map();
+    const _moZero = new THREE.Matrix4().makeScale(0, 0, 0), _moM = new THREE.Matrix4(), _moQ = new THREE.Quaternion(), _moS = new THREE.Vector3();
+    const _moteProxies = [];
+    for (const mat of [dustMat, splashMat, emberMat]) {
+      const mesh = new THREE.InstancedMesh(moteGeo, mat, MAX_MOTES);
+      mesh.name = 'motes-instanced'; mesh.frustumCulled = false; mesh.userData.noCull = true; mesh.visible = false;
+      for (let i = 0; i < MAX_MOTES; i++) mesh.setMatrixAt(i, _moZero);
+      scene.add(mesh);
+      _moteInst.set(mat, { mesh, n: 0, drawn: 0 });
+    }
+    function drawMoteInst() {
+      for (const e of _moteInst.values()) e.n = 0;
+      for (let i = 0; i < motes.length; i++) {
+        const m = motes[i], e = m.inst;
+        if (!e) continue;
+        _moS.set(m.cur, m.cur, m.cur); _moM.compose(m.mesh.position, _moQ, _moS);
+        e.mesh.setMatrixAt(e.n++, _moM);
+      }
+      for (const e of _moteInst.values()) {
+        for (let i = e.n; i < e.drawn; i++) e.mesh.setMatrixAt(i, _moZero);
+        if (e.n || e.drawn) e.mesh.instanceMatrix.needsUpdate = true;
+        e.drawn = e.n; e.mesh.visible = e.n > 0;
+      }
+    }
+
     function releaseMoteMesh(mesh) {
+      if (!mesh.isMesh) { _moteProxies.push(mesh); return; }   // CL-280: an instanced mote's stand-in
       mesh.visible = false;
       mesh.scale.setScalar(0.0001);
       motePool.push(mesh);
@@ -15121,12 +15201,13 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
 
     function spawnMote(x, y, z, mat, opts) {
       if (motes.length >= MAX_MOTES) return;
-      const mesh = acquireMoteMesh(mat);
+      const inst = _moteInst.get(mat) || null;   // CL-280
+      const mesh = inst ? (_moteProxies.pop() || { position: new THREE.Vector3() }) : acquireMoteMesh(mat);
       mesh.position.set(x, y, z);
       const scale = opts.scale;
-      mesh.scale.setScalar(scale);
+      if (!inst) mesh.scale.setScalar(scale);
       motes.push({
-        mesh, scale,
+        mesh, scale, inst, cur: scale,
         vx: opts.vx, vy: opts.vy, vz: opts.vz,
         grav: opts.grav, drag: opts.drag,
         age: 0, life: opts.life, grow: !!opts.grow
@@ -15275,8 +15356,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         m.mesh.position.x += m.vx * dt;
         m.mesh.position.y += m.vy * dt;
         m.mesh.position.z += m.vz * dt;
-        m.mesh.scale.setScalar(m.scale * (1 - t) * (m.grow ? 0.5 + t : 1));
+        m.cur = m.scale * (1 - t) * (m.grow ? 0.5 + t : 1);
+        if (!m.inst) m.mesh.scale.setScalar(m.cur);
       }
+      drawMoteInst();   // CL-280
     }
 
     // --- Debris / chunks ---
@@ -15335,19 +15418,34 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       return take();
     }
 
+    // CL-280 (AG-151: at night 20's peak 55 debris chunks in view, each its own mesh, material and draw, twice with the
+    // shadow pass): the chunks are one instanced mesh, one draw. Each keeps its colour and its tumble; one now shrinks away
+    // over the last third of its life where it used to fade (an opaque instance can't fade on its own).
+    const debrisInst = new THREE.InstancedMesh(chunkGeo, new THREE.MeshStandardMaterial({ roughness: 0.9 }), MAX_DEBRIS);
+    debrisInst.name = 'debris-chunks'; debrisInst.frustumCulled = false; debrisInst.castShadow = true;
+    debrisInst.userData.noCull = true;
+    debrisInst.instanceColor = new THREE.InstancedBufferAttribute(new Float32Array(MAX_DEBRIS * 3), 3);
+    const _dbZero = new THREE.Matrix4().makeScale(0, 0, 0), _dbM = new THREE.Matrix4(), _dbQ = new THREE.Quaternion(), _dbE = new THREE.Euler();
+    const _dbP = new THREE.Vector3(), _dbS = new THREE.Vector3(), _dbC = new THREE.Color();
+    for (let i = 0; i < MAX_DEBRIS; i++) { debrisInst.setMatrixAt(i, _dbZero); debrisInst.instanceColor.setXYZ(i, 1, 1, 1); }
+    scene.add(debrisInst);
+    let debrisDrawn = 0;
+    function clearDebris() {
+      debris.length = 0;
+      for (let i = 0; i < debrisDrawn; i++) debrisInst.setMatrixAt(i, _dbZero);
+      debrisDrawn = 0; debrisInst.instanceMatrix.needsUpdate = true;
+    }
+
     function spawnChunks(x, y, z, color, count, impulse = 4) {
       const n = Math.min(count, MAX_DEBRIS - debris.length);
+      if (n <= 0) return;
+      if (typeof color === 'number') _dbC.setHex(color); else _dbC.set(color);
       for (let i = 0; i < n; i++) {
-        const mat = chunkMat(color);
-        mat.opacity = 1; // pooled: reset what the previous user faded
-        const mesh = acquireEffectMesh(chunkGeo, mat, MAX_DEBRIS + 8);
-        mesh.position.set(x + (Math.random() - 0.5) * 0.3, y + Math.random() * 0.2, z + (Math.random() - 0.5) * 0.3);
-        mesh.scale.setScalar(0.5 + Math.random() * 1.2);
-        mesh.castShadow = true;
         const ang = Math.random() * Math.PI * 2;
         const sp = impulse * (0.5 + Math.random());
         debris.push({
-          mesh,
+          x: x + (Math.random() - 0.5) * 0.3, y: y + Math.random() * 0.2, z: z + (Math.random() - 0.5) * 0.3,
+          rx: 0, rz: 0, s: 0.5 + Math.random() * 1.2, r: _dbC.r, g: _dbC.g, b: _dbC.b,
           vx: Math.cos(ang) * sp,
           vy: 2 + Math.random() * impulse,
           vz: Math.sin(ang) * sp,
@@ -15362,16 +15460,16 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         const d = debris[i];
         d.age += dt;
         d.vy -= 14 * dt;
-        d.mesh.position.x += d.vx * dt;
-        d.mesh.position.y += d.vy * dt;
-        d.mesh.position.z += d.vz * dt;
-        d.mesh.rotation.x += dt * 4 * (1 + Math.abs(d.vx));
-        d.mesh.rotation.z += dt * 3 * (1 + Math.abs(d.vz));
+        d.x += d.vx * dt;
+        d.y += d.vy * dt;
+        d.z += d.vz * dt;
+        d.rx += dt * 4 * (1 + Math.abs(d.vx));
+        d.rz += dt * 3 * (1 + Math.abs(d.vz));
         {
-          const px = d.mesh.position.x, pz = d.mesh.position.z;
+          const px = d.x, pz = d.z;
           const gh = sampleHeight(px, pz) + 0.05;
-          if (d.mesh.position.y < gh) {
-            d.mesh.position.y = gh;
+          if (d.y < gh) {
+            d.y = gh;
             // Reflect off the actual surface so chunks tumble downhill rather than
             // pogoing straight up wherever they land.
             const v = reflectOnTerrain(px, pz, d.vx, d.vy, d.vz, 0.28, 0.62);
@@ -15384,14 +15482,19 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
             }
           }
         }
-        const fade = Math.max(0, 1 - d.age / d.life);
-        d.mesh.material.opacity = fade;
-        if (d.age >= d.life) {
-          releaseEffectMesh(d.mesh);
-          d.mesh.material.dispose(); // pooled materials no-op this (see poolProof)
-          debris.splice(i, 1);
-        }
+        if (d.age >= d.life) debris.splice(i, 1);
       }
+      // One instance per live chunk, in order; the ones past the count go to nothing.
+      const n = debris.length;
+      for (let i = 0; i < n; i++) {
+        const d = debris[i], k = d.s * Math.min(1, 3 * (1 - d.age / d.life));
+        _dbE.set(d.rx, 0, d.rz); _dbQ.setFromEuler(_dbE); _dbP.set(d.x, d.y, d.z); _dbS.set(k, k, k);
+        _dbM.compose(_dbP, _dbQ, _dbS); debrisInst.setMatrixAt(i, _dbM);
+        debrisInst.instanceColor.setXYZ(i, d.r, d.g, d.b);
+      }
+      for (let i = n; i < debrisDrawn; i++) debrisInst.setMatrixAt(i, _dbZero);
+      if (n || debrisDrawn) { debrisInst.instanceMatrix.needsUpdate = true; debrisInst.instanceColor.needsUpdate = true; }
+      debrisDrawn = n;
     }
 
     // --- Blood FX ---
@@ -25678,6 +25781,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // Nothing grows through the HQ, and nothing stands in its walls.
     clearFoliageInSquare(0, 0, HQ_HALF + 5.8);
     function buildFobYard() {
+      const fobLms = [];   // CL-280: drawn as one batch at the end
       const mats = new Map();
       const mat = (hex) => { let m = mats.get(hex); if (!m) { m = new THREE.MeshStandardMaterial({ color: hex, roughness: 0.88 }); mats.set(hex, m); } return m; };
       const put = (list, geo, hex, x, y, z, rx = 0, ry = 0, rz = 0) => { const m = new THREE.Mesh(geo, mat(hex)); m.position.set(x, y, z); m.rotation.set(rx, ry, rz); list.push(m); return m; };
@@ -25701,7 +25805,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         const cy = Math.cos(yaw), sy = Math.sin(yaw);
         for (const [lx, lz, r, h] of cols) lm.colliders.push(addSolid(cx + lx * cy + lz * sy, cz - lx * sy + lz * cy, r, gy - 0.05, gy + h, lm));
         lm.spawnColliders = lm.colliders.slice();
-        landmarks.push(lm);
+        landmarks.push(lm); fobLms.push(lm);
         return lm;
       };
       // The flat things on the ground (the ruts, the generator's pad) go into one mesh in world space: their parts are
@@ -25908,7 +26012,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         B(tp, 0.48, 0.28, 0.42, 0x2b2620, 0.36, 0.20, 0.68, 0, 0.3, 0);
         addLm('fob-burned-tent', 'camp', 9.4, -1.2, 0.10, 1.45, 95, tp, [[0, -0.55, 0.88, 1.90], [0, 0.55, 0.88, 1.90]]);
       }
+      fobBatch = batchLandmarks(fobLms, 'fob-yard-batch');   // CL-280
     }
+    let fobBatch = null;
     for (const t of trees) {
       if (Math.abs(t.x) > HQ_HALF + 1.5 || Math.abs(t.z) > HQ_HALF + 1.5) continue;
       t.alive = false; t.falling = false; t.stump = false;
@@ -48936,8 +49042,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // which brings the well up: m4 R 30-44k all reload, L 9-45k except u0.22-0.40 (the pouch trip); ak R 18-28k, L 23-46k except
     // u0.22-0.40 (seat3 row g2, seat4 row g3). The aa12's drum hides the palm under it at any framing that keeps the firing hand
     // (seat5, seat6): it takes the row with the strongest firing hand, R 10-24k, its palm a sliver at the seat (0.7-3.7k).
+    // GB-247: the launcher takes the rifles' side and tip too: R 16-34k the whole reload, L out only u0.25-0.40 (the pouch trip) and
+    // 67k at the drum (u0.48), against 5.7k there before (qa/2026-10-29-GB-247 sweep1 row g2). The uzi's support hand reads 0 px
+    // from u0.10 to u0.62 at every mount row tried (12 rows, sweep1-2): its own arm path, not the mount, so its entry stays.
     const FP_RELOAD_LIFT_GUN = { m4: { up: 0.10, side: 0.10, tip: -0.25 }, ak: { up: 0.08, side: 0.12, tip: -0.30 },
-      aa12: { up: 0.12, side: 0.12, tip: -0.25 }, launcher: { up: 0.06, cant: 0.6 }, uzi: { up: 0.19, tip: -0.6 } };
+      aa12: { up: 0.12, side: 0.12, tip: -0.25 }, launcher: { up: 0.10, side: 0.12, tip: -0.30, cant: 0.6 }, uzi: { up: 0.19, tip: -0.6 } };
     const _fpRlOut = { up: 0, in: 0, side: 0, fwd: 0, tip: 0, turn: 0, cant: 0, hip: 0 };
     function fpReloadSet() {   // GB-245: the live reload framing for the gun in hand
       const o = _fpRlOut, b = FP_RELOAD_LIFT, g = FP_RELOAD_LIFT_GUN[currentWeapon];
@@ -55821,7 +55930,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const rl = hordeNextRole(z.typeKey, hordeState.roleAcc); hordeState.roleAcc = rl.acc; z.hzRole = rl.role;   // GB-135: 70% mass, 30% flank
       z.wit = hordeWit(z.typeKey, Math.random());
       z.hzSlot = -1; z.hzSlotT = 0; z.hzOpenT = 0; z.hzOpen = false;
-      z.hzLungeT = 0; z.hzLungeCd = 0.5 + Math.random() * 2; z.hzRecoilT = 0; z.hzRecoilCd = 0; z.hzRecoilSide = 1;
+      z.hzLungeT = 0; z.hzCoilT = 0; z.hzLungeRec = 0; z.hzLungeCd = 0.5 + Math.random() * 2; z.hzRecoilT = 0; z.hzRecoilCd = 0; z.hzRecoilSide = 1;
       z.hzStalk = 0; z.hzMustered = false; z.hzSpX = 0; z.hzSpZ = 0; z.hzD = 1e9;
       z.hzReact = hordeReact(z.typeKey, Math.random());   // 'duck' (28%) or 'stagger' (the rest); null for the heavies
       z.hzStaggerT = 0; z.hzStaggerCd = 0; z.hzStagX = 0; z.hzStagZ = 0;
@@ -55879,7 +55988,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (z.hzReact === 'stagger') {
         if (z.hzStaggerCd > 0) return;
         z.hzStaggerT = HORDE.STAGGER_S; z.hzStaggerCd = HORDE.STAGGER_CD;
-        z.hzStagX = dx || 0; z.hzStagZ = dz || 0; z.hzLungeT = 0;
+        z.hzStagX = dx || 0; z.hzStagZ = dz || 0; z.hzLungeT = 0; z.hzCoilT = 0;
         return;
       }
       if (z.hzReact !== 'duck' || z.hzRecoilCd > 0) return;
@@ -55938,6 +56047,26 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
     // GB-202: updateZombies allocated 264 kB a frame at night 20 (GP-19940's profile), much of it Math.hypot's; this one does not.
     const zHyp = (a, b, c = 0, d = 0) => Math.sqrt(a * a + b * b + c * c + d * d);
+    // GB-251 (D-99, CU-184): updateZombies' own garbage. Any closure made inside its per-zombie loop that reads the loop's
+    // locals puts them all in a heap context, a new one each zombie each frame, and every write to a number among them
+    // (mx and mz many times a zombie) boxes a fresh heap number. These helpers live outside the loop so nothing does.
+    function zPoiGuardAlive(g) { let n = 0; for (const o of zombies) if (o.poiGuard === g && o.alive) n++; return n; }
+    function zKneeOf(cs, kneeK, walkAmt0) { return (Math.max(0, -cs) * kneeK + Math.max(0, cs) * 0.08) * Math.min(1, 0.4 + walkAmt0 * 0.6); }
+    function zSmooth01(q) { q = Math.max(0, Math.min(1, q)); return q * q * (3 - 2 * q); }
+    const _zClimbSlid = { x: 0, z: 0 };
+    const _zFeetCtx = { phase: 0, walkAmt: 0, standing: false, busy: false };
+    function zScreamerSafe(z, zx, zz) {
+      return (ax,az)=>{
+            const y=z.mesh.position.y;
+            for (const d of [.4,.8,1.2]) {
+              const ex=zx+ax*d, ez=zz+az*d, floor=entityGroundY(ex,ez,y+STEP_UP);
+              if (!Number.isFinite(floor) || (floor-y>.85 && !onRamp(ex,ez)) || floor-y < -1 || (!training.active && zHyp(ex,ez)>landRadius-1.3) || segCrossesHouse(zx,zz,ex,ez,z.radius) || buildBetween(zx,y+.65,zz,ex,y+.65,ez)) return false;
+              let q=resolveSoftBarricades(ex,ez,z.radius,1);q=resolveHardBuildCollisions(q.x,q.z,z.radius,false,y);q=resolveStaticProps(q.x,q.z,z.radius,y);
+              if (zHyp(q.x-ex,q.z-ez)>.04) return false;
+            }
+            return true;
+      };
+    }
     function updateZombies(dt) {
       updateRunePistol();   // GB-119: the rune pistol on the dock, by day
       if (hollowFloor) { updateBelow(dt); return; }   // GB-107: below, only the warren's dead move (topside's stay frozen)
@@ -55994,7 +56123,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         // GB-43: a POI guard holds its post until woken.
         if (z.poiGuard && !z.poiAwake) {
           const gd = zHyp(zTarget(z).position.x - z.mesh.position.x, zTarget(z).position.z - z.mesh.position.z);
-          const lost = zombies.filter((o) => o.poiGuard === z.poiGuard && o.alive).length < (z.poiGuard.n || 0);
+          const lost = zPoiGuardAlive(z.poiGuard) < (z.poiGuard.n || 0);
           if (poiPhase === 'wave') wakePoiGuards('alarm');
           else if (z.hp < z.maxHp || lost) wakePoiGuards('hit', z.poiGuard);
           else if (gd < POI_GUARD_WAKE) wakePoiGuards('near', z.poiGuard);
@@ -56155,9 +56284,12 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
             }
           }
           if (z.hz.lunge) {
-            if (z.hzLungeT > 0) { z.hzLungeT -= dt; spd = z.hzLungeAbs > 0 ? Math.min(spd * z.hzLungeAbs / Math.max(0.1, z.speed), z.hzLungeAbs * (bloodMoon ? 1.2 : 1)) : spd * HORDE.LUNGE_MUL; }   // GB-158: the shambler lunges at 5.0 m/s, the soldier at 6.0 (slows still cut it)
+            if (z.hzLungeRec > 0) z.hzLungeRec -= dt;   // GB-248: the feral's recovery pose (no speed change)
+            if (z.hzCoilT > 0) { z.hzCoilT -= dt; spd *= 0.35; if (z.hzCoilT <= 0) { z.hzCoilT = 0; z.hzLungeT = HORDE.LUNGE_S; } }   // GB-248: the coil, the lunge's tell
+            else
+            if (z.hzLungeT > 0) { z.hzLungeT -= dt; if (z.hzLungeT <= 0 && z.typeKey === 'feral') z.hzLungeRec = 0.24; spd = z.hzLungeAbs > 0 ? Math.min(spd * z.hzLungeAbs / Math.max(0.1, z.speed), z.hzLungeAbs * (bloodMoon ? 1.2 : 1)) : spd * HORDE.LUNGE_MUL; }   // GB-158: the shambler lunges at 5.0 m/s, the soldier at 6.0 (slows still cut it)
             else if (hzChase && z.hzLungeCd <= 0 && z.attackWindup <= 0 && hzPd >= HORDE.LUNGE_IN && hzPd <= HORDE.LUNGE_OUT) {
-              z.hzLungeT = HORDE.LUNGE_S;
+              if (z.typeKey === 'feral') z.hzCoilT = 0.18; else z.hzLungeT = HORDE.LUNGE_S;   // GB-248: the feral coils before it springs
               z.hzLungeCd = HORDE.LUNGE_CD[0] + Math.random() * (HORDE.LUNGE_CD[1] - HORDE.LUNGE_CD[0]);
             }
           }
@@ -56465,14 +56597,14 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         }
 
         // Colossus: wind up and flatten everything in a circle.
+        if (z.slamFollowT > 0) { z.slamFollowT -= dt; if (z.typeKey === 'colossus' && !graceFreeze) spd *= 0.25; }   // GB-248: planted through the follow-through
         if (tactics === 'boss' && !z.abilityBusy && !graceFreeze) {
           if (z.slamWind > 0) {
             z.slamWind -= dt;
             spd = 0;
-            if (z.mesh.userData.armLG) z.mesh.userData.armLG.rotation.x = -2.4;
-            if (z.mesh.userData.armRG) z.mesh.userData.armRG.rotation.x = -2.4;
             if (z.slamWind <= 0) {
               AudioSys.bossSlam();
+              z.slamFollowT = 0.5;   // GB-248: the follow-through (the fists into the ground, then the settle)
               const sd = zHyp(zx - zTarget(z).position.x, zz - zTarget(z).position.z);
               addShake(Math.max(0.25, 1.0 - sd * 0.03));
               spawnDust(zx, hHere, zz, 14);
@@ -56501,7 +56633,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
               }
               wantSlam = nearBuilds >= 2;
             }
-            if (wantSlam && z.slamCd <= 0) {
+            if (wantSlam && z.slamCd <= 0 && !(z.attackWindup > 0) && !(z.swingT > 0)) {   // GB-248: a claw swing finishes first
               z.slamWind = 0.75;
               z.slamCd = 4.2;
               { const sa = sndAt(zx, zz, 40); AudioSys.zombieVoice(z.typeKey, 'attack', sa.v, sa.pan, z); }
@@ -56588,16 +56720,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         tickScreamerShield(z, dt); // observe actual scream completion, not a separate clock
         const screamerTurn = steerScreamer(z, sx, sz, dt, z.typeKey === 'screamer' ? { // GP-19876: watch him while backing into safe space
           dx:px0-zx, dz:pz0-zz, allow:!graceFreeze && !rising && !lured && !windowRoute,
-          safe:(ax,az)=>{
-            const y=z.mesh.position.y;
-            for (const d of [.4,.8,1.2]) {
-              const ex=zx+ax*d, ez=zz+az*d, floor=entityGroundY(ex,ez,y+STEP_UP);
-              if (!Number.isFinite(floor) || (floor-y>.85 && !onRamp(ex,ez)) || floor-y < -1 || (!training.active && zHyp(ex,ez)>landRadius-1.3) || segCrossesHouse(zx,zz,ex,ez,z.radius) || buildBetween(zx,y+.65,zz,ex,y+.65,ez)) return false;
-              let q=resolveSoftBarricades(ex,ez,z.radius,1);q=resolveHardBuildCollisions(q.x,q.z,z.radius,false,y);q=resolveStaticProps(q.x,q.z,z.radius,y);
-              if (zHyp(q.x-ex,q.z-ez)>.04) return false;
-            }
-            return true;
-          }
+          safe:zScreamerSafe(z, zx, zz)   // GB-251: made outside the loop, so the loop's own locals stay off the heap
         } : null);
         if (screamerTurn) { sx=screamerTurn.x; sz=screamerTurn.z; spd*=screamerTurn.pace; }
         const spitterTurn = steerSpitter(z, z.spitWind > 0 ? tx-zx : sx, z.spitWind > 0 ? tz-zz : sz, dt);
@@ -56606,13 +56729,13 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         if (drownedTurn) { sx = drownedTurn.x; sz = drownedTurn.z; spd *= drownedTurn.pace; }
         let bruteStep = null;
         if (z.typeKey === 'brute') {
-          const victim = zTarget(z);
+          const victim = zTarget(z), zb = z;   // GB-251: the closures below hold zb, not the loop's z
           bruteStep = stepBrute(z, dt, { x:sx, z:sz, speed:spd, target:victim,
             valid:!graceFreeze && !rising && !gameOver && !won && !scriptedKill && victim.alive !== false && !(victim.hp <= 0),
             canStart:!lured && !windowRoute && !z.abilityBusy && z.attackWindup <= 0 && !(z.swingT > 0),
             dodging:v=>v === localPlayer && diveInAir(),
-            buildValid:b=>!!b && b.hp>0 && !doorIsOpen(b) && builds.includes(b),buildContact:(b,point,yaw)=>bruteBuildContact(z,b,point,yaw),
-            blocked:(a,b)=>!!buildBetween(a.x,a.y+.9,a.z,b.x,b.y+.9,b.z) || segCrossesHouse(a.x,a.z,b.x,b.z,z.radius) });
+            buildValid:b=>!!b && b.hp>0 && !doorIsOpen(b) && builds.includes(b),buildContact:(b,point,yaw)=>bruteBuildContact(zb,b,point,yaw),
+            blocked:(a,b)=>!!buildBetween(a.x,a.y+.9,a.z,b.x,b.y+.9,b.z) || segCrossesHouse(a.x,a.z,b.x,b.z,zb.radius) });
           if (bruteStep) {
             sx=bruteStep.x;sz=bruteStep.z;spd=bruteStep.speed;
             if (bruteStep.started === 'wind') { z.attackCd=Math.max(z.attackCd,bruteStep.build ? BRUTE.buildCooldown : BRUTE.cooldown);const sa=sndAt(zx,zz,30);AudioSys.zombieVoice('brute','attack',sa.v,sa.pan,z); }
@@ -56623,11 +56746,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         }
         let militaryStep = null;
         if (z.typeKey === 'military') {
-          const victim = zTarget(z), local = victim === localPlayer;
+          const victim = zTarget(z), local = victim === localPlayer, zm = z;   // GB-251: blocked holds zm, not the loop's z
           militaryStep = stepMilitary(z, dt, { x:sx, z:sz, speed:spd, target:victim, grenades:grenadesInFlight, thrower:g=>playerById(g.throwerId),
             valid:!graceFreeze && !rising && !gameOver && !won && !scriptedKill && victim.alive !== false && !(victim.hp <= 0),
             engage:!lured && !windowRoute, canStart:!lured && !windowRoute && !z.abilityBusy && z.attackWindup <= 0 && !(z.swingT > 0), dodging:local && diveInAir(),
-            blocked:(a,b)=>Math.abs(a.y-b.y)>1.3 || !!buildBetween(a.x,a.y+.25,a.z,b.x,b.y+.25,b.z) || segCrossesHouse(a.x,a.z,b.x,b.z,z.radius) });
+            blocked:(a,b)=>Math.abs(a.y-b.y)>1.3 || !!buildBetween(a.x,a.y+.25,a.z,b.x,b.y+.25,b.z) || segCrossesHouse(a.x,a.z,b.x,b.z,zm.radius) });
           if (militaryStep) {
             sx=militaryStep.x; sz=militaryStep.z; spd=militaryStep.speed;
             if (militaryStep.hit) {
@@ -56689,7 +56812,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         // Soft barricades — brutes shrug them off more
         const softStr = (tactics === 'tank' || z.siegeFrom === 'tank') ? 0.25 : 0.85;   // GB-88: a sieging brute keeps its shove
         let slid = (z.climber && pieceHeight('barricade') <= (z.climbHeight || CLIMB_HEIGHT))
-          ? { x: mx, z: mz }
+          ? (_zClimbSlid.x = mx, _zClimbSlid.z = mz, _zClimbSlid)   // GB-251: a reused scratch, read at once below
           : resolveSoftBarricades(mx, mz, z.radius, softStr);
         mx = slid.x; mz = slid.z;
         slid = resolveHardBuildCollisions(mx, mz, z.radius, false, z.mesh.position.y, z.climber ? (z.climbHeight || CLIMB_HEIGHT) : null);
@@ -56764,6 +56887,95 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           }
           if (z.hp <= 0) { z._defenseKill = !!z.burnDefense; dotKills.push(z); }
         }
+        zombieLateStep(z, dt, kind, spiderTouch, spiderWander, shamblerRecovering, tactics, windowRoute, dist, graceFreeze, spd, zx, zz, sx, sz, flowed, zDepth, zOnDeck, zSwimming, knocked, rising, spiderTurn, shamblerTurn, screamerTurn, spitterTurn, drownedTurn, bruteStep, militaryStep, drownedStep, bomberStep, mx, mz, dotKills);   // GB-251: the rest of this zombie's frame, in its own function (see zombieLateStep)
+      }
+      for (const z of zombies) if (z.alive && z.windowClimb) updateZombieWindowClimb(z, dt);
+      for (const z of dotKills) {
+        if (z.alive) killZombie(z, true, { kind: 'generic', dir: { x: 0, z: 0 }, defense: !!z._defenseKill });
+      }
+      for (const z of bombQueue) {
+        if (z.alive) killZombie(z, false, { kind: 'explosive', dir: { x: 0, z: 0 }, selfBlast: true });   // GB-77: it went off on its own
+      }
+      // GB-142: where each stood before the separation pass, for the contact ring after it (below).
+      for (const z of zombies) if (z.alive && z.mesh) { z._preSepX = z.mesh.position.x; z._preSepZ = z.mesh.position.z; }
+      // Keep the horde from collapsing into one overlapping stack.
+      for (let i = 0; i < zombies.length; i++) {
+        const a = zombies[i];
+        if (!a.alive) continue;
+        for (let j = i + 1; j < zombies.length; j++) {
+          const b = zombies[j];
+          if (!b.alive) continue;
+          const dx = b.mesh.position.x - a.mesh.position.x;
+          const dz = b.mesh.position.z - a.mesh.position.z;
+          const minD = a.radius + b.radius;
+          const roomD = (a.hz || b.hz) ? minD + HORDE.SPACE : minD;   // GB-94: a little room on the way in (heading only)
+          // Claude 2026-09-28: `!(|d| <= minD)` rather than `> minD`, so a NaN is skipped too. A NaN
+          // here used to get through the box test, turn `hypot || 0.0001` into 0.0001 and push
+          // every neighbour by NaN or ten thousand times the gap: one bad body took the horde.
+          if (!(Math.abs(dx) <= roomD && Math.abs(dz) <= roomD)) continue;
+          const dist = zHyp(dx, dz) || 0.0001;
+          if (dist >= minD) { if (dist < roomD) hordeRoom(a, b, dx / dist, dz / dist, (roomD - dist) / HORDE.SPACE); continue; }
+          const push = (minD - dist) * 0.58;
+          const ux = dx / dist, uz = dz / dist;
+          a.mesh.position.x -= ux * push; a.mesh.position.z -= uz * push;
+          b.mesh.position.x += ux * push; b.mesh.position.z += uz * push;
+        }
+      }
+      for (const z of zombies) {
+        if (!z.alive) continue;
+        // Claude 2026-09-28: backstop. A body whose position went bad this frame goes back to
+        // where it last stood (z.x/z.z, last frame's good place) instead of vanishing, and
+        // drops the steering state that may have carried the bad number.
+        if (!Number.isFinite(z.mesh.position.x) || !Number.isFinite(z.mesh.position.z) || !Number.isFinite(z.mesh.position.y)) {
+          const okX = Number.isFinite(z.x) ? z.x : zTarget(z).position.x, okZ = Number.isFinite(z.z) ? z.z : zTarget(z).position.z;
+          z.mesh.position.x = okX; z.mesh.position.z = okZ; z.mesh.position.y = entityGroundY(okX, okZ);
+          z.flowX = null; z.flowZ = null; z.unstickT = 0; z.staggerVX = 0; z.staggerVZ = 0;
+          z.stuckX = okX; z.stuckZ = okZ;
+          badPosResets++;
+        }
+        // GB-142: the separation pass pushes bodies without knowing he is there, and a dense horde round him summed
+        // enough shoves to put one into him or through him; the contact ring in the walk then set it out on his far
+        // side, 4 m in a tick (t98, megaswarm). So the ring again here: a body the pass left inside it, or carried
+        // across it, goes back onto it on the side it was on before the pass.
+        if (!scriptedKill && Number.isFinite(z._preSepX)) {
+          const tp = zTarget(z).position;
+          if (Math.abs(z.mesh.position.y - tp.y) < 1.6) {
+            const ring = z.radius + PLAYER_RADIUS + 0.04;
+            const ax = z._preSepX - tp.x, az = z._preSepZ - tp.z, bx = z.mesh.position.x - tp.x, bz = z.mesh.position.z - tp.z;
+            const ex = bx - ax, ez = bz - az, el = ex * ex + ez * ez;
+            const k = el > 1e-8 ? Math.max(0, Math.min(1, -(ax * ex + az * ez) / el)) : 1;
+            const cx = ax + ex * k, cz = az + ez * k;
+            const inside = bx * bx + bz * bz < ring * ring;
+            const across = cx * cx + cz * cz < ring * ring && ax * bx + az * bz < 0;
+            if (inside || across) {
+              let sx = ax, sz = az, sd = zHyp(sx, sz);
+              if (!(sd > 1e-4)) { sx = bx; sz = bz; sd = zHyp(sx, sz); }
+              if (sd > 1e-4) { z.mesh.position.x = tp.x + sx / sd * Math.max(ring, Math.min(sd, ring + 0.05)); z.mesh.position.z = tp.z + sz / sd * Math.max(ring, Math.min(sd, ring + 0.05)); }
+              if (hasShamblerSteering(z)) {   // GP-19854: the turning arc must keep clear of solid cover after the ring correction
+                const p = resolveHardBuildCollisions(z.mesh.position.x, z.mesh.position.z, z.radius, false, z.mesh.position.y, z.climber ? (z.climbHeight || CLIMB_HEIGHT) : null);
+                const q = resolveStaticProps(p.x, p.z, z.radius, z.mesh.position.y);
+                z.mesh.position.x = q.x; z.mesh.position.z = q.z;
+              }
+            }
+          }
+        }
+        if (training.active) trainingKeepZombie(z);   // CL-115
+        z.x = z.mesh.position.x;
+        z.z = z.mesh.position.z;
+        // Re-seat after the separation pass — except swimmers (their float height was
+        // eased above and used to get snapped to the lake bed here every frame) and
+        // bodies still clawing up out of the ground.
+        if (waterDepthAt(z.x, z.z) > 1.3) continue;
+        if (z.leapT > 0) continue; // mid-leap: the arc owns its height
+        z.mesh.position.y = entityGroundY(z.x, z.z) - (z.riseOff || 0);
+      }
+      updateWaveHud();
+    }
+    // GB-251 (D-99): the second half of updateZombies' per-zombie loop, moved out word for word. One function of
+    // 95 kB bytecode is past V8's 61 kB optimizing limit, so it stayed in the interpreter and boxed every number it made
+    // (about 5 kB a zombie a frame); two halves each fit. Its arguments are the loop's locals it reads (mx, mz and slid
+    // are its own from here on; nothing after the call reads them).
+    function zombieLateStep(z, dt, kind, spiderTouch, spiderWander, shamblerRecovering, tactics, windowRoute, dist, graceFreeze, spd, zx, zz, sx, sz, flowed, zDepth, zOnDeck, zSwimming, knocked, rising, spiderTurn, shamblerTurn, screamerTurn, spitterTurn, drownedTurn, bruteStep, militaryStep, drownedStep, bomberStep, mx, mz, dotKills) {
         const rr = zHyp(mx, mz);
         if (rr > landRadius - 1.2 && !training.active) {   // CL-115: past the map's edge is the Training Ground
           const s = (landRadius - 1.2) / rr;
@@ -56924,16 +57136,16 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         // a brute lifts and plants, a shambler drags its feet low. The limp leg (variant) swings short and stiff.
         const kneeK = z.typeKey === 'feral' ? 1.15 : (z.typeKey === 'brute' || z.typeKey === 'demon' || z.typeKey === 'colossus' || z.typeKey === 'guardian') ? 0.75 : z.typeKey === 'military' ? 0.8 : 0.55;
         const walkAmt0 = moving ? Math.min(1, spd / Math.max(0.5, z.baseSpeed)) : 0;
-        const kneeOf = (sw, cs) => (Math.max(0, -cs) * kneeK + Math.max(0, cs) * 0.08) * Math.min(1, 0.4 + walkAmt0 * 0.6);   // in the air: lift; on the ground: a little give
+        // in the air: lift; on the ground: a little give (GB-251: zKneeOf, above updateZombies, so no closure each frame)
         if (!z.farLod && ud.legLG) {
           const csL = Math.cos(phase), csR = Math.cos(phase + Math.PI);
           if (!parts.legL) {
             ud.legLG.rotation.x = swing * amp * (1 - limpK * 0.55);
-            if (ud.legLG.userData.shinG) ud.legLG.userData.shinG.rotation.x = kneeOf(swing, csL) * amp * 2 * (1 - limpK * 0.7);
+            if (ud.legLG.userData.shinG) ud.legLG.userData.shinG.rotation.x = zKneeOf(csL, kneeK, walkAmt0) * amp * 2 * (1 - limpK * 0.7);
           }
           if (!parts.legR) {
             ud.legRG.rotation.x = swing2 * amp;
-            if (ud.legRG.userData.shinG) ud.legRG.userData.shinG.rotation.x = kneeOf(swing2, csR) * amp * 2;
+            if (ud.legRG.userData.shinG) ud.legRG.userData.shinG.rotation.x = zKneeOf(csR, kneeK, walkAmt0) * amp * 2;
           }
         }
         if (ud.armLG) {
@@ -56957,12 +57169,12 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           const tp = zTarget(z).position, gd = zHyp(tp.x - zx, tp.z - zz);
           const want = moving && !standing && gd < 5.5 ? Math.min(1, (5.5 - gd) / 2.5) : 0;
           z.reachK = (z.reachK || 0) + (want - (z.reachK || 0)) * (1 - Math.exp(-4 * dt));
-          const rk = z.reachK;
+          const rk = z.reachK, zg = z;   // GB-251: grab holds zg, not the loop's z
           if (rk > 0.01) {
             const grab = (arm, x, ph) => {
-              arm.rotation.x += (x + Math.sin(z.bob * 1.6 + ph) * 0.12 - arm.rotation.x) * rk;
+              arm.rotation.x += (x + Math.sin(zg.bob * 1.6 + ph) * 0.12 - arm.rotation.x) * rk;
               const el = arm.userData.elbowG;
-              if (el) el.rotation.x += (-0.3 + Math.sin(z.bob * 3.1 + ph) * 0.2 - el.rotation.x) * rk;
+              if (el) el.rotation.x += (-0.3 + Math.sin(zg.bob * 3.1 + ph) * 0.2 - el.rotation.x) * rk;
             };
             if (!parts.armL) grab(ud.armLG, -1.45, 0);
             if (!parts.armR) grab(ud.armRG, -1.28, 1.3);
@@ -57129,7 +57341,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         //  - The hop (one leg): two hops a stride on the leg it has. Up with the knee tucked, down with the knee taking it,
         //    a lurch forward on each landing, the body leaning over the good leg, and both arms out for balance.
         if (!z.farLod && !ud.crawlLimbs && (z.crawling || z.hopping)) {
-          const go = moving && !standing ? 1 : 0.15;
+          const go = moving && !standing ? 1 : 0.15, restP = rest;   // GB-251: pull holds restP, not the loop's rest
           if (z.crawling) {
             const pull = (arm, p, side) => {
               const u = ((p % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2) / (Math.PI * 2);
@@ -57137,7 +57349,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
               if (u < 0.35) { const k = u / 0.35, e = k * k * (3 - 2 * k); ang = -0.9 - 1.8 * e; elb = -0.95 * Math.sin(k * Math.PI); }   // reach out ahead, elbow up
               else { const k = (u - 0.35) / 0.65, e = k * k * (3 - 2 * k); ang = -2.7 + 1.8 * e; elb = -0.15 - 0.45 * e; }               // plant and drag
               arm.rotation.x = -1.35 + (ang + 1.35) * go;
-              arm.rotation.z = (side < 0 ? (rest.armLRZ || 0) : (rest.armRRZ || 0)) + side * -0.32;
+              arm.rotation.z = (side < 0 ? (restP.armLRZ || 0) : (restP.armRRZ || 0)) + side * -0.32;
               if (arm.userData.elbowG) arm.userData.elbowG.rotation.x = elb * go - 0.2 * (1 - go);
             };
             const one = !!parts.armL !== !!parts.armR;   // one arm left: it pulls at the same pace, and the body yaws toward it
@@ -57164,11 +57376,48 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           }
         }
 
-        // Slam tell: both arms high overhead while the colossus winds up.
-        if (z.slamWind > 0) {
-          if (ud.armLG && !parts.armL) ud.armLG.rotation.x = -2.5;
-          if (ud.armRG && !parts.armR) ud.armRG.rotation.x = -2.5;
-          if (ud.torso) ud.torso.rotation.x = -0.2;
+        // GB-248 (D-89, GP-19970): the feral's horde lunge has a tell. The coil (hzCoilT, 0.18 s): it drops into its knees,
+        // the torso folds forward, both arms draw back and the head stays up on him. The spring (hzLungeT): it snaps out long
+        // along the line of the lunge, both arms thrown forward at him, nearly straight. The recovery (hzLungeRec, 0.24 s)
+        // eases it back into its run. Weighted over the run's own pose, so it starts and ends where the run is.
+        if (z.typeKey === 'feral' && z.hz && !z.farLod && !z.crawling && !z.hopping && !rising && z.attackWindup <= 0 && !(z.swingT > 0) && (z.hzCoilT > 0 || z.hzLungeT > 0 || z.hzLungeRec > 0)) {
+          const sm = zSmooth01;   // GB-251: one shared smoothstep, not a new closure each frame
+          let w, m;   // w: weight over the run; m: 0 = the coil's pose, 1 = the spring's
+          if (z.hzCoilT > 0) { w = sm(1 - z.hzCoilT / 0.18); m = 0; }
+          else if (z.hzLungeT > 0) { w = 1; m = 1 - Math.pow(1 - Math.min(1, (1 - z.hzLungeT / HORDE.LUNGE_S) / 0.3), 2); }   // out fast (ease-out), then held
+          else { w = 1 - sm(1 - z.hzLungeRec / 0.24); m = 1; }
+          const lean = 0.45 + 0.17 * m, sink = 0.12 - 0.07 * m, knee = 0.55 - 0.35 * m, look = -0.4 - 0.12 * m;
+          z._hzReach = (0.45 + (-1.05 - 0.45) * m) * w;   // the arms: applied over the claws below (applyFeralClaws owns the arms and palms)
+          gaitLean += (lean - gaitLean) * w; gaitSway *= 1 - 0.7 * w; gaitTwist *= 1 - 0.7 * w; headBob += (look - headBob) * w;
+          if (ud.hips) ud.hips.position.y -= sink * w;
+          if (ud.legLG && !parts.legL && ud.legLG.userData.shinG) ud.legLG.userData.shinG.rotation.x += knee * w;
+          if (ud.legRG && !parts.legR && ud.legRG.userData.shinG) ud.legRG.userData.shinG.rotation.x += knee * w;
+        }
+        // GB-248 (D-89, GP-19970): the colossus's slam, staged instead of snapped. The wind-up (slamWind, 0.75 s): it sinks
+        // into its legs and heaves both arms up and back from wherever the walk had them (slow in, to 0.6), shoulders out and
+        // the torso arched, holds them high, and from 0.82 brings them down before the hit. The follow-through (slamFollowT,
+        // 0.5 s): the fists drive on into the ground, the torso folds over them and the knees take it, a held beat, then it
+        // settles back into its walk (slow out).
+        if (z.slamWind > 0 && !rising) {
+          const sm = zSmooth01;   // GB-251: one shared smoothstep, not a new closure each frame
+          const k = 1 - Math.max(0, z.slamWind) / 0.75, rise = sm(k / 0.6), drop = Math.max(0, (k - 0.82) / 0.18), d2 = drop * drop;
+          const ax = -2.8 + 1.2 * d2, elb = -0.8 * rise * (1 - drop);
+          if (ud.armLG && !parts.armL) { ud.armLG.rotation.x += (ax - ud.armLG.rotation.x) * rise; ud.armLG.rotation.z = (rest.armLRZ || 0) + 0.28 * rise * (1 - d2); if (ud.armLG.userData.elbowG) ud.armLG.userData.elbowG.rotation.x += (elb - ud.armLG.userData.elbowG.rotation.x) * rise; }
+          if (ud.armRG && !parts.armR) { ud.armRG.rotation.x += (ax - ud.armRG.rotation.x) * rise; ud.armRG.rotation.z = (rest.armRRZ || 0) - 0.28 * rise * (1 - d2); if (ud.armRG.userData.elbowG) ud.armRG.userData.elbowG.rotation.x += (elb - ud.armRG.userData.elbowG.rotation.x) * rise; }
+          if (ud.torso) { ud.torso.rotation.x = (rest.torsoRX || 0) + gaitLean * (1 - rise) - 0.28 * rise + 0.55 * d2; ud.torso.rotation.z = (rest.torsoRZ || 0) + gaitSway * (1 - rise); ud.torso.rotation.y = (rest.torsoRY || 0) + gaitTwist * (1 - rise); }
+          if (ud.head && !parts.head) ud.head.rotation.x = (rest.headRX || 0) - 0.18 * rise + 0.1 * d2;
+          if (ud.hips) ud.hips.position.y -= 0.12 * rise;
+          if (ud.legLG && !parts.legL && ud.legLG.userData.shinG) ud.legLG.userData.shinG.rotation.x += 0.3 * rise; if (ud.legRG && !parts.legR && ud.legRG.userData.shinG) ud.legRG.userData.shinG.rotation.x += 0.3 * rise;   // GB-251: unrolled (no arrays each frame)
+        } else if (z.slamFollowT > 0 && z.typeKey === 'colossus' && !rising) {
+          const sm = zSmooth01;   // GB-251: one shared smoothstep, not a new closure each frame
+          const f = 1 - z.slamFollowT / 0.5, s = 1 - Math.pow(1 - Math.min(1, f / 0.16), 2), w = f < 0.4 ? 1 : 1 - sm((f - 0.4) / 0.6);
+          const ax = -1.6 + 0.85 * s, tx = 0.27 + 0.28 * s, sink = 0.12 + 0.08 * s;
+          if (ud.armLG && !parts.armL) { ud.armLG.rotation.x += (ax - ud.armLG.rotation.x) * w; ud.armLG.rotation.z += ((rest.armLRZ || 0) - ud.armLG.rotation.z) * w; if (ud.armLG.userData.elbowG) ud.armLG.userData.elbowG.rotation.x *= 1 - w; }
+          if (ud.armRG && !parts.armR) { ud.armRG.rotation.x += (ax - ud.armRG.rotation.x) * w; ud.armRG.rotation.z += ((rest.armRRZ || 0) - ud.armRG.rotation.z) * w; if (ud.armRG.userData.elbowG) ud.armRG.userData.elbowG.rotation.x *= 1 - w; }
+          if (ud.torso) { ud.torso.rotation.x = (rest.torsoRX || 0) + gaitLean * (1 - w) + tx * w; ud.torso.rotation.z = (rest.torsoRZ || 0) + gaitSway * (1 - w); ud.torso.rotation.y = (rest.torsoRY || 0) + gaitTwist * (1 - w); }
+          if (ud.head && !parts.head) ud.head.rotation.x = (rest.headRX || 0) + headBob * (1 - w) - 0.2 * w;   // the head comes up to find him
+          if (ud.hips) ud.hips.position.y -= sink * w;
+          if (ud.legLG && !parts.legL && ud.legLG.userData.shinG) ud.legLG.userData.shinG.rotation.x += (0.3 + 0.2 * s) * w; if (ud.legRG && !parts.legR && ud.legRG.userData.shinG) ud.legRG.userData.shinG.rotation.x += (0.3 + 0.2 * s) * w;   // GB-251: unrolled (no arrays each frame)
         }
 
         // Attack: cock both arms overhead and coil the torso, then whip them down
@@ -57232,7 +57481,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           if (!z.farLod && ud.legLG && !parts.legL && ud.legLG.userData.shinG) ud.legLG.userData.shinG.rotation.x += 0.35 * snap;
         } else if (ud.hips && ud.hips.position.z) ud.hips.position.z *= Math.max(0, 1 - 10 * dt);
 
-        if (false) {} else if (ud.torso && rest && z.attackWindup <= 0 && !(z.swingT > 0) && !(z.slamWind > 0)) {
+        if (false) {} else if (ud.torso && rest && z.attackWindup <= 0 && !(z.swingT > 0) && !(z.slamWind > 0) && !(z.slamFollowT > 0 && z.typeKey === 'colossus')) {
           ud.torso.rotation.x = (rest.torsoRX || 0) + gaitLean;
           ud.torso.rotation.z = (rest.torsoRZ || 0) + gaitSway;
           ud.torso.rotation.y = (rest.torsoRY || 0) + gaitTwist;
@@ -57309,9 +57558,13 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         if (poseWork && kind === 'screamer') applyScreamerPose(z, dt); // GP-19872: planted sway, open arms, scream arch and spent recovery
         if (z.spitterShot) { const shot=z.spitterShot; delete z.spitterShot; if (!parts.head) spawnAcidGlob(z,shot.x,shot.z,true); }
         if (poseWork && kind === 'drowned') { applyDrownedMotion(z, dt); applyDrownedPose(z); }
-        if (poseWork && kind === 'feral') applyFeralClaws(THREE, z, phase, standing ? 0 : walkAmt);   // GP-19850: open, palms-down rakes over final torso pose
+        const hzReach = z._hzReach || 0; z._hzReach = 0;   // GB-248: the lunge's arms, set in the feral's lunge pose above
+        if (poseWork && kind === 'feral') {
+          applyFeralClaws(THREE, z, phase, standing ? 0 : walkAmt);   // GP-19850: open, palms-down rakes over final torso pose
+          if (hzReach) { if (ud.armLG && !parts.armL) ud.armLG.rotation.x += hzReach; if (ud.armRG && !parts.armR) ud.armRG.rotation.x += hzReach; }   // GB-248: drawn back in the coil, thrown at him in the spring
+        }
         // CL-187: the roll of each step, heel to toe, over whatever the poses above gave the legs (game/zombie-feet.js).
-        if (poseWork) applyZombieFeet(z, { phase, walkAmt: standing ? 0 : walkAmt, standing, busy: rising || knocked || z.attackWindup > 0 || z.swingT > 0 || z.hitReact > 0 || z.hitPartT > 0 || !!(militaryStep && militaryStep.busy) || !!(bruteStep && bruteStep.busy) || !!drownedStep || !!shamblerRecovering || z.spitWind > 0 || z.screamT > 0 || z.chargeT > 0 || !!z.abilityBusy || z.leapT > 0 });
+        if (poseWork) { const fc = _zFeetCtx; fc.phase = phase; fc.walkAmt = standing ? 0 : walkAmt; fc.standing = standing; fc.busy = rising || knocked || z.attackWindup > 0 || z.swingT > 0 || z.hitReact > 0 || z.hitPartT > 0 || !!(militaryStep && militaryStep.busy) || !!(bruteStep && bruteStep.busy) || !!drownedStep || !!shamblerRecovering || z.spitWind > 0 || z.screamT > 0 || z.chargeT > 0 || !!z.abilityBusy || z.leapT > 0; applyZombieFeet(z, fc); }   // GB-251: one reused ctx, not a new object each zombie each frame
         if (poseWork && !rising && !knocked) applyZombieLean(z, dt);   // CL-187: in on a start, back on a stop, into a turn
         if (z.flashT > 0) {
           z.flashT = Math.max(0, z.flashT - dt);
@@ -57327,18 +57580,19 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         }
 
         z.attackCd -= dt;
-        if ((!zombieGraceActive() || (z.poiGuard && z.poiAwake)) && !spiderWander && !shamblerRecovering && !drownedStep && !militaryStep?.busy && !bruteStep?.busy && z.attackWindup <= 0 && !rising && !z.abilityBusy && tactics !== 'bomb') {   // GB-43, GP-19858
+        if ((!zombieGraceActive() || (z.poiGuard && z.poiAwake)) && !spiderWander && !shamblerRecovering && !drownedStep && !militaryStep?.busy && !bruteStep?.busy && z.attackWindup <= 0 && !rising && !z.abilityBusy && tactics !== 'bomb' && !(z.slamWind > 0) && !(z.slamFollowT > 0 && z.typeKey === 'colossus')) {   // GB-43, GP-19858; GB-248: not inside the colossus's slam
+          const zw = z, mxw = mx, mzw = mz, bruteStepW = bruteStep, screamerTurnW = screamerTurn;   // GB-251: tryWindup holds these, not the loop's own (none of them change below)
           const tryWindup = (type, dmg, cd, build) => {
-            if (z.attackCd > 0) return;
-            if (type === 'build' && beginBruteBuild(z,build,bruteBuildPoint(z,build),dmg)) { z.attackCd=BRUTE.buildCooldown;return; }
-            if (type === 'player' && bruteStep?.controlsAttack) return; // GP-19866: committed smash replaces fit Brute claw
-            if (screamerTurn?.evading) return; // GP-19876: exposed she seeks space instead of starting a claw or chewing cover
-            if (type === 'player' && chooseDrownedAttack(z, zTarget(z)) !== 'strike') return; // GP-19862: one equal grab/strike choice per contact
-            z.attackCd = cd;
-            z.attackWindup = 0.22;
-            { const sa = sndAt(mx, mz, 30); AudioSys.zombieVoice(z.typeKey, 'attack', sa.v, sa.pan, z); }
-            z.swingSide = Math.random() < 0.5 ? -1 : 1;
-            z._pendingAttack = { type, dmg, build: build || null };
+            if (zw.attackCd > 0) return;
+            if (type === 'build' && beginBruteBuild(zw,build,bruteBuildPoint(zw,build),dmg)) { zw.attackCd=BRUTE.buildCooldown;return; }
+            if (type === 'player' && bruteStepW?.controlsAttack) return; // GP-19866: committed smash replaces fit Brute claw
+            if (screamerTurnW?.evading) return; // GP-19876: exposed she seeks space instead of starting a claw or chewing cover
+            if (type === 'player' && chooseDrownedAttack(zw, zTarget(zw)) !== 'strike') return; // GP-19862: one equal grab/strike choice per contact
+            zw.attackCd = cd;
+            zw.attackWindup = 0.22;
+            { const sa = sndAt(mxw, mzw, 30); AudioSys.zombieVoice(zw.typeKey, 'attack', sa.v, sa.pan, zw); }
+            zw.swingSide = Math.random() < 0.5 ? -1 : 1;
+            zw._pendingAttack = { type, dmg, build: build || null };
           };
           // Vertical reach on top of the horizontal check — without it a zombie stuck at
           // the foot of the watchtower (or any other height difference) could still
@@ -57375,88 +57629,6 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
             }
           }
         }
-      }
-      for (const z of zombies) if (z.alive && z.windowClimb) updateZombieWindowClimb(z, dt);
-      for (const z of dotKills) {
-        if (z.alive) killZombie(z, true, { kind: 'generic', dir: { x: 0, z: 0 }, defense: !!z._defenseKill });
-      }
-      for (const z of bombQueue) {
-        if (z.alive) killZombie(z, false, { kind: 'explosive', dir: { x: 0, z: 0 }, selfBlast: true });   // GB-77: it went off on its own
-      }
-      // GB-142: where each stood before the separation pass, for the contact ring after it (below).
-      for (const z of zombies) if (z.alive && z.mesh) { z._preSepX = z.mesh.position.x; z._preSepZ = z.mesh.position.z; }
-      // Keep the horde from collapsing into one overlapping stack.
-      for (let i = 0; i < zombies.length; i++) {
-        const a = zombies[i];
-        if (!a.alive) continue;
-        for (let j = i + 1; j < zombies.length; j++) {
-          const b = zombies[j];
-          if (!b.alive) continue;
-          const dx = b.mesh.position.x - a.mesh.position.x;
-          const dz = b.mesh.position.z - a.mesh.position.z;
-          const minD = a.radius + b.radius;
-          const roomD = (a.hz || b.hz) ? minD + HORDE.SPACE : minD;   // GB-94: a little room on the way in (heading only)
-          // Claude 2026-09-28: `!(|d| <= minD)` rather than `> minD`, so a NaN is skipped too. A NaN
-          // here used to get through the box test, turn `hypot || 0.0001` into 0.0001 and push
-          // every neighbour by NaN or ten thousand times the gap: one bad body took the horde.
-          if (!(Math.abs(dx) <= roomD && Math.abs(dz) <= roomD)) continue;
-          const dist = zHyp(dx, dz) || 0.0001;
-          if (dist >= minD) { if (dist < roomD) hordeRoom(a, b, dx / dist, dz / dist, (roomD - dist) / HORDE.SPACE); continue; }
-          const push = (minD - dist) * 0.58;
-          const ux = dx / dist, uz = dz / dist;
-          a.mesh.position.x -= ux * push; a.mesh.position.z -= uz * push;
-          b.mesh.position.x += ux * push; b.mesh.position.z += uz * push;
-        }
-      }
-      for (const z of zombies) {
-        if (!z.alive) continue;
-        // Claude 2026-09-28: backstop. A body whose position went bad this frame goes back to
-        // where it last stood (z.x/z.z, last frame's good place) instead of vanishing, and
-        // drops the steering state that may have carried the bad number.
-        if (!Number.isFinite(z.mesh.position.x) || !Number.isFinite(z.mesh.position.z) || !Number.isFinite(z.mesh.position.y)) {
-          const okX = Number.isFinite(z.x) ? z.x : zTarget(z).position.x, okZ = Number.isFinite(z.z) ? z.z : zTarget(z).position.z;
-          z.mesh.position.x = okX; z.mesh.position.z = okZ; z.mesh.position.y = entityGroundY(okX, okZ);
-          z.flowX = null; z.flowZ = null; z.unstickT = 0; z.staggerVX = 0; z.staggerVZ = 0;
-          z.stuckX = okX; z.stuckZ = okZ;
-          badPosResets++;
-        }
-        // GB-142: the separation pass pushes bodies without knowing he is there, and a dense horde round him summed
-        // enough shoves to put one into him or through him; the contact ring in the walk then set it out on his far
-        // side, 4 m in a tick (t98, megaswarm). So the ring again here: a body the pass left inside it, or carried
-        // across it, goes back onto it on the side it was on before the pass.
-        if (!scriptedKill && Number.isFinite(z._preSepX)) {
-          const tp = zTarget(z).position;
-          if (Math.abs(z.mesh.position.y - tp.y) < 1.6) {
-            const ring = z.radius + PLAYER_RADIUS + 0.04;
-            const ax = z._preSepX - tp.x, az = z._preSepZ - tp.z, bx = z.mesh.position.x - tp.x, bz = z.mesh.position.z - tp.z;
-            const ex = bx - ax, ez = bz - az, el = ex * ex + ez * ez;
-            const k = el > 1e-8 ? Math.max(0, Math.min(1, -(ax * ex + az * ez) / el)) : 1;
-            const cx = ax + ex * k, cz = az + ez * k;
-            const inside = bx * bx + bz * bz < ring * ring;
-            const across = cx * cx + cz * cz < ring * ring && ax * bx + az * bz < 0;
-            if (inside || across) {
-              let sx = ax, sz = az, sd = zHyp(sx, sz);
-              if (!(sd > 1e-4)) { sx = bx; sz = bz; sd = zHyp(sx, sz); }
-              if (sd > 1e-4) { z.mesh.position.x = tp.x + sx / sd * Math.max(ring, Math.min(sd, ring + 0.05)); z.mesh.position.z = tp.z + sz / sd * Math.max(ring, Math.min(sd, ring + 0.05)); }
-              if (hasShamblerSteering(z)) {   // GP-19854: the turning arc must keep clear of solid cover after the ring correction
-                const p = resolveHardBuildCollisions(z.mesh.position.x, z.mesh.position.z, z.radius, false, z.mesh.position.y, z.climber ? (z.climbHeight || CLIMB_HEIGHT) : null);
-                const q = resolveStaticProps(p.x, p.z, z.radius, z.mesh.position.y);
-                z.mesh.position.x = q.x; z.mesh.position.z = q.z;
-              }
-            }
-          }
-        }
-        if (training.active) trainingKeepZombie(z);   // CL-115
-        z.x = z.mesh.position.x;
-        z.z = z.mesh.position.z;
-        // Re-seat after the separation pass — except swimmers (their float height was
-        // eased above and used to get snapped to the lake bed here every frame) and
-        // bodies still clawing up out of the ground.
-        if (waterDepthAt(z.x, z.z) > 1.3) continue;
-        if (z.leapT > 0) continue; // mid-leap: the arc owns its height
-        z.mesh.position.y = entityGroundY(z.x, z.z) - (z.riseOff || 0);
-      }
-      updateWaveHud();
     }
 
     // Skipping prep also ends the opening grace hour, or the wave would start with
@@ -58860,10 +59032,12 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         lm.alive = true;
         lm.hp = lm.maxHp;
         if (lm.mesh) lm.mesh.visible = true;
+        if (lm.batch) lm.batch.dirty = true;   // CL-280: rebuilt once, below
         if (lm.bar) lm.bar.visible = false;
         if (lm.emberMesh) lm.emberMesh.visible = !!(lm.campfire && lm.campfire.lit);
         if (lm.campfire) lm.campfire.dead = false;
       }
+      if (fobBatch && fobBatch.dirty) rebuildLandmarkBatch(fobBatch);
       clearZombies();
       for (const s of supplyDrops) airborne.dispose(s.group);
       supplyDrops.length = 0;
@@ -58890,8 +59064,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       grenadesInFlight.length = 0;
       for (const L of fallingLeaves) releaseEffectMesh(L.mesh);
       fallingLeaves.length = 0;
-      for (const d of debris) { releaseEffectMesh(d.mesh); d.mesh.material.dispose(); }
-      debris.length = 0;
+      clearDebris();   // CL-280
       clearBlood();
       for (const g of gibPieces) {
         releaseEffectMesh(g.mesh);
@@ -60749,7 +60922,7 @@ live++;
           let hh = 0, hw = 0;
           if (y === 'head') {   // through the centre of its head's meshes, where a player aims
             const root = z.mesh.userData.bossRig?.userData?.rig?.head || z.mesh.userData.head, lo = [Infinity, Infinity, Infinity], hi = [-Infinity, -Infinity, -Infinity], v = new THREE.Vector3();
-            if (root) root.traverse((m) => { const pa = m.isMesh && m.visible !== false && m.geometry?.attributes?.position; if (!pa) return; for (let i = 0; i < pa.count; i++) { v.fromBufferAttribute(pa, i).applyMatrix4(m.matrixWorld); for (let k = 0; k < 3; k++) { const q = [v.x, v.y, v.z][k]; if (q < lo[k]) lo[k] = q; if (q > hi[k]) hi[k] = q; } } });
+            if (root) root.traverse((m) => { const pa = m.isMesh && !m.isSkinnedMesh && !m.userData.stump && (m.userData.skinSrc || m.visible !== false) && m.geometry?.attributes?.position; if (!pa) return; for (let i = 0; i < pa.count; i++) { v.fromBufferAttribute(pa, i).applyMatrix4(m.matrixWorld); for (let k = 0; k < 3; k++) { const q = [v.x, v.y, v.z][k]; if (q < lo[k]) lo[k] = q; if (q > hi[k]) hi[k] = q; } } });
             if (lo[1] < Infinity) { c.x = (lo[0] + hi[0]) / 2; c.y = (lo[1] + hi[1]) / 2; c.z = (lo[2] + hi[2]) / 2; hh = (hi[1] - lo[1]) / 2; hw = Math.max(hi[0] - lo[0], hi[2] - lo[2]) / 2; } else c.y = z.mesh.position.y + (z.hitH || 1.4) * 0.85;
           }
           const shoot = (yy, ss = 0) => { const ox = -dz * ss, oz = dx * ss; return zombieRoundHit(z, new THREE.Vector3(c.x + ox - dx * 3, yy, c.z + oz - dz * 3), new THREE.Vector3(c.x + ox + dx * 3, yy, c.z + oz + dz * 3)); };
@@ -61386,8 +61559,9 @@ live++;
       }
       _warmZombies.length = 0;
       for (const m of motes.splice(0)) releaseMoteMesh(m.mesh);
+      drawMoteInst();   // CL-280: the instanced ones go too
       clearBlood();
-      for (const d of debris.splice(0)) releaseEffectMesh(d.mesh);
+      clearDebris();   // CL-280
       for (const g of gibPieces.splice(0)) releaseEffectMesh(g.mesh);
       for (const r of ripples.splice(0)) releaseRippleMesh(r.mesh);
       for (const p of projectiles.splice(0)) releaseTracerMesh(p.mesh);
@@ -61409,8 +61583,9 @@ live++;
       for (const c of casings.splice(0)) releaseEffectMesh(c.mesh);
       for (const g of grenadesInFlight.splice(0)) releaseProjectileMesh(g.mesh);
       for (const m of motes.splice(0)) releaseMoteMesh(m.mesh);
+      drawMoteInst();   // CL-280: the instanced ones go too
       clearBlood();
-      for (const d of debris.splice(0)) releaseEffectMesh(d.mesh);
+      clearDebris();   // CL-280
       for (const g of gibPieces.splice(0)) releaseEffectMesh(g.mesh);
       for (const r of ripples.splice(0)) releaseRippleMesh(r.mesh);
       for (const p of projectiles.splice(0)) releaseTracerMesh(p.mesh);

@@ -196,6 +196,8 @@ async function runOne(name) {
   }
   const errs = page.errors.slice(0, 2).map((e) => e.split('\n')[0]);
   results.push({ name, pass, fail, note, lines, errs, raw, info, secs: (Date.now() - t0) / 1000 });
+  // CU-178: a red check shows the page's first errors with --all-fails (a game change that throws on the test page's stand-in three reads here)
+  if ((fail || note) && errs.length && argv.includes('--all-fails')) for (const e of errs) console.log('           page error: ' + e.slice(0, 220));
   // A check's INFO lines (a benchmark's numbers, say) are shown with --all-fails whether it passed or not.
   if (argv.includes('--all-fails')) for (const l of lines.filter((l) => l.startsWith('INFO'))) console.log(`           ${l}`);
   const tag = note ? 'ERROR' : (fail ? 'FAIL ' : (info ? 'info ' : 'ok   '));
@@ -294,7 +296,18 @@ const listed = Object.values(files);
 const sumPass = listed.reduce((n, r) => n + (r.pass || 0), 0);
 const sumFail = listed.reduce((n, r) => n + (r.fail || 0), 0);
 fs.mkdirSync(path.join(ROOT, 'crew'), { recursive: true });
-fs.writeFileSync(testsPath, JSON.stringify({
+// CU-182: tests.json is written to a temp file and renamed, retried: a Windows lock (the crew panel reading it, Defender) threw UNKNOWN on the open and lost chunk 09's results
+const writeTestsJson = (text) => {
+  const tmp = testsPath + '.tmp-' + process.pid;
+  let last = null;
+  for (let i = 0; i < 20; i++) {
+    try { fs.writeFileSync(tmp, text); fs.renameSync(tmp, testsPath); return; }
+    catch (e) { last = e; Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 250); }
+  }
+  try { fs.unlinkSync(tmp); } catch { /* none */ }
+  console.error('tests.json was not written: ' + (last && last.message));
+};
+writeTestsJson(JSON.stringify({
   at: new Date().toISOString(),
   commit,
   pass: wanted.length ? sumPass : totalPass,

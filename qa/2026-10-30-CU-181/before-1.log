@@ -1,0 +1,9 @@
+GRANT cursor CU-181: starting one game-test command
+check-players: 309 player.position reads, all in the allowed places
+           INFO {"frames":32,"fps":5.3,"frameMs":188.4,"top":["r:cull 118.297 (max 631.9)","m:hold 27.369 (max 36.8)","r:matrices 14.419 (max 19.1)","m:pose 5.913 (max 7.6)","w:stairs+roof+birds+bugs+wildlife 1.047 (max 1.5)","tree+deck coll 0.847 (max 1.4)"],"cullMs":61.80000001192093}
+info  tcu181   0 pass   0 fail  54.5s  — INFO {"frames":32,"fps":5.3,"frameMs":188.4,"top":["r:cull 118.297 (max 631.9)","m:hold 27
+
+1 checks: 0 pass, 0 fail, 1 reported no assertions
+
+no assertions (probe, or the check bailed before asserting):
+  tcu181 INFO {"frames":32,"fps":5.3,"frameMs":188.4,"top":["r:cull 118.297 (max 631.9)","m:hold 27.369 (max 

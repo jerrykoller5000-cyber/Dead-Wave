@@ -1,0 +1,79 @@
+GRANT grokbot GB-248: starting one game-test command
+ok    t215      4 pass   0 fail  35.6s  (real renderer)
+    PASS read index.html and the scripts and styles the game loaded (227 files)
+    PASS no broken characters in them
+    PASS the HUD reads clean: timeLine "Daylight · 08:26 · Grace", tacticalLine "NVG — · Laser — · Light —", grenadeChips "G×3H×0", ammoDetail "12 / 12  ·  50 Bullets  ·  SEMI", hpNum "100 / 100"
+    PASS and shows its dots and times signs (NVG — · Laser — · Light — / G×3H×0)
+ok    t95       9 pass   0 fail  33.5s  (real renderer)
+    PASS the pick is x0.8 (0.8)
+    PASS laser off: the cone is the gun's own
+    PASS every gun with a laser, 200 draws each: x0.8 within 5% (minigun 0.800 m4 0.800 ak 0.800 pistol 0.800 uzi 0.800 shotgun 0.801 aa12 0.801 revolver 0.800 sniper 0.800 launcher 0.800)
+    PASS AK, 2000 free draws each: 6.009 -> 4.726 mrad (x0.786)
+    PASS Z (toggleLasers) with the laser sight bought: on, and it steadies
+    PASS Z again: off
+    PASS no laser sight owned: no change (6.033 vs 6.033 mrad)
+    PASS the chainsaw has no laser: nothing to steady
+    PASS no page errors
+ok    t198     17 pass   0 fail  44.7s  (real renderer)
+    PASS the debug handle is there (12 slots)
+    PASS every shambler rolls a pace in 0.78-1.45 of the type (0.80-1.42)
+    PASS and not one pace: 23 different among 24
+    PASS its walking speed is its pace through speedFor (GB-135)
+    PASS bands among them: shamble, jog, sprint
+    PASS night 1 shambler walk and top use x0.750
+    PASS night 2 shambler walk and top use x0.750
+    PASS night 8 shambler walk and top use x0.875
+    PASS night 14 shambler walk and top use x1.000
+    PASS feral walks 6.0-7.6 (top 8.0, lunge 9.0) or sprints at 0.85-0.92 of his run
+    PASS a brute stays a brute (0.94-1.06)
+    PASS the spider keeps its own walk
+    PASS a TT spawn that does not join keeps the old walk (the older checks; hz=null, speed=3.668/3.668)
+    PASS 10 of 10 reached him (13.5 s game time)
+    PASS they took 8 different slots round him
+    PASS they arrived from several sides, not single file: bearings span 147 degrees over 5 of 12 sides
+    PASS the pack waited for company and rushed together (1 rush)
+ok    t205     13 pass   0 fail  46.2s  (real renderer)
+    PASS hooks: speedFor, run 11.80, CAP_RUN 0.9, refill
+    PASS out of a wave the field is not held: {"hold":false,"t":0}
+    PASS walkers never past 90% of his sprint (top 7.33 of 10.62)
+    PASS 8 sprinters, all past his sprint (12.57, 12.33, 13.20, 12.68, 12.67, 12.32, 12.89, 12.95)
+    PASS the walkers are faster on average: 6.30 m/s (was 3.94)
+    PASS baseSpeed moves with it (the maimed cuts are off the new speed)
+    PASS 12 flankers and 28 in the mass of 40 (70/30)
+    PASS the spider takes no role and no cap
+    PASS a walker pushed to 40 m/s holds to its cap: 3.75 m/s, cap 3.75
+    PASS three of the ten are flankers
+    PASS the mass found its front (-129.28 deg)
+    PASS the flankers hold slots 80-125 deg off the front: 209 of 212 samples
+    PASS refill: one death waits; 14 down or 10 s, a clump
+ok    t247     12 pass   0 fail  39.1s  (real renderer)
+    PASS shamblers walk 3.90-4.69 m/s (mean 4.28), top and lunge 5.0
+    PASS 12 shambler sprinters still past his sprint (13.01, 12.73, 12.63, 13.09, 12.86, 13.15, 12.74, 12.91, 12.77, 12.68, 13.02, 12.53)
+    PASS soldiers walk 5.01-5.90 m/s, top 6.0
+    PASS demons walk 5.65-6.36 m/s (mean 5.97)
+    PASS demon charges 13.51-15.03 m/s (as before)
+    PASS ferals walk 6.08-7.50 m/s, top 8.0, lunge 9.0
+    PASS 2 feral sprinters stay below his run
+    PASS screamer unchanged: 5.06-7.24 m/s
+    PASS drowned unchanged: 3.85-4.94 m/s
+    PASS colossus: speed 4.00, measured 4.00 m/s over 2.57 s
+    PASS the colossus strides 2.36 rad/m (it was 3.8 / 1.84 = 2.07): its feet keep up
+    PASS guardian: speed 7.00, measured 7.00 m/s over 2.56 s
+ok    t75      16 pass   0 fail  51.1s  (real renderer)
+    PASS GB-50 hooks exported
+    PASS knocked back along the blow (kv -2.44, 0.00)
+    PASS a stumble: lurch 0.73, aim off -0.064 rad, jolt 0.26
+    PASS a shambler does not put him on a knee
+    PASS a short slide: 0.38 m (dz 0.00)
+    PASS over within a moment (speedK 1)
+    PASS a brute puts him on one knee (0.55 s)
+    PASS slowed, never stopped: walk speed x0.45 at worst
+    PASS more for a brute: 0.93 m vs 0.38 m
+    PASS back on his feet within 0.55 s
+    PASS no knee lock: the next heavy hit within 3 s only knocks him back
+    PASS five spawned inside the marine (5)
+    PASS nobody inside him: the worst gap is 0.040 m (feral, 370 samples)
+    PASS they crowd him: 4 of 5 at arm’s length
+    PASS and their blows land from the ring (6 hits, -40 hp)
+    PASS no page errors ()
+6 checks: 71 pass, 0 fail (real renderer)

@@ -1,0 +1,5 @@
+GRANT cursor CU-182: starting one game-test command
+check-players: 309 player.position reads, all in the allowed places
+ok    t178     8 pass   0 fail  45.1s
+
+1 checks: 8 pass, 0 fail

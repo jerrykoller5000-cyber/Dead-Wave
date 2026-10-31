@@ -1,0 +1,362 @@
+[
+  {
+    "name": "throwaway",
+    "code": 0,
+    "cpuBefore": 0,
+    "fps": 59.3,
+    "low": 41.6,
+    "worst": 26,
+    "hitches": 1,
+    "tick": 12.54,
+    "frameMs": 16.86,
+    "outside": 4.33,
+    "gpuMs": 0.25,
+    "draws": 295,
+    "triangles": 785412,
+    "zombies": 48,
+    "builds": 0,
+    "pipelines": 0,
+    "spikeCauses": {
+      "spikes": 9,
+      "pipelines": 0,
+      "builds": 0,
+      "uploads": 1,
+      "sunShadow": 0,
+      "gc": 1,
+      "code": 7
+    },
+    "spikes": 8,
+    "top": [
+      {
+        "k": "r:render",
+        "avg": 5.7,
+        "max": 36.2
+      },
+      {
+        "k": "zombies",
+        "avg": 2.08,
+        "max": 10.3
+      },
+      {
+        "k": "r:matrices",
+        "avg": 1.59,
+        "max": 7
+      },
+      {
+        "k": "m:hold",
+        "avg": 0.56,
+        "max": 2.1
+      },
+      {
+        "k": "r:cull",
+        "avg": 0.51,
+        "max": 2.6
+      },
+      {
+        "k": "m:pose",
+        "avg": 0.46,
+        "max": 1.6
+      },
+      {
+        "k": "hud+audio",
+        "avg": 0.21,
+        "max": 2.1
+      },
+      {
+        "k": "w:stairs+roof+birds+bugs+wildlife",
+        "avg": 0.19,
+        "max": 0.6
+      },
+      {
+        "k": "drops+hud",
+        "avg": 0.18,
+        "max": 1.5
+      },
+      {
+        "k": "w:treeFall+leaves+batches",
+        "avg": 0.13,
+        "max": 0.6
+      },
+      {
+        "k": "w:minimap",
+        "avg": 0.12,
+        "max": 2.2
+      },
+      {
+        "k": "r:rigSkin",
+        "avg": 0.08,
+        "max": 0.5
+      }
+    ]
+  },
+  {
+    "name": "run-1",
+    "code": 0,
+    "cpuBefore": 0,
+    "fps": 56.2,
+    "low": 35.9,
+    "worst": 44.5,
+    "hitches": 0,
+    "tick": 13.76,
+    "frameMs": 17.79,
+    "outside": 4.04,
+    "gpuMs": 0.25,
+    "draws": 287,
+    "triangles": 751680,
+    "zombies": 48,
+    "builds": 0,
+    "pipelines": 0,
+    "spikeCauses": {
+      "spikes": 10,
+      "pipelines": 0,
+      "builds": 0,
+      "uploads": 0,
+      "sunShadow": 0,
+      "gc": 0,
+      "code": 10
+    },
+    "spikes": 8,
+    "top": [
+      {
+        "k": "r:render",
+        "avg": 6.21,
+        "max": 21.6
+      },
+      {
+        "k": "zombies",
+        "avg": 2.49,
+        "max": 12.4
+      },
+      {
+        "k": "r:matrices",
+        "avg": 1.57,
+        "max": 5.3
+      },
+      {
+        "k": "r:cull",
+        "avg": 0.56,
+        "max": 2.4
+      },
+      {
+        "k": "m:hold",
+        "avg": 0.54,
+        "max": 1.3
+      },
+      {
+        "k": "m:pose",
+        "avg": 0.5,
+        "max": 1.6
+      },
+      {
+        "k": "hud+audio",
+        "avg": 0.23,
+        "max": 1.1
+      },
+      {
+        "k": "m:idle",
+        "avg": 0.2,
+        "max": 2.1
+      },
+      {
+        "k": "w:stairs+roof+birds+bugs+wildlife",
+        "avg": 0.19,
+        "max": 1.5
+      },
+      {
+        "k": "drops+hud",
+        "avg": 0.19,
+        "max": 2.2
+      },
+      {
+        "k": "w:minimap",
+        "avg": 0.13,
+        "max": 1.3
+      },
+      {
+        "k": "w:treeFall+leaves+batches",
+        "avg": 0.13,
+        "max": 0.4
+      }
+    ]
+  },
+  {
+    "name": "run-2",
+    "code": 0,
+    "cpuBefore": 0,
+    "fps": 58.7,
+    "low": 38.5,
+    "worst": 37.8,
+    "hitches": 0,
+    "tick": 13.08,
+    "frameMs": 17.04,
+    "outside": 3.95,
+    "gpuMs": 0.25,
+    "draws": 285,
+    "triangles": 725438,
+    "zombies": 48,
+    "builds": 0,
+    "pipelines": 0,
+    "spikeCauses": {
+      "spikes": 10,
+      "pipelines": 0,
+      "builds": 0,
+      "uploads": 1,
+      "sunShadow": 0,
+      "gc": 0,
+      "code": 9
+    },
+    "spikes": 8,
+    "top": [
+      {
+        "k": "r:render",
+        "avg": 5.97,
+        "max": 19.6
+      },
+      {
+        "k": "zombies",
+        "avg": 2.4,
+        "max": 14
+      },
+      {
+        "k": "r:matrices",
+        "avg": 1.28,
+        "max": 4.2
+      },
+      {
+        "k": "r:cull",
+        "avg": 0.55,
+        "max": 1.7
+      },
+      {
+        "k": "m:hold",
+        "avg": 0.51,
+        "max": 2.6
+      },
+      {
+        "k": "m:pose",
+        "avg": 0.47,
+        "max": 1.5
+      },
+      {
+        "k": "hud+audio",
+        "avg": 0.23,
+        "max": 1
+      },
+      {
+        "k": "m:idle",
+        "avg": 0.21,
+        "max": 2
+      },
+      {
+        "k": "w:stairs+roof+birds+bugs+wildlife",
+        "avg": 0.19,
+        "max": 0.5
+      },
+      {
+        "k": "drops+hud",
+        "avg": 0.19,
+        "max": 1.2
+      },
+      {
+        "k": "w:minimap",
+        "avg": 0.12,
+        "max": 1
+      },
+      {
+        "k": "w:treeFall+leaves+batches",
+        "avg": 0.12,
+        "max": 0.4
+      }
+    ]
+  },
+  {
+    "name": "run-3",
+    "code": 0,
+    "cpuBefore": 0,
+    "fps": 58.1,
+    "low": 36.6,
+    "worst": 22.3,
+    "hitches": 0,
+    "tick": 13.17,
+    "frameMs": 17.21,
+    "outside": 4.04,
+    "gpuMs": 0.25,
+    "draws": 288,
+    "triangles": 766686,
+    "zombies": 48,
+    "builds": 0,
+    "pipelines": 0,
+    "spikeCauses": {
+      "spikes": 6,
+      "pipelines": 0,
+      "builds": 0,
+      "uploads": 0,
+      "sunShadow": 0,
+      "gc": 2,
+      "code": 4
+    },
+    "spikes": 6,
+    "top": [
+      {
+        "k": "r:render",
+        "avg": 6.01,
+        "max": 26.6
+      },
+      {
+        "k": "zombies",
+        "avg": 2.27,
+        "max": 9.2
+      },
+      {
+        "k": "r:matrices",
+        "avg": 1.47,
+        "max": 7.7
+      },
+      {
+        "k": "m:hold",
+        "avg": 0.54,
+        "max": 1.4
+      },
+      {
+        "k": "r:cull",
+        "avg": 0.52,
+        "max": 3.3
+      },
+      {
+        "k": "m:pose",
+        "avg": 0.5,
+        "max": 1.5
+      },
+      {
+        "k": "hud+audio",
+        "avg": 0.22,
+        "max": 2.4
+      },
+      {
+        "k": "m:idle",
+        "avg": 0.21,
+        "max": 2.3
+      },
+      {
+        "k": "w:stairs+roof+birds+bugs+wildlife",
+        "avg": 0.19,
+        "max": 0.9
+      },
+      {
+        "k": "drops+hud",
+        "avg": 0.18,
+        "max": 2.5
+      },
+      {
+        "k": "w:treeFall+leaves+batches",
+        "avg": 0.13,
+        "max": 1.3
+      },
+      {
+        "k": "w:minimap",
+        "avg": 0.12,
+        "max": 1.1
+      }
+    ]
+  }
+]

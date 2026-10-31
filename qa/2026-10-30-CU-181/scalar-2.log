@@ -1,0 +1,10 @@
+Game-test request 6ffcf3a7-a3a5-40fc-9e89-84baf1c14ce5 queued at position 2. Waiting...
+GRANT cursor CU-182: starting one game-test command
+check-players: 309 player.position reads, all in the allowed places
+           INFO {"frames":111,"fps":18.4,"frameMs":54.5,"top":["m:hold 17.533 (max 28.3)","r:matrices 10.028 (max 15.2)","m:pose 4.192 (max 9)","r:cull 1.313 (max 2)","w:stairs+roof+birds+bugs+wildlife 0.805 (max 1.2)","tree+deck coll 0.65 (max 0.9)"]}
+info  tcu181   0 pass   0 fail  45.5s  — INFO {"frames":111,"fps":18.4,"frameMs":54.5,"top":["m:hold 17.533 (max 28.3)","r:matrices
+
+1 checks: 0 pass, 0 fail, 1 reported no assertions
+
+no assertions (probe, or the check bailed before asserting):
+  tcu181 INFO {"frames":111,"fps":18.4,"frameMs":54.5,"top":["m:hold 17.533 (max 28.3)","r:matrices 10.028 (m

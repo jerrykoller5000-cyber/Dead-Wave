@@ -6,7 +6,8 @@
 (async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
-  const until = async (cond, ms) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (cond()) return true; await wait(40); } return cond(); };
+  // GB-250 (CU-178: the test page ran at 4-14 fps): waits on the game's own events go on game time (T.getSimTime(), as GB-131 and t72), the same windows; a wall-clock cap only so a stuck game still ends the check.
+  const until = async (cond, ms, capMs = 120000) => { const s0 = T.getSimTime(), t0 = Date.now(); while ((T.getSimTime() - s0) * 1000 < ms && Date.now() - t0 < capMs) { if (cond()) return true; await wait(40); } return cond(); };
   const errs = []; window.addEventListener('error', (e) => errs.push(String(e.message || e.error)));
   try {
     await startMatch(T, 'Defences');
@@ -24,9 +25,9 @@
     const tgt = hold(T.spawnZombie(lt.x + sx * 7, lt.z + sz * 7, 'shambler', true, true));
     const mate = hold(T.spawnZombie(lt.x + sx * 7 + fx * 2.5, lt.z + sz * 7 + fz * 2.5, 'shambler', true, true));
     const far = hold(T.spawnZombie(lt.x + sx * 7 + fx * 16, lt.z + sz * 7 + fz * 16, 'shambler', true, true));
-    const t0 = performance.now();
+    const t0 = T.getSimTime();   // GB-250: game time
     const drawn = await until(() => tgt.threatB === lt || mate.threatB === lt, 2000);
-    ok(drawn && (performance.now() - t0) < 2100, 'the turret fires and draws its target within 2 s (' + ((performance.now() - t0) / 1000).toFixed(2) + ' s)');
+    ok(drawn && (T.getSimTime() - t0) < 2.1, 'the turret fires and draws its target within 2 s (' + (T.getSimTime() - t0).toFixed(2) + ' s of game time)');
     ok(tgt.threatB === lt && mate.threatB === lt && tgt.threatT > 0 && mate.threatT > 0, 'its pack comes too: target ' + (tgt.threatB === lt) + ', packmate 2.5 m off ' + (mate.threatB === lt));
     ok(!far.threatB && T.defenceTargetOf(far, 0) == null, 'a zombie 16 m off is not drawn');
     // It walks to the turret, not the marine.

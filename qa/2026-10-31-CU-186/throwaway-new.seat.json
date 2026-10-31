@@ -1,0 +1,52 @@
+{
+  "cpuPct": 17,
+  "loadPct": 23,
+  "top": [
+    {
+      "Name": "dwm",
+      "PercentProcessorTime": 22
+    },
+    {
+      "Name": "System",
+      "PercentProcessorTime": 22
+    },
+    {
+      "Name": "Cursor#5",
+      "PercentProcessorTime": 16
+    },
+    {
+      "Name": "Cursor#2",
+      "PercentProcessorTime": 11
+    },
+    {
+      "Name": "Cursor",
+      "PercentProcessorTime": 5
+    },
+    {
+      "Name": "msedge#2",
+      "PercentProcessorTime": 5
+    },
+    {
+      "Name": "msedge#9",
+      "PercentProcessorTime": 5
+    },
+    {
+      "Name": "WmiPrvSE#2",
+      "PercentProcessorTime": 5
+    }
+  ],
+  "counts": {
+    "msedge": 16,
+    "SearchIndexer": 1,
+    "Cursor": 17,
+    "vmmem": 1,
+    "wsl": 1,
+    "ChatGPT": 16,
+    "chrome": 0,
+    "git": 0,
+    "node": 7,
+    "vmmemWSL": 1,
+    "MsMpEng": 1,
+    "Antigravity": 6
+  }
+}

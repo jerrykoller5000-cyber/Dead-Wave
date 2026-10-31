@@ -1,0 +1,41 @@
+GRANT cursor CU-188: starting one game-test command
+check-players: 309 player.position reads, all in the allowed places
+ok    t96     19 pass   0 fail  45.2s
+ok    t97     15 pass   0 fail  42.9s
+           INFO ragdoll off: 160 spawned, 160 alive at the end, 129 ticks, frame 88.79 ms avg / 126.20 ms worst (headless)
+           INFO ragdoll on: 160 spawned, 159 alive at the end, 99 ticks, frame 100.58 ms avg / 540.90 ms worst (headless)
+ok    t98     20 pass   0 fail  82.1s
+           INFO 120 spawned, 120 alive after 93.3 s and 26 legs (650 ticks)
+ok    t99      6 pass   0 fail  131.7s
+ok    t100     7 pass   0 fail  37.9s
+ok    t101     9 pass   0 fail  35.8s
+ok    t102    17 pass   0 fail  43.6s
+ok    t103     8 pass   0 fail  36.8s
+ok    t104     5 pass   0 fail  36.3s
+ok    t105    15 pass   0 fail  44.8s
+ok    t106     9 pass   0 fail  117.8s
+ok    t107     8 pass   0 fail  38.0s
+ok    t108     9 pass   0 fail  36.3s
+ok    t109     5 pass   0 fail  36.6s
+ok    t110     4 pass   0 fail  36.7s
+           INFO brute head round: 0 of 1 checks blocked before a clear frame (0.00 s of game time)
+           INFO brute head round: 0 of 1 checks blocked before a clear frame (0.00 s of game time)
+           INFO shambler head round: 0 of 1 checks blocked before a clear frame (0.00 s of game time)
+           INFO feral head round: 1 of 2 checks blocked before a clear frame (0.05 s of game time)
+           INFO feral head centre p10 0.730, median 0.806 of hitH (line 0.7)
+           INFO leaper head round: 0 of 1 checks blocked before a clear frame (0.00 s of game time)
+           INFO leaper head centre p10 0.573, median 0.625 of hitH (line 0.55)
+           INFO spider head round: 0 of 1 checks blocked before a clear frame (0.00 s of game time)
+           INFO spider head centre p10 0.592, median 0.660 of hitH (line 0.6)
+ok    t111    11 pass   0 fail  46.4s
+ok    t112    13 pass   0 fail  41.3s
+ok    t113     5 pass   0 fail  60.3s
+ok    t114     8 pass   0 fail  38.4s
+ok    t115    10 pass   0 fail  37.9s
+ok    t116     7 pass   0 fail  47.1s
+ok    t117    17 pass   0 fail  40.8s
+ok    t119    20 pass   0 fail  37.3s
+ok    t120    11 pass   0 fail  39.0s
+ok    t121    31 pass   0 fail  24.5s
+
+25 checks: 289 pass, 0 fail

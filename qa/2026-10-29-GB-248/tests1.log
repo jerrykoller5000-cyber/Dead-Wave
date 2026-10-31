@@ -1,0 +1,369 @@
+GRANT grokbot GB-248: starting one game-test command
+ok    t215      4 pass   0 fail  30.5s  (real renderer)
+    PASS read index.html and the scripts and styles the game loaded (228 files)
+    PASS no broken characters in them
+    PASS the HUD reads clean: timeLine "Daylight · 08:18 · Grace", tacticalLine "NVG — · Laser — · Light —", grenadeChips "G×3H×0", ammoDetail "12 / 12  ·  50 Bullets  ·  SEMI", hpNum "100 / 100"
+    PASS and shows its dots and times signs (NVG — · Laser — · Light — / G×3H×0)
+ok    t95       9 pass   0 fail  32.6s  (real renderer)
+    PASS the pick is x0.8 (0.8)
+    PASS laser off: the cone is the gun's own
+    PASS every gun with a laser, 200 draws each: x0.8 within 5% (minigun 0.800 m4 0.800 ak 0.800 pistol 0.800 uzi 0.800 shotgun 0.801 aa12 0.801 revolver 0.800 sniper 0.800 launcher 0.800)
+    PASS AK, 2000 free draws each: 6.007 -> 4.802 mrad (x0.799)
+    PASS Z (toggleLasers) with the laser sight bought: on, and it steadies
+    PASS Z again: off
+    PASS no laser sight owned: no change (6.033 vs 6.033 mrad)
+    PASS the chainsaw has no laser: nothing to steady
+    PASS no page errors
+ok    t198     17 pass   0 fail  43.3s  (real renderer)
+    PASS the debug handle is there (12 slots)
+    PASS every shambler rolls a pace in 0.78-1.45 of the type (0.79-1.14)
+    PASS and not one pace: 23 different among 24
+    PASS its walking speed is its pace through speedFor (GB-135)
+    PASS bands among them: shamble, jog
+    PASS night 1 shambler walk and top use x0.750
+    PASS night 2 shambler walk and top use x0.750
+    PASS night 8 shambler walk and top use x0.875
+    PASS night 14 shambler walk and top use x1.000
+    PASS feral walks 6.0-7.6 (top 8.0, lunge 9.0) or sprints at 0.85-0.92 of his run
+    PASS a brute stays a brute (0.94-1.06)
+    PASS the spider keeps its own walk
+    PASS a TT spawn that does not join keeps the old walk (the older checks; hz=null, speed=3.668/3.668)
+    PASS 10 of 10 reached him (12.5 s game time)
+    PASS they took 6 different slots round him
+    PASS they arrived from several sides, not single file: bearings span 170 degrees over 5 of 12 sides
+    PASS the pack waited for company and rushed together (1 rush)
+ok    t205     13 pass   0 fail  46.1s  (real renderer)
+    PASS hooks: speedFor, run 11.80, CAP_RUN 0.9, refill
+    PASS out of a wave the field is not held: {"hold":false,"t":0}
+    PASS walkers never past 90% of his sprint (top 7.30 of 10.62)
+    PASS 6 sprinters, all past his sprint (12.30, 12.50, 12.94, 12.44, 13.12, 12.76)
+    PASS the walkers are faster on average: 6.17 m/s (was 3.86)
+    PASS baseSpeed moves with it (the maimed cuts are off the new speed)
+    PASS 12 flankers and 28 in the mass of 40 (70/30)
+    PASS the spider takes no role and no cap
+    PASS a walker pushed to 40 m/s holds to its cap: 3.41 m/s, cap 3.75
+    PASS three of the ten are flankers
+    PASS the mass found its front (-138.98 deg)
+    PASS the flankers hold slots 80-125 deg off the front: 204 of 210 samples
+    PASS refill: one death waits; 14 down or 10 s, a clump
+ok    t247     12 pass   0 fail  38.9s  (real renderer)
+    PASS shamblers walk 3.91-4.66 m/s (mean 4.28), top and lunge 5.0
+    PASS 4 shambler sprinters still past his sprint (12.66, 13.04, 12.91, 12.62)
+    PASS soldiers walk 5.04-5.94 m/s, top 6.0
+    PASS demons walk 5.62-6.39 m/s (mean 6.03)
+    PASS demon charges 13.44-15.10 m/s (as before)
+    PASS ferals walk 6.02-7.47 m/s, top 8.0, lunge 9.0
+    PASS 0 feral sprinters stay below his run
+    PASS screamer unchanged: 5.04-7.28 m/s
+    PASS drowned unchanged: 3.48-4.96 m/s
+    PASS colossus: speed 4.00, measured 4.00 m/s over 2.59 s
+    PASS the colossus strides 1.96 rad/m (it was 3.8 / 1.84 = 2.07): its feet keep up
+    PASS guardian: speed 7.00, measured 7.00 m/s over 2.56 s
+ok    t75      16 pass   0 fail  49.4s  (real renderer)
+    PASS GB-50 hooks exported
+    PASS knocked back along the blow (kv -2.44, 0.00)
+    PASS a stumble: lurch 0.73, aim off -0.064 rad, jolt 0.26
+    PASS a shambler does not put him on a knee
+    PASS a short slide: 0.37 m (dz 0.00)
+    PASS over within a moment (speedK 1)
+    PASS a brute puts him on one knee (0.55 s)
+    PASS slowed, never stopped: walk speed x0.45 at worst
+    PASS more for a brute: 0.93 m vs 0.37 m
+    PASS back on his feet within 0.55 s
+    PASS no knee lock: the next heavy hit within 3 s only knocks him back
+    PASS five spawned inside the marine (5)
+    PASS nobody inside him: the worst gap is 0.040 m (shambler, 395 samples)
+    PASS they crowd him: 5 of 5 at arm’s length
+    PASS and their blows land from the ring (7 hits, -56 hp)
+    PASS no page errors ()
+ok    t23       8 pass   0 fail  142.8s  (real renderer)
+    PASS match reached prep after Play
+    PASS every new sound plays without error
+    PASS chainsaw in hand with fuel (60)
+    PASS engine idling after the pull-start
+    PASS engine asked on every frame
+    PASS put away: engine shuts off
+    pistol:6[magRelease,magOut,magIn,magSlap,slideBack,slideFwd]
+    uzi:5[magRelease,magOut,magIn,magSlap,charge]
+    m4:5[magRelease,magOut,magIn,magSlap,charge]
+    ak:3[akRockOut,akRockIn,charge]
+    aa12:4[drumOut,drumIn,magSlap,charge]
+    sniper:8[magRelease,magOut,magIn,magSlap,boltUp,boltBack,boltFwd,boltDown]
+    minigun:6[boxLatch,belt,belt,boxSeat,boxLatch,motorBlip]
+    flamer:5[valveShut,tankOff,tankOn,valveOpen,igniter]
+    shotgun:12[grab,shell,grab,shell,grab,shell,grab,shell,grab,shell,grab,shell]
+    revolver:1[brass]
+    launcher:6[bigBrass,bigBrass,bigBrass,bigBrass,bigBrass,bigBrass]
+    PASS every gun has reload sounds
+    PASS shotgun: one sound per shell
+ok    t42      18 pass   0 fail  25.1s  (real renderer)
+    PASS root clear of the wall (mesh 191.4, trees 192.2, hill 196.7)
+    PASS root colossus fits the mouth (half-width at 4.9m 2.03)
+    PASS root corridor floor level (max dev 0.00)
+    PASS shale clear of the wall (mesh 201.3, trees 201.9, hill 210.0)
+    PASS shale colossus fits the mouth (half-width at 4.9m 1.96)
+    PASS shale corridor floor level (max dev 0.00)
+    PASS iron clear of the wall (mesh 196.6, trees 194.2, hill 202.3)
+    PASS iron colossus fits the mouth (half-width at 4.9m 3.56)
+    PASS iron corridor floor level (max dev 0.00)
+    PASS wet clear of the wall (mesh 199.8, trees 194.4, hill 205.0)
+    PASS wet colossus fits the mouth (half-width at 4.9m 2.84)
+    PASS wet corridor floor level (max dev 0.00)
+    PASS hill clear of the wall (mesh 199.4, trees 197.8, hill 205.8)
+    PASS hill colossus fits the mouth (half-width at 4.9m 2.07)
+    PASS hill corridor floor level (max dev 0.00)
+    PASS chalk clear of the wall (mesh 200.6, trees 200.0, hill 208.0)
+    PASS chalk colossus fits the mouth (half-width at 4.9m 2.63)
+    PASS chalk corridor floor level (max dev 0.00)
+    INFO root mesh 191.4 trees 192.2 hill 196.7 | shale mesh 201.3 trees 201.9 hill 210.0 | iron mesh 196.6 trees 194.2 hill 202.3 | wet mesh 199.8 trees 194.4 hill 205.0 | hill mesh 199.4 trees 197.8 hill 205.8 | chalk mesh 200.6 trees 200.0 hill 208.0
+ok    t43      35 pass   0 fail  40.0s  (real renderer)
+    PASS match reached prep after Play
+    PASS getWavePreview exported on TT
+    PASS getWaveDirectorState exported
+    PASS getActiveCaveIndices exported
+    PASS getWavePreview() returns a plan during prep
+    PASS preview.day matches director day (1)
+    PASS bloodMoon boolean
+    PASS surround boolean
+    PASS hasColossus boolean
+    PASS total === queue.length (15)
+    PASS caveByIndex parallel to queue
+    PASS caveIndices array
+    PASS bearings array
+    PASS byTypeAndCave array
+    PASS caveguard never in preview queue
+    PASS drowned rows use caveIndex -1
+    PASS ground rows (D-29) use caveIndex -1 and match groundRisers (8)
+    PASS day 1 is 15, 7-8 from the ground (15/8)
+    PASS non-drowned rows use valid POI.caves indices
+    PASS caveIndices ⊆ used mouths
+    PASS used mouths ⊆ caveIndices
+    PASS byTypeAndCave counts sum to total
+    PASS byTypeAndCave matches queue×caveByIndex
+    PASS getActiveCaveIndices === preview.caveIndices
+    PASS director state exposes frozen preview
+    PASS director caveByIndex length
+    PASS getWavePreview(same day) returns plan
+    PASS getWavePreview(other day) is null
+    PASS skipPrep entered wave
+    PASS working queues still full at wave start
+    PASS spawnWaveBatch produced plan spawns (4; alive 4)
+    PASS queue drained in lockstep with plan spawns (q 15→11, plan-made 4)
+    PASS caveByIndex stays parallel while draining
+    PASS spawned bodies near planned caves (4/4)
+    PASS ambush A has a caveIndices set (or surround/all-drowned day)
+ok    t53      76 pass   0 fail  50.9s  (real renderer)
+    PASS isGuardianNight exported
+    PASS getGuardianState exported
+    PASS getGuardianAlive exported
+    PASS getGuardianAlive null before guardian night
+    PASS ZOMBIE_TYPES.guardian present
+    PASS caveguard still present (scripted)
+    PASS guardian !== caveguard
+    PASS MAX_ZOMBIES === 48
+    PASS GUARDIAN_KEYS present
+    PASS GP-10 enemy.guardian.name
+    PASS GP-10 wavePreview.guardianNight
+    PASS GP-10 wavePreview.guardianFromCave
+    PASS GP-10 wavePreview.guardianUrgent
+    PASS GP-10 reward.guardianFirstBlood
+    PASS GP-10 reward.guardianBlueprint
+    PASS GP-10 reward.guardianSkulls
+    PASS isGuardianNight(6)
+    PASS isGuardianNight(12)
+    PASS isGuardianNight(5) false
+    PASS isGuardianNight(4) false
+    PASS isGuardianNight(30)
+    PASS match reached prep after Play
+    PASS day 4 preview day==4
+    PASS day 4 bloodMoon
+    PASS day 4 hasGuardian false
+    PASS day 4 queue has no guardian
+    PASS day 5 preview
+    PASS day 5 hasColossus
+    PASS day 5 hasGuardian false
+    PASS day 5 colossus not guardian
+    PASS day 6 preview
+    PASS 1) hasGuardian === true
+    PASS guardianNight === true
+    PASS 1) guardianCaveTheme === chalk
+    PASS 1) surround === false
+    PASS day 6 no colossus
+    PASS day 6 queue no colossus
+    PASS chalk cave exists
+    PASS guardianCaveIndex is chalk
+    PASS assault mouths = chalk only
+    PASS 2) exactly one guardian in queue
+    PASS 2) guardian assigned to chalk caveIndex
+    PASS 6) caveguard absent from queue
+    PASS 6) caveguard absent from buckets
+    PASS D-13 prep caveWarn === 1
+    PASS entered wave
+    PASS D-13 beginWave caveWarn === 2
+    PASS 5) live zombies never exceeded MAX_ZOMBIES
+    PASS 2) guardian spawned fightable
+    PASS spawned guardian.caveIndex === chalk
+    PASS guardian skipped chalk bone role
+    PASS getGuardianState alive
+    PASS getGuardianState hp
+    PASS getGuardianAlive while planned+alive
+    PASS getGuardianAlive x,z
+    PASS getGuardianAlive hp/hpMax
+    PASS getGuardianAlive caveIndex
+    PASS getGuardianAlive matches mesh
+    PASS 5) live count with guardian ≤ 48 (46)
+    PASS GB-17 debug guardian spawned
+    PASS GB-17 debug guardian not planned
+    PASS GB-17 debug guardian does not fire first-blood
+    PASS GB-17 firstBloodDone still false after debug kill
+    PASS GB-17 planned guardian still alive/planned
+    PASS 3) first-blood event once
+    PASS GB-17 first-blood carries x,z
+    PASS GB-17 first-blood xz matches kill
+    PASS 3) guardian dead; no second live guardian
+    PASS 3) defense / second kill does not re-fire first-blood
+    PASS getGuardianState.firstBloodDone
+    PASS getGuardianAlive null after guardian death
+    PASS d) stuck-test guardian spawned
+    PASS d) first 60s failsafe repaths
+    PASS d) stuckRepath === 1 after first pulse
+    PASS d) second failsafe retreats to mouth
+    PASS day 12 guardian + bloodMoon, no surround/colossus
+ok    t77      17 pass   0 fail  62.2s  (real renderer)
+    PASS blades: knife cd 0.55, machete cd 0.5 max 3
+    PASS saw: 14 a tick, arc 0.2
+    PASS size: shambler 1, brute 0.6, colossus 0.35
+    PASS knife on a shambler: 905.0 (sheet 905.0, CU-127)
+    PASS knife on a brute: 82.0 (sheet 82.0, plates on)
+    PASS ten saw ticks: the brute stands, head on (hp 47.2/85, parts {armL:true,armR:true,legL:false,legR:false,head:false})
+    PASS twenty-five at most kill it (17)
+    PASS saw in hand, 60 s of gas
+    PASS one tick bites at most 3 of 8 (3)
+    PASS gas burns faster in a body: 3.77 s vs 1.52 s running free (x2.5)
+    PASS and heats up: +0.189 vs +0.038 (x5.0)
+    PASS overheats at 1 (heat 1.00)
+    PASS stalled: no bites while it is hot, trigger still held
+    PASS cools to 0.45 and can be started again
+    PASS and it cuts again once restarted (fuel -1.84, heat 0.45->0.54, w chainsaw, paused ?, d 2.4,2.4,2.0 phase prep zl 8)
+    PASS off, it cools (0.44 -> 0.10)
+    PASS no page errors ()
+ok    t78      18 pass   0 fail  37.5s  (real renderer)
+    PASS NIGHT_PLAN has nights 1 to 20
+    PASS every night has its D-86 size (15, 50, 100 ... 860)
+    PASS twenty nights, twenty different tricks
+    PASS days 1-3 teach, 4-10 build, 11-20 test
+    PASS each night plays its plan: kinds, boss, Ember Night, caves, ground, pushes, trick
+    PASS GB-72: the treeline rises with the last push; nights 13/15/16/17 bring 40/40/50/60
+    PASS GB-73: night 10 opens every push with six brutes from one cave
+    PASS no night lighter than the one before, night 20 the heaviest: 1:15 2:52 3:112 4:170 5:276 6:336 7:326 8:432 9:460 10:627 11:614 12:748 13:766 14:756 15:944 16:1011 17:1025 18:1232 19:1322 20:1575
+    PASS the specialist share climbs: teach 13%, build 32%, test 46%, night 20 58%
+    PASS night 2: push 1 is 19 of 50, then a breather
+    PASS no spawns in the breather while 19 are still up
+    PASS field cleared: the breather lasts 9 s (lull 9 s)
+    PASS push 2 comes (50 out)
+    PASS a full field waits at most 30 s: 30 s
+    PASS night 19: a full field holds the breather 5 s (5 s at most)
+    PASS day 1: one push of 15, bursts 5-9 as before
+    PASS night 23: 980 (the old curve), plan nest-colossus
+    PASS no page errors
+FAIL  t93       6 pass   5 fail  56.9s  (real renderer)
+    FAIL at rest every walker's soles are on the ground, within 3 cm (shambler 1000000003.17, feral 1000000003.17, drowned 1000000003.17, military 1000000003.17, brute 1000000003.17, spitter 1000000003.17, screamer 1000000003.17, colossus 1000000003.17, demon 1000000003.17, bomber 1000000003.17)
+    FAIL over 1.5 s game time, walking soles stay above -5 cm and below +20 cm (+30 cm for Screamer and Feral) (shambler 1000000000.00/1000000003.17/1.51, feral 1000000000.00/1000000003.17/1.54, drowned 1000000000.00/1000000003.17/1.53, military 1000000000.00/1000000003.17/1.54, brute 1000000000.00/1000000003.17/1.50, spitter 1000000000.00/1000000003.17/1.55, screamer 1000000000.00/1000000003.17/1.52, colossus 1000000000.00/1000000003.17/1.54, demon 1000000000.00/1000000003.17/1.51, bomber 1000000000.00/1000000003.17/1.52)
+    PASS every head is inside its hit column, give or take 4 cm of pose (shambler -999999996.83<1.97 feral -999999996.83<1.59 drowned -999999996.83<1.88 military -999999996.83<2.06 brute -999999996.83<2.83 spitter 1.56<2.07 screamer -999999996.83<1.85 colossus -999999996.83<4.71 demon -999999996.83<3.29 bomber -999999996.83<2.11)
+    FAIL and its centre is in the headshot slice, above 0.78 of hitH, brute aside (spitter 1.56/2.07/0.72, colossus -999999996.83/4.71/0.67)
+    FAIL a bullet at the head's centre is a headshot (demon 12.00/12.00)
+    PASS hitH (about) unchanged where the head already fitted (brute 2.83, colossus 4.71)
+    PASS two pellets do not give it a reacting body
+    FAIL its feet stay on the ground (deepest 9.00 m) and find a planted stance after recovery (9.00 m)
+    PASS a crawling shambler's hips stay where they were (0.25-0.26 m, before 0.25)
+    PASS leaper and spider hips unchanged (0.57, 0.50)
+    PASS no page errors
+ok    t137     15 pass   0 fail  40.2s  (real renderer)
+    PASS D-86: a normal shambler carries 2 skulls
+    PASS D-86: Watchman blueprint costs $260
+    PASS the trim: starts night 8, loses 0.06 a night to x0.4
+    PASS nights 1-7 x1; 8-17 ramp to x0.40 (D-93); endless nights hold x0.40
+    PASS night 7: a 100 skull kill drops 100 (want 100; meter +100)
+    PASS night 8: a 100 skull kill drops 141 (want 141, night pay x1.5; meter +141)
+    PASS night 9: a 100 skull kill drops 88 (want 88; meter +88)
+    PASS night 10: a 100 skull kill drops 82 (want 82; meter +82)
+    PASS night 11: a 100 skull kill drops 76 (want 76; meter +76)
+    PASS night 14: a 100 skull kill drops 58 (want 58; meter +58)
+    PASS night 18: a 100 skull kill drops 40 (want 40; meter +40)
+    PASS night 20: a 100 skull kill drops 60 (want 60, night pay x1.5; meter +60)
+    PASS night 23: a 100 skull kill drops 40 (want 40; meter +40)
+    PASS the colossus still carries cashDrop 120 in the table (120)
+    PASS no page errors ()
+ok    t143     17 pass   0 fail  77.4s  (real renderer)
+    PASS its days: 7, 9, 11, 13, 17, 19, 21; not 5-6, 8, 10, 12, 15, 18, 20, 25
+    PASS reward 150 on nights 7-13, 300 from 14
+    PASS 7 stretches of trail 45 m or more from the HQ
+    PASS night 9: a wanderer is posted (reward 150, bounty-posted true)
+    PASS beside the two ordinary bounties
+    PASS it is a colossus, unaware
+    PASS it starts 100 m from the HQ
+    PASS unaware, it walks 39.5 m in 20 s
+    PASS and stays out on the trail (never nearer than 100 m to the HQ)
+    PASS the board snapshot follows it
+    PASS stuck, it turns back (repaths 0 -> 1, next point 9 -> 11)
+    PASS a hit wakes it (hit)
+    PASS the kill: bounty-done {wanderer, 150}, the bag +150
+    PASS the board says done
+    PASS another wanderer out on a trail
+    PASS the alarm sends it away: bounty-expired {wanderer, reason alarm}, gone
+    PASS no page errors
+ok    t168     39 pass   0 fail  57.3s  (real renderer)
+    PASS the debug handle is there
+    PASS he is down in the iron warren
+    PASS every alcove has its sleeper, lying down (11 of 11)
+    PASS each takes the iron cave role
+    PASS the roster pays half the night between them (15 of 30, 16 bodies)
+    PASS each sleeper carries its share
+    PASS at the mouth, nobody stirs
+    PASS walking within 2.5 m of one wakes it (after 91 ms)
+    PASS and it gets up
+    PASS its neighbours within 4 m wake too (3 of 3)
+    PASS it closes and swings at him
+    PASS it never stands in the rock (0 of 45 samples)
+    PASS the gun light held on one 6 m off wakes it after 1.5 s, not 1.4 s
+    PASS his pistol shot wakes the 5 within 35 m and not the 0 beyond
+    PASS never more than 24 awake (5 at most, 11 sleepers)
+    PASS the warren has its nests (1)
+    PASS near it, the nest sends one of its own (1)
+    PASS a nest's dead pay nothing (they keep coming)
+    PASS a round into it stops there and takes 150 of its 400 (250 left)
+    PASS a grenade on it, weak to blasts, blows it (and it is gone)
+    PASS the nest-blown event goes out
+    PASS blown, it sends no more
+    PASS stepping into the Deep brings the mine crew: a brute foreman and four soldiers (brute, military, military, military, military)
+    PASS one set-piece event
+    PASS the crew carries the rest of the pay (6)
+    PASS stepping in again brings no second crew
+    PASS the crew dead, the box shut: not yet cleared
+    PASS the box open too: the Deep is cleared
+    PASS topside's body stood where it was while he was below
+    PASS coming up takes the warren's dead away (0 were still lying there)
+    PASS and is still there after
+    PASS down again the same run: the dead he killed stay dead, the crew does not come back
+    PASS the shale Deep: feral,feral,feral,feral,shambler,shambler,shambler,shambler
+    PASS one sleeper killed in the shale warren: down again, the other 10 still lie there
+    PASS the wet Deep: drowned,drowned,drowned,drowned,drowned,drowned
+    PASS the drowned have risen to the floor
+    PASS the hill Deep: colossus,military,military,shambler,shambler
+    PASS the root Deep: nothing comes when he walks in
+    PASS the box opened, the climbers' knot drops and lands (6)
+ok    t249     13 pass   0 fail  38.6s  (real renderer)
+    PASS pistol on a shambler: 800000.00 (sheet 800000.00)
+    PASS 100% pistol hit uses this feral's own 73 HP bar: 73.00 (sheet 73.00)
+    PASS 100% of the body's own max HP kills
+    PASS an untagged bullet of 10 still does 10 (10.00)
+    PASS pistol on a military chest: 200000.00 (sheet 200000.00)
+    PASS pistol on a military helmet: 240000.00 (sheet 240000.00)
+    PASS pistol on a brute with its plates on: 100000.00 (sheet 100000.00)
+    PASS one flamethrower tick on a drowned: 10000.00 (sheet 10000.00)
+    PASS one shotgun pellet on a shambler: 385714.29 (sheet 385714.29)
+    PASS one chainsaw bite on a demon: 200000.00 (sheet 200000.00)
+    PASS a knife swing on a shambler: 905000.00 (sheet 905000.00)
+    PASS a sniper round on a colossus: 80000.00 (sheet 80000.00)
+    PASS no page errors
+17 checks: 333 pass, 5 fail (real renderer)

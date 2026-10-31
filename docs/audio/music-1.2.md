@@ -77,6 +77,7 @@ Chimera; screamer, Haunted; bomber, Carnage; drowned, Gutter; demon, Inferno; th
 | Dawn and the day's peace | Cinematic Orchestra, Blue Peace; Clear Sky by day |
 | The HQ and its yard | Anomaly, Safe Zone |
 | Dusk, the forest at night, the walk home | Anomaly, Dark Valley; granular underscores (wet) |
+| Inside a grove at night (D-98) | Dark Valley's stems and the wet underscores, in by how deep he is in the grove, out in the clearings |
 | The caves, the Hollows, the Marrow, the heart | Anomaly, The Anomaly and The Brain Scorcher; drones; the heart's fight from the heaviest slow kit (Doom or Tyrant) |
 | The graveyard, the chapel, the first people's stones | granular underscores (dry); tonal one-shots |
 | The relay and its vault, the mast | Mystery Nightfall pulses |
@@ -87,7 +88,7 @@ Chimera; screamer, Haunted; bomber, Carnage; drowned, Gutter; demon, Inferno; th
 | The wave's start, the last kill, a boss's entrance | braams, impacts, risers (Mystery Nightfall, Anomaly) |
 | Fallen; the last dawn | Anomaly impacts into Dark Valley's end; Blue Peace in full |
 
-Places fade in by distance as the existing ambience does; a fight always wins over a place.
+Places fade in by distance as the existing ambience does; a fight always wins over a place. The volume has its own sliders (D-98, CU-177): master, music (the score and his stingers) and ambience.
 
 ## How it's built
 

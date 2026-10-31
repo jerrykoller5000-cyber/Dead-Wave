@@ -20,8 +20,10 @@
 // --prof (CL-213, the CU-156 spec): over the same measured seconds the game's own
 // profiler (TT.profDbg, PROF in index.html) is on, and the line gets `prof`:
 //   frameMs   the mean frame (1000 / fps)
-//   tickMs    the JS the game's tick runs, the sum of every PROF section
-//   outsideMs frameMs - tickMs: the browser, the compositor, and waiting on the GPU
+//   tickMs    the JS the game's tick runs, the sum of every PROF section, over the WHOLE run (30 s)
+//   outsideMs frameMs - tickMs: frameMs is the last 10 s (fps' window) and tickMs the whole run, so this mixes windows (AG-162)
+//   last10    the same over the last 10 s, the window of fps and the low (CU-184): frameMs, tickMs, outsideMs and the top sections
+//             (the browser, the compositor and waiting on the GPU are outsideMs there)
 //   top       the 12 heaviest sections, mean and worst ms per frame
 //   spikes    the first frames over 25 ms with their four heaviest sections, the heap they freed and the pipelines,
 //             textures and geometries they built (CL-223), and whether the sun's shadow map was redrawn in it
@@ -66,6 +68,8 @@ const SCENARIO_ARG = flag('--scenario');
 // CU-171: --prof-all is --prof with every PROF section in the line's `prof.top`, not the heaviest 12 (what grew outside the top).
 // CU-173: --eval <file> runs that JavaScript in the page after the measured seconds (the JSON it returns goes in the line as `eval`).
 const EVAL_FILE = flag('--eval');
+// CU-184: --save-cpu <file> (with --prof --cpu) writes the raw DevTools CPU profile with the page's clock at its start and every frame's start time, so a spike frame's samples can be read apart.
+const SAVE_CPU = flag('--save-cpu');
 const PROF_ALL = argv.includes('--prof-all');
 const PROF_ON = argv.includes('--prof') || PROF_ALL;
 const CPU_ON = argv.includes('--cpu');
@@ -123,7 +127,10 @@ const SAMPLE = `(() => {
   const again = read();
   if (again.draws > best.draws) best = again;
   const snap = TT.perfSnapshot() || { fps: 0, low: 0, worst: 0, hitches: 0, frames: 0 };
-  return Object.assign({}, snap, best);
+  // CU-184: with --prof, the profiler's running totals at this second, so the last 10 s can be told from the whole run
+  const P = TT.profDbg;
+  const prof = P && P.on ? { frame: P.frame, t: Object.assign({}, P.t) } : null;
+  return Object.assign({}, snap, best, { prof });
 })()`;
 
 // Jump to night N, start it, then walk the director to the last push and let that
@@ -221,7 +228,7 @@ const PROF_START = `(() => {
   const counts = () => { const m = (R && R.info && R.info.memory) || {}; return [(R && R._pipelines && R._pipelines.caches && R._pipelines.caches.size) || 0, m.textures || 0, m.geometries || 0, (window.__benchBuilds && window.__benchBuilds.n) || 0, window.__dwSunShadowN || 0, (window.__benchRO && window.__benchRO.n) || 0]; };
   if (!P.__cl223) {
     const begin = P.begin; let last = counts(), lastT = performance.now();
-    P.begin = function () { const n0 = this.spikes.length, tb = performance.now(); begin.call(this); const now = counts();
+    P.begin = function () { const n0 = this.spikes.length, tb = performance.now(); (window.__benchFT || (window.__benchFT = {}))[this.frame] = tb; begin.call(this); const now = counts();
       if (this.spikes.length > n0) { const sp = this.spikes[this.spikes.length - 1]; sp.newPipelines = now[0] - last[0]; sp.newTextures = now[1] - last[1]; sp.newGeometries = now[2] - last[2]; sp.newBuilds = now[3] - last[3]; sp.sunShadow = now[4] - last[4]; sp.newRenderObjects = now[5] - last[5]; sp.t0 = +lastT.toFixed(2); sp.t1 = +tb.toFixed(2); }
       last = now; lastT = tb; };
     P.__cl223 = true;
@@ -541,10 +548,13 @@ try {
     if (!profStart || !profStart.ok) throw new Error('--prof: ' + (profStart && profStart.why));
     console.log(`bench: profiler on, GPU timestamps ${profStart.gpu}`);
   }
+  let cpuSync = null;
   if (CPU_ON) {
     await page.send('Profiler.enable');
     await page.send('Profiler.setSamplingInterval', { interval: 500 });
+    const cpuS0 = await page.evaluate('performance.now()');
     await page.send('Profiler.start');
+    cpuSync = (cpuS0 + await page.evaluate('performance.now()')) / 2;
     console.log('bench: CPU profile on');
   }
   // CL-239: GB-218 found AG-111's 3-second spikes are every phase of one frame at 2.5-3x its own average at once (render,
@@ -580,6 +590,7 @@ try {
     await new Promise((r) => setTimeout(r, 1000));
   }
   const cpuProfile = CPU_ON ? (await page.send('Profiler.stop', {}, 180000)).profile : null;
+  if (cpuProfile && SAVE_CPU) fs.writeFileSync(SAVE_CPU, JSON.stringify({ sync: cpuSync, ft: await page.evaluate('window.__benchFT || {}'), profile: cpuProfile }));
   const allocProfile = ALLOC_ON ? (await page.send('HeapProfiler.stopSampling', {}, 180000)).profile : null;
   const tail = windows.slice(-10);
   const paced = tail.filter((w) => w.fps > 0);
@@ -632,11 +643,26 @@ try {
     const tickMs = phases.reduce((s, p) => s + p.avg, 0);
     const frameMs = line.fps > 0 ? 1000 / line.fps : 0;
     const gpu = got.gpu || [];
+    // CU-184 (AG-162): fps, the low and frameMs are the last 10 s; tickMs and the sections above are the whole run. The tick surges in
+    // the last 10 s (all 48 round him), so frameMs - tickMs mixes the two. last10 is the sections over the last 10 s, the same
+    // window as fps: tick, outside and the top sections. The whole-run numbers stay beside it.
+    let last10 = null;
+    const snaps = windows.filter((x) => x.prof);
+    if (snaps.length > 10) {
+      const base = snaps[snaps.length - 11].prof, end = snaps[snaps.length - 1].prof, n = end.frame - base.frame;
+      if (n > 0) {
+        const ph = Object.keys(end.t).map((k) => ({ k, avg: ((end.t[k] || 0) - (base.t[k] || 0)) / n })).sort((a, b) => b.avg - a.avg);
+        const tick10 = ph.reduce((s, p) => s + p.avg, 0);
+        last10 = { seconds: 10, frames: n, frameMs: r2(frameMs), tickMs: r2(tick10), outsideMs: r2(frameMs - tick10),
+          top: ph.slice(0, PROF_ALL ? ph.length : 12).map((p) => ({ k: p.k, avg: r2(p.avg) })) };
+      }
+    }
     line.prof = {
       frames: got.rep ? got.rep.frames : 0,
       frameMs: r2(frameMs),
       tickMs: r2(tickMs),
-      outsideMs: r2(frameMs - tickMs),
+      outsideMs: r2(frameMs - tickMs),   // frameMs (last 10 s) minus tickMs (the whole run): two windows; see last10 for the same window
+      last10,
       top: phases.slice(0, PROF_ALL ? phases.length : 12).map((p) => ({ k: p.k, avg: r2(p.avg), max: r2(p.max) })),
       spikes: ((got.rep && got.rep.spikes) || []).slice(0, 8),
       // CL-223: every spike over 25 ms (up to PROF's 60) sorted by what it did: built pipelines, uploaded textures or
@@ -721,7 +747,9 @@ try {
   console.log(`tris   ${line.triangles}`);
   if (line.prof) {
     const p = line.prof;
-    console.log(`frame  ${p.frameMs} ms = tick ${p.tickMs} ms + outside ${p.outsideMs} ms   gpu ${p.gpuMs}${typeof p.gpuMs === 'number' ? ' ms' : ''}`);
+    if (p.last10) console.log(`frame  ${p.last10.frameMs} ms = tick ${p.last10.tickMs} ms + outside ${p.last10.outsideMs} ms  (the last 10 s, the window of fps and low)`);
+    console.log(`whole run: tick ${p.tickMs} ms over ${SECONDS} s; frame (last 10 s) - that = ${p.outsideMs} ms (two windows)   gpu ${p.gpuMs}${typeof p.gpuMs === 'number' ? ' ms' : ''}`);
+    if (p.last10) { console.log(`last 10 s, by section:`); for (const s of p.last10.top) console.log(`  ${s.k.padEnd(34)} ${s.avg.toFixed(2).padStart(6)} ms`); console.log(`whole run, by section:`); }
     for (const s of p.top) console.log(`  ${s.k.padEnd(34)} ${s.avg.toFixed(2).padStart(6)} ms   worst ${s.max.toFixed(1)}`);
   }
   if (line.cpu) {

@@ -1,0 +1,108 @@
+Game-test request 0709cd4b-655f-4ad2-8c07-94a2de3259a5 queued at position 2. Waiting...
+GRANT grokbot GB-249: starting one game-test command
+FAIL  t111      7 pass   4 fail  36.0s  (real renderer)
+    PASS a brute hit in the chest is a body hit: 18.00 vs 18.00
+    PASS a round through its head is a headshot: 33.30, 33.30 (body 18.00)
+    PASS a shambler: chest a body hit (20.00), its head a headshot (37.00)
+    FAIL a walking brute's head centre sits above its line with a margin: p10 0.000 (line 0.74, 60 samples)
+    PASS feral: a round through its head is a headshot (37.00 vs chest 20.00)
+    FAIL feral's head centre sits above its line while it walks: median 0.000 (line 0.7, 45 samples)
+    INFO feral head centre p10 0.000, median 0.000 of hitH (line 0.7)
+    PASS leaper: a round through its head is a headshot (48.10 vs chest 26.00)
+    FAIL leaper's head centre sits above its line while it walks: median 0.000 (line 0.55, 45 samples)
+    INFO leaper head centre p10 0.000, median 0.000 of hitH (line 0.55)
+    PASS spider: a round through its head is a headshot (25.90 vs chest 14.00)
+    FAIL spider's head centre sits above its line while it walks: median 0.000 (line 0.6, 45 samples)
+    INFO spider head centre p10 0.000, median 0.000 of hitH (line 0.6)
+    PASS no page errors
+ok    t76      16 pass   0 fail  42.0s  (real renderer)
+    PASS guards asleep at their post (3)
+    PASS drawn close up, not the far LOD (false/false/false)
+    PASS sampled 81 frames
+    PASS each one sways (torso roll ranges 0.090/0.076/0.120)
+    PASS each one breathes (hips 27.0/22.9/27.0 mm)
+    PASS each one looks about (head turn ranges 0.65/1.09/0.95 rad)
+    PASS never in step: the closest pair differs by 0.054 rad on average
+    PASS own breathing rates (2.00/2.29/2.24)
+    PASS they hold the post (moved at most 0.12 m)
+    PASS shuffles a step: leg lift 0.35 rad, turn -0.41 rad
+    PASS and is still at its post
+    PASS a zombie held in the grace idles (amt 1.00, grace true)
+    PASS it stands instead of walking on the spot
+    PASS and looks about (0.09 rad)
+    PASS a walker walks (phase +3.6, idle 0.00)
+    PASS no page errors ()
+FAIL  tgbprobe111    0 pass  72 fail  31.1s  (real renderer)
+    FAIL PROBE feral#0 hitH 1.533 head Group skinMeshes 1
+    FAIL PROBE   mesh Mesh v49 vis false src false pHidden false transp false stump false skinned false y 0.798..0.819 w 0.044x0.032
+    FAIL PROBE   mesh Mesh v49 vis false src false pHidden false transp false stump false skinned false y 0.787..0.807 w 0.044x0.032
+    FAIL PROBE   mesh Mesh v3312 vis false src true pHidden false transp false stump false skinned false y 0.684..0.954 w 0.278x0.278 HOOK SURF
+    FAIL PROBE   mesh zombie-eyes v360 vis false src true pHidden false transp false stump false skinned false y 0.787..0.819 w 0.185x0.082 HOOK SURF
+    FAIL PROBE   box hook y 0.684..0.954 centre 0.819 x -0.211 z 0.495
+    FAIL PROBE   box surf y 0.684..0.954 centre 0.819 x -0.211 z 0.495
+    FAIL PROBE   roundInfoDbg head: headHit false hitY 0.819
+    FAIL PROBE   sweep (frac of hitH : H head / b body / . miss) 0.60:b 0.62:b 0.64:b 0.66:b 0.68:b 0.70:b 0.72:b 0.74:b 0.76:b 0.78:b 0.80:b 0.82:b 0.84:b 0.86:b 0.88:b 0.90:b 0.92:H 0.94:H 0.96:. 0.98:. 1.00:.
+    FAIL PROBE feral#1 hitH 1.533 head Group skinMeshes 1
+    FAIL PROBE   mesh Mesh v49 vis false src false pHidden false transp false stump false skinned false y 0.798..0.819 w 0.039x0.033
+    FAIL PROBE   mesh Mesh v49 vis false src false pHidden false transp false stump false skinned false y 0.787..0.807 w 0.039x0.033
+    FAIL PROBE   mesh Mesh v3312 vis false src true pHidden false transp false stump false skinned false y 0.684..0.954 w 0.284x0.292 HOOK SURF
+    FAIL PROBE   mesh zombie-eyes v360 vis false src true pHidden false transp false stump false skinned false y 0.787..0.819 w 0.163x0.117 HOOK SURF
+    FAIL PROBE   box hook y 0.684..0.954 centre 0.819 x 0.279 z 0.464
+    FAIL PROBE   box surf y 0.684..0.954 centre 0.819 x 0.279 z 0.464
+    FAIL PROBE   roundInfoDbg head: headHit true hitY 0.765
+    FAIL PROBE   sweep (frac of hitH : H head / b body / . miss) 0.60:b 0.62:b 0.64:b 0.66:b 0.68:b 0.70:b 0.72:b 0.74:b 0.76:b 0.78:b 0.80:b 0.82:b 0.84:b 0.86:b 0.88:b 0.90:b 0.92:. 0.94:. 0.96:. 0.98:. 1.00:.
+    FAIL PROBE shambler#0 hitH 1.860 head Group skinMeshes 1
+    FAIL PROBE   mesh Mesh v49 vis false src false pHidden false transp false stump false skinned false y 0.835..0.852 w 0.035x0.056
+    FAIL PROBE   mesh Mesh v49 vis false src false pHidden false transp false stump false skinned false y 0.852..0.870 w 0.035x0.056
+    FAIL PROBE   mesh Mesh v3312 vis false src true pHidden false transp false stump false skinned false y 0.748..0.957 w 0.319x0.358 HOOK SURF
+    FAIL PROBE   mesh zombie-eyes v360 vis false src true pHidden false transp false stump false skinned false y 0.835..0.870 w 0.057x0.237 HOOK SURF
+    FAIL PROBE   box hook y 0.748..0.957 centre 0.853 x -0.201 z -0.007
+    FAIL PROBE   box surf y 0.748..0.957 centre 0.853 x -0.201 z -0.007
+    FAIL PROBE   roundInfoDbg head: headHit true hitY 0.853
+    FAIL PROBE   sweep (frac of hitH : H head / b body / . miss) 0.60:b 0.62:b 0.64:b 0.66:b 0.68:b 0.70:b 0.72:b 0.74:b 0.76:b 0.78:b 0.80:b 0.82:. 0.84:. 0.86:. 0.88:. 0.90:. 0.92:. 0.94:. 0.96:. 0.98:. 1.00:.
+    FAIL PROBE shambler#1 hitH 1.860 head Group skinMeshes 1
+    FAIL PROBE   mesh Mesh v49 vis false src false pHidden false transp false stump false skinned false y 0.835..0.852 w 0.052x0.041
+    FAIL PROBE   mesh Mesh v49 vis false src false pHidden false transp false stump false skinned false y 0.852..0.870 w 0.052x0.041
+    FAIL PROBE   mesh Mesh v3312 vis false src true pHidden false transp false stump false skinned false y 0.748..0.957 w 0.342x0.346 HOOK SURF
+    FAIL PROBE   mesh zombie-eyes v360 vis false src true pHidden false transp false stump false skinned false y 0.835..0.870 w 0.218x0.117 HOOK SURF
+    FAIL PROBE   box hook y 0.748..0.957 centre 0.853 x 0.109 z -0.165
+    FAIL PROBE   box surf y 0.748..0.957 centre 0.853 x 0.109 z -0.165
+    FAIL PROBE   roundInfoDbg head: headHit true hitY 0.853
+    FAIL PROBE   sweep (frac of hitH : H head / b body / . miss) 0.60:b 0.62:b 0.64:b 0.66:b 0.68:b 0.70:b 0.72:b 0.74:b 0.76:b 0.78:b 0.80:H 0.82:H 0.84:H 0.86:H 0.88:H 0.90:H 0.92:H 0.94:. 0.96:. 0.98:. 1.00:.
+    FAIL PROBE leaper#0 hitH 1.104 head Group skinMeshes 1
+    FAIL PROBE   mesh Mesh v49 vis false src false pHidden false transp false stump false skinned false y 0.680..0.709 w 0.039x0.038
+    FAIL PROBE   mesh Mesh v49 vis false src false pHidden false transp false stump false skinned false y 0.680..0.709 w 0.039x0.038
+    FAIL PROBE   mesh Mesh v2808 vis false src true pHidden false transp false stump false skinned false y 0.521..0.866 w 0.323x0.326 HOOK SURF
+    FAIL PROBE   mesh zombie-eyes v360 vis false src true pHidden false transp false stump false skinned false y 0.680..0.709 w 0.166x0.146 HOOK SURF
+    FAIL PROBE   box hook y 0.521..0.866 centre 0.693 x 0.507 z 0.592
+    FAIL PROBE   box surf y 0.521..0.866 centre 0.693 x 0.507 z 0.592
+    FAIL PROBE   roundInfoDbg head: headHit true hitY 0.650
+    FAIL PROBE   sweep (frac of hitH : H head / b body / . miss) 0.60:b 0.62:b 0.64:b 0.66:b 0.68:b 0.70:b 0.72:. 0.74:. 0.76:. 0.78:. 0.80:. 0.82:. 0.84:. 0.86:. 0.88:. 0.90:. 0.92:. 0.94:. 0.96:. 0.98:. 1.00:.
+    FAIL PROBE leaper#1 hitH 1.104 head Group skinMeshes 1
+    FAIL PROBE   mesh Mesh v49 vis false src false pHidden false transp false stump false skinned false y 0.680..0.709 w 0.051x0.032
+    FAIL PROBE   mesh Mesh v49 vis false src false pHidden false transp false stump false skinned false y 0.680..0.709 w 0.051x0.032
+    FAIL PROBE   mesh Mesh v2808 vis false src true pHidden false transp false stump false skinned false y 0.521..0.866 w 0.320x0.304 HOOK SURF
+    FAIL PROBE   mesh zombie-eyes v360 vis false src true pHidden false transp false stump false skinned false y 0.680..0.709 w 0.216x0.056 HOOK SURF
+    FAIL PROBE   box hook y 0.521..0.866 centre 0.693 x 0.114 z -0.775
+    FAIL PROBE   box surf y 0.521..0.866 centre 0.693 x 0.114 z -0.775
+    FAIL PROBE   roundInfoDbg head: headHit true hitY 0.693
+    FAIL PROBE   sweep (frac of hitH : H head / b body / . miss) 0.60:b 0.62:b 0.64:b 0.66:b 0.68:b 0.70:b 0.72:b 0.74:b 0.76:b 0.78:b 0.80:b 0.82:b 0.84:b 0.86:. 0.88:. 0.90:. 0.92:. 0.94:. 0.96:. 0.98:. 1.00:.
+    FAIL PROBE spider#0 hitH 0.950 head Group skinMeshes 1
+    FAIL PROBE   mesh Mesh v49 vis false src false pHidden false transp false stump false skinned false y 0.834..0.883 w 0.055x0.040
+    FAIL PROBE   mesh Mesh v49 vis false src false pHidden false transp false stump false skinned false y 0.834..0.883 w 0.055x0.040
+    FAIL PROBE   mesh Mesh v960 vis false src true pHidden false transp false stump false skinned false y 0.582..0.936 w 0.394x0.455 HOOK SURF
+    FAIL PROBE   mesh zombie-eyes v360 vis false src true pHidden false transp false stump false skinned false y 0.834..0.883 w 0.248x0.092 HOOK SURF
+    FAIL PROBE   box hook y 0.582..0.936 centre 0.759 x -0.176 z -0.688
+    FAIL PROBE   box surf y 0.582..0.936 centre 0.759 x -0.176 z -0.688
+    FAIL PROBE   roundInfoDbg head: headHit true hitY 0.759
+    FAIL PROBE   sweep (frac of hitH : H head / b body / . miss) 0.60:b 0.62:b 0.64:b 0.66:b 0.68:H 0.70:H 0.72:H 0.74:H 0.76:H 0.78:H 0.80:H 0.82:H 0.84:H 0.86:H 0.88:H 0.90:H 0.92:H 0.94:b 0.96:b 0.98:b 1.00:b
+    FAIL PROBE spider#1 hitH 0.950 head Group skinMeshes 1
+    FAIL PROBE   mesh Mesh v49 vis false src false pHidden false transp false stump false skinned false y 0.834..0.883 w 0.053x0.041
+    FAIL PROBE   mesh Mesh v49 vis false src false pHidden false transp false stump false skinned false y 0.834..0.883 w 0.053x0.041
+    FAIL PROBE   mesh Mesh v960 vis false src true pHidden false transp false stump false skinned false y 0.582..0.936 w 0.400x0.447 HOOK SURF
+    FAIL PROBE   mesh zombie-eyes v360 vis false src true pHidden false transp false stump false skinned false y 0.834..0.883 w 0.241x0.110 HOOK SURF
+    FAIL PROBE   box hook y 0.582..0.936 centre 0.759 x -0.241 z -0.672
+    FAIL PROBE   box surf y 0.582..0.936 centre 0.759 x -0.241 z -0.672
+    FAIL PROBE   roundInfoDbg head: headHit true hitY 0.759
+    FAIL PROBE   sweep (frac of hitH : H head / b body / . miss) 0.60:b 0.62:b 0.64:b 0.66:b 0.68:H 0.70:H 0.72:H 0.74:H 0.76:H 0.78:H 0.80:H 0.82:H 0.84:H 0.86:H 0.88:H 0.90:H 0.92:H 0.94:b 0.96:b 0.98:b 1.00:b
+3 checks: 23 pass, 76 fail (real renderer)

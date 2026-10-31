@@ -1,0 +1,38 @@
+Game-test request b19eec56-a138-412a-917d-a25559db11ba queued at position 2. Waiting...
+GRANT cursor CU-182: starting one game-test command
+check-players: 309 player.position reads, all in the allowed places
+ok    t173    12 pass   0 fail  36.7s
+ok    t174    14 pass   0 fail  64.1s
+ok    t175    12 pass   0 fail  44.6s
+ok    t176     8 pass   0 fail  49.2s
+ok    t177    10 pass   0 fail  40.0s
+FAIL  t178     7 pass   1 fail  48.4s
+ok    t179    27 pass   0 fail  41.4s
+ok    t180    29 pass   0 fail  63.7s
+ok    t181    23 pass   0 fail  49.1s
+ok    t182    36 pass   0 fail  45.9s
+ok    t183    16 pass   0 fail  45.1s
+           INFO crouch-walk slide 8.72% (at 2.09 m/s ground speed)
+ok    t184    29 pass   0 fail  48.6s
+           INFO holds: m4 1427 ms wall / 500 ms game, ak 1477 ms wall / 500 ms game, aa12 695 ms wall / 450 ms game, uzi 1263 ms wall / 400 ms game, shotgun 1063 ms wall / 300 ms game, revolver 1053 ms wall / 300 ms game, sniper 1143 ms wall / 300 ms game, pistol 374 ms wall / 300 ms game, pistol 660 ms wall / 400 ms game
+ok    t185    36 pass   0 fail  83.0s
+ok    t186    34 pass   0 fail  67.3s
+ok    t187    75 pass   0 fail  87.7s
+ok    t188    91 pass   0 fail  103.5s
+ok    t189     8 pass   0 fail  139.3s
+ok    t190    21 pass   0 fail  39.5s
+ok    t191    16 pass   0 fail  51.6s
+ok    t192    10 pass   0 fail  39.5s
+           INFO on the flat, walking, the lowest sole is -0.022 m
+ok    t193    18 pass   0 fail  63.5s
+ok    t194    35 pass   0 fail  74.8s
+ok    t195    16 pass   0 fail  95.3s
+ok    t196    17 pass   0 fail  41.1s
+ok    t197     7 pass   0 fail  41.7s
+
+25 checks: 607 pass, 1 fail
+
+by owner:
+  unassigned
+    t178   1 fail  FAIL back up the tunnel: the calm again (dayfight)
+           FAIL back up the tunnel: the calm again (dayfight)

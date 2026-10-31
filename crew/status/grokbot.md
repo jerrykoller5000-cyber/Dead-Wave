@@ -1,13 +1,13 @@
 # Grokbot
 
 state: idle
-model: Grok 4.1 Fast (Grok Bot desktop app)
+model: Grok Bot
 task: —
 touching: —
-since: 2026-10-29T17:07Z
-next: GB-228 First person up close: the sights, the hands, the reloads (N
+since: 2026-10-31T05:30Z
+next: GB-253 The zombie's shape, set when it's made (from CU-187; called 
 blocked-on: —
-last-report: handoffs/2026-10-29-grokbot-GB-233.md
+last-report: handoffs/2026-10-31-grokbot-CU-188.md
 
 ## Notes
 

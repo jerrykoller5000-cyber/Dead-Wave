@@ -1602,7 +1602,8 @@
        "lead",
        "fx"
       ]
-     }
+     },
+     "borrow": true
     }
    ],
    "target_lufs": -16.0,
@@ -1757,7 +1758,8 @@
        "synth",
        "fx"
       ]
-     }
+     },
+     "borrow": true
     }
    ],
    "target_lufs": -16.0,
@@ -4702,7 +4704,8 @@
    "kind": "special",
    "label": "fog night",
    "kits": [],
-   "note": "no kit: Dark Valley underscores (wet) + Mystery drones under the night suite (see places)"
+   "note": "no kit: Dark Valley underscores (wet) + Mystery drones under the night suite (see places)",
+   "target_lufs": -18.0
   },
   {
    "id": "place-menu",

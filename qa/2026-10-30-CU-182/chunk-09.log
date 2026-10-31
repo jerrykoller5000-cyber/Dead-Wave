@@ -1,0 +1,54 @@
+GRANT cursor CU-182: starting one game-test command
+check-players: 309 player.position reads, all in the allowed places
+ok    t223    15 pass   0 fail  54.7s
+ok    t224    27 pass   0 fail  125.0s
+ok    t225    21 pass   0 fail  52.4s
+ok    t226    38 pass   0 fail  120.0s
+           INFO crouched: ankles bent up to 53 deg; an ankle-worn shaft top would be 13.4 cm off the shin
+ok    t227    23 pass   0 fail  41.5s
+ok    t228    13 pass   0 fail  133.0s
+ok    t229    13 pass   0 fail  76.1s
+ok    t240    17 pass   0 fail  52.1s
+ok    t241     5 pass   0 fail  38.4s
+ok    t242    15 pass   0 fail  35.6s
+ok    t243    23 pass   0 fail  38.3s
+info  t244     0 pass   0 fail  37.1s  — SKIP the manual clock does not drive this page (run on the real renderer)
+ok    t245    15 pass   0 fail  39.3s
+ok    t246    24 pass   0 fail  62.7s
+ok    t247    12 pass   0 fail  45.6s
+FAIL  t248    11 pass   1 fail  39.8s
+ok    t249    13 pass   0 fail  37.7s
+ok    t250    10 pass   0 fail  37.4s
+ok    t251     3 pass   0 fail  38.2s
+ok    t252    12 pass   0 fail  52.7s
+ok    t253    15 pass   0 fail  48.7s
+ok    t254     8 pass   0 fail  42.0s
+           INFO smoking pinch: solved 2.6 cm, sampled 2.6 cm, wrist miss 5.1 cm; shoulder target/actual 27.7/27.7 cm; hand offset 15.8 cm
+ok    t255     5 pass   0 fail  43.0s
+ok    t256    10 pass   0 fail  52.7s
+ok    t257     7 pass   0 fail  29.0s
+
+25 checks: 355 pass, 1 fail, 1 reported no assertions
+
+no assertions (probe, or the check bailed before asserting):
+  t244   SKIP the manual clock does not drive this page (run on the real renderer)
+
+by owner:
+  unassigned
+    t248   1 fail  FAIL the raised turret, with a clear line, does hit (hp 27/27)
+           FAIL the raised turret, with a clear line, does hit (hp 27/27)
+node:fs:2427
+    return binding.writeFileUtf8(
+                   ^
+
+Error: UNKNOWN: unknown error, open 'C:\Users\Zero\Desktop\Tiny Trek\crew\tests.json'
+    at Object.writeFileSync (node:fs:2427:20)
+    at file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/tests/run-all.mjs:299:4
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5) {
+  errno: -4094,
+  code: 'UNKNOWN',
+  syscall: 'open',
+  path: 'C:\\Users\\Zero\\Desktop\\Tiny Trek\\crew\\tests.json'
+}
+
+Node.js v24.13.0

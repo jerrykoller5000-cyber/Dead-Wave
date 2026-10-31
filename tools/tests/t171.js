@@ -9,7 +9,8 @@
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
   const events = []; window.addEventListener('dw-game', (e) => { const d = e.detail || {}; if (['heart', 'quest', 'quest-door', 'guardian-kick-free', 'cave-guardian', 'hollow'].includes(d.type)) events.push(d); });
-  const until = async (f, ms) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (f()) return true; await wait(50); } return !!f(); };
+  // GB-250 (CU-178: the test page ran at 4-14 fps): waits on the game's own events go on game time (T.getSimTime(), as GB-131 and t72), the same windows; a wall-clock cap only so a stuck game still ends the check.
+  const until = async (f, ms, capMs = 120000) => { const s0 = T.getSimTime(), t0 = Date.now(); while ((T.getSimTime() - s0) * 1000 < ms && Date.now() - t0 < capMs) { if (f()) return true; await wait(50); } return !!f(); };
   const has = (type, f) => events.some((e) => e.type === type && (!f || f(e)));
   try {
     await startMatch(T, 'Heart');

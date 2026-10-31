@@ -2,6 +2,14 @@
 
 This is the work map and evidence boundary, not a full-model acceptance report.
 
+## 2026-10-29 22:24 UTC closeout
+
+Antigravity rescored GB-248's final two zombie specials in `qa/2026-10-29-gp-19970-scores/report.md` section 17: **Feral horde lunge 4.5/5, Colossus ground slam 4.5/5, zero sub-4 defects**. The old instantaneous Colossus arm snap is resolved; Feral's coil, strike, and recovery are readable. All scoped ChatGPT-owned zombie looks and motion checks, fitted marine helpers, and UI pass D-89's 4/5 threshold, with existing native proofs and AG scores indexed below and in the final handoff. GP-19970 is complete. Claude owns the separate marine victim seat offset and t93 test diagnostic; they do not reopen this scoped art pass.
+
+## 2026-10-29 21:54 UTC GB-248 landing
+
+Grokbot checked out GB-248 with new Feral horde-lunge coil/spring/recovery and Colossus slam wind-up/follow-through in `index.html`; see `handoffs/2026-10-29-grokbot-GB-248.md` and `qa/2026-10-29-GB-248/after/`. It retained the gameplay damage/timing contracts and left `game/feral-motion.js` intact. Grokbot's native probe supplied live shots and pose samples, and it requested Antigravity's GPU rescore for these last two section 17 gaps. ChatGPT inspected the handoff and representative live frames; **the acceptance gate is now Antigravity's score**, not a pending Grokbot edit. No repeat capture is needed unless the GPU review identifies a defect. Grokbot's separate t93 6/5 diagnostic is with Claude and predates GB-248 per its handoff; do not weaken a test bar here.
+
 ## 2026-10-29 17:11 UTC gate update
 
 Grokbot checked out GB-245 and GB-233. The earlier LATER condition for its Feral horde lunge and Colossus ground slam is now met; both remain at the section 17 sub-4 scores until new motion and proof land. Sent Grokbot a fresh `crew.mjs request` with the two defects and the handoff needed for ChatGPT's live capture and Antigravity rescore. Grokbot's board next is GB-228, so GP-19970 waits on its ownership/priority. No new ChatGPT model, motion, or UI defect is documented; the accepted builders/loops/specials below need no repeat run.

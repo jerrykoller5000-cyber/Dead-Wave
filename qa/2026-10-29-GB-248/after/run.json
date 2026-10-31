@@ -1,0 +1,2626 @@
+{
+  "at": "2026-10-29T21:14:33.702Z",
+  "subjects": {
+    "feral": {
+      "samples": [
+        {
+          "t": 35.151,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": 0,
+          "follow": 0,
+          "cd": 0.123,
+          "distance": 4.037,
+          "arms": [
+            -0.594,
+            -0.546
+          ],
+          "elbows": [
+            1.169,
+            1.075
+          ],
+          "torso": 0.672,
+          "head": -0.121,
+          "hipsY": 0.89,
+          "hipsZ": 0
+        },
+        {
+          "t": 35.194,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": 0,
+          "follow": 0,
+          "cd": 0.075,
+          "distance": 4.104,
+          "arms": [
+            -0.686,
+            -0.454
+          ],
+          "elbows": [
+            1.135,
+            0.896
+          ],
+          "torso": 0.828,
+          "head": -0.309,
+          "hipsY": 0.86,
+          "hipsZ": 0
+        },
+        {
+          "t": 35.242,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": 0,
+          "follow": 0,
+          "cd": 0.03,
+          "distance": 4.173,
+          "arms": [
+            -0.74,
+            -0.4
+          ],
+          "elbows": [
+            1.278,
+            0.951
+          ],
+          "torso": 0.781,
+          "head": -0.476,
+          "hipsY": 0.814,
+          "hipsZ": 0
+        },
+        {
+          "t": 35.289,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": 0,
+          "follow": 0,
+          "cd": -0.017,
+          "distance": 4.256,
+          "arms": [
+            -0.745,
+            -0.395
+          ],
+          "elbows": [
+            1.476,
+            1.134
+          ],
+          "torso": 0.605,
+          "head": -0.524,
+          "hipsY": 0.804,
+          "hipsZ": 0
+        },
+        {
+          "t": 35.337,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": 0,
+          "follow": 0,
+          "cd": -0.017,
+          "distance": 4.351,
+          "arms": [
+            -0.694,
+            -0.446
+          ],
+          "elbows": [
+            1.526,
+            1.287
+          ],
+          "torso": 0.519,
+          "head": -0.458,
+          "hipsY": 0.851,
+          "hipsZ": 0
+        },
+        {
+          "t": 35.389,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": 0,
+          "follow": 0,
+          "cd": -0.017,
+          "distance": 4.46,
+          "arms": [
+            -0.603,
+            -0.537
+          ],
+          "elbows": [
+            1.283,
+            1.24
+          ],
+          "torso": 0.64,
+          "head": -0.309,
+          "hipsY": 0.883,
+          "hipsZ": 0
+        },
+        {
+          "t": 35.455,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": 0,
+          "follow": 0,
+          "cd": -0.017,
+          "distance": 4.528,
+          "arms": [
+            -0.544,
+            -0.596
+          ],
+          "elbows": [
+            1.087,
+            1.169
+          ],
+          "torso": 0.755,
+          "head": -0.258,
+          "hipsY": 0.88,
+          "hipsZ": 0
+        },
+        {
+          "t": 35.492,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": 0,
+          "follow": 0,
+          "cd": -0.017,
+          "distance": 4.362,
+          "arms": [
+            -0.421,
+            -0.719
+          ],
+          "elbows": [
+            0.916,
+            1.194
+          ],
+          "torso": 0.845,
+          "head": -0.424,
+          "hipsY": 0.813,
+          "hipsZ": 0
+        },
+        {
+          "t": 35.538,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": 0,
+          "follow": 0,
+          "cd": -0.017,
+          "distance": 4.288,
+          "arms": [
+            -0.392,
+            -0.748
+          ],
+          "elbows": [
+            1.044,
+            1.395
+          ],
+          "torso": 0.716,
+          "head": -0.501,
+          "hipsY": 0.773,
+          "hipsZ": 0
+        },
+        {
+          "t": 35.582,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": 0,
+          "follow": 0,
+          "cd": -0.017,
+          "distance": 4.212,
+          "arms": [
+            -0.408,
+            -0.732
+          ],
+          "elbows": [
+            1.291,
+            1.607
+          ],
+          "torso": 0.513,
+          "head": -0.517,
+          "hipsY": 0.798,
+          "hipsZ": 0
+        },
+        {
+          "t": 35.634,
+          "alive": true,
+          "action": 0.163,
+          "coil": 0.163,
+          "lunge": 0,
+          "rec": 0,
+          "wind": 0,
+          "follow": 0,
+          "cd": 3.03,
+          "distance": 4.165,
+          "arms": [
+            -0.523,
+            -0.594
+          ],
+          "elbows": [
+            1.394,
+            1.463
+          ],
+          "torso": 0.502,
+          "head": -0.432,
+          "hipsY": 0.804,
+          "hipsZ": 0
+        },
+        {
+          "t": 36.013,
+          "alive": true,
+          "action": 0.174,
+          "coil": 0,
+          "lunge": 0.174,
+          "rec": 0,
+          "wind": 0,
+          "follow": 0,
+          "cd": 2.657,
+          "distance": 3.087,
+          "arms": [
+            -1.529,
+            -1.711
+          ],
+          "elbows": [
+            0.554,
+            0.747
+          ],
+          "torso": 1.193,
+          "head": -0.909,
+          "hipsY": 0.806,
+          "hipsZ": 0
+        },
+        {
+          "t": 36.055,
+          "alive": true,
+          "action": 0.131,
+          "coil": 0,
+          "lunge": 0.131,
+          "rec": 0,
+          "wind": 0,
+          "follow": 0,
+          "cd": 2.613,
+          "distance": 2.709,
+          "arms": [
+            -1.448,
+            -1.792
+          ],
+          "elbows": [
+            0.518,
+            0.81
+          ],
+          "torso": 1.201,
+          "head": -0.913,
+          "hipsY": 0.735,
+          "hipsZ": 0
+        },
+        {
+          "t": 36.455,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": -0.014,
+          "wind": 0,
+          "follow": 0,
+          "cd": 2.211,
+          "distance": 0.83,
+          "arms": [
+            -0.683,
+            -1.043
+          ],
+          "elbows": [
+            1.684,
+            2.162
+          ],
+          "torso": 0.293,
+          "head": -0.561,
+          "hipsY": 0.771,
+          "hipsZ": -0.092
+        },
+        {
+          "t": 36.492,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": -0.014,
+          "wind": 0,
+          "follow": 0,
+          "cd": 2.176,
+          "distance": 0.83,
+          "arms": [
+            -0.89,
+            -0.89
+          ],
+          "elbows": [
+            1.875,
+            2.112
+          ],
+          "torso": 0.265,
+          "head": -0.575,
+          "hipsY": 0.781,
+          "hipsZ": -0.1
+        },
+        {
+          "t": 36.529,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": -0.014,
+          "wind": 0,
+          "follow": 0,
+          "cd": 2.138,
+          "distance": 0.83,
+          "arms": [
+            -0.73,
+            -0.575
+          ],
+          "elbows": [
+            1.477,
+            1.334
+          ],
+          "torso": 0.555,
+          "head": -0.233,
+          "hipsY": 0.775,
+          "hipsZ": 0.147
+        },
+        {
+          "t": 36.573,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": -0.014,
+          "wind": 0,
+          "follow": 0,
+          "cd": 2.1,
+          "distance": 0.83,
+          "arms": [
+            -0.601,
+            -0.353
+          ],
+          "elbows": [
+            1.321,
+            1.065
+          ],
+          "torso": 0.661,
+          "head": -0.153,
+          "hipsY": 0.771,
+          "hipsZ": 0.251
+        },
+        {
+          "t": 36.624,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": -0.014,
+          "wind": 0,
+          "follow": 0,
+          "cd": 2.045,
+          "distance": 0.83,
+          "arms": [
+            -0.52,
+            -0.325
+          ],
+          "elbows": [
+            1.211,
+            0.997
+          ],
+          "torso": 0.777,
+          "head": -0.071,
+          "hipsY": 0.756,
+          "hipsZ": 0.264
+        },
+        {
+          "t": 36.665,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": -0.014,
+          "wind": 0,
+          "follow": 0,
+          "cd": 2.004,
+          "distance": 0.83,
+          "arms": [
+            -0.558,
+            -0.534
+          ],
+          "elbows": [
+            1.206,
+            1.109
+          ],
+          "torso": 0.82,
+          "head": -0.046,
+          "hipsY": 0.744,
+          "hipsZ": 0.166
+        },
+        {
+          "t": 36.699,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": -0.014,
+          "wind": 0,
+          "follow": 0,
+          "cd": 1.964,
+          "distance": 0.83,
+          "arms": [
+            -0.669,
+            -0.863
+          ],
+          "elbows": [
+            1.232,
+            1.294
+          ],
+          "torso": 0.829,
+          "head": -0.047,
+          "hipsY": 0.735,
+          "hipsZ": 0.013
+        },
+        {
+          "t": 36.732,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": -0.014,
+          "wind": 0,
+          "follow": 0,
+          "cd": 1.931,
+          "distance": 0.83,
+          "arms": [
+            -0.797,
+            -0.89
+          ],
+          "elbows": [
+            1.258,
+            1.309
+          ],
+          "torso": 0.833,
+          "head": -0.049,
+          "hipsY": 0.738,
+          "hipsZ": 0
+        },
+        {
+          "t": 36.765,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": -0.014,
+          "wind": 0,
+          "follow": 0,
+          "cd": 1.897,
+          "distance": 0.83,
+          "arms": [
+            -0.89,
+            -0.89
+          ],
+          "elbows": [
+            1.28,
+            1.307
+          ],
+          "torso": 0.838,
+          "head": -0.052,
+          "hipsY": 0.746,
+          "hipsZ": 0
+        },
+        {
+          "t": 36.797,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": -0.014,
+          "wind": 0,
+          "follow": 0,
+          "cd": 1.865,
+          "distance": 0.83,
+          "arms": [
+            -0.66,
+            -0.48
+          ],
+          "elbows": [
+            1.459,
+            1.287
+          ],
+          "torso": 0.436,
+          "head": -0.443,
+          "hipsY": 0.871,
+          "hipsZ": 0
+        },
+        {
+          "t": 36.837,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": -0.014,
+          "wind": 0,
+          "follow": 0,
+          "cd": 1.832,
+          "distance": 0.83,
+          "arms": [
+            -0.595,
+            -0.545
+          ],
+          "elbows": [
+            1.258,
+            1.23
+          ],
+          "torso": 0.547,
+          "head": -0.349,
+          "hipsY": 0.888,
+          "hipsZ": 0
+        },
+        {
+          "t": 36.88,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": -0.014,
+          "wind": 0,
+          "follow": 0,
+          "cd": 1.788,
+          "distance": 0.83,
+          "arms": [
+            -0.458,
+            -0.682
+          ],
+          "elbows": [
+            0.881,
+            1.121
+          ],
+          "torso": 0.777,
+          "head": -0.347,
+          "hipsY": 0.847,
+          "hipsZ": 0
+        },
+        {
+          "t": 36.922,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": -0.014,
+          "wind": 0,
+          "follow": 0,
+          "cd": 1.748,
+          "distance": 0.83,
+          "arms": [
+            -0.392,
+            -0.748
+          ],
+          "elbows": [
+            0.983,
+            1.334
+          ],
+          "torso": 0.654,
+          "head": -0.544,
+          "hipsY": 0.779,
+          "hipsZ": 0
+        },
+        {
+          "t": 36.969,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": -0.014,
+          "wind": 0,
+          "follow": 0,
+          "cd": 1.701,
+          "distance": 0.83,
+          "arms": [
+            -0.435,
+            -0.705
+          ],
+          "elbows": [
+            1.274,
+            1.537
+          ],
+          "torso": 0.43,
+          "head": -0.545,
+          "hipsY": 0.832,
+          "hipsZ": 0
+        },
+        {
+          "t": 37.011,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": -0.014,
+          "wind": 0,
+          "follow": 0,
+          "cd": 1.659,
+          "distance": 0.83,
+          "arms": [
+            -0.559,
+            -0.581
+          ],
+          "elbows": [
+            1.213,
+            1.208
+          ],
+          "torso": 0.589,
+          "head": -0.352,
+          "hipsY": 0.889,
+          "hipsZ": 0
+        },
+        {
+          "t": 37.045,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": -0.014,
+          "wind": 0,
+          "follow": 0,
+          "cd": 1.621,
+          "distance": 0.83,
+          "arms": [
+            -0.676,
+            -0.464
+          ],
+          "elbows": [
+            1.119,
+            0.887
+          ],
+          "torso": 0.785,
+          "head": -0.354,
+          "hipsY": 0.866,
+          "hipsZ": 0
+        },
+        {
+          "t": 37.101,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": -0.014,
+          "wind": 0,
+          "follow": 0,
+          "cd": 1.566,
+          "distance": 0.83,
+          "arms": [
+            -0.75,
+            -0.39
+          ],
+          "elbows": [
+            1.419,
+            1.069
+          ],
+          "torso": 0.591,
+          "head": -0.591,
+          "hipsY": 0.799,
+          "hipsZ": 0
+        },
+        {
+          "t": 37.137,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": -0.014,
+          "wind": 0,
+          "follow": 0,
+          "cd": 1.528,
+          "distance": 0.83,
+          "arms": [
+            -0.725,
+            -0.471
+          ],
+          "elbows": [
+            1.508,
+            1.27
+          ],
+          "torso": 0.472,
+          "head": -0.368,
+          "hipsY": 0.81,
+          "hipsZ": -0.009
+        },
+        {
+          "t": 37.175,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": -0.014,
+          "wind": 0,
+          "follow": 0,
+          "cd": 1.492,
+          "distance": 0.83,
+          "arms": [
+            -0.673,
+            -0.626
+          ],
+          "elbows": [
+            1.507,
+            1.454
+          ],
+          "torso": 0.444,
+          "head": -0.409,
+          "hipsY": 0.816,
+          "hipsZ": -0.025
+        },
+        {
+          "t": 37.212,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": -0.014,
+          "wind": 0,
+          "follow": 0,
+          "cd": 1.453,
+          "distance": 0.83,
+          "arms": [
+            -0.605,
+            -0.809
+          ],
+          "elbows": [
+            1.495,
+            1.654
+          ],
+          "torso": 0.413,
+          "head": -0.454,
+          "hipsY": 0.799,
+          "hipsZ": -0.043
+        },
+        {
+          "t": 37.247,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": -0.014,
+          "wind": 0,
+          "follow": 0,
+          "cd": 1.42,
+          "distance": 0.83,
+          "arms": [
+            -0.586,
+            -0.923
+          ],
+          "elbows": [
+            1.529,
+            1.785
+          ],
+          "torso": 0.387,
+          "head": -0.492,
+          "hipsY": 0.781,
+          "hipsZ": -0.058
+        },
+        {
+          "t": 37.297,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": -0.014,
+          "wind": 0,
+          "follow": 0,
+          "cd": 1.367,
+          "distance": 0.83,
+          "arms": [
+            -0.687,
+            -0.978
+          ],
+          "elbows": [
+            1.748,
+            1.895
+          ],
+          "torso": 0.344,
+          "head": -0.553,
+          "hipsY": 0.789,
+          "hipsZ": -0.082
+        },
+        {
+          "t": 37.346,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": -0.014,
+          "wind": 0,
+          "follow": 0,
+          "cd": 1.316,
+          "distance": 0.83,
+          "arms": [
+            -0.89,
+            -0.89
+          ],
+          "elbows": [
+            2.071,
+            1.876
+          ],
+          "torso": 0.312,
+          "head": -0.599,
+          "hipsY": 0.816,
+          "hipsZ": -0.1
+        },
+        {
+          "t": 37.382,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": -0.014,
+          "wind": 0,
+          "follow": 0,
+          "cd": 1.283,
+          "distance": 0.83,
+          "arms": [
+            -0.609,
+            -0.748
+          ],
+          "elbows": [
+            1.382,
+            1.5
+          ],
+          "torso": 0.598,
+          "head": -0.271,
+          "hipsY": 0.796,
+          "hipsZ": 0.131
+        },
+        {
+          "t": 37.413,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": -0.014,
+          "wind": 0,
+          "follow": 0,
+          "cd": 1.25,
+          "distance": 0.83,
+          "arms": [
+            -0.395,
+            -0.629
+          ],
+          "elbows": [
+            1.105,
+            1.35
+          ],
+          "torso": 0.695,
+          "head": -0.2,
+          "hipsY": 0.771,
+          "hipsZ": 0.231
+        },
+        {
+          "t": 37.452,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": -0.014,
+          "wind": 0,
+          "follow": 0,
+          "cd": 1.215,
+          "distance": 0.83,
+          "arms": [
+            -0.293,
+            -0.546
+          ],
+          "elbows": [
+            0.978,
+            1.241
+          ],
+          "torso": 0.78,
+          "head": -0.138,
+          "hipsY": 0.757,
+          "hipsZ": 0.279
+        },
+        {
+          "t": 37.503,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": -0.014,
+          "wind": 0,
+          "follow": 0,
+          "cd": 1.16,
+          "distance": 0.83,
+          "arms": [
+            -0.436,
+            -0.534
+          ],
+          "elbows": [
+            1.037,
+            1.182
+          ],
+          "torso": 0.862,
+          "head": -0.078,
+          "hipsY": 0.758,
+          "hipsZ": 0.212
+        },
+        {
+          "t": 37.538,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": -0.014,
+          "wind": 0,
+          "follow": 0,
+          "cd": 1.127,
+          "distance": 0.83,
+          "arms": [
+            -0.665,
+            -0.597
+          ],
+          "elbows": [
+            1.171,
+            1.201
+          ],
+          "torso": 0.874,
+          "head": -0.069,
+          "hipsY": 0.749,
+          "hipsZ": 0.105
+        },
+        {
+          "t": 37.571,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": -0.014,
+          "wind": 0,
+          "follow": 0,
+          "cd": 1.093,
+          "distance": 0.83,
+          "arms": [
+            -0.89,
+            -0.707
+          ],
+          "elbows": [
+            1.306,
+            1.232
+          ],
+          "torso": 0.874,
+          "head": -0.07,
+          "hipsY": 0.737,
+          "hipsZ": 0
+        },
+        {
+          "t": 37.605,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": -0.014,
+          "wind": 0,
+          "follow": 0,
+          "cd": 1.058,
+          "distance": 0.83,
+          "arms": [
+            -0.89,
+            -0.854
+          ],
+          "elbows": [
+            1.309,
+            1.271
+          ],
+          "torso": 0.874,
+          "head": -0.07,
+          "hipsY": 0.724,
+          "hipsZ": 0
+        },
+        {
+          "t": 37.659,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": -0.014,
+          "wind": 0,
+          "follow": 0,
+          "cd": 1.007,
+          "distance": 0.83,
+          "arms": [
+            -0.392,
+            -0.748
+          ],
+          "elbows": [
+            1.098,
+            1.45
+          ],
+          "torso": 0.569,
+          "head": -0.607,
+          "hipsY": 0.781,
+          "hipsZ": 0
+        },
+        {
+          "t": 37.693,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": -0.014,
+          "wind": 0,
+          "follow": 0,
+          "cd": 0.972,
+          "distance": 0.83,
+          "arms": [
+            -0.419,
+            -0.721
+          ],
+          "elbows": [
+            1.245,
+            1.54
+          ],
+          "torso": 0.46,
+          "head": -0.588,
+          "hipsY": 0.818,
+          "hipsZ": 0
+        },
+        {
+          "t": 37.727,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": -0.014,
+          "wind": 0,
+          "follow": 0,
+          "cd": 0.938,
+          "distance": 0.83,
+          "arms": [
+            -0.47,
+            -0.67
+          ],
+          "elbows": [
+            1.291,
+            1.482
+          ],
+          "torso": 0.459,
+          "head": -0.496,
+          "hipsY": 0.857,
+          "hipsZ": 0
+        }
+      ],
+      "shots": [
+        {
+          "file": "feral-01.png",
+          "elapsed": 510,
+          "state": {
+            "t": 35.634,
+            "alive": true,
+            "action": 0.163,
+            "coil": 0.163,
+            "lunge": 0,
+            "rec": 0,
+            "wind": 0,
+            "follow": 0,
+            "cd": 3.03,
+            "distance": 4.165,
+            "arms": [
+              -0.523,
+              -0.594
+            ],
+            "elbows": [
+              1.394,
+              1.463
+            ],
+            "torso": 0.502,
+            "head": -0.432,
+            "hipsY": 0.804,
+            "hipsZ": 0
+          }
+        },
+        {
+          "file": "feral-02.png",
+          "elapsed": 931,
+          "state": {
+            "t": 36.055,
+            "alive": true,
+            "action": 0.131,
+            "coil": 0,
+            "lunge": 0.131,
+            "rec": 0,
+            "wind": 0,
+            "follow": 0,
+            "cd": 2.613,
+            "distance": 2.709,
+            "arms": [
+              -1.448,
+              -1.792
+            ],
+            "elbows": [
+              0.518,
+              0.81
+            ],
+            "torso": 1.201,
+            "head": -0.913,
+            "hipsY": 0.735,
+            "hipsZ": 0
+          }
+        }
+      ],
+      "peak": 0.174,
+      "spawned": {
+        "type": "feral",
+        "horde": true
+      }
+    },
+    "colossus": {
+      "samples": [
+        {
+          "t": 37.775,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": 0,
+          "follow": 0,
+          "cd": 0.8,
+          "distance": 3,
+          "arms": [
+            -0.45,
+            -0.45
+          ],
+          "elbows": [
+            0,
+            0
+          ],
+          "torso": 0.128,
+          "head": 0,
+          "hipsY": 1.878,
+          "hipsZ": 0
+        },
+        {
+          "t": 37.814,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": 0,
+          "follow": 0,
+          "cd": 0.763,
+          "distance": 2.92,
+          "arms": [
+            -0.921,
+            0.021
+          ],
+          "elbows": [
+            -0.503,
+            -0.15
+          ],
+          "torso": 0.211,
+          "head": -0.067,
+          "hipsY": 1.836,
+          "hipsZ": 0
+        },
+        {
+          "t": 37.861,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": 0,
+          "follow": 0,
+          "cd": 0.713,
+          "distance": 2.745,
+          "arms": [
+            -0.731,
+            -0.169
+          ],
+          "elbows": [
+            -0.36,
+            -0.15
+          ],
+          "torso": 0.197,
+          "head": 0.011,
+          "hipsY": 1.842,
+          "hipsZ": 0
+        },
+        {
+          "t": 37.896,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": 0,
+          "follow": 0,
+          "cd": 0.681,
+          "distance": 2.626,
+          "arms": [
+            -0.578,
+            -0.322
+          ],
+          "elbows": [
+            -0.246,
+            -0.15
+          ],
+          "torso": 0.186,
+          "head": 0.064,
+          "hipsY": 1.843,
+          "hipsZ": 0
+        },
+        {
+          "t": 37.928,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": 0,
+          "follow": 0,
+          "cd": 0.648,
+          "distance": 2.501,
+          "arms": [
+            -0.41,
+            -0.49
+          ],
+          "elbows": [
+            -0.15,
+            -0.18
+          ],
+          "torso": 0.18,
+          "head": 0.102,
+          "hipsY": 1.843,
+          "hipsZ": 0
+        },
+        {
+          "t": 37.96,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": 0,
+          "follow": 0,
+          "cd": 0.631,
+          "distance": 2.437,
+          "arms": [
+            -0.326,
+            -0.574
+          ],
+          "elbows": [
+            -0.15,
+            -0.243
+          ],
+          "torso": 0.187,
+          "head": 0.112,
+          "hipsY": 1.842,
+          "hipsZ": 0
+        },
+        {
+          "t": 37.993,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": 0,
+          "follow": 0,
+          "cd": 0.585,
+          "distance": 2.257,
+          "arms": [
+            -0.111,
+            -0.789
+          ],
+          "elbows": [
+            -0.15,
+            -0.404
+          ],
+          "torso": 0.203,
+          "head": 0.105,
+          "hipsY": 1.837,
+          "hipsZ": 0
+        },
+        {
+          "t": 38.04,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": 0,
+          "follow": 0,
+          "cd": 0.535,
+          "distance": 2.057,
+          "arms": [
+            0.062,
+            -0.962
+          ],
+          "elbows": [
+            -0.15,
+            -0.534
+          ],
+          "torso": 0.218,
+          "head": 0.11,
+          "hipsY": 1.828,
+          "hipsZ": 0
+        },
+        {
+          "t": 38.088,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": 0,
+          "follow": 0,
+          "cd": 0.486,
+          "distance": 1.86,
+          "arms": [
+            0.145,
+            -1.045
+          ],
+          "elbows": [
+            -0.15,
+            -0.596
+          ],
+          "torso": 0.23,
+          "head": 0.137,
+          "hipsY": 1.816,
+          "hipsZ": 0
+        },
+        {
+          "t": 38.125,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": 0,
+          "follow": 0,
+          "cd": 0.453,
+          "distance": 1.729,
+          "arms": [
+            0.144,
+            -1.044
+          ],
+          "elbows": [
+            -0.15,
+            -0.595
+          ],
+          "torso": 0.237,
+          "head": 0.153,
+          "hipsY": 1.817,
+          "hipsZ": 0
+        },
+        {
+          "t": 38.161,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": 0,
+          "follow": 0,
+          "cd": 0.419,
+          "distance": 1.593,
+          "arms": [
+            0.094,
+            -0.994
+          ],
+          "elbows": [
+            -0.15,
+            -0.558
+          ],
+          "torso": 0.244,
+          "head": 0.176,
+          "hipsY": 1.826,
+          "hipsZ": 0
+        },
+        {
+          "t": 38.211,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": 0,
+          "follow": 0,
+          "cd": 0.366,
+          "distance": 1.51,
+          "arms": [
+            -1.616,
+            -1.616
+          ],
+          "elbows": [
+            -0.145,
+            -0.145
+          ],
+          "torso": 0.11,
+          "head": -0.073,
+          "hipsY": 1.899,
+          "hipsZ": -0.024
+        },
+        {
+          "t": 38.26,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": 0,
+          "follow": 0,
+          "cd": 0.315,
+          "distance": 1.51,
+          "arms": [
+            -1.871,
+            -1.871
+          ],
+          "elbows": [
+            -0.284,
+            -0.284
+          ],
+          "torso": 0.036,
+          "head": -0.115,
+          "hipsY": 1.906,
+          "hipsZ": -0.047
+        },
+        {
+          "t": 38.296,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": 0,
+          "follow": 0,
+          "cd": 0.282,
+          "distance": 1.51,
+          "arms": [
+            -2.035,
+            -2.035
+          ],
+          "elbows": [
+            -0.373,
+            -0.373
+          ],
+          "torso": -0.008,
+          "head": -0.144,
+          "hipsY": 1.906,
+          "hipsZ": -0.062
+        },
+        {
+          "t": 38.327,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": 0,
+          "follow": 0,
+          "cd": 0.249,
+          "distance": 1.51,
+          "arms": [
+            -2.2,
+            -2.2
+          ],
+          "elbows": [
+            -0.463,
+            -0.463
+          ],
+          "torso": -0.049,
+          "head": -0.174,
+          "hipsY": 1.903,
+          "hipsZ": -0.077
+        },
+        {
+          "t": 38.358,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": 0,
+          "follow": 0,
+          "cd": 0.217,
+          "distance": 1.51,
+          "arms": [
+            -2.362,
+            -2.362
+          ],
+          "elbows": [
+            -0.552,
+            -0.552
+          ],
+          "torso": -0.084,
+          "head": -0.207,
+          "hipsY": 1.899,
+          "hipsZ": -0.092
+        },
+        {
+          "t": 38.39,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": 0,
+          "follow": 0,
+          "cd": 0.185,
+          "distance": 1.51,
+          "arms": [
+            -2.45,
+            -2.45
+          ],
+          "elbows": [
+            -0.6,
+            -0.6
+          ],
+          "torso": -0.102,
+          "head": -0.225,
+          "hipsY": 1.894,
+          "hipsZ": -0.1
+        },
+        {
+          "t": 38.422,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": 0,
+          "follow": 0,
+          "cd": 0.152,
+          "distance": 1.51,
+          "arms": [
+            -1.817,
+            -1.817
+          ],
+          "elbows": [
+            -0.438,
+            -0.438
+          ],
+          "torso": 0.18,
+          "head": 0.101,
+          "hipsY": 1.871,
+          "hipsZ": 0.127
+        },
+        {
+          "t": 38.455,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": 0,
+          "follow": 0,
+          "cd": 0.12,
+          "distance": 1.51,
+          "arms": [
+            -1.233,
+            -1.233
+          ],
+          "elbows": [
+            -0.289,
+            -0.289
+          ],
+          "torso": 0.276,
+          "head": 0.169,
+          "hipsY": 1.848,
+          "hipsZ": 0.227
+        },
+        {
+          "t": 38.488,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": 0,
+          "follow": 0,
+          "cd": 0.087,
+          "distance": 1.51,
+          "arms": [
+            -0.732,
+            -0.732
+          ],
+          "elbows": [
+            -0.161,
+            -0.161
+          ],
+          "torso": 0.36,
+          "head": 0.228,
+          "hipsY": 1.834,
+          "hipsZ": 0.277
+        },
+        {
+          "t": 38.536,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": 0,
+          "follow": 0,
+          "cd": 0.038,
+          "distance": 1.51,
+          "arms": [
+            -0.23,
+            -0.23
+          ],
+          "elbows": [
+            -0.033,
+            -0.033
+          ],
+          "torso": 0.447,
+          "head": 0.285,
+          "hipsY": 1.833,
+          "hipsZ": 0.235
+        },
+        {
+          "t": 38.586,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": 0,
+          "follow": 0,
+          "cd": -0.011,
+          "distance": 1.51,
+          "arms": [
+            -0.1,
+            -0.1
+          ],
+          "elbows": [
+            0,
+            0
+          ],
+          "torso": 0.474,
+          "head": 0.297,
+          "hipsY": 1.84,
+          "hipsZ": 0.079
+        },
+        {
+          "t": 38.621,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": 0,
+          "follow": 0,
+          "cd": -0.044,
+          "distance": 1.51,
+          "arms": [
+            -0.1,
+            -0.1
+          ],
+          "elbows": [
+            0,
+            0
+          ],
+          "torso": 0.478,
+          "head": 0.295,
+          "hipsY": 1.844,
+          "hipsZ": 0
+        },
+        {
+          "t": 38.653,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": 0,
+          "follow": 0,
+          "cd": -0.077,
+          "distance": 1.51,
+          "arms": [
+            -0.1,
+            -0.1
+          ],
+          "elbows": [
+            0,
+            0
+          ],
+          "torso": 0.481,
+          "head": 0.293,
+          "hipsY": 1.846,
+          "hipsZ": 0
+        },
+        {
+          "t": 38.684,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": 0,
+          "follow": 0,
+          "cd": -0.109,
+          "distance": 1.51,
+          "arms": [
+            -0.1,
+            -0.1
+          ],
+          "elbows": [
+            0,
+            0
+          ],
+          "torso": 0.173,
+          "head": 0.032,
+          "hipsY": 1.785,
+          "hipsZ": 0
+        },
+        {
+          "t": 38.721,
+          "alive": true,
+          "action": 0.733,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": 0.733,
+          "follow": 0,
+          "cd": 4.2,
+          "distance": 1.51,
+          "arms": [
+            -0.322,
+            -0.596
+          ],
+          "elbows": [
+            -0.149,
+            -0.194
+          ],
+          "torso": 0.106,
+          "head": 0.01,
+          "hipsY": 1.884,
+          "hipsZ": 0
+        },
+        {
+          "t": 39.001,
+          "alive": true,
+          "action": 0.451,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": 0.451,
+          "follow": 0,
+          "cd": 4.2,
+          "distance": 1.51,
+          "arms": [
+            -2.145,
+            -2.217
+          ],
+          "elbows": [
+            -0.474,
+            -0.485
+          ],
+          "torso": -0.084,
+          "head": -0.13,
+          "hipsY": 1.798,
+          "hipsZ": 0
+        },
+        {
+          "t": 39.032,
+          "alive": true,
+          "action": 0.419,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": 0.419,
+          "follow": 0,
+          "cd": 4.2,
+          "distance": 1.51,
+          "arms": [
+            -2.369,
+            -2.417
+          ],
+          "elbows": [
+            -0.573,
+            -0.581
+          ],
+          "torso": -0.108,
+          "head": -0.146,
+          "hipsY": 1.787,
+          "hipsZ": 0
+        },
+        {
+          "t": 39.069,
+          "alive": true,
+          "action": 0.385,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": 0.385,
+          "follow": 0,
+          "cd": 4.2,
+          "distance": 1.51,
+          "arms": [
+            -2.565,
+            -2.591
+          ],
+          "elbows": [
+            -0.67,
+            -0.675
+          ],
+          "torso": -0.13,
+          "head": -0.161,
+          "hipsY": 1.777,
+          "hipsZ": 0
+        },
+        {
+          "t": 39.374,
+          "alive": true,
+          "action": 0.078,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": 0.078,
+          "follow": 0,
+          "cd": 4.2,
+          "distance": 1.51,
+          "arms": [
+            -2.589,
+            -2.589
+          ],
+          "elbows": [
+            -0.465,
+            -0.465
+          ],
+          "torso": -0.056,
+          "head": -0.162,
+          "hipsY": 1.766,
+          "hipsZ": 0
+        },
+        {
+          "t": 39.413,
+          "alive": true,
+          "action": 0.045,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": 0.045,
+          "follow": 0,
+          "cd": 4.2,
+          "distance": 1.51,
+          "arms": [
+            -2.264,
+            -2.264
+          ],
+          "elbows": [
+            -0.265,
+            -0.265
+          ],
+          "torso": 0.093,
+          "head": -0.135,
+          "hipsY": 1.766,
+          "hipsZ": 0
+        },
+        {
+          "t": 39.465,
+          "alive": true,
+          "action": 0.5,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": -0.01,
+          "follow": 0.5,
+          "cd": 4.2,
+          "distance": 1.51,
+          "arms": [
+            -1.6,
+            -1.6
+          ],
+          "elbows": [
+            0,
+            0
+          ],
+          "torso": 0.398,
+          "head": -0.2,
+          "hipsY": 1.766,
+          "hipsZ": 0
+        },
+        {
+          "t": 39.777,
+          "alive": true,
+          "action": 0.188,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": -0.01,
+          "follow": 0.188,
+          "cd": 3.888,
+          "distance": 3.973,
+          "arms": [
+            -0.539,
+            -0.773
+          ],
+          "elbows": [
+            -0.047,
+            -0.117
+          ],
+          "torso": 0.535,
+          "head": 0.03,
+          "hipsY": 1.731,
+          "hipsZ": 0
+        },
+        {
+          "t": 39.815,
+          "alive": true,
+          "action": 0.151,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": -0.01,
+          "follow": 0.151,
+          "cd": 3.851,
+          "distance": 4.128,
+          "arms": [
+            -0.411,
+            -0.793
+          ],
+          "elbows": [
+            -0.074,
+            -0.189
+          ],
+          "torso": 0.438,
+          "head": 0.193,
+          "hipsY": 1.766,
+          "hipsZ": 0
+        },
+        {
+          "t": 39.877,
+          "alive": true,
+          "action": 0.091,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": -0.01,
+          "follow": 0.091,
+          "cd": 3.791,
+          "distance": 4.339,
+          "arms": [
+            -0.203,
+            -0.831
+          ],
+          "elbows": [
+            -0.117,
+            -0.306
+          ],
+          "torso": 0.285,
+          "head": 0.423,
+          "hipsY": 1.82,
+          "hipsZ": 0
+        },
+        {
+          "t": 40.193,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": -0.01,
+          "follow": -0.013,
+          "cd": 3.47,
+          "distance": 3.934,
+          "arms": [
+            -0.652,
+            -0.248
+          ],
+          "elbows": [
+            -0.301,
+            -0.15
+          ],
+          "torso": 0.269,
+          "head": 0.498,
+          "hipsY": 1.841,
+          "hipsZ": 0
+        },
+        {
+          "t": 40.245,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": -0.01,
+          "follow": -0.013,
+          "cd": 3.418,
+          "distance": 3.733,
+          "arms": [
+            -0.873,
+            -0.027
+          ],
+          "elbows": [
+            -0.467,
+            -0.15
+          ],
+          "torso": 0.278,
+          "head": 0.519,
+          "hipsY": 1.834,
+          "hipsZ": 0
+        },
+        {
+          "t": 40.28,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": -0.01,
+          "follow": -0.013,
+          "cd": 3.384,
+          "distance": 3.598,
+          "arms": [
+            -0.978,
+            0.078
+          ],
+          "elbows": [
+            -0.546,
+            -0.15
+          ],
+          "torso": 0.28,
+          "head": 0.513,
+          "hipsY": 1.828,
+          "hipsZ": 0
+        },
+        {
+          "t": 40.318,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": -0.01,
+          "follow": -0.013,
+          "cd": 3.348,
+          "distance": 3.457,
+          "arms": [
+            -1.039,
+            0.139
+          ],
+          "elbows": [
+            -0.592,
+            -0.15
+          ],
+          "torso": 0.279,
+          "head": 0.493,
+          "hipsY": 1.82,
+          "hipsZ": 0
+        },
+        {
+          "t": 40.372,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": -0.01,
+          "follow": -0.013,
+          "cd": 3.293,
+          "distance": 3.238,
+          "arms": [
+            -1.027,
+            0.127
+          ],
+          "elbows": [
+            -0.583,
+            -0.15
+          ],
+          "torso": 0.27,
+          "head": 0.452,
+          "hipsY": 1.823,
+          "hipsZ": 0
+        },
+        {
+          "t": 40.406,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": -0.01,
+          "follow": -0.013,
+          "cd": 3.257,
+          "distance": 3.094,
+          "arms": [
+            -0.951,
+            0.051
+          ],
+          "elbows": [
+            -0.526,
+            -0.15
+          ],
+          "torso": 0.26,
+          "head": 0.435,
+          "hipsY": 1.831,
+          "hipsZ": 0
+        },
+        {
+          "t": 40.442,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": -0.01,
+          "follow": -0.013,
+          "cd": 3.224,
+          "distance": 2.963,
+          "arms": [
+            -0.84,
+            -0.06
+          ],
+          "elbows": [
+            -0.443,
+            -0.15
+          ],
+          "torso": 0.248,
+          "head": 0.434,
+          "hipsY": 1.838,
+          "hipsZ": 0
+        },
+        {
+          "t": 40.493,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": -0.01,
+          "follow": -0.013,
+          "cd": 3.169,
+          "distance": 2.746,
+          "arms": [
+            -0.596,
+            -0.304
+          ],
+          "elbows": [
+            -0.26,
+            -0.15
+          ],
+          "torso": 0.226,
+          "head": 0.462,
+          "hipsY": 1.845,
+          "hipsZ": 0
+        },
+        {
+          "t": 40.535,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": -0.01,
+          "follow": -0.013,
+          "cd": 3.133,
+          "distance": 2.601,
+          "arms": [
+            -0.412,
+            -0.488
+          ],
+          "elbows": [
+            -0.15,
+            -0.179
+          ],
+          "torso": 0.215,
+          "head": 0.494,
+          "hipsY": 1.846,
+          "hipsZ": 0
+        },
+        {
+          "t": 40.585,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": -0.01,
+          "follow": -0.013,
+          "cd": 3.08,
+          "distance": 2.392,
+          "arms": [
+            -0.155,
+            -0.745
+          ],
+          "elbows": [
+            -0.15,
+            -0.371
+          ],
+          "torso": 0.228,
+          "head": 0.533,
+          "hipsY": 1.842,
+          "hipsZ": 0
+        },
+        {
+          "t": 40.62,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": -0.01,
+          "follow": -0.013,
+          "cd": 3.045,
+          "distance": 2.254,
+          "arms": [
+            -0.017,
+            -0.883
+          ],
+          "elbows": [
+            -0.15,
+            -0.475
+          ],
+          "torso": 0.235,
+          "head": 0.541,
+          "hipsY": 1.837,
+          "hipsZ": 0
+        },
+        {
+          "t": 40.657,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": -0.01,
+          "follow": -0.013,
+          "cd": 3.009,
+          "distance": 2.112,
+          "arms": [
+            0.087,
+            -0.987
+          ],
+          "elbows": [
+            -0.15,
+            -0.553
+          ],
+          "torso": 0.239,
+          "head": 0.532,
+          "hipsY": 1.83,
+          "hipsZ": 0
+        },
+        {
+          "t": 40.705,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": -0.01,
+          "follow": -0.013,
+          "cd": 2.957,
+          "distance": 1.901,
+          "arms": [
+            0.15,
+            -1.05
+          ],
+          "elbows": [
+            -0.15,
+            -0.6
+          ],
+          "torso": 0.241,
+          "head": 0.495,
+          "hipsY": 1.817,
+          "hipsZ": 0
+        },
+        {
+          "t": 40.746,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": -0.01,
+          "follow": -0.013,
+          "cd": 2.921,
+          "distance": 1.759,
+          "arms": [
+            0.126,
+            -1.026
+          ],
+          "elbows": [
+            -0.15,
+            -0.582
+          ],
+          "torso": 0.237,
+          "head": 0.468,
+          "hipsY": 1.826,
+          "hipsZ": 0
+        },
+        {
+          "t": 40.832,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": -0.01,
+          "follow": -0.013,
+          "cd": 2.901,
+          "distance": 1.677,
+          "arms": [
+            0.088,
+            -0.988
+          ],
+          "elbows": [
+            -0.15,
+            -0.553
+          ],
+          "torso": 0.234,
+          "head": 0.455,
+          "hipsY": 1.83,
+          "hipsZ": 0
+        },
+        {
+          "t": 40.89,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": -0.01,
+          "follow": -0.013,
+          "cd": 2.851,
+          "distance": 1.51,
+          "arms": [
+            -0.069,
+            -0.831
+          ],
+          "elbows": [
+            -0.15,
+            -0.436
+          ],
+          "torso": 0.209,
+          "head": 0.453,
+          "hipsY": 1.841,
+          "hipsZ": 0
+        },
+        {
+          "t": 40.929,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": -0.01,
+          "follow": -0.013,
+          "cd": 2.807,
+          "distance": 1.51,
+          "arms": [
+            -1.568,
+            -1.568
+          ],
+          "elbows": [
+            -0.119,
+            -0.119
+          ],
+          "torso": 0.065,
+          "head": -0.036,
+          "hipsY": 1.904,
+          "hipsZ": -0.02
+        },
+        {
+          "t": 40.99,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": -0.01,
+          "follow": -0.013,
+          "cd": 2.76,
+          "distance": 1.51,
+          "arms": [
+            -1.803,
+            -1.803
+          ],
+          "elbows": [
+            -0.247,
+            -0.247
+          ],
+          "torso": 0.007,
+          "head": -0.08,
+          "hipsY": 1.904,
+          "hipsZ": -0.041
+        },
+        {
+          "t": 41.028,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": -0.01,
+          "follow": -0.013,
+          "cd": 2.711,
+          "distance": 1.51,
+          "arms": [
+            -2.046,
+            -2.046
+          ],
+          "elbows": [
+            -0.38,
+            -0.38
+          ],
+          "torso": -0.048,
+          "head": -0.127,
+          "hipsY": 1.899,
+          "hipsZ": -0.063
+        },
+        {
+          "t": 41.064,
+          "alive": true,
+          "action": 0,
+          "coil": 0,
+          "lunge": 0,
+          "rec": 0,
+          "wind": -0.01,
+          "follow": -0.013,
+          "cd": 2.673,
+          "distance": 1.51,
+          "arms": [
+            -2.237,
+            -2.237
+          ],
+          "elbows": [
+            -0.484,
+            -0.484
+          ],
+          "torso": -0.086,
+          "head": -0.167,
+          "hipsY": 1.893,
+          "hipsZ": -0.081
+        }
+      ],
+      "shots": [
+        {
+          "file": "colossus-01.png",
+          "elapsed": 947,
+          "state": {
+            "t": 38.721,
+            "alive": true,
+            "action": 0.733,
+            "coil": 0,
+            "lunge": 0,
+            "rec": 0,
+            "wind": 0.733,
+            "follow": 0,
+            "cd": 4.2,
+            "distance": 1.51,
+            "arms": [
+              -0.322,
+              -0.596
+            ],
+            "elbows": [
+              -0.149,
+              -0.194
+            ],
+            "torso": 0.106,
+            "head": 0.01,
+            "hipsY": 1.884,
+            "hipsZ": 0
+          }
+        },
+        {
+          "file": "colossus-02.png",
+          "elapsed": 1295,
+          "state": {
+            "t": 39.069,
+            "alive": true,
+            "action": 0.385,
+            "coil": 0,
+            "lunge": 0,
+            "rec": 0,
+            "wind": 0.385,
+            "follow": 0,
+            "cd": 4.2,
+            "distance": 1.51,
+            "arms": [
+              -2.565,
+              -2.591
+            ],
+            "elbows": [
+              -0.67,
+              -0.675
+            ],
+            "torso": -0.13,
+            "head": -0.161,
+            "hipsY": 1.777,
+            "hipsZ": 0
+          }
+        },
+        {
+          "file": "colossus-03.png",
+          "elapsed": 1692,
+          "state": {
+            "t": 39.465,
+            "alive": true,
+            "action": 0.5,
+            "coil": 0,
+            "lunge": 0,
+            "rec": 0,
+            "wind": -0.01,
+            "follow": 0.5,
+            "cd": 4.2,
+            "distance": 1.51,
+            "arms": [
+              -1.6,
+              -1.6
+            ],
+            "elbows": [
+              0,
+              0
+            ],
+            "torso": 0.398,
+            "head": -0.2,
+            "hipsY": 1.766,
+            "hipsZ": 0
+          }
+        },
+        {
+          "file": "colossus-04.png",
+          "elapsed": 2104,
+          "state": {
+            "t": 39.877,
+            "alive": true,
+            "action": 0.091,
+            "coil": 0,
+            "lunge": 0,
+            "rec": 0,
+            "wind": -0.01,
+            "follow": 0.091,
+            "cd": 3.791,
+            "distance": 4.339,
+            "arms": [
+              -0.203,
+              -0.831
+            ],
+            "elbows": [
+              -0.117,
+              -0.306
+            ],
+            "torso": 0.285,
+            "head": 0.423,
+            "hipsY": 1.82,
+            "hipsZ": 0
+          }
+        }
+      ],
+      "peak": 0.733,
+      "spawned": {
+        "type": "colossus",
+        "horde": false
+      }
+    }
+  },
+  "errors": [],
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "setup": {
+    "jumped": true,
+    "phase": "wave",
+    "grace": false
+  }
+}

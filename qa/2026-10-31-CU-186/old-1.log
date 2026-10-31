@@ -1,0 +1,44 @@
+bench: http://127.0.0.1:7095/index.html?debug=1
+bench: scenario night 20 for 30s
+
+bench: graphics high
+bench: night 20 push 2/6  out 3  spawned 213/861
+bench: night 20 push 4/6  out 7  spawned 427/861
+bench: night 20 push 5/6  out 2  spawned 639/861
+bench: night 20 push 6/6  out 48  spawned 723/861
+bench: profiler on, GPU timestamps on
+fps    59.9   (mean of last 10 s)
+low    51.4   (1% low, same windows)
+worst  17.5 ms
+hitch  0   (frames over 50 ms, whole run)
+draws  271
+tris   755183
+frame  16.69 ms = tick 13.81 ms + outside 2.88 ms  (the last 10 s, the window of fps and low)
+whole run: tick 12.52 ms over 30 s; frame (last 10 s) - that = 4.18 ms (two windows)   gpu 0.24 ms
+last 10 s, by section:
+  r:render                             6.18 ms
+  zombies                              3.00 ms
+  r:matrices                           1.50 ms
+  m:idle                               0.54 ms
+  m:pose                               0.51 ms
+  r:cull                               0.43 ms
+  hud+audio                            0.20 ms
+  m:hold                               0.17 ms
+  w:stairs+roof+birds+bugs+wildlife    0.17 ms
+  drops+hud                            0.14 ms
+  w:treeFall+leaves+batches            0.12 ms
+  w:minimap                            0.11 ms
+whole run, by section:
+  r:render                             5.66 ms   worst 11.1
+  zombies                              2.27 ms   worst 7.0
+  r:matrices                           1.43 ms   worst 3.0
+  m:hold                               0.52 ms   worst 1.3
+  m:pose                               0.51 ms   worst 1.2
+  r:cull                               0.42 ms   worst 0.9
+  hud+audio                            0.21 ms   worst 3.9
+  m:idle                               0.21 ms   worst 1.2
+  w:stairs+roof+birds+bugs+wildlife    0.18 ms   worst 0.6
+  drops+hud                            0.15 ms   worst 2.4
+  w:treeFall+leaves+batches            0.12 ms   worst 0.3
+  w:minimap                            0.11 ms   worst 0.9
+{"scenario":"night","seconds":30,"fps":59.9,"low":51.4,"worst":17.5,"hitches":0,"draws":271,"triangles":755183,"zombies":48,"gfx":"high","windows":10,"night":20,"push":5,"pushes":6,"last":true,"prof":{"frames":1825,"frameMs":16.69,"tickMs":12.52,"outsideMs":4.18,"last10":{"seconds":10,"frames":607,"frameMs":16.69,"tickMs":13.81,"outsideMs":2.88,"top":[{"k":"r:render","avg":6.18},{"k":"zombies","avg":3},{"k":"r:matrices","avg":1.5},{"k":"m:idle","avg":0.54},{"k":"m:pose","avg":0.51},{"k":"r:cull","avg":0.43},{"k":"hud+audio","avg":0.2},{"k":"m:hold","avg":0.17},{"k":"w:stairs+roof+birds+bugs+wildlife","avg":0.17},{"k":"drops+hud","avg":0.14},{"k":"w:treeFall+leaves+batches","avg":0.12},{"k":"w:minimap","avg":0.11}]},"top":[{"k":"r:render","avg":5.66,"max":11.1},{"k":"zombies","avg":2.27,"max":7},{"k":"r:matrices","avg":1.43,"max":3},{"k":"m:hold","avg":0.52,"max":1.3},{"k":"m:pose","avg":0.51,"max":1.2},{"k":"r:cull","avg":0.42,"max":0.9},{"k":"hud+audio","avg":0.21,"max":3.9},{"k":"m:idle","avg":0.21,"max":1.2},{"k":"w:stairs+roof+birds+bugs+wildlife","avg":0.18,"max":0.6},{"k":"drops+hud","avg":0.15,"max":2.4},{"k":"w:treeFall+leaves+batches","avg":0.12,"max":0.3},{"k":"w:minimap","avg":0.11,"max":0.9}],"spikes":[],"spikeCauses":{"spikes":0,"pipelines":0,"builds":0,"uploads":0,"sunShadow":0,"gc":0,"code":0},"gpuMs":0.24,"gpuSamples":1267,"pipelines":{"made":0,"released":0,"withNewShaders":0,"top":[],"first":[]},"builds":{"made":0,"top":[],"zombieAndEcho":[]},"renderObjects":{"made":299,"perFrame":0.16,"top":[{"k":"Mesh < Scene | MeshBasicMaterial | scene","n":235,"frames":[11,19,35,48,59,67]},{"k":"zombie-skin < Group < Scene | MeshStandardNodeMaterial | scene","n":24,"frames":[63,235,238,339,486,492]},{"k":"zombie-skin < Group < Scene | NodeMaterial | ortho","n":22,"frames":[774,1674]},{"k":"feral-motion-echo < Scene | MeshBasicMaterial | scene","n":12,"frames":[771,775,779,964,968,970]},{"k":"open-molded-holster < Group < Group | MeshStandardMaterial | scene","n":3,"frames":[1299,1309,1320]},{"k":"Mesh < Group < marine-idle-props | MeshStandardMaterial | scene","n":1,"frames":[1392]},{"k":"zombie-skin < Group < Scene | MeshStandardMaterial | scene","n":1,"frames":[1561]},{"k":"open-molded-holster < Group < Group | NodeMaterial | ortho","n":1,"frames":[1674]}],"spikes":[]},"gc":null}}

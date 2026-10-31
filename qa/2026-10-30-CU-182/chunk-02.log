@@ -1,0 +1,31 @@
+Game-test request deee42fe-8b35-4b31-b1e3-e8c5bf1951f1 queued at position 2. Waiting...
+GRANT cursor CU-182: starting one game-test command
+check-players: 309 player.position reads, all in the allowed places
+ok    t47     17 pass   0 fail  26.0s
+ok    t48     22 pass   0 fail  34.9s
+ok    t49     32 pass   0 fail  35.4s
+ok    t50     18 pass   0 fail  22.9s
+ok    t51     19 pass   0 fail  34.1s
+ok    t52     17 pass   0 fail  21.2s
+ok    t53     76 pass   0 fail  45.9s
+ok    t54     32 pass   0 fail  34.7s
+ok    t55     10 pass   0 fail  34.5s
+ok    t56      1 pass   0 fail  23.3s
+ok    t57     10 pass   0 fail  21.6s
+ok    t58      9 pass   0 fail  37.7s
+ok    t59     48 pass   0 fail  53.0s
+ok    t60     43 pass   0 fail  58.5s
+ok    t61     22 pass   0 fail  51.2s
+ok    t62      4 pass   0 fail  36.6s
+ok    t63      6 pass   0 fail  38.0s
+ok    t64      8 pass   0 fail  37.9s
+ok    t65     12 pass   0 fail  39.0s
+           INFO largest height change across one puddle: 0.180 m
+ok    t66      4 pass   0 fail  36.3s
+ok    t67      9 pass   0 fail  53.9s
+ok    t68     15 pass   0 fail  34.6s
+ok    t69     18 pass   0 fail  53.8s
+ok    t70     21 pass   0 fail  58.1s
+ok    t71     16 pass   0 fail  53.4s
+
+25 checks: 489 pass, 0 fail

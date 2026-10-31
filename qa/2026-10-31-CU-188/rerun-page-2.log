@@ -1,0 +1,12 @@
+GRANT cursor CU-188: starting one game-test command
+check-players: 309 player.position reads, all in the allowed places
+ok    t76     16 pass   0 fail  49.6s
+FAIL  t80     13 pass   1 fail  143.6s
+ok    t82      4 pass   0 fail  26.5s
+
+3 checks: 33 pass, 1 fail
+
+by owner:
+  unassigned
+    t80    1 fail  FAIL a spitter behind the house keeps creeping in (moved 6.9 m, 13.0 to 13.3 m)
+           FAIL a spitter behind the house keeps creeping in (moved 6.9 m, 13.0 to 13.3 m)

@@ -1,0 +1,10 @@
+GRANT cursor CU-178: starting one game-test command
+check-players: 309 player.position reads, all in the allowed places
+           INFO {"before":{"phase":"prep","t":0.68,"banner":""},"after":{"phase":"prep","banner":"","ret":"undefined"},"late":{"phase":"prep","banner":"","tl":"Night · 22:05"},"keys":["hq","updateHQ","HQ_WINDOW_FRONT","HQ_PANEL_FRONT","HQ_DUTY_BOARD_FRONT","HQ_DUTY_BOARD_REACH","HQ_RADIO_FRONT","HQ_RADIO_REACH","nearestHqPoi","hqStartWave","getAlarmShake","shotHQ","HQ_CIF_FRONT","HQ_ARMORY_FRONT","getHushState","hushDbg","openHQBriefingDbg","HOLLOW","enterHollow","leaveHollow","hollowState","belowDbg","claimHollowHere","markHollowPassage","hqLadderAt","stepHqLadder","onHqRoof"]}
+           INFO gameFlags {}
+info  tcu178   0 pass   0 fail  53.6s  — INFO {"before":{"phase":"prep","t":0.68,"banner":""},"after":{"phase":"prep","banner":"","
+
+1 checks: 0 pass, 0 fail, 1 reported no assertions
+
+no assertions (probe, or the check bailed before asserting):
+  tcu178 INFO {"before":{"phase":"prep","t":0.68,"banner":""},"after":{"phase":"prep","banner":"","ret":"unde

@@ -6,6 +6,10 @@
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
   const until = async (cond, maxMs) => { const t0 = Date.now(); while (Date.now() - t0 < maxMs) { if (cond()) return true; await wait(100); } return cond(); };
+  // CL-279 (CU-178: the test page ran at 4-14 fps and the alarm's 5.75 s of game time took 13.8 s of wall clock, past
+  // the 12 s this waited): the game's own sequences are waited for on game time, as GB-131 and CL-230 did; the same
+  // windows, a wall-clock cap only so a stuck game still ends the check.
+  const untilSim = async (cond, simS, capMs = 120000) => { const s0 = T.getSimTime(), t0 = Date.now(); while (T.getSimTime() - s0 < simS && Date.now() - t0 < capMs) { if (cond()) return true; await wait(50); } return cond(); };
   const hour = () => (T.getWorldTime() * 24);
   const tl = () => (document.getElementById('timeLine') || {}).textContent || '';
   try {
@@ -20,8 +24,8 @@
     ok(!/Night/.test(tl()), 'still day while it holds');
     // The alarm brings the night.
     T.hqStartWave();
-    await until(() => T.getPhase() === 'wave', 12000);
-    await until(() => /^Night/.test(tl()), 8000);
+    await untilSim(() => T.getPhase() === 'wave', 12);
+    await untilSim(() => /^Night/.test(tl()), 8);
     ok(T.getPhase() === 'wave', 'the alarm starts the wave');
     ok(/^Night/.test(tl()) && hour() > 21, 'the wave is fought at night: ' + hour().toFixed(2) + 'h, "' + tl() + '"');
     const dayBefore = T.getWaveDirectorState().day;
@@ -46,7 +50,7 @@
     // the sky sweeps on to the morning over the finisher and the first seconds of prep, and
     // the night's numbers go up on a small banner with no buttons.
     ok(T.getSkyMode() === 'prep', 'prep after the finisher, no held night: ' + T.getSkyMode());
-    await until(() => { const h = hour(); return h > 7.6 && h < 9; }, 14000);
+    await untilSim(() => { const h = hour(); return h > 7.6 && h < 9; }, 14);
     ok(hour() > 7.6 && hour() < 9, 'and it is morning by itself: ' + hour().toFixed(2) + 'h');
     ok(!/Night/.test(tl()), 'day on the HUD: "' + tl() + '"');
     const card = document.getElementById('dawnCard');
@@ -57,7 +61,7 @@
     // The next night comes from the briefing panel only; the alarm's shot holds the HQ.
     T.hqStartWave();
     ok(!!T.getLoopCine() && T.getLoopCine().kind === 'alarm', 'the alarm shot frames the HQ (no sky pan): ' + (T.getLoopCine() && T.getLoopCine().kind));
-    await until(() => T.getPhase() === 'wave' && !T.getLoopCine(), 15000);
+    await untilSim(() => T.getPhase() === 'wave' && !T.getLoopCine(), 15);
     ok(T.getPhase() === 'wave', 'night 2 is on: ' + T.getPhase());
     ok(hour() > 21 || hour() < 4, 'and it is night: ' + hour().toFixed(2) + 'h');
   } catch (e) {

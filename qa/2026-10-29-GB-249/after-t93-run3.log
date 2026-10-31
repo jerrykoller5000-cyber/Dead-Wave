@@ -1,0 +1,30 @@
+Game-test request 5995e60d-3221-4bb2-82d8-1b8f9d3d1c35 queued at position 2. Waiting...
+GRANT grokbot GB-249: starting one game-test command
+ok    t215      4 pass   0 fail  33.1s  (real renderer)
+    PASS read index.html and the scripts and styles the game loaded (229 files)
+    PASS no broken characters in them
+    PASS the HUD reads clean: timeLine "Daylight · 08:21 · Grace", tacticalLine "NVG — · Laser — · Light —", grenadeChips "G×3H×0", ammoDetail "12 / 12  ·  50 Bullets  ·  SEMI", hpNum "100 / 100"
+    PASS and shows its dots and times signs (NVG — · Laser — · Light — / G×3H×0)
+ok    t95       9 pass   0 fail  32.2s  (real renderer)
+    PASS the pick is x0.8 (0.8)
+    PASS laser off: the cone is the gun's own
+    PASS every gun with a laser, 200 draws each: x0.8 within 5% (minigun 0.800 m4 0.800 ak 0.800 pistol 0.800 uzi 0.800 shotgun 0.801 aa12 0.801 revolver 0.800 sniper 0.800 launcher 0.800)
+    PASS AK, 2000 free draws each: 6.089 -> 4.815 mrad (x0.791)
+    PASS Z (toggleLasers) with the laser sight bought: on, and it steadies
+    PASS Z again: off
+    PASS no laser sight owned: no change (6.033 vs 6.033 mrad)
+    PASS the chainsaw has no laser: nothing to steady
+    PASS no page errors
+ok    t93      11 pass   0 fail  49.5s  (real renderer)
+    PASS at rest every walker's soles are on the ground, within 3 cm (shambler 0.00 feral 0.00 drowned 0.00 military -0.00 brute 0.00 spitter 0.00 screamer 0.00 colossus 0.00 demon 0.00 bomber 0.00)
+    PASS over 1.5 s game time, walking soles stay above -5 cm and below +20 cm (+30 cm for Screamer and Feral) (deepest -0.05)
+    PASS every head is inside its hit column, give or take 4 cm of pose (shambler 1.92<2.00 feral 1.38<1.45 drowned 1.75<1.83 military 2.05<2.13 brute 2.66<2.83 spitter 1.87<1.95 screamer 1.81<1.89 colossus 4.35<4.71 demon 3.45<3.57 bomber 2.16<2.25)
+    PASS and its centre is in the headshot slice, above 0.78 of hitH, brute aside (shambler 0.86 feral 0.82 drowned 0.82 military 0.85 brute 0.84 spitter 0.82 screamer 0.86 colossus 0.83 demon 0.83 bomber 0.86)
+    PASS a bullet at the head's centre is a headshot (e.g. shambler 18.50 vs 10.00)
+    PASS hitH (about) unchanged where the head already fitted (brute 2.83, colossus 4.71)
+    PASS two pellets do not give it a reacting body
+    PASS its feet stay on the ground (deepest -0.01 m) and find a planted stance after recovery (-0.00 m)
+    PASS a crawling shambler's hips stay where they were (0.25-0.28 m, before 0.25)
+    PASS leaper and spider hips unchanged (0.57, 0.50)
+    PASS no page errors
+3 checks: 24 pass, 0 fail (real renderer)

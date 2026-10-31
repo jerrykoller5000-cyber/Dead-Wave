@@ -1,0 +1,49 @@
+Game-test request c988c47d-4b8c-49a1-b07d-3dc47170d768 queued at position 2. Waiting...
+GRANT grokbot GB-249: starting one game-test command
+check-players: 309 player.position reads, all in the allowed places
+           INFO brute head round: 0 of 1 checks blocked before a clear frame (0.00 s of game time)
+           INFO brute head round: 0 of 1 checks blocked before a clear frame (0.00 s of game time)
+           INFO shambler head round: 0 of 1 checks blocked before a clear frame (0.00 s of game time)
+           INFO feral head round: 0 of 1 checks blocked before a clear frame (0.00 s of game time)
+           INFO feral head centre p10 0.723, median 0.792 of hitH (line 0.7)
+           INFO leaper head round: 0 of 1 checks blocked before a clear frame (0.00 s of game time)
+           INFO leaper head centre p10 0.622, median 0.652 of hitH (line 0.55)
+           INFO spider head round: 0 of 1 checks blocked before a clear frame (0.00 s of game time)
+           INFO spider head centre p10 0.592, median 0.653 of hitH (line 0.6)
+ok    t111    11 pass   0 fail  44.0s
+           INFO shambler  head: head 6 | chest: body 6 | legs: legs 5, body 1
+           INFO feral     head: head 5, body 1 | chest: body 6 | legs: legs 6
+           INFO brute     head: head 5, miss 1 | chest: body 6 | legs: legs 4, body 2
+           INFO spider    head: head 6 | chest: head 6 | legs: -
+           INFO leaper    head: head 6 | chest: body 4, head 2 | legs: -
+           INFO colossus at 90 deg 6 m: its head is covered by its own gear from the camera here (no head case)
+           INFO colossus at 90 deg 14 m: its head is covered by its own gear from the camera here (no head case)
+           INFO colossus  head: head 4 | chest: body 6 | legs: legs 6
+           INFO the reticle rings a head lined up, and not a chest (true, los-clear)
+           INFO the gold-X round: 0 aim(s) blocked before a clear line to the head
+           INFO pistol 8 m 3 m/s +: hit, lead 0.22 m (pace x flight 0.33) at 0.66 of its height
+           INFO pistol 8 m 3 m/s -: miss, lead -0.19 m (pace x flight -0.33)
+           INFO pistol 8 m 6 m/s +: miss, lead 0.30 m (pace x flight 0.60)
+           INFO pistol 8 m 6 m/s -: miss, lead -0.30 m (pace x flight -0.60)
+           INFO pistol 18 m 3 m/s +: miss, lead 0.56 m (pace x flight 0.71)
+           INFO pistol 18 m 3 m/s -: hit, lead -0.58 m (pace x flight -0.71) at 0.64 of its height
+           INFO pistol 18 m 6 m/s +: miss, lead 1.09 m (pace x flight 1.39)
+           INFO pistol 18 m 6 m/s -: miss, lead -1.09 m (pace x flight -1.39)
+           INFO m4 8 m 3 m/s +: hit, lead 0.10 m (pace x flight 0.23) at 0.62 of its height
+           INFO m4 8 m 3 m/s -: hit, lead -0.11 m (pace x flight -0.23) at 0.63 of its height
+           INFO m4 8 m 6 m/s +: miss, lead 0.13 m (pace x flight 0.43)
+           INFO m4 8 m 6 m/s -: miss, lead -0.13 m (pace x flight -0.42)
+           INFO m4 18 m 3 m/s +: miss, lead 0.40 m (pace x flight 0.52)
+           INFO m4 18 m 3 m/s -: miss, lead -0.40 m (pace x flight -0.52)
+           INFO m4 18 m 6 m/s +: miss, lead 0.72 m (pace x flight 1.02)
+           INFO m4 18 m 6 m/s -: miss, lead -0.72 m (pace x flight -1.02)
+           INFO the 6 m/s runners on the test page: miss 8 (not a bar: the fake models; 1.x, CL FYI)
+           INFO launcher 12 m 6 m/s +: miss, lead -0.29 m (pace x flight 2.10)
+FAIL  t222     7 pass   1 fail  168.2s
+
+2 checks: 18 pass, 1 fail
+
+by owner:
+  unassigned
+    t222   1 fail  FAIL a runner crossing in front of him at 3 m/s, the cursor on it, is hit: hit 4, miss 4 (bar 5/
+           FAIL a runner crossing in front of him at 3 m/s, the cursor on it, is hit: hit 4, miss 4 (bar 5/8; the plumbing floor)

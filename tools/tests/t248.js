@@ -4,9 +4,11 @@
 (async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+  // CU-182 (Claude's ask, as GB-250): the hold is ms of GAME time (T.getSimTime()), so a slow or busy page gives the raised gun its turn and its shot
+  // all the same; the wall cap (20 s) only ends a stuck game. The windows and the bars are as they were.
   const hold = async (z, x, zz, ms) => {
-    const t0 = Date.now();
-    while (Date.now() - t0 < ms) {
+    const s0 = T.getSimTime(), t0 = Date.now();
+    while ((T.getSimTime() - s0) * 1000 < ms && Date.now() - t0 < 20000) {
       z.x = x; z.z = zz; z.speed = 0; z.baseSpeed = 0;
       if (z.mesh) { z.mesh.position.x = x; z.mesh.position.z = zz; }
       await wait(40);

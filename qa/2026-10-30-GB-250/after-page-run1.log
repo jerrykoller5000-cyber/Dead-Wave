@@ -1,0 +1,8 @@
+Game-test request 18391bb5-08a4-4e7c-b755-22984898edd9 queued at position 2. Waiting...
+GRANT grokbot GB-250: starting one game-test command
+check-players: 309 player.position reads, all in the allowed places
+ok    t112    13 pass   0 fail  43.6s
+ok    t168    39 pass   0 fail  58.5s
+ok    t171    23 pass   0 fail  48.1s
+
+3 checks: 75 pass, 0 fail

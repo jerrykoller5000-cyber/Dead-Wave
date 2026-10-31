@@ -1,0 +1,64 @@
+Game-test request 6126a98e-a1a9-43b4-8460-ea929ad5f94f queued at position 2. Waiting...
+GRANT cursor CU-182: starting one game-test command
+check-players: 309 player.position reads, all in the allowed places
+ok    t198    17 pass   0 fail  51.6s
+ok    t199    10 pass   0 fail  45.0s
+ok    t200     7 pass   0 fail  37.0s
+ok    t201    18 pass   0 fail  57.5s
+ok    t202    12 pass   0 fail  35.1s
+ok    t203    12 pass   0 fail  37.3s
+ok    t204    48 pass   0 fail  59.1s
+ok    t205    13 pass   0 fail  52.9s
+ok    t206    19 pass   0 fail  53.4s
+ok    t207    20 pass   0 fail  39.4s
+ok    t208    10 pass   0 fail  54.6s
+ok    t209    13 pass   0 fail  44.3s
+ok    t210     9 pass   0 fail  39.2s
+           INFO aimed at a zombie 16 m out, it hits it: 70 damage from 19 rounds (zombie 15.21 m)
+ok    t211    25 pass   0 fail  54.1s
+ok    t212    18 pass   0 fail  38.6s
+ok    t213    22 pass   0 fail  61.7s
+ok    t214    29 pass   0 fail  58.1s
+ok    t215     4 pass   0 fail  37.0s
+           INFO angular acceleration, rad/s^2: walk 222, run 748, jump 875, walk2 532, stop 394
+ok    t216    22 pass   0 fail  43.7s
+ok    t217    55 pass   0 fail  22.9s
+ok    t218    21 pass   0 fail  116.1s
+ok    t219    22 pass   0 fail  25.5s
+ok    t220    16 pass   0 fail  55.2s
+ok    t221    27 pass   0 fail  53.6s
+           INFO shambler  head: head 5, miss 1 | chest: body 6 | legs: ground 2, legs 4
+           INFO feral     head: head 5, miss 1 | chest: body 5, head 1 | legs: legs 6
+           INFO brute     head: head 5, miss 1 | chest: body 3, ground 1, head 2 | legs: legs 5, body 1
+           INFO spider    head: head 6 | chest: head 4, body 2 | legs: -
+           INFO leaper    head: head 6 | chest: body 4, head 2 | legs: -
+           INFO colossus at 90 deg 6 m: its head is covered by its own gear from the camera here (no head case)
+           INFO colossus at 90 deg 14 m: its head is covered by its own gear from the camera here (no head case)
+           INFO colossus  head: head 4 | chest: body 6 | legs: legs 5, body 1
+           INFO the reticle rings a head lined up, and not a chest (false, los-clear) (would fail; INFO on the test page)
+           INFO pistol 8 m 3 m/s +: hit, lead 0.22 m (pace x flight 0.33) at 0.65 of its height
+           INFO pistol 8 m 3 m/s -: hit, lead -0.22 m (pace x flight -0.33) at 0.66 of its height
+           INFO pistol 8 m 6 m/s +: hit, lead 0.30 m (pace x flight 0.60) at 0.61 of its height
+           INFO pistol 8 m 6 m/s -: miss, lead -0.30 m (pace x flight -0.60)
+           INFO pistol 18 m 3 m/s +: miss, lead 0.56 m (pace x flight 0.71)
+           INFO pistol 18 m 3 m/s -: hit, lead -0.57 m (pace x flight -0.71) at 0.61 of its height
+           INFO pistol 18 m 6 m/s +: miss, lead 1.09 m (pace x flight 1.39)
+           INFO pistol 18 m 6 m/s -: miss, lead -1.09 m (pace x flight -1.39)
+           INFO m4 8 m 3 m/s +: hit, lead 0.12 m (pace x flight 0.23) at 0.63 of its height
+           INFO m4 8 m 3 m/s -: hit, lead -0.13 m (pace x flight -0.23) at 0.65 of its height
+           INFO m4 8 m 6 m/s +: miss, lead 0.13 m (pace x flight 0.42)
+           INFO m4 8 m 6 m/s -: miss, lead -0.13 m (pace x flight -0.42)
+           INFO m4 18 m 3 m/s +: hit, lead 0.38 m (pace x flight 0.52) at 0.60 of its height
+           INFO m4 18 m 3 m/s -: hit, lead -0.38 m (pace x flight -0.52) at 0.60 of its height
+           INFO m4 18 m 6 m/s +: miss, lead 0.72 m (pace x flight 1.02)
+           INFO m4 18 m 6 m/s -: miss, lead -0.72 m (pace x flight -1.02)
+           INFO the 6 m/s runners on the test page: hit 1, miss 7 (not a bar: the fake models; 1.x, CL FYI)
+           INFO launcher 12 m 6 m/s +: miss, lead -0.30 m (pace x flight 2.11)
+FAIL  t222     7 pass   1 fail  169.8s
+
+25 checks: 476 pass, 1 fail
+
+by owner:
+  unassigned
+    t222   1 fail  FAIL pointing at a chest lands in the body: body 20, head 3, ground 1 (bar 70 %, one miss; a hea
+           FAIL pointing at a chest lands in the body: body 20, head 3, ground 1 (bar 70 %, one miss; a head only where the head covers the chest from up here)

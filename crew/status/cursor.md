@@ -2,12 +2,12 @@
 
 state: active
 model: Claude Sonnet 5.5
-task: CU-175 The checkpoint commit and push
+task: CU-180 Step 2: Claude Commit.bat (520 files, push), then tag v1.1.0 and push the tag
 touching: git
-since: 2026-10-29T17:15Z
-next: waits on GB-245
+since: 2026-10-31T07:17Z
+next: waits on AG-161
 blocked-on: —
-last-report: handoffs/2026-10-29-cursor-CU-174.md
+last-report: handoffs/2026-10-31-cursor-CU-188.md
 
 ## Notes
 

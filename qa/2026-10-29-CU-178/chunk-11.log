@@ -1,0 +1,43 @@
+Game-test request e839b681-394c-4a82-803e-36834150f852 queued at position 2. Waiting...
+GRANT cursor CU-178: starting one game-test command
+check-players: 309 player.position reads, all in the allowed places
+           INFO pistol aimed: rear -1.876 front -1.872 (ndc y) (would fail; INFO on the test page)
+           INFO revolver aimed: rear -1.821 front -1.815 (ndc y) (would fail; INFO on the test page)
+           INFO uzi aimed: rear -1.927 front - (ndc y) (would fail; INFO on the test page)
+           INFO m4 aimed: rear -1.972 front -1.967 (ndc y) (would fail; INFO on the test page)
+           INFO ak aimed: rear -1.945 front -1.942 (ndc y) (would fail; INFO on the test page)
+           INFO aa12 aimed: rear -1.937 front -1.938 (ndc y) (would fail; INFO on the test page)
+           INFO launcher aimed: rear -1.984 front -1.996 (ndc y) (would fail; INFO on the test page)
+info  t284     0 pass   0 fail  112.5s  — INFO pistol aimed: rear -1.876 front -1.872 (ndc y) (would fail; INFO on the test page)
+ok    t285    11 pass   0 fail  46.3s
+ok    t286    11 pass   0 fail  80.0s
+ok    t287    10 pass   0 fail  48.5s
+ok    t288    18 pass   0 fail  59.2s
+ok    t289    13 pass   0 fail  142.3s
+ok    t290    19 pass   0 fail  92.6s
+           INFO the view height wobbles 0.40 cm, the sight 0.50 cm; the pitch 0.00 deg, the sight 0.00 deg
+ok    t291    13 pass   0 fail  79.1s
+ok    t292    15 pass   0 fail  65.9s
+ok    t293     6 pass   0 fail  67.4s
+ok    t294    19 pass   0 fail  84.8s
+ok    t295    11 pass   0 fail  27.8s
+           INFO run: arm 36 17 -2 -9 -1 19 37 45 deg (+ back); elbow 84 97 112 120 117 104 89 80
+           INFO walk: arm 19 0 -22 -3; elbow 11 15 21 17
+ok    t296     9 pass   0 fail  66.3s
+           INFO off the ladder's line at most 0.0 cm ; feet 78, worst sole 0.5 cm off its rung at 1.00 m, rung 3; hands 78, worst target 0.0 cm , farthest reach 55.9 cm of 57.5 at 5.16 m, rung 16 (150 cm over his feet); headless fist (fakethree) worst -43.1 cm
+ok    t297     4 pass   0 fail  81.3s
+ok    t298    10 pass   0 fail  143.9s
+           INFO chest turn from rest at the cock -0.21, at the stab 0.45 rad (+ the knife's shoulder forward), lean 0.21; the stab's point 0.70 m ahead of him, 0.03 m to his left; shoulder to it 0.528 m (reach 0.575), with the turn and lean off 0.739 m (the point 0.70 m ahead)
+           INFO first person: the stab at (0.06, -0.50) 0.35 m from the eye, 0.540 m from the shoulder; the cock (0.45, -1.50), its arm 0.46 m from the eye at the nearest; the chop mid-cut (0.10, -0.35); the gun's dip at the stab 1.00
+ok    t299    13 pass   0 fail  56.0s
+ok    t300    10 pass   0 fail  45.8s
+ok    t301    44 pass   0 fail  56.2s
+ok    t302    17 pass   0 fail  51.5s
+ok    t303    13 pass   0 fail  81.4s
+ok    t304     7 pass   0 fail  55.7s
+ok    t305     8 pass   0 fail  54.5s
+
+22 checks: 281 pass, 0 fail, 1 reported no assertions
+
+no assertions (probe, or the check bailed before asserting):
+  t284   INFO pistol aimed: rear -1.876 front -1.872 (ndc y) (would fail; INFO on the test page)

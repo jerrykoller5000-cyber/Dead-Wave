@@ -1,0 +1,38 @@
+{
+  "cpuPct": 11.2,
+  "loadPct": 85,
+  "top": [
+    {
+      "Name": "git#1",
+      "PercentProcessorTime": 101
+    },
+    {
+      "Name": "dwm",
+      "PercentProcessorTime": 45
+    },
+    {
+      "Name": "nvcontainer#3",
+      "PercentProcessorTime": 22
+    },
+    {
+      "Name": "System",
+      "PercentProcessorTime": 22
+    },
+    {
+      "Name": "Cursor#2",
+      "PercentProcessorTime": 16
+    },
+    {
+      "Name": "msedge#2",
+      "PercentProcessorTime": 16
+    },
+    {
+      "Name": "Antigravity#1",
+      "PercentProcessorTime": 16
+    },
+    {
+      "Name": "Grok Bot#4",
+      "PercentProcessorTime": 11
+    }
+  ]
+}

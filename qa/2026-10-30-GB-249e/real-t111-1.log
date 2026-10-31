@@ -1,0 +1,24 @@
+Game-test request 5202b5d6-2915-4229-9ae0-ee84361924b3 queued at position 2. Waiting...
+GRANT grokbot GB-249: starting one game-test command
+ok    t111     11 pass   0 fail  36.4s  (real renderer)
+    INFO brute head round: 0 of 1 checks blocked before a clear frame (0.00 s of game time)
+    INFO brute head round: 0 of 1 checks blocked before a clear frame (0.00 s of game time)
+    PASS a brute hit in the chest is a body hit: 18.00 vs 18.00
+    PASS a round through its head is a headshot: 33.30, 33.30 (body 18.00)
+    INFO shambler head round: 0 of 1 checks blocked before a clear frame (0.00 s of game time)
+    PASS a shambler: chest a body hit (20.00), its head a headshot (37.00)
+    PASS a walking brute's head centre sits above its line with a margin: p10 0.859 (line 0.74, 60 samples)
+    INFO feral head round: 0 of 1 checks blocked before a clear frame (0.00 s of game time)
+    PASS feral: a round through its head is a headshot (37.00 vs chest 20.00)
+    PASS feral's head centre sits above its line while it walks: median 0.825 (line 0.7, 45 samples)
+    INFO feral head centre p10 0.746, median 0.825 of hitH (line 0.7)
+    INFO leaper head round: 0 of 1 checks blocked before a clear frame (0.00 s of game time)
+    PASS leaper: a round through its head is a headshot (48.10 vs chest 26.00)
+    PASS leaper's head centre sits above its line while it walks: median 0.614 (line 0.55, 45 samples)
+    INFO leaper head centre p10 0.584, median 0.614 of hitH (line 0.55)
+    INFO spider head round: 0 of 1 checks blocked before a clear frame (0.00 s of game time)
+    PASS spider: a round through its head is a headshot (25.90 vs chest 14.00)
+    PASS spider's head centre sits above its line while it walks: median 0.685 (line 0.6, 45 samples)
+    INFO spider head centre p10 0.628, median 0.685 of hitH (line 0.6)
+    PASS no page errors
+1 checks: 11 pass, 0 fail (real renderer)

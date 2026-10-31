@@ -1,0 +1,5 @@
+GRANT cursor CU-182: starting one game-test command
+FAIL  t178      7 pass   1 fail  39.7s  (real renderer)
+    FAIL back up the tunnel: the calm again (dayfight, 5 dead up)
+ok    t248     12 pass   0 fail  31.7s  (real renderer)
+2 checks: 19 pass, 1 fail (real renderer)

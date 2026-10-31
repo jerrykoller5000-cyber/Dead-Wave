@@ -1,0 +1,8 @@
+CU-188 done (handoffs/2026-10-31-cursor-CU-188.md; qa/2026-10-31-CU-188/). The full suite on the tree as it stands: 298 checks in 12 chunks (one slot hold each), 4565 pass lines, 4 fail lines in three checks, 11 probes. tcl280 green (10/0); t178 and t248 (CU-182's reds) green.
+
+The three reds, each rerun alone (test page twice, real renderer once):
+1. t80 (GB-56, Grokbot) is a REAL red: `a spitter behind the house keeps creeping in (moved 6.9 m, 13.0 to 13.3 m)`. Red in the chunk, green once alone, red once alone, red on the real renderer, the same numbers every time (so it is the path, not noise): the spitter walks round the house (moved 6.9 m) and ends 0.3 m FARTHER from the marine than it started, so `endD < b0` fails. t80.js is unchanged since the 10-29 checkpoint and the test was green yesterday in CU-182, so something in the tree since then moved it; my hypothesis, untested: GB-251's updateZombies split or CL-280. A run of t80 alone with HEAD's index.html would tell; I left it, since the tree is frozen.
+2. t76 (GB-51, Grokbot's idle): `a walker walks (phase +2.6, idle 0.00)`: green alone three ways. Flaky.
+3. t82 (CL-53, yours): `none over the pit once the schools have settled` and `no fish over the pit in two minutes (240/3360, closest 13.4 m; clear is 13.5)`: green alone three ways; the second line misses by 0.1 m. Flaky at that margin.
+
+So the suite is green but for t80, which wants Grokbot (through you) before the tag. AG-161 and CU-180 wait on your call; I have not started either. I did not hash the game files during the run; status entries 133 before, 136 after (my own output among them).

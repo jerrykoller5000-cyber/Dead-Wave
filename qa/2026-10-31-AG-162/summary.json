@@ -1,0 +1,5530 @@
+[
+  {
+    "name": "throwaway-new",
+    "cwd": "C:\\Users\\Zero\\Desktop\\Tiny Trek",
+    "hudMode": "normal",
+    "cpuBefore": 11.2,
+    "loadBefore": 85,
+    "fps": 59.6,
+    "low": 49.1,
+    "worst": 23.6,
+    "hitches": 0,
+    "draws": 290,
+    "triangles": 747100,
+    "gpuMs": 0.25,
+    "benchProf": {
+      "frames30s": 1821,
+      "frameMs10s": 16.78,
+      "tickMs30s": 13.66,
+      "outsideMsBench": 3.12,
+      "top30s": [
+        {
+          "k": "r:render",
+          "avg": 6.101,
+          "max": 11.6
+        },
+        {
+          "k": "zombies",
+          "avg": 2.501,
+          "max": 6.9
+        },
+        {
+          "k": "r:matrices",
+          "avg": 1.454,
+          "max": 3.3
+        },
+        {
+          "k": "m:hold",
+          "avg": 0.597,
+          "max": 2.2
+        },
+        {
+          "k": "r:cull",
+          "avg": 0.539,
+          "max": 1.3
+        },
+        {
+          "k": "m:pose",
+          "avg": 0.535,
+          "max": 1.6
+        },
+        {
+          "k": "hud+audio",
+          "avg": 0.228,
+          "max": 1.1
+        },
+        {
+          "k": "m:idle",
+          "avg": 0.22,
+          "max": 1.5
+        },
+        {
+          "k": "drops+hud",
+          "avg": 0.187,
+          "max": 3.5
+        },
+        {
+          "k": "w:stairs+roof+birds+bugs+wildlife",
+          "avg": 0.179,
+          "max": 0.7
+        }
+      ]
+    },
+    "windowSplit": {
+      "first20s": {
+        "frames": 1216,
+        "wallFrameMs": 16.68,
+        "tickMs": 12.87,
+        "outsideMs": 3.81,
+        "spikes": 0
+      },
+      "last10s": {
+        "frames": 605,
+        "wallFrameMs": 16.79,
+        "tickMs": 15.24,
+        "outsideMs": 1.55,
+        "spikes": 0,
+        "newTextures": 1,
+        "newGeometries": 14,
+        "newRenderObjects": 218,
+        "newBuilds": 0,
+        "top10s": [
+          {
+            "k": "r:render",
+            "avg": 6.76
+          },
+          {
+            "k": "zombies",
+            "avg": 3.33
+          },
+          {
+            "k": "r:matrices",
+            "avg": 1.57
+          },
+          {
+            "k": "m:idle",
+            "avg": 0.64
+          },
+          {
+            "k": "r:cull",
+            "avg": 0.56
+          },
+          {
+            "k": "m:pose",
+            "avg": 0.54
+          },
+          {
+            "k": "hud+audio",
+            "avg": 0.22
+          },
+          {
+            "k": "drops+hud",
+            "avg": 0.19
+          },
+          {
+            "k": "w:stairs+roof+birds+bugs+wildlife",
+            "avg": 0.17
+          },
+          {
+            "k": "w:treeFall+leaves+batches",
+            "avg": 0.13
+          }
+        ]
+      }
+    },
+    "spikeCauses": {
+      "spikes": 0,
+      "spikesLast10s": 0,
+      "pipelines": 0,
+      "builds": 0,
+      "uploads": 0,
+      "sunShadow": 0,
+      "gc": 0,
+      "code": 0
+    },
+    "spikes": [],
+    "domState": {
+      "activeAnimations": [],
+      "hudDisplay": "block",
+      "reticleDisplay": "none",
+      "objectiveHudChildren": 2,
+      "markerCount": 1,
+      "pictureDbg": {
+        "brightness": 1,
+        "vibrancy": 1,
+        "fpFov": 60,
+        "exposure": 1,
+        "graded": false,
+        "pictureOnly": false
+      }
+    },
+    "traceSummary": null
+  },
+  {
+    "name": "old-1",
+    "cwd": "C:/Users/Zero/Desktop/dw-cu184/old",
+    "hudMode": "normal",
+    "cpuBefore": 10.5,
+    "loadBefore": 20,
+    "fps": 53.1,
+    "low": 39.7,
+    "worst": 17.1,
+    "hitches": 0,
+    "draws": 260,
+    "triangles": 730566,
+    "gpuMs": 0.24,
+    "benchProf": {
+      "frames30s": 1737,
+      "frameMs10s": 18.83,
+      "tickMs30s": 15.05,
+      "outsideMsBench": 3.78,
+      "top30s": [
+        {
+          "k": "r:render",
+          "avg": 6.818,
+          "max": 28.9
+        },
+        {
+          "k": "zombies",
+          "avg": 2.621,
+          "max": 15.7
+        },
+        {
+          "k": "r:matrices",
+          "avg": 1.868,
+          "max": 5.2
+        },
+        {
+          "k": "m:hold",
+          "avg": 0.814,
+          "max": 2.5
+        },
+        {
+          "k": "m:pose",
+          "avg": 0.563,
+          "max": 2.9
+        },
+        {
+          "k": "r:cull",
+          "avg": 0.524,
+          "max": 2.2
+        },
+        {
+          "k": "hud+audio",
+          "avg": 0.244,
+          "max": 1.2
+        },
+        {
+          "k": "w:stairs+roof+birds+bugs+wildlife",
+          "avg": 0.205,
+          "max": 0.8
+        },
+        {
+          "k": "drops+hud",
+          "avg": 0.179,
+          "max": 1.5
+        },
+        {
+          "k": "w:minimap",
+          "avg": 0.141,
+          "max": 1.5
+        }
+      ]
+    },
+    "windowSplit": {
+      "first20s": {
+        "frames": 1182,
+        "wallFrameMs": 17.42,
+        "tickMs": 14.37,
+        "outsideMs": 3.05,
+        "spikes": 2
+      },
+      "last10s": {
+        "frames": 555,
+        "wallFrameMs": 18.37,
+        "tickMs": 16.48,
+        "outsideMs": 1.89,
+        "spikes": 11,
+        "newTextures": 0,
+        "newGeometries": 18,
+        "newRenderObjects": 184,
+        "newBuilds": 0,
+        "top10s": [
+          {
+            "k": "r:render",
+            "avg": 7.29
+          },
+          {
+            "k": "zombies",
+            "avg": 3.65
+          },
+          {
+            "k": "r:matrices",
+            "avg": 1.87
+          },
+          {
+            "k": "m:hold",
+            "avg": 0.76
+          },
+          {
+            "k": "r:cull",
+            "avg": 0.53
+          },
+          {
+            "k": "m:pose",
+            "avg": 0.5
+          },
+          {
+            "k": "hud+audio",
+            "avg": 0.22
+          },
+          {
+            "k": "w:stairs+roof+birds+bugs+wildlife",
+            "avg": 0.2
+          },
+          {
+            "k": "drops+hud",
+            "avg": 0.17
+          },
+          {
+            "k": "w:minimap",
+            "avg": 0.14
+          }
+        ]
+      }
+    },
+    "spikeCauses": {
+      "spikes": 13,
+      "spikesLast10s": 11,
+      "pipelines": 0,
+      "builds": 0,
+      "uploads": 0,
+      "sunShadow": 0,
+      "gc": 1,
+      "code": 12
+    },
+    "spikes": [
+      {
+        "frame": 684,
+        "ms": 26.1,
+        "top": [
+          "r:render 10.7",
+          "zombies 5.4",
+          "r:matrices 4.6",
+          "w:minimap 0.9"
+        ],
+        "heapMB": 927.6,
+        "freedMB": -0.7,
+        "newPipelines": 0,
+        "newTextures": 0,
+        "newGeometries": 0,
+        "newBuilds": 0,
+        "sunShadow": 0,
+        "newRenderObjects": 0,
+        "t0": 39768.1,
+        "t1": 39795
+      },
+      {
+        "frame": 1160,
+        "ms": 28,
+        "top": [
+          "r:render 11.6",
+          "zombies 6.6",
+          "r:matrices 4.5",
+          "w:minimap 1.3"
+        ],
+        "heapMB": 945.1,
+        "freedMB": -1.1,
+        "newPipelines": 0,
+        "newTextures": 0,
+        "newGeometries": 0,
+        "newBuilds": 0,
+        "sunShadow": 0,
+        "newRenderObjects": 0,
+        "t0": 48443.5,
+        "t1": 48472.5
+      },
+      {
+        "frame": 1184,
+        "ms": 28.9,
+        "top": [
+          "r:render 15.8",
+          "zombies 4.6",
+          "r:matrices 2.2",
+          "w:minimap 1.3"
+        ],
+        "heapMB": 936.3,
+        "freedMB": -1.2,
+        "newPipelines": 0,
+        "newTextures": 0,
+        "newGeometries": 0,
+        "newBuilds": 0,
+        "sunShadow": 0,
+        "newRenderObjects": 0,
+        "t0": 48973.6,
+        "t1": 49004.3
+      },
+      {
+        "frame": 1237,
+        "ms": 25.3,
+        "top": [
+          "r:render 7.6",
+          "m:hold2+arms 4.7",
+          "zombies 4.2",
+          "r:matrices 2.3"
+        ],
+        "heapMB": 931.5,
+        "freedMB": -6.7,
+        "newPipelines": 0,
+        "newTextures": 0,
+        "newGeometries": 0,
+        "newBuilds": 0,
+        "sunShadow": 0,
+        "newRenderObjects": 1,
+        "t0": 50105,
+        "t1": 50131.3
+      },
+      {
+        "frame": 1239,
+        "ms": 30.2,
+        "top": [
+          "zombies 11.9",
+          "r:render 10.7",
+          "r:matrices 2.3",
+          "m:idle 1.0"
+        ],
+        "heapMB": 934.2,
+        "freedMB": -1.5,
+        "newPipelines": 0,
+        "newTextures": 0,
+        "newGeometries": 0,
+        "newBuilds": 0,
+        "sunShadow": 0,
+        "newRenderObjects": 0,
+        "t0": 50156.5,
+        "t1": 50187.9
+      },
+      {
+        "frame": 1243,
+        "ms": 25.3,
+        "top": [
+          "r:render 13.1",
+          "zombies 3.8",
+          "r:matrices 3.3",
+          "r:cull 1.0"
+        ],
+        "heapMB": 941.6,
+        "freedMB": -1.4,
+        "newPipelines": 0,
+        "newTextures": 0,
+        "newGeometries": 0,
+        "newBuilds": 0,
+        "sunShadow": 0,
+        "newRenderObjects": 0,
+        "t0": 50257,
+        "t1": 50283.2
+      },
+      {
+        "frame": 1253,
+        "ms": 26.4,
+        "top": [
+          "r:render 10.3",
+          "m:hold2+arms 7.2",
+          "zombies 2.9",
+          "r:matrices 1.6"
+        ],
+        "heapMB": 930.1,
+        "freedMB": -5.8,
+        "newPipelines": 0,
+        "newTextures": 0,
+        "newGeometries": 0,
+        "newBuilds": 0,
+        "sunShadow": 0,
+        "newRenderObjects": 9,
+        "t0": 50458.9,
+        "t1": 50486.1
+      },
+      {
+        "frame": 1265,
+        "ms": 28.1,
+        "top": [
+          "r:render 13.9",
+          "zombies 5.5",
+          "r:matrices 2.2",
+          "m:idle 2.0"
+        ],
+        "heapMB": 943.2,
+        "freedMB": -1.9,
+        "newPipelines": 0,
+        "newTextures": 0,
+        "newGeometries": 0,
+        "newBuilds": 0,
+        "sunShadow": 0,
+        "newRenderObjects": 1,
+        "t0": 50726.4,
+        "t1": 50756.4
+      },
+      {
+        "frame": 1275,
+        "ms": 27.9,
+        "top": [
+          "r:render 11.5",
+          "zombies 7.0",
+          "r:matrices 4.1",
+          "m:idle 1.0"
+        ],
+        "heapMB": 951.5,
+        "freedMB": -1,
+        "newPipelines": 0,
+        "newTextures": 0,
+        "newGeometries": 0,
+        "newBuilds": 0,
+        "sunShadow": 0,
+        "newRenderObjects": 0,
+        "t0": 50957.2,
+        "t1": 50986.7
+      },
+      {
+        "frame": 1286,
+        "ms": 29.2,
+        "top": [
+          "r:render 12.1",
+          "m:hold2+arms 4.6",
+          "zombies 4.5",
+          "r:matrices 2.5"
+        ],
+        "heapMB": 935.2,
+        "freedMB": -5.9,
+        "newPipelines": 0,
+        "newTextures": 0,
+        "newGeometries": 0,
+        "newBuilds": 0,
+        "sunShadow": 0,
+        "newRenderObjects": 1,
+        "t0": 51189.5,
+        "t1": 51220.1
+      },
+      {
+        "frame": 1288,
+        "ms": 31.1,
+        "top": [
+          "zombies 15.7",
+          "r:render 9.5",
+          "r:matrices 1.8",
+          "m:hold 1.4"
+        ],
+        "heapMB": 952,
+        "freedMB": -6.4,
+        "newPipelines": 0,
+        "newTextures": 0,
+        "newGeometries": 0,
+        "newBuilds": 0,
+        "sunShadow": 0,
+        "newRenderObjects": 1,
+        "t0": 51253.7,
+        "t1": 51286.4
+      },
+      {
+        "frame": 1335,
+        "ms": 42.1,
+        "top": [
+          "r:render 28.9",
+          "zombies 5.4",
+          "r:matrices 4.0",
+          "m:hold 1.0"
+        ],
+        "heapMB": 898.7,
+        "freedMB": 45.9,
+        "newPipelines": 0,
+        "newTextures": 0,
+        "newGeometries": 0,
+        "newBuilds": 0,
+        "sunShadow": 0,
+        "newRenderObjects": 0,
+        "t0": 52153.1,
+        "t1": 52198.7
+      }
+    ],
+    "domState": {
+      "activeAnimations": [],
+      "hudDisplay": "block",
+      "reticleDisplay": "none",
+      "objectiveHudChildren": 2,
+      "markerCount": 1,
+      "pictureDbg": null
+    },
+    "traceSummary": {
+      "totalTraceEvents": 456136,
+      "windowMs": 10197.32,
+      "renderedFrames": 555,
+      "allRafCallbacksCount": 1665,
+      "gameTickRafCount": 555,
+      "traceFrameMs": 18.37,
+      "traceFps": 54.43,
+      "threads": {
+        "mainThread": "37988:27884",
+        "compositorThread": "37988:19052",
+        "vizCompositorThread": "18212:11160",
+        "gpuMainThread": "18212:18824"
+      },
+      "mainThreadSummary": {
+        "frameMs": 18.37,
+        "beginMainFrameMsPerFrame": 17.17,
+        "gameTickRafMsPerFrame": 16.54,
+        "allRafMsPerFrame": 16.66,
+        "otherRafMsPerFrame": 0.126,
+        "bmfPostRafMsPerFrame": 0.501,
+        "outsideGameTickMsPerFrame": 1.83,
+        "mainBusyMsPerFrame": 17.2,
+        "mainOutsideRafBusyMsPerFrame": 0.535,
+        "waitForFrameIdleMsPerFrame": 1.17,
+        "renderPipelinePostRafMsPerFrame": 0.141,
+        "renderPipelineTotalMsPerFrame": 0.32,
+        "breakdown": {
+          "FireAnimationFrame_All": {
+            "count": 1665,
+            "perFrameCount": 3,
+            "totalMs": 9249.04,
+            "msPerFrame": 16.665,
+            "inRafMsPerFrame": 16.665,
+            "outRafMsPerFrame": 0,
+            "maxMs": 42.72
+          },
+          "FireAnimationFrame_GameTick": {
+            "count": 555,
+            "perFrameCount": 1,
+            "totalMs": 9179.2,
+            "msPerFrame": 16.539,
+            "inRafMsPerFrame": 16.539,
+            "outRafMsPerFrame": 0,
+            "maxMs": 42.72
+          },
+          "FireAnimationFrame_OtherCallbacks": {
+            "count": 1110,
+            "perFrameCount": 2,
+            "totalMs": 69.84,
+            "msPerFrame": 0.126,
+            "inRafMsPerFrame": 0.126,
+            "outRafMsPerFrame": 0,
+            "maxMs": 0.77
+          },
+          "UpdateLayoutTree_Style": {
+            "count": 598,
+            "perFrameCount": 1.08,
+            "totalMs": 140.46,
+            "msPerFrame": 0.253,
+            "inRafMsPerFrame": 0.151,
+            "outRafMsPerFrame": 0.102,
+            "maxMs": 1.3
+          },
+          "Layout": {
+            "count": 25,
+            "perFrameCount": 0.05,
+            "totalMs": 4.39,
+            "msPerFrame": 0.008,
+            "inRafMsPerFrame": 0.001,
+            "outRafMsPerFrame": 0.007,
+            "maxMs": 0.26
+          },
+          "PrePaint": {
+            "count": 555,
+            "perFrameCount": 1,
+            "totalMs": 29.16,
+            "msPerFrame": 0.053,
+            "inRafMsPerFrame": 0.025,
+            "outRafMsPerFrame": 0.027,
+            "maxMs": 0.81
+          },
+          "Layerize": {
+            "count": 555,
+            "perFrameCount": 1,
+            "totalMs": 1.78,
+            "msPerFrame": 0.003,
+            "inRafMsPerFrame": 0.001,
+            "outRafMsPerFrame": 0.002,
+            "maxMs": 0.04
+          },
+          "Paint": {
+            "count": 50,
+            "perFrameCount": 0.09,
+            "totalMs": 1.81,
+            "msPerFrame": 0.003,
+            "inRafMsPerFrame": 0,
+            "outRafMsPerFrame": 0.003,
+            "maxMs": 0.1
+          },
+          "Composite_Commit": {
+            "count": 0,
+            "perFrameCount": 0,
+            "totalMs": 0,
+            "msPerFrame": 0,
+            "inRafMsPerFrame": 0,
+            "outRafMsPerFrame": 0,
+            "maxMs": 0
+          },
+          "Animation": {
+            "count": 0,
+            "perFrameCount": 0,
+            "totalMs": 0,
+            "msPerFrame": 0,
+            "inRafMsPerFrame": 0,
+            "outRafMsPerFrame": 0,
+            "maxMs": 0
+          },
+          "GC": {
+            "count": 729,
+            "perFrameCount": 1.31,
+            "totalMs": 46.45,
+            "msPerFrame": 0.084,
+            "inRafMsPerFrame": 0.066,
+            "outRafMsPerFrame": 0.018,
+            "maxMs": 18.6
+          },
+          "FunctionCall_OutsideRaf": {
+            "count": 364,
+            "perFrameCount": 0.66,
+            "totalMs": 3.57,
+            "msPerFrame": 0.006,
+            "inRafMsPerFrame": 0,
+            "outRafMsPerFrame": 0.006,
+            "maxMs": 0.07
+          },
+          "TimerFire": {
+            "count": 44,
+            "perFrameCount": 0.08,
+            "totalMs": 0.95,
+            "msPerFrame": 0.002,
+            "inRafMsPerFrame": 0.001,
+            "outRafMsPerFrame": 0.001,
+            "maxMs": 0.1
+          },
+          "RunMicrotasks_OutsideRaf": {
+            "count": 0,
+            "perFrameCount": 0,
+            "totalMs": 0,
+            "msPerFrame": 0,
+            "inRafMsPerFrame": 0,
+            "outRafMsPerFrame": 0,
+            "maxMs": 0
+          },
+          "HitTest": {
+            "count": 10,
+            "perFrameCount": 0.02,
+            "totalMs": 0.87,
+            "msPerFrame": 0.002,
+            "inRafMsPerFrame": 0,
+            "outRafMsPerFrame": 0.001,
+            "maxMs": 0.23
+          }
+        },
+        "topMainOutsideRaf": [
+          {
+            "name": "UpdateLayoutTree",
+            "count": 238,
+            "totalMs": 56.55,
+            "msPerFrame": 0.102
+          },
+          {
+            "name": "LayerTreeHost::DoUpdateLayers",
+            "count": 294,
+            "totalMs": 21.14,
+            "msPerFrame": 0.038
+          },
+          {
+            "name": "PrePaint",
+            "count": 294,
+            "totalMs": 15.18,
+            "msPerFrame": 0.027
+          },
+          {
+            "name": "MinorGC",
+            "count": 9,
+            "totalMs": 8.22,
+            "msPerFrame": 0.015
+          },
+          {
+            "name": "V8.GC_SCAVENGER",
+            "count": 9,
+            "totalMs": 7.15,
+            "msPerFrame": 0.013
+          },
+          {
+            "name": "V8.GC_SCAVENGER_SCAVENGE",
+            "count": 9,
+            "totalMs": 6.94,
+            "msPerFrame": 0.013
+          },
+          {
+            "name": "RasterImplementation::RasterCHROMIUM",
+            "count": 77,
+            "totalMs": 5.84,
+            "msPerFrame": 0.011
+          },
+          {
+            "name": "Layout",
+            "count": 22,
+            "totalMs": 3.95,
+            "msPerFrame": 0.007
+          },
+          {
+            "name": "FunctionCall",
+            "count": 364,
+            "totalMs": 3.57,
+            "msPerFrame": 0.006
+          },
+          {
+            "name": "IntersectionObserverController::computeIntersections",
+            "count": 588,
+            "totalMs": 3.52,
+            "msPerFrame": 0.006
+          },
+          {
+            "name": "ProxyMain::BeginMainFrame::commit",
+            "count": 294,
+            "totalMs": 2.48,
+            "msPerFrame": 0.004
+          },
+          {
+            "name": "V8.GC_SCAVENGER_SCAVENGE_PARALLEL_PHASE",
+            "count": 9,
+            "totalMs": 2.22,
+            "msPerFrame": 0.004
+          },
+          {
+            "name": "LayerTreeHost::WaitForCommitCompletion",
+            "count": 309,
+            "totalMs": 1.93,
+            "msPerFrame": 0.003
+          },
+          {
+            "name": "Paint",
+            "count": 44,
+            "totalMs": 1.63,
+            "msPerFrame": 0.003
+          },
+          {
+            "name": "V8.GC_MC_INCREMENTAL_START",
+            "count": 1,
+            "totalMs": 1.43,
+            "msPerFrame": 0.003
+          }
+        ]
+      },
+      "frameIntervals": {
+        "all": {
+          "count": 554,
+          "wallMs": 18.38,
+          "gameTickMs": 16.54,
+          "rafMs": 17.07,
+          "outsideMs": 1.83,
+          "postRafBusyMs": 0.224,
+          "idleWaitMs": 1.15
+        },
+        "normalVsync_le20ms": {
+          "count": 441,
+          "wallMs": 16.95,
+          "gameTickMs": 15.23,
+          "rafMs": 15.71,
+          "outsideMs": 1.72,
+          "postRafBusyMs": 0.197,
+          "idleWaitMs": 1.11
+        },
+        "missedVsync_gt20ms": {
+          "count": 113,
+          "wallMs": 23.94,
+          "gameTickMs": 21.66,
+          "rafMs": 22.4,
+          "outsideMs": 2.28,
+          "postRafBusyMs": 0.33,
+          "idleWaitMs": 1.29
+        },
+        "spikes_gt25ms": {
+          "count": 32,
+          "wallMs": 29.09,
+          "gameTickMs": 24.65,
+          "rafMs": 25.23,
+          "outsideMs": 4.43,
+          "postRafBusyMs": 0.428,
+          "idleWaitMs": 3.45
+        },
+        "slowestFrames": [
+          {
+            "idx": 152,
+            "wallMs": 46.34,
+            "gameTickMs": 42.72,
+            "rafMs": 43.59,
+            "outsideMs": 3.62,
+            "postRafBusyMs": 0.829,
+            "idleWaitMs": 1.93
+          },
+          {
+            "idx": 166,
+            "wallMs": 35.23,
+            "gameTickMs": 28.43,
+            "rafMs": 28.56,
+            "outsideMs": 6.8,
+            "postRafBusyMs": 0.367,
+            "idleWaitMs": 6.3
+          },
+          {
+            "idx": 153,
+            "wallMs": 34.73,
+            "gameTickMs": 21.86,
+            "rafMs": 22.37,
+            "outsideMs": 12.87,
+            "postRafBusyMs": 1.09,
+            "idleWaitMs": 11.27
+          },
+          {
+            "idx": 104,
+            "wallMs": 33.6,
+            "gameTickMs": 20.98,
+            "rafMs": 21.48,
+            "outsideMs": 12.62,
+            "postRafBusyMs": 0.493,
+            "idleWaitMs": 11.63
+          },
+          {
+            "idx": 105,
+            "wallMs": 32.82,
+            "gameTickMs": 31.26,
+            "rafMs": 31.49,
+            "outsideMs": 1.56,
+            "postRafBusyMs": 0.36,
+            "idleWaitMs": 0.98
+          },
+          {
+            "idx": 170,
+            "wallMs": 32.55,
+            "gameTickMs": 19.63,
+            "rafMs": 19.68,
+            "outsideMs": 12.92,
+            "postRafBusyMs": 0.796,
+            "idleWaitMs": 12.07
+          },
+          {
+            "idx": 56,
+            "wallMs": 31.46,
+            "gameTickMs": 30.39,
+            "rafMs": 30.45,
+            "outsideMs": 1.06,
+            "postRafBusyMs": 0.335,
+            "idleWaitMs": 0.67
+          },
+          {
+            "idx": 82,
+            "wallMs": 30.83,
+            "gameTickMs": 28.21,
+            "rafMs": 29.17,
+            "outsideMs": 2.63,
+            "postRafBusyMs": 0.703,
+            "idleWaitMs": 0.95
+          },
+          {
+            "idx": 1,
+            "wallMs": 30.72,
+            "gameTickMs": 29,
+            "rafMs": 29.5,
+            "outsideMs": 1.72,
+            "postRafBusyMs": 0.677,
+            "idleWaitMs": 0.54
+          },
+          {
+            "idx": 103,
+            "wallMs": 30.56,
+            "gameTickMs": 29.33,
+            "rafMs": 29.39,
+            "outsideMs": 1.23,
+            "postRafBusyMs": 0.501,
+            "idleWaitMs": 0.66
+          }
+        ]
+      },
+      "compositorSummary": {
+        "threadKey": "37988:19052",
+        "label": "Compositor (Renderer)",
+        "present": true,
+        "spanCount": 47815,
+        "totalBusyMs": 339.68,
+        "busyMsPerFrame": 0.612,
+        "topEvents": [
+          {
+            "name": "Graphics.Pipeline",
+            "count": 1778,
+            "totalMs": 151.55,
+            "msPerFrame": 0.273
+          },
+          {
+            "name": "ProxyImpl::ReadyToCommit",
+            "count": 555,
+            "totalMs": 131.08,
+            "msPerFrame": 0.236
+          },
+          {
+            "name": "ProxyImpl::ScheduledActionDraw",
+            "count": 555,
+            "totalMs": 116.71,
+            "msPerFrame": 0.21
+          },
+          {
+            "name": "MainFrame.Draw",
+            "count": 555,
+            "totalMs": 115.76,
+            "msPerFrame": 0.209
+          },
+          {
+            "name": "LayerTreeHostImpl::CommitComplete",
+            "count": 555,
+            "totalMs": 82.65,
+            "msPerFrame": 0.149
+          },
+          {
+            "name": "auto cc::LayerTreeHostImpl::PrepareTiles()::(lambda)::operator()()::(lambda)::operator()(uint32_t) const",
+            "count": 610,
+            "totalMs": 41.31,
+            "msPerFrame": 0.074
+          },
+          {
+            "name": "auto cc::TileManager::PrepareTiles(const GlobalStateThatImpactsTilePriority &)::(lambda)::operator()()::(lambda)::operator()(uint32_t) const",
+            "count": 610,
+            "totalMs": 39.93,
+            "msPerFrame": 0.072
+          },
+          {
+            "name": "TileManager::PrepareTiles",
+            "count": 610,
+            "totalMs": 38.82,
+            "msPerFrame": 0.07
+          },
+          {
+            "name": "LayerTreeImpl::UpdateDrawProperties",
+            "count": 555,
+            "totalMs": 36.28,
+            "msPerFrame": 0.065
+          },
+          {
+            "name": "LayerTreeHostImpl::PrepareToDraw",
+            "count": 555,
+            "totalMs": 35.69,
+            "msPerFrame": 0.064
+          },
+          {
+            "name": "TileManager::CheckForCompletedTasksAndIssueSignals",
+            "count": 633,
+            "totalMs": 32.23,
+            "msPerFrame": 0.058
+          },
+          {
+            "name": "ProxyImpl::Commit",
+            "count": 555,
+            "totalMs": 30.3,
+            "msPerFrame": 0.055
+          }
+        ]
+      },
+      "vizSummary": {
+        "threadKey": "18212:11160",
+        "label": "VizCompositorThread",
+        "present": true,
+        "spanCount": 22687,
+        "totalBusyMs": 402.74,
+        "busyMsPerFrame": 0.726,
+        "topEvents": [
+          {
+            "name": "Graphics.Pipeline",
+            "count": 3443,
+            "totalMs": 375.75,
+            "msPerFrame": 0.677
+          },
+          {
+            "name": "DisplayScheduler::OnBeginFrameDeadline",
+            "count": 612,
+            "totalMs": 314.78,
+            "msPerFrame": 0.567
+          },
+          {
+            "name": "DisplayScheduler::DrawAndSwap",
+            "count": 555,
+            "totalMs": 313.37,
+            "msPerFrame": 0.565
+          },
+          {
+            "name": "Display::DrawAndSwap",
+            "count": 555,
+            "totalMs": 312.28,
+            "msPerFrame": 0.563
+          },
+          {
+            "name": "DirectRenderer::DrawFrame",
+            "count": 555,
+            "totalMs": 237.42,
+            "msPerFrame": 0.428
+          },
+          {
+            "name": "DirectRenderer::DrawRenderPass",
+            "count": 1665,
+            "totalMs": 217.69,
+            "msPerFrame": 0.392
+          },
+          {
+            "name": "ExternalBeginFrameSource::OnBeginFrame",
+            "count": 611,
+            "totalMs": 47.21,
+            "msPerFrame": 0.085
+          },
+          {
+            "name": "Surface::CommitFrame",
+            "count": 555,
+            "totalMs": 18.7,
+            "msPerFrame": 0.034
+          },
+          {
+            "name": "Surface::ActivateFrame",
+            "count": 555,
+            "totalMs": 16.18,
+            "msPerFrame": 0.029
+          },
+          {
+            "name": "DisplayScheduler::BeginFrame",
+            "count": 618,
+            "totalMs": 13.18,
+            "msPerFrame": 0.024
+          },
+          {
+            "name": "auto viz::SkiaRenderer::FlushOutputSurface()::(lambda)::operator()()::(lambda)::operator()(uint32_t) const",
+            "count": 1665,
+            "totalMs": 11.34,
+            "msPerFrame": 0.02
+          },
+          {
+            "name": "SkiaOutputSurfaceImpl::FlushGpuTasks",
+            "count": 2220,
+            "totalMs": 8.88,
+            "msPerFrame": 0.016
+          }
+        ]
+      },
+      "gpuMainSummary": {
+        "threadKey": "18212:18824",
+        "label": "CrGpuMain (GPU Process)",
+        "present": true,
+        "spanCount": 86371,
+        "totalBusyMs": 4511.08,
+        "busyMsPerFrame": 8.128,
+        "topEvents": [
+          {
+            "name": "Scheduler::RunTask",
+            "count": 11398,
+            "totalMs": 4486.33,
+            "msPerFrame": 8.083
+          },
+          {
+            "name": "GpuChannel::ExecuteDeferredRequest",
+            "count": 9178,
+            "totalMs": 3654.95,
+            "msPerFrame": 6.586
+          },
+          {
+            "name": "CommandBuffer::Flush",
+            "count": 9178,
+            "totalMs": 3601.73,
+            "msPerFrame": 6.49
+          },
+          {
+            "name": "CommandBufferStub::OnAsyncFlush",
+            "count": 9178,
+            "totalMs": 3588.91,
+            "msPerFrame": 6.467
+          },
+          {
+            "name": "CommandBufferService:PutChanged",
+            "count": 9178,
+            "totalMs": 3543.3,
+            "msPerFrame": 6.384
+          },
+          {
+            "name": "WebGPU",
+            "count": 8967,
+            "totalMs": 3444.88,
+            "msPerFrame": 6.207
+          },
+          {
+            "name": "SkiaOutputSurfaceImplOnGpu::FinishPaintRenderPass",
+            "count": 1665,
+            "totalMs": 420.38,
+            "msPerFrame": 0.757
+          },
+          {
+            "name": "SkiaOutputSurfaceImplOnGpu::SwapBuffers",
+            "count": 555,
+            "totalMs": 319.71,
+            "msPerFrame": 0.576
+          },
+          {
+            "name": "SkiaOutputSurfaceImplOnGpu::EndAccessImages",
+            "count": 555,
+            "totalMs": 180.04,
+            "msPerFrame": 0.324
+          },
+          {
+            "name": "RendererMainThread",
+            "count": 163,
+            "totalMs": 158.53,
+            "msPerFrame": 0.286
+          },
+          {
+            "name": "Graphics.Pipeline",
+            "count": 1110,
+            "totalMs": 106.64,
+            "msPerFrame": 0.192
+          },
+          {
+            "name": "RasterDecoderImpl::DoEndRasterCHROMIUM",
+            "count": 177,
+            "totalMs": 90.52,
+            "msPerFrame": 0.163
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "new-1",
+    "cwd": "C:\\Users\\Zero\\Desktop\\Tiny Trek",
+    "hudMode": "normal",
+    "cpuBefore": 19,
+    "loadBefore": 100,
+    "fps": 56.4,
+    "low": 41.1,
+    "worst": 20.9,
+    "hitches": 0,
+    "draws": 287,
+    "triangles": 753963,
+    "gpuMs": 0.25,
+    "benchProf": {
+      "frames30s": 1802,
+      "frameMs10s": 17.73,
+      "tickMs30s": 14.52,
+      "outsideMsBench": 3.21,
+      "top30s": [
+        {
+          "k": "r:render",
+          "avg": 6.574,
+          "max": 35.1
+        },
+        {
+          "k": "zombies",
+          "avg": 2.536,
+          "max": 12.4
+        },
+        {
+          "k": "r:matrices",
+          "avg": 1.594,
+          "max": 4.6
+        },
+        {
+          "k": "m:hold",
+          "avg": 0.78,
+          "max": 1.9
+        },
+        {
+          "k": "r:cull",
+          "avg": 0.635,
+          "max": 1.9
+        },
+        {
+          "k": "m:pose",
+          "avg": 0.51,
+          "max": 1.2
+        },
+        {
+          "k": "hud+audio",
+          "avg": 0.244,
+          "max": 1.1
+        },
+        {
+          "k": "w:stairs+roof+birds+bugs+wildlife",
+          "avg": 0.219,
+          "max": 0.7
+        },
+        {
+          "k": "drops+hud",
+          "avg": 0.207,
+          "max": 1.2
+        },
+        {
+          "k": "w:minimap",
+          "avg": 0.14,
+          "max": 1.3
+        }
+      ]
+    },
+    "windowSplit": {
+      "first20s": {
+        "frames": 1233,
+        "wallFrameMs": 16.75,
+        "tickMs": 13.58,
+        "outsideMs": 3.17,
+        "spikes": 2
+      },
+      "last10s": {
+        "frames": 569,
+        "wallFrameMs": 17.95,
+        "tickMs": 16.55,
+        "outsideMs": 1.4,
+        "spikes": 4,
+        "newTextures": 2,
+        "newGeometries": 24,
+        "newRenderObjects": 201,
+        "newBuilds": 0,
+        "top10s": [
+          {
+            "k": "r:render",
+            "avg": 7.25
+          },
+          {
+            "k": "zombies",
+            "avg": 3.76
+          },
+          {
+            "k": "r:matrices",
+            "avg": 1.71
+          },
+          {
+            "k": "m:hold",
+            "avg": 0.75
+          },
+          {
+            "k": "r:cull",
+            "avg": 0.65
+          },
+          {
+            "k": "m:pose",
+            "avg": 0.47
+          },
+          {
+            "k": "hud+audio",
+            "avg": 0.23
+          },
+          {
+            "k": "w:stairs+roof+birds+bugs+wildlife",
+            "avg": 0.22
+          },
+          {
+            "k": "drops+hud",
+            "avg": 0.22
+          },
+          {
+            "k": "w:minimap",
+            "avg": 0.15
+          }
+        ]
+      }
+    },
+    "spikeCauses": {
+      "spikes": 6,
+      "spikesLast10s": 4,
+      "pipelines": 0,
+      "builds": 0,
+      "uploads": 0,
+      "sunShadow": 0,
+      "gc": 4,
+      "code": 2
+    },
+    "spikes": [
+      {
+        "frame": 360,
+        "ms": 43.3,
+        "top": [
+          "r:render 35.1",
+          "zombies 2.0",
+          "r:matrices 1.9",
+          "m:hold 1.0"
+        ],
+        "heapMB": 861,
+        "freedMB": 70.1,
+        "newPipelines": 0,
+        "newTextures": 0,
+        "newGeometries": 0,
+        "newBuilds": 0,
+        "sunShadow": 0,
+        "newRenderObjects": 0,
+        "t0": 35526.8,
+        "t1": 35575.2
+      },
+      {
+        "frame": 1078,
+        "ms": 33.7,
+        "top": [
+          "r:render 23.7",
+          "zombies 5.2",
+          "r:matrices 1.4",
+          "m:hold 0.8"
+        ],
+        "heapMB": 866.2,
+        "freedMB": 11.6,
+        "newPipelines": 0,
+        "newTextures": 0,
+        "newGeometries": 0,
+        "newBuilds": 0,
+        "sunShadow": 0,
+        "newRenderObjects": 0,
+        "t0": 47542,
+        "t1": 47578.4
+      },
+      {
+        "frame": 1339,
+        "ms": 25.7,
+        "top": [
+          "zombies 12.4",
+          "r:render 8.5",
+          "r:matrices 2.0",
+          "m:hold 0.6"
+        ],
+        "heapMB": 909.3,
+        "freedMB": -6.3,
+        "newPipelines": 0,
+        "newTextures": 0,
+        "newGeometries": 0,
+        "newBuilds": 0,
+        "sunShadow": 0,
+        "newRenderObjects": 0,
+        "t0": 52000.7,
+        "t1": 52028.3
+      },
+      {
+        "frame": 1590,
+        "ms": 35.1,
+        "top": [
+          "r:render 21.6",
+          "zombies 6.0",
+          "r:matrices 2.4",
+          "r:cull 1.4"
+        ],
+        "heapMB": 893.9,
+        "freedMB": 34.6,
+        "newPipelines": 0,
+        "newTextures": 0,
+        "newGeometries": 0,
+        "newBuilds": 0,
+        "sunShadow": 0,
+        "newRenderObjects": 0,
+        "t0": 56461.8,
+        "t1": 56498.6
+      },
+      {
+        "frame": 1591,
+        "ms": 26.5,
+        "top": [
+          "zombies 12.1",
+          "r:render 8.8",
+          "r:matrices 1.8",
+          "m:hold 0.9"
+        ],
+        "heapMB": 884.1,
+        "freedMB": 9.8,
+        "newPipelines": 0,
+        "newTextures": 0,
+        "newGeometries": 0,
+        "newBuilds": 0,
+        "sunShadow": 0,
+        "newRenderObjects": 1,
+        "t0": 56498.6,
+        "t1": 56529.8
+      },
+      {
+        "frame": 1792,
+        "ms": 26.8,
+        "top": [
+          "r:render 13.4",
+          "zombies 6.6",
+          "r:matrices 2.1",
+          "r:cull 0.8"
+        ],
+        "heapMB": 919.9,
+        "freedMB": -3.6,
+        "newPipelines": 0,
+        "newTextures": 0,
+        "newGeometries": 0,
+        "newBuilds": 0,
+        "sunShadow": 0,
+        "newRenderObjects": 0,
+        "t0": 60168.3,
+        "t1": 60198.6
+      }
+    ],
+    "domState": {
+      "activeAnimations": [],
+      "hudDisplay": "block",
+      "reticleDisplay": "none",
+      "objectiveHudChildren": 2,
+      "markerCount": 1,
+      "pictureDbg": {
+        "brightness": 1,
+        "vibrancy": 1,
+        "fpFov": 60,
+        "exposure": 1,
+        "graded": false,
+        "pictureOnly": false
+      }
+    },
+    "traceSummary": {
+      "totalTraceEvents": 478892,
+      "windowMs": 10211.63,
+      "renderedFrames": 569,
+      "allRafCallbacksCount": 1707,
+      "gameTickRafCount": 569,
+      "traceFrameMs": 17.95,
+      "traceFps": 55.72,
+      "threads": {
+        "mainThread": "8432:33088",
+        "compositorThread": "8432:30040",
+        "vizCompositorThread": "27900:29476",
+        "gpuMainThread": "27900:21000"
+      },
+      "mainThreadSummary": {
+        "frameMs": 17.95,
+        "beginMainFrameMsPerFrame": 17.31,
+        "gameTickRafMsPerFrame": 16.62,
+        "allRafMsPerFrame": 16.75,
+        "otherRafMsPerFrame": 0.135,
+        "bmfPostRafMsPerFrame": 0.562,
+        "outsideGameTickMsPerFrame": 1.33,
+        "mainBusyMsPerFrame": 17.34,
+        "mainOutsideRafBusyMsPerFrame": 0.59,
+        "waitForFrameIdleMsPerFrame": 0.6,
+        "renderPipelinePostRafMsPerFrame": 0.137,
+        "renderPipelineTotalMsPerFrame": 0.383,
+        "breakdown": {
+          "FireAnimationFrame_All": {
+            "count": 1707,
+            "perFrameCount": 3,
+            "totalMs": 9532.1,
+            "msPerFrame": 16.752,
+            "inRafMsPerFrame": 16.752,
+            "outRafMsPerFrame": 0,
+            "maxMs": 35.23
+          },
+          "FireAnimationFrame_GameTick": {
+            "count": 569,
+            "perFrameCount": 1,
+            "totalMs": 9455.37,
+            "msPerFrame": 16.618,
+            "inRafMsPerFrame": 16.618,
+            "outRafMsPerFrame": 0,
+            "maxMs": 35.23
+          },
+          "FireAnimationFrame_OtherCallbacks": {
+            "count": 1138,
+            "perFrameCount": 2,
+            "totalMs": 76.72,
+            "msPerFrame": 0.135,
+            "inRafMsPerFrame": 0.135,
+            "outRafMsPerFrame": 0,
+            "maxMs": 0.76
+          },
+          "UpdateLayoutTree_Style": {
+            "count": 618,
+            "perFrameCount": 1.09,
+            "totalMs": 165.99,
+            "msPerFrame": 0.292,
+            "inRafMsPerFrame": 0.203,
+            "outRafMsPerFrame": 0.089,
+            "maxMs": 0.66
+          },
+          "Layout": {
+            "count": 26,
+            "perFrameCount": 0.05,
+            "totalMs": 5.54,
+            "msPerFrame": 0.01,
+            "inRafMsPerFrame": 0,
+            "outRafMsPerFrame": 0.01,
+            "maxMs": 0.66
+          },
+          "PrePaint": {
+            "count": 569,
+            "perFrameCount": 1,
+            "totalMs": 29.88,
+            "msPerFrame": 0.053,
+            "inRafMsPerFrame": 0.033,
+            "outRafMsPerFrame": 0.019,
+            "maxMs": 0.46
+          },
+          "Layerize": {
+            "count": 569,
+            "perFrameCount": 1,
+            "totalMs": 13.83,
+            "msPerFrame": 0.024,
+            "inRafMsPerFrame": 0.01,
+            "outRafMsPerFrame": 0.015,
+            "maxMs": 0.49
+          },
+          "Paint": {
+            "count": 54,
+            "perFrameCount": 0.09,
+            "totalMs": 2.17,
+            "msPerFrame": 0.004,
+            "inRafMsPerFrame": 0,
+            "outRafMsPerFrame": 0.004,
+            "maxMs": 0.1
+          },
+          "Composite_Commit": {
+            "count": 0,
+            "perFrameCount": 0,
+            "totalMs": 0,
+            "msPerFrame": 0,
+            "inRafMsPerFrame": 0,
+            "outRafMsPerFrame": 0,
+            "maxMs": 0
+          },
+          "Animation": {
+            "count": 0,
+            "perFrameCount": 0,
+            "totalMs": 0,
+            "msPerFrame": 0,
+            "inRafMsPerFrame": 0,
+            "outRafMsPerFrame": 0,
+            "maxMs": 0
+          },
+          "GC": {
+            "count": 596,
+            "perFrameCount": 1.05,
+            "totalMs": 35.59,
+            "msPerFrame": 0.063,
+            "inRafMsPerFrame": 0.048,
+            "outRafMsPerFrame": 0.014,
+            "maxMs": 11.97
+          },
+          "FunctionCall_OutsideRaf": {
+            "count": 237,
+            "perFrameCount": 0.42,
+            "totalMs": 2.39,
+            "msPerFrame": 0.004,
+            "inRafMsPerFrame": 0,
+            "outRafMsPerFrame": 0.004,
+            "maxMs": 0.39
+          },
+          "TimerFire": {
+            "count": 45,
+            "perFrameCount": 0.08,
+            "totalMs": 0.84,
+            "msPerFrame": 0.001,
+            "inRafMsPerFrame": 0.001,
+            "outRafMsPerFrame": 0,
+            "maxMs": 0.09
+          },
+          "RunMicrotasks_OutsideRaf": {
+            "count": 0,
+            "perFrameCount": 0,
+            "totalMs": 0,
+            "msPerFrame": 0,
+            "inRafMsPerFrame": 0,
+            "outRafMsPerFrame": 0,
+            "maxMs": 0
+          },
+          "HitTest": {
+            "count": 10,
+            "perFrameCount": 0.02,
+            "totalMs": 0.72,
+            "msPerFrame": 0.001,
+            "inRafMsPerFrame": 0.001,
+            "outRafMsPerFrame": 0.001,
+            "maxMs": 0.1
+          }
+        },
+        "topMainOutsideRaf": [
+          {
+            "name": "UpdateLayoutTree",
+            "count": 168,
+            "totalMs": 50.76,
+            "msPerFrame": 0.089
+          },
+          {
+            "name": "LayerTreeHost::DoUpdateLayers",
+            "count": 198,
+            "totalMs": 15.07,
+            "msPerFrame": 0.026
+          },
+          {
+            "name": "PrePaint",
+            "count": 198,
+            "totalMs": 10.99,
+            "msPerFrame": 0.019
+          },
+          {
+            "name": "Layerize",
+            "count": 198,
+            "totalMs": 8.35,
+            "msPerFrame": 0.015
+          },
+          {
+            "name": "MinorGC",
+            "count": 6,
+            "totalMs": 6.1,
+            "msPerFrame": 0.011
+          },
+          {
+            "name": "Layout",
+            "count": 26,
+            "totalMs": 5.54,
+            "msPerFrame": 0.01
+          },
+          {
+            "name": "V8.GC_SCAVENGER",
+            "count": 6,
+            "totalMs": 4.95,
+            "msPerFrame": 0.009
+          },
+          {
+            "name": "V8.GC_SCAVENGER_SCAVENGE",
+            "count": 6,
+            "totalMs": 4.78,
+            "msPerFrame": 0.008
+          },
+          {
+            "name": "RasterImplementation::RasterCHROMIUM",
+            "count": 50,
+            "totalMs": 4.38,
+            "msPerFrame": 0.008
+          },
+          {
+            "name": "FunctionCall",
+            "count": 237,
+            "totalMs": 2.39,
+            "msPerFrame": 0.004
+          },
+          {
+            "name": "IntersectionObserverController::computeIntersections",
+            "count": 396,
+            "totalMs": 2.26,
+            "msPerFrame": 0.004
+          },
+          {
+            "name": "Paint",
+            "count": 54,
+            "totalMs": 2.17,
+            "msPerFrame": 0.004
+          },
+          {
+            "name": "ProxyMain::BeginMainFrame::commit",
+            "count": 198,
+            "totalMs": 2,
+            "msPerFrame": 0.004
+          },
+          {
+            "name": "V8.GC_SCAVENGER_SCAVENGE_PARALLEL_PHASE",
+            "count": 6,
+            "totalMs": 1.63,
+            "msPerFrame": 0.003
+          },
+          {
+            "name": "V8.GC_MC_INCREMENTAL_START",
+            "count": 1,
+            "totalMs": 1.49,
+            "msPerFrame": 0.003
+          }
+        ]
+      },
+      "frameIntervals": {
+        "all": {
+          "count": 568,
+          "wallMs": 17.94,
+          "gameTickMs": 16.61,
+          "rafMs": 17.31,
+          "outsideMs": 1.32,
+          "postRafBusyMs": 0.195,
+          "idleWaitMs": 0.51
+        },
+        "normalVsync_le20ms": {
+          "count": 495,
+          "wallMs": 17.27,
+          "gameTickMs": 16.03,
+          "rafMs": 16.71,
+          "outsideMs": 1.24,
+          "postRafBusyMs": 0.163,
+          "idleWaitMs": 0.48
+        },
+        "missedVsync_gt20ms": {
+          "count": 73,
+          "wallMs": 22.46,
+          "gameTickMs": 20.56,
+          "rafMs": 21.38,
+          "outsideMs": 1.91,
+          "postRafBusyMs": 0.412,
+          "idleWaitMs": 0.72
+        },
+        "spikes_gt25ms": {
+          "count": 7,
+          "wallMs": 29.92,
+          "gameTickMs": 25.87,
+          "rafMs": 26.94,
+          "outsideMs": 4.05,
+          "postRafBusyMs": 0.676,
+          "idleWaitMs": 2.31
+        },
+        "slowestFrames": [
+          {
+            "idx": 356,
+            "wallMs": 37.64,
+            "gameTickMs": 35.23,
+            "rafMs": 36.13,
+            "outsideMs": 2.41,
+            "postRafBusyMs": 0.85,
+            "idleWaitMs": 0.66
+          },
+          {
+            "idx": 558,
+            "wallMs": 31.21,
+            "gameTickMs": 26.99,
+            "rafMs": 28.54,
+            "outsideMs": 4.22,
+            "postRafBusyMs": 0.91,
+            "idleWaitMs": 1.77
+          },
+          {
+            "idx": 357,
+            "wallMs": 31.16,
+            "gameTickMs": 26.67,
+            "rafMs": 27.11,
+            "outsideMs": 4.5,
+            "postRafBusyMs": 0.795,
+            "idleWaitMs": 3.26
+          },
+          {
+            "idx": 6,
+            "wallMs": 29.79,
+            "gameTickMs": 18.98,
+            "rafMs": 19.92,
+            "outsideMs": 10.81,
+            "postRafBusyMs": 0.444,
+            "idleWaitMs": 9.42
+          },
+          {
+            "idx": 105,
+            "wallMs": 28.29,
+            "gameTickMs": 25.82,
+            "rafMs": 27.02,
+            "outsideMs": 2.47,
+            "postRafBusyMs": 0.742,
+            "idleWaitMs": 0.53
+          },
+          {
+            "idx": 300,
+            "wallMs": 25.81,
+            "gameTickMs": 22.8,
+            "rafMs": 24.25,
+            "outsideMs": 3.01,
+            "postRafBusyMs": 0.988,
+            "idleWaitMs": 0.57
+          },
+          {
+            "idx": 545,
+            "wallMs": 25.54,
+            "gameTickMs": 24.61,
+            "rafMs": 25.6,
+            "outsideMs": 0.93,
+            "postRafBusyMs": 0,
+            "idleWaitMs": 0
+          },
+          {
+            "idx": 301,
+            "wallMs": 24.98,
+            "gameTickMs": 24.98,
+            "rafMs": 25.1,
+            "outsideMs": 0,
+            "postRafBusyMs": 0,
+            "idleWaitMs": 0
+          },
+          {
+            "idx": 441,
+            "wallMs": 24.92,
+            "gameTickMs": 23.94,
+            "rafMs": 25.22,
+            "outsideMs": 0.98,
+            "postRafBusyMs": 0,
+            "idleWaitMs": 0
+          },
+          {
+            "idx": 84,
+            "wallMs": 24.78,
+            "gameTickMs": 21.73,
+            "rafMs": 22.79,
+            "outsideMs": 3.05,
+            "postRafBusyMs": 0.859,
+            "idleWaitMs": 1.13
+          }
+        ]
+      },
+      "compositorSummary": {
+        "threadKey": "8432:30040",
+        "label": "Compositor (Renderer)",
+        "present": true,
+        "spanCount": 49914,
+        "totalBusyMs": 350.89,
+        "busyMsPerFrame": 0.617,
+        "topEvents": [
+          {
+            "name": "Graphics.Pipeline",
+            "count": 1795,
+            "totalMs": 158.24,
+            "msPerFrame": 0.278
+          },
+          {
+            "name": "ProxyImpl::ReadyToCommit",
+            "count": 569,
+            "totalMs": 133.73,
+            "msPerFrame": 0.235
+          },
+          {
+            "name": "ProxyImpl::ScheduledActionDraw",
+            "count": 570,
+            "totalMs": 128.42,
+            "msPerFrame": 0.226
+          },
+          {
+            "name": "MainFrame.Draw",
+            "count": 570,
+            "totalMs": 127.26,
+            "msPerFrame": 0.224
+          },
+          {
+            "name": "LayerTreeHostImpl::CommitComplete",
+            "count": 569,
+            "totalMs": 84.33,
+            "msPerFrame": 0.148
+          },
+          {
+            "name": "auto cc::LayerTreeHostImpl::PrepareTiles()::(lambda)::operator()()::(lambda)::operator()(uint32_t) const",
+            "count": 612,
+            "totalMs": 43.15,
+            "msPerFrame": 0.076
+          },
+          {
+            "name": "auto cc::TileManager::PrepareTiles(const GlobalStateThatImpactsTilePriority &)::(lambda)::operator()()::(lambda)::operator()(uint32_t) const",
+            "count": 612,
+            "totalMs": 41.83,
+            "msPerFrame": 0.074
+          },
+          {
+            "name": "TileManager::PrepareTiles",
+            "count": 612,
+            "totalMs": 40.67,
+            "msPerFrame": 0.071
+          },
+          {
+            "name": "LayerTreeHostImpl::PrepareToDraw",
+            "count": 570,
+            "totalMs": 36.43,
+            "msPerFrame": 0.064
+          },
+          {
+            "name": "LayerTreeImpl::UpdateDrawProperties",
+            "count": 582,
+            "totalMs": 35.8,
+            "msPerFrame": 0.063
+          },
+          {
+            "name": "TileManager::CheckForCompletedTasksAndIssueSignals",
+            "count": 722,
+            "totalMs": 35.65,
+            "msPerFrame": 0.063
+          },
+          {
+            "name": "TileManager::CheckPendingGpuWorkAndIssueSignals",
+            "count": 1271,
+            "totalMs": 32.42,
+            "msPerFrame": 0.057
+          }
+        ]
+      },
+      "vizSummary": {
+        "threadKey": "27900:29476",
+        "label": "VizCompositorThread",
+        "present": true,
+        "spanCount": 23130,
+        "totalBusyMs": 391.27,
+        "busyMsPerFrame": 0.688,
+        "topEvents": [
+          {
+            "name": "Graphics.Pipeline",
+            "count": 3505,
+            "totalMs": 365.63,
+            "msPerFrame": 0.643
+          },
+          {
+            "name": "DisplayScheduler::OnBeginFrameDeadline",
+            "count": 612,
+            "totalMs": 308.17,
+            "msPerFrame": 0.542
+          },
+          {
+            "name": "DisplayScheduler::DrawAndSwap",
+            "count": 570,
+            "totalMs": 306.82,
+            "msPerFrame": 0.539
+          },
+          {
+            "name": "Display::DrawAndSwap",
+            "count": 570,
+            "totalMs": 305.68,
+            "msPerFrame": 0.537
+          },
+          {
+            "name": "DirectRenderer::DrawFrame",
+            "count": 570,
+            "totalMs": 232.15,
+            "msPerFrame": 0.408
+          },
+          {
+            "name": "DirectRenderer::DrawRenderPass",
+            "count": 1710,
+            "totalMs": 212.44,
+            "msPerFrame": 0.373
+          },
+          {
+            "name": "ExternalBeginFrameSource::OnBeginFrame",
+            "count": 613,
+            "totalMs": 46.53,
+            "msPerFrame": 0.082
+          },
+          {
+            "name": "Surface::CommitFrame",
+            "count": 570,
+            "totalMs": 18.35,
+            "msPerFrame": 0.032
+          },
+          {
+            "name": "Surface::ActivateFrame",
+            "count": 570,
+            "totalMs": 15.86,
+            "msPerFrame": 0.028
+          },
+          {
+            "name": "DisplayScheduler::BeginFrame",
+            "count": 613,
+            "totalMs": 15.57,
+            "msPerFrame": 0.027
+          },
+          {
+            "name": "auto viz::SkiaRenderer::FlushOutputSurface()::(lambda)::operator()()::(lambda)::operator()(uint32_t) const",
+            "count": 1708,
+            "totalMs": 11.15,
+            "msPerFrame": 0.02
+          },
+          {
+            "name": "SkiaOutputSurfaceImpl::FlushGpuTasks",
+            "count": 2277,
+            "totalMs": 8.79,
+            "msPerFrame": 0.015
+          }
+        ]
+      },
+      "gpuMainSummary": {
+        "threadKey": "27900:21000",
+        "label": "CrGpuMain (GPU Process)",
+        "present": true,
+        "spanCount": 91782,
+        "totalBusyMs": 4669.68,
+        "busyMsPerFrame": 8.207,
+        "topEvents": [
+          {
+            "name": "Scheduler::RunTask",
+            "count": 12000,
+            "totalMs": 4646.48,
+            "msPerFrame": 8.166
+          },
+          {
+            "name": "GpuChannel::ExecuteDeferredRequest",
+            "count": 9721,
+            "totalMs": 3812.82,
+            "msPerFrame": 6.701
+          },
+          {
+            "name": "CommandBuffer::Flush",
+            "count": 9704,
+            "totalMs": 3753.86,
+            "msPerFrame": 6.597
+          },
+          {
+            "name": "CommandBufferStub::OnAsyncFlush",
+            "count": 9704,
+            "totalMs": 3740.4,
+            "msPerFrame": 6.574
+          },
+          {
+            "name": "CommandBufferService:PutChanged",
+            "count": 9704,
+            "totalMs": 3691.89,
+            "msPerFrame": 6.488
+          },
+          {
+            "name": "WebGPU",
+            "count": 9150,
+            "totalMs": 3569.17,
+            "msPerFrame": 6.273
+          },
+          {
+            "name": "SkiaOutputSurfaceImplOnGpu::FinishPaintRenderPass",
+            "count": 1708,
+            "totalMs": 426.86,
+            "msPerFrame": 0.75
+          },
+          {
+            "name": "SkiaOutputSurfaceImplOnGpu::SwapBuffers",
+            "count": 570,
+            "totalMs": 312.67,
+            "msPerFrame": 0.549
+          },
+          {
+            "name": "SkiaOutputSurfaceImplOnGpu::EndAccessImages",
+            "count": 570,
+            "totalMs": 172.94,
+            "msPerFrame": 0.304
+          },
+          {
+            "name": "RendererMainThread",
+            "count": 167,
+            "totalMs": 160.62,
+            "msPerFrame": 0.282
+          },
+          {
+            "name": "RasterDecoderImpl::DoEndRasterCHROMIUM",
+            "count": 345,
+            "totalMs": 108.19,
+            "msPerFrame": 0.19
+          },
+          {
+            "name": "Graphics.Pipeline",
+            "count": 1140,
+            "totalMs": 107.59,
+            "msPerFrame": 0.189
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "old-2",
+    "cwd": "C:/Users/Zero/Desktop/dw-cu184/old",
+    "hudMode": "normal",
+    "cpuBefore": 14.7,
+    "loadBefore": 88,
+    "fps": 59.6,
+    "low": 46.3,
+    "worst": 26.6,
+    "hitches": 0,
+    "draws": 269,
+    "triangles": 722427,
+    "gpuMs": 0.23,
+    "benchProf": {
+      "frames30s": 1833,
+      "frameMs10s": 16.78,
+      "tickMs30s": 13.29,
+      "outsideMsBench": 3.49,
+      "top30s": [
+        {
+          "k": "r:render",
+          "avg": 5.988,
+          "max": 11.8
+        },
+        {
+          "k": "zombies",
+          "avg": 2.532,
+          "max": 11
+        },
+        {
+          "k": "r:matrices",
+          "avg": 1.408,
+          "max": 3.6
+        },
+        {
+          "k": "m:hold",
+          "avg": 0.739,
+          "max": 2
+        },
+        {
+          "k": "m:pose",
+          "avg": 0.519,
+          "max": 1.3
+        },
+        {
+          "k": "r:cull",
+          "avg": 0.445,
+          "max": 1.2
+        },
+        {
+          "k": "hud+audio",
+          "avg": 0.217,
+          "max": 0.8
+        },
+        {
+          "k": "w:stairs+roof+birds+bugs+wildlife",
+          "avg": 0.197,
+          "max": 0.6
+        },
+        {
+          "k": "drops+hud",
+          "avg": 0.163,
+          "max": 1.1
+        },
+        {
+          "k": "w:minimap",
+          "avg": 0.12,
+          "max": 2.7
+        }
+      ]
+    },
+    "windowSplit": {
+      "first20s": {
+        "frames": 1227,
+        "wallFrameMs": 16.68,
+        "tickMs": 12.52,
+        "outsideMs": 4.16,
+        "spikes": 0
+      },
+      "last10s": {
+        "frames": 606,
+        "wallFrameMs": 16.82,
+        "tickMs": 14.83,
+        "outsideMs": 1.99,
+        "spikes": 1,
+        "newTextures": 1,
+        "newGeometries": 21,
+        "newRenderObjects": 205,
+        "newBuilds": 0,
+        "top10s": [
+          {
+            "k": "r:render",
+            "avg": 6.64
+          },
+          {
+            "k": "zombies",
+            "avg": 3.47
+          },
+          {
+            "k": "r:matrices",
+            "avg": 1.48
+          },
+          {
+            "k": "m:hold",
+            "avg": 0.7
+          },
+          {
+            "k": "r:cull",
+            "avg": 0.45
+          },
+          {
+            "k": "m:pose",
+            "avg": 0.42
+          },
+          {
+            "k": "hud+audio",
+            "avg": 0.2
+          },
+          {
+            "k": "w:stairs+roof+birds+bugs+wildlife",
+            "avg": 0.2
+          },
+          {
+            "k": "drops+hud",
+            "avg": 0.16
+          },
+          {
+            "k": "w:minimap",
+            "avg": 0.12
+          }
+        ]
+      }
+    },
+    "spikeCauses": {
+      "spikes": 1,
+      "spikesLast10s": 1,
+      "pipelines": 0,
+      "builds": 0,
+      "uploads": 0,
+      "sunShadow": 0,
+      "gc": 0,
+      "code": 1
+    },
+    "spikes": [
+      {
+        "frame": 1762,
+        "ms": 25.3,
+        "top": [
+          "r:render 11.8",
+          "zombies 6.0",
+          "r:matrices 3.6",
+          "m:hold 0.7"
+        ],
+        "heapMB": 906.5,
+        "freedMB": -1.2,
+        "newPipelines": 0,
+        "newTextures": 0,
+        "newGeometries": 0,
+        "newBuilds": 0,
+        "sunShadow": 0,
+        "newRenderObjects": 0,
+        "t0": 58145.1,
+        "t1": 58171.7
+      }
+    ],
+    "domState": {
+      "activeAnimations": [],
+      "hudDisplay": "block",
+      "reticleDisplay": "none",
+      "objectiveHudChildren": 2,
+      "markerCount": 1,
+      "pictureDbg": null
+    },
+    "traceSummary": {
+      "totalTraceEvents": 493829,
+      "windowMs": 10195.2,
+      "renderedFrames": 606,
+      "allRafCallbacksCount": 1818,
+      "gameTickRafCount": 606,
+      "traceFrameMs": 16.82,
+      "traceFps": 59.44,
+      "threads": {
+        "mainThread": "13996:35976",
+        "compositorThread": "13996:22768",
+        "vizCompositorThread": "23024:36080",
+        "gpuMainThread": "23024:2776"
+      },
+      "mainThreadSummary": {
+        "frameMs": 16.82,
+        "beginMainFrameMsPerFrame": 15.46,
+        "gameTickRafMsPerFrame": 14.88,
+        "allRafMsPerFrame": 15,
+        "otherRafMsPerFrame": 0.114,
+        "bmfPostRafMsPerFrame": 0.463,
+        "outsideGameTickMsPerFrame": 1.94,
+        "mainBusyMsPerFrame": 15.49,
+        "mainOutsideRafBusyMsPerFrame": 0.498,
+        "waitForFrameIdleMsPerFrame": 1.33,
+        "renderPipelinePostRafMsPerFrame": 0.141,
+        "renderPipelineTotalMsPerFrame": 0.296,
+        "breakdown": {
+          "FireAnimationFrame_All": {
+            "count": 1818,
+            "perFrameCount": 3,
+            "totalMs": 9087.64,
+            "msPerFrame": 14.996,
+            "inRafMsPerFrame": 14.996,
+            "outRafMsPerFrame": 0,
+            "maxMs": 25.31
+          },
+          "FireAnimationFrame_GameTick": {
+            "count": 606,
+            "perFrameCount": 1,
+            "totalMs": 9018.55,
+            "msPerFrame": 14.882,
+            "inRafMsPerFrame": 14.882,
+            "outRafMsPerFrame": 0,
+            "maxMs": 25.31
+          },
+          "FireAnimationFrame_OtherCallbacks": {
+            "count": 1212,
+            "perFrameCount": 2,
+            "totalMs": 69.1,
+            "msPerFrame": 0.114,
+            "inRafMsPerFrame": 0.114,
+            "outRafMsPerFrame": 0,
+            "maxMs": 0.4
+          },
+          "UpdateLayoutTree_Style": {
+            "count": 639,
+            "perFrameCount": 1.05,
+            "totalMs": 142.32,
+            "msPerFrame": 0.235,
+            "inRafMsPerFrame": 0.129,
+            "outRafMsPerFrame": 0.105,
+            "maxMs": 0.56
+          },
+          "Layout": {
+            "count": 25,
+            "perFrameCount": 0.04,
+            "totalMs": 4.7,
+            "msPerFrame": 0.008,
+            "inRafMsPerFrame": 0.003,
+            "outRafMsPerFrame": 0.005,
+            "maxMs": 0.37
+          },
+          "PrePaint": {
+            "count": 606,
+            "perFrameCount": 1,
+            "totalMs": 28.59,
+            "msPerFrame": 0.047,
+            "inRafMsPerFrame": 0.02,
+            "outRafMsPerFrame": 0.027,
+            "maxMs": 0.33
+          },
+          "Layerize": {
+            "count": 606,
+            "perFrameCount": 1,
+            "totalMs": 1.93,
+            "msPerFrame": 0.003,
+            "inRafMsPerFrame": 0.001,
+            "outRafMsPerFrame": 0.002,
+            "maxMs": 0.12
+          },
+          "Paint": {
+            "count": 50,
+            "perFrameCount": 0.08,
+            "totalMs": 2.03,
+            "msPerFrame": 0.003,
+            "inRafMsPerFrame": 0.001,
+            "outRafMsPerFrame": 0.002,
+            "maxMs": 0.1
+          },
+          "Composite_Commit": {
+            "count": 0,
+            "perFrameCount": 0,
+            "totalMs": 0,
+            "msPerFrame": 0,
+            "inRafMsPerFrame": 0,
+            "outRafMsPerFrame": 0,
+            "maxMs": 0
+          },
+          "Animation": {
+            "count": 0,
+            "perFrameCount": 0,
+            "totalMs": 0,
+            "msPerFrame": 0,
+            "inRafMsPerFrame": 0,
+            "outRafMsPerFrame": 0,
+            "maxMs": 0
+          },
+          "GC": {
+            "count": 546,
+            "perFrameCount": 0.9,
+            "totalMs": 18.52,
+            "msPerFrame": 0.031,
+            "inRafMsPerFrame": 0.009,
+            "outRafMsPerFrame": 0.022,
+            "maxMs": 1.15
+          },
+          "FunctionCall_OutsideRaf": {
+            "count": 357,
+            "perFrameCount": 0.59,
+            "totalMs": 2.82,
+            "msPerFrame": 0.005,
+            "inRafMsPerFrame": 0,
+            "outRafMsPerFrame": 0.005,
+            "maxMs": 0.09
+          },
+          "TimerFire": {
+            "count": 44,
+            "perFrameCount": 0.07,
+            "totalMs": 0.78,
+            "msPerFrame": 0.001,
+            "inRafMsPerFrame": 0,
+            "outRafMsPerFrame": 0.001,
+            "maxMs": 0.1
+          },
+          "RunMicrotasks_OutsideRaf": {
+            "count": 0,
+            "perFrameCount": 0,
+            "totalMs": 0,
+            "msPerFrame": 0,
+            "inRafMsPerFrame": 0,
+            "outRafMsPerFrame": 0,
+            "maxMs": 0
+          },
+          "HitTest": {
+            "count": 10,
+            "perFrameCount": 0.02,
+            "totalMs": 0.67,
+            "msPerFrame": 0.001,
+            "inRafMsPerFrame": 0,
+            "outRafMsPerFrame": 0.001,
+            "maxMs": 0.07
+          }
+        },
+        "topMainOutsideRaf": [
+          {
+            "name": "UpdateLayoutTree",
+            "count": 293,
+            "totalMs": 63.88,
+            "msPerFrame": 0.105
+          },
+          {
+            "name": "LayerTreeHost::DoUpdateLayers",
+            "count": 361,
+            "totalMs": 23.64,
+            "msPerFrame": 0.039
+          },
+          {
+            "name": "PrePaint",
+            "count": 361,
+            "totalMs": 16.64,
+            "msPerFrame": 0.027
+          },
+          {
+            "name": "MinorGC",
+            "count": 17,
+            "totalMs": 13.1,
+            "msPerFrame": 0.022
+          },
+          {
+            "name": "V8.GC_SCAVENGER",
+            "count": 17,
+            "totalMs": 11.26,
+            "msPerFrame": 0.019
+          },
+          {
+            "name": "V8.GC_SCAVENGER_SCAVENGE",
+            "count": 17,
+            "totalMs": 10.89,
+            "msPerFrame": 0.018
+          },
+          {
+            "name": "RasterImplementation::RasterCHROMIUM",
+            "count": 94,
+            "totalMs": 7.02,
+            "msPerFrame": 0.012
+          },
+          {
+            "name": "IntersectionObserverController::computeIntersections",
+            "count": 722,
+            "totalMs": 4.19,
+            "msPerFrame": 0.007
+          },
+          {
+            "name": "V8.GC_SCAVENGER_SCAVENGE_PARALLEL_PHASE",
+            "count": 17,
+            "totalMs": 3.92,
+            "msPerFrame": 0.006
+          },
+          {
+            "name": "Layout",
+            "count": 15,
+            "totalMs": 3,
+            "msPerFrame": 0.005
+          },
+          {
+            "name": "ProxyMain::BeginMainFrame::commit",
+            "count": 361,
+            "totalMs": 2.87,
+            "msPerFrame": 0.005
+          },
+          {
+            "name": "FunctionCall",
+            "count": 357,
+            "totalMs": 2.82,
+            "msPerFrame": 0.005
+          },
+          {
+            "name": "LayerTreeHost::WaitForCommitCompletion",
+            "count": 369,
+            "totalMs": 2.04,
+            "msPerFrame": 0.003
+          },
+          {
+            "name": "V8.GC_SCAVENGER_SCAVENGE_PARALLEL",
+            "count": 17,
+            "totalMs": 1.65,
+            "msPerFrame": 0.003
+          },
+          {
+            "name": "V8.GC_SCAVENGER_SCAVENGE_WEAK_GLOBAL_HANDLES_IDENTIFY",
+            "count": 17,
+            "totalMs": 1.63,
+            "msPerFrame": 0.003
+          }
+        ]
+      },
+      "frameIntervals": {
+        "all": {
+          "count": 605,
+          "wallMs": 16.82,
+          "gameTickMs": 14.88,
+          "rafMs": 15.31,
+          "outsideMs": 1.94,
+          "postRafBusyMs": 0.229,
+          "idleWaitMs": 1.32
+        },
+        "normalVsync_le20ms": {
+          "count": 581,
+          "wallMs": 16.61,
+          "gameTickMs": 14.66,
+          "rafMs": 15.08,
+          "outsideMs": 1.95,
+          "postRafBusyMs": 0.225,
+          "idleWaitMs": 1.35
+        },
+        "missedVsync_gt20ms": {
+          "count": 24,
+          "wallMs": 21.86,
+          "gameTickMs": 20.17,
+          "rafMs": 20.95,
+          "outsideMs": 1.69,
+          "postRafBusyMs": 0.329,
+          "idleWaitMs": 0.63
+        },
+        "spikes_gt25ms": {
+          "count": 2,
+          "wallMs": 25.56,
+          "gameTickMs": 21.38,
+          "rafMs": 22.36,
+          "outsideMs": 4.18,
+          "postRafBusyMs": 0.16,
+          "idleWaitMs": 3.21
+        },
+        "slowestFrames": [
+          {
+            "idx": 534,
+            "wallMs": 26.11,
+            "gameTickMs": 25.31,
+            "rafMs": 26.45,
+            "outsideMs": 0.79,
+            "postRafBusyMs": 0,
+            "idleWaitMs": 0
+          },
+          {
+            "idx": 17,
+            "wallMs": 25.01,
+            "gameTickMs": 17.44,
+            "rafMs": 18.27,
+            "outsideMs": 7.57,
+            "postRafBusyMs": 0.32,
+            "idleWaitMs": 6.42
+          },
+          {
+            "idx": 539,
+            "wallMs": 24.8,
+            "gameTickMs": 21.28,
+            "rafMs": 22.72,
+            "outsideMs": 3.51,
+            "postRafBusyMs": 0.428,
+            "idleWaitMs": 1.65
+          },
+          {
+            "idx": 536,
+            "wallMs": 24.61,
+            "gameTickMs": 22.83,
+            "rafMs": 23.61,
+            "outsideMs": 1.78,
+            "postRafBusyMs": 0.358,
+            "idleWaitMs": 0.64
+          },
+          {
+            "idx": 313,
+            "wallMs": 23.43,
+            "gameTickMs": 20.56,
+            "rafMs": 22.25,
+            "outsideMs": 2.87,
+            "postRafBusyMs": 0.817,
+            "idleWaitMs": 0.37
+          },
+          {
+            "idx": 545,
+            "wallMs": 23.1,
+            "gameTickMs": 18.6,
+            "rafMs": 19.91,
+            "outsideMs": 4.5,
+            "postRafBusyMs": 0.313,
+            "idleWaitMs": 2.88
+          },
+          {
+            "idx": 504,
+            "wallMs": 22.59,
+            "gameTickMs": 21.47,
+            "rafMs": 22.66,
+            "outsideMs": 1.11,
+            "postRafBusyMs": 0,
+            "idleWaitMs": 0
+          },
+          {
+            "idx": 233,
+            "wallMs": 21.89,
+            "gameTickMs": 19.62,
+            "rafMs": 20.84,
+            "outsideMs": 2.27,
+            "postRafBusyMs": 0.729,
+            "idleWaitMs": 0.32
+          },
+          {
+            "idx": 528,
+            "wallMs": 21.85,
+            "gameTickMs": 20.61,
+            "rafMs": 20.64,
+            "outsideMs": 1.25,
+            "postRafBusyMs": 0.803,
+            "idleWaitMs": 0.41
+          },
+          {
+            "idx": 13,
+            "wallMs": 21.53,
+            "gameTickMs": 20.32,
+            "rafMs": 20.39,
+            "outsideMs": 1.21,
+            "postRafBusyMs": 0.886,
+            "idleWaitMs": 0.25
+          }
+        ]
+      },
+      "compositorSummary": {
+        "threadKey": "13996:22768",
+        "label": "Compositor (Renderer)",
+        "present": true,
+        "spanCount": 50402,
+        "totalBusyMs": 347.12,
+        "busyMsPerFrame": 0.573,
+        "topEvents": [
+          {
+            "name": "Graphics.Pipeline",
+            "count": 1829,
+            "totalMs": 149.18,
+            "msPerFrame": 0.246
+          },
+          {
+            "name": "ProxyImpl::ReadyToCommit",
+            "count": 606,
+            "totalMs": 143.73,
+            "msPerFrame": 0.237
+          },
+          {
+            "name": "ProxyImpl::ScheduledActionDraw",
+            "count": 606,
+            "totalMs": 120.83,
+            "msPerFrame": 0.199
+          },
+          {
+            "name": "MainFrame.Draw",
+            "count": 606,
+            "totalMs": 119.79,
+            "msPerFrame": 0.198
+          },
+          {
+            "name": "LayerTreeHostImpl::CommitComplete",
+            "count": 606,
+            "totalMs": 93.38,
+            "msPerFrame": 0.154
+          },
+          {
+            "name": "auto cc::LayerTreeHostImpl::PrepareTiles()::(lambda)::operator()()::(lambda)::operator()(uint32_t) const",
+            "count": 611,
+            "totalMs": 43.37,
+            "msPerFrame": 0.072
+          },
+          {
+            "name": "auto cc::TileManager::PrepareTiles(const GlobalStateThatImpactsTilePriority &)::(lambda)::operator()()::(lambda)::operator()(uint32_t) const",
+            "count": 611,
+            "totalMs": 41.69,
+            "msPerFrame": 0.069
+          },
+          {
+            "name": "LayerTreeImpl::UpdateDrawProperties",
+            "count": 606,
+            "totalMs": 40.45,
+            "msPerFrame": 0.067
+          },
+          {
+            "name": "TileManager::PrepareTiles",
+            "count": 611,
+            "totalMs": 40.21,
+            "msPerFrame": 0.066
+          },
+          {
+            "name": "LayerTreeHostImpl::PrepareToDraw",
+            "count": 606,
+            "totalMs": 36.83,
+            "msPerFrame": 0.061
+          },
+          {
+            "name": "TileManager::CheckForCompletedTasksAndIssueSignals",
+            "count": 635,
+            "totalMs": 34.63,
+            "msPerFrame": 0.057
+          },
+          {
+            "name": "TileManager::CheckPendingGpuWorkAndIssueSignals",
+            "count": 1229,
+            "totalMs": 32.73,
+            "msPerFrame": 0.054
+          }
+        ]
+      },
+      "vizSummary": {
+        "threadKey": "23024:36080",
+        "label": "VizCompositorThread",
+        "present": true,
+        "spanCount": 24288,
+        "totalBusyMs": 433.55,
+        "busyMsPerFrame": 0.715,
+        "topEvents": [
+          {
+            "name": "Graphics.Pipeline",
+            "count": 3647,
+            "totalMs": 408.67,
+            "msPerFrame": 0.674
+          },
+          {
+            "name": "DisplayScheduler::OnBeginFrameDeadline",
+            "count": 611,
+            "totalMs": 349.76,
+            "msPerFrame": 0.577
+          },
+          {
+            "name": "DisplayScheduler::DrawAndSwap",
+            "count": 606,
+            "totalMs": 348.44,
+            "msPerFrame": 0.575
+          },
+          {
+            "name": "Display::DrawAndSwap",
+            "count": 606,
+            "totalMs": 347.15,
+            "msPerFrame": 0.573
+          },
+          {
+            "name": "DirectRenderer::DrawFrame",
+            "count": 606,
+            "totalMs": 266.07,
+            "msPerFrame": 0.439
+          },
+          {
+            "name": "DirectRenderer::DrawRenderPass",
+            "count": 1818,
+            "totalMs": 244.06,
+            "msPerFrame": 0.403
+          },
+          {
+            "name": "ExternalBeginFrameSource::OnBeginFrame",
+            "count": 612,
+            "totalMs": 42.06,
+            "msPerFrame": 0.069
+          },
+          {
+            "name": "Surface::CommitFrame",
+            "count": 606,
+            "totalMs": 19.99,
+            "msPerFrame": 0.033
+          },
+          {
+            "name": "Surface::ActivateFrame",
+            "count": 606,
+            "totalMs": 17.31,
+            "msPerFrame": 0.029
+          },
+          {
+            "name": "auto viz::SkiaRenderer::FlushOutputSurface()::(lambda)::operator()()::(lambda)::operator()(uint32_t) const",
+            "count": 1818,
+            "totalMs": 13.05,
+            "msPerFrame": 0.022
+          },
+          {
+            "name": "DisplayScheduler::BeginFrame",
+            "count": 612,
+            "totalMs": 11.51,
+            "msPerFrame": 0.019
+          },
+          {
+            "name": "SkiaOutputSurfaceImpl::FlushGpuTasks",
+            "count": 2424,
+            "totalMs": 10.14,
+            "msPerFrame": 0.017
+          }
+        ]
+      },
+      "gpuMainSummary": {
+        "threadKey": "23024:2776",
+        "label": "CrGpuMain (GPU Process)",
+        "present": true,
+        "spanCount": 94196,
+        "totalBusyMs": 4528.17,
+        "busyMsPerFrame": 7.472,
+        "topEvents": [
+          {
+            "name": "Scheduler::RunTask",
+            "count": 12474,
+            "totalMs": 4504.54,
+            "msPerFrame": 7.433
+          },
+          {
+            "name": "GpuChannel::ExecuteDeferredRequest",
+            "count": 10050,
+            "totalMs": 3657.41,
+            "msPerFrame": 6.035
+          },
+          {
+            "name": "CommandBuffer::Flush",
+            "count": 10048,
+            "totalMs": 3602.21,
+            "msPerFrame": 5.944
+          },
+          {
+            "name": "CommandBufferStub::OnAsyncFlush",
+            "count": 10048,
+            "totalMs": 3588.53,
+            "msPerFrame": 5.922
+          },
+          {
+            "name": "CommandBufferService:PutChanged",
+            "count": 10048,
+            "totalMs": 3539.7,
+            "msPerFrame": 5.841
+          },
+          {
+            "name": "WebGPU",
+            "count": 9827,
+            "totalMs": 3456.97,
+            "msPerFrame": 5.705
+          },
+          {
+            "name": "SkiaOutputSurfaceImplOnGpu::FinishPaintRenderPass",
+            "count": 1818,
+            "totalMs": 429.72,
+            "msPerFrame": 0.709
+          },
+          {
+            "name": "SkiaOutputSurfaceImplOnGpu::SwapBuffers",
+            "count": 606,
+            "totalMs": 326.33,
+            "msPerFrame": 0.539
+          },
+          {
+            "name": "SkiaOutputSurfaceImplOnGpu::EndAccessImages",
+            "count": 606,
+            "totalMs": 188.71,
+            "msPerFrame": 0.311
+          },
+          {
+            "name": "RendererMainThread",
+            "count": 168,
+            "totalMs": 148.78,
+            "msPerFrame": 0.246
+          },
+          {
+            "name": "Graphics.Pipeline",
+            "count": 1212,
+            "totalMs": 106.42,
+            "msPerFrame": 0.176
+          },
+          {
+            "name": "SkiaOutputDevice->ScheduleOverlays()",
+            "count": 606,
+            "totalMs": 87.29,
+            "msPerFrame": 0.144
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "new-2",
+    "cwd": "C:\\Users\\Zero\\Desktop\\Tiny Trek",
+    "hudMode": "normal",
+    "cpuBefore": 14.8,
+    "loadBefore": 26,
+    "fps": 54.1,
+    "low": 37.8,
+    "worst": 21.9,
+    "hitches": 0,
+    "draws": 291,
+    "triangles": 771489,
+    "gpuMs": 0.25,
+    "benchProf": {
+      "frames30s": 1779,
+      "frameMs10s": 18.48,
+      "tickMs30s": 13.99,
+      "outsideMsBench": 4.49,
+      "top30s": [
+        {
+          "k": "r:render",
+          "avg": 6.238,
+          "max": 13
+        },
+        {
+          "k": "zombies",
+          "avg": 2.71,
+          "max": 25.7
+        },
+        {
+          "k": "r:matrices",
+          "avg": 1.38,
+          "max": 4.5
+        },
+        {
+          "k": "m:hold",
+          "avg": 0.817,
+          "max": 2.1
+        },
+        {
+          "k": "r:cull",
+          "avg": 0.567,
+          "max": 1.4
+        },
+        {
+          "k": "m:pose",
+          "avg": 0.514,
+          "max": 1.3
+        },
+        {
+          "k": "hud+audio",
+          "avg": 0.221,
+          "max": 1.1
+        },
+        {
+          "k": "drops+hud",
+          "avg": 0.189,
+          "max": 0.8
+        },
+        {
+          "k": "w:stairs+roof+birds+bugs+wildlife",
+          "avg": 0.188,
+          "max": 1.1
+        },
+        {
+          "k": "w:minimap",
+          "avg": 0.135,
+          "max": 1.1
+        }
+      ]
+    },
+    "windowSplit": {
+      "first20s": {
+        "frames": 1228,
+        "wallFrameMs": 16.71,
+        "tickMs": 12.54,
+        "outsideMs": 4.17,
+        "spikes": 1
+      },
+      "last10s": {
+        "frames": 551,
+        "wallFrameMs": 18.51,
+        "tickMs": 17.24,
+        "outsideMs": 1.27,
+        "spikes": 6,
+        "newTextures": 1,
+        "newGeometries": 20,
+        "newRenderObjects": 215,
+        "newBuilds": 0,
+        "top10s": [
+          {
+            "k": "r:render",
+            "avg": 7.56
+          },
+          {
+            "k": "zombies",
+            "avg": 4.19
+          },
+          {
+            "k": "r:matrices",
+            "avg": 1.6
+          },
+          {
+            "k": "m:hold",
+            "avg": 0.78
+          },
+          {
+            "k": "r:cull",
+            "avg": 0.61
+          },
+          {
+            "k": "m:pose",
+            "avg": 0.5
+          },
+          {
+            "k": "hud+audio",
+            "avg": 0.23
+          },
+          {
+            "k": "w:stairs+roof+birds+bugs+wildlife",
+            "avg": 0.2
+          },
+          {
+            "k": "drops+hud",
+            "avg": 0.18
+          },
+          {
+            "k": "w:minimap",
+            "avg": 0.15
+          }
+        ]
+      }
+    },
+    "spikeCauses": {
+      "spikes": 7,
+      "spikesLast10s": 6,
+      "pipelines": 0,
+      "builds": 0,
+      "uploads": 0,
+      "sunShadow": 0,
+      "gc": 2,
+      "code": 5
+    },
+    "spikes": [
+      {
+        "frame": 1154,
+        "ms": 38.5,
+        "top": [
+          "zombies 25.7",
+          "r:render 8.0",
+          "r:matrices 1.9",
+          "r:cull 0.6"
+        ],
+        "heapMB": 937.8,
+        "freedMB": 57.6,
+        "newPipelines": 0,
+        "newTextures": 0,
+        "newGeometries": 0,
+        "newBuilds": 0,
+        "sunShadow": 0,
+        "newRenderObjects": 0,
+        "t0": 48289.1,
+        "t1": 48335.7
+      },
+      {
+        "frame": 1356,
+        "ms": 28.2,
+        "top": [
+          "zombies 13.3",
+          "r:render 8.7",
+          "m:hold 1.9",
+          "r:matrices 1.3"
+        ],
+        "heapMB": 899.1,
+        "freedMB": -5.8,
+        "newPipelines": 0,
+        "newTextures": 0,
+        "newGeometries": 0,
+        "newBuilds": 0,
+        "sunShadow": 0,
+        "newRenderObjects": 0,
+        "t0": 51767.7,
+        "t1": 51796.7
+      },
+      {
+        "frame": 1377,
+        "ms": 30.4,
+        "top": [
+          "r:render 11.7",
+          "zombies 11.3",
+          "r:matrices 2.2",
+          "m:hold 1.4"
+        ],
+        "heapMB": 903.7,
+        "freedMB": -2.6,
+        "newPipelines": 0,
+        "newTextures": 0,
+        "newGeometries": 0,
+        "newBuilds": 0,
+        "sunShadow": 0,
+        "newRenderObjects": 0,
+        "t0": 52180.2,
+        "t1": 52211.6
+      },
+      {
+        "frame": 1400,
+        "ms": 25.1,
+        "top": [
+          "r:render 10.7",
+          "zombies 6.7",
+          "r:matrices 2.8",
+          "m:hold 1.6"
+        ],
+        "heapMB": 897,
+        "freedMB": -4.7,
+        "newPipelines": 0,
+        "newTextures": 0,
+        "newGeometries": 0,
+        "newBuilds": 0,
+        "sunShadow": 0,
+        "newRenderObjects": 0,
+        "t0": 52626.6,
+        "t1": 52656.1
+      },
+      {
+        "frame": 1587,
+        "ms": 26.3,
+        "top": [
+          "zombies 10.5",
+          "r:render 9.0",
+          "r:matrices 2.3",
+          "m:hold 0.8"
+        ],
+        "heapMB": 923.3,
+        "freedMB": -1.2,
+        "newPipelines": 0,
+        "newTextures": 0,
+        "newGeometries": 0,
+        "newBuilds": 0,
+        "sunShadow": 0,
+        "newRenderObjects": 0,
+        "t0": 56301.7,
+        "t1": 56328.9
+      },
+      {
+        "frame": 1605,
+        "ms": 26.2,
+        "top": [
+          "r:render 10.8",
+          "zombies 7.0",
+          "r:matrices 4.3",
+          "r:cull 0.8"
+        ],
+        "heapMB": 909.7,
+        "freedMB": -1.8,
+        "newPipelines": 0,
+        "newTextures": 0,
+        "newGeometries": 0,
+        "newBuilds": 0,
+        "sunShadow": 0,
+        "newRenderObjects": 0,
+        "t0": 56685.5,
+        "t1": 56712.5
+      },
+      {
+        "frame": 1626,
+        "ms": 33.6,
+        "top": [
+          "zombies 18.0",
+          "r:render 8.2",
+          "r:matrices 2.0",
+          "m:hold 0.9"
+        ],
+        "heapMB": 880.7,
+        "freedMB": 43.6,
+        "newPipelines": 0,
+        "newTextures": 0,
+        "newGeometries": 0,
+        "newBuilds": 0,
+        "sunShadow": 0,
+        "newRenderObjects": 0,
+        "t0": 57097.8,
+        "t1": 57136.1
+      }
+    ],
+    "domState": {
+      "activeAnimations": [
+        {
+          "playState": "running",
+          "id": "",
+          "target": "#kioskPrompt"
+        },
+        {
+          "playState": "running",
+          "id": "noticeDrop",
+          "target": "#bigBanner"
+        }
+      ],
+      "hudDisplay": "block",
+      "reticleDisplay": "none",
+      "objectiveHudChildren": 2,
+      "markerCount": 1,
+      "pictureDbg": {
+        "brightness": 1,
+        "vibrancy": 1,
+        "fpFov": 60,
+        "exposure": 1,
+        "graded": false,
+        "pictureOnly": false
+      }
+    },
+    "traceSummary": {
+      "totalTraceEvents": 454788,
+      "windowMs": 10198.71,
+      "renderedFrames": 551,
+      "allRafCallbacksCount": 1653,
+      "gameTickRafCount": 551,
+      "traceFrameMs": 18.51,
+      "traceFps": 54.03,
+      "threads": {
+        "mainThread": "25472:16876",
+        "compositorThread": "25472:23360",
+        "vizCompositorThread": "13388:22132",
+        "gpuMainThread": "13388:29592"
+      },
+      "mainThreadSummary": {
+        "frameMs": 18.51,
+        "beginMainFrameMsPerFrame": 17.96,
+        "gameTickRafMsPerFrame": 17.29,
+        "allRafMsPerFrame": 17.43,
+        "otherRafMsPerFrame": 0.138,
+        "bmfPostRafMsPerFrame": 0.53,
+        "outsideGameTickMsPerFrame": 1.22,
+        "mainBusyMsPerFrame": 17.98,
+        "mainOutsideRafBusyMsPerFrame": 0.55,
+        "waitForFrameIdleMsPerFrame": 0.53,
+        "renderPipelinePostRafMsPerFrame": 0.086,
+        "renderPipelineTotalMsPerFrame": 0.342,
+        "breakdown": {
+          "FireAnimationFrame_All": {
+            "count": 1653,
+            "perFrameCount": 3,
+            "totalMs": 9603.94,
+            "msPerFrame": 17.43,
+            "inRafMsPerFrame": 17.43,
+            "outRafMsPerFrame": 0,
+            "maxMs": 33.56
+          },
+          "FireAnimationFrame_GameTick": {
+            "count": 551,
+            "perFrameCount": 1,
+            "totalMs": 9528.08,
+            "msPerFrame": 17.292,
+            "inRafMsPerFrame": 17.292,
+            "outRafMsPerFrame": 0,
+            "maxMs": 33.56
+          },
+          "FireAnimationFrame_OtherCallbacks": {
+            "count": 1102,
+            "perFrameCount": 2,
+            "totalMs": 75.86,
+            "msPerFrame": 0.138,
+            "inRafMsPerFrame": 0.138,
+            "outRafMsPerFrame": 0,
+            "maxMs": 0.87
+          },
+          "UpdateLayoutTree_Style": {
+            "count": 587,
+            "perFrameCount": 1.07,
+            "totalMs": 149.65,
+            "msPerFrame": 0.272,
+            "inRafMsPerFrame": 0.213,
+            "outRafMsPerFrame": 0.059,
+            "maxMs": 0.96
+          },
+          "Layout": {
+            "count": 25,
+            "perFrameCount": 0.05,
+            "totalMs": 4.56,
+            "msPerFrame": 0.008,
+            "inRafMsPerFrame": 0.002,
+            "outRafMsPerFrame": 0.007,
+            "maxMs": 0.22
+          },
+          "PrePaint": {
+            "count": 551,
+            "perFrameCount": 1,
+            "totalMs": 29.55,
+            "msPerFrame": 0.054,
+            "inRafMsPerFrame": 0.039,
+            "outRafMsPerFrame": 0.015,
+            "maxMs": 0.32
+          },
+          "Layerize": {
+            "count": 551,
+            "perFrameCount": 1,
+            "totalMs": 2.17,
+            "msPerFrame": 0.004,
+            "inRafMsPerFrame": 0.002,
+            "outRafMsPerFrame": 0.002,
+            "maxMs": 0.28
+          },
+          "Paint": {
+            "count": 50,
+            "perFrameCount": 0.09,
+            "totalMs": 1.98,
+            "msPerFrame": 0.004,
+            "inRafMsPerFrame": 0.001,
+            "outRafMsPerFrame": 0.003,
+            "maxMs": 0.1
+          },
+          "Composite_Commit": {
+            "count": 0,
+            "perFrameCount": 0,
+            "totalMs": 0,
+            "msPerFrame": 0,
+            "inRafMsPerFrame": 0,
+            "outRafMsPerFrame": 0,
+            "maxMs": 0
+          },
+          "Animation": {
+            "count": 0,
+            "perFrameCount": 0,
+            "totalMs": 0,
+            "msPerFrame": 0,
+            "inRafMsPerFrame": 0,
+            "outRafMsPerFrame": 0,
+            "maxMs": 0
+          },
+          "GC": {
+            "count": 642,
+            "perFrameCount": 1.17,
+            "totalMs": 37.38,
+            "msPerFrame": 0.068,
+            "inRafMsPerFrame": 0.062,
+            "outRafMsPerFrame": 0.006,
+            "maxMs": 12.88
+          },
+          "FunctionCall_OutsideRaf": {
+            "count": 224,
+            "perFrameCount": 0.41,
+            "totalMs": 1.98,
+            "msPerFrame": 0.004,
+            "inRafMsPerFrame": 0,
+            "outRafMsPerFrame": 0.004,
+            "maxMs": 0.08
+          },
+          "TimerFire": {
+            "count": 43,
+            "perFrameCount": 0.08,
+            "totalMs": 0.85,
+            "msPerFrame": 0.002,
+            "inRafMsPerFrame": 0.001,
+            "outRafMsPerFrame": 0.001,
+            "maxMs": 0.14
+          },
+          "RunMicrotasks_OutsideRaf": {
+            "count": 0,
+            "perFrameCount": 0,
+            "totalMs": 0,
+            "msPerFrame": 0,
+            "inRafMsPerFrame": 0,
+            "outRafMsPerFrame": 0,
+            "maxMs": 0
+          },
+          "HitTest": {
+            "count": 10,
+            "perFrameCount": 0.02,
+            "totalMs": 0.81,
+            "msPerFrame": 0.001,
+            "inRafMsPerFrame": 0.001,
+            "outRafMsPerFrame": 0.001,
+            "maxMs": 0.15
+          }
+        },
+        "topMainOutsideRaf": [
+          {
+            "name": "UpdateLayoutTree",
+            "count": 124,
+            "totalMs": 32.33,
+            "msPerFrame": 0.059
+          },
+          {
+            "name": "LayerTreeHost::DoUpdateLayers",
+            "count": 146,
+            "totalMs": 11.91,
+            "msPerFrame": 0.022
+          },
+          {
+            "name": "PrePaint",
+            "count": 146,
+            "totalMs": 8.17,
+            "msPerFrame": 0.015
+          },
+          {
+            "name": "Layout",
+            "count": 20,
+            "totalMs": 3.7,
+            "msPerFrame": 0.007
+          },
+          {
+            "name": "RasterImplementation::RasterCHROMIUM",
+            "count": 37,
+            "totalMs": 3.68,
+            "msPerFrame": 0.007
+          },
+          {
+            "name": "MinorGC",
+            "count": 2,
+            "totalMs": 2.2,
+            "msPerFrame": 0.004
+          },
+          {
+            "name": "FunctionCall",
+            "count": 224,
+            "totalMs": 1.98,
+            "msPerFrame": 0.004
+          },
+          {
+            "name": "V8.GC_SCAVENGER",
+            "count": 2,
+            "totalMs": 1.89,
+            "msPerFrame": 0.003
+          },
+          {
+            "name": "IntersectionObserverController::computeIntersections",
+            "count": 292,
+            "totalMs": 1.82,
+            "msPerFrame": 0.003
+          },
+          {
+            "name": "V8.GC_SCAVENGER_SCAVENGE",
+            "count": 2,
+            "totalMs": 1.82,
+            "msPerFrame": 0.003
+          },
+          {
+            "name": "Paint",
+            "count": 40,
+            "totalMs": 1.6,
+            "msPerFrame": 0.003
+          },
+          {
+            "name": "Layerize",
+            "count": 146,
+            "totalMs": 1.2,
+            "msPerFrame": 0.002
+          },
+          {
+            "name": "ProxyMain::BeginMainFrame::commit",
+            "count": 146,
+            "totalMs": 1.2,
+            "msPerFrame": 0.002
+          },
+          {
+            "name": "V8.GC_MC_INCREMENTAL_START",
+            "count": 1,
+            "totalMs": 1.09,
+            "msPerFrame": 0.002
+          },
+          {
+            "name": "LayerTreeHost::WaitForCommitCompletion",
+            "count": 156,
+            "totalMs": 1.02,
+            "msPerFrame": 0.002
+          }
+        ]
+      },
+      "frameIntervals": {
+        "all": {
+          "count": 550,
+          "wallMs": 18.5,
+          "gameTickMs": 17.29,
+          "rafMs": 18.06,
+          "outsideMs": 1.21,
+          "postRafBusyMs": 0.127,
+          "idleWaitMs": 0.41
+        },
+        "normalVsync_le20ms": {
+          "count": 424,
+          "wallMs": 17.42,
+          "gameTickMs": 16.34,
+          "rafMs": 17.07,
+          "outsideMs": 1.08,
+          "postRafBusyMs": 0.103,
+          "idleWaitMs": 0.35
+        },
+        "missedVsync_gt20ms": {
+          "count": 126,
+          "wallMs": 22.14,
+          "gameTickMs": 20.48,
+          "rafMs": 21.42,
+          "outsideMs": 1.65,
+          "postRafBusyMs": 0.21,
+          "idleWaitMs": 0.6
+        },
+        "spikes_gt25ms": {
+          "count": 12,
+          "wallMs": 28.08,
+          "gameTickMs": 25.77,
+          "rafMs": 26.56,
+          "outsideMs": 2.31,
+          "postRafBusyMs": 0.361,
+          "idleWaitMs": 1.19
+        },
+        "slowestFrames": [
+          {
+            "idx": 397,
+            "wallMs": 38.88,
+            "gameTickMs": 33.56,
+            "rafMs": 34.36,
+            "outsideMs": 5.32,
+            "postRafBusyMs": 0.352,
+            "idleWaitMs": 4.17
+          },
+          {
+            "idx": 148,
+            "wallMs": 31.33,
+            "gameTickMs": 30.57,
+            "rafMs": 31.45,
+            "outsideMs": 0.76,
+            "postRafBusyMs": 0,
+            "idleWaitMs": 0
+          },
+          {
+            "idx": 171,
+            "wallMs": 29.39,
+            "gameTickMs": 25.23,
+            "rafMs": 25.28,
+            "outsideMs": 4.16,
+            "postRafBusyMs": 0.704,
+            "idleWaitMs": 3.41
+          },
+          {
+            "idx": 127,
+            "wallMs": 28.22,
+            "gameTickMs": 28.22,
+            "rafMs": 28.33,
+            "outsideMs": 0,
+            "postRafBusyMs": 0,
+            "idleWaitMs": 0
+          },
+          {
+            "idx": 376,
+            "wallMs": 27.6,
+            "gameTickMs": 26.34,
+            "rafMs": 27.66,
+            "outsideMs": 1.27,
+            "postRafBusyMs": 0,
+            "idleWaitMs": 0
+          },
+          {
+            "idx": 358,
+            "wallMs": 26.94,
+            "gameTickMs": 26.24,
+            "rafMs": 27.07,
+            "outsideMs": 0.7,
+            "postRafBusyMs": 0,
+            "idleWaitMs": 0
+          },
+          {
+            "idx": 298,
+            "wallMs": 26.33,
+            "gameTickMs": 23.82,
+            "rafMs": 24.96,
+            "outsideMs": 2.51,
+            "postRafBusyMs": 0.342,
+            "idleWaitMs": 1.02
+          },
+          {
+            "idx": 374,
+            "wallMs": 26.24,
+            "gameTickMs": 23.97,
+            "rafMs": 24.82,
+            "outsideMs": 2.27,
+            "postRafBusyMs": 0.998,
+            "idleWaitMs": 0.42
+          },
+          {
+            "idx": 311,
+            "wallMs": 25.65,
+            "gameTickMs": 24.3,
+            "rafMs": 24.35,
+            "outsideMs": 1.35,
+            "postRafBusyMs": 0.414,
+            "idleWaitMs": 0.89
+          },
+          {
+            "idx": 242,
+            "wallMs": 25.62,
+            "gameTickMs": 20.08,
+            "rafMs": 20.94,
+            "outsideMs": 5.54,
+            "postRafBusyMs": 0.822,
+            "idleWaitMs": 3.86
+          }
+        ]
+      },
+      "compositorSummary": {
+        "threadKey": "25472:23360",
+        "label": "Compositor (Renderer)",
+        "present": true,
+        "spanCount": 47891,
+        "totalBusyMs": 326.33,
+        "busyMsPerFrame": 0.592,
+        "topEvents": [
+          {
+            "name": "Graphics.Pipeline",
+            "count": 1776,
+            "totalMs": 143.4,
+            "msPerFrame": 0.26
+          },
+          {
+            "name": "ProxyImpl::ReadyToCommit",
+            "count": 551,
+            "totalMs": 126.82,
+            "msPerFrame": 0.23
+          },
+          {
+            "name": "ProxyImpl::ScheduledActionDraw",
+            "count": 552,
+            "totalMs": 113.16,
+            "msPerFrame": 0.205
+          },
+          {
+            "name": "MainFrame.Draw",
+            "count": 552,
+            "totalMs": 112.24,
+            "msPerFrame": 0.204
+          },
+          {
+            "name": "LayerTreeHostImpl::CommitComplete",
+            "count": 551,
+            "totalMs": 78.99,
+            "msPerFrame": 0.143
+          },
+          {
+            "name": "auto cc::LayerTreeHostImpl::PrepareTiles()::(lambda)::operator()()::(lambda)::operator()(uint32_t) const",
+            "count": 611,
+            "totalMs": 40.27,
+            "msPerFrame": 0.073
+          },
+          {
+            "name": "auto cc::TileManager::PrepareTiles(const GlobalStateThatImpactsTilePriority &)::(lambda)::operator()()::(lambda)::operator()(uint32_t) const",
+            "count": 611,
+            "totalMs": 38.89,
+            "msPerFrame": 0.071
+          },
+          {
+            "name": "TileManager::PrepareTiles",
+            "count": 611,
+            "totalMs": 37.74,
+            "msPerFrame": 0.068
+          },
+          {
+            "name": "LayerTreeHostImpl::PrepareToDraw",
+            "count": 552,
+            "totalMs": 34.66,
+            "msPerFrame": 0.063
+          },
+          {
+            "name": "LayerTreeImpl::UpdateDrawProperties",
+            "count": 551,
+            "totalMs": 34.1,
+            "msPerFrame": 0.062
+          },
+          {
+            "name": "TileManager::CheckForCompletedTasksAndIssueSignals",
+            "count": 637,
+            "totalMs": 32.91,
+            "msPerFrame": 0.06
+          },
+          {
+            "name": "TileManager::CheckPendingGpuWorkAndIssueSignals",
+            "count": 1173,
+            "totalMs": 30.67,
+            "msPerFrame": 0.056
+          }
+        ]
+      },
+      "vizSummary": {
+        "threadKey": "13388:22132",
+        "label": "VizCompositorThread",
+        "present": true,
+        "spanCount": 22511,
+        "totalBusyMs": 384.23,
+        "busyMsPerFrame": 0.697,
+        "topEvents": [
+          {
+            "name": "Graphics.Pipeline",
+            "count": 3430,
+            "totalMs": 358.48,
+            "msPerFrame": 0.651
+          },
+          {
+            "name": "DisplayScheduler::OnBeginFrameDeadline",
+            "count": 612,
+            "totalMs": 302.08,
+            "msPerFrame": 0.548
+          },
+          {
+            "name": "DisplayScheduler::DrawAndSwap",
+            "count": 552,
+            "totalMs": 300.7,
+            "msPerFrame": 0.546
+          },
+          {
+            "name": "Display::DrawAndSwap",
+            "count": 552,
+            "totalMs": 299.57,
+            "msPerFrame": 0.544
+          },
+          {
+            "name": "DirectRenderer::DrawFrame",
+            "count": 552,
+            "totalMs": 228.61,
+            "msPerFrame": 0.415
+          },
+          {
+            "name": "DirectRenderer::DrawRenderPass",
+            "count": 1654,
+            "totalMs": 209.01,
+            "msPerFrame": 0.379
+          },
+          {
+            "name": "ExternalBeginFrameSource::OnBeginFrame",
+            "count": 612,
+            "totalMs": 47.17,
+            "msPerFrame": 0.086
+          },
+          {
+            "name": "Surface::CommitFrame",
+            "count": 552,
+            "totalMs": 17.95,
+            "msPerFrame": 0.033
+          },
+          {
+            "name": "DisplayScheduler::BeginFrame",
+            "count": 612,
+            "totalMs": 16.37,
+            "msPerFrame": 0.03
+          },
+          {
+            "name": "Surface::ActivateFrame",
+            "count": 552,
+            "totalMs": 15.61,
+            "msPerFrame": 0.028
+          },
+          {
+            "name": "auto viz::SkiaRenderer::FlushOutputSurface()::(lambda)::operator()()::(lambda)::operator()(uint32_t) const",
+            "count": 1653,
+            "totalMs": 10.74,
+            "msPerFrame": 0.019
+          },
+          {
+            "name": "DisplayScheduler::ScheduleBeginFrameDeadline",
+            "count": 1775,
+            "totalMs": 8.62,
+            "msPerFrame": 0.016
+          }
+        ]
+      },
+      "gpuMainSummary": {
+        "threadKey": "13388:29592",
+        "label": "CrGpuMain (GPU Process)",
+        "present": true,
+        "spanCount": 85586,
+        "totalBusyMs": 4523.92,
+        "busyMsPerFrame": 8.21,
+        "topEvents": [
+          {
+            "name": "Scheduler::RunTask",
+            "count": 11275,
+            "totalMs": 4501.85,
+            "msPerFrame": 8.17
+          },
+          {
+            "name": "GpuChannel::ExecuteDeferredRequest",
+            "count": 9071,
+            "totalMs": 3709.59,
+            "msPerFrame": 6.732
+          },
+          {
+            "name": "CommandBuffer::Flush",
+            "count": 9069,
+            "totalMs": 3656.19,
+            "msPerFrame": 6.636
+          },
+          {
+            "name": "CommandBufferStub::OnAsyncFlush",
+            "count": 9069,
+            "totalMs": 3643.61,
+            "msPerFrame": 6.613
+          },
+          {
+            "name": "CommandBufferService:PutChanged",
+            "count": 9069,
+            "totalMs": 3598.02,
+            "msPerFrame": 6.53
+          },
+          {
+            "name": "WebGPU",
+            "count": 8856,
+            "totalMs": 3490.01,
+            "msPerFrame": 6.334
+          },
+          {
+            "name": "SkiaOutputSurfaceImplOnGpu::FinishPaintRenderPass",
+            "count": 1653,
+            "totalMs": 402.47,
+            "msPerFrame": 0.73
+          },
+          {
+            "name": "SkiaOutputSurfaceImplOnGpu::SwapBuffers",
+            "count": 551,
+            "totalMs": 299.97,
+            "msPerFrame": 0.544
+          },
+          {
+            "name": "RendererMainThread",
+            "count": 160,
+            "totalMs": 168.01,
+            "msPerFrame": 0.305
+          },
+          {
+            "name": "SkiaOutputSurfaceImplOnGpu::EndAccessImages",
+            "count": 551,
+            "totalMs": 166.17,
+            "msPerFrame": 0.302
+          },
+          {
+            "name": "Graphics.Pipeline",
+            "count": 1102,
+            "totalMs": 103.92,
+            "msPerFrame": 0.189
+          },
+          {
+            "name": "RasterDecoderImpl::DoEndRasterCHROMIUM",
+            "count": 178,
+            "totalMs": 97.9,
+            "msPerFrame": 0.178
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "new-nohud",
+    "cwd": "C:\\Users\\Zero\\Desktop\\Tiny Trek",
+    "hudMode": "nohud",
+    "cpuBefore": 15.1,
+    "loadBefore": 13,
+    "fps": 58.9,
+    "low": 48.4,
+    "worst": 33.1,
+    "hitches": 0,
+    "draws": 272,
+    "triangles": 686645,
+    "gpuMs": 0.31,
+    "benchProf": {
+      "frames30s": 1824,
+      "frameMs10s": 16.98,
+      "tickMs30s": 13.35,
+      "outsideMsBench": 3.63,
+      "top30s": [
+        {
+          "k": "r:render",
+          "avg": 5.94,
+          "max": 22
+        },
+        {
+          "k": "zombies",
+          "avg": 2.377,
+          "max": 11.3
+        },
+        {
+          "k": "r:matrices",
+          "avg": 1.545,
+          "max": 2.8
+        },
+        {
+          "k": "m:hold",
+          "avg": 0.544,
+          "max": 1.6
+        },
+        {
+          "k": "r:cull",
+          "avg": 0.527,
+          "max": 2.1
+        },
+        {
+          "k": "m:pose",
+          "avg": 0.512,
+          "max": 1.2
+        },
+        {
+          "k": "hud+audio",
+          "avg": 0.22,
+          "max": 2.1
+        },
+        {
+          "k": "w:stairs+roof+birds+bugs+wildlife",
+          "avg": 0.214,
+          "max": 0.7
+        },
+        {
+          "k": "m:idle",
+          "avg": 0.207,
+          "max": 1.5
+        },
+        {
+          "k": "drops+hud",
+          "avg": 0.188,
+          "max": 2.1
+        }
+      ]
+    },
+    "windowSplit": {
+      "first20s": {
+        "frames": 1229,
+        "wallFrameMs": 16.68,
+        "tickMs": 12.74,
+        "outsideMs": 3.94,
+        "spikes": 1
+      },
+      "last10s": {
+        "frames": 595,
+        "wallFrameMs": 17.02,
+        "tickMs": 14.62,
+        "outsideMs": 2.4,
+        "spikes": 1,
+        "newTextures": 1,
+        "newGeometries": 27,
+        "newRenderObjects": 309,
+        "newBuilds": 0,
+        "top10s": [
+          {
+            "k": "r:render",
+            "avg": 6.54
+          },
+          {
+            "k": "zombies",
+            "avg": 3.09
+          },
+          {
+            "k": "r:matrices",
+            "avg": 1.56
+          },
+          {
+            "k": "m:idle",
+            "avg": 0.62
+          },
+          {
+            "k": "r:cull",
+            "avg": 0.53
+          },
+          {
+            "k": "m:pose",
+            "avg": 0.5
+          },
+          {
+            "k": "hud+audio",
+            "avg": 0.22
+          },
+          {
+            "k": "w:stairs+roof+birds+bugs+wildlife",
+            "avg": 0.21
+          },
+          {
+            "k": "drops+hud",
+            "avg": 0.18
+          },
+          {
+            "k": "w:treeFall+leaves+batches",
+            "avg": 0.13
+          }
+        ]
+      }
+    },
+    "spikeCauses": {
+      "spikes": 2,
+      "spikesLast10s": 1,
+      "pipelines": 0,
+      "builds": 0,
+      "uploads": 0,
+      "sunShadow": 0,
+      "gc": 2,
+      "code": 0
+    },
+    "spikes": [
+      {
+        "frame": 200,
+        "ms": 27.6,
+        "top": [
+          "r:render 20.1",
+          "zombies 1.9",
+          "r:matrices 1.4",
+          "m:hold 0.9"
+        ],
+        "heapMB": 885.3,
+        "freedMB": 38.2,
+        "newPipelines": 0,
+        "newTextures": 0,
+        "newGeometries": 0,
+        "newBuilds": 0,
+        "sunShadow": 0,
+        "newRenderObjects": 0,
+        "t0": 32429.2,
+        "t1": 32459.7
+      },
+      {
+        "frame": 1720,
+        "ms": 31.6,
+        "top": [
+          "r:render 22.0",
+          "zombies 3.7",
+          "r:matrices 2.0",
+          "r:cull 0.7"
+        ],
+        "heapMB": 903.7,
+        "freedMB": 21.1,
+        "newPipelines": 0,
+        "newTextures": 0,
+        "newGeometries": 0,
+        "newBuilds": 0,
+        "sunShadow": 0,
+        "newRenderObjects": 0,
+        "t0": 57882.3,
+        "t1": 57915.4
+      }
+    ],
+    "domState": {
+      "activeAnimations": [],
+      "hudDisplay": "none",
+      "reticleDisplay": "none",
+      "objectiveHudChildren": 2,
+      "markerCount": 1,
+      "pictureDbg": {
+        "brightness": 1,
+        "vibrancy": 1,
+        "fpFov": 60,
+        "exposure": 1,
+        "graded": false,
+        "pictureOnly": false
+      }
+    },
+    "traceSummary": {
+      "totalTraceEvents": 464859,
+      "windowMs": 10129.69,
+      "renderedFrames": 595,
+      "allRafCallbacksCount": 1785,
+      "gameTickRafCount": 595,
+      "traceFrameMs": 17.02,
+      "traceFps": 58.74,
+      "threads": {
+        "mainThread": "14768:24856",
+        "compositorThread": "14768:24456",
+        "vizCompositorThread": "6180:26064",
+        "gpuMainThread": "6180:30512"
+      },
+      "mainThreadSummary": {
+        "frameMs": 17.02,
+        "beginMainFrameMsPerFrame": 15.14,
+        "gameTickRafMsPerFrame": 14.68,
+        "allRafMsPerFrame": 14.79,
+        "otherRafMsPerFrame": 0.11,
+        "bmfPostRafMsPerFrame": 0.35,
+        "outsideGameTickMsPerFrame": 2.34,
+        "mainBusyMsPerFrame": 15.2,
+        "mainOutsideRafBusyMsPerFrame": 0.406,
+        "waitForFrameIdleMsPerFrame": 1.83,
+        "renderPipelinePostRafMsPerFrame": 0.125,
+        "renderPipelineTotalMsPerFrame": 0.245,
+        "breakdown": {
+          "FireAnimationFrame_All": {
+            "count": 1785,
+            "perFrameCount": 3,
+            "totalMs": 8801.63,
+            "msPerFrame": 14.793,
+            "inRafMsPerFrame": 14.793,
+            "outRafMsPerFrame": 0,
+            "maxMs": 31.72
+          },
+          "FireAnimationFrame_GameTick": {
+            "count": 595,
+            "perFrameCount": 1,
+            "totalMs": 8736.04,
+            "msPerFrame": 14.682,
+            "inRafMsPerFrame": 14.682,
+            "outRafMsPerFrame": 0,
+            "maxMs": 31.72
+          },
+          "FireAnimationFrame_OtherCallbacks": {
+            "count": 1190,
+            "perFrameCount": 2,
+            "totalMs": 65.58,
+            "msPerFrame": 0.11,
+            "inRafMsPerFrame": 0.11,
+            "outRafMsPerFrame": 0,
+            "maxMs": 0.4
+          },
+          "UpdateLayoutTree_Style": {
+            "count": 604,
+            "perFrameCount": 1.02,
+            "totalMs": 121.49,
+            "msPerFrame": 0.204,
+            "inRafMsPerFrame": 0.104,
+            "outRafMsPerFrame": 0.1,
+            "maxMs": 0.36
+          },
+          "Layout": {
+            "count": 0,
+            "perFrameCount": 0,
+            "totalMs": 0,
+            "msPerFrame": 0,
+            "inRafMsPerFrame": 0,
+            "outRafMsPerFrame": 0,
+            "maxMs": 0
+          },
+          "PrePaint": {
+            "count": 595,
+            "perFrameCount": 1,
+            "totalMs": 23.23,
+            "msPerFrame": 0.039,
+            "inRafMsPerFrame": 0.015,
+            "outRafMsPerFrame": 0.024,
+            "maxMs": 0.09
+          },
+          "Layerize": {
+            "count": 595,
+            "perFrameCount": 1,
+            "totalMs": 1.04,
+            "msPerFrame": 0.002,
+            "inRafMsPerFrame": 0.001,
+            "outRafMsPerFrame": 0.001,
+            "maxMs": 0.01
+          },
+          "Paint": {
+            "count": 0,
+            "perFrameCount": 0,
+            "totalMs": 0,
+            "msPerFrame": 0,
+            "inRafMsPerFrame": 0,
+            "outRafMsPerFrame": 0,
+            "maxMs": 0
+          },
+          "Composite_Commit": {
+            "count": 0,
+            "perFrameCount": 0,
+            "totalMs": 0,
+            "msPerFrame": 0,
+            "inRafMsPerFrame": 0,
+            "outRafMsPerFrame": 0,
+            "maxMs": 0
+          },
+          "Animation": {
+            "count": 0,
+            "perFrameCount": 0,
+            "totalMs": 0,
+            "msPerFrame": 0,
+            "inRafMsPerFrame": 0,
+            "outRafMsPerFrame": 0,
+            "maxMs": 0
+          },
+          "GC": {
+            "count": 698,
+            "perFrameCount": 1.17,
+            "totalMs": 34.18,
+            "msPerFrame": 0.057,
+            "inRafMsPerFrame": 0.035,
+            "outRafMsPerFrame": 0.023,
+            "maxMs": 10.81
+          },
+          "FunctionCall_OutsideRaf": {
+            "count": 200,
+            "perFrameCount": 0.34,
+            "totalMs": 1.63,
+            "msPerFrame": 0.003,
+            "inRafMsPerFrame": 0,
+            "outRafMsPerFrame": 0.003,
+            "maxMs": 0.07
+          },
+          "TimerFire": {
+            "count": 43,
+            "perFrameCount": 0.07,
+            "totalMs": 0.73,
+            "msPerFrame": 0.001,
+            "inRafMsPerFrame": 0,
+            "outRafMsPerFrame": 0.001,
+            "maxMs": 0.08
+          },
+          "RunMicrotasks_OutsideRaf": {
+            "count": 0,
+            "perFrameCount": 0,
+            "totalMs": 0,
+            "msPerFrame": 0,
+            "inRafMsPerFrame": 0,
+            "outRafMsPerFrame": 0,
+            "maxMs": 0
+          },
+          "HitTest": {
+            "count": 10,
+            "perFrameCount": 0.02,
+            "totalMs": 0.32,
+            "msPerFrame": 0.001,
+            "inRafMsPerFrame": 0,
+            "outRafMsPerFrame": 0,
+            "maxMs": 0.04
+          }
+        },
+        "topMainOutsideRaf": [
+          {
+            "name": "UpdateLayoutTree",
+            "count": 294,
+            "totalMs": 59.6,
+            "msPerFrame": 0.1
+          },
+          {
+            "name": "PrePaint",
+            "count": 380,
+            "totalMs": 14.51,
+            "msPerFrame": 0.024
+          },
+          {
+            "name": "MinorGC",
+            "count": 15,
+            "totalMs": 12.31,
+            "msPerFrame": 0.021
+          },
+          {
+            "name": "V8.GC_SCAVENGER",
+            "count": 15,
+            "totalMs": 10.59,
+            "msPerFrame": 0.018
+          },
+          {
+            "name": "V8.GC_SCAVENGER_SCAVENGE",
+            "count": 15,
+            "totalMs": 10.25,
+            "msPerFrame": 0.017
+          },
+          {
+            "name": "RasterImplementation::RasterCHROMIUM",
+            "count": 88,
+            "totalMs": 6.7,
+            "msPerFrame": 0.011
+          },
+          {
+            "name": "LayerTreeHost::DoUpdateLayers",
+            "count": 380,
+            "totalMs": 5.86,
+            "msPerFrame": 0.01
+          },
+          {
+            "name": "IntersectionObserverController::computeIntersections",
+            "count": 760,
+            "totalMs": 4.19,
+            "msPerFrame": 0.007
+          },
+          {
+            "name": "V8.GC_SCAVENGER_SCAVENGE_PARALLEL_PHASE",
+            "count": 15,
+            "totalMs": 3.37,
+            "msPerFrame": 0.006
+          },
+          {
+            "name": "ProxyMain::BeginMainFrame::commit",
+            "count": 380,
+            "totalMs": 2.85,
+            "msPerFrame": 0.005
+          },
+          {
+            "name": "LayerTreeHost::WaitForCommitCompletion",
+            "count": 389,
+            "totalMs": 2.17,
+            "msPerFrame": 0.004
+          },
+          {
+            "name": "V8.GC_SCAVENGER_SCAVENGE_WEAK_GLOBAL_HANDLES_IDENTIFY",
+            "count": 15,
+            "totalMs": 1.83,
+            "msPerFrame": 0.003
+          },
+          {
+            "name": "FunctionCall",
+            "count": 200,
+            "totalMs": 1.63,
+            "msPerFrame": 0.003
+          },
+          {
+            "name": "CommandBufferProxyImpl::OrderingBarrier",
+            "count": 468,
+            "totalMs": 1.45,
+            "msPerFrame": 0.002
+          },
+          {
+            "name": "V8.GC_SCAVENGER_TRACED_HANDLES_COMPUTE_WEAKNESS_PARALLEL",
+            "count": 15,
+            "totalMs": 1.34,
+            "msPerFrame": 0.002
+          }
+        ]
+      },
+      "frameIntervals": {
+        "all": {
+          "count": 594,
+          "wallMs": 17.02,
+          "gameTickMs": 14.68,
+          "rafMs": 15.05,
+          "outsideMs": 2.34,
+          "postRafBusyMs": 0.196,
+          "idleWaitMs": 1.81
+        },
+        "normalVsync_le20ms": {
+          "count": 570,
+          "wallMs": 16.76,
+          "gameTickMs": 14.42,
+          "rafMs": 14.78,
+          "outsideMs": 2.33,
+          "postRafBusyMs": 0.198,
+          "idleWaitMs": 1.82
+        },
+        "missedVsync_gt20ms": {
+          "count": 24,
+          "wallMs": 23.26,
+          "gameTickMs": 20.81,
+          "rafMs": 21.49,
+          "outsideMs": 2.45,
+          "postRafBusyMs": 0.141,
+          "idleWaitMs": 1.69
+        },
+        "spikes_gt25ms": {
+          "count": 4,
+          "wallMs": 29.16,
+          "gameTickMs": 24.03,
+          "rafMs": 24.64,
+          "outsideMs": 5.13,
+          "postRafBusyMs": 0.341,
+          "idleWaitMs": 4.18
+        },
+        "slowestFrames": [
+          {
+            "idx": 490,
+            "wallMs": 33.91,
+            "gameTickMs": 31.72,
+            "rafMs": 32.74,
+            "outsideMs": 2.19,
+            "postRafBusyMs": 0.468,
+            "idleWaitMs": 0.7
+          },
+          {
+            "idx": 502,
+            "wallMs": 29.06,
+            "gameTickMs": 23.84,
+            "rafMs": 23.99,
+            "outsideMs": 5.22,
+            "postRafBusyMs": 0.329,
+            "idleWaitMs": 4.74
+          },
+          {
+            "idx": 501,
+            "wallMs": 28.15,
+            "gameTickMs": 21.57,
+            "rafMs": 22.34,
+            "outsideMs": 6.58,
+            "postRafBusyMs": 0.234,
+            "idleWaitMs": 5.58
+          },
+          {
+            "idx": 496,
+            "wallMs": 25.54,
+            "gameTickMs": 19,
+            "rafMs": 19.51,
+            "outsideMs": 6.53,
+            "postRafBusyMs": 0.332,
+            "idleWaitMs": 5.7
+          },
+          {
+            "idx": 499,
+            "wallMs": 24.24,
+            "gameTickMs": 16.13,
+            "rafMs": 17.08,
+            "outsideMs": 8.11,
+            "postRafBusyMs": 0.377,
+            "idleWaitMs": 6.78
+          },
+          {
+            "idx": 446,
+            "wallMs": 24.2,
+            "gameTickMs": 23.54,
+            "rafMs": 24.29,
+            "outsideMs": 0.66,
+            "postRafBusyMs": 0,
+            "idleWaitMs": 0
+          },
+          {
+            "idx": 504,
+            "wallMs": 23.93,
+            "gameTickMs": 22.87,
+            "rafMs": 24,
+            "outsideMs": 1.05,
+            "postRafBusyMs": 0,
+            "idleWaitMs": 0
+          },
+          {
+            "idx": 553,
+            "wallMs": 23.44,
+            "gameTickMs": 21.32,
+            "rafMs": 22.26,
+            "outsideMs": 2.12,
+            "postRafBusyMs": 0.316,
+            "idleWaitMs": 0.86
+          },
+          {
+            "idx": 149,
+            "wallMs": 23.14,
+            "gameTickMs": 23.14,
+            "rafMs": 23.25,
+            "outsideMs": 0,
+            "postRafBusyMs": 0,
+            "idleWaitMs": 0
+          },
+          {
+            "idx": 497,
+            "wallMs": 22.73,
+            "gameTickMs": 16.67,
+            "rafMs": 16.78,
+            "outsideMs": 6.06,
+            "postRafBusyMs": 0.324,
+            "idleWaitMs": 5.62
+          }
+        ]
+      },
+      "compositorSummary": {
+        "threadKey": "14768:24456",
+        "label": "Compositor (Renderer)",
+        "present": true,
+        "spanCount": 47623,
+        "totalBusyMs": 277.45,
+        "busyMsPerFrame": 0.466,
+        "topEvents": [
+          {
+            "name": "Graphics.Pipeline",
+            "count": 1812,
+            "totalMs": 127.25,
+            "msPerFrame": 0.214
+          },
+          {
+            "name": "ProxyImpl::ReadyToCommit",
+            "count": 595,
+            "totalMs": 102.62,
+            "msPerFrame": 0.172
+          },
+          {
+            "name": "ProxyImpl::ScheduledActionDraw",
+            "count": 596,
+            "totalMs": 96.24,
+            "msPerFrame": 0.162
+          },
+          {
+            "name": "MainFrame.Draw",
+            "count": 596,
+            "totalMs": 95.23,
+            "msPerFrame": 0.16
+          },
+          {
+            "name": "LayerTreeHostImpl::CommitComplete",
+            "count": 595,
+            "totalMs": 61.38,
+            "msPerFrame": 0.103
+          },
+          {
+            "name": "auto cc::LayerTreeHostImpl::PrepareTiles()::(lambda)::operator()()::(lambda)::operator()(uint32_t) const",
+            "count": 607,
+            "totalMs": 36.29,
+            "msPerFrame": 0.061
+          },
+          {
+            "name": "auto cc::TileManager::PrepareTiles(const GlobalStateThatImpactsTilePriority &)::(lambda)::operator()()::(lambda)::operator()(uint32_t) const",
+            "count": 607,
+            "totalMs": 35.02,
+            "msPerFrame": 0.059
+          },
+          {
+            "name": "TileManager::PrepareTiles",
+            "count": 607,
+            "totalMs": 33.92,
+            "msPerFrame": 0.057
+          },
+          {
+            "name": "ExternalBeginFrameSource::OnBeginFrame",
+            "count": 608,
+            "totalMs": 29.56,
+            "msPerFrame": 0.05
+          },
+          {
+            "name": "TileManager::CheckForCompletedTasksAndIssueSignals",
+            "count": 608,
+            "totalMs": 28.84,
+            "msPerFrame": 0.048
+          },
+          {
+            "name": "TileManager::CheckPendingGpuWorkAndIssueSignals",
+            "count": 1201,
+            "totalMs": 27.11,
+            "msPerFrame": 0.046
+          },
+          {
+            "name": "Scheduler::BeginFrame",
+            "count": 608,
+            "totalMs": 25.07,
+            "msPerFrame": 0.042
+          }
+        ]
+      },
+      "vizSummary": {
+        "threadKey": "6180:26064",
+        "label": "VizCompositorThread",
+        "present": true,
+        "spanCount": 19229,
+        "totalBusyMs": 218.36,
+        "busyMsPerFrame": 0.367,
+        "topEvents": [
+          {
+            "name": "Graphics.Pipeline",
+            "count": 3596,
+            "totalMs": 193.67,
+            "msPerFrame": 0.325
+          },
+          {
+            "name": "DisplayScheduler::OnBeginFrameDeadline",
+            "count": 608,
+            "totalMs": 141.42,
+            "msPerFrame": 0.238
+          },
+          {
+            "name": "DisplayScheduler::DrawAndSwap",
+            "count": 595,
+            "totalMs": 140.07,
+            "msPerFrame": 0.235
+          },
+          {
+            "name": "Display::DrawAndSwap",
+            "count": 595,
+            "totalMs": 138.81,
+            "msPerFrame": 0.233
+          },
+          {
+            "name": "DirectRenderer::DrawFrame",
+            "count": 595,
+            "totalMs": 66.57,
+            "msPerFrame": 0.112
+          },
+          {
+            "name": "DirectRenderer::DrawRenderPass",
+            "count": 595,
+            "totalMs": 52.78,
+            "msPerFrame": 0.089
+          },
+          {
+            "name": "ExternalBeginFrameSource::OnBeginFrame",
+            "count": 608,
+            "totalMs": 41.4,
+            "msPerFrame": 0.07
+          },
+          {
+            "name": "Surface::CommitFrame",
+            "count": 596,
+            "totalMs": 15.3,
+            "msPerFrame": 0.026
+          },
+          {
+            "name": "Surface::ActivateFrame",
+            "count": 596,
+            "totalMs": 12.46,
+            "msPerFrame": 0.021
+          },
+          {
+            "name": "DisplayScheduler::BeginFrame",
+            "count": 608,
+            "totalMs": 11.49,
+            "msPerFrame": 0.019
+          },
+          {
+            "name": "DisplayScheduler::ScheduleBeginFrameDeadline",
+            "count": 1811,
+            "totalMs": 8.31,
+            "msPerFrame": 0.014
+          },
+          {
+            "name": "SkiaRenderer::SwapBuffers",
+            "count": 595,
+            "totalMs": 7.62,
+            "msPerFrame": 0.013
+          }
+        ]
+      },
+      "gpuMainSummary": {
+        "threadKey": "6180:30512",
+        "label": "CrGpuMain (GPU Process)",
+        "present": true,
+        "spanCount": 87714,
+        "totalBusyMs": 4165.88,
+        "busyMsPerFrame": 7.001,
+        "topEvents": [
+          {
+            "name": "Scheduler::RunTask",
+            "count": 11048,
+            "totalMs": 4144.14,
+            "msPerFrame": 6.965
+          },
+          {
+            "name": "GpuChannel::ExecuteDeferredRequest",
+            "count": 9858,
+            "totalMs": 3616.1,
+            "msPerFrame": 6.077
+          },
+          {
+            "name": "CommandBuffer::Flush",
+            "count": 9856,
+            "totalMs": 3558.7,
+            "msPerFrame": 5.981
+          },
+          {
+            "name": "CommandBufferStub::OnAsyncFlush",
+            "count": 9856,
+            "totalMs": 3543.73,
+            "msPerFrame": 5.956
+          },
+          {
+            "name": "CommandBufferService:PutChanged",
+            "count": 9856,
+            "totalMs": 3489.89,
+            "msPerFrame": 5.865
+          },
+          {
+            "name": "WebGPU",
+            "count": 9679,
+            "totalMs": 3427.38,
+            "msPerFrame": 5.76
+          },
+          {
+            "name": "SkiaOutputSurfaceImplOnGpu::SwapBuffers",
+            "count": 595,
+            "totalMs": 289.15,
+            "msPerFrame": 0.486
+          },
+          {
+            "name": "SkiaOutputSurfaceImplOnGpu::EndAccessImages",
+            "count": 595,
+            "totalMs": 162.99,
+            "msPerFrame": 0.274
+          },
+          {
+            "name": "SkiaOutputSurfaceImplOnGpu::FinishPaintRenderPass",
+            "count": 595,
+            "totalMs": 149.88,
+            "msPerFrame": 0.252
+          },
+          {
+            "name": "RendererMainThread",
+            "count": 177,
+            "totalMs": 147.86,
+            "msPerFrame": 0.249
+          },
+          {
+            "name": "Graphics.Pipeline",
+            "count": 1190,
+            "totalMs": 111.41,
+            "msPerFrame": 0.187
+          },
+          {
+            "name": "SkiaOutputDevice->ScheduleOverlays()",
+            "count": 595,
+            "totalMs": 90.51,
+            "msPerFrame": 0.152
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "new-nooverlay",
+    "cwd": "C:\\Users\\Zero\\Desktop\\Tiny Trek",
+    "hudMode": "nooverlay",
+    "cpuBefore": 12.1,
+    "loadBefore": 15,
+    "fps": 58.4,
+    "low": 47.3,
+    "worst": 24.5,
+    "hitches": 0,
+    "draws": 284,
+    "triangles": 730922,
+    "gpuMs": 0.31,
+    "benchProf": {
+      "frames30s": 1819,
+      "frameMs10s": 17.12,
+      "tickMs30s": 13.9,
+      "outsideMsBench": 3.22,
+      "top30s": [
+        {
+          "k": "r:render",
+          "avg": 6.308,
+          "max": 17.9
+        },
+        {
+          "k": "zombies",
+          "avg": 2.475,
+          "max": 8.7
+        },
+        {
+          "k": "r:matrices",
+          "avg": 1.506,
+          "max": 2.8
+        },
+        {
+          "k": "m:hold",
+          "avg": 0.589,
+          "max": 1.4
+        },
+        {
+          "k": "r:cull",
+          "avg": 0.551,
+          "max": 1.3
+        },
+        {
+          "k": "m:pose",
+          "avg": 0.519,
+          "max": 1.1
+        },
+        {
+          "k": "m:idle",
+          "avg": 0.252,
+          "max": 1.4
+        },
+        {
+          "k": "hud+audio",
+          "avg": 0.219,
+          "max": 2.6
+        },
+        {
+          "k": "w:stairs+roof+birds+bugs+wildlife",
+          "avg": 0.191,
+          "max": 0.5
+        },
+        {
+          "k": "drops+hud",
+          "avg": 0.19,
+          "max": 1.4
+        }
+      ]
+    },
+    "windowSplit": {
+      "first20s": {
+        "frames": 1232,
+        "wallFrameMs": 16.68,
+        "tickMs": 13.1,
+        "outsideMs": 3.58,
+        "spikes": 0
+      },
+      "last10s": {
+        "frames": 587,
+        "wallFrameMs": 17.36,
+        "tickMs": 15.59,
+        "outsideMs": 1.77,
+        "spikes": 2,
+        "newTextures": 0,
+        "newGeometries": 18,
+        "newRenderObjects": 238,
+        "newBuilds": 0,
+        "top10s": [
+          {
+            "k": "r:render",
+            "avg": 7.03
+          },
+          {
+            "k": "zombies",
+            "avg": 3.33
+          },
+          {
+            "k": "r:matrices",
+            "avg": 1.55
+          },
+          {
+            "k": "m:idle",
+            "avg": 0.76
+          },
+          {
+            "k": "r:cull",
+            "avg": 0.59
+          },
+          {
+            "k": "m:pose",
+            "avg": 0.54
+          },
+          {
+            "k": "hud+audio",
+            "avg": 0.21
+          },
+          {
+            "k": "drops+hud",
+            "avg": 0.19
+          },
+          {
+            "k": "w:stairs+roof+birds+bugs+wildlife",
+            "avg": 0.17
+          },
+          {
+            "k": "w:minimap",
+            "avg": 0.13
+          }
+        ]
+      }
+    },
+    "spikeCauses": {
+      "spikes": 2,
+      "spikesLast10s": 2,
+      "pipelines": 0,
+      "builds": 0,
+      "uploads": 1,
+      "sunShadow": 0,
+      "gc": 0,
+      "code": 1
+    },
+    "spikes": [
+      {
+        "frame": 1665,
+        "ms": 28,
+        "top": [
+          "r:render 17.9",
+          "zombies 4.4",
+          "r:matrices 1.5",
+          "m:idle 0.8"
+        ],
+        "heapMB": 947.8,
+        "freedMB": -3.9,
+        "newPipelines": 0,
+        "newTextures": 0,
+        "newGeometries": 11,
+        "newBuilds": 0,
+        "sunShadow": 1,
+        "newRenderObjects": 27,
+        "t0": 56988.2,
+        "t1": 57016.9
+      },
+      {
+        "frame": 1800,
+        "ms": 25.3,
+        "top": [
+          "r:render 10.7",
+          "zombies 7.9",
+          "r:matrices 2.3",
+          "m:idle 1.0"
+        ],
+        "heapMB": 946,
+        "freedMB": -2,
+        "newPipelines": 0,
+        "newTextures": 0,
+        "newGeometries": 0,
+        "newBuilds": 0,
+        "sunShadow": 0,
+        "newRenderObjects": 0,
+        "t0": 59504,
+        "t1": 59530.1
+      }
+    ],
+    "domState": {
+      "activeAnimations": [],
+      "hudDisplay": "none",
+      "reticleDisplay": "none",
+      "objectiveHudChildren": 2,
+      "markerCount": 1,
+      "pictureDbg": {
+        "brightness": 1,
+        "vibrancy": 1,
+        "fpFov": 60,
+        "exposure": 1,
+        "graded": false,
+        "pictureOnly": false
+      }
+    },
+    "traceSummary": {
+      "totalTraceEvents": 458550,
+      "windowMs": 10189.06,
+      "renderedFrames": 587,
+      "allRafCallbacksCount": 1761,
+      "gameTickRafCount": 587,
+      "traceFrameMs": 17.36,
+      "traceFps": 57.61,
+      "threads": {
+        "mainThread": "4188:29852",
+        "compositorThread": "4188:12332",
+        "vizCompositorThread": "4220:21628",
+        "gpuMainThread": "4220:34420"
+      },
+      "mainThreadSummary": {
+        "frameMs": 17.36,
+        "beginMainFrameMsPerFrame": 16.13,
+        "gameTickRafMsPerFrame": 15.65,
+        "allRafMsPerFrame": 15.76,
+        "otherRafMsPerFrame": 0.112,
+        "bmfPostRafMsPerFrame": 0.363,
+        "outsideGameTickMsPerFrame": 1.71,
+        "mainBusyMsPerFrame": 16.18,
+        "mainOutsideRafBusyMsPerFrame": 0.417,
+        "waitForFrameIdleMsPerFrame": 1.18,
+        "renderPipelinePostRafMsPerFrame": 0.104,
+        "renderPipelineTotalMsPerFrame": 0.254,
+        "breakdown": {
+          "FireAnimationFrame_All": {
+            "count": 1761,
+            "perFrameCount": 3,
+            "totalMs": 9253,
+            "msPerFrame": 15.763,
+            "inRafMsPerFrame": 15.763,
+            "outRafMsPerFrame": 0,
+            "maxMs": 28.12
+          },
+          "FireAnimationFrame_GameTick": {
+            "count": 587,
+            "perFrameCount": 1,
+            "totalMs": 9187.13,
+            "msPerFrame": 15.651,
+            "inRafMsPerFrame": 15.651,
+            "outRafMsPerFrame": 0,
+            "maxMs": 28.12
+          },
+          "FireAnimationFrame_OtherCallbacks": {
+            "count": 1174,
+            "perFrameCount": 2,
+            "totalMs": 65.87,
+            "msPerFrame": 0.112,
+            "inRafMsPerFrame": 0.112,
+            "outRafMsPerFrame": 0,
+            "maxMs": 0.38
+          },
+          "UpdateLayoutTree_Style": {
+            "count": 592,
+            "perFrameCount": 1.01,
+            "totalMs": 125.62,
+            "msPerFrame": 0.214,
+            "inRafMsPerFrame": 0.13,
+            "outRafMsPerFrame": 0.084,
+            "maxMs": 0.33
+          },
+          "Layout": {
+            "count": 0,
+            "perFrameCount": 0,
+            "totalMs": 0,
+            "msPerFrame": 0,
+            "inRafMsPerFrame": 0,
+            "outRafMsPerFrame": 0,
+            "maxMs": 0
+          },
+          "PrePaint": {
+            "count": 587,
+            "perFrameCount": 1,
+            "totalMs": 22.18,
+            "msPerFrame": 0.038,
+            "inRafMsPerFrame": 0.019,
+            "outRafMsPerFrame": 0.019,
+            "maxMs": 0.06
+          },
+          "Layerize": {
+            "count": 587,
+            "perFrameCount": 1,
+            "totalMs": 1.09,
+            "msPerFrame": 0.002,
+            "inRafMsPerFrame": 0.001,
+            "outRafMsPerFrame": 0.001,
+            "maxMs": 0.01
+          },
+          "Paint": {
+            "count": 0,
+            "perFrameCount": 0,
+            "totalMs": 0,
+            "msPerFrame": 0,
+            "inRafMsPerFrame": 0,
+            "outRafMsPerFrame": 0,
+            "maxMs": 0
+          },
+          "Composite_Commit": {
+            "count": 0,
+            "perFrameCount": 0,
+            "totalMs": 0,
+            "msPerFrame": 0,
+            "inRafMsPerFrame": 0,
+            "outRafMsPerFrame": 0,
+            "maxMs": 0
+          },
+          "Animation": {
+            "count": 0,
+            "perFrameCount": 0,
+            "totalMs": 0,
+            "msPerFrame": 0,
+            "inRafMsPerFrame": 0,
+            "outRafMsPerFrame": 0,
+            "maxMs": 0
+          },
+          "GC": {
+            "count": 486,
+            "perFrameCount": 0.83,
+            "totalMs": 18.75,
+            "msPerFrame": 0.032,
+            "inRafMsPerFrame": 0.014,
+            "outRafMsPerFrame": 0.018,
+            "maxMs": 1.22
+          },
+          "FunctionCall_OutsideRaf": {
+            "count": 278,
+            "perFrameCount": 0.47,
+            "totalMs": 2.05,
+            "msPerFrame": 0.003,
+            "inRafMsPerFrame": 0,
+            "outRafMsPerFrame": 0.003,
+            "maxMs": 0.07
+          },
+          "TimerFire": {
+            "count": 44,
+            "perFrameCount": 0.07,
+            "totalMs": 0.76,
+            "msPerFrame": 0.001,
+            "inRafMsPerFrame": 0.001,
+            "outRafMsPerFrame": 0.001,
+            "maxMs": 0.1
+          },
+          "RunMicrotasks_OutsideRaf": {
+            "count": 0,
+            "perFrameCount": 0,
+            "totalMs": 0,
+            "msPerFrame": 0,
+            "inRafMsPerFrame": 0,
+            "outRafMsPerFrame": 0,
+            "maxMs": 0
+          },
+          "HitTest": {
+            "count": 10,
+            "perFrameCount": 0.02,
+            "totalMs": 0.15,
+            "msPerFrame": 0,
+            "inRafMsPerFrame": 0,
+            "outRafMsPerFrame": 0,
+            "maxMs": 0.03
+          }
+        },
+        "topMainOutsideRaf": [
+          {
+            "name": "UpdateLayoutTree",
+            "count": 238,
+            "totalMs": 49.11,
+            "msPerFrame": 0.084
+          },
+          {
+            "name": "PrePaint",
+            "count": 312,
+            "totalMs": 10.88,
+            "msPerFrame": 0.019
+          },
+          {
+            "name": "MinorGC",
+            "count": 13,
+            "totalMs": 10.68,
+            "msPerFrame": 0.018
+          },
+          {
+            "name": "V8.GC_SCAVENGER",
+            "count": 13,
+            "totalMs": 9.38,
+            "msPerFrame": 0.016
+          },
+          {
+            "name": "V8.GC_SCAVENGER_SCAVENGE",
+            "count": 13,
+            "totalMs": 9.08,
+            "msPerFrame": 0.015
+          },
+          {
+            "name": "RasterImplementation::RasterCHROMIUM",
+            "count": 76,
+            "totalMs": 5.71,
+            "msPerFrame": 0.01
+          },
+          {
+            "name": "LayerTreeHost::DoUpdateLayers",
+            "count": 312,
+            "totalMs": 4.49,
+            "msPerFrame": 0.008
+          },
+          {
+            "name": "IntersectionObserverController::computeIntersections",
+            "count": 624,
+            "totalMs": 3.31,
+            "msPerFrame": 0.006
+          },
+          {
+            "name": "V8.GC_SCAVENGER_SCAVENGE_PARALLEL_PHASE",
+            "count": 13,
+            "totalMs": 3.07,
+            "msPerFrame": 0.005
+          },
+          {
+            "name": "ProxyMain::BeginMainFrame::commit",
+            "count": 312,
+            "totalMs": 2.3,
+            "msPerFrame": 0.004
+          },
+          {
+            "name": "FunctionCall",
+            "count": 278,
+            "totalMs": 2.05,
+            "msPerFrame": 0.003
+          },
+          {
+            "name": "LayerTreeHost::WaitForCommitCompletion",
+            "count": 326,
+            "totalMs": 1.85,
+            "msPerFrame": 0.003
+          },
+          {
+            "name": "V8.GC_SCAVENGER_SCAVENGE_WEAK_GLOBAL_HANDLES_IDENTIFY",
+            "count": 13,
+            "totalMs": 1.42,
+            "msPerFrame": 0.002
+          },
+          {
+            "name": "V8.GC_SCAVENGER_SCAVENGE_COLLECT_OLD_TO_NEW_PAGES",
+            "count": 13,
+            "totalMs": 1.13,
+            "msPerFrame": 0.002
+          },
+          {
+            "name": "CommandBufferProxyImpl::OrderingBarrier",
+            "count": 388,
+            "totalMs": 0.99,
+            "msPerFrame": 0.002
+          }
+        ]
+      },
+      "frameIntervals": {
+        "all": {
+          "count": 586,
+          "wallMs": 17.35,
+          "gameTickMs": 15.65,
+          "rafMs": 16.11,
+          "outsideMs": 1.7,
+          "postRafBusyMs": 0.161,
+          "idleWaitMs": 1.13
+        },
+        "normalVsync_le20ms": {
+          "count": 538,
+          "wallMs": 16.95,
+          "gameTickMs": 15.19,
+          "rafMs": 15.62,
+          "outsideMs": 1.77,
+          "postRafBusyMs": 0.173,
+          "idleWaitMs": 1.21
+        },
+        "missedVsync_gt20ms": {
+          "count": 48,
+          "wallMs": 21.78,
+          "gameTickMs": 20.81,
+          "rafMs": 21.7,
+          "outsideMs": 0.97,
+          "postRafBusyMs": 0.021,
+          "idleWaitMs": 0.2
+        },
+        "spikes_gt25ms": {
+          "count": 3,
+          "wallMs": 26.85,
+          "gameTickMs": 23.42,
+          "rafMs": 24.35,
+          "outsideMs": 3.43,
+          "postRafBusyMs": 0.101,
+          "idleWaitMs": 2.45
+        },
+        "slowestFrames": [
+          {
+            "idx": 432,
+            "wallMs": 28.78,
+            "gameTickMs": 28.12,
+            "rafMs": 28.89,
+            "outsideMs": 0.66,
+            "postRafBusyMs": 0,
+            "idleWaitMs": 0
+          },
+          {
+            "idx": 567,
+            "wallMs": 26.4,
+            "gameTickMs": 25.38,
+            "rafMs": 26.45,
+            "outsideMs": 1.02,
+            "postRafBusyMs": 0,
+            "idleWaitMs": 0
+          },
+          {
+            "idx": 265,
+            "wallMs": 25.37,
+            "gameTickMs": 16.76,
+            "rafMs": 17.71,
+            "outsideMs": 8.61,
+            "postRafBusyMs": 0.303,
+            "idleWaitMs": 7.35
+          },
+          {
+            "idx": 519,
+            "wallMs": 24.42,
+            "gameTickMs": 23.2,
+            "rafMs": 24.48,
+            "outsideMs": 1.22,
+            "postRafBusyMs": 0,
+            "idleWaitMs": 0
+          },
+          {
+            "idx": 566,
+            "wallMs": 23.79,
+            "gameTickMs": 23.2,
+            "rafMs": 23.93,
+            "outsideMs": 0.58,
+            "postRafBusyMs": 0,
+            "idleWaitMs": 0
+          },
+          {
+            "idx": 495,
+            "wallMs": 23.35,
+            "gameTickMs": 22.44,
+            "rafMs": 23.41,
+            "outsideMs": 0.91,
+            "postRafBusyMs": 0,
+            "idleWaitMs": 0
+          },
+          {
+            "idx": 518,
+            "wallMs": 23.28,
+            "gameTickMs": 23.28,
+            "rafMs": 23.75,
+            "outsideMs": 0,
+            "postRafBusyMs": 0,
+            "idleWaitMs": 0
+          },
+          {
+            "idx": 559,
+            "wallMs": 22.86,
+            "gameTickMs": 22.24,
+            "rafMs": 22.92,
+            "outsideMs": 0.62,
+            "postRafBusyMs": 0,
+            "idleWaitMs": 0
+          },
+          {
+            "idx": 517,
+            "wallMs": 22.83,
+            "gameTickMs": 21.07,
+            "rafMs": 21.71,
+            "outsideMs": 1.76,
+            "postRafBusyMs": 0.391,
+            "idleWaitMs": 0.73
+          },
+          {
+            "idx": 457,
+            "wallMs": 22.71,
+            "gameTickMs": 21.56,
+            "rafMs": 22.76,
+            "outsideMs": 1.15,
+            "postRafBusyMs": 0,
+            "idleWaitMs": 0
+          }
+        ]
+      },
+      "compositorSummary": {
+        "threadKey": "4188:12332",
+        "label": "Compositor (Renderer)",
+        "present": true,
+        "spanCount": 47998,
+        "totalBusyMs": 326.34,
+        "busyMsPerFrame": 0.556,
+        "topEvents": [
+          {
+            "name": "Graphics.Pipeline",
+            "count": 1812,
+            "totalMs": 187.3,
+            "msPerFrame": 0.319
+          },
+          {
+            "name": "ProxyImpl::ScheduledActionDraw",
+            "count": 588,
+            "totalMs": 156.83,
+            "msPerFrame": 0.267
+          },
+          {
+            "name": "MainFrame.Draw",
+            "count": 588,
+            "totalMs": 155.81,
+            "msPerFrame": 0.265
+          },
+          {
+            "name": "ProxyImpl::ReadyToCommit",
+            "count": 587,
+            "totalMs": 90.9,
+            "msPerFrame": 0.155
+          },
+          {
+            "name": "GpuChannelHost::VerifyFlush",
+            "count": 588,
+            "totalMs": 60.17,
+            "msPerFrame": 0.103
+          },
+          {
+            "name": "ExternalBeginFrameSource::OnBeginFrame",
+            "count": 612,
+            "totalMs": 28.12,
+            "msPerFrame": 0.048
+          },
+          {
+            "name": "ProxyImpl::ScheduledActionPrepareTiles",
+            "count": 587,
+            "totalMs": 26.19,
+            "msPerFrame": 0.045
+          },
+          {
+            "name": "LayerTreeHostImpl::CommitComplete",
+            "count": 587,
+            "totalMs": 26.16,
+            "msPerFrame": 0.045
+          },
+          {
+            "name": "auto cc::LayerTreeHostImpl::PrepareTiles()::(lambda)::operator()()::(lambda)::operator()(uint32_t) const",
+            "count": 1143,
+            "totalMs": 25.83,
+            "msPerFrame": 0.044
+          },
+          {
+            "name": "auto cc::TileManager::PrepareTiles(const GlobalStateThatImpactsTilePriority &)::(lambda)::operator()()::(lambda)::operator()(uint32_t) const",
+            "count": 587,
+            "totalMs": 24.13,
+            "msPerFrame": 0.041
+          },
+          {
+            "name": "ProxyImpl::Commit",
+            "count": 587,
+            "totalMs": 23.99,
+            "msPerFrame": 0.041
+          },
+          {
+            "name": "Scheduler::BeginFrame",
+            "count": 612,
+            "totalMs": 23.43,
+            "msPerFrame": 0.04
+          }
+        ]
+      },
+      "vizSummary": {
+        "threadKey": "4220:21628",
+        "label": "VizCompositorThread",
+        "present": true,
+        "spanCount": 19103,
+        "totalBusyMs": 213.59,
+        "busyMsPerFrame": 0.364,
+        "topEvents": [
+          {
+            "name": "Graphics.Pipeline",
+            "count": 3571,
+            "totalMs": 187.17,
+            "msPerFrame": 0.319
+          },
+          {
+            "name": "DisplayScheduler::OnBeginFrameDeadline",
+            "count": 611,
+            "totalMs": 134.46,
+            "msPerFrame": 0.229
+          },
+          {
+            "name": "DisplayScheduler::DrawAndSwap",
+            "count": 587,
+            "totalMs": 133.02,
+            "msPerFrame": 0.227
+          },
+          {
+            "name": "Display::DrawAndSwap",
+            "count": 587,
+            "totalMs": 131.86,
+            "msPerFrame": 0.225
+          },
+          {
+            "name": "DirectRenderer::DrawFrame",
+            "count": 587,
+            "totalMs": 61.91,
+            "msPerFrame": 0.105
+          },
+          {
+            "name": "DirectRenderer::DrawRenderPass",
+            "count": 587,
+            "totalMs": 48.21,
+            "msPerFrame": 0.082
+          },
+          {
+            "name": "ExternalBeginFrameSource::OnBeginFrame",
+            "count": 612,
+            "totalMs": 43.96,
+            "msPerFrame": 0.075
+          },
+          {
+            "name": "Surface::CommitFrame",
+            "count": 587,
+            "totalMs": 14.26,
+            "msPerFrame": 0.024
+          },
+          {
+            "name": "DisplayScheduler::BeginFrame",
+            "count": 612,
+            "totalMs": 12.63,
+            "msPerFrame": 0.022
+          },
+          {
+            "name": "Surface::ActivateFrame",
+            "count": 587,
+            "totalMs": 11.57,
+            "msPerFrame": 0.02
+          },
+          {
+            "name": "DisplayScheduler::ScheduleBeginFrameDeadline",
+            "count": 1810,
+            "totalMs": 8.53,
+            "msPerFrame": 0.015
+          },
+          {
+            "name": "SkiaRenderer::SwapBuffers",
+            "count": 587,
+            "totalMs": 6.82,
+            "msPerFrame": 0.012
+          }
+        ]
+      },
+      "gpuMainSummary": {
+        "threadKey": "4220:34420",
+        "label": "CrGpuMain (GPU Process)",
+        "present": true,
+        "spanCount": 86026,
+        "totalBusyMs": 4156.46,
+        "busyMsPerFrame": 7.081,
+        "topEvents": [
+          {
+            "name": "Scheduler::RunTask",
+            "count": 10837,
+            "totalMs": 4133.54,
+            "msPerFrame": 7.042
+          },
+          {
+            "name": "GpuChannel::ExecuteDeferredRequest",
+            "count": 9663,
+            "totalMs": 3650.4,
+            "msPerFrame": 6.219
+          },
+          {
+            "name": "CommandBuffer::Flush",
+            "count": 9663,
+            "totalMs": 3596.11,
+            "msPerFrame": 6.126
+          },
+          {
+            "name": "CommandBufferStub::OnAsyncFlush",
+            "count": 9663,
+            "totalMs": 3582.81,
+            "msPerFrame": 6.104
+          },
+          {
+            "name": "CommandBufferService:PutChanged",
+            "count": 9663,
+            "totalMs": 3534.49,
+            "msPerFrame": 6.021
+          },
+          {
+            "name": "WebGPU",
+            "count": 9500,
+            "totalMs": 3456.4,
+            "msPerFrame": 5.888
+          },
+          {
+            "name": "SkiaOutputSurfaceImplOnGpu::SwapBuffers",
+            "count": 587,
+            "totalMs": 267.64,
+            "msPerFrame": 0.456
+          },
+          {
+            "name": "RendererMainThread",
+            "count": 163,
+            "totalMs": 153.93,
+            "msPerFrame": 0.262
+          },
+          {
+            "name": "SkiaOutputSurfaceImplOnGpu::EndAccessImages",
+            "count": 587,
+            "totalMs": 148.03,
+            "msPerFrame": 0.252
+          },
+          {
+            "name": "SkiaOutputSurfaceImplOnGpu::FinishPaintRenderPass",
+            "count": 587,
+            "totalMs": 135.07,
+            "msPerFrame": 0.23
+          },
+          {
+            "name": "Graphics.Pipeline",
+            "count": 1174,
+            "totalMs": 105.02,
+            "msPerFrame": 0.179
+          },
+          {
+            "name": "SkiaOutputDevice->ScheduleOverlays()",
+            "count": 587,
+            "totalMs": 86.45,
+            "msPerFrame": 0.147
+          }
+        ]
+      }
+    }
+  }
+]

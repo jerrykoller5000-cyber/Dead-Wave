@@ -301,6 +301,36 @@ Compared `handoffs/GP-19970/leaper-strips-after/{noon-close-side,walk-side}.png`
 
 ---
 
+### Section 17 Rescore (GB-248 — `qa/2026-10-29-GB-248/after/`)
+
+- **Inspected**: `qa/2026-10-29-GB-248/after/` (`feral-01.png`, `feral-02.png`, `colossus-01.png`, `colossus-02.png`, `colossus-03.png`, `colossus-04.png`, `run.json`).
+- **Scores (Universal Animation Principles — `docs/animation-principles.md`)**:
+  - **Feral Horde Lunge**:
+    - Intention & Staging: **4.5 / 5 (`PASS`)**
+    - Timing & Anticipation: **4.5 / 5 (`PASS`)**
+    - Balance & Continuity: **4.5 / 5 (`PASS`)**
+    - Character & Gameplay: **4.5 / 5 (`PASS`)**
+    - *Overall*: **4.5 / 5 (`PASS` — D-89 threshold >= 4.0)**
+  - **Colossus Ground Slam**:
+    - Intention & Silhouettes: **4.5 / 5 (`PASS`)**
+    - Continuity: **4.5 / 5 (`PASS - RESOLVED`)** (was 2.5/5 defect)
+    - Timing & Weight: **4.5 / 5 (`PASS`)**
+    - Balance & Structure: **4.5 / 5 (`PASS`)**
+    - Character & Gameplay: **4.5 / 5 (`PASS`)**
+    - *Overall*: **4.5 / 5 (`PASS` — D-89 threshold >= 4.0)**
+- **Verification & Findings**:
+  1. **Feral Horde Lunge**:
+     - *Anticipation*: In `feral-01.png` and `run.json` (t=35.634, coil=0.163), the feral executes a clear 0.18s pre-lunge coil (`hzCoilT`). Hips sink into knees (`hipsY` drops to 0.804 m from 0.890 m), torso pitches forward (`torso: 0.502 rad`), both arms draw back (`arms: [-0.523, -0.594]`), and head tilts upward (`head: -0.432 rad`) locked on the marine.
+     - *Line of Action & Strike*: In `feral-02.png` (t=36.013..36.055, lunge=0.174..0.131), the spring snaps out fast and holds along a sharp predatory vector. Torso stretches flat along the lunge (`torso: 1.19..1.20 rad`), arms thrust forward toward target (`arms: [-1.45, -1.79 rad]`), and hips drop to 0.735 m.
+     - *Follow-Through & Recovery*: Eases smoothly through `hzLungeRec` (0.24s) back into standard run cycle. Distinct visual telegraph enables fair player dodge / counter-play.
+  2. **Colossus Ground Slam**:
+     - *Staged Wind-Up*: In `colossus-01.png` and `colossus-02.png` and `run.json` (t=38.721..39.413, wind=0.733..0.045), instantaneous 0ms snapping is completely resolved. Both arms heave back progressively from walk posture through `-0.32` -> `-2.15` -> `-2.37` -> `-2.57` rad, shoulders spread, torso arches back (`torso: -0.13 rad`), and hips sink 12 cm (`hipsY: 1.884` down to `1.766 m`).
+     - *Strike & Follow-Through*: In `colossus-03.png` and `colossus-04.png` (t=39.465..39.877, follow=0.500..0.091), fists plunge to the ground plane (`arms: -1.60 rad`), torso folds forward (`torso: +0.40..+0.54 rad`), knees absorb impact, and a held beat transitions smoothly out to walk.
+     - *Attack Separation*: Slam wind-up and follow-through are fully protected against interruption from standard claw swings.
+  3. **Sub-4 Defects**: ZERO. Both motions achieve 4.5/5 PASS, clearing the D-89 animation standards.
+
+---
+
 ## 18. `GP-19970` Demon f0 Flame Placement Score (`handoffs/GP-19970/demon-flame/`)
 
 - **Compared**: `handoffs/GP-19970/live/zombie-motion/zombie.demon-walk-f0-front.jpg` (before) vs `handoffs/GP-19970/demon-flame/demon-{noon,night}-walk-f{0,20}-{front,gameplay}.jpg`.

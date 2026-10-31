@@ -551,9 +551,25 @@ export class PointsMaterial extends MaterialBase {}
 
 export class Box3 {
   constructor(min = new Vector3(Infinity, Infinity, Infinity), max = new Vector3(-Infinity, -Infinity, -Infinity)) { this.min = min; this.max = max; }
+  // CU-181: the same box as before, vertex by vertex through matrixWorld (the check numbers depend on it: a coarse box of each
+  // geometry's own box moved the zombies' hit heights and t76 and t111 with them), but in scalars: no Vector3 a vertex, the
+  // matrix read once. The new Vector3(...).applyMatrix4 a vertex walk cost the culling pass 100 ms a frame on the test page.
   setFromObject(o) {
     this.makeEmpty(); o.updateWorldMatrix(true, true);
-    o.traverse(c => { if (c.geometry && c.geometry.attributes && c.geometry.attributes.position) { const p = c.geometry.attributes.position; for (let i = 0; i < p.count; i++) this.expandByPoint(new Vector3(p.getX(i), p.getY(i), p.getZ(i)).applyMatrix4(c.matrixWorld)); } });
+    let x0 = Infinity, y0 = Infinity, z0 = Infinity, x1 = -Infinity, y1 = -Infinity, z1 = -Infinity;
+    o.traverse(c => {
+      const p = c.geometry && c.geometry.attributes && c.geometry.attributes.position;
+      if (!p) return;
+      const e = c.matrixWorld.elements, a = p.array, s = p.itemSize, n = p.count;
+      const e0 = e[0], e1 = e[1], e2 = e[2], e3 = e[3], e4 = e[4], e5 = e[5], e6 = e[6], e7 = e[7], e8 = e[8], e9 = e[9], e10 = e[10], e11 = e[11], e12 = e[12], e13 = e[13], e14 = e[14], e15 = e[15];
+      for (let i = 0, k = 0; i < n; i++, k += s) {
+        const x = a[k], y = a[k + 1], z = a[k + 2];
+        const w = 1 / ((e3 * x + e7 * y + e11 * z + e15) || 1);
+        const wx = (e0 * x + e4 * y + e8 * z + e12) * w, wy = (e1 * x + e5 * y + e9 * z + e13) * w, wz = (e2 * x + e6 * y + e10 * z + e14) * w;
+        if (wx < x0) x0 = wx; if (wx > x1) x1 = wx; if (wy < y0) y0 = wy; if (wy > y1) y1 = wy; if (wz < z0) z0 = wz; if (wz > z1) z1 = wz;
+      }
+    });
+    if (x0 <= x1) { this.min.set(x0, y0, z0); this.max.set(x1, y1, z1); }
     return this;
   }
   makeEmpty() { this.min.set(Infinity, Infinity, Infinity); this.max.set(-Infinity, -Infinity, -Infinity); return this; }

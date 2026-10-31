@@ -1,0 +1,9 @@
+Game-test request 5272054f-f0f5-4fd2-a1de-e56b611ec654 queued at position 2. Waiting...
+GRANT grokbot GB-249: starting one game-test command
+check-players: 309 player.position reads, all in the allowed places
+           INFO feral head centre p10 0.729, median 0.799 of hitH (line 0.7)
+           INFO leaper head centre p10 0.619, median 0.636 of hitH (line 0.55)
+           INFO spider head centre p10 0.585, median 0.637 of hitH (line 0.6)
+ok    t111    11 pass   0 fail  43.3s
+
+1 checks: 11 pass, 0 fail

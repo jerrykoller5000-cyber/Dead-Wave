@@ -1,0 +1,38 @@
+{
+  "cpuPct": 14.7,
+  "loadPct": 88,
+  "top": [
+    {
+      "Name": "git#1",
+      "PercentProcessorTime": 1949
+    },
+    {
+      "Name": "dwm",
+      "PercentProcessorTime": 28
+    },
+    {
+      "Name": "Antigravity#3",
+      "PercentProcessorTime": 22
+    },
+    {
+      "Name": "System",
+      "PercentProcessorTime": 16
+    },
+    {
+      "Name": "msedge#9",
+      "PercentProcessorTime": 11
+    },
+    {
+      "Name": "WmiPrvSE#2",
+      "PercentProcessorTime": 11
+    },
+    {
+      "Name": "msedge#2",
+      "PercentProcessorTime": 11
+    },
+    {
+      "Name": "Antigravity#1",
+      "PercentProcessorTime": 11
+    }
+  ]
+}

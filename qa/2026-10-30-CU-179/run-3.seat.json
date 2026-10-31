@@ -1,0 +1,52 @@
+{
+  "cpuPct": 0,
+  "top": [
+    {
+      "Name": "git#1",
+      "PercentProcessorTime": 99
+    },
+    {
+      "Name": "dwm",
+      "PercentProcessorTime": 27
+    },
+    {
+      "Name": "Cursor#2",
+      "PercentProcessorTime": 11
+    },
+    {
+      "Name": "msedge#2",
+      "PercentProcessorTime": 11
+    },
+    {
+      "Name": "MsMpEng",
+      "PercentProcessorTime": 5
+    },
+    {
+      "Name": "Cursor#9",
+      "PercentProcessorTime": 5
+    },
+    {
+      "Name": "System",
+      "PercentProcessorTime": 5
+    },
+    {
+      "Name": "msedge#9",
+      "PercentProcessorTime": 5
+    }
+  ],
+  "counts": {
+    "git": 4,
+    "msedge": 15,
+    "MsMpEng": 1,
+    "ChatGPT": 16,
+    "node": 7,
+    "Cursor": 17,
+    "vmmem": 1,
+    "wsl": 0,
+    "vmmemWSL": 0,
+    "Antigravity": 0,
+    "powershell": 1,
+    "chrome": 0,
+    "wslhost": 0
+  }
+}

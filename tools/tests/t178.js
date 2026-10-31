@@ -12,6 +12,9 @@
     const w0 = Date.now();
     while (T.marine.getObjectByName('insertion-harness') && Date.now() - w0 < 90000) await wait(100);
     T.clearZombies(); T.skipGrace && T.skipGrace();
+    // CL-279 (CU-182: on the faster page the heart's fight ran long enough in its waits to kill him, and the music went
+    // to the game over's 'end' instead of the calm): he can't die here; the checks are the music's, unchanged.
+    T.runDevCommand('godmode');
     if (A.setMuted) A.setMuted(false);
     if (!ms().playing) A.startMusic();
     T.setPitSilenced(true);
@@ -34,9 +37,17 @@
     H.hushBattery(0);
     await until(() => ms().section === 'break', 15000);
     ok(f.read().flat && ms().section === 'break', 'the Hush flat, nothing hurts it: the break (' + ms().section + ')');
+    // CL-279 (CU-182 run 2: 'dayfight', 5 dead up): back up the tunnel puts him at the rune door, in the Deep, and the warren's
+    // fight starts again. The test reached the door by teleport, so the Deep's set piece (once a run, when he steps into the
+    // Deep) had never fired, and it fired now: five dead on him, and the director rightly went to a day fight. A player walks
+    // through the Deep to reach the door, so its set piece is spent by then: the test spends it the same way, and any dead
+    // still up go the moment he's back. The check is the tunnel's hand-back from the heart's song, unchanged.
+    T.belowDbg.setDone.add('iron');
     H.back();
+    for (const z of T.zombies.slice()) if (z.alive) T.killZombie(z, false);
     await until(() => ms().stage === 'calm', 8000);
-    ok(ms().stage === 'calm', 'back up the tunnel: the calm again (' + ms().stage + ')');
+    const liveUp = T.zombies.filter((q) => q.alive).length;
+    ok(ms().stage === 'calm', 'back up the tunnel: the calm again (' + ms().stage + (ms().stage === 'calm' ? '' : ', ' + liveUp + ' dead up') + ')');
     H.hushBattery();
     H.enter();
     await until(() => ms().stage === 'heart', 8000);

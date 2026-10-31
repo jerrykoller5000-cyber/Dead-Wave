@@ -46,16 +46,17 @@
     const zs0 = below().find((z) => z.belowSleeper === s0.id);
     const nbrs = F.sleepers.filter((s) => s !== s0 && Math.hypot(s.x - s0.x, s.z - s0.z) <= 4).map((s) => s.id);
     stand(s0.x + ux * 2.0, s0.z + uz * 2.0);
-    const t0 = Date.now(); let wokeAt = null;
-    while (Date.now() - t0 < 3000) { await wait(50); stand(s0.x + ux * 2.0, s0.z + uz * 2.0); if (wokeAt === null && !zs0.sleeping) wokeAt = Date.now() - t0; }
+    // GB-250 (CU-178: the test page ran at 4-14 fps): waits on the game's own events go on game time (T.getSimTime(), as GB-131 and t72), the same windows; a wall-clock cap only so a stuck game still ends the check.
+    const t0 = T.getSimTime(), t0w = Date.now(); let wokeAt = null;
+    while (T.getSimTime() - t0 < 3 && Date.now() - t0w < 120000) { await wait(50); stand(s0.x + ux * 2.0, s0.z + uz * 2.0); if (wokeAt === null && !zs0.sleeping) wokeAt = Math.round((T.getSimTime() - t0) * 1000); }
     ok(wokeAt !== null && wokeAt < 800, 'walking within 2.5 m of one wakes it (after ' + wokeAt + ' ms)');
     ok(Math.abs(zs0.mesh.rotation.x) < 0.05, 'and it gets up');
     const nAwake = nbrs.filter((id) => { const z = below().find((q) => q.belowSleeper === id); return z && !z.sleeping; }).length;
     ok(nbrs.length === 0 || nAwake === nbrs.length, 'its neighbours within 4 m wake too (' + nAwake + ' of ' + nbrs.length + ')');
     // (2) awake, it comes to him and swings; never into the rock.
     let swung = false, inRock = 0, n = 0;
-    const t1 = Date.now();
-    while (Date.now() - t1 < 4000 && zs0.alive) {
+    const t1 = T.getSimTime(), t1w = Date.now();   // GB-250: game time
+    while (T.getSimTime() - t1 < 4 && Date.now() - t1w < 120000 && zs0.alive) {
       await wait(50); stand(s0.x + ux * 2.0, s0.z + uz * 2.0);
       if (zs0.attackCd > 0.9) swung = true;
       n++; if (!open(zs0.mesh.position.x, zs0.mesh.position.z)) inRock++;
@@ -85,8 +86,8 @@
     ok(inR.every((s) => s.state !== 'asleep') && outR.every((s) => s.state === 'asleep'), 'his pistol shot wakes the ' + inR.length + ' within ' + heardR + ' m and not the ' + outR.length + ' beyond');
     // (4) never more than 24 awake: wake every one, watch for 2 s.
     F.noise(p.x, p.z, 999);
-    let most = 0; const t2 = Date.now();
-    while (Date.now() - t2 < 2000) { await wait(50); stand(built.entry.x, built.entry.z); most = Math.max(most, D.awake()); }
+    let most = 0; const t2 = T.getSimTime(), t2w = Date.now();   // GB-250: game time
+    while (T.getSimTime() - t2 < 2 && Date.now() - t2w < 120000) { await wait(50); stand(built.entry.x, built.entry.z); most = Math.max(most, D.awake()); }
     ok(most <= 24, 'never more than 24 awake (' + most + ' at most, ' + F.sleepers.length + ' sleepers)');
     for (const z of below()) T.killZombie(z, false);
     // (5) a nest sends one of its own while he is near; rounds and a blast take its 400 HP; blown, it stops.
