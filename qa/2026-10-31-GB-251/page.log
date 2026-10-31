@@ -1,0 +1,22 @@
+GRANT grokbot GB-251: starting one game-test command
+check-players: 309 player.position reads, all in the allowed places
+ok    t23      8 pass   0 fail  108.5s
+ok    t48     22 pass   0 fail  37.7s
+ok    t75     16 pass   0 fail  51.5s
+ok    t77     17 pass   0 fail  53.7s
+ok    t78     18 pass   0 fail  40.6s
+ok    t95      9 pass   0 fail  60.5s
+           INFO ragdoll off: 160 spawned, 160 alive at the end, 121 ticks, frame 98.13 ms avg / 129.60 ms worst (headless)
+           INFO ragdoll on: 160 spawned, 160 alive at the end, 71 ticks, frame 240.54 ms avg / 708.20 ms worst (headless)
+ok    t98     20 pass   0 fail  86.0s
+ok    t112    13 pass   0 fail  46.5s
+ok    t143    17 pass   0 fail  75.9s
+ok    t168    39 pass   0 fail  64.6s
+ok    t202    12 pass   0 fail  39.1s
+ok    t205    13 pass   0 fail  59.9s
+ok    t209    13 pass   0 fail  49.7s
+ok    t215     4 pass   0 fail  40.4s
+ok    t247    12 pass   0 fail  49.5s
+ok    t249    13 pass   0 fail  38.8s
+
+16 checks: 246 pass, 0 fail

@@ -46,14 +46,14 @@ export function createMarineIdle({ THREE, marine, scene, solveArm, smoke, ground
     }
     return g;
   }
-  const cig = cigarette(); root.add(cig);
-  const pack = new THREE.Group(); root.add(pack);
+  const cig = cigarette(); cig.visible = false; root.add(cig);
+  const pack = new THREE.Group(); pack.visible = false; root.add(pack);
   const packMat = new THREE.MeshStandardMaterial({ color: 0x9c3930, roughness: .9 });
   const box = new THREE.Mesh(new THREE.BoxGeometry(.085, .115, .042), paper); pack.add(box);
   const band = new THREE.Mesh(new THREE.BoxGeometry(.087, .055, .044), packMat); band.position.y = -.017; pack.add(band);
   const lid = new THREE.Mesh(new THREE.BoxGeometry(.085, .024, .042), paper); lid.position.set(0, .067, -.018); lid.rotation.x = -.9; pack.add(lid);
-  const lighter = new THREE.Mesh(new THREE.BoxGeometry(.026, .05, .02), filter); root.add(lighter);
-  const spark = new THREE.Mesh(new THREE.SphereGeometry(.016, 5, 4), ember); spark.scale.y = 1.8; root.add(spark);
+  const lighter = new THREE.Mesh(new THREE.BoxGeometry(.026, .05, .02), filter); lighter.visible = false; root.add(lighter);
+  const spark = new THREE.Mesh(new THREE.SphereGeometry(.016, 5, 4), ember); spark.visible = false; spark.scale.y = 1.8; root.add(spark);
   const right = new THREE.Vector3(), left = new THREE.Vector3(), mouth = new THREE.Vector3();
   const tip = new THREE.Vector3(), local = new THREE.Vector3();
   const drops = [], pool = [];
@@ -148,7 +148,7 @@ export function createMarineIdle({ THREE, marine, scene, solveArm, smoke, ground
     cig.userData.targetReach=targetReach;cig.userData.actualReach=shoulder.distanceTo(actual);cig.userData.handOffset=offset.length();
   }
   let smokeT = 0;
-  function hide() { root.visible = false; u.balaclava?.userData.mouthOpen?.(0); }
+  function hide() { root.visible = false; cig.visible = pack.visible = lighter.visible = spark.visible = false; u.balaclava?.userData.mouthOpen?.(0); }
   hide();
   function drop(lit) {
     if (!cig.visible || !root.visible) return;

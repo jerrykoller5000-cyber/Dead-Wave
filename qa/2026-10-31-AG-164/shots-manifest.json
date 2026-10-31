@@ -1,0 +1,422 @@
+[
+  {
+    "weapon": "minigun",
+    "name": "Minigun",
+    "type": "base",
+    "state": "fp-hip",
+    "file": "qa/2026-10-31-AG-164/shots/minigun-fp-hip.png"
+  },
+  {
+    "weapon": "minigun",
+    "name": "Minigun",
+    "type": "base",
+    "state": "fp-aim",
+    "file": "qa/2026-10-31-AG-164/shots/minigun-fp-aim.png"
+  },
+  {
+    "weapon": "minigun",
+    "name": "Minigun",
+    "type": "base",
+    "state": "fp-reload",
+    "file": "qa/2026-10-31-AG-164/shots/minigun-fp-reload.png"
+  },
+  {
+    "weapon": "minigun",
+    "name": "Minigun",
+    "type": "base",
+    "state": "tp",
+    "file": "qa/2026-10-31-AG-164/shots/minigun-tp.png"
+  },
+  {
+    "weapon": "m4",
+    "name": "GW-4 Carbine",
+    "type": "base",
+    "state": "fp-hip",
+    "file": "qa/2026-10-31-AG-164/shots/m4-fp-hip.png"
+  },
+  {
+    "weapon": "m4",
+    "name": "GW-4 Carbine",
+    "type": "base",
+    "state": "fp-aim",
+    "file": "qa/2026-10-31-AG-164/shots/m4-fp-aim.png"
+  },
+  {
+    "weapon": "m4",
+    "name": "GW-4 Carbine",
+    "type": "base",
+    "state": "fp-reload",
+    "file": "qa/2026-10-31-AG-164/shots/m4-fp-reload.png"
+  },
+  {
+    "weapon": "m4",
+    "name": "GW-4 Carbine",
+    "type": "base",
+    "state": "tp",
+    "file": "qa/2026-10-31-AG-164/shots/m4-tp.png"
+  },
+  {
+    "weapon": "ak",
+    "name": "AK Assault Rifle",
+    "type": "base",
+    "state": "fp-hip",
+    "file": "qa/2026-10-31-AG-164/shots/ak-fp-hip.png"
+  },
+  {
+    "weapon": "ak",
+    "name": "AK Assault Rifle",
+    "type": "base",
+    "state": "fp-aim",
+    "file": "qa/2026-10-31-AG-164/shots/ak-fp-aim.png"
+  },
+  {
+    "weapon": "ak",
+    "name": "AK Assault Rifle",
+    "type": "base",
+    "state": "fp-reload",
+    "file": "qa/2026-10-31-AG-164/shots/ak-fp-reload.png"
+  },
+  {
+    "weapon": "ak",
+    "name": "AK Assault Rifle",
+    "type": "base",
+    "state": "tp",
+    "file": "qa/2026-10-31-AG-164/shots/ak-tp.png"
+  },
+  {
+    "weapon": "pistol",
+    "name": "M9 Service Pistol",
+    "type": "base",
+    "state": "fp-hip",
+    "file": "qa/2026-10-31-AG-164/shots/pistol-fp-hip.png"
+  },
+  {
+    "weapon": "pistol",
+    "name": "M9 Service Pistol",
+    "type": "base",
+    "state": "fp-aim",
+    "file": "qa/2026-10-31-AG-164/shots/pistol-fp-aim.png"
+  },
+  {
+    "weapon": "pistol",
+    "name": "M9 Service Pistol",
+    "type": "base",
+    "state": "fp-reload",
+    "file": "qa/2026-10-31-AG-164/shots/pistol-fp-reload.png"
+  },
+  {
+    "weapon": "pistol",
+    "name": "M9 Service Pistol",
+    "type": "base",
+    "state": "tp",
+    "file": "qa/2026-10-31-AG-164/shots/pistol-tp.png"
+  },
+  {
+    "weapon": "uzi",
+    "name": "Wasp SMG",
+    "type": "base",
+    "state": "fp-hip",
+    "file": "qa/2026-10-31-AG-164/shots/uzi-fp-hip.png"
+  },
+  {
+    "weapon": "uzi",
+    "name": "Wasp SMG",
+    "type": "base",
+    "state": "fp-aim",
+    "file": "qa/2026-10-31-AG-164/shots/uzi-fp-aim.png"
+  },
+  {
+    "weapon": "uzi",
+    "name": "Wasp SMG",
+    "type": "base",
+    "state": "fp-reload",
+    "file": "qa/2026-10-31-AG-164/shots/uzi-fp-reload.png"
+  },
+  {
+    "weapon": "uzi",
+    "name": "Wasp SMG",
+    "type": "base",
+    "state": "tp",
+    "file": "qa/2026-10-31-AG-164/shots/uzi-tp.png"
+  },
+  {
+    "weapon": "shotgun",
+    "name": "Pump Shotgun",
+    "type": "base",
+    "state": "fp-hip",
+    "file": "qa/2026-10-31-AG-164/shots/shotgun-fp-hip.png"
+  },
+  {
+    "weapon": "shotgun",
+    "name": "Pump Shotgun",
+    "type": "base",
+    "state": "fp-aim",
+    "file": "qa/2026-10-31-AG-164/shots/shotgun-fp-aim.png"
+  },
+  {
+    "weapon": "shotgun",
+    "name": "Pump Shotgun",
+    "type": "base",
+    "state": "fp-reload",
+    "file": "qa/2026-10-31-AG-164/shots/shotgun-fp-reload.png"
+  },
+  {
+    "weapon": "shotgun",
+    "name": "Pump Shotgun",
+    "type": "base",
+    "state": "tp",
+    "file": "qa/2026-10-31-AG-164/shots/shotgun-tp.png"
+  },
+  {
+    "weapon": "aa12",
+    "name": "Breacher-12 Shotgun",
+    "type": "base",
+    "state": "fp-hip",
+    "file": "qa/2026-10-31-AG-164/shots/aa12-fp-hip.png"
+  },
+  {
+    "weapon": "aa12",
+    "name": "Breacher-12 Shotgun",
+    "type": "base",
+    "state": "fp-aim",
+    "file": "qa/2026-10-31-AG-164/shots/aa12-fp-aim.png"
+  },
+  {
+    "weapon": "aa12",
+    "name": "Breacher-12 Shotgun",
+    "type": "base",
+    "state": "fp-reload",
+    "file": "qa/2026-10-31-AG-164/shots/aa12-fp-reload.png"
+  },
+  {
+    "weapon": "aa12",
+    "name": "Breacher-12 Shotgun",
+    "type": "base",
+    "state": "tp",
+    "file": "qa/2026-10-31-AG-164/shots/aa12-tp.png"
+  },
+  {
+    "weapon": "revolver",
+    "name": "Magnum Revolver",
+    "type": "base",
+    "state": "fp-hip",
+    "file": "qa/2026-10-31-AG-164/shots/revolver-fp-hip.png"
+  },
+  {
+    "weapon": "revolver",
+    "name": "Magnum Revolver",
+    "type": "base",
+    "state": "fp-aim",
+    "file": "qa/2026-10-31-AG-164/shots/revolver-fp-aim.png"
+  },
+  {
+    "weapon": "revolver",
+    "name": "Magnum Revolver",
+    "type": "base",
+    "state": "fp-reload",
+    "file": "qa/2026-10-31-AG-164/shots/revolver-fp-reload.png"
+  },
+  {
+    "weapon": "revolver",
+    "name": "Magnum Revolver",
+    "type": "base",
+    "state": "tp",
+    "file": "qa/2026-10-31-AG-164/shots/revolver-tp.png"
+  },
+  {
+    "weapon": "sniper",
+    "name": "Sniper Rifle",
+    "type": "base",
+    "state": "fp-hip",
+    "file": "qa/2026-10-31-AG-164/shots/sniper-fp-hip.png"
+  },
+  {
+    "weapon": "sniper",
+    "name": "Sniper Rifle",
+    "type": "base",
+    "state": "fp-aim",
+    "file": "qa/2026-10-31-AG-164/shots/sniper-fp-aim.png"
+  },
+  {
+    "weapon": "sniper",
+    "name": "Sniper Rifle",
+    "type": "base",
+    "state": "fp-reload",
+    "file": "qa/2026-10-31-AG-164/shots/sniper-fp-reload.png"
+  },
+  {
+    "weapon": "sniper",
+    "name": "Sniper Rifle",
+    "type": "base",
+    "state": "tp",
+    "file": "qa/2026-10-31-AG-164/shots/sniper-tp.png"
+  },
+  {
+    "weapon": "launcher",
+    "name": "Grenade Launcher",
+    "type": "base",
+    "state": "fp-hip",
+    "file": "qa/2026-10-31-AG-164/shots/launcher-fp-hip.png"
+  },
+  {
+    "weapon": "launcher",
+    "name": "Grenade Launcher",
+    "type": "base",
+    "state": "fp-aim",
+    "file": "qa/2026-10-31-AG-164/shots/launcher-fp-aim.png"
+  },
+  {
+    "weapon": "launcher",
+    "name": "Grenade Launcher",
+    "type": "base",
+    "state": "fp-reload",
+    "file": "qa/2026-10-31-AG-164/shots/launcher-fp-reload.png"
+  },
+  {
+    "weapon": "launcher",
+    "name": "Grenade Launcher",
+    "type": "base",
+    "state": "tp",
+    "file": "qa/2026-10-31-AG-164/shots/launcher-tp.png"
+  },
+  {
+    "weapon": "flamer",
+    "name": "Flamethrower",
+    "type": "base",
+    "state": "fp-hip",
+    "file": "qa/2026-10-31-AG-164/shots/flamer-fp-hip.png"
+  },
+  {
+    "weapon": "flamer",
+    "name": "Flamethrower",
+    "type": "base",
+    "state": "fp-aim",
+    "file": "qa/2026-10-31-AG-164/shots/flamer-fp-aim.png"
+  },
+  {
+    "weapon": "flamer",
+    "name": "Flamethrower",
+    "type": "base",
+    "state": "fp-reload",
+    "file": "qa/2026-10-31-AG-164/shots/flamer-fp-reload.png"
+  },
+  {
+    "weapon": "flamer",
+    "name": "Flamethrower",
+    "type": "base",
+    "state": "tp",
+    "file": "qa/2026-10-31-AG-164/shots/flamer-tp.png"
+  },
+  {
+    "weapon": "chainsaw",
+    "name": "Chainsaw",
+    "type": "base",
+    "state": "fp-hip",
+    "file": "qa/2026-10-31-AG-164/shots/chainsaw-fp-hip.png"
+  },
+  {
+    "weapon": "chainsaw",
+    "name": "Chainsaw",
+    "type": "base",
+    "state": "fp-aim",
+    "file": "qa/2026-10-31-AG-164/shots/chainsaw-fp-aim.png"
+  },
+  {
+    "weapon": "chainsaw",
+    "name": "Chainsaw",
+    "type": "base",
+    "state": "fp-reload",
+    "file": "qa/2026-10-31-AG-164/shots/chainsaw-fp-reload.png"
+  },
+  {
+    "weapon": "chainsaw",
+    "name": "Chainsaw",
+    "type": "base",
+    "state": "tp",
+    "file": "qa/2026-10-31-AG-164/shots/chainsaw-tp.png"
+  },
+  {
+    "weapon": "pistol-akimbo",
+    "name": "Akimbo Pistols",
+    "type": "akimbo",
+    "state": "fp-hip",
+    "file": "qa/2026-10-31-AG-164/shots/pistol-akimbo-fp-hip.png"
+  },
+  {
+    "weapon": "pistol-akimbo",
+    "name": "Akimbo Pistols",
+    "type": "akimbo",
+    "state": "fp-aim",
+    "file": "qa/2026-10-31-AG-164/shots/pistol-akimbo-fp-aim.png"
+  },
+  {
+    "weapon": "pistol-akimbo",
+    "name": "Akimbo Pistols",
+    "type": "akimbo",
+    "state": "fp-reload",
+    "file": "qa/2026-10-31-AG-164/shots/pistol-akimbo-fp-reload.png"
+  },
+  {
+    "weapon": "pistol-akimbo",
+    "name": "Akimbo Pistols",
+    "type": "akimbo",
+    "state": "tp",
+    "file": "qa/2026-10-31-AG-164/shots/pistol-akimbo-tp.png"
+  },
+  {
+    "weapon": "uzi-akimbo",
+    "name": "Akimbo Wasp SMGs",
+    "type": "akimbo",
+    "state": "fp-hip",
+    "file": "qa/2026-10-31-AG-164/shots/uzi-akimbo-fp-hip.png"
+  },
+  {
+    "weapon": "uzi-akimbo",
+    "name": "Akimbo Wasp SMGs",
+    "type": "akimbo",
+    "state": "fp-aim",
+    "file": "qa/2026-10-31-AG-164/shots/uzi-akimbo-fp-aim.png"
+  },
+  {
+    "weapon": "uzi-akimbo",
+    "name": "Akimbo Wasp SMGs",
+    "type": "akimbo",
+    "state": "fp-reload",
+    "file": "qa/2026-10-31-AG-164/shots/uzi-akimbo-fp-reload.png"
+  },
+  {
+    "weapon": "uzi-akimbo",
+    "name": "Akimbo Wasp SMGs",
+    "type": "akimbo",
+    "state": "tp",
+    "file": "qa/2026-10-31-AG-164/shots/uzi-akimbo-tp.png"
+  },
+  {
+    "weapon": "revolver-akimbo",
+    "name": "Akimbo Revolvers",
+    "type": "akimbo",
+    "state": "fp-hip",
+    "file": "qa/2026-10-31-AG-164/shots/revolver-akimbo-fp-hip.png"
+  },
+  {
+    "weapon": "revolver-akimbo",
+    "name": "Akimbo Revolvers",
+    "type": "akimbo",
+    "state": "fp-aim",
+    "file": "qa/2026-10-31-AG-164/shots/revolver-akimbo-fp-aim.png"
+  },
+  {
+    "weapon": "revolver-akimbo",
+    "name": "Akimbo Revolvers",
+    "type": "akimbo",
+    "state": "fp-reload",
+    "file": "qa/2026-10-31-AG-164/shots/revolver-akimbo-fp-reload.png"
+  },
+  {
+    "weapon": "revolver-akimbo",
+    "name": "Akimbo Revolvers",
+    "type": "akimbo",
+    "state": "tp",
+    "file": "qa/2026-10-31-AG-164/shots/revolver-akimbo-tp.png"
+  }
+]

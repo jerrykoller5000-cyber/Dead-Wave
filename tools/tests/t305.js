@@ -1,7 +1,7 @@
 // t305 - CL-263 (docs/specs/story-chain.md §6; GB-232's places): the survivors are found where they hid, as the thread
 // that leads there ends: Pike beyond the hikers' camp (its far side from the HQ, behind a tree there, on dry ground), Brandt
 // by the rangers' truck, Okafor in the trapper's cellar. Before night 3, or with the story gate off, nobody comes from a
-// thread; with it on, nobody comes before his thread is done.
+// thread; with it on, nobody comes before his thread is done, nor before his lead's day (CL-285, D-102: 5, 7, 8).
 (async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -36,9 +36,11 @@
     T.storyDbg.chain.reset(); T.storyDbg.gate(true); T.setDay(3);
     T.storyDbg.sync(); await wait(200);
     ok(fromThread().length === 0, 'the gate on, the threads open: nobody waiting yet');
-    // Each thread done: its survivor where he hid.
+    // Each thread done on night 3: nobody before his day (CL-285); on day 8, each survivor where he hid.
     for (const id of ['missing', 'search', 'oldman']) T.runDevCommand('story done ' + id);
     T.storyDbg.sync(); await wait(300);
+    ok(fromThread().length === 0, 'the threads done on night 3: nobody before his day (' + fromThread().length + ')');
+    T.setDay(8); T.storyDbg.sync(); await wait(300);
     const w = fromThread(), who = (st) => w.find((s) => s.style === st);
     if (hk && H.pikeHide) {
       const pk = who('hikers');

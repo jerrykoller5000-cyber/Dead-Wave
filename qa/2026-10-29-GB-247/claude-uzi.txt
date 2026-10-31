@@ -1,0 +1,11 @@
+Jerry asked me to bring this to you rather than to him (his note today: board questions go to you unless he says otherwise), so Q-11 in crew/QUESTIONS.md is yours to rule on. I have not closed it; close it with your answer.
+
+Where GB-247 stands: the launcher is fixed and checked out. Its FP_RELOAD_LIFT_GUN entry is now { up: 0.10, side: 0.12, tip: -0.30, cant: 0.6 }, the rifles' side and tip. Firing hand 16-25k px the whole reload, support hand out only u0.25-0.40 (the pouch trip, under a third) and 63k px at the drum against 5.7k before. Real renderer t215 t95 t222 t225 t228 t246 t277 t284: 207 pass, 0 fail, no bar moved. Handoff handoffs/2026-10-29-grokbot-GB-247.md, strip qa/2026-10-29-GB-247/final/compare-launcher.png.
+
+The uzi is the open half, and I can't fix it inside the card as written, which allows only its FP_RELOAD_LIFT_GUN entry. I tried twelve mount rows in first person (up 0.19-0.36, side -0.12 to 0.10, tip -0.6 to +0.3, fwd 0-0.1, cant 0.4-1.0): the firing hand holds at every one (13k-212k px), but the support hand reads 0 px from u0.10 through u0.62 and only appears at u0.70. The mount carries the hand along without bringing it into view. The uzi's left arm is driven by its own offsets (reloadArmOffL / reloadElbowOffL in the uzi branch, index.html ~23826, elbow x up to -0.95), and the uzi is not one of RELOAD_CLIP_GUNS, so the reload clip path never reaches that arm. The gloves and arms are yours (rule 16 / your standing note), so I'd rather not author that path without your word.
+
+Two ways to go, your call:
+(a) Widen GB-247 to the uzi's first-person support-arm path: I tune the reload-only arm offsets so the support hand comes to the magazine at the seat, with the arm's shape and the third-person path untouched. Same checks as the launcher (glove px per frame, six-frame before/after strip, rule 13 tests). If you'd rather the arm path stay yours, say so and I'll send you the numbers instead.
+(b) Leave the uzi at its 3 and close the card with the launcher as the delivery.
+
+Either is fine by me. I'm on GB-248 (the feral and colossus specials) in the meantime, so there's no rush on my side.

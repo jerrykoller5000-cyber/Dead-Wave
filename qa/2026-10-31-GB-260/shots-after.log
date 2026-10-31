@@ -1,0 +1,85 @@
+Game-test request 7ebf593c-d0e4-4fc8-8463-484d52e87ab9 queued at position 2. Waiting...
+GRANT grokbot GB-260: starting one game-test command
+ok   start --match --idle 12
+ok   eval {const T=TT; T.setHp(100000); T.clearZombies&&T.clearZombies(); T.grantAllWeapons(); T.addCash(99999); for (const w of ['pistol','uzi']) { try { 
+     setup -> 1
+ok   eval {const T=TT; try { T.armoryDbg.fit('pistol','ext',false); } catch (e) {}
+  if (T.isUnarmed && T.isUnarmed()) T.toggleHolster();
+  for (let i=0;i<
+     pistol -> pistol ext={"fitted":null,"ext":true,"heavy":false,"canExt":true,"canHeavy":false} vis=true
+ok   shot player --yaw 90 --out qa/2026-10-31-GB-260/after/tp-pistol-side.png
+ok   shot player --yaw 135 --out qa/2026-10-31-GB-260/after/tp-pistol-shoulder.png
+ok   shot weapon:pistol --view side --out qa/2026-10-31-GB-260/after/model-pistol-side.png
+ok   shot weapon:pistol --view back --out qa/2026-10-31-GB-260/after/model-pistol-back.png
+ok   eval {const T=TT; T.marineIdleDbg().reset(); T.setViewFirstDbg(true); await new Promise(r=>setTimeout(r,900)); T.marineIdleDbg().reset(); return T.get
+     fp on -> pistol
+ok   shot --live --out qa/2026-10-31-GB-260/after/fp-pistol-hip.png
+ok   eval {const T=TT; T.setAmmoDbg(T.getCurrentWeapon(), 1); T.startReload(); await new Promise(r=>setTimeout(r,150)); if (T.reloadClipDbg) T.reloadClipDb
+     reload 0.42 -> 1
+ok   shot --live --out qa/2026-10-31-GB-260/after/fp-pistol-reload-42.png
+ok   eval {const T=TT; if (T.reloadClipDbg) T.reloadClipDbg.hold(0.62); await new Promise(r=>setTimeout(r,900)); return 1}
+     reload 0.62 -> 1
+ok   shot --live --out qa/2026-10-31-GB-260/after/fp-pistol-reload-62.png
+ok   eval {const T=TT; if (T.reloadClipDbg) T.reloadClipDbg.hold(null); await new Promise(r=>setTimeout(r,700)); T.setViewFirstDbg(false); return 1}
+     reload off -> 1
+ok   eval {const T=TT; try { T.armoryDbg.fit('pistol','ext',true); } catch (e) {}
+  if (T.isUnarmed && T.isUnarmed()) T.toggleHolster();
+  for (let i=0;i<2
+     pistol-ext -> pistol ext={"fitted":"ext","ext":true,"heavy":false,"canExt":true,"canHeavy":false} vis=true
+ok   shot player --yaw 90 --out qa/2026-10-31-GB-260/after/tp-pistol-ext-side.png
+ok   shot player --yaw 135 --out qa/2026-10-31-GB-260/after/tp-pistol-ext-shoulder.png
+ok   shot weapon:pistol --view side --out qa/2026-10-31-GB-260/after/model-pistol-ext-side.png
+ok   shot weapon:pistol --view back --out qa/2026-10-31-GB-260/after/model-pistol-ext-back.png
+ok   eval {const T=TT; T.marineIdleDbg().reset(); T.setViewFirstDbg(true); await new Promise(r=>setTimeout(r,900)); T.marineIdleDbg().reset(); return T.get
+     fp on -> pistol
+ok   shot --live --out qa/2026-10-31-GB-260/after/fp-pistol-ext-hip.png
+ok   eval {const T=TT; T.setAmmoDbg(T.getCurrentWeapon(), 1); T.startReload(); await new Promise(r=>setTimeout(r,150)); if (T.reloadClipDbg) T.reloadClipDb
+     reload 0.42 -> 1
+ok   shot --live --out qa/2026-10-31-GB-260/after/fp-pistol-ext-reload-42.png
+ok   eval {const T=TT; if (T.reloadClipDbg) T.reloadClipDbg.hold(0.62); await new Promise(r=>setTimeout(r,900)); return 1}
+     reload 0.62 -> 1
+ok   shot --live --out qa/2026-10-31-GB-260/after/fp-pistol-ext-reload-62.png
+ok   eval {const T=TT; if (T.reloadClipDbg) T.reloadClipDbg.hold(null); await new Promise(r=>setTimeout(r,700)); T.setViewFirstDbg(false); return 1}
+     reload off -> 1
+ok   eval {const T=TT; try { T.armoryDbg.fit('uzi','ext',false); } catch (e) {}
+  if (T.isUnarmed && T.isUnarmed()) T.toggleHolster();
+  for (let i=0;i<24&
+     uzi -> uzi ext={"fitted":null,"ext":true,"heavy":false,"canExt":true,"canHeavy":true} vis=true
+ok   shot player --yaw 90 --out qa/2026-10-31-GB-260/after/tp-uzi-side.png
+ok   shot player --yaw 135 --out qa/2026-10-31-GB-260/after/tp-uzi-shoulder.png
+ok   shot weapon:uzi --view side --out qa/2026-10-31-GB-260/after/model-uzi-side.png
+ok   shot weapon:uzi --view back --out qa/2026-10-31-GB-260/after/model-uzi-back.png
+ok   eval {const T=TT; T.marineIdleDbg().reset(); T.setViewFirstDbg(true); await new Promise(r=>setTimeout(r,900)); T.marineIdleDbg().reset(); return T.get
+     fp on -> uzi
+ok   shot --live --out qa/2026-10-31-GB-260/after/fp-uzi-hip.png
+ok   eval {const T=TT; T.setAmmoDbg(T.getCurrentWeapon(), 1); T.startReload(); await new Promise(r=>setTimeout(r,150)); if (T.reloadClipDbg) T.reloadClipDb
+     reload 0.42 -> 1
+ok   shot --live --out qa/2026-10-31-GB-260/after/fp-uzi-reload-42.png
+ok   eval {const T=TT; if (T.reloadClipDbg) T.reloadClipDbg.hold(0.62); await new Promise(r=>setTimeout(r,900)); return 1}
+     reload 0.62 -> 1
+ok   shot --live --out qa/2026-10-31-GB-260/after/fp-uzi-reload-62.png
+ok   eval {const T=TT; if (T.reloadClipDbg) T.reloadClipDbg.hold(null); await new Promise(r=>setTimeout(r,700)); T.setViewFirstDbg(false); return 1}
+     reload off -> 1
+ok   eval {const T=TT; try { T.armoryDbg.fit('uzi','ext',true); } catch (e) {}
+  if (T.isUnarmed && T.isUnarmed()) T.toggleHolster();
+  for (let i=0;i<24&&
+     uzi-ext -> uzi ext={"fitted":"ext","ext":true,"heavy":false,"canExt":true,"canHeavy":true} vis=true
+ok   shot player --yaw 90 --out qa/2026-10-31-GB-260/after/tp-uzi-ext-side.png
+ok   shot player --yaw 135 --out qa/2026-10-31-GB-260/after/tp-uzi-ext-shoulder.png
+ok   shot weapon:uzi --view side --out qa/2026-10-31-GB-260/after/model-uzi-ext-side.png
+ok   shot weapon:uzi --view back --out qa/2026-10-31-GB-260/after/model-uzi-ext-back.png
+ok   eval {const T=TT; T.marineIdleDbg().reset(); T.setViewFirstDbg(true); await new Promise(r=>setTimeout(r,900)); T.marineIdleDbg().reset(); return T.get
+     fp on -> uzi
+ok   shot --live --out qa/2026-10-31-GB-260/after/fp-uzi-ext-hip.png
+ok   eval {const T=TT; T.setAmmoDbg(T.getCurrentWeapon(), 1); T.startReload(); await new Promise(r=>setTimeout(r,150)); if (T.reloadClipDbg) T.reloadClipDb
+     reload 0.42 -> 1
+ok   shot --live --out qa/2026-10-31-GB-260/after/fp-uzi-ext-reload-42.png
+ok   eval {const T=TT; if (T.reloadClipDbg) T.reloadClipDbg.hold(0.62); await new Promise(r=>setTimeout(r,900)); return 1}
+     reload 0.62 -> 1
+ok   shot --live --out qa/2026-10-31-GB-260/after/fp-uzi-ext-reload-62.png
+ok   eval {const T=TT; if (T.reloadClipDbg) T.reloadClipDbg.hold(null); await new Promise(r=>setTimeout(r,700)); T.setViewFirstDbg(false); return 1}
+     reload off -> 1
+ok   eval {const T=TT; T.setViewFirstDbg(false); return 1}
+      -> 1
+ok   stop
+DONE after

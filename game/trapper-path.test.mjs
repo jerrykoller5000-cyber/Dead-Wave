@@ -1,20 +1,20 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { TRAPPER, rowZ, sideSign, sideName, calledForDay, createTrapperPath, buildTrapperYardParts, setupTrapperMission } from './trapper-path.js';
+import { TRAPPER, rowZ, stoneX, postX, sideSign, sideName, calledForDay, createTrapperPath, buildTrapperYardParts, setupTrapperMission } from './trapper-path.js';
 
-test('trapper-path deals 8 rows of left/right safe stones and horseshoes, new each run', () => {
+test('trapper-path deals 8 rows of four-column safe stones and horseshoes, new each run', () => {
   let s = 17;
   const rnd = () => { s = (s * 48271) % 2147483647; return (s - 1) / 2147483646; };
   const p = createTrapperPath(rnd);
   assert.equal(p.state.safe.length, 8);
-  assert.ok(p.state.safe.every((v) => v === 0 || v === 1));
-  assert.ok(p.state.safe.includes(0) && p.state.safe.includes(1), 'both sides appear in the 8-row pattern');
+  assert.ok(p.state.safe.every((v) => v >= 0 && v < TRAPPER.COLS));
+  assert.ok(new Set(p.state.safe).size > 1, 'multiple columns appear in the 8-row pattern');
 
   for (let r = 0; r < TRAPPER.ROWS; r++) {
-    const leftPost = p.postLocal(r, 0), rightPost = p.postLocal(r, 1);
-    assert.equal(leftPost.horseshoe, p.safeSide(r) === 0);
-    assert.equal(rightPost.horseshoe, p.safeSide(r) === 1);
-    assert.notEqual(leftPost.horseshoe, rightPost.horseshoe, 'exactly one post per row has the horseshoe');
+    for (let col = 0; col < TRAPPER.COLS; col++) {
+      const post = p.postLocal(r, col);
+      assert.equal(post.horseshoe, p.safeSide(r) === col);
+    }
   }
 
   const first = p.state.safe.join(',');
@@ -57,9 +57,9 @@ test('walking the safe stones from row 0 to row 7 unlocks the hatch without snap
 
 test('a wrong stone or stepping into the leaves snaps a bear trap (25 damage, 3 s hold, 4-6 dead)', () => {
   const p = createTrapperPath(Math.random);
-  p.reset(Math.random, [0, 1, 0, 1, 0, 1, 0, 1]);
+  p.reset(Math.random, [0, 1, 2, 3, 0, 1, 2, 3]);
 
-  // Step onto Row 0's wrong stone (side 1):
+  // Step onto Row 0's wrong stone (side 1 when safe is 0):
   const wrong0 = p.stoneLocal(0, 1);
   const snap1 = p.step(wrong0.x, wrong0.z, 0.016, { grounded: true, day: 1 });
   assert.equal(snap1.kind, 'snap');
@@ -86,14 +86,14 @@ test('a wrong stone or stepping into the leaves snaps a bear trap (25 damage, 3 
   const safe0 = p.step(good0.x, good0.z, 0.016, { grounded: true, day: 1 });
   assert.equal(safe0.kind, 'safe');
   assert.equal(p.state.escapeRow, null);
-  const midLeaf = p.step(0.95, (rowZ(0) + rowZ(1)) * 0.5 + 1e-6, 0.016, { grounded: true, day: 1 });
+  const midLeaf = p.step(1.05, (rowZ(0) + rowZ(1)) * 0.5 + 1e-6, 0.016, { grounded: true, day: 1 });
   assert.equal(midLeaf.kind, 'snap');
   assert.equal(midLeaf.reason, 'leaves');
-  p.step(0.95, (rowZ(0) + rowZ(1)) * 0.5 + 1e-6, 3.1, { grounded: true, day: 1 });
+  p.step(1.05, (rowZ(0) + rowZ(1)) * 0.5 + 1e-6, 3.1, { grounded: true, day: 1 });
 
-  // Stepping into the leaves off the stones in Row 2 snaps a leaf trap:
+  // Stepping into the leaves between stones in Row 2 snaps a leaf trap:
   const leafZ = rowZ(2);
-  const snap2 = p.step(0.98, leafZ, 0.016, { grounded: true, day: 20 });
+  const snap2 = p.step(-0.90, leafZ, 0.016, { grounded: true, day: 20 });
   assert.equal(snap2.kind, 'snap');
   assert.equal(snap2.reason, 'leaves');
   assert.equal(snap2.row, 2);
@@ -107,12 +107,24 @@ test('calledForDay scales from 4 on day 1 to 6 on day 20, and helpers work', () 
   assert.equal(calledForDay(10), 5);
   assert.equal(calledForDay(20), 6);
   assert.equal(sideSign(0), -1);
-  assert.equal(sideSign(1), 1);
-  assert.equal(sideName(0), 'left');
-  assert.equal(sideName(1), 'right');
+  assert.equal(sideSign(1), -1);
+  assert.equal(sideSign(2), 1);
+  assert.equal(sideSign(3), 1);
+  assert.equal(sideName(0), 'far-left');
+  assert.equal(sideName(1), 'mid-left');
+  assert.equal(sideName(2), 'mid-right');
+  assert.equal(sideName(3), 'far-right');
+  assert.equal(stoneX(0), -1.35);
+  assert.equal(stoneX(1), -0.45);
+  assert.equal(stoneX(2), 0.45);
+  assert.equal(stoneX(3), 1.35);
+  assert.equal(postX(0), -1.80);
+  assert.equal(postX(1), -0.90);
+  assert.equal(postX(2), 0.90);
+  assert.equal(postX(3), 1.80);
 });
 
-test('buildTrapperYardParts constructs 8-row trapper yard with 16 stones, 16 posts, horseshoes, leaf traps and fence colliders', () => {
+test('buildTrapperYardParts constructs 8-row trapper yard with 32 stones, 32 posts, horseshoes, leaf traps and sealed back half colliders', () => {
   const mkVec = () => ({ x: 0, y: 0, z: 0, set(x, y, z) { this.x = x; this.y = y; this.z = z; return this; }, setScalar(s) { this.x = s; this.y = s; this.z = s; return this; } });
   class Node3D {
     constructor() { this.children = []; this.position = mkVec(); this.rotation = mkVec(); this.scale = mkVec(); this.userData = {}; }
@@ -165,9 +177,9 @@ test('buildTrapperYardParts constructs 8-row trapper yard with 16 stones, 16 pos
     trapperBar,
     rule: TRAPPER
   });
-  assert.equal(built.stones.length, 16);
-  assert.equal(built.posts.length, 16);
-  assert.ok(built.colliderSpots.length >= 20);
+  assert.equal(built.stones.length, 32);
+  assert.equal(built.posts.length, 32);
+  assert.ok(built.colliderSpots.length >= 30, 'includes yard flank fence and sealed rear perimeter colliders');
   assert.ok(built.parts.length > 350, 'includes iron-lined cellar room, stairs, skylight grate, bunk & shelves');
   assert.ok(built.doorLeftParts.length > 15, 'hinged left cellar door leaf with iron underside liner');
   assert.ok(built.doorRightParts.length > 15, 'hinged right cellar door leaf with iron underside liner');
@@ -176,11 +188,18 @@ test('buildTrapperYardParts constructs 8-row trapper yard with 16 stones, 16 pos
   for (let r = 0; r < TRAPPER.ROWS; r++) {
     const rowStones = built.stones.filter((s) => s.row === r);
     const rowPosts = built.posts.filter((p) => p.row === r);
-    assert.equal(rowStones.length, 2);
-    assert.equal(rowPosts.length, 2);
-    assert.equal(rowPosts[0].side, 0);
-    assert.equal(rowPosts[1].side, 1);
+    assert.equal(rowStones.length, 4);
+    assert.equal(rowPosts.length, 4);
+    for (let c = 0; c < 4; c++) {
+      assert.equal(rowPosts[c].side, c);
+    }
   }
+
+  // Verify sealed back half colliders enclose the cellar:
+  const rearColliders = built.colliderSpots.filter((c) => c.lz <= -5.0);
+  assert.ok(rearColliders.length >= 5, 'rear fence seal colliders across lz = -5.70');
+  const flankColliders = built.colliderSpots.filter((c) => Math.abs(c.lx) >= 2.0 && c.lz <= -1.0);
+  assert.ok(flankColliders.length >= 6, 'flank fence seal colliders enclosing cellar mound');
 
   // Verify setupTrapperMission wires shut/open cellar doors, colliders, platforms, inCellar, and cellarSpot (AG-135):
   THREE.PointLight = class extends Node3D { constructor(c, i, d, dec) { super(); this.color = c; this.intensity = i; this.distance = d; this.decay = dec; } };
@@ -243,11 +262,10 @@ test('buildTrapperYardParts constructs 8-row trapper yard with 16 stones, 16 pos
   assert.equal(trapper.doorBar.visible, true);
   assert.equal(worldSolids.includes(trapper.doorCollider), true);
 
-  // AG-140: verify setupTrapperMission strips a camp piece's mesh triangles AND removes its collider from
-  // worldSolids, lm.colliders, and lm.spawnColliders when a camp piece lands on objective:trapper-cache's approach:
+  // AG-140 / AG-149: verify setupTrapperMission removes colliders from worldSolids, lm.colliders,
+  // and lm.spawnColliders when a camp piece lands on objective:trapper-cache's approach, while
+  // preserving camp mesh geometry (AG-149 / CL-256 commit b117bc44):
   const campX = -33.49, campZ = 43.81;
-  // Two triangles in camp-local space: one at (-4.94, +1.92) (= world (-38.43, 45.73), curing frame 0.78 m from approach (-38.06, 46.42)),
-  // and one at (-2.90, -2.60) (trapper cabin, far from approach):
   const rawPos = new Float32Array([
     -4.94, 0.5, 1.92, -4.90, 1.5, 1.90, -4.98, 1.5, 1.94,
     -2.90, 0.5, -2.60, -2.80, 1.5, -2.60, -3.00, 1.5, -2.60
@@ -294,5 +312,5 @@ test('buildTrapperYardParts constructs 8-row trapper yard with 16 stones, 16 pos
   assert.equal(campLm.spawnColliders.includes(curingSolid), false, 'curing frame collider removed from lm.spawnColliders');
   assert.equal(ws2.includes(cabinSolid), true, 'cabin collider preserved');
   assert.equal(campLm.spawnColliders.includes(cabinSolid), true, 'cabin spawnCollider preserved');
-  assert.equal(campGeo.attributes.position.array.length, 9, 'curing frame triangle stripped from camp mesh while cabin triangle kept');
+  assert.equal(campGeo.attributes.position.array.length, 18, 'camp mesh triangles preserved (AG-149 / CL-256 commit b117bc44)');
 });

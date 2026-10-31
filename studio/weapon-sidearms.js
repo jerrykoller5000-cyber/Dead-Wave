@@ -180,8 +180,13 @@ export function makePistolModel(ctx) {
   // grip's axis (out through the front strap by ~20 mm) and its baseplate hung 44 mm below the grip. gunExtLook
   // stretches the same body down its own axis, so the extended one only comes out below the grip.
   const mag = K.group(0, -0.0877, -0.0255);
-  K.slab([[-0.010, 0.081], [0.010, 0.081], [0.010, -0.081], [-0.010, -0.081]], 0.028, magPoly, { bevel: 0.003, rx: 0.3, parent: mag });
-  K.slab([[-0.022, -0.081], [0.016, -0.081], [0.018, -0.092], [-0.024, -0.092]], 0.046, magPoly, { bevel: 0.003, rx: 0.3, parent: mag });   // GB-180: baseplate square to the mag and flush with the grip
+  // GB-260 (J7, Jerry: the pistol's extended magazine reads undersized): the body was 28 mm across and 20 mm front to
+  // back inside a grip 52 mm across and about 100 mm deep (docs/weapons-sizes.md) - the narrowest thing on the gun, and
+  // shallower than it was wide, which no real box magazine is. A .45 double-stack body is 40 mm across and 46 mm front
+  // to back, deeper than wide, with a floorplate proud of it on every side (52 x 54 mm here). Same 162 mm length, centre
+  // line and rake as GB-154/GB-180, so the well, the hand hold and gunExtLook's own growth are untouched.
+  K.slab([[-0.023, 0.081], [0.023, 0.081], [0.023, -0.081], [-0.023, -0.081]], 0.040, magPoly, { bevel: 0.003, rx: 0.3, parent: mag });
+  K.slab([[-0.026, -0.081], [0.024, -0.081], [0.026, -0.092], [-0.028, -0.092]], 0.052, magPoly, { bevel: 0.003, rx: 0.3, parent: mag });   // GB-180: baseplate square to the mag; GB-260: 52 x 54 mm, proud of the body
   gun.userData.slide = slide;
   gun.userData.mag = mag;
   gun.userData.baseSlidePos = slide.position.clone();

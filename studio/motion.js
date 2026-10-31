@@ -102,7 +102,35 @@ export function validateMotion(json) {
   if (json.fall !== undefined) { tones(json.fall.tone, 'fall.tone'); num(json.fall.catch, 'fall.catch', 0, 1); }
   if (json.held !== undefined) { tones(json.held.tone, 'held.tone'); num(json.held.friction, 'held.friction', 0, 1); }
   if (json.down !== undefined) { num(json.down.time, 'down.time', 0, 30); num(json.down.height, 'down.height', 0.05, 2); }
-  if (json.getup !== undefined) num(json.getup.time, 'getup.time', 0.05, 5);
+  if (json.getup !== undefined) {
+    if (!json.getup || typeof json.getup !== 'object' || Array.isArray(json.getup)) errs.push('getup must be an object');
+    else {
+      num(json.getup.time, 'getup.time', 0.05, 5);
+      const keys = json.getup.keys;
+      if (keys !== undefined) {
+        if (!Array.isArray(keys) || keys.length < 2) errs.push('getup.keys must have at least a start and end pose');
+        else {
+          if (keys[0]?.t !== 0 || keys.at(-1)?.t !== 1) errs.push('getup.keys must begin at t=0 and end at t=1');
+          let previous = -1;
+          for (const [i, key] of keys.entries()) {
+            const at = `getup.keys[${i}]`;
+            if (!key || typeof key !== 'object') { errs.push(`${at} must be a pose key`); continue; }
+            num(key.t, `${at}.t`, 0, 1);
+            if (isNum(key.t) && key.t <= previous) errs.push(`${at}.t must follow the preceding key`);
+            previous = key.t;
+            if (!key.pose || typeof key.pose !== 'object' || Array.isArray(key.pose)) { errs.push(`${at}.pose must name body points`); continue; }
+            for (const [point, offset] of Object.entries(key.pose)) {
+              if (!Array.isArray(offset) || offset.length !== 3 || offset.some(v => !isNum(v) || Math.abs(v) > 2))
+                errs.push(`${at}.pose.${point} must be a three-number local offset within 2 m`);
+            }
+          }
+          const endPose = keys.at(-1)?.pose;
+          if (endPose && typeof endPose === 'object' && Object.values(endPose).some(offset => Array.isArray(offset) && offset.some(v => v !== 0)))
+            errs.push('getup.keys must end at the standing pose (zero offsets)');
+        }
+      }
+    }
+  }
   if (json.death !== undefined) { num(json.death.tone, 'death.tone', 0, 1); num(json.death.settle, 'death.settle', 0.05, 10); }
   return errs;
 }
@@ -190,6 +218,9 @@ export function createBody(inst, preset, opts = {}) {
   const names = Object.keys(spec.points);
   const n = names.length;
   const idx = Object.fromEntries(names.map((k, i) => [k, i]));
+  const getupKeys = preset.getup.keys;
+  if (getupKeys) for (const key of getupKeys) for (const point of Object.keys(key.pose))
+    if (idx[point] === undefined) throw new Error(`getup pose point "${point}" is not in rig "${inst.def.name}"`);
   const joints = names.map((k) => {
     const j = inst.R[spec.points[k].joint];
     if (!j) throw new Error(`body point "${k}": the rig has no joint "${spec.points[k].joint}"`);
@@ -248,6 +279,25 @@ export function createBody(inst, preset, opts = {}) {
     for (let i = 0; i < n; i++) {
       _v.copy(offs[i]).applyMatrix4(joints[i].matrixWorld);
       A[i * 3] = _v.x; A[i * 3 + 1] = _v.y; A[i * 3 + 2] = _v.z;
+    }
+    // Authored get-up keys bias the animated point targets in the rig's local axes.
+    // The physics constraints keep bone lengths and ground contact while the body
+    // moves from hands/knees to the zero-offset standing key. Presets without keys
+    // keep the original tone-ramp path exactly.
+    if (body.state === 'getup' && getupKeys) {
+      const u = clamp01(stateT / preset.getup.time);
+      let k = 0; while (k < getupKeys.length - 2 && u > getupKeys[k + 1].t) k++;
+      const a = getupKeys[k], b = getupKeys[k + 1];
+      const v = smooth((u - a.t) / (b.t - a.t));
+      const m = inst.group.matrixWorld.elements;
+      for (let i = 0; i < n; i++) {
+        const p = a.pose[names[i]] || [0, 0, 0], q = b.pose[names[i]] || [0, 0, 0];
+        const x = p[0] + (q[0] - p[0]) * v, y = p[1] + (q[1] - p[1]) * v, z = p[2] + (q[2] - p[2]) * v;
+        const j = i * 3;
+        A[j] += m[0] * x + m[4] * y + m[8] * z;
+        A[j + 1] += m[1] * x + m[5] * y + m[9] * z;
+        A[j + 2] += m[2] * x + m[6] * y + m[10] * z;
+      }
     }
     if (!hasPrev) { A0.set(A); hasPrev = true; }
     for (const s of segs) s.animW.copy(s.j.matrixWorld);

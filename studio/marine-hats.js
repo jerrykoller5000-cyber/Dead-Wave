@@ -105,22 +105,25 @@ export function buildMarineHats(T, { hatG, part, dress, mats, addCast, rmesh, cy
 
   // The ballcap, worn forwards or backwards: a rounded dome with six panel seams, a button and a bill.
   const ballRings = [R(1.495, .0105), R(1.52, .0105, 1.502), R(1.55, .006, 1.502), [1.575, .1085, .1245, .1055], [1.592, .083, .095, .079], [1.6, .04, .046, .038], [1.6025, 0, 0, 0]];
-  const ballcap = (grp) => {
-    grp.add(loft(T, ballRings, capW, addCast));
+  // The backwards crown must put the head's deeper front radius at the forehead
+  // after rotation; turning the forward crown alone puts its shallow rear there.
+  const backRings = ballRings.map(([y, w, f, b]) => [y, w, b, f]);
+  const ballcap = (grp, rings = ballRings) => {
+    grp.add(loft(T, rings, capW, addCast));
     grp.add(bill(T, capW, addCast, { y: 1.508, z0: .112, w: .205, d: .108, droop: .026 }));
     at(grp, cyl(.012, .013, .008, capBandW, 8), 0, 1.6, 0);
     for (let j = 0; j < 6; j++) {
       const a = j / 6 * Math.PI * 2;
       // Along the dome as the loft draws it (straight between its rows), not a spline through the rows, which bowed out
       // of the dome between 1.52 and 1.575 (AG-81).
-      const rows = ballRings.slice(1).map(([y, w, f, b]) => { const [x, z] = planPoint(w + .0009, f + .0009, b + .0009, a); return new T.Vector3(x, y, z); });
+      const rows = rings.slice(1).map(([y, w, f, b]) => { const [x, z] = planPoint(w + .0009, f + .0009, b + .0009, a); return new T.Vector3(x, y, z); });
       const pts = [];
       for (let r = 0; r < rows.length - 1; r++) for (let k = 0; k < 4; k++) pts.push(rows[r].clone().lerp(rows[r + 1], k / 4));
       pts.push(rows[rows.length - 1]);
       grp.add(addCast(new T.Mesh(new T.TubeGeometry(new T.CatmullRomCurve3(pts, false, 'centripetal'), 24, .0012, 3, false), capBandW)));
     }
     {   // the strap at the back, a band round the dome's own curve (a straight box stood proud at its corners: AG-81)
-      const [w, f, b] = ringAt(ballRings, 1.525), arc = [];
+      const [w, f, b] = ringAt(rings, 1.525), arc = [];
       for (let k = 0; k <= 8; k++) { const [x, z] = planPoint(w + .002, f + .002, b + .002, Math.PI + (k / 8 - .5) * .7); arc.push(new T.Vector3(x, 1.525, z)); }
       const strap = addCast(new T.Mesh(new T.TubeGeometry(new T.CatmullRomCurve3(arc), 16, .0045, 4, false), strapMat));
       strap.scale.set(1, 3, 1); strap.position.y = 1.525 * (1 - 3);   // a flat band about 2.7 cm tall, round the curve
@@ -130,5 +133,5 @@ export function buildMarineHats(T, { hatG, part, dress, mats, addCast, rmesh, cy
   ballcap(dress.hats.ballcap = part(hatG));
   const back = dress.hats.ballcapBack = part(hatG);
   back.rotation.y = Math.PI;
-  ballcap(back);
+  ballcap(back, backRings);
 }

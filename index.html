@@ -369,6 +369,7 @@
        washed-out, milky finisher. It is a filter on the game canvas now (as the NVG is). */
     #loopCine .grade { display: none; }
     canvas.fin-grade:not(.nvg-phosphor) { filter: saturate(.4) contrast(1.16); }
+    canvas.nvg-washout, canvas.fin-grade.nvg-washout { filter: url(#nvgImageTubeDay); }   /* CL-283 (J37): the goggles by day */
     #loopCine .glare { position: absolute; inset: 0; opacity: 0; background: radial-gradient(ellipse at 70% 40%, rgba(255,236,190,.95) 0%, rgba(255,210,150,.7) 45%, rgba(255,190,120,.35) 100%); }
     #loopCine .blink { position: absolute; inset: 0; opacity: 0; background: #000; }
     body.loopcine #hud > *:not(#win):not(#bigBanner):not(#pause):not(#shop), body.loopcine #reticle, body.loopcine #hitPing { visibility: hidden !important; }
@@ -979,6 +980,23 @@
         <feGaussianBlur in="highlights" stdDeviation="3" result="halo"/>
         <feComposite in="signal" in2="halo" operator="arithmetic" k1="0" k2="1" k3=".25" k4="0"/>
       </filter>
+      <!-- CL-283 (J37): the same tube by day, its gain far too high: every value lifted toward a pale green-white, the
+           shadows gone grey-green, a wide glare round the bright parts. -->
+      <filter id="nvgImageTubeDay" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+        <feColorMatrix in="SourceGraphic" type="matrix" values=".2126 .7152 .0722 0 0  .2126 .7152 .0722 0 0  .2126 .7152 .0722 0 0  0 0 0 1 0" result="luminance"/>
+        <feComponentTransfer in="luminance" result="signal">
+          <feFuncR type="table" tableValues=".42 .66 .78 .86 .91 .95 .97 .99 1"/>
+          <feFuncG type="table" tableValues=".52 .78 .90 .96 .99 1 1 1 1"/>
+          <feFuncB type="table" tableValues=".46 .70 .82 .90 .94 .97 .98 .99 1"/>
+        </feComponentTransfer>
+        <feComponentTransfer in="luminance" result="highlights">
+          <feFuncR type="table" tableValues="0 0 0 .05 .25 .6 1"/>
+          <feFuncG type="table" tableValues="0 0 0 .05 .25 .6 1"/>
+          <feFuncB type="table" tableValues="0 0 0 .05 .25 .6 1"/>
+        </feComponentTransfer>
+        <feGaussianBlur in="highlights" stdDeviation="10" result="halo"/>
+        <feComposite in="signal" in2="halo" operator="arithmetic" k1="0" k2="1" k3=".55" k4="0"/>
+      </filter>
     </defs>
   </svg>
   <div id="nvgOverlay" aria-hidden="true"></div>
@@ -1353,6 +1371,7 @@
     import { buildMarineHead, buildMarineHair, buildMarineFeatures, buildBalaclava, buildSurvivorBeard } from './ui/marine-face.js';
     import { buildMarineEyewear } from './ui/marine-eyewear.js';   // CL-139: the eyewear, fitted to that head
     import { buildMarineBody } from './studio/marine-body.js';
+    import { createViewmodel } from './game/viewmodel.js';   // CL-281: the first-person view gun
     import { HAND_POSES, lerpPose } from './studio/marine-hand.js';   // GB-152
     import { createSelectorFlick } from './game/selector-flick.js';   // GB-167: the thumb on the fire selector
     import { applyMarineSurfaceDetail } from './studio/marine-detail.js';
@@ -2374,6 +2393,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         c.updateMatrixWorld(force);
       }
     }
+    let viewmodel = null;   // CL-281 (game/viewmodel.js): made on the first frame of a match, false if it failed
     function renderFrame() {
       if (gameStarted && !training.active) sceneCull(); else if (cullStats.hidden) { cullShowAll(); cullStats.hidden = 0; }   // CL-140
       PROF.mark('r:cull');
@@ -2382,6 +2402,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       syncRigSkins();   // CL-210: a changed part on a baked marine or survivor bakes him again
       PROF.mark('r:rigSkin');   // CL-211: its own line in bench --prof (it ran inside r:render)
       sunShadowCadence();   // CL-211: at night the sun's shadow map is redrawn every 4th frame
+      if (viewmodel) viewmodel.place();   // CL-281: onto the camera as it is drawn
       // CL-211: one walk of the scene's matrices a frame. render() walks them every call, and the sun's shadow pass
       // is a second render() inside the first: the two walks were 6.9 ms of a 30 ms night frame (AG-86 --cpu).
       updateSceneMatrices();
@@ -6195,17 +6216,32 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       // CL-178: high on the ladder's face, a small work platform with a soldier's skeleton on it, wearing the insulated
       // boots (world/lightning.js; the boots themselves are their own object, see ensureInsulatedBoots). One draw.
       // CL-264 (Jerry's N16): he is his own piece now, so the yank can shake him and he can fall (the platform stays one draw).
-      const perchSplit = buildMastPerchParts(THREE, { split: true });
+      const perchSplit = buildMastPerchParts(THREE, { split: true, limbs: true });
       const perch = mergeParts(perchSplit.platform, poiMat, { castShadow: true, receiveShadow: true });
       perch.name = 'mast-perch';
       perch.position.set(cx, gy, cz);
       scene.add(perch);
-      const skelMesh = mergeParts(perchSplit.skeleton, poiMat, { castShadow: true, receiveShadow: true });
+      const skelMesh = mergeParts(perchSplit.torso || perchSplit.skeleton, poiMat, { castShadow: true, receiveShadow: true });
       const skel = new THREE.Group(), pv = perchSplit.pivot;
       skel.name = 'mast-skeleton';
       skel.position.set(cx + pv[0], gy + pv[1], cz + pv[2]);
       skelMesh.position.set(-pv[0], -pv[1], -pv[2]);
       skel.add(skelMesh);
+      // CL-284 (Jerry's J43: "the player should actually yank the boots off it; it could free-fall spread-eagle off the
+      // mast"): his arms and legs are their own pieces, each turning about its shoulder or hip (in his frame, which at rest
+      // is the mast's), so the pulls drag his legs and he falls with them spread.
+      const skelLimbs = {};
+      for (const [k, L] of Object.entries(perchSplit.limbs || {})) {
+        const lg = new THREE.Group(); lg.name = 'mast-skeleton-' + k;
+        lg.position.set(L.pivot[0] - pv[0], L.pivot[1] - pv[1], L.pivot[2] - pv[2]);
+        const lm = mergeParts(L.parts, poiMat, { castShadow: true, receiveShadow: true });
+        lm.position.set(-L.pivot[0], -L.pivot[1], -L.pivot[2]);
+        lg.add(lm); skel.add(lg);
+        const from = L.knee || L.tip, rest = new THREE.Vector3(from[0] - L.pivot[0], from[1] - L.pivot[1], from[2] - L.pivot[2]).normalize();
+        const tip = new THREE.Vector3(L.tip[0] - pv[0], L.tip[1] - pv[1], L.tip[2] - pv[2]), knee = L.knee ? new THREE.Vector3(L.knee[0], L.knee[1], L.knee[2]) : null;
+        skelLimbs[k] = { g: lg, rest, tip, shin: knee ? new THREE.Vector3(L.tip[0] - knee.x, L.tip[1] - knee.y, L.tip[2] - knee.z).normalize() : null };
+      }
+      skel.userData.limbs = skelLimbs; skel.userData.axes = perchSplit.axes || null;
       skel.userData.noCull = true;   // his place is his state (on the perch, falling, down)
       scene.add(skel);
       if (POI.mast) { POI.mast.perch = perch; POI.mast.skeleton = skel; POI.mast.skelHome = skel.position.clone(); }
@@ -10503,9 +10539,52 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // pull jerks him toward the marine (the boots with him) and a bone creaks; the 5th to 7th pull (a roll each run)
     // brings them off: his rotten lanyard snaps, he tips forward off the platform, falls the 12 m turning over, and lands
     // face down at the mast's foot, where he stays for the run.
-    const BOOTS_YANK = { need: [5, 7], jerkS: 0.24, tipS: 0.7, fall: 9.8, out: 1.1, spin: 2.4, down: -1.78 };
+    const BOOTS_YANK = { need: [5, 7], jerkS: 0.24, tipS: 0.7, fall: 9.8, out: 1.1, spin: 2.4, down: -1.78,
+      // CL-284 (J43): each pull drags his legs toward the ladder (radians at the hip) and the boots further off his feet
+      // (metres down the shin by the last pull); falling, his arms and legs spread (their turn eases in over the tip and
+      // the first part of the fall) and flail a little until he lands.
+      drag: 0.32, slide: 0.12, spreadS: 0.9, flail: 0.14 };
     const bootsYank = { pulls: 0, need: 6, jerk: 0, phase: 'on', t: 0, vy: 0, local: null, quat: null, landed: null };
-    const _yk = { v: new THREE.Vector3(), b: new THREE.Box3() };
+    const _yk = { v: new THREE.Vector3(), b: new THREE.Box3(), q: new THREE.Quaternion(), q2: new THREE.Quaternion(), d: new THREE.Vector3(), ax: new THREE.Vector3(), id: new THREE.Quaternion() };
+    // CL-284: where his limbs go when he falls, in his own frame (across, up his spine, out of his chest): arms out to the
+    // sides and a little up, legs apart and back, a skydiver's spread.
+    function skelSpreadTarget(k, axes, out) {
+      const A = axes.across, S = axes.spine, C = axes.chest, s = k.endsWith('L') ? -1 : 1, arm = k.startsWith('arm');
+      const a = arm ? [0.9 * s, 0.5, 0.08] : [0.42 * s, -0.86, 0.28];
+      return out.set(A[0] * a[0] + S[0] * a[1] + C[0] * a[2], A[1] * a[0] + S[1] * a[1] + C[1] * a[2], A[2] * a[0] + S[2] * a[1] + C[2] * a[2]).normalize();
+    }
+    function poseSkelLimbs(sk, spread, drag, t) {
+      const L = sk.userData.limbs, axes = sk.userData.axes;
+      if (!L || !axes) return;
+      for (const k in L) {
+        const l = L[k];
+        l.g.quaternion.identity();
+        if (spread > 0) {
+          _yk.q.setFromUnitVectors(l.rest, skelSpreadTarget(k, axes, _yk.d));
+          l.g.quaternion.slerp(_yk.q, spread);
+          if (t != null) { const f = BOOTS_YANK.flail * spread * Math.sin(t * (k.startsWith('arm') ? 11 : 8) + (k.length * 1.7 + (k.endsWith('L') ? 0 : 2.1))); l.g.quaternion.multiply(_yk.q2.setFromAxisAngle(_yk.ax.set(1, 0, 0), f)); }
+        }
+        if (drag && k.startsWith('leg')) l.g.quaternion.premultiply(_yk.q2.setFromAxisAngle(_yk.ax.set(0, 0, 1), drag));   // toward the ladder (+x)
+      }
+    }
+    // The boots on his feet as his legs move: each boot rides its leg, slid `slide` metres down its shin.
+    function bootsOnSkelFeet(sk, b, slide) {
+      const L = sk.userData.limbs;
+      if (!L || !L.legL || !L.legR || !b || b.children.length < 2) return false;
+      if (!bootsYank.feet) {
+        sk.updateMatrixWorld(true); b.updateMatrixWorld(true);
+        bootsYank.feet = [0, 1].map((i) => { const c = b.children[i], leg = i === 0 ? L.legL : L.legR, w = c.getWorldPosition(new THREE.Vector3()); return { rest: c.position.clone(), inLeg: leg.g.worldToLocal(w) }; });
+      }
+      sk.updateMatrixWorld(true); b.updateMatrixWorld(true);
+      for (let i = 0; i < 2; i++) {
+        const leg = i === 0 ? L.legL : L.legR, F = bootsYank.feet[i];
+        _yk.v.copy(F.inLeg);
+        if (leg.shin) _yk.v.addScaledVector(leg.shin, slide);
+        leg.g.localToWorld(_yk.v);
+        b.children[i].position.copy(b.worldToLocal(_yk.v));
+      }
+      return true;
+    }
     function bootsYankRoll() { bootsYank.need = BOOTS_YANK.need[0] + Math.floor(Math.random() * (BOOTS_YANK.need[1] - BOOTS_YANK.need[0] + 1)); }
     bootsYankRoll();
     function bootsYankInReach(p = localPlayer) {
@@ -10546,26 +10625,37 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         const k = Math.sin(Y.jerk * Math.PI);
         sk.rotation.set(-0.16 * k, 0, 0.05 * k * (Y.pulls % 2 ? 1 : -1));
         sk.position.set(home.x, home.y - 0.04 * k, home.z - 0.05 * k);
+        // CL-284 (J43): his legs dragged toward the ladder with the pull, and the boots come further off his feet with
+        // each one (and a little more while it pulls), until the last takes them.
+        const drag = BOOTS_YANK.drag * k, slide = BOOTS_YANK.slide * Math.pow(Y.pulls / Math.max(1, Y.need), 0.8) + 0.025 * k;
+        poseSkelLimbs(sk, 0, drag, null);
         // His boots go with his feet.
-        if (b && b.visible && Y.local) { sk.updateMatrixWorld(true); b.position.copy(sk.localToWorld(_yk.v.copy(Y.local))); b.quaternion.copy(sk.quaternion).multiply(Y.quat); }
+        if (b && b.visible && Y.local) {
+          sk.updateMatrixWorld(true); b.position.copy(sk.localToWorld(_yk.v.copy(Y.local))); b.quaternion.copy(sk.quaternion).multiply(Y.quat);
+          bootsOnSkelFeet(sk, b, slide);
+        }
       } else if (Y.phase === 'tip') {
         // Over the edge: slow at first, about the platform's outer edge.
         Y.t += dt;
         const u = Math.min(1, Y.t / BOOTS_YANK.tipS);
         sk.rotation.set(-0.16 - 0.95 * u * u, 0, 0);
         sk.position.copy(home);
+        poseSkelLimbs(sk, (Y.t / (BOOTS_YANK.tipS + BOOTS_YANK.spreadS)) ** 1.5, 0, Y.t);   // CL-284: they start to spread as he goes
         if (u >= 1) { Y.phase = 'fall'; Y.vy = 0; }
       } else if (Y.phase === 'fall') {
         Y.vy -= BOOTS_YANK.fall * dt;
         sk.position.y += Y.vy * dt;
         sk.position.z -= BOOTS_YANK.out * dt;   // out from the mast's ladder face
         sk.rotation.x = Math.max(BOOTS_YANK.down, sk.rotation.x - BOOTS_YANK.spin * dt * 0.5);
+        Y.t += dt;
+        poseSkelLimbs(sk, Math.min(1, (Y.t / (BOOTS_YANK.tipS + BOOTS_YANK.spreadS)) ** 1.5), 0, Y.t);   // CL-284: spread-eagled
         sk.updateMatrixWorld(true);
         _yk.b.setFromObject(sk);
         const gy = sampleHeight(sk.position.x, sk.position.z);
         if (_yk.b.min.y <= gy + 0.02) {
-          // Face down in the dirt, his seat in the air.
+          // Face down in the dirt, his seat in the air, arms and legs out (CL-284).
           sk.rotation.x = BOOTS_YANK.down;
+          poseSkelLimbs(sk, 1, 0, null);
           sk.updateMatrixWorld(true); _yk.b.setFromObject(sk);
           sk.position.y += gy + 0.01 - _yk.b.min.y;
           Y.phase = 'down'; Y.landed = sk.position.clone();
@@ -10579,8 +10669,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const sk = POI.mast && POI.mast.skeleton, home = POI.mast && POI.mast.skelHome;
       bootsYank.pulls = 0; bootsYank.jerk = 0; bootsYank.phase = 'on'; bootsYank.t = 0; bootsYank.vy = 0; bootsYank.landed = null;
       bootsYankRoll();
-      if (sk && home) { sk.position.copy(home); sk.rotation.set(0, 0, 0); }
+      if (sk && home) { sk.position.copy(home); sk.rotation.set(0, 0, 0); poseSkelLimbs(sk, 0, 0, null); }   // CL-284: his limbs back
       if (lightning.boots && lightning.bootsHome) { lightning.boots.position.copy(lightning.bootsHome); if (bootsYank.quat) lightning.boots.quaternion.copy(bootsYank.quat); }
+      if (lightning.boots && bootsYank.feet) for (let i = 0; i < 2 && i < lightning.boots.children.length; i++) lightning.boots.children[i].position.copy(bootsYank.feet[i].rest);
     }
     function insulatedBootsOn(p) { return !!(p && p.insulatedBoots); }
     function wearInsulatedBoots(p = localPlayer) {
@@ -19591,7 +19682,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       }
       // CL-210: about 100 meshes down to about 25 (studio/marine-skin.js). Not the guns' mounts: what hangs there comes
       // and goes. ?rigskin=0 draws him the old way, for measuring.
-      if (skin && !legacyBody && RIG_SKIN) bakeRigSkin(THREE, TSL, g, { skip: [weaponMount, gripR, gripL, hipGrip] });
+      // CL-281: the arms in skins of their own, so first person's view gun can leave them out of the eye's pass.
+      if (skin && !legacyBody && RIG_SKIN) bakeRigSkin(THREE, TSL, g, { skip: [weaponMount, gripR, gripL, hipGrip], split: new URLSearchParams(location.search).get('vm') !== '0' ? [[armLG, armRG]] : [] });
       return g;
     }
     const RIG_SKIN = new URLSearchParams(location.search).get('rigskin') !== '0';
@@ -20040,9 +20132,13 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
 
     function updateNvgVisual() {
       const activeGreen = nvgDown && isNight && gameStarted && !gameOver && !won;
+      // CL-283 (Jerry's J37: "NVG overlay should still work in daylight, but extremely bright, washing out his vision"):
+      // the goggles down by day: the tube's picture flooded pale green, its glare round every bright thing.
+      const dayGlare = nvgDown && !isNight && gameStarted && !gameOver && !won;
       renderer.domElement.classList.toggle('nvg-phosphor', activeGreen);
+      renderer.domElement.classList.toggle('nvg-washout', dayGlare);
       if (nvgOverlayEl) {
-        if (activeGreen) nvgOverlayEl.classList.add('on');
+        if (activeGreen || dayGlare) nvgOverlayEl.classList.add('on');
         else nvgOverlayEl.classList.remove('on');
       }
       if (activeGreen && hurtFlash <= 0) {
@@ -21883,7 +21979,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     function toggleDualWield() {
       if(vault)return;
       if (!gameStarted || gameOver || won || paused) return;
-      if (reloading) return;
+      if (reloading || medPenT > 0) return;   // GB-258 (J17): not while the pen is in his left hand
       if (!dualCapable(currentWeapon)) {
         AudioSys.invalid();
         showBanner('NO SECOND GUN', WEAPON_STATS[currentWeapon].name + ' is a two-handed weapon', 1.4, '#ffb347');
@@ -25780,6 +25876,88 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     house.group.visible = true;
     // Nothing grows through the HQ, and nothing stands in its walls.
     clearFoliageInSquare(0, 0, HQ_HALF + 5.8);
+    // CL-284 (J41): the yard's ground: tyre tracks and the worn, darker earth under each prop, so the things round the HQ
+    // sit in the ground they stand on instead of on top of the grass. Canvas textures, made once.
+    let _fobRutTex = null, _fobBlendTex = null;
+    function fobRutTexture() {
+      if (_fobRutTex) return _fobRutTex;
+      const c = document.createElement('canvas'); c.width = 64; c.height = 128;
+      const x = c.getContext('2d');
+      if (x) {
+        let seed = 91; const r = () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
+        for (let yy = 0; yy < 128; yy += 2) for (let xx = 0; xx < 64; xx += 2) {
+          const e = Math.min(xx, 63 - xx) / 32, a = Math.max(0, Math.min(1, (e - 0.05 + (r() - 0.5) * 0.25) * 2.2));
+          if (a <= 0) continue;
+          const tread = ((yy + (xx < 32 ? xx : 64 - xx) * 0.6) % 16) < 5 ? 0.82 : 1;   // chevrons, worn faint
+          const v = (62 + r() * 18) * tread;
+          x.fillStyle = `rgba(${v | 0},${v * 0.8 | 0},${v * 0.6 | 0},${a * 0.8})`; x.fillRect(xx, yy, 2, 2);
+        }
+        for (let i = 0; i < 30; i++) { x.fillStyle = `rgba(120,108,88,${0.3 + r() * 0.3})`; x.fillRect(4 + r() * 56, r() * 128, 2, 2); }
+      }
+      const t = new THREE.CanvasTexture(c); t.wrapS = THREE.ClampToEdgeWrapping; t.wrapT = THREE.RepeatWrapping;
+      if (THREE.SRGBColorSpace) t.colorSpace = THREE.SRGBColorSpace;
+      return (_fobRutTex = t);
+    }
+    function fobBlendTexture() {
+      if (_fobBlendTex) return _fobBlendTex;
+      const c = document.createElement('canvas'); c.width = 64; c.height = 64;
+      const x = c.getContext('2d');
+      if (x) {
+        let seed = 57; const r = () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
+        for (let yy = 0; yy < 64; yy += 2) for (let xx = 0; xx < 64; xx += 2) {
+          const d = Math.hypot(xx - 31.5, yy - 31.5) / 32, a = Math.max(0, Math.min(1, (1 - d) * 1.6 + (r() - 0.5) * 0.35));
+          if (a <= 0) continue;
+          const v = 70 + r() * 26;
+          x.fillStyle = `rgba(${v | 0},${v * 0.82 | 0},${v * 0.6 | 0},${a * 0.62})`; x.fillRect(xx, yy, 2, 2);
+        }
+      }
+      const t = new THREE.CanvasTexture(c);
+      if (THREE.SRGBColorSpace) t.colorSpace = THREE.SRGBColorSpace;
+      return (_fobBlendTex = t);
+    }
+    // Strips (lists of {x, z, w}) draped on the ground as one mesh: groundRibbon's way, for many at once.
+    function fobRutMesh(strips, width) {
+      const pos = [], uv = [], idx = [];
+      for (const pts of strips) {
+        let v = 0; const base = pos.length / 3;
+        for (let i = 0; i < pts.length; i++) {
+          const a = pts[Math.max(0, i - 1)], b = pts[Math.min(pts.length - 1, i + 1)];
+          let dx = b.x - a.x, dz = b.z - a.z; const l = hypot(dx, dz) || 1; dx /= l; dz /= l;
+          const w = width / 2 * (pts[i].w ?? 1);
+          if (i) v += hypot(pts[i].x - pts[i - 1].x, pts[i].z - pts[i - 1].z) / (width * 2.2);
+          for (const sd of [-1, 1]) { const x = pts[i].x - dz * w * sd, z = pts[i].z + dx * w * sd; pos.push(x, sampleHeight(x, z) + 0.03, z); uv.push(sd < 0 ? 0 : 1, v); }
+          if (i) { const k = base + i * 2; idx.push(k - 2, k - 1, k, k - 1, k + 1, k); }
+        }
+      }
+      const geo = new THREE.BufferGeometry();
+      geo.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+      geo.setAttribute('uv', new THREE.Float32BufferAttribute(uv, 2));
+      geo.setIndex(idx); geo.computeVertexNormals();
+      const m = new THREE.Mesh(geo, new THREE.MeshStandardMaterial({ map: fobRutTexture(), transparent: true, depthWrite: false, roughness: 1, side: THREE.DoubleSide,
+        polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2 }));
+      m.receiveShadow = true; m.renderOrder = 1; m.userData.noCull = true;
+      return m;
+    }
+    // Soft patches of trodden earth (centre x, z, radius), draped on the ground as one mesh.
+    function fobBlendMesh(spots) {
+      const pos = [], uv = [], idx = [], N = 5;
+      for (const [cx, cz, r] of spots) {
+        const base = pos.length / 3;
+        for (let j = 0; j <= N; j++) for (let i = 0; i <= N; i++) {
+          const u = i / N, w = j / N, x = cx + (u - 0.5) * 2 * r, z = cz + (w - 0.5) * 2 * r;
+          pos.push(x, sampleHeight(x, z) + 0.025, z); uv.push(u, w);
+        }
+        for (let j = 0; j < N; j++) for (let i = 0; i < N; i++) { const a = base + j * (N + 1) + i, b = a + 1, c = a + N + 1, d = c + 1; idx.push(a, c, b, b, c, d); }
+      }
+      const geo = new THREE.BufferGeometry();
+      geo.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+      geo.setAttribute('uv', new THREE.Float32BufferAttribute(uv, 2));
+      geo.setIndex(idx); geo.computeVertexNormals();
+      const m = new THREE.Mesh(geo, new THREE.MeshStandardMaterial({ map: fobBlendTexture(), transparent: true, depthWrite: false, roughness: 1, side: THREE.DoubleSide,
+        polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -1 }));
+      m.receiveShadow = true; m.renderOrder = 1; m.userData.noCull = true;
+      return m;
+    }
     function buildFobYard() {
       const fobLms = [];   // CL-280: drawn as one batch at the end
       const mats = new Map();
@@ -25819,19 +25997,25 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           wear.push(m);
         }
       };
-      // 1. Tyre ruts in from the south trail into the packed-gravel apron (h < 0.08 m so sweep.js treats as ground wear).
-      for (const [nm, cx, cz, yaw, len] of [['fob-tyre-ruts-1', 5.45, -10.8, -0.42, 3.0], ['fob-tyre-ruts-2', 3.95, -7.75, -0.48, 3.0]]) {
-        const rp = [], gy = groundMinAround(cx, cz, 1.7), cy = Math.cos(yaw), sy = Math.sin(yaw);
-        for (let k = -3; k <= 3; k++) {
-          const lz = k * (len / 7);
+      // 1. Tyre ruts in from the south trail into the packed-gravel apron.
+      // CL-284 (Jerry's J41: "the tyre tracks look like wood planks"): they were rows of boxes with raised lips; now two
+      // pairs of tracks pressed into the ground: a soft-edged, darker, tread-marked strip for each wheel, draped on the
+      // ground and bending a little with the trail, all four one mesh.
+      {
+        const strips = [];
+        for (const [cx, cz, yaw, len, bend] of [[5.6, -11.2, -0.42, 5.2, 0.05], [4.0, -7.6, -0.48, 4.2, -0.04]]) {
+          const c = Math.cos(yaw), sn = Math.sin(yaw);
           for (const lx of [-0.68, 0.68]) {
-            const wx = cx + lx * cy + lz * sy, wz = cz - lx * sy + lz * cy, ly = sampleHeight(wx, wz) - gy;
-            B(rp, 0.32, 0.032, len / 6.5, 0x524739, lx, ly + 0.008, lz);
-            B(rp, 0.11, 0.038, len / 6.5, 0x786e5d, lx - 0.21, ly + 0.014, lz);
-            B(rp, 0.11, 0.038, len / 6.5, 0x786e5d, lx + 0.21, ly + 0.014, lz);
+            const pts = [];
+            for (let i = 0; i <= 14; i++) {
+              const u = i / 14, lz = (u - 0.5) * len, bx = lx + bend * len * Math.sin(u * Math.PI) * (u - 0.5) * 2;
+              pts.push({ x: cx + bx * c + lz * sn, z: cz - bx * sn + lz * c, w: 0.8 + 0.2 * Math.sin(u * Math.PI) });
+            }
+            strips.push(pts);
           }
         }
-        groundWear(rp, cx, gy, cz, yaw);   // CL-267 (night 20's draws, AG-151): with the generator's pad, one draw
+        const rm = fobRutMesh(strips, 0.34);
+        rm.name = 'fob-tyre-ruts'; scene.add(rm);
       }
       // 2. North utility yard: generator pallet pad under (-3.0, 6.7) and two fuel drums on a pallet west of it at (-4.55, 6.65).
       {
@@ -25873,7 +26057,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         B(cp, 0.42, 0.30, 0.52, 0x61563f, 0.24, 0.27, 0.32, 0, 0.12, 0);
         B(cp, 0.40, 0.28, 0.50, 0x48523d, 0.04, 0.62, -0.18, 0, 0.18, 0);
         C(cp, 0.13, 0.13, 0.54, 0x5a634c, -0.20, 0.61, 0.22, 10, 0, 0.15, Math.PI / 2);
-        addLm('fob-armory-crates', 'shed', 6.58, 0.05, 0.05, 0.76, 85, cp, [[0, 0, 0.62, 0.95]]);
+        // CL-284 (Jerry's J42: "Boxes and the broken shed/tent are too close to the CIF and the Armory"): out of the
+        // doors' way, past the Armory's corner to the north-east (was 6.58, 0.05: between the two doors).
+        addLm('fob-armory-crates', 'shed', 7.7, 7.7, 0.62, 0.76, 85, cp, [[0, 0, 0.62, 0.95]]);
       }
       // 4. South gap sandbag guard post with spent brass and a fallen combat helmet.
       {
@@ -26010,8 +26196,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         B(tp, 0.68, 0.24, 1.42, 0x3d342b, -0.52, 0.18, 0.28, 0, 0.14, 0.08);
         B(tp, 0.64, 0.22, 1.36, 0x332c24, 0.48, 0.16, -0.34, 0, -0.22, -0.18);
         B(tp, 0.48, 0.28, 0.42, 0x2b2620, 0.36, 0.20, 0.68, 0, 0.3, 0);
-        addLm('fob-burned-tent', 'camp', 9.4, -1.2, 0.10, 1.45, 95, tp, [[0, -0.55, 0.88, 1.90], [0, 0.55, 0.88, 1.90]]);
+        // CL-284 (J42): to the south-east, clear of the CIF's front (was 9.4, -1.2: 4 m off its door).
+        addLm('fob-burned-tent', 'camp', 9.9, -7.7, 0.55, 1.45, 95, tp, [[0, -0.55, 0.88, 1.90], [0, 0.55, 0.88, 1.90]]);
       }
+      // CL-284 (J41): the trodden earth under each of them (one mesh), so they sit in the yard instead of on its grass.
+      { const bm = fobBlendMesh(fobLms.map((l) => [l.x, l.z, (l.rubbleRadius || 1) * 1.4 + 0.3])); bm.name = 'fob-ground-blend'; scene.add(bm); }
       fobBatch = batchLandmarks(fobLms, 'fob-yard-batch');   // CL-280
     }
     let fobBatch = null;
@@ -27229,7 +27418,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     const DRESS_YAW_OF = { pack: Math.PI + 0.35, holster: 1.0, belt: 0.7 };   // the back for the pack, the side for the hip
     const DRESS_GEAR_OF = { helmet: 'helmet', carrier: 'vest', pads: 'pads' };   // items that need the gear bought
     let dressFrameKey = 'full', dressYawTo = null, dressLastT = 0;
-    const dressView = { y: DRESS_FRAMES.full.y, h: DRESS_FRAMES.full.h };
+    const dressView = { y: DRESS_FRAMES.full.y, h: DRESS_FRAMES.full.h, zoom: 1 };
+    let dressZoomTo = 1, dressPointerId = null, dressPinch = null;
+    const dressPointers = new Map();
+    const dressZoomClamp = value => Math.max(1, Math.min(2.5, value));
     function dressItemOwned(id) { const g = DRESS_GEAR_OF[id]; return !g || !!gearOwned[g]; }
     function frameDressOn(id) {
       dressFrameKey = id ? (DRESS_FRAME_OF[id] || (dressTab === 'him' ? 'head' : 'full')) : 'full';
@@ -27458,7 +27650,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (!dressCam) return;
       const f = DRESS_FRAMES[dressFrameKey] || DRESS_FRAMES.full, k = 1 - Math.exp(-dt * 7);
       dressView.y += (f.y - dressView.y) * k; dressView.h += (f.h - dressView.h) * k;
-      const d = (dressView.h / 2) / Math.tan(THREE.MathUtils.degToRad(dressCam.fov / 2));
+      dressView.zoom += (dressZoomTo - dressView.zoom) * (1 - Math.exp(-dt * 13));
+      const d = (dressView.h / 2) / Math.tan(THREE.MathUtils.degToRad(dressCam.fov / 2)) / dressView.zoom;
       dressCam.position.set(0.05 * d, dressView.y + 0.04 * d, d);
       dressCam.lookAt(0, dressView.y, 0);
     }
@@ -27496,7 +27689,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       for (const k of Object.keys(keys)) keys[k] = false;
       if (cifHintEl) cifHintEl.textContent = dressLabel('dress', 'hint', 'Each piece takes its own camo. Drag him to turn him.');
       previewFocus = dressItem;
-      setDressRotation(false); frameDressOn(null); dressLastT = 0;   // CL-125 / GP-138: he opens still, the whole of him in view
+      setDressRotation(false); frameDressOn(null); dressLastT = 0; dressZoomTo = dressView.zoom = 1; dressPointers.clear(); dressPinch = null; dressPointerId = null; dressDrag = false;   // CL-125 / GP-138: he opens still, the whole of him in view
       renderDressItems();
       renderDressChoices();
       ensureDressView();
@@ -27507,6 +27700,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     function closeCIF() {
       if (!cifOpen) return;
       cifOpen = false;
+      dressPointers.clear(); dressPinch = null; dressPointerId = null; dressDrag = false;
       if (dressRAF) cancelAnimationFrame(dressRAF);
       dressRAF = 0;
       if (AudioSys.cifLocker) AudioSys.cifLocker(false); else AudioSys.shutter(false);   // CL-161
@@ -27533,10 +27727,31 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (commitWardrobe(resetTab(wardrobeState, dressTab, camoKey))) { renderDressItems(); renderDressChoices(); }
     });
     if (cifMarineEl) {
-      cifMarineEl.addEventListener('pointerdown', (e) => { dressDrag = true; dressLastX = e.clientX; try { cifMarineEl.setPointerCapture(e.pointerId); } catch (_) {} });
-      cifMarineEl.addEventListener('pointermove', (e) => { if (!dressDrag) return; dressYaw += (e.clientX - dressLastX) * 0.012; dressLastX = e.clientX; });
-      cifMarineEl.addEventListener('pointerup', () => { dressDrag = false; });
-      cifMarineEl.addEventListener('pointercancel', () => { dressDrag = false; });
+      const pinchDistance = () => { const [a, b] = [...dressPointers.values()]; return Math.hypot(a.x - b.x, a.y - b.y); };
+      cifMarineEl.addEventListener('wheel', e => { if (!cifOpen) return; e.preventDefault(); dressZoomTo = dressZoomClamp(dressZoomTo * Math.exp(-e.deltaY * .0015)); }, { passive: false });
+      cifMarineEl.addEventListener('pointerdown', e => {
+        if (!cifOpen || (e.pointerType !== 'touch' && e.button !== 0)) return;
+        dressPointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+        if (dressPointers.size === 1) { dressDrag = true; dressPointerId = e.pointerId; dressLastX = e.clientX; }
+        else { dressDrag = false; dressPointerId = null; dressPinch = { distance: Math.max(1, pinchDistance()), zoom: dressZoomTo }; }
+        try { cifMarineEl.setPointerCapture(e.pointerId); } catch (_) {}
+        e.preventDefault();
+      });
+      cifMarineEl.addEventListener('pointermove', e => {
+        if (dressPointers.has(e.pointerId)) dressPointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+        if (dressPinch && dressPointers.size >= 2) { dressZoomTo = dressZoomClamp(dressPinch.zoom * pinchDistance() / dressPinch.distance); return; }
+        if (!dressDrag || dressPointerId !== e.pointerId) return;
+        dressYaw += (e.clientX - dressLastX) * .012; dressLastX = e.clientX;
+      });
+      const releaseDressPointer = e => {
+        dressPointers.delete(e.pointerId);
+        if (dressPointerId === e.pointerId) { dressPointerId = null; dressDrag = false; }
+        if (dressPointers.size < 2) dressPinch = null;
+        if (cifMarineEl.hasPointerCapture(e.pointerId)) cifMarineEl.releasePointerCapture(e.pointerId);
+      };
+      cifMarineEl.addEventListener('pointerup', releaseDressPointer);
+      cifMarineEl.addEventListener('pointercancel', releaseDressPointer);
+      cifMarineEl.addEventListener('lostpointercapture', releaseDressPointer);
     }
     // CL-113: pictures of the real guns for the Armory's shelves: a copy of the gun as it is now (its attachments, its
     // finish), lit on its own and drawn side on, muzzle to the right. One small renderer, made on first use; each
@@ -27637,7 +27852,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         armoryPics.scene.add(holder);
         const cam = armoryPics.cam, halfY = cam.fov * Math.PI / 360;
         const halfAngle = Math.min(halfY, Math.atan(Math.tan(halfY) * cam.aspect));
-        const distance = radius * 1.08 / Math.sin(halfAngle);
+        const distance = radius * 1.08 / Math.sin(halfAngle) / Math.max(1, Math.min(2.5, Number.isFinite(view?.zoom) ? view.zoom : 1));
         cam.position.set(-distance, 0, 0); cam.lookAt(0, 0, 0);
         cam.far = Math.max(30, distance + radius * 2); cam.updateProjectionMatrix();
         armoryPics.r.render(armoryPics.scene, cam);
@@ -27996,7 +28211,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         const P = trapperSiteProp();
         if (P && !trapper.built) buildTrapperMission(P);
         if (cmd === 'site trapper pattern') {
-          const pat = trapperPath.state.safe.map((s) => (s ? 'R' : 'L')).join(' · ');
+          const pat = trapperPath.state.safe.map((s) => (['L', 'ML', 'MR', 'R'][s] || String(s + 1))).join(' · ');
           showBanner(sayText('trapper.devTitle', {}, 'TRAPPER\'S PATH'), pat, 3, '#f2d35a');
         } else if (cmd === 'site trapper cellar' && trapper.cellarSpot) {
           trapperPath.unlock();
@@ -28621,7 +28836,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       return parts?.jackAt || parts?.jackApproach || prop?.approach || null;
     }
     function convoyJackInReach() {
-      if (!gameStarted || gameOver || won || training.active || objectiveModalOpen() || ['ready', 'warning', 'open'].includes(convoyMission.read().phase)) return false;
+      if (!gameStarted || gameOver || won || training.active || objectiveModalOpen() || storyClosedSite(CONVOY_SITE) || ['ready', 'warning', 'open'].includes(convoyMission.read().phase)) return false;
       const a = convoyJackAt(), p = localPlayer.position;
       return !!a && hypot(p.x - a.x, p.z - a.z) <= 1.7 && Math.abs(p.y - a.y) < 1.5;
     }
@@ -28766,7 +28981,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     function hikersPlace(m, a, b) { const v = new THREE.Vector3(b.x - a.x, b.y - a.y, b.z - a.z), l = v.length() || 1e-3; m.scale.set(1, l, 1); m.position.set((a.x + b.x) / 2, (a.y + b.y) / 2, (a.z + b.z) / 2); m.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), v.normalize()); }
     function hikersTeardown() { if (hikers?.group) { scene.remove(hikers.group); hikers.group.traverse((m) => { m.geometry?.dispose?.(); }); } hikers = null; }
     function hikersCut(t = 0.5) {
-      if (!hikers || hikersKit.read().phase !== 'hanging') return;
+      if (!hikers || storyClosedSite(HIKERS_SITE) || hikersKit.read().phase !== 'hanging') return;
       for (const e of hikersKit.cut()) if (e.kind === 'cut') {
         // GB-199: the rope parts where the round crossed it (t along it from the bough): the upper length stays over
         // the bough with a frayed end; the lower length goes down with the bag, knotted to its loop.
@@ -28784,7 +28999,19 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       hikersCut(((m.x - a.x) * bx + (m.y - a.y) * by + (m.z - a.z) * bz) / ((bx * bx + by * by + bz * bz) || 1));
     }
     function hikersBagDist() { if (!hikers) return Infinity; const p = localPlayer.position, b = hikers.pos; return Math.abs(p.y - b.y) > 2.2 ? Infinity : hypot(p.x - b.x, p.z - b.z); }
-    function hikersGrabbable() { return !!hikers && !!hikersKit?.read().loose && !hikersSiteDone() && !objectiveModalOpen() && hikersBagDist() <= HIKERS.grabR; }
+    // GB-258 (J51): until the kit is his, the camp's first-aid pouch (the site) is locked and said nothing, and nor did the
+    // bag hanging in its tree. Short floating words (docs/specs/day-missions.md): at the pouch, where the kit is; near the
+    // hanging bag, what to do. ChatGPT's keys; the fallbacks until they land.
+    function hikersHintText() {
+      if (!hikers || !hikersKit || storyClosedSite(HIKERS_SITE) || hikersSiteDone() || objectiveModalOpen()) return null;
+      const k = hikersKit.read(), p = localPlayer.position, h = hikers.hang, a = objectiveProps?.props?.[HIKERS_SITE]?.approach;
+      if (k.phase === 'hanging' && Math.abs(p.y - h.y) < 9 && hypot(p.x - h.x, p.z - h.z) <= 10) return sayText('hikers.shootRope', {}, 'Shoot the rope to drop the kit');
+      if (a && Math.abs(p.y - a.y) < 1.25 && hypot(p.x - a.x, p.z - a.z) <= 1.6)
+        return k.loose ? (k.phase === 'ground' ? sayText('hikers.pouchDown', {}, 'Their kit is down by the tree: grab it there') : sayText('hikers.pouchWater', {}, 'Their kit is in the river: grab it'))
+          : sayText(hikers.river ? 'hikers.pouchRiver' : 'hikers.pouchTree', {}, hikers.river ? 'Their kit hangs in a tree by the river: shoot the rope' : 'Their kit hangs in a tree: shoot the rope');
+      return null;
+    }
+    function hikersGrabbable() { return !!hikers && !storyClosedSite(HIKERS_SITE) && !!hikersKit?.read().loose && !hikersSiteDone() && !objectiveModalOpen() && hikersBagDist() <= HIKERS.grabR; }
     function updateHikersKit(dt) {
       if (!gameStarted || gameOver || won || paused || training.active) return;
       hikersRetryT -= dt;
@@ -28908,9 +29135,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (!gameStarted || gameOver || won || paused || training.active) return;
       const F = fuelEnsure(); if (!F) return;
       for (let i = fuelDrips.length - 1; i >= 0; i--) { const d = fuelDrips[i]; d.t -= dt; if (d.t <= 0) { scene.remove(d.mesh); fuelDrips.splice(i, 1); } }
-      const st = fuelRun.read(), P = localPlayer.position;
-      if (fuelPendingCause) { const c0 = fuelPendingCause; fuelPendingCause = null; fuelEvents(fuelRun.ignite(c0)); }
-      if (!st.done && fuelRun.read().phase === st.phase) {
+      const st = fuelRun.read(), P = localPlayer.position, leadClosed = storyClosedSite(FUEL_SITE);
+      if (fuelPendingCause) { const c0 = fuelPendingCause; fuelPendingCause = null; if (!leadClosed) fuelEvents(fuelRun.ignite(c0)); }
+      if (!leadClosed && !st.done && fuelRun.read().phase === st.phase) {
         if (st.phase === 'at-pump') fuelEvents(fuelRun.holdFill(dt, objEDown, fuelAtPump()));
         else if (st.phase === 'carried') {
           const ss = fuelSiteState(); if (ss === 'ready-to-claim' || ss === 'claimed') fuelEvents(fuelRun.pour(true));   // the claim took it at the generator
@@ -28939,7 +29166,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (!done) { const c = fuelCanPos(); F.can.position.set(c.x, c.y - 0.23, c.z); F.can.rotation.y = fuelCarried() ? camYawCurrent : 0.4; }
     }
     function fuelPromptText() {
-      if (!fuelProps || !gameStarted || gameOver || won) return null;
+      if (!fuelProps || !gameStarted || gameOver || won || storyClosedSite(FUEL_SITE)) return null;
       const st = fuelRun.read(); if (st.done) return null;
       if (st.phase === 'at-pump' && fuelAtPump()) return st.fill > 0 ? dwText('fuel.filling') : dwText('fuel.fill');
       if (st.phase === 'carried' && fuelAtGen()) return dwText('fuel.pour');
@@ -29049,9 +29276,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       prop.pickup = radioLocker;   // ui/objectives-runtime.js marks and tracks the site here once it is repaired
       // Two markers: amber over the cabinet until it is repaired, green over the vault until it is emptied.
       const mat = (color, o = {}) => new THREE.MeshStandardMaterial({ color, roughness: 0.75, metalness: 0.2, ...o });
+      // CL-284 (Jerry's J44: "Take away the giant floating indicator above the relay"): the cones are made but never put in
+      // the world; the tracker, the map and the prompts say where (the state below still runs, for the tests and the cues).
       const mark = (color) => {
         const m = new THREE.Mesh(new THREE.ConeGeometry(0.42, 0.85, 4), mat(0x111111, { emissive: color, emissiveIntensity: 2.6, roughness: 0.5, metalness: 0 }));
-        m.rotation.x = Math.PI; scene.add(m); return m;
+        m.rotation.x = Math.PI; m.name = 'relay-marker-unused'; return m;
       };
       radioMarks = { cabinet: mark(0xffa31a), locker: mark(0x3dff6a), t: 0 };
       radioMarks.cabinet.position.set(prop.centre.x, prop.centre.y + 2.7, prop.centre.z);
@@ -29168,7 +29397,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const k = V.rewards.katanaStand.userData.katana;
       if (k && V.rewards.katanaStand.visible) k.rotation.x = Math.sin(t * 0.8) * 0.06;
       // Cut the roof and the front away while he is inside, or the camera behind him looks at a wall.
-      const inside = vaultHas(L, localPlayer.position);
+      // CU-191 (J29): not in first person. He is standing in the room, so its walls stay.
+      const inside = vaultHas(L, localPlayer.position) && !viewFirst;
       if (inside !== L.cutaway) { L.cutaway = inside; V.setCutaway(inside); }
     }
     // CL-184: what the vault sends up, applied when he takes it (relayVaultGrant stands in for grantSupply on the radio's
@@ -29249,7 +29479,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // What the main prompt says about the radio and its vault (null: nothing). Called after every other prompt.
     function radioPromptText() {
       const prop = objectiveProps?.props?.[RADIO_SITE];
-      if (!prop || !gameStarted || gameOver || won) return null;
+      if (!prop || !gameStarted || gameOver || won || storyClosedSite(RADIO_SITE)) return null;
       if (!nearPromptSpot(prop) && !nearPromptSpot(prop.pickup) && !nearPromptSpot(radioLocker) && !nearPromptSpot(satoNote)) return null;
       const st = radioSiteState(), p = localPlayer.position;
       const key = { interact: 'E' };
@@ -29722,7 +29952,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (e.code !== 'KeyE' || e.repeat || relay.mode) return;
       if (!gameStarted || gameOver || won || paused || objectiveModalOpen() || training.active) return;
       const prop = objectiveProps?.props?.[RADIO_SITE];
-      if (!prop) return;
+      if (!prop || storyClosedSite(RADIO_SITE)) return;
       const st = radioSiteState(), stage = relayStage(), down = st === 'available' || st === 'active' || st === 'undiscovered';
       let mode = null;
       if (satoNote && relayNear(satoNote, 1.6)) mode = 'note';
@@ -29812,7 +30042,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // What the main prompt says at the truck or the cutters (null: nothing). Before the objectives' own prompt.
     function truckPromptText() {
       const prop = truckSiteProp();
-      if (!prop || !truck.chain || truck.off || !gameStarted || gameOver || won) return null;
+      if (!prop || !truck.chain || truck.off || !gameStarted || gameOver || won || storyClosedSite(TRUCK_SITE)) return null;
       const st = truckMission.state, key = { interact: 'E' };
       if (st.stage !== 'chained') return null;
       if (!st.cutters && truck.cutters && relayNear(truck.cuttersSpot, 1.4)) return sayText('truck.cutters', key, 'E — Take the bolt cutters');   // (not .visible: sceneCull hides it out of view)
@@ -29836,7 +30066,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (gameOver || won) { truck.hold = false; if (AudioSys.truckAlarm) AudioSys.truckAlarm(false); return; }
       if (!gameStarted || paused) return;
       if (truck.hold) {
-        if (!relayNear(prop) || truckMission.state.stage !== 'chained') truck.hold = false;
+        if (!relayNear(prop) || storyClosedSite(TRUCK_SITE) || truckMission.state.stage !== 'chained') truck.hold = false;
         else {
           const r = truckMission.hold(dt);
           if (r === 'cutting') {
@@ -29889,7 +30119,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (e.code !== 'KeyE' || e.repeat || relay.mode) return;
       if (!gameStarted || gameOver || won || paused || objectiveModalOpen() || training.active) return;
       const prop = truckSiteProp();
-      if (!prop || !truck.chain || truck.off || truckMission.state.stage !== 'chained') return;
+      if (!prop || !truck.chain || truck.off || storyClosedSite(TRUCK_SITE) || truckMission.state.stage !== 'chained') return;
       if (!truckMission.state.cutters && truck.cutters && relayNear(truck.cuttersSpot, 1.4)) {
         e.preventDefault(); e.stopImmediatePropagation();
         if (truckMission.takeCutters()) {
@@ -30050,7 +30280,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // What the main prompt says at the lockbox or by a thing to look at (null: nothing). Before the objectives' own.
     function rangerPromptText() {
       const prop = rangerSiteProp();
-      if (!prop || !ranger.built || ranger.off || ranger.mode || !gameStarted || gameOver || won || rangerCache.unlocked()) return null;
+      if (!prop || !ranger.built || ranger.off || ranger.mode || !gameStarted || gameOver || won || storyClosedSite(RANGER_SITE) || rangerCache.unlocked()) return null;
       const key = { interact: 'E' };
       if (relayNear(prop)) return sayText('ranger.lockbox', key, 'E — Lockbox');
       if (rangerClueNear()) return sayText('ranger.look', key, 'E — Look');
@@ -30087,7 +30317,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (e.code !== 'KeyE' || e.repeat || relay.mode || ranger.mode) return;
       if (!gameStarted || gameOver || won || paused || objectiveModalOpen() || training.active) return;
       const prop = rangerSiteProp();
-      if (!prop || !ranger.built || ranger.off || rangerCache.unlocked()) return;
+      if (!prop || !ranger.built || ranger.off || storyClosedSite(RANGER_SITE) || rangerCache.unlocked()) return;
       let mode = null, clue = null;
       if (relayNear(prop)) mode = 'keypad';
       else if ((clue = rangerClueNear())) mode = 'look';
@@ -30134,11 +30364,14 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         const hs = trapper.horseshoes[r];
         if (!hs) continue;
         const side = trapperPath.safeSide(r);
-        const sgn = trapperSideSign(side);
-        const lx = sgn * TRAPPER.POST_X, lz = trapperRowZ(r);
+        const post = trapper.posts ? trapper.posts.find((p) => p.row === r && p.side === side) : null;
+        const lx = post ? post.lx : (side >= 2 ? 1 : -1) * TRAPPER.POST_X;
+        const lz = post ? post.lz : trapperRowZ(r);
         const gy = trapper.groundAtLocal(lx, lz);
-        hs.position.set(lx - sgn * 0.015, gy + 0.88, lz + 0.084);
-        hs.rotation.set(0, -sgn * 0.24, 0);
+        const sgn = lx >= 0 ? 1 : -1;
+        const rotY = Math.abs(lx) > 1.2 ? -sgn * 0.20 : 0;
+        hs.position.set(lx - sgn * 0.005, gy + 0.88, lz + 0.084);
+        hs.rotation.set(0, rotY, 0);
         hs.userData.row = r;
         hs.userData.side = side;
         hs.matrixAutoUpdate = false;
@@ -30412,7 +30645,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     { const _tp = trapperSiteProp(); if (_tp && !trapper.built) buildTrapperMission(_tp); }
     function trapperPromptText() {
       const prop = trapperSiteProp();
-      if (!prop || !trapper.built || trapper.off || !gameStarted || gameOver || won) return null;
+      if (!prop || !trapper.built || trapper.off || !gameStarted || gameOver || won || storyClosedSite(TRAPPER_SITE)) return null;
       if (trapperPath.held()) {
         return sayText('trapper.snapped', { seconds: Math.max(1, Math.ceil(trapperPath.state.holdT)) }, 'Bear trap! (' + Math.max(1, Math.ceil(trapperPath.state.holdT)) + 's)');
       }
@@ -30423,7 +30656,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
     function trapperStepAt(wx, wz, dt, opts = {}) {
       const prop = trapperSiteProp();
-      if (!prop || !trapper.built || trapper.off) return null;
+      if (!prop || !trapper.built || trapper.off || storyClosedSite(TRAPPER_SITE)) return null;
       const loc = trapper.toLocal(wx, wz);
       const res = trapperPath.step(loc.x, loc.z, dt, opts);
       if (res.kind === 'snap') {
@@ -31617,6 +31850,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const props = objectiveProps && objectiveProps.props;
       if (!props || !objectiveRuntime || !gameStarted || gameOver || won) return null;
       if (hikersGrabbable()) return dwText('hikers.grab');   // GB-196
+      { const hint = hikersHintText(); if (hint) return hint; }   // GB-258 (J51)
       if (!Object.entries(props).some(([id, spot]) => id !== RADIO_SITE && (nearPromptSpot(spot) || nearPromptSpot(spot?.pickup)))) return null;
       let sites; try { sites = objectiveRuntime.read().sites; } catch (_) { return null; }
       for (const s of sites) {
@@ -31631,6 +31865,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const prop = props && props[id];
       if (!prop) return null;
       const reach = objectiveReach(prop);
+      if (storyClosedSite(id)) return { id, approach: reach.approach, distance: reach.distance, reachable: false, blockedBy: 'story', ePressed: false, eHeld: false, holdSeconds: 0, cancelled: null };
       // CL-183/CL-184: at the radio nothing is held. The reboot runs by itself; when it is done, the repair is reported
       // whole (the six seconds) wherever he is, until the site has taken it.
       if (id === RADIO_SITE) {
@@ -42371,6 +42606,15 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // there until taken (no new-day or alarm drop). The spot is the camp's fire for now (the hikers' shelf, the rangers'
     // truck and the cellar are each mission's owner's to place: s.x/s.z).
     const SURVIVOR_LEAD = { hikers: 'missing', ranger: 'search', trapper: 'oldman' };
+    // CL-285 (D-102, Jerry: "make sure that they are not visible or interactable before the time of their introduction"):
+    // with the gate on, nobody is placed, seen or taken in before his lead's day (game/story-chain.js LEADS earliest: Pike
+    // the missing hikers, day 5; Brandt the search, day 7; Okafor the old man, day 8), even with his thread done sooner (a
+    // lead done while still closed, a dev jump). Night 3 (SURVIVOR_FROM) still stands under it.
+    function survivorIntroDay(style) {
+      const l = storyLeadOf(SURVIVOR_LEAD[style]);
+      return Math.max(SURVIVOR_FROM, l ? l.earliest | 0 : 0);
+    }
+    function survivorIntroduced(s) { return !STORY_GATE || !s || !s.thread || (day | 0) >= survivorIntroDay(s.style); }
     // GB-232 (places): Okafor in the trapper's cellar (AG-135's trapper.cellarSpot), Brandt by the rangers' truck's door
     // (ranger.clues' 'truck' spot), Pike where he hid beyond the hikers' camp (CL-263, historyProps.pikeHide). null: the fire.
     function survivorPlace(style) {
@@ -42380,10 +42624,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       return null;
     }
     function survivorsAtThreadEnd() {
+      for (const s of survivorWaiting) if (s.root) s.root.visible = survivorIntroduced(s);   // CL-285: a dev step back hides him again
       if (!STORY_GATE || (day | 0) < SURVIVOR_FROM) return;
       for (let i = 0; i < POI.campsites.length; i++) {
         const c = POI.campsites[i], lead = SURVIVOR_LEAD[c?.style];
-        if (!lead || survivorCampsUsed.has(i) || storyChain.stateOf(lead) !== 'done') continue;
+        if (!lead || survivorCampsUsed.has(i) || (day | 0) < survivorIntroDay(c.style) || storyChain.stateOf(lead) !== 'done') continue;   // CL-285
         const open = zombies.find((o) => o.alive && o.poiGuard && o.poiGuard.kind === 'campsite' && o.poiGuard.index === i)?.poiGuard;
         const s = placeSurvivor(open || { kind: 'campsite', index: i, x: c.x, z: c.z }, day, survivorPlace(c.style));
         s.thread = lead;
@@ -42417,6 +42662,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (!survivorWaiting.length) return null;
       const p = localPlayer.position;
       for (const s of survivorWaiting) {
+        if (!survivorIntroduced(s)) continue;   // CL-285
         if (hypot(s.x - p.x, s.z - p.z) > SURVIVOR_REACH) continue;
         if (Number.isFinite(s.y) && Math.abs(s.y - p.y) > 1.6) continue;   // GB-232: the cellar under the yard
         return survivorGuardsLeft(s) ? null : s;
@@ -42424,7 +42670,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       return null;
     }
     function rescueSurvivor(s) {
-      if (!s || s.state !== 'waiting' || survivorGuardsLeft(s)) return false;
+      if (!s || s.state !== 'waiting' || survivorGuardsLeft(s) || !survivorIntroduced(s)) return false;   // CL-285
       s.state = 'rescued';
       removeSurvivorFigure(s);
       takeInSurvivor(s.style, s.camp, s.day);   // GB-116: home by the next dawn, on the roof
@@ -42741,8 +42987,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     function getSurvivors() { return survivors.map((s) => ({ ...s })); }
     const survivorDbg = {
       setChance: (c) => { survivorChance = c; }, allowed: survivorAllowed, inReach: () => !!survivorInReach(),
-      waiting: () => survivorWaiting.map((s) => ({ style: s.style, camp: s.camp, day: s.day, x: s.x, y: s.y, z: s.z, state: s.state, shown: !!(s.root && s.root.parent) })),
-      campsUsed: () => [...survivorCampsUsed], FROM: SURVIVOR_FROM, REACH: SURVIVOR_REACH
+      waiting: () => survivorWaiting.map((s) => ({ style: s.style, camp: s.camp, day: s.day, x: s.x, y: s.y, z: s.z, state: s.state, shown: !!(s.root && s.root.parent), visible: !!(s.root && s.root.parent && s.root.visible), thread: s.thread || null })),
+      campsUsed: () => [...survivorCampsUsed], FROM: SURVIVOR_FROM, REACH: SURVIVOR_REACH, introDay: survivorIntroDay, introduced: (style) => survivorIntroduced({ style, thread: SURVIVOR_LEAD[style] || null })   /* CL-285 */
     };
     // GB-89 (P-61): on some days from night 7 a colossus walks a worn trail (PATHS) by day: the 'wanderer' bounty.
     // It's a one-guard post that moves. It keeps to a stretch of trail at least WANDERER_HQ_CLEAR m from the HQ and walks
@@ -43701,6 +43947,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (medPenT > 0) return;                       // already mid-jab
       if (medkits <= 0) { AudioSys.invalid(); showBanner(dwText('supply.noMedpens'), dwText('supply.medpenHelp'), 1.5, '#ffb347'); return; }
       if (playerHp >= PLAYER_MAX_HP - 0.5) { AudioSys.invalid(); return; }
+      if (akimboOn()) { AudioSys.invalid(); showBanner(sayText('weapon.message.handsFull', {}, 'BOTH HANDS FULL'), sayText('weapon.message.freeHand', {}, 'Y goes back to one gun'), 1.2, '#ffb347'); return; }   // GB-258 (J17): no hand free for the pen
       medkits -= 1;
       // Cap off, jab into the thigh, click, hiss — the heal lands on the jab (updateMedPenUse).
       medPenT = MEDPEN_T; medPenHealed = false; medPenHand.visible = true;
@@ -48057,7 +48304,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // tower ladder, menus, building, cinematics and the Training Ground's wake-up. (CL-193: the dive allows it.)
     // CL-247 (D-87): the 5 key turns it on (viewFirst), no longer right-click; right-click there narrows to the Aim FOV.
     function otsAllowedBase() {   // CL-249: the sniper too (its scope is first person's aim down the sights there)
-      return gameStarted && !gameOver && !won && !paused && !shopOpen && !placeMode && !buildMode && !wheelIsOpen() &&
+      // CU-189 (J26): the weapon wheel does not turn this off. It used to, and the view eased out of first person
+      // (and back in on close). The wheel lets go of the pointer in miniPanelOpen and holds the view where it is.
+      return gameStarted && !gameOver && !won && !paused && !shopOpen && !placeMode && !buildMode &&
         !mortarMounted && !mortarCarried && !playerSwimming && !climbingTower &&
         !scriptedKill && !cine && !waveFinisher && !loopCine && !training.wake;
     }
@@ -48151,15 +48400,36 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (hide && !fpHeadHidden) { if (h.visible) { h.visible = false; fpHeadHidden = true; } }
       else if (!hide && fpHeadHidden) { fpHeadHidden = false; if (!(rabbitMound && rabbitMound.headOff)) h.visible = true; }
       const arm = marine.userData.armLG; if (!arm) return;   // CL-250
-      const hideArm = hide && fpAdsW > 0.5 && !!FP_HIDE_SUPPORT[currentWeapon] && !akimboOn();
+      const hideArm = hide && fpAdsW > 0.5 && !!FP_HIDE_SUPPORT[currentWeapon] && !akimboOn() && !(viewmodel && viewmodel.info.active);   // CL-281: the view gun's own arms
       if (hideArm && !fpArmHidden) { if (arm.visible) { arm.visible = false; fpArmHidden = true; } }
       else if (!hideArm && fpArmHidden) { fpArmHidden = false; arm.visible = true; }
+    }
+    // CL-281 (docs/specs/first-person-1.2.md): the view gun (game/viewmodel.js) for the guns game/viewmodel-poses.js
+    // lists, in first person once the camera is at his eyes and he holds it. ?vm=0 keeps the old first person.
+    const VM_ON = new URLSearchParams(location.search).get('vm') !== '0';
+    const _vmState = { want: false, weapon: null, ads: 0, vx: 0, vz: 0, vy: 0, grounded: true, reloadU: null, settled: false };
+    function updateViewmodel(dt) {
+      if (viewmodel === null) {
+        if (!gameStarted || !VM_ON) return;
+        try { viewmodel = createViewmodel({ THREE, TSL, renderer, scene, camera, marine, weaponMeshes, hold: (k) => WEAPON_HOLD[k],
+          stowed: () => (carryRig ? [...carryRig.slings.map((x) => x.g), ...carryRig.holsters.map((x) => x.g)] : []) }); }   // AG-168: his stowed guns out of the eye
+        catch (err) { console.warn('Grave Shift: the first-person view gun failed to build.', err); viewmodel = false; }
+      }
+      if (!viewmodel) return;
+      const st = _vmState;
+      st.want = viewFirst && OTS.w > 0.6 && gameStarted && !gameOver && !won && !unarmed && !akimboOn() && holdW > 0.5 && weaponMount.visible &&
+        !playerSwimming && !mortarMounted && !mortarCarried && !onAnyLadder() && !vault && !scriptedKill && !cine && !(knifeAnimT > 0);
+      st.weapon = currentWeapon; st.ads = fpAdsW; st.vx = velX; st.vz = velZ; st.vy = vy; st.grounded = grounded;
+      st.reloadU = reloading ? _clamp01(1 - reloadTimer / Math.max(0.05, reloadAnimDuration || 1)) : null;
+      // AG-168 (defect 3): the hands' places on the gun are read off him only at rest: settled, level, not aimed, standing.
+      st.settled = holdW > 0.98 && !reloading && Math.abs(OTS.pitch) < 0.35 && !diving() && fpAdsW < 0.01 && hypot(velX, velZ) < 0.3;
+      viewmodel.update(dt, st);
     }
     // CL-247: the third-person aim zoom (AIMZ above). Not with the sniper (its scope, until CL-249), the mounted guns,
     // the build tools or menus, or in first person.
     function aimZoomAllowed() {
       return zoomHeld && !viewFirst && pointerOnCanvas && gameStarted && !gameOver && !won && !paused && !shopOpen && !placeMode && !buildMode &&
-        !wheelIsOpen() && currentWeapon !== 'sniper' && !mortarMounted && !mortarCarried && !climbingTower && !scriptedKill && !cine &&
+        currentWeapon !== 'sniper' && !mortarMounted && !mortarCarried && !climbingTower && !scriptedKill && !cine &&
         !waveFinisher && !loopCine && !training.wake;
     }
     function aimzEase() { const w = AIMZ.w; return w * w * (3 - 2 * w); }
@@ -48190,7 +48460,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         }
       }
     }
+    let lockWantDbg = null;
     function otsLockWanted(on) {
+      lockWantDbg = !!on;
       const el = renderer.domElement, locked = document.pointerLockElement === el;
       try {
         if (on && !locked && el.requestPointerLock) { const p = el.requestPointerLock(); if (p && p.catch) p.catch(() => {}); }
@@ -48220,17 +48492,32 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // panel is up (the relay's breakers, radio, keypad and note; the ranger's lockbox and looks) first person lets go of
     // the pointer and holds the view still, so the panel can be clicked; the lock comes back when it closes.
     function miniPanelOpen() {
-      return !!(shopOpen || recordingKind || hqBriefingOpen || (relay.panel && relay.panel.isOpen()) || (typeof ranger !== 'undefined' && ranger && ranger.panel && ranger.panel.isOpen()));
+      // CU-189: the weapon and build wheels too. The cursor has to move to pick a wedge, and the view stays put.
+      return !!(wheelIsOpen() || shopOpen || recordingKind || hqBriefingOpen || (relay.panel && relay.panel.isOpen()) || (typeof ranger !== 'undefined' && ranger && ranger.panel && ranger.panel.isOpen()));
     }
     let _panelHeldLock = false;
+    // CU-190 (J27): a menu in first person used to leave the pointer locked. The lock request from the click that
+    // opened it can land after the menu has turned the view off, and nothing then lets go. While any menu is up,
+    // a locked pointer is released every frame; on close, first person asks for it back.
+    function menuHoldsPointer() {
+      return !!(miniPanelOpen() || paused || cifOpen || settingsFrom || devConsoleOpen || fullMapOpen
+        || (winEl && winEl.classList.contains('show'))
+        || (modeSelectEl && modeSelectEl.classList.contains('show'))
+        || (training.panel && training.panel.isOpen()));
+    }
     function updatePanelPointer() {
-      const open = miniPanelOpen();
-      if (open && OTS.on) { if (document.pointerLockElement === renderer.domElement) { _panelHeldLock = true; otsLockWanted(false); } }
-      else if (!open && _panelHeldLock) { _panelHeldLock = false; if (viewFirst && OTS.on) otsLockWanted(true); }
+      const open = menuHoldsPointer();
+      if (open) {
+        if (viewFirst) _panelHeldLock = true;
+        if (document.pointerLockElement === renderer.domElement) otsLockWanted(false);
+      } else if (_panelHeldLock) {
+        _panelHeldLock = false;
+        if (viewFirst && otsAllowed()) otsLockWanted(true);
+      }
     }
     function otsMouse(e) {
       if (!flightReplaying) { flightDx += e.movementX || 0; flightDy += e.movementY || 0; }
-      if (!OTS.on || miniPanelOpen()) return;
+      if (!OTS.on || menuHoldsPointer()) return;
       const k = OTS_SENS * lookSens;
       OTS.yaw -= (e.movementX || 0) * k;
       OTS.pitch = Math.max(OTS_PITCH[0], Math.min(OTS_PITCH[1], OTS.pitch - (e.movementY || 0) * k));
@@ -48281,7 +48568,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         // CU-111: the camera looks through the near wall. That glass is not the aim point;
         // the floor, a plate or a pillar beyond it is.
         trainingHit = traceTraining(training.tg, ray.origin, _trainingAimEnd, { throughGlass: !scoped });
-        if (trainingHit && trainingHit.t * TRAINING.FAR <= groundT) {
+        if (trainingHit && !trainingHit.solid.floor && trainingHit.t * TRAINING.FAR <= groundT) {   // GB-256 (J31, J32): the floor is raycastTerrain's hit already; as a range hit too the tie flipped each frame between 'ground' (chest-raised aim) and 'training' (the floor), and the gun bounced ~6 deg
           groundT = trainingHit.t * TRAINING.FAR;
           aimHit.set(trainingHit.point.x, trainingHit.point.y, trainingHit.point.z);
         } else trainingHit = null;
@@ -48374,7 +48661,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
 
     renderer.domElement.addEventListener('mousedown', (e) => {
       if (uiBlocksFire()) return;
-      if (viewFirst && OTS.on && document.pointerLockElement !== renderer.domElement && !miniPanelOpen()) otsLockWanted(true);   // CL-247: first person lost its lock (Esc, a menu); CL-258: not over a device's panel
+      if (viewFirst && OTS.on && document.pointerLockElement !== renderer.domElement && !menuHoldsPointer()) otsLockWanted(true);   // CL-247: first person lost its lock (Esc, a menu); CL-258 / CU-190: not while a menu is up
       if (e.button === 0) {
         if (placeMode) beginPlaceClick();
         else if (gameStarted && !gameOver && !won && !paused) mouseFireHeld = true;
@@ -48543,6 +48830,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const gun = firingGun();
       lastFiredGun = gun;
       gun.userData.flashT = 0.045;
+      gun.userData.shots = (gun.userData.shots | 0) + 1;   // CL-281: the view gun's recoil counts them
       // Pistol barrel/compensator are frame-locked; a fire slideKick detaches the muzzle.
       // Other weapons ignore slideKick (no slide mesh). Reload still racks the pistol slide.
       gun.userData.slideKick = (currentWeapon === 'pistol') ? 0 : 0.042;
@@ -48631,6 +48919,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       return { len, surface };
     }
 
+    const _vmLaserInv = new THREE.Matrix4(), _vmLaserAt = new THREE.Vector3();   // CL-281
     function updateLasers() {
       laserMuzzleLight.intensity = 0; // A beam scatters light; its emitter is not a floodlight.
       laserAimReport = null;
@@ -48641,7 +48930,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           if (!laser) continue;
           const st = WEAPON_STATS[name];
           const active = name === currentWeapon && gun.visible && gun.parent && gun.parent.visible;
-          const on = lasersEnabled && gearOwned.laser && active && !st.melee && gameStarted && !placeMode && !gameOver && !won && !reloading && !playerSwimming && !mortarMounted;
+          // GB-257 (J9): the beam stays on through a reload; it rides the gun as the hands work the magazine.
+          const on = lasersEnabled && gearOwned.laser && active && !st.melee && gameStarted && !placeMode && !gameOver && !won && !playerSwimming && !mortarMounted;
           laser.visible = on;
           if (!on) { laser.material.opacity = 0; continue; }
           const offhand = gun === offhandMeshes[name];
@@ -48651,28 +48941,32 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           laser.material.opacity = (nvgDown && isNight) ? 0.96 : (isNight ? 0.9 : 0.72);
           laser.material.blending = THREE.AdditiveBlending;
           gun.updateMatrixWorld(true);
-          // Same point the round is fired at. The cone leaves this muzzle and stops
-          // on the first material along that line, so it meets the cursor.
+          // GB-257 (J8): the cone leaves this muzzle along the bore every frame, so it moves with the recoil, the sway
+          // and the reload, and stops on the first material along that line. At rest the hold points the bore at the
+          // aim point (the round's), so it meets the cursor there; the reach is that point's distance plus a margin.
           const mz = gun.userData.muzzleLocal;
-          _laserOrigin.set(mz.x, mz.y, mz.z);
-          gun.localToWorld(_laserOrigin);
+          // CL-281: in first person with the view gun the beam leaves the view gun's muzzle (where the eye sees it) for
+          // the aim point; his own gun, out of the eye's pass, still holds the beam's mesh.
+          const vmLaser = !offhand && !!viewmodel && viewmodel.showing(name) && !!viewmodel.muzzleWorld(_laserOrigin);
+          if (!vmLaser) { _laserOrigin.set(mz.x, mz.y, mz.z); gun.localToWorld(_laserOrigin); }
           weaponAimPoint(_laserAim);
-          _laserDir.subVectors(_laserAim, _laserOrigin);
-          const reach = _laserDir.length();
+          const reach = _laserAim.distanceTo(_laserOrigin);
           if (reach < 0.05) { laser.visible = false; continue; }
-          _laserDir.multiplyScalar(1 / reach);
-          const stop = laserStop(_laserOrigin, _laserDir, reach);
+          if (vmLaser) {
+            _laserDir.subVectors(_laserAim, _laserOrigin).normalize();
+            _laserLocal.copy(_laserDir).transformDirection(_vmLaserInv.copy(gun.matrixWorld).invert());
+          } else {
+            _laserLocal.set(0, 0, mz.z >= 0 ? 1 : -1);
+            _laserDir.copy(_laserLocal).transformDirection(gun.matrixWorld);
+          }
+          const stop = laserStop(_laserOrigin, _laserDir, reach * 1.25 + 1);
           const len = stop.len;
-          _laserInv.copy(gun.matrixWorld).invert();
-          _laserLocal.copy(_laserDir).transformDirection(_laserInv);
-          if (_laserLocal.lengthSq() < 1e-8) _laserLocal.copy(_laserZ);
-          else _laserLocal.normalize();
           laser.quaternion.setFromUnitVectors(_laserZ, _laserLocal);
           const ws = Math.abs(gun.getWorldScale(_laserScale).z) || 1;
           const localLen = len / ws;
           const r0 = 0.0038 / ws, r1 = (0.0038 + 0.00015 * len) / ws;
           poseLaserBeam(laser, localLen, r0, r1);
-          laser.position.copy(mz);
+          if (vmLaser) laser.position.copy(gun.worldToLocal(_vmLaserAt.copy(_laserOrigin))); else laser.position.copy(mz);
           laser.scale.set(1, 1, 1);
           if (!offhand) {
             _laserEnd.copy(_laserOrigin).addScaledVector(_laserDir, len);
@@ -58213,6 +58507,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       camera.far = TRAINING.FAR; camera.updateProjectionMatrix();
       refreshArmoryRack(true);
       trainingHideWorld(true);   // CL-138: the valley leaves while he is in here
+      // CU-192 (J33): the warm frame is drawn while the loop is stopped, so it keeps whatever light the
+      // title had (morning, or night if the clock had run on). Put noon in before that frame, or the
+      // blackout fades up on a dim room.
+      updateDayNight(0);
       trainingWarmCompile();   // CL-117
       training.hud.show(true);
       updateWaveHud();
@@ -60696,7 +60994,8 @@ live++;
         if (fpEye) {
           OTS.eye.copy(fpEye);
           let lX = dX, lY = dY, lZ = dZ;
-          const sight = fpAdsW > 0 ? firstPersonSightSteady(realDt) : null;   // CL-260 (N5): steadied, not glued to the run's bounce
+          // CL-281: with the view gun the eye stays at his eyes; the view gun brings its sights to the view's line.
+          const sight = fpAdsW > 0 && !(viewmodel && viewmodel.info.active) ? firstPersonSightSteady(realDt) : null;   // CL-260 (N5): steadied, not glued to the run's bounce
           if (sight) {   // right-click: onto the gun's sight line
             const a = fpAdsW * fpAdsW * (3 - 2 * fpAdsW);
             OTS.eye.lerp(sight.pos, a);
@@ -60795,6 +61094,8 @@ live++;
       skyDome.position.copy(camera.position);
       PROF.mark('camera');
       flightRecord(dt);   // CU-160
+      updateViewmodel(realDt);   // CL-281
+      PROF.mark('viewmodel');
       renderFrame();
       PROF.mark('after render');
       if ((showPerf || INSPECT) && !window.TT) {
@@ -60804,10 +61105,33 @@ live++;
       getHitStumble: () => ({ ...hitStumble, speedK: hitStumbleSpeedK(), react: hitReaction.strength * Math.pow(hitReaction.time / hitReaction.duration, 2) }), HIT_KNEE_S, HIT_AIM_S,   // GB-50
           otsDbg: () => ({ on: OTS.on, w: OTS.w, yaw: OTS.yaw, pitch: OTS.pitch, locked: document.pointerLockElement === renderer.domElement, fov: aimFov, tilt: aimTiltDeg }),
           aimZoomDbg: () => ({ on: AIMZ.on, w: AIMZ.w, relX: AIMZ.relX, relZ: AIMZ.relZ, ndcX: AIMZ.ndcX, ndcY: AIMZ.ndcY, panX: AIMZ.appliedX, panZ: AIMZ.appliedZ, fov: camera.fov, baseFov: camFovCurrent, first: viewFirst }),   /* CL-247 */
-          setViewFirstDbg: (on) => toggleViewFirst(on), fpHeavyHipDbg: () => FP_HEAVY_HIP, setOtsAimDbg: (yaw, pitch) => { if (yaw != null) OTS.yaw = yaw; if (pitch != null) OTS.pitch = pitch; },   /* CL-271: the view's aim, for probes */ setFirstPersonFov: (deg) => setFirstPersonFov(deg), applyPictureSettings: () => applyPictureSettings(), pictureDbg: () => pictureState(), stepFrame: (dt) => stepFrame(dt), flightHold: (on) => { flightHold = !!on; }, flightReset: () => flightReset(), flightClip: (note) => flightClip(note), flightRestore: (clip) => flightRestore(clip), flightInput: (spec) => flightInput(spec), flightDbg: () => ({ hold: flightHold, frames: flightLog.frames().length, snaps: flightLog.snaps.length, replaying: flightReplaying, seed: flightRng.seed, xfade: XFADE.key, xw: XFADE.w }), fpTuneDbg: (o = {}) => { if (o.ready != null) FP_READY = o.ready; if (o.lift != null) FP_LIFT = o.lift; if (o.hip) Object.assign(FP_HIP, o.hip); if (o.hipHand) Object.assign(FP_HIP_HAND, o.hipHand); return { ready: FP_READY, lift: FP_LIFT, hip: { ...FP_HIP }, hipHand: { ...FP_HIP_HAND } }; },   /* CL-250 */ fpDbg: () => ({ first: viewFirst, w: OTS.w, ads: fpAdsW, headHidden: fpHeadHidden, armHidden: fpArmHidden, eye: OTS.eye ? OTS.eye.clone() : null, sight: firstPersonSight() ? { pos: _fpSight.clone(), fwd: _fpFwd.clone() } : null }),   /* CL-249 */ aimKindDbg: () => aimKind, aimAssistDbg: () => ({ ...aimAssistLast }), shotAimDbg: () => shotAimTarget().clone(), AIM_ASSIST_NDC, AIM_CHEST,   /* CL-247 */ otsLook: (dx, dy) => otsMouse({ movementX: dx, movementY: dy }),   /* CL-174 */
+          setViewFirstDbg: (on) => toggleViewFirst(on), viewmodelDbg: () => viewmodel || null, vmStateDbg: () => _vmState,   /* CL-281 */ fpHeavyHipDbg: () => FP_HEAVY_HIP, setOtsAimDbg: (yaw, pitch) => { if (yaw != null) OTS.yaw = yaw; if (pitch != null) OTS.pitch = pitch; },   /* CL-271: the view's aim, for probes */ setFirstPersonFov: (deg) => setFirstPersonFov(deg), applyPictureSettings: () => applyPictureSettings(), pictureDbg: () => pictureState(), stepFrame: (dt) => stepFrame(dt), flightHold: (on) => { flightHold = !!on; }, flightReset: () => flightReset(), flightClip: (note) => flightClip(note), flightRestore: (clip) => flightRestore(clip), flightInput: (spec) => flightInput(spec), flightDbg: () => ({ hold: flightHold, frames: flightLog.frames().length, snaps: flightLog.snaps.length, replaying: flightReplaying, seed: flightRng.seed, xfade: XFADE.key, xw: XFADE.w }), fpTuneDbg: (o = {}) => { if (o.ready != null) FP_READY = o.ready; if (o.lift != null) FP_LIFT = o.lift; if (o.hip) Object.assign(FP_HIP, o.hip); if (o.hipHand) Object.assign(FP_HIP_HAND, o.hipHand); return { ready: FP_READY, lift: FP_LIFT, hip: { ...FP_HIP }, hipHand: { ...FP_HIP_HAND } }; },   /* CL-250 */ fpDbg: () => ({ first: viewFirst, w: OTS.w, ads: fpAdsW, headHidden: fpHeadHidden, armHidden: fpArmHidden, eye: OTS.eye ? OTS.eye.clone() : null, sight: firstPersonSight() ? { pos: _fpSight.clone(), fwd: _fpFwd.clone() } : null }),   /* CL-249 */ aimKindDbg: () => aimKind, aimAssistDbg: () => ({ ...aimAssistLast }), shotAimDbg: () => shotAimTarget().clone(), AIM_ASSIST_NDC, AIM_CHEST,   /* CL-247 */ otsLook: (dx, dy) => otsMouse({ movementX: dx, movementY: dy }),   /* CL-174 */
           rotateBuildDbg: () => rotateBuild(), toggleStairs, nearestFoldStairs, emplacementRate, platforms, updateFoldingStairs, weaponMeshes, offhandMeshes, knifeMesh: () => knife, nightLockdown, lockdownState: () => ({ on: nightLockdown(), placeMode, buildMode, wheel: wheelKind, briefing: hqBriefingOpen, shop: shopOpen, cif: cifOpen }),   /* CU-82 */ setAmmoDbg: (k, n) => { if (isMagazineWeapon(k)) { if (!magazineStore[k]) issueWeaponMagazines(k, 0, 0); setLoadedMagazineRounds(magazineStore, k, n, dualActive && !!DUAL_CAPABLE[k] && !!dualOwned[k]); syncMagazine(k); } else ammoByWeapon[k] = n; }, getPlaceHint: () => placeHint, findRepairCandidate, findScrapCandidate, onMyStorey, refusalText, fireRoundDbg: (ox, oy, oz, dx, dy, dz, damage, speed, pierce) => { spawnProjectile(false, new THREE.Vector3(ox, oy, oz), new THREE.Vector3(dx, dy, dz), damage, 2, null, speed, 'bullet', pierce | 0); return projectiles[projectiles.length - 1]; }, stepProjectilesDbg: (dt) => { updateProjectiles(dt); flushShotHits(); }, /* GB-58 follow-up: one round, stepped by hand */ session, startDeathCine, skipDeathCine, endDeathCine, getCine: () => cine, plotSpot, nearestGrave, getCrew: () => cineCrew, tagWallDbg: { refresh: () => refreshTagWall(), wall: () => house.tagWall, tags: () => hollowTags.read().tags.slice(), TAG_TOTAL },   /* CL-206 */ burialDbg: { setRunTags: (ids) => { runTagIds = ids.slice(); }, runTags: () => runTagIds.slice(), whos: () => burialWhos(), MOUND },   /* CL-205 */ poseCrew, DIG_LEAN, drawPlaque, moundHeight, placeShovel, GRAVE_PLOTS, endGame, playerNameEl, hq, house, getSkullBag: () => skullBag, getSkullLedger: () => skullLedger, awardCash, skullSafeSpot, getSkullLife: () => ({ life: SKULL_LIFE, zipR: SKULL_ZIP_R, zipMax: SKULL_ZIP_MAX }), getSkullRecall: () => skullRecallUntil, updateHQ, HQ_WINDOW_FRONT, HQ_PANEL_FRONT, HQ_DUTY_BOARD_FRONT, HQ_DUTY_BOARD_REACH, HQ_RADIO_FRONT, HQ_RADIO_REACH, cashDrops, killZombie, KIOSK, SKULL_LOOK, makeSkullMesh, getGestureT: () => gestureT, mortarArcBlocked, mortarSolve, mountMortar, updateMortarArc, fireMortar, mortarCrewSpot, getMortarNoRoom: () => mortarNoRoom, onStairsRamp, dismountMortar, fireShellDbg, flushShotHits, setMotionEnabledDbg: () => {}, getCorpses: () => corpses, marineDown, bomberBlast, updateCorpsesDbg: (dt) => updateCorpses(dt), freezeCorpse, getMortarAim: () => mortarAimState, setAimTargetDbg: (x, z) => { aimTarget.x = x; aimTarget.z = z; aimTarget.y = sampleHeight(x, z); aimKind = 'none'; }, setZoomHeldDbg: (v) => { zoomHeld = !!v; }, getAimCamDbg: () => ({ ads: aimCamAds, pose: aimCamPose, elev: AIM_CAM_ELEV, shoulder: AIM_SHOULDER }) /* CU-114 */, getShoulderDbg: () => ({ aimF: _shAimDbg.f.clone(), aimT: _shAimDbg.t.clone(), kick: { ...recoilKick }, tilt: { ...reloadMountOff }, w: shoulderHoldW, ads: shoulderAdsW, rawAds: shoulderAds(), cheek: shoulderCheekAng, hold: SHOULDER_HOLD, holds: WEAPON_HOLD }), /* GB-129 */ getWeaponSizeDbg: () => ({ upm: MARINE_UPM, sizes: WEAPON_SIZE, blades: BLADE_SIZE, carry: CARRY_FIT, factors: Object.fromEntries(Object.keys(weaponMeshes).map((k) => [k, weaponSizeFactor(k)])) }), /* GB-130 */ resolveSoftBarricades, resolveHardBuildCollisions, PLAYER_RADIUS_DBG: PLAYER_RADIUS, upgradeBoxPieces, commitUpgradeDbg: (gx, gz) => { commitUpgradeDrag({ gx, gz }); }, beginUpgradeDragDbg: (gx, gz) => { upgradeDrag = { gx, gz }; }, landmarks, nearestAttackableBuild, buildsNear, getGameMode: () => gameMode, devBench, buildsNearDbg: (x, z, r) => buildsNear(x, z, r, []), upgradePlan, applyUpgrade, tryUpgrade, getRepairTarget, getRepairSnapshot, repairNearestBuild, getObjectiveProps, getObjectiveInteraction, buyUpgradeBlueprint, getUpgradeOwned: () => upgradeOwned, tierOf, buildBetween, UPGRADE_TRACKS, setShopTabDbg: (t) => { shopTab = t; renderShop(); }, pushOutOfBuild, upgradeTarget, getUpgradeHint: () => upgradeHint,
           knifeAttack, BLADE_STATS, bladeStats, landmarkInSquare, levelGroundRect, startReload, isReloading: () => reloading, toggleNvgDbg: () => toggleNvg(), setGearDbg: (k) => { gearOwned[k] = true; }, laserSteadies, STREAK_HEAL_CAP_FRAC, streakHealHp: () => streakHealHp(), fogCullDbg: () => ({ on: fogCullOn, far: _fcFar, margin: FOG_CULL_MARGIN, back: FOG_CULL_BACK, hidden: zombies.filter((z) => z.alive && z.fogHidden).length }), setFogCullDbg: (on) => { fogCullOn = !!on; if (!fogCullOn) for (const z of zombies) if (z.fogHidden) { z.fogHidden = false; if (z.mesh) z.mesh.visible = true; } }, fogCullDepthDbg: (z) => { fogCullPrep(); return fogCullDepth(z); }, LASER_SPREAD_MUL, setLasersDbg: (on) => { lasersEnabled = !!on; updateLasers(); }, laserAimDbg: () => laserAimReport, toggleLasers, aimDirWithSpreadDbg: (s) => aimDirWithSpread(s), getAimDirDbg: () => getAimDir().clone(), resetSprayDbg: () => { sprayHeat = 0; sprayShot = 0; }, onBoards, setAimYawDbg: (y) => { aimYaw = y; }, getKnifeCd: () => knifeCd, setKnifeCd: (v) => { knifeCd = v; },
-          openWheel, closeWheelDbg: () => { wheelKind = null; wheelEl.classList.remove("show"); }, wheelTurnPage, getWheelState: () => ({ kind: wheelKind, page: wheelPage, keys: wheelItems.map((it) => it.key) }), BUILD_PAGES, BUILD_ORDER,
+          openWheel, openMenuDbg: (name) => {
+            if (name === 'shop') openShop(true);
+            else if (name === 'cif') openCIF();
+            else if (name === 'armory') { openCIF(); if (cifOpen) { cifEl.classList.add('armory-only'); if (armoryUI && armoryUI.open) armoryUI.open(); } }
+            else if (name === 'pause') setPaused(true);
+            else if (name === 'settings') openSettings('pause');
+            else if (name === 'briefing') {
+              const p = HQ_PANEL_FRONT;
+              player.position.set(p.x, sampleHeight(p.x, p.z), p.z);
+              openHQBriefing();
+            }
+            else if (name === 'dev') openDevConsole();
+            else if (name === 'map') setFullMap(true);
+            else if (name === 'wheel') openWheel('weapon');
+            return menuHoldsPointer();
+          }, closeMenuDbg: (name) => {
+            if (name === 'shop') closeShop();
+            else if (name === 'cif' || name === 'armory') { cifEl.classList.remove('armory-only'); closeCIF(); }
+            else if (name === 'pause' || name === 'settings') setPaused(false);
+            else if (name === 'briefing') closeHQBriefing();
+            else if (name === 'dev') closeDevConsole();
+            else if (name === 'map') setFullMap(false);
+            else if (name === 'wheel') closeWheel(false);
+          }, lockWantDbg: () => lockWantDbg, menuHoldsDbg: () => menuHoldsPointer(), closeWheelDbg: () => { wheelKind = null; wheelEl.classList.remove("show"); }, wheelTurnPage, getWheelState: () => ({ kind: wheelKind, page: wheelPage, keys: wheelItems.map((it) => it.key) }), BUILD_PAGES, BUILD_ORDER,
           applyGraphicsPreset, GFX_PRESETS, getGfx: () => gfxKey, skipPrep,
           THREE, scene, renderer, camera, sun, hemi, moon, ground, player, groundMeshY,
           trees, rocks, foliage, zombies, builds, sampleHeight, waterDepthAt,

@@ -1,0 +1,849 @@
+{
+  "t284": {
+    "pass": 7,
+    "fail": 0,
+    "elapsedSec": 50.1,
+    "lines": [
+      "PASS pistol aimed: rear -0.000 front 0.000 (ndc y, view gun)",
+      "PASS revolver aimed: rear 0.000 front 0.000 (ndc y)",
+      "PASS uzi aimed: rear -0.000 front - (ndc y)",
+      "PASS m4 aimed: rear 0.000 front 0.012 (ndc y)",
+      "PASS ak aimed: rear 0.000 front 0.000 (ndc y)",
+      "PASS aa12 aimed: rear 0.000 front -0.000 (ndc y)",
+      "PASS launcher aimed: rear -0.001 front -0.000 (ndc y)"
+    ]
+  },
+  "diagnostics": {
+    "hack": true,
+    "filter": true,
+    "gunNodes": 27,
+    "socketsR": {
+      "p": {
+        "x": 0.0927817350273509,
+        "y": -0.05463371573146012,
+        "z": -0.060513976452383135
+      },
+      "q": {
+        "isQuaternion": true,
+        "_x": 0.571995871408642,
+        "_y": 0.6570639661639155,
+        "_z": -0.2612794373251498,
+        "_w": -0.4157171190743365
+      },
+      "s": 1.863124478396938
+    },
+    "socketsL": {
+      "p": {
+        "x": -0.15815154486075797,
+        "y": -0.08350912823445988,
+        "z": -0.013420313807077006
+      },
+      "q": {
+        "isQuaternion": true,
+        "_x": -0.6150543672902432,
+        "_y": 0.6822448728363683,
+        "_z": -0.18585460308663287,
+        "_w": 0.3488669162835539
+      },
+      "s": 1.8631244783969376
+    },
+    "wristsView": {
+      "rPos": {
+        "x": 0.13756330635670744,
+        "y": -0.11146606654705447,
+        "z": -0.4045765703680449
+      },
+      "rYDir": {
+        "x": 0.01602062263116949,
+        "y": 0.23182377338710158,
+        "z": 0.9726258673010273
+      },
+      "lPos": {
+        "x": 0.24985802055963707,
+        "y": -0.11452063685370267,
+        "z": -0.4303758406053367
+      },
+      "lYDir": {
+        "x": 0.1668691776702616,
+        "y": 0.24606754856647722,
+        "z": 0.9547803093309659
+      },
+      "armRElbowRootPos": {
+        "x": 0.12572279394116898,
+        "y": -0.18176252341436944,
+        "z": -0.19645590724772916
+      },
+      "armRYDir": {
+        "x": 0.17695226942941739,
+        "y": -0.34457450412653534,
+        "z": 0.9219307487277618
+      },
+      "armLElbowRootPos": {
+        "x": 0.25551087068712997,
+        "y": -0.1334522867452641,
+        "z": -0.20810205016251343
+      },
+      "armLYDir": {
+        "x": -0.23148580533189655,
+        "y": -0.20338260826707943,
+        "z": 0.9513410726886138
+      }
+    },
+    "gunMeshesReceiveShadow": "19/20",
+    "gunMeshesSample": [
+      {
+        "name": "",
+        "receiveShadow": true,
+        "castShadow": false,
+        "mat": "vm:MeshStandardMaterial"
+      },
+      {
+        "name": "",
+        "receiveShadow": true,
+        "castShadow": false,
+        "mat": "vm:MeshStandardMaterial"
+      },
+      {
+        "name": "",
+        "receiveShadow": true,
+        "castShadow": false,
+        "mat": "vm:MeshStandardMaterial"
+      },
+      {
+        "name": "",
+        "receiveShadow": true,
+        "castShadow": false,
+        "mat": "vm:MeshStandardMaterial"
+      },
+      {
+        "name": "",
+        "receiveShadow": true,
+        "castShadow": false,
+        "mat": "vm:MeshStandardMaterial"
+      },
+      {
+        "name": "",
+        "receiveShadow": true,
+        "castShadow": false,
+        "mat": "vm:MeshStandardMaterial"
+      },
+      {
+        "name": "",
+        "receiveShadow": true,
+        "castShadow": false,
+        "mat": "vm:MeshStandardMaterial"
+      },
+      {
+        "name": "",
+        "receiveShadow": true,
+        "castShadow": false,
+        "mat": "vm:furniture:pistol"
+      },
+      {
+        "name": "",
+        "receiveShadow": true,
+        "castShadow": false,
+        "mat": "vm:MeshStandardMaterial"
+      },
+      {
+        "name": "",
+        "receiveShadow": true,
+        "castShadow": false,
+        "mat": "vm:MeshStandardMaterial"
+      }
+    ],
+    "armMeshesSample": [
+      {
+        "side": "r",
+        "name": "vm-forearm",
+        "receiveShadow": true,
+        "castShadow": false
+      },
+      {
+        "side": "r",
+        "name": "vm-cuff",
+        "receiveShadow": true,
+        "castShadow": false
+      },
+      {
+        "side": "r",
+        "name": "vm-bare-forearm",
+        "receiveShadow": true,
+        "castShadow": false
+      },
+      {
+        "side": "r",
+        "name": "vm-wrist-skin",
+        "receiveShadow": true,
+        "castShadow": false
+      },
+      {
+        "side": "r",
+        "name": "vm-hand-glove-main",
+        "receiveShadow": true,
+        "castShadow": false
+      },
+      {
+        "side": "r",
+        "name": "vm-hand-glove-pads",
+        "receiveShadow": true,
+        "castShadow": false
+      },
+      {
+        "side": "r",
+        "name": "vm-hand-bare-main",
+        "receiveShadow": true,
+        "castShadow": false
+      },
+      {
+        "side": "l",
+        "name": "vm-forearm",
+        "receiveShadow": true,
+        "castShadow": false
+      },
+      {
+        "side": "l",
+        "name": "vm-cuff",
+        "receiveShadow": true,
+        "castShadow": false
+      },
+      {
+        "side": "l",
+        "name": "vm-bare-forearm",
+        "receiveShadow": true,
+        "castShadow": false
+      },
+      {
+        "side": "l",
+        "name": "vm-wrist-skin",
+        "receiveShadow": true,
+        "castShadow": false
+      },
+      {
+        "side": "l",
+        "name": "vm-hand-glove-main",
+        "receiveShadow": true,
+        "castShadow": false
+      },
+      {
+        "side": "l",
+        "name": "vm-hand-glove-pads",
+        "receiveShadow": true,
+        "castShadow": false
+      },
+      {
+        "side": "l",
+        "name": "vm-hand-bare-main",
+        "receiveShadow": true,
+        "castShadow": false
+      }
+    ],
+    "marineVisibleNotHiddenCount": 114,
+    "marineVisibleNotHiddenSample": [
+      "Group/fitted-pelvis",
+      "Group/Group/Mesh",
+      "Group/Group/holster-thigh-band",
+      "Group/Group/Group/calf-pad-strap",
+      "Group/Group/Group/Group/Mesh",
+      "Group/Group/Group/Group/Mesh",
+      "Group/Group/Group/boot-shaft/boot-shaft",
+      "Group/Group/Group/boot-shaft/boot-shaft",
+      "Group/Group/Group/boot-shaft/boot-shaft",
+      "Group/Group/Group/boot-shaft/boot-shaft",
+      "Group/Group/Group/Mesh",
+      "Group/Group/Group/Mesh",
+      "Group/Group/Group/Mesh",
+      "Group/Group/thigh-pad-strap",
+      "Group/Group/Mesh",
+      "Group/Group/Mesh",
+      "Group/Group/Group/open-molded-holster",
+      "Group/Group/Mesh",
+      "Group/Group/holster-thigh-band",
+      "Group/Group/Group/calf-pad-strap",
+      "Group/Group/Group/Group/Mesh",
+      "Group/Group/Group/Group/Mesh",
+      "Group/Group/Group/boot-shaft/boot-shaft",
+      "Group/Group/Group/boot-shaft/boot-shaft",
+      "Group/Group/Group/boot-shaft/boot-shaft",
+      "Group/Group/Group/boot-shaft/boot-shaft",
+      "Group/Group/Group/Mesh",
+      "Group/Group/Group/Mesh",
+      "Group/Group/Group/Mesh",
+      "Group/Group/thigh-pad-strap",
+      "Group/Group/Mesh",
+      "Group/Group/Mesh",
+      "Group/Group/Group/Group/Group/Group/Mesh",
+      "Group/Group/Group/Group/Group/Group/Mesh",
+      "Group/Group/Group/Group/Group/Group/Mesh",
+      "Group/Group/Group/Group/Group/Mesh",
+      "Group/Group/Group/Group/Group/Mesh",
+      "Group/Group/Group/Group/Mesh",
+      "Group/Group/Group/open-molded-holster",
+      "Group/Mesh"
+    ]
+  },
+  "shots": [
+    {
+      "name": "vm-hq-roof-hip",
+      "file": "qa\\2026-10-31-AG-168\\vm-hq-roof-hip.png",
+      "pos": {
+        "x": 0,
+        "y": -3.17,
+        "z": -8.5
+      },
+      "vm": {
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "mag": "seated",
+        "hand": "fore",
+        "wristR": 0.61,
+        "wristL": 0.61
+      }
+    },
+    {
+      "name": "vm-hq-roof-ads",
+      "file": "qa\\2026-10-31-AG-168\\vm-hq-roof-ads.png",
+      "pos": {
+        "x": 0,
+        "y": -3.17,
+        "z": -8.5
+      },
+      "vm": {
+        "active": true,
+        "raise": 1,
+        "ads": 1,
+        "mag": "seated",
+        "hand": "fore",
+        "wristR": 0.61,
+        "wristL": 0.61
+      }
+    },
+    {
+      "name": "vm-wall-hip",
+      "file": "qa\\2026-10-31-AG-168\\vm-wall-hip.png",
+      "pos": {
+        "x": 0,
+        "y": -3.17,
+        "z": -5.42
+      },
+      "vm": {
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "mag": "seated",
+        "hand": "fore",
+        "wristR": 0.61,
+        "wristL": 0.61
+      }
+    },
+    {
+      "name": "vm-wall-ads",
+      "file": "qa\\2026-10-31-AG-168\\vm-wall-ads.png",
+      "pos": {
+        "x": 0,
+        "y": -3.17,
+        "z": -5.42
+      },
+      "vm": {
+        "active": true,
+        "raise": 1,
+        "ads": 1,
+        "mag": "seated",
+        "hand": "fore",
+        "wristR": 0.61,
+        "wristL": 0.61
+      }
+    },
+    {
+      "name": "vm-outdoor-sun-hip",
+      "file": "qa\\2026-10-31-AG-168\\vm-outdoor-sun-hip.png",
+      "pos": {
+        "x": 0,
+        "y": -3.17,
+        "z": 10
+      },
+      "vm": {
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "mag": "seated",
+        "hand": "fore",
+        "wristR": 0.61,
+        "wristL": 0.61
+      }
+    },
+    {
+      "name": "vm-night20-hip",
+      "file": "qa\\2026-10-31-AG-168\\vm-night20-hip.png",
+      "pos": {
+        "x": 0,
+        "y": -3.17,
+        "z": 10
+      },
+      "vm": {
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "mag": "seated",
+        "hand": "fore",
+        "wristR": 0.61,
+        "wristL": 0.61
+      }
+    },
+    {
+      "name": "vm-night20-hip",
+      "file": "qa\\2026-10-31-AG-168\\vm-night20-hip.png",
+      "pos": {
+        "x": 0,
+        "y": -3.17,
+        "z": 10
+      },
+      "vm": {
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "mag": "seated",
+        "hand": "fore",
+        "wristR": 0.61,
+        "wristL": 0.61
+      }
+    },
+    {
+      "name": "vm-night20-ads",
+      "file": "qa\\2026-10-31-AG-168\\vm-night20-ads.png",
+      "pos": {
+        "x": 0,
+        "y": -3.17,
+        "z": 10
+      },
+      "vm": {
+        "active": true,
+        "raise": 1,
+        "ads": 1,
+        "mag": "seated",
+        "hand": "fore",
+        "wristR": 0.61,
+        "wristL": 0.61
+      }
+    },
+    {
+      "name": "vm-night20-nvg-ads",
+      "file": "qa\\2026-10-31-AG-168\\vm-night20-nvg-ads.png",
+      "pos": {
+        "x": 0,
+        "y": -3.17,
+        "z": 10
+      },
+      "vm": {
+        "active": true,
+        "raise": 1,
+        "ads": 1,
+        "mag": "seated",
+        "hand": "fore",
+        "wristR": 0.61,
+        "wristL": 0.61
+      }
+    },
+    {
+      "name": "vm-night20-nvg-hip",
+      "file": "qa\\2026-10-31-AG-168\\vm-night20-nvg-hip.png",
+      "pos": {
+        "x": 0,
+        "y": -3.17,
+        "z": 10
+      },
+      "vm": {
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "mag": "seated",
+        "hand": "fore",
+        "wristR": 0.61,
+        "wristL": 0.61
+      }
+    },
+    {
+      "name": "old-wall-hip",
+      "file": "qa\\2026-10-31-AG-168\\old-wall-hip.png",
+      "pos": {
+        "x": 0,
+        "y": -3.17,
+        "z": -5.42
+      },
+      "vm": null
+    },
+    {
+      "name": "old-wall-ads",
+      "file": "qa\\2026-10-31-AG-168\\old-wall-ads.png",
+      "pos": {
+        "x": 0,
+        "y": -3.17,
+        "z": -5.42
+      },
+      "vm": null
+    }
+  ],
+  "benches": {
+    "3p-default": {
+      "label": "3p-default",
+      "query": "",
+      "firstPerson": false,
+      "weapon": "pistol",
+      "vmActive": false,
+      "vmNodes": null,
+      "fps": 53.2,
+      "low": 35.9,
+      "worst": 40.8,
+      "hitches": 0,
+      "draws": 258,
+      "triangles": 702674,
+      "gpuMs": 0.34,
+      "wholeRun": {
+        "frames": 1702,
+        "tickMs": 16.15,
+        "viewmodelAvgMs": 0.01,
+        "viewmodelMaxMs": 0.4
+      },
+      "last10": {
+        "frames": 541,
+        "frameMs": 18.8,
+        "tickMs": 17.46,
+        "outsideMs": 1.33,
+        "viewmodelMs": 0.009,
+        "top": [
+          {
+            "k": "r:render",
+            "avg": 7.961
+          },
+          {
+            "k": "zombies",
+            "avg": 3.574
+          },
+          {
+            "k": "r:matrices",
+            "avg": 1.899
+          },
+          {
+            "k": "m:idle",
+            "avg": 0.765
+          },
+          {
+            "k": "r:cull",
+            "avg": 0.613
+          },
+          {
+            "k": "m:pose",
+            "avg": 0.611
+          },
+          {
+            "k": "hud+audio",
+            "avg": 0.211
+          },
+          {
+            "k": "m:hold",
+            "avg": 0.21
+          },
+          {
+            "k": "w:stairs+roof+birds+bugs+wildlife",
+            "avg": 0.204
+          },
+          {
+            "k": "w:minimap",
+            "avg": 0.174
+          },
+          {
+            "k": "w:treeFall+leaves+batches",
+            "avg": 0.152
+          },
+          {
+            "k": "drops+hud",
+            "avg": 0.124
+          },
+          {
+            "k": "aim+climb",
+            "avg": 0.104
+          },
+          {
+            "k": "r:rigSkin",
+            "avg": 0.1
+          },
+          {
+            "k": "daynight",
+            "avg": 0.091
+          }
+        ]
+      }
+    },
+    "3p-vm0": {
+      "label": "3p-vm0",
+      "query": "&vm=0",
+      "firstPerson": false,
+      "weapon": "pistol",
+      "vmActive": false,
+      "vmNodes": null,
+      "fps": 57.1,
+      "low": 42.1,
+      "worst": 37.4,
+      "hitches": 0,
+      "draws": 270,
+      "triangles": 784271,
+      "gpuMs": 0.34,
+      "wholeRun": {
+        "frames": 1787,
+        "tickMs": 14.03,
+        "viewmodelAvgMs": 0.006,
+        "viewmodelMaxMs": 0.2
+      },
+      "last10": {
+        "frames": 580,
+        "frameMs": 17.51,
+        "tickMs": 15.61,
+        "outsideMs": 1.9,
+        "viewmodelMs": 0.005,
+        "top": [
+          {
+            "k": "r:render",
+            "avg": 6.844
+          },
+          {
+            "k": "zombies",
+            "avg": 3.607
+          },
+          {
+            "k": "r:matrices",
+            "avg": 1.737
+          },
+          {
+            "k": "m:idle",
+            "avg": 0.591
+          },
+          {
+            "k": "m:pose",
+            "avg": 0.546
+          },
+          {
+            "k": "r:cull",
+            "avg": 0.466
+          },
+          {
+            "k": "hud+audio",
+            "avg": 0.199
+          },
+          {
+            "k": "w:stairs+roof+birds+bugs+wildlife",
+            "avg": 0.189
+          },
+          {
+            "k": "m:hold",
+            "avg": 0.169
+          },
+          {
+            "k": "w:minimap",
+            "avg": 0.149
+          },
+          {
+            "k": "w:treeFall+leaves+batches",
+            "avg": 0.129
+          },
+          {
+            "k": "aim+climb",
+            "avg": 0.109
+          },
+          {
+            "k": "drops+hud",
+            "avg": 0.107
+          },
+          {
+            "k": "r:rigSkin",
+            "avg": 0.085
+          },
+          {
+            "k": "daynight",
+            "avg": 0.082
+          }
+        ]
+      }
+    },
+    "1p-pistol-default": {
+      "label": "1p-pistol-default",
+      "query": "",
+      "firstPerson": true,
+      "weapon": "pistol",
+      "vmActive": true,
+      "vmNodes": 27,
+      "fps": 33.8,
+      "low": 20.8,
+      "worst": 69,
+      "hitches": 8,
+      "draws": 592,
+      "triangles": 1116724,
+      "gpuMs": 8.6,
+      "wholeRun": {
+        "frames": 1246,
+        "tickMs": 22.69,
+        "viewmodelAvgMs": 0.145,
+        "viewmodelMaxMs": 1.3
+      },
+      "last10": {
+        "frames": 344,
+        "frameMs": 29.59,
+        "tickMs": 27.33,
+        "outsideMs": 2.26,
+        "viewmodelMs": 0.171,
+        "top": [
+          {
+            "k": "r:render",
+            "avg": 14.001
+          },
+          {
+            "k": "zombies",
+            "avg": 4.141
+          },
+          {
+            "k": "r:matrices",
+            "avg": 3.074
+          },
+          {
+            "k": "aim+climb",
+            "avg": 1.28
+          },
+          {
+            "k": "m:hold",
+            "avg": 0.847
+          },
+          {
+            "k": "r:cull",
+            "avg": 0.705
+          },
+          {
+            "k": "m:pose",
+            "avg": 0.631
+          },
+          {
+            "k": "w:minimap",
+            "avg": 0.364
+          },
+          {
+            "k": "w:stairs+roof+birds+bugs+wildlife",
+            "avg": 0.248
+          },
+          {
+            "k": "hud+audio",
+            "avg": 0.214
+          },
+          {
+            "k": "drops+hud",
+            "avg": 0.2
+          },
+          {
+            "k": "w:treeFall+leaves+batches",
+            "avg": 0.193
+          },
+          {
+            "k": "r:rigSkin",
+            "avg": 0.18
+          },
+          {
+            "k": "m:hold2+arms",
+            "avg": 0.179
+          },
+          {
+            "k": "viewmodel",
+            "avg": 0.171
+          }
+        ]
+      }
+    },
+    "1p-pistol-vm0": {
+      "label": "1p-pistol-vm0",
+      "query": "&vm=0",
+      "firstPerson": true,
+      "weapon": "pistol",
+      "vmActive": false,
+      "vmNodes": null,
+      "fps": 36.7,
+      "low": 25.5,
+      "worst": 32.6,
+      "hitches": 16,
+      "draws": 573,
+      "triangles": 1067919,
+      "gpuMs": 8.2,
+      "wholeRun": {
+        "frames": 1089,
+        "tickMs": 23.42,
+        "viewmodelAvgMs": 0.011,
+        "viewmodelMaxMs": 0.6
+      },
+      "last10": {
+        "frames": 373,
+        "frameMs": 27.25,
+        "tickMs": 24.69,
+        "outsideMs": 2.56,
+        "viewmodelMs": 0.01,
+        "top": [
+          {
+            "k": "r:render",
+            "avg": 12.734
+          },
+          {
+            "k": "zombies",
+            "avg": 3.515
+          },
+          {
+            "k": "r:matrices",
+            "avg": 2.84
+          },
+          {
+            "k": "aim+climb",
+            "avg": 1.1
+          },
+          {
+            "k": "m:hold",
+            "avg": 0.697
+          },
+          {
+            "k": "m:pose",
+            "avg": 0.678
+          },
+          {
+            "k": "r:cull",
+            "avg": 0.634
+          },
+          {
+            "k": "m:idle",
+            "avg": 0.301
+          },
+          {
+            "k": "w:minimap",
+            "avg": 0.299
+          },
+          {
+            "k": "w:stairs+roof+birds+bugs+wildlife",
+            "avg": 0.241
+          },
+          {
+            "k": "hud+audio",
+            "avg": 0.208
+          },
+          {
+            "k": "w:treeFall+leaves+batches",
+            "avg": 0.181
+          },
+          {
+            "k": "m:hold2+arms",
+            "avg": 0.163
+          },
+          {
+            "k": "drops+hud",
+            "avg": 0.162
+          },
+          {
+            "k": "r:rigSkin",
+            "avg": 0.125
+          }
+        ]
+      }
+    }
+  }
+}

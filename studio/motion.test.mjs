@@ -106,6 +106,39 @@ test('a brute shrugs off what drops a shambler', () => {
   assert.ok(!br.events.includes('fall'), br.events.join(' '));
 });
 
+test('get-up pose keys lift through hands and knees while an unkeyed preset keeps its original path', () => {
+  const base = presets.json('zombie/shambler');
+  const authored = loadMotion({ ...base, getup: { time: 1.4, keys: [
+    { t: 0, pose: { pelvis: [0,-.5,.15], kneeL: [0,-.25,.2], kneeR: [0,-.25,.2], handL: [0,-.6,.3], handR: [0,-.6,.3] } },
+    { t: .55, pose: { pelvis: [0,-.25,.1], kneeL: [0,-.18,.12], kneeR: [0,-.18,.12], handL: [0,-.35,.2], handR: [0,-.35,.2] } },
+    { t: 1, pose: {} }
+  ] } });
+  const plain = loadMotion({ ...base, getup: { time: 1.4 } });
+  const bodies = [authored,plain].map(p => createBody(rigs.get('zombie').create({}), p));
+  for (const body of bodies) { body.follow(); body.hit({ at: 'pelvis', dir: [0,.3,-1], power: 8, kind: 'blast' }); }
+  const samples=[], simulated=[];
+  for (let f=0;f<360;f++) {
+    for (const body of bodies) { body.follow(); body.update(1/60); body.apply(); }
+    if (bodies.every(b => b.state === 'getup')) {
+      const [keyed,unkeyed]=bodies.map(b => b.animPoints());
+      samples.push(keyed.handL[1]-unkeyed.handL[1]);
+      const [keyedPoint,unkeyedPoint]=bodies.map(b => b.points().handL);
+      simulated.push(keyedPoint[1]-unkeyedPoint[1]);
+    }
+  }
+  assert(samples.length>20, 'both bodies entered get-up');
+  assert(samples.some(v => v < -.3), 'authored hand first braces well below the standing hand');
+  assert(simulated.some(v => Math.abs(v) > .02), 'the keyed target changes the simulated hand, not only the target buffer');
+  assert(Math.abs(samples.at(-1))<.05, 'last authored key returns to the standing pose');
+  assert(bodies.every(b => b.state === 'animated'), 'both paths recover');
+  assert.deepEqual(validateMotion({ ...base, getup: { time: 1.4, keys: [
+    {t:0,pose:{handL:[0,-.5,.2]}},{t:1,pose:{}}
+  ] } }), []);
+  assert(validateMotion({ ...base, getup: { time: 1.4, keys: [
+    {t:0,pose:{handL:[0,-.5,.2]}},{t:1,pose:{handL:[0,-.2,0]}}
+  ] } }).some(message => /standing pose/.test(message)));
+});
+
 test('the pool caps how many bodies simulate; a full pool sleeps the oldest one lying down first', () => {
   const pool = createMotionPool({ max: 2 });
   const make = () => { const b = createBody(rigs.get('zombie').create({}), preset('zombie/shambler'), { pool }); b.follow(); return b; };

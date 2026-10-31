@@ -1,13 +1,13 @@
 # Grokbot
 
-state: idle
+state: active
 model: Grok Bot
-task: —
-touching: —
-since: 2026-10-31T05:30Z
-next: GB-253 The zombie's shape, set when it's made (from CU-187; called 
+task: GB-260 Magazines and suppressors to scale (J7, J21; from GP-19986), from ChatGPT's docs/weapons-sizes.md and AG-164's shots
+touching: studio/weapon-build.js
+since: 2026-10-31T20:08Z
+next: GB-260 Magazines and suppressors to scale (J7, J21; from GP-19986).
 blocked-on: —
-last-report: handoffs/2026-10-31-grokbot-CU-188.md
+last-report: handoffs/2026-10-31-grokbot-GB-262.md
 
 ## Notes
 

@@ -32,6 +32,9 @@ const MAX_EVENTS = 80;
 const LOCK_RETRY_MS = 40;
 const LOCK_WAIT_MS = 15_000;
 const RECONCILE_MS = 5_000;
+const WRITE_ATTEMPTS = 20;
+const WRITE_RETRY_MS = 250;
+const RETRYABLE_WRITE = new Set(['EACCES', 'EPERM', 'EBUSY', 'UNKNOWN']);
 
 function delay(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -73,6 +76,42 @@ export function processLiveness(pid) {
     if (error?.code === 'EPERM') return true;
     return null;
   }
+}
+
+export async function installStateFile(temp, dest, backup, ops = {}) {
+  const renameOp = ops.rename || rename;
+  const unlinkOp = ops.unlink || unlink;
+  const copyOp = ops.copyFile || copyFile;
+  const wait = ops.delay || delay;
+  const windows = ops.windows ?? process.platform === 'win32';
+  const attempts = ops.attempts ?? WRITE_ATTEMPTS;
+  const waitMs = ops.waitMs ?? WRITE_RETRY_MS;
+  let lastError = null;
+  for (let attempt = 0; attempt < attempts; attempt += 1) {
+    try {
+      if (backup) {
+        await copyOp(dest, backup).catch(error => {
+          if (error?.code !== 'ENOENT') throw error;
+        });
+      }
+      // Windows cannot replace an existing file with rename, so the live file goes first.
+      // The backup above is the last complete generation if that delete succeeds and the
+      // rename then fails.
+      if (windows) {
+        await unlinkOp(dest).catch(error => {
+          if (error?.code !== 'ENOENT') throw error;
+        });
+      }
+      await renameOp(temp, dest);
+      return;
+    } catch (error) {
+      lastError = error;
+      if (!RETRYABLE_WRITE.has(error?.code) || attempt === attempts - 1) break;
+      await wait(waitMs);
+    }
+  }
+  await unlinkOp(temp).catch(() => {});
+  throw lastError;
 }
 
 function emptyState(machine, clock) {
@@ -195,30 +234,11 @@ export class GameTestSlot {
     state.updatedAt = nowIso(this.clock);
     const temp = `${this.stateFile}.${process.pid}.${randomUUID()}.tmp`;
     await writeFile(temp, `${JSON.stringify(state, null, 2)}\n`, 'utf8');
-    await copyFile(this.stateFile, this.backupFile).catch(error => {
-      if (error?.code !== 'ENOENT') throw error;
-    });
-    if (process.platform !== 'win32') {
-      await rename(temp, this.stateFile);
-      return;
-    }
-    // Windows cannot replace an existing destination with rename. Keep the last
-    // complete generation as a recovery journal, then install the complete temp.
-    await unlink(this.stateFile).catch(error => {
-      if (error?.code !== 'ENOENT') throw error;
-    });
-    let lastError;
-    for (let attempt = 0; attempt < 20; attempt += 1) {
-      try {
-        await rename(temp, this.stateFile);
-        return;
-      } catch (error) {
-        lastError = error;
-        if (!['EACCES', 'EPERM'].includes(error?.code)) throw error;
-        await delay(LOCK_RETRY_MS);
-      }
-    }
-    throw lastError;
+    // CU-193: ChatGPT's runner got EPERM renaming this temp (and slot status writes through here too).
+    // The old retry covered only the rename, after the unlink, so an EPERM on deleting the live file
+    // threw at once. installStateFile retries the backup, the delete and the rename, 20 times, 250 ms
+    // apart, as run-all's tests.json write does.
+    await installStateFile(temp, this.stateFile, this.backupFile);
   }
 
   async #readLockOwner() {

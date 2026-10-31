@@ -1,0 +1,22 @@
+{
+  "out": "review/cu-191/",
+  "sheet": true,
+  "cols": 2,
+  "size": "1280x720",
+  "shots": [
+    {
+      "live": true,
+      "caption": "Third person: roof and front cut away",
+      "settle": 200,
+      "out": "review/cu-191/third.png",
+      "pre": "T.clearZombies && T.clearZombies(); const L = T.radioCuesDbg().locker; if (!L || !L.insideAt) throw new Error('vault not built'); const p = L.insideAt; T.setViewFirstDbg(false); T.player.position.set(p.x, p.y + 0.05, p.z); await wait(700); T.player.position.set(p.x, p.y + 0.05, p.z);"
+    },
+    {
+      "live": true,
+      "caption": "First person: the room stays",
+      "settle": 250,
+      "out": "review/cu-191/first.png",
+      "pre": "const L = T.radioCuesDbg().locker; const p = L.insideAt; T.setViewFirstDbg(true); const t0 = Date.now(); while (T.fpDbg().w < 0.9 && Date.now() - t0 < 8000) { T.player.position.set(p.x, p.y + 0.05, p.z); await wait(200); } if (T.fpDbg().w < 0.9) throw new Error('not in first person ' + T.fpDbg().w); if (L.cutaway) throw new Error('still cut away in first person'); T.setOtsAimDbg(null, 0.45); T.player.position.set(p.x, p.y + 0.05, p.z); await wait(300);"
+    }
+  ]
+}

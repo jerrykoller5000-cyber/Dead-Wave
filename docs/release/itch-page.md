@@ -1,6 +1,6 @@
 # Grave Shift — itch.io page copy
 
-On itch as a private draft since 2026-10-23: https://caracal-interactive.itch.io/grave-shift (edit: https://itch.io/game/edit/5217751). This file matches what is pasted there; change both together.
+1.1 replacement copy for Jerry to paste on itch.io (D-84); the live page has not been changed by this task. Page: https://caracal-interactive.itch.io/grave-shift (edit: https://itch.io/game/edit/5217751). The existing cover stays; AG-166's seven new 1920×1080 gallery shots are listed under Publishing notes below.
 
 ## Title
 
@@ -8,15 +8,25 @@ Grave Shift
 
 ## Tagline
 
-Scavenge by day. Hold the dead by night. Make it to extraction on night twenty.
+Follow the valley by day. Hold the line by night. Make it to extraction on night twenty.
 
 ## Page text
 
-FOB Threshold fell. You're the Gravewalker sent back into the valley. In daylight, bring in supplies, find survivors, repair the relay and build a line around HQ. Prep has no countdown: when you're ready, sound the alarm at the HQ panel. At night, the dead come out of six cave mouths. Hold through twenty nights, then call Heron to the lake.
+FOB Threshold fell. You're the Gravewalker sent back into the valley. Scavenge in daylight, bring people home, and build a line around HQ. Preparation has no countdown. Sound the alarm when you're ready; when night falls, the dead come out of six cave mouths. Survive twenty nights and call Heron to the lake for extraction.
 
-The six supply sites each have a task to solve before their stores open: a wrecked medical convoy, a ranger cache, a chained utility truck, a trapper's path, a hikers' kit and a fuel depot. Explore the unsealed caves by day to enter the Hollows, search for the missing Gravewalkers' tags and follow what they left behind. Kill the risen, collect their marked skulls, bank them at the HQ sample window for Cash, then order weapons, ammo and defences from the supply terminal.
+The valley has a longer memory in 1.1. A new lead reaches you each dawn after the first day. Follow the duty board and radio from Threshold's lost fuel through the relay, six supply sites and the search for six missing hikers. A wrecked ambulance, a chained truck, a ranger cache and a trapper's path are places to investigate, not just crates to empty. Search the unsealed caves, carry what you need into the Hollows, and piece together what happened to the Gravewalkers who went below.
 
-This 1.0 build is single-player. A run does not save midway.
+Fight from the marine's eyes or over his shoulder. The dead have distinct shapes and movements; the screamer, feral and armored ones call for different reactions when they reach your walls. Marked skulls from the risen become Cash only after you bank them at HQ's sample window. Spend it on weapons, ammunition and defenses, then decide when to take the next night on. The score follows that rhythm: a different song for each night, rising with the attack and giving way when the last kill lands.
+
+Grave Shift is single-player. A run does not save midway.
+
+## New in 1.1
+
+- A connected trail of daily leads, missing hikers and survivors, from the fuel depot to the Hollows.
+- Reworked routes, landmarks, cave descents and weather: the first two days stay clear, then storms and wind can change the valley.
+- Clearer zombie silhouettes, steadier first-person sights and reloads, and new body-led movement for the marine.
+- A faster supply terminal, more readable field screens, and settings for brightness, vibrancy and first-person field of view.
+- Night music and sound that leave room for the alarm, the guns and what is moving nearby.
 
 ## Controls
 
@@ -53,4 +63,8 @@ Answered on itch.io's generative-AI question: Yes, with graphics, audio, text an
 
 ## Credits
 
-Created and directed by Jerry. Built with the Grave Shift crew: Claude, Cursor, ChatGPT, Grokbot and Antigravity. The game uses three.js and the Black Ops One and Chakra Petch fonts; the desktop app uses Tauri. Third-party licence notices ship with the download in NOTICES.txt (and the fonts' full licence in vendor/fonts/OFL.txt).
+Created and directed by Jerry. Built with the Grave Shift crew: Claude, Cursor, ChatGPT, Grokbot, Antigravity and Muse. The game uses three.js and the Black Ops One and Chakra Petch fonts; the desktop app uses Tauri. Third-party licence notices ship with the download in NOTICES.txt (and the fonts' full licence in vendor/fonts/OFL.txt).
+
+## Publishing notes (not page text)
+
+Keep `docs/release/itch/cover.png`. Replace or extend the screenshot gallery with AG-166's 1.1 captures in this order: `06-first-person-patrol.png`, `07-third-person-fob-defense.png`, `08-trapper-path.png`, `09-night-assault.png`, `10-the-warrens.png`, `11-story-hikers-camp.png`, `12-dawn-survived.png`. Each is 1920×1080; [AG-166's report](../../qa/2026-10-31-AG-166/report.md) records the GPU capture and [contact sheet](../../qa/2026-10-31-AG-166/sheet.jpg). Jerry handles the itch edit and upload under D-84.

@@ -1,0 +1,7 @@
+GB-258 (J51) added floating words for the hikers' kit in index.html (hikersHintText, the GB-196 part), through sayText with these fallbacks until your keys land. Please add them under // GB-258 in ui/strings.js (your words; change them as you like):
+- "hikers.shootRope": "Shoot the rope to drop the kit"   (within 10 m of the bag while it hangs)
+- "hikers.pouchRiver": "Their kit hangs in a tree by the river: shoot the rope"   (at the camp's first-aid pouch, kit still hanging, a river-bank tree)
+- "hikers.pouchTree": "Their kit hangs in a tree: shoot the rope"   (same, the no-river tree)
+- "hikers.pouchDown": "Their kit is down by the tree: grab it there"   (at the pouch, the kit on the ground)
+- "hikers.pouchWater": "Their kit is in the river: grab it"   (at the pouch, the kit floating or snagged)
+J17's refusal reuses your weapon.message.handsFull / weapon.message.freeHand. No change needed in index.html once the keys exist.

@@ -1,0 +1,7 @@
+CU-193 ran your objectives fixture the way this PC can. ui/objectives.browser.mjs exits at once: Cannot find module 'playwright' (qa/2026-10-31-CU-193/playwright-attempt.log). There is no Playwright in the repo; tools/cdp.mjs is the browser driver. I drove ui/objectives.fixture.html through it, in the slot (qa/2026-10-31-CU-193/run-objectives.mjs). 16 checks failed, no page errors.
+
+Cause, in the current ui/objectives.js and the fixture: canTrack keeps a site only when it is reachable or navigable. fresh() marks every site reachable false, and scenario() calls app.track(id) on the line before it sets reachable. track() returns false, and only the radio site becomes a marker. So the script's "seven markers" is 1, the medical-convoy click finds nothing, and the active/interrupted/full/partial/READY states do not take. The radio Enter itself does ("Restore the radio mast").
+
+The slot side of CU-193 is in: tools/game-test-slot.mjs now retries EPERM on the backup, the delete and the rename (20 times, 250 ms), which slot status writes through too. node --test of the slot tests plus qa/2026-10-31-CU-193/install.test.mjs: 19 pass, 0 fail.
+
+Without Playwright, ask Cursor to run the check, or write it on tools/cdp.mjs. Both still go through the slot.

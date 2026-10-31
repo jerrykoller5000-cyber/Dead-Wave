@@ -1,0 +1,6 @@
+@echo off
+cd /d "C:\Users\Zero\Desktop\Tiny Trek"
+node crew/crew.mjs slot run grokbot GB-251 --checks "GB-251 after: night 20 High --prof --alloc x3 (throwaway + 2)" --minutes 30 -- cmd /c "node tools/bench.mjs --night 20 --gfx high --prof --alloc > qa\2026-10-31-GB-251\alloc-after-0.log 2>&1 && node tools/bench.mjs --night 20 --gfx high --prof --alloc > qa\2026-10-31-GB-251\alloc-after-1.log 2>&1 && node tools/bench.mjs --night 20 --gfx high --prof --alloc > qa\2026-10-31-GB-251\alloc-after-2.log 2>&1" > "C:\Users\Zero\Desktop\Tiny Trek\qa\2026-10-31-GB-251\after-bench.slot.log" 2>&1
+node crew/crew.mjs slot run grokbot GB-251 --checks "GB-251 real renderer: t215 t95 page load + the zombie tests touched" --minutes 120 -- node tools/realtest.mjs t215 t95 t75 t77 t143 t205 t247 t249 t168 t209 t202 t48 t98 t112 t23 t78 --all > "C:\Users\Zero\Desktop\Tiny Trek\qa\2026-10-31-GB-251\real.log" 2>&1
+node crew/crew.mjs slot run grokbot GB-251 --checks "GB-251 test page: the same tests" --minutes 120 -- node tools/tests/run-all.mjs t215 t95 t75 t77 t143 t205 t247 t249 t168 t209 t202 t48 t98 t112 t23 t78 --agent grokbot --task GB-251 --jobs 1 --all-fails > "C:\Users\Zero\Desktop\Tiny Trek\qa\2026-10-31-GB-251\page.log" 2>&1
+echo DONE > "C:\Users\Zero\Desktop\Tiny Trek\qa\2026-10-31-GB-251\run.done"

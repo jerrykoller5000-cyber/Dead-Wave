@@ -11,6 +11,8 @@ body.opening #objectiveHud, body.frontend #objectiveHud, body.deploying #objecti
 .objective-marker:hover { border-color:#fff1c6; }
 .objective-marker:focus-visible, .objective-tracker button:focus-visible { outline:2px solid #fff0b8; outline-offset:4px; }
 .objective-tracker { box-sizing:border-box; max-width:300px; width:100%; padding:16px; border-left:2px solid #b9a26a; background:#0b120ff5; color:#d8ddcc; font:12px/1.55 var(--font-hud,system-ui,sans-serif); box-shadow:0 8px 26px #0003; }
+#hqBriefing #briefing-report > .objective-tracker { grid-column:1/-1; max-width:none; width:100%; border:1px solid #68725a45; border-left:3px solid #b9a26a; background:#17201a; box-shadow:none; }
+#hqBriefing .objective-tracker h2 { margin:0 0 5px; color:#e0c98c; font:600 15px/1.35 var(--font-hud,system-ui,sans-serif); }
 .objective-tracker h2 { margin:0 0 5px; color:#e0c98c; font:600 15px/1.35 var(--font-hud,system-ui,sans-serif); }
 .objective-distance { display:block; margin-bottom:12px; font-variant-numeric:tabular-nums; color:#a8b3a1; }
 .objective-tracker p { margin:9px 0; }

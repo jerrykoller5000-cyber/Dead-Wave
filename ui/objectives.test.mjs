@@ -52,6 +52,8 @@ test('stale snapshots and previous-run packets cannot restore claimed targets',(
 test('pause hides presentation without losing tracking; malformed coordinates never print NaN',()=>{
   const c=createObjectiveTracker();c.update(snapshot());c.track(radio);c.update(snapshot({sequence:1,active:false}));
   assert.equal(c.read().tracker,null);assert.equal(c.track(radio),false);
+  assert.equal(c.read({includeInactive:true}).tracker.id,radio);
+  assert.equal(c.read({includeInactive:true}).tracker.prompt,'');
   c.update(snapshot({sequence:2,player:{x:NaN,z:0}}));assert.equal(c.read().tracker.id,radio);assert.equal(c.read().tracker.distance,null);
   c.update(snapshot({sequence:3,sites:[site(radio,{position:{x:Infinity,z:0}})]}));assert.equal(c.read().markers.length,0);
 });

@@ -1,0 +1,98 @@
+GRANT grokbot GB-256: starting one game-test command
+ok    t215      4 pass   0 fail  32.5s  (real renderer)
+    PASS read index.html and the scripts and styles the game loaded (227 files)
+    PASS no broken characters in them
+    PASS the HUD reads clean: timeLine "Daylight · 08:20 · Grace", tacticalLine "NVG — · Laser — · Light —", grenadeChips "G×3H×0", ammoDetail "12 / 12  ·  50 Bullets  ·  SEMI", hpNum "100 / 100"
+    PASS and shows its dots and times signs (NVG — · Laser — · Light — / G×3H×0)
+ok    t95       9 pass   0 fail  33.6s  (real renderer)
+    PASS the pick is x0.8 (0.8)
+    PASS laser off: the cone is the gun's own
+    PASS every gun with a laser, 200 draws each: x0.8 within 5% (minigun 0.800 m4 0.800 ak 0.800 pistol 0.800 uzi 0.800 shotgun 0.801 aa12 0.801 revolver 0.800 sniper 0.800 launcher 0.800)
+    PASS AK, 2000 free draws each: 6.003 -> 4.853 mrad (x0.808)
+    PASS Z (toggleLasers) with the laser sight bought: on, and it steadies
+    PASS Z again: off
+    PASS no laser sight owned: no change (6.033 vs 6.033 mrad)
+    PASS the chainsaw has no laser: nothing to steady
+    PASS no page errors
+ok    t276     20 pass   0 fail  53.3s  (real renderer)
+    PASS a pistol in hand (pistol)
+    PASS no zoom yet, third person (w 0)
+    PASS right-click held: the zoom comes in (w 1.00)
+    PASS it is 2x: the view's tan halves (0.500, fov 32.2 from 60.0)
+    PASS the point the cursor was on stays under it (0.350, -0.250 vs 0.35, -0.25)
+    PASS the view centres between him and it (centre 2.7 m from it, 2.8 m from him; they are 5.3 m apart)
+    PASS no shoulder camera and no pointer lock (ots w 0)
+    PASS he moves 2 m and it keeps its offset from him (0.350, -0.250)
+    PASS pushed to the edge, it slides that way (18.1 m, 0.97 along the screen's right)
+    PASS let go: it eases back (w 0)
+    PASS and the usual view is back (tan 1.000, pan 0)
+    PASS the 5 key brings the shoulder camera (ots w 0.92)
+    PASS right-click there narrows to the Aim FOV, not the zoom (fov 39.4, Aim FOV 38, zoom w 0)
+    PASS and 5 again goes back to third person (ots w 0)
+    PASS the cursor on open ground: the round goes at chest height over it (ground, 1.15 m up)
+    PASS before CL-247 the round went at the ground point under the cursor, into the dirt short of it (ground)
+    PASS now it meets the zombie (zombie, aim ground)
+    PASS just off it (0.03 of the screen's half-height, the pick missing it) the assist puts the round on it (assist, zombie; nearest 0.028)
+    PASS well off it (0.14), no assist (ground)
+    PASS no page errors ()
+ok    t182     36 pass   0 fail  45.0s  (real renderer)
+    PASS the title menu has a Training Ground button (Training Ground)
+    PASS it starts straight away, no insertion
+    PASS the page knows it is in training
+    PASS he stands behind the firing line (0.0, -200.0, -640.6)
+    PASS far from the map: the world is not around him
+    PASS he walks in unarmed, Cash to spare (CU-120)
+    PASS five targets and a yellow firing line
+    PASS copies of the HQ's CIF, supply terminal, Armory, panel and skull window (cif,kiosk,armory,hqPanel,skullWindow)
+    PASS the copy is built from the HQ's own pieces (a change there shows here)
+    PASS at the cif, E is cif (cif)
+    PASS at the kiosk, E is kiosk (kiosk)
+    PASS at the armory, E is armory (armory)
+    PASS at the hqPanel, E is trainingPanel (trainingPanel)
+    PASS at the skullWindow, E is hqWindow (hqWindow)
+    PASS the supply terminal opens here
+    PASS the Armory opens here
+    PASS a round down lane 3 drops its target
+    PASS and it stands up again
+    PASS the walls stop rounds
+    PASS he can't walk through the walls (7.20)
+    PASS it opens
+    PASS the HQ panel lists the kinds (13)
+    PASS spawn: the countdown starts ({"kind":"shambler","count":3,"remaining":5,"seconds":5})
+    PASS the security shutter comes down
+    PASS three shamblers called in (3)
+    PASS in the build room they come for him (43.1 m -> 41.0 m)
+    PASS no building while they are out (Clear the zombies before building.)
+    PASS clear all
+    PASS killed here: no burial, a blackout ({"wake":true})
+    PASS the screen goes black
+    PASS the zombies are gone and he is patched up
+    PASS he lies on the infirmary bed (lying, his root 1.10 m from the pad)
+    PASS then up beside it
+    PASS and the lights are back
+    PASS standing on the range, no building there (Build mode is only available in the build room.)
+    PASS leaving takes the Training Ground away
+ok    t219     22 pass   0 fail  25.2s  (real renderer)
+    PASS the Training Ground has a light switch
+    PASS on the range side of the build room wall, facing in (x -7.98)
+    PASS right beside the doorway, downrange of its frame (0.55 m)
+    PASS at hand height (1.37 m)
+    PASS he can stand at it (the rooms do not push him off)
+    PASS at it, E is the lights (trainingLights)
+    PASS a few steps from where he starts (8.9 m)
+    PASS the prompt says so (ELights off)
+    PASS it starts lit: noon ({"on":true,"night":false,"room":true}, 0.5)
+    PASS E puts the lights out: the night ({"on":false,"night":true,"room":false}, 0)
+    PASS the light really drops (sun 1.73 -> 0.03, sky 0.68 -> 0.15)
+    PASS the lever drops (0.50)
+    PASS the lamp strips go out (glow 0, tube 50565b)
+    PASS the UI hears it (training-lights, on: false)
+    PASS and it stays dark frame after frame
+    PASS the prompt turns round (ELights on)
+    PASS in the dark the goggles work as they do at night
+    PASS E again: noon, and the lever is up ({"on":true,"night":false,"room":true})
+    PASS the light is what it was, the strips lit again
+    PASS the goggles stop glaring green once the lights are on
+    PASS off again
+    PASS leaving in the dark: the next visit starts lit and the night stays in the room ({"on":true,"night":false,"room":true}, 0.5)
+5 checks: 91 pass, 0 fail (real renderer)

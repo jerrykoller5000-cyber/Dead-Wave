@@ -1,0 +1,9 @@
+# QA Report: AG-169 — GPU Validation & Shots for GP-19987, GP-19988, and GP-19989
+
+See full handoff report at `handoffs/2026-10-31-antigravity-AG-169.md` and telemetry in `qa/2026-10-31-AG-169/ag169-summary.json`.
+
+## Summary Scores
+- **GP-19987 (Day-1 Fuel Lead Gate & READY Briefing `.objective-tracker`)**: **5.0 / 5 PASS** (`realtest t307 --all` 6/6 on WebGPU RTX 5080; `gp19987-fuel-closed-hold-e.png`, `gp19987-fuel-open-hold-e.png`, `gp19987-ready-desktop.png`, `gp19987-ready-narrow-390.png`).
+- **GP-19988 Part A (Backwards Ballcap + Balaclava 5-Angle & 4-Light)**: **3.0 / 5 PARTIAL** — `backRings` `[y, w, b, f]` swap fixed the upper forehead crown (`y >= 1.52 m`, `+27.6 mm` clearance at `y = 1.53 m`), but the lower sweatband rim (`y = 1.49..1.51 m`) across the forehead temples (`|θ| = 15°..75°`) still clips `-7.2 mm` inside the balaclava hood (`gp19988-cap-noon-front.png`, `left.png`, `right.png`, `overcast-3q.png`) because `planPoint()` (`studio/marine-hats.js:11-14`) uses exponent `0.80` on `c < 0` vs `0.55` on `c >= 0`.
+- **GP-19988 Part B (Brute Get-Up Filmstrip `studio/motion/zombie/brute.json` v3)**: **2.0 / 5 FAIL** — In `gp19988-brute-getup-1..3.png` (`u = 0.02, 0.35, 0.55`), the brute's torso remains vertical and sinks waist-deep into the dirt (`pelvisY = 0.12 m`) with arms tucked at its chest because `brute.json` v3 omits `waist`, `shoulderL/R`, `elbowL/R`, and `hipL/R` while `ZOMBIE_BODY` solves `spine` up-axis from `waist -> chest` (`studio/bodies.js:24`). Live gameplay (`index.html:52993`) also still calls `knockDownPitch`.
+- **GP-19989 (Armory Workbench & CIF Inspection Zoom)**: **4.8 / 5 PASS** — Wheel & 2-pointer pinch zoom across `[1.0, 2.5]`, min/max clamping, zoom preservation across CIF item switches (`cap` head-frame at `2.5×` frames at `camZ = 0.78` with 0 mesh clipping), and clean reset to `1.0×` on close/reopen (`gp19989-cif-*.png`, `gp19989-wb-*.png`).

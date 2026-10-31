@@ -1,0 +1,15 @@
+Game-test request ab50d79d-c5ca-43a6-ba64-f038aaae1614 queued at position 2. Waiting...
+GRANT grokbot GB-260: starting one game-test command
+check-players: 310 player.position reads, all in the allowed places
+ok    t38     12 pass   0 fail  75.6s
+ok    t121    31 pass   0 fail  26.3s
+ok    t194    35 pass   0 fail  76.4s
+ok    t217    55 pass   0 fail  26.7s
+FAIL  t242    14 pass   1 fail  38.3s
+ok    t277    38 pass   0 fail  38.4s
+
+6 checks: 185 pass, 1 fail
+
+by owner:
+  unassigned
+    t242   1 fail  FAIL extended: the magazine is inside the grip above its bottom (worst 6.3 mm out at u 0.194 v 4

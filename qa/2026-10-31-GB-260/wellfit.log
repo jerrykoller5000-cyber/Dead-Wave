@@ -1,0 +1,193 @@
+GRANT grokbot GB-260: starting one game-test command
+{
+ "m4": {
+  "magAcross": 66,
+  "magDeep": 140,
+  "magTop": -52,
+  "slices": [
+   {
+    "dy": 0.004,
+    "across": 75,
+    "depth": 125.1
+   },
+   {
+    "dy": 0.01,
+    "across": 74.7,
+    "depth": 20.7
+   },
+   {
+    "dy": 0.02,
+    "across": 75,
+    "depth": 78.3
+   },
+   {
+    "dy": 0.035,
+    "across": 76.7,
+    "depth": 134.7
+   },
+   {
+    "dy": 0.05,
+    "across": 72.1,
+    "depth": 78.2
+   }
+  ]
+ },
+ "ak": {
+  "magAcross": 66,
+  "magDeep": 212.5,
+  "magTop": -47.7,
+  "slices": [
+   {
+    "dy": 0.004,
+    "across": 55,
+    "depth": 130.2
+   },
+   {
+    "dy": 0.01,
+    "none": true
+   },
+   {
+    "dy": 0.02,
+    "across": 96,
+    "depth": 9.3
+   },
+   {
+    "dy": 0.035,
+    "across": 88,
+    "depth": 0
+   },
+   {
+    "dy": 0.05,
+    "across": 94,
+    "depth": 23.7
+   }
+  ]
+ },
+ "sniper": {
+  "magAcross": 56,
+  "magDeep": 86,
+  "magTop": -50,
+  "slices": [
+   {
+    "dy": 0.004,
+    "across": 100,
+    "depth": 171.4
+   },
+   {
+    "dy": 0.01,
+    "across": 100,
+    "depth": 126.3
+   },
+   {
+    "dy": 0.02,
+    "across": 100,
+    "depth": 100.9
+   },
+   {
+    "dy": 0.035,
+    "across": 100,
+    "depth": 127.7
+   },
+   {
+    "dy": 0.05,
+    "across": 100,
+    "depth": 140
+   }
+  ]
+ },
+ "aa12": {
+  "magAcross": 310,
+  "magDeep": 253,
+  "magTop": -40,
+  "slices": [
+   {
+    "dy": 0.004,
+    "none": true
+   },
+   {
+    "dy": 0.01,
+    "across": 131,
+    "depth": 141.8
+   },
+   {
+    "dy": 0.02,
+    "across": 131,
+    "depth": 15.4
+   },
+   {
+    "dy": 0.035,
+    "across": 131,
+    "depth": 0
+   },
+   {
+    "dy": 0.05,
+    "across": 131,
+    "depth": 0
+   }
+  ]
+ },
+ "uzi": {
+  "magAcross": 42,
+  "magDeep": 97.9,
+  "magTop": -88,
+  "slices": [
+   {
+    "dy": 0.004,
+    "across": 81,
+    "depth": 113.7
+   },
+   {
+    "dy": 0.01,
+    "across": 80,
+    "depth": 97.7
+   },
+   {
+    "dy": 0.02,
+    "across": 80,
+    "depth": 92.6
+   },
+   {
+    "dy": 0.035,
+    "across": 80,
+    "depth": 100
+   },
+   {
+    "dy": 0.05,
+    "across": 90.6,
+    "depth": 150.5
+   }
+  ]
+ },
+ "pistol": {
+  "magAcross": 52,
+  "magDeep": 99.8,
+  "magTop": -3.5,
+  "slices": [
+   {
+    "dy": 0.004,
+    "across": 50.5,
+    "depth": 163.5
+   },
+   {
+    "dy": 0.01,
+    "across": 47.3,
+    "depth": 150
+   },
+   {
+    "dy": 0.02,
+    "across": 46,
+    "depth": 5
+   },
+   {
+    "dy": 0.035,
+    "across": 47.8,
+    "depth": 134.2
+   },
+   {
+    "dy": 0.05,
+    "across": 47.8,
+    "depth": 118.9
+   }
+  ]
+ }
+}

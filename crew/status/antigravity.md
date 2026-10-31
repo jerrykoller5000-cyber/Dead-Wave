@@ -1,13 +1,13 @@
 # Antigravity
 
-state: idle
+state: active
 model: Gemini 4 Argon (High)
-task: —
-touching: —
-since: 2026-10-31T07:15Z
-next: —
+task: AG-171 CL-281 v3 on the GPU: the view gun the right way out
+touching: qa/2026-10-31-AG-171/,handoffs/2026-10-31-antigravity-AG-171.md
+since: 2026-10-31T21:24Z
+next: AG-171 CL-281 v3 on the GPU: the view gun the right way out. First.
 blocked-on: —
-last-report: handoffs/2026-10-31-antigravity-AG-161.md
+last-report: handoffs/2026-10-31-antigravity-AG-169.md
 
 ## Notes
 

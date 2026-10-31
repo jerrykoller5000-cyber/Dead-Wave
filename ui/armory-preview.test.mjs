@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import * as THREE from '../vendor/three/three.core.js';
+import {createArmoryPreview} from './armory-preview.js';
 const source=fs.readFileSync(new URL('../index.html',import.meta.url),'utf8');
 const take=(start,end)=>source.slice(source.indexOf(start),source.indexOf(end,source.indexOf(start)));
 const copySource=take('function carryGunCopy(kind) {','    function carryInstanced(');
@@ -27,7 +28,7 @@ function setup(){
    }
   });
  }}};
- const copy=new Function('THREE','weaponMeshes','return ('+copySource+');')(THREE,meshes);
+ const copy=new Function('THREE','weaponMeshes','cloneLean','return ('+copySource+');')(THREE,meshes,obj=>obj.clone(true));
  const doc={createElement:()=>({getContext:()=>({drawImage(){}}),toDataURL:()=> 'data:image/png;base64,fixture'})};
  const preview=new Function('THREE','weaponMeshes','armoryPicsReady','armoryPics','carryGunCopy','document','return ('+previewSource+');')(
   THREE,meshes,async()=>ready,pics,copy,doc);
@@ -51,4 +52,36 @@ test('updated attachments appear on the next request; invalid input and renderer
  assert.equal(f.pics.scene.children.length,0);assert.equal(f.read().disposals,0);
  f.setFail(false);f.setReady(false);const previous=f.read().renders;
  assert.equal(await f.preview('m4',{}),null);assert.equal(f.read().renders,previous);
+});
+
+test('workbench zoom responds to wheel and pinch, eases to clamps, and resets for another gun',async()=>{
+ const frames=new Map();let frameId=0,now=0;
+ const host={requestAnimationFrame(fn){frames.set(++frameId,fn);return frameId;},cancelAnimationFrame(id){frames.delete(id);}};
+ const doc={defaultView:host,createElement(){
+  const handlers=new Map();return {dataset:{},style:{},children:[],attributes:new Map(),hidden:false,
+   append(...nodes){this.children.push(...nodes);},addEventListener(type,fn){handlers.set(type,fn);},
+   fire(type,event={}){handlers.get(type)?.({preventDefault(){},stopPropagation(){},...event});},
+   setAttribute(key,value){this.attributes.set(key,value);},removeAttribute(key){this.attributes.delete(key);},
+   setPointerCapture(){},hasPointerCapture(){return false;},focus(){},remove(){}};
+ }};
+ const views=[];
+ const preview=createArmoryPreview({doc,render:async(_gun,view)=>{views.push(view);return 'data:image/png;base64,fixture';},
+  labels:{hint:'hint',left:'left',front:'front',right:'right',unavailable:'unavailable'}});
+ const stage=preview.element.children[0];
+ async function advance(count=30){for(let i=0;i<count;i++){
+  if(!frames.size)break;now+=16;const pending=[...frames.values()];frames.clear();for(const fn of pending)fn(now);
+  await Promise.resolve();await Promise.resolve();
+ }}
+ preview.show('m4','M4');await advance();
+ stage.fire('wheel',{deltaY:-10000});await advance();
+ assert(Math.abs(views.at(-1).zoom-2.5)<.01,'wheel zoom reaches upper clamp');
+ stage.fire('wheel',{deltaY:10000});await advance();
+ assert(Math.abs(views.at(-1).zoom-1)<.01,'wheel zoom reaches lower clamp');
+ stage.fire('pointerdown',{pointerId:1,pointerType:'touch',clientX:0,clientY:0});
+ stage.fire('pointerdown',{pointerId:2,pointerType:'touch',clientX:100,clientY:0});
+ stage.fire('pointermove',{pointerId:2,pointerType:'touch',clientX:180,clientY:0});await advance();
+ assert(views.at(-1).zoom>1.7&&views.at(-1).zoom<1.9,'pinch zoom follows finger separation');
+ preview.show('pistol','Pistol');await advance();
+ assert.equal(views.at(-1).zoom,1,'another gun opens at its own full view');
+ preview.hide();assert.equal(frames.size,0,'hidden view stops rendering');preview.dispose();
 });

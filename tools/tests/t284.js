@@ -20,10 +20,13 @@
       await wait(1500); T.setViewFirstDbg(true); await wait(1000); T.setZoomHeldDbg(true);
       const t0 = Date.now(); while (T.fpDbg().ads < 0.99 && Date.now() - t0 < 6000) await wait(100); await wait(400);
       const g = T.weaponMeshes[w], c = T.camera || window.camera; g.updateWorldMatrix(true, false);
-      const y = (a) => a ? g.localToWorld(new T.THREE.Vector3(...a)).project(c).y : null;
+      // GB-262 (CL-281): where the view gun draws this weapon his own gun is out of the eye's pass, so measure the view gun's sights
+      // through its own projection (the same gun-local points, the same bars: rule 13). Other guns as before.
+      const vm = T.viewmodelDbg ? T.viewmodelDbg() : null, viaVm = !!(vm && vm.showing && vm.showing(w));
+      const y = (a) => a ? (viaVm ? vm.ndc(vm.viewPoint(new T.THREE.Vector3(...a))).y : g.localToWorld(new T.THREE.Vector3(...a)).project(c).y) : null;
       const ry = y(r), fy = y(f);
       okReal(Math.abs(ry) <= 0.02 && (fy == null || (Math.abs(fy) <= 0.02 && Math.abs(ry - fy) <= 0.015)),
-        w + ' aimed: rear ' + ry.toFixed(3) + ' front ' + (fy == null ? '-' : fy.toFixed(3)) + ' (ndc y)');
+        w + ' aimed: rear ' + ry.toFixed(3) + ' front ' + (fy == null ? '-' : fy.toFixed(3)) + ' (ndc y' + (viaVm ? ', view gun' : '') + ')');
       T.setZoomHeldDbg(false); await wait(700); T.setViewFirstDbg(false); await wait(500);
     }
   } catch (e) { out.push('FAIL threw: ' + (e && e.stack || e)); }

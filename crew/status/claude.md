@@ -1,15 +1,16 @@
 # Claude
 
-state: idle
-model: Claude Opus 5.5 (Cowork, cloud)
-task: —
+state: active
+model: Claude Opus 5.5
+task: CL-281 stage 1: fixes from AG-168's first shots and MU-11 in; AG-168 shoots again
 touching: —
-since: 2026-10-29T17:00Z
-next: CL-277 Night 20's scene: what the 1.1 build added to every frame (A
+since: 2026-10-31T20:18Z
+next: CL-281 (spec: docs/specs/first-person-1.2.md, 2026-10-31; stage 1 i
 blocked-on: —
-last-report: handoffs/2026-10-29-claude-CL-277.md
+last-report: handoffs/2026-10-31-claude-CL-284.md
 
 ## Notes
+- 2026-10-31: device_commit_files can resend an earlier upload when a stagedPath is reused (twice a commit 'written' left the old file): give each commit a fresh file name and check the md5 on the PC after.
 
 - 2026-10-25: headless Blender is installed in the cloud box (`pip install bpy`, 5.2 LTS): studio/import-cmu.py reads the CMU FBX clips (huggingface gbionics/cmu-fbx; credit mocap.cs.cmu.edu). The 2-core box's software renderer is slow with the gun in view in first person: give first-person eases 14-20 s in tests.
 

@@ -1,0 +1,61 @@
+bench: http://127.0.0.1:27819/index.html?debug=1
+bench: scenario night 20 for 30s
+
+bench: graphics high
+bench: night 20 push 2/6  out 2  spawned 212/861
+bench: night 20 push 4/6  out 2  spawned 422/861
+bench: night 20 push 5/6  out 1  spawned 631/861
+bench: night 20 push 6/6  out 48  spawned 723/861
+bench: profiler on, GPU timestamps on
+bench: allocation sampling on
+alloc  682.7 kB a frame (39.7 MB/s); by function:
+     94.3 kB  updateZombies index.html:56070
+     43.2 kB  trace zombie-ability-collision.js:39
+     39.6 kB  zombieLateStep index.html:56978
+     27.9 kB  getDynamicCacheKey three.webgpu.js:25827
+     23.3 kB  propsNear index.html:53422
+     23.1 kB  get three.webgpu.js:2954
+     21.1 kB  getNodeChildren three.webgpu.js:622
+     21.1 kB  draw three.webgpu.js:69261
+     19.2 kB  updateNumber three.webgpu.js:52725
+     18.7 kB  get three.webgpu.js:25966
+     16.8 kB  updateBurningTrees index.html:52074
+     15.9 kB  getCacheKey$1 three.webgpu.js:592
+     12.7 kB  update three.webgpu.js:12257
+     11.4 kB  resolveStaticProps index.html:53455
+      8.3 kB  (anonymous) marine-kit-fit.js:35
+fps    55.9   (mean of last 10 s)
+low    39.3   (1% low, same windows)
+worst  24.8 ms
+hitch  0   (frames over 50 ms, whole run)
+draws  265
+tris   781458
+frame  17.89 ms = tick 16.91 ms + outside 0.98 ms  (the last 10 s, the window of fps and low)
+whole run: tick 15.89 ms over 30 s; frame (last 10 s) - that = 2 ms (two windows)   gpu 0.26 ms
+last 10 s, by section:
+  r:render                             8.52 ms
+  zombies                              3.07 ms
+  r:matrices                           1.92 ms
+  m:hold                               0.73 ms
+  r:cull                               0.51 ms
+  m:pose                               0.45 ms
+  w:stairs+roof+birds+bugs+wildlife    0.21 ms
+  hud+audio                            0.18 ms
+  w:minimap                            0.15 ms
+  w:treeFall+leaves+batches            0.14 ms
+  drops+hud                            0.12 ms
+  r:rigSkin                            0.10 ms
+whole run, by section:
+  r:render                             8.13 ms   worst 14.0
+  zombies                              2.25 ms   worst 14.4
+  r:matrices                           1.97 ms   worst 5.2
+  m:hold                               0.77 ms   worst 5.0
+  r:cull                               0.51 ms   worst 1.3
+  m:pose                               0.51 ms   worst 20.3
+  w:stairs+roof+birds+bugs+wildlife    0.24 ms   worst 2.0
+  hud+audio                            0.20 ms   worst 1.1
+  w:treeFall+leaves+batches            0.15 ms   worst 0.4
+  w:minimap                            0.15 ms   worst 1.1
+  drops+hud                            0.12 ms   worst 1.3
+  r:rigSkin                            0.10 ms   worst 0.4
+{"scenario":"night","seconds":30,"fps":55.9,"low":39.3,"worst":24.8,"hitches":0,"draws":265,"triangles":781458,"zombies":48,"gfx":"high","windows":10,"night":20,"push":5,"pushes":6,"last":true,"prof":{"frames":1788,"frameMs":17.89,"tickMs":15.89,"outsideMs":2,"last10":{"seconds":10,"frames":569,"frameMs":17.89,"tickMs":16.91,"outsideMs":0.98,"top":[{"k":"r:render","avg":8.52},{"k":"zombies","avg":3.07},{"k":"r:matrices","avg":1.92},{"k":"m:hold","avg":0.73},{"k":"r:cull","avg":0.51},{"k":"m:pose","avg":0.45},{"k":"w:stairs+roof+birds+bugs+wildlife","avg":0.21},{"k":"hud+audio","avg":0.18},{"k":"w:minimap","avg":0.15},{"k":"w:treeFall+leaves+batches","avg":0.14},{"k":"drops+hud","avg":0.12},{"k":"r:rigSkin","avg":0.1}]},"top":[{"k":"r:render","avg":8.13,"max":14},{"k":"zombies","avg":2.25,"max":14.4},{"k":"r:matrices","avg":1.97,"max":5.2},{"k":"m:hold","avg":0.77,"max":5},{"k":"r:cull","avg":0.51,"max":1.3},{"k":"m:pose","avg":0.51,"max":20.3},{"k":"w:stairs+roof+birds+bugs+wildlife","avg":0.24,"max":2},{"k":"hud+audio","avg":0.2,"max":1.1},{"k":"w:treeFall+leaves+batches","avg":0.15,"max":0.4},{"k":"w:minimap","avg":0.15,"max":1.1},{"k":"drops+hud","avg":0.12,"max":1.3},{"k":"r:rigSkin","avg":0.1,"max":0.4}],"spikes":[{"frame":342,"ms":26.7,"top":["r:render 13.2","r:matrices 3.9","zombies 2.3","m:hold 1.7"],"heapMB":930.3,"freedMB":-0.7,"newPipelines":0,"newTextures":0,"newGeometries":0,"newBuilds":0,"sunShadow":0,"newRenderObjects":1,"t0":36449.1,"t1":36476.8},{"frame":1203,"ms":41.6,"top":["m:pose 20.3","r:render 8.7","zombies 7.5","r:matrices 2.0"],"heapMB":869.1,"freedMB":120.4,"newPipelines":0,"newTextures":0,"newGeometries":0,"newBuilds":0,"sunShadow":0,"newRenderObjects":0,"t0":51011.9,"t1":51057},{"frame":1274,"ms":25.1,"top":["r:render 7.8","m:hold2+arms 6.8","zombies 3.7","r:matrices 1.8"],"heapMB":879,"freedMB":25.5,"newPipelines":0,"newTextures":0,"newGeometries":0,"newBuilds":0,"sunShadow":0,"newRenderObjects":1,"t0":52318.4,"t1":52344.2},{"frame":1286,"ms":25.6,"top":["r:render 9.5","m:hold2+arms 5.5","zombies 4.3","r:matrices 2.0"],"heapMB":907.1,"freedMB":-10,"newPipelines":0,"newTextures":0,"newGeometries":0,"newBuilds":0,"sunShadow":0,"newRenderObjects":1,"t0":52551,"t1":52578},{"frame":1290,"ms":29.4,"top":["zombies 14.4","r:render 8.8","r:matrices 2.1","m:hold 0.9"],"heapMB":885.4,"freedMB":28.4,"newPipelines":0,"newTextures":0,"newGeometries":0,"newBuilds":0,"sunShadow":0,"newRenderObjects":0,"t0":52639,"t1":52669},{"frame":1332,"ms":26.2,"top":["r:render 12.1","r:matrices 5.1","zombies 3.3","r:cull 1.3"],"heapMB":905.2,"freedMB":-0.6,"newPipelines":0,"newTextures":0,"newGeometries":0,"newBuilds":0,"sunShadow":0,"newRenderObjects":0,"t0":53451.2,"t1":53478.2},{"frame":1641,"ms":26.2,"top":["r:render 11.6","zombies 7.2","r:matrices 3.2","m:hold 0.9"],"heapMB":915.5,"freedMB":-0.6,"newPipelines":0,"newTextures":0,"newGeometries":0,"newBuilds":0,"sunShadow":0,"newRenderObjects":0,"t0":58818.6,"t1":58845.5}],"spikeCauses":{"spikes":7,"pipelines":0,"builds":0,"uploads":0,"sunShadow":0,"gc":3,"code":4},"gpuMs":0.26,"gpuSamples":697,"pipelines":{"made":0,"released":0,"withNewShaders":0,"top":[],"first":[]},"builds":{"made":0,"top":[],"zombieAndEcho":[]},"renderObjects":{"made":67,"perFrame":0.04,"top":[{"k":"zombie-skin < Group < Scene | MeshStandardNodeMaterial | scene","n":25,"frames":[55,57,115,342,420,519]},{"k":"zombie-skin < Group < Scene | NodeMaterial | ortho","n":24,"frames":[766,1666]},{"k":"feral-motion-echo < Scene | MeshBasicMaterial | scene","n":9,"frames":[933,937,941,961,965,969]},{"k":"open-molded-holster < Group < Group | MeshStandardMaterial | scene","n":5,"frames":[1274,1283,1286,1293,1302]},{"k":"zombie-skin < Group < Scene | MeshStandardMaterial | scene","n":3,"frames":[1459,1463,1684]},{"k":"open-molded-holster < Group < Group | NodeMaterial | ortho","n":1,"frames":[1666]}],"spikes":[{"frame":342,"n":1,"top":["1 zombie-skin < Group < Scene | MeshStandardNodeMaterial | scene"]},{"frame":1203,"n":0,"top":[]},{"frame":1274,"n":1,"top":["1 open-molded-holster < Group < Group | MeshStandardMaterial | scene"]},{"frame":1286,"n":1,"top":["1 open-molded-holster < Group < Group | MeshStandardMaterial | scene"]},{"frame":1290,"n":0,"top":[]},{"frame":1332,"n":0,"top":[]},{"frame":1641,"n":0,"top":[]}]},"gc":null},"alloc":{"frames":1788,"kbPerFrame":682.7,"mbPerSecond":39.7,"self":[{"k":"updateZombies index.html:56070","kb":94.3},{"k":"trace zombie-ability-collision.js:39","kb":43.2},{"k":"zombieLateStep index.html:56978","kb":39.6},{"k":"getDynamicCacheKey three.webgpu.js:25827","kb":27.9},{"k":"propsNear index.html:53422","kb":23.3},{"k":"get three.webgpu.js:2954","kb":23.1},{"k":"getNodeChildren three.webgpu.js:622","kb":21.1},{"k":"draw three.webgpu.js:69261","kb":21.1},{"k":"updateNumber three.webgpu.js:52725","kb":19.2},{"k":"get three.webgpu.js:25966","kb":18.7},{"k":"updateBurningTrees index.html:52074","kb":16.8},{"k":"getCacheKey$1 three.webgpu.js:592","kb":15.9},{"k":"update three.webgpu.js:12257","kb":12.7},{"k":"resolveStaticProps index.html:53455","kb":11.4},{"k":"(anonymous) marine-kit-fit.js:35","kb":8.3},{"k":"updateTreeBatchesInner index.html:18180","kb":8.1},{"k":"sampleClip clip.js:119","kb":7.8},{"k":"_projectObject three.webgpu.js:51838","kb":7.7},{"k":"updateWildlife index.html:13993","kb":7.6},{"k":"trackZombieMotion index.html:47784","kb":7.2},{"k":"abs :0","kb":6.8},{"k":"add :0","kb":6.6},{"k":"keys :0","kb":5.9},{"k":"equals three.webgpu.js:294","kb":5.7},{"k":"next :0","kb":5.5}],"stacks":[{"k":"updateZombies index.html:56070 < tick index.html:59768 < update three.webgpu.js:24889","kb":94.3},{"k":"zombieLateStep index.html:56978 < updateZombies index.html:56070 < tick index.html:59768","kb":39.6},{"k":"trace zombie-ability-collision.js:39 < lineClear zombie-ability-collision.js:140 < updateActor zombie-ability-runtime.js:157","kb":30},{"k":"getDynamicCacheKey three.webgpu.js:25827 < get three.webgpu.js:25966 < _renderObjectDirect three.webgpu.js:52172","kb":27.7},{"k":"propsNear index.html:53422 < resolveStaticProps index.html:53455 < updateZombies index.html:56070","kb":23.3},{"k":"draw three.webgpu.js:69261 < _renderObjectDirect three.webgpu.js:52172 < renderObject three.webgpu.js:52063","kb":21.1},{"k":"updateNumber three.webgpu.js:52725 < update three.webgpu.js:52680 < _update three.webgpu.js:27644","kb":19.2},{"k":"get three.webgpu.js:25966 < _renderObjectDirect three.webgpu.js:52172 < renderObject three.webgpu.js:52063","kb":18.7},{"k":"getNodeChildren three.webgpu.js:622 < getCacheKey$1 three.webgpu.js:592 < getCacheKey$1 three.webgpu.js:592","kb":17.1},{"k":"updateBurningTrees index.html:52074 < tick index.html:59768 < update three.webgpu.js:24889","kb":16.8},{"k":"get three.webgpu.js:2954 < getCacheKey$1 three.webgpu.js:592 < getCacheKey$1 three.webgpu.js:592","kb":14.1},{"k":"trace zombie-ability-collision.js:39 < updateShots zombie-ability-runtime.js:200 < update zombie-ability-runtime.js:241","kb":13.2},{"k":"update three.webgpu.js:12257 < updateForRender three.webgpu.js:47136 < _renderObjectDirect three.webgpu.js:52172","kb":12.6},{"k":"resolveStaticProps index.html:53455 < updateZombies index.html:56070 < tick index.html:59768","kb":11.4},{"k":"(anonymous) marine-kit-fit.js:35 < traverseVisible three.core.js:13920 < traverseVisible three.core.js:13920","kb":8.3},{"k":"updateTreeBatchesInner index.html:18180 < updateTreeBatches index.html:18172 < updateWorldAnimations index.html:59367","kb":8.1},{"k":"sampleClip clip.js:119 < marineGait index.html:20149 < applyShamblerMotion shambler-motion.js:56","kb":7.8},{"k":"updateWildlife index.html:13993 < updateWorldAnimations index.html:59367 < tick index.html:59768","kb":7.6},{"k":"trackZombieMotion index.html:47784 < tick index.html:59768 < update three.webgpu.js:24889","kb":7.2},{"k":"getCacheKey$1 three.webgpu.js:592 < getCacheKey$1 three.webgpu.js:592 < getCacheKey three.webgpu.js:1342","kb":6.5},{"k":"_projectObject three.webgpu.js:51838 < _projectObject three.webgpu.js:51838 < _projectObject three.webgpu.js:51838","kb":6},{"k":"abs :0 < updateZombies index.html:56070 < tick index.html:59768","kb":5.8},{"k":"equals three.webgpu.js:294 < _renderObjectDirect three.webgpu.js:52172 < renderObject three.webgpu.js:52063","kb":5.5},{"k":"stateOf marine-skin.js:48 < syncRigSkins marine-skin.js:204 < renderFrame index.html:2377","kb":5.2},{"k":"getCacheKey$1 three.webgpu.js:592 < getCacheKey$1 three.webgpu.js:592 < getCacheKey$1 three.webgpu.js:592","kb":5.2}]}}

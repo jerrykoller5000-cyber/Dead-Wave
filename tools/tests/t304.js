@@ -1,5 +1,5 @@
-// t304 - GB-232 (places; docs/specs/story-chain.md 6): with the gate on, day 3, 'story done oldman' finds Okafor in the
-// trapper's cellar (trapper.cellarSpot, within 0.5 m, at its floor height, not pushed out by AG-137's cellar colliders);
+// t304 - GB-232 (places; docs/specs/story-chain.md 6): with the gate on, 'story done oldman' finds Okafor in the
+// trapper's cellar on her day (CL-285, D-102: not on night 3, from day 8, the old man's lead's day) (trapper.cellarSpot, within 0.5 m, at its floor height, not pushed out by AG-137's cellar colliders);
 // E from the yard above (more than 1.6 m up) doesn't reach her, from the cellar floor beside her it does. Brandt, when
 // the search is done, waits by the rangers' truck's door if its clue spot is set (else the fire), Pike at the fire.
 (async () => {
@@ -13,7 +13,10 @@
     const W = () => T.survivorDbg.waiting();
     T.setDay(3); T.storyDbg.sync(); T.storyDbg.gate(true);
     T.runDevCommand('story done oldman');
-    ok(await until(() => W().some((s) => s.style === 'trapper'), 4000), 'day 3, the old man done: Okafor waits (' + W().map((s) => s.style).join(',') + ')');
+    await wait(800); T.storyDbg.sync();
+    ok(!W().some((s) => s.style === 'trapper'), 'day 3, the old man done: not before her day (CL-285)');
+    T.setDay(8); T.storyDbg.sync();
+    ok(await until(() => W().some((s) => s.style === 'trapper'), 4000), 'day 8, the old man done: Okafor waits (' + W().map((s) => s.style).join(',') + ')');
     const ok1 = W().find((s) => s.style === 'trapper'), cs = T.trapperDbg.cellarSpot();
     ok(!!cs, 'the trapper exposes cellarSpot');
     if (ok1 && cs) {

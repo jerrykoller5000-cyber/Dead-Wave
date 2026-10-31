@@ -22,7 +22,7 @@ try {
   await shot('tracked');
   await page.locator('[data-site="objective:medical-convoy"]').click();
   assert.equal(await page.locator('.objective-marker[aria-pressed="true"]').count(),1);
-  assert.equal(await page.locator('.objective-tracker h2').textContent(),'Recover medical supplies');
+  assert.equal(await page.locator('.objective-tracker h2').textContent(),"Open Threshold's medical case");
   await page.locator('.objective-tracker button').click();assert(await page.locator('.objective-tracker').isHidden());
   for(const state of ['available','active','interrupted','full','partial','claimed','unavailable','hidden']) {
     await page.evaluate(state=>objectiveFixture.scenario(state),state);
@@ -52,6 +52,19 @@ try {
   assert(await choice.isDisabled());assert.equal(await choice.inputValue(),'9mm');
   await page.evaluate(()=>{const s=objectiveFixture.snapshot();s.sequence++;s.active=false;objectiveFixture.app.update(s);});
   assert(await page.locator('.objective-markers').isHidden());
+  await page.evaluate(()=>{
+    objectiveFixture.scenario('available');
+    const dialog=document.createElement('dialog');dialog.id='hqBriefing';dialog.dataset.panel='alarm';
+    const report=document.createElement('div');report.id='briefing-report';dialog.append(report);document.body.append(dialog);
+    dialog.showModal();dispatchEvent(new CustomEvent('dw-game',{detail:{type:'briefing-open'}}));
+    const s=objectiveFixture.snapshot();s.sequence++;s.active=false;objectiveFixture.app.update(s);
+  });
+  assert.equal(await page.locator('#briefing-report > .objective-tracker').count(),1);
+  assert(await page.locator('#briefing-report > .objective-tracker').isVisible());
+  assert.equal(await page.locator('#briefing-report .objective-prompt').textContent(),'');
+  await page.evaluate(()=>{document.getElementById('hqBriefing').close();dispatchEvent(new CustomEvent('dw-game',{detail:{type:'briefing-closed'}}));});
+  assert.equal(await page.locator('#hud > .objective-tracker').count(),1);
+  assert(await page.locator('#hud > .objective-tracker').isHidden());
   assert.deepEqual(errors,[]);
   console.log('PASS objectives fixture: seven markers, one tracker, keyboard/focus, progress, interruption, full/partial inventory, terminal/hidden sites and narrow viewport.');
   console.log('PASS no page errors. Stub sites only; no world, rewards or GPU performance claim.');

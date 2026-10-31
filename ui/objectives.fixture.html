@@ -24,18 +24,19 @@ const rewards=[{key:'shop.ammo.pack',params:{quantity:60,unit:rounds}},{key:'sup
   {key:'shop.ammo.pack',params:{quantity:60,unit:rounds}}];
 const app=mountObjectives({mapRoot:document.getElementById('map'),hudRoot:document.getElementById('hud'),project:p=>({x:(p.x+180)/260,y:(110-p.z)/230})});
 let runId=1,snapshot;
-function fresh(){return {runId,sequence:0,active:true,player:{x:0,z:0},sites:OBJECTIVE_SITES.map((site,i)=>({id:site.id,state:'available',position:{x:positions[i][0],z:positions[i][1]},reachable:false,reward:rewards[i]}))};}
+function fresh(){return {runId,sequence:0,active:true,player:{x:0,z:0},sites:OBJECTIVE_SITES.map((site,i)=>({id:site.id,state:'available',position:{x:positions[i][0],z:positions[i][1]},reachable:true,reward:rewards[i]}))};}
 function scenario(name='overview',id='objective:radio-repair') {
-  runId++;app.reset(runId);snapshot=fresh();app.update(snapshot);
-  if(name!=='overview')app.track(id);
-  const s=snapshot.sites.find(s=>s.id===id);s.reachable=true;
+  runId++;app.reset(runId);snapshot=fresh();
+  const s=snapshot.sites.find(s=>s.id===id);
   if(name==='active'){s.state='active';s.progress=.55;}
   if(name==='interrupted')s.feedback='interrupted';
   if(name==='full'){s.state='ready-to-claim';s.feedback='full';}
   if(name==='partial'){s.state='ready-to-claim';s.feedback='partial';s.remaining={key:'shop.ammo.pack',params:{quantity:18,unit:rounds}};}
   if(['claimed','unavailable'].includes(name))s.state=name;
   if(name==='hidden')for(const row of snapshot.sites)if(row.id!==id)row.state='undiscovered';
-  snapshot.sequence++;app.update(snapshot);return app.read();
+  snapshot.sequence++;app.update(snapshot);
+  if(name!=='overview')app.track(id);
+  return app.read();
 }
 scenario();document.getElementById('scenario').addEventListener('change',e=>scenario(e.target.value));
 window.objectiveFixture={app,scenario,tick:()=>{snapshot.sequence++;app.update(snapshot);},snapshot:()=>snapshot};

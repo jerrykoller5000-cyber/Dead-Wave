@@ -1,0 +1,442 @@
+[
+ {
+  "gun": "minigun",
+  "view": "third",
+  "rest": {
+   "vis": true,
+   "beamBore": 0.02,
+   "beamAim": 12.52,
+   "boreAim": 12.54,
+   "miss": 3.08,
+   "len": 2.3
+  },
+  "fire": {
+   "boreSwingDeg": 0.52,
+   "beamOffBoreDeg": 0.65,
+   "visFrames": "20/20"
+  },
+  "reload": {
+   "frames": 68,
+   "beamShown": 0,
+   "beamOffBoreDeg": 0
+  }
+ },
+ {
+  "gun": "m4",
+  "view": "third",
+  "rest": {
+   "vis": true,
+   "beamBore": 0,
+   "beamAim": 11.8,
+   "boreAim": 11.8,
+   "miss": 3.16,
+   "len": 2.57
+  },
+  "fire": {
+   "boreSwingDeg": 2.53,
+   "beamOffBoreDeg": 3.01,
+   "visFrames": "20/20"
+  },
+  "reload": {
+   "frames": 93,
+   "beamShown": 0,
+   "beamOffBoreDeg": 0
+  }
+ },
+ {
+  "gun": "ak",
+  "view": "third",
+  "rest": {
+   "vis": true,
+   "beamBore": 0,
+   "beamAim": 11.93,
+   "boreAim": 11.93,
+   "miss": 3.16,
+   "len": 2.5
+  },
+  "fire": {
+   "boreSwingDeg": 3.1,
+   "beamOffBoreDeg": 3.72,
+   "visFrames": "20/20"
+  },
+  "reload": {
+   "frames": 120,
+   "beamShown": 0,
+   "beamOffBoreDeg": 0
+  }
+ },
+ {
+  "gun": "pistol",
+  "view": "third",
+  "rest": {
+   "vis": true,
+   "beamBore": 0,
+   "beamAim": 11.03,
+   "boreAim": 11.03,
+   "miss": 3.13,
+   "len": 2.98
+  },
+  "fire": {
+   "boreSwingDeg": 8.36,
+   "beamOffBoreDeg": 8.65,
+   "visFrames": "20/20"
+  },
+  "reload": {
+   "frames": 80,
+   "beamShown": 0,
+   "beamOffBoreDeg": 0
+  }
+ },
+ {
+  "gun": "uzi",
+  "view": "third",
+  "rest": {
+   "vis": true,
+   "beamBore": 0,
+   "beamAim": 10.95,
+   "boreAim": 10.95,
+   "miss": 3.12,
+   "len": 3.04
+  },
+  "fire": {
+   "boreSwingDeg": 7.63,
+   "beamOffBoreDeg": 7.91,
+   "visFrames": "20/20"
+  },
+  "reload": {
+   "frames": 83,
+   "beamShown": 0,
+   "beamOffBoreDeg": 0
+  }
+ },
+ {
+  "gun": "shotgun",
+  "view": "third",
+  "rest": {
+   "vis": true,
+   "beamBore": 0,
+   "beamAim": 12.04,
+   "boreAim": 12.04,
+   "miss": 3.16,
+   "len": 2.45
+  },
+  "fire": {
+   "boreSwingDeg": 18.96,
+   "beamOffBoreDeg": 22.78,
+   "visFrames": "20/20"
+  },
+  "reload": {
+   "frames": 25,
+   "beamShown": 0,
+   "beamOffBoreDeg": 0
+  }
+ },
+ {
+  "gun": "aa12",
+  "view": "third",
+  "rest": {
+   "vis": true,
+   "beamBore": 0,
+   "beamAim": 11.84,
+   "boreAim": 11.84,
+   "miss": 3.15,
+   "len": 2.55
+  },
+  "fire": {
+   "boreSwingDeg": 19.68,
+   "beamOffBoreDeg": 23.19,
+   "visFrames": "20/20"
+  },
+  "reload": {
+   "frames": 156,
+   "beamShown": 0,
+   "beamOffBoreDeg": 0
+  }
+ },
+ {
+  "gun": "revolver",
+  "view": "third",
+  "rest": {
+   "vis": true,
+   "beamBore": 0,
+   "beamAim": 11.18,
+   "boreAim": 11.18,
+   "miss": 3.14,
+   "len": 2.89
+  },
+  "fire": {
+   "boreSwingDeg": 15.98,
+   "beamOffBoreDeg": 16.75,
+   "visFrames": "20/20"
+  },
+  "reload": {
+   "frames": 108,
+   "beamShown": 0,
+   "beamOffBoreDeg": 0
+  }
+ },
+ {
+  "gun": "sniper",
+  "view": "third",
+  "rest": {
+   "vis": true,
+   "beamBore": 0,
+   "beamAim": 12.41,
+   "boreAim": 12.41,
+   "miss": 3.16,
+   "len": 2.29
+  },
+  "fire": {
+   "boreSwingDeg": 14.46,
+   "beamOffBoreDeg": 17.97,
+   "visFrames": "20/20"
+  },
+  "reload": {
+   "frames": 141,
+   "beamShown": 0,
+   "beamOffBoreDeg": 0
+  }
+ },
+ {
+  "gun": "launcher",
+  "view": "third",
+  "rest": {
+   "vis": true,
+   "beamBore": 0,
+   "beamAim": 0,
+   "boreAim": 0,
+   "miss": 2.99,
+   "len": 2.8
+  },
+  "fire": {
+   "boreSwingDeg": 17.74,
+   "beamOffBoreDeg": 20.17,
+   "visFrames": "20/20"
+  },
+  "reload": {
+   "frames": 24,
+   "beamShown": 0,
+   "beamOffBoreDeg": 0
+  }
+ },
+ {
+  "gun": "minigun",
+  "view": "first",
+  "rest": {
+   "vis": true,
+   "beamBore": 0,
+   "beamAim": 0,
+   "boreAim": 0,
+   "miss": 40.71,
+   "len": 2.17
+  },
+  "fire": {
+   "boreSwingDeg": 0.51,
+   "beamOffBoreDeg": 0.53,
+   "visFrames": "20/20"
+  },
+  "reload": {
+   "frames": 68,
+   "beamShown": 0,
+   "beamOffBoreDeg": 0
+  }
+ },
+ {
+  "gun": "m4",
+  "view": "first",
+  "rest": {
+   "vis": true,
+   "beamBore": 0,
+   "beamAim": 0,
+   "boreAim": 0,
+   "miss": 40.72,
+   "len": 2.45
+  },
+  "fire": {
+   "boreSwingDeg": 2.46,
+   "beamOffBoreDeg": 2.52,
+   "visFrames": "20/20"
+  },
+  "reload": {
+   "frames": 93,
+   "beamShown": 0,
+   "beamOffBoreDeg": 0
+  }
+ },
+ {
+  "gun": "ak",
+  "view": "first",
+  "rest": {
+   "vis": true,
+   "beamBore": 0,
+   "beamAim": 0,
+   "boreAim": 0,
+   "miss": 40.7,
+   "len": 2.41
+  },
+  "fire": {
+   "boreSwingDeg": 3.02,
+   "beamOffBoreDeg": 3.09,
+   "visFrames": "20/20"
+  },
+  "reload": {
+   "frames": 120,
+   "beamShown": 0,
+   "beamOffBoreDeg": 0
+  }
+ },
+ {
+  "gun": "pistol",
+  "view": "first",
+  "rest": {
+   "vis": true,
+   "beamBore": 0,
+   "beamAim": 0,
+   "boreAim": 0,
+   "miss": 40.66,
+   "len": 2.99
+  },
+  "fire": {
+   "boreSwingDeg": 7.19,
+   "beamOffBoreDeg": 7.23,
+   "visFrames": "20/20"
+  },
+  "reload": {
+   "frames": 80,
+   "beamShown": 0,
+   "beamOffBoreDeg": 0
+  }
+ },
+ {
+  "gun": "uzi",
+  "view": "first",
+  "rest": {
+   "vis": true,
+   "beamBore": 0,
+   "beamAim": 0,
+   "boreAim": 0,
+   "miss": 40.67,
+   "len": 3.05
+  },
+  "fire": {
+   "boreSwingDeg": 7.44,
+   "beamOffBoreDeg": 7.49,
+   "visFrames": "20/20"
+  },
+  "reload": {
+   "frames": 83,
+   "beamShown": 0,
+   "beamOffBoreDeg": 0
+  }
+ },
+ {
+  "gun": "shotgun",
+  "view": "first",
+  "rest": {
+   "vis": true,
+   "beamBore": 0,
+   "beamAim": 0,
+   "boreAim": 0,
+   "miss": 40.7,
+   "len": 2.35
+  },
+  "fire": {
+   "boreSwingDeg": 21.2,
+   "beamOffBoreDeg": 21.75,
+   "visFrames": "20/20"
+  },
+  "reload": {
+   "frames": 25,
+   "beamShown": 0,
+   "beamOffBoreDeg": 0
+  }
+ },
+ {
+  "gun": "aa12",
+  "view": "first",
+  "rest": {
+   "vis": true,
+   "beamBore": 0,
+   "beamAim": 0,
+   "boreAim": 0,
+   "miss": 40.72,
+   "len": 2.36
+  },
+  "fire": {
+   "boreSwingDeg": 19.33,
+   "beamOffBoreDeg": 19.79,
+   "visFrames": "20/20"
+  },
+  "reload": {
+   "frames": 156,
+   "beamShown": 0,
+   "beamOffBoreDeg": 0
+  }
+ },
+ {
+  "gun": "revolver",
+  "view": "first",
+  "rest": {
+   "vis": true,
+   "beamBore": 0,
+   "beamAim": 0,
+   "boreAim": 0,
+   "miss": 40.67,
+   "len": 2.91
+  },
+  "fire": {
+   "boreSwingDeg": 14.52,
+   "beamOffBoreDeg": 14.61,
+   "visFrames": "20/20"
+  },
+  "reload": {
+   "frames": 108,
+   "beamShown": 0,
+   "beamOffBoreDeg": 0
+  }
+ },
+ {
+  "gun": "sniper",
+  "view": "first",
+  "rest": {
+   "vis": true,
+   "beamBore": 0,
+   "beamAim": 0,
+   "boreAim": 0,
+   "miss": 40.71,
+   "len": 2.2
+  },
+  "fire": {
+   "boreSwingDeg": 13.46,
+   "beamOffBoreDeg": 13.87,
+   "visFrames": "20/20"
+  },
+  "reload": {
+   "frames": 141,
+   "beamShown": 0,
+   "beamOffBoreDeg": 0
+  }
+ },
+ {
+  "gun": "launcher",
+  "view": "first",
+  "rest": {
+   "vis": true,
+   "beamBore": 0,
+   "beamAim": 0,
+   "boreAim": 0,
+   "miss": 40.7,
+   "len": 2.63
+  },
+  "fire": {
+   "boreSwingDeg": 16.92,
+   "beamOffBoreDeg": 17.24,
+   "visFrames": "20/20"
+  },
+  "reload": {
+   "frames": 24,
+   "beamShown": 0,
+   "beamOffBoreDeg": 0
+  }
+ }
+]

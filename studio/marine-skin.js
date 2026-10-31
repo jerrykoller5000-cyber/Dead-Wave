@@ -92,11 +92,14 @@ function buildSkins(THREE, TSL, rig) {
     src.baked = true;
     const own = textured(m) || m.isMeshPhysicalMaterial || m.isNodeMaterial;   // drawn with its own material
     const key = !own ? 'plain|' + m.side + '|' + !!m.flatShading : rig.mergeTextured && textured(m) && !m.isMeshPhysicalMaterial && !m.isNodeMaterial ? texKey(m) : m;
-    let set = sets.get(key); if (!set) sets.set(key, set = []);
-    set.push(o);
+    // CL-281: a part under one of the split roots (the player's arms) goes in skins of its own, so the first-person view
+    // can leave them out of the eye's pass and keep them in the shadows'.
+    const setKey = (src.split ? 'split' + src.split + '|' : '') + (typeof key === 'string' ? key : 'mat|' + key.uuid);
+    let set = sets.get(setKey); if (!set) sets.set(setKey, set = { key, split: src.split || 0, parts: [] });
+    set.parts.push(o);
   }
   const M = new THREE.Matrix4(), NM = new THREE.Matrix3(), v = new THREE.Vector3(), n = new THREE.Vector3();
-  for (const [key, parts] of sets) {
+  for (const { key, split, parts } of sets.values()) {
     const plain = typeof key === 'string' && key.startsWith('plain|'), shared = typeof key === 'string' && !plain;
     if (parts.length < 2) { for (const o of parts) { unhide(o); rig.byObj.get(o).baked = false; } continue; }
     const bones = [], boneIdx = new Map(), prep = [];
@@ -159,6 +162,7 @@ function buildSkins(THREE, TSL, rig) {
     }
     const skin = new THREE.SkinnedMesh(geo, mat);
     skin.name = 'rig-skin'; skin.userData.rigSkin = true; skin.userData.noRigSkin = true;
+    if (split) skin.userData.rigSplit = split;   // CL-281
     skin.castShadow = parts.some((o) => o.castShadow); skin.receiveShadow = parts.some((o) => o.receiveShadow);
     skin.frustumCulled = false;
     root.add(skin);
@@ -170,17 +174,21 @@ function buildSkins(THREE, TSL, rig) {
 }
 
 // Bake a rig: every mesh on it now (but not under `skip`) is a source from here on.
-export function bakeRigSkin(THREE, TSL, root, { skip = [], mergeTextured = false, bakeLive = false } = {}) {
+// split (CL-281): roots (or lists of roots) whose parts are baked into skins of their own (each skin's userData.rigSplit
+// is the entry's place in the list, from 1).
+export function bakeRigSkin(THREE, TSL, root, { skip = [], mergeTextured = false, bakeLive = false, split = [] } = {}) {
   if (!THREE || !THREE.SkinnedMesh || !THREE.Skeleton || !THREE.MeshStandardNodeMaterial || !TSL || !TSL.attribute || !root) return null;
   if (root.userData.rigSkin) return root.userData.rigSkin;
   const skipSet = new Set(skip.filter(Boolean));
+  const splitOf = new Map(); split.forEach((o, i) => { for (const x of Array.isArray(o) ? o : [o]) if (x) splitOf.set(x, i + 1); });
   const sources = [];
-  const walk = (o) => {
+  const walk = (o, tag) => {
     if (skipSet.has(o)) return;
-    if (o.isMesh && bakeable(o, o.material, bakeLive)) sources.push({ o, state: new Array(STATE_N), baked: false, hits: [], bend: bendOf(root, o) });
-    for (const c of o.children) walk(c);
+    if (splitOf.has(o)) tag = splitOf.get(o);
+    if (o.isMesh && bakeable(o, o.material, bakeLive)) sources.push({ o, state: new Array(STATE_N), baked: false, hits: [], bend: bendOf(root, o), split: tag || 0 });
+    for (const c of o.children) walk(c, tag);
   };
-  for (const c of root.children) walk(c);
+  for (const c of root.children) walk(c, 0);
   const rig = { THREE, TSL, root, sources, byObj: new Map(sources.map((s) => [s.o, s])), out: new Set(), skins: [], plainMats: new Map(), mergeTextured, bakeLive, bakes: 0, handedBack: 0, _st: new Array(STATE_N) };
   root.userData.rigSkin = rig;
   buildSkins(THREE, TSL, rig);

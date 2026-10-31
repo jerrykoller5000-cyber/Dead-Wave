@@ -343,12 +343,16 @@ export function buildMastPerchParts(T, options = {}) {
       S.seg([fx - Math.sin(palmYaw) * 0.026, hand[1], fz - Math.cos(palmYaw) * 0.026], [tipX, hand[1] - 0.012, tipZ], 0.0045, 0.004, M.bone, 4);
     }
   };
-  arm(P(-0.19, 0.44, -0.02), [-1.0, D + 0.3, -1.12], [-1.02, D + 0.075, -1.2], [-1.02, D + 0.03, -1.24], 0.2);
-  arm(P(0.19, 0.44, -0.02), [-0.6, D + 0.32, -1.16], [-0.72, D + 0.22, -1.31], [-0.76, D + 0.205, -1.36], -0.5);
+  // CL-284 (J43): each limb's parts are kept apart (limbs[]), so he can be pulled and fall spread-eagled.
+  const limbs = {};
+  const limb = (key, pivot, tip, f) => { const a = parts.length; f(); limbs[key] = { from: a, to: parts.length, pivot, tip }; };
+  limb('armL', P(-0.19, 0.44, -0.02), [-1.02, D + 0.075, -1.2], () => arm(P(-0.19, 0.44, -0.02), [-1.0, D + 0.3, -1.12], [-1.02, D + 0.075, -1.2], [-1.02, D + 0.03, -1.24], 0.2));
+  limb('armR', P(0.19, 0.44, -0.02), [-0.72, D + 0.22, -1.31], () => arm(P(0.19, 0.44, -0.02), [-0.6, D + 0.32, -1.16], [-0.72, D + 0.22, -1.31], [-0.76, D + 0.205, -1.36], -0.5));
   // --- Legs over the edge: thighs out, shins hanging, trousers tucked into the boots, bone below.
   const bootX = MAST_PERCH.boots.x, bootZ = MAST_PERCH.boots.z, bootY = MAST_PERCH.boots.y;
   for (const dx of [-0.13, 0.14]) {
     const x = bootX + dx, hipP = [bootX + dx * 0.6, D + 0.1, -1.22], knee = [x, D + 0.11, -1.53];
+    const legFrom = parts.length;
     S.seg(hipP, knee, 0.075, 0.064, M.olive, 10);                                  // the thigh
     S.box(0.05, 0.11, 0.1, M.oliveDk, x + Math.sign(dx) * 0.06, D + 0.11, -1.4);   // a cargo pocket
     S.ball(0.062, M.olive, ...knee, [1, 1, 1.1]);                                   // the knee
@@ -358,6 +362,7 @@ export function buildMastPerchParts(T, options = {}) {
     S.ball(0.024, M.boneDk, x, bootY + 0.08, bootZ - 0.008);                         // the ankle
     S.box(0.06, 0.035, 0.08, M.bone, x, bootY + 0.05, bootZ - 0.045);               // the foot's bones
     for (let i = 0; i < 4; i++) S.seg([x - 0.022 + i * 0.015, bootY + 0.045, bootZ - 0.085], [x - 0.024 + i * 0.016, bootY + 0.035, bootZ - 0.135], 0.006, 0.005, M.bone, 4);
+    limbs[dx < 0 ? 'legL' : 'legR'] = { from: legFrom, to: parts.length, pivot: hipP, tip: [x, bootY + 0.05, bootZ - 0.045], knee };
   }
   // --- His lanyard, still clipped to the mast's leg: why he never fell.
   S.tube([P(0.08, 0.02, 0.07), [-0.66, D + 0.42, -0.95], [-0.6, D + 0.68, -0.72], [-0.56, D + 0.8, -0.6]], 0.011, M.strap, 12);
@@ -366,7 +371,19 @@ export function buildMastPerchParts(T, options = {}) {
   for (const p of parts) { p.castShadow = true; p.receiveShadow = true; }
   // CL-264 (Jerry's N16): split, for the yank: the platform and the carabiner stay on the mast; he (with his lanyard)
   // is his own piece, turned about `pivot` (where he sits on the platform's outer edge) when he jerks and falls.
-  if (options.split) return { platform: [...parts.slice(0, skelFrom), ...parts.slice(skelTo)], skeleton: parts.slice(skelFrom, skelTo), pivot: [-0.78, D, -1.36] };
+  if (options.split) {
+    const out = { platform: [...parts.slice(0, skelFrom), ...parts.slice(skelTo)], skeleton: parts.slice(skelFrom, skelTo), pivot: [-0.78, D, -1.36] };
+    if (options.limbs) {
+      // CL-284: his torso (with the skull, the cap and the lanyard) and four limbs, each with the joint it turns about
+      // (a shoulder, a hip) and the point at its far end (the hand, the foot), in the mast's frame; and his axes.
+      const inLimb = new Set();
+      out.limbs = {};
+      for (const [k, L] of Object.entries(limbs)) { out.limbs[k] = { parts: parts.slice(L.from, L.to), pivot: L.pivot, tip: L.tip, knee: L.knee || null }; for (let i = L.from; i < L.to; i++) inLimb.add(i); }
+      out.torso = []; for (let i = skelFrom; i < skelTo; i++) if (!inLimb.has(i)) out.torso.push(parts[i]);
+      out.axes = { across: [1, 0, 0], spine: [0, cu, su], chest: [0, su, -cu] };
+    }
+    return out;
+  }
   return parts;
 }
 

@@ -58,6 +58,19 @@ test('props show extraction and smoking, emitted smoke and landing fire, all cle
   assert.equal(f.fires(),1); assert(c.drops[0].landed);
   c.reset(); assert.equal(c.drops.length,0); assert(!c.props.root.visible);
 });
+test('cigarette, pack, lighter and spark remain hidden before and after the smoke phases', () => {
+  const c = fixture().idle, props = c.props.root.children;
+  assert.equal(props.length, 4);
+  assert(props.every(prop => !prop.visible), 'all props start hidden even if the root is cloned or shown');
+  c.step(8, {}); c.pose(.016);
+  assert(props.every(prop => !prop.visible), 'bored sway does not expose props');
+  c.step(27, {}); c.pose(.016);
+  assert(c.props.root.visible && c.props.cig.visible, 'the smoking pose can show its cigarette');
+  c.step(.016, { active: true });
+  assert(props.every(prop => !prop.visible), 'movement hides every child after the drop');
+  c.step(26, {}); c.pose(.016); c.reset();
+  assert(props.every(prop => !prop.visible), 'reset hides every child');
+});
 test('long sessions keep discarded cigarette objects bounded', () => {
   const f = fixture(), c = f.idle;
   for(let i=0;i<100;i++) { c.step(31,{}); c.pose(.016); c.step(.016,{active:true}); }

@@ -1,0 +1,190 @@
+[
+ {
+  "label": "dry: hanging, he is at the camp approach",
+  "view": "third",
+  "phase": "hanging",
+  "grabbable": false,
+  "reach": "locked",
+  "dist": 0.4,
+  "action": null,
+  "objPrompt": "Their kit hangs in a tree by the river: shoot the rope",
+  "shown": true,
+  "offscreen": false,
+  "text": "Their kit hangs in a tree by the river: shoot the rope"
+ },
+ {
+  "label": "dry: hanging, he is at the camp approach",
+  "view": "first",
+  "phase": "hanging",
+  "grabbable": false,
+  "reach": "locked",
+  "dist": 0.4,
+  "action": null,
+  "objPrompt": "Their kit hangs in a tree by the river: shoot the rope",
+  "shown": true,
+  "offscreen": false,
+  "text": "Their kit hangs in a tree by the river: shoot the rope"
+ },
+ {
+  "label": "dry: hanging, he stands under the bag",
+  "view": "third",
+  "phase": "hanging",
+  "grabbable": false,
+  "reach": "locked",
+  "dist": 120.31,
+  "action": null,
+  "objPrompt": "Shoot the rope to drop the kit",
+  "shown": true,
+  "offscreen": false,
+  "text": "Shoot the rope to drop the kit"
+ },
+ {
+  "label": "dry: hanging, he stands under the bag",
+  "view": "first",
+  "phase": "hanging",
+  "grabbable": false,
+  "reach": "locked",
+  "dist": 120.31,
+  "action": null,
+  "objPrompt": "Shoot the rope to drop the kit",
+  "shown": true,
+  "offscreen": false,
+  "text": "Shoot the rope to drop the kit"
+ },
+ {
+  "label": "dry: on the ground, he is 1.2 m off",
+  "view": "third",
+  "phase": "ground",
+  "grabbable": true,
+  "reach": "locked",
+  "dist": 120.3,
+  "action": null,
+  "objPrompt": "E — Grab the kit",
+  "shown": true,
+  "offscreen": false,
+  "text": "EGrab the kit"
+ },
+ {
+  "label": "dry: on the ground, he is 1.2 m off",
+  "view": "first",
+  "phase": "ground",
+  "grabbable": true,
+  "reach": "locked",
+  "dist": 120.3,
+  "action": null,
+  "objPrompt": "E — Grab the kit",
+  "shown": true,
+  "offscreen": false,
+  "text": "EGrab the kit"
+ },
+ {
+  "label": "dry: on the ground, he is at the camp approach",
+  "view": "third",
+  "phase": "ground",
+  "grabbable": false,
+  "reach": "locked",
+  "dist": 0.4,
+  "action": null,
+  "objPrompt": "Their kit is down by the tree: grab it there",
+  "shown": true,
+  "offscreen": false,
+  "text": "Their kit is down by the tree: grab it there"
+ },
+ {
+  "label": "dry: on the ground, he is at the camp approach",
+  "view": "first",
+  "phase": "ground",
+  "grabbable": false,
+  "reach": "locked",
+  "dist": 0.4,
+  "action": null,
+  "objPrompt": "Their kit is down by the tree: grab it there",
+  "shown": true,
+  "offscreen": false,
+  "text": "Their kit is down by the tree: grab it there"
+ },
+ {
+  "label": "river: floating, he is 1.2 m off",
+  "view": "third",
+  "phase": "floating",
+  "grabbable": true,
+  "reach": "locked",
+  "dist": 124.69,
+  "action": null,
+  "objPrompt": "E — Grab the kit",
+  "shown": true,
+  "offscreen": false,
+  "text": "EGrab the kit"
+ },
+ {
+  "label": "river: floating, he is 1.2 m off",
+  "view": "first",
+  "phase": "floating",
+  "grabbable": true,
+  "reach": "locked",
+  "dist": 124.65,
+  "action": null,
+  "objPrompt": "E — Grab the kit",
+  "shown": true,
+  "offscreen": false,
+  "text": "EGrab the kit"
+ },
+ {
+  "label": "river: snagged, he is 1.2 m off",
+  "view": "third",
+  "phase": "snagged",
+  "grabbable": true,
+  "reach": "locked",
+  "dist": 124.61,
+  "action": null,
+  "objPrompt": "E — Grab the kit",
+  "shown": true,
+  "offscreen": false,
+  "text": "EGrab the kit"
+ },
+ {
+  "label": "river: snagged, he is 1.2 m off",
+  "view": "first",
+  "phase": "snagged",
+  "grabbable": true,
+  "reach": "locked",
+  "dist": 124.61,
+  "action": null,
+  "objPrompt": "E — Grab the kit",
+  "shown": true,
+  "offscreen": false,
+  "text": "EGrab the kit"
+ },
+ {
+  "J17": {
+   "medkits": 3,
+   "one gun": {
+    "akimbo": false,
+    "medkitsBefore": 3,
+    "medkitsAfter": 2,
+    "penT": 0.7,
+    "penVisible": true,
+    "banner": "MEDPEN+1 MedPen (3/3) · H to use"
+   },
+   "akimbo": {
+    "akimbo": true,
+    "medkitsBefore": 2,
+    "medkitsAfter": 2,
+    "penT": 0,
+    "penVisible": false,
+    "banner": "BOTH HANDS FULLY goes back to one gun"
+   },
+   "one gun again": {
+    "akimbo": false,
+    "medkitsBefore": 2,
+    "medkitsAfter": 1,
+    "penT": 0.7,
+    "penVisible": true,
+    "banner": "SINGLEBack to one gun"
+   }
+  }
+ },
+ {
+  "pageErrors": []
+ }
+]

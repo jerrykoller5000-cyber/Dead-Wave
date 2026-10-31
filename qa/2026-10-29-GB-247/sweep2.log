@@ -1,0 +1,25 @@
+GRANT grokbot GB-247: starting one game-test command
+camera: camera: loading the game...............................
+camera: ready in 31 s on port 28414: match, ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11), 1600x900
+help: ok
+setup: pistol
+launcher: warm-up done
+launcher {"up":0.14,"in":0.04,"side":0.14,"fwd":0,"tip":-0.3,"turn":0,"cant":0.8,"hip":0} u10 R 12930 L 14429 | u18 R   380 L 11159 | u25 R    67 L     0 | u33 R   142 L     0 | u40 R   335 L     0 | u48 R  1445 L 65559 | u55 R  1990 L  9060 | u62 R  2376 L  9626 | u70 R  2897 L 10762 | u85 R  1421 L 27476
+launcher {"up":0.1,"in":0.1,"side":0.12,"fwd":0,"tip":-0.3,"turn":0,"cant":0.6,"hip":0} u10 R 18991 L 13077 | u18 R 77435 L  6131 | u25 R 76324 L     0 | u33 R 75338 L     0 | u40 R 74424 L     0 | u48 R 70283 L 50109 | u55 R 68053 L   235 | u62 R 66872 L   431 | u70 R 65461 L   571 | u85 R 66717 L  7110
+launcher {"up":0.1,"in":0.04,"side":0.12,"fwd":0,"tip":-0.3,"turn":0,"cant":1,"hip":0} u10 R 15912 L 14861 | u18 R 31992 L  6308 | u25 R 32021 L     0 | u33 R 32163 L     0 | u40 R 32451 L     0 | u48 R 31320 L 65988 | u55 R 34110 L  1925 | u62 R 34473 L  2319 | u70 R 34601 L  2645 | u85 R 33646 L 15982
+launcher {"up":0.16,"in":0.04,"side":0.16,"fwd":0,"tip":-0.3,"turn":0,"cant":0.6,"hip":0} u10 R 20215 L 15559 | u18 R     0 L 14435 | u25 R     0 L     0 MERGED | u33 R     0 L     0 MERGED | u40 R     0 L     0 MERGED | u48 R     0 L 73157 | u55 R     0 L 17395 | u62 R     0 L 16501 | u70 R     0 L 16368 | u85 R     0 L 34334
+launcher {"up":0.12,"in":0.04,"side":0.12,"fwd":0.06,"tip":-0.3,"turn":0,"cant":0.6,"hip":0} u10 R 13838 L 14943 | u18 R  3651 L  7604 | u25 R  2732 L     0 | u33 R  1925 L     0 | u40 R  1956 L     0 | u48 R  2152 L 61736 | u55 R  1609 L  5273 | u62 R  1734 L  5801 | u70 R  1708 L  6609 | u85 R  1357 L 22945
+launcher {"up":0.12,"in":0.04,"side":0.18,"fwd":0,"tip":-0.3,"turn":0,"cant":0.6,"hip":0} u10 R 22811 L 13297 | u18 R 52851 L  8166 | u25 R 52318 L     0 | u33 R 52126 L     0 | u40 R 52639 L     0 | u48 R 51802 L 67973 | u55 R 54280 L   529 | u62 R 56100 L   918 | u70 R 58326 L  1385 | u85 R 60857 L  9642
+camera stop: camera: stopped
+camera: camera: loading the game..............................
+camera: ready in 30 s on port 36257: match, ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11), 1600x900
+help: ok
+setup: pistol
+uzi: warm-up done
+uzi {"up":0.3,"in":0.04,"side":-0.08,"fwd":0,"tip":-0.6,"turn":0,"cant":0.4,"hip":0} u10 R 60246 L     0 | u18 R144332 L     0 | u25 R143089 L     0 | u33 R142936 L     0 | u40 R143716 L     0 | u48 R144909 L     0 | u55 R145588 L     0 | u62 R144744 L     0 | u70 R116119 L 15142 | u85 R135041 L 60707
+uzi {"up":0.3,"in":0.04,"side":-0.08,"fwd":0,"tip":0,"turn":0,"cant":0.4,"hip":0} u10 R 79395 L     0 | u18 R212270 L     0 | u25 R209740 L     0 | u33 R205948 L     0 | u40 R201053 L     0 | u48 R194535 L     0 | u55 R184610 L     0 | u62 R166790 L     0 | u70 R149325 L    59 | u85 R146315 L 15526
+uzi {"up":0.3,"in":0.04,"side":-0.08,"fwd":0,"tip":0.3,"turn":0,"cant":0.4,"hip":0} u10 R 34919 L     0 | u18 R133071 L     0 | u25 R138775 L     0 | u33 R146083 L     0 | u40 R154394 L     0 | u48 R162822 L     0 | u55 R155546 L     0 | u62 R144106 L     0 | u70 R135372 L    91 | u85 R125934 L   387
+uzi {"up":0.19,"in":0.04,"side":-0.08,"fwd":0,"tip":0.3,"turn":0,"cant":0.4,"hip":0} u10 R 15832 L     0 | u18 R 63548 L     0 | u25 R 62138 L     0 | u33 R 61069 L     0 | u40 R 60286 L     0 | u48 R 60754 L     0 | u55 R 60270 L     0 | u62 R 59953 L     0 | u70 R 59336 L     0 | u85 R 56319 L   550
+uzi {"up":0.36,"in":0.04,"side":-0.04,"fwd":0.1,"tip":-0.3,"turn":0,"cant":0.4,"hip":0} u10 R 57092 L     0 | u18 R121625 L     0 | u25 R119381 L     0 | u33 R117730 L     0 | u40 R117519 L     0 | u48 R119453 L     0 | u55 R121410 L     0 | u62 R123439 L     0 | u70 R115251 L     0 | u85 R110336 L 49910
+uzi {"up":0.24,"in":0.04,"side":-0.12,"fwd":0,"tip":-0.6,"turn":0,"cant":1,"hip":0} u10 R 39234 L     0 | u18 R131201 L     0 | u25 R126916 L     0 | u33 R123415 L     0 | u40 R121136 L     0 | u48 R120024 L     0 | u55 R119332 L     0 | u62 R119287 L     0 | u70 R 93881 L     0 | u85 R113908 L 18094
+camera stop: camera: stopped

@@ -1,0 +1,23 @@
+Game-test request 5d7c263f-85c0-4b55-9c29-b3f49f6b43db queued at position 2. Waiting...
+GRANT grokbot GB-251: starting one game-test command
+check-players: 309 player.position reads, all in the allowed places
+ok    t23      8 pass   0 fail  106.8s
+ok    t48     22 pass   0 fail  37.3s
+ok    t75     16 pass   0 fail  48.4s
+ok    t77     17 pass   0 fail  52.5s
+ok    t78     18 pass   0 fail  36.7s
+ok    t95      9 pass   0 fail  54.3s
+           INFO ragdoll off: 160 spawned, 160 alive at the end, 118 ticks, frame 87.16 ms avg / 123.40 ms worst (headless)
+           INFO ragdoll on: 160 spawned, 160 alive at the end, 90 ticks, frame 180.36 ms avg / 605.90 ms worst (headless)
+ok    t98     20 pass   0 fail  85.1s
+ok    t112    13 pass   0 fail  43.0s
+ok    t143    17 pass   0 fail  72.5s
+ok    t168    39 pass   0 fail  60.7s
+ok    t202    12 pass   0 fail  37.0s
+ok    t205    13 pass   0 fail  54.7s
+ok    t209    13 pass   0 fail  46.3s
+ok    t215     4 pass   0 fail  38.0s
+ok    t247    12 pass   0 fail  45.8s
+ok    t249    13 pass   0 fail  39.3s
+
+16 checks: 246 pass, 0 fail

@@ -37,7 +37,8 @@
     ok(!!inst && inst.isInstancedMesh, 'one instanced mesh for the chunks');
     const m = new THREE.Matrix4(); inst.getMatrixAt ? inst.getMatrixAt(0, m) : null;
     out.push('INFO chunk 0 matrix scale ' + (inst.getMatrixAt ? new THREE.Vector3().setFromMatrixScale(m).x.toFixed(2) : 'n/a') + ', debris ' + T.debris.length);
-    await wait(2500);
+    // 2.5 s of game time, not of the wall's (a slow box runs the game slower than the clock: 42 left at 2.5 s wall).
+    { const s0 = T.getSimTime(), w0 = Date.now(); while (T.getSimTime() - s0 < 2.5 && Date.now() - w0 < 40000) await wait(50); }
     ok(T.debris.length === 0, 'the chunks are gone after their lives (' + T.debris.length + ')');
     // Motes: dust is instanced, with a stand-in holding its position.
     const n0 = T.motes.length;

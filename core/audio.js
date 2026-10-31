@@ -3368,19 +3368,21 @@ export const AudioSys = (() => {
 
   // --- Night vision: the tube whines up when the goggles come down, a faint
   // low hum while they are on, and whines away when they go up.
+  // CL-283 (Jerry's J38: "Cut NVG-related sound volume by 50 %"): every goggle sound at half its level (NVG_VOL).
+  const NVG_VOL = 0.5;
   let nvgHumNode = null;
   function nvgToggle(on) {
-    if (tk(on ? 'player/nvg-on' : 'player/nvg-off')) return;   // CL-161
-    playTone({ freq: on ? 420 : 520, type: 'square', dur: 0.03, vol: 0.07 });                   // mount clicks
-    playNoise({ dur: 0.05, vol: 0.05, filterFreq: 2400, filterType: 'bandpass', when: 0.01 });
-    if (on) playTone({ freq: 700, type: 'sine', dur: 0.7, vol: 0.035, slideTo: 7200, when: 0.05, attack: 0.1 });
-    else playTone({ freq: 6800, type: 'sine', dur: 0.5, vol: 0.03, slideTo: 500, when: 0.03 });
+    if (tk(on ? 'player/nvg-on' : 'player/nvg-off', NVG_VOL)) return;   // CL-161
+    playTone({ freq: on ? 420 : 520, type: 'square', dur: 0.03, vol: 0.07 * NVG_VOL });                   // mount clicks
+    playNoise({ dur: 0.05, vol: 0.05 * NVG_VOL, filterFreq: 2400, filterType: 'bandpass', when: 0.01 });
+    if (on) playTone({ freq: 700, type: 'sine', dur: 0.7, vol: 0.035 * NVG_VOL, slideTo: 7200, when: 0.05, attack: 0.1 });
+    else playTone({ freq: 6800, type: 'sine', dur: 0.5, vol: 0.03 * NVG_VOL, slideTo: 500, when: 0.03 });
   }
   function nvgHum(on) {
     const c = ctx;
     if (!c) return;
     // CL-161: Jerry's hum as a bed while the goggles are down; the synth's stays off then
-    const rec = bed('nvg', 'player/nvg-hum', on && !muted ? 1 : 0, { bus: fxBus || sfxGain, tc: 0.25 });
+    const rec = bed('nvg', 'player/nvg-hum', on && !muted ? NVG_VOL : 0, { bus: fxBus || sfxGain, tc: 0.25 });
     if (rec && on) { if (nvgHumNode) { const n = nvgHumNode; nvgHumNode = null; try { n.g2.gain.setTargetAtTime(0.0001, c.currentTime, 0.06); n.o.stop(c.currentTime + 0.3); n.o2.stop(c.currentTime + 0.3); } catch (_) {} } return; }
     if (on && !muted) {
       if (nvgHumNode) return;
@@ -3389,7 +3391,7 @@ export const AudioSys = (() => {
       const o = c.createOscillator(); o.type = 'sine'; o.frequency.value = 7200;
       const o2 = c.createOscillator(); o2.type = 'sine'; o2.frequency.value = 120;
       const g = c.createGain(); g.gain.setValueAtTime(0, t0);
-      const g2 = c.createGain(); g2.gain.setValueAtTime(0.0001, t0); g2.gain.setTargetAtTime(0.006, t0 + 0.6, 0.2);
+      const g2 = c.createGain(); g2.gain.setValueAtTime(0.0001, t0); g2.gain.setTargetAtTime(0.006 * NVG_VOL, t0 + 0.6, 0.2);
       o.connect(g); o2.connect(g2); g.connect(fxBus || sfxGain); g2.connect(fxBus || sfxGain);
       o.start(t0); o2.start(t0);
       nvgHumNode = { o, o2, g, g2 };

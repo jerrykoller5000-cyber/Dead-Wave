@@ -8,7 +8,7 @@
 # --route from=to files a folder's picks in another folder; --skip leaves a folder's picks unmade (wired nowhere yet).
 # A bed's take gives "loop": seconds (and "xfade", default 2): it's made to loop without a seam, no fades.
 # Each take is cut (start/end, seconds), high-passed (hp Hz: below it a pack's sub only eats the level the game evens
-# to), faded in and out, folded to mono (anything placed in the world; "stereo": true keeps two channels for the UI),
+# to), low-passed if the folder or take says lp (Hz; CL-283), faded in and out, folded to mono (anything placed in the world; "stereo": true keeps two channels for the UI),
 # resampled to 48 kHz, levelled (the part that sounds at -20 dBFS RMS, the peak at most -1 dBFS) and written as
 # OGG Vorbis to z-sounds/<folder>/pk-<pack>-<name>.ogg. The game evens every take to its folder's level anyway
 # (core/takes.js), so this level is only for the listen page's "as recorded".
@@ -36,9 +36,10 @@ def local(src, roots):
             return os.path.join(to, rest)
     return src.replace('\\', '/')
 
-def decode(path, start, end, hp, stereo):
+def decode(path, start, end, hp, stereo, lp=0):
     af = []
     if hp: af += [f'highpass=f={hp}:poles=2', f'highpass=f={hp}:poles=2']   # 24 dB an octave
+    if lp: af += [f'lowpass=f={lp}:poles=2', f'lowpass=f={lp}:poles=2']     # CL-283: lp Hz, the top off (the gravel's chain-like ticks)
     cmd = ['ffmpeg', '-v', 'error']
     if start: cmd += ['-ss', str(start)]
     if end: cmd += ['-to', str(end)]
@@ -109,7 +110,7 @@ def main():
         if isinstance(spec, list): spec = { 'takes': spec }
         folder = route.get(folder, folder)
         if a.only and folder != a.only: continue
-        hp, stereo = spec.get('hp', 0), spec.get('stereo', folder.startswith('ui/'))
+        hp, stereo, lp = spec.get('hp', 0), spec.get('stereo', folder.startswith('ui/')), spec.get('lp', 0)
         names = names_in.setdefault(folder, set())   # two routed folders may share one
         for t in spec['takes']:
             name = t.get('name') or slug(t['src'])
@@ -119,9 +120,9 @@ def main():
             src = local(t['src'], roots)
             if t.get('loop'):   # a bed: "loop": seconds, "xfade": seconds (default 2)
                 xf = t.get('xfade', 2.0)
-                x = make_loop(decode(src, t.get('start', 0), t.get('start', 0) + t['loop'] + xf + 0.05, t.get('hp', hp), stereo), t['loop'], xf)
+                x = make_loop(decode(src, t.get('start', 0), t.get('start', 0) + t['loop'] + xf + 0.05, t.get('hp', hp), stereo, t.get('lp', lp)), t['loop'], xf)
             else:
-                x = decode(src, t.get('start', 0), t.get('end'), t.get('hp', hp), stereo)
+                x = decode(src, t.get('start', 0), t.get('end'), t.get('hp', hp), stereo, t.get('lp', lp))
                 if t.get('leadTrim', True): x = lead_trim(x)
                 x = shape(x, t.get('fadeIn', 0.008), t.get('fadeOut', min(0.3, len(x) / SR * 0.2)))
             x, g = level(x)

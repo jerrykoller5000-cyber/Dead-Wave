@@ -1,0 +1,19 @@
+GB-260's magazines are studio/weapon-*.js (mine, in hand). The six cans are not: their length and radius are the SUPPRESSOR table in index.html (now ~18449, m4/ak/pistol/uzi/sniper/shotgun {r, len, back}), gunSuppressor() builds from it, and t121 ("length as specified") and t217 read T.SUPPRESSOR[k] as the spec. index.html is Cursor's and is held by CU-191, and my GB-260 check-in only covers studio/weapon-*.js, so I cannot make the rifle cans J21 asks for. Please route one of these:
+
+(a) Cursor applies the four-number edit below as a CU item (you approve the numbers). No studio file changes for it and no test bar moves.
+(b) You authorise me a named part of index.html -- "index.html (SUPPRESSOR can sizes)" only -- to check in on and change just those entries, after CU-191 frees the file.
+(c) Move the can spec down into studio/ so index.html imports it (a contract change, docs/contracts.md) -- most work, cleanest home, and it would want Cursor to land the import.
+
+The numbers, measured on the current tree (qa/2026-10-31-GB-260/before.json) against ChatGPT's cited table, in visual mm on the 1.8 m marine (builder x the gun's own WEAPON_SIZE factor):
+
+  gun      now len x dia      cited analog                             target len x dia   new { r, len }        keep back
+  pistol   90.5 x 33.2        SilencerCo Omega 45K  162 mm            162 x 33.2         0.0275, 0.2686        0.008
+  uzi      84.7 x 28.6        SilencerCo Omega 9K   115 mm            115 x 28.6         0.0270, 0.2172        0.020
+  m4      124.6 x 36.6        SilencerCo Velos 5.56 152 x 44 mm        152 x 44           0.0300, 0.2075        0.065
+  ak      134.3 x 46.3        SilencerCo Velos 7.62 163 x 44 mm        163 x 44           0.0295, 0.2184        0.036
+  sniper  254.8 x 65.8        Dead Air Sandman-L    226 x 38 mm        LEAVE AS IS -- bigger than the analog in both measures, as the card says
+  shotgun 300.7 x 100.2       (Salvo 12 is rectangular)                 LEAVE AS IS -- Jerry's deliberate big round can, review/suppressors/notes.md
+
+Radii are set so the finished diameter is the analog's (dia visual = 2r x factor x 1000); lengths so the whole can is the analog's. `back` is unchanged, so every can still sleeves over its own muzzle device and simply reaches further forward. Checked against the tests those numbers touch, no bar moved: t121 wants len-back in (0.05, 0.35) -> 0.2606 / 0.1972 / 0.1425 / 0.1824, all inside; t217 wants S.len >= 4S.r (all hold), r/barrelR in 1.25..3.2 (the m4 gets fatter, the ak slightly slimmer), and the sleeve/seat checks are unaffected by length alone. The sniper's 0.31 and the shotgun's 0.36 are untouched, so nothing grows past its cited size.
+
+I am doing the magazines now and will check out with --review on those; the cans can follow as their own small change once you pick (a), (b) or (c).

@@ -1,37 +1,42 @@
-// game/trapper-path.js — AG-93 / AG-124 (D-82, D-88, docs/specs/day-missions.md §4): the trapper's safe path day mission,
+// game/trapper-path.js — AG-93 / AG-124 / AG-165 (D-82, D-88, docs/specs/day-missions.md §4, J45): the trapper's safe path day mission,
 // as pure rules (no DOM, no Three.js). Jerry: "almost like a little platformer."
-// Eight rows of two stepping stones in a deep bed of leaves inside the trapper's fenced yard, leading to his cellar
-// hatch (objective:trapper-cache). A split-rail fence and brambles close both sides; each row has a post on each side,
-// and a horseshoe is nailed to the post on the safe stone's side (0 = left, 1 = right). A new pattern each run. A wrong
-// step, or a step off the stones into the leaves, snaps a bear trap: 25 damage, held 3 s (he can still shoot), and calls
-// 4 to 6 dead. Once opened in a run, the site stays open for restocks.
+// Eight rows of four stepping stones in a wide bed of leaves inside the trapper's fenced yard, leading to his cellar
+// hatch (objective:trapper-cache). A split-rail fence, stacked logs, and brambles seal both sides and the entire cellar
+// back half so nobody clips in or gets stuck (only the bear-trap route reaches the hatch). Each row has four posts, one
+// beside each stone, and an iron horseshoe is nailed to the post of the row's safe stone (0 = far-left, 1 = mid-left,
+// 2 = mid-right, 3 = far-right). A new pattern each run. A wrong step, or a step off the stones into the leaves, snaps
+// a bear trap: 25 damage, held 3 s (he can still shoot), and calls 4 to 6 dead. Once opened in a run, the site stays open.
 
 export const TRAPPER = Object.freeze({
   ROWS: 8,
-  SIDES: Object.freeze(['left', 'right']),
+  COLS: 4,
+  SIDES: Object.freeze(['far-left', 'mid-left', 'mid-right', 'far-right']),
   DAMAGE: 25,
   HOLD_S: 3.0,
   CALLED_MIN: 4,
   CALLED_MAX: 6,
-  // Local coordinates in the path frame (origin at prop.centre, +z out through prop.approach to the fence gate,
-  // -x = left side (0), +x = right side (1) when looking from the fence entrance towards the hatch):
+  // Local coordinates in the path frame (origin at prop.centre, +z out through prop.approach to the fence gate):
   ROW_Z0: 8.45,       // Row 0 (at the yard fence gate)
   ROW_STEP: 0.90,     // Rows at z = 8.45, 7.55, 6.65, 5.75, 4.85, 3.95, 3.05, 2.15
-  STONE_X: 0.54,      // Left stone at x = -0.54, Right stone at x = +0.54
-  POST_X: 1.34,       // Fence posts at x = -1.34 and x = +1.34 beside each row
-  STONE_R: 0.42,      // Safe stepping stone radius
-  BRIDGE_R: 0.30,     // Safe walking corridor between consecutive safe stones
-  WRONG_R: 0.38,      // Wrong stone trigger radius
+  // Four stones wide: columns at x = -1.35, -0.45, +0.45, +1.35 (spacing 0.90 m)
+  STONE_XS: Object.freeze([-1.35, -0.45, 0.45, 1.35]),
+  // Four posts per row: posts at x = -1.80, -0.90, +0.90, +1.80 beside each stone
+  POST_XS: Object.freeze([-1.80, -0.90, 0.90, 1.80]),
+  STONE_X: 0.45,      // Inner stone distance for legacy caller compatibility
+  POST_X: 1.80,       // Outer fence post line at x = -1.80 and x = +1.80
+  STONE_R: 0.38,      // Safe stepping stone radius
+  BRIDGE_R: 0.28,     // Safe walking corridor between consecutive safe stones
+  WRONG_R: 0.36,      // Wrong stone trigger radius
   BED_Z_MAX: 8.95,    // Outer edge of the leaf bed at the fence gate
   BED_Z_MIN: 1.80,    // Inner edge of the leaf bed by the hatch apron (prop.approach is at z ~ 1.44)
-  BED_HALF_W: 1.20,   // Leaf bed half-width inside the fence/brambles
+  BED_HALF_W: 1.65,   // Leaf bed half-width inside the fence/brambles (covers stones from -1.35 to +1.35)
   ENTRY_Z: 9.60,      // Where `site trapper` stands him outside the yard gate
   // Yard placement relative to campsites[2] (away from bridges[1], on the flat wooded side behind his cabin/workbench):
   YARD_OFF_X: 8.0,
   YARD_OFF_Z: -2.6,
   YARD_YAW: 2.0944,   // 120 deg: yard runs from the root cellar behind his cabin out toward the trail from HQ
   HATCH_APPROACH_Z: 1.44,
-  // AG-135 (story-chain.md §4 day 8, CL-263): the trapper's iron-lined cellar under the bulkhead doors:
+  // AG-135 / AG-165: cellar under bulkhead doors and back half enclosure:
   CELLAR_FLOOR_Y: -2.15,
   CELLAR_CEIL_UNDER_Y: -0.14,
   CELLAR_ROOF_Y: 0.06,
@@ -43,18 +48,51 @@ export const TRAPPER = Object.freeze({
   ROOM_HALF_W: 1.62,
   CELLAR_SPOT_X: -0.45,
   CELLAR_SPOT_Z: -3.65,
+  BACK_SEAL_Z_BACK: -5.70, // Rear seal barrier z
+  BACK_SEAL_HALF_W: 2.35,  // Rear seal barrier half-width enclosing cellar room
 });
 
 export function rowZ(row, rule = TRAPPER) {
   return rule.ROW_Z0 - row * rule.ROW_STEP;
 }
 
+export function stoneX(side, rule = TRAPPER) {
+  const xs = rule.STONE_XS || [-1.35, -0.45, 0.45, 1.35];
+  if (typeof side === 'number') {
+    const idx = Math.max(0, Math.min(xs.length - 1, side | 0));
+    return xs[idx];
+  }
+  if (side === 'far-left' || side === 'left') return xs[0];
+  if (side === 'mid-left') return xs[1];
+  if (side === 'mid-right') return xs[2];
+  if (side === 'far-right' || side === 'right') return xs[3];
+  return xs[0];
+}
+
+export function postX(side, rule = TRAPPER) {
+  const xs = rule.POST_XS || [-1.80, -0.90, 0.90, 1.80];
+  if (typeof side === 'number') {
+    const idx = Math.max(0, Math.min(xs.length - 1, side | 0));
+    return xs[idx];
+  }
+  if (side === 'far-left' || side === 'left') return xs[0];
+  if (side === 'mid-left') return xs[1];
+  if (side === 'mid-right') return xs[2];
+  if (side === 'far-right' || side === 'right') return xs[3];
+  return xs[0];
+}
+
 export function sideSign(side) {
-  return side === 1 || side === 'right' ? 1 : -1;
+  if (typeof side === 'number') return side >= 2 ? 1 : -1;
+  return side === 'right' || side === 'far-right' || side === 'mid-right' ? 1 : -1;
 }
 
 export function sideName(side) {
-  return side === 1 || side === 'right' ? 'right' : 'left';
+  const names = ['far-left', 'mid-left', 'mid-right', 'far-right'];
+  if (typeof side === 'number') return names[Math.max(0, Math.min(3, side | 0))];
+  if (side === 'left') return 'far-left';
+  if (side === 'right') return 'far-right';
+  return String(side);
 }
 
 export function calledForDay(day, rule = TRAPPER) {
@@ -86,15 +124,23 @@ export function createTrapperPath(rand = Math.random, config = {}) {
   };
 
   function reset(r = rand, pattern = null) {
+    const cols = rule.COLS || 4;
     if (Array.isArray(pattern) && pattern.length === rule.ROWS) {
-      state.safe = pattern.map((v) => (v === 1 || v === 'right' ? 1 : 0));
+      state.safe = pattern.map((v) => {
+        if (typeof v === 'number') return Math.max(0, Math.min(cols - 1, v | 0));
+        if (v === 'far-left' || v === 'left') return 0;
+        if (v === 'mid-left') return 1;
+        if (v === 'mid-right') return 2;
+        if (v === 'far-right' || v === 'right') return cols - 1;
+        return 0;
+      });
     } else {
       const next = [];
-      for (let i = 0; i < rule.ROWS; i++) next.push(r() < 0.5 ? 0 : 1);
-      // Ensure both sides appear at least once so the horseshoes always form a real pattern.
-      if (next.every((v) => v === next[0]) && rule.ROWS >= 2) {
+      for (let i = 0; i < rule.ROWS; i++) next.push(Math.floor(r() * cols) % cols);
+      // Ensure multiple columns appear across the rows so horseshoes form a real pattern.
+      if (next.every((v) => v === next[0]) && rule.ROWS >= 2 && cols >= 2) {
         const flipIdx = 1 + (Math.floor(r() * (rule.ROWS - 1)) % (rule.ROWS - 1));
-        next[flipIdx] = 1 - next[0];
+        next[flipIdx] = (next[0] + 1) % cols;
       }
       state.safe = next;
     }
@@ -108,23 +154,33 @@ export function createTrapperPath(rand = Math.random, config = {}) {
 
   reset(rand);
 
+  function normalizeSide(side) {
+    const cols = rule.COLS || 4;
+    if (typeof side === 'number') return Math.max(0, Math.min(cols - 1, side | 0));
+    if (side === 'far-left' || side === 'left') return 0;
+    if (side === 'mid-left') return 1;
+    if (side === 'mid-right') return 2;
+    if (side === 'far-right' || side === 'right') return cols - 1;
+    return 0;
+  }
+
   function stoneLocal(row, side) {
-    const s = side === 1 || side === 'right' ? 1 : 0;
+    const s = normalizeSide(side);
     return {
       row,
       side: s,
-      x: sideSign(s) * rule.STONE_X,
+      x: stoneX(s, rule),
       z: rowZ(row, rule),
       safe: state.safe[row] === s,
     };
   }
 
   function postLocal(row, side) {
-    const s = side === 1 || side === 'right' ? 1 : 0;
+    const s = normalizeSide(side);
     return {
       row,
       side: s,
-      x: sideSign(s) * rule.POST_X,
+      x: postX(s, rule),
       z: rowZ(row, rule),
       horseshoe: state.safe[row] === s,
     };
@@ -144,19 +200,23 @@ export function createTrapperPath(rand = Math.random, config = {}) {
       return { zone: 'hatch', row: rule.ROWS };
     }
     const row = nearestRow(lz);
+    const cols = rule.COLS || 4;
     // 1. Check wrong stones first: stepping onto any wrong stone snaps its trap.
     for (let r = 0; r < rule.ROWS; r++) {
-      const wSide = 1 - state.safe[r];
-      const wx = sideSign(wSide) * rule.STONE_X, wz = rowZ(r, rule);
-      if (hypot2(lx - wx, lz - wz) <= rule.WRONG_R) {
-        return { zone: 'wrong-stone', row: r, side: wSide, x: wx, z: wz };
+      const sSide = state.safe[r];
+      for (let col = 0; col < cols; col++) {
+        if (col === sSide) continue;
+        const wx = stoneX(col, rule), wz = rowZ(r, rule);
+        if (hypot2(lx - wx, lz - wz) <= rule.WRONG_R) {
+          return { zone: 'wrong-stone', row: r, side: col, x: wx, z: wz };
+        }
       }
     }
     // 2. Check safe stones:
     let bestSafeRow = -1, bestSafeD = Infinity;
     for (let r = 0; r < rule.ROWS; r++) {
       const sSide = state.safe[r];
-      const sx = sideSign(sSide) * rule.STONE_X, sz = rowZ(r, rule);
+      const sx = stoneX(sSide, rule), sz = rowZ(r, rule);
       const d = hypot2(lx - sx, lz - sz);
       if (d <= rule.STONE_R && d < bestSafeD) {
         bestSafeD = d;
@@ -167,23 +227,23 @@ export function createTrapperPath(rand = Math.random, config = {}) {
       return { zone: 'safe-stone', row: bestSafeRow, side: state.safe[bestSafeRow] };
     }
     // 3. Check safe walking bridges between consecutive safe stones (and entry/exit thresholds):
-    const s0x = sideSign(state.safe[0]) * rule.STONE_X, s0z = rowZ(0, rule);
+    const s0x = stoneX(state.safe[0], rule), s0z = rowZ(0, rule);
     if (distToSegment2D(lx, lz, s0x, rule.BED_Z_MAX, s0x, s0z) <= rule.BRIDGE_R) {
       return { zone: 'safe-stone', row: 0, side: state.safe[0], bridge: true };
     }
     for (let r = 0; r < rule.ROWS - 1; r++) {
-      const ax = sideSign(state.safe[r]) * rule.STONE_X, az = rowZ(r, rule);
-      const bx = sideSign(state.safe[r + 1]) * rule.STONE_X, bz = rowZ(r + 1, rule);
+      const ax = stoneX(state.safe[r], rule), az = rowZ(r, rule);
+      const bx = stoneX(state.safe[r + 1], rule), bz = rowZ(r + 1, rule);
       if (distToSegment2D(lx, lz, ax, az, bx, bz) <= rule.BRIDGE_R) {
         const nearer = Math.abs(lz - az) <= Math.abs(lz - bz) ? r : r + 1;
         return { zone: 'safe-stone', row: nearer, side: state.safe[nearer], bridge: true };
       }
     }
     const sLast = rule.ROWS - 1;
-    const s5x = sideSign(state.safe[sLast]) * rule.STONE_X, s5z = rowZ(sLast, rule);
+    const sLastX = stoneX(state.safe[sLast], rule), sLastZ = rowZ(sLast, rule);
     if (
-      distToSegment2D(lx, lz, s5x, s5z, s5x, rule.BED_Z_MIN) <= rule.BRIDGE_R ||
-      distToSegment2D(lx, lz, s5x, s5z, 0, rule.BED_Z_MIN) <= rule.BRIDGE_R
+      distToSegment2D(lx, lz, sLastX, sLastZ, sLastX, rule.BED_Z_MIN) <= rule.BRIDGE_R ||
+      distToSegment2D(lx, lz, sLastX, sLastZ, 0, rule.BED_Z_MIN) <= rule.BRIDGE_R
     ) {
       return { zone: 'safe-stone', row: sLast, side: state.safe[sLast], bridge: true };
     }
@@ -192,7 +252,7 @@ export function createTrapperPath(rand = Math.random, config = {}) {
       zone: 'leaves',
       row,
       side: lx >= 0 ? 1 : 0,
-      x: Math.max(-0.88, Math.min(0.88, lx)),
+      x: Math.max(-rule.BED_HALF_W, Math.min(rule.BED_HALF_W, lx)),
       z: lz,
     };
   }
@@ -303,8 +363,8 @@ export function buildTrapperYardParts(THREE, { groundAtLocal, surfAtLocal, doorP
   const ironMid = 0x524e49;
 
   // 1. Dark forest humus base & organic multi-layered autumn leaf bed (no checkerboard grid).
-  const nx = 10, nz = 28;
-  const x0 = -1.00, x1 = 1.00;
+  const nx = 14, nz = 28;
+  const x0 = -1.65, x1 = 1.65;
   const z0 = 1.24, z1 = 8.68;
   for (let ix = 0; ix < nx; ix++) {
     for (let iz = 0; iz < nz; iz++) {
@@ -364,9 +424,11 @@ export function buildTrapperYardParts(THREE, { groundAtLocal, surfAtLocal, doorP
   const hiddenTrapSpots = [];
   for (let r = 0; r < rule.ROWS; r++) {
     const lz = rowZ(r, rule);
-    hiddenTrapSpots.push([-0.84, lz + 0.12, r * 1.1 + 0.3]);
-    hiddenTrapSpots.push([0.0, lz - 0.34, r * 0.85 - 0.4]);
-    hiddenTrapSpots.push([0.84, lz - 0.10, r * 1.3 + 0.9]);
+    hiddenTrapSpots.push([-1.55, lz + 0.12, r * 1.1 + 0.3]);
+    hiddenTrapSpots.push([-0.90, lz - 0.28, r * 0.9 + 0.1]);
+    hiddenTrapSpots.push([0.0, lz + 0.15, r * 0.85 - 0.4]);
+    hiddenTrapSpots.push([0.90, lz - 0.32, r * 1.05 + 0.5]);
+    hiddenTrapSpots.push([1.55, lz - 0.10, r * 1.3 + 0.9]);
   }
   for (let i = 0; i < hiddenTrapSpots.length; i++) {
     const [tx, tz, rot] = hiddenTrapSpots[i];
@@ -401,24 +463,25 @@ export function buildTrapperYardParts(THREE, { groundAtLocal, surfAtLocal, doorP
     ));
   }
 
-  // 3. Eight rows of two large, natural split-fieldstone stepping slabs (+ gate & cellar apron flagstones):
+  // 3. Eight rows of four large, natural split-fieldstone stepping slabs (+ gate & cellar apron flagstones):
   const baseSlabGeo = new THREE.CylinderGeometry(0.34, 0.38, 0.072, 9);
   const topSlabGeo = new THREE.CylinderGeometry(0.29, 0.33, 0.042, 8);
   const chipGeo = new THREE.BoxGeometry(0.18, 0.036, 0.15);
+  const cols = rule.COLS || 4;
   for (let r = 0; r < rule.ROWS; r++) {
     const lz = rowZ(r, rule);
-    for (const side of [0, 1]) {
-      const sgn = sideSign(side);
-      const lx = sgn * rule.STONE_X;
+    for (let col = 0; col < cols; col++) {
+      const lx = stoneX(col, rule);
       const gy = groundAtLocal(lx, lz);
-      const h = hash01(r * 17 + side * 3, r * 7 + side * 19);
-      const colA = stonePalette[(r + side) % stonePalette.length];
-      const colB = stonePalette[(r * 2 + side + 1) % stonePalette.length];
+      const h = hash01(r * 17 + col * 3, r * 7 + col * 19);
+      const colA = stonePalette[(r + col) % stonePalette.length];
+      const colB = stonePalette[(r * 2 + col + 1) % stonePalette.length];
       const sx = 1.0 + (h - 0.5) * 0.14;
-      const sz = 0.94 + (hash01(r * 23, side * 11) - 0.5) * 0.14;
-      const yawA = r * 1.15 + side * 2.05;
+      const sz = 0.94 + (hash01(r * 23, col * 11) - 0.5) * 0.14;
+      const yawA = r * 1.15 + col * 2.05;
       parts.push(trapperPart(baseSlabGeo.clone(), colA, lx, gy + 0.036, lz, 0, yawA, 0, sx, 1, sz));
       parts.push(trapperPart(topSlabGeo.clone(), colB, lx + (h - 0.5) * 0.025, gy + 0.068, lz, 0, yawA + 0.45, 0, sx * 0.95, 1, sz * 0.95));
+      const sgn = col >= 2 ? 1 : -1;
       parts.push(trapperPart(chipGeo.clone(), stonePalette[(r + 3) % stonePalette.length],
         lx - sgn * 0.11, gy + 0.055, lz + ((r % 2) ? 0.08 : -0.08), 0.04, yawA + 0.9, -0.03));
 
@@ -429,29 +492,29 @@ export function buildTrapperYardParts(THREE, { groundAtLocal, surfAtLocal, doorP
         const isMoss = (k + r) % 2 === 0;
         parts.push(trapperPart(
           new THREE.DodecahedronGeometry(0.06, 0),
-          isMoss ? mossPalette[(r + k) % mossPalette.length] : leafPalette[(r + k + side) % leafPalette.length],
+          isMoss ? mossPalette[(r + k) % mossPalette.length] : leafPalette[(r + k + col) % leafPalette.length],
           lx + Math.cos(a) * rimR, gy + 0.03, lz + Math.sin(a) * rimR,
           0.1, a, 0.08, 1.3, 0.35, 1.0
         ));
       }
       const w = toWorld(lx, lz);
-      stones.push({ row: r, side, lx, lz, x: w.x, y: cy0 + gy + 0.082, z: w.z });
+      stones.push({ row: r, side: col, lx, lz, x: w.x, y: cy0 + gy + 0.082, z: w.z });
     }
   }
   // Threshold flagstones at the cellar apron (z = 1.42) and yard gate entrance (z = 8.68):
   for (const [az, aw, ad] of [
-    [1.42, 0.36, 0.26],
-    [8.68, 0.38, 0.26],
+    [1.42, 0.46, 0.28],
+    [8.68, 0.48, 0.28],
   ]) {
-    for (const sx of [-0.30, 0.30]) {
+    for (const sx of [-0.45, 0.45]) {
       const gy = groundAtLocal(sx, az);
       parts.push(trapperPart(new THREE.BoxGeometry(aw, 0.054, ad), stonePalette[0], sx, gy + 0.026, az, 0, sx * 0.22, 0));
       parts.push(trapperPart(new THREE.BoxGeometry(aw * 0.86, 0.024, ad * 0.84), stonePalette[2], sx, gy + 0.056, az, 0, -sx * 0.15, 0));
     }
   }
 
-  // 4. Trapper's yard fence: 16 sturdy row posts with chamfered caps, iron bands, and backing boards for the horseshoes;
-  //    plus heavy entrance gate posts with overhead crossbeam, hanging lantern, and split-log rails down both sides.
+  // 4. Trapper's yard fence: 32 sturdy row posts (4 per row) with chamfered caps, iron bands, and backing boards for horseshoes;
+  //    plus heavy entrance gate posts with overhead crossbeam, hanging lantern, split-log rails, and sealed back half.
   const postBox = new THREE.BoxGeometry(0.16, 1.28, 0.16);
   const postBase = new THREE.BoxGeometry(0.19, 0.24, 0.19);
   const postCap = new THREE.BoxGeometry(0.19, 0.045, 0.19);
@@ -459,19 +522,20 @@ export function buildTrapperYardParts(THREE, { groundAtLocal, surfAtLocal, doorP
   const postPlaque = new THREE.BoxGeometry(0.14, 0.25, 0.022);
   for (let r = 0; r < rule.ROWS; r++) {
     const lz = rowZ(r, rule);
-    for (const side of [0, 1]) {
-      const sgn = sideSign(side);
-      const lx = sgn * rule.POST_X;
+    for (let col = 0; col < cols; col++) {
+      const lx = postX(col, rule);
       const gy = groundAtLocal(lx, lz);
-      const wCol = woodPalette[(r + side) % woodPalette.length];
-      parts.push(trapperPart(postBase.clone(), barkPalette[(r + side) % barkPalette.length], lx, gy + 0.12, lz));
+      const wCol = woodPalette[(r + col) % woodPalette.length];
+      parts.push(trapperPart(postBase.clone(), barkPalette[(r + col) % barkPalette.length], lx, gy + 0.12, lz));
       parts.push(trapperPart(postBox.clone(), wCol, lx, gy + 0.64, lz));
       parts.push(trapperPart(postCap.clone(), barkPalette[0], lx, gy + 1.29, lz));
       parts.push(trapperPart(postBand.clone(), ironDark, lx, gy + 1.12, lz));
-      // Pale weathered backing board facing the approach (+z) and slightly inward toward the path:
-      parts.push(trapperPart(postPlaque.clone(), 0xc8b68e, lx - sgn * 0.005, gy + 0.88, lz + 0.068, 0, -sgn * 0.20, 0));
+      const sgn = col >= 2 ? 1 : -1;
+      const rotY = Math.abs(lx) > 1.2 ? -sgn * 0.20 : 0;
+      // Pale weathered backing board facing approach (+z):
+      parts.push(trapperPart(postPlaque.clone(), 0xc8b68e, lx - sgn * 0.005, gy + 0.88, lz + 0.068, 0, rotY, 0));
       const w = toWorld(lx, lz);
-      posts.push({ row: r, side, lx, lz, x: w.x, y: cy0 + gy, z: w.z });
+      posts.push({ row: r, side: col, lx, lz, x: w.x, y: cy0 + gy, z: w.z });
     }
   }
 
@@ -479,21 +543,20 @@ export function buildTrapperYardParts(THREE, { groundAtLocal, surfAtLocal, doorP
   const gateZ = rule.BED_Z_MAX + 0.08;
   const gatePostGeo = new THREE.BoxGeometry(0.22, 2.25, 0.22);
   const gateCapGeo = new THREE.BoxGeometry(0.26, 0.06, 0.26);
-  for (const side of [0, 1]) {
-    const sgn = sideSign(side);
+  for (const sgn of [-1, 1]) {
     const lx = sgn * rule.POST_X;
     // Cellar end anchor post (lz = 0.68):
     const gy0 = groundAtLocal(lx, 0.68);
-    parts.push(trapperPart(postBox.clone(), woodPalette[side], lx, gy0 + 0.62, 0.68));
+    parts.push(trapperPart(postBox.clone(), woodPalette[sgn > 0 ? 1 : 0], lx, gy0 + 0.62, 0.68));
     parts.push(trapperPart(postCap.clone(), barkPalette[0], lx, gy0 + 1.27, 0.68));
 
     // Tall entrance gate post (lz = gateZ):
     const gyG = groundAtLocal(lx, gateZ);
-    parts.push(trapperPart(gatePostGeo.clone(), woodPalette[side], lx, gyG + 1.12, gateZ));
+    parts.push(trapperPart(gatePostGeo.clone(), woodPalette[sgn > 0 ? 1 : 0], lx, gyG + 1.12, gateZ));
     parts.push(trapperPart(gateCapGeo.clone(), barkPalette[0], lx, gyG + 2.26, gateZ));
     parts.push(trapperPart(new THREE.BoxGeometry(0.235, 0.036, 0.235), ironDark, lx, gyG + 1.95, gateZ));
 
-    // Three split-log fence rails + diagonal bracing connecting posts from z = 0.68 to gateZ - 0.18:
+    // Three split-log fence rails + diagonal bracing connecting outer posts from z = 0.68 to gateZ - 0.18:
     const zList = [0.68];
     for (let r = rule.ROWS - 1; r >= 0; r--) zList.push(rowZ(r, rule));
     zList.push(gateZ - 0.18);
@@ -501,14 +564,14 @@ export function buildTrapperYardParts(THREE, { groundAtLocal, surfAtLocal, doorP
       const za = zList[i], zb = zList[i + 1];
       const ya = groundAtLocal(lx, za), yb = groundAtLocal(lx, zb);
       for (const h of [0.32, 0.64, 0.98]) {
-        trapperBar(parts, [lx, ya + h, za], [lx, yb + h, zb], 0.042, woodPalette[(i + side) % woodPalette.length], 6);
+        trapperBar(parts, [lx, ya + h, za], [lx, yb + h, zb], 0.042, woodPalette[(i + (sgn > 0 ? 1 : 0)) % woodPalette.length], 6);
       }
-      if (i % 2 === side) {
-        trapperBar(parts, [lx, ya + 0.32, za], [lx, yb + 0.96, zb], 0.028, barkPalette[(i + side) % barkPalette.length], 5);
+      if (i % 2 === (sgn > 0 ? 1 : 0)) {
+        trapperBar(parts, [lx, ya + 0.32, za], [lx, yb + 0.96, zb], 0.028, barkPalette[(i + (sgn > 0 ? 1 : 0)) % barkPalette.length], 5);
       }
     }
 
-    // Flared wing fence at the yard gate (z = gateZ -> gateZ + 0.36, x = ±1.34 -> ±1.92):
+    // Flared wing fence at the yard gate (z = gateZ -> gateZ + 0.36, x = ±1.80 -> ±2.38):
     const wxOut = sgn * (rule.POST_X + 0.58), wzOut = gateZ + 0.36;
     const gyOut = groundAtLocal(wxOut, wzOut);
     parts.push(trapperPart(postBox.clone(), woodPalette[2], wxOut, gyOut + 0.60, wzOut));
@@ -529,8 +592,8 @@ export function buildTrapperYardParts(THREE, { groundAtLocal, surfAtLocal, doorP
       trapperBar(parts, [sgn * rule.POST_X, gyS + 1.55, gateZ], [sgn * (rule.POST_X - 0.48), beamY - 0.04, gateZ], 0.042, woodPalette[0], 5);
     }
     // Weathered plank sign board on the gate lintel:
-    parts.push(trapperPart(new THREE.BoxGeometry(1.18, 0.24, 0.04), 0x6b533b, 0, beamY - 0.18, gateZ + 0.05, 0, 0, -0.02));
-    parts.push(trapperPart(new THREE.BoxGeometry(1.10, 0.17, 0.046), 0xb8a37a, 0, beamY - 0.18, gateZ + 0.052, 0, 0, -0.02));
+    parts.push(trapperPart(new THREE.BoxGeometry(1.48, 0.24, 0.04), 0x6b533b, 0, beamY - 0.18, gateZ + 0.05, 0, 0, -0.02));
+    parts.push(trapperPart(new THREE.BoxGeometry(1.38, 0.17, 0.046), 0xb8a37a, 0, beamY - 0.18, gateZ + 0.052, 0, 0, -0.02));
     // Hanging iron lantern & spare leghold trap on the right gate post:
     const lxLan = rule.POST_X - 0.24, lyLan = yR + 1.72;
     trapperBar(parts, [rule.POST_X, yR + 1.82, gateZ + 0.08], [lxLan, lyLan + 0.12, gateZ + 0.22], 0.016, ironDark, 5);
@@ -572,10 +635,60 @@ export function buildTrapperYardParts(THREE, { groundAtLocal, surfAtLocal, doorP
   // Solid colliders closing both fence sides (keeping prop.approach at (0, 1.44), (0, 0), and the cellar stairwell clear):
   for (const sgn of [-1, 1]) {
     for (let lz = 0.42; lz <= gateZ; lz += 0.72) {
-      colliderSpots.push({ lx: sgn * (rule.POST_X + 0.34), lz, r: 0.34 });
+      colliderSpots.push({ lx: sgn * (rule.POST_X + 0.34), lz, r: 0.36 });
     }
   }
 
+  // AG-165 (J45): Sealed cellar back half:
+  // Continue split-rail fence, timber posts, deadfall brambles, and solid colliders along both flanks to lz = -5.70,
+  // and completely enclose the rear at lz = -5.70 so nobody clips in or gets stuck (only bear-trap route reaches hatch).
+  const sealBackZ = rule.BACK_SEAL_Z_BACK || -5.70;
+  const sealHalfW = rule.POST_X + 0.35; // ~2.15 m
+  for (const sgn of [-1, 1]) {
+    const lxFlank = sgn * sealHalfW;
+    for (let lz = 0.42; lz >= sealBackZ; lz -= 1.45) {
+      const gy = groundAtLocal(lxFlank, lz);
+      parts.push(trapperPart(postBox.clone(), woodPalette[1], lxFlank, gy + 0.64, lz));
+      parts.push(trapperPart(postCap.clone(), barkPalette[0], lxFlank, gy + 1.29, lz));
+      parts.push(trapperPart(postBand.clone(), ironDark, lxFlank, gy + 1.12, lz));
+      parts.push(trapperPart(new THREE.DodecahedronGeometry(0.42, 0), bramblePalette[Math.abs(Math.floor(lz * 2)) % bramblePalette.length],
+        lxFlank + sgn * 0.28, gy + 0.32, lz, 0.2, lz * 1.5, 0.1, 1.2, 0.85, 1.1));
+    }
+    for (let lz = 0.42; lz > sealBackZ; lz -= 1.45) {
+      const za = lz, zb = Math.max(sealBackZ, lz - 1.45);
+      const ya = groundAtLocal(lxFlank, za), yb = groundAtLocal(lxFlank, zb);
+      for (const h of [0.34, 0.68, 1.02]) {
+        trapperBar(parts, [lxFlank, ya + h, za], [lxFlank, yb + h, zb], 0.045, woodPalette[0], 6);
+      }
+    }
+    for (let lz = 0.42; lz >= sealBackZ; lz -= 0.65) {
+      colliderSpots.push({ lx: lxFlank, lz, r: 0.36 });
+    }
+  }
+
+  // Rear seal fence line across lz = sealBackZ:
+  for (let lx = -sealHalfW; lx <= sealHalfW + 0.01; lx += 1.40) {
+    const gy = groundAtLocal(lx, sealBackZ);
+    parts.push(trapperPart(postBox.clone(), woodPalette[2], lx, gy + 0.64, sealBackZ));
+    parts.push(trapperPart(postCap.clone(), barkPalette[0], lx, gy + 1.29, sealBackZ));
+    parts.push(trapperPart(new THREE.DodecahedronGeometry(0.44, 0), bramblePalette[Math.abs(Math.floor(lx * 3)) % bramblePalette.length],
+      lx, gy + 0.35, sealBackZ - 0.25, 0.1, lx * 2.1, 0.2, 1.15, 0.88, 1.1));
+  }
+  for (let lx = -sealHalfW; lx < sealHalfW - 0.01; lx += 1.40) {
+    const xa = lx, xb = Math.min(sealHalfW, lx + 1.40);
+    const ya = groundAtLocal(xa, sealBackZ), yb = groundAtLocal(xb, sealBackZ);
+    for (const h of [0.34, 0.68, 1.02]) {
+      trapperBar(parts, [xa, ya + h, sealBackZ], [xb, yb + h, sealBackZ], 0.045, woodPalette[1], 6);
+    }
+  }
+  for (let lx = -sealHalfW; lx <= sealHalfW + 0.01; lx += 0.55) {
+    colliderSpots.push({ lx, lz: sealBackZ, r: 0.36 });
+  }
+
+  // Bulkhead rear retaining header colliders at lz = -2.25:
+  for (const sgn of [-1, 1]) {
+    colliderSpots.push({ lx: sgn * 0.95, lz: -2.25, r: 0.32 });
+  }
   // 6. AG-135 / AG-144 (story-chain.md §4 Day 8, docs/art-direction.md §2 Iron rule):
   //    The trapper's iron-lined root cellar under the bulkhead doors at the head of the yard.
   //    - Roof is the natural ground (buildCaveCap style in index.html); no box aprons or protruding slabs

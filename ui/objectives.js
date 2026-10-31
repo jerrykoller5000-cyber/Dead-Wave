@@ -53,7 +53,7 @@ export function createObjectiveTracker() {
     trackedId=id;notice='';return true;
   }
   function untrack(){trackedId=null;notice='';}
-  function read() {
+  function read({includeInactive=false}={}) {
     const markers=[...sites.values()].filter(canTrack).map(site=>{
       const def=DEFS.get(site.id),title=text(def.titleKey);
       const distance=player?Math.round(Math.hypot(site.position.x-player.x,site.position.z-player.z)):null;
@@ -73,9 +73,9 @@ export function createObjectiveTracker() {
       const action=repairing?text('objectives.radioRepair'):text('objectives.claim');
       tracker={...marker,reward,status,choices:site.choices.map(c=>({...c})),choiceId:site.choiceId,choiceLocked:site.choiceLocked,
         progress:site.state==='active'?site.progress:null,busy:site.state==='active',
-        prompt:site.reachable&&site.state!=='active'?(repairing?text('objectives.holdRepair'):text('objectives.interact',{action})):''};
+        prompt:!includeInactive&&site.reachable&&site.state!=='active'?(repairing?text('objectives.holdRepair'):text('objectives.interact',{action})):''};
     }
-    return {runId,sequence,active,markers:active?markers:[],tracker:active?tracker:null,notice:active?notice:''};
+    return {runId,sequence,active,markers:active?markers:[],tracker:active||includeInactive?tracker:null,notice:active?notice:''};
   }
   return {reset,update,track,untrack,read};
 }
@@ -112,14 +112,20 @@ export function mountObjectives({mapRoot,hudRoot,project,onTrack=()=>{},onChoose
   const stop=doc.createElement('button');stop.type='button';stop.textContent=text('objectives.untrack');
   const choiceLabel=doc.createElement('label'),choice=doc.createElement('select');
   choiceLabel.className='objective-choice';choiceLabel.append(doc.createTextNode(text('objectives.choosePack')),choice);choiceLabel.hidden=true;
-  let choiceSignature='',trackedId=null;
+  let choiceSignature='',trackedId=null,inReady=false;
+  function placeCard() {
+    const ready=doc.querySelector('#hqBriefing[open][data-panel="alarm"] #briefing-report');
+    const parent=ready||hudRoot;
+    inReady=!!ready;
+    if(card.parentNode!==parent)parent.append(card);
+  }
   choice.addEventListener('change',()=>{const t=model.read().tracker;if(t&&!t.choiceLocked)onChoose(t.id,choice.value);});
   const announcement=doc.createElement('p');announcement.className='objective-notice';announcement.setAttribute('role','status');
   status.className='objective-status';prompt.className='objective-prompt';distance.className='objective-distance';
   card.append(title,distance,choiceLabel,reward,status,progress,prompt,stop);mapRoot.append(layer);hudRoot.append(card,announcement);
   function label(el,value){if(el.textContent!==value)el.textContent=value;if(el.hidden===!!value)el.hidden=!value;}
   function paint() {
-    const view=model.read(), markers=projectObjectiveMarkers(view.markers,project), ids=new Set(markers.map(m=>m.id));
+    const view=model.read({includeInactive:inReady}), markers=projectObjectiveMarkers(view.markers,project), ids=new Set(markers.map(m=>m.id));
     trackedId=view.tracker?.id||null;
     for(const [id,button] of buttons)if(!ids.has(id)) {
       if(button===doc.activeElement)layer.focus({preventScroll:true});button.remove();buttons.delete(id);
@@ -140,7 +146,9 @@ export function mountObjectives({mapRoot,hudRoot,project,onTrack=()=>{},onChoose
       if(button.style.top!==top)button.style.top=top;
     }
     if(layer.hidden===view.active)layer.hidden=!view.active;
-    if(card.hidden===!!view.tracker)card.hidden=!view.tracker;
+    // Standalone fixtures without an HQ briefing keep the card visible.
+    const showCard=!!view.tracker&&(inReady||!doc.querySelector('#hqBriefing'));
+    if(card.hidden===showCard)card.hidden=!showCard;
     if(view.tracker) {
       const t=view.tracker;label(title,t.title);label(distance,t.distance===null?'':text('objectives.distance',{distance:t.distance}));
       if(choiceLabel.hidden===!!t.choices.length)choiceLabel.hidden=!t.choices.length;
@@ -157,7 +165,7 @@ export function mountObjectives({mapRoot,hudRoot,project,onTrack=()=>{},onChoose
     label(announcement,view.notice);
     return view;
   }
-  stop.addEventListener('click',()=>{model.untrack();paint();onTrack(null);layer.focus({preventScroll:true});});
+  stop.addEventListener('click',()=>{model.untrack();paint();onTrack(null);(inReady?doc.querySelector('#hqBriefing .briefing-close'):layer)?.focus({preventScroll:true});});
   function guard(e) {
     if(e.type==='keydown'||e.type==='keyup') {
       // Keep native selector navigation, but let movement/interact return focus
@@ -169,6 +177,13 @@ export function mountObjectives({mapRoot,hudRoot,project,onTrack=()=>{},onChoose
     e.stopPropagation();
   }
   for(const parent of [layer,card])for(const type of ['keydown','keyup','mousedown','mouseup','pointerdown','pointerup','wheel','contextmenu'])parent.addEventListener(type,guard);
+  const bus=doc.defaultView;
+  const onBriefing=({detail})=>{
+    if(!['briefing-open','briefing-closed','run-reset'].includes(detail?.type))return;
+    // The briefing renderer receives this event first and may rebuild the page.
+    placeCard();paint();
+  };
+  bus?.addEventListener('dw-game',onBriefing);
   paint();
   return {
     tracked:()=>trackedId,
@@ -176,6 +191,6 @@ export function mountObjectives({mapRoot,hudRoot,project,onTrack=()=>{},onChoose
     reset:id=>{model.reset(id);paint();},
     track:id=>{const accepted=model.track(id);if(accepted){paint();onTrack(id);}return accepted;},
     refresh:paint, read:model.read,
-    destroy:()=>{layer.remove();card.remove();announcement.remove();buttons.clear();}
+    destroy:()=>{bus?.removeEventListener('dw-game',onBriefing);layer.remove();card.remove();announcement.remove();buttons.clear();}
   };
 }

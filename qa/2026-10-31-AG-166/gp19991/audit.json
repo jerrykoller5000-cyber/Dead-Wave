@@ -1,0 +1,17 @@
+{
+  "audit0": {
+    "rootVis": false,
+    "sparkVis": false,
+    "lighterVis": false,
+    "sparkPos": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    }
+  },
+  "audit25": {
+    "propsVis": false,
+    "sparkVis": false
+  },
+  "timestamp": "2026-10-31T12:05:19.203Z"
+}

@@ -1,0 +1,76 @@
+bench: http://127.0.0.1:47379/index.html?debug=1
+bench: scenario night 20 for 20s
+
+bench: graphics high
+bench: night 20 push 2/6  out 0  spawned 210/861
+bench: night 20 push 4/6  out 1  spawned 421/861
+bench: night 20 push 5/6  out 6  spawned 636/861
+bench: night 20 push 6/6  out 48  spawned 723/861
+bench: profiler on, GPU timestamps on
+fps    60.0   (mean of last 10 s)
+low    57.8   (1% low, same windows)
+worst  17.2 ms
+hitch  1   (frames over 50 ms, whole run)
+draws  253
+tris   676583
+frame  16.67 ms = tick 12.76 ms + outside 3.91 ms  (the last 10 s, the window of fps and low)
+whole run: tick 12.69 ms over 20 s; frame (last 10 s) - that = 3.98 ms (two windows)   gpu 0.33 ms
+last 10 s, by section:
+  r:render                             5.86 ms
+  zombies                              2.06 ms
+  r:matrices                           1.54 ms
+  m:hold                               0.82 ms
+  m:pose                               0.54 ms
+  r:cull                               0.38 ms
+  hud+audio                            0.20 ms
+  w:stairs+roof+birds+bugs+wildlife    0.19 ms
+  w:minimap                            0.13 ms
+  w:treeFall+leaves+batches            0.13 ms
+  drops+hud                            0.11 ms
+  daynight                             0.09 ms
+whole run, by section:
+  r:render                             5.90 ms   worst 31.4
+  zombies                              1.87 ms   worst 7.7
+  r:matrices                           1.50 ms   worst 4.4
+  m:hold                               0.83 ms   worst 1.5
+  m:pose                               0.55 ms   worst 1.4
+  r:cull                               0.39 ms   worst 1.2
+  w:stairs+roof+birds+bugs+wildlife    0.21 ms   worst 0.6
+  hud+audio                            0.20 ms   worst 1.1
+  w:minimap                            0.13 ms   worst 0.9
+  w:treeFall+leaves+batches            0.13 ms   worst 0.4
+  drops+hud                            0.11 ms   worst 0.5
+  daynight                             0.09 ms   worst 0.4
+scene  9432 nodes (6422 recompose each frame), 7028 meshes (3162 shown, 1854 cast shadows), 0 bones, 1474 top-level (262 culled, 1753 nodes under them), the dead 1671 nodes
+    2088 nodes   476 x Group   (420 auto, 1139 meshes, 0 bones)
+    1083 nodes    32 x zombie (Group>zombie-eyes)   (321 auto, 629 meshes, 0 bones)
+     725 nodes   724 x Mesh   (430 auto, 725 meshes, 0 bones)
+     701 nodes     1 x Group>fitted-pelvis   (701 auto, 486 meshes, 0 bones)
+     588 nodes    12 x Group>bird-skin   (588 auto, 540 meshes, 0 bones)
+     560 nodes    14 x butterfly   (560 auto, 518 meshes, 0 bones)
+     462 nodes    14 x Group>fish-skin   (462 auto, 434 meshes, 0 bones)
+     410 nodes    10 x bee   (410 auto, 380 meshes, 0 bones)
+     407 nodes    11 x zombie (Group>demon-fire-fist)   (339 auto, 209 meshes, 0 bones)
+     308 nodes     4 x Group>rabbit-skin   (308 auto, 256 meshes, 0 bones)
+     265 nodes     1 x history-props   (265 auto, 223 meshes, 0 bones)
+     245 nodes     7 x Group>squirrel-tail   (245 auto, 231 meshes, 0 bones)
+     219 nodes     1 x relay-vault   (219 auto, 206 meshes, 0 bones)
+     215 nodes     5 x Group>frog-skin   (215 auto, 210 meshes, 0 bones)
+     156 nodes     3 x bird-flock   (156 auto, 102 meshes, 0 bones)
+draws  253 a frame by the camera, 13 by the shadow pass; by owner:
+      80  Group>tag-wall
+      52  Group>fitted-pelvis
+      41  Mesh
+      21  zombie (Group>demon-fire-fist)
+      16  ground-sectors
+      10  Group
+       8  zombie (Group>zombie-eyes)
+       6  fuel-depot
+       5  feral-motion-echo
+       4  rock-batch
+       2  zombie (Group>concept-surface)
+       2  motes-instanced
+       1  fob-yard-batch
+       1  fob-ground-wear
+       1  debris-chunks
+{"scenario":"night","seconds":20,"fps":60,"low":57.8,"worst":17.2,"hitches":1,"draws":253,"triangles":676583,"zombies":48,"gfx":"high","windows":10,"night":20,"push":5,"pushes":6,"last":true,"prof":{"frames":1220,"frameMs":16.67,"tickMs":12.69,"outsideMs":3.98,"last10":{"seconds":10,"frames":610,"frameMs":16.67,"tickMs":12.76,"outsideMs":3.91,"top":[{"k":"r:render","avg":5.86},{"k":"zombies","avg":2.06},{"k":"r:matrices","avg":1.54},{"k":"m:hold","avg":0.82},{"k":"m:pose","avg":0.54},{"k":"r:cull","avg":0.38},{"k":"hud+audio","avg":0.2},{"k":"w:stairs+roof+birds+bugs+wildlife","avg":0.19},{"k":"w:minimap","avg":0.13},{"k":"w:treeFall+leaves+batches","avg":0.13},{"k":"drops+hud","avg":0.11},{"k":"daynight","avg":0.09}]},"top":[{"k":"r:render","avg":5.9,"max":31.4},{"k":"zombies","avg":1.87,"max":7.7},{"k":"r:matrices","avg":1.5,"max":4.4},{"k":"m:hold","avg":0.83,"max":1.5},{"k":"m:pose","avg":0.55,"max":1.4},{"k":"r:cull","avg":0.39,"max":1.2},{"k":"w:stairs+roof+birds+bugs+wildlife","avg":0.21,"max":0.6},{"k":"hud+audio","avg":0.2,"max":1.1},{"k":"w:minimap","avg":0.13,"max":0.9},{"k":"w:treeFall+leaves+batches","avg":0.13,"max":0.4},{"k":"drops+hud","avg":0.11,"max":0.5},{"k":"daynight","avg":0.09,"max":0.4}],"spikes":[{"frame":3,"ms":37.3,"top":["r:render 31.4","r:matrices 1.3","zombies 1.1","m:hold 1.0"],"heapMB":860.6,"freedMB":103.6,"newPipelines":0,"newTextures":0,"newGeometries":0,"newBuilds":0,"sunShadow":0,"newRenderObjects":0,"t0":30147.3,"t1":30207.9}],"spikeCauses":{"spikes":1,"pipelines":0,"builds":0,"uploads":0,"sunShadow":0,"gc":1,"code":0},"gpuMs":0.33,"gpuSamples":850,"pipelines":{"made":0,"released":0,"withNewShaders":0,"top":[],"first":[]},"builds":{"made":0,"top":[],"zombieAndEcho":[]},"renderObjects":{"made":25,"perFrame":0.02,"top":[{"k":"zombie-skin < Group < Scene | MeshStandardNodeMaterial | scene","n":16,"frames":[159,189,217,717,1054,1069]},{"k":"feral-motion-echo < Scene | MeshBasicMaterial | scene","n":6,"frames":[630,633,636,1030,1033,1036]},{"k":"zombie-skin < Group < Scene | NodeMaterial | ortho","n":3,"frames":[771]}],"spikes":[{"frame":3,"n":0,"top":[]}]},"gc":null},"census":{"nodes":9432,"auto":6422,"meshes":7028,"shown":3162,"casters":1854,"bones":0,"top":1474,"culledTops":262,"culledNodes":1753,"zombieNodes":1671,"groups":[{"k":"Group","count":476,"nodes":2088,"auto":420,"meshes":1139,"bones":0,"culled":16},{"k":"zombie (Group>zombie-eyes)","count":32,"nodes":1083,"auto":321,"meshes":629,"bones":0,"culled":0},{"k":"Mesh","count":724,"nodes":725,"auto":430,"meshes":725,"bones":0,"culled":146},{"k":"Group>fitted-pelvis","count":1,"nodes":701,"auto":701,"meshes":486,"bones":0,"culled":0},{"k":"Group>bird-skin","count":12,"nodes":588,"auto":588,"meshes":540,"bones":0,"culled":0},{"k":"butterfly","count":14,"nodes":560,"auto":560,"meshes":518,"bones":0,"culled":0},{"k":"Group>fish-skin","count":14,"nodes":462,"auto":462,"meshes":434,"bones":0,"culled":14},{"k":"bee","count":10,"nodes":410,"auto":410,"meshes":380,"bones":0,"culled":0},{"k":"zombie (Group>demon-fire-fist)","count":11,"nodes":407,"auto":339,"meshes":209,"bones":0,"culled":0},{"k":"Group>rabbit-skin","count":4,"nodes":308,"auto":308,"meshes":256,"bones":0,"culled":0},{"k":"history-props","count":1,"nodes":265,"auto":265,"meshes":223,"bones":0,"culled":0},{"k":"Group>squirrel-tail","count":7,"nodes":245,"auto":245,"meshes":231,"bones":0,"culled":7},{"k":"relay-vault","count":1,"nodes":219,"auto":219,"meshes":206,"bones":0,"culled":1},{"k":"Group>frog-skin","count":5,"nodes":215,"auto":215,"meshes":210,"bones":0,"culled":5},{"k":"bird-flock","count":3,"nodes":156,"auto":156,"meshes":102,"bones":0,"culled":0},{"k":"Group>tag-wall","count":1,"nodes":142,"auto":142,"meshes":107,"bones":0,"culled":0},{"k":"zombie (Group>concept-surface)","count":4,"nodes":142,"auto":72,"meshes":80,"bones":0,"culled":0},{"k":"killer-rabbit","count":1,"nodes":85,"auto":85,"meshes":76,"bones":0,"culled":0},{"k":"rabbit-mound","count":1,"nodes":74,"auto":74,"meshes":71,"bones":0,"culled":1},{"k":"Group>convoy-ambulance","count":1,"nodes":62,"auto":62,"meshes":32,"bones":0,"culled":1},{"k":"objectiveProps","count":1,"nodes":48,"auto":48,"meshes":37,"bones":0,"culled":0},{"k":"rock-batch","count":47,"nodes":47,"auto":0,"meshes":47,"bones":0,"culled":40},{"k":"Group>turtle-skin","count":1,"nodes":45,"auto":45,"meshes":44,"bones":0,"culled":1},{"k":"zombie (Group>brute-plate-left)","count":1,"nodes":39,"auto":2,"meshes":21,"bones":0,"culled":0},{"k":"trapper-path","count":1,"nodes":37,"auto":5,"meshes":33,"bones":0,"culled":0},{"k":"Group>barrow-offerings","count":1,"nodes":32,"auto":32,"meshes":20,"bones":0,"culled":1},{"k":"hikers-kit","count":1,"nodes":24,"auto":24,"meshes":19,"bones":0,"culled":0},{"k":"Group>marrow-door","count":1,"nodes":20,"auto":20,"meshes":11,"bones":0,"culled":1},{"k":"fuel-depot","count":1,"nodes":20,"auto":20,"meshes":16,"bones":0,"culled":0},{"k":"ground-sectors","count":1,"nodes":19,"auto":19,"meshes":18,"bones":0,"culled":0}],"draws":{"frames":2,"main":253,"shadow":13,"byGroup":[{"k":"Group>tag-wall","n":80},{"k":"Group>fitted-pelvis","n":52},{"k":"Mesh","n":41},{"k":"zombie (Group>demon-fire-fist)","n":21},{"k":"ground-sectors","n":16},{"k":"Group","n":10},{"k":"zombie (Group>zombie-eyes)","n":8},{"k":"fuel-depot","n":6},{"k":"feral-motion-echo","n":5},{"k":"rock-batch","n":4},{"k":"zombie (Group>concept-surface)","n":2},{"k":"motes-instanced","n":2},{"k":"fob-yard-batch","n":1},{"k":"fob-ground-wear","n":1},{"k":"debris-chunks","n":1},{"k":"fob-threshold-sign","n":1},{"k":"fob-ground-blend","n":1},{"k":"fob-tyre-ruts","n":1}],"byPart":[{"k":"Mesh / (unnamed)","n":41},{"k":"Group>tag-wall / (unnamed)","n":26},{"k":"Group>fitted-pelvis / (unnamed)","n":22},{"k":"Group>tag-wall / hq-armory","n":19},{"k":"ground-sectors / (unnamed)","n":16},{"k":"Group>tag-wall / hq-skull-intake","n":13},{"k":"zombie (Group>demon-fire-fist) / demon-fire-fists","n":11},{"k":"Group / (unnamed)","n":10},{"k":"Group>fitted-pelvis / rig-skin","n":10},{"k":"zombie (Group>demon-fire-fist) / zombie-skin","n":10},{"k":"zombie (Group>zombie-eyes) / zombie-skin","n":8},{"k":"Group>tag-wall / fob-lockdown-door","n":6},{"k":"fuel-depot / hq-generator","n":6},{"k":"Group>tag-wall / hq-alarm-cabinet","n":5},{"k":"feral-motion-echo / feral-motion-echo","n":5},{"k":"rock-batch / rock-batch","n":4},{"k":"Group>fitted-pelvis / wrist","n":4},{"k":"Group>tag-wall / hq-cif","n":4},{"k":"Group>fitted-pelvis / balaclava","n":3},{"k":"Group>tag-wall / hq-duty-board","n":3},{"k":"Group>fitted-pelvis / live-sleeve-live","n":2},{"k":"Group>fitted-pelvis / live-trouser-leg-live","n":2},{"k":"Group>fitted-pelvis / marine-facial-features","n":2},{"k":"Group>tag-wall / hq-radio-set","n":2},{"k":"motes-instanced / motes-instanced","n":2},{"k":"fob-yard-batch / fob-yard-batch","n":1},{"k":"fob-ground-wear / fob-ground-wear","n":1},{"k":"debris-chunks / debris-chunks","n":1},{"k":"Group>fitted-pelvis / magazineBody","n":1},{"k":"Group>fitted-pelvis / pgb-patch","n":1},{"k":"Group>fitted-pelvis / open-molded-holster","n":1},{"k":"Group>fitted-pelvis / marine-waist-live","n":1},{"k":"Group>fitted-pelvis / live-seat-live","n":1},{"k":"Group>tag-wall / hq-designation","n":1},{"k":"fob-threshold-sign / (unnamed)","n":1},{"k":"zombie (Group>concept-surface) / zombie-skin","n":1},{"k":"zombie (Group>concept-surface) / demon-fire-fists","n":1},{"k":"Group>tag-wall / hq-damaged-terminal","n":1},{"k":"Group>fitted-pelvis / chapel-glow","n":1},{"k":"Group>fitted-pelvis / medium-fade","n":1}]}}}

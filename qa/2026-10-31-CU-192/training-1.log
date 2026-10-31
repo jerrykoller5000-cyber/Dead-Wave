@@ -1,0 +1,61 @@
+bench: http://127.0.0.1:65161/index.html?debug=1
+bench: scenario training for 20s
+
+bench: graphics high
+bench: training light {"time":0.5,"lightsOff":false,"room":true,"active":true,"wake":false,"hidden":1073,"blackout":false,"sun":1.73,"hemi":0.68,"ambient":0.04,"pointOn":4,"pointAll":23,"pool":1,"standIns":19,"brightness":1,"exposure":1,"graded":false,"danger":0}
+bench: profiler on, GPU timestamps on
+fps    60.0   (mean of last 10 s)
+low    58.9   (1% low, same windows)
+worst  16.9 ms
+hitch  1   (frames over 50 ms, whole run)
+draws  246
+tris   115197
+frame  16.67 ms = tick 7.28 ms + outside 9.39 ms  (the last 10 s, the window of fps and low)
+whole run: tick 7.49 ms over 20 s; frame (last 10 s) - that = 9.17 ms (two windows)   gpu 0.24 ms
+last 10 s, by section:
+  r:render                             5.15 ms
+  m:pose                               0.63 ms
+  r:matrices                           0.49 ms
+  effects                              0.13 ms
+  drops+hud                            0.11 ms
+  daynight                             0.10 ms
+  r:rigSkin                            0.10 ms
+  hud+audio                            0.09 ms
+  w:rest                               0.07 ms
+  tree+deck coll                       0.06 ms
+  idle+gear                            0.05 ms
+  m:reload+knife                       0.04 ms
+whole run, by section:
+  r:render                             5.21 ms   worst 13.8
+  m:pose                               0.63 ms   worst 1.7
+  r:matrices                           0.51 ms   worst 1.7
+  effects                              0.15 ms   worst 0.6
+  drops+hud                            0.11 ms   worst 0.7
+  daynight                             0.10 ms   worst 0.6
+  r:rigSkin                            0.10 ms   worst 0.4
+  hud+audio                            0.10 ms   worst 0.3
+  w:rest                               0.08 ms   worst 0.4
+  tree+deck coll                       0.07 ms   worst 0.3
+  idle+gear                            0.06 ms   worst 0.3
+  m:reload+knife                       0.05 ms   worst 0.2
+scene  7821 nodes (5754 recompose each frame), 6118 meshes (2898 shown, 1639 cast shadows), 0 bones, 1394 top-level (0 culled, 0 nodes under them), the dead 0 nodes
+    2088 nodes   476 x Group   (420 auto, 1139 meshes, 0 bones)
+     719 nodes     1 x Group>fitted-pelvis   (719 auto, 498 meshes, 0 bones)
+     704 nodes   703 x Mesh   (409 auto, 704 meshes, 0 bones)
+     560 nodes    14 x butterfly   (560 auto, 518 meshes, 0 bones)
+     490 nodes    10 x Group>bird-skin   (490 auto, 450 meshes, 0 bones)
+     462 nodes    14 x Group>fish-skin   (462 auto, 434 meshes, 0 bones)
+     369 nodes     9 x bee   (369 auto, 342 meshes, 0 bones)
+     311 nodes     1 x training-ground   (311 auto, 251 meshes, 0 bones)
+     265 nodes     1 x history-props   (265 auto, 223 meshes, 0 bones)
+     258 nodes     6 x Group>frog-skin   (258 auto, 252 meshes, 0 bones)
+     231 nodes     3 x Group>rabbit-skin   (231 auto, 192 meshes, 0 bones)
+     219 nodes     1 x relay-vault   (219 auto, 206 meshes, 0 bones)
+     175 nodes     5 x Group>squirrel-tail   (175 auto, 165 meshes, 0 bones)
+     156 nodes     3 x bird-flock   (156 auto, 102 meshes, 0 bones)
+     142 nodes     1 x Group>tag-wall   (142 auto, 107 meshes, 0 bones)
+draws  211 a frame by the camera, 23 by the shadow pass; by owner:
+     168  training-ground
+      42  Group>fitted-pelvis
+       1  motes-instanced
+{"scenario":"training","seconds":20,"fps":60,"low":58.9,"worst":16.9,"hitches":1,"draws":246,"triangles":115197,"zombies":0,"gfx":"high","windows":10,"prof":{"frames":1131,"frameMs":16.67,"tickMs":7.49,"outsideMs":9.17,"last10":{"seconds":10,"frames":607,"frameMs":16.67,"tickMs":7.28,"outsideMs":9.39,"top":[{"k":"r:render","avg":5.15},{"k":"m:pose","avg":0.63},{"k":"r:matrices","avg":0.49},{"k":"effects","avg":0.13},{"k":"drops+hud","avg":0.11},{"k":"daynight","avg":0.1},{"k":"r:rigSkin","avg":0.1},{"k":"hud+audio","avg":0.09},{"k":"w:rest","avg":0.07},{"k":"tree+deck coll","avg":0.06},{"k":"idle+gear","avg":0.05},{"k":"m:reload+knife","avg":0.04}]},"top":[{"k":"r:render","avg":5.21,"max":13.8},{"k":"m:pose","avg":0.63,"max":1.7},{"k":"r:matrices","avg":0.51,"max":1.7},{"k":"effects","avg":0.15,"max":0.6},{"k":"drops+hud","avg":0.11,"max":0.7},{"k":"daynight","avg":0.1,"max":0.6},{"k":"r:rigSkin","avg":0.1,"max":0.4},{"k":"hud+audio","avg":0.1,"max":0.3},{"k":"w:rest","avg":0.08,"max":0.4},{"k":"tree+deck coll","avg":0.07,"max":0.3},{"k":"idle+gear","avg":0.06,"max":0.3},{"k":"m:reload+knife","avg":0.05,"max":0.2}],"spikes":[],"spikeCauses":{"spikes":0,"pipelines":0,"builds":0,"uploads":0,"sunShadow":0,"gc":0,"code":0},"gpuMs":0.24,"gpuSamples":1117,"pipelines":{"made":0,"released":0,"withNewShaders":0,"top":[],"first":[]},"builds":{"made":0,"top":[],"zombieAndEcho":[]},"renderObjects":{"made":0,"perFrame":0,"top":[],"spikes":[]},"gc":null},"census":{"nodes":7821,"auto":5754,"meshes":6118,"shown":2898,"casters":1639,"bones":0,"top":1394,"culledTops":0,"culledNodes":0,"zombieNodes":0,"groups":[{"k":"Group","count":476,"nodes":2088,"auto":420,"meshes":1139,"bones":0,"culled":0},{"k":"Group>fitted-pelvis","count":1,"nodes":719,"auto":719,"meshes":498,"bones":0,"culled":0},{"k":"Mesh","count":703,"nodes":704,"auto":409,"meshes":704,"bones":0,"culled":0},{"k":"butterfly","count":14,"nodes":560,"auto":560,"meshes":518,"bones":0,"culled":0},{"k":"Group>bird-skin","count":10,"nodes":490,"auto":490,"meshes":450,"bones":0,"culled":0},{"k":"Group>fish-skin","count":14,"nodes":462,"auto":462,"meshes":434,"bones":0,"culled":0},{"k":"bee","count":9,"nodes":369,"auto":369,"meshes":342,"bones":0,"culled":0},{"k":"training-ground","count":1,"nodes":311,"auto":311,"meshes":251,"bones":0,"culled":0},{"k":"history-props","count":1,"nodes":265,"auto":265,"meshes":223,"bones":0,"culled":0},{"k":"Group>frog-skin","count":6,"nodes":258,"auto":258,"meshes":252,"bones":0,"culled":0},{"k":"Group>rabbit-skin","count":3,"nodes":231,"auto":231,"meshes":192,"bones":0,"culled":0},{"k":"relay-vault","count":1,"nodes":219,"auto":219,"meshes":206,"bones":0,"culled":0},{"k":"Group>squirrel-tail","count":5,"nodes":175,"auto":175,"meshes":165,"bones":0,"culled":0},{"k":"bird-flock","count":3,"nodes":156,"auto":156,"meshes":102,"bones":0,"culled":0},{"k":"Group>tag-wall","count":1,"nodes":142,"auto":142,"meshes":107,"bones":0,"culled":0},{"k":"Group>turtle-skin","count":2,"nodes":90,"auto":90,"meshes":88,"bones":0,"culled":0},{"k":"killer-rabbit","count":1,"nodes":85,"auto":85,"meshes":76,"bones":0,"culled":0},{"k":"rabbit-mound","count":1,"nodes":74,"auto":74,"meshes":71,"bones":0,"culled":0},{"k":"Group>convoy-ambulance","count":1,"nodes":62,"auto":62,"meshes":32,"bones":0,"culled":0},{"k":"objectiveProps","count":1,"nodes":48,"auto":48,"meshes":37,"bones":0,"culled":0},{"k":"rock-batch","count":47,"nodes":47,"auto":0,"meshes":47,"bones":0,"culled":0},{"k":"trapper-path","count":1,"nodes":37,"auto":5,"meshes":33,"bones":0,"culled":0},{"k":"Group>barrow-offerings","count":1,"nodes":32,"auto":32,"meshes":20,"bones":0,"culled":0},{"k":"Group>marrow-door","count":1,"nodes":20,"auto":20,"meshes":11,"bones":0,"culled":0},{"k":"ground-sectors","count":1,"nodes":19,"auto":19,"meshes":18,"bones":0,"culled":0},{"k":"holy-reliquary","count":1,"nodes":14,"auto":14,"meshes":12,"bones":0,"culled":0},{"k":"PointLight","count":11,"nodes":11,"auto":11,"meshes":0,"bones":0,"culled":0},{"k":"mast-skeleton","count":1,"nodes":10,"auto":10,"meshes":5,"bones":0,"culled":0},{"k":"first-standing-stone","count":3,"nodes":10,"auto":10,"meshes":7,"bones":0,"culled":0},{"k":"frag-grenade","count":1,"nodes":9,"auto":9,"meshes":7,"bones":0,"culled":0}],"draws":{"frames":2,"main":211,"shadow":23,"byGroup":[{"k":"training-ground","n":168},{"k":"Group>fitted-pelvis","n":42},{"k":"motes-instanced","n":1}],"byPart":[{"k":"training-ground / (unnamed)","n":43},{"k":"training-ground / training-armory","n":19},{"k":"training-ground / training-cutaway-east","n":16},{"k":"training-ground / training-containment","n":15},{"k":"Group>fitted-pelvis / (unnamed)","n":13},{"k":"Group>fitted-pelvis / rig-skin","n":10},{"k":"training-ground / training-cutaway-north","n":7},{"k":"training-ground / training-firing-bench","n":6},{"k":"training-ground / training-range-console","n":6},{"k":"training-ground / training-impact-marks","n":6},{"k":"training-ground / training-cutaway-west","n":5},{"k":"training-ground / training-gate-frame","n":5},{"k":"training-ground / training-kiosk","n":5},{"k":"training-ground / training-cutaway-rangeSouth","n":4},{"k":"training-ground / training-cutaway-south","n":4},{"k":"training-ground / training-gate-leaf--1","n":4},{"k":"Group>fitted-pelvis / wrist","n":4},{"k":"training-ground / training-razor-perimeter","n":4},{"k":"training-ground / target-plate","n":4},{"k":"training-ground / training-cutaway-overhead","n":3},{"k":"Group>fitted-pelvis / balaclava","n":3},{"k":"training-ground / range-drill-monitor","n":3},{"k":"training-ground / training-gate-leaf-1","n":2},{"k":"Group>fitted-pelvis / live-sleeve-live","n":2},{"k":"Group>fitted-pelvis / live-trouser-leg-live","n":2},{"k":"Group>fitted-pelvis / marine-facial-features","n":2},{"k":"training-ground / training-light-switch-lever","n":2},{"k":"Group>fitted-pelvis / pgb-patch","n":1},{"k":"Group>fitted-pelvis / open-molded-holster","n":1},{"k":"Group>fitted-pelvis / marine-waist-live","n":1},{"k":"Group>fitted-pelvis / live-seat-live","n":1},{"k":"training-ground / firing-line","n":1},{"k":"training-ground / training-void","n":1},{"k":"training-ground / training-range-floor","n":1},{"k":"training-ground / training-build-floor","n":1},{"k":"training-ground / training-no-build-paint","n":1},{"k":"motes-instanced / motes-instanced","n":1},{"k":"Group>fitted-pelvis / chapel-glow","n":1},{"k":"Group>fitted-pelvis / medium-fade","n":1}]}},"light":{"time":0.5,"lightsOff":false,"room":true,"active":true,"wake":false,"hidden":1073,"blackout":false,"sun":1.73,"hemi":0.68,"ambient":0.04,"pointOn":4,"pointAll":23,"pool":1,"standIns":19,"brightness":1,"exposure":1,"graded":false,"danger":0}}

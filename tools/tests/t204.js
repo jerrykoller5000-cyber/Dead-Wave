@@ -43,7 +43,9 @@
     ok(!D.relay.mode, 'E puts it back');
     // The cabinet.
     stand(A.x, A.y, A.z); await wait(300);
-    ok(R().marks.cabinet.visible && !R().marks.locker.visible, 'amber marker over the cabinet, none over the vault');
+    // CL-284 (Jerry's J44, 2026-10-31: "Take away the giant floating indicator above the relay"): CL-127's floating cones
+    // are gone from the world (rule 13: Jerry's change of the design, not a weaker bar); the prompt says what to do here.
+    ok(!R().marks.cabinet.parent && !R().marks.locker.parent, 'no floating marker over the cabinet or the vault (J44)');
     ok(/breaker/i.test(R().prompt || ''), 'the main prompt: "' + R().prompt + '"');
     await tap(); await wait(150);
     const panel = document.getElementById('relayPanel');

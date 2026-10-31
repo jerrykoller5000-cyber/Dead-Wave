@@ -3,6 +3,7 @@
 //   node tools/bench.mjs                         megaswarm, 500 shamblers, 30 s
 //   node tools/bench.mjs --scenario day5         day 5, start the wave, then 30 s
 //   node tools/bench.mjs --scenario build        place ten walls through tryPlace, then 30 s
+//   node tools/bench.mjs --scenario training     the Training Ground at noon, then 30 s (CU-192)
 //   node tools/bench.mjs --night 5               night 5's last push, horde out, then 30 s
 //   node tools/bench.mjs --night 20 --gfx high   same, on the High preset
 //   node tools/bench.mjs --seconds 8 --headless  short run
@@ -12,6 +13,9 @@
 //   node tools/bench.mjs --night 20 --gfx high --prof --cpu   and which functions (a DevTools CPU profile)
 //   node tools/bench.mjs --night 20 --gfx high --prof --alloc   and who allocates (the garbage behind GC pauses)
 //   node tools/bench.mjs --night 20 --gfx high --prof --gc      and V8's GC on the main thread, per spike (CL-239)
+//   node tools/bench.mjs --night 20 --gfx high --res 0.5 --prof  the preset's render scale times 0.5 (half each way, a
+//                                                                quarter of the pixels): if fps doesn't move, the GPU isn't
+//                                                                what limits the frame (CL-288)
 //
 // One JSON line per scenario (the line AG-82 reads): fps, 1% low, worst frame,
 // frames over 50 ms, draw calls and triangles. Draw calls and triangles come
@@ -63,6 +67,7 @@ const flag = (name) => {
 const SECONDS = num('--seconds', 30);
 const COUNT = num('--count', 500);
 const GFX = flag('--gfx');
+const RES = num('--res', 0);   // CL-288: a multiplier on the preset's render scale (0 = as the preset has it)
 const NIGHT_ARG = flag('--night');
 const SCENARIO_ARG = flag('--scenario');
 // CU-171: --prof-all is --prof with every PROF section in the line's `prof.top`, not the heaviest 12 (what grew outside the top).
@@ -71,6 +76,10 @@ const EVAL_FILE = flag('--eval');
 // CU-184: --save-cpu <file> (with --prof --cpu) writes the raw DevTools CPU profile with the page's clock at its start and every frame's start time, so a spike frame's samples can be read apart.
 const SAVE_CPU = flag('--save-cpu');
 const PROF_ALL = argv.includes('--prof-all');
+// CU-192: --fight with --scenario training fills the room (deployNow, no alarm) before the measured seconds.
+const FIGHT = argv.includes('--fight');
+// CU-192: --title-night leaves the title clock at night, then enters training, to see if that dim sticks.
+const TITLE_NIGHT = argv.includes('--title-night');
 const PROF_ON = argv.includes('--prof') || PROF_ALL;
 const CPU_ON = argv.includes('--cpu');
 const CENSUS_ON = CPU_ON || argv.includes('--census');
@@ -165,6 +174,45 @@ const ADVANCE = `(() => {
     zombies: up(),
     spawned: st().waveSpawned,
     total: st().waveTotal
+  };
+})()`;
+
+// CU-192: the Training Ground's light, for the "sometimes dimmer" check. Noon is world time 0.5
+// with the room's switch on; danger.amount above 0 is the alarm pulling the sun down.
+const TRAINING_LIGHT = `(() => {
+  const pic = TT.pictureDbg ? TT.pictureDbg() : null;
+  const st = TT.trainingDbg.state();
+  const tg = TT.trainingDbg.tg();
+  let sun = null, hemi = null, ambient = null;
+  let pointOn = 0, pointAll = 0;
+  TT.scene.traverse((o) => {
+    if (o.isDirectionalLight && sun == null) sun = Math.round(o.intensity * 1000) / 1000;
+    else if (o.isHemisphereLight && hemi == null) hemi = Math.round(o.intensity * 1000) / 1000;
+    else if (o.isAmbientLight && ambient == null) ambient = Math.round(o.intensity * 1000) / 1000;
+    else if (o.isPointLight) { pointAll++; if (o.intensity > 0.01) pointOn++; }
+  });
+  const blackout = document.getElementById('trainingBlackout');
+  const pool = TT.lightPoolDbg.pool();
+  const round3 = (n) => Math.round(n * 1000) / 1000;
+  return {
+    time: round3(TT.getWorldTime()),
+    lightsOff: !!st.lightsOff,
+    room: tg && tg.lightsOn ? !!tg.lightsOn() : null,
+    active: !!st.active,
+    wake: !!st.wake,
+    hidden: st.hidWorld ? st.hidWorld.length : 0,
+    blackout: !!(blackout && blackout.classList.contains('on')),
+    fogNear: TT.scene.fog ? Math.round(TT.scene.fog.near) : null,
+    fogFar: TT.scene.fog ? Math.round(TT.scene.fog.far) : null,
+    background: TT.scene.background && TT.scene.background.getHexString ? TT.scene.background.getHexString() : null,
+    sun, hemi, ambient,
+    pointOn, pointAll,
+    pool: pool.lights.filter((L) => L.intensity > 0.01).length,
+    standIns: pool.standIns().length,
+    brightness: pic ? pic.brightness : null,
+    exposure: pic ? pic.exposure : null,
+    graded: pic ? !!pic.graded : null,
+    danger: st.danger && st.danger.state ? round3(st.danger.state().amount) : null
   };
 })()`;
 
@@ -468,6 +516,13 @@ try {
   await page.waitFor('window.DWOpening.active === false', { timeout: 120000 });
 
   let placed = null;
+  let trainingLight = null;
+  if (RES > 0) {   // CL-288: before the preset applies, so applyGraphicsPreset sets the pixel ratio and the passes follow
+    const scale = await page.evaluate(`(() => { const k = ${JSON.stringify(GFX)} || TT.getGfx(); const p = TT.GFX_PRESETS && TT.GFX_PRESETS[k];
+      if (!p) return null; p.scale *= ${RES}; TT.applyGraphicsPreset(k); return { preset: k, scale: p.scale, pr: TT.renderer && TT.renderer.getPixelRatio ? TT.renderer.getPixelRatio() : null }; })()`);
+    if (!scale) throw new Error('--res: no preset to scale');
+    console.log(`bench: render scale ${JSON.stringify(scale)}`);
+  }
   if (GFX) {
     const applied = await page.evaluate(`(() => {
       if (!TT.GFX_PRESETS || !TT.GFX_PRESETS[${JSON.stringify(GFX)}]) return '';
@@ -538,8 +593,50 @@ try {
     // The alarm brings night on over a couple of seconds. Measure after that, so the
     // frame is the night and not the sky tween.
     await page.evaluate('new Promise(r => setTimeout(r, 3000))');
+  } else if (SCENARIO === 'training') {
+    if (TITLE_NIGHT) {
+      const night = await page.evaluate(`(() => { TT.setWorldTime(0.02); return TT.getWorldTime(); })()`);
+      await page.evaluate('new Promise(r => setTimeout(r, 800))');
+      console.log('bench: title clock set to night (' + night + ')');
+    }
+    const started = await page.evaluate(`(async () => {
+      const name = document.getElementById('playerName');
+      if (name) name.value = 'Bench';
+      const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+      for (let i = 0; i < 40; i++) {
+        if (TT.trainingDbg.state().active) return true;
+        const card = document.getElementById('firstRunCard');
+        const anyway = document.getElementById('firstRunPlay');
+        if (card && !card.hidden && anyway) anyway.click();
+        const b = document.getElementById('modeTraining');
+        if (b) b.click();
+        await wait(500);
+      }
+      return !!TT.trainingDbg.state().active;
+    })()`, 180000);
+    if (!started) throw new Error('training never started');
+    const early = await page.evaluate(TRAINING_LIGHT);
+    console.log('bench: training light on entry ' + JSON.stringify(early));
+    const lit = await page.waitFor(`(() => {
+      const b = document.getElementById('trainingBlackout');
+      const dark = b && b.classList.contains('on');
+      return !dark && Math.abs(window.TT.getWorldTime() - 0.5) < 0.02;
+    })()`, { timeout: 30000 });
+    if (!lit) throw new Error('training never reached noon with the blackout down');
+    trainingLight = await page.evaluate(TRAINING_LIGHT);
+    console.log('bench: training light ' + JSON.stringify(trainingLight));
+    if (FIGHT) {
+      const fight = await page.evaluate(`(() => {
+        let made = 0;
+        for (let i = 0; i < 8 && TT.trainingDbg.alive() < (TT.MAX_ZOMBIES || 48); i++) made += TT.trainingDbg.deployNow('shambler', 10);
+        return { made, alive: TT.trainingDbg.alive() };
+      })()`);
+      console.log('bench: training fight ' + JSON.stringify(fight));
+      if (!fight.alive) throw new Error('training fight spawned nobody');
+      await page.evaluate('new Promise(r => setTimeout(r, 2000))');
+    }
   } else {
-    throw new Error('unknown scenario ' + SCENARIO + ' (megaswarm, day5, build, night)');
+    throw new Error('unknown scenario ' + SCENARIO + ' (megaswarm, day5, build, night, training)');
   }
 
   let profStart = null;
@@ -739,6 +836,7 @@ try {
   if (EVAL_FILE) line.eval = await page.evaluate(fs.readFileSync(EVAL_FILE, 'utf8'));
   if (SCENARIO === 'megaswarm') line.count = COUNT;
   if (SCENARIO === 'build') line.placed = placed;
+  if (SCENARIO === 'training') line.light = trainingLight;
   console.log(`fps    ${line.fps.toFixed(1)}   (mean of last ${use.length} s)`);
   console.log(`low    ${line.low.toFixed(1)}   (1% low, same windows)`);
   console.log(`worst  ${line.worst.toFixed(1)} ms`);

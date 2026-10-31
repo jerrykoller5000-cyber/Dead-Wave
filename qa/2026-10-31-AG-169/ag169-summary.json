@@ -1,0 +1,188 @@
+{
+  "t307ExitCode": 0,
+  "consoleErrors": [],
+  "gp19987": {
+    "fuel": {
+      "closedPhase": "at-pump",
+      "closedFill": 0,
+      "closedPrompt": null,
+      "closedPromptBefore": null
+    },
+    "fuelOpen": {
+      "openPromptBefore": "Hold E - Fill the can",
+      "openPhase": "at-pump",
+      "openFill": 1.269199999988079,
+      "openPromptDuring": "Filling..."
+    },
+    "readyDesktop": {
+      "trackerFound": true,
+      "trackerInsideDialog": true,
+      "trackerParentClass": "briefing-report",
+      "trackerHeading": "Recover the depot fuel",
+      "rect": {
+        "x": 221,
+        "y": 710,
+        "w": 828,
+        "h": 233
+      }
+    },
+    "readyNarrow": {
+      "rect": {
+        "x": 35,
+        "y": 775,
+        "w": 310,
+        "h": 225
+      },
+      "fitsViewport": true,
+      "scrollWidth": 390,
+      "innerWidth": 390
+    }
+  },
+  "gp19988": {
+    "capGeometry": {
+      "capVisible": true,
+      "ballcapBackRotY": 3.142,
+      "capVertices": 4657,
+      "maskVertices": 905,
+      "capFrontMinZ": {
+        "1.53": 0.1175,
+        "1.52": 0.1138,
+        "1.51": 0.1009,
+        "1.49": 0.1045,
+        "1.54": 0.0968,
+        "1.55": 0.1177,
+        "1.56": 0.1148
+      },
+      "maskFrontMaxZ": {
+        "1.50": 0.1196,
+        "1.53": 0.0899
+      },
+      "clearancesMm": {
+        "1.53": 27.6
+      }
+    },
+    "bruteFilmstrip": [
+      {
+        "beat": "1-down-palms",
+        "targetU": 0.02,
+        "state": "getup",
+        "pelvisY": 0.12,
+        "chestY": 0.943,
+        "headY": 1.312,
+        "handLY": 0.278,
+        "handRY": 0.195,
+        "kneeLY": 0.07,
+        "kneeRY": 0.07
+      },
+      {
+        "beat": "2-knee-under",
+        "targetU": 0.35,
+        "state": "getup",
+        "pelvisY": 0.12,
+        "chestY": 0.435,
+        "headY": 0.526,
+        "handLY": 0.05,
+        "handRY": 0.05,
+        "kneeLY": 0.07,
+        "kneeRY": 0.07
+      },
+      {
+        "beat": "3-two-arm-push",
+        "targetU": 0.55,
+        "state": "getup",
+        "pelvisY": 0.197,
+        "chestY": 0.552,
+        "headY": 0.539,
+        "handLY": 0.05,
+        "handRY": 0.05,
+        "kneeLY": 0.07,
+        "kneeRY": 0.07
+      },
+      {
+        "beat": "4-hip-rise",
+        "targetU": 0.7,
+        "state": "getup",
+        "pelvisY": 0.471,
+        "chestY": 1.041,
+        "headY": 1.023,
+        "handLY": 0.24,
+        "handRY": 0.168,
+        "kneeLY": 0.072,
+        "kneeRY": 0.07
+      },
+      {
+        "beat": "5-head-lag",
+        "targetU": 0.86,
+        "state": "getup",
+        "pelvisY": 0.728,
+        "chestY": 1.445,
+        "headY": 1.448,
+        "handLY": 0.66,
+        "handRY": 0.568,
+        "kneeLY": 0.234,
+        "kneeRY": 0.205
+      },
+      {
+        "beat": "6-recovered",
+        "targetU": 1,
+        "state": "getup",
+        "pelvisY": 0.952,
+        "chestY": 1.742,
+        "headY": 1.767,
+        "handLY": 0.988,
+        "handRY": 0.908,
+        "kneeLY": 0.42,
+        "kneeRY": 0.398
+      }
+    ]
+  },
+  "gp19989": {
+    "cifDesktop": {
+      "openZoom": 1,
+      "openCamZ": 4.331,
+      "hint": "Dress each piece separately. Four camos issued. Earn the rest in the field."
+    },
+    "cifZoomMax": {
+      "zoom": 2.5,
+      "camZ": 1.733,
+      "frame": "full"
+    },
+    "cifSwitchItem": {
+      "item": "cap",
+      "frame": "head",
+      "zoom": 2.5,
+      "camY": 1.491,
+      "camZ": 0.78
+    },
+    "cifClampAndPinch": {
+      "minClampZoom": 1,
+      "pinchZoom": 1.85,
+      "reopenZoomFrom1P": 1
+    },
+    "cifNarrow": {
+      "zoom": 2.5,
+      "canvasRect": {
+        "x": 23,
+        "y": 107,
+        "w": 106,
+        "h": 159
+      },
+      "scrollWidth": 390
+    },
+    "workbench": {
+      "stageFound": true,
+      "ready": "true",
+      "hint": "Drag to turn · Scroll or pinch to zoom · Home faces front",
+      "src1xLen": 11494
+    },
+    "workbenchZoom": {
+      "changedOnZoomIn": true,
+      "srcBeforeLen": 11494,
+      "srcAfterMaxLen": 28710
+    },
+    "workbenchReset": {
+      "reopenResetChangedFromZoomed": true,
+      "pageErrors": []
+    }
+  }
+}

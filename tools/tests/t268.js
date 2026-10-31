@@ -14,9 +14,9 @@
     await until(() => R.built, 4000);
     ok(R.built && !R.off && !!R.group, 'the trapper mission is built at campsites.2');
     const rows = D.TRAPPER.ROWS;
-    ok(rows === 8 && R.stones.length === rows * 2 && R.posts.length === rows * 2 && R.horseshoes.length === rows,
-      'eight rows of two stepping stones (' + R.stones.length + '), ' + R.posts.length + ' side posts, and ' + R.horseshoes.length + ' horseshoes');
-    ok(R.colliders.length >= 20, 'fence and bramble colliders close both sides of the leaf bed (' + R.colliders.length + ')');
+    ok(rows === 8 && R.stones.length === rows * 4 && R.posts.length === rows * 4 && R.horseshoes.length === rows,
+      'eight rows of four stepping stones (' + R.stones.length + '), ' + R.posts.length + ' side posts, and ' + R.horseshoes.length + ' horseshoes');
+    ok(R.colliders.length >= 30, 'fence, bramble, and rear seal colliders close both sides and cellar back half (' + R.colliders.length + ')');
     const shoesMatch = () => S().safe.every((side, row) => {
       const post = R.posts.find((p) => p.row === row && p.side === side);
       const hs = R.horseshoes[row];
@@ -26,6 +26,18 @@
     ok(D.locked(), 'the trapper cache is locked before crossing the safe path');
     ok(!D.doorsOpen() && R.doorL && R.doorR && R.doorBar && R.doorL.rotation.z === 0 && R.doorR.rotation.z === 0 && R.doorBar.visible && T.worldSolids.includes(R.doorCollider),
       'AG-135: cellar doors start shut with iron locking bar and door collider in place');
+
+    // AG-165: Verify cellar back half is sealed against clipping:
+    const rearCols = R.colliders.filter((c) => {
+      const loc = R.toLocal(c.x, c.z);
+      return loc && loc.z <= -5.0;
+    });
+    ok(rearCols.length >= 5, 'rear fence seal colliders block rear entry into cellar back half (' + rearCols.length + ')');
+    const flankCols = R.colliders.filter((c) => {
+      const loc = R.toLocal(c.x, c.z);
+      return loc && Math.abs(loc.x) >= 2.0 && loc.z <= -1.0;
+    });
+    ok(flankCols.length >= 6, 'flank fence seal colliders enclose the cellar mound (' + flankCols.length + ')');
 
     // At the cellar hatch before crossing: locked and shows the trapped path prompt.
     T.runDevCommand('site trapper hatch'); await wait(150);
@@ -50,8 +62,10 @@
     const good0 = R.stones.find((s) => s.row === 0 && s.side === S().safe[0]);
     const step0 = D.stepAt(good0.x, good0.z, 0.016, { grounded: true, day: 1 });
     ok(step0 && step0.kind === 'safe' && S().progress === 1, 'row 0 safe stone advances progress to 1');
-    const opp1 = R.stones.find((s) => s.row === 1 && s.side !== S().safe[1]);
-    const leafW = R.toWorld(opp1.lx * 1.4, (good0.lz + opp1.lz) * 0.5);
+    const s0 = S().safe[0], s1 = S().safe[1];
+    const bridgeMidX = (D.TRAPPER.STONE_XS[s0] + D.TRAPPER.STONE_XS[s1]) * 0.5;
+    const leafLx = bridgeMidX >= 0 ? -1.20 : 1.20;
+    const leafW = R.toWorld(leafLx, (good0.lz + (D.TRAPPER.ROW_Z0 - D.TRAPPER.ROW_STEP)) * 0.5);
     const snap2 = D.stepAt(leafW.x, leafW.z, 0.016, { grounded: true, day: 1 });
     ok(snap2 && snap2.kind === 'snap' && snap2.reason === 'leaves' && R.sprungGroup.children.length === 2,
       'stepping off the stones into the leaves snaps a trap (' + (snap2 && snap2.reason) + ')');

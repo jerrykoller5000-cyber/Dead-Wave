@@ -1,0 +1,19 @@
+GRANT grokbot GB-260: starting one game-test command
+{
+ "note": "mm",
+ "vertices": 552,
+ "inGrip": 162,
+ "magAcross": 42,
+ "magDeep": 97.9,
+ "magBottomMm": -326.8,
+ "gripBottomMm": -180,
+ "gripTopMm": -6.5,
+ "marginToOutlineMm": 1.88,
+ "roomToSideMm": 18.99,
+ "tightest": {
+  "u": 0.44,
+  "z": 3.1,
+  "y": -97.6,
+  "x": -15
+ }
+}

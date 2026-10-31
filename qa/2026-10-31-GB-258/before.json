@@ -1,0 +1,190 @@
+[
+ {
+  "label": "dry: hanging, he is at the camp approach",
+  "view": "third",
+  "phase": "hanging",
+  "grabbable": false,
+  "reach": "locked",
+  "dist": 0.4,
+  "action": null,
+  "objPrompt": null,
+  "shown": false,
+  "offscreen": false,
+  "text": ""
+ },
+ {
+  "label": "dry: hanging, he is at the camp approach",
+  "view": "first",
+  "phase": "hanging",
+  "grabbable": false,
+  "reach": "locked",
+  "dist": 0.4,
+  "action": null,
+  "objPrompt": null,
+  "shown": false,
+  "offscreen": false,
+  "text": ""
+ },
+ {
+  "label": "dry: hanging, he stands under the bag",
+  "view": "third",
+  "phase": "hanging",
+  "grabbable": false,
+  "reach": "locked",
+  "dist": 120.31,
+  "action": null,
+  "objPrompt": null,
+  "shown": false,
+  "offscreen": false,
+  "text": ""
+ },
+ {
+  "label": "dry: hanging, he stands under the bag",
+  "view": "first",
+  "phase": "hanging",
+  "grabbable": false,
+  "reach": "locked",
+  "dist": 120.31,
+  "action": null,
+  "objPrompt": null,
+  "shown": false,
+  "offscreen": false,
+  "text": ""
+ },
+ {
+  "label": "dry: on the ground, he is 1.2 m off",
+  "view": "third",
+  "phase": "ground",
+  "grabbable": true,
+  "reach": "locked",
+  "dist": 120.3,
+  "action": null,
+  "objPrompt": "E — Grab the kit",
+  "shown": true,
+  "offscreen": false,
+  "text": "EGrab the kit"
+ },
+ {
+  "label": "dry: on the ground, he is 1.2 m off",
+  "view": "first",
+  "phase": "ground",
+  "grabbable": true,
+  "reach": "locked",
+  "dist": 120.3,
+  "action": null,
+  "objPrompt": "E — Grab the kit",
+  "shown": true,
+  "offscreen": false,
+  "text": "EGrab the kit"
+ },
+ {
+  "label": "dry: on the ground, he is at the camp approach",
+  "view": "third",
+  "phase": "ground",
+  "grabbable": false,
+  "reach": "locked",
+  "dist": 0.4,
+  "action": null,
+  "objPrompt": null,
+  "shown": false,
+  "offscreen": true,
+  "text": "EGrab the kit"
+ },
+ {
+  "label": "dry: on the ground, he is at the camp approach",
+  "view": "first",
+  "phase": "ground",
+  "grabbable": false,
+  "reach": "locked",
+  "dist": 0.4,
+  "action": null,
+  "objPrompt": null,
+  "shown": false,
+  "offscreen": true,
+  "text": "EGrab the kit"
+ },
+ {
+  "label": "river: floating, he is 1.2 m off",
+  "view": "third",
+  "phase": "floating",
+  "grabbable": true,
+  "reach": "locked",
+  "dist": 124.7,
+  "action": null,
+  "objPrompt": "E — Grab the kit",
+  "shown": true,
+  "offscreen": false,
+  "text": "EGrab the kit"
+ },
+ {
+  "label": "river: floating, he is 1.2 m off",
+  "view": "first",
+  "phase": "floating",
+  "grabbable": true,
+  "reach": "locked",
+  "dist": 124.65,
+  "action": null,
+  "objPrompt": "E — Grab the kit",
+  "shown": true,
+  "offscreen": false,
+  "text": "EGrab the kit"
+ },
+ {
+  "label": "river: snagged, he is 1.2 m off",
+  "view": "third",
+  "phase": "snagged",
+  "grabbable": true,
+  "reach": "locked",
+  "dist": 124.61,
+  "action": null,
+  "objPrompt": "E — Grab the kit",
+  "shown": true,
+  "offscreen": false,
+  "text": "EGrab the kit"
+ },
+ {
+  "label": "river: snagged, he is 1.2 m off",
+  "view": "first",
+  "phase": "snagged",
+  "grabbable": true,
+  "reach": "locked",
+  "dist": 124.61,
+  "action": null,
+  "objPrompt": "E — Grab the kit",
+  "shown": true,
+  "offscreen": false,
+  "text": "EGrab the kit"
+ },
+ {
+  "J17": {
+   "medkits": 3,
+   "one gun": {
+    "akimbo": false,
+    "medkitsBefore": 3,
+    "medkitsAfter": 2,
+    "penT": 0.7,
+    "penVisible": true,
+    "banner": "MEDPEN+1 MedPen (3/3) · H to use"
+   },
+   "akimbo": {
+    "akimbo": true,
+    "medkitsBefore": 2,
+    "medkitsAfter": 1,
+    "penT": 0.68,
+    "penVisible": true,
+    "banner": "AKIMBOTwo guns up — no grenades, no blade"
+   },
+   "one gun again": {
+    "akimbo": false,
+    "medkitsBefore": 1,
+    "medkitsAfter": 0,
+    "penT": 0.7,
+    "penVisible": true,
+    "banner": "SINGLEBack to one gun"
+   }
+  }
+ },
+ {
+  "pageErrors": []
+ }
+]

@@ -1,0 +1,85 @@
+Game-test request c4cf9f35-1c98-44f0-9b06-e044f0a3b62c queued at position 2. Waiting...
+GRANT grokbot GB-260: starting one game-test command
+ok   start --match --idle 12
+ok   eval {const T=TT; T.setHp(100000); T.clearZombies&&T.clearZombies(); T.grantAllWeapons(); T.addCash(99999); for (const w of ['pistol','uzi',
+     setup -> 
+ok   eval {const T=TT; try { T.armoryDbg.fit('pistol','ext',false); } catch (e) {}
+  if (T.isUnarmed && T.isUnarmed()) T.toggleHolster();
+  for (
+     pistol -> 
+ok   shot player --yaw 90 --out qa/2026-10-31-GB-260/after2/tp-pistol-side.png
+ok   shot player --yaw 135 --out qa/2026-10-31-GB-260/after2/tp-pistol-shoulder.png
+ok   shot weapon:pistol --view side --out qa/2026-10-31-GB-260/after2/model-pistol-side.png
+ok   shot weapon:pistol --view back --out qa/2026-10-31-GB-260/after2/model-pistol-back.png
+ok   eval {const T=TT; T.marineIdleDbg().reset(); T.setViewFirstDbg(true); await new Promise(r=>setTimeout(r,900)); T.marineIdleDbg().reset(); re
+     fp -> 
+ok   shot --live --out qa/2026-10-31-GB-260/after2/fp-pistol-hip.png
+ok   eval {const T=TT; T.setAmmoDbg(T.getCurrentWeapon(), 1); T.startReload(); await new Promise(r=>setTimeout(r,150)); if (T.reloadClipDbg) T.re
+     reload .42 -> 
+ok   shot --live --out qa/2026-10-31-GB-260/after2/fp-pistol-reload-42.png
+ok   eval {const T=TT; if (T.reloadClipDbg) T.reloadClipDbg.hold(0.62); await new Promise(r=>setTimeout(r,900)); return 1}
+     reload .62 -> 
+ok   shot --live --out qa/2026-10-31-GB-260/after2/fp-pistol-reload-62.png
+ok   eval {const T=TT; if (T.reloadClipDbg) T.reloadClipDbg.hold(null); await new Promise(r=>setTimeout(r,700)); T.setViewFirstDbg(false); return
+     off -> 
+ok   eval {const T=TT; try { T.armoryDbg.fit('pistol','ext',true); } catch (e) {}
+  if (T.isUnarmed && T.isUnarmed()) T.toggleHolster();
+  for (l
+     pistol-ext -> 
+ok   shot player --yaw 90 --out qa/2026-10-31-GB-260/after2/tp-pistol-ext-side.png
+ok   shot player --yaw 135 --out qa/2026-10-31-GB-260/after2/tp-pistol-ext-shoulder.png
+ok   shot weapon:pistol --view side --out qa/2026-10-31-GB-260/after2/model-pistol-ext-side.png
+ok   shot weapon:pistol --view back --out qa/2026-10-31-GB-260/after2/model-pistol-ext-back.png
+ok   eval {const T=TT; T.marineIdleDbg().reset(); T.setViewFirstDbg(true); await new Promise(r=>setTimeout(r,900)); T.marineIdleDbg().reset(); re
+     fp -> 
+ok   shot --live --out qa/2026-10-31-GB-260/after2/fp-pistol-ext-hip.png
+ok   eval {const T=TT; T.setAmmoDbg(T.getCurrentWeapon(), 1); T.startReload(); await new Promise(r=>setTimeout(r,150)); if (T.reloadClipDbg) T.re
+     reload .42 -> 
+ok   shot --live --out qa/2026-10-31-GB-260/after2/fp-pistol-ext-reload-42.png
+ok   eval {const T=TT; if (T.reloadClipDbg) T.reloadClipDbg.hold(0.62); await new Promise(r=>setTimeout(r,900)); return 1}
+     reload .62 -> 
+ok   shot --live --out qa/2026-10-31-GB-260/after2/fp-pistol-ext-reload-62.png
+ok   eval {const T=TT; if (T.reloadClipDbg) T.reloadClipDbg.hold(null); await new Promise(r=>setTimeout(r,700)); T.setViewFirstDbg(false); return
+     off -> 
+ok   eval {const T=TT; try { T.armoryDbg.fit('m4','ext',false); } catch (e) {}
+  if (T.isUnarmed && T.isUnarmed()) T.toggleHolster();
+  for (let 
+     m4 -> 
+ok   shot player --yaw 90 --out qa/2026-10-31-GB-260/after2/tp-m4-side.png
+ok   shot player --yaw 135 --out qa/2026-10-31-GB-260/after2/tp-m4-shoulder.png
+ok   shot weapon:m4 --view side --out qa/2026-10-31-GB-260/after2/model-m4-side.png
+ok   shot weapon:m4 --view back --out qa/2026-10-31-GB-260/after2/model-m4-back.png
+ok   eval {const T=TT; T.marineIdleDbg().reset(); T.setViewFirstDbg(true); await new Promise(r=>setTimeout(r,900)); T.marineIdleDbg().reset(); re
+     fp -> 
+ok   shot --live --out qa/2026-10-31-GB-260/after2/fp-m4-hip.png
+ok   eval {const T=TT; T.setAmmoDbg(T.getCurrentWeapon(), 1); T.startReload(); await new Promise(r=>setTimeout(r,150)); if (T.reloadClipDbg) T.re
+     reload .42 -> 
+ok   shot --live --out qa/2026-10-31-GB-260/after2/fp-m4-reload-42.png
+ok   eval {const T=TT; if (T.reloadClipDbg) T.reloadClipDbg.hold(0.62); await new Promise(r=>setTimeout(r,900)); return 1}
+     reload .62 -> 
+ok   shot --live --out qa/2026-10-31-GB-260/after2/fp-m4-reload-62.png
+ok   eval {const T=TT; if (T.reloadClipDbg) T.reloadClipDbg.hold(null); await new Promise(r=>setTimeout(r,700)); T.setViewFirstDbg(false); return
+     off -> 
+ok   eval {const T=TT; try { T.armoryDbg.fit('m4','ext',true); } catch (e) {}
+  if (T.isUnarmed && T.isUnarmed()) T.toggleHolster();
+  for (let i
+     m4-ext -> 
+ok   shot player --yaw 90 --out qa/2026-10-31-GB-260/after2/tp-m4-ext-side.png
+ok   shot player --yaw 135 --out qa/2026-10-31-GB-260/after2/tp-m4-ext-shoulder.png
+ok   shot weapon:m4 --view side --out qa/2026-10-31-GB-260/after2/model-m4-ext-side.png
+ok   shot weapon:m4 --view back --out qa/2026-10-31-GB-260/after2/model-m4-ext-back.png
+ok   eval {const T=TT; T.marineIdleDbg().reset(); T.setViewFirstDbg(true); await new Promise(r=>setTimeout(r,900)); T.marineIdleDbg().reset(); re
+     fp -> 
+ok   shot --live --out qa/2026-10-31-GB-260/after2/fp-m4-ext-hip.png
+ok   eval {const T=TT; T.setAmmoDbg(T.getCurrentWeapon(), 1); T.startReload(); await new Promise(r=>setTimeout(r,150)); if (T.reloadClipDbg) T.re
+     reload .42 -> 
+ok   shot --live --out qa/2026-10-31-GB-260/after2/fp-m4-ext-reload-42.png
+ok   eval {const T=TT; if (T.reloadClipDbg) T.reloadClipDbg.hold(0.62); await new Promise(r=>setTimeout(r,900)); return 1}
+     reload .62 -> 
+ok   shot --live --out qa/2026-10-31-GB-260/after2/fp-m4-ext-reload-62.png
+ok   eval {const T=TT; if (T.reloadClipDbg) T.reloadClipDbg.hold(null); await new Promise(r=>setTimeout(r,700)); T.setViewFirstDbg(false); return
+     off -> 
+ok   eval {const T=TT; T.setViewFirstDbg(false); return 1}
+      -> 
+ok   stop
+DONE after2

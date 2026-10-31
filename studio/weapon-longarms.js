@@ -134,15 +134,19 @@ export function makeM4Model(ctx) {
   K.box(0.016, 0.022, 0.032, gunDark, 0.052, 0.02, 0.505);
   K.lathe([[0, 0.468], [0.015, 0.468], [0.015, 0.532], [0.019, 0.542], [0.019, 0.56], [0.015, 0.561], [0, 0.561]], gunDark, { x: 0.066, y: 0.02, seg: 12 });
   K.disc(0.014, gaugeFace, 0.066, 0.02, 0.5615, 0);
+  // GB-260 (J7's second half: each magazine fills its magwell): docs/weapons-sizes.md measured this body 58 mm across
+  // in a 70 mm well, 0.83 of it, where a real AR magazine fills about 0.96 of its well (25 mm body in a 26 mm well). The
+  // body is 64 mm now, ribs to 68 (1 mm inside the well), floorplate 72 (proud of it, as a real floorplate is). The
+  // curve, the rake, the feed top and the insertion axis are untouched; the well is Cursor's index.html and is not.
   // Magazine: a polymer mag with its curve, the grip ribs, a floorplate.
   const mag = K.group(0, -0.16, 0.05);
   K.slab([[-0.046, 0.108], ...profileCurve([-0.046, 0.03], [-0.04, -0.05], [-0.01, -0.104], 5), ...profileCurve([0.086, -0.096], [0.054, -0.04], [0.046, 0.03], 5), [0.046, 0.108]],   /* GB-233 r4: a slight STANAG curve */
-    0.058, magPoly, { bevel: 0.006, parent: mag });
+    0.064, magPoly, { bevel: 0.006, parent: mag });
   for (const sx of [-1, 1]) for (const z of [-0.027, 0, 0.027]) {
-    K.slab(gunBand([[z, 0.053], [z + 0.004, -0.012], [z + 0.012, -0.07], [z + 0.019, -0.095]], 0.003), 0.003, gunDark, { x: sx * 0.0295, bevel: 0, parent: mag });   // GB-189: no 1 mm bevel on a 3 mm rib
+    K.slab(gunBand([[z, 0.053], [z + 0.004, -0.012], [z + 0.012, -0.07], [z + 0.019, -0.095]], 0.003), 0.003, gunDark, { x: sx * 0.0325, bevel: 0, parent: mag });   // GB-189: no 1 mm bevel on a 3 mm rib; GB-260: on the wider body
   }
-  for (const y of [-0.018, -0.049, -0.08]) K.box(0.061, 0.004, 0.082, magPoly, 0, y, 0.011 - y * 0.15, 0, 0, 0, mag, 0.001);
-  K.slab([[-0.016, -0.1], [0.092, -0.092], [0.094, -0.11], [-0.016, -0.118]], 0.066, magPoly, { bevel: 0.005, parent: mag });
+  for (const y of [-0.018, -0.049, -0.08]) K.box(0.067, 0.004, 0.082, magPoly, 0, y, 0.011 - y * 0.15, 0, 0, 0, mag, 0.001);
+  K.slab([[-0.016, -0.1], [0.092, -0.092], [0.094, -0.11], [-0.016, -0.118]], 0.072, magPoly, { bevel: 0.005, parent: mag });   // GB-260: 72 mm, proud of the 64 mm body
   gun.userData.mag = mag;
   gun.userData.baseMagPos = mag.position.clone();
   gun.userData.baseMagRot = mag.rotation.clone();

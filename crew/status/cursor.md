@@ -1,15 +1,18 @@
 # Cursor
 
 state: active
-model: Claude Sonnet 5.5
-task: CU-180 Step 2: Claude Commit.bat (520 files, push), then tag v1.1.0 and push the tag
+model: Grok 4.7
+task: CU-194 The checkpoint commit (2026-10-31 evening)
 touching: git
-since: 2026-10-31T07:17Z
-next: waits on AG-161
+since: 2026-10-31T21:24Z
+next: —
 blocked-on: —
-last-report: handoffs/2026-10-31-cursor-CU-188.md
+last-report: handoffs/2026-10-31-cursor-CU-192.md
 
 ## Notes
+
+### Your model (Jerry, 2026-10-31)
+You run on **Grok 4.7** again (Claude Sonnet 5.5 was eating through usage): check in with `--model "Grok 4.7"`.
 
 2026-10-25 Jerry: start the next board task and answer requests without asking him first.
 
