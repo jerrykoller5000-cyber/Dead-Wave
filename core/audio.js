@@ -3771,6 +3771,27 @@ export const AudioSys = (() => {
     playNoise({ dur: 0.18, vol: 0.06, filterFreq: 3800, filterType: 'highpass', attack: 0.01 });
     playNoise({ dur: 0.12, vol: 0.04, filterFreq: 2600, filterType: 'bandpass', when: 0.14, attack: 0.01 });
   }
+  // GP-20005: a woods warning, synthesized (no pack). snap is a branch, brush/rustle the undergrowth, leaves a dry footfall.
+  let woodsWarnCd = 0;
+  function woodsWarning(kind, volume = 1, pan = 0) {
+    const c = ensure();
+    if (!c || muted) return;
+    const vol = Math.max(0, Math.min(1, +volume || 0));
+    if (vol < 0.02) return;
+    if (c.currentTime < woodsWarnCd) return;
+    woodsWarnCd = c.currentTime + 0.12;
+    const p = Math.max(-1, Math.min(1, +pan || 0));
+    if (kind === 'snap') {
+      playNoise({ dur: 0.04, vol: 0.12 * vol, filterFreq: 2400, filterType: 'bandpass', attack: 0.002, pan: p });
+      playTone({ freq: 210, type: 'triangle', dur: 0.05, vol: 0.045 * vol, slideTo: 90, pan: p });
+    } else if (kind === 'leaves') {
+      playNoise({ dur: 0.14, vol: 0.07 * vol, filterFreq: 4600, filterType: 'highpass', attack: 0.006, pan: p });
+      playNoise({ dur: 0.09, vol: 0.035 * vol, filterFreq: 3000, filterType: 'bandpass', when: 0.05, pan: p });
+    } else {
+      playNoise({ dur: 0.26, vol: 0.08 * vol, filterFreq: 1500, filterType: 'bandpass', attack: 0.02, pan: p });
+      playNoise({ dur: 0.16, vol: 0.045 * vol, filterFreq: 800, filterType: 'lowpass', when: 0.04, pan: p });
+    }
+  }
   const api = {
     setTraining,trainingCue:(kind)=>{if(trainingMode&&!muted){if(trainingFacility?.cue(kind))return;if(TRAIN_TAKE[kind]&&tk(TRAIN_TAKE[kind],kind==='step'?0.85:1))return;trainingSound?.cue(kind);}},   // CL-161: Jerry's takes first
     trainingState:()=>({enabled:trainingMode,...trainingSound?.state(),facility:trainingFacility?.state()}),
@@ -3785,7 +3806,7 @@ export const AudioSys = (() => {
     emptyClick: W(emptyClick), reloadStart: W(reloadStart), reloadDone: W(reloadDone), slideRack: W(slideRack),
     shotgunPump: W(shotgunPump), revolverCylinder: W(revolverCylinder), revolverSpin: W(revolverSpin),
     launcherDrum: W(launcherDrum), launcherShellInsert: W(launcherShellInsert),
-    jump, nvgClick, coin, leafHit: W(leafHit), treeFell, treeThud, crownFire, trunkBump,
+    jump, nvgClick, coin, leafHit: W(leafHit), treeFell, treeThud, crownFire, trunkBump, woodsWarning,
     win, resetBlip, noteSpin, startMusic, stopMusic,
     place, invalid, turretShot: W(turretShot, [0.7, 0.88]), zombieHit: W(zombieHit), zombieDeath: W(zombieDeath),
     groan, headshot: W(headshot), dodgeRoll, streak, footstep, heartbeat,

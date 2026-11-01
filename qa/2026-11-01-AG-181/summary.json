@@ -1,0 +1,515 @@
+{
+  "timestamp": "2026-11-01T08:15:06.617Z",
+  "task": "AG-181",
+  "agent": "Antigravity",
+  "target": "GP-20005 Woods Warnings Listen-Check & Sound Principles Review",
+  "checks": {
+    "audio": {
+      "hasWoodsWarning": true,
+      "kindsTested": {
+        "snap": "ok",
+        "brush": "ok",
+        "leaves": "ok",
+        "unknown": "ok"
+      },
+      "quietHandled": true,
+      "mix": {
+        "ctx": "running",
+        "weap": 1.350000023841858,
+        "fx": 0.800000011920929,
+        "amb": 0.5,
+        "musicDuck": 0.9999999999848526,
+        "rain": null
+      }
+    },
+    "brushRun": {
+      "tree": {
+        "x": -163.38583964325878,
+        "z": -53.88378422156345
+      },
+      "offset": 2,
+      "coverAtSpawn": "brush",
+      "playerPos": {
+        "x": -149.38583964325878,
+        "y": -1.416131294378655,
+        "z": -53.88378422156345
+      },
+      "zombiePos": {
+        "x": -151.75898370567242,
+        "y": -1.2091504147576728,
+        "z": -53.16138742220666
+      },
+      "initialDistance": 12,
+      "finalDistance": 2.480659161733041,
+      "initialState": {
+        "night": true,
+        "nvg": false,
+        "flashlight": false,
+        "gameStarted": true,
+        "paused": false,
+        "training": false,
+        "seen": false,
+        "cover": "brush"
+      },
+      "finalState": {
+        "night": true,
+        "nvg": false,
+        "flashlight": false,
+        "gameStarted": true,
+        "paused": false,
+        "training": false,
+        "seen": false,
+        "cover": "branch"
+      },
+      "events": [
+        {
+          "time": 5.26,
+          "kind": "brush",
+          "type": "shambler",
+          "x": -161.34,
+          "y": -1.3,
+          "z": -53.89,
+          "distance": 12,
+          "volume": 0.373,
+          "pan": 0.85,
+          "night": true
+        },
+        {
+          "time": 7.23,
+          "kind": "brush",
+          "type": "shambler",
+          "x": -154.41,
+          "y": -1.14,
+          "z": -53.16,
+          "distance": 5.14,
+          "volume": 0.707,
+          "pan": 0.85,
+          "night": true
+        }
+      ],
+      "errors": []
+    },
+    "branchRun": {
+      "tree": {
+        "x": -163.38583964325878,
+        "z": -53.88378422156345
+      },
+      "offset": 0.8,
+      "coverAtSpawn": "branch",
+      "playerPos": {
+        "x": -150.58583964325877,
+        "y": -1.3736178125338685,
+        "z": -53.88378422156345
+      },
+      "zombiePos": {
+        "x": -155.0601899291822,
+        "y": -1.1153207635132865,
+        "z": -53.17304236399728
+      },
+      "initialDistance": 12,
+      "finalDistance": 4.530448594702266,
+      "initialState": {
+        "night": true,
+        "nvg": false,
+        "flashlight": false,
+        "gameStarted": true,
+        "paused": false,
+        "training": false,
+        "seen": false,
+        "cover": "branch"
+      },
+      "finalState": {
+        "night": false,
+        "nvg": false,
+        "flashlight": false,
+        "gameStarted": true,
+        "paused": false,
+        "training": false,
+        "seen": true,
+        "cover": "brush"
+      },
+      "events": [
+        {
+          "time": 10.11,
+          "kind": "branch",
+          "type": "shambler",
+          "x": -162.58,
+          "y": -1.44,
+          "z": -53.93,
+          "distance": 12,
+          "volume": 0.371,
+          "pan": 0.85,
+          "night": true
+        },
+        {
+          "time": 11.55,
+          "kind": "leaves",
+          "type": "shambler",
+          "x": -159.51,
+          "y": -1.12,
+          "z": -53.32,
+          "distance": 8.99,
+          "volume": 0.509,
+          "pan": 0.85,
+          "night": true
+        }
+      ],
+      "errors": []
+    },
+    "leavesRun": {
+      "tree": {
+        "x": -163.38583964325878,
+        "z": -53.88378422156345
+      },
+      "offset": 4,
+      "coverAtSpawn": "leaves",
+      "playerPos": {
+        "x": -147.38583964325878,
+        "y": -1.5515858957028845,
+        "z": -53.88378422156345
+      },
+      "zombiePos": {
+        "x": -150.19184359892054,
+        "y": -1.4638459787018951,
+        "z": -54.24785783189332
+      },
+      "initialDistance": 12,
+      "finalDistance": 2.829524305060499,
+      "initialState": {
+        "night": true,
+        "nvg": false,
+        "flashlight": false,
+        "gameStarted": true,
+        "paused": false,
+        "training": false,
+        "seen": false,
+        "cover": "leaves"
+      },
+      "finalState": {
+        "night": true,
+        "nvg": false,
+        "flashlight": false,
+        "gameStarted": true,
+        "paused": false,
+        "training": false,
+        "seen": false,
+        "cover": "brush"
+      },
+      "events": [
+        {
+          "time": 16.68,
+          "kind": "leaves",
+          "type": "shambler",
+          "x": -159.34,
+          "y": -1.15,
+          "z": -53.9,
+          "distance": 12,
+          "volume": 0.373,
+          "pan": 0.85,
+          "night": true
+        },
+        {
+          "time": 17.94,
+          "kind": "brush",
+          "type": "shambler",
+          "x": -155.04,
+          "y": -1.09,
+          "z": -53,
+          "distance": 7.77,
+          "volume": 0.57,
+          "pan": 0.85,
+          "night": true
+        }
+      ],
+      "errors": []
+    },
+    "openGroundRun": {
+      "openPos": {
+        "x": -40,
+        "z": -20
+      },
+      "playerPos": {
+        "x": -28,
+        "y": -3.378453016281128,
+        "z": -20
+      },
+      "zombiePos": {
+        "x": -31.095620047636203,
+        "y": -3.4698785133037893,
+        "z": -19.398391702804794
+      },
+      "initialDistance": 12,
+      "finalDistance": 3.153537065357134,
+      "eventCount": 0,
+      "events": [],
+      "errors": []
+    },
+    "packRun": {
+      "tree": {
+        "x": -163.38583964325878,
+        "z": -53.88378422156345
+      },
+      "playerPos": {
+        "x": -149.38583964325878,
+        "y": -1.416131294378655,
+        "z": -53.88378422156345
+      },
+      "zombiePositions": [
+        {
+          "x": -158.23087831968965,
+          "y": -1.0407704634690103,
+          "z": -53.13672133787929
+        },
+        {
+          "x": -156.75095529384868,
+          "y": -1.039117356693583,
+          "z": -53.12340574169762
+        },
+        {
+          "x": -155.9109785435692,
+          "y": -1.0680190545540342,
+          "z": -53.129810734838976
+        }
+      ],
+      "eventCount": 6,
+      "events": [
+        {
+          "time": 28.27,
+          "kind": "branch",
+          "type": "shambler",
+          "x": -161.88,
+          "y": -1.38,
+          "z": -54.89,
+          "distance": 12.54,
+          "volume": 0.349,
+          "pan": 0.85,
+          "night": true
+        },
+        {
+          "time": 28.58,
+          "kind": "brush",
+          "type": "shambler",
+          "x": -160.75,
+          "y": -1.19,
+          "z": -52.99,
+          "distance": 11.42,
+          "volume": 0.397,
+          "pan": 0.85,
+          "night": true
+        },
+        {
+          "time": 28.9,
+          "kind": "leaves",
+          "type": "shambler",
+          "x": -159.2,
+          "y": -1.17,
+          "z": -54.3,
+          "distance": 9.85,
+          "volume": 0.468,
+          "pan": 0.85,
+          "night": true
+        },
+        {
+          "time": 30.24,
+          "kind": "brush",
+          "type": "shambler",
+          "x": -159.91,
+          "y": -1.15,
+          "z": -53.45,
+          "distance": 10.55,
+          "volume": 0.436,
+          "pan": 0.85,
+          "night": true
+        },
+        {
+          "time": 30.59,
+          "kind": "leaves",
+          "type": "shambler",
+          "x": -157.16,
+          "y": -1.04,
+          "z": -53.21,
+          "distance": 7.82,
+          "volume": 0.565,
+          "pan": 0.85,
+          "night": true
+        },
+        {
+          "time": 31.21,
+          "kind": "leaves",
+          "type": "shambler",
+          "x": -157.12,
+          "y": -1.03,
+          "z": -53.12,
+          "distance": 7.8,
+          "volume": 0.566,
+          "pan": 0.85,
+          "night": true
+        }
+      ],
+      "intervals": [
+        0.31,
+        0.32,
+        1.34,
+        0.35,
+        0.62
+      ],
+      "minInterval": 0.31,
+      "errors": []
+    },
+    "night20Run": {
+      "tree": {
+        "x": -163.38583964325878,
+        "z": -53.88378422156345
+      },
+      "playerPos": {
+        "x": -149.38583964325878,
+        "y": -1.416131294378655,
+        "z": -53.88378422156345
+      },
+      "zombiePos": {
+        "x": -150.22059991026828,
+        "y": -1.3205129844984005,
+        "z": -53.60526079952819
+      },
+      "events": [
+        {
+          "time": 33.64,
+          "kind": "brush",
+          "type": "shambler",
+          "x": -161.34,
+          "y": -1.3,
+          "z": -53.83,
+          "distance": 12,
+          "volume": 0.374,
+          "pan": 0.85,
+          "night": true
+        },
+        {
+          "time": 35.25,
+          "kind": "brush",
+          "type": "shambler",
+          "x": -154.72,
+          "y": -1.13,
+          "z": -53.19,
+          "distance": 5.45,
+          "volume": 0.69,
+          "pan": 0.85,
+          "night": true
+        }
+      ],
+      "initialMix": {
+        "ctx": "running",
+        "weap": 1.350000023841858,
+        "fx": 0.800000011920929,
+        "amb": 0.5,
+        "musicDuck": 0.9999999999999994,
+        "rain": null
+      },
+      "finalMix": {
+        "ctx": "running",
+        "weap": 1.350000023841858,
+        "fx": 0.800000011920929,
+        "amb": 0.5,
+        "musicDuck": 0.9999999999999994,
+        "rain": null
+      },
+      "errors": []
+    }
+  },
+  "metrics": {
+    "renderer": {
+      "backend": "WebGPU",
+      "unmaskedRenderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "unmaskedVendor": "Google Inc. (NVIDIA)"
+    }
+  },
+  "captures": [
+    {
+      "id": "woods-approach-brush-night1",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-181\\woods-approach-brush-night1.png",
+      "cam": {
+        "fov": 52,
+        "x": -144.88583964325878,
+        "y": 0.9838687056213449,
+        "z": -48.88378422156345,
+        "tx": -151.75898370567242,
+        "ty": -0.20915041475767282,
+        "tz": -53.16138742220666
+      }
+    },
+    {
+      "id": "woods-approach-branch-night1",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-181\\woods-approach-branch-night1.png",
+      "cam": {
+        "fov": 50,
+        "x": -146.78583964325875,
+        "y": 0.8263821874661317,
+        "z": -58.38378422156345,
+        "tx": -155.0601899291822,
+        "ty": -0.11532076351328646,
+        "tz": -53.17304236399728
+      }
+    },
+    {
+      "id": "woods-approach-leaves-night1",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-181\\woods-approach-leaves-night1.png",
+      "cam": {
+        "fov": 52,
+        "x": -143.1858396432588,
+        "y": 0.7484141042971153,
+        "z": -49.083784221563455,
+        "tx": -150.19184359892054,
+        "ty": -0.46384597870189515,
+        "tz": -54.24785783189332
+      }
+    },
+    {
+      "id": "open-ground-approach-silent",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-181\\open-ground-approach-silent.png",
+      "cam": {
+        "fov": 54,
+        "x": -24,
+        "y": -1.1784530162811278,
+        "z": -14.5,
+        "tx": -31.095620047636203,
+        "ty": -2.4698785133037893,
+        "tz": -19.398391702804794
+      }
+    },
+    {
+      "id": "woods-pack-approach-night1",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-181\\woods-pack-approach-night1.png",
+      "cam": {
+        "fov": 54,
+        "x": -144.88583964325878,
+        "y": 1.083868705621345,
+        "z": -47.88378422156345,
+        "tx": -161.38583964325878,
+        "ty": -0.616131294378655,
+        "tz": -53.88378422156345
+      }
+    },
+    {
+      "id": "woods-approach-night20-mix",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-181\\woods-approach-night20-mix.png",
+      "cam": {
+        "fov": 52,
+        "x": -145.1858396432588,
+        "y": 0.9838687056213449,
+        "z": -48.68378422156345,
+        "tx": -150.22059991026828,
+        "ty": -0.3205129844984005,
+        "tz": -53.60526079952819
+      }
+    }
+  ],
+  "scores": {
+    "clarity": 5,
+    "placement": 5,
+    "character": 5,
+    "mix": 5,
+    "variety": 5,
+    "timing": 5,
+    "overall": 5
+  }
+}

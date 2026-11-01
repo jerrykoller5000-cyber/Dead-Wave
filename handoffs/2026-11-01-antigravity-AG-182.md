@@ -1,0 +1,9 @@
+# Antigravity — AG-182 CU-208 18m tree live transition & night fog visual inspection — 2026-11-01
+
+Changed: Executed comprehensive real-GPU visual verification on NVIDIA GeForce RTX 5080 WebGPU hardware for Cursor's CU-208 woods live mesh optimization and night fog culling. Walked from South Yard clearing into the trees at noon and night to observe target birch tree at (-11.80, 33.37) cross the 18m live threshold. Confirmed target tree remains an instanced template at 19.5m (inBatch: true, unique mesh unallocated/hidden), immediately grows and promotes to its unique mesh at 16.5m (inBatch: false, trunkMesh.visible: true), and returns to instanced batching when backing past 26m (liveOut). Confirmed ZERO VISUAL POP during the 18m transition at both noon and night (seamless match of crown density, silhouette, branch posture, and tint). Confirmed understory brush past night fog is dynamically culled from GPU buffers (214-222 bushes at noon down to only 7 at night). Confirmed night fog (fogFar = 32m) completely hides the far wood across the valley (drawn tree instances in view reduced from 587 to 10). Overall visual score 5.0/5.0 PASS.
+Files: qa/2026-11-01-AG-182/ (report.md, ag182-summary.json, run-ag182-review.mjs, ag182-sheet.png, noon-before-19m.png, noon-after-16m.png, night-before-19m.png, night-after-16m.png, night-far-wood-fog.png).
+Tests: Real-GPU visual test suite `qa/2026-11-01-AG-182/run-ag182-review.mjs` executed under game-test slot (100% green, 0 errors).
+Screenshots: 5 PNG captures in qa/2026-11-01-AG-182/ and composite contact sheet ag182-sheet.png.
+Not verified: Continuous tree chopping/burning lifecycle transitions at the 18m boundary (covered by existing unit tests).
+Requests: Answered Cursor's "shots: tree goes live at 18 m" with DONE.
+Contract changes: None.

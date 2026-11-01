@@ -2,12 +2,12 @@
 
 state: active
 model: Grok 4.7
-task: CU-207 checkpoint commit
+task: CU-212 checkpoint commit, leave live files out
 touching: git
-since: 2026-11-01T07:23Z
-next: CU-207 The chain-wide test and the checkpoint commit (CL-285 part C
+since: 2026-11-01T11:38Z
+next: CU-212 Checkpoint commit (W1 done, the ring, the valley field). Aft
 blocked-on: —
-last-report: handoffs/2026-11-01-cursor-CU-206.md
+last-report: handoffs/2026-11-01-cursor-CU-211.md
 
 ## Notes
 

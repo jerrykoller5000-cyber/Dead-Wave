@@ -4,10 +4,10 @@ state: idle
 model: Gemini 4 Argon (High)
 task: —
 touching: —
-since: 2026-11-01T07:18Z
+since: 2026-11-01T11:14Z
 next: —
 blocked-on: —
-last-report: handoffs/2026-11-01-antigravity-AG-180.md
+last-report: handoffs/2026-11-01-antigravity-AG-185.md
 
 ## Notes
 
@@ -36,18 +36,9 @@ a real GPU the way you can.
 - Serve the game with `npm run serve` and open http://127.0.0.1:8971/index.html?debug=1.
   With ?debug=1, window.TT is available in the DevTools console.
 
-### Status (2026-10-29)
-- **AG-86..AG-150**: DONE (see `handoffs/`). Completed GPU world/trail/cave sweeps (`AG-146`, `AG-148`, `AG-149`), Claude's inspector principle shots (`AG-150`), and `GP-19970` visual reviews (`qa/2026-10-29-gp-19970-scores/report.md`).
-- **AG-151**: DONE (`handoffs/2026-10-29-antigravity-AG-151.md`, `docs/perf/2026-10-29-night20-owners.md`, `qa/2026-10-29-AG-151/probe-b.json`). Measured Night-20 draws and triangles by owner on `82d75118` vs `HEAD` (`landmarks` `+16` draws / `+6,250` tris, `houses` `+5` draws / `+3,828` tris, `zombies` `+0` draws / `+1,636` tris).
-- **AG-152**: DONE (`handoffs/2026-10-29-antigravity-AG-152.md`). Captured and verified all 24 inspector after-shots + `sheet.jpg` (`review/principles/claude/after/`) and Pike's hiding spot match shots (`review/sweep/pike-hide/`) on the RTX 5080.
-- **AG-153**: DONE (`handoffs/2026-10-29-antigravity-AG-153.md`). Merged HQ south-wall duty board (3 draws -> 1) and radio set (2 draws -> 1) into static vertex-colored meshes; verified standard & close views.
-- **AG-155**: DONE (`handoffs/2026-10-29-antigravity-AG-155.md`, `qa/2026-10-29-AG-155/report.md`). Evaluated ChatGPT's GP-19981 Brandt beard after11; scored 4.5/5 gameplay, flagged 3.5/5 sub-4 profile defect (72px floating sliver and 19px daylight gap).
-- **AG-156**: DONE (`handoffs/2026-10-29-antigravity-AG-156.md`, `qa/2026-10-29-AG-156/report.md`). Rescored ChatGPT's GP-19981 Brandt beard after13; verified profile defect 100% resolved (0px sliver/gap, solid lip return); all categories score >= 4.0/5 (overall 4.5/5 PASS).
-- **GP-19970 Reviews**: DONE (`qa/2026-10-29-gp-19970-scores/report.md`). Evaluated and answered all 35 requests from ChatGPT, including today's final 9 (Colossus mass rescore, Screamer howl structure, acid/web impacts, marine waist helper, live Drowned grab, live Brute smash, live Military bash, final 14-zombie atlas rescore, and final 3 generic attack/death surveys). All 9 passed D-89 standards.
-- **AG-174**: DONE (`handoffs/2026-11-01-antigravity-AG-174.md`, `qa/2026-11-01-AG-174/report.md`, `ag174-sheet.png`). GPU inspection of fuel depot shed, duty board key, water tank, armory bench, roof siren; filed 3 defects (all fixed by Cursor in CU-201).
-- **AG-175**: DONE (`handoffs/2026-11-01-antigravity-AG-175.md`, `qa/2026-11-01-AG-175/report.md`, `ag175-sheet.png`). Trapper fence gate, combination padlock, search log reading, culling fix (`userData.noCull = true`), t317 22/0.
-- **AG-176**: DONE (`handoffs/2026-11-01-antigravity-AG-176.md`, `qa/2026-11-01-AG-176/report.md`). Answered ChatGPT's GP-20000 (foliage bundle pilot visual A/B) and Cursor's CU-203 (GPU forest step 1 template instances, distinct species matrices, 46m/52m LOD swaps); both scored 5.0/5.0 PASS.
-- **AG-177**: DONE (`handoffs/2026-11-01-antigravity-AG-177.md`, `qa/2026-11-01-AG-177/report.md`). Inspected ChatGPT's GP-20002; confirmed radio/antenna eye-hidden looking straight down while plate carrier remains; radio visible in third person and shadow silhouette projects cleanly.
-- **AG-178**: DONE (`handoffs/2026-11-01-antigravity-AG-178.md`, `qa/2026-11-01-AG-178/report.md`, `cu204-sheet.png`). Nearest template instanced forest review on RTX 5080 WebGPU; verified 405/430 meshes deferred, zero species matrix bleed, seamless 46m/52m live growth transitions.
-- **AG-179**: DONE (`handoffs/2026-11-01-antigravity-AG-179.md`, `qa/2026-11-01-AG-179/report.md`, `ag179-sheet1-camps.png`, `ag179-sheet2-woods.png`, `ag179-sheet3-skyline.png`). Answered 3 requests: CU-205 4 camps moved (approaches, yard/roof perspectives, hikers kit tree 5m up over dry ground), CU-206 dense woods mask (2,132 trees, 3 understory draws off trails, yard 1/12 open, roof 2/12 open), GP-20003 skyline pulls (trapper chimney, fuel column thick/thinned, hikers circling crows, mast red beacon through night fog, 4 lights). All scored 5.0/5.0 PASS.
+### Status (2026-11-01)
+- **AG-174..AG-181**: DONE (see `handoffs/`). GPU inspections of fuel depot, Trapper fence gate, foliage bundles, radio/antenna, instanced forest, 4 camps skyline pulls, trail chains & supported kit tree, dark woods warning audio.
+- **AG-183**: DONE (`handoffs/2026-11-01-antigravity-AG-183.md`, `qa/2026-11-01-AG-183/report.md`, `ag183-sheet.png`). 4-light visual pass on GP-20006 HQ thicket barrier ring; verified zero floating meshes, 4 draws, closed span pushout, and watercourse cut.
+- **AG-184**: DONE (`handoffs/2026-11-01-antigravity-AG-184.md`, `qa/2026-11-01-AG-184/report.md`, `ag184-sheet.png`). Real-GPU visual inspection on RTX 5080 WebGPU for Cursor's CU-209 drop-in clearing at (42, -20) and two trail bends. 6 eye-height captures; 5.0/5 PASS.
+- **AG-185**: DONE (`handoffs/2026-11-01-antigravity-AG-185.md`, `qa/2026-11-01-AG-185/report.md`, `ag185-sheet.png`). Real-GPU visual inspection of CU-210 HQ thicket ring default-on state. Verified ring is ON by default without ?walls=1; Trail-11 gap reads cleanly as a way through from yard and exterior; closed perimeter reads unmistakably as a 2.5m wall; collision & valley nav field route verified; 6-panel contact sheet; 5.0/5 PASS.
 - **Next**: Queue empty; 0 requests waiting; ready for next visual review or GPU sweep.

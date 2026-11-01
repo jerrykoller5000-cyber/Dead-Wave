@@ -1,0 +1,365 @@
+{
+  "timestamp": "2026-11-01T10:17:05.233Z",
+  "wallBands": {
+    "on": true,
+    "draws": 4,
+    "bands": [
+      {
+        "kind": "hq-thicket",
+        "width": 4,
+        "radius": 60,
+        "gaps": [
+          {
+            "id": "trail-0",
+            "at": 39.64412407752877,
+            "width": 10.563109191483449
+          },
+          {
+            "id": "trail-1",
+            "at": 140.78188170978785,
+            "width": 8.902003407261134
+          },
+          {
+            "id": "trail-2",
+            "at": 227.05717386052265,
+            "width": 17.51493402252862
+          },
+          {
+            "id": "trail-3",
+            "at": 313.32577679344297,
+            "width": 31.977474177799536
+          },
+          {
+            "id": "trail-4",
+            "at": 340.14049942901454,
+            "width": 8.745650236226425
+          },
+          {
+            "id": "river-0",
+            "at": 108.49744389851219,
+            "width": 25.49951704994931
+          }
+        ],
+        "solids": 343
+      }
+    ],
+    "gapDetails": [
+      {
+        "id": "trail-0",
+        "at": 39.64,
+        "width": 10.56,
+        "thetaDeg": 37.9,
+        "x": 47.37,
+        "z": 36.82,
+        "h": -0.34
+      },
+      {
+        "id": "trail-1",
+        "at": 140.78,
+        "width": 8.9,
+        "thetaDeg": 134.4,
+        "x": -42.01,
+        "z": 42.84,
+        "h": 0.74
+      },
+      {
+        "id": "trail-2",
+        "at": 227.06,
+        "width": 17.51,
+        "thetaDeg": 216.8,
+        "x": -48.03,
+        "z": -35.96,
+        "h": -4.8
+      },
+      {
+        "id": "trail-3",
+        "at": 313.33,
+        "width": 31.98,
+        "thetaDeg": 299.2,
+        "x": 29.28,
+        "z": -52.37,
+        "h": -2.82
+      },
+      {
+        "id": "trail-4",
+        "at": 340.14,
+        "width": 8.75,
+        "thetaDeg": 324.8,
+        "x": 49.03,
+        "z": -34.58,
+        "h": -3.63
+      },
+      {
+        "id": "river-0",
+        "at": 108.5,
+        "width": 25.5,
+        "thetaDeg": 103.6,
+        "x": -14.12,
+        "z": 58.32,
+        "h": 0.42
+      }
+    ],
+    "collision": {
+      "closedInsideBlocked": true,
+      "resolveClosed": {
+        "x": -62.35,
+        "z": 0
+      },
+      "trailGapId": "trail-0",
+      "trailBlocked": false,
+      "resolveTrail": {
+        "x": 47.37,
+        "z": 36.82
+      }
+    }
+  },
+  "gaps": [
+    {
+      "id": "trail-0",
+      "at": 39.64,
+      "width": 10.56,
+      "thetaDeg": 37.9,
+      "x": 47.37,
+      "z": 36.82,
+      "h": -0.34
+    },
+    {
+      "id": "trail-1",
+      "at": 140.78,
+      "width": 8.9,
+      "thetaDeg": 134.4,
+      "x": -42.01,
+      "z": 42.84,
+      "h": 0.74
+    },
+    {
+      "id": "trail-2",
+      "at": 227.06,
+      "width": 17.51,
+      "thetaDeg": 216.8,
+      "x": -48.03,
+      "z": -35.96,
+      "h": -4.8
+    },
+    {
+      "id": "trail-3",
+      "at": 313.33,
+      "width": 31.98,
+      "thetaDeg": 299.2,
+      "x": 29.28,
+      "z": -52.37,
+      "h": -2.82
+    },
+    {
+      "id": "trail-4",
+      "at": 340.14,
+      "width": 8.75,
+      "thetaDeg": 324.8,
+      "x": 49.03,
+      "z": -34.58,
+      "h": -3.63
+    },
+    {
+      "id": "river-0",
+      "at": 108.5,
+      "width": 25.5,
+      "thetaDeg": 103.6,
+      "x": -14.12,
+      "z": 58.32,
+      "h": 0.42
+    }
+  ],
+  "collisionChecks": {
+    "closedInsideBlocked": true,
+    "resolveClosed": {
+      "x": -62.35,
+      "z": 0
+    },
+    "trailGapId": "trail-0",
+    "trailBlocked": false,
+    "resolveTrail": {
+      "x": 47.37,
+      "z": 36.82
+    }
+  },
+  "captures": [
+    {
+      "name": "ring-closed-inside-noon",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-183\\ring-closed-inside-noon.png",
+      "state": {
+        "px": -52,
+        "py": -1.0659649848937989,
+        "pz": 0,
+        "tx": -60,
+        "ty": -2.02976279258728,
+        "tz": 0,
+        "fov": 40,
+        "worldTime": 0.5008366399999853,
+        "heightGround": -2.765964984893799,
+        "targetHeight": -2.02976279258728
+      }
+    },
+    {
+      "name": "ring-closed-inside-dusk",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-183\\ring-closed-inside-dusk.png",
+      "state": {
+        "px": -52,
+        "py": -1.0659649848937989,
+        "pz": 0,
+        "tx": -60,
+        "ty": -2.02976279258728,
+        "tz": 0,
+        "fov": 40,
+        "worldTime": 0.7408104799999712,
+        "heightGround": -2.765964984893799,
+        "targetHeight": -2.02976279258728
+      }
+    },
+    {
+      "name": "ring-closed-inside-overcast",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-183\\ring-closed-inside-overcast.png",
+      "state": {
+        "px": -52,
+        "py": -1.0659649848937989,
+        "pz": 0,
+        "tx": -60,
+        "ty": -2.02976279258728,
+        "tz": 0,
+        "fov": 40,
+        "worldTime": 0.5008305200000289,
+        "heightGround": -2.765964984893799,
+        "targetHeight": -2.02976279258728
+      }
+    },
+    {
+      "name": "ring-closed-inside-night",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-183\\ring-closed-inside-night.png",
+      "state": {
+        "px": -52,
+        "py": -1.0659649848937989,
+        "pz": 0,
+        "tx": -60,
+        "ty": -2.02976279258728,
+        "tz": 0,
+        "fov": 40,
+        "worldTime": 0.020848520000028625,
+        "heightGround": -2.765964984893799,
+        "targetHeight": -2.02976279258728
+      }
+    },
+    {
+      "name": "ring-closed-outside-noon",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-183\\ring-closed-outside-noon.png",
+      "state": {
+        "px": -68,
+        "py": -0.8496368408203125,
+        "pz": 0,
+        "tx": -60,
+        "ty": -2.02976279258728,
+        "tz": 0,
+        "fov": 40,
+        "worldTime": 0.5008009999999999,
+        "heightGround": -2.5496368408203125,
+        "targetHeight": -2.02976279258728
+      }
+    },
+    {
+      "name": "ring-closed-outside-dusk",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-183\\ring-closed-outside-dusk.png",
+      "state": {
+        "px": -68,
+        "py": -0.8496368408203125,
+        "pz": 0,
+        "tx": -60,
+        "ty": -2.02976279258728,
+        "tz": 0,
+        "fov": 40,
+        "worldTime": 0.7408335199999572,
+        "heightGround": -2.5496368408203125,
+        "targetHeight": -2.02976279258728
+      }
+    },
+    {
+      "name": "trail-gap-inside-noon",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-183\\trail-gap-inside-noon.png",
+      "state": {
+        "px": 41.05611387405969,
+        "py": 0.32877204558898776,
+        "pz": 31.912309749691318,
+        "tx": 53.68876429684729,
+        "ty": 1.3108302923522164,
+        "tz": 41.731481980365565,
+        "fov": 40,
+        "worldTime": 0.5008361599999426,
+        "heightGround": -1.3712279544110122,
+        "targetHeight": 1.3108302923522164
+      }
+    },
+    {
+      "name": "trail-gap-inside-dusk",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-183\\trail-gap-inside-dusk.png",
+      "state": {
+        "px": 41.05611387405969,
+        "py": 0.32877204558898776,
+        "pz": 31.912309749691318,
+        "tx": 53.68876429684729,
+        "ty": 1.3108302923522164,
+        "tz": 41.731481980365565,
+        "fov": 40,
+        "worldTime": 0.7408349600000143,
+        "heightGround": -1.3712279544110122,
+        "targetHeight": 1.3108302923522164
+      }
+    },
+    {
+      "name": "trail-gap-inside-night",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-183\\trail-gap-inside-night.png",
+      "state": {
+        "px": 41.05611387405969,
+        "py": 0.32877204558898776,
+        "pz": 31.912309749691318,
+        "tx": 53.68876429684729,
+        "ty": 1.3108302923522164,
+        "tz": 41.731481980365565,
+        "fov": 40,
+        "worldTime": 0.020824520000028632,
+        "heightGround": -1.3712279544110122,
+        "targetHeight": 1.3108302923522164
+      }
+    },
+    {
+      "name": "river-gap-noon",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-183\\river-gap-noon.png",
+      "state": {
+        "px": -2.9905045879808543,
+        "py": 3.2516750670859835,
+        "pz": 51.91393726456572,
+        "tx": -14.118829754387422,
+        "ty": 1.619588820726976,
+        "tz": 58.31516652095426,
+        "fov": 40,
+        "worldTime": 0.5008343599999425,
+        "heightGround": 1.5516750670859834,
+        "targetHeight": 1.619588820726976
+      }
+    },
+    {
+      "name": "river-gap-dusk",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-183\\river-gap-dusk.png",
+      "state": {
+        "px": -2.9905045879808543,
+        "py": 3.2516750670859835,
+        "pz": 51.91393726456572,
+        "tx": -14.118829754387422,
+        "ty": 1.619588820726976,
+        "tz": 58.31516652095426,
+        "fov": 40,
+        "worldTime": 0.7408428799999711,
+        "heightGround": 1.5516750670859834,
+        "targetHeight": 1.619588820726976
+      }
+    }
+  ],
+  "scores": {},
+  "verdict": "PASS"
+}

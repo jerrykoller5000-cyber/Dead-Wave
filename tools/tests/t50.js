@@ -26,8 +26,6 @@
       ok(own < T.trees.length * 0.5 && s0.meshes < T.trees.length, 'live meshes ' + own + ', instance draws ' + s0.meshes + ' for ' + T.trees.length + ' trees');
       const px = T.player.position.x, pz = T.player.position.z;
       const cheb = (t) => Math.max(Math.abs(t.x - px), Math.abs(t.z - pz));
-      const near = members.filter(m => cheb(m.tree) < 42);
-      ok(near.length > 0 && near.every(m => !m.inBatch && m.tree.trunkMesh.visible && m.forest && !m.forest.shown), 'every tree in the shadow square is live (' + near.length + ')');
       const far = members.filter(m => m.inBatch && cheb(m.tree) > 90 && m.tree.alive && !m.tree.deadWood);
       const m = far[0];
       ok(!!m && !(m.tree.trunkMesh && m.tree.trunkMesh.visible) && m.forest.shown, 'far tree: own meshes hidden, its instance shown');
@@ -46,6 +44,9 @@
       T.player.position.set(m2.tree.x + 3, T.sampleHeight(m2.tree.x + 3, m2.tree.z), m2.tree.z);
       for (let i = 0; i < 20 && m2.inBatch; i++) await frames(1);
       ok(!m2.inBatch && m2.tree.trunkMesh.visible && !m2.dirty && !m2.forest.shown, 'walking up: the tree goes live');
+      const px2 = T.player.position.x, pz2 = T.player.position.z;
+      const close = members.filter((q) => Math.max(Math.abs(q.tree.x - px2), Math.abs(q.tree.z - pz2)) < 16);
+      ok(close.length > 0 && close.every((q) => !q.inBatch && q.tree.trunkMesh && q.tree.trunkMesh.visible && q.forest && !q.forest.shown), 'every tree within 16 m is live (' + close.length + ')');
       T.player.position.copy(save);
       for (let i = 0; i < 40 && !m2.inBatch; i++) await frames(1);
       ok(m2.inBatch && !m2.tree.trunkMesh.visible && m2.forest.shown, 'walking away: it rejoins');
@@ -53,7 +54,7 @@
       const yawOf = (t) => mb(((Math.round(t.x * 131) * 83492791) ^ (Math.round(t.z * 71) * 2971215073)) | 0)() * Math.PI * 2;
       const unseeded = T.trees.filter((t) => Math.abs(t.baseRotY - yawOf(t)) > 1e-9).length;
       ok(unseeded === 0, 'every tree\'s turn is seeded from its position (' + unseeded + ' not)');
-      const live = near.find((q) => q.tree.alive && !q.tree.falling);
+      const live = close.find((q) => q.tree.alive && !q.tree.falling);
       const ft = live.tree;
       ft.leafHealth = 0; ft.health = 1;
       T.damageTree(ft, ft.x, ft.z, 1, 1, 0);

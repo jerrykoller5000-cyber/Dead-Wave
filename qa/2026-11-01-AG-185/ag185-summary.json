@@ -1,0 +1,179 @@
+{
+  "timestamp": "2026-11-01T11:12:47.561Z",
+  "wallsDefaultOn": true,
+  "bandSpecs": {
+    "kind": "hq-thicket",
+    "width": 4,
+    "radius": 60,
+    "gaps": [
+      {
+        "id": "trail-2",
+        "kind": "trail",
+        "halfWidth": 1.85
+      },
+      {
+        "id": "trail-3",
+        "kind": "trail",
+        "halfWidth": 3.05
+      },
+      {
+        "id": "trail-8",
+        "kind": "trail",
+        "halfWidth": 2.75
+      },
+      {
+        "id": "trail-11",
+        "kind": "trail",
+        "halfWidth": 1.85
+      },
+      {
+        "id": "trail-12",
+        "kind": "trail",
+        "halfWidth": 1.85
+      },
+      {
+        "id": "trail-13",
+        "kind": "trail",
+        "halfWidth": 1.85
+      },
+      {
+        "id": "trail-20",
+        "kind": "trail",
+        "halfWidth": 1.85
+      },
+      {
+        "id": "river-0",
+        "kind": "river",
+        "at": 108.49744389851219,
+        "width": 25.49951704994931
+      }
+    ],
+    "solids": 253
+  },
+  "trailGaps": [],
+  "selectedTrail": null,
+  "closedSpan": null,
+  "collisionTests": {
+    "closed": {
+      "pt": {
+        "x": -60,
+        "z": 0
+      },
+      "blocked": true,
+      "resolved": {
+        "x": -62.35,
+        "z": 0
+      }
+    },
+    "trail11": {
+      "pt": {
+        "x": 29.28,
+        "z": -52.37
+      },
+      "blocked": false,
+      "resolved": {
+        "x": 29.28,
+        "z": -52.37
+      }
+    },
+    "trail0": {
+      "pt": {
+        "x": 35.41,
+        "z": 48.44
+      },
+      "blocked": false,
+      "resolved": {
+        "x": 35.41,
+        "z": 48.44
+      }
+    }
+  },
+  "valleyFieldTests": {
+    "ready": true,
+    "cells": 384,
+    "ms": 27.19999998807907,
+    "yardDist": 5.181980609893799,
+    "outsideDistT11": 39.40254211425781
+  },
+  "captures": [
+    {
+      "name": "1-yard-trail-gap-noon",
+      "file": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-185\\1-yard-trail-gap-noon.png",
+      "state": {
+        "px": 34,
+        "py": -0.6916648626327515,
+        "pz": -46.5,
+        "tx": 24,
+        "ty": -2.1968286514282225,
+        "tz": -58,
+        "fov": 38
+      }
+    },
+    {
+      "name": "2-outside-toward-hq-noon",
+      "file": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-185\\2-outside-toward-hq-noon.png",
+      "state": {
+        "px": 24,
+        "py": -1.6968286514282227,
+        "pz": -58,
+        "tx": 0,
+        "ty": -1.9686761379241944,
+        "tz": -6.5,
+        "fov": 38
+      }
+    },
+    {
+      "name": "3-gap-corridor-passage-noon",
+      "file": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-185\\3-gap-corridor-passage-noon.png",
+      "state": {
+        "px": 30.5,
+        "py": -0.8702565908432007,
+        "pz": -50.5,
+        "tx": 25,
+        "ty": -2.294382381439209,
+        "tz": -57,
+        "fov": 42
+      }
+    },
+    {
+      "name": "4-closed-span-yard-noon",
+      "file": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-185\\4-closed-span-yard-noon.png",
+      "state": {
+        "px": -50,
+        "py": -1.1125331401824952,
+        "pz": 0,
+        "tx": -60,
+        "ty": -2.02976279258728,
+        "tz": 0,
+        "fov": 38
+      }
+    },
+    {
+      "name": "5-outside-closed-span-noon",
+      "file": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-185\\5-outside-closed-span-noon.png",
+      "state": {
+        "px": -68,
+        "py": -0.8496368408203125,
+        "pz": 0,
+        "tx": -60,
+        "ty": -2.02976279258728,
+        "tz": 0,
+        "fov": 38
+      }
+    },
+    {
+      "name": "6-outside-toward-hq-dusk",
+      "file": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-185\\6-outside-toward-hq-dusk.png",
+      "state": {
+        "px": 24,
+        "py": -1.6968286514282227,
+        "pz": -58,
+        "tx": 0,
+        "ty": -1.9686761379241944,
+        "tz": -6.5,
+        "fov": 38
+      }
+    }
+  ],
+  "verdict": "PASS"
+}

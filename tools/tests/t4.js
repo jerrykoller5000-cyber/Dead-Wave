@@ -10,7 +10,7 @@
     await startMatch(T, 'DeckAim');
     // GB-55: startMatch waits a fixed 10 s after prep, but the insertion is 9 s of game time and
     // game time is capped at 0.05 s a frame, so on a slow machine it is still flying the camera
-    // (and it drops the marine back at 0,-8.5 when it ends). Wait for it to actually finish: its
+    // (and it drops the marine at the landing clearing, 42,-20, when it ends). Wait for it to actually finish: its
     // harness comes off the marine in insertion.finish().
     let ins = Date.now();
     while (T.marine.getObjectByName('insertion-harness') && Date.now() - ins < 90000) await wait(100);
