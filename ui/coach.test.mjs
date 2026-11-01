@@ -120,3 +120,20 @@ test('MedPen coaching uses health percentage, needs a pen, and survives profile 
  assert.equal(c.tick(lessonFrame({hp:100,maxHp:200,medkits:0})),null);
  const restored=start({load:()=>saved});assert.equal(restored.tick(lessonFrame({medkits:1})),null);
 });
+
+test('a first run points down the trail until the HQ clearing, then teaches as before', () => {
+  const c = start();
+  const far = { active: true, firstRun: true, atHq: false, skulls: 0, dt: 0.2, day: 1, phase: 'prep' };
+  const trail = c.tick(far);
+  assert.equal(trail.id, 'trail');
+  assert.equal(trail.title, 'Follow the trail');
+  assert.match(trail.body, /worn ground/);
+  assert.match(trail.body, /light/);
+  c.handle({ type: 'skull-pickup', count: 1, carriedCount: 1, runId: 'one' });
+  assert.equal(c.tick(far).id, 'trail');
+  const home = c.tick({ ...far, atHq: true, skulls: 1 });
+  assert.equal(home.id, 'pickup');
+  const later = start();
+  later.handle({ type: 'skull-pickup', count: 1, carriedCount: 1, runId: 'one' });
+  assert.equal(later.tick({ active: true, firstRun: false, atHq: false, skulls: 1, dt: 0 }).id, 'pickup');
+});

@@ -2,12 +2,12 @@
 
 state: active
 model: Grok 4.7
-task: CU-212 checkpoint commit, leave live files out
+task: CU-215 checkpoint with index.html
 touching: git
-since: 2026-11-01T11:38Z
-next: CU-212 Checkpoint commit (W1 done, the ring, the valley field). Aft
+since: 2026-11-01T13:23Z
+next: —
 blocked-on: —
-last-report: handoffs/2026-11-01-cursor-CU-211.md
+last-report: handoffs/2026-11-01-cursor-CU-214.md
 
 ## Notes
 

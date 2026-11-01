@@ -766,6 +766,13 @@ const messages = {
   "interaction.lowerStairs": "{interact} — Lower the stairs",
   "interaction.raiseStairs": "{interact} — Raise the stairs",
   "interaction.grave": "Here lies {name} — fell on Night {day}",
+  "interaction.shortcut.inspect": "{interact} — Inspect fallen logs",
+  "interaction.shortcut.hold": "Hold {interact} — Cut through fallen logs",
+  "interaction.shortcut.progress": "Cutting through · {percent}%",
+  "interaction.shortcut.needSaw": "A chainsaw would cut through these logs.",
+  "interaction.shortcut.equipSaw": "Equip the chainsaw to cut through.",
+  "interaction.shortcut.drySaw": "The chainsaw needs gas.",
+  "interaction.shortcut.open": "Shortcut opened.",
 
   // CIF: the camouflage window at the HQ (CU-61, Jerry direct). Swaps are free.
   // GP-93: CU-70 dressing-room labels, including CL-97 style choices.
@@ -1356,6 +1363,7 @@ const messages = {
   "build.reason.wallTaken": "That wall already has something on it",
   "build.reason.noRoom": "No room",
   "build.reason.openGround": "Needs open ground",
+  "build.reason.tooThick": "Too thick to build here",
   "build.reason.support": "Needs a {supports} under it",
   "build.reason.occupied": "Something already standing there",
   "build.reason.belowWallTaken": "Something is on top of the wall below",
@@ -1692,6 +1700,8 @@ const messages = {
   "poi.cleared": "{name} · Cleared",
   "coach.poi": "Shamblers at {poi}: go and clear them.",
   "coach.poiHelp": "Press {map} to find it on your map, then collect the skulls they drop.",
+  "coach.trail": "Follow the trail",
+  "coach.trailBody": "The worn ground leads to the HQ. Its light is at the end.",
   "coach.build": "Press {buildWheel} to build.",
   "coach.pair": "Press {akimbo} for two guns.",
   "coach.medpen": "Press {heal} to jab a MedPen.",
@@ -1871,6 +1881,7 @@ const messages = {
   "utility.alarm.waitingTag": "SIREN NOT FITTED",
   "utility.alarm.lookLine": "The roof socket stands empty. No siren faces the road.",
   "utility.iron.hangPrompt": "{interact} — Hang horseshoes",
+  "utility.iron.takeDownPrompt": "{interact} — Take down horseshoes",
   "utility.iron.hangBanner": "THE GAP IS CLOSED TO THE DEAD",
   "utility.needsPower": "NO POWER",
   "utility.hosePrompt": "{interact} — Hose the fire",

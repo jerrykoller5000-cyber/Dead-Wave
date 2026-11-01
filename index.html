@@ -1364,7 +1364,10 @@
     import { addCast, rbox, rmesh, mergeParts, boxProjectUV, slab as profileSlab, lathe as profileLathe, curve as profileCurve } from './core/geometry.js';
     import { CAMO_KEYS, CAMO_SOLID_KEYS, CAMO_DEFAULT, isCamoKey, paintCamo } from './core/camo.js';
     import { AudioSys } from './core/audio.js';
+    import { makeNavField, buildNavField, markNavCircle, paintNavDisc, paintNavSegment, navDir, navIndex, startNavWorker, NAV_CLEAR } from './core/nav-field.js';   // CU-210
     import { createNightWarnings } from './game/night-warnings.js';
+    import { hqRingPoints, ringTrailGaps, ringWaterGaps, makeWallBand, resolveWallBand } from './game/wall-bands.js';
+    import { makeShortcutBand, nearestShortcut, setShortcutCut, stepShortcutCut, shortcutLogPieces } from './game/shortcut-bands.js';
     import { DWLoad, yieldToBrowser, whileHiddenFramesRun } from './core/loader.js';
     import { text as dwText } from './ui/strings.js';
     import { createIntakeDisplay } from './ui/skull-intake.js';
@@ -1452,6 +1455,7 @@
     import * as CaveGuardian from './world/cave-guardian.js';
     import { applyZombieConcept, prepareConvoySleeperAppearance } from './studio/zombie-concepts.js';
     import { blendZombieJoins, refreshZombieJoinLoss } from './combat/zombie-joins.js';
+    import { ringGapSpots, shortcutSpot, ironPush, ironBlockCircles, ironSegs, nearestSpot, createIronGaps } from './combat/iron-gaps.js';   // GB-266
     import { createMarineIdle } from './studio/marine-idle.js';
     import { createMarineTurn } from './studio/marine-turn.js';
     import { GAIT_WEIGHT, gaitExtras, leanFromAccel } from './studio/marine-gait-feel.js';   // CL-186: the weight in his walk and run
@@ -3691,6 +3695,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     const TRAIL_HW = 0.85;
     // The trampled, packed-earth yard around the HQ that every trail starts from.
     const HQ_YARD_R = 9.5;
+    // CU-209: he lands here, not in the yard. The insertion, the co-op seat and the
+    // reset all read SPAWN_X/Z, which are these.
+    const LANDING_X = 42, LANDING_Z = -20, LANDING_CLEAR = 9;
 
     (function planPOIs() {
       const rnd = mulberry32(0x9015eed);
@@ -3822,32 +3829,98 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         }
         return false;
       }
-      // A straight a->b run reads as surveyed rather than worn in. Bow each leg out
-      // sideways by a noise-driven amount with its own noise offset (tag), so
-      // neighbouring legs don't bulge in lockstep. The bow is exactly 0 at both ends,
-      // so a leg still lands on its landmark and leaves the trail it forks from at
-      // exactly the junction point.
-      let pathTag = 0;
+      // A straight a->b run reads as surveyed rather than worn in. CU-209: a spur bends
+      // twice, the bows on opposite sides and about 30% of the leg long, and the second
+      // bend sits inside the last 30 m so the place is not in sight down the trail.
+      // A bridge deck stays straight. The bow shrinks until both bends are on ground
+      // he can walk.
+      let pathTag = 0, pathBendN = 0;
+      // GP-20006's thicket is a 4 m ring at 60 m. A bend inside 50-70 m makes the
+      // trail cross it on a slant and the gap runs tens of metres. The crossing
+      // itself is a straight radial step.
+      function squareToHqRing(pts) {
+        if (!pts || pts.length < 2) return pts;
+        const out = [pts[0]];
+        const inBand = (r) => r >= 50 && r <= 70;
+        for (let i = 1; i < pts.length; i++) {
+          const a = out[out.length - 1], b = pts[i];
+          const ra = hypot(a.x, a.z), rb = hypot(b.x, b.z);
+          if (!inBand(ra) && !inBand(rb) && !((ra < 50 && rb > 70) || (ra > 70 && rb < 50))) { out.push(b); continue; }
+          const mx = (a.x + b.x) * 0.5, mz = (a.z + b.z) * 0.5, mr = hypot(mx, mz) || 1;
+          const ux = mx / mr, uz = mz / mr;
+          const inner = { x: ux * 49, z: uz * 49 }, outer = { x: ux * 71, z: uz * 71 };
+          if (rb >= ra) { if (hypot(a.x - inner.x, a.z - inner.z) > 1.2) out.push(inner); out.push(outer); }
+          else { if (hypot(a.x - outer.x, a.z - outer.z) > 1.2) out.push(outer); out.push(inner); }
+          if (!inBand(rb)) out.push(b);
+        }
+        return out;
+      }
+      function trailWalkable(x, z) {
+        if (waterDepthAt(x, z) > 0.05) return false;
+        if (terrainSlope(x, z) > 0.5) return false;
+        if (distToRiver(x, z) < RIVER_WIDTH + 1.2) return false;
+        if (sampleHeight(x, z) > 46) return false;
+        return true;
+      }
       function wavyLeg(ax, az, bx, bz, straight = false) {
         pathTag += 23.7;
         const tag = pathTag;
         const len = hypot(bx - ax, bz - az);
         const dx = bx - ax, dz = bz - az;
         const nx = len > 1e-4 ? -dz / len : 0, nz = len > 1e-4 ? dx / len : 0;
-        const segs = Math.max(2, Math.round(len / 3.5));
-        const pts = [{ x: ax, z: az }];
-        const maxBow = straight ? 0 : Math.min(5.5, len * 0.2);
-        for (let i = 1; i < segs; i++) {
-          const t = i / segs;
-          const x = ax + dx * t, z = az + dz * t;
-          const n = fbm(x * 0.04 + tag, z * 0.04 - tag * 1.7, 2) +
-                    fbm(x * 0.011 + tag * 0.31, z * 0.011 - tag * 0.31, 2) * 0.7;
-          const taper = smoothstep01(t / 0.16) * smoothstep01((1 - t) / 0.12);
-          const amt = n * taper * maxBow;
-          pts.push({ x: x + nx * amt, z: z + nz * amt });
+        if (straight || len < 18) {
+          const segs = Math.max(2, Math.round(len / 3.5));
+          const pts = [{ x: ax, z: az }];
+          const maxBow = straight ? 0 : Math.min(5.5, len * 0.2);
+          for (let i = 1; i < segs; i++) {
+            const t = i / segs;
+            const x = ax + dx * t, z = az + dz * t;
+            const n = fbm(x * 0.04 + tag, z * 0.04 - tag * 1.7, 2) +
+                      fbm(x * 0.011 + tag * 0.31, z * 0.011 - tag * 0.31, 2) * 0.7;
+            const taper = smoothstep01(t / 0.16) * smoothstep01((1 - t) / 0.12);
+            pts.push({ x: x + nx * n * taper * maxBow, z: z + nz * n * taper * maxBow });
+          }
+          pts.push({ x: bx, z: bz });
+          return pts;
+        }
+        pathBendN++;
+        const side = pathBendN % 2 ? 1 : -1;
+        const ringFree = (t) => {
+          let u = t;
+          for (let k = 0; k < 10; k++) {
+            const r = hypot(ax + dx * u, az + dz * u);
+            if (r < 48 || r > 72) return Math.max(0.14, Math.min(0.9, u));
+            u += (r < 60 ? -0.05 : 0.05);
+          }
+          return Math.max(0.14, Math.min(0.9, u));
+        };
+        const bowAt = (t, sign) => {
+          let mag = len * 0.30;
+          for (let k = 0; k < 7; k++) {
+            const x = ax + dx * t + nx * sign * mag;
+            const z = az + dz * t + nz * sign * mag;
+            const prevX = ax + dx * Math.max(0, t - 0.2), prevZ = az + dz * Math.max(0, t - 0.2);
+            if (trailWalkable(x, z) && !crossesRiver(prevX, prevZ, x, z) && !overWater(prevX, prevZ, x, z)) return { x, z };
+            mag *= 0.72;
+          }
+          return { x: ax + dx * t, z: az + dz * t };
+        };
+        const t1 = ringFree(0.32);
+        let t2 = ringFree(Math.max(0.62, 1 - 22 / len));
+        if (Math.abs(t2 - t1) < 0.12) t2 = ringFree(Math.min(0.9, t1 + 0.28));
+        const knots = [{ x: ax, z: az }, bowAt(t1, side), bowAt(t2, -side), { x: bx, z: bz }];
+        const pts = [knots[0]];
+        for (let s = 0; s < 3; s++) {
+          const a = knots[s], b = knots[s + 1];
+          const sl = hypot(b.x - a.x, b.z - a.z);
+          const n = Math.max(1, Math.round(sl / 3.5));
+          for (let i = 1; i <= n; i++) {
+            if (s < 2 && i === n) break;
+            pts.push({ x: a.x + (b.x - a.x) * i / n, z: a.z + (b.z - a.z) * i / n });
+          }
         }
         pts.push({ x: bx, z: bz });
-        return pts;
+        return squareToHqRing(pts);
       }
 
       const TRAIL_EASE = 0.55;   // cost of a metre already on a trail vs one of open ground
@@ -3963,6 +4036,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (POI.mast) dests.push(POI.mast);
       dests.sort((a, b) => hypot(a.x, a.z) - hypot(b.x, b.z));
       for (const d of dests) addPath(d.x, d.z, d.round || null);
+      // CU-209: one trail from the landing clearing to the HQ yard. Two bends (wavyLeg).
+      addLeg(null, wavyLeg(LANDING_X, LANDING_Z, 0, -6.5));
       // A bridge nobody's trail happens to cross still gets walked to: a crossing
       // with worn approaches and no path to it looks like it was dropped there.
       for (const b of POI.bridges) {
@@ -4791,6 +4866,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (geo.getAttribute('gwear')) geo.getAttribute('gwear').needsUpdate = true;
       if (deferNormals) groundNormalsDirty = true;
       else geo.computeVertexNormals();
+      valleyHeightsDirty = true;   // CU-210: the valley field's climb reads these heights
     }
     ground.receiveShadow = true;
     // CL-118: the terrain was one 266k-triangle mesh, so every frame drew all of it: the half behind the camera and the
@@ -17222,6 +17298,62 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       rocks.push(rec);
       return rec;
     }
+    // GP-20006 / CU-210: the HQ ring is on. The valley field routes the dead through
+    // its trail gaps. ?walls=0 leaves the ring out.
+    const WALLS_ON = urlParams.get('walls') !== '0';
+    const wallBands = [];
+    const SHORTCUTS_ON = urlParams.get('shortcuts') !== '0';
+    const shortcutBands = []; // Claude approved five W2 sites
+    let shortcutVisualSync = () => {};
+    function registerShortcutBand(band) {
+      shortcutBands.push(band);
+      wallBands.push(band); // player and valley field see the same circles
+      for (const s of band.solids) { s.kind = 'log'; s.wallBand = band; worldSolids.push(s); }
+    }
+    function syncShortcutOpen(band, open, announce = false) {
+      const change = setShortcutCut(band, open);
+      if (!change) return false;
+      for (const s of change.removed) {
+        const i = worldSolids.indexOf(s);
+        if (i >= 0) worldSolids.splice(i, 1);
+      }
+      for (const s of change.added) { s.kind = 'log'; s.wallBand = band; worldSolids.push(s); }
+      shortcutVisualSync();
+      window.dispatchEvent(new CustomEvent('dw-log', { detail: { shortcut: band.id, state: open ? 'cut' : 'reset', solids: band.solids.length } }));
+      if (announce) showBanner(dwText('interaction.shortcut.open'), '', 1.5);
+      return true;
+    }
+    window.addEventListener('dw-game', (e) => {
+      if (e.detail?.type === 'run-reset') for (const band of shortcutBands) if (band.cut) syncShortcutOpen(band, false);
+    });
+    if (WALLS_ON) {
+      const radius = 60, width = 4;
+      const gaps = ringTrailGaps(PATHS, radius, width).concat(
+        ringWaterGaps(radius, width, (x, z) => waterDepthAt(x, z) > 0.05));
+      const band = makeWallBand({ pts: hqRingPoints(radius), width, gaps, heightAt: sampleHeight });
+      band.kind = 'hq-thicket'; band.radius = radius;
+      wallBands.push(band);
+      for (const s of band.solids) addSolid(s.x, s.z, s.radius, s.y0, s.y1).wallBand = band;
+    }
+    // GP-20007, Claude's rule-10 approval (2026-11-01): five woodland cuts.
+    // The fire-tower proposal was dropped because it sat inside the place's
+    // 30 m approach. The official trails remain open on both sides of these.
+    if (SHORTCUTS_ON) {
+      const sites = [
+        ['landing-rangers', 68.9, -18.9, 66.7, -9.1],
+        ['fuel-wreck', -111.8, 28.2, -121.8, 27.8],
+        ['trapper-grave', -65.4, 111.1, -59.9, 102.8],
+        ['grave-wreck', -108.0, 70.3, -99.6, 64.9],
+        ['fuel-mast', -130.9, 9.7, -127.3, 0.4],
+      ];
+      for (const [id, ax, az, bx, bz] of sites) registerShortcutBand(makeShortcutBand({
+        id, a: { x: ax, z: az }, b: { x: bx, z: bz }, heightAt: sampleHeight,
+      }));
+    }
+    const inHQThicket = (x, z, pad = 0) => wallBands.some((band) =>
+      Math.abs(hypot(x, z) - band.radius) < band.width * 0.5 + pad &&
+      !band.isGap(x, z, ((Math.atan2(z, x) + Math.PI * 2) % (Math.PI * 2)) * band.radius));
+
     // scatterRocks — seeded, biased onto steep and high ground where scree collects
     function scatterRocks() {
       const rnd = mulberry32(0x70c45e);
@@ -17237,6 +17369,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         const x = Math.cos(ang) * rad;
         const z = Math.sin(ang) * rad;
         if (landDist(x, z) < spawnClear) continue;
+        if (hypot(x - LANDING_X, z - LANDING_Z) < LANDING_CLEAR) continue;
         if (waterDepthAt(x, z) > 0.35) continue;
         if (distToRiver(x, z) < RIVER_WIDTH + 0.9) continue;
         if (nearPOI(x, z, 8) || distToPath(x, z) < 1.8) continue;
@@ -17255,7 +17388,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         // Boulders scatter out past the boundary into the foothills, so some land
         // exactly where the wall stands. Clearance scales with the rock — a big
         // erratic sticking half out of the masonry is what gave this away.
-        if (inWallBand(x, z, 1.1 + s * 1.2)) continue;
+        if (inWallBand(x, z, 1.1 + s * 1.2) || inHQThicket(x, z, 1.1 + s * 1.2)) continue;
         const minSpace = 3.2 + s * 1.15;
         let ok = true;
         for (const p of placed) {
@@ -18272,6 +18405,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
 
     let UNDERSTORY_DRAWS = 0;
+    const understoryPacks = [];
     // CU-206: the woods. Dense except clearings, trails and dry glades. ?woods=0 is the scatter below.
     function scatterTreesWoods() {
       const rnd = mulberry32(0x7e44a1);
@@ -18293,6 +18427,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         const x = Math.cos(ang) * rad;
         const z = Math.sin(ang) * rad;
         if (landDist(x, z) < 24) continue;                 // the HQ clearing
+        if (hypot(x - LANDING_X, z - LANDING_Z) < LANDING_CLEAR) continue;   // CU-209: the drop-in clearing
         if (landDist(x, z) < 50 && rnd() > 0.25) continue; // the shadow square stays thin; past it the woods close in
         if (waterDepthAt(x, z) > 0.02) continue;
         const slope = terrainSlope(x, z);
@@ -18312,7 +18447,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         if (rnd() > (moisture < 0.38 ? 0.22 : 0.78)) continue;   // dry ground stays a glade
         let scale = 0.55 + rnd() * 1.3;
         if (rnd() < 0.045) scale = 1.85 + rnd() * 0.35;
-        if (inWallBand(x, z, 1.0 + scale * 0.9)) continue;
+        if (inWallBand(x, z, 1.0 + scale * 0.9) || inHQThicket(x, z, 1.0 + scale * 0.9)) continue;
         const minSpace = 5.2 + scale * 0.9;                // crowns leave a gap, so the eye reaches 30-40 m
         let okPlace = true;
         const cx = Math.floor(x / SPACE_CELL), cz = Math.floor(z / SPACE_CELL);
@@ -18332,6 +18467,94 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         let bucket = spaceGrid.get(sk);
         if (!bucket) spaceGrid.set(sk, (bucket = []));
         bucket.push(rec);
+      }
+      // CU-209 (rule 7): the three lines the HQ still saw get a belt 25-60 m out,
+      // outside the clearing. Trees on the mast's roof line slide onto the yard's
+      // lower ray, so the roof can see the mast and the yard cannot.
+      const beltSpotOk = (x, z) => landDist(x, z) >= 25 && landDist(x, z) <= 68
+        && waterDepthAt(x, z) <= 0.02 && terrainSlope(x, z) <= 0.48 && sampleHeight(x, z) <= 46
+        && distToRiver(x, z) >= RIVER_WIDTH + 1.6 && !nearPOI(x, z, 12)
+        && !(POI.mast && hypot(x - POI.mast.x, z - POI.mast.z) < 18)
+        && hypot(x - LANDING_X, z - LANDING_Z) >= LANDING_CLEAR
+        && !inWallBand(x, z, 2) && !inHQThicket(x, z, 2);
+      const tooClose = (x, z, gap) => {
+        const cx = Math.floor(x / SPACE_CELL), cz = Math.floor(z / SPACE_CELL);
+        for (let ix = cx - 1; ix <= cx + 1; ix++) for (let iz = cz - 1; iz <= cz + 1; iz++) {
+          const bucket = spaceGrid.get(ix + ',' + iz);
+          if (!bucket) continue;
+          for (const q of bucket) if (hypot(x - q.x, z - q.z) < gap) return true;
+        }
+        return false;
+      };
+      const fileRec = (rec) => {
+        placed.push(rec);
+        const sk = Math.floor(rec.x / SPACE_CELL) + ',' + Math.floor(rec.z / SPACE_CELL);
+        let b = spaceGrid.get(sk);
+        if (!b) spaceGrid.set(sk, (b = []));
+        b.push(rec);
+      };
+      if (POI.mast) {
+        const ax = 0, az = -6.5, bx = POI.mast.x, bz = POI.mast.z;
+        const rdx = bx, rdz = bz, rl = Math.hypot(rdx, rdz) || 1;
+        for (const rec of placed) {
+          const along = (rec.x * rdx + rec.z * rdz) / rl;
+          if (along < 20 || along > 130) continue;
+          const rx = rdx / rl * along, rz = rdz / rl * along;
+          if (hypot(rec.x - rx, rec.z - rz) > 8) continue;
+          const t = along / rl;
+          const yx = ax + (bx - ax) * t, yz = az + (bz - az) * t;
+          const ox = yx - rx, oz = yz - rz, ol = Math.hypot(ox, oz) || 1;
+          const nx = rx + ox / ol * 9, nz = rz + oz / ol * 9;
+          if (waterDepthAt(nx, nz) > 0.02 || terrainSlope(nx, nz) > 0.55) continue;
+          rec.x = nx; rec.z = nz;
+        }
+      }
+      spaceGrid.clear();
+      for (const rec of placed) {
+        const sk = Math.floor(rec.x / SPACE_CELL) + ',' + Math.floor(rec.z / SPACE_CELL);
+        let b = spaceGrid.get(sk);
+        if (!b) spaceGrid.set(sk, (b = []));
+        b.push(rec);
+      }
+      const clearOfMast = (x, z, scale) => {
+        if (!POI.mast) return true;
+        const rdx = POI.mast.x, rdz = POI.mast.z, rl = Math.hypot(rdx, rdz) || 1;
+        const along = (x * rdx + z * rdz) / rl;
+        if (along < 18 || along > rl - 10) return true;
+        const rx = rdx / rl * along, rz = rdz / rl * along;
+        const need = Math.max(2.4, 0.85 * 1.9 * (scale || 1.2) + 0.8);
+        return hypot(x - rx, z - rz) >= need;
+      };
+      const belts = [];
+      if (POI.dock) belts.push({ x: POI.dock.x, z: POI.dock.z, scale: 1.2, ez: -6.5, at: [32, 46, 58] });
+      if (POI.mast) belts.push({ x: POI.mast.x, z: POI.mast.z, scale: 1.8, ez: -6.5, at: [34, 44], path: 0.6 });
+      if (POI.wrecks && POI.wrecks[1]) belts.push({ x: POI.wrecks[1].x + 4, z: POI.wrecks[1].z - 4, scale: 1.8, ez: -6.5, at: [28, 40, 54], path: 0.7 });
+      if (POI.wrecks && POI.wrecks[1]) belts.push({ x: POI.wrecks[1].x + 4, z: POI.wrecks[1].z - 4, scale: 2.2, ez: 0, at: [28, 40, 54], path: 0.7 });
+      if (POI.graveyard) belts.push({ x: POI.graveyard.x, z: POI.graveyard.z, scale: 2.05, ez: 0, at: [32, 46, 58] });
+      if (POI.cabins && POI.cabins[0]) belts.push({ x: POI.cabins[0].x, z: POI.cabins[0].z, scale: 2.05, ez: 0, at: [32, 46, 58] });
+      if (POI.cabins && POI.cabins[0]) belts.push({ x: POI.cabins[0].x, z: POI.cabins[0].z, scale: 2.05, ez: -6.5, at: [34, 44], path: 0.8 });
+      if (POI.cabins && POI.cabins[1]) belts.push({ x: POI.cabins[1].x, z: POI.cabins[1].z, scale: 2.05, ez: 0, at: [32, 46, 58] });
+      if (POI.campsites && POI.campsites[1]) belts.push({ x: POI.campsites[1].x + 4, z: POI.campsites[1].z + 4, scale: 2.8, ez: 0, at: [56, 68], path: 1.1 });
+      if (POI.sheds && POI.sheds[2]) belts.push({ x: POI.sheds[2].x + 4, z: POI.sheds[2].z - 2, scale: 1.05, ez: -6.5, at: [28, 38], path: 0.8 });
+      if (POI.sheds && POI.sheds[2]) belts.push({ x: POI.sheds[2].x, z: POI.sheds[2].z, scale: 1.8, ez: 0, at: [48, 60] });
+      for (const belt of belts) {
+        const dx = belt.x, dz = belt.z - belt.ez, len = Math.hypot(dx, dz) || 1;
+        const px = -dz / len, pz = dx / len;
+        const pathMin = belt.path || 2.4;
+        for (const dist of belt.at) {
+          const t = dist / len;
+          if (t <= 0.05 || t >= 0.8) continue;
+          const cx = dx * t, cz = belt.ez + dz * t;
+          let spot = null;
+          for (const off of [0, 1.0, -1.0, 2.2, -2.2]) {
+            const x = cx + px * off, z = cz + pz * off;
+            if (distToPath(x, z) < pathMin) continue;
+            if (beltSpotOk(x, z) && clearOfMast(x, z, belt.scale) && !tooClose(x, z, 2.2)) { spot = { x, z }; break; }
+          }
+          if (!spot) continue;
+          const h = sampleHeight(spot.x, spot.z);
+          fileRec({ x: spot.x, z: spot.z, kind: treeKindFor(h, moistureAt(spot.x, spot.z), terrainSlope(spot.x, spot.z), rnd), scale: belt.scale, lean: (rnd() - 0.5) * 0.08, minSpace: 2.2 });
+        }
       }
       for (const p of placed) makeTree(p.x, p.z, p);
       buildUnderstory(placed, rnd);
@@ -18388,6 +18611,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         matrices.value.needsUpdate = true;
         if (matrices.value.version != null) matrices.value.version++;
         scene.add(mesh);
+        understoryPacks.push({ mesh, buf: matrices.value, cpu: arr.slice(), list });
         UNDERSTORY_DRAWS++;
       }
     }
@@ -18434,7 +18658,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         // The treeline deliberately runs past the boundary into the foothills, which
         // means trunks land inside the wall. Clear the trunk (canopy may still lean
         // over the top — branches above a wall are fine, a trunk through it is not).
-        if (inWallBand(x, z, 1.0 + scale * 0.9)) continue;
+        if (inWallBand(x, z, 1.0 + scale * 0.9) || inHQThicket(x, z, 1.0 + scale * 0.9)) continue;
         const minSpace = 4.0 + scale * 1.35;
         let okPlace = true;
         const cx = Math.floor(x / SPACE_CELL), cz = Math.floor(z / SPACE_CELL);
@@ -18463,6 +18687,102 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     const _scatterT0 = performance.now();
     const TREE_SCATTER_COUNT = scatterTrees();
     const TREE_SCATTER_MS = Math.round(performance.now() - _scatterT0);
+
+    // Four instanced draws cover every band: brush, saplings, fallen wood, stone.
+    // Their collision remains the circles above; visual jitter never changes the gap.
+    const wallBandMeshes = [];
+    function buildWallBandVisuals() {
+      if (!wallBands.length || typeof TSL.instancedArray !== 'function') return;
+      const rnd = mulberry32(0x6b9d25);
+      const lists = { brush: [], sap: [], log: [], rock: [] };
+      for (const band of wallBands.filter((b) => b.kind !== 'shortcut-deadfall')) for (let i = 0; i < band.solids.length; i++) {
+        const s = band.solids[i];
+        const nx = s.nx, nz = s.nz;
+        for (const side of [-1, 1]) {
+          const offset = side * (0.45 + rnd() * 0.75), along = (rnd() - 0.5) * 0.7;
+          const x = s.x + nx * offset - nz * along, z = s.z + nz * offset + nx * along;
+          lists.brush.push({ x, z, yaw: rnd() * 6.283, s: 0.95 + rnd() * 0.65 });
+        }
+        if (i % 5 === 0) lists.sap.push({ x: s.x + nx * (rnd() - 0.5), z: s.z + nz * (rnd() - 0.5), yaw: rnd() * 6.283, s: 1.05 + rnd() * 0.5 });
+        if (i % 11 === 0) lists.log.push({ x: s.x + nx * (rnd() - 0.5), z: s.z + nz * (rnd() - 0.5), yaw: Math.atan2(nz, nx) + (rnd() - 0.5) * 0.8, s: 1.2 + rnd() * 0.8 });
+        if (i % 19 === 0) lists.rock.push({ x: s.x + nx * (rnd() - 0.5), z: s.z + nz * (rnd() - 0.5), yaw: rnd() * 6.283, s: 0.8 + rnd() * 0.6 });
+      }
+      const plantGeo = (forms) => mergeParts(forms.map(([geo, hex, x, y, z, rz = 0]) => {
+        const mesh = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: hex }));
+        mesh.position.set(x, y, z); mesh.rotation.z = rz;
+        return mesh;
+      }), treeCanopyMat).geometry;
+      const geos = {
+        brush: plantGeo([
+          [new THREE.IcosahedronGeometry(0.5, 0), 0x2c492b, -0.34, 0.55, -0.12],
+          [new THREE.IcosahedronGeometry(0.55, 0), 0x365633, 0.24, 0.63, 0.18],
+          [new THREE.IcosahedronGeometry(0.37, 0), 0x25432b, 0.02, 1.04, -0.18],
+          [new THREE.ConeGeometry(0.08, 0.65, 4), 0x4b5c38, -0.47, 1.07, 0, -0.32],
+          [new THREE.ConeGeometry(0.07, 0.55, 4), 0x465835, 0.4, 1.12, -0.05, 0.4]
+        ]),
+        sap: plantGeo([
+          [new THREE.CylinderGeometry(0.07, 0.11, 1.8, 5), 0x4c3d30, 0, 0.9, 0],
+          [new THREE.ConeGeometry(0.39, 1.05, 5), 0x2d4930, 0, 1.28, 0],
+          [new THREE.ConeGeometry(0.27, 0.95, 5), 0x365736, 0, 1.7, 0]
+        ]),
+        log: paintUnderGeo(new THREE.CylinderGeometry(0.15, 0.19, 2.1, 5), 0x594734),
+        rock: paintUnderGeo(new THREE.DodecahedronGeometry(0.48, 0), 0x50554e)
+      };
+      geos.log.rotateZ(Math.PI / 2);
+      for (const kind of ['brush', 'sap', 'log', 'rock']) {
+        const list = lists[kind];
+        if (!list.length) continue;
+        const matrices = TSL.instancedArray(list.length, 'mat4');
+        const mat = (kind === 'log' || kind === 'rock' ? treeWoodMat : treeCanopyMat).clone();
+        mat.positionNode = matrices.element(TSL.instanceIndex).mul(TSL.positionLocal).xyz;
+        const mesh = new THREE.Mesh(geos[kind], mat);
+        mesh.count = list.length; mesh.frustumCulled = false;
+        mesh.castShadow = false; mesh.receiveShadow = false; mesh.matrixAutoUpdate = false;
+        mesh.userData.wallBand = kind;
+        const arr = matrices.value.array;
+        for (let i = 0; i < list.length; i++) {
+          const it = list[i];
+          writeUnderMat(arr, i, it.x, sampleHeight(it.x, it.z) + (kind === 'log' ? 0.19 : kind === 'rock' ? 0.35 : 0), it.z, it.yaw, it.s);
+        }
+        matrices.value.needsUpdate = true;
+        if (matrices.value.version != null) matrices.value.version++;
+        scene.add(mesh); wallBandMeshes.push(mesh);
+      }
+    }
+    buildWallBandVisuals();
+
+    // All five deadfalls share one low-poly bark draw. Each trunk has two end
+    // instances and one 3 m kerf instance; cutting hides only the three kerfs.
+    function buildShortcutLogVisuals() {
+      if (!shortcutBands.length || typeof TSL.instancedArray !== 'function') return;
+      const count = shortcutBands.length * 9;
+      const matrices = TSL.instancedArray(count, 'mat4');
+      const geo = paintUnderGeo(new THREE.CylinderGeometry(0.23, 0.25, 1, 7), 0x574636);
+      geo.rotateZ(Math.PI / 2);
+      const mat = treeWoodMat.clone();
+      mat.positionNode = matrices.element(TSL.instanceIndex).mul(TSL.positionLocal).xyz;
+      const mesh = new THREE.Mesh(geo, mat);
+      mesh.count = count; mesh.frustumCulled = false;
+      mesh.castShadow = false; mesh.receiveShadow = false; mesh.matrixAutoUpdate = false;
+      mesh.userData.shortcutLogs = true;
+      const arr = matrices.value.array;
+      shortcutVisualSync = () => {
+        let i = 0;
+        for (const band of shortcutBands) for (const p of shortcutLogPieces(band)) {
+          const o = i++ * 16, c = Math.cos(p.yaw), s = Math.sin(p.yaw);
+          const L = p.visible ? p.length : 0.00001, R = p.radius / 0.24;
+          arr[o] = c * L; arr[o + 1] = p.rise; arr[o + 2] = s * L; arr[o + 3] = 0;
+          arr[o + 4] = 0; arr[o + 5] = R; arr[o + 6] = 0; arr[o + 7] = 0;
+          arr[o + 8] = -s * R; arr[o + 9] = 0; arr[o + 10] = c * R; arr[o + 11] = 0;
+          arr[o + 12] = p.x; arr[o + 13] = p.visible ? p.y : -1000; arr[o + 14] = p.z; arr[o + 15] = 1;
+        }
+        matrices.value.needsUpdate = true;
+        if (matrices.value.version != null) matrices.value.version++;
+      };
+      shortcutVisualSync();
+      scene.add(mesh);
+    }
+    buildShortcutLogVisuals();
 
     // Scenery stays drawn across the whole map. It used to be hidden outside the
     // purchased radius, so half the world simply vanished behind an invisible circle
@@ -18504,6 +18824,13 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     let tbFrame = 0;
     const treeBatchCells = new Map();
     const treeBatchMembers = [];
+    const TB_GRID = 16, treeBatchGrid = new Map();
+    function tbGridAdd(m) {
+      const k = (Math.floor(m.tree.x / TB_GRID)) + ',' + (Math.floor(m.tree.z / TB_GRID));
+      let a = treeBatchGrid.get(k);
+      if (!a) treeBatchGrid.set(k, (a = []));
+      a.push(m);
+    }
     let treeBatchesBuilt = false;
     const _tbNM = new THREE.Matrix3();
 
@@ -18524,6 +18851,14 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     function tbSame(a, b) {
       for (let i = 0; i < TB_SNAP_N; i++) if (a[i] !== b[i]) return false;
       return true;
+    }
+    // The fields a shot, a burn or a hide change. Position stays out: a batched tree is frozen.
+    function tbDrifted(t, snap) {
+      const g = t.group;
+      return t.alive !== snap[0] || t.falling !== snap[1] || !!t.stump !== snap[2] || !!t.log !== snap[3]
+        || t.leafHealth !== snap[4] || t.health !== snap[5] || (t.burnT || 0) !== snap[6] || (t.smoulder || 0) !== snap[7]
+        || (t.trimStage || 0) !== snap[8] || !!t.canopyTransparent !== snap[9] || g.visible !== snap[10]
+        || g.parent !== snap[11] || (t.leafHiddenCount || 0) !== snap[19];
     }
     // The meshes a batch copies. Crown wood rides on the canopy group, so it is baked
     // with the canopy at rest (the breeze is live-only).
@@ -18699,15 +19034,22 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
     // Copies the instances that should draw. Standing still does not upload again:
     // a fresh buffer every frame was most of the render cost past 1x.
-    let _forestFrustum = null, _forestProj = null, _forestSphere = null, forestCamSig = null;
+    let _forestFrustum = null, _forestProj = null, _forestSphere = null, forestCamSig = null, forestFogSig = null;
+    let forestFlushRuns = 0, forestFlushSkips = 0;
     function forestFlush() {
       let dirty = false;
       for (const pack of forestPacks) if (pack.dirty) { dirty = true; break; }
+      // CU-208: night fog (far 32) hid the far canopy and the GPU still drew it. Repack when the fog moves
+      // so dawn brings those trees back without a camera step.
+      const fogFar = (typeof scene !== 'undefined' && scene && scene.fog) ? scene.fog.far : 0;
+      const fogSig = fogFar | 0;
       const camSig = (typeof camera !== 'undefined' && camera)
         ? ((camera.position.x | 0) ^ ((camera.position.z | 0) << 8) ^ ((camera.rotation.y * 16 | 0) << 16))
         : 0;
-      if (forestCamSig === camSig && !dirty) return;
+      if (forestCamSig === camSig && forestFogSig === fogSig && !dirty) { forestFlushSkips++; return; }
+      forestFlushRuns++;
       forestCamSig = camSig;
+      forestFogSig = fogSig;
       let view = null;
       if (FOREST_COMPACT && typeof camera !== 'undefined' && camera && typeof THREE.Frustum === 'function') {
         if (!_forestFrustum) {
@@ -18726,11 +19068,16 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         let n = 0;
         for (const m of pack.members) {
           if (!m.inBatch || !m.forest.shown) continue;
+          const t = m.tree;
           if (view) {
-            const t = m.tree;
             _forestSphere.center.set(t.x, (t.group.position.y || 0) + 8, t.z);
             _forestSphere.radius = (t.canopyRadius || 4) + 12;
             if (!view.intersectsSphere(_forestSphere)) continue;
+          }
+          if (fogFar > 1 && camera) {
+            const dx = t.x - camera.position.x, dz = t.z - camera.position.z;
+            const reach = fogFar + (t.canopyRadius || 4) + 3;
+            if (dx * dx + dz * dz > reach * reach) continue;
           }
           const src = m.forest.slot * 16, dst = n * 16;
           for (let i = 0; i < 16; i++) gpu[dst + i] = pack.cpu[src + i];
@@ -18745,6 +19092,32 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         if (tintBuf.version != null) tintBuf.version++;
       }
       forestShownN = shown;
+      // CU-208: the brush is one draw of every bush. At night the fog hides all but the nearest,
+      // and the rest were still submitted.
+      if (understoryPacks.length && camera) {
+        const cx = camera.position.x, cz = camera.position.z;
+        const reach = fogFar > 1 ? fogFar + 3 : 1e9, r2 = reach * reach;
+        for (const pack of understoryPacks) {
+          const gpu = pack.buf.array;
+          let n = 0;
+          for (let i = 0; i < pack.list.length; i++) {
+            const it = pack.list[i];
+            const dx = it.x - cx, dz = it.z - cz;
+            if (dx * dx + dz * dz > r2) continue;
+            if (view) {
+              _forestSphere.center.set(it.x, 2, it.z);
+              _forestSphere.radius = 2;
+              if (!view.intersectsSphere(_forestSphere)) continue;
+            }
+            const src = i * 16, dst = n * 16;
+            for (let k = 0; k < 16; k++) gpu[dst + k] = pack.cpu[src + k];
+            n++;
+          }
+          pack.mesh.count = n;
+          pack.buf.needsUpdate = true;
+          if (pack.buf.version != null) pack.buf.version++;
+        }
+      }
     }
     function forestGoLive(m, why) {
       ensureTreeGrown(m.tree);
@@ -18753,7 +19126,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         m.wood = parts.wood; m.leaf = parts.leaf;
       }
       m.inBatch = false;
-      if (m.tree.group) m.tree.group.userData.walkSkip = false;
+      if (m.tree.group) {
+        m.tree.group.userData.walkSkip = false;
+        if (!m.tree.group.parent) scene.add(m.tree.group);
+        if (m.tree.alive && !m.tree.stump && !m.tree.log) m.tree.group.visible = true;
+      }
       m.tree._tbInBatch = false;
       if (why === 'changed') { m.dirty = true; m.tree._tbRestored = false; }
       forestWrite(m, true);
@@ -18766,9 +19143,15 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       m.inBatch = true;
       m.tree._tbInBatch = true;
       m.dirty = false;
+      // Off the scene while the instance draws: sceneCull and the render walk were
+      // visiting every far tree. The snapshot is taken after, so a null parent is rest.
+      if (m.tree.group) {
+        m.tree.group.visible = false;
+        m.tree.group.userData.walkSkip = true;
+        if (m.tree.group.parent) m.tree.group.parent.remove(m.tree.group);
+      }
       m.snap = tbSnapshot(m.tree);
       tbFreeze(m.tree, true);
-      if (m.tree.group) m.tree.group.userData.walkSkip = true;
     }
     function forestMaterial(base, matrices, tints) {
       const mat = base.clone();
@@ -18845,14 +19228,19 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
             inBatch: true, dirty: false, snap: null
           };
           tree._forestMember = m;
+          if (tree.group) {
+            tree.group.visible = false;
+            tree.group.userData.walkSkip = true;
+            if (tree.group.parent) tree.group.parent.remove(tree.group);
+          }
           m.snap = tbSnapshot(tree);
           forestWrite(m, false);
           if (tree.trunkMesh) tbShowOwn(m, false);
           tbFreeze(tree, true);
-          if (tree.group) tree.group.userData.walkSkip = true;
           tree._tbInBatch = true;
           holder.members.push(m);
           treeBatchMembers.push(m);
+          tbGridAdd(m);
         });
       }
       forestOn = true;
@@ -18869,7 +19257,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           console.warn('Grave Shift: instanced forest failed, using the cells.', err);
           window.__forestErr = String(err && (err.stack || err.message) || err);
           for (const pack of forestPacks) { if (pack.wood) scene.remove(pack.wood); if (pack.leaf) scene.remove(pack.leaf); }
-          forestPacks.length = 0; forestOn = false; forestMeshN = 0; forestTemplates = 0; treeBatchMembers.length = 0;
+          forestPacks.length = 0; forestOn = false; forestMeshN = 0; forestTemplates = 0; treeBatchMembers.length = 0; treeBatchGrid.clear();
           if (trees.length > 2200) return;
           for (const t of trees) { t._tbInBatch = false; t._forestMember = null; if (t.group) t.group.userData.walkSkip = false; ensureTreeGrown(t); }
         }
@@ -18893,6 +19281,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         cell.leaf.n += m.leafCount;
         cell.members.push(m);
         treeBatchMembers.push(m);
+        tbGridAdd(m);
       }
       // Build: one wood mesh and one canopy mesh per cell, every tree written in.
       for (const cell of treeBatchCells.values()) {
@@ -18952,21 +19341,30 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
     function updateTreeBatchesInner() {
       const px = player.position.x, pz = player.position.z;
-      const liveIn = SHADOW_NEAR + TB_LIVE_PAD_IN, liveOut = SHADOW_NEAR + TB_LIVE_PAD_OUT;
+      const woodsNear = urlParams.get('woods') !== '0' && !FOREST_OLD;
+      const liveIn = woodsNear ? 18 : SHADOW_NEAR + TB_LIVE_PAD_IN;
+      const liveOut = woodsNear ? 26 : SHADOW_NEAR + TB_LIVE_PAD_OUT;
       // A changed tree swaps at once. Swaps for distance alone are spread over frames
       // (a teleport or the insertion drop moves the player hundreds of metres at once),
       // since a batch copy and the tree's own meshes look the same.
       let moves = TB_MOVES_PER_FRAME;
-      // The change check runs on a third of the batched trees each frame: a far tree that
-      // is hit shows its batch copy for at most two more frames, and the check costs a
-      // third as much.
+      // Far trees only compare the fields a hit changes. The full pose snapshot stays
+      // inside the watch ring, a third of those trees a frame, as before.
+      const watch = liveOut + 48;
       const slice = (tbFrame++) % 3;
-      for (let i = 0; i < treeBatchMembers.length; i++) {
-        const m = treeBatchMembers[i], t = m.tree;
+      const fogFar = (typeof scene !== 'undefined' && scene && scene.fog && scene.fog.far > 1) ? scene.fog.far : 1e9;
+      // At night the fog hides the valley. Only the trees inside it are worth a look;
+      // by day the whole list is still walked, a third of it for a hit.
+      const nightScan = fogFar < 80 && treeBatchGrid.size > 0;
+      const consider = (m, i) => {
+        const t = m.tree;
         const d = Math.max(Math.abs(t.x - px), Math.abs(t.z - pz));
         if (m.inBatch) {
-          if (i % 3 === slice && !tbSame(m.snap, tbSnapshot(t, _tbScratch))) tbGoLive(m, 'changed');
-          else if (d < liveIn && moves > 0) { moves--; tbGoLive(m, 'near'); }
+          if (d < liveIn && moves > 0) { moves--; tbGoLive(m, 'near'); }
+          else if (i % 3 === slice && m.snap) {
+            if (d < watch) { if (!tbSame(m.snap, tbSnapshot(t, _tbScratch))) tbGoLive(m, 'changed'); }
+            else if (tbDrifted(t, m.snap)) tbGoLive(m, 'changed');
+          }
         } else if (d > liveOut && moves > 0) {
           if (t._tbRestored) { m.dirty = false; t._tbRestored = false; }
           // CL-220: a change that undid itself (the canopy fade on the camera's line, a hidden leaf back) leaves the tree
@@ -18975,6 +19373,19 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           if (!m.dirty && t.alive && !t.falling && !t.stump && !t.log && t.group.visible && t.group.parent &&
               !t.canopyTransparent && !(t.burnT > 0) && !(t.smoulder > 0)) { moves--; tbGoBatch(m); }
         }
+      };
+      if (nightScan) {
+        const scan = fogFar + 24;
+        const i0 = Math.floor((px - scan) / TB_GRID), i1 = Math.floor((px + scan) / TB_GRID);
+        const j0 = Math.floor((pz - scan) / TB_GRID), j1 = Math.floor((pz + scan) / TB_GRID);
+        let n = 0;
+        for (let j = j0; j <= j1; j++) for (let i = i0; i <= i1; i++) {
+          const bucket = treeBatchGrid.get(i + ',' + j);
+          if (!bucket) continue;
+          for (let k = 0; k < bucket.length; k++) consider(bucket[k], n++);
+        }
+      } else {
+        for (let i = 0; i < treeBatchMembers.length; i++) consider(treeBatchMembers[i], i);
       }
       if (forestOn) forestFlush();
     }
@@ -18982,7 +19393,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       let live = 0, batched = 0, cells = 0, meshes = 0, dirty = 0;
       for (const m of treeBatchMembers) { if (m.inBatch) batched++; else live++; if (m.dirty) dirty++; }
       for (const c of treeBatchCells.values()) { cells++; if (c.wood.mesh) meshes++; if (c.leaf.mesh) meshes++; }
-      return { off: TREE_BATCH_OFF, mode: FOREST_OLD || !forestOn ? 'cells' : 'forest', built: treeBatchesBuilt, buildMs: Math.round(treeBatchBuildMs), frameMsAvg: +(treeBatchTiming.ms / Math.max(1, treeBatchTiming.calls)).toFixed(3), frameMsMax: +treeBatchTiming.maxMs.toFixed(2), calls: treeBatchTiming.calls, trees: trees.length, members: treeBatchMembers.length, batched, live, dirty, cells, meshes: meshes + forestMeshN, templates: forestTemplates, instances: forestShownN, scatterMs: TREE_SCATTER_MS, compact: FOREST_COMPACT, understory: UNDERSTORY_DRAWS };
+      let underN = 0; for (const p of understoryPacks) underN += p.mesh.count;
+      return { off: TREE_BATCH_OFF, mode: FOREST_OLD || !forestOn ? 'cells' : 'forest', built: treeBatchesBuilt, buildMs: Math.round(treeBatchBuildMs), frameMsAvg: +(treeBatchTiming.ms / Math.max(1, treeBatchTiming.calls)).toFixed(3), frameMsMax: +treeBatchTiming.maxMs.toFixed(2), calls: treeBatchTiming.calls, trees: trees.length, members: treeBatchMembers.length, batched, live, dirty, cells, meshes: meshes + forestMeshN, templates: forestTemplates, instances: forestShownN, underN, flushes: forestFlushRuns, skips: forestFlushSkips, scatterMs: TREE_SCATTER_MS, compact: FOREST_COMPACT, understory: UNDERSTORY_DRAWS };
     }
 
     // --- Weapons (shared mats) ---
@@ -32195,6 +32607,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
     let hudPromptElapsed = 0, hudPromptLastMs = -Infinity, hudPromptAction = null;
     let hudStateLastMs = -Infinity, hudStateKey = '';
+    let trailRun = -1, trailJoined = false;
     function updateKioskPrompt(dt) {
       enforceNightLockdown();   // CU-82
       if (gameStarted && !objectiveRuntime) {
@@ -32236,13 +32649,16 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         // One prompt for whatever E would do right now (see actionTarget).
         const a = shopOpen ? null : actionTarget();
         hudPromptAction = a;
+        if (uiRunId !== trailRun) { trailRun = uiRunId; trailJoined = false; }
+        if (Math.hypot(player.position.x, player.position.z) < 24) trailJoined = true;
         const hudState = { dt: hudPromptElapsed, active: gameStarted && !gameOver && !won && !paused && !shopOpen,
           nearWindow: a === 'hqWindow', skulls: skullBag.count,
           day, phase, cash: bank, hp: playerHp, maxHp: PLAYER_MAX_HP, medkits,
           building: !!(buildMode || placeMode), hasPair: !!dualOwned[currentWeapon], akimbo: akimboOn(),
-          pendingDeposit: hq.dep !== 'idle' && hq.dep !== 'green' };
+          pendingDeposit: hq.dep !== 'idle' && hq.dep !== 'green',
+          firstRun: !(runRecords.read().runs > 0), atHq: trailJoined };
         const stateKey = [uiRunId, hudState.active, hudState.nearWindow, hudState.skulls, day, phase, bank, playerHp, medkits,
-          hudState.building, hudState.hasPair, hudState.akimbo, hudState.pendingDeposit].join('|');
+          hudState.building, hudState.hasPair, hudState.akimbo, hudState.pendingDeposit, hudState.firstRun, hudState.atHq].join('|');
         if (stateKey !== hudStateKey || promptNowMs - hudStateLastMs >= 200 || dt <= 0) {
           publishUI('hud-state', hudState);
           hudStateKey = stateKey; hudStateLastMs = promptNowMs; hudPromptElapsed = 0;
@@ -32259,6 +32675,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         else if (a === 'utilBench') text = utilityPromptFor('workshop');
         else if (a === 'utilSiren') text = utilityPromptFor('alarm');
         else if (a === 'utilHose') text = utilitySay('utility.hosePrompt', { interact: 'E' }, 'E \u2014 Hose the fire');
+        else if (a === 'iron') text = ironPromptText();   // GB-266
         else if (a === 'cif') text = dwText('cif.prompt');
         else if (a === 'rangeConsole') text = 'E — '+sayText('range.prompt');
         else if (a === 'trainingPanel') text = sayText('training.panelPrompt', {}, 'E — HQ panel: call in zombies');   // CL-115
@@ -32269,6 +32686,13 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         else if (a === 'convoyRecording' || a === 'hikerRecording') text=dwText(a==='convoyRecording'?'story.recording.radioPrompt':'story.recording.cameraPrompt');
         else if (a === 'hollowHaul') { const p = localPlayer.position, haul = hollowHaulTarget(p.x, p.y, p.z); if (haul) text = dwText(haul.kind === 'box' ? 'haul.open' : haul.kind === 'tag' ? 'haul.tag' : 'haul.crate'); }
         else if (a === 'hollowPassage') { const hp = hollowPassage(); if (hp) text = sayText('hollow.passage', { cave: hp.name }, hp.name ? 'E \u2014 Take the passage to ' + hp.name : 'E \u2014 Take the passage'); }   // CU-72
+        else if (a === 'shortcut') {
+          const cut = nearestShortcut(shortcutBands, localPlayer.position.x, localPlayer.position.z);
+          text = cut && cut.holdSeconds > 0
+            ? dwText('interaction.shortcut.progress', { percent: Math.round(cut.holdSeconds * 25) })
+            : dwText(currentWeapon === 'chainsaw' && weaponOwned.chainsaw
+              ? 'interaction.shortcut.hold' : 'interaction.shortcut.inspect', { interact: 'E' });
+        }
         else if (a === 'mountMortar') text = sayText(nearestMortar(2.6)?.type === 'm240' ? 'interaction.watchman' : 'interaction.mortar');
         else if (a === 'door') { const d = nearestDoor(); text = d && d.doorOpen ? 'E — Close the door' : 'E — Open the door'; }
         else if (a === 'stairs') { const st = nearestFoldStairs(); text = st && st.folded ? 'E — Lower the stairs' : 'E — Raise the stairs'; }
@@ -32457,6 +32881,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (!placeMode && !buildMode && survivorInReach()) return 'survivor';   // GB-90
       if (!placeMode && !buildMode && roofSurvivorInReach()) return 'roofSurvivor';   // GB-116
       if (!placeMode && !buildMode && runePistolInReach()) return 'runePistol';   // GB-119
+      if (!placeMode && !buildMode && ironTarget(px, pz)) return 'iron';   // GB-266
       if (kd < KIOSK.useDist && kd <= md && kd <= dd && kd <= sd) return 'kiosk';
       if (m && md <= dd && md <= sd) return 'mountMortar';
       if (dr && dd <= sd) return 'door';
@@ -32471,6 +32896,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         }
         if (best) { coldCampfire = best; coldCampYaw = Math.atan2(best.x - px, best.z - pz); return 'lightFire'; }
       }
+      if (SHORTCUTS_ON && !placeMode && !buildMode && nearestShortcut(shortcutBands, px, pz)) return 'shortcut';
       return null;
     }
     function doAction() {
@@ -32485,6 +32911,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       else if (a === 'hushWire') wireHushBoard();   // CL-259
       else if (a === 'utilPump' || a === 'utilBench' || a === 'utilSiren') utilityInstallAction(a);   // CU-201
       else if (a === 'utilHose') utilityHose();
+      else if (a === 'iron') ironUseE();   // GB-266
       else if (a === 'cif') openCIF();
       else if (a === 'armory') { openCIF(); if (cifOpen) { cifEl.classList.add('armory-only'); if (armoryUI && armoryUI.open) armoryUI.open(); if (AudioSys.armoryBench) AudioSys.armoryBench(); } }   // CL-103b: the Armory alone
       else if (a === 'convoyJack') convoyMissionEvents(convoyMission.tap());
@@ -32499,6 +32926,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       else if (a === 'survivor') rescueSurvivor(survivorInReach());   // GB-90
       else if (a === 'roofSurvivor') roofSurvivorAction();   // GB-116
       else if (a === 'runePistol') takeRunePistol();   // GB-119
+      else if (a === 'shortcut') {
+        if (!weaponOwned.chainsaw) showBanner(dwText('interaction.shortcut.needSaw'), '', 1.4);
+        else if (currentWeapon !== 'chainsaw') showBanner(dwText('interaction.shortcut.equipSaw'), '', 1.4);
+        else if (sawFuel <= 0) showBanner(dwText('interaction.shortcut.drySaw'), '', 1.4);
+      }
       else if (a) interactMortar();
       else if (tower?.alive && onTowerDeck && hypot(localPlayer.position.x - tower.x, localPlayer.position.z - tower.z) < TOWER_DECK_HALF + 0.8)
         readPropNote('watchtower');
@@ -32511,6 +32943,23 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // D-17 / CU-11. Any site can be asked; only one hold timer runs, on the site
     // that was reachable when E went down.
     let objEDown = false, objEPressed = false;
+    let shortcutHoldBand = null;
+    function stepShortcutInteraction(dt) {
+      const p = localPlayer.position;
+      const target = SHORTCUTS_ON && gameStarted && !gameOver && !won
+        ? nearestShortcut(shortcutBands, p.x, p.z) : null;
+      const held = !!(target && objEDown && weaponOwned.chainsaw && currentWeapon === 'chainsaw'
+        && !unarmed && !objectiveModalOpen() && !playerSwimming);
+      if (shortcutHoldBand && (!held || shortcutHoldBand !== target)) {
+        stepShortcutCut(shortcutHoldBand, 0, { held: false, inReach: false, bite: false });
+        shortcutHoldBand = null;
+      }
+      if (!held) return;
+      shortcutHoldBand = target;
+      const bite = sawCutTick(dt); // GB-265 owns gas, heat, chain, sound and 40 m hearing
+      const result = stepShortcutCut(target, dt, { held: true, inReach: true, bite });
+      if (result.completed) { syncShortcutOpen(target, true, true); shortcutHoldBand = null; }
+    }
     let objHoldId = null, objHoldSeconds = 0, objCancelId = null, objCancel = null, objDamaged = false;
     function getObjectiveProps() { return objectiveProps; }
     function objectiveModalOpen() {
@@ -32759,6 +33208,133 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         for (const u of on) utilityCameOn(u);
       }
       if (any) { utilityTags(); utilityHud(); }
+    }
+    // GB-266 (CL-289 iron, CL-287 W2; D-106): the old man's horseshoe sets (utilities' supply 'horseshoes'), hung with E
+    // over a ring gap or a cut shortcut (GP-20007), close it to the dead only (combat/iron-gaps.js). The line is marked in
+    // both of the dead's fields (valleyBlock, tagged) and updateZombies pushes a dead body back off it; he is never pushed.
+    // Held for the run with the utilities and reset with it; E again takes a set down to move it.
+    const ironSupply = {
+      count: () => (utilitiesOn && utilities.isOn('iron')) ? utilities.supply('horseshoes') : 0,
+      take: () => utilities.use('horseshoes', 1),
+      give: () => { const s = utilities.read(); s.supply.horseshoes = (s.supply.horseshoes || 0) + 1; utilities.load(s); },
+    };
+    const ironGaps = createIronGaps(ironSupply);
+    const ironMeshes = new Map(), ironHungList = [];
+    let ironHungN = 0, ironSpotCache = null, ironSpotSig = '', ironLook = null;
+    const _ironOut = { x: 0, z: 0 };
+    function ironSpots() {
+      let sig = '';
+      for (const b of shortcutBands) sig += b.cut ? '1' : '0';
+      if (ironSpotCache && sig === ironSpotSig) return ironSpotCache;
+      const out = [];
+      for (const band of wallBands) if (band.kind === 'hq-thicket') out.push(...ringGapSpots(band, { isWater: (x, z) => waterDepthAt(x, z) > 0.05 }));
+      for (const band of shortcutBands) { const s = shortcutSpot(band); if (s) out.push(s); }
+      ironSpotCache = out; ironSpotSig = sig;
+      return out;
+    }
+    function ironPushDead(x, z, r, px, pz) {
+      _ironOut.x = x; _ironOut.z = z;
+      for (let i = 0; i < ironHungList.length; i++) {
+        const p = ironPush(ironHungList[i], _ironOut.x, _ironOut.z, r, px, pz);
+        if (p) { _ironOut.x = p.x; _ironOut.z = p.z; }
+      }
+      return _ironOut;
+    }
+    // One set: two posts and a wire across the gap, the shoes hung on it open end up. Two draws a set.
+    function ironMerge(parts) {
+      const pos = [], nor = [];
+      for (const p of parts) {
+        const g = p.geo.index ? p.geo.toNonIndexed() : p.geo.clone();
+        g.applyMatrix4(p.m); pos.push(g.attributes.position.array); nor.push(g.attributes.normal.array); g.dispose();
+      }
+      const n = pos.reduce((a, b) => a + b.length, 0), P = new Float32Array(n), N = new Float32Array(n);
+      for (let i = 0, o = 0; i < pos.length; o += pos[i].length, i++) { P.set(pos[i], o); N.set(nor[i], o); }
+      const g = new THREE.BufferGeometry();
+      g.setAttribute('position', new THREE.BufferAttribute(P, 3)); g.setAttribute('normal', new THREE.BufferAttribute(N, 3));
+      g.computeBoundingSphere(); return g;
+    }
+    function ironMesh(s) {
+      if (!ironLook) ironLook = {
+        post: new THREE.CylinderGeometry(0.06, 0.075, 1.7, 6), wire: new THREE.CylinderGeometry(0.012, 0.012, 1, 4),
+        shoe: new THREE.TorusGeometry(0.075, 0.015, 4, 10, Math.PI * 1.6),
+        wood: new THREE.MeshStandardMaterial({ color: 0x4e3d2c, roughness: 0.92, metalness: 0.05 }),
+        iron: new THREE.MeshStandardMaterial({ color: 0x5f5a54, roughness: 0.55, metalness: 0.7 }),
+      };
+      const k = ironLook, up = new THREE.Vector3(0, 1, 0);
+      const m4 = (x, y, z, q, sx = 1, sy = 1, sz = 1) => new THREE.Matrix4().compose(new THREE.Vector3(x, y, z), q || new THREE.Quaternion(), new THREE.Vector3(sx, sy, sz));
+      const frameParts = [], shoes = [];
+      const segs = ironSegs(s);
+      for (let q = 0; q < segs.length; q++) {
+        const sg = segs[q], ux = sg.ux, uz = sg.uz;
+        const ax = sg.x - ux * sg.half, az = sg.z - uz * sg.half, bx = sg.x + ux * sg.half, bz = sg.z + uz * sg.half;
+        const ay = sampleHeight(ax, az), by = sampleHeight(bx, bz);
+        const a = new THREE.Vector3(ax, ay + 1.5, az), b = new THREE.Vector3(bx, by + 1.5, bz), d = b.clone().sub(a), len = d.length();
+        if (q === 0) frameParts.push({ geo: k.post, m: m4(ax, ay + 0.75, az) });
+        frameParts.push({ geo: k.post, m: m4(bx, by + 0.75, bz) });
+        frameParts.push({ geo: k.wire, m: m4((ax + bx) / 2, (ay + by) / 2 + 1.5, (az + bz) / 2, new THREE.Quaternion().setFromUnitVectors(up, d.clone().normalize()), 1, len, 1) });
+        // The torus's gap is centred at -0.2 pi: turned 0.7 pi about z it opens up; then its plane along the wire.
+        const sq = new THREE.Quaternion().setFromEuler(new THREE.Euler(0, Math.atan2(-uz, ux), 0.7 * Math.PI, 'YXZ'));
+        const n = Math.max(2, Math.round(len / 0.42));
+        for (let i = 0; i < n; i++) { const p = a.clone().addScaledVector(d, (i + 0.5) / n); shoes.push({ geo: k.shoe, m: m4(p.x, p.y - 0.1, p.z, sq) }); }
+      }
+      const g = new THREE.Group(); g.name = 'iron-' + s.id;
+      const fm = new THREE.Mesh(ironMerge(frameParts), k.wood), sm = new THREE.Mesh(ironMerge(shoes), k.iron);
+      fm.castShadow = sm.castShadow = true;
+      g.add(fm, sm); return g;
+    }
+    function ironSync() {
+      ironGaps.prune(new Set(ironSpots().map((s) => s.id)));
+      ironHungList.length = 0;
+      for (const s of ironGaps.hung()) ironHungList.push(s);
+      ironHungN = ironHungList.length;
+      for (const [id, g] of ironMeshes) if (!ironGaps.isHung(id)) {
+        scene.remove(g); g.traverse((o) => { if (o.geometry) o.geometry.dispose(); });
+        ironMeshes.delete(id); valleyUnblock('iron:' + id);
+      }
+      for (const s of ironHungList) if (!ironMeshes.has(s.id)) {
+        const g = ironMesh(s); scene.add(g); ironMeshes.set(s.id, g);
+        for (const c of ironBlockCircles(s)) valleyBlock(c.x, c.z, c.r, 'iron:' + s.id);
+      }
+      utilityHud();
+      try { updateFlowFields(0, true); } catch (_) {}
+    }
+    // The spot in reach: a hung one (to take down), or an empty one when he has a set.
+    function ironTarget(px, pz) {
+      if (!gameStarted || gameOver || won) return null;
+      const s = nearestSpot(ironSpots(), px, pz);
+      if (!s) return null;
+      if (ironGaps.isHung(s.id)) return s;
+      return ironSupply.count() > 0 ? s : null;
+    }
+    function ironPromptText() {
+      const P = localPlayer.position, s = ironTarget(P.x, P.z);
+      if (!s) return null;
+      return ironGaps.isHung(s.id)
+        ? sayText('utility.iron.takeDownPrompt', { interact: 'E' }, 'E \u2014 Take the horseshoes down')
+        : sayText('utility.iron.hangPrompt', { interact: 'E' }, 'E \u2014 Hang horseshoes');
+    }
+    function ironUseE() {
+      const P = localPlayer.position, s = ironTarget(P.x, P.z);
+      if (!s) return false;
+      const was = ironGaps.isHung(s.id);
+      const done = was ? ironGaps.takeDown(s.id) : ironGaps.hang(s);
+      if (!done) return false;
+      ironSync();
+      if (!was) showBanner(sayText('utility.iron.hangBanner', {}, 'THE GAP IS CLOSED TO THE DEAD'), '', 1.8, '#d7c6a4');
+      window.dispatchEvent(new CustomEvent('dw-log', { detail: { iron: s.id, state: was ? 'down' : 'hung', left: utilities.supply('horseshoes') } }));
+      return true;
+    }
+    window.addEventListener('dw-game', (e) => { if (e.detail?.type === 'run-reset') { ironGaps.reset(); ironSync(); } });
+    function ironDbg() {
+      return {
+        spots: () => ironSpots().map((s) => ({ id: s.id, kind: s.kind, x: s.x, z: s.z, ux: s.ux, uz: s.uz, half: s.half, segs: ironSegs(s).map((g) => ({ x: g.x, z: g.z, ux: g.ux, uz: g.uz, half: g.half })), hung: ironGaps.isHung(s.id) })),
+        read: () => ironGaps.read(), left: () => ironSupply.count(), target: () => { const P = localPlayer.position, s = ironTarget(P.x, P.z); return s ? s.id : null; },
+        prompt: () => ironPromptText(), use: () => ironUseE(), meshes: () => ironMeshes.size,
+        hang: (id) => { const s = ironSpots().find((q) => q.id === id); const ok = !!s && ironGaps.hang(s); if (ok) ironSync(); return ok; },
+        down: (id) => { const ok = ironGaps.takeDown(id); if (ok) ironSync(); return ok; },
+        push: (x, z, r = 0.35, px = x, pz = z) => { const p = ironPushDead(x, z, r, px, pz); return { x: p.x, z: p.z }; },
+        blocks: () => valleyBlocks.filter((b) => b.tag).length,
+      };
     }
     // Is this site's lead closed (so the site is hidden and locked while the gate is on)?
     function storyClosedSite(site) { return STORY_GATE && !!site && !storyChain.siteOpen(site); }
@@ -35536,6 +36112,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     const _NATURAL = { 'a tree stump': 'stump', 'a tree': 'tree', 'a rock': 'rock' };
     function refusalText(why) {
       if (!why) return '';
+      if (why === 'too thick to build here') return sayText('build.reason.tooThick', null, 'Too thick to build here');
       if (why.toLowerCase() === 'that is the cabin') return dwText('build.reason.cabin');
       if (!_refusalByText) {
         _refusalByText = new Map();
@@ -35559,6 +36136,31 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         return name.charAt(0).toUpperCase() + name.slice(1) + ' in the way';
       }
       return why.charAt(0).toUpperCase() + why.slice(1);
+    }
+    // CU-213: a footprint has to sit in a clearing, a glade, or on worn trail
+    // inside the HQ ring. The ring's thicket and any other wall band stay shut.
+    // A gap's mouth is trail, so a wall can stand there.
+    function onWallBand(x, z, pad) {
+      for (const band of wallBands) for (const s of band.solids) {
+        if (hypot(x - s.x, z - s.z) < s.radius + pad) return true;
+      }
+      return false;
+    }
+    function underCanopy(x, z, pad) {
+      for (const t of trees) {
+        if (!t.alive || t.falling || (t.stump && t.stumpMesh)) continue;
+        const rad = t.canopyRadius || ((t.trunkRadius || 0.4) * 3);
+        if (hypot(x - t.x, z - t.z) < rad * 0.72 + pad) return true;
+      }
+      return false;
+    }
+    function clearToBuild(x, z, r) {
+      if (onWallBand(x, z, Math.max(0.3, r))) return false;
+      if (landDist(x, z) < 24) return true;
+      if (hypot(x - LANDING_X, z - LANDING_Z) < LANDING_CLEAR) return true;
+      if (nearPOI(x, z, 10)) return true;
+      if (hypot(x, z) <= 64 && pathWearAt(x, z) >= 0.5) return true;
+      return !underCanopy(x, z, r);
     }
     function placeRefusal(x, z, gx, gz, yaw = buildYaw, opts = null) {
       // CL-143 (Jerry: "start with build mode now for training grounds ... not permit the player to build within 5 tiles of
@@ -35630,9 +36232,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
             if (distToStream(px, pz) < STREAM_WIDTH * 0.9) return 'too close to the water';
             if (waterDepthAt(px, pz) > 0.05) return 'in the water';
             const h = sampleHeight(px, pz); if (h < lo) lo = h; if (h > hi) hi = h;
+            if (!clearToBuild(px, pz, 0.35)) return 'too thick to build here';
             if (tt !== -0.45 && tt !== 0.45 && overlapsBlocked(px, pz, 0.3, true)) return inTheWay(px, pz, 0.3, true);
           }
           if (hi - lo > 0.9) return 'ground too rough';
+          if (!clearToBuild(mx, mz, 0.45)) return 'too thick to build here';
           const hx = (q % 2 ? spec.depth : 1.0) + PLAYER_RADIUS, hz = (q % 2 ? 1.0 : spec.depth) + PLAYER_RADIUS;
           if (Math.abs(nearestPlayer(0, 0).position.x - mx) < hx && Math.abs(nearestPlayer(0, 0).position.z - mz) < hz) return 'you are standing there';
           return null;
@@ -35643,6 +36247,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (waterDepthAt(x, z) > 0.05) return 'in the water';
       // Rough ground: a 2m piece needs its whole footprint on something close to level.
       if (groundSpread(x, z, footprint) > 0.6) return 'ground too rough';
+      if (!clearToBuild(x, z, footprint)) return 'too thick to build here';
       if (overlapsBlocked(x, z, footprint)) return inTheWay(x, z, footprint);
       return null;
     }
@@ -41928,7 +42533,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // by itself at the last kill).
     const ALARM_CINE_LEAD = { alarm: 0.55, dusk: 0.55, night: 0.55 };   // a beat for the camera to arrive
     const ALARM_HOLD = { alarm: 4.6, dusk: 4.6, night: 4.6 };           // the music waits this long (D-33)
-    const SPAWN_X = 0, SPAWN_Z = -8.5;
+    const SPAWN_X = LANDING_X, SPAWN_Z = LANDING_Z;
     let loopCine = null;
     let loopHoldIdle = 0;
     const _lcPos = new THREE.Vector3(), _lcLook = new THREE.Vector3(), _lcD = new THREE.Vector3();
@@ -43895,7 +44500,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // guard inside it wakes (reason 'shot') and comes, like the alarm or a hit. In a wave the horde is already coming,
     // so the rule shows by day, at the posts and bounties. A suppressor cuts the radius to SUPPRESSED_HEARING_MUL of it
     // and its rounds hit SUPPRESSED_DAMAGE_MUL as hard. P-139's stir meter can read the same noise (shotsHeard, lastShotNoise).
-    const SHOT_HEARING = { pistol: 35, revolver: 50, uzi: 35, m4: 45, ak: 50, shotgun: 45, aa12: 50, sniper: 70, minigun: 55, launcher: 45 };
+    // GB-265 (GP-20007): the saw is heard to 40 m while it cuts (no can fits it, so it is never suppressed). Only sawCutTick
+    // calls heardShot('chainsaw') today; the trigger-held saw on bodies and trees stays as it was.
+    const SHOT_HEARING = { pistol: 35, revolver: 50, uzi: 35, m4: 45, ak: 50, shotgun: 45, aa12: 50, sniper: 70, minigun: 55, launcher: 45, chainsaw: 40 };
     const SUPPRESSED_HEARING_MUL = 0.3;
     const SUPPRESSED_DAMAGE_MUL = 0.9;
     let shotsHeard = 0, lastShotNoise = null;
@@ -43913,6 +44520,43 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       }
       if (woke) shotsHeard++;
       return woke;
+    }
+    // GB-265 (GP-20007): the saw at work on something that is not a body, such as a deadfall cut held on E. Call it each
+    // frame the cut holds. It runs the saw as the trigger does while the chain bites: gas at the bite rate, heat up to an
+    // overheat, the chain, the glow and the sound, and the 40 m hearing (heardShot('chainsaw')) on the first bite and then
+    // every SAW_CUT_HEAR_S, so the caller makes no hearing call of its own. It returns true when the saw bit this frame
+    // (advance the cut) and false when it can't (saw not in hand or not started, dry, overheated, or the run is over).
+    const SAW_CUT_HEAR_S = 0.5;
+    let sawCutHoldT = 0, sawCutHearT = 0;
+    function sawCutTick(dt) {
+      if (currentWeapon !== 'chainsaw' || unarmed || !gameStarted || gameOver || won) return false;
+      if (sawStart.phase !== 'ready' || sawOverheat || sawFuel <= 0) return false;
+      if (sawCutHoldT <= 0) sawCutHearT = 0;   // a new hold is heard at once
+      sawCutHoldT = 0.2;   // tryFire's idle saw leaves the motor to this while the hold lasts
+      sawCutHearT -= dt;
+      if (sawCutHearT <= 0) { sawCutHearT = SAW_CUT_HEAR_S; heardShot('chainsaw'); }
+      if (fireHeld) return true;   // the trigger is running the saw this frame already
+      const gun = getActiveGun();
+      sawCutting = true; sawBiteT = 0.3;
+      sawFuel = Math.max(0, sawFuel - dt * (1 + SAW_BITE_FUEL));
+      sawHeat = Math.min(1, sawHeat + dt * SAW_HEAT_BITE);
+      if (sawHeat >= 1) { sawCutHoldT = 0; sawOverheatStop(gun); return false; }
+      AudioSys.chainsawStart();
+      AudioSys.chainsawSetRev(1);
+      if (gun.userData.heatMat) gun.userData.heatMat.emissiveIntensity = 0.22 + sawHeat * 0.9 + Math.sin(performance.now() * 0.02) * 0.06;
+      advanceChainsawChain(gun, dt * 28);
+      if (!sawHudRunning) { sawHudRunning = true; updateAmmoHud(); }
+      return true;
+    }
+    // GB-52 / GB-265: the saw overheats (on the trigger or in a held cut): it stops and won't start until it has cooled.
+    function sawOverheatStop(gun) {
+      sawOverheat = true;
+      AudioSys.chainsawStop();
+      AudioSys.chainsawDryPull();
+      if (gun.userData.heatMat) gun.userData.heatMat.emissiveIntensity = 1.2;
+      showBanner('SAW OVERHEATED', 'Let it cool a moment', 1.2, '#ffb347');
+      sawHudRunning = false;
+      updateAmmoHud();
     }
 
     // GB-57 / D-37 / D-38: the day's bounties. From night 2 each prep posts guards at one POI
@@ -45100,7 +45744,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       };
     }
     function beginMarineInsertion() {
-      const gy = sampleHeight(0, -8.5), chute = airborne.chute(), plane = makeCargoPlane();
+      const gy = sampleHeight(SPAWN_X, SPAWN_Z), chute = airborne.chute(), plane = makeCargoPlane();
       chute.name = 'marine-parachute'; plane.name = 'insertion-aircraft';
       airborne.prepare(chute); scene.add(chute, plane);
       plane.rotation.y = Math.PI / 2;
@@ -45130,11 +45774,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const rig = {
         update(t,dt) {
           orders.update(t);   // CL-204: in his hand from 0.7 s to 5.4 s, unless a key put it away
-          plane.position.set(-1+t*12+t*t*2,gy+36,-3.5);
+          plane.position.set(SPAWN_X-1+t*12+t*t*2,gy+36,SPAWN_Z+5);
           plane.userData.tick(dt,48);
           plane.visible=t<5;
           const descent=Math.min(1,t/6.3), drift=1-smooth(descent);
-          player.position.set(-10*drift,gy+28*(1-descent),-8.5+5*drift);
+          player.position.set(SPAWN_X-10*drift,gy+28*(1-descent),SPAWN_Z+5*drift);
           player.rotation.y=0;
           const sway = Math.sin(t*2.1)*.035*Math.sin(descent*Math.PI);
           marine.rotation.z=sway;
@@ -45147,7 +45791,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           if(t>=6.3) {
             if(!landed){
               landed=true;chute.rotation.set(0,0,0);chute.scale.setScalar(1.35);
-              spawnDust(0,gy,-8.5,9);if(!(AudioSys.chuteLand&&AudioSys.chuteLand()))AudioSys.footstep(false,false);   // CL-161
+              spawnDust(SPAWN_X,gy,SPAWN_Z,9);if(!(AudioSys.chuteLand&&AudioSys.chuteLand()))AudioSys.footstep(false,false);   // CL-161
             }
             const settle=t-6.3, recover=smooth(settle/1.1);
             for(const key of parts)ud[key].quaternion.slerpQuaternions(suspended.get(key),neutral.get(key),recover);
@@ -45169,7 +45813,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         camera(t,cam,destination,focus,reduced) {
           const settle=smooth((t-6.3)/2.7);
           // Keep both the opening canopy and departing transport in the first shot.
-          view.set(reduced?20:24-t*.35,gy+Math.max(15,35-t*2.8),-43);
+          view.set(SPAWN_X+(reduced?20:24-t*.35),gy+Math.max(15,35-t*2.8),SPAWN_Z-34.5);
           focal.set(player.position.x,player.position.y+4.4,player.position.z);
           cam.position.lerpVectors(view,destination,settle);
           focal.lerp(focus,settle);cam.lookAt(focal);
@@ -45178,7 +45822,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         finish() {
           orders.hide();
           airborne.dispose(chute);airborne.dispose(plane);airborne.dispose(harness);
-          player.position.set(0,gy,-8.5);marine.position.y=-ROLL_PIVOT_Y;marine.rotation.z=0;
+          player.position.set(SPAWN_X,gy,SPAWN_Z);marine.position.y=-ROLL_PIVOT_Y;marine.rotation.z=0;
           for(const key of parts)ud[key].quaternion.copy(neutral.get(key));
           weaponMount.visible=weaponWasVisible;grounded=true;velX=velZ=0;
           marineInsertion=null;
@@ -52465,6 +53109,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           fireHeld = false;
         }
         if (sawStart.phase !== 'ready') fireHeld = false;   // GP-188: hands back before the chain can bite.
+        if (!fireHeld && sawCutHoldT > 0) { sawCutHoldT = Math.max(0, sawCutHoldT - dt); return; }   // GB-265: a held cut (sawCutTick) runs it
         if (!fireHeld || won || gameOver || !gameStarted) {
           AudioSys.chainsawStop();
           if (gun.userData.heatMat) gun.userData.heatMat.emissiveIntensity = 0;
@@ -52490,16 +53135,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         const biting = sawBiteT > 0;
         sawFuel = Math.max(0, sawFuel - dt * (1 + (biting ? SAW_BITE_FUEL : 0)));
         sawHeat = Math.min(1, sawHeat + dt * (biting ? SAW_HEAT_BITE : SAW_HEAT_RUN));
-        if (sawHeat >= 1) {
-          sawOverheat = true;
-          AudioSys.chainsawStop();
-          AudioSys.chainsawDryPull();
-          if (gun.userData.heatMat) gun.userData.heatMat.emissiveIntensity = 1.2;
-          showBanner('SAW OVERHEATED', 'Let it cool a moment', 1.2, '#ffb347');
-          sawHudRunning = false;
-          updateAmmoHud();
-          return;
-        }
+        if (sawHeat >= 1) { sawOverheatStop(gun); return; }   // GB-265: shared with sawCutTick
         if (fireCooldown <= 0) {
           fireCooldown = st.interval;
           chainsawTick();
@@ -53782,7 +54418,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       for (const t of trees) {
         if (t.smoulder > 0 && !(t.burnT > 0)) updateSmoulder(t, dt);
         if (!t.burnT || t.burnT <= 0) continue;
-        if (!t.group.visible || (!t.alive && !t.falling && !t.log)) { t.burnT = 0; hideTreeFire(t); continue; }
+        // A batched tree is hidden on purpose. Leave the burn; the batch check brings it live next frame.
+        if ((!t.group.visible && !t._tbInBatch) || (!t.alive && !t.falling && !t.log)) { t.burnT = 0; hideTreeFire(t); continue; }
+        if (!t.group.visible) continue;
         const wet = weather.intensity || 0;
         t.burnT -= dt * (1 + wet);
         t.burnAge += dt;
@@ -54433,6 +55071,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // The understory follows those trees (CU-206); the HQ and trails remain quiet.
     const nightWarnings = createNightWarnings();
     const nightWarningsOn = urlParams.get('warnings') !== '0';
+    const nightWarningDenseWoods = urlParams.get('woods') !== '0';
     const nightWarningTreeCell = 6, nightWarningTrees = new Map();
     let nightWarningTreeCount = -1;
     const _nightWarningScreen = new THREE.Vector3();
@@ -54473,6 +55112,17 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const fy = flashlight.target.position.y - flashlight.position.y;
       const fz = flashlight.target.position.z - flashlight.position.z;
       return (dx * fx + dy * fy + dz * fz) / (dist * Math.hypot(fx, fy, fz)) > Math.cos(flashlight.angle * 0.85);
+    }
+    function maybeNightWarning(z, distance, chasing, moving, x, y, wz) {
+      if (!nightWarnings.ready(z, distance, chasing, moving, true,
+          gameStarted && !paused && !gameOver && !won && !training.active)) return;
+      if (nightWarningSeen(x, y, wz)) return;
+      const cover = nightWarningCover(x, y, wz);
+      if (!cover) return;
+      const sa = sndAt(x, wz, 26);
+      nightWarnings.emit(z, { kind: cover, x, y, z: wz, distance,
+        volume: sa.v, pan: sa.pan, night: isNight, type: z.typeKey });
+      AudioSys.woodsWarning?.(cover === 'branch' ? 'snap' : cover, sa.v, sa.pan);
     }
 
     // GB-75 (P-26): plates. PLATE_CUT against bullets, pellets, blades and the saw (plus an iron cave's extra
@@ -55243,6 +55893,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       // get pushed.
       for (const ws of near) {
         if (ws.y0 == null) continue;
+        if (ws.wallBand) continue; // one nearest-line push below avoids chain surfing
         const minD = ws.radius + entR;
         const dx = x - ws.x, dz = z - ws.z;
         if (dx > minD || dx < -minD || dz > minD || dz < -minD) continue;
@@ -55259,6 +55910,13 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           x += (dx / dist) * push;
           z += (dz / dist) * push;
         }
+      }
+      for (const band of wallBands) {
+        const groundY = sampleHeight(x, z);
+        const footY = entY != null ? entY : entityGroundY(x, z);
+        if (footY > groundY + 2.2 || footY + 2.2 < groundY - 0.25) continue;
+        const pushed = resolveWallBand(band, x, z, entR);
+        x = pushed.x; z = pushed.z;
       }
       // The cabin (every mode): nothing rises inside it.
       if (house.present) { const hp = pushOutOfHouse(x, z, entR); x = hp.x; z = hp.z; }
@@ -55425,6 +56083,140 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     const ffPlayer = makeFF();
     const ffHouse = makeFF();
 
+    // CU-210: one valley-wide field, seeded at the HQ, rebuilt only when the
+    // topology changes. The player field above is untouched. Trees are a cost
+    // (woods 1.6, trail 0.6), not a blocked trunk. Walls, logs, the house and
+    // builds are the blocked cells; valleyBlock() is the plug for anything else.
+    const VALLEY_N = 384;
+    const ffValley = makeNavField(VALLEY_N, -VALLEY_N * 1.25 / 2, -VALLEY_N * 1.25 / 2);
+    const valleyBlocks = [];
+    let valleyHeightsDirty = false;
+    let valleySig = 0;
+    let valleySeq = 0;
+    let valleyBusy = false;
+    let valleyAgain = false;
+    let valleyWorker = null;
+    function valleyTopologySig() {
+      let s = wallBands.length * 131 + valleyBlocks.length * 17;
+      for (const b of valleyBlocks) s = (Math.imul(s, 31) + ((b.x * 4) | 0) + ((b.z * 4) | 0) * 8191) | 0;   // GB-266: a block moved
+      for (let i = 0; i < builds.length; i++) {
+        const b = builds[i];
+        if (b.type === 'spikes' || b.type === 'mine') continue;
+        s = (Math.imul(s, 33) + ((b.x * 4) | 0) + ((b.z * 4) | 0) * 8191 + (b.hp > 0 ? 1 : 2)) | 0;
+      }
+      for (let i = 0; i < worldSolids.length; i++) if (worldSolids[i].kind === 'log') s++;
+      return s;
+    }
+    function fillValleyGround() {
+      const F = ffValley, n = F.n;
+      for (let j = 0; j < n; j++) {
+        const wz = F.oz + (j + 0.5) * F.cell;
+        for (let i = 0; i < n; i++) {
+          const wx = F.ox + (i + 0.5) * F.cell, k = j * n + i;
+          const h = sampleHeight(wx, wz);
+          const w = waterLevelAt(wx, wz);
+          F.h[k] = h;
+          F.cost[k] = (w != null && w - h > 1.3) ? 2.5 : 1;
+        }
+      }
+      for (const t of trees) {
+        if (!t.alive || t.falling || t.stump || !(t.canopyRadius > 0)) continue;
+        paintNavDisc(F, t.x, t.z, t.canopyRadius, 1.6, (old, c) => (old > 0.9 && old < 1.1) ? c : old);
+      }
+      for (const line of PATHS) {
+        if (!line || line.deck || line.length < 2) continue;
+        const hw = (line.hw || 0.85) + 0.4;
+        for (let i = 1; i < line.length; i++) paintNavSegment(F, line[i - 1].x, line[i - 1].z, line[i].x, line[i].z, hw, 0.6);
+      }
+      F.ground = true;
+    }
+    function markValleyBlocked() {
+      const F = ffValley;
+      F.blocked.fill(0);
+      if (house.present && house.group) {
+        const h = house.half + NAV_CLEAR, cx = house.group.position.x, cz = house.group.position.z;
+        const i0 = Math.max(0, Math.floor((cx - h - F.ox) / F.cell)), i1 = Math.min(F.n - 1, Math.floor((cx + h - F.ox) / F.cell));
+        const j0 = Math.max(0, Math.floor((cz - h - F.oz) / F.cell)), j1 = Math.min(F.n - 1, Math.floor((cz + h - F.oz) / F.cell));
+        for (let j = j0; j <= j1; j++) for (let i = i0; i <= i1; i++) {
+          const wx = F.ox + (i + 0.5) * F.cell, wz = F.oz + (j + 0.5) * F.cell;
+          if (Math.abs(wx - cx) < h && Math.abs(wz - cz) < h) F.blocked[j * F.n + i] = 1;
+        }
+      }
+      for (const b of builds) {
+        if (b.type === 'spikes' || b.type === 'mine') continue;
+        const reach = BUILD_GRID * 0.75 + NAV_CLEAR;
+        const i0 = Math.max(0, Math.floor((b.x - reach - F.ox) / F.cell)), i1 = Math.min(F.n - 1, Math.floor((b.x + reach - F.ox) / F.cell));
+        const j0 = Math.max(0, Math.floor((b.z - reach - F.oz) / F.cell)), j1 = Math.min(F.n - 1, Math.floor((b.z + reach - F.oz) / F.cell));
+        for (let j = j0; j <= j1; j++) {
+          const wz = F.oz + (j + 0.5) * F.cell;
+          for (let i = i0; i <= i1; i++) {
+            const k = j * F.n + i;
+            if (F.blocked[k]) continue;
+            const wx = F.ox + (i + 0.5) * F.cell;
+            const r = pushOutOfBuild(b, wx, wz, NAV_CLEAR, false, F.h[k]);
+            if (r.x !== wx || r.z !== wz) F.blocked[k] = 1;
+          }
+        }
+      }
+      for (const band of wallBands) for (const s of band.solids) markNavCircle(F, s.x, s.z, s.radius + NAV_CLEAR);
+      for (const s of valleyBlocks) markNavCircle(F, s.x, s.z, s.r + NAV_CLEAR);
+      for (let i = 0; i < worldSolids.length; i++) {
+        const ws = worldSolids[i];
+        if (ws.kind === 'log') markNavCircle(F, ws.x, ws.z, ws.radius + NAV_CLEAR);
+      }
+    }
+    function rebuildValley() {
+      try {
+        if (valleyHeightsDirty && ffValley.ground) {
+          const F = ffValley, n = F.n;
+          for (let j = 0; j < n; j++) {
+            const wz = F.oz + (j + 0.5) * F.cell;
+            for (let i = 0; i < n; i++) F.h[j * n + i] = sampleHeight(F.ox + (i + 0.5) * F.cell, wz);
+          }
+        } else if (!ffValley.ground) fillValleyGround();
+        valleyHeightsDirty = false;
+        markValleyBlocked();
+        const seedX = house.group ? house.group.position.x : 0;
+        const seedZ = house.group ? house.group.position.z : 0;
+        const seedR = (house.half || 3) + 2;
+        const seq = ++valleySeq;
+        if (valleyWorker && ffValley.ready) {
+          if (valleyBusy) { valleyAgain = true; return; }
+          valleyBusy = true;
+          valleyWorker.postMessage({ seq, n: ffValley.n, ox: ffValley.ox, oz: ffValley.oz, seedX, seedZ, seedR, blocked: ffValley.blocked, h: ffValley.h, cost: ffValley.cost });
+          return;
+        }
+        const t0 = performance.now();
+        buildNavField(ffValley, seedX, seedZ, seedR);
+        ffValley.lastMs = performance.now() - t0;
+      } catch (err) {
+        ffValley.ready = false;
+        console.info('Grave Shift: valley field skipped.', err);
+      }
+    }
+    function attachValleyWorker() {
+      valleyWorker = startNavWorker();
+      if (!valleyWorker) return;
+      valleyWorker.onmessage = (e) => {
+        valleyBusy = false;
+        if (e.data && e.data.seq === valleySeq && e.data.dist) {
+          ffValley.dist = e.data.dist;
+          ffValley.ready = true;
+        }
+        if (valleyAgain) { valleyAgain = false; rebuildValley(); }
+      };
+      valleyWorker.onerror = () => {
+        valleyWorker = null;
+        valleyBusy = false;
+        try { buildNavField(ffValley, house.group ? house.group.position.x : 0, house.group ? house.group.position.z : 0, (house.half || 3) + 2); } catch (_) { ffValley.ready = false; }
+      };
+    }
+    function valleyBlock(x, z, r, tag) { valleyBlocks.push({ x, z, r, tag }); }   // GB-266: a tag to take it out again
+    function valleyUnblock(tag) { for (let i = valleyBlocks.length - 1; i >= 0; i--) if (valleyBlocks[i].tag === tag) valleyBlocks.splice(i, 1); }   // GB-266
+    attachValleyWorker();
+    rebuildValley();
+    valleySig = valleyTopologySig();
+
     function ffIndexOf(F, x, z) {
       const i = Math.floor((x - F.ox) / FF_CELL), j = Math.floor((z - F.oz) / FF_CELL);
       if (i < 0 || j < 0 || i >= FF_N || j >= FF_N) return -1;
@@ -55508,6 +56300,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         if (footY > ws.y1 - 0.3 || footY + 2.2 < ws.y0) continue;
         ffMarkCircle(F, ws.x, ws.z, ws.radius);
       }
+      for (const s of valleyBlocks) if (s.tag && inGrid(s.x, s.z, s.r + 1)) ffMarkCircle(F, s.x, s.z, s.r);   // GB-266: hung iron closes it here too
       if (house.present) {
         // The square footprint, inflated like everything else.
         const h = house.half + FF_CLEAR, cx = house.group.position.x, cz = house.group.position.z;
@@ -55618,6 +56411,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
 
     function updateFlowFields(dt, force) {
+      const vSig = valleyTopologySig();
+      if (valleyHeightsDirty || vSig !== valleySig) { valleySig = vSig; rebuildValley(); }
       ffPlayer.timer -= dt;
       if (ffDestChanged()) force = true;   // GB-202 (t126): new destinations rebuild at once
       if (ffPlayer.timer <= 0 || force || !ffPlayer.ready) {
@@ -55682,7 +56477,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       _ffOut.x = dx / l; _ffOut.z = dz / l;
       return true;
     }
-    function flowDir(x, z) { return flowDirOn(ffPlayer, x, z); }
+    function flowDir(x, z) {
+      if (!flowEnabled) return false;
+      if (flowDirOn(ffPlayer, x, z)) return true;
+      return ffValley.ready && navDir(ffValley, x, z, _ffOut);
+    }
     function houseFlowDir(x, z) { return flowDirOn(ffHouse, x, z); }
 
     function updateTreeFade(dt) {
@@ -55695,7 +56494,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const fadeNear = 2.5;
       const fadeOpacity = 0.22;
       for (const t of trees) {
-        if (!t.group.visible || !t.alive || t.falling || t.stump) continue;
+        if (t._tbInBatch || !t.group.visible || !t.alive || t.falling || t.stump) continue;
         const dx = t.x - px, dz = t.z - pz;
         const dist = hypot(dx, dz);
         let want = 1;
@@ -55791,7 +56590,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (climbingTower || climbingHq) return;
       const py = player.position.y + getStanceEyeY() * 0.75;
       for (const t of trees) {
-        if (!t.group.visible) continue;
+        if (t._tbInBatch || !t.group.visible) continue;
         // Read the live position each pass — using a snapshot taken before the loop
         // meant overlapping props double-counted their pushes.
         const px = player.position.x, pz = player.position.z;
@@ -57847,6 +58646,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const poiPhase = phase;   // GB-43: the loop body declares its own `phase` further down
       fogCullPrep();   // GB-59
       const zFrameDt = dt, zTickOn = zombies.length >= ZOMBIE_TICK.crowd && !training.active;   // GB-194
+      // CU-206 leaves a 24 m bare HQ circle. From its inner 9 m, no tree can
+      // enter the 15 m warning radius; skip the cover and projection work there.
+      const nightWarningHqClear = nightWarningDenseWoods && landDist(localPlayer.position.x, localPlayer.position.z) < 9;
       if (zTickOn) { camera.getWorldDirection(_zTickFw); _zTickFw.y = 0; }
       for (const z of zombies) {
         if (!z.alive) continue;
@@ -58572,6 +59374,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         mx = slid.x; mz = slid.z;
         slid = resolveStaticProps(mx, mz, z.radius, z.mesh.position.y);
         mx = slid.x; mz = slid.z;
+        if (ironHungN) { const ip = ironPushDead(mx, mz, z.radius, zx, zz); mx = ip.x; mz = ip.z; }   // GB-266: hung iron, the dead only
         if (house.present) {
           const hp = pushOutOfHouse(mx, mz, z.radius);
           mx = hp.x; mz = hp.z;
@@ -58640,6 +59443,12 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           }
           if (z.hp <= 0) { z._defenseKill = !!z.burnDefense; dotKills.push(z); }
         }
+        // GP-20005: the first half has the chase target; keep the sound work in
+        // its own small function so this hot loop stays below V8's bytecode limit.
+        if (nightWarningsOn && !nightWarningHqClear && hzPd >= 2.5 && hzPd <= 15) maybeNightWarning(z, hzPd,
+          z._tp === localPlayer && !lured && !windowRoute && !spiderWander && tx === px0 && tz === pz0 && !(z.poiGuard && !z.poiAwake) && !z.sleeping,
+          !graceFreeze && !rising && !zSwimming && zHyp(mx - zx, mz - zz) > dt * 0.08,
+          mx, z.mesh.position.y, mz);
         zombieLateStep(z, dt, kind, spiderTouch, spiderWander, shamblerRecovering, tactics, windowRoute, dist, graceFreeze, spd, zx, zz, sx, sz, flowed, zDepth, zOnDeck, zSwimming, knocked, rising, spiderTurn, shamblerTurn, screamerTurn, spitterTurn, drownedTurn, bruteStep, militaryStep, drownedStep, bomberStep, mx, mz, dotKills);   // GB-251: the rest of this zombie's frame, in its own function (see zombieLateStep)
       }
       for (const z of zombies) if (z.alive && z.windowClimb) updateZombieWindowClimb(z, dt);
@@ -58826,23 +59635,6 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         // instead of walking on the spot.
         const standing = !moving || spd < 0.05;
         if (!standing) z.walkPhase = (z.walkPhase || 0) + dt * cadence;
-        // GP-20005: footsteps, brush and snapped twigs announce a body closing from
-        // the dark woods while there is still room to turn a light or move away.
-        if (nightWarnings.ready(z, hzPd,
-            !lured && !windowRoute && !spiderWander && tx === px0 && tz === pz0 && !(z.poiGuard && !z.poiAwake) && !z.sleeping,
-            !standing && !zSwimming && zHyp(mx - zx, mz - zz) > dt * 0.08, true,
-            nightWarningsOn && gameStarted && !paused && !gameOver && !won && !training.active)) {
-          const wx = z.mesh.position.x, wy = z.mesh.position.y, wz = z.mesh.position.z;
-          if (!nightWarningSeen(wx, wy, wz)) {
-            const cover = nightWarningCover(wx, wy, wz);
-            if (cover) {
-              const sa = sndAt(wx, wz, 26);
-              nightWarnings.emit(z, { kind: cover, x: wx, y: wy, z: wz, distance: hzPd,
-                volume: sa.v, pan: sa.pan, night: isNight, type: z.typeKey });
-              AudioSys.woodsWarning?.(cover, sa.v, sa.pan);
-            }
-          }
-        }
         // Heavy things you hear coming: a footfall every half stride.
         if (moving && (z.typeKey === 'brute' || z.typeKey === 'demon' || z.typeKey === 'colossus' || z.typeKey === 'guardian')) {
           const fi = Math.floor((z.walkPhase || 0) / Math.PI);
@@ -60344,7 +61136,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         const near=(x,z,r)=>Math.abs(x-p.x)<r+2&&Math.abs(z-p.z)<r+2;
         for(const s of worldSolids)if(near(s.x,s.z,s.radius))S.push({x:s.x,z:s.z,radius:s.radius,minY:s.y0,maxY:s.y1});
         for(const s of caveSealSolids)if(near(s.x,s.z,s.radius))S.push({x:s.x,z:s.z,radius:s.radius,minY:s.y0,maxY:s.y1});
-        for(const t of trees)if(t.group.visible&&(t.alive&&!t.falling||t.stump)&&near(t.x,t.z,t.trunkRadius))S.push({x:t.x,z:t.z,radius:t.trunkRadius,minY:t.group.position.y,maxY:t.group.position.y+(t.stump ? .3 : (t.canopyBottom||2))});
+        for(const t of trees)if(!t._tbInBatch&&t.group.visible&&(t.alive&&!t.falling||t.stump)&&near(t.x,t.z,t.trunkRadius))S.push({x:t.x,z:t.z,radius:t.trunkRadius,minY:t.group.position.y,maxY:t.group.position.y+(t.stump ? .3 : (t.canopyBottom||2))});
         for(const r of rocks)if(r.alive&&r.mesh.visible&&near(r.x,r.z,r.radius))S.push({x:r.x,z:r.z,radius:r.radius,minY:r.mesh.position.y,maxY:r.mesh.position.y+r.height});
       }
       const q=constrainDiveBody(playerFrameStart,p,dive.dirX,dive.dirZ,lie.flat,lie.hip,S);
@@ -60669,7 +61461,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       house.hp = house.maxHp;
       // Both modes start at the foot of the porch steps (the old hunted spawn, 0,0, is
       // inside the cabin now that the cabin stands in every mode).
-      player.position.set(0, sampleHeight(0, -8.5), -8.5);
+      player.position.set(SPAWN_X, sampleHeight(SPAWN_X, SPAWN_Z), SPAWN_Z);
       day = 0;
       phase = 'idle';
       clearZombies();
@@ -60714,9 +61506,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (menuCamera.deploying || !validatedPlayerName()) return;
       Fullscreen.applyPreference();
       AudioSys.unlock();
-      const y = sampleHeight(0, -8.5);
-      const focus = new THREE.Vector3(0, y + 1.3, -8.5);
-      const destination = new THREE.Vector3(0, focus.y + CAM_R_DEFAULT * Math.sin(CAM_ELEV_DEFAULT), -8.5 - CAM_R_DEFAULT * Math.cos(CAM_ELEV_DEFAULT));
+      const y = sampleHeight(SPAWN_X, SPAWN_Z);
+      const focus = new THREE.Vector3(SPAWN_X, y + 1.3, SPAWN_Z);
+      const destination = new THREE.Vector3(SPAWN_X, focus.y + CAM_R_DEFAULT * Math.sin(CAM_ELEV_DEFAULT), SPAWN_Z - CAM_R_DEFAULT * Math.cos(CAM_ELEV_DEFAULT));
       let insertion;
       menuCamera.begin(() => {
         startMode('hunt');
@@ -60996,10 +61788,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       player.visible = true;
       updateMarinePose(0.016, false, false);
       holdWeapon(0.016);
-      const y = sampleHeight(0, -8.5);
-      camLook.set(0, y + 1.3, -8.5);
-      camera.position.set(0, camLook.y + CAM_R_DEFAULT * Math.sin(CAM_ELEV_DEFAULT),
-        -8.5 - CAM_R_DEFAULT * Math.cos(CAM_ELEV_DEFAULT));
+      const y = sampleHeight(SPAWN_X, SPAWN_Z);
+      camLook.set(SPAWN_X, y + 1.3, SPAWN_Z);
+      camera.position.set(SPAWN_X, camLook.y + CAM_R_DEFAULT * Math.sin(CAM_ELEV_DEFAULT),
+        SPAWN_Z - CAM_R_DEFAULT * Math.cos(CAM_ELEV_DEFAULT));
       camera.lookAt(camLook);
       scopeOrbitPosition = camera.position.clone();
       aimPointerNdc.set(0, 0);
@@ -61644,6 +62436,7 @@ live++;
       }
 
       simTime += dt;   // GB-131: only while the sim runs (not while paused)
+      stepShortcutInteraction(dt);
       updateMarineIdle(dt);
       updateCarriedGear(dt);   // CL-90
       if (extractionBoat) extractionBoat.update(dt);   // CL-73
@@ -62644,12 +63437,13 @@ live++;
           setWeapon, getCurrentWeapon: () => currentWeapon,
           // Debug-only: economy hooks. grantAllWeapons hands over the arsenal so the older
           // weapon probes keep working; the rest let probes drive the kiosk directly.
-          grantAllWeapons, KIOSK, openShop, closeShop, buyWeapon, buyAmmo, buyGear, buyBuild, skullValueDbg: () => skullValueTotal, siegeNightDbg: () => siegeNightNow, LATE_CASH_NIGHT, LATE_CASH_FACTOR, LATE_CASH_STEP, lateCashMul, buyExtMag, buyHeavyBarrel, fitWeaponMod, weaponMods, HEAVY_BARREL_PRICE, EXT_MAG_RELOAD_MUL, HEAVY_CLIMB_MUL, HEAVY_SWAP_DUR, HEAVY_MOVE_SPREAD_MUL, recoilClimb, getReloadDbg: () => ({ timer: reloadTimer, anim: reloadAnimDuration, weapon: reloadWeapon }), /* CL-84 */ akimboDbg: { AKIMBO_CARRY, carry: () => akimboCarryW, retreat: () => akimboRetreat },   /* CL-188 */ airDbg: { AIR, pose: () => POSE.airPose, jumpNow: () => { if (!grounded) return false; vy = PHYS.jumpVel; grounded = false; coyoteT = 0; return true; } },   /* CL-210 */ rigSkinDbg: { info: (r) => rigSkinInfo(r || marine), count: () => rigSkinCount(), sync: () => syncRigSkins() },   /* CL-189 */ aoDbg: { AO_DEFAULTS, info: () => marine.userData.aoInfo, bake: (o) => (marine.userData.aoInfo = bakeMarineAO(THREE, marine, { ...marine.userData.ao, ...(o || {}) })) },   /* CL-186 */ zombieFeetDbg: { ZFEET, ZLEAN },   /* CL-187 */ gaitDbg: { GAIT, GAIT_FEEL, GAIT_WEIGHT, UNARMED_ARMS, UNARMED_RUN, WINDED, winded: () => POSE.winded || 0, setWinded: (v) => { POSE.winded = v; }, breaths: () => POSE.breaths || 0, pose: () => POSE, clips: () => MARINE_GAIT, w: () => POSE.gaitW || 0, run: () => POSE.gaitRun || 0, sample: (u, r) => { const g = marineGait(u, r); return g && { ...g }; } },   /* CL-84 */ smoothDbg: { MOVE_FEEL, GUN_LAG, xfade: () => XFADE, gunLag: () => gunLag, wish: () => ({ x: wishVX, z: wishVZ }), vel: () => ({ x: velX, z: velZ, y: vy }), lookY: () => camLookYS, pose: () => POSE, phase: () => walkPhase, lerpK: _lerpK, decayK: _decayK },   /* CL-133 */ handsDbg: { HANDS, roll: () => ({ r: handRollR, l: handRollL }), WRIST, HAND_R: _HAND_R, HAND_L: _HAND_L, wrist: () => ({ r: wristTurnR, l: wristTurnL, needR: wristNeedR, needL: wristNeedL }), gripPoint: (side, out = new THREE.Vector3()) => side === 'L' ? fistPointW(marine.userData.elbowLG, _HAND_L, gripAL, out) : fistPointW(marine.userData.elbowRG, _HAND_R, gripAR, out), gripA: () => ({ r: gripAR, l: gripAL }),   /* CU-100: where each hand closes now (the hand point while it isn't holding) */ knife: () => ({ u: knifeArmU, clip: KNIFE_CLIP, chop: MACHETE_CLIP, dur: knifeSwingDur, places: _kp }), FP_BLADE_PATH, FP_BLADE_AIM, FP_BLADE_DIP, fpBladeDip: () => fpBladeDip, BLADE_BODY, bladeTwist: (u, h) => bladeTwist(u, h),   /* CL-261 */ knifeHold: (u) => { knifeHoldU = u == null ? null : _clamp01(u); if (u != null) { knifeSwingDur = bladeSwingDur(); knifeAnimT = knifeSwingDur * (1 - knifeHoldU) || 0.0001; } }, drawHold: (t) => { drawHoldT = t == null ? null : Math.max(0, t); }, knifeClip: (on) => { if (!on) { _kc = KNIFE_CLIP || _kc; KNIFE_CLIP = null; } else if (_kc) KNIFE_CLIP = _kc; }, drawPlace, gripDownDir, foreChannelDir },   /* CL-122 */ fpReloadLiftDbg: () => FP_RELOAD_LIFT, fpReloadLiftGunDbg: () => FP_RELOAD_LIFT_GUN, fpReloadSetDbg: () => ({ ...fpReloadSet() }),   /* GB-245 */ reloadClipDbg: { clip: () => RELOAD_CLIP, places: () => _rlP, hold: (u) => { reloadHoldU = u == null ? null : _clamp01(u); if (reloading && u != null) reloadTimer = Math.max(0.001, (reloadAnimDuration || 1) * (1 - reloadHoldU)); }, mag: () => (RELOAD_CLIP ? Studio.magAt(RELOAD_CLIP, _clamp01(1 - reloadTimer / Math.max(0.05, reloadAnimDuration || 1))) : null) }, getSwapDbg: () => ({ swapT, swapDur, fireCooldown }), setSprayDbg: (h, n) => { sprayHeat = h; sprayShot = n | 0; sprayWeapon = currentWeapon; }, setVelDbg: (x, z) => { velX = x; velZ = z; }, resetEconomyDbg: () => resetEconomy(), WEAPON_ORDER, buySuppressor, SUPPRESSOR_PRICE, SHOT_HEARING, SUPPRESSED_HEARING_MUL, SUPPRESSED_DAMAGE_MUL, shotHearingRadius, suppressedDamageMul, heardShotDbg: () => ({ shotsHeard, lastShotNoise }), buyPistolAuto, PISTOL_AUTO_PRICE, toggleFireMode, toggleHolster, isUnarmed: () => unarmed, setSpareMags, handInGun, takeOutGun, spareMagCount: (w) => (magazineStore[w] && magazineStore[w].spare ? magazineStore[w].spare.length : 0), magazinesDbg: (w) => (magazineStore[w] ? magazineSnapshot(magazineStore, w) : null), setMagazinesDbg: (w, loaded, spare, loaded2 = null) => { const e = magazineStore[w]; if (!e) return false; e.loaded[0].rounds = Math.min(e.size, loaded | 0); if (loaded2 != null && e.loaded[1]) e.loaded[1].rounds = Math.min(e.size, loaded2 | 0); e.spare = spare.slice(0, e.maxSpare).map((r) => ({ rounds: Math.min(e.size, r | 0), size: e.size })); syncMagazine(w); updateAmmoHud(); return true; }, reloadGainsMagazine, toggleDualWieldDbg: () => toggleDualWield(), setDualOwnedDbg: (w, on = true) => { dualOwned[w] = !!on; if (on && isMagazineWeapon(w) && magazineStore[w]) { issueSecondGun(magazineStore, w); syncMagazine(w); } return !!dualOwned[w]; },   /* CL-188 */   /* GB-137 */ stepFireDbg: (dt) => tryFire(dt), recoilSpan, GEAR, WEAPON_PRICE, AMMO_PACK, caliberOf, RESERVE_CAP, RESERVE_CAP_BASE, SPARE_CAP_MULT, START_RESERVE_45, reserveCap, BUILD_UNLOCK_PRICE,
+          grantAllWeapons, KIOSK, openShop, closeShop, buyWeapon, buyAmmo, buyGear, buyBuild, skullValueDbg: () => skullValueTotal, siegeNightDbg: () => siegeNightNow, LATE_CASH_NIGHT, LATE_CASH_FACTOR, LATE_CASH_STEP, lateCashMul, buyExtMag, buyHeavyBarrel, fitWeaponMod, weaponMods, HEAVY_BARREL_PRICE, EXT_MAG_RELOAD_MUL, HEAVY_CLIMB_MUL, HEAVY_SWAP_DUR, HEAVY_MOVE_SPREAD_MUL, recoilClimb, getReloadDbg: () => ({ timer: reloadTimer, anim: reloadAnimDuration, weapon: reloadWeapon }), /* CL-84 */ akimboDbg: { AKIMBO_CARRY, carry: () => akimboCarryW, retreat: () => akimboRetreat },   /* CL-188 */ airDbg: { AIR, pose: () => POSE.airPose, jumpNow: () => { if (!grounded) return false; vy = PHYS.jumpVel; grounded = false; coyoteT = 0; return true; } },   /* CL-210 */ rigSkinDbg: { info: (r) => rigSkinInfo(r || marine), count: () => rigSkinCount(), sync: () => syncRigSkins() },   /* CL-189 */ aoDbg: { AO_DEFAULTS, info: () => marine.userData.aoInfo, bake: (o) => (marine.userData.aoInfo = bakeMarineAO(THREE, marine, { ...marine.userData.ao, ...(o || {}) })) },   /* CL-186 */ zombieFeetDbg: { ZFEET, ZLEAN },   /* CL-187 */ gaitDbg: { GAIT, GAIT_FEEL, GAIT_WEIGHT, UNARMED_ARMS, UNARMED_RUN, WINDED, winded: () => POSE.winded || 0, setWinded: (v) => { POSE.winded = v; }, breaths: () => POSE.breaths || 0, pose: () => POSE, clips: () => MARINE_GAIT, w: () => POSE.gaitW || 0, run: () => POSE.gaitRun || 0, sample: (u, r) => { const g = marineGait(u, r); return g && { ...g }; } },   /* CL-84 */ smoothDbg: { MOVE_FEEL, GUN_LAG, xfade: () => XFADE, gunLag: () => gunLag, wish: () => ({ x: wishVX, z: wishVZ }), vel: () => ({ x: velX, z: velZ, y: vy }), lookY: () => camLookYS, pose: () => POSE, phase: () => walkPhase, lerpK: _lerpK, decayK: _decayK },   /* CL-133 */ handsDbg: { HANDS, roll: () => ({ r: handRollR, l: handRollL }), WRIST, HAND_R: _HAND_R, HAND_L: _HAND_L, wrist: () => ({ r: wristTurnR, l: wristTurnL, needR: wristNeedR, needL: wristNeedL }), gripPoint: (side, out = new THREE.Vector3()) => side === 'L' ? fistPointW(marine.userData.elbowLG, _HAND_L, gripAL, out) : fistPointW(marine.userData.elbowRG, _HAND_R, gripAR, out), gripA: () => ({ r: gripAR, l: gripAL }),   /* CU-100: where each hand closes now (the hand point while it isn't holding) */ knife: () => ({ u: knifeArmU, clip: KNIFE_CLIP, chop: MACHETE_CLIP, dur: knifeSwingDur, places: _kp }), FP_BLADE_PATH, FP_BLADE_AIM, FP_BLADE_DIP, fpBladeDip: () => fpBladeDip, BLADE_BODY, bladeTwist: (u, h) => bladeTwist(u, h),   /* CL-261 */ knifeHold: (u) => { knifeHoldU = u == null ? null : _clamp01(u); if (u != null) { knifeSwingDur = bladeSwingDur(); knifeAnimT = knifeSwingDur * (1 - knifeHoldU) || 0.0001; } }, drawHold: (t) => { drawHoldT = t == null ? null : Math.max(0, t); }, knifeClip: (on) => { if (!on) { _kc = KNIFE_CLIP || _kc; KNIFE_CLIP = null; } else if (_kc) KNIFE_CLIP = _kc; }, drawPlace, gripDownDir, foreChannelDir },   /* CL-122 */ fpReloadLiftDbg: () => FP_RELOAD_LIFT, fpReloadLiftGunDbg: () => FP_RELOAD_LIFT_GUN, fpReloadSetDbg: () => ({ ...fpReloadSet() }),   /* GB-245 */ reloadClipDbg: { clip: () => RELOAD_CLIP, places: () => _rlP, hold: (u) => { reloadHoldU = u == null ? null : _clamp01(u); if (reloading && u != null) reloadTimer = Math.max(0.001, (reloadAnimDuration || 1) * (1 - reloadHoldU)); }, mag: () => (RELOAD_CLIP ? Studio.magAt(RELOAD_CLIP, _clamp01(1 - reloadTimer / Math.max(0.05, reloadAnimDuration || 1))) : null) }, getSwapDbg: () => ({ swapT, swapDur, fireCooldown }), setSprayDbg: (h, n) => { sprayHeat = h; sprayShot = n | 0; sprayWeapon = currentWeapon; }, setVelDbg: (x, z) => { velX = x; velZ = z; }, resetEconomyDbg: () => resetEconomy(), WEAPON_ORDER, buySuppressor, SUPPRESSOR_PRICE, SHOT_HEARING, SUPPRESSED_HEARING_MUL, SUPPRESSED_DAMAGE_MUL, shotHearingRadius, suppressedDamageMul, heardShotDbg: () => ({ shotsHeard, lastShotNoise }), sawCutTick, sawCutDbg: () => ({ holdT: sawCutHoldT, hearT: sawCutHearT, fuel: sawFuel, heat: sawHeat, overheat: sawOverheat, biteT: sawBiteT }), buyPistolAuto, PISTOL_AUTO_PRICE, toggleFireMode, toggleHolster, isUnarmed: () => unarmed, setSpareMags, handInGun, takeOutGun, spareMagCount: (w) => (magazineStore[w] && magazineStore[w].spare ? magazineStore[w].spare.length : 0), magazinesDbg: (w) => (magazineStore[w] ? magazineSnapshot(magazineStore, w) : null), setMagazinesDbg: (w, loaded, spare, loaded2 = null) => { const e = magazineStore[w]; if (!e) return false; e.loaded[0].rounds = Math.min(e.size, loaded | 0); if (loaded2 != null && e.loaded[1]) e.loaded[1].rounds = Math.min(e.size, loaded2 | 0); e.spare = spare.slice(0, e.maxSpare).map((r) => ({ rounds: Math.min(e.size, r | 0), size: e.size })); syncMagazine(w); updateAmmoHud(); return true; }, reloadGainsMagazine, toggleDualWieldDbg: () => toggleDualWield(), setDualOwnedDbg: (w, on = true) => { dualOwned[w] = !!on; if (on && isMagazineWeapon(w) && magazineStore[w]) { issueSecondGun(magazineStore, w); syncMagazine(w); } return !!dualOwned[w]; },   /* CL-188 */   /* GB-137 */ stepFireDbg: (dt) => tryFire(dt), recoilSpan, GEAR, WEAPON_PRICE, AMMO_PACK, caliberOf, RESERVE_CAP, RESERVE_CAP_BASE, SPARE_CAP_MULT, START_RESERVE_45, reserveCap, BUILD_UNLOCK_PRICE,
           getWeaponOwned: () => weaponOwned, getReserve: () => reserveAmmo, getGearOwned: () => gearOwned, getBuildUnlocked: () => buildUnlocked,
           getAmmo: () => ammoByWeapon, getPhase: () => phase, setPhase: (p) => { phase = p; }, isShopOpen: () => shopOpen, getSawFuel: () => sawFuel, sawStartDbg: () => ({ ...sawStart, ...sawStartPose(sawStart) }),
           // Debug-only: survival-rules hooks (health cap, medkits, cash decay, self-damage).
           acidGlobs, pickWaterSpawn, waveComposition, nightPlanFor, NIGHT_PLAN, NIGHT_TIER, nightPushSizes, getWavePace: () => nightPace, pickZombieType, getWavePreview, getBounties, spawnBounties, expireBounties, bountyRewardFor, getSurvivors, survivorDbg, survivorHelpDbg, roofDbg, getHushState, hushDbg, spawnWanderer, wandererAllowed, wandererTrails, wandererReward, WANDERER_PACE, bountyGuardTypes, bountyDbg: () => ({ due: bountiesDue, seq: !!hq.seq, last: bountyLastKeys.slice() }), getWaveDirectorState, getActiveCaveIndices, spawnWaveBatch, beginWave, startPrep, clearZombies, isGuardianNight, getGuardianState, getGuardianAlive, GUARDIAN_KEYS, ZOMBIE_TYPES, MAX_ZOMBIES, spawnObjectiveDefenders, getRadioDefenderState, grantSupply, listOwnedAmmoPackChoices, grantBuildBlueprint, pulseGuardianFailsafeForTest, RADIO_DEFENDER, CAVE_ROLES, roleForCave, applyCaveRole, CLIMB_HEIGHT, climberCanVaultBuild, warnActiveCaves, getRendererBackend: () => rendererBackend, TSL,
-          flowField: () => ({ ready: ffPlayer.ready, ms: ffPlayer.lastMs, ox: ffPlayer.ox, oz: ffPlayer.oz, F: ffPlayer, FF_N, FF_CELL,   /* CL-140 */ house: { ready: ffHouse.ready, ms: ffHouse.lastMs } }),
+          flowField: () => ({ ready: ffPlayer.ready, ms: ffPlayer.lastMs, ox: ffPlayer.ox, oz: ffPlayer.oz, F: ffPlayer, FF_N, FF_CELL,   /* CL-140 */ house: { ready: ffHouse.ready, ms: ffHouse.lastMs }, valley: { ready: ffValley.ready, ms: ffValley.lastMs || 0, n: ffValley.n } }),
+          valleyBlock, valleyDistAt: (x, z) => { const k = navIndex(ffValley, x, z); return k < 0 ? null : ffValley.dist[k]; },
           updateFlowField: (dt, force) => updateFlowFields(dt || 0, force !== false), flowDir: (x, z) => (flowDir(x, z) ? { x: _ffOut.x, z: _ffOut.z } : null),
           houseFlowDir: (x, z) => (houseFlowDir(x, z) ? { x: _ffOut.x, z: _ffOut.z } : null),
           setFlow: (on) => { flowEnabled = !!on; },
@@ -62693,6 +63487,16 @@ live++;
           state: (z) => ({ night: isNight, nvg: nvgDown, flashlight: flashlightActive(),
             gameStarted, paused, training: training.active, seen: z ? nightWarningSeen(z.mesh.position.x, z.mesh.position.y, z.mesh.position.z) : null,
             cover: z ? nightWarningCover(z.mesh.position.x, z.mesh.position.y, z.mesh.position.z) : null }) };
+        window.TT.wallBandsDbg = { on: WALLS_ON, bands: () => wallBands.map((b) => ({ kind: b.kind, width: b.width,
+          radius: b.radius, gaps: b.gaps.map((g) => ({ id: g.id, kind: g.kind, halfWidth: g.halfWidth,
+            at: g.at, width: g.width })), solids: b.solids.length })), draws: () => wallBandMeshes.length,
+          blocked: (x, z, r = 0.35) => wallBands.some((b) => b.solids.some((s) => hypot(x - s.x, z - s.z) < s.radius + r)),
+          resolve: (x, z, r = 0.35) => resolveStaticProps(x, z, r, sampleHeight(x, z)) };
+        window.TT.shortcutDbg = { on: SHORTCUTS_ON,
+          list: () => shortcutBands.map((b) => ({ id: b.id, x: b.middle.x, z: b.middle.z,
+            cut: b.cut, hold: b.holdSeconds, solids: b.solids.length })),
+          cut: (id, on = true) => { const b = shortcutBands.find((s) => s.id === id); return b ? syncShortcutOpen(b, on) : false; },
+          resolve: (x, z, r = 0.35) => resolveStaticProps(x, z, r, sampleHeight(x, z)) };
         window.TT.inspectHost = inspectHost;   // CL-196: the inspector can attach to any debug game (the suite's check does)
         window.TT.storyAftermathDbg={read:()=>storyAftermath.read(),sync:updateStoryAftermath,open:openStoryRecording,close:closeStoryRecording,
           at:storyRecordingAt,near:nearStoryRecording,modal:()=>recordingKind,camera:()=>recoveredCamera};
@@ -62708,6 +63512,7 @@ live++;
           drips: () => fuelDrips.length, site: () => fuelSiteState(), reach: () => objectiveProps?.props?.[FUEL_SITE] ? objectiveReach(objectiveProps.props[FUEL_SITE]) : null,
           prompt: () => fuelPromptText(), carry: (dt, moved) => { const ev = fuelRun.carry(dt, moved, day); fuelEvents(ev); return ev; }, slow: () => fuelSlow(), fireBlocked: () => fuelCarried(), lastBoom: () => fuelLastBoom, pools: () => firePools.length, gunShown: () => weaponMount.visible };   // GB-197; GB-199: the held gun goes away with the can
         window.TT.utilityDbg = { on: (v) => { if (v == null) return utilitiesOn; utilitySetOn(!!v); return utilitiesOn; }, read: () => utilities.read(), lead: (id) => utilityLead(id), install: (id) => utilityInstallAction(id === 'plumbing' ? 'utilPump' : id === 'workshop' ? 'utilBench' : 'utilSiren'), why: (id) => utilities.whyOff(id), spots: () => utilityProps ? utilityProps.spots : null, tank: () => utilityFill, hose: () => utilityHose(), step: (dt) => utilityUpdate(dt), cost: () => repairCostMul(), supply: () => utilities.supply('horseshoes'), reset: () => { utilities.reset(); utilityFill = 0; utilityTags(); utilityHud(); } };
+        window.TT.ironDbg = ironDbg();   // GB-266
         window.TT.chainDbg = { on: (v) => { if (v == null) return chainGatesOn; chainSetOn(!!v); return chainGatesOn; }, read: () => chainGates.read(), shut: (site) => chainShutSite(site), prompt: () => chainPromptText(), use: () => chainUseE(), gate: () => { const g = chainWorld.gates.get("depot-shed"); return g ? { x: g.x, y: g.y, z: g.z, open: chainGates.isOpen("depot-shed") } : null; }, key: () => { const k = chainWorld.keys.get("price-key"); return k ? { x: k.x, y: k.y, z: k.z, state: chainGates.keyState("price-key"), visible: !!k.mesh.visible } : null; }, spare: () => chainWorld.spare ? { key: chainWorld.spare.key, x: chainWorld.spare.x, z: chainWorld.spare.z, state: chainGates.keyState(chainWorld.spare.key) } : null, load: (s) => { chainGates.load(s); const k = chainWorld.keys.get('price-key'); if (k) k.mesh.visible = chainGates.keyState('price-key') !== 'held'; }, dawn: (n) => { const got = chainGates.dawn(n, storyChain.read()); for (const gate of got) chainSpareArrived(gate); return got; }, story: () => storyChain.read(), at: (id) => { const g = chainWorld.gates.get(id); return g ? { x: g.x, y: g.y, z: g.z, open: chainGates.isOpen(id), fenced: !!(g.mesh && g.mesh.userData.fenced) } : null; }, keyAt: (key) => { const k = chainWorld.keys.get(key); return k ? { x: k.x, y: k.y, z: k.z, state: chainGates.keyState(key), visible: !!(k.mesh && (k.mesh.userData?._cull?.hidden ? k.mesh.userData._cull.want : k.mesh.visible)) } : null; }, event: (n) => chainGates.event(n), mineShut: () => chainGatesOn && chainLive.has("below") && !chainGates.isOpen("mine-iron-gate"), reset: () => resetStoryChain() };
         window.TT.hikersAgeDbg = (s, opts = { inWater: true }) => { if (!hikersKit) return []; const ev = hikersKit.step(s, opts); hikersEvents(ev); return ev; };   // GB-196: a test ages the float without waiting it out
         window.TT.convoyDbg = {

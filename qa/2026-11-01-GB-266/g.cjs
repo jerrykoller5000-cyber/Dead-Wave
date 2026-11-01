@@ -1,0 +1,2 @@
+const fs=require('fs');const [,,file,pat,ctx='0']=process.argv;const L=fs.readFileSync(file,'utf8').split(/\r?\n/);const re=new RegExp(pat);const c=+ctx;let last=-1;
+L.forEach((l,i)=>{if(re.test(l)){for(let j=Math.max(0,i-c,last+1);j<=Math.min(L.length-1,i+c);j++){console.log((j+1)+': '+L[j].slice(0,260));last=j;} if(c)console.log('--');}});

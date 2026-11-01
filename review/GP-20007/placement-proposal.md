@@ -15,6 +15,12 @@ the centre 3 m opens to both player and dead, while the two ends remain.
 | 5 | Graveyard → crashed wreck: a 51 m woodland diagonal cuts the corner of a ~162 m marked walk, offering a discoverable connection between two dangerous sites. | `(-103.8,67.6)` | `(-108.0,70.3)` to `(-99.6,64.9)` |
 | 6 | Fuel depot → radio mast: the direct 40 m line reaches the hill edge, while the network routes back around the woods (~266 m). A stacked deadfall signals the closed way without hiding the mast's skyline light. | `(-129.1,5.0)` | `(-130.9,9.7)` to `(-127.3,0.4)` |
 
+**Claude's rule-10 ruling, 2026-11-01:** approve 1, 3, 4, 5 and 6 as
+proposed. Site 2 lies only 12 m from the fire tower. Claude allowed moving it
+at least 30 m from every place centre or dropping it and keeping five. We are
+dropping site 2; no unapproved substitute will be placed. The five approved
+sites are the implementation set.
+
 Live RTX 5080 probe: all six **full 10 m segments** were sampled every 0.5 m.
 Minimum clearance beyond the nearest marked trail edge was 17.6, 5.8, 8.9,
 26.3, 9.9 and 13.2 m respectively; maximum water depth was zero for each;

@@ -16,6 +16,7 @@ export function createCoach({ load = () => null, save = () => {} } = {}) {
   const isWarning = id => id === 'caveWarning' || id === 'pitWarning';
   let pickupSeen = false, purchasePending = false, card = null, remaining = 0, visible = false;
   const persist = () => { try { save(JSON.stringify({ version: 1, ...profile })); } catch { /* play still works */ } };
+  function coachLine(key, fallback) { try { return text(key); } catch { return fallback; } }
   function handle(event = {}) {
     if (event.type === 'controls-ready') { ready = true; return; }
     if (event.type === 'run-reset') {
@@ -73,6 +74,11 @@ export function createCoach({ load = () => null, save = () => {} } = {}) {
     visible = ready && frame.active === true;
     if (!visible) return null;
     if (pendingWarnings.length) show(pendingWarnings.shift(), 8);
+    if (frame.firstRun === true && frame.atHq === false && !isWarning(card)) {
+      card = 'trail'; remaining = Infinity;
+      return read();
+    }
+    if (card === 'trail') card = null;
     if (!isWarning(card) && carried > 0 && !processing && frame.nearWindow && !profile.banked && !profile.bankShown) show('bank', Infinity);
     if (!card && carried > 0 && !processing && pickupSeen && !profile.banked && !profile.bankShown && !profile.pickupShown) show('pickup', 8);
     if (!card && !carried && poiKey && !fightRetired && !profile.banked && !profile.poiShown) show('poi', 12);
@@ -89,6 +95,11 @@ export function createCoach({ load = () => null, save = () => {} } = {}) {
   }
   function read() {
     if (!visible || !card) return null;
+    if (card === 'trail') return {
+      id: 'trail',
+      title: coachLine('coach.trail', 'Follow the trail'),
+      body: coachLine('coach.trailBody', 'The worn ground leads to the HQ. Its light is at the end.')
+    };
     return { id: card, title: card === 'poi' ? text('coach.poi', {poi:text(poiKey)}) : text(`coach.${card}`),
       body: card === 'poi' ? text('coach.poiHelp') : card === 'pickup' ? text('coach.return') : card === 'purchase' ? text('coach.loop') : '' };
   }

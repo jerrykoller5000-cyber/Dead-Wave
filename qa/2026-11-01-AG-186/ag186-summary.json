@@ -1,0 +1,340 @@
+{
+  "timestamp": "2026-11-01T13:22:30.072Z",
+  "hardware": "NVIDIA GeForce RTX 5080 WebGPU",
+  "model": "Gemini 4 Argon (High)",
+  "shortcutsDefaultOn": true,
+  "sites": [
+    {
+      "id": "landing-rangers",
+      "x": 67.80000000000001,
+      "z": -14,
+      "cut": false,
+      "hold": 0,
+      "solids": 19
+    },
+    {
+      "id": "fuel-wreck",
+      "x": -116.8,
+      "z": 28,
+      "cut": false,
+      "hold": 0,
+      "solids": 19
+    },
+    {
+      "id": "trapper-grave",
+      "x": -62.650000000000006,
+      "z": 106.94999999999999,
+      "cut": false,
+      "hold": 0,
+      "solids": 19
+    },
+    {
+      "id": "grave-wreck",
+      "x": -103.8,
+      "z": 67.6,
+      "cut": false,
+      "hold": 0,
+      "solids": 19
+    },
+    {
+      "id": "fuel-mast",
+      "x": -129.1,
+      "z": 5.05,
+      "cut": false,
+      "hold": 0,
+      "solids": 19
+    }
+  ],
+  "telemetry": [
+    {
+      "id": "landing-rangers",
+      "x": 67.80000000000001,
+      "z": -14,
+      "solidsBefore": 19,
+      "solidsAfterCut": 9,
+      "solidsReset": 19,
+      "blockedBefore": true,
+      "blockedAfterCut": false,
+      "resolvedBefore": {
+        "x": 66.77549793530176,
+        "z": -14.229990259422058
+      },
+      "resolvedAfterCut": {
+        "x": 67.80000000000001,
+        "z": -14
+      }
+    },
+    {
+      "id": "fuel-wreck",
+      "x": -116.8,
+      "z": 28,
+      "solidsBefore": 19,
+      "solidsAfterCut": 9,
+      "solidsReset": 19,
+      "blockedBefore": true,
+      "blockedAfterCut": false,
+      "resolvedBefore": {
+        "x": -116.75803355973368,
+        "z": 26.95083899334212
+      },
+      "resolvedAfterCut": {
+        "x": -116.8,
+        "z": 28
+      }
+    },
+    {
+      "id": "trapper-grave",
+      "x": -62.650000000000006,
+      "z": 106.94999999999999,
+      "solidsBefore": 19,
+      "solidsAfterCut": 9,
+      "solidsReset": 19,
+      "blockedBefore": true,
+      "blockedAfterCut": false,
+      "resolvedBefore": {
+        "x": -61.77472820440793,
+        "z": 107.52999938262124
+      },
+      "resolvedAfterCut": {
+        "x": -62.650000000000006,
+        "z": 106.94999999999999
+      }
+    },
+    {
+      "id": "grave-wreck",
+      "x": -103.8,
+      "z": 67.6,
+      "solidsBefore": 19,
+      "solidsAfterCut": 9,
+      "solidsReset": 19,
+      "blockedBefore": true,
+      "blockedAfterCut": false,
+      "resolvedBefore": {
+        "x": -103.23220452912082,
+        "z": 68.48323739914538
+      },
+      "resolvedAfterCut": {
+        "x": -103.8,
+        "z": 67.6
+      }
+    },
+    {
+      "id": "fuel-mast",
+      "x": -129.1,
+      "z": 5.05,
+      "solidsBefore": 19,
+      "solidsAfterCut": 9,
+      "solidsReset": 19,
+      "blockedBefore": true,
+      "blockedAfterCut": false,
+      "resolvedBefore": {
+        "x": -128.1208034968122,
+        "z": 5.429043807685597
+      },
+      "resolvedAfterCut": {
+        "x": -129.1,
+        "z": 5.05
+      }
+    }
+  ],
+  "collisionTests": {},
+  "promptTests": {
+    "withoutSaw": {
+      "text": "EInspect fallen logs",
+      "shown": true
+    },
+    "withSaw": {
+      "text": "EInspect fallen logs",
+      "shown": true
+    },
+    "progress": {
+      "text": "Cutting through · 11%",
+      "shown": true
+    }
+  },
+  "captures": [
+    {
+      "name": "1-landing-rangers-uncut-noon",
+      "file": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-186\\1-landing-rangers-uncut-noon.png",
+      "state": {
+        "px": 74.5,
+        "py": -3.8,
+        "pz": -14,
+        "tx": 67.8,
+        "ty": -4.8,
+        "tz": -14,
+        "fov": 48
+      }
+    },
+    {
+      "name": "2-landing-rangers-cut-noon",
+      "file": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-186\\2-landing-rangers-cut-noon.png",
+      "state": {
+        "px": 74.5,
+        "py": -3.8,
+        "pz": -14,
+        "tx": 67.8,
+        "ty": -4.8,
+        "tz": -14,
+        "fov": 48
+      }
+    },
+    {
+      "name": "3-fuel-wreck-uncut-noon",
+      "file": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-186\\3-fuel-wreck-uncut-noon.png",
+      "state": {
+        "px": -116.8,
+        "py": 1.6,
+        "pz": 34.2,
+        "tx": -116.8,
+        "ty": 0.6,
+        "tz": 28,
+        "fov": 48
+      }
+    },
+    {
+      "name": "4-fuel-wreck-cut-noon",
+      "file": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-186\\4-fuel-wreck-cut-noon.png",
+      "state": {
+        "px": -116.8,
+        "py": 1.6,
+        "pz": 34.2,
+        "tx": -116.8,
+        "ty": 0.6,
+        "tz": 28,
+        "fov": 48
+      }
+    },
+    {
+      "name": "5-trapper-grave-uncut-noon",
+      "file": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-186\\5-trapper-grave-uncut-noon.png",
+      "state": {
+        "px": -57.7,
+        "py": 4.6,
+        "pz": 110.2,
+        "tx": -62.65,
+        "ty": 3.4,
+        "tz": 106.95,
+        "fov": 48
+      }
+    },
+    {
+      "name": "6-trapper-grave-cut-noon",
+      "file": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-186\\6-trapper-grave-cut-noon.png",
+      "state": {
+        "px": -57.7,
+        "py": 4.6,
+        "pz": 110.2,
+        "tx": -62.65,
+        "ty": 3.4,
+        "tz": 106.95,
+        "fov": 48
+      }
+    },
+    {
+      "name": "7-grave-wreck-uncut-noon",
+      "file": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-186\\7-grave-wreck-uncut-noon.png",
+      "state": {
+        "px": -100.5,
+        "py": 2,
+        "pz": 72.6,
+        "tx": -103.8,
+        "ty": 0.9,
+        "tz": 67.6,
+        "fov": 48
+      }
+    },
+    {
+      "name": "8-fuel-mast-uncut-noon",
+      "file": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-186\\8-fuel-mast-uncut-noon.png",
+      "state": {
+        "px": -123.5,
+        "py": 2.2,
+        "pz": 7.2,
+        "tx": -129.1,
+        "ty": 1,
+        "tz": 5.05,
+        "fov": 48
+      }
+    },
+    {
+      "name": "9-grave-wreck-uncut-overcast",
+      "file": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-186\\9-grave-wreck-uncut-overcast.png",
+      "state": {
+        "px": -100.5,
+        "py": 2,
+        "pz": 72.6,
+        "tx": -103.8,
+        "ty": 0.9,
+        "tz": 67.6,
+        "fov": 48
+      }
+    },
+    {
+      "name": "10-fuel-wreck-cut-overcast",
+      "file": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-186\\10-fuel-wreck-cut-overcast.png",
+      "state": {
+        "px": -116.8,
+        "py": 1.6,
+        "pz": 34.2,
+        "tx": -116.8,
+        "ty": 0.6,
+        "tz": 28,
+        "fov": 48
+      }
+    },
+    {
+      "name": "11-fuel-mast-uncut-dusk",
+      "file": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-186\\11-fuel-mast-uncut-dusk.png",
+      "state": {
+        "px": -123.5,
+        "py": 2.2,
+        "pz": 7.2,
+        "tx": -129.1,
+        "ty": 1,
+        "tz": 5.05,
+        "fov": 48
+      }
+    },
+    {
+      "name": "12-landing-rangers-cut-dusk",
+      "file": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-186\\12-landing-rangers-cut-dusk.png",
+      "state": {
+        "px": 74.5,
+        "py": -3.8,
+        "pz": -14,
+        "tx": 67.8,
+        "ty": -4.8,
+        "tz": -14,
+        "fov": 48
+      }
+    },
+    {
+      "name": "13-fuel-wreck-uncut-night",
+      "file": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-186\\13-fuel-wreck-uncut-night.png",
+      "state": {
+        "px": -116.8,
+        "py": 1.6,
+        "pz": 34.2,
+        "tx": -116.8,
+        "ty": 0.6,
+        "tz": 28,
+        "fov": 48
+      }
+    },
+    {
+      "name": "14-trapper-grave-uncut-night",
+      "file": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-186\\14-trapper-grave-uncut-night.png",
+      "state": {
+        "px": -57.7,
+        "py": 4.6,
+        "pz": 110.2,
+        "tx": -62.65,
+        "ty": 3.4,
+        "tz": 106.95,
+        "fov": 48
+      }
+    }
+  ],
+  "verdict": "PASS"
+}

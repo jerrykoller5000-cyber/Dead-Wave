@@ -1,0 +1,3 @@
+import fs from 'node:fs';
+function dups(file){const s=fs.readFileSync(file,'utf8');const lines=s.split('\n').map(l=>l.trim()).filter(l=>l.length>0&&!l.startsWith('//'));const seen=new Map(),out=new Set();for(let i=0;i+3<lines.length;i++){const k=lines.slice(i,i+4).join('\u0001');if(k.length<60)continue;if(seen.has(k))out.add(k);else seen.set(k,1);}return out;}
+const a=dups('qa/2026-10-31-GB-260/inline.before.mjs'),b=dups('qa/2026-10-31-GB-260/inline.now.mjs');let n=0,g=0;for(const k of b)if(!a.has(k)){n++;if(/GB-260|r: 0\.02(7|75|76|71)/.test(k)){g++;console.log('NEW GB-260:\n  '+k.split('\u0001').join('\n  '));}}console.log('new dup windows since before-cans: '+n+', touching GB-260 lines: '+g);

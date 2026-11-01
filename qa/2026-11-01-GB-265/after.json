@@ -1,0 +1,40 @@
+{
+ "probe": {
+  "radius": 40,
+  "table": 40,
+  "inHand": "chainsaw",
+  "ready": true,
+  "sleeps38Before": true,
+  "cut38": {
+   "ticks": 103,
+   "bit": 103,
+   "noisesIn2s": 4,
+   "w": "chainsaw",
+   "r": 40,
+   "suppressed": false,
+   "woke": true,
+   "why": "shot",
+   "fuel": [
+    59.96,
+    54.964
+   ],
+   "heat": [
+    0,
+    0.25
+   ],
+   "biteT": 0.3
+  },
+  "afterHold": 0,
+  "cut42": {
+   "noises": 3,
+   "woke": false
+  },
+  "overheat": {
+   "returned": false,
+   "overheat": true,
+   "next": false
+  },
+  "otherGun": false
+ },
+ "pageErrors": []
+}
