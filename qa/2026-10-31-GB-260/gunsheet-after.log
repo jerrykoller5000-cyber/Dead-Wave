@@ -1,0 +1,13 @@
+Game-test request 9bb3bbd0-d7b4-4618-9c4f-0dc3f3baf3d3 queued at position 2. Waiting...
+GRANT grokbot GB-260: starting one game-test command
+shoot: C:/Program Files/Google/Chrome/Application/chrome.exe
+shoot: http://127.0.0.1:59917/index.html?debug=1&raf=timer&renderer=webgl
+shoot: world ready in 72.6s
+  gun-m4                 671 KB
+  gun-ak                 671 KB
+  gun-sniper             655 KB
+  gun-shotgun            652 KB
+  gun-uzi                681 KB
+  gun-pistol             679 KB
+
+shoot: 6 view(s) written to qa\2026-10-31-GB-260\cans-after

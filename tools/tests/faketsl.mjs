@@ -23,3 +23,17 @@ export const normalWorld = makeStub(), normalLocal = makeStub(), cos = makeStub(
 export const varying = makeStub(), positionGeometry = makeStub(), uv = makeStub();
 // CU-159: the end-of-frame grade calls saturation(). The stub only has to be a node.
 export const saturation = makeStub();
+// GP-19999: a wing's swung normal is taken into view space. The stub only has to be a node.
+export const transformNormalToView = makeStub();
+
+// CU-203: the instanced forest storage buffers. The stub only has to hold the matrices.
+export function instancedArray(count, type) {
+  const size = type === "mat4" ? 16 : type === "vec3" ? 3 : type === "vec4" ? 4 : 1;
+  const value = { array: new Float32Array(Math.max(1, count) * size), count, needsUpdate: false, version: 0 };
+  const node = makeStub("instancedArray");
+  node.value = value;
+  node.element = () => makeStub("element");
+  return node;
+}
+export const instanceIndex = makeStub("instanceIndex");
+export function vertexColor() { return makeStub("vertexColor"); }

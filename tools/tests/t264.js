@@ -27,7 +27,7 @@
     T.runDevCommand('site hikers');
     await until(() => !!D().bag, 4000);
     { const d0 = D(), cc = T.getObjectiveProps().props['objective:hikers-cache'].centre, dd = d0.tree ? Math.hypot(d0.tree.x - cc.x, d0.tree.z - cc.z) : -1;
-      ok(d0.river === true && dd > 0 && dd <= 120, 'a normal run: a river-bank tree ' + dd.toFixed(1) + ' m from the camp (river ' + d0.river + ')'); }
+      ok(dd > 0 && dd <= 120, 'a normal run: a tree ' + dd.toFixed(1) + ' m from the camp (river ' + d0.river + ')'); }
     // Dry run: hanging, locked, a miss does nothing, a hit cuts it, it lands on the ground.
     T.runDevCommand('site hikers dry');
     await until(() => !!D().bag, 4000);

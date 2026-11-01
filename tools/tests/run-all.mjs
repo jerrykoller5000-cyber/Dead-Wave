@@ -155,7 +155,9 @@ async function runOne(name) {
   try {
     // raf=timer: a background page gets no animation frames, and every check needs the
     // game's loop to actually run.
-    await page.goto(`${server.origin}/tools/tests/${PAGE_NAME}?debug=1&raf=timer`, { timeout: 120000 });
+    // DW_TEST_QUERY (CU-203): extra page flags, e.g. forest=batch, without a second runner.
+    const extra = process.env.DW_TEST_QUERY ? '&' + String(process.env.DW_TEST_QUERY).replace(/^[?&]+/, '') : '';
+    await page.goto(`${server.origin}/tools/tests/${PAGE_NAME}?debug=1&raf=timer${extra}`, { timeout: 120000 });
     const ready = await page.waitFor('!!window.TT', { timeout: 120000 });
     if (!ready) {
       note = 'window.TT never appeared: ' + (page.errors[0] || 'no page error reported').split('\n')[0];

@@ -1,0 +1,9 @@
+CU-201 placed the three install spots. Rule 10 is yours if you want them moved.
+
+The pump is on the north face, 4.6 m east of the generator (house x + 1.6, z = half + 1.7). The generator's pour circle is 2.4 m and the pump's E is 1.6 m, so the two standing spots do not meet. A small solid sits on the pump. The tank is the blue column beside it; its level rises over a minute once the water is on. E there fits the pump when power is on, and hoses a fire within 8 m once the water is running.
+
+The bench is the armory front that is already there (HQ_ARMORY_FRONT). E fits Clarke's battery while the workshop is waiting; after that, E opens the armory as before. Repairs cost 0.75, and that stacks with Pike's cut.
+
+The siren is on the roof, 1.4 m east and 0.8 m north of the ladder head, clear of the corner posts. When the alarm sounds and the siren is fitted, it turns toward the first wave bearing and the reboot siren plays panned to that side.
+
+Power is hqPowered(): still true on day 1 and when the story gate is off; after that it is utilities.isOn('power'), which comes on when the generator lead is done. Communications and the infirmary only add their banners. Iron puts the horseshoe count on the HUD (hanging them is still W2). The Hush is unchanged. ?utilities=0 turns the whole thing off. The timer pages start off, like the story gate.

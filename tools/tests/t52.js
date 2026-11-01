@@ -12,10 +12,10 @@
     const CL6 = {
       'objective:radio-repair':   [-149.87, -1.15, -149.29, 0.23, -2.75],
       'objective:medical-convoy': null,   // GP-19937 (CL-217): in the wreck's own frame now, worked out below
-      'objective:ranger-cache':   [30.52, -19.24, 31.09, -17.85, -2.75],
-      'objective:hikers-cache':   [2.02, -77.68, 3.41, -78.26, -1.18],
-      'objective:trapper-cache':  [-37.49, 47.81, -38.06, 46.42, 0.39],
-      'objective:fuel-depot':     [-44.13, -18.34, -43.07, -17.28, -2.36],
+      'objective:ranger-cache':   [123, 4, 123.57, 5.39, -2.75],
+      'objective:hikers-cache':   [26, -122, 27.39, -122.58, -1.18],
+      'objective:trapper-cache':  [-16, 144, -16.57, 142.61, 0.39],
+      'objective:fuel-depot':     [-112, 8, -110.94, 9.06, -2.36],
       'objective:wreck-salvage':  [-95.91, -45.77, -96.97, -46.83, 0.79]
     };
     { // the medical row turns with wrecks.0: off (1.5, -1.2), approach (1.5, 0) in its frame

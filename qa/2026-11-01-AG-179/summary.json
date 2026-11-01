@@ -1,0 +1,598 @@
+{
+  "timestamp": "2026-11-01T06:14:39.460Z",
+  "camps": {
+    "poi": {
+      "rangers": {
+        "x": 128,
+        "z": 0,
+        "y": -3.85
+      },
+      "hikers": {
+        "x": 22,
+        "z": -126,
+        "y": 9.83
+      },
+      "trapper": {
+        "x": -12,
+        "z": 140,
+        "y": 4.1
+      },
+      "fuel": {
+        "x": -116,
+        "z": 10,
+        "y": 0.35
+      },
+      "mast": {
+        "x": -153.37,
+        "z": -4.15,
+        "y": 0.25
+      },
+      "house": {
+        "x": 0,
+        "z": 0,
+        "half": 5
+      },
+      "yardEye": {
+        "x": 0,
+        "y": -1.47,
+        "z": -6.5
+      },
+      "roofEye": {
+        "x": 0,
+        "y": 3.83,
+        "z": 0
+      }
+    },
+    "hikersKit": {
+      "kitPhase": "hanging",
+      "bagPos": {
+        "x": 34.87,
+        "y": 15.45,
+        "z": -120.81
+      },
+      "treePos": {
+        "x": 36.81,
+        "y": 10.06,
+        "z": -120.56
+      },
+      "hangHeight": 5,
+      "waterDepth": 0,
+      "isOverWater": false
+    }
+  },
+  "woods": {
+    "census": {
+      "treeCount": 2132,
+      "tbStats": {
+        "off": false,
+        "mode": "forest",
+        "built": true,
+        "buildMs": 36,
+        "frameMsAvg": 0.848,
+        "frameMsMax": 15.3,
+        "calls": 889,
+        "trees": 2132,
+        "members": 2132,
+        "batched": 2056,
+        "live": 76,
+        "dirty": 1,
+        "cells": 0,
+        "meshes": 58,
+        "templates": 29,
+        "instances": 661,
+        "scatterMs": 130,
+        "compact": true,
+        "understory": 3
+      },
+      "understoryMeshes": [
+        {
+          "name": "",
+          "kind": "understory:brush",
+          "count": 467,
+          "visible": true
+        },
+        {
+          "name": "",
+          "kind": "understory:sap",
+          "count": 250,
+          "visible": true
+        },
+        {
+          "name": "",
+          "kind": "understory:log",
+          "count": 149,
+          "visible": true
+        }
+      ]
+    }
+  },
+  "skyline": {},
+  "sightlines": {
+    "yardOpen": 1,
+    "yardTotal": 12,
+    "yardRows": [
+      {
+        "id": "tower",
+        "x": -25,
+        "z": -125,
+        "dist": 122,
+        "open": false,
+        "by": "tree"
+      },
+      {
+        "id": "graveyard",
+        "x": -90,
+        "z": 89.2,
+        "dist": 131.4,
+        "open": false,
+        "by": "ground"
+      },
+      {
+        "id": "dock",
+        "x": -86.1,
+        "z": -64.9,
+        "dist": 104,
+        "open": true,
+        "by": null
+      },
+      {
+        "id": "cabin:0",
+        "x": 20,
+        "z": 104.1,
+        "dist": 112.7,
+        "open": false,
+        "by": "tree"
+      },
+      {
+        "id": "cabin:1",
+        "x": 91.4,
+        "z": -66.8,
+        "dist": 109.7,
+        "open": false,
+        "by": "tree"
+      },
+      {
+        "id": "objective:radio-repair",
+        "x": -149.9,
+        "z": -1.2,
+        "dist": 150,
+        "open": false,
+        "by": "tree"
+      },
+      {
+        "id": "objective:medical-convoy",
+        "x": -118,
+        "z": 47.9,
+        "dist": 130,
+        "open": false,
+        "by": "tree"
+      },
+      {
+        "id": "objective:ranger-cache",
+        "x": 123,
+        "z": 4,
+        "dist": 123.5,
+        "open": false,
+        "by": "tree"
+      },
+      {
+        "id": "objective:hikers-cache",
+        "x": 26,
+        "z": -122,
+        "dist": 119.1,
+        "open": false,
+        "by": "tree"
+      },
+      {
+        "id": "objective:trapper-cache",
+        "x": -4,
+        "z": 137.4,
+        "dist": 144.1,
+        "open": false,
+        "by": "ground"
+      },
+      {
+        "id": "objective:fuel-depot",
+        "x": -112,
+        "z": 8,
+        "dist": 113,
+        "open": false,
+        "by": "tree"
+      },
+      {
+        "id": "objective:wreck-salvage",
+        "x": -95.9,
+        "z": -45.8,
+        "dist": 103.7,
+        "open": false,
+        "by": "tree"
+      }
+    ],
+    "roofOpen": 2,
+    "roofTotal": 12,
+    "roofRows": [
+      {
+        "id": "tower",
+        "x": -25,
+        "z": -125,
+        "dist": 127.8,
+        "open": false,
+        "by": "tree"
+      },
+      {
+        "id": "graveyard",
+        "x": -90,
+        "z": 89.2,
+        "dist": 126.7,
+        "open": true,
+        "by": null
+      },
+      {
+        "id": "dock",
+        "x": -86.1,
+        "z": -64.9,
+        "dist": 107.9,
+        "open": false,
+        "by": "tree"
+      },
+      {
+        "id": "cabin:0",
+        "x": 20,
+        "z": 104.1,
+        "dist": 106,
+        "open": false,
+        "by": "tree"
+      },
+      {
+        "id": "cabin:1",
+        "x": 91.4,
+        "z": -66.8,
+        "dist": 113.2,
+        "open": true,
+        "by": null
+      },
+      {
+        "id": "objective:radio-repair",
+        "x": -149.9,
+        "z": -1.2,
+        "dist": 149.9,
+        "open": false,
+        "by": "tree"
+      },
+      {
+        "id": "objective:medical-convoy",
+        "x": -118,
+        "z": 47.9,
+        "dist": 127.4,
+        "open": false,
+        "by": "tree"
+      },
+      {
+        "id": "objective:ranger-cache",
+        "x": 123,
+        "z": 4,
+        "dist": 123.2,
+        "open": false,
+        "by": "tree"
+      },
+      {
+        "id": "objective:hikers-cache",
+        "x": 26,
+        "z": -122,
+        "dist": 125,
+        "open": false,
+        "by": "tree"
+      },
+      {
+        "id": "objective:trapper-cache",
+        "x": -4,
+        "z": 137.4,
+        "dist": 137.5,
+        "open": false,
+        "by": "tree"
+      },
+      {
+        "id": "objective:fuel-depot",
+        "x": -112,
+        "z": 8,
+        "dist": 112.3,
+        "open": false,
+        "by": "tree"
+      },
+      {
+        "id": "objective:wreck-salvage",
+        "x": -95.9,
+        "z": -45.8,
+        "dist": 106.3,
+        "open": false,
+        "by": "tree"
+      }
+    ]
+  },
+  "captures": [
+    {
+      "id": "camps-rangers-approach",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-179\\camps-rangers-approach.png",
+      "px": 108,
+      "pz": 0,
+      "tx": 128,
+      "tz": 0,
+      "time": 0.42
+    },
+    {
+      "id": "camps-rangers-from-yard",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-179\\camps-rangers-from-yard.png",
+      "px": 0,
+      "pz": -6.5,
+      "tx": 128,
+      "tz": 0,
+      "time": 0.42
+    },
+    {
+      "id": "camps-rangers-from-roof",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-179\\camps-rangers-from-roof.png",
+      "px": 0,
+      "pz": 0,
+      "tx": 128,
+      "tz": 0,
+      "time": 0.42
+    },
+    {
+      "id": "camps-hikers-approach",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-179\\camps-hikers-approach.png",
+      "px": 22,
+      "pz": -104,
+      "tx": 22,
+      "tz": -126,
+      "time": 0.42
+    },
+    {
+      "id": "camps-hikers-from-yard",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-179\\camps-hikers-from-yard.png",
+      "px": 0,
+      "pz": -6.5,
+      "tx": 22,
+      "tz": -126,
+      "time": 0.42
+    },
+    {
+      "id": "camps-hikers-from-roof",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-179\\camps-hikers-from-roof.png",
+      "px": 0,
+      "pz": 0,
+      "tx": 22,
+      "tz": -126,
+      "time": 0.42
+    },
+    {
+      "id": "camps-hikers-kit-tree",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-179\\camps-hikers-kit-tree.png",
+      "px": 41.31,
+      "pz": -125.06,
+      "tx": 36.81,
+      "tz": -120.56,
+      "time": 0.42
+    },
+    {
+      "id": "camps-trapper-approach",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-179\\camps-trapper-approach.png",
+      "px": -12,
+      "pz": 118,
+      "tx": -12,
+      "tz": 140,
+      "time": 0.42
+    },
+    {
+      "id": "camps-trapper-from-yard",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-179\\camps-trapper-from-yard.png",
+      "px": 0,
+      "pz": -6.5,
+      "tx": -12,
+      "tz": 140,
+      "time": 0.42
+    },
+    {
+      "id": "camps-trapper-from-roof",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-179\\camps-trapper-from-roof.png",
+      "px": 0,
+      "pz": 0,
+      "tx": -12,
+      "tz": 140,
+      "time": 0.42
+    },
+    {
+      "id": "camps-fuel-approach",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-179\\camps-fuel-approach.png",
+      "px": -96,
+      "pz": 10,
+      "tx": -116,
+      "tz": 10,
+      "time": 0.42
+    },
+    {
+      "id": "camps-fuel-from-yard",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-179\\camps-fuel-from-yard.png",
+      "px": 0,
+      "pz": -6.5,
+      "tx": -116,
+      "tz": 10,
+      "time": 0.42
+    },
+    {
+      "id": "camps-fuel-from-roof",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-179\\camps-fuel-from-roof.png",
+      "px": 0,
+      "pz": 0,
+      "tx": -116,
+      "tz": 10,
+      "time": 0.42
+    },
+    {
+      "id": "woods-yard-noon",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-179\\woods-yard-noon.png",
+      "px": 0,
+      "pz": -6.5,
+      "tx": 30,
+      "tz": 8.5,
+      "time": 0.42
+    },
+    {
+      "id": "woods-yard-dusk",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-179\\woods-yard-dusk.png",
+      "px": 0,
+      "pz": -6.5,
+      "tx": 30,
+      "tz": 8.5,
+      "time": 0.73
+    },
+    {
+      "id": "woods-roof-noon",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-179\\woods-roof-noon.png",
+      "px": 0,
+      "pz": 0,
+      "tx": 40,
+      "tz": -30,
+      "time": 0.42
+    },
+    {
+      "id": "woods-roof-dusk",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-179\\woods-roof-dusk.png",
+      "px": 0,
+      "pz": 0,
+      "tx": 40,
+      "tz": -30,
+      "time": 0.73
+    },
+    {
+      "id": "woods-trail-noon",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-179\\woods-trail-noon.png",
+      "px": 60,
+      "pz": 2,
+      "tx": 60,
+      "tz": 35,
+      "time": 0.42
+    },
+    {
+      "id": "woods-trail-dusk",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-179\\woods-trail-dusk.png",
+      "px": 60,
+      "pz": 2,
+      "tx": 60,
+      "tz": 35,
+      "time": 0.73
+    },
+    {
+      "id": "skyline-trapper-noon",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-179\\skyline-trapper-noon.png",
+      "px": 0,
+      "pz": 0,
+      "tx": -12,
+      "tz": 140,
+      "time": 0.42
+    },
+    {
+      "id": "skyline-trapper-night",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-179\\skyline-trapper-night.png",
+      "px": 0,
+      "pz": 0,
+      "tx": -12,
+      "tz": 140,
+      "time": 0.88
+    },
+    {
+      "id": "skyline-fuel-noon-thick",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-179\\skyline-fuel-noon-thick.png",
+      "px": 0,
+      "pz": 0,
+      "tx": -116,
+      "tz": 10,
+      "time": 0.42
+    },
+    {
+      "id": "skyline-fuel-noon-thinned",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-179\\skyline-fuel-noon-thinned.png",
+      "px": 0,
+      "pz": 0,
+      "tx": -116,
+      "tz": 10,
+      "time": 0.42
+    },
+    {
+      "id": "skyline-crows-noon",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-179\\skyline-crows-noon.png",
+      "px": 0,
+      "pz": 0,
+      "tx": 22,
+      "tz": -126,
+      "time": 0.42
+    },
+    {
+      "id": "skyline-crows-night",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-179\\skyline-crows-night.png",
+      "px": 0,
+      "pz": 0,
+      "tx": 22,
+      "tz": -126,
+      "time": 0.88
+    },
+    {
+      "id": "skyline-mast-night-off",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-179\\skyline-mast-night-off.png",
+      "px": 0,
+      "pz": 0,
+      "tx": -153.37,
+      "tz": -4.15,
+      "time": 0.88
+    },
+    {
+      "id": "skyline-mast-night-on",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-179\\skyline-mast-night-on.png",
+      "px": 0,
+      "pz": 0,
+      "tx": -153.37,
+      "tz": -4.15,
+      "time": 0.88
+    },
+    {
+      "id": "skyline-fourlights-noon",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-179\\skyline-fourlights-noon.png",
+      "px": 0,
+      "pz": 0,
+      "tx": -12,
+      "tz": 140,
+      "time": 0.42
+    },
+    {
+      "id": "skyline-fourlights-overcast",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-179\\skyline-fourlights-overcast.png",
+      "px": 0,
+      "pz": 0,
+      "tx": -12,
+      "tz": 140,
+      "time": 0.42
+    },
+    {
+      "id": "skyline-fourlights-dusk",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-179\\skyline-fourlights-dusk.png",
+      "px": 0,
+      "pz": 0,
+      "tx": -12,
+      "tz": 140,
+      "time": 0.73
+    },
+    {
+      "id": "skyline-fourlights-night",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-179\\skyline-fourlights-night.png",
+      "px": 0,
+      "pz": 0,
+      "tx": -12,
+      "tz": 140,
+      "time": 0.88
+    }
+  ],
+  "scores": {
+    "cu205_camps": 5,
+    "cu206_woods": 5,
+    "gp20003_skyline": 5
+  }
+}

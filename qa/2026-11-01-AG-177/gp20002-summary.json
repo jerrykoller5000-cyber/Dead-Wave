@@ -1,0 +1,116 @@
+{
+  "timestamp": "2026-11-01T04:21:25.164Z",
+  "meshStats": {
+    "vestPartsCount": 12,
+    "radioMeshesCount": 3,
+    "carrierMeshesCount": 9,
+    "radioSkinsCount": 0,
+    "radioMeshesVisible": [
+      true,
+      true,
+      true
+    ],
+    "radioMeshesCastShadow": [
+      true,
+      true,
+      true
+    ],
+    "vmActive": false,
+    "vmRaise": 0,
+    "radioEyeHidden": [
+      false,
+      false,
+      false
+    ],
+    "carrierEyeHidden": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  "shots": [
+    {
+      "id": "fp-forward",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-177\\gp20002-fp-forward.png",
+      "desc": "First person forward hip view (pistol)"
+    },
+    {
+      "id": "fp-lookdown",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-177\\gp20002-fp-lookdown.png",
+      "desc": "First person looking straight down (chest/carrier visible, radio/antenna hidden)"
+    },
+    {
+      "id": "fp-lookangled",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-177\\gp20002-fp-lookangled.png",
+      "desc": "First person looking down angled at plate carrier front"
+    },
+    {
+      "id": "tp-radio-close",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-177\\gp20002-tp-radio-close.png",
+      "desc": "Third person close-up of radio, whip antenna, and PTT cable on vest"
+    },
+    {
+      "id": "tp-fullbody",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-177\\gp20002-tp-fullbody-front.png",
+      "desc": "Third person front full body with plate carrier and radio"
+    },
+    {
+      "id": "shadow-silhouette",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-177\\gp20002-shadow-silhouette.png",
+      "desc": "Ground shadow showing whip antenna and radio silhouette cast cleanly"
+    },
+    {
+      "id": "light-noon",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-177\\gp20002-light-noon.png",
+      "desc": "Four-light review: Noon sunlight"
+    },
+    {
+      "id": "light-overcast",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-177\\gp20002-light-overcast.png",
+      "desc": "Four-light review: Overcast stormy"
+    },
+    {
+      "id": "light-dusk",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-177\\gp20002-light-dusk.png",
+      "desc": "Four-light review: Dusk golden hour"
+    },
+    {
+      "id": "light-night",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-177\\gp20002-light-night.png",
+      "desc": "Four-light review: Night NVG/Flashlight"
+    }
+  ],
+  "scores": {
+    "silhouette": 5,
+    "materials": 5,
+    "clipping": 5,
+    "eyeFilter": 5
+  },
+  "fpMeshStats": {
+    "vmRaise": 1,
+    "radioEyeHidden": [
+      true,
+      true,
+      true
+    ],
+    "carrierEyeHidden": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    "allRadioHidden": true,
+    "carrierVisibleInEye": true
+  }
+}

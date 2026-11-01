@@ -37,6 +37,10 @@
     const split = skins.filter((s) => s.userData.rigSplit);
     if (ud.rigSkin) ok(split.length > 0 && split.every((s) => vm.isEyeHidden(s)) && skins.filter((s) => !s.userData.rigSplit).every((s) => !vm.isEyeHidden(s)), 'his baked arms are skins of their own, out of the eye\'s pass; the rest of him is in it (' + split.length + ' of ' + skins.length + ')');
     else out.push('INFO no rig skins on this page (the stand-in three): his arms are their own meshes');
+    const radio = ud.gearParts.vest.filter((o) => o.userData.vmEyeRadio), carrier = ud.gearParts.vest.filter((o) => !o.userData.vmEyeRadio);
+    const radioSkins = skins.filter((s) => s.userData.rigSplit === 2);
+    const bakedRadio = ud.rigSkin ? ud.rigSkin.sources.filter((s) => s.o.userData.vmEyeRadio && s.baked) : [];
+    ok(radio.length >= 3 && radio.every((o) => vm.isEyeHidden(o) && o.visible && o.castShadow) && carrier.some((o) => o.visible && !vm.isEyeHidden(o)) && (bakedRadio.length === 0 || (radioSkins.length > 0 && radioSkins.every((s) => vm.isEyeHidden(s) && s.castShadow))), 'the radio and antenna are eye-hidden in first person while the worn carrier and shadow remain (' + radio.length + ' radio meshes, ' + bakedRadio.length + ' baked, ' + radioSkins.length + ' radio skins)');
     ok(vm.filtering, 'the eye\'s pass leaves them out (the render filter is on)');
     ok(armHid === armN && ud.armLG.visible && ud.armRG.visible && src.visible, 'and they are still there for his shadow (visible)');
     // the hands on their sockets
@@ -120,7 +124,7 @@
       T.setAmmoDbg('pistol', 2);
       T.startReload();
       ok(await until(() => T.isReloading(), 3000), 'a reload starts');
-      const seen = new Set(), places = new Set(); let handFit = Infinity, maxFit = 0, hidden = false;
+      const seen = new Set(), places = new Set(); let handFit = Infinity, maxFit = 0, hidden = false, rackSteep = Infinity;
       const palmOf = () => { const p = new THREE.Vector3(); A.l.rig.point('palm', p); const W = A.l.layout.wrist; return inView(A.l.wrist, p.set(p.x - W[0], p.y - W[1], p.z - W[2])); };
       while (T.isReloading()) {
         const i = vm.info; seen.add(i.magState); places.add(i.handPlace);
@@ -130,12 +134,18 @@
           if (foot) { const d = foot.distanceTo(palmOf()); handFit = Math.min(handFit, d); maxFit = Math.max(maxFit, d); }
         }
         if (i.magState === 'pouch' && vm.gun.mag && !vm.gun.mag.visible) hidden = true;
+        if (i.handPlace === 'work') {   // AG-171: racking, the support forearm comes up from low left, not across the gun
+          const w = vm.ndc(inView(A.l.wrist, new THREE.Vector3())), e = vm.ndc(inView(A.l.root, new THREE.Vector3()));
+          const asp = (T.camera || window.camera).aspect || 1.78, dx = (e.x - w.x) * asp, dy = e.y - w.y;
+          rackSteep = Math.min(rackSteep, Math.atan2(-dy, Math.abs(dx)));
+        }
         await wait(30);
       }
       ok(seen.has('hand') && seen.has('pouch') && seen.has('seated'), 'the magazine: seated, in his palm, away, back (' + [...seen].join(' ') + ')');
       ok(places.has('well') && places.has('pouch') && places.has('work'), 'the support hand goes to the well, the pouch and the slide (' + [...places].join(' ') + ')');
       ok(maxFit < 0.015, 'the magazine rides the support palm (its foot within ' + (maxFit * 100).toFixed(2) + ' cm)');
       ok(hidden, 'away in the pouch it is out of sight');
+      (real ? ok : (c, m) => out.push('INFO ' + m + ' (the stand-in three)'))(rackSteep > 0.61 && rackSteep < Infinity, 'racking the slide, the support forearm runs down out of the view, at least 35 degrees below level on screen (' + (rackSteep * 180 / Math.PI).toFixed(0) + ')');
       await wait(400);
       const g = vm.gun, dm = g.mag.position.distanceTo(g.magBase.pos);
       ok(vm.info.magState === 'seated' && g.mag.visible && dm < 1e-4, 'after it: the magazine seated in the well (' + dm.toExponential(1) + ')');
@@ -156,6 +166,7 @@
     ok(await until(() => vm.info.active && vm.info.raise > 0.99, 8000), 'and the view gun is up again');
     T.setViewFirstDbg(false);
     ok(await until(() => !vm.info.active, 12000), 'third person: the view gun goes');
+    ok(radio.every((o) => o.visible && !vm.isEyeHidden(o)) && (!ud.rigSkin || ud.rigSkin.skins.filter((s) => s.userData.rigSplit === 2).every((s) => !vm.isEyeHidden(s))), 'the radio and antenna are drawn in third person');
     let left = 0; T.marine.traverse((o) => { if (o.userData && o.userData.vmEyeHide) left++; }); src.traverse((o) => { if (o.userData && o.userData.vmEyeHide) left++; });
     ok(left === 0 && !vm.filtering, 'nothing of his left out of the eye\'s pass (' + left + ')');
     ok(errs.length === 0, 'no page errors (' + errs.slice(0, 2).join(' | ') + ')');

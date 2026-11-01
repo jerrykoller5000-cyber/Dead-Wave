@@ -1,0 +1,3 @@
+GRANT grokbot GB-260: starting one game-test command
+check-players: 310 player.position reads, all in the allowed places
+ok    t38     12 pass   0 fail  81.4s

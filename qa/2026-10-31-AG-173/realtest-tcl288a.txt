@@ -1,0 +1,7 @@
+ok    tcl288a    5 pass   0 fail  28.3s  (real renderer)
+    PASS the shadow walk is pruned by default ({"on":true,"cursor":8208,"passes":702,"last":593,"refreshed":7315})
+    PASS shadow passes ran with children left out (790 passes, 592 children out of the last)
+    PASS nothing left hidden after the frames (868 visible top-level children before, 867 after)
+    PASS no child with a caster is marked caster-free (0)
+    PASS no page errors
+1 checks: 5 pass, 0 fail (real renderer)

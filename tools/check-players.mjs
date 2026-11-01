@@ -15,8 +15,9 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 // over his head (promptAnchor, the local view). Kinds 1 and 3 (Claude, lead).
 const ALLOWED = new Set(`
 tick updateWater updateAmbientLife updateAudioDirection updateWindSway updateRoofCutaway ease
-warmEffectPools finishEffectWarmup updateCaveEyes destroyLandmark campsiteMapName drawMinimap
+warmEffectPools finishEffectWarmup updateCaveEyes destroyLandmark campsiteMapName drawMinimap stepMapReveal
 toFull updateCampfires updateRainDroplets updatePuddles cullFoliageByDistance updateTreeBatchesInner
+updateBirds flushBugInstances
 updatePitBubbles updateWorldVoices flushShotHits sndAt damageZombie updateTreeFade updateShadowLOD sceneCull
 resolveTreeCollisions updateTowerClimb updateSlopeSlide tryRoll tryVault updateVault enterHollow leaveHollow updateHqLadder stepHqLadder pushOutOfHouse inLot sendMarineToSpawn resetGame
 startMode tipAt smooth updateMarineBody marineBody marineHit damagePlayer updateMouseAim updateMouseAimBody

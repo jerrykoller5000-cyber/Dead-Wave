@@ -2,9 +2,9 @@
 
 state: active
 model: Grok Bot
-task: GB-260 Magazines and suppressors to scale (J7, J21; from GP-19986), from ChatGPT's docs/weapons-sizes.md and AG-164's shots
-touching: studio/weapon-build.js
-since: 2026-10-31T20:08Z
+task: GB-260 Magazines and suppressors to scale (J7, J21; from GP-19986): magazines in studio/weapon-*.js, the six cans in index.html's SUPPRESSOR table (Claude's 20:43Z ruling)
+touching: studio/weapon-sidearms.js, studio/weapon-longarms.js, index.html (SUPPRESSOR can sizes only)
+since: 2026-10-31T21:54Z
 next: GB-260 Magazines and suppressors to scale (J7, J21; from GP-19986).
 blocked-on: —
 last-report: handoffs/2026-10-31-grokbot-GB-262.md

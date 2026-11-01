@@ -1,0 +1,1361 @@
+{
+  "scenario": "day5",
+  "seconds": 12,
+  "fps": 59.5,
+  "low": 49.8,
+  "worst": 22.6,
+  "hitches": 1,
+  "draws": 276,
+  "triangles": 635441,
+  "zombies": 42,
+  "gfx": "high",
+  "windows": 10,
+  "viewmodelMs": 0.02,
+  "prof": {
+    "frames": 727,
+    "frameMs": 16.81,
+    "tickMs": 14.08,
+    "outsideMs": 2.73,
+    "last10": {
+      "seconds": 10,
+      "frames": 605,
+      "frameMs": 16.81,
+      "tickMs": 13.76,
+      "outsideMs": 3.05,
+      "viewmodelMs": 0.01,
+      "top": [
+        {
+          "k": "r:render",
+          "avg": 7.62
+        },
+        {
+          "k": "r:matrices",
+          "avg": 1.25
+        },
+        {
+          "k": "m:hold",
+          "avg": 0.87
+        },
+        {
+          "k": "zombies",
+          "avg": 0.81
+        },
+        {
+          "k": "m:pose",
+          "avg": 0.54
+        },
+        {
+          "k": "r:cull",
+          "avg": 0.52
+        },
+        {
+          "k": "w:minimap",
+          "avg": 0.23
+        },
+        {
+          "k": "hud+audio",
+          "avg": 0.21
+        },
+        {
+          "k": "waves",
+          "avg": 0.19
+        },
+        {
+          "k": "aim+climb",
+          "avg": 0.18
+        },
+        {
+          "k": "w:stairs+roof+birds+bugs+wildlife",
+          "avg": 0.17
+        },
+        {
+          "k": "w:treeFall+leaves+batches",
+          "avg": 0.16
+        }
+      ]
+    },
+    "top": [
+      {
+        "k": "r:render",
+        "avg": 7.92,
+        "max": 18.8
+      },
+      {
+        "k": "r:matrices",
+        "avg": 1.26,
+        "max": 3.3
+      },
+      {
+        "k": "m:hold",
+        "avg": 0.87,
+        "max": 1.8
+      },
+      {
+        "k": "zombies",
+        "avg": 0.8,
+        "max": 7.9
+      },
+      {
+        "k": "m:pose",
+        "avg": 0.55,
+        "max": 1.2
+      },
+      {
+        "k": "r:cull",
+        "avg": 0.53,
+        "max": 9
+      },
+      {
+        "k": "w:minimap",
+        "avg": 0.23,
+        "max": 2.2
+      },
+      {
+        "k": "hud+audio",
+        "avg": 0.21,
+        "max": 2.5
+      },
+      {
+        "k": "aim+climb",
+        "avg": 0.18,
+        "max": 0.5
+      },
+      {
+        "k": "waves",
+        "avg": 0.17,
+        "max": 13.5
+      },
+      {
+        "k": "w:stairs+roof+birds+bugs+wildlife",
+        "avg": 0.17,
+        "max": 2.2
+      },
+      {
+        "k": "w:treeFall+leaves+batches",
+        "avg": 0.16,
+        "max": 0.6
+      }
+    ],
+    "spikes": [
+      {
+        "frame": 8,
+        "ms": 27.1,
+        "top": [
+          "r:render 18.8",
+          "w:minimap 2.0",
+          "m:hold 1.3",
+          "r:matrices 1.0"
+        ],
+        "heapMB": 847.9,
+        "freedMB": -1.5,
+        "newPipelines": 0,
+        "newTextures": 0,
+        "newGeometries": 0,
+        "newBuilds": 0,
+        "sunShadow": 0,
+        "newRenderObjects": 0,
+        "t0": 35526.2,
+        "t1": 35557.5
+      },
+      {
+        "frame": 9,
+        "ms": 25.8,
+        "top": [
+          "r:render 17.7",
+          "hud+audio 1.4",
+          "m:hold 1.3",
+          "r:matrices 1.2"
+        ],
+        "heapMB": 848.8,
+        "freedMB": -0.8,
+        "newPipelines": 0,
+        "newTextures": 0,
+        "newGeometries": 0,
+        "newBuilds": 0,
+        "sunShadow": 0,
+        "newRenderObjects": 0,
+        "t0": 35557.5,
+        "t1": 35589
+      },
+      {
+        "frame": 44,
+        "ms": 25.5,
+        "top": [
+          "r:render 11.2",
+          "r:cull 9.0",
+          "r:matrices 1.8",
+          "m:hold 0.6"
+        ],
+        "heapMB": 845.6,
+        "freedMB": -2.4,
+        "newPipelines": 0,
+        "newTextures": 0,
+        "newGeometries": 0,
+        "newBuilds": 0,
+        "sunShadow": 0,
+        "newRenderObjects": 0,
+        "t0": 36259.3,
+        "t1": 36285.6
+      },
+      {
+        "frame": 384,
+        "ms": 32.7,
+        "top": [
+          "waves 13.5",
+          "r:render 9.7",
+          "r:matrices 3.0",
+          "zombies 1.2"
+        ],
+        "heapMB": 849.7,
+        "freedMB": -11.8,
+        "newPipelines": 0,
+        "newTextures": 0,
+        "newGeometries": 0,
+        "newBuilds": 0,
+        "sunShadow": 0,
+        "newRenderObjects": 0,
+        "t0": 41990.7,
+        "t1": 42024.4
+      }
+    ],
+    "spikeCauses": {
+      "spikes": 4,
+      "pipelines": 0,
+      "builds": 0,
+      "uploads": 0,
+      "sunShadow": 0,
+      "gc": 0,
+      "code": 4
+    },
+    "gpuMs": 0.31,
+    "gpuSamples": 340,
+    "pipelines": {
+      "made": 0,
+      "released": 0,
+      "withNewShaders": 0,
+      "top": [],
+      "first": []
+    },
+    "builds": {
+      "made": 0,
+      "top": [],
+      "zombieAndEcho": []
+    },
+    "renderObjects": {
+      "made": 4,
+      "perFrame": 0.01,
+      "top": [
+        {
+          "k": "Mesh < chain-gate-combination < Scene | NodeMaterial | ortho",
+          "n": 3,
+          "frames": [
+            10
+          ]
+        },
+        {
+          "k": "chain-combination < chain-gate-combination < Scene | NodeMaterial | ortho",
+          "n": 1,
+          "frames": [
+            10
+          ]
+        }
+      ],
+      "spikes": [
+        {
+          "frame": 8,
+          "n": 0,
+          "top": []
+        },
+        {
+          "frame": 9,
+          "n": 0,
+          "top": []
+        },
+        {
+          "frame": 44,
+          "n": 0,
+          "top": []
+        },
+        {
+          "frame": 384,
+          "n": 0,
+          "top": []
+        }
+      ]
+    },
+    "gc": null
+  },
+  "cpu": {
+    "frames": 727,
+    "sampledMs": 17.61,
+    "idleMs": 1.99,
+    "self": [
+      {
+        "k": "updateMatrixWorld three.core.js:13980",
+        "ms": 1.42
+      },
+      {
+        "k": "_projectObject three.webgpu.js:51838",
+        "ms": 0.8
+      },
+      {
+        "k": "_renderObjectDirect three.webgpu.js:52172",
+        "ms": 0.66
+      },
+      {
+        "k": "writeBuffer :0",
+        "ms": 0.6
+      },
+      {
+        "k": "multiplyMatrices three.core.js:11564",
+        "ms": 0.44
+      },
+      {
+        "k": "updateByType three.webgpu.js:52705",
+        "ms": 0.42
+      },
+      {
+        "k": "updateWorldMatrix three.core.js:14027",
+        "ms": 0.38
+      },
+      {
+        "k": "bend marine-cloth.js:58",
+        "ms": 0.37
+      },
+      {
+        "k": "renderFrame index.html:2455",
+        "ms": 0.3
+      },
+      {
+        "k": "tick index.html:61149",
+        "ms": 0.28
+      },
+      {
+        "k": "updateNode three.webgpu.js:45491",
+        "ms": 0.27
+      },
+      {
+        "k": "set three.webgpu.js:3038",
+        "ms": 0.25
+      },
+      {
+        "k": "update three.webgpu.js:52680",
+        "ms": 0.23
+      },
+      {
+        "k": "sceneCull index.html:2279",
+        "ms": 0.22
+      },
+      {
+        "k": "intersectsObject three.core.js:26138",
+        "ms": 0.21
+      },
+      {
+        "k": "setVertexBuffer :0",
+        "ms": 0.2
+      },
+      {
+        "k": "update three.webgpu.js:12257",
+        "ms": 0.17
+      },
+      {
+        "k": "updateZombies index.html:57446",
+        "ms": 0.17
+      },
+      {
+        "k": "_updateBindings three.webgpu.js:27602",
+        "ms": 0.17
+      },
+      {
+        "k": "draw three.webgpu.js:69261",
+        "ms": 0.17
+      },
+      {
+        "k": "submit :0",
+        "ms": 0.16
+      },
+      {
+        "k": "setBindGroup :0",
+        "ms": 0.16
+      },
+      {
+        "k": "updateTreeBatchesInner index.html:18721",
+        "ms": 0.15
+      },
+      {
+        "k": "bend marine-waist.js:37",
+        "ms": 0.14
+      },
+      {
+        "k": "test three.core.js:12844",
+        "ms": 0.13
+      }
+    ],
+    "total": [
+      {
+        "k": "update three.webgpu.js:24889",
+        "ms": 13.98
+      },
+      {
+        "k": "tick index.html:61149",
+        "ms": 13.89
+      },
+      {
+        "k": "renderFrame index.html:2455",
+        "ms": 9.69
+      },
+      {
+        "k": "render three.webgpu.js:70584",
+        "ms": 7.82
+      },
+      {
+        "k": "_renderScene three.webgpu.js:50526",
+        "ms": 7.82
+      },
+      {
+        "k": "renderObject three.webgpu.js:52063",
+        "ms": 7.71
+      },
+      {
+        "k": "_renderObjectDirect three.webgpu.js:52172",
+        "ms": 7.71
+      },
+      {
+        "k": "_renderObjects three.webgpu.js:52037",
+        "ms": 7.71
+      },
+      {
+        "k": "updateBeforeNode three.webgpu.js:45393",
+        "ms": 7.65
+      },
+      {
+        "k": "updateBefore three.webgpu.js:47077",
+        "ms": 7.65
+      },
+      {
+        "k": "updateBefore three.webgpu.js:33666",
+        "ms": 6.7
+      },
+      {
+        "k": "updateMatrixWorld three.core.js:13980",
+        "ms": 1.81
+      },
+      {
+        "k": "_updateBindings three.webgpu.js:27602",
+        "ms": 1.51
+      },
+      {
+        "k": "updateForRender three.webgpu.js:27591",
+        "ms": 1.44
+      },
+      {
+        "k": "_update three.webgpu.js:27644",
+        "ms": 1.33
+      },
+      {
+        "k": "_projectObject three.webgpu.js:51838",
+        "ms": 1.2
+      },
+      {
+        "k": "updateSceneMatrices index.html:2431",
+        "ms": 1.18
+      },
+      {
+        "k": "updateBefore BloomNode.js:287",
+        "ms": 0.94
+      },
+      {
+        "k": "updateForRender three.webgpu.js:47136",
+        "ms": 0.83
+      },
+      {
+        "k": "holdWeapon index.html:50747",
+        "ms": 0.81
+      },
+      {
+        "k": "updateWorldAnimations index.html:60748",
+        "ms": 0.79
+      },
+      {
+        "k": "updateNode three.webgpu.js:45491",
+        "ms": 0.79
+      },
+      {
+        "k": "updateZombies index.html:57446",
+        "ms": 0.72
+      },
+      {
+        "k": "draw three.webgpu.js:69261",
+        "ms": 0.71
+      },
+      {
+        "k": "update three.webgpu.js:52680",
+        "ms": 0.68
+      },
+      {
+        "k": "writeBuffer :0",
+        "ms": 0.6
+      },
+      {
+        "k": "get three.webgpu.js:25966",
+        "ms": 0.58
+      },
+      {
+        "k": "updateForRender three.webgpu.js:26429",
+        "ms": 0.54
+      },
+      {
+        "k": "updateMarinePose index.html:21160",
+        "ms": 0.48
+      },
+      {
+        "k": "holdHand index.html:50316",
+        "ms": 0.48
+      }
+    ],
+    "callers": {
+      "updateMatrixWorld three.core.js:13980": [
+        {
+          "k": "updateSceneMatrices index.html:2431",
+          "ms": 1.07
+        },
+        {
+          "k": "holdWeapon index.html:50747",
+          "ms": 0.29
+        },
+        {
+          "k": "holdHand index.html:50316",
+          "ms": 0.22
+        },
+        {
+          "k": "rollForearm index.html:50237",
+          "ms": 0.19
+        }
+      ],
+      "_projectObject three.webgpu.js:51838": [
+        {
+          "k": "_renderScene three.webgpu.js:50526",
+          "ms": 1.2
+        },
+        {
+          "k": "(root) :0",
+          "ms": 0
+        }
+      ],
+      "_renderObjectDirect three.webgpu.js:52172": [
+        {
+          "k": "renderObject three.webgpu.js:52063",
+          "ms": 7.71
+        },
+        {
+          "k": "_renderObjects three.webgpu.js:52037",
+          "ms": 0
+        }
+      ],
+      "writeBuffer :0": [
+        {
+          "k": "updateBinding three.webgpu.js:66960",
+          "ms": 0.37
+        },
+        {
+          "k": "updateAttribute three.webgpu.js:66384",
+          "ms": 0.23
+        }
+      ],
+      "multiplyMatrices three.core.js:11564": [
+        {
+          "k": "updateMatrixWorld three.core.js:13980",
+          "ms": 0.35
+        },
+        {
+          "k": "updateWorldMatrix three.core.js:14027",
+          "ms": 0.07
+        },
+        {
+          "k": "update three.webgpu.js:14911",
+          "ms": 0.01
+        },
+        {
+          "k": "_renderScene three.webgpu.js:50526",
+          "ms": 0
+        }
+      ],
+      "updateByType three.webgpu.js:52705": [
+        {
+          "k": "update three.webgpu.js:52680",
+          "ms": 0.46
+        },
+        {
+          "k": "_update three.webgpu.js:27644",
+          "ms": 0
+        }
+      ],
+      "updateWorldMatrix three.core.js:14027": [
+        {
+          "k": "apply marine-turn.js:118",
+          "ms": 0.37
+        },
+        {
+          "k": "localToWorld three.core.js:13491",
+          "ms": 0.03
+        },
+        {
+          "k": "getWorldQuaternion three.core.js:13838",
+          "ms": 0.02
+        },
+        {
+          "k": "getWorldPosition three.core.js:13824",
+          "ms": 0.01
+        }
+      ],
+      "bend marine-cloth.js:58": [
+        {
+          "k": "renderObject three.webgpu.js:52063",
+          "ms": 0.36
+        },
+        {
+          "k": "(anonymous) three.webgpu.js:38054",
+          "ms": 0.01
+        }
+      ],
+      "renderFrame index.html:2455": [
+        {
+          "k": "tick index.html:61149",
+          "ms": 9.69
+        }
+      ],
+      "tick index.html:61149": [
+        {
+          "k": "update three.webgpu.js:24889",
+          "ms": 13.89
+        }
+      ],
+      "updateNode three.webgpu.js:45491": [
+        {
+          "k": "updateForRender three.webgpu.js:47136",
+          "ms": 0.79
+        }
+      ],
+      "set three.webgpu.js:3038": [
+        {
+          "k": "(anonymous) three.webgpu.js:4065",
+          "ms": 0.15
+        },
+        {
+          "k": "getCacheKey$1 three.webgpu.js:592",
+          "ms": 0.05
+        },
+        {
+          "k": "updateBefore BloomNode.js:287",
+          "ms": 0.02
+        },
+        {
+          "k": "update three.webgpu.js:10323",
+          "ms": 0.01
+        }
+      ],
+      "setFromObject three.core.js:9361": [
+        {
+          "k": "sceneCull index.html:2279",
+          "ms": 0.02
+        }
+      ],
+      "computeBoundingSphere three.core.js:19123": [
+        {
+          "k": "skinZombieMesh index.html:40802",
+          "ms": 0.02
+        },
+        {
+          "k": "rbox geometry.js:94",
+          "ms": 0
+        },
+        {
+          "k": "splitBootSurface shambler-motion.js:8",
+          "ms": 0
+        }
+      ]
+    },
+    "callees": {
+      "updateZombies index.html:57446": [
+        {
+          "k": "zombieLateStep index.html:58354",
+          "ms": 0.17
+        },
+        {
+          "k": "updateFlowFields index.html:55244",
+          "ms": 0.11
+        },
+        {
+          "k": "resolveStaticProps index.html:54831",
+          "ms": 0.11
+        },
+        {
+          "k": "zombieTickDt index.html:57409",
+          "ms": 0.02
+        },
+        {
+          "k": "updateWaveHud index.html:43360",
+          "ms": 0.02
+        },
+        {
+          "k": "steerShambler shambler-steering.js:10",
+          "ms": 0.01
+        },
+        {
+          "k": "hordeFrame index.html:57329",
+          "ms": 0.01
+        },
+        {
+          "k": "stepMilitary military-behavior.js:13",
+          "ms": 0.01
+        },
+        {
+          "k": "resolveSoftBarricades index.html:54747",
+          "ms": 0.01
+        },
+        {
+          "k": "approachPoint horde.js:166",
+          "ms": 0.01
+        }
+      ],
+      "tick index.html:61149": [
+        {
+          "k": "renderFrame index.html:2455",
+          "ms": 9.69
+        },
+        {
+          "k": "holdWeapon index.html:50747",
+          "ms": 0.81
+        },
+        {
+          "k": "updateWorldAnimations index.html:60748",
+          "ms": 0.79
+        },
+        {
+          "k": "updateZombies index.html:57446",
+          "ms": 0.72
+        },
+        {
+          "k": "updateMarinePose index.html:21160",
+          "ms": 0.48
+        },
+        {
+          "k": "updateWaveSystem index.html:59020",
+          "ms": 0.18
+        },
+        {
+          "k": "updateAudioDirection index.html:60654",
+          "ms": 0.18
+        },
+        {
+          "k": "updateKioskPrompt index.html:31939",
+          "ms": 0.1
+        },
+        {
+          "k": "resolveTreeCollisions index.html:55412",
+          "ms": 0.09
+        },
+        {
+          "k": "P.begin :57",
+          "ms": 0.09
+        }
+      ],
+      "renderFrame index.html:2455": [
+        {
+          "k": "render three.webgpu.js:70584",
+          "ms": 7.82
+        },
+        {
+          "k": "updateSceneMatrices index.html:2431",
+          "ms": 1.18
+        },
+        {
+          "k": "sceneCull index.html:2279",
+          "ms": 0.25
+        },
+        {
+          "k": "syncRigSkins marine-skin.js:212",
+          "ms": 0.11
+        },
+        {
+          "k": "updateLightPool index.html:2229",
+          "ms": 0.02
+        },
+        {
+          "k": "mark index.html:1716",
+          "ms": 0.01
+        },
+        {
+          "k": "sunShadowCadence index.html:2383",
+          "ms": 0
+        }
+      ],
+      "updateWorldAnimations index.html:60748": [
+        {
+          "k": "drawMinimap index.html:9652",
+          "ms": 0.2
+        },
+        {
+          "k": "updateTreeBatches index.html:18713",
+          "ms": 0.16
+        },
+        {
+          "k": "updateWildlife index.html:14371",
+          "ms": 0.13
+        },
+        {
+          "k": "updateTreeFade index.html:55312",
+          "ms": 0.04
+        },
+        {
+          "k": "updateTreeSway index.html:55518",
+          "ms": 0.03
+        },
+        {
+          "k": "updateWindSway index.html:10326",
+          "ms": 0.02
+        },
+        {
+          "k": "updateLightning index.html:11050",
+          "ms": 0.02
+        },
+        {
+          "k": "updateMotes index.html:15721",
+          "ms": 0.02
+        },
+        {
+          "k": "updateHouse index.html:26305",
+          "ms": 0.02
+        },
+        {
+          "k": "updateBirds index.html:10068",
+          "ms": 0.01
+        }
+      ],
+      "bend marine-waist.js:37": [],
+      "bend marine-cloth.js:58": [
+        {
+          "k": "multiplyMatrices three.core.js:11564",
+          "ms": 0
+        },
+        {
+          "k": "padSphere marine-cloth.js:48",
+          "ms": 0
+        }
+      ]
+    }
+  },
+  "census": {
+    "nodes": 7280,
+    "auto": 4098,
+    "meshes": 5193,
+    "shown": 2290,
+    "casters": 1572,
+    "bones": 0,
+    "top": 1589,
+    "culledTops": 223,
+    "culledNodes": 1270,
+    "zombieNodes": 1321,
+    "groups": [
+      {
+        "k": "Group",
+        "count": 476,
+        "nodes": 2070,
+        "auto": 420,
+        "meshes": 1124,
+        "bones": 0,
+        "culled": 16
+      },
+      {
+        "k": "zombie (Group>zombie-eyes)",
+        "count": 39,
+        "nodes": 1220,
+        "auto": 79,
+        "meshes": 676,
+        "bones": 0,
+        "culled": 0
+      },
+      {
+        "k": "Mesh",
+        "count": 880,
+        "nodes": 881,
+        "auto": 688,
+        "meshes": 881,
+        "bones": 0,
+        "culled": 121
+      },
+      {
+        "k": "Group>fitted-pelvis",
+        "count": 1,
+        "nodes": 701,
+        "auto": 701,
+        "meshes": 486,
+        "bones": 0,
+        "culled": 0
+      },
+      {
+        "k": "Group>bird-skin",
+        "count": 6,
+        "nodes": 294,
+        "auto": 294,
+        "meshes": 270,
+        "bones": 0,
+        "culled": 0
+      },
+      {
+        "k": "history-props",
+        "count": 1,
+        "nodes": 265,
+        "auto": 265,
+        "meshes": 223,
+        "bones": 0,
+        "culled": 0
+      },
+      {
+        "k": "Group>fish-skin",
+        "count": 7,
+        "nodes": 231,
+        "auto": 231,
+        "meshes": 217,
+        "bones": 0,
+        "culled": 7
+      },
+      {
+        "k": "relay-vault",
+        "count": 1,
+        "nodes": 219,
+        "auto": 219,
+        "meshes": 206,
+        "bones": 0,
+        "culled": 1
+      },
+      {
+        "k": "Group>rabbit-skin",
+        "count": 2,
+        "nodes": 154,
+        "auto": 154,
+        "meshes": 128,
+        "bones": 0,
+        "culled": 0
+      },
+      {
+        "k": "Group>tag-wall",
+        "count": 1,
+        "nodes": 134,
+        "auto": 134,
+        "meshes": 99,
+        "bones": 0,
+        "culled": 0
+      },
+      {
+        "k": "Group>frog-skin",
+        "count": 3,
+        "nodes": 129,
+        "auto": 129,
+        "meshes": 126,
+        "bones": 0,
+        "culled": 3
+      },
+      {
+        "k": "Group>squirrel-tail",
+        "count": 3,
+        "nodes": 105,
+        "auto": 105,
+        "meshes": 99,
+        "bones": 0,
+        "culled": 3
+      },
+      {
+        "k": "killer-rabbit",
+        "count": 1,
+        "nodes": 85,
+        "auto": 85,
+        "meshes": 76,
+        "bones": 0,
+        "culled": 0
+      },
+      {
+        "k": "rabbit-mound",
+        "count": 1,
+        "nodes": 74,
+        "auto": 74,
+        "meshes": 71,
+        "bones": 0,
+        "culled": 1
+      },
+      {
+        "k": "Group>convoy-ambulance",
+        "count": 1,
+        "nodes": 62,
+        "auto": 62,
+        "meshes": 32,
+        "bones": 0,
+        "culled": 1
+      },
+      {
+        "k": "zombie (Group>concept-surface)",
+        "count": 2,
+        "nodes": 62,
+        "auto": 4,
+        "meshes": 34,
+        "bones": 0,
+        "culled": 0
+      },
+      {
+        "k": "objectiveProps",
+        "count": 1,
+        "nodes": 48,
+        "auto": 48,
+        "meshes": 37,
+        "bones": 0,
+        "culled": 0
+      },
+      {
+        "k": "rock-batch",
+        "count": 47,
+        "nodes": 47,
+        "auto": 0,
+        "meshes": 47,
+        "bones": 0,
+        "culled": 40
+      },
+      {
+        "k": "Group>turtle-skin",
+        "count": 1,
+        "nodes": 45,
+        "auto": 45,
+        "meshes": 44,
+        "bones": 0,
+        "culled": 1
+      },
+      {
+        "k": "zombie (Group>brute-plate-left)",
+        "count": 1,
+        "nodes": 39,
+        "auto": 2,
+        "meshes": 21,
+        "bones": 0,
+        "culled": 0
+      },
+      {
+        "k": "trapper-path",
+        "count": 1,
+        "nodes": 37,
+        "auto": 5,
+        "meshes": 33,
+        "bones": 0,
+        "culled": 0
+      },
+      {
+        "k": "Group>barrow-offerings",
+        "count": 1,
+        "nodes": 32,
+        "auto": 32,
+        "meshes": 20,
+        "bones": 0,
+        "culled": 1
+      },
+      {
+        "k": "chain-gate-chain",
+        "count": 2,
+        "nodes": 26,
+        "auto": 26,
+        "meshes": 24,
+        "bones": 0,
+        "culled": 0
+      },
+      {
+        "k": "hikers-kit",
+        "count": 1,
+        "nodes": 24,
+        "auto": 24,
+        "meshes": 19,
+        "bones": 0,
+        "culled": 0
+      },
+      {
+        "k": "Group>marrow-door",
+        "count": 1,
+        "nodes": 20,
+        "auto": 20,
+        "meshes": 11,
+        "bones": 0,
+        "culled": 1
+      },
+      {
+        "k": "fuel-depot",
+        "count": 1,
+        "nodes": 20,
+        "auto": 20,
+        "meshes": 16,
+        "bones": 0,
+        "culled": 0
+      },
+      {
+        "k": "ground-sectors",
+        "count": 1,
+        "nodes": 19,
+        "auto": 19,
+        "meshes": 18,
+        "bones": 0,
+        "culled": 0
+      },
+      {
+        "k": "chain-key",
+        "count": 5,
+        "nodes": 15,
+        "auto": 15,
+        "meshes": 10,
+        "bones": 0,
+        "culled": 0
+      },
+      {
+        "k": "hq-utilities",
+        "count": 1,
+        "nodes": 15,
+        "auto": 15,
+        "meshes": 11,
+        "bones": 0,
+        "culled": 0
+      },
+      {
+        "k": "holy-reliquary",
+        "count": 1,
+        "nodes": 14,
+        "auto": 14,
+        "meshes": 12,
+        "bones": 0,
+        "culled": 1
+      }
+    ],
+    "draws": {
+      "frames": 2,
+      "main": 262,
+      "shadow": 13,
+      "byGroup": [
+        {
+          "k": "Mesh",
+          "n": 83
+        },
+        {
+          "k": "Group>tag-wall",
+          "n": 72
+        },
+        {
+          "k": "Group>fitted-pelvis",
+          "n": 52
+        },
+        {
+          "k": "ground-sectors",
+          "n": 16
+        },
+        {
+          "k": "Group",
+          "n": 10
+        },
+        {
+          "k": "hq-utilities",
+          "n": 8
+        },
+        {
+          "k": "fuel-depot",
+          "n": 6
+        },
+        {
+          "k": "rock-batch",
+          "n": 4
+        },
+        {
+          "k": "motes-instanced",
+          "n": 3
+        },
+        {
+          "k": "chain-key",
+          "n": 2
+        },
+        {
+          "k": "fob-yard-batch",
+          "n": 1
+        },
+        {
+          "k": "fob-ground-wear",
+          "n": 1
+        },
+        {
+          "k": "debris-chunks",
+          "n": 1
+        },
+        {
+          "k": "fob-threshold-sign",
+          "n": 1
+        },
+        {
+          "k": "fob-ground-blend",
+          "n": 1
+        },
+        {
+          "k": "fob-tyre-ruts",
+          "n": 1
+        }
+      ],
+      "byPart": [
+        {
+          "k": "Mesh / (unnamed)",
+          "n": 83
+        },
+        {
+          "k": "Group>tag-wall / (unnamed)",
+          "n": 26
+        },
+        {
+          "k": "Group>fitted-pelvis / (unnamed)",
+          "n": 22
+        },
+        {
+          "k": "ground-sectors / (unnamed)",
+          "n": 16
+        },
+        {
+          "k": "Group>tag-wall / hq-skull-intake",
+          "n": 13
+        },
+        {
+          "k": "Group>tag-wall / hq-armory",
+          "n": 11
+        },
+        {
+          "k": "Group / (unnamed)",
+          "n": 10
+        },
+        {
+          "k": "Group>fitted-pelvis / rig-skin",
+          "n": 10
+        },
+        {
+          "k": "Group>tag-wall / fob-lockdown-door",
+          "n": 6
+        },
+        {
+          "k": "fuel-depot / hq-generator",
+          "n": 6
+        },
+        {
+          "k": "Group>tag-wall / hq-alarm-cabinet",
+          "n": 5
+        },
+        {
+          "k": "hq-utilities / hq-pump",
+          "n": 5
+        },
+        {
+          "k": "rock-batch / rock-batch",
+          "n": 4
+        },
+        {
+          "k": "Group>fitted-pelvis / wrist",
+          "n": 4
+        },
+        {
+          "k": "Group>tag-wall / hq-cif",
+          "n": 4
+        },
+        {
+          "k": "Group>fitted-pelvis / balaclava",
+          "n": 3
+        },
+        {
+          "k": "Group>tag-wall / hq-duty-board",
+          "n": 3
+        },
+        {
+          "k": "hq-utilities / hq-bench-battery",
+          "n": 3
+        },
+        {
+          "k": "motes-instanced / motes-instanced",
+          "n": 3
+        },
+        {
+          "k": "Group>fitted-pelvis / live-sleeve-live",
+          "n": 2
+        },
+        {
+          "k": "Group>fitted-pelvis / live-trouser-leg-live",
+          "n": 2
+        },
+        {
+          "k": "Group>fitted-pelvis / marine-facial-features",
+          "n": 2
+        },
+        {
+          "k": "Group>tag-wall / hq-radio-set",
+          "n": 2
+        },
+        {
+          "k": "chain-key / (unnamed)",
+          "n": 2
+        },
+        {
+          "k": "fob-yard-batch / fob-yard-batch",
+          "n": 1
+        },
+        {
+          "k": "fob-ground-wear / fob-ground-wear",
+          "n": 1
+        },
+        {
+          "k": "debris-chunks / debris-chunks",
+          "n": 1
+        },
+        {
+          "k": "Group>fitted-pelvis / magazineBody",
+          "n": 1
+        },
+        {
+          "k": "Group>fitted-pelvis / pgb-patch",
+          "n": 1
+        },
+        {
+          "k": "Group>fitted-pelvis / open-molded-holster",
+          "n": 1
+        },
+        {
+          "k": "Group>fitted-pelvis / marine-waist-live",
+          "n": 1
+        },
+        {
+          "k": "Group>fitted-pelvis / live-seat-live",
+          "n": 1
+        },
+        {
+          "k": "Group>tag-wall / hq-designation",
+          "n": 1
+        },
+        {
+          "k": "fob-threshold-sign / (unnamed)",
+          "n": 1
+        },
+        {
+          "k": "Group>tag-wall / hq-damaged-terminal",
+          "n": 1
+        },
+        {
+          "k": "Group>fitted-pelvis / chapel-glow",
+          "n": 1
+        },
+        {
+          "k": "Group>fitted-pelvis / medium-fade",
+          "n": 1
+        },
+        {
+          "k": "fob-ground-blend / fob-ground-blend",
+          "n": 1
+        },
+        {
+          "k": "fob-tyre-ruts / fob-tyre-ruts",
+          "n": 1
+        }
+      ]
+    }
+  }
+}

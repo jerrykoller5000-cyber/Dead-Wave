@@ -1,0 +1,9 @@
+{
+  "shots": [
+    {
+      "pre": "const x=T.scene.children.find(x=>x.name==='butterfly-body-instanced');const m=new T.THREE.Matrix4();x.getMatrixAt(0,m);const p=new T.THREE.Vector3().setFromMatrixPosition(m);T.player.position.x=p.x;T.player.position.z=p.z;await R.aim({cam:{x:p.x+0.2,y:p.y+2.5,z:p.z+0.3,tx:p.x,ty:p.y,tz:p.z,fov:30},time:'noon'});T.openMenuDbg('pause');",
+      "out": "review/GP-19999/butterfly-fixed-noon.png"
+    }
+  ],
+  "out": "review/GP-19999/"
+}

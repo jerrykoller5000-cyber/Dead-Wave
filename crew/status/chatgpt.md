@@ -1,18 +1,18 @@
 # ChatGPT
 
-state: idle
+state: active
 model: GPT-6
-task: —
-touching: —
-since: 2026-10-31T21:00Z
+task: GP-20005 Add directional pre-attack woods warnings for unseen nearby dead
+touching: game/night-warnings.js (new), game/night-warnings.test.mjs (new), index.html (night warning hookup), review/GP-20005/*, handoffs/2026-11-01-chatgpt-GP-20005.md
+since: 2026-11-01T07:15Z
 next: —
 blocked-on: —
-last-report: handoffs/2026-10-31-chatgpt-GP-19995.md
+last-report: handoffs/2026-11-01-chatgpt-GP-20004.md
 
 ## Notes
 
-GP-19981 ACCEPTED: AG-156 scored final after13 4.5/5 overall, all categories >=4, profile float and daylight gap 0px. Native Inspector ten views zero errors. Handoff handoffs/2026-10-29-chatgpt-GP-19981.md. Claude has a separate request to remove two redundant index.html moustache bars; no ChatGPT follow-up needed unless owner asks.
+GP-20002 DONE: The marine radio cluster is eye-hidden in first person, visible in third and casts shadow; carrier stays visible. `tcl281` real WebGPU 42/0; AG-177 four-light visual 5/5. Report `handoffs/2026-11-01-chatgpt-GP-20002.md` has before/after shots. Checked out `--review` for new test assertions.
 
-GP-19970 DONE: Final handoff handoffs/2026-10-29-chatgpt-GP-19970-final.md; source of truth handoffs/GP-19970/remaining-pass.md and qa/2026-10-29-gp-19970-scores/report.md. All 14 zombie builders/loops and scoped specials, marine helpers and CRT UI accepted >=4. AG's GB-248 rescore put Feral lunge and Colossus slam at 4.5/5 each, zero sub-4 defects. Marine victim seat offset and t93 diagnostic are separate Claude issues. Full suite/load/fps are Cursor/Claude integration work.
+GP-20000 DONE: Foliage BundleGroup pilot visually passed AG-176 5/5 but regressed CPU render time and 1% lows in three day 5 and night 20 paired profiles. Claude dropped rollout under CL-288. Default is old path; pilot remains `?bundles=1` for reproduction. Report `handoffs/2026-11-01-chatgpt-GP-20000.md`.
 
-GP-19974, GP-19973, GP-19975, GP-19968/69/72, GP-19977 DONE; reports in handoffs/. Only Cursor/Claude commit or push. CU-160 note-box wording remains LATER as a separate task.
+GP-20001 and GP-19999 ACCEPTED: final reports handoffs/2026-11-01-chatgpt-GP-20001-final.md and handoffs/2026-11-01-chatgpt-GP-19999-final.md. GP-19998 DONE. GP-19981 accepted (handoffs/2026-10-29-chatgpt-GP-19981.md); GP-19970 done (handoffs/2026-10-29-chatgpt-GP-19970-final.md). Prior finished GP tasks have reports in handoffs/. Only Cursor/Claude commit or push.

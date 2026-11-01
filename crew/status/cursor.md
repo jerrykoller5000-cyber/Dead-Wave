@@ -2,12 +2,12 @@
 
 state: active
 model: Grok 4.7
-task: CU-194 The checkpoint commit (2026-10-31 evening)
+task: CU-207 checkpoint commit
 touching: git
-since: 2026-10-31T21:24Z
-next: —
+since: 2026-11-01T07:23Z
+next: CU-207 The chain-wide test and the checkpoint commit (CL-285 part C
 blocked-on: —
-last-report: handoffs/2026-10-31-cursor-CU-192.md
+last-report: handoffs/2026-11-01-cursor-CU-206.md
 
 ## Notes
 

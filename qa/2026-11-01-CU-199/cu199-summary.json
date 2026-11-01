@@ -1,0 +1,497 @@
+{
+  "timestamp": "2026-11-01T01:16:31.444Z",
+  "props": {},
+  "armory": {
+    "mounted-noon": {
+      "near": true,
+      "gunsOwned": [
+        "pistol",
+        "shotgun",
+        "m4",
+        "uzi",
+        "sniper"
+      ],
+      "rackMeshCount": 4,
+      "rackVisible": true,
+      "rackKinds": [
+        "pistol"
+      ],
+      "drawCalls": 668
+    },
+    "takeoff-noon": {
+      "currentWeapon": "pistol",
+      "rackMeshCount": 4,
+      "rackKinds": [
+        "pistol"
+      ],
+      "drawCalls": 726
+    },
+    "mounted-dusk": {
+      "near": true,
+      "gunsOwned": [
+        "pistol",
+        "shotgun",
+        "m4",
+        "uzi",
+        "sniper"
+      ],
+      "rackMeshCount": 4,
+      "rackVisible": true,
+      "rackKinds": [
+        "pistol"
+      ],
+      "drawCalls": 773
+    },
+    "takeoff-dusk": {
+      "currentWeapon": "pistol",
+      "rackMeshCount": 4,
+      "rackKinds": [
+        "pistol"
+      ],
+      "drawCalls": 769
+    }
+  },
+  "shots": [
+    {
+      "id": "hq-valley-noon",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-CU-199\\hq-valley-level-noon.png",
+      "desc": "HQ level across valley at noon"
+    },
+    {
+      "id": "hq-valley-dusk",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-CU-199\\hq-valley-level-dusk.png",
+      "desc": "HQ level across valley at dusk"
+    },
+    {
+      "id": "sandbags-far-noon",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-CU-199\\sandbags-far-noon.png",
+      "brass": {
+        "found": true,
+        "name": "brass",
+        "visible": false,
+        "dist": 39.6,
+        "maxDist": 28
+      },
+      "helmet": {
+        "found": true,
+        "name": "dropped-helmet",
+        "visible": true,
+        "dist": 39.94,
+        "maxDist": 55
+      }
+    },
+    {
+      "id": "sandbags-veryfar-noon",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-CU-199\\sandbags-veryfar-noon.png",
+      "helmet": {
+        "found": true,
+        "name": "dropped-helmet",
+        "visible": false,
+        "dist": 65.37,
+        "maxDist": 55
+      }
+    },
+    {
+      "id": "sandbags-near-noon",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-CU-199\\sandbags-near-noon.png",
+      "brass": {
+        "found": true,
+        "name": "brass",
+        "visible": true,
+        "dist": 15.56,
+        "maxDist": 28
+      },
+      "helmet": {
+        "found": true,
+        "name": "dropped-helmet",
+        "visible": true,
+        "dist": 16.02,
+        "maxDist": 55
+      }
+    },
+    {
+      "id": "sandbags-far-dusk",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-CU-199\\sandbags-far-dusk.png",
+      "brass": {
+        "found": true,
+        "name": "brass",
+        "visible": false,
+        "dist": 39.6,
+        "maxDist": 28
+      },
+      "helmet": {
+        "found": true,
+        "name": "dropped-helmet",
+        "visible": true,
+        "dist": 39.94,
+        "maxDist": 55
+      }
+    },
+    {
+      "id": "sandbags-veryfar-dusk",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-CU-199\\sandbags-veryfar-dusk.png",
+      "helmet": {
+        "found": true,
+        "name": "dropped-helmet",
+        "visible": false,
+        "dist": 65.37,
+        "maxDist": 55
+      }
+    },
+    {
+      "id": "sandbags-near-dusk",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-CU-199\\sandbags-near-dusk.png",
+      "brass": {
+        "found": true,
+        "name": "brass",
+        "visible": true,
+        "dist": 15.56,
+        "maxDist": 28
+      },
+      "helmet": {
+        "found": true,
+        "name": "dropped-helmet",
+        "visible": true,
+        "dist": 16.02,
+        "maxDist": 55
+      }
+    },
+    {
+      "id": "warren-board-far-noon",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-CU-199\\warren-board-far-noon.png",
+      "board": {
+        "found": true,
+        "name": "survey-board:root",
+        "visible": true,
+        "dist": 45.28,
+        "maxDist": 55
+      }
+    },
+    {
+      "id": "warren-board-near-noon",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-CU-199\\warren-board-near-noon.png",
+      "board": {
+        "found": true,
+        "name": "survey-board:root",
+        "visible": true,
+        "dist": 31.11,
+        "maxDist": 55
+      }
+    },
+    {
+      "id": "warren-board-far-dusk",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-CU-199\\warren-board-far-dusk.png",
+      "board": {
+        "found": true,
+        "name": "survey-board:root",
+        "visible": true,
+        "dist": 45.28,
+        "maxDist": 55
+      }
+    },
+    {
+      "id": "warren-board-near-dusk",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-CU-199\\warren-board-near-dusk.png",
+      "board": {
+        "found": true,
+        "name": "survey-board:root",
+        "visible": true,
+        "dist": 31.11,
+        "maxDist": 55
+      }
+    },
+    {
+      "id": "trapper-far-noon",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-CU-199\\trapper-yard-far-noon.png",
+      "traps": {
+        "found": true,
+        "name": "leghold-traps",
+        "visible": false,
+        "dist": 43.91,
+        "maxDist": 28
+      },
+      "horseshoes": {
+        "found": false
+      },
+      "hatch": {
+        "found": true,
+        "name": "cellar-hatch",
+        "visible": false,
+        "dist": 44.73,
+        "maxDist": 0
+      }
+    },
+    {
+      "id": "trapper-near-noon",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-CU-199\\trapper-yard-near-noon.png",
+      "traps": {
+        "found": true,
+        "name": "leghold-traps",
+        "visible": true,
+        "dist": 20.67,
+        "maxDist": 28
+      },
+      "horseshoes": {
+        "found": false
+      },
+      "hatch": {
+        "found": true,
+        "name": "cellar-hatch",
+        "visible": false,
+        "dist": 22.16,
+        "maxDist": 0
+      }
+    },
+    {
+      "id": "trapper-far-dusk",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-CU-199\\trapper-yard-far-dusk.png",
+      "traps": {
+        "found": true,
+        "name": "leghold-traps",
+        "visible": false,
+        "dist": 43.91,
+        "maxDist": 28
+      },
+      "horseshoes": {
+        "found": false
+      },
+      "hatch": {
+        "found": true,
+        "name": "cellar-hatch",
+        "visible": false,
+        "dist": 44.73,
+        "maxDist": 0
+      }
+    },
+    {
+      "id": "trapper-near-dusk",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-CU-199\\trapper-yard-near-dusk.png",
+      "traps": {
+        "found": true,
+        "name": "leghold-traps",
+        "visible": true,
+        "dist": 20.67,
+        "maxDist": 28
+      },
+      "horseshoes": {
+        "found": false
+      },
+      "hatch": {
+        "found": true,
+        "name": "cellar-hatch",
+        "visible": false,
+        "dist": 22.16,
+        "maxDist": 0
+      }
+    },
+    {
+      "id": "graveyard-far-noon",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-CU-199\\graveyard-far-noon.png",
+      "casket": {
+        "found": true,
+        "name": "holy-reliquary",
+        "visible": false,
+        "dist": 70.18,
+        "maxDist": 50
+      },
+      "church": {
+        "found": false
+      },
+      "openGrave": {
+        "found": true,
+        "name": "open-grave",
+        "visible": true,
+        "dist": 72.88,
+        "maxDist": 0
+      }
+    },
+    {
+      "id": "graveyard-near-noon",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-CU-199\\graveyard-near-noon.png",
+      "casket": {
+        "found": true,
+        "name": "holy-reliquary",
+        "visible": true,
+        "dist": 34.83,
+        "maxDist": 50
+      },
+      "church": {
+        "found": false
+      },
+      "openGrave": {
+        "found": true,
+        "name": "open-grave",
+        "visible": true,
+        "dist": 38.39,
+        "maxDist": 0
+      }
+    },
+    {
+      "id": "graveyard-far-dusk",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-CU-199\\graveyard-far-dusk.png",
+      "casket": {
+        "found": true,
+        "name": "holy-reliquary",
+        "visible": false,
+        "dist": 70.18,
+        "maxDist": 50
+      },
+      "church": {
+        "found": false
+      },
+      "openGrave": {
+        "found": true,
+        "name": "open-grave",
+        "visible": true,
+        "dist": 72.88,
+        "maxDist": 0
+      }
+    },
+    {
+      "id": "graveyard-near-dusk",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-CU-199\\graveyard-near-dusk.png",
+      "casket": {
+        "found": true,
+        "name": "holy-reliquary",
+        "visible": true,
+        "dist": 34.83,
+        "maxDist": 50
+      },
+      "church": {
+        "found": false
+      },
+      "openGrave": {
+        "found": true,
+        "name": "open-grave",
+        "visible": true,
+        "dist": 38.39,
+        "maxDist": 0
+      }
+    },
+    {
+      "id": "armory-wall-noon",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-CU-199\\armory-wall-multi-guns-noon.png",
+      "state": {
+        "near": true,
+        "gunsOwned": [
+          "pistol",
+          "shotgun",
+          "m4",
+          "uzi",
+          "sniper"
+        ],
+        "rackMeshCount": 4,
+        "rackVisible": true,
+        "rackKinds": [
+          "pistol"
+        ],
+        "drawCalls": 668
+      }
+    },
+    {
+      "id": "armory-takeoff-noon",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-CU-199\\armory-wall-after-takeoff-noon.png",
+      "state": {
+        "currentWeapon": "pistol",
+        "rackMeshCount": 4,
+        "rackKinds": [
+          "pistol"
+        ],
+        "drawCalls": 726
+      }
+    },
+    {
+      "id": "armory-wall-dusk",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-CU-199\\armory-wall-multi-guns-dusk.png",
+      "state": {
+        "near": true,
+        "gunsOwned": [
+          "pistol",
+          "shotgun",
+          "m4",
+          "uzi",
+          "sniper"
+        ],
+        "rackMeshCount": 4,
+        "rackVisible": true,
+        "rackKinds": [
+          "pistol"
+        ],
+        "drawCalls": 773
+      }
+    },
+    {
+      "id": "armory-takeoff-dusk",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-CU-199\\armory-wall-after-takeoff-dusk.png",
+      "state": {
+        "currentWeapon": "pistol",
+        "rackMeshCount": 4,
+        "rackKinds": [
+          "pistol"
+        ],
+        "drawCalls": 769
+      }
+    }
+  ],
+  "targets": {
+    "sandbags": {
+      "x": 19.98292457618953,
+      "z": 104.08745276450543
+    },
+    "brassPos": {
+      "x": 19.98292457618953,
+      "y": 5.862612542917428,
+      "z": 104.08745276450543,
+      "maxDist": 28
+    },
+    "helmetPos": {
+      "x": 18.03600520257058,
+      "y": 5.538747906666093,
+      "z": 105.65573365536243,
+      "maxDist": 55
+    },
+    "boardPos": {
+      "x": 161.62002109377718,
+      "y": 3.715071468177909,
+      "z": 73.56799652328748,
+      "maxDist": 55,
+      "name": "survey-board:root"
+    },
+    "trapperPos": {
+      "x": -33.48656361110521,
+      "z": 43.80906834910414
+    },
+    "postPos": {
+      "x": -15.654429583372997,
+      "y": 0.1655696371207559,
+      "z": 38.93879513631448
+    },
+    "trapsPos": {
+      "x": -18.604454607903882,
+      "y": -1.505035391703394,
+      "z": 33.82925970198765,
+      "maxDist": 28
+    },
+    "hatchPos": {
+      "x": -26.196702434181145,
+      "y": 0.25492659313195687,
+      "z": 41.61907182708978
+    },
+    "graveyardPos": {
+      "x": -89.96258248961861,
+      "z": 89.15278685234811
+    },
+    "reliquaryPos": {
+      "x": -93.91258248961861,
+      "y": -0.4244370194211895,
+      "z": 85.85278685234812,
+      "maxDist": 50
+    },
+    "churchPos": null,
+    "openGravePos": {
+      "x": -103.04658759398636,
+      "y": -0.6911488529065906,
+      "z": 92.47826582971044
+    }
+  }
+}

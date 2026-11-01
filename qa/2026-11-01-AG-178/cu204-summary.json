@@ -1,0 +1,243 @@
+{
+  "timestamp": "2026-11-01T05:10:06.840Z",
+  "templates": [],
+  "deferredGrowth": {
+    "totalTrees": 430,
+    "ungrown": 405,
+    "grown": 25,
+    "tbStats": {
+      "off": false,
+      "mode": "forest",
+      "built": true,
+      "buildMs": 36,
+      "frameMsAvg": 0.283,
+      "frameMsMax": 12.8,
+      "calls": 791,
+      "trees": 430,
+      "members": 430,
+      "batched": 408,
+      "live": 22,
+      "dirty": 1,
+      "cells": 0,
+      "meshes": 56,
+      "templates": 28,
+      "instances": 129,
+      "scatterMs": 16,
+      "compact": true
+    },
+    "templateCounts": {}
+  },
+  "instancedForest": {
+    "treePair": {
+      "autumn": {
+        "x": 121.51,
+        "z": -58.78,
+        "scale": 0.95,
+        "kind": "autumn"
+      },
+      "other": {
+        "x": 113.92,
+        "z": -56.14,
+        "scale": 1.03,
+        "kind": "birch"
+      },
+      "midpoint": {
+        "x": 117.71,
+        "z": -57.46
+      },
+      "vantagePoint": {
+        "x": 138.08,
+        "z": 1.1
+      },
+      "distAutumn": 62.13,
+      "distOther": 62.13
+    },
+    "matrixInspection": {
+      "autumnMember": {
+        "inBatch": true,
+        "shown": true,
+        "slot": 1,
+        "treeScale": 0.9531122973188759,
+        "templateScale": 1,
+        "tint": [
+          1.1395350060332565,
+          1.1395350060332565,
+          1.1395350060332565
+        ],
+        "hasGrownMesh": false,
+        "hasMatNode": false,
+        "matArrayLength": 0
+      },
+      "otherMember": {
+        "inBatch": true,
+        "shown": true,
+        "slot": 25,
+        "treeScale": 1.0325850527267904,
+        "templateScale": 1,
+        "tint": [
+          0.8904719128925354,
+          0.8904719128925354,
+          0.8904719128925354
+        ],
+        "hasGrownMesh": false,
+        "hasMatNode": false,
+        "matArrayLength": 0
+      },
+      "distinctMatNodes": false,
+      "distinctTintNodes": false,
+      "distinctTemplates": false,
+      "tbStats": {
+        "off": false,
+        "mode": "forest",
+        "built": true,
+        "buildMs": 36,
+        "frameMsAvg": 0.33,
+        "frameMsMax": 12.8,
+        "calls": 825,
+        "trees": 430,
+        "members": 430,
+        "batched": 403,
+        "live": 27,
+        "dirty": 0,
+        "cells": 0,
+        "meshes": 56,
+        "templates": 28,
+        "instances": 120,
+        "scatterMs": 16,
+        "compact": true
+      }
+    },
+    "pairShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-178\\cu204-fp-distant-pair.png",
+    "autumnFarShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-178\\cu204-fp-autumn-focus.png",
+    "otherFarShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-178\\cu204-fp-other-focus.png"
+  },
+  "walkTransition": [
+    {
+      "id": "walk-1-far-65m",
+      "desc": "Distant Template Instance (65m, mesh un-grown)",
+      "dist": 65,
+      "shot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-178\\cu204-walk-1-far-65m.png",
+      "batchState": {
+        "inBatch": true,
+        "shown": true,
+        "hasGrownMesh": false,
+        "trunkVisible": null,
+        "playerDist": 65.00035698117753
+      }
+    },
+    {
+      "id": "walk-2-swap-live-44m",
+      "desc": "Crossed liveIn (44m < 46m) -> First mesh growth & live swap",
+      "dist": 44,
+      "shot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-178\\cu204-walk-2-swap-live-44m.png",
+      "batchState": {
+        "inBatch": false,
+        "shown": false,
+        "hasGrownMesh": true,
+        "trunkVisible": true,
+        "playerDist": 44.0002416487971
+      }
+    },
+    {
+      "id": "walk-3-near-15m",
+      "desc": "Near Tree Unique Mesh Close-up (15m)",
+      "dist": 15,
+      "shot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-178\\cu204-walk-3-near-15m.png",
+      "batchState": {
+        "inBatch": false,
+        "shown": false,
+        "hasGrownMesh": true,
+        "trunkVisible": true,
+        "playerDist": 15.000082380271744
+      }
+    },
+    {
+      "id": "walk-4-return-far-65m",
+      "desc": "Walked Back (65m > 52m) -> Rejoined Batched Instance",
+      "dist": 65,
+      "shot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-178\\cu204-walk-4-return-far-65m.png",
+      "batchState": {
+        "inBatch": true,
+        "shown": true,
+        "hasGrownMesh": true,
+        "trunkVisible": false,
+        "playerDist": 65.00035698117753
+      }
+    }
+  ],
+  "comparisons": {
+    "forestAll": {
+      "off": false,
+      "mode": "forest",
+      "built": true,
+      "buildMs": 57,
+      "frameMsAvg": 0.246,
+      "frameMsMax": 17.3,
+      "calls": 798,
+      "trees": 430,
+      "members": 430,
+      "batched": 403,
+      "live": 27,
+      "dirty": 0,
+      "cells": 0,
+      "meshes": 56,
+      "templates": 28,
+      "instances": 403,
+      "scatterMs": 19,
+      "compact": false,
+      "shot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-178\\cu204-forest-all.png"
+    },
+    "forestBatch": {
+      "off": false,
+      "mode": "cells",
+      "built": true,
+      "buildMs": 67,
+      "frameMsAvg": 0.162,
+      "frameMsMax": 2.1,
+      "calls": 753,
+      "trees": 430,
+      "members": 430,
+      "batched": 403,
+      "live": 27,
+      "dirty": 0,
+      "cells": 51,
+      "meshes": 102,
+      "templates": 0,
+      "instances": 0,
+      "scatterMs": 391,
+      "compact": true,
+      "shot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-178\\cu204-forest-batch.png"
+    },
+    "trees8x": {
+      "treeCount": 2572,
+      "tbStats": {
+        "off": false,
+        "mode": "forest",
+        "built": true,
+        "buildMs": 42,
+        "frameMsAvg": 1.338,
+        "frameMsMax": 16.4,
+        "calls": 574,
+        "trees": 2572,
+        "members": 2571,
+        "batched": 2444,
+        "live": 127,
+        "dirty": 0,
+        "cells": 0,
+        "meshes": 62,
+        "templates": 31,
+        "instances": 788,
+        "scatterMs": 96,
+        "compact": true
+      },
+      "loadTimeSec": 29.09,
+      "shot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-178\\cu204-trees-8x.png"
+    }
+  },
+  "scores": {
+    "geometry": 5,
+    "material": 5,
+    "context": 5,
+    "motion": 5
+  }
+}

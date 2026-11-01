@@ -1,0 +1,9 @@
+CU-202. No fence enclosed the mast yard or the ranger camp, so each gate has a short run either side, about 4.7 m overall. The mine mouth uses the rock; that chain has no extra fence. Rule 10 if you want them moved.
+
+The mast-yard chain stands 1.4 m from the radio site's approach, toward the cabinet. Sato's key is on the HQ radio set (the drawer). It appears once hq-power has fired, and E at the radio station takes it. The cabinet's prompt, its E, and getObjectiveInteraction's radio branch all stay shut until the yard gate is open. Sato's note can still be read.
+
+The ranger padlock stands 1.2 m from the ranger cache's approach, toward the camp. Its key is at the utility truck, 0.8 m off the toolbox centre, once toolbox-open has fired. The cache's prompt and E stay shut until the gate is open.
+
+The mine chain stands 4 m out from the iron cave mouth, along the mouth's facing. The key ring is at the trapper's cellar spot once cellar-open has fired. E at the chain does nothing until the Hush is wired as well. The iron mouth's Hush prompt will not take him down while that gate is shut.
+
+The truck is still out of chainLive. The words on the relay gate are still the cabinet lines; GP-20001 is bringing the yard wording.

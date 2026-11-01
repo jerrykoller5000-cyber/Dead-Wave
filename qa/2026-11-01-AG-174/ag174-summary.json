@@ -1,0 +1,167 @@
+{
+  "timestamp": "2026-11-01T02:12:26.977Z",
+  "metrics": {
+    "priceKey": {
+      "generator": {
+        "x": -3,
+        "z": 6.7,
+        "y": -3.1686761379241943
+      },
+      "clipboardKey": {
+        "x": -2.45,
+        "y": -3.1686761379241943,
+        "z": 7.05,
+        "state": "ready",
+        "visible": true
+      },
+      "groundY": -3.1686761379241943,
+      "yDelta": 0
+    },
+    "spareKey": {
+      "spare": {
+        "key": "sato-key",
+        "x": -1.62,
+        "z": -5.08,
+        "state": "ready"
+      },
+      "dutyBoardPos": {
+        "x": -1.62,
+        "y": -1.609,
+        "z": -5.08
+      },
+      "housePos": {
+        "x": 0,
+        "y": -3.169,
+        "z": 0
+      }
+    },
+    "gate": {
+      "gate": {
+        "x": -45.29426570632693,
+        "y": -3.0094829219030776,
+        "z": -17.172923655094458,
+        "open": false
+      },
+      "pump": {
+        "x": -46.24885986092877,
+        "z": -16.21832950049262,
+        "y": -2.9904560270076592
+      },
+      "groundY": -3.0094829219030776,
+      "yDelta": 0
+    },
+    "pump": {
+      "pumpSpot": {
+        "x": 1.6,
+        "z": 6.7,
+        "y": -3.1686761379241943
+      },
+      "groundY": -3.1686761379241943,
+      "fill": 0.008783333333333334,
+      "yDelta": 0
+    },
+    "bench": {
+      "benchSpot": {
+        "x": 5.9,
+        "z": 3.3,
+        "y": -2.2686761379241944
+      },
+      "armoryFront": {
+        "x": 5.9,
+        "z": 3.3
+      },
+      "workshopState": "on"
+    },
+    "siren": {
+      "sirenSpot": {
+        "x": -3.7500000000000004,
+        "z": 0.8,
+        "y": 2.231323862075806
+      },
+      "alarmState": "on",
+      "sirenRotationY": 1.35
+    }
+  },
+  "shots": [
+    {
+      "id": "price-clipboard-key-noon",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-174\\price-clipboard-key-noon.png",
+      "desc": "Price clipboard & key by generator at noon"
+    },
+    {
+      "id": "price-clipboard-key-dusk",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-174\\price-clipboard-key-dusk.png",
+      "desc": "Price clipboard & key by generator at dusk"
+    },
+    {
+      "id": "spare-key-dutyboard-noon",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-174\\spare-key-dutyboard-noon.png",
+      "desc": "Spare key on HQ duty board at noon"
+    },
+    {
+      "id": "spare-key-dutyboard-dusk",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-174\\spare-key-dutyboard-dusk.png",
+      "desc": "Spare key on HQ duty board at dusk"
+    },
+    {
+      "id": "fuel-shed-padlocked-noon",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-174\\fuel-shed-padlocked-noon.png",
+      "desc": "Fuel depot padlocked shed door at noon"
+    },
+    {
+      "id": "fuel-shed-padlocked-dusk",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-174\\fuel-shed-padlocked-dusk.png",
+      "desc": "Fuel depot padlocked shed door at dusk"
+    },
+    {
+      "id": "fuel-shed-open-noon",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-174\\fuel-shed-open-noon.png",
+      "desc": "Fuel depot shed door open at noon"
+    },
+    {
+      "id": "fuel-shed-open-dusk",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-174\\fuel-shed-open-dusk.png",
+      "desc": "Fuel depot shed door open at dusk"
+    },
+    {
+      "id": "hq-pump-tank-dry-noon",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-174\\hq-pump-tank-dry-noon.png",
+      "desc": "HQ pump & water tank (dry) at noon"
+    },
+    {
+      "id": "hq-pump-tank-dry-dusk",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-174\\hq-pump-tank-dry-dusk.png",
+      "desc": "HQ pump & water tank (dry) at dusk"
+    },
+    {
+      "id": "hq-pump-tank-filling-noon",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-174\\hq-pump-tank-filling-noon.png",
+      "desc": "HQ pump & water tank (filling ~53%) at noon"
+    },
+    {
+      "id": "hq-pump-tank-filling-dusk",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-174\\hq-pump-tank-filling-dusk.png",
+      "desc": "HQ pump & water tank (filling ~53%) at dusk"
+    },
+    {
+      "id": "armory-workbench-battery-noon",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-174\\armory-workbench-battery-noon.png",
+      "desc": "Armory workbench with fitted battery at noon"
+    },
+    {
+      "id": "armory-workbench-battery-dusk",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-174\\armory-workbench-battery-dusk.png",
+      "desc": "Armory workbench with fitted battery at dusk"
+    },
+    {
+      "id": "roof-siren-wave-noon",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-174\\roof-siren-wave-noon.png",
+      "desc": "Roof siren beside ladder turned toward wave at noon"
+    },
+    {
+      "id": "roof-siren-wave-dusk",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-174\\roof-siren-wave-dusk.png",
+      "desc": "Roof siren beside ladder turned toward wave at dusk"
+    }
+  ]
+}

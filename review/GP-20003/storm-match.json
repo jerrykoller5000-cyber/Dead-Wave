@@ -1,0 +1,16 @@
+[
+  {
+    "cam": { "x": 0, "y": 4.83, "z": 0, "tx": -12, "ty": 32, "tz": 140, "fov": 55 },
+    "time": "noon",
+    "pre": "T.weather.raining=true; T.weather.intensity=0.75; T.stepFrame(0.03); await wait(650);",
+    "caption": "Trapper storm overcast from roof",
+    "out": "review/GP-20003/trapper-roof-overcast-live.png"
+  },
+  {
+    "cam": { "x": 0, "y": 4.83, "z": 0, "tx": -116, "ty": 23, "tz": 10, "fov": 55 },
+    "time": "noon",
+    "pre": "T.weather.raining=true; T.weather.intensity=0.75; T.stepFrame(0.03); await wait(650);",
+    "caption": "Fuel storm overcast from roof",
+    "out": "review/GP-20003/fuel-roof-overcast-live.png"
+  }
+]

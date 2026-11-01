@@ -52,9 +52,9 @@ export const VM_RELOADS = Object.freeze({
       [0.12, { pos: [-0.045, 0.045, 0.03], rot: [0.16, 0.34, -0.42] }],
       [0.55, { pos: [-0.045, 0.05, 0.03], rot: [0.16, 0.36, -0.42] }],
       [0.62, { pos: [-0.04, 0.062, 0.025], rot: [0.14, 0.31, -0.4] }],   // the slap lifts it
-      [0.68, { pos: [-0.03, 0.04, 0.02], rot: [0.26, 0.12, 0.16] }],     // turned to present the slide
-      [0.80, { pos: [-0.012, 0.03, 0.045], rot: [0.28, 0.1, 0.2] }],     // pushed out against the rack
-      [0.90, { pos: [-0.018, 0.035, 0.02], rot: [0.22, 0.12, 0.12] }],
+      [0.68, { pos: [-0.03, 0.04, 0.02], rot: [0.26, 0.12, 0.55] }],     // turned to present the slide, rolled in toward the support hand
+      [0.80, { pos: [-0.012, 0.03, 0.045], rot: [0.28, 0.1, 0.6] }],     // pushed out against the rack (AG-171: rolled in, so the
+      [0.90, { pos: [-0.018, 0.035, 0.02], rot: [0.22, 0.12, 0.42] }],   // support forearm comes up from low left, not across the gun)
       [1.00, null]
     ],
     hand: [

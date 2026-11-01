@@ -1015,6 +1015,7 @@
       <div id="stats">
         <div class="stat-row"><span class="label" data-dw-text="hud.cash"></span>$<span id="coins">0</span></div>
         <div class="stat-row"><span class="label" data-dw-text="hud.skulls"></span><span id="skulls">0</span></div>
+        <div id="ironStat" class="stat-row" hidden><span class="label" data-dw-text="hud.horseshoes"></span><span id="ironCount">0</span></div>
         <div id="waveLine" class="stat-row"></div>
         <div id="landStat" class="stat-row">Land r<span id="landR">120</span></div>
       </div>
@@ -1363,6 +1364,7 @@
     import { addCast, rbox, rmesh, mergeParts, boxProjectUV, slab as profileSlab, lathe as profileLathe, curve as profileCurve } from './core/geometry.js';
     import { CAMO_KEYS, CAMO_SOLID_KEYS, CAMO_DEFAULT, isCamoKey, paintCamo } from './core/camo.js';
     import { AudioSys } from './core/audio.js';
+    import { createNightWarnings } from './game/night-warnings.js';
     import { DWLoad, yieldToBrowser, whileHiddenFramesRun } from './core/loader.js';
     import { text as dwText } from './ui/strings.js';
     import { createIntakeDisplay } from './ui/skull-intake.js';
@@ -1398,7 +1400,9 @@
     import { trainingCamoGate } from './ui/training-camo.js';   // GB-168: every camo open at the CIF in training
     import { createBadgeAdapter, renderBadgeCollection } from './ui/badges-runtime.js';
     import { mapMissionMarkers, projectMapMissions, drawMapMissions, mapMissionLegend } from './ui/map-missions.js';
+    import { createSkylinePulls } from './game/skyline-pulls.js';   // GP-20003: distant W1 smoke, crows and mast light
     import { mapLandmarks, createMapLandmarkIntel, drawMapLandmarks, drawMapCamera } from './ui/map-landmarks.js';
+    import { createRevealGrid, fillUnknown } from './ui/map-reveal.js';   // CU-198
     import { createEnemyMapIntel, drawEnemyBearings } from './ui/map-enemies.js';
     import { buildAlertMarkers, drawBuildAlerts, createBuildAttackPulses, createFarBuildWarnings } from './ui/build-alerts.js';
     import { createDailyCall, cheapestTurretBlueprint } from './ui/radio-call.js';
@@ -1481,6 +1485,8 @@
     import { planVault, sampleVault, vaultEligible, vaultCanFire } from './game/player-vault.js';   // GP-19900
     import { vaultReward } from './game/relay-vault.js';   // CL-184: the vault's reward by the day
     import { createStoryChain, leadOf as storyLeadOf, leadForSite as storyLeadForSite } from './game/story-chain.js';   // CL-263
+    import { createChainGates, gateOfLead, gateById, gateOfKey } from './game/chain-gates.js';   // CU-200
+    import { createUtilities } from './game/utilities.js';   // CU-201
     import { makeVaultModel, VAULT_SIZE } from './studio/relay-vault-model.js';   // CL-184
     import { makeKatanaModel, makeSheathedKatana } from './studio/katana.js';   // CL-184: the red katana
     import { makeFragGrenade } from './studio/frag-grenade.js';   // GB-171: the M67-style frag grenade
@@ -2308,6 +2314,25 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           if (ud._cull && ud._cull.hidden) cullShow(o, ud._cull);
           continue;
         }
+        // CU-199 (AG-170 §1.3): brass and traps at 28 m, boards and a helmet at 55 m. The history group sits at the
+        // origin, unrotated, so a child's position is where it stands. Four metres of overlap so it doesn't flicker
+        // on the line. A mission's find is closer than the shortest of these, so nothing goes before its site's reach.
+        if (ud.maxDist > 0) {
+          const par = o.parent;
+          const rooted = !par || par === scene || (par.position.x === 0 && par.position.z === 0 && par.rotation.x === 0 && par.rotation.y === 0 && par.rotation.z === 0);
+          if (rooted) {
+            let c0 = ud._cull;
+            if (!c0) {
+              if (o.visible === false) continue;
+              c0 = ud._cull = { r: 0, ox: 0, oy: 0, oz: 0, px: 0, py: 0, pz: 0, t: -1e9, hidden: false, want: true, byDist: false };
+            }
+            const d0 = hypot(o.position.x - px, o.position.z - pz);
+            if (d0 > (c0.hidden && c0.byDist ? ud.maxDist - 4 : ud.maxDist)) {
+              c0.byDist = true; hidden++; if (!c0.hidden) cullHide(o, c0); continue;
+            }
+            c0.byDist = false;
+          }
+        }
         let c = ud._cull;
         if (!c) {
           if (o.visible === false || spheres >= 6) continue;   // its owner's hide, or enough new spheres this frame
@@ -2367,6 +2392,41 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (hypot(sun.target.position.x - sunShadowX, sun.target.position.z - sunShadowZ) > SUN_SHADOW_DEEP_MOVE) { sunShadowStats.moved++; sunShadowRedraw(); }
       else if (++sunShadowTick >= SUN_SHADOW_DEEP_EVERY) { sunShadowStats.timed++; sunShadowRedraw(); }
     }
+    // CL-288 (D-104; AG-170): every shadow pass (three's ShadowNode.updateShadow: the sun and each shadowing light) walks
+    // the whole scene again to draw a dozen casters: ShadowNode.updateBefore was 5.3-6.6 ms of CPU a frame on Jerry's
+    // 5080, with the GPU at 0.33 ms. Two thirds of the visible nodes sit under top-level children with no caster at all
+    // (CL-288's probe, day 5: 3,501 of 5,195). For a shadow's render those children are hidden and shown again right
+    // after, so its walk skips them. Whether a child holds a caster is cached on it and refreshed a few children a
+    // frame (at once for a new child or one whose child count changed). PCF only (a VSM pass draws receivers too).
+    // ?shadowprune=0 turns it off; TT.shadowPruneDbg() counts.
+    const SHADOW_PRUNE = urlParams.get('shadowprune') !== '0';
+    const shadowPrune = { cursor: 0, passes: 0, last: 0, refreshed: 0 };
+    function holdsCaster(o) { let yes = false; o.traverse((m) => { if (m.isMesh && m.castShadow) yes = true; }); return yes; }
+    function casterFlag(c) {
+      const u = c.userData; let f = u._shadowCaster;
+      if (f === undefined || f.n !== c.children.length) { f = u._shadowCaster = { has: holdsCaster(c), n: c.children.length }; shadowPrune.refreshed++; }
+      return f.has;
+    }
+    function shadowPruneRefresh() {   // a caster added deep inside a child shows up within a few seconds
+      const kids = scene.children, n = kids.length; if (!n) return;
+      for (let i = 0; i < 12; i++) { const c = kids[shadowPrune.cursor++ % n]; if (c) c.userData._shadowCaster = undefined; }
+    }
+    function shadowPruneBegin(sc, out) {
+      out.length = 0;
+      if (!SHADOW_PRUNE || sc !== scene || renderer.shadowMap.type === THREE.VSMShadowMap) return out;
+      const kids = scene.children;
+      for (let i = 0; i < kids.length; i++) { const c = kids[i]; if (c.visible && !c.isLight && !casterFlag(c)) { c.visible = false; out.push(c); } }
+      shadowPrune.passes++; shadowPrune.last = out.length;
+      return out;
+    }
+    if (THREE.ShadowNode && THREE.ShadowNode.prototype && !THREE.ShadowNode.prototype.__dwPrune) {
+      const SNp = THREE.ShadowNode.prototype, updateShadow0 = SNp.updateShadow, hid = [];
+      SNp.updateShadow = function (frame) {
+        shadowPruneBegin(frame && frame.scene, hid);
+        try { return updateShadow0.call(this, frame); } finally { for (let i = 0; i < hid.length; i++) hid[i].visible = true; hid.length = 0; }
+      };
+      SNp.__dwPrune = true;
+    }
     // CL-211: scene.updateMatrixWorld(), less the top-level things sceneCull has hidden: nothing draws them, and a
     // change made while hidden waits (updateMatrix keeps matrixWorldNeedsUpdate) until they are shown, which happens
     // in sceneCull before this walk, the same frame. getWorldPosition and Box3.setFromObject bring their own up to date.
@@ -2402,6 +2462,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       syncRigSkins();   // CL-210: a changed part on a baked marine or survivor bakes him again
       PROF.mark('r:rigSkin');   // CL-211: its own line in bench --prof (it ran inside r:render)
       sunShadowCadence();   // CL-211: at night the sun's shadow map is redrawn every 4th frame
+      shadowPruneRefresh();   // CL-288: the shadow passes walk only children that hold casters
       if (viewmodel) viewmodel.place();   // CL-281: onto the camera as it is drawn
       // CL-211: one walk of the scene's matrices a frame. render() walks them every call, and the sun's shadow pass
       // is a second render() inside the first: the two walks were 6.9 ms of a 30 ms night frame (AG-86 --cpu).
@@ -3709,6 +3770,13 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       // Do this before trail routing so the path still ends at the actual ladder.
       POI.tower = { x: -25, z: -125 };
 
+      // CU-205 (CL-287 W1, rule 10): Claude's four spots, after every roll, before the trails.
+      // +x is west, +z is north. The sites, the trucks and the yards follow these anchors.
+      if (POI.campsites[0]) { POI.campsites[0].x = 128; POI.campsites[0].z = 0; }       // rangers, west
+      if (POI.campsites[1]) { POI.campsites[1].x = 22; POI.campsites[1].z = -126; }    // hikers, south by the tower
+      if (POI.campsites[2]) { POI.campsites[2].x = -12; POI.campsites[2].z = 140; }    // trapper, north across the river
+      if (POI.sheds[2]) { POI.sheds[2].x = -116; POI.sheds[2].z = 10; }                // fuel depot, east on the road to the mast
+
       // Warning / story props (cheap juice near graveyard, wrecks, one cabin).
       if (POI.graveyard) {
         POI.signs.push({ x: POI.graveyard.x + 4.2, z: POI.graveyard.z - 3.0, kind: 'keepout', yaw: 0.4 });
@@ -3890,6 +3958,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (POI.tower) dests.push({ x: POI.tower.x, z: POI.tower.z - TOWER_LADDER_OUT, round: POI.tower });
       // One worn track each toward the new landmarks (keeps path count reasonable).
       if (POI.sheds[0]) dests.push(POI.sheds[0]);
+      if (POI.sheds[2]) dests.push(POI.sheds[2]);   // CU-205: a spur to the fuel depot
       if (POI.wrecks[0]) dests.push(POI.wrecks[0]);
       if (POI.mast) dests.push(POI.mast);
       dests.sort((a, b) => hypot(a.x, a.z) - hypot(b.x, b.z));
@@ -5600,6 +5669,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         m.geometry.dispose();
       }
       for (const mt of trial.materials) mt.dispose();
+      // CU-205: the tent footprints t295 measures. A new trail can land on one even when no single mesh reads as tall.
+      const CAMP_TENTS = [ [[-2.8, -3, 1.6]], [[-3, -2, 1.3], [2.3, -3.4, 1.2]], [] ];
+      for (const [lx, lz, rad] of (CAMP_TENTS[variant] || [])) parts.push({ x: lx, z: lz, r: rad * 0.6, tall: true });
       // The camp's own day-mission cache and where he stands to open it (assets/world/objective-props.js) stay clear too.
       const keep = [];
       try { for (const o of window.objectiveSitesFrom ? window.objectiveSitesFrom(POI, null) : []) if (hypot(o.x - cx, o.z - cz) < 9) keep.push([o.x, o.z], [o.ax, o.az]); } catch (_) {}
@@ -8668,7 +8740,17 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       G.userData.cullKids = true;   // CL-277: each prop culled on its own (they lie all over the map)
       const doc = typeof document !== 'undefined' ? document : null;
       const rnd = mulberry32(0xC1D0);
-      const put = (obj, x, z, yaw, r, dy = 0) => { obj.position.set(x, sampleHeight(x, z) + dy, z); obj.rotation.y = yaw; obj.userData.seatHistoryTerrain?.(sampleHeight); G.add(obj); historyProps.taken.push({ x, z, r }); historyProps.parts[obj.name] = obj; return obj; };
+      // CU-199: a casing, a trap or a horseshoe is worth drawing at 28 m; a board or a helmet at 55 m.
+      const historyDrawDist = (obj) => {
+        if (!obj) return obj;
+        const n = obj.name || '';
+        let dist = 0;
+        if (n === 'brass' || n === 'leghold-traps' || n === 'horseshoe') dist = 28;
+        else if (n === 'dropped-helmet' || n.startsWith('survey-board:') || n === 'trailhead-board' || n === 'ranger-hiker-roster' || n === 'hikers-camp-roster' || n === 'iron-below') dist = 55;
+        if (dist) obj.userData.maxDist = dist;
+        return obj;
+      };
+      const put = (obj, x, z, yaw, r, dy = 0) => { historyDrawDist(obj); obj.position.set(x, sampleHeight(x, z) + dy, z); obj.rotation.y = yaw; obj.userData.seatHistoryTerrain?.(sampleHeight); G.add(obj); historyProps.taken.push({ x, z, r }); historyProps.parts[obj.name] = obj; return obj; };
       const spot = (id, x, z, r) => historyProps.spots.push({ id, x, z, r });
       // The survey boards, beside each warren cave's mouth, facing out.
       for (const c of POI.caves) {
@@ -8700,7 +8782,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       // FOB Threshold's fall: brass round the sandbag line, a helmet, and drag marks to the nearest cave.
       if (POI.sandbags) {
         const sb = POI.sandbags;
-        const brass = History.buildBrass(THREE, 36, rnd, 1.8); brass.position.set(sb.x, sampleHeight(sb.x, sb.z) + 0.01, sb.z); G.add(brass);
+        const brass = History.buildBrass(THREE, 36, rnd, 1.8); brass.position.set(sb.x, sampleHeight(sb.x, sb.z) + 0.01, sb.z); historyDrawDist(brass); G.add(brass);
         const hs = historyFreeSpot(sb.x, sb.z, 2.5, 6, 0.6, 0.5);
         if (hs) put(History.buildDroppedHelmet(THREE, { cover: coverMat, helmet: helmetMat, nvg: nvgMat, pouch: pouchMat }), hs.x, hs.z, rnd() * 6, 0.4);   // CL-267: his own helmet
         let best = null, bd = Infinity;
@@ -8741,7 +8823,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
             const rRoster = History.buildRangerHikerRoster(THREE, doc);
             rRoster.position.set(rx, sampleHeight(bx, bz) + 1.28, rz);
             rRoster.rotation.y = rYaw;
-            G.add(rRoster);
+            historyDrawDist(rRoster); G.add(rRoster);
             historyProps.parts['ranger-hiker-roster'] = rRoster;
             rLm.hikerRoster = rRoster;
             registerReadablePaper(rRoster);
@@ -8755,7 +8837,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
             const hRoster = History.buildHikerCampRoster(THREE, doc);
             hRoster.position.set(hx, sampleHeight(hx, hz) + 0.49, hz);
             hRoster.rotation.y = hYaw - 0.2 + Math.PI;
-            G.add(hRoster);
+            historyDrawDist(hRoster); G.add(hRoster);
             historyProps.parts['hikers-camp-roster'] = hRoster;
             hLm.hikerRoster = hRoster;
             registerReadablePaper(hRoster);
@@ -8799,8 +8881,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
             const post = new THREE.Mesh(new THREE.BoxGeometry(0.14, 1.6, 0.14), new THREE.MeshStandardMaterial({ color: 0x4b3a28, roughness: 0.95 }));
             post.name = 'trapper-post'; const px = h.x + 1.0, pz = h.z + 0.3;
             post.position.set(px, sampleHeight(px, pz) + 0.8, pz); G.add(post); historyProps.taken.push({ x: px, z: pz, r: 0.3 });
-            for (let k = 0; k < 3; k++) { const hs = History.buildHorseshoe(THREE); hs.position.set(px, sampleHeight(px, pz) + 0.75 + k * 0.28, pz + 0.08); G.add(hs); }
-            const tr = History.buildTraps(THREE); tr.position.set(px - 0.6, sampleHeight(px - 0.6, pz + 0.8), pz + 0.8); G.add(tr);
+            for (let k = 0; k < 3; k++) { const hs = History.buildHorseshoe(THREE); hs.position.set(px, sampleHeight(px, pz) + 0.75 + k * 0.28, pz + 0.08); historyDrawDist(hs); G.add(hs); }
+            const tr = History.buildTraps(THREE); tr.position.set(px - 0.6, sampleHeight(px - 0.6, pz + 0.8), pz + 0.8); historyDrawDist(tr); G.add(tr);
           }
         }
       }
@@ -9465,7 +9547,33 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       ctx.fill();
       ctx.restore();
     }
-    const mapLandmarkIntel = createMapLandmarkIntel();
+    const mapLandmarkIntel = createMapLandmarkIntel({ radius: 14 });   // CU-198: a clearing, not the old 18 m
+    const mapReveal = createRevealGrid();
+    let mapRevealRun = -1;
+    function saveMapReveal() {
+      try { sessionStorage.setItem('dw-map-reveal', JSON.stringify({ run: uiRunId, cells: mapReveal.packed(), found: mapReveal.found() })); } catch (_) {}
+    }
+    function loadMapReveal() {
+      if (mapRevealRun === uiRunId) return;
+      mapRevealRun = uiRunId;
+      mapReveal.reset();
+      try {
+        const s = JSON.parse(sessionStorage.getItem('dw-map-reveal') || 'null');
+        if (s && s.run === uiRunId) { mapReveal.unpack(s.cells); mapReveal.restoreFound(s.found); }
+      } catch (_) {}
+    }
+    function stepMapReveal() {
+      if (!gameStarted || training.active || (typeof hollow !== 'undefined' && hollow.below())) return;
+      loadMapReveal();
+      const p = player.position;
+      const grew = mapReveal.revealAround(p.x, p.z);
+      const sites = [];
+      const props = objectiveProps?.props;
+      if (props) for (const [id, prop] of Object.entries(props)) sites.push({ id, centre: prop.centre || prop });
+      const newly = mapReveal.visit(currentMapLandmarks(), sites, p.x, p.z);
+      for (const id of newly) showBanner(sayText('place.' + id + '.name', {}, id), sayText('place.' + id + '.line', {}, ''), 2.5, '#d7c6a4');
+      if (grew || newly.length) saveMapReveal();
+    }
     let mapLandmarkRows = null, mapLandmarkHq = null;
     function currentMapLandmarks() {
       const hq = house.present ? house.group.position : null;
@@ -9478,7 +9586,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     const mapSightPoint = new THREE.Vector3(), mapSightNdc = new THREE.Vector3();
     let mapEnemySightTick = 0;
     window.addEventListener('dw-game', ({detail}) => {
-      if (detail?.type === 'run-reset') { mapEnemyIntel.reset(); mapLandmarkIntel.reset(); mapLandmarkRows = null; mapEnemySightTick = 0; }
+      if (detail?.type === 'run-reset') { mapEnemyIntel.reset(); mapLandmarkIntel.reset(); mapReveal.reset(); mapRevealRun = uiRunId; saveMapReveal(); mapLandmarkRows = null; mapEnemySightTick = 0; }
     });
     function mapEnemyVisible(enemy) {
       if (!enemy.mesh.visible) return false;
@@ -9559,7 +9667,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (gameStarted && mapEnemySightTick <= 0) {
         mapEnemySightTick = .2;
         mapEnemyIntel.observe(zombies, player.position, mapEnemyVisible);
-        if (!training.active && !hollow.below()) mapLandmarkIntel.observe(currentMapLandmarks(), player.position);
+        if (!training.active && !hollow.below()) { mapLandmarkIntel.observe(currentMapLandmarks(), player.position); stepMapReveal(); }
       }
       if (fullMapOpen) drawFullMap(dt);
       minimapTick -= dt;
@@ -9597,6 +9705,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         ctx.translate(-pb.x, -pb.y);
         ctx.imageSmoothingEnabled = true;
         ctx.drawImage(mapBake, 0, 0);
+        if (gameStarted && !training.active) fillUnknown(ctx, mapReveal, worldToBake, bakeScale);   // CU-198
         ctx.restore();
       }
       // Range rings at 25 m and the 50 m edge, so distance reads off the map.
@@ -9614,7 +9723,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const mapSnapshot = objectiveRuntime?.snapshot();
       drawCacheMarks(ctx, cacheIntel.markers({ runId: uiRunId, day, sites: mapSnapshot?.sites || [] }),
         { x: px, z: pz, yaw, center: C, scale: k, rim: RIM - 56 });
-      drawMapLandmarks(ctx, mapLandmarkIntel.labels(currentMapLandmarks()), toLocal, {size:W,mini:true});
+      drawMapLandmarks(ctx, mapLandmarkIntel.labels(currentMapLandmarks()).filter((r) => r.discovered), toLocal, {size:W,mini:true});
       drawMapMissions(ctx, projectMapMissions(currentMapMissions(mapSnapshot), toLocal,
         {x:px,z:pz,yaw,center:C,scale:k,rim:RIM-32}));
       ctx.restore();
@@ -9690,6 +9799,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       ctx.clearRect(0, 0, W, W);
       ctx.imageSmoothingEnabled = true;
       ctx.drawImage(mapBake, 0, 0, W, W);
+      if (gameStarted && !training.active) { ctx.save(); ctx.scale(W / BAKE_PX, W / BAKE_PX); fillUnknown(ctx, mapReveal, worldToBake, bakeScale); ctx.restore(); }   // CU-198
       ctx.strokeStyle = 'rgba(10,14,8,0.9)';
       ctx.lineWidth = 4 * sz;
       ctx.beginPath(); ctx.arc(C, C, C - 2 * sz, 0, Math.PI * 2); ctx.stroke();
@@ -9701,7 +9811,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       ctx.beginPath(); ctx.arc(pp.x, pp.y, MINI_R * bakeScale * s, 0, Math.PI * 2); ctx.stroke();
       ctx.setLineDash([]);
       drawMapBlips(ctx, toFull, sz);
-      drawMapLandmarks(ctx, mapLandmarkIntel.labels(currentMapLandmarks()), toFull, {size:W,scale:sz});
+      drawMapLandmarks(ctx, mapLandmarkIntel.labels(currentMapLandmarks()).filter((r) => r.discovered), toFull, {size:W,scale:sz});
       drawMapCamera(ctx, pp, {yaw:camYawCurrent,
         halfFov:Math.atan(Math.tan(THREE.MathUtils.degToRad(camera.fov)/2)*camera.aspect), reach:30*bakeScale*s,scale:sz});
       const missions = currentMapMissions();
@@ -9721,11 +9831,148 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       }
     }
 
+    // GP-19999: bake each critter's fixed body and paired wing shapes once. Instance
+    // those two shapes; a per-instance flap attribute rotates the wing vertices about
+    // their original shoulder pivots, so the old poses survive without per-part draws.
+    function wildlifeShape(root, wings) {
+      root.updateMatrixWorld(true);
+      const inv = new THREE.Matrix4().copy(root.matrixWorld).invert();
+      const wingPivots = root.userData.wings
+        ? root.userData.wings.map(w => ({ pivot: w.pivot, side: w.side }))
+        : [{ pivot: root.userData.wingL, side: -1 }, { pivot: root.userData.wingR, side: 1 }];
+      const pos = [], normals = [], colors = [], sides = [], hinges = [], tintable = [];
+      const matrix = new THREE.Matrix4(), normalMatrix = new THREE.Matrix3();
+      const point = new THREE.Vector3(), normal = new THREE.Vector3();
+      const pivotPositions = wingPivots.map(w => w.pivot.getWorldPosition(new THREE.Vector3()).applyMatrix4(inv));
+      const parts = [];
+      root.traverse(part => {
+        if (!part.isMesh) return;
+        const wi = wingPivots.findIndex(w => { for (let p = part.parent; p && p !== root; p = p.parent) if (p === w.pivot) return true; return false; });
+        if ((wi >= 0) !== wings) return;
+        parts.push({ part, wi });
+      });
+      // The merged wing has no per-triangle depth writes: draw its base plane first,
+      // then the raised color panels, veins and spots in their original layer order.
+      if (wings) parts.sort((a, b) => Math.abs(a.part.position.y) - Math.abs(b.part.position.y));
+      for (const { part, wi } of parts) {
+        matrix.multiplyMatrices(inv, part.matrixWorld);
+        normalMatrix.getNormalMatrix(matrix);
+        const geometry = part.geometry.index ? part.geometry.toNonIndexed() : part.geometry;
+        const P = geometry.attributes.position, N = geometry.attributes.normal;
+        const c = part.material.color || new THREE.Color(0xffffff);
+        const alpha = part.material.opacity == null ? 1 : part.material.opacity;
+        for (let i = 0; i < P.count; i++) {
+          point.fromBufferAttribute(P, i).applyMatrix4(matrix);
+          if (N) normal.fromBufferAttribute(N, i); else normal.set(0, 1, 0);
+          normal.applyMatrix3(normalMatrix).normalize();
+          pos.push(point.x, point.y, point.z);
+          normals.push(normal.x, normal.y, normal.z);
+          colors.push(c.r, c.g, c.b, alpha);
+          if (wings) {
+            sides.push(wingPivots[wi].side);
+            hinges.push(pivotPositions[wi].x, pivotPositions[wi].y);
+            tintable.push(part.material === root.userData.wingMat ? 1 : 0);
+          }
+        }
+        if (geometry !== part.geometry) geometry.dispose();
+      }
+      const geometry = new THREE.BufferGeometry();
+      geometry.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+      geometry.setAttribute('normal', new THREE.Float32BufferAttribute(normals, 3));
+      geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 4));
+      if (wings) {
+        geometry.setAttribute('wingSide', new THREE.Float32BufferAttribute(sides, 1));
+        geometry.setAttribute('wingHinge', new THREE.Float32BufferAttribute(hinges, 2));
+        geometry.setAttribute('wingTintable', new THREE.Float32BufferAttribute(tintable, 1));
+      }
+      geometry.computeBoundingSphere();
+      return geometry;
+    }
+    const wildlifeZero = new THREE.Matrix4().makeScale(0, 0, 0);
+    let wildlifeWarmReady = false;
+    function wildlifeBatch(root, count, basic, roughness, label) {
+      const makeMaterial = (wing) => {
+        const params = { side: THREE.DoubleSide, transparent: wing, depthWrite: !wing, roughness, color: 0xffffff };
+        const mat = basic ? new THREE.MeshBasicNodeMaterial(params) : new THREE.MeshStandardNodeMaterial(params);
+        const vc = TSL.attribute('color', 'vec4');
+        if (wing) {
+          const side = TSL.attribute('wingSide', 'float');
+          const hinge = TSL.attribute('wingHinge', 'vec2');
+          const angle = side.mul(TSL.attribute('wingFlap', 'float'));
+          const sn = TSL.sin(angle), cs = TSL.cos(angle), p = TSL.positionLocal;
+          const x = p.x.sub(hinge.x), y = p.y.sub(hinge.y);
+          mat.positionNode = TSL.vec3(x.mul(cs).sub(y.mul(sn)).add(hinge.x), x.mul(sn).add(y.mul(cs)).add(hinge.y), p.z);
+          if (!basic) {
+            const n = TSL.normalLocal;
+            const swungNormal = TSL.vec3(n.x.mul(cs).sub(n.y.mul(sn)), n.x.mul(sn).add(n.y.mul(cs)), n.z);
+            mat.normalNode = TSL.transformNormalToView(swungNormal);
+          }
+          const tint = TSL.attribute('wingTint', 'vec3');
+          mat.colorNode = vc.xyz.mul(TSL.mix(TSL.vec3(1, 1, 1), tint, TSL.attribute('wingTintable', 'float')));
+          mat.opacityNode = vc.w;
+        } else mat.colorNode = vc.xyz;
+        return mat;
+      };
+      const body = new THREE.InstancedMesh(wildlifeShape(root, false), makeMaterial(false), count);
+      const wingGeo = wildlifeShape(root, true);
+      wingGeo.setAttribute('wingFlap', new THREE.InstancedBufferAttribute(new Float32Array(count), 1));
+      wingGeo.setAttribute('wingTint', new THREE.InstancedBufferAttribute(new Float32Array(count * 3), 3));
+      const wing = new THREE.InstancedMesh(wingGeo, makeMaterial(true), count);
+      body.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+      wing.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+      wingGeo.attributes.wingFlap.setUsage(THREE.DynamicDrawUsage);
+      wingGeo.attributes.wingTint.setUsage(THREE.DynamicDrawUsage);
+      body.name = label + '-body-instanced';
+      wing.name = label + '-wings-instanced';
+      // WebGPU fixes the instance-matrix buffer length at first compile. Warm the
+      // full capacity with zero-scale matrices; never compile a count-0 batch.
+      for (let i = 0; i < count; i++) {
+        body.setMatrixAt(i, wildlifeZero);
+        wing.setMatrixAt(i, wildlifeZero);
+      }
+      body.visible = wing.visible = false;
+      body.frustumCulled = wing.frustumCulled = false; // distance-cull the instances below
+      body.castShadow = wing.castShadow = false;
+      scene.add(body, wing);
+      return { body, wing, capacity: count, drawn: 0 };
+    }
+    function wildlifeInstance(batch, index, pose, flap, tint) {
+      pose.updateMatrixWorld(true);
+      batch.body.setMatrixAt(index, pose.matrixWorld);
+      batch.wing.setMatrixAt(index, pose.matrixWorld);
+      batch.wing.geometry.attributes.wingFlap.setX(index, flap);
+      batch.wing.geometry.attributes.wingTint.setXYZ(index, tint.r, tint.g, tint.b);
+    }
+    function wildlifeFinish(batch, count) {
+      if (!wildlifeWarmReady) {
+        for (let i = count; i < batch.capacity; i++) {
+          batch.body.setMatrixAt(i, wildlifeZero);
+          batch.wing.setMatrixAt(i, wildlifeZero);
+        }
+      } else if (!count) {
+        // Three.js r175 submits one instance even for count=0. Hide the mesh and
+        // clear slot zero so a killed or rain-hidden insect cannot leave a ghost.
+        batch.body.setMatrixAt(0, wildlifeZero);
+        batch.wing.setMatrixAt(0, wildlifeZero);
+      }
+      batch.body.count = batch.wing.count = wildlifeWarmReady ? count : batch.capacity;
+      if (wildlifeWarmReady) batch.body.visible = batch.wing.visible = count > 0;
+      if (count || batch.drawn || !wildlifeWarmReady) {
+        batch.body.instanceMatrix.needsUpdate = true;
+        batch.wing.instanceMatrix.needsUpdate = true;
+        batch.wing.geometry.attributes.wingFlap.needsUpdate = true;
+        batch.wing.geometry.attributes.wingTint.needsUpdate = true;
+      }
+      batch.drawn = count;
+    }
+    const wildlifeWhite = new THREE.Color(0xffffff);
+
     // Bird flocks turning lazy circles over the valley. They scatter nothing and fix
     // nothing — the sky just shouldn't be dead.
     // GP-19966: one continuous swept silhouette per wing, with a separate beat and glide
     // for each bird. The flock still follows its seeded orbit.
     const birdFlocks = [];
+    let flockBatch = null;
     function buildBirds() {
       const rnd = mulberry32(0xb14d5);
       const birdMat = new THREE.MeshBasicMaterial({ color: 0x1a1c22, side: THREE.DoubleSide });
@@ -9791,17 +10038,24 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const anchors = [
         { x: 0, z: 0 }, { x: LAKE.x + 30, z: LAKE.z + 20 }, { x: 90, z: 90 }
       ];
-      for (let f = 0; f < 3; f++) {
+      const template = makeBird(1, 0, mulberry32(0xb14d5));
+      flockBatch = wildlifeBatch(template, 10, true, 1, 'bird-flock');
+      for (let f = 0; f < 2; f++) { // D-107: two smaller flocks make a sighting less routine
         const motionRnd = mulberry32(0xb16d5 + f * 1097);
         const root = new THREE.Group();
         root.name = 'bird-flock';
         root.userData.noCull = true;
-        const n = 5 + ((rnd() * 3) | 0); // CU-132: flocks back to 5-7 so they read in the sky
+        const n = 4 + ((rnd() * 2) | 0); // D-107: four or five birds per flock
         const birds = [];
         for (let i = 0; i < n; i++) {
           const row = i === 0 ? 0 : Math.ceil(i / 2);
           const side = i === 0 ? 0 : (i % 2 ? 1 : -1);
-          const bird = makeBird(1.55 + rnd() * 0.35, rnd() * Math.PI * 2, motionRnd);
+          const bird = new THREE.Object3D();
+          bird.scale.setScalar(1.55 + rnd() * 0.35);
+          bird.userData.phase = rnd() * Math.PI * 2;
+          bird.userData.flapRate = 4.7 + motionRnd() * 2.5;
+          bird.userData.glide = 0.2 + motionRnd() * 0.24;
+          bird.userData.drift = motionRnd() * Math.PI * 2;
           bird.userData.home = {
             x: side * row * 3.6 + (motionRnd() - 0.5) * 1.5,
             y: (rnd() - 0.5) * 0.35,
@@ -9825,6 +10079,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
 
     function updateBirds(dt) {
+      let drawn = 0;
+      const hide = bugsShouldHide();
       for (const f of birdFlocks) {
         f.ang += f.speed * dt;
         f.t += dt;
@@ -9834,6 +10090,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         // Face along the direction of travel around the circle, and bank into the turn.
         f.mesh.rotation.y = -f.ang + (f.speed > 0 ? 0 : Math.PI);
         f.mesh.rotation.z = (f.speed > 0 ? -1 : 1) * (0.12 + 0.05 * Math.sin(f.t * 0.55));
+        f.mesh.updateMatrixWorld(true);
         for (const b of f.birds) {
           const data = b.userData;
           const cycle = ((f.t * data.flapRate + data.phase) % (Math.PI * 2)) / (Math.PI * 2);
@@ -9849,11 +10106,12 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
             data.home.y + Math.sin(f.t * 0.64 + data.drift) * 0.2,
             data.home.z + Math.cos(f.t * 0.37 + data.drift) * 0.65
           );
-          for (const w of b.userData.wings) {
-            w.pivot.rotation.z = w.side * lift;
+          if (!hide && flockBatch && drawn < 10 && hypot(b.position.x + f.mesh.position.x - player.position.x, b.position.z + f.mesh.position.z - player.position.z) < 150) {
+            wildlifeInstance(flockBatch, drawn++, b, lift, wildlifeWhite);
           }
         }
       }
+      if (flockBatch) wildlifeFinish(flockBatch, drawn);
     }
 
     // Firelight flicker + drifting embers. A camp stays dark until he lights it.
@@ -10911,6 +11169,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const rel = buildReliquary(THREE);
       rel.position.set(gx, sampleHeight(gx, gz) - 0.03, gz);
       rel.rotation.y = 0.7;
+      rel.userData.maxDist = 50;   // CU-199: a casket you walk up to, not a shape on the horizon
       scene.add(rel);
       rabbitMound.reliquary = rel;
       rabbitMound.reliquaryAt = { x: gx, z: gz };
@@ -11188,7 +11447,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           sp.gone = true; touched = true;
           for (let i = sp.start; i < sp.start + sp.count; i++) pos.setXYZ(i, sp.x, -500, sp.z);
         }
-        if (touched) pos.needsUpdate = true;
+        if (touched) {
+          pos.needsUpdate = true;
+          if (foliageBundle) foliageBundle.needsUpdate = true;
+        }
       }
       // The per-tuft meshes of ?foliage=legacy.
       for (const f of foliage) {
@@ -11203,8 +11465,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         f.mesh.geometry.dispose();
       }
       foliage.length = 0;
-      for (const c of foliageChunks) { scene.remove(c); c.geometry.dispose(); }
+      for (const c of foliageChunks) { c.removeFromParent(); c.geometry.dispose(); }
       foliageChunks.length = 0;
+      if (foliageBundle) { foliageBundle.removeFromParent(); foliageBundle = null; }
     }
 
     // === Foliage chunks =========================================================
@@ -11227,6 +11490,13 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     const FOLIAGE_LEGACY = /[?&]foliage=legacy(&|=|$)/i.test(location.search);
     const FOLIAGE_CELL = 45;   // CL-218: was 30 (about 2.2 times the chunks, so draws; the GPU has the room)
     const foliageChunks = [];
+    // CL-288 (D-104): opt-in WebGPU render-bundle pilot. Three paired runs in each
+    // target scenario lowered reported draws but worsened CPU render and 1% lows;
+    // keep the existing path by default until a broader batch earns the cost.
+    // static=false keeps wind and trampler node uniforms live on cached replay.
+    const FOLIAGE_BUNDLES = !FOLIAGE_LEGACY && urlParams.get('bundles') === '1'
+      && renderer.backend?.isWebGPUBackend === true && !!THREE.BundleGroup;
+    let foliageBundle = null;
     // Ground-cover draw distance (graphics preset; 0 = unlimited). Hiding a mesh is
     // free under the node renderer — its pipeline is already compiled — so this can
     // flip chunks every few frames without costing a shader build.
@@ -11234,17 +11504,25 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     let _foliageCullTick = 0, _foliageCullApplied = -1;
     function cullFoliageByDistance() {
       if (foliageCullDist <= 0) {
-        if (_foliageCullApplied !== 0) { for (const c of foliageChunks) c.visible = true; _foliageCullApplied = 0; }
+        if (_foliageCullApplied !== 0) {
+          let changed = false;
+          for (const c of foliageChunks) if (!c.visible) { c.visible = true; changed = true; }
+          if (changed && foliageBundle) foliageBundle.needsUpdate = true;
+          _foliageCullApplied = 0;
+        }
         return;
       }
       if ((_foliageCullTick++ & 3) !== 0 && _foliageCullApplied === foliageCullDist) return;
       _foliageCullApplied = foliageCullDist;
       const px = gameStarted ? player.position.x : camera.position.x, pz = gameStarted ? player.position.z : camera.position.z;
+      let changed = false;
       for (const c of foliageChunks) {
         const s = c.geometry.boundingSphere;
         const dx = s.center.x - px, dz = s.center.z - pz, r = foliageCullDist + s.radius;
-        c.visible = dx * dx + dz * dz < r * r;
+        const visible = dx * dx + dz * dz < r * r;
+        if (c.visible !== visible) { c.visible = visible; changed = true; }
       }
+      if (changed && foliageBundle) foliageBundle.needsUpdate = true;
     }
     const foliageWind = { time: null, dirX: null, dirZ: null, strength: null, player: null, tramplers: null };
     const TRAMPLER_SLOTS = 4; // the nearest few zombies flatten grass too
@@ -11287,6 +11565,13 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
 
     function bakeFoliageChunks() {
       if (FOLIAGE_LEGACY) return;
+      if (FOLIAGE_BUNDLES) {
+        foliageBundle = new THREE.BundleGroup();
+        foliageBundle.name = 'ground-foliage-bundle';
+        foliageBundle.static = false; // refresh wind and trampler node uniforms on cached replay
+        foliageBundle.userData.noCull = true; // children are culled by cullFoliageByDistance
+        scene.add(foliageBundle);
+      }
       // One material for every chunk. If the node material can't be built the chunks
       // still go in with the plain material — static grass, but still one draw a cell.
       let chunkMat = null;
@@ -11349,7 +11634,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         mesh.receiveShadow = false;
         mesh.userData.spans = cell.spans || [];
         mesh.matrixAutoUpdate = false;       // CL-28: world-space geometry at the origin; never moves
-        scene.add(mesh);
+        if (foliageBundle) foliageBundle.add(mesh); else scene.add(mesh);
         foliageChunks.push(mesh);
       }
     }
@@ -11605,9 +11890,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // --- Bees & butterflies (Grave Shift critters) --------------------------------
     // Land on flower pads (bush tops as fallback), flutter / forage, die in 1 HP.
     const bugs = [];
-    const MAX_BUGS = 24;
+    const MAX_BUGS = 12; // D-107: sightings are rarer alongside the halved ground wildlife
     const BUG_HIT_R = 0.24;
     let _bugPads = [];
+    let bugBatches = null;
 
     const beeYellowMat = new THREE.MeshStandardMaterial({ color: 0xf4c430, roughness: 0.68 });
     const beeAmberMat = new THREE.MeshStandardMaterial({ color: 0xd4921a, roughness: 0.78 });
@@ -11646,7 +11932,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
 
     function makeBeeMesh() {
       const g = new THREE.Group();
-      const s = 0.14 + Math.random() * 0.04;
+      const s = 0.15; // template size; each live instance keeps the original random scale
       // Head with compound eyes, frons, and elbowed antennae
       const head = new THREE.Mesh(new THREE.SphereGeometry(0.025, 10, 8), beeBlackMat);
       head.scale.set(1.05, 0.95, 0.88);
@@ -11750,8 +12036,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
 
     function makeButterflyMesh() {
       const g = new THREE.Group();
-      const s = 0.22 + Math.random() * 0.08;
-      const col = BUTTE_WING_COLORS[(Math.random() * BUTTE_WING_COLORS.length) | 0];
+      const s = 0.25; // template size; per-instance scale and wing colour are sampled at spawn
+      const col = 0xffffff;
       const wingMat = new THREE.MeshStandardMaterial({
         color: col, transparent: true, opacity: 0.9, side: THREE.DoubleSide, roughness: 0.48, depthWrite: false
       });
@@ -11871,12 +12157,32 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
 
     function clearBugs() {
-      for (const b of bugs) {
-        if (!b.mesh) continue;
-        scene.remove(b.mesh);
-        disposeBugMesh(b.mesh);
-      }
       bugs.length = 0;
+      if (bugBatches) { wildlifeFinish(bugBatches.bee, 0); wildlifeFinish(bugBatches.butterfly, 0); }
+    }
+
+    function ensureBugBatches() {
+      if (bugBatches) return;
+      const bee = makeBeeMesh(), butterfly = makeButterflyMesh();
+      bee.scale.setScalar(1);
+      butterfly.scale.setScalar(1);
+      bugBatches = {
+        bee: wildlifeBatch(bee, MAX_BUGS, false, 0.75, 'bee'),
+        butterfly: wildlifeBatch(butterfly, MAX_BUGS, false, 0.7, 'butterfly')
+      };
+    }
+
+    function flushBugInstances() {
+      if (!bugBatches) return;
+      const counts = { bee: 0, butterfly: 0 };
+      for (const b of bugs) {
+        if (!b.alive || !b.mesh || !b.mesh.visible || b.hiddenForRain) continue;
+        if (hypot(b.mesh.position.x - player.position.x, b.mesh.position.z - player.position.z) > 80) continue;
+        const batch = bugBatches[b.kind], i = counts[b.kind]++;
+        wildlifeInstance(batch, i, b.mesh, -(b.flap || 0), b.tint || wildlifeWhite);
+      }
+      wildlifeFinish(bugBatches.bee, counts.bee);
+      wildlifeFinish(bugBatches.butterfly, counts.butterfly);
     }
 
     function pickBugPad(excludeIdx) {
@@ -11890,7 +12196,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     function spawnOneBug(kind) {
       if (bugs.length >= MAX_BUGS) return;
       if (!_bugPads.length) refreshBugPads();
-      const mesh = kind === 'bee' ? makeBeeMesh() : makeButterflyMesh();
+      const mesh = new THREE.Object3D();
+      const s = kind === 'bee' ? 0.14 + Math.random() * 0.04 : 0.22 + Math.random() * 0.08;
+      mesh.scale.setScalar(s / (kind === 'bee' ? 0.15 : 0.25));
+      const tint = kind === 'bee' ? wildlifeWhite : new THREE.Color(BUTTE_WING_COLORS[(Math.random() * BUTTE_WING_COLORS.length) | 0]);
       const picked = pickBugPad(-1);
       let x, z;
       if (picked) {
@@ -11906,10 +12215,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const y = gh + 0.6 + Math.random() * 1.4;
       mesh.position.set(x, y, z);
       mesh.userData.walkWhenShown = true;   // CL-211: hidden (rain, night), the matrix walk skips it
-      scene.add(mesh);
       bugs.push({
         kind,
         mesh,
+        tint,
         hp: 1,
         alive: true,
         hiddenForRain: false,
@@ -11930,9 +12239,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
 
     function spawnBugs() {
       clearBugs();
+      ensureBugBatches();
       refreshBugPads();
-      let n = 18 + ((Math.random() * 11) | 0); // 18-28
-      if (typeof isNight !== 'undefined' && isNight) n = Math.max(10, Math.floor(n * 0.65));
+      let n = 9 + ((Math.random() * 6) | 0); // D-107: 9-14 before the 12-bug cap
+      if (typeof isNight !== 'undefined' && isNight) n = Math.max(5, Math.floor(n * 0.65));
       n = Math.min(n, MAX_BUGS);
       const nBees = Math.round(n * 0.4);
       for (let i = 0; i < nBees; i++) spawnOneBug('bee');
@@ -11946,9 +12256,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const col = b.kind === 'bee' ? 0xffdd44 : 0xff8844;
       spawnChunks(p.x, p.y, p.z, col, 3, 2.2);
       spawnChunks(p.x, p.y, p.z, 0xffaa66, 2, 1.6);
-      scene.remove(b.mesh);
-      disposeBugMesh(b.mesh);
       b.mesh = null;
+      flushBugInstances(); // a shot or blast cannot leave its last instance for one more frame
     }
 
     function bugSeekTarget(b, dt, speed, wobble) {
@@ -12029,19 +12338,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         const isBee = b.kind === 'bee';
         b.phase += dt;
 
-        const wl = b.mesh.userData.wingL, wr = b.mesh.userData.wingR;
-        if (wl && wr) {
-          if (b.mode === 'land') {
-            const a = Math.sin(b.phase * (isBee ? 18 : 6)) * (isBee ? 0.08 : 0.04);
-            wl.rotation.z = a; wr.rotation.z = -a;
-          } else if (isBee) {
-            const a = Math.sin(b.phase * 42) * 0.55;
-            wl.rotation.z = a; wr.rotation.z = -a;
-          } else {
-            const a = Math.sin(b.phase * 16) * 0.85;
-            wl.rotation.z = a; wr.rotation.z = -a;
-          }
-        }
+        if (b.mode === 'land') b.flap = Math.sin(b.phase * (isBee ? 18 : 6)) * (isBee ? 0.08 : 0.04);
+        else if (isBee) b.flap = Math.sin(b.phase * 42) * 0.55;
+        else b.flap = Math.sin(b.phase * 16) * 0.85;
 
         if (b.mode === 'land') {
           b.landTimer -= dt;
@@ -12108,6 +12407,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         const spd = hypot(b.vel.x, b.vel.z);
         if (spd > 0.15) b.mesh.rotation.y = Math.atan2(b.vel.x, b.vel.z);
       }
+      flushBugInstances();
     }
 
     function hitBugsSegment(ax, ay, az, bx, by, bz) {
@@ -12148,14 +12448,16 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     const burrows = [];
     const nests = [];
     const lilyPads = [];
-    const MAX_BIRDS = 14;    // CU-132: back up. 7 was thin enough that the sky looked empty.
-    const MAX_RABBITS = 4;   // CU-132: 2 was easy to miss once they started down the hole.
-    const MAX_FROGS = 8;
-    const MAX_SQUIRRELS = 9;
-    const MAX_TURTLES = 6;
-    const MAX_FISH = 14;
+    // D-107 (Jerry, 2026-10-31: "Let's cut the game's total wildlife by 50%. It really should be a bit more of a rarity
+    // to see them"): every kind halved, its cap and its roll (CU-132's numbers were the full ones).
+    const MAX_BIRDS = 7;
+    const MAX_RABBITS = 2;
+    const MAX_FROGS = 4;
+    const MAX_SQUIRRELS = 5;
+    const MAX_TURTLES = 3;
+    const MAX_FISH = 7;
     const MAX_BURROWS = 3;   // CU-132: one by each camp, where you actually walk.
-    const MAX_NESTS = 6;
+    const MAX_NESTS = 3;    // D-107
     const MAX_LILYPADS = 6;
     const BIRD_HIT_R = 0.28;
     const RABBIT_HIT_R = 0.22;
@@ -13541,7 +13843,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
 
     function spawnNests() {
-      const n = 4 + ((Math.random() * 3) | 0); // 4-6
+      const n = 2 + ((Math.random() * 2) | 0); // 2-3 (D-107)
       for (let i = 0; i < Math.min(n, MAX_NESTS); i++) spawnOneNest();
     }
 
@@ -13772,7 +14074,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
 
     function spawnSquirrels() {
-      const n = 5 + ((Math.random() * 4) | 0); // 5-8
+      const n = 3 + ((Math.random() * 2) | 0); // 3-4 (D-107)
       for (let i = 0; i < Math.min(n, MAX_SQUIRRELS); i++) spawnOneSquirrel();
     }
 
@@ -13824,7 +14126,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
 
     function spawnTurtles() {
-      const n = 4 + ((Math.random() * 3) | 0); // 4-6
+      const n = 2 + ((Math.random() * 2) | 0); // 2-3 (D-107)
       for (let i = 0; i < Math.min(n, MAX_TURTLES); i++) spawnOneTurtle();
     }
 
@@ -13889,9 +14191,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
     function spawnFish() {
       fishSchools.length = 0;
-      // Three schools in the lake, two holding in the river's runs.
-      spawnSchool('lake', 4); spawnSchool('lake', 3); spawnSchool('lake', 3);
-      spawnSchool('river', 2); spawnSchool('river', 2);
+      // Two schools in the lake, one holding in the river's runs (D-107: half of CL-53's fourteen).
+      spawnSchool('lake', 3); spawnSchool('lake', 2);
+      spawnSchool('river', 2);
     }
 
     function spawnWildlife() {
@@ -13899,9 +14201,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       spawnBurrows();
       spawnNests();
       spawnLilyPads();
-      const nb = 10 + ((Math.random() * 5) | 0); // CU-132: 10-14 again. 5-7 left the air empty.
-      const nr = 3 + ((Math.random() * 2) | 0);  // CU-132: 3-4, out by the camps, not down the hole.
-      const nf = 5 + ((Math.random() * 4) | 0);  // 5-8
+      const nb = 5 + ((Math.random() * 3) | 0);  // 5-7 (D-107: half of CU-132's 10-14)
+      const nr = 1 + ((Math.random() * 2) | 0);  // 1-2 (D-107), out by the camps, not down the hole
+      const nf = 3 + ((Math.random() * 2) | 0);  // 3-4 (D-107)
       for (let i = 0; i < Math.min(nb, MAX_BIRDS); i++) spawnOneBird();
       for (let i = 0; i < Math.min(nr, MAX_RABBITS); i++) spawnOneRabbit(i === 0);
       for (let i = 0; i < Math.min(nf, MAX_FROGS); i++) spawnOneFrog();
@@ -17825,97 +18127,108 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         });
       }
     }
+    // CU-204: an instanced forest grows a tree's own meshes the first time it goes live.
+    // ?forest=batch and ?trees=single still grow every tree here, because the cells copy them.
+    const FOREST_DEFER = !(/[?&]trees=single(&|=|$)/i.test(location.search) || CANOPY_LEGACY) && urlParams.get('forest') !== 'batch' && typeof TSL.instancedArray === 'function';
+
+    function fillTreeMeshes(tree, built) {
+      const g = tree.group, canopy = tree.canopy, T = built.T;
+      canopy.position.y = T.pivotY;
+      let leafPieces, canopyMesh = null;
+      const lposArr = built.leafGeo.attributes.position.array, lcolArr = built.leafGeo.attributes.color.array;
+      const hexOf = (piece) => {
+        const k = (piece.start + (piece.count >> 1)) * 3;
+        _lc2.setRGB(lcolArr[k], lcolArr[k + 1], lcolArr[k + 2]);
+        return _lc2.getHex();
+      };
+      const leafMats = tree.leafMats;
+      if (!CANOPY_LEGACY) {
+        canopyMesh = new THREE.Mesh(built.leafGeo, treeCanopyMat);
+        canopyMesh.castShadow = true;
+        canopy.add(canopyMesh);
+        leafPieces = T.pieces.map((piece) => ({
+          start: piece.start, count: piece.count, center: piece.center, r: piece.r,
+          base: lposArr.slice(piece.start * 3, (piece.start + piece.count) * 3),
+          colorHex: hexOf(piece), visible: true, shrink: 1, mesh: null, geo: built.leafGeo, canopyMesh
+        }));
+      } else {
+        leafPieces = T.pieces.map((piece, i) => {
+          const pos = new Float32Array(piece.count * 3), nrm = new Float32Array(piece.count * 3);
+          const nArr = built.leafGeo.attributes.normal.array;
+          for (let v = 0; v < piece.count; v++) {
+            const k = (piece.start + v) * 3;
+            pos[v * 3] = lposArr[k] - piece.center.x; pos[v * 3 + 1] = lposArr[k + 1] - piece.center.y; pos[v * 3 + 2] = lposArr[k + 2] - piece.center.z;
+            nrm[v * 3] = nArr[k]; nrm[v * 3 + 1] = nArr[k + 1]; nrm[v * 3 + 2] = nArr[k + 2];
+          }
+          const geo = new THREE.BufferGeometry();
+          geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+          geo.setAttribute('normal', new THREE.BufferAttribute(nrm, 3));
+          const mesh = new THREE.Mesh(geo, leafMats[i % leafMats.length]);
+          mesh.position.copy(piece.center);
+          mesh.castShadow = true;
+          mesh.userData.baseScale = 1;
+          canopy.add(mesh);
+          return { mesh, center: mesh.position, r: piece.r };
+        });
+      }
+      if (built.crownWoodMesh) canopy.add(built.crownWoodMesh);
+      g.add(built.trunkMesh);
+      tree.leafPieces = leafPieces;
+      tree.canopyMeshes = canopyMesh ? [canopyMesh] : null;
+      tree.canopyMat = canopyMesh ? treeCanopyMat : null;
+      tree.woodMeshes = [built.trunkMesh, built.crownWoodMesh].filter(Boolean);
+      tree.trunkMesh = built.trunkMesh;
+      tree.trunkRadius = T.trunkR;
+      tree.canopyRadius = T.canopyRadius;
+      tree.canopyBottom = T.canopyBottom;
+      tree.canopyTop = T.canopyTop;
+      tree.canopyPivotY = T.pivotY;
+      g.position.y = groundMinAround(tree.x, tree.z, T.trunkR * 2.2);
+      if (tree._forestMember) {
+        const parts = tbParts(tree);
+        tree._forestMember.wood = parts.wood;
+        tree._forestMember.leaf = parts.leaf;
+      }
+    }
+
+    function ensureTreeGrown(tree) {
+      if (!tree || tree.trunkMesh) return;
+      const built = buildTreeMeshes(tree.kind, tree.scale, mulberry32(((Math.round(tree.x * 97) * 73856093) ^ (Math.round(tree.z * 89) * 19349663)) | 0));
+      fillTreeMeshes(tree, built);
+    }
+
     function makeTree(x, z, opts = {}) {
       const {
         kind = 'pine',
         scale = 1,
         lean = 0
       } = opts;
-
       const g = new THREE.Group();
       const canopy = new THREE.Group();
       const leafColors = paletteSets[kind] || paletteSets.pine;
-      const leafMats = matsFrom(leafColors);
-      // Seeded from where it stands, so a given tree grows the same shape every load.
-      const built = buildTreeMeshes(kind, scale, mulberry32(((Math.round(x * 97) * 73856093) ^ (Math.round(z * 89) * 19349663)) | 0));
-      const T = built.T;
-      canopy.position.y = T.pivotY;
-
-      let leafPieces, canopyMesh = null;
-      const lposArr = built.leafGeo.attributes.position.array, lcolArr = built.leafGeo.attributes.color.array;
-      const hexOf = (p) => {
-        const k = (p.start + (p.count >> 1)) * 3;
-        _lc2.setRGB(lcolArr[k], lcolArr[k + 1], lcolArr[k + 2]);
-        return _lc2.getHex();
-      };
-      if (!CANOPY_LEGACY) {
-        canopyMesh = new THREE.Mesh(built.leafGeo, treeCanopyMat);
-        canopyMesh.castShadow = true;
-        canopy.add(canopyMesh);
-        leafPieces = T.pieces.map((p) => ({
-          start: p.start, count: p.count, center: p.center, r: p.r,
-          base: lposArr.slice(p.start * 3, (p.start + p.count) * 3),
-          colorHex: hexOf(p), visible: true, shrink: 1, mesh: null, geo: built.leafGeo, canopyMesh
-        }));
-      } else {
-        // ?canopy=legacy: one mesh per clump, centred on the clump so scaling shrinks
-        // it in place.
-        leafPieces = T.pieces.map((p, i) => {
-          const pos = new Float32Array(p.count * 3), nrm = new Float32Array(p.count * 3);
-          const nArr = built.leafGeo.attributes.normal.array;
-          for (let v = 0; v < p.count; v++) {
-            const k = (p.start + v) * 3;
-            pos[v * 3] = lposArr[k] - p.center.x; pos[v * 3 + 1] = lposArr[k + 1] - p.center.y; pos[v * 3 + 2] = lposArr[k + 2] - p.center.z;
-            nrm[v * 3] = nArr[k]; nrm[v * 3 + 1] = nArr[k + 1]; nrm[v * 3 + 2] = nArr[k + 2];
-          }
-          const geo = new THREE.BufferGeometry();
-          geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-          geo.setAttribute('normal', new THREE.BufferAttribute(nrm, 3));
-          const m = new THREE.Mesh(geo, leafMats[i % leafMats.length]);
-          m.position.copy(p.center);
-          m.castShadow = true;
-          m.userData.baseScale = 1;
-          canopy.add(m);
-          return { mesh: m, center: m.position, r: p.r };
-        });
-      }
-      if (built.crownWoodMesh) canopy.add(built.crownWoodMesh);
-
-      g.add(built.trunkMesh);
       g.add(canopy);
-      // Seated on the low point of the root flare so trunks never hover over a slope.
-      g.position.set(x, groundMinAround(x, z, T.trunkR * 2.2), z);
-      // CL-16: the turn is seeded from where the tree stands, like its shape, so the forest
-      // faces the same way on every load (rule 10). It was Math.random().
+      g.position.set(x, groundMinAround(x, z, 0.35 * scale), z);
+      // CL-16: the turn is seeded from where the tree stands, so the forest faces the same way every load.
       g.rotation.y = mulberry32(((Math.round(x * 131) * 83492791) ^ (Math.round(z * 71) * 2971215073)) | 0)() * Math.PI * 2;
       if (lean) g.rotation.z = lean;
       scene.add(g);
-
       const leafHealthMax = TREE_LEAF_HP[kind] || 12;
       const healthMax = 6;
-
       const tree = {
         group: g,
         canopy,
-        // Per-clump handles into the merged canopy (or, in ?canopy=legacy, wrappers
-        // round per-clump meshes). Everything downstream goes through the leafPiece*
-        // helpers and never needs to know which.
-        leafPieces,
-        canopyMeshes: canopyMesh ? [canopyMesh] : null,
-        canopyMat: canopyMesh ? treeCanopyMat : null,
+        leafPieces: [],
+        canopyMeshes: null,
+        canopyMat: null,
         canopyMatFaded: null,
-        canopyPivotY: T.pivotY,
-        woodMeshes: [built.trunkMesh, built.crownWoodMesh].filter(Boolean),
-        x,
-        z,
-        kind,
-        scale,
-        lean,
-        trunkRadius: T.trunkR,
-        canopyRadius: T.canopyRadius,
-        canopyBottom: T.canopyBottom,
-        canopyTop: T.canopyTop,
-        leafMats,
+        canopyPivotY: 1.6 * scale,
+        woodMeshes: [],
+        x, z, kind, scale, lean,
+        trunkRadius: 0.22 * scale,
+        canopyRadius: 1.7 * scale,
+        canopyBottom: 1.1 * scale,
+        canopyTop: 3.4 * scale,
+        leafMats: matsFrom(leafColors),
         canopyFade: 1,
         canopyTransparent: false,
         sway: 0,
@@ -17937,9 +18250,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         stump: false,
         stumpHp: 10,
         stumpMesh: null,
-        trunkMesh: built.trunkMesh
+        trunkMesh: null
       };
+      canopy.position.y = tree.canopyPivotY;
       trees.push(tree);
+      if (!FOREST_DEFER) fillTreeMeshes(tree, buildTreeMeshes(kind, scale, mulberry32(((Math.round(x * 97) * 73856093) ^ (Math.round(z * 89) * 19349663)) | 0)));
       return tree;
     }
 
@@ -17956,16 +18271,145 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       return rnd() < 0.45 ? 'birch' : (rnd() < 0.6 ? 'oak' : 'autumn');
     }
 
-    function scatterTrees() {
+    let UNDERSTORY_DRAWS = 0;
+    // CU-206: the woods. Dense except clearings, trails and dry glades. ?woods=0 is the scatter below.
+    function scatterTreesWoods() {
       const rnd = mulberry32(0x7e44a1);
       const placed = [];
+      const SPACE_CELL = 8, spaceGrid = new Map();
+      const outer = LAND_MAX + 26;
+      const _treesN = urlParams.get('trees');
+      const mul = (_treesN && _treesN !== 'single' && Number.isFinite(+_treesN) && +_treesN > 0) ? Math.min(8, +_treesN) : 0;
+      const target = mul ? Math.round(430 * mul) : 2500;   // CU-204: about 2,500 trees still held ~57 fps
+      let attempts = 0, dry = 0, lastN = 0;
+      const attemptCap = 32000;
+      while (placed.length < target && attempts < attemptCap && dry <= 12000) {
+        attempts++;
+        if (placed.length === lastN) dry++; else dry = 0;
+        lastN = placed.length;
+        if (dry > 12000) break;
+        const ang = rnd() * Math.PI * 2;
+        const rad = Math.sqrt(rnd()) * outer;
+        const x = Math.cos(ang) * rad;
+        const z = Math.sin(ang) * rad;
+        if (landDist(x, z) < 24) continue;                 // the HQ clearing
+        if (landDist(x, z) < 50 && rnd() > 0.25) continue; // the shadow square stays thin; past it the woods close in
+        if (waterDepthAt(x, z) > 0.02) continue;
+        const slope = terrainSlope(x, z);
+        if (slope > 0.48) continue;
+        const h = sampleHeight(x, z);
+        if (h > 46) continue;
+        if (h > 30 && rnd() < smoothBand(30, 46, h)) continue;
+        const ds = distToRiver(x, z);
+        if (ds < RIVER_WIDTH + 1.6) continue;
+        if (ds < RIVER_WIDTH + 4.5 && rnd() < 0.5) continue;
+        if (nearPOI(x, z, 14)) continue;                   // a place's clearing
+        if (POI.mast && hypot(x - POI.mast.x, z - POI.mast.z) < 20) continue;   // the mast's hilltop
+        const trail = distToPath(x, z);
+        if (trail < 2.2) continue;
+        if (trail < 3.7 && rnd() > 0.22) continue;         // a thin verge
+        const moisture = moistureAt(x, z);
+        if (rnd() > (moisture < 0.38 ? 0.22 : 0.78)) continue;   // dry ground stays a glade
+        let scale = 0.55 + rnd() * 1.3;
+        if (rnd() < 0.045) scale = 1.85 + rnd() * 0.35;
+        if (inWallBand(x, z, 1.0 + scale * 0.9)) continue;
+        const minSpace = 5.2 + scale * 0.9;                // crowns leave a gap, so the eye reaches 30-40 m
+        let okPlace = true;
+        const cx = Math.floor(x / SPACE_CELL), cz = Math.floor(z / SPACE_CELL);
+        for (let ix = cx - 1; ix <= cx + 1 && okPlace; ix++) for (let iz = cz - 1; iz <= cz + 1 && okPlace; iz++) {
+          const bucket = spaceGrid.get(ix + ',' + iz);
+          if (!bucket) continue;
+          for (const q of bucket) {
+            if (hypot(x - q.x, z - q.z) < Math.min(minSpace, (q.minSpace + minSpace) * 0.5)) { okPlace = false; break; }
+          }
+        }
+        if (!okPlace) continue;
+        const kind = treeKindFor(h, moisture, slope, rnd);
+        const lean = (rnd() - 0.5) * 0.12 + slope * 0.16;
+        const rec = { x, z, kind, scale, lean, minSpace };
+        placed.push(rec);
+        const sk = Math.floor(x / SPACE_CELL) + ',' + Math.floor(z / SPACE_CELL);
+        let bucket = spaceGrid.get(sk);
+        if (!bucket) spaceGrid.set(sk, (bucket = []));
+        bucket.push(rec);
+      }
+      for (const p of placed) makeTree(p.x, p.z, p);
+      buildUnderstory(placed, rnd);
+      return placed.length;
+    }
+    function paintUnderGeo(geo, hex) {
+      const c = new THREE.Color(hex);
+      const n = geo.attributes.position.count;
+      const col = new Float32Array(n * 3);
+      for (let i = 0; i < n; i++) { col[i * 3] = c.r; col[i * 3 + 1] = c.g; col[i * 3 + 2] = c.b; }
+      geo.setAttribute('color', new THREE.BufferAttribute(col, 3));
+      return geo;
+    }
+    function writeUnderMat(arr, i, x, y, z, yaw, s) {
+      const c = Math.cos(yaw), n = Math.sin(yaw), o = i * 16;
+      arr[o] = c * s; arr[o + 1] = 0; arr[o + 2] = n * s;
+      arr[o + 4] = 0; arr[o + 5] = s; arr[o + 6] = 0;
+      arr[o + 8] = -n * s; arr[o + 9] = 0; arr[o + 10] = c * s;
+      arr[o + 12] = x; arr[o + 13] = y; arr[o + 14] = z; arr[o + 15] = 1;
+    }
+    function buildUnderstory(treesPlaced, rnd) {
+      if (typeof TSL.instancedArray !== 'function' || !treeCanopyMat) return;
+      const items = [];
+      for (const p of treesPlaced) {
+        if (rnd() > 0.42) continue;
+        const jx = (rnd() - 0.5) * 3.2, jz = (rnd() - 0.5) * 3.2;
+        const x = p.x + jx, z = p.z + jz;
+        if (landDist(x, z) < 26 || distToPath(x, z) < 3.7 || nearPOI(x, z, 16)) continue;
+        if (waterDepthAt(x, z) > 0.02) continue;
+        const roll = rnd();
+        items.push({ kind: roll < 0.55 ? 'brush' : roll < 0.82 ? 'sap' : 'log', x, z, yaw: rnd() * Math.PI * 2, s: 0.75 + rnd() * 0.7 });
+      }
+      const geos = {
+        brush: paintUnderGeo(new THREE.ConeGeometry(0.55, 0.8, 5), 0x3f6b34),
+        sap: paintUnderGeo(new THREE.ConeGeometry(0.28, 1.7, 5), 0x2d5c30),
+        log: paintUnderGeo(new THREE.CylinderGeometry(0.11, 0.13, 1.7, 5), 0x6b4e32)
+      };
+      geos.log.rotateZ(Math.PI / 2);
+      for (const kind of ['brush', 'sap', 'log']) {
+        const list = items.filter((it) => it.kind === kind);
+        if (!list.length) continue;
+        const matrices = TSL.instancedArray(list.length, 'mat4');
+        const mat = (kind === 'log' ? treeWoodMat : treeCanopyMat).clone();
+        mat.positionNode = matrices.element(TSL.instanceIndex).mul(TSL.positionLocal).xyz;
+        const mesh = new THREE.Mesh(geos[kind], mat);
+        mesh.count = list.length; mesh.frustumCulled = false; mesh.castShadow = false; mesh.receiveShadow = false;
+        mesh.matrixAutoUpdate = false;
+        mesh.userData.treeBatch = 'understory:' + kind;
+        const arr = matrices.value.array;
+        for (let i = 0; i < list.length; i++) {
+          const it = list[i];
+          writeUnderMat(arr, i, it.x, sampleHeight(it.x, it.z) + (kind === 'log' ? 0.12 : 0), it.z, it.yaw, it.s);
+        }
+        matrices.value.needsUpdate = true;
+        if (matrices.value.version != null) matrices.value.version++;
+        scene.add(mesh);
+        UNDERSTORY_DRAWS++;
+      }
+    }
+    function scatterTrees() {
+      if (urlParams.get('woods') !== '0') return scatterTreesWoods();
+      const rnd = mulberry32(0x7e44a1);
+      const placed = [];
+      const SPACE_CELL = 8, spaceGrid = new Map();   // CU-204: neighbours only, same test as the old all-pairs walk
       // Woodland runs past the play boundary so the treeline climbs into the foothills.
       const outer = LAND_MAX + 26;
-      const target = 430;
+      const _treesN = urlParams.get('trees');
+      const TREE_MUL = (_treesN && _treesN !== 'single' && Number.isFinite(+_treesN) && +_treesN > 0) ? Math.min(8, +_treesN) : 1;   // CU-203: ?trees=N
+      const target = Math.round(430 * TREE_MUL);
       const spawnClear = 15;
-      let attempts = 0;
-      while (placed.length < target && attempts < target * 40) {
+      let attempts = 0, dry = 0, lastN = 0;
+      const attemptCap = target > 2000 ? 20000 : target * 40;
+      // Past 4x, target * 40 never finished loading. 20000 tries places what the valley will hold.
+      while (placed.length < target && attempts < attemptCap && dry <= 12000) {
         attempts++;
+        if (placed.length === lastN) dry++; else dry = 0;
+        lastN = placed.length;
+        if (dry > 12000) break;
         const ang = rnd() * Math.PI * 2;
         const rad = Math.sqrt(rnd()) * outer;
         const x = Math.cos(ang) * rad;
@@ -17992,23 +18436,33 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         // over the top — branches above a wall are fine, a trunk through it is not).
         if (inWallBand(x, z, 1.0 + scale * 0.9)) continue;
         const minSpace = 4.0 + scale * 1.35;
-        let ok = true;
-        for (const p of placed) {
-          if (hypot(x - p.x, z - p.z) < Math.min(minSpace, (p.minSpace + minSpace) * 0.5)) {
-            ok = false; break;
+        let okPlace = true;
+        const cx = Math.floor(x / SPACE_CELL), cz = Math.floor(z / SPACE_CELL);
+        for (let ix = cx - 1; ix <= cx + 1 && okPlace; ix++) for (let iz = cz - 1; iz <= cz + 1 && okPlace; iz++) {
+          const bucket = spaceGrid.get(ix + ',' + iz);
+          if (!bucket) continue;
+          for (const q of bucket) {
+            if (hypot(x - q.x, z - q.z) < Math.min(minSpace, (q.minSpace + minSpace) * 0.5)) { okPlace = false; break; }
           }
         }
-        if (!ok) continue;
+        if (!okPlace) continue;
         const kind = treeKindFor(h, moisture, slope, rnd);
         // Trees lean away from the slope they grow on, like they chased the light.
         const lean = (rnd() - 0.5) * 0.12 + slope * 0.16;
-        placed.push({ x, z, kind, scale, lean, minSpace });
+        const rec = { x, z, kind, scale, lean, minSpace };
+        placed.push(rec);
+        const sk = Math.floor(x / SPACE_CELL) + ',' + Math.floor(z / SPACE_CELL);
+        let bucket = spaceGrid.get(sk);
+        if (!bucket) spaceGrid.set(sk, (bucket = []));
+        bucket.push(rec);
       }
       for (const p of placed) makeTree(p.x, p.z, p);
       return placed.length;
     }
     await loadMark('rocks');
+    const _scatterT0 = performance.now();
     const TREE_SCATTER_COUNT = scatterTrees();
+    const TREE_SCATTER_MS = Math.round(performance.now() - _scatterT0);
 
     // Scenery stays drawn across the whole map. It used to be hidden outside the
     // purchased radius, so half the world simply vanished behind an invisible circle
@@ -18038,6 +18492,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // where they always were. Only its trunk and canopy meshes are hidden while its
     // batch copy draws it. ?trees=single turns batching off.
     const TREE_BATCH_OFF = /[?&]trees=single(&|=|$)/i.test(location.search) || CANOPY_LEGACY;
+    const FOREST_OLD = urlParams.get('forest') === 'batch';   // CU-203: the merged cells, for the comparison
+    const FOREST_COMPACT = urlParams.get('forest') !== 'all';   // CU-204: off-screen instances stay out. ?forest=all draws every one.
+    let forestOn = false, forestTemplates = 0, forestMeshN = 0, forestShownN = 0;
+    const forestPacks = [];
     const TB_CELL = 64;
     // Live inside SHADOW_NEAR + 4 (the square the shadow LOD uses), back to the batch
     // outside SHADOW_NEAR + 10. Read at run time: SHADOW_NEAR is declared further down.
@@ -18148,6 +18606,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
     function tbGoLive(m, why) {
       if (!m.inBatch) return;
+      if (m.forest) { forestGoLive(m, why); return; }
       m.inBatch = false;
       if (m.tree.group) m.tree.group.userData.walkSkip = false;   // CL-211: back in the frame's matrix walk
       m.tree._tbInBatch = false;
@@ -18174,6 +18633,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
     function tbGoBatch(m) {
       if (m.inBatch) return;
+      if (m.forest) { forestGoBatch(m); return; }
       tbWrite(m, m.cell.wood, m.woodStart, m.wood);
       tbWrite(m, m.cell.leaf, m.leafStart, m.leaf);
       tbTouch(m.cell.wood, m.woodStart, m.woodCount, true);
@@ -18189,9 +18649,231 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
 
     let treeBatchBuildMs = 0;
+    // CU-203: far trees are instances of a few grown templates, one storage buffer a template,
+    // so the draw does not build a uniform matrix per program (the r175 canopy failure).
+    // Near trees stay the live meshes. ?forest=batch keeps the merged cells.
+    const _forestM = new THREE.Matrix4(), _forestS = new THREE.Matrix4();
+    function forestAvg(geo) {
+      const c = geo && geo.attributes && geo.attributes.color && geo.attributes.color.array;
+      if (!c || !c.length) return [1, 1, 1];
+      let r = 0, g = 0, b = 0;
+      for (let i = 0; i < c.length; i += 3) { r += c[i]; g += c[i + 1]; b += c[i + 2]; }
+      const n = c.length / 3;
+      return [r / n || 1, g / n || 1, b / n || 1];
+    }
+    function forestJoin(a, b) {
+      if (!b) return a;
+      const geo = new THREE.BufferGeometry();
+      for (const name of ['position', 'normal', 'color']) {
+        const A = a.attributes[name], B = b.attributes[name];
+        if (!A || !B) continue;
+        const arr = new Float32Array(A.array.length + B.array.length);
+        arr.set(A.array, 0); arr.set(B.array, A.array.length);
+        geo.setAttribute(name, new THREE.BufferAttribute(arr, A.itemSize));
+      }
+      const ea = a.attributes.ember, eb = b.attributes.ember;
+      if (ea && eb) {
+        const arr = new Float32Array(ea.array.length + eb.array.length);
+        arr.set(ea.array, 0); arr.set(eb.array, ea.array.length);
+        geo.setAttribute('ember', new THREE.BufferAttribute(arr, 1));
+      }
+      return geo;
+    }
+    function forestWrite(m, hidden) {
+      const f = m.forest, cpu = f.pack.cpu, tint = f.pack.cpuTint, o = f.slot * 16;
+      if (hidden) {
+        for (let i = 0; i < 16; i++) cpu[o + i] = 0;
+        cpu[o + 15] = 1;
+      } else {
+        const s = m.tree.scale / f.templateScale;
+        _forestS.makeScale(s, s, s);
+        m.tree.group.updateMatrix();
+        _forestM.multiplyMatrices(m.tree.group.matrix, _forestS);
+        const e = _forestM.elements;
+        for (let i = 0; i < 16; i++) cpu[o + i] = e[i];
+      }
+      const k = f.slot * 3;
+      tint[k] = f.tint[0]; tint[k + 1] = f.tint[1]; tint[k + 2] = f.tint[2];
+      f.shown = !hidden;
+      f.pack.dirty = true;
+    }
+    // Copies the instances that should draw. Standing still does not upload again:
+    // a fresh buffer every frame was most of the render cost past 1x.
+    let _forestFrustum = null, _forestProj = null, _forestSphere = null, forestCamSig = null;
+    function forestFlush() {
+      let dirty = false;
+      for (const pack of forestPacks) if (pack.dirty) { dirty = true; break; }
+      const camSig = (typeof camera !== 'undefined' && camera)
+        ? ((camera.position.x | 0) ^ ((camera.position.z | 0) << 8) ^ ((camera.rotation.y * 16 | 0) << 16))
+        : 0;
+      if (forestCamSig === camSig && !dirty) return;
+      forestCamSig = camSig;
+      let view = null;
+      if (FOREST_COMPACT && typeof camera !== 'undefined' && camera && typeof THREE.Frustum === 'function') {
+        if (!_forestFrustum) {
+          _forestFrustum = new THREE.Frustum();
+          _forestProj = new THREE.Matrix4();
+          _forestSphere = new THREE.Sphere();
+        }
+        camera.updateMatrixWorld();
+        _forestProj.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse);
+        _forestFrustum.setFromProjectionMatrix(_forestProj);
+        view = _forestFrustum;
+      }
+      let shown = 0;
+      for (const pack of forestPacks) {
+        const gpu = pack.matNode.value.array, gt = pack.tintNode.value.array;
+        let n = 0;
+        for (const m of pack.members) {
+          if (!m.inBatch || !m.forest.shown) continue;
+          if (view) {
+            const t = m.tree;
+            _forestSphere.center.set(t.x, (t.group.position.y || 0) + 8, t.z);
+            _forestSphere.radius = (t.canopyRadius || 4) + 12;
+            if (!view.intersectsSphere(_forestSphere)) continue;
+          }
+          const src = m.forest.slot * 16, dst = n * 16;
+          for (let i = 0; i < 16; i++) gpu[dst + i] = pack.cpu[src + i];
+          const ts = m.forest.slot * 3, td = n * 3;
+          gt[td] = pack.cpuTint[ts]; gt[td + 1] = pack.cpuTint[ts + 1]; gt[td + 2] = pack.cpuTint[ts + 2];
+          n++;
+        }
+        pack.wood.count = n; pack.leaf.count = n; pack.dirty = false; shown += n;
+        const buf = pack.matNode.value, tintBuf = pack.tintNode.value;
+        buf.needsUpdate = true; tintBuf.needsUpdate = true;
+        if (buf.version != null) buf.version++;
+        if (tintBuf.version != null) tintBuf.version++;
+      }
+      forestShownN = shown;
+    }
+    function forestGoLive(m, why) {
+      ensureTreeGrown(m.tree);
+      if (!m.wood || !m.wood.length) {
+        const parts = tbParts(m.tree);
+        m.wood = parts.wood; m.leaf = parts.leaf;
+      }
+      m.inBatch = false;
+      if (m.tree.group) m.tree.group.userData.walkSkip = false;
+      m.tree._tbInBatch = false;
+      if (why === 'changed') { m.dirty = true; m.tree._tbRestored = false; }
+      forestWrite(m, true);
+      tbFreeze(m.tree, false);
+      tbShowOwn(m, true);
+    }
+    function forestGoBatch(m) {
+      forestWrite(m, false);
+      tbShowOwn(m, false);
+      m.inBatch = true;
+      m.tree._tbInBatch = true;
+      m.dirty = false;
+      m.snap = tbSnapshot(m.tree);
+      tbFreeze(m.tree, true);
+      if (m.tree.group) m.tree.group.userData.walkSkip = true;
+    }
+    function forestMaterial(base, matrices, tints) {
+      const mat = base.clone();
+      const M = matrices.element(TSL.instanceIndex);
+      mat.positionNode = M.mul(TSL.positionLocal).xyz;
+      if (typeof TSL.vertexColor === 'function') mat.colorNode = TSL.vertexColor().mul(tints.element(TSL.instanceIndex));
+      return mat;
+    }
+    function buildForest() {
+      const t0 = performance.now();
+      const kinds = ['pine', 'oak', 'autumn', 'birch'];
+      const scales = [0.6, 0.8, 1.0, 1.2, 1.4, 1.6, 1.85, 2.15];
+      const templates = [];
+      kinds.forEach((kind, ki) => scales.forEach((scale, si) => {
+        const built = buildTreeMeshes(kind, scale, mulberry32((ki + 1) * 10007 + (si + 1) * 97));
+        const wood = forestJoin(built.trunkMesh.geometry, built.crownWoodMesh && built.crownWoodMesh.geometry);
+        const T = built.T;
+        templates.push({
+          kind, scale, wood, leaf: built.leafGeo, leafAvg: forestAvg(built.leafGeo),
+          trunkR: T.trunkR, canopyRadius: T.canopyRadius, canopyBottom: T.canopyBottom, canopyTop: T.canopyTop, pivotY: T.pivotY
+        });
+      }));
+      // One pack per template for the whole valley: 4 kinds, 8 grows, wood and leaf. At most 64 draws.
+      const groups = new Map();
+      for (const t of trees) {
+        if (!t.group || !t.group.parent || !t.group.visible || !t.canopy) continue;
+        if (!t.alive || t.falling || t.stump) continue;
+        let best = null, bd = Infinity;
+        for (const tpl of templates) if (tpl.kind === t.kind) {
+          const d = Math.abs(tpl.scale - t.scale);
+          if (d < bd) { bd = d; best = tpl; }
+        }
+        if (!best) continue;
+        const s = t.scale / best.scale;
+        t.trunkRadius = best.trunkR * s;
+        t.canopyRadius = best.canopyRadius * s;
+        t.canopyBottom = best.canopyBottom * s;
+        t.canopyTop = best.canopyTop * s;
+        t.canopyPivotY = best.pivotY * s;
+        t.canopy.position.y = t.canopyPivotY;
+        if (!t.trunkMesh) t.group.position.y = groundMinAround(t.x, t.z, t.trunkRadius * 2.2);
+        let pack = groups.get(best);
+        if (!pack) groups.set(best, (pack = { template: best, trees: [] }));
+        pack.trees.push(t);
+      }
+      forestPacks.length = 0;
+      for (const pack of groups.values()) {
+        const tpl = pack.template, list = pack.trees, n = list.length;
+        forestTemplates++;
+        const matrices = TSL.instancedArray(n, 'mat4');
+        const tints = TSL.instancedArray(n, 'vec3');
+        const holder = {
+          template: tpl, members: [], matNode: matrices, tintNode: tints,
+          cpu: new Float32Array(n * 16), cpuTint: new Float32Array(n * 3), wood: null, leaf: null
+        };
+        const wood = new THREE.Mesh(tpl.wood, forestMaterial(treeWoodMat, matrices, tints));
+        const leaf = new THREE.Mesh(tpl.leaf, forestMaterial(treeCanopyMat, matrices, tints));
+        for (const mesh of [wood, leaf]) {
+          mesh.count = n; mesh.castShadow = false; mesh.receiveShadow = mesh === wood;
+          mesh.frustumCulled = false; mesh.matrixAutoUpdate = false;
+          mesh.userData.treeBatch = 'forest:' + tpl.kind + ':' + tpl.scale;
+          scene.add(mesh); forestMeshN++;
+        }
+        holder.wood = wood; holder.leaf = leaf;
+        forestPacks.push(holder);
+        list.forEach((tree, i) => {
+          const tintRnd = mulberry32(((Math.round(tree.x * 17) * 1597334677) ^ (Math.round(tree.z * 13) * 3812015801)) | 0);
+          const k = 0.86 + tintRnd() * 0.28;
+          const parts = tree.trunkMesh ? tbParts(tree) : { wood: [], leaf: [] };
+          const m = {
+            tree, forest: { slot: i, pack: holder, templateScale: tpl.scale, tint: [k, k, k], shown: true },
+            cell: null, wood: parts.wood, leaf: parts.leaf,
+            woodStart: 0, woodCount: 0, leafStart: 0, leafCount: 0,
+            inBatch: true, dirty: false, snap: null
+          };
+          tree._forestMember = m;
+          m.snap = tbSnapshot(tree);
+          forestWrite(m, false);
+          if (tree.trunkMesh) tbShowOwn(m, false);
+          tbFreeze(tree, true);
+          if (tree.group) tree.group.userData.walkSkip = true;
+          tree._tbInBatch = true;
+          holder.members.push(m);
+          treeBatchMembers.push(m);
+        });
+      }
+      forestOn = true;
+      treeBatchBuildMs = performance.now() - t0;
+      forestFlush();
+      if (typeof player !== 'undefined' && player) for (let i = 0; i < 40; i++) updateTreeBatches();
+    }
+
     function buildTreeBatches() {
       treeBatchesBuilt = true;
       if (TREE_BATCH_OFF) return;
+      if (!FOREST_OLD && typeof TSL.instancedArray === 'function') {
+        try { buildForest(); return; } catch (err) {
+          console.warn('Grave Shift: instanced forest failed, using the cells.', err);
+          window.__forestErr = String(err && (err.stack || err.message) || err);
+          for (const pack of forestPacks) { if (pack.wood) scene.remove(pack.wood); if (pack.leaf) scene.remove(pack.leaf); }
+          forestPacks.length = 0; forestOn = false; forestMeshN = 0; forestTemplates = 0; treeBatchMembers.length = 0;
+          if (trees.length > 2200) return;
+          for (const t of trees) { t._tbInBatch = false; t._forestMember = null; if (t.group) t.group.userData.walkSkip = false; ensureTreeGrown(t); }
+        }
+      }
       const t0 = performance.now();
       // Plan: which trees, which cell, which ranges.
       for (const t of trees) {
@@ -18294,12 +18976,13 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
               !t.canopyTransparent && !(t.burnT > 0) && !(t.smoulder > 0)) { moves--; tbGoBatch(m); }
         }
       }
+      if (forestOn) forestFlush();
     }
     function treeBatchStats() {
       let live = 0, batched = 0, cells = 0, meshes = 0, dirty = 0;
       for (const m of treeBatchMembers) { if (m.inBatch) batched++; else live++; if (m.dirty) dirty++; }
       for (const c of treeBatchCells.values()) { cells++; if (c.wood.mesh) meshes++; if (c.leaf.mesh) meshes++; }
-      return { off: TREE_BATCH_OFF, built: treeBatchesBuilt, buildMs: Math.round(treeBatchBuildMs), frameMsAvg: +(treeBatchTiming.ms / Math.max(1, treeBatchTiming.calls)).toFixed(3), frameMsMax: +treeBatchTiming.maxMs.toFixed(2), calls: treeBatchTiming.calls, trees: trees.length, members: treeBatchMembers.length, batched, live, dirty, cells, meshes };
+      return { off: TREE_BATCH_OFF, mode: FOREST_OLD || !forestOn ? 'cells' : 'forest', built: treeBatchesBuilt, buildMs: Math.round(treeBatchBuildMs), frameMsAvg: +(treeBatchTiming.ms / Math.max(1, treeBatchTiming.calls)).toFixed(3), frameMsMax: +treeBatchTiming.maxMs.toFixed(2), calls: treeBatchTiming.calls, trees: trees.length, members: treeBatchMembers.length, batched, live, dirty, cells, meshes: meshes + forestMeshN, templates: forestTemplates, instances: forestShownN, scatterMs: TREE_SCATTER_MS, compact: FOREST_COMPACT, understory: UNDERSTORY_DRAWS };
     }
 
     // --- Weapons (shared mats) ---
@@ -18448,10 +19131,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // flash hider, nut or brake and nothing else. heavyBack keeps the AK's heavy barrel look (gunHeavyLook) where it was.
     const SUPPRESSOR = {
       //        can radius, length, how far back over the muzzle it starts, look
-      m4:      { r: 0.025, len: 0.17, back: 0.065, look: 'rifle' },                  // over the flash hider, as CL-95 had it
-      ak:      { r: 0.031, len: 0.18, back: 0.036, heavyBack: 0.05, look: 'ak' },    // starts in front of the front sight post (it swallowed it)
-      pistol:  { r: 0.0275, len: 0.15, back: 0.008, look: 'pistol' },               // GB-154: 25% fatter (55 mm across, was 44); back face on the crown, just ahead of the longer slide
-      uzi:     { r: 0.027, len: 0.16, back: 0.02, look: 'pistol' },                  // was 1 mm wider than the barrel nut
+      m4:      { r: 0.0276, len: 0.1907, back: 0.065, look: 'rifle' },              // GB-260: 152 x 44 mm visual (Velos LBP 5.56); over the flash hider, as CL-95 had it
+      ak:      { r: 0.0271, len: 0.2009, back: 0.036, heavyBack: 0.05, look: 'ak' },   // GB-260: 163 x 44 mm visual (Velos LBP 7.62); starts in front of the front sight post
+      pistol:  { r: 0.0275, len: 0.247, back: 0.008, look: 'pistol' },               // GB-260: 162 mm visual (Omega 45K); GB-154's fatter can, back face on the crown
+      uzi:     { r: 0.027, len: 0.1997, back: 0.02, look: 'pistol' },                // GB-260: 115 mm visual (Omega 9K); 1 mm wider than the barrel nut
       sniper:  { r: 0.04, len: 0.31, back: 0.124, look: 'sniper' },                  // over the whole brake (its corners stuck out through the can)
       shotgun: { r: 0.06, len: 0.36, back: 0.045, look: 'big',                       // Jerry: big and round, "No Country for Old Men"
                  clamp: { r: 0.044, z: -0.033, len: 0.025 } },                      // the clamp sits behind the bead, not through it
@@ -19097,7 +19780,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         for (const c of grp.children) {
           if (!c.isMesh || keep.has(c) || c.children.length || !c.geometry || !c.geometry.attributes.position || Array.isArray(c.material)) continue;
           let byGear = byMat.get(c.material); if (!byGear) { byGear = new Map(); byMat.set(c.material, byGear); }
-          const gk = gearOf.get(c) || '';
+          // GP-20002: keep the vest radio separate so the eye can omit it without losing the carrier.
+          const gk = (gearOf.get(c) || '') + (c.userData.vmEyeRadio ? '|radio' : '');
           let list = byGear.get(gk); if (!list) { list = []; byGear.set(gk, list); }
           list.push(c);
         }
@@ -19136,9 +19820,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           geo.computeBoundingSphere();
           const merged = new THREE.Mesh(geo, mat);
           merged.castShadow = true; merged.receiveShadow = true;
+          if (list[0].userData.vmEyeRadio) merged.userData.vmEyeRadio = true;
           for (const c of list) grp.remove(c);
           grp.add(merged);
-          if (gk) { gearParts[gk] = gearParts[gk].filter((x) => list.indexOf(x) < 0); gearParts[gk].push(merged); }
+          const gearKey = gearOf.get(list[0]);
+          if (gearKey) { gearParts[gearKey] = gearParts[gearKey].filter((x) => list.indexOf(x) < 0); gearParts[gearKey].push(merged); }
         }
       }
     }
@@ -19682,8 +20368,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       }
       // CL-210: about 100 meshes down to about 25 (studio/marine-skin.js). Not the guns' mounts: what hangs there comes
       // and goes. ?rigskin=0 draws him the old way, for measuring.
-      // CL-281: the arms in skins of their own, so first person's view gun can leave them out of the eye's pass.
-      if (skin && !legacyBody && RIG_SKIN) bakeRigSkin(THREE, TSL, g, { skip: [weaponMount, gripR, gripL, hipGrip], split: new URLSearchParams(location.search).get('vm') !== '0' ? [[armLG, armRG]] : [] });
+      // CL-281 / GP-20002: split the arms and radio from the carrier skin for the first-person eye.
+      if (skin && !legacyBody && RIG_SKIN) bakeRigSkin(THREE, TSL, g, { skip: [weaponMount, gripR, gripL, hipGrip], split: new URLSearchParams(location.search).get('vm') !== '0' ? [[armLG, armRG], gearParts.vest.filter((o) => o.userData.vmEyeRadio)] : [] });
       return g;
     }
     const RIG_SKIN = new URLSearchParams(location.search).get('rigskin') !== '0';
@@ -25829,6 +26515,17 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       };
       mountRow(kinds.filter((k) => slotType(k) === 'primary'), false);
       mountRow(kinds.filter((k) => slotType(k) !== 'primary'), true);
+      // CU-199 (AG-170): the mounted guns are one draw per material until the rack changes. This rebuild is the
+      // unfold (a gun picked off comes off the live copies), then the plain parts fold together again.
+      if (urlParams.get('fold') !== '0') {
+        const doomed = [];
+        rack.traverse((o) => { if (o.isMesh && o.geometry && o.geometry !== RACK_PEG_GEO) doomed.push(o.geometry); });
+        try { foldStatic(THREE, TSL, rack); }
+        catch (e) { console.warn('Grave Shift: armory rack fold skipped.', e); doomed.length = 0; }
+        const keep = new Set();
+        rack.traverse((o) => { if (o.isMesh && o.geometry) keep.add(o.geometry); });
+        for (const geo of doomed) if (!keep.has(geo)) geo.dispose();
+      }
       mirrorTrainingRack();   // CL-115
     }
     function updateArmoryRack(dt) {
@@ -28836,7 +29533,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       return parts?.jackAt || parts?.jackApproach || prop?.approach || null;
     }
     function convoyJackInReach() {
-      if (!gameStarted || gameOver || won || training.active || objectiveModalOpen() || storyClosedSite(CONVOY_SITE) || ['ready', 'warning', 'open'].includes(convoyMission.read().phase)) return false;
+      if (!gameStarted || gameOver || won || training.active || objectiveModalOpen() || storyClosedSite(CONVOY_SITE) || chainShutSite(CONVOY_SITE) || ['ready', 'warning', 'open'].includes(convoyMission.read().phase)) return false;
       const a = convoyJackAt(), p = localPlayer.position;
       return !!a && hypot(p.x - a.x, p.z - a.z) <= 1.7 && Math.abs(p.y - a.y) < 1.5;
     }
@@ -28935,7 +29632,17 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         }
         cands.push({ tree: t, d, bank });
       }
-      let pick = pickHikersTree(cands);
+      // CU-205 moved this camp beside shorter trees. A five-metre bag cannot hang from a bough above its crown:
+      // prefer a nearby tree whose actual top clears the tie and the hanging rope, while preserving the river rule.
+      const supported = force ? cands : cands.filter(({ tree: t, bank }) => {
+        const target = bank ? riverPointAt(riverProject(t.x, t.z).s) : c;
+        const o = outTo(t, target.x, target.z);
+        const reach = Math.max((t.trunkRadius || 0.3) + 1.6, (t.canopyRadius || 0) * 0.9 + 0.45);
+        const x = t.x + o.x * reach, z = t.z + o.z * reach;
+        const branchY = sampleHeight(x, z) + HIKERS.ropeH + 0.9;
+        return (t.group?.position.y ?? sampleHeight(t.x, t.z)) + (t.canopyTop || 0) >= branchY + 0.85;
+      });
+      let pick = pickHikersTree(supported.length ? supported : cands);
       if (force && !pick?.river) { const bk = cands.filter((x) => x.bank).sort((x, y) => x.d - y.d)[0]; if (bk) pick = { tree: bk.tree, river: true }; }
       if (!pick) return null;
       const tree = pick.tree;
@@ -28943,8 +29650,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       let o;
       if (river) { const rp = riverProject(tree.x, tree.z), q = riverPointAt(rp.s); o = outTo(tree, q.x, q.z); } else o = outTo(tree, c.x, c.z);
       const reach = Math.max(tr + 1.6, (tree.canopyRadius || 0) * 0.9 + 0.45);   // out past the leaves: a round stops in the canopy (updateProjectiles), so the rope hangs clear of it
-      const branch = { x: tree.x + o.x * reach, y: gy + HIKERS.ropeH + 0.9, z: tree.z + o.z * reach };
-      const hang = { x: branch.x, y: gy + HIKERS.ropeH, z: branch.z };
+      const hx = tree.x + o.x * reach, hz = tree.z + o.z * reach;
+      const hang = { x: hx, y: sampleHeight(hx, hz) + HIKERS.ropeH, z: hz };
+      const branch = { x: hx, y: hang.y + 0.9, z: hz };
       const tie = { x: tree.x + o.x * (tr + 0.05), y: gy + 1.3, z: tree.z + o.z * (tr + 0.05) };
       const wet = river ? waterAlong(branch.x, branch.z, o) : null;
       const land = wet || { x: hang.x + o.x * 0.4, z: hang.z + o.z * 0.4 };
@@ -28954,8 +29662,16 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const group = new THREE.Group(); group.name = 'hikers-kit';
       const ropeMat = ropeMaterial(THREE);
       const seg = (a, b, r, mat) => { const m = new THREE.Mesh(new THREE.CylinderGeometry(r, r, 1, 6), mat); hikersPlace(m, a, b); group.add(m); return m; };
-      const bough = makeBough({ THREE, len: reach + 0.2, r0: Math.min(0.17, tr * 0.45 + 0.05) }); mergeStaticKeepUV(bough);
+      const bough = makeBough({ THREE, len: reach + 0.2, r0: Math.min(0.17, tr * 0.45 + 0.05) });
+      const barkMat = bough.children.find((m) => m.isMesh)?.material;
+      mergeStaticKeepUV(bough);
       bough.position.set(tree.x + o.x * tr * 0.5, branch.y - 0.02, tree.z + o.z * tr * 0.5); bough.rotation.y = Math.atan2(-o.z, o.x); group.add(bough);
+      // The manufactured bough needs a load path into this tree's actual trunk, including when its crown starts low.
+      const limb = new THREE.Mesh(new THREE.CylinderGeometry(Math.min(0.12, tr * 0.25), Math.min(0.24, tr * 0.4), 1, 7), barkMat);
+      hikersPlace(limb,
+        { x: tree.x, y: (tree.group?.position.y ?? gy) + Math.min(2.8, (tree.canopyBottom || 3) * 0.75), z: tree.z },
+        { x: bough.position.x, y: bough.position.y - 0.25, z: bough.position.z });
+      group.add(limb);
       const top = { x: branch.x, y: branch.y + 0.08, z: branch.z };
       const ropeA = seg(tie, top, 0.016, ropeMat), ropeB = seg(top, { x: hang.x, y: hang.y + 0.3, z: hang.z }, 0.016, ropeMat);
       const bag = makeHikersBag({ THREE }); bag.name = 'hikers-kit-bag';
@@ -28981,7 +29697,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     function hikersPlace(m, a, b) { const v = new THREE.Vector3(b.x - a.x, b.y - a.y, b.z - a.z), l = v.length() || 1e-3; m.scale.set(1, l, 1); m.position.set((a.x + b.x) / 2, (a.y + b.y) / 2, (a.z + b.z) / 2); m.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), v.normalize()); }
     function hikersTeardown() { if (hikers?.group) { scene.remove(hikers.group); hikers.group.traverse((m) => { m.geometry?.dispose?.(); }); } hikers = null; }
     function hikersCut(t = 0.5) {
-      if (!hikers || storyClosedSite(HIKERS_SITE) || hikersKit.read().phase !== 'hanging') return;
+      if (!hikers || storyClosedSite(HIKERS_SITE) || chainShutSite(HIKERS_SITE) || hikersKit.read().phase !== 'hanging') return;
       for (const e of hikersKit.cut()) if (e.kind === 'cut') {
         // GB-199: the rope parts where the round crossed it (t along it from the bough): the upper length stays over
         // the bough with a frayed end; the lower length goes down with the bag, knotted to its loop.
@@ -29003,7 +29719,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // bag hanging in its tree. Short floating words (docs/specs/day-missions.md): at the pouch, where the kit is; near the
     // hanging bag, what to do. ChatGPT's keys; the fallbacks until they land.
     function hikersHintText() {
-      if (!hikers || !hikersKit || storyClosedSite(HIKERS_SITE) || hikersSiteDone() || objectiveModalOpen()) return null;
+      if (!hikers || !hikersKit || storyClosedSite(HIKERS_SITE) || chainShutSite(HIKERS_SITE) || hikersSiteDone() || objectiveModalOpen()) return null;
       const k = hikersKit.read(), p = localPlayer.position, h = hikers.hang, a = objectiveProps?.props?.[HIKERS_SITE]?.approach;
       if (k.phase === 'hanging' && Math.abs(p.y - h.y) < 9 && hypot(p.x - h.x, p.z - h.z) <= 10) return sayText('hikers.shootRope', {}, 'Shoot the rope to drop the kit');
       if (a && Math.abs(p.y - a.y) < 1.25 && hypot(p.x - a.x, p.z - a.z) <= 1.6)
@@ -29011,7 +29727,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           : sayText(hikers.river ? 'hikers.pouchRiver' : 'hikers.pouchTree', {}, hikers.river ? 'Their kit hangs in a tree by the river: shoot the rope' : 'Their kit hangs in a tree: shoot the rope');
       return null;
     }
-    function hikersGrabbable() { return !!hikers && !storyClosedSite(HIKERS_SITE) && !!hikersKit?.read().loose && !hikersSiteDone() && !objectiveModalOpen() && hikersBagDist() <= HIKERS.grabR; }
+    function hikersGrabbable() { return !!hikers && !storyClosedSite(HIKERS_SITE) && !chainShutSite(HIKERS_SITE) && !!hikersKit?.read().loose && !hikersSiteDone() && !objectiveModalOpen() && hikersBagDist() <= HIKERS.grabR; }
     function updateHikersKit(dt) {
       if (!gameStarted || gameOver || won || paused || training.active) return;
       hikersRetryT -= dt;
@@ -29087,6 +29803,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const drip = makeDripDecal({ THREE });
       scene.add(group);
       fuelProps = { prop, pump, gen, group, pumpMesh, genMesh, can, dripMat: drip.mat, dripGeo: drip.geo, canPos: { x: pump.x + 0.75, y: pump.y + 0.23, z: pump.z + 0.2 } };
+      chainPlaceGenerator();   // CU-200: the shed's padlock, and Price's key by this generator
       return fuelProps;
     }
     function fuelTeardown() {
@@ -29135,7 +29852,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (!gameStarted || gameOver || won || paused || training.active) return;
       const F = fuelEnsure(); if (!F) return;
       for (let i = fuelDrips.length - 1; i >= 0; i--) { const d = fuelDrips[i]; d.t -= dt; if (d.t <= 0) { scene.remove(d.mesh); fuelDrips.splice(i, 1); } }
-      const st = fuelRun.read(), P = localPlayer.position, leadClosed = storyClosedSite(FUEL_SITE);
+      const st = fuelRun.read(), P = localPlayer.position;
+      const chainActed = objEPressed && chainUseE();   // CU-200: E at the padlock or at Price's key
+      const leadClosed = storyClosedSite(FUEL_SITE) || chainShutSite(FUEL_SITE) || chainActed;
       if (fuelPendingCause) { const c0 = fuelPendingCause; fuelPendingCause = null; if (!leadClosed) fuelEvents(fuelRun.ignite(c0)); }
       if (!leadClosed && !st.done && fuelRun.read().phase === st.phase) {
         if (st.phase === 'at-pump') fuelEvents(fuelRun.holdFill(dt, objEDown, fuelAtPump()));
@@ -29167,6 +29886,12 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
     function fuelPromptText() {
       if (!fuelProps || !gameStarted || gameOver || won || storyClosedSite(FUEL_SITE)) return null;
+      if (chainShutSite(FUEL_SITE)) {
+        const g = chainWorld.gates.get('depot-shed');
+        const atGate = g && hypot(localPlayer.position.x - g.x, localPlayer.position.z - g.z) <= 2.2;
+        if (atGate || fuelAtPump()) return chainGates.canOpen('depot-shed') ? chainSay('chain.generator.look', 'A chain gate closes the path to the depot pump.') : chainSay('chain.generator.locked', 'The depot gate is locked.');
+        return null;
+      }
       const st = fuelRun.read(); if (st.done) return null;
       if (st.phase === 'at-pump' && fuelAtPump()) return st.fill > 0 ? dwText('fuel.filling') : dwText('fuel.fill');
       if (st.phase === 'carried' && fuelAtGen()) return dwText('fuel.pour');
@@ -29480,6 +30205,12 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     function radioPromptText() {
       const prop = objectiveProps?.props?.[RADIO_SITE];
       if (!prop || !gameStarted || gameOver || won || storyClosedSite(RADIO_SITE)) return null;
+      if (chainShutSite(RADIO_SITE)) {
+        const g = chainWorld.gates.get('mast-yard');
+        const atGate = g && chainNear(g.x, g.z, 2.2);
+        if (atGate) return chainGates.canOpen('mast-yard') ? chainSay('chain.relay.look', 'A chain closes the mast yard.') : chainSay('chain.relay.locked', 'The cabinet needs Sato\'s gate key. Check the HQ radio drawer.');
+        if (nearPromptSpot(prop) || nearPromptSpot(prop.pickup)) return chainSay('chain.relay.locked', 'The cabinet needs Sato\'s gate key. Check the HQ radio drawer.');
+      }
       if (!nearPromptSpot(prop) && !nearPromptSpot(prop.pickup) && !nearPromptSpot(radioLocker) && !nearPromptSpot(satoNote)) return null;
       const st = radioSiteState(), p = localPlayer.position;
       const key = { interact: 'E' };
@@ -29953,6 +30684,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (!gameStarted || gameOver || won || paused || objectiveModalOpen() || training.active) return;
       const prop = objectiveProps?.props?.[RADIO_SITE];
       if (!prop || storyClosedSite(RADIO_SITE)) return;
+      if (chainShutSite(RADIO_SITE) && !(satoNote && relayNear(satoNote, 1.6))) return;   // CU-202
       const st = radioSiteState(), stage = relayStage(), down = st === 'available' || st === 'active' || st === 'undiscovered';
       let mode = null;
       if (satoNote && relayNear(satoNote, 1.6)) mode = 'note';
@@ -30073,6 +30805,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
             truck.biteT -= dt;
             if (truck.biteT <= 0) { truck.biteT = 0.32; if (AudioSys.boltCutterBite) AudioSys.boltCutterBite(); }
           } else if (r === 'cut') {
+            if (chainGatesOn && chainGates.canOpen('toolbox-chain')) chainGates.open('toolbox-chain');   // CU-200
             truck.hold = false;
             if (truck.chain) truck.chain.visible = false;
             if (AudioSys.chainSnap) AudioSys.chainSnap();
@@ -30123,6 +30856,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (!truckMission.state.cutters && truck.cutters && relayNear(truck.cuttersSpot, 1.4)) {
         e.preventDefault(); e.stopImmediatePropagation();
         if (truckMission.takeCutters()) {
+          if (chainGatesOn && chainGates.keyState('bolt-cutters') === 'ready') chainGates.take('bolt-cutters');   // CU-200
           truck.cutters.visible = false;
           if (AudioSys.boltCuttersTake) AudioSys.boltCuttersTake();
           showBanner(sayText('truck.cuttersTitle', {}, 'BOLT CUTTERS'), '', 1.6, '#f2d35a');
@@ -30203,6 +30937,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       logMat.userData = { readablePaper: true, baseHex: 0xdad4c6 };
       const log = new THREE.Mesh(new THREE.PlaneGeometry(0.3, 0.3), logMat);
       log.name = 'ranger-search-log';
+      log.userData.noCull = true;   // CU-205: the camp is far; the log stays when the view is still at the HQ
       log.position.set(lx, sampleHeight(bx, bz) + 1.03, lz); log.rotation.y = yaw;
       scene.add(log);
       registerReadablePaper(log);
@@ -30251,6 +30986,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     function rangerOpen(mode, clue = null) {
       const P = rangerPanel();
       if (mode === 'look') {
+        if (clue && clue.source === 'board') chainReadSearchLog();   // CU-200: the combination is learned by reading the log
         P.open('look', { key: clue.source + ':' + rangerCache.digitOf(clue.source), html: rangerLook(clue.source), paper: !!clue.paper, help: sayText('ranger.lookHelp', {}, 'E step back') });
         if (clue.paper && AudioSys.paperRustle) AudioSys.paperRustle();
       } else {
@@ -30281,6 +31017,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     function rangerPromptText() {
       const prop = rangerSiteProp();
       if (!prop || !ranger.built || ranger.off || ranger.mode || !gameStarted || gameOver || won || storyClosedSite(RANGER_SITE) || rangerCache.unlocked()) return null;
+      if (chainShutSite(RANGER_SITE)) {
+        const g = chainWorld.gates.get('ranger-gate');
+        if (g && chainNear(g.x, g.z, 2.2)) return chainGates.canOpen('ranger-gate') ? chainSay('chain.search.look', 'A locked gate stands across the ranger camp trail.') : chainSay('chain.search.locked', 'The rangers\' gate is locked. Clarke put its key in her toolbox.');
+        if (relayNear(prop)) return chainSay('chain.search.locked', 'The rangers\' gate is locked. Clarke put its key in her toolbox.');
+      }
       const key = { interact: 'E' };
       if (relayNear(prop)) return sayText('ranger.lockbox', key, 'E — Lockbox');
       if (rangerClueNear()) return sayText('ranger.look', key, 'E — Look');
@@ -30317,7 +31058,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (e.code !== 'KeyE' || e.repeat || relay.mode || ranger.mode) return;
       if (!gameStarted || gameOver || won || paused || objectiveModalOpen() || training.active) return;
       const prop = rangerSiteProp();
-      if (!prop || !ranger.built || ranger.off || storyClosedSite(RANGER_SITE) || rangerCache.unlocked()) return;
+      if (!prop || !ranger.built || ranger.off || storyClosedSite(RANGER_SITE) || rangerCache.unlocked() || chainShutSite(RANGER_SITE)) return;
       let mode = null, clue = null;
       if (relayNear(prop)) mode = 'keypad';
       else if ((clue = rangerClueNear())) mode = 'look';
@@ -30646,6 +31387,18 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     function trapperPromptText() {
       const prop = trapperSiteProp();
       if (!prop || !trapper.built || trapper.off || !gameStarted || gameOver || won || storyClosedSite(TRAPPER_SITE)) return null;
+      if (chainShutSite(TRAPPER_SITE)) {
+        const g = chainWorld.gates.get('trapper-fence');
+        if (g && chainNear(g.x, g.z, 2.2)) {
+          return chainGates.canOpen('trapper-fence')
+            ? chainSay('chain.oldman.look', 'A combination lock holds the trapper\'s yard gate.')
+            : chainSay('chain.oldman.locked', 'The trapper\'s gate needs the combination on the search log\'s last line.');
+        }
+        if (relayNear(prop)) {
+          return chainSay('chain.oldman.locked', 'The trapper\'s gate needs the combination on the search log\'s last line.');
+        }
+        return null;
+      }
       if (trapperPath.held()) {
         return sayText('trapper.snapped', { seconds: Math.max(1, Math.ceil(trapperPath.state.holdT)) }, 'Bear trap! (' + Math.max(1, Math.ceil(trapperPath.state.holdT)) + 's)');
       }
@@ -30656,7 +31409,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
     function trapperStepAt(wx, wz, dt, opts = {}) {
       const prop = trapperSiteProp();
-      if (!prop || !trapper.built || trapper.off || storyClosedSite(TRAPPER_SITE)) return null;
+      if (!prop || !trapper.built || trapper.off || storyClosedSite(TRAPPER_SITE) || chainShutSite(TRAPPER_SITE)) return null;
       const loc = trapper.toLocal(wx, wz);
       const res = trapperPath.step(loc.x, loc.z, dt, opts);
       if (res.kind === 'snap') {
@@ -30709,8 +31462,22 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       }
       if (gameOver || won) { trapper.holdPos = null; return; }
       if (!gameStarted || paused || training.active) return;
+      if (chainGatesOn && objEPressed) { const g = chainWorld.gates.get('trapper-fence'); if (g && chainNear(g.x, g.z, 2.2)) chainUseE(); }
       const pPos = localPlayer.position;
       const py = pPos.y;
+      // CU-199: each horseshoe is a few centimetres across, nailed on a post of a yard about 6 m long. Past 28 m it
+      // is not worth a draw; the stones stay. Four metres of overlap so they don't flicker. Inside the yard every
+      // shoe is closer than that, so the safe side still reads while he walks the path.
+      if (trapper.toWorld && trapper.horseshoes) {
+        for (let i = 0; i < trapper.horseshoes.length; i++) {
+          const hs = trapper.horseshoes[i];
+          if (!hs) continue;
+          const w = trapper.toWorld(hs.position.x, hs.position.z);
+          const far = hypot(w.x - pPos.x, w.z - pPos.z);
+          const show = hs.visible ? far < 32 : far < 28;
+          if (hs.visible !== show) hs.visible = show;
+        }
+      }
       const inCellar = !!(trapper.inCellar && trapper.inCellar(pPos.x, py, pPos.z));
       if (trapper.setCutaway) {
         trapper.setCutaway(inCellar && !viewFirst);
@@ -30817,6 +31584,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
     historyProps.buildCheckpoint?.(); delete historyProps.buildCheckpoint; // GP-121: route after all static obstacles exist.
     buildBirds();
+    const skylinePulls = urlParams.get('skyline') === '0' ? null : createSkylinePulls(THREE, { scene, poi: POI, landmarks, height: sampleHeight, camera });
+    const skylineMastBeacon = campfires.find(f => f.beacon);
+    let skylineFuelCheck = 0, skylineFuelDone = false;
     bakeMinimap();
     reseatAllProps();
     bakeFoliageChunks();
@@ -30941,7 +31711,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     const HQ_BAY_LAMP_I = 1.85;
     let hqPowerWas = true, hqPowerFlickT = 0;
     function hqPowered() {
-      try { return !STORY_GATE || day < 2 || fuelRun.read().done; } catch (_) { return true; }
+      try {
+        if (!STORY_GATE || day < 2) return true;   // CU-201: day 1, and the checks, stay lit
+        if (utilitiesOn) { utilitySyncFromMissions(); return utilities.isOn('power'); }
+        return !!fuelRun.read().done;
+      } catch (_) { return true; }
     }
     function hqPowerFlicker(dt) {   // 1, or the stutter as the power comes back
       const on = hqPowered();
@@ -31086,6 +31860,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     const propNotes = createPropNotes(); propNotes.reset(uiRunId);
     const propNoteCard = mountPropNoteCard(document);
     function readPropNote(id) {
+      if (chainGatesOn && id === FUEL_SITE) return;   // CU-200: one fuel log, the key's, by the HQ generator
       const note = propNotes.read(id, { repaired: relayUp() });
       if (note) propNoteCard.show(note);
     }
@@ -31184,6 +31959,14 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       startLoopCine(cineKind);
       publishUI('alarm-started', { day, hold: ALARM_HOLD[cineKind] });   // D-33: no sting, the music waits
       AudioSys.klaxon();
+      if (utilitiesOn && utilities.isOn('alarm')) {   // CU-201: the roof siren, from the side the dead are coming
+        try {
+          if (AudioSys.relayBoot) AudioSys.relayBoot(true);
+          const bearing = (typeof waveBearings !== 'undefined' && waveBearings && waveBearings[0]) || 0;
+          if (AudioSys.relayBeep) AudioSys.relayBeep(true, 1.2, Math.max(-1, Math.min(1, Math.sin(bearing))));
+          if (utilityProps && utilityProps.siren) utilityProps.siren.rotation.y = bearing;
+        } catch (_) {}
+      }
       showBanner(dwText('hq.alarm'), dwText('hq.heard', {day}), 2.6, '#ff5a44');
     }
     const HQ_STROBE_S = 5;
@@ -31472,6 +32255,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         } else if (a === 'hqPanel') text = dwText(hq.seq ? 'hq.alarmSounding' : phase === 'prep' ? 'hq.start' : 'hq.inProgress');
         else if (a === 'dutyBoard' || a === 'hqRadio') text = dwText(a==='dutyBoard'?'story.duty.prompt':'story.radio.prompt');
         else if (a === 'hushWire') text = sayText('hush.wirePrompt', {}, "E \u2014 Wire the relay's spare board");   // CL-259
+        else if (a === 'utilPump') text = utilityPromptFor('plumbing');   // CU-201
+        else if (a === 'utilBench') text = utilityPromptFor('workshop');
+        else if (a === 'utilSiren') text = utilityPromptFor('alarm');
+        else if (a === 'utilHose') text = utilitySay('utility.hosePrompt', { interact: 'E' }, 'E \u2014 Hose the fire');
         else if (a === 'cif') text = dwText('cif.prompt');
         else if (a === 'rangeConsole') text = 'E — '+sayText('range.prompt');
         else if (a === 'trainingPanel') text = sayText('training.panelPrompt', {}, 'E — HQ panel: call in zombies');   // CL-115
@@ -31490,13 +32277,13 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         else if (a === 'setMortar') text = sayText(mortarCarried?.kind === 'm240' ? 'm240.carrying' : 'mortar.carrying');
         if (LOCKDOWN_STATIONS.has(a) && nightLockdown()) text = lockdownText('prompt', 'Locked down until dawn');   // CU-82
         if (!text && bootsYankInReach()) text = sayText('mast.yank', { interact: 'E' }, 'E \u2014 Yank the boots');   // CL-264
-        if (!text && !a) text = fuelPromptText() || truckPromptText() || rangerPromptText() || trapperPromptText() || null;   // CL-216/217 (AG-94), AG-93: a mission's own thing before the Hush's word at a cave mouth
+        if (!text && !a) text = chainPromptText() || hikersGatePromptText() || convoyGatePromptText() || fuelPromptText() || truckPromptText() || rangerPromptText() || trapperPromptText() || null;   // CU-200; GP-20004; GP-20001; CL-216/217 (AG-94), AG-93
         if (!text) { const hp = hushPrompt(); if (hp) text = sayText(POI.caves[hp.cave]?.theme === 'chalk' ? 'hush.chalk' : hp.key, {}, hp.fallback); }   // GB-106 (ChatGPT keys the words)
         if (!text && a === 'survivor') text = dwText('survivor.rescue');   // GB-90
         if (!text && a === 'roofSurvivor') text = roofSurvivorPrompt();   // GB-116
         if (!text && a === 'runePistol') text = dwText('quest.runePistol', { interact: 'E' });   // GB-119
         if (!text && boardingReach()) text = boardHoldT > 0 ? dwText('extraction.boarding', {pct: Math.round(100 * boardHoldT / BOARD_HOLD_S)}) : dwText('extraction.boardPrompt');   // GB-86/GB-114
-        if (!text && !a) text = radioPromptText() || fuelPromptText() || truckPromptText() || rangerPromptText() || trapperPromptText() || objectivePromptText();   // CL-127; CL-216; CL-217; AG-93
+        if (!text && !a) text = chainPromptText() || hikersGatePromptText() || convoyGatePromptText() || radioPromptText() || fuelPromptText() || truckPromptText() || rangerPromptText() || trapperPromptText() || objectivePromptText();   // CU-200; GP-20004; GP-20001; CL-127; CL-216; CL-217; AG-93
         if (!text && gameStarted && !gameOver && !won) {
           const gr = nearestGrave(2.6);
           if (gr) text = dwText('interaction.grave', { name: gr.name, day: gr.day });
@@ -31661,6 +32448,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (!placeMode && !buildMode && nearHQWindow() && kd > 1.2) return 'hqWindow';
       if (!placeMode && !buildMode) { const station=nearestStoryStation(); if(station)return station==='duty'?'dutyBoard':hush.board==='carried'?'hushWire':'hqRadio'; }   // CL-259: the spare board first
       if (!placeMode && !buildMode && nearHQPanel()) return 'hqPanel';
+      if (!placeMode && !buildMode) { const uAct = utilityAction(); if (uAct) return uAct; }   // CU-201: fit the pump, the battery or the siren
       if (!placeMode && !buildMode && nearArmory()) return 'armory';   // CL-103: checked first, the two hatches are side by side
       if (!placeMode && !buildMode && nearCIF()) return 'cif';
       if (!placeMode && !buildMode && hushPrompt()?.act) return 'hush';   // GB-106
@@ -31695,6 +32483,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       else if (a === 'hqPanel') { openHQBriefing(); readPropNote('hq'); }
       else if (a === 'dutyBoard' || a === 'hqRadio') openHQBriefing({panel:a==='dutyBoard'?'duty':'radio'});
       else if (a === 'hushWire') wireHushBoard();   // CL-259
+      else if (a === 'utilPump' || a === 'utilBench' || a === 'utilSiren') utilityInstallAction(a);   // CU-201
+      else if (a === 'utilHose') utilityHose();
       else if (a === 'cif') openCIF();
       else if (a === 'armory') { openCIF(); if (cifOpen) { cifEl.classList.add('armory-only'); if (armoryUI && armoryUI.open) armoryUI.open(); if (AudioSys.armoryBench) AudioSys.armoryBench(); } }   // CL-103b: the Armory alone
       else if (a === 'convoyJack') convoyMissionEvents(convoyMission.tap());
@@ -31714,6 +32504,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         readPropNote('watchtower');
       else if (POI.dock && hypot(localPlayer.position.x - POI.dock.x, localPlayer.position.z - POI.dock.z) < DOCK_LEN / 2 + 2 && Math.abs(localPlayer.position.y - POI.dock.deckY) < 1.6)
         readPropNote('dock');
+      else if (chainGatesOn && chainUseE()) return;
       else { const site = storyPropInReach(localPlayer.position); if (site) readPropNote(site); }   // CL-109: the boards, the mine, the graveyard, the gate
     }
 
@@ -31753,23 +32544,635 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (!gameStarted || day <= storyDay) return;
       storyDay = day;
       for (const id of storyChain.dawn(day)) storyPublish('open', id);
+      if (chainGatesOn) for (const gate of chainGates.dawn(day, storyChain.read())) chainSpareArrived(gate);   // CU-200
     }
     function updateStoryChain(dt) {
       if (!gameStarted || gameOver || won) return;
+      chainUpdate(dt);   // CU-200
+      chainSyncEvents();
+      utilityUpdate(dt);   // CU-201
       updateStoryAftermath();
       if (day > storyDay) storyDawn();
       storySyncT -= dt; if (storySyncT > 0) return;
       storySyncT = 0.5;
       for (const id of Object.keys(STORY_DONE)) {
-        if (storyChain.stateOf(id) === 'done') continue;
         let d = false; try { d = !!STORY_DONE[id](); } catch (_) {}
-        if (d && storyChain.done(id)) storyPublish('done', id);
+        if (!d) continue;
+        if (storyChain.stateOf(id) !== 'done' && storyChain.done(id)) storyPublish('done', id);
+        if (utilitiesOn) utilityLead(id);   // CU-201
       }
       survivorsAtThreadEnd();   // GB-232
     }
-    function resetStoryChain() { storyChain.reset(); storyDay = 0; storySyncT = 0; }
+    function resetStoryChain() { storyChain.reset(); storyDay = 0; storySyncT = 0; chainGates.reset(); chainClearWorld(); utilities.reset(); utilityClear(); }   // CU-201
+    // CU-201 (CL-289, D-106): the HQ's utilities. Off on the suite's timer pages unless ?utilities=1.
+    // ?utilities=0 leaves a real game without them. Power's truth stays hqPowered(), which reads isOn('power')
+    // once the gate is on and the day is past the first. Spots (rule 10 is Claude's): the pump is on the north
+    // face 4.6 m east of the generator, so the pour circle and the pump's E do not meet; the bench is the armory
+    // front that is already there; the siren is on the roof, just east of the ladder head.
+    const utilities = createUtilities();
+    let utilitiesOn = urlParams.get('utilities') === '1' || (urlParams.get('utilities') !== '0' && urlParams.get('raf') !== 'timer');
+    let utilityProps = null, utilityFill = 0;
+    const UTILITY_WORD = { power: 'power', comms: 'communications', infirmary: 'infirmary', plumbing: 'plumbing', workshop: 'workshop', alarm: 'alarm', iron: 'iron', hush: 'hush' };
+    function utilitySay(key, params, fallback) { return sayText(key, params || {}, fallback); }
+    function utilityCameOn(id) {
+      const word = UTILITY_WORD[id];
+      if (!word || id === 'hush') return;
+      showBanner(utilitySay('utility.' + word + '.banner', {}, id), '', 2.4, '#d7c6a4');
+      utilityHud();
+    }
+    function utilityBox(g, w, h, d, color, x, y, z, rough, metal) {
+      const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), new THREE.MeshStandardMaterial({ color, roughness: rough, metalness: metal }));
+      m.position.set(x, y, z); m.castShadow = true; g.add(m); return m;
+    }
+    function utilityTag(lines) {
+      const cv = document.createElement('canvas'); cv.width = 256; cv.height = 64;
+      const c = cv.getContext && cv.getContext('2d');
+      if (c) {
+        c.fillStyle = '#1a140c'; c.fillRect(0, 0, 256, 64);
+        c.fillStyle = '#e6d7a8'; c.font = 'bold 26px sans-serif'; c.textAlign = 'center'; c.textBaseline = 'middle';
+        c.fillText(lines || '', 128, 32);
+      }
+      const tex = new THREE.CanvasTexture(cv);
+      const m = new THREE.Mesh(new THREE.PlaneGeometry(0.72, 0.18), new THREE.MeshBasicMaterial({ map: tex, transparent: true }));
+      m.userData.tex = tex; m.userData.cv = cv; return m;
+    }
+    function utilityTagText(tag, lines) {
+      const cv = tag.userData.cv, c = cv && cv.getContext && cv.getContext('2d');
+      if (!c) return;
+      c.fillStyle = '#1a140c'; c.fillRect(0, 0, 256, 64);
+      c.fillStyle = '#e6d7a8'; c.font = 'bold 26px sans-serif'; c.textAlign = 'center'; c.textBaseline = 'middle';
+      c.fillText(lines || '', 128, 32);
+      tag.userData.tex.needsUpdate = true;
+    }
+    function utilitySpots() {
+      const hp = house.group.position, half = house.half || 4;
+      const ladder = hqLadderAt();
+      const px = hp.x + 1.6, pz = hp.z + half + 1.7;
+      return {
+        pump: { x: px, z: pz, y: sampleHeight(px, pz) },
+        bench: { x: HQ_ARMORY_FRONT.x, z: HQ_ARMORY_FRONT.z, y: hp.y + 0.9 },
+        siren: { x: ladder.x + 1.4, z: ladder.z + 0.8, y: ladder.roof }
+      };
+    }
+    function utilityClear() {
+      if (utilityProps) {
+        scene.remove(utilityProps.group);
+        if (utilityProps.solid) { const i = worldSolids.indexOf(utilityProps.solid); if (i >= 0) worldSolids.splice(i, 1); }
+      }
+      utilityProps = null; utilityFill = 0;
+      const el = document.getElementById('ironStat'); if (el) el.hidden = true;
+    }
+    function utilityEnsure() {
+      if (!utilitiesOn || utilityProps || !house.group) return utilityProps;
+      const spots = utilitySpots();
+      const g = new THREE.Group(); g.name = 'hq-utilities';
+      const pump = new THREE.Group(); pump.name = 'hq-pump';
+      utilityBox(pump, 0.55, 0.7, 0.4, 0x4a4038, 0, 0.35, 0, 0.8, 0.2);
+      utilityBox(pump, 0.7, 1.5, 0.7, 0x3a4048, 0.9, 0.75, 0, 0.7, 0.35);
+      const glass = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 1.15, 8), new THREE.MeshStandardMaterial({ color: 0x9aabb4, roughness: 0.15, metalness: 0.35, transparent: true, opacity: 0.35 }));
+      glass.position.set(0.9, 0.75, 0.4); pump.add(glass);   // AG-174: a sight glass on the yard side, the shell stays closed
+      const water = new THREE.Mesh(new THREE.CylinderGeometry(0.038, 0.038, 1.1, 8), new THREE.MeshStandardMaterial({ color: 0x3a8fb8, roughness: 0.2, metalness: 0.15, transparent: true, opacity: 0.9 }));
+      water.position.set(0.9, 0.75, 0.4); water.name = 'hq-tank-water'; pump.add(water);
+      const pumpTag = utilityTag(''); pumpTag.position.set(0, 1.15, 0.22); pump.add(pumpTag);
+      pump.position.set(spots.pump.x, spots.pump.y, spots.pump.z); g.add(pump);
+      const bench = new THREE.Group(); bench.name = 'hq-bench-battery';
+      utilityBox(bench, 0.28, 0.16, 0.16, 0x2a2e28, 0, 0.1, 0, 0.6, 0.3);
+      utilityBox(bench, 0.04, 0.06, 0.04, 0xd7a441, 0.1, 0.2, 0.04, 0.4, 0.6);
+      const benchTag = utilityTag(''); benchTag.position.set(0, 0.45, 0); bench.add(benchTag);
+      bench.position.set(spots.bench.x, spots.bench.y, spots.bench.z); g.add(bench);
+      const siren = new THREE.Group(); siren.name = 'hq-roof-siren';
+      utilityBox(siren, 0.28, 0.16, 0.28, 0x3a3e44, 0, 0.1, 0, 0.6, 0.4);
+      const horn = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.16, 0.28, 8), new THREE.MeshStandardMaterial({ color: 0xc43a2f, roughness: 0.45, metalness: 0.3 }));
+      horn.rotation.z = Math.PI / 2; horn.position.y = 0.28; siren.add(horn);
+      const sirenTag = utilityTag(''); sirenTag.position.set(0, 0.55, 0); siren.add(sirenTag);
+      siren.position.set(spots.siren.x, spots.siren.y, spots.siren.z); g.add(siren);
+      scene.add(g);
+      const solid = addSolid(spots.pump.x, spots.pump.z, 0.45, spots.pump.y, spots.pump.y + 1.5);
+      utilityProps = { group: g, spots, water, pump, bench, siren, pumpTag, benchTag, sirenTag, solid };
+      return utilityProps;
+    }
+    function utilitySetOn(on) {
+      utilitiesOn = !!on;
+      if (!utilitiesOn) { utilityClear(); return; }
+      utilityEnsure(); utilityTags(); utilityHud();
+    }
+    function utilityNear(spot, r, yMax) {
+      const P = localPlayer.position;
+      if (hypot(P.x - spot.x, P.z - spot.z) > r) return false;
+      if (yMax != null && Math.abs(P.y - spot.y) > yMax) return false;
+      return true;
+    }
+    function utilityFireNear() {
+      if (!utilityProps) return false;
+      const s = utilityProps.spots.pump;
+      for (const f of groundFires) if (hypot(f.x - s.x, f.z - s.z) < 8) return true;
+      for (const f of firePools) if (hypot(f.x - s.x, f.z - s.z) < 8) return true;
+      for (const z of zombies) if (z && z.alive && z.burnT > 0 && z.mesh && hypot(z.mesh.position.x - s.x, z.mesh.position.z - s.z) < 8) return true;
+      return false;
+    }
+    function utilityHose() {
+      if (!utilitiesOn || !utilities.isOn('plumbing') || !utilityProps) return 0;
+      const s = utilityProps.spots.pump; let n = 0;
+      for (let i = groundFires.length - 1; i >= 0; i--) {
+        const f = groundFires[i];
+        if (hypot(f.x - s.x, f.z - s.z) < 8) { f.age = 999; n++; }
+      }
+      for (const f of firePools) if (hypot(f.x - s.x, f.z - s.z) < 8) { f.t = 0; n++; }
+      for (const z of zombies) if (z && z.burnT > 0 && z.mesh && hypot(z.mesh.position.x - s.x, z.mesh.position.z - s.z) < 8) { z.burnT = 0; n++; }
+      return n;
+    }
+    function utilityTags() {
+      if (!utilityProps) return;
+      const show = (part, tag, id) => {
+        const st = utilities.state(id);
+        part.visible = st === 'earned' || st === 'on';
+        tag.visible = st === 'earned';
+        if (st !== 'earned') return;
+        const why = utilities.whyOff(id);
+        const word = UTILITY_WORD[id] || id;
+        const label = why === 'needs:power' ? utilitySay('utility.needsPower', {}, 'NO POWER') : utilitySay('utility.' + word + '.waitingTag', {}, '');
+        utilityTagText(tag, label);
+      };
+      show(utilityProps.pump, utilityProps.pumpTag, 'plumbing');
+      show(utilityProps.bench, utilityProps.benchTag, 'workshop');
+      show(utilityProps.siren, utilityProps.sirenTag, 'alarm');
+      if (utilities.isOn('plumbing')) utilityProps.pump.visible = true;
+      if (utilities.isOn('workshop')) utilityProps.bench.visible = true;
+      if (utilities.isOn('alarm')) utilityProps.siren.visible = true;
+    }
+    function utilityHud() {
+      const el = document.getElementById('ironStat'), n = document.getElementById('ironCount');
+      if (!el || !n) return;
+      const show = utilitiesOn && utilities.isOn('iron');
+      el.hidden = !show;
+      if (show) n.textContent = String(utilities.supply('horseshoes'));
+    }
+    function utilityUpdate(dt) {
+      if (!utilitiesOn) return;
+      utilityEnsure();
+      if (utilities.isOn('plumbing')) utilityFill = Math.min(1, utilityFill + dt / 60);
+      if (utilityProps && utilityProps.water) {
+        const h = 0.08 + 0.92 * utilityFill;
+        utilityProps.water.scale.y = h;
+        utilityProps.water.position.y = 0.175 + 0.55 * h;   // AG-174: the column rises inside the sight glass
+      }
+    }
+    function utilityAction() {
+      if (!utilitiesOn || !utilityProps) return null;
+      const s = utilityProps.spots;
+      if (utilityNear(s.pump, 1.6, 2.2)) {
+        if (utilities.isOn('plumbing') && utilityFireNear()) return 'utilHose';
+        if (utilities.state('plumbing') === 'earned') return 'utilPump';
+      }
+      if (utilityNear(s.bench, 1.6, 2.6) && utilities.state('workshop') === 'earned' && utilities.installAt('hq-bench')) return 'utilBench';
+      if (utilityNear(s.siren, 1.6, 1.8) && utilities.state('alarm') === 'earned') return 'utilSiren';
+      return null;
+    }
+    function utilityPromptFor(id) {
+      const why = utilities.whyOff(id);
+      const word = UTILITY_WORD[id];
+      if (why === 'install') return utilitySay('utility.' + word + '.installPrompt', { interact: 'E' }, 'E — Fit it');
+      if (why === 'needs:power' || why === 'earned') return utilitySay('utility.' + word + '.lookLine', {}, '');
+      if (utilities.state(id) === 'earned') return utilitySay('utility.' + word + '.lookLine', {}, '');
+      return null;
+    }
+    function utilityInstallAction(which) {
+      const id = which === 'utilPump' ? 'plumbing' : which === 'utilBench' ? 'workshop' : 'alarm';
+      if (!utilities.install(id)) return false;
+      utilityCameOn(id); utilityTags(); return true;
+    }
+    function utilityLead(id) {
+      if (!utilitiesOn) return [];
+      const on = utilities.leadDone(id);
+      for (const u of on) utilityCameOn(u);
+      utilityTags(); utilityHud(); return on;
+    }
+    function utilitySyncFromMissions() {
+      if (!utilitiesOn) return;
+      let any = false;
+      for (const id of Object.keys(STORY_DONE)) {
+        let d = false; try { d = !!STORY_DONE[id](); } catch (_) {}
+        if (!d) continue;
+        const on = utilities.leadDone(id);
+        if (!on.length) continue;
+        any = true;
+        for (const u of on) utilityCameOn(u);
+      }
+      if (any) { utilityTags(); utilityHud(); }
+    }
     // Is this site's lead closed (so the site is hidden and locked while the gate is on)?
     function storyClosedSite(site) { return STORY_GATE && !!site && !storyChain.siteOpen(site); }
+    // CU-200 (CL-285 part C, D-102): the chain's gates. The suite's timer pages start with them off, like the story
+    // gate, unless ?chaingates=1. ?chaingates=0 leaves a real game without them. A lead shuts its site only once its
+    // blocker is in the world. This page builds the generator's; the other seven register when their owners place them.
+    const chainGates = createChainGates();
+    let chainGatesOn = urlParams.get('chaingates') === '1' || (urlParams.get('chaingates') !== '0' && urlParams.get('raf') !== 'timer');
+    const chainLive = new Set();
+    const chainWorld = { gates: new Map(), keys: new Map(), spare: null, opening: null };
+    let chainTrailSignMap = null;
+    function chainSay(key, fallback) { return sayText(key, {}, fallback); }
+    function chainShutSite(site) {
+      if (!chainGatesOn || !site) return false;
+      const lead = storyLeadForSite(site);
+      if (!lead || !chainLive.has(lead.id)) return false;
+      const g = gateOfLead(lead.id);
+      return !!g && !chainGates.isOpen(g.gate);
+    }
+    function chainBox(g, w, h, d, color, x, y, z, rough, metal) {
+      const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), new THREE.MeshStandardMaterial({ color, roughness: rough, metalness: metal }));
+      m.position.set(x, y, z); m.castShadow = true; m.receiveShadow = true; g.add(m); return m;
+    }
+    function chainBlockerMesh(kind) {
+      const g = new THREE.Group(); g.name = 'chain-gate-' + kind; g.userData.noCull = true;
+      if (kind === 'chain') {
+        chainBox(g, 0.12, 1.15, 0.12, 0x5c4632, -0.7, 0.57, 0, 0.9, 0);
+        chainBox(g, 0.12, 1.15, 0.12, 0x5c4632, 0.7, 0.57, 0, 0.9, 0);
+        const link = new THREE.Mesh(new THREE.TorusGeometry(0.07, 0.015, 5, 8), new THREE.MeshStandardMaterial({ color: 0x9aa0a6, roughness: 0.45, metalness: 0.7 }));
+        for (let i = 0; i < 6; i++) { const l = link.clone(); l.position.set(-0.5 + i * 0.2, 0.85, 0); l.rotation.y = Math.PI / 2; g.add(l); }
+        chainBox(g, 0.34, 0.22, 0.02, 0xd7c6a4, 0, 1.15, 0.08, 0.95, 0);
+      } else if (kind === 'pins') {
+        chainBox(g, 0.13, 1.25, 0.16, 0x4b554b, -1.03, 0.62, 0, 0.7, 0.3);
+        chainBox(g, 0.13, 1.25, 0.16, 0x4b554b, 1.03, 0.62, 0, 0.7, 0.3);
+        chainBox(g, 2.15, 0.15, 0.1, 0xa33a32, 0, 0.96, 0, 0.58, 0.2);
+        for (const x of [-0.68, -0.23, 0.23, 0.68]) chainBox(g, 0.16, 0.15, 0.015, 0xd9d4c3, x, 0.96, 0.06, 0.8, 0);
+        chainBox(g, 0.23, 0.22, 0.23, 0x30383a, -1.03, 0.96, 0, 0.55, 0.5);
+        chainBox(g, 0.25, 0.22, 0.23, 0x30383a, 1.03, 0.96, 0, 0.55, 0.5);
+        for (const x of [0.94, 1.12]) chainBox(g, 0.11, 0.23, 0.13, 0xc4a15a, x, 1.1, 0.13, 0.45, 0.65);
+      } else if (kind === 'combination') {
+        chainBox(g, 0.08, 1.4, 0.08, 0x4a4038, -0.55, 0.7, 0, 0.85, 0);
+        chainBox(g, 0.08, 1.4, 0.08, 0x4a4038, 0.55, 0.7, 0, 0.85, 0);
+        chainBox(g, 1.2, 0.08, 0.06, 0x4a4038, 0, 1.05, 0, 0.85, 0);
+        const lock = chainBox(g, 0.1, 0.14, 0.05, 0x22262b, 0, 0.95, 0.06, 0.5, 0.6); lock.name = 'chain-combination'; g.userData.lock = lock;
+      } else {
+        chainBox(g, 0.9, 1.7, 0.08, 0x6a5a48, 0, 0.85, 0, 0.9, 0);   // AG-174: the door faces the approach, not edge-on
+        chainBox(g, 0.04, 0.16, 0.08, 0x8a9096, 0.38, 1.05, 0.05, 0.45, 0.7);
+        const lock = chainBox(g, 0.09, 0.12, 0.04, 0xc4a15a, 0.38, 0.98, 0.07, 0.4, 0.75); lock.name = 'chain-padlock'; g.userData.lock = lock;
+      }
+      return g;
+    }
+    function chainKeyMesh() {
+      const g = new THREE.Group(); g.name = 'chain-key'; g.userData.noCull = true;
+      chainBox(g, 0.28, 0.02, 0.36, 0xd7c6a4, 0, 0.02, 0, 0.95, 0);
+      chainBox(g, 0.09, 0.012, 0.03, 0xc4a15a, 0.06, 0.04, 0.08, 0.35, 0.8);
+      return g;
+    }
+    function chainClearWorld() {
+      for (const g of chainWorld.gates.values()) {
+        if (g.mesh) scene.remove(g.mesh);
+        const i = worldSolids.indexOf(g.solid); if (i >= 0) worldSolids.splice(i, 1);
+      }
+      chainWorld.gates.clear();
+      for (const k of chainWorld.keys.values()) if (k.mesh) scene.remove(k.mesh);
+      chainWorld.keys.clear();
+      if (chainWorld.spare && chainWorld.spare.mesh) scene.remove(chainWorld.spare.mesh);
+      chainWorld.spare = null; chainWorld.opening = null; chainLive.clear();
+    }
+    function chainNear(x, z, r) {
+      const P = localPlayer.position;
+      return hypot(P.x - x, P.z - z) <= r && Math.abs(P.y - sampleHeight(x, z)) < 2;
+    }
+
+    function chainWithFence(kind) {
+      const mesh = chainBlockerMesh(kind);
+      chainBox(mesh, 1.5, 0.08, 0.06, 0x5c4632, -1.55, 0.72, 0, 0.9, 0);
+      chainBox(mesh, 1.5, 0.08, 0.06, 0x5c4632, -1.55, 0.98, 0, 0.9, 0);
+      chainBox(mesh, 0.1, 1.15, 0.1, 0x5c4632, -2.35, 0.55, 0, 0.9, 0);
+      chainBox(mesh, 1.5, 0.08, 0.06, 0x5c4632, 1.55, 0.72, 0, 0.9, 0);
+      chainBox(mesh, 1.5, 0.08, 0.06, 0x5c4632, 1.55, 0.98, 0, 0.9, 0);
+      chainBox(mesh, 0.1, 1.15, 0.1, 0x5c4632, 2.35, 0.55, 0, 0.9, 0);
+      mesh.userData.fenced = true;
+      return mesh;
+    }
+    function chainPlaceKey(key, x, y, z) {
+      if (chainWorld.keys.has(key)) return;
+      const mesh = chainKeyMesh();
+      mesh.position.set(x, y, z);
+      mesh.visible = chainGates.keyState(key) === 'ready';
+      scene.add(mesh);
+      chainWorld.keys.set(key, { mesh, x, y, z });
+    }
+    function chainDropGate(id, lead, kind, x, z, yaw, fenced) {
+      if (chainWorld.gates.has(id) || chainGates.isOpen(id)) return;
+      const y = sampleHeight(x, z);
+      const mesh = fenced ? chainWithFence(kind) : chainBlockerMesh(kind);
+      mesh.position.set(x, y, z); mesh.rotation.y = yaw; scene.add(mesh);
+      const solid = addSolid(x, z, fenced ? 1.15 : 0.85, y, y + 1.7);
+      chainWorld.gates.set(id, { mesh, solid, x, y, z, lead });
+    }
+    function chainPlaceRelay() {
+      if (!chainGatesOn || chainLive.has('relay')) return;
+      const prop = objectiveProps?.props?.[RADIO_SITE];
+      const mast = POI.mast;
+      if (!prop?.centre && !mast) return;
+      const c = prop?.centre || mast, a = prop?.approach || { x: c.x + 6, z: c.z };
+      const dx = c.x - a.x, dz = c.z - a.z, len = hypot(dx, dz) || 1;
+      const x = a.x + dx / len * 1.4, z = a.z + dz / len * 1.4;
+      chainDropGate('mast-yard', 'relay', 'chain', x, z, Math.atan2(dx, dz), true);
+      chainLive.add('relay');
+      if (house.radioSet && !chainWorld.keys.has('sato-key')) {
+        house.radioSet.updateWorldMatrix(true, true);
+        const p = new THREE.Vector3(); house.radioSet.getWorldPosition(p);
+        chainPlaceKey('sato-key', p.x, p.y, p.z);
+      }
+    }
+    function chainPlaceMedical() {
+      if (!chainGatesOn) return;
+      if (!chainLive.has('medical')) {
+        const wreck = POI.wrecks?.[0];
+        if (wreck) {
+          // The spur ends at the ambulance. Walk back along it so the arm stands on
+          // the approach road, with the bend hiding the jack until the player arrives.
+          let road = null, end = -1, nearest = 2.5;
+          for (const line of PATHS) {
+            if (line.deck || line.length < 2) continue;
+            for (const i of [0, line.length - 1]) {
+              const d = hypot(line[i].x - wreck.x, line[i].z - wreck.z);
+              if (d < nearest) { nearest = d; road = line; end = i; }
+            }
+          }
+          if (road) {
+            let remaining = 7, i = end, step = end === 0 ? 1 : -1;
+            let a = road[i], b = road[i + step];
+            while (b) {
+              const length = hypot(b.x - a.x, b.z - a.z);
+              if (length >= remaining) break;
+              remaining -= length; i += step; a = b; b = road[i + step];
+            }
+            if (b) {
+              const length = hypot(b.x - a.x, b.z - a.z) || 1;
+              const x = a.x + (b.x - a.x) * Math.min(1, remaining / length);
+              const z = a.z + (b.z - a.z) * Math.min(1, remaining / length);
+              chainDropGate('road-barrier', 'medical', 'pins', x, z, Math.atan2(b.x - a.x, b.z - a.z), false);
+              chainLive.add('medical');
+            }
+          }
+        }
+      }
+      if (chainLive.has('medical') && radioLocker && !chainWorld.keys.has('barrier-key')) {
+        const S = VAULT_SIZE;
+        radioLocker.group.updateWorldMatrix(true, true);
+        const p = radioLocker.group.localToWorld(new THREE.Vector3(S.SHAFT.x + 0.37, S.FLOOR + 0.04, S.SHAFT.z));
+        chainPlaceKey('barrier-key', p.x, p.y, p.z);
+      }
+    }
+    function chainPlaceMissing() {
+      if (!chainGatesOn) return;
+      if (!chainLive.has('missing')) {
+        const camp = POI.campsites?.[1];
+        if (camp) {
+          // Follow the final footpath back from the camp, so the closure crosses the trail at its clearing.
+          let path = null, end = -1, best = 3;
+          for (const line of PATHS) {
+            if (line.deck || line.length < 2) continue;
+            for (const i of [0, line.length - 1]) {
+              const d = hypot(line[i].x - camp.x, line[i].z - camp.z);
+              if (d < best) { best = d; path = line; end = i; }
+            }
+          }
+          if (path) {
+            let remaining = 8, i = end, step = end === 0 ? 1 : -1;
+            let a = path[i], b = path[i + step];
+            while (b) {
+              const length = hypot(b.x - a.x, b.z - a.z);
+              if (length >= remaining) break;
+              remaining -= length; i += step; a = b; b = path[i + step];
+            }
+            if (b) {
+              const length = hypot(b.x - a.x, b.z - a.z) || 1;
+              const x = a.x + (b.x - a.x) * Math.min(1, remaining / length);
+              const z = a.z + (b.z - a.z) * Math.min(1, remaining / length);
+              chainDropGate('trail-chain', 'missing', 'chain', x, z, Math.atan2(camp.x - x, camp.z - z) + Math.PI, true);
+              chainLive.add('missing');
+              const gate = chainWorld.gates.get('trail-chain');
+              if (gate) {
+                // The shared chain mesh's six links leave small air gaps; a thin steel run joins them to both posts.
+                chainBox(gate.mesh, 1.4, 0.02, 0.02, 0x71787a, 0, 0.85, 0, 0.55, 0.65);
+                if (!chainTrailSignMap) {
+                  const canvas = document.createElement('canvas'); canvas.width = 512; canvas.height = 192;
+                  const ctx = canvas.getContext('2d');
+                  ctx.fillStyle = '#c9bb94'; ctx.fillRect(0, 0, 512, 192);
+                  ctx.strokeStyle = '#765f42'; ctx.lineWidth = 16; ctx.strokeRect(8, 8, 496, 176);
+                  ctx.fillStyle = '#372e26'; ctx.font = 'bold 64px sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+                  ctx.fillText(dwText('chain.missing.sign'), 256, 100, 450);
+                  chainTrailSignMap = new THREE.CanvasTexture(canvas); chainTrailSignMap.colorSpace = THREE.SRGBColorSpace;
+                }
+                const sign = new THREE.Mesh(new THREE.PlaneGeometry(0.95, 0.36), new THREE.MeshStandardMaterial({ map: chainTrailSignMap, roughness: 0.92, side: THREE.DoubleSide }));
+                sign.position.set(0, 1.16, 0.115); sign.name = 'trail-closed-sign'; gate.mesh.add(sign);
+              }
+            }
+          }
+        }
+      }
+      if (chainLive.has('missing') && !chainWorld.keys.has('chain-key')) {
+        const cab = convoyParts()?.vehicle;
+        if (cab) {
+          cab.updateWorldMatrix(true, true);
+          // The ambulance is rolled onto its right flank: the glovebox lip is exposed below the radio.
+          const p = cab.localToWorld(new THREE.Vector3(1.3, 0.1, -2.2));
+          chainPlaceKey('chain-key', p.x, p.y, p.z);
+        }
+      }
+    }
+    function chainPlaceRanger() {
+      if (!chainGatesOn || chainLive.has('search')) return;
+      const prop = objectiveProps?.props?.['objective:ranger-cache'];
+      if (!prop?.centre) return;
+      const c = prop.centre, a = prop.approach || { x: c.x, z: c.z + 6 };
+      const dx = c.x - a.x, dz = c.z - a.z, len = hypot(dx, dz) || 1;
+      const x = a.x + dx / len * 1.2, z = a.z + dz / len * 1.2;
+      chainDropGate('ranger-gate', 'search', 'padlock', x, z, Math.atan2(dx, dz), true);
+      chainLive.add('search');
+      const truckP = objectiveProps?.props?.[TRUCK_SITE];
+      if (truckP?.centre) chainPlaceKey('ranger-gate-key', truckP.centre.x + 0.8, (truckP.centre.y || sampleHeight(truckP.centre.x, truckP.centre.z)) + 0.7, truckP.centre.z);
+    }
+    function chainPlaceMine() {
+      if (!chainGatesOn || chainLive.has('below')) return;
+      const iron = (POI.caves || []).find((c) => c && c.theme === 'iron');
+      if (!iron) return;
+      const yaw = iron.yaw || 0;
+      const x = iron.x + Math.sin(yaw) * 4, z = iron.z + Math.cos(yaw) * 4;
+      chainDropGate('mine-iron-gate', 'below', 'chain', x, z, yaw, false);
+      chainLive.add('below');
+      const spot = trapper.cellarSpot;
+      if (spot) chainPlaceKey('trapper-keyring', spot.x, (spot.y || sampleHeight(spot.x, spot.z)) + 0.9, spot.z);
+    }
+    function chainPlaceTrapper() {
+      if (!chainGatesOn || chainLive.has('oldman')) return;
+      const prop = trapperSiteProp();
+      if (!trapper.built) {
+        try { if (prop) buildTrapperMission(prop); } catch (_) {}
+      }
+      if (!trapper.built || trapper.off || !trapper.toWorld) return;
+      chainLive.add('oldman');
+      if (chainGates.isOpen('trapper-fence')) return;
+      const gateLz = (TRAPPER.BED_Z_MAX || 8.95) + 0.08;
+      const p = trapper.toWorld(0, gateLz);
+      chainDropGate('trapper-fence', 'oldman', 'combination', p.x, p.z, TRAPPER.YARD_YAW, false);
+    }
+    function chainKeyInReach(key, placed) {
+      const where = chainGates.keySource(key);
+      if (where === 'hq-board') {
+        const s = chainWorld.spare;
+        return !!(s && s.key === key && ((typeof nearHQStation === 'function' && nearHQStation('duty')) || chainNear(s.x, s.z, 2)));
+      }
+      if (where === 'hq-radio-drawer') return (typeof nearHQStation === 'function' && nearHQStation('radio')) || !!(placed && chainNear(placed.x, placed.z, 1.8));
+      return !!(placed && placed.mesh.visible && chainNear(placed.x, placed.z, 1.6));
+    }
+    function chainPlaceGenerator() {
+      if (!chainGatesOn || chainLive.has('generator') || !fuelProps) return;
+      chainLive.add('generator');
+      if (chainGates.isOpen('depot-shed')) return;
+      const F = fuelProps, c = F.prop.centre, pump = F.pump;
+      const dx = pump.x - c.x, dz = pump.z - c.z, len = hypot(dx, dz) || 1;
+      const x = pump.x - dx / len * 1.35, z = pump.z - dz / len * 1.35, y = sampleHeight(x, z);
+      const mesh = chainBlockerMesh('padlock');
+      mesh.position.set(x, y, z); mesh.rotation.y = Math.atan2(dx, dz); scene.add(mesh);
+      const solid = addSolid(x, z, 0.55, y, y + 1.7);
+      chainWorld.gates.set('depot-shed', { mesh, solid, x, y, z, lead: 'generator' });
+      const kx = F.gen.x + 0.55, kz = F.gen.z + 0.35, ky = sampleHeight(kx, kz);
+      const key = chainKeyMesh(); key.position.set(kx, ky, kz); key.rotation.y = 0.4; scene.add(key);
+      if (chainGates.keyState('price-key') === 'held') key.visible = false;
+      chainWorld.keys.set('price-key', { mesh: key, x: kx, y: ky, z: kz });
+    }
+    function chainSetOn(on) {
+      chainGatesOn = !!on;
+      if (!chainGatesOn) { chainClearWorld(); return; }
+      try { fuelEnsure(); } catch (_) {}
+      chainPlaceGenerator();
+      chainPlaceRelay();
+      chainPlaceMedical();
+      chainPlaceMissing();
+      chainPlaceRanger();
+      chainPlaceMine();
+      chainPlaceTrapper();
+    }
+    function chainSpareArrived(gateId) {
+      const spec = gateById(gateId); if (!spec) return;
+      showBanner(chainSay('chain.' + spec.lead + '.keyBanner', 'A SPARE KEY'), chainSay('chain.' + spec.lead + '.keyName', 'A spare was left on the duty board.'), 3, '#d7c6a4');
+      const board = house && house.dutyBoard;
+      if (!board) return;
+      board.updateWorldMatrix(true, true);
+      const p = new THREE.Vector3(); board.getWorldPosition(p);
+      const mesh = chainKeyMesh(); mesh.rotation.x = Math.PI / 2; mesh.rotation.y = Math.PI; mesh.position.set(p.x, p.y - 0.2, p.z - 0.025); scene.add(mesh);   // AG-174: hang on the board, not through the wall
+      if (chainWorld.spare && chainWorld.spare.mesh) scene.remove(chainWorld.spare.mesh);
+      chainWorld.spare = { mesh, key: spec.key, x: p.x, z: p.z };
+    }
+    function chainTryOpen(gateId) {
+      if (!chainGates.canOpen(gateId)) return false;
+      if (!chainGates.open(gateId)) return false;
+      const g = chainWorld.gates.get(gateId);
+      chainWorld.opening = { gate: gateId, t: 0 };
+      const lead = g ? g.lead : (gateById(gateId) && gateById(gateId).lead);
+      if (lead) showBanner(chainSay('chain.' + lead + '.open', 'The way is open.'), '', 2.2, '#d7c6a4');
+      return true;
+    }
+    function chainTryTake(key) {
+      if (chainGates.keyState(key) !== 'ready') return false;
+      const spec = gateOfKey(key); if (!spec) return false;
+      const where = chainGates.keySource(key);
+      if (where === 'hq-board') {
+        const s = chainWorld.spare;
+        if (!s || s.key !== key) return false;
+        const atBoard = (typeof nearHQStation === 'function' && nearHQStation('duty')) || chainNear(s.x, s.z, 2);
+        if (!atBoard) return false;
+      } else {
+        const placed = chainWorld.keys.get(key);
+        if (!chainKeyInReach(key, placed)) return false;
+      }
+      if (!chainGates.take(key)) return false;
+      const placed = chainWorld.keys.get(key);
+      if (placed) placed.mesh.visible = false;
+      if (chainWorld.spare && chainWorld.spare.key === key) { scene.remove(chainWorld.spare.mesh); chainWorld.spare = null; }
+      showBanner(chainSay('chain.' + spec.lead + '.keyBanner', 'KEY FOUND'), chainSay('chain.' + spec.lead + '.keyNote', ''), 2.6, '#d7c6a4');
+      return true;
+    }
+    function chainUseE() {
+      if (!chainGatesOn || !gameStarted || gameOver || won) return false;
+      for (const [id, gate] of chainWorld.gates) {
+        if (!chainGates.isOpen(id) && chainNear(gate.x, gate.z, 1.8) && chainTryOpen(id)) return true;
+      }
+      for (const [key, placed] of chainWorld.keys) {
+        if (chainGates.keyState(key) === 'ready' && chainTryTake(key)) return true;
+      }
+      if (chainWorld.spare && chainGates.keyState(chainWorld.spare.key) === 'ready' && chainTryTake(chainWorld.spare.key)) return true;
+      return false;
+    }
+    function chainPromptText() {
+      if (!chainGatesOn || !gameStarted || gameOver || won) return null;
+      for (const [key, placed] of chainWorld.keys) {
+        if (placed.mesh.visible && chainGates.keyState(key) === 'ready' && chainKeyInReach(key, placed)) {
+          const spec = gateOfKey(key);
+          if (spec) return 'E \u2014 ' + chainSay('chain.' + spec.lead + '.keyName', 'Key');
+        }
+      }
+      if (chainWorld.spare && chainGates.keyState(chainWorld.spare.key) === 'ready') {
+        const spec = gateOfKey(chainWorld.spare.key);
+        const at = (typeof nearHQStation === 'function' && nearHQStation('duty')) || chainNear(chainWorld.spare.x, chainWorld.spare.z, 2);
+        if (at && spec) return 'E \u2014 ' + chainSay('chain.' + spec.lead + '.keyName', 'Spare key');
+      }
+      return null;
+    }
+    function convoyGatePromptText() {
+      if (!gameStarted || gameOver || won || !chainShutSite(CONVOY_SITE)) return null;
+      const gate = chainWorld.gates.get('road-barrier');
+      const jack = convoyJackAt();
+      if (!(gate && chainNear(gate.x, gate.z, 2.2)) && !(jack && chainNear(jack.x, jack.z, 1.7))) return null;
+      return chainGates.canOpen('road-barrier')
+        ? chainSay('chain.medical.look', 'E — Pull the road barrier pins')
+        : chainSay('chain.medical.locked', 'The road barrier needs its key.');
+    }
+    function hikersGatePromptText() {
+      if (!gameStarted || gameOver || won || !chainShutSite(HIKERS_SITE)) return null;
+      const gate = chainWorld.gates.get('trail-chain');
+      if (!gate || !chainNear(gate.x, gate.z, 2.2)) return null;
+      return chainGates.canOpen('trail-chain')
+        ? chainSay('chain.missing.openPrompt', 'E — Unhook the trail chain')
+        : chainSay('chain.missing.locked', 'The camp chain needs its key.');
+    }
+    function chainUpdate(dt) {
+      if (chainGatesOn) {
+        try { chainPlaceRelay(); } catch (_) {}
+        try { chainPlaceMedical(); } catch (_) {}
+        try { chainPlaceMissing(); } catch (_) {}
+        try { chainPlaceRanger(); } catch (_) {}
+        try { chainPlaceMine(); } catch (_) {}
+        try { chainPlaceTrapper(); } catch (_) {}
+        if (!chainWorld.keys.has('trapper-keyring') && trapper.cellarSpot) {
+          const s = trapper.cellarSpot;
+          chainPlaceKey('trapper-keyring', s.x, (s.y || sampleHeight(s.x, s.z)) + 0.9, s.z);
+        }
+        for (const [key, placed] of chainWorld.keys) placed.mesh.visible = chainGates.keyState(key) === 'ready';
+      }
+      const o = chainWorld.opening; if (!o) return;
+      o.t += dt;
+      const g = chainWorld.gates.get(o.gate);
+      const lock = g && g.mesh && g.mesh.userData.lock;
+      if (lock) { lock.rotation.z = Math.min(1.2, o.t * 4); lock.position.y -= dt * 0.6; }
+      if (o.t > 0.45 && g) {
+        scene.remove(g.mesh);
+        const i = worldSolids.indexOf(g.solid); if (i >= 0) worldSolids.splice(i, 1);
+        chainWorld.gates.delete(o.gate); chainWorld.opening = null;
+      }
+    }
+    function chainSyncEvents() {
+      if (!chainGatesOn) return;
+      if (fuelRun.read().done) chainGates.event('hq-power');
+      if (radioLocker && (radioLocker.phase === 'open' || radioLocker.phase === 'empty')) chainGates.event('vault-first-lift');
+      const wreck = POI.wrecks && POI.wrecks[0];
+      if (wreck && hypot(localPlayer.position.x - wreck.x, localPlayer.position.z - wreck.z) < 12) chainGates.event('ambulance-reached');
+      if (truck.built && !truck.off && truckMission.unlocked()) chainGates.event('toolbox-open');
+      if (trapper.built && !trapper.off && trapperPath.unlocked()) chainGates.event('cellar-open');
+      if (hush.board === 'wired' || hush.owned) chainGates.event('hush-wired');
+      if (chainGates.happened('search-log-read') && chainGates.keyState('trapper-combination') === 'ready') chainGates.take('trapper-combination');
+    }
+    function chainReadSearchLog() {
+      if (!chainGatesOn) return;
+      chainGates.event('search-log-read');
+      if (chainGates.keyState('trapper-combination') === 'ready') {
+        chainGates.take('trapper-combination');
+        showBanner(chainSay('chain.oldman.keyBanner', 'TRAPPER GATE COMBINATION LEARNED'), chainSay('chain.oldman.keyNote', ''), 3, '#d7c6a4');
+      }
+    }
     function objectiveReach(prop) {
       const spot = prop.pickup && radioLockerOpen() ? prop.pickup : prop;   // CL-127: once repaired, the radio's supplies are in the locker
       const approach = spot.approach;
@@ -31780,6 +33183,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (dead) blockedBy = 'dead';
       else if (objectiveModalOpen()) blockedBy = 'modal';
       else if (storyClosedSite(prop.id || spot.id)) blockedBy = 'story';   // CL-263: its lead hasn't opened
+      else if (chainShutSite(prop.id || spot.id)) blockedBy = 'chain';   // CU-200: the lead is open, the gate is not
       else if (prop === objectiveProps?.props?.[CONVOY_SITE] && !convoyMission.read().done) blockedBy = 'locked';
       else if (prop === objectiveProps?.props?.[HIKERS_SITE] && !hikersSiteDone()) blockedBy = 'locked';   // GB-196: the kit in the tree first
       else if (prop === objectiveProps?.props?.[FUEL_SITE] && !fuelRun.read().done) blockedBy = 'locked';   // GB-197: the can poured at the HQ first
@@ -31869,6 +33273,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       // CL-183/CL-184: at the radio nothing is held. The reboot runs by itself; when it is done, the repair is reported
       // whole (the six seconds) wherever he is, until the site has taken it.
       if (id === RADIO_SITE) {
+        if (chainShutSite(RADIO_SITE)) return { id, approach: reach.approach, distance: reach.distance, reachable: false, blockedBy: 'chain', ePressed: false, eHeld: false, holdSeconds: 0, cancelled: null };   // CU-202
         const st = radioSiteState(), stage = relayStage();
         const fin = (stage === 'locker' || stage === 'done') && (st === 'available' || st === 'active' || st === 'undiscovered');
         if (fin) return { id, approach: reach.approach, distance: 0, reachable: true, blockedBy: null, ePressed: false, eHeld: true, holdSeconds: RELAY.HOLD_S, cancelled: null };
@@ -31881,6 +33286,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (id === FUEL_SITE && fuelProps && ((fuelCarried() && fuelAtGen()) || (fuelRun.read().done && fuelSiteState() !== 'claimed'))) {
         return { id, approach: { x: fuelProps.gen.x, y: fuelProps.gen.y, z: fuelProps.gen.z }, distance: 0, reachable: true, blockedBy: null, ePressed: objEPressed, eHeld: objEDown, holdSeconds: 0, cancelled: null };
       }
+      if (chainShutSite(id)) return { id, approach: reach.approach, distance: reach.distance, reachable: false, blockedBy: 'chain', ePressed: false, eHeld: false, holdSeconds: 0, cancelled: null };   // CU-200
       if (id === HIKERS_SITE && !hikersSiteDone()) {
         const g = hikersGrabbable(), b = hikers?.pos;
         if (g) return { id, approach: { x: b.x, y: b.y, z: b.z }, distance: hikersBagDist(), reachable: true, blockedBy: null, ePressed: objEPressed, eHeld: objEDown, holdSeconds: 0, cancelled: null };
@@ -41772,6 +43178,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (!gameStarted || gameOver || won || phase !== 'prep' || hush.below) return null;
       const m = nearestHushMouth();
       if (!m) return null;
+      if (m.c.theme === 'iron' && chainGatesOn && chainLive.has('below') && !chainGates.isOpen('mine-iron-gate')) {
+        const can = chainGates.canOpen('mine-iron-gate');
+        return { act: false, key: can ? 'chain.below.look' : 'chain.below.locked', fallback: can ? 'An iron gate bars this mine mouth.' : 'The mine gates need the trapper\'s key ring from the iron cellar.', cave: m.i };
+      }
       if (!hush.owned) return { act: false, key: 'hush.none', fallback: 'The dead come up from here. No way down. Not yet.', cave: m.i };   // CL-259
       if (!hush.charged) return { act: false, key: 'hush.flat', fallback: 'The Hush is flat. Tomorrow.', cave: m.i };
       if (m.c.theme === 'chalk') return { act: false, key: 'hush.chalk', fallback: 'Too close to the source.', cave: m.i };
@@ -42821,7 +44231,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     function roofHas(who) { return roofCrew.some((r) => r.who === who); }
     function survivorHelps(style) { return roofHas(SURVIVOR_WHO[style]); }
     function regenCapFrac() { return REGEN_CAP_FRAC; }   // GB-116: GB-91's medic is gone; Okafor heals instead
-    function repairCostMul() { return roofHas('pike') ? PIKE_REPAIR_MUL : 1; }
+    function repairCostMul() { const pike = roofHas('pike') ? PIKE_REPAIR_MUL : 1; return (utilitiesOn && utilities.isOn('workshop')) ? pike * PIKE_REPAIR_MUL : pike; }   // CU-201
     function survivorName(who) { return sayText('story.survivor.' + who + '.name', {}, SURVIVOR_NAME[who] || who); }
     function roofAlert() { return !!hq.seq || phase === 'wave'; }
     function roofPostAt(who) {
@@ -52189,6 +53599,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       }
     }
     function damageTree(tree, hitX, hitZ, hitY, dirX, dirZ) {
+      ensureTreeGrown(tree);
       if (tree.stump) {
         damageStump(tree, 1, { x: dirX, z: dirZ });
         return;
@@ -52290,6 +53701,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
 
     function igniteTree(t, defense = false, atY = 0) {
+      ensureTreeGrown(t);
       if (!t.alive || t.falling) return;
       if ((t.burnT || 0) > 0) return;
       if (trees.filter(o => o.burnT > 0).length >= MAX_BURNING_TREES) return;
@@ -53015,6 +54427,52 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const side = d > 0.01 ? (dx * -Math.cos(camYawCurrent) + dz * Math.sin(camYawCurrent)) / d : 0;
       _snd.pan = Math.max(-0.85, Math.min(0.85, side * Math.min(1, d / 5)));
       return _snd;
+    }
+
+    // GP-20005: cover beside an approaching body, indexed once from the woods' trees.
+    // The understory follows those trees (CU-206); the HQ and trails remain quiet.
+    const nightWarnings = createNightWarnings();
+    const nightWarningsOn = urlParams.get('warnings') !== '0';
+    const nightWarningTreeCell = 6, nightWarningTrees = new Map();
+    let nightWarningTreeCount = -1;
+    const _nightWarningScreen = new THREE.Vector3();
+    function nightWarningCover(x, y, z) {
+      if (nightWarningTreeCount !== trees.length) {
+        nightWarningTrees.clear();
+        for (const t of trees) {
+          const key = Math.floor(t.x / nightWarningTreeCell) + ',' + Math.floor(t.z / nightWarningTreeCell);
+          let bucket = nightWarningTrees.get(key);
+          if (!bucket) nightWarningTrees.set(key, (bucket = []));
+          bucket.push(t);
+        }
+        nightWarningTreeCount = trees.length;
+      }
+      const cx = Math.floor(x / nightWarningTreeCell), cz = Math.floor(z / nightWarningTreeCell);
+      let nearest = 4.5;
+      for (let ix = cx - 1; ix <= cx + 1; ix++) for (let iz = cz - 1; iz <= cz + 1; iz++) {
+        const bucket = nightWarningTrees.get(ix + ',' + iz);
+        if (!bucket) continue;
+        for (const t of bucket) {
+          if (!t.alive || t.falling || Math.abs(y - t.group.position.y) > 3) continue;
+          const d = zHyp(x - t.x, z - t.z);
+          if (d < nearest) nearest = d;
+        }
+      }
+      return nearest < 1.9 ? 'branch' : nearest < 3.8 ? 'brush' : nearest < 4.5 ? 'leaves' : null;
+    }
+    function nightWarningSeen(x, y, z) {
+      _nightWarningScreen.set(x, y + 1, z).project(camera);
+      if (Math.abs(_nightWarningScreen.x) > 0.95 || Math.abs(_nightWarningScreen.y) > 0.95 ||
+          _nightWarningScreen.z < -1 || _nightWarningScreen.z > 1) return false;
+      if (!isNight || nvgDown) return true;
+      if (!flashlightActive() || flashlight.intensity <= 0) return false;
+      const dx = x - flashlight.position.x, dy = y + 1 - flashlight.position.y, dz = z - flashlight.position.z;
+      const dist = Math.hypot(dx, dy, dz);
+      if (dist > flashlight.distance || dist < 0.01) return false;
+      const fx = flashlight.target.position.x - flashlight.position.x;
+      const fy = flashlight.target.position.y - flashlight.position.y;
+      const fz = flashlight.target.position.z - flashlight.position.z;
+      return (dx * fx + dy * fy + dz * fz) / (dist * Math.hypot(fx, fy, fz)) > Math.cos(flashlight.angle * 0.85);
     }
 
     // GB-75 (P-26): plates. PLATE_CUT against bullets, pellets, blades and the saw (plus an iron cave's extra
@@ -56364,6 +57822,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     function updateZombies(dt) {
       updateRunePistol();   // GB-119: the rune pistol on the dock, by day
       if (hollowFloor) { updateBelow(dt); return; }   // GB-107: below, only the warren's dead move (topside's stay frozen)
+      nightWarnings.advance(dt);
       zFrame++;   // GB-100
       if (poiGuardsDue && phase === 'prep' && gameStarted && !devNoZombies && _preRollDone && !_liveRoll) { poiGuardsDue = false; spawnPoiGuards(); }   // GB-43
       if (bountiesDue && phase === 'prep' && gameStarted && !devNoZombies && _preRollDone && !_liveRoll && !hq.seq && !paused) { bountiesDue = false; spawnBounties(); }   // GB-57
@@ -57367,6 +58826,23 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         // instead of walking on the spot.
         const standing = !moving || spd < 0.05;
         if (!standing) z.walkPhase = (z.walkPhase || 0) + dt * cadence;
+        // GP-20005: footsteps, brush and snapped twigs announce a body closing from
+        // the dark woods while there is still room to turn a light or move away.
+        if (nightWarnings.ready(z, hzPd,
+            !lured && !windowRoute && !spiderWander && tx === px0 && tz === pz0 && !(z.poiGuard && !z.poiAwake) && !z.sleeping,
+            !standing && !zSwimming && zHyp(mx - zx, mz - zz) > dt * 0.08, true,
+            nightWarningsOn && gameStarted && !paused && !gameOver && !won && !training.active)) {
+          const wx = z.mesh.position.x, wy = z.mesh.position.y, wz = z.mesh.position.z;
+          if (!nightWarningSeen(wx, wy, wz)) {
+            const cover = nightWarningCover(wx, wy, wz);
+            if (cover) {
+              const sa = sndAt(wx, wz, 26);
+              nightWarnings.emit(z, { kind: cover, x: wx, y: wy, z: wz, distance: hzPd,
+                volume: sa.v, pan: sa.pan, night: isNight, type: z.typeKey });
+              AudioSys.woodsWarning?.(cover, sa.v, sa.pan);
+            }
+          }
+        }
         // Heavy things you hear coming: a footfall every half stride.
         if (moving && (z.typeKey === 'brute' || z.typeKey === 'demon' || z.typeKey === 'colossus' || z.typeKey === 'guardian')) {
           const fi = Math.floor((z.walkPhase || 0) / Math.PI);
@@ -58183,6 +59659,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       sun.castShadow = p.shadow > 0;
       if (p.shadow > 0) sun.shadow.mapSize.set(p.shadow, p.shadow);
       foliageCullDist = p.foliage;
+      if (foliageBundle) foliageBundle.needsUpdate = true; // the preset can change the shadow/material pipeline
       cullFoliageByDistance(); // the loop skips it while paused, where presets get picked
       // Queued so rapid clicks can't interleave two builds; each checks the latest pick.
       _postRebuild = _postRebuild.then(() => {
@@ -59694,6 +61171,8 @@ live++;
       drawMinimap(dt);
       PROF.mark('w:minimap');
       updateWind(dt);
+      if ((skylineFuelCheck -= dt) <= 0) { skylineFuelCheck = 1; skylineFuelDone = STORY_DONE.generator(); }
+      skylinePulls?.update(dt, { wind, daylight: !isNight, fuelDone: skylineFuelDone, beaconOn: !!(skylineMastBeacon && skylineMastBeacon.light.intensity > 0) });
       updateWindSway();
       updateGaleLeaves(dt);   // CL-262
       PROF.mark('w:wind');
@@ -61179,7 +62658,7 @@ live++;
           ffHouseDistAt: (x, z) => { const k = ffIndexOf(ffHouse, x, z); return k < 0 ? null : ffHouse.dist[k]; },
           // Debug-only: renderer-cost hooks (shared light pool, canopy fade, puddle materials).
           effectLights, muzzleFlashLight, flashlight, applyCanopyFade, spawnGroundFire, puddleMatPool, casings,
-          CANOPY_LEGACY, WATER_FORCE_CPU, preRollFight, finishEffectWarmup, renderFrame, groundBaseColors, groundWornColors, groundWear, getGroundDetail: () => GROUND_DETAIL, caveApronWear, caveHillHeight, caveWarn, caveCorridor, waterNoiseTex, waterColourAt, WATER_TINT, riverSurfAt, riverProject, riverBedAt, getRiverJoin: () => RIVER_JOIN_S, terrainBase, terrainRaw, fishes, fishSchools, updateFish, waterCurrentAt, waterSurfaceTargets, waterLevelAt, waterDepthAt, LAKE, streamGroup, getTreeTex: () => ({ leaf: leafDetailTex, bark: barkDetailTex, on: treeShaderOn }), igniteTree, updateBurningTrees, updateFallingTrees, updateSmoke, updateZombieFires, smokePuffs, groundFires, spawnGroundFire, zombieFireSets, getGroundDetailTex: () => groundDetailTex, GROUND_DETAIL_SCALE, PATHS, PATH_HUBS, pathWearAt, yardWearAt, ground, POST_OFF, getPostProcessing: () => postProcessing, getBloomNode: () => bloomNode, FOLIAGE_LEGACY, foliageChunks, listFlowerPads, getFoliageWindOnGPU: () => foliageWindOnGPU, foliageWind, getWaterOnGPU: () => waterOnGPU, getWaterTimeUniform: () => waterTimeUniform, leafPieceY, leafPieceVisible, leafPieceWorldPos, leafPieceColorHex, setLeafPiece, damageTree, restoreTree, beginTreeFall, terrainSlope, waterAt, addLogSolids, removeLogSolids, TREE_LOG_LIE, treeBatchStats, updateTreeBatches, getObjectiveProps: () => objectiveProps, storyDbg: { chain: storyChain, read: () => ({ ...storyChain.read(), gate: STORY_GATE, gatePlay: STORY_GATE_PLAY }), gate: (on = true) => { STORY_GATE = !!on; return STORY_GATE; }, closedSite: (site) => storyClosedSite(site), sync: () => { storySyncT = 0; updateStoryChain(0); }, leadForSite: storyLeadForSite, reach: (site) => { const pr = objectiveProps?.props?.[site]; return pr ? objectiveReach(pr) : null; } },   /* CL-263 */ windDbg: { wind, spell: windSpell, leaves: galeLeaves, mesh: galeLeafMesh, WIND_SPELL, STORM_GAP, STORM_FIRST, STORM_GRACE_DAY, schedule: (f) => scheduleNextRain(f), update: (dt) => updateWeather(dt) },   /* CL-262 */ relayDbg: { puzzle: relayPuzzle, state: () => relayPuzzle.state, relay, open: (m) => relayOpen(m), act: (a) => relayAction(a), close: () => relayClose(), RELAY, vault: () => radioLocker, note: () => satoNote, plan: (d) => relayDayPlan(d), rewardFor: (d) => { if (radioLocker) radioLocker.reward = vaultReward(d, vaultCan); if (radioLocker.phase !== "locked") vaultShowReward(radioLocker); return radioLocker && radioLocker.reward; }, spawnSpot: (r0, r1) => relaySpawnSpot(POI.mast, r0, r1), satoSpots: () => satoSpots, placeNote: () => placeSatoNote() },   /* CL-183, CL-184, CL-257 */ siteCallTheDead, truckDbg: { mission: truckMission, state: () => truckMission.state, truck, prompt: () => truckPromptText(), locked: () => truckLocked(), reach: () => truckSiteProp() && objectiveReach(truckSiteProp()), TRUCK },   /* CL-216 */ rangerDbg: { cache: rangerCache, state: () => rangerCache.state, ranger, prompt: () => rangerPromptText(), locked: () => rangerLocked(), reach: () => rangerSiteProp() && objectiveReach(rangerSiteProp()), open: (m, src) => rangerOpen(m, src ? ranger.clues.find((c) => c.source === src) : null), act: (a) => rangerAction(a), close: () => rangerClose(), update: (dt) => updateRanger(dt), RANGER },   /* CL-217 */ trapperDbg: { path: trapperPath, state: () => trapperPath.state, trapper, prompt: () => trapperPromptText(), locked: () => trapperLocked(), doorsOpen: () => !!(trapper.doorsOpen && trapper.doorsOpen()), inCellar: (x = localPlayer.position.x, y = localPlayer.position.y, z = localPlayer.position.z) => !!(trapper.inCellar && trapper.inCellar(x, y, z)), cellarSpot: () => trapper.cellarSpot, syncCellar: (u) => trapper.syncCellar && trapper.syncCellar(u), reach: () => trapperSiteProp() && objectiveReach(trapperSiteProp()), stepAt: (x, z, dt, o) => trapperStepAt(x, z, dt, o), syncHorseshoes: () => syncTrapperHorseshoes(), clearSprung: () => clearTrapperSprung(), update: (dt) => updateTrapper(dt), TRAPPER },   /* AG-93, AG-135 */ drawsOf: (root, max = 400) => { const out = []; if (!root) return out; root.updateMatrixWorld(true); root.traverse((o) => { if (!o.isMesh) return; for (let q = o; q && q !== root.parent; q = q.parent) if (!q.visible) return; const m = Array.isArray(o.material) ? o.material[0] : o.material || {}; const path = []; for (let q = o; q && q !== root; q = q.parent) if (q.name) path.unshift(q.name); out.push({ path: path.join('/') || '(unnamed)', type: o.type, mat: m.type, map: !!m.map, emissive: !!(m.emissive && (m.emissive.r || m.emissive.g || m.emissive.b) && m.emissiveIntensity > 0), transparent: !!m.transparent, vc: !!m.vertexColors, folded: !!o.userData.folded, baked: o.userData.baked || 0, verts: o.geometry && o.geometry.attributes.position ? o.geometry.attributes.position.count : 0, inst: o.isInstancedMesh ? o.count : 0 }); }); return out.slice(0, max); },   /* CL-218: every visible mesh under a root, and why it is its own draw */ radioCuesDbg: () => ({ locker: radioLocker, marks: radioMarks, bar: radioBarEl, state: radioSiteState(), prompt: radioPromptText(), objPrompt: objectivePromptText(), runtime: objectiveRuntime, hold: { id: objHoldId, s: objHoldSeconds, down: objEDown } }), getTreeBatches: () => ({ cells: treeBatchCells, members: treeBatchMembers, off: TREE_BATCH_OFF }),
+          CANOPY_LEGACY, WATER_FORCE_CPU, preRollFight, finishEffectWarmup, renderFrame, groundBaseColors, groundWornColors, groundWear, getGroundDetail: () => GROUND_DETAIL, caveApronWear, caveHillHeight, caveWarn, caveCorridor, waterNoiseTex, waterColourAt, WATER_TINT, riverSurfAt, riverProject, riverBedAt, getRiverJoin: () => RIVER_JOIN_S, terrainBase, terrainRaw, fishes, fishSchools, updateFish, waterCurrentAt, waterSurfaceTargets, waterLevelAt, waterDepthAt, LAKE, streamGroup, getTreeTex: () => ({ leaf: leafDetailTex, bark: barkDetailTex, on: treeShaderOn }), igniteTree, growTreeMeshes: ensureTreeGrown, updateBurningTrees, updateFallingTrees, updateSmoke, updateZombieFires, smokePuffs, groundFires, spawnGroundFire, zombieFireSets, getGroundDetailTex: () => groundDetailTex, GROUND_DETAIL_SCALE, PATHS, PATH_HUBS, pathWearAt, yardWearAt, ground, POST_OFF, getPostProcessing: () => postProcessing, getBloomNode: () => bloomNode, FOLIAGE_LEGACY, foliageChunks, listFlowerPads, getFoliageWindOnGPU: () => foliageWindOnGPU, foliageWind, getWaterOnGPU: () => waterOnGPU, getWaterTimeUniform: () => waterTimeUniform, leafPieceY, leafPieceVisible, leafPieceWorldPos, leafPieceColorHex, setLeafPiece, damageTree, restoreTree, beginTreeFall, terrainSlope, waterAt, addLogSolids, removeLogSolids, TREE_LOG_LIE, treeBatchStats, updateTreeBatches, getObjectiveProps: () => objectiveProps, storyDbg: { chain: storyChain, read: () => ({ ...storyChain.read(), gate: STORY_GATE, gatePlay: STORY_GATE_PLAY }), gate: (on = true) => { STORY_GATE = !!on; return STORY_GATE; }, closedSite: (site) => storyClosedSite(site), sync: () => { storySyncT = 0; updateStoryChain(0); }, leadForSite: storyLeadForSite, reach: (site) => { const pr = objectiveProps?.props?.[site]; return pr ? objectiveReach(pr) : null; } },   /* CL-263 */ windDbg: { wind, spell: windSpell, leaves: galeLeaves, mesh: galeLeafMesh, WIND_SPELL, STORM_GAP, STORM_FIRST, STORM_GRACE_DAY, schedule: (f) => scheduleNextRain(f), update: (dt) => updateWeather(dt) },   /* CL-262 */ relayDbg: { puzzle: relayPuzzle, state: () => relayPuzzle.state, relay, open: (m) => relayOpen(m), act: (a) => relayAction(a), close: () => relayClose(), RELAY, vault: () => radioLocker, note: () => satoNote, plan: (d) => relayDayPlan(d), rewardFor: (d) => { if (radioLocker) radioLocker.reward = vaultReward(d, vaultCan); if (radioLocker.phase !== "locked") vaultShowReward(radioLocker); return radioLocker && radioLocker.reward; }, spawnSpot: (r0, r1) => relaySpawnSpot(POI.mast, r0, r1), satoSpots: () => satoSpots, placeNote: () => placeSatoNote() },   /* CL-183, CL-184, CL-257 */ siteCallTheDead, truckDbg: { mission: truckMission, state: () => truckMission.state, truck, prompt: () => truckPromptText(), locked: () => truckLocked(), reach: () => truckSiteProp() && objectiveReach(truckSiteProp()), TRUCK },   /* CL-216 */ rangerDbg: { cache: rangerCache, state: () => rangerCache.state, ranger, prompt: () => rangerPromptText(), locked: () => rangerLocked(), reach: () => rangerSiteProp() && objectiveReach(rangerSiteProp()), open: (m, src) => rangerOpen(m, src ? ranger.clues.find((c) => c.source === src) : null), act: (a) => rangerAction(a), close: () => rangerClose(), update: (dt) => updateRanger(dt), RANGER },   /* CL-217 */ trapperDbg: { path: trapperPath, state: () => trapperPath.state, trapper, prompt: () => trapperPromptText(), locked: () => trapperLocked(), doorsOpen: () => !!(trapper.doorsOpen && trapper.doorsOpen()), inCellar: (x = localPlayer.position.x, y = localPlayer.position.y, z = localPlayer.position.z) => !!(trapper.inCellar && trapper.inCellar(x, y, z)), cellarSpot: () => trapper.cellarSpot, syncCellar: (u) => trapper.syncCellar && trapper.syncCellar(u), reach: () => trapperSiteProp() && objectiveReach(trapperSiteProp()), stepAt: (x, z, dt, o) => trapperStepAt(x, z, dt, o), syncHorseshoes: () => syncTrapperHorseshoes(), clearSprung: () => clearTrapperSprung(), update: (dt) => updateTrapper(dt), TRAPPER },   /* AG-93, AG-135 */ drawsOf: (root, max = 400) => { const out = []; if (!root) return out; root.updateMatrixWorld(true); root.traverse((o) => { if (!o.isMesh) return; for (let q = o; q && q !== root.parent; q = q.parent) if (!q.visible) return; const m = Array.isArray(o.material) ? o.material[0] : o.material || {}; const path = []; for (let q = o; q && q !== root; q = q.parent) if (q.name) path.unshift(q.name); out.push({ path: path.join('/') || '(unnamed)', type: o.type, mat: m.type, map: !!m.map, emissive: !!(m.emissive && (m.emissive.r || m.emissive.g || m.emissive.b) && m.emissiveIntensity > 0), transparent: !!m.transparent, vc: !!m.vertexColors, folded: !!o.userData.folded, baked: o.userData.baked || 0, verts: o.geometry && o.geometry.attributes.position ? o.geometry.attributes.position.count : 0, inst: o.isInstancedMesh ? o.count : 0 }); }); return out.slice(0, max); },   /* CL-218: every visible mesh under a root, and why it is its own draw */ radioCuesDbg: () => ({ locker: radioLocker, marks: radioMarks, bar: radioBarEl, state: radioSiteState(), prompt: radioPromptText(), objPrompt: objectivePromptText(), runtime: objectiveRuntime, hold: { id: objHoldId, s: objHoldSeconds, down: objEDown } }), getTreeBatches: () => ({ cells: treeBatchCells, members: treeBatchMembers, off: TREE_BATCH_OFF }),
           feralMotionDbg: feralMotion,   // GP-198
           enemyAbilitiesDbg: enemyAbilities,   // GP-179
           waterWaveTargets, motes, motePool, ripples, ripplePool, acidGlobPool, acidPuddlePool, groundFirePool, clearGroundFires, groundFires, bloodDecals, debris, bloodParticles, spawnMote, spawnRipple, spawnEmbers, dustMat, spawnGibBurst, spawnBlood, spawnChunks, runDevCommand, devJumpToNight, openDevConsole, closeDevConsole, isDevConsoleOpen: () => devConsoleOpen, isInfiniteCash: () => devInfiniteCash, kioskOpenAllowed, PREP_TIME, getPrepTimer: () => prepTimer, setPrepTimer: (t) => { prepTimer = t; }, setDay: (d) => { day = d; }, getDay: () => day,
@@ -61203,12 +62682,17 @@ live++;
           setShotView, getShotView: () => shotView,
           skipGrace: () => { hoursSinceMatchStart = Math.max(hoursSinceMatchStart, ZOMBIE_GRACE_HOURS + 0.01); },
           getQuestState: () => quest.read(), learnQuest: place => quest.learn(place), restoreQuestDbg: state => quest.restore(state),
-          launcherBrassDbg: () => ({ thrown: launcherBrassThrown, spent: launcherSpent }),   /* GB-133 */ dismemberDbg: (z, part) => detachZombiePart(z, part, 0, 1), MAIMED_HOP_MUL, cloneLean,   /* CL-136 */ slowMoDbg, triggerSlowMo, diveDbg: () => ({ phase: dive.phase, w: dive.w, k: diveTimeScale(dive), meter: dive.meter, cd: dive.cd, slowT: dive.slowT, slowing: slowmoOn(dive), vx: dive.vx, vz: dive.vz, dirX: dive.dirX, dirZ: dive.dirZ, dives: dive.dives, flat: diveFlatW,pose:divePoseFrame,contact:dive.contact }), setDiveMeterDbg: (v) => { dive.meter = Math.max(0, Math.min(1, +v || 0)); }, DIVE,   /* CL-193 */ selectorFlick,   /* GB-167 */   /* CL-137 */ trainingHideWorld, getHidWorld: () => training.hidWorld,   /* CL-138 */ profDbg: PROF, rotateCamera, cullDbg: cullStats, cullShowAll, zombiePoolDbg: () => Object.fromEntries([...zombiePool].map(([k, v]) => [k, v.length])), sunShadowDbg: () => ({ ...sunShadowStats, deep: sunShadowDeep, tick: sunShadowTick, every: SUN_SHADOW_DEEP_EVERY, move: SUN_SHADOW_DEEP_MOVE }),   /* CL-237 */ zombieHitNightMul,   /* CL-244 */ marineShadowDbg: (full) => ({ builds: marineShadowBuilds, lastDiff: marineShadowDiff, proxy: marineShadowProxy, ms: marineShadowMs, sig: marineShadowSig, bones: marineShadowProxy ? marineShadowProxy.skeleton.bones.length : 0, verts: marineShadowProxy ? marineShadowProxy.geometry.attributes.position.count : 0, warm: marineShadowWarm, retired: marineShadowRetired.length, drawnAt: marineShadowProxy ? marineShadowProxy.userData.drawnAt : null, seen: marineShadowSeen, seenAt: marineShadowSeenAt, builtAt: marineShadowBuiltAt, frame: perfFrame, now: full ? marineShadowNow() : undefined }),   /* CL-241: warm..frame, now */ skinMergeGroup, skinUnmerge,   /* CL-140 */   /* GB-136 */ grenadeArcDbg: () => ({ charging: grenadeCharging, t: grenadeChargeT, visible: grenadeArc.visible, hit: grenadeArc.userData.hit, dots: grenadeArc.userData.dots, launcher: launcherArc.visible, lhit: launcherArc.userData.hit, lstate: launcherArc.userData.state, last: lastGrenadeThrow, n: grenades, cd: grenadeCd }), startGrenadeCharge, releaseGrenadeCharge, GRENADE_THROW, grenadeThrowSpeed, flyArc,   /* GB-134 */ grenadeAnimDbg: () => ({ phase: grenadeAnim.phase, t: grenadeAnim.t, inHand: grenadeAnim.inHand, queued: grenadeAnim.queued, hand: grenadeHand, carriedShown: grenadeInHandN, simple: !!grenadeArc.userData.simple, segs: grenadeArc.userData.segs, release: grenadeReleasePoint().clone(), anim: GRENADE_ANIM, keys: GR_KEY }), holdGrenadeAnim: (phase, t) => { grenadeAnimHold = phase ? { phase, t: t || 0 } : null; if (!phase) { grenadeAnim.phase = ''; setGrenadeInHand(false); } }, setGrenadesDbg: (n) => { grenades = n | 0; updateAmmoHud(); updateCarriedGear(0, true); },   /* CU-97 */ m240Dbg: () => { const b = mortarMounted && mortarMounted.type === 'm240' ? mortarMounted : null; return { belt: b ? b.belt : null, feedT: b ? (b.feedT || 0) : 0, reserve: reserveAmmo['7.62 belt'] | 0, flash: !!(b && b.mesh.userData.flash && b.mesh.userData.flash.visible), hud: ammoDetailEl ? ammoDetailEl.textContent : '', hudName: ammoWeaponEl ? ammoWeaponEl.textContent : '' }; }, watchmanDbg: () => ({state:mortarMounted?.watchman || null,weight:_watchman.weight,ghost:ghostGroup}), crewDbg: () => ({ mortar: { w: _mcrew.w, phase: _mcrew.load.phase, roundIn: _mcrew.load.round, dropping: _mcrew.load.dropping, dropT: _mcrew.load.dropT, fired: _mcrew.load.fired, round: _mcrew.round, muzzle: _mcrew.muzzle, axis: _mcrew.axis, feet: _mcrew.plant.feet, steps: _mcrew.plant.steps }, m240: { feet: _watchman.plant.feet, steps: _watchman.plant.steps } }),   /* GB-156 */ feedM240, m240MuzzleWorld, M240_FEED_S, stockedLooseCalibers, aimPointDbg: (x, y, z) => { aimTarget.set(x, y, z); }, upgradeAvailableHint, getUpgradeAvailHint: () => upgradeAvailHint, tipOnce, tipsDbg: () => ({ seen: Object.assign({}, tipsSeen || {}), reset: () => { tipsSeen = {}; try { localStorage.removeItem(TIP_STORE); } catch (e) {} } }), placeBannerText: () => placeBannerEl.textContent, bigBannerText: () => bigBannerT.textContent + ' | ' + bigBannerS.textContent,   /* GB-139 */ m240VisDbg: () => ({ carried: carriedM240Mesh.visible, carriedMortar: carriedMortarMesh.visible, carriedGun: carriedM240Mesh, spent: { ...m240Spent }, casings: casings.length, pitchTo: m240PitchTo, muzzle: m240MuzzleWorld, CARRY_M240, CARRY_ARM, ELEV: [M240_ELEV_MIN, M240_ELEV_MAX], setDown: setDownMortar, casingsList: casings }),   /* CL-131 */ brandtGunDbg: () => { const r = roofCrew.find((c) => c.who === 'brandt'); return r && r.gun ? { gun: r.gun, flashed: !!r.gun.userData.flash, shots: r.shots } : null; },   /* GB-138 */ getSimTime: () => simTime,   /* GB-131 */ getDebugTouched: () => debugTouched, resetGame, ensureCrew,   /* CL-105 */ makeMarine,   /* CL-94 */ carryDbg, carryPreview, updateCarriedGear, CARRY_SLOTS, drawDbg, updateMarineDraw, drawPreview,   /* CL-90 */ dressMarine, DRESS, getMarine: () => marine, dressGuns, getGunFurniture: () => gunFurniture,   /* CL-97 */ buildWarren, layoutWarren, WARREN_THEMES, HOLLOW, enterHollow, leaveHollow, warrenDbg: () => ({ safe: warrenSafe, lastY: warrenLastY, open: (x, y, z) => belowCamOpen(x, y, z), roof: (x, z) => belowRoofAt(x, z) }), hollowState: () => hollow.state(), belowDbg, applyVaultReward,   /* CL-259 */   /* GB-107 */ stirDbg,   /* GB-108 */ heartDbg,   /* GB-92 */ runePistolDbg,   /* GB-119 */ hordeDbg,   /* GB-94 */ getMedDropCount: () => medDrops.length,   /* GB-94 */ grantHaul, claimHollowHere, markHollowPassage: (b) => { markHollowPassage(b); return passageMark; },   /* CU-80, CU-72 */ hqLadderAt, stepHqLadder, onHqRoof: () => onHqRoof,   /* CL-99 */ pitSignal, setPitWord, setPitSilenced, updatePitSignal, setOnTowerDeckDbg: (v) => { onTowerDeck = !!v; }, /* CL-107 */ firstPeople, updateFirstPeople, caveSealSolids, /* CL-112 */ buildHeart, HEART, /* CL-81 */ letGoDbg, /* CL-116 */ lightPoolDbg: { pool: () => ensureLightPool(), update: () => updateLightPool() }, /* CL-115 */ trainingDbg: { round: (p) => trainingRound(p),   /* GB-163: a round by hand (shots, tests) */ start: () => startTraining(), enter: () => enterTraining(), leave: () => leaveTraining(), state: () => training, tg: () => training.tg,
+          launcherBrassDbg: () => ({ thrown: launcherBrassThrown, spent: launcherSpent }),   /* GB-133 */ dismemberDbg: (z, part) => detachZombiePart(z, part, 0, 1), MAIMED_HOP_MUL, cloneLean,   /* CL-136 */ slowMoDbg, triggerSlowMo, diveDbg: () => ({ phase: dive.phase, w: dive.w, k: diveTimeScale(dive), meter: dive.meter, cd: dive.cd, slowT: dive.slowT, slowing: slowmoOn(dive), vx: dive.vx, vz: dive.vz, dirX: dive.dirX, dirZ: dive.dirZ, dives: dive.dives, flat: diveFlatW,pose:divePoseFrame,contact:dive.contact }), setDiveMeterDbg: (v) => { dive.meter = Math.max(0, Math.min(1, +v || 0)); }, DIVE,   /* CL-193 */ selectorFlick,   /* GB-167 */   /* CL-137 */ trainingHideWorld, getHidWorld: () => training.hidWorld,   /* CL-138 */ profDbg: PROF, rotateCamera, cullDbg: cullStats, cullShowAll, zombiePoolDbg: () => Object.fromEntries([...zombiePool].map(([k, v]) => [k, v.length])), shadowPruneDbg: () => ({ on: SHADOW_PRUNE, ...shadowPrune }),   /* CL-288 */ sunShadowDbg: () => ({ ...sunShadowStats, deep: sunShadowDeep, tick: sunShadowTick, every: SUN_SHADOW_DEEP_EVERY, move: SUN_SHADOW_DEEP_MOVE }),   /* CL-237 */ zombieHitNightMul,   /* CL-244 */ marineShadowDbg: (full) => ({ builds: marineShadowBuilds, lastDiff: marineShadowDiff, proxy: marineShadowProxy, ms: marineShadowMs, sig: marineShadowSig, bones: marineShadowProxy ? marineShadowProxy.skeleton.bones.length : 0, verts: marineShadowProxy ? marineShadowProxy.geometry.attributes.position.count : 0, warm: marineShadowWarm, retired: marineShadowRetired.length, drawnAt: marineShadowProxy ? marineShadowProxy.userData.drawnAt : null, seen: marineShadowSeen, seenAt: marineShadowSeenAt, builtAt: marineShadowBuiltAt, frame: perfFrame, now: full ? marineShadowNow() : undefined }),   /* CL-241: warm..frame, now */ skinMergeGroup, skinUnmerge,   /* CL-140 */   /* GB-136 */ grenadeArcDbg: () => ({ charging: grenadeCharging, t: grenadeChargeT, visible: grenadeArc.visible, hit: grenadeArc.userData.hit, dots: grenadeArc.userData.dots, launcher: launcherArc.visible, lhit: launcherArc.userData.hit, lstate: launcherArc.userData.state, last: lastGrenadeThrow, n: grenades, cd: grenadeCd }), startGrenadeCharge, releaseGrenadeCharge, GRENADE_THROW, grenadeThrowSpeed, flyArc,   /* GB-134 */ grenadeAnimDbg: () => ({ phase: grenadeAnim.phase, t: grenadeAnim.t, inHand: grenadeAnim.inHand, queued: grenadeAnim.queued, hand: grenadeHand, carriedShown: grenadeInHandN, simple: !!grenadeArc.userData.simple, segs: grenadeArc.userData.segs, release: grenadeReleasePoint().clone(), anim: GRENADE_ANIM, keys: GR_KEY }), holdGrenadeAnim: (phase, t) => { grenadeAnimHold = phase ? { phase, t: t || 0 } : null; if (!phase) { grenadeAnim.phase = ''; setGrenadeInHand(false); } }, setGrenadesDbg: (n) => { grenades = n | 0; updateAmmoHud(); updateCarriedGear(0, true); },   /* CU-97 */ m240Dbg: () => { const b = mortarMounted && mortarMounted.type === 'm240' ? mortarMounted : null; return { belt: b ? b.belt : null, feedT: b ? (b.feedT || 0) : 0, reserve: reserveAmmo['7.62 belt'] | 0, flash: !!(b && b.mesh.userData.flash && b.mesh.userData.flash.visible), hud: ammoDetailEl ? ammoDetailEl.textContent : '', hudName: ammoWeaponEl ? ammoWeaponEl.textContent : '' }; }, watchmanDbg: () => ({state:mortarMounted?.watchman || null,weight:_watchman.weight,ghost:ghostGroup}), crewDbg: () => ({ mortar: { w: _mcrew.w, phase: _mcrew.load.phase, roundIn: _mcrew.load.round, dropping: _mcrew.load.dropping, dropT: _mcrew.load.dropT, fired: _mcrew.load.fired, round: _mcrew.round, muzzle: _mcrew.muzzle, axis: _mcrew.axis, feet: _mcrew.plant.feet, steps: _mcrew.plant.steps }, m240: { feet: _watchman.plant.feet, steps: _watchman.plant.steps } }),   /* GB-156 */ feedM240, m240MuzzleWorld, M240_FEED_S, stockedLooseCalibers, aimPointDbg: (x, y, z) => { aimTarget.set(x, y, z); }, upgradeAvailableHint, getUpgradeAvailHint: () => upgradeAvailHint, tipOnce, tipsDbg: () => ({ seen: Object.assign({}, tipsSeen || {}), reset: () => { tipsSeen = {}; try { localStorage.removeItem(TIP_STORE); } catch (e) {} } }), placeBannerText: () => placeBannerEl.textContent, bigBannerText: () => bigBannerT.textContent + ' | ' + bigBannerS.textContent,   /* GB-139 */ m240VisDbg: () => ({ carried: carriedM240Mesh.visible, carriedMortar: carriedMortarMesh.visible, carriedGun: carriedM240Mesh, spent: { ...m240Spent }, casings: casings.length, pitchTo: m240PitchTo, muzzle: m240MuzzleWorld, CARRY_M240, CARRY_ARM, ELEV: [M240_ELEV_MIN, M240_ELEV_MAX], setDown: setDownMortar, casingsList: casings }),   /* CL-131 */ brandtGunDbg: () => { const r = roofCrew.find((c) => c.who === 'brandt'); return r && r.gun ? { gun: r.gun, flashed: !!r.gun.userData.flash, shots: r.shots } : null; },   /* GB-138 */ getSimTime: () => simTime,   /* GB-131 */ getDebugTouched: () => debugTouched, resetGame, ensureCrew,   /* CL-105 */ makeMarine,   /* CL-94 */ carryDbg, carryPreview, updateCarriedGear, CARRY_SLOTS, drawDbg, updateMarineDraw, drawPreview,   /* CL-90 */ dressMarine, DRESS, getMarine: () => marine, dressGuns, getGunFurniture: () => gunFurniture,   /* CL-97 */ buildWarren, layoutWarren, WARREN_THEMES, HOLLOW, enterHollow, leaveHollow, warrenDbg: () => ({ safe: warrenSafe, lastY: warrenLastY, open: (x, y, z) => belowCamOpen(x, y, z), roof: (x, z) => belowRoofAt(x, z) }), hollowState: () => hollow.state(), belowDbg, applyVaultReward,   /* CL-259 */   /* GB-107 */ stirDbg,   /* GB-108 */ heartDbg,   /* GB-92 */ runePistolDbg,   /* GB-119 */ hordeDbg,   /* GB-94 */ getMedDropCount: () => medDrops.length,   /* GB-94 */ grantHaul, claimHollowHere, markHollowPassage: (b) => { markHollowPassage(b); return passageMark; },   /* CU-80, CU-72 */ hqLadderAt, stepHqLadder, onHqRoof: () => onHqRoof, mapRevealDbg: () => ({ seen: (x, z) => mapReveal.seen(x, z), count: () => mapReveal.count(), found: () => mapReveal.found(), step: () => stepMapReveal() }),   /* CU-198 */   /* CL-99 */ pitSignal, setPitWord, setPitSilenced, updatePitSignal, setOnTowerDeckDbg: (v) => { onTowerDeck = !!v; }, /* CL-107 */ firstPeople, updateFirstPeople, caveSealSolids, /* CL-112 */ buildHeart, HEART, /* CL-81 */ letGoDbg, /* CL-116 */ lightPoolDbg: { pool: () => ensureLightPool(), update: () => updateLightPool() }, /* CL-115 */ trainingDbg: { round: (p) => trainingRound(p),   /* GB-163: a round by hand (shots, tests) */ start: () => startTraining(), enter: () => enterTraining(), leave: () => leaveTraining(), state: () => training, tg: () => training.tg,
             action: () => trainingActionTarget(), spawn: (k, n) => trainingSpawn(k, n), clear: () => trainingClear(), layout: () => trainingLayout(), clearLayout: () => trainingLayoutClear(), layoutPieces: () => training.layout || [], layoutRefused: () => training.layoutRefused || [], alive: () => trainingAlive(), blackout: () => trainingBlackout(), hitTarget: (i, pt) => trainingHitTarget(i, pt, !!pt), deployNow: (k, n) => trainingDeployNow(k, n), tunnel: () => training.tunnel, pops: () => training.pops, clearSkulls: () => trainingClearSkulls(),   /* CL-171 */
             update: (dt) => updateTraining(dt), panel: () => (ensureTrainingUi(), training.panel), openPanel: () => openTrainingPanel(), round: (p) => trainingRound(p), TRAINING,
             lights: () => ({ on: !training.lightsOff, night: isNight, room: training.tg ? training.tg.lightsOn() : null }), toggleLights: () => toggleTrainingLights() /* CU-94 */ }, /* CL-114 */ stockNoticeDbg: { arrivals: (n) => stockArrivals(n), queue: (n) => queueStockNotice(n), state: () => ({ t: stockNotice.t, hold: stockNotice.hold, guns: stockNotice.guns.slice(), shown: stockNotice.shown.slice(), visible: !!(stockNotice.el && stockNotice.el.classList.contains('show')) }), tick: (dt) => updateStockNotice(dt), show: (guns) => showStockNotice(guns), setDay: (n) => { day = n; }, NIGHT: GUN_STOCK_NIGHT }, armoryFinishDbg: { list: (k) => armoryFinishes(k), paint: (k, key) => paintArmoryGun(k, key) }, /* CL-113 */ armoryDbg: { mods: (w) => armoryMods(w), fit: (w, id, on) => fitArmoryMod(w, id, on), inReach: () => weaponsInReach(), picture: (k) => armoryPicture(k), pics: () => ({ drawn: armoryPics.drawn, cached: armoryPics.cache.size, ok: !!armoryPics.r }), rack: () => (house.armoryRack ? house.armoryRack.children.map((g) => g.userData.rackKind).filter(Boolean) : null), refreshRack: () => refreshArmoryRack(true), stored: () => armoryStoredKinds(), bigtex: () => bigtexWheel, ui: () => armoryUI, owned: () => ({ suppressor: { ...suppressorOwned }, auto: pistolAutoOwned, tank: sawTankUpgraded }) }, /* CL-83 */ nightRimDbg, /* CL-108, CL-109 */ historyProps, storyPropInReach, /* CL-111 */ runeFinishDbg: { unlocked: () => runeFinishUnlocked(), unlock: () => unlockRuneFinish(), lock: () => { runeFinish.unlocked = false; try { localStorage.removeItem(RUNE_FINISH_STORE); } catch (_) {} }, isGunFinishKey: (k) => isGunFinishKey(k), tex: () => runeFinish.tex, glow: (l) => updateRuneFinishGlow(l), state: () => runeFinish, furniture: () => gunFurniture, readWardrobe: () => readWardrobe(), KEY: RUNE_FINISH_KEY }, /* CL-78 */ guardianBossDbg: { rigOf: (z) => (z && z.mesh && z.mesh.userData.bossRig) || null, update: (dt) => updateGuardianBossRigs(dt), BOSS_RIG }, /* CL-93 */ rabbitDbg: { ensure: () => ensureRabbitMound(), state: () => rabbitMound, update: (dt) => updateRabbitMound(dt), wake: () => wakeKillerRabbit(), hit: (a, b) => rabbitMoundHit(a.x, a.y, a.z, b.x, b.y, b.z), give: () => { ensureRabbitMound(); rabbitMound.holy = true; rabbitMound.reliquary.userData.grenade.visible = false; }, ready: () => holyGrenadeReady(), throwG: () => { grenadeCd = 0; throwGrenade(); }, reset: () => resetRabbitMound(), distToPath: (x, z) => distToPath(x, z), RABBIT }, /* CL-92 */ lightningDbg: { yank: () => bootsYankPress(), yankState: () => ({ ...bootsYank, inReach: bootsYankInReach() }), skeleton: () => POI.mast && POI.mast.skeleton, strike: (k) => strikeLightning(k || null), update: (dt) => updateLightning(dt), state: () => lightning, odds: (o) => { lightning.odds = o || null; }, boots: () => ensureInsulatedBoots(), wear: (p) => wearInsulatedBoots(p || localPlayer), /* CL-178 */ mast: () => ({ ladder: mastLadder(), climb: mastClimb, high: onMastHigh(), perch: POI.mast ? POI.mast.perch : null, PERCH: MAST_PERCH }), climbMast: (y) => { const L = mastLadder(); if (!L) return false; mastClimb.on = true; climbingTower = true; player.position.set(L.x, Math.min(L.top, L.foot + (y || 0)), L.z); velX = 0; velZ = 0; vy = 0; return true; }, leaveMast: () => letGoOfMast(), /* CL-179 */ fall: () => mastFall, smoke: () => zapSmoke, ladderNow: () => ladderNow(), holster: () => ({ ...ladderHolster, unarmed }), /* CL-180 */ limbs: () => _lad.st, handTargets: () => _lad.hand, LADDER_GRIP, worn: (p) => insulatedBootsOn(p || localPlayer), reset: () => resetLightning(), marine: () => worldMarine, bolt: (x, z, hold) => { showBolt({ x, y: sampleHeight(x, z), z }); if (hold) { lightning.boltT = 1e9; lightning.flashT = 0; lightning.flashEl.style.opacity = '0'; } }, LIGHTNING, BOOTS_HEX }, /* CL-76 */ fogNightDbg: { active: () => fogNightActive(), k: () => fogNightK, force: (v) => { fogNightForce = v; }, step: (dt) => updateDayNight(dt), apply: (dt) => applyFogNight(dt), FOG_NIGHT }, /* CL-75 */ makeSurvivorFigure, SURVIVOR_LOOK, resolveTreeCollisionsDbg: (dt) => resolveTreeCollisions(dt),   /* CL-80 */ boatRig, getExtractionBoat: () => extractionBoat, /* CL-143 */ trainingBuildDbg: { refusal: (x, z, gx, gz, kind) => { const was = placeMode; if (kind) placeMode = kind; try { return placeRefusal(x, z, gx, gz); } finally { placeMode = was; } }, area: () => training.tg && training.tg.build, gridIndex }, /* CL-142 */ makeCargoPlane, insertionDbg: { begin: () => beginMarineInsertion(), rig: () => marineInsertion, ordersEl: () => ordersCardEl }, BOARD_HOLD_S, boardingDbg: () => ({ holdT: boardHoldT, pending: !!boardPending, reach: boardingReach(), won, gameOver, hot: !!matchStats.hotExtraction, state: extractionState }),   /* CL-73 */ setGunSuppressor, SUPPRESSOR,   /* CL-95 */
           addDummyPlayer, removeDummyPlayer, nearestPlayer, playersNear, playerById, players, getPlayers: () => players, nightKindForDay: (d) => nightKindOf(d, nightPlanFor(d), isGuardianNight(d)),   /* CU-77 */
         });
+        window.TT.nightWarningsDbg = { enabled: nightWarningsOn, events: nightWarnings.events,
+          stats: nightWarnings.stats, cover: (x, z) => nightWarningCover(x, sampleHeight(x, z), z),
+          state: (z) => ({ night: isNight, nvg: nvgDown, flashlight: flashlightActive(),
+            gameStarted, paused, training: training.active, seen: z ? nightWarningSeen(z.mesh.position.x, z.mesh.position.y, z.mesh.position.z) : null,
+            cover: z ? nightWarningCover(z.mesh.position.x, z.mesh.position.y, z.mesh.position.z) : null }) };
         window.TT.inspectHost = inspectHost;   // CL-196: the inspector can attach to any debug game (the suite's check does)
         window.TT.storyAftermathDbg={read:()=>storyAftermath.read(),sync:updateStoryAftermath,open:openStoryRecording,close:closeStoryRecording,
           at:storyRecordingAt,near:nearStoryRecording,modal:()=>recordingKind,camera:()=>recoveredCamera};
@@ -61223,6 +62707,8 @@ live++;
         window.TT.fuelDbg = { run: () => fuelRun.read(), props: () => fuelProps ? { pump: fuelProps.pump, gen: fuelProps.gen } : null, can: () => fuelProps ? fuelCanPos() : null,
           drips: () => fuelDrips.length, site: () => fuelSiteState(), reach: () => objectiveProps?.props?.[FUEL_SITE] ? objectiveReach(objectiveProps.props[FUEL_SITE]) : null,
           prompt: () => fuelPromptText(), carry: (dt, moved) => { const ev = fuelRun.carry(dt, moved, day); fuelEvents(ev); return ev; }, slow: () => fuelSlow(), fireBlocked: () => fuelCarried(), lastBoom: () => fuelLastBoom, pools: () => firePools.length, gunShown: () => weaponMount.visible };   // GB-197; GB-199: the held gun goes away with the can
+        window.TT.utilityDbg = { on: (v) => { if (v == null) return utilitiesOn; utilitySetOn(!!v); return utilitiesOn; }, read: () => utilities.read(), lead: (id) => utilityLead(id), install: (id) => utilityInstallAction(id === 'plumbing' ? 'utilPump' : id === 'workshop' ? 'utilBench' : 'utilSiren'), why: (id) => utilities.whyOff(id), spots: () => utilityProps ? utilityProps.spots : null, tank: () => utilityFill, hose: () => utilityHose(), step: (dt) => utilityUpdate(dt), cost: () => repairCostMul(), supply: () => utilities.supply('horseshoes'), reset: () => { utilities.reset(); utilityFill = 0; utilityTags(); utilityHud(); } };
+        window.TT.chainDbg = { on: (v) => { if (v == null) return chainGatesOn; chainSetOn(!!v); return chainGatesOn; }, read: () => chainGates.read(), shut: (site) => chainShutSite(site), prompt: () => chainPromptText(), use: () => chainUseE(), gate: () => { const g = chainWorld.gates.get("depot-shed"); return g ? { x: g.x, y: g.y, z: g.z, open: chainGates.isOpen("depot-shed") } : null; }, key: () => { const k = chainWorld.keys.get("price-key"); return k ? { x: k.x, y: k.y, z: k.z, state: chainGates.keyState("price-key"), visible: !!k.mesh.visible } : null; }, spare: () => chainWorld.spare ? { key: chainWorld.spare.key, x: chainWorld.spare.x, z: chainWorld.spare.z, state: chainGates.keyState(chainWorld.spare.key) } : null, load: (s) => { chainGates.load(s); const k = chainWorld.keys.get('price-key'); if (k) k.mesh.visible = chainGates.keyState('price-key') !== 'held'; }, dawn: (n) => { const got = chainGates.dawn(n, storyChain.read()); for (const gate of got) chainSpareArrived(gate); return got; }, story: () => storyChain.read(), at: (id) => { const g = chainWorld.gates.get(id); return g ? { x: g.x, y: g.y, z: g.z, open: chainGates.isOpen(id), fenced: !!(g.mesh && g.mesh.userData.fenced) } : null; }, keyAt: (key) => { const k = chainWorld.keys.get(key); return k ? { x: k.x, y: k.y, z: k.z, state: chainGates.keyState(key), visible: !!(k.mesh && (k.mesh.userData?._cull?.hidden ? k.mesh.userData._cull.want : k.mesh.visible)) } : null; }, event: (n) => chainGates.event(n), mineShut: () => chainGatesOn && chainLive.has("below") && !chainGates.isOpen("mine-iron-gate"), reset: () => resetStoryChain() };
         window.TT.hikersAgeDbg = (s, opts = { inWater: true }) => { if (!hikersKit) return []; const ev = hikersKit.step(s, opts); hikersEvents(ev); return ev; };   // GB-196: a test ages the float without waiting it out
         window.TT.convoyDbg = {
           state: () => convoyMission.read(), jack: () => convoyJackAt(), parts: () => convoyParts(), sleeper: () => convoySleeperMesh,
@@ -61568,6 +63054,7 @@ live++;
         return 'fight';
       }
       _preRollDone = true;
+      wildlifeWarmReady = true;
       const canvas = F.canvas, prevVis = F.prevVis;
       for (const o of F.culled) o.frustumCulled = true;
       for (const o of F.hidden) o.visible = false;
@@ -62018,7 +63505,7 @@ live++;
     // CL-196: the inspector skips the warm-up's fights (set A, the staged and the live ones). The Training Ground compiles
     // its own scene on the way in (trainingWarmCompile) and a subject compiles when it is first shown.
     if (INSPECT) {
-      _setADone = true; _preRollDone = true; finishFirstMinuteLoad();
+      _setADone = true; _preRollDone = true; wildlifeWarmReady = true; finishFirstMinuteLoad();
       window.DWInspectHost = inspectHost();
       import('./studio/inspector/inspector.js').then((m) => m.boot(inspectHost()))
         .catch((e) => { window.DWInspectError = String(e && e.stack || e); console.error('Inspector: did not start', e); });

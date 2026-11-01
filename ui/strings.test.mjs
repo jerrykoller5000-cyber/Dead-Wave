@@ -151,3 +151,32 @@ test('Story v2 keeps narrative names and both sides of the skull-to-Cash loop', 
   assert.equal(text('shop.title'), 'Supply Terminal');
   assert.equal(text('world.hq'), 'FOB Threshold');
 });
+
+test('discovery cards cover each clearing with brief names and world lines', () => {
+  const places = ['hq', 'landing', 'fuel', 'mast', 'convoy', 'clarke', 'hikers', 'rangers',
+    'trapper', 'mine', 'firetower', 'graveyard', 'dock', 'northCabin', 'southwestCabin'];
+  for (const id of places) {
+    const name = text(`place.${id}.name`);
+    const line = text(`place.${id}.line`);
+    assert.match(name, /^\S+(?: \S+){1,3}$/, `${id} name`);
+    assert.ok(line.length < 60, `${id} line (${line.length})`);
+    assert.doesNotMatch(line, /^(?:go|find|take|follow|use|press|hold|repair|clear)\b/i, `${id} line`);
+  }
+  assert.equal(text('place.hq.name'), 'FOB Threshold');
+  assert.equal(text('place.mine.name'), 'Coldwater Mine');
+});
+
+test('all eight HQ utilities have brief restoration banners and fitted parts have prompts', () => {
+  for (const id of ['power', 'communications', 'infirmary', 'plumbing', 'workshop', 'alarm', 'iron', 'hush']) {
+    const banner = text(`utility.${id}.banner`);
+    assert.ok(banner.length < 50, `${id} banner (${banner.length})`);
+    assert.doesNotMatch(banner, /[!?]/, `${id} banner`);
+  }
+  for (const id of ['plumbing', 'workshop', 'alarm']) {
+    assert.match(text(`utility.${id}.installPrompt`, { interact: 'Gamepad A' }), /^Gamepad A — Fit /);
+    assert.ok(text(`utility.${id}.waitingTag`).length < 25, `${id} tag`);
+    assert.ok(text(`utility.${id}.lookLine`).length > 20, `${id} look line`);
+  }
+  assert.equal(text('utility.iron.hangPrompt', { interact: 'Gamepad A' }), 'Gamepad A — Hang horseshoes');
+  assert.match(text('utility.iron.hangBanner'), /DEAD/);
+});

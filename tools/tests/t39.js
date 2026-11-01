@@ -1,6 +1,7 @@
 (async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise(r => setTimeout(r, ms));
+  if (typeof T.growTreeMeshes === 'function') for (const tree of T.trees) T.growTreeMeshes(tree);
   const kinds = {}; for (const t of T.trees) kinds[t.kind] = (kinds[t.kind] || 0) + 1;
   ok(Object.keys(kinds).length === 4, 'all four species grow: ' + JSON.stringify(kinds));
   ok(T.trees.every(t => t.leafPieces.length >= 6 && t.canopyTop > t.canopyBottom && t.canopyRadius > 0.5), 'every crown has pieces and sane extents');

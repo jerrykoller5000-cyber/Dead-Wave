@@ -1,0 +1,992 @@
+{
+  "timestamp": "2026-10-31T23:51:46.603Z",
+  "diagnostics": {
+    "bee-body-instanced": {
+      "count": 3,
+      "maxCount": 12,
+      "vertexCount": 6888,
+      "transparent": false,
+      "depthWrite": true,
+      "tintableVerts": 0,
+      "nonTintableVerts": 6888,
+      "sampleVerts": [
+        {
+          "v": 0,
+          "rgba": [
+            0.009,
+            0.008,
+            0.007,
+            1
+          ],
+          "tintable": null,
+          "side": null,
+          "hinge": null
+        },
+        {
+          "v": 3444,
+          "rgba": [
+            0.009,
+            0.008,
+            0.007,
+            1
+          ],
+          "tintable": null,
+          "side": null,
+          "hinge": null
+        },
+        {
+          "v": 6887,
+          "rgba": [
+            0.905,
+            0.552,
+            0.03,
+            1
+          ],
+          "tintable": null,
+          "side": null,
+          "hinge": null
+        }
+      ],
+      "instances": [
+        {
+          "i": 0,
+          "pos": [
+            13.05,
+            -2.3,
+            -29.645
+          ],
+          "scale": 1.041,
+          "flap": null,
+          "tint": null
+        },
+        {
+          "i": 1,
+          "pos": [
+            -27.044,
+            -1.305,
+            -21.542
+          ],
+          "scale": 0.993,
+          "flap": null,
+          "tint": null
+        },
+        {
+          "i": 2,
+          "pos": [
+            6.446,
+            -0.896,
+            19.597
+          ],
+          "scale": 1.072,
+          "flap": null,
+          "tint": null
+        }
+      ]
+    },
+    "bee-wings-instanced": {
+      "count": 3,
+      "maxCount": 12,
+      "vertexCount": 204,
+      "transparent": true,
+      "depthWrite": false,
+      "tintableVerts": 0,
+      "nonTintableVerts": 204,
+      "sampleVerts": [
+        {
+          "v": 0,
+          "rgba": [
+            0.791,
+            0.888,
+            1,
+            0.48
+          ],
+          "tintable": 0,
+          "side": -1,
+          "hinge": [
+            -0.018,
+            0.028
+          ]
+        },
+        {
+          "v": 102,
+          "rgba": [
+            0.791,
+            0.888,
+            1,
+            0.48
+          ],
+          "tintable": 0,
+          "side": 1,
+          "hinge": [
+            0.018,
+            0.028
+          ]
+        },
+        {
+          "v": 203,
+          "rgba": [
+            0.658,
+            0.287,
+            0.01,
+            1
+          ],
+          "tintable": 0,
+          "side": 1,
+          "hinge": [
+            0.018,
+            0.028
+          ]
+        }
+      ],
+      "instances": [
+        {
+          "i": 0,
+          "pos": [
+            13.05,
+            -2.3,
+            -29.645
+          ],
+          "scale": 1.041,
+          "flap": -0.2433,
+          "tint": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "i": 1,
+          "pos": [
+            -27.044,
+            -1.305,
+            -21.542
+          ],
+          "scale": 0.993,
+          "flap": 0.2294,
+          "tint": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "i": 2,
+          "pos": [
+            6.446,
+            -0.896,
+            19.597
+          ],
+          "scale": 1.072,
+          "flap": 0.5422,
+          "tint": [
+            1,
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    "butterfly-body-instanced": {
+      "count": 3,
+      "maxCount": 12,
+      "vertexCount": 2952,
+      "transparent": false,
+      "depthWrite": true,
+      "tintableVerts": 0,
+      "nonTintableVerts": 2952,
+      "sampleVerts": [
+        {
+          "v": 0,
+          "rgba": [
+            0.018,
+            0.013,
+            0.008,
+            1
+          ],
+          "tintable": null,
+          "side": null,
+          "hinge": null
+        },
+        {
+          "v": 1476,
+          "rgba": [
+            0.018,
+            0.013,
+            0.008,
+            1
+          ],
+          "tintable": null,
+          "side": null,
+          "hinge": null
+        },
+        {
+          "v": 2951,
+          "rgba": [
+            0.018,
+            0.013,
+            0.008,
+            1
+          ],
+          "tintable": null,
+          "side": null,
+          "hinge": null
+        }
+      ],
+      "instances": [
+        {
+          "i": 0,
+          "pos": [
+            40.111,
+            -1.834,
+            11.198
+          ],
+          "scale": 1.144,
+          "flap": null,
+          "tint": null
+        },
+        {
+          "i": 1,
+          "pos": [
+            -0.256,
+            -0.669,
+            -10.369
+          ],
+          "scale": 0.981,
+          "flap": null,
+          "tint": null
+        },
+        {
+          "i": 2,
+          "pos": [
+            -54.479,
+            -0.771,
+            -6.001
+          ],
+          "scale": 0.913,
+          "flap": null,
+          "tint": null
+        }
+      ]
+    },
+    "butterfly-wings-instanced": {
+      "count": 3,
+      "maxCount": 12,
+      "vertexCount": 1680,
+      "transparent": true,
+      "depthWrite": false,
+      "tintableVerts": 864,
+      "nonTintableVerts": 816,
+      "sampleVerts": [
+        {
+          "v": 0,
+          "rgba": [
+            1,
+            1,
+            1,
+            0.9
+          ],
+          "tintable": 1,
+          "side": -1,
+          "hinge": [
+            0,
+            0.008
+          ]
+        },
+        {
+          "v": 840,
+          "rgba": [
+            1,
+            1,
+            1,
+            0.9
+          ],
+          "tintable": 1,
+          "side": 1,
+          "hinge": [
+            0,
+            0.008
+          ]
+        },
+        {
+          "v": 1679,
+          "rgba": [
+            0.018,
+            0.013,
+            0.008,
+            1
+          ],
+          "tintable": 0,
+          "side": 1,
+          "hinge": [
+            0,
+            0.008
+          ]
+        }
+      ],
+      "instances": [
+        {
+          "i": 0,
+          "pos": [
+            40.111,
+            -1.834,
+            11.198
+          ],
+          "scale": 1.144,
+          "flap": 0.377,
+          "tint": [
+            0.195,
+            0.102,
+            0.042
+          ]
+        },
+        {
+          "i": 1,
+          "pos": [
+            -0.256,
+            -0.669,
+            -10.369
+          ],
+          "scale": 0.981,
+          "flap": 0.7964,
+          "tint": [
+            0.205,
+            0.275,
+            0.479
+          ]
+        },
+        {
+          "i": 2,
+          "pos": [
+            -54.479,
+            -0.771,
+            -6.001
+          ],
+          "scale": 0.913,
+          "flap": -0.7753,
+          "tint": [
+            0.672,
+            0.631,
+            0.262
+          ]
+        }
+      ]
+    },
+    "bird-flock-body-instanced": {
+      "count": 9,
+      "maxCount": 10,
+      "vertexCount": 420,
+      "transparent": false,
+      "depthWrite": true,
+      "tintableVerts": 0,
+      "nonTintableVerts": 420,
+      "sampleVerts": [
+        {
+          "v": 0,
+          "rgba": [
+            0.01,
+            0.012,
+            0.016,
+            1
+          ],
+          "tintable": null,
+          "side": null,
+          "hinge": null
+        },
+        {
+          "v": 210,
+          "rgba": [
+            0.01,
+            0.012,
+            0.016,
+            1
+          ],
+          "tintable": null,
+          "side": null,
+          "hinge": null
+        },
+        {
+          "v": 419,
+          "rgba": [
+            0.01,
+            0.012,
+            0.016,
+            1
+          ],
+          "tintable": null,
+          "side": null,
+          "hinge": null
+        }
+      ],
+      "instances": [
+        {
+          "i": 0,
+          "pos": [
+            49.277,
+            42.06,
+            19.92
+          ],
+          "scale": 1.85,
+          "flap": null,
+          "tint": null
+        },
+        {
+          "i": 1,
+          "pos": [
+            54.061,
+            41.526,
+            18.865
+          ],
+          "scale": 1.588,
+          "flap": null,
+          "tint": null
+        },
+        {
+          "i": 2,
+          "pos": [
+            47.3,
+            41.826,
+            15.395
+          ],
+          "scale": 1.735,
+          "flap": null,
+          "tint": null
+        },
+        {
+          "i": 3,
+          "pos": [
+            59.32,
+            41.324,
+            17.376
+          ],
+          "scale": 1.663,
+          "flap": null,
+          "tint": null
+        },
+        {
+          "i": 4,
+          "pos": [
+            45.087,
+            42.052,
+            12.861
+          ],
+          "scale": 1.748,
+          "flap": null,
+          "tint": null
+        },
+        {
+          "i": 5,
+          "pos": [
+            -73.544,
+            27.735,
+            -110.356
+          ],
+          "scale": 1.578,
+          "flap": null,
+          "tint": null
+        },
+        {
+          "i": 6,
+          "pos": [
+            -71.724,
+            27.849,
+            -114.69
+          ],
+          "scale": 1.834,
+          "flap": null,
+          "tint": null
+        },
+        {
+          "i": 7,
+          "pos": [
+            -76.427,
+            28.172,
+            -109.238
+          ],
+          "scale": 1.707,
+          "flap": null,
+          "tint": null
+        },
+        {
+          "i": 8,
+          "pos": [
+            -71.076,
+            27.568,
+            -119.111
+          ],
+          "scale": 1.608,
+          "flap": null,
+          "tint": null
+        }
+      ]
+    },
+    "bird-flock-wings-instanced": {
+      "count": 9,
+      "maxCount": 10,
+      "vertexCount": 120,
+      "transparent": true,
+      "depthWrite": false,
+      "tintableVerts": 0,
+      "nonTintableVerts": 120,
+      "sampleVerts": [
+        {
+          "v": 0,
+          "rgba": [
+            0.01,
+            0.012,
+            0.016,
+            1
+          ],
+          "tintable": 0,
+          "side": -1,
+          "hinge": [
+            -0.045,
+            0.018
+          ]
+        },
+        {
+          "v": 60,
+          "rgba": [
+            0.01,
+            0.012,
+            0.016,
+            1
+          ],
+          "tintable": 0,
+          "side": 1,
+          "hinge": [
+            0.045,
+            0.018
+          ]
+        },
+        {
+          "v": 119,
+          "rgba": [
+            0.01,
+            0.012,
+            0.016,
+            1
+          ],
+          "tintable": 0,
+          "side": 1,
+          "hinge": [
+            0.045,
+            0.018
+          ]
+        }
+      ],
+      "instances": [
+        {
+          "i": 0,
+          "pos": [
+            49.277,
+            42.06,
+            19.92
+          ],
+          "scale": 1.85,
+          "flap": -0.0638,
+          "tint": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "i": 1,
+          "pos": [
+            54.061,
+            41.526,
+            18.865
+          ],
+          "scale": 1.588,
+          "flap": 0.3718,
+          "tint": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "i": 2,
+          "pos": [
+            47.3,
+            41.826,
+            15.395
+          ],
+          "scale": 1.735,
+          "flap": 0.0239,
+          "tint": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "i": 3,
+          "pos": [
+            59.32,
+            41.324,
+            17.376
+          ],
+          "scale": 1.663,
+          "flap": 0.427,
+          "tint": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "i": 4,
+          "pos": [
+            45.087,
+            42.052,
+            12.861
+          ],
+          "scale": 1.748,
+          "flap": 0.0257,
+          "tint": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "i": 5,
+          "pos": [
+            -73.544,
+            27.735,
+            -110.356
+          ],
+          "scale": 1.578,
+          "flap": 0.4321,
+          "tint": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "i": 6,
+          "pos": [
+            -71.724,
+            27.849,
+            -114.69
+          ],
+          "scale": 1.834,
+          "flap": 0.12,
+          "tint": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "i": 7,
+          "pos": [
+            -76.427,
+            28.172,
+            -109.238
+          ],
+          "scale": 1.707,
+          "flap": 0.0806,
+          "tint": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "i": 8,
+          "pos": [
+            -71.076,
+            27.568,
+            -119.111
+          ],
+          "scale": 1.608,
+          "flap": -0.1633,
+          "tint": [
+            1,
+            1,
+            1
+          ]
+        }
+      ]
+    }
+  },
+  "cullAndKillChecks": {
+    "noonBeforeKill": {
+      "beeBody": 3,
+      "beeWing": 3,
+      "butBody": 3,
+      "butWing": 3
+    },
+    "afterKillBut": {
+      "butBodyCount": 2,
+      "butWingCount": 2,
+      "decrementedImmediately": true
+    },
+    "afterKillBee": {
+      "beeBodyCount": 2,
+      "beeWingCount": 2,
+      "decrementedImmediately": true
+    },
+    "rainCounts": {
+      "beeBody": 0,
+      "beeWing": 0,
+      "butBody": 0,
+      "butWing": 0
+    },
+    "nightCounts": {
+      "beeBody": 0,
+      "beeWing": 0,
+      "butBody": 0,
+      "butWing": 0
+    }
+  },
+  "gameplayDraws": {
+    "noon": {
+      "drawCalls": 446,
+      "triangles": 904338,
+      "batches": {
+        "bee-body-instanced": {
+          "count": 3,
+          "visible": true,
+          "maxCount": 12
+        },
+        "bee-wings-instanced": {
+          "count": 3,
+          "visible": true,
+          "maxCount": 12
+        },
+        "butterfly-body-instanced": {
+          "count": 3,
+          "visible": true,
+          "maxCount": 12
+        },
+        "butterfly-wings-instanced": {
+          "count": 3,
+          "visible": true,
+          "maxCount": 12
+        },
+        "bird-flock-body-instanced": {
+          "count": 5,
+          "visible": true,
+          "maxCount": 10
+        },
+        "bird-flock-wings-instanced": {
+          "count": 5,
+          "visible": true,
+          "maxCount": 10
+        }
+      }
+    },
+    "overcast": {
+      "drawCalls": 451,
+      "triangles": 900139,
+      "batches": {
+        "bee-body-instanced": {
+          "count": 0,
+          "visible": true,
+          "maxCount": 12
+        },
+        "bee-wings-instanced": {
+          "count": 0,
+          "visible": true,
+          "maxCount": 12
+        },
+        "butterfly-body-instanced": {
+          "count": 0,
+          "visible": true,
+          "maxCount": 12
+        },
+        "butterfly-wings-instanced": {
+          "count": 0,
+          "visible": true,
+          "maxCount": 12
+        },
+        "bird-flock-body-instanced": {
+          "count": 6,
+          "visible": true,
+          "maxCount": 10
+        },
+        "bird-flock-wings-instanced": {
+          "count": 6,
+          "visible": true,
+          "maxCount": 10
+        }
+      }
+    },
+    "dusk": {
+      "drawCalls": 507,
+      "triangles": 938583,
+      "batches": {
+        "bee-body-instanced": {
+          "count": 3,
+          "visible": true,
+          "maxCount": 12
+        },
+        "bee-wings-instanced": {
+          "count": 3,
+          "visible": true,
+          "maxCount": 12
+        },
+        "butterfly-body-instanced": {
+          "count": 3,
+          "visible": true,
+          "maxCount": 12
+        },
+        "butterfly-wings-instanced": {
+          "count": 3,
+          "visible": true,
+          "maxCount": 12
+        },
+        "bird-flock-body-instanced": {
+          "count": 9,
+          "visible": true,
+          "maxCount": 10
+        },
+        "bird-flock-wings-instanced": {
+          "count": 9,
+          "visible": true,
+          "maxCount": 10
+        }
+      }
+    },
+    "night": {
+      "drawCalls": 338,
+      "triangles": 649625,
+      "batches": {
+        "bee-body-instanced": {
+          "count": 0,
+          "visible": true,
+          "maxCount": 12
+        },
+        "bee-wings-instanced": {
+          "count": 0,
+          "visible": true,
+          "maxCount": 12
+        },
+        "butterfly-body-instanced": {
+          "count": 0,
+          "visible": true,
+          "maxCount": 12
+        },
+        "butterfly-wings-instanced": {
+          "count": 0,
+          "visible": true,
+          "maxCount": 12
+        },
+        "bird-flock-body-instanced": {
+          "count": 9,
+          "visible": true,
+          "maxCount": 10
+        },
+        "bird-flock-wings-instanced": {
+          "count": 9,
+          "visible": true,
+          "maxCount": 10
+        }
+      }
+    }
+  },
+  "bruteRetake": [
+    {
+      "beat": "1-down-palms",
+      "targetU": 0.02,
+      "state": "getup",
+      "pelvisY": 0.12,
+      "waistY": 0.474,
+      "chestY": 0.877,
+      "headY": 1.218,
+      "handLY": 0.271,
+      "handRY": 0.206,
+      "kneeLY": 0.07,
+      "kneeRY": 0.07
+    },
+    {
+      "beat": "2-knee-under",
+      "targetU": 0.35,
+      "state": "getup",
+      "pelvisY": 0.12,
+      "waistY": 0.456,
+      "chestY": 0.409,
+      "headY": 0.476,
+      "handLY": 0.05,
+      "handRY": 0.05,
+      "kneeLY": 0.07,
+      "kneeRY": 0.07
+    },
+    {
+      "beat": "3-two-arm-push",
+      "targetU": 0.55,
+      "state": "getup",
+      "pelvisY": 0.192,
+      "waistY": 0.538,
+      "chestY": 0.507,
+      "headY": 0.502,
+      "handLY": 0.05,
+      "handRY": 0.05,
+      "kneeLY": 0.07,
+      "kneeRY": 0.07
+    },
+    {
+      "beat": "4-hip-rise",
+      "targetU": 0.7,
+      "state": "getup",
+      "pelvisY": 0.414,
+      "waistY": 0.792,
+      "chestY": 0.941,
+      "headY": 0.951,
+      "handLY": 0.207,
+      "handRY": 0.142,
+      "kneeLY": 0.073,
+      "kneeRY": 0.07
+    },
+    {
+      "beat": "5-head-lag",
+      "targetU": 0.86,
+      "state": "getup",
+      "pelvisY": 0.671,
+      "waistY": 1.042,
+      "chestY": 1.325,
+      "headY": 1.317,
+      "handLY": 0.591,
+      "handRY": 0.52,
+      "kneeLY": 0.233,
+      "kneeRY": 0.141
+    },
+    {
+      "beat": "6-recovered",
+      "targetU": 1,
+      "state": "getup",
+      "pelvisY": 0.855,
+      "waistY": 1.224,
+      "chestY": 1.593,
+      "headY": 1.637,
+      "handLY": 0.899,
+      "handRY": 0.833,
+      "kneeLY": 0.367,
+      "kneeRY": 0.322
+    }
+  ],
+  "livePositions": {
+    "butterfly": {
+      "x": -0.7204225659370422,
+      "y": -0.8264874815940857,
+      "z": -10.827836990356445,
+      "count": 2
+    },
+    "bee": {
+      "x": -27.25147247314453,
+      "y": -1.0378148555755615,
+      "z": -21.341064453125,
+      "count": 2
+    },
+    "flock": {
+      "x": 46.563255310058594,
+      "y": 42.43822479248047,
+      "z": 25.158954620361328,
+      "count": 10
+    }
+  }
+}

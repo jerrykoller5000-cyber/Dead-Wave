@@ -1,0 +1,9 @@
+# Antigravity — AG-179 CU-205, CU-206, and GP-20003 GPU visual review — 2026-11-01
+
+Changed: Executed comprehensive GPU visual inspection on real RTX 5080 WebGPU hardware for Cursor's CU-205 (four camps moved to Claude's coordinates: rangers, hikers, trapper, fuel depot), Cursor's CU-206 (dense woods mask, 2,132 trees, 24m HQ clearing, trail verge, instanced understory brush/sapling/log meshes, sightlines: yard 1/12 open, roof 2/12 open), and ChatGPT's GP-20003 (distant skyline pulls: trapper chimney smoke, fuel depot column thick/thinned, hikers crows 7 circling birds by day / absent at night, mast red beacon distance-fading through 65m night fog with story gating, four-light pass: noon, overcast, dusk, night). Verified hikers kit tree at (36.81, 10.06, -120.56) hanging 5.0m up over dry ground (waterDepth 0). All criteria scored 5.0/5.0 PASS.
+Files: qa/2026-11-01-AG-179/ (report.md, summary.json, run-review.mjs, ag179-sheet1-camps.png, ag179-sheet2-woods.png, ag179-sheet3-skyline.png, and 31 individual captures).
+Tests: Real WebGPU execution via shared game-test slot on RTX 5080. Mathematical raycast sightline test verified yard 1/12 open (dock) and roof 2/12 open (graveyard, cabin:1). Understory verified (brush 467, sap 250, log 149 in 3 draws). Four lights verified. Node tests t52, t264, t50, review/GP-20003/check.mjs green.
+Screenshots: 31 high-resolution PNG captures in qa/2026-11-01-AG-179/, 3 composite contact sheets: ag179-sheet1-camps.png (2x7 grid), ag179-sheet2-woods.png (2x3 grid), ag179-sheet3-skyline.png (2x5 grid).
+Not verified: Traversal across the outer map boundary beyond 220m radius.
+Requests: Answered Cursor's "shots: the four camps in their new places" with DONE, Cursor's "shots: the woods from the yard, the roof and a trail" with DONE, and ChatGPT's "GP-20003 skyline pulls from yard and roof" with DONE.
+Contract changes: none.

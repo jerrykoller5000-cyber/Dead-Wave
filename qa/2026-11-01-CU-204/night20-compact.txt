@@ -1,0 +1,46 @@
+bench: http://127.0.0.1:63942/index.html?debug=1&forest=compact
+bench: scenario night 20 for 12s
+
+bench: ready 9216 ms
+bench: graphics high
+bench: night 20 push 2/6  out 2  spawned 212/861
+bench: night 20 push 4/6  out 2  spawned 422/861
+bench: night 20 push 5/6  out 6  spawned 636/861
+bench: night 20 push 6/6  out 48  spawned 723/861
+bench: first person {"first":true,"w":0.9,"weapon":"pistol","unarmed":false,"vm":true}
+bench: profiler on, GPU timestamps on
+fps    57.7   (mean of last 10 s)
+low    43.1   (1% low, same windows)
+worst  61.2 ms
+hitch  1   (frames over 50 ms, whole run)
+draws  428
+tris   815008
+frame  17.33 ms = tick 16.32 ms + outside 1.01 ms  (the last 10 s, the window of fps and low)
+whole run: tick 16.29 ms over 12 s; frame (last 10 s) - that = 1.04 ms (two windows)   gpu 0.44 ms
+last 10 s, by section:
+  r:render                             8.37 ms
+  zombies                              2.05 ms
+  r:matrices                           1.67 ms
+  m:hold                               0.81 ms
+  aim+climb                            0.50 ms
+  r:cull                               0.50 ms
+  m:pose                               0.49 ms
+  w:treeFall+leaves+batches            0.31 ms
+  w:minimap                            0.23 ms
+  hud+audio                            0.18 ms
+  viewmodel                            0.16 ms
+  drops+hud                            0.15 ms
+whole run, by section:
+  r:render                             8.36 ms   worst 14.1
+  zombies                              2.01 ms   worst 21.2
+  r:matrices                           1.68 ms   worst 3.1
+  m:hold                               0.81 ms   worst 2.0
+  r:cull                               0.50 ms   worst 1.1
+  aim+climb                            0.50 ms   worst 2.7
+  m:pose                               0.49 ms   worst 1.6
+  w:treeFall+leaves+batches            0.31 ms   worst 0.9
+  w:minimap                            0.23 ms   worst 1.4
+  hud+audio                            0.18 ms   worst 0.8
+  viewmodel                            0.16 ms   worst 1.0
+  drops+hud                            0.14 ms   worst 0.7
+{"scenario":"night","seconds":12,"fps":57.7,"low":43.1,"worst":61.2,"hitches":1,"draws":428,"triangles":815008,"zombies":48,"gfx":"high","windows":10,"night":20,"push":5,"pushes":6,"last":true,"viewmodelMs":0.16,"fp":{"first":true,"w":0.9,"weapon":"pistol","unarmed":false,"vm":true},"prof":{"frames":709,"frameMs":17.33,"tickMs":16.29,"outsideMs":1.04,"last10":{"seconds":10,"frames":588,"frameMs":17.33,"tickMs":16.32,"outsideMs":1.01,"viewmodelMs":0.16,"top":[{"k":"r:render","avg":8.37},{"k":"zombies","avg":2.05},{"k":"r:matrices","avg":1.67},{"k":"m:hold","avg":0.81},{"k":"aim+climb","avg":0.5},{"k":"r:cull","avg":0.5},{"k":"m:pose","avg":0.49},{"k":"w:treeFall+leaves+batches","avg":0.31},{"k":"w:minimap","avg":0.23},{"k":"hud+audio","avg":0.18},{"k":"viewmodel","avg":0.16},{"k":"drops+hud","avg":0.15}]},"top":[{"k":"r:render","avg":8.36,"max":14.1},{"k":"zombies","avg":2.01,"max":21.2},{"k":"r:matrices","avg":1.68,"max":3.1},{"k":"m:hold","avg":0.81,"max":2},{"k":"r:cull","avg":0.5,"max":1.1},{"k":"aim+climb","avg":0.5,"max":2.7},{"k":"m:pose","avg":0.49,"max":1.6},{"k":"w:treeFall+leaves+batches","avg":0.31,"max":0.9},{"k":"w:minimap","avg":0.23,"max":1.4},{"k":"hud+audio","avg":0.18,"max":0.8},{"k":"viewmodel","avg":0.16,"max":1},{"k":"drops+hud","avg":0.14,"max":0.7}],"spikes":[{"frame":56,"ms":27.2,"top":["r:render 14.1","marine 5.8","zombies 1.6","r:matrices 1.3"],"heapMB":793.7,"freedMB":-9.2,"newPipelines":0,"newTextures":0,"newGeometries":2,"newBuilds":0,"sunShadow":1,"newRenderObjects":3,"t0":30830.8,"t1":30858.5},{"frame":607,"ms":27,"top":["r:render 11.8","zombies 7.6","r:matrices 1.7","m:hold 0.9"],"heapMB":826.4,"freedMB":-0.8,"newPipelines":0,"newTextures":0,"newGeometries":0,"newBuilds":0,"sunShadow":0,"newRenderObjects":0,"t0":40297.8,"t1":40325.8},{"frame":608,"ms":37.1,"top":["zombies 21.2","r:render 8.5","r:matrices 2.1","m:hold 0.9"],"heapMB":681.6,"freedMB":144.9,"newPipelines":0,"newTextures":0,"newGeometries":0,"newBuilds":0,"sunShadow":0,"newRenderObjects":0,"t0":40325.8,"t1":40387}],"spikeCauses":{"spikes":3,"pipelines":0,"builds":0,"uploads":1,"sunShadow":0,"gc":1,"code":1},"gpuMs":0.44,"gpuSamples":254,"pipelines":{"made":0,"released":0,"withNewShaders":0,"top":[],"first":[]},"builds":{"made":0,"top":[],"zombieAndEcho":[]},"renderObjects":{"made":7,"perFrame":0.01,"top":[{"k":"zombie-skin < Group < Scene | MeshStandardNodeMaterial | scene","n":4,"frames":[285,429,511,652]},{"k":"zombie-skin < Group < Scene | NodeMaterial | ortho","n":2,"frames":[56]},{"k":"marine-shadow < Group < Group | NodeMaterial | ortho","n":1,"frames":[56]}],"spikes":[{"frame":56,"n":3,"top":["2 zombie-skin < Group < Scene | NodeMaterial | ortho","1 marine-shadow < Group < Group | NodeMaterial | ortho"]},{"frame":607,"n":0,"top":[]},{"frame":608,"n":0,"top":[]}]},"gc":null}}

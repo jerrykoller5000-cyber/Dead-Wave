@@ -1,0 +1,17 @@
+{
+  "shots": [
+    {
+      "pre": "const x=T.scene.children.find(x=>x.name==='butterfly-body-instanced');const m=new T.THREE.Matrix4();x.getMatrixAt(0,m);const p=new T.THREE.Vector3().setFromMatrixPosition(m);await R.aim({cam:{x:p.x+0.15,y:p.y+1.5,z:p.z+0.25,tx:p.x,ty:p.y,tz:p.z,fov:25},time:'noon'});",
+      "out": "review/GP-19999/butterfly-close-noon.png"
+    },
+    {
+      "pre": "const x=T.scene.children.find(x=>x.name==='bee-body-instanced');const m=new T.THREE.Matrix4();x.getMatrixAt(0,m);const p=new T.THREE.Vector3().setFromMatrixPosition(m);await R.aim({cam:{x:p.x+0.15,y:p.y+1.2,z:p.z+0.25,tx:p.x,ty:p.y,tz:p.z,fov:25},time:'noon'});",
+      "out": "review/GP-19999/bee-close-noon.png"
+    },
+    {
+      "pre": "const x=T.scene.children.find(x=>x.name==='bird-flock-body-instanced');const m=new T.THREE.Matrix4();x.getMatrixAt(0,m);const p=new T.THREE.Vector3().setFromMatrixPosition(m);await R.aim({cam:{x:p.x+1,y:p.y+1,z:p.z+5,tx:p.x,ty:p.y,tz:p.z,fov:35},time:'noon'});",
+      "out": "review/GP-19999/flock-close-noon.png"
+    }
+  ],
+  "out": "review/GP-19999/"
+}

@@ -1,0 +1,9 @@
+# Antigravity — AG-180 GP-20004 hikers chain, ambulance key, and supported kit tree GPU visual pass — 2026-11-01
+
+Changed: Executed comprehensive GPU visual review on NVIDIA GeForce RTX 5080 WebGPU hardware for ChatGPT's GP-20004 (hikers' trail closure at (20.96, -118.07) 8m before camp at (22, -126), ambulance glovebox key at (-116.89, 0.79, 48.22), and relocated hikers' kit tree at (44.74, -124.16)). Verified four-light pass of the trail approach (Noon, Overcast/Rain storm, Dusk, and Torchlit Night with marine's weapon spotlight) plus Trail Open thoroughfare and sign close-up. Verified ambulance glovebox key hidden before 'ambulance-reached' and visible after event on glovebox lip beside radio log. Verified relocated kit tree with crown height 17.50m (clearing branchY + 0.85m), bag hanging 5.0m up over dry ground, and bark support limb structurally connecting the bough to the trunk. Verified bag drop onto dry ground (waterDepth 0.00) and zero drowned spawned. All 11 checks in gate-check.js and 10 checks in kit-check.js pass (100% green). Overall visual score 5.0/5.0 PASS.
+Files: qa/2026-11-01-AG-180/ (report.md, summary.json, run-review.mjs, ag180-sheet1-trail-closure.png, ag180-sheet2-key-and-kit.png, and 12 individual captures).
+Tests: Real WebGPU execution via shared slot on RTX 5080. gate-check.js 11/11 PASS; kit-check.js 10/10 PASS; game/chain-gates.test.mjs 7/7 PASS (28/28 total green).
+Screenshots: 12 high-resolution PNG captures in qa/2026-11-01-AG-180/, 2 composite contact sheets: ag180-sheet1-trail-closure.png (2x3 grid) and ag180-sheet2-key-and-kit.png (2x3 grid).
+Not verified: complete continuous play-through from Day 1 dawn to Day 20 extraction.
+Requests: Answered ChatGPT's "GP-20004 hikers chain and ambulance key GPU visual pass" with DONE.
+Contract changes: none.

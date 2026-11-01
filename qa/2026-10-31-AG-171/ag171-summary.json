@@ -1,0 +1,246 @@
+{
+  "tcl281ExitCode": 0,
+  "vmsheetExitCode": 0,
+  "shots": {
+    "noonOutdoorHip": {
+      "info": {
+        "active": true,
+        "flip": true,
+        "wristMaxRad": 0.87,
+        "wristMaxDeg": 49.8,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "fore"
+      },
+      "flippedMeshes": 34,
+      "totalMeshes": 34,
+      "wristBendDeg": {
+        "r": 49.8,
+        "l": 46.7
+      },
+      "forearmR": {
+        "degOffEyeLine": 68.9,
+        "elbowNdc": {
+          "x": 1.198,
+          "y": -1.525
+        },
+        "wristNdc": {
+          "x": 0.498,
+          "y": -0.439
+        }
+      },
+      "forearmL": {
+        "degOffEyeLine": 74.6,
+        "elbowNdc": {
+          "x": -0.193,
+          "y": -1.313
+        },
+        "wristNdc": {
+          "x": 0.147,
+          "y": -0.538
+        }
+      }
+    },
+    "noonOutdoorAds": {
+      "info": {
+        "active": true,
+        "flip": true,
+        "wristMaxRad": 0.87,
+        "wristMaxDeg": 49.8,
+        "raise": 1,
+        "ads": 1,
+        "magState": "seated",
+        "handPlace": "fore"
+      },
+      "flippedMeshes": 34,
+      "totalMeshes": 34,
+      "wristBendDeg": {
+        "r": 49.8,
+        "l": 49.8
+      },
+      "forearmR": {
+        "degOffEyeLine": 75.1,
+        "elbowNdc": {
+          "x": 0.679,
+          "y": -1.343
+        },
+        "wristNdc": {
+          "x": 0.163,
+          "y": -0.408
+        }
+      },
+      "forearmL": {
+        "degOffEyeLine": 74.5,
+        "elbowNdc": {
+          "x": -0.822,
+          "y": -1.387
+        },
+        "wristNdc": {
+          "x": -0.242,
+          "y": -0.457
+        }
+      }
+    },
+    "hqRoofHip": {
+      "info": {
+        "active": true,
+        "flip": true,
+        "wristMaxRad": 0.87,
+        "wristMaxDeg": 49.8,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "fore"
+      },
+      "flippedMeshes": 34,
+      "totalMeshes": 34,
+      "wristBendDeg": {
+        "r": 49.8,
+        "l": 46.6
+      },
+      "forearmR": {
+        "degOffEyeLine": 68.8,
+        "elbowNdc": {
+          "x": 1.194,
+          "y": -1.517
+        },
+        "wristNdc": {
+          "x": 0.498,
+          "y": -0.432
+        }
+      },
+      "forearmL": {
+        "degOffEyeLine": 74.5,
+        "elbowNdc": {
+          "x": -0.193,
+          "y": -1.305
+        },
+        "wristNdc": {
+          "x": 0.146,
+          "y": -0.531
+        }
+      }
+    },
+    "night20Hip": {
+      "info": {
+        "active": true,
+        "flip": true,
+        "wristMaxRad": 0.87,
+        "wristMaxDeg": 49.8,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "fore"
+      },
+      "flippedMeshes": 34,
+      "totalMeshes": 34,
+      "wristBendDeg": {
+        "r": 49.8,
+        "l": 46.7
+      },
+      "forearmR": {
+        "degOffEyeLine": 68.8,
+        "elbowNdc": {
+          "x": 1.196,
+          "y": -1.521
+        },
+        "wristNdc": {
+          "x": 0.498,
+          "y": -0.435
+        }
+      },
+      "forearmL": {
+        "degOffEyeLine": 74.5,
+        "elbowNdc": {
+          "x": -0.193,
+          "y": -1.308
+        },
+        "wristNdc": {
+          "x": 0.146,
+          "y": -0.534
+        }
+      }
+    },
+    "night20NvgHip": {
+      "info": {
+        "active": true,
+        "flip": true,
+        "wristMaxRad": 0.87,
+        "wristMaxDeg": 49.8,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "fore"
+      },
+      "flippedMeshes": 34,
+      "totalMeshes": 34,
+      "wristBendDeg": {
+        "r": 49.8,
+        "l": 46.7
+      },
+      "forearmR": {
+        "degOffEyeLine": 68.8,
+        "elbowNdc": {
+          "x": 1.198,
+          "y": -1.528
+        },
+        "wristNdc": {
+          "x": 0.498,
+          "y": -0.441
+        }
+      },
+      "forearmL": {
+        "degOffEyeLine": 74.6,
+        "elbowNdc": {
+          "x": -0.193,
+          "y": -1.315
+        },
+        "wristNdc": {
+          "x": 0.146,
+          "y": -0.54
+        }
+      }
+    },
+    "night20NvgAds": {
+      "info": {
+        "active": true,
+        "flip": true,
+        "wristMaxRad": 0.87,
+        "wristMaxDeg": 49.8,
+        "raise": 1,
+        "ads": 1,
+        "magState": "seated",
+        "handPlace": "fore"
+      },
+      "flippedMeshes": 34,
+      "totalMeshes": 34,
+      "wristBendDeg": {
+        "r": 49.8,
+        "l": 49.8
+      },
+      "forearmR": {
+        "degOffEyeLine": 75,
+        "elbowNdc": {
+          "x": 0.68,
+          "y": -1.343
+        },
+        "wristNdc": {
+          "x": 0.163,
+          "y": -0.408
+        }
+      },
+      "forearmL": {
+        "degOffEyeLine": 74.5,
+        "elbowNdc": {
+          "x": -0.821,
+          "y": -1.386
+        },
+        "wristNdc": {
+          "x": -0.243,
+          "y": -0.457
+        }
+      }
+    }
+  }
+}

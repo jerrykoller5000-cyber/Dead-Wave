@@ -1,0 +1,85 @@
+{
+  "timestamp": "2026-11-01T02:57:55.217Z",
+  "metrics": {
+    "gateInfo": {
+      "x": -17.666376327720243,
+      "y": -1.0091431327510467,
+      "z": 36.69403004884754,
+      "open": false,
+      "fenced": false
+    },
+    "rangerLogPos": {
+      "x": 40.30884744459518,
+      "y": -6.129800115456654,
+      "z": -24.12429355328278
+    },
+    "spareInfo": {
+      "x": -1.62,
+      "z": -5.08,
+      "key": "trapper-combination",
+      "state": "ready"
+    }
+  },
+  "shots": [
+    {
+      "id": "trapper-gate-locked-noon",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-175\\trapper-gate-locked-noon.png",
+      "desc": "Trapper fence gate locked approach at noon"
+    },
+    {
+      "id": "trapper-gate-locked-dusk",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-175\\trapper-gate-locked-dusk.png",
+      "desc": "Trapper fence gate locked approach at dusk"
+    },
+    {
+      "id": "trapper-gate-lock-closeup-noon",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-175\\trapper-gate-lock-closeup-noon.png",
+      "desc": "Combination lock close-up at noon"
+    },
+    {
+      "id": "trapper-gate-lock-closeup-dusk",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-175\\trapper-gate-lock-closeup-dusk.png",
+      "desc": "Combination lock close-up at dusk"
+    },
+    {
+      "id": "trapper-gate-open-noon",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-175\\trapper-gate-open-noon.png",
+      "desc": "Trapper fence gate open passage at noon"
+    },
+    {
+      "id": "trapper-gate-open-dusk",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-175\\trapper-gate-open-dusk.png",
+      "desc": "Trapper fence gate open passage at dusk"
+    },
+    {
+      "id": "trapper-yard-path-noon",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-175\\trapper-yard-path-noon.png",
+      "desc": "Inside trapper yard along safe path at noon"
+    },
+    {
+      "id": "trapper-yard-path-dusk",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-175\\trapper-yard-path-dusk.png",
+      "desc": "Inside trapper yard along safe path at dusk"
+    },
+    {
+      "id": "ranger-search-log-noon",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-175\\ranger-search-log-noon.png",
+      "desc": "Ranger search log prop at noon"
+    },
+    {
+      "id": "ranger-search-log-dusk",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-175\\ranger-search-log-dusk.png",
+      "desc": "Ranger search log prop at dusk"
+    },
+    {
+      "id": "spare-combination-dutyboard-noon",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-175\\spare-combination-dutyboard-noon.png",
+      "desc": "Spare combination note on HQ duty board at noon"
+    },
+    {
+      "id": "spare-combination-dutyboard-dusk",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-175\\spare-combination-dutyboard-dusk.png",
+      "desc": "Spare combination note on HQ duty board at dusk"
+    }
+  ]
+}

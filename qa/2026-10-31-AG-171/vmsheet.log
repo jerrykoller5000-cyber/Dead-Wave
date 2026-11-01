@@ -1,0 +1,13 @@
+vm-hip             {"active":true,"raise":1,"ads":0,"mag":"seated","hand":"fore","u":null} -> qa\2026-10-31-AG-171\vm-hip.png
+vm-ads             {"active":true,"raise":1,"ads":1,"mag":"seated","hand":"fore","u":null} -> qa\2026-10-31-AG-171\vm-ads.png
+vm-hip-again       {"active":true,"raise":1,"ads":0,"mag":"seated","hand":"fore","u":null} -> qa\2026-10-31-AG-171\vm-hip-again.png
+vm-reload-grab     {"active":true,"raise":1,"ads":0,"mag":"hand","hand":"below","u":0.19488888888447353} -> qa\2026-10-31-AG-171\vm-reload-grab.png
+vm-reload-pouch    {"active":true,"raise":1,"ads":0,"mag":"hand","hand":"below","u":0.45540740741623775} -> qa\2026-10-31-AG-171\vm-reload-pouch.png
+vm-reload-seat     {"active":true,"raise":1,"ads":0,"mag":"seated","hand":"well","u":0.6543703703747852} -> qa\2026-10-31-AG-171\vm-reload-seat.png
+vm-reload-slide    {"active":true,"raise":1,"ads":0,"mag":"seated","hand":"work","u":0.8816296296428752} -> qa\2026-10-31-AG-171\vm-reload-slide.png
+vm-look-down       {"active":true,"raise":1,"ads":0,"mag":"seated","hand":"fore","u":null} -> qa\2026-10-31-AG-171\vm-look-down.png
+vm-look-up         {"active":true,"raise":1,"ads":0,"mag":"seated","hand":"fore","u":null} -> qa\2026-10-31-AG-171\vm-look-up.png
+vm-turn            {"active":true,"raise":1,"ads":0,"mag":"seated","hand":"fore","u":null} -> qa\2026-10-31-AG-171\vm-turn.png
+old-hip            none -> qa\2026-10-31-AG-171\old-hip.png
+old-ads            none -> qa\2026-10-31-AG-171\old-ads.png
+

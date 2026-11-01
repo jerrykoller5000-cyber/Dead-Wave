@@ -1,0 +1,3 @@
+bench: http://127.0.0.1:32261/index.html?debug=1&trees=8
+bench: scenario day5 for 15s
+

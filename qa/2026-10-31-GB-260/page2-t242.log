@@ -1,0 +1,9 @@
+GRANT grokbot GB-260: starting one game-test command
+check-players: 310 player.position reads, all in the allowed places
+FAIL  t242    14 pass   1 fail  38.4s
+
+1 checks: 14 pass, 1 fail
+
+by owner:
+  unassigned
+    t242   1 fail  FAIL extended: the magazine is inside the grip above its bottom (worst 6.3 mm out at u 0.194 v 4

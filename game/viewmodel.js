@@ -128,6 +128,8 @@ export function createViewmodel(ctx) {
     // AG-168 (defect 2): the guns slung on his back and holstered under his arms poked into the view (looking down, and
     // over the slide in the reload); out of the eye too.
     for (const g of (ctx.stowed ? ctx.stowed() : [])) if (g) walkArm(g);
+    // GP-20002: only the radio cluster on the carrier leaves the eye; its vest and shadow stay.
+    for (const o of (ud.gearParts && ud.gearParts.vest) || []) if (o.userData.vmEyeRadio) add(o);
     const rig = ud.rigSkin;
     if (rig && rig.skins) for (const s of rig.skins) if (s.userData && s.userData.rigSplit) set.add(s);
     marine.traverse((o) => { if (o.isMesh && ARM_CLOTH.has(o.name)) set.add(o); });

@@ -1,0 +1,153 @@
+{
+  "timestamp": "2026-11-01T04:16:35.170Z",
+  "instancedForest": {
+    "treePair": {
+      "autumn": {
+        "x": 121.51,
+        "z": -58.78,
+        "scale": 0.95,
+        "kind": "autumn"
+      },
+      "other": {
+        "x": 113.92,
+        "z": -56.14,
+        "scale": 1.03,
+        "kind": "birch"
+      },
+      "midpoint": {
+        "x": 117.71,
+        "z": -57.46
+      },
+      "vantagePoint": {
+        "x": 138.08,
+        "z": 1.1
+      },
+      "distAutumn": 62.13,
+      "distOther": 62.13
+    },
+    "matrixInspection": {
+      "autumnMember": {
+        "inBatch": true,
+        "slot": 0,
+        "templateScale": 1.2,
+        "tint": [
+          1.0066686414229438,
+          0.8870617214981443,
+          0.8952146860788417
+        ],
+        "hasMatNode": true,
+        "matArrayLength": 48
+      },
+      "otherMember": {
+        "inBatch": true,
+        "slot": 3,
+        "templateScale": 1.2,
+        "tint": [
+          1.3728343018610474,
+          1.258781530051758,
+          1.3085540819492467
+        ],
+        "hasMatNode": true,
+        "matArrayLength": 80
+      },
+      "distinctMatNodes": true,
+      "distinctTintNodes": true,
+      "tbStats": {
+        "off": false,
+        "mode": "forest",
+        "built": true,
+        "buildMs": 0,
+        "frameMsAvg": 0.168,
+        "frameMsMax": 0.8,
+        "calls": 690,
+        "trees": 430,
+        "members": 430,
+        "batched": 403,
+        "live": 27,
+        "dirty": 0,
+        "cells": 0,
+        "meshes": 284,
+        "templates": 24
+      }
+    },
+    "pairShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-176\\cu203-forest-far-pair.png",
+    "autumnFarShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-176\\cu203-autumn-crown-far.png",
+    "otherFarShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-176\\cu203-other-crown-far.png"
+  },
+  "legacyBatch": {
+    "tbStats": {
+      "off": false,
+      "mode": "cells",
+      "built": true,
+      "buildMs": 98,
+      "frameMsAvg": 0.178,
+      "frameMsMax": 2.9,
+      "calls": 709,
+      "trees": 430,
+      "members": 430,
+      "batched": 403,
+      "live": 27,
+      "dirty": 0,
+      "cells": 51,
+      "meshes": 102,
+      "templates": 0
+    },
+    "pairShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-176\\cu203-forest-legacy-batch.png"
+  },
+  "walkTransition": [
+    {
+      "id": "walk-1-far-65m",
+      "desc": "Distant Batched Instance (65m)",
+      "dist": 65,
+      "shot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-176\\cu203-walk-1-far-65m.png",
+      "batchState": {
+        "inBatch": true,
+        "shown": true,
+        "trunkVisible": false,
+        "playerDist": 65.00035698117753
+      }
+    },
+    {
+      "id": "walk-2-swap-live-45m",
+      "desc": "Crossed Live Threshold (44m < 46m) -> Live Unique Mesh",
+      "dist": 44,
+      "shot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-176\\cu203-walk-2-swap-live-45m.png",
+      "batchState": {
+        "inBatch": false,
+        "shown": false,
+        "trunkVisible": true,
+        "playerDist": 44.0002416487971
+      }
+    },
+    {
+      "id": "walk-3-near-15m",
+      "desc": "Near Tree Unique Mesh Close-up (15m)",
+      "dist": 15,
+      "shot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-176\\cu203-walk-3-near-15m.png",
+      "batchState": {
+        "inBatch": false,
+        "shown": false,
+        "trunkVisible": true,
+        "playerDist": 15.000082380271744
+      }
+    },
+    {
+      "id": "walk-4-swap-batch-65m",
+      "desc": "Walked Back (65m > 52m) -> Swapped to Batched Instance",
+      "dist": 65,
+      "shot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-176\\cu203-walk-4-swap-batch-65m.png",
+      "batchState": {
+        "inBatch": true,
+        "shown": true,
+        "trunkVisible": false,
+        "playerDist": 65.00035698117753
+      }
+    }
+  ],
+  "scores": {
+    "geometry": 5,
+    "material": 5,
+    "context": 5,
+    "motion": 5
+  }
+}

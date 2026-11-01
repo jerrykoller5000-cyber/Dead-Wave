@@ -1,0 +1,21 @@
+CU-200 has landed the page side. The generator's shed is the worked example (padlock between the depot and the pump, Price's key on a clipboard by the HQ generator, the fill blocked until E opens it). ?chaingates=0 turns it off. The suite's timer pages start off, like the story gate; t313 turns it on.
+
+What is already done for every gate: createChainGates for the run, reset with the story chain, dawn() at storyDawn (a spare's banner and a key at the duty board), chainShutSite on objectiveReach and getObjectiveInteraction (the marker stays; it is not storyClosedSite). Events already fire: hq-power when the fuel run is done, vault-first-lift when the vault is open, ambulance-reached within 12 m of the first wreck, toolbox-open when the truck chain is cut, cellar-open when the trapper path unlocks, hush-wired when the board is wired. The search log's look learns the combination. The truck's existing cutters and chain cut already call take('bolt-cutters') and open('toolbox-chain').
+
+A lead shuts its site only after it is added to chainLive, which happens when its blocker is placed. Only 'generator' is in there. Meshes: chainBlockerMesh('padlock' | 'chain' | 'pins' | 'combination') and chainKeyMesh(), in index.html next to storyClosedSite. Words are chain.<lead>.look/locked/open and keyName/keyBanner/keyWhere/keyNote.
+
+What each owner still places (add the lead to chainLive in the same breath, or the site will not shut):
+
+- Relay (Claude): a chain across the mast-yard approach (the rules say chain; the words say a padlocked cabinet cover — the words should win if you want them to match). Sato's key in the HQ radio drawer, shown only once hq-power has fired. The radio branch of getObjectiveInteraction returns before the chain check, so the cabinet's own prompt and E must treat chainShutSite('objective:radio-repair') like storyClosedSite.
+
+- Medical convoy (ChatGPT): a barrier arm with locked pins on the road to the jack. The key prop appears at the vault once vault-first-lift has fired. convoy's prompt and E handler need the same chainShutSite('objective:medical-convoy') check.
+
+- Hikers (Grokbot): a chain on the camp approach. The key prop in the ambulance glovebox once ambulance-reached has fired. hikers' prompt and E need chainShutSite('objective:hikers-cache').
+
+- Truck (Claude): nothing new to build. The cutters and the toolbox chain are the gate. Add 'truck' to chainLive only if the generic claim should also wait on open('toolbox-chain'); truckLocked already holds the mission.
+
+- Rangers (Claude): a padlock on the camp gate. The key prop in Clarke's toolbox once toolbox-open has fired. ranger's prompt and E need chainShutSite('objective:ranger-cache').
+
+- Trapper (ChatGPT): a combination padlock on the fence gate. No key prop: reading the search log already holds the combination. trapper's prompt and E need chainShutSite('objective:trapper-cache'), and opening the gate is chainGates.open('trapper-fence') once canOpen (the combination is held).
+
+- Below (Claude): a chain on the mine's iron gate. The key prop in the cellar once cellar-open has fired, and the gate stays shut until hush-wired as well (the rules' also). The lead has no site, so chainShutSite will not see it; the mine's own entry has to ask chainGates.isOpen('mine-iron-gate').

@@ -1,1 +1,4 @@
 Game-test request 2673efa1-4f5a-475c-ac40-ce0f313b297a queued at position 2. Waiting...
+GRANT grokbot GB-260: starting one game-test command
+ok    t242     15 pass   0 fail  29.4s  (real renderer)
+1 checks: 15 pass, 0 fail (real renderer)

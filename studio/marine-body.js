@@ -351,6 +351,7 @@ export function buildMarineBody(T, {root, put, rmesh: roundedMesh, cyl, part, dr
   b(rmesh(.033,.029,.016,buckleMat,.005),0,.852,.153);
   b(rmesh(.277,.03,.02,strapMat,.006),0,1.11,-.139);
   const v=(mesh,x,y,z,...angles)=>addGear('vest',torsoG,mesh,x,y-.7,z,...angles);
+  const radioPart=(mesh)=>{mesh.userData.vmEyeRadio=true;return mesh;};
   const torsoSeam=(points,mat,key,r=.0016)=>{const mesh=seam(torsoG,points.map(([x,y,z])=>[x,y-.7,z]),mat,r);if(key)gearParts[key].push(mesh);return mesh;};
   v(carrierPlate(.35,.335,.034,carrierW),0,.973,.151);
   v(carrierPlate(.35,.345,.032,carrierW),0,.98,-.149);
@@ -377,13 +378,13 @@ export function buildMarineBody(T, {root, put, rmesh: roundedMesh, cyl, part, dr
   }
   v(rmesh(.114,.055,.022,carrierPouchW,.008),.043,1.067,.18);
   v(rmesh(.113,.011,.023,webMat,.003),.043,1.09,.182);
-  v(rmesh(.06,.112,.032,nvgMat,.009),-.158,1.055,.19);
-  v(rmesh(.045,.015,.006,strapMat,.002),-.158,1.081,.209);
-  for(let k=0;k<4;k++)v(rmesh(.026,.003,.005,webMat,.001),-.158,1.068-k*.008,.21);
-  for(const x of[-.173,-.149])v(cyl(.006,.006,.014,nvgMat,8),x,1.117,.19);
-  torsoSeam([[-.143,1.116,.19],[-.113,1.159,.144],[-.08,1.181,.113],[-.063,1.142,.144],[-.067,1.115,.186]],nvgMat,'vest',.003);
-  v(rmesh(.022,.035,.012,nvgMat,.004),-.065,1.105,.189);
-  const antenna=v(cyl(.0035,.0035,.17,nvgMat,5),-.158,1.185,.19);antenna.rotation.z=.1;
+  radioPart(v(rmesh(.06,.112,.032,nvgMat,.009),-.158,1.055,.19));
+  radioPart(v(rmesh(.045,.015,.006,strapMat,.002),-.158,1.081,.209));
+  for(let k=0;k<4;k++)radioPart(v(rmesh(.026,.003,.005,webMat,.001),-.158,1.068-k*.008,.21));
+  for(const x of[-.173,-.149])radioPart(v(cyl(.006,.006,.014,nvgMat,8),x,1.117,.19));
+  radioPart(torsoSeam([[-.143,1.116,.19],[-.113,1.159,.144],[-.08,1.181,.113],[-.063,1.142,.144],[-.067,1.115,.186]],nvgMat,'vest',.003));
+  radioPart(v(rmesh(.022,.035,.012,nvgMat,.004),-.065,1.105,.189));
+  const antenna=radioPart(v(cyl(.0035,.0035,.17,nvgMat,5),-.158,1.185,.19));antenna.rotation.z=.1;
   v(rmesh(.092,.025,.019,webMat,.006),0,1.138,-.179);
   const patchRed=new T.MeshStandardMaterial({color:0xb03030,roughness:.9});
   for(const [fn,z] of [[at,.132],[v,.178]]) {

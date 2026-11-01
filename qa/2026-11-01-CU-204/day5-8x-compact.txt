@@ -1,0 +1,4 @@
+bench: http://127.0.0.1:51988/index.html?debug=1&trees=8
+bench: scenario day5 for 12s
+
+bench: ready 181705 ms

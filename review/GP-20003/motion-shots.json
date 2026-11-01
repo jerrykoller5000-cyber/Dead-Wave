@@ -1,0 +1,8 @@
+[
+  { "cam": { "x": 22, "y": 24, "z": -90, "tx": 22, "ty": 38, "tz": -126, "fov": 55 }, "time": "noon", "wait": 100, "caption": "Hikers crows 0", "out": "review/GP-20003/motion/crows-0.png" },
+  { "cam": { "x": 22, "y": 24, "z": -90, "tx": 22, "ty": 38, "tz": -126, "fov": 55 }, "time": "noon", "wait": 300, "caption": "Hikers crows 1", "out": "review/GP-20003/motion/crows-1.png" },
+  { "cam": { "x": 22, "y": 24, "z": -90, "tx": 22, "ty": 38, "tz": -126, "fov": 55 }, "time": "noon", "wait": 300, "caption": "Hikers crows 2", "out": "review/GP-20003/motion/crows-2.png" },
+  { "cam": { "x": -12, "y": 17, "z": 100, "tx": -12, "ty": 33, "tz": 140, "fov": 55 }, "time": "dusk", "wait": 100, "caption": "Trapper smoke 0", "out": "review/GP-20003/motion/smoke-0.png" },
+  { "cam": { "x": -12, "y": 17, "z": 100, "tx": -12, "ty": 33, "tz": 140, "fov": 55 }, "time": "dusk", "wait": 300, "caption": "Trapper smoke 1", "out": "review/GP-20003/motion/smoke-1.png" },
+  { "cam": { "x": -12, "y": 17, "z": 100, "tx": -12, "ty": 33, "tz": 140, "fov": 55 }, "time": "dusk", "wait": 300, "caption": "Trapper smoke 2", "out": "review/GP-20003/motion/smoke-2.png" }
+]

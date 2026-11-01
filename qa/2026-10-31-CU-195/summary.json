@@ -1,0 +1,302 @@
+{
+  "runs": [
+    {
+      "name": "n20-A1",
+      "code": 0,
+      "fps": 54.3,
+      "draws": 519,
+      "fp": {
+        "first": true,
+        "w": 0.9,
+        "weapon": "pistol",
+        "unarmed": false,
+        "vm": false
+      },
+      "tickMs": 17.6,
+      "frameMs": 18.42,
+      "viewmodelMs": 0
+    },
+    {
+      "name": "n20-B1",
+      "code": 0,
+      "fps": 50.5,
+      "draws": 522,
+      "fp": {
+        "first": true,
+        "w": 0.91,
+        "weapon": "pistol",
+        "unarmed": false,
+        "vm": true
+      },
+      "tickMs": 18.93,
+      "frameMs": 19.8,
+      "viewmodelMs": 0.13
+    },
+    {
+      "name": "n20-A2",
+      "code": 0,
+      "fps": 40.3,
+      "draws": 487,
+      "fp": {
+        "first": true,
+        "w": 0.91,
+        "weapon": "pistol",
+        "unarmed": false,
+        "vm": false
+      },
+      "tickMs": 23.74,
+      "frameMs": 24.81,
+      "viewmodelMs": 0.02
+    },
+    {
+      "name": "n20-B2",
+      "code": 0,
+      "fps": 50.9,
+      "draws": 514,
+      "fp": {
+        "first": true,
+        "w": 0.91,
+        "weapon": "pistol",
+        "unarmed": false,
+        "vm": true
+      },
+      "tickMs": 18.76,
+      "frameMs": 19.65,
+      "viewmodelMs": 0.08
+    },
+    {
+      "name": "n20-A3",
+      "code": 0,
+      "fps": 51.9,
+      "draws": 452,
+      "fp": {
+        "first": true,
+        "w": 0.91,
+        "weapon": "pistol",
+        "unarmed": false,
+        "vm": false
+      },
+      "tickMs": 18.43,
+      "frameMs": 19.27,
+      "viewmodelMs": 0.01
+    },
+    {
+      "name": "n20-B3",
+      "code": 0,
+      "fps": 52.6,
+      "draws": 514,
+      "fp": {
+        "first": true,
+        "w": 0.91,
+        "weapon": "pistol",
+        "unarmed": false,
+        "vm": true
+      },
+      "tickMs": 18.2,
+      "frameMs": 19.01,
+      "viewmodelMs": 0.03
+    },
+    {
+      "name": "d5-A1",
+      "code": 0,
+      "fps": 59.9,
+      "draws": 502,
+      "fp": {
+        "first": true,
+        "w": 0.92,
+        "weapon": "pistol",
+        "unarmed": false,
+        "vm": false
+      },
+      "tickMs": 14.88,
+      "frameMs": 16.69,
+      "viewmodelMs": 0.01
+    },
+    {
+      "name": "d5-B1",
+      "code": 0,
+      "fps": 59.4,
+      "draws": 504,
+      "fp": {
+        "first": true,
+        "w": 0.92,
+        "weapon": "pistol",
+        "unarmed": false,
+        "vm": true
+      },
+      "tickMs": 14.9,
+      "frameMs": 16.84,
+      "viewmodelMs": 0.08
+    },
+    {
+      "name": "d5-A2",
+      "code": 0,
+      "fps": 59.7,
+      "draws": 519,
+      "fp": {
+        "first": true,
+        "w": 0.92,
+        "weapon": "pistol",
+        "unarmed": false,
+        "vm": false
+      },
+      "tickMs": 14.23,
+      "frameMs": 16.75,
+      "viewmodelMs": 0.01
+    },
+    {
+      "name": "d5-B2",
+      "code": 0,
+      "fps": 55.7,
+      "draws": 525,
+      "fp": {
+        "first": true,
+        "w": 0.9,
+        "weapon": "pistol",
+        "unarmed": false,
+        "vm": true
+      },
+      "tickMs": 16.81,
+      "frameMs": 17.95,
+      "viewmodelMs": 0.08
+    },
+    {
+      "name": "d5-A3",
+      "code": 0,
+      "fps": 59.8,
+      "draws": 508,
+      "fp": {
+        "first": true,
+        "w": 0.92,
+        "weapon": "pistol",
+        "unarmed": false,
+        "vm": false
+      },
+      "tickMs": 14.61,
+      "frameMs": 16.72,
+      "viewmodelMs": 0.01
+    },
+    {
+      "name": "d5-B3",
+      "code": 0,
+      "fps": 59.2,
+      "draws": 508,
+      "fp": {
+        "first": true,
+        "w": 0.93,
+        "weapon": "pistol",
+        "unarmed": false,
+        "vm": true
+      },
+      "tickMs": 15.6,
+      "frameMs": 16.89,
+      "viewmodelMs": 0.08
+    }
+  ],
+  "n20": {
+    "pairs": [
+      {
+        "pair": 1,
+        "fps": -3.8,
+        "tickMs": 1.33,
+        "frameMs": 1.38,
+        "viewmodelMs": 0.13,
+        "draws": 3
+      },
+      {
+        "pair": 2,
+        "fps": 10.6,
+        "tickMs": -4.98,
+        "frameMs": -5.16,
+        "viewmodelMs": 0.06,
+        "draws": 27
+      },
+      {
+        "pair": 3,
+        "fps": 0.7,
+        "tickMs": -0.23,
+        "frameMs": -0.26,
+        "viewmodelMs": 0.02,
+        "draws": 62
+      }
+    ],
+    "fps": {
+      "median": 0.7,
+      "min": -3.8,
+      "max": 10.6
+    },
+    "tickMs": {
+      "median": -0.23,
+      "min": -4.98,
+      "max": 1.33
+    },
+    "frameMs": {
+      "median": -0.26,
+      "min": -5.16,
+      "max": 1.38
+    },
+    "viewmodelMs": {
+      "median": 0.06,
+      "min": 0.02,
+      "max": 0.13
+    },
+    "draws": {
+      "median": 27,
+      "min": 3,
+      "max": 62
+    }
+  },
+  "d5": {
+    "pairs": [
+      {
+        "pair": 1,
+        "fps": -0.5,
+        "tickMs": 0.02,
+        "frameMs": 0.15,
+        "viewmodelMs": 0.07,
+        "draws": 2
+      },
+      {
+        "pair": 2,
+        "fps": -4,
+        "tickMs": 2.58,
+        "frameMs": 1.2,
+        "viewmodelMs": 0.07,
+        "draws": 6
+      },
+      {
+        "pair": 3,
+        "fps": -0.6,
+        "tickMs": 0.99,
+        "frameMs": 0.17,
+        "viewmodelMs": 0.07,
+        "draws": 0
+      }
+    ],
+    "fps": {
+      "median": -0.6,
+      "min": -4,
+      "max": -0.5
+    },
+    "tickMs": {
+      "median": 0.99,
+      "min": 0.02,
+      "max": 2.58
+    },
+    "frameMs": {
+      "median": 0.17,
+      "min": 0.15,
+      "max": 1.2
+    },
+    "viewmodelMs": {
+      "median": 0.07,
+      "min": 0.07,
+      "max": 0.07
+    },
+    "draws": {
+      "median": 2,
+      "min": 0,
+      "max": 6
+    }
+  }
+}

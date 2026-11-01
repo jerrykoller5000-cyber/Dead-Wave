@@ -1,0 +1,34 @@
+[
+  {
+    "tag": "off-1",
+    "fps": 51.1,
+    "low": 29.9,
+    "draws": 483,
+    "render": 11.13,
+    "zombies": 29
+  },
+  {
+    "tag": "on-1",
+    "fps": 59,
+    "low": 43.9,
+    "draws": 487,
+    "render": 8.72,
+    "zombies": 27
+  },
+  {
+    "tag": "on-2",
+    "fps": 58.9,
+    "low": 42.4,
+    "draws": 484,
+    "render": 9.43,
+    "zombies": 29
+  },
+  {
+    "tag": "off-2",
+    "fps": 57.7,
+    "low": 38.7,
+    "draws": 483,
+    "render": 9.38,
+    "zombies": 27
+  }
+]

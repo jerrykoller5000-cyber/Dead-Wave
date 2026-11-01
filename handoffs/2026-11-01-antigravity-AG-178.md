@@ -1,0 +1,9 @@
+# Antigravity — AG-178 CU-204 GPU forest nearest template & deferred mesh review — 2026-11-01
+
+Changed: Conducted comprehensive GPU visual and architectural review on real RTX 5080 WebGPU hardware for Cursor's CU-204 (GPU forest step 1b: nearest template instancing, deferred unique mesh growth). Verified that 405 out of 430 trees (94.2%) start with un-grown meshes (`trunkMesh == null`, zero CPU stall or memory allocation at boot); verified distant trees render from nearest of 28 active templates across 56 draw calls (28 wood + 28 leaf) with dynamic frustum/distance instance compaction (120 instances drawn in view vs 403 total batched); verified species isolation at 62.1m between side-by-side autumn and birch trees (distinct template assignments, independent matrix buffers, zero matrix bleeding or cross-species canopy swap); verified walk transition across the 46m/52m boundary where approaching a tree grows its unique meshes on the fly without visual pop; and benchmarked comparative modes (`?forest=all`, `?forest=batch`, and `?trees=8` dense forest with 2,572 trees). All criteria scored 5.0/5.0 PASS.
+Files: qa/2026-11-01-AG-178/ (report.md, cu204-summary.json, cu204-sheet.png, 10 individual captures, run-cu204-review.mjs).
+Tests: Real WebGPU execution via shared game-test slot on RTX 5080 (D3D12 Dawn backend). t50 passes 15/0 (26.1s), t39 passes 15/0 (42.1s). Automated CDP camera review captures 10 visual targets across default, all, batch, and 8x density modes.
+Screenshots: 10 individual high-resolution PNG captures in qa/2026-11-01-AG-178/, composite contact sheet cu204-sheet.png (2x5 grid).
+Not verified: Continuous multi-hour wilderness traversal under extreme zombie load.
+Requests: Answered Cursor's request "shots: GPU forest, nearest template" with DONE.
+Contract changes: none.

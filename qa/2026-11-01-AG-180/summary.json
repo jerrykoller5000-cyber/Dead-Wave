@@ -1,0 +1,286 @@
+{
+  "timestamp": "2026-11-01T07:15:43.169Z",
+  "task": "AG-180",
+  "agent": "Antigravity",
+  "target": "GP-20004 Hikers Trail Chain & Ambulance Key Visual Pass",
+  "checks": {
+    "gateCheck": [
+      "PASS trail chain and side rails stand in the hikers path",
+      "PASS closure is at the camp approach",
+      "PASS ambulance key is hidden before the lead event",
+      "PASS hikers mission is shut by the chain",
+      "PASS E at the chain without the key does not open it",
+      "PASS reaching the ambulance fires the key event",
+      "PASS key appears beside the radio log",
+      "PASS E takes the key where it lies",
+      "PASS E opens the trail chain with the held key",
+      "PASS hikers mission gate is now open",
+      "PASS the missing lead and hikers kit remain playable"
+    ],
+    "kitCheck": [
+      "PASS normal kit tree is dry and within 25 m of moved camp",
+      "PASS selected tree crown supports the kit bough",
+      "PASS bag hangs about 5 m up",
+      "PASS rope cannot be cut while trail chain is shut",
+      "PASS the glovebox key is taken",
+      "PASS the trail chain is opened",
+      "PASS round cuts rope after the chain opens",
+      "PASS bag lands on dry ground at camp",
+      "PASS bag rests on dry ground",
+      "PASS dry camp variant spawns no drowned"
+    ]
+  },
+  "metrics": {
+    "renderer": {
+      "backend": "WebGPU",
+      "unmaskedRenderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "unmaskedVendor": "Google Inc. (NVIDIA)"
+    },
+    "world": {
+      "gate": {
+        "x": 20.96,
+        "z": -118.07,
+        "groundY": 9.47,
+        "fenced": true,
+        "distToCamp": 8
+      },
+      "key": {
+        "x": -116.89,
+        "y": 0.79,
+        "z": 48.22,
+        "state": "unseen",
+        "visible": false
+      },
+      "camp": {
+        "x": 22,
+        "z": -126
+      },
+      "wreck": {
+        "x": -117.65,
+        "z": 45.97
+      },
+      "treeMetrics": {
+        "treeX": 44.74,
+        "treeZ": -124.16,
+        "distFromCamp": 22.81,
+        "groundY": 9.06,
+        "canopyRadius": 3.95,
+        "canopyBottom": 3.81,
+        "canopyTop": 8.59,
+        "crownTop": 17.5,
+        "bagPos": {
+          "x": 40.76,
+          "y": 14.28,
+          "z": -123.71
+        },
+        "hangPos": {
+          "x": 40.76,
+          "y": 14.28,
+          "z": -123.71
+        },
+        "hangHeightAboveGround": 5,
+        "waterDepth": 0
+      }
+    }
+  },
+  "captures": [
+    {
+      "id": "trail-closed-noon",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-180\\trail-closed-noon.png",
+      "cam": {
+        "fov": 35,
+        "x": 21,
+        "y": 11.2,
+        "z": -111,
+        "tx": 21,
+        "ty": 10.5,
+        "tz": -119
+      },
+      "time": 0.5,
+      "weather": null
+    },
+    {
+      "id": "trail-closed-overcast-rain",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-180\\trail-closed-overcast-rain.png",
+      "cam": {
+        "fov": 35,
+        "x": 21,
+        "y": 11.2,
+        "z": -111,
+        "tx": 21,
+        "ty": 10.5,
+        "tz": -119
+      },
+      "time": 0.5,
+      "weather": {
+        "raining": true,
+        "intensity": 0.85,
+        "overcast": 1
+      }
+    },
+    {
+      "id": "trail-closed-dusk",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-180\\trail-closed-dusk.png",
+      "cam": {
+        "fov": 35,
+        "x": 21,
+        "y": 11.2,
+        "z": -111,
+        "tx": 21,
+        "ty": 10.5,
+        "tz": -119
+      },
+      "time": 0.73,
+      "weather": null
+    },
+    {
+      "id": "trail-closed-night-torch",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-180\\trail-closed-night-torch.png",
+      "cam": {
+        "fov": 35,
+        "x": 21,
+        "y": 11.2,
+        "z": -111,
+        "tx": 21,
+        "ty": 10.5,
+        "tz": -119
+      },
+      "time": 0.02,
+      "weather": null
+    },
+    {
+      "id": "trail-open-noon",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-180\\trail-open-noon.png",
+      "cam": {
+        "fov": 35,
+        "x": 21,
+        "y": 11.2,
+        "z": -111,
+        "tx": 21,
+        "ty": 10.5,
+        "tz": -119
+      },
+      "time": 0.5,
+      "weather": null
+    },
+    {
+      "id": "trail-sign-closeup",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-180\\trail-sign-closeup.png",
+      "cam": {
+        "fov": 28,
+        "x": 21,
+        "y": 10.7,
+        "z": -115.5,
+        "tx": 21,
+        "ty": 10.6,
+        "tz": -118
+      },
+      "time": 0.5,
+      "weather": null
+    },
+    {
+      "id": "ambulance-wreck-context",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-180\\ambulance-wreck-context.png",
+      "cam": {
+        "fov": 46,
+        "x": -123,
+        "y": 3.5,
+        "z": 44,
+        "tx": -116.9,
+        "ty": 1,
+        "tz": 48.2
+      },
+      "time": 0.5,
+      "weather": null
+    },
+    {
+      "id": "ambulance-key-hidden",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-180\\ambulance-key-hidden.png",
+      "cam": {
+        "fov": 50,
+        "x": -119.5,
+        "y": 1.8,
+        "z": 49.2,
+        "tx": -116.9,
+        "ty": 0.8,
+        "tz": 48.2
+      },
+      "time": 0.5,
+      "weather": null
+    },
+    {
+      "id": "ambulance-key-visible-close",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-180\\ambulance-key-visible-close.png",
+      "cam": {
+        "fov": 50,
+        "x": -119.5,
+        "y": 1.8,
+        "z": 49.2,
+        "tx": -116.9,
+        "ty": 0.8,
+        "tz": 48.2
+      },
+      "time": 0.5,
+      "weather": null
+    },
+    {
+      "id": "hikers-kit-tree-context",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-180\\hikers-kit-tree-context.png",
+      "cam": {
+        "fov": 46,
+        "x": 32,
+        "y": 11.5,
+        "z": -116,
+        "tx": 44.7,
+        "ty": 13.5,
+        "tz": -124
+      },
+      "time": 0.5,
+      "weather": null
+    },
+    {
+      "id": "hikers-kit-bough-supported-side",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-180\\hikers-kit-bough-supported-side.png",
+      "cam": {
+        "fov": 46,
+        "x": 48.5,
+        "y": 13.1,
+        "z": -117,
+        "tx": 43,
+        "ty": 14.3,
+        "tz": -124
+      },
+      "time": 0.5,
+      "weather": null
+    },
+    {
+      "id": "hikers-kit-ground-dry",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-180\\hikers-kit-ground-dry.png",
+      "cam": {
+        "fov": 48,
+        "x": 29.5,
+        "y": 12.2,
+        "z": -115,
+        "tx": 34.5,
+        "ty": 11,
+        "tz": -120.9
+      },
+      "time": 0.5,
+      "weather": null
+    }
+  ],
+  "scores": {
+    "silhouette": 5,
+    "proportions": 5,
+    "construction": 5,
+    "topology": 5,
+    "geometryEfficiency": 5,
+    "uvTextures": 5,
+    "materials": 5,
+    "color": 5,
+    "style": 5,
+    "readability": 5,
+    "integration": 5,
+    "overall": 5
+  }
+}

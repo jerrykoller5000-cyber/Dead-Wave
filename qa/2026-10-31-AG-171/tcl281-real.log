@@ -1,0 +1,72 @@
+ok    tcl281   39 pass   0 fail  39.3s  (real renderer)
+    PASS a pistol in hand
+    PASS third person: no view gun
+    PASS first person with the pistol: the view gun is up (raise 1.00)
+    INFO = first person with the pistol: the view gun is up (raise 1.00)
+    PASS his own arms (258/258) and pistol (20/20) are out of the eye's pass
+    INFO = his own arms (258/258) and pistol (20/20) are out of the eye's pass
+    PASS the laser's beam is still drawn
+    PASS his baked arms are skins of their own, out of the eye's pass; the rest of him is in it (3 of 9)
+    INFO = his baked arms are skins of their own, out of the eye's pass; the rest of him is in it (3 of 9)
+    PASS the eye's pass leaves them out (the render filter is on)
+    INFO = the eye's pass leaves them out (the render filter is on)
+    PASS and they are still there for his shadow (visible)
+    INFO = and they are still there for his shadow (visible)
+    PASS both wrists on their sockets (0.00, 0.00 cm)
+    INFO = both wrists on their sockets (0.00, 0.00 cm)
+    PASS the firing hand's grip through the pistol's grip (0.12 cm)
+    INFO = the firing hand's grip through the pistol's grip (0.12 cm)
+    PASS the wrists bend no more than VM.wristMax, at most 50 degrees (0.87, 0.81 of 0.87)
+    INFO = the wrists bend no more than VM.wristMax, at most 50 degrees (0.87, 0.81 of 0.87)
+    PASS the forearms leave the view downward, not at the eye (69, 74 degrees off the eye line; elbows at ndc y -1.52, -1.31)
+    INFO = the forearms leave the view downward, not at the eye (69, 74 degrees off the eye line; elbows at ndc y -1.52, -1.31)
+    PASS the mirrored meshes draw wound the other way on WebGPU, as they are elsewhere (flip true)
+    INFO = the mirrored meshes draw wound the other way on WebGPU, as they are elsewhere (flip true)
+    PASS nothing on screen in front of the near plane (nearest 24.9 cm, 24 meshes)
+    INFO = nothing on screen in front of the near plane (nearest 24.9 cm, 24 meshes)
+    INFO view gun draws: 24 meshes
+    PASS at the hip the pistol is low right (grip ndc 0.36, -0.45; muzzle 0.23, -0.11)
+    INFO = at the hip the pistol is low right (grip ndc 0.36, -0.45; muzzle 0.23, -0.11)
+    PASS the forearms don't cross: the firing elbow to the right of the support one (ndc x 1.01, -0.08)
+    INFO = the forearms don't cross: the firing elbow to the right of the support one (ndc x 1.01, -0.08)
+    PASS and canted (-6.9 deg)
+    INFO = and canted (-6.9 deg)
+    PASS right-click: down the sights
+    PASS the rear notch and the front post on the view's centre, within a pixel at 1080p (0.000, -0.000, 0.000, 0.000)
+    INFO = the rear notch and the front post on the view's centre, within a pixel at 1080p (0.000, -0.000, 0.000, 0.000)
+    PASS the eye stays at his eyes down the sights (0.000 m)
+    INFO = the eye stays at his eyes down the sights (0.000 m)
+    PASS down the sights the wrists are on their sockets too (0.00, 0.00 cm)
+    INFO = down the sights the wrists are on their sockets too (0.00, 0.00 cm)
+    PASS a shot kicks the gun back (1.5 cm)
+    INFO = a shot kicks the gun back (1.5 cm)
+    INFO the slide on the shot: 0.0 cm (gun units)
+    PASS and it settles back (-0.02 cm off)
+    INFO = and it settles back (-0.02 cm off)
+    PASS a reload starts
+    PASS the magazine: seated, in his palm, away, back (seated hand pouch)
+    INFO = the magazine: seated, in his palm, away, back (seated hand pouch)
+    PASS the support hand goes to the well, the pouch and the slide (fore well below pouch work)
+    INFO = the support hand goes to the well, the pouch and the slide (fore well below pouch work)
+    PASS the magazine rides the support palm (its foot within 0.00 cm)
+    INFO = the magazine rides the support palm (its foot within 0.00 cm)
+    PASS away in the pouch it is out of sight
+    PASS after it: the magazine seated in the well (0.0e+0)
+    INFO = after it: the magazine seated in the well (0.0e+0)
+    PASS and the support hand back on the gun (0.00 cm)
+    INFO = and the support hand back on the gun (0.00 cm)
+    PASS the view gun's muzzle in the world for the laser (0.69 m from the eye)
+    INFO = the view gun's muzzle in the world for the laser (0.69 m from the eye)
+    PASS an m4 in hand
+    PASS the view gun goes down for a gun it has no entry for yet
+    PASS his own arms back in the eye's pass (0 left out), the filter off
+    INFO = his own arms back in the eye's pass (0 left out), the filter off
+    PASS the pistol again
+    PASS and the view gun is up again
+    PASS third person: the view gun goes
+    PASS nothing of his left out of the eye's pass (0)
+    INFO = nothing of his left out of the eye's pass (0)
+    PASS no page errors ()
+    INFO = no page errors ()
+1 checks: 39 pass, 0 fail (real renderer)
+

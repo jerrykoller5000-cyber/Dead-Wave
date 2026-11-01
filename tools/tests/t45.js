@@ -20,7 +20,7 @@
   }
   ok(proud === 0, 'river mouth is open water (' + proud + ' dry points on the line)');
   // Fish: in water, in schools.
-  ok(T.fishes.length >= 10 && T.fishSchools.length >= 4, 'fish in schools (' + T.fishes.length + ' in ' + T.fishSchools.length + ')');
+  ok(T.fishes.length >= 5 && T.fishSchools.length >= 3, 'fish in schools (D-107: half as many; ' + T.fishes.length + ' in ' + T.fishSchools.length + ')');
   let dry = 0;
   for (let k = 0; k < 400; k++) { T.updateFish(0.05, 0, 0); if (k % 20 === 0) for (const f of T.fishes) if (T.waterDepthAt(f.mesh.position.x, f.mesh.position.z) < 0.2) dry++; }
   ok(dry === 0, 'fish keep to swimmable water');

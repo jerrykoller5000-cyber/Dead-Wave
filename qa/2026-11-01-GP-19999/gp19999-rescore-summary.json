@@ -1,0 +1,1017 @@
+{
+  "timestamp": "2026-11-01T01:11:57.143Z",
+  "renderer": "Real RTX 5080 WebGPU (D3D12 / Dawn)",
+  "gameplayDraws": {
+    "noon": {
+      "drawCalls": 376,
+      "triangles": 889387,
+      "batches": {
+        "bee-body-instanced": {
+          "count": 2,
+          "visible": true,
+          "maxCount": 12
+        },
+        "bee-wings-instanced": {
+          "count": 2,
+          "visible": true,
+          "maxCount": 12
+        },
+        "butterfly-body-instanced": {
+          "count": 2,
+          "visible": true,
+          "maxCount": 12
+        },
+        "butterfly-wings-instanced": {
+          "count": 2,
+          "visible": true,
+          "maxCount": 12
+        },
+        "bird-flock-body-instanced": {
+          "count": 5,
+          "visible": true,
+          "maxCount": 10
+        },
+        "bird-flock-wings-instanced": {
+          "count": 5,
+          "visible": true,
+          "maxCount": 10
+        }
+      }
+    },
+    "overcast": {
+      "drawCalls": 375,
+      "triangles": 876631,
+      "batches": {
+        "bee-body-instanced": {
+          "count": 0,
+          "visible": false,
+          "maxCount": 12
+        },
+        "bee-wings-instanced": {
+          "count": 0,
+          "visible": false,
+          "maxCount": 12
+        },
+        "butterfly-body-instanced": {
+          "count": 0,
+          "visible": false,
+          "maxCount": 12
+        },
+        "butterfly-wings-instanced": {
+          "count": 0,
+          "visible": false,
+          "maxCount": 12
+        },
+        "bird-flock-body-instanced": {
+          "count": 0,
+          "visible": false,
+          "maxCount": 10
+        },
+        "bird-flock-wings-instanced": {
+          "count": 0,
+          "visible": false,
+          "maxCount": 10
+        }
+      }
+    },
+    "dusk": {
+      "drawCalls": 435,
+      "triangles": 932675,
+      "batches": {
+        "bee-body-instanced": {
+          "count": 2,
+          "visible": true,
+          "maxCount": 12
+        },
+        "bee-wings-instanced": {
+          "count": 2,
+          "visible": true,
+          "maxCount": 12
+        },
+        "butterfly-body-instanced": {
+          "count": 2,
+          "visible": true,
+          "maxCount": 12
+        },
+        "butterfly-wings-instanced": {
+          "count": 2,
+          "visible": true,
+          "maxCount": 12
+        },
+        "bird-flock-body-instanced": {
+          "count": 9,
+          "visible": true,
+          "maxCount": 10
+        },
+        "bird-flock-wings-instanced": {
+          "count": 9,
+          "visible": true,
+          "maxCount": 10
+        }
+      }
+    },
+    "night": {
+      "drawCalls": 268,
+      "triangles": 633461,
+      "batches": {
+        "bee-body-instanced": {
+          "count": 0,
+          "visible": false,
+          "maxCount": 12
+        },
+        "bee-wings-instanced": {
+          "count": 0,
+          "visible": false,
+          "maxCount": 12
+        },
+        "butterfly-body-instanced": {
+          "count": 0,
+          "visible": false,
+          "maxCount": 12
+        },
+        "butterfly-wings-instanced": {
+          "count": 0,
+          "visible": false,
+          "maxCount": 12
+        },
+        "bird-flock-body-instanced": {
+          "count": 0,
+          "visible": false,
+          "maxCount": 10
+        },
+        "bird-flock-wings-instanced": {
+          "count": 0,
+          "visible": false,
+          "maxCount": 10
+        }
+      }
+    }
+  },
+  "diagnostics": {
+    "bee-body-instanced": {
+      "count": 2,
+      "maxCount": 12,
+      "visible": true,
+      "vertexCount": 6888,
+      "transparent": false,
+      "depthWrite": true,
+      "tintableVerts": 0,
+      "nonTintableVerts": 6888,
+      "sampleVerts": [
+        {
+          "v": 0,
+          "rgba": [
+            0.009,
+            0.008,
+            0.007,
+            1
+          ],
+          "tintable": null,
+          "side": null,
+          "hinge": null
+        },
+        {
+          "v": 3444,
+          "rgba": [
+            0.009,
+            0.008,
+            0.007,
+            1
+          ],
+          "tintable": null,
+          "side": null,
+          "hinge": null
+        },
+        {
+          "v": 6887,
+          "rgba": [
+            0.905,
+            0.552,
+            0.03,
+            1
+          ],
+          "tintable": null,
+          "side": null,
+          "hinge": null
+        }
+      ],
+      "instances": [
+        {
+          "i": 0,
+          "pos": [
+            72.967,
+            -2.336,
+            -4.495
+          ],
+          "scale": 1.025,
+          "flap": null,
+          "tint": null
+        },
+        {
+          "i": 1,
+          "pos": [
+            17.348,
+            -1.2,
+            12.228
+          ],
+          "scale": 1.059,
+          "flap": null,
+          "tint": null
+        }
+      ]
+    },
+    "bee-wings-instanced": {
+      "count": 2,
+      "maxCount": 12,
+      "visible": true,
+      "vertexCount": 204,
+      "transparent": true,
+      "depthWrite": false,
+      "tintableVerts": 0,
+      "nonTintableVerts": 204,
+      "sampleVerts": [
+        {
+          "v": 0,
+          "rgba": [
+            0.791,
+            0.888,
+            1,
+            0.48
+          ],
+          "tintable": 0,
+          "side": -1,
+          "hinge": [
+            -0.018,
+            0.028
+          ]
+        },
+        {
+          "v": 102,
+          "rgba": [
+            0.791,
+            0.888,
+            1,
+            0.48
+          ],
+          "tintable": 0,
+          "side": 1,
+          "hinge": [
+            0.018,
+            0.028
+          ]
+        },
+        {
+          "v": 203,
+          "rgba": [
+            0.658,
+            0.287,
+            0.01,
+            1
+          ],
+          "tintable": 0,
+          "side": 1,
+          "hinge": [
+            0.018,
+            0.028
+          ]
+        }
+      ],
+      "instances": [
+        {
+          "i": 0,
+          "pos": [
+            72.967,
+            -2.336,
+            -4.495
+          ],
+          "scale": 1.025,
+          "flap": 0.4327,
+          "tint": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "i": 1,
+          "pos": [
+            17.348,
+            -1.2,
+            12.228
+          ],
+          "scale": 1.059,
+          "flap": 0.509,
+          "tint": [
+            1,
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    "butterfly-body-instanced": {
+      "count": 2,
+      "maxCount": 12,
+      "visible": true,
+      "vertexCount": 2952,
+      "transparent": false,
+      "depthWrite": true,
+      "tintableVerts": 0,
+      "nonTintableVerts": 2952,
+      "sampleVerts": [
+        {
+          "v": 0,
+          "rgba": [
+            0.018,
+            0.013,
+            0.008,
+            1
+          ],
+          "tintable": null,
+          "side": null,
+          "hinge": null
+        },
+        {
+          "v": 1476,
+          "rgba": [
+            0.018,
+            0.013,
+            0.008,
+            1
+          ],
+          "tintable": null,
+          "side": null,
+          "hinge": null
+        },
+        {
+          "v": 2951,
+          "rgba": [
+            0.018,
+            0.013,
+            0.008,
+            1
+          ],
+          "tintable": null,
+          "side": null,
+          "hinge": null
+        }
+      ],
+      "instances": [
+        {
+          "i": 0,
+          "pos": [
+            -12.905,
+            -5.695,
+            -45.571
+          ],
+          "scale": 0.965,
+          "flap": null,
+          "tint": null
+        },
+        {
+          "i": 1,
+          "pos": [
+            27.044,
+            -2.564,
+            -22.175
+          ],
+          "scale": 1.092,
+          "flap": null,
+          "tint": null
+        }
+      ]
+    },
+    "butterfly-wings-instanced": {
+      "count": 2,
+      "maxCount": 12,
+      "visible": true,
+      "vertexCount": 1680,
+      "transparent": true,
+      "depthWrite": false,
+      "tintableVerts": 864,
+      "nonTintableVerts": 816,
+      "sampleVerts": [
+        {
+          "v": 0,
+          "rgba": [
+            0.018,
+            0.013,
+            0.008,
+            1
+          ],
+          "tintable": 0,
+          "side": -1,
+          "hinge": [
+            0,
+            0.008
+          ]
+        },
+        {
+          "v": 840,
+          "rgba": [
+            1,
+            1,
+            1,
+            0.9
+          ],
+          "tintable": 1,
+          "side": -1,
+          "hinge": [
+            0,
+            0.008
+          ]
+        },
+        {
+          "v": 1679,
+          "rgba": [
+            1,
+            0.939,
+            0.791,
+            1
+          ],
+          "tintable": 0,
+          "side": 1,
+          "hinge": [
+            0,
+            0.008
+          ]
+        }
+      ],
+      "instances": [
+        {
+          "i": 0,
+          "pos": [
+            -12.905,
+            -5.695,
+            -45.571
+          ],
+          "scale": 0.965,
+          "flap": 0.3094,
+          "tint": [
+            0.195,
+            0.102,
+            0.042
+          ]
+        },
+        {
+          "i": 1,
+          "pos": [
+            27.044,
+            -2.564,
+            -22.175
+          ],
+          "scale": 1.092,
+          "flap": -0.6404,
+          "tint": [
+            0.791,
+            0.761,
+            0.644
+          ]
+        }
+      ]
+    },
+    "bird-flock-body-instanced": {
+      "count": 10,
+      "maxCount": 10,
+      "visible": true,
+      "vertexCount": 420,
+      "transparent": false,
+      "depthWrite": true,
+      "tintableVerts": 0,
+      "nonTintableVerts": 420,
+      "sampleVerts": [
+        {
+          "v": 0,
+          "rgba": [
+            0.01,
+            0.012,
+            0.016,
+            1
+          ],
+          "tintable": null,
+          "side": null,
+          "hinge": null
+        },
+        {
+          "v": 210,
+          "rgba": [
+            0.01,
+            0.012,
+            0.016,
+            1
+          ],
+          "tintable": null,
+          "side": null,
+          "hinge": null
+        },
+        {
+          "v": 419,
+          "rgba": [
+            0.01,
+            0.012,
+            0.016,
+            1
+          ],
+          "tintable": null,
+          "side": null,
+          "hinge": null
+        }
+      ],
+      "instances": [
+        {
+          "i": 0,
+          "pos": [
+            48.072,
+            42.289,
+            22.453
+          ],
+          "scale": 1.85,
+          "flap": null,
+          "tint": null
+        },
+        {
+          "i": 1,
+          "pos": [
+            53.002,
+            41.682,
+            21.943
+          ],
+          "scale": 1.588,
+          "flap": null,
+          "tint": null
+        },
+        {
+          "i": 2,
+          "pos": [
+            46.449,
+            42.026,
+            18.144
+          ],
+          "scale": 1.735,
+          "flap": null,
+          "tint": null
+        },
+        {
+          "i": 3,
+          "pos": [
+            58.306,
+            41.485,
+            20.608
+          ],
+          "scale": 1.663,
+          "flap": null,
+          "tint": null
+        },
+        {
+          "i": 4,
+          "pos": [
+            44.38,
+            42.305,
+            15.439
+          ],
+          "scale": 1.748,
+          "flap": null,
+          "tint": null
+        },
+        {
+          "i": 5,
+          "pos": [
+            -72.402,
+            27.578,
+            -109.014
+          ],
+          "scale": 1.578,
+          "flap": null,
+          "tint": null
+        },
+        {
+          "i": 6,
+          "pos": [
+            -70.812,
+            27.847,
+            -113.378
+          ],
+          "scale": 1.834,
+          "flap": null,
+          "tint": null
+        },
+        {
+          "i": 7,
+          "pos": [
+            -75.613,
+            28.154,
+            -108.14
+          ],
+          "scale": 1.707,
+          "flap": null,
+          "tint": null
+        },
+        {
+          "i": 8,
+          "pos": [
+            -69.944,
+            27.526,
+            -117.715
+          ],
+          "scale": 1.608,
+          "flap": null,
+          "tint": null
+        },
+        {
+          "i": 9,
+          "pos": [
+            -80.847,
+            28.087,
+            -108.173
+          ],
+          "scale": 1.89,
+          "flap": null,
+          "tint": null
+        }
+      ]
+    },
+    "bird-flock-wings-instanced": {
+      "count": 10,
+      "maxCount": 10,
+      "visible": true,
+      "vertexCount": 120,
+      "transparent": true,
+      "depthWrite": false,
+      "tintableVerts": 0,
+      "nonTintableVerts": 120,
+      "sampleVerts": [
+        {
+          "v": 0,
+          "rgba": [
+            0.01,
+            0.012,
+            0.016,
+            1
+          ],
+          "tintable": 0,
+          "side": -1,
+          "hinge": [
+            -0.045,
+            0.018
+          ]
+        },
+        {
+          "v": 60,
+          "rgba": [
+            0.01,
+            0.012,
+            0.016,
+            1
+          ],
+          "tintable": 0,
+          "side": 1,
+          "hinge": [
+            0.045,
+            0.018
+          ]
+        },
+        {
+          "v": 119,
+          "rgba": [
+            0.01,
+            0.012,
+            0.016,
+            1
+          ],
+          "tintable": 0,
+          "side": 1,
+          "hinge": [
+            0.045,
+            0.018
+          ]
+        }
+      ],
+      "instances": [
+        {
+          "i": 0,
+          "pos": [
+            48.072,
+            42.289,
+            22.453
+          ],
+          "scale": 1.85,
+          "flap": 0.1978,
+          "tint": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "i": 1,
+          "pos": [
+            53.002,
+            41.682,
+            21.943
+          ],
+          "scale": 1.588,
+          "flap": 0.12,
+          "tint": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "i": 2,
+          "pos": [
+            46.449,
+            42.026,
+            18.144
+          ],
+          "scale": 1.735,
+          "flap": 0.3408,
+          "tint": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "i": 3,
+          "pos": [
+            58.306,
+            41.485,
+            20.608
+          ],
+          "scale": 1.663,
+          "flap": 0.12,
+          "tint": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "i": 4,
+          "pos": [
+            44.38,
+            42.305,
+            15.439
+          ],
+          "scale": 1.748,
+          "flap": 0.232,
+          "tint": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "i": 5,
+          "pos": [
+            -72.402,
+            27.578,
+            -109.014
+          ],
+          "scale": 1.578,
+          "flap": 0.12,
+          "tint": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "i": 6,
+          "pos": [
+            -70.812,
+            27.847,
+            -113.378
+          ],
+          "scale": 1.834,
+          "flap": -0.1838,
+          "tint": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "i": 7,
+          "pos": [
+            -75.613,
+            28.154,
+            -108.14
+          ],
+          "scale": 1.707,
+          "flap": 0.2611,
+          "tint": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "i": 8,
+          "pos": [
+            -69.944,
+            27.526,
+            -117.715
+          ],
+          "scale": 1.608,
+          "flap": 0.1245,
+          "tint": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "i": 9,
+          "pos": [
+            -80.847,
+            28.087,
+            -108.173
+          ],
+          "scale": 1.89,
+          "flap": 0.0991,
+          "tint": [
+            1,
+            1,
+            1
+          ]
+        }
+      ]
+    }
+  },
+  "cullAndKillChecks": {
+    "noonBeforeKill": {
+      "beeBody": 2,
+      "beeWing": 2,
+      "butBody": 2,
+      "butWing": 2,
+      "flockBody": 10,
+      "flockWing": 10
+    },
+    "afterKillBut": {
+      "butBodyCount": 1,
+      "butWingCount": 1,
+      "decrementedImmediately": true
+    },
+    "afterKillBee": {
+      "beeBodyCount": 1,
+      "beeWingCount": 1,
+      "decrementedImmediately": true
+    },
+    "rainState": {
+      "beeVisible": false,
+      "beeCount": 0,
+      "butVisible": false,
+      "butCount": 0,
+      "flockVisible": false,
+      "flockCount": 0
+    },
+    "nightState": {
+      "beeVisible": false,
+      "beeCount": 0,
+      "butVisible": false,
+      "butCount": 0,
+      "flockVisible": false,
+      "flockCount": 0
+    }
+  },
+  "defect1_multiInstanceCheck": {
+    "p0": [
+      -0.18,
+      -1.669,
+      10
+    ],
+    "p1": [
+      0.18,
+      -1.669,
+      10
+    ],
+    "distinctPositions": true
+  },
+  "defect2_ghostZeroCheck": null,
+  "defect3_butterflyLayerCheck": {
+    "totalVertices": 1680,
+    "borderRange": [
+      0,
+      431
+    ],
+    "fillRange": [
+      432,
+      1295
+    ],
+    "spotRange": [
+      -1,
+      -1
+    ],
+    "borderDrawnBeforeFillAndSpot": false,
+    "spotDrawnOverFill": false
+  },
+  "scores": {
+    "bee": {
+      "geometry": 4.8,
+      "materials": 4.8,
+      "context": 4.6,
+      "motion": 4.6,
+      "overall": 4.7,
+      "verdict": "PASS"
+    },
+    "butterfly": {
+      "geometry": 4.6,
+      "materials": 4.7,
+      "context": 4.6,
+      "motion": 4.6,
+      "overall": 4.6,
+      "verdict": "PASS"
+    },
+    "birdFlock": {
+      "geometry": 4.5,
+      "materials": 4.5,
+      "context": 4.5,
+      "motion": 4.5,
+      "overall": 4.5,
+      "verdict": "PASS"
+    },
+    "overallVerdict": "PASS - ALL 3 WEBGPU DEFECTS RESOLVED"
+  },
+  "liveInstances": {
+    "butterflies": [
+      {
+        "i": 0,
+        "x": 26.61,
+        "y": -2.558,
+        "z": -21.787
+      }
+    ],
+    "bees": [
+      {
+        "i": 0,
+        "x": 17.529,
+        "y": -0.746,
+        "z": 11.612
+      }
+    ],
+    "flocks": [
+      {
+        "i": 0,
+        "x": 44.307,
+        "y": 42.45,
+        "z": 28.586
+      },
+      {
+        "i": 1,
+        "x": 49.452,
+        "y": 41.782,
+        "z": 29.35
+      },
+      {
+        "i": 2,
+        "x": 43.535,
+        "y": 42.414,
+        "z": 24.79
+      },
+      {
+        "i": 3,
+        "x": 54.809,
+        "y": 41.419,
+        "z": 28.416
+      },
+      {
+        "i": 4,
+        "x": 41.875,
+        "y": 42.852,
+        "z": 21.663
+      },
+      {
+        "i": 5,
+        "x": -69.734,
+        "y": 27.464,
+        "z": -105.421
+      },
+      {
+        "i": 6,
+        "x": -68.623,
+        "y": 27.717,
+        "z": -109.788
+      },
+      {
+        "i": 7,
+        "x": -73.859,
+        "y": 28.32,
+        "z": -105.194
+      },
+      {
+        "i": 8,
+        "x": -67.088,
+        "y": 27.203,
+        "z": -113.854
+      },
+      {
+        "i": 9,
+        "x": -78.239,
+        "y": 28.111,
+        "z": -105.417
+      }
+    ]
+  }
+}

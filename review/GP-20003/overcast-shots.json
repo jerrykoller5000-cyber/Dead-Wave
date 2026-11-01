@@ -1,0 +1,17 @@
+[
+  {
+    "cam": { "x": 0, "y": 4.83, "z": 0, "tx": -12, "ty": 30, "tz": 140, "fov": 55 },
+    "time": "noon", "pre": "T.weather.raining=true; T.weather.intensity=0.65; T.stepFrame(0.03);",
+    "caption": "Trapper overcast", "out": "review/GP-20003/overcast-trapper-roof.png"
+  },
+  {
+    "cam": { "x": 0, "y": 4.83, "z": 0, "tx": -116, "ty": 20, "tz": 10, "fov": 55 },
+    "time": "noon", "pre": "T.weather.raining=true; T.weather.intensity=0.65; T.stepFrame(0.03);",
+    "caption": "Fuel overcast", "out": "review/GP-20003/overcast-fuel-roof.png"
+  },
+  {
+    "cam": { "x": 0, "y": 4.83, "z": 0, "tx": 22, "ty": 38, "tz": -126, "fov": 55 },
+    "time": "noon", "pre": "T.weather.raining=true; T.weather.intensity=0.65; T.stepFrame(0.03);",
+    "caption": "Hikers overcast", "out": "review/GP-20003/overcast-hikers-roof.png"
+  }
+]

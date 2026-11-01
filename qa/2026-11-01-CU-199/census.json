@@ -1,0 +1,33 @@
+{
+  "task": "CU-199",
+  "before": "AG-170 §1.3, first person looking level by day: history-props 72 draws (brass 36, leghold-traps 14, survey-board 10, horseshoe 3, dropped-helmet 2, open-grave 2); hq-armory 19 with the starter loadout, 93 with every weapon.",
+  "after": {
+    "day5": {
+      "cmd": "node tools/bench.mjs --scenario day5 --gfx high --fp pistol --census",
+      "fps": 59.8,
+      "low": 51.4,
+      "draws": 372,
+      "main": 354,
+      "historyProps": 7,
+      "historyParts": ["open-grave 2", "trapper-post 1", "coldwater-church 1", "coldwater-foundation 1", "iron-banded-grave 1"],
+      "hqArmory": 11,
+      "tagWall": 68,
+      "trapperPath": 25,
+      "cellarRoofCap": 21,
+      "holyReliquaryCulled": true
+    },
+    "night20": {
+      "cmd": "node tools/bench.mjs --night 20 --gfx high --fp pistol --census",
+      "fps": 43.5,
+      "low": 25.1,
+      "draws": 406,
+      "main": 395.5,
+      "historyProps": 7,
+      "hqArmory": 11,
+      "tagWall": 59,
+      "trapperPath": 25,
+      "cellarRoofCap": 21
+    }
+  },
+  "left": "The cellar roof cap stays: it is the ground over the cellar, and hiding it would open a hole. The church, the open grave and the foundations stay so the places still read. Unnamed meshes were not given a distance. The all-weapons rack was not benched; refresh folds it the same way, and the starter hatch is 11 draws against AG-170's 19."
+}

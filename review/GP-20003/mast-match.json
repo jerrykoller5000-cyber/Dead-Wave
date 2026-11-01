@@ -1,0 +1,8 @@
+[
+  {
+    "cam": { "x": 0, "y": 4.83, "z": 0, "tx": -153.37, "ty": 16.25, "tz": -4.15, "fov": 55 },
+    "time": "night",
+    "pre": "T.setRelayUpDbg(true); T.campfires.find(f=>f.beacon).phase=0; T.setWorldTime(0); T.stepFrame(0.03);",
+    "out": "review/GP-20003/mast-roof-night-live.png"
+  }
+]

@@ -15,9 +15,52 @@
       still = b === lastB ? still + 1 : 0; lastB = b;
     }
     const s0 = T.treeBatchStats();
-    ok(s0.built && !s0.off, 'batches built at load (' + s0.buildMs + ' ms)');
+    ok(s0.built && !s0.off, 'batches built at load (' + s0.buildMs + ' ms, ' + s0.mode + ')');
     ok(s0.members >= T.trees.length - 12 && s0.batched > s0.members * 0.6, 'most trees batched (' + s0.batched + ' of ' + s0.members + ', ' + s0.live + ' live)');
     const { members, cells } = T.getTreeBatches();
+    if (s0.mode === 'forest') {
+      // CU-203: far trees are instances of a template. The cell copy is the old path (?forest=batch).
+      ok(s0.templates >= 4, 'templates for the kinds (' + s0.templates + ')');
+      const visible = (o) => { for (let p = o; p; p = p.parent) if (!p.visible) return false; return true; };
+      let own = 0; for (const t of T.trees) t.group.traverse(o => { if (o.isMesh && visible(o)) own++; });
+      ok(own < T.trees.length * 0.5 && s0.meshes < T.trees.length, 'live meshes ' + own + ', instance draws ' + s0.meshes + ' for ' + T.trees.length + ' trees');
+      const px = T.player.position.x, pz = T.player.position.z;
+      const cheb = (t) => Math.max(Math.abs(t.x - px), Math.abs(t.z - pz));
+      const near = members.filter(m => cheb(m.tree) < 42);
+      ok(near.length > 0 && near.every(m => !m.inBatch && m.tree.trunkMesh.visible && m.forest && !m.forest.shown), 'every tree in the shadow square is live (' + near.length + ')');
+      const far = members.filter(m => m.inBatch && cheb(m.tree) > 90 && m.tree.alive && !m.tree.deadWood);
+      const m = far[0];
+      ok(!!m && !(m.tree.trunkMesh && m.tree.trunkMesh.visible) && m.forest.shown, 'far tree: own meshes hidden, its instance shown');
+      let twice = 0;
+      for (const q of members) if (q.tree.trunkMesh && q.tree.trunkMesh.visible && q.forest.shown) twice++;
+      ok(twice === 0, 'no tree is drawn as itself and as an instance (' + twice + ')');
+      T.igniteTree(m.tree, false, 1);
+      await frames(3);
+      ok(m.tree.burnT > 0 && !m.inBatch && m.dirty && !m.forest.shown, 'burning tree goes live and its instance hides');
+      ok(m.tree.trunkMesh.visible, 'its own meshes draw');
+      T.restoreTree(m.tree);
+      await frames(3);
+      ok(m.inBatch && !m.tree.trunkMesh.visible && m.forest.shown, 'restored far tree rejoins the instances');
+      const m2 = far.find(q => q !== m && q.inBatch);
+      const save = T.player.position.clone();
+      T.player.position.set(m2.tree.x + 3, T.sampleHeight(m2.tree.x + 3, m2.tree.z), m2.tree.z);
+      for (let i = 0; i < 20 && m2.inBatch; i++) await frames(1);
+      ok(!m2.inBatch && m2.tree.trunkMesh.visible && !m2.dirty && !m2.forest.shown, 'walking up: the tree goes live');
+      T.player.position.copy(save);
+      for (let i = 0; i < 40 && !m2.inBatch; i++) await frames(1);
+      ok(m2.inBatch && !m2.tree.trunkMesh.visible && m2.forest.shown, 'walking away: it rejoins');
+      const mb = (a) => () => { let t = (a += 0x6D2B79F5); t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+      const yawOf = (t) => mb(((Math.round(t.x * 131) * 83492791) ^ (Math.round(t.z * 71) * 2971215073)) | 0)() * Math.PI * 2;
+      const unseeded = T.trees.filter((t) => Math.abs(t.baseRotY - yawOf(t)) > 1e-9).length;
+      ok(unseeded === 0, 'every tree\'s turn is seeded from its position (' + unseeded + ' not)');
+      const live = near.find((q) => q.tree.alive && !q.tree.falling);
+      const ft = live.tree;
+      ft.leafHealth = 0; ft.health = 1;
+      T.damageTree(ft, ft.x, ft.z, 1, 1, 0);
+      await frames(4);
+      ok(ft.falling && ft.trunkMesh.visible && live.forest && !live.forest.shown, 'a near tree falls on its own meshes');
+      return out.join('\n');
+    }
     const visible = (o) => { for (let p = o; p; p = p.parent) if (!p.visible) return false; return true; };
     // Draws for trees: their own visible meshes plus the cell meshes.
     let own = 0; for (const t of T.trees) t.group.traverse(o => { if (o.isMesh && visible(o)) own++; });

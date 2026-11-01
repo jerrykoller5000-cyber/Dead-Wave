@@ -7,6 +7,8 @@
 //   node tools/bench.mjs --night 5               night 5's last push, horde out, then 30 s
 //   node tools/bench.mjs --night 20 --gfx high   same, on the High preset
 //   node tools/bench.mjs --seconds 8 --headless  short run
+//   node tools/bench.mjs --night 20 --gfx high --fp pistol          first person, pistol drawn, then the measured seconds (CU-195)
+//   node tools/bench.mjs --night 20 --gfx high --fp pistol --vm 0    the same with the old first person (?vm=0)
 //   node tools/bench.mjs --night 20 --gfx high --prof   and where each frame's time goes
 //   node tools/bench.mjs --night 20 --gfx high --prof-all   --prof with every PROF section listed (CU-171)
 //   node tools/bench.mjs --night 20 --gfx high --eval <file.js>   and run that JavaScript in the page after the seconds (CU-173)
@@ -80,6 +82,12 @@ const PROF_ALL = argv.includes('--prof-all');
 const FIGHT = argv.includes('--fight');
 // CU-192: --title-night leaves the title clock at night, then enters training, to see if that dim sticks.
 const TITLE_NIGHT = argv.includes('--title-night');
+// CU-195: --fp <weapon> draws that gun in first person before the measured seconds. --vm 0 is the old first person.
+const FP = flag('--fp');
+const VM_OFF = flag('--vm') === '0';
+// CL-288: --query <k=v&k2=v2> adds query parameters to the page's URL (e.g. --query shadowprune=0 for the old shadow walk).
+const EXTRA_QUERY = flag('--query').replace(/^[?&]+/, '');
+const LEVEL = argv.includes('--level');   // CU-204: first person looks level, so the forest is in the picture
 const PROF_ON = argv.includes('--prof') || PROF_ALL;
 const CPU_ON = argv.includes('--cpu');
 const CENSUS_ON = CPU_ON || argv.includes('--census');
@@ -106,7 +114,7 @@ const server = await serve(ROOT, 0);
 const browser = await launch({ headless: argv.includes('--headless'), args: ['--enable-precise-memory-info'] });
 // Real animation frames. The raf=timer mode is clamped to one frame a second in a
 // throttled tab, which left every one-second window empty.
-const url = `${server.origin}/index.html?debug=1${argv.includes('--flight') && argv[argv.indexOf('--flight') + 1] === 'off' ? '&flight=0' : ''}`;
+const url = `${server.origin}/index.html?debug=1${VM_OFF ? '&vm=0' : ''}${EXTRA_QUERY ? '&' + EXTRA_QUERY : ''}${argv.includes('--flight') && argv[argv.indexOf('--flight') + 1] === 'off' ? '&flight=0' : ''}`;
 console.log(`bench: ${url}`);
 console.log(`bench: scenario ${SCENARIO}${SCENARIO === 'night' ? ' ' + NIGHT : ''} for ${SECONDS}s\n`);
 
@@ -502,6 +510,7 @@ function median(nums) {
 
 try {
   const page = await browser.newPage({ width: 1280, height: 720 });
+  const tNav = Date.now();
   await page.goto(url, { waitUntil: 'none' });
   await page.waitFor('!!window.DWOpening', { timeout: 60000 });
   for (let i = 0; i < 2; i++) {
@@ -512,11 +521,13 @@ try {
     await page.evaluate('new Promise(r => setTimeout(r, 250))');
   }
   const ready = await page.waitFor('!!window.TT && !!window.TT.spawnMegaswarm', { timeout: 180000 });
+  console.log(`bench: ready ${Date.now() - tNav} ms`);
   if (!ready) throw new Error('TT never appeared');
   await page.waitFor('window.DWOpening.active === false', { timeout: 120000 });
 
   let placed = null;
   let trainingLight = null;
+  let fpState = null;
   if (RES > 0) {   // CL-288: before the preset applies, so applyGraphicsPreset sets the pixel ratio and the passes follow
     const scale = await page.evaluate(`(() => { const k = ${JSON.stringify(GFX)} || TT.getGfx(); const p = TT.GFX_PRESETS && TT.GFX_PRESETS[k];
       if (!p) return null; p.scale *= ${RES}; TT.applyGraphicsPreset(k); return { preset: k, scale: p.scale, pr: TT.renderer && TT.renderer.getPixelRatio ? TT.renderer.getPixelRatio() : null }; })()`);
@@ -639,6 +650,43 @@ try {
     throw new Error('unknown scenario ' + SCENARIO + ' (megaswarm, day5, build, night, training)');
   }
 
+  if (FP) {
+    fpState = await page.evaluate(`(async () => {
+      const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+      if (TT.runDevCommand) TT.runDevCommand('godmode');
+      const order = TT.WEAPON_ORDER || [];
+      const idx = order.indexOf(${JSON.stringify(FP)});
+      if (idx < 0) return { error: 'no such weapon' };
+      if (TT.setWeapon) TT.setWeapon(idx);
+      if (TT.isUnarmed && TT.isUnarmed() && TT.toggleHolster) TT.toggleHolster();
+      TT.setViewFirstDbg(true);
+      const t0 = Date.now();
+      let vm = false;
+      while (Date.now() - t0 < 12000) {
+        const fp = TT.fpDbg();
+        const gun = TT.viewmodelDbg();
+        vm = !!(gun && gun.info && gun.info.active);
+        if (fp.first && fp.w > 0.9 && (${VM_OFF ? 'true' : 'false'} || vm)) break;
+        await wait(100);
+      }
+      if (${LEVEL ? 'true' : 'false'} && TT.setOtsAimDbg) TT.setOtsAimDbg(null, 0);
+      const fp = TT.fpDbg();
+      const gun = TT.viewmodelDbg();
+      return {
+        first: !!fp.first,
+        w: Math.round(fp.w * 100) / 100,
+        weapon: TT.getCurrentWeapon ? TT.getCurrentWeapon() : null,
+        unarmed: TT.isUnarmed ? !!TT.isUnarmed() : null,
+        vm: !!(gun && gun.info && gun.info.active)
+      };
+    })()`, 30000);
+    console.log('bench: first person ' + JSON.stringify(fpState));
+    if (!fpState || fpState.error) throw new Error('first person: ' + (fpState && fpState.error));
+    if (!fpState.first || fpState.w < 0.9) throw new Error('first person did not settle (' + JSON.stringify(fpState) + ')');
+    if (!VM_OFF && !fpState.vm) throw new Error('the view gun did not show');
+    if (VM_OFF && fpState.vm) throw new Error('?vm=0 still showed the view gun');
+  }
+
   let profStart = null;
   if (PROF_ON) {
     profStart = await page.evaluate(PROF_START);
@@ -750,10 +798,15 @@ try {
       if (n > 0) {
         const ph = Object.keys(end.t).map((k) => ({ k, avg: ((end.t[k] || 0) - (base.t[k] || 0)) / n })).sort((a, b) => b.avg - a.avg);
         const tick10 = ph.reduce((s, p) => s + p.avg, 0);
+        const vm10 = ph.find((p) => p.k === 'viewmodel');
         last10 = { seconds: 10, frames: n, frameMs: r2(frameMs), tickMs: r2(tick10), outsideMs: r2(frameMs - tick10),
+          viewmodelMs: vm10 ? r2(vm10.avg) : null,
           top: ph.slice(0, PROF_ALL ? ph.length : 12).map((p) => ({ k: p.k, avg: r2(p.avg) })) };
       }
     }
+    const vmAll = phases.find((p) => p.k === 'viewmodel');
+    line.viewmodelMs = vmAll ? r2(vmAll.avg) : null;
+    if (fpState) line.fp = fpState;
     line.prof = {
       frames: got.rep ? got.rep.frames : 0,
       frameMs: r2(frameMs),

@@ -1,0 +1,131 @@
+{
+  "timestamp": "2026-11-01T04:11:57.299Z",
+  "bundles0": {
+    "bundleInfo": {
+      "hasBundleGroup": false,
+      "bundleChildren": 0,
+      "bundleStatic": null,
+      "foliageChunksTotal": 153
+    },
+    "day5Shot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-176\\gp20000-day5-bundles0.png",
+    "night20Shot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-176\\gp20000-night20-bundles0.png",
+    "windMetrics": {
+      "foliageWindOnGPU": true,
+      "timeProgression": 0.2593999999761589,
+      "windStrength": 0.4162463717809349,
+      "dirX": 0.54633281753247,
+      "dirZ": 0.83756817781422
+    },
+    "playerTrample": {
+      "playerPos": {
+        "x": 18,
+        "y": -2.8069021701812744,
+        "z": 22
+      },
+      "windPlayerUniform": {
+        "x": 12,
+        "y": -3.1686761379241943,
+        "z": 16
+      }
+    },
+    "playerTrampleShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-176\\gp20000-player-trample-bundles0.png",
+    "zombieTrample": {
+      "zombieSpawned": true,
+      "zombiePos": {
+        "x": 18.9,
+        "z": 22.9
+      },
+      "tramplerUniform": {
+        "x": 0,
+        "y": -100,
+        "z": 0
+      }
+    },
+    "zombieTrampleShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-176\\gp20000-zombie-trample-bundles0.png",
+    "highPresetChunks": 81,
+    "highCullShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-176\\gp20000-cull-high-bundles0.png",
+    "lowPresetChunks": 18,
+    "lowCullShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-176\\gp20000-cull-low-bundles0.png",
+    "restoredHighChunks": 81
+  },
+  "bundles1": {
+    "bundleInfo": {
+      "hasBundleGroup": true,
+      "bundleChildren": 153,
+      "bundleStatic": false,
+      "foliageChunksTotal": 153
+    },
+    "day5Shot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-176\\gp20000-day5-bundles1.png",
+    "night20Shot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-176\\gp20000-night20-bundles1.png",
+    "windMetrics": {
+      "foliageWindOnGPU": true,
+      "timeProgression": 0.2599000000357634,
+      "windStrength": 0.4206488606827534,
+      "dirX": 0.544201382790098,
+      "dirZ": 0.8389546203277894
+    },
+    "playerTrample": {
+      "playerPos": {
+        "x": 18,
+        "y": -2.8069021701812744,
+        "z": 22
+      },
+      "windPlayerUniform": {
+        "x": 12,
+        "y": -3.1686761379241943,
+        "z": 16
+      }
+    },
+    "playerTrampleShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-176\\gp20000-player-trample-bundles1.png",
+    "zombieTrample": {
+      "zombieSpawned": true,
+      "zombiePos": {
+        "x": 18.9,
+        "z": 22.9
+      },
+      "tramplerUniform": {
+        "x": 0,
+        "y": -100,
+        "z": 0
+      }
+    },
+    "zombieTrampleShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-176\\gp20000-zombie-trample-bundles1.png",
+    "highPresetChunks": 81,
+    "highCullShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-176\\gp20000-cull-high-bundles1.png",
+    "lowPresetChunks": 18,
+    "lowCullShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-176\\gp20000-cull-low-bundles1.png",
+    "restoredHighChunks": 81
+  },
+  "pixelDiffs": {
+    "day5": {
+      "totalPixels": 230400,
+      "differingPixels": 4471,
+      "differingPercent": 1.94,
+      "meanDelta": 17.52
+    },
+    "night20": {
+      "totalPixels": 230400,
+      "differingPixels": 627,
+      "differingPercent": 0.27,
+      "meanDelta": 25.31
+    },
+    "highCull": {
+      "totalPixels": 230400,
+      "differingPixels": 5395,
+      "differingPercent": 2.34,
+      "meanDelta": 15.97
+    },
+    "lowCull": {
+      "totalPixels": 230400,
+      "differingPixels": 5149,
+      "differingPercent": 2.23,
+      "meanDelta": 17.11
+    }
+  },
+  "scores": {
+    "geometry": 5,
+    "material": 5,
+    "context": 5,
+    "motion": 5
+  }
+}
