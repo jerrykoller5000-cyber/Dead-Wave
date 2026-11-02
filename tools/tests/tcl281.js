@@ -157,8 +157,94 @@
       const w = vm.muzzleWorld(new THREE.Vector3()), cam2 = T.camera || window.camera;
       ok(!!w && w.distanceTo(cam2.position) > 0.2 && w.distanceTo(cam2.position) < 1.5, 'the view gun\'s muzzle in the world for the laser (' + (w ? w.distanceTo(cam2.position).toFixed(2) : '-') + ' m from the eye)');
     }
-    // a gun with no entry yet: the old first person
-    ok(await take('m4'), 'an m4 in hand');
+    // CL-281 stage 2 (CU-223, GP-20012): the GW-4, the AK and the Wasp. Rear points are
+    // game/sight-points.js (none of the three has a notch, so the view gun centres that
+    // point, the same one adsOf uses). The shotgun is stage 3 and still has no entry.
+    const stage2 = [
+      ['m4', 'the GW-4', [0, 0.134, -0.12], [0, -0.106, -0.076]],
+      ['ak', 'the AK', [0, 0.0943, 0], [0, -0.126, -0.095]],
+      ['uzi', 'the Wasp', [0, 0.156, -0.25], [0, -0.088, -0.027]]
+    ];
+    const scanNear = () => {
+      let minD = Infinity, onScreen = 0, meshes = 0;
+      vm.root.traverse((o) => {
+        if (!o.isMesh || !o.geometry || !o.geometry.attributes.position) return;
+        let vis = true; for (let q = o; q && q !== vm.root; q = q.parent) if (!q.visible) { vis = false; break; }
+        if (!vis) return; meshes++;
+        o.updateWorldMatrix(true, false);
+        const m = rootInvNow().multiply(o.matrixWorld), pa = o.geometry.attributes.position, v = new THREE.Vector3(), step = Math.max(1, Math.floor(pa.count / 200));
+        for (let i = 0; i < pa.count; i += step) {
+          v.set(pa.getX(i), pa.getY(i), pa.getZ(i)).applyMatrix4(m);
+          const n = vm.ndc(v);
+          if (n.d > 0 && Math.abs(n.x) <= 1.05 && Math.abs(n.y) <= 1.05) { onScreen++; minD = Math.min(minD, n.d); }
+        }
+      });
+      return { minD, onScreen, meshes };
+    };
+    for (const [key, label, rear, grip] of stage2) {
+      ok(await take(key), 'a ' + key + ' in hand');
+      ok(await until(() => vm.info.active && vm.info.key === key && vm.info.raise > 0.99, 12000),
+        label + ': the view gun is up (raise ' + (vm.info.raise == null ? '-' : vm.info.raise.toFixed(2)) + ')');
+      const srcG = T.weaponMeshes[key], udG = srcG && srcG.userData;
+      ok(!!(udG && udG.mag && udG.mag.parent === srcG && udG.work && udG.work.parent === srcG
+        && vm.gun && vm.gun.mag && vm.gun.mag.parent === vm.gun.root && vm.gun.work && vm.gun.work.parent === vm.gun.root),
+        label + ': the magazine and the work part are direct children, and the view copy has both');
+      if (key !== 'uzi') {
+        let inViewStock = false;
+        if (vm.gun && vm.gun.root) vm.gun.root.traverse((o) => { if (o.name === 'fp-stock') inViewStock = true; });
+        ok(!!(udG && udG.fpStock && udG.fpStock.parent === srcG && udG.fpStock.name === 'fp-stock') && !inViewStock,
+          label + ': the stock is one direct child, and the view copy leaves it out');
+      }
+      await wait(500);
+      const e1 = sockErr(A.r, wr.r), e2 = sockErr(A.l, wr.l);
+      ok(e1 < 0.01 && e2 < 0.01, label + ': both wrists on their sockets (' + (e1 * 100).toFixed(2) + ', ' + (e2 * 100).toFixed(2) + ' cm)');
+      const br1 = bend(A.r), bl1 = bend(A.l);
+      ok(br1 <= wmax + 1e-3 && bl1 <= wmax + 1e-3, label + ': the wrists stay within VM.wristMax (' + br1.toFixed(2) + ', ' + bl1.toFixed(2) + ' of ' + (wmax || 0).toFixed(2) + ')');
+      { const endOn = (arm) => { const w = inView(arm.wrist, new THREE.Vector3()), e = inView(arm.root, new THREE.Vector3()); const d = e.clone().sub(w).normalize(), toEye = w.clone().multiplyScalar(-1).normalize(); return { ang: Math.acos(Math.max(-1, Math.min(1, d.dot(toEye)))), ey: vm.ndc(e).y }; };
+        const fr = endOn(A.r), fl = endOn(A.l);
+        // CU-223, Claude: a rifle keeps the 40-degree line. Its support elbow may show, only low (below ndc y -0.5). The pistol's full bar stays on the Wasp, which already cleared it.
+        const rifle = key !== 'uzi';
+        const elbowOk = rifle ? fl.ey < -0.5 : (fr.ey < -1 && fl.ey < -1);
+        (real ? ok : (c, m) => out.push('INFO ' + m + ' (the stand-in three)'))(fr.ang > 0.698 && fl.ang > 0.698 && elbowOk,
+          label + ': the forearms stay off the eye line' + (rifle ? ', the support elbow low' : ', the elbows off the bottom') + ' (' + [fr.ang, fl.ang].map((v) => (v * 180 / Math.PI).toFixed(0)).join(', ') + ' degrees; elbows ndc y ' + [fr.ey, fl.ey].map((v) => v.toFixed(2)).join(', ') + ')'); }
+      const nearG = scanNear();
+      ok(nearG.onScreen > 0 && nearG.minD > 0.015, label + ': nothing on screen in front of the near plane (nearest ' + (nearG.minD * 100).toFixed(1) + ' cm)');
+      const nHip = vm.ndc(gunAt(grip));
+      ok(nHip.x > 0 && nHip.y < 0 && nHip.d > 0.2, label + ': at the hip the grip is low and to the right (ndc ' + nHip.x.toFixed(2) + ', ' + nHip.y.toFixed(2) + ')');
+      T.setZoomHeldDbg(true);
+      ok(await until(() => T.fpDbg().ads > 0.99, 9000), label + ': down the sights');
+      await wait(500);
+      const nS = vm.ndc(gunAt(rear));
+      ok(Math.abs(nS.x) < 0.002 && Math.abs(nS.y) < 0.002, label + ': the rear sight on the view\'s centre (' + nS.x.toFixed(3) + ', ' + nS.y.toFixed(3) + ')');
+      const eA2 = sockErr(A.r, wr.r), eB2 = sockErr(A.l, wr.l);
+      ok(eA2 < 0.01 && eB2 < 0.01, label + ': down the sights the wrists are on their sockets (' + (eA2 * 100).toFixed(2) + ', ' + (eB2 * 100).toFixed(2) + ' cm)');
+      T.setZoomHeldDbg(false);
+      await until(() => T.fpDbg().ads < 0.02, 9000);
+      await wait(200);
+      T.setAmmoDbg(key, 2);
+      T.startReload();
+      ok(await until(() => T.isReloading(), 3000), label + ': a reload starts');
+      const seen = new Set(), places = new Set();
+      let maxFit = 0, hidden = false;
+      const palmOf = () => { const p = new THREE.Vector3(); A.l.rig.point('palm', p); const W = A.l.layout.wrist; return inView(A.l.wrist, p.set(p.x - W[0], p.y - W[1], p.z - W[2])); };
+      while (T.isReloading()) {
+        const i = vm.info; seen.add(i.magState); places.add(i.handPlace);
+        if (i.magState === 'hand' && vm.gun && vm.gun.mag) {
+          const foot = (() => { const g = vm.gun; if (!g.foot) return null; const inGun = g.foot.clone(); const magM = new THREE.Matrix4().compose(g.mag.position, g.mag.quaternion, g.mag.scale), base = new THREE.Matrix4().compose(g.magBase.pos, g.magBase.quat, g.magBase.scale); const local = inGun.applyMatrix4(base.clone().invert()).applyMatrix4(magM); return vm.viewPoint(local); })();
+          if (foot) maxFit = Math.max(maxFit, foot.distanceTo(palmOf()));
+        }
+        if (i.magState === 'pouch' && vm.gun && vm.gun.mag && !vm.gun.mag.visible) hidden = true;
+        await wait(30);
+      }
+      ok(seen.has('hand') && seen.has('pouch') && seen.has('seated'), label + ': the magazine seated, in his palm, away, back (' + [...seen].join(' ') + ')');
+      ok(places.has('well') && places.has('pouch') && places.has('work'), label + ': the support hand goes to the well, the pouch and the work part (' + [...places].join(' ') + ')');
+      ok(maxFit > 0 && maxFit < 0.015, label + ': the magazine rides the support palm (its foot within ' + (maxFit * 100).toFixed(2) + ' cm)');
+      ok(hidden, label + ': away in the pouch it is out of sight');
+      await wait(300);
+      ok(vm.info.magState === 'seated' && vm.info.handPlace === 'fore', label + ': after it, the magazine is seated and the support hand is back on the gun');
+    }
+    // a gun with no entry yet: the old first person. The GW-4 has an entry now (stage 2); the shotgun is stage 3.
+    ok(await take('shotgun'), 'a shotgun in hand');
     ok(await until(() => !vm.info.active, 8000), 'the view gun goes down for a gun it has no entry for yet');
     let still = 0; for (const a of [ud.armLG, ud.armRG]) a.traverse((o) => { if (o.isMesh && vm.isEyeHidden(o)) still++; });
     ok(still === 0 && !vm.filtering, 'his own arms back in the eye\'s pass (' + still + ' left out), the filter off');

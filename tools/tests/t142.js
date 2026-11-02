@@ -12,6 +12,8 @@
     const x = thinX ? box.cx - (half + 0.85) : box.cx;
     const z = thinX ? box.cz : box.cz - (half + 0.85);
     T.player.position.set(x, T.sampleHeight(x, z), z);
+    // CU-220: spawn aim now follows the landing. The hop is about the obstacle, so face it.
+    if (T.setAimYawDbg) T.setAimYawDbg(Math.atan2(box.cx - x, box.cz - z));
     return box;
   }
   function pastFace(box, x, z) {
@@ -22,9 +24,12 @@
     return Math.abs(x - box.cx) < box.hx + 0.42 && Math.abs(z - box.cz) < box.hz + 0.42;
   }
   async function settle() {
-    for (let i = 0; i < 15; i++) await wait(40);
+    for (let i = 0; i < 40; i++) await wait(40);
   }
   async function hop(box) {
+    const p0 = T.player.position;
+    const dx = box.cx - p0.x, dz = box.cz - p0.z, face = Math.atan2(dx, dz);
+    if (T.setAimYawDbg) T.setAimYawDbg(face);
     const before = T.speedMult();
     const started = T.tryVault();
     const during = T.speedMult();
@@ -35,17 +40,21 @@
     const gy = T.sampleHeight(p.x, p.z);
     const slid = T.resolveHardBuildCollisions(p.x, p.z, 0.42, true, p.y);
     const shove = Math.hypot(slid.x - p.x, slid.z - p.z);
-    return { started, before, during, past, grounded: Math.abs(p.y - gy) < 0.35, shove, vaulting: T.isVaulting(), frames };
+    return { started, before, during, past, grounded: Math.abs(p.y - gy) < 0.35, shove, vaulting: T.isVaulting(), frames, face, dx, dz, hx: box.hx, hz: box.hz };
   }
   try {
     await startMatch(T, 'Vault');
     T.unlockAllBuilds();
     const p = T.player.position;
-    const gx = T.gridIndex(40), gz = T.gridIndex(40);
+    const spot = 12; // 40,40 now sits on the HQ ring, so the hop landed in the thicket
+    const gx = T.gridIndex(spot), gz = T.gridIndex(spot);
     const yPad = T.sampleHeight(T.gridCentre(gx), T.gridCentre(gz));
     if (T.levelGroundRect) T.levelGroundRect(T.gridCentre(gx - 4), T.gridCentre(gz - 4), T.gridCentre(gx + 4), T.gridCentre(gz + 4), yPad, 6);
     for (const t of T.trees) {
-      if (Math.hypot(t.x - 40, t.z - 40) < 18) { t.alive = false; t.stump = false; }
+      if (Math.hypot(t.x - spot, t.z - spot) < 18) { t.alive = false; t.stump = false; }
+    }
+    if (T.rocks) for (const r of T.rocks) {
+      if (r.alive && Math.hypot(r.x - spot, r.z - spot) < 18) r.alive = false;
     }
     p.set(T.gridCentre(gx), T.sampleHeight(T.gridCentre(gx), T.gridCentre(gz)), T.gridCentre(gz));
     await settle();
@@ -54,7 +63,14 @@
     standBeside(bag);
     await settle();
     const bagHop = await hop(T.thinBoxFor(bag));
-    ok(bagHop.started, 'a sandbag starts a vault');
+    const feet = T.player.position;
+    const shoved = T.wallBandsDbg.resolve(feet.x, feet.z, 0.42);
+    const aim = T.getAimDirDbg ? T.getAimDirDbg() : null;
+    let nearTree = 0, nearRock = 0;
+    for (const tr of T.trees) if (tr.alive && Math.hypot(tr.x - feet.x, tr.z - feet.z) < 6) nearTree++;
+    if (T.rocks) for (const r of T.rocks) if (r.alive && Math.hypot(r.x - feet.x, r.z - feet.z) < 6) nearRock++;
+    ok(bagHop.started, 'a sandbag starts a vault (face ' + f2(bagHop.face) + ' to bag ' + f2(bagHop.dx) + ',' + f2(bagHop.dz)
+      + ' box ' + f2(bagHop.hx) + 'x' + f2(bagHop.hz) + ')');
     ok(bagHop.past >= 0.5, 'he is ' + f2(bagHop.past) + ' m past the sandbag (want >= 0.5)');
     ok(bagHop.grounded && !bagHop.vaulting, 'he is down and the hop is over (' + bagHop.frames + ' waits)');
     ok(bagHop.shove < 0.08, 'he is not still inside it (push ' + f2(bagHop.shove) + ')');

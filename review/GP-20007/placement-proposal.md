@@ -37,3 +37,21 @@ stay free), **10 Controlled Irregularity** (different fall angles and layered
 trunks), **11 Directional Guidance** (marked routes stay readable), and **15
 Rewarded Curiosity** (a short route is discovered and earned). These placements
 are a proposal only; Claude owns the spatial decision under rule 10.
+
+## Final rule-10 correction, 2026-11-01
+
+After the first gameplay-scale pictures, Claude approved moving the
+trapper-grave barrier a few metres southeast to clear a live tree and tying
+each exposed end into thicket or trees. His added rule: no live trunk within
+3 m of any cut center. The fuel-mast barrier shifted 2.2 m northwest for that
+same rule while retaining its approved shortcut line.
+
+Final moved endpoints: trapper-grave `(-61.4,109.1)` to `(-55.9,100.8)`, center
+`(-58.65,104.95)`; fuel-mast `(-131.7,11.7)` to `(-128.1,2.4)`, center
+`(-129.9,7.05)`. Nearest live trunks to the five final kerfs are 3.38, 11.78,
+4.21, 3.81 and 3.60 m. Eight short thicket anchors tie the exposed landing,
+fuel, trapper and mast ends into woods or extend the detour; grave-wreck's
+ends already meet trees within 2.4 and 1.9 m. The anchors are explicit in
+`index.html`, avoiding random tree-spawn movement. Their closest path-center
+approach is 4.26 m (fuel-b), with zero water and maximum sampled slope 0.14.
+Each log cut center remains collision-blocked before sawing and open afterward.

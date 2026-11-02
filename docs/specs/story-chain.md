@@ -130,7 +130,7 @@ the Hollows round it.
 - **Why:** the camera's last frame: bolt cutters at the mine. Clarke's door: "RAN DRY AT THE BEND. WALKED." Her toolbox
   is chained shut.
 - **Why care:** ammo; the walk to the mine mouth and back; the car alarm.
-- **Connects:** Threshold (Clarke, the driver; her ring is in the wet warren); the hikers' cutters; the mine.
+- **Connects:** Threshold (Clarke, the driver; his ring is in the wet warren); the hikers' cutters; the mine.
 - **Changes:** the toolbox open; the truck's battery lives again: its headlights, left on, light the bend at night.
 - **Memorable:** the alarm going off and the dead coming down the road toward the light.
 

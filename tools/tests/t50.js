@@ -42,7 +42,13 @@
       const m2 = far.find(q => q !== m && q.inBatch);
       const save = T.player.position.clone();
       T.player.position.set(m2.tree.x + 3, T.sampleHeight(m2.tree.x + 3, m2.tree.z), m2.tree.z);
-      for (let i = 0; i < 20 && m2.inBatch; i++) await frames(1);
+      // The near box swaps 12 trees a frame. Waiting only until this one tree is live
+      // left the rest of a thick box instanced (CU-220: 16 trees, the check sampled on frame 1).
+      for (let i = 0; i < 20; i++) {
+        await frames(1);
+        const boxBusy = members.some((q) => q.inBatch && Math.max(Math.abs(q.tree.x - T.player.position.x), Math.abs(q.tree.z - T.player.position.z)) < 16);
+        if (!m2.inBatch && !boxBusy) break;
+      }
       ok(!m2.inBatch && m2.tree.trunkMesh.visible && !m2.dirty && !m2.forest.shown, 'walking up: the tree goes live');
       const px2 = T.player.position.x, pz2 = T.player.position.z;
       const close = members.filter((q) => Math.max(Math.abs(q.tree.x - px2), Math.abs(q.tree.z - pz2)) < 16);

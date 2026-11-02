@@ -1,0 +1,358 @@
+{
+  "rows": [
+    {
+      "mode": "off",
+      "fps": 3.1,
+      "low": 3,
+      "worst": 341.2,
+      "hitches": 88,
+      "draws": 434,
+      "triangles": 767611,
+      "windows": 10,
+      "gfx": "high",
+      "nav": [
+        {
+          "id": "hq",
+          "x": 0,
+          "z": 0,
+          "blocked": false,
+          "dist": null,
+          "wet": 0
+        },
+        {
+          "id": "ne-gap",
+          "x": -50,
+          "z": 115,
+          "blocked": false,
+          "dist": 110.02873229980469,
+          "wet": 0
+        },
+        {
+          "id": "ne-out",
+          "x": -145,
+          "z": 148,
+          "blocked": false,
+          "dist": 178.05731201171875,
+          "wet": 0
+        },
+        {
+          "id": "nw-gap",
+          "x": 91.54,
+          "z": 69.7,
+          "blocked": false,
+          "dist": 105.04344940185547,
+          "wet": 0
+        },
+        {
+          "id": "nw-out",
+          "x": 145,
+          "z": 146,
+          "blocked": false,
+          "dist": 193.1920623779297,
+          "wet": 0
+        },
+        {
+          "id": "sw-gap",
+          "x": 68,
+          "z": -105,
+          "blocked": false,
+          "dist": 97.24625396728516,
+          "wet": 0
+        },
+        {
+          "id": "sw-out",
+          "x": 145,
+          "z": -147,
+          "blocked": false,
+          "dist": 180.99539184570312,
+          "wet": 0
+        },
+        {
+          "id": "se-shore",
+          "x": -57.2,
+          "z": -68.2,
+          "blocked": false,
+          "dist": 86.05511474609375,
+          "wet": 0
+        },
+        {
+          "id": "se-beyond",
+          "x": -66,
+          "z": -79,
+          "blocked": false,
+          "dist": 97.7015609741211,
+          "wet": 1.1621037483215333
+        }
+      ]
+    },
+    {
+      "mode": "on",
+      "fps": 3.2,
+      "low": 3.1,
+      "worst": 310.8,
+      "hitches": 91,
+      "draws": 410,
+      "triangles": 807121,
+      "windows": 10,
+      "gfx": "high",
+      "nav": [
+        {
+          "id": "hq",
+          "x": 0,
+          "z": 0,
+          "blocked": false,
+          "dist": null,
+          "wet": 0
+        },
+        {
+          "id": "ne-gap",
+          "x": -50,
+          "z": 115,
+          "blocked": false,
+          "dist": 110.02873229980469,
+          "wet": 0
+        },
+        {
+          "id": "ne-out",
+          "x": -145,
+          "z": 148,
+          "blocked": false,
+          "dist": 181.59283447265625,
+          "wet": 0
+        },
+        {
+          "id": "nw-gap",
+          "x": 91.54,
+          "z": 69.7,
+          "blocked": false,
+          "dist": 105.04344940185547,
+          "wet": 0
+        },
+        {
+          "id": "nw-out",
+          "x": 145,
+          "z": 146,
+          "blocked": false,
+          "dist": 193.92431640625,
+          "wet": 0
+        },
+        {
+          "id": "sw-gap",
+          "x": 68,
+          "z": -105,
+          "blocked": false,
+          "dist": 98.7107162475586,
+          "wet": 0
+        },
+        {
+          "id": "sw-out",
+          "x": 145,
+          "z": -147,
+          "blocked": false,
+          "dist": 181.72763061523438,
+          "wet": 0
+        },
+        {
+          "id": "se-shore",
+          "x": -57.2,
+          "z": -68.2,
+          "blocked": true,
+          "dist": null,
+          "wet": 0
+        },
+        {
+          "id": "se-beyond",
+          "x": -66,
+          "z": -79,
+          "blocked": false,
+          "dist": 97.7015609741211,
+          "wet": 1.1621037483215333
+        }
+      ]
+    },
+    {
+      "mode": "on",
+      "fps": 3,
+      "low": 2.9,
+      "worst": 336,
+      "hitches": 86,
+      "draws": 414,
+      "triangles": 809093,
+      "windows": 10,
+      "gfx": "high",
+      "nav": [
+        {
+          "id": "hq",
+          "x": 0,
+          "z": 0,
+          "blocked": false,
+          "dist": null,
+          "wet": 0
+        },
+        {
+          "id": "ne-gap",
+          "x": -50,
+          "z": 115,
+          "blocked": false,
+          "dist": 110.02873229980469,
+          "wet": 0
+        },
+        {
+          "id": "ne-out",
+          "x": -145,
+          "z": 148,
+          "blocked": false,
+          "dist": 181.59283447265625,
+          "wet": 0
+        },
+        {
+          "id": "nw-gap",
+          "x": 91.54,
+          "z": 69.7,
+          "blocked": false,
+          "dist": 105.04344940185547,
+          "wet": 0
+        },
+        {
+          "id": "nw-out",
+          "x": 145,
+          "z": 146,
+          "blocked": false,
+          "dist": 193.92431640625,
+          "wet": 0
+        },
+        {
+          "id": "sw-gap",
+          "x": 68,
+          "z": -105,
+          "blocked": false,
+          "dist": 98.7107162475586,
+          "wet": 0
+        },
+        {
+          "id": "sw-out",
+          "x": 145,
+          "z": -147,
+          "blocked": false,
+          "dist": 181.72763061523438,
+          "wet": 0
+        },
+        {
+          "id": "se-shore",
+          "x": -57.2,
+          "z": -68.2,
+          "blocked": true,
+          "dist": null,
+          "wet": 0
+        },
+        {
+          "id": "se-beyond",
+          "x": -66,
+          "z": -79,
+          "blocked": false,
+          "dist": 97.7015609741211,
+          "wet": 1.1621037483215333
+        }
+      ]
+    },
+    {
+      "mode": "off",
+      "fps": 3.1,
+      "low": 3,
+      "worst": 323.8,
+      "hitches": 90,
+      "draws": 418,
+      "triangles": 725897,
+      "windows": 10,
+      "gfx": "high",
+      "nav": [
+        {
+          "id": "hq",
+          "x": 0,
+          "z": 0,
+          "blocked": false,
+          "dist": null,
+          "wet": 0
+        },
+        {
+          "id": "ne-gap",
+          "x": -50,
+          "z": 115,
+          "blocked": false,
+          "dist": 110.02873229980469,
+          "wet": 0
+        },
+        {
+          "id": "ne-out",
+          "x": -145,
+          "z": 148,
+          "blocked": false,
+          "dist": 178.05731201171875,
+          "wet": 0
+        },
+        {
+          "id": "nw-gap",
+          "x": 91.54,
+          "z": 69.7,
+          "blocked": false,
+          "dist": 105.04344940185547,
+          "wet": 0
+        },
+        {
+          "id": "nw-out",
+          "x": 145,
+          "z": 146,
+          "blocked": false,
+          "dist": 193.1920623779297,
+          "wet": 0
+        },
+        {
+          "id": "sw-gap",
+          "x": 68,
+          "z": -105,
+          "blocked": false,
+          "dist": 97.24625396728516,
+          "wet": 0
+        },
+        {
+          "id": "sw-out",
+          "x": 145,
+          "z": -147,
+          "blocked": false,
+          "dist": 180.99539184570312,
+          "wet": 0
+        },
+        {
+          "id": "se-shore",
+          "x": -57.2,
+          "z": -68.2,
+          "blocked": false,
+          "dist": 86.05511474609375,
+          "wet": 0
+        },
+        {
+          "id": "se-beyond",
+          "x": -66,
+          "z": -79,
+          "blocked": false,
+          "dist": 97.7015609741211,
+          "wet": 1.1621037483215333
+        }
+      ]
+    }
+  ],
+  "median": {
+    "off": {
+      "fps": 3.1,
+      "low": 3,
+      "draws": 426,
+      "triangles": 746754
+    },
+    "on": {
+      "fps": 3.1,
+      "low": 3,
+      "draws": 412,
+      "triangles": 808107
+    }
+  }
+}

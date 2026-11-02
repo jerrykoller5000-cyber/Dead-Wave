@@ -1,0 +1,42 @@
+Game-test request 3c6f2656-3ed2-47b0-b0c0-a4bbf7dae085 queued at position 3. Waiting...
+GRANT cursor CU-220: starting one game-test command
+check-players: 314 player.position reads, all in the allowed places
+ok    t191    16 pass   0 fail  59.2s
+FAIL  t192     8 pass   2 fail  39.9s
+           INFO on the flat, walking, the lowest sole is -0.022 m
+ok    t193    18 pass   0 fail  65.0s
+ok    t194    35 pass   0 fail  72.3s
+ok    t195    16 pass   0 fail  97.7s
+ok    t196    17 pass   0 fail  39.1s
+ok    t197     7 pass   0 fail  36.9s
+ok    t198    17 pass   0 fail  52.8s
+ok    t199    10 pass   0 fail  47.1s
+ok    t200     7 pass   0 fail  37.5s
+ok    t201    18 pass   0 fail  57.1s
+ok    t202    12 pass   0 fail  36.0s
+ok    t203    12 pass   0 fail  40.6s
+ok    t204    48 pass   0 fail  61.9s
+ok    t205    13 pass   0 fail  55.3s
+           page error: TypeError: Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'.
+           page error: TypeError: Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'.
+FAIL  t206    18 pass   1 fail  54.9s
+ok    t207    20 pass   0 fail  41.6s
+ok    t208    10 pass   0 fail  58.5s
+ok    t209    13 pass   0 fail  46.0s
+ok    t210     9 pass   0 fail  45.6s
+           INFO aimed at a zombie 16 m out, it hits it: 100 damage from 15 rounds (zombie 15.31 m)
+ok    t211    25 pass   0 fail  65.0s
+ok    t212    18 pass   0 fail  42.9s
+ok    t213    22 pass   0 fail  69.1s
+ok    t214    29 pass   0 fail  70.8s
+ok    t215     4 pass   0 fail  41.7s
+
+25 checks: 422 pass, 3 fail
+
+by owner:
+  unassigned
+    t192   2 fail  FAIL he mounts the M240B
+           FAIL he mounts the M240B
+           FAIL and it still fires its belt (500)
+    t206   1 fail  FAIL it grows with the hold: 6.83 m at 0.30 s, 12.17 m at 0.8 s (capped: 0.80)
+           FAIL it grows with the hold: 6.83 m at 0.30 s, 12.17 m at 0.8 s (capped: 0.80)

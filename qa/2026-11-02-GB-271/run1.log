@@ -1,0 +1,57 @@
+GRANT grokbot GB-271: starting one game-test command
+check-players: 314 player.position reads, all in the allowed places
+ok    t71     16 pass   0 fail  57.2s
+ok    t74     18 pass   0 fail  48.3s
+ok    t75     16 pass   0 fail  42.8s
+FAIL  t76     15 pass   1 fail  50.3s
+ok    t77     17 pass   0 fail  51.7s
+ok    t78     18 pass   0 fail  37.4s
+ok    t83     31 pass   0 fail  55.6s
+ok    t85     15 pass   0 fail  51.5s
+ok    t95      9 pass   0 fail  54.9s
+           INFO ragdoll off: 160 spawned, 160 alive at the end, 130 ticks, frame 95.48 ms avg / 126.40 ms worst (headless)
+           INFO ragdoll on: 160 spawned, 159 alive at the end, 116 ticks, frame 92.07 ms avg / 486.30 ms worst (headless)
+ok    t98     20 pass   0 fail  82.4s
+ok    t108     9 pass   0 fail  36.7s
+ok    t109     5 pass   0 fail  36.8s
+ok    t139    13 pass   0 fail  47.6s
+ok    t143    17 pass   0 fail  73.8s
+ok    t148    23 pass   0 fail  53.8s
+ok    t215     4 pass   0 fail  38.2s
+
+16 checks: 246 pass, 1 fail
+
+by owner:
+  unassigned
+    t76    1 fail  FAIL drawn close up, not the far LOD (false/false/true)
+           FAIL drawn close up, not the far LOD (false/false/true)
+check-players: 314 player.position reads, all in the allowed places
+FAIL  t74     17 pass   1 fail  49.9s
+
+1 checks: 17 pass, 1 fail
+
+by owner:
+  unassigned
+    t74    1 fail  FAIL and come for him (10.6 -> 10.6 m)
+           FAIL and come for him (10.6 -> 10.6 m)
+check-players: 314 player.position reads, all in the allowed places
+FAIL  t74     17 pass   1 fail  48.9s
+
+1 checks: 17 pass, 1 fail
+
+by owner:
+  unassigned
+    t74    1 fail  FAIL and come for him (10.6 -> 11.5 m)
+           FAIL and come for him (10.6 -> 11.5 m)
+FAIL  t74      17 pass   1 fail  37.8s  (real renderer)
+    FAIL and come for him (10.3 -> 10.1 m)
+ok    t215      4 pass   0 fail  32.7s  (real renderer)
+ok    t95       9 pass   0 fail  31.8s  (real renderer)
+3 checks: 30 pass, 1 fail (real renderer)
+training: title up in 16.3 s, WebGPURenderer
+training: in the room (room built), 0 called in, frames still running: true
+training: page errors none
+match: title up in 20.3 s, WebGPURenderer
+match: in prep, past the insertion
+night: phase wave, lockdown true, zombies 14
+match: page errors none

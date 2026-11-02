@@ -1,0 +1,5 @@
+GRANT cursor CU-220: starting one game-test command
+check-players: 314 player.position reads, all in the allowed places
+ok    t320    21 pass   0 fail  162.2s
+
+1 checks: 21 pass, 0 fail

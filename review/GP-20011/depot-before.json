@@ -1,0 +1,34 @@
+{
+ "schema": "dw-camera-shot",
+ "schemaVersion": 2,
+ "target": "place:shed:2",
+ "label": "place shed:2",
+ "view": "three",
+ "cam": {
+  "x": -98.83261687150008,
+  "y": 14.045550225071938,
+  "z": 30.459290518831022,
+  "tx": -116,
+  "ty": 2.154512959718704,
+  "tz": 10,
+  "fov": 35
+ },
+ "time": 0.5002362800000428,
+ "size": [
+  1600,
+  900
+ ],
+ "center": {
+  "x": -116,
+  "y": 2.154512959718704,
+  "z": 10
+ },
+ "boxSize": {
+  "x": 12,
+  "y": 4.800000000000001,
+  "z": 12
+ },
+ "mode": "match",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "at": "2026-11-01T15:29:26.128Z"
+}

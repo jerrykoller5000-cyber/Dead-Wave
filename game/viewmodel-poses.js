@@ -37,7 +37,90 @@ export const VM_POSES = Object.freeze({
     slideKick: 0.055,
     elbows: { r: [0.36, -0.75, 0.06], l: [-0.34, -0.75, 0.06] },   // AG-168: low and wide, so the forearms leave the view down its corners
     reload: 'pistol'
+  },
+  m4: {
+    hip: { at: [0.18, -0.205, -0.70], yaw: -0.065, pitch: 0.035, roll: -0.11 },
+    ads: { rear: 0.54 },   // holographic window at a readable size once the shoulder stock is eye-hidden
+    kick: { back: 0.044, up: 0.09, side: 0.018, ads: 0.50 },
+    workKick: 0.025,
+    elbows: { r: [0.33, -0.61, -0.10], l: [-0.36, -0.95, -0.26] },
+    reload: 'carbine'
+  },
+  ak: {
+    hip: { at: [0.195, -0.215, -0.75], yaw: -0.075, pitch: 0.045, roll: -0.12 },
+    ads: { rear: 0.70 },   // KR-7 leaf sight and long shoulder stock; stock is omitted only from the view copy
+    kick: { back: 0.063, up: 0.15, side: 0.032, ads: 0.58 },
+    workKick: 0.035,
+    elbows: { r: [0.35, -0.63, -0.12], l: [-0.40, -1.10, -0.27] },
+    reload: 'ak'
+  },
+  uzi: {
+    hip: { at: [0.17, -0.18, -0.54], yaw: -0.06, pitch: 0.025, roll: -0.10 },
+    ads: { rear: 0.43 },   // the Wasp's tower stays legible without bringing the receiver into the face
+    kick: { back: 0.025, up: 0.062, side: 0.016, ads: 0.45 },
+    workKick: 0.03,
+    elbows: { r: [0.27, -0.58, -0.08], l: [-0.23, -0.56, -0.18] },
+    reload: 'smg'
   }
+});
+
+// Stage-2 reload paths are kept together so their beats can be tuned against one GPU filmstrip.
+const VM_STAGE2_RELOADS = Object.freeze({
+  carbine: {
+    gun: [[0, null], [.12, { pos: [-.055, .06, .015], rot: [.12, .23, -.28] }],
+      [.54, { pos: [-.055, .065, .015], rot: [.12, .23, -.28] }],
+      [.62, { pos: [-.052, .075, .012], rot: [.10, .20, -.25] }],
+      [.78, { pos: [-.032, .045, 0], rot: [.18, .08, -.08] }], [1, null]],
+    hand: [[0, 'fore', 'fore'], [.08, 'well', 'mag'], [.19, 'below', 'mag'],
+      [.34, 'pouch', 'mag'], [.38, 'pouch', 'pouch'], [.52, 'below', 'mag'],
+      [.62, 'well', 'mag'], [.66, 'well', 'cup'], [.76, 'work', 'open'],
+      [.82, 'work', 'open'], [.88, 'fore', 'fore'], [1, 'fore', 'fore']],
+    mag: { grab: .12, swapOut: .335, swapIn: .385, seat: .62 },
+    places: { well: { z: [0, .94, .34], y: [-.55, -.34, -.76] }, below: { drop: .14 },
+      work: { at: [-.038, -.03, .11], z: [-1, .05, .1], y: [-.35, -.65, -.65] },
+      pouch: { at: [-.29, -.51, -.32], z: [.25, .9, .3], y: [-.4, -.6, .65] } }
+  },
+  ak: {
+    gun: [[0, null], [.12, { pos: [-.065, .065, .012], rot: [.15, .25, -.32] }],
+      [.34, { pos: [-.07, .07, .01], rot: [.18, .26, -.36] }],
+      [.50, { pos: [-.07, .07, .01], rot: [.18, .26, -.36] }],
+      [.62, { pos: [-.058, .075, .008], rot: [.12, .22, -.28] }],
+      [.79, { pos: [-.025, .045, 0], rot: [.20, .06, -.10] }], [1, null]],
+    hand: [[0, 'fore', 'fore'], [.10, 'well', 'mag'], [.19, 'below', 'mag'],
+      [.34, 'pouch', 'mag'], [.38, 'pouch', 'pouch'], [.50, 'below', 'mag'],
+      [.62, 'well', 'mag'], [.66, 'well', 'cup'], [.76, 'work', 'pinch'],
+      [.83, 'work', 'pinch'], [.90, 'fore', 'fore'], [1, 'fore', 'fore']],
+    mag: { grab: .12, swapOut: .335, swapIn: .385, seat: .62 },
+    rock: { out: [.12, .19], in: [.50, .62], angle: .27 },
+    rack: [.76, .80, .83, .045],
+    places: { well: { z: [.15, .90, .41], y: [-.60, -.28, -.75] }, below: { drop: .16 },
+      work: { at: [.083, .042, .13], z: [.65, .25, -.72], y: [-.7, .15, -.4] },
+      pouch: { at: [-.31, -.54, -.35], z: [.25, .9, .3], y: [-.4, -.6, .65] } }
+  },
+  smg: {
+    gun: [[0, null], [.10, { pos: [-.035, .05, .015], rot: [.10, .20, -.23] }],
+      [.51, { pos: [-.035, .055, .015], rot: [.10, .22, -.23] }],
+      [.58, { pos: [-.03, .065, .008], rot: [.08, .16, -.18] }],
+      [.72, { pos: [-.018, .04, 0], rot: [.14, .08, -.05] }], [1, null]],
+    hand: [[0, 'fore', 'fore'], [.08, 'well', 'mag'], [.17, 'below', 'mag'],
+      [.32, 'pouch', 'mag'], [.36, 'pouch', 'pouch'], [.49, 'below', 'mag'],
+      [.58, 'well', 'mag'], [.62, 'well', 'cup'], [.70, 'work', 'pinch'],
+      [.78, 'work', 'pinch'], [.82, 'fore', 'fore'], [1, 'fore', 'fore']],
+    mag: { grab: .10, swapOut: .315, swapIn: .365, seat: .58 },
+    rack: [.70, .74, .78, .045],
+    places: { well: { z: [0, .98, .20], y: [-.7, -.2, -.68] }, below: { drop: .12 },
+      work: { at: [0, .115, .11], z: [0, -1, 0], y: [-.75, 0, -.66] },
+      pouch: { at: [-.24, -.46, -.29], z: [.25, .9, .3], y: [-.4, -.6, .65] } }
+  }
+});
+
+// Gun-local contact points. The support point is on the handguard for the rifles and beside the grip on the Wasp.
+// A magazine's foot stays in the support palm during the reload. The work point is a fixed bolt/handle target until
+// the weapon builders expose moving direct-child nodes; the viewmodel then follows those nodes.
+export const VM_SOCKETS = Object.freeze({
+  m4: { grip: [0, -0.106, -0.076], support: [0, -0.005, 0.36], magFoot: [0, -0.278, 0.04], work: [-0.038, -0.03, 0.11] },
+  ak: { grip: [0, -0.126, -0.095], support: [0, -0.025, 0.37], magFoot: [0, -0.331, 0.14], work: [0.083, 0.042, 0.13] },
+  uzi: { grip: [0, -0.088, -0.027], support: [-0.055, -0.035, 0.055], magFoot: [0, -0.324, -0.043], work: [0, 0.115, 0.11] }
 });
 
 // Reloads in view space. gun: [beat, pose] keys (pose: an offset from the hold, view space: pos m, rot [yaw, pitch,
@@ -71,5 +154,6 @@ export const VM_RELOADS = Object.freeze({
       work: { z: [0.15, -1, 0.05], y: [-0.7, -0.2, -0.68], grab: [0, -0.012, 0.01] },   // AG-168: the forearm down, not up over the slide
       pouch: { at: [-0.24, -0.46, -0.24], z: [0.25, 0.9, 0.3], y: [-0.4, -0.6, 0.65] }   // view space, out of sight
     }
-  }
+  },
+  ...VM_STAGE2_RELOADS
 });

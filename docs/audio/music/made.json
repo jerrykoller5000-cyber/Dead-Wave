@@ -1,0 +1,2008 @@
+{
+ "task": "CL-275",
+ "kits": {
+  "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Scarecrow 105bpm Emin": {
+   "kit": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Scarecrow 105bpm Emin",
+   "base": "gh-hs3-scarecrow",
+   "bpm": 105,
+   "bars": 16,
+   "loop_s": 36.571438,
+   "samples": 1755429,
+   "gain_db": -2.1,
+   "lufs": -16.0,
+   "peak_dbfs": -3.6,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs3-scarecrow-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs3-scarecrow-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs3-scarecrow-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Kick Drum": "drums",
+    "Lead Guitar": "lead",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare Drum": "drums"
+   },
+   "left": [
+    "Crash Transition FX",
+    "Hit FX",
+    "Impact_FX",
+    "Reverse FX"
+   ],
+   "for": [
+    "night-01"
+   ]
+  },
+  "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Abyss 170bpm Fmin": {
+   "kit": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Abyss 170bpm Fmin",
+   "base": "gh-hs-abyss",
+   "bpm": 170,
+   "bars": 16,
+   "loop_s": 22.588229,
+   "samples": 1084235,
+   "gain_db": -2.1,
+   "lufs": -16.0,
+   "peak_dbfs": -2.7,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs-abyss-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs-abyss-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs-abyss-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Hi Hat 1": "drums",
+    "Hi Hat 2": "drums",
+    "Kick Drum": "drums",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare": "drums",
+    "Synth": "lead"
+   },
+   "left": [],
+   "for": [
+    "night-19"
+   ]
+  },
+  "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Basilisk 100bpm Emin": {
+   "kit": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Basilisk 100bpm Emin",
+   "base": "gh-hs-basilisk",
+   "bpm": 100,
+   "bars": 16,
+   "loop_s": 38.4,
+   "samples": 1843200,
+   "gain_db": -3.7,
+   "lufs": -16.0,
+   "peak_dbfs": -2.9,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs-basilisk-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs-basilisk-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs-basilisk-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Hi Hat": "drums",
+    "Kick Drum": "drums",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare": "drums",
+    "Synth": "lead"
+   },
+   "left": [],
+   "for": [
+    "night-01"
+   ]
+  },
+  "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Deathmark 130bpm Gmin": {
+   "kit": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Deathmark 130bpm Gmin",
+   "base": "gh-hs-deathmark",
+   "bpm": 130,
+   "bars": 16,
+   "loop_s": 29.538458,
+   "samples": 1417846,
+   "gain_db": -2.4,
+   "lufs": -16.0,
+   "peak_dbfs": -3.2,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs-deathmark-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs-deathmark-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs-deathmark-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Kick Drum": "drums",
+    "Lead Guitar": "lead",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare": "drums"
+   },
+   "left": [],
+   "for": [
+    "night-07"
+   ]
+  },
+  "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Doom 103bpm F#min": {
+   "kit": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Doom 103bpm F#min",
+   "base": "gh-hs-doom",
+   "bpm": 103,
+   "bars": 16,
+   "loop_s": 37.281562,
+   "samples": 1789515,
+   "gain_db": 0.7,
+   "lufs": -16.0,
+   "peak_dbfs": -2.7,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs-doom-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs-doom-rhythm.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Hi Hat 1": "drums",
+    "Hi Hat 2": "drums",
+    "Kick Drum": "drums",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare": "drums"
+   },
+   "left": [],
+   "for": [
+    "special-heart"
+   ]
+  },
+  "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Exile 175bpm Fmin": {
+   "kit": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Exile 175bpm Fmin",
+   "base": "gh-hs-exile",
+   "bpm": 175,
+   "bars": 16,
+   "loop_s": 21.942854,
+   "samples": 1053257,
+   "gain_db": -3.0,
+   "lufs": -16.0,
+   "peak_dbfs": -2.8,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs-exile-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs-exile-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs-exile-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Hi Hat": "drums",
+    "Kick Drum": "drums",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare": "drums",
+    "Synth": "lead"
+   },
+   "left": [],
+   "for": [
+    "night-18"
+   ]
+  },
+  "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Frenzy 160bpm Fmin": {
+   "kit": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Frenzy 160bpm Fmin",
+   "base": "gh-hs-frenzy",
+   "bpm": 160,
+   "bars": 16,
+   "loop_s": 24.0,
+   "samples": 1152000,
+   "gain_db": -1.3,
+   "lufs": -16.0,
+   "peak_dbfs": -1.3,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs-frenzy-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs-frenzy-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs-frenzy-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Hi Hat": "drums",
+    "Kick Drum": "drums",
+    "Lead Guitar": "lead",
+    "Open Hat 1": "drums",
+    "Open Hat 2": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare": "drums",
+    "Synth": "lead"
+   },
+   "left": [],
+   "for": [
+    "motif-feral"
+   ]
+  },
+  "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Grave 130bpm Gmin": {
+   "kit": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Grave 130bpm Gmin",
+   "base": "gh-hs-grave",
+   "bpm": 130,
+   "bars": 16,
+   "loop_s": 29.538458,
+   "samples": 1417846,
+   "gain_db": -2.9,
+   "lufs": -16.0,
+   "peak_dbfs": -3.3,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs-grave-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs-grave-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs-grave-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Kick Drum": "drums",
+    "Lead Guitar": "lead",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare": "drums"
+   },
+   "left": [],
+   "for": [
+    "night-07"
+   ]
+  },
+  "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Havoc 160bpm Fmin": {
+   "kit": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Havoc 160bpm Fmin",
+   "base": "gh-hs-havoc",
+   "bpm": 160,
+   "bars": 32,
+   "loop_s": 48.0,
+   "samples": 2304000,
+   "gain_db": -4.1,
+   "lufs": -16.0,
+   "peak_dbfs": -3.7,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs-havoc-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs-havoc-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs-havoc-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Kick Drum": "drums",
+    "Lead Guitar": "lead",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare": "drums"
+   },
+   "left": [],
+   "for": [
+    "night-18"
+   ]
+  },
+  "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Hellfire 160bpm Fmin": {
+   "kit": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Hellfire 160bpm Fmin",
+   "base": "gh-hs-hellfire",
+   "bpm": 160,
+   "bars": 16,
+   "loop_s": 24.0,
+   "samples": 1152000,
+   "gain_db": -0.3,
+   "lufs": -16.0,
+   "peak_dbfs": -1.2,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs-hellfire-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs-hellfire-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs-hellfire-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Hi Hat": "drums",
+    "Kick Drum": "drums",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare": "drums",
+    "Synth": "lead"
+   },
+   "left": [],
+   "for": [
+    "night-17"
+   ]
+  },
+  "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Hellforged 170bpm Fmin": {
+   "kit": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Hellforged 170bpm Fmin",
+   "base": "gh-hs-hellforged",
+   "bpm": 170,
+   "bars": 16,
+   "loop_s": 22.588229,
+   "samples": 1084235,
+   "gain_db": -2.6,
+   "lufs": -16.0,
+   "peak_dbfs": -3.0,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs-hellforged-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs-hellforged-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs-hellforged-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Hi Hat 1": "drums",
+    "Hi Hat 2": "drums",
+    "Kick Drum": "drums",
+    "Lead Guitar": "lead",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare": "drums",
+    "Synth": "lead"
+   },
+   "left": [],
+   "for": [
+    "night-16"
+   ]
+  },
+  "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Inferno 160bpm Gmin": {
+   "kit": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Inferno 160bpm Gmin",
+   "base": "gh-hs-inferno",
+   "bpm": 160,
+   "bars": 16,
+   "loop_s": 24.0,
+   "samples": 1152000,
+   "gain_db": -2.1,
+   "lufs": -16.0,
+   "peak_dbfs": -3.3,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs-inferno-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs-inferno-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs-inferno-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Kick Drum": "drums",
+    "Lead Guitar": "lead",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare": "drums"
+   },
+   "left": [],
+   "for": [
+    "motif-demon"
+   ]
+  },
+  "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Nightmare 170bpm Fmin": {
+   "kit": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Nightmare 170bpm Fmin",
+   "base": "gh-hs-nightmare",
+   "bpm": 170,
+   "bars": 16,
+   "loop_s": 22.588229,
+   "samples": 1084235,
+   "gain_db": -0.2,
+   "lufs": -16.0,
+   "peak_dbfs": -2.5,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs-nightmare-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs-nightmare-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs-nightmare-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Crash 1": "drums",
+    "Crash 2": "drums",
+    "Crash 3": "drums",
+    "Hi Hat": "drums",
+    "Kick Drum": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare": "drums",
+    "Synth": "lead"
+   },
+   "left": [],
+   "for": [
+    "night-17"
+   ]
+  },
+  "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Onslaught 150bpm Fmin": {
+   "kit": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Onslaught 150bpm Fmin",
+   "base": "gh-hs-onslaught",
+   "bpm": 150,
+   "bars": 16,
+   "loop_s": 25.6,
+   "samples": 1228800,
+   "gain_db": -1.9,
+   "lufs": -16.0,
+   "peak_dbfs": -2.3,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs-onslaught-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs-onslaught-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs-onslaught-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Hi Hat": "drums",
+    "Kick Drum": "drums",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare": "drums",
+    "Synth": "lead"
+   },
+   "left": [],
+   "for": [
+    "night-13"
+   ]
+  },
+  "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Rampage 170bpm Fmin": {
+   "kit": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Rampage 170bpm Fmin",
+   "base": "gh-hs-rampage",
+   "bpm": 170,
+   "bars": 16,
+   "loop_s": 22.588229,
+   "samples": 1084235,
+   "gain_db": -1.2,
+   "lufs": -16.5,
+   "peak_dbfs": -1.0,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs-rampage-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs-rampage-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs-rampage-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Kick Drum": "drums",
+    "Lead Guitar": "lead",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare": "drums"
+   },
+   "left": [],
+   "for": [
+    "night-16"
+   ]
+  },
+  "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Ruin 150bpm Fmin": {
+   "kit": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Ruin 150bpm Fmin",
+   "base": "gh-hs-ruin",
+   "bpm": 150,
+   "bars": 16,
+   "loop_s": 25.6,
+   "samples": 1228800,
+   "gain_db": -2.9,
+   "lufs": -16.0,
+   "peak_dbfs": -3.8,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs-ruin-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs-ruin-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs-ruin-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Hi Hat": "drums",
+    "Kick Drum": "drums",
+    "Lead Guitar": "lead",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare": "drums"
+   },
+   "left": [],
+   "for": [
+    "night-13"
+   ]
+  },
+  "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Venom 130bpm Gmin": {
+   "kit": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Venom 130bpm Gmin",
+   "base": "gh-hs-venom",
+   "bpm": 130,
+   "bars": 16,
+   "loop_s": 29.538458,
+   "samples": 1417846,
+   "gain_db": -0.5,
+   "lufs": -16.0,
+   "peak_dbfs": -5.0,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs-venom-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs-venom-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs-venom-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Kick Drum": "drums",
+    "Lead Guitar": "lead",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare": "drums"
+   },
+   "left": [],
+   "for": [
+    "motif-spitter"
+   ]
+  },
+  "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Vortex 170bpm Fmin": {
+   "kit": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Vortex 170bpm Fmin",
+   "base": "gh-hs-vortex",
+   "bpm": 170,
+   "bars": 16,
+   "loop_s": 22.588229,
+   "samples": 1084235,
+   "gain_db": -4.4,
+   "lufs": -16.0,
+   "peak_dbfs": -4.5,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs-vortex-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs-vortex-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs-vortex-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Kick Drum": "drums",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare": "drums",
+    "Synth": "lead"
+   },
+   "left": [],
+   "for": [
+    "night-17"
+   ]
+  },
+  "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Warlord 170bpm Fmin": {
+   "kit": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Warlord 170bpm Fmin",
+   "base": "gh-hs-warlord",
+   "bpm": 170,
+   "bars": 16,
+   "loop_s": 22.588229,
+   "samples": 1084235,
+   "gain_db": -2.6,
+   "lufs": -16.0,
+   "peak_dbfs": -2.4,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs-warlord-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs-warlord-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs-warlord-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Hi Hat": "drums",
+    "Kick Drum": "drums",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare": "drums",
+    "Synth": "lead"
+   },
+   "left": [],
+   "for": [
+    "night-19"
+   ]
+  },
+  "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Wraith 170bpm Fmin": {
+   "kit": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Wraith 170bpm Fmin",
+   "base": "gh-hs-wraith",
+   "bpm": 170,
+   "bars": 16,
+   "loop_s": 22.588229,
+   "samples": 1084235,
+   "gain_db": -0.4,
+   "lufs": -16.0,
+   "peak_dbfs": -3.3,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs-wraith-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs-wraith-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs-wraith-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Hi Hat 1": "drums",
+    "Hi Hat 2": "drums",
+    "Kick Drum": "drums",
+    "Lead Guitar": "lead",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare": "drums"
+   },
+   "left": [],
+   "for": [
+    "special-guardian-b"
+   ]
+  },
+  "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Binary 150bpm Bmin": {
+   "kit": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Binary 150bpm Bmin",
+   "base": "gh-hs2-binary",
+   "bpm": 150,
+   "bars": 16,
+   "loop_s": 25.6,
+   "samples": 1228800,
+   "gain_db": -1.9,
+   "lufs": -16.0,
+   "peak_dbfs": -2.2,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs2-binary-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs2-binary-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs2-binary-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Hi Hat": "drums",
+    "Kick Drum": "drums",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare Drum": "drums",
+    "Synth": "lead"
+   },
+   "left": [
+    "Crash Transition FX",
+    "Hit FX",
+    "Vinyl FX",
+    "White Noise Riser FX"
+   ],
+   "for": [
+    "night-10"
+   ]
+  },
+  "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Carnage 130bpm Emin": {
+   "kit": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Carnage 130bpm Emin",
+   "base": "gh-hs2-carnage",
+   "bpm": 130,
+   "bars": 16,
+   "loop_s": 29.538458,
+   "samples": 1417846,
+   "gain_db": -1.6,
+   "lufs": -16.0,
+   "peak_dbfs": -1.7,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs2-carnage-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs2-carnage-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs2-carnage-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Kick Drum": "drums",
+    "Lead Guitar": "lead",
+    "Open Hat 1": "drums",
+    "Open Hat 2": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare Drum": "drums",
+    "Synth": "lead"
+   },
+   "left": [
+    "Flutter Riser FX",
+    "Gunshot FX",
+    "Hit FX",
+    "Transition FX"
+   ],
+   "for": [
+    "motif-bomber"
+   ]
+  },
+  "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Crypt 150bpm D#min": {
+   "kit": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Crypt 150bpm D#min",
+   "base": "gh-hs2-crypt",
+   "bpm": 150,
+   "bars": 16,
+   "loop_s": 25.6,
+   "samples": 1228800,
+   "gain_db": -1.8,
+   "lufs": -16.0,
+   "peak_dbfs": -3.6,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs2-crypt-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs2-crypt-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs2-crypt-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Hi Hat": "drums",
+    "Kick Drum": "drums",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare Drum": "drums",
+    "Synth 1": "lead",
+    "Synth 2": "lead"
+   },
+   "left": [
+    "Hit FX",
+    "Riser FX",
+    "White Noise Hit FX"
+   ],
+   "for": [
+    "night-14"
+   ]
+  },
+  "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Cursed 150bpm D#min": {
+   "kit": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Cursed 150bpm D#min",
+   "base": "gh-hs2-cursed",
+   "bpm": 150,
+   "bars": 16,
+   "loop_s": 25.6,
+   "samples": 1228800,
+   "gain_db": -2.0,
+   "lufs": -16.0,
+   "peak_dbfs": -1.6,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs2-cursed-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs2-cursed-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs2-cursed-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Kick Drum": "drums",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare Drum": "drums",
+    "Synth": "lead"
+   },
+   "left": [
+    "Clock FX",
+    "Heartbeat FX",
+    "Hit FX",
+    "Quick Transition FX"
+   ],
+   "for": [
+    "night-12"
+   ]
+  },
+  "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Deadweight 110bpm Emin": {
+   "kit": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Deadweight 110bpm Emin",
+   "base": "gh-hs2-deadweight",
+   "bpm": 110,
+   "bars": 16,
+   "loop_s": 34.909083,
+   "samples": 1675636,
+   "gain_db": -3.6,
+   "lufs": -16.0,
+   "peak_dbfs": -3.5,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs2-deadweight-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs2-deadweight-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs2-deadweight-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Kick Drum": "drums",
+    "Lead Guitar": "lead",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare Drum": "drums"
+   },
+   "left": [
+    "Impact_FX",
+    "White Noise Harsh Hit FX"
+   ],
+   "for": [
+    "night-05"
+   ]
+  },
+  "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Decay 130bpm Emin": {
+   "kit": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Decay 130bpm Emin",
+   "base": "gh-hs2-decay",
+   "bpm": 130,
+   "bars": 16,
+   "loop_s": 29.538458,
+   "samples": 1417846,
+   "gain_db": -3.2,
+   "lufs": -16.0,
+   "peak_dbfs": -3.3,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs2-decay-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs2-decay-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs2-decay-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Hi Hat 1": "drums",
+    "Hi Hat 2": "drums",
+    "Kick Drum": "drums",
+    "Lead Guitar": "lead",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare Drum": "drums",
+    "Synth": "lead"
+   },
+   "left": [
+    "Crash Hit & Downlifter_FX",
+    "White Noise Riser FX"
+   ],
+   "for": [
+    "night-06"
+   ]
+  },
+  "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Disruptor 140bpm Bmin": {
+   "kit": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Disruptor 140bpm Bmin",
+   "base": "gh-hs2-disruptor",
+   "bpm": 140,
+   "bars": 16,
+   "loop_s": 27.428563,
+   "samples": 1316571,
+   "gain_db": -2.1,
+   "lufs": -16.0,
+   "peak_dbfs": -3.4,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs2-disruptor-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs2-disruptor-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs2-disruptor-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Hi Hat": "drums",
+    "Kick Drum": "drums",
+    "Lead Guitar": "lead",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare Drum": "drums"
+   },
+   "left": [
+    "Atmosphere FX",
+    "Epic Hit FX",
+    "Sub Drop FX"
+   ],
+   "for": [
+    "night-10"
+   ]
+  },
+  "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Exterminate 150bpm D#min": {
+   "kit": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Exterminate 150bpm D#min",
+   "base": "gh-hs2-exterminate",
+   "bpm": 150,
+   "bars": 16,
+   "loop_s": 25.6,
+   "samples": 1228800,
+   "gain_db": -3.0,
+   "lufs": -16.0,
+   "peak_dbfs": -3.1,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs2-exterminate-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs2-exterminate-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs2-exterminate-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Kick Drum": "drums",
+    "Lead Guitar": "lead",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare Drum": "drums"
+   },
+   "left": [
+    "Harsh Riser FX",
+    "Huge Hit FX"
+   ],
+   "for": [
+    "night-12"
+   ]
+  },
+  "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Flux 130bpm Emin": {
+   "kit": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Flux 130bpm Emin",
+   "base": "gh-hs2-flux",
+   "bpm": 130,
+   "bars": 16,
+   "loop_s": 29.538458,
+   "samples": 1417846,
+   "gain_db": -2.8,
+   "lufs": -16.0,
+   "peak_dbfs": -2.9,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs2-flux-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs2-flux-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs2-flux-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Kick Drum": "drums",
+    "Open Hat 1": "drums",
+    "Open Hat 2": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare Drum": "drums",
+    "Synth": "lead"
+   },
+   "left": [
+    "Impact_Downlifter_FX",
+    "Scary Riser FX"
+   ],
+   "for": [
+    "night-06"
+   ]
+  },
+  "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Glitchform 130bpm D#min": {
+   "kit": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Glitchform 130bpm D#min",
+   "base": "gh-hs2-glitchform",
+   "bpm": 130,
+   "bars": 16,
+   "loop_s": 29.538458,
+   "samples": 1417846,
+   "gain_db": -1.7,
+   "lufs": -16.0,
+   "peak_dbfs": -2.2,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs2-glitchform-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs2-glitchform-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs2-glitchform-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Kick Drum": "drums",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare Drum": "drums",
+    "Synth": "lead"
+   },
+   "left": [
+    "Deep Hit FX",
+    "Gunshot FX",
+    "Heartbeat",
+    "Metallic Snare Fill FX"
+   ],
+   "for": [
+    "motif-spider"
+   ]
+  },
+  "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Gutter 150bpm Fmin": {
+   "kit": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Gutter 150bpm Fmin",
+   "base": "gh-hs2-gutter",
+   "bpm": 150,
+   "bars": 16,
+   "loop_s": 25.6,
+   "samples": 1228800,
+   "gain_db": -2.5,
+   "lufs": -16.0,
+   "peak_dbfs": -3.3,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs2-gutter-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs2-gutter-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs2-gutter-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Hi Hat": "drums",
+    "Kick Drum": "drums",
+    "Lead Guitar": "lead",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare Drum": "drums"
+   },
+   "left": [
+    "Atmosphere FX",
+    "Crash FX",
+    "Hit & Riser FX"
+   ],
+   "for": [
+    "motif-drowned"
+   ]
+  },
+  "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Haunted 150bpm Emin": {
+   "kit": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Haunted 150bpm Emin",
+   "base": "gh-hs2-haunted",
+   "bpm": 150,
+   "bars": 16,
+   "loop_s": 25.6,
+   "samples": 1228800,
+   "gain_db": -4.2,
+   "lufs": -16.0,
+   "peak_dbfs": -3.3,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs2-haunted-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs2-haunted-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs2-haunted-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Hi Hat 1": "drums",
+    "Hi Hat 2": "drums",
+    "Kick Drum": "drums",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare Drum": "drums",
+    "Synth": "lead"
+   },
+   "left": [
+    "Atmosphere Dark FX",
+    "Hit & Transition FX"
+   ],
+   "for": [
+    "motif-screamer"
+   ]
+  },
+  "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Hellmouth 150bpm D#min": {
+   "kit": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Hellmouth 150bpm D#min",
+   "base": "gh-hs2-hellmouth",
+   "bpm": 150,
+   "bars": 16,
+   "loop_s": 25.6,
+   "samples": 1228800,
+   "gain_db": -2.8,
+   "lufs": -16.0,
+   "peak_dbfs": -2.5,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs2-hellmouth-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs2-hellmouth-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs2-hellmouth-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Crash Looped FX": "drums",
+    "Kick Drum": "drums",
+    "Lead Guitar": "lead",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare Drum": "drums"
+   },
+   "left": [
+    "Riser FX",
+    "White Noise Energy",
+    "White Noise Hits FX"
+   ],
+   "for": [
+    "night-11"
+   ]
+  },
+  "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Ironclad 130bpm Emin": {
+   "kit": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Ironclad 130bpm Emin",
+   "base": "gh-hs2-ironclad",
+   "bpm": 130,
+   "bars": 16,
+   "loop_s": 29.538458,
+   "samples": 1417846,
+   "gain_db": -2.7,
+   "lufs": -16.0,
+   "peak_dbfs": -2.9,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs2-ironclad-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs2-ironclad-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs2-ironclad-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Kick Drum": "drums",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare Drum": "drums",
+    "Synth": "lead"
+   },
+   "left": [
+    "Downlifter_FX",
+    "Impact_Hit FX",
+    "Stutter Riser FX"
+   ],
+   "for": [
+    "night-08"
+   ]
+  },
+  "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Rotten 125bpm D#min": {
+   "kit": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Rotten 125bpm D#min",
+   "base": "gh-hs2-rotten",
+   "bpm": 125,
+   "bars": 16,
+   "loop_s": 30.72,
+   "samples": 1474560,
+   "gain_db": -2.4,
+   "lufs": -16.0,
+   "peak_dbfs": -2.5,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs2-rotten-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs2-rotten-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs2-rotten-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Kick Drum": "drums",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare Drum": "drums",
+    "Synth": "lead"
+   },
+   "left": [
+    "Downlifter_FX",
+    "Hit FX",
+    "Police Siren FX"
+   ],
+   "for": [
+    "motif-shambler"
+   ]
+  },
+  "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Rusted 156bpm Emin": {
+   "kit": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Rusted 156bpm Emin",
+   "base": "gh-hs2-rusted",
+   "bpm": 156,
+   "bars": 16,
+   "loop_s": 24.615375,
+   "samples": 1181538,
+   "gain_db": -1.9,
+   "lufs": -16.0,
+   "peak_dbfs": -2.1,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs2-rusted-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs2-rusted-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs2-rusted-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Kick Drum": "drums",
+    "Lead Guitar": "lead",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare Drum": "drums"
+   },
+   "left": [
+    "Impact_FX",
+    "Quick Riser FX",
+    "White Noise Hits Loop FX"
+   ],
+   "for": [
+    "night-15"
+   ]
+  },
+  "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Sledgehammer 150bpm Cmin": {
+   "kit": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Sledgehammer 150bpm Cmin",
+   "base": "gh-hs2-sledgehammer",
+   "bpm": 150,
+   "bars": 16,
+   "loop_s": 25.6,
+   "samples": 1228800,
+   "gain_db": -4.2,
+   "lufs": -16.0,
+   "peak_dbfs": -3.6,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs2-sledgehammer-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs2-sledgehammer-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs2-sledgehammer-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Hi Hat": "drums",
+    "Kick Drum": "drums",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare Drum": "drums",
+    "Synth": "lead"
+   },
+   "left": [
+    "Downlifter_& Uplifter FX",
+    "Impat Deep FX"
+   ],
+   "for": [
+    "motif-brute"
+   ]
+  },
+  "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Surge 110bpm Fmin": {
+   "kit": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Surge 110bpm Fmin",
+   "base": "gh-hs2-surge",
+   "bpm": 110,
+   "bars": 16,
+   "loop_s": 34.909083,
+   "samples": 1675636,
+   "gain_db": -1.4,
+   "lufs": -16.0,
+   "peak_dbfs": -3.3,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs2-surge-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs2-surge-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs2-surge-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Kick Drum": "drums",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare Drum": "drums",
+    "Synth": "lead"
+   },
+   "left": [
+    "Crash Transition FX",
+    "Impact_FX",
+    "Noise Energy Texture",
+    "Siren FX"
+   ],
+   "for": [
+    "night-02"
+   ]
+  },
+  "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Titan 130bpm Emin": {
+   "kit": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Titan 130bpm Emin",
+   "base": "gh-hs2-titan",
+   "bpm": 130,
+   "bars": 16,
+   "loop_s": 29.538458,
+   "samples": 1417846,
+   "gain_db": -2.0,
+   "lufs": -16.5,
+   "peak_dbfs": -1.0,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs2-titan-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs2-titan-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs2-titan-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Kick Drum": "drums",
+    "Lead Guitar": "lead",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare Drum": "drums"
+   },
+   "left": [
+    "Deep Hit FX",
+    "Transition FX",
+    "White Noise Ambience"
+   ],
+   "for": [
+    "motif-colossus",
+    "special-colossus"
+   ]
+  },
+  "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Trauma 110bpm F#min": {
+   "kit": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Trauma 110bpm F#min",
+   "base": "gh-hs2-trauma",
+   "bpm": 110,
+   "bars": 16,
+   "loop_s": 34.909083,
+   "samples": 1675636,
+   "gain_db": -2.5,
+   "lufs": -16.0,
+   "peak_dbfs": -2.0,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs2-trauma-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs2-trauma-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs2-trauma-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Kick Drum": "drums",
+    "Lead Guitar": "lead",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare Drum": "drums"
+   },
+   "left": [
+    "Crash FX",
+    "Vinyl FX"
+   ],
+   "for": [
+    "night-04"
+   ]
+  },
+  "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Tremor 150bpm Fmin": {
+   "kit": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Tremor 150bpm Fmin",
+   "base": "gh-hs2-tremor",
+   "bpm": 150,
+   "bars": 16,
+   "loop_s": 25.6,
+   "samples": 1228800,
+   "gain_db": -3.0,
+   "lufs": -16.0,
+   "peak_dbfs": -3.3,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs2-tremor-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs2-tremor-rhythm.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Kick Drum": "drums",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare Drum": "drums"
+   },
+   "left": [
+    "Epic Hit FX",
+    "Siren Stabs FX"
+   ],
+   "for": [
+    "night-13"
+   ]
+  },
+  "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Voltage 150bpm D#min": {
+   "kit": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Voltage 150bpm D#min",
+   "base": "gh-hs2-voltage",
+   "bpm": 150,
+   "bars": 16,
+   "loop_s": 25.6,
+   "samples": 1228800,
+   "gain_db": -2.7,
+   "lufs": -17.1,
+   "peak_dbfs": -1.0,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs2-voltage-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs2-voltage-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs2-voltage-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Kick Drum": "drums",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare Drum": "drums",
+    "Synth": "lead"
+   },
+   "left": [
+    "Downlifter_FX",
+    "Glitch Riser FX",
+    "White Noise Riser FX"
+   ],
+   "for": [
+    "night-11"
+   ]
+  },
+  "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Annihilation 165bpm C#min": {
+   "kit": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Annihilation 165bpm C#min",
+   "base": "gh-hs3-annihilation",
+   "bpm": 165,
+   "bars": 16,
+   "loop_s": 23.272729,
+   "samples": 1117091,
+   "gain_db": 0.4,
+   "lufs": -16.0,
+   "peak_dbfs": -4.2,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs3-annihilation-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs3-annihilation-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs3-annihilation-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Hi Hat": "drums",
+    "Kick Drum": "drums",
+    "Lead Guitar": "lead",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare Drum": "drums"
+   },
+   "left": [
+    "Atmosphere FX",
+    "Crash Transition FX",
+    "Gunshot FX",
+    "Impact_FX"
+   ],
+   "for": [
+    "night-20"
+   ]
+  },
+  "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Babylon 140bpm Emin": {
+   "kit": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Babylon 140bpm Emin",
+   "base": "gh-hs3-babylon",
+   "bpm": 140,
+   "bars": 16,
+   "loop_s": 27.428563,
+   "samples": 1316571,
+   "gain_db": 0.2,
+   "lufs": -16.0,
+   "peak_dbfs": -3.2,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs3-babylon-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs3-babylon-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs3-babylon-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Kick Drum": "drums",
+    "Lead Guitar": "lead",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare Drum": "drums"
+   },
+   "left": [
+    "Gunshot FX",
+    "Impact_FX",
+    "White Noise Riser FX"
+   ],
+   "for": [
+    "night-08"
+   ]
+  },
+  "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Chamber 150bpm D#min": {
+   "kit": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Chamber 150bpm D#min",
+   "base": "gh-hs3-chamber",
+   "bpm": 150,
+   "bars": 16,
+   "loop_s": 25.6,
+   "samples": 1228800,
+   "gain_db": 0.3,
+   "lufs": -16.0,
+   "peak_dbfs": -3.9,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs3-chamber-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs3-chamber-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs3-chamber-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Hi Hat": "drums",
+    "Kick Drum": "drums",
+    "Lead Guitar": "lead",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare Drum": "drums"
+   },
+   "left": [
+    "Atmosphere FX",
+    "Impact_FX",
+    "Quick Transition FX"
+   ],
+   "for": [
+    "night-14"
+   ]
+  },
+  "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Chimera 110bpm Emin": {
+   "kit": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Chimera 110bpm Emin",
+   "base": "gh-hs3-chimera",
+   "bpm": 110,
+   "bars": 12,
+   "loop_s": 26.181812,
+   "samples": 1256727,
+   "gain_db": -2.0,
+   "lufs": -16.0,
+   "peak_dbfs": -2.0,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs3-chimera-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs3-chimera-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs3-chimera-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Kick Drum": "drums",
+    "Lead Guitar": "lead",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare Drum": "drums"
+   },
+   "left": [
+    "Alarm FX",
+    "Sub Drop FX"
+   ],
+   "for": [
+    "motif-leaper"
+   ]
+  },
+  "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Cleanse 115bpm Dmin": {
+   "kit": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Cleanse 115bpm Dmin",
+   "base": "gh-hs3-cleanse",
+   "bpm": 115,
+   "bars": 16,
+   "loop_s": 33.391312,
+   "samples": 1602783,
+   "gain_db": -2.1,
+   "lufs": -16.0,
+   "peak_dbfs": -3.9,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs3-cleanse-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs3-cleanse-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs3-cleanse-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Hi Hat": "drums",
+    "Kick Drum": "drums",
+    "Lead Guitar": "lead",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare Drum": "drums"
+   },
+   "left": [
+    "Alarm FX",
+    "Alien FX",
+    "Impact_FX"
+   ],
+   "for": [
+    "night-03"
+   ]
+  },
+  "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Consume 155bpm Dmin": {
+   "kit": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Consume 155bpm Dmin",
+   "base": "gh-hs3-consume",
+   "bpm": 155,
+   "bars": 16,
+   "loop_s": 24.774188,
+   "samples": 1189161,
+   "gain_db": -1.9,
+   "lufs": -16.0,
+   "peak_dbfs": -3.4,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs3-consume-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs3-consume-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs3-consume-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Kick Drum": "drums",
+    "Lead Guitar": "lead",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare Drum": "drums"
+   },
+   "left": [
+    "Alarm FX",
+    "Impact_FX",
+    "Riser FX"
+   ],
+   "for": [
+    "night-09"
+   ]
+  },
+  "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Cult 160bpm Fmin": {
+   "kit": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Cult 160bpm Fmin",
+   "base": "gh-hs3-cult",
+   "bpm": 160,
+   "bars": 16,
+   "loop_s": 24.0,
+   "samples": 1152000,
+   "gain_db": -0.9,
+   "lufs": -16.0,
+   "peak_dbfs": -3.3,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs3-cult-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs3-cult-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs3-cult-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Kick Drum": "drums",
+    "Lead Guitar": "lead",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare Drum": "drums"
+   },
+   "left": [
+    "Gunshot FX",
+    "Impact_FX",
+    "Riser FX"
+   ],
+   "for": [
+    "night-16"
+   ]
+  },
+  "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Despair 130bpm Dmin": {
+   "kit": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Despair 130bpm Dmin",
+   "base": "gh-hs3-despair",
+   "bpm": 130,
+   "bars": 16,
+   "loop_s": 29.538458,
+   "samples": 1417846,
+   "gain_db": -1.9,
+   "lufs": -16.0,
+   "peak_dbfs": -3.9,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs3-despair-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs3-despair-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs3-despair-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Kick Drum": "drums",
+    "Lead Guitar": "lead",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare Drum": "drums"
+   },
+   "left": [
+    "Alarm FX",
+    "Atmosphere FX"
+   ],
+   "for": [
+    "night-09"
+   ]
+  },
+  "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Epitah 170bpm C#min": {
+   "kit": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Epitah 170bpm C#min",
+   "base": "gh-hs3-epitah",
+   "bpm": 170,
+   "bars": 32,
+   "loop_s": 45.176479,
+   "samples": 2168471,
+   "gain_db": 1.2,
+   "lufs": -16.0,
+   "peak_dbfs": -2.7,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs3-epitah-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs3-epitah-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs3-epitah-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Hi Hat": "drums",
+    "Kick Drum": "drums",
+    "Lead Guitar": "lead",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare Drum": "drums"
+   },
+   "left": [
+    "Impact_FX",
+    "Transition FX"
+   ],
+   "for": [
+    "night-20"
+   ]
+  },
+  "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Flame 170bpm D#min": {
+   "kit": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Flame 170bpm D#min",
+   "base": "gh-hs3-flame",
+   "bpm": 170,
+   "bars": 16,
+   "loop_s": 22.588229,
+   "samples": 1084235,
+   "gain_db": -2.4,
+   "lufs": -16.0,
+   "peak_dbfs": -4.8,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs3-flame-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs3-flame-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs3-flame-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Hi Hat": "drums",
+    "Kick Drum": "drums",
+    "Lead Guitar": "lead",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare Drum": "drums"
+   },
+   "left": [
+    "Impact_FX",
+    "Riser FX"
+   ],
+   "for": [
+    "special-red-sky"
+   ]
+  },
+  "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Gloom 110bpm F#min": {
+   "kit": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Gloom 110bpm F#min",
+   "base": "gh-hs3-gloom",
+   "bpm": 110,
+   "bars": 16,
+   "loop_s": 34.909083,
+   "samples": 1675636,
+   "gain_db": 0.3,
+   "lufs": -16.0,
+   "peak_dbfs": -4.3,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs3-gloom-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs3-gloom-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs3-gloom-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Kick Drum": "drums",
+    "Lead Guitar": "lead",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare Drum": "drums"
+   },
+   "left": [
+    "Atmosphere FX",
+    "Crash Transition FX",
+    "Impact_FX",
+    "Riser FX"
+   ],
+   "for": [
+    "night-04"
+   ]
+  },
+  "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Hell Knight 105bpm Dmin": {
+   "kit": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Hell Knight 105bpm Dmin",
+   "base": "gh-hs3-hell-knight",
+   "bpm": 105,
+   "bars": 16,
+   "loop_s": 36.571438,
+   "samples": 1755429,
+   "gain_db": 1.1,
+   "lufs": -16.0,
+   "peak_dbfs": -2.5,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs3-hell-knight-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs3-hell-knight-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs3-hell-knight-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Kick Drum": "drums",
+    "Lead Guitar": "lead",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare Drum": "drums"
+   },
+   "left": [
+    "Impact_FX",
+    "Riser FX"
+   ],
+   "for": [
+    "motif-guardians",
+    "special-guardian"
+   ]
+  },
+  "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Mental 100bpm Emin": {
+   "kit": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Mental 100bpm Emin",
+   "base": "gh-hs3-mental",
+   "bpm": 100,
+   "bars": 16,
+   "loop_s": 38.4,
+   "samples": 1843200,
+   "gain_db": -1.5,
+   "lufs": -16.0,
+   "peak_dbfs": -2.4,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs3-mental-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs3-mental-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs3-mental-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Kick Drum": "drums",
+    "Lead Guitar": "lead",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare Drum": "drums"
+   },
+   "left": [
+    "Alarm FX",
+    "Impact_FX",
+    "Siren FX"
+   ],
+   "for": [
+    "night-05"
+   ]
+  },
+  "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Phobia 105bpm Fmin": {
+   "kit": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Phobia 105bpm Fmin",
+   "base": "gh-hs3-phobia",
+   "bpm": 105,
+   "bars": 16,
+   "loop_s": 36.571438,
+   "samples": 1755429,
+   "gain_db": -1.8,
+   "lufs": -16.0,
+   "peak_dbfs": -5.2,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs3-phobia-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs3-phobia-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs3-phobia-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Kick Drum": "drums",
+    "Lead Guitar": "lead",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare Drum": "drums"
+   },
+   "left": [
+    "Atmosphere FX",
+    "Impact_FX",
+    "Riser FX"
+   ],
+   "for": [
+    "night-02"
+   ]
+  },
+  "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Purgatory 150bpm Emin": {
+   "kit": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Purgatory 150bpm Emin",
+   "base": "gh-hs3-purgatory",
+   "bpm": 150,
+   "bars": 16,
+   "loop_s": 25.6,
+   "samples": 1228800,
+   "gain_db": -1.9,
+   "lufs": -16.0,
+   "peak_dbfs": -3.0,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs3-purgatory-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs3-purgatory-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs3-purgatory-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Hi Hat": "drums",
+    "Kick Drum": "drums",
+    "Lead Guitar": "lead",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare Drum": "drums"
+   },
+   "left": [
+    "Impact_FX",
+    "Riser FX"
+   ],
+   "for": [
+    "night-15"
+   ]
+  },
+  "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Realm 105bpm Dmin": {
+   "kit": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Realm 105bpm Dmin",
+   "base": "gh-hs3-realm",
+   "bpm": 105,
+   "bars": 16,
+   "loop_s": 36.571438,
+   "samples": 1755429,
+   "gain_db": -2.0,
+   "lufs": -16.0,
+   "peak_dbfs": -3.1,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs3-realm-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs3-realm-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs3-realm-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Kick Drum": "drums",
+    "Lead Guitar": "lead",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare Drum": "drums"
+   },
+   "left": [
+    "Alarm FX",
+    "Laser FX",
+    "Transition FX"
+   ],
+   "for": [
+    "night-03"
+   ]
+  },
+  "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Revenge 100bpm Emin": {
+   "kit": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Revenge 100bpm Emin",
+   "base": "gh-hs3-revenge",
+   "bpm": 100,
+   "bars": 16,
+   "loop_s": 38.4,
+   "samples": 1843200,
+   "gain_db": -1.3,
+   "lufs": -16.0,
+   "peak_dbfs": -3.5,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs3-revenge-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs3-revenge-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs3-revenge-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Kick Drum": "drums",
+    "Lead Guitar": "lead",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare Drum": "drums"
+   },
+   "left": [
+    "Impact_FX",
+    "Riser FX",
+    "Sub Drop FX"
+   ],
+   "for": [
+    "night-01"
+   ]
+  },
+  "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Rude 160bpm Emin": {
+   "kit": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Rude 160bpm Emin",
+   "base": "gh-hs3-rude",
+   "bpm": 160,
+   "bars": 16,
+   "loop_s": 24.0,
+   "samples": 1152000,
+   "gain_db": -1.5,
+   "lufs": -16.0,
+   "peak_dbfs": -4.5,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs3-rude-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs3-rude-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs3-rude-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Hi Hat": "drums",
+    "Kick Drum": "drums",
+    "Lead Guitar": "lead",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare Drum": "drums"
+   },
+   "left": [
+    "Glitch FX",
+    "Riser FX"
+   ],
+   "for": [
+    "special-wanderer"
+   ]
+  },
+  "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Sin 110bpm F#min": {
+   "kit": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Sin 110bpm F#min",
+   "base": "gh-hs3-sin",
+   "bpm": 110,
+   "bars": 16,
+   "loop_s": 34.909083,
+   "samples": 1675636,
+   "gain_db": -1.3,
+   "lufs": -16.0,
+   "peak_dbfs": -2.2,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs3-sin-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs3-sin-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs3-sin-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Hi Hat": "drums",
+    "Kick Drum": "drums",
+    "Lead Guitar": "lead",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare Drum": "drums"
+   },
+   "left": [
+    "Impact_FX",
+    "Transition FX"
+   ],
+   "for": [
+    "night-04"
+   ]
+  },
+  "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Tyrant 100bpm Dmin": {
+   "kit": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Tyrant 100bpm Dmin",
+   "base": "gh-hs3-tyrant",
+   "bpm": 100,
+   "bars": 16,
+   "loop_s": 38.4,
+   "samples": 1843200,
+   "gain_db": 0.1,
+   "lufs": -16.0,
+   "peak_dbfs": -3.5,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs3-tyrant-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs3-tyrant-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs3-tyrant-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Kick Drum": "drums",
+    "Lead Guitar": "lead",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare Drum": "drums"
+   },
+   "left": [
+    "Riser FX",
+    "Synth FX"
+   ],
+   "for": [
+    "night-03"
+   ]
+  },
+  "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Viper 110bpm Fmin": {
+   "kit": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Viper 110bpm Fmin",
+   "base": "gh-hs3-viper",
+   "bpm": 110,
+   "bars": 16,
+   "loop_s": 34.909083,
+   "samples": 1675636,
+   "gain_db": -0.7,
+   "lufs": -16.0,
+   "peak_dbfs": -4.0,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs3-viper-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs3-viper-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs3-viper-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Kick Drum": "drums",
+    "Lead Guitar": "lead",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare Drum": "drums"
+   },
+   "left": [
+    "Impact_& Atmosphere FX"
+   ],
+   "for": [
+    "night-02"
+   ]
+  }
+ },
+ "places": {
+  "place-menu": {
+   "src": "Ghosthack - Anomaly/Ghosthack - Anomaly/Construction Kits/Kit 05 - Clear Sky - Am 65Bpm/Ghosthack-A_Kit 05_Clear Sky_Am 65Bpm.wav",
+   "file": "assets/soundtrack/gh/gh-place-menu.ogg",
+   "seconds": 180.92,
+   "gain_db": -0.9
+  },
+  "place-hq": {
+   "src": "Ghosthack - Anomaly/Ghosthack - Anomaly/Construction Kits/Kit 01 - Safe Zone - Am 70Bpm/Ghosthack-A_Kit 01_Safe Zone_Am 70Bpm.wav",
+   "file": "assets/soundtrack/gh/gh-place-hq.ogg",
+   "seconds": 310.29,
+   "gain_db": -1.0
+  },
+  "place-dusk": {
+   "src": "Ghosthack - Anomaly/Ghosthack - Anomaly/Construction Kits/Kit 02 - Dark Valley - Cm 65Bpm/Ghosthack-A_Kit 02_Dark Valley_Cm 65Bpm.wav",
+   "file": "assets/soundtrack/gh/gh-place-dusk.ogg",
+   "seconds": 387.69,
+   "gain_db": -0.9
+  },
+  "place-dawn": {
+   "src": "Ghosthack - Cinematic Orchestra Volume 2/Ghosthack - Cinematic Orchestra Volume 2/Construction Kits/Blue Peace/GH_FS III_Songkits_Blue Peace_Cmaj_90bpm.wav",
+   "file": "assets/soundtrack/gh/gh-place-dawn.ogg",
+   "seconds": 79.78,
+   "gain_db": -4.5
+  },
+  "place-fallen": {
+   "src": "Ghosthack - Anomaly/Ghosthack - Anomaly/Construction Kits/Kit 02 - Dark Valley - Cm 65Bpm/STEMS/WET/Ghosthack-A_Kit 02_Atmos Drone_Cm 65Bpm (WET).wav",
+   "file": "assets/soundtrack/gh/gh-place-fallen.ogg",
+   "seconds": 385.85,
+   "gain_db": -5.0
+  }
+ }
+}

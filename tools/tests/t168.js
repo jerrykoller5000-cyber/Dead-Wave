@@ -41,7 +41,8 @@
     ok(below().every((z) => z.sleeping), 'at the mouth, nobody stirs');
     // the sleeper nearest the mouth, and a spot 2 m from it toward its chamber's middle
     const s0 = F.sleepers.slice().sort((a, b) => Math.hypot(a.x - built.entry.x, a.z - built.entry.z) - Math.hypot(b.x - built.entry.x, b.z - built.entry.z))[0];
-    const cx = Math.floor((s0.x - nav.ox) / 6) * 6 + 3 + nav.ox, cz = Math.floor((s0.z - nav.oz) / 6) * 6 + 3 + nav.oz;
+    const CS = built.cell || 6;   // GB-267: the warren's own cell size (7.5 m since GB-267)
+    const cx = Math.floor((s0.x - nav.ox) / CS) * CS + CS / 2 + nav.ox, cz = Math.floor((s0.z - nav.oz) / CS) * CS + CS / 2 + nav.oz;
     const ux = (cx - s0.x) / Math.hypot(cx - s0.x, cz - s0.z), uz = (cz - s0.z) / Math.hypot(cx - s0.x, cz - s0.z);
     const zs0 = below().find((z) => z.belowSleeper === s0.id);
     const nbrs = F.sleepers.filter((s) => s !== s0 && Math.hypot(s.x - s0.x, s.z - s0.z) <= 4).map((s) => s.id);
@@ -83,7 +84,11 @@
     await wait(400);
     const heardR = T.shotHearingRadius('pistol');
     const inR = quiet.filter((s) => Math.hypot(s.x - p.x, s.z - p.z) <= heardR), outR = quiet.filter((s) => Math.hypot(s.x - p.x, s.z - p.z) > heardR);
-    ok(inR.every((s) => s.state !== 'asleep') && outR.every((s) => s.state === 'asleep'), 'his pistol shot wakes the ' + inR.length + ' within ' + heardR + ' m and not the ' + outR.length + ' beyond');
+    // CL-291: one beyond it may stir all the same, a moment later, because a neighbour within 4 m woke (below-fight's
+    // rule; GB-267's chambers put a sleeper 35.3 m off the entry 3.3 m from one at 33 m). Never by the shot itself.
+    const byNbr = (s) => s.state !== 'asleep' && s.why === 'neighbour' && inR.some((q) => Math.hypot(q.x - s.x, q.z - s.z) <= 4);
+    const stirred = outR.filter(byNbr).length;
+    ok(inR.every((s) => s.state !== 'asleep') && outR.every((s) => s.state === 'asleep' || byNbr(s)), 'his pistol shot wakes the ' + inR.length + ' within ' + heardR + ' m and not the ' + outR.length + ' beyond' + (stirred ? ' (' + stirred + ' of them stirred by a neighbour within 4 m)' : ''));
     // (4) never more than 24 awake: wake every one, watch for 2 s.
     F.noise(p.x, p.z, 999);
     let most = 0; const t2 = T.getSimTime(), t2w = Date.now();   // GB-250: game time
@@ -146,7 +151,7 @@
     for (const th of Object.keys(want)) {
       const b2 = T.enterHollow({ theme: th, cave: 0 });
       stand(b2.points.set.x, b2.points.set.z);
-      await wait(1600);
+      { const t0 = T.getSimTime(), w0 = Date.now(); while (T.getSimTime() - t0 < 1.6 && Date.now() - w0 < 20000) await wait(50); }   // CL-291: 1.6 game seconds (the drowned's 1.2 s rise is game time)
       const got = T.zombies.filter((z) => z.below && z.belowSet).map((z) => z.typeKey).sort().join(',');
       ok(got === want[th][1], 'the ' + th + ' Deep: ' + got);
       if (th === 'shale') {

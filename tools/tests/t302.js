@@ -16,7 +16,9 @@
     const built = T.enterHollow({ theme: 'iron', cave: 0 });
     ok(!!built, 'down into the iron warren');
     const e = built.entry, floor = built.groundAt(e.x, e.z);
-    // The ground in the rock: where he stood, not the valley.
+    // The ground in the rock: where he stood, not the valley. GB-267 lands him on the descent's landing (built.arrive,
+    // 6 m up), so stand him on the entry's floor first; the rock's ground is the last floor he stood on (CL-259).
+    P.set(e.x, floor, e.z); { const s0 = T.getSimTime(); while (T.getSimTime() - s0 < 0.3) await wait(40); }
     const rockX = e.x - 9;   // west of the mouth: rock
     ok(built.groundAt(rockX, e.z) == null, 'west of the mouth is rock (no cell)');
     ok(Math.abs(T.sampleHeight(rockX, e.z) - floor) < 0.01, 'the ground in the rock is his last floor (' + T.sampleHeight(rockX, e.z).toFixed(2) + ', floor ' + floor.toFixed(2) + '), not the valley 400 m up');

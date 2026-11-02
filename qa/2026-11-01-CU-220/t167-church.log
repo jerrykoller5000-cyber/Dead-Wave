@@ -1,0 +1,8 @@
+Game-test request 56c6718b-6bfd-4e5b-9bd4-f055f026d549 queued at position 2. Waiting...
+GRANT cursor CU-220: starting one game-test command
+check-players: 314 player.position reads, all in the allowed places
+ok    t87     13 pass   0 fail  39.4s
+ok    t167    20 pass   0 fail  24.0s
+ok    t318     7 pass   0 fail  26.2s
+
+3 checks: 40 pass, 0 fail

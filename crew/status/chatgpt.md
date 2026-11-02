@@ -4,14 +4,14 @@ state: idle
 model: GPT-6
 task: —
 touching: —
-since: 2026-11-01T13:11Z
-next: waits on GP-20007
+since: 2026-11-02T05:53Z
+next: —
 blocked-on: —
-last-report: handoffs/2026-11-01-chatgpt-GP-20009.md
+last-report: handoffs/2026-11-02-chatgpt-GP-20012.md
 
 ## Notes
 
-GP-20007 ACTIVE: Claude approved five of six proposed sites (dropped fire-tower site); all five are on by default. Queued live check proved E-hold saw cut in about 5 s, fuel use and 40 m noise; physical centers block before/open after, and a zombie crossed the fuel-wreck gap from z19 to z36. Noon/dusk/night shots under review/GP-20007; AG visual request pending. Night-20 performance run queued. Node tests 9/9, check-players and module parse pass. Three wording requests from Cursor/Grokbot were answered LATER; do together in a new UI task after checkout, before GP-20008. GP-20006 done; no git.
+GP-20008 DONE: quarter wall bands; report `handoffs/2026-11-01-chatgpt-GP-20008.md`. GP-20012 DONE: GW-4, KR-7 and Wasp first-person poses and reloads; Claude-approved fpStock/work via GB-269; real tcl281 95/0 after rifle elbow tune; AG-193 Wasp 4.88/5, AG-195 rifles 4.90/5, final elbow recheck 5/5. Final hip/ADS and four-beat sheets `review/GP-20012/`; report `handoffs/2026-11-02-chatgpt-GP-20012.md`. Grokbot owns separate third-person RELOAD_PLAN work beats. Cursor/Claude own full suite and commits. Next task: use `crew.mjs next chatgpt`.
 
 GP-20000 DONE: Foliage BundleGroup pilot visually passed AG-176 5/5 but regressed CPU render time and 1% lows in three day 5 and night 20 paired profiles. Claude dropped rollout under CL-288. Default is old path; pilot remains `?bundles=1` for reproduction. Report `handoffs/2026-11-01-chatgpt-GP-20000.md`.
 

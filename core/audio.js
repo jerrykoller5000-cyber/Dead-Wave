@@ -1215,6 +1215,45 @@ export const AudioSys = (() => {
     for (const w of WAVE_BY_DAY) if ((d || 1) >= w.from) t = w.track;
     return t;
   }
+  // CL-275: the score's nights (music.json score.waveByDay) and the old ones, and which the waves use.
+  let SCORE_WAVE = null, OLD_WAVE = null, scoreIsOn = false;
+  // CL-275: the score's specials (music.json score.specials): guardian, redsky, colossus, heart, wanderer -> a layered track.
+  const SCORE_SPECIALS = {};
+  // CL-275: the calm (music.json score.pools): the menu, dawn, the day, dusk, night, the end screens, as whole tracks.
+  const SCORE_POOLS = {};
+  let OLD_POOLS = null, scoreCalmLost = false;
+  function applyScorePools(on, changed) {
+    if (!OLD_POOLS) OLD_POOLS = JSON.parse(JSON.stringify(MUSIC_POOLS));
+    for (const k of Object.keys(OLD_POOLS)) MUSIC_POOLS[k] = OLD_POOLS[k].slice();
+    if (on && !scoreCalmLost) for (const k of Object.keys(SCORE_POOLS)) MUSIC_POOLS[k] = SCORE_POOLS[k].slice();
+    if (changed && stage === 'calm') mood = null;   // switched: the calm moves to the new pool's song (fade out, then in); not on the first load (it broke t73's lull)
+  }
+  // CL-275: the Training Ground's motifs (music.json score.motifs): a type -> its kit, played while it practises.
+  const SCORE_MOTIFS = {};
+  let motif = null;   // { track, kind, quietT } while a type is out in the Training Ground
+  const motifTrackFor = (kind) => SCORE_MOTIFS[kind] || ((kind === 'guardian' || kind === 'caveguard') ? SCORE_MOTIFS.guardians : null) || null;
+  // Which special the fight wants now: the guardian up, else the red sky (Ember), else a colossus. Null without the score.
+  function scoreSpecialKey(state) {
+    if (!scoreIsOn || !state) return null;
+    return state.guardian ? 'guardian' : state.ember ? 'redsky' : state.boss ? 'colossus' : null;
+  }
+  let specialWant = null, specialWantT = 0;
+  function scoreWanted() {
+    try {
+      if (typeof location !== 'undefined' && /[?&]score=1(?:&|$)/.test(location.search || '')) return true;
+      return typeof localStorage !== 'undefined' && localStorage.getItem('tt_score') === '1';
+    } catch (_) { return false; }
+  }
+  function setScore(on) {
+    on = !!on && !!SCORE_WAVE;
+    const was = scoreIsOn;
+    if (!OLD_WAVE) OLD_WAVE = WAVE_BY_DAY.map((w) => Object.assign({}, w));
+    WAVE_BY_DAY = (on ? SCORE_WAVE : OLD_WAVE).map((w) => Object.assign({}, w));
+    scoreIsOn = on;
+    applyScorePools(on, was !== on);   // CL-275
+    if (ctx) secWantDay(lastDay);
+    return on;
+  }
   let manifestLoaded = false;
   function loadMusicManifest() {
     if (manifestLoaded || typeof fetch !== 'function') return;
@@ -1244,6 +1283,32 @@ export const AudioSys = (() => {
           };
         }
         secWantDay(lastDay);
+      }
+      // CL-275 (D-97): the 1.2 score. A night's fight is a suite of Hellshot kits, each three layers that loop together,
+      // bar-exact (tools/music-make.py): drums and bass, the rhythm guitars, the leads and synths. Opt-in until it covers
+      // every moment (?score=1, localStorage tt_score = 1, or setScore(true)): then its waveByDay replaces the old one.
+      const sc = m.score;
+      if (sc && sc.layered && typeof sc.layered === 'object') {
+        for (const k of Object.keys(sc.layered)) {
+          const L = sc.layered[k];
+          if (!L || !Array.isArray(L.kits) || !L.kits.length) continue;
+          const kits = {};
+          for (const q of L.kits) if (q && typeof q.name === 'string' && q.files && typeof q.files.drums === 'string' && +q.loopS > 0 && +q.barS > 0) kits[q.name] = { files: Object.assign({}, q.files), barS: +q.barS, dur: +q.loopS };
+          const names = Object.keys(kits); if (!names.length) continue;
+          const last = names[names.length - 1];
+          SECTIONED[k] = {
+            layered: true, fallback: typeof L.fallback === 'string' ? L.fallback : null, kits, barS: kits[names[0]].barS,
+            list: Object.fromEntries(names.map((n) => [n, { t0: 0, dur: kits[n].dur }])),
+            flow: Object.assign({ stalk: names[0], fight: names, lull: names[0], last, surge: last, lastAt: 3, near: 45, far: 70, lullAfter: 4, rhythmAt: 70, leadAt: 20 }, L.flow || {})
+          };
+        }
+        if (Array.isArray(sc.waveByDay) && sc.waveByDay.length && sc.waveByDay.every((w) => w && isFinite(+w.from) && typeof w.track === 'string')) {
+          SCORE_WAVE = sc.waveByDay.map((w) => ({ from: +w.from, track: w.track })).sort((a, b) => a.from - b.from);
+        }
+        if (sc.specials && typeof sc.specials === 'object') for (const k of Object.keys(sc.specials)) if (SECTIONED[sc.specials[k]]) SCORE_SPECIALS[k] = sc.specials[k];
+        if (sc.motifs && typeof sc.motifs === 'object') for (const k of Object.keys(sc.motifs)) if (SECTIONED[sc.motifs[k]]) SCORE_MOTIFS[k] = sc.motifs[k];
+        if (sc.pools && typeof sc.pools === 'object') for (const k of Object.keys(sc.pools)) if (Array.isArray(sc.pools[k]) && sc.pools[k].length) SCORE_POOLS[k] = sc.pools[k].slice();
+        setScore(scoreWanted());
       }
       const df = m.dayFight;
       if (df && Array.isArray(df.tracks) && Array.isArray(df.sizes) && df.tracks.length && df.tracks.length === df.sizes.length) {
@@ -1318,7 +1383,7 @@ export const AudioSys = (() => {
   let lastCue = null, cueCount = 0;
   let overlapFrames = 0;    // frames with a sting and audible music together (must stay 0)
 
-  function trackUrl(name) { return SOUNDTRACK + name + '.mp3'; }
+  function trackUrl(name) { return SOUNDTRACK + name + (/^gh\//.test(name) ? '.ogg' : '.mp3'); }   // CL-275: the score's calm is OGG
 
   // --- CL-42: the section player ------------------------------------------------------
   // Day 1's song is cut into sections (tools/day1.py), all one tempo and each its own circle.
@@ -1343,54 +1408,122 @@ export const AudioSys = (() => {
   let sec = null;            // { track, name, src, g, startAt, dur, t0 }
   let secPending = null;     // { name, at }
   let secMode = 'stalk', secRot = -1, secQuietT = 0, secLoops = 0;
+  // CL-275: the files a sectioned track plays from (one for a cut song, every kit's layers for a layered suite).
+  function secFiles(S) { return !S ? [] : S.layered ? Object.values(S.kits).flatMap((k) => Object.values(k.files)) : [S.file]; }
+  function secFailed(track) { return secFiles(SECTIONED[track]).some((f) => secBuf[f] === 'failed'); }
   function loadSections(track) {
     const S = SECTIONED[track];
-    if (!S || secBuf[S.file] || !ctx || typeof fetch !== 'function') return;
-    secBuf[S.file] = 'loading';
-    fetch(SOUNDTRACK + S.file).then((r) => (r.ok ? r.arrayBuffer() : Promise.reject(new Error('http ' + r.status))))
+    if (S && S.layered) { for (const f of secFiles(S)) loadSecFile(f); return; }
+    if (S) loadSecFile(S.file);
+  }
+  function loadSecFile(file) {
+    if (!file || secBuf[file] || !ctx || typeof fetch !== 'function') return;
+    secBuf[file] = 'loading';
+    fetch(SOUNDTRACK + file).then((r) => (r.ok ? r.arrayBuffer() : Promise.reject(new Error('http ' + r.status))))
       .then((ab) => new Promise((res, rej) => { const p = ctx.decodeAudioData(ab, res, rej); if (p && p.catch) p.catch(rej); }))
-      .then((buf) => { secBuf[S.file] = buf; })
-      .catch(() => { secBuf[S.file] = 'failed'; });
+      .then((buf) => { secBuf[file] = buf; })
+      .catch(() => { secBuf[file] = 'failed'; });
   }
   // CL-38: hold only what the run can reach soon (tonight's and tomorrow's song, the day track,
   // whatever is playing); drop the other decoded songs, they come back when their night does.
   let secWantedFor = -1;
   function secWantDay(d) {
     d = d || 1;
-    const waveTracks = new Set(WAVE_BY_DAY.map((w) => w.track).concat(Object.values(SPECIAL_TRACKS), [HEART_TRACK]));   // CL-85: loaded when it's near
+    const waveTracks = new Set(WAVE_BY_DAY.map((w) => w.track).concat(Object.values(SPECIAL_TRACKS), [HEART_TRACK],
+      Object.values(SECTIONED).map((S) => S.fallback).filter(Boolean), (OLD_WAVE || []).map((w) => w.track), (SCORE_WAVE || []).map((w) => w.track)));   // CL-85; CL-275
     const keep = new Set([waveTrackForDay(d), waveTrackForDay(d + 1)]);
+    { const t1 = waveTrackForDay(d + 1); if (SECTIONED[t1] && SECTIONED[t1].layered && t1 !== waveTrackForDay(d)) keep.delete(t1); }   // CL-275: tomorrow's suite at dawn
+    for (const t of Array.from(keep)) { const S = SECTIONED[t]; if (S && S.layered && S.fallback && secFailed(t)) keep.add(S.fallback); }   // CL-275: no gh files here
+    for (const k of Object.keys(SECTIONED)) if (SECTIONED[k].layered) waveTracks.add(k);   // CL-275: the score's tracks load only when wanted
+    if (motif && motif.track) keep.add(motif.track);
+    if (scoreIsOn) {   // CL-275: the guardian's suite on its nights (6, 12, 18), any other special once a fight has asked for it
+      if (SCORE_SPECIALS.guardian && d % 6 === 0) keep.add(SCORE_SPECIALS.guardian);
+      const k = scoreSpecialKey(lastState); if (k && SCORE_SPECIALS[k]) keep.add(SCORE_SPECIALS[k]);
+      if (SCORE_SPECIALS.heart && lastState && (lastState.heartSoon || lastState.heart)) keep.add(SCORE_SPECIALS.heart);
+    }
     const sp = specialTrack(lastState); if (sp) keep.add(sp);   // CL-77: tonight's special song
     if (stage === 'heart' || (lastState && (lastState.heartSoon || lastState.heart))) keep.add(HEART_TRACK);   // CL-85
     if (sec && sec.track) keep.add(sec.track);
     for (const k of Object.keys(SECTIONED)) {
       const S = SECTIONED[k];
       if (!waveTracks.has(k) || keep.has(k)) loadSections(k);
-      else if (secBuf[S.file] && typeof secBuf[S.file] === 'object') delete secBuf[S.file];
+      else for (const f of secFiles(S)) if (secBuf[f] && typeof secBuf[f] === 'object') delete secBuf[f];
     }
     secWantedFor = d;
   }
   function sectionsReady(track) {
     const S = SECTIONED[track];
-    return !!(S && ctx && ctx.state !== 'closed' && secBuf[S.file] && typeof secBuf[S.file] === 'object');
+    return !!(S && ctx && ctx.state !== 'closed' && secFiles(S).every((f) => secBuf[f] && typeof secBuf[f] === 'object'));
+  }
+  // CL-275: a kit of a layered suite: its layers started together on the same bar, each through its own gain.
+  function secLayeredPlay(S, name, when) {
+    const kit = S.kits[name]; if (!kit) return false;
+    const bufs = {};
+    for (const [l, f] of Object.entries(kit.files)) { const b = secBuf[f]; if (!b || typeof b !== 'object') return false; bufs[l] = b; }
+    secEnsureOut();
+    const g = ctx.createGain();
+    g.gain.setValueAtTime(0, when); g.gain.linearRampToValueAtTime(1, when + 0.012);
+    g.connect(secOut);
+    const srcs = [], layers = {};
+    for (const [l, b] of Object.entries(bufs)) {
+      const src = ctx.createBufferSource();
+      src.buffer = b; src.loop = true; src.loopStart = 0; src.loopEnd = Math.min(kit.dur, b.duration);
+      const lg = ctx.createGain(); const v = layerWant(l, S, lastState);
+      lg.gain.setValueAtTime(v, when);
+      src.connect(lg); lg.connect(g); src.start(when, 0);
+      srcs.push(src); layers[l] = { g: lg, v };
+    }
+    if (sec && sec.src) secOldOut(sec, when);
+    sec = { track: sec ? sec.track : deckTrack, name, src: srcs[0], srcs, g, layers, startAt: when, dur: kit.dur, t0: 0, barS: kit.barS, file: kit.files.drums };
+    secLoops = 0;
+    return true;
+  }
+  function secOldOut(old, when) {   // the old one out over 30 ms
+    try { old.g.gain.setValueAtTime(1, when); old.g.gain.linearRampToValueAtTime(0, when + 0.03); for (const s of old.srcs || [old.src]) s.stop(when + 0.05); } catch (_) {}
+  }
+  function secEnsureOut() {
+    if (secOut) return;
+    secOut = ctx.createGain(); secOut.gain.value = 0;
+    secLp = ctx.createBiquadFilter(); secLp.type = 'lowpass'; secLp.frequency.value = 20000; secLp.Q.value = 0.5;   // CL-101: shut below
+    secOut.connect(secLp); secLp.connect(ctx.destination);
+  }
+  // CL-275: how much of each layer the fight wants. The drums and bass always; the rhythm guitars once one is within
+  // flow.rhythmAt (or the night's last push, or its last few); the leads once one is within flow.leadAt, or then.
+  // A little hysteresis (15 m, 10 m) so a zombie on the line doesn't flutter them.
+  function layerWant(layer, S, state) {
+    if (layer === 'drums') return 1;
+    const F = S.flow, mode = secMode, near = state && state.nearest != null ? state.nearest : 999, live = state ? state.threat || 0 : 0;
+    const was = sec && sec.layers && sec.layers[layer] ? sec.layers[layer].v : 0;
+    if (mode === 'last' || mode === 'surge') return 1;
+    if (mode === 'stalk' || mode === 'lull' || !live) return 0;
+    const pace = state && state.pace, peak = !!(pace && pace.pushes > 1 && pace.push === pace.pushes - 1 && !pace.inLull);
+    if (layer === 'rhythm') return peak || near <= F.rhythmAt + (was > 0.5 ? 15 : 0) ? 1 : 0;
+    return peak || near <= F.leadAt + (was > 0.5 ? 10 : 0) ? 1 : 0;
+  }
+  function secLayersUpdate(state) {
+    const S = SECTIONED[sec.track]; if (!S || !S.layered || !sec.layers || !ctx) return;
+    const now = ctx.currentTime, beat = (sec.barS || S.barS) / 4;
+    const at = sec.startAt + Math.max(0, Math.ceil((now + 0.03 - sec.startAt) / beat)) * beat;   // on the next beat
+    for (const [l, o] of Object.entries(sec.layers)) {
+      const v = layerWant(l, S, state);
+      if (v === o.v) continue;
+      o.v = v;
+      try { o.g.gain.cancelScheduledValues(at); o.g.gain.setTargetAtTime(v, at, v > 0 ? 0.06 : 0.3); } catch (_) { o.g.gain.value = v; }
+    }
   }
   function secPlay(name, when) {
+    { const L = SECTIONED[sec ? sec.track : deckTrack]; if (L && L.layered) return secLayeredPlay(L, name, when); }
     const S = SECTIONED[sec ? sec.track : deckTrack]; const buf = S && secBuf[S.file];
     const part = S && S.list[name];
     if (!part || !buf || typeof buf !== 'object') return false;
-    if (!secOut) {
-      secOut = ctx.createGain(); secOut.gain.value = 0;
-      secLp = ctx.createBiquadFilter(); secLp.type = 'lowpass'; secLp.frequency.value = 20000; secLp.Q.value = 0.5;   // CL-101: shut below
-      secOut.connect(secLp); secLp.connect(ctx.destination);
-    }
+    secEnsureOut();
     const src = ctx.createBufferSource();
     src.buffer = buf; src.loop = true; src.loopStart = part.t0; src.loopEnd = part.t0 + part.dur;
     const g = ctx.createGain();
     g.gain.setValueAtTime(0, when); g.gain.linearRampToValueAtTime(1, when + 0.012);
     src.connect(g); g.connect(secOut);
     src.start(when, part.t0);
-    if (sec && sec.src) {                     // the old one out over the same 30 ms
-      try { sec.g.gain.setValueAtTime(1, when); sec.g.gain.linearRampToValueAtTime(0, when + 0.03); sec.src.stop(when + 0.05); } catch (_) {}
-    }
+    if (sec && sec.src) secOldOut(sec, when);   // the old one out over the same 30 ms
     sec = { track: sec ? sec.track : deckTrack, name, src, g, startAt: when, dur: part.dur, t0: part.t0 };
     secLoops = 0;
     return true;
@@ -1398,7 +1531,7 @@ export const AudioSys = (() => {
   function secStop(fade) {
     if (sec && sec.src && ctx) {
       const t = ctx.currentTime;
-      try { sec.g.gain.cancelScheduledValues(t); sec.g.gain.setValueAtTime(sec.g.gain.value, t); sec.g.gain.linearRampToValueAtTime(0, t + (fade || 0.03)); sec.src.stop(t + (fade || 0.03) + 0.02); } catch (_) {}
+      try { sec.g.gain.cancelScheduledValues(t); sec.g.gain.setValueAtTime(sec.g.gain.value, t); sec.g.gain.linearRampToValueAtTime(0, t + (fade || 0.03)); for (const s of sec.srcs || [sec.src]) s.stop(t + (fade || 0.03) + 0.02); } catch (_) {}
     }
     sec = null; secPending = null;
   }
@@ -1453,7 +1586,9 @@ export const AudioSys = (() => {
       if (now >= secPending.at - 0.005) { secPending = null; }
       return;
     }
-    const nextBar = sec.startAt + Math.max(1, Math.ceil((now + 0.08 - sec.startAt) / S.barS)) * S.barS;
+    secLayersUpdate(state);   // CL-275
+    const barS = sec.barS || S.barS;   // CL-275: a suite's kits each have their own tempo
+    const nextBar = sec.startAt + Math.max(1, Math.ceil((now + 0.08 - sec.startAt) / barS)) * barS;
     const endOfSec = sec.startAt + Math.max(1, Math.ceil((now + 0.08 - sec.startAt) / sec.dur)) * sec.dur;
     if (mode !== secMode || !secFits(mode, sec.name)) {
       // A new part of the fight: cut on the next bar line.
@@ -1465,6 +1600,57 @@ export const AudioSys = (() => {
       const name = secSectionFor(mode);
       if (name !== sec.name && secPlay(name, endOfSec)) secPending = { name, at: endOfSec };
     }
+  }
+  // CL-275: with the score on, a boss in the fight (the guardian, the red sky's, a colossus) takes the fight to its own
+  // suite on the next bar line, and the night's comes back when it's gone. A change must hold 1.5 s (no flutter); a
+  // suite not decoded yet is asked for and the fight goes on as it was until it is.
+  function secSpecialSwitch(state, dt) {
+    if (!sec || !ctx || !scoreIsOn || secPending) return;
+    const k = scoreSpecialKey(state);
+    const want = (k && SCORE_SPECIALS[k]) || waveTrackForDay(lastDay);
+    if (!want || want === sec.track) { specialWant = null; specialWantT = 0; return; }
+    if (want !== specialWant) { specialWant = want; specialWantT = 0; }
+    specialWantT += dt;
+    const W = SECTIONED[want];
+    if (!W || !W.layered) return;
+    if (!sectionsReady(want)) { loadSections(want); return; }
+    if (specialWantT < 1.5) return;
+    const S = SECTIONED[sec.track], barS = sec.barS || (S && S.barS) || 2;
+    const now = ctx.currentTime, at = sec.startAt + Math.max(1, Math.ceil((now + 0.08 - sec.startAt) / barS)) * barS;
+    sec.track = want; deckTrack = want; secRot = -1;
+    const first = W.flow.fight[0];
+    if (secPlay(first, at)) secPending = { name: first, at };
+    specialWant = null; specialWantT = 0;
+  }
+  // CL-275: a type comes out to practise: its motif kit, from its drums, the rest coming in as it closes (layerWant).
+  // It goes when the practice is over (nobody up for 3 s) or he leaves. Only with the score on, and once decoded.
+  function trainingMotif(kind) {
+    if (!scoreIsOn || !trainingMode || !ctx) return false;
+    const t = motifTrackFor(kind); if (!t) return false;
+    if (motif && motif.track === t && sec && sec.track === t) { motif.quietT = 0; return true; }
+    if (sec) secStop(0.6);
+    motif = { track: t, kind, quietT: 0, started: false };
+    loadSections(t);
+    return true;
+  }
+  function motifUpdate(dt, state) {
+    if (!motif) return;
+    lastState = state;
+    if (!scoreIsOn || muted) { if (sec) secStop(0.4); motif = null; return; }
+    if (!motif.started) {
+      if (secFailed(motif.track)) { motif = null; return; }
+      if (!sectionsReady(motif.track)) return;
+      secMode = 'fight'; secRot = -1; secQuietT = 0;
+      sec = { track: motif.track, name: null, src: null, g: null, startAt: 0, dur: 1, t0: 0 };
+      if (!secPlay(SECTIONED[motif.track].flow.fight[0], ctx.currentTime + 0.05)) { sec = null; motif = null; return; }
+      motif.started = true;
+    }
+    const live = state.threat || 0;
+    motif.quietT = live > 0 ? 0 : motif.quietT + dt;
+    if (motif.quietT > 3) { secStop(1.5); motif = null; return; }
+    const out = Math.max(0, Math.min(1, MUSIC_VOL * userMusic * gainOf(motif.track) * (state.paused ? 0.45 : 1)));
+    if (secOut) { try { secOut.gain.setTargetAtTime(out, ctx.currentTime, 0.05); } catch (_) { secOut.gain.value = out; } }
+    if (sec) secLayersUpdate(state);
   }
   function secStart(name, state) {
     // The first section: straight into the fight if they're already on you.
@@ -1496,7 +1682,8 @@ export const AudioSys = (() => {
       const e = deck.error;
       lastDeckError = { code: e ? e.code : 0, src: deck.src, track: deckTrack };
       if (!deckTrack || (e && e.code === 1)) return;
-      if (deck.src && !deck.src.endsWith('/' + deckTrack + '.mp3')) return;
+      if (deck.src && !deck.src.endsWith(trackUrl(deckTrack).replace(SOUNDTRACK, '/').replace(/^\/+/, '/'))) return;
+      if (/^gh\//.test(deckTrack)) { scoreCalmLost = true; applyScorePools(false, true); }   // CL-275: no gh files here: the old calm
       deckTrack = null; gapT = 1.5;
     });
     return deck;
@@ -1510,6 +1697,7 @@ export const AudioSys = (() => {
   function startDeck(name, opts) {
     const o = opts || {};
     secStop();
+    { const L = SECTIONED[name]; if (L && L.layered && !sectionsReady(name) && L.fallback) name = L.fallback; }   // CL-275
     if (sectionsReady(name) && secStart(name, o.state)) {
       if (deck) { try { deck.pause(); } catch (_) {} deck.volume = 0; }
       deckTrack = name;
@@ -1669,7 +1857,8 @@ export const AudioSys = (() => {
   function startHeart() {
     stopSting(); stopDeck();
     stage = 'heart'; mood = 'fight'; nextMood = null;
-    const name = SECTIONED[HEART_TRACK] && sectionsReady(HEART_TRACK) ? HEART_TRACK : pickTrack('guardian');
+    const sh = scoreIsOn && SCORE_SPECIALS.heart && sectionsReady(SCORE_SPECIALS.heart) ? SCORE_SPECIALS.heart : null;   // CL-275
+    const name = sh || (SECTIONED[HEART_TRACK] && sectionsReady(HEART_TRACK) ? HEART_TRACK : pickTrack('guardian'));
     startDeck(name, { level: 0, fadeIn: FIGHT_FADE[name] != null ? FIGHT_FADE[name] : 1.2, state: lastState });
   }
   // It dies: the song falls away fast and the long falling note plays alone (secret-quest.md 6), then the ending.
@@ -1730,7 +1919,7 @@ export const AudioSys = (() => {
   }
   // Called every frame by the game loop with the current state.
   function updateMusic(dt, state) {
-    if(trainingMode){trainingSound?.update(muted?0:userMusic,!!state.paused);trainingFacility?.tick(muted||!!state.paused);return;}
+    if(trainingMode){trainingSound?.update(muted?0:userMusic*(motif&&sec?0.35:1),!!state.paused);trainingFacility?.tick(muted||!!state.paused);motifUpdate(dt,state);return;}
     lastState = state;
     const started = !!state.started;
     const phaseNow = state.phase;
@@ -1848,6 +2037,7 @@ export const AudioSys = (() => {
       const out = Math.max(0, Math.min(1, v));
       if (sec && secOut && ctx) {
         try { secOut.gain.setTargetAtTime(out, ctx.currentTime, 0.02); } catch (_) { secOut.gain.value = out; }
+        if (stage === 'fight') secSpecialSwitch(state, dt);   // CL-275
         if (stage === 'fight' || stage === 'heart') secUpdate(state, dt);   // CL-85
       } else if (deck && Math.abs(out - deck.volume) > 0.0005) deck.volume = out;
     }
@@ -1899,7 +2089,13 @@ export const AudioSys = (() => {
   }
   function musicState() {
     return {
-      stage, mood, nextMood, front: sec ? SOUNDTRACK + SECTIONED[sec.track].file : (deck && deckTrack ? deck.src : null), frontTime: deck ? deck.currentTime : 0,
+      stage, mood, nextMood, front: sec ? SOUNDTRACK + (sec.file || SECTIONED[sec.track].file) : (deck && deckTrack ? deck.src : null), frontTime: deck ? deck.currentTime : 0,
+      score: { on: scoreIsOn, nights: (SCORE_WAVE || []).length, layers: sec && sec.layers ? Object.fromEntries(Object.entries(sec.layers).map(([k, o]) => [k, o.v])) : null,
+        layerGains: sec && sec.layers ? Object.fromEntries(Object.entries(sec.layers).map(([k, o]) => [k, +o.g.gain.value.toFixed(3)])) : null,
+        kit: sec && sec.layers ? sec.name : null, barS: sec ? sec.barS || null : null, failed: Object.keys(SECTIONED).filter((k) => SECTIONED[k].layered && secFailed(k)),
+        specials: Object.assign({}, SCORE_SPECIALS), specialWant: specialWant, track: sec ? sec.track : null,
+        motifs: Object.assign({}, SCORE_MOTIFS), motif: motif ? { kind: motif.kind, track: motif.track, started: motif.started } : null,
+        pools: Object.assign({}, SCORE_POOLS), calmLost: scoreCalmLost },   // CL-275
       deckTrack, deckLevel, volume: sec && secOut ? secOut.gain.value : (deck ? deck.volume : 0), prox, briefDuck, briefingOpen, day: lastDay, lastDeckError,
       waveByDay: WAVE_BY_DAY.map((w) => Object.assign({}, w)),
       night: nightMusic(lastDay), nightCurve: Array.from({ length: 20 }, (_, i) => nightMusic(i + 1)),
@@ -3574,7 +3770,7 @@ export const AudioSys = (() => {
     open: 'training/panel-beep', spawn: 'training/gate-open', clear: 'training/clear-all', wake: 'training/infirmary-wake',
     enter: 'training/panel-enter' };   // CL-272: the way in, from the packs
   function setTraining(on){
-    on=!!on;if(on===trainingMode)return;trainingMode=on;
+    on=!!on;if(on===trainingMode)return;trainingMode=on;if(!on&&motif){motif=null;secStop(0.6);}   // CL-275
     try { if (on) setTimeout(() => { if (trainingMode) bed('vent', 'training/ventilation', 1, { bus: fxBus || sfxGain, tc: 1.5 }); }, 400); else stopBed('vent', 0.8); } catch (_) {}   // CL-161
     if(on){
       stopMusic();rainStop();setSolo(false);
@@ -3771,6 +3967,46 @@ export const AudioSys = (() => {
     playNoise({ dur: 0.18, vol: 0.06, filterFreq: 3800, filterType: 'highpass', attack: 0.01 });
     playNoise({ dur: 0.12, vol: 0.04, filterFreq: 2600, filterType: 'bandpass', when: 0.14, attack: 0.01 });
   }
+  // CU-219 (GP-20011): five quiet place cues. Immersive, under combat, no pack files.
+  // The mine's mist stays silent. Each ignores a volume under 0.02.
+  function placeCue(volume, pan) {
+    if (typeof window === 'undefined') return null;
+    const c = ensure();
+    if (!c || muted) return null;
+    const vol = Math.max(0, Math.min(1, +volume || 0));
+    if (vol < 0.02) return null;
+    return { vol, pan: Math.max(-1, Math.min(1, +pan || 0)) };
+  }
+  function depotGeneratorCough(volume = 1, pan = 0) {
+    const q = placeCue(volume, pan); if (!q) return;
+    playNoise({ dur: 0.22, vol: 0.05 * q.vol, filterFreq: 480, filterType: 'lowpass', attack: 0.03, pan: q.pan });
+    playTone({ freq: 52, type: 'sawtooth', dur: 0.16, vol: 0.04 * q.vol, when: 0.08, slideTo: 34, pan: q.pan });
+    playTone({ freq: 46, type: 'sawtooth', dur: 0.22, vol: 0.03 * q.vol, when: 0.38, slideTo: 28, pan: q.pan });
+    playNoise({ dur: 0.28, vol: 0.025 * q.vol, filterFreq: 320, filterType: 'lowpass', when: 0.55, attack: 0.04, pan: q.pan });
+  }
+  function mastWireSing(volume = 1, pan = 0) {
+    const q = placeCue(volume, pan); if (!q) return;
+    playTone({ freq: 740, type: 'sine', dur: 0.9, vol: 0.035 * q.vol, slideTo: 980, attack: 0.08, pan: q.pan });
+    playTone({ freq: 1480, type: 'sine', dur: 0.7, vol: 0.012 * q.vol, when: 0.12, slideTo: 1720, attack: 0.1, pan: q.pan });
+  }
+  function hikersPhoneRing(volume = 1, pan = 0) {
+    const q = placeCue(volume, pan); if (!q) return;
+    for (const when of [0, 0.42]) {
+      playTone({ freq: 480, type: 'square', dur: 0.16, vol: 0.04 * q.vol, when, attack: 0.01, pan: q.pan });
+      playTone({ freq: 620, type: 'square', dur: 0.16, vol: 0.03 * q.vol, when, attack: 0.01, pan: q.pan });
+    }
+  }
+  function rangerRadioSquelch(volume = 1, pan = 0) {
+    const q = placeCue(volume, pan); if (!q) return;
+    playNoise({ dur: 0.09, vol: 0.05 * q.vol, filterFreq: 2200, filterType: 'bandpass', attack: 0.004, pan: q.pan });
+    playNoise({ dur: 0.05, vol: 0.03 * q.vol, filterFreq: 3400, filterType: 'highpass', when: 0.1, pan: q.pan });
+  }
+  function trapperIronChime(volume = 1, pan = 0) {
+    const q = placeCue(volume, pan); if (!q) return;
+    playTone({ freq: 880, type: 'triangle', dur: 0.45, vol: 0.045 * q.vol, slideTo: 640, attack: 0.005, pan: q.pan });
+    playTone({ freq: 1760, type: 'sine', dur: 0.3, vol: 0.015 * q.vol, attack: 0.005, pan: q.pan });
+    playNoise({ dur: 0.04, vol: 0.02 * q.vol, filterFreq: 5000, filterType: 'highpass', pan: q.pan });
+  }
   // GP-20005: a woods warning, synthesized (no pack). snap is a branch, brush/rustle the undergrowth, leaves a dry footfall.
   let woodsWarnCd = 0;
   function woodsWarning(kind, volume = 1, pan = 0) {
@@ -3793,7 +4029,7 @@ export const AudioSys = (() => {
     }
   }
   const api = {
-    setTraining,trainingCue:(kind)=>{if(trainingMode&&!muted){if(trainingFacility?.cue(kind))return;if(TRAIN_TAKE[kind]&&tk(TRAIN_TAKE[kind],kind==='step'?0.85:1))return;trainingSound?.cue(kind);}},   // CL-161: Jerry's takes first
+    setTraining,trainingMotif,trainingCue:(kind)=>{if(trainingMode&&!muted){if(trainingFacility?.cue(kind))return;if(TRAIN_TAKE[kind]&&tk(TRAIN_TAKE[kind],kind==='step'?0.85:1))return;trainingSound?.cue(kind);}},   // CL-161: Jerry's takes first
     trainingState:()=>({enabled:trainingMode,...trainingSound?.state(),facility:trainingFacility?.state()}),
     unlock, toggleMute, isMuted, setMuted,
     fire: W(fire, [0.5, 0.75]), fireWeapon: W(fireWeapon, (id) => SHOT_DUCK[id] || [0.45, 0.7]),
@@ -3807,6 +4043,7 @@ export const AudioSys = (() => {
     shotgunPump: W(shotgunPump), revolverCylinder: W(revolverCylinder), revolverSpin: W(revolverSpin),
     launcherDrum: W(launcherDrum), launcherShellInsert: W(launcherShellInsert),
     jump, nvgClick, coin, leafHit: W(leafHit), treeFell, treeThud, crownFire, trunkBump, woodsWarning,
+    depotGeneratorCough, mastWireSing, hikersPhoneRing, rangerRadioSquelch, trapperIronChime,
     win, resetBlip, noteSpin, startMusic, stopMusic,
     place, invalid, turretShot: W(turretShot, [0.7, 0.88]), zombieHit: W(zombieHit), zombieDeath: W(zombieDeath),
     groan, headshot: W(headshot), dodgeRoll, streak, footstep, heartbeat,
@@ -3825,7 +4062,7 @@ export const AudioSys = (() => {
     // Read-only view of the mix, for tests and the perf overlay.
     mixState: () => ({ ctx: ctx ? ctx.state : 'none', weap: weapBus ? weapBus.gain.value : null, fx: fxBus ? fxBus.gain.value : null, amb: ambBus ? ambBus.gain.value : null, musicDuck: musicShotDuck, rain: rainLoop ? rainLoop.gain.gain.value : null }),
     rainStart, rainStop, rainSetIntensity, isRainRunning,
-    updateMusic, musicState, musicCue, cueLength, setMood, setSfxVolume, setMusicVolume, getVolumes,
+    updateMusic, musicState, musicCue, cueLength, setMood, setSfxVolume, setMusicVolume, getVolumes, setScore,   // CL-275
     ambienceStart, updateAmbience, birdChirp: A(birdChirp), owlHoot: A(owlHoot), thunder: A(thunder), lightningStrike: A(lightningStrike), holyChoir, chapelChoir, rabbitScreech, holyBlast, dayCleared,
     distantGroan: A(distantGroan),
     clip, preloadClips, clipState,   // CL-147

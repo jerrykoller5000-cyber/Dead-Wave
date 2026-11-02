@@ -1,0 +1,54 @@
+ M core/audio.js
+ M crew/BOARD.md
+ M crew/LOG.md
+ M crew/status/antigravity.md
+ M crew/status/chatgpt.md
+ M crew/status/cursor.md
+ M crew/status/grokbot.md
+ M crew/status/muse.md
+ M crew/tests.json
+ M docs/contracts.md
+ M game/skyline-pulls.js
+ M handoffs/2026-11-01-chatgpt-GP-20007.md
+ M handoffs/requests.md
+ M index.html
+ M review/GP-20007/performance.md
+ M review/GP-20007/placement-proposal.md
+?? core/place-events-audio.test.mjs
+?? game/place-events.js
+?? game/place-events.test.mjs
+?? game/skyline-pulls.test.mjs
+?? handoffs/2026-11-01-antigravity-AG-187.md
+?? handoffs/2026-11-01-antigravity-AG-188.md
+?? handoffs/2026-11-01-antigravity-AG-189.md
+?? handoffs/2026-11-01-chatgpt-GP-20010.md
+?? handoffs/2026-11-01-chatgpt-GP-20011.md
+?? handoffs/2026-11-01-cursor-CU-215.md
+?? handoffs/2026-11-01-cursor-CU-216.md
+?? handoffs/2026-11-01-cursor-CU-218.md
+?? handoffs/2026-11-01-cursor-CU-219.md
+?? handoffs/2026-11-01-grokbot-GB-267-layout.md
+?? handoffs/2026-11-01-muse-MU-25.md
+?? handoffs/2026-11-01-muse-MU-26.md
+?? qa/2026-11-01-AG-187/
+?? qa/2026-11-01-AG-188/
+?? qa/2026-11-01-AG-189/
+?? qa/2026-11-01-CU-220/
+?? review/GP-20007/fuel-mast-final-cut-noon.json
+?? review/GP-20007/fuel-mast-final-cut-noon.png
+?? review/GP-20007/fuel-mast-final-noon.json
+?? review/GP-20007/fuel-mast-final-noon.png
+?? review/GP-20007/fuel-wreck-final-noon.json
+?? review/GP-20007/fuel-wreck-final-noon.png
+?? review/GP-20007/trapper-grave-final-cut-east-noon.json
+?? review/GP-20007/trapper-grave-final-cut-east-noon.png
+?? review/GP-20007/trapper-grave-final-cut-northwest-noon.json
+?? review/GP-20007/trapper-grave-final-cut-northwest-noon.png
+?? review/GP-20007/trapper-grave-final-noon.json
+?? review/GP-20007/trapper-grave-final-noon.png
+?? review/GP-20007/trapper-grave-final-reverse-noon.json
+?? review/GP-20007/trapper-grave-final-reverse-noon.png
+?? review/GP-20010/
+?? review/GP-20011/
+?? tools/tests/t323.js
+?? tools/tests/t324.js

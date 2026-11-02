@@ -64,6 +64,72 @@ export function ringWaterGaps(radius, width, isWater) {
   return gaps;
 }
 
+function polylineLengths(pts) {
+  const lens = [0];
+  for (let i = 1; i < pts.length; i++)
+    lens.push(lens[i - 1] + Math.hypot(pts[i].x - pts[i - 1].x, pts[i].z - pts[i - 1].z));
+  return lens;
+}
+
+function pointOnPolyline(pts, lens, at) {
+  let i = 1;
+  while (i < lens.length - 1 && lens[i] < at) i++;
+  const d = lens[i] - lens[i - 1], t = d > 0 ? (at - lens[i - 1]) / d : 0;
+  const a = pts[i - 1], b = pts[i];
+  return { x: a.x + (b.x - a.x) * t, z: a.z + (b.z - a.z) * t,
+    nx: d > 0 ? -(b.z - a.z) / d : 1, nz: d > 0 ? (b.x - a.x) / d : 0 };
+}
+
+// A quarter band follows authored bends. A trail only cuts it where its real
+// corridor approaches the polyline, preserving a diagonal crossing's full width.
+export function bandTrailGaps(pts, paths, width = 5) {
+  if (pts.length < 2) return [];
+  const lens = polylineLengths(pts), length = lens.at(-1);
+  return paths.flatMap((path, i) => {
+    if (!path || path.length < 2) return [];
+    const halfWidth = (path.hw ?? 0.85) + 1;
+    const limit = width * 0.5 + halfWidth;
+    for (let at = 0; at <= length; at += 1) {
+      const p = pointOnPolyline(pts, lens, Math.min(at, length));
+      if (distanceToTrailSq(p.x, p.z, path, limit) < limit * limit)
+        return [{ id: `trail-${i}`, kind: 'trail', pts: path, halfWidth }];
+    }
+    return [];
+  });
+}
+
+// Omit wet ground across the whole 5 m strip. A bridge still gets its normal
+// trail cut; this water cut never invents another bridge or blocks the river.
+export function bandWaterGaps(pts, width, isWater) {
+  if (pts.length < 2) return [];
+  const lens = polylineLengths(pts), length = lens.at(-1), step = 0.5;
+  if (length <= 0) return [];
+  const n = Math.ceil(length / step), wet = [];
+  for (let i = 0; i <= n; i++) {
+    const p = pointOnPolyline(pts, lens, Math.min(length, i * length / n));
+    const h = width * 0.5;
+    wet.push(isWater(p.x, p.z) || isWater(p.x + p.nx * h, p.z + p.nz * h) ||
+      isWater(p.x - p.nx * h, p.z - p.nz * h));
+  }
+  const gaps = [];
+  for (let i = 0; i <= n; i++) {
+    if (!wet[i] || wet[i - 1]) continue;
+    let end = i;
+    while (end + 1 <= n && wet[end + 1]) end++;
+    const a = i * length / n, b = end * length / n;
+    gaps.push({ id: `water-${gaps.length}`, kind: 'river', at: (a + b) * 0.5,
+      width: b - a + width + 1 });
+  }
+  return gaps;
+}
+
+// `clearWidth` is the opening for a marine's centre. Widen the missing solid
+// centres by the circle radius plus body radius so the actual passage is 4 m.
+export function bandWalkGap(id, at, clearWidth = 4, bandWidth = 5, bodyR = 0.35) {
+  return { id, kind: 'walk', at, clearWidth,
+    width: clearWidth + bandWidth + bodyR * 2 };
+}
+
 export function makeWallBand({ pts, width = 4, gaps = [], spacing = 0.8, heightAt = () => 0, top = 2.5 }) {
   const lens = [0];
   const bounds = { x0: Infinity, z0: Infinity, x1: -Infinity, z1: -Infinity };
@@ -73,13 +139,14 @@ export function makeWallBand({ pts, width = 4, gaps = [], spacing = 0.8, heightA
   }
   for (let i = 1; i < pts.length; i++) lens.push(lens[i - 1] + Math.hypot(pts[i].x - pts[i - 1].x, pts[i].z - pts[i - 1].z));
   const length = lens[lens.length - 1];
+  const closed = pts.length > 2 && Math.hypot(pts[0].x - pts.at(-1).x, pts[0].z - pts.at(-1).z) < 1e-3;
   const solidRadius = width * 0.5;
   const isGap = (x, z, at, clearance = 0) => gaps.some((g) => {
     if (g.pts) {
       const limit = g.halfWidth + clearance;
       return distanceToTrailSq(x, z, g.pts, limit) < limit * limit;
     }
-    const d = Math.abs(normalizeArc(at - g.at + length * 0.5, length) - length * 0.5);
+    const d = closed ? Math.abs(normalizeArc(at - g.at + length * 0.5, length) - length * 0.5) : Math.abs(at - g.at);
     return d < g.width * 0.5;
   });
   const solids = [];
@@ -98,7 +165,7 @@ export function makeWallBand({ pts, width = 4, gaps = [], spacing = 0.8, heightA
     const nz = d > 0 ? (pts[i].x - pts[i - 1].x) / d : 0;
     solids.push({ x, z, nx, nz, radius: solidRadius, y0: y - 0.25, y1: y + top, at });
   }
-  return { pts, width, gaps, length, lens, bounds, solids, isGap };
+  return { pts, width, gaps, length, lens, bounds, solids, isGap, closed };
 }
 
 // Movement uses a single nearest-line push. Iterating all overlapping circle
@@ -133,8 +200,8 @@ export function resolveWallBand(band, x, z, bodyR = 0.35) {
   if (best >= minD * minD) return { x, z };
   const walkable = band.gaps.some((g) => {
     if (g.pts) return distanceToTrailSq(x, z, g.pts, g.halfWidth) < g.halfWidth ** 2;
-    const d = Math.abs(normalizeArc(at - g.at + band.length * 0.5, band.length) - band.length * 0.5);
-    return d < Math.max(0, g.width * 0.5 - minD);
+    const d = band.closed ? Math.abs(normalizeArc(at - g.at + band.length * 0.5, band.length) - band.length * 0.5) : Math.abs(at - g.at);
+    return d < (g.clearWidth != null ? g.clearWidth * 0.5 : Math.max(0, g.width * 0.5 - minD));
   });
   if (walkable) return { x, z };
   const d = Math.sqrt(best);

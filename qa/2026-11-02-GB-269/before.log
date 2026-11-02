@@ -1,0 +1,18 @@
+Game-test request 6d06d442-f01e-42dd-849b-4fc6d11b46a6 queued at position 2. Waiting...
+GRANT grokbot GB-269: starting one game-test command
+check-players: 314 player.position reads, all in the allowed places
+           INFO m4: 4348 points, sum 154140 666168 9556057, 16 meshes
+           INFO ak: 3002 points, sum 78270 -1104150 5626052, 15 meshes
+           INFO uzi: 3556 points, sum -25480 260820 3783912, 13 meshes
+FAIL  tgb269   3 pass   5 fail  38.9s
+
+1 checks: 3 pass, 5 fail
+
+by owner:
+  unassigned
+    tgb269 5 fail  FAIL m4: gun.userData.fpStock is a direct child named fp-stock
+           FAIL m4: gun.userData.fpStock is a direct child named fp-stock
+           FAIL m4: gun.userData.work is a direct child
+           FAIL ak: gun.userData.fpStock is a direct child named fp-stock
+           FAIL ak: gun.userData.work is a direct child
+           FAIL uzi: gun.userData.work is a direct child

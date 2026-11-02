@@ -1,0 +1,8 @@
+Game-test request 69e6ea43-9562-44eb-b400-5539e44441e5 queued at position 3. Waiting...
+GRANT cursor CU-220: starting one game-test command
+ok    t325     25 pass   0 fail  49.7s  (real renderer)
+ok    t168     39 pass   0 fail  52.4s  (real renderer)
+ok    t170     20 pass   0 fail  75.9s  (real renderer)
+ok    t215      4 pass   0 fail  32.1s  (real renderer)
+ok    t95       9 pass   0 fail  31.7s  (real renderer)
+5 checks: 97 pass, 0 fail (real renderer)

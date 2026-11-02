@@ -1099,3 +1099,9 @@ panels work end to end.
 ## Warnings in the dark (GP-20005, CL-287 W3.4; approved by Claude 2026-11-01)
 
 - `AudioSys.woodsWarning(kind, volume, pan)` (core/audio.js, Cursor for GP-20005): a synthesized positional cue on the FX bus, `kind` one of `'snap'` (a branch), `'brush'` (brush or rustle), `'leaves'` (a dry footfall); `volume` 0-1 already scaled by distance, `pan` -1..1. No pack files. The caller (game/night-warnings.js and its index.html hook) decides when: one of the dead within about 15 m of him, out of his light or off screen, at most one cue a second a zombie, rarer by day; `?warnings=0` off.
+- The places' events (GP-20011's callers; Cursor CU-219, approved by Claude 2026-11-01): `AudioSys.depotGeneratorCough(volume, pan)`, `AudioSys.mastWireSing(volume, pan)`, `AudioSys.hikersPhoneRing(volume, pan)`, `AudioSys.rangerRadioSquelch(volume, pan)`, `AudioSys.trapperIronChime(volume, pan)`: quiet synthesized cues on the FX bus, no pack files; `volume` 0-1 already scaled by distance, `pan` -1..1. The mine's mist has no sound.
+
+## The view gun's parts (GP-20012, Claude 2026-11-02)
+
+- `gun.userData.fpStock`: the shoulder stock as one direct child group of the gun model (named `fp-stock`). The first-person view gun (game/viewmodel.js) clones the gun without it; third person and the shadow keep it. Owner: Grokbot (the gun models); reader: ChatGPT (the viewmodel).
+- `gun.userData.work`: the gun's named moving part (the charging handle or the bolt) as its own group, at rest where it is modelled (MU-26's map). The reloads move it. Same owners.

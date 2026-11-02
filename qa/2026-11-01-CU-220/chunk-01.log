@@ -1,0 +1,39 @@
+GRANT cursor CU-220: starting one game-test command
+check-players: 314 player.position reads, all in the allowed places
+ok    t15     10 pass   0 fail  101.9s
+info  t16      0 pass   0 fail  71.5s  — 692
+ok    t17     10 pass   0 fail  61.5s
+ok    t18      7 pass   0 fail  39.4s
+ok    t19      6 pass   0 fail  75.3s
+info  t20      0 pass   0 fail  69.1s  — 51,-15 edge0 L0 yaw 0.00 rx 0.00 rz 0.00 ch 1
+ok    t21     16 pass   0 fail  93.2s
+info  t22      0 pass   0 fail  76.2s  — builds box 90,144 / -54,2 barrels before 6 after 12
+ok    t23      8 pass   0 fail  107.3s
+ok    t24     14 pass   0 fail  64.9s
+ok    t25     29 pass   0 fail  60.1s
+info  t26      0 pass   0 fail  73.4s  — pieces 692 failed: 
+info  t27      0 pass   0 fail  78.5s  — EMPTY WORLD visible meshes: 1854
+info  t28      0 pass   0 fail  36.1s  — shambler total 14: hips:1m/1mat torso:1m/1mat armL:1m/1mat Group:1m/1mat armR:1m/1mat Grou
+ok    t29     12 pass   0 fail  43.6s
+info  t30      0 pass   0 fail  39.3s  — turret at 46.0,-24.0 y -7.20
+ok    t31     26 pass   0 fail  38.8s
+info  t32      0 pass   0 fail  70.4s  — road pieces: wall/door@-38.0 wall/door@-24.0 wire/gate@-20.0 barricade/gate@-18.0
+ok    t33      4 pass   0 fail  40.4s
+ok    t34     20 pass   0 fail  58.6s
+ok    t35     28 pass   0 fail  66.8s
+ok    t36     22 pass   0 fail  66.0s
+ok    t37     17 pass   0 fail  159.5s
+ok    t38     12 pass   0 fail  78.0s
+ok    t39     15 pass   0 fail  48.9s
+
+25 checks: 256 pass, 0 fail, 8 reported no assertions
+
+no assertions (probe, or the check bailed before asserting):
+  t16    692
+  t20    51,-15 edge0 L0 yaw 0.00 rx 0.00 rz 0.00 ch 1
+  t22    builds box 90,144 / -54,2 barrels before 6 after 12
+  t26    pieces 692 failed: 
+  t27    EMPTY WORLD visible meshes: 1854
+  t28    shambler total 14: hips:1m/1mat torso:1m/1mat armL:1m/1mat Group:1m/1mat armR:1m/1mat Group:1m/1mat 
+  t30    turret at 46.0,-24.0 y -7.20
+  t32    road pieces: wall/door@-38.0 wall/door@-24.0 wire/gate@-20.0 barricade/gate@-18.0

@@ -1,0 +1,387 @@
+{
+  "timestamp": "2026-11-01T15:17:13.428Z",
+  "target": "GP-20010 HQ sky haze (CL-287 W3.4 / D-106)",
+  "telemetry": {
+    "sprite": {
+      "found": true,
+      "dbg": {
+        "on": true,
+        "visible": false,
+        "opacity": 0,
+        "powered": true,
+        "flood": 0
+      },
+      "name": "skyline-hq-haze",
+      "type": "Sprite",
+      "pos": {
+        "x": 0,
+        "y": 18.83,
+        "z": 0
+      },
+      "hqPos": {
+        "x": 0,
+        "y": -3.17,
+        "z": 0
+      },
+      "heightAboveHQ": 22,
+      "scale": {
+        "x": 40,
+        "y": 27,
+        "z": 1
+      },
+      "blending": 2,
+      "color": "#ffdfb3",
+      "transparent": true,
+      "fog": false,
+      "depthTest": true,
+      "depthWrite": false,
+      "noCull": true
+    }
+  },
+  "distanceFadeCurve": [
+    {
+      "distanceMeters": 0,
+      "visible": false,
+      "opacity": 0,
+      "spriteOpacity": 0,
+      "flood": 2.4
+    },
+    {
+      "distanceMeters": 15,
+      "visible": false,
+      "opacity": 0,
+      "spriteOpacity": 0,
+      "flood": 2.4
+    },
+    {
+      "distanceMeters": 24,
+      "visible": false,
+      "opacity": 0,
+      "spriteOpacity": 0,
+      "flood": 2.4
+    },
+    {
+      "distanceMeters": 35,
+      "visible": true,
+      "opacity": 0.0357,
+      "spriteOpacity": 0.0357,
+      "flood": 2.4
+    },
+    {
+      "distanceMeters": 50,
+      "visible": true,
+      "opacity": 0.1298,
+      "spriteOpacity": 0.1298,
+      "flood": 2.4
+    },
+    {
+      "distanceMeters": 60,
+      "visible": true,
+      "opacity": 0.16,
+      "spriteOpacity": 0.16,
+      "flood": 2.4
+    },
+    {
+      "distanceMeters": 88,
+      "visible": true,
+      "opacity": 0.16,
+      "spriteOpacity": 0.16,
+      "flood": 2.4
+    },
+    {
+      "distanceMeters": 100,
+      "visible": true,
+      "opacity": 0.16,
+      "spriteOpacity": 0.16,
+      "flood": 2.4
+    },
+    {
+      "distanceMeters": 120,
+      "visible": true,
+      "opacity": 0.16,
+      "spriteOpacity": 0.16,
+      "flood": 2.4
+    },
+    {
+      "distanceMeters": 150,
+      "visible": true,
+      "opacity": 0.16,
+      "spriteOpacity": 0.16,
+      "flood": 2.4
+    },
+    {
+      "distanceMeters": 180,
+      "visible": true,
+      "opacity": 0.135,
+      "spriteOpacity": 0.135,
+      "flood": 2.4
+    },
+    {
+      "distanceMeters": 200,
+      "visible": true,
+      "opacity": 0.092,
+      "spriteOpacity": 0.092,
+      "flood": 2.4
+    },
+    {
+      "distanceMeters": 255,
+      "visible": false,
+      "opacity": 0,
+      "spriteOpacity": 0,
+      "flood": 2.4
+    },
+    {
+      "distanceMeters": 300,
+      "visible": false,
+      "opacity": 0,
+      "spriteOpacity": 0,
+      "flood": 2.4
+    }
+  ],
+  "lightingModels": {
+    "dusk": {
+      "time": 0.74,
+      "on": true,
+      "visible": true,
+      "opacity": 0.16,
+      "powered": true,
+      "flood": 2.4
+    },
+    "night": {
+      "time": 0.02,
+      "on": true,
+      "visible": true,
+      "opacity": 0.16,
+      "powered": true,
+      "flood": 2.4
+    },
+    "noon": {
+      "time": 0.5,
+      "on": true,
+      "visible": false,
+      "opacity": 0,
+      "powered": true,
+      "flood": 0
+    },
+    "overcast": {
+      "time": 0.5,
+      "overcast": 1,
+      "on": true,
+      "visible": false,
+      "opacity": 0,
+      "powered": true,
+      "flood": 0
+    }
+  },
+  "powerStateTests": {
+    "powerOn": {
+      "on": true,
+      "visible": true,
+      "opacity": 0.16,
+      "powered": true,
+      "flood": 2.4
+    },
+    "powerOff": {
+      "on": true,
+      "visible": false,
+      "opacity": 0,
+      "powered": true,
+      "flood": 0
+    }
+  },
+  "drawCalls": {
+    "callsWithGlow": 3081,
+    "callsWithoutGlow": 3082,
+    "spriteNetDrawCalls": -1,
+    "triangles": 1316391
+  },
+  "coachTruthEvaluation": {
+    "coachTrail": "Follow the trail",
+    "coachBody": "The worn ground leads to the HQ. Its light is at the end.",
+    "landingPt": {
+      "x": 42,
+      "z": -20
+    },
+    "distToHQ": 46.5,
+    "bearingDeg": 295.5,
+    "truthful": true
+  },
+  "rule19Scores": {
+    "geometry": 5,
+    "silhouette": 4.8,
+    "materials": 4.8,
+    "context": 5,
+    "overall": 4.9
+  },
+  "captures": [
+    {
+      "name": "1-dusk-woods-south-88m",
+      "file": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-188\\1-dusk-woods-south-88m.png",
+      "shotData": {
+        "px": 65,
+        "py": 5,
+        "pz": -60,
+        "tx": 0,
+        "ty": 18,
+        "tz": 0,
+        "fov": 60,
+        "time": 0.74,
+        "dbg": {
+          "on": true,
+          "visible": true,
+          "opacity": 0.16,
+          "powered": true,
+          "flood": 2.4
+        }
+      }
+    },
+    {
+      "name": "2-night-woods-west-90m",
+      "file": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-188\\2-night-woods-west-90m.png",
+      "shotData": {
+        "px": -90,
+        "py": 2,
+        "pz": 0,
+        "tx": 0,
+        "ty": 18,
+        "tz": 0,
+        "fov": 60,
+        "time": 0.02,
+        "dbg": {
+          "on": true,
+          "visible": true,
+          "opacity": 0.16,
+          "powered": true,
+          "flood": 2.4
+        }
+      }
+    },
+    {
+      "name": "3-dusk-trail-approach-60m",
+      "file": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-188\\3-dusk-trail-approach-60m.png",
+      "shotData": {
+        "px": 52,
+        "py": 3.2,
+        "pz": -28,
+        "tx": 0,
+        "ty": 16,
+        "tz": 0,
+        "fov": 55,
+        "time": 0.74,
+        "dbg": {
+          "on": true,
+          "visible": true,
+          "opacity": 0.16,
+          "powered": true,
+          "flood": 2.4
+        }
+      }
+    },
+    {
+      "name": "4-night-woods-far-150m",
+      "file": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-188\\4-night-woods-far-150m.png",
+      "shotData": {
+        "px": -150,
+        "py": 2.5,
+        "pz": 0,
+        "tx": 0,
+        "ty": 19,
+        "tz": 0,
+        "fov": 60,
+        "time": 0.02,
+        "dbg": {
+          "on": true,
+          "visible": true,
+          "opacity": 0.16,
+          "powered": true,
+          "flood": 2.4
+        }
+      }
+    },
+    {
+      "name": "5-noon-woods-west-90m",
+      "file": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-188\\5-noon-woods-west-90m.png",
+      "shotData": {
+        "px": -90,
+        "py": 2,
+        "pz": 0,
+        "tx": 0,
+        "ty": 18,
+        "tz": 0,
+        "fov": 60,
+        "time": 0.5,
+        "dbg": {
+          "on": true,
+          "visible": false,
+          "opacity": 0,
+          "powered": true,
+          "flood": 0
+        }
+      }
+    },
+    {
+      "name": "6-overcast-woods-south-88m",
+      "file": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-188\\6-overcast-woods-south-88m.png",
+      "shotData": {
+        "px": 65,
+        "py": 5,
+        "pz": -60,
+        "tx": 0,
+        "ty": 18,
+        "tz": 0,
+        "fov": 60,
+        "time": 0.5,
+        "dbg": {
+          "on": true,
+          "visible": false,
+          "opacity": 0,
+          "powered": true,
+          "flood": 0
+        }
+      }
+    },
+    {
+      "name": "7-dusk-blackout-unpowered-88m",
+      "file": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-188\\7-dusk-blackout-unpowered-88m.png",
+      "shotData": {
+        "px": 65,
+        "py": 5,
+        "pz": -60,
+        "tx": 0,
+        "ty": 18,
+        "tz": 0,
+        "fov": 60,
+        "time": 0.74,
+        "dbg": {
+          "on": true,
+          "visible": true,
+          "opacity": 0.16,
+          "powered": true,
+          "flood": 2.4
+        }
+      }
+    },
+    {
+      "name": "8-night-trail-clearing-35m",
+      "file": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-188\\8-night-trail-clearing-35m.png",
+      "shotData": {
+        "px": 30,
+        "py": 2.4,
+        "pz": -18,
+        "tx": 0,
+        "ty": 14,
+        "tz": 0,
+        "fov": 55,
+        "time": 0.02,
+        "dbg": {
+          "on": true,
+          "visible": true,
+          "opacity": 0.05793833502158014,
+          "powered": true,
+          "flood": 2.4
+        }
+      }
+    }
+  ],
+  "verdict": "PASS"
+}

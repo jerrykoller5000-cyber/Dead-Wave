@@ -1,0 +1,36 @@
+Game-test request 088105a8-b74c-47f9-afde-ede58e9e0d61 queued at position 3. Waiting...
+GRANT cursor CU-220: starting one game-test command
+check-players: 314 player.position reads, all in the allowed places
+FAIL  t302    16 pass   1 fail  43.4s
+ok    t303    13 pass   0 fail  57.3s
+ok    t304     8 pass   0 fail  42.1s
+ok    t305     9 pass   0 fail  42.7s
+ok    t306    11 pass   0 fail  40.8s
+ok    t307     6 pass   0 fail  40.7s
+ok    t308    38 pass   0 fail  43.6s
+ok    t309     6 pass   0 fail  38.4s
+ok    t310     5 pass   0 fail  28.1s
+ok    t311     7 pass   0 fail  37.7s
+ok    t312     8 pass   0 fail  37.5s
+ok    t313    19 pass   0 fail  37.0s
+ok    t314    24 pass   0 fail  41.0s
+ok    t315    19 pass   0 fail  37.4s
+ok    t316     8 pass   0 fail  39.6s
+ok    t317    22 pass   0 fail  40.4s
+ok    t318     7 pass   0 fail  25.8s
+ok    t319     5 pass   0 fail  24.7s
+FAIL  t320    19 pass   2 fail  163.2s
+ok    t321     7 pass   0 fail  25.9s
+ok    t322    20 pass   0 fail  91.0s
+ok    t323     5 pass   0 fail  24.7s
+ok    t324     2 pass   0 fail  25.4s
+
+23 checks: 284 pass, 3 fail
+
+by owner:
+  unassigned
+    t302   1 fail  FAIL the ground in the rock is his last floor (-394.00, floor -400.00), not the valley 400 m up
+           FAIL the ground in the rock is his last floor (-394.00, floor -400.00), not the valley 400 m up
+    t320   2 fail  FAIL between 250° inside through a gap in 31s (r 62, stuck 0.0s, clip false)
+           FAIL between 250° inside through a gap in 31s (r 62, stuck 0.0s, clip false)
+           FAIL between 368° inside through a gap in 31s (r 59, stuck 0.0s, clip false)

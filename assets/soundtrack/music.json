@@ -211,7 +211,49 @@
     "elevenlabs/night-17": 1.316,
     "elevenlabs/night-18": 1.346,
     "elevenlabs/night-19": 1.214,
-    "elevenlabs/night-20": 1.362
+    "elevenlabs/night-20": 1.362,
+    "gh/night-01": 2.339,
+    "gh/night-02": 2.34,
+    "gh/night-03": 2.339,
+    "gh/night-04": 2.339,
+    "gh/night-05": 2.34,
+    "gh/night-06": 2.34,
+    "gh/night-07": 2.34,
+    "gh/night-08": 2.339,
+    "gh/night-09": 2.34,
+    "gh/night-10": 2.34,
+    "gh/night-11": 2.339,
+    "gh/night-12": 2.34,
+    "gh/night-13": 2.34,
+    "gh/night-14": 2.34,
+    "gh/night-15": 2.34,
+    "gh/night-16": 2.34,
+    "gh/night-17": 2.34,
+    "gh/night-18": 2.339,
+    "gh/night-19": 2.34,
+    "gh/night-20": 2.34,
+    "gh/guardian": 2.34,
+    "gh/redsky": 2.34,
+    "gh/colossus": 2.34,
+    "gh/heart": 2.34,
+    "gh/wanderer": 2.34,
+    "gh/motif-shambler": 2.34,
+    "gh/motif-feral": 2.34,
+    "gh/motif-brute": 2.34,
+    "gh/motif-colossus": 2.34,
+    "gh/motif-spitter": 2.34,
+    "gh/motif-spider": 2.34,
+    "gh/motif-leaper": 2.34,
+    "gh/motif-screamer": 2.34,
+    "gh/motif-bomber": 2.34,
+    "gh/motif-drowned": 2.34,
+    "gh/motif-demon": 2.34,
+    "gh/motif-guardians": 2.34,
+    "gh/gh-place-menu": 0.966,
+    "gh/gh-place-hq": 0.912,
+    "gh/gh-place-dusk": 0.832,
+    "gh/gh-place-dawn": 0.832,
+    "gh/gh-place-fallen": 0.822
   },
   "dayFight": {
     "tracks": [
@@ -1577,6 +1619,1039 @@
           ]
         ]
       }
+    }
+  },
+  "score": {
+    "about": "CL-275 (D-97): the 1.2 score from F:\\Music. Each night a suite of Hellshot kits, three layers each (gh/*.ogg, git-ignored: made on Jerry's PC by tools/music-make.py). Opt-in until it covers every moment: ?score=1 or localStorage tt_score=1. A night's gain matches the loudness of the song it replaces; fallback is that song (played when the gh files are not on this machine).",
+    "layered": {
+      "gh/night-01": {
+        "fallback": "elevenlabs/night-01",
+        "kits": [
+          {
+            "name": "scarecrow",
+            "bpm": 105,
+            "barS": 2.285714,
+            "loopS": 36.571438,
+            "files": {
+              "drums": "gh/gh-hs3-scarecrow-drums.ogg",
+              "rhythm": "gh/gh-hs3-scarecrow-rhythm.ogg",
+              "lead": "gh/gh-hs3-scarecrow-lead.ogg"
+            }
+          },
+          {
+            "name": "revenge",
+            "bpm": 100,
+            "barS": 2.4,
+            "loopS": 38.4,
+            "files": {
+              "drums": "gh/gh-hs3-revenge-drums.ogg",
+              "rhythm": "gh/gh-hs3-revenge-rhythm.ogg",
+              "lead": "gh/gh-hs3-revenge-lead.ogg"
+            }
+          },
+          {
+            "name": "basilisk",
+            "bpm": 100,
+            "barS": 2.4,
+            "loopS": 38.4,
+            "files": {
+              "drums": "gh/gh-hs-basilisk-drums.ogg",
+              "rhythm": "gh/gh-hs-basilisk-rhythm.ogg",
+              "lead": "gh/gh-hs-basilisk-lead.ogg"
+            }
+          }
+        ]
+      },
+      "gh/night-02": {
+        "fallback": "elevenlabs/night-02",
+        "kits": [
+          {
+            "name": "surge",
+            "bpm": 110,
+            "barS": 2.181818,
+            "loopS": 34.909083,
+            "files": {
+              "drums": "gh/gh-hs2-surge-drums.ogg",
+              "rhythm": "gh/gh-hs2-surge-rhythm.ogg",
+              "lead": "gh/gh-hs2-surge-lead.ogg"
+            }
+          },
+          {
+            "name": "viper",
+            "bpm": 110,
+            "barS": 2.181818,
+            "loopS": 34.909083,
+            "files": {
+              "drums": "gh/gh-hs3-viper-drums.ogg",
+              "rhythm": "gh/gh-hs3-viper-rhythm.ogg",
+              "lead": "gh/gh-hs3-viper-lead.ogg"
+            }
+          },
+          {
+            "name": "phobia",
+            "bpm": 105,
+            "barS": 2.285714,
+            "loopS": 36.571438,
+            "files": {
+              "drums": "gh/gh-hs3-phobia-drums.ogg",
+              "rhythm": "gh/gh-hs3-phobia-rhythm.ogg",
+              "lead": "gh/gh-hs3-phobia-lead.ogg"
+            }
+          }
+        ]
+      },
+      "gh/night-03": {
+        "fallback": "elevenlabs/night-03",
+        "kits": [
+          {
+            "name": "tyrant",
+            "bpm": 100,
+            "barS": 2.4,
+            "loopS": 38.4,
+            "files": {
+              "drums": "gh/gh-hs3-tyrant-drums.ogg",
+              "rhythm": "gh/gh-hs3-tyrant-rhythm.ogg",
+              "lead": "gh/gh-hs3-tyrant-lead.ogg"
+            }
+          },
+          {
+            "name": "realm",
+            "bpm": 105,
+            "barS": 2.285714,
+            "loopS": 36.571438,
+            "files": {
+              "drums": "gh/gh-hs3-realm-drums.ogg",
+              "rhythm": "gh/gh-hs3-realm-rhythm.ogg",
+              "lead": "gh/gh-hs3-realm-lead.ogg"
+            }
+          },
+          {
+            "name": "cleanse",
+            "bpm": 115,
+            "barS": 2.086957,
+            "loopS": 33.391312,
+            "files": {
+              "drums": "gh/gh-hs3-cleanse-drums.ogg",
+              "rhythm": "gh/gh-hs3-cleanse-rhythm.ogg",
+              "lead": "gh/gh-hs3-cleanse-lead.ogg"
+            }
+          }
+        ]
+      },
+      "gh/night-04": {
+        "fallback": "elevenlabs/night-04",
+        "kits": [
+          {
+            "name": "trauma",
+            "bpm": 110,
+            "barS": 2.181818,
+            "loopS": 34.909083,
+            "files": {
+              "drums": "gh/gh-hs2-trauma-drums.ogg",
+              "rhythm": "gh/gh-hs2-trauma-rhythm.ogg",
+              "lead": "gh/gh-hs2-trauma-lead.ogg"
+            }
+          },
+          {
+            "name": "gloom",
+            "bpm": 110,
+            "barS": 2.181818,
+            "loopS": 34.909083,
+            "files": {
+              "drums": "gh/gh-hs3-gloom-drums.ogg",
+              "rhythm": "gh/gh-hs3-gloom-rhythm.ogg",
+              "lead": "gh/gh-hs3-gloom-lead.ogg"
+            }
+          },
+          {
+            "name": "sin",
+            "bpm": 110,
+            "barS": 2.181818,
+            "loopS": 34.909083,
+            "files": {
+              "drums": "gh/gh-hs3-sin-drums.ogg",
+              "rhythm": "gh/gh-hs3-sin-rhythm.ogg",
+              "lead": "gh/gh-hs3-sin-lead.ogg"
+            }
+          }
+        ]
+      },
+      "gh/night-05": {
+        "fallback": "elevenlabs/night-05",
+        "kits": [
+          {
+            "name": "deadweight",
+            "bpm": 110,
+            "barS": 2.181818,
+            "loopS": 34.909083,
+            "files": {
+              "drums": "gh/gh-hs2-deadweight-drums.ogg",
+              "rhythm": "gh/gh-hs2-deadweight-rhythm.ogg",
+              "lead": "gh/gh-hs2-deadweight-lead.ogg"
+            }
+          },
+          {
+            "name": "mental",
+            "bpm": 100,
+            "barS": 2.4,
+            "loopS": 38.4,
+            "files": {
+              "drums": "gh/gh-hs3-mental-drums.ogg",
+              "rhythm": "gh/gh-hs3-mental-rhythm.ogg",
+              "lead": "gh/gh-hs3-mental-lead.ogg"
+            }
+          }
+        ]
+      },
+      "gh/night-06": {
+        "fallback": "elevenlabs/night-06",
+        "kits": [
+          {
+            "name": "decay",
+            "bpm": 130,
+            "barS": 1.846154,
+            "loopS": 29.538458,
+            "files": {
+              "drums": "gh/gh-hs2-decay-drums.ogg",
+              "rhythm": "gh/gh-hs2-decay-rhythm.ogg",
+              "lead": "gh/gh-hs2-decay-lead.ogg"
+            }
+          },
+          {
+            "name": "flux",
+            "bpm": 130,
+            "barS": 1.846154,
+            "loopS": 29.538458,
+            "files": {
+              "drums": "gh/gh-hs2-flux-drums.ogg",
+              "rhythm": "gh/gh-hs2-flux-rhythm.ogg",
+              "lead": "gh/gh-hs2-flux-lead.ogg"
+            }
+          }
+        ]
+      },
+      "gh/night-07": {
+        "fallback": "elevenlabs/night-07",
+        "kits": [
+          {
+            "name": "grave",
+            "bpm": 130,
+            "barS": 1.846154,
+            "loopS": 29.538458,
+            "files": {
+              "drums": "gh/gh-hs-grave-drums.ogg",
+              "rhythm": "gh/gh-hs-grave-rhythm.ogg",
+              "lead": "gh/gh-hs-grave-lead.ogg"
+            }
+          },
+          {
+            "name": "deathmark",
+            "bpm": 130,
+            "barS": 1.846154,
+            "loopS": 29.538458,
+            "files": {
+              "drums": "gh/gh-hs-deathmark-drums.ogg",
+              "rhythm": "gh/gh-hs-deathmark-rhythm.ogg",
+              "lead": "gh/gh-hs-deathmark-lead.ogg"
+            }
+          }
+        ]
+      },
+      "gh/night-08": {
+        "fallback": "elevenlabs/night-08",
+        "kits": [
+          {
+            "name": "ironclad",
+            "bpm": 130,
+            "barS": 1.846154,
+            "loopS": 29.538458,
+            "files": {
+              "drums": "gh/gh-hs2-ironclad-drums.ogg",
+              "rhythm": "gh/gh-hs2-ironclad-rhythm.ogg",
+              "lead": "gh/gh-hs2-ironclad-lead.ogg"
+            }
+          },
+          {
+            "name": "babylon",
+            "bpm": 140,
+            "barS": 1.714286,
+            "loopS": 27.428563,
+            "files": {
+              "drums": "gh/gh-hs3-babylon-drums.ogg",
+              "rhythm": "gh/gh-hs3-babylon-rhythm.ogg",
+              "lead": "gh/gh-hs3-babylon-lead.ogg"
+            }
+          }
+        ]
+      },
+      "gh/night-09": {
+        "fallback": "elevenlabs/night-09",
+        "kits": [
+          {
+            "name": "despair",
+            "bpm": 130,
+            "barS": 1.846154,
+            "loopS": 29.538458,
+            "files": {
+              "drums": "gh/gh-hs3-despair-drums.ogg",
+              "rhythm": "gh/gh-hs3-despair-rhythm.ogg",
+              "lead": "gh/gh-hs3-despair-lead.ogg"
+            }
+          },
+          {
+            "name": "consume",
+            "bpm": 155,
+            "barS": 1.548387,
+            "loopS": 24.774188,
+            "files": {
+              "drums": "gh/gh-hs3-consume-drums.ogg",
+              "rhythm": "gh/gh-hs3-consume-rhythm.ogg",
+              "lead": "gh/gh-hs3-consume-lead.ogg"
+            }
+          }
+        ]
+      },
+      "gh/night-10": {
+        "fallback": "elevenlabs/night-10",
+        "kits": [
+          {
+            "name": "disruptor",
+            "bpm": 140,
+            "barS": 1.714286,
+            "loopS": 27.428563,
+            "files": {
+              "drums": "gh/gh-hs2-disruptor-drums.ogg",
+              "rhythm": "gh/gh-hs2-disruptor-rhythm.ogg",
+              "lead": "gh/gh-hs2-disruptor-lead.ogg"
+            }
+          },
+          {
+            "name": "binary",
+            "bpm": 150,
+            "barS": 1.6,
+            "loopS": 25.6,
+            "files": {
+              "drums": "gh/gh-hs2-binary-drums.ogg",
+              "rhythm": "gh/gh-hs2-binary-rhythm.ogg",
+              "lead": "gh/gh-hs2-binary-lead.ogg"
+            }
+          }
+        ]
+      },
+      "gh/night-11": {
+        "fallback": "elevenlabs/night-11",
+        "kits": [
+          {
+            "name": "hellmouth",
+            "bpm": 150,
+            "barS": 1.6,
+            "loopS": 25.6,
+            "files": {
+              "drums": "gh/gh-hs2-hellmouth-drums.ogg",
+              "rhythm": "gh/gh-hs2-hellmouth-rhythm.ogg",
+              "lead": "gh/gh-hs2-hellmouth-lead.ogg"
+            }
+          },
+          {
+            "name": "voltage",
+            "bpm": 150,
+            "barS": 1.6,
+            "loopS": 25.6,
+            "files": {
+              "drums": "gh/gh-hs2-voltage-drums.ogg",
+              "rhythm": "gh/gh-hs2-voltage-rhythm.ogg",
+              "lead": "gh/gh-hs2-voltage-lead.ogg"
+            }
+          }
+        ]
+      },
+      "gh/night-12": {
+        "fallback": "elevenlabs/night-12",
+        "kits": [
+          {
+            "name": "exterminate",
+            "bpm": 150,
+            "barS": 1.6,
+            "loopS": 25.6,
+            "files": {
+              "drums": "gh/gh-hs2-exterminate-drums.ogg",
+              "rhythm": "gh/gh-hs2-exterminate-rhythm.ogg",
+              "lead": "gh/gh-hs2-exterminate-lead.ogg"
+            }
+          },
+          {
+            "name": "cursed",
+            "bpm": 150,
+            "barS": 1.6,
+            "loopS": 25.6,
+            "files": {
+              "drums": "gh/gh-hs2-cursed-drums.ogg",
+              "rhythm": "gh/gh-hs2-cursed-rhythm.ogg",
+              "lead": "gh/gh-hs2-cursed-lead.ogg"
+            }
+          }
+        ]
+      },
+      "gh/night-13": {
+        "fallback": "elevenlabs/night-13",
+        "kits": [
+          {
+            "name": "ruin",
+            "bpm": 150,
+            "barS": 1.6,
+            "loopS": 25.6,
+            "files": {
+              "drums": "gh/gh-hs-ruin-drums.ogg",
+              "rhythm": "gh/gh-hs-ruin-rhythm.ogg",
+              "lead": "gh/gh-hs-ruin-lead.ogg"
+            }
+          },
+          {
+            "name": "onslaught",
+            "bpm": 150,
+            "barS": 1.6,
+            "loopS": 25.6,
+            "files": {
+              "drums": "gh/gh-hs-onslaught-drums.ogg",
+              "rhythm": "gh/gh-hs-onslaught-rhythm.ogg",
+              "lead": "gh/gh-hs-onslaught-lead.ogg"
+            }
+          },
+          {
+            "name": "tremor",
+            "bpm": 150,
+            "barS": 1.6,
+            "loopS": 25.6,
+            "files": {
+              "drums": "gh/gh-hs2-tremor-drums.ogg",
+              "rhythm": "gh/gh-hs2-tremor-rhythm.ogg"
+            }
+          }
+        ]
+      },
+      "gh/night-14": {
+        "fallback": "elevenlabs/night-14",
+        "kits": [
+          {
+            "name": "chamber",
+            "bpm": 150,
+            "barS": 1.6,
+            "loopS": 25.6,
+            "files": {
+              "drums": "gh/gh-hs3-chamber-drums.ogg",
+              "rhythm": "gh/gh-hs3-chamber-rhythm.ogg",
+              "lead": "gh/gh-hs3-chamber-lead.ogg"
+            }
+          },
+          {
+            "name": "crypt",
+            "bpm": 150,
+            "barS": 1.6,
+            "loopS": 25.6,
+            "files": {
+              "drums": "gh/gh-hs2-crypt-drums.ogg",
+              "rhythm": "gh/gh-hs2-crypt-rhythm.ogg",
+              "lead": "gh/gh-hs2-crypt-lead.ogg"
+            }
+          }
+        ]
+      },
+      "gh/night-15": {
+        "fallback": "elevenlabs/night-15",
+        "kits": [
+          {
+            "name": "purgatory",
+            "bpm": 150,
+            "barS": 1.6,
+            "loopS": 25.6,
+            "files": {
+              "drums": "gh/gh-hs3-purgatory-drums.ogg",
+              "rhythm": "gh/gh-hs3-purgatory-rhythm.ogg",
+              "lead": "gh/gh-hs3-purgatory-lead.ogg"
+            }
+          },
+          {
+            "name": "rusted",
+            "bpm": 156,
+            "barS": 1.538462,
+            "loopS": 24.615375,
+            "files": {
+              "drums": "gh/gh-hs2-rusted-drums.ogg",
+              "rhythm": "gh/gh-hs2-rusted-rhythm.ogg",
+              "lead": "gh/gh-hs2-rusted-lead.ogg"
+            }
+          }
+        ]
+      },
+      "gh/night-16": {
+        "fallback": "elevenlabs/night-16",
+        "kits": [
+          {
+            "name": "hellforged",
+            "bpm": 170,
+            "barS": 1.411765,
+            "loopS": 22.588229,
+            "files": {
+              "drums": "gh/gh-hs-hellforged-drums.ogg",
+              "rhythm": "gh/gh-hs-hellforged-rhythm.ogg",
+              "lead": "gh/gh-hs-hellforged-lead.ogg"
+            }
+          },
+          {
+            "name": "cult",
+            "bpm": 160,
+            "barS": 1.5,
+            "loopS": 24.0,
+            "files": {
+              "drums": "gh/gh-hs3-cult-drums.ogg",
+              "rhythm": "gh/gh-hs3-cult-rhythm.ogg",
+              "lead": "gh/gh-hs3-cult-lead.ogg"
+            }
+          },
+          {
+            "name": "rampage",
+            "bpm": 170,
+            "barS": 1.411765,
+            "loopS": 22.588229,
+            "files": {
+              "drums": "gh/gh-hs-rampage-drums.ogg",
+              "rhythm": "gh/gh-hs-rampage-rhythm.ogg",
+              "lead": "gh/gh-hs-rampage-lead.ogg"
+            }
+          }
+        ]
+      },
+      "gh/night-17": {
+        "fallback": "elevenlabs/night-17",
+        "kits": [
+          {
+            "name": "nightmare",
+            "bpm": 170,
+            "barS": 1.411765,
+            "loopS": 22.588229,
+            "files": {
+              "drums": "gh/gh-hs-nightmare-drums.ogg",
+              "rhythm": "gh/gh-hs-nightmare-rhythm.ogg",
+              "lead": "gh/gh-hs-nightmare-lead.ogg"
+            }
+          },
+          {
+            "name": "vortex",
+            "bpm": 170,
+            "barS": 1.411765,
+            "loopS": 22.588229,
+            "files": {
+              "drums": "gh/gh-hs-vortex-drums.ogg",
+              "rhythm": "gh/gh-hs-vortex-rhythm.ogg",
+              "lead": "gh/gh-hs-vortex-lead.ogg"
+            }
+          },
+          {
+            "name": "hellfire",
+            "bpm": 160,
+            "barS": 1.5,
+            "loopS": 24.0,
+            "files": {
+              "drums": "gh/gh-hs-hellfire-drums.ogg",
+              "rhythm": "gh/gh-hs-hellfire-rhythm.ogg",
+              "lead": "gh/gh-hs-hellfire-lead.ogg"
+            }
+          }
+        ]
+      },
+      "gh/night-18": {
+        "fallback": "elevenlabs/night-18",
+        "kits": [
+          {
+            "name": "havoc",
+            "bpm": 160,
+            "barS": 1.5,
+            "loopS": 48.0,
+            "files": {
+              "drums": "gh/gh-hs-havoc-drums.ogg",
+              "rhythm": "gh/gh-hs-havoc-rhythm.ogg",
+              "lead": "gh/gh-hs-havoc-lead.ogg"
+            }
+          },
+          {
+            "name": "exile",
+            "bpm": 175,
+            "barS": 1.371429,
+            "loopS": 21.942854,
+            "files": {
+              "drums": "gh/gh-hs-exile-drums.ogg",
+              "rhythm": "gh/gh-hs-exile-rhythm.ogg",
+              "lead": "gh/gh-hs-exile-lead.ogg"
+            }
+          }
+        ]
+      },
+      "gh/night-19": {
+        "fallback": "elevenlabs/night-19",
+        "kits": [
+          {
+            "name": "warlord",
+            "bpm": 170,
+            "barS": 1.411765,
+            "loopS": 22.588229,
+            "files": {
+              "drums": "gh/gh-hs-warlord-drums.ogg",
+              "rhythm": "gh/gh-hs-warlord-rhythm.ogg",
+              "lead": "gh/gh-hs-warlord-lead.ogg"
+            }
+          },
+          {
+            "name": "abyss",
+            "bpm": 170,
+            "barS": 1.411765,
+            "loopS": 22.588229,
+            "files": {
+              "drums": "gh/gh-hs-abyss-drums.ogg",
+              "rhythm": "gh/gh-hs-abyss-rhythm.ogg",
+              "lead": "gh/gh-hs-abyss-lead.ogg"
+            }
+          }
+        ]
+      },
+      "gh/night-20": {
+        "fallback": "elevenlabs/night-20",
+        "kits": [
+          {
+            "name": "annihilation",
+            "bpm": 165,
+            "barS": 1.454545,
+            "loopS": 23.272729,
+            "files": {
+              "drums": "gh/gh-hs3-annihilation-drums.ogg",
+              "rhythm": "gh/gh-hs3-annihilation-rhythm.ogg",
+              "lead": "gh/gh-hs3-annihilation-lead.ogg"
+            }
+          },
+          {
+            "name": "epitah",
+            "bpm": 170,
+            "barS": 1.411765,
+            "loopS": 45.176479,
+            "files": {
+              "drums": "gh/gh-hs3-epitah-drums.ogg",
+              "rhythm": "gh/gh-hs3-epitah-rhythm.ogg",
+              "lead": "gh/gh-hs3-epitah-lead.ogg"
+            }
+          }
+        ]
+      },
+      "gh/guardian": {
+        "fallback": null,
+        "kits": [
+          {
+            "name": "hell-knight",
+            "bpm": 105,
+            "barS": 2.285714,
+            "loopS": 36.571438,
+            "files": {
+              "drums": "gh/gh-hs3-hell-knight-drums.ogg",
+              "rhythm": "gh/gh-hs3-hell-knight-rhythm.ogg",
+              "lead": "gh/gh-hs3-hell-knight-lead.ogg"
+            }
+          },
+          {
+            "name": "wraith",
+            "bpm": 170,
+            "barS": 1.411765,
+            "loopS": 22.588229,
+            "files": {
+              "drums": "gh/gh-hs-wraith-drums.ogg",
+              "rhythm": "gh/gh-hs-wraith-rhythm.ogg",
+              "lead": "gh/gh-hs-wraith-lead.ogg"
+            }
+          }
+        ]
+      },
+      "gh/redsky": {
+        "fallback": null,
+        "kits": [
+          {
+            "name": "flame",
+            "bpm": 170,
+            "barS": 1.411765,
+            "loopS": 22.588229,
+            "files": {
+              "drums": "gh/gh-hs3-flame-drums.ogg",
+              "rhythm": "gh/gh-hs3-flame-rhythm.ogg",
+              "lead": "gh/gh-hs3-flame-lead.ogg"
+            }
+          }
+        ]
+      },
+      "gh/colossus": {
+        "fallback": null,
+        "kits": [
+          {
+            "name": "titan",
+            "bpm": 130,
+            "barS": 1.846154,
+            "loopS": 29.538458,
+            "files": {
+              "drums": "gh/gh-hs2-titan-drums.ogg",
+              "rhythm": "gh/gh-hs2-titan-rhythm.ogg",
+              "lead": "gh/gh-hs2-titan-lead.ogg"
+            }
+          }
+        ]
+      },
+      "gh/heart": {
+        "fallback": null,
+        "kits": [
+          {
+            "name": "doom",
+            "bpm": 103,
+            "barS": 2.330097,
+            "loopS": 37.281562,
+            "files": {
+              "drums": "gh/gh-hs-doom-drums.ogg",
+              "rhythm": "gh/gh-hs-doom-rhythm.ogg"
+            }
+          }
+        ]
+      },
+      "gh/wanderer": {
+        "fallback": null,
+        "kits": [
+          {
+            "name": "rude",
+            "bpm": 160,
+            "barS": 1.5,
+            "loopS": 24.0,
+            "files": {
+              "drums": "gh/gh-hs3-rude-drums.ogg",
+              "rhythm": "gh/gh-hs3-rude-rhythm.ogg",
+              "lead": "gh/gh-hs3-rude-lead.ogg"
+            }
+          }
+        ]
+      },
+      "gh/motif-shambler": {
+        "fallback": null,
+        "kits": [
+          {
+            "name": "rotten",
+            "bpm": 125,
+            "barS": 1.92,
+            "loopS": 30.72,
+            "files": {
+              "drums": "gh/gh-hs2-rotten-drums.ogg",
+              "rhythm": "gh/gh-hs2-rotten-rhythm.ogg",
+              "lead": "gh/gh-hs2-rotten-lead.ogg"
+            }
+          }
+        ]
+      },
+      "gh/motif-feral": {
+        "fallback": null,
+        "kits": [
+          {
+            "name": "frenzy",
+            "bpm": 160,
+            "barS": 1.5,
+            "loopS": 24.0,
+            "files": {
+              "drums": "gh/gh-hs-frenzy-drums.ogg",
+              "rhythm": "gh/gh-hs-frenzy-rhythm.ogg",
+              "lead": "gh/gh-hs-frenzy-lead.ogg"
+            }
+          }
+        ]
+      },
+      "gh/motif-brute": {
+        "fallback": null,
+        "kits": [
+          {
+            "name": "sledgehammer",
+            "bpm": 150,
+            "barS": 1.6,
+            "loopS": 25.6,
+            "files": {
+              "drums": "gh/gh-hs2-sledgehammer-drums.ogg",
+              "rhythm": "gh/gh-hs2-sledgehammer-rhythm.ogg",
+              "lead": "gh/gh-hs2-sledgehammer-lead.ogg"
+            }
+          }
+        ]
+      },
+      "gh/motif-colossus": {
+        "fallback": null,
+        "kits": [
+          {
+            "name": "titan",
+            "bpm": 130,
+            "barS": 1.846154,
+            "loopS": 29.538458,
+            "files": {
+              "drums": "gh/gh-hs2-titan-drums.ogg",
+              "rhythm": "gh/gh-hs2-titan-rhythm.ogg",
+              "lead": "gh/gh-hs2-titan-lead.ogg"
+            }
+          }
+        ]
+      },
+      "gh/motif-spitter": {
+        "fallback": null,
+        "kits": [
+          {
+            "name": "venom",
+            "bpm": 130,
+            "barS": 1.846154,
+            "loopS": 29.538458,
+            "files": {
+              "drums": "gh/gh-hs-venom-drums.ogg",
+              "rhythm": "gh/gh-hs-venom-rhythm.ogg",
+              "lead": "gh/gh-hs-venom-lead.ogg"
+            }
+          }
+        ]
+      },
+      "gh/motif-spider": {
+        "fallback": null,
+        "kits": [
+          {
+            "name": "glitchform",
+            "bpm": 130,
+            "barS": 1.846154,
+            "loopS": 29.538458,
+            "files": {
+              "drums": "gh/gh-hs2-glitchform-drums.ogg",
+              "rhythm": "gh/gh-hs2-glitchform-rhythm.ogg",
+              "lead": "gh/gh-hs2-glitchform-lead.ogg"
+            }
+          }
+        ]
+      },
+      "gh/motif-leaper": {
+        "fallback": null,
+        "kits": [
+          {
+            "name": "chimera",
+            "bpm": 110,
+            "barS": 2.181818,
+            "loopS": 26.181812,
+            "files": {
+              "drums": "gh/gh-hs3-chimera-drums.ogg",
+              "rhythm": "gh/gh-hs3-chimera-rhythm.ogg",
+              "lead": "gh/gh-hs3-chimera-lead.ogg"
+            }
+          }
+        ]
+      },
+      "gh/motif-screamer": {
+        "fallback": null,
+        "kits": [
+          {
+            "name": "haunted",
+            "bpm": 150,
+            "barS": 1.6,
+            "loopS": 25.6,
+            "files": {
+              "drums": "gh/gh-hs2-haunted-drums.ogg",
+              "rhythm": "gh/gh-hs2-haunted-rhythm.ogg",
+              "lead": "gh/gh-hs2-haunted-lead.ogg"
+            }
+          }
+        ]
+      },
+      "gh/motif-bomber": {
+        "fallback": null,
+        "kits": [
+          {
+            "name": "carnage",
+            "bpm": 130,
+            "barS": 1.846154,
+            "loopS": 29.538458,
+            "files": {
+              "drums": "gh/gh-hs2-carnage-drums.ogg",
+              "rhythm": "gh/gh-hs2-carnage-rhythm.ogg",
+              "lead": "gh/gh-hs2-carnage-lead.ogg"
+            }
+          }
+        ]
+      },
+      "gh/motif-drowned": {
+        "fallback": null,
+        "kits": [
+          {
+            "name": "gutter",
+            "bpm": 150,
+            "barS": 1.6,
+            "loopS": 25.6,
+            "files": {
+              "drums": "gh/gh-hs2-gutter-drums.ogg",
+              "rhythm": "gh/gh-hs2-gutter-rhythm.ogg",
+              "lead": "gh/gh-hs2-gutter-lead.ogg"
+            }
+          }
+        ]
+      },
+      "gh/motif-demon": {
+        "fallback": null,
+        "kits": [
+          {
+            "name": "inferno",
+            "bpm": 160,
+            "barS": 1.5,
+            "loopS": 24.0,
+            "files": {
+              "drums": "gh/gh-hs-inferno-drums.ogg",
+              "rhythm": "gh/gh-hs-inferno-rhythm.ogg",
+              "lead": "gh/gh-hs-inferno-lead.ogg"
+            }
+          }
+        ]
+      },
+      "gh/motif-guardians": {
+        "fallback": null,
+        "kits": [
+          {
+            "name": "hell-knight",
+            "bpm": 105,
+            "barS": 2.285714,
+            "loopS": 36.571438,
+            "files": {
+              "drums": "gh/gh-hs3-hell-knight-drums.ogg",
+              "rhythm": "gh/gh-hs3-hell-knight-rhythm.ogg",
+              "lead": "gh/gh-hs3-hell-knight-lead.ogg"
+            }
+          }
+        ]
+      }
+    },
+    "waveByDay": [
+      {
+        "from": 1,
+        "track": "gh/night-01"
+      },
+      {
+        "from": 2,
+        "track": "gh/night-02"
+      },
+      {
+        "from": 3,
+        "track": "gh/night-03"
+      },
+      {
+        "from": 4,
+        "track": "gh/night-04"
+      },
+      {
+        "from": 5,
+        "track": "gh/night-05"
+      },
+      {
+        "from": 6,
+        "track": "gh/night-06"
+      },
+      {
+        "from": 7,
+        "track": "gh/night-07"
+      },
+      {
+        "from": 8,
+        "track": "gh/night-08"
+      },
+      {
+        "from": 9,
+        "track": "gh/night-09"
+      },
+      {
+        "from": 10,
+        "track": "gh/night-10"
+      },
+      {
+        "from": 11,
+        "track": "gh/night-11"
+      },
+      {
+        "from": 12,
+        "track": "gh/night-12"
+      },
+      {
+        "from": 13,
+        "track": "gh/night-13"
+      },
+      {
+        "from": 14,
+        "track": "gh/night-14"
+      },
+      {
+        "from": 15,
+        "track": "gh/night-15"
+      },
+      {
+        "from": 16,
+        "track": "gh/night-16"
+      },
+      {
+        "from": 17,
+        "track": "gh/night-17"
+      },
+      {
+        "from": 18,
+        "track": "gh/night-18"
+      },
+      {
+        "from": 19,
+        "track": "gh/night-19"
+      },
+      {
+        "from": 20,
+        "track": "gh/night-20"
+      }
+    ],
+    "specials": {
+      "guardian": "gh/guardian",
+      "redsky": "gh/redsky",
+      "colossus": "gh/colossus",
+      "heart": "gh/heart",
+      "wanderer": "gh/wanderer"
+    },
+    "motifs": {
+      "shambler": "gh/motif-shambler",
+      "feral": "gh/motif-feral",
+      "brute": "gh/motif-brute",
+      "colossus": "gh/motif-colossus",
+      "spitter": "gh/motif-spitter",
+      "spider": "gh/motif-spider",
+      "leaper": "gh/motif-leaper",
+      "screamer": "gh/motif-screamer",
+      "bomber": "gh/motif-bomber",
+      "drowned": "gh/motif-drowned",
+      "demon": "gh/motif-demon",
+      "guardians": "gh/motif-guardians"
+    },
+    "pools": {
+      "menu": [
+        "gh/gh-place-menu"
+      ],
+      "dawnprep": [
+        "gh/gh-place-dawn"
+      ],
+      "day": [
+        "gh/gh-place-hq",
+        "gh/gh-place-menu"
+      ],
+      "dusk": [
+        "gh/gh-place-dusk"
+      ],
+      "night": [
+        "gh/gh-place-dusk"
+      ],
+      "aftermath": [
+        "gh/gh-place-hq"
+      ],
+      "dawn": [
+        "gh/gh-place-dawn"
+      ],
+      "fallen": [
+        "gh/gh-place-fallen"
+      ]
     }
   }
 }

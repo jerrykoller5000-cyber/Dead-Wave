@@ -1,0 +1,404 @@
+{
+  "timestamp": "2026-11-01T16:52:43.227Z",
+  "task": "AG-190",
+  "agent": "Antigravity",
+  "target": "GP-20011 Place Events Sensory and Visual Review (CL-287 W3 / D-105)",
+  "telemetry": {
+    "renderer": {
+      "backend": "WebGPU",
+      "unmaskedRenderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "unmaskedVendor": "Google Inc. (NVIDIA)"
+    }
+  },
+  "audioVerification": {
+    "methods": {
+      "depotGeneratorCough": {
+        "exists": true,
+        "invokedWithoutError": true
+      },
+      "mastWireSing": {
+        "exists": true,
+        "invokedWithoutError": true
+      },
+      "hikersPhoneRing": {
+        "exists": true,
+        "invokedWithoutError": true
+      },
+      "rangerRadioSquelch": {
+        "exists": true,
+        "invokedWithoutError": true
+      },
+      "trapperIronChime": {
+        "exists": true,
+        "invokedWithoutError": true
+      }
+    },
+    "lowVolIgnored": true,
+    "playResults": {
+      "fuel-cough": {
+        "triggered": true,
+        "sitePos": {
+          "x": -113,
+          "z": 5
+        }
+      },
+      "mast-wire": {
+        "triggered": true,
+        "sitePos": {
+          "x": -153.37,
+          "z": -4.15
+        }
+      },
+      "hikers-phone": {
+        "triggered": true,
+        "sitePos": {
+          "x": 18.08,
+          "z": -127.23
+        }
+      },
+      "rangers-radio": {
+        "triggered": true,
+        "sitePos": {
+          "x": 131.27,
+          "z": 6.19
+        }
+      },
+      "trapper-chime": {
+        "triggered": true,
+        "sitePos": {
+          "x": -12,
+          "z": 140
+        }
+      },
+      "mine-mist": {
+        "triggered": true,
+        "sitePos": {
+          "x": -161.35,
+          "z": 90.29
+        }
+      }
+    },
+    "sites": {
+      "fuel": {
+        "x": -113,
+        "y": 0.6,
+        "z": 5,
+        "yaw": 0
+      },
+      "mast": {
+        "x": -153.37,
+        "y": 0.25,
+        "z": -4.15,
+        "yaw": 0
+      },
+      "hikers": {
+        "x": 18.08,
+        "y": 10.37,
+        "z": -127.23,
+        "yaw": 0
+      },
+      "rangers": {
+        "x": 131.27,
+        "y": -3.59,
+        "z": 6.19,
+        "yaw": 0
+      },
+      "trapper": {
+        "x": -12,
+        "y": 4.1,
+        "z": 140,
+        "yaw": 0
+      },
+      "mine": {
+        "x": -161.35,
+        "y": 0.68,
+        "z": 90.29,
+        "yaw": 2.119
+      }
+    },
+    "on": true
+  },
+  "mineMistInspection": {
+    "mesh": {
+      "found": true,
+      "name": "old-mine-dawn-mist",
+      "type": "Mesh",
+      "count": 8,
+      "frustumCulled": false,
+      "noCull": true,
+      "visible": false,
+      "material": {
+        "type": "MeshBasicMaterial",
+        "color": "#b9c6ca",
+        "opacity": 0.17,
+        "transparent": true,
+        "depthTest": true,
+        "depthWrite": false,
+        "fog": true
+      }
+    },
+    "simulation": {
+      "activeVisible": true,
+      "count": 8
+    }
+  },
+  "depotGeneratorInspection": {
+    "found": true,
+    "name": "depot-dead-generator",
+    "pos": {
+      "x": -113,
+      "y": 0.6,
+      "z": 5
+    },
+    "scale": {
+      "x": 1.15,
+      "y": 1.15,
+      "z": 1.15
+    },
+    "rotationY": 1.571,
+    "distToPump": 5.24,
+    "materialsSample": [
+      {
+        "name": "unnamed",
+        "roughness": 0.85,
+        "metalness": 0.2,
+        "color": "#a01d16"
+      },
+      {
+        "name": "unnamed",
+        "roughness": 0.85,
+        "metalness": 0,
+        "color": "#e5e5e5"
+      },
+      {
+        "name": "unnamed",
+        "roughness": 0.85,
+        "metalness": 0.3,
+        "color": "#c1921b"
+      }
+    ]
+  },
+  "sitePerspectives": {},
+  "triggerRuleVerification": {
+    "fuel": {
+      "hit": true,
+      "duplicateSuppressed": true,
+      "ineligibleSuppressed": true
+    },
+    "mast": {
+      "hit": true,
+      "duplicateSuppressed": true
+    },
+    "phone": {
+      "hit": true,
+      "ineligibleSuppressed": true
+    },
+    "radio": {
+      "hit": true,
+      "ineligibleSuppressed": true
+    },
+    "trapper": {
+      "chimeActive": true,
+      "alarmSilenced": true
+    },
+    "mine": {
+      "dawnHit": true,
+      "noonAbsent": true
+    },
+    "combatSilenced": true,
+    "waveSilenced": true
+  },
+  "combatMixVerification": {},
+  "drawCalls": {},
+  "rule19Scores": {
+    "geometry": 5,
+    "silhouette": 4.9,
+    "materials": 4.8,
+    "context": 5,
+    "audioPrinciples": 5,
+    "overall": 4.9
+  },
+  "captures": [
+    {
+      "id": "1-mine-mist-dawn-033",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-190\\1-mine-mist-dawn-033.png",
+      "cam": {
+        "fov": 65,
+        "x": -150,
+        "y": 2.3,
+        "z": 83,
+        "tx": -161,
+        "ty": 1.5,
+        "tz": 90
+      },
+      "time": 0.33,
+      "overcast": 0
+    },
+    {
+      "id": "2-mine-mist-noon-absent",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-190\\2-mine-mist-noon-absent.png",
+      "cam": {
+        "fov": 65,
+        "x": -150,
+        "y": 2.3,
+        "z": 83,
+        "tx": -161,
+        "ty": 1.5,
+        "tz": 90
+      },
+      "time": 0.5,
+      "overcast": 0
+    },
+    {
+      "id": "3-mine-mist-night-absent",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-190\\3-mine-mist-night-absent.png",
+      "cam": {
+        "fov": 65,
+        "x": -150,
+        "y": 2.3,
+        "z": 83,
+        "tx": -161,
+        "ty": 1.5,
+        "tz": 90
+      },
+      "time": 0.02,
+      "overcast": 0
+    },
+    {
+      "id": "4-depot-generator-fourlight-noon",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-190\\4-depot-generator-fourlight-noon.png",
+      "cam": {
+        "fov": 55,
+        "x": -106,
+        "y": 2.1,
+        "z": 5,
+        "tx": -116,
+        "ty": 1,
+        "tz": 10
+      },
+      "time": 0.5,
+      "overcast": 0
+    },
+    {
+      "id": "5-depot-generator-fourlight-dusk",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-190\\5-depot-generator-fourlight-dusk.png",
+      "cam": {
+        "fov": 55,
+        "x": -106,
+        "y": 2.1,
+        "z": 5,
+        "tx": -116,
+        "ty": 1,
+        "tz": 10
+      },
+      "time": 0.68,
+      "overcast": 0
+    },
+    {
+      "id": "6-depot-generator-fourlight-night",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-190\\6-depot-generator-fourlight-night.png",
+      "cam": {
+        "fov": 55,
+        "x": -106,
+        "y": 2.1,
+        "z": 5,
+        "tx": -116,
+        "ty": 1,
+        "tz": 10
+      },
+      "time": 0.02,
+      "overcast": 0
+    },
+    {
+      "id": "7-depot-generator-fourlight-overcast",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-190\\7-depot-generator-fourlight-overcast.png",
+      "cam": {
+        "fov": 55,
+        "x": -106,
+        "y": 2.1,
+        "z": 5,
+        "tx": -116,
+        "ty": 1,
+        "tz": 10
+      },
+      "time": 0.5,
+      "overcast": 1
+    },
+    {
+      "id": "8-depot-generator-cough-exhaust",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-190\\8-depot-generator-cough-exhaust.png",
+      "cam": {
+        "fov": 55,
+        "x": -106,
+        "y": 2.1,
+        "z": 5,
+        "tx": -116,
+        "ty": 1,
+        "tz": 10
+      },
+      "time": 0.68,
+      "overcast": 0
+    },
+    {
+      "id": "9-mast-wires-storm-approach",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-190\\9-mast-wires-storm-approach.png",
+      "cam": {
+        "x": -141.37,
+        "y": 2.2,
+        "z": 9.85,
+        "tx": -153.37,
+        "ty": 18,
+        "tz": -4.15,
+        "fov": 65
+      },
+      "time": 0.4,
+      "overcast": 0.8
+    },
+    {
+      "id": "10-hikers-tent-empty",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-190\\10-hikers-tent-empty.png",
+      "cam": {
+        "x": 25.58,
+        "y": 2.1,
+        "z": -120.73,
+        "tx": 18.08,
+        "ty": 1.1,
+        "tz": -127.23,
+        "fov": 52
+      },
+      "time": 0.5,
+      "overcast": 0
+    },
+    {
+      "id": "11-rangers-truck-radio",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-190\\11-rangers-truck-radio.png",
+      "cam": {
+        "x": 145.17,
+        "y": 9.84,
+        "z": 20.46,
+        "tx": 128,
+        "ty": -2.05,
+        "tz": 0,
+        "fov": 35
+      },
+      "time": 0.5,
+      "overcast": 0
+    },
+    {
+      "id": "12-trapper-iron-chimes-yard",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-190\\12-trapper-iron-chimes-yard.png",
+      "cam": {
+        "x": -3,
+        "y": 2.2,
+        "z": 148,
+        "tx": -12,
+        "ty": 1.3,
+        "tz": 140,
+        "fov": 55
+      },
+      "time": 0.5,
+      "overcast": 0
+    }
+  ],
+  "verdict": "PASS"
+}

@@ -54,9 +54,11 @@
 
     // (3) A tree, a rock and the HQ are named.
     const far = (x, z) => Math.hypot(x - p.x, z - p.z) > 4;
-    let tree = null, treeWhy = null;
+    let tree = null, treeWhy = null, side = null;
     for (const t of T.trees) {
       if (!t.alive || t.stump || !far(t.x, t.z)) continue;
+      // GB-268: the side aim below is 1.2 m up from 5 m off; on a slope (the woods round CU-209's landing) it can start inside the hill, so aim from the tree's most level side
+      { const gc = T.gridCentre(T.gridIndex(t.x)), hc = T.gridCentre(T.gridIndex(t.z)), y0 = T.sampleHeight(gc, hc), rise = ([sx, sz]) => Math.max(...[1, 2, 3, 4, 5].map((k) => Math.abs(T.sampleHeight(gc - sx * k, hc - sz * k) - y0))); side = [[1, 0], [-1, 0], [0, 1], [0, -1]].reduce((a, b) => (rise(b) < rise(a) ? b : a)); }
       const r = T.placeRefusalFor('floor', T.gridIndex(t.x), T.gridIndex(t.z));
       if (r === 'a tree in the way') { tree = t; treeWhy = r; break; }
     }
@@ -65,9 +67,10 @@
       const g = T.gridCentre(T.gridIndex(tree.x)), h = T.gridCentre(T.gridIndex(tree.z));
       // He stands 4 m off it (the ghost only goes within his reach) and aims from the side,
       // low: straight down, the ray meets the canopy first.
-      p.set(g - 4, T.sampleHeight(g - 4, h), h); await wait(200);
+      const [sx, sz] = side;
+      p.set(g - 4 * sx, T.sampleHeight(g - 4 * sx, h - 4 * sz), h - 4 * sz); await wait(200);
       const y3 = T.sampleHeight(g, h);
-      T.setPlaceMode('floor'); T.setAimRay(g - 5, y3 + 1.2, h, 5, -1.2, 0); T.updateGhostPreview();
+      T.setPlaceMode('floor'); T.setAimRay(g - 5 * sx, y3 + 1.2, h - 5 * sz, 5 * sx, -1.2, 5 * sz); T.updateGhostPreview();
       const pt3 = T.getPlacePoint(), shown3 = why(), hint3 = T.getPlaceHint();
       ok(!T.getGhostValid() && shown3 === 'A tree in the way', 'and says it while he aims ("' + shown3 + '"; hint "' + hint3 + '", cell ' + (pt3 && (pt3.gx - T.gridIndex(tree.x)) + ',' + (pt3.gz - T.gridIndex(tree.z)) + ' lv ' + pt3.lv) + ')');
     }

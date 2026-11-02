@@ -1,0 +1,189 @@
+{
+  "enabled": true,
+  "count": 4,
+  "bands": [
+    {
+      "kind": "quarter-ne",
+      "width": 5,
+      "pts": [
+        {
+          "x": -10,
+          "z": 69
+        },
+        {
+          "x": -30,
+          "z": 95
+        },
+        {
+          "x": -50,
+          "z": 115
+        },
+        {
+          "x": -75,
+          "z": 130
+        },
+        {
+          "x": -140,
+          "z": 143
+        }
+      ],
+      "gaps": [
+        {
+          "id": "trail-15",
+          "kind": "trail",
+          "halfWidth": 1.85
+        },
+        {
+          "id": "quarter-ne-walk",
+          "kind": "walk",
+          "at": 61.086710181175356,
+          "width": 9.7,
+          "clearWidth": 4
+        }
+      ],
+      "solids": 168
+    },
+    {
+      "kind": "quarter-nw",
+      "width": 5,
+      "pts": [
+        {
+          "x": 66,
+          "z": 23
+        },
+        {
+          "x": 83,
+          "z": 50
+        },
+        {
+          "x": 91.54,
+          "z": 69.7
+        },
+        {
+          "x": 96,
+          "z": 80
+        },
+        {
+          "x": 118,
+          "z": 118
+        },
+        {
+          "x": 141,
+          "z": 141
+        }
+      ],
+      "gaps": [
+        {
+          "id": "water-0",
+          "kind": "river",
+          "at": 63.54166909304933,
+          "width": 19.45588286676339
+        },
+        {
+          "id": "quarter-nw-walk",
+          "kind": "walk",
+          "at": 53.377525820927076,
+          "width": 9.7,
+          "clearWidth": 4
+        }
+      ],
+      "solids": 146
+    },
+    {
+      "kind": "quarter-sw",
+      "width": 5,
+      "pts": [
+        {
+          "x": 50,
+          "z": -49
+        },
+        {
+          "x": 59,
+          "z": -70
+        },
+        {
+          "x": 68,
+          "z": -105
+        },
+        {
+          "x": 103,
+          "z": -130
+        },
+        {
+          "x": 140,
+          "z": -143
+        }
+      ],
+      "gaps": [
+        {
+          "id": "trail-11",
+          "kind": "trail",
+          "halfWidth": 1.85
+        },
+        {
+          "id": "quarter-sw-walk",
+          "kind": "walk",
+          "at": 58.98594131677703,
+          "width": 9.7,
+          "clearWidth": 4
+        }
+      ],
+      "solids": 158
+    },
+    {
+      "kind": "quarter-se",
+      "width": 5,
+      "pts": [
+        {
+          "x": -45,
+          "z": -53.6
+        },
+        {
+          "x": -57.2,
+          "z": -68.2
+        }
+      ],
+      "gaps": [
+        {
+          "id": "trail-2",
+          "kind": "trail",
+          "halfWidth": 1.85
+        }
+      ],
+      "solids": 7
+    }
+  ],
+  "wetSolids": 0,
+  "gaps": [
+    {
+      "band": "quarter-ne",
+      "id": "quarter-ne-walk",
+      "kind": "walk",
+      "at": 61.086710181175356,
+      "width": 9.7,
+      "clearWidth": 4
+    },
+    {
+      "band": "quarter-nw",
+      "id": "quarter-nw-walk",
+      "kind": "walk",
+      "at": 53.377525820927076,
+      "width": 9.7,
+      "clearWidth": 4
+    },
+    {
+      "band": "quarter-sw",
+      "id": "quarter-sw-walk",
+      "kind": "walk",
+      "at": 58.98594131677703,
+      "width": 9.7,
+      "clearWidth": 4
+    }
+  ],
+  "below": {
+    "x": 91.54,
+    "z": 69.7
+  },
+  "draws": 4,
+  "errors": []
+}

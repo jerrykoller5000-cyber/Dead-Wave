@@ -182,7 +182,7 @@ climb that ladder.
 
 | Who | Their job on the roof | Where they hid, and how | Found (at E) | On the roof (talk) | Aboard (victory) |
 | --- | --- | --- | --- | --- | --- |
-| **Cpl. Dana Okafor**, medic | **Heals him.** He climbs up and she patches him to full health, once a day. During the alarm she fires her M4. | The trapper's camp, in his iron-lined root cellar. The dead walk right over it. | "Iron walls. They walk straight past. Took me three weeks to believe it." | "Sit. Hold still. I had eleven people to keep alive here. I'm keeping the one I've got." | "Cpl. Okafor, medic. Still counting the ones she couldn't reach." |
+| **Cpl. Dana Okafor**, medic | **Heals him.** He climbs up and Okafor patches him to full health, once a day. During the alarm Okafor fires his M4. | The trapper's camp, in his iron-lined root cellar. The dead walk right over it. | "Iron walls. They walk straight past. Took me three weeks to believe it." | "Sit. Hold still. I had eleven people to keep alive here. I'm keeping the one I've got." | "Cpl. Okafor, medic. Still counting the ones he couldn't reach." |
 | **Sgt. Eli Brandt**, machine gunner | **Mans the M240B** on the roof during the alarm: heavy fire on whatever comes at the HQ. | On overwatch in the watchtower when it fell; watched it all, then moved only by day and slept in the rangers' truck. | "I watched it happen from up there. Couldn't hit enough of them. Get me a gun with a belt and I'll fix that." | "From the tower the stones under the lake blink. In order. Every night. I wrote it down somewhere." | "Sgt. Brandt. Counted every round. Says he still owes nine." |
 | **Spc. Pike**, mechanic | **Cheaper repairs:** what he rebuilds costs less while he's on the roof. During the alarm he fires his M4. | Beyond the hikers' camp, concealed under a low, mossy rock outcrop beside a tree. He caked himself in ash and mud from their fire pit so he smelled like nothing alive. | "Don't shoot. I've been mud for three weeks." | "I kept the trucks running that hauled this wall in. Built to keep things out. Turns out it keeps us in." | "Spc. Pike, mechanic. Wants to see the wall from the outside." |
 
@@ -199,7 +199,7 @@ who owe him money.
 | A tag came up yesterday (any) | "Whose? … Right. Put it on the wall. I'll do the rest." | "I counted them going down. Thank you for counting them coming back." | "That's one. Don't tell me the rest. I'll do them one at a time." |
 | Sato's tag | "Sato pulled the fuse. If he hadn't, there'd be no relay to fix." | "Sato was on the radio when it started. He never stopped talking. I never heard what he said." | "He owed me twenty. Keep the tag. We're square." |
 | Hale's tag | "The captain. Four marks on the back. He was counting too." | "Hale sent me up the tower. That's why I'm here and he isn't." | "Captain Hale. Never saw him sit down. Not once in four days." |
-| Clarke's tag | "That ring goes over the mountains. Not to you." | "Clarke drove the wall in. Every panel. She'd want to know it held." | "Not yours. The ring. Don't ask." |
+| Clarke's tag | "That ring goes over the mountains. Not to you." | "Clarke drove the wall in. Every panel. He'd want to know it held." | "Not yours. The ring. Don't ask." |
 | Price's tag | "Price. Pike's bunkmate. Tell him yourself." | "Jonah fixed my gun the day before. It's the one I've got." | "You found Jonah. Thank you. Don't tell Brandt I cried." |
 | Kowalski's tag | "Nineteen. He lied about that on the form. Everyone knew." | "The kid. Mended his own chain with wire the first night. Said it was for luck." | "Kowalski. He thought the wall was for bears." |
 | The twelve passed (night 6 survived) | "Six nights. That's one more than we got. Don't get used to it." | "Threshold never saw a sixth night. You did. I watched it." | "Six. That's a record. I checked. There was nobody to check with, but I checked." |
@@ -314,11 +314,11 @@ line changes (below).
 | --- | --- | --- |
 | Root (root:0) | HALE M. · CPT · PGB | Commanding. Four tally marks scratched on the back: the quiet days. A fifth, started and not finished. |
 | Root (root:1) | LINDQVIST T. · PVT · PGB | Rifleman. A bottle cap threaded on the chain. He called it his lucky cap. He was wrong about that. |
-| Shale (shale:0) | DELGADO R. · CPL · PGB | Rifleman. A pressed poppy from the valley, taped behind the tag. She picked it the first quiet day. |
+| Shale (shale:0) | DELGADO R. · CPL · PGB | Rifleman. A pressed poppy from the valley, taped behind the tag. He picked it the first quiet day. |
 | Shale (shale:1) | MENSAH A. · SPC · PGB | Demolitions. A length of fuse wound round the chain. "Saving it for something big." |
 | Iron (iron:0) | SATO K. · SGT · PGB | Signals. He pulled the relay's fuse at 02:14 to shut the tone out. Scratched on the back: IT'S A WORD. |
 | Iron (iron:1) | PRICE J. · PFC · PGB | Engineer. Pike's name scratched under his own. Bunkmates. He still has his. |
-| Wet (wet:0) | CLARKE I. · CPL · PGB | Driver. A ring on the chain, too small for her finger. Someone over the mountains is waiting for it. |
+| Wet (wet:0) | CLARKE I. · CPL · PGB | Driver. A ring on the chain, too small for his finger. Someone over the mountains is waiting for it. |
 | Wet (wet:1) | KOWALSKI D. · PVT · PGB | Rifleman, the youngest. The chain's been mended with wire. Nineteen. |
 | Hill (hill:0) | ADE S. · LT · PGB | Intelligence. One page of the valley's file folded small behind the tag: "COLDWATER. ONE WINTER. IRON." |
 
@@ -402,7 +402,7 @@ in a run:
 - "Enclosed: one (1) morale item. It's a chocolate bar. It's from the dispatcher. It's not on the form."
 - "Weather, your valley, tomorrow: fog. Weather, your valley, every day since we started watching: fog."
 - "The file has a page about the one night in twenty. It's water-damaged. Of course it is."
-- "This crate was packed by someone who has read your reports. Good luck. She means it."
+- "This crate was packed by someone who has read your reports. Good luck. He means it."
 - "Return of this slip is not required. Return of you is."
 
 **The duty board** (the HQ board, in Pike's and Hale's hands, under the tally): "Sample window 02:00–02:30. Bring

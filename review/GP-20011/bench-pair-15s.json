@@ -1,0 +1,54 @@
+{
+  "rows": [
+    {
+      "mode": "off",
+      "fps": 2.3,
+      "low": 2.2,
+      "worst": 404.3,
+      "hitches": 12,
+      "draws": 238,
+      "triangles": 115197
+    },
+    {
+      "mode": "on",
+      "fps": 2.4,
+      "low": 2.2,
+      "worst": 421.2,
+      "hitches": 16,
+      "draws": 238,
+      "triangles": 115197
+    },
+    {
+      "mode": "on",
+      "fps": 2.3,
+      "low": 2.2,
+      "worst": 410.8,
+      "hitches": 14,
+      "draws": 238,
+      "triangles": 115197
+    },
+    {
+      "mode": "off",
+      "fps": 7.3,
+      "low": 7.2,
+      "worst": 391,
+      "hitches": 17,
+      "draws": 238,
+      "triangles": 115197
+    }
+  ],
+  "median": {
+    "off": {
+      "fps": 4.8,
+      "low": 4.7,
+      "draws": 238,
+      "triangles": 115197
+    },
+    "on": {
+      "fps": 2.3499999999999996,
+      "low": 2.2,
+      "draws": 238,
+      "triangles": 115197
+    }
+  }
+}

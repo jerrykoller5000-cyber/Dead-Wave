@@ -1,0 +1,36 @@
+{
+  "rows": [
+    {
+      "mode": "off",
+      "readyMs": 23556,
+      "on": false,
+      "count": 0,
+      "draws": 4
+    },
+    {
+      "mode": "default",
+      "readyMs": 24361,
+      "on": true,
+      "count": 4,
+      "draws": 4
+    },
+    {
+      "mode": "default",
+      "readyMs": 22107,
+      "on": true,
+      "count": 4,
+      "draws": 4
+    },
+    {
+      "mode": "off",
+      "readyMs": 23201,
+      "on": false,
+      "count": 0,
+      "draws": 4
+    }
+  ],
+  "medianMs": {
+    "off": 23378.5,
+    "default": 23234
+  }
+}

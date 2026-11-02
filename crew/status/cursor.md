@@ -2,12 +2,12 @@
 
 state: active
 model: Grok 4.7
-task: CU-215 checkpoint with index.html
+task: CU-225 checkpoint commit for the playtest build
 touching: git
-since: 2026-11-01T13:23Z
+since: 2026-11-02T06:12Z
 next: —
 blocked-on: —
-last-report: handoffs/2026-11-01-cursor-CU-214.md
+last-report: handoffs/2026-11-02-cursor-CU-222.md
 
 ## Notes
 

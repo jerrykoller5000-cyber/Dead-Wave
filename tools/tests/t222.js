@@ -27,10 +27,15 @@
       const near = (T.trees || []).filter((t) => t.alive !== false && Math.hypot(t.x - gx, t.z - gz) < 26).length + (T.rocks || []).filter((r) => r.alive !== false && Math.hypot(r.x - gx, r.z - gz) < 26).length;
       let lo = Infinity, hi = -Infinity;
       for (let a = 0; a < 8; a++) for (const rr of [6, 14, 22]) { const h = T.sampleHeight(gx + Math.sin(a) * rr, gz + Math.cos(a) * rr); lo = Math.min(lo, h); hi = Math.max(hi, h); }
-      const score = near * 2 + (hi - lo);
-      if (!best || score < best.score) best = { x: gx, z: gz, score };
+      // GB-270: and the lane the runners cross and the still ones stand in (out to 20 m in front, 8 m either side) level
+      // with his feet, so a round aimed at a chest at 18 m is not met by a rise on the way (the woods moved the old spot).
+      const h0 = T.sampleHeight(gx, gz); let lane = 0;
+      for (let lx = -8; lx <= 8; lx += 4) for (let lz = 2; lz <= 20; lz += 2) lane = Math.max(lane, Math.abs(T.sampleHeight(gx + lx, gz + lz) - h0));
+      const score = near * 2 + (hi - lo) + lane * 8;
+      if (!best || score < best.score) best = { x: gx, z: gz, score, lane };
     }
     P.set(best.x, T.sampleHeight(best.x, best.z), best.z);
+    info('the spot: ' + best.x + ', ' + best.z + ', its lane within ' + best.lane.toFixed(2) + ' m of his feet');
     await wait(1500);
     const HEAD = { brute: 0.74, feral: 0.70, leaper: 0.55, spider: 0.60 }, headLine = (k) => HEAD[k] != null ? HEAD[k] : 0.78;
     // Where a world point is on screen, as a pinhole camera (the test build's Vector3.project is a stub; its Raycaster
@@ -201,7 +206,10 @@
       for (let i = 0; i < 14; i++) { const q = z.mesh.position; pointOnce(new THREE.Vector3(q.x, q.y + (z.hitH || 1.7) * 0.56, q.z)); await wait(40); }
       { const q = z.mesh.position; pointOnce(new THREE.Vector3(q.x, q.y + (z.hitH || 1.7) * 0.56, q.z)); await frame(); }   // fired on the next frame after the cursor last moved
       { const q = z.mesh.position; pointOnce(new THREE.Vector3(q.x, q.y + (z.hitH || 1.7) * 0.56, q.z)); await frame(); }   // GB-206: re-point on the frame it fires (the view slides toward the cursor)
-      const Mu = T.getMuzzleWorld().clone(), d = T.aimTarget.clone().sub(Mu).normalize(), z0 = z.mesh.position.clone(), lead = T.aimTarget.x - z0.x;
+      // GB-270: the runner where the aim saw it. trackZombieMotion keeps the spot it read on the frame the aim was taken
+      // (z._mvX/_mvZ); this check's runner steps in its own frame callback after the game's, so its mesh is already a frame on.
+      // In the game a shot leaves on the frame it was aimed, before the zombies move, so that spot is where the round starts.
+      const Mu = T.getMuzzleWorld().clone(), d = T.aimTarget.clone().sub(Mu).normalize(), z0 = z._mvT != null ? new THREE.Vector3(z._mvX, T.sampleHeight(z._mvX, z._mvZ), z._mvZ) : z.mesh.position.clone(), lead = T.aimTarget.x - z0.x;
       alive = false;
       const spd = (ST[gun] && ST[gun].speed) || 75;
       // GB-193: through the game's hit test, as the still ones: the zombie held where it was when he fired and the round's

@@ -1,0 +1,38 @@
+Game-test request 41e49026-ccfd-48ce-9d5d-4ff5b4d82084 queued at position 3. Waiting...
+GRANT cursor CU-220: starting one game-test command
+check-players: 314 player.position reads, all in the allowed places
+ok    t40      6 pass   0 fail  43.5s
+ok    t41      9 pass   0 fail  36.7s
+           INFO root mesh 191.4 trees 192.2 hill 196.7 | shale mesh 201.3 trees 201.9 hill 210.0 | iron mesh 196.6 trees 194.2 hill 202.3 | wet mesh 199.8 trees 194.4 hill 205.0 | hill mesh 199.4 trees 197.8 hill 205.8 | chalk mesh 200.6 trees 200.0 hill 208.0
+ok    t42     18 pass   0 fail  23.6s
+ok    t43     35 pass   0 fail  36.5s
+ok    t44      6 pass   0 fail  22.1s
+ok    t45      8 pass   0 fail  22.1s
+ok    t46     11 pass   0 fail  24.7s
+ok    t47     17 pass   0 fail  22.3s
+ok    t48     22 pass   0 fail  35.5s
+ok    t49     32 pass   0 fail  38.5s
+FAIL  t50     14 pass   1 fail  27.2s
+ok    t51     19 pass   0 fail  38.9s
+ok    t52     17 pass   0 fail  25.1s
+ok    t53     76 pass   0 fail  42.7s
+ok    t54     32 pass   0 fail  37.5s
+ok    t55     10 pass   0 fail  36.4s
+ok    t56      1 pass   0 fail  24.1s
+ok    t57     10 pass   0 fail  22.3s
+ok    t58      9 pass   0 fail  44.9s
+FAIL  t59     47 pass   1 fail  78.1s
+ok    t60     43 pass   0 fail  67.0s
+ok    t61     22 pass   0 fail  53.0s
+ok    t62      4 pass   0 fail  37.3s
+ok    t63      6 pass   0 fail  37.0s
+ok    t64      8 pass   0 fail  39.3s
+
+25 checks: 482 pass, 2 fail
+
+by owner:
+  unassigned
+    t50    1 fail  FAIL every tree within 16 m is live (16)
+           FAIL every tree within 16 m is live (16)
+    t59    1 fail  FAIL dragged to the mouth (closest 20.65 m from the lip)
+           FAIL dragged to the mouth (closest 20.65 m from the lip)

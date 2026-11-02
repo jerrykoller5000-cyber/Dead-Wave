@@ -1,0 +1,37 @@
+const sites = [];
+const add = (id, p, radius = 14) => { if (p && Number.isFinite(p.x) && Number.isFinite(p.z)) sites.push({ id, x: +p.x.toFixed(1), z: +p.z.toFixed(1), radius }); };
+add('hq', { x: 0, z: 0 }, 24);
+add('landing', { x: 42, z: -20 }, 9);
+for (let i = 0; i < (T.POI.campsites || []).length; i++) add('camp-' + i, T.POI.campsites[i]);
+for (let i = 0; i < (T.POI.cabins || []).length; i++) add('cabin-' + i, T.POI.cabins[i]);
+for (let i = 0; i < (T.POI.sheds || []).length; i++) add('shed-' + i, T.POI.sheds[i]);
+for (let i = 0; i < (T.POI.wrecks || []).length; i++) add('wreck-' + i, T.POI.wrecks[i]);
+for (let i = 0; i < (T.POI.caves || []).length; i++) add('cave-' + i, T.POI.caves[i]);
+for (let i = 0; i < (T.POI.bridges || []).length; i++) add('bridge-' + i, T.POI.bridges[i], 9);
+add('mast', T.POI.mast, 20); add('graveyard', T.POI.graveyard); add('tower', T.POI.tower, 12); add('dock', T.POI.dock, 9);
+const distToPath = (x, z, pts) => {
+  let best = Infinity;
+  for (let i = 1; i < pts.length; i++) {
+    const a = pts[i-1], b = pts[i], dx = b.x-a.x, dz = b.z-a.z, d = dx*dx+dz*dz;
+    const t = d ? Math.max(0, Math.min(1, ((x-a.x)*dx+(z-a.z)*dz)/d)) : 0;
+    best = Math.min(best, Math.hypot(x-a.x-t*dx, z-a.z-t*dz));
+  }
+  return best;
+};
+const dirs = [['ne', 1, 1], ['se', 1, -1], ['sw', -1, -1], ['nw', -1, 1]];
+const bands = dirs.map(([id, sx, sz]) => {
+  const samples = [];
+  for (let r = 70; r <= 200; r += 1) {
+    const x = sx*r/Math.SQRT2, z = sz*r/Math.SQRT2;
+    samples.push({ r, x, z, wet: T.waterDepthAt(x,z) > 0.05,
+      slope: T.terrainSlope(x,z), nearest: sites.map(s => ({ id: s.id, clearance: Math.hypot(x-s.x,z-s.z)-s.radius })).sort((a,b)=>a.clearance-b.clearance)[0],
+      trails: T.PATHS.map((p,i)=>({ i, d: distToPath(x,z,p) })).filter(v=>v.d < 3.5) });
+  }
+  const near = samples.slice().sort((a,b)=>a.nearest.clearance-b.nearest.clearance).slice(0,7).map(v=>({r:v.r,site:v.nearest.id,clearance:+v.nearest.clearance.toFixed(1)}));
+  const wet = samples.filter(v=>v.wet).map(v=>v.r);
+  const trail = [];
+  for (const v of samples) for (const t of v.trails) if (!trail.some(q=>q.i===t.i && v.r-q.last<3)) trail.push({i:t.i,first:v.r,last:v.r}); else { const q=trail.find(q=>q.i===t.i && v.r-q.last<3); q.last=v.r; }
+  const gap = samples.filter(v=>v.r>=118 && v.r<=132).map(v=>({r:v.r,wet:v.wet,slope:+v.slope.toFixed(2),clearance:+v.nearest.clearance.toFixed(1)}));
+  return {id,from:{x:+samples[0].x.toFixed(1),z:+samples[0].z.toFixed(1)},to:{x:+samples.at(-1).x.toFixed(1),z:+samples.at(-1).z.toFixed(1)},near,wet,trail,gap};
+});
+return {sites,bands};

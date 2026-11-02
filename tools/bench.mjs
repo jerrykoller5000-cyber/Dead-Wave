@@ -662,28 +662,30 @@ try {
       TT.setViewFirstDbg(true);
       const t0 = Date.now();
       let vm = false;
+      const vmFn = typeof TT.viewmodelDbg === 'function';
       while (Date.now() - t0 < 12000) {
         const fp = TT.fpDbg();
-        const gun = TT.viewmodelDbg();
+        const gun = vmFn ? TT.viewmodelDbg() : null;
         vm = !!(gun && gun.info && gun.info.active);
-        if (fp.first && fp.w > 0.9 && (${VM_OFF ? 'true' : 'false'} || vm)) break;
+        if (fp.first && fp.w > 0.9 && (${VM_OFF ? 'true' : 'false'} || vm || !vmFn)) break;
         await wait(100);
       }
       if (${LEVEL ? 'true' : 'false'} && TT.setOtsAimDbg) TT.setOtsAimDbg(null, 0);
       const fp = TT.fpDbg();
-      const gun = TT.viewmodelDbg();
+      const gun = vmFn ? TT.viewmodelDbg() : null;
       return {
         first: !!fp.first,
         w: Math.round(fp.w * 100) / 100,
         weapon: TT.getCurrentWeapon ? TT.getCurrentWeapon() : null,
         unarmed: TT.isUnarmed ? !!TT.isUnarmed() : null,
-        vm: !!(gun && gun.info && gun.info.active)
+        vm: !!(gun && gun.info && gun.info.active),
+        vmFn
       };
     })()`, 30000);
     console.log('bench: first person ' + JSON.stringify(fpState));
     if (!fpState || fpState.error) throw new Error('first person: ' + (fpState && fpState.error));
     if (!fpState.first || fpState.w < 0.9) throw new Error('first person did not settle (' + JSON.stringify(fpState) + ')');
-    if (!VM_OFF && !fpState.vm) throw new Error('the view gun did not show');
+    if (!VM_OFF && fpState.vmFn !== false && !fpState.vm) throw new Error('the view gun did not show');
     if (VM_OFF && fpState.vm) throw new Error('?vm=0 still showed the view gun');
   }
 

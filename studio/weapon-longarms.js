@@ -62,7 +62,10 @@ export function makeM4Model(ctx) {
   K.box(0.003, 0.004, 0.072, gunMid, 0.0425, 0.05, 0.03);
   K.slab([[-0.052, 0.022], [-0.016, 0.022], [-0.01, 0.06], [-0.052, 0.068]], 0.022, gunBody, { x: 0.042, bevel: 0.005 });
   // Charging handle out the back, the folded rear sight.
-  K.box(0.028, 0.012, 0.045, gunDark, 0, 0.068, -0.195);
+  // GB-269 (GP-20012, docs/contracts.md): the charging handle is its own group, gun.userData.work, at rest where it was.
+  const work = K.group(0, 0.068, -0.195); work.name = 'work';
+  K.box(0.028, 0.012, 0.045, gunDark, 0, 0, 0, 0, 0, 0, work);
+  gun.userData.work = work;
   K.slab([[-0.226, 0.058], [-0.206, 0.058], [-0.2, 0.077], [-0.226, 0.077]], 0.09, gunDark, { bevel: 0.004 });
   K.slab([[-0.165, 0.092], [-0.115, 0.092], [-0.12, 0.108], [-0.16, 0.108]], 0.034, gunDark, { bevel: 0.003 });
   // Lower receiver: the trigger housing, the flared magwell, the pins and controls.
@@ -85,19 +88,23 @@ export function makeM4Model(ctx) {
   ]), 0.056, gunPoly, { bevel: 0.009, segs: 3 });
   // Telescoping stock: distinct cheek tube, open triangular web and shoulder pad.
   // The open area is geometry, not a painted black inset through a solid stock.
-  K.lathe([[0, -0.505], [0.014, -0.505], [0.0175, -0.5], [0.0175, -0.19], [0.021, -0.188], [0.021, -0.168], [0, -0.168]], gunDark, { y: 0.035, seg: 12 });
-  K.slab([[-0.33, 0.012], [-0.328, 0.05], [-0.345, 0.062], [-0.49, 0.064], [-0.548, 0.074], [-0.552, 0.016], [-0.38, 0.002]], 0.066, gunPoly, { bevel: 0.009, segs: 3 });
-  K.slab([[-0.553, 0.055], [-0.533, 0.048], [-0.523, -0.056], [-0.54, -0.08], [-0.553, -0.078]], 0.066, gunPoly, { bevel: 0.007 });
-  K.slab(gunBand([[-0.364, 0.003], [-0.405, -0.006], [-0.492, -0.064], [-0.538, -0.07]], 0.012), 0.057, gunPoly, { bevel: 0.005 });
-  K.slab([[-0.569, 0.077], [-0.552, 0.077], [-0.552, -0.08], [-0.567, -0.083]], 0.072, gunRubber, { bevel: 0.006 });
-  K.slab([[-0.34, 0.005], [-0.402, -0.01], [-0.401, -0.021], [-0.36, -0.018], [-0.34, -0.008]], 0.03, gunDark, { bevel: 0.003 });
+  // GB-269 (GP-20012): the buffer tube and the whole stock are one group, gun.userData.fpStock ('fp-stock'), so the view
+  // gun can leave it out of the sight picture; third person and the shadow keep it. Every part is where it was.
+  const stock = K.group(0, 0, 0); stock.name = 'fp-stock';
+  K.lathe([[0, -0.505], [0.014, -0.505], [0.0175, -0.5], [0.0175, -0.19], [0.021, -0.188], [0.021, -0.168], [0, -0.168]], gunDark, { y: 0.035, seg: 12, parent: stock });
+  K.slab([[-0.33, 0.012], [-0.328, 0.05], [-0.345, 0.062], [-0.49, 0.064], [-0.548, 0.074], [-0.552, 0.016], [-0.38, 0.002]], 0.066, gunPoly, { bevel: 0.009, segs: 3, parent: stock });
+  K.slab([[-0.553, 0.055], [-0.533, 0.048], [-0.523, -0.056], [-0.54, -0.08], [-0.553, -0.078]], 0.066, gunPoly, { bevel: 0.007, parent: stock });
+  K.slab(gunBand([[-0.364, 0.003], [-0.405, -0.006], [-0.492, -0.064], [-0.538, -0.07]], 0.012), 0.057, gunPoly, { bevel: 0.005, parent: stock });
+  K.slab([[-0.569, 0.077], [-0.552, 0.077], [-0.552, -0.08], [-0.567, -0.083]], 0.072, gunRubber, { bevel: 0.006, parent: stock });
+  K.slab([[-0.34, 0.005], [-0.402, -0.01], [-0.401, -0.021], [-0.36, -0.018], [-0.34, -0.008]], 0.03, gunDark, { bevel: 0.003, parent: stock });
   for (const sx of [-1, 1]) {
-    K.slab([[-0.365, 0.053], [-0.505, 0.06], [-0.522, 0.047], [-0.37, 0.04]], 0.004, gunPoly, { x: sx * 0.033, bevel: 0.002 });
-    K.cyl(0.011, 0.011, 0.004, gunDark, sx * 0.032, -0.045, -0.516, null, 12, 'x');
-    K.cyl(0.0065, 0.0065, 0.005, gunRubber, sx * 0.034, -0.045, -0.516, null, 10, 'x');
+    K.slab([[-0.365, 0.053], [-0.505, 0.06], [-0.522, 0.047], [-0.37, 0.04]], 0.004, gunPoly, { x: sx * 0.033, bevel: 0.002, parent: stock });
+    K.cyl(0.011, 0.011, 0.004, gunDark, sx * 0.032, -0.045, -0.516, stock, 12, 'x');
+    K.cyl(0.0065, 0.0065, 0.005, gunRubber, sx * 0.034, -0.045, -0.516, stock, 10, 'x');
   }
-  for (let i = 0; i < 5; i++) K.box(0.066, 0.004, 0.002, gunDark, 0, -0.056 + i * 0.026, -0.568, 0, 0, 0, null, 0);
-  K.cyl(0.009, 0.009, 0.07, gunDark, 0, 0.032, -0.52, null, 8, 'x');
+  for (let i = 0; i < 5; i++) K.box(0.066, 0.004, 0.002, gunDark, 0, -0.056 + i * 0.026, -0.568, 0, 0, 0, stock, 0);
+  K.cyl(0.009, 0.009, 0.07, gunDark, 0, 0.032, -0.52, stock, 8, 'x');
+  gun.userData.fpStock = stock;
   // Free-float handguard: the barrel nut, an octagon with M-LOK slots, a full-length top rail on a riser.
   K.lathe([[0.012, 0.186], [0.03, 0.186], [0.03, 0.206], [0.012, 0.206]], gunDark, { y: 0.02, seg: 12 });
   // GB-180 (close-up: a short handguard and a long pencil barrel): the handguard runs on to 0.70 over the gas block and a
@@ -179,8 +186,11 @@ export function makeAkModel(ctx) {
   // Right side: the long safety lever and its tab, the charging handle on the carrier.
   K.slab(gunBand([[-0.17, 0.036], [-0.02, 0.03], [0.005, 0.008]], 0.008), 0.006, gunDark, { x: 0.047, bevel: 0.002 });
   K.box(0.006, 0.03, 0.018, gunDark, 0.047, 0.004, 0.012);
-  K.box(0.04, 0.018, 0.02, gunDark, 0.062, 0.042, 0.13, 0, 0, 0, null, 0.005);
-  K.sph(0.012, gunDark, 0.083, 0.042, 0.13, null, 8);
+  // GB-269 (GP-20012, docs/contracts.md): the charging handle is its own group, gun.userData.work, at rest where it was.
+  const work = K.group(0.062, 0.042, 0.13); work.name = 'work';
+  K.box(0.04, 0.018, 0.02, gunDark, 0, 0, 0, 0, 0, 0, work, 0.005);
+  K.sph(0.012, gunDark, 0.021, 0, 0, work, 8);
+  gun.userData.work = work;
   // Trigger guard, the magazine release in front of it, a trigger with its tip curling forward, the wooden grip.
   // Grip centre line is still gripOutline(-0.1, -0.14, 0.19, …, 0.34): the palm stays at the hold.
   K.slab(gunBand([[0.002, -0.042], [0.004, -0.078], [-0.016, -0.096], [-0.042, -0.092], [-0.048, -0.07]], 0.007), 0.03, gunDark, { bevel: 0.004 });   // GB-180: a moulded guard, not a wire (pass 4: as wide as a real guard)
@@ -197,20 +207,24 @@ export function makeAkModel(ctx) {
   K.cyl(0.0055, 0.0055, 0.003, gunDark, 0.0275, -0.155, -0.108, null, 8, 'x');   // GB-178: the grip screw seated on the panel
   K.slab([[-0.142, -0.040], [-0.058, -0.040], [-0.062, -0.052], [-0.136, -0.054]], 0.06, gunDark, { bevel: 0.003 });   // GB-180: the grip's steel mounting tang under the receiver
   // Stock: the dropped wooden butt with its wrist, a steel buttplate, the tang, a sling loop.
+  // GB-269 (GP-20012): all of it one group, gun.userData.fpStock ('fp-stock'), for the view gun to leave out; every part
+  // is where it was. The grip screws in the loop below stay with the grip.
+  const stock = K.group(0, 0, 0); stock.name = 'fp-stock';
   K.slab([[-0.222, 0.042], ...profileCurve([-0.255, 0.038], [-0.34, 0.012], [-0.412, 0.012], 5),
     ...profileCurve([-0.412, 0.012], [-0.515, 0.017], [-0.571, -0.009], 5), [-0.579, -0.145], [-0.57, -0.153],
     ...profileCurve([-0.57, -0.153], [-0.414, -0.084], [-0.337, -0.069], 5),
-    ...profileCurve([-0.337, -0.069], [-0.27, -0.044], [-0.222, -0.036], 4)], 0.07, woodMat, { bevel: 0.017, segs: 3 });
-  K.slab([[-0.592, 0.0], [-0.573, -0.004], [-0.579, -0.152], [-0.597, -0.156]], 0.074, gunDark, { bevel: 0.004 });
-  K.box(0.078, 0.022, 0.05, gunDark, 0, 0.033, -0.236);
-  K.box(0.024, 0.004, 0.048, gunBody, 0, 0.046, -0.265, 0.08, 0, 0, null, 0.002);
-  K.cyl(0.004, 0.004, 0.003, gunDark, 0, 0.05, -0.274, null, 6, 'y');
+    ...profileCurve([-0.337, -0.069], [-0.27, -0.044], [-0.222, -0.036], 4)], 0.07, woodMat, { bevel: 0.017, segs: 3, parent: stock });
+  K.slab([[-0.592, 0.0], [-0.573, -0.004], [-0.579, -0.152], [-0.597, -0.156]], 0.074, gunDark, { bevel: 0.004, parent: stock });
+  K.box(0.078, 0.022, 0.05, gunDark, 0, 0.033, -0.236, 0, 0, 0, stock);
+  K.box(0.024, 0.004, 0.048, gunBody, 0, 0.046, -0.265, 0.08, 0, 0, stock, 0.002);
+  K.cyl(0.004, 0.004, 0.003, gunDark, 0, 0.05, -0.274, stock, 6, 'y');
   for (const sx of [-1, 1]) {
-    K.slab(gunBand([[-0.32, -0.035], [-0.386, -0.049], [-0.472, -0.056], [-0.535, -0.049]], 0.0015), 0.002, woodDark, { x: sx * 0.035, bevel: 0 });
-    K.slab(gunBand([[-0.396, -0.066], [-0.451, -0.079], [-0.536, -0.096]], 0.0011), 0.002, woodDark, { x: sx * 0.035, bevel: 0 });
+    K.slab(gunBand([[-0.32, -0.035], [-0.386, -0.049], [-0.472, -0.056], [-0.535, -0.049]], 0.0015), 0.002, woodDark, { x: sx * 0.035, bevel: 0, parent: stock });
+    K.slab(gunBand([[-0.396, -0.066], [-0.451, -0.079], [-0.536, -0.096]], 0.0011), 0.002, woodDark, { x: sx * 0.035, bevel: 0, parent: stock });
     K.cyl(0.0075, 0.0075, 0.003, gunDark, sx * 0.033, -0.15, -0.104, null, 10, 'x');
   }
-  K.tor(0.014, 0.004, gunDark, 0, -0.122, -0.45, 0, Math.PI / 2, 0);
+  K.tor(0.014, 0.004, gunDark, 0, -0.122, -0.45, 0, Math.PI / 2, 0, stock);
+  gun.userData.fpStock = stock;
   // Handguards: the lower with its palm swell and grooves, the upper over the gas tube, the steel bands.
   K.slab([[0.244, 0.03], [0.53, 0.03], [0.535, 0.0], [0.53, -0.04], [0.45, -0.052], [0.33, -0.053], [0.262, -0.047], [0.244, -0.034]], 0.074, woodMat, { bevel: 0.014, segs: 3 });   // GB-233 r4: slimmer (was 0.086 wide, -0.063 deep)
   for (const sx of [-1, 1]) {

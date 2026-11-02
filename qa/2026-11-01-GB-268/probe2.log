@@ -1,0 +1,68 @@
+Game-test request b20da90f-c1a8-41a6-b4d4-4fec458203cd queued at position 2. Waiting...
+GRANT grokbot GB-268: starting one game-test command
+check-players: 314 player.position reads, all in the allowed places
+           INFO start P 42.00,-7.55,-20.00 ground -7.54
+           INFO mortar 43.20,-7.49,-20.00,80 mount true
+           INFO mortar yaw -1.14 aim 0.0,0.0 cam 43.9,-28.8
+           INFO on mortar P 44.15,-7.37,-20.45
+           INFO off P 44.15,-7.37,-20.45 mounted false carried false
+           INFO gun m240,42.95,-7.51,-20.45,hp 120,lv undefined
+           INFO dist 1.20 dy -0.14
+           INFO crew spot {"x":42.94716077857731,"y":-7.469266550916258,"z":-21.008209739114687,"ok":false,"why":"blocked"}
+           INFO mount m240 -> false mounted false noRoom false banner NO ROOM BEHIND THE WATCHMANA build is blocking the gunner position.
+           INFO after settle P 44.15,-7.37,-20.45 retry false banner NO ROOM BEHIND THE WATCHMANA build is blocking the gunner position.
+ok    tgb268a   1 pass   0 fail  42.1s
+           INFO P 24.00,20.00 cell 12,10
+           INFO camera 33.67,4.56,-9.87 player y -2.75
+           INFO cell -3,-3: wall refusal "null" floor refusal "null"
+           INFO cell -2,-3: wall refusal "null" floor refusal "null"
+           INFO cell -1,-3: wall refusal "null" floor refusal "null"
+           INFO cell 0,-3: wall refusal "null" floor refusal "null"
+           INFO cell 1,-3: wall refusal "null" floor refusal "null"
+           INFO cell 2,-3: wall refusal "null" floor refusal "null"
+           INFO cell 3,-3: wall refusal "null" floor refusal "null"
+           INFO cell 4,-3: wall refusal "null" floor refusal "null"
+           INFO cell 5,-3: wall refusal "null" floor refusal "null"
+           INFO walls placed: true true wallAt true true
+           INFO aim start pt {"x":22,"z":14,"gx":11,"gz":7,"lv":1} valid true hint ""
+           INFO aim end pt {"x":30,"z":14,"gx":15,"gz":7,"lv":1} plan [null,null,null,null,null]
+           INFO made floor@-1,-3 lv1 floor@0,-3 lv1 floor@1,-3 lv1 floor@3,-3 lv1 floor@2,-3 lv1
+ok    tgb268e   1 pass   0 fail  41.5s
+           INFO drag s1 lz 78.25 g lz 76.05 dragT 0.15/31.94 scene true rate 2.910342515022546 mouthDist 76.83304239659522
+           INFO drag s9 lz 77.22 g lz 76.49 dragT 1.31/31.94 scene true rate 2.910342515022546 mouthDist 76.83304239659522
+           INFO drag s17 lz 77.43 g lz 76.90 dragT 2.47/31.94 scene true rate 2.910342515022546 mouthDist 76.83304239659522
+           INFO drag s25 lz 77.50 g lz 77.24 dragT 3.64/31.94 scene true rate 2.910342515022546 mouthDist 76.83304239659522
+           INFO drag s33 lz 74.39 g lz 73.89 dragT 4.80/31.94 scene true rate 2.910342515022546 mouthDist 76.83304239659522
+           INFO drag s41 lz 70.88 g lz 70.37 dragT 5.97/31.94 scene true rate 2.910342515022546 mouthDist 76.83304239659522
+           INFO drag s49 lz 67.45 g lz 66.85 dragT 7.13/31.94 scene true rate 2.910342515022546 mouthDist 76.83304239659522
+           INFO drag s57 lz 64.01 g lz 63.33 dragT 8.29/31.94 scene true rate 2.910342515022546 mouthDist 76.83304239659522
+           INFO drag s65 lz 60.49 g lz 59.81 dragT 9.46/31.94 scene true rate 2.910342515022546 mouthDist 76.83304239659522
+           INFO drag s73 lz 56.92 g lz 56.29 dragT 10.62/31.94 scene true rate 2.910342515022546 mouthDist 76.83304239659522
+           INFO drag s81 lz 53.32 g lz 52.77 dragT 11.79/31.94 scene true rate 2.910342515022546 mouthDist 76.83304239659522
+           INFO drag s89 lz 49.74 g lz 49.25 dragT 12.95/31.94 scene true rate 2.910342515022546 mouthDist 76.83304239659522
+           INFO drag s97 lz 46.25 g lz 45.74 dragT 14.12/31.94 scene true rate 2.910342515022546 mouthDist 76.83304239659522
+           INFO drag s105 lz 42.84 g lz 42.22 dragT 15.28/31.94 scene true rate 2.910342515022546 mouthDist 76.83304239659522
+           INFO drag s113 lz 39.31 g lz 38.70 dragT 16.44/31.94 scene true rate 2.910342515022546 mouthDist 76.83304239659522
+           INFO drag s121 lz 35.78 g lz 35.18 dragT 17.61/31.94 scene true rate 2.910342515022546 mouthDist 76.83304239659522
+           INFO drag s129 lz 32.30 g lz 31.66 dragT 18.77/31.94 scene true rate 2.910342515022546 mouthDist 76.83304239659522
+           INFO drag s137 lz 28.80 g lz 28.14 dragT 19.94/31.94 scene true rate 2.910342515022546 mouthDist 76.83304239659522
+           INFO drag s145 lz 25.28 g lz 24.62 dragT 21.10/31.94 scene true rate 2.910342515022546 mouthDist 76.83304239659522
+           INFO drag s153 lz 21.72 g lz 21.11 dragT 22.26/31.94 scene true rate 2.910342515022546 mouthDist 76.83304239659522
+           INFO drag s161 lz 18.12 g lz 17.59 dragT 23.43/31.94 scene true rate 2.910342515022546 mouthDist 76.83304239659522
+           INFO drag s169 lz 14.58 g lz 14.07 dragT 24.59/31.94 scene true rate 2.910342515022546 mouthDist 76.83304239659522
+           INFO drag s177 lz 11.15 g lz 10.55 dragT 25.76/31.94 scene true rate 2.910342515022546 mouthDist 76.83304239659522
+           INFO drag s185 lz 7.68 g lz 7.03 dragT 26.92/31.94 scene true rate 2.910342515022546 mouthDist 76.83304239659522
+           INFO drag s193 lz 4.12 g lz 3.51 dragT 28.08/31.94 scene true rate 2.910342515022546 mouthDist 76.83304239659522
+           INFO end: cave 164.5,69.6 yaw -1.78 samples 200 wall 14.1s dragFrom lz 78.88 dragTo lz 0.20 dragDone true t 2.2335000000000003 scene true P 164.5,69.1 landing? undefined
+ok    tgb268f  48 pass   0 fail  66.3s
+           INFO zNear before kill: alive true fogHidden undefined visible true depth 90.0 line 73.0 windup -0.030000000000000027 swingT -0.01999999999999995 pending false keepT 1.8499999999999999 busy undefined charge undefined/undefined lineClear undefined farLod true P 42.0,-20.0 z at 58.2,106.0 dist 127.0
+           INFO after kill: wasHidden false body.visible true
+FAIL  tgb268g  18 pass   1 fail  47.1s
+ok    t74     18 pass   0 fail  49.4s
+
+5 checks: 86 pass, 1 fail
+
+by owner:
+  unassigned
+    tgb268g 1 fail  FAIL killed while hidden: the corpse is drawn
+           FAIL killed while hidden: the corpse is drawn

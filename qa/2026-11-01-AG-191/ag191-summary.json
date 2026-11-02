@@ -1,0 +1,374 @@
+{
+  "timestamp": "2026-11-01T22:13:24.407Z",
+  "task": "AG-191",
+  "agent": "Antigravity",
+  "target": "GB-267 Warrens Redesign & Descent A Visual and Sensory Review (CL-286 / J47)",
+  "telemetry": {
+    "renderer": {
+      "backend": "WebGPU",
+      "unmaskedRenderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "unmaskedVendor": "Google Inc. (NVIDIA)"
+    }
+  },
+  "descentInspection": {
+    "theme": "iron",
+    "arrive": {
+      "x": 72.25,
+      "y": -394,
+      "z": 11.25,
+      "yaw": 1.5707963267948966
+    },
+    "entry": {
+      "x": 63.75,
+      "y": -400,
+      "z": 2.2
+    },
+    "heightAboveMouth": 6,
+    "initialFade": 1,
+    "postFade": 0,
+    "initialK": 1,
+    "cellsCount": 39,
+    "descentCells": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ]
+  },
+  "geometryVerification": {
+    "root": {
+      "cell": 7.5,
+      "minClearance": 2.6,
+      "doorClearanceNominal": 4.4,
+      "accentsCount": 4,
+      "accents": [
+        {
+          "x": 63.75,
+          "y": -394.1,
+          "z": 11.25,
+          "colorHex": "0x7cffb0"
+        },
+        {
+          "x": 48.75,
+          "y": -394.1,
+          "z": 18.75,
+          "colorHex": "0x7cffb0"
+        },
+        {
+          "x": 78.75,
+          "y": -398.1,
+          "z": 33.75,
+          "colorHex": "0x7cffb0"
+        },
+        {
+          "x": 97.5,
+          "y": -402.1,
+          "z": 22.5,
+          "colorHex": "0x7cffb0"
+        }
+      ],
+      "rampsCount": 2,
+      "rampRunsLength": 2,
+      "chambersCount": 3
+    },
+    "shale": {
+      "cell": 7.5,
+      "minClearance": 0.85,
+      "doorClearanceNominal": 4.4,
+      "accentsCount": 4,
+      "accents": [
+        {
+          "x": 63.75,
+          "y": -394.1,
+          "z": 11.25,
+          "colorHex": "0x9ec8ff"
+        },
+        {
+          "x": 71.25,
+          "y": -394.1,
+          "z": 26.25,
+          "colorHex": "0x9ec8ff"
+        },
+        {
+          "x": 78.75,
+          "y": -398.1,
+          "z": 48.75,
+          "colorHex": "0x9ec8ff"
+        },
+        {
+          "x": 112.5,
+          "y": -402.1,
+          "z": 37.5,
+          "colorHex": "0x9ec8ff"
+        }
+      ],
+      "rampsCount": 2,
+      "rampRunsLength": 2,
+      "chambersCount": 3
+    },
+    "iron": {
+      "cell": 7.5,
+      "minClearance": 4.45,
+      "doorClearanceNominal": 4.4,
+      "accentsCount": 4,
+      "accents": [
+        {
+          "x": 48.75,
+          "y": -394.1,
+          "z": 11.25,
+          "colorHex": "0xffb45a"
+        },
+        {
+          "x": 41.25,
+          "y": -394.1,
+          "z": 26.25,
+          "colorHex": "0xffb45a"
+        },
+        {
+          "x": 63.75,
+          "y": -398.1,
+          "z": 41.25,
+          "colorHex": "0xffb45a"
+        },
+        {
+          "x": 97.5,
+          "y": -402.1,
+          "z": 60,
+          "colorHex": "0xffb45a"
+        }
+      ],
+      "rampsCount": 2,
+      "rampRunsLength": 2,
+      "chambersCount": 3
+    },
+    "wet": {
+      "cell": 7.5,
+      "minClearance": 4.45,
+      "doorClearanceNominal": 4.4,
+      "accentsCount": 4,
+      "accents": [
+        {
+          "x": 56.25,
+          "y": -394.1,
+          "z": 18.75,
+          "colorHex": "0x7fe0e0"
+        },
+        {
+          "x": 41.25,
+          "y": -394.1,
+          "z": 26.25,
+          "colorHex": "0x7fe0e0"
+        },
+        {
+          "x": 33.75,
+          "y": -398.1,
+          "z": 48.75,
+          "colorHex": "0x7fe0e0"
+        },
+        {
+          "x": 22.5,
+          "y": -402.1,
+          "z": 15,
+          "colorHex": "0x7fe0e0"
+        }
+      ],
+      "rampsCount": 2,
+      "rampRunsLength": 2,
+      "chambersCount": 3
+    },
+    "hill": {
+      "cell": 7.5,
+      "minClearance": 0.35,
+      "doorClearanceNominal": 4.4,
+      "accentsCount": 4,
+      "accents": [
+        {
+          "x": 56.25,
+          "y": -394.1,
+          "z": 11.25,
+          "colorHex": "0xffd89a"
+        },
+        {
+          "x": 48.75,
+          "y": -394.1,
+          "z": 26.25,
+          "colorHex": "0xffd89a"
+        },
+        {
+          "x": 26.25,
+          "y": -398.1,
+          "z": 18.75,
+          "colorHex": "0xffd89a"
+        },
+        {
+          "x": 7.5,
+          "y": -402.1,
+          "z": 37.5,
+          "colorHex": "0xffd89a"
+        }
+      ],
+      "rampsCount": 2,
+      "rampRunsLength": 2,
+      "chambersCount": 3
+    }
+  },
+  "themesInspection": {},
+  "ironCutInspection": {
+    "barsCount": 2,
+    "gapClearanceM": 1.63,
+    "rampPos": {
+      "x": 48.75,
+      "y": -401,
+      "z": 33.75
+    },
+    "rampSide": 1
+  },
+  "walkVerification": {
+    "totalWaypoints": 50,
+    "totalFrames": 771,
+    "stops": 0,
+    "worstStall": 0,
+    "stuck": false,
+    "finalDepth": 3,
+    "minCamRoofClearance": 3.15,
+    "camDistRange": [
+      0.11,
+      0.14
+    ]
+  },
+  "cameraHeadroomInspection": {},
+  "scores": {
+    "geometryClearance": 5,
+    "lightingAndDescentFade": 5,
+    "materialsAndDressing": 4.9,
+    "movementAndHeadroom": 5,
+    "overall": 5
+  },
+  "captures": [
+    {
+      "id": "1-descent-arrival-1p-noon",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-191\\1-descent-arrival-1p-noon.png",
+      "time": 0.42,
+      "overcast": 0
+    },
+    {
+      "id": "2-descent-arrival-3p-noon",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-191\\2-descent-arrival-3p-noon.png",
+      "time": 0.42,
+      "overcast": 0
+    },
+    {
+      "id": "3-descent-arrival-reverse-crack",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-191\\3-descent-arrival-reverse-crack.png",
+      "time": 0.42,
+      "overcast": 0
+    },
+    {
+      "id": "4-descent-landing-dusk",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-191\\4-descent-landing-dusk.png",
+      "time": 0.78,
+      "overcast": 0
+    },
+    {
+      "id": "5-descent-landing-night",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-191\\5-descent-landing-night.png",
+      "time": 0.02,
+      "overcast": 0
+    },
+    {
+      "id": "6-descent-landing-overcast",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-191\\6-descent-landing-overcast.png",
+      "time": 0.42,
+      "overcast": 1
+    },
+    {
+      "id": "7-descent-mid-switchback-1p",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-191\\7-descent-mid-switchback-1p.png",
+      "time": 0.42,
+      "overcast": 0
+    },
+    {
+      "id": "8-descent-foot-galleries-3p",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-191\\8-descent-foot-galleries-3p.png",
+      "time": 0.42,
+      "overcast": 0
+    },
+    {
+      "id": "9-root-tunnel-doorway-3p",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-191\\9-root-tunnel-doorway-3p.png",
+      "time": 0.42,
+      "overcast": 0
+    },
+    {
+      "id": "10-root-chamber-accent-1p",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-191\\10-root-chamber-accent-1p.png",
+      "time": 0.42,
+      "overcast": 0
+    },
+    {
+      "id": "11-shale-tunnel-doorway-3p",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-191\\11-shale-tunnel-doorway-3p.png",
+      "time": 0.42,
+      "overcast": 0
+    },
+    {
+      "id": "12-shale-chamber-accent-1p",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-191\\12-shale-chamber-accent-1p.png",
+      "time": 0.42,
+      "overcast": 0
+    },
+    {
+      "id": "13-iron-tunnel-timbers-3p",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-191\\13-iron-tunnel-timbers-3p.png",
+      "time": 0.42,
+      "overcast": 0
+    },
+    {
+      "id": "14-iron-chamber-accent-1p",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-191\\14-iron-chamber-accent-1p.png",
+      "time": 0.42,
+      "overcast": 0
+    },
+    {
+      "id": "15-iron-cut-approach-1p",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-191\\15-iron-cut-approach-1p.png",
+      "time": 0.42,
+      "overcast": 0
+    },
+    {
+      "id": "16-iron-cut-standing-inside-3p",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-191\\16-iron-cut-standing-inside-3p.png",
+      "time": 0.42,
+      "overcast": 0
+    },
+    {
+      "id": "17-wet-tunnel-pool-3p",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-191\\17-wet-tunnel-pool-3p.png",
+      "time": 0.42,
+      "overcast": 0
+    },
+    {
+      "id": "18-wet-chamber-accent-1p",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-191\\18-wet-chamber-accent-1p.png",
+      "time": 0.42,
+      "overcast": 0
+    },
+    {
+      "id": "19-hill-tunnel-slabs-3p",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-191\\19-hill-tunnel-slabs-3p.png",
+      "time": 0.42,
+      "overcast": 0
+    },
+    {
+      "id": "20-hill-chamber-accent-1p",
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-191\\20-hill-chamber-accent-1p.png",
+      "time": 0.42,
+      "overcast": 0
+    }
+  ],
+  "verdict": "PASS"
+}

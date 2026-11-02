@@ -1,0 +1,116 @@
+Game-test request 2498ab76-ec29-4f11-ae86-dbbd17714bdd queued at position 2. Waiting...
+GRANT grokbot GB-270: starting one game-test command
+check-players: 314 player.position reads, all in the allowed places
+ok    t95      9 pass   0 fail  59.2s
+ok    t215     4 pass   0 fail  40.3s
+           INFO shambler  head: head 6 | chest: body 6 | legs: legs 4, ground 2
+           INFO feral     head: head 4, ground 2 | chest: body 5, head 1 | legs: legs 4, ground 2
+           INFO brute     head: head 5, body 1 | chest: body 6 | legs: legs 4, ground 2
+           INFO spider    head: head 5, ground 1 | chest: head 4, body 2 | legs: -
+           INFO leaper    head: head 6 | chest: body 4, head 1, ground 1 | legs: -
+           INFO colossus at 90 deg 6 m: its head is covered by its own gear from the camera here (no head case)
+           INFO colossus at 90 deg 14 m: its head is covered by its own gear from the camera here (no head case)
+           INFO colossus  head: head 4 | chest: body 6 | legs: legs 5, body 1
+           INFO the reticle rings a head lined up, and not a chest (false, los-clear) (would fail; INFO on the test page)
+           INFO the gold-X round: 0 aim(s) blocked before a clear line to the head
+           INFO pistol 8 m 3 m/s +: hit, lead 0.34 m (pace x flight 0.33) at 0.57 of its height
+           INFO pistol 8 m 3 m/s -: hit, lead -0.37 m (pace x flight -0.33) at 0.59 of its height
+           INFO pistol 8 m 6 m/s +: hit, lead 0.60 m (pace x flight 0.60) at 0.57 of its height
+           INFO pistol 8 m 6 m/s -: hit, lead -0.60 m (pace x flight -0.60) at 0.62 of its height
+           INFO pistol 18 m 3 m/s +: ground, lead 0.67 m (pace x flight 0.73) at 0.55 of its height
+           INFO pistol 18 m 3 m/s -: ground, lead -0.72 m (pace x flight -0.71) at 0.57 of its height
+           INFO pistol 18 m 6 m/s +: ground, lead 1.43 m (pace x flight 1.43) at 0.57 of its height
+           INFO pistol 18 m 6 m/s -: ground, lead -1.39 m (pace x flight -1.40) at 0.56 of its height
+           INFO m4 8 m 3 m/s +: hit, lead 0.28 m (pace x flight 0.24) at 0.61 of its height
+           INFO m4 8 m 3 m/s -: hit, lead -0.28 m (pace x flight -0.24) at 0.60 of its height
+           INFO m4 8 m 6 m/s +: hit, lead 0.44 m (pace x flight 0.43) at 0.61 of its height
+           INFO m4 8 m 6 m/s -: hit, lead -0.44 m (pace x flight -0.43) at 0.61 of its height
+           INFO m4 18 m 3 m/s +: ground, lead 0.49 m (pace x flight 0.54) at 0.55 of its height
+           INFO m4 18 m 3 m/s -: ground, lead -0.53 m (pace x flight -0.52) at 0.53 of its height
+           INFO m4 18 m 6 m/s +: ground, lead 1.05 m (pace x flight 1.05) at 0.61 of its height
+           INFO m4 18 m 6 m/s -: ground, lead -1.02 m (pace x flight -1.02) at 0.58 of its height
+           INFO the 6 m/s runners on the test page: hit 4, ground 4 (not a bar: the fake models; 1.x, CL FYI)
+           INFO launcher 12 m 6 m/s +: miss, lead 0.00 m (pace x flight 2.12)
+FAIL  t222     6 pass   2 fail  180.2s
+
+3 checks: 19 pass, 2 fail
+
+by owner:
+  unassigned
+    t222   2 fail  FAIL no round aimed at a body goes into the ground or past it (10; bar 8)
+           FAIL no round aimed at a body goes into the ground or past it (10; bar 8)
+           FAIL a runner crossing in front of him at 3 m/s, the cursor on it, is hit: hit 4, ground 4 (bar 5/8; the plumbing floor)
+check-players: 314 player.position reads, all in the allowed places
+           INFO shambler  head: head 5, miss 1 | chest: body 6 | legs: legs 4, ground 2
+           INFO feral     head: head 5, body 1 | chest: body 4, head 2 | legs: legs 4, ground 2
+           INFO brute     head: head 5, miss 1 | chest: body 6 | legs: legs 5, ground 1
+           INFO spider    head: head 6 | chest: head 5, body 1 | legs: -
+           INFO leaper    head: head 6 | chest: body 4, head 1, ground 1 | legs: -
+           INFO colossus at 90 deg 6 m: its head is covered by its own gear from the camera here (no head case)
+           INFO colossus at 90 deg 14 m: its head is covered by its own gear from the camera here (no head case)
+           INFO colossus  head: head 4 | chest: body 6 | legs: legs 5, body 1
+           INFO the reticle rings a head lined up, and not a chest (false, los-clear) (would fail; INFO on the test page)
+           INFO the gold-X round: 0 aim(s) blocked before a clear line to the head
+           INFO pistol 8 m 3 m/s +: hit, lead 0.38 m (pace x flight 0.33) at 0.62 of its height
+           INFO pistol 8 m 3 m/s -: hit, lead -0.38 m (pace x flight -0.33) at 0.60 of its height
+           INFO pistol 8 m 6 m/s +: hit, lead 0.60 m (pace x flight 0.60) at 0.50 of its height
+           INFO pistol 8 m 6 m/s -: hit, lead -0.60 m (pace x flight -0.60) at 0.61 of its height
+           INFO pistol 18 m 3 m/s +: ground, lead 0.69 m (pace x flight 0.73) at 0.57 of its height
+           INFO pistol 18 m 3 m/s -: ground, lead -0.72 m (pace x flight -0.71) at 0.57 of its height
+           INFO pistol 18 m 6 m/s +: ground, lead 1.43 m (pace x flight 1.43) at 0.56 of its height
+           INFO pistol 18 m 6 m/s -: ground, lead -1.39 m (pace x flight -1.39) at 0.56 of its height
+           INFO m4 8 m 3 m/s +: hit, lead 0.25 m (pace x flight 0.24) at 0.52 of its height
+           INFO m4 8 m 3 m/s -: hit, lead -0.28 m (pace x flight -0.24) at 0.59 of its height
+           INFO m4 8 m 6 m/s +: hit, lead 0.43 m (pace x flight 0.43) at 0.57 of its height
+           INFO m4 8 m 6 m/s -: hit, lead -0.44 m (pace x flight -0.43) at 0.61 of its height
+           INFO m4 18 m 3 m/s +: ground, lead 0.49 m (pace x flight 0.54) at 0.55 of its height
+           INFO m4 18 m 3 m/s -: ground, lead -0.55 m (pace x flight -0.52) at 0.59 of its height
+           INFO m4 18 m 6 m/s +: ground, lead 1.05 m (pace x flight 1.05) at 0.56 of its height
+           INFO m4 18 m 6 m/s -: ground, lead -1.02 m (pace x flight -1.02) at 0.57 of its height
+           INFO the 6 m/s runners on the test page: hit 4, ground 4 (not a bar: the fake models; 1.x, CL FYI)
+           INFO launcher 12 m 6 m/s +: miss, lead 0.00 m (pace x flight 2.12)
+FAIL  t222     7 pass   1 fail  179.2s
+
+1 checks: 7 pass, 1 fail
+
+by owner:
+  unassigned
+    t222   1 fail  FAIL a runner crossing in front of him at 3 m/s, the cursor on it, is hit: hit 4, ground 4 (bar 
+           FAIL a runner crossing in front of him at 3 m/s, the cursor on it, is hit: hit 4, ground 4 (bar 5/8; the plumbing floor)
+FAIL  t222      7 pass   2 fail  150.5s  (real renderer)
+    INFO shambler  head: head 6 | chest: body 6 | legs: legs 3, ground 2, body 1
+    INFO feral     head: head 5, body 1 | chest: body 5, head 1 | legs: legs 4, ground 2
+    INFO brute     head: head 6 | chest: body 6 | legs: legs 5, body 1
+    INFO spider    head: head 6 | chest: head 5, body 1 | legs: -
+    INFO leaper    head: head 6 | chest: body 4, head 2 | legs: -
+    INFO colossus at 90 deg 6 m: its head is covered by its own gear from the camera here (no head case)
+    INFO colossus at 90 deg 14 m: its head is covered by its own gear from the camera here (no head case)
+    INFO colossus  head: head 4 | chest: body 6 | legs: ground 1, legs 5
+    PASS pointing at a head is a headshot: 33/34 (bar 90 %; was 17/64)
+    PASS pointing at a chest lands in the body: body 23, head 1 (bar 80 %, no miss; a head only where the head covers the chest from up here)
+    PASS pointing at the legs lands low: 17/24 (bar 60 %)
+    FAIL no round aimed at a body goes into the ground or past it (5; bar 4)
+    PASS the reticle rings a head lined up, and not a chest (true, los-clear)
+    INFO the gold-X round: 0 aim(s) blocked before a clear line to the head
+    PASS his round into the head flashes the gold X on the reticle (rgb(255, 210, 74))
+    PASS the ticks show the spread: pistol 7.0 px, shotgun 42.1 px
+    INFO pistol 8 m 3 m/s +: hit, lead 0.32 m (pace x flight 0.32) at 0.61 of its height
+    INFO pistol 8 m 3 m/s -: hit, lead -0.31 m (pace x flight -0.32) at 0.62 of its height
+    INFO pistol 8 m 6 m/s +: hit, lead 0.54 m (pace x flight 0.59) at 0.57 of its height
+    INFO pistol 8 m 6 m/s -: hit, lead -0.50 m (pace x flight -0.59) at 0.60 of its height
+    INFO pistol 18 m 3 m/s +: ground, lead 0.72 m (pace x flight 0.72) at 0.56 of its height
+    INFO pistol 18 m 3 m/s -: ground, lead -0.70 m (pace x flight -0.71) at 0.56 of its height
+    INFO pistol 18 m 6 m/s +: miss, lead 1.00 m (pace x flight 1.43)
+    INFO pistol 18 m 6 m/s -: miss, lead -0.81 m (pace x flight -1.36)
+    INFO m4 8 m 3 m/s +: hit, lead 0.23 m (pace x flight 0.23) at 0.61 of its height
+    INFO m4 8 m 3 m/s -: hit, lead -0.23 m (pace x flight -0.23) at 0.61 of its height
+    INFO m4 8 m 6 m/s +: hit, lead 0.41 m (pace x flight 0.42) at 0.56 of its height
+    INFO m4 8 m 6 m/s -: hit, lead -0.42 m (pace x flight -0.42) at 0.55 of its height
+    INFO m4 18 m 3 m/s +: ground, lead 0.52 m (pace x flight 0.53) at 0.56 of its height
+    INFO m4 18 m 3 m/s -: ground, lead -0.51 m (pace x flight -0.52) at 0.61 of its height
+    INFO m4 18 m 6 m/s +: ground, lead 0.71 m (pace x flight 1.05) at 0.63 of its height
+    INFO m4 18 m 6 m/s -: miss, lead -0.52 m (pace x flight -1.00)
+    FAIL a runner crossing in front of him at 3-6 m/s, the cursor on it, is hit: hit 8, ground 5, miss 3 (bar 14/16; was 7/36)
+    INFO launcher 12 m 6 m/s +: miss, lead -0.07 m (pace x flight 2.10)
+    PASS the launcher is not led (it lobs): -0.07 m off the body
+1 checks: 7 pass, 2 fail (real renderer)

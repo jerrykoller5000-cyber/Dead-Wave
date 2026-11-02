@@ -4,10 +4,10 @@ state: idle
 model: Gemini 4 Argon (High)
 task: —
 touching: —
-since: 2026-11-01T13:25Z
+since: 2026-11-02T05:47Z
 next: —
 blocked-on: —
-last-report: handoffs/2026-11-01-antigravity-AG-186.md
+last-report: handoffs/2026-11-02-antigravity-AG-197.md
 
 ## Notes
 
@@ -36,9 +36,9 @@ a real GPU the way you can.
 - Serve the game with `npm run serve` and open http://127.0.0.1:8971/index.html?debug=1.
   With ?debug=1, window.TT is available in the DevTools console.
 
-### Status (2026-11-01)
-- **AG-174..AG-181**: DONE (see `handoffs/`). GPU inspections of fuel depot, Trapper fence gate, foliage bundles, radio/antenna, instanced forest, 4 camps skyline pulls, trail chains & supported kit tree, dark woods warning audio.
-- **AG-183**: DONE (`handoffs/2026-11-01-antigravity-AG-183.md`, `qa/2026-11-01-AG-183/report.md`, `ag183-sheet.png`). 4-light visual pass on GP-20006 HQ thicket barrier ring; verified zero floating meshes, 4 draws, closed span pushout, and watercourse cut.
-- **AG-184**: DONE (`handoffs/2026-11-01-antigravity-AG-184.md`, `qa/2026-11-01-AG-184/report.md`, `ag184-sheet.png`). Real-GPU visual inspection on RTX 5080 WebGPU for Cursor's CU-209 drop-in clearing at (42, -20) and two trail bends. 6 eye-height captures; 5.0/5 PASS.
-- **AG-185**: DONE (`handoffs/2026-11-01-antigravity-AG-185.md`, `qa/2026-11-01-AG-185/report.md`, `ag185-sheet.png`). Real-GPU visual inspection of CU-210 HQ thicket ring default-on state. Verified ring is ON by default without ?walls=1; Trail-11 gap reads cleanly as a way through from yard and exterior; closed perimeter reads unmistakably as a 2.5m wall; collision & valley nav field route verified; 6-panel contact sheet; 5.0/5 PASS.
+### Status (2026-11-02)
+- **AG-174..AG-185**: DONE (see `handoffs/`). GPU inspections of thicket rings, clearings, trails, dark woods audio, fuel depot, Trapper fence gate, skyline pulls.
+- **AG-194**: DONE (`handoffs/2026-11-02-antigravity-AG-194.md`, `qa/2026-11-02-AG-194/`). Real-GPU verification on RTX 5080 WebGPU for CL-275 score (tcl275a 12/0, tcl275b 6/0, tcl275c 7/0, t182 36/0). JS heap evaluation at Night 20 peak.
+- **AG-196**: DONE (`handoffs/2026-11-02-antigravity-AG-196.md`, `qa/2026-11-02-AG-196/`). Real-hardware process memory benchmark across all Chrome processes on RTX 5080. Verified score's decoded PCM audio buffers reside in the Game Renderer process (+15.2 MB PrivWS) rather than Audio Service (3.4 MB static) or V8 JS Heap (flat). Evaluated Training Ground 3-motif recovery sequence (feral, brute, spitter); verified memory drops back down by 55-82 MB after clearing each motif.
+- **AG-197**: DONE (`handoffs/2026-11-02-antigravity-AG-197.md`, `qa/2026-11-02-AG-197/`). Real-hardware WebGPU verification on RTX 5080 for CL-275 score calm pools (`tcl275d` 7/0) and full audio regression suite (`t73` 12/0, `t60` 43/0, `t61` 22/0, `tcl275a` 12/0; 96/0 total PASS). Calm plays `gh-place-dawn` audibly and cleanly restores old calm on score off.
 - **Next**: Queue empty; 0 requests waiting; ready for next visual review or GPU sweep.

@@ -1,6 +1,15 @@
 // GP-20003: W1's distant clues. Each smoke column is one instanced draw; the
 // circling crows are two. All anchors come from the built POIs, never map coords.
-export function createSkylinePulls(THREE, { scene, poi, landmarks = [], height, camera }) {
+const smooth = (v) => { const u = Math.max(0, Math.min(1, v)); return u * u * (3 - 2 * u); };
+
+// Invisible inside the lit yard, useful beyond the trees, and gone at the far
+// edge of the valley. Fog is handled here because a night mist ends at 32 m.
+export function hqGlowOpacity(distance, lit) {
+  if (!lit || !Number.isFinite(distance)) return 0;
+  return 0.16 * smooth((distance - 24) / 36) * (1 - smooth((distance - 155) / 100));
+}
+
+export function createSkylinePulls(THREE, { scene, poi, landmarks = [], height, camera, hq = null }) {
   const TAU = Math.PI * 2;
   const zero = new THREE.Matrix4().makeScale(0, 0, 0);
   const matrix = new THREE.Matrix4();
@@ -130,8 +139,22 @@ export function createSkylinePulls(THREE, { scene, poi, landmarks = [], height, 
     scene.add(beacon);
   }
 
+  // One fog-exempt, depth-tested haze disc above the HQ canopy. It has no
+  // light, shadow or gameplay collider, and borrows the mast's radial texture.
+  const hqGlow = hq ? new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTex,
+    color: 0xffdfb3, blending: THREE.AdditiveBlending, transparent: true,
+    opacity: 0, depthTest: true, depthWrite: false, fog: false })) : null;
+  if (hqGlow) {
+    hqGlow.name = 'skyline-hq-haze';
+    hqGlow.position.set(hq.x, hq.y + 22, hq.z);
+    hqGlow.scale.set(40, 27, 1);
+    hqGlow.visible = false;
+    hqGlow.userData.noCull = true;
+    scene.add(hqGlow);
+  }
+
   let time = 0;
-  function update(dt, { wind, daylight, fuelDone, beaconOn }) {
+  function update(dt, { wind, daylight, fuelDone, beaconOn, hqGlowOn = false }) {
     time += Math.max(0, dt);
     camera.getWorldQuaternion(cameraRotation);
     drawColumn(chimney, sites.trapper, daylight ? 14 : 0, time, wind, 0.025, 2.1, 0.07, 44);
@@ -145,6 +168,10 @@ export function createSkylinePulls(THREE, { scene, poi, landmarks = [], height, 
         beacon.material.opacity = 0.94 * Math.max(0, 1 - Math.max(0, distance - 45) / 260);
       }
     }
+    if (hqGlow) {
+      hqGlow.material.opacity = hqGlowOpacity(camera.position.distanceTo(hqGlow.position), hqGlowOn);
+      hqGlow.visible = hqGlow.material.opacity > 0.001;
+    }
   }
-  return { update, sites, chimney, fuel, bodies, wings, beacon };
+  return { update, sites, chimney, fuel, bodies, wings, beacon, hqGlow };
 }

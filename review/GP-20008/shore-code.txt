@@ -1,0 +1,27 @@
+const sites=[];const add=(id,p,r=14)=>{if(p&&Number.isFinite(p.x)&&Number.isFinite(p.z))sites.push({id,x:p.x,z:p.z,r});};
+add('hq',{x:0,z:0},24);add('landing',{x:42,z:-20},9);
+for(const key of ['campsites','cabins','sheds','wrecks','caves','bridges'])for(let i=0;i<(T.POI[key]||[]).length;i++)add(key+'-'+i,T.POI[key][i],key==='bridges'?9:14);
+add('mast',T.POI.mast,20);add('graveyard',T.POI.graveyard);add('tower',T.POI.tower,12);add('dock',T.POI.dock,9);
+const clearance=(x,z)=>Math.min(...sites.map(p=>Math.hypot(x-p.x,z-p.z)-p.r-2.5));
+const wet=(x,z,nx,nz)=>[-2.5,0,2.5].some(s=>T.waterDepthAt(x+nx*s,z+nz*s)>.05);
+const radial=[];
+for(let deg=190;deg<=270;deg++){
+ const a=deg*Math.PI/180,dx=Math.cos(a),dz=Math.sin(a),nx=-dz,nz=dx;
+ let shore=Infinity;
+ for(let r=70;r<=180;r+=.5)if(wet(r*dx,r*dz,nx,nz)){shore=r;break;}
+ if(!Number.isFinite(shore)||shore<82)continue;
+ const stop=shore-6;let minClear=Infinity,maxSlope=0;
+ for(let r=70;r<=stop;r+=.5){const x=r*dx,z=r*dz;minClear=Math.min(minClear,clearance(x,z));maxSlope=Math.max(maxSlope,T.terrainSlope(x,z));}
+ if(minClear>=15&&maxSlope<=.3)radial.push({deg,shore,stop:+stop.toFixed(1),x:+(stop*dx).toFixed(1),z:+(stop*dz).toFixed(1),clear:+minClear.toFixed(1),slope:+maxSlope.toFixed(2)});
+}
+radial.sort((a,b)=>Math.abs(a.deg-225)-Math.abs(b.deg-225));
+const pts=[[66,23],[83,50],[96,80],[118,118],[141,141]],north=[];
+for(let i=1;i<pts.length;i++){
+ const a=pts[i-1],b=pts[i],len=Math.hypot(b[0]-a[0],b[1]-a[1]),nx=-(b[1]-a[1])/len,nz=(b[0]-a[0])/len;
+ for(let s=0;s<=len;s+=.5){const x=a[0]+(b[0]-a[0])*s/len,z=a[1]+(b[1]-a[1])*s/len,r=Math.hypot(x,z);
+  if(r<105||r>118||wet(x,z,nx,nz)||clearance(x,z)<15||T.terrainSlope(x,z)>.3)continue;
+  north.push({x:+x.toFixed(1),z:+z.toFixed(1),r:+r.toFixed(1),clear:+clearance(x,z).toFixed(1),slope:+T.terrainSlope(x,z).toFixed(2)});
+ }
+}
+north.sort((a,b)=>Math.abs(a.r-115)-Math.abs(b.r-115));
+return {radialCount:radial.length,radial:radial.slice(0,20),northGap:north.slice(0,12)};

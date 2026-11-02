@@ -1,0 +1,40 @@
+{
+  "backend": "WebGPU",
+  "hipGrip": {
+    "x": 0.3067173305069887,
+    "y": -0.5790598220656893
+  },
+  "aimed": {
+    "rear": [
+      0,
+      0
+    ],
+    "front": [
+      0,
+      0
+    ],
+    "near": {
+      "closest": 0.3703621943363459,
+      "seen": 1850
+    }
+  },
+  "places": [
+    "fore",
+    "well",
+    "below",
+    "pouch",
+    "work"
+  ],
+  "states": [
+    "seated",
+    "hand",
+    "pouch"
+  ],
+  "reloadNear": 0.3073511923837268,
+  "workFrames": 5,
+  "maxWrist": 0.87,
+  "samples": 41,
+  "finished": true,
+  "finalMag": "seated",
+  "finalHand": "fore"
+}

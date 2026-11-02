@@ -1,0 +1,93 @@
+GRANT cursor CU-220: starting one game-test command
+check-players: 314 player.position reads, all in the allowed places
+FAIL  t6      18 pass   3 fail  44.3s
+ok    t14     13 pass   0 fail  39.8s
+ok    t50     15 pass   0 fail  25.1s
+FAIL  t59     47 pass   1 fail  70.7s
+FAIL  t74     17 pass   1 fail  50.8s
+FAIL  t76     15 pass   1 fail  49.3s
+FAIL  t87     12 pass   1 fail  38.8s
+FAIL  t96     18 pass   1 fail  44.4s
+ok    t139    13 pass   0 fail  50.4s
+FAIL  t142     7 pass   3 fail  46.7s
+ok    t164    14 pass   0 fail  39.8s
+FAIL  t167    19 pass   1 fail  23.5s
+ok    t168    39 pass   0 fail  63.3s
+ok    t170    20 pass   0 fail  89.1s
+FAIL  t192     8 pass   2 fail  41.5s
+           page error: TypeError: Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'.
+           page error: TypeError: Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'.
+FAIL  t206    18 pass   1 fail  54.7s
+           INFO shambler  head: head 4, miss 1, body 1 | chest: body 6 | legs: miss 1, ground 2, legs 3
+           INFO feral     head: head 6 | chest: body 4, head 1, legs 1 | legs: legs 4, ground 2
+           INFO brute     head: body 1, head 4, miss 1 | chest: body 6 | legs: legs 5, ground 1
+           INFO spider    head: head 6 | chest: head 4, body 2 | legs: -
+           INFO leaper    head: head 5, body 1 | chest: body 4, head 2 | legs: -
+           INFO colossus at 90 deg 6 m: its head is covered by its own gear from the camera here (no head case)
+           INFO colossus at 90 deg 14 m: its head is covered by its own gear from the camera here (no head case)
+           INFO colossus  head: head 4 | chest: body 6 | legs: legs 5, body 1
+           INFO the reticle rings a head lined up, and not a chest (false, los-clear) (would fail; INFO on the test page)
+           INFO the gold-X round: 0 aim(s) blocked before a clear line to the head
+           INFO pistol 8 m 3 m/s +: miss, lead 0.18 m (pace x flight 0.33)
+           INFO pistol 8 m 3 m/s -: hit, lead -0.19 m (pace x flight -0.33) at 0.53 of its height
+           INFO pistol 8 m 6 m/s +: miss, lead 0.30 m (pace x flight 0.60)
+           INFO pistol 8 m 6 m/s -: miss, lead -0.30 m (pace x flight -0.60)
+           INFO pistol 18 m 3 m/s +: ground, lead 0.54 m (pace x flight 0.73) at 0.56 of its height
+           INFO pistol 18 m 3 m/s -: miss, lead -0.56 m (pace x flight -0.71)
+           INFO pistol 18 m 6 m/s +: ground, lead 1.12 m (pace x flight 1.43) at 0.58 of its height
+           INFO pistol 18 m 6 m/s -: miss, lead -1.18 m (pace x flight -1.38)
+           INFO m4 8 m 3 m/s +: hit, lead 0.10 m (pace x flight 0.23) at 0.51 of its height
+           INFO m4 8 m 3 m/s -: miss, lead -0.09 m (pace x flight -0.23)
+           INFO m4 8 m 6 m/s +: miss, lead 0.13 m (pace x flight 0.43)
+           INFO m4 8 m 6 m/s -: miss, lead -0.14 m (pace x flight -0.43)
+           INFO m4 18 m 3 m/s +: ground, lead 0.36 m (pace x flight 0.54) at 0.56 of its height
+           INFO m4 18 m 3 m/s -: miss, lead -0.40 m (pace x flight -0.52)
+           INFO m4 18 m 6 m/s +: miss, lead 0.75 m (pace x flight 1.05)
+           INFO m4 18 m 6 m/s -: miss, lead -0.81 m (pace x flight -1.01)
+           INFO the 6 m/s runners on the test page: miss 7, ground 1 (not a bar: the fake models; 1.x, CL FYI)
+           INFO launcher 12 m 6 m/s +: miss, lead -0.28 m (pace x flight 2.11)
+FAIL  t222     7 pass   1 fail  171.8s
+           INFO night 8: day 8 bloodMoon true preview.bloodMoon true silenced false quest {"runId":1,"day":8,"order":[4,6,7,3,2],"unlocked":true,"triedDay":6,"known":[false,false,false,false,false],"silencedDay":6,"silenced":false,"heart":null,"done":false} total 315
+ok    t260     9 pass   0 fail  39.4s
+FAIL  t302    16 pass   1 fail  52.2s
+FAIL  t320    17 pass   4 fail  215.5s
+
+20 checks: 342 pass, 21 fail
+
+by owner:
+  Grokbot (combat core)
+    t6     3 fail  FAIL floor drag preview all green: [null,null,null,null,null,null]
+           FAIL floor drag preview all green: [null,null,null,null,null,null]
+           FAIL floor dragged wall-to-wall across a gap: 6
+           FAIL dragged floors are roofs at level 1 (not boardwalks): 0,0,0,0,0,0
+  unassigned
+    t59    1 fail  FAIL dragged to the mouth (closest 20.65 m from the lip)
+           FAIL dragged to the mouth (closest 20.65 m from the lip)
+    t74    1 fail  FAIL and come for him (12.2 -> 13.4 m)
+           FAIL and come for him (12.2 -> 13.4 m)
+    t76    1 fail  FAIL drawn close up, not the far LOD (true/false/false)
+           FAIL drawn close up, not the far LOD (true/false/false)
+    t87    1 fail  FAIL and says it while he aims (""; hint "", cell 3,0 lv undefined)
+           FAIL and says it while he aims (""; hint "", cell 3,0 lv undefined)
+    t96    1 fail  FAIL killed while hidden: the corpse is drawn
+           FAIL killed while hidden: the corpse is drawn
+    t142   3 fail  FAIL a sandbag starts a vault
+           FAIL a sandbag starts a vault
+           FAIL during the hop he keeps 70% of his speed (1.00 of 1.00)
+           FAIL wire: 0.76 m past, grounded true
+    t167   1 fail  FAIL Coldwater's church by the old cemetery, behind the burial yard (35.0 m)
+           FAIL Coldwater's church by the old cemetery, behind the burial yard (35.0 m)
+    t192   2 fail  FAIL he mounts the M240B
+           FAIL he mounts the M240B
+           FAIL and it still fires its belt (500)
+    t206   1 fail  FAIL it grows with the hold: 6.83 m at 0.30 s, 12.17 m at 0.8 s (capped: 0.80)
+           FAIL it grows with the hold: 6.83 m at 0.30 s, 12.17 m at 0.8 s (capped: 0.80)
+    t222   1 fail  FAIL a runner crossing in front of him at 3 m/s, the cursor on it, is hit: miss 4, hit 2, ground
+           FAIL a runner crossing in front of him at 3 m/s, the cursor on it, is hit: miss 4, hit 2, ground 2 (bar 5/8; the plumbing floor)
+    t302   1 fail  FAIL the ground in the rock is his last floor (-394.00, floor -400.00), not the valley 400 m up
+           FAIL the ground in the rock is his last floor (-394.00, floor -400.00), not the valley 400 m up
+    t320   4 fail  FAIL gap 302° inside through a gap in 20s (r 62, stuck 0.0s, clip false)
+           FAIL gap 302° inside through a gap in 20s (r 62, stuck 0.0s, clip false)
+           FAIL between 250° inside through a gap in 22s (r 58, stuck 0.0s, clip false)
+           FAIL between 368° inside through a gap in 22s (r 77, stuck 0.0s, clip false)
+           FAIL past the ring, a shambler from the far side reached him (r 36, stuck 0.0s)

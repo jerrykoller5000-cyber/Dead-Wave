@@ -1,0 +1,36 @@
+const sites = [];
+const add = (id,p,r=14) => { if(p&&Number.isFinite(p.x)&&Number.isFinite(p.z)) sites.push({id,x:p.x,z:p.z,r}); };
+add('hq',{x:0,z:0},24); add('landing',{x:42,z:-20},9);
+for(const key of ['campsites','cabins','sheds','wrecks','caves','bridges']) for(let i=0;i<(T.POI[key]||[]).length;i++) add(key+'-'+i,T.POI[key][i],key==='bridges'?9:14);
+add('mast',T.POI.mast,20);add('graveyard',T.POI.graveyard);add('tower',T.POI.tower,12);add('dock',T.POI.dock,9);
+const nearest=(x,z)=>sites.map(s=>({id:s.id,clear:Math.hypot(x-s.x,z-s.z)-s.r-2.5})).sort((a,b)=>a.clear-b.clear)[0];
+const proposals={
+ ne:[[66,23],[83,50],[96,80],[118,118],[141,141]],
+ se:[[50,-49],[59,-70],[68,-105],[103,-130],[140,-143]],
+ nw:[[-10,69],[-30,95],[-50,115],[-75,130],[-140,143]]
+};
+const checked=Object.entries(proposals).map(([id,pts])=>{
+ const rows=[]; let length=0;
+ for(let i=1;i<pts.length;i++){
+  const a=pts[i-1],b=pts[i],d=Math.hypot(b[0]-a[0],b[1]-a[1]);
+  for(let j=0;j<=Math.ceil(d);j++){
+   const q=j/Math.ceil(d),x=a[0]+(b[0]-a[0])*q,z=a[1]+(b[1]-a[1])*q,r=Math.hypot(x,z);
+   const n=nearest(x,z); rows.push({r,x,z,n,wet:T.waterDepthAt(x,z)>.05,slope:T.terrainSlope(x,z)});
+  }
+  length+=d;
+ }
+ const worst=rows.slice().sort((a,b)=>a.n.clear-b.n.clear).slice(0,5).map(v=>({r:+v.r.toFixed(1),x:+v.x.toFixed(1),z:+v.z.toFixed(1),site:v.n.id,clear:+v.n.clear.toFixed(1)}));
+ const wet=rows.filter(v=>v.wet).map(v=>+v.r.toFixed(1));
+ const steep=rows.filter(v=>v.slope>.3).map(v=>({r:+v.r.toFixed(1),s:+v.slope.toFixed(2)}));
+ const gap=rows.filter(v=>v.r>120&&v.r<130).sort((a,b)=>Math.abs(a.r-125)-Math.abs(b.r-125)).slice(0,1).map(v=>({x:+v.x.toFixed(1),z:+v.z.toFixed(1),r:+v.r.toFixed(1),clear:+v.n.clear.toFixed(1),slope:+v.slope.toFixed(2),wet:v.wet}));
+ return {id,length:+length.toFixed(1),worst,wet:[wet[0],wet.at(-1),wet.length],steep:steep.slice(0,5),gap};
+});
+const polar=[];
+for(const r of [70,80,90,100,110,125,140,150,175,200]){
+ const list=[];
+ for(let deg=180;deg<=270;deg+=5){const a=deg*Math.PI/180,x=r*Math.cos(a),z=r*Math.sin(a),n=nearest(x,z),wet=T.waterDepthAt(x,z)>.05,slope=T.terrainSlope(x,z);
+  if(!wet&&n.clear>=15&&slope<=.3)list.push({deg,clear:+n.clear.toFixed(1),slope:+slope.toFixed(2)});
+ }
+ polar.push({r,valid:list});
+}
+return {checked,polar};

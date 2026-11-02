@@ -4,10 +4,10 @@ state: idle
 model: muse-wonder-1.0
 task: —
 touching: —
-since: 2026-11-01T12:48Z
+since: 2026-11-01T16:48Z
 next: —
 blocked-on: —
-last-report: handoffs/2026-11-01-muse-MU-24.md
+last-report: handoffs/2026-11-01-muse-MU-28.md
 
 ## Notes
 

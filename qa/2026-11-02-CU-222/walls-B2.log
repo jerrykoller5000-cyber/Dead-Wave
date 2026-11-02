@@ -1,0 +1,115 @@
+bench: http://127.0.0.1:26218/index.html?debug=1&quarterwalls=0&walls=0
+bench: scenario night 20 for 30s
+
+bench: ready 10129 ms
+bench: graphics high
+bench: night 20 push 2/6  out 7  spawned 210/861
+bench: night 20 push 4/6  out 0  spawned 420/861
+bench: night 20 push 5/6  out 1  spawned 631/861
+bench: night 20 push 6/6  out 48  spawned 723/861
+bench: profiler on, GPU timestamps on
+fps    56.3   (mean of last 10 s)
+low    40.5   (1% low, same windows)
+worst  21.7 ms
+hitch  1   (frames over 50 ms, whole run)
+draws  219
+tris   537773
+frame  17.76 ms = tick 15.92 ms + outside 1.85 ms  (the last 10 s, the window of fps and low)
+whole run: tick 16.88 ms over 30 s; frame (last 10 s) - that = 0.88 ms (two windows)   gpu 0.22 ms
+last 10 s, by section:
+  r:render                             7.05 ms
+  zombies                              2.61 ms
+  r:matrices                           1.48 ms
+  aim+climb                            1.09 ms
+  m:idle                               0.62 ms
+  m:pose                               0.52 ms
+  r:cull                               0.46 ms
+  w:treeFall+leaves+batches            0.31 ms
+  w:minimap                            0.23 ms
+  hud+audio                            0.20 ms
+  m:hold                               0.18 ms
+  drops+hud                            0.13 ms
+  w:treeFade+sway                      0.11 ms
+  w:stairs+roof+birds+bugs+wildlife    0.10 ms
+  r:rigSkin                            0.10 ms
+  tree+deck coll                       0.08 ms
+  daynight                             0.08 ms
+  w:wind                               0.05 ms
+  fires+smoke                          0.05 ms
+  m:reload+knife                       0.05 ms
+  w:motes+flame+ripples+life           0.05 ms
+  w:weather+lightning+clouds           0.04 ms
+  m:hold2+arms                         0.03 ms
+  idle+gear                            0.03 ms
+  camera                               0.03 ms
+  w:banner..normals                    0.03 ms
+  move                                 0.02 ms
+  combat misc                          0.02 ms
+  effects                              0.02 ms
+  m:reticle+ghost                      0.02 ms
+  r:lightPool                          0.01 ms
+  m:lasers                             0.01 ms
+  jump+guns                            0.01 ms
+  ground+clamp                         0.01 ms
+  viewmodel                            0.01 ms
+  w:doors+traps+shadowLOD              0.01 ms
+  w:foliageCull                        0.01 ms
+  turrets                              0.01 ms
+  m:hush+roof+kills                    0.01 ms
+  after render                         0.00 ms
+  marine                               0.00 ms
+  m:fire                               0.00 ms
+  m:mortar+carry                       0.00 ms
+  waves                                0.00 ms
+  projectiles                          0.00 ms
+  w:water                              0.00 ms
+  w:rest                               0.00 ms
+whole run, by section:
+  r:render                             7.86 ms   worst 16.4
+  zombies                              2.60 ms   worst 9.5
+  r:matrices                           1.65 ms   worst 5.3
+  aim+climb                            0.68 ms   worst 23.4
+  m:hold                               0.62 ms   worst 2.7
+  m:pose                               0.54 ms   worst 2.2
+  r:cull                               0.51 ms   worst 1.7
+  w:treeFall+leaves+batches            0.37 ms   worst 2.5
+  w:minimap                            0.28 ms   worst 2.7
+  m:idle                               0.25 ms   worst 2.0
+  hud+audio                            0.22 ms   worst 1.1
+  drops+hud                            0.16 ms   worst 1.4
+  w:treeFade+sway                      0.13 ms   worst 0.9
+  w:stairs+roof+birds+bugs+wildlife    0.13 ms   worst 0.8
+  r:rigSkin                            0.11 ms   worst 0.4
+  tree+deck coll                       0.09 ms   worst 0.5
+  daynight                             0.09 ms   worst 0.4
+  fires+smoke                          0.06 ms   worst 1.9
+  w:wind                               0.06 ms   worst 0.5
+  m:reload+knife                       0.05 ms   worst 0.3
+  w:motes+flame+ripples+life           0.05 ms   worst 1.5
+  w:weather+lightning+clouds           0.05 ms   worst 0.4
+  w:banner..normals                    0.04 ms   worst 0.2
+  idle+gear                            0.03 ms   worst 0.2
+  camera                               0.03 ms   worst 0.2
+  move                                 0.02 ms   worst 0.2
+  combat misc                          0.02 ms   worst 0.5
+  effects                              0.02 ms   worst 0.2
+  r:lightPool                          0.02 ms   worst 1.6
+  m:reticle+ghost                      0.02 ms   worst 0.2
+  m:hold2+arms                         0.01 ms   worst 5.2
+  viewmodel                            0.01 ms   worst 0.2
+  m:lasers                             0.01 ms   worst 0.1
+  jump+guns                            0.01 ms   worst 0.3
+  w:doors+traps+shadowLOD              0.01 ms   worst 0.2
+  ground+clamp                         0.01 ms   worst 0.1
+  m:hush+roof+kills                    0.01 ms   worst 0.2
+  turrets                              0.01 ms   worst 0.2
+  w:foliageCull                        0.01 ms   worst 0.3
+  m:fire                               0.00 ms   worst 0.1
+  marine                               0.00 ms   worst 0.2
+  waves                                0.00 ms   worst 0.1
+  after render                         0.00 ms   worst 0.1
+  m:mortar+carry                       0.00 ms   worst 0.1
+  w:water                              0.00 ms   worst 0.1
+  projectiles                          0.00 ms   worst 0.1
+  w:rest                               0.00 ms   worst 0.1
+{"scenario":"night","seconds":30,"fps":56.3,"low":40.5,"worst":21.7,"hitches":1,"draws":219,"triangles":537773,"zombies":48,"gfx":"high","windows":10,"night":20,"push":5,"pushes":6,"last":true,"viewmodelMs":0.01,"prof":{"frames":1650,"frameMs":17.76,"tickMs":16.88,"outsideMs":0.88,"last10":{"seconds":10,"frames":574,"frameMs":17.76,"tickMs":15.92,"outsideMs":1.85,"viewmodelMs":0.01,"top":[{"k":"r:render","avg":7.05},{"k":"zombies","avg":2.61},{"k":"r:matrices","avg":1.48},{"k":"aim+climb","avg":1.09},{"k":"m:idle","avg":0.62},{"k":"m:pose","avg":0.52},{"k":"r:cull","avg":0.46},{"k":"w:treeFall+leaves+batches","avg":0.31},{"k":"w:minimap","avg":0.23},{"k":"hud+audio","avg":0.2},{"k":"m:hold","avg":0.18},{"k":"drops+hud","avg":0.13},{"k":"w:treeFade+sway","avg":0.11},{"k":"w:stairs+roof+birds+bugs+wildlife","avg":0.1},{"k":"r:rigSkin","avg":0.1},{"k":"tree+deck coll","avg":0.08},{"k":"daynight","avg":0.08},{"k":"w:wind","avg":0.05},{"k":"fires+smoke","avg":0.05},{"k":"m:reload+knife","avg":0.05},{"k":"w:motes+flame+ripples+life","avg":0.05},{"k":"w:weather+lightning+clouds","avg":0.04},{"k":"m:hold2+arms","avg":0.03},{"k":"idle+gear","avg":0.03},{"k":"camera","avg":0.03},{"k":"w:banner..normals","avg":0.03},{"k":"move","avg":0.02},{"k":"combat misc","avg":0.02},{"k":"effects","avg":0.02},{"k":"m:reticle+ghost","avg":0.02},{"k":"r:lightPool","avg":0.01},{"k":"m:lasers","avg":0.01},{"k":"jump+guns","avg":0.01},{"k":"ground+clamp","avg":0.01},{"k":"viewmodel","avg":0.01},{"k":"w:doors+traps+shadowLOD","avg":0.01},{"k":"w:foliageCull","avg":0.01},{"k":"turrets","avg":0.01},{"k":"m:hush+roof+kills","avg":0.01},{"k":"after render","avg":0},{"k":"marine","avg":0},{"k":"m:fire","avg":0},{"k":"m:mortar+carry","avg":0},{"k":"waves","avg":0},{"k":"projectiles","avg":0},{"k":"w:water","avg":0},{"k":"w:rest","avg":0}]},"top":[{"k":"r:render","avg":7.86,"max":16.4},{"k":"zombies","avg":2.6,"max":9.5},{"k":"r:matrices","avg":1.65,"max":5.3},{"k":"aim+climb","avg":0.68,"max":23.4},{"k":"m:hold","avg":0.62,"max":2.7},{"k":"m:pose","avg":0.54,"max":2.2},{"k":"r:cull","avg":0.51,"max":1.7},{"k":"w:treeFall+leaves+batches","avg":0.37,"max":2.5},{"k":"w:minimap","avg":0.28,"max":2.7},{"k":"m:idle","avg":0.25,"max":2},{"k":"hud+audio","avg":0.22,"max":1.1},{"k":"drops+hud","avg":0.16,"max":1.4},{"k":"w:treeFade+sway","avg":0.13,"max":0.9},{"k":"w:stairs+roof+birds+bugs+wildlife","avg":0.13,"max":0.8},{"k":"r:rigSkin","avg":0.11,"max":0.4},{"k":"tree+deck coll","avg":0.09,"max":0.5},{"k":"daynight","avg":0.09,"max":0.4},{"k":"fires+smoke","avg":0.06,"max":1.9},{"k":"w:wind","avg":0.06,"max":0.5},{"k":"m:reload+knife","avg":0.05,"max":0.3},{"k":"w:motes+flame+ripples+life","avg":0.05,"max":1.5},{"k":"w:weather+lightning+clouds","avg":0.05,"max":0.4},{"k":"w:banner..normals","avg":0.04,"max":0.2},{"k":"idle+gear","avg":0.03,"max":0.2},{"k":"camera","avg":0.03,"max":0.2},{"k":"move","avg":0.02,"max":0.2},{"k":"combat misc","avg":0.02,"max":0.5},{"k":"effects","avg":0.02,"max":0.2},{"k":"r:lightPool","avg":0.02,"max":1.6},{"k":"m:reticle+ghost","avg":0.02,"max":0.2},{"k":"m:hold2+arms","avg":0.01,"max":5.2},{"k":"viewmodel","avg":0.01,"max":0.2},{"k":"m:lasers","avg":0.01,"max":0.1},{"k":"jump+guns","avg":0.01,"max":0.3},{"k":"w:doors+traps+shadowLOD","avg":0.01,"max":0.2},{"k":"ground+clamp","avg":0.01,"max":0.1},{"k":"m:hush+roof+kills","avg":0.01,"max":0.2},{"k":"turrets","avg":0.01,"max":0.2},{"k":"w:foliageCull","avg":0.01,"max":0.3},{"k":"m:fire","avg":0,"max":0.1},{"k":"marine","avg":0,"max":0.2},{"k":"waves","avg":0,"max":0.1},{"k":"after render","avg":0,"max":0.1},{"k":"m:mortar+carry","avg":0,"max":0.1},{"k":"w:water","avg":0,"max":0.1},{"k":"projectiles","avg":0,"max":0.1},{"k":"w:rest","avg":0,"max":0.1}],"spikes":[{"frame":553,"ms":25.5,"top":["r:render 10.6","zombies 5.7","m:hold 2.4","r:matrices 2.1"],"heapMB":848.4,"freedMB":-0.9,"newPipelines":0,"newTextures":0,"newGeometries":0,"newBuilds":0,"sunShadow":0,"newRenderObjects":0,"t0":39978.5,"t1":40005.5},{"frame":564,"ms":27.6,"top":["r:render 12.7","zombies 7.2","r:matrices 1.8","m:hold 1.4"],"heapMB":822.9,"freedMB":-0.6,"newPipelines":0,"newTextures":0,"newGeometries":0,"newBuilds":0,"sunShadow":0,"newRenderObjects":0,"t0":40172.6,"t1":40201.4},{"frame":585,"ms":28,"top":["r:render 11.5","zombies 5.5","r:matrices 3.4","m:hold 1.1"],"heapMB":843.5,"freedMB":-0.9,"newPipelines":0,"newTextures":0,"newGeometries":0,"newBuilds":0,"sunShadow":0,"newRenderObjects":0,"t0":40587.8,"t1":40617.5},{"frame":591,"ms":26,"top":["r:render 12.1","zombies 3.0","r:matrices 2.7","m:hold 2.0"],"heapMB":847.8,"freedMB":-0.6,"newPipelines":0,"newTextures":0,"newGeometries":0,"newBuilds":0,"sunShadow":0,"newRenderObjects":0,"t0":40721.3,"t1":40748.4},{"frame":592,"ms":28.6,"top":["r:render 13.5","r:matrices 4.4","zombies 2.8","m:hold 1.6"],"heapMB":848.5,"freedMB":-0.7,"newPipelines":0,"newTextures":0,"newGeometries":0,"newBuilds":0,"sunShadow":0,"newRenderObjects":0,"t0":40748.4,"t1":40779},{"frame":598,"ms":31.1,"top":["r:render 16.4","r:matrices 3.8","zombies 2.7","r:cull 1.7"],"heapMB":852.7,"freedMB":-0.7,"newPipelines":0,"newTextures":0,"newGeometries":0,"newBuilds":0,"sunShadow":0,"newRenderObjects":0,"t0":40874.5,"t1":40906.5},{"frame":602,"ms":28.6,"top":["r:render 14.7","zombies 3.9","r:matrices 3.3","m:hold 1.4"],"heapMB":822.7,"freedMB":-0.7,"newPipelines":0,"newTextures":0,"newGeometries":0,"newBuilds":0,"sunShadow":0,"newRenderObjects":0,"t0":40969.5,"t1":41001.4},{"frame":603,"ms":25.1,"top":["r:render 7.7","zombies 7.2","w:minimap 1.8","r:matrices 1.6"],"heapMB":823.3,"freedMB":-0.6,"newPipelines":0,"newTextures":0,"newGeometries":0,"newBuilds":0,"sunShadow":0,"newRenderObjects":0,"t0":41001.4,"t1":41027.3}],"spikeCauses":{"spikes":43,"pipelines":0,"builds":0,"uploads":0,"sunShadow":0,"gc":4,"code":39},"gpuMs":0.22,"gpuSamples":637,"pipelines":{"made":0,"released":0,"withNewShaders":0,"top":[],"first":[]},"builds":{"made":0,"top":[],"zombieAndEcho":[]},"renderObjects":{"made":60,"perFrame":0.04,"top":[{"k":"Mesh < Scene | MeshBasicMaterial | scene","n":30,"frames":[1367,1368,1372,1376,1380,1390]},{"k":"zombie-skin < Group < Scene | MeshStandardNodeMaterial | scene","n":11,"frames":[54,486,640,736,893,905]},{"k":"feral-motion-echo < Scene | MeshBasicMaterial | scene","n":9,"frames":[651,654,657,827,831,835]},{"k":"zombie-skin < Group < Scene | NodeMaterial | ortho","n":5,"frames":[773]},{"k":"open-molded-holster < Group < Group | MeshStandardMaterial | scene","n":3,"frames":[1146,1154,1162]},{"k":"zombie-skin < Group < Scene | MeshStandardMaterial | scene","n":1,"frames":[990]},{"k":"Mesh < Group < marine-idle-props | MeshStandardMaterial | scene","n":1,"frames":[1221]}],"spikes":[{"frame":553,"n":0,"top":[]},{"frame":564,"n":0,"top":[]},{"frame":585,"n":0,"top":[]},{"frame":591,"n":0,"top":[]},{"frame":592,"n":0,"top":[]},{"frame":598,"n":0,"top":[]},{"frame":602,"n":0,"top":[]},{"frame":603,"n":0,"top":[]}]},"gc":null}}

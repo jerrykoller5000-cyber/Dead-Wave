@@ -1,0 +1,8 @@
+GRANT grokbot GB-269: starting one game-test command
+training: title up in 15.9 s, WebGPURenderer
+training: in the room (room built), 0 called in, frames still running: true
+training: page errors none
+match: title up in 16.9 s, WebGPURenderer
+match: in prep, past the insertion
+night: phase wave, lockdown true, zombies 14
+match: page errors none

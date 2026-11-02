@@ -329,9 +329,12 @@ export function makeUziModel(ctx) {
   K.slab([[-.13, .074], [.2, .074], [.2, .09], [.192, .098], [-.11, .104], [-.123, .1], [-.13, .092]], .09, gunMid, {bevel: .009, segs: 3});
   // GB-235 (Jerry: "Uzi sights need to be usable, right now the charging handle gets in the way"): the knob sits low in the
   // top cover's groove like the real one, its top at y .122, 7 mm under the line from the rear aperture to the post (.129 here); was .138.
-  K.cyl(0.014, 0.014, 0.03, gunDark, 0, 0.098, 0.11, null, 8, 'y');
-  K.cyl(.016, .016, .014, gunDark, 0, .115, .11, null, 20, 'y');
-  for (let j = 0; j < 16; j++) {const a = j / 16 * Math.PI * 2; flatDetail(THREE, gun, gunAccent, .002, .011, .002, Math.cos(a) * .0157, .115, .11 + Math.sin(a) * .0157);}
+  // GB-269 (GP-20012, docs/contracts.md): the cocking knob is its own group, gun.userData.work, at rest where it was.
+  const work = K.group(0, 0.098, 0.11); work.name = 'work';
+  K.cyl(0.014, 0.014, 0.03, gunDark, 0, 0, 0, work, 8, 'y');
+  K.cyl(.016, .016, .014, gunDark, 0, .017, 0, work, 20, 'y');
+  for (let j = 0; j < 16; j++) {const a = j / 16 * Math.PI * 2; flatDetail(THREE, work, gunAccent, .002, .011, .002, Math.cos(a) * .0157, .017, Math.sin(a) * .0157);}
+  gun.userData.work = work;
   // Sights: slim ears, a rear aperture you can look through, a hooded front post.
   for (const sx of [-1, 1]) {
     K.slab([[-.096, .100], [-.096, .142], [-.088, .158], [-.072, .158], [-.064, .142], [-.064, .100]], .006, gunDark, {x: sx * .018, bevel: .0015, segs: 2});

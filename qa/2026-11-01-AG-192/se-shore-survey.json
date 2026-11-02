@@ -1,0 +1,251 @@
+{
+  "diagonalAnalysis": {
+    "maxPreWater": 0,
+    "maxPostWater": 0,
+    "note": "Diagonal (-55,-65)->(-61,-71) cuts southwest directly into the lake contour rather than following the shoreline curvature around the wall stub at (-57.2, -68.2).",
+    "samples": [
+      {
+        "step": 0,
+        "target": {
+          "x": -55,
+          "z": -65
+        },
+        "preWater": 0,
+        "postPos": {
+          "x": -59.47,
+          "y": -4.79,
+          "z": -66.69
+        },
+        "postWater": 0
+      },
+      {
+        "step": 5,
+        "target": {
+          "x": -56,
+          "z": -66
+        },
+        "preWater": 0,
+        "postPos": {
+          "x": -59.61,
+          "y": -4.51,
+          "z": -67.45
+        },
+        "postWater": 0
+      },
+      {
+        "step": 10,
+        "target": {
+          "x": -57,
+          "z": -67
+        },
+        "preWater": 0,
+        "postPos": {
+          "x": -59.56,
+          "y": -4.37,
+          "z": -68.12
+        },
+        "postWater": 0
+      },
+      {
+        "step": 15,
+        "target": {
+          "x": -58,
+          "z": -68
+        },
+        "preWater": 0,
+        "postPos": {
+          "x": -59.4,
+          "y": -4.28,
+          "z": -68.69
+        },
+        "postWater": 0
+      },
+      {
+        "step": 20,
+        "target": {
+          "x": -59,
+          "z": -69
+        },
+        "preWater": 0,
+        "postPos": {
+          "x": -59.18,
+          "y": -4.23,
+          "z": -69.11
+        },
+        "postWater": 0
+      },
+      {
+        "step": 25,
+        "target": {
+          "x": -60,
+          "z": -70
+        },
+        "preWater": 0,
+        "postPos": {
+          "x": -60,
+          "y": -3.85,
+          "z": -70
+        },
+        "postWater": 0
+      },
+      {
+        "step": 30,
+        "target": {
+          "x": -61,
+          "z": -71
+        },
+        "preWater": 0,
+        "postPos": {
+          "x": -61,
+          "y": -3.38,
+          "z": -71
+        },
+        "postWater": 0
+      }
+    ]
+  },
+  "surveyedWaypoints": [
+    {
+      "x": -55.25,
+      "z": -72.25,
+      "y": -3.214,
+      "water": 0,
+      "slope": 0.249,
+      "push": 0,
+      "wallBlocked": false
+    },
+    {
+      "x": -56,
+      "z": -72.5,
+      "y": -3.022,
+      "water": 0,
+      "slope": 0.259,
+      "push": 0,
+      "wallBlocked": false
+    },
+    {
+      "x": -57,
+      "z": -72.5,
+      "y": -2.929,
+      "water": 0,
+      "slope": 0.251,
+      "push": 0,
+      "wallBlocked": false
+    },
+    {
+      "x": -58,
+      "z": -72.5,
+      "y": -2.839,
+      "water": 0,
+      "slope": 0.221,
+      "push": 0,
+      "wallBlocked": false
+    },
+    {
+      "x": -59,
+      "z": -72.5,
+      "y": -2.812,
+      "water": 0,
+      "slope": 0.172,
+      "push": 0,
+      "wallBlocked": false
+    },
+    {
+      "x": -60,
+      "z": -72.5,
+      "y": -2.877,
+      "water": 0,
+      "slope": 0.109,
+      "push": 0,
+      "wallBlocked": false
+    },
+    {
+      "x": -61,
+      "z": -72.5,
+      "y": -3.034,
+      "water": 0,
+      "slope": 0.092,
+      "push": 0,
+      "wallBlocked": false
+    },
+    {
+      "x": -61.25,
+      "z": -71.75,
+      "y": -3.151,
+      "water": 0,
+      "slope": 0.073,
+      "push": 0,
+      "wallBlocked": false
+    },
+    {
+      "x": -61.5,
+      "z": -71,
+      "y": -3.261,
+      "water": 0,
+      "slope": 0.093,
+      "push": 0,
+      "wallBlocked": false
+    },
+    {
+      "x": -61.75,
+      "z": -70.25,
+      "y": -3.456,
+      "water": 0,
+      "slope": 0.124,
+      "push": 0,
+      "wallBlocked": false
+    },
+    {
+      "x": -61.75,
+      "z": -69.25,
+      "y": -3.709,
+      "water": 0,
+      "slope": 0.12,
+      "push": 0,
+      "wallBlocked": false
+    },
+    {
+      "x": -61.75,
+      "z": -68.25,
+      "y": -3.883,
+      "water": 0,
+      "slope": 0.102,
+      "push": 0,
+      "wallBlocked": false
+    },
+    {
+      "x": -61.75,
+      "z": -67.25,
+      "y": -3.989,
+      "water": 0,
+      "slope": 0.128,
+      "push": 0,
+      "wallBlocked": false
+    },
+    {
+      "x": -61.5,
+      "z": -67,
+      "y": -4.073,
+      "water": 0,
+      "slope": 0.144,
+      "push": 0,
+      "wallBlocked": false
+    }
+  ],
+  "forwardWalk": {
+    "totalSteps": 50,
+    "stops": 0,
+    "maxWaterDepth": 0,
+    "isDry": true,
+    "pass": true
+  },
+  "reverseWalk": {
+    "totalSteps": 50,
+    "stops": 0,
+    "maxWaterDepth": 0,
+    "isDry": true,
+    "pass": true
+  },
+  "stubTipDistance": 4.3,
+  "waterlineDistance": null
+}

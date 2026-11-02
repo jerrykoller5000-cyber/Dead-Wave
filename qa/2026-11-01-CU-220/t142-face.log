@@ -1,0 +1,12 @@
+GRANT cursor CU-220: starting one game-test command
+check-players: 314 player.position reads, all in the allowed places
+FAIL  t142     7 pass   3 fail  51.0s
+
+1 checks: 7 pass, 3 fail
+
+by owner:
+  unassigned
+    t142   3 fail  FAIL a sandbag starts a vault
+           FAIL a sandbag starts a vault
+           FAIL during the hop he keeps 70% of his speed (1.00 of 1.00)
+           FAIL wire: 0.76 m past, grounded true

@@ -1,0 +1,296 @@
+{
+  "timestamp": "2026-11-01T15:25:35.141Z",
+  "target": "CU-218 HQ Ring Openings Visual Inspection (CL-287 W2 / Rule 10)",
+  "test_t324": {
+    "passed": true,
+    "output": [
+      "PASS the ring has dry openings (4.5m [0.85@0.1]; 7.6m [2.05@0.3 1.75@0.3]; 4.2m [0.85@0.1]; 5.2m [0.85@7.8 0.85@0.3]; 5.2m [0.85@0.2 0.85@0.2])",
+      "PASS each dry opening stays a single crossing (4.5m [0.85@0.1]; 7.6m [2.05@0.3 1.75@0.3]; 4.2m [0.85@0.1]; 5.2m [0.85@7.8 0.85@0.3]; 5.2m [0.85@0.2 0.85@0.2])"
+    ]
+  },
+  "openings": [
+    {
+      "id": 1,
+      "arcMetres": 4.45,
+      "midAngleRad": 0.925,
+      "midAngleDeg": 53,
+      "center": {
+        "x": 36.11,
+        "z": 47.92,
+        "y": 0.68
+      },
+      "nearestTrail": {
+        "index": 20,
+        "hw": 0.85,
+        "dist": 0.07
+      },
+      "gapBlocked": false,
+      "leftWallBlocked": true,
+      "rightWallBlocked": true
+    },
+    {
+      "id": 2,
+      "arcMetres": 7.59,
+      "midAngleRad": 2.1642,
+      "midAngleDeg": 124,
+      "center": {
+        "x": -33.55,
+        "z": 49.74,
+        "y": 0.94
+      },
+      "nearestTrail": {
+        "index": 3,
+        "hw": 2.05,
+        "dist": 0.27
+      },
+      "gapBlocked": false,
+      "leftWallBlocked": true,
+      "rightWallBlocked": true
+    },
+    {
+      "id": 3,
+      "arcMetres": 4.19,
+      "midAngleRad": 3.4274,
+      "midAngleDeg": 196.4,
+      "center": {
+        "x": -57.57,
+        "z": -16.92,
+        "y": -2.62
+      },
+      "nearestTrail": {
+        "index": 2,
+        "hw": 0.85,
+        "dist": 0.12
+      },
+      "gapBlocked": false,
+      "leftWallBlocked": true,
+      "rightWallBlocked": true
+    },
+    {
+      "id": 4,
+      "arcMetres": 5.24,
+      "midAngleRad": 5.2731,
+      "midAngleDeg": 302.1,
+      "center": {
+        "x": 31.91,
+        "z": -50.81,
+        "y": -2.26
+      },
+      "nearestTrail": {
+        "index": 13,
+        "hw": 0.85,
+        "dist": 0.3
+      },
+      "gapBlocked": false,
+      "leftWallBlocked": true,
+      "rightWallBlocked": true
+    },
+    {
+      "id": 5,
+      "arcMetres": 5.24,
+      "midAngleRad": 5.644,
+      "midAngleDeg": 323.4,
+      "center": {
+        "x": 48.15,
+        "z": -35.79,
+        "y": -3.35
+      },
+      "nearestTrail": {
+        "index": 11,
+        "hw": 0.85,
+        "dist": 0.17
+      },
+      "gapBlocked": false,
+      "leftWallBlocked": true,
+      "rightWallBlocked": true
+    }
+  ],
+  "wideOpeningEvaluation": {
+    "arcMetres": 7.59,
+    "center": {
+      "x": -33.55,
+      "z": 49.74,
+      "y": 0.94
+    },
+    "trailWidth": 4.1,
+    "trailHalfWidth": 2.05,
+    "flankWallsIntact": true,
+    "readsAsTrailGap": true,
+    "reason": "The 7.6 m opening accommodates two merged trail spurs with double half-width (hw ~2.05m = 4.1m trail span) plus necessary barrier clearance out to adjacent solid anchors. Both flanks are firmly capped by 2.5m thicket barrier meshes that curve with the ring, with worn trail ground passing directly through the portal into the outer woods."
+  },
+  "captures": [
+    {
+      "id": 1,
+      "arcMetres": 4.45,
+      "file": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-189\\opening-1-4.45m-inside.png",
+      "shotData": {
+        "px": 25.27705288004873,
+        "py": 0.6209111448238882,
+        "pz": 33.5420720543502,
+        "tx": 43.332090651512104,
+        "ty": 3.865775895754334,
+        "tz": 57.500694950314625,
+        "fov": 48
+      },
+      "opening": {
+        "id": 1,
+        "arcMetres": 4.45,
+        "midAngleRad": 0.925,
+        "midAngleDeg": 53,
+        "center": {
+          "x": 36.11,
+          "z": 47.92,
+          "y": 0.68
+        },
+        "nearestTrail": {
+          "index": 20,
+          "hw": 0.85,
+          "dist": 0.07
+        },
+        "gapBlocked": false,
+        "leftWallBlocked": true,
+        "rightWallBlocked": true
+      }
+    },
+    {
+      "id": 2,
+      "arcMetres": 7.59,
+      "file": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-189\\opening-2-7.59m-inside.png",
+      "shotData": {
+        "px": -23.485813900949573,
+        "py": 0.38512033247153266,
+        "pz": 34.81977233426382,
+        "tx": -40.2613952587707,
+        "ty": 1.1991497451173971,
+        "tz": 59.6910382873094,
+        "fov": 48
+      },
+      "opening": {
+        "id": 2,
+        "arcMetres": 7.59,
+        "midAngleRad": 2.1642,
+        "midAngleDeg": 124,
+        "center": {
+          "x": -33.55,
+          "z": 49.74,
+          "y": 0.94
+        },
+        "nearestTrail": {
+          "index": 3,
+          "hw": 2.05,
+          "dist": 0.27
+        },
+        "gapBlocked": false,
+        "leftWallBlocked": true,
+        "rightWallBlocked": true
+      }
+    },
+    {
+      "id": 3,
+      "arcMetres": 4.19,
+      "file": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-189\\opening-3-4.19m-inside.png",
+      "shotData": {
+        "px": -40.296242635546434,
+        "py": -1.669890380704807,
+        "pz": -11.84114983678399,
+        "tx": -69.07927308950818,
+        "ty": -0.6817188711871327,
+        "tz": -20.29911400591541,
+        "fov": 48
+      },
+      "opening": {
+        "id": 3,
+        "arcMetres": 4.19,
+        "midAngleRad": 3.4274,
+        "midAngleDeg": 196.4,
+        "center": {
+          "x": -57.57,
+          "z": -16.92,
+          "y": -2.62
+        },
+        "nearestTrail": {
+          "index": 2,
+          "hw": 0.85,
+          "dist": 0.12
+        },
+        "gapBlocked": false,
+        "leftWallBlocked": true,
+        "rightWallBlocked": true
+      }
+    },
+    {
+      "id": 4,
+      "arcMetres": 5.24,
+      "file": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-189\\opening-4-5.24m-inside.png",
+      "shotData": {
+        "px": 22.33511610132331,
+        "py": -3.5037151258827466,
+        "pz": -35.5688429491375,
+        "tx": 38.28877045941139,
+        "ty": 1.5453043964157147,
+        "tz": -60.975159341378564,
+        "fov": 48
+      },
+      "opening": {
+        "id": 4,
+        "arcMetres": 5.24,
+        "midAngleRad": 5.2731,
+        "midAngleDeg": 302.1,
+        "center": {
+          "x": 31.91,
+          "z": -50.81,
+          "y": -2.26
+        },
+        "nearestTrail": {
+          "index": 13,
+          "hw": 0.85,
+          "dist": 0.3
+        },
+        "gapBlocked": false,
+        "leftWallBlocked": true,
+        "rightWallBlocked": true
+      }
+    },
+    {
+      "id": 5,
+      "arcMetres": 5.24,
+      "file": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-01-AG-189\\opening-5-5.24m-inside.png",
+      "shotData": {
+        "px": 33.70844494431494,
+        "py": -4.365774804907373,
+        "pz": -25.054754826900385,
+        "tx": 57.785905618825616,
+        "ty": -1.027673039070179,
+        "tz": -42.95100827468637,
+        "fov": 48
+      },
+      "opening": {
+        "id": 5,
+        "arcMetres": 5.24,
+        "midAngleRad": 5.644,
+        "midAngleDeg": 323.4,
+        "center": {
+          "x": 48.15,
+          "z": -35.79,
+          "y": -3.35
+        },
+        "nearestTrail": {
+          "index": 11,
+          "hw": 0.85,
+          "dist": 0.17
+        },
+        "gapBlocked": false,
+        "leftWallBlocked": true,
+        "rightWallBlocked": true
+      }
+    }
+  ],
+  "rule19Scores": {
+    "geometry": 5,
+    "silhouette": 4.9,
+    "materials": 4.8,
+    "context": 5,
+    "overall": 4.9
+  },
+  "verdict": "PASS"
+}

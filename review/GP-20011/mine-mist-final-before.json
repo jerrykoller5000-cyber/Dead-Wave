@@ -1,0 +1,34 @@
+{
+ "schema": "dw-camera-shot",
+ "schemaVersion": 2,
+ "target": "place:cave:iron",
+ "label": "place cave:iron",
+ "view": null,
+ "cam": {
+  "fov": 65,
+  "x": -150,
+  "y": 2.3,
+  "z": 83,
+  "tx": -161,
+  "ty": 1.5,
+  "tz": 90
+ },
+ "time": 0.33023567999997144,
+ "size": [
+  1600,
+  900
+ ],
+ "center": {
+  "x": -161.3549974851715,
+  "y": 2.776664471626282,
+  "z": 90.28778953672132
+ },
+ "boxSize": {
+  "x": 14,
+  "y": 5.6000000000000005,
+  "z": 14
+ },
+ "mode": "match",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "at": "2026-11-01T15:27:02.340Z"
+}

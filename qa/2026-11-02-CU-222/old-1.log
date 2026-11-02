@@ -1,0 +1,129 @@
+bench: http://127.0.0.1:42849/index.html?debug=1
+bench: scenario night 20 for 30s
+
+bench: graphics high
+bench: night 20 push 2/6  out 3  spawned 213/861
+bench: night 20 push 4/6  out 6  spawned 426/861
+bench: night 20 push 5/6  out 3  spawned 640/861
+bench: night 20 push 6/6  out 48  spawned 723/861
+bench: profiler on, GPU timestamps on
+bench: allocation sampling on
+alloc  794.5 kB a frame (46 MB/s); by function:
+     90.1 kB  getVertexPosition three.core.js:20036
+     87.4 kB  updateZombies index.html:56070
+     45.2 kB  checkGeometryIntersection three.core.js:20300
+     38.4 kB  zombieLateStep index.html:56978
+     26.3 kB  getDynamicCacheKey three.webgpu.js:25827
+     24.3 kB  trace zombie-ability-collision.js:39
+     23.1 kB  get three.webgpu.js:2954
+     22.6 kB  propsNear index.html:53422
+     20.9 kB  getNodeChildren three.webgpu.js:622
+     20.4 kB  draw three.webgpu.js:69261
+     18.5 kB  updateNumber three.webgpu.js:52725
+     18.5 kB  get three.webgpu.js:25966
+     16.5 kB  getCacheKey$1 three.webgpu.js:592
+     16.2 kB  updateBurningTrees index.html:52074
+     12.4 kB  update three.webgpu.js:12257
+fps    55.0   (mean of last 10 s)
+low    41.1   (1% low, same windows)
+worst  26.0 ms
+hitch  1   (frames over 50 ms, whole run)
+draws  258
+tris   739754
+frame  18.18 ms = tick 17.03 ms + outside 1.15 ms  (the last 10 s, the window of fps and low)
+whole run: tick 15.17 ms over 30 s; frame (last 10 s) - that = 3.01 ms (two windows)   gpu 0.32 ms
+last 10 s, by section:
+  r:render                             7.55 ms
+  zombies                              3.21 ms
+  r:matrices                           1.81 ms
+  aim+climb                            1.06 ms
+  m:idle                               0.60 ms
+  m:pose                               0.53 ms
+  r:cull                               0.51 ms
+  w:stairs+roof+birds+bugs+wildlife    0.20 ms
+  hud+audio                            0.20 ms
+  m:hold                               0.18 ms
+  w:minimap                            0.15 ms
+  w:treeFall+leaves+batches            0.13 ms
+  drops+hud                            0.12 ms
+  r:rigSkin                            0.10 ms
+  daynight                             0.08 ms
+  tree+deck coll                       0.06 ms
+  w:treeFade+sway                      0.05 ms
+  w:wind                               0.05 ms
+  m:reload+knife                       0.05 ms
+  w:motes+flame+ripples+life           0.05 ms
+  fires+smoke                          0.03 ms
+  camera                               0.03 ms
+  m:hold2+arms                         0.03 ms
+  idle+gear                            0.03 ms
+  move                                 0.02 ms
+  combat misc                          0.02 ms
+  r:lightPool                          0.02 ms
+  w:banner..normals                    0.02 ms
+  effects                              0.02 ms
+  m:reticle+ghost                      0.02 ms
+  w:weather+lightning+clouds           0.01 ms
+  jump+guns                            0.01 ms
+  turrets                              0.01 ms
+  m:lasers                             0.01 ms
+  ground+clamp                         0.01 ms
+  w:foliageCull                        0.01 ms
+  m:hush+roof+kills                    0.01 ms
+  after render                         0.00 ms
+  marine                               0.00 ms
+  waves                                0.00 ms
+  w:doors+traps+shadowLOD              0.00 ms
+  m:fire                               0.00 ms
+  m:mortar+carry                       0.00 ms
+  w:water                              0.00 ms
+  projectiles                          0.00 ms
+  w:rest                               0.00 ms
+whole run, by section:
+  r:render                             7.06 ms   worst 15.3
+  zombies                              2.46 ms   worst 8.0
+  r:matrices                           1.69 ms   worst 3.5
+  aim+climb                            0.61 ms   worst 31.8
+  m:hold                               0.56 ms   worst 1.6
+  m:pose                               0.51 ms   worst 1.1
+  r:cull                               0.47 ms   worst 1.3
+  m:idle                               0.22 ms   worst 1.5
+  w:stairs+roof+birds+bugs+wildlife    0.22 ms   worst 0.6
+  hud+audio                            0.21 ms   worst 1.3
+  w:minimap                            0.14 ms   worst 1.0
+  w:treeFall+leaves+batches            0.13 ms   worst 0.4
+  drops+hud                            0.12 ms   worst 0.8
+  r:rigSkin                            0.10 ms   worst 0.4
+  daynight                             0.09 ms   worst 0.6
+  tree+deck coll                       0.08 ms   worst 0.5
+  w:treeFade+sway                      0.05 ms   worst 0.2
+  m:reload+knife                       0.05 ms   worst 0.2
+  w:wind                               0.05 ms   worst 0.4
+  w:motes+flame+ripples+life           0.04 ms   worst 0.4
+  fires+smoke                          0.03 ms   worst 1.2
+  idle+gear                            0.03 ms   worst 0.4
+  camera                               0.03 ms   worst 0.3
+  r:lightPool                          0.02 ms   worst 1.8
+  move                                 0.02 ms   worst 0.2
+  w:banner..normals                    0.02 ms   worst 0.2
+  combat misc                          0.02 ms   worst 0.2
+  effects                              0.02 ms   worst 0.2
+  m:reticle+ghost                      0.02 ms   worst 0.2
+  w:weather+lightning+clouds           0.02 ms   worst 0.2
+  m:hold2+arms                         0.01 ms   worst 3.9
+  turrets                              0.01 ms   worst 0.2
+  jump+guns                            0.01 ms   worst 0.2
+  m:hush+roof+kills                    0.01 ms   worst 0.2
+  ground+clamp                         0.01 ms   worst 0.2
+  m:lasers                             0.01 ms   worst 0.1
+  w:foliageCull                        0.01 ms   worst 0.2
+  w:doors+traps+shadowLOD              0.01 ms   worst 0.1
+  m:fire                               0.00 ms   worst 0.2
+  marine                               0.00 ms   worst 0.2
+  waves                                0.00 ms   worst 0.2
+  m:mortar+carry                       0.00 ms   worst 0.1
+  w:water                              0.00 ms   worst 0.1
+  after render                         0.00 ms   worst 0.1
+  projectiles                          0.00 ms   worst 0.1
+  w:rest                               0.00 ms   worst 0.1
+{"scenario":"night","seconds":30,"fps":55,"low":41.1,"worst":26,"hitches":1,"draws":258,"triangles":739754,"zombies":48,"gfx":"high","windows":10,"night":20,"push":5,"pushes":6,"last":true,"prof":{"frames":1780,"frameMs":18.18,"tickMs":15.17,"outsideMs":3.01,"last10":{"seconds":10,"frames":559,"frameMs":18.18,"tickMs":17.03,"outsideMs":1.15,"top":[{"k":"r:render","avg":7.55},{"k":"zombies","avg":3.21},{"k":"r:matrices","avg":1.81},{"k":"aim+climb","avg":1.06},{"k":"m:idle","avg":0.6},{"k":"m:pose","avg":0.53},{"k":"r:cull","avg":0.51},{"k":"w:stairs+roof+birds+bugs+wildlife","avg":0.2},{"k":"hud+audio","avg":0.2},{"k":"m:hold","avg":0.18},{"k":"w:minimap","avg":0.15},{"k":"w:treeFall+leaves+batches","avg":0.13},{"k":"drops+hud","avg":0.12},{"k":"r:rigSkin","avg":0.1},{"k":"daynight","avg":0.08},{"k":"tree+deck coll","avg":0.06},{"k":"w:treeFade+sway","avg":0.05},{"k":"w:wind","avg":0.05},{"k":"m:reload+knife","avg":0.05},{"k":"w:motes+flame+ripples+life","avg":0.05},{"k":"fires+smoke","avg":0.03},{"k":"camera","avg":0.03},{"k":"m:hold2+arms","avg":0.03},{"k":"idle+gear","avg":0.03},{"k":"move","avg":0.02},{"k":"combat misc","avg":0.02},{"k":"r:lightPool","avg":0.02},{"k":"w:banner..normals","avg":0.02},{"k":"effects","avg":0.02},{"k":"m:reticle+ghost","avg":0.02},{"k":"w:weather+lightning+clouds","avg":0.01},{"k":"jump+guns","avg":0.01},{"k":"turrets","avg":0.01},{"k":"m:lasers","avg":0.01},{"k":"ground+clamp","avg":0.01},{"k":"w:foliageCull","avg":0.01},{"k":"m:hush+roof+kills","avg":0.01},{"k":"after render","avg":0},{"k":"marine","avg":0},{"k":"waves","avg":0},{"k":"w:doors+traps+shadowLOD","avg":0},{"k":"m:fire","avg":0},{"k":"m:mortar+carry","avg":0},{"k":"w:water","avg":0},{"k":"projectiles","avg":0},{"k":"w:rest","avg":0}]},"top":[{"k":"r:render","avg":7.06,"max":15.3},{"k":"zombies","avg":2.46,"max":8},{"k":"r:matrices","avg":1.69,"max":3.5},{"k":"aim+climb","avg":0.61,"max":31.8},{"k":"m:hold","avg":0.56,"max":1.6},{"k":"m:pose","avg":0.51,"max":1.1},{"k":"r:cull","avg":0.47,"max":1.3},{"k":"m:idle","avg":0.22,"max":1.5},{"k":"w:stairs+roof+birds+bugs+wildlife","avg":0.22,"max":0.6},{"k":"hud+audio","avg":0.21,"max":1.3},{"k":"w:minimap","avg":0.14,"max":1},{"k":"w:treeFall+leaves+batches","avg":0.13,"max":0.4},{"k":"drops+hud","avg":0.12,"max":0.8},{"k":"r:rigSkin","avg":0.1,"max":0.4},{"k":"daynight","avg":0.09,"max":0.6},{"k":"tree+deck coll","avg":0.08,"max":0.5},{"k":"w:treeFade+sway","avg":0.05,"max":0.2},{"k":"m:reload+knife","avg":0.05,"max":0.2},{"k":"w:wind","avg":0.05,"max":0.4},{"k":"w:motes+flame+ripples+life","avg":0.04,"max":0.4},{"k":"fires+smoke","avg":0.03,"max":1.2},{"k":"idle+gear","avg":0.03,"max":0.4},{"k":"camera","avg":0.03,"max":0.3},{"k":"r:lightPool","avg":0.02,"max":1.8},{"k":"move","avg":0.02,"max":0.2},{"k":"w:banner..normals","avg":0.02,"max":0.2},{"k":"combat misc","avg":0.02,"max":0.2},{"k":"effects","avg":0.02,"max":0.2},{"k":"m:reticle+ghost","avg":0.02,"max":0.2},{"k":"w:weather+lightning+clouds","avg":0.02,"max":0.2},{"k":"m:hold2+arms","avg":0.01,"max":3.9},{"k":"turrets","avg":0.01,"max":0.2},{"k":"jump+guns","avg":0.01,"max":0.2},{"k":"m:hush+roof+kills","avg":0.01,"max":0.2},{"k":"ground+clamp","avg":0.01,"max":0.2},{"k":"m:lasers","avg":0.01,"max":0.1},{"k":"w:foliageCull","avg":0.01,"max":0.2},{"k":"w:doors+traps+shadowLOD","avg":0.01,"max":0.1},{"k":"m:fire","avg":0,"max":0.2},{"k":"marine","avg":0,"max":0.2},{"k":"waves","avg":0,"max":0.2},{"k":"m:mortar+carry","avg":0,"max":0.1},{"k":"w:water","avg":0,"max":0.1},{"k":"after render","avg":0,"max":0.1},{"k":"projectiles","avg":0,"max":0.1},{"k":"w:rest","avg":0,"max":0.1}],"spikes":[{"frame":1511,"ms":49.2,"top":["aim+climb 31.8","r:render 7.7","zombies 3.2","r:matrices 1.9"],"heapMB":855.9,"freedMB":168.1,"newPipelines":0,"newTextures":0,"newGeometries":2,"newBuilds":0,"sunShadow":0,"newRenderObjects":2,"t0":57011,"t1":57098.1},{"frame":1678,"ms":25.3,"top":["r:render 15.3","zombies 3.1","r:matrices 2.1","aim+climb 1.4"],"heapMB":887.8,"freedMB":-3.9,"newPipelines":0,"newTextures":0,"newGeometries":7,"newBuilds":0,"sunShadow":1,"newRenderObjects":19,"t0":60236.7,"t1":60262.7}],"spikeCauses":{"spikes":2,"pipelines":0,"builds":0,"uploads":2,"sunShadow":0,"gc":0,"code":0},"gpuMs":0.32,"gpuSamples":808,"pipelines":{"made":0,"released":0,"withNewShaders":0,"top":[],"first":[]},"builds":{"made":0,"top":[],"zombieAndEcho":[]},"renderObjects":{"made":94,"perFrame":0.05,"top":[{"k":"Mesh < Scene | MeshBasicMaterial | scene","n":30,"frames":[1513,1514,1518,1520,1524,1532]},{"k":"zombie-skin < Group < Scene | MeshStandardNodeMaterial | scene","n":23,"frames":[61,83,225,250,534,546]},{"k":"zombie-skin < Group < Scene | NodeMaterial | ortho","n":21,"frames":[778,1678]},{"k":"feral-motion-echo < Scene | MeshBasicMaterial | scene","n":12,"frames":[900,903,906,984,987,990]},{"k":"open-molded-holster < Group < Group | MeshStandardMaterial | scene","n":3,"frames":[1292,1302,1312]},{"k":"Mesh < zombie-fireball < Scene | MeshBasicMaterial | scene","n":2,"frames":[1475,1476]},{"k":"Mesh < Group < marine-idle-props | MeshStandardMaterial | scene","n":1,"frames":[1381]},{"k":"zombie-skin < Group < Scene | MeshStandardMaterial | scene","n":1,"frames":[1511]},{"k":"open-molded-holster < Group < Group | NodeMaterial | ortho","n":1,"frames":[1678]}],"spikes":[{"frame":1511,"n":2,"top":["1 zombie-skin < Group < Scene | MeshStandardNodeMaterial | scene","1 zombie-skin < Group < Scene | MeshStandardMaterial | scene"]},{"frame":1678,"n":19,"top":["18 zombie-skin < Group < Scene | NodeMaterial | ortho","1 open-molded-holster < Group < Group | NodeMaterial | ortho"]}]},"gc":null},"alloc":{"frames":1780,"kbPerFrame":794.5,"mbPerSecond":46,"self":[{"k":"getVertexPosition three.core.js:20036","kb":90.1},{"k":"updateZombies index.html:56070","kb":87.4},{"k":"checkGeometryIntersection three.core.js:20300","kb":45.2},{"k":"zombieLateStep index.html:56978","kb":38.4},{"k":"getDynamicCacheKey three.webgpu.js:25827","kb":26.3},{"k":"trace zombie-ability-collision.js:39","kb":24.3},{"k":"get three.webgpu.js:2954","kb":23.1},{"k":"propsNear index.html:53422","kb":22.6},{"k":"getNodeChildren three.webgpu.js:622","kb":20.9},{"k":"draw three.webgpu.js:69261","kb":20.4},{"k":"updateNumber three.webgpu.js:52725","kb":18.5},{"k":"get three.webgpu.js:25966","kb":18.5},{"k":"getCacheKey$1 three.webgpu.js:592","kb":16.5},{"k":"updateBurningTrees index.html:52074","kb":16.2},{"k":"update three.webgpu.js:12257","kb":12.4},{"k":"resolveStaticProps index.html:53455","kb":8.7},{"k":"sampleClip clip.js:119","kb":8.2},{"k":"updateTreeBatchesInner index.html:18180","kb":8},{"k":"trackZombieMotion index.html:47784","kb":8},{"k":"_projectObject three.webgpu.js:51838","kb":7.4},{"k":"updateWildlife index.html:13993","kb":6.9},{"k":"next :0","kb":6.8},{"k":"add :0","kb":6.7},{"k":"shotBlocked index.html:47832","kb":6.2},{"k":"abs :0","kb":6.1}],"stacks":[{"k":"getVertexPosition three.core.js:20036 < checkGeometryIntersection three.core.js:20300 < _computeIntersections three.core.js:20132","kb":90.1},{"k":"updateZombies index.html:56070 < tick index.html:59768 < update three.webgpu.js:24889","kb":87.4},{"k":"checkGeometryIntersection three.core.js:20300 < _computeIntersections three.core.js:20132 < intersect three.core.js:53847","kb":41.9},{"k":"zombieLateStep index.html:56978 < updateZombies index.html:56070 < tick index.html:59768","kb":38.4},{"k":"getDynamicCacheKey three.webgpu.js:25827 < get three.webgpu.js:25966 < _renderObjectDirect three.webgpu.js:52172","kb":26.2},{"k":"propsNear index.html:53422 < resolveStaticProps index.html:53455 < updateZombies index.html:56070","kb":22.6},{"k":"draw three.webgpu.js:69261 < _renderObjectDirect three.webgpu.js:52172 < renderObject three.webgpu.js:52063","kb":20.4},{"k":"updateNumber three.webgpu.js:52725 < update three.webgpu.js:52680 < _update three.webgpu.js:27644","kb":18.5},{"k":"get three.webgpu.js:25966 < _renderObjectDirect three.webgpu.js:52172 < renderObject three.webgpu.js:52063","kb":18.5},{"k":"getNodeChildren three.webgpu.js:622 < getCacheKey$1 three.webgpu.js:592 < getCacheKey$1 three.webgpu.js:592","kb":17.2},{"k":"updateBurningTrees index.html:52074 < tick index.html:59768 < update three.webgpu.js:24889","kb":16.2},{"k":"get three.webgpu.js:2954 < getCacheKey$1 three.webgpu.js:592 < getCacheKey$1 three.webgpu.js:592","kb":13.8},{"k":"update three.webgpu.js:12257 < updateForRender three.webgpu.js:47136 < _renderObjectDirect three.webgpu.js:52172","kb":12.2},{"k":"trace zombie-ability-collision.js:39 < updateShots zombie-ability-runtime.js:200 < update zombie-ability-runtime.js:241","kb":12.2},{"k":"trace zombie-ability-collision.js:39 < lineClear zombie-ability-collision.js:140 < updateActor zombie-ability-runtime.js:157","kb":12.1},{"k":"resolveStaticProps index.html:53455 < updateZombies index.html:56070 < tick index.html:59768","kb":8.7},{"k":"sampleClip clip.js:119 < marineGait index.html:20149 < applyShamblerMotion shambler-motion.js:56","kb":8.2},{"k":"updateTreeBatchesInner index.html:18180 < updateTreeBatches index.html:18172 < updateWorldAnimations index.html:59367","kb":8},{"k":"trackZombieMotion index.html:47784 < tick index.html:59768 < update three.webgpu.js:24889","kb":8},{"k":"updateWildlife index.html:13993 < updateWorldAnimations index.html:59367 < tick index.html:59768","kb":6.9},{"k":"getCacheKey$1 three.webgpu.js:592 < getCacheKey$1 three.webgpu.js:592 < getCacheKey three.webgpu.js:1342","kb":6.6},{"k":"_projectObject three.webgpu.js:51838 < _projectObject three.webgpu.js:51838 < _projectObject three.webgpu.js:51838","kb":5.6},{"k":"equals three.webgpu.js:294 < _renderObjectDirect three.webgpu.js:52172 < renderObject three.webgpu.js:52063","kb":5.5},{"k":"getCacheKey$1 three.webgpu.js:592 < getCacheKey$1 three.webgpu.js:592 < getCacheKey$1 three.webgpu.js:592","kb":5.4},{"k":"add :0 < propsNear index.html:53422 < resolveStaticProps index.html:53455","kb":5.3}]}}

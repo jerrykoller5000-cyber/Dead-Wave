@@ -1,0 +1,35 @@
+Game-test request 42afab5e-d02e-4073-9070-3692692bed3d queued at position 3. Waiting...
+GRANT cursor CU-220: starting one game-test command
+check-players: 314 player.position reads, all in the allowed places
+ok    t115    10 pass   0 fail  39.8s
+ok    t116     7 pass   0 fail  47.3s
+ok    t117    17 pass   0 fail  40.0s
+ok    t119    20 pass   0 fail  38.8s
+ok    t120    11 pass   0 fail  38.5s
+ok    t121    31 pass   0 fail  26.6s
+ok    t122    14 pass   0 fail  38.6s
+ok    t123     6 pass   0 fail  31.5s
+ok    t124     5 pass   0 fail  46.8s
+ok    t125    10 pass   0 fail  42.9s
+ok    t126    12 pass   0 fail  45.4s
+ok    t127    28 pass   0 fail  86.5s
+ok    t128    28 pass   0 fail  97.0s
+ok    t129    22 pass   0 fail  37.9s
+ok    t130    14 pass   0 fail  37.6s
+ok    t131    18 pass   0 fail  49.9s
+ok    t132    11 pass   0 fail  38.6s
+ok    t133     9 pass   0 fail  44.6s
+ok    t134     9 pass   0 fail  27.5s
+ok    t135     8 pass   0 fail  37.3s
+ok    t136    36 pass   0 fail  47.7s
+ok    t137    15 pass   0 fail  41.9s
+ok    t138     6 pass   0 fail  39.0s
+FAIL  t139    12 pass   1 fail  47.2s
+ok    t140    17 pass   0 fail  37.3s
+
+25 checks: 376 pass, 1 fail
+
+by owner:
+  unassigned
+    t139   1 fail  FAIL a suppressed M4 round hits 17.10 vs null bare (x0.9)
+           FAIL a suppressed M4 round hits 17.10 vs null bare (x0.9)

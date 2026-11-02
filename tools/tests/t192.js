@@ -8,6 +8,7 @@
   try {
     await startMatch(T, 'ArcM240');
     T.unlockAllBuilds();
+    { const yx = 0, yz = -8.5, p0 = T.player.position; p0.set(yx, T.sampleHeight(yx, yz), yz); const w0 = Date.now(); while (Date.now() - w0 < 8000 && Math.hypot(T.camera.position.x - p0.x, T.camera.position.z - p0.z) > 8) await new Promise((r) => setTimeout(r, 100)); await new Promise((r) => setTimeout(r, 300)); }   // GB-268: CU-209 moved the landing to (42,-20), on a hillside (D-105); this check was written standing in the yard at (0,-8.5)
     const P = T.player.position;
     // The mortar draws its arc.
     const mortar = T.spawnBuild('mortar', P.x + 1.2, P.z);

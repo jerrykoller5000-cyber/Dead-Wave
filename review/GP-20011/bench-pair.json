@@ -1,0 +1,62 @@
+{
+  "rows": [
+    {
+      "mode": "off",
+      "fps": 2.5,
+      "low": 2.5,
+      "worst": 414.1,
+      "hitches": 54,
+      "draws": 238,
+      "triangles": 115197,
+      "windows": 10,
+      "gfx": "high"
+    },
+    {
+      "mode": "on",
+      "fps": 2.5,
+      "low": 2.4,
+      "worst": 417.3,
+      "hitches": 53,
+      "draws": 238,
+      "triangles": 115197,
+      "windows": 10,
+      "gfx": "high"
+    },
+    {
+      "mode": "on",
+      "fps": 2.5,
+      "low": 2.5,
+      "worst": 408.3,
+      "hitches": 52,
+      "draws": 238,
+      "triangles": 115197,
+      "windows": 10,
+      "gfx": "high"
+    },
+    {
+      "mode": "off",
+      "fps": 2.3,
+      "low": 2.2,
+      "worst": 468.6,
+      "hitches": 52,
+      "draws": 238,
+      "triangles": 115197,
+      "windows": 10,
+      "gfx": "high"
+    }
+  ],
+  "median": {
+    "off": {
+      "fps": 2.4,
+      "low": 2.35,
+      "draws": 238,
+      "triangles": 115197
+    },
+    "on": {
+      "fps": 2.5,
+      "low": 2.45,
+      "draws": 238,
+      "triangles": 115197
+    }
+  }
+}

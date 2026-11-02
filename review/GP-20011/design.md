@@ -1,0 +1,19 @@
+# GP-20011 — place events, implementation brief
+
+The six events are ambient place cues, not quests. They answer the quest-design questions because the phone and radio touch ongoing stories:
+
+- **Why they exist:** abandoned equipment, exposed wires, iron protections and cold cave air react to the valley's day and weather; the hikers' phone and rangers' radio remain unexplained.
+- **Why care:** each event makes a place identifiable and rewards returning to it. The wires precede weather; the chimes' sudden absence precedes the dead.
+- **Connection:** depot power, mast relay, missing hikers, rangers' search, trapper's iron and the old mine are existing world threads.
+- **What changes:** nothing in objectives or rewards. An event only changes the moment's sensory state; its cooldown resets with the next run, day or storm as appropriate.
+- **What is memorable:** six distinct small reactions belong to six specific places, with no VO or UI banner. The chimes use silence as the cue.
+
+All audio is immersive under the sound principles and stays below combat. No event fires in a fight. Audio uses positional volume/pan through `sndAt` and the SFX bus through `AudioSys`, subject to Cursor's owned synth-cue implementation.
+
+Triggers in the new `game/place-events.js` use gameplay state, not wall clock randomness. The dead depot generator coughs once every other day while the player is near it in the late prep light (the match sky stops at 0.68 before the alarm). Guy wires sing once when a scheduled storm is less than 75 seconds away and the player is near the mast. The hikers' tent phone rings once on alternating runs while the player is within 30 m during daytime. The rangers' truck radio gives one short, wordless burst on one run in three, near the truck during daytime. Iron chimes sound gently at intervals while the player is in the trapper's yard during prep; the alarm stops them. The mine mouth sheds a few low puffs during the dawn sweep and the early morning, when the player is near it.
+
+The mine mist's action: cold air pushes outward from the existing old-mine mouth, remains low, then thins over roughly four seconds. Its reference is the game's `spawnSmokePuff`/`updateSmoke` motion and the skyline smoke columns; they provide the project's established procedural timing and texture language. Key states are emergence at the apron, slow outward drift, and dissipating into morning air. A single small instanced, camera-facing group shares material and texture and never touches collision. Gameplay camera, four-light and filmstrip checks will assess environmental fit and motion.
+
+The generator puff reuses the existing smoke effect. Source inspection found the only prior `makeGenerator` model at the HQ; Claude approved an inactive copy beside the depot pump. Its pad is (-113, 5), y=0.60: slope 0.04, water depth 0, path wear 0, no prior solid within 2.2 m and nearest live tree ~17 m. `depot-pad-marker.png` shows the temporary survey marker; `depot-generator-after-noon.png` and `depot-cough-dusk.png` show the built prop and triggered exhaust. The new 0.7 m solid pushes the player away but is over 5 m from the pump's E spot. The phone rings from the existing hikers' second tent (local offset 2.3, −3.4 under the camp's yaw) without adding a visible phone, preserving the empty-tent mystery. The radio uses the ranger truck's actual model position. The chimes use the trapper's existing iron dressing as their spatial source. If visual chimes are needed for the silence to read, add them at an existing post after Claude's review.
+
+Validation: one Node test per trigger rule, queued game shots and ears-on report from Antigravity. `?events=0` disables trigger and visual effects. No new pack files or contract change from this module; Cursor's AudioSys additions need lead approval.

@@ -1,0 +1,6 @@
+GRANT cursor CU-220: starting one game-test command
+ok    tcl275a   12 pass   0 fail  39.9s  (real renderer)
+ok    t73      12 pass   0 fail  47.3s  (real renderer)
+ok    t60      43 pass   0 fail  54.8s  (real renderer)
+ok    t61      22 pass   0 fail  46.3s  (real renderer)
+4 checks: 89 pass, 0 fail (real renderer)

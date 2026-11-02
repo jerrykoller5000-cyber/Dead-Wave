@@ -1,0 +1,144 @@
+{
+  "task": "AG-194",
+  "agent": "antigravity",
+  "timestamp": "2026-11-02T03:27:55.021Z",
+  "backend": "WebGPU",
+  "suiteTests": {
+    "tcl275a": {
+      "pass": 12,
+      "fail": 0,
+      "lines": [
+        "PASS the score has its 20 nights, off until asked ({\"n\":20,\"on\":false})",
+        "PASS on: night 1 is the score's (gh/night-01)",
+        "PASS the fight is the score's night 1: fight/gh/night-01",
+        "PASS its first kit, Scarecrow: http://127.0.0.1:32419/assets/soundtrack/gh/gh-hs3-scarecrow-drums.ogg",
+        "PASS it loops on its 16 bars at 105 bpm, sample-accurately: {\"start\":0,\"end\":36.5714375,\"loop\":true}",
+        "PASS a bar is 2.29 s (2.285714)",
+        "PASS the horde out of sight: drums and bass alone {\"drums\":1,\"rhythm\":0.048,\"lead\":0}",
+        "PASS one within 45 m: the rhythm guitars come in {\"drums\":1,\"rhythm\":0.986,\"lead\":0}",
+        "PASS one on him (within 20 m): the leads {\"drums\":1,\"rhythm\":1,\"lead\":0.92}",
+        "PASS never under a sting (0 frames)",
+        "PASS off again: the old night 1 (elevenlabs/night-01)",
+        "PASS no page errors"
+      ]
+    },
+    "tcl275b": {
+      "pass": 6,
+      "fail": 0,
+      "lines": [
+        "PASS the specials are in the score: {\"guardian\":\"gh/guardian\",\"redsky\":\"gh/redsky\",\"colossus\":\"gh/colossus\",\"heart\":\"gh/heart\",\"wanderer\":\"gh/wanderer\"}",
+        "PASS a colossus in the fight: its suite, Titan (gh/colossus/titan)",
+        "PASS Titan loops on its 16 bars at 130 bpm: {\"start\":0,\"end\":29.538458,\"loop\":true}",
+        "PASS it goes down: night 1's suite again (gh/night-01)",
+        "PASS never under a sting (0)",
+        "PASS no page errors"
+      ]
+    }
+  },
+  "night20": {
+    "scoreOff": {
+      "usedHeapMB": "687.24",
+      "totalHeapMB": "755.18",
+      "cdpJSHeapUsedMB": null,
+      "cdpJSHeapTotalMB": null,
+      "musicState": {
+        "playing": true,
+        "stage": "alarm",
+        "deckTrack": null,
+        "overlapFrames": 0,
+        "scoreOn": false
+      }
+    },
+    "scoreOn": {
+      "usedHeapMB": "683.63",
+      "totalHeapMB": "750.98",
+      "cdpJSHeapUsedMB": null,
+      "cdpJSHeapTotalMB": null,
+      "musicState": {
+        "playing": true,
+        "stage": "alarm",
+        "deckTrack": null,
+        "overlapFrames": 0,
+        "sectionLoop": null,
+        "score": {
+          "on": true,
+          "track": null,
+          "kit": null,
+          "barS": null,
+          "layers": null,
+          "layerGains": null,
+          "failed": []
+        }
+      }
+    },
+    "deltaMB": {
+      "usedHeapDeltaMB": "-3.61",
+      "cdpUsedDeltaMB": null
+    }
+  },
+  "audioState": {},
+  "faults": [],
+  "trainingGroundMotifs": {
+    "task": "AG-194",
+    "subtask": "tcl275c and t182",
+    "timestamp": "2026-11-02T03:39:26.323Z",
+    "backend": null,
+    "tests": {
+      "tcl275c": {
+        "pass": 7,
+        "fail": 0,
+        "lines": [
+          "PASS the twelve motifs are in the score (12)",
+          "PASS a feral called out (1)",
+          "PASS its motif is asked for: {\"kind\":\"feral\",\"track\":\"gh/motif-feral\",\"started\":false}",
+          "PASS the feral's kit plays: gh/motif-feral/frenzy",
+          "PASS from its drums {\"drums\":1,\"rhythm\":0,\"lead\":0}",
+          "PASS the practice cleared: the motif goes",
+          "PASS no page errors"
+        ]
+      },
+      "t182": {
+        "pass": 36,
+        "fail": 0,
+        "lines": [
+          "PASS the title menu has a Training Ground button (Training Ground)",
+          "PASS it starts straight away, no insertion",
+          "PASS the page knows it is in training",
+          "PASS he stands behind the firing line (0.0, -200.0, -640.6)",
+          "PASS far from the map: the world is not around him",
+          "PASS he walks in unarmed, Cash to spare (CU-120)",
+          "PASS five targets and a yellow firing line",
+          "PASS copies of the HQ's CIF, supply terminal, Armory, panel and skull window (cif,kiosk,armory,hqPanel,skullWindow)",
+          "PASS the copy is built from the HQ's own pieces (a change there shows here)",
+          "PASS at the cif, E is cif (cif)",
+          "PASS at the kiosk, E is kiosk (kiosk)",
+          "PASS at the armory, E is armory (armory)",
+          "PASS at the hqPanel, E is trainingPanel (trainingPanel)",
+          "PASS at the skullWindow, E is hqWindow (hqWindow)",
+          "PASS the supply terminal opens here",
+          "PASS the Armory opens here",
+          "PASS a round down lane 3 drops its target",
+          "PASS and it stands up again",
+          "PASS the walls stop rounds",
+          "PASS he can't walk through the walls (7.20)",
+          "PASS it opens",
+          "PASS the HQ panel lists the kinds (13)",
+          "PASS spawn: the countdown starts ({\"kind\":\"shambler\",\"count\":3,\"remaining\":5,\"seconds\":5})",
+          "PASS the security shutter comes down",
+          "PASS three shamblers called in (3)",
+          "PASS in the build room they come for him (43.0 m -> 40.8 m)",
+          "PASS no building while they are out (Clear the zombies before building.)",
+          "PASS clear all",
+          "PASS killed here: no burial, a blackout ({\"wake\":true})",
+          "PASS the screen goes black",
+          "PASS the zombies are gone and he is patched up",
+          "PASS he lies on the infirmary bed (lying, his root 1.10 m from the pad)",
+          "PASS then up beside it",
+          "PASS and the lights are back",
+          "PASS standing on the range, no building there (Build mode is only available in the build room.)",
+          "PASS leaving takes the Training Ground away"
+        ]
+      }
+    }
+  }
+}

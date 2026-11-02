@@ -29,6 +29,7 @@
   T.levelGroundRect(T.gridCentre(pgx - 8), T.gridCentre(pgz - 10), T.gridCentre(pgx + 6), T.gridCentre(pgz + 6), T.sampleHeight(p.x, p.z), 8);
   p.set(T.gridCentre(pgx), T.sampleHeight(T.gridCentre(pgx), T.gridCentre(pgz)), T.gridCentre(pgz));
   await wait(200);
+  { const p0 = T.player.position, w0 = Date.now(); while (Date.now() - w0 < 8000 && Math.hypot(T.camera.position.x - p0.x, T.camera.position.z - p0.z) > 8) await new Promise((r) => setTimeout(r, 100)); }   // GB-268: the camera catches up with him first (CU-209's landing is 40 m from here)
   const cam = () => T.camera.position;
   const aimAtCell = (gx, gz, y) => { const c = cam(); const tx = T.gridCentre(gx), tz = T.gridCentre(gz); const ty = y == null ? T.sampleHeight(tx, tz) : y; T.setAimRay(c.x, c.y, c.z, tx - c.x, ty - c.y, tz - c.z); };
   // --- drag a wall line along x ---

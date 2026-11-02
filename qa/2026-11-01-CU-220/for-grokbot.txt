@@ -1,0 +1,10 @@
+CU-220, red in the chunk and red alone twice on the test page. Nothing weakened.
+
+t6 floors: drag preview [null x6]; wall-to-wall placed 6, not 5; levels 0,0,0,0,0,0 (boardwalks, not roofs).
+t59 cave: dragged to the mouth, closest 20.65 m from the lip (GB-35/44).
+t74 day-1 guard: come for him 12.2 -> 13.4 m (GB-43). He walked away.
+t76 idle: drawn close up, not the far LOD (true/false/false). This was flaky on 1.1; it is red alone twice now (GB-51).
+t87 refusal: while he aims, the banner is empty (hint "", cell 3,0, lv undefined). Expected "A tree in the way" (GB-62).
+t96 fog: killed while hidden, the corpse is drawn (GB-59).
+t192 M240B: he never mounts it, belt stays 500 (CU-87; weapons are yours now).
+t206 grenade: hold grows 6.83 m at 0.30 s and 12.17 m at 0.8 s, cap 0.80 (GB-134).

@@ -1,0 +1,40 @@
+Game-test request 03538119-bfd4-4710-bd60-eeb5ddd32bf9 queued at position 3. Waiting...
+GRANT cursor CU-220: starting one game-test command
+check-players: 314 player.position reads, all in the allowed places
+ok    t141     7 pass   0 fail  37.0s
+FAIL  t142     7 pass   3 fail  45.4s
+ok    t143    17 pass   0 fail  71.7s
+ok    t144     9 pass   0 fail  38.8s
+ok    t145    17 pass   0 fail  24.6s
+ok    t146    43 pass   0 fail  39.5s
+ok    t147    19 pass   0 fail  97.9s
+ok    t148    23 pass   0 fail  52.7s
+ok    t149    16 pass   0 fail  61.5s
+ok    t150    13 pass   0 fail  60.3s
+ok    t151     7 pass   0 fail  25.2s
+ok    t152    27 pass   0 fail  56.1s
+ok    t153    15 pass   0 fail  26.1s
+ok    t154     5 pass   0 fail  39.8s
+ok    t155     2 pass   0 fail  39.8s
+ok    t156    34 pass   0 fail  58.6s
+ok    t157     6 pass   0 fail  37.6s
+ok    t158    13 pass   0 fail  25.6s
+ok    t159    10 pass   0 fail  46.7s
+ok    t160    11 pass   0 fail  55.5s
+ok    t161     7 pass   0 fail  24.4s
+ok    t162    21 pass   0 fail  64.6s
+ok    t163    16 pass   0 fail  61.1s
+FAIL  t164    12 pass   2 fail  43.1s
+ok    t165    11 pass   0 fail  25.1s
+
+25 checks: 368 pass, 5 fail
+
+by owner:
+  unassigned
+    t142   3 fail  FAIL a sandbag starts a vault
+           FAIL a sandbag starts a vault
+           FAIL during the hop he keeps 70% of his speed (1.00 of 1.00)
+           FAIL wire: 0.76 m past, grounded true
+    t164   2 fail  FAIL standing, its hands and feet are on the ground, its claws in it no deeper than 10 cm (lowes
+           FAIL standing, its hands and feet are on the ground, its claws in it no deeper than 10 cm (lowest -0.106 m)
+           FAIL its head is in the hit column, its eyes in the headshot slice (1.76; head 2.62-3.93 of 3.77)

@@ -1,0 +1,46 @@
+GRANT cursor CU-220: starting one game-test command
+check-players: 314 player.position reads, all in the allowed places
+ok    t90      6 pass   0 fail  44.5s
+ok    t91      7 pass   0 fail  42.8s
+ok    t92      5 pass   0 fail  38.8s
+ok    t93     11 pass   0 fail  61.2s
+ok    t94      8 pass   0 fail  41.3s
+ok    t95      9 pass   0 fail  61.8s
+FAIL  t96     18 pass   1 fail  48.5s
+ok    t97     15 pass   0 fail  47.5s
+           INFO ragdoll off: 160 spawned, 160 alive at the end, 120 ticks, frame 92.61 ms avg / 126.10 ms worst (headless)
+           INFO ragdoll on: 160 spawned, 159 alive at the end, 111 ticks, frame 99.87 ms avg / 501.80 ms worst (headless)
+ok    t98     20 pass   0 fail  83.6s
+           INFO 120 spawned, 120 alive after 98.1 s and 26 legs (650 ticks)
+ok    t99      6 pass   0 fail  138.3s
+ok    t100     7 pass   0 fail  42.1s
+ok    t101     9 pass   0 fail  39.0s
+ok    t102    17 pass   0 fail  48.9s
+ok    t103     8 pass   0 fail  38.7s
+ok    t104     5 pass   0 fail  37.8s
+ok    t105    15 pass   0 fail  47.2s
+ok    t106     9 pass   0 fail  115.6s
+ok    t107     8 pass   0 fail  38.9s
+ok    t108     9 pass   0 fail  38.3s
+ok    t109     5 pass   0 fail  37.7s
+ok    t110     4 pass   0 fail  37.5s
+           INFO brute head round: 0 of 1 checks blocked before a clear frame (0.00 s of game time)
+           INFO brute head round: 0 of 1 checks blocked before a clear frame (0.00 s of game time)
+           INFO shambler head round: 0 of 1 checks blocked before a clear frame (0.00 s of game time)
+           INFO feral head round: 1 of 2 checks blocked before a clear frame (0.05 s of game time)
+           INFO feral head centre p10 0.725, median 0.808 of hitH (line 0.7)
+           INFO leaper head round: 0 of 1 checks blocked before a clear frame (0.00 s of game time)
+           INFO leaper head centre p10 0.621, median 0.636 of hitH (line 0.55)
+           INFO spider head round: 0 of 1 checks blocked before a clear frame (0.00 s of game time)
+           INFO spider head centre p10 0.655, median 0.670 of hitH (line 0.6)
+ok    t111    11 pass   0 fail  49.4s
+ok    t112    13 pass   0 fail  45.4s
+ok    t113     5 pass   0 fail  65.0s
+ok    t114     8 pass   0 fail  40.6s
+
+25 checks: 238 pass, 1 fail
+
+by owner:
+  unassigned
+    t96    1 fail  FAIL killed while hidden: the corpse is drawn
+           FAIL killed while hidden: the corpse is drawn

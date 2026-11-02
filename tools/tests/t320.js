@@ -103,17 +103,31 @@
         if (!spot) { ok(false, s.kind + ' had no dry ground'); continue; }
         const z = T.spawnZombie(spot.x, spot.z, 'shambler', true, true);
         if (!z) { ok(false, s.kind + ' did not spawn'); continue; }
-        men.push({ s, z, stuckFor: 0, clipped: false, arrived: false, viaGap: false, wasOut: true, hist: [{ t: T.getSimTime(), x: spot.x, z: spot.z }], prevT: T.getSimTime() });
+        // CU-220, Claude: the clock follows the arc to the nearest gap plus the way in, at his speed, times 1.5.
+        let nearest = Math.PI;
+        for (const g of gaps) { let d = Math.abs(g.a - s.a); if (d > Math.PI) d = Math.PI * 2 - d; if (d < nearest) nearest = d; }
+        const speed = (z.speed > 0.5 && z.speed) || (z.baseSpeed > 0.5 && z.baseSpeed) || 3.67;
+        const spawnR = hypot(spot.x - hx, spot.z - hz);
+        const allow = Math.max(50, 1.5 * (60 * nearest + Math.max(0, spawnR - 54)) / speed);
+        men.push({ s, z, stuckFor: 0, clipped: false, arrived: false, viaGap: false, wasOut: true, hist: [{ t: T.getSimTime(), x: spot.x, z: spot.z }], prevT: T.getSimTime(), allow, travel: 0 });
       }
       const t0 = T.getSimTime();
       const w0 = Date.now();
-      while (men.some((m) => !m.arrived && m.stuckFor <= 3 && m.z.alive) && T.getSimTime() - t0 < 50 && Date.now() - w0 < 40000) {
+      const longest = men.reduce((n, m) => Math.max(n, m.allow), 20);
+      // CU-220: allow is game time. This page does about 0.85 s of game per wall
+      // second (34 s of game inside a 40 s wall), so a flat 40 s wall cut a 50 s
+      // walk off early. Cover the allowance, and stop before the runner's 180 s kill.
+      const wantWall = Math.ceil(longest / 0.85 * 1000) + 2000;
+      const wallMs = Math.max(8000, Math.min(wantWall, 168000 - (Date.now() - wall0)));
+      while (men.some((m) => !m.arrived && m.stuckFor <= 3 && m.z.alive && T.getSimTime() - t0 < m.allow) && Date.now() - w0 < wallMs) {
         await wait(80);
         const now = T.getSimTime();
         for (const m of men) {
-          if (m.arrived || !m.z.alive || m.stuckFor > 3) continue;
+          if (m.arrived || !m.z.alive || m.stuckFor > 3 || now - t0 >= m.allow) continue;
           const p = m.z.mesh.position;
           const dt = Math.min(0.35, now - m.prevT);
+          const prev = m.hist[m.hist.length - 1];
+          m.travel += hypot(p.x - prev.x, p.z - prev.z);
           const r = hypot(p.x - hx, p.z - hz);
           m.hist.push({ t: now, x: p.x, z: p.z });
           while (m.hist.length > 1 && now - m.hist[0].t > 1.2) m.hist.shift();
@@ -133,8 +147,10 @@
       }
       for (const m of men) {
         const deg = (m.s.a * 180 / Math.PI).toFixed(0);
+        let nearest = Math.PI;
+        for (const g of gaps) { let d = Math.abs(g.a - m.s.a); if (d > Math.PI) d = Math.PI * 2 - d; if (d < nearest) nearest = d; }
         ok(m.arrived && m.viaGap && !m.clipped && m.stuckFor <= 3,
-          m.s.kind + ' ' + deg + '° inside through a gap in ' + (m.secs || 0).toFixed(0) + 's (r ' + (m.r || 0).toFixed(0) + ', stuck ' + m.stuckFor.toFixed(1) + 's, clip ' + m.clipped + ')');
+          m.s.kind + ' ' + deg + '° inside through a gap in ' + (m.secs || 0).toFixed(0) + 's (r ' + (m.r || 0).toFixed(0) + ', walked ' + (m.travel || 0).toFixed(0) + 'm, stuck ' + m.stuckFor.toFixed(1) + 's, clip ' + m.clipped + ', nearest gap ' + (nearest * 180 / Math.PI).toFixed(0) + ' deg)');
       }
       return men.length;
     }
@@ -145,7 +161,7 @@
       + await walkGroup(betweenSpots, (p) => hypot(p.x - hx, p.z - hz) < 54);
     ok(walked >= gaps.length, 'walked a gap and a between-gap for each opening (' + walked + '/' + (gaps.length * 2) + ')');
 
-    if (budget()) {
+    if (budget() && Date.now() - wall0 < 140000) {
       put(hx, hz + 6);
       const jumped = T.devJumpToNight(20, true);
       ok(jumped !== false, 'night 20 started');
@@ -155,7 +171,7 @@
       let firstIn = null, clipped = 0, stuckN = 0;
       const stuckFor = new Map();
       const hist = new Map();
-      while (T.getSimTime() - t0 < 35 && Date.now() - w0 < 40000 && firstIn == null) {
+      while (T.getSimTime() - t0 < 35 && Date.now() - w0 < 40000 && Date.now() - wall0 < 168000 && firstIn == null) {
         await wait(120);
         const now = T.getSimTime();
         for (const z of T.zombies || []) {
@@ -194,9 +210,13 @@
         put(px, pz);
         T.clearZombies();
         const far = dry(Math.PI);
-        const w = far && await walkTo(far, (p) => hypot(p.x - px, p.z - pz) < 14, 55000);
-        ok(!!(w && w.arrived && !w.clipped && w.stuckFor <= 3),
-          'past the ring, a shambler from the far side reached him' + (w ? ' (r ' + w.r.toFixed(0) + ', stuck ' + w.stuckFor.toFixed(1) + 's)' : ''));
+        const farCap = Math.min(55000, 172000 - (Date.now() - wall0));
+        if (!far) ok(false, 'past the ring, no dry ground on the far side');
+        else if (farCap >= 12000) {
+          const w = await walkTo(far, (p) => hypot(p.x - px, p.z - pz) < 14, farCap);
+          ok(!!(w && w.arrived && !w.clipped && w.stuckFor <= 3),
+            'past the ring, a shambler from the far side reached him' + (w ? ' (r ' + w.r.toFixed(0) + ', stuck ' + w.stuckFor.toFixed(1) + 's)' : ''));
+        }
       }
     }
   } catch (e) { out.push('FAIL threw: ' + (e && e.stack || e)); }

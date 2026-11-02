@@ -1,0 +1,67 @@
+Game-test request 9800e43a-2d67-4d05-8c91-ef18372e37d4 queued at position 3. Waiting...
+GRANT cursor CU-220: starting one game-test command
+check-players: 314 player.position reads, all in the allowed places
+           INFO angular acceleration, rad/s^2: walk 310, run 764, jump 821, walk2 530, stop 193
+ok    t216    22 pass   0 fail  49.2s
+ok    t217    55 pass   0 fail  24.7s
+ok    t218    21 pass   0 fail  122.2s
+ok    t219    22 pass   0 fail  29.0s
+ok    t220    16 pass   0 fail  54.1s
+ok    t221    27 pass   0 fail  48.6s
+           INFO shambler  head: head 5, miss 1 | chest: body 6 | legs: legs 3, ground 2, body 1
+           INFO feral     head: head 6 | chest: body 6 | legs: legs 4, ground 2
+           INFO brute     head: head 5, miss 1 | chest: body 6 | legs: legs 5, ground 1
+           INFO spider    head: head 6 | chest: head 5, body 1 | legs: -
+           INFO leaper    head: head 5, body 1 | chest: body 4, head 2 | legs: -
+           INFO colossus at 90 deg 14 m: its head is covered by its own gear from the camera here (no head case)
+           INFO colossus  head: body 2, head 3 | chest: body 6 | legs: legs 6
+           INFO the reticle rings a head lined up, and not a chest (false, los-clear) (would fail; INFO on the test page)
+           INFO the gold-X round: 0 aim(s) blocked before a clear line to the head
+           INFO pistol 8 m 3 m/s +: miss, lead 0.18 m (pace x flight 0.33)
+           INFO pistol 8 m 3 m/s -: hit, lead -0.22 m (pace x flight -0.33) at 0.65 of its height
+           INFO pistol 8 m 6 m/s +: miss, lead 0.30 m (pace x flight 0.60)
+           INFO pistol 8 m 6 m/s -: miss, lead -0.30 m (pace x flight -0.60)
+           INFO pistol 18 m 3 m/s +: miss, lead 0.54 m (pace x flight 0.73)
+           INFO pistol 18 m 3 m/s -: ground, lead -0.59 m (pace x flight -0.71) at 0.62 of its height
+           INFO pistol 18 m 6 m/s +: ground, lead 1.13 m (pace x flight 1.43) at 0.55 of its height
+           INFO pistol 18 m 6 m/s -: miss, lead -1.18 m (pace x flight -1.38)
+           INFO m4 8 m 3 m/s +: hit, lead 0.10 m (pace x flight 0.23) at 0.53 of its height
+           INFO m4 8 m 3 m/s -: hit, lead -0.13 m (pace x flight -0.23) at 0.64 of its height
+           INFO m4 8 m 6 m/s +: miss, lead 0.13 m (pace x flight 0.43)
+           INFO m4 8 m 6 m/s -: miss, lead -0.14 m (pace x flight -0.43)
+           INFO m4 18 m 3 m/s +: ground, lead 0.37 m (pace x flight 0.54) at 0.57 of its height
+           INFO m4 18 m 3 m/s -: ground, lead -0.40 m (pace x flight -0.52) at 0.61 of its height
+           INFO m4 18 m 6 m/s +: ground, lead 0.75 m (pace x flight 1.05) at 0.55 of its height
+           INFO m4 18 m 6 m/s -: miss, lead -0.81 m (pace x flight -1.01)
+           INFO the 6 m/s runners on the test page: miss 6, ground 2 (not a bar: the fake models; 1.x, CL FYI)
+           INFO launcher 12 m 6 m/s +: miss, lead -0.30 m (pace x flight 2.11)
+FAIL  t222     7 pass   1 fail  170.7s
+ok    t223    15 pass   0 fail  56.4s
+ok    t224    27 pass   0 fail  139.1s
+ok    t225    21 pass   0 fail  58.7s
+ok    t226    38 pass   0 fail  133.2s
+           INFO crouched: ankles bent up to 54 deg; an ankle-worn shaft top would be 13.5 cm off the shin
+ok    t227    23 pass   0 fail  44.0s
+ok    t228    13 pass   0 fail  130.5s
+ok    t229    13 pass   0 fail  77.9s
+ok    t240    17 pass   0 fail  49.9s
+ok    t241     5 pass   0 fail  36.6s
+ok    t242    15 pass   0 fail  35.7s
+ok    t243    23 pass   0 fail  39.4s
+info  t244     0 pass   0 fail  36.5s  — SKIP the manual clock does not drive this page (run on the real renderer)
+ok    t245    15 pass   0 fail  37.6s
+ok    t246    24 pass   0 fail  67.2s
+ok    t247    12 pass   0 fail  47.1s
+ok    t248    12 pass   0 fail  44.0s
+ok    t249    13 pass   0 fail  40.2s
+ok    t250    10 pass   0 fail  37.1s
+
+25 checks: 466 pass, 1 fail, 1 reported no assertions
+
+no assertions (probe, or the check bailed before asserting):
+  t244   SKIP the manual clock does not drive this page (run on the real renderer)
+
+by owner:
+  unassigned
+    t222   1 fail  FAIL a runner crossing in front of him at 3 m/s, the cursor on it, is hit: miss 2, hit 3, ground
+           FAIL a runner crossing in front of him at 3 m/s, the cursor on it, is hit: miss 2, hit 3, ground 3 (bar 5/8; the plumbing floor)

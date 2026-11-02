@@ -1,0 +1,27 @@
+Game-test request 69c4c9de-c51e-4076-8c79-0b550dc0bb5d queued at position 2. Waiting...
+GRANT grokbot GB-267: starting one game-test command
+FAIL  t325     22 pass   3 fail  54.4s  (real renderer)
+    FAIL walked down the descent to the mouth: no stop, no stall over 0.2 s (240 frames, worst run of slow frames 17, stops 0)
+    FAIL and on to the Deep through the iron cut: no stop, no stall over 0.2 s (472 frames, worst 391, stops 381, STUCK at 48.7,11.0)
+    FAIL in the Deep: depth 3 (1)
+ok    t215      4 pass   0 fail  37.5s  (real renderer)
+ok    t95       9 pass   0 fail  35.8s  (real renderer)
+ok    t152     27 pass   0 fail  49.5s  (real renderer)
+ok    t157      6 pass   0 fail  33.4s  (real renderer)
+FAIL  t167     19 pass   1 fail  22.8s  (real renderer)
+    FAIL Coldwater's church by the old cemetery, behind the burial yard (35.0 m)
+FAIL  t168     38 pass   1 fail  53.2s  (real renderer)
+    FAIL his pistol shot wakes the 3 within 35 m and not the 3 beyond
+FAIL  t170     17 pass   3 fail  81.4s  (real renderer)
+    FAIL after the ten seconds he is out at the mouth, not grabbed (13.0 s)
+    FAIL the stir's 'out', and the leave by the bolt-hole
+    FAIL and the Hush is spent for the day
+ok    t171     23 pass   0 fail  42.2s  (real renderer)
+FAIL  t174     11 pass   3 fail  66.1s  (real renderer)
+    FAIL topside: none of the warren, the wind up (0.000, wind 0.000)
+    FAIL the room's low air (0.000)
+    FAIL back up: the wind again, the warren gone (wind 0.000, rumble 0.000)
+ok    t178      8 pass   0 fail  48.4s  (real renderer)
+ok    t190     21 pass   0 fail  45.9s  (real renderer)
+ok    t191     16 pass   0 fail  76.9s  (real renderer)
+13 checks: 221 pass, 11 fail (real renderer)

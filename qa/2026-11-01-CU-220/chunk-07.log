@@ -1,0 +1,43 @@
+Game-test request 55f2fce3-e747-4e5d-98a9-ee56f71ca559 queued at position 3. Waiting...
+GRANT cursor CU-220: starting one game-test command
+check-players: 314 player.position reads, all in the allowed places
+ok    t166    11 pass   0 fail  37.9s
+FAIL  t167    19 pass   1 fail  24.9s
+FAIL  t168    38 pass   1 fail  57.8s
+ok    t169     8 pass   0 fail  24.9s
+FAIL  t170    17 pass   3 fail  88.4s
+ok    t171    23 pass   0 fail  51.7s
+ok    t172     7 pass   0 fail  46.6s
+ok    t173    12 pass   0 fail  38.7s
+ok    t174    14 pass   0 fail  66.0s
+ok    t175    12 pass   0 fail  47.3s
+ok    t176     8 pass   0 fail  47.9s
+ok    t177    10 pass   0 fail  39.2s
+ok    t178     8 pass   0 fail  43.5s
+ok    t179    27 pass   0 fail  44.1s
+ok    t180    29 pass   0 fail  72.6s
+ok    t181    23 pass   0 fail  53.6s
+ok    t182    36 pass   0 fail  49.7s
+ok    t183    16 pass   0 fail  49.5s
+           INFO crouch-walk slide 8.01% (at 1.92 m/s ground speed)
+ok    t184    29 pass   0 fail  52.3s
+           INFO holds: m4 1694 ms wall / 500 ms game, ak 1724 ms wall / 500 ms game, aa12 838 ms wall / 450 ms game, uzi 1493 ms wall / 400 ms game, shotgun 1295 ms wall / 300 ms game, revolver 1258 ms wall / 300 ms game, sniper 1334 ms wall / 300 ms game, pistol 1246 ms wall / 300 ms game, pistol 751 ms wall / 400 ms game
+ok    t185    36 pass   0 fail  94.4s
+ok    t186    34 pass   0 fail  48.6s
+ok    t187    75 pass   0 fail  94.7s
+ok    t188    91 pass   0 fail  117.8s
+ok    t189     8 pass   0 fail  152.6s
+ok    t190    21 pass   0 fail  39.2s
+
+25 checks: 612 pass, 5 fail
+
+by owner:
+  unassigned
+    t167   1 fail  FAIL Coldwater's church by the old cemetery, behind the burial yard (35.0 m)
+           FAIL Coldwater's church by the old cemetery, behind the burial yard (35.0 m)
+    t168   1 fail  FAIL his pistol shot wakes the 3 within 35 m and not the 3 beyond
+           FAIL his pistol shot wakes the 3 within 35 m and not the 3 beyond
+    t170   3 fail  FAIL after the ten seconds he is out at the mouth, not grabbed (13.0 s)
+           FAIL after the ten seconds he is out at the mouth, not grabbed (13.0 s)
+           FAIL the stir's 'out', and the leave by the bolt-hole
+           FAIL and the Hush is spent for the day

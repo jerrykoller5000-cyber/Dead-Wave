@@ -15,7 +15,7 @@
 //
 // index.html calls update(dt, state) each frame before it draws and place() in renderFrame; it asks muzzleWorld()
 // where the view gun's muzzle appears (the laser leaves from there).
-import { VM, VM_POSES, VM_RELOADS } from './viewmodel-poses.js';
+import { VM, VM_POSES, VM_RELOADS, VM_SOCKETS } from './viewmodel-poses.js';
 import { SIGHT } from './sight-points.js';
 import { buildViewArm, wristSpacePoint, HAND_SCALE } from '../studio/fp-arms.js';
 import { copyPose, lerpPose, HAND_POSES } from '../studio/marine-hand.js';
@@ -209,7 +209,7 @@ export function createViewmodel(ctx) {
   }
 
   // --- the gun's copy ------------------------------------------------------------------------------------------------
-  let gun = null;   // { key, src, root, pairs, slide, mag, flash, nodes, s, foot, magBase }
+  let gun = null;   // { key, src, root, pairs, work, slide, mag, flash, nodes, s, foot, magBase }
   function cloneLean(src, pairs, skip) {
     let o;
     if (src.isMesh) {
@@ -230,7 +230,7 @@ export function createViewmodel(ctx) {
     dropGun();
     const src = weaponMeshes[key];
     if (!src) return;
-    const ud = src.userData || {}, pairs = [], skip = new Set([ud.laser].filter(Boolean));
+    const ud = src.userData || {}, pairs = [], skip = new Set([ud.laser, ud.fpStock].filter(Boolean));
     const r = cloneLean(src, pairs, skip);
     r.position.set(0, 0, 0); r.quaternion.set(0, 0, 0, 1); r.scale.set(1, 1, 1);
     gunHolder.add(r);
@@ -239,8 +239,10 @@ export function createViewmodel(ctx) {
     // MU-11 (finding 3): the palm ride and the slide's grab work in the gun root's space: a magazine or slide deeper in the
     // gun's tree is left to his own gun's animation (mirrored) instead.
     const direct = (o) => (o && o.parent === src ? o : null);
-    gun = { key, src, root: r, pairs, map, slide: map.get(direct(ud.slide)) || null, mag: map.get(direct(ud.mag)) || null, flash: map.get(ud.flash) || null,
+    gun = { key, src, root: r, pairs, slide: map.get(direct(ud.slide)) || null,
+      work: map.get(direct(ud.work || ud.slide)) || null, mag: map.get(direct(ud.mag)) || null, flash: map.get(ud.flash) || null,
       nodes: countNodes(src), s: 1, foot: null, magBase: null };
+    gun.workBase = gun.work ? gun.work.position.clone() : null;
     gun.pairs = pairs.filter(([s]) => s !== src);   // the copy's root is placed here, not mirrored
     if (gun.mag && ud.baseMagPos) {
       const mp = ud.baseMagPos, mr = ud.baseMagRot;
@@ -287,7 +289,7 @@ export function createViewmodel(ctx) {
 
   // --- where each hand sits on the gun: read off his body while the hold is settled --------------------------------
   const sockets = { key: null, r: null, l: null, poseR: copyPose(HAND_POSES.relaxed), poseL: copyPose(HAND_POSES.relaxed) };
-  const _sm = M4(), _sf = F();
+  const _sm = M4(), _sf = F(), _contact = V3(), _target = V3();
   function readSockets(key, settled, dt) {
     const ud = marine.userData, src = weaponMeshes[key];
     const wr = ud.elbowRG && ud.elbowRG.userData.wrist, wl = ud.elbowLG && ud.elbowLG.userData.wrist;
@@ -303,6 +305,12 @@ export function createViewmodel(ctx) {
       _sm.multiplyMatrices(inv, w.matrixWorld); fromMatrix(_sm, _sf);
       if (first || !sockets[side]) sockets[side] = { p: _sf.p.clone(), q: _sf.q.clone(), s: _sf.s };
       else lerpF(sockets[side], _sf, k, sockets[side]);
+      const authored = VM_SOCKETS[key];
+      if (authored && arms) {
+        _target.set(...(side === 'r' ? authored.grip : authored.support));
+        wristSpacePoint(arms[side], 'grip', _contact).multiplyScalar(sockets[side].s).applyQuaternion(sockets[side].q);
+        sockets[side].p.copy(_target).sub(_contact);
+      }
     }
     sockets.key = key;
   }
@@ -332,10 +340,15 @@ export function createViewmodel(ctx) {
       const g = G, inv = _pinv.copy(g.q).invert();
       at.set(pl.pouch.at[0] * MX, pl.pouch.at[1], pl.pouch.at[2]).sub(g.p).applyQuaternion(inv).multiplyScalar(1 / g.s);
       z.set(pl.pouch.z[0] * MX, pl.pouch.z[1], pl.pouch.z[2]).applyQuaternion(inv); y.set(pl.pouch.y[0] * MX, pl.pouch.y[1], pl.pouch.y[2]).applyQuaternion(inv);
-    } else if (name === 'work' && gun.slide) {
-      if (!gun.grab) { const b = localBox(gun.slide); gun.grab = b ? new T.Vector3((b.min.x + b.max.x) / 2, b.max.y - 0.25 * (b.max.y - b.min.y), b.min.z + 0.25 * (b.max.z - b.min.z)) : V3(); }
-      gun.slide.updateMatrix();
-      at.copy(gun.grab).add(_pg.set(pl.work.grab[0], pl.work.grab[1], pl.work.grab[2])).applyMatrix4(gun.slide.matrix);
+    } else if (name === 'work' && pl.work) {
+      if (pl.work.at) {
+        at.set(...pl.work.at);
+        if (gun.work && gun.workBase) at.add(_pg.copy(gun.work.position).sub(gun.workBase));
+      } else if (gun.work) {
+        if (!gun.grab) { const b = localBox(gun.work); gun.grab = b ? new T.Vector3((b.min.x + b.max.x) / 2, b.max.y - 0.25 * (b.max.y - b.min.y), b.min.z + 0.25 * (b.max.z - b.min.z)) : V3(); }
+        gun.work.updateMatrix();
+        at.copy(gun.grab).add(_pg.set(...pl.work.grab)).applyMatrix4(gun.work.matrix);
+      } else at.set(0, 0, 0);
       z.set(...pl.work.z); y.set(...pl.work.y);
     } else {
       if (!gun.foot) footOf();
@@ -358,6 +371,7 @@ export function createViewmodel(ctx) {
     const b = localBox(gun.mag);
     const inMag = b ? new T.Vector3((b.min.x + b.max.x) / 2, b.min.y, (b.min.z + b.max.z) / 2) : V3();
     gun.mag.updateMatrix();
+    gun.magFootLocal = inMag.clone();
     gun.foot = inMag.applyMatrix4(gun.mag.matrix);
     gun.mag.position.copy(keep.p); gun.mag.quaternion.copy(keep.q);
   }
@@ -538,10 +552,12 @@ export function createViewmodel(ctx) {
   }
 
   const _eR = [0, 0, 0], _eL = [0, 0, 0];
-  const _wm = M4(), _mf = F(), _mrel = F(), _wellF = F(), _localF = F(), _wiF = F(), _local2 = F(), _outF = F(), _gi = Q(), _psc = V3(), _mw = V3();
+  const _wm = M4(), _mf = F(), _mrel = F(), _wellF = F(), _localF = F(), _wiF = F(), _local2 = F(), _outF = F(), _gi = Q(), _psc = V3(), _mw = V3(), _rockQ = Q(), _rockPivot = V3(), _rockMoved = V3();
   function update(dt, st) {
     dt = Math.min(0.05, Math.max(0, dt || 0));
-    const key = st && st.want && st.weapon && VM_POSES[st.weapon] && weaponMeshes[st.weapon] ? st.weapon : null;
+    const candidate = st && st.want && st.weapon && VM_POSES[st.weapon] ? weaponMeshes[st.weapon] : null;
+    const needsStockSplit = st && (st.weapon === 'm4' || st.weapon === 'ak');
+    const key = candidate && (!needsStockSplit || (candidate.userData && candidate.userData.fpStock && candidate.userData.fpStock.parent === candidate)) ? st.weapon : null;
     // lower before a change; raise once the new one is in
     if ((gun ? gun.key : null) !== key) {
       if (S.raise > 0.02 && gun) S.raise = Math.max(0, S.raise - dt * VM.raise * 1.6);
@@ -564,13 +580,13 @@ export function createViewmodel(ctx) {
     S.ads = st.ads || 0; info.ads = S.ads;
     gunFrame(P, gun.key, st, dt);
     gun.root.position.copy(G.p); gun.root.quaternion.copy(G.q); gun.root.scale.setScalar(G.s);
-    // the slide's kick on a shot (the third-person pistol's slide stays still; its rack in a reload is mirrored)
+    // The copied action cycles on a shot; the original gun keeps its third-person animation.
     S.slideT += dt;
     if (gun.slide && P.slideKick) { const t = S.slideT, k = t < 0.018 ? t / 0.018 : t < 0.075 ? 1 - (t - 0.018) / 0.057 : 0; gun.slide.position.z -= P.slideKick * k; }
-    // AG-168 (defect 4): the rack, driven here (his own pistol's slide stays put through the reload): back as the hand
-    // pulls (rack[0] to rack[1]), held, and forward at the release (rack[2], the slide-forward sound).
+    if (gun.work && gun.work !== gun.slide && P.workKick) { const t = S.slideT, k = t < 0.018 ? t / 0.018 : t < 0.075 ? 1 - (t - 0.018) / 0.057 : 0; gun.work.position.z -= P.workKick * k; }
+    // The reload's bolt/charging-handle pull follows the support hand after the magazine seats.
     { const Rr = P.reload && VM_RELOADS[P.reload], rk = Rr && Rr.rack, ur = st.reloadU;
-      if (gun.slide && rk && ur != null) { const back = smooth((ur - rk[0]) / (rk[1] - rk[0])) * (1 - smooth((ur - rk[2]) / 0.03)); gun.slide.position.z -= rk[3] * back; } }
+      if (gun.work && rk && ur != null) { const back = smooth((ur - rk[0]) / (rk[1] - rk[0])) * (1 - smooth((ur - rk[2]) / 0.03)); gun.work.position.z -= rk[3] * back; } }
     // the hands
     const R = P.reload && VM_RELOADS[P.reload];
     const u = R && st.reloadU != null ? clamp(st.reloadU, 0, 1) : null;
@@ -602,6 +618,14 @@ export function createViewmodel(ctx) {
         const local = placeLocalOfWrist(_local2);
         const out = mul(local, _mrel, _outF);
         gun.mag.position.copy(out.p); gun.mag.quaternion.copy(out.q); gun.mag.scale.setScalar(out.s);
+        if (R.rock && gun.magFootLocal) {
+          const rock = R.rock;
+          const angle = rock.angle * (smooth((u - rock.out[0]) / (rock.out[1] - rock.out[0])) - smooth((u - rock.in[0]) / (rock.in[1] - rock.in[0])));
+          _rockPivot.copy(gun.magFootLocal).multiplyScalar(out.s).applyQuaternion(gun.mag.quaternion);
+          gun.mag.quaternion.multiply(_rockQ.setFromAxisAngle(AX_X, angle));
+          _rockMoved.copy(gun.magFootLocal).multiplyScalar(out.s).applyQuaternion(gun.mag.quaternion);
+          gun.mag.position.add(_rockPivot.sub(_rockMoved));
+        }
         gun.mag.visible = true;
       } else {
         gun.mag.position.copy(gun.magBase.pos); gun.mag.quaternion.copy(gun.magBase.quat); gun.mag.scale.copy(gun.magBase.scale);

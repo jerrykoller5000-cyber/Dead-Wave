@@ -1,0 +1,6 @@
+Game-test request 7e3e2101-0635-468e-925f-68c9f819decb queued at position 2. Waiting...
+GRANT cursor CU-223: starting one game-test command
+check-players: 314 player.position reads, all in the allowed places
+ok    tcl281  88 pass   0 fail  94.5s
+
+1 checks: 88 pass, 0 fail

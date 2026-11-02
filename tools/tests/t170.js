@@ -29,7 +29,8 @@
       const open = (x, z) => { const a = Math.floor((x - nav.ox) / nav.cell), c = Math.floor((z - nav.oz) / nav.cell); return a >= 0 && c >= 0 && a < nav.w && c < nav.h && !!nav.walkable[c * nav.w + a]; };
       for (const c of b.cells) {
         if (c.kind !== 'chamber' || c.depth !== 1 || c.id === b.plan.mouthCell) continue;
-        const x = g.x + c.i * 6 + 3, z = g.z + c.j * 6 + 3;
+        const CS = b.cell || 6;   // GB-267: the warren's own cell size
+        const x = g.x + c.i * CS + CS / 2, z = g.z + c.j * CS + CS / 2;
         if (open(x, z) && b.exits.boltHoles.every((h) => Math.hypot(h.x - x, h.z - z) > (h.r || 1.5) + 1)) return { x, z };
       }
       return null;

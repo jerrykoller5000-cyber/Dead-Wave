@@ -1,0 +1,1702 @@
+{
+  "task": "AG-196",
+  "agent": "antigravity",
+  "timestamp": "2026-11-02T05:14:36.291Z",
+  "night20": {
+    "scoreOff": [
+      {
+        "scoreOn": false,
+        "runIndex": 1,
+        "screenshot": "night20-score-off-run1.png",
+        "pageMetrics": {
+          "usedJSHeapMB": "674.47",
+          "totalJSHeapMB": "747.73",
+          "cdpJSHeapUsedMB": null,
+          "backend": "WebGPU",
+          "musicState": {
+            "playing": true,
+            "stage": "alarm",
+            "deckTrack": null,
+            "overlapFrames": 0,
+            "score": {
+              "on": false,
+              "track": null,
+              "kit": null,
+              "barS": null,
+              "layers": null,
+              "layerGains": null,
+              "motif": null
+            }
+          }
+        },
+        "processMemory": {
+          "processes": [
+            {
+              "Id": 2012,
+              "ParentId": 35464,
+              "Role": "browser",
+              "PrivateBytesBytes": 76873728,
+              "PrivateBytesMB": 73.31,
+              "PrivateWorkingSetBytes": 63619072,
+              "PrivateWorkingSetMB": 60.67,
+              "WorkingSetBytes": 191053824,
+              "WorkingSetMB": 182.2,
+              "CommandLine": "\"C:/Program Files/Google/Chrome/Application/chrome.exe\" --remote-debugging-port=0 --user-data-dir=C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-em4zDL --no-first-run --no-default-browser-check --disable-extensions --disable-background-timer-throttling --disable-renderer-backgrounding --disable-backgrounding-occluded-windows --mute-audio --enable-precise-memory-info --enable-unsafe-webgpu --window-size=1280,720 --enable-precise-memory-info --js-flags=--expose-gc --task-id=AG-196-N20-OFF-R1 about:blank"
+            },
+            {
+              "Id": 27792,
+              "ParentId": 2012,
+              "Role": "crashpad",
+              "PrivateBytesBytes": 2506752,
+              "PrivateBytesMB": 2.39,
+              "PrivateWorkingSetBytes": 1585152,
+              "PrivateWorkingSetMB": 1.51,
+              "WorkingSetBytes": 10104832,
+              "WorkingSetMB": 9.64,
+              "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=crashpad-handler --user-data-dir=C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-em4zDL /prefetch:4 --monitor-self-annotation=ptype=crashpad-handler --user-stream-region=244,65568 --database=C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-em4zDL\\Crashpad --metrics-dir=C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-em4zDL --url=https://clients2.google.com/cr/report --annotation=channel= --annotation=plat=Win64 --annotation=prod=Chrome --annotation=ver=156.0.8078.74 --initial-client-data=0x138,0x13c,0x140,0x114,0x144,0x7ff9e63f9f40,0x7ff9e63f9f50,0x7ff9e63f9f60"
+            },
+            {
+              "Id": 29520,
+              "ParentId": 2012,
+              "Role": "gpu",
+              "PrivateBytesBytes": 2679627776,
+              "PrivateBytesMB": 2555.49,
+              "PrivateWorkingSetBytes": 502747136,
+              "PrivateWorkingSetMB": 479.46,
+              "WorkingSetBytes": 665911296,
+              "WorkingSetMB": 635.06,
+              "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=gpu-process --gpu-recent-crash-count=0 --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-em4zDL\" --no-pre-read-main-dll --gpu-preferences=WAAAAAAAAADgAAAEAAAAAAAAAAAAAGAAQAAAAAAAAAADAAAAAAAAADgAAAAAAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAAAAAAKAAAAAAAAAAoAAAAAAAAAAgAAAAAAAAAEAAAAAIAAAABAAAAAAAAAAgAAAAAAAAACAAAAAAAAAA= --metrics-shmem-handle=1300,i,13352521763204832211,9964914372859807478,262144 --field-trial-handle=2008,i,12521575572293865954,1920402544316281099,262144 --variations-seed-version --pseudonymization-salt-handle=2012,i,11277068727274628735,8554529406480950254,4 --trace-process-track-uuid=3190708988185955192 --mojo-platform-channel-handle=2000 /prefetch:2"
+            },
+            {
+              "Id": 38180,
+              "ParentId": 2012,
+              "Role": "audio service",
+              "PrivateBytesBytes": 15376384,
+              "PrivateBytesMB": 14.66,
+              "PrivateWorkingSetBytes": 9461760,
+              "PrivateWorkingSetMB": 9.02,
+              "WorkingSetBytes": 42258432,
+              "WorkingSetMB": 40.3,
+              "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --mute-audio --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-em4zDL\" --no-pre-read-main-dll --metrics-shmem-handle=2400,i,9068907246454849691,6578676273570454669,524288 --field-trial-handle=2008,i,12521575572293865954,1920402544316281099,262144 --variations-seed-version --pseudonymization-salt-handle=2012,i,11277068727274628735,8554529406480950254,4 --trace-process-track-uuid=3190708989122997041 --mojo-platform-channel-handle=2380 /prefetch:11"
+            },
+            {
+              "Id": 32108,
+              "ParentId": 2012,
+              "Role": "audio service",
+              "PrivateBytesBytes": 8019968,
+              "PrivateBytesMB": 7.65,
+              "PrivateWorkingSetBytes": 2678784,
+              "PrivateWorkingSetMB": 2.55,
+              "WorkingSetBytes": 18014208,
+              "WorkingSetMB": 17.18,
+              "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=utility --utility-sub-type=storage.mojom.StorageService --lang=en-US --service-sandbox-type=service --mute-audio --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-em4zDL\" --no-pre-read-main-dll --metrics-shmem-handle=2684,i,18261066798431426851,1186652527575571852,524288 --field-trial-handle=2008,i,12521575572293865954,1920402544316281099,262144 --variations-seed-version --pseudonymization-salt-handle=2012,i,11277068727274628735,8554529406480950254,4 --trace-process-track-uuid=3190708990060038890 --mojo-platform-channel-handle=2588 /prefetch:13"
+            },
+            {
+              "Id": 18884,
+              "ParentId": 2012,
+              "Role": "renderer",
+              "PrivateBytesBytes": 53194752,
+              "PrivateBytesMB": 50.73,
+              "PrivateWorkingSetBytes": 43143168,
+              "PrivateWorkingSetMB": 41.14,
+              "WorkingSetBytes": 95744000,
+              "WorkingSetMB": 91.31,
+              "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=renderer --top-chrome-webui --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-em4zDL\" --no-pre-read-main-dll --disable-background-timer-throttling --enable-precise-memory-info --enable-unsafe-webgpu --remote-debugging-port=0 --js-flags=--expose-gc --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=5 --launch-time-ticks=370511803641 --metrics-shmem-handle=3036,i,15014834198245390547,417898278518188062,1572864 --field-trial-handle=2008,i,12521575572293865954,1920402544316281099,262144 --variations-seed-version --pseudonymization-salt-handle=2012,i,11277068727274628735,8554529406480950254,4 --trace-process-track-uuid=3190708990997080739 --mojo-platform-channel-handle=3776 /prefetch:1"
+            },
+            {
+              "Id": 21184,
+              "ParentId": 2012,
+              "Role": "renderer",
+              "PrivateBytesBytes": 20529152,
+              "PrivateBytesMB": 19.58,
+              "PrivateWorkingSetBytes": 12701696,
+              "PrivateWorkingSetMB": 12.11,
+              "WorkingSetBytes": 48582656,
+              "WorkingSetMB": 46.33,
+              "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=renderer --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-em4zDL\" --no-pre-read-main-dll --disable-background-timer-throttling --enable-precise-memory-info --enable-unsafe-webgpu --remote-debugging-port=0 --js-flags=--expose-gc --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=6 --launch-time-ticks=370511834213 --metrics-shmem-handle=4160,i,10728431177591139251,5593251283436093021,1572864 --field-trial-handle=2008,i,12521575572293865954,1920402544316281099,262144 --variations-seed-version --pseudonymization-salt-handle=2012,i,11277068727274628735,8554529406480950254,4 --trace-process-track-uuid=3190708991934122588 --mojo-platform-channel-handle=4180 /prefetch:1"
+            },
+            {
+              "Id": 15112,
+              "ParentId": 2012,
+              "Role": "renderer",
+              "PrivateBytesBytes": 1312788480,
+              "PrivateBytesMB": 1251.97,
+              "PrivateWorkingSetBytes": 1232134144,
+              "PrivateWorkingSetMB": 1175.05,
+              "WorkingSetBytes": 1381933056,
+              "WorkingSetMB": 1317.91,
+              "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=renderer --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-em4zDL\" --no-pre-read-main-dll --disable-background-timer-throttling --enable-precise-memory-info --enable-unsafe-webgpu --remote-debugging-port=0 --js-flags=--expose-gc --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=8 --launch-time-ticks=370511871074 --metrics-shmem-handle=4396,i,9053237492092314390,12309544243357737141,1572864 --field-trial-handle=2008,i,12521575572293865954,1920402544316281099,262144 --variations-seed-version --pseudonymization-salt-handle=2012,i,11277068727274628735,8554529406480950254,4 --trace-process-track-uuid=3190708993808206286 --mojo-platform-channel-handle=4392 /prefetch:1"
+            },
+            {
+              "Id": 11296,
+              "ParentId": 2012,
+              "Role": "audio service",
+              "PrivateBytesBytes": 9158656,
+              "PrivateBytesMB": 8.73,
+              "PrivateWorkingSetBytes": 3551232,
+              "PrivateWorkingSetMB": 3.39,
+              "WorkingSetBytes": 23814144,
+              "WorkingSetMB": 22.71,
+              "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=utility --utility-sub-type=audio.mojom.AudioService --lang=en-US --service-sandbox-type=audio --mute-audio --video-capture-use-gpu-memory-buffer --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-em4zDL\" --no-pre-read-main-dll --metrics-shmem-handle=5752,i,16545338190866136450,4467937665874824412,524288 --field-trial-handle=2008,i,12521575572293865954,1920402544316281099,262144 --variations-seed-version --pseudonymization-salt-handle=2012,i,11277068727274628735,8554529406480950254,4 --trace-process-track-uuid=3190708997556373682 --mojo-platform-channel-handle=5964 /prefetch:12"
+            },
+            {
+              "Id": 28768,
+              "ParentId": 2012,
+              "Role": "renderer",
+              "PrivateBytesBytes": 15044608,
+              "PrivateBytesMB": 14.35,
+              "PrivateWorkingSetBytes": 7438336,
+              "PrivateWorkingSetMB": 7.09,
+              "WorkingSetBytes": 31305728,
+              "WorkingSetMB": 29.86,
+              "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=renderer --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-em4zDL\" --no-pre-read-main-dll --disable-background-timer-throttling --enable-precise-memory-info --enable-unsafe-webgpu --remote-debugging-port=0 --js-flags=--expose-gc --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=23 --launch-time-ticks=370514515916 --metrics-shmem-handle=7112,i,8588883396173279747,7167540448882672853,1572864 --field-trial-handle=2008,i,12521575572293865954,1920402544316281099,262144 --variations-seed-version --pseudonymization-salt-handle=2012,i,11277068727274628735,8554529406480950254,4 --trace-process-track-uuid=3190709007863834021 --mojo-platform-channel-handle=6852 /prefetch:1"
+            }
+          ],
+          "sumPrivateBytesMB": 3998.86,
+          "sumPrivateWorkingSetMB": 1791.99,
+          "sumWorkingSetMB": 2392.5
+        }
+      },
+      {
+        "scoreOn": false,
+        "runIndex": 2,
+        "screenshot": "night20-score-off-run2.png",
+        "pageMetrics": {
+          "usedJSHeapMB": "674.66",
+          "totalJSHeapMB": "758.75",
+          "cdpJSHeapUsedMB": null,
+          "backend": "WebGPU",
+          "musicState": {
+            "playing": true,
+            "stage": "alarm",
+            "deckTrack": null,
+            "overlapFrames": 0,
+            "score": {
+              "on": false,
+              "track": null,
+              "kit": null,
+              "barS": null,
+              "layers": null,
+              "layerGains": null,
+              "motif": null
+            }
+          }
+        },
+        "processMemory": {
+          "processes": [
+            {
+              "Id": 23248,
+              "ParentId": 35464,
+              "Role": "browser",
+              "PrivateBytesBytes": 76820480,
+              "PrivateBytesMB": 73.26,
+              "PrivateWorkingSetBytes": 63385600,
+              "PrivateWorkingSetMB": 60.45,
+              "WorkingSetBytes": 190750720,
+              "WorkingSetMB": 181.91,
+              "CommandLine": "\"C:/Program Files/Google/Chrome/Application/chrome.exe\" --remote-debugging-port=0 --user-data-dir=C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-59Cyov --no-first-run --no-default-browser-check --disable-extensions --disable-background-timer-throttling --disable-renderer-backgrounding --disable-backgrounding-occluded-windows --mute-audio --enable-precise-memory-info --enable-unsafe-webgpu --window-size=1280,720 --enable-precise-memory-info --js-flags=--expose-gc --task-id=AG-196-N20-OFF-R2 about:blank"
+            },
+            {
+              "Id": 36644,
+              "ParentId": 23248,
+              "Role": "crashpad",
+              "PrivateBytesBytes": 2506752,
+              "PrivateBytesMB": 2.39,
+              "PrivateWorkingSetBytes": 1585152,
+              "PrivateWorkingSetMB": 1.51,
+              "WorkingSetBytes": 10100736,
+              "WorkingSetMB": 9.63,
+              "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=crashpad-handler --user-data-dir=C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-59Cyov /prefetch:4 --monitor-self-annotation=ptype=crashpad-handler --user-stream-region=256,65568 --database=C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-59Cyov\\Crashpad --metrics-dir=C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-59Cyov --url=https://clients2.google.com/cr/report --annotation=channel= --annotation=plat=Win64 --annotation=prod=Chrome --annotation=ver=156.0.8078.74 --initial-client-data=0x12c,0x130,0x134,0x64,0x138,0x7ff9e63f9f40,0x7ff9e63f9f50,0x7ff9e63f9f60"
+            },
+            {
+              "Id": 12240,
+              "ParentId": 23248,
+              "Role": "gpu",
+              "PrivateBytesBytes": 2808713216,
+              "PrivateBytesMB": 2678.6,
+              "PrivateWorkingSetBytes": 528912384,
+              "PrivateWorkingSetMB": 504.41,
+              "WorkingSetBytes": 685772800,
+              "WorkingSetMB": 654,
+              "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=gpu-process --gpu-recent-crash-count=0 --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-59Cyov\" --no-pre-read-main-dll --gpu-preferences=WAAAAAAAAADgAAAEAAAAAAAAAAAAAGAAQAAAAAAAAAADAAAAAAAAADgAAAAAAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAAAAAAKAAAAAAAAAAoAAAAAAAAAAgAAAAAAAAAEAAAAAIAAAABAAAAAAAAAAgAAAAAAAAACAAAAAAAAAA= --metrics-shmem-handle=1936,i,13078138931182192209,6594842891943191331,262144 --field-trial-handle=2040,i,10272529139238537431,1129712840151471472,262144 --variations-seed-version --pseudonymization-salt-handle=2068,i,7560398646784553969,4790801343620350567,4 --trace-process-track-uuid=3190708988185955192 --mojo-platform-channel-handle=2028 /prefetch:2"
+            },
+            {
+              "Id": 25588,
+              "ParentId": 23248,
+              "Role": "audio service",
+              "PrivateBytesBytes": 15425536,
+              "PrivateBytesMB": 14.71,
+              "PrivateWorkingSetBytes": 9306112,
+              "PrivateWorkingSetMB": 8.88,
+              "WorkingSetBytes": 42184704,
+              "WorkingSetMB": 40.23,
+              "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --mute-audio --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-59Cyov\" --no-pre-read-main-dll --metrics-shmem-handle=2236,i,9867454992673166456,7021700639589931973,524288 --field-trial-handle=2040,i,10272529139238537431,1129712840151471472,262144 --variations-seed-version --pseudonymization-salt-handle=2068,i,7560398646784553969,4790801343620350567,4 --trace-process-track-uuid=3190708989122997041 --mojo-platform-channel-handle=2408 /prefetch:11"
+            },
+            {
+              "Id": 18496,
+              "ParentId": 23248,
+              "Role": "audio service",
+              "PrivateBytesBytes": 8069120,
+              "PrivateBytesMB": 7.7,
+              "PrivateWorkingSetBytes": 2723840,
+              "PrivateWorkingSetMB": 2.6,
+              "WorkingSetBytes": 18051072,
+              "WorkingSetMB": 17.21,
+              "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=utility --utility-sub-type=storage.mojom.StorageService --lang=en-US --service-sandbox-type=service --mute-audio --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-59Cyov\" --no-pre-read-main-dll --metrics-shmem-handle=2672,i,14354172286234426101,1551019106246954357,524288 --field-trial-handle=2040,i,10272529139238537431,1129712840151471472,262144 --variations-seed-version --pseudonymization-salt-handle=2068,i,7560398646784553969,4790801343620350567,4 --trace-process-track-uuid=3190708990060038890 --mojo-platform-channel-handle=2660 /prefetch:13"
+            },
+            {
+              "Id": 29352,
+              "ParentId": 23248,
+              "Role": "renderer",
+              "PrivateBytesBytes": 49557504,
+              "PrivateBytesMB": 47.26,
+              "PrivateWorkingSetBytes": 39727104,
+              "PrivateWorkingSetMB": 37.89,
+              "WorkingSetBytes": 92348416,
+              "WorkingSetMB": 88.07,
+              "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=renderer --top-chrome-webui --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-59Cyov\" --no-pre-read-main-dll --disable-background-timer-throttling --enable-precise-memory-info --enable-unsafe-webgpu --remote-debugging-port=0 --js-flags=--expose-gc --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=5 --launch-time-ticks=370547892780 --metrics-shmem-handle=3652,i,12501968213645856889,2225483459266577388,1572864 --field-trial-handle=2040,i,10272529139238537431,1129712840151471472,262144 --variations-seed-version --pseudonymization-salt-handle=2068,i,7560398646784553969,4790801343620350567,4 --trace-process-track-uuid=3190708990997080739 --mojo-platform-channel-handle=3360 /prefetch:1"
+            },
+            {
+              "Id": 12292,
+              "ParentId": 23248,
+              "Role": "renderer",
+              "PrivateBytesBytes": 19324928,
+              "PrivateBytesMB": 18.43,
+              "PrivateWorkingSetBytes": 10346496,
+              "PrivateWorkingSetMB": 9.87,
+              "WorkingSetBytes": 46260224,
+              "WorkingSetMB": 44.12,
+              "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=renderer --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-59Cyov\" --no-pre-read-main-dll --disable-background-timer-throttling --enable-precise-memory-info --enable-unsafe-webgpu --remote-debugging-port=0 --js-flags=--expose-gc --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=6 --launch-time-ticks=370547925650 --metrics-shmem-handle=4248,i,7684321147760589734,13781262821880118205,1572864 --field-trial-handle=2040,i,10272529139238537431,1129712840151471472,262144 --variations-seed-version --pseudonymization-salt-handle=2068,i,7560398646784553969,4790801343620350567,4 --trace-process-track-uuid=3190708991934122588 --mojo-platform-channel-handle=4256 /prefetch:1"
+            },
+            {
+              "Id": 30708,
+              "ParentId": 23248,
+              "Role": "renderer",
+              "PrivateBytesBytes": 1339236352,
+              "PrivateBytesMB": 1277.2,
+              "PrivateWorkingSetBytes": 1264578560,
+              "PrivateWorkingSetMB": 1206,
+              "WorkingSetBytes": 1403240448,
+              "WorkingSetMB": 1338.23,
+              "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=renderer --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-59Cyov\" --no-pre-read-main-dll --disable-background-timer-throttling --enable-precise-memory-info --enable-unsafe-webgpu --remote-debugging-port=0 --js-flags=--expose-gc --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=8 --launch-time-ticks=370547959058 --metrics-shmem-handle=4604,i,13805591921955751882,1735979090606279305,1572864 --field-trial-handle=2040,i,10272529139238537431,1129712840151471472,262144 --variations-seed-version --pseudonymization-salt-handle=2068,i,7560398646784553969,4790801343620350567,4 --trace-process-track-uuid=3190708993808206286 --mojo-platform-channel-handle=4516 /prefetch:1"
+            },
+            {
+              "Id": 22396,
+              "ParentId": 23248,
+              "Role": "audio service",
+              "PrivateBytesBytes": 9244672,
+              "PrivateBytesMB": 8.82,
+              "PrivateWorkingSetBytes": 3641344,
+              "PrivateWorkingSetMB": 3.47,
+              "WorkingSetBytes": 23896064,
+              "WorkingSetMB": 22.79,
+              "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=utility --utility-sub-type=audio.mojom.AudioService --lang=en-US --service-sandbox-type=audio --mute-audio --video-capture-use-gpu-memory-buffer --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-59Cyov\" --no-pre-read-main-dll --metrics-shmem-handle=5884,i,5830989154433553657,3016577390970142128,524288 --field-trial-handle=2040,i,10272529139238537431,1129712840151471472,262144 --variations-seed-version --pseudonymization-salt-handle=2068,i,7560398646784553969,4790801343620350567,4 --trace-process-track-uuid=3190708997556373682 --mojo-platform-channel-handle=5960 /prefetch:12"
+            },
+            {
+              "Id": 19104,
+              "ParentId": 23248,
+              "Role": "renderer",
+              "PrivateBytesBytes": 15003648,
+              "PrivateBytesMB": 14.31,
+              "PrivateWorkingSetBytes": 7442432,
+              "PrivateWorkingSetMB": 7.1,
+              "WorkingSetBytes": 31309824,
+              "WorkingSetMB": 29.86,
+              "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=renderer --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-59Cyov\" --no-pre-read-main-dll --disable-background-timer-throttling --enable-precise-memory-info --enable-unsafe-webgpu --remote-debugging-port=0 --js-flags=--expose-gc --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=23 --launch-time-ticks=370550655701 --metrics-shmem-handle=6984,i,12894162807902684354,16718561963675066375,1572864 --field-trial-handle=2040,i,10272529139238537431,1129712840151471472,262144 --variations-seed-version --pseudonymization-salt-handle=2068,i,7560398646784553969,4790801343620350567,4 --trace-process-track-uuid=3190709007863834021 --mojo-platform-channel-handle=7044 /prefetch:1"
+            }
+          ],
+          "sumPrivateBytesMB": 4142.68,
+          "sumPrivateWorkingSetMB": 1842.18,
+          "sumWorkingSetMB": 2426.05
+        }
+      }
+    ],
+    "scoreOn": [
+      {
+        "scoreOn": true,
+        "runIndex": 1,
+        "screenshot": "night20-score-on-run1.png",
+        "pageMetrics": {
+          "usedJSHeapMB": "676.73",
+          "totalJSHeapMB": "761.20",
+          "cdpJSHeapUsedMB": null,
+          "backend": "WebGPU",
+          "musicState": {
+            "playing": true,
+            "stage": "alarm",
+            "deckTrack": null,
+            "overlapFrames": 0,
+            "score": {
+              "on": true,
+              "track": null,
+              "kit": null,
+              "barS": null,
+              "layers": null,
+              "layerGains": null,
+              "motif": null
+            }
+          }
+        },
+        "processMemory": {
+          "processes": [
+            {
+              "Id": 39412,
+              "ParentId": 35464,
+              "Role": "browser",
+              "PrivateBytesBytes": 78155776,
+              "PrivateBytesMB": 74.54,
+              "PrivateWorkingSetBytes": 64606208,
+              "PrivateWorkingSetMB": 61.61,
+              "WorkingSetBytes": 195608576,
+              "WorkingSetMB": 186.55,
+              "CommandLine": "\"C:/Program Files/Google/Chrome/Application/chrome.exe\" --remote-debugging-port=0 --user-data-dir=C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-ZREzS7 --no-first-run --no-default-browser-check --disable-extensions --disable-background-timer-throttling --disable-renderer-backgrounding --disable-backgrounding-occluded-windows --mute-audio --enable-precise-memory-info --enable-unsafe-webgpu --window-size=1280,720 --enable-precise-memory-info --js-flags=--expose-gc --task-id=AG-196-N20-ON-R1 about:blank"
+            },
+            {
+              "Id": 19312,
+              "ParentId": 39412,
+              "Role": "crashpad",
+              "PrivateBytesBytes": 2519040,
+              "PrivateBytesMB": 2.4,
+              "PrivateWorkingSetBytes": 1581056,
+              "PrivateWorkingSetMB": 1.51,
+              "WorkingSetBytes": 10100736,
+              "WorkingSetMB": 9.63,
+              "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=crashpad-handler --user-data-dir=C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-ZREzS7 /prefetch:4 --monitor-self-annotation=ptype=crashpad-handler --user-stream-region=232,65568 --database=C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-ZREzS7\\Crashpad --metrics-dir=C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-ZREzS7 --url=https://clients2.google.com/cr/report --annotation=channel= --annotation=plat=Win64 --annotation=prod=Chrome --annotation=ver=156.0.8078.74 --initial-client-data=0x12c,0x130,0x134,0x108,0x138,0x7ff9e63f9f40,0x7ff9e63f9f50,0x7ff9e63f9f60"
+            },
+            {
+              "Id": 27436,
+              "ParentId": 39412,
+              "Role": "gpu",
+              "PrivateBytesBytes": 2775568384,
+              "PrivateBytesMB": 2646.99,
+              "PrivateWorkingSetBytes": 515645440,
+              "PrivateWorkingSetMB": 491.76,
+              "WorkingSetBytes": 658202624,
+              "WorkingSetMB": 627.71,
+              "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=gpu-process --gpu-recent-crash-count=0 --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-ZREzS7\" --no-pre-read-main-dll --gpu-preferences=WAAAAAAAAADgAAAEAAAAAAAAAAAAAGAAQAAAAAAAAAADAAAAAAAAADgAAAAAAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAAAAAAKAAAAAAAAAAoAAAAAAAAAAgAAAAAAAAAEAAAAAIAAAABAAAAAAAAAAgAAAAAAAAACAAAAAAAAAA= --metrics-shmem-handle=1928,i,3136791935545484707,8379401423073615680,262144 --field-trial-handle=2040,i,14851017713720258435,4714301424245819110,262144 --variations-seed-version --pseudonymization-salt-handle=2056,i,12532796405739151988,5802893867012609690,4 --trace-process-track-uuid=3190708988185955192 --mojo-platform-channel-handle=2036 /prefetch:2"
+            },
+            {
+              "Id": 26196,
+              "ParentId": 39412,
+              "Role": "audio service",
+              "PrivateBytesBytes": 14766080,
+              "PrivateBytesMB": 14.08,
+              "PrivateWorkingSetBytes": 8814592,
+              "PrivateWorkingSetMB": 8.41,
+              "WorkingSetBytes": 42053632,
+              "WorkingSetMB": 40.11,
+              "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --mute-audio --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-ZREzS7\" --no-pre-read-main-dll --metrics-shmem-handle=2400,i,12896870181973482765,16225018676110173366,524288 --field-trial-handle=2040,i,14851017713720258435,4714301424245819110,262144 --variations-seed-version --pseudonymization-salt-handle=2056,i,12532796405739151988,5802893867012609690,4 --trace-process-track-uuid=3190708989122997041 --mojo-platform-channel-handle=2408 /prefetch:11"
+            },
+            {
+              "Id": 30860,
+              "ParentId": 39412,
+              "Role": "audio service",
+              "PrivateBytesBytes": 8015872,
+              "PrivateBytesMB": 7.64,
+              "PrivateWorkingSetBytes": 2678784,
+              "PrivateWorkingSetMB": 2.55,
+              "WorkingSetBytes": 18202624,
+              "WorkingSetMB": 17.36,
+              "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=utility --utility-sub-type=storage.mojom.StorageService --lang=en-US --service-sandbox-type=service --mute-audio --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-ZREzS7\" --no-pre-read-main-dll --metrics-shmem-handle=2656,i,3227813435069951447,3735728493864151935,524288 --field-trial-handle=2040,i,14851017713720258435,4714301424245819110,262144 --variations-seed-version --pseudonymization-salt-handle=2056,i,12532796405739151988,5802893867012609690,4 --trace-process-track-uuid=3190708990060038890 --mojo-platform-channel-handle=2672 /prefetch:13"
+            },
+            {
+              "Id": 34528,
+              "ParentId": 39412,
+              "Role": "renderer",
+              "PrivateBytesBytes": 50008064,
+              "PrivateBytesMB": 47.69,
+              "PrivateWorkingSetBytes": 40284160,
+              "PrivateWorkingSetMB": 38.42,
+              "WorkingSetBytes": 93036544,
+              "WorkingSetMB": 88.73,
+              "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=renderer --top-chrome-webui --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-ZREzS7\" --no-pre-read-main-dll --disable-background-timer-throttling --enable-precise-memory-info --enable-unsafe-webgpu --remote-debugging-port=0 --js-flags=--expose-gc --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=5 --launch-time-ticks=370583144734 --metrics-shmem-handle=3772,i,14217338282770422396,11821872706462130108,1572864 --field-trial-handle=2040,i,14851017713720258435,4714301424245819110,262144 --variations-seed-version --pseudonymization-salt-handle=2056,i,12532796405739151988,5802893867012609690,4 --trace-process-track-uuid=3190708990997080739 --mojo-platform-channel-handle=3780 /prefetch:1"
+            },
+            {
+              "Id": 29320,
+              "ParentId": 39412,
+              "Role": "renderer",
+              "PrivateBytesBytes": 19050496,
+              "PrivateBytesMB": 18.17,
+              "PrivateWorkingSetBytes": 10149888,
+              "PrivateWorkingSetMB": 9.68,
+              "WorkingSetBytes": 46587904,
+              "WorkingSetMB": 44.43,
+              "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=renderer --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-ZREzS7\" --no-pre-read-main-dll --disable-background-timer-throttling --enable-precise-memory-info --enable-unsafe-webgpu --remote-debugging-port=0 --js-flags=--expose-gc --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=6 --launch-time-ticks=370583178942 --metrics-shmem-handle=4212,i,8728236273222011014,15271727082059799004,1572864 --field-trial-handle=2040,i,14851017713720258435,4714301424245819110,262144 --variations-seed-version --pseudonymization-salt-handle=2056,i,12532796405739151988,5802893867012609690,4 --trace-process-track-uuid=3190708991934122588 --mojo-platform-channel-handle=4228 /prefetch:1"
+            },
+            {
+              "Id": 30696,
+              "ParentId": 39412,
+              "Role": "renderer",
+              "PrivateBytesBytes": 1314955264,
+              "PrivateBytesMB": 1254.04,
+              "PrivateWorkingSetBytes": 1241292800,
+              "PrivateWorkingSetMB": 1183.79,
+              "WorkingSetBytes": 1370148864,
+              "WorkingSetMB": 1306.68,
+              "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=renderer --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-ZREzS7\" --no-pre-read-main-dll --disable-background-timer-throttling --enable-precise-memory-info --enable-unsafe-webgpu --remote-debugging-port=0 --js-flags=--expose-gc --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=8 --launch-time-ticks=370583216006 --metrics-shmem-handle=4540,i,5998368776696899059,7960568009375054437,1572864 --field-trial-handle=2040,i,14851017713720258435,4714301424245819110,262144 --variations-seed-version --pseudonymization-salt-handle=2056,i,12532796405739151988,5802893867012609690,4 --trace-process-track-uuid=3190708993808206286 --mojo-platform-channel-handle=4520 /prefetch:1"
+            },
+            {
+              "Id": 22468,
+              "ParentId": 39412,
+              "Role": "audio service",
+              "PrivateBytesBytes": 9248768,
+              "PrivateBytesMB": 8.82,
+              "PrivateWorkingSetBytes": 3641344,
+              "PrivateWorkingSetMB": 3.47,
+              "WorkingSetBytes": 24064000,
+              "WorkingSetMB": 22.95,
+              "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=utility --utility-sub-type=audio.mojom.AudioService --lang=en-US --service-sandbox-type=audio --mute-audio --video-capture-use-gpu-memory-buffer --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-ZREzS7\" --no-pre-read-main-dll --metrics-shmem-handle=5968,i,8165361154243621019,11459623903448126489,524288 --field-trial-handle=2040,i,14851017713720258435,4714301424245819110,262144 --variations-seed-version --pseudonymization-salt-handle=2056,i,12532796405739151988,5802893867012609690,4 --trace-process-track-uuid=3190708997556373682 --mojo-platform-channel-handle=5800 /prefetch:12"
+            },
+            {
+              "Id": 17880,
+              "ParentId": 39412,
+              "Role": "renderer",
+              "PrivateBytesBytes": 15429632,
+              "PrivateBytesMB": 14.71,
+              "PrivateWorkingSetBytes": 7708672,
+              "PrivateWorkingSetMB": 7.35,
+              "WorkingSetBytes": 32583680,
+              "WorkingSetMB": 31.07,
+              "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=renderer --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-ZREzS7\" --no-pre-read-main-dll --disable-background-timer-throttling --enable-precise-memory-info --enable-unsafe-webgpu --remote-debugging-port=0 --js-flags=--expose-gc --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=23 --launch-time-ticks=370585810485 --metrics-shmem-handle=6992,i,2549239655160488398,229262918913630029,1572864 --field-trial-handle=2040,i,14851017713720258435,4714301424245819110,262144 --variations-seed-version --pseudonymization-salt-handle=2056,i,12532796405739151988,5802893867012609690,4 --trace-process-track-uuid=3190709007863834021 --mojo-platform-channel-handle=7624 /prefetch:1"
+            }
+          ],
+          "sumPrivateBytesMB": 4089.08,
+          "sumPrivateWorkingSetMB": 1808.55,
+          "sumWorkingSetMB": 2375.22
+        }
+      },
+      {
+        "scoreOn": true,
+        "runIndex": 2,
+        "screenshot": "night20-score-on-run2.png",
+        "pageMetrics": {
+          "usedJSHeapMB": "671.33",
+          "totalJSHeapMB": "767.05",
+          "cdpJSHeapUsedMB": null,
+          "backend": "WebGPU",
+          "musicState": {
+            "playing": true,
+            "stage": "alarm",
+            "deckTrack": null,
+            "overlapFrames": 0,
+            "score": {
+              "on": true,
+              "track": null,
+              "kit": null,
+              "barS": null,
+              "layers": null,
+              "layerGains": null,
+              "motif": null
+            }
+          }
+        },
+        "processMemory": {
+          "processes": [
+            {
+              "Id": 12240,
+              "ParentId": 35464,
+              "Role": "browser",
+              "PrivateBytesBytes": 77557760,
+              "PrivateBytesMB": 73.96,
+              "PrivateWorkingSetBytes": 64294912,
+              "PrivateWorkingSetMB": 61.32,
+              "WorkingSetBytes": 195366912,
+              "WorkingSetMB": 186.32,
+              "CommandLine": "\"C:/Program Files/Google/Chrome/Application/chrome.exe\" --remote-debugging-port=0 --user-data-dir=C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-lbGdKi --no-first-run --no-default-browser-check --disable-extensions --disable-background-timer-throttling --disable-renderer-backgrounding --disable-backgrounding-occluded-windows --mute-audio --enable-precise-memory-info --enable-unsafe-webgpu --window-size=1280,720 --enable-precise-memory-info --js-flags=--expose-gc --task-id=AG-196-N20-ON-R2 about:blank"
+            },
+            {
+              "Id": 30844,
+              "ParentId": 12240,
+              "Role": "crashpad",
+              "PrivateBytesBytes": 2568192,
+              "PrivateBytesMB": 2.45,
+              "PrivateWorkingSetBytes": 1609728,
+              "PrivateWorkingSetMB": 1.54,
+              "WorkingSetBytes": 10129408,
+              "WorkingSetMB": 9.66,
+              "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=crashpad-handler --user-data-dir=C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-lbGdKi /prefetch:4 --monitor-self-annotation=ptype=crashpad-handler --user-stream-region=232,65568 --database=C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-lbGdKi\\Crashpad --metrics-dir=C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-lbGdKi --url=https://clients2.google.com/cr/report --annotation=channel= --annotation=plat=Win64 --annotation=prod=Chrome --annotation=ver=156.0.8078.74 --initial-client-data=0x12c,0x130,0x134,0x108,0x138,0x7ff9e63f9f40,0x7ff9e63f9f50,0x7ff9e63f9f60"
+            },
+            {
+              "Id": 38288,
+              "ParentId": 12240,
+              "Role": "gpu",
+              "PrivateBytesBytes": 2773229568,
+              "PrivateBytesMB": 2644.76,
+              "PrivateWorkingSetBytes": 525246464,
+              "PrivateWorkingSetMB": 500.91,
+              "WorkingSetBytes": 684044288,
+              "WorkingSetMB": 652.36,
+              "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=gpu-process --gpu-recent-crash-count=0 --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-lbGdKi\" --no-pre-read-main-dll --gpu-preferences=WAAAAAAAAADgAAAEAAAAAAAAAAAAAGAAQAAAAAAAAAADAAAAAAAAADgAAAAAAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAAAAAAKAAAAAAAAAAoAAAAAAAAAAgAAAAAAAAAEAAAAAIAAAABAAAAAAAAAAgAAAAAAAAACAAAAAAAAAA= --metrics-shmem-handle=1928,i,1339027984614424827,13414607702687565851,262144 --field-trial-handle=2036,i,11769241106865386572,10385038344242247633,262144 --variations-seed-version --pseudonymization-salt-handle=2032,i,13504370586836990264,1115375237985087758,4 --trace-process-track-uuid=3190708988185955192 --mojo-platform-channel-handle=2024 /prefetch:2"
+            },
+            {
+              "Id": 14924,
+              "ParentId": 12240,
+              "Role": "audio service",
+              "PrivateBytesBytes": 14401536,
+              "PrivateBytesMB": 13.73,
+              "PrivateWorkingSetBytes": 8282112,
+              "PrivateWorkingSetMB": 7.9,
+              "WorkingSetBytes": 41672704,
+              "WorkingSetMB": 39.74,
+              "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --mute-audio --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-lbGdKi\" --no-pre-read-main-dll --metrics-shmem-handle=2416,i,2963565680034851074,14794702812242565719,524288 --field-trial-handle=2036,i,11769241106865386572,10385038344242247633,262144 --variations-seed-version --pseudonymization-salt-handle=2032,i,13504370586836990264,1115375237985087758,4 --trace-process-track-uuid=3190708989122997041 --mojo-platform-channel-handle=2252 /prefetch:11"
+            },
+            {
+              "Id": 9548,
+              "ParentId": 12240,
+              "Role": "audio service",
+              "PrivateBytesBytes": 8044544,
+              "PrivateBytesMB": 7.67,
+              "PrivateWorkingSetBytes": 2699264,
+              "PrivateWorkingSetMB": 2.57,
+              "WorkingSetBytes": 18235392,
+              "WorkingSetMB": 17.39,
+              "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=utility --utility-sub-type=storage.mojom.StorageService --lang=en-US --service-sandbox-type=service --mute-audio --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-lbGdKi\" --no-pre-read-main-dll --metrics-shmem-handle=2660,i,1484788385014820662,16572426113330795758,524288 --field-trial-handle=2036,i,11769241106865386572,10385038344242247633,262144 --variations-seed-version --pseudonymization-salt-handle=2032,i,13504370586836990264,1115375237985087758,4 --trace-process-track-uuid=3190708990060038890 --mojo-platform-channel-handle=2684 /prefetch:13"
+            },
+            {
+              "Id": 37384,
+              "ParentId": 12240,
+              "Role": "renderer",
+              "PrivateBytesBytes": 49041408,
+              "PrivateBytesMB": 46.77,
+              "PrivateWorkingSetBytes": 39571456,
+              "PrivateWorkingSetMB": 37.74,
+              "WorkingSetBytes": 92327936,
+              "WorkingSetMB": 88.05,
+              "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=renderer --top-chrome-webui --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-lbGdKi\" --no-pre-read-main-dll --disable-background-timer-throttling --enable-precise-memory-info --enable-unsafe-webgpu --remote-debugging-port=0 --js-flags=--expose-gc --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=5 --launch-time-ticks=370648082556 --metrics-shmem-handle=3796,i,14999474426217990244,17358154052896946217,1572864 --field-trial-handle=2036,i,11769241106865386572,10385038344242247633,262144 --variations-seed-version --pseudonymization-salt-handle=2032,i,13504370586836990264,1115375237985087758,4 --trace-process-track-uuid=3190708990997080739 --mojo-platform-channel-handle=3812 /prefetch:1"
+            },
+            {
+              "Id": 34396,
+              "ParentId": 12240,
+              "Role": "renderer",
+              "PrivateBytesBytes": 18071552,
+              "PrivateBytesMB": 17.23,
+              "PrivateWorkingSetBytes": 10190848,
+              "PrivateWorkingSetMB": 9.72,
+              "WorkingSetBytes": 46608384,
+              "WorkingSetMB": 44.45,
+              "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=renderer --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-lbGdKi\" --no-pre-read-main-dll --disable-background-timer-throttling --enable-precise-memory-info --enable-unsafe-webgpu --remote-debugging-port=0 --js-flags=--expose-gc --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=6 --launch-time-ticks=370648111766 --metrics-shmem-handle=4204,i,10430045520207287616,8975379784501787847,1572864 --field-trial-handle=2036,i,11769241106865386572,10385038344242247633,262144 --variations-seed-version --pseudonymization-salt-handle=2032,i,13504370586836990264,1115375237985087758,4 --trace-process-track-uuid=3190708991934122588 --mojo-platform-channel-handle=4220 /prefetch:1"
+            },
+            {
+              "Id": 14452,
+              "ParentId": 12240,
+              "Role": "renderer",
+              "PrivateBytesBytes": 1368350720,
+              "PrivateBytesMB": 1304.96,
+              "PrivateWorkingSetBytes": 1287315456,
+              "PrivateWorkingSetMB": 1227.68,
+              "WorkingSetBytes": 1428205568,
+              "WorkingSetMB": 1362.04,
+              "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=renderer --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-lbGdKi\" --no-pre-read-main-dll --disable-background-timer-throttling --enable-precise-memory-info --enable-unsafe-webgpu --remote-debugging-port=0 --js-flags=--expose-gc --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=8 --launch-time-ticks=370648144584 --metrics-shmem-handle=4624,i,7264533451644544637,9841356797941517785,1572864 --field-trial-handle=2036,i,11769241106865386572,10385038344242247633,262144 --variations-seed-version --pseudonymization-salt-handle=2032,i,13504370586836990264,1115375237985087758,4 --trace-process-track-uuid=3190708993808206286 --mojo-platform-channel-handle=4640 /prefetch:1"
+            },
+            {
+              "Id": 23708,
+              "ParentId": 12240,
+              "Role": "audio service",
+              "PrivateBytesBytes": 9117696,
+              "PrivateBytesMB": 8.7,
+              "PrivateWorkingSetBytes": 3518464,
+              "PrivateWorkingSetMB": 3.36,
+              "WorkingSetBytes": 23994368,
+              "WorkingSetMB": 22.88,
+              "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=utility --utility-sub-type=audio.mojom.AudioService --lang=en-US --service-sandbox-type=audio --mute-audio --video-capture-use-gpu-memory-buffer --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-lbGdKi\" --no-pre-read-main-dll --metrics-shmem-handle=5952,i,2085422397577117719,18181800738666135751,524288 --field-trial-handle=2036,i,11769241106865386572,10385038344242247633,262144 --variations-seed-version --pseudonymization-salt-handle=2032,i,13504370586836990264,1115375237985087758,4 --trace-process-track-uuid=3190708997556373682 --mojo-platform-channel-handle=4928 /prefetch:12"
+            },
+            {
+              "Id": 38940,
+              "ParentId": 12240,
+              "Role": "renderer",
+              "PrivateBytesBytes": 14983168,
+              "PrivateBytesMB": 14.29,
+              "PrivateWorkingSetBytes": 7413760,
+              "PrivateWorkingSetMB": 7.07,
+              "WorkingSetBytes": 31539200,
+              "WorkingSetMB": 30.08,
+              "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=renderer --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-lbGdKi\" --no-pre-read-main-dll --disable-background-timer-throttling --enable-precise-memory-info --enable-unsafe-webgpu --remote-debugging-port=0 --js-flags=--expose-gc --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=23 --launch-time-ticks=370650768577 --metrics-shmem-handle=7564,i,4239125113074468622,9690364965215728013,1572864 --field-trial-handle=2036,i,11769241106865386572,10385038344242247633,262144 --variations-seed-version --pseudonymization-salt-handle=2032,i,13504370586836990264,1115375237985087758,4 --trace-process-track-uuid=3190709007863834021 --mojo-platform-channel-handle=7460 /prefetch:1"
+            }
+          ],
+          "sumPrivateBytesMB": 4134.52,
+          "sumPrivateWorkingSetMB": 1859.81,
+          "sumWorkingSetMB": 2452.97
+        }
+      }
+    ]
+  },
+  "trainingGround": {
+    "baseline": {
+      "screenshot": "tg-motif-baseline.png",
+      "pageMetrics": {
+        "usedJSHeapMB": "703.97",
+        "totalJSHeapMB": "783.91",
+        "cdpJSHeapUsedMB": null,
+        "backend": "WebGPU",
+        "musicState": {
+          "playing": false,
+          "stage": "calm",
+          "deckTrack": null,
+          "overlapFrames": 0,
+          "score": {
+            "on": true,
+            "track": null,
+            "kit": null,
+            "barS": null,
+            "layers": null,
+            "layerGains": null,
+            "motif": null
+          }
+        }
+      },
+      "processMemory": {
+        "processes": [
+          {
+            "Id": 12800,
+            "ParentId": 35464,
+            "Role": "browser",
+            "PrivateBytesBytes": 75472896,
+            "PrivateBytesMB": 71.98,
+            "PrivateWorkingSetBytes": 60858368,
+            "PrivateWorkingSetMB": 58.04,
+            "WorkingSetBytes": 185606144,
+            "WorkingSetMB": 177.01,
+            "CommandLine": "\"C:/Program Files/Google/Chrome/Application/chrome.exe\" --remote-debugging-port=0 --user-data-dir=C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj --no-first-run --no-default-browser-check --disable-extensions --disable-background-timer-throttling --disable-renderer-backgrounding --disable-backgrounding-occluded-windows --mute-audio --enable-precise-memory-info --enable-unsafe-webgpu --window-size=1280,720 --enable-precise-memory-info --js-flags=--expose-gc --task-id=AG-196-TG-MOTIFS about:blank"
+          },
+          {
+            "Id": 22788,
+            "ParentId": 12800,
+            "Role": "crashpad",
+            "PrivateBytesBytes": 2629632,
+            "PrivateBytesMB": 2.51,
+            "PrivateWorkingSetBytes": 1634304,
+            "PrivateWorkingSetMB": 1.56,
+            "WorkingSetBytes": 10149888,
+            "WorkingSetMB": 9.68,
+            "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=crashpad-handler --user-data-dir=C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj /prefetch:4 --monitor-self-annotation=ptype=crashpad-handler --user-stream-region=256,65568 --database=C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\\Crashpad --metrics-dir=C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj --url=https://clients2.google.com/cr/report --annotation=channel= --annotation=plat=Win64 --annotation=prod=Chrome --annotation=ver=156.0.8078.74 --initial-client-data=0x12c,0x130,0x134,0xb0,0x138,0x7ff9e63f9f40,0x7ff9e63f9f50,0x7ff9e63f9f60"
+          },
+          {
+            "Id": 10580,
+            "ParentId": 12800,
+            "Role": "gpu",
+            "PrivateBytesBytes": 3157237760,
+            "PrivateBytesMB": 3010.98,
+            "PrivateWorkingSetBytes": 622387200,
+            "PrivateWorkingSetMB": 593.55,
+            "WorkingSetBytes": 780668928,
+            "WorkingSetMB": 744.5,
+            "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=gpu-process --gpu-recent-crash-count=0 --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --gpu-preferences=WAAAAAAAAADgAAAEAAAAAAAAAAAAAGAAQAAAAAAAAAADAAAAAAAAADgAAAAAAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAAAAAAKAAAAAAAAAAoAAAAAAAAAAgAAAAAAAAAEAAAAAIAAAABAAAAAAAAAAgAAAAAAAAACAAAAAAAAAA= --metrics-shmem-handle=1888,i,12834398980278507633,5101202618834806132,262144 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708988185955192 --mojo-platform-channel-handle=2044 /prefetch:2"
+          },
+          {
+            "Id": 33940,
+            "ParentId": 12800,
+            "Role": "audio service",
+            "PrivateBytesBytes": 15282176,
+            "PrivateBytesMB": 14.57,
+            "PrivateWorkingSetBytes": 9146368,
+            "PrivateWorkingSetMB": 8.72,
+            "WorkingSetBytes": 41820160,
+            "WorkingSetMB": 39.88,
+            "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --mute-audio --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --metrics-shmem-handle=2312,i,16342553886235846728,3150437451239749688,524288 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708989122997041 --mojo-platform-channel-handle=2412 /prefetch:11"
+          },
+          {
+            "Id": 28712,
+            "ParentId": 12800,
+            "Role": "audio service",
+            "PrivateBytesBytes": 8171520,
+            "PrivateBytesMB": 7.79,
+            "PrivateWorkingSetBytes": 2801664,
+            "PrivateWorkingSetMB": 2.67,
+            "WorkingSetBytes": 18104320,
+            "WorkingSetMB": 17.27,
+            "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=utility --utility-sub-type=storage.mojom.StorageService --lang=en-US --service-sandbox-type=service --mute-audio --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --metrics-shmem-handle=2680,i,10055297031104748074,16903460114441782660,524288 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708990060038890 --mojo-platform-channel-handle=2528 /prefetch:13"
+          },
+          {
+            "Id": 37300,
+            "ParentId": 12800,
+            "Role": "renderer",
+            "PrivateBytesBytes": 70135808,
+            "PrivateBytesMB": 66.89,
+            "PrivateWorkingSetBytes": 60313600,
+            "PrivateWorkingSetMB": 57.52,
+            "WorkingSetBytes": 110882816,
+            "WorkingSetMB": 105.75,
+            "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=renderer --top-chrome-webui --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --disable-background-timer-throttling --enable-precise-memory-info --enable-unsafe-webgpu --remote-debugging-port=0 --js-flags=--expose-gc --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=5 --launch-time-ticks=370712986237 --metrics-shmem-handle=3528,i,2461334945231494919,18300640508118657519,1572864 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708990997080739 --mojo-platform-channel-handle=3532 /prefetch:1"
+          },
+          {
+            "Id": 30696,
+            "ParentId": 12800,
+            "Role": "renderer",
+            "PrivateBytesBytes": 18288640,
+            "PrivateBytesMB": 17.44,
+            "PrivateWorkingSetBytes": 10354688,
+            "PrivateWorkingSetMB": 9.88,
+            "WorkingSetBytes": 46227456,
+            "WorkingSetMB": 44.09,
+            "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=renderer --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --disable-background-timer-throttling --enable-precise-memory-info --enable-unsafe-webgpu --remote-debugging-port=0 --js-flags=--expose-gc --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=6 --launch-time-ticks=370713021203 --metrics-shmem-handle=4132,i,14460809954889847938,7329965034445594409,1572864 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708991934122588 --mojo-platform-channel-handle=3588 /prefetch:1"
+          },
+          {
+            "Id": 35576,
+            "ParentId": 12800,
+            "Role": "renderer",
+            "PrivateBytesBytes": 1437515776,
+            "PrivateBytesMB": 1370.92,
+            "PrivateWorkingSetBytes": 1358049280,
+            "PrivateWorkingSetMB": 1295.14,
+            "WorkingSetBytes": 1498914816,
+            "WorkingSetMB": 1429.48,
+            "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=renderer --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --disable-background-timer-throttling --enable-precise-memory-info --enable-unsafe-webgpu --remote-debugging-port=0 --js-flags=--expose-gc --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=8 --launch-time-ticks=370713059525 --metrics-shmem-handle=4552,i,6179874923244570832,546251900998707228,1572864 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708993808206286 --mojo-platform-channel-handle=4572 /prefetch:1"
+          },
+          {
+            "Id": 36620,
+            "ParentId": 12800,
+            "Role": "renderer",
+            "PrivateBytesBytes": 20525056,
+            "PrivateBytesMB": 19.57,
+            "PrivateWorkingSetBytes": 11202560,
+            "PrivateWorkingSetMB": 10.68,
+            "WorkingSetBytes": 42536960,
+            "WorkingSetMB": 40.57,
+            "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=renderer --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --extension-process --no-pre-read-main-dll --disable-background-timer-throttling --enable-precise-memory-info --enable-unsafe-webgpu --remote-debugging-port=0 --js-flags=--expose-gc --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=11 --launch-time-ticks=370713181348 --metrics-shmem-handle=5604,i,5627188141446037752,7002176638185929899,1572864 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708996619331833 --mojo-platform-channel-handle=5516 /prefetch:9"
+          },
+          {
+            "Id": 25884,
+            "ParentId": 12800,
+            "Role": "audio service",
+            "PrivateBytesBytes": 9146368,
+            "PrivateBytesMB": 8.72,
+            "PrivateWorkingSetBytes": 3538944,
+            "PrivateWorkingSetMB": 3.38,
+            "WorkingSetBytes": 23789568,
+            "WorkingSetMB": 22.69,
+            "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=utility --utility-sub-type=audio.mojom.AudioService --lang=en-US --service-sandbox-type=audio --mute-audio --video-capture-use-gpu-memory-buffer --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --metrics-shmem-handle=5328,i,9520535692557210891,16515301030036416088,524288 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708997556373682 --mojo-platform-channel-handle=1940 /prefetch:12"
+          },
+          {
+            "Id": 32224,
+            "ParentId": 12800,
+            "Role": "renderer",
+            "PrivateBytesBytes": 14995456,
+            "PrivateBytesMB": 14.3,
+            "PrivateWorkingSetBytes": 7442432,
+            "PrivateWorkingSetMB": 7.1,
+            "WorkingSetBytes": 31305728,
+            "WorkingSetMB": 29.86,
+            "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=renderer --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --disable-background-timer-throttling --enable-precise-memory-info --enable-unsafe-webgpu --remote-debugging-port=0 --js-flags=--expose-gc --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=23 --launch-time-ticks=370715693971 --metrics-shmem-handle=7788,i,4887129353084234892,8377682735182303445,1572864 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190709007863834021 --mojo-platform-channel-handle=8012 /prefetch:1"
+          }
+        ],
+        "sumPrivateBytesMB": 4605.67,
+        "sumPrivateWorkingSetMB": 2048.24,
+        "sumWorkingSetMB": 2660.78
+      }
+    },
+    "motifs": {
+      "feral": {
+        "active": {
+          "screenshot": "tg-motif-feral-active.png",
+          "pageMetrics": {
+            "usedJSHeapMB": "632.33",
+            "totalJSHeapMB": "721.86",
+            "cdpJSHeapUsedMB": null,
+            "backend": "WebGPU",
+            "musicState": {
+              "playing": false,
+              "stage": "calm",
+              "deckTrack": null,
+              "overlapFrames": 0,
+              "score": {
+                "on": true,
+                "track": null,
+                "kit": null,
+                "barS": null,
+                "layers": null,
+                "layerGains": null,
+                "motif": null
+              }
+            }
+          },
+          "processMemory": {
+            "processes": [
+              {
+                "Id": 12800,
+                "ParentId": 35464,
+                "Role": "browser",
+                "PrivateBytesBytes": 76201984,
+                "PrivateBytesMB": 72.67,
+                "PrivateWorkingSetBytes": 62259200,
+                "PrivateWorkingSetMB": 59.38,
+                "WorkingSetBytes": 188391424,
+                "WorkingSetMB": 179.66,
+                "CommandLine": "\"C:/Program Files/Google/Chrome/Application/chrome.exe\" --remote-debugging-port=0 --user-data-dir=C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj --no-first-run --no-default-browser-check --disable-extensions --disable-background-timer-throttling --disable-renderer-backgrounding --disable-backgrounding-occluded-windows --mute-audio --enable-precise-memory-info --enable-unsafe-webgpu --window-size=1280,720 --enable-precise-memory-info --js-flags=--expose-gc --task-id=AG-196-TG-MOTIFS about:blank"
+              },
+              {
+                "Id": 22788,
+                "ParentId": 12800,
+                "Role": "crashpad",
+                "PrivateBytesBytes": 2490368,
+                "PrivateBytesMB": 2.38,
+                "PrivateWorkingSetBytes": 1568768,
+                "PrivateWorkingSetMB": 1.5,
+                "WorkingSetBytes": 10084352,
+                "WorkingSetMB": 9.62,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=crashpad-handler --user-data-dir=C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj /prefetch:4 --monitor-self-annotation=ptype=crashpad-handler --user-stream-region=256,65568 --database=C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\\Crashpad --metrics-dir=C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj --url=https://clients2.google.com/cr/report --annotation=channel= --annotation=plat=Win64 --annotation=prod=Chrome --annotation=ver=156.0.8078.74 --initial-client-data=0x12c,0x130,0x134,0xb0,0x138,0x7ff9e63f9f40,0x7ff9e63f9f50,0x7ff9e63f9f60"
+              },
+              {
+                "Id": 10580,
+                "ParentId": 12800,
+                "Role": "gpu",
+                "PrivateBytesBytes": 3109003264,
+                "PrivateBytesMB": 2964.98,
+                "PrivateWorkingSetBytes": 623882240,
+                "PrivateWorkingSetMB": 594.98,
+                "WorkingSetBytes": 782524416,
+                "WorkingSetMB": 746.27,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=gpu-process --gpu-recent-crash-count=0 --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --gpu-preferences=WAAAAAAAAADgAAAEAAAAAAAAAAAAAGAAQAAAAAAAAAADAAAAAAAAADgAAAAAAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAAAAAAKAAAAAAAAAAoAAAAAAAAAAgAAAAAAAAAEAAAAAIAAAABAAAAAAAAAAgAAAAAAAAACAAAAAAAAAA= --metrics-shmem-handle=1888,i,12834398980278507633,5101202618834806132,262144 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708988185955192 --mojo-platform-channel-handle=2044 /prefetch:2"
+              },
+              {
+                "Id": 33940,
+                "ParentId": 12800,
+                "Role": "audio service",
+                "PrivateBytesBytes": 14442496,
+                "PrivateBytesMB": 13.77,
+                "PrivateWorkingSetBytes": 8556544,
+                "PrivateWorkingSetMB": 8.16,
+                "WorkingSetBytes": 41414656,
+                "WorkingSetMB": 39.5,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --mute-audio --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --metrics-shmem-handle=2312,i,16342553886235846728,3150437451239749688,524288 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708989122997041 --mojo-platform-channel-handle=2412 /prefetch:11"
+              },
+              {
+                "Id": 28712,
+                "ParentId": 12800,
+                "Role": "audio service",
+                "PrivateBytesBytes": 8171520,
+                "PrivateBytesMB": 7.79,
+                "PrivateWorkingSetBytes": 2801664,
+                "PrivateWorkingSetMB": 2.67,
+                "WorkingSetBytes": 18104320,
+                "WorkingSetMB": 17.27,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=utility --utility-sub-type=storage.mojom.StorageService --lang=en-US --service-sandbox-type=service --mute-audio --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --metrics-shmem-handle=2680,i,10055297031104748074,16903460114441782660,524288 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708990060038890 --mojo-platform-channel-handle=2528 /prefetch:13"
+              },
+              {
+                "Id": 37300,
+                "ParentId": 12800,
+                "Role": "renderer",
+                "PrivateBytesBytes": 50167808,
+                "PrivateBytesMB": 47.84,
+                "PrivateWorkingSetBytes": 40026112,
+                "PrivateWorkingSetMB": 38.17,
+                "WorkingSetBytes": 92606464,
+                "WorkingSetMB": 88.32,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=renderer --top-chrome-webui --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --disable-background-timer-throttling --enable-precise-memory-info --enable-unsafe-webgpu --remote-debugging-port=0 --js-flags=--expose-gc --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=5 --launch-time-ticks=370712986237 --metrics-shmem-handle=3528,i,2461334945231494919,18300640508118657519,1572864 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708990997080739 --mojo-platform-channel-handle=3532 /prefetch:1"
+              },
+              {
+                "Id": 30696,
+                "ParentId": 12800,
+                "Role": "renderer",
+                "PrivateBytesBytes": 18288640,
+                "PrivateBytesMB": 17.44,
+                "PrivateWorkingSetBytes": 10354688,
+                "PrivateWorkingSetMB": 9.88,
+                "WorkingSetBytes": 46227456,
+                "WorkingSetMB": 44.09,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=renderer --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --disable-background-timer-throttling --enable-precise-memory-info --enable-unsafe-webgpu --remote-debugging-port=0 --js-flags=--expose-gc --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=6 --launch-time-ticks=370713021203 --metrics-shmem-handle=4132,i,14460809954889847938,7329965034445594409,1572864 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708991934122588 --mojo-platform-channel-handle=3588 /prefetch:1"
+              },
+              {
+                "Id": 35576,
+                "ParentId": 12800,
+                "Role": "renderer",
+                "PrivateBytesBytes": 1534636032,
+                "PrivateBytesMB": 1463.54,
+                "PrivateWorkingSetBytes": 1453543424,
+                "PrivateWorkingSetMB": 1386.21,
+                "WorkingSetBytes": 1594568704,
+                "WorkingSetMB": 1520.7,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=renderer --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --disable-background-timer-throttling --enable-precise-memory-info --enable-unsafe-webgpu --remote-debugging-port=0 --js-flags=--expose-gc --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=8 --launch-time-ticks=370713059525 --metrics-shmem-handle=4552,i,6179874923244570832,546251900998707228,1572864 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708993808206286 --mojo-platform-channel-handle=4572 /prefetch:1"
+              },
+              {
+                "Id": 25884,
+                "ParentId": 12800,
+                "Role": "audio service",
+                "PrivateBytesBytes": 9109504,
+                "PrivateBytesMB": 8.69,
+                "PrivateWorkingSetBytes": 3526656,
+                "PrivateWorkingSetMB": 3.36,
+                "WorkingSetBytes": 23789568,
+                "WorkingSetMB": 22.69,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=utility --utility-sub-type=audio.mojom.AudioService --lang=en-US --service-sandbox-type=audio --mute-audio --video-capture-use-gpu-memory-buffer --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --metrics-shmem-handle=5328,i,9520535692557210891,16515301030036416088,524288 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708997556373682 --mojo-platform-channel-handle=1940 /prefetch:12"
+              },
+              {
+                "Id": 32224,
+                "ParentId": 12800,
+                "Role": "renderer",
+                "PrivateBytesBytes": 14995456,
+                "PrivateBytesMB": 14.3,
+                "PrivateWorkingSetBytes": 7442432,
+                "PrivateWorkingSetMB": 7.1,
+                "WorkingSetBytes": 31305728,
+                "WorkingSetMB": 29.86,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=renderer --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --disable-background-timer-throttling --enable-precise-memory-info --enable-unsafe-webgpu --remote-debugging-port=0 --js-flags=--expose-gc --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=23 --launch-time-ticks=370715693971 --metrics-shmem-handle=7788,i,4887129353084234892,8377682735182303445,1572864 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190709007863834021 --mojo-platform-channel-handle=8012 /prefetch:1"
+              }
+            ],
+            "sumPrivateBytesMB": 4613.4,
+            "sumPrivateWorkingSetMB": 2111.41,
+            "sumWorkingSetMB": 2697.98
+          }
+        },
+        "cleared": {
+          "screenshot": "tg-motif-feral-cleared.png",
+          "pageMetrics": {
+            "usedJSHeapMB": "643.34",
+            "totalJSHeapMB": "722.30",
+            "cdpJSHeapUsedMB": null,
+            "backend": "WebGPU",
+            "musicState": {
+              "playing": false,
+              "stage": "calm",
+              "deckTrack": null,
+              "overlapFrames": 0,
+              "score": {
+                "on": true,
+                "track": null,
+                "kit": null,
+                "barS": null,
+                "layers": null,
+                "layerGains": null,
+                "motif": null
+              }
+            }
+          },
+          "processMemory": {
+            "processes": [
+              {
+                "Id": 12800,
+                "ParentId": 35464,
+                "Role": "browser",
+                "PrivateBytesBytes": 76234752,
+                "PrivateBytesMB": 72.7,
+                "PrivateWorkingSetBytes": 62238720,
+                "PrivateWorkingSetMB": 59.36,
+                "WorkingSetBytes": 188338176,
+                "WorkingSetMB": 179.61,
+                "CommandLine": "\"C:/Program Files/Google/Chrome/Application/chrome.exe\" --remote-debugging-port=0 --user-data-dir=C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj --no-first-run --no-default-browser-check --disable-extensions --disable-background-timer-throttling --disable-renderer-backgrounding --disable-backgrounding-occluded-windows --mute-audio --enable-precise-memory-info --enable-unsafe-webgpu --window-size=1280,720 --enable-precise-memory-info --js-flags=--expose-gc --task-id=AG-196-TG-MOTIFS about:blank"
+              },
+              {
+                "Id": 22788,
+                "ParentId": 12800,
+                "Role": "crashpad",
+                "PrivateBytesBytes": 2490368,
+                "PrivateBytesMB": 2.38,
+                "PrivateWorkingSetBytes": 1568768,
+                "PrivateWorkingSetMB": 1.5,
+                "WorkingSetBytes": 10084352,
+                "WorkingSetMB": 9.62,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=crashpad-handler --user-data-dir=C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj /prefetch:4 --monitor-self-annotation=ptype=crashpad-handler --user-stream-region=256,65568 --database=C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\\Crashpad --metrics-dir=C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj --url=https://clients2.google.com/cr/report --annotation=channel= --annotation=plat=Win64 --annotation=prod=Chrome --annotation=ver=156.0.8078.74 --initial-client-data=0x12c,0x130,0x134,0xb0,0x138,0x7ff9e63f9f40,0x7ff9e63f9f50,0x7ff9e63f9f60"
+              },
+              {
+                "Id": 10580,
+                "ParentId": 12800,
+                "Role": "gpu",
+                "PrivateBytesBytes": 3104043008,
+                "PrivateBytesMB": 2960.25,
+                "PrivateWorkingSetBytes": 620486656,
+                "PrivateWorkingSetMB": 591.74,
+                "WorkingSetBytes": 778231808,
+                "WorkingSetMB": 742.18,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=gpu-process --gpu-recent-crash-count=0 --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --gpu-preferences=WAAAAAAAAADgAAAEAAAAAAAAAAAAAGAAQAAAAAAAAAADAAAAAAAAADgAAAAAAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAAAAAAKAAAAAAAAAAoAAAAAAAAAAgAAAAAAAAAEAAAAAIAAAABAAAAAAAAAAgAAAAAAAAACAAAAAAAAAA= --metrics-shmem-handle=1888,i,12834398980278507633,5101202618834806132,262144 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708988185955192 --mojo-platform-channel-handle=2044 /prefetch:2"
+              },
+              {
+                "Id": 33940,
+                "ParentId": 12800,
+                "Role": "audio service",
+                "PrivateBytesBytes": 14442496,
+                "PrivateBytesMB": 13.77,
+                "PrivateWorkingSetBytes": 8556544,
+                "PrivateWorkingSetMB": 8.16,
+                "WorkingSetBytes": 41414656,
+                "WorkingSetMB": 39.5,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --mute-audio --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --metrics-shmem-handle=2312,i,16342553886235846728,3150437451239749688,524288 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708989122997041 --mojo-platform-channel-handle=2412 /prefetch:11"
+              },
+              {
+                "Id": 28712,
+                "ParentId": 12800,
+                "Role": "audio service",
+                "PrivateBytesBytes": 8171520,
+                "PrivateBytesMB": 7.79,
+                "PrivateWorkingSetBytes": 2801664,
+                "PrivateWorkingSetMB": 2.67,
+                "WorkingSetBytes": 18104320,
+                "WorkingSetMB": 17.27,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=utility --utility-sub-type=storage.mojom.StorageService --lang=en-US --service-sandbox-type=service --mute-audio --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --metrics-shmem-handle=2680,i,10055297031104748074,16903460114441782660,524288 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708990060038890 --mojo-platform-channel-handle=2528 /prefetch:13"
+              },
+              {
+                "Id": 37300,
+                "ParentId": 12800,
+                "Role": "renderer",
+                "PrivateBytesBytes": 50167808,
+                "PrivateBytesMB": 47.84,
+                "PrivateWorkingSetBytes": 40026112,
+                "PrivateWorkingSetMB": 38.17,
+                "WorkingSetBytes": 92606464,
+                "WorkingSetMB": 88.32,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=renderer --top-chrome-webui --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --disable-background-timer-throttling --enable-precise-memory-info --enable-unsafe-webgpu --remote-debugging-port=0 --js-flags=--expose-gc --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=5 --launch-time-ticks=370712986237 --metrics-shmem-handle=3528,i,2461334945231494919,18300640508118657519,1572864 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708990997080739 --mojo-platform-channel-handle=3532 /prefetch:1"
+              },
+              {
+                "Id": 30696,
+                "ParentId": 12800,
+                "Role": "renderer",
+                "PrivateBytesBytes": 18288640,
+                "PrivateBytesMB": 17.44,
+                "PrivateWorkingSetBytes": 10354688,
+                "PrivateWorkingSetMB": 9.88,
+                "WorkingSetBytes": 46227456,
+                "WorkingSetMB": 44.09,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=renderer --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --disable-background-timer-throttling --enable-precise-memory-info --enable-unsafe-webgpu --remote-debugging-port=0 --js-flags=--expose-gc --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=6 --launch-time-ticks=370713021203 --metrics-shmem-handle=4132,i,14460809954889847938,7329965034445594409,1572864 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708991934122588 --mojo-platform-channel-handle=3588 /prefetch:1"
+              },
+              {
+                "Id": 35576,
+                "ParentId": 12800,
+                "Role": "renderer",
+                "PrivateBytesBytes": 1476071424,
+                "PrivateBytesMB": 1407.69,
+                "PrivateWorkingSetBytes": 1396592640,
+                "PrivateWorkingSetMB": 1331.89,
+                "WorkingSetBytes": 1537560576,
+                "WorkingSetMB": 1466.33,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=renderer --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --disable-background-timer-throttling --enable-precise-memory-info --enable-unsafe-webgpu --remote-debugging-port=0 --js-flags=--expose-gc --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=8 --launch-time-ticks=370713059525 --metrics-shmem-handle=4552,i,6179874923244570832,546251900998707228,1572864 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708993808206286 --mojo-platform-channel-handle=4572 /prefetch:1"
+              },
+              {
+                "Id": 25884,
+                "ParentId": 12800,
+                "Role": "audio service",
+                "PrivateBytesBytes": 9166848,
+                "PrivateBytesMB": 8.74,
+                "PrivateWorkingSetBytes": 3567616,
+                "PrivateWorkingSetMB": 3.4,
+                "WorkingSetBytes": 23818240,
+                "WorkingSetMB": 22.71,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=utility --utility-sub-type=audio.mojom.AudioService --lang=en-US --service-sandbox-type=audio --mute-audio --video-capture-use-gpu-memory-buffer --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --metrics-shmem-handle=5328,i,9520535692557210891,16515301030036416088,524288 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708997556373682 --mojo-platform-channel-handle=1940 /prefetch:12"
+              },
+              {
+                "Id": 32224,
+                "ParentId": 12800,
+                "Role": "renderer",
+                "PrivateBytesBytes": 14995456,
+                "PrivateBytesMB": 14.3,
+                "PrivateWorkingSetBytes": 7442432,
+                "PrivateWorkingSetMB": 7.1,
+                "WorkingSetBytes": 31305728,
+                "WorkingSetMB": 29.86,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=renderer --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --disable-background-timer-throttling --enable-precise-memory-info --enable-unsafe-webgpu --remote-debugging-port=0 --js-flags=--expose-gc --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=23 --launch-time-ticks=370715693971 --metrics-shmem-handle=7788,i,4887129353084234892,8377682735182303445,1572864 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190709007863834021 --mojo-platform-channel-handle=8012 /prefetch:1"
+              }
+            ],
+            "sumPrivateBytesMB": 4552.9,
+            "sumPrivateWorkingSetMB": 2053.87,
+            "sumWorkingSetMB": 2639.49
+          }
+        }
+      },
+      "brute": {
+        "active": {
+          "screenshot": "tg-motif-brute-active.png",
+          "pageMetrics": {
+            "usedJSHeapMB": "653.60",
+            "totalJSHeapMB": "721.58",
+            "cdpJSHeapUsedMB": null,
+            "backend": "WebGPU",
+            "musicState": {
+              "playing": false,
+              "stage": "calm",
+              "deckTrack": null,
+              "overlapFrames": 0,
+              "score": {
+                "on": true,
+                "track": null,
+                "kit": null,
+                "barS": null,
+                "layers": null,
+                "layerGains": null,
+                "motif": null
+              }
+            }
+          },
+          "processMemory": {
+            "processes": [
+              {
+                "Id": 12800,
+                "ParentId": 35464,
+                "Role": "browser",
+                "PrivateBytesBytes": 73207808,
+                "PrivateBytesMB": 69.82,
+                "PrivateWorkingSetBytes": 59805696,
+                "PrivateWorkingSetMB": 57.04,
+                "WorkingSetBytes": 185905152,
+                "WorkingSetMB": 177.29,
+                "CommandLine": "\"C:/Program Files/Google/Chrome/Application/chrome.exe\" --remote-debugging-port=0 --user-data-dir=C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj --no-first-run --no-default-browser-check --disable-extensions --disable-background-timer-throttling --disable-renderer-backgrounding --disable-backgrounding-occluded-windows --mute-audio --enable-precise-memory-info --enable-unsafe-webgpu --window-size=1280,720 --enable-precise-memory-info --js-flags=--expose-gc --task-id=AG-196-TG-MOTIFS about:blank"
+              },
+              {
+                "Id": 22788,
+                "ParentId": 12800,
+                "Role": "crashpad",
+                "PrivateBytesBytes": 2490368,
+                "PrivateBytesMB": 2.38,
+                "PrivateWorkingSetBytes": 1568768,
+                "PrivateWorkingSetMB": 1.5,
+                "WorkingSetBytes": 10084352,
+                "WorkingSetMB": 9.62,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=crashpad-handler --user-data-dir=C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj /prefetch:4 --monitor-self-annotation=ptype=crashpad-handler --user-stream-region=256,65568 --database=C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\\Crashpad --metrics-dir=C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj --url=https://clients2.google.com/cr/report --annotation=channel= --annotation=plat=Win64 --annotation=prod=Chrome --annotation=ver=156.0.8078.74 --initial-client-data=0x12c,0x130,0x134,0xb0,0x138,0x7ff9e63f9f40,0x7ff9e63f9f50,0x7ff9e63f9f60"
+              },
+              {
+                "Id": 10580,
+                "ParentId": 12800,
+                "Role": "gpu",
+                "PrivateBytesBytes": 3104636928,
+                "PrivateBytesMB": 2960.81,
+                "PrivateWorkingSetBytes": 623648768,
+                "PrivateWorkingSetMB": 594.76,
+                "WorkingSetBytes": 782340096,
+                "WorkingSetMB": 746.1,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=gpu-process --gpu-recent-crash-count=0 --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --gpu-preferences=WAAAAAAAAADgAAAEAAAAAAAAAAAAAGAAQAAAAAAAAAADAAAAAAAAADgAAAAAAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAAAAAAKAAAAAAAAAAoAAAAAAAAAAgAAAAAAAAAEAAAAAIAAAABAAAAAAAAAAgAAAAAAAAACAAAAAAAAAA= --metrics-shmem-handle=1888,i,12834398980278507633,5101202618834806132,262144 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708988185955192 --mojo-platform-channel-handle=2044 /prefetch:2"
+              },
+              {
+                "Id": 33940,
+                "ParentId": 12800,
+                "Role": "audio service",
+                "PrivateBytesBytes": 14442496,
+                "PrivateBytesMB": 13.77,
+                "PrivateWorkingSetBytes": 8556544,
+                "PrivateWorkingSetMB": 8.16,
+                "WorkingSetBytes": 41431040,
+                "WorkingSetMB": 39.51,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --mute-audio --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --metrics-shmem-handle=2312,i,16342553886235846728,3150437451239749688,524288 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708989122997041 --mojo-platform-channel-handle=2412 /prefetch:11"
+              },
+              {
+                "Id": 28712,
+                "ParentId": 12800,
+                "Role": "audio service",
+                "PrivateBytesBytes": 8171520,
+                "PrivateBytesMB": 7.79,
+                "PrivateWorkingSetBytes": 2801664,
+                "PrivateWorkingSetMB": 2.67,
+                "WorkingSetBytes": 18104320,
+                "WorkingSetMB": 17.27,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=utility --utility-sub-type=storage.mojom.StorageService --lang=en-US --service-sandbox-type=service --mute-audio --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --metrics-shmem-handle=2680,i,10055297031104748074,16903460114441782660,524288 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708990060038890 --mojo-platform-channel-handle=2528 /prefetch:13"
+              },
+              {
+                "Id": 37300,
+                "ParentId": 12800,
+                "Role": "renderer",
+                "PrivateBytesBytes": 50167808,
+                "PrivateBytesMB": 47.84,
+                "PrivateWorkingSetBytes": 40026112,
+                "PrivateWorkingSetMB": 38.17,
+                "WorkingSetBytes": 92606464,
+                "WorkingSetMB": 88.32,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=renderer --top-chrome-webui --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --disable-background-timer-throttling --enable-precise-memory-info --enable-unsafe-webgpu --remote-debugging-port=0 --js-flags=--expose-gc --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=5 --launch-time-ticks=370712986237 --metrics-shmem-handle=3528,i,2461334945231494919,18300640508118657519,1572864 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708990997080739 --mojo-platform-channel-handle=3532 /prefetch:1"
+              },
+              {
+                "Id": 30696,
+                "ParentId": 12800,
+                "Role": "renderer",
+                "PrivateBytesBytes": 18288640,
+                "PrivateBytesMB": 17.44,
+                "PrivateWorkingSetBytes": 10354688,
+                "PrivateWorkingSetMB": 9.88,
+                "WorkingSetBytes": 46227456,
+                "WorkingSetMB": 44.09,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=renderer --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --disable-background-timer-throttling --enable-precise-memory-info --enable-unsafe-webgpu --remote-debugging-port=0 --js-flags=--expose-gc --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=6 --launch-time-ticks=370713021203 --metrics-shmem-handle=4132,i,14460809954889847938,7329965034445594409,1572864 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708991934122588 --mojo-platform-channel-handle=3588 /prefetch:1"
+              },
+              {
+                "Id": 35576,
+                "ParentId": 12800,
+                "Role": "renderer",
+                "PrivateBytesBytes": 1567444992,
+                "PrivateBytesMB": 1494.83,
+                "PrivateWorkingSetBytes": 1488973824,
+                "PrivateWorkingSetMB": 1420,
+                "WorkingSetBytes": 1630117888,
+                "WorkingSetMB": 1554.6,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=renderer --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --disable-background-timer-throttling --enable-precise-memory-info --enable-unsafe-webgpu --remote-debugging-port=0 --js-flags=--expose-gc --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=8 --launch-time-ticks=370713059525 --metrics-shmem-handle=4552,i,6179874923244570832,546251900998707228,1572864 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708993808206286 --mojo-platform-channel-handle=4572 /prefetch:1"
+              },
+              {
+                "Id": 25884,
+                "ParentId": 12800,
+                "Role": "audio service",
+                "PrivateBytesBytes": 9166848,
+                "PrivateBytesMB": 8.74,
+                "PrivateWorkingSetBytes": 3571712,
+                "PrivateWorkingSetMB": 3.41,
+                "WorkingSetBytes": 23814144,
+                "WorkingSetMB": 22.71,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=utility --utility-sub-type=audio.mojom.AudioService --lang=en-US --service-sandbox-type=audio --mute-audio --video-capture-use-gpu-memory-buffer --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --metrics-shmem-handle=5328,i,9520535692557210891,16515301030036416088,524288 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708997556373682 --mojo-platform-channel-handle=1940 /prefetch:12"
+              },
+              {
+                "Id": 32224,
+                "ParentId": 12800,
+                "Role": "renderer",
+                "PrivateBytesBytes": 14995456,
+                "PrivateBytesMB": 14.3,
+                "PrivateWorkingSetBytes": 7442432,
+                "PrivateWorkingSetMB": 7.1,
+                "WorkingSetBytes": 31305728,
+                "WorkingSetMB": 29.86,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=renderer --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --disable-background-timer-throttling --enable-precise-memory-info --enable-unsafe-webgpu --remote-debugging-port=0 --js-flags=--expose-gc --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=23 --launch-time-ticks=370715693971 --metrics-shmem-handle=7788,i,4887129353084234892,8377682735182303445,1572864 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190709007863834021 --mojo-platform-channel-handle=8012 /prefetch:1"
+              }
+            ],
+            "sumPrivateBytesMB": 4637.72,
+            "sumPrivateWorkingSetMB": 2142.69,
+            "sumWorkingSetMB": 2729.37
+          }
+        },
+        "cleared": {
+          "screenshot": "tg-motif-brute-cleared.png",
+          "pageMetrics": {
+            "usedJSHeapMB": "643.67",
+            "totalJSHeapMB": "722.14",
+            "cdpJSHeapUsedMB": null,
+            "backend": "WebGPU",
+            "musicState": {
+              "playing": false,
+              "stage": "calm",
+              "deckTrack": null,
+              "overlapFrames": 0,
+              "score": {
+                "on": true,
+                "track": null,
+                "kit": null,
+                "barS": null,
+                "layers": null,
+                "layerGains": null,
+                "motif": null
+              }
+            }
+          },
+          "processMemory": {
+            "processes": [
+              {
+                "Id": 12800,
+                "ParentId": 35464,
+                "Role": "browser",
+                "PrivateBytesBytes": 75554816,
+                "PrivateBytesMB": 72.05,
+                "PrivateWorkingSetBytes": 61833216,
+                "PrivateWorkingSetMB": 58.97,
+                "WorkingSetBytes": 188870656,
+                "WorkingSetMB": 180.12,
+                "CommandLine": "\"C:/Program Files/Google/Chrome/Application/chrome.exe\" --remote-debugging-port=0 --user-data-dir=C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj --no-first-run --no-default-browser-check --disable-extensions --disable-background-timer-throttling --disable-renderer-backgrounding --disable-backgrounding-occluded-windows --mute-audio --enable-precise-memory-info --enable-unsafe-webgpu --window-size=1280,720 --enable-precise-memory-info --js-flags=--expose-gc --task-id=AG-196-TG-MOTIFS about:blank"
+              },
+              {
+                "Id": 22788,
+                "ParentId": 12800,
+                "Role": "crashpad",
+                "PrivateBytesBytes": 2490368,
+                "PrivateBytesMB": 2.38,
+                "PrivateWorkingSetBytes": 1568768,
+                "PrivateWorkingSetMB": 1.5,
+                "WorkingSetBytes": 10084352,
+                "WorkingSetMB": 9.62,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=crashpad-handler --user-data-dir=C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj /prefetch:4 --monitor-self-annotation=ptype=crashpad-handler --user-stream-region=256,65568 --database=C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\\Crashpad --metrics-dir=C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj --url=https://clients2.google.com/cr/report --annotation=channel= --annotation=plat=Win64 --annotation=prod=Chrome --annotation=ver=156.0.8078.74 --initial-client-data=0x12c,0x130,0x134,0xb0,0x138,0x7ff9e63f9f40,0x7ff9e63f9f50,0x7ff9e63f9f60"
+              },
+              {
+                "Id": 10580,
+                "ParentId": 12800,
+                "Role": "gpu",
+                "PrivateBytesBytes": 3118682112,
+                "PrivateBytesMB": 2974.21,
+                "PrivateWorkingSetBytes": 637521920,
+                "PrivateWorkingSetMB": 607.99,
+                "WorkingSetBytes": 802496512,
+                "WorkingSetMB": 765.32,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=gpu-process --gpu-recent-crash-count=0 --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --gpu-preferences=WAAAAAAAAADgAAAEAAAAAAAAAAAAAGAAQAAAAAAAAAADAAAAAAAAADgAAAAAAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAAAAAAKAAAAAAAAAAoAAAAAAAAAAgAAAAAAAAAEAAAAAIAAAABAAAAAAAAAAgAAAAAAAAACAAAAAAAAAA= --metrics-shmem-handle=1888,i,12834398980278507633,5101202618834806132,262144 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708988185955192 --mojo-platform-channel-handle=2044 /prefetch:2"
+              },
+              {
+                "Id": 33940,
+                "ParentId": 12800,
+                "Role": "audio service",
+                "PrivateBytesBytes": 14594048,
+                "PrivateBytesMB": 13.92,
+                "PrivateWorkingSetBytes": 8687616,
+                "PrivateWorkingSetMB": 8.29,
+                "WorkingSetBytes": 41791488,
+                "WorkingSetMB": 39.86,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --mute-audio --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --metrics-shmem-handle=2312,i,16342553886235846728,3150437451239749688,524288 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708989122997041 --mojo-platform-channel-handle=2412 /prefetch:11"
+              },
+              {
+                "Id": 28712,
+                "ParentId": 12800,
+                "Role": "audio service",
+                "PrivateBytesBytes": 8339456,
+                "PrivateBytesMB": 7.95,
+                "PrivateWorkingSetBytes": 2961408,
+                "PrivateWorkingSetMB": 2.82,
+                "WorkingSetBytes": 18690048,
+                "WorkingSetMB": 17.82,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=utility --utility-sub-type=storage.mojom.StorageService --lang=en-US --service-sandbox-type=service --mute-audio --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --metrics-shmem-handle=2680,i,10055297031104748074,16903460114441782660,524288 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708990060038890 --mojo-platform-channel-handle=2528 /prefetch:13"
+              },
+              {
+                "Id": 37300,
+                "ParentId": 12800,
+                "Role": "renderer",
+                "PrivateBytesBytes": 50401280,
+                "PrivateBytesMB": 48.07,
+                "PrivateWorkingSetBytes": 40251392,
+                "PrivateWorkingSetMB": 38.39,
+                "WorkingSetBytes": 93175808,
+                "WorkingSetMB": 88.86,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=renderer --top-chrome-webui --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --disable-background-timer-throttling --enable-precise-memory-info --enable-unsafe-webgpu --remote-debugging-port=0 --js-flags=--expose-gc --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=5 --launch-time-ticks=370712986237 --metrics-shmem-handle=3528,i,2461334945231494919,18300640508118657519,1572864 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708990997080739 --mojo-platform-channel-handle=3532 /prefetch:1"
+              },
+              {
+                "Id": 30696,
+                "ParentId": 12800,
+                "Role": "renderer",
+                "PrivateBytesBytes": 18657280,
+                "PrivateBytesMB": 17.79,
+                "PrivateWorkingSetBytes": 10715136,
+                "PrivateWorkingSetMB": 10.22,
+                "WorkingSetBytes": 46977024,
+                "WorkingSetMB": 44.8,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=renderer --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --disable-background-timer-throttling --enable-precise-memory-info --enable-unsafe-webgpu --remote-debugging-port=0 --js-flags=--expose-gc --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=6 --launch-time-ticks=370713021203 --metrics-shmem-handle=4132,i,14460809954889847938,7329965034445594409,1572864 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708991934122588 --mojo-platform-channel-handle=3588 /prefetch:1"
+              },
+              {
+                "Id": 35576,
+                "ParentId": 12800,
+                "Role": "renderer",
+                "PrivateBytesBytes": 1565556736,
+                "PrivateBytesMB": 1493.03,
+                "PrivateWorkingSetBytes": 1487720448,
+                "PrivateWorkingSetMB": 1418.8,
+                "WorkingSetBytes": 1628917760,
+                "WorkingSetMB": 1553.46,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=renderer --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --disable-background-timer-throttling --enable-precise-memory-info --enable-unsafe-webgpu --remote-debugging-port=0 --js-flags=--expose-gc --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=8 --launch-time-ticks=370713059525 --metrics-shmem-handle=4552,i,6179874923244570832,546251900998707228,1572864 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708993808206286 --mojo-platform-channel-handle=4572 /prefetch:1"
+              },
+              {
+                "Id": 25884,
+                "ParentId": 12800,
+                "Role": "audio service",
+                "PrivateBytesBytes": 9248768,
+                "PrivateBytesMB": 8.82,
+                "PrivateWorkingSetBytes": 3657728,
+                "PrivateWorkingSetMB": 3.49,
+                "WorkingSetBytes": 24244224,
+                "WorkingSetMB": 23.12,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=utility --utility-sub-type=audio.mojom.AudioService --lang=en-US --service-sandbox-type=audio --mute-audio --video-capture-use-gpu-memory-buffer --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --metrics-shmem-handle=5328,i,9520535692557210891,16515301030036416088,524288 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708997556373682 --mojo-platform-channel-handle=1940 /prefetch:12"
+              },
+              {
+                "Id": 32224,
+                "ParentId": 12800,
+                "Role": "renderer",
+                "PrivateBytesBytes": 15327232,
+                "PrivateBytesMB": 14.62,
+                "PrivateWorkingSetBytes": 7782400,
+                "PrivateWorkingSetMB": 7.42,
+                "WorkingSetBytes": 32112640,
+                "WorkingSetMB": 30.62,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=renderer --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --disable-background-timer-throttling --enable-precise-memory-info --enable-unsafe-webgpu --remote-debugging-port=0 --js-flags=--expose-gc --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=23 --launch-time-ticks=370715693971 --metrics-shmem-handle=7788,i,4887129353084234892,8377682735182303445,1572864 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190709007863834021 --mojo-platform-channel-handle=8012 /prefetch:1"
+              }
+            ],
+            "sumPrivateBytesMB": 4652.84,
+            "sumPrivateWorkingSetMB": 2157.89,
+            "sumWorkingSetMB": 2753.6
+          }
+        }
+      },
+      "spitter": {
+        "active": {
+          "screenshot": "tg-motif-spitter-active.png",
+          "pageMetrics": {
+            "usedJSHeapMB": "634.67",
+            "totalJSHeapMB": "722.01",
+            "cdpJSHeapUsedMB": null,
+            "backend": "WebGPU",
+            "musicState": {
+              "playing": false,
+              "stage": "calm",
+              "deckTrack": null,
+              "overlapFrames": 0,
+              "score": {
+                "on": true,
+                "track": null,
+                "kit": null,
+                "barS": null,
+                "layers": null,
+                "layerGains": null,
+                "motif": null
+              }
+            }
+          },
+          "processMemory": {
+            "processes": [
+              {
+                "Id": 12800,
+                "ParentId": 35464,
+                "Role": "browser",
+                "PrivateBytesBytes": 76804096,
+                "PrivateBytesMB": 73.25,
+                "PrivateWorkingSetBytes": 62754816,
+                "PrivateWorkingSetMB": 59.85,
+                "WorkingSetBytes": 189792256,
+                "WorkingSetMB": 181,
+                "CommandLine": "\"C:/Program Files/Google/Chrome/Application/chrome.exe\" --remote-debugging-port=0 --user-data-dir=C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj --no-first-run --no-default-browser-check --disable-extensions --disable-background-timer-throttling --disable-renderer-backgrounding --disable-backgrounding-occluded-windows --mute-audio --enable-precise-memory-info --enable-unsafe-webgpu --window-size=1280,720 --enable-precise-memory-info --js-flags=--expose-gc --task-id=AG-196-TG-MOTIFS about:blank"
+              },
+              {
+                "Id": 22788,
+                "ParentId": 12800,
+                "Role": "crashpad",
+                "PrivateBytesBytes": 2490368,
+                "PrivateBytesMB": 2.38,
+                "PrivateWorkingSetBytes": 1568768,
+                "PrivateWorkingSetMB": 1.5,
+                "WorkingSetBytes": 10084352,
+                "WorkingSetMB": 9.62,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=crashpad-handler --user-data-dir=C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj /prefetch:4 --monitor-self-annotation=ptype=crashpad-handler --user-stream-region=256,65568 --database=C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\\Crashpad --metrics-dir=C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj --url=https://clients2.google.com/cr/report --annotation=channel= --annotation=plat=Win64 --annotation=prod=Chrome --annotation=ver=156.0.8078.74 --initial-client-data=0x12c,0x130,0x134,0xb0,0x138,0x7ff9e63f9f40,0x7ff9e63f9f50,0x7ff9e63f9f60"
+              },
+              {
+                "Id": 10580,
+                "ParentId": 12800,
+                "Role": "gpu",
+                "PrivateBytesBytes": 3125219328,
+                "PrivateBytesMB": 2980.44,
+                "PrivateWorkingSetBytes": 642277376,
+                "PrivateWorkingSetMB": 612.52,
+                "WorkingSetBytes": 792432640,
+                "WorkingSetMB": 755.72,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=gpu-process --gpu-recent-crash-count=0 --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --gpu-preferences=WAAAAAAAAADgAAAEAAAAAAAAAAAAAGAAQAAAAAAAAAADAAAAAAAAADgAAAAAAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAAAAAAKAAAAAAAAAAoAAAAAAAAAAgAAAAAAAAAEAAAAAIAAAABAAAAAAAAAAgAAAAAAAAACAAAAAAAAAA= --metrics-shmem-handle=1888,i,12834398980278507633,5101202618834806132,262144 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708988185955192 --mojo-platform-channel-handle=2044 /prefetch:2"
+              },
+              {
+                "Id": 33940,
+                "ParentId": 12800,
+                "Role": "audio service",
+                "PrivateBytesBytes": 14725120,
+                "PrivateBytesMB": 14.04,
+                "PrivateWorkingSetBytes": 8798208,
+                "PrivateWorkingSetMB": 8.39,
+                "WorkingSetBytes": 41902080,
+                "WorkingSetMB": 39.96,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --mute-audio --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --metrics-shmem-handle=2312,i,16342553886235846728,3150437451239749688,524288 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708989122997041 --mojo-platform-channel-handle=2412 /prefetch:11"
+              },
+              {
+                "Id": 28712,
+                "ParentId": 12800,
+                "Role": "audio service",
+                "PrivateBytesBytes": 8339456,
+                "PrivateBytesMB": 7.95,
+                "PrivateWorkingSetBytes": 2961408,
+                "PrivateWorkingSetMB": 2.82,
+                "WorkingSetBytes": 18690048,
+                "WorkingSetMB": 17.82,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=utility --utility-sub-type=storage.mojom.StorageService --lang=en-US --service-sandbox-type=service --mute-audio --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --metrics-shmem-handle=2680,i,10055297031104748074,16903460114441782660,524288 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708990060038890 --mojo-platform-channel-handle=2528 /prefetch:13"
+              },
+              {
+                "Id": 37300,
+                "ParentId": 12800,
+                "Role": "renderer",
+                "PrivateBytesBytes": 50401280,
+                "PrivateBytesMB": 48.07,
+                "PrivateWorkingSetBytes": 40251392,
+                "PrivateWorkingSetMB": 38.39,
+                "WorkingSetBytes": 93175808,
+                "WorkingSetMB": 88.86,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=renderer --top-chrome-webui --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --disable-background-timer-throttling --enable-precise-memory-info --enable-unsafe-webgpu --remote-debugging-port=0 --js-flags=--expose-gc --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=5 --launch-time-ticks=370712986237 --metrics-shmem-handle=3528,i,2461334945231494919,18300640508118657519,1572864 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708990997080739 --mojo-platform-channel-handle=3532 /prefetch:1"
+              },
+              {
+                "Id": 30696,
+                "ParentId": 12800,
+                "Role": "renderer",
+                "PrivateBytesBytes": 18657280,
+                "PrivateBytesMB": 17.79,
+                "PrivateWorkingSetBytes": 10715136,
+                "PrivateWorkingSetMB": 10.22,
+                "WorkingSetBytes": 46977024,
+                "WorkingSetMB": 44.8,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=renderer --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --disable-background-timer-throttling --enable-precise-memory-info --enable-unsafe-webgpu --remote-debugging-port=0 --js-flags=--expose-gc --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=6 --launch-time-ticks=370713021203 --metrics-shmem-handle=4132,i,14460809954889847938,7329965034445594409,1572864 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708991934122588 --mojo-platform-channel-handle=3588 /prefetch:1"
+              },
+              {
+                "Id": 35576,
+                "ParentId": 12800,
+                "Role": "renderer",
+                "PrivateBytesBytes": 1689309184,
+                "PrivateBytesMB": 1611.05,
+                "PrivateWorkingSetBytes": 1614041088,
+                "PrivateWorkingSetMB": 1539.27,
+                "WorkingSetBytes": 1740296192,
+                "WorkingSetMB": 1659.68,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=renderer --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --disable-background-timer-throttling --enable-precise-memory-info --enable-unsafe-webgpu --remote-debugging-port=0 --js-flags=--expose-gc --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=8 --launch-time-ticks=370713059525 --metrics-shmem-handle=4552,i,6179874923244570832,546251900998707228,1572864 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708993808206286 --mojo-platform-channel-handle=4572 /prefetch:1"
+              },
+              {
+                "Id": 25884,
+                "ParentId": 12800,
+                "Role": "audio service",
+                "PrivateBytesBytes": 9248768,
+                "PrivateBytesMB": 8.82,
+                "PrivateWorkingSetBytes": 3657728,
+                "PrivateWorkingSetMB": 3.49,
+                "WorkingSetBytes": 24244224,
+                "WorkingSetMB": 23.12,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=utility --utility-sub-type=audio.mojom.AudioService --lang=en-US --service-sandbox-type=audio --mute-audio --video-capture-use-gpu-memory-buffer --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --metrics-shmem-handle=5328,i,9520535692557210891,16515301030036416088,524288 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708997556373682 --mojo-platform-channel-handle=1940 /prefetch:12"
+              },
+              {
+                "Id": 32224,
+                "ParentId": 12800,
+                "Role": "renderer",
+                "PrivateBytesBytes": 15327232,
+                "PrivateBytesMB": 14.62,
+                "PrivateWorkingSetBytes": 7782400,
+                "PrivateWorkingSetMB": 7.42,
+                "WorkingSetBytes": 32112640,
+                "WorkingSetMB": 30.62,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=renderer --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --disable-background-timer-throttling --enable-precise-memory-info --enable-unsafe-webgpu --remote-debugging-port=0 --js-flags=--expose-gc --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=23 --launch-time-ticks=370715693971 --metrics-shmem-handle=7788,i,4887129353084234892,8377682735182303445,1572864 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190709007863834021 --mojo-platform-channel-handle=8012 /prefetch:1"
+              }
+            ],
+            "sumPrivateBytesMB": 4778.41,
+            "sumPrivateWorkingSetMB": 2283.87,
+            "sumWorkingSetMB": 2851.2
+          }
+        },
+        "cleared": {
+          "screenshot": "tg-motif-spitter-cleared.png",
+          "pageMetrics": {
+            "usedJSHeapMB": "643.26",
+            "totalJSHeapMB": "722.26",
+            "cdpJSHeapUsedMB": null,
+            "backend": "WebGPU",
+            "musicState": {
+              "playing": false,
+              "stage": "calm",
+              "deckTrack": null,
+              "overlapFrames": 0,
+              "score": {
+                "on": true,
+                "track": null,
+                "kit": null,
+                "barS": null,
+                "layers": null,
+                "layerGains": null,
+                "motif": null
+              }
+            }
+          },
+          "processMemory": {
+            "processes": [
+              {
+                "Id": 12800,
+                "ParentId": 35464,
+                "Role": "browser",
+                "PrivateBytesBytes": 77103104,
+                "PrivateBytesMB": 73.53,
+                "PrivateWorkingSetBytes": 63418368,
+                "PrivateWorkingSetMB": 60.48,
+                "WorkingSetBytes": 193298432,
+                "WorkingSetMB": 184.34,
+                "CommandLine": "\"C:/Program Files/Google/Chrome/Application/chrome.exe\" --remote-debugging-port=0 --user-data-dir=C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj --no-first-run --no-default-browser-check --disable-extensions --disable-background-timer-throttling --disable-renderer-backgrounding --disable-backgrounding-occluded-windows --mute-audio --enable-precise-memory-info --enable-unsafe-webgpu --window-size=1280,720 --enable-precise-memory-info --js-flags=--expose-gc --task-id=AG-196-TG-MOTIFS about:blank"
+              },
+              {
+                "Id": 22788,
+                "ParentId": 12800,
+                "Role": "crashpad",
+                "PrivateBytesBytes": 2490368,
+                "PrivateBytesMB": 2.38,
+                "PrivateWorkingSetBytes": 1568768,
+                "PrivateWorkingSetMB": 1.5,
+                "WorkingSetBytes": 10084352,
+                "WorkingSetMB": 9.62,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=crashpad-handler --user-data-dir=C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj /prefetch:4 --monitor-self-annotation=ptype=crashpad-handler --user-stream-region=256,65568 --database=C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\\Crashpad --metrics-dir=C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj --url=https://clients2.google.com/cr/report --annotation=channel= --annotation=plat=Win64 --annotation=prod=Chrome --annotation=ver=156.0.8078.74 --initial-client-data=0x12c,0x130,0x134,0xb0,0x138,0x7ff9e63f9f40,0x7ff9e63f9f50,0x7ff9e63f9f60"
+              },
+              {
+                "Id": 10580,
+                "ParentId": 12800,
+                "Role": "gpu",
+                "PrivateBytesBytes": 3118325760,
+                "PrivateBytesMB": 2973.87,
+                "PrivateWorkingSetBytes": 635461632,
+                "PrivateWorkingSetMB": 606.02,
+                "WorkingSetBytes": 786067456,
+                "WorkingSetMB": 749.65,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=gpu-process --gpu-recent-crash-count=0 --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --gpu-preferences=WAAAAAAAAADgAAAEAAAAAAAAAAAAAGAAQAAAAAAAAAADAAAAAAAAADgAAAAAAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAAAAAAKAAAAAAAAAAoAAAAAAAAAAgAAAAAAAAAEAAAAAIAAAABAAAAAAAAAAgAAAAAAAAACAAAAAAAAAA= --metrics-shmem-handle=1888,i,12834398980278507633,5101202618834806132,262144 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708988185955192 --mojo-platform-channel-handle=2044 /prefetch:2"
+              },
+              {
+                "Id": 33940,
+                "ParentId": 12800,
+                "Role": "audio service",
+                "PrivateBytesBytes": 14233600,
+                "PrivateBytesMB": 13.57,
+                "PrivateWorkingSetBytes": 8355840,
+                "PrivateWorkingSetMB": 7.97,
+                "WorkingSetBytes": 41668608,
+                "WorkingSetMB": 39.74,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --mute-audio --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --metrics-shmem-handle=2312,i,16342553886235846728,3150437451239749688,524288 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708989122997041 --mojo-platform-channel-handle=2412 /prefetch:11"
+              },
+              {
+                "Id": 28712,
+                "ParentId": 12800,
+                "Role": "audio service",
+                "PrivateBytesBytes": 8253440,
+                "PrivateBytesMB": 7.87,
+                "PrivateWorkingSetBytes": 2887680,
+                "PrivateWorkingSetMB": 2.75,
+                "WorkingSetBytes": 18792448,
+                "WorkingSetMB": 17.92,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=utility --utility-sub-type=storage.mojom.StorageService --lang=en-US --service-sandbox-type=service --mute-audio --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --metrics-shmem-handle=2680,i,10055297031104748074,16903460114441782660,524288 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708990060038890 --mojo-platform-channel-handle=2528 /prefetch:13"
+              },
+              {
+                "Id": 37300,
+                "ParentId": 12800,
+                "Role": "renderer",
+                "PrivateBytesBytes": 50401280,
+                "PrivateBytesMB": 48.07,
+                "PrivateWorkingSetBytes": 40251392,
+                "PrivateWorkingSetMB": 38.39,
+                "WorkingSetBytes": 93331456,
+                "WorkingSetMB": 89.01,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=renderer --top-chrome-webui --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --disable-background-timer-throttling --enable-precise-memory-info --enable-unsafe-webgpu --remote-debugging-port=0 --js-flags=--expose-gc --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=5 --launch-time-ticks=370712986237 --metrics-shmem-handle=3528,i,2461334945231494919,18300640508118657519,1572864 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708990997080739 --mojo-platform-channel-handle=3532 /prefetch:1"
+              },
+              {
+                "Id": 30696,
+                "ParentId": 12800,
+                "Role": "renderer",
+                "PrivateBytesBytes": 18030592,
+                "PrivateBytesMB": 17.2,
+                "PrivateWorkingSetBytes": 10137600,
+                "PrivateWorkingSetMB": 9.67,
+                "WorkingSetBytes": 46551040,
+                "WorkingSetMB": 44.39,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=renderer --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --disable-background-timer-throttling --enable-precise-memory-info --enable-unsafe-webgpu --remote-debugging-port=0 --js-flags=--expose-gc --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=6 --launch-time-ticks=370713021203 --metrics-shmem-handle=4132,i,14460809954889847938,7329965034445594409,1572864 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708991934122588 --mojo-platform-channel-handle=3588 /prefetch:1"
+              },
+              {
+                "Id": 35576,
+                "ParentId": 12800,
+                "Role": "renderer",
+                "PrivateBytesBytes": 1607356416,
+                "PrivateBytesMB": 1532.89,
+                "PrivateWorkingSetBytes": 1535827968,
+                "PrivateWorkingSetMB": 1464.68,
+                "WorkingSetBytes": 1662513152,
+                "WorkingSetMB": 1585.5,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=renderer --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --disable-background-timer-throttling --enable-precise-memory-info --enable-unsafe-webgpu --remote-debugging-port=0 --js-flags=--expose-gc --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=8 --launch-time-ticks=370713059525 --metrics-shmem-handle=4552,i,6179874923244570832,546251900998707228,1572864 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708993808206286 --mojo-platform-channel-handle=4572 /prefetch:1"
+              },
+              {
+                "Id": 25884,
+                "ParentId": 12800,
+                "Role": "audio service",
+                "PrivateBytesBytes": 9211904,
+                "PrivateBytesMB": 8.79,
+                "PrivateWorkingSetBytes": 3620864,
+                "PrivateWorkingSetMB": 3.45,
+                "WorkingSetBytes": 24395776,
+                "WorkingSetMB": 23.27,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=utility --utility-sub-type=audio.mojom.AudioService --lang=en-US --service-sandbox-type=audio --mute-audio --video-capture-use-gpu-memory-buffer --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --metrics-shmem-handle=5328,i,9520535692557210891,16515301030036416088,524288 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190708997556373682 --mojo-platform-channel-handle=1940 /prefetch:12"
+              },
+              {
+                "Id": 32224,
+                "ParentId": 12800,
+                "Role": "renderer",
+                "PrivateBytesBytes": 15327232,
+                "PrivateBytesMB": 14.62,
+                "PrivateWorkingSetBytes": 7782400,
+                "PrivateWorkingSetMB": 7.42,
+                "WorkingSetBytes": 32301056,
+                "WorkingSetMB": 30.8,
+                "CommandLine": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --type=renderer --user-data-dir=\"C:\\Users\\Zero\\AppData\\Local\\Temp\\dw-chrome-srw7Fj\" --no-pre-read-main-dll --disable-background-timer-throttling --enable-precise-memory-info --enable-unsafe-webgpu --remote-debugging-port=0 --js-flags=--expose-gc --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=23 --launch-time-ticks=370715693971 --metrics-shmem-handle=7788,i,4887129353084234892,8377682735182303445,1572864 --field-trial-handle=2036,i,11732818916113916512,9327896738391163,262144 --variations-seed-version --pseudonymization-salt-handle=2052,i,7603970661778237044,11749932202881862006,4 --trace-process-track-uuid=3190709007863834021 --mojo-platform-channel-handle=8012 /prefetch:1"
+              }
+            ],
+            "sumPrivateBytesMB": 4692.79,
+            "sumPrivateWorkingSetMB": 2202.33,
+            "sumWorkingSetMB": 2774.24
+          }
+        }
+      }
+    }
+  }
+}

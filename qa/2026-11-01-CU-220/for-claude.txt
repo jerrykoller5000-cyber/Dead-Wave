@@ -1,0 +1,6 @@
+CU-220, red in the chunk and red alone twice. Flaky (green alone twice): t14, t139, t164, t168, t170, t260. t168 and t170's chunk fails are the page being slow; both were 39/0 and 20/0 alone. The real-renderer run of t325 t168 t170 t215 t95 is queued behind the slot.
+
+t167 Coldwater: the church by the old cemetery is 35.0 m from the burial yard (CL-108/109). Yours.
+t302 Hollows: sampleHeight in the rock is -394.00, the floor is -400.00, so the 0.01 m check fails. It is not the old 400 m pop, it is 6 m high (CL-259). Yours, unless you want me to look at sampleHeight under the warren.
+
+Still mine, not in this note as yours: t320 (the ring walk, redder alone), t142 vault, t222 runner aim, t50 (I changed the wait so a thick near box can finish swapping; the bar is the same).

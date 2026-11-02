@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { hqRingPoints, ringTrailGaps, ringWaterGaps, makeWallBand, resolveWallBand } from './wall-bands.js';
+import { hqRingPoints, ringTrailGaps, ringWaterGaps, bandTrailGaps, bandWaterGaps,
+  bandWalkGap, makeWallBand, resolveWallBand } from './wall-bands.js';
 
 test('ring gaps follow every crossing and only the crossings', () => {
   const paths = [Object.assign([{ x: 0, z: 0 }, { x: 90, z: 0 }], { hw: 0.85 }),
@@ -74,4 +75,33 @@ test('the same primitive handles a straight polyline and authored corridor', () 
   assert.deepEqual(resolveWallBand(band, 0, 0), { x: 0, z: 0 });
   const pushed = resolveWallBand(band, 6, 0);
   assert.ok(Math.abs(pushed.x - 6) < 1e-6 && Math.abs(pushed.z) >= 2.35);
+});
+
+test('a bent quarter band preserves the full trail crossing and omits the wet strip', () => {
+  const pts = [{ x: 0, z: 0 }, { x: 10, z: 0 }, { x: 20, z: 10 }];
+  const path = Object.assign([{ x: 7, z: -8 }, { x: 7, z: 8 }], { hw: 1 });
+  const far = Object.assign([{ x: 40, z: -8 }, { x: 40, z: 8 }], { hw: 1 });
+  const trails = bandTrailGaps(pts, [path, far], 5);
+  assert.deepEqual(trails.map(g => g.id), ['trail-0']);
+  const water = bandWaterGaps(pts, 5, (x, z) => x >= 15 && x <= 18);
+  assert.equal(water.length, 1);
+  const band = makeWallBand({ pts, width: 5, gaps: [...trails, ...water] });
+  for (let z = -1; z <= 1; z += 0.25)
+    assert.deepEqual(resolveWallBand(band, 7, z), { x: 7, z }, `trail open at z=${z}`);
+  assert.equal(band.solids.some(s => s.x >= 15 && s.x <= 18), false);
+  assert.ok(band.solids.some(s => s.x < 3), 'closed segment remains');
+});
+
+test('four-metre authored gap is walkable on an open band and does not wrap to its start', () => {
+  const pts = [{ x: 0, z: 0 }, { x: 30, z: 0 }];
+  const gap = bandWalkGap('outer-walk', 20, 4, 5);
+  const band = makeWallBand({ pts, width: 5, gaps: [gap] });
+  assert.equal(band.closed, false);
+  for (let x = 18.5; x <= 21.5; x += 0.5) {
+    assert.deepEqual(resolveWallBand(band, x, 0), { x, z: 0 });
+    assert.equal(band.solids.some(s => Math.abs(s.x - x) < s.radius + 0.35), false);
+  }
+  assert.equal(band.isGap(0, 0, 0), false, 'outer gap must not wrap across an open polyline');
+  const blocked = resolveWallBand(band, 2, 0);
+  assert.ok(Math.abs(blocked.z) >= 2.85, 'closed start remains impassable');
 });

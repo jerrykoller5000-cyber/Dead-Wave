@@ -1,0 +1,12 @@
+GRANT cursor CU-220: starting one game-test command
+check-players: 314 player.position reads, all in the allowed places
+FAIL  t320    18 pass   3 fail  181.8s
+
+1 checks: 18 pass, 3 fail
+
+by owner:
+  unassigned
+    t320   3 fail  FAIL gap 323° inside through a gap in 20s (r 62, stuck 0.0s, clip false, nearest gap 0 deg)
+           FAIL gap 323° inside through a gap in 20s (r 62, stuck 0.0s, clip false, nearest gap 0 deg)
+           FAIL between 250° inside through a gap in 32s (r 61, stuck 0.0s, clip false, nearest gap 52 deg)
+           FAIL between 368° inside through a gap in 31s (r 58, stuck 0.0s, clip false, nearest gap 45 deg)
