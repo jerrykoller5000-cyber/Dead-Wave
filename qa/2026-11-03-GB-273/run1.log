@@ -1,0 +1,49 @@
+Game-test request 42e3943b-a154-42f1-9989-53a65a65f2e3 queued at position 1. Waiting...
+GRANT grokbot GB-273: starting one game-test command
+
+=== node --test game/wall-cull.test.mjs
+✔ the band becomes straight segments of at most 6 m, none across the gap (0.7699ms)
+✔ behind the wall: hidden on the second read, not the first (0.8027ms)
+✔ through the gap: shown (0.2107ms)
+✔ at the wall foot on the near side: never hidden (0.1814ms)
+✔ a tall thing seen over the wall is shown (0.2194ms)
+✔ one seen read shows it again (walking round the end) (0.1797ms)
+✔ far cells round-robin within the budget, re-tested when the eye moves (1.6485ms)
+✔ an empty wall list hides nothing (0.144ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 89.6157
+=== exit 0
+
+=== node tools/realtest.mjs tgb273
+ok    tgb273    5 pass   0 fail  40.1s  (real renderer)
+    INFO wall test 0.059 ms a frame (avg of 240)
+1 checks: 5 pass, 0 fail (real renderer)
+=== exit 0
+
+=== node tools/tests/run-all.mjs tgb273 t215 t95 t329 t80 --jobs 1 --all-fails
+check-players: 315 player.position reads, all in the allowed places
+           INFO wall test 0.080 ms a frame (avg of 240)
+ok    tgb273   5 pass   0 fail  53.0s
+ok    t80     14 pass   0 fail  153.8s
+ok    t95      9 pass   0 fail  59.2s
+ok    t215     4 pass   0 fail  42.3s
+ok    t329    10 pass   0 fail  24.7s
+
+5 checks: 42 pass, 0 fail
+=== exit 0
+
+=== node tools/smoke-real.mjs
+training: title up in 17.9 s, WebGPURenderer
+training: in the room (room built), 0 called in, frames still running: true
+training: page errors none
+match: title up in 23.8 s, WebGPURenderer
+match: in prep, past the insertion
+night: phase wave, lockdown true, zombies 12
+match: page errors none
+=== exit 0

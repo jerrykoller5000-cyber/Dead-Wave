@@ -1,0 +1,874 @@
+{
+  "date": "2026-11-03",
+  "task": "AG-211",
+  "description": "The stone walls in the game, not the studio (LOD by distance from origin vs camera)",
+  "totalShots": 24,
+  "stone": [
+    {
+      "shotId": "stone_hq_3m_noon",
+      "mode": "stone",
+      "spotId": "hq",
+      "spotLabel": "HQ Ring (Yard Side)",
+      "bandKind": "hq-thicket",
+      "nominalDist": 3,
+      "lightId": "noon",
+      "worldTime": 0.5,
+      "distCenter": 59.99905120103125,
+      "isFarLODFormula": true,
+      "telemetry": {
+        "camPos": {
+          "x": 55.14866209274594,
+          "y": -5.436218772176852,
+          "z": -14.85546513621251
+        },
+        "targetStation": {
+          "x": 57.93374882892889,
+          "z": -15.606629733883912
+        },
+        "actualDist": 2.8846067983101373,
+        "aimYaw": 1.8339372223797106,
+        "viewFirst": true,
+        "otsW": 1,
+        "weaponKey": "launcher",
+        "vmRaise": 1,
+        "vmRootVisible": true,
+        "launcherNdc": {
+          "x": 0.10712323010350552,
+          "y": -0.21982373378275438,
+          "d": 1.042698731942447
+        }
+      },
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-03-AG-211\\captures\\stone_hq_3m_noon.jpg"
+    },
+    {
+      "shotId": "stone_hq_3m_dusk",
+      "mode": "stone",
+      "spotId": "hq",
+      "spotLabel": "HQ Ring (Yard Side)",
+      "bandKind": "hq-thicket",
+      "nominalDist": 3,
+      "lightId": "dusk",
+      "worldTime": 0.77,
+      "distCenter": 59.99905120103125,
+      "isFarLODFormula": true,
+      "telemetry": {
+        "camPos": {
+          "x": 55.14618201310025,
+          "y": -5.434852327056767,
+          "z": -14.856469642140826
+        },
+        "targetStation": {
+          "x": 57.93374882892889,
+          "z": -15.606629733883912
+        },
+        "actualDist": 2.886740188509007,
+        "aimYaw": 1.8339372223797106,
+        "viewFirst": true,
+        "otsW": 1,
+        "weaponKey": "launcher",
+        "vmRaise": 1,
+        "vmRootVisible": true,
+        "launcherNdc": {
+          "x": 0.10712816207237168,
+          "y": -0.22148649175855434,
+          "d": 1.0428579259941702
+        }
+      },
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-03-AG-211\\captures\\stone_hq_3m_dusk.jpg"
+    },
+    {
+      "shotId": "stone_hq_10m_noon",
+      "mode": "stone",
+      "spotId": "hq",
+      "spotLabel": "HQ Ring (Yard Side)",
+      "bandKind": "hq-thicket",
+      "nominalDist": 10,
+      "lightId": "noon",
+      "worldTime": 0.5,
+      "distCenter": 59.99905120103125,
+      "isFarLODFormula": true,
+      "telemetry": {
+        "camPos": {
+          "x": 48.38593919565818,
+          "y": -5.647703638507925,
+          "z": -13.036897876428004
+        },
+        "targetStation": {
+          "x": 57.93374882892889,
+          "z": -15.606629733883912
+        },
+        "actualDist": 9.887577590714562,
+        "aimYaw": 1.8339372223797106,
+        "viewFirst": true,
+        "otsW": 1,
+        "weaponKey": "launcher",
+        "vmRaise": 1,
+        "vmRootVisible": true,
+        "launcherNdc": {
+          "x": 0.10715801991695739,
+          "y": -0.2182902808720446,
+          "d": 1.0425673514662899
+        }
+      },
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-03-AG-211\\captures\\stone_hq_10m_noon.jpg"
+    },
+    {
+      "shotId": "stone_hq_10m_dusk",
+      "mode": "stone",
+      "spotId": "hq",
+      "spotLabel": "HQ Ring (Yard Side)",
+      "bandKind": "hq-thicket",
+      "nominalDist": 10,
+      "lightId": "dusk",
+      "worldTime": 0.77,
+      "distCenter": 59.99905120103125,
+      "isFarLODFormula": true,
+      "telemetry": {
+        "camPos": {
+          "x": 48.38907810930929,
+          "y": -5.6489167829640605,
+          "z": -13.03857705277465
+        },
+        "targetStation": {
+          "x": 57.93374882892889,
+          "z": -15.606629733883912
+        },
+        "actualDist": 9.884110163232513,
+        "aimYaw": 1.8339372223797106,
+        "viewFirst": true,
+        "otsW": 1,
+        "weaponKey": "launcher",
+        "vmRaise": 1,
+        "vmRootVisible": true,
+        "launcherNdc": {
+          "x": 0.10718733820196495,
+          "y": -0.2151779780934521,
+          "d": 1.0422821845101353
+        }
+      },
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-03-AG-211\\captures\\stone_hq_10m_dusk.jpg"
+    },
+    {
+      "shotId": "stone_hq_30m_noon",
+      "mode": "stone",
+      "spotId": "hq",
+      "spotLabel": "HQ Ring (Yard Side)",
+      "bandKind": "hq-thicket",
+      "nominalDist": 30,
+      "lightId": "noon",
+      "worldTime": 0.5,
+      "distCenter": 59.99905120103125,
+      "isFarLODFormula": true,
+      "telemetry": {
+        "camPos": {
+          "x": 29.082190152172544,
+          "y": -2.452652753855218,
+          "z": -7.847274351385469
+        },
+        "targetStation": {
+          "x": 57.93374882892889,
+          "z": -15.606629733883912
+        },
+        "actualDist": 29.876747380366258,
+        "aimYaw": 1.8339372223797106,
+        "viewFirst": true,
+        "otsW": 1,
+        "weaponKey": "launcher",
+        "vmRaise": 1,
+        "vmRootVisible": true,
+        "launcherNdc": {
+          "x": 0.10717059096545473,
+          "y": -0.2169526556841981,
+          "d": 1.042445058915298
+        }
+      },
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-03-AG-211\\captures\\stone_hq_30m_noon.jpg"
+    },
+    {
+      "shotId": "stone_hq_30m_dusk",
+      "mode": "stone",
+      "spotId": "hq",
+      "spotLabel": "HQ Ring (Yard Side)",
+      "bandKind": "hq-thicket",
+      "nominalDist": 30,
+      "lightId": "dusk",
+      "worldTime": 0.77,
+      "distCenter": 59.99905120103125,
+      "isFarLODFormula": true,
+      "telemetry": {
+        "camPos": {
+          "x": 29.07613151543573,
+          "y": -2.4503327405827218,
+          "z": -7.863831748599548
+        },
+        "targetStation": {
+          "x": 57.93374882892889,
+          "z": -15.606629733883912
+        },
+        "actualDist": 29.878303125394254,
+        "aimYaw": 1.8339372223797106,
+        "viewFirst": true,
+        "otsW": 1,
+        "weaponKey": "launcher",
+        "vmRaise": 1,
+        "vmRootVisible": true,
+        "launcherNdc": {
+          "x": 0.10713384951272838,
+          "y": -0.22087556853897755,
+          "d": 1.042802564465842
+        }
+      },
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-03-AG-211\\captures\\stone_hq_30m_dusk.jpg"
+    },
+    {
+      "shotId": "stone_qnw_3m_noon",
+      "mode": "stone",
+      "spotId": "qnw",
+      "spotLabel": "Quarter-NW (Near 83, 50)",
+      "bandKind": "quarter-nw",
+      "nominalDist": 3,
+      "lightId": "noon",
+      "worldTime": 0.5,
+      "distCenter": 96.53434083602072,
+      "isFarLODFormula": true,
+      "telemetry": {
+        "camPos": {
+          "x": 80.32434638701143,
+          "y": 4.90551892614827,
+          "z": 51.16267424210643
+        },
+        "targetStation": {
+          "x": 82.78361799511339,
+          "z": 49.656334462827154
+        },
+        "actualDist": 2.8839341832045187,
+        "aimYaw": 2.132724157661648,
+        "viewFirst": true,
+        "otsW": 1,
+        "weaponKey": "launcher",
+        "vmRaise": 1,
+        "vmRootVisible": true,
+        "launcherNdc": {
+          "x": 0.10712506379074245,
+          "y": -0.22088909213087665,
+          "d": 1.042800405392079
+        }
+      },
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-03-AG-211\\captures\\stone_qnw_3m_noon.jpg"
+    },
+    {
+      "shotId": "stone_qnw_3m_dusk",
+      "mode": "stone",
+      "spotId": "qnw",
+      "spotLabel": "Quarter-NW (Near 83, 50)",
+      "bandKind": "quarter-nw",
+      "nominalDist": 3,
+      "lightId": "dusk",
+      "worldTime": 0.77,
+      "distCenter": 96.53434083602072,
+      "isFarLODFormula": true,
+      "telemetry": {
+        "camPos": {
+          "x": 80.3207449402414,
+          "y": 4.914583058518039,
+          "z": 51.1641815956537
+        },
+        "targetStation": {
+          "x": 82.78361799511339,
+          "z": 49.656334462827154
+        },
+        "actualDist": 2.8877926969205627,
+        "aimYaw": 2.132724157661648,
+        "viewFirst": true,
+        "otsW": 1,
+        "weaponKey": "launcher",
+        "vmRaise": 1,
+        "vmRootVisible": true,
+        "launcherNdc": {
+          "x": 0.10717035936734633,
+          "y": -0.21697721742744128,
+          "d": 1.0424473079736503
+        }
+      },
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-03-AG-211\\captures\\stone_qnw_3m_dusk.jpg"
+    },
+    {
+      "shotId": "stone_qnw_10m_noon",
+      "mode": "stone",
+      "spotId": "qnw",
+      "spotLabel": "Quarter-NW (Near 83, 50)",
+      "bandKind": "quarter-nw",
+      "nominalDist": 10,
+      "lightId": "noon",
+      "worldTime": 0.5,
+      "distCenter": 96.53434083602072,
+      "isFarLODFormula": true,
+      "telemetry": {
+        "camPos": {
+          "x": 74.40206399100599,
+          "y": 5.691222307480205,
+          "z": 54.89546155909105
+        },
+        "targetStation": {
+          "x": 82.78361799511339,
+          "z": 49.656334462827154
+        },
+        "actualDist": 9.884275403618386,
+        "aimYaw": 2.132724157661648,
+        "viewFirst": true,
+        "otsW": 1,
+        "weaponKey": "launcher",
+        "vmRaise": 1,
+        "vmRootVisible": true,
+        "launcherNdc": {
+          "x": 0.10718739158575542,
+          "y": -0.21517233435950037,
+          "d": 1.0422816654106215
+        }
+      },
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-03-AG-211\\captures\\stone_qnw_10m_noon.jpg"
+    },
+    {
+      "shotId": "stone_qnw_10m_dusk",
+      "mode": "stone",
+      "spotId": "qnw",
+      "spotLabel": "Quarter-NW (Near 83, 50)",
+      "bandKind": "quarter-nw",
+      "nominalDist": 10,
+      "lightId": "dusk",
+      "worldTime": 0.77,
+      "distCenter": 96.53434083602072,
+      "isFarLODFormula": true,
+      "telemetry": {
+        "camPos": {
+          "x": 74.41463195749829,
+          "y": 5.689783193014639,
+          "z": 54.896285916689415
+        },
+        "targetStation": {
+          "x": 82.78361799511339,
+          "z": 49.656334462827154
+        },
+        "actualDist": 9.874057855645253,
+        "aimYaw": 2.132724157661648,
+        "viewFirst": true,
+        "otsW": 1,
+        "weaponKey": "launcher",
+        "vmRaise": 1,
+        "vmRootVisible": true,
+        "launcherNdc": {
+          "x": 0.10715827453591865,
+          "y": -0.21826314096014082,
+          "d": 1.0425648742181188
+        }
+      },
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-03-AG-211\\captures\\stone_qnw_10m_dusk.jpg"
+    },
+    {
+      "shotId": "stone_qnw_30m_noon",
+      "mode": "stone",
+      "spotId": "qnw",
+      "spotLabel": "Quarter-NW (Near 83, 50)",
+      "bandKind": "quarter-nw",
+      "nominalDist": 30,
+      "lightId": "noon",
+      "worldTime": 0.5,
+      "distCenter": 96.53434083602072,
+      "isFarLODFormula": true,
+      "telemetry": {
+        "camPos": {
+          "x": 57.46036994297927,
+          "y": 6.028885754648124,
+          "z": 65.54321734153562
+        },
+        "targetStation": {
+          "x": 82.78361799511339,
+          "z": 49.656334462827154
+        },
+        "actualDist": 29.89414557253167,
+        "aimYaw": 2.132724157661648,
+        "viewFirst": true,
+        "otsW": 1,
+        "weaponKey": "launcher",
+        "vmRaise": 1,
+        "vmRootVisible": true,
+        "launcherNdc": {
+          "x": 0.10712822495582937,
+          "y": -0.22147974086409414,
+          "d": 1.0428573147649398
+        }
+      },
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-03-AG-211\\captures\\stone_qnw_30m_noon.jpg"
+    },
+    {
+      "shotId": "stone_qnw_30m_dusk",
+      "mode": "stone",
+      "spotId": "qnw",
+      "spotLabel": "Quarter-NW (Near 83, 50)",
+      "bandKind": "quarter-nw",
+      "nominalDist": 30,
+      "lightId": "dusk",
+      "worldTime": 0.77,
+      "distCenter": 96.53434083602072,
+      "isFarLODFormula": true,
+      "telemetry": {
+        "camPos": {
+          "x": 57.47002011226464,
+          "y": 6.0274023789148785,
+          "z": 65.54912699862719
+        },
+        "targetStation": {
+          "x": 82.78361799511339,
+          "z": 49.656334462827154
+        },
+        "actualDist": 29.889113274912415,
+        "aimYaw": 2.132724157661648,
+        "viewFirst": true,
+        "otsW": 1,
+        "weaponKey": "launcher",
+        "vmRaise": 1,
+        "vmRootVisible": true,
+        "launcherNdc": {
+          "x": 0.10714334477693825,
+          "y": -0.2198578232237868,
+          "d": 1.0427101491516746
+        }
+      },
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-03-AG-211\\captures\\stone_qnw_30m_dusk.jpg"
+    }
+  ],
+  "hedge": [
+    {
+      "shotId": "hedge_hq_3m_noon",
+      "mode": "hedge",
+      "spotId": "hq",
+      "spotLabel": "HQ Ring (Yard Side)",
+      "bandKind": "hq-thicket",
+      "nominalDist": 3,
+      "lightId": "noon",
+      "worldTime": 0.5,
+      "distCenter": 59.99905120103125,
+      "isFarLODFormula": true,
+      "telemetry": {
+        "camPos": {
+          "x": 55.14850347891267,
+          "y": -5.43617273445553,
+          "z": -14.855568109062535
+        },
+        "targetStation": {
+          "x": 57.93374882892889,
+          "z": -15.606629733883912
+        },
+        "actualDist": 2.884733128742812,
+        "aimYaw": 1.8339372223797106,
+        "viewFirst": true,
+        "otsW": 1,
+        "weaponKey": "launcher",
+        "vmRaise": 1,
+        "vmRootVisible": true,
+        "launcherNdc": {
+          "x": 0.10712323010350537,
+          "y": -0.2198237337827332,
+          "d": 1.0426987319424441
+        }
+      },
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-03-AG-211\\captures\\hedge_hq_3m_noon.jpg"
+    },
+    {
+      "shotId": "hedge_hq_3m_dusk",
+      "mode": "hedge",
+      "spotId": "hq",
+      "spotLabel": "HQ Ring (Yard Side)",
+      "bandKind": "hq-thicket",
+      "nominalDist": 3,
+      "lightId": "dusk",
+      "worldTime": 0.77,
+      "distCenter": 59.99905120103125,
+      "isFarLODFormula": true,
+      "telemetry": {
+        "camPos": {
+          "x": 55.145931822064355,
+          "y": -5.434881485161814,
+          "z": -14.856567843602518
+        },
+        "targetStation": {
+          "x": 57.93374882892889,
+          "z": -15.606629733883912
+        },
+        "actualDist": 2.886956269674973,
+        "aimYaw": 1.8339372223797106,
+        "viewFirst": true,
+        "otsW": 1,
+        "weaponKey": "launcher",
+        "vmRaise": 1,
+        "vmRootVisible": true,
+        "launcherNdc": {
+          "x": 0.10712816207237126,
+          "y": -0.2214864917585535,
+          "d": 1.0428579259941713
+        }
+      },
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-03-AG-211\\captures\\hedge_hq_3m_dusk.jpg"
+    },
+    {
+      "shotId": "hedge_hq_10m_noon",
+      "mode": "hedge",
+      "spotId": "hq",
+      "spotLabel": "HQ Ring (Yard Side)",
+      "bandKind": "hq-thicket",
+      "nominalDist": 10,
+      "lightId": "noon",
+      "worldTime": 0.5,
+      "distCenter": 59.99905120103125,
+      "isFarLODFormula": true,
+      "telemetry": {
+        "camPos": {
+          "x": 48.386044174890145,
+          "y": -5.647779582247456,
+          "z": -13.037046966477327
+        },
+        "targetStation": {
+          "x": 57.93374882892889,
+          "z": -15.606629733883912
+        },
+        "actualDist": 9.887437471827877,
+        "aimYaw": 1.8339372223797106,
+        "viewFirst": true,
+        "otsW": 1,
+        "weaponKey": "launcher",
+        "vmRaise": 1,
+        "vmRootVisible": true,
+        "launcherNdc": {
+          "x": 0.10715801991695705,
+          "y": -0.21829028087204397,
+          "d": 1.0425673514662908
+        }
+      },
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-03-AG-211\\captures\\hedge_hq_10m_noon.jpg"
+    },
+    {
+      "shotId": "hedge_hq_10m_dusk",
+      "mode": "hedge",
+      "spotId": "hq",
+      "spotLabel": "HQ Ring (Yard Side)",
+      "bandKind": "hq-thicket",
+      "nominalDist": 10,
+      "lightId": "dusk",
+      "worldTime": 0.77,
+      "distCenter": 59.99905120103125,
+      "isFarLODFormula": true,
+      "telemetry": {
+        "camPos": {
+          "x": 48.389597026879265,
+          "y": -5.649034600353293,
+          "z": -13.038758511118159
+        },
+        "targetStation": {
+          "x": 57.93374882892889,
+          "z": -15.606629733883912
+        },
+        "actualDist": 9.883561920546438,
+        "aimYaw": 1.8339372223797106,
+        "viewFirst": true,
+        "otsW": 1,
+        "weaponKey": "launcher",
+        "vmRaise": 1,
+        "vmRootVisible": true,
+        "launcherNdc": {
+          "x": 0.10718733820196458,
+          "y": -0.2151779780934512,
+          "d": 1.0422821845101364
+        }
+      },
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-03-AG-211\\captures\\hedge_hq_10m_dusk.jpg"
+    },
+    {
+      "shotId": "hedge_hq_30m_noon",
+      "mode": "hedge",
+      "spotId": "hq",
+      "spotLabel": "HQ Ring (Yard Side)",
+      "bandKind": "hq-thicket",
+      "nominalDist": 30,
+      "lightId": "noon",
+      "worldTime": 0.5,
+      "distCenter": 59.99905120103125,
+      "isFarLODFormula": true,
+      "telemetry": {
+        "camPos": {
+          "x": 29.082328096086492,
+          "y": -2.452826472354415,
+          "z": -7.848296268118567
+        },
+        "targetStation": {
+          "x": 57.93374882892889,
+          "z": -15.606629733883912
+        },
+        "actualDist": 29.876348780758047,
+        "aimYaw": 1.8339372223797106,
+        "viewFirst": true,
+        "otsW": 1,
+        "weaponKey": "launcher",
+        "vmRaise": 1,
+        "vmRootVisible": true,
+        "launcherNdc": {
+          "x": 0.1071705909654543,
+          "y": -0.21695265568419714,
+          "d": 1.0424450589152991
+        }
+      },
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-03-AG-211\\captures\\hedge_hq_30m_noon.jpg"
+    },
+    {
+      "shotId": "hedge_hq_30m_dusk",
+      "mode": "hedge",
+      "spotId": "hq",
+      "spotLabel": "HQ Ring (Yard Side)",
+      "bandKind": "hq-thicket",
+      "nominalDist": 30,
+      "lightId": "dusk",
+      "worldTime": 0.77,
+      "distCenter": 59.99905120103125,
+      "isFarLODFormula": true,
+      "telemetry": {
+        "camPos": {
+          "x": 29.075794388691705,
+          "y": -2.450243643891432,
+          "z": -7.864050583761355
+        },
+        "targetStation": {
+          "x": 57.93374882892889,
+          "z": -15.606629733883912
+        },
+        "actualDist": 29.87857202696805,
+        "aimYaw": 1.8339372223797106,
+        "viewFirst": true,
+        "otsW": 1,
+        "weaponKey": "launcher",
+        "vmRaise": 1,
+        "vmRootVisible": true,
+        "launcherNdc": {
+          "x": 0.10713384951272792,
+          "y": -0.22087556853897652,
+          "d": 1.0428025644658434
+        }
+      },
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-03-AG-211\\captures\\hedge_hq_30m_dusk.jpg"
+    },
+    {
+      "shotId": "hedge_qnw_3m_noon",
+      "mode": "hedge",
+      "spotId": "qnw",
+      "spotLabel": "Quarter-NW (Near 83, 50)",
+      "bandKind": "quarter-nw",
+      "nominalDist": 3,
+      "lightId": "noon",
+      "worldTime": 0.5,
+      "distCenter": 96.53434083602072,
+      "isFarLODFormula": true,
+      "telemetry": {
+        "camPos": {
+          "x": 80.32388477709374,
+          "y": 4.905781134741066,
+          "z": 51.16294329797867
+        },
+        "targetStation": {
+          "x": 82.78361799511339,
+          "z": 49.656334462827154
+        },
+        "actualDist": 2.884468354131471,
+        "aimYaw": 2.132724157661648,
+        "viewFirst": true,
+        "otsW": 1,
+        "weaponKey": "launcher",
+        "vmRaise": 1,
+        "vmRootVisible": true,
+        "launcherNdc": {
+          "x": 0.10712506379074203,
+          "y": -0.22088909213087568,
+          "d": 1.04280040539208
+        }
+      },
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-03-AG-211\\captures\\hedge_qnw_3m_noon.jpg"
+    },
+    {
+      "shotId": "hedge_qnw_3m_dusk",
+      "mode": "hedge",
+      "spotId": "qnw",
+      "spotLabel": "Quarter-NW (Near 83, 50)",
+      "bandKind": "quarter-nw",
+      "nominalDist": 3,
+      "lightId": "dusk",
+      "worldTime": 0.77,
+      "distCenter": 96.53434083602072,
+      "isFarLODFormula": true,
+      "telemetry": {
+        "camPos": {
+          "x": 80.32065852363947,
+          "y": 4.914672342309958,
+          "z": 51.164494076404715
+        },
+        "targetStation": {
+          "x": 82.78361799511339,
+          "z": 49.656334462827154
+        },
+        "actualDist": 2.8880295667027935,
+        "aimYaw": 2.132724157661648,
+        "viewFirst": true,
+        "otsW": 1,
+        "weaponKey": "launcher",
+        "vmRaise": 1,
+        "vmRootVisible": true,
+        "launcherNdc": {
+          "x": 0.10717035936734626,
+          "y": -0.216977217427441,
+          "d": 1.0424473079736505
+        }
+      },
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-03-AG-211\\captures\\hedge_qnw_3m_dusk.jpg"
+    },
+    {
+      "shotId": "hedge_qnw_10m_noon",
+      "mode": "hedge",
+      "spotId": "qnw",
+      "spotLabel": "Quarter-NW (Near 83, 50)",
+      "bandKind": "quarter-nw",
+      "nominalDist": 10,
+      "lightId": "noon",
+      "worldTime": 0.5,
+      "distCenter": 96.53434083602072,
+      "isFarLODFormula": true,
+      "telemetry": {
+        "camPos": {
+          "x": 74.40262292980593,
+          "y": 5.6911977653389965,
+          "z": 54.89556463522639
+        },
+        "targetStation": {
+          "x": 82.78361799511339,
+          "z": 49.656334462827154
+        },
+        "actualDist": 9.883856083740119,
+        "aimYaw": 2.132724157661648,
+        "viewFirst": true,
+        "otsW": 1,
+        "weaponKey": "launcher",
+        "vmRaise": 1,
+        "vmRootVisible": true,
+        "launcherNdc": {
+          "x": 0.10718739158575519,
+          "y": -0.21517233435949984,
+          "d": 1.0422816654106222
+        }
+      },
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-03-AG-211\\captures\\hedge_qnw_10m_noon.jpg"
+    },
+    {
+      "shotId": "hedge_qnw_10m_dusk",
+      "mode": "hedge",
+      "spotId": "qnw",
+      "spotLabel": "Quarter-NW (Near 83, 50)",
+      "bandKind": "quarter-nw",
+      "nominalDist": 10,
+      "lightId": "dusk",
+      "worldTime": 0.77,
+      "distCenter": 96.53434083602072,
+      "isFarLODFormula": true,
+      "telemetry": {
+        "camPos": {
+          "x": 74.41556874378067,
+          "y": 5.68963767225935,
+          "z": 54.89625229706179
+        },
+        "targetStation": {
+          "x": 82.78361799511339,
+          "z": 49.656334462827154
+        },
+        "actualDist": 9.873246030676048,
+        "aimYaw": 2.132724157661648,
+        "viewFirst": true,
+        "otsW": 1,
+        "weaponKey": "launcher",
+        "vmRaise": 1,
+        "vmRootVisible": true,
+        "launcherNdc": {
+          "x": 0.1071582745359186,
+          "y": -0.2182631409601407,
+          "d": 1.0425648742181188
+        }
+      },
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-03-AG-211\\captures\\hedge_qnw_10m_dusk.jpg"
+    },
+    {
+      "shotId": "hedge_qnw_30m_noon",
+      "mode": "hedge",
+      "spotId": "qnw",
+      "spotLabel": "Quarter-NW (Near 83, 50)",
+      "bandKind": "quarter-nw",
+      "nominalDist": 30,
+      "lightId": "noon",
+      "worldTime": 0.5,
+      "distCenter": 96.53434083602072,
+      "isFarLODFormula": true,
+      "telemetry": {
+        "camPos": {
+          "x": 57.46110151092143,
+          "y": 6.028651537843556,
+          "z": 65.54333039316289
+        },
+        "targetStation": {
+          "x": 82.78361799511339,
+          "z": 49.656334462827154
+        },
+        "actualDist": 29.893585947200744,
+        "aimYaw": 2.132724157661648,
+        "viewFirst": true,
+        "otsW": 1,
+        "weaponKey": "launcher",
+        "vmRaise": 1,
+        "vmRootVisible": true,
+        "launcherNdc": {
+          "x": 0.1071282249558294,
+          "y": -0.22147974086409417,
+          "d": 1.0428573147649398
+        }
+      },
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-03-AG-211\\captures\\hedge_qnw_30m_noon.jpg"
+    },
+    {
+      "shotId": "hedge_qnw_30m_dusk",
+      "mode": "hedge",
+      "spotId": "qnw",
+      "spotLabel": "Quarter-NW (Near 83, 50)",
+      "bandKind": "quarter-nw",
+      "nominalDist": 30,
+      "lightId": "dusk",
+      "worldTime": 0.77,
+      "distCenter": 96.53434083602072,
+      "isFarLODFormula": true,
+      "telemetry": {
+        "camPos": {
+          "x": 57.47020589670115,
+          "y": 6.027396619758742,
+          "z": 65.54954209923136
+        },
+        "targetStation": {
+          "x": 82.78361799511339,
+          "z": 49.656334462827154
+        },
+        "actualDist": 29.889176653730356,
+        "aimYaw": 2.132724157661648,
+        "viewFirst": true,
+        "otsW": 1,
+        "weaponKey": "launcher",
+        "vmRaise": 1,
+        "vmRootVisible": true,
+        "launcherNdc": {
+          "x": 0.10714334477693847,
+          "y": -0.21985782322378739,
+          "d": 1.0427101491516737
+        }
+      },
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-03-AG-211\\captures\\hedge_qnw_30m_dusk.jpg"
+    }
+  ]
+}

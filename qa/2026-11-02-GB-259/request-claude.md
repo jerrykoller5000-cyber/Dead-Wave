@@ -1,0 +1,13 @@
+GB-259 stage-2 guns' sights are fixed in the builders (studio/weapon-*.js, game/sight-points.js); before/after ADS shots on the RTX in qa/2026-11-02-GB-259/before and /after (logs run1.log, run2.log):
+- Pistol: the post's tip sat at the notch's FLOOR (0.087 vs 0.082), so no post showed in the notch. Post raised 5 mm to the ears' tops (0.092), front dot level with the rear dots: a three-dot picture. SIGHT.pistol notch [-0.064, 0.092], tip [0.282, 0.092], level.
+- KR-7: its front post (0.081) was 1.6 cm under a rear blob (0.095) and the eye looked over the hood. Now a U notch (ears 0.090 @ 0.218), the post's tip at 0.090, the hood raised 8 mm to clear it. SIGHT.ak pos y 0.090, level.
+- GW-4 (J10): dot 2.8 to 3.5 mm inside a thin EOTech ring. Sight point unchanged.
+- Wasp (J4 sights): the eye rode the ears' tops (0.156), 3 cm over a 5 mm aperture that had a solid block through it. Now an 11.8 mm aperture on a stem, the post's tip on its centre (0.126), the hood bar clear above. SIGHT.uzi pos y 0.126.
+
+Rule 13: three tests hold the old points, so they're red by exactly the change (none is a bar). Proposed, no tolerance touched:
+1. tcl281.js:103 pistol [0,0.082,-0.064] / [0,0.087,0.282] to [0,0.092,-0.064] / [0,0.092,0.282]; :165 ak [0,0.0943,0] to [0,0.090,0]; :166 uzi [0,0.156,-0.25] to [0,0.126,-0.25]. (CU-223's lines: Cursor's or yours?)
+2. t284 RF: pistol [[0,.092,-.064],[0,.092,.282]]; uzi [[0,.126,-.08],[0,.126,.198]] (it now has a front point). I edited t284 in GB-233, so I can do it.
+3. t277 (mine): its 'eye clears the top line' rule puts an aperture sight's eye on the ears' tops (that's how GB-228 got 0.156). I'd add `ring: [-0.08, 0.126]` to SIGHT.uzi and a check for ring sights: the eye within 3 mm of the ring's centre and nothing on the centre line inside the hole. OK?
+Separately: t279 (1 fail, the m4's eye 18.6 cm off firstPersonSight) and t291 (2 fails) are red on the m4, whose sight point I didn't change; I think they've been red since the m4 went onto the view gun (GP-20012), as they read the old first person's sight. Not mine to change; flagging.
+J4's other half, the Wasp's zoom: first person's ADS takes the world to the Aim FOV (38) for every gun (index.html ~63000, not my area). Want a per-weapon ADS FOV there (the Wasp and the pistol narrowing less, e.g. Aim FOV + 12), and whose is it?
+Next for me (builder side, not waiting on this): the revolver's hammer under the notch line (J13), the minigun's small red dot (J18), the launcher's leaf sight (J16); the Breacher-12 (J20) and the arc after GP-20014 brings them onto the view gun.

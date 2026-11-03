@@ -231,7 +231,19 @@ export const AudioSys = (() => {
     return buf;
   }
 
+  // CL-295 (Jerry's J53, 2026-11-02: "still that weird chain sound when the player is moving around"): every sound by name
+  // while a trace is on. AudioSys.traceDbg(true) starts it; traceDbg(false) stops it and returns the list: { t, kind, name,
+  // file, v } for a take (its file), a clip, a synth tone or noise (the function that asked for it).
+  let traceList = null;
+  const traceCaller = () => { const l = (new Error().stack || '').split('\n').map((x) => x.trim()).filter((x) => x.startsWith('at '));
+    for (const x of l.slice(2)) { const m = /^at (?:Object\.)?([\w$]+)/.exec(x); if (m && !/^(playTone|playNoise|traceCaller|tk|playTake)$/.test(m[1])) return m[1]; } return '?'; };
+  function trace(kind, name, file, v) { if (traceList && traceList.length < 5000) traceList.push({ t: +(((typeof performance !== 'undefined' ? performance.now() : Date.now())) / 1000).toFixed(3), kind, name, file: file || null, v: v == null ? null : +(+v).toFixed(2) }); }
+  function traceDbg(on) {
+    if (on) { traceList = []; if (takes && takes.setPlayHook) takes.setPlayHook((id, rel, v) => trace('take', id, rel, v)); return true; }
+    const out = traceList || []; traceList = null; if (takes && takes.setPlayHook) takes.setPlayHook(null); return out;
+  }
   function playTone({ freq = 440, type = 'square', dur = 0.08, vol = 0.2, slideTo = null, when = 0, rev = 0, attack = 0.01, pan = 0 }) {
+    if (traceList) trace('tone', traceCaller(), type + ' ' + Math.round(freq) + ' Hz', vol);
     const c = ensure();
     if (!c || muted) return;
     const t0 = c.currentTime + when;
@@ -252,6 +264,7 @@ export const AudioSys = (() => {
   }
 
   function playNoise({ dur = 0.06, vol = 0.15, filterFreq = 1800, filterType = 'bandpass', when = 0, rev = 0, attack = 0.005, q = null, pan = 0 }) {
+    if (traceList) trace('noise', traceCaller(), filterType + ' ' + Math.round(filterFreq) + ' Hz', vol);
     const c = ensure();
     if (!c || muted) return;
     const buf = noiseBuffer(dur + 0.02);
@@ -458,6 +471,7 @@ export const AudioSys = (() => {
   }
   function preloadClips(names = Object.keys(CLIPS)) { for (const n of names) loadClip(n); }
   function playClipNow(name, buf, v, pan) {
+    if (traceList) trace('clip', name, null, v);
     const c = ensure(); if (!c || muted || !buf) return;
     const def = CLIPS[name];
     const src = c.createBufferSource(); src.buffer = buf;
@@ -1221,11 +1235,17 @@ export const AudioSys = (() => {
   const SCORE_SPECIALS = {};
   // CL-275: the calm (music.json score.pools): the menu, dawn, the day, dusk, night, the end screens, as whole tracks.
   const SCORE_POOLS = {};
-  let OLD_POOLS = null, scoreCalmLost = false;
+  // CL-275: the score's cues in place of the old stings (music.json score.stings); Jerry's alarm stinger is never swapped.
+  const SCORE_STINGS = {};
+  let OLD_POOLS = null, OLD_STINGS = null, scoreCalmLost = false;
   function applyScorePools(on, changed) {
     if (!OLD_POOLS) OLD_POOLS = JSON.parse(JSON.stringify(MUSIC_POOLS));
+    if (!OLD_STINGS) OLD_STINGS = Object.assign({}, MUSIC_STINGS);
+    for (const k of Object.keys(MUSIC_POOLS)) if (!(k in OLD_POOLS)) delete MUSIC_POOLS[k];   // the score's own pools (place_*) go when it's off
     for (const k of Object.keys(OLD_POOLS)) MUSIC_POOLS[k] = OLD_POOLS[k].slice();
-    if (on && !scoreCalmLost) for (const k of Object.keys(SCORE_POOLS)) MUSIC_POOLS[k] = SCORE_POOLS[k].slice();
+    for (const k of Object.keys(MUSIC_STINGS)) if (!(k in OLD_STINGS)) delete MUSIC_STINGS[k];
+    Object.assign(MUSIC_STINGS, OLD_STINGS);
+    if (on && !scoreCalmLost) { for (const k of Object.keys(SCORE_POOLS)) MUSIC_POOLS[k] = SCORE_POOLS[k].slice(); Object.assign(MUSIC_STINGS, SCORE_STINGS); }
     if (changed && stage === 'calm') mood = null;   // switched: the calm moves to the new pool's song (fade out, then in); not on the first load (it broke t73's lull)
   }
   // CL-275: the Training Ground's motifs (music.json score.motifs): a type -> its kit, played while it practises.
@@ -1238,11 +1258,15 @@ export const AudioSys = (() => {
     return state.guardian ? 'guardian' : state.ember ? 'redsky' : state.boss ? 'colossus' : null;
   }
   let specialWant = null, specialWantT = 0;
+  // D-97's switch (Jerry, 2026-11-02: "I really wanted to hear it"): the score is ON by default now. ?score=0 or
+  // localStorage tt_score = '0' (the settings switch, CU-177) brings back the old music; where the gh files aren't on the
+  // machine each part falls back to the old music by itself.
   function scoreWanted() {
     try {
+      if (typeof location !== 'undefined' && /[?&]score=0(?:&|$)/.test(location.search || '')) return false;
       if (typeof location !== 'undefined' && /[?&]score=1(?:&|$)/.test(location.search || '')) return true;
-      return typeof localStorage !== 'undefined' && localStorage.getItem('tt_score') === '1';
-    } catch (_) { return false; }
+      return !(typeof localStorage !== 'undefined' && localStorage.getItem('tt_score') === '0');
+    } catch (_) { return true; }
   }
   function setScore(on) {
     on = !!on && !!SCORE_WAVE;
@@ -1308,6 +1332,7 @@ export const AudioSys = (() => {
         if (sc.specials && typeof sc.specials === 'object') for (const k of Object.keys(sc.specials)) if (SECTIONED[sc.specials[k]]) SCORE_SPECIALS[k] = sc.specials[k];
         if (sc.motifs && typeof sc.motifs === 'object') for (const k of Object.keys(sc.motifs)) if (SECTIONED[sc.motifs[k]]) SCORE_MOTIFS[k] = sc.motifs[k];
         if (sc.pools && typeof sc.pools === 'object') for (const k of Object.keys(sc.pools)) if (Array.isArray(sc.pools[k]) && sc.pools[k].length) SCORE_POOLS[k] = sc.pools[k].slice();
+        if (sc.stings && typeof sc.stings === 'object') for (const k of Object.keys(sc.stings)) if (typeof sc.stings[k] === 'string' && k !== 'alarm') SCORE_STINGS[k] = sc.stings[k];   // never the alarm: Jerry's metal stinger stays
         setScore(scoreWanted());
       }
       const df = m.dayFight;
@@ -1751,7 +1776,7 @@ export const AudioSys = (() => {
       if (!sting) {
         sting = new Audio();
         sting.addEventListener('ended', () => { if (stingName) finishSting(); });
-        sting.addEventListener('error', () => { const e = sting.error; if (stingName && !(e && e.code === 1)) finishSting(); });
+        sting.addEventListener('error', () => { const e = sting.error; if (stingName && !(e && e.code === 1)) { if (/\/gh\/gh-cue-/.test(sting.src || '')) { scoreCalmLost = true; applyScorePools(false, true); } finishSting(); } });   // CL-275: no gh files here
       }
       sting.src = trackUrl(file);
       stingName = name;
@@ -1820,6 +1845,10 @@ export const AudioSys = (() => {
     cueCount++;
     lastCue = { name, played: !!file && musicPlaying && !muted, at: cueCount };
     if (!file || !musicPlaying || muted) return;
+    // CL-294: the same cue file again inside 20 s (three finds on one sprint) plays once
+    const tNow = nowMs() / 1000;
+    if (file === cueLastFile && tNow - cueLastAt < 20) { lastCue.played = false; lastCue.held = true; return; }
+    cueLastFile = file; cueLastAt = tNow;
     try {
       if (!cueEl) cueEl = new Audio();
       cueEl.src = trackUrl(file);
@@ -1912,8 +1941,23 @@ export const AudioSys = (() => {
     const hit = MUSIC_HITS[name] || 0;
     startDeck(name, { from: hit, loopAt: hit, level: 1, fadeIn: 0.5 });
   }
+  // CL-294 (Jerry's J65, 2026-11-02: "If you run around sprinting right off the bat you discover every location very
+  // quickly and the music switches tracks rapidly"): a place's music only once he has stayed there (dwellS inside it), and
+  // the calm music moves to or from a place's at most once every gapS. The day, dusk and night changes aren't held.
+  // Tests may shorten both (AudioSys.calmFlow); tcl294 holds the real numbers.
+  const calmFlow = { dwellS: 20, gapS: 60 };
+  let placeSeen = null, placeSeenAt = 0, placeSettled = null, calmSwitchedAt = -1e9, cueLastFile = null, cueLastAt = -1e9;
+  function settledPlace(state) {
+    const p = (state && state.place) || null, now = nowMs() / 1000;
+    if (p !== placeSeen) { placeSeen = p; placeSeenAt = now; }
+    placeSettled = p && now - placeSeenAt >= calmFlow.dwellS ? p : (p === placeSettled ? p : null);
+    return placeSettled;
+  }
+  const isPlaceMood = (m) => typeof m === 'string' && m.startsWith('place_');
   function calmMoodFor(state) {
     if (!state.started) return 'menu';
+    const place = settledPlace(state);
+    if (scoreIsOn && place && MUSIC_POOLS['place_' + place]) return 'place_' + place;   // CL-275: the graveyard, the relay, the hikers' camp
     if (state.night) return state.dusk ? 'dusk' : 'night';
     return state.dawn ? 'dawnprep' : 'day';
   }
@@ -1975,7 +2019,10 @@ export const AudioSys = (() => {
     }
     if (stage === 'calm') {
       const want = lastCalm;
-      if (want !== mood) nextMood = want;
+      // CL-294: into or out of a place's music no sooner than gapS after the last such change
+      const held = mood && (isPlaceMood(want) || isPlaceMood(mood)) && nowMs() / 1000 - calmSwitchedAt < calmFlow.gapS;
+      if (want !== mood && !held) nextMood = want;
+      else if (want === mood && nextMood && nextMood !== mood) nextMood = null;   // he came back before it moved
     }
     // --- the fast fades finishing ---
     if (stage === 'release' && (!deckTrack || deckLevel <= 0.001)) startRelief();
@@ -1998,7 +2045,7 @@ export const AudioSys = (() => {
     // --- calm music: fade the old one right out, then the new one in ---
     if (stage === 'calm') {
       if (nextMood && deckTrack) { deckTarget = 0; deckRate = 1 / FADE_OUT_S; if (deckLevel <= 0.001) { stopDeck(); } }
-      if (nextMood && !deckTrack) { mood = nextMood; nextMood = null; gapT = 0; startDeck(pickTrack(mood), { level: 0, fadeIn: FADE_IN_S }); }
+      if (nextMood && !deckTrack) { mood = nextMood; nextMood = null; gapT = 0; calmSwitchedAt = nowMs() / 1000; startDeck(pickTrack(mood), { level: 0, fadeIn: FADE_IN_S }); }
       else if (!deckTrack && mood && gapT > 0) { gapT -= dt; if (gapT <= 0) startDeck(pickTrack(mood), { level: 0, fadeIn: 3 }); }
       else if (!deckTrack && mood && gapT <= 0 && !nextMood) startDeck(pickTrack(mood), { level: 0, fadeIn: FADE_IN_S });
     }
@@ -2095,7 +2142,8 @@ export const AudioSys = (() => {
         kit: sec && sec.layers ? sec.name : null, barS: sec ? sec.barS || null : null, failed: Object.keys(SECTIONED).filter((k) => SECTIONED[k].layered && secFailed(k)),
         specials: Object.assign({}, SCORE_SPECIALS), specialWant: specialWant, track: sec ? sec.track : null,
         motifs: Object.assign({}, SCORE_MOTIFS), motif: motif ? { kind: motif.kind, track: motif.track, started: motif.started } : null,
-        pools: Object.assign({}, SCORE_POOLS), calmLost: scoreCalmLost },   // CL-275
+        pools: Object.assign({}, SCORE_POOLS), stings: Object.assign({}, SCORE_STINGS), calmLost: scoreCalmLost,   // CL-275
+        place: { seen: placeSeen, settled: placeSettled, dwellS: calmFlow.dwellS, gapS: calmFlow.gapS, sinceSwitch: +(nowMs() / 1000 - calmSwitchedAt).toFixed(1) } },   // CL-294
       deckTrack, deckLevel, volume: sec && secOut ? secOut.gain.value : (deck ? deck.volume : 0), prox, briefDuck, briefingOpen, day: lastDay, lastDeckError,
       waveByDay: WAVE_BY_DAY.map((w) => Object.assign({}, w)),
       night: nightMusic(lastDay), nightCurve: Array.from({ length: 20 }, (_, i) => nightMusic(i + 1)),
@@ -3766,7 +3814,10 @@ export const AudioSys = (() => {
   const W = (fn, duck) => onBus('weap', fn, duck);
   const A = (fn) => onBus('amb', fn);
   // CL-161: the Training Ground's cues Jerry recorded (the rest stay ui/training-audio.js's tones)
-  const TRAIN_TAKE = { step: 'player/footstep-tile', target: 'training/target-hit', reset: 'training/target-rise', impact: 'training/wall-impact',
+  // CL-295 (J53, J36: "that weird chain sound when the player is moving around"; found by tcl295b on the real page, AG): the
+  // Training Ground's steps played player/footstep-tile, whose pack takes are the pack's "Boots Glass" steps, glass crunching
+  // and ringing under every footfall. Its floor is a concrete hangar's: the concrete boots (player/footstep-stone), clean.
+  const TRAIN_TAKE = { step: 'player/footstep-stone', target: 'training/target-hit', reset: 'training/target-rise', impact: 'training/wall-impact',
     open: 'training/panel-beep', spawn: 'training/gate-open', clear: 'training/clear-all', wake: 'training/infirmary-wake',
     enter: 'training/panel-enter' };   // CL-272: the way in, from the packs
   function setTraining(on){
@@ -4062,7 +4113,7 @@ export const AudioSys = (() => {
     // Read-only view of the mix, for tests and the perf overlay.
     mixState: () => ({ ctx: ctx ? ctx.state : 'none', weap: weapBus ? weapBus.gain.value : null, fx: fxBus ? fxBus.gain.value : null, amb: ambBus ? ambBus.gain.value : null, musicDuck: musicShotDuck, rain: rainLoop ? rainLoop.gain.gain.value : null }),
     rainStart, rainStop, rainSetIntensity, isRainRunning,
-    updateMusic, musicState, musicCue, cueLength, setMood, setSfxVolume, setMusicVolume, getVolumes, setScore,   // CL-275
+    updateMusic, musicState, musicCue, cueLength, setMood, setSfxVolume, setMusicVolume, getVolumes, setScore, calmFlow, traceDbg,   // CL-275, CL-294, CL-295
     ambienceStart, updateAmbience, birdChirp: A(birdChirp), owlHoot: A(owlHoot), thunder: A(thunder), lightningStrike: A(lightningStrike), holyChoir, chapelChoir, rabbitScreech, holyBlast, dayCleared,
     distantGroan: A(distantGroan),
     clip, preloadClips, clipState,   // CL-147

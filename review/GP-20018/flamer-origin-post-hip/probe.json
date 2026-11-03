@@ -1,0 +1,35 @@
+{
+  "first-person": {
+    "first": true,
+    "weapon": "flamer",
+    "vmActive": true,
+    "vmKey": "flamer",
+    "vmRaise": 1,
+    "bodyMuzzle": [
+      42.196833191604085,
+      -6.2134357722670615,
+      -19.220366775380967
+    ],
+    "viewMuzzle": [
+      41.8585409723009,
+      -6.129278260722446,
+      -18.789959395385473
+    ],
+    "muzzleSeparationM": 0.5538723906686821,
+    "backend": "WebGPU"
+  },
+  "third-person": {
+    "first": false,
+    "weapon": "flamer",
+    "vmActive": false,
+    "vmKey": null,
+    "vmRaise": 0,
+    "bodyMuzzle": [
+      42.1243978258605,
+      -6.540072600397141,
+      -19.12512100208246
+    ],
+    "muzzleSeparationM": null,
+    "backend": "WebGPU"
+  }
+}

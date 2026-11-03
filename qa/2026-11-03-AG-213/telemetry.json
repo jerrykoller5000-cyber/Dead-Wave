@@ -1,0 +1,1872 @@
+{
+  "testDate": "2026-11-03T02:17:55.528Z",
+  "hardware": "NVIDIA GeForce RTX 5080 WebGPU",
+  "rings": {
+    "depot": {
+      "label": "Fuel Depot Shed Ring",
+      "approach": {
+        "nearPlace": "depot",
+        "promptBefore": "The depot shed is locked. Price's fuel log is by the dead HQ generator.",
+        "shutBefore": true,
+        "gateStateBefore": [
+          {
+            "place": "depot",
+            "gate": "depot-shed",
+            "open": false,
+            "w": 0,
+            "solids": 14,
+            "blocks": 14,
+            "x": -104.28745087989603,
+            "z": 16.53033329184642
+          }
+        ],
+        "playerPos": [
+          -102.81200670039787,
+          -0.1155356551625727,
+          18.16222313898226
+        ],
+        "gatePos": [
+          -104.28745087989603,
+          16.53033329184642
+        ],
+        "ringCenter": [
+          -112,
+          8
+        ],
+        "ringRadius": 11.5
+      },
+      "lockedInteraction": {
+        "acted": true,
+        "gatesState": [
+          {
+            "place": "depot",
+            "gate": "depot-shed",
+            "open": false,
+            "w": 0,
+            "solids": 14,
+            "blocks": 14,
+            "x": -104.28745087989603,
+            "z": 16.53033329184642
+          }
+        ],
+        "promptAfter": "The depot shed is locked. Price's fuel log is by the dead HQ generator."
+      },
+      "openInteraction": {
+        "promptWithKey": "E — Open the gate",
+        "gatesAfter": [
+          {
+            "place": "depot",
+            "gate": "depot-shed",
+            "open": true,
+            "w": 1,
+            "solids": 0,
+            "blocks": 0,
+            "x": -104.28745087989603,
+            "z": 16.53033329184642
+          }
+        ],
+        "shutAfter": false,
+        "interiorDist": 7.500000000000003,
+        "walkThroughSuccess": true
+      }
+    },
+    "mast": {
+      "label": "Radio Mast Yard Ring",
+      "approach": {
+        "nearPlace": "mast",
+        "promptBefore": "The mast yard gate needs Sato's key. Once HQ has power, check the radio drawer.",
+        "shutBefore": true,
+        "gateStateBefore": [
+          {
+            "place": "mast",
+            "gate": "mast-yard",
+            "open": false,
+            "w": 0,
+            "solids": 14,
+            "blocks": 14,
+            "x": -153.07001944585858,
+            "z": 13.84472954422889
+          }
+        ],
+        "playerPos": [
+          -153.0335825416665,
+          0.53003271205636,
+          16.04442778535491
+        ],
+        "gatePos": [
+          -153.07001944585858,
+          13.84472954422889
+        ],
+        "ringCenter": [
+          -153.3681395710665,
+          -4.152801519529441
+        ],
+        "ringRadius": 18
+      },
+      "lockedInteraction": {
+        "acted": true,
+        "gatesState": [
+          {
+            "place": "mast",
+            "gate": "mast-yard",
+            "open": false,
+            "w": 0,
+            "solids": 14,
+            "blocks": 14,
+            "x": -153.07001944585858,
+            "z": 13.84472954422889
+          }
+        ],
+        "promptAfter": "The mast yard gate needs Sato's key. Once HQ has power, check the radio drawer."
+      },
+      "openInteraction": {
+        "promptWithKey": "E — Open the gate",
+        "gatesAfter": [
+          {
+            "place": "mast",
+            "gate": "mast-yard",
+            "open": true,
+            "w": 1,
+            "solids": 0,
+            "blocks": 0,
+            "x": -153.07001944585858,
+            "z": 13.84472954422889
+          }
+        ],
+        "shutAfter": false,
+        "interiorDist": 14.000000000000002,
+        "walkThroughSuccess": true
+      }
+    },
+    "hikers": {
+      "label": "Hikers Camp Trail Ring",
+      "approach": {
+        "nearPlace": "hikers",
+        "promptBefore": "The camp chain is locked. A key was left in the ambulance glovebox.",
+        "shutBefore": true,
+        "gateStateBefore": [
+          {
+            "place": "hikers",
+            "gate": "trail-chain",
+            "open": false,
+            "w": 0,
+            "solids": 14,
+            "blocks": 14,
+            "x": 5.077279743196631,
+            "z": -119.86636004398882
+          }
+        ],
+        "playerPos": [
+          3.0089472673651074,
+          7.178140695888822,
+          -119.11669293825412
+        ],
+        "gatePos": [
+          5.077279743196631,
+          -119.86636004398882
+        ],
+        "ringCenter": [
+          22,
+          -126
+        ],
+        "ringRadius": 18
+      },
+      "lockedInteraction": {
+        "acted": true,
+        "gatesState": [
+          {
+            "place": "hikers",
+            "gate": "trail-chain",
+            "open": false,
+            "w": 0,
+            "solids": 14,
+            "blocks": 14,
+            "x": 5.077279743196631,
+            "z": -119.86636004398882
+          }
+        ],
+        "promptAfter": "The camp chain is locked. A key was left in the ambulance glovebox."
+      },
+      "openInteraction": {
+        "promptWithKey": "E — Open the gate",
+        "gatesAfter": [
+          {
+            "place": "hikers",
+            "gate": "trail-chain",
+            "open": true,
+            "w": 1,
+            "solids": 0,
+            "blocks": 0,
+            "x": 5.077279743196631,
+            "z": -119.86636004398882
+          }
+        ],
+        "shutAfter": false,
+        "interiorDist": 13.999999999999996,
+        "walkThroughSuccess": true
+      }
+    },
+    "rangers": {
+      "label": "Rangers Cache Ring",
+      "approach": {
+        "nearPlace": "rangers",
+        "promptBefore": "The rangers' gate is locked. Clarke put its key in his toolbox.",
+        "shutBefore": true,
+        "gateStateBefore": [
+          {
+            "place": "rangers",
+            "gate": "ranger-gate",
+            "open": false,
+            "w": 0,
+            "solids": 14,
+            "blocks": 14,
+            "x": 112.99315274975596,
+            "z": 9.939544034202134
+          }
+        ],
+        "playerPos": [
+          111.15898253028169,
+          -2.2706792245226715,
+          11.15437719393795
+        ],
+        "gatePos": [
+          112.99315274975596,
+          9.939544034202134
+        ],
+        "ringCenter": [
+          128,
+          0
+        ],
+        "ringRadius": 18
+      },
+      "lockedInteraction": {
+        "acted": true,
+        "gatesState": [
+          {
+            "place": "rangers",
+            "gate": "ranger-gate",
+            "open": false,
+            "w": 0,
+            "solids": 14,
+            "blocks": 14,
+            "x": 112.99315274975596,
+            "z": 9.939544034202134
+          }
+        ],
+        "promptAfter": "The rangers' gate is locked. Clarke put its key in his toolbox."
+      },
+      "openInteraction": {
+        "promptWithKey": "E — Open the gate",
+        "gatesAfter": [
+          {
+            "place": "rangers",
+            "gate": "ranger-gate",
+            "open": true,
+            "w": 1,
+            "solids": 0,
+            "blocks": 0,
+            "x": 112.99315274975596,
+            "z": 9.939544034202134
+          }
+        ],
+        "shutAfter": false,
+        "interiorDist": 14.000000000000005,
+        "walkThroughSuccess": true
+      }
+    }
+  },
+  "circumventionProbes": {
+    "depot": {
+      "place": "depot",
+      "ringRadius": 11.5,
+      "testedBearings": 48,
+      "breachCount": 0,
+      "breaches": [],
+      "bearings": [
+        {
+          "idx": 0,
+          "angleRad": 0,
+          "isGateBearing": false,
+          "endDist": 12.75,
+          "wallRadius": 11.5,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 1,
+          "angleRad": 0.131,
+          "isGateBearing": false,
+          "endDist": 12.74,
+          "wallRadius": 11.5,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 2,
+          "angleRad": 0.262,
+          "isGateBearing": false,
+          "endDist": 12.74,
+          "wallRadius": 11.5,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 3,
+          "angleRad": 0.393,
+          "isGateBearing": true,
+          "endDist": 12.74,
+          "wallRadius": 11.5,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 4,
+          "angleRad": 0.524,
+          "isGateBearing": true,
+          "endDist": 12.74,
+          "wallRadius": 11.5,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 5,
+          "angleRad": 0.654,
+          "isGateBearing": true,
+          "endDist": 12.74,
+          "wallRadius": 11.5,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 6,
+          "angleRad": 0.785,
+          "isGateBearing": true,
+          "endDist": 12.3,
+          "wallRadius": 11.5,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 7,
+          "angleRad": 0.916,
+          "isGateBearing": true,
+          "endDist": 12.33,
+          "wallRadius": 11.5,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 8,
+          "angleRad": 1.047,
+          "isGateBearing": true,
+          "endDist": 12.74,
+          "wallRadius": 11.5,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 9,
+          "angleRad": 1.178,
+          "isGateBearing": true,
+          "endDist": 12.74,
+          "wallRadius": 11.5,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 10,
+          "angleRad": 1.309,
+          "isGateBearing": true,
+          "endDist": 12.74,
+          "wallRadius": 11.5,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 11,
+          "angleRad": 1.44,
+          "isGateBearing": false,
+          "endDist": 12.74,
+          "wallRadius": 11.5,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 12,
+          "angleRad": 1.571,
+          "isGateBearing": false,
+          "endDist": 12.74,
+          "wallRadius": 11.5,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 13,
+          "angleRad": 1.702,
+          "isGateBearing": false,
+          "endDist": 12.74,
+          "wallRadius": 11.5,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 14,
+          "angleRad": 1.833,
+          "isGateBearing": false,
+          "endDist": 12.74,
+          "wallRadius": 11.5,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 15,
+          "angleRad": 1.963,
+          "isGateBearing": false,
+          "endDist": 12.74,
+          "wallRadius": 11.5,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 16,
+          "angleRad": 2.094,
+          "isGateBearing": false,
+          "endDist": 12.74,
+          "wallRadius": 11.5,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 17,
+          "angleRad": 2.225,
+          "isGateBearing": false,
+          "endDist": 12.74,
+          "wallRadius": 11.5,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 18,
+          "angleRad": 2.356,
+          "isGateBearing": false,
+          "endDist": 12.74,
+          "wallRadius": 11.5,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 19,
+          "angleRad": 2.487,
+          "isGateBearing": false,
+          "endDist": 12.75,
+          "wallRadius": 11.5,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 20,
+          "angleRad": 2.618,
+          "isGateBearing": false,
+          "endDist": 12.74,
+          "wallRadius": 11.5,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 21,
+          "angleRad": 2.749,
+          "isGateBearing": false,
+          "endDist": 12.74,
+          "wallRadius": 11.5,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 22,
+          "angleRad": 2.88,
+          "isGateBearing": false,
+          "endDist": 12.74,
+          "wallRadius": 11.5,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 23,
+          "angleRad": 3.011,
+          "isGateBearing": false,
+          "endDist": 12.74,
+          "wallRadius": 11.5,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 24,
+          "angleRad": 3.142,
+          "isGateBearing": false,
+          "endDist": 12.74,
+          "wallRadius": 11.5,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 25,
+          "angleRad": 3.272,
+          "isGateBearing": false,
+          "endDist": 12.74,
+          "wallRadius": 11.5,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 26,
+          "angleRad": 3.403,
+          "isGateBearing": false,
+          "endDist": 18.18,
+          "wallRadius": 11.5,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 27,
+          "angleRad": 3.534,
+          "isGateBearing": false,
+          "endDist": 18.63,
+          "wallRadius": 11.5,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 28,
+          "angleRad": 3.665,
+          "isGateBearing": false,
+          "endDist": 18.68,
+          "wallRadius": 11.5,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 29,
+          "angleRad": 3.796,
+          "isGateBearing": false,
+          "endDist": 12.74,
+          "wallRadius": 11.5,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 30,
+          "angleRad": 3.927,
+          "isGateBearing": false,
+          "endDist": 12.75,
+          "wallRadius": 11.5,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 31,
+          "angleRad": 4.058,
+          "isGateBearing": false,
+          "endDist": 12.74,
+          "wallRadius": 11.5,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 32,
+          "angleRad": 4.189,
+          "isGateBearing": false,
+          "endDist": 12.74,
+          "wallRadius": 11.5,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 33,
+          "angleRad": 4.32,
+          "isGateBearing": false,
+          "endDist": 12.74,
+          "wallRadius": 11.5,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 34,
+          "angleRad": 4.451,
+          "isGateBearing": false,
+          "endDist": 12.74,
+          "wallRadius": 11.5,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 35,
+          "angleRad": 4.581,
+          "isGateBearing": false,
+          "endDist": 12.74,
+          "wallRadius": 11.5,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 36,
+          "angleRad": 4.712,
+          "isGateBearing": false,
+          "endDist": 12.74,
+          "wallRadius": 11.5,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 37,
+          "angleRad": 4.843,
+          "isGateBearing": false,
+          "endDist": 12.74,
+          "wallRadius": 11.5,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 38,
+          "angleRad": 4.974,
+          "isGateBearing": false,
+          "endDist": 12.74,
+          "wallRadius": 11.5,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 39,
+          "angleRad": 5.105,
+          "isGateBearing": false,
+          "endDist": 12.74,
+          "wallRadius": 11.5,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 40,
+          "angleRad": 5.236,
+          "isGateBearing": false,
+          "endDist": 12.74,
+          "wallRadius": 11.5,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 41,
+          "angleRad": 5.367,
+          "isGateBearing": false,
+          "endDist": 12.74,
+          "wallRadius": 11.5,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 42,
+          "angleRad": 5.498,
+          "isGateBearing": false,
+          "endDist": 12.74,
+          "wallRadius": 11.5,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 43,
+          "angleRad": 5.629,
+          "isGateBearing": false,
+          "endDist": 12.74,
+          "wallRadius": 11.5,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 44,
+          "angleRad": 5.76,
+          "isGateBearing": false,
+          "endDist": 12.74,
+          "wallRadius": 11.5,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 45,
+          "angleRad": 5.89,
+          "isGateBearing": false,
+          "endDist": 12.74,
+          "wallRadius": 11.5,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 46,
+          "angleRad": 6.021,
+          "isGateBearing": false,
+          "endDist": 12.74,
+          "wallRadius": 11.5,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 47,
+          "angleRad": 6.152,
+          "isGateBearing": false,
+          "endDist": 12.74,
+          "wallRadius": 11.5,
+          "stoppedOutside": true
+        }
+      ]
+    },
+    "mast": {
+      "place": "mast",
+      "ringRadius": 18,
+      "testedBearings": 48,
+      "breachCount": 0,
+      "breaches": [],
+      "bearings": [
+        {
+          "idx": 0,
+          "angleRad": 0,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 1,
+          "angleRad": 0.131,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 2,
+          "angleRad": 0.262,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 3,
+          "angleRad": 0.393,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 4,
+          "angleRad": 0.524,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 5,
+          "angleRad": 0.654,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 6,
+          "angleRad": 0.785,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 7,
+          "angleRad": 0.916,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 8,
+          "angleRad": 1.047,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 9,
+          "angleRad": 1.178,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 10,
+          "angleRad": 1.309,
+          "isGateBearing": true,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 11,
+          "angleRad": 1.44,
+          "isGateBearing": true,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 12,
+          "angleRad": 1.571,
+          "isGateBearing": true,
+          "endDist": 18.8,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 13,
+          "angleRad": 1.702,
+          "isGateBearing": true,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 14,
+          "angleRad": 1.833,
+          "isGateBearing": true,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 15,
+          "angleRad": 1.963,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 16,
+          "angleRad": 2.094,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 17,
+          "angleRad": 2.225,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 18,
+          "angleRad": 2.356,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 19,
+          "angleRad": 2.487,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 20,
+          "angleRad": 2.618,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 21,
+          "angleRad": 2.749,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 22,
+          "angleRad": 2.88,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 23,
+          "angleRad": 3.011,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 24,
+          "angleRad": 3.142,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 25,
+          "angleRad": 3.272,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 26,
+          "angleRad": 3.403,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 27,
+          "angleRad": 3.534,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 28,
+          "angleRad": 3.665,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 29,
+          "angleRad": 3.796,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 30,
+          "angleRad": 3.927,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 31,
+          "angleRad": 4.058,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 32,
+          "angleRad": 4.189,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 33,
+          "angleRad": 4.32,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 34,
+          "angleRad": 4.451,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 35,
+          "angleRad": 4.581,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 36,
+          "angleRad": 4.712,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 37,
+          "angleRad": 4.843,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 38,
+          "angleRad": 4.974,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 39,
+          "angleRad": 5.105,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 40,
+          "angleRad": 5.236,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 41,
+          "angleRad": 5.367,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 42,
+          "angleRad": 5.498,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 43,
+          "angleRad": 5.629,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 44,
+          "angleRad": 5.76,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 45,
+          "angleRad": 5.89,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 46,
+          "angleRad": 6.021,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 47,
+          "angleRad": 6.152,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        }
+      ]
+    },
+    "hikers": {
+      "place": "hikers",
+      "ringRadius": 18,
+      "testedBearings": 48,
+      "breachCount": 0,
+      "breaches": [],
+      "bearings": [
+        {
+          "idx": 0,
+          "angleRad": 0,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 1,
+          "angleRad": 0.131,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 2,
+          "angleRad": 0.262,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 3,
+          "angleRad": 0.393,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 4,
+          "angleRad": 0.524,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 5,
+          "angleRad": 0.654,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 6,
+          "angleRad": 0.785,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 7,
+          "angleRad": 0.916,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 8,
+          "angleRad": 1.047,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 9,
+          "angleRad": 1.178,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 10,
+          "angleRad": 1.309,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 11,
+          "angleRad": 1.44,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 12,
+          "angleRad": 1.571,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 13,
+          "angleRad": 1.702,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 14,
+          "angleRad": 1.833,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 15,
+          "angleRad": 1.963,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 16,
+          "angleRad": 2.094,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 17,
+          "angleRad": 2.225,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 18,
+          "angleRad": 2.356,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 19,
+          "angleRad": 2.487,
+          "isGateBearing": true,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 20,
+          "angleRad": 2.618,
+          "isGateBearing": true,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 21,
+          "angleRad": 2.749,
+          "isGateBearing": true,
+          "endDist": 18.81,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 22,
+          "angleRad": 2.88,
+          "isGateBearing": true,
+          "endDist": 18.85,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 23,
+          "angleRad": 3.011,
+          "isGateBearing": true,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 24,
+          "angleRad": 3.142,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 25,
+          "angleRad": 3.272,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 26,
+          "angleRad": 3.403,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 27,
+          "angleRad": 3.534,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 28,
+          "angleRad": 3.665,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 29,
+          "angleRad": 3.796,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 30,
+          "angleRad": 3.927,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 31,
+          "angleRad": 4.058,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 32,
+          "angleRad": 4.189,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 33,
+          "angleRad": 4.32,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 34,
+          "angleRad": 4.451,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 35,
+          "angleRad": 4.581,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 36,
+          "angleRad": 4.712,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 37,
+          "angleRad": 4.843,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 38,
+          "angleRad": 4.974,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 39,
+          "angleRad": 5.105,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 40,
+          "angleRad": 5.236,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 41,
+          "angleRad": 5.367,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 42,
+          "angleRad": 5.498,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 43,
+          "angleRad": 5.629,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 44,
+          "angleRad": 5.76,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 45,
+          "angleRad": 5.89,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 46,
+          "angleRad": 6.021,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 47,
+          "angleRad": 6.152,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        }
+      ]
+    },
+    "rangers": {
+      "place": "rangers",
+      "ringRadius": 18,
+      "testedBearings": 48,
+      "breachCount": 0,
+      "breaches": [],
+      "bearings": [
+        {
+          "idx": 0,
+          "angleRad": 0,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 1,
+          "angleRad": 0.131,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 2,
+          "angleRad": 0.262,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 3,
+          "angleRad": 0.393,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 4,
+          "angleRad": 0.524,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 5,
+          "angleRad": 0.654,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 6,
+          "angleRad": 0.785,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 7,
+          "angleRad": 0.916,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 8,
+          "angleRad": 1.047,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 9,
+          "angleRad": 1.178,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 10,
+          "angleRad": 1.309,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 11,
+          "angleRad": 1.44,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 12,
+          "angleRad": 1.571,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 13,
+          "angleRad": 1.702,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 14,
+          "angleRad": 1.833,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 15,
+          "angleRad": 1.963,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 16,
+          "angleRad": 2.094,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 17,
+          "angleRad": 2.225,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 18,
+          "angleRad": 2.356,
+          "isGateBearing": true,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 19,
+          "angleRad": 2.487,
+          "isGateBearing": true,
+          "endDist": 18.84,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 20,
+          "angleRad": 2.618,
+          "isGateBearing": true,
+          "endDist": 18.81,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 21,
+          "angleRad": 2.749,
+          "isGateBearing": true,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 22,
+          "angleRad": 2.88,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 23,
+          "angleRad": 3.011,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 24,
+          "angleRad": 3.142,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 25,
+          "angleRad": 3.272,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 26,
+          "angleRad": 3.403,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 27,
+          "angleRad": 3.534,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 28,
+          "angleRad": 3.665,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 29,
+          "angleRad": 3.796,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 30,
+          "angleRad": 3.927,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 31,
+          "angleRad": 4.058,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 32,
+          "angleRad": 4.189,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 33,
+          "angleRad": 4.32,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 34,
+          "angleRad": 4.451,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 35,
+          "angleRad": 4.581,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 36,
+          "angleRad": 4.712,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 37,
+          "angleRad": 4.843,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 38,
+          "angleRad": 4.974,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 39,
+          "angleRad": 5.105,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 40,
+          "angleRad": 5.236,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 41,
+          "angleRad": 5.367,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 42,
+          "angleRad": 5.498,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 43,
+          "angleRad": 5.629,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 44,
+          "angleRad": 5.76,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 45,
+          "angleRad": 5.89,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 46,
+          "angleRad": 6.021,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        },
+        {
+          "idx": 47,
+          "angleRad": 6.152,
+          "isGateBearing": false,
+          "endDist": 19.25,
+          "wallRadius": 18,
+          "stoppedOutside": true
+        }
+      ]
+    }
+  },
+  "nightDeadWatch": {
+    "depot": {
+      "place": "depot",
+      "ringRadius": 11.5,
+      "secondsObserved": 60,
+      "breachIncidents": 52,
+      "maxZombiesInside": 6,
+      "containmentPass": false,
+      "samplesCount": 60
+    },
+    "hikers": {
+      "place": "hikers",
+      "ringRadius": 18,
+      "secondsObserved": 60,
+      "breachIncidents": 41,
+      "maxZombiesInside": 6,
+      "containmentPass": false,
+      "samplesCount": 60
+    }
+  }
+}

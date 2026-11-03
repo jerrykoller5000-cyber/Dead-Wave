@@ -1,0 +1,58 @@
+{
+  "backend": "WebGPU",
+  "samples": [
+    {
+      "yaw": 0.25,
+      "weapon": "revolver",
+      "first": true,
+      "active": true,
+      "key": "revolver",
+      "raise": 1,
+      "muzzle": {
+        "x": 0.11567159998654773,
+        "y": -0.006203668712215826,
+        "d": 0.7762498656515235
+      }
+    },
+    {
+      "yaw": 0.4,
+      "weapon": "revolver",
+      "first": true,
+      "active": true,
+      "key": "revolver",
+      "raise": 1,
+      "muzzle": {
+        "x": 0.06445520732159737,
+        "y": -0.014948624837021555,
+        "d": 0.7606006412072267
+      }
+    },
+    {
+      "yaw": 0.55,
+      "weapon": "revolver",
+      "first": true,
+      "active": true,
+      "key": "revolver",
+      "raise": 1,
+      "muzzle": {
+        "x": 0.015043064436632345,
+        "y": -0.00893052529747346,
+        "d": 0.7376657743023076
+      }
+    },
+    {
+      "yaw": 0.7,
+      "weapon": "revolver",
+      "first": true,
+      "active": true,
+      "key": "revolver",
+      "raise": 1,
+      "muzzle": {
+        "x": -0.03260571229676732,
+        "y": -0.010155988391378705,
+        "d": 0.709751041727241
+      }
+    }
+  ],
+  "errors": []
+}

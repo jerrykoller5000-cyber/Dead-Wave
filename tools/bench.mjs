@@ -646,8 +646,25 @@ try {
       if (!fight.alive) throw new Error('training fight spawned nobody');
       await page.evaluate('new Promise(r => setTimeout(r, 2000))');
     }
+  } else if (SCENARIO === 'woods') {
+    await startMatch(page);
+    const seat = await page.evaluate(`(() => {
+      TT.setWorldTime(0.5);
+      const spots = [[110, 20], [110, -30], [-110, 20], [90, 80], [-90, -40]];
+      let pick = spots[0];
+      for (const s of spots) {
+        if (Math.hypot(s[0], s[1]) < 75) continue;
+        if (TT.waterDepthAt(s[0], s[1]) > 0.2) continue;
+        pick = s; break;
+      }
+      const y = TT.sampleHeight(pick[0], pick[1]);
+      TT.player.position.set(pick[0], y, pick[1]);
+      if (TT.setViewFirstDbg) TT.setViewFirstDbg(true);
+      return { x: pick[0], z: pick[1], y, time: TT.getWorldTime(), wet: TT.waterDepthAt(pick[0], pick[1]) };
+    })()`);
+    console.log('bench: noon woods ' + JSON.stringify(seat));
   } else {
-    throw new Error('unknown scenario ' + SCENARIO + ' (megaswarm, day5, build, night, training)');
+    throw new Error('unknown scenario ' + SCENARIO + ' (megaswarm, day5, build, night, training, woods)');
   }
 
   if (FP) {

@@ -14,7 +14,7 @@ export function tickScreamerShield(z,dt){
  z._sonicScreaming=singing;z.sonicHitT=Math.max(0,(z.sonicHitT||0)-dt);
 }
 export function restoreScreamerPose(z){const s=poses.get(z);if(s?.saved){for(const [o,k,v]of s.saved)o[k]=v;s.saved=null;}}
-export function resetScreamer(z){if(z.typeKey!=='screamer')return;restoreScreamerPose(z);poses.delete(z);turns.delete(z);delete z.sonicOpenT;delete z._sonicScreaming;delete z.sonicHitT;
+export function resetScreamer(z){if(z.typeKey!=='screamer')return;restoreScreamerPose(z);poses.delete(z);turns.delete(z);z.sonicOpenT=undefined;z._sonicScreaming=undefined;z.sonicHitT=undefined;
  for(const l of [z.mesh.userData.legLG,z.mesh.userData.legRG])l?.userData.shamblerAnkle?.rotation.set(0,0,0);
  z.mesh.userData.screamerFx?.hide();}
 export function screamerState(z){const p=poses.get(z),s=turns.get(z);return {open:z.sonicOpenT||0,shield:screamerProtected(z),phase:p?.phase,weight:p?.weight,exposure:p?.exposure,hover:p?.hover,rate:s?.rate,mode:s?.mode,evadeSide:s?.evadeSide};}

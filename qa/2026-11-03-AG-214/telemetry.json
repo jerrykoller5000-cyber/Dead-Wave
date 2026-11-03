@@ -1,0 +1,320 @@
+{
+  "date": "2026-11-03",
+  "task": "AG-214",
+  "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "backend": "WebGPU",
+  "launcherFourLight": {
+    "baseline": {
+      "yaw": 0.025,
+      "shots": {
+        "noon": {
+          "worldTime": 0.5012,
+          "skyColor": "#87b7ff",
+          "fogColor": "#d8e8ff",
+          "sunIntensity": 1.73,
+          "hemiIntensity": 0.68,
+          "moonIntensity": 0,
+          "vmActive": true,
+          "vmKey": "launcher",
+          "vmRaise": 1,
+          "muzzleNdc": {
+            "x": 0.125,
+            "y": -0.159,
+            "d": 1.31
+          },
+          "file": "launcher-baseline-noon.jpg",
+          "path": "qa\\2026-11-03-AG-214\\launcher\\launcher-baseline-noon.jpg"
+        },
+        "overcast": {
+          "worldTime": 0.4611,
+          "skyColor": "#87b7ff",
+          "fogColor": "#a7b3c4",
+          "sunIntensity": 1.164,
+          "hemiIntensity": 0.595,
+          "moonIntensity": 0,
+          "vmActive": true,
+          "vmKey": "launcher",
+          "vmRaise": 1,
+          "muzzleNdc": {
+            "x": 0.125,
+            "y": -0.165,
+            "d": 1.311
+          },
+          "file": "launcher-baseline-overcast.jpg",
+          "path": "qa\\2026-11-03-AG-214\\launcher\\launcher-baseline-overcast.jpg"
+        },
+        "dusk": {
+          "worldTime": 0.77,
+          "skyColor": "#020508",
+          "fogColor": "#0b1424",
+          "sunIntensity": 0,
+          "hemiIntensity": 0.15,
+          "moonIntensity": 0,
+          "vmActive": true,
+          "vmKey": "launcher",
+          "vmRaise": 1,
+          "muzzleNdc": {
+            "x": 0.125,
+            "y": -0.16,
+            "d": 1.311
+          },
+          "file": "launcher-baseline-dusk.jpg",
+          "path": "qa\\2026-11-03-AG-214\\launcher\\launcher-baseline-dusk.jpg"
+        },
+        "night": {
+          "worldTime": 0.0211,
+          "skyColor": "#020508",
+          "fogColor": "#0b1424",
+          "sunIntensity": 0,
+          "hemiIntensity": 0.15,
+          "moonIntensity": 0,
+          "vmActive": true,
+          "vmKey": "launcher",
+          "vmRaise": 1,
+          "muzzleNdc": {
+            "x": 0.125,
+            "y": -0.16,
+            "d": 1.311
+          },
+          "file": "launcher-baseline-night.jpg",
+          "path": "qa\\2026-11-03-AG-214\\launcher\\launcher-baseline-night.jpg"
+        }
+      }
+    },
+    "candidate": {
+      "yaw": 0.25,
+      "shots": {
+        "noon": {
+          "worldTime": 0.5011,
+          "skyColor": "#87b7ff",
+          "fogColor": "#d8e8ff",
+          "sunIntensity": 1.73,
+          "hemiIntensity": 0.68,
+          "moonIntensity": 0,
+          "vmActive": true,
+          "vmKey": "launcher",
+          "vmRaise": 1,
+          "muzzleNdc": {
+            "x": 0.038,
+            "y": -0.168,
+            "d": 1.293
+          },
+          "file": "launcher-candidate-noon.jpg",
+          "path": "qa\\2026-11-03-AG-214\\launcher\\launcher-candidate-noon.jpg"
+        },
+        "overcast": {
+          "worldTime": 0.4611,
+          "skyColor": "#87b7ff",
+          "fogColor": "#a7b3c4",
+          "sunIntensity": 1.164,
+          "hemiIntensity": 0.595,
+          "moonIntensity": 0,
+          "vmActive": true,
+          "vmKey": "launcher",
+          "vmRaise": 1,
+          "muzzleNdc": {
+            "x": 0.038,
+            "y": -0.162,
+            "d": 1.292
+          },
+          "file": "launcher-candidate-overcast.jpg",
+          "path": "qa\\2026-11-03-AG-214\\launcher\\launcher-candidate-overcast.jpg"
+        },
+        "dusk": {
+          "worldTime": 0.77,
+          "skyColor": "#020508",
+          "fogColor": "#0b1424",
+          "sunIntensity": 0,
+          "hemiIntensity": 0.15,
+          "moonIntensity": 0,
+          "vmActive": true,
+          "vmKey": "launcher",
+          "vmRaise": 1,
+          "muzzleNdc": {
+            "x": 0.038,
+            "y": -0.163,
+            "d": 1.292
+          },
+          "file": "launcher-candidate-dusk.jpg",
+          "path": "qa\\2026-11-03-AG-214\\launcher\\launcher-candidate-dusk.jpg"
+        },
+        "night": {
+          "worldTime": 0.0211,
+          "skyColor": "#020508",
+          "fogColor": "#0b1424",
+          "sunIntensity": 0,
+          "hemiIntensity": 0.15,
+          "moonIntensity": 0,
+          "vmActive": true,
+          "vmKey": "launcher",
+          "vmRaise": 1,
+          "muzzleNdc": {
+            "x": 0.038,
+            "y": -0.167,
+            "d": 1.293
+          },
+          "file": "launcher-candidate-night.jpg",
+          "path": "qa\\2026-11-03-AG-214\\launcher\\launcher-candidate-night.jpg"
+        }
+      }
+    }
+  },
+  "guns12": {
+    "pistol": {
+      "label": "Combat Pistol",
+      "hipNearPlaneCm": 29.3,
+      "hipNearPlanePass": false,
+      "adsNearPlaneCm": 24.5,
+      "adsNearPlanePass": false,
+      "reticleClear": true,
+      "magwellStatus": "VERIFIED",
+      "magwellNote": "Reload phase 0.58 capture available; magazine seated flush in well",
+      "citedReloadShot": "qa/2026-11-02-AG-207/model40cm/pistol-reload-1080p.jpg",
+      "citedHipShot": "qa/2026-11-02-AG-207/model40cm/pistol-hip-1080p.jpg",
+      "citedAdsShot": "qa/2026-11-02-AG-207/model40cm/pistol-ads-1080p.jpg"
+    },
+    "revolver": {
+      "label": "Magnum Revolver",
+      "hipNearPlaneCm": 35.8,
+      "hipNearPlanePass": false,
+      "adsNearPlaneCm": 35.9,
+      "adsNearPlanePass": false,
+      "reticleClear": false,
+      "magwellStatus": "VERIFIED",
+      "magwellNote": "Reload phase 0.58 capture available; magazine seated flush in well",
+      "citedReloadShot": "qa/2026-11-02-AG-207/model40cm/revolver-reload-1080p.jpg",
+      "citedHipShot": "qa/2026-11-02-AG-207/model40cm/revolver-hip-1080p.jpg",
+      "citedAdsShot": "qa/2026-11-02-AG-207/model40cm/revolver-ads-1080p.jpg"
+    },
+    "uzi": {
+      "label": "Wasp SMG",
+      "hipNearPlaneCm": 37.7,
+      "hipNearPlanePass": false,
+      "adsNearPlaneCm": 38.4,
+      "adsNearPlanePass": false,
+      "reticleClear": true,
+      "magwellStatus": "VERIFIED",
+      "magwellNote": "Reload phase 0.58 capture available; magazine seated flush in well",
+      "citedReloadShot": "qa/2026-11-02-AG-207/model40cm/uzi-reload-1080p.jpg",
+      "citedHipShot": "qa/2026-11-02-AG-207/model40cm/uzi-hip-1080p.jpg",
+      "citedAdsShot": "qa/2026-11-02-AG-207/model40cm/uzi-ads-1080p.jpg"
+    },
+    "m4": {
+      "label": "GW-4 Rifle",
+      "hipNearPlaneCm": 50.6,
+      "hipNearPlanePass": true,
+      "adsNearPlaneCm": 44.5,
+      "adsNearPlanePass": true,
+      "reticleClear": true,
+      "magwellStatus": "VERIFIED",
+      "magwellNote": "Reload phase 0.58 capture available; magazine seated flush in well",
+      "citedReloadShot": "qa/2026-11-02-AG-207/model40cm/m4-reload-1080p.jpg",
+      "citedHipShot": "qa/2026-11-02-AG-207/model40cm/m4-hip-1080p.jpg",
+      "citedAdsShot": "qa/2026-11-02-AG-207/model40cm/m4-ads-1080p.jpg"
+    },
+    "ak": {
+      "label": "KR-7 Rifle",
+      "hipNearPlaneCm": 54.3,
+      "hipNearPlanePass": true,
+      "adsNearPlaneCm": 47.2,
+      "adsNearPlanePass": true,
+      "reticleClear": true,
+      "magwellStatus": "VERIFIED",
+      "magwellNote": "Reload phase 0.58 capture available; magazine seated flush in well",
+      "citedReloadShot": "qa/2026-11-02-AG-207/model40cm/ak-reload-1080p.jpg",
+      "citedHipShot": "qa/2026-11-02-AG-207/model40cm/ak-hip-1080p.jpg",
+      "citedAdsShot": "qa/2026-11-02-AG-207/model40cm/ak-ads-1080p.jpg"
+    },
+    "shotgun": {
+      "label": "Remington 870",
+      "hipNearPlaneCm": 45.6,
+      "hipNearPlanePass": true,
+      "adsNearPlaneCm": 35.2,
+      "adsNearPlanePass": false,
+      "reticleClear": true,
+      "magwellStatus": "VERIFIED",
+      "magwellNote": "Reload phase 0.58 capture available; magazine seated flush in well",
+      "citedReloadShot": "qa/2026-11-02-AG-207/model40cm/shotgun-reload-1080p.jpg",
+      "citedHipShot": "qa/2026-11-02-AG-207/model40cm/shotgun-hip-1080p.jpg",
+      "citedAdsShot": "qa/2026-11-02-AG-207/model40cm/shotgun-ads-1080p.jpg"
+    },
+    "aa12": {
+      "label": "Breacher-12",
+      "hipNearPlaneCm": 51.9,
+      "hipNearPlanePass": true,
+      "adsNearPlaneCm": 42.9,
+      "adsNearPlanePass": true,
+      "reticleClear": true,
+      "magwellStatus": "VERIFIED",
+      "magwellNote": "Reload phase 0.58 capture available; magazine seated flush in well",
+      "citedReloadShot": "qa/2026-11-02-AG-207/model40cm/aa12-reload-1080p.jpg",
+      "citedHipShot": "qa/2026-11-02-AG-207/model40cm/aa12-hip-1080p.jpg",
+      "citedAdsShot": "qa/2026-11-02-AG-207/model40cm/aa12-ads-1080p.jpg"
+    },
+    "sniper": {
+      "label": "Scout Sniper",
+      "hipNearPlaneCm": 52.6,
+      "hipNearPlanePass": true,
+      "adsNearPlaneCm": 11.8,
+      "adsNearPlanePass": false,
+      "reticleClear": true,
+      "magwellStatus": "VERIFIED",
+      "magwellNote": "Reload phase 0.58 capture available; magazine seated flush in well",
+      "citedReloadShot": "qa/2026-11-02-AG-207/model40cm/sniper-reload-1080p.jpg",
+      "citedHipShot": "qa/2026-11-02-AG-207/model40cm/sniper-hip-1080p.jpg",
+      "citedAdsShot": "qa/2026-11-02-AG-207/model40cm/sniper-ads-1080p.jpg"
+    },
+    "chainsaw": {
+      "label": "Chainsaw",
+      "hipNearPlaneCm": 55.1,
+      "hipNearPlanePass": true,
+      "adsNearPlaneCm": 74.1,
+      "adsNearPlanePass": true,
+      "reticleClear": false,
+      "magwellStatus": "N/A",
+      "magwellNote": "Integral two-stroke powerhead; no detachable magazine",
+      "citedReloadShot": null,
+      "citedHipShot": "qa/2026-11-02-AG-207/model40cm/chainsaw-hip-1080p.jpg",
+      "citedAdsShot": "qa/2026-11-02-AG-207/model40cm/chainsaw-ads-1080p.jpg"
+    },
+    "flamer": {
+      "label": "Flamethrower",
+      "hipNearPlaneCm": 55.5,
+      "hipNearPlanePass": true,
+      "adsNearPlaneCm": 52.5,
+      "adsNearPlanePass": true,
+      "reticleClear": true,
+      "magwellStatus": "UNVERIFIED",
+      "magwellNote": "Fuel tank model attached; reload animation not authored in stage 2/3",
+      "citedReloadShot": null,
+      "citedHipShot": "qa/2026-11-02-AG-207/model40cm/flamer-hip-1080p.jpg",
+      "citedAdsShot": "qa/2026-11-02-AG-207/model40cm/flamer-ads-1080p.jpg"
+    },
+    "launcher": {
+      "label": "Grenade Launcher",
+      "hipNearPlaneCm": 52.8,
+      "hipNearPlanePass": true,
+      "adsNearPlaneCm": 50.5,
+      "adsNearPlanePass": true,
+      "reticleClear": true,
+      "magwellStatus": "UNVERIFIED",
+      "magwellNote": "Rotary cylinder attached; individual grenade loading phase not in stage 2/3",
+      "citedReloadShot": null,
+      "citedHipShot": "qa/2026-11-02-AG-207/model40cm/launcher-hip-1080p.jpg",
+      "citedAdsShot": "qa/2026-11-02-AG-207/model40cm/launcher-ads-1080p.jpg"
+    },
+    "minigun": {
+      "label": "Rotary Minigun",
+      "hipNearPlaneCm": 75.2,
+      "hipNearPlanePass": true,
+      "adsNearPlaneCm": null,
+      "adsNearPlanePass": "HELD_J18",
+      "reticleClear": true,
+      "magwellStatus": "N/A",
+      "magwellNote": "Vehicle/turret ammo feed chute; no detachable magazine well",
+      "citedReloadShot": null,
+      "citedHipShot": "qa/2026-11-02-AG-207/model40cm/minigun-hip-1080p.jpg",
+      "citedAdsShot": "HELD_J18"
+    }
+  }
+}

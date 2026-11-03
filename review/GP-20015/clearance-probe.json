@@ -1,0 +1,249 @@
+{
+  "backend": "WebGPU",
+  "bridges": [
+    {
+      "x": 56.43388399379876,
+      "z": 72.84695436991102,
+      "yaw": 3.067653615931853,
+      "deckY": 4.554736711333276
+    },
+    {
+      "x": -46.84750222959626,
+      "z": 50.10166518026916,
+      "yaw": 2.5535900500422257,
+      "deckY": 0.689175186146715
+    }
+  ],
+  "bands": [
+    {
+      "kind": "hq-thicket",
+      "solids": 374,
+      "crossingGaps": [
+        "bridge-1",
+        "ford-3-0",
+        "ford-8-0"
+      ]
+    },
+    {
+      "kind": "quarter-ne",
+      "solids": 168,
+      "crossingGaps": []
+    },
+    {
+      "kind": "quarter-nw",
+      "solids": 146,
+      "crossingGaps": []
+    },
+    {
+      "kind": "quarter-sw",
+      "solids": 158,
+      "crossingGaps": []
+    },
+    {
+      "kind": "quarter-se",
+      "solids": 7,
+      "crossingGaps": []
+    },
+    {
+      "kind": "shortcut-deadfall",
+      "solids": 19,
+      "crossingGaps": []
+    },
+    {
+      "kind": "shortcut-deadfall",
+      "solids": 19,
+      "crossingGaps": []
+    },
+    {
+      "kind": "shortcut-deadfall",
+      "solids": 19,
+      "crossingGaps": []
+    },
+    {
+      "kind": "shortcut-deadfall",
+      "solids": 19,
+      "crossingGaps": []
+    },
+    {
+      "kind": "shortcut-deadfall",
+      "solids": 19,
+      "crossingGaps": []
+    },
+    {
+      "kind": "shortcut-thicket",
+      "solids": 6,
+      "crossingGaps": []
+    },
+    {
+      "kind": "shortcut-thicket",
+      "solids": 6,
+      "crossingGaps": []
+    },
+    {
+      "kind": "shortcut-thicket",
+      "solids": 14,
+      "crossingGaps": []
+    },
+    {
+      "kind": "shortcut-thicket",
+      "solids": 15,
+      "crossingGaps": []
+    },
+    {
+      "kind": "shortcut-thicket",
+      "solids": 9,
+      "crossingGaps": []
+    },
+    {
+      "kind": "shortcut-thicket",
+      "solids": 6,
+      "crossingGaps": []
+    },
+    {
+      "kind": "shortcut-thicket",
+      "solids": 15,
+      "crossingGaps": []
+    },
+    {
+      "kind": "shortcut-thicket",
+      "solids": 15,
+      "crossingGaps": []
+    }
+  ],
+  "results": [
+    {
+      "id": "bridge-0",
+      "pts": [
+        {
+          "x": 55.53264943051196,
+          "z": 85.01362097428287
+        },
+        {
+          "x": 57.33511855708556,
+          "z": 60.68028776553917
+        }
+      ],
+      "halfWidth": 1.5,
+      "samples": 150,
+      "blocked": 0,
+      "first": []
+    },
+    {
+      "id": "bridge-1",
+      "pts": [
+        {
+          "x": -53.61484462354405,
+          "z": 60.25267877119085
+        },
+        {
+          "x": -40.080159835648466,
+          "z": 39.950651589347466
+        }
+      ],
+      "halfWidth": 1.5,
+      "samples": 150,
+      "blocked": 0,
+      "first": []
+    },
+    {
+      "id": "ford-2-0",
+      "pts": [
+        {
+          "x": -59.124238026809664,
+          "z": -74.04466126402637
+        },
+        {
+          "x": -59.15709488576176,
+          "z": -74.03349428668378
+        },
+        {
+          "x": -62.52376013165484,
+          "z": -72.88927430583225
+        },
+        {
+          "x": -65.89042537754791,
+          "z": -71.74505432498071
+        },
+        {
+          "x": -69.257090623441,
+          "z": -70.60083434412917
+        },
+        {
+          "x": -72.62375586933408,
+          "z": -69.45661436327764
+        },
+        {
+          "x": -75.99042111522716,
+          "z": -68.3123943824261
+        },
+        {
+          "x": -79.35708636112024,
+          "z": -67.16817440157456
+        },
+        {
+          "x": -82.72375160701333,
+          "z": -66.02395442072303
+        },
+        {
+          "x": -83.25510795480933,
+          "z": -65.84336368606589
+        }
+      ],
+      "halfWidth": 1.5,
+      "samples": 204,
+      "blocked": 0,
+      "first": []
+    },
+    {
+      "id": "ford-3-0",
+      "pts": [
+        {
+          "x": -32.7862250554043,
+          "z": 49.074096036386614
+        },
+        {
+          "x": -39.997651390607984,
+          "z": 59.86808735240667
+        }
+      ],
+      "halfWidth": 1.5,
+      "samples": 81,
+      "blocked": 0,
+      "first": []
+    },
+    {
+      "id": "ford-8-0",
+      "pts": [
+        {
+          "x": -39.997651390607984,
+          "z": 59.86808735240667
+        },
+        {
+          "x": -32.77585322285932,
+          "z": 49.05857158044435
+        }
+      ],
+      "halfWidth": 1.5,
+      "samples": 84,
+      "blocked": 0,
+      "first": []
+    },
+    {
+      "id": "ford-9-0",
+      "pts": [
+        {
+          "x": -46.619161601992495,
+          "z": 53.55047872360534
+        },
+        {
+          "x": -47.07476192276643,
+          "z": 57.03558799038898
+        }
+      ],
+      "halfWidth": 1.5,
+      "samples": 27,
+      "blocked": 0,
+      "first": []
+    }
+  ]
+}

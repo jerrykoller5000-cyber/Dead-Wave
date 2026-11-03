@@ -1,0 +1,220 @@
+{
+  "revolver": {
+    "label": "Revolver",
+    "lights": {
+      "noon": {
+        "hipShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\revolver-noon-hip.jpg",
+        "adsShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\revolver-noon-ads.jpg",
+        "reloadShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\revolver-noon-reload.jpg"
+      },
+      "overcast": {
+        "hipShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\revolver-overcast-hip.jpg",
+        "adsShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\revolver-overcast-ads.jpg",
+        "reloadShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\revolver-overcast-reload.jpg"
+      },
+      "dusk": {
+        "hipShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\revolver-dusk-hip.jpg",
+        "adsShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\revolver-dusk-ads.jpg",
+        "reloadShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\revolver-dusk-reload.jpg"
+      },
+      "night": {
+        "hipShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\revolver-night-hip.jpg",
+        "adsShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\revolver-night-ads.jpg",
+        "reloadShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\revolver-night-reload.jpg"
+      }
+    },
+    "checks": {
+      "cylinderSwingsLeft": true,
+      "frontPostNdc": {
+        "x": 0.203,
+        "y": -0.006
+      },
+      "frontPostVisible": true
+    },
+    "scores": {
+      "hands": 4.8,
+      "placement": 4.6,
+      "reloads": 4.8,
+      "model40cm": 4.6,
+      "overall": 4.6
+    }
+  },
+  "chainsaw": {
+    "label": "Chainsaw",
+    "lights": {
+      "noon": {
+        "hipShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\chainsaw-noon-hip.jpg",
+        "adsShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\chainsaw-noon-ads.jpg",
+        "reloadShot": null
+      },
+      "overcast": {
+        "hipShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\chainsaw-overcast-hip.jpg",
+        "adsShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\chainsaw-overcast-ads.jpg",
+        "reloadShot": null
+      },
+      "dusk": {
+        "hipShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\chainsaw-dusk-hip.jpg",
+        "adsShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\chainsaw-dusk-ads.jpg",
+        "reloadShot": null
+      },
+      "night": {
+        "hipShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\chainsaw-night-hip.jpg",
+        "adsShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\chainsaw-night-ads.jpg",
+        "reloadShot": null
+      }
+    },
+    "checks": {
+      "barNdc": {
+        "x": 0,
+        "y": 0.111
+      },
+      "barCentered": true,
+      "barUp": true,
+      "teethCount": 22,
+      "teethMirrored": true,
+      "wristR": {
+        "x": 0.073,
+        "y": -0.884
+      },
+      "wristL": {
+        "x": -0.062,
+        "y": -0.216
+      }
+    },
+    "scores": {
+      "hands": 4.7,
+      "placement": 4.7,
+      "reloads": 5,
+      "model40cm": 4.6,
+      "overall": 4.6
+    }
+  },
+  "minigun": {
+    "label": "Minigun",
+    "lights": {
+      "noon": {
+        "hipShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\minigun-noon-hip.jpg",
+        "adsShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\minigun-noon-ads.jpg",
+        "reloadShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\minigun-noon-reload.jpg"
+      },
+      "overcast": {
+        "hipShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\minigun-overcast-hip.jpg",
+        "adsShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\minigun-overcast-ads.jpg",
+        "reloadShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\minigun-overcast-reload.jpg"
+      },
+      "dusk": {
+        "hipShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\minigun-dusk-hip.jpg",
+        "adsShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\minigun-dusk-ads.jpg",
+        "reloadShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\minigun-dusk-reload.jpg"
+      },
+      "night": {
+        "hipShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\minigun-night-hip.jpg",
+        "adsShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\minigun-night-ads.jpg",
+        "reloadShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\minigun-night-reload.jpg"
+      }
+    },
+    "checks": {
+      "supportWristPos": {
+        "x": 0.024,
+        "y": -0.593,
+        "z": -1.195
+      },
+      "supportWristNdc": {
+        "x": -0.02,
+        "y": -0.86
+      },
+      "muzzleNdc": {
+        "x": -0.05,
+        "y": -0.334
+      },
+      "palmBearingUnder": true,
+      "supportHandInsideHousing": false
+    },
+    "scores": {
+      "hands": 4.5,
+      "placement": 4.6,
+      "reloads": 4.5,
+      "model40cm": 4.6,
+      "overall": 4.6
+    }
+  },
+  "flamer": {
+    "label": "Flamer",
+    "lights": {
+      "noon": {
+        "hipShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\flamer-noon-hip.jpg",
+        "adsShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\flamer-noon-ads.jpg",
+        "reloadShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\flamer-noon-reload.jpg"
+      },
+      "overcast": {
+        "hipShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\flamer-overcast-hip.jpg",
+        "adsShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\flamer-overcast-ads.jpg",
+        "reloadShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\flamer-overcast-reload.jpg"
+      },
+      "dusk": {
+        "hipShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\flamer-dusk-hip.jpg",
+        "adsShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\flamer-dusk-ads.jpg",
+        "reloadShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\flamer-dusk-reload.jpg"
+      },
+      "night": {
+        "hipShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\flamer-night-hip.jpg",
+        "adsShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\flamer-night-ads.jpg",
+        "reloadShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\flamer-night-reload.jpg"
+      }
+    },
+    "checks": {
+      "nozzleNdc": {
+        "x": 0.133,
+        "y": -0.14
+      },
+      "nozzleLowRight": true
+    },
+    "scores": {
+      "hands": 4.6,
+      "placement": 4.6,
+      "reloads": 4.5,
+      "model40cm": 4.6,
+      "overall": 4.6
+    }
+  },
+  "launcher": {
+    "label": "Launcher",
+    "lights": {
+      "noon": {
+        "hipShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\launcher-noon-hip.jpg",
+        "adsShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\launcher-noon-ads.jpg",
+        "reloadShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\launcher-noon-reload.jpg"
+      },
+      "overcast": {
+        "hipShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\launcher-overcast-hip.jpg",
+        "adsShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\launcher-overcast-ads.jpg",
+        "reloadShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\launcher-overcast-reload.jpg"
+      },
+      "dusk": {
+        "hipShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\launcher-dusk-hip.jpg",
+        "adsShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\launcher-dusk-ads.jpg",
+        "reloadShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\launcher-dusk-reload.jpg"
+      },
+      "night": {
+        "hipShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\launcher-night-hip.jpg",
+        "adsShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\launcher-night-ads.jpg",
+        "reloadShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\gp20016\\launcher-night-reload.jpg"
+      }
+    },
+    "checks": {
+      "muzzleNdc": {
+        "x": 0.125,
+        "y": -0.162
+      },
+      "stockExcluded": true,
+      "sightAligned": true
+    },
+    "scores": {
+      "hands": 4.6,
+      "placement": 4.6,
+      "reloads": 4.5,
+      "model40cm": 4.6,
+      "overall": 4.6
+    }
+  }
+}

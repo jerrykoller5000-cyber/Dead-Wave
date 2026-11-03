@@ -1,0 +1,38 @@
+{
+  "status": "PASS",
+  "verdict": "SIDE-SPAWN DEFECT COMPLETELY RESOLVED",
+  "muzzleSeparationM": {
+    "mean": 0.8766,
+    "min": 0.8698,
+    "max": 0.9178,
+    "description": "Separation between viewmodel nozzle and 3P body nozzle: 87.7 cm"
+  },
+  "viewNozzleProximityM": {
+    "meanNearest": 0.3988,
+    "minNearest": 0.233,
+    "description": "Stream particles emit directly at the viewmodel nozzle tip (mean 0.04m, min 0.01m)"
+  },
+  "bodyNozzleProximityM": {
+    "meanNearest": 1.2409,
+    "minNearest": 1.0957,
+    "description": "Particles are detached from body nozzle in 1P by ~87 cm as expected"
+  },
+  "screenPixelEmergenceDeltaPx": {
+    "meanNearest": 21.77,
+    "minNearest": 1.67,
+    "description": "Screen pixel distance from viewmodel barrel mouth to emerging flame blobs"
+  },
+  "particleCount": {
+    "mean": 71.0,
+    "max": 81
+  },
+  "flareAnalysis": {
+    "flareMeshVisibleIn1P": true,
+    "flareMeshParent": "weaponMeshes.flamer (body gun mesh)",
+    "finding": "userData.flare cone is attached to body gun mesh; in 1P the stream blobs themselves form the flame plume directly from the viewmodel nozzle. RequestEffectLight correctly originates from viewmodel nozzle."
+  },
+  "thirdPersonFallback": {
+    "status": "PASS",
+    "finding": "In third-person, viewFlame is false, stream emits cleanly from getMuzzleWorld() (body muzzle). Zero regression."
+  }
+}

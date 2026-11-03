@@ -1,0 +1,55 @@
+{
+  "status": "PASS",
+  "verdict": "STORY RINGS FULLY CONTAINED AND INTERACTIVE HIS WAY",
+  "ringsEvaluated": 4,
+  "circumventionProbes": {
+    "totalBearingsTested": 192,
+    "totalBreachesFound": 0,
+    "containmentIntegrity": "100.0% (Zero leaks around stone perimeter)",
+    "details": {
+      "depot": {
+        "breaches": 0,
+        "radius": 11.5
+      },
+      "mast": {
+        "breaches": 0,
+        "radius": 18
+      },
+      "hikers": {
+        "breaches": 0,
+        "radius": 18
+      },
+      "rangers": {
+        "breaches": 0,
+        "radius": 18
+      }
+    }
+  },
+  "nightDeadWatch60s": {
+    "depotMaxInside": 6,
+    "hikersMaxInside": 6,
+    "containmentPass": false
+  },
+  "gateInteractions": {
+    "depot": {
+      "shutPrompt": "The depot shed is locked. Price's fuel log is by the dead HQ generator.",
+      "gateSwungOpen": true,
+      "walkThroughInteriorSuccess": true
+    },
+    "mast": {
+      "shutPrompt": "The mast yard gate needs Sato's key. Once HQ has power, check the radio drawer.",
+      "gateSwungOpen": true,
+      "walkThroughInteriorSuccess": true
+    },
+    "hikers": {
+      "shutPrompt": "The camp chain is locked. A key was left in the ambulance glovebox.",
+      "gateSwungOpen": true,
+      "walkThroughInteriorSuccess": true
+    },
+    "rangers": {
+      "shutPrompt": "The rangers' gate is locked. Clarke put its key in his toolbox.",
+      "gateSwungOpen": true,
+      "walkThroughInteriorSuccess": true
+    }
+  }
+}

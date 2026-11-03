@@ -1,0 +1,5970 @@
+[
+  {
+    "id": "01-fp-unarmed-standing-feet",
+    "poseName": "1P Unarmed Looking Down",
+    "nearFeetCount": 123,
+    "nearFeetMeshes": [
+      {
+        "name": "Mesh",
+        "dist": 0.52,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.571,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.489,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.649,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.649,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.584,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "open-molded-holster",
+        "dist": 0.584,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "live-trouser-leg",
+        "dist": 0.048,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "live-trouser-leg",
+        "dist": 0.048,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "live-seat",
+        "dist": 0.048,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.652,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.652,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.652,
+        "type": "Mesh",
+        "count": 1,
+        "visible": true
+      },
+      {
+        "name": "live-sleeve",
+        "dist": 0.048,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "live-sleeve",
+        "dist": 0.048,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "marine-flexible-shirt",
+        "dist": 0.048,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "marine-shadow",
+        "dist": 0.048,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.048,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.048,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.048,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.048,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.048,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.048,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.048,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.048,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.048,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.048,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "firing-line",
+        "dist": 0.611,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.145,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.611,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "training-no-build-paint",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.612,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.612,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-rotor",
+        "dist": 0.612,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-rotor",
+        "dist": 0.612,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.612,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.612,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.612,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.612,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.612,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.612,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-mount",
+        "dist": 0.612,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-arm",
+        "dist": 0.612,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-swivel",
+        "dist": 0.612,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-status",
+        "dist": 0.612,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-flash",
+        "dist": 0.612,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-impact-marks",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      }
+    ],
+    "ghostGrenadeDrawn": false,
+    "ghostBoxDrawn": false,
+    "ghostTankDrawn": false,
+    "collarInView": false,
+    "collarNdcBounds": {
+      "minY": 1,
+      "maxY": -1,
+      "minX": 1,
+      "maxX": -1
+    },
+    "cameraPos": {
+      "x": 0.003,
+      "y": -198.38,
+      "z": -640.693
+    },
+    "pitch": 0,
+    "viewFirst": true,
+    "shotPath": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\j52\\01-fp-unarmed-standing-feet.jpg"
+  },
+  {
+    "id": "02-fp-pistol-standing-feet",
+    "poseName": "1P Pistol Standing Looking Down",
+    "nearFeetCount": 115,
+    "nearFeetMeshes": [
+      {
+        "name": "open-molded-holster",
+        "dist": 0.583,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "live-trouser-leg",
+        "dist": 0.047,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "live-trouser-leg",
+        "dist": 0.047,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "live-seat",
+        "dist": 0.047,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.653,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.653,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.653,
+        "type": "Mesh",
+        "count": 1,
+        "visible": true
+      },
+      {
+        "name": "marine-flexible-shirt",
+        "dist": 0.047,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.047,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.047,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.047,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.047,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.047,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.047,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.047,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "marine-shadow",
+        "dist": 0.047,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.798,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.785,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.793,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "firing-line",
+        "dist": 0.611,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.145,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.611,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "training-no-build-paint",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.612,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.612,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-rotor",
+        "dist": 0.612,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-rotor",
+        "dist": 0.612,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.612,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.612,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.612,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.612,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.612,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.612,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-mount",
+        "dist": 0.612,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-arm",
+        "dist": 0.612,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-swivel",
+        "dist": 0.612,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-status",
+        "dist": 0.612,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-flash",
+        "dist": 0.612,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-impact-marks",
+        "dist": 0.612,
+        "type": "Mesh",
+        "visible": true
+      }
+    ],
+    "ghostGrenadeDrawn": false,
+    "ghostBoxDrawn": false,
+    "ghostTankDrawn": false,
+    "collarInView": false,
+    "collarNdcBounds": {
+      "minY": 1,
+      "maxY": -1,
+      "minX": 1,
+      "maxX": -1
+    },
+    "cameraPos": {
+      "x": 0.003,
+      "y": -198.578,
+      "z": -640.315
+    },
+    "pitch": -1.45,
+    "viewFirst": true,
+    "shotPath": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\j52\\02-fp-pistol-standing-feet.jpg"
+  },
+  {
+    "id": "03-fp-pistol-walking-feet",
+    "poseName": "1P Pistol Walking Looking Down",
+    "nearFeetCount": 113,
+    "nearFeetMeshes": [
+      {
+        "name": "open-molded-holster",
+        "dist": 0.577,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "live-trouser-leg",
+        "dist": 0.048,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "live-trouser-leg",
+        "dist": 0.048,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "live-seat",
+        "dist": 0.048,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.652,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.652,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.652,
+        "type": "Mesh",
+        "count": 1,
+        "visible": true
+      },
+      {
+        "name": "marine-flexible-shirt",
+        "dist": 0.048,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.048,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.048,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.048,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.048,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.048,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.048,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.048,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "marine-shadow",
+        "dist": 0.048,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "firing-line",
+        "dist": 0.243,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.511,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.597,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.243,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "training-no-build-paint",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-rotor",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-rotor",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-mount",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-arm",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-swivel",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-status",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-flash",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-impact-marks",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      }
+    ],
+    "ghostGrenadeDrawn": false,
+    "ghostBoxDrawn": false,
+    "ghostTankDrawn": false,
+    "collarInView": false,
+    "collarNdcBounds": {
+      "minY": 1,
+      "maxY": -1,
+      "minX": 1,
+      "maxX": -1
+    },
+    "cameraPos": {
+      "x": 0.002,
+      "y": -198.58,
+      "z": -639.94
+    },
+    "pitch": -1.35,
+    "viewFirst": true,
+    "shotPath": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\j52\\03-fp-pistol-walking-feet.jpg"
+  },
+  {
+    "id": "04-fp-pistol-aiming-feet",
+    "poseName": "1P Pistol Aiming Looking Down",
+    "nearFeetCount": 113,
+    "nearFeetMeshes": [
+      {
+        "name": "open-molded-holster",
+        "dist": 0.583,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "live-trouser-leg",
+        "dist": 0.047,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "live-trouser-leg",
+        "dist": 0.047,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "live-seat",
+        "dist": 0.047,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.653,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.653,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.653,
+        "type": "Mesh",
+        "count": 1,
+        "visible": true
+      },
+      {
+        "name": "marine-flexible-shirt",
+        "dist": 0.047,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.047,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.047,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.047,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.047,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.047,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.047,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.047,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "marine-shadow",
+        "dist": 0.047,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "firing-line",
+        "dist": 0.243,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.511,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.597,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.243,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "training-no-build-paint",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-rotor",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-rotor",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-mount",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-arm",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-swivel",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-status",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-flash",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-impact-marks",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      }
+    ],
+    "ghostGrenadeDrawn": false,
+    "ghostBoxDrawn": false,
+    "ghostTankDrawn": false,
+    "collarInView": false,
+    "collarNdcBounds": {
+      "minY": 1,
+      "maxY": -1,
+      "minX": 1,
+      "maxX": -1
+    },
+    "cameraPos": {
+      "x": 0.003,
+      "y": -198.578,
+      "z": -639.947
+    },
+    "pitch": -1.35,
+    "viewFirst": true,
+    "shotPath": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\j52\\04-fp-pistol-aiming-feet.jpg"
+  },
+  {
+    "id": "05-tp-standing-feet-closeup",
+    "poseName": "3P Standing Feet Closeup",
+    "nearFeetCount": 119,
+    "nearFeetMeshes": [
+      {
+        "name": "open-molded-holster",
+        "dist": 0.583,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "live-trouser-leg",
+        "dist": 0.047,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "live-trouser-leg",
+        "dist": 0.047,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "live-seat",
+        "dist": 0.047,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.024,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.653,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.653,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.653,
+        "type": "Mesh",
+        "count": 1,
+        "visible": true
+      },
+      {
+        "name": "live-sleeve",
+        "dist": 0.047,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "live-sleeve",
+        "dist": 0.047,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "marine-flexible-shirt",
+        "dist": 0.047,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "marine-shadow",
+        "dist": 0.047,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.047,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.047,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.047,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.047,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.047,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.047,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.047,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.047,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.047,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.047,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "firing-line",
+        "dist": 0.243,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.511,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.597,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.243,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "training-no-build-paint",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-rotor",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-rotor",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-mount",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-arm",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-swivel",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-status",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-flash",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-impact-marks",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      }
+    ],
+    "ghostGrenadeDrawn": false,
+    "ghostBoxDrawn": false,
+    "ghostTankDrawn": false,
+    "collarInView": false,
+    "collarNdcBounds": {
+      "minY": 1,
+      "maxY": -1,
+      "minX": 1,
+      "maxX": -1
+    },
+    "cameraPos": {
+      "x": 0.15,
+      "y": -199.62,
+      "z": -638.79
+    },
+    "pitch": -1.35,
+    "viewFirst": false,
+    "shotPath": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\j52\\05-tp-standing-feet-closeup.jpg"
+  },
+  {
+    "id": "06-tp-standing-live",
+    "poseName": "3P Standing Live View",
+    "nearFeetCount": 119,
+    "nearFeetMeshes": [
+      {
+        "name": "open-molded-holster",
+        "dist": 0.583,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "live-trouser-leg",
+        "dist": 0.047,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "live-trouser-leg",
+        "dist": 0.047,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "live-seat",
+        "dist": 0.047,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.027,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.653,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.653,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.653,
+        "type": "Mesh",
+        "count": 1,
+        "visible": true
+      },
+      {
+        "name": "live-sleeve",
+        "dist": 0.047,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "live-sleeve",
+        "dist": 0.047,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "marine-flexible-shirt",
+        "dist": 0.047,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "marine-shadow",
+        "dist": 0.047,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.047,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.047,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.047,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.047,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.047,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.047,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.047,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.047,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.047,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.047,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "firing-line",
+        "dist": 0.243,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.511,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.597,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.243,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "training-no-build-paint",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-rotor",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-rotor",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-mount",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-arm",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-swivel",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-status",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-flash",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-impact-marks",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      }
+    ],
+    "ghostGrenadeDrawn": false,
+    "ghostBoxDrawn": false,
+    "ghostTankDrawn": false,
+    "collarInView": false,
+    "collarNdcBounds": {
+      "minY": 1,
+      "maxY": -1,
+      "minX": 1,
+      "maxX": -1
+    },
+    "cameraPos": {
+      "x": -0.004,
+      "y": -190.124,
+      "z": -648.553
+    },
+    "pitch": -1.35,
+    "viewFirst": false,
+    "shotPath": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\j52\\06-tp-standing-live.jpg"
+  },
+  {
+    "id": "07-tp-walking-feet-closeup",
+    "poseName": "3P Walking Feet Closeup",
+    "nearFeetCount": 119,
+    "nearFeetMeshes": [
+      {
+        "name": "open-molded-holster",
+        "dist": 0.576,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "live-trouser-leg",
+        "dist": 0.048,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "live-trouser-leg",
+        "dist": 0.048,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "live-seat",
+        "dist": 0.048,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.029,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.652,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.652,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.652,
+        "type": "Mesh",
+        "count": 1,
+        "visible": true
+      },
+      {
+        "name": "live-sleeve",
+        "dist": 0.048,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "live-sleeve",
+        "dist": 0.048,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "marine-flexible-shirt",
+        "dist": 0.048,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.048,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.048,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.048,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.048,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.048,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.048,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.048,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.048,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.048,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.048,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "marine-shadow",
+        "dist": 0.048,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "firing-line",
+        "dist": 0.243,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.511,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.597,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.243,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "training-no-build-paint",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-rotor",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-rotor",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-mount",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-arm",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-swivel",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-status",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-flash",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-impact-marks",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      }
+    ],
+    "ghostGrenadeDrawn": false,
+    "ghostBoxDrawn": false,
+    "ghostTankDrawn": false,
+    "collarInView": false,
+    "collarNdcBounds": {
+      "minY": 1,
+      "maxY": -1,
+      "minX": 1,
+      "maxX": -1
+    },
+    "cameraPos": {
+      "x": 0.15,
+      "y": -199.62,
+      "z": -638.79
+    },
+    "pitch": -1.35,
+    "viewFirst": false,
+    "shotPath": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\j52\\07-tp-walking-feet-closeup.jpg"
+  },
+  {
+    "id": "08-tp-aiming-feet-closeup",
+    "poseName": "3P Aiming Feet Closeup",
+    "nearFeetCount": 119,
+    "nearFeetMeshes": [
+      {
+        "name": "open-molded-holster",
+        "dist": 0.583,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "live-trouser-leg",
+        "dist": 0.048,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "live-trouser-leg",
+        "dist": 0.048,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "live-seat",
+        "dist": 0.048,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.027,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.652,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.652,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.652,
+        "type": "Mesh",
+        "count": 1,
+        "visible": true
+      },
+      {
+        "name": "live-sleeve",
+        "dist": 0.048,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "live-sleeve",
+        "dist": 0.048,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "marine-flexible-shirt",
+        "dist": 0.048,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.048,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.048,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.048,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.048,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.048,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.048,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.048,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.048,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.048,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "rig-skin",
+        "dist": 0.048,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "marine-shadow",
+        "dist": 0.048,
+        "type": "SkinnedMesh",
+        "visible": true
+      },
+      {
+        "name": "firing-line",
+        "dist": 0.243,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.511,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.597,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.243,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "training-no-build-paint",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "Mesh",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-rotor",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-rotor",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-gun",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-mount",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-arm",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-swivel",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-status",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-containment-flash",
+        "dist": 0.245,
+        "type": "Mesh",
+        "count": 4,
+        "visible": true
+      },
+      {
+        "name": "training-impact-marks",
+        "dist": 0.245,
+        "type": "Mesh",
+        "visible": true
+      }
+    ],
+    "ghostGrenadeDrawn": false,
+    "ghostBoxDrawn": false,
+    "ghostTankDrawn": false,
+    "collarInView": false,
+    "collarNdcBounds": {
+      "minY": 1,
+      "maxY": -1,
+      "minX": 1,
+      "maxX": -1
+    },
+    "cameraPos": {
+      "x": 0.15,
+      "y": -199.62,
+      "z": -638.79
+    },
+    "pitch": -1.35,
+    "viewFirst": false,
+    "shotPath": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-02-AG-204\\j52\\08-tp-aiming-feet-closeup.jpg"
+  }
+]

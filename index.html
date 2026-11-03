@@ -1366,7 +1366,7 @@
     import { AudioSys } from './core/audio.js';
     import { makeNavField, buildNavField, markNavCircle, paintNavDisc, paintNavSegment, navDir, navIndex, startNavWorker, NAV_CLEAR } from './core/nav-field.js';   // CU-210
     import { createNightWarnings } from './game/night-warnings.js';
-    import { hqRingPoints, ringTrailGaps, ringWaterGaps, bandTrailGaps, bandWaterGaps,
+    import { hqRingPoints, ringTrailGaps, ringWaterGaps, bandTrailGaps, bandWaterGaps, crossingCorridors,
       bandWalkGap, makeWallBand, resolveWallBand } from './game/wall-bands.js';
     import { makeShortcutBand, nearestShortcut, setShortcutCut, stepShortcutCut, shortcutLogPieces } from './game/shortcut-bands.js';
     import { DWLoad, yieldToBrowser, whileHiddenFramesRun } from './core/loader.js';
@@ -1423,6 +1423,8 @@
     import { mountArmory } from './ui/armory.js';
     import { createLightPool } from './world/light-pool.js';   // CL-116
     import { bakeStatic, foldStatic } from './world/bake.js';   // CL-117; CL-218
+    import { buildStoneWallKit } from './world/stone-wall-kit.js';   // CU-232
+    import { createWallCull, wallSegmentsFromBand } from './game/wall-cull.js';   // GB-273: the walls' cull
     import { TRAINING, buildTrainingGround, clampToRects, segmentBox, propSolids, fallSign } from './world/training.js';   // CL-115, CL-158
     import { createZombieAbilityRuntime } from './game/zombie-ability-runtime.js';
     import { attachZombieAbilityVisuals, resetZombieAbilityVisuals, updateZombieAbilityVisuals } from './game/zombie-ability-visuals.js';
@@ -1492,6 +1494,7 @@
     import { vaultReward } from './game/relay-vault.js';   // CL-184: the vault's reward by the day
     import { createStoryChain, leadOf as storyLeadOf, leadForSite as storyLeadForSite } from './game/story-chain.js';   // CL-263
     import { createChainGates, gateOfLead, gateById, gateOfKey } from './game/chain-gates.js';   // CU-200
+    import { planStoryRings, storyRingAt, clipFenceToRing } from './game/story-gates.js';   // CL-296 (?gates=1)
     import { createUtilities } from './game/utilities.js';   // CU-201
     import { makeVaultModel, VAULT_SIZE } from './studio/relay-vault-model.js';   // CL-184
     import { makeKatanaModel, makeSheathedKatana } from './studio/katana.js';   // CL-184: the red katana
@@ -2251,7 +2254,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     let _cullUnitsN = 0;
     const _cullS = new THREE.Sphere(), _cullC = new THREE.Vector3();
     let cullFrame = 0, cullSkip = null, cullSkipAt = -1e9;
-    const cullStats = { hidden: 0, tested: 0, spheres: 0, ms: 0, on: urlParams.get('cull') !== '0' };
+    const cullStats = { hidden: 0, tested: 0, spheres: 0, ms: 0, wallMs: 0, on: urlParams.get('cull') !== '0' };
+    // GB-273 (docs/specs/sector-cull.md): set where the bands are built when they're stone; ?wallcull=0 leaves it off.
+    let wallCull = null; const _wcEye = new THREE.Vector3();
     function cullSkipSet() {
       if (cullFrame - cullSkipAt < 60 && cullSkip) return cullSkip;
       cullSkipAt = cullFrame;
@@ -2293,6 +2298,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       _cullM.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse);
       _cullFrustum.setFromProjectionMatrix(_cullM);
       const px = player.position.x, pz = player.position.z;
+      // GB-273: the walls' cull, its own PROF line (cull:walls). Its cells are filled as the spheres below are measured.
+      if (wallCull) { PROF.mark('r:cull'); const tw = performance.now(); _wcEye.setFromMatrixPosition(camera.matrixWorld); wallCull.update(_wcEye.x, _wcEye.y, _wcEye.z); cullStats.wallMs = performance.now() - tw; PROF.mark('cull:walls'); }
       const shadowR = sun.castShadow ? SHADOW_HALF + 10 : 0;   // (CL-211 tried 0 at night: no faster, worse lows)
       let spheres = 0, hidden = 0, tested = 0;
       // CL-277 (AG-151: night 20's 287 history props walked and frustum-tested every frame from anywhere): a group that
@@ -2352,13 +2359,18 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           _cullBox.getBoundingSphere(_cullS);
           c.r = _cullS.radius * 1.2 + 0.5;
           c.ox = _cullS.center.x - o.position.x; c.oy = _cullS.center.y - o.position.y; c.oz = _cullS.center.z - o.position.z;
+          // GB-273: a static draw (it hasn't moved since it was first measured, and is under 10 m across) joins its 8 m cell once.
+          if (wallCull) {
+            if (c.wc === undefined) { c.wc = c.r <= 10 && !ud.noWallCull ? wallCull.include(_cullS.center.x, _cullS.center.y, _cullS.center.z, c.r) : -2; c.wx = o.position.x; c.wy = o.position.y; c.wz = o.position.z; }
+            else if (c.wc >= 0 && (Math.abs(o.position.x - c.wx) + Math.abs(o.position.y - c.wy) + Math.abs(o.position.z - c.wz) > 0.1)) c.wc = -2;   // it moves: never the walls'
+          }
         }
         if (c.r < 0) continue;
         tested++;
         _cullS.center.set(o.position.x + c.ox, o.position.y + c.oy, o.position.z + c.oz); _cullS.radius = c.r;
         const dx = _cullS.center.x - px, dz = _cullS.center.z - pz, d = hypot(dx, dz);
         const tiny = c.r < 1 && d > 60 + c.r * 40;   // a rabbit, a bird, a bug: a few pixels at sixty metres
-        const out = tiny || (d > shadowR + c.r && !_cullFrustum.intersectsSphere(_cullS));
+        const out = tiny || (d > shadowR + c.r && !_cullFrustum.intersectsSphere(_cullS)) || (wallCull !== null && c.wc >= 0 && wallCull.isHidden(c.wc));   // GB-273
         if (out) { hidden++; if (!c.hidden) cullHide(o, c); }
         else if (c.hidden) cullShow(o, c);
       }
@@ -9176,7 +9188,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           const poster = toLocal(ix, iz); obstacles.push({x:poster.x,z:poster.z,r:2.65},{x:-4.8,z:7.5,r:3.5});
           for(const[x,z]of[[3.55,7],[3.9,11],[-3.45,12],[3.4,-4],[-3.4,-4]])obstacles.push({x,z,r:2.95});
           const clear = (x,z) => { const p=toWorld(x,z);return waterDepthAt(p.x,p.z)<.04&&!obstacles.some(o=>hypot(x-o.x,z-o.z)<o.r); };
-          const ends=PATHS.flatMap(line=>line.map(q=>toLocal(q.x,q.z))).filter(p=>p.z>10&&Math.abs(p.x)<50&&clear(p.x,p.z)).sort((a,b)=>hypot(a.x,a.z)-hypot(b.x,b.z));
+          const ends=PATHS.flatMap(line=>line.filter(q=>!storyRingAt(storyRings.rings,q.x,q.z)).map(q=>toLocal(q.x,q.z))).filter(p=>p.z>10&&Math.abs(p.x)<50&&clear(p.x,p.z)).sort((a,b)=>hypot(a.x,a.z)-hypot(b.x,b.z));
           if (!ends.length) throw new Error('Cordon approach has no clear existing trail join');
           const inside=planConvoyRoute({start:{x:0,z:2},end:{x:ends[0].x,z:ends[0].z},height,clear:(x,z)=>z>1&&hypot(toWorld(x,z).x,toWorld(x,z).z)<WALL_INNER_R-1&&clear(x,z)});
           inside.unshift({x:0,z:0});
@@ -17500,10 +17512,16 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // GP-20006 / CU-210: the HQ ring is on. The valley field routes the dead through
     // its trail gaps. ?walls=0 leaves the ring out.
     const WALLS_ON = urlParams.get('walls') !== '0';
+    const STONE_WALLS = WALLS_ON && urlParams.get('walls') !== 'hedge';   // CU-233: stone is the default; ?walls=hedge is the brush
     // GP-20008: Claude's approved quarter bands are on; ?quarterwalls=0
     // leaves them out for paired field and performance checks.
     const QUARTERS_ON = WALLS_ON && urlParams.get('quarterwalls') !== '0';
     const wallBands = [];
+    // GP-20015 / J68: real crossings keep a three-metre passage across the
+    // deck or ford and four metres onto each bank, independent of where a
+    // wall-band trail gap happens to terminate.
+    const crossingPaths = crossingCorridors(POI.bridges, PATHS,
+      (x, z) => waterDepthAt(x, z) > 0.05, BRIDGE_HALF_LEN, 4);
     const SHORTCUTS_ON = urlParams.get('shortcuts') !== '0';
     const shortcutBands = []; // Claude approved five W2 sites
     let shortcutVisualSync = () => {};
@@ -17530,9 +17548,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     });
     if (WALLS_ON) {
       const radius = 60, width = 4;
+      const pts = hqRingPoints(radius);
       const gaps = ringTrailGaps(PATHS, radius, width).concat(
+        bandTrailGaps(pts, crossingPaths, width),
         ringWaterGaps(radius, width, (x, z) => waterDepthAt(x, z) > 0.05));
-      const band = makeWallBand({ pts: hqRingPoints(radius), width, gaps, heightAt: sampleHeight });
+      const band = makeWallBand({ pts, width, gaps, heightAt: sampleHeight });
       band.kind = 'hq-thicket'; band.radius = radius;
       wallBands.push(band);
       for (const s of band.solids) addSolid(s.x, s.z, s.radius, s.y0, s.y1).wallBand = band;
@@ -17550,6 +17570,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       for (const [kind, coords, gapIndex] of routes) {
         const pts = coords.map(([x, z]) => ({ x, z }));
         const gaps = bandTrailGaps(pts, PATHS, width).concat(
+          bandTrailGaps(pts, crossingPaths, width),
           bandWaterGaps(pts, width, (x, z) => waterDepthAt(x, z) > 0.05));
         if (gapIndex != null) {
           let at = 0;
@@ -17591,16 +17612,39 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         ['mast-b', -128.1, 2.4, -125.2, -5.0],
       ];
       for (const [id, ax, az, bx, bz] of anchors) {
-        const band = makeWallBand({ pts: [{ x: ax, z: az }, { x: bx, z: bz }],
-          width: 2.5, spacing: 0.55, heightAt: sampleHeight, top: 1.8 });
+        const pts = [{ x: ax, z: az }, { x: bx, z: bz }];
+        const band = makeWallBand({ pts, width: 2.5, spacing: 0.55,
+          gaps: bandTrailGaps(pts, crossingPaths, 2.5), heightAt: sampleHeight, top: 1.8 });
         band.kind = 'shortcut-thicket'; band.id = id;
         wallBands.push(band);
         for (const s of band.solids) { s.kind = 'thicket'; s.wallBand = band; worldSolids.push(s); }
       }
     }
-    const inHQThicket = (x, z, pad = 0) => wallBands.some((band) =>
+    // CL-296 (D-111 order 3; docs/specs/story-gates.md). Jerry: "we are going to have to work on gating certain locations
+    // and making the player do something before accessing them." ?gates=1 rings each story place whose woods leave a way
+    // round its chain gate in the bands' stone, a gate where each of its own trails comes in, opened by that chain gate's
+    // key (game/story-gates.js plans them; rule 10). Off unless asked, and only while the chain gates are on.
+    const STORY_GATES_ON = WALLS_ON && urlParams.get('gates') === '1' &&
+      (urlParams.get('chaingates') === '1' || (urlParams.get('chaingates') !== '0' && urlParams.get('raf') !== 'timer'));
+    const storyRings = STORY_GATES_ON ? planStoryRings({ POI, PATHS,
+      sites: (() => { try { return window.objectiveSitesFrom ? window.objectiveSitesFrom(POI, null) : []; } catch (_) { return []; } })(),
+      bands: wallBands, solids: worldSolids, isWater: (x, z) => waterDepthAt(x, z) > 0.05 }) : { rings: [], skipped: [] };
+    for (const ring of storyRings.rings) {
+      const band = makeWallBand({ pts: ring.pts, width: ring.width, gaps: ring.gaps, heightAt: sampleHeight, top: 3.2 });
+      band.kind = 'story-ring'; band.id = ring.place; band.near = ring.near; ring.band = band;
+      wallBands.push(band);
+      for (const s of band.solids) addSolid(s.x, s.z, s.radius, s.y0, s.y1).wallBand = band;
+      for (const f of POI.fences) clipFenceToRing(f, ring);   // a camp's broken fence stops short of the wall
+    }
+    // GB-273 (docs/specs/sector-cull.md): the stone bands as occluders for sceneCull (not the hedge: it's under the eye).
+    if (STONE_WALLS && urlParams.get('wallcull') !== '0') {
+      const segs = [];
+      for (const b of wallBands) if (b.kind !== 'shortcut-deadfall' && b.solids && b.solids.length > 1) for (const sg of wallSegmentsFromBand(b, sampleHeight)) segs.push(sg);
+      if (segs.length) wallCull = createWallCull(segs);
+    }
+    const inHQThicket = (x, z, pad = 0) => wallBands.some((band) => band.near ? band.near(x, z, pad) : (   // CL-296: a ring knows its own line
       Math.abs(hypot(x, z) - band.radius) < band.width * 0.5 + pad &&
-      !band.isGap(x, z, ((Math.atan2(z, x) + Math.PI * 2) % (Math.PI * 2)) * band.radius));
+      !band.isGap(x, z, ((Math.atan2(z, x) + Math.PI * 2) % (Math.PI * 2)) * band.radius)));
 
     // scatterRocks — seeded, biased onto steep and high ground where scree collects
     function scatterRocks() {
@@ -18458,6 +18502,37 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
 
     const trees = [];
+    // CU-224: the burn update and the trunk shove used to walk every tree. A burning or
+    // smouldering tree is on burnWatch. A tree drawn as its own mesh (not a forest
+    // instance) is on touchTrees, which is the only one that can shove him.
+    const burnWatch = [];
+    const touchTrees = [];
+    function watchBurn(t) {
+      if (t._burnWatch) return;
+      t._burnWatch = true;
+      burnWatch.push(t);
+    }
+    function dropBurn(t) {
+      if (!t._burnWatch) return;
+      t._burnWatch = false;
+      const i = burnWatch.indexOf(t);
+      if (i >= 0) burnWatch.splice(i, 1);
+    }
+    function treeTouch(t, batched) {
+      t._tbInBatch = !!batched;
+      if (batched) {
+        if (!t._touchListed) return;
+        t._touchListed = false;
+        const i = touchTrees.indexOf(t);
+        if (i >= 0) touchTrees.splice(i, 1);
+      } else if (!t._touchListed) {
+        t._touchListed = true;
+        touchTrees.push(t);
+      }
+    }
+    function touchUnbatched() {
+      for (const t of trees) if (!t._tbInBatch && !t._touchListed) treeTouch(t, false);
+    }
     const fallingLeaves = [];
     const PLAYER_RADIUS = 0.42;
     const leafGeo = new THREE.PlaneGeometry(0.18, 0.12);
@@ -19015,7 +19090,18 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // Their collision remains the circles above; visual jitter never changes the gap.
     const wallBandMeshes = [];
     function buildWallBandVisuals() {
-      if (!wallBands.length || typeof TSL.instancedArray !== 'function') return;
+      if (!wallBands.length) return;
+      if (STONE_WALLS) {
+        const lines = wallBands.filter((b) => b.kind !== 'shortcut-deadfall' && b.pts && b.pts.length > 1).map((b) => ({ pts: b.pts, gaps: b.gaps || [] }));
+        if (lines.length) {
+          const group = buildStoneWallKit({ THREE, sampleHeight, lines, seed: 0x510e9a11 });
+          group.name = 'stone-wall-bands';
+          scene.add(group);
+          for (const mesh of group.children) wallBandMeshes.push(mesh);
+        }
+        return;
+      }
+      if (typeof TSL.instancedArray !== 'function') return;
       const rnd = mulberry32(0x6b9d25);
       const lists = { brush: [], sap: [], log: [], rock: [] };
       for (const band of wallBands.filter((b) => b.kind !== 'shortcut-deadfall')) for (let i = 0; i < band.solids.length; i++) {
@@ -19267,7 +19353,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (m.forest) { forestGoLive(m, why); return; }
       m.inBatch = false;
       if (m.tree.group) m.tree.group.userData.walkSkip = false;   // CL-211: back in the frame's matrix walk
-      m.tree._tbInBatch = false;
+      treeTouch(m.tree, false);
       if (why === 'changed') { m.dirty = true; m.tree._tbRestored = false; }
       tbCollapse(m.cell.wood, m.woodStart, m.woodCount);
       tbCollapse(m.cell.leaf, m.leafStart, m.leafCount);
@@ -19298,7 +19384,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       tbTouch(m.cell.leaf, m.leafStart, m.leafCount, true);
       tbShowOwn(m, false);
       m.inBatch = true;
-      m.tree._tbInBatch = true;
+      treeTouch(m.tree, true);
       m.dirty = false;
       m.snap = tbSnapshot(m.tree);
       tbFreeze(m.tree, true);
@@ -19454,7 +19540,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         if (!m.tree.group.parent) scene.add(m.tree.group);
         if (m.tree.alive && !m.tree.stump && !m.tree.log) m.tree.group.visible = true;
       }
-      m.tree._tbInBatch = false;
+      treeTouch(m.tree, false);
       if (why === 'changed') { m.dirty = true; m.tree._tbRestored = false; }
       forestWrite(m, true);
       tbFreeze(m.tree, false);
@@ -19464,7 +19550,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       forestWrite(m, false);
       tbShowOwn(m, false);
       m.inBatch = true;
-      m.tree._tbInBatch = true;
+      treeTouch(m.tree, true);
       m.dirty = false;
       // Off the scene while the instance draws: sceneCull and the render walk were
       // visiting every far tree. The snapshot is taken after, so a null parent is rest.
@@ -19560,7 +19646,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           forestWrite(m, false);
           if (tree.trunkMesh) tbShowOwn(m, false);
           tbFreeze(tree, true);
-          tree._tbInBatch = true;
+          treeTouch(tree, true);
           holder.members.push(m);
           treeBatchMembers.push(m);
           tbGridAdd(m);
@@ -19570,6 +19656,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       treeBatchBuildMs = performance.now() - t0;
       forestFlush();
       if (typeof player !== 'undefined' && player) for (let i = 0; i < 40; i++) updateTreeBatches();
+      touchUnbatched();
     }
 
     function buildTreeBatches() {
@@ -19582,7 +19669,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           for (const pack of forestPacks) { if (pack.wood) scene.remove(pack.wood); if (pack.leaf) scene.remove(pack.leaf); }
           forestPacks.length = 0; forestOn = false; forestMeshN = 0; forestTemplates = 0; treeBatchMembers.length = 0; treeBatchGrid.clear();
           if (trees.length > 2200) return;
-          for (const t of trees) { t._tbInBatch = false; t._forestMember = null; if (t.group) t.group.userData.walkSkip = false; ensureTreeGrown(t); }
+          for (const t of trees) { treeTouch(t, false); t._forestMember = null; if (t.group) t.group.userData.walkSkip = false; ensureTreeGrown(t); }
         }
       }
       const t0 = performance.now();
@@ -19620,7 +19707,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           tbWrite(m, cell.wood, m.woodStart, m.wood);
           if (cell.leaf.mesh) tbWrite(m, cell.leaf, m.leafStart, m.leaf);
           m.inBatch = true;
-          m.tree._tbInBatch = true;
+          treeTouch(m.tree, true);
           m.snap = tbSnapshot(m.tree);
           tbShowOwn(m, false);
           tbFreeze(m.tree, true);
@@ -19650,6 +19737,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       // Anything already near the player starts live (the player exists by now: the
       // batches are built late in the load).
       if (typeof player !== 'undefined' && player) for (let i = 0; i < 40; i++) updateTreeBatches();
+      touchUnbatched();
     }
 
     // Once a frame, after the world has moved: which trees draw from their own meshes.
@@ -21224,6 +21312,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     chapelHalo.name = 'chapel-glow';
     chapelHalo.position.set(0, 1.05, 0);
     chapelHalo.scale.set(0.72, 1.2, 0.48);
+    chapelHalo.visible = false;   // AG-200: drawn only while it glows (at opacity 0 it was a sphere drawn every frame)
     marine.add(chapelHalo);
     let chapelGlowT = 0, chapelBlessDay = -1, chapelCrouchWas = false;
     // Crouch in the aisle, in front of the parish cross: full health, a short choir, a gold glow. Once this day.
@@ -21243,6 +21332,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (AudioSys.chapelChoir) AudioSys.chapelChoir();
     }
     function updateChapelBless(dt) {
+      chapelHalo.visible = chapelGlowT > 0;
       if (chapelGlowT > 0) {
         chapelGlowT = Math.max(0, chapelGlowT - dt);
         chapelLight.intensity = 16 * chapelGlowT;
@@ -24025,6 +24115,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       rig.mags.count = p.mags; rig.grenades.count = p.grenades;
       rig.shells.count = p.shells; rig.rounds40.count = p.rounds40;
       rig.boxes.count = p.boxes; rig.tanks.count = p.tanks;
+      // AG-200 (J52): three's WebGPU renderer draws an InstancedMesh with count 0 as one instance (count > 1 ? count : 1), so an
+      // empty pouch row drew its first slot anyway (a grenade by his belt in the Training Ground's G x0): an empty row is hidden.
+      for (const m of [rig.mags, rig.grenades, rig.shells, rig.rounds40, rig.boxes, rig.tanks]) m.visible = m.count > 0;
       rig.bandolier.visible = p.bandolier; rig.belt40.visible = p.belt40;
       // Over the carrier the bands follow its pouches; on the shirt they follow the fabric.
       rig.bandolier.userData.fit(p.vest,rig.shells);
@@ -25714,7 +25807,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           gun.rotation.copy(base.rot);
         }
 
-        // Swing-out cylinder gate (lateral + yaw) — readable, not a weapon spin
+        // J57: the crane is on gun-local -x, so the cylinder opens toward it
+        // (screen-left in the mirrored first-person view), not across the gun.
         if (gun.userData.cylinder) {
           const cyl = gun.userData.cylinder;
           const bp = gun.userData.baseCylinderPos || gun.userData.baseMagPos;
@@ -25722,13 +25816,13 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           if (bp && br) {
             const swing = openAmt;
             cyl.position.set(
-              bp.x + 0.095 * swing + 0.012 * ejector,
+              bp.x - 0.095 * swing - 0.012 * ejector,
               bp.y - 0.008 * swing,
               bp.z + 0.01 * swing
             );
             cyl.rotation.set(
               br.x,
-              br.y + 0.16 * swing,
+              br.y - 0.16 * swing,
               br.z + chamberStep * (Math.PI * 2 / 6)
             );
           }
@@ -28368,7 +28462,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       return heading;
     }
     function renderShop() {
-      if (!shopListEl || day < 1) return;   // GP-19976: no equipment quotes while the hidden pre-match shop has no night
+      if (!shopListEl || (day < 1 && !training.active)) return;   // GP-19976: no equipment quotes while the hidden pre-match shop has no night. CU-229: the Training Ground kiosk still sells.
       shopCashEl.textContent = devInfiniteCash || training.active ? '∞' : String(bank);
       shopListEl.innerHTML = '';
       const group = SHOP_TABS.find(([key, pages]) => key === shopTab || pages.includes(shopTab)) || SHOP_TABS[1];
@@ -28493,7 +28587,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         // CL-113 (Jerry): an attachment is bought here and put on in the Armory. Owned, the row says where it is.
         const modRow = (name, owned, fitted, help, price, buy) => {
           const tag = fitted ? sayText('armory.kioskFitted', {}, 'fitted') : owned ? sayText('armory.kioskOwned', {}, 'owned · fit it at the Armory') : '';
-          shopRow(name, tag, help, owned ? 'OWNED' : '$' + price, !owned && bank >= price, owned ? null : buy, owned ? 'owned' : '');
+          // CU-229 (J58): bought, not fitted. Using it says where it goes.
+          const use = owned && !fitted ? () => boughtForArmory(name) : (owned ? null : buy);
+          shopRow(name, tag, help, owned ? dwText('shop.ownedButton') : '$' + price, (!owned && bank >= price) || !!(owned && !fitted), use, owned ? 'owned' : '');
         };
         for (const w of WEAPON_ORDER) {
           if (!weaponOwned[w]) continue;
@@ -28733,7 +28829,13 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       renderShop();
     }
     // CL-113 (Jerry): the kiosk sells attachments; he puts them on in the Armory.
-    function boughtForArmory(name) { showBanner(sayText('armory.boughtTitle', { item: name }, name.toUpperCase() + ' BOUGHT'), sayText('armory.boughtHint', {}, 'Fit it at the Armory'), 1.8, '#9fd36a'); }
+    let armoryFitHint = null;
+    function boughtForArmory(name) {
+      const title = sayText('armory.boughtTitle', { item: name }, name.toUpperCase() + ' BOUGHT');
+      const sub = sayText('armory.boughtHint', {}, 'Fit it at the Armory');
+      armoryFitHint = { title: title, sub: sub };
+      showBanner(title, sub, 1.8, '#9fd36a');
+    }
     function buyExtMag(w) {
       if (!EXT_MAG_PRICE[w] || extMagOwned[w]) return;
       if (!spend(equipmentPrice(EXT_MAG_PRICE[w], day))) return;
@@ -28830,6 +28932,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       paused = false;
       if (viewFirst && otsAllowedBase()) otsLockWanted(true);   // restore the selected view on the close gesture
       syncReticleVisibility();
+      // CU-229: the shop covers the banner. Say it once the shop is gone.
+      if (armoryFitHint) { const hint = armoryFitHint; armoryFitHint = null; showBanner(hint.title, hint.sub, 2.6, '#9fd36a'); }
     }
     document.getElementById('shopClose').addEventListener('click', closeShop);
 
@@ -29788,6 +29892,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         const a = Math.random() * Math.PI * 2, r = 46 + Math.random() * 8;
         const c = clampToLand(px + Math.cos(a) * r, pz + Math.sin(a) * r, 3);
         if (waterDepthAt(c.x, c.z) > 0.3 && !ZOMBIE_TYPES[tk].aquatic) continue;
+        if (storyRingShut(c.x, c.z)) continue;   // CL-296
         const zz = spawnZombie(c.x, c.z, tk, true);
         if (!zz) continue;
         zz.huntPlayer = true;
@@ -34031,6 +34136,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
     function chainUseE() {
       if (!chainGatesOn || !gameStarted || gameOver || won) return false;
+      { const e = storyGateNear();   // CL-296: the ring's gate is the chain gate
+        if (e) { if (!chainTryOpen(e.ring.gate)) showBanner(chainSay('chain.' + e.ring.lead + '.locked', 'The gate is locked.'), '', 2.4, '#d7c6a4'); return true; } }
       for (const [id, gate] of chainWorld.gates) {
         if (!chainGates.isOpen(id) && chainNear(gate.x, gate.z, 1.8) && chainTryOpen(id)) return true;
       }
@@ -34042,6 +34149,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
     function chainPromptText() {
       if (!chainGatesOn || !gameStarted || gameOver || won) return null;
+      { const e = storyGateNear();   // CL-296
+        if (e) return chainGates.canOpen(e.ring.gate) ? chainSay('chain.' + e.ring.lead + '.ringPrompt', 'E \u2014 Open the gate') : chainSay('chain.' + e.ring.lead + '.locked', 'The gate is locked.'); }
       for (const [key, placed] of chainWorld.keys) {
         if (placed.mesh.visible && chainGates.keyState(key) === 'ready' && chainKeyInReach(key, placed)) {
           const spec = gateOfKey(key);
@@ -34072,7 +34181,81 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         ? chainSay('chain.missing.openPrompt', 'E — Unhook the trail chain')
         : chainSay('chain.missing.locked', 'The camp chain needs its key.');
     }
+    // CL-296: the story rings' gates (?gates=1). Shut: a row of solids across the gap and a block in the dead's field.
+    // Open (its chain gate open, by the key used here or at the chain itself): the leaves swing in and stay; a run reset
+    // shuts them again.
+    const storyGates = [];
+    function storyRingShut(x, z) {
+      try {   // (a spawn check can run while the page is still building: before the rings or the chain exist, nothing is shut)
+        if (!STORY_GATES_ON) return false;
+        const ring = storyRingAt(storyRings.rings, x, z);
+        return !!ring && !chainGates.isOpen(ring.gate);
+      } catch (_) { return false; }
+    }
+    function storyGatesBuild() {
+      if (storyGates.built) return;
+      storyGates.built = true;
+      const iron = new THREE.MeshStandardMaterial({ color: 0x2f2d2a, roughness: 0.55, metalness: 0.55 });
+      const stone = new THREE.MeshStandardMaterial({ color: 0x938a7a, roughness: 0.95, metalness: 0 });
+      const box = (w, h, d, x, y, z) => { const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), iron); m.position.set(x, y, z); return m; };
+      for (const ring of storyRings.rings) ring.gates.forEach((g, gi) => {
+        const y = sampleHeight(g.x, g.z), L = g.half;
+        const root = new THREE.Group(); root.name = 'story-gate-' + ring.place + '-' + gi;
+        root.position.set(g.x, y, g.z); root.rotation.y = Math.atan2(-g.az, g.ax);   // local +x along the ring, +z inward
+        const piers = [];
+        for (const side of [-1, 1]) { const p = new THREE.Mesh(new THREE.BoxGeometry(0.8, 3.0, 0.8), stone); p.position.set(side * (L + 0.4), 1.45, 0); piers.push(p); }
+        const pierMesh = mergeParts(piers, stone, { castShadow: true, receiveShadow: true }); root.add(pierMesh);
+        const leaves = [];
+        for (const side of [-1, 1]) {
+          const parts = [box(L, 0.07, 0.06, -side * L / 2, 0.3, 0), box(L, 0.07, 0.06, -side * L / 2, 1.25, 0), box(L, 0.07, 0.06, -side * L / 2, 2.15, 0),
+            box(0.08, 2.1, 0.08, -side * 0.04, 1.2, 0), box(0.08, 2.1, 0.08, -side * (L - 0.04), 1.2, 0)];
+          for (let b = 0.18; b < L - 0.1; b += 0.17) parts.push(box(0.03, 1.95, 0.03, -side * b, 1.22, 0));
+          const leaf = new THREE.Group(); leaf.position.set(side * L, 0, 0);
+          const m = mergeParts(parts, iron, { castShadow: true, receiveShadow: true }); leaf.add(m); root.add(leaf); leaves.push({ leaf, side });
+        }
+        const lock = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.16, 0.1), new THREE.MeshStandardMaterial({ color: 0x6d6258, roughness: 0.4, metalness: 0.8 }));
+        lock.position.set(0, 1.18, 0.08); root.add(lock);
+        scene.add(root);
+        const solids = g.solids.map((q) => { const s = { x: q.x, z: q.z, radius: q.r, y0: y - 0.25, y1: y + 2.6, landmark: null, kind: 'story-gate' }; return s; });
+        storyGates.push({ ring, g, root, leaves, lock, solids, open: true, w: 1, tag: 'story-gate-' + ring.place });
+      });
+      for (const e of storyGates) storyGateSet(e, false, true);
+    }
+    function storyGateSet(e, open, now = false) {
+      if (e.open === open) return;
+      e.open = open;
+      if (open) {
+        for (const s of e.solids) { const i = worldSolids.indexOf(s); if (i >= 0) worldSolids.splice(i, 1); }
+        if (!storyGates.some((o) => o !== e && o.ring === e.ring && !o.open)) valleyUnblock(e.tag);
+        e.lock.visible = false;
+      } else {
+        for (const s of e.solids) if (!worldSolids.includes(s)) worldSolids.push(s);
+        for (const s of e.solids) valleyBlock(s.x, s.z, s.radius, e.tag);
+        e.lock.visible = true; e.w = 0;
+      }
+      if (now) e.w = open ? 1 : 0;
+      for (const { leaf, side } of e.leaves) leaf.rotation.y = side * 1.75 * (e.w * e.w * (3 - 2 * e.w));
+    }
+    function storyGatesUpdate(dt) {
+      if (!STORY_GATES_ON || !storyRings.rings.length) return;
+      storyGatesBuild();
+      for (const e of storyGates) {
+        const open = chainGates.isOpen(e.ring.gate);
+        if (open !== e.open) storyGateSet(e, open, !open);
+        if (e.open && e.w < 1) {
+          e.w = Math.min(1, e.w + dt / 1.4);
+          const k = e.w * e.w * (3 - 2 * e.w);
+          for (const { leaf, side } of e.leaves) leaf.rotation.y = side * 1.75 * k;
+        }
+      }
+    }
+    function storyGateNear() {
+      if (!STORY_GATES_ON) return null;
+      for (const e of storyGates) if (!e.open && chainNear(e.g.x, e.g.z, 2.6)) return e;
+      return null;
+    }
     function chainUpdate(dt) {
+      storyGatesUpdate(dt);   // CL-296
       if (chainGatesOn) {
         try { chainPlaceRelay(); } catch (_) {}
         try { chainPlaceMedical(); } catch (_) {}
@@ -42505,6 +42688,98 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       return 'shambler';
     }
 
+    // GB-253 (CU-187): a zombie is made with every field it will ever carry, in one order, so its shape (V8's map) never
+    // changes in the walk and updateZombies and zombieLateStep stop deoptimizing on it. First the fields spawnZombie's
+    // literal had, the same values in the same order (the same Math.random calls); then the ones the walk, the hits and
+    // the modules add later. Those start undefined, exactly what reading a missing field gave (the code tests many with
+    // == null or === undefined), except the few it only reads as a number (|| 0, > 0, || 1), which start 0. More than
+    // 127 fields would make an object literal a slow dictionary, so a constructor makes them. A new zombie field belongs
+    // here too; and clear one with = undefined, never delete (a delete turns the zombie into a slow dictionary).
+    function ZombieShape(mesh, x, z, tk, def, vr, hp, riseDur) {
+      this.mesh = mesh; this.x = x; this.z = z; this.typeKey = tk;
+      this.hp = hp; this.maxHp = hp;
+      this.speed = def.speed * ZOMBIE_PACE; this.baseSpeed = def.speed * ZOMBIE_PACE;
+      this.radius = def.radius;
+      this.damage = def.damage; this.baseDamage = def.damage;
+      this.armor = def.armor || 0;
+      this.attackCd = 0; this.attackWindup = 0; this.alive = true;
+      this.brute = tk === 'brute';
+      this.reward = def.cashDrop != null ? def.cashDrop : def.reward;
+      this.cashDrop = def.cashDrop != null ? def.cashDrop : def.reward;
+      this.tactics = def.tactics || 'direct';
+      this.bob = Math.random() * Math.PI * 2;
+      this.walkPhase = vr.phase || Math.random() * Math.PI * 2;
+      this.gaitMul = vr.gait || 1;
+      this.scale = def.scale * vr.height;
+      this.riseT = riseDur; this.riseDur = riseDur;
+      this.swingT = 0; this.swingSide = 1;
+      this.hitH = mesh.userData.hitH || 1.45;
+      this.meleeMult = tk === 'brute' ? 1.7 : (tk === 'demon' ? 1.5 : 1);
+      this.fireResist = def.fireResist || 0;
+      this.armored = !!def.armored;   // GB-75: plates (the brute)
+      this.aquatic = !!def.aquatic; this.spider = !!def.spider;
+      this.partsLost = emptyPartsLost();
+      this.crawling = false;
+      this.flankSide = Math.random() < 0.5 ? -1 : 1;
+      this.flankPhase = Math.random() * Math.PI * 2;
+      this.sprintT = 0;
+      this.rushT = 0;
+      this.strafeDir = Math.random() < 0.5 ? -1 : 1;
+      this.hitReact = 0;
+      this.hitDirX = 0; this.hitDirZ = 0;
+      this.staggerVX = 0; this.staggerVZ = 0;
+      this.flashT = 0;
+      this.dying = false;
+      this.deathKind = null;
+      this.deathT = 0;
+      this.deathDirX = 0; this.deathDirZ = 0;
+      // the later fields (218)
+      this.caveIndex = undefined; this.caveTrait = undefined; this.caveTheme = undefined; this.roleArmorAdd = 0; this.roleFireAdd = 0;
+      this.douseRadius = undefined; this.douseAgePerSec = undefined; this._mvVX = undefined; this._mvVZ = undefined; this._mvX = undefined;
+      this._mvZ = undefined; this._mvT = undefined; this._tpF = undefined; this._tp = undefined; this._tickPh = undefined; this._tickAcc = 0;
+      this.hz = undefined; this.paceMul = 0; this.paceBand = undefined; this.paceNight = 0; this.paceU = 0; this.hzCap = undefined;
+      this.hzLungeAbs = undefined; this.chargeBase = undefined; this.hzRole = undefined; this.wit = undefined; this.hzSlot = undefined;
+      this.hzSlotT = undefined; this.hzOpenT = undefined; this.hzOpen = undefined; this.hzLungeT = undefined; this.hzCoilT = undefined;
+      this.hzLungeRec = undefined; this.hzLungeCd = undefined; this.hzRecoilT = 0; this.hzRecoilCd = 0; this.hzRecoilSide = 0;
+      this.hzStalk = undefined; this.hzMustered = undefined; this.hzSpX = undefined; this.hzSpZ = undefined; this.hzD = undefined;
+      this.hzReact = undefined; this.hzStaggerT = undefined; this.hzStaggerCd = 0; this.hzStagX = undefined; this.hzStagZ = undefined;
+      this.farLod = undefined; this.windowSearchT = undefined; this.windowTarget = undefined; this.hzChasing = undefined; this.hzBear = undefined;
+      this.hzSlotMass = undefined; this.flowX = undefined; this.flowZ = undefined; this.inWater = undefined; this.fuseT = undefined; this.stuckT = 0;
+      this.riseOff = undefined; this.footIdx = undefined; this._castShadow = undefined; this.groanCd = undefined; this.idle = undefined;
+      this._hzReach = 0; this._preSepX = undefined; this._preSepZ = undefined; this.stuckX = undefined; this.stuckZ = undefined;
+      this.swimRippleT = undefined; this.seenNoted = undefined; this._rim = 0; this.reachK = undefined; this.twitchCd = undefined;
+      this.lookK = undefined; this._feet = undefined; this._lean = undefined; this.unstickT = undefined; this.unstickSide = 0;
+      this.defSeek = undefined; this.rangedAbility = undefined; this.abilityBusy = undefined; this.defSeekT = undefined; this.defSeekB = undefined;
+      this.chargeCd = undefined; this.twitchT = undefined; this.twitchDir = undefined; this.lookYaw = undefined; this.lookPitch = undefined;
+      this.chargeWind = undefined; this.chargeDX = undefined; this.chargeDZ = undefined; this.fogKeepT = 0; this.chargeT = undefined;
+      this.chargeHit = undefined; this.noticed = undefined; this.noticeT = undefined; this._pendingAttack = undefined; this.ringHeld = 0;
+      this.climber = undefined; this.climbHeight = undefined; this.slamCd = undefined; this.slamWind = undefined; this.slamFollowT = undefined;
+      this.groundRise = undefined; this.shamblerRecoveryActive = undefined; this.lurchCd = undefined; this.lurchT = undefined;
+      this.lurchDir = undefined; this.leapCd = undefined; this.leapDur = undefined; this.leapT = undefined; this.leapDX = undefined;
+      this.leapDZ = undefined; this.leapSpd = undefined; this.leapH = undefined; this.spiderSpitSnap = undefined; this.spitCd = undefined;
+      this.lineT = undefined; this.lineGo = 0; this.spiderSpitWind = undefined; this.spiderShot = undefined; this.lineClear = undefined;
+      this.strafeT = undefined; this.slowT = undefined; this._defenseKill = undefined; this.bleedT = undefined; this.bleedPart = undefined;
+      this.bleedPulse = undefined; this.hopping = undefined; this.limbless = undefined; this.shredAcc = undefined; this.relayCalled = undefined;
+      this.burnT = undefined; this.windowClimb = undefined; this.headshotMul = undefined; this.fogHidden = undefined; this._detonated = undefined;
+      this.objectiveId = undefined; this.objectiveRole = undefined; this.fromWave = undefined; this.guardianProgressT = 0;
+      this.guardianStuckRepath = undefined; this.guardianBestDist = undefined; this.guardianRetreat = undefined; this.bossRig = undefined;
+      this.burnDefense = undefined; this.flameHitAt = undefined; this._fireSet = undefined; this._fireAge = undefined; this._shotLast = undefined;
+      this._shotN = 0; this._shotDmg = undefined; this._shotRaw = undefined; this._shotY = undefined; this._shotDX = undefined;
+      this._shotDZ = undefined; this.knockDur = undefined; this.knockT = undefined; this.knockCd = undefined; this.knockSign = undefined;
+      this._shotHead = undefined; this.sonicHitT = undefined; this._osSid = undefined; this._osFull = undefined; this.hitSide = undefined;
+      this.hitPart = undefined; this.hitPartT = undefined; this._shotId = undefined; this._shotDefense = undefined; this._militaryRound = undefined;
+      this._bruteRound = undefined; this._headRound = undefined; this.threatT = undefined; this.threatB = undefined; this.defProgB = undefined;
+      this.defProgD = undefined; this.defProgT = undefined; this.defGiveUpT = undefined; this.below = undefined; this.belowSleeper = undefined;
+      this.sleeping = undefined; this._belowGone = undefined; this.getUpT = undefined; this.belowFallV = undefined; this.belowRiseT = undefined;
+      this.belowNest = undefined; this.belowSet = undefined; this.barrowKing = undefined; this.heartCalled = undefined; this.poiGuard = undefined;
+      this.smashT = undefined; this.smashTarget = undefined; this.poiLungeT = undefined; this.buffT = 0; this.lineSawBlock = undefined;
+      this.spitWind = undefined; this.spitterShot = undefined; this.spitSnap = undefined; this.screamCd = undefined; this.screamT = undefined;
+      this.dripT = undefined; this.burnTouchT = undefined; this.trainingZ = undefined; this.trainingIntro = undefined; this.trainingEntry = undefined;
+      this.ttSpawn = undefined; this.sonicOpenT = undefined; this._sonicScreaming = undefined; this.huntPlayer = undefined; this.poiAwake = undefined;
+      this.poiWake = undefined; this.heartGuardian = undefined; this.guardianPlanned = undefined; this.siegeFrom = undefined; this.lineBlockN = 0;
+      this.lineClearN = 0; this.lineHad = undefined; this.lineLostT = 0;
+    }
+
     function spawnZombie(x, z, typeKey = null, overCap = false, noRise = false) {
       if (zombies.length >= MAX_ZOMBIES && !overCap) return null;
       const tk = typeKey || pickZombieType(day);
@@ -42525,45 +42800,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       // walking out of a cave mouth is already on its feet (noRise).
       const riseDur = (noRise || waterDepthAt(x, z) > 0.2) ? 0 : 0.9 + Math.random() * 0.5;
       const hp = Math.max(8, Math.round(def.hp * hpVar));
-      const zom = {
-        mesh, x, z, typeKey: tk,
-        hp, maxHp: hp,
-        speed: def.speed * ZOMBIE_PACE, baseSpeed: def.speed * ZOMBIE_PACE,
-        radius: def.radius,
-        damage: def.damage, baseDamage: def.damage,
-        armor: def.armor || 0,
-        attackCd: 0, attackWindup: 0, alive: true,
-        brute: tk === 'brute',
-        reward: def.cashDrop != null ? def.cashDrop : def.reward,
-        cashDrop: def.cashDrop != null ? def.cashDrop : def.reward,
-        tactics: def.tactics || 'direct',
-        bob: Math.random() * Math.PI * 2,
-        walkPhase: vr.phase || Math.random() * Math.PI * 2,
-        gaitMul: vr.gait || 1,
-        scale: def.scale * vr.height,
-        riseT: riseDur, riseDur: riseDur,
-        swingT: 0, swingSide: 1,
-        hitH: mesh.userData.hitH || 1.45,
-        meleeMult: tk === 'brute' ? 1.7 : (tk === 'demon' ? 1.5 : 1),
-        fireResist: def.fireResist || 0,
-        armored: !!def.armored,   // GB-75: plates (the brute)
-        aquatic: !!def.aquatic, spider: !!def.spider,
-        partsLost: emptyPartsLost(),
-        crawling: false,
-        flankSide: Math.random() < 0.5 ? -1 : 1,
-        flankPhase: Math.random() * Math.PI * 2,
-        sprintT: 0,
-        rushT: 0,
-        strafeDir: Math.random() < 0.5 ? -1 : 1,
-        hitReact: 0,
-        hitDirX: 0, hitDirZ: 0,
-        staggerVX: 0, staggerVZ: 0,
-        flashT: 0,
-        dying: false,
-        deathKind: null,
-        deathT: 0,
-        deathDirX: 0, deathDirZ: 0
-      };
+      const zom = new ZombieShape(mesh, x, z, tk, def, vr, hp, riseDur);   // GB-253: every field it will carry, made here (ZombieShape)
       mesh.userData.partsLost = zom.partsLost;
       mesh.userData.dismembered = false;
       mesh.userData.gibbed = false;
@@ -43829,6 +44066,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
 
     function isNavValidSpawn(x, z) {
       if (!Number.isFinite(x) || !Number.isFinite(z)) return false;
+      if (storyRingShut(x, z)) return false;   // CL-296: nothing is placed inside a shut story ring (site calls, crate guards)
       if (waterDepthAt(x, z) > 0.35) return false;
       if (terrainSlope(x, z) > 0.55) return false;
       try {
@@ -44755,6 +44993,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           if (hypot(s.x - sx, s.z - sz) > SCREAM_PULL_R[1]) continue;
           if (hypot(s.x - px, s.z - pz) < SCREAM_PULL_CLEAR) continue;
           if (waterDepthAt(s.x, s.z) > 0.2) continue;
+          if (storyRingShut(s.x, s.z)) continue;   // CL-296 (AG-213): never pulled inside a shut story ring
           spot = s;
         }
         if (!spot) continue;
@@ -44778,6 +45017,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (hd < GROUND_RISE_MIN || hd > GROUND_RISE_MAX) return false;
       { const np = nearestPlayer(x, z, { alive: true }).position; if (hypot(x - np.x, z - np.z) < GROUND_RISE_CLEAR) return false; }   // GB-100: clear of every player
       if (waterDepthAt(x, z) > 0.05) return false;
+      if (storyRingShut(x, z)) return false;   // CL-296 (AG-213): nothing rises inside a shut story ring
       const gy = sampleHeight(x, z);
       if (pointInCameraView(x, gy + 0.3, z) || pointInCameraView(x, gy + 1.8, z)) return false;
       if (POI.caves) for (const c of POI.caves) if (hypot(x - c.x, z - c.z) < 6) return false;
@@ -44814,7 +45054,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     let poiGuardPost = null;
     function poiPostList() {
       const list = [];
-      const add = (kind, arr) => { (arr || []).forEach((p, i) => { if (p && Number.isFinite(p.x) && Number.isFinite(p.z)) list.push({ kind, index: i, x: p.x, z: p.z, dist: hypot(p.x, p.z) }); }); };
+      const add = (kind, arr) => { (arr || []).forEach((p, i) => { if (p && Number.isFinite(p.x) && Number.isFinite(p.z) && !storyRingShut(p.x, p.z)) list.push({ kind, index: i, x: p.x, z: p.z, dist: hypot(p.x, p.z) }); }); };
       add('campsite', POI.campsites); add('cabin', POI.cabins); add('shed', POI.sheds); add('wreck', POI.wrecks);
       add('tower', [POI.tower]); add('graveyard', [POI.graveyard]); add('mast', [POI.mast]); add('dock', [POI.dock]);
       return list;
@@ -50755,7 +50995,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // m4's carry handle filled the bottom of the view in the first shots): metres further back along the sight line.
     const FP_RELIEF = { m4: 0.14, ak: 0.16, shotgun: 0.12, aa12: 0.12, uzi: 0.12, launcher: 0.1 };
     const _fpEye = new THREE.Vector3(), _fpOff = new THREE.Vector3(), _fpSight = new THREE.Vector3(), _fpFwd = new THREE.Vector3();
-    let fpOffSet = false, fpAdsW = 0, fpHeadHidden = false, fpArmHidden = false;
+    let fpOffSet = false, fpAdsW = 0, fpHeadHidden = false, fpArmHidden = false, fpCrouchWas = 0;
     // CL-250 (GB-223's shots): down the uzi's and the flamer's sights his support fist sat in front of the eye and filled
     // the upper view; with these guns that arm is out of sight while he looks down the sights.
     const FP_HIDE_SUPPORT = { uzi: 1, flamer: 1 };
@@ -50765,9 +51005,20 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       _fpEye.copy(FP_EYE); h.localToWorld(_fpEye);
       const P = localPlayer.position, ox = _fpEye.x - P.x, oy = _fpEye.y - P.y, oz = _fpEye.z - P.z;
       if (!fpOffSet || hypot(ox - _fpOff.x, oz - _fpOff.z) > 1 || Math.abs(oy - _fpOff.y) > 1) { _fpOff.set(ox, oy, oz); fpOffSet = true; }
-      const k = 1 - Math.exp(-FP_BOB_RATE * dt);
-      _fpOff.x += (ox - _fpOff.x) * k; _fpOff.y += (oy - _fpOff.y) * k; _fpOff.z += (oz - _fpOff.z) * k;
-      return _fpEye.set(P.x + _fpOff.x, P.y + _fpOff.y, P.z + _fpOff.z);
+      // CL-293 (ChatGPT's t291 on the real renderer: 1.16 cm of the run's bounce down the sights): aimed, the eye eases at a quarter of the rate
+      // (t291 again, 0.60 cm against its 0.6 bar: the height eases at a tenth aimed; a change of more than 4 cm, a crouch or a
+      // stand, still follows at the full rate so his posture is never late)
+      const k = 1 - Math.exp(-FP_BOB_RATE * (1 - 0.75 * fpAdsW) * dt);
+      // (ChatGPT: a 4 cm deadband could be crossed by the run's own bob; it's his posture changing that follows fast now.
+      //  Restored 2026-11-03: this edit of 14:00Z was lost when a whole-file restore of index.html put back an older copy.)
+      const postureMoving = Math.abs((POSE.crouch || 0) - fpCrouchWas) > 0.0015 || diveFlatW > 0.01; fpCrouchWas = POSE.crouch || 0;
+      const ky = postureMoving ? 1 - Math.exp(-FP_BOB_RATE * dt) : 1 - Math.exp(-FP_BOB_RATE * (1 - 0.9 * fpAdsW) * dt);
+      _fpOff.x += (ox - _fpOff.x) * k; _fpOff.y += (oy - _fpOff.y) * ky; _fpOff.z += (oz - _fpOff.z) * k;
+      // J52 (Jerry, 2026-11-02, "a sphere or a ball in-between player's feet"; AG-200): looking down from his eyes, his collar and the
+      // uniform's closed neck filled the middle of the view, a round camo bowl over his boots. As he looks down the eye comes forward of
+      // the collar, 0.18 m by 69 degrees down, so he sees his chest, his legs and his boots.
+      const pdn = Math.max(0, Math.min(1, (-(OTS.pitch || 0) - 0.35) / 0.85)), fwdK = 0.18 * pdn * pdn * (3 - 2 * pdn);
+      return _fpEye.set(P.x + _fpOff.x + Math.sin(OTS.yaw || 0) * fwdK, P.y + _fpOff.y, P.z + _fpOff.z + Math.cos(OTS.yaw || 0) * fwdK);
     }
     // The held gun's sight line in the world: { pos, fwd } or null (akimbo, a blade, a gun with no entry).
     function firstPersonSight() {
@@ -50834,7 +51085,22 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // CL-281 (docs/specs/first-person-1.2.md): the view gun (game/viewmodel.js) for the guns game/viewmodel-poses.js
     // lists, in first person once the camera is at his eyes and he holds it. ?vm=0 keeps the old first person.
     const VM_ON = new URLSearchParams(location.search).get('vm') !== '0';
-    const _vmState = { want: false, weapon: null, ads: 0, vx: 0, vz: 0, vy: 0, grounded: true, reloadU: null, settled: false };
+    const _vmState = { want: false, weapon: null, ads: 0, vx: 0, vz: 0, vy: 0, grounded: true, reloadU: null, settled: false, phase: null, run: 0, sprint: false };
+    // CL-293 (the pass's Fire line): each shot turns the drawn view up a little and lets it spring home (the share, in
+    // game/viewmodel-poses.js VM.camera). It is put on the camera just before the draw and taken off just after, so
+    // nothing that aims, casts or places reads it: the shots go where the crosshair was. Less through a scope.
+    const _fpPunchQ = new THREE.Quaternion(), _fpPunch = { p: 0, y: 0 };
+    function fpPunchApply() {
+      if (!viewmodel || !viewFirst || typeof viewmodel.cameraPunch !== 'function') return false;
+      const pu = viewmodel.cameraPunch(_fpPunch);
+      if (!(Math.abs(pu.p) > 1e-5 || Math.abs(pu.y) > 1e-5)) return false;
+      const k = 1 - scopeAmt * 0.6;
+      _fpPunchQ.copy(camera.quaternion);
+      camera.rotateX(pu.p * k); camera.rotateY(pu.y * k);
+      camera.updateMatrixWorld();
+      return true;
+    }
+    function fpPunchUndo() { camera.quaternion.copy(_fpPunchQ); camera.updateMatrixWorld(); }
     function updateViewmodel(dt) {
       if (viewmodel === null) {
         if (!gameStarted || !VM_ON) return;
@@ -50847,6 +51113,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       st.want = viewFirst && OTS.w > 0.6 && gameStarted && !gameOver && !won && !unarmed && !akimboOn() && holdW > 0.5 && weaponMount.visible &&
         !playerSwimming && !mortarMounted && !mortarCarried && !onAnyLadder() && !vault && !scriptedKill && !cine && !(knifeAnimT > 0);
       st.weapon = currentWeapon; st.ads = fpAdsW; st.vx = velX; st.vz = velZ; st.vy = vy; st.grounded = grounded;
+      // CL-293 (J55): the view gun's bob on his stride's own cycle (the one his legs and his eye ride), walk to run by his gait's weight
+      st.phase = walkPhase; st.run = POSE.gaitRun || 0; st.sprint = !!(keys.ShiftLeft || keys.ShiftRight) && hypot(velX, velZ) > 0.5;
+      st.stream = flamerOn && currentWeapon === 'flamer';   // CL-293 (J59): the flamer's steady pushback
       st.reloadU = reloading ? _clamp01(1 - reloadTimer / Math.max(0.05, reloadAnimDuration || 1)) : null;
       // AG-168 (defect 3): the hands' places on the gun are read off him only at rest: settled, level, not aimed, standing.
       st.settled = holdW > 0.98 && !reloading && Math.abs(OTS.pitch) < 0.35 && !diving() && fpAdsW < 0.01 && hypot(velX, velZ) < 0.3;
@@ -50922,7 +51191,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       // CU-189: the weapon and build wheels too. The cursor has to move to pick a wedge, and the view stays put.
       return !!(wheelIsOpen() || shopOpen || recordingKind || hqBriefingOpen || (relay.panel && relay.panel.isOpen()) || (typeof ranger !== 'undefined' && ranger && ranger.panel && ranger.panel.isOpen()));
     }
-    let _panelHeldLock = false;
+    let _panelHeldLock = false, panelPointerTicks = 0;
     // CU-190 (J27): a menu in first person used to leave the pointer locked. The lock request from the click that
     // opened it can land after the menu has turned the view off, and nothing then lets go. While any menu is up,
     // a locked pointer is released every frame; on close, first person asks for it back.
@@ -50933,6 +51202,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         || (training.panel && training.panel.isOpen()));
     }
     function updatePanelPointer() {
+      panelPointerTicks++;
       const open = menuHoldsPointer();
       if (open) {
         if (viewFirst) _panelHeldLock = true;
@@ -52647,7 +52917,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     function flamerTick() {
       flamerTickN++;
       AudioSys.flameBurst('player', 1, 0, 0.11);
-      addShake(0.02);
+      // CL-293 (Jerry's J59, J19 before it: "There should be a smooth pushback. Not the insanity we have right now. It shakes
+      // the camera like crazy"): a shake every tick was a 12.5 Hz buzz of the whole view (AG-202: 5.2 cm RMS). In first person
+      // the view gun leans back steadily while the stream runs (game/viewmodel.js, st.stream); third person keeps a breath of it.
+      if (!viewFirst) addShake(0.006);
     }
 
     // === Flame stream ===========================================================
@@ -52680,6 +52953,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     const flameParticles = [];
     const _flameNear = [];
     const _flameDir = new THREE.Vector3();
+    const _flameOrigin = new THREE.Vector3(), _flameAim = new THREE.Vector3();
     let flameEmitAcc = 0, flameClock = 0, flameGroundCd = 0;
     // Nozzle flare: a flickering cone of flame at the tip while the trigger is held.
     // Built here rather than in makeFlamer(), which runs before these materials exist.
@@ -52736,7 +53010,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const gun = weaponMeshes.flamer;
       const flare = gun.userData.flare;
       if (firing) {
-        const o = getMuzzleWorld(), aim = getAimDir();
+        // First person draws a separate view gun: emit where its nozzle appears.
+        // The body gun remains the origin in third person and while the view gun raises.
+        const viewFlame = !!viewmodel && viewmodel.showing('flamer') && !!viewmodel.muzzleWorld(_flameOrigin);
+        const o = viewFlame ? _flameOrigin : getMuzzleWorld();
+        const aim = viewFlame ? _flameAim.subVectors(weaponAimPoint(), o).normalize() : getAimDir();
         // A flamethrower is hosed, not pointed: pitch is held between ~7° down and ~34°
         // up. Following a reticle on the ground near your boots would spray your own feet;
         // this way the stream reaches out and sags onto the ground a few metres ahead,
@@ -54713,7 +54991,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       ensureTreeGrown(t);
       if (!t.alive || t.falling) return;
       if ((t.burnT || 0) > 0) return;
-      if (trees.filter(o => o.burnT > 0).length >= MAX_BURNING_TREES) return;
+      let burningN = 0;
+      for (let i = 0; i < burnWatch.length; i++) if (burnWatch[i].burnT > 0) burningN++;
+      if (burningN >= MAX_BURNING_TREES) return;
       t.burnT = 9 + Math.random() * 4;
       t.burnDur = t.burnT;
       t.burnDefense = defense;
@@ -54733,6 +55013,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       f.slot.fill(-1);
       for (const fl of f.crownF) fl.visible = false;
       const sa = sndAt(t.x, t.z, 30); AudioSys.fireCrackle(sa.v, sa.pan);
+      watchBurn(t);
     }
 
     // Leaf-clump fire: heat (scorch, glow) → char → shrink → gone.
@@ -54788,9 +55069,13 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
 
     function updateBurningTrees(dt) {
       if (fireTimeU) fireTimeU.value += dt;
-      for (const t of trees) {
+      for (let bi = burnWatch.length - 1; bi >= 0; bi--) {
+        const t = burnWatch[bi];
         if (t.smoulder > 0 && !(t.burnT > 0)) updateSmoulder(t, dt);
-        if (!t.burnT || t.burnT <= 0) continue;
+        if (!t.burnT || t.burnT <= 0) {
+          if (!(t.smoulder > 0)) dropBurn(t);
+          continue;
+        }
         // A batched tree is hidden on purpose. Leave the burn; the batch check brings it live next frame.
         if ((!t.group.visible && !t._tbInBatch) || (!t.alive && !t.falling && !t.log)) { t.burnT = 0; hideTreeFire(t); continue; }
         if (!t.group.visible) continue;
@@ -55031,6 +55316,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     function beginTreeFall(tree, dirX, dirZ) {
       if (!tree.alive || tree.falling) return;
       tree.falling = true;
+      propDirty = true;
       tree.fallT = 0;
       tree.log = false;
       tree.logBaseY = tree.group.position.y;
@@ -56220,8 +56506,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     const PROP_CELL = 8;
     const propGrid = new Map();
     const _propNear = [];
-    const _propSeen = new Set();
-    let propGridStamp = '';
+    let propGen = 1;
+    let propDirty = true;
+    let propNTrees = -1, propNRocks = -1, propNSolids = -1;
     const propCell = (v) => Math.floor(v / PROP_CELL);
     function fileProp(obj, r) {
       const i0 = propCell(obj.x - r), i1 = propCell(obj.x + r);
@@ -56234,20 +56521,24 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       }
     }
     function propsNear(x, z, r) {
-      const stamp = ((_zgFrame / 12) | 0) + ':' + trees.length + ':' + rocks.length + ':' + worldSolids.length;   // CL-117: not every frame
-      if (stamp !== propGridStamp) {
-        propGridStamp = stamp;
+      // CU-224: standing trunks do not move, so the grid is rebuilt when a tree falls
+      // or a solid is added, not on a timer. The timer was refiling every tree.
+      const nTrees = trees.length, nRocks = rocks.length, nSolids = worldSolids.length;
+      if (propDirty || nTrees !== propNTrees || nRocks !== propNRocks || nSolids !== propNSolids) {
+        propDirty = false;
+        propNTrees = nTrees; propNRocks = nRocks; propNSolids = nSolids;
         for (const a of propGrid.values()) a.length = 0;
-        for (const t of trees) {
+        for (let ti = 0; ti < trees.length; ti++) {
+          const t = trees[ti];
           const solid = (t.stump && t.stumpMesh) ? t.trunkRadius * 1.15
             : ((t.alive && !t.falling) ? t.trunkRadius : 0);
           if (solid > 0) fileProp(t, solid);
         }
-        for (const rock of rocks) if (rock.alive) fileProp(rock, rock.radius || 0);
-        for (const ws of worldSolids) fileProp(ws, ws.radius || 0);
+        for (let ri = 0; ri < rocks.length; ri++) { const rock = rocks[ri]; if (rock.alive) fileProp(rock, rock.radius || 0); }
+        for (let si = 0; si < worldSolids.length; si++) { const ws = worldSolids[si]; fileProp(ws, ws.radius || 0); }
       }
       _propNear.length = 0;
-      _propSeen.clear();
+      const gen = ++propGen;
       const pad = r + PROP_CELL;
       const i0 = propCell(x - pad), i1 = propCell(x + pad);
       const j0 = propCell(z - pad), j1 = propCell(z + pad);
@@ -56256,8 +56547,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         if (!a) continue;
         for (let k = 0; k < a.length; k++) {
           const obj = a[k];
-          if (_propSeen.has(obj)) continue;
-          _propSeen.add(obj);
+          if (obj._pg === gen) continue;
+          obj._pg = gen;
           _propNear.push(obj);
         }
       }
@@ -57004,13 +57295,19 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       // (D-103), and their trunks pushed him off his line on the descent and held him in the iron warren's chambers.
       if (hollowFloor) return;
       const py = player.position.y + getStanceEyeY() * 0.75;
-      for (const t of trees) {
-        if (t._tbInBatch || !t.group.visible) continue;
+      for (let ti = 0; ti < touchTrees.length; ti++) {
+        const t = touchTrees[ti];
+        if (!t.group || !t.group.visible) continue;
         // Read the live position each pass — using a snapshot taken before the loop
         // meant overlapping props double-counted their pushes.
         const px = player.position.x, pz = player.position.z;
+        const dx = px - t.x, dz = pz - t.z;
+        const reach = Math.max(t.canopyRadius || 0, t.trunkRadius || 0) + 1;
+        if (dx > reach || dx < -reach || dz > reach || dz < -reach) {
+          if (t.leafCooldown > 0) t.leafCooldown -= dt;
+          continue;
+        }
         if (t.stump && t.stumpMesh) {
-          const dx = px - t.x, dz = pz - t.z;
           const dist = hypot(dx, dz) || 0.0001;
           const trunkMin = t.trunkRadius + PLAYER_RADIUS * 0.85;
           if (dist < trunkMin) {
@@ -57021,7 +57318,6 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           continue;
         }
         if (!t.alive || t.falling) continue;
-        const dx = px - t.x, dz = pz - t.z;
         const dist = hypot(dx, dz) || 0.0001;
         const nx = dx / dist, nz = dz / dist;
         const trunkMin = t.trunkRadius + PLAYER_RADIUS;
@@ -57054,11 +57350,13 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         t.leafCooldown = Math.max(0, t.leafCooldown - dt);
       }
       // Rocks
-      for (const rock of rocks) {
-        if (!rock.alive || !rock.mesh.visible) continue;
+      for (let ri = 0; ri < rocks.length; ri++) {
+        const rock = rocks[ri];
+        if (!rock.alive || !rock.mesh || !rock.mesh.visible) continue;
         const dx = player.position.x - rock.x, dz = player.position.z - rock.z;
-        const dist = hypot(dx, dz) || 0.0001;
         const minD = rock.radius + PLAYER_RADIUS;
+        if (dx > minD || dx < -minD || dz > minD || dz < -minD) continue;
+        const dist = hypot(dx, dz) || 0.0001;
         if (dist < minD) {
           const push = minD - dist;
           player.position.x += (dx / dist) * push;
@@ -57070,7 +57368,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       // straight through every building on the map. Skipped once you're actually up on
       // top of one (the tower deck), checked against real height rather than the
       // terrain under you, since a platform like that isn't part of the terrain.
-      for (const ws of worldSolids) {
+      for (let wi = 0; wi < worldSolids.length; wi++) {
+        const ws = worldSolids[wi];
         const minD = ws.radius + PLAYER_RADIUS;
         const dx = player.position.x - ws.x, dz = player.position.z - ws.z;
         if (dx > minD || dx < -minD || dz > minD || dz < -minD) continue;
@@ -57084,7 +57383,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         }
       }
       // CL-107: the Marrow cave's door. Against him only (the dead squeeze out through its hole).
-      for (const ws of caveSealSolids) {
+      for (let ci = 0; ci < caveSealSolids.length; ci++) {
+        const ws = caveSealSolids[ci];
         const minD = ws.radius + PLAYER_RADIUS;
         const dx = player.position.x - ws.x, dz = player.position.z - ws.z;
         if (dx > minD || dx < -minD || dz > minD || dz < -minD) continue;
@@ -59518,9 +59818,25 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
             const hadLine = z.lineClear;
             z.lineClear = !shotBlocked({ x: zx + ox, y: fy, z: zz + oz }, { x: tx + ox, y: gy, z: tz + oz }) &&
               !shotBlocked({ x: zx - ox, y: fy, z: zz - oz }, { x: tx - ox, y: gy, z: tz - oz });
-            if (!z.lineClear) { z.lineSawBlock = true; z.lineGo = 1.2; }
-            else if (hadLine === false && z.lineSawBlock) z.lineGo = 1.2;
+            // GB-253 (Claude's (1), 2026-11-02): one blocked check while it strafed in the open made an open-field spider
+            // a blocked hunter for good (GP-19979), so it committed in and parked inside near. Now a spider that had the line
+            // in its band and loses it while strafing turns its strafe round (back toward where it had the line) and keeps
+            // holding; it becomes a hunter only if it is still blocked 2 s later (lineLostT, below). One that never had the
+            // line (behind the house) becomes one after two blocked checks in a row, as GP-19979 meant; three clear checks
+            // in a row beyond near clear it again.
+            if (!z.lineClear) {
+              z.lineClearN = 0; z.lineBlockN = (z.lineBlockN || 0) + 1;
+              if (z.spider && z.lineHad && !z.lineSawBlock) { if (!(z.lineLostT > 0)) { z.lineLostT = 2; z.strafeDir = -(z.strafeDir || 1); z.strafeT = 2.2; } }
+              else { if (z.lineBlockN >= 2) z.lineSawBlock = true; z.lineGo = 1.2; }
+            } else {
+              z.lineBlockN = 0; z.lineLostT = 0;
+              if (z.spider && !z.lineSawBlock) z.lineHad = true;
+              if (hadLine === false && z.lineSawBlock) z.lineGo = 1.2;
+              if (z.lineSawBlock && dist > near) { z.lineClearN = (z.lineClearN || 0) + 1; if (z.lineClearN >= 3) { z.lineSawBlock = false; z.lineClearN = 0; } }
+              else z.lineClearN = 0;
+            }
           }
+          if (z.lineLostT > 0) { z.lineLostT -= dt; if (z.lineLostT <= 0) { z.lineLostT = 0; if (z.lineClear === false) { z.lineSawBlock = true; z.lineHad = false; z.lineGo = 1.2; } } }
           // GP-19979: once a blocked hunter wins a firing line, commit straight into
           // it for lineGo, then hold that spot. A back-off or random skitter at the
           // corner put it behind the house again; an open-field spider still strafes.
@@ -59531,7 +59847,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           } else if (dist < near && z.lineClear !== false) {
             if (z.lineSawBlock) spd = 0;
             else { sx = -nx; sz = -nz; spd = z.baseSpeed * 0.85; }
-          } else if (dist < hold && z.lineClear !== false && !(z.lineGo > 0)) {
+          } else if (dist < hold && ((z.lineClear !== false && !(z.lineGo > 0)) || z.lineLostT > 0)) {
             if (z.spider && !z.lineSawBlock) { z.strafeT = (z.strafeT || 0) - dt; if (z.strafeT <= 0) { z.strafeT = 1.2 + Math.random(); z.strafeDir = Math.random() < 0.5 ? -1 : 1; } const d0 = z.strafeDir || 1; sx = -nz * d0; sz = nx * d0; spd = z.baseSpeed * 0.6; }
             else spd = 0;
           }
@@ -59619,6 +59935,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
               const rr2 = 13 + Math.random() * 8;
               const spot2 = resolveStaticProps(zx + Math.cos(a2) * rr2, zz + Math.sin(a2) * rr2, 0.8);
               if (waterDepthAt(spot2.x, spot2.z) > 1) continue;
+              if (storyRingShut(spot2.x, spot2.z)) continue;   // CL-296 (AG-216): a howl calls none up inside a shut story ring
               if (spawnZombie(spot2.x, spot2.z, Math.random() < 0.6 ? 'shambler' : 'feral')) {
                 spawnDust(spot2.x, sampleHeight(spot2.x, spot2.z), spot2.z, 5);
                 called++;
@@ -60595,7 +60912,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         if (poseWork && kind === 'military') applyMilitaryPose(z, dt); // GP-19864: planted combat stride, guard, bash and kick
         if (poseWork && kind === 'spitter') applySpitterMotion(z, dt); // GP-19870: hunched shuffle, hip lag and final retch/recoil
         if (poseWork && kind === 'screamer') applyScreamerPose(z, dt); // GP-19872: planted sway, open arms, scream arch and spent recovery
-        if (z.spitterShot) { const shot=z.spitterShot; delete z.spitterShot; if (!parts.head) spawnAcidGlob(z,shot.x,shot.z,true); }
+        if (z.spitterShot) { const shot=z.spitterShot; z.spitterShot = undefined; if (!parts.head) spawnAcidGlob(z,shot.x,shot.z,true); }
         if (poseWork && kind === 'drowned') { applyDrownedMotion(z, dt); applyDrownedPose(z); }
         const hzReach = z._hzReach || 0; z._hzReach = 0;   // GB-248: the lunge's arms, set in the feral's lunge pose above
         if (poseWork && kind === 'feral') {
@@ -61281,6 +61598,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         // in the scene, left where it was aimed in the valley. Hidden with the valley, its matrix stopped updating, so the
         // gun light kept pointing at the old spot outside (a patch high on the hangar wall) and lit nothing he aimed at.
         keep.add(flashlight.target);
+        // CL-293 (AG-219, ChatGPT's find): the view gun's root rides the camera but sits in the scene at the top level; left
+        // where he was in the valley when he went in, it was hidden and frozen there, so in the Training Ground the gun
+        // could be "visible" and nowhere near his eye.
+        if (viewmodel && viewmodel.root) keep.add(viewmodel.root);
         for (const z of zombies) if (z.mesh) keep.add(z.mesh);
         for (const c of corpses) if (c.mesh) keep.add(c.mesh);
         const hid = [];
@@ -61840,7 +62161,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           const entry = z.trainingEntry;
           entry.z -= dt * (entry.pace || 3);   // CL-171: its own walking pace, so the stride matches the ground
           z.mesh.position.set(entry.x, tg.floorY, entry.z); z.mesh.rotation.y = Math.PI;
-          if (entry.z <= tg.releaseGate.passage.wallZ - (z.radius || .42) - 1) { delete z.trainingEntry; z.mesh.visible = true; }
+          if (entry.z <= tg.releaseGate.passage.wallZ - (z.radius || .42) - 1) { z.trainingEntry = undefined; z.mesh.visible = true; }
         }
       }
       // CL-171: the tunnel, and anything still in it, is drawn only while the camera is in the room.
@@ -62385,6 +62706,13 @@ live++;
       b.forest += (_ambForest - b.forest) * Math.min(1, dt * 1.5);
       b.below = a.below;   // CL-101
       placeBeds(b); a.dread = Math.max(b.cave, b.pit * 0.8);   // CL-82: the music hears it too
+      { // CL-275: the place he's in, for the score's calm (the graveyard, the relay's mast, the hikers' camp); in at r, out at r + 12
+        const qx = player.position.x, qz = player.position.z, was = a.place || null;
+        let place = null;
+        const at = (o, r, id) => { if (!o || place) return; if (hypot(o.x - qx, o.z - qz) < (was === id ? r + 12 : r)) place = id; };
+        at(POI.graveyard, 40, 'graveyard'); at(POI.mast, 35, 'relay'); at(POI.campsites && POI.campsites.find((c) => c.style === 'hikers'), 30, 'hikers');
+        a.place = place;
+      }
       AudioSys.updateAmbience(b);
     }
     function updateWorldAnimationsIndoors(dt) {   // CL-118: the Training Ground's frame
@@ -62911,6 +63239,7 @@ live++;
           }
         }
         if (inspectHook) { inspectHook.frame(0, 0); applyShotView(); }   // CL-196
+        updatePanelPointer();   // CU-228 (J56): pause returns before updateOts, so a menu never let the pointer go
         renderFrame();
         return;
       }
@@ -63848,7 +64177,8 @@ live++;
       flightRecord(dt);   // CU-160
       updateViewmodel(realDt);   // CL-281
       PROF.mark('viewmodel');
-      renderFrame();
+      const fpPunched = fpPunchApply();   // CL-293: the shot's turn of the view, for this draw only
+      try { renderFrame(); } finally { if (fpPunched) fpPunchUndo(); }
       PROF.mark('after render');
       if ((showPerf || INSPECT) && !window.TT) {
         window.TT = stampDebugHooks({
@@ -63883,7 +64213,7 @@ live++;
             else if (name === 'dev') closeDevConsole();
             else if (name === 'map') setFullMap(false);
             else if (name === 'wheel') closeWheel(false);
-          }, lockWantDbg: () => lockWantDbg, menuHoldsDbg: () => menuHoldsPointer(), closeWheelDbg: () => { wheelKind = null; wheelEl.classList.remove("show"); }, wheelTurnPage, getWheelState: () => ({ kind: wheelKind, page: wheelPage, keys: wheelItems.map((it) => it.key) }), BUILD_PAGES, BUILD_ORDER,
+          }, lockWantDbg: () => lockWantDbg, menuHoldsDbg: () => menuHoldsPointer(), panelPointerDbg: () => panelPointerTicks, closeWheelDbg: () => { wheelKind = null; wheelEl.classList.remove("show"); }, wheelTurnPage, getWheelState: () => ({ kind: wheelKind, page: wheelPage, keys: wheelItems.map((it) => it.key) }), BUILD_PAGES, BUILD_ORDER,
           applyGraphicsPreset, GFX_PRESETS, getGfx: () => gfxKey, skipPrep,
           THREE, scene, renderer, camera, sun, hemi, moon, ground, player, groundMeshY,
           trees, rocks, foliage, zombies, builds, sampleHeight, waterDepthAt,
@@ -63956,7 +64286,7 @@ live++;
           setShotView, getShotView: () => shotView,
           skipGrace: () => { hoursSinceMatchStart = Math.max(hoursSinceMatchStart, ZOMBIE_GRACE_HOURS + 0.01); },
           getQuestState: () => quest.read(), learnQuest: place => quest.learn(place), restoreQuestDbg: state => quest.restore(state),
-          launcherBrassDbg: () => ({ thrown: launcherBrassThrown, spent: launcherSpent }),   /* GB-133 */ dismemberDbg: (z, part) => detachZombiePart(z, part, 0, 1), MAIMED_HOP_MUL, cloneLean,   /* CL-136 */ slowMoDbg, triggerSlowMo, diveDbg: () => ({ phase: dive.phase, w: dive.w, k: diveTimeScale(dive), meter: dive.meter, cd: dive.cd, slowT: dive.slowT, slowing: slowmoOn(dive), vx: dive.vx, vz: dive.vz, dirX: dive.dirX, dirZ: dive.dirZ, dives: dive.dives, flat: diveFlatW,pose:divePoseFrame,contact:dive.contact }), setDiveMeterDbg: (v) => { dive.meter = Math.max(0, Math.min(1, +v || 0)); }, DIVE,   /* CL-193 */ selectorFlick,   /* GB-167 */   /* CL-137 */ trainingHideWorld, getHidWorld: () => training.hidWorld,   /* CL-138 */ profDbg: PROF, rotateCamera, cullDbg: cullStats, cullShowAll, zombiePoolDbg: () => Object.fromEntries([...zombiePool].map(([k, v]) => [k, v.length])), shadowPruneDbg: () => ({ on: SHADOW_PRUNE, ...shadowPrune }),   /* CL-288 */ sunShadowDbg: () => ({ ...sunShadowStats, deep: sunShadowDeep, tick: sunShadowTick, every: SUN_SHADOW_DEEP_EVERY, move: SUN_SHADOW_DEEP_MOVE }),   /* CL-237 */ zombieHitNightMul,   /* CL-244 */ marineShadowDbg: (full) => ({ builds: marineShadowBuilds, lastDiff: marineShadowDiff, proxy: marineShadowProxy, ms: marineShadowMs, sig: marineShadowSig, bones: marineShadowProxy ? marineShadowProxy.skeleton.bones.length : 0, verts: marineShadowProxy ? marineShadowProxy.geometry.attributes.position.count : 0, warm: marineShadowWarm, retired: marineShadowRetired.length, drawnAt: marineShadowProxy ? marineShadowProxy.userData.drawnAt : null, seen: marineShadowSeen, seenAt: marineShadowSeenAt, builtAt: marineShadowBuiltAt, frame: perfFrame, now: full ? marineShadowNow() : undefined }),   /* CL-241: warm..frame, now */ skinMergeGroup, skinUnmerge,   /* CL-140 */   /* GB-136 */ grenadeArcDbg: () => ({ charging: grenadeCharging, t: grenadeChargeT, visible: grenadeArc.visible, hit: grenadeArc.userData.hit, dots: grenadeArc.userData.dots, launcher: launcherArc.visible, lhit: launcherArc.userData.hit, lstate: launcherArc.userData.state, last: lastGrenadeThrow, n: grenades, cd: grenadeCd }), startGrenadeCharge, releaseGrenadeCharge, GRENADE_THROW, grenadeThrowSpeed, flyArc,   /* GB-134 */ grenadeAnimDbg: () => ({ phase: grenadeAnim.phase, t: grenadeAnim.t, inHand: grenadeAnim.inHand, queued: grenadeAnim.queued, hand: grenadeHand, carriedShown: grenadeInHandN, simple: !!grenadeArc.userData.simple, segs: grenadeArc.userData.segs, release: grenadeReleasePoint().clone(), anim: GRENADE_ANIM, keys: GR_KEY }), holdGrenadeAnim: (phase, t) => { grenadeAnimHold = phase ? { phase, t: t || 0 } : null; if (!phase) { grenadeAnim.phase = ''; setGrenadeInHand(false); } }, setGrenadesDbg: (n) => { grenades = n | 0; updateAmmoHud(); updateCarriedGear(0, true); },   /* CU-97 */ m240Dbg: () => { const b = mortarMounted && mortarMounted.type === 'm240' ? mortarMounted : null; return { belt: b ? b.belt : null, feedT: b ? (b.feedT || 0) : 0, reserve: reserveAmmo['7.62 belt'] | 0, flash: !!(b && b.mesh.userData.flash && b.mesh.userData.flash.visible), hud: ammoDetailEl ? ammoDetailEl.textContent : '', hudName: ammoWeaponEl ? ammoWeaponEl.textContent : '' }; }, watchmanDbg: () => ({state:mortarMounted?.watchman || null,weight:_watchman.weight,ghost:ghostGroup}), crewDbg: () => ({ mortar: { w: _mcrew.w, phase: _mcrew.load.phase, roundIn: _mcrew.load.round, dropping: _mcrew.load.dropping, dropT: _mcrew.load.dropT, fired: _mcrew.load.fired, round: _mcrew.round, muzzle: _mcrew.muzzle, axis: _mcrew.axis, feet: _mcrew.plant.feet, steps: _mcrew.plant.steps }, m240: { feet: _watchman.plant.feet, steps: _watchman.plant.steps } }),   /* GB-156 */ feedM240, m240MuzzleWorld, M240_FEED_S, stockedLooseCalibers, aimPointDbg: (x, y, z) => { aimTarget.set(x, y, z); }, upgradeAvailableHint, getUpgradeAvailHint: () => upgradeAvailHint, tipOnce, tipsDbg: () => ({ seen: Object.assign({}, tipsSeen || {}), reset: () => { tipsSeen = {}; try { localStorage.removeItem(TIP_STORE); } catch (e) {} } }), placeBannerText: () => placeBannerEl.textContent, bigBannerText: () => bigBannerT.textContent + ' | ' + bigBannerS.textContent,   /* GB-139 */ m240VisDbg: () => ({ carried: carriedM240Mesh.visible, carriedMortar: carriedMortarMesh.visible, carriedGun: carriedM240Mesh, spent: { ...m240Spent }, casings: casings.length, pitchTo: m240PitchTo, muzzle: m240MuzzleWorld, CARRY_M240, CARRY_ARM, ELEV: [M240_ELEV_MIN, M240_ELEV_MAX], setDown: setDownMortar, casingsList: casings }),   /* CL-131 */ brandtGunDbg: () => { const r = roofCrew.find((c) => c.who === 'brandt'); return r && r.gun ? { gun: r.gun, flashed: !!r.gun.userData.flash, shots: r.shots } : null; },   /* GB-138 */ getSimTime: () => simTime,   /* GB-131 */ getDebugTouched: () => debugTouched, resetGame, ensureCrew,   /* CL-105 */ makeMarine,   /* CL-94 */ carryDbg, carryPreview, updateCarriedGear, CARRY_SLOTS, drawDbg, updateMarineDraw, drawPreview,   /* CL-90 */ dressMarine, DRESS, getMarine: () => marine, dressGuns, getGunFurniture: () => gunFurniture,   /* CL-97 */ buildWarren, layoutWarren, WARREN_THEMES, HOLLOW, enterHollow, leaveHollow, warrenDbg: () => ({ safe: warrenSafe, lastY: warrenLastY, open: (x, y, z) => belowCamOpen(x, y, z), roof: (x, z) => belowRoofAt(x, z) }), hollowState: () => hollow.state(), belowDbg, applyVaultReward,   /* CL-259 */   /* GB-107 */ stirDbg,   /* GB-108 */ heartDbg,   /* GB-92 */ runePistolDbg,   /* GB-119 */ hordeDbg,   /* GB-94 */ getMedDropCount: () => medDrops.length,   /* GB-94 */ grantHaul, claimHollowHere, markHollowPassage: (b) => { markHollowPassage(b); return passageMark; },   /* CU-80, CU-72 */ hqLadderAt, stepHqLadder, onHqRoof: () => onHqRoof, mapRevealDbg: () => ({ seen: (x, z) => mapReveal.seen(x, z), count: () => mapReveal.count(), found: () => mapReveal.found(), step: () => stepMapReveal() }),   /* CU-198 */   /* CL-99 */ pitSignal, setPitWord, setPitSilenced, updatePitSignal, setOnTowerDeckDbg: (v) => { onTowerDeck = !!v; }, /* CL-107 */ firstPeople, updateFirstPeople, caveSealSolids, /* CL-112 */ buildHeart, HEART, /* CL-81 */ letGoDbg, /* CL-116 */ lightPoolDbg: { pool: () => ensureLightPool(), update: () => updateLightPool() }, /* CL-115 */ trainingDbg: { round: (p) => trainingRound(p),   /* GB-163: a round by hand (shots, tests) */ start: () => startTraining(), enter: () => enterTraining(), leave: () => leaveTraining(), state: () => training, tg: () => training.tg,
+          wallCullDbg: () => (wallCull ? { cells: wallCull.stats.cells, hidden: wallCull.stats.hidden, tested: wallCull.stats.tested, segments: wallCull.stats.segments, ms: cullStats.wallMs, cull: wallCull } : null),   /* GB-273 */ launcherBrassDbg: () => ({ thrown: launcherBrassThrown, spent: launcherSpent }),   /* GB-133 */ dismemberDbg: (z, part) => detachZombiePart(z, part, 0, 1), MAIMED_HOP_MUL, cloneLean,   /* CL-136 */ slowMoDbg, triggerSlowMo, diveDbg: () => ({ phase: dive.phase, w: dive.w, k: diveTimeScale(dive), meter: dive.meter, cd: dive.cd, slowT: dive.slowT, slowing: slowmoOn(dive), vx: dive.vx, vz: dive.vz, dirX: dive.dirX, dirZ: dive.dirZ, dives: dive.dives, flat: diveFlatW,pose:divePoseFrame,contact:dive.contact }), setDiveMeterDbg: (v) => { dive.meter = Math.max(0, Math.min(1, +v || 0)); }, DIVE,   /* CL-193 */ selectorFlick,   /* GB-167 */   /* CL-137 */ trainingHideWorld, getHidWorld: () => training.hidWorld,   /* CL-138 */ profDbg: PROF, rotateCamera, cullDbg: cullStats, cullShowAll, zombiePoolDbg: () => Object.fromEntries([...zombiePool].map(([k, v]) => [k, v.length])), shadowPruneDbg: () => ({ on: SHADOW_PRUNE, ...shadowPrune }),   /* CL-288 */ sunShadowDbg: () => ({ ...sunShadowStats, deep: sunShadowDeep, tick: sunShadowTick, every: SUN_SHADOW_DEEP_EVERY, move: SUN_SHADOW_DEEP_MOVE }),   /* CL-237 */ zombieHitNightMul,   /* CL-244 */ marineShadowDbg: (full) => ({ builds: marineShadowBuilds, lastDiff: marineShadowDiff, proxy: marineShadowProxy, ms: marineShadowMs, sig: marineShadowSig, bones: marineShadowProxy ? marineShadowProxy.skeleton.bones.length : 0, verts: marineShadowProxy ? marineShadowProxy.geometry.attributes.position.count : 0, warm: marineShadowWarm, retired: marineShadowRetired.length, drawnAt: marineShadowProxy ? marineShadowProxy.userData.drawnAt : null, seen: marineShadowSeen, seenAt: marineShadowSeenAt, builtAt: marineShadowBuiltAt, frame: perfFrame, now: full ? marineShadowNow() : undefined }),   /* CL-241: warm..frame, now */ skinMergeGroup, skinUnmerge,   /* CL-140 */   /* GB-136 */ grenadeArcDbg: () => ({ charging: grenadeCharging, t: grenadeChargeT, visible: grenadeArc.visible, hit: grenadeArc.userData.hit, dots: grenadeArc.userData.dots, launcher: launcherArc.visible, lhit: launcherArc.userData.hit, lstate: launcherArc.userData.state, last: lastGrenadeThrow, n: grenades, cd: grenadeCd }), startGrenadeCharge, releaseGrenadeCharge, GRENADE_THROW, grenadeThrowSpeed, flyArc,   /* GB-134 */ grenadeAnimDbg: () => ({ phase: grenadeAnim.phase, t: grenadeAnim.t, inHand: grenadeAnim.inHand, queued: grenadeAnim.queued, hand: grenadeHand, carriedShown: grenadeInHandN, simple: !!grenadeArc.userData.simple, segs: grenadeArc.userData.segs, release: grenadeReleasePoint().clone(), anim: GRENADE_ANIM, keys: GR_KEY }), holdGrenadeAnim: (phase, t) => { grenadeAnimHold = phase ? { phase, t: t || 0 } : null; if (!phase) { grenadeAnim.phase = ''; setGrenadeInHand(false); } }, setGrenadesDbg: (n) => { grenades = n | 0; updateAmmoHud(); updateCarriedGear(0, true); },   /* CU-97 */ m240Dbg: () => { const b = mortarMounted && mortarMounted.type === 'm240' ? mortarMounted : null; return { belt: b ? b.belt : null, feedT: b ? (b.feedT || 0) : 0, reserve: reserveAmmo['7.62 belt'] | 0, flash: !!(b && b.mesh.userData.flash && b.mesh.userData.flash.visible), hud: ammoDetailEl ? ammoDetailEl.textContent : '', hudName: ammoWeaponEl ? ammoWeaponEl.textContent : '' }; }, watchmanDbg: () => ({state:mortarMounted?.watchman || null,weight:_watchman.weight,ghost:ghostGroup}), crewDbg: () => ({ mortar: { w: _mcrew.w, phase: _mcrew.load.phase, roundIn: _mcrew.load.round, dropping: _mcrew.load.dropping, dropT: _mcrew.load.dropT, fired: _mcrew.load.fired, round: _mcrew.round, muzzle: _mcrew.muzzle, axis: _mcrew.axis, feet: _mcrew.plant.feet, steps: _mcrew.plant.steps }, m240: { feet: _watchman.plant.feet, steps: _watchman.plant.steps } }),   /* GB-156 */ feedM240, m240MuzzleWorld, M240_FEED_S, stockedLooseCalibers, aimPointDbg: (x, y, z) => { aimTarget.set(x, y, z); }, upgradeAvailableHint, getUpgradeAvailHint: () => upgradeAvailHint, tipOnce, tipsDbg: () => ({ seen: Object.assign({}, tipsSeen || {}), reset: () => { tipsSeen = {}; try { localStorage.removeItem(TIP_STORE); } catch (e) {} } }), placeBannerText: () => placeBannerEl.textContent, bigBannerText: () => bigBannerT.textContent + ' | ' + bigBannerS.textContent,   /* GB-139 */ m240VisDbg: () => ({ carried: carriedM240Mesh.visible, carriedMortar: carriedMortarMesh.visible, carriedGun: carriedM240Mesh, spent: { ...m240Spent }, casings: casings.length, pitchTo: m240PitchTo, muzzle: m240MuzzleWorld, CARRY_M240, CARRY_ARM, ELEV: [M240_ELEV_MIN, M240_ELEV_MAX], setDown: setDownMortar, casingsList: casings }),   /* CL-131 */ brandtGunDbg: () => { const r = roofCrew.find((c) => c.who === 'brandt'); return r && r.gun ? { gun: r.gun, flashed: !!r.gun.userData.flash, shots: r.shots } : null; },   /* GB-138 */ getSimTime: () => simTime,   /* GB-131 */ getDebugTouched: () => debugTouched, resetGame, ensureCrew,   /* CL-105 */ makeMarine,   /* CL-94 */ carryDbg, carryPreview, updateCarriedGear, CARRY_SLOTS, drawDbg, updateMarineDraw, drawPreview,   /* CL-90 */ dressMarine, DRESS, getMarine: () => marine, dressGuns, getGunFurniture: () => gunFurniture,   /* CL-97 */ buildWarren, layoutWarren, WARREN_THEMES, HOLLOW, enterHollow, leaveHollow, warrenDbg: () => ({ safe: warrenSafe, lastY: warrenLastY, open: (x, y, z) => belowCamOpen(x, y, z), roof: (x, z) => belowRoofAt(x, z) }), hollowState: () => hollow.state(), belowDbg, applyVaultReward,   /* CL-259 */   /* GB-107 */ stirDbg,   /* GB-108 */ heartDbg,   /* GB-92 */ runePistolDbg,   /* GB-119 */ hordeDbg,   /* GB-94 */ getMedDropCount: () => medDrops.length,   /* GB-94 */ grantHaul, claimHollowHere, markHollowPassage: (b) => { markHollowPassage(b); return passageMark; },   /* CU-80, CU-72 */ hqLadderAt, stepHqLadder, onHqRoof: () => onHqRoof, mapRevealDbg: () => ({ seen: (x, z) => mapReveal.seen(x, z), count: () => mapReveal.count(), found: () => mapReveal.found(), step: () => stepMapReveal() }),   /* CU-198 */   /* CL-99 */ pitSignal, setPitWord, setPitSilenced, updatePitSignal, setOnTowerDeckDbg: (v) => { onTowerDeck = !!v; }, /* CL-107 */ firstPeople, updateFirstPeople, caveSealSolids, /* CL-112 */ buildHeart, HEART, /* CL-81 */ letGoDbg, /* CL-116 */ lightPoolDbg: { pool: () => ensureLightPool(), update: () => updateLightPool() }, /* CL-115 */ trainingDbg: { round: (p) => trainingRound(p),   /* GB-163: a round by hand (shots, tests) */ start: () => startTraining(), enter: () => enterTraining(), leave: () => leaveTraining(), state: () => training, tg: () => training.tg,
             action: () => trainingActionTarget(), spawn: (k, n) => trainingSpawn(k, n), clear: () => trainingClear(), layout: () => trainingLayout(), clearLayout: () => trainingLayoutClear(), layoutPieces: () => training.layout || [], layoutRefused: () => training.layoutRefused || [], alive: () => trainingAlive(), blackout: () => trainingBlackout(), hitTarget: (i, pt) => trainingHitTarget(i, pt, !!pt), deployNow: (k, n) => trainingDeployNow(k, n), tunnel: () => training.tunnel, pops: () => training.pops, clearSkulls: () => trainingClearSkulls(),   /* CL-171 */
             update: (dt) => updateTraining(dt), panel: () => (ensureTrainingUi(), training.panel), openPanel: () => openTrainingPanel(), round: (p) => trainingRound(p), TRAINING,
             lights: () => ({ on: !training.lightsOff, night: isNight, room: training.tg ? training.tg.lightsOn() : null }), toggleLights: () => toggleTrainingLights() /* CU-94 */ }, /* CL-114 */ stockNoticeDbg: { arrivals: (n) => stockArrivals(n), queue: (n) => queueStockNotice(n), state: () => ({ t: stockNotice.t, hold: stockNotice.hold, guns: stockNotice.guns.slice(), shown: stockNotice.shown.slice(), visible: !!(stockNotice.el && stockNotice.el.classList.contains('show')) }), tick: (dt) => updateStockNotice(dt), show: (guns) => showStockNotice(guns), setDay: (n) => { day = n; }, NIGHT: GUN_STOCK_NIGHT }, armoryFinishDbg: { list: (k) => armoryFinishes(k), paint: (k, key) => paintArmoryGun(k, key) }, /* CL-113 */ armoryDbg: { mods: (w) => armoryMods(w), fit: (w, id, on) => fitArmoryMod(w, id, on), inReach: () => weaponsInReach(), picture: (k) => armoryPicture(k), pics: () => ({ drawn: armoryPics.drawn, cached: armoryPics.cache.size, ok: !!armoryPics.r }), rack: () => (house.armoryRack ? house.armoryRack.children.map((g) => g.userData.rackKind).filter(Boolean) : null), refreshRack: () => refreshArmoryRack(true), stored: () => armoryStoredKinds(), bigtex: () => bigtexWheel, ui: () => armoryUI, owned: () => ({ suppressor: { ...suppressorOwned }, auto: pistolAutoOwned, tank: sawTankUpgraded }) }, /* CL-83 */ nightRimDbg, /* CL-108, CL-109 */ historyProps, storyPropInReach, /* CL-111 */ runeFinishDbg: { unlocked: () => runeFinishUnlocked(), unlock: () => unlockRuneFinish(), lock: () => { runeFinish.unlocked = false; try { localStorage.removeItem(RUNE_FINISH_STORE); } catch (_) {} }, isGunFinishKey: (k) => isGunFinishKey(k), tex: () => runeFinish.tex, glow: (l) => updateRuneFinishGlow(l), state: () => runeFinish, furniture: () => gunFurniture, readWardrobe: () => readWardrobe(), KEY: RUNE_FINISH_KEY }, /* CL-78 */ guardianBossDbg: { rigOf: (z) => (z && z.mesh && z.mesh.userData.bossRig) || null, update: (dt) => updateGuardianBossRigs(dt), BOSS_RIG }, /* CL-93 */ rabbitDbg: { ensure: () => ensureRabbitMound(), state: () => rabbitMound, update: (dt) => updateRabbitMound(dt), wake: () => wakeKillerRabbit(), hit: (a, b) => rabbitMoundHit(a.x, a.y, a.z, b.x, b.y, b.z), give: () => { ensureRabbitMound(); rabbitMound.holy = true; rabbitMound.reliquary.userData.grenade.visible = false; }, ready: () => holyGrenadeReady(), throwG: () => { grenadeCd = 0; throwGrenade(); }, reset: () => resetRabbitMound(), distToPath: (x, z) => distToPath(x, z), RABBIT }, /* CL-92 */ lightningDbg: { yank: () => bootsYankPress(), yankState: () => ({ ...bootsYank, inReach: bootsYankInReach() }), skeleton: () => POI.mast && POI.mast.skeleton, strike: (k) => strikeLightning(k || null), update: (dt) => updateLightning(dt), state: () => lightning, odds: (o) => { lightning.odds = o || null; }, boots: () => ensureInsulatedBoots(), wear: (p) => wearInsulatedBoots(p || localPlayer), /* CL-178 */ mast: () => ({ ladder: mastLadder(), climb: mastClimb, high: onMastHigh(), perch: POI.mast ? POI.mast.perch : null, PERCH: MAST_PERCH }), climbMast: (y) => { const L = mastLadder(); if (!L) return false; mastClimb.on = true; climbingTower = true; player.position.set(L.x, Math.min(L.top, L.foot + (y || 0)), L.z); velX = 0; velZ = 0; vy = 0; return true; }, leaveMast: () => letGoOfMast(), /* CL-179 */ fall: () => mastFall, smoke: () => zapSmoke, ladderNow: () => ladderNow(), holster: () => ({ ...ladderHolster, unarmed }), /* CL-180 */ limbs: () => _lad.st, handTargets: () => _lad.hand, LADDER_GRIP, worn: (p) => insulatedBootsOn(p || localPlayer), reset: () => resetLightning(), marine: () => worldMarine, bolt: (x, z, hold) => { showBolt({ x, y: sampleHeight(x, z), z }); if (hold) { lightning.boltT = 1e9; lightning.flashT = 0; lightning.flashEl.style.opacity = '0'; } }, LIGHTNING, BOOTS_HEX }, /* CL-76 */ fogNightDbg: { active: () => fogNightActive(), k: () => fogNightK, force: (v) => { fogNightForce = v; }, step: (dt) => updateDayNight(dt), apply: (dt) => applyFogNight(dt), FOG_NIGHT }, /* CL-75 */ makeSurvivorFigure, SURVIVOR_LOOK, resolveTreeCollisionsDbg: (dt) => resolveTreeCollisions(dt),   /* CL-80 */ boatRig, getExtractionBoat: () => extractionBoat, /* CL-143 */ trainingBuildDbg: { refusal: (x, z, gx, gz, kind) => { const was = placeMode; if (kind) placeMode = kind; try { return placeRefusal(x, z, gx, gz); } finally { placeMode = was; } }, area: () => training.tg && training.tg.build, gridIndex }, /* CL-142 */ makeCargoPlane, insertionDbg: { begin: () => beginMarineInsertion(), rig: () => marineInsertion, ordersEl: () => ordersCardEl }, BOARD_HOLD_S, boardingDbg: () => ({ holdT: boardHoldT, pending: !!boardPending, reach: boardingReach(), won, gameOver, hot: !!matchStats.hotExtraction, state: extractionState }),   /* CL-73 */ setGunSuppressor, SUPPRESSOR,   /* CL-95 */
@@ -63968,11 +64298,21 @@ live++;
             gameStarted, paused, training: training.active, seen: z ? nightWarningSeen(z.mesh.position.x, z.mesh.position.y, z.mesh.position.z) : null,
             cover: z ? nightWarningCover(z.mesh.position.x, z.mesh.position.y, z.mesh.position.z) : null }) };
         window.TT.wallBandsDbg = { on: WALLS_ON, quartersOn: QUARTERS_ON,
+          crossings: () => crossingPaths.map((p) => ({ id: p.crossingId, pts: p.map((q) => ({ x: q.x, z: q.z })), halfWidth: p.gapHalfWidth })),
           bands: () => wallBands.map((b) => ({ kind: b.kind, width: b.width, pts: b.pts,
           radius: b.radius, gaps: b.gaps.map((g) => ({ id: g.id, kind: g.kind, halfWidth: g.halfWidth,
             at: g.at, width: g.width, clearWidth: g.clearWidth })), solids: b.solids.length })), draws: () => wallBandMeshes.length,
           blocked: (x, z, r = 0.35) => wallBands.some((b) => b.solids.some((s) => hypot(x - s.x, z - s.z) < s.radius + r)),
           resolve: (x, z, r = 0.35) => resolveStaticProps(x, z, r, sampleHeight(x, z)) };
+        window.TT.storyGatesDbg = { on: STORY_GATES_ON,   // CL-296
+          rings: () => storyRings.rings.map((r) => ({ place: r.place, gate: r.gate, lead: r.lead, cx: r.cx, cz: r.cz, r: r.r, width: r.width,
+            solids: r.band ? r.band.solids.length : 0, gates: r.gates.map((g) => ({ x: g.x, z: g.z, ax: g.ax, az: g.az, half: g.half, span: g.span })) })),
+          skipped: () => storyRings.skipped.slice(),
+          gates: () => storyGates.map((e) => ({ place: e.ring.place, gate: e.ring.gate, open: e.open, w: e.w, solids: e.solids.filter((s) => worldSolids.includes(s)).length,
+            blocks: valleyBlocks.filter((b) => b.tag === e.tag).length, x: e.g.x, z: e.g.z })),
+          shut: (x, z) => storyRingShut(x, z), near: () => { const e = storyGateNear(); return e ? e.ring.place : null; },
+          riseOk: (x, z) => groundRiseSpotOk(x, z),   // AG-213
+          build: () => { storyGatesBuild(); return storyGates.length; } };
         window.TT.shortcutDbg = { on: SHORTCUTS_ON,
           list: () => shortcutBands.map((b) => ({ id: b.id, x: b.middle.x, z: b.middle.z,
             cut: b.cut, hold: b.holdSeconds, solids: b.solids.length })),

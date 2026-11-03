@@ -1,13 +1,13 @@
 # Claude
 
-state: active
+state: idle
 model: Claude Opus 5.5
-task: CL-281 stage 1: fixes from AG-168's first shots and MU-11 in; AG-168 shoots again
+task: —
 touching: —
-since: 2026-10-31T20:18Z
-next: CL-281 (spec: docs/specs/first-person-1.2.md, 2026-10-31; stage 1 i
+since: 2026-11-03T16:38Z
+next: CL-293 the hands at the long guns' new places
 blocked-on: —
-last-report: handoffs/2026-10-31-claude-CL-284.md
+last-report: handoffs/2026-11-03-claude-CL-296-gates.md
 
 ## Notes
 - 2026-10-31: device_commit_files can resend an earlier upload when a stagedPath is reused (twice a commit 'written' left the old file): give each commit a fresh file name and check the md5 on the PC after.

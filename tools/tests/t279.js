@@ -38,11 +38,25 @@
     { const h0 = Math.atan2(dir.x, dir.z); T.otsLook(-200, 0); await wait(700); const d1 = cam.getWorldDirection(new THREE.Vector3()), h1 = Math.atan2(d1.x, d1.z);
       ok(Math.abs(h1 - h0) > 0.2, 'the mouse turns the view (' + h0.toFixed(2) + ' -> ' + h1.toFixed(2) + ')'); }
 
-    // Right-click: down the m4's sights.
+    // Right-click: down the m4 view gun's rendered sight line. Its own projection
+    // differs from the world camera's, so reconstruct the two visible points from NDC.
+    const sightSpec = (await import('./game/sight-points.js')).SIGHT.m4;
+    const viewSight = () => {
+      const vm = T.viewmodelDbg && T.viewmodelDbg();
+      if (!vm || !vm.showing('m4')) return null;
+      cam.updateMatrixWorld();
+      const t = Math.tan(cam.fov * Math.PI / 360), a = cam.aspect;
+      const world = (z) => {
+        const n = vm.ndc(vm.viewPoint(new THREE.Vector3(sightSpec.pos[0], sightSpec.pos[1], z)));
+        return cam.localToWorld(new THREE.Vector3(n.x * n.d * t * a, n.y * n.d * t, -n.d));
+      };
+      const pos = world(sightSpec.pos[2]), front = world(sightSpec.pos[2] + 0.5);
+      return { pos, fwd: front.sub(pos).normalize() };
+    };
     T.setZoomHeldDbg(true); held = true;
     ok(await until(() => F().ads > 0.99, 9000), 'right-click: down the sights (ads ' + F().ads.toFixed(2) + ')');
     await wait(400);
-    const s = F().sight;
+    const s = viewSight();
     if (!s) ok(false, 'the m4 has a sight line');
     else {
       const along = cam.position.clone().sub(s.pos), off = along.clone().sub(s.fwd.clone().multiplyScalar(along.dot(s.fwd))).length();

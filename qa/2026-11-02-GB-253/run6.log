@@ -1,0 +1,55 @@
+GRANT grokbot GB-253: starting one game-test command
+=== LIVE index.html: T80 x5
+check-players: 315 player.position reads, all in the allowed places
+ok    t80     14 pass   0 fail  146.1s
+
+1 checks: 14 pass, 0 fail
+check-players: 315 player.position reads, all in the allowed places
+ok    t80     14 pass   0 fail  158.1s
+
+1 checks: 14 pass, 0 fail
+check-players: 315 player.position reads, all in the allowed places
+ok    t80     14 pass   0 fail  152.8s
+
+1 checks: 14 pass, 0 fail
+check-players: 315 player.position reads, all in the allowed places
+ok    t80     14 pass   0 fail  144.9s
+
+1 checks: 14 pass, 0 fail
+check-players: 315 player.position reads, all in the allowed places
+ok    t80     14 pass   0 fail  150.5s
+
+1 checks: 14 pass, 0 fail
+=== LIVE: testpage zombies
+check-players: 315 player.position reads, all in the allowed places
+ok    tcl275a  13 pass   0 fail  48.7s
+info  t27      0 pass   0 fail  68.2s  — EMPTY WORLD visible meshes: 1978
+ok    t74     18 pass   0 fail  49.9s
+ok    t77     17 pass   0 fail  48.5s
+ok    t78     18 pass   0 fail  36.5s
+ok    t83     31 pass   0 fail  50.6s
+ok    t85     15 pass   0 fail  48.2s
+ok    t95      9 pass   0 fail  57.3s
+ok    t148    23 pass   0 fail  56.0s
+ok    t215     4 pass   0 fail  40.7s
+
+10 checks: 148 pass, 0 fail, 1 reported no assertions
+
+no assertions (probe, or the check bailed before asserting):
+  t27    EMPTY WORLD visible meshes: 1978
+=== LIVE: REAL
+ok    t215      4 pass   0 fail  28.6s  (real renderer)
+ok    t95       9 pass   0 fail  28.9s  (real renderer)
+ok    t74      18 pass   0 fail  37.9s  (real renderer)
+FAIL  t80      13 pass   1 fail  131.8s  (real renderer)
+    FAIL a spider on a line that grazes the corner takes one with room (start 0.29 m clear, end 2.14 m; tight 0% of the time after 3 s; closest 2.1 m)
+4 checks: 44 pass, 1 fail (real renderer)
+=== LIVE: SMOKE
+training: title up in 20.8 s, WebGPURenderer
+training: in the room (room built), 0 called in, frames still running: true
+training: page errors none
+match: title up in 18.5 s, WebGPURenderer
+match: in prep, past the insertion
+night: phase wave, lockdown true, zombies 7
+match: page errors none
+=== END

@@ -1,0 +1,709 @@
+{
+  "generatedAt": "2026-11-03T17:03:02.812Z",
+  "seat": {
+    "x": 42,
+    "y": -7.5468,
+    "z": -20,
+    "yaw": 0.000152,
+    "otsYaw": 0.000152,
+    "otsPitch": 0
+  },
+  "weapons": {
+    "pistol": {
+      "key": "pistol",
+      "label": "Pistol",
+      "kind": "vm",
+      "currentWeapon": "pistol",
+      "dualActive": false,
+      "firstPerson": true,
+      "worldTime": 0.5,
+      "rootVisible": true,
+      "vmActive": true,
+      "vmRaise": 1,
+      "vmKey": "pistol",
+      "akimboCarry": 0,
+      "holdW": 0,
+      "rightGunVisible": false,
+      "leftGunVisible": false,
+      "muzzleNdc": {
+        "x": 0.2309,
+        "y": -0.1115
+      },
+      "muzzlePx": [
+        1181.67,
+        600.23,
+        0.6713
+      ],
+      "gripPx": [
+        1288.66,
+        696.61,
+        0.4693
+      ],
+      "wristR": [
+        1452.96,
+        770.94,
+        0.4313
+      ],
+      "wristL": [
+        1169.87,
+        849.39,
+        0.4478
+      ],
+      "camPos": [
+        42.0027,
+        -6.1237,
+        -19.8847
+      ],
+      "playerPos": [
+        42,
+        -7.5468,
+        -20
+      ],
+      "gunPixels": 33483,
+      "gunAndHandPixels": 243207,
+      "gunScreenPct": 1.61,
+      "gunAndHandScreenPct": 11.73
+    },
+    "revolver": {
+      "key": "revolver",
+      "label": "Revolver",
+      "kind": "vm",
+      "currentWeapon": "revolver",
+      "dualActive": false,
+      "firstPerson": true,
+      "worldTime": 0.5,
+      "rootVisible": true,
+      "vmActive": true,
+      "vmRaise": 1,
+      "vmKey": "revolver",
+      "akimboCarry": 0,
+      "holdW": 0,
+      "rightGunVisible": false,
+      "leftGunVisible": false,
+      "muzzleNdc": {
+        "x": 0.0645,
+        "y": -0.0126
+      },
+      "muzzlePx": [
+        1021.89,
+        546.8,
+        0.7604
+      ],
+      "gripPx": [
+        1255.13,
+        677.86,
+        0.5149
+      ],
+      "wristR": [
+        1431.27,
+        767.19,
+        0.4844
+      ],
+      "wristL": [
+        1174.34,
+        854.74,
+        0.4749
+      ],
+      "camPos": [
+        42.0027,
+        -6.124,
+        -19.887
+      ],
+      "playerPos": [
+        42,
+        -7.5468,
+        -20
+      ],
+      "gunPixels": 69707,
+      "gunAndHandPixels": 231610,
+      "gunScreenPct": 3.36,
+      "gunAndHandScreenPct": 11.17
+    },
+    "uzi": {
+      "key": "uzi",
+      "label": "Wasp (Uzi)",
+      "kind": "vm",
+      "currentWeapon": "uzi",
+      "dualActive": false,
+      "firstPerson": true,
+      "worldTime": 0.5,
+      "rootVisible": true,
+      "vmActive": true,
+      "vmRaise": 1,
+      "vmKey": "uzi",
+      "akimboCarry": 0,
+      "holdW": 0,
+      "rightGunVisible": false,
+      "leftGunVisible": false,
+      "muzzleNdc": {
+        "x": 0.2312,
+        "y": -0.2581
+      },
+      "muzzlePx": [
+        1181.97,
+        679.36,
+        0.6667
+      ],
+      "gripPx": [
+        1331.86,
+        816.6,
+        0.4131
+      ],
+      "wristR": [
+        1503.8,
+        959.37,
+        0.3847
+      ],
+      "wristL": [
+        1111.87,
+        881.69,
+        0.4437
+      ],
+      "camPos": [
+        42.0021,
+        -6.1265,
+        -19.8806
+      ],
+      "playerPos": [
+        42,
+        -7.5468,
+        -20
+      ],
+      "gunPixels": 98284,
+      "gunAndHandPixels": 236955,
+      "gunScreenPct": 4.74,
+      "gunAndHandScreenPct": 11.43
+    },
+    "m4": {
+      "key": "m4",
+      "label": "GW-4 (M4)",
+      "kind": "vm",
+      "currentWeapon": "m4",
+      "dualActive": false,
+      "firstPerson": true,
+      "worldTime": 0.5,
+      "rootVisible": true,
+      "vmActive": true,
+      "vmRaise": 1,
+      "vmKey": "m4",
+      "akimboCarry": 0,
+      "holdW": 1,
+      "rightGunVisible": false,
+      "leftGunVisible": false,
+      "muzzleNdc": {
+        "x": 0.1301,
+        "y": -0.0998
+      },
+      "muzzlePx": [
+        1084.91,
+        593.91,
+        1.1087
+      ],
+      "gripPx": [
+        1306.48,
+        745.16,
+        0.4491
+      ],
+      "wristR": [
+        1511.56,
+        972.66,
+        0.3712
+      ],
+      "wristL": [
+        1094.33,
+        705.06,
+        0.6942
+      ],
+      "camPos": [
+        42.0321,
+        -6.1269,
+        -19.8811
+      ],
+      "playerPos": [
+        42,
+        -7.5468,
+        -20
+      ],
+      "gunPixels": 132194,
+      "gunAndHandPixels": 299779,
+      "gunScreenPct": 6.38,
+      "gunAndHandScreenPct": 14.46
+    },
+    "ak": {
+      "key": "ak",
+      "label": "KR-7 (AK)",
+      "kind": "vm",
+      "currentWeapon": "ak",
+      "dualActive": false,
+      "firstPerson": true,
+      "worldTime": 0.5,
+      "rootVisible": true,
+      "vmActive": true,
+      "vmRaise": 1,
+      "vmKey": "ak",
+      "akimboCarry": 0,
+      "holdW": 1,
+      "rightGunVisible": false,
+      "leftGunVisible": false,
+      "muzzleNdc": {
+        "x": 0.1235,
+        "y": -0.0767
+      },
+      "muzzlePx": [
+        1078.55,
+        581.4,
+        1.1606
+      ],
+      "gripPx": [
+        1301.57,
+        703.3,
+        0.4614
+      ],
+      "wristR": [
+        1511.39,
+        969.62,
+        0.3718
+      ],
+      "wristL": [
+        1088.25,
+        684.78,
+        0.7169
+      ],
+      "camPos": [
+        42.0345,
+        -6.1245,
+        -19.8877
+      ],
+      "playerPos": [
+        42,
+        -7.5468,
+        -20
+      ],
+      "gunPixels": 137220,
+      "gunAndHandPixels": 307299,
+      "gunScreenPct": 6.62,
+      "gunAndHandScreenPct": 14.82
+    },
+    "shotgun": {
+      "key": "shotgun",
+      "label": "Shotgun",
+      "kind": "vm",
+      "currentWeapon": "shotgun",
+      "dualActive": false,
+      "firstPerson": true,
+      "worldTime": 0.5,
+      "rootVisible": true,
+      "vmActive": true,
+      "vmRaise": 1,
+      "vmKey": "shotgun",
+      "akimboCarry": 0,
+      "holdW": 1,
+      "rightGunVisible": false,
+      "leftGunVisible": false,
+      "muzzleNdc": {
+        "x": 0.1015,
+        "y": -0.0588
+      },
+      "muzzlePx": [
+        1057.45,
+        571.76,
+        1.2085
+      ],
+      "gripPx": [
+        1281.15,
+        749.67,
+        0.4411
+      ],
+      "wristR": [
+        1508.26,
+        937.68,
+        0.3715
+      ],
+      "wristL": [
+        1097.68,
+        764.02,
+        0.6581
+      ],
+      "camPos": [
+        42.0195,
+        -6.1306,
+        -19.8661
+      ],
+      "playerPos": [
+        42,
+        -7.5468,
+        -20
+      ],
+      "gunPixels": 170210,
+      "gunAndHandPixels": 284661,
+      "gunScreenPct": 8.21,
+      "gunAndHandScreenPct": 13.73
+    },
+    "aa12": {
+      "key": "aa12",
+      "label": "Breacher-12",
+      "kind": "vm",
+      "currentWeapon": "aa12",
+      "dualActive": false,
+      "firstPerson": true,
+      "worldTime": 0.5,
+      "rootVisible": true,
+      "vmActive": true,
+      "vmRaise": 1,
+      "vmKey": "aa12",
+      "akimboCarry": 0,
+      "holdW": 1,
+      "rightGunVisible": false,
+      "leftGunVisible": false,
+      "muzzleNdc": {
+        "x": 0.1043,
+        "y": -0.0503
+      },
+      "muzzlePx": [
+        1060.1,
+        567.15,
+        1.1794
+      ],
+      "gripPx": [
+        1230.23,
+        663.96,
+        0.5098
+      ],
+      "wristR": [
+        1508.22,
+        937.62,
+        0.3724
+      ],
+      "wristL": [
+        1062.55,
+        677.38,
+        0.7612
+      ],
+      "camPos": [
+        41.9985,
+        -6.1345,
+        -19.8607
+      ],
+      "playerPos": [
+        42,
+        -7.5468,
+        -20
+      ],
+      "gunPixels": 220228,
+      "gunAndHandPixels": 379169,
+      "gunScreenPct": 10.62,
+      "gunAndHandScreenPct": 18.29
+    },
+    "sniper": {
+      "key": "sniper",
+      "label": "Sniper",
+      "kind": "vm",
+      "currentWeapon": "sniper",
+      "dualActive": false,
+      "firstPerson": true,
+      "worldTime": 0.5,
+      "rootVisible": true,
+      "vmActive": true,
+      "vmRaise": 1,
+      "vmKey": "sniper",
+      "akimboCarry": 0,
+      "holdW": 1,
+      "rightGunVisible": false,
+      "leftGunVisible": false,
+      "muzzleNdc": {
+        "x": 0.0114,
+        "y": -0.0825
+      },
+      "muzzlePx": [
+        970.99,
+        584.57,
+        1.5022
+      ],
+      "gripPx": [
+        1185.16,
+        723.43,
+        0.6311
+      ],
+      "wristR": [
+        1368.43,
+        855.37,
+        0.5237
+      ],
+      "wristL": [
+        1016.78,
+        693.76,
+        0.8799
+      ],
+      "camPos": [
+        41.9816,
+        -6.131,
+        -19.8717
+      ],
+      "playerPos": [
+        42,
+        -7.5468,
+        -20
+      ],
+      "gunPixels": 111293,
+      "gunAndHandPixels": 240311,
+      "gunScreenPct": 5.37,
+      "gunAndHandScreenPct": 11.59
+    },
+    "launcher": {
+      "key": "launcher",
+      "label": "Launcher",
+      "kind": "vm",
+      "currentWeapon": "launcher",
+      "dualActive": false,
+      "firstPerson": true,
+      "worldTime": 0.5,
+      "rootVisible": true,
+      "vmActive": true,
+      "vmRaise": 1,
+      "vmKey": "launcher",
+      "akimboCarry": 0,
+      "holdW": 1,
+      "rightGunVisible": false,
+      "leftGunVisible": false,
+      "muzzleNdc": {
+        "x": 0.0841,
+        "y": -0.1363
+      },
+      "muzzlePx": [
+        1040.72,
+        613.62,
+        1.0742
+      ],
+      "gripPx": [
+        1234.76,
+        748.02,
+        0.5789
+      ],
+      "wristR": [
+        1386.38,
+        858.67,
+        0.5235
+      ],
+      "wristL": [
+        1044.16,
+        766.64,
+        0.8641
+      ],
+      "camPos": [
+        41.9724,
+        -6.1278,
+        -19.8824
+      ],
+      "playerPos": [
+        42,
+        -7.5468,
+        -20
+      ],
+      "gunPixels": 132030,
+      "gunAndHandPixels": 234421,
+      "gunScreenPct": 6.37,
+      "gunAndHandScreenPct": 11.31
+    },
+    "minigun": {
+      "key": "minigun",
+      "label": "Minigun",
+      "kind": "vm",
+      "currentWeapon": "minigun",
+      "dualActive": false,
+      "firstPerson": true,
+      "worldTime": 0.5,
+      "rootVisible": true,
+      "vmActive": true,
+      "vmRaise": 1,
+      "vmKey": "minigun",
+      "akimboCarry": 0,
+      "holdW": 0,
+      "rightGunVisible": false,
+      "leftGunVisible": false,
+      "muzzleNdc": {
+        "x": 0.0018,
+        "y": -0.3702
+      },
+      "muzzlePx": [
+        961.71,
+        739.9,
+        1.7489
+      ],
+      "gripPx": [
+        1194.99,
+        950.5,
+        0.8879
+      ],
+      "wristR": [
+        1360.25,
+        858.77,
+        0.7118
+      ],
+      "wristL": [
+        975.96,
+        970.97,
+        0.8472
+      ],
+      "camPos": [
+        41.9755,
+        -6.1229,
+        -19.893
+      ],
+      "playerPos": [
+        42,
+        -7.5468,
+        -20
+      ],
+      "gunPixels": 174380,
+      "gunAndHandPixels": 216432,
+      "gunScreenPct": 8.41,
+      "gunAndHandScreenPct": 10.44
+    },
+    "flamer": {
+      "key": "flamer",
+      "label": "Flamer",
+      "kind": "vm",
+      "currentWeapon": "flamer",
+      "dualActive": false,
+      "firstPerson": true,
+      "worldTime": 0.5,
+      "rootVisible": true,
+      "vmActive": true,
+      "vmRaise": 1,
+      "vmKey": "flamer",
+      "akimboCarry": 0,
+      "holdW": 0,
+      "rightGunVisible": false,
+      "leftGunVisible": false,
+      "muzzleNdc": {
+        "x": 0.1195,
+        "y": -0.0679
+      },
+      "muzzlePx": [
+        1074.73,
+        576.64,
+        1.1828
+      ],
+      "gripPx": [
+        1244.58,
+        721.43,
+        0.5302
+      ],
+      "wristR": [
+        1442.32,
+        940.68,
+        0.4254
+      ],
+      "wristL": [
+        1070.1,
+        729.61,
+        0.7448
+      ],
+      "camPos": [
+        41.9913,
+        -6.1253,
+        -19.8781
+      ],
+      "playerPos": [
+        42,
+        -7.5468,
+        -20
+      ],
+      "gunPixels": 148986,
+      "gunAndHandPixels": 301460,
+      "gunScreenPct": 7.18,
+      "gunAndHandScreenPct": 14.54
+    },
+    "chainsaw": {
+      "key": "chainsaw",
+      "label": "Chainsaw",
+      "kind": "vm",
+      "currentWeapon": "chainsaw",
+      "dualActive": false,
+      "firstPerson": true,
+      "worldTime": 0.5,
+      "rootVisible": true,
+      "vmActive": true,
+      "vmRaise": 1,
+      "vmKey": "chainsaw",
+      "akimboCarry": 0,
+      "holdW": 0,
+      "rightGunVisible": false,
+      "leftGunVisible": false,
+      "muzzleNdc": {
+        "x": 0,
+        "y": 0.1095
+      },
+      "muzzlePx": [
+        960,
+        480.85,
+        1.3776
+      ],
+      "gripPx": [
+        960,
+        779.22,
+        0.7832
+      ],
+      "wristR": [
+        1030.89,
+        1045.35,
+        0.6531
+      ],
+      "wristL": [
+        909.39,
+        664.59,
+        0.7313
+      ],
+      "camPos": [
+        42.019,
+        -6.1322,
+        -19.8682
+      ],
+      "playerPos": [
+        42,
+        -7.5468,
+        -20
+      ],
+      "gunPixels": 140927,
+      "gunAndHandPixels": 206160,
+      "gunScreenPct": 6.8,
+      "gunAndHandScreenPct": 9.94
+    },
+    "akimbo-pistol": {
+      "key": "akimbo-pistol",
+      "label": "Akimbo Pistols",
+      "kind": "akimbo",
+      "currentWeapon": "pistol",
+      "dualActive": true,
+      "firstPerson": true,
+      "worldTime": 0.5,
+      "rootVisible": false,
+      "vmActive": false,
+      "vmRaise": 0,
+      "vmKey": null,
+      "akimboCarry": 0,
+      "holdW": 0,
+      "rightGunVisible": true,
+      "leftGunVisible": true,
+      "muzzleNdc": null,
+      "muzzlePx": null,
+      "gripPx": null,
+      "wristR": null,
+      "wristL": null,
+      "camPos": [
+        42.0304,
+        -6.134,
+        -19.8733
+      ],
+      "playerPos": [
+        42,
+        -7.5468,
+        -20
+      ],
+      "gunPixels": 43835,
+      "gunAndHandPixels": 48883,
+      "gunScreenPct": 2.11,
+      "gunAndHandScreenPct": 2.36
+    }
+  }
+}

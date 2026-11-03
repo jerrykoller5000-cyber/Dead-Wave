@@ -209,10 +209,19 @@ export function createViewmodel(ctx) {
   }
 
   // --- the gun's copy ------------------------------------------------------------------------------------------------
-  let gun = null;   // { key, src, root, pairs, work, slide, mag, flash, nodes, s, foot, magBase }
+  let gun = null;   // { key, src, root, pairs, work, slide, mag, pump, bolt, cylinder, shell, flash, nodes, s, foot, magBase }
   function cloneLean(src, pairs, skip) {
     let o;
-    if (src.isMesh) {
+    if (src.isInstancedMesh) {
+      // The chainsaw's moving teeth are one draw. Keep their instances in the
+      // eye copy; a plain Mesh would show only the prototype tooth.
+      o = new T.InstancedMesh(geoOf(src.geometry), vmMaterial(src.material), src.count);
+      o.instanceMatrix.array.set(src.instanceMatrix.array);
+      o.instanceMatrix.needsUpdate = true;
+      o.userData.vmInstanceVersion = src.instanceMatrix.version;
+      if (src.instanceColor) o.instanceColor = src.instanceColor.clone();
+      o.castShadow = false; o.receiveShadow = !!src.receiveShadow; o.frustumCulled = false; o.renderOrder = src.renderOrder || 0;
+    } else if (src.isMesh) {
       o = new T.Mesh(geoOf(src.geometry), vmMaterial(src.material));
       o.castShadow = false; o.receiveShadow = !!src.receiveShadow; o.frustumCulled = false; o.renderOrder = src.renderOrder || 0;
     } else o = new T.Group();
@@ -230,7 +239,9 @@ export function createViewmodel(ctx) {
     dropGun();
     const src = weaponMeshes[key];
     if (!src) return;
-    const ud = src.userData || {}, pairs = [], skip = new Set([ud.laser, ud.fpStock].filter(Boolean));
+    // CL-293 (Jerry, 3 Nov: "there being no stocks"): the stock is in the copy now, shown at the hip and put away down the
+    // sights (update, below), where it would fill the eye.
+    const ud = src.userData || {}, pairs = [], skip = new Set([ud.laser].filter(Boolean));
     const r = cloneLean(src, pairs, skip);
     r.position.set(0, 0, 0); r.quaternion.set(0, 0, 0, 1); r.scale.set(1, 1, 1);
     gunHolder.add(r);
@@ -240,9 +251,15 @@ export function createViewmodel(ctx) {
     // gun's tree is left to his own gun's animation (mirrored) instead.
     const direct = (o) => (o && o.parent === src ? o : null);
     gun = { key, src, root: r, pairs, slide: map.get(direct(ud.slide)) || null,
-      work: map.get(direct(ud.work || ud.slide)) || null, mag: map.get(direct(ud.mag)) || null, flash: map.get(ud.flash) || null,
+      work: map.get(direct(ud.work || ud.slide)) || null, mag: map.get(direct(ud.mag)) || null,
+      pump: map.get(direct(ud.pump)) || null, bolt: map.get(direct(ud.bolt)) || null,
+      cylinder: map.get(direct(ud.cylinder)) || null, shell: map.get(direct(ud.reloadShell)) || null,
+      stock: map.get(ud.fpStock) || null,
+      flash: map.get(ud.flash) || null,
       nodes: countNodes(src), s: 1, foot: null, magBase: null };
     gun.workBase = gun.work ? gun.work.position.clone() : null;
+    gun.pumpBase = gun.pump ? gun.pump.position.clone() : null;
+    gun.shellBase = gun.shell ? { pos: gun.shell.position.clone(), quat: gun.shell.quaternion.clone() } : null;
     gun.pairs = pairs.filter(([s]) => s !== src);   // the copy's root is placed here, not mirrored
     if (gun.mag && ud.baseMagPos) {
       const mp = ud.baseMagPos, mr = ud.baseMagRot;
@@ -289,7 +306,7 @@ export function createViewmodel(ctx) {
 
   // --- where each hand sits on the gun: read off his body while the hold is settled --------------------------------
   const sockets = { key: null, r: null, l: null, poseR: copyPose(HAND_POSES.relaxed), poseL: copyPose(HAND_POSES.relaxed) };
-  const _sm = M4(), _sf = F(), _contact = V3(), _target = V3();
+  const _sm = M4(), _sf = F(), _contact = V3(), _target = V3(), _tq2 = Q(), _te = new T.Euler(), _fy = V3();
   function readSockets(key, settled, dt) {
     const ud = marine.userData, src = weaponMeshes[key];
     const wr = ud.elbowRG && ud.elbowRG.userData.wrist, wl = ud.elbowLG && ud.elbowLG.userData.wrist;
@@ -303,11 +320,16 @@ export function createViewmodel(ctx) {
     const k = first ? 1 : 1 - Math.exp(-4 * dt);
     for (const [side, w] of [['r', wr], ['l', wl]]) {
       _sm.multiplyMatrices(inv, w.matrixWorld); fromMatrix(_sm, _sf);
+      // CL-293 (J54): a hand's turn on the gun can be set per gun (VM_SOCKETS gripRot / supportRot: x, y, z radians, YXZ, in
+      // the gun's space, on top of the hold's own turn) and tried live (info.tune[key][side] = { p, r }, then retune()).
+      { const A = VM_SOCKETS[key], tn = info.tune[key] && info.tune[key][side], rr = (tn && tn.r) || (A && (side === 'r' ? A.gripRot : A.supportRot));
+        if (rr) _sf.q.premultiply(_tq2.setFromEuler(_te.set(rr[0], rr[1], rr[2], 'YXZ'))); }
       if (first || !sockets[side]) sockets[side] = { p: _sf.p.clone(), q: _sf.q.clone(), s: _sf.s };
       else lerpF(sockets[side], _sf, k, sockets[side]);
-      const authored = VM_SOCKETS[key];
-      if (authored && arms) {
-        _target.set(...(side === 'r' ? authored.grip : authored.support));
+      const authored = VM_SOCKETS[key], tnp = info.tune[key] && info.tune[key][side] && info.tune[key][side].p;
+      const tgt = tnp || (authored && (side === 'r' ? authored.grip : authored.support));
+      if (tgt && arms) {
+        _target.set(tgt[0], tgt[1], tgt[2]);
         wristSpacePoint(arms[side], 'grip', _contact).multiplyScalar(sockets[side].s).applyQuaternion(sockets[side].q);
         sockets[side].p.copy(_target).sub(_contact);
       }
@@ -318,6 +340,7 @@ export function createViewmodel(ctx) {
   // --- springs ---------------------------------------------------------------------------------------------------
   const spring = (c) => ({ x: [0, 0, 0], v: [0, 0, 0], t: [0, 0, 0], k: c.k, c: 2 * c.z * Math.sqrt(c.k) });
   const sp = { pos: spring(VM.spring.pos), rot: spring(VM.spring.rot) };
+  const cs = spring(VM.camera || { k: 300, z: 0.82 });   // CL-293: the view's share of each shot (pitch, yaw), cameraPunch()
   function stepSpring(s, dt) {
     const n = Math.max(1, Math.ceil(dt * 240)), h = dt / n;
     for (let i = 0; i < n; i++) for (let a = 0; a < 3; a++) { const acc = -s.k * (s.x[a] - s.t[a]) - s.c * s.v[a]; s.v[a] += acc * h; s.x[a] += s.v[a] * h; }
@@ -325,10 +348,10 @@ export function createViewmodel(ctx) {
 
   // --- state ------------------------------------------------------------------------------------------------------
   const S = { raise: 0, want: null, ads: 0, bobPhase: 0, bobW: 0, time: 0, lastFlashT: null, slideT: 9, wasGrounded: true, fallV: 0,
-    camQ: null, reloadU: null, shots: 0, lastPlace: null };
+    camQ: null, reloadU: null, shots: 0, lastPlace: null, wx: 0, wy: 0, run: 0, sprint: 0, push: 0 };
   const G = F();                 // the gun's frame in view space this frame
   const WR = F(), WL = F();      // the wrists' frames in view space
-  const info = { active: false, key: null, raise: 0, ads: 0, wrist: { r: 0, l: 0 }, magState: 'seated', handPlace: 'fore', reloadU: null, hack: canHack, filter: canFilter, flip: FLIP, wristMax: VM.wristMax };
+  const info = { tune: {}, active: false, key: null, raise: 0, ads: 0, wrist: { r: 0, l: 0 }, magState: 'seated', handPlace: 'fore', reloadU: null, hack: canHack, filter: canFilter, flip: FLIP, wristMax: VM.wristMax };
 
   const _pz = V3(), _py = V3(), _pat = V3(), _px = V3(), _pinv = Q(), _pg = V3(), _ppalm = V3();
   // The left hand's places through a reload, as wrist frames in the gun's own space.
@@ -340,16 +363,24 @@ export function createViewmodel(ctx) {
       const g = G, inv = _pinv.copy(g.q).invert();
       at.set(pl.pouch.at[0] * MX, pl.pouch.at[1], pl.pouch.at[2]).sub(g.p).applyQuaternion(inv).multiplyScalar(1 / g.s);
       z.set(pl.pouch.z[0] * MX, pl.pouch.z[1], pl.pouch.z[2]).applyQuaternion(inv); y.set(pl.pouch.y[0] * MX, pl.pouch.y[1], pl.pouch.y[2]).applyQuaternion(inv);
-    } else if (name === 'work' && pl.work) {
-      if (pl.work.at) {
-        at.set(...pl.work.at);
-        if (gun.work && gun.workBase) at.add(_pg.copy(gun.work.position).sub(gun.workBase));
-      } else if (gun.work) {
-        if (!gun.grab) { const b = localBox(gun.work); gun.grab = b ? new T.Vector3((b.min.x + b.max.x) / 2, b.max.y - 0.25 * (b.max.y - b.min.y), b.min.z + 0.25 * (b.max.z - b.min.z)) : V3(); }
-        gun.work.updateMatrix();
-        at.copy(gun.grab).add(_pg.set(...pl.work.grab)).applyMatrix4(gun.work.matrix);
+    } else if (pl[name] && (pl[name].at || pl[name].part || name === 'work')) {
+      const place = pl[name];
+      const part = place.part ? gun[place.part] : (name === 'work' ? gun.work : null);
+      if (place.part && part) {
+        part.updateMatrix();
+        if (place.at) at.set(...place.at);
+        else if (place.grab) at.set(...place.grab);
+        else at.set(0, 0, 0);
+        at.applyMatrix4(part.matrix);
+      } else if (place.at) {
+        at.set(...place.at);
+        if (name === 'work' && gun.work && gun.workBase) at.add(_pg.copy(gun.work.position).sub(gun.workBase));
+      } else if (part) {
+        if (!gun.grab) { const b = localBox(part); gun.grab = b ? new T.Vector3((b.min.x + b.max.x) / 2, b.max.y - 0.25 * (b.max.y - b.min.y), b.min.z + 0.25 * (b.max.z - b.min.z)) : V3(); }
+        part.updateMatrix();
+        at.copy(gun.grab).add(_pg.set(...place.grab)).applyMatrix4(part.matrix);
       } else at.set(0, 0, 0);
-      z.set(...pl.work.z); y.set(...pl.work.y);
+      z.set(...place.z); y.set(...place.y);
     } else {
       if (!gun.foot) footOf();
       if (gun.foot) at.copy(gun.foot); else at.set(0, 0, 0);
@@ -399,6 +430,7 @@ export function createViewmodel(ctx) {
     }
   }
   function magState(R, u) {
+    if (!R || !R.mag) return 'seated';
     const m = R.mag;
     if (u == null || u < m.grab || u >= m.seat) return 'seated';
     if (u >= m.swapOut && u < m.swapIn) return 'pouch';
@@ -493,14 +525,16 @@ export function createViewmodel(ctx) {
     if (S.camQ && dt > 0) { const d = _cdq.copy(S.camQ).invert().multiply(cq); const sgn = d.w < 0 ? -1 : 1; wx = 2 * d.x * sgn / dt; wy = 2 * d.y * sgn / dt; }
     S.camQ = (S.camQ || Q()).copy(cq);
     const sw = VM.sway, adsK = 1 + (sw.ads - 1) * a;
+    // CL-293 (MU-31's second suspect): the turn rate low-passed before it moves the gun (the springs chased each delta)
+    { const kf = dt > 0 ? 1 - Math.exp(-dt / sw.tau) : 0; S.wx += (clamp(wx, -40, 40) - S.wx) * kf; S.wy += (clamp(wy, -40, 40) - S.wy) * kf; wx = S.wx; wy = S.wy; }
     const lim = sw.lookMax;
     // velocity in the view's space
     const vx = st.vx || 0, vz = st.vz || 0, inv = _ciq.copy(cq).invert(), lv = _lv.set(vx, 0, vz).applyQuaternion(inv);
     sp.rot.t[0] = clamp(-wy * sw.look, -lim, lim) * adsK * MX;     // yaw lags the turn (as the eye sees it)
     sp.rot.t[1] = clamp(-wx * sw.look, -lim, lim) * adsK;          // pitch lags
     sp.rot.t[2] = clamp(wy * sw.look * 0.6 - lv.x * sw.move * 1.5, -lim, lim) * adsK * MX;   // a little roll into the turn and the strafe
-    sp.pos.t[0] = clamp(-lv.x * sw.move, -0.03, 0.03) * adsK * MX;
-    sp.pos.t[1] = 0; sp.pos.t[2] = clamp(-lv.z * sw.move * 0.5, -0.02, 0.02) * adsK;
+    sp.pos.t[0] = clamp(-lv.x * sw.move, -sw.moveMax, sw.moveMax) * adsK * MX;
+    sp.pos.t[1] = 0; sp.pos.t[2] = clamp(-lv.z * sw.move * 0.5, -sw.moveMax * 0.6, sw.moveMax * 0.6) * adsK;
     // landing
     if (st.grounded && !S.wasGrounded) { const dip = Math.min(VM.land.max, Math.abs(S.fallV) * VM.land.per); sp.pos.v[1] -= dip * 28; sp.rot.v[1] -= dip * 9; }
     S.wasGrounded = !!st.grounded; if (!st.grounded) S.fallV = st.vy || 0;
@@ -509,17 +543,39 @@ export function createViewmodel(ctx) {
     if (ft !== S.lastFlashT && S.lastFlashT != null) {
       const k = P.kick, m = 1 + (k.ads - 1) * a;
       sp.pos.x[2] += k.back * m; sp.rot.x[1] += k.up * m; sp.rot.x[0] += (Math.random() - 0.5) * 2 * k.side * m; S.slideT = 0; S.shots++;
+      const C = VM.camera;   // CL-293: a velocity kick, so the view rises over a few frames instead of jumping (peak = share x up)
+      if (C) { const imp = 2.72 * Math.sqrt(cs.k); cs.v[0] += k.up * m * C.share * imp; cs.v[1] += (Math.random() - 0.5) * 2 * k.side * m * C.side * imp; }
     }
     S.lastFlashT = ft;
     stepSpring(sp.pos, dt); stepSpring(sp.rot, dt);
-    // the walk's bob and breathing
-    const speed = Math.hypot(vx, vz), b = VM.bob, bw = st.grounded ? Math.min(1, speed / 4) : 0;
-    S.bobW += (bw - S.bobW) * (1 - Math.exp(-8 * dt));
-    S.bobPhase += dt * speed * b.rate * Math.PI;
+    stepSpring(cs, dt); if (VM.camera) cs.x[0] = clamp(cs.x[0], -VM.camera.max, VM.camera.max);
+    // the walk's bob and breathing. CL-293 (J55): on his stride (st.phase is index.html's walkPhase, the cycle his legs
+    // and his eye are on): across and a roll once a stride, down once a step, a little yaw for the figure eight; walk to
+    // run by his run weight (st.run, POSE.gaitRun). Without a phase it keeps its own at his legs' cadence.
+    const speed = Math.hypot(vx, vz), b = VM.bob, bw = st.grounded ? Math.min(1, speed / 3) : 0;
+    S.bobW += (bw - S.bobW) * (1 - Math.exp(-6 * dt));
+    const runW = st.run != null ? clamp(st.run, 0, 1) : smooth((speed - 8) / 3);
+    S.run += (runW - S.run) * (1 - Math.exp(-6 * dt));
+    if (st.phase != null && isFinite(st.phase)) S.bobPhase = st.phase;
+    else if (speed > 0.3) S.bobPhase = (S.bobPhase + dt * (b.cadence[0] + (b.cadence[1] - b.cadence[0]) * S.run)) % (Math.PI * 2);
     S.time += dt;
+    const mixRun = (v) => v[0] + (v[1] - v[0]) * S.run;
     const bk = S.bobW * (1 + (b.ads - 1) * a), br = VM.breathe, bth = Math.sin(S.time * Math.PI * 2 * br.rate) * (1 + (br.ads - 1) * a);
-    const off = _off.set(sp.pos.x[0] + Math.sin(S.bobPhase) * b.x * bk, sp.pos.x[1] + (Math.cos(2 * S.bobPhase) - 1) * 0.5 * b.y * bk + bth * br.y, sp.pos.x[2]);
-    const rq = eulerQ(sp.rot.x[0], sp.rot.x[1] + bth * br.pitch, sp.rot.x[2] + Math.sin(S.bobPhase) * b.roll * bk, _rqq);
+    const bs = Math.sin(S.bobPhase), bd = (Math.cos(2 * S.bobPhase) - 1) * 0.5;   // across (-1..1), down (0..-1)
+    // the sprint (not down the sights): down, across toward the middle, back, and turned in; eased in and out
+    const spWant = (st.sprint != null ? (st.sprint ? 1 : 0) : (S.run > 0.6 && speed > 9 ? 1 : 0)) * (st.grounded ? 1 : S.sprint > 0.5 ? 1 : 0) * (1 - a) * (st.reloadU != null ? 0.4 : 1);
+    { const ps = info.tune.sprint || VM.sprint, tau = spWant > S.sprint ? ps.in : ps.out; S.sprint += (spWant - S.sprint) * (dt > 0 ? 1 - Math.exp(-dt / tau) : 0); }
+    const spr = smooth(S.sprint), PS = info.tune.sprint || VM.sprint;   // CL-293: live tuning
+    // CL-293 (J59): a stream (the flamer held) pushes the gun back and up a little, eased in over 0.3 s and held while it
+    // runs, with a slow sway of the nozzle; no shake. Out over 0.2 s when it stops.
+    { const pw = st.stream ? 1 : 0, tp = pw > S.push ? 0.3 : 0.2; S.push += (pw - S.push) * (dt > 0 ? 1 - Math.exp(-dt / tp) : 0); }
+    const pu = smooth(S.push), PB = VM.push || { back: 0.03, up: 0.006, pitch: 0.035, sway: 0.004, rate: 1.3 }, psw = Math.sin(S.time * Math.PI * 2 * PB.rate) * PB.sway * pu;
+    const off = _off.set(sp.pos.x[0] + bs * mixRun(b.x) * bk - PS.across * spr * MX,
+      sp.pos.x[1] + bd * mixRun(b.y) * bk + bth * br.y - PS.down * spr,
+      sp.pos.x[2] + PS.back * spr + PB.back * pu);
+    off.x += psw * MX; off.y += PB.up * pu;
+    const rq = eulerQ(sp.rot.x[0] + (bs * mixRun(b.yaw) * bk + PS.yaw * spr) * MX, sp.rot.x[1] + bth * br.pitch + PS.pitch * spr + PB.pitch * pu,
+      sp.rot.x[2] + (bs * mixRun(b.roll) * bk + PS.roll * spr) * MX, _rqq);
     // the reload's own moves
     const R = P.reload && VM_RELOADS[P.reload];
     if (R && st.reloadU != null) {
@@ -542,6 +598,12 @@ export function createViewmodel(ctx) {
   function mirrorParts() {
     for (const [s, o] of gun.pairs) {
       o.position.copy(s.position); o.quaternion.copy(s.quaternion); o.scale.copy(s.scale); o.visible = s.visible;
+      if (s.isInstancedMesh && o.isInstancedMesh && s.instanceMatrix.version !== o.userData.vmInstanceVersion) {
+        o.count = s.count;
+        o.instanceMatrix.array.set(s.instanceMatrix.array);
+        o.instanceMatrix.needsUpdate = true;
+        o.userData.vmInstanceVersion = s.instanceMatrix.version;
+      }
       if (o.isMesh) { const g = geoOf(s.geometry); if (o.geometry !== g) o.geometry = g; }   // MU-11 (finding 2): a part's shape swapped in place (its twin under the mirror on WebGPU)
       if (o.isMesh && s.material && !Array.isArray(s.material)) {
         const want = vmMaterial(s.material);
@@ -552,11 +614,13 @@ export function createViewmodel(ctx) {
   }
 
   const _eR = [0, 0, 0], _eL = [0, 0, 0];
+  const _sh = V3(), _shm = M4(), VM_SHOULDER = [0.19, -0.24, 0.08];   // CL-293: his shoulder from the eye (as the eye sees it, his right)
   const _wm = M4(), _mf = F(), _mrel = F(), _wellF = F(), _localF = F(), _wiF = F(), _local2 = F(), _outF = F(), _gi = Q(), _psc = V3(), _mw = V3(), _rockQ = Q(), _rockPivot = V3(), _rockMoved = V3();
   function update(dt, st) {
     dt = Math.min(0.05, Math.max(0, dt || 0));
     const candidate = st && st.want && st.weapon && VM_POSES[st.weapon] ? weaponMeshes[st.weapon] : null;
-    const needsStockSplit = st && (st.weapon === 'm4' || st.weapon === 'ak');
+    const needsStockSplit = st && (st.weapon === 'm4' || st.weapon === 'ak' ||
+      st.weapon === 'shotgun' || st.weapon === 'aa12' || st.weapon === 'sniper');
     const key = candidate && (!needsStockSplit || (candidate.userData && candidate.userData.fpStock && candidate.userData.fpStock.parent === candidate)) ? st.weapon : null;
     // lower before a change; raise once the new one is in
     if ((gun ? gun.key : null) !== key) {
@@ -565,8 +629,10 @@ export function createViewmodel(ctx) {
     } else if (key) S.raise = Math.min(1, S.raise + dt * VM.raise);
     const active = !!gun && S.raise > 0.001;
     info.active = active; info.key = gun ? gun.key : null; info.raise = S.raise;
-    root.visible = active;
+    // The world's scope mask owns the full sniper sight picture above 82% ADS.
+    root.visible = active && !(gun && gun.key === 'sniper' && (st.ads || 0) >= 0.82);
     setEyeHide(active, active ? gun.src : null);
+    if (gun && gun.stock) gun.stock.visible = (st.ads || 0) < 0.35;   // CL-293: the stock at the hip, away down the sights
     if (!active) { S.camQ = null; S.lastPlace = null; return; }
     syncArmMaterials();
     if (gunNodes(gun.src) !== gun.nodes) buildGun(gun.key);
@@ -592,20 +658,53 @@ export function createViewmodel(ctx) {
     const u = R && st.reloadU != null ? clamp(st.reloadU, 0, 1) : null;
     info.reloadU = u;
     const eR = _eR, eL = _eL;
-    eR[0] = P.elbows.r[0] * MX; eR[1] = P.elbows.r[1]; eR[2] = P.elbows.r[2];
-    eL[0] = P.elbows.l[0] * MX; eL[1] = P.elbows.l[1]; eL[2] = P.elbows.l[2];
+    const EB = (info.tune[gun.key] && info.tune[gun.key].elbows) || P.elbows;   // CL-293: live tuning
+    eR[0] = EB.r[0] * MX; eR[1] = EB.r[1]; eR[2] = EB.r[2];
+    eL[0] = EB.l[0] * MX; eL[1] = EB.l[1]; eL[2] = EB.l[2];
+    // CL-293 (J54: "Wrists should flare out more. They are bent too inward"): with P.elbowFollow [length, drop] the forearm
+    // runs on along the hand's own line and drops, so the wrist stays nearly straight and the arms come in from the sides.
+    const FOL = !(info.tune[gun.key] && info.tune[gun.key].elbows) && P.elbowFollow;
+    const follow = (W, e) => { _fy.set(0, 1, 0).applyQuaternion(W.q); e[0] = W.p.x + _fy.x * FOL[0]; e[1] = W.p.y + _fy.y * FOL[0] - FOL[1]; e[2] = W.p.z + _fy.z * FOL[0]; };
+    // CL-293 (GP-20018: the long guns moved up close): P.elbowRel { r, l } puts each elbow at an offset from its own wrist
+    // (view space, as the eye sees it: x out to that side, y down, z back toward him), so the forearms keep their angle
+    // in the view wherever the gun sits; live as info.tune[key].elbowRel. Fixed elbows (P.elbows) when it's absent.
+    const REL = !FOL && !(info.tune[gun.key] && info.tune[gun.key].elbows) && ((info.tune[gun.key] && info.tune[gun.key].elbowRel) || P.elbowRel);
+    const rel = (W, o, e) => { e[0] = W.p.x + o[0] * MX; e[1] = W.p.y + o[1]; e[2] = W.p.z + o[2]; };
     mul(G, sockets.r, WR);
+    if (FOL) follow(WR, eR);
+    else if (REL) rel(WR, REL.r, eR);
     twistToward(arms.r, WR, eR);
     let poseL = sockets.poseL;
+    // CL-293 (J54): a support hand's own fingers and thumb for a gun (VM_SOCKETS supportPose, a HAND_POSES-shaped pose: the
+    // pistol's thumbs forward), or tried live (info.tune[key].poseL); the body's hold gives the rest.
+    { const tp = (info.tune[gun.key] && info.tune[gun.key].poseL) || (VM_SOCKETS[gun.key] && VM_SOCKETS[gun.key].supportPose); if (tp) poseL = tp; }
     if (u != null) { poseL = reloadHand(R, u, _localF); mul(G, _localF, WL); }
-    else { mul(G, sockets.l, WL); twistToward(arms.l, WL, eL); info.handPlace = 'fore'; }
+    else {
+      mul(G, sockets.l, WL);
+      // A shotgun's support hand stays on the moving forend through each pump stroke.
+      if (gun.pump && gun.pumpBase) WL.p.add(_pg.copy(gun.pump.position).sub(gun.pumpBase).multiplyScalar(G.s).applyQuaternion(G.q));
+      if (FOL) follow(WL, eL);
+      else if (REL) rel(WL, REL.l, eL);
+      twistToward(arms.l, WL, eL); info.handPlace = 'fore';
+    }
+    if (FOL && u != null) follow(WL, eL);
+    else if (REL && u != null) rel(WL, REL.l, eL);
     mirrorWorn(arms.r, 1); mirrorWorn(arms.l, -1);
     info.wrist.r = poseArm(arms.r, WR, eR, VM.wristMax);
     info.wrist.l = poseArm(arms.l, WL, eL, VM.wristMax);
+    // CL-293 (Jerry, 3 Nov: "the arms looking weird and skinny", "elbow flared in the wrong direction"): the upper arm turns
+    // at the elbow toward his shoulder (view space, as the eye sees it: 0.19 m out, 0.24 m down, a little behind the eye).
+    for (const [a, sx] of [[arms.r, 1], [arms.l, -1]]) {
+      if (!a.upper) continue;
+      a.root.updateMatrix();
+      _sh.set(VM_SHOULDER[0] * sx * MX, VM_SHOULDER[1], VM_SHOULDER[2]).applyMatrix4(_shm.copy(a.root.matrix).invert());
+      const len = _sh.length();
+      if (len > 1e-4) { a.upper.quaternion.setFromUnitVectors(AX_Y, _sh.multiplyScalar(1 / len)); a.upper.scale.set(1, Math.max(1, len / 0.34), 1); }
+    }
     arms.r.rig.set(sockets.poseR).update(); arms.l.rig.set(poseL).update();
     for (const a of [arms.r, arms.l]) if (a.bridge && a.parts.rolled.visible && a.bridge.userData.bend) a.bridge.userData.bend();
     // the magazine: seated, in the support palm, or away in the pouch
-    if (gun.mag && gun.magBase) {
+    if (gun.mag && gun.magBase && (!R || R.mag)) {
       const ms = R ? magState(R, u) : 'seated';
       info.magState = ms;
       if (ms === 'hand') {
@@ -630,6 +729,21 @@ export function createViewmodel(ctx) {
       } else {
         gun.mag.position.copy(gun.magBase.pos); gun.mag.quaternion.copy(gun.magBase.quat); gun.mag.scale.copy(gun.magBase.scale);
         gun.mag.visible = ms !== 'pouch';
+      }
+    }
+    // The pump loads one shell per game reload cycle. Keep the loose shell in
+    // the support palm until its port beat, then seat and hide it.
+    if (gun.shell && gun.shellBase && R && R.kind === 'shell') {
+      const inPalm = u != null && u >= 0.29 && u < 0.56;
+      const atPort = u != null && u >= 0.56 && u < 0.74;
+      gun.shell.visible = inPalm || atPort;
+      if (inPalm) {
+        const local = placeLocalOfWrist(_local2);
+        gun.shell.position.copy(wristSpacePoint(arms.l, 'palm', _ppalm).multiplyScalar(local.s).applyQuaternion(local.q).add(local.p));
+        gun.shell.quaternion.copy(local.q).multiply(gun.shellBase.quat);
+      } else {
+        gun.shell.position.copy(gun.shellBase.pos);
+        gun.shell.quaternion.copy(gun.shellBase.quat);
       }
     }
     place();
@@ -679,7 +793,9 @@ export function createViewmodel(ctx) {
     if (root.parent) root.parent.remove(root);
   }
   return {
-    root, space, update, place, muzzleWorld, showing, viewPoint, ndc, dispose, info,
+    root, space, update, place, muzzleWorld, showing, viewPoint, ndc, dispose, info, retune: () => { sockets.key = null; },
+    // CL-293: the view's turn for this shot's spring (radians: p up, y left); 0 unless the view gun is up.
+    cameraPunch: (out = { p: 0, y: 0 }) => { const on = info.active && S.raise > 0.5; out.p = on ? cs.x[0] : 0; out.y = on ? cs.x[1] : 0; return out; },
     get gun() { return gun; }, get arms() { return arms; }, get sockets() { return sockets; }, get frame() { return G; },
     get wrists() { return { r: WR, l: WL }; }, get proj() { return proj; }, get hidden() { return hidden; }, get filtering() { return filterOn; },
     isEyeHidden: (o) => hideOn && !!(o && o.userData && o.userData.vmEyeHide)

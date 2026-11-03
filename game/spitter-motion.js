@@ -8,7 +8,7 @@ const unavailable=z=>!z.alive||z.crawling||z.hopping||z.sleeping||z.poiGuard&&!z
 export const setSpitterMotionEnabled=v=>{enabled=!!v;}; // private comparison only
 export function restoreSpitterMotion(z){const s=poses.get(z);if(s?.saved){for(const [o,k,v]of s.saved)o[k]=v;s.saved=null;}}
 export function resetSpitterMotion(z){if(z.typeKey!=='spitter')return;restoreSpitterMotion(z);poses.delete(z);turns.delete(z);
- for(const l of [z.mesh.userData.legLG,z.mesh.userData.legRG])l?.userData.shamblerAnkle?.rotation.set(0,0,0);delete z.spitterShot;}
+ for(const l of [z.mesh.userData.legLG,z.mesh.userData.legRG])l?.userData.shamblerAnkle?.rotation.set(0,0,0);z.spitterShot=undefined;}
 export function spitterMotionState(z){const s=poses.get(z),t=turns.get(z);return {phase:s?.phase,weight:s?.weight,yaw:t?.yaw,rate:t?.rate};}
 export function spitterFacing(z,dx,dz,cos=.65){const d=Math.hypot(dx,dz);return !enabled||z.typeKey!=='spitter'||d<1e-6||(Math.sin(z.mesh.rotation.y)*dx+Math.cos(z.mesh.rotation.y)*dz)/d>=cos;}
 export function steerSpitter(z,dx,dz,dt){

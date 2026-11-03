@@ -108,7 +108,7 @@ function launcherDrum(T) {
 }
 
 export function makeMinigunModel(ctx) {
-  const { THREE, gunKit, gunArc, gunBand, gunEffects, finishGun, gunBody, gunDark, gunMid, gunAccent, gunPoly, gunRubber, brassMat, gunOlive, fuelRedMat } = ctx;
+  const { THREE, gunKit, gunArc, gunBand, gunEffects, finishGun, gunBody, gunDark, gunMid, gunAccent, gunPoly, gunRubber, brassMat, gunOlive, fuelRedMat, glassMat, sightDotMat } = ctx;
   const gun = new THREE.Group();
   const K = gunKit(gun);
   // Housing: one moulded body with a round back end, bolted side plates, cooling slots, the hub showing.
@@ -133,6 +133,15 @@ export function makeMinigunModel(ctx) {
   K.box(0.05, 0.035, 0.18, gunRubber, 0, 0.26, 0);
   for (const z of [-0.12, 0.12]) { K.cyl(0.018, 0.018, 0.047, gunMid, 0, 0.155, z, null, 10, 'x'); bolt(K, gunDark, gunAccent, -0.025, 0.155, z); }
   for (let i = 0; i < 8; i++) K.box(0.051, 0.003, 0.007, gunPoly, 0, 0.278, -0.072 + i * 0.020, 0, 0, 0, null, 0.001);
+  // GB-259 (J18, GP-20017): a small open reflex sight on the carry handle's top bar (rubber top 0.2775), its window
+  // and dot at y 0.330 so the aim line clears the rear top grip (tops out 0.320 near z -0.30). Dot 3.5 mm in a thin ring, as GW-4.
+  K.box(0.04, 0.012, 0.07, gunDark, 0, 0.2835, 0.01, 0, 0, 0, null, 0.003);
+  for (const sx of [-1, 1]) K.box(0.005, 0.072, 0.06, gunDark, sx * 0.024, 0.325, 0.01, 0, 0, 0, null, 0.0015);
+  K.box(0.053, 0.008, 0.06, gunDark, 0, 0.365, 0.01, 0, 0, 0, null, 0.002);
+  const reflexGlass = Object.assign(glassMat.clone(), { transparent: true, opacity: 0.18, depthWrite: false });
+  K.box(0.043, 0.064, 0.003, reflexGlass, 0, 0.325, 0.035);
+  K.box(0.0035, 0.0035, 0.002, sightDotMat, 0, 0.330, 0.0355);
+  K.tor(0.0075, 0.0006, sightDotMat, 0, 0.330, 0.0355, 0, 0, 0, null, Math.PI * 2, 24);
   // GB-177 (pass 2: the trigger was a long red bar buried in the grip): a red trigger blade hung from the grip's front
   // strap, its tip curling forward like the other guns', inside a guard that runs from the strap and back to it.
   K.slab(gunBand([[-0.222, 0.25], [-0.214, 0.236], [-0.216, 0.22], [-0.206, 0.206]], 0.0045), 0.012, fuelRedMat, { bevel: 0.002 });
@@ -202,15 +211,33 @@ export function makeLauncherModel(ctx) {
   const K = gunKit(gun);
   // Rear frame up to the drum's back face, the top strap over the drum, the forward frame round the barrel.
   K.slab([[-0.25, 0.08], [-0.25, -0.035], [-0.23, -0.06], [0.039, -0.06], [0.049, -0.044], [0.049, 0.09], [0.033, 0.106], [-0.227, 0.106]], 0.15, gunBody, { bevel: 0.012 });
-  // V3 has a smooth top and a tiny fixed datum, with no rail, lettering or raised ladder sight.
+  // V3 had a smooth top and a tiny fixed datum, with no rail, lettering or raised ladder sight; the datum stays as the leaf's hinge block.
   K.slab([[-0.215, 0.109], [-0.184, 0.109], [-0.192, 0.12], [-0.208, 0.12]], 0.022, gunDark, { bevel: 0.002 });
+  // J62 (Claude, 2026-11-02, from Jerry's J16: "the ability to arc rounds a little, maybe a leaf sight"): the drum's rim (y 0.123)
+  // stood above the only sight, so nothing could be aimed over it. A folding rear leaf on the datum, its three notched rungs
+  // (tops y 0.137, 0.144, 0.151: the higher ones lift the muzzle to arc a round further), and a front post on the front frame
+  // with its tip level with the first notch (y 0.137), both above the drum line. Small and dark, so third person reads as before.
+  K.cyl(0.0035, 0.0035, 0.03, gunDark, 0, 0.1225, -0.2, null, 8, 'x');   // the leaf's hinge pin on the datum
+  for (const sx of [-1, 1]) {
+    K.box(0.004, 0.034, 0.003, gunDark, sx * 0.011, 0.14, -0.2);   // the leaf's side rails (to y 0.157)
+    for (const y of [0.137, 0.144, 0.151]) K.box(0.0065, 0.002, 0.003, gunDark, sx * 0.00575, y - 0.001, -0.2);   // the rungs, a 5 mm notch between halves
+  }
+  K.box(0.026, 0.003, 0.003, gunDark, 0, 0.1555, -0.2);   // the leaf's top bar
   for (const sx of [-1, 1]) {
     K.slab([[-0.245, -0.017], [-0.112, -0.017], [-0.103, -0.024], [-0.103, -0.051], [-0.233, -0.051], [-0.245, -0.04]], 0.004, gunMid, { x: sx * 0.082, bevel: 0.002 });
     for (const [z, y] of [[-0.229, 0.084], [0.023, 0.081], [-0.226, -0.035], [-0.12, -0.035]]) bolt(K, gunDark, gunAccent, sx * 0.087, y, z, 0.005);
   }
   K.slab([[0.265, -0.05], [0.315, -0.05], [0.315, 0.09], [0.265, 0.09]], 0.12, gunBody, { bevel: 0.014 });
+  // J62: the front post on the front frame, its tip at the first notch's height (y 0.137), between two low guard ears.
+  K.box(0.024, 0.012, 0.03, gunDark, 0, 0.096, 0.29);
+  K.box(0.004, 0.035, 0.004, gunDark, 0, 0.1195, 0.29);
+  for (const sx of [-1, 1]) K.box(0.003, 0.03, 0.012, gunDark, sx * 0.012, 0.117, 0.29);
   K.cyl(0.018, 0.018, 0.5, gunMid, 0, -0.02, 0.12, null, 8);
   // Collapsible stock on its tube, with a pad; pistol grip, trigger guard, trigger.
+  // J62 (GP-20016): the stock tube, olive body, rubber pad and stock-side slabs (with their bolts) are one group,
+  // gun.userData.fpStock ('fp-stock'), for the view gun to leave out of the eye; third person and the shadow keep it.
+  // Every part is where it was (the group sits at the gun's origin).
+  const stock = K.group(0, 0, 0), stockStart = gun.children.length; stock.name = 'fp-stock';
   K.lathe([[0, -0.46], [0.024, -0.46], [0.024, -0.25], [0, -0.25]], gunDark, { y: 0.04, seg: 12 });
   K.slab([[-0.33, 0.08], [-0.47, 0.084], [-0.48, 0.08], [-0.48, -0.06], [-0.44, -0.065], [-0.37, -0.02], [-0.33, -0.01]], 0.08, gunOlive, { bevel: 0.016, segs: 3 });
   K.slab([[-0.504, 0.088], [-0.48, 0.088], [-0.48, -0.066], [-0.5, -0.072]], 0.086, gunRubber, { bevel: 0.008 });
@@ -218,6 +245,8 @@ export function makeLauncherModel(ctx) {
     K.slab([[-0.462, 0.06], [-0.359, 0.056], [-0.37, -0.009], [-0.45, -0.042]], 0.002, gunOlive, { x: sx * 0.048, bevel: 0.003 });
     bolt(K, gunDark, gunMid, sx * 0.05, 0.036, -0.452, 0.006);
   }
+  for (const p of gun.children.slice(stockStart)) stock.add(p);
+  gun.userData.fpStock = stock;
   K.slab(gripOutline(-0.05, -0.1, 0.16, 0.08, 0.3), 0.066, gunPoly, { bevel: 0.014, segs: 3 });
   K.slab(gunBand([[0.03, -0.058], [0.03, -0.088], [0.016, -0.096], [-0.01, -0.09]], 0.007), 0.03, gunDark, { bevel: 0.004 });   // GB-180: a moulded guard, not a wire (pass 4: as wide as a real guard)
   // GB-175: trigger face toward the grip, tip curling forward (the convention Jerry set on the revolver and sniper).

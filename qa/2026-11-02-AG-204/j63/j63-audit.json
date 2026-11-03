@@ -1,0 +1,21 @@
+{
+  "foreStats": {
+    "repU": 0.565,
+    "repV": 2.202,
+    "repMean": 1.383,
+    "tileM": 0.723
+  },
+  "cuffStats": {
+    "repU": 1.131,
+    "repV": 1.739,
+    "repMean": 1.435,
+    "tileM": 0.697
+  },
+  "liveSleeveHidden": false,
+  "vmActive": true,
+  "sniperCheck": {
+    "hipActive": true,
+    "adsActive": true,
+    "bodyArmsVisible": true
+  }
+}

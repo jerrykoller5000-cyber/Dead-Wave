@@ -1,0 +1,293 @@
+{
+  "task": "AG-198",
+  "agent": "antigravity",
+  "timestamp": "2026-11-02T09:29:37.481Z",
+  "backend": "WebGPU",
+  "suiteScore0": {
+    "tcl275a": {
+      "pass": 12,
+      "fail": 0,
+      "backend": "WebGPU",
+      "lines": [
+        "PASS the score has its 20 nights, off until asked ({\"n\":20,\"on\":false})",
+        "PASS on: night 1 is the score's (gh/night-01)",
+        "PASS the fight is the score's night 1: fight/gh/night-01",
+        "PASS its first kit, Scarecrow: assets/soundtrack/gh/gh-hs3-scarecrow-drums.ogg",
+        "PASS it loops on its 16 bars at 105 bpm, sample-accurately: {\"loop\":true,\"start\":0,\"end\":36.5714375}",
+        "PASS a bar is 2.29 s (2.2857142857142856)",
+        "PASS the horde out of sight: drums and bass alone {\"drums\":1,\"rhythm\":0,\"lead\":0}",
+        "PASS one within 45 m: the rhythm guitars come in {\"drums\":1,\"rhythm\":1,\"lead\":0}",
+        "PASS one on him (within 20 m): the leads {\"drums\":1,\"rhythm\":1,\"lead\":1}",
+        "PASS never under a sting (0 frames)",
+        "PASS off again: the old night 1 (elevenlabs/night-01)",
+        "PASS no page errors"
+      ]
+    },
+    "t73": {
+      "pass": 12,
+      "fail": 0,
+      "backend": "WebGPU",
+      "lines": [
+        "PASS day 1's sections are decoded before the wave: {\"elevenlabs/night-01\":true}",
+        "PASS the fight is day 1's song: fight/elevenlabs/night-01",
+        "PASS played from the section file: assets/soundtrack/elevenlabs/night-01_sections.ogg",
+        "PASS with the horde out of sight it stalks: stalk (stalk)",
+        "PASS the stalk loops on its own 8 bars, sample-accurately: {\"loop\":true,\"start\":0,\"end\":20}",
+        "PASS one closes in: it drops into the fight on a bar line: dropA (fight)",
+        "PASS the change was scheduled on a bar line: 2.500 s after start (bar 2.5 s)",
+        "PASS the fight rotates onto a second section at the bar line: riffB",
+        "PASS when the field goes quiet the break takes over: break (quiet)",
+        "PASS the last three: the climax: climax (climax)",
+        "PASS the section player is audible and never overlaps a sting: vol 0.132, overlap 0",
+        "PASS no page errors"
+      ]
+    },
+    "t60": {
+      "pass": 43,
+      "fail": 0,
+      "backend": "WebGPU",
+      "note": "Full 43/0 run completed in task-266 (?score=0); screenshot saved at qa/2026-11-02-AG-198/t60.png"
+    },
+    "t61": {
+      "pass": 22,
+      "fail": 0,
+      "backend": "WebGPU",
+      "note": "Full 22/0 run completed in task-266 (?score=0); screenshot saved at qa/2026-11-02-AG-198/t61.png"
+    }
+  },
+  "suiteDefaultScoreOn": {
+    "tcl275a": {
+      "pass": 10,
+      "fail": 2,
+      "expectedRedUntilCL297": true,
+      "lines": [
+        "FAIL the score has its 20 nights, off until asked ({\"n\":20,\"on\":true})",
+        "PASS on: night 1 is the score's (gh/night-01)",
+        "PASS the fight is the score's night 1: fight/gh/night-01",
+        "PASS its first kit, Scarecrow: assets/soundtrack/gh/gh-hs3-scarecrow-drums.ogg",
+        "PASS it loops on its 16 bars at 105 bpm, sample-accurately: {\"loop\":true,\"start\":0,\"end\":36.5714375}",
+        "PASS a bar is 2.29 s (2.2857142857142856)",
+        "PASS the horde out of sight: drums and bass alone {\"drums\":1,\"rhythm\":0,\"lead\":0}",
+        "PASS one within 45 m: the rhythm guitars come in {\"drums\":1,\"rhythm\":1,\"lead\":0}",
+        "PASS one on him (within 20 m): the leads {\"drums\":1,\"rhythm\":1,\"lead\":1}",
+        "PASS never under a sting (0 frames)",
+        "FAIL off again: the old night 1 (elevenlabs/night-01)",
+        "PASS no page errors"
+      ]
+    },
+    "tcl294": {
+      "pass": 8,
+      "fail": 0,
+      "backend": "WebGPU",
+      "lines": [
+        "PASS the real numbers: stay 20 s, gap 60 s ({\"dwellS\":20,\"gapS\":60})",
+        "PASS passing through: seen, not settled ({\"seen\":\"graveyard\",\"settled\":null,\"dwellS\":3,\"gapS\":6,\"sinceSwitch\":10.6}, dawnprep)",
+        "PASS gone again: the day's calm never moved (dawnprep/gh/gh-place-dawn)",
+        "PASS he stays: the graveyard's music after 5.1 s (stay 3)",
+        "PASS left at once: held inside the gap (place_graveyard, 2.6 s)",
+        "PASS after the gap: the day's calm (dawnprep/gh/gh-place-dawn)",
+        "PASS the same cue inside 20 s plays once ({\"name\":\"objective\",\"played\":true,\"at\":1} then {\"name\":\"objective\",\"played\":false,\"at\":2,\"held\":true})",
+        "PASS no page errors"
+      ]
+    },
+    "tcl275d": {
+      "pass": 10,
+      "fail": 1,
+      "backend": "WebGPU",
+      "lines": [
+        "PASS the calm pools are in the score: {\"menu\":[\"gh/gh-place-menu\"],\"dawnprep\":[\"gh/gh-place-dawn\"],\"day\":[\"gh/gh-place-hq\",\"gh/gh-place-menu\"],\"dusk\":[\"gh/gh-place-alarm-build\"],\"night\":[\"gh/gh-place-dusk\"],\"aftermath\":[\"gh/gh-place-hq\"],\"dawn\":[\"gh/gh-place-dawn\"],\"fallen\":[\"gh/gh-place-fallen\"],\"place_graveyard\":[\"gh/gh-place-graveyard\"],\"place_relay\":[\"gh/gh-place-relay\"],\"place_hikers\":[\"gh/gh-place-hikers\"]}",
+        "PASS off: the old calm (calm_day)",
+        "PASS on: the day pool is the score's (gh/gh-place-hq,gh/gh-place-menu)",
+        "PASS on: the old stings are the score's cues, the alarm's metal stinger untouched (sting_alarm_metal)",
+        "PASS the calm plays a place's track: gh/gh-place-dawn (gh-place-dawn.ogg)",
+        "PASS at the graveyard: its underscore (place_graveyard/gh/gh-place-graveyard)",
+        "FAIL home again: the day's calm (gh/gh-place-dawn)",
+        "PASS and it is heard (0.075, level 1.00, calm/dawnprep/gh/gh-place-dawn, err null)",
+        "PASS off again: the old day pool (calm_day)",
+        "PASS and the old stings",
+        "PASS no page errors"
+      ]
+    }
+  },
+  "earProxyAndPlaces": {
+    "initialCalm": {
+      "scoreOn": true,
+      "calmFlowDefault": {
+        "dwellS": 20,
+        "gapS": 60
+      },
+      "stage": "calm",
+      "mood": "dawnprep",
+      "deckTrack": "gh/gh-place-dawn",
+      "front": "http://127.0.0.1:28825/assets/soundtrack/gh/gh-place-dawn.ogg",
+      "volume": 0.07346476771414294,
+      "deckLevel": 0.9810999999940395,
+      "overlapFrames": 0,
+      "lastCue": null,
+      "stings": {
+        "alarm": "sting_alarm_metal",
+        "clear": "gh/gh-cue-last-kill",
+        "dawn": "gh/gh-cue-dawn",
+        "night_falls": "gh/gh-cue-night-fall",
+        "ember": "gh/gh-cue-boss-entrance",
+        "guardian": "gh/gh-cue-boss-entrance",
+        "achievement": "gh/gh-cue-discovery",
+        "airdrop": "gh/gh-cue-discovery",
+        "objective": "gh/gh-cue-discovery",
+        "poi_cleared": "gh/gh-cue-mission-done",
+        "camp": "gh/gh-cue-mission-done"
+      },
+      "scorePools": {
+        "menu": [
+          "gh/gh-place-menu"
+        ],
+        "dawnprep": [
+          "gh/gh-place-dawn"
+        ],
+        "day": [
+          "gh/gh-place-hq",
+          "gh/gh-place-menu"
+        ],
+        "dusk": [
+          "gh/gh-place-alarm-build"
+        ],
+        "night": [
+          "gh/gh-place-dusk"
+        ],
+        "aftermath": [
+          "gh/gh-place-hq"
+        ],
+        "dawn": [
+          "gh/gh-place-dawn"
+        ],
+        "fallen": [
+          "gh/gh-place-fallen"
+        ],
+        "place_graveyard": [
+          "gh/gh-place-graveyard"
+        ],
+        "place_relay": [
+          "gh/gh-place-relay"
+        ],
+        "place_hikers": [
+          "gh/gh-place-hikers"
+        ]
+      },
+      "scoreStings": {
+        "clear": "gh/gh-cue-last-kill",
+        "night_falls": "gh/gh-cue-night-fall",
+        "guardian": "gh/gh-cue-boss-entrance",
+        "ember": "gh/gh-cue-boss-entrance",
+        "objective": "gh/gh-cue-discovery",
+        "achievement": "gh/gh-cue-discovery",
+        "airdrop": "gh/gh-cue-discovery",
+        "poi_cleared": "gh/gh-cue-mission-done",
+        "camp": "gh/gh-cue-mission-done",
+        "dawn": "gh/gh-cue-dawn"
+      }
+    },
+    "graveyardState": {
+      "poi": {
+        "x": -89.96258248961861,
+        "z": 89.15278685234811
+      },
+      "dist": 5.923299740888241,
+      "stage": "calm",
+      "mood": "place_graveyard",
+      "placeState": {
+        "seen": "graveyard",
+        "settled": "graveyard",
+        "dwellS": 1,
+        "gapS": 1.5,
+        "sinceSwitch": 0.8
+      },
+      "deckTrack": "gh/gh-place-graveyard",
+      "front": "http://127.0.0.1:28825/assets/soundtrack/gh/gh-place-graveyard.ogg",
+      "volume": 0.010138922999476212,
+      "deckLevel": 0.14126666667064033,
+      "overlapFrames": 0,
+      "lastDeckError": null
+    },
+    "relayState": {
+      "poi": {
+        "x": -153.3681395710665,
+        "z": -4.152801519529441
+      },
+      "dist": 6,
+      "stage": "calm",
+      "mood": "place_relay",
+      "placeState": {
+        "seen": "relay",
+        "settled": "relay",
+        "dwellS": 1,
+        "gapS": 1.5,
+        "sinceSwitch": 12.1
+      },
+      "deckTrack": "gh/gh-place-relay",
+      "front": "http://127.0.0.1:39599/assets/soundtrack/gh/gh-place-relay.ogg",
+      "volume": 0.01105507800012645,
+      "deckLevel": 0.14943333333730696,
+      "overlapFrames": 0,
+      "lastDeckError": null
+    },
+    "hikersState": {
+      "poi": {
+        "x": 22,
+        "z": -126,
+        "style": "hikers"
+      },
+      "dist": 5,
+      "stage": "calm",
+      "mood": "place_hikers",
+      "placeState": {
+        "seen": "hikers",
+        "settled": "hikers",
+        "dwellS": 1,
+        "gapS": 1.5,
+        "sinceSwitch": 24.7
+      },
+      "deckTrack": "gh/gh-place-hikers",
+      "front": "http://127.0.0.1:28825/assets/soundtrack/gh/gh-place-hikers.ogg",
+      "volume": 0.011052288000297535,
+      "deckLevel": 0.15306666666269303,
+      "overlapFrames": 0,
+      "lastDeckError": null
+    },
+    "duskAndNightFalls": {
+      "cueBeforeDusk": {
+        "name": "camp",
+        "played": true,
+        "at": 1
+      },
+      "duskMoodState": {
+        "worldTime": 0.72,
+        "stage": "calm",
+        "mood": "dusk",
+        "deckTrack": "gh/gh-place-alarm-build",
+        "front": "http://127.0.0.1:28825/assets/soundtrack/gh/gh-place-alarm-build.ogg",
+        "volume": 0.01117097999999999,
+        "deckLevel": 0.151,
+        "overlapFrames": 0,
+        "lastCueAfterTransition": {
+          "name": "camp",
+          "played": true,
+          "at": 1
+        }
+      },
+      "autoTriggeredNightFallsAtDusk": false,
+      "cueAfterExplicitNightFalls": {
+        "name": "night_falls",
+        "played": true,
+        "at": 2
+      },
+      "cueSecondCallWithin20s": {
+        "name": "night_falls",
+        "played": false,
+        "at": 3,
+        "held": true
+      },
+      "overlapAfterExplicit": 0
+    },
+    "noteOnRelayAndHikersGuards": "Without T.clearZombies(), daytime POI guard zombies at POI.mast and hikers camp stand within DAY_FIGHT_RANGE (38m), switching stage from calm to dayfight (chip_skirmish_b) before the 20s calmFlow.dwellS completes."
+  }
+}

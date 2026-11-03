@@ -4,10 +4,10 @@ state: idle
 model: Gemini 4 Argon (High)
 task: —
 touching: —
-since: 2026-11-02T05:47Z
+since: 2026-11-03T17:48Z
 next: —
 blocked-on: —
-last-report: handoffs/2026-11-02-antigravity-AG-197.md
+last-report: handoffs/2026-11-03-antigravity-AG-222.md
 
 ## Notes
 
@@ -38,7 +38,16 @@ a real GPU the way you can.
 
 ### Status (2026-11-02)
 - **AG-174..AG-185**: DONE (see `handoffs/`). GPU inspections of thicket rings, clearings, trails, dark woods audio, fuel depot, Trapper fence gate, skyline pulls.
-- **AG-194**: DONE (`handoffs/2026-11-02-antigravity-AG-194.md`, `qa/2026-11-02-AG-194/`). Real-GPU verification on RTX 5080 WebGPU for CL-275 score (tcl275a 12/0, tcl275b 6/0, tcl275c 7/0, t182 36/0). JS heap evaluation at Night 20 peak.
-- **AG-196**: DONE (`handoffs/2026-11-02-antigravity-AG-196.md`, `qa/2026-11-02-AG-196/`). Real-hardware process memory benchmark across all Chrome processes on RTX 5080. Verified score's decoded PCM audio buffers reside in the Game Renderer process (+15.2 MB PrivWS) rather than Audio Service (3.4 MB static) or V8 JS Heap (flat). Evaluated Training Ground 3-motif recovery sequence (feral, brute, spitter); verified memory drops back down by 55-82 MB after clearing each motif.
-- **AG-197**: DONE (`handoffs/2026-11-02-antigravity-AG-197.md`, `qa/2026-11-02-AG-197/`). Real-hardware WebGPU verification on RTX 5080 for CL-275 score calm pools (`tcl275d` 7/0) and full audio regression suite (`t73` 12/0, `t60` 43/0, `t61` 22/0, `tcl275a` 12/0; 96/0 total PASS). Calm plays `gh-place-dawn` audibly and cleanly restores old calm on score off.
-- **Next**: Queue empty; 0 requests waiting; ready for next visual review or GPU sweep.
+- **AG-194..AG-197**: DONE (see `handoffs/`). Real-hardware WebGPU benchmarks on RTX 5080: memory, process Private WS, and audio suites.
+- **AG-198**: DONE (`handoffs/2026-11-02-antigravity-AG-198.md`, `qa/2026-11-02-AG-198/`). CL-275 and CL-294 score cues and places on RTX 5080 WebGPU.
+- **AG-199**: DONE (`handoffs/2026-11-02-antigravity-AG-199.md`, `qa/2026-11-02-AG-199/`). GP-20014 four-light view-gun review.
+- **AG-202**: DONE (`handoffs/2026-11-02-antigravity-AG-202.md`, `handoffs/2026-11-02-antigravity-AG-202-r1.md`, `qa/2026-11-02-AG-202/round1/`). First-person contact sheet across all 19 weapons + CL-293 round 1 complete shoot (pistol, revolver, GW-4 stills, strips, GIFs, traces, raycast interior hull metrics).
+- **CL-295**: DONE (`qa/2026-11-02-CL-295-realtest.txt`). Ran `tcl295` (9/0) and `tcl295b` on real WebGPU renderer; confirmed Training Ground floor `player/footstep-tile` maps to `pk-ocular-boot-glass-*.ogg`.
+- **AG-200**: DONE (`handoffs/2026-11-02-antigravity-AG-200.md`, `qa/2026-11-02-AG-200/`). J52 sphere between feet audit from launcher in Training Ground; isolated `rig.grenades` `InstancedMesh(count=0)` draw fallback.
+- **AG-201**: DONE (`handoffs/2026-11-02-antigravity-AG-201.md`, `qa/2026-11-02-AG-201/`). J63 camo size pop probe in 1P Training Ground; identified uniform sleeve UV mismatch (42 cm vs 22 cm/4 cm) and viewmodel unscaled vs body scaled weapon camo.
+- **AG-203**: DONE (`handoffs/2026-11-02-antigravity-AG-203.md`, `qa/2026-11-02-AG-203/`). J67 studio dry-stone wall (2.5–3.5m, 3 draws, 38k tris) vs today's hedge side-by-side across 3 spots × 4 lights; 5-seat sector cull audit shows 42.4% draw calls and 57.9% tris (~640k tris/frame) skipped.
+- **AG-204 / AG-204b**: DONE (handoffs/2026-11-02-antigravity-AG-204b.md). Modular dry-stone wall kit optimized under hedge triangle budget (1,428 tris, 3 draws: masonry, moss, ivy).
+- **AG-209**: DONE (handoffs/2026-11-02-antigravity-AG-209.md). Round 1 strips pixel gate (1,620 frames verified, 0 dropped frames), GP-20017 revolver candidate, shotgun 4-light.
+- **AG-210**: DONE (handoffs/2026-11-02-antigravity-AG-210.md). Recaptured round 1 walk/run strips with stepFrame on TG build floor (walk 21.54 m, run 34.35 m, J55 vibration verified < 1.0 px hpRMS), launcher +0.25 cant 4-light (4.85/5), 12-gun 40 cm scorecard (4.80/5).
+- **AG-211**: DONE (handoffs/2026-11-02-antigravity-AG-211.md). Evaluated stone walls in the game vs studio on Jerry's RTX 5080 WebGPU: confirmed distCenter > 48.0 origin-distance check bakes 100% of game walls as 12-triangle far slab boxes (mossTris = 0, ivyTris = 0). Captured 24 1080p shots at HQ Ring and Quarter-NW across Noon and Dusk under default stone vs ?walls=hedge. Confirmed slabs read as boxes; recommended camera-based dynamic LOD.
+- **Next**: Queue empty. All assigned tasks completed through to done. Ready for new assignments.

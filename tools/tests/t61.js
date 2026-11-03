@@ -8,6 +8,9 @@
   const until = async (cond, maxMs) => { const t0 = Date.now(); while (Date.now() - t0 < maxMs) { if (cond()) return true; await wait(100); } return cond(); };
   try {
     await startMatch(T, 'Finisher');
+    // CL-297: these checks are the old music's (the ElevenLabs nights, the sections); the score is on by default since
+    // 2026-11-02, so ask for the old music, as ?score=0 does (the score's own checks: tcl275a-d).
+    if (T.AudioSys && T.AudioSys.setScore) T.AudioSys.setScore(false);
     // A saved mute (tt_* settings in the tester's browser) would silence the director and
     // every check below would read nothing: unmute, and say so if music still won't start.
     if (A.setMuted) A.setMuted(false);

@@ -1,0 +1,10 @@
+{
+  "shots": [
+    { "target": "place:bridge:0", "view": "eye", "dist": 14, "fov": 65, "time": "noon", "size": "1280x720", "out": "review/GP-20015/bridge0-before-a.png" },
+    { "target": "place:bridge:0", "view": "back", "dist": 14, "fov": 65, "time": "noon", "size": "1280x720", "out": "review/GP-20015/bridge0-before-b.png" },
+    { "target": "place:bridge:1", "view": "eye", "dist": 14, "fov": 65, "time": "noon", "size": "1280x720", "out": "review/GP-20015/bridge1-before-a.png" },
+    { "target": "place:bridge:1", "view": "back", "dist": 14, "fov": 65, "time": "noon", "size": "1280x720", "out": "review/GP-20015/bridge1-before-b.png" }
+  ],
+  "out": "review/GP-20015/before/",
+  "cols": 2
+}

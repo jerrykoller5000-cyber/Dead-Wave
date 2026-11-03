@@ -80,6 +80,51 @@ function pointOnPolyline(pts, lens, at) {
     nx: d > 0 ? -(b.z - a.z) / d : 1, nz: d > 0 ? (b.x - a.x) / d : 0 };
 }
 
+// Rule 8: a crossing's deck and four metres of each bank must stay open even
+// where a wall band meets the trail obliquely or the trail ends near the bank.
+export function crossingCorridors(bridges, paths, isWater, bridgeHalfLen = 8.2, bankReach = 4) {
+  const corridors = [];
+  const add = (pts, id) => {
+    pts.gapHalfWidth = 1.5; // three metres clear for the marine's centre
+    pts.crossingId = id;
+    let x0 = Infinity, z0 = Infinity, x1 = -Infinity, z1 = -Infinity;
+    for (const p of pts) { x0 = Math.min(x0, p.x); z0 = Math.min(z0, p.z); x1 = Math.max(x1, p.x); z1 = Math.max(z1, p.z); }
+    pts.bb = [x0, z0, x1, z1];
+    corridors.push(pts);
+  };
+  for (let i = 0; i < bridges.length; i++) {
+    const b = bridges[i], reach = bridgeHalfLen + bankReach;
+    const dx = Math.sin(b.yaw) * reach, dz = Math.cos(b.yaw) * reach;
+    add([{ x: b.x - dx, z: b.z - dz }, { x: b.x + dx, z: b.z + dz }], `bridge-${i}`);
+  }
+  // A trail through shallow water is a ford. Extend its wet run along the
+  // actual trail, retaining bends rather than cutting a straight shortcut.
+  for (let pi = 0; pi < paths.length; pi++) {
+    const path = paths[pi];
+    if (!path || path.deck || path.length < 2) continue;
+    const lens = polylineLengths(path), length = lens.at(-1);
+    if (length <= 0) continue;
+    const n = Math.ceil(length / 0.5), step = length / n;
+    let start = -1, count = 0;
+    for (let i = 0; i <= n + 1; i++) {
+      const p = i <= n ? pointOnPolyline(path, lens, i * step) : null;
+      const wet = p && isWater(p.x, p.z);
+      if (wet && start < 0) start = i * step;
+      if (!wet && start >= 0) {
+        // Allow one sample's uncertainty in the shore, so the dry reach is
+        // never shorter than bankReach on either side.
+        const a = Math.max(0, start - bankReach - step), b = Math.min(length, (i - 1) * step + bankReach + step);
+        const pts = [pointOnPolyline(path, lens, a)];
+        for (let j = 1; j < path.length - 1; j++) if (lens[j] > a && lens[j] < b) pts.push(path[j]);
+        pts.push(pointOnPolyline(path, lens, b));
+        add(pts, `ford-${pi}-${count++}`);
+        start = -1;
+      }
+    }
+  }
+  return corridors;
+}
+
 // A quarter band follows authored bends. A trail only cuts it where its real
 // corridor approaches the polyline, preserving a diagonal crossing's full width.
 export function bandTrailGaps(pts, paths, width = 5) {
@@ -87,12 +132,12 @@ export function bandTrailGaps(pts, paths, width = 5) {
   const lens = polylineLengths(pts), length = lens.at(-1);
   return paths.flatMap((path, i) => {
     if (!path || path.length < 2) return [];
-    const halfWidth = (path.hw ?? 0.85) + 1;
+    const halfWidth = path.gapHalfWidth ?? ((path.hw ?? 0.85) + 1);
     const limit = width * 0.5 + halfWidth;
     for (let at = 0; at <= length; at += 1) {
       const p = pointOnPolyline(pts, lens, Math.min(at, length));
       if (distanceToTrailSq(p.x, p.z, path, limit) < limit * limit)
-        return [{ id: `trail-${i}`, kind: 'trail', pts: path, halfWidth }];
+        return [{ id: path.crossingId || `trail-${i}`, kind: path.crossingId ? 'crossing' : 'trail', pts: path, halfWidth }];
     }
     return [];
   });
@@ -171,11 +216,15 @@ export function makeWallBand({ pts, width = 4, gaps = [], spacing = 0.8, heightA
 // Movement uses a single nearest-line push. Iterating all overlapping circle
 // solids in order makes a body surf sideways along the wall to the next gap.
 // The circles still serve build clearance and the zombie navigation grid.
+// Both callers consume the coordinates immediately, so the collision result
+// can share one scratch object instead of allocating on every zombie step.
+const wallBandResult = { x: 0, z: 0 };
 export function resolveWallBand(band, x, z, bodyR = 0.35) {
+  wallBandResult.x = x; wallBandResult.z = z;
   const minD = band.width * 0.5 + bodyR;
-  if (band.radius != null && Math.abs(Math.hypot(x, z) - band.radius) > minD) return { x, z };
+  if (band.radius != null && Math.abs(Math.hypot(x, z) - band.radius) > minD) return wallBandResult;
   if (x < band.bounds.x0 - minD || x > band.bounds.x1 + minD ||
-      z < band.bounds.z0 - minD || z > band.bounds.z1 + minD) return { x, z };
+      z < band.bounds.z0 - minD || z > band.bounds.z1 + minD) return wallBandResult;
   let best = Infinity, nearX = 0, nearZ = 0, nearNX = 1, nearNZ = 0, at = 0;
   if (band.radius != null) {
     const r = Math.hypot(x, z), scale = band.radius / r;
@@ -197,15 +246,22 @@ export function resolveWallBand(band, x, z, bodyR = 0.35) {
       at = band.lens[i - 1] + t * segLen;
     }
   }
-  if (best >= minD * minD) return { x, z };
-  const walkable = band.gaps.some((g) => {
-    if (g.pts) return distanceToTrailSq(x, z, g.pts, g.halfWidth) < g.halfWidth ** 2;
+  if (best >= minD * minD) return wallBandResult;
+  let walkable = false;
+  for (let i = 0; i < band.gaps.length; i++) {
+    const g = band.gaps[i];
+    if (g.pts) {
+      if (distanceToTrailSq(x, z, g.pts, g.halfWidth) < g.halfWidth ** 2) { walkable = true; break; }
+      continue;
+    }
     const d = band.closed ? Math.abs(normalizeArc(at - g.at + band.length * 0.5, band.length) - band.length * 0.5) : Math.abs(at - g.at);
-    return d < (g.clearWidth != null ? g.clearWidth * 0.5 : Math.max(0, g.width * 0.5 - minD));
-  });
-  if (walkable) return { x, z };
+    if (d < (g.clearWidth != null ? g.clearWidth * 0.5 : Math.max(0, g.width * 0.5 - minD))) { walkable = true; break; }
+  }
+  if (walkable) return wallBandResult;
   const d = Math.sqrt(best);
   const nx = d > 1e-8 ? (x - nearX) / d : nearNX;
   const nz = d > 1e-8 ? (z - nearZ) / d : nearNZ;
-  return { x: nearX + nx * minD, z: nearZ + nz * minD };
+  wallBandResult.x = nearX + nx * minD;
+  wallBandResult.z = nearZ + nz * minD;
+  return wallBandResult;
 }

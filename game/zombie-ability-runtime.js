@@ -95,7 +95,7 @@ export function createZombieAbilityRuntime(env){
     while(shots.length)releaseShot(shots.length-1);while(trails.length)releaseTrail(trails.length-1);
     hurtAt=new WeakMap();states=new WeakMap();
     demonTurns=[];nextDemonCast=0;
-    for(const z of env.actors()){z.abilityBusy=false;delete z.rangedAbility;if(z.mesh)updateZombieAbilityVisuals(z,clock,{});}
+    for(const z of env.actors()){z.abilityBusy=false;z.rangedAbility=undefined;if(z.mesh)updateZombieAbilityVisuals(z,clock,{});}
   }
   function actorState(z){
     let s=states.get(z);if(!s){s={trail:createAcidTrail(z.mesh.position),lineT:0,line:true,slot:0};

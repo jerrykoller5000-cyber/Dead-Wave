@@ -40,7 +40,7 @@
     const radio = ud.gearParts.vest.filter((o) => o.userData.vmEyeRadio), carrier = ud.gearParts.vest.filter((o) => !o.userData.vmEyeRadio);
     const radioSkins = skins.filter((s) => s.userData.rigSplit === 2);
     const bakedRadio = ud.rigSkin ? ud.rigSkin.sources.filter((s) => s.o.userData.vmEyeRadio && s.baked) : [];
-    ok(radio.length >= 3 && radio.every((o) => vm.isEyeHidden(o) && o.visible && o.castShadow) && carrier.some((o) => o.visible && !vm.isEyeHidden(o)) && (bakedRadio.length === 0 || (radioSkins.length > 0 && radioSkins.every((s) => vm.isEyeHidden(s) && s.castShadow))), 'the radio and antenna are eye-hidden in first person while the worn carrier and shadow remain (' + radio.length + ' radio meshes, ' + bakedRadio.length + ' baked, ' + radioSkins.length + ' radio skins)');
+    ok(radio.length >= 3 && radio.every((o) => vm.isEyeHidden(o) && o.visible && o.castShadow) && carrier.some((o) => o.visible && !vm.isEyeHidden(o)) && (bakedRadio.length === 0 || (radioSkins.length > 0 && radioSkins.every((s) => vm.isEyeHidden(s) && s.castShadow))), 'the radio and antenna are eye-hidden in first person while the worn carrier and shadow remain (hidden ' + radio.filter((o) => vm.isEyeHidden(o)).length + ', visible ' + radio.filter((o) => o.visible).length + ', shadow ' + radio.filter((o) => o.castShadow).length + ' of ' + radio.length + '; filter ' + vm.filtering + '; carrier shown ' + carrier.filter((o) => o.visible && !vm.isEyeHidden(o)).length + '; ' + radio.length + ' radio meshes, ' + bakedRadio.length + ' baked, ' + radioSkins.length + ' radio skins)');
     ok(vm.filtering, 'the eye\'s pass leaves them out (the render filter is on)');
     ok(armHid === armN && ud.armLG.visible && ud.armRG.visible && src.visible, 'and they are still there for his shadow (visible)');
     // the hands on their sockets
@@ -66,10 +66,10 @@
     // AG-168 v2: the forearms run down out of the view, not at the eye: each forearm's line from the wrist to the elbow
     // at least 40 degrees off the wrist's line to the eye, and the elbow below the view's bottom edge (the real renderer:
     // the stand-in three's sockets come from its own arm poses, which are off).
-    { const endOn = (arm) => { const w = inView(arm.wrist, new THREE.Vector3()), e = inView(arm.root, new THREE.Vector3()); const d = e.clone().sub(w).normalize(), toEye = w.clone().multiplyScalar(-1).normalize(); return { ang: Math.acos(Math.max(-1, Math.min(1, d.dot(toEye)))), ey: vm.ndc(e).y }; };
+    { const endOn = (arm) => { const w = inView(arm.wrist, new THREE.Vector3()), e = inView(arm.root, new THREE.Vector3()); const d = e.clone().sub(w).normalize(), toEye = w.clone().multiplyScalar(-1).normalize(); const far = arm.upper ? inView(arm.upper, new THREE.Vector3(0, 0.34, 0)) : inView(arm.root, new THREE.Vector3(0, 0.42, 0))   /* CL-293: the upper arm's far end (it turns at the elbow toward his shoulder) */, fn = far.z > -0.01 ? null : vm.ndc(far); return { ang: Math.acos(Math.max(-1, Math.min(1, d.dot(toEye)))), ey: vm.ndc(e).y, off: vm.ndc(e).y < -1 || !fn || fn.y < -1 || Math.abs(fn.x) > 1 }; };
       const fr = endOn(A.r), fl = endOn(A.l);
-      (real ? ok : (c, m) => out.push('INFO ' + m + ' (the stand-in three)'))(fr.ang > 0.698 && fl.ang > 0.698 && fr.ey < -1 && fl.ey < -1,
-        'the forearms leave the view downward, not at the eye (' + [fr.ang, fl.ang].map((v) => (v * 180 / Math.PI).toFixed(0)).join(', ') + ' degrees off the eye line; elbows at ndc y ' + [fr.ey, fl.ey].map((v) => v.toFixed(2)).join(', ') + ')'); }
+      (real ? ok : (c, m) => out.push('INFO ' + m + ' (the stand-in three)'))(fr.ang > 0.698 && fl.ang > 0.698 && fr.off && fl.off,
+        'the forearms leave the view, not at the eye (CL-293: the end of each sleeve off the bottom or the side, the elbow may show now the sleeve runs on; ' + [fr.ang, fl.ang].map((v) => (v * 180 / Math.PI).toFixed(0)).join(', ') + ' degrees off the eye line; elbows at ndc y ' + [fr.ey, fl.ey].map((v) => v.toFixed(2)).join(', ') + ')'); }
     ok(vm.info.flip === !!(T.renderer && T.renderer.backend && T.renderer.backend.isWebGPUBackend && vm.space && vm.space.scale.x < 0), 'the mirrored meshes draw wound the other way on WebGPU, as they are elsewhere (flip ' + vm.info.flip + ')');
     // nothing in front of the near plane, of what is on screen
     const near = 0.01; let minD = Infinity, onScreen = 0, meshes = 0;
@@ -100,7 +100,7 @@
     T.setZoomHeldDbg(true);
     ok(await until(() => T.fpDbg().ads > 0.99, 9000), 'right-click: down the sights');
     await wait(700);
-    const nR = vm.ndc(gunAt([0, 0.082, -0.064])), nF = vm.ndc(gunAt([0, 0.087, 0.282]));
+    const nR = vm.ndc(gunAt([0, 0.092, -0.064])), nF = vm.ndc(gunAt([0, 0.092, 0.282]));
     ok(Math.abs(nR.x) < 0.002 && Math.abs(nR.y) < 0.002 && Math.abs(nF.x) < 0.002 && Math.abs(nF.y) < 0.002, 'the rear notch and the front post on the view\'s centre, within a pixel at 1080p (' + [nR.x, nR.y, nF.x, nF.y].map((v) => v.toFixed(3)).join(', ') + ')');
     const eye1 = T.fpDbg().eye, cam = T.camera || window.camera;
     ok(eye0 && eye1 && eye1.distanceTo(cam.position) < 0.06, 'the eye stays at his eyes down the sights (' + (eye1 ? eye1.distanceTo(cam.position).toFixed(3) : '-') + ' m)');
@@ -162,8 +162,8 @@
     // point, the same one adsOf uses). The shotgun is stage 3 and still has no entry.
     const stage2 = [
       ['m4', 'the GW-4', [0, 0.134, -0.12], [0, -0.106, -0.076]],
-      ['ak', 'the AK', [0, 0.0943, 0], [0, -0.126, -0.095]],
-      ['uzi', 'the Wasp', [0, 0.156, -0.25], [0, -0.088, -0.027]]
+      ['ak', 'the AK', [0, 0.090, 0], [0, -0.126, -0.095]],
+      ['uzi', 'the Wasp', [0, 0.126, -0.25], [0, -0.088, -0.027]]
     ];
     const scanNear = () => {
       let minD = Infinity, onScreen = 0, meshes = 0;
@@ -190,23 +190,25 @@
         && vm.gun && vm.gun.mag && vm.gun.mag.parent === vm.gun.root && vm.gun.work && vm.gun.work.parent === vm.gun.root),
         label + ': the magazine and the work part are direct children, and the view copy has both');
       if (key !== 'uzi') {
-        let inViewStock = false;
-        if (vm.gun && vm.gun.root) vm.gun.root.traverse((o) => { if (o.name === 'fp-stock') inViewStock = true; });
-        ok(!!(udG && udG.fpStock && udG.fpStock.parent === srcG && udG.fpStock.name === 'fp-stock') && !inViewStock,
-          label + ': the stock is one direct child, and the view copy leaves it out');
+        // CL-293 (Jerry, 3 Nov: "there being no stocks"): the view copy keeps the stock, shown at the hip, away down the sights.
+        let viewStock = null;
+        if (vm.gun && vm.gun.root) vm.gun.root.traverse((o) => { if (o.name === 'fp-stock') viewStock = o; });
+        const adsNow = (vm.info.ads || 0);
+        ok(!!(udG && udG.fpStock && udG.fpStock.parent === srcG && udG.fpStock.name === 'fp-stock') && !!viewStock && viewStock.visible === (adsNow < 0.35),
+          label + ': the stock is one direct child, and the view copy shows it at the hip, not down the sights (ads ' + adsNow.toFixed(2) + ', shown ' + !!(viewStock && viewStock.visible) + ')');
       }
       await wait(500);
       const e1 = sockErr(A.r, wr.r), e2 = sockErr(A.l, wr.l);
       ok(e1 < 0.01 && e2 < 0.01, label + ': both wrists on their sockets (' + (e1 * 100).toFixed(2) + ', ' + (e2 * 100).toFixed(2) + ' cm)');
       const br1 = bend(A.r), bl1 = bend(A.l);
       ok(br1 <= wmax + 1e-3 && bl1 <= wmax + 1e-3, label + ': the wrists stay within VM.wristMax (' + br1.toFixed(2) + ', ' + bl1.toFixed(2) + ' of ' + (wmax || 0).toFixed(2) + ')');
-      { const endOn = (arm) => { const w = inView(arm.wrist, new THREE.Vector3()), e = inView(arm.root, new THREE.Vector3()); const d = e.clone().sub(w).normalize(), toEye = w.clone().multiplyScalar(-1).normalize(); return { ang: Math.acos(Math.max(-1, Math.min(1, d.dot(toEye)))), ey: vm.ndc(e).y }; };
+      { const endOn = (arm) => { const w = inView(arm.wrist, new THREE.Vector3()), e = inView(arm.root, new THREE.Vector3()); const d = e.clone().sub(w).normalize(), toEye = w.clone().multiplyScalar(-1).normalize(); const far = arm.upper ? inView(arm.upper, new THREE.Vector3(0, 0.34, 0)) : inView(arm.root, new THREE.Vector3(0, 0.42, 0))   /* CL-293: the upper arm's far end (it turns at the elbow toward his shoulder) */, fn = far.z > -0.01 ? null : vm.ndc(far); return { ang: Math.acos(Math.max(-1, Math.min(1, d.dot(toEye)))), ey: vm.ndc(e).y, off: vm.ndc(e).y < -1 || !fn || fn.y < -1 || Math.abs(fn.x) > 1 }; };
         const fr = endOn(A.r), fl = endOn(A.l);
         // CU-223, Claude: a rifle keeps the 40-degree line. Its support elbow may show, only low (below ndc y -0.5). The pistol's full bar stays on the Wasp, which already cleared it.
         const rifle = key !== 'uzi';
-        const elbowOk = rifle ? fl.ey < -0.5 : (fr.ey < -1 && fl.ey < -1);
+        const elbowOk = rifle ? fl.ey < -0.5 : (fr.off && fl.off);   // CL-293: the arm (its upper arm toward his shoulder, 3 Nov) leaves the view
         (real ? ok : (c, m) => out.push('INFO ' + m + ' (the stand-in three)'))(fr.ang > 0.698 && fl.ang > 0.698 && elbowOk,
-          label + ': the forearms stay off the eye line' + (rifle ? ', the support elbow low' : ', the elbows off the bottom') + ' (' + [fr.ang, fl.ang].map((v) => (v * 180 / Math.PI).toFixed(0)).join(', ') + ' degrees; elbows ndc y ' + [fr.ey, fl.ey].map((v) => v.toFixed(2)).join(', ') + ')'); }
+          label + ': the forearms stay off the eye line' + (rifle ? ', the support elbow low' : ', the sleeves leave the view') + ' (' + [fr.ang, fl.ang].map((v) => (v * 180 / Math.PI).toFixed(0)).join(', ') + ' degrees; elbows ndc y ' + [fr.ey, fl.ey].map((v) => v.toFixed(2)).join(', ') + ')'); }
       const nearG = scanNear();
       ok(nearG.onScreen > 0 && nearG.minD > 0.015, label + ': nothing on screen in front of the near plane (nearest ' + (nearG.minD * 100).toFixed(1) + ' cm)');
       const nHip = vm.ndc(gunAt(grip));
@@ -243,15 +245,98 @@
       await wait(300);
       ok(vm.info.magState === 'seated' && vm.info.handPlace === 'fore', label + ': after it, the magazine is seated and the support hand is back on the gun');
     }
-    // a gun with no entry yet: the old first person. The GW-4 has an entry now (stage 2); the shotgun is stage 3.
-    ok(await take('shotgun'), 'a shotgun in hand');
-    ok(await until(() => !vm.info.active, 8000), 'the view gun goes down for a gun it has no entry for yet');
-    let still = 0; for (const a of [ud.armLG, ud.armRG]) a.traverse((o) => { if (o.isMesh && vm.isEyeHidden(o)) still++; });
-    ok(still === 0 && !vm.filtering, 'his own arms back in the eye\'s pass (' + still + ' left out), the filter off');
+    // CU-227 stage 3 (GP-20014). Rear points are game/sight-points.js after GB-259.
+    // The sniper's view gun hides at full ADS (0.82); the sight is read on the way there.
+    const stage3 = [
+      ['shotgun', 'the shotgun', [0, 0.105, -0.25], [0, -0.088, -0.056], true],
+      ['aa12', 'the Breacher', [0, 0.1807, -0.25], [0, -0.145, -0.166], true],
+      ['revolver', 'the revolver', [0, 0.114, -0.05], [0, -0.07, -0.04], false],
+      ['sniper', 'the sniper', [0, 0.140, -0.20], [0, -0.088, -0.117], true]
+    ];
+    for (const [key, label, rear, grip, stock] of stage3) {
+      ok(await take(key), 'a ' + key + ' in hand');
+      ok(await until(() => vm.info.active && vm.info.key === key && vm.info.raise > 0.99, 12000),
+        label + ': the view gun is up (raise ' + (vm.info.raise == null ? '-' : vm.info.raise.toFixed(2)) + ')');
+      const srcG = T.weaponMeshes[key], udG = srcG && srcG.userData;
+      if (stock) {
+        // CL-293 (Jerry, 3 Nov: "there being no stocks"): the view copy keeps the stock, shown at the hip, away down the sights.
+        let viewStock = null;
+        if (vm.gun && vm.gun.root) vm.gun.root.traverse((o) => { if (o.name === 'fp-stock') viewStock = o; });
+        const adsNow = (vm.info.ads || 0);
+        ok(!!(udG && udG.fpStock && udG.fpStock.parent === srcG && udG.fpStock.name === 'fp-stock') && !!viewStock && viewStock.visible === (adsNow < 0.35),
+          label + ': the stock is one direct child, and the view copy shows it at the hip, not down the sights (ads ' + adsNow.toFixed(2) + ', shown ' + !!(viewStock && viewStock.visible) + ')');
+      }
+      if (udG && udG.mag && udG.mag.parent === srcG) {
+        ok(!!(vm.gun && vm.gun.mag && vm.gun.mag.parent === vm.gun.root), label + ': the view copy has the magazine');
+      }
+      if (udG && udG.work && udG.work.parent === srcG) {
+        ok(!!(vm.gun && vm.gun.work && vm.gun.work.parent === vm.gun.root), label + ': the view copy has the work part');
+      }
+      await wait(400);
+      const es1 = sockErr(A.r, wr.r), es2 = sockErr(A.l, wr.l);
+      ok(es1 < 0.01 && es2 < 0.01, label + ': both wrists on their sockets (' + (es1 * 100).toFixed(2) + ', ' + (es2 * 100).toFixed(2) + ' cm)');
+      const bs1 = bend(A.r), bs2 = bend(A.l);
+      ok(bs1 <= wmax + 1e-3 && bs2 <= wmax + 1e-3, label + ': the wrists stay within VM.wristMax (' + bs1.toFixed(2) + ', ' + bs2.toFixed(2) + ')');
+      { const endOn = (arm) => { const w = inView(arm.wrist, new THREE.Vector3()), e = inView(arm.root, new THREE.Vector3()); const d = e.clone().sub(w).normalize(), toEye = w.clone().multiplyScalar(-1).normalize(); const far = arm.upper ? inView(arm.upper, new THREE.Vector3(0, 0.34, 0)) : inView(arm.root, new THREE.Vector3(0, 0.42, 0))   /* CL-293: the upper arm's far end (it turns at the elbow toward his shoulder) */, fn = far.z > -0.01 ? null : vm.ndc(far); return { ang: Math.acos(Math.max(-1, Math.min(1, d.dot(toEye)))), ey: vm.ndc(e).y, off: vm.ndc(e).y < -1 || !fn || fn.y < -1 || Math.abs(fn.x) > 1 }; };
+        const fr = endOn(A.r), fl = endOn(A.l);
+        // CU-223's bar: a long gun keeps the 40-degree line and a low support elbow. The revolver keeps the pistol's full bar.
+        const rifle = key !== 'revolver';
+        const elbowOk = rifle ? fl.ey < -0.5 : (fr.off && fl.off);   // CL-293: the arm (its upper arm toward his shoulder, 3 Nov) leaves the view
+        (real ? ok : (c, m) => out.push('INFO ' + m + ' (the stand-in three)'))(fr.ang > 0.698 && fl.ang > 0.698 && elbowOk,
+          label + ': the forearms stay off the eye line' + (rifle ? ', the support elbow low' : ', the sleeves leave the view') + ' (' + [fr.ang, fl.ang].map((v) => (v * 180 / Math.PI).toFixed(0)).join(', ') + ' degrees; elbows ndc y ' + [fr.ey, fl.ey].map((v) => v.toFixed(2)).join(', ') + ')'); }
+      const nearS = scanNear();
+      ok(nearS.onScreen > 0 && nearS.minD > 0.015, label + ': nothing on screen in front of the near plane (nearest ' + (nearS.minD * 100).toFixed(1) + ' cm)');
+      const nHipS = vm.ndc(gunAt(grip));
+      ok(nHipS.x > 0 && nHipS.y < 0 && nHipS.d > 0.2, label + ': at the hip the grip is low and to the right (ndc ' + nHipS.x.toFixed(2) + ', ' + nHipS.y.toFixed(2) + ')');
+      T.setZoomHeldDbg(true);
+      let sawSight = null, sawAds = 0;
+      const tAds = Date.now();
+      while (Date.now() - tAds < 5000) {
+        const ads = T.fpDbg().ads || 0;
+        if (key === 'sniper' && ads > sawAds && ads < 0.82) { sawAds = ads; sawSight = vm.ndc(gunAt(rear)); }
+        if (ads > 0.99) break;
+        await wait(30);
+      }
+      if (key === 'sniper') {
+        ok(!vm.root.visible, label + ': full scope hides the view gun');
+        ok(!!sawSight && Math.abs(sawSight.x) < 0.12 && Math.abs(sawSight.y) < 0.12,
+          label + ': the scope axis was on the view just before it hides (ads ' + sawAds.toFixed(2) + ', ndc ' + (sawSight ? sawSight.x.toFixed(3) + ', ' + sawSight.y.toFixed(3) : 'missed') + ')');
+      } else {
+        ok((T.fpDbg().ads || 0) > 0.99, label + ': down the sights');
+        await wait(400);
+        const nSs = vm.ndc(gunAt(rear));
+        ok(Math.abs(nSs.x) < 0.02 && Math.abs(nSs.y) < 0.02, label + ': the rear sight on the view\'s centre (' + nSs.x.toFixed(3) + ', ' + nSs.y.toFixed(3) + ')');
+      }
+      T.setZoomHeldDbg(false);
+      await until(() => (T.fpDbg().ads || 0) < 0.05, 9000);
+      await wait(200);
+      T.setAmmoDbg(key, 1);
+      T.startReload();
+      ok(await until(() => T.isReloading(), 3000), label + ': a reload starts');
+      const placesS = new Set();
+      const tRel = Date.now();
+      while (T.isReloading() && Date.now() - tRel < 6000) { placesS.add(vm.info.handPlace); await wait(40); }
+      ok(placesS.size > 1, label + ': the support hand leaves its hold (' + [...placesS].join(' ') + ')');
+    }
+    // CU-231 stage 4 (GP-20016). The launcher, minigun, flamer and chainsaw have entries now.
+    // Every gun in the order has one, so the old no-entry drop is the third-person check below.
+    const stage4 = [
+      ['launcher', 'the launcher'],
+      ['minigun', 'the minigun'],
+      ['flamer', 'the flamer'],
+      ['chainsaw', 'the chainsaw']
+    ];
+    for (const [key, label] of stage4) {
+      ok(await take(key), 'a ' + key + ' in hand');
+      ok(await until(() => vm.info.active && vm.info.key === key && vm.info.raise > 0.99, 12000),
+        label + ': the view gun is up (raise ' + (vm.info.raise == null ? '-' : vm.info.raise.toFixed(2)) + ')');
+    }
     ok(await take('pistol'), 'the pistol again');
     ok(await until(() => vm.info.active && vm.info.raise > 0.99, 8000), 'and the view gun is up again');
     T.setViewFirstDbg(false);
     ok(await until(() => !vm.info.active, 12000), 'third person: the view gun goes');
+    let still = 0; for (const a of [ud.armLG, ud.armRG]) a.traverse((o) => { if (o.isMesh && vm.isEyeHidden(o)) still++; });
+    ok(still === 0 && !vm.filtering, 'his own arms back in the eye\'s pass (' + still + ' left out), the filter off');
     ok(radio.every((o) => o.visible && !vm.isEyeHidden(o)) && (!ud.rigSkin || ud.rigSkin.skins.filter((s) => s.userData.rigSplit === 2).every((s) => !vm.isEyeHidden(s))), 'the radio and antenna are drawn in third person');
     let left = 0; T.marine.traverse((o) => { if (o.userData && o.userData.vmEyeHide) left++; }); src.traverse((o) => { if (o.userData && o.userData.vmEyeHide) left++; });
     ok(left === 0 && !vm.filtering, 'nothing of his left out of the eye\'s pass (' + left + ')');

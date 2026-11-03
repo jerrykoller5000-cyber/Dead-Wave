@@ -7,6 +7,10 @@
 //   npm test -- --all-fails      print every FAIL line in full, not just the first
 //   npm test -- --no-retry       don't re-run the failures one at a time (see "flaky" below)
 //
+//   A test may carry a first-lines comment: // query: gates=1&chaingates=1
+//   Those flags are added to that test's page only. DW_TEST_QUERY still adds
+//   flags for the whole run, and the two are combined (the test's flags first).
+//
 // How it works. Each tNN.js is an async expression evaluated inside a loaded copy of the
 // game, and asserts against window.TT. The copy (test.html, generated here) points the
 // three.js import map at Claude's fakethree.mjs / faketsl.mjs: real maths and scene graph,
@@ -147,6 +151,20 @@ const server = await serve(ROOT, 0);
 const browser = await launch({ headless: true });
 const results = [];
 
+// CU-235. The first `// query: a=1&b=2` in the test's first lines is that page's flags.
+// DW_TEST_QUERY still applies to every test. The test's own flags come first.
+function queryForTest(code) {
+  const lines = String(code).split(/\r?\n/).slice(0, 20);
+  let fromFile = '';
+  for (const line of lines) {
+    const m = line.match(/^\s*\/\/\s*query:\s*(\S+)/);
+    if (m) { fromFile = m[1].replace(/^[?&]+/, ''); break; }
+  }
+  const fromEnv = process.env.DW_TEST_QUERY ? String(process.env.DW_TEST_QUERY).replace(/^[?&]+/, '') : '';
+  const parts = [fromFile, fromEnv].filter(Boolean);
+  return parts.length ? '&' + parts.join('&') : '';
+}
+
 async function runOne(name) {
   const code = fs.readFileSync(path.join(HERE, name + '.js'), 'utf8');
   const page = await browser.newPage({ width: 1280, height: 720 });
@@ -155,8 +173,8 @@ async function runOne(name) {
   try {
     // raf=timer: a background page gets no animation frames, and every check needs the
     // game's loop to actually run.
-    // DW_TEST_QUERY (CU-203): extra page flags, e.g. forest=batch, without a second runner.
-    const extra = process.env.DW_TEST_QUERY ? '&' + String(process.env.DW_TEST_QUERY).replace(/^[?&]+/, '') : '';
+    // CU-235: a first-lines `// query:` on the test, plus DW_TEST_QUERY for the whole run.
+    const extra = queryForTest(code);
     await page.goto(`${server.origin}/tools/tests/${PAGE_NAME}?debug=1&raf=timer${extra}`, { timeout: 120000 });
     const ready = await page.waitFor('!!window.TT', { timeout: 120000 });
     if (!ready) {

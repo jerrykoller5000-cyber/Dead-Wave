@@ -1,0 +1,20 @@
+{"backend":"WebGPU","key":"shotgun","active":true,"ads":1,"wrist":{"r":0.87,"l":0.5319156006448421},"mag":false,"pump":true,"bolt":false,"cylinder":false,"shell":true,"visible":true,"right":{"angle":77.7,"elbowY":-1.43},"left":{"angle":84.9,"elbowY":-0.89}}
+shotgun 0.2: {"key":"shotgun","u":0.19999999999999996,"hand":"pouch","mag":"seated","shell":false}
+shotgun 0.45: {"key":"shotgun","u":0.44999999999999996,"hand":"port","mag":"seated","shell":true}
+shotgun 0.7: {"key":"shotgun","u":0.7,"hand":"port","mag":"seated","shell":true}
+shotgun 0.9: {"key":"shotgun","u":0.9,"hand":"pump","mag":"seated","shell":false}
+{"backend":"WebGPU","key":"aa12","active":true,"ads":1,"wrist":{"r":0.87,"l":0.36878214359921113},"mag":true,"pump":false,"bolt":false,"cylinder":false,"shell":false,"visible":true,"right":{"angle":84.8,"elbowY":-1.87},"left":{"angle":70.4,"elbowY":-0.89}}
+aa12 0.2: {"key":"aa12","u":0.19999999999999996,"hand":"below","mag":"hand","shell":false}
+aa12 0.45: {"key":"aa12","u":0.44999999999999996,"hand":"pouch","mag":"hand","shell":false}
+aa12 0.7: {"key":"aa12","u":0.7,"hand":"well","mag":"seated","shell":false}
+aa12 0.9: {"key":"aa12","u":0.9,"hand":"fore","mag":"seated","shell":false}
+{"backend":"WebGPU","key":"revolver","active":true,"ads":1,"wrist":{"r":0.87,"l":0.87},"mag":true,"pump":false,"bolt":false,"cylinder":true,"shell":false,"visible":true,"right":{"angle":80,"elbowY":-1.7},"left":{"angle":79.6,"elbowY":-1.81}}
+revolver 0.2: {"key":"revolver","u":0.19999999999999996,"hand":"ejector","mag":"seated","shell":false}
+revolver 0.45: {"key":"revolver","u":0.44999999999999996,"hand":"loader","mag":"seated","shell":false}
+revolver 0.7: {"key":"revolver","u":0.7,"hand":"loader","mag":"seated","shell":false}
+revolver 0.9: {"key":"revolver","u":0.9,"hand":"fore","mag":"seated","shell":false}
+{"backend":"WebGPU","key":"sniper","active":true,"ads":1,"wrist":{"r":0.87,"l":0.11826141652248227},"mag":true,"pump":false,"bolt":true,"cylinder":false,"shell":false,"visible":false,"right":{"angle":103.7,"elbowY":-4.05},"left":{"angle":88,"elbowY":-1.19}}
+sniper 0.2: {"key":"sniper","u":0.19999999999999996,"hand":"below","mag":"hand","shell":false}
+sniper 0.45: {"key":"sniper","u":0.44999999999999996,"hand":"below","mag":"hand","shell":false}
+sniper 0.7: {"key":"sniper","u":0.7,"hand":"work","mag":"seated","shell":false}
+sniper 0.9: {"key":"sniper","u":0.9,"hand":"work","mag":"seated","shell":false}

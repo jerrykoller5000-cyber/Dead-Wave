@@ -1,0 +1,110 @@
+{
+  "baselineYaw": 0.025,
+  "candidateYaw": 0.25,
+  "shots": {
+    "baseline-noon": {
+      "key": "launcher",
+      "active": true,
+      "rootVisible": true,
+      "raise": 1,
+      "ads": 0,
+      "muzzleNdc": {
+        "x": 0.1251914445700135,
+        "y": -0.16192867632096092,
+        "d": 1.310711098067617
+      },
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-03-AG-210\\launcher\\launcher-baseline-noon.jpg"
+    },
+    "baseline-overcast": {
+      "key": "launcher",
+      "active": true,
+      "rootVisible": true,
+      "raise": 1,
+      "ads": 0,
+      "muzzleNdc": {
+        "x": 0.1253643660778633,
+        "y": -0.16523780587331005,
+        "d": 1.311015173987112
+      },
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-03-AG-210\\launcher\\launcher-baseline-overcast.jpg"
+    },
+    "baseline-dusk": {
+      "key": "launcher",
+      "active": true,
+      "rootVisible": true,
+      "raise": 1,
+      "ads": 0,
+      "muzzleNdc": {
+        "x": 0.1253758696058724,
+        "y": -0.16433449063229874,
+        "d": 1.310936518838123
+      },
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-03-AG-210\\launcher\\launcher-baseline-dusk.jpg"
+    },
+    "baseline-night": {
+      "key": "launcher",
+      "active": true,
+      "rootVisible": true,
+      "raise": 1,
+      "ads": 0,
+      "muzzleNdc": {
+        "x": 0.12540976642402382,
+        "y": -0.16033811275732535,
+        "d": 1.3105839184770873
+      },
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-03-AG-210\\launcher\\launcher-baseline-night.jpg"
+    },
+    "candidate-noon": {
+      "key": "launcher",
+      "active": true,
+      "rootVisible": true,
+      "raise": 1,
+      "ads": 0,
+      "muzzleNdc": {
+        "x": 0.03832389615568352,
+        "y": -0.16040920466864675,
+        "d": 1.2922563809776597
+      },
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-03-AG-210\\launcher\\launcher-candidate-noon.jpg"
+    },
+    "candidate-overcast": {
+      "key": "launcher",
+      "active": true,
+      "rootVisible": true,
+      "raise": 1,
+      "ads": 0,
+      "muzzleNdc": {
+        "x": 0.038320582225395285,
+        "y": -0.16165050706543194,
+        "d": 1.2923681411751193
+      },
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-03-AG-210\\launcher\\launcher-candidate-overcast.jpg"
+    },
+    "candidate-dusk": {
+      "key": "launcher",
+      "active": true,
+      "rootVisible": true,
+      "raise": 1,
+      "ads": 0,
+      "muzzleNdc": {
+        "x": 0.03831061365289831,
+        "y": -0.16542235928840446,
+        "d": 1.2927044208209635
+      },
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-03-AG-210\\launcher\\launcher-candidate-dusk.jpg"
+    },
+    "candidate-night": {
+      "key": "launcher",
+      "active": true,
+      "rootVisible": true,
+      "raise": 1,
+      "ads": 0,
+      "muzzleNdc": {
+        "x": 0.03830484591503535,
+        "y": -0.16763163854827315,
+        "d": 1.292899069319692
+      },
+      "path": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-03-AG-210\\launcher\\launcher-candidate-night.jpg"
+    }
+  }
+}

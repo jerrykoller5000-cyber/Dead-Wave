@@ -1,0 +1,110 @@
+{
+  "samples": [
+    {
+      "variant": "baseline",
+      "key": "minigun",
+      "at": [
+        0.19,
+        -0.25,
+        -1
+      ],
+      "yaw": 0.25,
+      "weapon": "minigun",
+      "first": true,
+      "active": true,
+      "vmKey": "minigun",
+      "raise": 1,
+      "muzzleNdc": {
+        "x": -0.049594104407024504,
+        "y": -0.33976370810940365,
+        "d": 2.0980660129948903
+      },
+      "backend": "WebGPU"
+    },
+    {
+      "variant": "mid-55-yaw003",
+      "key": "minigun",
+      "at": [
+        0.18,
+        -0.19,
+        -0.55
+      ],
+      "yaw": 0.03,
+      "weapon": "minigun",
+      "first": true,
+      "active": true,
+      "vmKey": "minigun",
+      "raise": 1,
+      "muzzleNdc": {
+        "x": 0.07510676788294425,
+        "y": -0.3530190470935679,
+        "d": 1.6871605169380763
+      },
+      "backend": "WebGPU"
+    },
+    {
+      "variant": "mid-55-yaw015",
+      "key": "minigun",
+      "at": [
+        0.18,
+        -0.19,
+        -0.55
+      ],
+      "yaw": 0.15,
+      "weapon": "minigun",
+      "first": true,
+      "active": true,
+      "vmKey": "minigun",
+      "raise": 1,
+      "muzzleNdc": {
+        "x": -0.0032961643860060052,
+        "y": -0.36539335472185286,
+        "d": 1.6720894277786051
+      },
+      "backend": "WebGPU"
+    },
+    {
+      "variant": "mid-65-yaw003",
+      "key": "minigun",
+      "at": [
+        0.19,
+        -0.2,
+        -0.65
+      ],
+      "yaw": 0.03,
+      "weapon": "minigun",
+      "first": true,
+      "active": true,
+      "vmKey": "minigun",
+      "raise": 1,
+      "muzzleNdc": {
+        "x": 0.07635752783424427,
+        "y": -0.3433680101620487,
+        "d": 1.787118611484349
+      },
+      "backend": "WebGPU"
+    },
+    {
+      "variant": "mid-65-yaw015",
+      "key": "minigun",
+      "at": [
+        0.19,
+        -0.2,
+        -0.65
+      ],
+      "yaw": 0.15,
+      "weapon": "minigun",
+      "first": true,
+      "active": true,
+      "vmKey": "minigun",
+      "raise": 1,
+      "muzzleNdc": {
+        "x": 0.0023874369118724588,
+        "y": -0.3523603549613691,
+        "d": 1.7723208305419478
+      },
+      "backend": "WebGPU"
+    }
+  ],
+  "errors": []
+}

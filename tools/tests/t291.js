@@ -23,6 +23,19 @@
     await startMatch(T, 'Sights steady');
     T.clearZombies && T.clearZombies(); T.skipGrace && T.skipGrace(); T.runDevCommand('godmode');
     const THREE = T.THREE, cam = T.camera, P = T.player.position, F = () => T.fpDbg();
+    const sightSpec = (await import('./game/sight-points.js')).SIGHT.m4;
+    const viewSight = () => {
+      const vm = T.viewmodelDbg && T.viewmodelDbg();
+      if (!vm || !vm.showing('m4')) return null;
+      cam.updateMatrixWorld();
+      const t = Math.tan(cam.fov * Math.PI / 360), a = cam.aspect;
+      const world = (z) => {
+        const n = vm.ndc(vm.viewPoint(new THREE.Vector3(sightSpec.pos[0], sightSpec.pos[1], z)));
+        return cam.localToWorld(new THREE.Vector3(n.x * n.d * t * a, n.y * n.d * t, -n.d));
+      };
+      const pos = world(sightSpec.pos[2]), front = world(sightSpec.pos[2] + 0.5);
+      return { pos, fwd: front.sub(pos).normalize() };
+    };
     T.grantAllWeapons(); for (let i = 0; i < 16 && T.getCurrentWeapon() !== 'm4'; i++) T.setWeapon(i); await wait(300);
     ok(T.getCurrentWeapon() === 'm4', 'an m4 in hand');
 
@@ -64,7 +77,7 @@
     await wait(600);   // up to pace
     const t0 = Date.now();
     while (Date.now() - t0 < 2600) {
-      const s = F().sight; if (s) {
+      const s = viewSight(); if (s) {
         const dir = cam.getWorldDirection(new THREE.Vector3());
         camH.push(cam.position.y - P.y); sightH.push(s.pos.y - P.y);
         camP.push(Math.asin(Math.max(-1, Math.min(1, dir.y)))); sightP.push(Math.asin(Math.max(-1, Math.min(1, s.fwd.y))));
@@ -93,7 +106,7 @@
 
     // Standing: back onto the sight line.
     ok(await until(() => {
-      const s = F().sight; if (!s) return false;
+      const s = viewSight(); if (!s) return false;
       const along = cam.position.clone().sub(s.pos), off = along.clone().sub(s.fwd.clone().multiplyScalar(along.dot(s.fwd))).length();
       return off < 0.02 && cam.getWorldDirection(new THREE.Vector3()).angleTo(s.fwd) * 180 / Math.PI < 2;
     }, 4000), 'standing, the eye settles back onto the sight line');

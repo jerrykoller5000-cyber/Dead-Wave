@@ -1,0 +1,10 @@
+{
+  "shots": [
+    { "cam": { "x": -59.124, "y": 2.5, "z": -74.045, "tx": -83.255, "ty": 1.5, "tz": -65.843, "fov": 65 }, "out": "review/GP-20015/ford-2-0-trail.png" },
+    { "cam": { "x": -32.786, "y": 2.5, "z": 49.074, "tx": -39.998, "ty": 1.5, "tz": 59.868, "fov": 65 }, "out": "review/GP-20015/ford-3-0-trail.png" },
+    { "cam": { "x": -39.998, "y": 2.5, "z": 59.868, "tx": -32.776, "ty": 1.5, "tz": 49.059, "fov": 65 }, "out": "review/GP-20015/ford-8-0-trail.png" },
+    { "cam": { "x": -46.619, "y": 2.5, "z": 53.55, "tx": -47.075, "ty": 1.5, "tz": 57.036, "fov": 65 }, "out": "review/GP-20015/ford-9-0-trail.png" }
+  ],
+  "out": "review/GP-20015/fords/",
+  "cols": 2
+}

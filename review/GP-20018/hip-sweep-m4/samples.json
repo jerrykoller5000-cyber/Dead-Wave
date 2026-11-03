@@ -1,0 +1,110 @@
+{
+  "samples": [
+    {
+      "variant": "baseline",
+      "key": "m4",
+      "at": [
+        0.18,
+        -0.205,
+        -0.7
+      ],
+      "yaw": -0.065,
+      "weapon": "m4",
+      "first": true,
+      "active": true,
+      "vmKey": "m4",
+      "raise": 1,
+      "muzzleNdc": {
+        "x": 0.16302050371397797,
+        "y": -0.11822155063816131,
+        "d": 1.4063800191765976
+      },
+      "backend": "WebGPU"
+    },
+    {
+      "variant": "close-40-yaw003",
+      "key": "m4",
+      "at": [
+        0.16,
+        -0.17,
+        -0.4
+      ],
+      "yaw": 0.03,
+      "weapon": "m4",
+      "first": true,
+      "active": true,
+      "vmKey": "m4",
+      "raise": 1,
+      "muzzleNdc": {
+        "x": 0.1301259635918799,
+        "y": -0.09820653512060729,
+        "d": 1.1086252280807933
+      },
+      "backend": "WebGPU"
+    },
+    {
+      "variant": "close-36-yaw003",
+      "key": "m4",
+      "at": [
+        0.15,
+        -0.16,
+        -0.36
+      ],
+      "yaw": 0.03,
+      "weapon": "m4",
+      "first": true,
+      "active": true,
+      "vmKey": "m4",
+      "raise": 1,
+      "muzzleNdc": {
+        "x": 0.12594292145937036,
+        "y": -0.0769134006083193,
+        "d": 1.0680881363952017
+      },
+      "backend": "WebGPU"
+    },
+    {
+      "variant": "close-36-yaw015",
+      "key": "m4",
+      "at": [
+        0.15,
+        -0.16,
+        -0.36
+      ],
+      "yaw": 0.15,
+      "weapon": "m4",
+      "first": true,
+      "active": true,
+      "vmKey": "m4",
+      "raise": 1,
+      "muzzleNdc": {
+        "x": 0.048935126410726816,
+        "y": -0.08717568967022246,
+        "d": 1.0621625160652022
+      },
+      "backend": "WebGPU"
+    },
+    {
+      "variant": "close-36-yaw025",
+      "key": "m4",
+      "at": [
+        0.15,
+        -0.16,
+        -0.36
+      ],
+      "yaw": 0.25,
+      "weapon": "m4",
+      "first": true,
+      "active": true,
+      "vmKey": "m4",
+      "raise": 1,
+      "muzzleNdc": {
+        "x": -0.015088427974875229,
+        "y": -0.08238524105009787,
+        "d": 1.0486529157520719
+      },
+      "backend": "WebGPU"
+    }
+  ],
+  "errors": []
+}

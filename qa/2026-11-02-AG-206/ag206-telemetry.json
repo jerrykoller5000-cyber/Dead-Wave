@@ -1,0 +1,520 @@
+{
+  "date": "2026-11-02",
+  "task": "AG-206",
+  "requestId": "GP-20016 visual gate",
+  "backend": "WebGPU",
+  "gpu": null,
+  "seat": "woods-trail",
+  "j57Verification": {
+    "hip": {
+      "weapon": "revolver",
+      "vmKey": "revolver",
+      "active": true,
+      "raise": 1,
+      "ads": 0,
+      "muzzleNdc": {
+        "x": 0.2025,
+        "y": -0.0054,
+        "d": 0.7889
+      },
+      "muzzlePx": [
+        1154.41,
+        542.93,
+        0.7889
+      ],
+      "wristR_ndc": {
+        "x": 0.5036,
+        "y": -0.454
+      },
+      "wristR_px": [
+        1443.42,
+        785.18,
+        0.4623
+      ],
+      "wristL_ndc": {
+        "x": 0.2073,
+        "y": -0.5322
+      },
+      "wristL_px": [
+        1158.98,
+        827.41,
+        0.5065
+      ],
+      "vmPos": [
+        -0.17374,
+        -0.07401,
+        -0.51944
+      ],
+      "vmRot": [
+        -0.02793,
+        3.13159,
+        0.11003
+      ],
+      "cylPos": {
+        "x": 0,
+        "y": 0.05,
+        "z": 0.02
+      }
+    },
+    "ads": {
+      "weapon": "revolver",
+      "vmKey": "revolver",
+      "active": true,
+      "raise": 1,
+      "ads": 1,
+      "muzzleNdc": {
+        "x": 0,
+        "y": -0.0794,
+        "d": 0.7397
+      },
+      "muzzlePx": [
+        960,
+        582.89,
+        0.7397
+      ],
+      "wristR_ndc": {
+        "x": 0.1633,
+        "y": -0.6753
+      },
+      "wristR_px": [
+        1116.8,
+        904.64,
+        0.4103
+      ],
+      "wristL_ndc": {
+        "x": -0.1828,
+        "y": -0.7068
+      },
+      "wristL_px": [
+        784.47,
+        921.67,
+        0.4504
+      ],
+      "vmPos": [
+        0,
+        -0.08913,
+        -0.46709
+      ],
+      "vmRot": [
+        0.01902,
+        -3.14159,
+        0
+      ],
+      "cylPos": {
+        "x": 0,
+        "y": 0.05,
+        "z": 0.02
+      }
+    },
+    "reloadOut": {
+      "weapon": "revolver",
+      "vmKey": "revolver",
+      "active": true,
+      "raise": 1,
+      "ads": 0,
+      "muzzleNdc": {
+        "x": 0.1954,
+        "y": 0.1712,
+        "d": 0.7461
+      },
+      "muzzlePx": [
+        1147.54,
+        447.54,
+        0.7461
+      ],
+      "wristR_ndc": {
+        "x": 0.4758,
+        "y": -0.3316
+      },
+      "wristR_px": [
+        1416.73,
+        719.08,
+        0.4297
+      ],
+      "wristL_ndc": {
+        "x": 0.0801,
+        "y": -0.2595
+      },
+      "wristL_px": [
+        1036.91,
+        680.15,
+        0.5148
+      ],
+      "vmPos": [
+        -0.14737,
+        -0.03135,
+        -0.48768
+      ],
+      "vmRot": [
+        -0.15666,
+        -3.09294,
+        0.16138
+      ],
+      "cylPos": {
+        "x": -0.1051,
+        "y": 0.042,
+        "z": 0.03
+      },
+      "reloadU": 0.21999999999999997,
+      "handPlace": "ejector"
+    },
+    "reloadIn": {
+      "weapon": "revolver",
+      "vmKey": "revolver",
+      "active": true,
+      "raise": 1,
+      "ads": 0,
+      "muzzleNdc": {
+        "x": 0.1952,
+        "y": 0.167,
+        "d": 0.7465
+      },
+      "muzzlePx": [
+        1147.43,
+        449.84,
+        0.7465
+      ],
+      "wristR_ndc": {
+        "x": 0.4757,
+        "y": -0.3354
+      },
+      "wristR_px": [
+        1416.72,
+        721.14,
+        0.4297
+      ],
+      "wristL_ndc": {
+        "x": 0.2719,
+        "y": -0.0628
+      },
+      "wristL_px": [
+        1221.01,
+        573.92,
+        0.4239
+      ],
+      "vmPos": [
+        -0.14737,
+        -0.03246,
+        -0.48783
+      ],
+      "vmRot": [
+        -0.15404,
+        -3.09297,
+        0.16151
+      ],
+      "cylPos": {
+        "x": -0.095,
+        "y": 0.042,
+        "z": 0.03
+      },
+      "reloadU": 0.58,
+      "handPlace": "loader"
+    },
+    "reloadHome": {
+      "weapon": "revolver",
+      "vmKey": "revolver",
+      "active": true,
+      "raise": 1,
+      "ads": 0,
+      "muzzleNdc": {
+        "x": 0.1954,
+        "y": 0.1536,
+        "d": 0.7497
+      },
+      "muzzlePx": [
+        1147.56,
+        457.05,
+        0.7497
+      ],
+      "wristR_ndc": {
+        "x": 0.4769,
+        "y": -0.3446
+      },
+      "wristR_px": [
+        1417.85,
+        726.06,
+        0.4319
+      ],
+      "wristL_ndc": {
+        "x": 0.2185,
+        "y": -0.1484
+      },
+      "wristL_px": [
+        1169.74,
+        620.12,
+        0.4392
+      ],
+      "vmPos": [
+        -0.14878,
+        -0.03545,
+        -0.48999
+      ],
+      "vmRot": [
+        -0.14426,
+        -3.09666,
+        0.15772
+      ],
+      "cylPos": {
+        "x": -0.0909,
+        "y": 0.0423,
+        "z": 0.0296
+      },
+      "reloadU": 0.82,
+      "handPlace": "part"
+    }
+  },
+  "launcherVerification": {
+    "stockExcluded": true,
+    "adsRearM": 0.6,
+    "adsRearIs60": true,
+    "sightNotch": [
+      -0.2,
+      0.137
+    ],
+    "sightTip": [
+      0.29,
+      0.137
+    ],
+    "sightLevel": true
+  },
+  "chainsawVerification": {
+    "teethCount": 22,
+    "sourceTeethCount": 22,
+    "teethMatches22": true,
+    "barNdc": {
+      "x": 0,
+      "y": 0.1111
+    },
+    "barCentered": true
+  },
+  "minigunVerification": {
+    "wristL_ndc": {
+      "x": -0.021,
+      "y": -0.863
+    },
+    "supportBearingUnder": true,
+    "wristR_ndc": {
+      "x": 0.182,
+      "y": -0.443
+    }
+  },
+  "flamerVerification": {
+    "muzzleNdc": {
+      "x": 0.133,
+      "y": -0.144
+    },
+    "nozzleLowRight": true
+  },
+  "weaponScores": {
+    "revolver": {
+      "label": "Revolver",
+      "key": "revolver",
+      "structural": {
+        "craneHinge": -0.0335,
+        "frontBladeTipY": 0.121
+      },
+      "lights": {
+        "noon": {
+          "hip": "revolver-noon-hip.jpg",
+          "ads": "revolver-noon-ads.jpg",
+          "reload": "revolver-noon-reload.jpg"
+        },
+        "overcast": {
+          "hip": "revolver-overcast-hip.jpg",
+          "ads": "revolver-overcast-ads.jpg",
+          "reload": "revolver-overcast-reload.jpg"
+        },
+        "dusk": {
+          "hip": "revolver-dusk-hip.jpg",
+          "ads": "revolver-dusk-ads.jpg",
+          "reload": "revolver-dusk-reload.jpg"
+        },
+        "night": {
+          "hip": "revolver-night-hip.jpg",
+          "ads": "revolver-night-ads.jpg",
+          "reload": "revolver-night-reload.jpg"
+        }
+      },
+      "scores": {
+        "geometry": 4.9,
+        "materials": 4.8,
+        "context": 4.85,
+        "readability": 4.85,
+        "overall": 4.85
+      }
+    },
+    "chainsaw": {
+      "label": "Chainsaw",
+      "key": "chainsaw",
+      "structural": {
+        "teethCount": 22,
+        "sourceTeethCount": 22,
+        "teethMatches22": true,
+        "barNdc": {
+          "x": 0,
+          "y": 0.1111
+        },
+        "barCentered": true
+      },
+      "lights": {
+        "noon": {
+          "hip": "chainsaw-noon-hip.jpg",
+          "ads": "chainsaw-noon-ads.jpg"
+        },
+        "overcast": {
+          "hip": "chainsaw-overcast-hip.jpg",
+          "ads": "chainsaw-overcast-ads.jpg"
+        },
+        "dusk": {
+          "hip": "chainsaw-dusk-hip.jpg",
+          "ads": "chainsaw-dusk-ads.jpg"
+        },
+        "night": {
+          "hip": "chainsaw-night-hip.jpg",
+          "ads": "chainsaw-night-ads.jpg"
+        }
+      },
+      "scores": {
+        "geometry": 4.9,
+        "materials": 4.8,
+        "context": 4.85,
+        "readability": 4.8,
+        "overall": 4.84
+      }
+    },
+    "minigun": {
+      "label": "Minigun",
+      "key": "minigun",
+      "structural": {
+        "wristL_ndc": {
+          "x": -0.021,
+          "y": -0.863
+        },
+        "supportBearingUnder": true,
+        "wristR_ndc": {
+          "x": 0.182,
+          "y": -0.443
+        }
+      },
+      "lights": {
+        "noon": {
+          "hip": "minigun-noon-hip.jpg",
+          "ads": "minigun-noon-ads.jpg",
+          "reload": "minigun-noon-reload.jpg"
+        },
+        "overcast": {
+          "hip": "minigun-overcast-hip.jpg",
+          "ads": "minigun-overcast-ads.jpg",
+          "reload": "minigun-overcast-reload.jpg"
+        },
+        "dusk": {
+          "hip": "minigun-dusk-hip.jpg",
+          "ads": "minigun-dusk-ads.jpg",
+          "reload": "minigun-dusk-reload.jpg"
+        },
+        "night": {
+          "hip": "minigun-night-hip.jpg",
+          "ads": "minigun-night-ads.jpg",
+          "reload": "minigun-night-reload.jpg"
+        }
+      },
+      "scores": {
+        "geometry": 4.8,
+        "materials": 4.8,
+        "context": 4.85,
+        "readability": 4.75,
+        "overall": 4.8
+      }
+    },
+    "flamer": {
+      "label": "Flamer",
+      "key": "flamer",
+      "structural": {
+        "muzzleNdc": {
+          "x": 0.133,
+          "y": -0.144
+        },
+        "nozzleLowRight": true
+      },
+      "lights": {
+        "noon": {
+          "hip": "flamer-noon-hip.jpg",
+          "ads": "flamer-noon-ads.jpg",
+          "reload": "flamer-noon-reload.jpg"
+        },
+        "overcast": {
+          "hip": "flamer-overcast-hip.jpg",
+          "ads": "flamer-overcast-ads.jpg",
+          "reload": "flamer-overcast-reload.jpg"
+        },
+        "dusk": {
+          "hip": "flamer-dusk-hip.jpg",
+          "ads": "flamer-dusk-ads.jpg",
+          "reload": "flamer-dusk-reload.jpg"
+        },
+        "night": {
+          "hip": "flamer-night-hip.jpg",
+          "ads": "flamer-night-ads.jpg",
+          "reload": "flamer-night-reload.jpg"
+        }
+      },
+      "scores": {
+        "geometry": 4.8,
+        "materials": 4.8,
+        "context": 4.85,
+        "readability": 4.8,
+        "overall": 4.81
+      }
+    },
+    "launcher": {
+      "label": "Launcher",
+      "key": "launcher",
+      "structural": {
+        "stockExcluded": true,
+        "adsRearM": 0.6,
+        "adsRearIs60": true,
+        "sightNotch": [
+          -0.2,
+          0.137
+        ],
+        "sightTip": [
+          0.29,
+          0.137
+        ],
+        "sightLevel": true
+      },
+      "lights": {
+        "noon": {
+          "hip": "launcher-noon-hip.jpg",
+          "ads": "launcher-noon-ads.jpg",
+          "reload": "launcher-noon-reload.jpg"
+        },
+        "overcast": {
+          "hip": "launcher-overcast-hip.jpg",
+          "ads": "launcher-overcast-ads.jpg",
+          "reload": "launcher-overcast-reload.jpg"
+        },
+        "dusk": {
+          "hip": "launcher-dusk-hip.jpg",
+          "ads": "launcher-dusk-ads.jpg",
+          "reload": "launcher-dusk-reload.jpg"
+        },
+        "night": {
+          "hip": "launcher-night-hip.jpg",
+          "ads": "launcher-night-ads.jpg",
+          "reload": "launcher-night-reload.jpg"
+        }
+      },
+      "scores": {
+        "geometry": 4.85,
+        "materials": 4.8,
+        "context": 4.85,
+        "readability": 4.8,
+        "overall": 4.83
+      }
+    }
+  },
+  "shots": {},
+  "defects": [],
+  "errors": []
+}

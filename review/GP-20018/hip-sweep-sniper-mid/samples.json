@@ -1,0 +1,110 @@
+{
+  "samples": [
+    {
+      "variant": "baseline",
+      "key": "sniper",
+      "at": [
+        0.2,
+        -0.2,
+        -0.82
+      ],
+      "yaw": 0.025,
+      "weapon": "sniper",
+      "first": true,
+      "active": true,
+      "vmKey": "sniper",
+      "raise": 1,
+      "muzzleNdc": {
+        "x": 0.0915103303188678,
+        "y": -0.0825658414306919,
+        "d": 1.7840801931934878
+      },
+      "backend": "WebGPU"
+    },
+    {
+      "variant": "mid-55-yaw003",
+      "key": "sniper",
+      "at": [
+        0.18,
+        -0.19,
+        -0.55
+      ],
+      "yaw": 0.03,
+      "weapon": "sniper",
+      "first": true,
+      "active": true,
+      "vmKey": "sniper",
+      "raise": 1,
+      "muzzleNdc": {
+        "x": 0.09187047527963389,
+        "y": -0.08549529163330263,
+        "d": 1.5138789355789983
+      },
+      "backend": "WebGPU"
+    },
+    {
+      "variant": "mid-55-yaw015",
+      "key": "sniper",
+      "at": [
+        0.18,
+        -0.19,
+        -0.55
+      ],
+      "yaw": 0.15,
+      "weapon": "sniper",
+      "first": true,
+      "active": true,
+      "vmKey": "sniper",
+      "raise": 1,
+      "muzzleNdc": {
+        "x": 0.017929404808371085,
+        "y": -0.08140858327703937,
+        "d": 1.502132852981113
+      },
+      "backend": "WebGPU"
+    },
+    {
+      "variant": "mid-65-yaw003",
+      "key": "sniper",
+      "at": [
+        0.19,
+        -0.2,
+        -0.65
+      ],
+      "yaw": 0.03,
+      "weapon": "sniper",
+      "first": true,
+      "active": true,
+      "vmKey": "sniper",
+      "raise": 1,
+      "muzzleNdc": {
+        "x": 0.0922004503259481,
+        "y": -0.0941312485085225,
+        "d": 1.6141305448500698
+      },
+      "backend": "WebGPU"
+    },
+    {
+      "variant": "mid-65-yaw015",
+      "key": "sniper",
+      "at": [
+        0.19,
+        -0.2,
+        -0.65
+      ],
+      "yaw": 0.15,
+      "weapon": "sniper",
+      "first": true,
+      "active": true,
+      "vmKey": "sniper",
+      "raise": 1,
+      "muzzleNdc": {
+        "x": 0.022892048457161123,
+        "y": -0.08661904141459661,
+        "d": 1.602090518821854
+      },
+      "backend": "WebGPU"
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,2996 @@
+{
+  "task": "AG-199",
+  "agent": "antigravity",
+  "weapons": [
+    "shotgun",
+    "aa12",
+    "revolver",
+    "sniper"
+  ],
+  "timestamp": "2026-11-02T09:13:23.101Z",
+  "backend": "WebGPU",
+  "shotgun": {
+    "shots": {
+      "1-hip": {
+        "backend": "WebGPU",
+        "key": "shotgun",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.87,
+          "l": 0.2400421839433103
+        },
+        "sockErr": {
+          "r": 5.155369359468229e-16,
+          "l": 2.124888270385395e-15
+        },
+        "bend": {
+          "r": 0.8699999999999962,
+          "l": 0.2400421839433103
+        },
+        "forearm": {
+          "r": {
+            "ang": 65,
+            "ey": -1.02,
+            "ex": 0.62
+          },
+          "l": {
+            "ang": 71.3,
+            "ey": -0.65,
+            "ex": -0.01
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": false,
+        "hasPump": true,
+        "hasBolt": false,
+        "hasCylinder": false,
+        "hasShell": false,
+        "near": {
+          "closest": 0.45996309410308706,
+          "seen": 2949
+        }
+      },
+      "2-ads": {
+        "backend": "WebGPU",
+        "key": "shotgun",
+        "active": true,
+        "raise": 1,
+        "ads": 1,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.87,
+          "l": 0.5311495204096247
+        },
+        "sockErr": {
+          "r": 3.018546457344101e-15,
+          "l": 5.900789845335481e-15
+        },
+        "bend": {
+          "r": 0.869999999999999,
+          "l": 0.5311495204096256
+        },
+        "forearm": {
+          "r": {
+            "ang": 77.8,
+            "ey": -1.43,
+            "ex": 0.6
+          },
+          "l": {
+            "ang": 84.8,
+            "ey": -0.89,
+            "ex": -0.26
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": false,
+        "hasPump": true,
+        "hasBolt": false,
+        "hasCylinder": false,
+        "hasShell": false,
+        "near": {
+          "closest": 0.34345484303367896,
+          "seen": 2878
+        }
+      },
+      "3-hip-return": {
+        "backend": "WebGPU",
+        "key": "shotgun",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.87,
+          "l": 0.23655683925448015
+        },
+        "sockErr": {
+          "r": 5.417672226377439e-16,
+          "l": 1.772232082236044e-15
+        },
+        "bend": {
+          "r": 0.8699999999999939,
+          "l": 0.23655683925447638
+        },
+        "forearm": {
+          "r": {
+            "ang": 64.9,
+            "ey": -1.02,
+            "ex": 0.62
+          },
+          "l": {
+            "ang": 71.5,
+            "ey": -0.65,
+            "ex": -0.01
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": false,
+        "hasPump": true,
+        "hasBolt": false,
+        "hasCylinder": false,
+        "hasShell": false,
+        "near": {
+          "closest": 0.4596120826834859,
+          "seen": 2948
+        }
+      },
+      "4-reload-2": {
+        "backend": "WebGPU",
+        "key": "shotgun",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "pouch",
+        "reloadU": 0.19999999999999996,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.87,
+          "l": 0.87
+        },
+        "sockErr": {
+          "r": 3.0887354325867102e-15,
+          "l": 1.4946834900704542e-15
+        },
+        "bend": {
+          "r": 0.8699999999999929,
+          "l": 0.8699999999999958
+        },
+        "forearm": {
+          "r": {
+            "ang": 65.3,
+            "ey": -0.88,
+            "ex": 0.59
+          },
+          "l": {
+            "ang": 150.2,
+            "ey": -5.76,
+            "ex": -1.65
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": false,
+        "hasPump": true,
+        "hasBolt": false,
+        "hasCylinder": false,
+        "hasShell": false,
+        "near": {
+          "closest": 0.4319986259615825,
+          "seen": 2323
+        }
+      },
+      "5-reload-45": {
+        "backend": "WebGPU",
+        "key": "shotgun",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "port",
+        "reloadU": 0.44999999999999996,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.87,
+          "l": 0.87
+        },
+        "sockErr": {
+          "r": 3.245771000670352e-15,
+          "l": 2.6691571797624175e-15
+        },
+        "bend": {
+          "r": 0.8699999999999931,
+          "l": 0.8699999999999992
+        },
+        "forearm": {
+          "r": {
+            "ang": 65.3,
+            "ey": -0.89,
+            "ex": 0.59
+          },
+          "l": {
+            "ang": 49.1,
+            "ey": -0.81,
+            "ex": 0.22
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": false,
+        "hasPump": true,
+        "hasBolt": false,
+        "hasCylinder": false,
+        "hasShell": true,
+        "near": {
+          "closest": 0.43154765888177643,
+          "seen": 3052
+        }
+      },
+      "6-reload-7": {
+        "backend": "WebGPU",
+        "key": "shotgun",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "port",
+        "reloadU": 0.7,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.87,
+          "l": 0.87
+        },
+        "sockErr": {
+          "r": 1.8498627855025465e-15,
+          "l": 4.0110408104921116e-15
+        },
+        "bend": {
+          "r": 0.8699999999999939,
+          "l": 0.8699999999999973
+        },
+        "forearm": {
+          "r": {
+            "ang": 65.3,
+            "ey": -0.88,
+            "ex": 0.59
+          },
+          "l": {
+            "ang": 41.2,
+            "ey": -0.5,
+            "ex": 0.35
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": false,
+        "hasPump": true,
+        "hasBolt": false,
+        "hasCylinder": false,
+        "hasShell": true,
+        "near": {
+          "closest": 0.4317750980079415,
+          "seen": 3065
+        }
+      },
+      "7-reload-9": {
+        "backend": "WebGPU",
+        "key": "shotgun",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "pump",
+        "reloadU": 0.9,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.87,
+          "l": 0.87
+        },
+        "sockErr": {
+          "r": 3.1707024946691817e-15,
+          "l": 4.199905614969676e-15
+        },
+        "bend": {
+          "r": 0.8699999999999919,
+          "l": 0.8699999999999971
+        },
+        "forearm": {
+          "r": {
+            "ang": 65,
+            "ey": -0.92,
+            "ex": 0.61
+          },
+          "l": {
+            "ang": 59.6,
+            "ey": -0.47,
+            "ex": 0.42
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": false,
+        "hasPump": true,
+        "hasBolt": false,
+        "hasCylinder": false,
+        "hasShell": false,
+        "near": {
+          "closest": 0.42893873013485684,
+          "seen": 2957
+        }
+      },
+      "8-art-noon": {
+        "backend": "WebGPU",
+        "key": "shotgun",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.87,
+          "l": 0.24071450887542298
+        },
+        "sockErr": {
+          "r": 2.3215344831324906e-15,
+          "l": 4.238613557900966e-15
+        },
+        "bend": {
+          "r": 0.869999999999998,
+          "l": 0.24071450887541831
+        },
+        "forearm": {
+          "r": {
+            "ang": 64.9,
+            "ey": -1.02,
+            "ex": 0.62
+          },
+          "l": {
+            "ang": 71.4,
+            "ey": -0.65,
+            "ex": -0.01
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": false,
+        "hasPump": true,
+        "hasBolt": false,
+        "hasCylinder": false,
+        "hasShell": false,
+        "near": {
+          "closest": 0.45970005421655363,
+          "seen": 2948
+        }
+      },
+      "9-art-dusk": {
+        "backend": "WebGPU",
+        "key": "shotgun",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.87,
+          "l": 0.2376511211128479
+        },
+        "sockErr": {
+          "r": 3.51795762092615e-15,
+          "l": 1.5982970556924734e-15
+        },
+        "bend": {
+          "r": 0.8699999999999957,
+          "l": 0.23765112111285214
+        },
+        "forearm": {
+          "r": {
+            "ang": 65,
+            "ey": -1.02,
+            "ex": 0.62
+          },
+          "l": {
+            "ang": 71.4,
+            "ey": -0.65,
+            "ex": -0.01
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": false,
+        "hasPump": true,
+        "hasBolt": false,
+        "hasCylinder": false,
+        "hasShell": false,
+        "near": {
+          "closest": 0.4599194334970822,
+          "seen": 2949
+        }
+      },
+      "10-art-overcast": {
+        "backend": "WebGPU",
+        "key": "shotgun",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.87,
+          "l": 0.23587897611283176
+        },
+        "sockErr": {
+          "r": 5.728686258851893e-16,
+          "l": 3.5038047658940695e-15
+        },
+        "bend": {
+          "r": 0.8699999999999948,
+          "l": 0.23587897611282796
+        },
+        "forearm": {
+          "r": {
+            "ang": 64.9,
+            "ey": -1.02,
+            "ex": 0.62
+          },
+          "l": {
+            "ang": 71.5,
+            "ey": -0.66,
+            "ex": -0.01
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": false,
+        "hasPump": true,
+        "hasBolt": false,
+        "hasCylinder": false,
+        "hasShell": false,
+        "near": {
+          "closest": 0.45965262170705257,
+          "seen": 2947
+        }
+      },
+      "11-art-night": {
+        "backend": "WebGPU",
+        "key": "shotgun",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.87,
+          "l": 0.23586079092900167
+        },
+        "sockErr": {
+          "r": 1.8209011484034673e-15,
+          "l": 1.9397156336316165e-15
+        },
+        "bend": {
+          "r": 0.8699999999999972,
+          "l": 0.23586079092900689
+        },
+        "forearm": {
+          "r": {
+            "ang": 65,
+            "ey": -1.02,
+            "ex": 0.62
+          },
+          "l": {
+            "ang": 71.4,
+            "ey": -0.65,
+            "ex": -0.01
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": false,
+        "hasPump": true,
+        "hasBolt": false,
+        "hasCylinder": false,
+        "hasShell": false,
+        "near": {
+          "closest": 0.4599632431854673,
+          "seen": 2949
+        }
+      },
+      "12-motion-look-down": {
+        "backend": "WebGPU",
+        "key": "shotgun",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.87,
+          "l": 0.23623420759359443
+        },
+        "sockErr": {
+          "r": 4.10651221757036e-15,
+          "l": 2.1969024649798208e-15
+        },
+        "bend": {
+          "r": 0.869999999999993,
+          "l": 0.2362342075936058
+        },
+        "forearm": {
+          "r": {
+            "ang": 65,
+            "ey": -1.02,
+            "ex": 0.62
+          },
+          "l": {
+            "ang": 71.5,
+            "ey": -0.65,
+            "ex": -0.01
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": false,
+        "hasPump": true,
+        "hasBolt": false,
+        "hasCylinder": false,
+        "hasShell": false,
+        "near": {
+          "closest": 0.4598201674306025,
+          "seen": 2948
+        }
+      },
+      "13-motion-look-up": {
+        "backend": "WebGPU",
+        "key": "shotgun",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.87,
+          "l": 0.23644684919426165
+        },
+        "sockErr": {
+          "r": 5.372263561536176e-15,
+          "l": 8.544029998311908e-15
+        },
+        "bend": {
+          "r": 0.8699999999999952,
+          "l": 0.23644684919425785
+        },
+        "forearm": {
+          "r": {
+            "ang": 64.9,
+            "ey": -1.02,
+            "ex": 0.62
+          },
+          "l": {
+            "ang": 71.5,
+            "ey": -0.65,
+            "ex": -0.01
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": false,
+        "hasPump": true,
+        "hasBolt": false,
+        "hasCylinder": false,
+        "hasShell": false,
+        "near": {
+          "closest": 0.4597462285356166,
+          "seen": 2948
+        }
+      },
+      "14-motion-turn-sway": {
+        "backend": "WebGPU",
+        "key": "shotgun",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.87,
+          "l": 0.23103213474156645
+        },
+        "sockErr": {
+          "r": 5.488871223306155e-15,
+          "l": 4.7276635022601545e-15
+        },
+        "bend": {
+          "r": 0.8700000000000004,
+          "l": 0.23103213474156595
+        },
+        "forearm": {
+          "r": {
+            "ang": 64.9,
+            "ey": -1.02,
+            "ex": 0.62
+          },
+          "l": {
+            "ang": 71.4,
+            "ey": -0.65,
+            "ex": -0.01
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": false,
+        "hasPump": true,
+        "hasBolt": false,
+        "hasCylinder": false,
+        "hasShell": false,
+        "near": {
+          "closest": 0.45972613059529643,
+          "seen": 2948
+        }
+      },
+      "15-wall-hip": {
+        "backend": "WebGPU",
+        "key": "shotgun",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.87,
+          "l": 0.24394048876366228
+        },
+        "sockErr": {
+          "r": 3.3047788925480533e-15,
+          "l": 4.175161926517072e-15
+        },
+        "bend": {
+          "r": 0.8699999999999936,
+          "l": 0.24394048876366872
+        },
+        "forearm": {
+          "r": {
+            "ang": 64.9,
+            "ey": -1.02,
+            "ex": 0.62
+          },
+          "l": {
+            "ang": 71.3,
+            "ey": -0.65,
+            "ex": -0.01
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": false,
+        "hasPump": true,
+        "hasBolt": false,
+        "hasCylinder": false,
+        "hasShell": false,
+        "near": {
+          "closest": 0.45964374090201615,
+          "seen": 2948
+        }
+      },
+      "16-wall-ads": {
+        "backend": "WebGPU",
+        "key": "shotgun",
+        "active": true,
+        "raise": 1,
+        "ads": 1,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.87,
+          "l": 0.5348665567890729
+        },
+        "sockErr": {
+          "r": 2.9796874070320124e-15,
+          "l": 3.90516115821561e-15
+        },
+        "bend": {
+          "r": 0.8699999999999939,
+          "l": 0.5348665567890738
+        },
+        "forearm": {
+          "r": {
+            "ang": 78.1,
+            "ey": -1.43,
+            "ex": 0.6
+          },
+          "l": {
+            "ang": 84.7,
+            "ey": -0.89,
+            "ex": -0.26
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": false,
+        "hasPump": true,
+        "hasBolt": false,
+        "hasCylinder": false,
+        "hasShell": false,
+        "near": {
+          "closest": 0.3434548430336808,
+          "seen": 2878
+        }
+      }
+    },
+    "reloadCycle": {
+      "finished": false
+    },
+    "ergonomics": {},
+    "sights": {},
+    "depthTest": {}
+  },
+  "aa12": {
+    "shots": {
+      "1-hip": {
+        "backend": "WebGPU",
+        "key": "aa12",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.8322661326047323,
+          "l": 0.5924623456700653
+        },
+        "sockErr": {
+          "r": 4.494432514646436e-15,
+          "l": 9.019494489765868e-16
+        },
+        "bend": {
+          "r": 0.8322661326047286,
+          "l": 0.5924623456700583
+        },
+        "forearm": {
+          "r": {
+            "ang": 62.9,
+            "ey": -1.01,
+            "ex": 0.57
+          },
+          "l": {
+            "ang": 52.3,
+            "ey": -0.5,
+            "ex": -0.01
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": true,
+        "hasPump": false,
+        "hasBolt": false,
+        "hasCylinder": false,
+        "hasShell": false,
+        "near": {
+          "closest": 0.5243145628158062,
+          "seen": 2357
+        }
+      },
+      "2-ads": {
+        "backend": "WebGPU",
+        "key": "aa12",
+        "active": true,
+        "raise": 1,
+        "ads": 1,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.87,
+          "l": 0.3704451122769729
+        },
+        "sockErr": {
+          "r": 1.661165983373736e-15,
+          "l": 4.8540972666265076e-15
+        },
+        "bend": {
+          "r": 0.8699999999999963,
+          "l": 0.37044511227696497
+        },
+        "forearm": {
+          "r": {
+            "ang": 85.1,
+            "ey": -1.87,
+            "ex": 0.64
+          },
+          "l": {
+            "ang": 70.3,
+            "ey": -0.89,
+            "ex": -0.27
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": true,
+        "hasPump": false,
+        "hasBolt": false,
+        "hasCylinder": false,
+        "hasShell": false,
+        "near": {
+          "closest": 0.41441692334027674,
+          "seen": 1859
+        }
+      },
+      "3-hip-return": {
+        "backend": "WebGPU",
+        "key": "aa12",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.8319182898789287,
+          "l": 0.5901615967468207
+        },
+        "sockErr": {
+          "r": 2.112343365827712e-15,
+          "l": 5.389157964038493e-16
+        },
+        "bend": {
+          "r": 0.8319182898789212,
+          "l": 0.5901615967468219
+        },
+        "forearm": {
+          "r": {
+            "ang": 62.9,
+            "ey": -1.01,
+            "ex": 0.57
+          },
+          "l": {
+            "ang": 52.4,
+            "ey": -0.5,
+            "ex": -0.01
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": true,
+        "hasPump": false,
+        "hasBolt": false,
+        "hasCylinder": false,
+        "hasShell": false,
+        "near": {
+          "closest": 0.5244101620638986,
+          "seen": 2357
+        }
+      },
+      "4-reload-2": {
+        "backend": "WebGPU",
+        "key": "aa12",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "hand",
+        "handPlace": "below",
+        "reloadU": 0.19999999999999996,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.5968720394457714,
+          "l": 0.87
+        },
+        "sockErr": {
+          "r": 3.799980572455304e-15,
+          "l": 1.1723240201901227e-15
+        },
+        "bend": {
+          "r": 0.5968720394457585,
+          "l": 0.869999999999999
+        },
+        "forearm": {
+          "r": {
+            "ang": 66.5,
+            "ey": -0.9,
+            "ex": 0.49
+          },
+          "l": {
+            "ang": 66.3,
+            "ey": -1.32,
+            "ex": 0.1
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": true,
+        "hasPump": false,
+        "hasBolt": false,
+        "hasCylinder": false,
+        "hasShell": false,
+        "near": {
+          "closest": 0.5028272769742713,
+          "seen": 2271
+        }
+      },
+      "5-reload-45": {
+        "backend": "WebGPU",
+        "key": "aa12",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "hand",
+        "handPlace": "pouch",
+        "reloadU": 0.44999999999999996,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.5947295077462057,
+          "l": 0.87
+        },
+        "sockErr": {
+          "r": 2.6825444347127726e-15,
+          "l": 2.6472766915523344e-15
+        },
+        "bend": {
+          "r": 0.594729507746195,
+          "l": 0.8700000000000002
+        },
+        "forearm": {
+          "r": {
+            "ang": 66.5,
+            "ey": -0.89,
+            "ex": 0.49
+          },
+          "l": {
+            "ang": 108.3,
+            "ey": -2.4,
+            "ex": -0.47
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": true,
+        "hasPump": false,
+        "hasBolt": false,
+        "hasCylinder": false,
+        "hasShell": false,
+        "near": {
+          "closest": 0.5029081275193054,
+          "seen": 1091
+        }
+      },
+      "6-reload-7": {
+        "backend": "WebGPU",
+        "key": "aa12",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "well",
+        "reloadU": 0.7,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.7276963963356541,
+          "l": 0.87
+        },
+        "sockErr": {
+          "r": 1.1517727838831442e-15,
+          "l": 2.5757413442395863e-15
+        },
+        "bend": {
+          "r": 0.727696396335645,
+          "l": 0.8699999999999994
+        },
+        "forearm": {
+          "r": {
+            "ang": 64.9,
+            "ey": -0.88,
+            "ex": 0.51
+          },
+          "l": {
+            "ang": 66,
+            "ey": -0.88,
+            "ex": 0.18
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": true,
+        "hasPump": false,
+        "hasBolt": false,
+        "hasCylinder": false,
+        "hasShell": false,
+        "near": {
+          "closest": 0.4955552863231571,
+          "seen": 2351
+        }
+      },
+      "7-reload-9": {
+        "backend": "WebGPU",
+        "key": "aa12",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": 0.9,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.8076764121560355,
+          "l": 0.6400537852348217
+        },
+        "sockErr": {
+          "r": 3.3061772475722164e-15,
+          "l": 1.5161761050816639e-15
+        },
+        "bend": {
+          "r": 0.8076764121560279,
+          "l": 0.6400537852348178
+        },
+        "forearm": {
+          "r": {
+            "ang": 63.4,
+            "ey": -0.96,
+            "ex": 0.55
+          },
+          "l": {
+            "ang": 53.3,
+            "ey": -0.47,
+            "ex": -0.03
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": true,
+        "hasPump": false,
+        "hasBolt": false,
+        "hasCylinder": false,
+        "hasShell": false,
+        "near": {
+          "closest": 0.5121390147336076,
+          "seen": 2361
+        }
+      },
+      "8-art-noon": {
+        "backend": "WebGPU",
+        "key": "aa12",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.8293623026711547,
+          "l": 0.5949146023086133
+        },
+        "sockErr": {
+          "r": 4.802677106152286e-15,
+          "l": 3.941291737419306e-15
+        },
+        "bend": {
+          "r": 0.8293623026711447,
+          "l": 0.594914602308616
+        },
+        "forearm": {
+          "r": {
+            "ang": 62.8,
+            "ey": -1,
+            "ex": 0.57
+          },
+          "l": {
+            "ang": 52.3,
+            "ey": -0.49,
+            "ex": -0.01
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": true,
+        "hasPump": false,
+        "hasBolt": false,
+        "hasCylinder": false,
+        "hasShell": false,
+        "near": {
+          "closest": 0.5243448491987778,
+          "seen": 2357
+        }
+      },
+      "9-art-dusk": {
+        "backend": "WebGPU",
+        "key": "aa12",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.8328036681615902,
+          "l": 0.5915000469680086
+        },
+        "sockErr": {
+          "r": 1.871186959898982e-15,
+          "l": 3.6528910504821414e-15
+        },
+        "bend": {
+          "r": 0.8328036681615825,
+          "l": 0.5915000469680066
+        },
+        "forearm": {
+          "r": {
+            "ang": 62.9,
+            "ey": -1.01,
+            "ex": 0.57
+          },
+          "l": {
+            "ang": 52.3,
+            "ey": -0.5,
+            "ex": -0.01
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": true,
+        "hasPump": false,
+        "hasBolt": false,
+        "hasCylinder": false,
+        "hasShell": false,
+        "near": {
+          "closest": 0.5242990590474584,
+          "seen": 2357
+        }
+      },
+      "10-art-overcast": {
+        "backend": "WebGPU",
+        "key": "aa12",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.8304664115690893,
+          "l": 0.5930397639082724
+        },
+        "sockErr": {
+          "r": 2.7427508750844547e-15,
+          "l": 8.101585801848734e-16
+        },
+        "bend": {
+          "r": 0.8304664115690794,
+          "l": 0.5930397639082722
+        },
+        "forearm": {
+          "r": {
+            "ang": 62.8,
+            "ey": -1,
+            "ex": 0.57
+          },
+          "l": {
+            "ang": 52.2,
+            "ey": -0.49,
+            "ex": -0.01
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": true,
+        "hasPump": false,
+        "hasBolt": false,
+        "hasCylinder": false,
+        "hasShell": false,
+        "near": {
+          "closest": 0.5243067124678357,
+          "seen": 2357
+        }
+      },
+      "11-art-night": {
+        "backend": "WebGPU",
+        "key": "aa12",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.8307719549652184,
+          "l": 0.5921738716580915
+        },
+        "sockErr": {
+          "r": 1.6250646570963809e-15,
+          "l": 5.477983173530784e-15
+        },
+        "bend": {
+          "r": 0.8307719549652107,
+          "l": 0.5921738716580913
+        },
+        "forearm": {
+          "r": {
+            "ang": 62.8,
+            "ey": -1.01,
+            "ex": 0.57
+          },
+          "l": {
+            "ang": 52.2,
+            "ey": -0.5,
+            "ex": -0.01
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": true,
+        "hasPump": false,
+        "hasBolt": false,
+        "hasCylinder": false,
+        "hasShell": false,
+        "near": {
+          "closest": 0.5243176133613219,
+          "seen": 2357
+        }
+      },
+      "12-motion-look-down": {
+        "backend": "WebGPU",
+        "key": "aa12",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.832526406353557,
+          "l": 0.5906932784111051
+        },
+        "sockErr": {
+          "r": 1.6534963408039704e-15,
+          "l": 2.3003663002222862e-15
+        },
+        "bend": {
+          "r": 0.8325264063535462,
+          "l": 0.590693278411099
+        },
+        "forearm": {
+          "r": {
+            "ang": 62.9,
+            "ey": -1.01,
+            "ex": 0.57
+          },
+          "l": {
+            "ang": 52.3,
+            "ey": -0.5,
+            "ex": -0.01
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": true,
+        "hasPump": false,
+        "hasBolt": false,
+        "hasCylinder": false,
+        "hasShell": false,
+        "near": {
+          "closest": 0.52430550044582,
+          "seen": 2357
+        }
+      },
+      "13-motion-look-up": {
+        "backend": "WebGPU",
+        "key": "aa12",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.8293060771516789,
+          "l": 0.5933634211601483
+        },
+        "sockErr": {
+          "r": 7.000185078482645e-15,
+          "l": 4.7585232522442936e-15
+        },
+        "bend": {
+          "r": 0.8293060771516692,
+          "l": 0.59336342116014
+        },
+        "forearm": {
+          "r": {
+            "ang": 62.8,
+            "ey": -1,
+            "ex": 0.57
+          },
+          "l": {
+            "ang": 52.2,
+            "ey": -0.49,
+            "ex": -0.01
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": true,
+        "hasPump": false,
+        "hasBolt": false,
+        "hasCylinder": false,
+        "hasShell": false,
+        "near": {
+          "closest": 0.5243305407142056,
+          "seen": 2357
+        }
+      },
+      "14-motion-turn-sway": {
+        "backend": "WebGPU",
+        "key": "aa12",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.8320314511510473,
+          "l": 0.5918396414451323
+        },
+        "sockErr": {
+          "r": 3.384928717882925e-15,
+          "l": 6.584333938989914e-15
+        },
+        "bend": {
+          "r": 0.8320314511510356,
+          "l": 0.5918396414451313
+        },
+        "forearm": {
+          "r": {
+            "ang": 62.9,
+            "ey": -1.01,
+            "ex": 0.57
+          },
+          "l": {
+            "ang": 52.4,
+            "ey": -0.5,
+            "ex": -0.01
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": true,
+        "hasPump": false,
+        "hasBolt": false,
+        "hasCylinder": false,
+        "hasShell": false,
+        "near": {
+          "closest": 0.5243921257959027,
+          "seen": 2357
+        }
+      },
+      "15-wall-hip": {
+        "backend": "WebGPU",
+        "key": "aa12",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.8296381992135274,
+          "l": 0.87
+        },
+        "sockErr": {
+          "r": 4.448258563599295e-15,
+          "l": 1.5223243747904587e-15
+        },
+        "bend": {
+          "r": 0.8296381992135121,
+          "l": 0.8700000000000002
+        },
+        "forearm": {
+          "r": {
+            "ang": 62.8,
+            "ey": -1,
+            "ex": 0.57
+          },
+          "l": {
+            "ang": 28.3,
+            "ey": 0.03,
+            "ex": 0.09
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": true,
+        "hasPump": false,
+        "hasBolt": false,
+        "hasCylinder": false,
+        "hasShell": false,
+        "near": {
+          "closest": 0.523805807566781,
+          "seen": 2357
+        }
+      },
+      "16-wall-ads": {
+        "backend": "WebGPU",
+        "key": "aa12",
+        "active": true,
+        "raise": 1,
+        "ads": 1,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.87,
+          "l": 0.87
+        },
+        "sockErr": {
+          "r": 3.2565523546794566e-15,
+          "l": 5.3061901915356025e-15
+        },
+        "bend": {
+          "r": 0.8699999999999811,
+          "l": 0.8700000000000006
+        },
+        "forearm": {
+          "r": {
+            "ang": 86.6,
+            "ey": -1.85,
+            "ex": 0.62
+          },
+          "l": {
+            "ang": 35.8,
+            "ey": 0.07,
+            "ex": -0.14
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": true,
+        "hasPump": false,
+        "hasBolt": false,
+        "hasCylinder": false,
+        "hasShell": false,
+        "near": {
+          "closest": 0.4219321944477764,
+          "seen": 1888
+        }
+      }
+    },
+    "reloadCycle": {
+      "finished": true
+    },
+    "ergonomics": {},
+    "sights": {},
+    "depthTest": {}
+  },
+  "revolver": {
+    "shots": {
+      "1-hip": {
+        "backend": "WebGPU",
+        "key": "revolver",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.87,
+          "l": 0.7914126916814882
+        },
+        "sockErr": {
+          "r": 1.5154137605576044e-15,
+          "l": 4.341707557710324e-15
+        },
+        "bend": {
+          "r": 0.8700000000000023,
+          "l": 0.7914126916814912
+        },
+        "forearm": {
+          "r": {
+            "ang": 68.8,
+            "ey": -1.43,
+            "ex": 1.1
+          },
+          "l": {
+            "ang": 72.7,
+            "ey": -1.28,
+            "ex": -0.18
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": true,
+        "hasPump": false,
+        "hasBolt": false,
+        "hasCylinder": true,
+        "hasShell": false,
+        "near": {
+          "closest": 0.2783739804789255,
+          "seen": 2369
+        }
+      },
+      "2-ads": {
+        "backend": "WebGPU",
+        "key": "revolver",
+        "active": true,
+        "raise": 1,
+        "ads": 1,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.87,
+          "l": 0.87
+        },
+        "sockErr": {
+          "r": 1.8536589799046823e-15,
+          "l": 7.162874682589104e-16
+        },
+        "bend": {
+          "r": 0.8700000000000032,
+          "l": 0.8700000000000062
+        },
+        "forearm": {
+          "r": {
+            "ang": 80,
+            "ey": -1.7,
+            "ex": 0.71
+          },
+          "l": {
+            "ang": 79.6,
+            "ey": -1.81,
+            "ex": -0.89
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": true,
+        "hasPump": false,
+        "hasBolt": false,
+        "hasCylinder": true,
+        "hasShell": false,
+        "near": {
+          "closest": 0.3254092954234749,
+          "seen": 2303
+        }
+      },
+      "3-hip-return": {
+        "backend": "WebGPU",
+        "key": "revolver",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.87,
+          "l": 0.7908698180685575
+        },
+        "sockErr": {
+          "r": 3.338177745151469e-15,
+          "l": 2.463727542916475e-15
+        },
+        "bend": {
+          "r": 0.870000000000009,
+          "l": 0.7908698180685665
+        },
+        "forearm": {
+          "r": {
+            "ang": 68.8,
+            "ey": -1.43,
+            "ex": 1.1
+          },
+          "l": {
+            "ang": 72.7,
+            "ey": -1.28,
+            "ex": -0.18
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": true,
+        "hasPump": false,
+        "hasBolt": false,
+        "hasCylinder": true,
+        "hasShell": false,
+        "near": {
+          "closest": 0.2782654971588483,
+          "seen": 2369
+        }
+      },
+      "4-reload-2": {
+        "backend": "WebGPU",
+        "key": "revolver",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "ejector",
+        "reloadU": 0.19999999999999996,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.87,
+          "l": 0.87
+        },
+        "sockErr": {
+          "r": 7.721838581466776e-16,
+          "l": 4.8717607930716666e-15
+        },
+        "bend": {
+          "r": 0.8700000000000025,
+          "l": 0.8699999999999986
+        },
+        "forearm": {
+          "r": {
+            "ang": 70,
+            "ey": -1.38,
+            "ex": 1.07
+          },
+          "l": {
+            "ang": 36.3,
+            "ey": -0.35,
+            "ex": 0.62
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": true,
+        "hasPump": false,
+        "hasBolt": false,
+        "hasCylinder": true,
+        "hasShell": false,
+        "near": {
+          "closest": 0.25323797879779597,
+          "seen": 2445
+        }
+      },
+      "5-reload-45": {
+        "backend": "WebGPU",
+        "key": "revolver",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "loader",
+        "reloadU": 0.44999999999999996,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.87,
+          "l": 0.87
+        },
+        "sockErr": {
+          "r": 1.7246466902272033e-15,
+          "l": 2.963502805796743e-15
+        },
+        "bend": {
+          "r": 0.8700000000000049,
+          "l": 0.8700000000000006
+        },
+        "forearm": {
+          "r": {
+            "ang": 70,
+            "ey": -1.38,
+            "ex": 1.07
+          },
+          "l": {
+            "ang": 44.8,
+            "ey": -1.02,
+            "ex": 1.05
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": true,
+        "hasPump": false,
+        "hasBolt": false,
+        "hasCylinder": true,
+        "hasShell": false,
+        "near": {
+          "closest": 0.19713866756289894,
+          "seen": 2393
+        }
+      },
+      "6-reload-7": {
+        "backend": "WebGPU",
+        "key": "revolver",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "loader",
+        "reloadU": 0.7,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.87,
+          "l": 0.87
+        },
+        "sockErr": {
+          "r": 2.8718639232811673e-15,
+          "l": 2.7814147467806897e-15
+        },
+        "bend": {
+          "r": 0.8700000000000033,
+          "l": 0.8699999999999987
+        },
+        "forearm": {
+          "r": {
+            "ang": 70,
+            "ey": -1.37,
+            "ex": 1.07
+          },
+          "l": {
+            "ang": 45,
+            "ey": -0.86,
+            "ex": 1.13
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": true,
+        "hasPump": false,
+        "hasBolt": false,
+        "hasCylinder": true,
+        "hasShell": false,
+        "near": {
+          "closest": 0.22764719069267017,
+          "seen": 2391
+        }
+      },
+      "7-reload-9": {
+        "backend": "WebGPU",
+        "key": "revolver",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": 0.9,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.87,
+          "l": 0.656041795137855
+        },
+        "sockErr": {
+          "r": 1.692862592547962e-15,
+          "l": 3.93221674866899e-15
+        },
+        "bend": {
+          "r": 0.8700000000000093,
+          "l": 0.6560417951378645
+        },
+        "forearm": {
+          "r": {
+            "ang": 69.6,
+            "ey": -1.38,
+            "ex": 1.07
+          },
+          "l": {
+            "ang": 71.3,
+            "ey": -1.1,
+            "ex": -0.13
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": true,
+        "hasPump": false,
+        "hasBolt": false,
+        "hasCylinder": true,
+        "hasShell": false,
+        "near": {
+          "closest": 0.26583696401954976,
+          "seen": 2394
+        }
+      },
+      "8-art-noon": {
+        "backend": "WebGPU",
+        "key": "revolver",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.87,
+          "l": 0.7926047696550225
+        },
+        "sockErr": {
+          "r": 3.3512199696088718e-15,
+          "l": 1.5852905047438163e-15
+        },
+        "bend": {
+          "r": 0.8700000000000055,
+          "l": 0.7926047696550288
+        },
+        "forearm": {
+          "r": {
+            "ang": 68.8,
+            "ey": -1.44,
+            "ex": 1.1
+          },
+          "l": {
+            "ang": 72.8,
+            "ey": -1.29,
+            "ex": -0.18
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": true,
+        "hasPump": false,
+        "hasBolt": false,
+        "hasCylinder": true,
+        "hasShell": false,
+        "near": {
+          "closest": 0.2784642907068032,
+          "seen": 2369
+        }
+      },
+      "9-art-dusk": {
+        "backend": "WebGPU",
+        "key": "revolver",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.87,
+          "l": 0.7911028121472636
+        },
+        "sockErr": {
+          "r": 1.8427695672393697e-15,
+          "l": 1.1551122306821434e-15
+        },
+        "bend": {
+          "r": 0.8700000000000091,
+          "l": 0.7911028121472731
+        },
+        "forearm": {
+          "r": {
+            "ang": 68.9,
+            "ey": -1.43,
+            "ex": 1.1
+          },
+          "l": {
+            "ang": 72.7,
+            "ey": -1.28,
+            "ex": -0.18
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": true,
+        "hasPump": false,
+        "hasBolt": false,
+        "hasCylinder": true,
+        "hasShell": false,
+        "near": {
+          "closest": 0.278544137009741,
+          "seen": 2369
+        }
+      },
+      "10-art-overcast": {
+        "backend": "WebGPU",
+        "key": "revolver",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.87,
+          "l": 0.7917142144616672
+        },
+        "sockErr": {
+          "r": 1.2818749660365435e-15,
+          "l": 1.684022518587624e-15
+        },
+        "bend": {
+          "r": 0.8700000000000061,
+          "l": 0.7917142144616779
+        },
+        "forearm": {
+          "r": {
+            "ang": 68.8,
+            "ey": -1.43,
+            "ex": 1.1
+          },
+          "l": {
+            "ang": 72.7,
+            "ey": -1.28,
+            "ex": -0.18
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": true,
+        "hasPump": false,
+        "hasBolt": false,
+        "hasCylinder": true,
+        "hasShell": false,
+        "near": {
+          "closest": 0.2784914569673167,
+          "seen": 2369
+        }
+      },
+      "11-art-night": {
+        "backend": "WebGPU",
+        "key": "revolver",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.87,
+          "l": 0.7921028393437886
+        },
+        "sockErr": {
+          "r": 3.0201650301949374e-15,
+          "l": 3.2357870978575226e-15
+        },
+        "bend": {
+          "r": 0.8700000000000071,
+          "l": 0.792102839343796
+        },
+        "forearm": {
+          "r": {
+            "ang": 68.8,
+            "ey": -1.44,
+            "ex": 1.1
+          },
+          "l": {
+            "ang": 72.8,
+            "ey": -1.29,
+            "ex": -0.18
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": true,
+        "hasPump": false,
+        "hasBolt": false,
+        "hasCylinder": true,
+        "hasShell": false,
+        "near": {
+          "closest": 0.2784169284642329,
+          "seen": 2369
+        }
+      },
+      "12-motion-look-down": {
+        "backend": "WebGPU",
+        "key": "revolver",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.87,
+          "l": 0.790824752441121
+        },
+        "sockErr": {
+          "r": 5.587701306121159e-15,
+          "l": 1.6655658173411744e-15
+        },
+        "bend": {
+          "r": 0.8700000000000103,
+          "l": 0.7908247524411279
+        },
+        "forearm": {
+          "r": {
+            "ang": 68.8,
+            "ey": -1.43,
+            "ex": 1.1
+          },
+          "l": {
+            "ang": 72.6,
+            "ey": -1.28,
+            "ex": -0.18
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": true,
+        "hasPump": false,
+        "hasBolt": false,
+        "hasCylinder": true,
+        "hasShell": false,
+        "near": {
+          "closest": 0.27846490859998074,
+          "seen": 2369
+        }
+      },
+      "13-motion-look-up": {
+        "backend": "WebGPU",
+        "key": "revolver",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.87,
+          "l": 0.7925916539223299
+        },
+        "sockErr": {
+          "r": 7.402157560187375e-15,
+          "l": 6.4326054023362355e-15
+        },
+        "bend": {
+          "r": 0.8700000000000072,
+          "l": 0.7925916539223364
+        },
+        "forearm": {
+          "r": {
+            "ang": 68.8,
+            "ey": -1.44,
+            "ex": 1.1
+          },
+          "l": {
+            "ang": 72.8,
+            "ey": -1.29,
+            "ex": -0.18
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": true,
+        "hasPump": false,
+        "hasBolt": false,
+        "hasCylinder": true,
+        "hasShell": false,
+        "near": {
+          "closest": 0.278397574845733,
+          "seen": 2369
+        }
+      },
+      "14-motion-turn-sway": {
+        "backend": "WebGPU",
+        "key": "revolver",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.87,
+          "l": 0.7913180624700223
+        },
+        "sockErr": {
+          "r": 6.824034386733983e-15,
+          "l": 4.568912570209547e-15
+        },
+        "bend": {
+          "r": 0.8700000000000078,
+          "l": 0.7913180624700296
+        },
+        "forearm": {
+          "r": {
+            "ang": 68.8,
+            "ey": -1.43,
+            "ex": 1.1
+          },
+          "l": {
+            "ang": 72.7,
+            "ey": -1.28,
+            "ex": -0.18
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": true,
+        "hasPump": false,
+        "hasBolt": false,
+        "hasCylinder": true,
+        "hasShell": false,
+        "near": {
+          "closest": 0.27832777442253437,
+          "seen": 2369
+        }
+      },
+      "15-wall-hip": {
+        "backend": "WebGPU",
+        "key": "revolver",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.87,
+          "l": 0.87
+        },
+        "sockErr": {
+          "r": 1.5647474998540476e-15,
+          "l": 3.145699930740632e-15
+        },
+        "bend": {
+          "r": 0.8700000000000043,
+          "l": 0.870000000000008
+        },
+        "forearm": {
+          "r": {
+            "ang": 65.4,
+            "ey": -1.48,
+            "ex": 1.09
+          },
+          "l": {
+            "ang": 37.1,
+            "ey": -1.37,
+            "ex": 0.05
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": true,
+        "hasPump": false,
+        "hasBolt": false,
+        "hasCylinder": true,
+        "hasShell": false,
+        "near": {
+          "closest": 0.2706801615392955,
+          "seen": 2370
+        }
+      },
+      "16-wall-ads": {
+        "backend": "WebGPU",
+        "key": "revolver",
+        "active": true,
+        "raise": 1,
+        "ads": 1,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.87,
+          "l": 0.87
+        },
+        "sockErr": {
+          "r": 6.0999310749020624e-15,
+          "l": 2.6762190263854063e-15
+        },
+        "bend": {
+          "r": 0.870000000000007,
+          "l": 0.8700000000000078
+        },
+        "forearm": {
+          "r": {
+            "ang": 59,
+            "ey": -2,
+            "ex": 0.75
+          },
+          "l": {
+            "ang": 50.1,
+            "ey": -2.2,
+            "ex": -0.77
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": true,
+        "hasPump": false,
+        "hasBolt": false,
+        "hasCylinder": true,
+        "hasShell": false,
+        "near": {
+          "closest": 0.27088915842209377,
+          "seen": 2299
+        }
+      }
+    },
+    "reloadCycle": {
+      "finished": true
+    },
+    "ergonomics": {},
+    "sights": {},
+    "depthTest": {}
+  },
+  "sniper": {
+    "shots": {
+      "1-hip": {
+        "backend": "WebGPU",
+        "key": "sniper",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.860139713434873,
+          "l": 0.5829516554036367
+        },
+        "sockErr": {
+          "r": 2.033936459318182e-15,
+          "l": 1.6035902412230618e-15
+        },
+        "bend": {
+          "r": 0.8601397134348663,
+          "l": 0.5829516554036394
+        },
+        "forearm": {
+          "r": {
+            "ang": 61.4,
+            "ey": -0.86,
+            "ex": 0.53
+          },
+          "l": {
+            "ang": 53.2,
+            "ey": -0.48,
+            "ex": -0.01
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": true,
+        "hasPump": false,
+        "hasBolt": true,
+        "hasCylinder": false,
+        "hasShell": false,
+        "near": {
+          "closest": 0.521486199284116,
+          "seen": 2532
+        }
+      },
+      "2-ads": {
+        "backend": "WebGPU",
+        "key": "sniper",
+        "active": true,
+        "raise": 1,
+        "ads": 1,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.87,
+          "l": 0.1195836418329609
+        },
+        "sockErr": {
+          "r": 2.098725787486831e-15,
+          "l": 1.7996767452728878e-15
+        },
+        "bend": {
+          "r": 0.8699999999999982,
+          "l": 0.11958364183300092
+        },
+        "forearm": {
+          "r": {
+            "ang": 104.1,
+            "ey": -4.03,
+            "ex": 1.95
+          },
+          "l": {
+            "ang": 88,
+            "ey": -1.2,
+            "ex": -0.4
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": false,
+        "hasMag": true,
+        "hasPump": false,
+        "hasBolt": true,
+        "hasCylinder": false,
+        "hasShell": false,
+        "near": {
+          "closest": 0.10490128091148265,
+          "seen": 1510
+        }
+      },
+      "3-hip-return": {
+        "backend": "WebGPU",
+        "key": "sniper",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.8591966508418044,
+          "l": 0.5826073809785159
+        },
+        "sockErr": {
+          "r": 2.2862576121397515e-15,
+          "l": 3.822719718476963e-15
+        },
+        "bend": {
+          "r": 0.8591966508417984,
+          "l": 0.5826073809785075
+        },
+        "forearm": {
+          "r": {
+            "ang": 61.3,
+            "ey": -0.86,
+            "ex": 0.53
+          },
+          "l": {
+            "ang": 53.2,
+            "ey": -0.47,
+            "ex": -0.01
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": true,
+        "hasPump": false,
+        "hasBolt": true,
+        "hasCylinder": false,
+        "hasShell": false,
+        "near": {
+          "closest": 0.5215441948020446,
+          "seen": 2532
+        }
+      },
+      "4-reload-2": {
+        "backend": "WebGPU",
+        "key": "sniper",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "hand",
+        "handPlace": "below",
+        "reloadU": 0.19999999999999996,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.6651170406082856,
+          "l": 0.87
+        },
+        "sockErr": {
+          "r": 1.5982970556924734e-15,
+          "l": 3.5993534905457756e-15
+        },
+        "bend": {
+          "r": 0.6651170406082678,
+          "l": 0.8699999999999938
+        },
+        "forearm": {
+          "r": {
+            "ang": 64.6,
+            "ey": -0.78,
+            "ex": 0.47
+          },
+          "l": {
+            "ang": 71.1,
+            "ey": -1.33,
+            "ex": 0.05
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": true,
+        "hasPump": false,
+        "hasBolt": true,
+        "hasCylinder": false,
+        "hasShell": false,
+        "near": {
+          "closest": 0.5046577914324355,
+          "seen": 2451
+        }
+      },
+      "5-reload-45": {
+        "backend": "WebGPU",
+        "key": "sniper",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "hand",
+        "handPlace": "below",
+        "reloadU": 0.44999999999999996,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.6645568377202198,
+          "l": 0.87
+        },
+        "sockErr": {
+          "r": 4.723669544294219e-15,
+          "l": 2.2887833992611187e-16
+        },
+        "bend": {
+          "r": 0.6645568377202067,
+          "l": 0.8699999999999968
+        },
+        "forearm": {
+          "r": {
+            "ang": 64.5,
+            "ey": -0.76,
+            "ex": 0.46
+          },
+          "l": {
+            "ang": 64.4,
+            "ey": -1.09,
+            "ex": 0.17
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": true,
+        "hasPump": false,
+        "hasBolt": true,
+        "hasCylinder": false,
+        "hasShell": false,
+        "near": {
+          "closest": 0.5060052524817369,
+          "seen": 2491
+        }
+      },
+      "6-reload-7": {
+        "backend": "WebGPU",
+        "key": "sniper",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "work",
+        "reloadU": 0.7,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.7793480119355047,
+          "l": 0.87
+        },
+        "sockErr": {
+          "r": 6.061909215660398e-16,
+          "l": 3.849954473107261e-15
+        },
+        "bend": {
+          "r": 0.7793480119354944,
+          "l": 0.8699999999999957
+        },
+        "forearm": {
+          "r": {
+            "ang": 63.6,
+            "ey": -0.76,
+            "ex": 0.49
+          },
+          "l": {
+            "ang": 71.3,
+            "ey": -0.58,
+            "ex": 0.28
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": true,
+        "hasPump": false,
+        "hasBolt": true,
+        "hasCylinder": false,
+        "hasShell": false,
+        "near": {
+          "closest": 0.503805402959832,
+          "seen": 2545
+        }
+      },
+      "7-reload-9": {
+        "backend": "WebGPU",
+        "key": "sniper",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "work",
+        "reloadU": 0.9,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.8481583469018399,
+          "l": 0.87
+        },
+        "sockErr": {
+          "r": 1.6992216372873033e-15,
+          "l": 6.144021263144161e-15
+        },
+        "bend": {
+          "r": 0.8481583469018331,
+          "l": 0.8699999999999992
+        },
+        "forearm": {
+          "r": {
+            "ang": 62.2,
+            "ey": -0.78,
+            "ex": 0.5
+          },
+          "l": {
+            "ang": 68.8,
+            "ey": -0.6,
+            "ex": 0.31
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": true,
+        "hasPump": false,
+        "hasBolt": true,
+        "hasCylinder": false,
+        "hasShell": false,
+        "near": {
+          "closest": 0.5010402859215185,
+          "seen": 2540
+        }
+      },
+      "8-art-noon": {
+        "backend": "WebGPU",
+        "key": "sniper",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.8571469848425991,
+          "l": 0.5855959683300034
+        },
+        "sockErr": {
+          "r": 5.675523192258613e-15,
+          "l": 2.7264114167449077e-15
+        },
+        "bend": {
+          "r": 0.8571469848425913,
+          "l": 0.5855959683299995
+        },
+        "forearm": {
+          "r": {
+            "ang": 61.3,
+            "ey": -0.86,
+            "ex": 0.53
+          },
+          "l": {
+            "ang": 53.1,
+            "ey": -0.47,
+            "ex": -0.01
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": true,
+        "hasPump": false,
+        "hasBolt": true,
+        "hasCylinder": false,
+        "hasShell": false,
+        "near": {
+          "closest": 0.5214965734194061,
+          "seen": 2532
+        }
+      },
+      "9-art-dusk": {
+        "backend": "WebGPU",
+        "key": "sniper",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.8603674345509057,
+          "l": 0.5831616957541196
+        },
+        "sockErr": {
+          "r": 3.0638182956799816e-15,
+          "l": 2.3610191932795496e-15
+        },
+        "bend": {
+          "r": 0.8603674345508919,
+          "l": 0.5831616957541219
+        },
+        "forearm": {
+          "r": {
+            "ang": 61.3,
+            "ey": -0.86,
+            "ex": 0.53
+          },
+          "l": {
+            "ang": 53.2,
+            "ey": -0.48,
+            "ex": -0.01
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": true,
+        "hasPump": false,
+        "hasBolt": true,
+        "hasCylinder": false,
+        "hasShell": false,
+        "near": {
+          "closest": 0.5214192000146101,
+          "seen": 2532
+        }
+      },
+      "10-art-overcast": {
+        "backend": "WebGPU",
+        "key": "sniper",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.8597346850704441,
+          "l": 0.5834215789141172
+        },
+        "sockErr": {
+          "r": 1.0619908546843355e-15,
+          "l": 1.875094052700647e-15
+        },
+        "bend": {
+          "r": 0.8597346850704312,
+          "l": 0.5834215789141157
+        },
+        "forearm": {
+          "r": {
+            "ang": 61.3,
+            "ey": -0.86,
+            "ex": 0.53
+          },
+          "l": {
+            "ang": 53.1,
+            "ey": -0.47,
+            "ex": -0.01
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": true,
+        "hasPump": false,
+        "hasBolt": true,
+        "hasCylinder": false,
+        "hasShell": false,
+        "near": {
+          "closest": 0.5214585618770496,
+          "seen": 2532
+        }
+      },
+      "11-art-night": {
+        "backend": "WebGPU",
+        "key": "sniper",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.857148781688121,
+          "l": 0.5844584908325275
+        },
+        "sockErr": {
+          "r": 1.085665291867152e-15,
+          "l": 4.783148230544905e-15
+        },
+        "bend": {
+          "r": 0.8571487816881114,
+          "l": 0.5844584908325298
+        },
+        "forearm": {
+          "r": {
+            "ang": 61.3,
+            "ey": -0.86,
+            "ex": 0.53
+          },
+          "l": {
+            "ang": 53.1,
+            "ey": -0.47,
+            "ex": -0.01
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": true,
+        "hasPump": false,
+        "hasBolt": true,
+        "hasCylinder": false,
+        "hasShell": false,
+        "near": {
+          "closest": 0.5215645448649595,
+          "seen": 2532
+        }
+      },
+      "12-motion-look-down": {
+        "backend": "WebGPU",
+        "key": "sniper",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.8606723396997707,
+          "l": 0.5813464546792605
+        },
+        "sockErr": {
+          "r": 1.0711962271900222e-14,
+          "l": 9.40623312730179e-15
+        },
+        "bend": {
+          "r": 0.8606723396997619,
+          "l": 0.5813464546792575
+        },
+        "forearm": {
+          "r": {
+            "ang": 61.4,
+            "ey": -0.86,
+            "ex": 0.53
+          },
+          "l": {
+            "ang": 53.2,
+            "ey": -0.48,
+            "ex": -0.01
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": true,
+        "hasPump": false,
+        "hasBolt": true,
+        "hasCylinder": false,
+        "hasShell": false,
+        "near": {
+          "closest": 0.5214747320046945,
+          "seen": 2532
+        }
+      },
+      "13-motion-look-up": {
+        "backend": "WebGPU",
+        "key": "sniper",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.8578682897217276,
+          "l": 0.5837839277414067
+        },
+        "sockErr": {
+          "r": 9.253643974962918e-15,
+          "l": 6.712145260873138e-15
+        },
+        "bend": {
+          "r": 0.8578682897217147,
+          "l": 0.5837839277414026
+        },
+        "forearm": {
+          "r": {
+            "ang": 61.3,
+            "ey": -0.86,
+            "ex": 0.53
+          },
+          "l": {
+            "ang": 53.1,
+            "ey": -0.47,
+            "ex": -0.01
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": true,
+        "hasPump": false,
+        "hasBolt": true,
+        "hasCylinder": false,
+        "hasShell": false,
+        "near": {
+          "closest": 0.5215472640910102,
+          "seen": 2532
+        }
+      },
+      "14-motion-turn-sway": {
+        "backend": "WebGPU",
+        "key": "sniper",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.8607720342948413,
+          "l": 0.5809662280233132
+        },
+        "sockErr": {
+          "r": 1.6401643046719713e-15,
+          "l": 4.244062583408401e-15
+        },
+        "bend": {
+          "r": 0.8607720342948306,
+          "l": 0.5809662280233013
+        },
+        "forearm": {
+          "r": {
+            "ang": 61.4,
+            "ey": -0.86,
+            "ex": 0.53
+          },
+          "l": {
+            "ang": 53.2,
+            "ey": -0.48,
+            "ex": -0.01
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": true,
+        "hasPump": false,
+        "hasBolt": true,
+        "hasCylinder": false,
+        "hasShell": false,
+        "near": {
+          "closest": 0.5215259981240865,
+          "seen": 2532
+        }
+      },
+      "15-wall-hip": {
+        "backend": "WebGPU",
+        "key": "sniper",
+        "active": true,
+        "raise": 1,
+        "ads": 0,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.8573106739517519,
+          "l": 0.87
+        },
+        "sockErr": {
+          "r": 1.9661451076596713e-15,
+          "l": 4.034022515814009e-15
+        },
+        "bend": {
+          "r": 0.8573106739517388,
+          "l": 0.8699999999999994
+        },
+        "forearm": {
+          "r": {
+            "ang": 61.3,
+            "ey": -0.86,
+            "ex": 0.53
+          },
+          "l": {
+            "ang": 26.9,
+            "ey": 0.03,
+            "ex": 0.1
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": true,
+        "hasMag": true,
+        "hasPump": false,
+        "hasBolt": true,
+        "hasCylinder": false,
+        "hasShell": false,
+        "near": {
+          "closest": 0.521361185341663,
+          "seen": 2532
+        }
+      },
+      "16-wall-ads": {
+        "backend": "WebGPU",
+        "key": "sniper",
+        "active": true,
+        "raise": 1,
+        "ads": 1,
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "wristMax": 0.87,
+        "wrist": {
+          "r": 0.87,
+          "l": 0.87
+        },
+        "sockErr": {
+          "r": 5.050337491073892e-15,
+          "l": 3.458194635633042e-15
+        },
+        "bend": {
+          "r": 0.8699999999999878,
+          "l": 0.8699999999999991
+        },
+        "forearm": {
+          "r": {
+            "ang": 105.7,
+            "ey": -3.84,
+            "ex": 1.85
+          },
+          "l": {
+            "ang": 44.2,
+            "ey": 0.3,
+            "ex": -0.3
+          }
+        },
+        "stockVisibleInView": false,
+        "visible": false,
+        "hasMag": true,
+        "hasPump": false,
+        "hasBolt": true,
+        "hasCylinder": false,
+        "hasShell": false,
+        "near": {
+          "closest": 0.10490128091148221,
+          "seen": 1574
+        }
+      }
+    },
+    "reloadCycle": {
+      "finished": true
+    },
+    "ergonomics": {},
+    "sights": {},
+    "depthTest": {}
+  }
+}

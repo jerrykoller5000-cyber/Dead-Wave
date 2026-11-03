@@ -1,0 +1,89 @@
+{
+  "samples": [
+    {
+      "variant": "baseline",
+      "key": "sniper",
+      "at": [
+        0.2,
+        -0.2,
+        -0.82
+      ],
+      "yaw": 0.025,
+      "weapon": "sniper",
+      "first": true,
+      "active": true,
+      "vmKey": "sniper",
+      "raise": 1,
+      "muzzleNdc": {
+        "x": 0.09151286744380407,
+        "y": -0.0820013524741879,
+        "d": 1.784030730940971
+      },
+      "backend": "WebGPU"
+    },
+    {
+      "variant": "close-40-yaw003",
+      "key": "sniper",
+      "at": [
+        0.16,
+        -0.17,
+        -0.4
+      ],
+      "yaw": 0.03,
+      "weapon": "sniper",
+      "first": true,
+      "active": true,
+      "vmKey": "sniper",
+      "raise": 1,
+      "muzzleNdc": {
+        "x": 0.08768480505708784,
+        "y": -0.07013835383471122,
+        "d": 1.3639216699456151
+      },
+      "backend": "WebGPU"
+    },
+    {
+      "variant": "close-40-yaw015",
+      "key": "sniper",
+      "at": [
+        0.16,
+        -0.17,
+        -0.4
+      ],
+      "yaw": 0.15,
+      "weapon": "sniper",
+      "first": true,
+      "active": true,
+      "vmKey": "sniper",
+      "raise": 1,
+      "muzzleNdc": {
+        "x": 0.005507619097113178,
+        "y": -0.06414324093297473,
+        "d": 1.352086315447078
+      },
+      "backend": "WebGPU"
+    },
+    {
+      "variant": "close-36-yaw003",
+      "key": "sniper",
+      "at": [
+        0.15,
+        -0.16,
+        -0.36
+      ],
+      "yaw": 0.03,
+      "weapon": "sniper",
+      "first": true,
+      "active": true,
+      "vmKey": "sniper",
+      "raise": 1,
+      "muzzleNdc": {
+        "x": 0.0829621522951168,
+        "y": -0.06236774765733349,
+        "d": 1.324126929096201
+      },
+      "backend": "WebGPU"
+    }
+  ],
+  "errors": []
+}

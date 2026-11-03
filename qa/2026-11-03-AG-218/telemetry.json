@@ -1,0 +1,1320 @@
+{
+  "camera": [
+    {
+      "shotId": "camera_hq_3m_noon",
+      "mode": "camera",
+      "spot": "hq",
+      "spotLabel": "HQ Ring (Yard Side)",
+      "targetDist": 3,
+      "actualDist": 2.89,
+      "light": "noon",
+      "worldTime": 0.5,
+      "camPos": {
+        "x": 55.15,
+        "y": -5.43,
+        "z": -14.86
+      },
+      "targetStation": {
+        "x": 57.93,
+        "z": -15.61
+      },
+      "stoneUserData": {
+        "lod": "camera",
+        "cells": 45,
+        "slabInstances": 355,
+        "pierTris": 14976,
+        "builtCells": 25,
+        "nearTris": 113412,
+        "nearShowing": 7,
+        "_cull": {
+          "r": 242.439344606292,
+          "ox": 0.9429473914206028,
+          "oy": 2.271890640258789,
+          "oz": -0.08654313534498215,
+          "px": 0,
+          "py": 0,
+          "pz": 0,
+          "t": 483,
+          "hidden": false,
+          "want": true
+        }
+      },
+      "file": "camera_hq_3m_noon.jpg",
+      "path": "qa\\2026-11-03-AG-218\\captures\\camera_hq_3m_noon.jpg"
+    },
+    {
+      "shotId": "camera_hq_3m_dusk",
+      "mode": "camera",
+      "spot": "hq",
+      "spotLabel": "HQ Ring (Yard Side)",
+      "targetDist": 3,
+      "actualDist": 2.89,
+      "light": "dusk",
+      "worldTime": 0.77,
+      "camPos": {
+        "x": 55.15,
+        "y": -5.44,
+        "z": -14.86
+      },
+      "targetStation": {
+        "x": 57.93,
+        "z": -15.61
+      },
+      "stoneUserData": {
+        "lod": "camera",
+        "cells": 45,
+        "slabInstances": 355,
+        "pierTris": 14976,
+        "builtCells": 25,
+        "nearTris": 113412,
+        "nearShowing": 7,
+        "_shadowCaster": {
+          "has": true,
+          "n": 27
+        },
+        "_cull": {
+          "r": 242.439344606292,
+          "ox": 0.9429473914206028,
+          "oy": 2.271890640258789,
+          "oz": -0.08654313534498215,
+          "px": 0,
+          "py": 0,
+          "pz": 0,
+          "t": 483,
+          "hidden": false,
+          "want": true
+        }
+      },
+      "file": "camera_hq_3m_dusk.jpg",
+      "path": "qa\\2026-11-03-AG-218\\captures\\camera_hq_3m_dusk.jpg"
+    },
+    {
+      "shotId": "camera_hq_10m_noon",
+      "mode": "camera",
+      "spot": "hq",
+      "spotLabel": "HQ Ring (Yard Side)",
+      "targetDist": 10,
+      "actualDist": 9.88,
+      "light": "noon",
+      "worldTime": 0.5,
+      "camPos": {
+        "x": 48.39,
+        "y": -5.65,
+        "z": -13.04
+      },
+      "targetStation": {
+        "x": 57.93,
+        "z": -15.61
+      },
+      "stoneUserData": {
+        "lod": "camera",
+        "cells": 45,
+        "slabInstances": 355,
+        "pierTris": 14976,
+        "builtCells": 25,
+        "nearTris": 113412,
+        "nearShowing": 7,
+        "_cull": {
+          "r": 242.439344606292,
+          "ox": 0.9429473914206028,
+          "oy": 2.271890640258789,
+          "oz": -0.08654313534498215,
+          "px": 0,
+          "py": 0,
+          "pz": 0,
+          "t": 483,
+          "hidden": false,
+          "want": true
+        }
+      },
+      "file": "camera_hq_10m_noon.jpg",
+      "path": "qa\\2026-11-03-AG-218\\captures\\camera_hq_10m_noon.jpg"
+    },
+    {
+      "shotId": "camera_hq_10m_dusk",
+      "mode": "camera",
+      "spot": "hq",
+      "spotLabel": "HQ Ring (Yard Side)",
+      "targetDist": 10,
+      "actualDist": 9.88,
+      "light": "dusk",
+      "worldTime": 0.77,
+      "camPos": {
+        "x": 48.39,
+        "y": -5.65,
+        "z": -13.07
+      },
+      "targetStation": {
+        "x": 57.93,
+        "z": -15.61
+      },
+      "stoneUserData": {
+        "lod": "camera",
+        "cells": 45,
+        "slabInstances": 355,
+        "pierTris": 14976,
+        "builtCells": 25,
+        "nearTris": 113412,
+        "nearShowing": 7,
+        "_shadowCaster": {
+          "has": true,
+          "n": 27
+        },
+        "_cull": {
+          "r": 242.439344606292,
+          "ox": 0.9429473914206028,
+          "oy": 2.271890640258789,
+          "oz": -0.08654313534498215,
+          "px": 0,
+          "py": 0,
+          "pz": 0,
+          "t": 724,
+          "hidden": false,
+          "want": true
+        }
+      },
+      "file": "camera_hq_10m_dusk.jpg",
+      "path": "qa\\2026-11-03-AG-218\\captures\\camera_hq_10m_dusk.jpg"
+    },
+    {
+      "shotId": "camera_hq_30m_noon",
+      "mode": "camera",
+      "spot": "hq",
+      "spotLabel": "HQ Ring (Yard Side)",
+      "targetDist": 30,
+      "actualDist": 29.89,
+      "light": "noon",
+      "worldTime": 0.5,
+      "camPos": {
+        "x": 29.07,
+        "y": -2.45,
+        "z": -7.87
+      },
+      "targetStation": {
+        "x": 57.93,
+        "z": -15.61
+      },
+      "stoneUserData": {
+        "lod": "camera",
+        "cells": 45,
+        "slabInstances": 355,
+        "pierTris": 14976,
+        "builtCells": 25,
+        "nearTris": 113412,
+        "nearShowing": 7,
+        "_shadowCaster": {
+          "has": true,
+          "n": 27
+        },
+        "_cull": {
+          "r": 242.439344606292,
+          "ox": 0.9429473914206028,
+          "oy": 2.271890640258789,
+          "oz": -0.08654313534498215,
+          "px": 0,
+          "py": 0,
+          "pz": 0,
+          "t": 724,
+          "hidden": false,
+          "want": true
+        }
+      },
+      "file": "camera_hq_30m_noon.jpg",
+      "path": "qa\\2026-11-03-AG-218\\captures\\camera_hq_30m_noon.jpg"
+    },
+    {
+      "shotId": "camera_hq_30m_dusk",
+      "mode": "camera",
+      "spot": "hq",
+      "spotLabel": "HQ Ring (Yard Side)",
+      "targetDist": 30,
+      "actualDist": 29.88,
+      "light": "dusk",
+      "worldTime": 0.77,
+      "camPos": {
+        "x": 29.07,
+        "y": -2.45,
+        "z": -7.86
+      },
+      "targetStation": {
+        "x": 57.93,
+        "z": -15.61
+      },
+      "stoneUserData": {
+        "lod": "camera",
+        "cells": 45,
+        "slabInstances": 355,
+        "pierTris": 14976,
+        "builtCells": 25,
+        "nearTris": 113412,
+        "nearShowing": 6,
+        "_cull": {
+          "r": 242.439344606292,
+          "ox": 0.9429473914206028,
+          "oy": 2.271890640258789,
+          "oz": -0.08654313534498215,
+          "px": 0,
+          "py": 0,
+          "pz": 0,
+          "t": 724,
+          "hidden": false,
+          "want": true
+        }
+      },
+      "file": "camera_hq_30m_dusk.jpg",
+      "path": "qa\\2026-11-03-AG-218\\captures\\camera_hq_30m_dusk.jpg"
+    },
+    {
+      "shotId": "camera_qnw_3m_noon",
+      "mode": "camera",
+      "spot": "qnw",
+      "spotLabel": "Quarter-NW (Near 83, 50)",
+      "targetDist": 3,
+      "actualDist": 2.86,
+      "light": "noon",
+      "worldTime": 0.5,
+      "camPos": {
+        "x": 80.35,
+        "y": 4.91,
+        "z": 51.17
+      },
+      "targetStation": {
+        "x": 82.78,
+        "z": 49.66
+      },
+      "stoneUserData": {
+        "lod": "camera",
+        "cells": 45,
+        "slabInstances": 355,
+        "pierTris": 14976,
+        "builtCells": 26,
+        "nearTris": 117708,
+        "nearShowing": 5,
+        "_shadowCaster": {
+          "has": true,
+          "n": 27
+        },
+        "_cull": {
+          "r": 242.439344606292,
+          "ox": 0.9429473914206028,
+          "oy": 2.271890640258789,
+          "oz": -0.08654313534498215,
+          "px": 0,
+          "py": 0,
+          "pz": 0,
+          "t": 724,
+          "hidden": false,
+          "want": true
+        }
+      },
+      "file": "camera_qnw_3m_noon.jpg",
+      "path": "qa\\2026-11-03-AG-218\\captures\\camera_qnw_3m_noon.jpg"
+    },
+    {
+      "shotId": "camera_qnw_3m_dusk",
+      "mode": "camera",
+      "spot": "qnw",
+      "spotLabel": "Quarter-NW (Near 83, 50)",
+      "targetDist": 3,
+      "actualDist": 2.86,
+      "light": "dusk",
+      "worldTime": 0.77,
+      "camPos": {
+        "x": 80.36,
+        "y": 4.91,
+        "z": 51.18
+      },
+      "targetStation": {
+        "x": 82.78,
+        "z": 49.66
+      },
+      "stoneUserData": {
+        "lod": "camera",
+        "cells": 45,
+        "slabInstances": 355,
+        "pierTris": 14976,
+        "builtCells": 27,
+        "nearTris": 119832,
+        "nearShowing": 5,
+        "_cull": {
+          "r": 242.439344606292,
+          "ox": 0.9429473914206028,
+          "oy": 2.271890640258789,
+          "oz": -0.08654313534498215,
+          "px": 0,
+          "py": 0,
+          "pz": 0,
+          "t": 724,
+          "hidden": false,
+          "want": true
+        }
+      },
+      "file": "camera_qnw_3m_dusk.jpg",
+      "path": "qa\\2026-11-03-AG-218\\captures\\camera_qnw_3m_dusk.jpg"
+    },
+    {
+      "shotId": "camera_qnw_10m_noon",
+      "mode": "camera",
+      "spot": "qnw",
+      "spotLabel": "Quarter-NW (Near 83, 50)",
+      "targetDist": 10,
+      "actualDist": 9.87,
+      "light": "noon",
+      "worldTime": 0.5,
+      "camPos": {
+        "x": 74.44,
+        "y": 5.69,
+        "z": 54.92
+      },
+      "targetStation": {
+        "x": 82.78,
+        "z": 49.66
+      },
+      "stoneUserData": {
+        "lod": "camera",
+        "cells": 45,
+        "slabInstances": 355,
+        "pierTris": 14976,
+        "builtCells": 28,
+        "nearTris": 127632,
+        "nearShowing": 5,
+        "_shadowCaster": {
+          "has": true,
+          "n": 29
+        },
+        "_cull": {
+          "r": 242.439344606292,
+          "ox": 0.9429473914206028,
+          "oy": 2.271890640258789,
+          "oz": -0.08654313534498215,
+          "px": 0,
+          "py": 0,
+          "pz": 0,
+          "t": 724,
+          "hidden": false,
+          "want": true
+        }
+      },
+      "file": "camera_qnw_10m_noon.jpg",
+      "path": "qa\\2026-11-03-AG-218\\captures\\camera_qnw_10m_noon.jpg"
+    },
+    {
+      "shotId": "camera_qnw_10m_dusk",
+      "mode": "camera",
+      "spot": "qnw",
+      "spotLabel": "Quarter-NW (Near 83, 50)",
+      "targetDist": 10,
+      "actualDist": 9.88,
+      "light": "dusk",
+      "worldTime": 0.77,
+      "camPos": {
+        "x": 74.44,
+        "y": 5.69,
+        "z": 54.94
+      },
+      "targetStation": {
+        "x": 82.78,
+        "z": 49.66
+      },
+      "stoneUserData": {
+        "lod": "camera",
+        "cells": 45,
+        "slabInstances": 355,
+        "pierTris": 14976,
+        "builtCells": 28,
+        "nearTris": 127632,
+        "nearShowing": 5,
+        "_shadowCaster": {
+          "has": true,
+          "n": 30
+        },
+        "_cull": {
+          "r": 242.439344606292,
+          "ox": 0.9429473914206028,
+          "oy": 2.271890640258789,
+          "oz": -0.08654313534498215,
+          "px": 0,
+          "py": 0,
+          "pz": 0,
+          "t": 724,
+          "hidden": false,
+          "want": true
+        }
+      },
+      "file": "camera_qnw_10m_dusk.jpg",
+      "path": "qa\\2026-11-03-AG-218\\captures\\camera_qnw_10m_dusk.jpg"
+    },
+    {
+      "shotId": "camera_qnw_30m_noon",
+      "mode": "camera",
+      "spot": "qnw",
+      "spotLabel": "Quarter-NW (Near 83, 50)",
+      "targetDist": 30,
+      "actualDist": 29.91,
+      "light": "noon",
+      "worldTime": 0.5,
+      "camPos": {
+        "x": 57.47,
+        "y": 6.03,
+        "z": 65.59
+      },
+      "targetStation": {
+        "x": 82.78,
+        "z": 49.66
+      },
+      "stoneUserData": {
+        "lod": "camera",
+        "cells": 45,
+        "slabInstances": 355,
+        "pierTris": 14976,
+        "builtCells": 29,
+        "nearTris": 128808,
+        "nearShowing": 5,
+        "_shadowCaster": {
+          "has": true,
+          "n": 30
+        },
+        "_cull": {
+          "r": 242.439344606292,
+          "ox": 0.9429473914206028,
+          "oy": 2.271890640258789,
+          "oz": -0.08654313534498215,
+          "px": 0,
+          "py": 0,
+          "pz": 0,
+          "t": 724,
+          "hidden": false,
+          "want": true
+        }
+      },
+      "file": "camera_qnw_30m_noon.jpg",
+      "path": "qa\\2026-11-03-AG-218\\captures\\camera_qnw_30m_noon.jpg"
+    },
+    {
+      "shotId": "camera_qnw_30m_dusk",
+      "mode": "camera",
+      "spot": "qnw",
+      "spotLabel": "Quarter-NW (Near 83, 50)",
+      "targetDist": 30,
+      "actualDist": 29.92,
+      "light": "dusk",
+      "worldTime": 0.77,
+      "camPos": {
+        "x": 57.46,
+        "y": 6.04,
+        "z": 65.59
+      },
+      "targetStation": {
+        "x": 82.78,
+        "z": 49.66
+      },
+      "stoneUserData": {
+        "lod": "camera",
+        "cells": 45,
+        "slabInstances": 355,
+        "pierTris": 14976,
+        "builtCells": 29,
+        "nearTris": 128808,
+        "nearShowing": 7,
+        "_shadowCaster": {
+          "has": true,
+          "n": 31
+        },
+        "_cull": {
+          "r": 242.439344606292,
+          "ox": 0.9429473914206028,
+          "oy": 2.271890640258789,
+          "oz": -0.08654313534498215,
+          "px": 0,
+          "py": 0,
+          "pz": 0,
+          "t": 965,
+          "hidden": false,
+          "want": true
+        }
+      },
+      "file": "camera_qnw_30m_dusk.jpg",
+      "path": "qa\\2026-11-03-AG-218\\captures\\camera_qnw_30m_dusk.jpg"
+    }
+  ],
+  "slabs": [
+    {
+      "shotId": "slabs_hq_3m_noon",
+      "mode": "slabs",
+      "spot": "hq",
+      "spotLabel": "HQ Ring (Yard Side)",
+      "targetDist": 3,
+      "actualDist": 2.89,
+      "light": "noon",
+      "worldTime": 0.5,
+      "camPos": {
+        "x": 55.15,
+        "y": -5.43,
+        "z": -14.86
+      },
+      "targetStation": {
+        "x": 57.93,
+        "z": -15.61
+      },
+      "stoneUserData": {
+        "draws": 3,
+        "tris": 14220,
+        "stoneTris": 14220,
+        "mossTris": 0,
+        "ivyTris": 0,
+        "_cull": {
+          "r": 242.4349626167141,
+          "ox": 0.9335174560546875,
+          "oy": 2.1120200157165527,
+          "oz": -0.0874786376953125,
+          "px": 0,
+          "py": 0,
+          "pz": 0,
+          "t": 483,
+          "hidden": false,
+          "want": true
+        }
+      },
+      "file": "slabs_hq_3m_noon.jpg",
+      "path": "qa\\2026-11-03-AG-218\\captures\\slabs_hq_3m_noon.jpg"
+    },
+    {
+      "shotId": "slabs_hq_3m_dusk",
+      "mode": "slabs",
+      "spot": "hq",
+      "spotLabel": "HQ Ring (Yard Side)",
+      "targetDist": 3,
+      "actualDist": 2.89,
+      "light": "dusk",
+      "worldTime": 0.77,
+      "camPos": {
+        "x": 55.15,
+        "y": -5.44,
+        "z": -14.86
+      },
+      "targetStation": {
+        "x": 57.93,
+        "z": -15.61
+      },
+      "stoneUserData": {
+        "draws": 3,
+        "tris": 14220,
+        "stoneTris": 14220,
+        "mossTris": 0,
+        "ivyTris": 0,
+        "_shadowCaster": {
+          "has": true,
+          "n": 3
+        },
+        "_cull": {
+          "r": 242.4349626167141,
+          "ox": 0.9335174560546875,
+          "oy": 2.1120200157165527,
+          "oz": -0.0874786376953125,
+          "px": 0,
+          "py": 0,
+          "pz": 0,
+          "t": 483,
+          "hidden": false,
+          "want": true
+        }
+      },
+      "file": "slabs_hq_3m_dusk.jpg",
+      "path": "qa\\2026-11-03-AG-218\\captures\\slabs_hq_3m_dusk.jpg"
+    },
+    {
+      "shotId": "slabs_hq_10m_noon",
+      "mode": "slabs",
+      "spot": "hq",
+      "spotLabel": "HQ Ring (Yard Side)",
+      "targetDist": 10,
+      "actualDist": 9.88,
+      "light": "noon",
+      "worldTime": 0.5,
+      "camPos": {
+        "x": 48.39,
+        "y": -5.65,
+        "z": -13.04
+      },
+      "targetStation": {
+        "x": 57.93,
+        "z": -15.61
+      },
+      "stoneUserData": {
+        "draws": 3,
+        "tris": 14220,
+        "stoneTris": 14220,
+        "mossTris": 0,
+        "ivyTris": 0,
+        "_cull": {
+          "r": 242.4349626167141,
+          "ox": 0.9335174560546875,
+          "oy": 2.1120200157165527,
+          "oz": -0.0874786376953125,
+          "px": 0,
+          "py": 0,
+          "pz": 0,
+          "t": 483,
+          "hidden": false,
+          "want": true
+        }
+      },
+      "file": "slabs_hq_10m_noon.jpg",
+      "path": "qa\\2026-11-03-AG-218\\captures\\slabs_hq_10m_noon.jpg"
+    },
+    {
+      "shotId": "slabs_hq_10m_dusk",
+      "mode": "slabs",
+      "spot": "hq",
+      "spotLabel": "HQ Ring (Yard Side)",
+      "targetDist": 10,
+      "actualDist": 9.88,
+      "light": "dusk",
+      "worldTime": 0.77,
+      "camPos": {
+        "x": 48.39,
+        "y": -5.65,
+        "z": -13.07
+      },
+      "targetStation": {
+        "x": 57.93,
+        "z": -15.61
+      },
+      "stoneUserData": {
+        "draws": 3,
+        "tris": 14220,
+        "stoneTris": 14220,
+        "mossTris": 0,
+        "ivyTris": 0,
+        "_shadowCaster": {
+          "has": true,
+          "n": 3
+        },
+        "_cull": {
+          "r": 242.4349626167141,
+          "ox": 0.9335174560546875,
+          "oy": 2.1120200157165527,
+          "oz": -0.0874786376953125,
+          "px": 0,
+          "py": 0,
+          "pz": 0,
+          "t": 724,
+          "hidden": false,
+          "want": true
+        }
+      },
+      "file": "slabs_hq_10m_dusk.jpg",
+      "path": "qa\\2026-11-03-AG-218\\captures\\slabs_hq_10m_dusk.jpg"
+    },
+    {
+      "shotId": "slabs_hq_30m_noon",
+      "mode": "slabs",
+      "spot": "hq",
+      "spotLabel": "HQ Ring (Yard Side)",
+      "targetDist": 30,
+      "actualDist": 29.89,
+      "light": "noon",
+      "worldTime": 0.5,
+      "camPos": {
+        "x": 29.07,
+        "y": -2.45,
+        "z": -7.87
+      },
+      "targetStation": {
+        "x": 57.93,
+        "z": -15.61
+      },
+      "stoneUserData": {
+        "draws": 3,
+        "tris": 14220,
+        "stoneTris": 14220,
+        "mossTris": 0,
+        "ivyTris": 0,
+        "_cull": {
+          "r": 242.4349626167141,
+          "ox": 0.9335174560546875,
+          "oy": 2.1120200157165527,
+          "oz": -0.0874786376953125,
+          "px": 0,
+          "py": 0,
+          "pz": 0,
+          "t": 724,
+          "hidden": false,
+          "want": true
+        }
+      },
+      "file": "slabs_hq_30m_noon.jpg",
+      "path": "qa\\2026-11-03-AG-218\\captures\\slabs_hq_30m_noon.jpg"
+    },
+    {
+      "shotId": "slabs_hq_30m_dusk",
+      "mode": "slabs",
+      "spot": "hq",
+      "spotLabel": "HQ Ring (Yard Side)",
+      "targetDist": 30,
+      "actualDist": 29.88,
+      "light": "dusk",
+      "worldTime": 0.77,
+      "camPos": {
+        "x": 29.07,
+        "y": -2.45,
+        "z": -7.86
+      },
+      "targetStation": {
+        "x": 57.93,
+        "z": -15.61
+      },
+      "stoneUserData": {
+        "draws": 3,
+        "tris": 14220,
+        "stoneTris": 14220,
+        "mossTris": 0,
+        "ivyTris": 0,
+        "_shadowCaster": {
+          "has": true,
+          "n": 3
+        },
+        "_cull": {
+          "r": 242.4349626167141,
+          "ox": 0.9335174560546875,
+          "oy": 2.1120200157165527,
+          "oz": -0.0874786376953125,
+          "px": 0,
+          "py": 0,
+          "pz": 0,
+          "t": 724,
+          "hidden": false,
+          "want": true
+        }
+      },
+      "file": "slabs_hq_30m_dusk.jpg",
+      "path": "qa\\2026-11-03-AG-218\\captures\\slabs_hq_30m_dusk.jpg"
+    },
+    {
+      "shotId": "slabs_qnw_3m_noon",
+      "mode": "slabs",
+      "spot": "qnw",
+      "spotLabel": "Quarter-NW (Near 83, 50)",
+      "targetDist": 3,
+      "actualDist": 2.86,
+      "light": "noon",
+      "worldTime": 0.5,
+      "camPos": {
+        "x": 80.35,
+        "y": 4.91,
+        "z": 51.17
+      },
+      "targetStation": {
+        "x": 82.78,
+        "z": 49.66
+      },
+      "stoneUserData": {
+        "draws": 3,
+        "tris": 14220,
+        "stoneTris": 14220,
+        "mossTris": 0,
+        "ivyTris": 0,
+        "_shadowCaster": {
+          "has": true,
+          "n": 3
+        },
+        "_cull": {
+          "r": 242.4349626167141,
+          "ox": 0.9335174560546875,
+          "oy": 2.1120200157165527,
+          "oz": -0.0874786376953125,
+          "px": 0,
+          "py": 0,
+          "pz": 0,
+          "t": 724,
+          "hidden": false,
+          "want": true
+        }
+      },
+      "file": "slabs_qnw_3m_noon.jpg",
+      "path": "qa\\2026-11-03-AG-218\\captures\\slabs_qnw_3m_noon.jpg"
+    },
+    {
+      "shotId": "slabs_qnw_3m_dusk",
+      "mode": "slabs",
+      "spot": "qnw",
+      "spotLabel": "Quarter-NW (Near 83, 50)",
+      "targetDist": 3,
+      "actualDist": 2.86,
+      "light": "dusk",
+      "worldTime": 0.77,
+      "camPos": {
+        "x": 80.36,
+        "y": 4.91,
+        "z": 51.18
+      },
+      "targetStation": {
+        "x": 82.78,
+        "z": 49.66
+      },
+      "stoneUserData": {
+        "draws": 3,
+        "tris": 14220,
+        "stoneTris": 14220,
+        "mossTris": 0,
+        "ivyTris": 0,
+        "_cull": {
+          "r": 242.4349626167141,
+          "ox": 0.9335174560546875,
+          "oy": 2.1120200157165527,
+          "oz": -0.0874786376953125,
+          "px": 0,
+          "py": 0,
+          "pz": 0,
+          "t": 724,
+          "hidden": false,
+          "want": true
+        }
+      },
+      "file": "slabs_qnw_3m_dusk.jpg",
+      "path": "qa\\2026-11-03-AG-218\\captures\\slabs_qnw_3m_dusk.jpg"
+    },
+    {
+      "shotId": "slabs_qnw_10m_noon",
+      "mode": "slabs",
+      "spot": "qnw",
+      "spotLabel": "Quarter-NW (Near 83, 50)",
+      "targetDist": 10,
+      "actualDist": 9.87,
+      "light": "noon",
+      "worldTime": 0.5,
+      "camPos": {
+        "x": 74.44,
+        "y": 5.69,
+        "z": 54.92
+      },
+      "targetStation": {
+        "x": 82.78,
+        "z": 49.66
+      },
+      "stoneUserData": {
+        "draws": 3,
+        "tris": 14220,
+        "stoneTris": 14220,
+        "mossTris": 0,
+        "ivyTris": 0,
+        "_shadowCaster": {
+          "has": true,
+          "n": 3
+        },
+        "_cull": {
+          "r": 242.4349626167141,
+          "ox": 0.9335174560546875,
+          "oy": 2.1120200157165527,
+          "oz": -0.0874786376953125,
+          "px": 0,
+          "py": 0,
+          "pz": 0,
+          "t": 724,
+          "hidden": false,
+          "want": true
+        }
+      },
+      "file": "slabs_qnw_10m_noon.jpg",
+      "path": "qa\\2026-11-03-AG-218\\captures\\slabs_qnw_10m_noon.jpg"
+    },
+    {
+      "shotId": "slabs_qnw_10m_dusk",
+      "mode": "slabs",
+      "spot": "qnw",
+      "spotLabel": "Quarter-NW (Near 83, 50)",
+      "targetDist": 10,
+      "actualDist": 9.88,
+      "light": "dusk",
+      "worldTime": 0.77,
+      "camPos": {
+        "x": 74.44,
+        "y": 5.69,
+        "z": 54.94
+      },
+      "targetStation": {
+        "x": 82.78,
+        "z": 49.66
+      },
+      "stoneUserData": {
+        "draws": 3,
+        "tris": 14220,
+        "stoneTris": 14220,
+        "mossTris": 0,
+        "ivyTris": 0,
+        "_shadowCaster": {
+          "has": true,
+          "n": 3
+        },
+        "_cull": {
+          "r": 242.4349626167141,
+          "ox": 0.9335174560546875,
+          "oy": 2.1120200157165527,
+          "oz": -0.0874786376953125,
+          "px": 0,
+          "py": 0,
+          "pz": 0,
+          "t": 724,
+          "hidden": false,
+          "want": true
+        }
+      },
+      "file": "slabs_qnw_10m_dusk.jpg",
+      "path": "qa\\2026-11-03-AG-218\\captures\\slabs_qnw_10m_dusk.jpg"
+    },
+    {
+      "shotId": "slabs_qnw_30m_noon",
+      "mode": "slabs",
+      "spot": "qnw",
+      "spotLabel": "Quarter-NW (Near 83, 50)",
+      "targetDist": 30,
+      "actualDist": 29.91,
+      "light": "noon",
+      "worldTime": 0.5,
+      "camPos": {
+        "x": 57.47,
+        "y": 6.03,
+        "z": 65.59
+      },
+      "targetStation": {
+        "x": 82.78,
+        "z": 49.66
+      },
+      "stoneUserData": {
+        "draws": 3,
+        "tris": 14220,
+        "stoneTris": 14220,
+        "mossTris": 0,
+        "ivyTris": 0,
+        "_shadowCaster": {
+          "has": true,
+          "n": 3
+        },
+        "_cull": {
+          "r": 242.4349626167141,
+          "ox": 0.9335174560546875,
+          "oy": 2.1120200157165527,
+          "oz": -0.0874786376953125,
+          "px": 0,
+          "py": 0,
+          "pz": 0,
+          "t": 724,
+          "hidden": false,
+          "want": true
+        }
+      },
+      "file": "slabs_qnw_30m_noon.jpg",
+      "path": "qa\\2026-11-03-AG-218\\captures\\slabs_qnw_30m_noon.jpg"
+    },
+    {
+      "shotId": "slabs_qnw_30m_dusk",
+      "mode": "slabs",
+      "spot": "qnw",
+      "spotLabel": "Quarter-NW (Near 83, 50)",
+      "targetDist": 30,
+      "actualDist": 29.92,
+      "light": "dusk",
+      "worldTime": 0.77,
+      "camPos": {
+        "x": 57.46,
+        "y": 6.04,
+        "z": 65.6
+      },
+      "targetStation": {
+        "x": 82.78,
+        "z": 49.66
+      },
+      "stoneUserData": {
+        "draws": 3,
+        "tris": 14220,
+        "stoneTris": 14220,
+        "mossTris": 0,
+        "ivyTris": 0,
+        "_shadowCaster": {
+          "has": true,
+          "n": 3
+        },
+        "_cull": {
+          "r": 242.4349626167141,
+          "ox": 0.9335174560546875,
+          "oy": 2.1120200157165527,
+          "oz": -0.0874786376953125,
+          "px": 0,
+          "py": 0,
+          "pz": 0,
+          "t": 965,
+          "hidden": false,
+          "want": true
+        }
+      },
+      "file": "slabs_qnw_30m_dusk.jpg",
+      "path": "qa\\2026-11-03-AG-218\\captures\\slabs_qnw_30m_dusk.jpg"
+    }
+  ],
+  "hedge": [
+    {
+      "shotId": "hedge_hq_3m_noon",
+      "mode": "hedge",
+      "spot": "hq",
+      "spotLabel": "HQ Ring (Yard Side)",
+      "targetDist": 3,
+      "actualDist": 2.89,
+      "light": "noon",
+      "worldTime": 0.5,
+      "camPos": {
+        "x": 55.15,
+        "y": -5.43,
+        "z": -14.86
+      },
+      "targetStation": {
+        "x": 57.93,
+        "z": -15.61
+      },
+      "stoneUserData": null,
+      "file": "hedge_hq_3m_noon.jpg",
+      "path": "qa\\2026-11-03-AG-218\\captures\\hedge_hq_3m_noon.jpg"
+    },
+    {
+      "shotId": "hedge_hq_3m_dusk",
+      "mode": "hedge",
+      "spot": "hq",
+      "spotLabel": "HQ Ring (Yard Side)",
+      "targetDist": 3,
+      "actualDist": 2.89,
+      "light": "dusk",
+      "worldTime": 0.77,
+      "camPos": {
+        "x": 55.15,
+        "y": -5.44,
+        "z": -14.86
+      },
+      "targetStation": {
+        "x": 57.93,
+        "z": -15.61
+      },
+      "stoneUserData": null,
+      "file": "hedge_hq_3m_dusk.jpg",
+      "path": "qa\\2026-11-03-AG-218\\captures\\hedge_hq_3m_dusk.jpg"
+    },
+    {
+      "shotId": "hedge_hq_10m_noon",
+      "mode": "hedge",
+      "spot": "hq",
+      "spotLabel": "HQ Ring (Yard Side)",
+      "targetDist": 10,
+      "actualDist": 9.88,
+      "light": "noon",
+      "worldTime": 0.5,
+      "camPos": {
+        "x": 48.39,
+        "y": -5.65,
+        "z": -13.04
+      },
+      "targetStation": {
+        "x": 57.93,
+        "z": -15.61
+      },
+      "stoneUserData": null,
+      "file": "hedge_hq_10m_noon.jpg",
+      "path": "qa\\2026-11-03-AG-218\\captures\\hedge_hq_10m_noon.jpg"
+    },
+    {
+      "shotId": "hedge_hq_10m_dusk",
+      "mode": "hedge",
+      "spot": "hq",
+      "spotLabel": "HQ Ring (Yard Side)",
+      "targetDist": 10,
+      "actualDist": 9.88,
+      "light": "dusk",
+      "worldTime": 0.77,
+      "camPos": {
+        "x": 48.39,
+        "y": -5.65,
+        "z": -13.07
+      },
+      "targetStation": {
+        "x": 57.93,
+        "z": -15.61
+      },
+      "stoneUserData": null,
+      "file": "hedge_hq_10m_dusk.jpg",
+      "path": "qa\\2026-11-03-AG-218\\captures\\hedge_hq_10m_dusk.jpg"
+    },
+    {
+      "shotId": "hedge_hq_30m_noon",
+      "mode": "hedge",
+      "spot": "hq",
+      "spotLabel": "HQ Ring (Yard Side)",
+      "targetDist": 30,
+      "actualDist": 29.89,
+      "light": "noon",
+      "worldTime": 0.5,
+      "camPos": {
+        "x": 29.07,
+        "y": -2.45,
+        "z": -7.87
+      },
+      "targetStation": {
+        "x": 57.93,
+        "z": -15.61
+      },
+      "stoneUserData": null,
+      "file": "hedge_hq_30m_noon.jpg",
+      "path": "qa\\2026-11-03-AG-218\\captures\\hedge_hq_30m_noon.jpg"
+    },
+    {
+      "shotId": "hedge_hq_30m_dusk",
+      "mode": "hedge",
+      "spot": "hq",
+      "spotLabel": "HQ Ring (Yard Side)",
+      "targetDist": 30,
+      "actualDist": 29.88,
+      "light": "dusk",
+      "worldTime": 0.77,
+      "camPos": {
+        "x": 29.07,
+        "y": -2.45,
+        "z": -7.86
+      },
+      "targetStation": {
+        "x": 57.93,
+        "z": -15.61
+      },
+      "stoneUserData": null,
+      "file": "hedge_hq_30m_dusk.jpg",
+      "path": "qa\\2026-11-03-AG-218\\captures\\hedge_hq_30m_dusk.jpg"
+    },
+    {
+      "shotId": "hedge_qnw_3m_noon",
+      "mode": "hedge",
+      "spot": "qnw",
+      "spotLabel": "Quarter-NW (Near 83, 50)",
+      "targetDist": 3,
+      "actualDist": 2.86,
+      "light": "noon",
+      "worldTime": 0.5,
+      "camPos": {
+        "x": 80.35,
+        "y": 4.91,
+        "z": 51.17
+      },
+      "targetStation": {
+        "x": 82.78,
+        "z": 49.66
+      },
+      "stoneUserData": null,
+      "file": "hedge_qnw_3m_noon.jpg",
+      "path": "qa\\2026-11-03-AG-218\\captures\\hedge_qnw_3m_noon.jpg"
+    },
+    {
+      "shotId": "hedge_qnw_3m_dusk",
+      "mode": "hedge",
+      "spot": "qnw",
+      "spotLabel": "Quarter-NW (Near 83, 50)",
+      "targetDist": 3,
+      "actualDist": 2.86,
+      "light": "dusk",
+      "worldTime": 0.77,
+      "camPos": {
+        "x": 80.36,
+        "y": 4.91,
+        "z": 51.18
+      },
+      "targetStation": {
+        "x": 82.78,
+        "z": 49.66
+      },
+      "stoneUserData": null,
+      "file": "hedge_qnw_3m_dusk.jpg",
+      "path": "qa\\2026-11-03-AG-218\\captures\\hedge_qnw_3m_dusk.jpg"
+    },
+    {
+      "shotId": "hedge_qnw_10m_noon",
+      "mode": "hedge",
+      "spot": "qnw",
+      "spotLabel": "Quarter-NW (Near 83, 50)",
+      "targetDist": 10,
+      "actualDist": 9.87,
+      "light": "noon",
+      "worldTime": 0.5,
+      "camPos": {
+        "x": 74.44,
+        "y": 5.69,
+        "z": 54.92
+      },
+      "targetStation": {
+        "x": 82.78,
+        "z": 49.66
+      },
+      "stoneUserData": null,
+      "file": "hedge_qnw_10m_noon.jpg",
+      "path": "qa\\2026-11-03-AG-218\\captures\\hedge_qnw_10m_noon.jpg"
+    },
+    {
+      "shotId": "hedge_qnw_10m_dusk",
+      "mode": "hedge",
+      "spot": "qnw",
+      "spotLabel": "Quarter-NW (Near 83, 50)",
+      "targetDist": 10,
+      "actualDist": 9.87,
+      "light": "dusk",
+      "worldTime": 0.77,
+      "camPos": {
+        "x": 74.44,
+        "y": 5.69,
+        "z": 54.94
+      },
+      "targetStation": {
+        "x": 82.78,
+        "z": 49.66
+      },
+      "stoneUserData": null,
+      "file": "hedge_qnw_10m_dusk.jpg",
+      "path": "qa\\2026-11-03-AG-218\\captures\\hedge_qnw_10m_dusk.jpg"
+    },
+    {
+      "shotId": "hedge_qnw_30m_noon",
+      "mode": "hedge",
+      "spot": "qnw",
+      "spotLabel": "Quarter-NW (Near 83, 50)",
+      "targetDist": 30,
+      "actualDist": 29.91,
+      "light": "noon",
+      "worldTime": 0.5,
+      "camPos": {
+        "x": 57.47,
+        "y": 6.03,
+        "z": 65.59
+      },
+      "targetStation": {
+        "x": 82.78,
+        "z": 49.66
+      },
+      "stoneUserData": null,
+      "file": "hedge_qnw_30m_noon.jpg",
+      "path": "qa\\2026-11-03-AG-218\\captures\\hedge_qnw_30m_noon.jpg"
+    },
+    {
+      "shotId": "hedge_qnw_30m_dusk",
+      "mode": "hedge",
+      "spot": "qnw",
+      "spotLabel": "Quarter-NW (Near 83, 50)",
+      "targetDist": 30,
+      "actualDist": 29.92,
+      "light": "dusk",
+      "worldTime": 0.77,
+      "camPos": {
+        "x": 57.46,
+        "y": 6.04,
+        "z": 65.6
+      },
+      "targetStation": {
+        "x": 82.78,
+        "z": 49.66
+      },
+      "stoneUserData": null,
+      "file": "hedge_qnw_30m_dusk.jpg",
+      "path": "qa\\2026-11-03-AG-218\\captures\\hedge_qnw_30m_dusk.jpg"
+    }
+  ]
+}

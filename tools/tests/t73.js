@@ -9,6 +9,9 @@
   const until = async (cond, maxMs) => { const t0 = Date.now(); while (Date.now() - t0 < maxMs) { if (cond()) return true; await wait(100); } return cond(); };
   try {
     await startMatch(T, 'Sections');
+    // CL-297: these checks are the old music's (the ElevenLabs nights, the sections); the score is on by default since
+    // 2026-11-02, so ask for the old music, as ?score=0 does (the score's own checks: tcl275a-d).
+    if (T.AudioSys && T.AudioSys.setScore) T.AudioSys.setScore(false);
     if (A.setMuted) A.setMuted(false);
     if (!ms().playing) A.startMusic();
     const song1 = (() => { let t = null; for (const w of ms().waveByDay || []) if (w.from <= 1) t = w.track; return t; })();   // CL-209: night 1's song, whichever music music.json has (CL-165)

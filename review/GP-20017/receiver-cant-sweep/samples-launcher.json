@@ -1,0 +1,62 @@
+{
+  "backend": "WebGPU",
+  "samples": [
+    {
+      "key": "launcher",
+      "yaw": 0.03,
+      "weapon": "launcher",
+      "first": true,
+      "active": true,
+      "vmKey": "launcher",
+      "raise": 1,
+      "muzzle": {
+        "x": 0.12346558459802306,
+        "y": -0.15823947503249297,
+        "d": 1.3102846750951653
+      }
+    },
+    {
+      "key": "launcher",
+      "yaw": 0.15,
+      "weapon": "launcher",
+      "first": true,
+      "active": true,
+      "vmKey": "launcher",
+      "raise": 1,
+      "muzzle": {
+        "x": 0.07671921072560586,
+        "y": -0.16596639769237834,
+        "d": 1.304209721839938
+      }
+    },
+    {
+      "key": "launcher",
+      "yaw": 0.25,
+      "weapon": "launcher",
+      "first": true,
+      "active": true,
+      "vmKey": "launcher",
+      "raise": 1,
+      "muzzle": {
+        "x": 0.03831824929352092,
+        "y": -0.16252805679852775,
+        "d": 1.2924468248701007
+      }
+    },
+    {
+      "key": "launcher",
+      "yaw": 0.35,
+      "weapon": "launcher",
+      "first": true,
+      "active": true,
+      "vmKey": "launcher",
+      "raise": 1,
+      "muzzle": {
+        "x": 0.00027069397936911734,
+        "y": -0.16514802164163586,
+        "d": 1.2760371107162456
+      }
+    }
+  ],
+  "errors": []
+}

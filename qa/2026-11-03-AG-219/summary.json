@@ -1,0 +1,191 @@
+[
+  {
+    "key": "m4",
+    "label": "GW-4 (M4)",
+    "diagonalDeg": 34.3,
+    "widthPct": 20.0,
+    "reticleClear": true,
+    "muzzleNdc": {
+      "x": 0.1301,
+      "y": -0.0955
+    },
+    "vmPos": [
+      -0.1664,
+      -0.0974,
+      -0.449
+    ],
+    "vmRot": [
+      -0.0346,
+      3.1116,
+      -0.11
+    ]
+  },
+  {
+    "key": "ak",
+    "label": "AK",
+    "diagonalDeg": 28.7,
+    "widthPct": 20.0,
+    "reticleClear": true,
+    "muzzleNdc": {
+      "x": 0.1235,
+      "y": -0.0794
+    },
+    "vmPos": [
+      -0.1685,
+      -0.0813,
+      -0.4616
+    ],
+    "vmRot": [
+      -0.045,
+      3.1116,
+      -0.12
+    ]
+  },
+  {
+    "key": "uzi",
+    "label": "Wasp (Uzi)",
+    "diagonalDeg": 42.5,
+    "widthPct": 20.0,
+    "reticleClear": true,
+    "muzzleNdc": {
+      "x": 0.2312,
+      "y": -0.261
+    },
+    "vmPos": [
+      -0.1643,
+      -0.1229,
+      -0.4132
+    ],
+    "vmRot": [
+      -0.0259,
+      3.1116,
+      -0.1
+    ]
+  },
+  {
+    "key": "shotgun",
+    "label": "Shotgun",
+    "diagonalDeg": 38.5,
+    "widthPct": 20.0,
+    "reticleClear": true,
+    "muzzleNdc": {
+      "x": 0.1015,
+      "y": -0.0605
+    },
+    "vmPos": [
+      -0.1514,
+      -0.0993,
+      -0.4411
+    ],
+    "vmRot": [
+      -0.0434,
+      3.1116,
+      0.105
+    ]
+  },
+  {
+    "key": "aa12",
+    "label": "Breacher (AA12)",
+    "diagonalDeg": 29.6,
+    "widthPct": 20.0,
+    "reticleClear": true,
+    "muzzleNdc": {
+      "x": 0.1043,
+      "y": -0.0453
+    },
+    "vmPos": [
+      -0.1473,
+      -0.0661,
+      -0.5095
+    ],
+    "vmRot": [
+      -0.0374,
+      3.1116,
+      0.0951
+    ]
+  },
+  {
+    "key": "flamer",
+    "label": "Flamer",
+    "diagonalDeg": 40.4,
+    "widthPct": 20.0,
+    "reticleClear": true,
+    "muzzleNdc": {
+      "x": 0.1195,
+      "y": -0.0686
+    },
+    "vmPos": [
+      -0.1613,
+      -0.1031,
+      -0.5302
+    ],
+    "vmRot": [
+      -0.0221,
+      3.1116,
+      -0.0801
+    ]
+  },
+  {
+    "key": "sniper",
+    "label": "Sniper",
+    "diagonalDeg": 33.0,
+    "widthPct": 20.0,
+    "reticleClear": false,
+    "muzzleNdc": {
+      "x": 0.0114,
+      "y": -0.0803
+    },
+    "vmPos": [
+      -0.1519,
+      -0.1231,
+      -0.631
+    ],
+    "vmRot": [
+      -0.028,
+      2.9916,
+      0.0904
+    ]
+  },
+  {
+    "key": "launcher",
+    "label": "Launcher",
+    "diagonalDeg": 34.7,
+    "widthPct": 20.0,
+    "reticleClear": true,
+    "muzzleNdc": {
+      "x": 0.0841,
+      "y": -0.1373
+    },
+    "vmPos": [
+      -0.1701,
+      -0.129,
+      -0.579
+    ],
+    "vmRot": [
+      -0.032,
+      2.9916,
+      0.0896
+    ]
+  },
+  {
+    "key": "minigun",
+    "label": "Minigun",
+    "diagonalDeg": 42.1,
+    "widthPct": 20.0,
+    "reticleClear": false,
+    "muzzleNdc": {
+      "x": 0.0018,
+      "y": -0.3705
+    },
+    "vmPos": [
+      -0.2231,
+      -0.3898,
+      -0.8878
+    ],
+    "vmRot": [
+      -0.0177,
+      2.8916,
+      -0.0893
+    ]
+  }
+]

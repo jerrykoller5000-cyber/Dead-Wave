@@ -1,0 +1,6723 @@
+{
+  "uniform_body_unarmed": {
+    "vmActive": false,
+    "marineUVs": [
+      {
+        "label": "marine-unarmed",
+        "name": "fitted-pelvis",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 0,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:trousers",
+        "matUuid": "538f208d-7f45-4a93-9fb9-c758496e2359",
+        "matColor": "#d2cebd",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 89,
+        "medURepeatsPerM": 1.155,
+        "medVRepeatsPerM": 0.805,
+        "medUVRepeatsPerM": 2.311,
+        "tileMetersU": 0.866,
+        "tileMetersV": 1.243,
+        "tileMetersUV": 0.433
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 0,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:holster",
+        "matUuid": "d42b8e25-8a26-4f30-8921-d0276e4b12d2",
+        "matColor": "#34382c",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 24,
+        "medURepeatsPerM": 12.195,
+        "medVRepeatsPerM": 9.524,
+        "medUVRepeatsPerM": 13.382,
+        "tileMetersU": 0.082,
+        "tileMetersV": 0.105,
+        "tileMetersUV": 0.075
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:pads",
+        "matUuid": "65f1825c-a4a6-43c1-bd90-a4818ff4629e",
+        "matColor": "#3a3f33",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 264,
+        "medURepeatsPerM": 5.514,
+        "medVRepeatsPerM": 5.214,
+        "medUVRepeatsPerM": 6.623,
+        "tileMetersU": 0.181,
+        "tileMetersV": 0.192,
+        "tileMetersUV": 0.151
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 0,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:trousers",
+        "matUuid": "538f208d-7f45-4a93-9fb9-c758496e2359",
+        "matColor": "#d2cebd",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 768,
+        "medURepeatsPerM": 1.573,
+        "medVRepeatsPerM": 1.568,
+        "medUVRepeatsPerM": 2.338,
+        "tileMetersU": 0.636,
+        "tileMetersV": 0.638,
+        "tileMetersUV": 0.428
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 0,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:belt",
+        "matUuid": "d80f1020-5b8d-47a2-b6b1-438b51307d5c",
+        "matColor": "#2b2e24",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 144,
+        "medURepeatsPerM": 41.667,
+        "medVRepeatsPerM": 0,
+        "medUVRepeatsPerM": 41.667,
+        "tileMetersU": 0.024,
+        "tileMetersV": null,
+        "tileMetersUV": 0.024
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": true,
+        "worldScale": {
+          "x": 0.6333,
+          "y": 0.6333,
+          "z": 0.6333
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:pistol",
+        "matUuid": "b31bdd9d-9bdd-45c4-b532-a59b8bb51af4",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 144,
+        "medURepeatsPerM": 3.742,
+        "medVRepeatsPerM": 1.217,
+        "medUVRepeatsPerM": 3.756,
+        "tileMetersU": 0.267,
+        "tileMetersV": 0.822,
+        "tileMetersUV": 0.266
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": true,
+        "worldScale": {
+          "x": 0.6333,
+          "y": 0.6333,
+          "z": 0.6333
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:pistol",
+        "matUuid": "b31bdd9d-9bdd-45c4-b532-a59b8bb51af4",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 3024,
+        "medURepeatsPerM": 2.232,
+        "medVRepeatsPerM": 3.037,
+        "medUVRepeatsPerM": 3.739,
+        "tileMetersU": 0.448,
+        "tileMetersV": 0.329,
+        "tileMetersUV": 0.267
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 0,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:holster",
+        "matUuid": "d42b8e25-8a26-4f30-8921-d0276e4b12d2",
+        "matColor": "#34382c",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 24,
+        "medURepeatsPerM": 12.195,
+        "medVRepeatsPerM": 9.524,
+        "medUVRepeatsPerM": 13.382,
+        "tileMetersU": 0.082,
+        "tileMetersV": 0.105,
+        "tileMetersUV": 0.075
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:pads",
+        "matUuid": "65f1825c-a4a6-43c1-bd90-a4818ff4629e",
+        "matColor": "#3a3f33",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 264,
+        "medURepeatsPerM": 5.514,
+        "medVRepeatsPerM": 5.214,
+        "medUVRepeatsPerM": 6.623,
+        "tileMetersU": 0.181,
+        "tileMetersV": 0.192,
+        "tileMetersUV": 0.151
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 0,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:trousers",
+        "matUuid": "538f208d-7f45-4a93-9fb9-c758496e2359",
+        "matColor": "#d2cebd",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 768,
+        "medURepeatsPerM": 1.573,
+        "medVRepeatsPerM": 1.566,
+        "medUVRepeatsPerM": 2.338,
+        "tileMetersU": 0.636,
+        "tileMetersV": 0.639,
+        "tileMetersUV": 0.428
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 0,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:belt",
+        "matUuid": "d80f1020-5b8d-47a2-b6b1-438b51307d5c",
+        "matColor": "#2b2e24",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 144,
+        "medURepeatsPerM": 41.667,
+        "medVRepeatsPerM": 0,
+        "medUVRepeatsPerM": 41.667,
+        "tileMetersU": 0.024,
+        "tileMetersV": null,
+        "tileMetersUV": 0.024
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": true,
+        "worldScale": {
+          "x": 0.6333,
+          "y": 0.6333,
+          "z": 0.6333
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:pistol",
+        "matUuid": "b31bdd9d-9bdd-45c4-b532-a59b8bb51af4",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 144,
+        "medURepeatsPerM": 3.742,
+        "medVRepeatsPerM": 1.217,
+        "medUVRepeatsPerM": 3.756,
+        "tileMetersU": 0.267,
+        "tileMetersV": 0.822,
+        "tileMetersUV": 0.266
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": true,
+        "worldScale": {
+          "x": 0.6333,
+          "y": 0.6333,
+          "z": 0.6333
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:pistol",
+        "matUuid": "b31bdd9d-9bdd-45c4-b532-a59b8bb51af4",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 3024,
+        "medURepeatsPerM": 2.232,
+        "medVRepeatsPerM": 3.037,
+        "medUVRepeatsPerM": 3.739,
+        "tileMetersU": 0.448,
+        "tileMetersV": 0.329,
+        "tileMetersUV": 0.267
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 0,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:belt",
+        "matUuid": "d80f1020-5b8d-47a2-b6b1-438b51307d5c",
+        "matColor": "#2b2e24",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 1284,
+        "medURepeatsPerM": 10.253,
+        "medVRepeatsPerM": 9.505,
+        "medUVRepeatsPerM": 9.809,
+        "tileMetersU": 0.098,
+        "tileMetersV": 0.105,
+        "tileMetersUV": 0.102
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "live-trouser-leg",
+        "type": "Mesh",
+        "parentChain": "live-trouser-leg-live > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:trousers",
+        "matUuid": "538f208d-7f45-4a93-9fb9-c758496e2359",
+        "matColor": "#d2cebd",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 4950,
+        "medURepeatsPerM": 1.7,
+        "medVRepeatsPerM": 2.343,
+        "medUVRepeatsPerM": 2.337,
+        "tileMetersU": 0.588,
+        "tileMetersV": 0.427,
+        "tileMetersUV": 0.428
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "live-shorts-leg",
+        "type": "Mesh",
+        "parentChain": "live-shorts-leg-live > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:trousers",
+        "matUuid": "538f208d-7f45-4a93-9fb9-c758496e2359",
+        "matColor": "#d2cebd",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 3210,
+        "medURepeatsPerM": 1.272,
+        "medVRepeatsPerM": 2.255,
+        "medUVRepeatsPerM": 2.371,
+        "tileMetersU": 0.786,
+        "tileMetersV": 0.443,
+        "tileMetersUV": 0.422
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "live-trouser-leg",
+        "type": "Mesh",
+        "parentChain": "live-trouser-leg-live > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:trousers",
+        "matUuid": "538f208d-7f45-4a93-9fb9-c758496e2359",
+        "matColor": "#d2cebd",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 4950,
+        "medURepeatsPerM": 1.695,
+        "medVRepeatsPerM": 2.342,
+        "medUVRepeatsPerM": 2.345,
+        "tileMetersU": 0.59,
+        "tileMetersV": 0.427,
+        "tileMetersUV": 0.426
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "live-shorts-leg",
+        "type": "Mesh",
+        "parentChain": "live-shorts-leg-live > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:trousers",
+        "matUuid": "538f208d-7f45-4a93-9fb9-c758496e2359",
+        "matColor": "#d2cebd",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 3210,
+        "medURepeatsPerM": 1.272,
+        "medVRepeatsPerM": 2.255,
+        "medUVRepeatsPerM": 2.37,
+        "tileMetersU": 0.786,
+        "tileMetersV": 0.443,
+        "tileMetersUV": 0.422
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "live-seat",
+        "type": "Mesh",
+        "parentChain": "live-seat-live > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:trousers",
+        "matUuid": "538f208d-7f45-4a93-9fb9-c758496e2359",
+        "matColor": "#d2cebd",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 1848,
+        "medURepeatsPerM": 1.521,
+        "medVRepeatsPerM": 1.689,
+        "medUVRepeatsPerM": 2.267,
+        "tileMetersU": 0.658,
+        "tileMetersV": 0.592,
+        "tileMetersUV": 0.441
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:pads",
+        "matUuid": "65f1825c-a4a6-43c1-bd90-a4818ff4629e",
+        "matColor": "#3a3f33",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 34,
+        "medURepeatsPerM": 6.286,
+        "medVRepeatsPerM": 6.34,
+        "medUVRepeatsPerM": 9.109,
+        "tileMetersU": 0.159,
+        "tileMetersV": 0.158,
+        "tileMetersUV": 0.11
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 0,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:belt",
+        "matUuid": "d80f1020-5b8d-47a2-b6b1-438b51307d5c",
+        "matColor": "#2b2e24",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 40,
+        "medURepeatsPerM": 41.667,
+        "medVRepeatsPerM": 0,
+        "medUVRepeatsPerM": 41.667,
+        "tileMetersU": 0.024,
+        "tileMetersV": null,
+        "tileMetersUV": 0.024
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 0,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:shirt",
+        "matUuid": "314d89c0-6efa-41b0-ad18-cff360637809",
+        "matColor": "#e2ded0",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 396,
+        "medURepeatsPerM": 1.667,
+        "medVRepeatsPerM": 0.884,
+        "medUVRepeatsPerM": 2.373,
+        "tileMetersU": 0.6,
+        "tileMetersV": 1.131,
+        "tileMetersUV": 0.421
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "gb152-hand",
+        "type": "Mesh",
+        "parentChain": "Group > wrist > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 1.18,
+          "y": 1.18,
+          "z": 1.18
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:gloves",
+        "matUuid": "84c2d79b-0c3d-4760-9159-5d9769de1037",
+        "matColor": "#2a2c24",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 2496,
+        "medURepeatsPerM": 1.82,
+        "medVRepeatsPerM": 1.897,
+        "medUVRepeatsPerM": 2.017,
+        "tileMetersU": 0.549,
+        "tileMetersV": 0.527,
+        "tileMetersUV": 0.496
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.6333,
+          "y": 0.6333,
+          "z": 0.6333
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:pistol",
+        "matUuid": "b31bdd9d-9bdd-45c4-b532-a59b8bb51af4",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 144,
+        "medURepeatsPerM": 3.742,
+        "medVRepeatsPerM": 1.217,
+        "medUVRepeatsPerM": 3.756,
+        "tileMetersU": 0.267,
+        "tileMetersV": 0.822,
+        "tileMetersUV": 0.266
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.6333,
+          "y": 0.6333,
+          "z": 0.6333
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:pistol",
+        "matUuid": "b31bdd9d-9bdd-45c4-b532-a59b8bb51af4",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 3024,
+        "medURepeatsPerM": 2.232,
+        "medVRepeatsPerM": 3.037,
+        "medUVRepeatsPerM": 3.739,
+        "tileMetersU": 0.448,
+        "tileMetersV": 0.329,
+        "tileMetersUV": 0.267
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.5296,
+          "y": 0.5296,
+          "z": 0.5296
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:uzi",
+        "matUuid": "7ee80491-2c0b-4200-8bdb-198691c9085b",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 1890,
+        "medURepeatsPerM": 2.501,
+        "medVRepeatsPerM": 3.805,
+        "medUVRepeatsPerM": 4.479,
+        "tileMetersU": 0.4,
+        "tileMetersV": 0.263,
+        "tileMetersUV": 0.223
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.7755,
+          "y": 0.7755,
+          "z": 0.7755
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:revolver",
+        "matUuid": "d2e0f2cc-0557-48b5-903d-5450d76e041e",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 4068,
+        "medURepeatsPerM": 2.171,
+        "medVRepeatsPerM": 2.822,
+        "medUVRepeatsPerM": 3.07,
+        "tileMetersU": 0.461,
+        "tileMetersV": 0.354,
+        "tileMetersUV": 0.326
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.7755,
+          "y": 0.7755,
+          "z": 0.7755
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:revolver",
+        "matUuid": "7cc33984-e95e-40fc-bc21-a2af12f2c917",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 696,
+        "medURepeatsPerM": 1.119,
+        "medVRepeatsPerM": 2.714,
+        "medUVRepeatsPerM": 3.066,
+        "tileMetersU": 0.894,
+        "tileMetersV": 0.368,
+        "tileMetersUV": 0.326
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 0,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.0565,
+          "y": 0.0565,
+          "z": 0.0576
+        },
+        "localScale": {
+          "x": 0.0565,
+          "y": 0.0565,
+          "z": 0.0576
+        },
+        "matName": "wear:shirt",
+        "matUuid": "314d89c0-6efa-41b0-ad18-cff360637809",
+        "matColor": "#e2ded0",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 1980,
+        "medURepeatsPerM": 26.133,
+        "medVRepeatsPerM": 31.487,
+        "medUVRepeatsPerM": 39.907,
+        "tileMetersU": 0.038,
+        "tileMetersV": 0.032,
+        "tileMetersUV": 0.025
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 0,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:shirt",
+        "matUuid": "314d89c0-6efa-41b0-ad18-cff360637809",
+        "matColor": "#e2ded0",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 444,
+        "medURepeatsPerM": 1.68,
+        "medVRepeatsPerM": 1.297,
+        "medUVRepeatsPerM": 2.37,
+        "tileMetersU": 0.595,
+        "tileMetersV": 0.771,
+        "tileMetersUV": 0.422
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "pgb-patch",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.062,
+          "y": 0.072,
+          "z": 1
+        },
+        "localScale": {
+          "x": 0.062,
+          "y": 0.072,
+          "z": 1
+        },
+        "matName": "pgb-patch",
+        "matUuid": "0038a06c-0c0b-441f-b046-971a28101a89",
+        "matColor": "#ffffff",
+        "vertexColors": false,
+        "texUuid": "29e6b843-7c51-4bd6-ba3b-d447e3f8a175",
+        "texSize": {
+          "w": 192,
+          "h": 224
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 4,
+        "medURepeatsPerM": 16.129,
+        "medVRepeatsPerM": 13.889,
+        "medUVRepeatsPerM": 16.129,
+        "tileMetersU": 0.062,
+        "tileMetersV": 0.072,
+        "tileMetersUV": 0.062
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:pads",
+        "matUuid": "65f1825c-a4a6-43c1-bd90-a4818ff4629e",
+        "matColor": "#3a3f33",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 34,
+        "medURepeatsPerM": 6.286,
+        "medVRepeatsPerM": 6.34,
+        "medUVRepeatsPerM": 9.109,
+        "tileMetersU": 0.159,
+        "tileMetersV": 0.158,
+        "tileMetersUV": 0.11
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 0,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:belt",
+        "matUuid": "d80f1020-5b8d-47a2-b6b1-438b51307d5c",
+        "matColor": "#2b2e24",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 40,
+        "medURepeatsPerM": 41.667,
+        "medVRepeatsPerM": 0,
+        "medUVRepeatsPerM": 41.667,
+        "tileMetersU": 0.024,
+        "tileMetersV": null,
+        "tileMetersUV": 0.024
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 0,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:shirt",
+        "matUuid": "314d89c0-6efa-41b0-ad18-cff360637809",
+        "matColor": "#e2ded0",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 396,
+        "medURepeatsPerM": 1.66,
+        "medVRepeatsPerM": 0.884,
+        "medUVRepeatsPerM": 2.373,
+        "tileMetersU": 0.602,
+        "tileMetersV": 1.131,
+        "tileMetersUV": 0.421
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "gb152-hand",
+        "type": "Mesh",
+        "parentChain": "Group > wrist > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 1.18,
+          "y": 1.18,
+          "z": 1.18
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:gloves",
+        "matUuid": "84c2d79b-0c3d-4760-9159-5d9769de1037",
+        "matColor": "#2a2c24",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 2496,
+        "medURepeatsPerM": 1.82,
+        "medVRepeatsPerM": 1.897,
+        "medUVRepeatsPerM": 2.017,
+        "tileMetersU": 0.549,
+        "tileMetersV": 0.527,
+        "tileMetersUV": 0.496
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "magazineBody > Group > Group > Group > Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.88,
+          "y": 0.88,
+          "z": 0.88
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:minigun",
+        "matUuid": "fedd7ec4-3cb1-4c51-96e7-d7f485662d72",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 864,
+        "medURepeatsPerM": 2.147,
+        "medVRepeatsPerM": 2.147,
+        "medUVRepeatsPerM": 2.706,
+        "tileMetersU": 0.466,
+        "tileMetersV": 0.466,
+        "tileMetersUV": 0.37
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "magazineBody > Group > Group > Group > Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.88,
+          "y": 0.88,
+          "z": 0.88
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:minigun",
+        "matUuid": "bd4e92be-d146-459f-8a9a-26984cdb77fa",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 1728,
+        "medURepeatsPerM": 2.343,
+        "medVRepeatsPerM": 2.147,
+        "medUVRepeatsPerM": 2.531,
+        "tileMetersU": 0.427,
+        "tileMetersV": 0.466,
+        "tileMetersUV": 0.395
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.88,
+          "y": 0.88,
+          "z": 0.88
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:minigun",
+        "matUuid": "bd4e92be-d146-459f-8a9a-26984cdb77fa",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 1716,
+        "medURepeatsPerM": 2.201,
+        "medVRepeatsPerM": 2.629,
+        "medUVRepeatsPerM": 2.7,
+        "tileMetersU": 0.454,
+        "tileMetersV": 0.38,
+        "tileMetersUV": 0.37
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.6741,
+          "y": 0.6741,
+          "z": 0.6741
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:m4",
+        "matUuid": "fb3154d7-e851-4bf2-ab17-4fdaab5c6f8a",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 804,
+        "medURepeatsPerM": 1.677,
+        "medVRepeatsPerM": 3.128,
+        "medUVRepeatsPerM": 3.513,
+        "tileMetersU": 0.596,
+        "tileMetersV": 0.32,
+        "tileMetersUV": 0.285
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "fp-stock > Group > Group > Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.6741,
+          "y": 0.6741,
+          "z": 0.6741
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:m4",
+        "matUuid": "fb3154d7-e851-4bf2-ab17-4fdaab5c6f8a",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 1032,
+        "medURepeatsPerM": 2.63,
+        "medVRepeatsPerM": 2.801,
+        "medUVRepeatsPerM": 3.525,
+        "tileMetersU": 0.38,
+        "tileMetersV": 0.357,
+        "tileMetersUV": 0.284
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "fp-stock > Group > Group > Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.6864,
+          "y": 0.6864,
+          "z": 0.6864
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:ak",
+        "matUuid": "bf3f1ef7-81ea-4496-9f9d-4118e28e08c3",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 1092,
+        "medURepeatsPerM": 3.097,
+        "medVRepeatsPerM": 1.806,
+        "medUVRepeatsPerM": 3.448,
+        "tileMetersU": 0.323,
+        "tileMetersV": 0.554,
+        "tileMetersUV": 0.29
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "fp-stock > Group > Group > Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.6864,
+          "y": 0.6864,
+          "z": 0.6864
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:ak",
+        "matUuid": "a12a620e-5b14-45b3-a489-152c11c4a20b",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 288,
+        "medURepeatsPerM": 3.401,
+        "medVRepeatsPerM": 3.374,
+        "medUVRepeatsPerM": 3.469,
+        "tileMetersU": 0.294,
+        "tileMetersV": 0.296,
+        "tileMetersUV": 0.288
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.6864,
+          "y": 0.6864,
+          "z": 0.6864
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:ak",
+        "matUuid": "bf3f1ef7-81ea-4496-9f9d-4118e28e08c3",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 1188,
+        "medURepeatsPerM": 1.969,
+        "medVRepeatsPerM": 2.943,
+        "medUVRepeatsPerM": 3.458,
+        "tileMetersU": 0.508,
+        "tileMetersV": 0.34,
+        "tileMetersUV": 0.289
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.6864,
+          "y": 0.6864,
+          "z": 0.6864
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:ak",
+        "matUuid": "a12a620e-5b14-45b3-a489-152c11c4a20b",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 960,
+        "medURepeatsPerM": 2.546,
+        "medVRepeatsPerM": 3.291,
+        "medUVRepeatsPerM": 3.466,
+        "tileMetersU": 0.393,
+        "tileMetersV": 0.304,
+        "tileMetersUV": 0.289
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "fp-stock > Group > Group > Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.6843,
+          "y": 0.6843,
+          "z": 0.6843
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:aa12",
+        "matUuid": "6ed0f3b0-025b-4116-a695-f382c72b12e5",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 1068,
+        "medURepeatsPerM": 2.576,
+        "medVRepeatsPerM": 2.901,
+        "medUVRepeatsPerM": 3.478,
+        "tileMetersU": 0.388,
+        "tileMetersV": 0.345,
+        "tileMetersUV": 0.288
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.6843,
+          "y": 0.6843,
+          "z": 0.6843
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:aa12",
+        "matUuid": "6ed0f3b0-025b-4116-a695-f382c72b12e5",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 1728,
+        "medURepeatsPerM": 2.177,
+        "medVRepeatsPerM": 3.232,
+        "medUVRepeatsPerM": 3.472,
+        "tileMetersU": 0.459,
+        "tileMetersV": 0.309,
+        "tileMetersUV": 0.288
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.6333,
+          "y": 0.6333,
+          "z": 0.6333
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:pistol",
+        "matUuid": "b31bdd9d-9bdd-45c4-b532-a59b8bb51af4",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 144,
+        "medURepeatsPerM": 3.742,
+        "medVRepeatsPerM": 1.217,
+        "medUVRepeatsPerM": 3.756,
+        "tileMetersU": 0.267,
+        "tileMetersV": 0.822,
+        "tileMetersUV": 0.266
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.6333,
+          "y": 0.6333,
+          "z": 0.6333
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:pistol",
+        "matUuid": "b31bdd9d-9bdd-45c4-b532-a59b8bb51af4",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 3024,
+        "medURepeatsPerM": 2.232,
+        "medVRepeatsPerM": 3.037,
+        "medUVRepeatsPerM": 3.739,
+        "tileMetersU": 0.448,
+        "tileMetersV": 0.329,
+        "tileMetersUV": 0.267
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.5296,
+          "y": 0.5296,
+          "z": 0.5296
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:uzi",
+        "matUuid": "7ee80491-2c0b-4200-8bdb-198691c9085b",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 1890,
+        "medURepeatsPerM": 2.501,
+        "medVRepeatsPerM": 3.805,
+        "medUVRepeatsPerM": 4.479,
+        "tileMetersU": 0.4,
+        "tileMetersV": 0.263,
+        "tileMetersUV": 0.223
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "fp-stock > Group > Group > Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.7935,
+          "y": 0.7935,
+          "z": 0.7935
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:shotgun",
+        "matUuid": "83b9d489-1bf4-4371-8dda-df4e260969fa",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 1320,
+        "medURepeatsPerM": 2.538,
+        "medVRepeatsPerM": 1.921,
+        "medUVRepeatsPerM": 2.995,
+        "tileMetersU": 0.394,
+        "tileMetersV": 0.521,
+        "tileMetersUV": 0.334
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.7935,
+          "y": 0.7935,
+          "z": 0.7935
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:shotgun",
+        "matUuid": "83b9d489-1bf4-4371-8dda-df4e260969fa",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 1836,
+        "medURepeatsPerM": 2.065,
+        "medVRepeatsPerM": 2.829,
+        "medUVRepeatsPerM": 3,
+        "tileMetersU": 0.484,
+        "tileMetersV": 0.353,
+        "tileMetersUV": 0.333
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.7935,
+          "y": 0.7935,
+          "z": 0.7935
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:shotgun",
+        "matUuid": "83b9d489-1bf4-4371-8dda-df4e260969fa",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 1032,
+        "medURepeatsPerM": 1.802,
+        "medVRepeatsPerM": 2.459,
+        "medUVRepeatsPerM": 2.989,
+        "tileMetersU": 0.555,
+        "tileMetersV": 0.407,
+        "tileMetersUV": 0.335
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.7755,
+          "y": 0.7755,
+          "z": 0.7755
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:revolver",
+        "matUuid": "d2e0f2cc-0557-48b5-903d-5450d76e041e",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 4068,
+        "medURepeatsPerM": 2.171,
+        "medVRepeatsPerM": 2.822,
+        "medUVRepeatsPerM": 3.07,
+        "tileMetersU": 0.461,
+        "tileMetersV": 0.354,
+        "tileMetersUV": 0.326
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.7755,
+          "y": 0.7755,
+          "z": 0.7755
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:revolver",
+        "matUuid": "7cc33984-e95e-40fc-bc21-a2af12f2c917",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 696,
+        "medURepeatsPerM": 1.119,
+        "medVRepeatsPerM": 2.714,
+        "medUVRepeatsPerM": 3.066,
+        "tileMetersU": 0.894,
+        "tileMetersV": 0.368,
+        "tileMetersUV": 0.326
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.7233,
+          "y": 0.7233,
+          "z": 0.7233
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:sniper",
+        "matUuid": "a7796d1a-168d-4226-ab24-42670a82da22",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 648,
+        "medURepeatsPerM": 2.096,
+        "medVRepeatsPerM": 2.714,
+        "medUVRepeatsPerM": 3.256,
+        "tileMetersU": 0.477,
+        "tileMetersV": 0.368,
+        "tileMetersUV": 0.307
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "fp-stock > Group > Group > Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.7233,
+          "y": 0.7233,
+          "z": 0.7233
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:sniper",
+        "matUuid": "0556631d-7ba8-49bb-8587-c849dff416b7",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 888,
+        "medURepeatsPerM": 2.327,
+        "medVRepeatsPerM": 2.982,
+        "medUVRepeatsPerM": 3.29,
+        "tileMetersU": 0.43,
+        "tileMetersV": 0.335,
+        "tileMetersUV": 0.304
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.7233,
+          "y": 0.7233,
+          "z": 0.7233
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:sniper",
+        "matUuid": "0556631d-7ba8-49bb-8587-c849dff416b7",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 3396,
+        "medURepeatsPerM": 2.234,
+        "medVRepeatsPerM": 3.258,
+        "medUVRepeatsPerM": 3.291,
+        "tileMetersU": 0.448,
+        "tileMetersV": 0.307,
+        "tileMetersUV": 0.304
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.6978,
+          "y": 0.6978,
+          "z": 0.6978
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:launcher",
+        "matUuid": "748b6d94-27a9-4410-9ee2-b943d90bd421",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 2880,
+        "medURepeatsPerM": 2.648,
+        "medVRepeatsPerM": 2.648,
+        "medUVRepeatsPerM": 3.31,
+        "tileMetersU": 0.378,
+        "tileMetersV": 0.378,
+        "tileMetersUV": 0.302
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.6978,
+          "y": 0.6978,
+          "z": 0.6978
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:launcher",
+        "matUuid": "748b6d94-27a9-4410-9ee2-b943d90bd421",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 588,
+        "medURepeatsPerM": 2.507,
+        "medVRepeatsPerM": 2.87,
+        "medUVRepeatsPerM": 3.409,
+        "tileMetersU": 0.399,
+        "tileMetersV": 0.348,
+        "tileMetersUV": 0.293
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.6978,
+          "y": 0.6978,
+          "z": 0.6978
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:launcher",
+        "matUuid": "25402a68-3ba1-4d9c-981b-2e3f8b987e92",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 936,
+        "medURepeatsPerM": 2.139,
+        "medVRepeatsPerM": 2.664,
+        "medUVRepeatsPerM": 3.385,
+        "tileMetersU": 0.467,
+        "tileMetersV": 0.375,
+        "tileMetersUV": 0.295
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "magazineBody > Group > Group > Group > Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.8383,
+          "y": 0.8383,
+          "z": 0.8383
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:flamer",
+        "matUuid": "0c014a30-13ea-491d-942f-db641e62d063",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 2304,
+        "medURepeatsPerM": 2.224,
+        "medVRepeatsPerM": 2.224,
+        "medUVRepeatsPerM": 2.84,
+        "tileMetersU": 0.45,
+        "tileMetersV": 0.45,
+        "tileMetersUV": 0.352
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.8383,
+          "y": 0.8383,
+          "z": 0.8383
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:flamer",
+        "matUuid": "0c014a30-13ea-491d-942f-db641e62d063",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 1080,
+        "medURepeatsPerM": 1.274,
+        "medVRepeatsPerM": 2.516,
+        "medUVRepeatsPerM": 2.814,
+        "tileMetersU": 0.785,
+        "tileMetersV": 0.398,
+        "tileMetersUV": 0.355
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.8042,
+          "y": 0.8042,
+          "z": 0.8042
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:chainsaw",
+        "matUuid": "27167d19-2b5f-4c8e-9e90-af880e0af8da",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 144,
+        "medURepeatsPerM": 2.935,
+        "medVRepeatsPerM": 2.093,
+        "medUVRepeatsPerM": 2.955,
+        "tileMetersU": 0.341,
+        "tileMetersV": 0.478,
+        "tileMetersUV": 0.338
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.8042,
+          "y": 0.8042,
+          "z": 0.8042
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:chainsaw",
+        "matUuid": "27167d19-2b5f-4c8e-9e90-af880e0af8da",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 2208,
+        "medURepeatsPerM": 2.035,
+        "medVRepeatsPerM": 2.414,
+        "medUVRepeatsPerM": 2.957,
+        "tileMetersU": 0.491,
+        "tileMetersV": 0.414,
+        "tileMetersUV": 0.338
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 0,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.0565,
+          "y": 0.0565,
+          "z": 0.0576
+        },
+        "localScale": {
+          "x": 0.0565,
+          "y": 0.0565,
+          "z": 0.0576
+        },
+        "matName": "wear:shirt",
+        "matUuid": "314d89c0-6efa-41b0-ad18-cff360637809",
+        "matColor": "#e2ded0",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 1980,
+        "medURepeatsPerM": 26.133,
+        "medVRepeatsPerM": 31.487,
+        "medUVRepeatsPerM": 39.907,
+        "tileMetersU": 0.038,
+        "tileMetersV": 0.032,
+        "tileMetersUV": 0.025
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 0,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:shirt",
+        "matUuid": "314d89c0-6efa-41b0-ad18-cff360637809",
+        "matColor": "#e2ded0",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 444,
+        "medURepeatsPerM": 1.68,
+        "medVRepeatsPerM": 1.297,
+        "medUVRepeatsPerM": 2.37,
+        "tileMetersU": 0.595,
+        "tileMetersV": 0.771,
+        "tileMetersUV": 0.422
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 0,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.94,
+          "y": 0.97,
+          "z": 0.94
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:cap",
+        "matUuid": "9718428b-8d5b-4a97-a0e2-82f1c6f7d142",
+        "matColor": "#d8d6c4",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 3660,
+        "medURepeatsPerM": 1.759,
+        "medVRepeatsPerM": 1.728,
+        "medUVRepeatsPerM": 2.455,
+        "tileMetersU": 0.568,
+        "tileMetersV": 0.579,
+        "tileMetersUV": 0.407
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 0,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.94,
+          "y": 0.97,
+          "z": 0.94
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:cap",
+        "matUuid": "9718428b-8d5b-4a97-a0e2-82f1c6f7d142",
+        "matColor": "#d8d6c4",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 1680,
+        "medURepeatsPerM": 1.813,
+        "medVRepeatsPerM": 2.111,
+        "medUVRepeatsPerM": 2.487,
+        "tileMetersU": 0.552,
+        "tileMetersV": 0.474,
+        "tileMetersUV": 0.402
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 0,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.94,
+          "y": 0.97,
+          "z": 0.94
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:cap",
+        "matUuid": "9718428b-8d5b-4a97-a0e2-82f1c6f7d142",
+        "matColor": "#d8d6c4",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 1884,
+        "medURepeatsPerM": 1.622,
+        "medVRepeatsPerM": 1.983,
+        "medUVRepeatsPerM": 2.455,
+        "tileMetersU": 0.616,
+        "tileMetersV": 0.504,
+        "tileMetersUV": 0.407
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 0,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.94,
+          "y": 0.97,
+          "z": 0.94
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:cap",
+        "matUuid": "9718428b-8d5b-4a97-a0e2-82f1c6f7d142",
+        "matColor": "#d8d6c4",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 1884,
+        "medURepeatsPerM": 1.624,
+        "medVRepeatsPerM": 1.947,
+        "medUVRepeatsPerM": 2.455,
+        "tileMetersU": 0.616,
+        "tileMetersV": 0.513,
+        "tileMetersUV": 0.407
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "marine-fitted-helmet-cover",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.94,
+          "y": 0.97,
+          "z": 0.94
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:helmet",
+        "matUuid": "6c96d07d-4b47-4c31-abc5-f335fa9b59f3",
+        "matColor": "#d8d6c4",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 1320,
+        "medURepeatsPerM": 1.656,
+        "medVRepeatsPerM": 1.947,
+        "medUVRepeatsPerM": 2.478,
+        "tileMetersU": 0.604,
+        "tileMetersV": 0.514,
+        "tileMetersUV": 0.404
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "cloth-balaclava",
+        "type": "Mesh",
+        "parentChain": "balaclava > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.94,
+          "y": 0.97,
+          "z": 0.94
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:mask",
+        "matUuid": "52919585-c0a3-4e41-9c92-dbb7e1a96ee5",
+        "matColor": "#81613c",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 297,
+        "medURepeatsPerM": 2,
+        "medVRepeatsPerM": 2.68,
+        "medUVRepeatsPerM": 2.311,
+        "tileMetersU": 0.5,
+        "tileMetersV": 0.373,
+        "tileMetersUV": 0.433
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "balaclava-fitted-hood",
+        "type": "Mesh",
+        "parentChain": "balaclava > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 0,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.94,
+          "y": 0.97,
+          "z": 0.94
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:mask",
+        "matUuid": "52919585-c0a3-4e41-9c92-dbb7e1a96ee5",
+        "matColor": "#81613c",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 363,
+        "medURepeatsPerM": 1.396,
+        "medVRepeatsPerM": 2.97,
+        "medUVRepeatsPerM": 1.596,
+        "tileMetersU": 0.717,
+        "tileMetersV": 0.337,
+        "tileMetersUV": 0.627
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "balaclava > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.94,
+          "y": 0.97,
+          "z": 0.94
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:mask",
+        "matUuid": "52919585-c0a3-4e41-9c92-dbb7e1a96ee5",
+        "matColor": "#81613c",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 245,
+        "medURepeatsPerM": 1.166,
+        "medVRepeatsPerM": 13.941,
+        "medUVRepeatsPerM": 13.751,
+        "tileMetersU": 0.858,
+        "tileMetersV": 0.072,
+        "tileMetersUV": 0.073
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:shirt",
+        "matUuid": "314d89c0-6efa-41b0-ad18-cff360637809",
+        "matColor": "#e2ded0",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 7584,
+        "medURepeatsPerM": 1.893,
+        "medVRepeatsPerM": 2.174,
+        "medUVRepeatsPerM": 2.315,
+        "tileMetersU": 0.528,
+        "tileMetersV": 0.46,
+        "tileMetersUV": 0.432
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:carrier",
+        "matUuid": "01501abc-91a8-4413-b900-aa19aeb821dc",
+        "matColor": "#4c5138",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 3264,
+        "medURepeatsPerM": 18.502,
+        "medVRepeatsPerM": 13.036,
+        "medUVRepeatsPerM": 13.533,
+        "tileMetersU": 0.054,
+        "tileMetersV": 0.077,
+        "tileMetersUV": 0.074
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:carrier",
+        "matUuid": "1e56119b-0904-4e66-85e5-4bdea8fadb0f",
+        "matColor": "#34382c",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 2448,
+        "medURepeatsPerM": 5.717,
+        "medVRepeatsPerM": 11.235,
+        "medUVRepeatsPerM": 5.652,
+        "tileMetersU": 0.175,
+        "tileMetersV": 0.089,
+        "tileMetersUV": 0.177
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:pack",
+        "matUuid": "b0707fb3-1aab-4a16-8f4a-03a4a8b8353f",
+        "matColor": "#5a6b3e",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 1776,
+        "medURepeatsPerM": 3.238,
+        "medVRepeatsPerM": 2.998,
+        "medUVRepeatsPerM": 3.202,
+        "tileMetersU": 0.309,
+        "tileMetersV": 0.334,
+        "tileMetersUV": 0.312
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group",
+        "visible": false,
+        "layersMask": 0,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:pack",
+        "matUuid": "b0707fb3-1aab-4a16-8f4a-03a4a8b8353f",
+        "matColor": "#5a6b3e",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 1536,
+        "medURepeatsPerM": 30.303,
+        "medVRepeatsPerM": 10.434,
+        "medUVRepeatsPerM": 10.57,
+        "tileMetersU": 0.033,
+        "tileMetersV": 0.096,
+        "tileMetersUV": 0.095
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:pack",
+        "matUuid": "b0707fb3-1aab-4a16-8f4a-03a4a8b8353f",
+        "matColor": "#5a6b3e",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 1536,
+        "medURepeatsPerM": 30.303,
+        "medVRepeatsPerM": 9.717,
+        "medUVRepeatsPerM": 9.854,
+        "tileMetersU": 0.033,
+        "tileMetersV": 0.103,
+        "tileMetersUV": 0.101
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:pack",
+        "matUuid": "05b82eb1-ab13-46a6-bcf9-2c49764154f9",
+        "matColor": "#4a5538",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 1956,
+        "medURepeatsPerM": 5.767,
+        "medVRepeatsPerM": 10.87,
+        "medUVRepeatsPerM": 10.833,
+        "tileMetersU": 0.173,
+        "tileMetersV": 0.092,
+        "tileMetersUV": 0.092
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "magazineBody > Group > Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.4638,
+          "y": 0.4638,
+          "z": 0.4638
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:minigun",
+        "matUuid": "fedd7ec4-3cb1-4c51-96e7-d7f485662d72",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 864,
+        "medURepeatsPerM": 4.073,
+        "medVRepeatsPerM": 4.073,
+        "medUVRepeatsPerM": 5.134,
+        "tileMetersU": 0.246,
+        "tileMetersV": 0.246,
+        "tileMetersUV": 0.195
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "magazineBody > Group > Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.4638,
+          "y": 0.4638,
+          "z": 0.4638
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:minigun",
+        "matUuid": "bd4e92be-d146-459f-8a9a-26984cdb77fa",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 1728,
+        "medURepeatsPerM": 4.446,
+        "medVRepeatsPerM": 4.073,
+        "medUVRepeatsPerM": 4.802,
+        "tileMetersU": 0.225,
+        "tileMetersV": 0.246,
+        "tileMetersUV": 0.208
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.4638,
+          "y": 0.4638,
+          "z": 0.4638
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:minigun",
+        "matUuid": "bd4e92be-d146-459f-8a9a-26984cdb77fa",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 1716,
+        "medURepeatsPerM": 4.177,
+        "medVRepeatsPerM": 4.989,
+        "medUVRepeatsPerM": 5.124,
+        "tileMetersU": 0.239,
+        "tileMetersV": 0.2,
+        "tileMetersUV": 0.195
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.6741,
+          "y": 0.6741,
+          "z": 0.6741
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:m4",
+        "matUuid": "fb3154d7-e851-4bf2-ab17-4fdaab5c6f8a",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 804,
+        "medURepeatsPerM": 1.677,
+        "medVRepeatsPerM": 3.128,
+        "medUVRepeatsPerM": 3.513,
+        "tileMetersU": 0.596,
+        "tileMetersV": 0.32,
+        "tileMetersUV": 0.285
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "fp-stock > Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.6741,
+          "y": 0.6741,
+          "z": 0.6741
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:m4",
+        "matUuid": "fb3154d7-e851-4bf2-ab17-4fdaab5c6f8a",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 1032,
+        "medURepeatsPerM": 2.63,
+        "medVRepeatsPerM": 2.801,
+        "medUVRepeatsPerM": 3.525,
+        "tileMetersU": 0.38,
+        "tileMetersV": 0.357,
+        "tileMetersUV": 0.284
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.5296,
+          "y": 0.5296,
+          "z": 0.5296
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:uzi",
+        "matUuid": "7ee80491-2c0b-4200-8bdb-198691c9085b",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 1890,
+        "medURepeatsPerM": 2.501,
+        "medVRepeatsPerM": 3.805,
+        "medUVRepeatsPerM": 4.479,
+        "tileMetersU": 0.4,
+        "tileMetersV": 0.263,
+        "tileMetersUV": 0.223
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": true,
+        "worldScale": {
+          "x": 0.5296,
+          "y": 0.5296,
+          "z": 0.5296
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:uzi",
+        "matUuid": "7ee80491-2c0b-4200-8bdb-198691c9085b",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 1890,
+        "medURepeatsPerM": 2.501,
+        "medVRepeatsPerM": 3.805,
+        "medUVRepeatsPerM": 4.479,
+        "tileMetersU": 0.4,
+        "tileMetersV": 0.263,
+        "tileMetersUV": 0.223
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.7755,
+          "y": 0.7755,
+          "z": 0.7755
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:revolver",
+        "matUuid": "d2e0f2cc-0557-48b5-903d-5450d76e041e",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 4068,
+        "medURepeatsPerM": 2.171,
+        "medVRepeatsPerM": 2.822,
+        "medUVRepeatsPerM": 3.07,
+        "tileMetersU": 0.461,
+        "tileMetersV": 0.354,
+        "tileMetersUV": 0.326
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 0.7755,
+          "y": 0.7755,
+          "z": 0.7755
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:revolver",
+        "matUuid": "7cc33984-e95e-40fc-bc21-a2af12f2c917",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 696,
+        "medURepeatsPerM": 1.119,
+        "medVRepeatsPerM": 2.714,
+        "medUVRepeatsPerM": 3.066,
+        "tileMetersU": 0.894,
+        "tileMetersV": 0.368,
+        "tileMetersUV": 0.326
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": true,
+        "worldScale": {
+          "x": 0.7755,
+          "y": 0.7755,
+          "z": 0.7755
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:revolver",
+        "matUuid": "d2e0f2cc-0557-48b5-903d-5450d76e041e",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 4068,
+        "medURepeatsPerM": 2.171,
+        "medVRepeatsPerM": 2.822,
+        "medUVRepeatsPerM": 3.07,
+        "tileMetersU": 0.461,
+        "tileMetersV": 0.354,
+        "tileMetersUV": 0.326
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": true,
+        "worldScale": {
+          "x": 0.7755,
+          "y": 0.7755,
+          "z": 0.7755
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:revolver",
+        "matUuid": "7cc33984-e95e-40fc-bc21-a2af12f2c917",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 696,
+        "medURepeatsPerM": 1.119,
+        "medVRepeatsPerM": 2.714,
+        "medUVRepeatsPerM": 3.066,
+        "tileMetersU": 0.894,
+        "tileMetersV": 0.368,
+        "tileMetersUV": 0.326
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "live-sleeve",
+        "type": "Mesh",
+        "parentChain": "live-sleeve-live > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:shirt",
+        "matUuid": "314d89c0-6efa-41b0-ad18-cff360637809",
+        "matColor": "#e2ded0",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 5238,
+        "medURepeatsPerM": 1.669,
+        "medVRepeatsPerM": 1.738,
+        "medUVRepeatsPerM": 2.323,
+        "tileMetersU": 0.599,
+        "tileMetersV": 0.575,
+        "tileMetersUV": 0.431
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "live-sleeve-rolled",
+        "type": "Mesh",
+        "parentChain": "live-sleeve-rolled-live > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:shirt",
+        "matUuid": "314d89c0-6efa-41b0-ad18-cff360637809",
+        "matColor": "#e2ded0",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 4338,
+        "medURepeatsPerM": 1.449,
+        "medVRepeatsPerM": 1.876,
+        "medUVRepeatsPerM": 2.333,
+        "tileMetersU": 0.69,
+        "tileMetersV": 0.533,
+        "tileMetersUV": 0.429
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "live-sleeve",
+        "type": "Mesh",
+        "parentChain": "live-sleeve-live > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:shirt",
+        "matUuid": "314d89c0-6efa-41b0-ad18-cff360637809",
+        "matColor": "#e2ded0",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 5238,
+        "medURepeatsPerM": 1.57,
+        "medVRepeatsPerM": 1.925,
+        "medUVRepeatsPerM": 2.31,
+        "tileMetersU": 0.637,
+        "tileMetersV": 0.519,
+        "tileMetersUV": 0.433
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "live-sleeve-rolled",
+        "type": "Mesh",
+        "parentChain": "live-sleeve-rolled-live > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:shirt",
+        "matUuid": "314d89c0-6efa-41b0-ad18-cff360637809",
+        "matColor": "#e2ded0",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 4338,
+        "medURepeatsPerM": 1.432,
+        "medVRepeatsPerM": 1.872,
+        "medUVRepeatsPerM": 2.304,
+        "tileMetersU": 0.698,
+        "tileMetersV": 0.534,
+        "tileMetersUV": 0.434
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "marine-flexible-shirt",
+        "type": "Mesh",
+        "parentChain": "marine-waist-live > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:shirt",
+        "matUuid": "314d89c0-6efa-41b0-ad18-cff360637809",
+        "matColor": "#e2ded0",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 6720,
+        "medURepeatsPerM": 1.806,
+        "medVRepeatsPerM": 1.884,
+        "medUVRepeatsPerM": 2.358,
+        "tileMetersU": 0.554,
+        "tileMetersV": 0.531,
+        "tileMetersUV": 0.424
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "rig-skin",
+        "type": "SkinnedMesh",
+        "parentChain": "Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:trousers",
+        "matUuid": "538f208d-7f45-4a93-9fb9-c758496e2359",
+        "matColor": "#d2cebd",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 2040,
+        "medURepeatsPerM": 1.557,
+        "medVRepeatsPerM": 1.143,
+        "medUVRepeatsPerM": 2.336,
+        "tileMetersU": 0.642,
+        "tileMetersV": 0.875,
+        "tileMetersUV": 0.428
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "rig-skin",
+        "type": "SkinnedMesh",
+        "parentChain": "Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:holster",
+        "matUuid": "d42b8e25-8a26-4f30-8921-d0276e4b12d2",
+        "matColor": "#34382c",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 72,
+        "medURepeatsPerM": 12.195,
+        "medVRepeatsPerM": 9.524,
+        "medUVRepeatsPerM": 13.382,
+        "tileMetersU": 0.082,
+        "tileMetersV": 0.105,
+        "tileMetersUV": 0.075
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "rig-skin",
+        "type": "SkinnedMesh",
+        "parentChain": "Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:belt",
+        "matUuid": "d80f1020-5b8d-47a2-b6b1-438b51307d5c",
+        "matColor": "#2b2e24",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 1572,
+        "medURepeatsPerM": 11.235,
+        "medVRepeatsPerM": 9.505,
+        "medUVRepeatsPerM": 11.759,
+        "tileMetersU": 0.089,
+        "tileMetersV": 0.105,
+        "tileMetersUV": 0.085
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "rig-skin",
+        "type": "SkinnedMesh",
+        "parentChain": "Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:belt",
+        "matUuid": "d80f1020-5b8d-47a2-b6b1-438b51307d5c",
+        "matColor": "#2b2e24",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 144,
+        "medURepeatsPerM": 41.666,
+        "medVRepeatsPerM": 0,
+        "medUVRepeatsPerM": 41.666,
+        "tileMetersU": 0.024,
+        "tileMetersV": null,
+        "tileMetersUV": 0.024
+      },
+      {
+        "label": "marine-unarmed",
+        "name": "rig-skin",
+        "type": "SkinnedMesh",
+        "parentChain": "Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "wear:shirt",
+        "matUuid": "314d89c0-6efa-41b0-ad18-cff360637809",
+        "matColor": "#e2ded0",
+        "vertexColors": true,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 5640,
+        "medURepeatsPerM": 13.399,
+        "medVRepeatsPerM": 22.887,
+        "medUVRepeatsPerM": 36.995,
+        "tileMetersU": 0.075,
+        "tileMetersV": 0.044,
+        "tileMetersUV": 0.027
+      }
+    ]
+  },
+  "uniform_vm_m4": {
+    "vmActive": true,
+    "vmArmR_UVs": [
+      {
+        "label": "vm-arm-r",
+        "name": "vm-forearm",
+        "type": "Mesh",
+        "parentChain": "vm-sleeve > vm-arm-r > vm-space > viewmodel",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": -1,
+          "y": 1,
+          "z": 1
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "vm:wear:shirt",
+        "matUuid": "bd07c220-d5a7-4c1d-bb2e-8752ee02688b",
+        "matColor": "#e2ded0",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 528,
+        "medURepeatsPerM": 3.405,
+        "medVRepeatsPerM": 2.963,
+        "medUVRepeatsPerM": 2.993,
+        "tileMetersU": 0.294,
+        "tileMetersV": 0.337,
+        "tileMetersUV": 0.334
+      },
+      {
+        "label": "vm-arm-r",
+        "name": "vm-cuff",
+        "type": "Mesh",
+        "parentChain": "vm-sleeve > vm-arm-r > vm-space > viewmodel",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": -1,
+          "y": 1,
+          "z": 1
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "vm:wear:shirt",
+        "matUuid": "bd07c220-d5a7-4c1d-bb2e-8752ee02688b",
+        "matColor": "#e2ded0",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 126,
+        "medURepeatsPerM": 4.637,
+        "medVRepeatsPerM": 2.746,
+        "medUVRepeatsPerM": 3.789,
+        "tileMetersU": 0.216,
+        "tileMetersV": 0.364,
+        "tileMetersUV": 0.264
+      },
+      {
+        "label": "vm-arm-r",
+        "name": "vm-hand-glove-main",
+        "type": "Mesh",
+        "parentChain": "vm-hand-glove > vm-wrist > vm-arm-r > vm-space > viewmodel",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": -1.18,
+          "y": 1.18,
+          "z": 1.18
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "vm:wear:gloves",
+        "matUuid": "ef263db0-2827-4337-a96f-04ba41a2e0ac",
+        "matColor": "#2a2c24",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 2496,
+        "medURepeatsPerM": 1.82,
+        "medVRepeatsPerM": 1.897,
+        "medUVRepeatsPerM": 2.017,
+        "tileMetersU": 0.549,
+        "tileMetersV": 0.527,
+        "tileMetersUV": 0.496
+      }
+    ],
+    "vmArmL_UVs": [
+      {
+        "label": "vm-arm-l",
+        "name": "vm-forearm",
+        "type": "Mesh",
+        "parentChain": "vm-sleeve > vm-arm-l > vm-space > viewmodel",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": -1,
+          "y": 1,
+          "z": 1
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "vm:wear:shirt",
+        "matUuid": "bd07c220-d5a7-4c1d-bb2e-8752ee02688b",
+        "matColor": "#e2ded0",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 528,
+        "medURepeatsPerM": 3.405,
+        "medVRepeatsPerM": 2.96,
+        "medUVRepeatsPerM": 2.989,
+        "tileMetersU": 0.294,
+        "tileMetersV": 0.338,
+        "tileMetersUV": 0.335
+      },
+      {
+        "label": "vm-arm-l",
+        "name": "vm-cuff",
+        "type": "Mesh",
+        "parentChain": "vm-sleeve > vm-arm-l > vm-space > viewmodel",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": -1,
+          "y": 1,
+          "z": 1
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "vm:wear:shirt",
+        "matUuid": "bd07c220-d5a7-4c1d-bb2e-8752ee02688b",
+        "matColor": "#e2ded0",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 126,
+        "medURepeatsPerM": 4.637,
+        "medVRepeatsPerM": 2.746,
+        "medUVRepeatsPerM": 3.789,
+        "tileMetersU": 0.216,
+        "tileMetersV": 0.364,
+        "tileMetersUV": 0.264
+      },
+      {
+        "label": "vm-arm-l",
+        "name": "vm-hand-glove-main",
+        "type": "Mesh",
+        "parentChain": "vm-hand-glove > vm-wrist > vm-arm-l > vm-space > viewmodel",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": -1.18,
+          "y": 1.18,
+          "z": 1.18
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "vm:wear:gloves",
+        "matUuid": "ef263db0-2827-4337-a96f-04ba41a2e0ac",
+        "matColor": "#2a2c24",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": true,
+        "hasRoughnessMap": true,
+        "vertCount": 2496,
+        "medURepeatsPerM": 1.82,
+        "medVRepeatsPerM": 1.897,
+        "medUVRepeatsPerM": 2.017,
+        "tileMetersU": 0.549,
+        "tileMetersV": 0.527,
+        "tileMetersUV": 0.496
+      }
+    ],
+    "vmGun_UVs": [
+      {
+        "label": "vm-gun-m4",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > vm-gun > vm-space > viewmodel",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": -0.6741,
+          "y": 0.6741,
+          "z": 0.6741
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "vm:furniture:m4",
+        "matUuid": "0e1e5e7d-fbce-4535-afe1-290b4fc05d58",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 804,
+        "medURepeatsPerM": 1.677,
+        "medVRepeatsPerM": 3.128,
+        "medUVRepeatsPerM": 3.513,
+        "tileMetersU": 0.596,
+        "tileMetersV": 0.32,
+        "tileMetersUV": 0.285
+      }
+    ],
+    "bodyGun_UVs": [
+      {
+        "label": "body-gun-m4",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": true,
+        "worldScale": {
+          "x": 0.6741,
+          "y": 0.6741,
+          "z": 0.6741
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:m4",
+        "matUuid": "fb3154d7-e851-4bf2-ab17-4fdaab5c6f8a",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 804,
+        "medURepeatsPerM": 1.677,
+        "medVRepeatsPerM": 3.128,
+        "medUVRepeatsPerM": 3.513,
+        "tileMetersU": 0.596,
+        "tileMetersV": 0.32,
+        "tileMetersUV": 0.285
+      },
+      {
+        "label": "body-gun-m4",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "fp-stock > Group > Group > Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": true,
+        "worldScale": {
+          "x": 0.6741,
+          "y": 0.6741,
+          "z": 0.6741
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:m4",
+        "matUuid": "fb3154d7-e851-4bf2-ab17-4fdaab5c6f8a",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 1032,
+        "medURepeatsPerM": 2.63,
+        "medVRepeatsPerM": 2.801,
+        "medUVRepeatsPerM": 3.525,
+        "tileMetersU": 0.38,
+        "tileMetersV": 0.357,
+        "tileMetersUV": 0.284
+      }
+    ]
+  },
+  "uniform_and_gun_body_m4_pop": {
+    "vmActive": true,
+    "bodyGunScale": {
+      "x": 0.6741,
+      "y": 0.6741,
+      "z": 0.6741
+    },
+    "bodyGun_UVs": [
+      {
+        "label": "body-gun-m4-in-1p",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": true,
+        "worldScale": {
+          "x": 0.6741,
+          "y": 0.6741,
+          "z": 0.6741
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:m4",
+        "matUuid": "fb3154d7-e851-4bf2-ab17-4fdaab5c6f8a",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 804,
+        "medURepeatsPerM": 1.677,
+        "medVRepeatsPerM": 3.128,
+        "medUVRepeatsPerM": 3.513,
+        "tileMetersU": 0.596,
+        "tileMetersV": 0.32,
+        "tileMetersUV": 0.285
+      },
+      {
+        "label": "body-gun-m4-in-1p",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "fp-stock > Group > Group > Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": true,
+        "worldScale": {
+          "x": 0.6741,
+          "y": 0.6741,
+          "z": 0.6741
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:m4",
+        "matUuid": "fb3154d7-e851-4bf2-ab17-4fdaab5c6f8a",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 1032,
+        "medURepeatsPerM": 2.63,
+        "medVRepeatsPerM": 2.801,
+        "medUVRepeatsPerM": 3.525,
+        "tileMetersU": 0.38,
+        "tileMetersV": 0.357,
+        "tileMetersUV": 0.284
+      }
+    ]
+  },
+  "ak_vm_1p": {
+    "vmActive": true,
+    "vmGun_UVs": [
+      {
+        "label": "vm-gun-ak",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > vm-gun > vm-space > viewmodel",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": -0.6864,
+          "y": 0.6864,
+          "z": 0.6864
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "vm:furniture:ak",
+        "matUuid": "3169a78f-c504-4ffd-86a0-7ecd8a2a046d",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 1188,
+        "medURepeatsPerM": 1.969,
+        "medVRepeatsPerM": 2.943,
+        "medUVRepeatsPerM": 3.458,
+        "tileMetersU": 0.508,
+        "tileMetersV": 0.34,
+        "tileMetersUV": 0.289
+      },
+      {
+        "label": "vm-gun-ak",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > vm-gun > vm-space > viewmodel",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": -0.6864,
+          "y": 0.6864,
+          "z": 0.6864
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "vm:furniture:ak",
+        "matUuid": "ec5206c9-4db1-4dd3-8479-98ac604bd0de",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 960,
+        "medURepeatsPerM": 2.546,
+        "medVRepeatsPerM": 3.291,
+        "medUVRepeatsPerM": 3.466,
+        "tileMetersU": 0.393,
+        "tileMetersV": 0.304,
+        "tileMetersUV": 0.289
+      }
+    ]
+  },
+  "sniper_ads_before_pop": {
+    "ads": 0.717,
+    "vmActive": true,
+    "vmGun_UVs": [
+      {
+        "label": "vm-gun-sniper",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > vm-gun > vm-space > viewmodel",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": -0.7233,
+          "y": 0.7233,
+          "z": 0.7233
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "vm:furniture:sniper",
+        "matUuid": "98884881-4296-4472-95e8-b12363225f99",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 648,
+        "medURepeatsPerM": 2.096,
+        "medVRepeatsPerM": 2.714,
+        "medUVRepeatsPerM": 3.256,
+        "tileMetersU": 0.477,
+        "tileMetersV": 0.368,
+        "tileMetersUV": 0.307
+      },
+      {
+        "label": "vm-gun-sniper",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > vm-gun > vm-space > viewmodel",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": -0.7233,
+          "y": 0.7233,
+          "z": 0.7233
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "vm:furniture:sniper",
+        "matUuid": "a130c911-36d0-4c6c-be98-9750b82c4021",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 3396,
+        "medURepeatsPerM": 2.234,
+        "medVRepeatsPerM": 3.258,
+        "medUVRepeatsPerM": 3.291,
+        "tileMetersU": 0.448,
+        "tileMetersV": 0.307,
+        "tileMetersUV": 0.304
+      }
+    ]
+  },
+  "sniper_ads_after_pop": {
+    "ads": 1,
+    "vmActive": true
+  },
+  "armory_rack_comparison": {
+    "rackUVs": [],
+    "vmShotgunUVs": [
+      {
+        "label": "vm-shotgun",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > vm-gun > vm-space > viewmodel",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": -0.7935,
+          "y": 0.7935,
+          "z": 0.7935
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "vm:furniture:shotgun",
+        "matUuid": "462ed7fe-7f74-456b-94b4-e7423341c6e6",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 1836,
+        "medURepeatsPerM": 2.065,
+        "medVRepeatsPerM": 2.829,
+        "medUVRepeatsPerM": 3,
+        "tileMetersU": 0.484,
+        "tileMetersV": 0.353,
+        "tileMetersUV": 0.333
+      },
+      {
+        "label": "vm-shotgun",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > vm-gun > vm-space > viewmodel",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": false,
+        "worldScale": {
+          "x": -0.7935,
+          "y": 0.7935,
+          "z": 0.7935
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "vm:furniture:shotgun",
+        "matUuid": "462ed7fe-7f74-456b-94b4-e7423341c6e6",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 1032,
+        "medURepeatsPerM": 1.802,
+        "medVRepeatsPerM": 2.459,
+        "medUVRepeatsPerM": 2.989,
+        "tileMetersU": 0.555,
+        "tileMetersV": 0.407,
+        "tileMetersUV": 0.335
+      }
+    ],
+    "allWeaponsBodyUVs": {
+      "minigun": [
+        {
+          "label": "weaponMeshes:minigun",
+          "name": "(unnamed)",
+          "type": "Mesh",
+          "parentChain": "magazineBody > Group > Group > Group > Group > Group > Group > Group > Group > Group > Group",
+          "visible": true,
+          "layersMask": 1,
+          "vmEyeHide": true,
+          "worldScale": {
+            "x": 0.88,
+            "y": 0.88,
+            "z": 0.88
+          },
+          "localScale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          },
+          "matName": "furniture:minigun",
+          "matUuid": "fedd7ec4-3cb1-4c51-96e7-d7f485662d72",
+          "matColor": "#e6e2d6",
+          "vertexColors": false,
+          "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+          "texSize": {
+            "w": 256,
+            "h": 256
+          },
+          "texRepeat": {
+            "x": 1,
+            "y": 1
+          },
+          "generateMipmaps": true,
+          "minFilter": 1008,
+          "magFilter": 1006,
+          "hasBumpMap": false,
+          "hasRoughnessMap": false,
+          "vertCount": 864,
+          "medURepeatsPerM": 2.147,
+          "medVRepeatsPerM": 2.147,
+          "medUVRepeatsPerM": 2.706,
+          "tileMetersU": 0.466,
+          "tileMetersV": 0.466,
+          "tileMetersUV": 0.37
+        },
+        {
+          "label": "weaponMeshes:minigun",
+          "name": "(unnamed)",
+          "type": "Mesh",
+          "parentChain": "magazineBody > Group > Group > Group > Group > Group > Group > Group > Group > Group > Group",
+          "visible": true,
+          "layersMask": 1,
+          "vmEyeHide": true,
+          "worldScale": {
+            "x": 0.88,
+            "y": 0.88,
+            "z": 0.88
+          },
+          "localScale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          },
+          "matName": "furniture:minigun",
+          "matUuid": "bd4e92be-d146-459f-8a9a-26984cdb77fa",
+          "matColor": "#e6e2d6",
+          "vertexColors": false,
+          "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+          "texSize": {
+            "w": 256,
+            "h": 256
+          },
+          "texRepeat": {
+            "x": 1,
+            "y": 1
+          },
+          "generateMipmaps": true,
+          "minFilter": 1008,
+          "magFilter": 1006,
+          "hasBumpMap": false,
+          "hasRoughnessMap": false,
+          "vertCount": 1728,
+          "medURepeatsPerM": 2.343,
+          "medVRepeatsPerM": 2.147,
+          "medUVRepeatsPerM": 2.531,
+          "tileMetersU": 0.427,
+          "tileMetersV": 0.466,
+          "tileMetersUV": 0.395
+        },
+        {
+          "label": "weaponMeshes:minigun",
+          "name": "(unnamed)",
+          "type": "Mesh",
+          "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group",
+          "visible": true,
+          "layersMask": 1,
+          "vmEyeHide": true,
+          "worldScale": {
+            "x": 0.88,
+            "y": 0.88,
+            "z": 0.88
+          },
+          "localScale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          },
+          "matName": "furniture:minigun",
+          "matUuid": "bd4e92be-d146-459f-8a9a-26984cdb77fa",
+          "matColor": "#e6e2d6",
+          "vertexColors": false,
+          "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+          "texSize": {
+            "w": 256,
+            "h": 256
+          },
+          "texRepeat": {
+            "x": 1,
+            "y": 1
+          },
+          "generateMipmaps": true,
+          "minFilter": 1008,
+          "magFilter": 1006,
+          "hasBumpMap": false,
+          "hasRoughnessMap": false,
+          "vertCount": 1716,
+          "medURepeatsPerM": 2.201,
+          "medVRepeatsPerM": 2.629,
+          "medUVRepeatsPerM": 2.7,
+          "tileMetersU": 0.454,
+          "tileMetersV": 0.38,
+          "tileMetersUV": 0.37
+        }
+      ],
+      "m4": [
+        {
+          "label": "weaponMeshes:m4",
+          "name": "(unnamed)",
+          "type": "Mesh",
+          "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group",
+          "visible": true,
+          "layersMask": 1,
+          "vmEyeHide": true,
+          "worldScale": {
+            "x": 0.6741,
+            "y": 0.6741,
+            "z": 0.6741
+          },
+          "localScale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          },
+          "matName": "furniture:m4",
+          "matUuid": "fb3154d7-e851-4bf2-ab17-4fdaab5c6f8a",
+          "matColor": "#e6e2d6",
+          "vertexColors": false,
+          "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+          "texSize": {
+            "w": 256,
+            "h": 256
+          },
+          "texRepeat": {
+            "x": 1,
+            "y": 1
+          },
+          "generateMipmaps": true,
+          "minFilter": 1008,
+          "magFilter": 1006,
+          "hasBumpMap": false,
+          "hasRoughnessMap": false,
+          "vertCount": 804,
+          "medURepeatsPerM": 1.677,
+          "medVRepeatsPerM": 3.128,
+          "medUVRepeatsPerM": 3.513,
+          "tileMetersU": 0.596,
+          "tileMetersV": 0.32,
+          "tileMetersUV": 0.285
+        },
+        {
+          "label": "weaponMeshes:m4",
+          "name": "(unnamed)",
+          "type": "Mesh",
+          "parentChain": "fp-stock > Group > Group > Group > Group > Group > Group > Group > Group > Group",
+          "visible": true,
+          "layersMask": 1,
+          "vmEyeHide": true,
+          "worldScale": {
+            "x": 0.6741,
+            "y": 0.6741,
+            "z": 0.6741
+          },
+          "localScale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          },
+          "matName": "furniture:m4",
+          "matUuid": "fb3154d7-e851-4bf2-ab17-4fdaab5c6f8a",
+          "matColor": "#e6e2d6",
+          "vertexColors": false,
+          "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+          "texSize": {
+            "w": 256,
+            "h": 256
+          },
+          "texRepeat": {
+            "x": 1,
+            "y": 1
+          },
+          "generateMipmaps": true,
+          "minFilter": 1008,
+          "magFilter": 1006,
+          "hasBumpMap": false,
+          "hasRoughnessMap": false,
+          "vertCount": 1032,
+          "medURepeatsPerM": 2.63,
+          "medVRepeatsPerM": 2.801,
+          "medUVRepeatsPerM": 3.525,
+          "tileMetersU": 0.38,
+          "tileMetersV": 0.357,
+          "tileMetersUV": 0.284
+        }
+      ],
+      "ak": [
+        {
+          "label": "weaponMeshes:ak",
+          "name": "(unnamed)",
+          "type": "Mesh",
+          "parentChain": "fp-stock > Group > Group > Group > Group > Group > Group > Group > Group > Group",
+          "visible": true,
+          "layersMask": 1,
+          "vmEyeHide": true,
+          "worldScale": {
+            "x": 0.6864,
+            "y": 0.6864,
+            "z": 0.6864
+          },
+          "localScale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          },
+          "matName": "furniture:ak",
+          "matUuid": "bf3f1ef7-81ea-4496-9f9d-4118e28e08c3",
+          "matColor": "#e6e2d6",
+          "vertexColors": false,
+          "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+          "texSize": {
+            "w": 256,
+            "h": 256
+          },
+          "texRepeat": {
+            "x": 1,
+            "y": 1
+          },
+          "generateMipmaps": true,
+          "minFilter": 1008,
+          "magFilter": 1006,
+          "hasBumpMap": false,
+          "hasRoughnessMap": false,
+          "vertCount": 1092,
+          "medURepeatsPerM": 3.097,
+          "medVRepeatsPerM": 1.806,
+          "medUVRepeatsPerM": 3.448,
+          "tileMetersU": 0.323,
+          "tileMetersV": 0.554,
+          "tileMetersUV": 0.29
+        },
+        {
+          "label": "weaponMeshes:ak",
+          "name": "(unnamed)",
+          "type": "Mesh",
+          "parentChain": "fp-stock > Group > Group > Group > Group > Group > Group > Group > Group > Group",
+          "visible": true,
+          "layersMask": 1,
+          "vmEyeHide": true,
+          "worldScale": {
+            "x": 0.6864,
+            "y": 0.6864,
+            "z": 0.6864
+          },
+          "localScale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          },
+          "matName": "furniture:ak",
+          "matUuid": "a12a620e-5b14-45b3-a489-152c11c4a20b",
+          "matColor": "#e6e2d6",
+          "vertexColors": false,
+          "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+          "texSize": {
+            "w": 256,
+            "h": 256
+          },
+          "texRepeat": {
+            "x": 1,
+            "y": 1
+          },
+          "generateMipmaps": true,
+          "minFilter": 1008,
+          "magFilter": 1006,
+          "hasBumpMap": false,
+          "hasRoughnessMap": false,
+          "vertCount": 288,
+          "medURepeatsPerM": 3.401,
+          "medVRepeatsPerM": 3.374,
+          "medUVRepeatsPerM": 3.469,
+          "tileMetersU": 0.294,
+          "tileMetersV": 0.296,
+          "tileMetersUV": 0.288
+        },
+        {
+          "label": "weaponMeshes:ak",
+          "name": "(unnamed)",
+          "type": "Mesh",
+          "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group",
+          "visible": true,
+          "layersMask": 1,
+          "vmEyeHide": true,
+          "worldScale": {
+            "x": 0.6864,
+            "y": 0.6864,
+            "z": 0.6864
+          },
+          "localScale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          },
+          "matName": "furniture:ak",
+          "matUuid": "bf3f1ef7-81ea-4496-9f9d-4118e28e08c3",
+          "matColor": "#e6e2d6",
+          "vertexColors": false,
+          "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+          "texSize": {
+            "w": 256,
+            "h": 256
+          },
+          "texRepeat": {
+            "x": 1,
+            "y": 1
+          },
+          "generateMipmaps": true,
+          "minFilter": 1008,
+          "magFilter": 1006,
+          "hasBumpMap": false,
+          "hasRoughnessMap": false,
+          "vertCount": 1188,
+          "medURepeatsPerM": 1.969,
+          "medVRepeatsPerM": 2.943,
+          "medUVRepeatsPerM": 3.458,
+          "tileMetersU": 0.508,
+          "tileMetersV": 0.34,
+          "tileMetersUV": 0.289
+        },
+        {
+          "label": "weaponMeshes:ak",
+          "name": "(unnamed)",
+          "type": "Mesh",
+          "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group",
+          "visible": true,
+          "layersMask": 1,
+          "vmEyeHide": true,
+          "worldScale": {
+            "x": 0.6864,
+            "y": 0.6864,
+            "z": 0.6864
+          },
+          "localScale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          },
+          "matName": "furniture:ak",
+          "matUuid": "a12a620e-5b14-45b3-a489-152c11c4a20b",
+          "matColor": "#e6e2d6",
+          "vertexColors": false,
+          "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+          "texSize": {
+            "w": 256,
+            "h": 256
+          },
+          "texRepeat": {
+            "x": 1,
+            "y": 1
+          },
+          "generateMipmaps": true,
+          "minFilter": 1008,
+          "magFilter": 1006,
+          "hasBumpMap": false,
+          "hasRoughnessMap": false,
+          "vertCount": 960,
+          "medURepeatsPerM": 2.546,
+          "medVRepeatsPerM": 3.291,
+          "medUVRepeatsPerM": 3.466,
+          "tileMetersU": 0.393,
+          "tileMetersV": 0.304,
+          "tileMetersUV": 0.289
+        }
+      ],
+      "pistol": [
+        {
+          "label": "weaponMeshes:pistol",
+          "name": "(unnamed)",
+          "type": "Mesh",
+          "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group > Group",
+          "visible": true,
+          "layersMask": 1,
+          "vmEyeHide": true,
+          "worldScale": {
+            "x": 0.6333,
+            "y": 0.6333,
+            "z": 0.6333
+          },
+          "localScale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          },
+          "matName": "furniture:pistol",
+          "matUuid": "b31bdd9d-9bdd-45c4-b532-a59b8bb51af4",
+          "matColor": "#e6e2d6",
+          "vertexColors": false,
+          "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+          "texSize": {
+            "w": 256,
+            "h": 256
+          },
+          "texRepeat": {
+            "x": 1,
+            "y": 1
+          },
+          "generateMipmaps": true,
+          "minFilter": 1008,
+          "magFilter": 1006,
+          "hasBumpMap": false,
+          "hasRoughnessMap": false,
+          "vertCount": 144,
+          "medURepeatsPerM": 3.742,
+          "medVRepeatsPerM": 1.217,
+          "medUVRepeatsPerM": 3.756,
+          "tileMetersU": 0.267,
+          "tileMetersV": 0.822,
+          "tileMetersUV": 0.266
+        },
+        {
+          "label": "weaponMeshes:pistol",
+          "name": "(unnamed)",
+          "type": "Mesh",
+          "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group",
+          "visible": true,
+          "layersMask": 1,
+          "vmEyeHide": true,
+          "worldScale": {
+            "x": 0.6333,
+            "y": 0.6333,
+            "z": 0.6333
+          },
+          "localScale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          },
+          "matName": "furniture:pistol",
+          "matUuid": "b31bdd9d-9bdd-45c4-b532-a59b8bb51af4",
+          "matColor": "#e6e2d6",
+          "vertexColors": false,
+          "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+          "texSize": {
+            "w": 256,
+            "h": 256
+          },
+          "texRepeat": {
+            "x": 1,
+            "y": 1
+          },
+          "generateMipmaps": true,
+          "minFilter": 1008,
+          "magFilter": 1006,
+          "hasBumpMap": false,
+          "hasRoughnessMap": false,
+          "vertCount": 3024,
+          "medURepeatsPerM": 2.232,
+          "medVRepeatsPerM": 3.037,
+          "medUVRepeatsPerM": 3.739,
+          "tileMetersU": 0.448,
+          "tileMetersV": 0.329,
+          "tileMetersUV": 0.267
+        }
+      ],
+      "uzi": [
+        {
+          "label": "weaponMeshes:uzi",
+          "name": "(unnamed)",
+          "type": "Mesh",
+          "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group",
+          "visible": true,
+          "layersMask": 1,
+          "vmEyeHide": true,
+          "worldScale": {
+            "x": 0.5296,
+            "y": 0.5296,
+            "z": 0.5296
+          },
+          "localScale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          },
+          "matName": "furniture:uzi",
+          "matUuid": "7ee80491-2c0b-4200-8bdb-198691c9085b",
+          "matColor": "#e6e2d6",
+          "vertexColors": false,
+          "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+          "texSize": {
+            "w": 256,
+            "h": 256
+          },
+          "texRepeat": {
+            "x": 1,
+            "y": 1
+          },
+          "generateMipmaps": true,
+          "minFilter": 1008,
+          "magFilter": 1006,
+          "hasBumpMap": false,
+          "hasRoughnessMap": false,
+          "vertCount": 1890,
+          "medURepeatsPerM": 2.501,
+          "medVRepeatsPerM": 3.805,
+          "medUVRepeatsPerM": 4.479,
+          "tileMetersU": 0.4,
+          "tileMetersV": 0.263,
+          "tileMetersUV": 0.223
+        }
+      ],
+      "shotgun": [
+        {
+          "label": "weaponMeshes:shotgun",
+          "name": "(unnamed)",
+          "type": "Mesh",
+          "parentChain": "fp-stock > Group > Group > Group > Group > Group > Group > Group > Group > Group",
+          "visible": true,
+          "layersMask": 1,
+          "vmEyeHide": true,
+          "worldScale": {
+            "x": 0.7935,
+            "y": 0.7935,
+            "z": 0.7935
+          },
+          "localScale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          },
+          "matName": "furniture:shotgun",
+          "matUuid": "83b9d489-1bf4-4371-8dda-df4e260969fa",
+          "matColor": "#e6e2d6",
+          "vertexColors": false,
+          "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+          "texSize": {
+            "w": 256,
+            "h": 256
+          },
+          "texRepeat": {
+            "x": 1,
+            "y": 1
+          },
+          "generateMipmaps": true,
+          "minFilter": 1008,
+          "magFilter": 1006,
+          "hasBumpMap": false,
+          "hasRoughnessMap": false,
+          "vertCount": 1320,
+          "medURepeatsPerM": 2.538,
+          "medVRepeatsPerM": 1.921,
+          "medUVRepeatsPerM": 2.995,
+          "tileMetersU": 0.394,
+          "tileMetersV": 0.521,
+          "tileMetersUV": 0.334
+        },
+        {
+          "label": "weaponMeshes:shotgun",
+          "name": "(unnamed)",
+          "type": "Mesh",
+          "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group > Group",
+          "visible": true,
+          "layersMask": 1,
+          "vmEyeHide": true,
+          "worldScale": {
+            "x": 0.7935,
+            "y": 0.7935,
+            "z": 0.7935
+          },
+          "localScale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          },
+          "matName": "furniture:shotgun",
+          "matUuid": "83b9d489-1bf4-4371-8dda-df4e260969fa",
+          "matColor": "#e6e2d6",
+          "vertexColors": false,
+          "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+          "texSize": {
+            "w": 256,
+            "h": 256
+          },
+          "texRepeat": {
+            "x": 1,
+            "y": 1
+          },
+          "generateMipmaps": true,
+          "minFilter": 1008,
+          "magFilter": 1006,
+          "hasBumpMap": false,
+          "hasRoughnessMap": false,
+          "vertCount": 1836,
+          "medURepeatsPerM": 2.065,
+          "medVRepeatsPerM": 2.829,
+          "medUVRepeatsPerM": 3,
+          "tileMetersU": 0.484,
+          "tileMetersV": 0.353,
+          "tileMetersUV": 0.333
+        },
+        {
+          "label": "weaponMeshes:shotgun",
+          "name": "(unnamed)",
+          "type": "Mesh",
+          "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group",
+          "visible": true,
+          "layersMask": 1,
+          "vmEyeHide": true,
+          "worldScale": {
+            "x": 0.7935,
+            "y": 0.7935,
+            "z": 0.7935
+          },
+          "localScale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          },
+          "matName": "furniture:shotgun",
+          "matUuid": "83b9d489-1bf4-4371-8dda-df4e260969fa",
+          "matColor": "#e6e2d6",
+          "vertexColors": false,
+          "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+          "texSize": {
+            "w": 256,
+            "h": 256
+          },
+          "texRepeat": {
+            "x": 1,
+            "y": 1
+          },
+          "generateMipmaps": true,
+          "minFilter": 1008,
+          "magFilter": 1006,
+          "hasBumpMap": false,
+          "hasRoughnessMap": false,
+          "vertCount": 1032,
+          "medURepeatsPerM": 1.802,
+          "medVRepeatsPerM": 2.459,
+          "medUVRepeatsPerM": 2.989,
+          "tileMetersU": 0.555,
+          "tileMetersV": 0.407,
+          "tileMetersUV": 0.335
+        }
+      ],
+      "aa12": [
+        {
+          "label": "weaponMeshes:aa12",
+          "name": "(unnamed)",
+          "type": "Mesh",
+          "parentChain": "fp-stock > Group > Group > Group > Group > Group > Group > Group > Group > Group",
+          "visible": true,
+          "layersMask": 1,
+          "vmEyeHide": true,
+          "worldScale": {
+            "x": 0.6843,
+            "y": 0.6843,
+            "z": 0.6843
+          },
+          "localScale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          },
+          "matName": "furniture:aa12",
+          "matUuid": "6ed0f3b0-025b-4116-a695-f382c72b12e5",
+          "matColor": "#e6e2d6",
+          "vertexColors": false,
+          "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+          "texSize": {
+            "w": 256,
+            "h": 256
+          },
+          "texRepeat": {
+            "x": 1,
+            "y": 1
+          },
+          "generateMipmaps": true,
+          "minFilter": 1008,
+          "magFilter": 1006,
+          "hasBumpMap": false,
+          "hasRoughnessMap": false,
+          "vertCount": 1068,
+          "medURepeatsPerM": 2.576,
+          "medVRepeatsPerM": 2.901,
+          "medUVRepeatsPerM": 3.478,
+          "tileMetersU": 0.388,
+          "tileMetersV": 0.345,
+          "tileMetersUV": 0.288
+        },
+        {
+          "label": "weaponMeshes:aa12",
+          "name": "(unnamed)",
+          "type": "Mesh",
+          "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group",
+          "visible": true,
+          "layersMask": 1,
+          "vmEyeHide": true,
+          "worldScale": {
+            "x": 0.6843,
+            "y": 0.6843,
+            "z": 0.6843
+          },
+          "localScale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          },
+          "matName": "furniture:aa12",
+          "matUuid": "6ed0f3b0-025b-4116-a695-f382c72b12e5",
+          "matColor": "#e6e2d6",
+          "vertexColors": false,
+          "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+          "texSize": {
+            "w": 256,
+            "h": 256
+          },
+          "texRepeat": {
+            "x": 1,
+            "y": 1
+          },
+          "generateMipmaps": true,
+          "minFilter": 1008,
+          "magFilter": 1006,
+          "hasBumpMap": false,
+          "hasRoughnessMap": false,
+          "vertCount": 1728,
+          "medURepeatsPerM": 2.177,
+          "medVRepeatsPerM": 3.232,
+          "medUVRepeatsPerM": 3.472,
+          "tileMetersU": 0.459,
+          "tileMetersV": 0.309,
+          "tileMetersUV": 0.288
+        }
+      ],
+      "revolver": [
+        {
+          "label": "weaponMeshes:revolver",
+          "name": "(unnamed)",
+          "type": "Mesh",
+          "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group",
+          "visible": true,
+          "layersMask": 1,
+          "vmEyeHide": true,
+          "worldScale": {
+            "x": 0.7755,
+            "y": 0.7755,
+            "z": 0.7755
+          },
+          "localScale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          },
+          "matName": "furniture:revolver",
+          "matUuid": "d2e0f2cc-0557-48b5-903d-5450d76e041e",
+          "matColor": "#e6e2d6",
+          "vertexColors": false,
+          "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+          "texSize": {
+            "w": 256,
+            "h": 256
+          },
+          "texRepeat": {
+            "x": 1,
+            "y": 1
+          },
+          "generateMipmaps": true,
+          "minFilter": 1008,
+          "magFilter": 1006,
+          "hasBumpMap": false,
+          "hasRoughnessMap": false,
+          "vertCount": 4068,
+          "medURepeatsPerM": 2.171,
+          "medVRepeatsPerM": 2.822,
+          "medUVRepeatsPerM": 3.07,
+          "tileMetersU": 0.461,
+          "tileMetersV": 0.354,
+          "tileMetersUV": 0.326
+        },
+        {
+          "label": "weaponMeshes:revolver",
+          "name": "(unnamed)",
+          "type": "Mesh",
+          "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group",
+          "visible": true,
+          "layersMask": 1,
+          "vmEyeHide": true,
+          "worldScale": {
+            "x": 0.7755,
+            "y": 0.7755,
+            "z": 0.7755
+          },
+          "localScale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          },
+          "matName": "furniture:revolver",
+          "matUuid": "7cc33984-e95e-40fc-bc21-a2af12f2c917",
+          "matColor": "#e6e2d6",
+          "vertexColors": false,
+          "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+          "texSize": {
+            "w": 256,
+            "h": 256
+          },
+          "texRepeat": {
+            "x": 1,
+            "y": 1
+          },
+          "generateMipmaps": true,
+          "minFilter": 1008,
+          "magFilter": 1006,
+          "hasBumpMap": false,
+          "hasRoughnessMap": false,
+          "vertCount": 696,
+          "medURepeatsPerM": 1.119,
+          "medVRepeatsPerM": 2.714,
+          "medUVRepeatsPerM": 3.066,
+          "tileMetersU": 0.894,
+          "tileMetersV": 0.368,
+          "tileMetersUV": 0.326
+        }
+      ],
+      "sniper": [
+        {
+          "label": "weaponMeshes:sniper",
+          "name": "(unnamed)",
+          "type": "Mesh",
+          "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group",
+          "visible": true,
+          "layersMask": 1,
+          "vmEyeHide": true,
+          "worldScale": {
+            "x": 0.7233,
+            "y": 0.7233,
+            "z": 0.7233
+          },
+          "localScale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          },
+          "matName": "furniture:sniper",
+          "matUuid": "a7796d1a-168d-4226-ab24-42670a82da22",
+          "matColor": "#e6e2d6",
+          "vertexColors": false,
+          "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+          "texSize": {
+            "w": 256,
+            "h": 256
+          },
+          "texRepeat": {
+            "x": 1,
+            "y": 1
+          },
+          "generateMipmaps": true,
+          "minFilter": 1008,
+          "magFilter": 1006,
+          "hasBumpMap": false,
+          "hasRoughnessMap": false,
+          "vertCount": 648,
+          "medURepeatsPerM": 2.096,
+          "medVRepeatsPerM": 2.714,
+          "medUVRepeatsPerM": 3.256,
+          "tileMetersU": 0.477,
+          "tileMetersV": 0.368,
+          "tileMetersUV": 0.307
+        },
+        {
+          "label": "weaponMeshes:sniper",
+          "name": "(unnamed)",
+          "type": "Mesh",
+          "parentChain": "fp-stock > Group > Group > Group > Group > Group > Group > Group > Group > Group",
+          "visible": true,
+          "layersMask": 1,
+          "vmEyeHide": true,
+          "worldScale": {
+            "x": 0.7233,
+            "y": 0.7233,
+            "z": 0.7233
+          },
+          "localScale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          },
+          "matName": "furniture:sniper",
+          "matUuid": "0556631d-7ba8-49bb-8587-c849dff416b7",
+          "matColor": "#e6e2d6",
+          "vertexColors": false,
+          "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+          "texSize": {
+            "w": 256,
+            "h": 256
+          },
+          "texRepeat": {
+            "x": 1,
+            "y": 1
+          },
+          "generateMipmaps": true,
+          "minFilter": 1008,
+          "magFilter": 1006,
+          "hasBumpMap": false,
+          "hasRoughnessMap": false,
+          "vertCount": 888,
+          "medURepeatsPerM": 2.327,
+          "medVRepeatsPerM": 2.982,
+          "medUVRepeatsPerM": 3.29,
+          "tileMetersU": 0.43,
+          "tileMetersV": 0.335,
+          "tileMetersUV": 0.304
+        },
+        {
+          "label": "weaponMeshes:sniper",
+          "name": "(unnamed)",
+          "type": "Mesh",
+          "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group",
+          "visible": true,
+          "layersMask": 1,
+          "vmEyeHide": true,
+          "worldScale": {
+            "x": 0.7233,
+            "y": 0.7233,
+            "z": 0.7233
+          },
+          "localScale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          },
+          "matName": "furniture:sniper",
+          "matUuid": "0556631d-7ba8-49bb-8587-c849dff416b7",
+          "matColor": "#e6e2d6",
+          "vertexColors": false,
+          "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+          "texSize": {
+            "w": 256,
+            "h": 256
+          },
+          "texRepeat": {
+            "x": 1,
+            "y": 1
+          },
+          "generateMipmaps": true,
+          "minFilter": 1008,
+          "magFilter": 1006,
+          "hasBumpMap": false,
+          "hasRoughnessMap": false,
+          "vertCount": 3396,
+          "medURepeatsPerM": 2.234,
+          "medVRepeatsPerM": 3.258,
+          "medUVRepeatsPerM": 3.291,
+          "tileMetersU": 0.448,
+          "tileMetersV": 0.307,
+          "tileMetersUV": 0.304
+        }
+      ],
+      "launcher": [
+        {
+          "label": "weaponMeshes:launcher",
+          "name": "(unnamed)",
+          "type": "Mesh",
+          "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group > Group",
+          "visible": true,
+          "layersMask": 1,
+          "vmEyeHide": true,
+          "worldScale": {
+            "x": 0.6978,
+            "y": 0.6978,
+            "z": 0.6978
+          },
+          "localScale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          },
+          "matName": "furniture:launcher",
+          "matUuid": "748b6d94-27a9-4410-9ee2-b943d90bd421",
+          "matColor": "#e6e2d6",
+          "vertexColors": false,
+          "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+          "texSize": {
+            "w": 256,
+            "h": 256
+          },
+          "texRepeat": {
+            "x": 1,
+            "y": 1
+          },
+          "generateMipmaps": true,
+          "minFilter": 1008,
+          "magFilter": 1006,
+          "hasBumpMap": false,
+          "hasRoughnessMap": false,
+          "vertCount": 2880,
+          "medURepeatsPerM": 2.648,
+          "medVRepeatsPerM": 2.648,
+          "medUVRepeatsPerM": 3.31,
+          "tileMetersU": 0.378,
+          "tileMetersV": 0.378,
+          "tileMetersUV": 0.302
+        },
+        {
+          "label": "weaponMeshes:launcher",
+          "name": "(unnamed)",
+          "type": "Mesh",
+          "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group",
+          "visible": true,
+          "layersMask": 1,
+          "vmEyeHide": true,
+          "worldScale": {
+            "x": 0.6978,
+            "y": 0.6978,
+            "z": 0.6978
+          },
+          "localScale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          },
+          "matName": "furniture:launcher",
+          "matUuid": "748b6d94-27a9-4410-9ee2-b943d90bd421",
+          "matColor": "#e6e2d6",
+          "vertexColors": false,
+          "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+          "texSize": {
+            "w": 256,
+            "h": 256
+          },
+          "texRepeat": {
+            "x": 1,
+            "y": 1
+          },
+          "generateMipmaps": true,
+          "minFilter": 1008,
+          "magFilter": 1006,
+          "hasBumpMap": false,
+          "hasRoughnessMap": false,
+          "vertCount": 588,
+          "medURepeatsPerM": 2.507,
+          "medVRepeatsPerM": 2.87,
+          "medUVRepeatsPerM": 3.409,
+          "tileMetersU": 0.399,
+          "tileMetersV": 0.348,
+          "tileMetersUV": 0.293
+        },
+        {
+          "label": "weaponMeshes:launcher",
+          "name": "(unnamed)",
+          "type": "Mesh",
+          "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group",
+          "visible": true,
+          "layersMask": 1,
+          "vmEyeHide": true,
+          "worldScale": {
+            "x": 0.6978,
+            "y": 0.6978,
+            "z": 0.6978
+          },
+          "localScale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          },
+          "matName": "furniture:launcher",
+          "matUuid": "25402a68-3ba1-4d9c-981b-2e3f8b987e92",
+          "matColor": "#e6e2d6",
+          "vertexColors": false,
+          "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+          "texSize": {
+            "w": 256,
+            "h": 256
+          },
+          "texRepeat": {
+            "x": 1,
+            "y": 1
+          },
+          "generateMipmaps": true,
+          "minFilter": 1008,
+          "magFilter": 1006,
+          "hasBumpMap": false,
+          "hasRoughnessMap": false,
+          "vertCount": 936,
+          "medURepeatsPerM": 2.139,
+          "medVRepeatsPerM": 2.664,
+          "medUVRepeatsPerM": 3.385,
+          "tileMetersU": 0.467,
+          "tileMetersV": 0.375,
+          "tileMetersUV": 0.295
+        }
+      ],
+      "flamer": [
+        {
+          "label": "weaponMeshes:flamer",
+          "name": "(unnamed)",
+          "type": "Mesh",
+          "parentChain": "magazineBody > Group > Group > Group > Group > Group > Group > Group > Group > Group > Group",
+          "visible": true,
+          "layersMask": 1,
+          "vmEyeHide": true,
+          "worldScale": {
+            "x": 0.8383,
+            "y": 0.8383,
+            "z": 0.8383
+          },
+          "localScale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          },
+          "matName": "furniture:flamer",
+          "matUuid": "0c014a30-13ea-491d-942f-db641e62d063",
+          "matColor": "#e6e2d6",
+          "vertexColors": false,
+          "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+          "texSize": {
+            "w": 256,
+            "h": 256
+          },
+          "texRepeat": {
+            "x": 1,
+            "y": 1
+          },
+          "generateMipmaps": true,
+          "minFilter": 1008,
+          "magFilter": 1006,
+          "hasBumpMap": false,
+          "hasRoughnessMap": false,
+          "vertCount": 2304,
+          "medURepeatsPerM": 2.224,
+          "medVRepeatsPerM": 2.224,
+          "medUVRepeatsPerM": 2.84,
+          "tileMetersU": 0.45,
+          "tileMetersV": 0.45,
+          "tileMetersUV": 0.352
+        },
+        {
+          "label": "weaponMeshes:flamer",
+          "name": "(unnamed)",
+          "type": "Mesh",
+          "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group",
+          "visible": true,
+          "layersMask": 1,
+          "vmEyeHide": true,
+          "worldScale": {
+            "x": 0.8383,
+            "y": 0.8383,
+            "z": 0.8383
+          },
+          "localScale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          },
+          "matName": "furniture:flamer",
+          "matUuid": "0c014a30-13ea-491d-942f-db641e62d063",
+          "matColor": "#e6e2d6",
+          "vertexColors": false,
+          "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+          "texSize": {
+            "w": 256,
+            "h": 256
+          },
+          "texRepeat": {
+            "x": 1,
+            "y": 1
+          },
+          "generateMipmaps": true,
+          "minFilter": 1008,
+          "magFilter": 1006,
+          "hasBumpMap": false,
+          "hasRoughnessMap": false,
+          "vertCount": 1080,
+          "medURepeatsPerM": 1.274,
+          "medVRepeatsPerM": 2.516,
+          "medUVRepeatsPerM": 2.814,
+          "tileMetersU": 0.785,
+          "tileMetersV": 0.398,
+          "tileMetersUV": 0.355
+        }
+      ],
+      "chainsaw": [
+        {
+          "label": "weaponMeshes:chainsaw",
+          "name": "(unnamed)",
+          "type": "Mesh",
+          "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group > Group",
+          "visible": true,
+          "layersMask": 1,
+          "vmEyeHide": true,
+          "worldScale": {
+            "x": 0.8042,
+            "y": 0.8042,
+            "z": 0.8042
+          },
+          "localScale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          },
+          "matName": "furniture:chainsaw",
+          "matUuid": "27167d19-2b5f-4c8e-9e90-af880e0af8da",
+          "matColor": "#e6e2d6",
+          "vertexColors": false,
+          "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+          "texSize": {
+            "w": 256,
+            "h": 256
+          },
+          "texRepeat": {
+            "x": 1,
+            "y": 1
+          },
+          "generateMipmaps": true,
+          "minFilter": 1008,
+          "magFilter": 1006,
+          "hasBumpMap": false,
+          "hasRoughnessMap": false,
+          "vertCount": 144,
+          "medURepeatsPerM": 2.935,
+          "medVRepeatsPerM": 2.093,
+          "medUVRepeatsPerM": 2.955,
+          "tileMetersU": 0.341,
+          "tileMetersV": 0.478,
+          "tileMetersUV": 0.338
+        },
+        {
+          "label": "weaponMeshes:chainsaw",
+          "name": "(unnamed)",
+          "type": "Mesh",
+          "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group",
+          "visible": true,
+          "layersMask": 1,
+          "vmEyeHide": true,
+          "worldScale": {
+            "x": 0.8042,
+            "y": 0.8042,
+            "z": 0.8042
+          },
+          "localScale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          },
+          "matName": "furniture:chainsaw",
+          "matUuid": "27167d19-2b5f-4c8e-9e90-af880e0af8da",
+          "matColor": "#e6e2d6",
+          "vertexColors": false,
+          "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+          "texSize": {
+            "w": 256,
+            "h": 256
+          },
+          "texRepeat": {
+            "x": 1,
+            "y": 1
+          },
+          "generateMipmaps": true,
+          "minFilter": 1008,
+          "magFilter": 1006,
+          "hasBumpMap": false,
+          "hasRoughnessMap": false,
+          "vertCount": 2208,
+          "medURepeatsPerM": 2.035,
+          "medVRepeatsPerM": 2.414,
+          "medUVRepeatsPerM": 2.957,
+          "tileMetersU": 0.491,
+          "tileMetersV": 0.414,
+          "tileMetersUV": 0.338
+        }
+      ]
+    }
+  },
+  "heavy_launcher_1p": {
+    "vmActive": true,
+    "launcherUVs": [
+      {
+        "label": "weaponMeshes:launcher",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": true,
+        "worldScale": {
+          "x": 0.6978,
+          "y": 0.6978,
+          "z": 0.6978
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:launcher",
+        "matUuid": "748b6d94-27a9-4410-9ee2-b943d90bd421",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 2880,
+        "medURepeatsPerM": 2.648,
+        "medVRepeatsPerM": 2.648,
+        "medUVRepeatsPerM": 3.31,
+        "tileMetersU": 0.378,
+        "tileMetersV": 0.378,
+        "tileMetersUV": 0.302
+      },
+      {
+        "label": "weaponMeshes:launcher",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": true,
+        "worldScale": {
+          "x": 0.6978,
+          "y": 0.6978,
+          "z": 0.6978
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:launcher",
+        "matUuid": "748b6d94-27a9-4410-9ee2-b943d90bd421",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 588,
+        "medURepeatsPerM": 2.507,
+        "medVRepeatsPerM": 2.87,
+        "medUVRepeatsPerM": 3.409,
+        "tileMetersU": 0.399,
+        "tileMetersV": 0.348,
+        "tileMetersUV": 0.293
+      },
+      {
+        "label": "weaponMeshes:launcher",
+        "name": "(unnamed)",
+        "type": "Mesh",
+        "parentChain": "Group > Group > Group > Group > Group > Group > Group > Group > Group",
+        "visible": true,
+        "layersMask": 1,
+        "vmEyeHide": true,
+        "worldScale": {
+          "x": 0.6978,
+          "y": 0.6978,
+          "z": 0.6978
+        },
+        "localScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "matName": "furniture:launcher",
+        "matUuid": "25402a68-3ba1-4d9c-981b-2e3f8b987e92",
+        "matColor": "#e6e2d6",
+        "vertexColors": false,
+        "texUuid": "8216c92c-615e-407d-8b7e-f17e6dd0f119",
+        "texSize": {
+          "w": 256,
+          "h": 256
+        },
+        "texRepeat": {
+          "x": 1,
+          "y": 1
+        },
+        "generateMipmaps": true,
+        "minFilter": 1008,
+        "magFilter": 1006,
+        "hasBumpMap": false,
+        "hasRoughnessMap": false,
+        "vertCount": 936,
+        "medURepeatsPerM": 2.139,
+        "medVRepeatsPerM": 2.664,
+        "medUVRepeatsPerM": 3.385,
+        "tileMetersU": 0.467,
+        "tileMetersV": 0.375,
+        "tileMetersUV": 0.295
+      }
+    ]
+  }
+}

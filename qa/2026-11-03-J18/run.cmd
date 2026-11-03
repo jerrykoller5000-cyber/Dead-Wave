@@ -1,0 +1,1 @@
+node crew/crew.mjs slot run grokbot GB-259 --checks "J18 after: ADS shot, t215 t95 t277 t284 tcl281, real tcl281 t277, smoke" --minutes 40 -- node qa/2026-11-03-J18/after.mjs > qa\2026-11-03-J18\after.log 2>&1

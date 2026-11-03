@@ -1,0 +1,89 @@
+{
+  "samples": [
+    {
+      "variant": "baseline",
+      "key": "ak",
+      "at": [
+        0.195,
+        -0.215,
+        -0.75
+      ],
+      "yaw": -0.075,
+      "weapon": "ak",
+      "first": true,
+      "active": true,
+      "vmKey": "ak",
+      "raise": 1,
+      "muzzleNdc": {
+        "x": 0.16921142847330256,
+        "y": -0.11418842730917877,
+        "d": 1.5081115729082843
+      },
+      "backend": "WebGPU"
+    },
+    {
+      "variant": "close-40-yaw003",
+      "key": "ak",
+      "at": [
+        0.16,
+        -0.17,
+        -0.4
+      ],
+      "yaw": 0.03,
+      "weapon": "ak",
+      "first": true,
+      "active": true,
+      "vmKey": "ak",
+      "raise": 1,
+      "muzzleNdc": {
+        "x": 0.12346224656368401,
+        "y": -0.08095984918281943,
+        "d": 1.1609350980471254
+      },
+      "backend": "WebGPU"
+    },
+    {
+      "variant": "close-40-yaw015",
+      "key": "ak",
+      "at": [
+        0.16,
+        -0.17,
+        -0.4
+      ],
+      "yaw": 0.15,
+      "weapon": "ak",
+      "first": true,
+      "active": true,
+      "vmKey": "ak",
+      "raise": 1,
+      "muzzleNdc": {
+        "x": 0.04740625122732356,
+        "y": -0.07561433499616436,
+        "d": 1.1535245023607428
+      },
+      "backend": "WebGPU"
+    },
+    {
+      "variant": "close-36-yaw003",
+      "key": "ak",
+      "at": [
+        0.15,
+        -0.16,
+        -0.36
+      ],
+      "yaw": 0.03,
+      "weapon": "ak",
+      "first": true,
+      "active": true,
+      "vmKey": "ak",
+      "raise": 1,
+      "muzzleNdc": {
+        "x": 0.1191508389602807,
+        "y": -0.07210454077552078,
+        "d": 1.1211743928339948
+      },
+      "backend": "WebGPU"
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,1 @@
+node crew/crew.mjs slot run grokbot GB-273 --checks "GB-273 walls' cull: unit, real tgb273, page tgb273 t215 t95 t329 t80, smoke" --minutes 30 -- node qa/2026-11-03-GB-273/run1.mjs > qa\2026-11-03-GB-273\run1.log 2>&1

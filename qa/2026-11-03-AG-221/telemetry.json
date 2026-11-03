@@ -1,0 +1,507 @@
+{
+  "generatedAt": "2026-11-03T17:12:43.284Z",
+  "seat": {
+    "x": 42,
+    "y": -7.5468,
+    "z": -20,
+    "yaw": 0.000149,
+    "otsYaw": 0.000149,
+    "otsPitch": 0
+  },
+  "geomAudit": {
+    "meshCount": 16,
+    "sightDatum": {
+      "pos": [
+        0,
+        0.33,
+        -0.3
+      ],
+      "fwd": [
+        0,
+        0,
+        1
+      ],
+      "dotCenter": [
+        0,
+        0.33,
+        0.0355
+      ]
+    },
+    "rearGripMaxY": 0.32,
+    "carryRubberMaxY": null,
+    "reflexBounds": {
+      "x": [
+        -0.0215,
+        0.0215
+      ],
+      "y": [
+        0.293,
+        0.357
+      ],
+      "z": [
+        0.0335,
+        0.0365
+      ]
+    },
+    "clearanceOverRearGripMm": 10,
+    "clearanceUnderHoodTopMm": 31
+  },
+  "captures": {
+    "noon-hip": {
+      "currentWeapon": "minigun",
+      "firstPerson": true,
+      "worldTime": 0.5,
+      "vmActive": true,
+      "vmKey": "minigun",
+      "vmRaise": 1,
+      "vmAds": 0,
+      "framePos": [
+        -0.2231,
+        -0.3915,
+        -0.8874
+      ],
+      "dotNdc": {
+        "x": 0.25601,
+        "y": -0.19173,
+        "d": 0.9199
+      },
+      "dotPx": [
+        1205.77,
+        643.54,
+        0.9199
+      ],
+      "hoodWindowPx": {
+        "left": 1199.74,
+        "right": 1235.07,
+        "top": 610.78,
+        "bottom": 683.4,
+        "widthPx": 35.33,
+        "heightPx": 72.62
+      },
+      "rearGripTopPx": [
+        1423.32,
+        709.8,
+        0.6338
+      ],
+      "muzzlePx": [
+        961.71,
+        742.23,
+        1.7484
+      ],
+      "wristR": [
+        1359.79,
+        860.74,
+        0.7116
+      ],
+      "wristL": [
+        974.41,
+        970.86,
+        0.8512
+      ],
+      "gunPixels": 173044,
+      "gunAndHandPixels": 214732,
+      "gunScreenPct": 8.35,
+      "gunAndHandScreenPct": 10.36,
+      "dotRedPixels": 0
+    },
+    "noon-ads": {
+      "currentWeapon": "minigun",
+      "firstPerson": true,
+      "worldTime": 0.5,
+      "vmActive": true,
+      "vmKey": "minigun",
+      "vmRaise": 1,
+      "vmAds": 1,
+      "framePos": [
+        0,
+        -0.2904,
+        -1.024
+      ],
+      "dotNdc": {
+        "x": 0,
+        "y": 0,
+        "d": 1.0552
+      },
+      "dotPx": [
+        960,
+        540,
+        1.0552
+      ],
+      "hoodWindowPx": {
+        "left": 940.59,
+        "right": 979.41,
+        "top": 504.78,
+        "bottom": 576.57,
+        "widthPx": 38.82,
+        "heightPx": 71.79
+      },
+      "rearGripTopPx": [
+        960,
+        552.27,
+        0.76
+      ],
+      "muzzlePx": [
+        960,
+        700.9,
+        1.9128
+      ],
+      "wristR": [
+        989.17,
+        714.76,
+        0.8441
+      ],
+      "wristL": [
+        744.74,
+        856.01,
+        1.0409
+      ],
+      "gunPixels": 143680,
+      "gunAndHandPixels": 204850,
+      "gunScreenPct": 6.93,
+      "gunAndHandScreenPct": 9.88,
+      "dotRedPixels": 42
+    },
+    "overcast-hip": {
+      "currentWeapon": "minigun",
+      "firstPerson": true,
+      "worldTime": 0.42,
+      "vmActive": true,
+      "vmKey": "minigun",
+      "vmRaise": 1,
+      "vmAds": 0,
+      "framePos": [
+        -0.2231,
+        -0.391,
+        -0.8875
+      ],
+      "dotNdc": {
+        "x": 0.25603,
+        "y": -0.19082,
+        "d": 0.9198
+      },
+      "dotPx": [
+        1205.79,
+        643.04,
+        0.9198
+      ],
+      "hoodWindowPx": {
+        "left": 1199.76,
+        "right": 1235.09,
+        "top": 610.29,
+        "bottom": 682.91,
+        "widthPx": 35.33,
+        "heightPx": 72.62
+      },
+      "rearGripTopPx": [
+        1423.38,
+        709.4,
+        0.6337
+      ],
+      "muzzlePx": [
+        961.71,
+        741.62,
+        1.7486
+      ],
+      "wristR": [
+        1360.08,
+        860.19,
+        0.7116
+      ],
+      "wristL": [
+        975.64,
+        971.54,
+        0.8502
+      ],
+      "gunPixels": 170878,
+      "gunAndHandPixels": 211220,
+      "gunScreenPct": 8.24,
+      "gunAndHandScreenPct": 10.19,
+      "dotRedPixels": 0
+    },
+    "overcast-ads": {
+      "currentWeapon": "minigun",
+      "firstPerson": true,
+      "worldTime": 0.42,
+      "vmActive": true,
+      "vmKey": "minigun",
+      "vmRaise": 1,
+      "vmAds": 1,
+      "framePos": [
+        0,
+        -0.2904,
+        -1.024
+      ],
+      "dotNdc": {
+        "x": 0,
+        "y": 0,
+        "d": 1.0552
+      },
+      "dotPx": [
+        960,
+        540,
+        1.0552
+      ],
+      "hoodWindowPx": {
+        "left": 940.59,
+        "right": 979.41,
+        "top": 504.78,
+        "bottom": 576.57,
+        "widthPx": 38.82,
+        "heightPx": 71.79
+      },
+      "rearGripTopPx": [
+        960,
+        552.27,
+        0.76
+      ],
+      "muzzlePx": [
+        960,
+        700.9,
+        1.9128
+      ],
+      "wristR": [
+        989.43,
+        714.66,
+        0.8441
+      ],
+      "wristL": [
+        745.28,
+        856.93,
+        1.0395
+      ],
+      "gunPixels": 142831,
+      "gunAndHandPixels": 204697,
+      "gunScreenPct": 6.89,
+      "gunAndHandScreenPct": 9.87,
+      "dotRedPixels": 45
+    },
+    "dusk-hip": {
+      "currentWeapon": "minigun",
+      "firstPerson": true,
+      "worldTime": 0.77,
+      "vmActive": true,
+      "vmKey": "minigun",
+      "vmRaise": 1,
+      "vmAds": 0,
+      "framePos": [
+        -0.2231,
+        -0.3906,
+        -0.8876
+      ],
+      "dotNdc": {
+        "x": 0.25605,
+        "y": -0.18997,
+        "d": 0.9197
+      },
+      "dotPx": [
+        1205.81,
+        642.58,
+        0.9197
+      ],
+      "hoodWindowPx": {
+        "left": 1199.78,
+        "right": 1235.12,
+        "top": 609.84,
+        "bottom": 682.46,
+        "widthPx": 35.34,
+        "heightPx": 72.62
+      },
+      "rearGripTopPx": [
+        1423.43,
+        709.03,
+        0.6336
+      ],
+      "muzzlePx": [
+        961.71,
+        741.06,
+        1.7487
+      ],
+      "wristR": [
+        1360.46,
+        859.62,
+        0.7116
+      ],
+      "wristL": [
+        976.19,
+        971.59,
+        0.8497
+      ],
+      "gunPixels": 121464,
+      "gunAndHandPixels": 154891,
+      "gunScreenPct": 5.86,
+      "gunAndHandScreenPct": 7.47,
+      "dotRedPixels": 0
+    },
+    "dusk-ads": {
+      "currentWeapon": "minigun",
+      "firstPerson": true,
+      "worldTime": 0.77,
+      "vmActive": true,
+      "vmKey": "minigun",
+      "vmRaise": 1,
+      "vmAds": 1,
+      "framePos": [
+        0,
+        -0.2904,
+        -1.024
+      ],
+      "dotNdc": {
+        "x": 0,
+        "y": 0,
+        "d": 1.0552
+      },
+      "dotPx": [
+        960,
+        540,
+        1.0552
+      ],
+      "hoodWindowPx": {
+        "left": 940.59,
+        "right": 979.41,
+        "top": 504.78,
+        "bottom": 576.57,
+        "widthPx": 38.82,
+        "heightPx": 71.79
+      },
+      "rearGripTopPx": [
+        960,
+        552.27,
+        0.76
+      ],
+      "muzzlePx": [
+        960,
+        700.9,
+        1.9128
+      ],
+      "wristR": [
+        989.72,
+        714.54,
+        0.844
+      ],
+      "wristL": [
+        745.48,
+        857.34,
+        1.0388
+      ],
+      "gunPixels": 114992,
+      "gunAndHandPixels": 197298,
+      "gunScreenPct": 5.55,
+      "gunAndHandScreenPct": 9.51,
+      "dotRedPixels": 35
+    },
+    "night-hip": {
+      "currentWeapon": "minigun",
+      "firstPerson": true,
+      "worldTime": 0.02,
+      "vmActive": true,
+      "vmKey": "minigun",
+      "vmRaise": 1,
+      "vmAds": 0,
+      "framePos": [
+        -0.2231,
+        -0.3902,
+        -0.8877
+      ],
+      "dotNdc": {
+        "x": 0.25607,
+        "y": -0.18924,
+        "d": 0.9196
+      },
+      "dotPx": [
+        1205.83,
+        642.19,
+        0.9196
+      ],
+      "hoodWindowPx": {
+        "left": 1199.8,
+        "right": 1235.14,
+        "top": 609.45,
+        "bottom": 682.07,
+        "widthPx": 35.34,
+        "heightPx": 72.62
+      },
+      "rearGripTopPx": [
+        1423.47,
+        708.71,
+        0.6335
+      ],
+      "muzzlePx": [
+        961.71,
+        740.58,
+        1.7488
+      ],
+      "wristR": [
+        1360.57,
+        859.19,
+        0.7117
+      ],
+      "wristL": [
+        976.34,
+        971.39,
+        0.8492
+      ],
+      "gunPixels": 126249,
+      "gunAndHandPixels": 161944,
+      "gunScreenPct": 6.09,
+      "gunAndHandScreenPct": 7.81,
+      "dotRedPixels": 0
+    },
+    "night-ads": {
+      "currentWeapon": "minigun",
+      "firstPerson": true,
+      "worldTime": 0.02,
+      "vmActive": true,
+      "vmKey": "minigun",
+      "vmRaise": 1,
+      "vmAds": 1,
+      "framePos": [
+        0,
+        -0.2904,
+        -1.024
+      ],
+      "dotNdc": {
+        "x": 0,
+        "y": 0,
+        "d": 1.0552
+      },
+      "dotPx": [
+        960,
+        540,
+        1.0552
+      ],
+      "hoodWindowPx": {
+        "left": 940.59,
+        "right": 979.41,
+        "top": 504.78,
+        "bottom": 576.57,
+        "widthPx": 38.82,
+        "heightPx": 71.79
+      },
+      "rearGripTopPx": [
+        960,
+        552.27,
+        0.76
+      ],
+      "muzzlePx": [
+        960,
+        700.9,
+        1.9128
+      ],
+      "wristR": [
+        989.73,
+        714.53,
+        0.8439
+      ],
+      "wristL": [
+        745.33,
+        857.47,
+        1.0382
+      ],
+      "gunPixels": 114861,
+      "gunAndHandPixels": 198191,
+      "gunScreenPct": 5.54,
+      "gunAndHandScreenPct": 9.56,
+      "dotRedPixels": 32
+    }
+  }
+}

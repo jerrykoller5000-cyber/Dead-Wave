@@ -253,7 +253,17 @@
     "gh/gh-place-hq": 0.912,
     "gh/gh-place-dusk": 0.832,
     "gh/gh-place-dawn": 0.832,
-    "gh/gh-place-fallen": 0.822
+    "gh/gh-place-fallen": 0.822,
+    "gh/gh-cue-last-kill": 2.489,
+    "gh/gh-cue-night-fall": 2.094,
+    "gh/gh-cue-boss-entrance": 1.607,
+    "gh/gh-cue-discovery": 1.824,
+    "gh/gh-cue-mission-done": 3.639,
+    "gh/gh-cue-dawn": 2.924,
+    "gh/gh-place-graveyard": 0.813,
+    "gh/gh-place-relay": 0.822,
+    "gh/gh-place-hikers": 0.832,
+    "gh/gh-place-alarm-build": 0.822
   },
   "dayFight": {
     "tracks": [
@@ -2638,7 +2648,7 @@
         "gh/gh-place-menu"
       ],
       "dusk": [
-        "gh/gh-place-dusk"
+        "gh/gh-place-alarm-build"
       ],
       "night": [
         "gh/gh-place-dusk"
@@ -2651,7 +2661,28 @@
       ],
       "fallen": [
         "gh/gh-place-fallen"
+      ],
+      "place_graveyard": [
+        "gh/gh-place-graveyard"
+      ],
+      "place_relay": [
+        "gh/gh-place-relay"
+      ],
+      "place_hikers": [
+        "gh/gh-place-hikers"
       ]
+    },
+    "stings": {
+      "clear": "gh/gh-cue-last-kill",
+      "night_falls": "gh/gh-cue-night-fall",
+      "guardian": "gh/gh-cue-boss-entrance",
+      "ember": "gh/gh-cue-boss-entrance",
+      "objective": "gh/gh-cue-discovery",
+      "achievement": "gh/gh-cue-discovery",
+      "airdrop": "gh/gh-cue-discovery",
+      "poi_cleared": "gh/gh-cue-mission-done",
+      "camp": "gh/gh-cue-mission-done",
+      "dawn": "gh/gh-cue-dawn"
     }
   }
 }

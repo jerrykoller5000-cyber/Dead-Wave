@@ -126,8 +126,10 @@ export function makePistolModel(ctx) {
   for (const sx of [-1, 1]) K.slab([[-0.128, 0.030], [-0.104, 0.030], [-0.106, 0.042], [-0.126, 0.042]], 0.0075, gunDark, { x: sx * 0.0078, bevel: 0.0012, parent: slide });
   for (const sx of [-1, 1]) K.box(0.004, 0.005, 0.002, gaugeFace, sx * 0.006, 0.036, -0.1285, 0, 0, 0, slide);
   K.slab([[0.217, 0.016], [0.245, 0.016], [0.242, 0.026], [0.220, 0.026]], 0.022, gunMid, { bevel: 0.0015, parent: slide });   // GB-180: front dovetail
-  K.slab([[0.221, 0.024], [0.241, 0.024], [0.237, 0.037], [0.226, 0.037]], 0.008, gunDark, { bevel: 0.0015, parent: slide });
-  K.box(0.004, 0.004, 0.002, sightDotMat, 0, 0.032, 0.2195, 0, 0, 0, slide);
+  // GB-259 (down the sights the post's tip sat at the notch's floor, so none of it showed in the notch): the post up 5 mm,
+  // its tip level with the ears' tops (gun y 0.092), its dot level with the rear dots (0.086): a three-dot picture.
+  K.slab([[0.221, 0.024], [0.241, 0.024], [0.237, 0.042], [0.226, 0.042]], 0.008, gunDark, { bevel: 0.0015, parent: slide });
+  K.box(0.004, 0.004, 0.002, sightDotMat, 0, 0.036, 0.2195, 0, 0, 0, slide);
   K.slab([[-.011, .002], [.05, .002], [.05, .016], [.043, .020], [-.011, .020]], .0014, gunRubber, { x: .0233, bevel: .001, parent: slide });
   K.box(.002, .003, .055, gunMid, .0242, .004, .019, 0, 0, 0, slide);
   K.box(0.003, 0.006, 0.04, gunDark, 0.0236, 0.004, -0.03, 0, 0, 0, slide);
@@ -290,14 +292,19 @@ export function makeRevolverModel(ctx) {
   // GB-233 r4: the crane, on his left of the window's front, the arm the cylinder swings out on, and its pivot screw.
   K.slab([[.04, .03], [.066, .028], [.066, -.01], [.04, -.006]], .006, steelMat, {x: -.0335, bevel: .0015});
   K.cyl(.0032, .0032, .0016, gunAccent, -.0368, .002, .058, null, 10, 'x');
-  // GB-173 (Jerry: the sights did not line up): the front blade's top is level with the rear notch (y 0.121) on x 0.
-  K.slab([[0.298, 0.097], [0.326, 0.097], [0.326, 0.121], [0.31, 0.121]], 0.005, gunDark, { bevel: 0.001 });
-  // the ejector rod on the cylinder's axis, inside the underlug
-  K.cyl(0.006, 0.006, 0.1, steelMat, 0, 0.046, 0.1, null, 12);
-  K.cyl(.007, .007, .018, gunAccent, 0, .046, .143, null, 12);
+  // J57: the post keeps its sighted tip at y .121, but has enough width and a
+  // pale rear insert to read against the dark rear notch at first-person scale.
+  K.slab([[0.298, 0.097], [0.326, 0.097], [0.326, 0.121], [0.31, 0.121]], 0.008, gunDark, { bevel: 0.001 });
+  K.box(0.004, 0.006, 0.0015, steelMat, 0, 0.115, 0.2985, 0, 0, 0, null, 0.0004);
+  // The ejector rod belongs to the cylinder: it follows the left-hand swing.
+  // Its closed world position is unchanged (cylinder origin y .05, z .02).
+  K.cyl(0.006, 0.006, 0.1, steelMat, 0, -0.004, 0.08, cylinder, 12);
+  K.cyl(.007, .007, .018, gunAccent, 0, -0.004, .123, cylinder, 12);
   K.disc(0.013, gunRubber, 0, 0.083, 0.3325, 0, null, 10);
   // Hammer (cocks and falls): the body and a chequered spur.
-  const hammer = K.group(0, 0.1, -0.08);
+  // GB-259 (GP-20014, J13): the pivot 15 mm lower (was y 0.1), so the idle spur sits 5+ mm under the notch-to-blade line
+  // instead of 8.7 mm over it in the notch; cock and fall still turn it about the same axis from baseHammerRot.
+  const hammer = K.group(0, 0.085, -0.08);
   // GB-174 (Jerry: the hammer was a crude bent slab): a hammer body seated in the frame's slot behind the recoil shield,
   // its short spur curving back and down over the backstrap, chequered across the top. Same pivot (0, 0.1, -0.08).
   K.slab([[0.01, -0.03], [0.012, -0.004], [0.008, 0.01], [0.002, 0.016], [-0.008, 0.019], [-0.018, 0.02], [-0.027, 0.018], [-0.033, 0.013], [-0.035, 0.008], [-0.03, 0.006], [-0.02, 0.006], [-0.012, 0.002], [-0.009, -0.01], [-0.008, -0.03]], 0.011, gunDark, { bevel: 0.002, parent: hammer });
@@ -340,11 +347,13 @@ export function makeUziModel(ctx) {
     K.slab([[-.096, .100], [-.096, .142], [-.088, .158], [-.072, .158], [-.064, .142], [-.064, .100]], .006, gunDark, {x: sx * .018, bevel: .0015, segs: 2});
     K.slab([[.182, .096], [.182, .136], [.190, .150], [.206, .150], [.212, .136], [.212, .096]], .006, gunDark, {x: sx * .016, bevel: .0015, segs: 2});
   }
-  K.box(.006, .034, .008, gunDark, 0, .118, -.08);
-  K.tor(.0042, .0016, gunAccent, 0, .126, -.08, 0, 0, 0, null, Math.PI * 2, 12);
-  K.box(.004, .026, .004, gunDark, 0, .116, .198);
-  for (const sx of [-1, 1]) K.box(.004, .030, .014, gunDark, sx * .011, .114, .198);
-  K.box(.026, .004, .014, gunDark, 0, .130, .198);
+  // GB-259 (J4: the sights unusable): the aperture was a 5 mm ring with a solid block through it, and the eye rode the ears'
+  // tops, 3 cm over it. Now an 11.8 mm hole on a stem below it, the post's tip on its centre (y .126), the hood clear above.
+  K.box(.006, .016, .008, gunDark, 0, .109, -.08);
+  K.tor(.0075, .0016, gunAccent, 0, .126, -.08, 0, 0, 0, null, Math.PI * 2, 16);
+  K.box(.004, .023, .004, gunDark, 0, .1145, .198);
+  for (const sx of [-1, 1]) K.box(.004, .038, .014, gunDark, sx * .011, .118, .198);
+  K.box(.026, .004, .014, gunDark, 0, .135, .198);
   // Folding stock: a straight wire frame and a butt, not the drooping struts.
   for (const sx of [-1, 1]) {
     K.slab([[-.118, .030], [-.305, .016], [-.305, .006], [-.118, .018]], .007, gunMid, {x: sx * .040, bevel: .002});

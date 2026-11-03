@@ -1,0 +1,412 @@
+{
+  "bandsCount": 18,
+  "bandsSummary": [
+    {
+      "kind": "hq-thicket",
+      "width": 4,
+      "solids": 374
+    },
+    {
+      "kind": "quarter-ne",
+      "width": 5,
+      "solids": 168
+    },
+    {
+      "kind": "quarter-nw",
+      "width": 5,
+      "solids": 146
+    },
+    {
+      "kind": "quarter-sw",
+      "width": 5,
+      "solids": 158
+    },
+    {
+      "kind": "quarter-se",
+      "width": 5,
+      "solids": 7
+    },
+    {
+      "kind": "shortcut-deadfall",
+      "width": 1.4,
+      "solids": 19
+    },
+    {
+      "kind": "shortcut-deadfall",
+      "width": 1.4,
+      "solids": 19
+    },
+    {
+      "kind": "shortcut-deadfall",
+      "width": 1.4,
+      "solids": 19
+    },
+    {
+      "kind": "shortcut-deadfall",
+      "width": 1.4,
+      "solids": 19
+    },
+    {
+      "kind": "shortcut-deadfall",
+      "width": 1.4,
+      "solids": 19
+    },
+    {
+      "kind": "shortcut-thicket",
+      "width": 2.5,
+      "solids": 6
+    },
+    {
+      "kind": "shortcut-thicket",
+      "width": 2.5,
+      "solids": 6
+    },
+    {
+      "kind": "shortcut-thicket",
+      "width": 2.5,
+      "solids": 14
+    },
+    {
+      "kind": "shortcut-thicket",
+      "width": 2.5,
+      "solids": 15
+    },
+    {
+      "kind": "shortcut-thicket",
+      "width": 2.5,
+      "solids": 9
+    },
+    {
+      "kind": "shortcut-thicket",
+      "width": 2.5,
+      "solids": 6
+    },
+    {
+      "kind": "shortcut-thicket",
+      "width": 2.5,
+      "solids": 15
+    },
+    {
+      "kind": "shortcut-thicket",
+      "width": 2.5,
+      "solids": 15
+    }
+  ],
+  "seats": [
+    {
+      "id": "seat1_hq_north_ring",
+      "label": "Seat 1: HQ Clearing North -> hq-thicket (N arc)",
+      "bandKind": "hq-thicket",
+      "seatPos": {
+        "x": -4,
+        "y": -0.6,
+        "z": 42
+      },
+      "distToWallM": 16,
+      "rendererInfo": {
+        "calls": 5804,
+        "triangles": 2945993
+      },
+      "totalFrustumDraws": 318,
+      "totalFrustumTris": 1258228,
+      "sectorCullBehindBand": {
+        "drawsSkipped": 172,
+        "trisSkipped": 728004,
+        "pctDraws": 54.1,
+        "pctTris": 57.9
+      },
+      "heightOcclusionByWallHeight": {
+        "h2_5m": {
+          "draws": 168,
+          "tris": 704832
+        },
+        "h3_0m": {
+          "draws": 168,
+          "tris": 709774
+        },
+        "h3_5m": {
+          "draws": 168,
+          "tris": 715118
+        }
+      },
+      "byOwnerBehind": {
+        "world-props-other": {
+          "draws": 170,
+          "tris": 97040,
+          "partialInstancedDraws": 0
+        },
+        "trees-or-understory-instanced": {
+          "draws": 0,
+          "tris": 48,
+          "partialInstancedDraws": 1
+        },
+        "history-props": {
+          "draws": 2,
+          "tris": 120,
+          "partialInstancedDraws": 0
+        },
+        "forest-instanced-trees": {
+          "draws": 0,
+          "partialInstancedDraws": 64,
+          "treesInFrustum": 488,
+          "treesBehindBand": 487,
+          "tris": 630796,
+          "trisOccludedBy25mWall": 619293,
+          "trisOccludedBy30mWall": 624225,
+          "trisOccludedBy35mWall": 629563
+        }
+      }
+    },
+    {
+      "id": "seat2_hq_west_ring",
+      "label": "Seat 2: HQ Clearing West -> hq-thicket (W landing/rangers gap)",
+      "bandKind": "hq-thicket",
+      "seatPos": {
+        "x": 42,
+        "y": -7.12,
+        "z": -10
+      },
+      "distToWallM": 16,
+      "rendererInfo": {
+        "calls": 5824,
+        "triangles": 2946013
+      },
+      "totalFrustumDraws": 259,
+      "totalFrustumTris": 1222011,
+      "sectorCullBehindBand": {
+        "drawsSkipped": 117,
+        "trisSkipped": 762636,
+        "pctDraws": 45.2,
+        "pctTris": 62.4
+      },
+      "heightOcclusionByWallHeight": {
+        "h2_5m": {
+          "draws": 96,
+          "tris": 515605
+        },
+        "h3_0m": {
+          "draws": 106,
+          "tris": 603441
+        },
+        "h3_5m": {
+          "draws": 108,
+          "tris": 664536
+        }
+      },
+      "byOwnerBehind": {
+        "world-props-other": {
+          "draws": 97,
+          "tris": 109284,
+          "partialInstancedDraws": 2
+        },
+        "trees-or-understory-instanced": {
+          "draws": 0,
+          "tris": 32,
+          "partialInstancedDraws": 1
+        },
+        "history-props": {
+          "draws": 20,
+          "tris": 5390,
+          "partialInstancedDraws": 0
+        },
+        "forest-instanced-trees": {
+          "draws": 0,
+          "partialInstancedDraws": 64,
+          "treesInFrustum": 513,
+          "treesBehindBand": 508,
+          "tris": 647930,
+          "trisOccludedBy25mWall": 438290,
+          "trisOccludedBy30mWall": 508370,
+          "trisOccludedBy35mWall": 566044
+        }
+      }
+    },
+    {
+      "id": "seat3_quarter_nw",
+      "label": "Seat 3: NW Approach -> quarter-nw band",
+      "bandKind": "quarter-nw",
+      "seatPos": {
+        "x": 70,
+        "y": 4.35,
+        "z": 62
+      },
+      "distToWallM": 18.25,
+      "rendererInfo": {
+        "calls": 5844,
+        "triangles": 2946033
+      },
+      "totalFrustumDraws": 257,
+      "totalFrustumTris": 1108958,
+      "sectorCullBehindBand": {
+        "drawsSkipped": 119,
+        "trisSkipped": 689965,
+        "pctDraws": 46.3,
+        "pctTris": 62.2
+      },
+      "heightOcclusionByWallHeight": {
+        "h2_5m": {
+          "draws": 107,
+          "tris": 622285
+        },
+        "h3_0m": {
+          "draws": 110,
+          "tris": 649743
+        },
+        "h3_5m": {
+          "draws": 110,
+          "tris": 660443
+        }
+      },
+      "byOwnerBehind": {
+        "world-props-other": {
+          "draws": 99,
+          "tris": 92225,
+          "partialInstancedDraws": 0
+        },
+        "trees-or-understory-instanced": {
+          "draws": 0,
+          "tris": 128,
+          "partialInstancedDraws": 1
+        },
+        "history-props": {
+          "draws": 20,
+          "tris": 5390,
+          "partialInstancedDraws": 0
+        },
+        "forest-instanced-trees": {
+          "draws": 0,
+          "partialInstancedDraws": 64,
+          "treesInFrustum": 469,
+          "treesBehindBand": 466,
+          "tris": 592222,
+          "trisOccludedBy25mWall": 544552,
+          "trisOccludedBy30mWall": 565952,
+          "trisOccludedBy35mWall": 576566
+        }
+      }
+    },
+    {
+      "id": "seat4_quarter_ne",
+      "label": "Seat 4: NE Approach -> quarter-ne band",
+      "bandKind": "quarter-ne",
+      "seatPos": {
+        "x": -22,
+        "y": 2.15,
+        "z": 76
+      },
+      "distToWallM": 21.47,
+      "rendererInfo": {
+        "calls": 5864,
+        "triangles": 2946053
+      },
+      "totalFrustumDraws": 212,
+      "totalFrustumTris": 1003913,
+      "sectorCullBehindBand": {
+        "drawsSkipped": 77,
+        "trisSkipped": 523888,
+        "pctDraws": 36.3,
+        "pctTris": 52.2
+      },
+      "heightOcclusionByWallHeight": {
+        "h2_5m": {
+          "draws": 69,
+          "tris": 425285
+        },
+        "h3_0m": {
+          "draws": 74,
+          "tris": 478232
+        },
+        "h3_5m": {
+          "draws": 74,
+          "tris": 503229
+        }
+      },
+      "byOwnerBehind": {
+        "world-props-other": {
+          "draws": 75,
+          "tris": 65407,
+          "partialInstancedDraws": 0
+        },
+        "landmarks-pois": {
+          "draws": 1,
+          "tris": 23820,
+          "partialInstancedDraws": 0
+        },
+        "history-props": {
+          "draws": 1,
+          "tris": 5068,
+          "partialInstancedDraws": 0
+        },
+        "forest-instanced-trees": {
+          "draws": 0,
+          "partialInstancedDraws": 64,
+          "treesInFrustum": 341,
+          "treesBehindBand": 332,
+          "tris": 429593,
+          "trisOccludedBy25mWall": 354874,
+          "trisOccludedBy30mWall": 391676,
+          "trisOccludedBy35mWall": 416671
+        }
+      }
+    },
+    {
+      "id": "seat5_quarter_sw",
+      "label": "Seat 5: SW Approach -> quarter-sw band",
+      "bandKind": "quarter-sw",
+      "seatPos": {
+        "x": 44,
+        "y": 4.1,
+        "z": -68
+      },
+      "distToWallM": 16.49,
+      "rendererInfo": {
+        "calls": 5884,
+        "triangles": 2946073
+      },
+      "totalFrustumDraws": 199,
+      "totalFrustumTris": 908013,
+      "sectorCullBehindBand": {
+        "drawsSkipped": 60,
+        "trisSkipped": 499702,
+        "pctDraws": 30.2,
+        "pctTris": 55
+      },
+      "heightOcclusionByWallHeight": {
+        "h2_5m": {
+          "draws": 56,
+          "tris": 462344
+        },
+        "h3_0m": {
+          "draws": 57,
+          "tris": 467975
+        },
+        "h3_5m": {
+          "draws": 57,
+          "tris": 471742
+        }
+      },
+      "byOwnerBehind": {
+        "world-props-other": {
+          "draws": 60,
+          "tris": 54210,
+          "partialInstancedDraws": 0
+        },
+        "trees-or-understory-instanced": {
+          "draws": 0,
+          "tris": 64,
+          "partialInstancedDraws": 1
+        },
+        "forest-instanced-trees": {
+          "draws": 0,
+          "partialInstancedDraws": 64,
+          "treesInFrustum": 354,
+          "treesBehindBand": 341,
+          "tris": 445428,
+          "trisOccludedBy25mWall": 417228,
+          "trisOccludedBy30mWall": 422566,
+          "trisOccludedBy35mWall": 426327
+        }
+      }
+    }
+  ]
+}

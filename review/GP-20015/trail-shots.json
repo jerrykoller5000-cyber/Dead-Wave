@@ -1,0 +1,10 @@
+{
+  "shots": [
+    { "cam": { "x": 57.394, "y": 6.2, "z": 59.883, "tx": 56.43388, "ty": 5.75, "tz": 72.84695, "fov": 65 }, "out": "review/GP-20015/bridge0-trail-south.png" },
+    { "cam": { "x": 55.474, "y": 6.2, "z": 85.811, "tx": 56.43388, "ty": 5.75, "tz": 72.84695, "fov": 65 }, "out": "review/GP-20015/bridge0-trail-north.png" },
+    { "cam": { "x": -39.6325, "y": 2.34, "z": 39.2857, "tx": -46.8475, "ty": 1.89, "tz": 50.1017, "fov": 65 }, "out": "review/GP-20015/bridge1-trail-south.png" },
+    { "cam": { "x": -54.0625, "y": 2.34, "z": 60.9177, "tx": -46.8475, "ty": 1.89, "tz": 50.1017, "fov": 65 }, "out": "review/GP-20015/bridge1-trail-north.png" }
+  ],
+  "out": "review/GP-20015/trails/",
+  "cols": 2
+}

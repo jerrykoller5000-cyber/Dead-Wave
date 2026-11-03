@@ -1,0 +1,222 @@
+{
+  "shotgun": {
+    "baseline": {
+      "noon": {
+        "key": "shotgun",
+        "active": true,
+        "rootVisible": true,
+        "raise": 1,
+        "ads": 0,
+        "hipYaw": 0.025,
+        "muzzle": {
+          "x": 0.10357608450370344,
+          "y": -0.06744772940998547,
+          "d": 1.5186024556275795
+        }
+      },
+      "overcast": {
+        "key": "shotgun",
+        "active": true,
+        "rootVisible": true,
+        "raise": 1,
+        "ads": 0,
+        "hipYaw": 0.025,
+        "muzzle": {
+          "x": 0.10268393141815721,
+          "y": -0.06486392711990707,
+          "d": 1.5182348384456112
+        }
+      },
+      "dusk": {
+        "key": "shotgun",
+        "active": true,
+        "rootVisible": true,
+        "raise": 1,
+        "ads": 0,
+        "hipYaw": 0.025,
+        "muzzle": {
+          "x": 0.10264011210480721,
+          "y": -0.06680624221853833,
+          "d": 1.5184154300697257
+        }
+      },
+      "night": {
+        "key": "shotgun",
+        "active": true,
+        "rootVisible": true,
+        "raise": 1,
+        "ads": 0,
+        "hipYaw": 0.025,
+        "muzzle": {
+          "x": 0.10261523158845239,
+          "y": -0.07064194168649655,
+          "d": 1.5187778390913371
+        }
+      }
+    },
+    "candidate": {
+      "noon": {
+        "key": "shotgun",
+        "active": true,
+        "rootVisible": true,
+        "raise": 1,
+        "ads": 0,
+        "hipYaw": 0.25,
+        "muzzle": {
+          "x": -0.012854700005527521,
+          "y": -0.07412770787422995,
+          "d": 1.4919053064141585
+        }
+      },
+      "overcast": {
+        "key": "shotgun",
+        "active": true,
+        "rootVisible": true,
+        "raise": 1,
+        "ads": 0,
+        "hipYaw": 0.25,
+        "muzzle": {
+          "x": -0.012855571395321607,
+          "y": -0.07304560654453641,
+          "d": 1.4918041804231326
+        }
+      },
+      "dusk": {
+        "key": "shotgun",
+        "active": true,
+        "rootVisible": true,
+        "raise": 1,
+        "ads": 0,
+        "hipYaw": 0.25,
+        "muzzle": {
+          "x": -0.012858417095989052,
+          "y": -0.06954850186771945,
+          "d": 1.4914740287320005
+        }
+      },
+      "night": {
+        "key": "shotgun",
+        "active": true,
+        "rootVisible": true,
+        "raise": 1,
+        "ads": 0,
+        "hipYaw": 0.25,
+        "muzzle": {
+          "x": -0.012860999260698324,
+          "y": -0.06642224543518176,
+          "d": 1.4911745783142
+        }
+      }
+    }
+  },
+  "aa12": {
+    "baseline": {
+      "noon": {
+        "key": "aa12",
+        "active": true,
+        "rootVisible": true,
+        "raise": 1,
+        "ads": 0,
+        "hipYaw": 0.03,
+        "muzzle": {
+          "x": 0.10387457452294807,
+          "y": -0.10189308815828609,
+          "d": 1.5590704718080268
+        }
+      },
+      "overcast": {
+        "key": "aa12",
+        "active": true,
+        "rootVisible": true,
+        "raise": 1,
+        "ads": 0,
+        "hipYaw": 0.03,
+        "muzzle": {
+          "x": 0.10385088490336694,
+          "y": -0.10527937612634458,
+          "d": 1.5594261142891839
+        }
+      },
+      "dusk": {
+        "key": "aa12",
+        "active": true,
+        "rootVisible": true,
+        "raise": 1,
+        "ads": 0,
+        "hipYaw": 0.03,
+        "muzzle": {
+          "x": 0.1038336330345389,
+          "y": -0.10777855141096919,
+          "d": 1.5596852115969104
+        }
+      },
+      "night": {
+        "key": "aa12",
+        "active": true,
+        "rootVisible": true,
+        "raise": 1,
+        "ads": 0,
+        "hipYaw": 0.03,
+        "muzzle": {
+          "x": 0.1038411066452985,
+          "y": -0.10669239189025918,
+          "d": 1.5595729585542037
+        }
+      }
+    },
+    "candidate": {
+      "noon": {
+        "key": "aa12",
+        "active": true,
+        "rootVisible": true,
+        "raise": 1,
+        "ads": 0,
+        "hipYaw": 0.25,
+        "muzzle": {
+          "x": -0.0019238283697813466,
+          "y": -0.10505231618838752,
+          "d": 1.5330621407849083
+        }
+      },
+      "overcast": {
+        "key": "aa12",
+        "active": true,
+        "rootVisible": true,
+        "raise": 1,
+        "ads": 0,
+        "hipYaw": 0.25,
+        "muzzle": {
+          "x": -0.0019242168975235627,
+          "y": -0.10214356912171985,
+          "d": 1.5327525929512165
+        }
+      },
+      "dusk": {
+        "key": "aa12",
+        "active": true,
+        "rootVisible": true,
+        "raise": 1,
+        "ads": 0,
+        "hipYaw": 0.25,
+        "muzzle": {
+          "x": -0.0019241349265277069,
+          "y": -0.10275419804575585,
+          "d": 1.5328178904805163
+        }
+      },
+      "night": {
+        "key": "aa12",
+        "active": true,
+        "rootVisible": true,
+        "raise": 1,
+        "ads": 0,
+        "hipYaw": 0.25,
+        "muzzle": {
+          "x": -0.0019236744407946959,
+          "y": -0.10621502056119668,
+          "d": 1.533184813674376
+        }
+      }
+    }
+  }
+}

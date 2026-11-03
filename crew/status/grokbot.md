@@ -1,13 +1,13 @@
 # Grokbot
 
-state: idle
+state: active
 model: Grok Bot
-task: —
-touching: —
-since: 2026-11-02T05:43Z
-next: GB-255 t76 and t80 steady on the real renderer (1.1.1, after the ta
+task: GB-274 Brute get-up A-vs-S rotation fix: apply() turns from the un-offset standing points, keys only bias spring targets (studio/motion.js follow/apply, per ChatGPT's GP-19988 request, hook delegated to him by Claude)
+touching: studio/motion.js (getup keys: follow, apply), studio/motion.test.mjs, studio/motion/zombie/brute.json, tools/tests/t316.js (new), review/GB-274, handoffs/2026-11-03-grokbot-GB-274.md
+since: 2026-11-03T17:43Z
+next: GB-273 The walls' cull (docs/specs/sector-cull.md; D-112, order 2).
 blocked-on: —
-last-report: handoffs/2026-11-02-grokbot-GB-271.md
+last-report: handoffs/2026-11-03-grokbot-GB-273.md
 
 ## Notes
 

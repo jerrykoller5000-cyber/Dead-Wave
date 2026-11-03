@@ -1,0 +1,118 @@
+{
+  "backend": "WebGPU",
+  "samples": [
+    {
+      "key": "shotgun",
+      "yaw": 0.03,
+      "weapon": "shotgun",
+      "first": true,
+      "active": true,
+      "vmKey": "shotgun",
+      "raise": 1,
+      "muzzle": {
+        "x": 0.10006831689025844,
+        "y": -0.06489931449166347,
+        "d": 1.5180744208359007
+      }
+    },
+    {
+      "key": "shotgun",
+      "yaw": 0.15,
+      "weapon": "shotgun",
+      "first": true,
+      "active": true,
+      "vmKey": "shotgun",
+      "raise": 1,
+      "muzzle": {
+        "x": 0.03834465860763671,
+        "y": -0.07293747292858227,
+        "d": 1.5088960969734924
+      }
+    },
+    {
+      "key": "shotgun",
+      "yaw": 0.25,
+      "weapon": "shotgun",
+      "first": true,
+      "active": true,
+      "vmKey": "shotgun",
+      "raise": 1,
+      "muzzle": {
+        "x": -0.01285901755591673,
+        "y": -0.06881760376118914,
+        "d": 1.49140438341243
+      }
+    },
+    {
+      "key": "shotgun",
+      "yaw": 0.35,
+      "weapon": "shotgun",
+      "first": true,
+      "active": true,
+      "vmKey": "shotgun",
+      "raise": 1,
+      "muzzle": {
+        "x": -0.06421364129802497,
+        "y": -0.06989865332124248,
+        "d": 1.4665558082782448
+      }
+    },
+    {
+      "key": "aa12",
+      "yaw": 0.03,
+      "weapon": "aa12",
+      "first": true,
+      "active": true,
+      "vmKey": "aa12",
+      "raise": 1,
+      "muzzle": {
+        "x": 0.10383642581013235,
+        "y": -0.10737203754769911,
+        "d": 1.5596432624373708
+      }
+    },
+    {
+      "key": "aa12",
+      "yaw": 0.15,
+      "weapon": "aa12",
+      "first": true,
+      "active": true,
+      "vmKey": "aa12",
+      "raise": 1,
+      "muzzle": {
+        "x": 0.04601841994331598,
+        "y": -0.10075837261735383,
+        "d": 1.5492326979273767
+      }
+    },
+    {
+      "key": "aa12",
+      "yaw": 0.25,
+      "weapon": "aa12",
+      "first": true,
+      "active": true,
+      "vmKey": "aa12",
+      "raise": 1,
+      "muzzle": {
+        "x": -0.0019233070658916161,
+        "y": -0.10901433557089761,
+        "d": 1.5334776705101658
+      }
+    },
+    {
+      "key": "aa12",
+      "yaw": 0.35,
+      "weapon": "aa12",
+      "first": true,
+      "active": true,
+      "vmKey": "aa12",
+      "raise": 1,
+      "muzzle": {
+        "x": -0.04984667443162422,
+        "y": -0.1058693665731046,
+        "d": 1.5089378740349328
+      }
+    }
+  ],
+  "errors": []
+}

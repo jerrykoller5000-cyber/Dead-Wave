@@ -1,0 +1,30 @@
+[
+    {
+        "target":  "weapon:launcher",
+        "time":  "noon",
+        "yaw":  180,
+        "pitch":  8,
+        "dist":  0.9,
+        "fov":  18,
+        "out":  "review/J62b/launcher-sightline-noon.png",
+        "size":  "1200x800"
+    },
+    {
+        "target":  "weapon:launcher",
+        "time":  "noon",
+        "view":  "side",
+        "fov":  14,
+        "out":  "review/J62b/launcher-side-close-noon.png",
+        "size":  "1600x900"
+    },
+    {
+        "target":  "weapon:launcher",
+        "time":  "night",
+        "yaw":  180,
+        "pitch":  8,
+        "dist":  0.9,
+        "fov":  18,
+        "out":  "review/J62b/launcher-sightline-night.png",
+        "size":  "1200x800"
+    }
+]

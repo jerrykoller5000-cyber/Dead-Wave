@@ -16,6 +16,9 @@
     ok(!all.some((n) => /^fight_(breach|wire|ash_wind|run_the_line|teeth)$/.test(n)), 'the compose.py fight tracks are out of the pools');
 
     await startMatch(T, 'Music');
+    // CL-297: these checks are the old music's (the ElevenLabs nights, the sections); the score is on by default since
+    // 2026-11-02, so ask for the old music, as ?score=0 does (the score's own checks: tcl275a-d).
+    if (T.AudioSys && T.AudioSys.setScore) T.AudioSys.setScore(false);
     // A saved mute (tt_* settings in the tester's browser) would silence the director and
     // every check below would read nothing: unmute, and say so if music still won't start.
     if (A.setMuted) A.setMuted(false);

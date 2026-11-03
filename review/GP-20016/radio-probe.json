@@ -1,0 +1,38 @@
+{
+  "backend": "WebGPU",
+  "active": true,
+  "filtering": true,
+  "radio": [
+    {
+      "name": "",
+      "type": "Mesh",
+      "visible": true,
+      "castShadow": true,
+      "hidden": true,
+      "parent": "Group"
+    },
+    {
+      "name": "",
+      "type": "Mesh",
+      "visible": true,
+      "castShadow": true,
+      "hidden": true,
+      "parent": "Group"
+    },
+    {
+      "name": "",
+      "type": "Mesh",
+      "visible": true,
+      "castShadow": true,
+      "hidden": true,
+      "parent": "Group"
+    }
+  ],
+  "carrier": {
+    "n": 9,
+    "visible": 9,
+    "eyeVisible": 9
+  },
+  "radioSkins": [],
+  "bakedRadio": 0
+}

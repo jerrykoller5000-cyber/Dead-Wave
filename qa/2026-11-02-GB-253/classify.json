@@ -1,0 +1,1928 @@
+{
+ "caveIndex": {
+  "t": "number",
+  "n": 18,
+  "unsafe": [
+   "index.html:other:\"CaveGuardian(z.caveIndex, px, pz, 'death\"",
+   "index.html:other:\"eIndex: (alive.caveIndex != null && aliv\"",
+   "index.html:other:\"e.caveIndex >= 0) ? alive.c\"",
+   "index.html:other:\" !z.dying && z.caveIndex >= 0) { walkers\"",
+   "index.html:other:\"k, ci: spawned.caveIndex, ground: !!grou\"",
+   "index.html:other:\"ilter((h) => h.caveIndex === caveIndex).\"",
+   "index.html:other:\"ilter((h) => h.caveIndex !== caveIndex);\"",
+   "index.html:other:\"{ caveIndex: w.caveIndex, age: cavePokeN\"",
+   "index.html:other:\"&& POI.caves[w.caveIndex] && POI.caves[w\"",
+   "index.html:other:\".caveIndex].pokeEyes) } : \"",
+   "index.html:other:\"{ caveIndex: h.caveIndex, age: cavePokeN\"",
+   "index.html:other:\"aveGuardian(ch.caveIndex, ch.cave.x, ch.\"",
+   "index.html:other:\" caveIndex: ch.caveIndex, t: ch.t, speed\"",
+   "index.html:other:\"  const ci = z.caveIndex != null && z.ca\"",
+   "index.html:other:\"Index >= 0 ? z.caveIndex : guardianCaveI\""
+  ],
+  "numericWrite": true
+ },
+ "caveTrait": {
+  "t": "string",
+  "n": 2,
+  "unsafe": [
+   "index.html:other:\"        if (z.caveTrait === 'douse' && \""
+  ],
+  "numericWrite": false
+ },
+ "caveTheme": {
+  "t": "string",
+  "n": 5,
+  "unsafe": [
+   "index.html:other:\"onst roleK = z.caveTheme && CAVE_ROLES[z\"",
+   "index.html:other:\".caveTheme] && CAVE_ROLES[\"",
+   "index.html:other:\"z.caveTheme].speedMul != nu\"",
+   "index.html:other:\"? CAVE_ROLES[z.caveTheme].speedMul : 1;\""
+  ],
+  "numericWrite": false
+ },
+ "roleArmorAdd": {
+  "t": "number",
+  "n": 3,
+  "unsafe": [],
+  "numericWrite": false
+ },
+ "roleFireAdd": {
+  "t": "number",
+  "n": 3,
+  "unsafe": [],
+  "numericWrite": false
+ },
+ "douseRadius": {
+  "t": "number",
+  "n": 4,
+  "unsafe": [
+   "index.html:other:\"= role.douseRadius;\"",
+   "drowned-behavior.js:other:\"-q.z)<=DROWNED.douseRadius&&Math.abs(p.y-q\""
+  ],
+  "numericWrite": false
+ },
+ "douseAgePerSec": {
+  "t": "number",
+  "n": 3,
+  "unsafe": [
+   "index.html:other:\"ec = role.douseAgePerSec;\""
+  ],
+  "numericWrite": false
+ },
+ "_mvVX": {
+  "t": "number",
+  "n": 4,
+  "unsafe": [
+   "index.html:compound:\"1, dt * 10); z._mvVX += (vx - z._mvV\"",
+   "index.html:other:\"auncher' && pz._mvVX != null) {\"",
+   "index.html:other:\"   let lx = pz._mvVX * tf, lz = pz._\""
+  ],
+  "numericWrite": true
+ },
+ "_mvVZ": {
+  "t": "number",
+  "n": 3,
+  "unsafe": [
+   "index.html:compound:\"._mvVX) * k; z._mvVZ += (vz - z._mvV\"",
+   "index.html:other:\" * tf, lz = pz._mvVZ * tf;\""
+  ],
+  "numericWrite": true
+ },
+ "_mvX": {
+  "t": "number",
+  "n": 2,
+  "unsafe": [
+   "index.html:other:\" vx = (p.x - z._mvX) / dt, vz = (p.\""
+  ],
+  "numericWrite": false
+ },
+ "_mvZ": {
+  "t": "number",
+  "n": 2,
+  "unsafe": [
+   "index.html:other:\" vz = (p.z - z._mvZ) / dt;\""
+  ],
+  "numericWrite": false
+ },
+ "_mvT": {
+  "t": "number",
+  "n": 4,
+  "unsafe": [
+   "index.html:other:\"= simTime - (z._mvT == null ? -1 : \"",
+   "index.html:other:\"z._mvT);\"",
+   "index.html:other:\"        if (z._mvT != null && dt >\""
+  ],
+  "numericWrite": false
+ },
+ "_tpF": {
+  "t": "number",
+  "n": 2,
+  "unsafe": [
+   "index.html:other:\"      if (z._tpF !== zFrame) { z\""
+  ],
+  "numericWrite": false
+ },
+ "_tp": {
+  "t": "object",
+  "n": 7,
+  "unsafe": [
+   "index.html:other:\"      return z._tp;\"",
+   "index.html:other:\"          z._tp === localPlayer\"",
+   "shambler-recovery.js:other:\"    target:z._tp?.position||null\"",
+   "shambler-recovery.js:other:\"const target=z._tp?.position||s.ta\"",
+   "shambler-recovery.js:other:\"const target=z._tp?.position||s.ta\"",
+   "spider-motion.js:other:\"  const prey=z._tp?.position;\""
+  ],
+  "numericWrite": false
+ },
+ "_tickPh": {
+  "t": "number",
+  "n": 3,
+  "unsafe": [
+   "index.html:other:\"      if (z._tickPh === undefined) \"",
+   "index.html:other:\"&& (zFrame + z._tickPh) % n !== 0 && a\""
+  ],
+  "numericWrite": true
+ },
+ "_tickAcc": {
+  "t": "number",
+  "n": 3,
+  "unsafe": [],
+  "numericWrite": true
+ },
+ "hz": {
+  "t": "object|null",
+  "n": 59,
+  "unsafe": [
+   "index.html:other:\"s(t.z - z) - t.hz)) < clear\"",
+   "index.html:other:\"ath.max(t.cz-t.hz,Math.min(t.cz+t\"",
+   "index.html:other:\".hz,p.z)):b.z};\"",
+   "index.html:other:\"ix(headRoll, G.hz * F.head);\"",
+   "index.html:other:\"ix(headRoll, G.hz);\"",
+   "index.html:other:\"x, h / 2, thin.hz);\"",
+   "index.html:other:\"ong = t.hx > t.hz;\"",
+   "index.html:other:\"L_TOP / 2, box.hz);\"",
+   "index.html:other:\"= box.hx > box.hz, nx = alongX ? \"",
+   "index.html:other:\" (alongX ? box.hz : box.hx) + z.r\"",
+   "index.html:other:\"(z - t.cz) - t.hz);\"",
+   "index.html:other:\"thin.cz - thin.hz, z1: thin.cz + \"",
+   "index.html:other:\"thin.hz, y0, y1: y0 + h\"",
+   "index.html:other:\" x0: b.x - box.hz, x1: b.x + box.\"",
+   "index.html:other:\" z0: b.z - box.hz, z1: b.z + box.\"",
+   "index.html:other:\"p - u * 0.8, S.hz + S.sz * dist);\"",
+   "index.html:other:\"SHOT.lookUp, S.hz);\"",
+   "index.html:other:\"box.cz) <= box.hz\"",
+   "index.html:other:\"hx > windowBox.hz;\"",
+   "index.html:other:\"hx : windowBox.hz;\"",
+   "index.html:other:\"/ 2, windowBox.hz],\"",
+   "index.html:other:\".09, windowBox.hz]\"",
+   "index.html:other:\"gX ? windowBox.hz : sideHalf\"",
+   "index.html:other:\"n.hx, hy, thin.hz);\"",
+   "index.html:other:\", cy, b.z, box.hz, hy, box.hz);\"",
+   "index.html:other:\"GRID / 4 : box.hz, hy, dz ? BUILD\"",
+   "index.html:other:\"GRID / 4 : box.hz);\"",
+   "index.html:other:\"h.max(t.cz - t.hz, Math.min(t.cz \"",
+   "index.html:other:\"+ t.hz, z)) : b.z;\"",
+   "index.html:other:\" if (t.hx <= t.hz) { nx = (x >= t\"",
+   "index.html:other:\"ntR, hz = thin.hz + entR;\"",
+   "index.html:other:\"onst hub = box.hz + entR;\"",
+   "index.html:other:\"GRID / 4 : box.hz) + entR;\"",
+   "index.html:other:\"GRID / 4 : box.hz) + entR;\"",
+   "index.html:other:\"!z.alive || !z.hz) continue;\"",
+   "index.html:other:\"        if (z.hz.muster && z.hzD\"",
+   "index.html:other:\"        if (z.hz.muster && !z.po\"",
+   "index.html:other:\"        if (z.hz === undefined) \"",
+   "index.html:other:\" hzChase = !!z.hz && !lured && !w\"",
+   "index.html:other:\" (hzChase && z.hz.slot && !OWN_ST\"",
+   "index.html:other:\"         if (z.hz.muster && hzCha\"",
+   "index.html:other:\"         if (z.hz.lunge) {\"",
+   "feral-motion.js:other:\"ap(head.z-prev.hz))/dt:0);}\"",
+   "player-vault.js:other:\"ngX=box.hx>box.hz, half=alongX?bo\"",
+   "player-vault.js:other:\"x.hz:box.hx, span=al\"",
+   "player-vault.js:other:\"ngX?box.hx:box.hz;\""
+  ],
+  "numericWrite": true
+ },
+ "paceMul": {
+  "t": "number",
+  "n": 2,
+  "unsafe": [],
+  "numericWrite": true
+ },
+ "paceBand": {
+  "t": "string",
+  "n": 2,
+  "unsafe": [],
+  "numericWrite": false
+ },
+ "paceNight": {
+  "t": "number",
+  "n": 1,
+  "unsafe": [],
+  "numericWrite": false
+ },
+ "paceU": {
+  "t": "number",
+  "n": 1,
+  "unsafe": [],
+  "numericWrite": false
+ },
+ "hzCap": {
+  "t": "number",
+  "n": 3,
+  "unsafe": [
+   "index.html:other:\"ath.min(spd, z.hzCap * (bloodMoon ? \""
+  ],
+  "numericWrite": false
+ },
+ "hzLungeAbs": {
+  "t": "number",
+  "n": 4,
+  "unsafe": [
+   "index.html:other:\"spd * z.hzLungeAbs / Math.max(0.1,\"",
+   "index.html:other:\" z.speed), z.hzLungeAbs * (bloodMoon ? \""
+  ],
+  "numericWrite": false
+ },
+ "chargeBase": {
+  "t": "number",
+  "n": 4,
+  "unsafe": [
+   "index.html:other:\"0 ? Math.pow(z.chargeBase / z.baseSpeed, \""
+  ],
+  "numericWrite": false
+ },
+ "hzRole": {
+  "t": "string",
+  "n": 4,
+  "unsafe": [
+   "index.html:other:\"        if (z.hzRole === 'mass' && z\"",
+   "index.html:other:\"ordeRoleSlot(z.hzRole, Math.atan2(zz1\""
+  ],
+  "numericWrite": false
+ },
+ "wit": {
+  "t": "number",
+  "n": 3,
+  "unsafe": [
+   "horde.js:other:\"urn p ? lerp(p.wit[0], p.wit[1], c\""
+  ],
+  "numericWrite": false
+ },
+ "hzSlot": {
+  "t": "number",
+  "n": 10,
+  "unsafe": [
+   "index.html:other:\"        if (z.hzSlot >= 0) L[z.hzSlo\"",
+   "index.html:other:\"         if (z.hzSlot < 0 || z.hzSlot\"",
+   "index.html:other:\"         if (z.hzSlot >= 0 && L[z.hzS\"",
+   "index.html:other:\"lot] > 0) L[z.hzSlot]--;\"",
+   "index.html:other:\"           L[z.hzSlot]++;\"",
+   "index.html:other:\"  } else if (z.hzSlot >= 0 && hzPd > \""
+  ],
+  "numericWrite": true
+ },
+ "hzSlotT": {
+  "t": "number",
+  "n": 4,
+  "unsafe": [
+   "index.html:compound:\"            z.hzSlotT -= dt;\"",
+   "index.html:other:\"zSlot < 0 || z.hzSlotT <= 0 || (z.hzRo\""
+  ],
+  "numericWrite": true
+ },
+ "hzOpenT": {
+  "t": "number",
+  "n": 4,
+  "unsafe": [
+   "index.html:compound:\"            z.hzOpenT -= dt;\"",
+   "index.html:other:\"         if (z.hzOpenT <= 0) {\""
+  ],
+  "numericWrite": true
+ },
+ "hzOpen": {
+  "t": "boolean",
+  "n": 3,
+  "unsafe": [],
+  "numericWrite": false
+ },
+ "hzLungeT": {
+  "t": "number",
+  "n": 12,
+  "unsafe": [
+   "index.html:other:\"T -= dt; if (z.hzLungeT <= 0 && z.typeK\"",
+   "index.html:other:\".min(1, (1 - z.hzLungeT / HORDE.LUNGE_S\""
+  ],
+  "numericWrite": true
+ },
+ "hzCoilT": {
+  "t": "number",
+  "n": 8,
+  "unsafe": [
+   "index.html:other:\"*= 0.35; if (z.hzCoilT <= 0) { z.hzCoi\"",
+   "index.html:other:\" - z.hzCoilT / 0.18); m = 0;\""
+  ],
+  "numericWrite": true
+ },
+ "hzLungeRec": {
+  "t": "number",
+  "n": 5,
+  "unsafe": [
+   "index.html:other:\"= 1 - sm(1 - z.hzLungeRec / 0.24); m = 1;\""
+  ],
+  "numericWrite": true
+ },
+ "hzLungeCd": {
+  "t": "number",
+  "n": 5,
+  "unsafe": [
+   "index.html:other:\" (hzChase && z.hzLungeCd <= 0 && z.attac\""
+  ],
+  "numericWrite": true
+ },
+ "hzRecoilT": {
+  "t": "number",
+  "n": 4,
+  "unsafe": [],
+  "numericWrite": true
+ },
+ "hzRecoilCd": {
+  "t": "number",
+  "n": 4,
+  "unsafe": [],
+  "numericWrite": true
+ },
+ "hzRecoilSide": {
+  "t": "number",
+  "n": 3,
+  "unsafe": [],
+  "numericWrite": true
+ },
+ "hzStalk": {
+  "t": "number",
+  "n": 4,
+  "unsafe": [
+   "index.html:compound:\"             z.hzStalk += dt; spd *= H\"",
+   "index.html:other:\"         if (z.hzStalk >= HORDE.STALK_\""
+  ],
+  "numericWrite": true
+ },
+ "hzMustered": {
+  "t": "boolean",
+  "n": 5,
+  "unsafe": [
+   "index.html:other:\"   else if (!z.hzMustered && !z.poiGuard \""
+  ],
+  "numericWrite": false
+ },
+ "hzSpX": {
+  "t": "number",
+  "n": 6,
+  "unsafe": [
+   "index.html:compound:\"CE_FREE_D) { a.hzSpX -= ux * w; a.hz\"",
+   "index.html:compound:\"CE_FREE_D) { b.hzSpX += ux * w; b.hz\"",
+   "index.html:other:\"       sx += z.hzSpX * HORDE.SPACE_W\""
+  ],
+  "numericWrite": true
+ },
+ "hzSpZ": {
+  "t": "number",
+  "n": 6,
+  "unsafe": [
+   "index.html:compound:\"X -= ux * w; a.hzSpZ -= uz * w; }\"",
+   "index.html:compound:\"X += ux * w; b.hzSpZ += uz * w; }\"",
+   "index.html:other:\"ACE_W; sz += z.hzSpZ * HORDE.SPACE_W\""
+  ],
+  "numericWrite": true
+ },
+ "hzD": {
+  "t": "number",
+  "n": 10,
+  "unsafe": [
+   "index.html:other:\"hzChasing && z.hzD < HORDE.MASS_R)\"",
+   "index.html:other:\"hz.muster && z.hzD >= HORDE.MUSTER\"",
+   "index.html:other:\"_IN && z.hzD <= HORDE.MUSTER\"",
+   "index.html:other:\".poiGuard && z.hzD >= HORDE.MUSTER\"",
+   "index.html:other:\"_IN && z.hzD <= HORDE.MUSTER\"",
+   "index.html:other:\"      if (!(z.hzD > HORDE.RECOIL_\"",
+   "index.html:other:\" if (a.hz && a.hzD > HORDE.SPACE_F\"",
+   "index.html:other:\" if (b.hz && b.hzD > HORDE.SPACE_F\""
+  ],
+  "numericWrite": true
+ },
+ "hzReact": {
+  "t": "null|string",
+  "n": 3,
+  "unsafe": [
+   "index.html:other:\"      if (z.hzReact === 'stagger') \"",
+   "index.html:other:\"      if (z.hzReact !== 'duck' || z\""
+  ],
+  "numericWrite": false
+ },
+ "hzStaggerT": {
+  "t": "number",
+  "n": 7,
+  "unsafe": [
+   "index.html:other:\"GGER_PUSH * (z.hzStaggerT / HORDE.STAGGER\"",
+   "index.html:other:\".hzStaggerT - dt);\""
+  ],
+  "numericWrite": true
+ },
+ "hzStaggerCd": {
+  "t": "number",
+  "n": 4,
+  "unsafe": [],
+  "numericWrite": true
+ },
+ "hzStagX": {
+  "t": "number",
+  "n": 3,
+  "unsafe": [
+   "index.html:other:\" * dt; mx += z.hzStagX * k; mz += z.hz\""
+  ],
+  "numericWrite": true
+ },
+ "hzStagZ": {
+  "t": "number",
+  "n": 3,
+  "unsafe": [
+   "index.html:other:\"X * k; mz += z.hzStagZ * k; }\""
+  ],
+  "numericWrite": true
+ },
+ "farLod": {
+  "t": "boolean",
+  "n": 36,
+  "unsafe": [
+   "index.html:other:\"hidden · ' + c.farLod + ' far-LOD · '\"",
+   "index.html:other:\"f (far === !!z.farLod) return;\"",
+   "index.html:other:\"        if (!z.farLod && ud.crawlLimb\"",
+   "index.html:other:\"        if (!z.farLod && ud.legLG) {\"",
+   "index.html:other:\"        if (!z.farLod && !z.crawling \"",
+   "index.html:other:\"(!rising && !z.farLod && !z.crawling \"",
+   "index.html:other:\"        if (!z.farLod && ud.head && !\"",
+   "index.html:other:\"        if (!z.farLod) {\"",
+   "index.html:other:\"        if (!z.farLod && ud.head && !\"",
+   "index.html:other:\"        if (!z.farLod && !ud.crawlLim\"",
+   "index.html:other:\" && z.hz && !z.farLod && !z.crawling \"",
+   "index.html:other:\"        if (!z.farLod && ud.legLG && \"",
+   "index.html:other:\"artT > 0 && !z.farLod) {\"",
+   "index.html:other:\" poseWork = !z.farLod && (zombiePoseV\"",
+   "feral-motion.js:other:\"h?.visible&&!z.farLod&&inDomain(z)&&\"",
+   "screamer-appearance.js:other:\"&&!z.below&&!z.farLod;smoke.visible=s\""
+  ],
+  "numericWrite": false
+ },
+ "windowSearchT": {
+  "t": "number",
+  "n": 4,
+  "unsafe": [
+   "index.html:other:\"      if (z.windowSearchT <= 0) {\""
+  ],
+  "numericWrite": true
+ },
+ "windowTarget": {
+  "t": "null",
+  "n": 6,
+  "unsafe": [
+   "index.html:other:\"   const w = z.windowTarget;\""
+  ],
+  "numericWrite": false
+ },
+ "hzChasing": {
+  "t": "boolean",
+  "n": 2,
+  "unsafe": [],
+  "numericWrite": false
+ },
+ "hzBear": {
+  "t": "number",
+  "n": 3,
+  "unsafe": [],
+  "numericWrite": true
+ },
+ "hzSlotMass": {
+  "t": "number|null",
+  "n": 2,
+  "unsafe": [
+   "index.html:other:\"deFrontMoved(z.hzSlotMass, hordeState.mas\""
+  ],
+  "numericWrite": false
+ },
+ "flowX": {
+  "t": "number|null",
+  "n": 7,
+  "unsafe": [
+   "index.html:other:\"? _ffOut.x : z.flowX + (_ffOut.x - z\"",
+   "index.html:other:\".flowX) * e);\"",
+   "index.html:other:\"st fl = zHyp(z.flowX, z.flowZ) || 1;\"",
+   "index.html:other:\"        sx = z.flowX / fl; sz = z.fl\""
+  ],
+  "numericWrite": true
+ },
+ "flowZ": {
+  "t": "number",
+  "n": 6,
+  "unsafe": [
+   "index.html:other:\"? _ffOut.z : z.flowZ + (_ffOut.z - z\"",
+   "index.html:other:\".flowZ) * e);\"",
+   "index.html:other:\"Hyp(z.flowX, z.flowZ) || 1;\"",
+   "index.html:other:\"X / fl; sz = z.flowZ / fl; flowed = \""
+  ],
+  "numericWrite": true
+ },
+ "inWater": {
+  "t": "boolean",
+  "n": 13,
+  "unsafe": [
+   "index.html:other:\"'spider' && !z.inWater) {\"",
+   "drowned-behavior.js:other:\"  if(hold&&!z.inWater)for(const leg o\"",
+   "screamer-behavior.js:other:\"Lost?.legR&&!z.inWater&&threat?.allow&\"",
+   "zombie-ability-runtime.js:other:\"if(allowed&&!z.inWater)for(const p of \""
+  ],
+  "numericWrite": false
+ },
+ "fuseT": {
+  "t": "number",
+  "n": 4,
+  "unsafe": [
+   "index.html:other:\"5 * Math.sin(z.fuseT * (dTarget < 14\"",
+   "bomber-appearance.js:other:\"*Math.sin(z.fuseT*(d<14?9:4)))*1.\""
+  ],
+  "numericWrite": true
+ },
+ "stuckT": {
+  "t": "number",
+  "n": 4,
+  "unsafe": [],
+  "numericWrite": true
+ },
+ "riseOff": {
+  "t": "number",
+  "n": 4,
+  "unsafe": [
+   "index.html:other:\"osition.y -= z.riseOff;\""
+  ],
+  "numericWrite": true
+ },
+ "footIdx": {
+  "t": "number",
+  "n": 4,
+  "unsafe": [
+   "index.html:other:\"  if (fi !== z.footIdx) {\"",
+   "index.html:other:\"  if (fi !== z.footIdx) {\""
+  ],
+  "numericWrite": false
+ },
+ "_castShadow": {
+  "t": "boolean",
+  "n": 2,
+  "unsafe": [
+   "index.html:other:\"         if (z._castShadow !== want) {\""
+  ],
+  "numericWrite": false
+ },
+ "groanCd": {
+  "t": "number",
+  "n": 4,
+  "unsafe": [
+   "index.html:other:\"ndom() * 6 : z.groanCd) - dt;\"",
+   "index.html:other:\"        if (z.groanCd <= 0) {\""
+  ],
+  "numericWrite": true
+ },
+ "idle": {
+  "t": "object",
+  "n": 6,
+  "unsafe": [
+   "index.html:other:\"Text('hud.wave.idle', {day}));\"",
+   "index.html:other:\"     let s = z.idle;\"",
+   "index.html:other:\"eIdle.state, s.idle);\""
+  ],
+  "numericWrite": false
+ },
+ "_hzReach": {
+  "t": "number",
+  "n": 2,
+  "unsafe": [],
+  "numericWrite": true
+ },
+ "_preSepX": {
+  "t": "number",
+  "n": 3,
+  "unsafe": [
+   "index.html:other:\"  const ax = z._preSepX - tp.x, az = z.\""
+  ],
+  "numericWrite": false
+ },
+ "_preSepZ": {
+  "t": "number",
+  "n": 2,
+  "unsafe": [
+   "index.html:other:\"- tp.x, az = z._preSepZ - tp.z, bx = z.\""
+  ],
+  "numericWrite": false
+ },
+ "stuckX": {
+  "t": "number",
+  "n": 4,
+  "unsafe": [],
+  "numericWrite": false
+ },
+ "stuckZ": {
+  "t": "number",
+  "n": 4,
+  "unsafe": [],
+  "numericWrite": false
+ },
+ "swimRippleT": {
+  "t": "number",
+  "n": 3,
+  "unsafe": [
+   "index.html:other:\"         if (z.swimRippleT <= 0) {\""
+  ],
+  "numericWrite": true
+ },
+ "seenNoted": {
+  "t": "boolean",
+  "n": 4,
+  "unsafe": [
+   "index.html:other:\"        if (!z.seenNoted) noteFirstSeen(\""
+  ],
+  "numericWrite": false
+ },
+ "_rim": {
+  "t": "number",
+  "n": 4,
+  "unsafe": [],
+  "numericWrite": true
+ },
+ "reachK": {
+  "t": "number",
+  "n": 3,
+  "unsafe": [
+   "index.html:other:\"  const rk = z.reachK, zg = z;   // G\""
+  ],
+  "numericWrite": true
+ },
+ "twitchCd": {
+  "t": "number",
+  "n": 3,
+  "unsafe": [
+   "index.html:other:\"ndom() * 5 : z.twitchCd) - dt;\"",
+   "index.html:other:\"         if (z.twitchCd <= 0) { z.twitc\""
+  ],
+  "numericWrite": true
+ },
+ "lookK": {
+  "t": "number",
+  "n": 4,
+  "unsafe": [
+   "index.html:other:\"  const ky = z.lookK * (seen ? 1 : 0\""
+  ],
+  "numericWrite": true
+ },
+ "_feet": {
+  "t": "object",
+  "n": 1,
+  "unsafe": [],
+  "numericWrite": false
+ },
+ "_lean": {
+  "t": "object",
+  "n": 1,
+  "unsafe": [],
+  "numericWrite": false
+ },
+ "unstickT": {
+  "t": "number",
+  "n": 7,
+  "unsafe": [
+   "index.html:compound:\"          z.unstickT -= dt;\""
+  ],
+  "numericWrite": true
+ },
+ "unstickSide": {
+  "t": "number",
+  "n": 3,
+  "unsafe": [],
+  "numericWrite": true
+ },
+ "defSeek": {
+  "t": "boolean",
+  "n": 6,
+  "unsafe": [
+   "index.html:other:\"ce seekers (`z.defSeek`): they go for \"",
+   "index.html:other:\"reatB) || (!!z.defSeek && !!z.defSeekB\"",
+   "index.html:other:\"      return z.defSeek;\""
+  ],
+  "numericWrite": true
+ },
+ "rangedAbility": {
+  "t": "object",
+  "n": 2,
+  "unsafe": [
+   "zombie-ability-runtime.js:other:\"false;delete z.rangedAbility;if(z.mesh)updat\""
+  ],
+  "numericWrite": false
+ },
+ "abilityBusy": {
+  "t": "boolean",
+  "n": 28,
+  "unsafe": [
+   "index.html:other:\"const far = !z.abilityBusy && hypot(z.mesh\"",
+   "index.html:other:\"<= reach && !z.abilityBusy) {\"",
+   "index.html:other:\" } else if (!z.abilityBusy) {\"",
+   "index.html:other:\"'charge' && !z.abilityBusy && !graceFreeze\"",
+   "index.html:other:\"= 'boss' && !z.abilityBusy && !graceFreeze\"",
+   "index.html:other:\"dowRoute && !z.abilityBusy && z.attackWind\"",
+   "index.html:other:\"dowRoute && !z.abilityBusy && z.attackWind\"",
+   "index.html:other:\" !rising && !z.abilityBusy && !gameOver &&\"",
+   "index.html:other:\" !rising && !z.abilityBusy && tactics !== \"",
+   "brute-behavior.js:other:\"!z.poiAwake||z.abilityBusy;\"",
+   "drowned-behavior.js:other:\"indowClimb&&!z.abilityBusy&&!z.partsLost?.\"",
+   "drowned-motion.js:other:\"windowClimb||z.abilityBusy;\"",
+   "screamer-behavior.js:other:\"windowClimb||z.abilityBusy;\"",
+   "spitter-motion.js:other:\"windowClimb||z.abilityBusy;\""
+  ],
+  "numericWrite": false
+ },
+ "defSeekT": {
+  "t": "number",
+  "n": 3,
+  "unsafe": [
+   "index.html:other:\"      if (z.defSeekT <= 0 || (z.defS\""
+  ],
+  "numericWrite": true
+ },
+ "defSeekB": {
+  "t": "null",
+  "n": 7,
+  "unsafe": [
+   "index.html:other:\"defSeek && !!z.defSeekB)); }\"",
+   "index.html:other:\".defSeekB))) {\"",
+   "index.html:other:\"hable(z, z.defSeekB, dt)) return nu\"",
+   "index.html:other:\"      return z.defSeekB;\""
+  ],
+  "numericWrite": false
+ },
+ "chargeCd": {
+  "t": "number",
+  "n": 4,
+  "unsafe": [
+   "index.html:other:\"ndom() * 2 : z.chargeCd) - dt;\"",
+   "index.html:other:\"  } else if (z.chargeCd <= 0 && dist > \""
+  ],
+  "numericWrite": true
+ },
+ "twitchT": {
+  "t": "number",
+  "n": 5,
+  "unsafe": [
+   "index.html:compound:\"            z.twitchT -= dt;\"",
+   "index.html:other:\"(Math.max(0, z.twitchT) / 0.2 * Math.P\""
+  ],
+  "numericWrite": true
+ },
+ "twitchDir": {
+  "t": "number",
+  "n": 3,
+  "unsafe": [
+   "index.html:other:\" headLoll += z.twitchDir * 0.42 * k; hea\""
+  ],
+  "numericWrite": true
+ },
+ "lookYaw": {
+  "t": "number",
+  "n": 3,
+  "unsafe": [
+   "index.html:other:\"adRY || 0) + z.lookYaw;\""
+  ],
+  "numericWrite": true
+ },
+ "lookPitch": {
+  "t": "number",
+  "n": 3,
+  "unsafe": [
+   "index.html:other:\"  headBob += z.lookPitch;\""
+  ],
+  "numericWrite": true
+ },
+ "chargeWind": {
+  "t": "number",
+  "n": 8,
+  "unsafe": [
+   "index.html:compound:\"            z.chargeWind -= dt;\"",
+   "index.html:other:\" Math.max(0, z.chargeWind)) * 6;\"",
+   "index.html:other:\"         if (z.chargeWind <= 0) {\""
+  ],
+  "numericWrite": true
+ },
+ "chargeDX": {
+  "t": "number",
+  "n": 3,
+  "unsafe": [
+   "index.html:other:\"        sx = z.chargeDX; sz = z.chargeD\"",
+   "index.html:other:\"     velX += z.chargeDX * 13; velZ += z\""
+  ],
+  "numericWrite": false
+ },
+ "chargeDZ": {
+  "t": "number",
+  "n": 3,
+  "unsafe": [
+   "index.html:other:\"argeDX; sz = z.chargeDZ;\"",
+   "index.html:other:\" 13; velZ += z.chargeDZ * 13; vy = Math\""
+  ],
+  "numericWrite": false
+ },
+ "fogKeepT": {
+  "t": "number",
+  "n": 3,
+  "unsafe": [],
+  "numericWrite": true
+ },
+ "chargeT": {
+  "t": "number",
+  "n": 13,
+  "unsafe": [
+   "index.html:compound:\"            z.chargeT -= dt;\"",
+   "index.html:other:\"         if (z.chargeT <= 0) { z.charg\""
+  ],
+  "numericWrite": true
+ },
+ "chargeHit": {
+  "t": "boolean",
+  "n": 4,
+  "unsafe": [
+   "index.html:other:\"        if (!z.chargeHit) {\""
+  ],
+  "numericWrite": false
+ },
+ "noticed": {
+  "t": "boolean",
+  "n": 3,
+  "unsafe": [
+   "index.html:other:\"if (seen && !z.noticed && gd < 12) { z\""
+  ],
+  "numericWrite": false
+ },
+ "noticeT": {
+  "t": "number",
+  "n": 3,
+  "unsafe": [
+   "index.html:other:\"(Math.max(0, z.noticeT) / 0.45 * Math.\""
+  ],
+  "numericWrite": true
+ },
+ "_pendingAttack": {
+  "t": "null",
+  "n": 10,
+  "unsafe": [
+   "index.html:other:\" const atk = z._pendingAttack;\""
+  ],
+  "numericWrite": false
+ },
+ "ringHeld": {
+  "t": "number",
+  "n": 1,
+  "unsafe": [],
+  "numericWrite": true
+ },
+ "climber": {
+  "t": "boolean",
+  "n": 4,
+  "unsafe": [
+   "index.html:other:\".position.y, z.climber ? (z.climbHeigh\"",
+   "index.html:other:\".position.y, z.climber ? (z.climbHeigh\""
+  ],
+  "numericWrite": false
+ },
+ "climbHeight": {
+  "t": "number",
+  "n": 5,
+  "unsafe": [
+   "index.html:other:\"!= null ? role.climbHeight : CLIMB_HEIGHT;\""
+  ],
+  "numericWrite": false
+ },
+ "slamCd": {
+  "t": "number",
+  "n": 3,
+  "unsafe": [
+   "index.html:other:\"(wantSlam && z.slamCd <= 0 && !(z.att\""
+  ],
+  "numericWrite": true
+ },
+ "slamWind": {
+  "t": "number",
+  "n": 10,
+  "unsafe": [
+   "index.html:compound:\"            z.slamWind -= dt;\"",
+   "index.html:other:\"         if (z.slamWind <= 0) {\"",
+   "index.html:other:\" Math.max(0, z.slamWind) / 0.75, rise =\""
+  ],
+  "numericWrite": true
+ },
+ "slamFollowT": {
+  "t": "number",
+  "n": 6,
+  "unsafe": [
+   "index.html:other:\"onst f = 1 - z.slamFollowT / 0.5, s = 1 - \""
+  ],
+  "numericWrite": true
+ },
+ "groundRise": {
+  "t": "boolean",
+  "n": 1,
+  "unsafe": [],
+  "numericWrite": false
+ },
+ "shamblerRecoveryActive": {
+  "t": "boolean",
+  "n": 6,
+  "unsafe": [
+   "shambler-recovery.js:other:\"ide,active:!!z.shamblerRecoveryActive}:null;\"",
+   "shambler-steering.js:other:\".hitPartT>0||z.shamblerRecoveryActive;\""
+  ],
+  "numericWrite": false
+ },
+ "lurchCd": {
+  "t": "number",
+  "n": 3,
+  "unsafe": [
+   "index.html:other:\"ndom() * 6 : z.lurchCd) - dt;\"",
+   "index.html:other:\"         if (z.lurchCd <= 0) { z.lurch\""
+  ],
+  "numericWrite": true
+ },
+ "lurchT": {
+  "t": "number",
+  "n": 4,
+  "unsafe": [
+   "index.html:compound:\"             z.lurchT -= dt;\"",
+   "index.html:other:\"(Math.max(0, z.lurchT) / 0.55 * Math.\""
+  ],
+  "numericWrite": true
+ },
+ "lurchDir": {
+  "t": "number",
+  "n": 2,
+  "unsafe": [
+   "index.html:other:\" gaitSway += z.lurchDir * 0.16 * k; hea\""
+  ],
+  "numericWrite": true
+ },
+ "leapCd": {
+  "t": "number",
+  "n": 5,
+  "unsafe": [
+   "index.html:other:\"null ? 1.2 : z.leapCd) - dt;\"",
+   "index.html:other:\"  } else if (z.leapCd <= 0 && z.speed\""
+  ],
+  "numericWrite": true
+ },
+ "leapDur": {
+  "t": "number",
+  "n": 7,
+  "unsafe": [
+   "index.html:other:\"   z.leapT = z.leapDur;\"",
+   "index.html:other:\"Spd = dist / z.leapDur;\"",
+   "index.html:other:\" - z.leapT / z.leapDur;\"",
+   "leaper-motion.js:other:\"mp(1-z.leapT/z.leapDur):0,tuck=air?Mat\""
+  ],
+  "numericWrite": true
+ },
+ "leapT": {
+  "t": "number",
+  "n": 20,
+  "unsafe": [
+   "index.html:other:\"seT <= 0 && fi.leapT <= 0 && sc && s\"",
+   "index.html:other:\"        if (fi.leapT === 0.01) { P.y\"",
+   "index.html:compound:\"            fi.leapT += dt;\"",
+   "index.html:compound:\"            z.leapT -= dt;\"",
+   "index.html:other:\"         if (z.leapT <= 0) {\"",
+   "index.html:other:\"onst u = 1 - z.leapT / z.leapDur;\"",
+   "leaper-motion.js:other:\"=air?clamp(1-z.leapT/z.leapDur):0,tu\""
+  ],
+  "numericWrite": true
+ },
+ "leapDX": {
+  "t": "number",
+  "n": 2,
+  "unsafe": [
+   "index.html:other:\"        sx = z.leapDX; sz = z.leapDZ;\""
+  ],
+  "numericWrite": false
+ },
+ "leapDZ": {
+  "t": "number",
+  "n": 2,
+  "unsafe": [
+   "index.html:other:\"leapDX; sz = z.leapDZ; spd = z.leapSp\""
+  ],
+  "numericWrite": false
+ },
+ "leapSpd": {
+  "t": "number",
+  "n": 2,
+  "unsafe": [
+   "index.html:other:\"eapDZ; spd = z.leapSpd;\""
+  ],
+  "numericWrite": false
+ },
+ "leapH": {
+  "t": "number",
+  "n": 2,
+  "unsafe": [
+   "index.html:other:\"* Math.PI) * z.leapH;\""
+  ],
+  "numericWrite": true
+ },
+ "spiderSpitSnap": {
+  "t": "number",
+  "n": 6,
+  "unsafe": [
+   "spider-motion.js:other:\".PI*z.spiderSpitSnap/SPIDER_MOTION.s\""
+  ],
+  "numericWrite": true
+ },
+ "spitCd": {
+  "t": "number",
+  "n": 11,
+  "unsafe": [
+   "index.html:other:\" dist > 4 && z.spitCd <= 0 && z.lineC\"",
+   "index.html:other:\" dist > 4 && z.spitCd <= 0) {\"",
+   "index.html:other:\"h.random() : z.spitCd) - dt;\"",
+   "index.html:other:\"  } else if (z.spitCd <= 0 && dT > 4.\""
+  ],
+  "numericWrite": true
+ },
+ "lineT": {
+  "t": "number",
+  "n": 8,
+  "unsafe": [
+   "index.html:other:\"ineClear && (z.lineT == null ? -9 : \"",
+   "index.html:other:\"z.lineT) > -0.5) return\"",
+   "index.html:other:\"         if (z.lineT <= 0 && dist < \"",
+   "zombie-ability-runtime.js:compound:\"    s.lineT-=dt;\"",
+   "zombie-ability-runtime.js:other:\"    if(s.lineT<=0&&(a.stage===\""
+  ],
+  "numericWrite": true
+ },
+ "lineGo": {
+  "t": "number",
+  "n": 5,
+  "unsafe": [],
+  "numericWrite": true
+ },
+ "spiderSpitWind": {
+  "t": "number",
+  "n": 8,
+  "unsafe": [
+   "index.html:other:\".spiderSpitWind - dt); spd *= 0\"",
+   "index.html:other:\"         if (z.spiderSpitWind <= 0) {\""
+  ],
+  "numericWrite": true
+ },
+ "spiderShot": {
+  "t": "null",
+  "n": 5,
+  "unsafe": [
+   "index.html:other:\" z.spiderShot; z.spiderShot =\""
+  ],
+  "numericWrite": false
+ },
+ "lineClear": {
+  "t": "boolean",
+  "n": 11,
+  "unsafe": [
+   "index.html:other:\"st hadLine = z.lineClear;\"",
+   "index.html:other:\"        if (!z.lineClear) { z.lineSawBlo\"",
+   "index.html:other:\"eSawBlock && z.lineClear !== false && z.\"",
+   "index.html:other:\"st < near && z.lineClear !== false) {\"",
+   "index.html:other:\"st < hold && z.lineClear !== false && !(\"",
+   "index.html:other:\"t < reach && z.lineClear !== false && sp\"",
+   "index.html:other:\"itCd <= 0 && z.lineClear !== false && sp\"",
+   "spider-motion.js:other:\"      if(z.lineClear===false||desire\""
+  ],
+  "numericWrite": false
+ },
+ "strafeT": {
+  "t": "number",
+  "n": 2,
+  "unsafe": [
+   "index.html:other:\"0) - dt; if (z.strafeT <= 0) { z.straf\""
+  ],
+  "numericWrite": true
+ },
+ "slowT": {
+  "t": "static",
+  "n": 9,
+  "unsafe": [
+   "index.html:other:\"h.slowT - dt);\"",
+   "index.html:other:\"d, slowT: dive.slowT, slowing: slowm\""
+  ],
+  "numericWrite": true
+ },
+ "_defenseKill": {
+  "t": "static",
+  "n": 5,
+  "unsafe": [
+   "index.html:other:\", defense: !!z._defenseKill });\""
+  ],
+  "numericWrite": false
+ },
+ "bleedT": {
+  "t": "static",
+  "n": 4,
+  "unsafe": [
+   "index.html:compound:\"          z.bleedT -= dt;\"",
+   "index.html:other:\"0.5 + 0.5 * (z.bleedT / 2.4));\""
+  ],
+  "numericWrite": true
+ },
+ "bleedPart": {
+  "t": "static",
+  "n": 3,
+  "unsafe": [
+   "index.html:other:\"Data[PART_UD[z.bleedPart]];\"",
+   "index.html:other:\"  const up = z.bleedPart === 'head';\""
+  ],
+  "numericWrite": false
+ },
+ "bleedPulse": {
+  "t": "static",
+  "n": 4,
+  "unsafe": [
+   "index.html:compound:\"          z.bleedPulse -= dt;\"",
+   "index.html:other:\"         if (z.bleedPulse <= 0) {\""
+  ],
+  "numericWrite": true
+ },
+ "hopping": {
+  "t": "static",
+  "n": 29,
+  "unsafe": [
+   "index.html:other:\"crawling && !z.hopping && !(ud && ud.c\"",
+   "index.html:other:\" ? 'crawl' : z.hopping ? 'hop' : z.typ\"",
+   "index.html:other:\"crawling && !z.hopping && ud.armLG && \"",
+   "index.html:other:\"crawling && !z.hopping && !(z.hitReact\"",
+   "index.html:other:\"crawling && !z.hopping) {\"",
+   "index.html:other:\"crawling and z.hopping). Over the walk\"",
+   "index.html:other:\"crawling && !z.hopping && !rising && z\"",
+   "drowned-behavior.js:other:\"z.crawling&&!z.hopping&&!z.sleeping&&!\""
+  ],
+  "numericWrite": false
+ },
+ "limbless": {
+  "t": "static",
+  "n": 1,
+  "unsafe": [],
+  "numericWrite": false
+ },
+ "shredAcc": {
+  "t": "static",
+  "n": 3,
+  "unsafe": [
+   "index.html:other:\"        if (z.shredAcc < shredStep) re\"",
+   "index.html:compound:\"        z.shredAcc -= shredStep;\""
+  ],
+  "numericWrite": true
+ },
+ "relayCalled": {
+  "t": "static",
+  "n": 1,
+  "unsafe": [],
+  "numericWrite": false
+ },
+ "burnT": {
+  "t": "static",
+  "n": 41,
+  "unsafe": [
+   "index.html:other:\" Math.min(1, z.burnT / 0.6);\"",
+   "index.html:other:\" t.burnDur = t.burnT;\"",
+   "index.html:compound:\"        t.burnT -= dt * (1 + we\"",
+   "index.html:other:\" Math.max(0, t.burnT / dur);        \"",
+   "index.html:other:\" Math.min(1, t.burnT / 2.2);        \"",
+   "index.html:other:\"        if (t.burnT <= 0) {\"",
+   "index.html:compound:\"          z.burnT -= dt * (1 + RA\""
+  ],
+  "numericWrite": true
+ },
+ "windowClimb": {
+  "t": "static",
+  "n": 23,
+  "unsafe": [
+   "index.html:other:\"   const w = z.windowClimb;\"",
+   "index.html:other:\"knocked || !!z.windowClimb;\"",
+   "drowned-behavior.js:other:\".getUpT>0)&&!z.windowClimb&&!z.abilityBusy\""
+  ],
+  "numericWrite": false
+ },
+ "headshotMul": {
+  "t": "static",
+  "n": 4,
+  "unsafe": [
+   "index.html:other:\"= role.headshotMul;\""
+  ],
+  "numericWrite": false
+ },
+ "fogHidden": {
+  "t": "static",
+  "n": 12,
+  "unsafe": [
+   "index.html:other:\" drawn · ' + c.fogHidden + ' fog-hidden \"",
+   "index.html:other:\"      hide = z.fogHidden ? d > _fcFar - \"",
+   "index.html:other:\" (hide === !!z.fogHidden) return;\"",
+   "index.html:other:\"        if (!o.fogHidden && (pointInCame\""
+  ],
+  "numericWrite": false
+ },
+ "_detonated": {
+  "t": "static",
+  "n": 2,
+  "unsafe": [
+   "index.html:other:\"'bomber' && !z._detonated) {\""
+  ],
+  "numericWrite": false
+ },
+ "objectiveId": {
+  "t": "static",
+  "n": 3,
+  "unsafe": [
+   "index.html:other:\"> z.alive && z.objectiveId === RADIO_OBJEC\""
+  ],
+  "numericWrite": false
+ },
+ "objectiveRole": {
+  "t": "static",
+  "n": 2,
+  "unsafe": [],
+  "numericWrite": false
+ },
+ "fromWave": {
+  "t": "static",
+  "n": 2,
+  "unsafe": [],
+  "numericWrite": false
+ },
+ "guardianProgressT": {
+  "t": "static",
+  "n": 7,
+  "unsafe": [],
+  "numericWrite": true
+ },
+ "guardianStuckRepath": {
+  "t": "static",
+  "n": 9,
+  "unsafe": [
+   "index.html:other:\"      if (z.guardianStuckRepath <= 1) {\"",
+   "index.html:other:\"stuckRepath: z.guardianStuckRepath, retreat: !!z.g\"",
+   "index.html:other:\"stuckRepath: z.guardianStuckRepath, retreat: !!z.g\"",
+   "index.html:other:\"         if (z.guardianStuckRepath <= 1) {\""
+  ],
+  "numericWrite": true
+ },
+ "guardianBestDist": {
+  "t": "static",
+  "n": 7,
+  "unsafe": [
+   "index.html:other:\"if (dProg < (z.guardianBestDist == null ? Infin\"",
+   "index.html:other:\"ity : z.guardianBestDist) - 0.5) {\""
+  ],
+  "numericWrite": false
+ },
+ "guardianRetreat": {
+  "t": "static",
+  "n": 8,
+  "unsafe": [
+   "index.html:other:\", retreat: !!z.guardianRetreat };\"",
+   "index.html:other:\", retreat: !!z.guardianRetreat };\""
+  ],
+  "numericWrite": false
+ },
+ "bossRig": {
+  "t": "static",
+  "n": 16,
+  "unsafe": [
+   "index.html:other:\"      if (!ud.bossRig) {\"",
+   "index.html:other:\"const rig = ud.bossRig;\"",
+   "index.html:other:\"mesh.userData.bossRig === z.bossRig.g\"",
+   "index.html:other:\"s(z, z.mesh, z.bossRig, dt);\"",
+   "index.html:other:\".mesh.userData.bossRig;\"",
+   "index.html:other:\".mesh.userData.bossRig?4:1.5;\"",
+   "index.html:other:\".mesh.userData.bossRig?4:1.5;\"",
+   "index.html:other:\".mesh.userData.bossRig) || null, updat\"",
+   "index.html:other:\".mesh.userData.bossRig?.userData?.rig?\"",
+   "zombie-headshots.js:other:\"n;let body=!!u.bossRig;for(let n=m.par\""
+  ],
+  "numericWrite": false
+ },
+ "burnDefense": {
+  "t": "static",
+  "n": 7,
+  "unsafe": [
+   "index.html:other:\"(t.x, t.z, !!t.burnDefense, 1);\"",
+   "index.html:other:\"iteTree(o, !!t.burnDefense, o.canopyBottom\"",
+   "index.html:other:\"o, catchT, !!z.burnDefense);\"",
+   "index.html:other:\"enseKill = !!z.burnDefense; dotKills.push(\""
+  ],
+  "numericWrite": false
+ },
+ "flameHitAt": {
+  "t": "static",
+  "n": 2,
+  "unsafe": [],
+  "numericWrite": false
+ },
+ "_fireSet": {
+  "t": "static",
+  "n": 6,
+  "unsafe": [
+   "index.html:other:\"   const g = z._fireSet;\"",
+   "index.html:other:\" { const g = z._fireSet; if (g) { g.vis\""
+  ],
+  "numericWrite": false
+ },
+ "_fireAge": {
+  "t": "static",
+  "n": 6,
+  "unsafe": [
+   "index.html:compound:\"        z._fireAge += dt;\"",
+   "index.html:other:\" Math.min(1, z._fireAge * 3) * Math.min\"",
+   "index.html:other:\"8 + Math.sin(z._fireAge * 9 + d.phase) \"",
+   "index.html:other:\"oseFlame(fl, z._fireAge, d.height * pul\"",
+   "index.html:other:\"1 + Math.sin(z._fireAge * 17) * 0.25, 7\""
+  ],
+  "numericWrite": true
+ },
+ "_shotLast": {
+  "t": "static",
+  "n": 1,
+  "unsafe": [],
+  "numericWrite": false
+ },
+ "_shotN": {
+  "t": "static",
+  "n": 4,
+  "unsafe": [],
+  "numericWrite": true
+ },
+ "_shotDmg": {
+  "t": "static",
+  "n": 6,
+  "unsafe": [
+   "index.html:other:\"z, 'pellet', z._shotDmg, dx, dz, z._sho\""
+  ],
+  "numericWrite": true
+ },
+ "_shotRaw": {
+  "t": "static",
+  "n": 5,
+  "unsafe": [
+   "index.html:other:\"fo.shotId && z._shotRaw > raw) raw = z.\"",
+   "index.html:other:\"._shotY / n, z._shotRaw);\""
+  ],
+  "numericWrite": true
+ },
+ "_shotY": {
+  "t": "static",
+  "n": 4,
+  "unsafe": [
+   "index.html:other:\"Dmg, dx, dz, z._shotY / n, z._shotRaw\""
+  ],
+  "numericWrite": true
+ },
+ "_shotDX": {
+  "t": "static",
+  "n": 5,
+  "unsafe": [
+   "index.html:other:\"st L = hypot(z._shotDX, z._shotDZ);\"",
+   "index.html:other:\"= L > 0.01 ? z._shotDX / L : 0, dz = L\""
+  ],
+  "numericWrite": true
+ },
+ "_shotDZ": {
+  "t": "static",
+  "n": 5,
+  "unsafe": [
+   "index.html:other:\"t(z._shotDX, z._shotDZ);\"",
+   "index.html:other:\"= L > 0.01 ? z._shotDZ / L : 0;\""
+  ],
+  "numericWrite": true
+ },
+ "knockDur": {
+  "t": "static",
+  "n": 4,
+  "unsafe": [
+   "index.html:other:\"  z.knockT = z.knockDur;\"",
+   "index.html:other:\" z.knockCd = z.knockDur + 2.5;\"",
+   "index.html:other:\"  const el = z.knockDur - Math.max(0, z\""
+  ],
+  "numericWrite": false
+ },
+ "knockT": {
+  "t": "static",
+  "n": 28,
+  "unsafe": [
+   "index.html:compound:\"      z.knockT -= dt;\"",
+   "index.html:other:\" Math.max(0, z.knockT);\"",
+   "index.html:other:\"    else if (z.knockT <= KNOCK_RISE) \"",
+   "index.html:other:\" Math.max(0, z.knockT) / KNOCK_RISE; \"",
+   "index.html:other:\"      if (z.knockT <= 0) { z.knock\""
+  ],
+  "numericWrite": false
+ },
+ "knockCd": {
+  "t": "static",
+  "n": 3,
+  "unsafe": [],
+  "numericWrite": false
+ },
+ "knockSign": {
+  "t": "static",
+  "n": 2,
+  "unsafe": [
+   "index.html:other:\"      return z.knockSign * flat * k;\""
+  ],
+  "numericWrite": false
+ },
+ "_shotHead": {
+  "t": "static",
+  "n": 5,
+  "unsafe": [
+   "index.html:other:\"!(shieldSid&&z._shotHead===shieldSid);\"",
+   "index.html:other:\" && !(sid && z._shotHead === sid);\"",
+   "index.html:other:\"t || (sid && z._shotHead === sid)) skill\""
+  ],
+  "numericWrite": false
+ },
+ "sonicHitT": {
+  "t": "static",
+  "n": 4,
+  "unsafe": [
+   "screamer-behavior.js:other:\"aming;delete z.sonicHitT;\""
+  ],
+  "numericWrite": true
+ },
+ "_osSid": {
+  "t": "static",
+  "n": 1,
+  "unsafe": [
+   "index.html:other:\"; if (!sd || z._osSid !== sd) { z._os\""
+  ],
+  "numericWrite": false
+ },
+ "_osFull": {
+  "t": "static",
+  "n": 2,
+  "unsafe": [],
+  "numericWrite": false
+ },
+ "hitSide": {
+  "t": "static",
+  "n": 5,
+  "unsafe": [
+   "index.html:other:\".hitPart and z.hitSide are set in\""
+  ],
+  "numericWrite": false
+ },
+ "hitPart": {
+  "t": "static",
+  "n": 9,
+  "unsafe": [
+   "index.html:other:\"artT > 0 && (z.hitPart === 'legL' || z\"",
+   "index.html:other:\".hitPart === 'legR')) ca\"",
+   "index.html:other:\"PartT > 0 && z.hitPart === 'head')) {\"",
+   "index.html:other:\" came in on. z.hitPart and z.hitSide a\"",
+   "index.html:other:\"|| 1, part = z.hitPart;\""
+  ],
+  "numericWrite": true
+ },
+ "hitPartT": {
+  "t": "static",
+  "n": 21,
+  "unsafe": [
+   "index.html:other:\".hitPartT - dt);\"",
+   "index.html:other:\"onst u = 1 - z.hitPartT / 0.45, k = u <\""
+  ],
+  "numericWrite": true
+ },
+ "_shotId": {
+  "t": "static",
+  "n": 2,
+  "unsafe": [
+   "index.html:other:\"        if (z._shotId === info.shotId\"",
+   "index.html:other:\"        if (z._shotId !== sid) { z._s\""
+  ],
+  "numericWrite": false
+ },
+ "_shotDefense": {
+  "t": "static",
+  "n": 2,
+  "unsafe": [
+   "index.html:other:\"        if (!z._shotDefense && z._shotDmg >\""
+  ],
+  "numericWrite": false
+ },
+ "_militaryRound": {
+  "t": "static",
+  "n": 3,
+  "unsafe": [
+   "index.html:other:\"itaryZone:hitZ._militaryRound?.zone, military\"",
+   "index.html:other:\"Part:hitZ._militaryRound?.part, bruteZon\""
+  ],
+  "numericWrite": false
+ },
+ "_bruteRound": {
+  "t": "static",
+  "n": 3,
+  "unsafe": [
+   "index.html:other:\"bruteZone:hitZ._bruteRound?.zone, brutePar\"",
+   "index.html:other:\"t:hitZ._bruteRound?.part, defense:\""
+  ],
+  "numericWrite": false
+ },
+ "_headRound": {
+  "t": "static",
+  "n": 2,
+  "unsafe": [
+   "index.html:other:\", headHit:hitZ._headRound, militaryZone:h\""
+  ],
+  "numericWrite": false
+ },
+ "threatT": {
+  "t": "static",
+  "n": 9,
+  "unsafe": [
+   "index.html:other:\"atB === b && z.threatT > DEF_THREAT_T \"",
+   "index.html:compound:\"        z.threatT -= dt;\""
+  ],
+  "numericWrite": true
+ },
+ "threatB": {
+  "t": "static",
+  "n": 9,
+  "unsafe": [
+   "index.html:other:\"atT > 0 && !!z.threatB) || (!!z.defSee\"",
+   "index.html:other:\"      if (z.threatB === b && z.thre\"",
+   "index.html:other:\"Reachable(z, z.threatB, dt)) return z.\""
+  ],
+  "numericWrite": false
+ },
+ "defProgB": {
+  "t": "static",
+  "n": 2,
+  "unsafe": [
+   "index.html:other:\"      if (z.defProgB !== b) { z.defP\""
+  ],
+  "numericWrite": false
+ },
+ "defProgD": {
+  "t": "static",
+  "n": 3,
+  "unsafe": [
+   "index.html:other:\"     if (d < z.defProgD - 0.5 || z.atta\""
+  ],
+  "numericWrite": true
+ },
+ "defProgT": {
+  "t": "static",
+  "n": 4,
+  "unsafe": [
+   "index.html:compound:\"      z.defProgT += dt;\"",
+   "index.html:other:\"      if (z.defProgT < DEF_STUCK_T) \""
+  ],
+  "numericWrite": true
+ },
+ "defGiveUpT": {
+  "t": "static",
+  "n": 6,
+  "unsafe": [],
+  "numericWrite": false
+ },
+ "below": {
+  "t": "static",
+  "n": 35,
+  "unsafe": [
+   "index.html:other:\"localToWorld(S.below.copy(gd.gb145Fo\"",
+   "index.html:other:\".copy(fore); S.below.copy(fore); }\"",
+   "index.html:other:\"hollow.state().below) return no('Com\"",
+   "index.html:other:\"), below: hush.below, board: hush.bo\"",
+   "index.html:other:\": can ? 'chain.below.look' : 'chain.\"",
+   "index.html:other:\"alone set hush.below\"",
+   "index.html:other:\"h.lit && !hush.below && POI.caves[hu\"",
+   "index.html:other:\"localToWorld(P.below.copy(gun.userDa\"",
+   "index.html:other:\"main: z => !!z.below === !!hollowFlo\"",
+   "index.html:other:\"main: z => !!z.below === !!hollowFlo\"",
+   "index.html:other:\"        if (!z.below) continue;\"",
+   "index.html:other:\".find((q) => q.below && q.belowSleep\"",
+   "screamer-appearance.js:other:\"ow=z.alive&&!z.below&&!z.farLod;smok\"",
+   "viewmodel.js:other:\"w') at.y -= pl.below.drop;\""
+  ],
+  "numericWrite": false
+ },
+ "belowSleeper": {
+  "t": "static",
+  "n": 6,
+  "unsafe": [
+   "index.html:other:\"ght.sleepers[z.belowSleeper]) belowFight.sl\"",
+   "index.html:other:\"eepers[z.belowSleeper].state = 'dead'\"",
+   "index.html:other:\"> q.below && q.belowSleeper === id && q.ali\""
+  ],
+  "numericWrite": false
+ },
+ "sleeping": {
+  "t": "static",
+  "n": 27,
+  "unsafe": [
+   "index.html:other:\" z.alive && !z.sleeping && !(z.poiGuard\"",
+   "index.html:other:\" z.alive && !z.sleeping) n++; return n;\"",
+   "index.html:other:\"oiAwake) && !z.sleeping,\"",
+   "drowned-behavior.js:other:\"!z.hopping&&!z.sleeping&&!(z.riseT>0)&&\""
+  ],
+  "numericWrite": false
+ },
+ "_belowGone": {
+  "t": "static",
+  "n": 2,
+  "unsafe": [
+   "index.html:other:\"!z.alive && !z._belowGone) { st.killed.ad\""
+  ],
+  "numericWrite": false
+ },
+ "getUpT": {
+  "t": "static",
+  "n": 19,
+  "unsafe": [
+   "index.html:compound:\"      z.getUpT -= dt;\"",
+   "index.html:other:\" Math.min(1, z.getUpT / 0.8));\"",
+   "index.html:other:\"      if (z.getUpT <= 0) { z.mesh.\""
+  ],
+  "numericWrite": true
+ },
+ "belowFallV": {
+  "t": "static",
+  "n": 6,
+  "unsafe": [
+   "index.html:other:\"ndowClimb || z.belowFallV != null) &&\"",
+   "index.html:other:\"        if (z.belowFallV != null) {   //\"",
+   "index.html:compound:\"          z.belowFallV += 18 * dt; q.y\"",
+   "index.html:other:\" -= z.belowFallV * dt;\""
+  ],
+  "numericWrite": true
+ },
+ "belowRiseT": {
+  "t": "static",
+  "n": 21,
+  "unsafe": [
+   "index.html:compound:\"          z.belowRiseT -= dt;\"",
+   "index.html:other:\"         if (z.belowRiseT <= 0 && gy != n\""
+  ],
+  "numericWrite": true
+ },
+ "belowNest": {
+  "t": "static",
+  "n": 3,
+  "unsafe": [
+   "index.html:other:\"& z.alive && z.belowNest != null) nestOw\"",
+   "index.html:other:\"n[z.belowNest] = (nestOwn[z.b\""
+  ],
+  "numericWrite": false
+ },
+ "belowSet": {
+  "t": "static",
+  "n": 2,
+  "unsafe": [],
+  "numericWrite": false
+ },
+ "barrowKing": {
+  "t": "static",
+  "n": 1,
+  "unsafe": [],
+  "numericWrite": false
+ },
+ "heartCalled": {
+  "t": "static",
+  "n": 1,
+  "unsafe": [],
+  "numericWrite": false
+ },
+ "poiGuard": {
+  "t": "static",
+  "n": 58,
+  "unsafe": [
+   "index.html:other:\"& o.alive && o.poiGuard === z.poiGuard)\"",
+   "index.html:other:\"        z.poiGuard.cleared = true;\"",
+   "index.html:other:\"ed', { kind: z.poiGuard.kind, index: z.\"",
+   "index.html:other:\"rd.index, x: z.poiGuard.x, z: z.poiGuar\"",
+   "index.html:other:\"d.z, count: z.poiGuard.n || 0 });\"",
+   "index.html:other:\"        if (z.poiGuard.bounty) settleB\"",
+   "index.html:other:\"&& (!post || o.poiGuard === post)) { o.\"",
+   "index.html:other:\"ards('shot', o.poiGuard); woke++; }\"",
+   "index.html:other:\"         if (o.poiGuard !== post || !o.\"",
+   "index.html:other:\"campsite' && o.poiGuard.index === i)?.p\"",
+   "index.html:other:\"> o.alive && o.poiGuard === s.post); }\"",
+   "index.html:other:\"const post = z.poiGuard, w = post.wande\"",
+   "index.html:other:\"> o.alive && o.poiGuard === b).length,\"",
+   "index.html:other:\"> o.alive && o.poiGuard === b && o.poiA\"",
+   "index.html:other:\"!o.dying && !o.poiGuard);\"",
+   "index.html:other:\" || z.poiGuard.bounty)) return\"",
+   "index.html:other:\"z.muster && !z.poiGuard && z.hzD >= HOR\"",
+   "index.html:other:\"zombies) if (o.poiGuard === g && o.aliv\"",
+   "index.html:other:\"uards('hit', z.poiGuard);\"",
+   "index.html:other:\"ards('near', z.poiGuard);\"",
+   "index.html:other:\"    else if (z.poiGuard.wanderer) { /* \"",
+   "index.html:other:\"&& z.poiGuard.wanderer) { con\"",
+   "index.html:other:\"|| z.poiGuard.wanderer));   /\"",
+   "index.html:other:\"Mustered && !z.poiGuard && hordeState.c\"",
+   "index.html:other:\"ilter((z) => z.poiGuard && !z.poiGuard.\""
+  ],
+  "numericWrite": false
+ },
+ "smashT": {
+  "t": "static",
+  "n": 3,
+  "unsafe": [
+   "index.html:other:\"         if (z.smashT <= 0 || (z.smas\""
+  ],
+  "numericWrite": true
+ },
+ "smashTarget": {
+  "t": "static",
+  "n": 4,
+  "unsafe": [
+   "index.html:other:\"const best = z.smashTarget;\""
+  ],
+  "numericWrite": false
+ },
+ "poiLungeT": {
+  "t": "static",
+  "n": 4,
+  "unsafe": [],
+  "numericWrite": false
+ },
+ "buffT": {
+  "t": "static",
+  "n": 3,
+  "unsafe": [],
+  "numericWrite": true
+ },
+ "lineSawBlock": {
+  "t": "static",
+  "n": 5,
+  "unsafe": [
+   "index.html:other:\"z.spider && !z.lineSawBlock) { z.strafeT = \""
+  ],
+  "numericWrite": false
+ },
+ "spitWind": {
+  "t": "static",
+  "n": 15,
+  "unsafe": [
+   "index.html:compound:\"            z.spitWind -= dt; spd = 0;\"",
+   "index.html:other:\"         if (z.spitWind <= 0) { z.spitt\"",
+   "index.html:other:\"max(0, z.spitWind) / 0.6 : 0, sna\"",
+   "spitter-motion.js:other:\"tterSpitPose(z.spitWind,z.spitSnap),res\""
+  ],
+  "numericWrite": true
+ },
+ "spitterShot": {
+  "t": "static",
+  "n": 4,
+  "unsafe": [
+   "index.html:other:\".spitterShot; delete z.spitt\"",
+   "spitter-motion.js:other:\",0,0);delete z.spitterShot;}\""
+  ],
+  "numericWrite": false
+ },
+ "spitSnap": {
+  "t": "static",
+  "n": 6,
+  "unsafe": [
+   "spitter-motion.js:other:\"e(z.spitWind,z.spitSnap),rest=u.rest||{\""
+  ],
+  "numericWrite": true
+ },
+ "screamCd": {
+  "t": "static",
+  "n": 3,
+  "unsafe": [
+   "index.html:other:\"dist < 32 && z.screamCd <= 0) {\""
+  ],
+  "numericWrite": true
+ },
+ "screamT": {
+  "t": "static",
+  "n": 16,
+  "unsafe": [
+   "index.html:compound:\"            z.screamT -= dt;\"",
+   "index.html:other:\"7 + Math.sin(z.screamT * 30) * 0.1;\""
+  ],
+  "numericWrite": true
+ },
+ "dripT": {
+  "t": "static",
+  "n": 3,
+  "unsafe": [
+   "index.html:other:\"         if (z.dripT <= 0) {\""
+  ],
+  "numericWrite": true
+ },
+ "burnTouchT": {
+  "t": "static",
+  "n": 2,
+  "unsafe": [
+   "index.html:other:\"         if (z.burnTouchT <= 0) { z.burnT\""
+  ],
+  "numericWrite": true
+ },
+ "trainingZ": {
+  "t": "static",
+  "n": 6,
+  "unsafe": [
+   "index.html:other:\".active || !!z.trainingZ) });\"",
+   "index.html:other:\".active || !!z.trainingZ),\""
+  ],
+  "numericWrite": false
+ },
+ "trainingIntro": {
+  "t": "static",
+  "n": 1,
+  "unsafe": [],
+  "numericWrite": false
+ },
+ "trainingEntry": {
+  "t": "static",
+  "n": 10,
+  "unsafe": [
+   "index.html:other:\"position.x = z.trainingEntry.x; z.mesh.posit\"",
+   "index.html:other:\"ion.z = z.trainingEntry.z;\"",
+   "index.html:other:\"onst entry = z.trainingEntry;\"",
+   "index.html:other:\" 1) { delete z.trainingEntry; z.mesh.visible\"",
+   "index.html:other:\"pth(passage, z.trainingEntry.z);\"",
+   "training-containment.js:other:\"belongs(z)&&!z.trainingEntry&&z.mesh.visible\""
+  ],
+  "numericWrite": false
+ },
+ "ttSpawn": {
+  "t": "static",
+  "n": 3,
+  "unsafe": [
+   "index.html:other:\"defense) && !z.ttSpawn) {\""
+  ],
+  "numericWrite": false
+ },
+ "sonicOpenT": {
+  "t": "static",
+  "n": 9,
+  "unsafe": [
+   "screamer-behavior.js:other:\"te(z);delete z.sonicOpenT;delete z._sonic\""
+  ],
+  "numericWrite": true
+ },
+ "_sonicScreaming": {
+  "t": "static",
+  "n": 4,
+  "unsafe": [
+   "screamer-behavior.js:other:\"OpenT;delete z._sonicScreaming;delete z.sonicH\""
+  ],
+  "numericWrite": false
+ },
+ "huntPlayer": {
+  "t": "static",
+  "n": 1,
+  "unsafe": [],
+  "numericWrite": false
+ },
+ "poiAwake": {
+  "t": "static",
+  "n": 29,
+  "unsafe": [
+   "index.html:other:\"poiGuard && !o.poiAwake && (!post || o.\"",
+   "index.html:other:\"poiGuard && !z.poiAwake) && !z.crawling\"",
+   "index.html:other:\"poiGuard && !z.poiAwake)))) updateFlowF\"",
+   "index.html:other:\"poiGuard && !z.poiAwake) {\"",
+   "index.html:other:\"poiGuard && !z.poiAwake && z.poiGuard.w\"",
+   "index.html:other:\"poiGuard && !z.poiAwake) spd *= WANDERE\"",
+   "index.html:other:\"poiGuard && !z.poiAwake) && !z.sleeping\"",
+   "index.html:other:\"poiGuard && !z.poiAwake) continue;   //\"",
+   "feral-motion.js:other:\"z.poiGuard&&!z.poiAwake);\"",
+   "military-behavior.js:other:\"z.poiGuard&&!z.poiAwake;\""
+  ],
+  "numericWrite": false
+ },
+ "poiWake": {
+  "t": "static",
+  "n": 1,
+  "unsafe": [],
+  "numericWrite": false
+ },
+ "heartGuardian": {
+  "t": "static",
+  "n": 1,
+  "unsafe": [],
+  "numericWrite": false
+ }
+}

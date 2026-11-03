@@ -1,0 +1,110 @@
+{
+  "samples": [
+    {
+      "variant": "baseline",
+      "key": "launcher",
+      "at": [
+        0.19,
+        -0.23,
+        -0.78
+      ],
+      "yaw": 0.25,
+      "weapon": "launcher",
+      "first": true,
+      "active": true,
+      "vmKey": "launcher",
+      "raise": 1,
+      "muzzleNdc": {
+        "x": 0.03830642970262202,
+        "y": -0.16702297474233685,
+        "d": 1.292845614129477
+      },
+      "backend": "WebGPU"
+    },
+    {
+      "variant": "mid-55-yaw003",
+      "key": "launcher",
+      "at": [
+        0.18,
+        -0.19,
+        -0.55
+      ],
+      "yaw": 0.03,
+      "weapon": "launcher",
+      "first": true,
+      "active": true,
+      "vmKey": "launcher",
+      "raise": 1,
+      "muzzleNdc": {
+        "x": 0.1407110394629726,
+        "y": -0.13017587882691825,
+        "d": 1.0804569911909736
+      },
+      "backend": "WebGPU"
+    },
+    {
+      "variant": "mid-55-yaw015",
+      "key": "launcher",
+      "at": [
+        0.18,
+        -0.19,
+        -0.55
+      ],
+      "yaw": 0.15,
+      "weapon": "launcher",
+      "first": true,
+      "active": true,
+      "vmKey": "launcher",
+      "raise": 1,
+      "muzzleNdc": {
+        "x": 0.0840989193553382,
+        "y": -0.13294364597011632,
+        "d": 1.0739157575384406
+      },
+      "backend": "WebGPU"
+    },
+    {
+      "variant": "mid-65-yaw003",
+      "key": "launcher",
+      "at": [
+        0.19,
+        -0.2,
+        -0.65
+      ],
+      "yaw": 0.03,
+      "weapon": "launcher",
+      "first": true,
+      "active": true,
+      "vmKey": "launcher",
+      "raise": 1,
+      "muzzleNdc": {
+        "x": 0.13701390196013782,
+        "y": -0.13712296739546653,
+        "d": 1.1807196919708116
+      },
+      "backend": "WebGPU"
+    },
+    {
+      "variant": "mid-65-yaw015",
+      "key": "launcher",
+      "at": [
+        0.19,
+        -0.2,
+        -0.65
+      ],
+      "yaw": 0.15,
+      "weapon": "launcher",
+      "first": true,
+      "active": true,
+      "vmKey": "launcher",
+      "raise": 1,
+      "muzzleNdc": {
+        "x": 0.08525197340303062,
+        "y": -0.13334228002563522,
+        "d": 1.1736730129073027
+      },
+      "backend": "WebGPU"
+    }
+  ],
+  "errors": []
+}

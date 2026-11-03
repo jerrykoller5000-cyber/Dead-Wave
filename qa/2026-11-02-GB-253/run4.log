@@ -1,0 +1,21 @@
+GRANT grokbot GB-253: starting one game-test command
+=== FIX ONLY: T80 x5
+check-players: 315 player.position reads, all in the allowed places
+FAIL  t80     13 pass   1 fail  147.6s
+
+1 checks: 13 pass, 1 fail
+
+by owner:
+  unassigned
+    t80    1 fail  FAIL a spider in the open holds its band (5.2 to 5.2 m)
+           FAIL a spider in the open holds its band (5.2 to 5.2 m)
+check-players: 315 player.position reads, all in the allowed places
+FAIL  t80     13 pass   1 fail  146.8s
+
+1 checks: 13 pass, 1 fail
+
+by owner:
+  unassigned
+    t80    1 fail  FAIL a spider in the open holds its band (5.4 to 5.4 m)
+           FAIL a spider in the open holds its band (5.4 to 5.4 m)
+check-players: 315 player.position reads, all in the allowed places

@@ -1,0 +1,25 @@
+{
+  "name": "ag204-stone-wall-kit-studio",
+  "draws": 3,
+  "tris": 4284,
+  "stoneTris": 4104,
+  "mossTris": 108,
+  "ivyTris": 72,
+  "children": [
+    {
+      "name": "stone-wall-masonry",
+      "type": "Mesh",
+      "tris": 1368
+    },
+    {
+      "name": "stone-wall-moss",
+      "type": "Mesh",
+      "tris": 36
+    },
+    {
+      "name": "stone-wall-ivy",
+      "type": "Mesh",
+      "tris": 24
+    }
+  ]
+}

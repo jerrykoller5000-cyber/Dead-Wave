@@ -1,0 +1,122 @@
+{
+  "pistol": {
+    "magOut": {
+      "weapon": "pistol",
+      "phase": "mag-out",
+      "reloadU": 0.3400000000000001,
+      "magState": "pouch",
+      "vmActive": true,
+      "rootVisible": true,
+      "magVisible": false
+    },
+    "seating": {
+      "weapon": "pistol",
+      "phase": "seating",
+      "reloadU": 0.58,
+      "magState": "hand",
+      "vmActive": true,
+      "rootVisible": true,
+      "magVisible": true
+    }
+  },
+  "uzi": {
+    "magOut": {
+      "weapon": "uzi",
+      "phase": "mag-out",
+      "reloadU": 0.32000000000000006,
+      "magState": "pouch",
+      "vmActive": true,
+      "rootVisible": true,
+      "magVisible": false
+    },
+    "seating": {
+      "weapon": "uzi",
+      "phase": "seating",
+      "reloadU": 0.53,
+      "magState": "hand",
+      "vmActive": true,
+      "rootVisible": true,
+      "magVisible": true
+    }
+  },
+  "m4": {
+    "magOut": {
+      "weapon": "m4",
+      "phase": "mag-out",
+      "reloadU": 0.3200000000000002,
+      "magState": "hand",
+      "vmActive": true,
+      "rootVisible": true,
+      "magVisible": true
+    },
+    "seating": {
+      "weapon": "m4",
+      "phase": "seating",
+      "reloadU": 0.53,
+      "magState": "hand",
+      "vmActive": true,
+      "rootVisible": true,
+      "magVisible": true
+    }
+  },
+  "ak": {
+    "magOut": {
+      "weapon": "ak",
+      "phase": "mag-out",
+      "reloadU": 0.32000000000000006,
+      "magState": "hand",
+      "vmActive": true,
+      "rootVisible": true,
+      "magVisible": true
+    },
+    "seating": {
+      "weapon": "ak",
+      "phase": "seating",
+      "reloadU": 0.53,
+      "magState": "hand",
+      "vmActive": true,
+      "rootVisible": true,
+      "magVisible": true
+    }
+  },
+  "aa12": {
+    "magOut": {
+      "weapon": "aa12",
+      "phase": "mag-out",
+      "reloadU": 0.36,
+      "magState": "pouch",
+      "vmActive": true,
+      "rootVisible": true,
+      "magVisible": false
+    },
+    "seating": {
+      "weapon": "aa12",
+      "phase": "seating",
+      "reloadU": 0.6,
+      "magState": "hand",
+      "vmActive": true,
+      "rootVisible": true,
+      "magVisible": true
+    }
+  },
+  "sniper": {
+    "magOut": {
+      "weapon": "sniper",
+      "phase": "mag-out",
+      "reloadU": 0.32000000000000006,
+      "magState": "pouch",
+      "vmActive": true,
+      "rootVisible": true,
+      "magVisible": false
+    },
+    "seating": {
+      "weapon": "sniper",
+      "phase": "seating",
+      "reloadU": 0.53,
+      "magState": "hand",
+      "vmActive": true,
+      "rootVisible": true,
+      "magVisible": true
+    }
+  }
+}

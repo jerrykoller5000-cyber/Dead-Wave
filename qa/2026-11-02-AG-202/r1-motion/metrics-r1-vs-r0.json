@@ -1,0 +1,1018 @@
+{
+  "weapons": {
+    "pistol": {
+      "stills": {
+        "hip": {
+          "r0": {
+            "muzzle": [
+              1181.73,
+              597.93,
+              0.6711
+            ],
+            "wristR": [
+              1438.6,
+              773.66,
+              0.4114
+            ],
+            "wristL": [
+              1131.04,
+              850.29,
+              0.4644
+            ],
+            "vmActive": true,
+            "insideHullVerts": 968,
+            "testedVerts": 4154,
+            "camFov": 60,
+            "camPos": [
+              0.0025,
+              -198.3789,
+              -640.3256
+            ],
+            "otsYaw": 0,
+            "otsPitch": 0,
+            "vmPos": [
+              -0.1649,
+              -0.07735,
+              -0.46919
+            ],
+            "vmRot": [
+              -0.02147,
+              3.13159,
+              0.12001
+            ],
+            "vmKick": null
+          },
+          "r1": {
+            "muzzle": [
+              1181.71,
+              598.96,
+              0.6711
+            ],
+            "wristR": [
+              1438.8,
+              774.8,
+              0.412
+            ],
+            "wristL": [
+              1101.56,
+              826.54,
+              0.4673
+            ],
+            "vmActive": true,
+            "insideHullVerts": 1200,
+            "testedVerts": 4154,
+            "camFov": 60,
+            "camPos": [
+              -0.0031,
+              -198.5763,
+              -640.4994
+            ],
+            "otsYaw": 0,
+            "otsPitch": 0,
+            "vmPos": [
+              -0.1649,
+              -0.07796,
+              -0.46922
+            ],
+            "vmRot": [
+              -0.02082,
+              3.13159,
+              0.12001
+            ],
+            "gaitW": 1,
+            "gaitRun": 0,
+            "walkPhase": 1.1083
+          }
+        },
+        "sprint": {
+          "r0": {
+            "muzzle": [
+              1181.41,
+              612.45,
+              0.6514
+            ],
+            "wristR": [
+              1452.43,
+              805.48,
+              0.3934
+            ],
+            "wristL": [
+              1097.73,
+              857.4,
+              0.4491
+            ],
+            "vmActive": true,
+            "insideHullVerts": 1158,
+            "testedVerts": 4154,
+            "camFov": 62.34,
+            "camPos": [
+              -26.0397,
+              -198.6594,
+              -641.948
+            ],
+            "otsYaw": 0,
+            "otsPitch": 0,
+            "vmPos": [
+              -0.15963,
+              -0.08563,
+              -0.44936
+            ],
+            "vmRot": [
+              -0.01828,
+              3.1318,
+              0.10943
+            ],
+            "vmKick": null
+          },
+          "r1": {
+            "muzzle": [
+              1016.75,
+              757.2,
+              0.6181
+            ],
+            "wristR": [
+              1390.89,
+              859.36,
+              0.3793
+            ],
+            "wristL": [
+              1062.07,
+              1046.75,
+              0.4115
+            ],
+            "vmActive": true,
+            "insideHullVerts": 1090,
+            "testedVerts": 4154,
+            "camFov": 62.76,
+            "camPos": [
+              -26.0294,
+              -198.6432,
+              -641.7558
+            ],
+            "otsYaw": 0,
+            "otsPitch": 0,
+            "vmPos": [
+              -0.11518,
+              -0.12862,
+              -0.42879
+            ],
+            "vmRot": [
+              0.21887,
+              2.80453,
+              0.34491
+            ],
+            "gaitW": 1,
+            "gaitRun": 0.9975,
+            "walkPhase": 2.8126
+          }
+        }
+      },
+      "strips": {
+        "walk": {
+          "r0": {
+            "hpRmsPx": 8.255,
+            "hpRmsAllPx": 8.106,
+            "stepDeltaRmsPx": 11.275,
+            "ampXPx": 16.09,
+            "ampYPx": 17.33,
+            "ampXPct": 0.838,
+            "ampYPct": 1.605,
+            "bobHzX": 6.84,
+            "bobHzY": 13.7,
+            "vmBobHzX": 6.84,
+            "vmBobHzY": 13.68,
+            "strafeTiltDeg": 0.0,
+            "strafeShiftXPx": 0.0,
+            "flickPeakPx": 0.0,
+            "flickLagMs": 0.0,
+            "flickSettleS": 0.0,
+            "flickOvershootPct": 0.0,
+            "maxHullVerts": 1184
+          },
+          "r1": {
+            "hpRmsPx": 3.469,
+            "hpRmsAllPx": 4.755,
+            "stepDeltaRmsPx": 4.947,
+            "ampXPx": 39.53,
+            "ampYPx": 14.88,
+            "ampXPct": 2.059,
+            "ampYPct": 1.378,
+            "bobHzX": 1.52,
+            "bobHzY": 3.02,
+            "vmBobHzX": 1.52,
+            "vmBobHzY": 3.02,
+            "strafeTiltDeg": 0.0,
+            "strafeShiftXPx": 0.0,
+            "flickPeakPx": 0.0,
+            "flickLagMs": 0.0,
+            "flickSettleS": 0.0,
+            "flickOvershootPct": 0.0,
+            "maxHullVerts": 1208
+          }
+        },
+        "run": {
+          "r0": {
+            "hpRmsPx": 6.624,
+            "hpRmsAllPx": 6.499,
+            "stepDeltaRmsPx": 12.209,
+            "ampXPx": 15.86,
+            "ampYPx": 16.6,
+            "ampXPct": 0.826,
+            "ampYPct": 1.537,
+            "bobHzX": 10.92,
+            "bobHzY": 8.16,
+            "vmBobHzX": 10.92,
+            "vmBobHzY": 8.18,
+            "strafeTiltDeg": 0.0,
+            "strafeShiftXPx": 0.0,
+            "flickPeakPx": 0.0,
+            "flickLagMs": 0.0,
+            "flickSettleS": 0.0,
+            "flickOvershootPct": 0.0,
+            "maxHullVerts": 1208
+          },
+          "r1": {
+            "hpRmsPx": 11.272,
+            "hpRmsAllPx": 11.379,
+            "stepDeltaRmsPx": 12.444,
+            "ampXPx": 67.32,
+            "ampYPx": 24.64,
+            "ampXPct": 3.506,
+            "ampYPct": 2.281,
+            "bobHzX": 2.22,
+            "bobHzY": 4.46,
+            "vmBobHzX": 2.22,
+            "vmBobHzY": 4.46,
+            "strafeTiltDeg": 0.0,
+            "strafeShiftXPx": 0.0,
+            "flickPeakPx": 0.0,
+            "flickLagMs": 0.0,
+            "flickSettleS": 0.0,
+            "flickOvershootPct": 0.0,
+            "maxHullVerts": 1200
+          }
+        },
+        "strafe": {
+          "r0": {
+            "hpRmsPx": 7.73,
+            "hpRmsAllPx": 7.73,
+            "stepDeltaRmsPx": 10.649,
+            "ampXPx": 84.07,
+            "ampYPx": 18.88,
+            "ampXPct": 4.379,
+            "ampYPct": 1.748,
+            "bobHzX": 0.5,
+            "bobHzY": 13.98,
+            "vmBobHzX": 0.5,
+            "vmBobHzY": 13.98,
+            "strafeTiltDeg": 3.99,
+            "strafeShiftXPx": -67.95,
+            "flickPeakPx": 0.0,
+            "flickLagMs": 0.0,
+            "flickSettleS": 0.0,
+            "flickOvershootPct": 0.0,
+            "maxHullVerts": 1208
+          },
+          "r1": {
+            "hpRmsPx": 5.538,
+            "hpRmsAllPx": 5.538,
+            "stepDeltaRmsPx": 10.564,
+            "ampXPx": 160.48,
+            "ampYPx": 130.26,
+            "ampXPct": 8.358,
+            "ampYPct": 12.061,
+            "bobHzX": 0.5,
+            "bobHzY": 3.0,
+            "vmBobHzX": 0.5,
+            "vmBobHzY": 2.98,
+            "strafeTiltDeg": 5.13,
+            "strafeShiftXPx": -93.28,
+            "flickPeakPx": 0.0,
+            "flickLagMs": 0.0,
+            "flickSettleS": 0.0,
+            "flickOvershootPct": 0.0,
+            "maxHullVerts": 1206
+          }
+        },
+        "flick90": {
+          "r0": {
+            "hpRmsPx": 0.313,
+            "hpRmsAllPx": 0.313,
+            "stepDeltaRmsPx": 0.367,
+            "ampXPx": 5.15,
+            "ampYPx": 5.07,
+            "ampXPct": 0.268,
+            "ampYPct": 0.469,
+            "bobHzX": 0.5,
+            "bobHzY": 0.5,
+            "vmBobHzX": 0.5,
+            "vmBobHzY": 0.5,
+            "strafeTiltDeg": 0.0,
+            "strafeShiftXPx": 0.0,
+            "flickPeakPx": 5.28,
+            "flickLagMs": 100.0,
+            "flickSettleS": 2.567,
+            "flickOvershootPct": 4.17,
+            "maxHullVerts": 1214
+          },
+          "r1": {
+            "hpRmsPx": 0.794,
+            "hpRmsAllPx": 0.794,
+            "stepDeltaRmsPx": 2.406,
+            "ampXPx": 62.44,
+            "ampYPx": 5.42,
+            "ampXPct": 3.252,
+            "ampYPct": 0.502,
+            "bobHzX": 0.68,
+            "bobHzY": 0.5,
+            "vmBobHzX": 0.5,
+            "vmBobHzY": 0.5,
+            "strafeTiltDeg": 0.0,
+            "strafeShiftXPx": 0.0,
+            "flickPeakPx": 62.58,
+            "flickLagMs": 200.0,
+            "flickSettleS": 2.567,
+            "flickOvershootPct": 0.26,
+            "maxHullVerts": 1214
+          }
+        }
+      }
+    },
+    "revolver": {
+      "stills": {
+        "hip": {
+          "r0": {
+            "muzzle": [
+              1154.28,
+              546.43,
+              0.7894
+            ],
+            "wristR": [
+              1439.72,
+              809.3,
+              0.4465
+            ],
+            "wristL": [
+              1108.74,
+              844.05,
+              0.4851
+            ],
+            "vmActive": true,
+            "insideHullVerts": 1246,
+            "testedVerts": 4154,
+            "camFov": 60,
+            "camPos": [
+              -0.0019,
+              -198.5783,
+              -640.1226
+            ],
+            "otsYaw": 0,
+            "otsPitch": 0,
+            "vmPos": [
+              -0.17374,
+              -0.07583,
+              -0.51967
+            ],
+            "vmRot": [
+              -0.02373,
+              3.13159,
+              0.10999
+            ],
+            "vmKick": null
+          },
+          "r1": {
+            "muzzle": [
+              1153.66,
+              542.88,
+              0.7888
+            ],
+            "wristR": [
+              1440,
+              830.55,
+              0.4508
+            ],
+            "wristL": [
+              1108.53,
+              842.38,
+              0.4851
+            ],
+            "vmActive": true,
+            "insideHullVerts": 1348,
+            "testedVerts": 4154,
+            "camFov": 60,
+            "camPos": [
+              0.014,
+              -198.5805,
+              -640.4924
+            ],
+            "otsYaw": 0,
+            "otsPitch": 0,
+            "vmPos": [
+              -0.17376,
+              -0.07399,
+              -0.51942
+            ],
+            "vmRot": [
+              -0.028,
+              3.12871,
+              0.10819
+            ],
+            "gaitW": 1,
+            "gaitRun": 0,
+            "walkPhase": 1.2192
+          }
+        },
+        "sprint": {
+          "r0": {
+            "muzzle": [
+              1164.19,
+              554.85,
+              0.7696
+            ],
+            "wristR": [
+              1461.38,
+              810.52,
+              0.4204
+            ],
+            "wristL": [
+              1114.01,
+              870.76,
+              0.4786
+            ],
+            "vmActive": true,
+            "insideHullVerts": 1244,
+            "testedVerts": 4154,
+            "camFov": 62.34,
+            "camPos": [
+              -25.9807,
+              -198.6544,
+              -641.9356
+            ],
+            "otsYaw": 0,
+            "otsPitch": 0,
+            "vmPos": [
+              -0.17847,
+              -0.08213,
+              -0.49978
+            ],
+            "vmRot": [
+              -0.02217,
+              3.13135,
+              0.11967
+            ],
+            "vmKick": null
+          },
+          "r1": {
+            "muzzle": [
+              965.54,
+              705.45,
+              0.7348
+            ],
+            "wristR": [
+              1408.82,
+              914.91,
+              0.4018
+            ],
+            "wristL": [
+              1062.63,
+              1033.7,
+              0.4293
+            ],
+            "vmActive": true,
+            "insideHullVerts": 1408,
+            "testedVerts": 4154,
+            "camFov": 62.76,
+            "camPos": [
+              -26.024,
+              -198.642,
+              -641.7554
+            ],
+            "otsYaw": 0,
+            "otsPitch": 0,
+            "vmPos": [
+              -0.1161,
+              -0.13135,
+              -0.47919
+            ],
+            "vmRot": [
+              0.21565,
+              2.80465,
+              0.33164
+            ],
+            "gaitW": 1,
+            "gaitRun": 0.9975,
+            "walkPhase": 2.9235
+          }
+        }
+      },
+      "strips": {
+        "walk": {
+          "r0": {
+            "hpRmsPx": 6.498,
+            "hpRmsAllPx": 6.341,
+            "stepDeltaRmsPx": 9.216,
+            "ampXPx": 12.33,
+            "ampYPx": 14.98,
+            "ampXPct": 0.642,
+            "ampYPct": 1.387,
+            "bobHzX": 6.84,
+            "bobHzY": 13.7,
+            "vmBobHzX": 6.84,
+            "vmBobHzY": 13.68,
+            "strafeTiltDeg": 0.0,
+            "strafeShiftXPx": 0.0,
+            "flickPeakPx": 0.0,
+            "flickLagMs": 0.0,
+            "flickSettleS": 0.0,
+            "flickOvershootPct": 0.0,
+            "maxHullVerts": 1358
+          },
+          "r1": {
+            "hpRmsPx": 3.098,
+            "hpRmsAllPx": 4.662,
+            "stepDeltaRmsPx": 4.521,
+            "ampXPx": 36.16,
+            "ampYPx": 13.6,
+            "ampXPct": 1.883,
+            "ampYPct": 1.259,
+            "bobHzX": 1.52,
+            "bobHzY": 3.02,
+            "vmBobHzX": 1.52,
+            "vmBobHzY": 3.02,
+            "strafeTiltDeg": 0.0,
+            "strafeShiftXPx": 0.0,
+            "flickPeakPx": 0.0,
+            "flickLagMs": 0.0,
+            "flickSettleS": 0.0,
+            "flickOvershootPct": 0.0,
+            "maxHullVerts": 1356
+          }
+        },
+        "run": {
+          "r0": {
+            "hpRmsPx": 5.266,
+            "hpRmsAllPx": 5.176,
+            "stepDeltaRmsPx": 9.527,
+            "ampXPx": 12.14,
+            "ampYPx": 15.53,
+            "ampXPct": 0.632,
+            "ampYPct": 1.438,
+            "bobHzX": 10.92,
+            "bobHzY": 8.16,
+            "vmBobHzX": 10.92,
+            "vmBobHzY": 8.16,
+            "strafeTiltDeg": 0.0,
+            "strafeShiftXPx": 0.0,
+            "flickPeakPx": 0.0,
+            "flickLagMs": 0.0,
+            "flickSettleS": 0.0,
+            "flickOvershootPct": 0.0,
+            "maxHullVerts": 1242
+          },
+          "r1": {
+            "hpRmsPx": 10.171,
+            "hpRmsAllPx": 10.361,
+            "stepDeltaRmsPx": 11.379,
+            "ampXPx": 62.78,
+            "ampYPx": 22.64,
+            "ampXPct": 3.27,
+            "ampYPct": 2.096,
+            "bobHzX": 2.22,
+            "bobHzY": 4.46,
+            "vmBobHzX": 2.22,
+            "vmBobHzY": 4.46,
+            "strafeTiltDeg": 0.0,
+            "strafeShiftXPx": 0.0,
+            "flickPeakPx": 0.0,
+            "flickLagMs": 0.0,
+            "flickSettleS": 0.0,
+            "flickOvershootPct": 0.0,
+            "maxHullVerts": 1412
+          }
+        },
+        "strafe": {
+          "r0": {
+            "hpRmsPx": 6.336,
+            "hpRmsAllPx": 6.336,
+            "stepDeltaRmsPx": 8.732,
+            "ampXPx": 62.41,
+            "ampYPx": 15.65,
+            "ampXPct": 3.251,
+            "ampYPct": 1.449,
+            "bobHzX": 0.5,
+            "bobHzY": 13.98,
+            "vmBobHzX": 0.5,
+            "vmBobHzY": 13.98,
+            "strafeTiltDeg": 4.02,
+            "strafeShiftXPx": -50.54,
+            "flickPeakPx": 0.0,
+            "flickLagMs": 0.0,
+            "flickSettleS": 0.0,
+            "flickOvershootPct": 0.0,
+            "maxHullVerts": 1274
+          },
+          "r1": {
+            "hpRmsPx": 5.077,
+            "hpRmsAllPx": 5.077,
+            "stepDeltaRmsPx": 10.285,
+            "ampXPx": 169.54,
+            "ampYPx": 132.8,
+            "ampXPct": 8.83,
+            "ampYPct": 12.296,
+            "bobHzX": 0.5,
+            "bobHzY": 3.0,
+            "vmBobHzX": 0.5,
+            "vmBobHzY": 2.98,
+            "strafeTiltDeg": 5.12,
+            "strafeShiftXPx": -69.59,
+            "flickPeakPx": 0.0,
+            "flickLagMs": 0.0,
+            "flickSettleS": 0.0,
+            "flickOvershootPct": 0.0,
+            "maxHullVerts": 1342
+          }
+        },
+        "flick90": {
+          "r0": {
+            "hpRmsPx": 0.346,
+            "hpRmsAllPx": 0.346,
+            "stepDeltaRmsPx": 0.402,
+            "ampXPx": 5.69,
+            "ampYPx": 4.95,
+            "ampXPct": 0.296,
+            "ampYPct": 0.458,
+            "bobHzX": 0.5,
+            "bobHzY": 0.5,
+            "vmBobHzX": 0.5,
+            "vmBobHzY": 0.5,
+            "strafeTiltDeg": 0.0,
+            "strafeShiftXPx": 0.0,
+            "flickPeakPx": 5.6,
+            "flickLagMs": 100.0,
+            "flickSettleS": 2.433,
+            "flickOvershootPct": 3.75,
+            "maxHullVerts": 1250
+          },
+          "r1": {
+            "hpRmsPx": 0.756,
+            "hpRmsAllPx": 0.756,
+            "stepDeltaRmsPx": 2.053,
+            "ampXPx": 54.4,
+            "ampYPx": 5.34,
+            "ampXPct": 2.833,
+            "ampYPct": 0.494,
+            "bobHzX": 0.58,
+            "bobHzY": 0.5,
+            "vmBobHzX": 0.5,
+            "vmBobHzY": 0.5,
+            "strafeTiltDeg": 0.0,
+            "strafeShiftXPx": 0.0,
+            "flickPeakPx": 54.41,
+            "flickLagMs": 200.0,
+            "flickSettleS": 2.2,
+            "flickOvershootPct": 0.53,
+            "maxHullVerts": 1256
+          }
+        }
+      }
+    },
+    "m4": {
+      "stills": {
+        "hip": {
+          "r0": {
+            "muzzle": [
+              1116.51,
+              603.49,
+              1.4063
+            ],
+            "wristR": [
+              1285.93,
+              849.02,
+              0.6593
+            ],
+            "wristL": [
+              1110.94,
+              702.24,
+              1.0006
+            ],
+            "vmActive": true,
+            "insideHullVerts": 2254,
+            "testedVerts": 4154,
+            "camFov": 60,
+            "camPos": [
+              0.0108,
+              -198.5812,
+              -640.1186
+            ],
+            "otsYaw": 0,
+            "otsPitch": 0,
+            "vmPos": [
+              -0.19099,
+              -0.13213,
+              -0.74809
+            ],
+            "vmRot": [
+              -0.03523,
+              -3.07659,
+              -0.11001
+            ],
+            "vmKick": null
+          },
+          "r1": {
+            "muzzle": [
+              1115.26,
+              602.65,
+              1.4064
+            ],
+            "wristR": [
+              1282.24,
+              860.11,
+              0.6602
+            ],
+            "wristL": [
+              1091.85,
+              654.44,
+              0.9982
+            ],
+            "vmActive": true,
+            "insideHullVerts": 2202,
+            "testedVerts": 4154,
+            "camFov": 60,
+            "camPos": [
+              0.0059,
+              -198.5798,
+              -640.498
+            ],
+            "otsYaw": 0,
+            "otsPitch": 0,
+            "vmPos": [
+              -0.19098,
+              -0.13159,
+              -0.74803
+            ],
+            "vmRot": [
+              -0.03634,
+              -3.07946,
+              -0.11193
+            ],
+            "gaitW": 1,
+            "gaitRun": 0,
+            "walkPhase": 1.33
+          }
+        },
+        "sprint": {
+          "r0": {
+            "muzzle": [
+              1115.53,
+              607.82,
+              1.3861
+            ],
+            "wristR": [
+              1290.75,
+              848.9,
+              0.6411
+            ],
+            "wristL": [
+              1105.22,
+              708.23,
+              0.9724
+            ],
+            "vmActive": true,
+            "insideHullVerts": 2201,
+            "testedVerts": 4154,
+            "camFov": 62.34,
+            "camPos": [
+              -26.0536,
+              -198.6706,
+              -641.9299
+            ],
+            "otsYaw": 0,
+            "otsPitch": 0,
+            "vmPos": [
+              -0.18574,
+              -0.13849,
+              -0.72791
+            ],
+            "vmRot": [
+              -0.03726,
+              -3.0762,
+              -0.12137
+            ],
+            "vmKick": null
+          },
+          "r1": {
+            "muzzle": [
+              926.55,
+              751.69,
+              1.3435
+            ],
+            "wristR": [
+              1261.07,
+              916.95,
+              0.6125
+            ],
+            "wristL": [
+              960.62,
+              800.04,
+              0.9283
+            ],
+            "vmActive": true,
+            "insideHullVerts": 2509,
+            "testedVerts": 4154,
+            "camFov": 62.76,
+            "camPos": [
+              -26.0316,
+              -198.6491,
+              -641.7448
+            ],
+            "otsYaw": 0,
+            "otsPitch": 0,
+            "vmPos": [
+              -0.12303,
+              -0.19097,
+              -0.71537
+            ],
+            "vmRot": [
+              0.19227,
+              2.87826,
+              0.12553
+            ],
+            "gaitW": 1,
+            "gaitRun": 0.9975,
+            "walkPhase": 3.0343
+          }
+        }
+      },
+      "strips": {
+        "walk": {
+          "r0": {
+            "hpRmsPx": 3.737,
+            "hpRmsAllPx": 3.632,
+            "stepDeltaRmsPx": 5.164,
+            "ampXPx": 7.03,
+            "ampYPx": 10.28,
+            "ampXPct": 0.366,
+            "ampYPct": 0.952,
+            "bobHzX": 6.84,
+            "bobHzY": 13.7,
+            "vmBobHzX": 6.84,
+            "vmBobHzY": 13.7,
+            "strafeTiltDeg": 0.0,
+            "strafeShiftXPx": 0.0,
+            "flickPeakPx": 0.0,
+            "flickLagMs": 0.0,
+            "flickSettleS": 0.0,
+            "flickOvershootPct": 0.0,
+            "maxHullVerts": 2409
+          },
+          "r1": {
+            "hpRmsPx": 1.887,
+            "hpRmsAllPx": 3.686,
+            "stepDeltaRmsPx": 2.84,
+            "ampXPx": 23.1,
+            "ampYPx": 9.17,
+            "ampXPct": 1.203,
+            "ampYPct": 0.849,
+            "bobHzX": 1.52,
+            "bobHzY": 3.02,
+            "vmBobHzX": 1.52,
+            "vmBobHzY": 3.02,
+            "strafeTiltDeg": 0.0,
+            "strafeShiftXPx": 0.0,
+            "flickPeakPx": 0.0,
+            "flickLagMs": 0.0,
+            "flickSettleS": 0.0,
+            "flickOvershootPct": 0.0,
+            "maxHullVerts": 2468
+          }
+        },
+        "run": {
+          "r0": {
+            "hpRmsPx": 2.994,
+            "hpRmsAllPx": 2.932,
+            "stepDeltaRmsPx": 5.47,
+            "ampXPx": 6.96,
+            "ampYPx": 10.03,
+            "ampXPct": 0.362,
+            "ampYPct": 0.929,
+            "bobHzX": 10.92,
+            "bobHzY": 8.18,
+            "vmBobHzX": 10.92,
+            "vmBobHzY": 8.18,
+            "strafeTiltDeg": 0.0,
+            "strafeShiftXPx": 0.0,
+            "flickPeakPx": 0.0,
+            "flickLagMs": 0.0,
+            "flickSettleS": 0.0,
+            "flickOvershootPct": 0.0,
+            "maxHullVerts": 2247
+          },
+          "r1": {
+            "hpRmsPx": 6.368,
+            "hpRmsAllPx": 6.757,
+            "stepDeltaRmsPx": 7.269,
+            "ampXPx": 41.43,
+            "ampYPx": 12.21,
+            "ampXPct": 2.158,
+            "ampYPct": 1.131,
+            "bobHzX": 2.22,
+            "bobHzY": 4.46,
+            "vmBobHzX": 2.22,
+            "vmBobHzY": 4.46,
+            "strafeTiltDeg": 0.0,
+            "strafeShiftXPx": 0.0,
+            "flickPeakPx": 0.0,
+            "flickLagMs": 0.0,
+            "flickSettleS": 0.0,
+            "flickOvershootPct": 0.0,
+            "maxHullVerts": 2563
+          }
+        },
+        "strafe": {
+          "r0": {
+            "hpRmsPx": 3.515,
+            "hpRmsAllPx": 3.515,
+            "stepDeltaRmsPx": 4.905,
+            "ampXPx": 36.65,
+            "ampYPx": 15.49,
+            "ampXPct": 1.909,
+            "ampYPct": 1.434,
+            "bobHzX": 0.5,
+            "bobHzY": 0.5,
+            "vmBobHzX": 0.5,
+            "vmBobHzY": 13.98,
+            "strafeTiltDeg": 3.98,
+            "strafeShiftXPx": -29.51,
+            "flickPeakPx": 0.0,
+            "flickLagMs": 0.0,
+            "flickSettleS": 0.0,
+            "flickOvershootPct": 0.0,
+            "maxHullVerts": 2382
+          },
+          "r1": {
+            "hpRmsPx": 3.91,
+            "hpRmsAllPx": 3.91,
+            "stepDeltaRmsPx": 9.08,
+            "ampXPx": 162.07,
+            "ampYPx": 122.97,
+            "ampXPct": 8.441,
+            "ampYPct": 11.386,
+            "bobHzX": 0.5,
+            "bobHzY": 0.5,
+            "vmBobHzX": 0.5,
+            "vmBobHzY": 2.98,
+            "strafeTiltDeg": 5.1,
+            "strafeShiftXPx": -41.56,
+            "flickPeakPx": 0.0,
+            "flickLagMs": 0.0,
+            "flickSettleS": 0.0,
+            "flickOvershootPct": 0.0,
+            "maxHullVerts": 2531
+          }
+        },
+        "flick90": {
+          "r0": {
+            "hpRmsPx": 0.686,
+            "hpRmsAllPx": 0.686,
+            "stepDeltaRmsPx": 0.77,
+            "ampXPx": 11.22,
+            "ampYPx": 4.38,
+            "ampXPct": 0.584,
+            "ampYPct": 0.406,
+            "bobHzX": 0.5,
+            "bobHzY": 0.5,
+            "vmBobHzX": 0.5,
+            "vmBobHzY": 0.5,
+            "strafeTiltDeg": 0.0,
+            "strafeShiftXPx": 0.0,
+            "flickPeakPx": 11.19,
+            "flickLagMs": 100.0,
+            "flickSettleS": 1.867,
+            "flickOvershootPct": 2.06,
+            "maxHullVerts": 2221
+          },
+          "r1": {
+            "hpRmsPx": 1.349,
+            "hpRmsAllPx": 1.349,
+            "stepDeltaRmsPx": 2.324,
+            "ampXPx": 55.28,
+            "ampYPx": 8.25,
+            "ampXPct": 2.879,
+            "ampYPct": 0.764,
+            "bobHzX": 0.5,
+            "bobHzY": 0.5,
+            "vmBobHzX": 0.5,
+            "vmBobHzY": 0.5,
+            "strafeTiltDeg": 0.0,
+            "strafeShiftXPx": 0.0,
+            "flickPeakPx": 55.64,
+            "flickLagMs": 166.7,
+            "flickSettleS": 2.567,
+            "flickOvershootPct": 0.34,
+            "maxHullVerts": 2226
+          }
+        }
+      }
+    }
+  }
+}

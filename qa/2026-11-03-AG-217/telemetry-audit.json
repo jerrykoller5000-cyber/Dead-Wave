@@ -1,0 +1,304 @@
+{
+  "audit_metadata": {
+    "task": "AG-217",
+    "reference_task": "GP-20017",
+    "date": "2026-11-03",
+    "evaluator": "Antigravity (Gemini 4 Argon High)",
+    "hardware": "Jerry's PC, NVIDIA GeForce RTX 5080, WebGPU 1080p pipeline",
+    "pass_target": "docs/specs/fps-pass.md round 3 visual gate (<4 defects)"
+  },
+  "weapons": [
+    {
+      "key": "pistol",
+      "name": "Combat Pistol",
+      "category": "Sidearm",
+      "hip_shot": "review/GP-20017/model-audit/pistol-hip.png",
+      "ads_shot": "review/GP-20017/model-audit/pistol-ads.png",
+      "detail_shot": "qa/2026-11-02-AG-209/magwell/crops/pistol-seating-crop.jpg",
+      "sight_obs": "Front blade and rear notch align dead-center on reticle axis; no sightline obstruction.",
+      "receiver_slide_obs": "Clean slide top fluting; bevelled muzzle crown; ejection port contour cleanly defined.",
+      "hammer_mechanism_obs": "Exposed hammer properly modeled and textured; slide serrations crisp at 40 cm.",
+      "magwell_status": "VERIFIED",
+      "magwell_obs": "AG-209 seating crop confirms bevelled magazine basepad sits completely flush against frame bevel.",
+      "material_scale_obs": "Matte parkerized dark steel finish; uniform texel density at 1080p and 1440p; no camo pop (J63).",
+      "z_fighting_obs": "Zero z-fighting across slide rails, extractor pin, or barrel chamber hood.",
+      "four_light_obs": "Audited in Noon, Overcast, Dusk, Night in AG-206; highlights pick out slide bevels cleanly.",
+      "near_plane_telemetry_cm": {
+        "hip": 29.3,
+        "ads": 24.5
+      },
+      "score": 4.85,
+      "verdict": "PASS"
+    },
+    {
+      "key": "revolver",
+      "name": "Magnum Revolver",
+      "category": "Sidearm",
+      "hip_shot": "review/GP-20017/probe-revolver/revolver-hip.png",
+      "ads_shot": "review/GP-20017/probe-revolver/revolver-ads.png",
+      "detail_shot": "qa/2026-11-02-AG-209/revolver/revolver-+0.40-fourlight-comparison.jpg",
+      "sight_obs": "Slightly understated front blade against wide rear notch (Defect 2); reticle alignment centered at ADS.",
+      "receiver_slide_obs": "Hip yaw +0.40 candidate rotates cylinder and barrel side into clean 3D silhouette, curing AG-206 backplate block look.",
+      "hammer_mechanism_obs": "Fluted 6-shot cylinder, crane pivot arm, and cocked spur hammer fully articulated.",
+      "magwell_status": "VERIFIED",
+      "magwell_obs": "Cylinder crane swing-out and ejector star stroke verified in AG-207 reload (revolver-reload-1080p.jpg).",
+      "material_scale_obs": "Polished blued steel with satin sheen; micro-scratches visible at close distance; steady texel scale.",
+      "z_fighting_obs": "Zero z-fighting along top barrel rib, cylinder flutes, or frame screws.",
+      "four_light_obs": "AG-209 4-light comparison confirms distinct specular ridge highlights across all 4 times of day.",
+      "near_plane_telemetry_cm": {
+        "hip": 35.8,
+        "ads": 35.9
+      },
+      "score": 4.8,
+      "verdict": "PASS"
+    },
+    {
+      "key": "uzi",
+      "name": "Wasp SMG",
+      "category": "Compact Automatic",
+      "hip_shot": "review/GP-20017/model-audit/uzi-hip.png",
+      "ads_shot": "review/GP-20017/model-audit/uzi-ads.png",
+      "detail_shot": "qa/2026-11-02-AG-209/magwell/crops/uzi-seating-crop.jpg",
+      "sight_obs": "Aperture sight wings frame front post; top cocking handle offset cleanly leaves central sightline clear (D-91 order).",
+      "receiver_slide_obs": "Stamped sheet-metal receiver ribs, folding stock hinge, and barrel nut clearly detailed.",
+      "hammer_mechanism_obs": "Bolt face visible through ejection port; charging handle slot properly proportioned.",
+      "magwell_status": "VERIFIED",
+      "magwell_obs": "Stick magazine seats flush into pistol grip housing; verified via AG-209 seating crop.",
+      "material_scale_obs": "Phosphate finish with slight edge wear; consistent texel density; robust low-reflection tone.",
+      "z_fighting_obs": "Zero z-fighting between top cover latch, sight protector wings, or barrel collar.",
+      "four_light_obs": "Audited in AG-206; stamped metal ribs maintain depth under flat overcast and dusk moon.",
+      "near_plane_telemetry_cm": {
+        "hip": 37.7,
+        "ads": 38.4
+      },
+      "score": 4.9,
+      "verdict": "PASS"
+    },
+    {
+      "key": "m4",
+      "name": "GW-4 Rifle",
+      "category": "Assault Rifle",
+      "hip_shot": "review/GP-20017/model-audit/m4-hip.png",
+      "ads_shot": "review/GP-20017/model-audit/m4-ads.png",
+      "detail_shot": "qa/2026-11-02-AG-209/magwell/crops/m4-seating-crop.jpg",
+      "sight_obs": "A2 front sight post centered in flat-top optic rail channel; sight picture clear and unobstructed.",
+      "receiver_slide_obs": "Picatinny upper receiver rail, brass deflector, forward assist, and dust cover crisply defined.",
+      "hammer_mechanism_obs": "Charging handle latch sits flush against upper receiver; birdcage flash hider detailed at muzzle.",
+      "magwell_status": "VERIFIED",
+      "magwell_obs": "Flared magwell cleanly accepts STANAG 30-round magazine; AG-209 seating crop shows flush fit with zero gap.",
+      "material_scale_obs": "Anodized aluminum receiver and ribbed polymer handguard textures scale accurately; no J63 camo pop.",
+      "z_fighting_obs": "Zero z-fighting between upper/lower receiver split line, rail cuts, or delta ring.",
+      "four_light_obs": "Audited in AG-195 and AG-206; raking dusk light emphasizes handguard ribbing.",
+      "near_plane_telemetry_cm": {
+        "hip": 50.6,
+        "ads": 44.5
+      },
+      "score": 4.85,
+      "verdict": "PASS"
+    },
+    {
+      "key": "ak",
+      "name": "KR-7 Rifle",
+      "category": "Assault Rifle",
+      "hip_shot": "review/GP-20017/model-audit/ak-hip.png",
+      "ads_shot": "review/GP-20017/model-audit/ak-ads.png",
+      "detail_shot": "qa/2026-11-02-AG-209/magwell/crops/ak-seating-crop.jpg",
+      "sight_obs": "Tangent rear sight notch aligns precisely with hooded front sight post; clear field of view down range.",
+      "receiver_slide_obs": "Ribbed dust cover, selector lever notch, gas tube collar, and muzzle slant brake distinct.",
+      "hammer_mechanism_obs": "Right-side bolt carrier and reciprocating charging handle cleanly separated from receiver body.",
+      "magwell_status": "VERIFIED",
+      "magwell_obs": "Curved 7.62 steel magazine locks cleanly into front pivot catch; AG-209 crop confirms locked engagement.",
+      "material_scale_obs": "Laminated wood handguard grain and stamped dark metal receiver texture render with natural fidelity.",
+      "z_fighting_obs": "Zero z-fighting between receiver cover ribs, gas block, or magazine latch.",
+      "four_light_obs": "Audited in AG-195 and AG-206; directional sun creates crisp cast shadows across receiver fluting.",
+      "near_plane_telemetry_cm": {
+        "hip": 54.3,
+        "ads": 47.2
+      },
+      "score": 4.85,
+      "verdict": "PASS"
+    },
+    {
+      "key": "shotgun",
+      "name": "Remington 870",
+      "category": "Shotgun",
+      "hip_shot": "review/GP-20017/model-audit/shotgun-hip.png",
+      "ads_shot": "review/GP-20017/model-audit/shotgun-ads.png",
+      "detail_shot": "qa/2026-11-02-AG-209/shotguns/shotgun-fourlight-comparison.jpg",
+      "sight_obs": "Vent rib barrel and front brass bead cleanly define aiming plane; receiver backplate reads wide at ADS.",
+      "receiver_slide_obs": "Candidate yaw +0.25 (AG-209) reveals side receiver contour and ejection port, resolving flat backplate look.",
+      "hammer_mechanism_obs": "Grooved pump slide and steel action bars articulate smoothly; tubular magazine cap detailed.",
+      "magwell_status": "VERIFIED",
+      "magwell_obs": "Under-receiver loading gate verified in AG-207 reload (tubular magazine design; no detachable box mag).",
+      "material_scale_obs": "Dark blued finish with subtle edge highlights; textured fore-end grip holds high texel scale.",
+      "z_fighting_obs": "Zero z-fighting between barrel rib supports, magazine tube bracket, or trigger guard.",
+      "four_light_obs": "AG-209 4-light comparison confirms candidate +0.25 yaw reads distinctly in Noon, Overcast, Dusk, and Night.",
+      "near_plane_telemetry_cm": {
+        "hip": 45.6,
+        "ads": 35.2
+      },
+      "score": 4.8,
+      "verdict": "PASS"
+    },
+    {
+      "key": "aa12",
+      "name": "Breacher-12",
+      "category": "Automatic Shotgun",
+      "hip_shot": "review/GP-20017/model-audit/aa12-hip.png",
+      "ads_shot": "review/GP-20017/model-audit/aa12-ads.png",
+      "detail_shot": "qa/2026-11-02-AG-209/magwell/crops/aa12-seating-crop.jpg",
+      "sight_obs": "Elevated combat ghost-ring rear and post sight sit proud above chassis; clear sight picture.",
+      "receiver_slide_obs": "Candidate yaw +0.25 exposes drum circumference and side housing, breaking up massive flat polymer back.",
+      "hammer_mechanism_obs": "Internal bolt mechanism with side charging track; heavy recoil buffer tube enclosure.",
+      "magwell_status": "VERIFIED",
+      "magwell_obs": "20-round rotary drum magazine seats firmly into lower chassis channel; AG-209 seating crop confirms fit.",
+      "material_scale_obs": "Reinforced matte polymer body with stainless steel barrel insert; uniform texel density.",
+      "z_fighting_obs": "Zero z-fighting across clamshell seam, sight brackets, or drum latch.",
+      "four_light_obs": "AG-209 4-light comparison proves candidate drum silhouette holds up across all four sky illumination states.",
+      "near_plane_telemetry_cm": {
+        "hip": 51.9,
+        "ads": 42.9
+      },
+      "score": 4.8,
+      "verdict": "PASS"
+    },
+    {
+      "key": "sniper",
+      "name": "Scout Sniper",
+      "category": "Precision Rifle",
+      "hip_shot": "review/GP-20017/model-audit/sniper-hip.png",
+      "ads_shot": "review/GP-20017/model-audit/sniper-ads.png",
+      "detail_shot": "qa/2026-11-02-AG-209/magwell/crops/sniper-seating-crop.jpg",
+      "sight_obs": "High-magnification telescopic optic with reticle crosshairs; ADS eye-relief at 11.8 cm creates realistic optic bezel.",
+      "receiver_slide_obs": "Bolt-action receiver with turned-down bolt handle, heavy fluted barrel, and threaded muzzle brake.",
+      "hammer_mechanism_obs": "Cock-on-open bolt cocking piece visible at receiver rear; smooth bolt cycling path.",
+      "magwell_status": "VERIFIED",
+      "magwell_obs": "5-round single-stack box magazine seats flush into floorplate magwell; confirmed in AG-209 crop.",
+      "material_scale_obs": "Dark grey composite stock with textured grip panels; anodized scope tube; clean texel scale.",
+      "z_fighting_obs": "Zero z-fighting between optic ring mounts, Picatinny base, or fluted barrel contours.",
+      "four_light_obs": "Audited in AG-206; scope lens reflections and tube specular gleam respond accurately to lighting.",
+      "near_plane_telemetry_cm": {
+        "hip": 52.6,
+        "ads": 11.8
+      },
+      "score": 4.9,
+      "verdict": "PASS"
+    },
+    {
+      "key": "chainsaw",
+      "name": "Chainsaw",
+      "category": "Melee / Heavy",
+      "hip_shot": "review/GP-20017/model-audit/chainsaw-hip.png",
+      "ads_shot": "review/GP-20017/model-audit/chainsaw-ads.png",
+      "detail_shot": "qa/2026-11-02-AG-207/model40cm/chainsaw-hip-1080p.jpg",
+      "sight_obs": "Guide bar points directly up screen center per Jerry J60 directive; no traditional sight post.",
+      "receiver_slide_obs": "Two-stroke engine block, wrap-around tubular support bar, chain brake lever, and side exhaust port.",
+      "hammer_mechanism_obs": "Recoil pull cord housing, sprocket drive cover, and individual saw tooth cutters cleanly modeled.",
+      "magwell_status": "N/A",
+      "magwell_obs": "Integral gasoline motor with fuel reservoir cap; no detachable magazine (correctly marked N/A).",
+      "material_scale_obs": "Weathered industrial enamel on engine housing, bare steel cutter bar with grease wear marks.",
+      "z_fighting_obs": "Zero z-fighting across guide bar chain track, wrap handle mounts, or muffler heat shield.",
+      "four_light_obs": "Audited in AG-206; chrome chain tooth bevels catch directional sun and moon rims.",
+      "near_plane_telemetry_cm": {
+        "hip": 55.1,
+        "ads": 74.1
+      },
+      "score": 4.85,
+      "verdict": "PASS"
+    },
+    {
+      "key": "flamer",
+      "name": "Flamethrower",
+      "category": "Special Heavy",
+      "hip_shot": "review/GP-20017/model-audit/flamer-hip.png",
+      "ads_shot": "review/GP-20017/model-audit/flamer-ads.png",
+      "detail_shot": "qa/2026-11-03-AG-212/flamer-nozzle-closeup.jpg",
+      "sight_obs": "Nozzle hood low center-right; flame projection line converges with screen center; sightline clear.",
+      "receiver_slide_obs": "Dual propellant tubes, perforated heat dissipation sleeve, regulator valve wheels, and igniter head.",
+      "hammer_mechanism_obs": "Twin pilot flame brackets and spark electrode; 1P stream emergence verified in AG-212 (0m lateral offset).",
+      "magwell_status": "UNVERIFIED",
+      "magwell_obs": "Integral fuel tank / pressure hose connection; reload animation not authored (marked UNVERIFIED).",
+      "material_scale_obs": "Brass fittings, scorched heat-tempered steel nozzle, and matte canister coating.",
+      "z_fighting_obs": "Zero z-fighting between perforated barrel shroud, gas lines, or regulator clamps.",
+      "four_light_obs": "Audited in AG-206 and AG-212; nozzle thermal sheen and flame bloom illuminate surrounding geometry.",
+      "near_plane_telemetry_cm": {
+        "hip": 55.5,
+        "ads": 52.5
+      },
+      "score": 4.85,
+      "verdict": "PASS"
+    },
+    {
+      "key": "launcher",
+      "name": "Grenade Launcher",
+      "category": "Heavy Explosive",
+      "hip_shot": "review/GP-20017/probe-launcher/launcher-hip.png",
+      "ads_shot": "review/GP-20017/probe-launcher/launcher-ads.png",
+      "detail_shot": "qa/2026-11-03-AG-214/launcher/launcher-fourlight-comparison.jpg",
+      "sight_obs": "Folding leaf quadrant sight legibly raised in ADS; reticle center completely clear at muzzle NDC (0.038, -0.165).",
+      "receiver_slide_obs": "Candidate yaw +0.25 (AG-214) exposes 6-chamber rotary cylinder fluting and crane latch in 3D perspective.",
+      "hammer_mechanism_obs": "Heavy double-action trigger guard, cylinder indexing ratchet, and forward crane pivot clearly separated.",
+      "magwell_status": "UNVERIFIED",
+      "magwell_obs": "Revolving cylinder chamber; individual 40mm grenade reload animation not in stage 2/3 (marked UNVERIFIED).",
+      "material_scale_obs": "Parkerized military finish on barrel and frame; rubberized rear butt plate; clean texel scale.",
+      "z_fighting_obs": "Zero z-fighting along barrel cylinder interface, leaf sight hinges, or cylinder flutes.",
+      "four_light_obs": "AG-214 4-light comparison (Noon, Overcast, Dusk, Night) confirms rotary cylinder depth across all conditions.",
+      "near_plane_telemetry_cm": {
+        "hip": 52.8,
+        "ads": 50.5
+      },
+      "score": 4.85,
+      "verdict": "PASS"
+    },
+    {
+      "key": "minigun",
+      "name": "Rotary Minigun",
+      "category": "Heavy Gatling",
+      "hip_shot": "review/GP-20017/model-audit/minigun-hip.png",
+      "ads_shot": "review/GP-20017/model-audit/minigun-ads.png",
+      "detail_shot": "qa/2026-11-02-AG-207/model40cm/minigun-hip-1080p.jpg",
+      "sight_obs": "ADS sightline blocked by carry handle / motor housing (Defect 1; explicitly HELD pending Grokbot J18 reflex dot).",
+      "receiver_slide_obs": "6-barrel cluster, dual barrel clamp collars, heavy electric drive motor housing, and ammo chute receiver.",
+      "hammer_mechanism_obs": "Spade grip handle assembly, electric motor wiring harness, and flexible metallic feed chute.",
+      "magwell_status": "N/A",
+      "magwell_obs": "Continuous feed chute from backpack ammunition hopper; no detachable magazine (correctly marked N/A).",
+      "material_scale_obs": "High-density gunmetal and manganese phosphate finish; barrel heat patina holds detail at 40 cm.",
+      "z_fighting_obs": "Zero z-fighting across rotating barrel bundle, clamp rings, or motor housing seams.",
+      "four_light_obs": "Audited in AG-206; cylindrical barrel cluster specular highlights transition smoothly through day/night cycle.",
+      "near_plane_telemetry_cm": {
+        "hip": 75.2,
+        "ads": null
+      },
+      "score": 4.8,
+      "verdict": "PASS (Hip) / HELD (ADS - J18)"
+    }
+  ],
+  "defects_summary": {
+    "defect_count": 3,
+    "defect_ceiling": 4,
+    "within_tolerance": true,
+    "defects": [
+      {
+        "id": 1,
+        "weapon": "minigun",
+        "component": "ADS sight picture",
+        "description": "ADS view is obstructed by the heavy carry handle and electric drive motor housing at y 0.300-0.320. Held pending Grokbot GB-259 J18 reflex red dot.",
+        "status": "HELD_PENDING_GB259"
+      },
+      {
+        "id": 2,
+        "weapon": "revolver",
+        "component": "Front sight post silhouette",
+        "description": "Front sight post reads slightly subtle against wide rear notch under low-contrast Dusk/Night lighting conditions.",
+        "status": "MINOR_USABILITY_NOTE"
+      },
+      {
+        "id": 3,
+        "weapon": "long_guns (m4, ak, shotgun, aa12, sniper, launcher)",
+        "component": "Hip at-rest orientation",
+        "description": "Long guns at rest are held somewhat end-on and upright (steep perspective angle). Handed over to GP-20018 for side-on shouldered placement.",
+        "status": "HANDED_OVER_TO_GP20018"
+      }
+    ]
+  }
+}

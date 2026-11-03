@@ -1,0 +1,11 @@
+file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/cdp.mjs:153
+      throw new Error('evaluate failed: ' + text);
+            ^
+
+Error: evaluate failed: TypeError: TT.getZombies is not a function
+    at <anonymous>:2:17
+    at <anonymous>:6:3
+    at Page.evaluate (file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/cdp.mjs:153:13)
+    at async file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/bench.mjs:891:30
+
+Node.js v24.13.0

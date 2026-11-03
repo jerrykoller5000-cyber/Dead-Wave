@@ -2003,6 +2003,68 @@
    "file": "assets/soundtrack/gh/gh-place-fallen.ogg",
    "seconds": 385.85,
    "gain_db": -5.0
+  },
+  "place-graveyard": {
+   "src": "Ghosthack - Anomaly/Ghosthack - Anomaly/Granular Underscores/DRY/Ghosthack-A_Alone Fm 65Bpm (DRY).wav",
+   "file": "assets/soundtrack/gh/gh-place-graveyard.ogg",
+   "seconds": 111.69,
+   "gain_db": -1.4
+  },
+  "place-relay": {
+   "src": "Ghosthack - Mystery Nightfall - Trailer SFX/Ghosthack - Mystery Nightfall - Trailer SFX/Loops/Pulses/Ghosthack-MN_Pulse Loop 80_Abnormality_E.wav",
+   "file": "assets/soundtrack/gh/gh-place-relay.ogg",
+   "seconds": 96.0,
+   "gain_db": -2.6
+  },
+  "place-hikers": {
+   "src": "Ghosthack - Cinematic Orchestra Volume 2/Ghosthack - Cinematic Orchestra Volume 2/Construction Kits/Unapreciated/GH_FS III_Songkits_Unapreciated_Cm_140bpm.wav",
+   "file": "assets/soundtrack/gh/gh-place-hikers.ogg",
+   "seconds": 119.74,
+   "gain_db": -6.1
+  },
+  "place-alarm-build": {
+   "src": "Ghosthack - Cinematic Orchestra Volume 2/Ghosthack - Cinematic Orchestra Volume 2/Construction Kits/Pressure/GH_FS III_Songkits_Pressure_Em_150bpm.wav",
+   "file": "assets/soundtrack/gh/gh-place-alarm-build.ogg",
+   "seconds": 128.34,
+   "gain_db": -6.5
+  }
+ },
+ "cues": {
+  "discovery": {
+   "src": "Ghosthack - Mystery Nightfall - Trailer SFX/Ghosthack - Mystery Nightfall - Trailer SFX/One Shots/Tonal/Ghosthack-MN_Tonal_Entangle_D.wav",
+   "file": "assets/soundtrack/gh/gh-cue-discovery.ogg",
+   "seconds": 7.81,
+   "gain_db": -9.1
+  },
+  "mission-done": {
+   "src": "Ghosthack - Cinematic Orchestra Volume 2/Ghosthack - Cinematic Orchestra Volume 2/Construction Kits/Captain_s Ship/GH_FS III_Songkits_Captains Ship_Cm_106bpm.wav",
+   "file": "assets/soundtrack/gh/gh-cue-mission-done.ogg",
+   "seconds": 11.0,
+   "gain_db": -0.7
+  },
+  "last-kill": {
+   "src": "Ghosthack - Anomaly/Ghosthack - Anomaly/Impacts/DRY/Ghosthack-A_Shocker Gm 65Bpm (DRY).wav",
+   "file": "assets/soundtrack/gh/gh-cue-last-kill.ogg",
+   "seconds": 4.62,
+   "gain_db": -0.9
+  },
+  "boss-entrance": {
+   "src": "Ghosthack - Mystery Nightfall - Trailer SFX/Ghosthack - Mystery Nightfall - Trailer SFX/One Shots/Risers/Ghosthack-MN_Riser_Collide.wav",
+   "file": "assets/soundtrack/gh/gh-cue-boss-entrance.ogg",
+   "seconds": 6.14,
+   "gain_db": 1.3
+  },
+  "night-fall": {
+   "src": "Ghosthack - Mystery Nightfall - Trailer SFX/Ghosthack - Mystery Nightfall - Trailer SFX/One Shots/Drones/Ghosthack-MN_Drone_Scavenge_C.wav",
+   "file": "assets/soundtrack/gh/gh-cue-night-fall.ogg",
+   "seconds": 10.0,
+   "gain_db": -2.8
+  },
+  "dawn": {
+   "src": "Ghosthack - Cinematic Orchestra Volume 2/Ghosthack - Cinematic Orchestra Volume 2/Construction Kits/Blue Peace/GH_FS III_Songkits_Blue Peace_Cmaj_90bpm.wav",
+   "file": "assets/soundtrack/gh/gh-cue-dawn.ogg",
+   "seconds": 10.7,
+   "gain_db": 7.4
   }
  }
 }

@@ -1,0 +1,89 @@
+{
+  "samples": [
+    {
+      "variant": "baseline",
+      "key": "minigun",
+      "at": [
+        0.19,
+        -0.25,
+        -1
+      ],
+      "yaw": 0.25,
+      "weapon": "minigun",
+      "first": true,
+      "active": true,
+      "vmKey": "minigun",
+      "raise": 1,
+      "muzzleNdc": {
+        "x": -0.04958811846671179,
+        "y": -0.33776277487255046,
+        "d": 2.0983192772263326
+      },
+      "backend": "WebGPU"
+    },
+    {
+      "variant": "side-25",
+      "key": "minigun",
+      "at": [
+        0.3,
+        -0.22,
+        -0.65
+      ],
+      "yaw": 0.25,
+      "weapon": "minigun",
+      "first": true,
+      "active": true,
+      "vmKey": "minigun",
+      "raise": 1,
+      "muzzleNdc": {
+        "x": 0.001784074326905297,
+        "y": -0.3766891863660283,
+        "d": 1.7482112544197315
+      },
+      "backend": "WebGPU"
+    },
+    {
+      "variant": "side-35",
+      "key": "minigun",
+      "at": [
+        0.32,
+        -0.22,
+        -0.65
+      ],
+      "yaw": 0.35,
+      "weapon": "minigun",
+      "first": true,
+      "active": true,
+      "vmKey": "minigun",
+      "raise": 1,
+      "muzzleNdc": {
+        "x": -0.04831009928593996,
+        "y": -0.37848541761833887,
+        "d": 1.7137050522753683
+      },
+      "backend": "WebGPU"
+    },
+    {
+      "variant": "side-45",
+      "key": "minigun",
+      "at": [
+        0.36,
+        -0.22,
+        -0.65
+      ],
+      "yaw": 0.45,
+      "weapon": "minigun",
+      "first": true,
+      "active": true,
+      "vmKey": "minigun",
+      "raise": 1,
+      "muzzleNdc": {
+        "x": -0.08713993030642177,
+        "y": -0.3973625032432341,
+        "d": 1.6670841024383192
+      },
+      "backend": "WebGPU"
+    }
+  ],
+  "errors": []
+}

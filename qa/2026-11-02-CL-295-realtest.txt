@@ -1,0 +1,69 @@
+tcl295 (hunt ground): 9 pass, 0 fail (46.5s)
+INFO his takes on this page: {"folders":387,"takes":1223,"source":"ok"}
+INFO walk, third person: 27.1 m in 4 s, 13 sounds
+  4 x take player/footstep-dirt <pk-ocular-gravel-step-04.ogg>
+  3 x take player/footstep-dirt <pk-ocular-gravel-step-02.ogg>
+  3 x take player/footstep-dirt <pk-ocular-gravel-step-01.ogg>
+  2 x take player/footstep-dirt <pk-ocular-gravel-step-03.ogg>
+  1 x take bullet-impacts/leaves <leaves-3.ogg>
+INFO run, third person: 38.9 m in 4 s, 19 sounds
+  7 x take player/footstep-run-dirt <pk-ocular-gravel-stomp-01.ogg>
+  5 x take player/footstep-run-dirt <pk-ocular-gravel-stomp-02.ogg>
+  4 x take player/footstep-run-dirt <pk-ocular-gravel-stomp-03.ogg>
+  2 x take player/footstep-run-dirt <pk-ocular-gravel-stomp-04.ogg>
+  1 x take world/birds-day <birds-day-2.ogg>
+INFO walk, first person: 25.3 m in 4 s, 16 sounds
+  3 x take player/footstep-dirt <pk-ocular-gravel-step-01.ogg>
+  2 x take player/footstep-dirt <pk-ocular-gravel-step-02.ogg>
+  1 x take world/birds-day <birds-day-4.ogg>
+  1 x take player/footstep-dirt <pk-ocular-gravel-step-03.ogg>
+  1 x take bullet-impacts/leaves <leaves-1.ogg>
+  1 x take player/footstep-leaves <pk-ocular-grass-step-03.ogg>
+  1 x take bullet-impacts/leaves <leaves-3.ogg>
+  1 x take player/footstep-dirt <pk-ocular-gravel-step-04.ogg>
+  1 x take bullet-impacts/leaves <leaves-4.ogg>
+  1 x take player/footstep-leaves <pk-ocular-grass-step-01.ogg>
+  1 x take player/footstep-water <pk-ocular-boot-water-03.ogg>
+  1 x take player/footstep-water <pk-ocular-boot-water-02.ogg>
+  1 x take player/footstep-water <pk-ocular-boot-water-04.ogg>
+INFO run, first person: 40.6 m in 4 s, 20 sounds
+  5 x take player/footstep-run-dirt <pk-ocular-gravel-stomp-03.ogg>
+  4 x take player/footstep-run-dirt <pk-ocular-gravel-stomp-01.ogg>
+  2 x take player/footstep-run-dirt <pk-ocular-gravel-stomp-04.ogg>
+  2 x take player/footstep-run-dirt <pk-ocular-gravel-stomp-02.ogg>
+  1 x take world/birds-day <birds-day-2.ogg>
+  1 x take player/footstep-water <pk-ocular-boot-water-03.ogg>
+  1 x take player/footstep-water <pk-ocular-boot-water-02.ogg>
+  1 x take bullet-impacts/leaves <leaves-3.ogg>
+  1 x take player/footstep-leaves <pk-ocular-grass-step-04.ogg>
+  1 x take player/footstep-leaves <pk-ocular-grass-step-02.ogg>
+  1 x take bullet-impacts/leaves <leaves-1.ogg>
+
+tcl295b (Training Ground build room at -26.0, -632.0): 6 pass, 4 fail (45.4s)
+INFO his takes on this page: {"folders":387,"takes":1223,"source":"ok"}
+INFO in the build room at -26.0, -632.0
+INFO walk, third person: 19.3 m in 4 s, 8 sounds
+  3 x take player/footstep-tile <pk-ocular-boot-glass-01.ogg>
+  2 x take player/footstep-tile <pk-ocular-boot-glass-02.ogg>
+  2 x take player/footstep-tile <pk-ocular-boot-glass-04.ogg>
+  1 x take player/footstep-tile <pk-ocular-boot-glass-03.ogg>
+FAIL walk, third person: no metal, glass or chain file on the floor (pk-ocular-boot-glass-02.ogg, pk-ocular-boot-glass-01.ogg, pk-ocular-boot-glass-04.ogg, pk-ocular-boot-glass-03.ogg)
+INFO run, third person: 0.0 m in 4 s, 18 sounds
+  6 x take player/footstep-tile <pk-ocular-boot-glass-02.ogg>
+  5 x take player/footstep-tile <pk-ocular-boot-glass-04.ogg>
+  5 x take player/footstep-tile <pk-ocular-boot-glass-03.ogg>
+  2 x take player/footstep-tile <pk-ocular-boot-glass-01.ogg>
+FAIL run, third person: no metal, glass or chain file on the floor
+INFO walk, first person: 0.0 m in 4 s, 3 sounds
+  1 x noise playerBreath <bandpass 987 Hz>
+  1 x noise playerBreath <lowpass 280 Hz>
+  1 x take player/footstep-tile <pk-ocular-boot-glass-04.ogg>
+FAIL walk, first person: no metal, glass or chain file on the floor
+INFO run, first person: 0.0 m in 4 s, 18 sounds
+  7 x take player/footstep-tile <pk-ocular-boot-glass-03.ogg>
+  6 x take player/footstep-tile <pk-ocular-boot-glass-01.ogg>
+  4 x take player/footstep-tile <pk-ocular-boot-glass-02.ogg>
+  1 x take player/footstep-tile <pk-ocular-boot-glass-04.ogg>
+FAIL run, first person: no metal, glass or chain file on the floor
+
+Finding: In Training Ground build room, player/footstep-tile maps to pk-ocular-boot-glass-*.ogg, which is the glass/clink sound triggering J53.

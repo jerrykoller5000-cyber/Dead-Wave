@@ -133,7 +133,9 @@ export function makeM4Model(ctx) {
   // 8 mm square: aimed (GB-228) the plate hid the target and the square covered a zombie's head at 30 m.
   const holoGlass = Object.assign(glassMat.clone(), { transparent: true, opacity: 0.18, depthWrite: false });
   K.box(0.046, 0.044, 0.003, holoGlass, 0, 0.134, 0.045);
-  K.box(0.0028, 0.0028, 0.002, sightDotMat, 0, 0.134, 0.0455);
+  // GB-259 (J10: the red dot could use work): a 3.5 mm dot (was 2.8, about 3 px down the sights) inside a thin ring, EOTech-style.
+  K.box(0.0035, 0.0035, 0.002, sightDotMat, 0, 0.134, 0.0455);
+  K.tor(0.0075, 0.0006, sightDotMat, 0, 0.134, 0.0455, 0, 0, 0, null, Math.PI * 2, 24);
   for (const z of [-0.02, 0.0]) K.box(0.008, 0.008, 0.012, gunRubber, 0.03, 0.118, z);
   K.cyl(0.008, 0.008, 0.012, gunMid, -0.032, 0.106, 0.019, null, 10, 'x');
   for (const sx of [-1, 1]) K.cyl(0.004, 0.004, 0.003, gunMid, sx * 0.03, 0.124, 0.033, null, 6, 'x');
@@ -182,7 +184,8 @@ export function makeAkModel(ctx) {
   K.box(0.024, 0.008, 0.016, gunDark, 0, 0.078, -0.205);
   K.slab([[0.15, 0.054], [0.248, 0.054], [0.248, 0.068], [0.20, 0.084], [0.15, 0.08]], 0.044, gunDark, { bevel: 0.003 });
   K.box(0.026, 0.004, 0.062, gunDark, 0, 0.084, 0.195);
-  K.box(0.008, 0.010, 0.008, gunAccent, 0, 0.090, 0.218);
+  // GB-259: a U notch on the leaf's rear (ears to 0.090, the floor the leaf's top at 0.086), not a blob over the line.
+  for (const sx of [-1, 1]) K.box(0.004, 0.004, 0.008, gunAccent, sx * 0.005, 0.088, 0.218);
   // Right side: the long safety lever and its tab, the charging handle on the carrier.
   K.slab(gunBand([[-0.17, 0.036], [-0.02, 0.03], [0.005, 0.008]], 0.008), 0.006, gunDark, { x: 0.047, bevel: 0.002 });
   K.box(0.006, 0.03, 0.018, gunDark, 0.047, 0.004, 0.012);
@@ -243,9 +246,10 @@ export function makeAkModel(ctx) {
   K.lathe([[0, 0.5], [0.0155, 0.5], [0.0155, 0.6], [0.0135, 0.608], [0.0135, 0.92], [0, 0.92]], gunAccent, { y: -0.005, seg: 12 });
   K.lathe([[0, 0.53], [0.0035, 0.53], [0.0035, 0.832], [0.006, 0.836], [0.006, 0.846], [0, 0.846]], gunDark, { y: -0.032, seg: 6 });
   K.slab([[0.818, -0.03], [0.862, -0.03], [0.858, 0.05], [0.826, 0.05]], 0.034, gunDark, { bevel: 0.004 });
-  K.tor(0.022, 0.005, gunDark, 0, 0.07, 0.84, 0, 0, 0, null, Math.PI, 10);
-  for (const sx of [-1, 1]) K.box(0.006, 0.024, 0.012, gunDark, sx * 0.022, 0.06, 0.84);
-  K.box(0.006, 0.03, 0.006, gunDark, 0, 0.066, 0.84);
+  // GB-259: the post's tip up to the notch's line (0.090; it was 0.081, under the rear sight) and the hood raised to clear it.
+  K.tor(0.022, 0.005, gunDark, 0, 0.078, 0.84, 0, 0, 0, null, Math.PI, 10);
+  for (const sx of [-1, 1]) K.box(0.006, 0.032, 0.012, gunDark, sx * 0.022, 0.064, 0.84);
+  K.box(0.006, 0.039, 0.006, gunDark, 0, 0.0705, 0.84);
   K.box(0.022, 0.02, 0.05, gunDark, 0, -0.03, 0.82);
   K.lathe([[0, 0.918], [0.019, 0.918], [0.019, 0.988], [0.0165, 0.994], [0.008, 0.994], [0.008, 0.985], [0, 0.985]], gunDark, { y: -0.005, seg: 12 });
   K.box(0.025, 0.01, 0.04, gunRubber, 0, 0.012, 0.965, -0.35);
@@ -298,11 +302,15 @@ export function makeAa12Model(ctx) {
   // Stock: moulded polymer with its skeleton cut, a rubber pad.
   // GB-173 (Jerry: the stock was a boxy flared block): the AA-12's fixed stock. A moulded nose steps the receiver's
   // width down; the top and comb run straight back off the receiver, the underside slopes from the wrist to a deep butt.
-  K.slab([[-0.255, 0.074], [-0.31, 0.072], [-0.31, -0.07], [-0.282, -0.074], [-0.255, -0.078]], 0.118, gunPoly, { bevel: 0.012, segs: 3 });
-  K.slab([[-0.3, 0.07], [-0.535, 0.064], [-0.553, 0.058], [-0.553, -0.1], [-0.538, -0.106], [-0.47, -0.092], [-0.36, -0.07], [-0.3, -0.066]], 0.086, gunPoly, { bevel: 0.014, segs: 3 });
-  K.slab([[-0.34, 0.078], [-0.522, 0.073], [-0.532, 0.064], [-0.34, 0.068]], 0.062, gunPoly, { bevel: 0.006, segs: 2 });   // the comb
-  for (const sx of [-1, 1]) K.slab([[-0.335, 0.04], [-0.5, 0.034], [-0.5, -0.042], [-0.42, -0.054], [-0.335, -0.038]], 0.003, gunPoly, { x: sx * 0.044, bevel: 0.002 });
-  K.slab([[-0.576, 0.058], [-0.553, 0.06], [-0.553, -0.102], [-0.573, -0.108], [-0.579, -0.09], [-0.579, 0.044]], 0.092, gunRubber, { bevel: 0.008 });   // butt pad
+  // GB-259 (GP-20014): the stock (nose, body, comb, panels, pad) is one group, gun.userData.fpStock ('fp-stock'), for the
+  // view gun to leave out of the eye; third person and the shadow keep it. Every part is where it was.
+  const stock = K.group(0, 0, 0); stock.name = 'fp-stock';
+  K.slab([[-0.255, 0.074], [-0.31, 0.072], [-0.31, -0.07], [-0.282, -0.074], [-0.255, -0.078]], 0.118, gunPoly, { bevel: 0.012, segs: 3, parent: stock });
+  K.slab([[-0.3, 0.07], [-0.535, 0.064], [-0.553, 0.058], [-0.553, -0.1], [-0.538, -0.106], [-0.47, -0.092], [-0.36, -0.07], [-0.3, -0.066]], 0.086, gunPoly, { bevel: 0.014, segs: 3, parent: stock });
+  K.slab([[-0.34, 0.078], [-0.522, 0.073], [-0.532, 0.064], [-0.34, 0.068]], 0.062, gunPoly, { bevel: 0.006, segs: 2, parent: stock });   // the comb
+  for (const sx of [-1, 1]) K.slab([[-0.335, 0.04], [-0.5, 0.034], [-0.5, -0.042], [-0.42, -0.054], [-0.335, -0.038]], 0.003, gunPoly, { x: sx * 0.044, bevel: 0.002, parent: stock });
+  K.slab([[-0.576, 0.058], [-0.553, 0.06], [-0.553, -0.102], [-0.573, -0.108], [-0.579, -0.09], [-0.579, 0.044]], 0.092, gunRubber, { bevel: 0.008, parent: stock });   // butt pad
+  gun.userData.fpStock = stock;
   // Pistol grip, trigger guard, trigger.
   // GB-173 (Jerry: grip and trigger too close to the drum): grip, guard, trigger and panels 70 mm further back, so the
   // guard clears the drum's rear face by ~13 mm (WEAPON_HOLD.aa12 grip/trig/hold follow in index.html).
@@ -394,12 +402,15 @@ export function makeShotgunModel(ctx) {
   }
   K.box(0.018, 0.008, 0.022, gunDark, 0, 0.083, -0.13, 0.2, 0, 0, null, 0.003);
   // Stock with a recoil pad; the pistol grip, trigger guard and trigger; a sling loop.
+  // GB-259 (GP-20014): the stock, its pad, comb and sling loop are one group, gun.userData.fpStock ('fp-stock'), for the
+  // view gun to leave out of the eye; third person and the shadow keep it. Every part is where it was.
+  const stock = K.group(0, 0, 0); stock.name = 'fp-stock';
   K.slab([[-0.186, 0.056], ...profileCurve([-0.186, 0.056], [-0.229, 0.011], [-0.266, 0.027], 5),
     [-0.302, 0.057], [-0.454, 0.052], [-0.468, 0.048], [-0.469, -0.118], [-0.454, -0.121],
     ...profileCurve([-0.454, -0.121], [-0.346, -0.064], [-0.306, -0.07], 5), [-0.27, -0.094],
-    ...profileCurve([-0.27, -0.094], [-0.228, -0.025], [-0.196, -0.035], 5), [-0.155, -0.044]], 0.084, gunPoly, { bevel: 0.012, segs: 3 });
-  K.slab([[-0.494, 0.055], [-0.464, 0.054], [-0.47, -0.12], [-0.491, -0.124], [-0.496, -0.103]], 0.088, gunRubber, { bevel: 0.008 });
-  K.slab([[-0.294, 0.047], [-0.45, 0.047], [-0.447, 0.024], [-0.424, 0.014], [-0.326, 0.026]], 0.087, gunPoly, { bevel: 0.007, segs: 3 });
+    ...profileCurve([-0.27, -0.094], [-0.228, -0.025], [-0.196, -0.035], 5), [-0.155, -0.044]], 0.084, gunPoly, { bevel: 0.012, segs: 3, parent: stock });
+  K.slab([[-0.494, 0.055], [-0.464, 0.054], [-0.47, -0.12], [-0.491, -0.124], [-0.496, -0.103]], 0.088, gunRubber, { bevel: 0.008, parent: stock });
+  K.slab([[-0.294, 0.047], [-0.45, 0.047], [-0.447, 0.024], [-0.424, 0.014], [-0.326, 0.026]], 0.087, gunPoly, { bevel: 0.007, segs: 3, parent: stock });
   K.slab(gunBand([[-0.251, -0.044], [-0.204, -0.017], [-0.167, -0.019], [-0.105, -0.062]], 0.02), 0.07, gunPoly, { bevel: 0.008, segs: 3 });
   // Grip centre line is still gripOutline(-0.06, -0.1, 0.16, …, 0.28): the palm stays at the hold.
   // GB-178 (Jerry: grips were butchered): a clean pistol grip: an even front strap, a filled backstrap up into the stock arch on the same centre line and hand anchor (u 0.42, v 0).
@@ -415,7 +426,8 @@ export function makeShotgunModel(ctx) {
   // GB-175: trigger face toward the grip, tip curling forward (the convention Jerry set on the revolver and sniper).
   // GB-180: a solid trigger blade (wide at the root, tapering to the curled tip), not a wire.
   K.slab([[0.0384, -0.0471], [0.0303, -0.0589], [0.0319, -0.0699], [0.0405, -0.0795], [0.0355, -0.0845], [0.0241, -0.0741], [0.0197, -0.0571], [0.0276, -0.0409]], 0.012, gunAccent, { bevel: 0.002 });
-  K.tor(0.012, 0.004, gunDark, 0, -0.088, -0.4, 0, Math.PI / 2, 0);
+  K.tor(0.012, 0.004, gunDark, 0, -0.088, -0.4, 0, Math.PI / 2, 0, stock);
+  gun.userData.fpStock = stock;
   // Closed-action pump extends forward, while its original root and palm contact
   // stay put. Action bars, groove panels and lips all move with that same root.
   const pump = K.group(0, -0.02, 0.28);
@@ -520,18 +532,22 @@ export function makeSniperModel(ctx) {
   // Skeleton stock: the top bar, a cheek riser on two posts, the lower bar, the butt and pad, a rear monopod.
   // GB-180 pass 6 (vs an AXMC-style chassis: a solid, deep stock with a tall cheek riser and a thick pad; ours was a
   // thin open skeleton): one solid stock body from the action to the pad, deeper at the butt.
-  K.slab([[-0.245, 0.062], [-0.6, 0.062], [-0.6, -0.112], [-0.56, -0.114], [-0.43, -0.082], [-0.31, -0.06], [-0.245, -0.045]], 0.074, gunTan, { bevel: 0.012, segs: 3 });
-  K.slab([[-0.32, 0.058], [-0.535, 0.058], [-0.535, 0.122], [-0.37, 0.128], [-0.32, 0.106]], 0.07, gunTan, { bevel: 0.01, segs: 3 });   // GB-180: a tall cheek riser
-  for (const z of [-0.36, -0.48]) for (const sx of [-1, 1]) K.cyl(0.008, 0.008, 0.004, steelMat, sx * 0.036, 0.09, z, null, 8, 'x');   // riser clamp knobs
-  K.slab(gunBand([[-0.3, -0.052], [-0.45, -0.075], [-0.575, -0.098]], 0.015), 0.062, gunTan, { bevel: 0.01 });
-  K.slab([[-0.566, 0.068], [-0.594, 0.068], [-0.598, -0.1], [-0.57, -0.104]], 0.07, gunTan, { bevel: 0.01 });
-  K.slab([[-0.598, 0.074], [-0.636, 0.074], [-0.64, -0.118], [-0.602, -0.122]], 0.084, gunRubber, { bevel: 0.01 });   // GB-180: a thick pad
+  // GB-259 (GP-20014): the stock body, cheek riser, butt, pad and monopod are one group, gun.userData.fpStock ('fp-stock'),
+  // for the view gun to leave out of the eye; third person and the shadow keep it. Every part is where it was.
+  const stock = K.group(0, 0, 0); stock.name = 'fp-stock';
+  K.slab([[-0.245, 0.062], [-0.6, 0.062], [-0.6, -0.112], [-0.56, -0.114], [-0.43, -0.082], [-0.31, -0.06], [-0.245, -0.045]], 0.074, gunTan, { bevel: 0.012, segs: 3, parent: stock });
+  K.slab([[-0.32, 0.058], [-0.535, 0.058], [-0.535, 0.122], [-0.37, 0.128], [-0.32, 0.106]], 0.07, gunTan, { bevel: 0.01, segs: 3, parent: stock });   // GB-180: a tall cheek riser
+  for (const z of [-0.36, -0.48]) for (const sx of [-1, 1]) K.cyl(0.008, 0.008, 0.004, steelMat, sx * 0.036, 0.09, z, stock, 8, 'x');   // riser clamp knobs
+  K.slab(gunBand([[-0.3, -0.052], [-0.45, -0.075], [-0.575, -0.098]], 0.015), 0.062, gunTan, { bevel: 0.01, parent: stock });
+  K.slab([[-0.566, 0.068], [-0.594, 0.068], [-0.598, -0.1], [-0.57, -0.104]], 0.07, gunTan, { bevel: 0.01, parent: stock });
+  K.slab([[-0.598, 0.074], [-0.636, 0.074], [-0.64, -0.118], [-0.602, -0.122]], 0.084, gunRubber, { bevel: 0.01, parent: stock });   // GB-180: a thick pad
   for (const sx of [-1, 1]) {
-    for (const [z, y] of [[-0.29, 0.025], [-0.29, -0.025], [-0.584, 0.052], [-0.588, -0.081]]) K.cyl(0.0045, 0.0045, 0.003, gunDark, sx * 0.035, y, z, null, 8, 'x');
-    K.slab(gunBand([[-0.309, -0.05], [-0.444, -0.076], [-0.564, -0.098]], 0.002), 0.003, gunBody, { x: sx * 0.031, bevel: 0.001 });
+    for (const [z, y] of [[-0.29, 0.025], [-0.29, -0.025], [-0.584, 0.052], [-0.588, -0.081]]) K.cyl(0.0045, 0.0045, 0.003, gunDark, sx * 0.035, y, z, stock, 8, 'x');
+    K.slab(gunBand([[-0.309, -0.05], [-0.444, -0.076], [-0.564, -0.098]], 0.002), 0.003, gunBody, { x: sx * 0.031, bevel: 0.001, parent: stock });
   }
-  K.cyl(0.01, 0.01, 0.1, gunDark, 0, -0.12, -0.5, null, 6, 'y');
-  K.cyl(0.014, 0.014, 0.015, gunBody, 0, -0.127, -0.5, null, 12, 'y');
+  K.cyl(0.01, 0.01, 0.1, gunDark, 0, -0.12, -0.5, stock, 6, 'y');
+  K.cyl(0.014, 0.014, 0.015, gunBody, 0, -0.127, -0.5, stock, 12, 'y');
+  gun.userData.fpStock = stock;
   K.box(0.04, 0.02, 0.1, gunTan, 0, -0.03, -0.26, 0, 0, 0, null, 0.006);
   // GB-173 (Jerry: a gap in the stock above the grip): the chassis is solid through the wrist, rear block to magwell,
   // under the action and above the grip and trigger.

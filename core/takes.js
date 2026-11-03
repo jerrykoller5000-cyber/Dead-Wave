@@ -241,6 +241,7 @@ export const packTrim = (id, rel) => (isPackTake(rel) && Number.isFinite(PACK_TR
 export function createTakeBank({ getCtx, connect, track = () => {}, fetchJson, fetchBytes, root = 'z-sounds/', listUrls = null, storage }) {
   let listed = null, listing = null, levels = {};
   const files = new Map(), bufs = new Map(), loads = new Map(), last = new Map(), plays = {};
+  let playHook = null;
   const rates = new WeakMap();
   const playing = new Map();   // folder -> [{ src, g, at }] oldest first
   let active = 0, activeFx = 0, failed = 0;
@@ -287,7 +288,7 @@ export function createTakeBank({ getCtx, connect, track = () => {}, fetchJson, f
       try {
         const ab = await fetchBytes(urlFor(rel));
         const buf = await new Promise((res, rej) => { const q = ctx.decodeAudioData(ab, res, rej); if (q && q.catch) q.catch(rej); });
-        return evened(ctx, buf, takeTarget(id) * packTrim(id, rel));
+        return Object.assign(evened(ctx, buf, takeTarget(id) * packTrim(id, rel)), { rel });   // CL-295: the file, for the trace
       } catch (_) { failed++; return null; }
     })).then((list) => { const ok = list.filter(Boolean); bufs.set(id, ok.length ? ok : null); return bufs.get(id); });
     loads.set(id, p);
@@ -335,6 +336,7 @@ export function createTakeBank({ getCtx, connect, track = () => {}, fetchJson, f
     const z = Z_GROUPS.has(id.split('/')[0]);
     if (!ctx || (z ? active >= MAX_VOICES : activeFx >= MAX_FX)) return !!ctx;   // over the cap: drop it rather than fall back to the synth
     const t = pick(id, list);
+    if (playHook) { try { playHook(id, t.rel || null, v); } catch (_) {} }   // CL-295 (J53): AudioSys.traceDbg
     const src = ctx.createBufferSource(); src.buffer = t.buf;
     let r;
     if (emitter && typeof emitter === 'object' && id.startsWith('zombies/')) {
@@ -408,6 +410,7 @@ export function createTakeBank({ getCtx, connect, track = () => {}, fetchJson, f
   }
 
   return {
+    setPlayHook: (fn) => { playHook = typeof fn === 'function' ? fn : null; },
     init, load, play, loop,
     // Look again (entering the Training Ground does): takes dropped in while the game runs are picked up.
     refresh: () => { listing = null; return init(); },

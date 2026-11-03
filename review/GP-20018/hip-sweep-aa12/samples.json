@@ -1,0 +1,89 @@
+{
+  "samples": [
+    {
+      "variant": "baseline",
+      "key": "aa12",
+      "at": [
+        0.2,
+        -0.23,
+        -0.78
+      ],
+      "yaw": 0.25,
+      "weapon": "aa12",
+      "first": true,
+      "active": true,
+      "vmKey": "aa12",
+      "raise": 1,
+      "muzzleNdc": {
+        "x": -0.0019232251191650053,
+        "y": -0.10964352711928274,
+        "d": 1.5335430104870555
+      },
+      "backend": "WebGPU"
+    },
+    {
+      "variant": "close-40-yaw003",
+      "key": "aa12",
+      "at": [
+        0.16,
+        -0.17,
+        -0.4
+      ],
+      "yaw": 0.03,
+      "weapon": "aa12",
+      "first": true,
+      "active": true,
+      "vmKey": "aa12",
+      "raise": 1,
+      "muzzleNdc": {
+        "x": 0.10431392716879312,
+        "y": -0.04457445013886965,
+        "d": 1.178909107132529
+      },
+      "backend": "WebGPU"
+    },
+    {
+      "variant": "close-40-yaw015",
+      "key": "aa12",
+      "at": [
+        0.16,
+        -0.17,
+        -0.4
+      ],
+      "yaw": 0.15,
+      "weapon": "aa12",
+      "first": true,
+      "active": true,
+      "vmKey": "aa12",
+      "raise": 1,
+      "muzzleNdc": {
+        "x": 0.02762807018511236,
+        "y": -0.053052717603334354,
+        "d": 1.1699006661076883
+      },
+      "backend": "WebGPU"
+    },
+    {
+      "variant": "close-36-yaw003",
+      "key": "aa12",
+      "at": [
+        0.15,
+        -0.16,
+        -0.36
+      ],
+      "yaw": 0.03,
+      "weapon": "aa12",
+      "first": true,
+      "active": true,
+      "vmKey": "aa12",
+      "raise": 1,
+      "muzzleNdc": {
+        "x": 0.09940245277291368,
+        "y": -0.033998628670769575,
+        "d": 1.1391454615929741
+      },
+      "backend": "WebGPU"
+    }
+  ],
+  "errors": []
+}

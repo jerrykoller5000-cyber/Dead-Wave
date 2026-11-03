@@ -1,0 +1,34 @@
+{
+  "noon": {
+    "key": "revolver",
+    "active": true,
+    "rootVisible": true,
+    "raise": 1,
+    "ads": 0,
+    "hipYaw": 0.4
+  },
+  "overcast": {
+    "key": "revolver",
+    "active": true,
+    "rootVisible": true,
+    "raise": 1,
+    "ads": 0,
+    "hipYaw": 0.4
+  },
+  "dusk": {
+    "key": "revolver",
+    "active": true,
+    "rootVisible": true,
+    "raise": 1,
+    "ads": 0,
+    "hipYaw": 0.4
+  },
+  "night": {
+    "key": "revolver",
+    "active": true,
+    "rootVisible": true,
+    "raise": 1,
+    "ads": 0,
+    "hipYaw": 0.4
+  }
+}

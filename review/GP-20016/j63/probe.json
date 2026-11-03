@@ -1,0 +1,52 @@
+{
+  "hip": {
+    "backend": "WebGPU",
+    "state": "hip",
+    "ads": 0,
+    "vm": {
+      "active": true,
+      "key": "sniper",
+      "visible": true,
+      "filtering": true
+    },
+    "sleeves": [
+      {
+        "name": "live-sleeve",
+        "parent": "live-sleeve-live",
+        "hidden": true
+      },
+      {
+        "name": "live-sleeve",
+        "parent": "live-sleeve-live",
+        "hidden": true
+      }
+    ],
+    "bodyGunMeshes": 18,
+    "bodyGunHidden": 18
+  },
+  "scope": {
+    "backend": "WebGPU",
+    "state": "scope",
+    "ads": 1,
+    "vm": {
+      "active": true,
+      "key": "sniper",
+      "visible": false,
+      "filtering": true
+    },
+    "sleeves": [
+      {
+        "name": "live-sleeve",
+        "parent": "live-sleeve-live",
+        "hidden": true
+      },
+      {
+        "name": "live-sleeve",
+        "parent": "live-sleeve-live",
+        "hidden": true
+      }
+    ],
+    "bodyGunMeshes": 18,
+    "bodyGunHidden": 18
+  }
+}

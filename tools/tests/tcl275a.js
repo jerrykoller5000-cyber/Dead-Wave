@@ -13,7 +13,9 @@
     if (A.setMuted) A.setMuted(false);
     if (!ms().playing) A.startMusic();
     await until(() => ms().score && ms().score.nights > 0, 10000);
-    ok(ms().score && ms().score.nights === 20 && !ms().score.on, 'the score has its 20 nights, off until asked (' + JSON.stringify(ms().score && { n: ms().score.nights, on: ms().score.on }) + ')');
+    // CL-297: the score is on by default since 2026-11-02 (Jerry: "I really wanted to hear it"); ?score=0 / tt_score '0' is the old music.
+    ok(ms().score && ms().score.nights === 20 && ms().score.on, 'the score has its 20 nights, on by default (' + JSON.stringify(ms().score && { n: ms().score.nights, on: ms().score.on }) + ')');
+    ok(A.setScore(false) === false && !ms().score.on && /^elevenlabs\//.test((ms().waveByDay || [])[0] && ms().waveByDay[0].track || ''), 'off: night 1 is the old song (' + ((ms().waveByDay || [])[0] || {}).track + ')');
     const old1 = (ms().waveByDay || [])[0] && ms().waveByDay[0].track;
     ok(A.setScore(true) === true && ms().score.on && ms().waveByDay[0].track === 'gh/night-01', 'on: night 1 is the score\'s (' + ms().waveByDay[0].track + ')');
     await until(() => ms().sectionsReady['gh/night-01'] || ms().score.failed.includes('gh/night-01'), 30000);
