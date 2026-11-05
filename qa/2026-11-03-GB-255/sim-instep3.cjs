@@ -1,0 +1,4 @@
+const N=100000; function sim(g){let bad=0,bad2=0,worst=9;for(let k=0;k<N;k++){const gs=[];const order=[...Array(g).keys()].sort(()=>Math.random()-0.5);for(let i=0;i<g;i++){gs.push({t:Math.random()*100,sw:0.6+0.7*(order[i]+0.5*Math.random()*0.2)/(g-1)*(1-0.0)-0,ph:Math.random()*6.283});}
+let min=9;for(let a=0;a<g;a++)for(let b=a+1;b<g;b++){let d=0,n=0;for(let T=0;T<4;T+=0.04){const wa=Math.sin((gs[a].t+T)*gs[a].sw+gs[a].ph)*0.06,wb=Math.sin((gs[b].t+T)*gs[b].sw+gs[b].ph)*0.06;d+=Math.abs(wa-wb);n++;}min=Math.min(min,d/n);}
+worst=Math.min(worst,min);if(min<=0.01)bad++; if(min<=0.015)bad2++;}return [bad/N,bad2/N,worst.toFixed(4)];}
+console.log('spread 2:',sim(2),'3:',sim(3));

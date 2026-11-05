@@ -1,0 +1,35 @@
+=== SWEEP current hold
+{"pen":0.045,"penAt":[-0.12,0.11],"hits":22,"C":{"hold":[-0.3,-0.25,0.34],"grip":[0,-0.017,-0.52],"fore":[-0.304,0.012,0.16],"twist":1},"dRrear":0.001,"dLpeg":0.001,"rear":[0.323,0.837,0.143],"peg":[0.042,0.873,0.735],"housingRear":[0.321,0.853,0.205],"housingFront":[0.308,0.863,0.799],"hR":[0.322,0.837,0.143],"hL":[0.043,0.873,0.734],"ammo":[0.489,0.789,0.588]}
+=== AFTER shots and probe
+took minigun
+aim AIMED[[0,1,-0.91,0.42],[0,1,-0.02,1],[0,1,-0.02,1],[0,1,-0.02,1]]END
+after probe {"grip":[0,-0.017,-0.52],"fore":[-0.304,0.012,0.16],"hold":[-0.3,-0.25,0.34],"twist":1,"scale":0.88,"R":[42.306,-6.701,-19.861],"L":[42.027,-6.667,-19.27],"dR":0,"dL":0.001,"dLpeg":0.001,"dRrear":0,"dRtrig":0.094,"peg":[42.026,-6.667,-19.269],"rear":[42.306,-6.701,-19.861],"trigW":[42.304,-6.65,-19.783],"c":[42.296,-6.68,-19.404],"f":[0,0,1],"lx":[-1,0,-0.021],"gf":[-0.02,0,1]}
+=== REAL remaining hold, hand and viewmodel tests
+file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/game-test-slot.mjs:607
+      throw new Error(
+            ^
+
+Error: Game/browser launch blocked: no machine-wide game-test lease. Run it through `node tools/game-test-slot.mjs run <agent> <task> --checks "<batch>" -- <command>`.
+    at GameTestSlot.assertHeld (file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/game-test-slot.mjs:607:13)
+    at assertGameTestSlot (file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/game-test-slot.mjs:805:30)
+    at launch (file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/cdp.mjs:227:9)
+    at file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/realtest.mjs:17:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+
+Node.js v24.13.0
+=== TESTPAGE same
+Browser tests need --agent <name> --task <id>; the command then queues and resumes automatically.
+=== SMOKE
+file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/game-test-slot.mjs:607
+      throw new Error(
+            ^
+
+Error: Game/browser launch blocked: no machine-wide game-test lease. Run it through `node tools/game-test-slot.mjs run <agent> <task> --checks "<batch>" -- <command>`.
+    at GameTestSlot.assertHeld (file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/game-test-slot.mjs:607:13)
+    at assertGameTestSlot (file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/game-test-slot.mjs:805:30)
+    at launch (file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/cdp.mjs:227:9)
+    at file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/smoke-real.mjs:18:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+
+Node.js v24.13.0
+=== DONE

@@ -1,0 +1,1889 @@
+{
+  "generatedAt": "2026-11-03T23:12:44.230Z",
+  "seat": {
+    "x": 42,
+    "y": -7.5468,
+    "z": -20,
+    "yaw": 0.000151,
+    "otsYaw": 0.000151,
+    "otsPitch": 0
+  },
+  "build": {
+    "uziWeaponSize": {
+      "len": 0.66,
+      "m": 0.47,
+      "look": 1
+    },
+    "uziSizeFactor": 0.65476,
+    "uziUnscaledZ": {
+      "minZ": -19.80288,
+      "maxZ": -18.9549,
+      "lenZ": 0.84798
+    },
+    "chainsawWeaponSize": {
+      "len": 1.376,
+      "m": 0.85,
+      "look": 1.2
+    }
+  },
+  "pairs": {
+    "pistol": {
+      "rest": {
+        "currentWeapon": "pistol",
+        "firstPerson": true,
+        "dualActive": true,
+        "vmActive": true,
+        "vmKey": "pistol",
+        "vmRaise": 1,
+        "vmAkimbo": true,
+        "vmAds": 0,
+        "vmReloadU": null,
+        "handPlace": "pair",
+        "shotsR": 0,
+        "shotsL": 0,
+        "slideRZ": 0.05,
+        "slideLZ": 0.05,
+        "barrelSpinRotZ": null,
+        "sawState": null,
+        "muzzleRNdc": {
+          "x": 0.2532,
+          "y": -0.2011,
+          "d": 0.6708,
+          "px": [
+            1203.03,
+            648.58,
+            0.6708
+          ]
+        },
+        "muzzleLNdc": {
+          "x": -0.2532,
+          "y": -0.2011,
+          "d": 0.6708,
+          "px": [
+            716.97,
+            648.58,
+            0.6708
+          ]
+        },
+        "gripRNdc": {
+          "x": 0.3915,
+          "y": -0.5344,
+          "d": 0.4699,
+          "px": [
+            1335.8,
+            828.55,
+            0.4699
+          ]
+        },
+        "gripLNdc": {
+          "x": -0.3915,
+          "y": -0.5344,
+          "d": 0.4699,
+          "px": [
+            584.2,
+            828.55,
+            0.4699
+          ]
+        },
+        "wristRNdc": {
+          "x": 0.5598,
+          "y": -0.6514,
+          "d": 0.4355,
+          "px": [
+            1497.4,
+            891.78,
+            0.4355
+          ]
+        },
+        "wristLNdc": {
+          "x": -0.5598,
+          "y": -0.6514,
+          "d": 0.4355,
+          "px": [
+            422.6,
+            891.78,
+            0.4355
+          ]
+        },
+        "wristRView": [
+          -0.2502,
+          -0.1638,
+          -0.4355
+        ],
+        "wristLView": [
+          0.2502,
+          -0.1638,
+          -0.4355
+        ],
+        "elbowRNdc": {
+          "x": 1.0167,
+          "y": -1.7366,
+          "d": 0.3315
+        },
+        "elbowLNdc": {
+          "x": -1.0558,
+          "y": -1.7145,
+          "d": 0.3317
+        },
+        "holdFrames": 60
+      },
+      "fireR": {
+        "currentWeapon": "pistol",
+        "firstPerson": true,
+        "dualActive": true,
+        "vmActive": true,
+        "vmKey": "pistol",
+        "vmRaise": 1,
+        "vmAkimbo": true,
+        "vmAds": 0,
+        "vmReloadU": null,
+        "handPlace": "pair",
+        "shotsR": 1,
+        "shotsL": 0,
+        "slideRZ": 0.0098,
+        "slideLZ": 0.05,
+        "barrelSpinRotZ": null,
+        "sawState": null,
+        "muzzleRNdc": {
+          "x": 0.2786,
+          "y": -0.1525,
+          "d": 0.6272,
+          "px": [
+            1227.45,
+            622.35,
+            0.6272
+          ]
+        },
+        "muzzleLNdc": {
+          "x": -0.2531,
+          "y": -0.2047,
+          "d": 0.671,
+          "px": [
+            717.03,
+            650.54,
+            0.671
+          ]
+        },
+        "gripRNdc": {
+          "x": 0.4234,
+          "y": -0.5767,
+          "d": 0.435,
+          "px": [
+            1366.43,
+            851.43,
+            0.435
+          ]
+        },
+        "gripLNdc": {
+          "x": -0.3914,
+          "y": -0.5378,
+          "d": 0.4699,
+          "px": [
+            584.22,
+            830.44,
+            0.4699
+          ]
+        },
+        "wristRNdc": {
+          "x": 0.6078,
+          "y": -0.7335,
+          "d": 0.3959,
+          "px": [
+            1543.46,
+            936.07,
+            0.3959
+          ]
+        },
+        "wristLNdc": {
+          "x": -0.5596,
+          "y": -0.6565,
+          "d": 0.4357,
+          "px": [
+            422.79,
+            894.53,
+            0.4357
+          ]
+        },
+        "wristRView": [
+          -0.2469,
+          -0.1676,
+          -0.3959
+        ],
+        "wristLView": [
+          0.2502,
+          -0.1651,
+          -0.4357
+        ],
+        "elbowRNdc": {
+          "x": 1.0762,
+          "y": -2.0017,
+          "d": 0.3
+        },
+        "elbowLNdc": {
+          "x": -1.0507,
+          "y": -1.7212,
+          "d": 0.3328
+        },
+        "firedSide": "r",
+        "deltaShotsR": 1,
+        "deltaShotsL": 0
+      },
+      "fireL": {
+        "currentWeapon": "pistol",
+        "firstPerson": true,
+        "dualActive": true,
+        "vmActive": true,
+        "vmKey": "pistol",
+        "vmRaise": 1,
+        "vmAkimbo": true,
+        "vmAds": 0,
+        "vmReloadU": null,
+        "handPlace": "pair",
+        "shotsR": 1,
+        "shotsL": 1,
+        "slideRZ": 0.05,
+        "slideLZ": 0.0098,
+        "barrelSpinRotZ": null,
+        "sawState": null,
+        "muzzleRNdc": {
+          "x": 0.2532,
+          "y": -0.2008,
+          "d": 0.6708,
+          "px": [
+            1203.03,
+            648.46,
+            0.6708
+          ]
+        },
+        "muzzleLNdc": {
+          "x": -0.2703,
+          "y": -0.1485,
+          "d": 0.6266,
+          "px": [
+            700.54,
+            620.21,
+            0.6266
+          ]
+        },
+        "gripRNdc": {
+          "x": 0.3915,
+          "y": -0.5341,
+          "d": 0.4699,
+          "px": [
+            1335.8,
+            828.43,
+            0.4699
+          ]
+        },
+        "gripLNdc": {
+          "x": -0.4229,
+          "y": -0.5728,
+          "d": 0.4349,
+          "px": [
+            554.02,
+            849.3,
+            0.4349
+          ]
+        },
+        "wristRNdc": {
+          "x": 0.5596,
+          "y": -0.653,
+          "d": 0.4355,
+          "px": [
+            1497.23,
+            892.61,
+            0.4355
+          ]
+        },
+        "wristLNdc": {
+          "x": -0.6077,
+          "y": -0.7288,
+          "d": 0.3961,
+          "px": [
+            376.58,
+            933.54,
+            0.3961
+          ]
+        },
+        "wristRView": [
+          -0.2502,
+          -0.1642,
+          -0.4355
+        ],
+        "wristLView": [
+          0.247,
+          -0.1666,
+          -0.3961
+        ],
+        "elbowRNdc": {
+          "x": 1.0108,
+          "y": -1.7392,
+          "d": 0.3325
+        },
+        "elbowLNdc": {
+          "x": -1.1265,
+          "y": -1.9829,
+          "d": 0.2985
+        },
+        "firedSide": "l",
+        "deltaShotsR": 0,
+        "deltaShotsL": 1
+      },
+      "reload": {
+        "currentWeapon": "pistol",
+        "firstPerson": true,
+        "dualActive": true,
+        "vmActive": true,
+        "vmKey": "pistol",
+        "vmRaise": 1,
+        "vmAkimbo": true,
+        "vmAds": 0,
+        "vmReloadU": 0.428,
+        "handPlace": "pair",
+        "shotsR": 1,
+        "shotsL": 1,
+        "slideRZ": 0.05,
+        "slideLZ": 0.05,
+        "barrelSpinRotZ": null,
+        "sawState": null,
+        "muzzleRNdc": {
+          "x": 0.2032,
+          "y": -0.4607,
+          "d": 0.6389,
+          "px": [
+            1155.11,
+            788.76,
+            0.6389
+          ]
+        },
+        "muzzleLNdc": {
+          "x": -0.2032,
+          "y": -0.4607,
+          "d": 0.6389,
+          "px": [
+            764.89,
+            788.76,
+            0.6389
+          ]
+        },
+        "gripRNdc": {
+          "x": 0.3825,
+          "y": -1.0526,
+          "d": 0.4666,
+          "px": [
+            1327.21,
+            1108.38,
+            0.4666
+          ]
+        },
+        "gripLNdc": {
+          "x": -0.3825,
+          "y": -1.0526,
+          "d": 0.4666,
+          "px": [
+            592.79,
+            1108.38,
+            0.4666
+          ]
+        },
+        "wristRNdc": {
+          "x": 0.5143,
+          "y": -1.3121,
+          "d": 0.398,
+          "px": [
+            1453.74,
+            1248.51,
+            0.398
+          ]
+        },
+        "wristLNdc": {
+          "x": -0.5143,
+          "y": -1.3121,
+          "d": 0.398,
+          "px": [
+            466.26,
+            1248.51,
+            0.398
+          ]
+        },
+        "wristRView": [
+          -0.2101,
+          -0.3015,
+          -0.398
+        ],
+        "wristLView": [
+          0.2101,
+          -0.3015,
+          -0.398
+        ],
+        "elbowRNdc": {
+          "x": 1.0342,
+          "y": -2.9536,
+          "d": 0.272
+        },
+        "elbowLNdc": {
+          "x": -1.0965,
+          "y": -3.0304,
+          "d": 0.2609
+        },
+        "gripDipNdcR": 0.5182,
+        "gripDipNdcL": 0.5182
+      },
+      "aim": {
+        "currentWeapon": "pistol",
+        "firstPerson": true,
+        "dualActive": true,
+        "vmActive": true,
+        "vmKey": "pistol",
+        "vmRaise": 1,
+        "vmAkimbo": true,
+        "vmAds": 1,
+        "vmReloadU": null,
+        "handPlace": "pair",
+        "shotsR": 1,
+        "shotsL": 1,
+        "slideRZ": 0.05,
+        "slideLZ": 0.05,
+        "barrelSpinRotZ": null,
+        "sawState": null,
+        "muzzleRNdc": {
+          "x": 0.2146,
+          "y": -0.1207,
+          "d": 0.6908,
+          "px": [
+            1166.06,
+            605.16,
+            0.6908
+          ]
+        },
+        "muzzleLNdc": {
+          "x": -0.2146,
+          "y": -0.1207,
+          "d": 0.6908,
+          "px": [
+            753.94,
+            605.16,
+            0.6908
+          ]
+        },
+        "gripRNdc": {
+          "x": 0.3353,
+          "y": -0.4395,
+          "d": 0.4899,
+          "px": [
+            1281.9,
+            777.3,
+            0.4899
+          ]
+        },
+        "gripLNdc": {
+          "x": -0.3353,
+          "y": -0.4395,
+          "d": 0.4899,
+          "px": [
+            638.1,
+            777.3,
+            0.4899
+          ]
+        },
+        "wristRNdc": {
+          "x": 0.5096,
+          "y": -0.5524,
+          "d": 0.4553,
+          "px": [
+            1449.26,
+            838.3,
+            0.4553
+          ]
+        },
+        "wristLNdc": {
+          "x": -0.5096,
+          "y": -0.5524,
+          "d": 0.4553,
+          "px": [
+            470.74,
+            838.3,
+            0.4553
+          ]
+        },
+        "wristRView": [
+          -0.2102,
+          -0.1282,
+          -0.4553
+        ],
+        "wristLView": [
+          0.2102,
+          -0.1282,
+          -0.4553
+        ],
+        "elbowRNdc": {
+          "x": 0.9651,
+          "y": -1.6567,
+          "d": 0.3506
+        },
+        "elbowLNdc": {
+          "x": -1.0071,
+          "y": -1.6329,
+          "d": 0.3508
+        },
+        "gripInNdcR": 0.0562,
+        "gripInNdcL": 0.0562,
+        "gripUpNdcR": 0.0949,
+        "gripUpNdcL": 0.0949
+      }
+    },
+    "uzi": {
+      "rest": {
+        "currentWeapon": "uzi",
+        "firstPerson": true,
+        "dualActive": true,
+        "vmActive": true,
+        "vmKey": "uzi",
+        "vmRaise": 1,
+        "vmAkimbo": true,
+        "vmAds": 0,
+        "vmReloadU": null,
+        "handPlace": "pair",
+        "shotsR": 0,
+        "shotsL": 0,
+        "slideRZ": 0.11,
+        "slideLZ": 0.11,
+        "barrelSpinRotZ": null,
+        "sawState": null,
+        "muzzleRNdc": {
+          "x": 0.0999,
+          "y": -0.0924,
+          "d": 0.7024,
+          "px": [
+            1055.92,
+            589.88,
+            0.7024
+          ]
+        },
+        "muzzleLNdc": {
+          "x": -0.0999,
+          "y": -0.0924,
+          "d": 0.7024,
+          "px": [
+            864.08,
+            589.88,
+            0.7024
+          ]
+        },
+        "gripRNdc": {
+          "x": 0.454,
+          "y": -0.4305,
+          "d": 0.4153,
+          "px": [
+            1395.83,
+            772.46,
+            0.4153
+          ]
+        },
+        "gripLNdc": {
+          "x": -0.454,
+          "y": -0.4305,
+          "d": 0.4153,
+          "px": [
+            524.17,
+            772.46,
+            0.4153
+          ]
+        },
+        "wristRNdc": {
+          "x": 0.6673,
+          "y": -0.6475,
+          "d": 0.3817,
+          "px": [
+            1600.61,
+            889.67,
+            0.3817
+          ]
+        },
+        "wristLNdc": {
+          "x": -0.6673,
+          "y": -0.6475,
+          "d": 0.3817,
+          "px": [
+            319.39,
+            889.67,
+            0.3817
+          ]
+        },
+        "wristRView": [
+          -0.2614,
+          -0.1427,
+          -0.3817
+        ],
+        "wristLView": [
+          0.2614,
+          -0.1427,
+          -0.3817
+        ],
+        "elbowRNdc": {
+          "x": 1.1926,
+          "y": -1.9262,
+          "d": 0.2875
+        },
+        "elbowLNdc": {
+          "x": -1.2325,
+          "y": -1.8989,
+          "d": 0.2891
+        },
+        "holdFrames": 60
+      },
+      "fireR": {
+        "currentWeapon": "uzi",
+        "firstPerson": true,
+        "dualActive": true,
+        "vmActive": true,
+        "vmKey": "uzi",
+        "vmRaise": 1,
+        "vmAkimbo": true,
+        "vmAds": 0,
+        "vmReloadU": null,
+        "handPlace": "pair",
+        "shotsR": 1,
+        "shotsL": 0,
+        "slideRZ": 0.08807,
+        "slideLZ": 0.11,
+        "barrelSpinRotZ": null,
+        "sawState": null,
+        "muzzleRNdc": {
+          "x": 0.1062,
+          "y": -0.0493,
+          "d": 0.67,
+          "px": [
+            1061.95,
+            566.64,
+            0.67
+          ]
+        },
+        "muzzleLNdc": {
+          "x": -0.0999,
+          "y": -0.0957,
+          "d": 0.7026,
+          "px": [
+            864.1,
+            591.65,
+            0.7026
+          ]
+        },
+        "gripRNdc": {
+          "x": 0.4869,
+          "y": -0.4608,
+          "d": 0.3873,
+          "px": [
+            1427.42,
+            788.86,
+            0.3873
+          ]
+        },
+        "gripLNdc": {
+          "x": -0.4539,
+          "y": -0.4337,
+          "d": 0.4153,
+          "px": [
+            524.22,
+            774.21,
+            0.4153
+          ]
+        },
+        "wristRNdc": {
+          "x": 0.7204,
+          "y": -0.7117,
+          "d": 0.3515,
+          "px": [
+            1651.61,
+            924.32,
+            0.3515
+          ]
+        },
+        "wristLNdc": {
+          "x": -0.667,
+          "y": -0.6524,
+          "d": 0.3817,
+          "px": [
+            319.64,
+            892.3,
+            0.3817
+          ]
+        },
+        "wristRView": [
+          -0.2599,
+          -0.1444,
+          -0.3515
+        ],
+        "wristLView": [
+          0.2614,
+          -0.1438,
+          -0.3817
+        ],
+        "elbowRNdc": {
+          "x": 1.2875,
+          "y": -2.1706,
+          "d": 0.2602
+        },
+        "elbowLNdc": {
+          "x": -1.2268,
+          "y": -1.9056,
+          "d": 0.2898
+        },
+        "firedSide": "r",
+        "deltaShotsR": 1,
+        "deltaShotsL": 0
+      },
+      "fireL": {
+        "currentWeapon": "uzi",
+        "firstPerson": true,
+        "dualActive": true,
+        "vmActive": true,
+        "vmKey": "uzi",
+        "vmRaise": 1,
+        "vmAkimbo": true,
+        "vmAds": 0,
+        "vmReloadU": null,
+        "handPlace": "pair",
+        "shotsR": 1,
+        "shotsL": 1,
+        "slideRZ": 0.11,
+        "slideLZ": 0.08807,
+        "barrelSpinRotZ": null,
+        "sawState": null,
+        "muzzleRNdc": {
+          "x": 0.0998,
+          "y": -0.1019,
+          "d": 0.7029,
+          "px": [
+            1055.85,
+            595.05,
+            0.7029
+          ]
+        },
+        "muzzleLNdc": {
+          "x": -0.1004,
+          "y": -0.056,
+          "d": 0.6686,
+          "px": [
+            863.63,
+            570.26,
+            0.6686
+          ]
+        },
+        "gripRNdc": {
+          "x": 0.4538,
+          "y": -0.44,
+          "d": 0.4154,
+          "px": [
+            1395.68,
+            777.59,
+            0.4154
+          ]
+        },
+        "gripLNdc": {
+          "x": -0.4864,
+          "y": -0.4676,
+          "d": 0.3873,
+          "px": [
+            493.04,
+            792.52,
+            0.3873
+          ]
+        },
+        "wristRNdc": {
+          "x": 0.6666,
+          "y": -0.659,
+          "d": 0.3821,
+          "px": [
+            1599.93,
+            895.84,
+            0.3821
+          ]
+        },
+        "wristLNdc": {
+          "x": -0.7199,
+          "y": -0.7179,
+          "d": 0.352,
+          "px": [
+            268.87,
+            927.65,
+            0.352
+          ]
+        },
+        "wristRView": [
+          -0.2614,
+          -0.1454,
+          -0.3821
+        ],
+        "wristLView": [
+          0.2601,
+          -0.1459,
+          -0.352
+        ],
+        "elbowRNdc": {
+          "x": 1.1855,
+          "y": -1.9386,
+          "d": 0.2887
+        },
+        "elbowLNdc": {
+          "x": -1.3375,
+          "y": -2.152,
+          "d": 0.2611
+        },
+        "firedSide": "l",
+        "deltaShotsR": 0,
+        "deltaShotsL": 1
+      },
+      "reload": {
+        "currentWeapon": "uzi",
+        "firstPerson": true,
+        "dualActive": true,
+        "vmActive": true,
+        "vmKey": "uzi",
+        "vmRaise": 1,
+        "vmAkimbo": true,
+        "vmAds": 0,
+        "vmReloadU": 0.4206,
+        "handPlace": "pair",
+        "shotsR": 1,
+        "shotsL": 1,
+        "slideRZ": 0.11,
+        "slideLZ": 0.11,
+        "barrelSpinRotZ": null,
+        "sawState": null,
+        "muzzleRNdc": {
+          "x": 0.0617,
+          "y": -0.4122,
+          "d": 0.6833,
+          "px": [
+            1019.27,
+            762.61,
+            0.6833
+          ]
+        },
+        "muzzleLNdc": {
+          "x": -0.0617,
+          "y": -0.4122,
+          "d": 0.6833,
+          "px": [
+            900.73,
+            762.61,
+            0.6833
+          ]
+        },
+        "gripRNdc": {
+          "x": 0.4299,
+          "y": -1.0499,
+          "d": 0.4084,
+          "px": [
+            1372.7,
+            1106.97,
+            0.4084
+          ]
+        },
+        "gripLNdc": {
+          "x": -0.4299,
+          "y": -1.0499,
+          "d": 0.4084,
+          "px": [
+            547.3,
+            1106.97,
+            0.4084
+          ]
+        },
+        "wristRNdc": {
+          "x": 0.6448,
+          "y": -1.403,
+          "d": 0.3395,
+          "px": [
+            1579.02,
+            1297.62,
+            0.3395
+          ]
+        },
+        "wristLNdc": {
+          "x": -0.6448,
+          "y": -1.403,
+          "d": 0.3395,
+          "px": [
+            340.98,
+            1297.62,
+            0.3395
+          ]
+        },
+        "wristRView": [
+          -0.2247,
+          -0.275,
+          -0.3395
+        ],
+        "wristLView": [
+          0.2247,
+          -0.275,
+          -0.3395
+        ],
+        "elbowRNdc": {
+          "x": 1.3676,
+          "y": -3.4982,
+          "d": 0.2175
+        },
+        "elbowLNdc": {
+          "x": -1.4661,
+          "y": -3.6146,
+          "d": 0.2071
+        },
+        "gripDipNdcR": 0.6194,
+        "gripDipNdcL": 0.6194
+      },
+      "aim": {
+        "currentWeapon": "uzi",
+        "firstPerson": true,
+        "dualActive": true,
+        "vmActive": true,
+        "vmKey": "uzi",
+        "vmRaise": 1,
+        "vmAkimbo": true,
+        "vmAds": 1,
+        "vmReloadU": null,
+        "handPlace": "pair",
+        "shotsR": 1,
+        "shotsL": 1,
+        "slideRZ": 0.11,
+        "slideLZ": 0.11,
+        "barrelSpinRotZ": null,
+        "sawState": null,
+        "muzzleRNdc": {
+          "x": 0.0489,
+          "y": -0.0123,
+          "d": 0.7227,
+          "px": [
+            1006.98,
+            546.64,
+            0.7227
+          ]
+        },
+        "muzzleLNdc": {
+          "x": -0.0489,
+          "y": -0.0123,
+          "d": 0.7227,
+          "px": [
+            913.02,
+            546.64,
+            0.7227
+          ]
+        },
+        "gripRNdc": {
+          "x": 0.3893,
+          "y": -0.313,
+          "d": 0.4354,
+          "px": [
+            1333.7,
+            709.02,
+            0.4354
+          ]
+        },
+        "gripLNdc": {
+          "x": -0.3893,
+          "y": -0.313,
+          "d": 0.4354,
+          "px": [
+            586.3,
+            709.02,
+            0.4354
+          ]
+        },
+        "wristRNdc": {
+          "x": 0.608,
+          "y": -0.5338,
+          "d": 0.402,
+          "px": [
+            1543.7,
+            828.26,
+            0.402
+          ]
+        },
+        "wristLNdc": {
+          "x": -0.608,
+          "y": -0.5338,
+          "d": 0.402,
+          "px": [
+            376.3,
+            828.26,
+            0.402
+          ]
+        },
+        "wristRView": [
+          -0.2214,
+          -0.1093,
+          -0.402
+        ],
+        "wristLView": [
+          0.2214,
+          -0.1093,
+          -0.402
+        ],
+        "elbowRNdc": {
+          "x": 1.1127,
+          "y": -1.8265,
+          "d": 0.3086
+        },
+        "elbowLNdc": {
+          "x": -1.1559,
+          "y": -1.7997,
+          "d": 0.3103
+        },
+        "gripInNdcR": 0.0647,
+        "gripInNdcL": 0.0647,
+        "gripUpNdcR": 0.1175,
+        "gripUpNdcL": 0.1175
+      }
+    },
+    "revolver": {
+      "rest": {
+        "currentWeapon": "revolver",
+        "firstPerson": true,
+        "dualActive": true,
+        "vmActive": true,
+        "vmKey": "revolver",
+        "vmRaise": 1,
+        "vmAkimbo": true,
+        "vmAds": 0,
+        "vmReloadU": null,
+        "handPlace": "pair",
+        "shotsR": 0,
+        "shotsL": 0,
+        "slideRZ": null,
+        "slideLZ": null,
+        "barrelSpinRotZ": null,
+        "sawState": null,
+        "muzzleRNdc": {
+          "x": 0.1606,
+          "y": -0.0833,
+          "d": 0.8244,
+          "px": [
+            1114.13,
+            584.98,
+            0.8244
+          ]
+        },
+        "muzzleLNdc": {
+          "x": -0.1606,
+          "y": -0.0833,
+          "d": 0.8244,
+          "px": [
+            805.87,
+            584.98,
+            0.8244
+          ]
+        },
+        "gripRNdc": {
+          "x": 0.377,
+          "y": -0.454,
+          "d": 0.569,
+          "px": [
+            1321.95,
+            785.17,
+            0.569
+          ]
+        },
+        "gripLNdc": {
+          "x": -0.377,
+          "y": -0.454,
+          "d": 0.569,
+          "px": [
+            598.05,
+            785.17,
+            0.569
+          ]
+        },
+        "wristRNdc": {
+          "x": 0.5479,
+          "y": -0.5779,
+          "d": 0.5181,
+          "px": [
+            1485.98,
+            852.06,
+            0.5181
+          ]
+        },
+        "wristLNdc": {
+          "x": -0.5479,
+          "y": -0.5779,
+          "d": 0.5181,
+          "px": [
+            434.02,
+            852.06,
+            0.5181
+          ]
+        },
+        "wristRView": [
+          -0.2913,
+          -0.1729,
+          -0.5181
+        ],
+        "wristLView": [
+          0.2913,
+          -0.1729,
+          -0.5181
+        ],
+        "elbowRNdc": {
+          "x": 0.9277,
+          "y": -1.4172,
+          "d": 0.4119
+        },
+        "elbowLNdc": {
+          "x": -0.9573,
+          "y": -1.3969,
+          "d": 0.4129
+        },
+        "holdFrames": 60
+      },
+      "fireR": {
+        "currentWeapon": "revolver",
+        "firstPerson": true,
+        "dualActive": true,
+        "vmActive": true,
+        "vmKey": "revolver",
+        "vmRaise": 1,
+        "vmAkimbo": true,
+        "vmAds": 0,
+        "vmReloadU": null,
+        "handPlace": "pair",
+        "shotsR": 1,
+        "shotsL": 0,
+        "slideRZ": null,
+        "slideLZ": null,
+        "barrelSpinRotZ": null,
+        "sawState": null,
+        "muzzleRNdc": {
+          "x": 0.1851,
+          "y": 0.0469,
+          "d": 0.7342,
+          "px": [
+            1137.71,
+            514.67,
+            0.7342
+          ]
+        },
+        "muzzleLNdc": {
+          "x": -0.1606,
+          "y": -0.0781,
+          "d": 0.8239,
+          "px": [
+            805.78,
+            582.15,
+            0.8239
+          ]
+        },
+        "gripRNdc": {
+          "x": 0.4238,
+          "y": -0.4845,
+          "d": 0.5071,
+          "px": [
+            1366.83,
+            801.62,
+            0.5071
+          ]
+        },
+        "gripLNdc": {
+          "x": -0.3771,
+          "y": -0.4493,
+          "d": 0.569,
+          "px": [
+            598.01,
+            782.61,
+            0.569
+          ]
+        },
+        "wristRNdc": {
+          "x": 0.6186,
+          "y": -0.6764,
+          "d": 0.4515,
+          "px": [
+            1553.85,
+            905.23,
+            0.4515
+          ]
+        },
+        "wristLNdc": {
+          "x": -0.5459,
+          "y": -0.5743,
+          "d": 0.5217,
+          "px": [
+            435.94,
+            850.1,
+            0.5217
+          ]
+        },
+        "wristRView": [
+          -0.2867,
+          -0.1763,
+          -0.4515
+        ],
+        "wristLView": [
+          0.2923,
+          -0.173,
+          -0.5217
+        ],
+        "elbowRNdc": {
+          "x": 1.0042,
+          "y": -1.7293,
+          "d": 0.3582
+        },
+        "elbowLNdc": {
+          "x": -0.9444,
+          "y": -1.3796,
+          "d": 0.4206
+        },
+        "firedSide": "r",
+        "deltaShotsR": 1,
+        "deltaShotsL": 0
+      },
+      "fireL": {
+        "currentWeapon": "revolver",
+        "firstPerson": true,
+        "dualActive": true,
+        "vmActive": true,
+        "vmKey": "revolver",
+        "vmRaise": 1,
+        "vmAkimbo": true,
+        "vmAds": 0,
+        "vmReloadU": null,
+        "handPlace": "pair",
+        "shotsR": 1,
+        "shotsL": 1,
+        "slideRZ": null,
+        "slideLZ": null,
+        "barrelSpinRotZ": null,
+        "sawState": null,
+        "muzzleRNdc": {
+          "x": 0.1606,
+          "y": -0.0792,
+          "d": 0.824,
+          "px": [
+            1114.2,
+            582.78,
+            0.824
+          ]
+        },
+        "muzzleLNdc": {
+          "x": -0.1904,
+          "y": 0.0456,
+          "d": 0.7359,
+          "px": [
+            777.24,
+            515.4,
+            0.7359
+          ]
+        },
+        "gripRNdc": {
+          "x": 0.3771,
+          "y": -0.4503,
+          "d": 0.569,
+          "px": [
+            1321.98,
+            783.17,
+            0.569
+          ]
+        },
+        "gripLNdc": {
+          "x": -0.4245,
+          "y": -0.4855,
+          "d": 0.5073,
+          "px": [
+            552.52,
+            802.17,
+            0.5073
+          ]
+        },
+        "wristRNdc": {
+          "x": 0.5479,
+          "y": -0.5749,
+          "d": 0.5179,
+          "px": [
+            1486.01,
+            850.45,
+            0.5179
+          ]
+        },
+        "wristLNdc": {
+          "x": -0.619,
+          "y": -0.6807,
+          "d": 0.449,
+          "px": [
+            365.72,
+            907.56,
+            0.449
+          ]
+        },
+        "wristRView": [
+          -0.2913,
+          -0.1719,
+          -0.5179
+        ],
+        "wristLView": [
+          0.2853,
+          -0.1765,
+          -0.449
+        ],
+        "elbowRNdc": {
+          "x": 0.9256,
+          "y": -1.4152,
+          "d": 0.4121
+        },
+        "elbowLNdc": {
+          "x": -1.0461,
+          "y": -1.736,
+          "d": 0.3539
+        },
+        "firedSide": "l",
+        "deltaShotsR": 0,
+        "deltaShotsL": 1
+      },
+      "reload": {
+        "currentWeapon": "revolver",
+        "firstPerson": true,
+        "dualActive": true,
+        "vmActive": true,
+        "vmKey": "revolver",
+        "vmRaise": 1,
+        "vmAkimbo": true,
+        "vmAds": 0,
+        "vmReloadU": 0.4259,
+        "handPlace": "pair",
+        "shotsR": 1,
+        "shotsL": 1,
+        "slideRZ": null,
+        "slideLZ": null,
+        "barrelSpinRotZ": null,
+        "sawState": null,
+        "muzzleRNdc": {
+          "x": 0.1001,
+          "y": -0.3524,
+          "d": 0.7898,
+          "px": [
+            1056.09,
+            730.28,
+            0.7898
+          ]
+        },
+        "muzzleLNdc": {
+          "x": -0.1001,
+          "y": -0.3524,
+          "d": 0.7898,
+          "px": [
+            863.91,
+            730.28,
+            0.7898
+          ]
+        },
+        "gripRNdc": {
+          "x": 0.3671,
+          "y": -0.8843,
+          "d": 0.5646,
+          "px": [
+            1312.43,
+            1017.51,
+            0.5646
+          ]
+        },
+        "gripLNdc": {
+          "x": -0.3671,
+          "y": -0.8843,
+          "d": 0.5646,
+          "px": [
+            607.57,
+            1017.51,
+            0.5646
+          ]
+        },
+        "wristRNdc": {
+          "x": 0.5054,
+          "y": -1.1273,
+          "d": 0.477,
+          "px": [
+            1445.19,
+            1148.76,
+            0.477
+          ]
+        },
+        "wristLNdc": {
+          "x": -0.5054,
+          "y": -1.1273,
+          "d": 0.477,
+          "px": [
+            474.81,
+            1148.76,
+            0.477
+          ]
+        },
+        "wristRView": [
+          -0.2474,
+          -0.3104,
+          -0.477
+        ],
+        "wristLView": [
+          0.2474,
+          -0.3104,
+          -0.477
+        ],
+        "elbowRNdc": {
+          "x": 0.9063,
+          "y": -2.3377,
+          "d": 0.3498
+        },
+        "elbowLNdc": {
+          "x": -0.9494,
+          "y": -2.3779,
+          "d": 0.3386
+        },
+        "gripDipNdcR": 0.4303,
+        "gripDipNdcL": 0.4303
+      },
+      "aim": {
+        "currentWeapon": "revolver",
+        "firstPerson": true,
+        "dualActive": true,
+        "vmActive": true,
+        "vmKey": "revolver",
+        "vmRaise": 1,
+        "vmAkimbo": true,
+        "vmAds": 1,
+        "vmReloadU": null,
+        "handPlace": "pair",
+        "shotsR": 1,
+        "shotsL": 1,
+        "slideRZ": null,
+        "slideLZ": null,
+        "barrelSpinRotZ": null,
+        "sawState": null,
+        "muzzleRNdc": {
+          "x": 0.1253,
+          "y": -0.0092,
+          "d": 0.8443,
+          "px": [
+            1080.33,
+            544.98,
+            0.8443
+          ]
+        },
+        "muzzleLNdc": {
+          "x": -0.1253,
+          "y": -0.0092,
+          "d": 0.8443,
+          "px": [
+            839.67,
+            544.98,
+            0.8443
+          ]
+        },
+        "gripRNdc": {
+          "x": 0.3378,
+          "y": -0.379,
+          "d": 0.589,
+          "px": [
+            1284.24,
+            744.64,
+            0.589
+          ]
+        },
+        "gripLNdc": {
+          "x": -0.3378,
+          "y": -0.379,
+          "d": 0.589,
+          "px": [
+            635.76,
+            744.64,
+            0.589
+          ]
+        },
+        "wristRNdc": {
+          "x": 0.5158,
+          "y": -0.5013,
+          "d": 0.5375,
+          "px": [
+            1455.21,
+            810.72,
+            0.5375
+          ]
+        },
+        "wristLNdc": {
+          "x": -0.5158,
+          "y": -0.5013,
+          "d": 0.5375,
+          "px": [
+            464.79,
+            810.72,
+            0.5375
+          ]
+        },
+        "wristRView": [
+          -0.2512,
+          -0.1373,
+          -0.5375
+        ],
+        "wristLView": [
+          0.2512,
+          -0.1373,
+          -0.5375
+        ],
+        "elbowRNdc": {
+          "x": 0.9007,
+          "y": -1.3728,
+          "d": 0.431
+        },
+        "elbowLNdc": {
+          "x": -0.9334,
+          "y": -1.3516,
+          "d": 0.4319
+        },
+        "gripInNdcR": 0.0392,
+        "gripInNdcL": 0.0392,
+        "gripUpNdcR": 0.075,
+        "gripUpNdcL": 0.075
+      }
+    }
+  },
+  "minigun": {
+    "rest": {
+      "currentWeapon": "minigun",
+      "firstPerson": true,
+      "dualActive": false,
+      "vmActive": true,
+      "vmKey": "minigun",
+      "vmRaise": 1,
+      "vmAkimbo": false,
+      "vmAds": 0,
+      "vmReloadU": null,
+      "handPlace": "fore",
+      "shotsR": 1,
+      "shotsL": 0,
+      "slideRZ": null,
+      "slideLZ": null,
+      "barrelSpinRotZ": 0,
+      "sawState": null,
+      "muzzleRNdc": {
+        "x": 0.0292,
+        "y": -0.375,
+        "d": 1.852,
+        "px": [
+          988.01,
+          742.49,
+          1.852
+        ]
+      },
+      "muzzleLNdc": null,
+      "gripRNdc": {
+        "x": 0.192,
+        "y": -0.9153,
+        "d": 0.8649,
+        "px": [
+          1144.35,
+          1034.29,
+          0.8649
+        ]
+      },
+      "gripLNdc": null,
+      "wristRNdc": {
+        "x": 0.3889,
+        "y": -0.7743,
+        "d": 0.6028,
+        "px": [
+          1333.32,
+          958.14,
+          0.6028
+        ]
+      },
+      "wristLNdc": {
+        "x": -0.0413,
+        "y": -0.8447,
+        "d": 0.8505,
+        "px": [
+          920.35,
+          996.12,
+          0.8505
+        ]
+      },
+      "wristRView": [
+        -0.2406,
+        -0.2695,
+        -0.6028
+      ],
+      "wristLView": [
+        0.0361,
+        -0.4148,
+        -0.8505
+      ],
+      "elbowRNdc": {
+        "x": 0.7053,
+        "y": -1.5147,
+        "d": 0.4757
+      },
+      "elbowLNdc": {
+        "x": -0.1724,
+        "y": -1.3601,
+        "d": 0.7502
+      },
+      "holdFrames": 60
+    },
+    "fire": {
+      "currentWeapon": "minigun",
+      "firstPerson": true,
+      "dualActive": false,
+      "vmActive": true,
+      "vmKey": "minigun",
+      "vmRaise": 1,
+      "vmAkimbo": false,
+      "vmAds": 0,
+      "vmReloadU": null,
+      "handPlace": "fore",
+      "shotsR": 13,
+      "shotsL": 0,
+      "slideRZ": null,
+      "slideLZ": null,
+      "barrelSpinRotZ": 18.275,
+      "sawState": null,
+      "muzzleRNdc": {
+        "x": 0.0284,
+        "y": -0.3541,
+        "d": 1.8416,
+        "px": [
+          987.26,
+          731.22,
+          1.8416
+        ]
+      },
+      "muzzleLNdc": null,
+      "gripRNdc": {
+        "x": 0.1937,
+        "y": -0.9119,
+        "d": 0.8558,
+        "px": [
+          1145.92,
+          1032.43,
+          0.8558
+        ]
+      },
+      "gripLNdc": null,
+      "wristRNdc": {
+        "x": 0.3976,
+        "y": -0.786,
+        "d": 0.5894,
+        "px": [
+          1341.7,
+          964.44,
+          0.5894
+        ]
+      },
+      "wristLNdc": {
+        "x": -0.0434,
+        "y": -0.8381,
+        "d": 0.8436,
+        "px": [
+          918.37,
+          992.55,
+          0.8436
+        ]
+      },
+      "wristRView": [
+        -0.2405,
+        -0.2675,
+        -0.5894
+      ],
+      "wristLView": [
+        0.0376,
+        -0.4082,
+        -0.8436
+      ],
+      "elbowRNdc": {
+        "x": 0.725,
+        "y": -1.5505,
+        "d": 0.4629
+      },
+      "elbowLNdc": {
+        "x": -0.1776,
+        "y": -1.3554,
+        "d": 0.7438
+      },
+      "deltaShotsR": 12
+    }
+  },
+  "chainsaw": {
+    "idle": {
+      "currentWeapon": "chainsaw",
+      "firstPerson": true,
+      "dualActive": false,
+      "vmActive": true,
+      "vmKey": "chainsaw",
+      "vmRaise": 1,
+      "vmAkimbo": false,
+      "vmAds": 0,
+      "vmReloadU": null,
+      "handPlace": "fore",
+      "shotsR": 0,
+      "shotsL": 0,
+      "slideRZ": null,
+      "slideLZ": null,
+      "barrelSpinRotZ": null,
+      "sawState": {
+        "holdT": 0,
+        "hearT": 0,
+        "fuel": 60,
+        "heat": 0,
+        "overheat": false,
+        "biteT": 0,
+        "startPhase": "ready"
+      },
+      "muzzleRNdc": {
+        "x": -0.1623,
+        "y": 0.1938,
+        "d": 1.2486,
+        "px": [
+          804.23,
+          435.34,
+          1.2486
+        ]
+      },
+      "muzzleLNdc": null,
+      "gripRNdc": {
+        "x": 0.2274,
+        "y": -0.5976,
+        "d": 0.7115,
+        "px": [
+          1178.34,
+          862.71,
+          0.7115
+        ]
+      },
+      "gripLNdc": null,
+      "wristRNdc": {
+        "x": 0.4856,
+        "y": -0.8938,
+        "d": 0.604,
+        "px": [
+          1426.21,
+          1022.63,
+          0.604
+        ]
+      },
+      "wristLNdc": {
+        "x": 0.1311,
+        "y": -0.3937,
+        "d": 0.6236,
+        "px": [
+          1085.88,
+          752.59,
+          0.6236
+        ]
+      },
+      "wristRView": [
+        -0.3011,
+        -0.3117,
+        -0.604
+      ],
+      "wristLView": [
+        -0.0839,
+        -0.1418,
+        -0.6236
+      ],
+      "elbowRNdc": {
+        "x": 0.866,
+        "y": -1.6681,
+        "d": 0.4508
+      },
+      "elbowLNdc": {
+        "x": -0.0964,
+        "y": -0.9214,
+        "d": 0.5809
+      },
+      "holdFrames": 60
+    },
+    "cut": {
+      "currentWeapon": "chainsaw",
+      "firstPerson": true,
+      "dualActive": false,
+      "vmActive": true,
+      "vmKey": "chainsaw",
+      "vmRaise": 1,
+      "vmAkimbo": false,
+      "vmAds": 0,
+      "vmReloadU": null,
+      "handPlace": "fore",
+      "shotsR": 0,
+      "shotsL": 0,
+      "slideRZ": null,
+      "slideLZ": null,
+      "barrelSpinRotZ": null,
+      "sawState": {
+        "holdT": 0,
+        "hearT": 0,
+        "fuel": 59.400000000000034,
+        "heat": 0.014999999999999987,
+        "overheat": false,
+        "biteT": 0,
+        "startPhase": "ready"
+      },
+      "muzzleRNdc": {
+        "x": -0.1623,
+        "y": 0.1953,
+        "d": 1.2481,
+        "px": [
+          804.17,
+          434.53,
+          1.2481
+        ]
+      },
+      "muzzleLNdc": null,
+      "gripRNdc": {
+        "x": 0.2275,
+        "y": -0.5965,
+        "d": 0.7114,
+        "px": [
+          1178.37,
+          862.1,
+          0.7114
+        ]
+      },
+      "gripLNdc": null,
+      "wristRNdc": {
+        "x": 0.485,
+        "y": -0.8891,
+        "d": 0.6044,
+        "px": [
+          1425.59,
+          1020.13,
+          0.6044
+        ]
+      },
+      "wristLNdc": {
+        "x": 0.1311,
+        "y": -0.3925,
+        "d": 0.6235,
+        "px": [
+          1085.82,
+          751.95,
+          0.6235
+        ]
+      },
+      "wristRView": [
+        -0.3009,
+        -0.3103,
+        -0.6044
+      ],
+      "wristLView": [
+        -0.0839,
+        -0.1413,
+        -0.6235
+      ],
+      "elbowRNdc": {
+        "x": 0.8714,
+        "y": -1.6525,
+        "d": 0.4505
+      },
+      "elbowLNdc": {
+        "x": -0.0967,
+        "y": -0.9201,
+        "d": 0.5806
+      }
+    }
+  }
+}

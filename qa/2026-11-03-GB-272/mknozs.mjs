@@ -1,0 +1,14 @@
+﻿import fs from 'fs';
+const live = fs.readFileSync('index.html','utf8');
+const before = fs.readFileSync('qa/2026-11-02-GB-253/index.before.html','utf8');
+const EOL = live.includes('\r\n') ? '\r\n' : '\n';
+const L = live.split(EOL), B = before.split(before.includes('\r\n') ? '\r\n' : '\n');
+const a = B.findIndex((l,i)=> l==='      const zom = {' && B[i-1].includes('const hp = Math.max(8, Math.round(def.hp * hpVar));'));
+const b = B.findIndex((l,i)=> i>a && l==='      };' && B[i+1].includes('mesh.userData.partsLost = zom.partsLost;'));
+console.log('before literal', a, b, b-a);
+const lit = B.slice(a, b+1);
+const at = L.findIndex(l => l.includes('const zom = new ZombieShape('));
+console.log('live at', at, L[at]);
+L.splice(at, 1, ...lit);
+fs.writeFileSync('index.nozs.html', L.join(EOL), {encoding:'utf8'});
+console.log('written', L.length);

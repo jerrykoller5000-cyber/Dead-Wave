@@ -1,0 +1,11 @@
+[
+  {"target":"weapon:minigun","view":"side","time":"noon","out":"review/GP-20024/minigun-after-side-noon.png"},
+  {"target":"weapon:minigun","view":"top","time":"noon","out":"review/GP-20024/minigun-after-top-noon.png"},
+  {"target":"weapon:minigun","view":"three","time":"noon","out":"review/GP-20024/minigun-after-three-noon.png"},
+  {"target":"weapon:minigun","view":"side","time":0.42,"out":"review/GP-20024/minigun-after-side-overcast.png"},
+  {"target":"weapon:minigun","view":"three","time":0.42,"out":"review/GP-20024/minigun-after-three-overcast.png"},
+  {"target":"weapon:minigun","view":"side","time":"dusk","out":"review/GP-20024/minigun-after-side-dusk.png"},
+  {"target":"weapon:minigun","view":"three","time":"dusk","out":"review/GP-20024/minigun-after-three-dusk.png"},
+  {"target":"weapon:minigun","view":"side","time":"night","out":"review/GP-20024/minigun-after-side-night.png"},
+  {"target":"weapon:minigun","view":"three","time":"night","out":"review/GP-20024/minigun-after-three-night.png"}
+]

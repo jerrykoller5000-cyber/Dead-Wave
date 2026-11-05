@@ -1,0 +1,38 @@
+=== T76 REAL x6
+ok    t76      16 pass   0 fail  39.0s  (real renderer)
+ok    t76      16 pass   0 fail  42.2s  (real renderer)
+ok    t76      16 pass   0 fail  42.3s  (real renderer)
+ok    t76      16 pass   0 fail  42.1s  (real renderer)
+ok    t76      16 pass   0 fail  42.1s  (real renderer)
+ok    t76      16 pass   0 fail  44.4s  (real renderer)
+6 checks: 96 pass, 0 fail (real renderer)
+=== TESTPAGE
+check-players: 315 player.position reads, all in the allowed places
+FAIL  t76     15 pass   1 fail  51.9s
+FAIL  t80     13 pass   1 fail  157.6s
+ok    t95      9 pass   0 fail  59.4s
+ok    t215     4 pass   0 fail  37.9s
+
+4 checks: 41 pass, 2 fail
+
+by owner:
+  unassigned
+    t76    1 fail  FAIL drawn close up, not the far LOD (false/true)
+           FAIL drawn close up, not the far LOD (false/true)
+    t80    1 fail  FAIL a spider on a line that grazes the corner takes one with room (start 0.29 m clear, end 0.82
+           FAIL a spider on a line that grazes the corner takes one with room (start 0.29 m clear, end 0.82 m; tight 32% of the time after 3 s; closest 6.0 m)
+=== REAL
+ok    t215      4 pass   0 fail  32.4s  (real renderer)
+ok    t95       9 pass   0 fail  32.8s  (real renderer)
+FAIL  t80      13 pass   1 fail  138.8s  (real renderer)
+    FAIL a spider on a line that grazes the corner takes one with room (start 0.29 m clear, end 1.39 m; tight 66% of the time after 3 s; closest 5.6 m)
+3 checks: 26 pass, 1 fail (real renderer)
+=== SMOKE
+training: title up in 16.0 s, WebGPURenderer
+training: in the room (room built), 0 called in, frames still running: true
+training: page errors none
+match: title up in 18.5 s, WebGPURenderer
+match: in prep, past the insertion
+night: phase wave, lockdown true, zombies 8
+match: page errors none
+=== DONE

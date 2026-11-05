@@ -1,0 +1,1 @@
+cd /d "C:\Users\Zero\Desktop\Tiny Trek" && node crew/crew.mjs slot run grokbot GB-277 --checks "framing probe for the brute filmstrip" --minutes 10 -- node review/GB-277/filmstrip.mjs 0.45 "[0.4]" after probe3- > review\GB-277\film2.log 2>&1

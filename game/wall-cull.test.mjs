@@ -66,3 +66,12 @@ test('an empty wall list hides nothing', () => {
   W.update(-10, 1.7, 12); W.update(-10, 1.7, 12);
   assert.equal(W.isHidden(id), false);
 });
+test('a wide, low prop: the cell top is the draw own top, not the sphere top (AG-222)', () => {
+  // A sphere of r 3 around a 1 m tall prop: the sphere top would be 3.5 m, over the 2.5 m wall; its own top (1 m) is under it.
+  const W = make(), id = W.include(7, 0.5, 12, 3, 1.0);
+  W.update(-10, 1.7, 12); W.update(-10, 1.7, 12);
+  assert.equal(W.isHidden(id), true, 'hidden behind the wall with its real top');
+  const V = make(), vid = V.include(7, 0.5, 12, 3);
+  V.update(-10, 1.7, 12); V.update(-10, 1.7, 12);
+  assert.equal(V.isHidden(vid), false, 'with the sphere top (no top given) it stays seen');
+});

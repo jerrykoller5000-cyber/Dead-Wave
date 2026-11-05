@@ -1,0 +1,1 @@
+cd /d "C:\Users\Zero\Desktop\Tiny Trek" && node crew/crew.mjs slot run grokbot GB-277 --checks "before/after filmstrips of a live brute get-up (camera, one instance)" --minutes 20 -- node review/GB-277/filmstrip.mjs 0.85 > review\GB-277\film.log 2>&1

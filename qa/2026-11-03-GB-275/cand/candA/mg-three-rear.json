@@ -1,0 +1,34 @@
+{
+ "schema": "dw-camera-shot",
+ "schemaVersion": 2,
+ "target": "player",
+ "label": "player",
+ "view": null,
+ "cam": {
+  "fov": 35,
+  "x": 40.841,
+  "y": -6.227,
+  "z": -21.56,
+  "tx": 42.035,
+  "ty": -6.927,
+  "tz": -19.558
+ },
+ "time": 0.35980583999984406,
+ "size": [
+  1600,
+  900
+ ],
+ "center": {
+  "x": 42,
+  "y": -6.64679633580171,
+  "z": -20
+ },
+ "boxSize": {
+  "x": 0.8,
+  "y": 1.9,
+  "z": 0.8
+ },
+ "mode": "match",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "at": "2026-11-04T03:08:51.974Z"
+}

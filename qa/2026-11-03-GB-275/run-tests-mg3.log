@@ -1,0 +1,529 @@
+GRANT grokbot GB-275: starting one game-test command
+=== REAL remaining hold, hand and viewmodel tests
+ok    t228     95 pass   0 fail  97.5s  (real renderer)
+    PASS gun hand: its forearm has a wrist
+    PASS gun hand: the glove and the bare hand hang on it, built where they were (2 parts)
+    PASS gun hand: at rest the wrist does not turn the hand
+    PASS gun hand: its grip point is inside the fist (-0.010, -0.262, 0.078)
+    PASS support hand: its forearm has a wrist
+    PASS support hand: the glove and the bare hand hang on it, built where they were (2 parts)
+    PASS support hand: at rest the wrist does not turn the hand
+    PASS support hand: its grip point is inside the fist (0.020, -0.262, 0.088)
+    PASS TT.handsDbg has the wrist (max 1.3 rad) and the support reach to the fist (0.52 m)
+    PASS pistol standing: the firing hand closes on the grip (0.0 cm)
+    PASS pistol standing: the support hand on its anchor (0.1 cm)
+    PASS pistol standing: the support wrist within its turn (26 deg)
+    PASS pistol walking: the firing hand closes on the grip (0.1 cm)
+    PASS pistol walking: the support hand on its anchor (0.1 cm)
+    PASS pistol walking: the support wrist within its turn (28 deg)
+    PASS revolver standing: the firing hand closes on the grip (0.0 cm)
+    PASS revolver standing: the support hand on its anchor (0.1 cm)
+    PASS revolver standing: the support wrist within its turn (26 deg)
+    PASS revolver walking: the firing hand closes on the grip (0.1 cm)
+    PASS revolver walking: the support hand on its anchor (0.1 cm)
+    PASS revolver walking: the support wrist within its turn (28 deg)
+    PASS uzi standing: the firing hand closes on the grip (0.0 cm)
+    PASS uzi standing: the support hand on its anchor (0.0 cm)
+    PASS uzi standing: the support wrist within its turn (74 deg)
+    PASS uzi standing: the support fist along its forend (37 deg)
+    PASS uzi walking: the firing hand closes on the grip (0.1 cm)
+    PASS uzi walking: the support hand on its anchor (0.0 cm)
+    PASS uzi walking: the support wrist within its turn (74 deg)
+    PASS uzi walking: the support fist along its forend (39 deg)
+    PASS m4 standing: the firing hand closes on the grip (0.0 cm)
+    PASS m4 standing: the support hand on its anchor or back along the forend (0.0 cm back) (0.0 cm)
+    PASS m4 standing: the support wrist within its turn (74 deg)
+    PASS m4 standing: the support fist along its forend (22 deg)
+    PASS m4 walking: the firing hand closes on the grip (0.0 cm)
+    PASS m4 walking: the support hand on its anchor or back along the forend (0.1 cm back) (0.1 cm)
+    PASS m4 walking: the support wrist within its turn (74 deg)
+    PASS m4 walking: the support fist along its forend (25 deg)
+    PASS ak standing: the firing hand closes on the grip (0.0 cm)
+    PASS ak standing: the support hand on its anchor or back along the forend (0.1 cm back) (0.1 cm)
+    PASS ak standing: the support wrist within its turn (74 deg)
+    PASS ak standing: the support fist along its forend (24 deg)
+    PASS ak walking: the firing hand closes on the grip (0.0 cm)
+    PASS ak walking: the support hand on its anchor or back along the forend (0.6 cm back) (0.3 cm)
+    PASS ak walking: the support wrist within its turn (74 deg)
+    PASS ak walking: the support fist along its forend (32 deg)
+    PASS aa12 standing: the firing hand closes on the grip (0.0 cm)
+    PASS aa12 standing: the support hand on its anchor or back along the forend (0.0 cm back) (0.0 cm)
+    PASS aa12 standing: the support wrist within its turn (74 deg)
+    PASS aa12 standing: the support fist along its forend (34 deg)
+    PASS aa12 walking: the firing hand closes on the grip (0.0 cm)
+    PASS aa12 walking: the support hand on its anchor or back along the forend (0.1 cm back) (0.1 cm)
+    PASS aa12 walking: the support wrist within its turn (74 deg)
+    PASS aa12 walking: the support fist along its forend (31 deg)
+    PASS shotgun standing: the firing hand closes on the grip (0.0 cm)
+    PASS shotgun standing: the support hand on its anchor (0.0 cm)
+    PASS shotgun standing: the support wrist within its turn (74 deg)
+    PASS shotgun standing: the support fist along its forend (27 deg)
+    PASS shotgun walking: the firing hand closes on the grip (0.0 cm)
+    PASS shotgun walking: the support hand on its anchor (0.1 cm)
+    PASS shotgun walking: the support wrist within its turn (74 deg)
+    PASS shotgun walking: the support fist along its forend (26 deg)
+    PASS sniper standing: the firing hand closes on the grip (0.0 cm)
+    PASS sniper standing: the support hand on its anchor or back along the forend (3.2 cm back) (0.2 cm)
+    PASS sniper standing: the support wrist within its turn (74 deg)
+    PASS sniper standing: the support fist along its forend (34 deg)
+    PASS sniper walking: the firing hand closes on the grip (0.0 cm)
+    PASS sniper walking: the support hand on its anchor or back along the forend (4.6 cm back) (0.2 cm)
+    PASS sniper walking: the support wrist within its turn (74 deg)
+    PASS sniper walking: the support fist along its forend (35 deg)
+    PASS launcher standing: the firing hand closes on the grip (0.0 cm)
+    PASS launcher standing: the support hand on its anchor (0.0 cm)
+    PASS launcher standing: the support wrist within its turn (19 deg)
+    PASS launcher standing: the support fist along its foregrip (0 deg)
+    PASS launcher walking: the firing hand closes on the grip (0.0 cm)
+    PASS launcher walking: the support hand on its anchor (0.1 cm)
+    PASS launcher walking: the support wrist within its turn (23 deg)
+    PASS launcher walking: the support fist along its foregrip (0 deg)
+    PASS flamer standing: the firing hand closes on the grip (0.0 cm)
+    PASS flamer standing: the support hand on its anchor (0.0 cm)
+    PASS flamer standing: the support wrist within its turn (21 deg)
+    PASS flamer standing: the support fist along its foregrip (0 deg)
+    PASS flamer walking: the firing hand closes on the grip (0.0 cm)
+    PASS flamer walking: the support hand on its anchor (0.1 cm)
+    PASS flamer walking: the support wrist within its turn (24 deg)
+    PASS flamer walking: the support fist along its foregrip (0 deg)
+    PASS chainsaw standing: the firing hand closes on the grip (0.0 cm)
+    PASS chainsaw standing: the support hand on its anchor (1.6 cm)
+    PASS chainsaw standing: the support wrist within its turn (0 deg)
+    PASS chainsaw walking: the firing hand closes on the grip (0.1 cm)
+    PASS chainsaw walking: the support hand on its anchor (1.6 cm)
+    PASS chainsaw walking: the support wrist within its turn (0 deg)
+    PASS m4: the reload runs
+    PASS through a reload the support hand is back to its hand point, the wrist at rest (grip 0.00)
+    PASS with the knife out the support wrist is at rest
+    PASS holstered, both wrists are at rest or in the GB-170 hang (y -1.15, 1.15)
+ok    t249     13 pass   0 fail  32.0s  (real renderer)
+    PASS pistol on a shambler: 800000.00 (sheet 800000.00)
+    PASS 100% pistol hit uses this feral's own 73 HP bar: 73.00 (sheet 73.00)
+    PASS 100% of the body's own max HP kills
+    PASS an untagged bullet of 10 still does 10 (10.00)
+    PASS pistol on a military chest: 200000.00 (sheet 200000.00)
+    PASS pistol on a military helmet: 240000.00 (sheet 240000.00)
+    PASS pistol on a brute with its plates on: 100000.00 (sheet 100000.00)
+    PASS one flamethrower tick on a drowned: 10000.00 (sheet 10000.00)
+    PASS one shotgun pellet on a shambler: 385714.29 (sheet 385714.29)
+    PASS one chainsaw bite on a demon: 200000.00 (sheet 200000.00)
+    PASS a knife swing on a shambler: 905000.00 (sheet 905000.00)
+    PASS a sniper round on a colossus: 80000.00 (sheet 80000.00)
+    PASS no page errors
+ok    t54      32 pass   0 fail  29.6s  (real renderer)
+    PASS spawnObjectiveDefenders exported
+    PASS getRadioDefenderState exported
+    PASS grantSupply exported
+    PASS listOwnedAmmoPackChoices exported
+    PASS grantBuildBlueprint exported
+    PASS RADIO_DEFENDER.count === 2
+    PASS RADIO_DEFENDER.triggerR === 24
+    PASS match reached prep
+    PASS c) player-damaged fires once
+    PASS c) player-damaged carries toHp
+    PASS b) grantSupply ok
+    PASS b) accepted+remaining arrays
+    PASS b) accepted+remaining === 5 (got 1+4)
+    PASS b) same receiptId is idempotent
+    PASS b) grenade grant ok
+    PASS b) listOwnedAmmoPackChoices returns array
+    PASS b) .45 choice present (starter pistol, GB-23)
+    PASS b) grantBuildBlueprint mortar
+    PASS b) second blueprint alreadyOwned
+    PASS GB-17 refuse grant ok
+    PASS GB-17 unowned .338 refused (acc=0 rem=4)
+    PASS GB-17 .338 reserve still empty
+    PASS GB-17 fuel grant ok
+    PASS GB-17 fuel accepted+remaining === 1.25 (got 0+1.25)
+    PASS GB-17 fuel fraction preserved (rem=1.25 acc=0)
+    PASS a) radio site id
+    PASS a) radio centre
+    PASS a) spawnObjectiveDefenders returned
+    PASS a) spawned at least one defender
+    PASS a) live defenders tagged
+    PASS a) defenders are shamblers
+    PASS a) second call does not double-spawn
+ok    t68      15 pass   0 fail  29.8s  (real renderer)
+    PASS spare capacity multiplier is 1.4 (not double)
+    PASS reserveCap / RESERVE_CAP_BASE exported
+    PASS starting .45 spare 36 -> 50 (got 50)
+    PASS every calibre cap is x1.4 of the old one
+    PASS spot caps .45 168, 5.56 252, 12ga 154
+    PASS m4 bought
+    PASS charged the m4 price
+    PASS m4 arrives with a loaded magazine (30)
+    PASS m4 arrives with a full 5.56 reserve in whole magazines (240)
+    PASS an owned gun cannot be re-bought for a refill
+    PASS shotgun arrives with a full 12ga reserve (154)
+    PASS aa12 arrives full: drum 20 and 12ga back to 154
+    PASS buying never lowers a reserve
+    PASS ext mag: 5.56 cap 252 x1.5 = 378
+    PASS chainsaw bought (fuel path unchanged)
+ok    t77      17 pass   0 fail  40.0s  (real renderer)
+    PASS blades: knife cd 0.55, machete cd 0.5 max 3
+    PASS saw: 14 a tick, arc 0.2
+    PASS size: shambler 1, brute 0.6, colossus 0.35
+    PASS knife on a shambler: 905.0 (sheet 905.0, CU-127)
+    PASS knife on a brute: 82.0 (sheet 82.0, plates on)
+    PASS ten saw ticks: the brute stands, head on (hp 47.2/85, parts {armL:true,armR:true,legL:false,legR:false,head:false})
+    PASS twenty-five at most kill it (17)
+    PASS saw in hand, 60 s of gas
+    PASS one tick bites at most 3 of 8 (3)
+    PASS gas burns faster in a body: 3.81 s vs 1.52 s running free (x2.5)
+    PASS and heats up: +0.191 vs +0.038 (x5.0)
+    PASS overheats at 1 (heat 1.00)
+    PASS stalled: no bites while it is hot, trigger still held
+    PASS cools to 0.45 and can be started again
+    PASS and it cuts again once restarted (fuel -1.76, heat 0.45->0.54, w chainsaw, paused ?, d 2.4,2.4,2.4 phase prep zl 8)
+    PASS off, it cools (0.44 -> 0.10)
+    PASS no page errors ()
+ok    t23       8 pass   0 fail  74.8s  (real renderer)
+    PASS match reached prep after Play
+    PASS every new sound plays without error
+    PASS chainsaw in hand with fuel (60)
+    PASS engine idling after the pull-start
+    PASS engine asked on every frame
+    PASS put away: engine shuts off
+    pistol:6[magRelease,magOut,magIn,magSlap,slideBack,slideFwd]
+    uzi:5[magRelease,magOut,magIn,magSlap,charge]
+    m4:5[magRelease,magOut,magIn,magSlap,charge]
+    ak:3[akRockOut,akRockIn,charge]
+    aa12:4[drumOut,drumIn,magSlap,charge]
+    sniper:8[magRelease,magOut,magIn,magSlap,boltUp,boltBack,boltFwd,boltDown]
+    minigun:6[boxLatch,belt,belt,boxSeat,boxLatch,motorBlip]
+    flamer:5[valveShut,tankOff,tankOn,valveOpen,igniter]
+    shotgun:16[grab,shell,grab,shell,grab,shell,grab,shell,grab,shell,grab,shell,grab,shell,grab,shell]
+    revolver:1[brass]
+    launcher:6[bigBrass,bigBrass,bigBrass,bigBrass,bigBrass,bigBrass]
+    PASS every gun has reload sounds
+    PASS shotgun: one sound per shell
+FAIL  t298      9 pass   1 fail  39.3s  (real renderer)
+    PASS the recorder is on TT
+    PASS Math.random is the seeded generator (seed 3175700821)
+    PASS first person settled before the clip (1)
+    PASS the clip has 600 frames and 4 snapshots
+    PASS the clip names the seed and the field of view
+    PASS the player matches within 1 mm (0.00000 m)
+    PASS the camera direction matches within 0.01 deg (0.0000)
+    FAIL after the eye ease the camera position matches within 1 mm (0.0066 m)
+    PASS the opening frames stay within 20 mm while the eye catches the head (0.0066 m at frame 159)
+    PASS replay drove the frames itself
+ok    tcl281  151 pass   0 fail  83.9s  (real renderer)
+    PASS a pistol in hand
+    PASS third person: no view gun
+    PASS first person with the pistol: the view gun is up (raise 1.00)
+    INFO = first person with the pistol: the view gun is up (raise 1.00)
+    PASS his own arms (286/286) and pistol (20/20) are out of the eye's pass
+    INFO = his own arms (286/286) and pistol (20/20) are out of the eye's pass
+    PASS the laser's beam is still drawn
+    PASS his baked arms are skins of their own, out of the eye's pass; the rest of him is in it (3 of 9)
+    INFO = his baked arms are skins of their own, out of the eye's pass; the rest of him is in it (3 of 9)
+    PASS the radio and antenna are eye-hidden in first person while the worn carrier and shadow remain (hidden 3, visible 3, shadow 3 of 3; filter true; carrier shown 9; 3 radio meshes, 0 baked, 0 radio skins)
+    INFO = the radio and antenna are eye-hidden in first person while the worn carrier and shadow remain (hidden 3, visible 3, shadow 3 of 3; filter true; carrier shown 9; 3 radio meshes, 0 baked, 0 radio skins)
+    PASS the eye's pass leaves them out (the render filter is on)
+    INFO = the eye's pass leaves them out (the render filter is on)
+    PASS and they are still there for his shadow (visible)
+    INFO = and they are still there for his shadow (visible)
+    PASS both wrists on their sockets (0.00, 0.00 cm)
+    INFO = both wrists on their sockets (0.00, 0.00 cm)
+    PASS the firing hand's grip through the pistol's grip (0.09 cm)
+    INFO = the firing hand's grip through the pistol's grip (0.09 cm)
+    PASS the wrists bend no more than VM.wristMax, at most 50 degrees (0.87, 0.87 of 0.87)
+    INFO = the wrists bend no more than VM.wristMax, at most 50 degrees (0.87, 0.87 of 0.87)
+    PASS the forearms leave the view, not at the eye (CL-293: the end of each sleeve off the bottom or the side, the elbow may show now the sleeve runs on; 89, 78 degrees off the eye line; elbows at ndc y -1.40, -1.51)
+    INFO = the forearms leave the view, not at the eye (CL-293: the end of each sleeve off the bottom or the side, the elbow may show now the sleeve runs on; 89, 78 degrees off the eye line; elbows at ndc y -1.40, -1.51)
+    PASS the mirrored meshes draw wound the other way on WebGPU, as they are elsewhere (flip true)
+    INFO = the mirrored meshes draw wound the other way on WebGPU, as they are elsewhere (flip true)
+    PASS nothing on screen in front of the near plane (nearest 31.4 cm, 26 meshes)
+    INFO = nothing on screen in front of the near plane (nearest 31.4 cm, 26 meshes)
+    INFO view gun draws: 26 meshes
+    PASS at the hip the pistol is low right (grip ndc 0.36, -0.56; muzzle 0.23, -0.18)
+    INFO = at the hip the pistol is low right (grip ndc 0.36, -0.56; muzzle 0.23, -0.18)
+    PASS the forearms don't cross: the firing elbow to the right of the support one (ndc x 1.08, 0.01)
+    INFO = the forearms don't cross: the firing elbow to the right of the support one (ndc x 1.08, 0.01)
+    PASS and canted (-5.1 deg)
+    INFO = and canted (-5.1 deg)
+    PASS right-click: down the sights
+    PASS the rear notch and the front post on the view's centre, within a pixel at 1080p (0.000, 0.000, 0.000, -0.000)
+    INFO = the rear notch and the front post on the view's centre, within a pixel at 1080p (0.000, 0.000, 0.000, -0.000)
+    PASS the eye stays at his eyes down the sights (0.000 m)
+    INFO = the eye stays at his eyes down the sights (0.000 m)
+    PASS down the sights the wrists are on their sockets too (0.00, 0.00 cm)
+    INFO = down the sights the wrists are on their sockets too (0.00, 0.00 cm)
+    PASS a shot kicks the gun back (2.1 cm)
+    INFO = a shot kicks the gun back (2.1 cm)
+    INFO the slide on the shot: 0.0 cm (gun units)
+    PASS and it settles back (-0.02 cm off)
+    INFO = and it settles back (-0.02 cm off)
+    PASS a reload starts
+    PASS the magazine: seated, in his palm, away, back (seated hand pouch)
+    INFO = the magazine: seated, in his palm, away, back (seated hand pouch)
+    PASS the support hand goes to the well, the pouch and the slide (fore well below pouch work)
+    INFO = the support hand goes to the well, the pouch and the slide (fore well below pouch work)
+    PASS the magazine rides the support palm (its foot within 0.00 cm)
+    INFO = the magazine rides the support palm (its foot within 0.00 cm)
+    PASS away in the pouch it is out of sight
+    PASS racking the slide, the support forearm runs down out of the view, at least 35 degrees below level on screen (65)
+    INFO = racking the slide, the support forearm runs down out of the view, at least 35 degrees below level on screen (65)
+    PASS after it: the magazine seated in the well (0.0e+0)
+    INFO = after it: the magazine seated in the well (0.0e+0)
+    PASS and the support hand back on the gun (0.00 cm)
+    INFO = and the support hand back on the gun (0.00 cm)
+    PASS the view gun's muzzle in the world for the laser (0.69 m from the eye)
+    INFO = the view gun's muzzle in the world for the laser (0.69 m from the eye)
+    PASS a m4 in hand
+    PASS the GW-4: the view gun is up (raise 1.00)
+    INFO = the GW-4: the view gun is up (raise 1.00)
+    PASS the GW-4: the magazine and the work part are direct children, and the view copy has both
+    PASS the GW-4: the stock is one direct child, and the view copy shows it at the hip, not down the sights (ads 0.00, shown true)
+    INFO = the GW-4: the stock is one direct child, and the view copy shows it at the hip, not down the sights (ads 0.00, shown true)
+    PASS the GW-4: both wrists on their sockets (0.00, 0.00 cm)
+    INFO = the GW-4: both wrists on their sockets (0.00, 0.00 cm)
+    PASS the GW-4: the wrists stay within VM.wristMax (0.77, 0.15 of 0.87)
+    INFO = the GW-4: the wrists stay within VM.wristMax (0.77, 0.15 of 0.87)
+    PASS the GW-4: the forearms stay off the eye line, the support elbow low (97, 76 degrees; elbows ndc y -2.51, -1.06)
+    INFO = the GW-4: the forearms stay off the eye line, the support elbow low (97, 76 degrees; elbows ndc y -2.51, -1.06)
+    PASS the GW-4: nothing on screen in front of the near plane (nearest 19.8 cm)
+    INFO = the GW-4: nothing on screen in front of the near plane (nearest 19.8 cm)
+    PASS the GW-4: at the hip the grip is low and to the right (ndc 0.44, -0.91)
+    INFO = the GW-4: at the hip the grip is low and to the right (ndc 0.44, -0.91)
+    PASS the GW-4: down the sights
+    PASS the GW-4: the rear sight on the view's centre (-0.000, 0.000)
+    INFO = the GW-4: the rear sight on the view's centre (-0.000, 0.000)
+    PASS the GW-4: down the sights the wrists are on their sockets (0.00, 0.00 cm)
+    INFO = the GW-4: down the sights the wrists are on their sockets (0.00, 0.00 cm)
+    PASS the GW-4: a reload starts
+    PASS the GW-4: the magazine seated, in his palm, away, back (seated hand pouch)
+    INFO = the GW-4: the magazine seated, in his palm, away, back (seated hand pouch)
+    PASS the GW-4: the support hand goes to the well, the pouch and the work part (fore well below pouch work)
+    INFO = the GW-4: the support hand goes to the well, the pouch and the work part (fore well below pouch work)
+    PASS the GW-4: the magazine rides the support palm (its foot within 0.00 cm)
+    INFO = the GW-4: the magazine rides the support palm (its foot within 0.00 cm)
+    PASS the GW-4: away in the pouch it is out of sight
+    PASS the GW-4: after it, the magazine is seated and the support hand is back on the gun
+    PASS a ak in hand
+    PASS the AK: the view gun is up (raise 1.00)
+    INFO = the AK: the view gun is up (raise 1.00)
+    PASS the AK: the magazine and the work part are direct children, and the view copy has both
+    PASS the AK: the stock is one direct child, and the view copy shows it at the hip, not down the sights (ads 0.00, shown true)
+    INFO = the AK: the stock is one direct child, and the view copy shows it at the hip, not down the sights (ads 0.00, shown true)
+    PASS the AK: both wrists on their sockets (0.00, 0.00 cm)
+    INFO = the AK: both wrists on their sockets (0.00, 0.00 cm)
+    PASS the AK: the wrists stay within VM.wristMax (0.76, 0.17 of 0.87)
+    INFO = the AK: the wrists stay within VM.wristMax (0.76, 0.17 of 0.87)
+    PASS the AK: the forearms stay off the eye line, the support elbow low (97, 74 degrees; elbows ndc y -2.50, -1.01)
+    INFO = the AK: the forearms stay off the eye line, the support elbow low (97, 74 degrees; elbows ndc y -2.50, -1.01)
+    PASS the AK: nothing on screen in front of the near plane (nearest 21.8 cm)
+    INFO = the AK: nothing on screen in front of the near plane (nearest 21.8 cm)
+    PASS the AK: at the hip the grip is low and to the right (ndc 0.44, -0.91)
+    INFO = the AK: at the hip the grip is low and to the right (ndc 0.44, -0.91)
+    PASS the AK: down the sights
+    PASS the AK: the rear sight on the view's centre (0.000, -0.000)
+    INFO = the AK: the rear sight on the view's centre (0.000, -0.000)
+    PASS the AK: down the sights the wrists are on their sockets (0.00, 0.00 cm)
+    INFO = the AK: down the sights the wrists are on their sockets (0.00, 0.00 cm)
+    PASS the AK: a reload starts
+    PASS the AK: the magazine seated, in his palm, away, back (seated hand pouch)
+    INFO = the AK: the magazine seated, in his palm, away, back (seated hand pouch)
+    PASS the AK: the support hand goes to the well, the pouch and the work part (fore well below pouch work)
+    INFO = the AK: the support hand goes to the well, the pouch and the work part (fore well below pouch work)
+    PASS the AK: the magazine rides the support palm (its foot within 0.00 cm)
+    INFO = the AK: the magazine rides the support palm (its foot within 0.00 cm)
+    PASS the AK: away in the pouch it is out of sight
+    PASS the AK: after it, the magazine is seated and the support hand is back on the gun
+    PASS a uzi in hand
+    PASS the Wasp: the view gun is up (raise 1.00)
+    INFO = the Wasp: the view gun is up (raise 1.00)
+    PASS the Wasp: the magazine and the work part are direct children, and the view copy has both
+    PASS the Wasp: both wrists on their sockets (0.00, 0.00 cm)
+    INFO = the Wasp: both wrists on their sockets (0.00, 0.00 cm)
+    PASS the Wasp: the wrists stay within VM.wristMax (0.77, 0.23 of 0.87)
+    INFO = the Wasp: the wrists stay within VM.wristMax (0.77, 0.23 of 0.87)
+    PASS the Wasp: the forearms stay off the eye line, the sleeves leave the view (101, 82 degrees; elbows ndc y -1.96, -1.76)
+    INFO = the Wasp: the forearms stay off the eye line, the sleeves leave the view (101, 82 degrees; elbows ndc y -1.96, -1.76)
+    PASS the Wasp: nothing on screen in front of the near plane (nearest 29.8 cm)
+    INFO = the Wasp: nothing on screen in front of the near plane (nearest 29.8 cm)
+    PASS the Wasp: at the hip the grip is low and to the right (ndc 0.39, -0.73)
+    INFO = the Wasp: at the hip the grip is low and to the right (ndc 0.39, -0.73)
+    PASS the Wasp: down the sights
+    PASS the Wasp: the rear sight on the view's centre (-0.000, 0.000)
+    INFO = the Wasp: the rear sight on the view's centre (-0.000, 0.000)
+    PASS the Wasp: down the sights the wrists are on their sockets (0.00, 0.00 cm)
+    INFO = the Wasp: down the sights the wrists are on their sockets (0.00, 0.00 cm)
+    PASS the Wasp: a reload starts
+    PASS the Wasp: the magazine seated, in his palm, away, back (seated hand pouch)
+    INFO = the Wasp: the magazine seated, in his palm, away, back (seated hand pouch)
+    PASS the Wasp: the support hand goes to the well, the pouch and the work part (fore well below pouch work)
+    INFO = the Wasp: the support hand goes to the well, the pouch and the work part (fore well below pouch work)
+    PASS the Wasp: the magazine rides the support palm (its foot within 0.00 cm)
+    INFO = the Wasp: the magazine rides the support palm (its foot within 0.00 cm)
+    PASS the Wasp: away in the pouch it is out of sight
+    PASS the Wasp: after it, the magazine is seated and the support hand is back on the gun
+    PASS a shotgun in hand
+    PASS the shotgun: the view gun is up (raise 0.99)
+    INFO = the shotgun: the view gun is up (raise 0.99)
+    PASS the shotgun: the stock is one direct child, and the view copy shows it at the hip, not down the sights (ads 0.00, shown true)
+    INFO = the shotgun: the stock is one direct child, and the view copy shows it at the hip, not down the sights (ads 0.00, shown true)
+    PASS the shotgun: both wrists on their sockets (0.00, 0.00 cm)
+    INFO = the shotgun: both wrists on their sockets (0.00, 0.00 cm)
+    PASS the shotgun: the wrists stay within VM.wristMax (0.87, 0.77)
+    INFO = the shotgun: the wrists stay within VM.wristMax (0.87, 0.77)
+    PASS the shotgun: the forearms stay off the eye line, the support elbow low (94, 91 degrees; elbows ndc y -2.48, -1.12)
+    INFO = the shotgun: the forearms stay off the eye line, the support elbow low (94, 91 degrees; elbows ndc y -2.48, -1.12)
+    PASS the shotgun: nothing on screen in front of the near plane (nearest 19.7 cm)
+    INFO = the shotgun: nothing on screen in front of the near plane (nearest 19.7 cm)
+    PASS the shotgun: at the hip the grip is low and to the right (ndc 0.44, -0.90)
+    INFO = the shotgun: at the hip the grip is low and to the right (ndc 0.44, -0.90)
+    PASS the shotgun: down the sights
+    PASS the shotgun: the rear sight on the view's centre (-0.000, 0.000)
+    INFO = the shotgun: the rear sight on the view's centre (-0.000, 0.000)
+    PASS the shotgun: a reload starts
+    PASS the shotgun: the support hand leaves its hold (fore pouch port pump)
+    INFO = the shotgun: the support hand leaves its hold (fore pouch port pump)
+    PASS a aa12 in hand
+    PASS the Breacher: the view gun is up (raise 1.00)
+    INFO = the Breacher: the view gun is up (raise 1.00)
+    PASS the Breacher: the stock is one direct child, and the view copy shows it at the hip, not down the sights (ads 0.00, shown true)
+    INFO = the Breacher: the stock is one direct child, and the view copy shows it at the hip, not down the sights (ads 0.00, shown true)
+    PASS the Breacher: the view copy has the magazine
+    PASS the Breacher: both wrists on their sockets (0.00, 0.00 cm)
+    INFO = the Breacher: both wrists on their sockets (0.00, 0.00 cm)
+    PASS the Breacher: the wrists stay within VM.wristMax (0.87, 0.18)
+    INFO = the Breacher: the wrists stay within VM.wristMax (0.87, 0.18)
+    PASS the Breacher: the forearms stay off the eye line, the support elbow low (93, 77 degrees; elbows ndc y -2.49, -0.97)
+    INFO = the Breacher: the forearms stay off the eye line, the support elbow low (93, 77 degrees; elbows ndc y -2.49, -0.97)
+    PASS the Breacher: nothing on screen in front of the near plane (nearest 14.8 cm)
+    INFO = the Breacher: nothing on screen in front of the near plane (nearest 14.8 cm)
+    PASS the Breacher: at the hip the grip is low and to the right (ndc 0.46, -0.95)
+    INFO = the Breacher: at the hip the grip is low and to the right (ndc 0.46, -0.95)
+    PASS the Breacher: down the sights
+    PASS the Breacher: the rear sight on the view's centre (0.000, 0.000)
+    INFO = the Breacher: the rear sight on the view's centre (0.000, 0.000)
+    PASS the Breacher: a reload starts
+    PASS the Breacher: the support hand leaves its hold (fore well below pouch work)
+    INFO = the Breacher: the support hand leaves its hold (fore well below pouch work)
+    PASS a revolver in hand
+    PASS the revolver: the view gun is up (raise 1.00)
+    INFO = the revolver: the view gun is up (raise 1.00)
+    PASS the revolver: the view copy has the magazine
+    PASS the revolver: both wrists on their sockets (0.00, 0.00 cm)
+    INFO = the revolver: both wrists on their sockets (0.00, 0.00 cm)
+    PASS the revolver: the wrists stay within VM.wristMax (0.87, 0.87)
+    INFO = the revolver: the wrists stay within VM.wristMax (0.87, 0.87)
+    PASS the revolver: the forearms stay off the eye line, the sleeves leave the view (94, 74 degrees; elbows ndc y -1.55, -1.57)
+    INFO = the revolver: the forearms stay off the eye line, the sleeves leave the view (94, 74 degrees; elbows ndc y -1.55, -1.57)
+    PASS the revolver: nothing on screen in front of the near plane (nearest 35.2 cm)
+    INFO = the revolver: nothing on screen in front of the near plane (nearest 35.2 cm)
+    PASS the revolver: at the hip the grip is low and to the right (ndc 0.40, -0.67)
+    INFO = the revolver: at the hip the grip is low and to the right (ndc 0.40, -0.67)
+    PASS the revolver: down the sights
+    PASS the revolver: the rear sight on the view's centre (0.000, 0.000)
+    INFO = the revolver: the rear sight on the view's centre (0.000, 0.000)
+    PASS the revolver: a reload starts
+    PASS the revolver: the support hand leaves its hold (fore part ejector pouch loader)
+    INFO = the revolver: the support hand leaves its hold (fore part ejector pouch loader)
+    PASS a sniper in hand
+    PASS the sniper: the view gun is up (raise 1.00)
+    INFO = the sniper: the view gun is up (raise 1.00)
+    PASS the sniper: the stock is one direct child, and the view copy shows it at the hip, not down the sights (ads 0.00, shown true)
+    INFO = the sniper: the stock is one direct child, and the view copy shows it at the hip, not down the sights (ads 0.00, shown true)
+    PASS the sniper: the view copy has the magazine
+    PASS the sniper: both wrists on their sockets (0.00, 0.00 cm)
+    INFO = the sniper: both wrists on their sockets (0.00, 0.00 cm)
+    PASS the sniper: the wrists stay within VM.wristMax (0.87, 0.23)
+    INFO = the sniper: the wrists stay within VM.wristMax (0.87, 0.23)
+    PASS the sniper: the forearms stay off the eye line, the support elbow low (91, 79 degrees; elbows ndc y -1.79, -0.98)
+    INFO = the sniper: the forearms stay off the eye line, the support elbow low (91, 79 degrees; elbows ndc y -1.79, -0.98)
+    PASS the sniper: nothing on screen in front of the near plane (nearest 24.4 cm)
+    INFO = the sniper: nothing on screen in front of the near plane (nearest 24.4 cm)
+    PASS the sniper: at the hip the grip is low and to the right (ndc 0.37, -0.88)
+    INFO = the sniper: at the hip the grip is low and to the right (ndc 0.37, -0.88)
+    PASS the sniper: full scope hides the view gun
+    PASS the sniper: the scope axis was on the view just before it hides (at ads 0.80 from 4 samples up to 0.76, ndc 0.111, -0.118)
+    INFO = the sniper: the scope axis was on the view just before it hides (at ads 0.80 from 4 samples up to 0.76, ndc 0.111, -0.118)
+    PASS the sniper: a reload starts
+    PASS the sniper: the support hand leaves its hold (fore well below pouch work)
+    INFO = the sniper: the support hand leaves its hold (fore well below pouch work)
+    PASS a launcher in hand
+    PASS the launcher: the view gun is up (raise 1.00)
+    INFO = the launcher: the view gun is up (raise 1.00)
+    PASS a minigun in hand
+    PASS the minigun: the view gun is up (raise 1.00)
+    INFO = the minigun: the view gun is up (raise 1.00)
+    PASS a flamer in hand
+    PASS the flamer: the view gun is up (raise 1.00)
+    INFO = the flamer: the view gun is up (raise 1.00)
+    PASS a chainsaw in hand
+    PASS the chainsaw: the view gun is up (raise 1.00)
+    INFO = the chainsaw: the view gun is up (raise 1.00)
+    PASS the pistol again
+    PASS and the view gun is up again
+    PASS third person: the view gun goes
+    PASS his own arms back in the eye's pass (0 left out), the filter off
+    INFO = his own arms back in the eye's pass (0 left out), the filter off
+    PASS the radio and antenna are drawn in third person
+    PASS nothing of his left out of the eye's pass (0)
+    INFO = nothing of his left out of the eye's pass (0)
+    PASS no page errors ()
+    INFO = no page errors ()
+ok    tcl301   22 pass   0 fail  41.1s  (real renderer)
+    PASS a pistol in hand
+    PASS first person with the pair: the view guns are up (akimbo true)
+    PASS two view guns: the right hand's and the off hand's own copy
+    PASS the left gun the right one's mirror (-0.187,-0.113,-0.469 / 0.187,-0.113,-0.469)
+    PASS one each side of the view, low (ndc 0.39, -0.42 and -0.39)
+    INFO G -0.187,-0.113,-0.469,0.633 grip -0.190,-0.155,-0.460 WR -0.250,-0.161,-0.434 sock 0.076,-0.074,-0.086 s 1.863
+    PASS each hand on its own gun's grip (wrists 0.066, 0.066 m from the grips), mirrored
+    PASS the left hand holds its gun (pair), wrists within their bend (0.87, 0.87)
+    INFO forearm r -0.25,-0.74,0.62 l 0.25,-0.74,0.62, elbows z -0.323, -0.323
+    PASS the forearms come up from below (down from the wrists: -0.74, -0.74)
+    PASS not out flat to the sides (across -0.25, 0.25)
+    PASS a left shot kicks the left gun only (0.01, 2.93 cm)
+    PASS a right shot kicks the right gun only (2.93, 0.01 cm)
+    PASS a left shot turns the drawn view up too (0.0093 rad)
+    PASS the reload dips both guns 14.8 cm and brings them back (0.07 cm off)
+    PASS both together through it (0.00 cm apart from mirrored)
+    PASS the elbows stay well ahead of the eye through the reload (nearest -0.257 m)
+    PASS the left muzzle is left of the eye in the world (-0.17,-0.08,-0.67)
+    PASS the off hand's own gun is out of the eye's pass
+    PASS back to one gun: one view gun (false)
+    PASS the minigun in hand
+    PASS its view gun is up
+    PASS the minigun's right hand grips its rear grip (0.000,-0.017,-0.520; the grip's centre 0, -0.017, -0.520)
+    PASS no page errors ()
+9 checks: 362 pass, 1 fail (real renderer)
+=== TESTPAGE same
+check-players: 315 player.position reads, all in the allowed places
+ok    t23      8 pass   0 fail  107.2s
+ok    t54     32 pass   0 fail  36.8s
+ok    t68     15 pass   0 fail  38.2s
+ok    t77     17 pass   0 fail  51.1s
+ok    t95      9 pass   0 fail  59.0s
+ok    t107     8 pass   0 fail  42.9s
+ok    t180    29 pass   0 fail  69.2s
+           INFO holds: m4 1503 ms wall / 500 ms game, ak 1480 ms wall / 450 ms game, aa12 748 ms wall / 450 ms game, uzi 1304 ms wall / 400 ms game, shotgun 1217 ms wall / 300 ms game, revolver 1171 ms wall / 300 ms game, sniper 1359 ms wall / 300 ms game, pistol 384 ms wall / 300 ms game, pistol 681 ms wall / 400 ms game
+ok    t185    36 pass   0 fail  92.5s
+ok    t188    91 pass   0 fail  122.1s
+ok    t189     7 pass   0 fail  141.7s
+ok    t195    16 pass   0 fail  96.5s
+ok    t202    12 pass   0 fail  37.6s
+ok    t215     4 pass   0 fail  42.2s
+ok    t228    13 pass   0 fail  147.5s
+ok    t249    13 pass   0 fail  40.1s
+FAIL  t298     9 pass   1 fail  97.6s
+
+16 checks: 319 pass, 1 fail
+
+by owner:
+  unassigned
+    t298   1 fail  FAIL after the eye ease the camera position matches within 1 mm (0.0045 m)
+           FAIL after the eye ease the camera position matches within 1 mm (0.0045 m)
+=== SMOKE
+training: title up in 16.9 s, WebGPURenderer
+training: in the room (room built), 0 called in, frames still running: true
+training: page errors none
+match: title up in 21.1 s, WebGPURenderer
+match: in prep, past the insertion
+night: phase wave, lockdown true, zombies 15
+match: page errors none
+=== DONE

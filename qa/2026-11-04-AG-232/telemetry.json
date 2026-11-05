@@ -1,0 +1,1048 @@
+{
+  "generatedAt": "2026-11-04T01:43:54.913Z",
+  "seat": {
+    "x": 42,
+    "y": -7.5468,
+    "z": -20,
+    "yaw": 0.000151,
+    "otsYaw": 0.000151,
+    "otsPitch": 0
+  },
+  "build": {
+    "chainsawWeaponSize": {
+      "len": 1.715,
+      "m": 0.85,
+      "look": 1.2
+    },
+    "chainsawFactor": 0.54684,
+    "minigunScale": 0.88,
+    "chainsawScale": 0.6453,
+    "chainsawHold3P": {
+      "twist": 0.5,
+      "hold": [
+        -0.24,
+        -0.34,
+        0.22
+      ],
+      "grip": [
+        0,
+        -0.014,
+        -0.46
+      ],
+      "trig": [
+        0,
+        -0.01,
+        -0.39
+      ],
+      "fore": [
+        -0.01,
+        0.246,
+        -0.035
+      ],
+      "level": true
+    },
+    "minigunHold3P": {
+      "twist": 0.6,
+      "hold": [
+        -0.3,
+        -0.3,
+        0.2
+      ],
+      "grip": [
+        0,
+        0.2,
+        -0.28
+      ],
+      "fore": [
+        0,
+        0.14,
+        -0.05
+      ]
+    }
+  },
+  "firstPerson": {
+    "minigunRest": {
+      "weapon": "minigun",
+      "active": true,
+      "key": "minigun",
+      "raise": 1,
+      "wristBend": {
+        "r": 0.105,
+        "l": 0.582
+      },
+      "wristToSocketViewM": {
+        "r": 0.0656,
+        "l": 0.0656
+      },
+      "palmGripGunLocal": {
+        "r": [
+          0,
+          -0.017,
+          -0.52
+        ],
+        "l": [
+          -0.075,
+          0.263,
+          0.16
+        ],
+        "errR": 0,
+        "errL": 0
+      },
+      "wristsView": {
+        "r": [
+          -0.2472,
+          -0.4953,
+          -0.4045
+        ],
+        "l": [
+          -0.0737,
+          -0.2245,
+          -0.9911
+        ]
+      },
+      "socketsView": {
+        "grip": [
+          -0.228,
+          -0.433,
+          -0.411
+        ],
+        "support": [
+          -0.1136,
+          -0.1727,
+          -0.9961
+        ]
+      },
+      "ndc": {
+        "grip": {
+          "x": 0.54,
+          "y": -1.825
+        },
+        "support": {
+          "x": 0.111,
+          "y": -0.3
+        },
+        "wristR": {
+          "x": 0.595,
+          "y": -2.121
+        },
+        "wristL": {
+          "x": 0.072,
+          "y": -0.392
+        },
+        "muzzle": {
+          "x": 0.029,
+          "y": -0.37
+        }
+      },
+      "worldTime": 0.5,
+      "holdFrames": 60
+    },
+    "minigun_042": {
+      "weapon": "minigun",
+      "active": true,
+      "key": "minigun",
+      "raise": 1,
+      "wristBend": {
+        "r": 0.106,
+        "l": 0.563
+      },
+      "wristToSocketViewM": {
+        "r": 0.0656,
+        "l": 0.0656
+      },
+      "palmGripGunLocal": {
+        "r": [
+          0,
+          -0.017,
+          -0.52
+        ],
+        "l": [
+          -0.075,
+          0.263,
+          0.16
+        ],
+        "errR": 0,
+        "errL": 0
+      },
+      "wristsView": {
+        "r": [
+          -0.2472,
+          -0.4961,
+          -0.4045
+        ],
+        "l": [
+          -0.0745,
+          -0.2269,
+          -0.9902
+        ]
+      },
+      "socketsView": {
+        "grip": [
+          -0.228,
+          -0.4337,
+          -0.411
+        ],
+        "support": [
+          -0.1136,
+          -0.1745,
+          -0.9965
+        ]
+      },
+      "ndc": {
+        "grip": {
+          "x": 0.54,
+          "y": -1.828
+        },
+        "support": {
+          "x": 0.111,
+          "y": -0.303
+        },
+        "wristR": {
+          "x": 0.595,
+          "y": -2.124
+        },
+        "wristL": {
+          "x": 0.073,
+          "y": -0.397
+        },
+        "muzzle": {
+          "x": 0.029,
+          "y": -0.374
+        }
+      },
+      "worldTime": 0.42
+    },
+    "minigun_dusk": {
+      "weapon": "minigun",
+      "active": true,
+      "key": "minigun",
+      "raise": 1,
+      "wristBend": {
+        "r": 0.106,
+        "l": 0.559
+      },
+      "wristToSocketViewM": {
+        "r": 0.0656,
+        "l": 0.0656
+      },
+      "palmGripGunLocal": {
+        "r": [
+          0,
+          -0.017,
+          -0.52
+        ],
+        "l": [
+          -0.075,
+          0.263,
+          0.16
+        ],
+        "errR": 0,
+        "errL": 0
+      },
+      "wristsView": {
+        "r": [
+          -0.2473,
+          -0.4965,
+          -0.4045
+        ],
+        "l": [
+          -0.0747,
+          -0.2281,
+          -0.9902
+        ]
+      },
+      "socketsView": {
+        "grip": [
+          -0.228,
+          -0.4342,
+          -0.411
+        ],
+        "support": [
+          -0.1136,
+          -0.1757,
+          -0.9968
+        ]
+      },
+      "ndc": {
+        "grip": {
+          "x": 0.54,
+          "y": -1.83
+        },
+        "support": {
+          "x": 0.111,
+          "y": -0.305
+        },
+        "wristR": {
+          "x": 0.596,
+          "y": -2.126
+        },
+        "wristL": {
+          "x": 0.074,
+          "y": -0.399
+        },
+        "muzzle": {
+          "x": 0.029,
+          "y": -0.376
+        }
+      },
+      "worldTime": 0.74
+    },
+    "minigun_night": {
+      "weapon": "minigun",
+      "active": true,
+      "key": "minigun",
+      "raise": 1,
+      "wristBend": {
+        "r": 0.106,
+        "l": 0.558
+      },
+      "wristToSocketViewM": {
+        "r": 0.0656,
+        "l": 0.0656
+      },
+      "palmGripGunLocal": {
+        "r": [
+          0,
+          -0.017,
+          -0.52
+        ],
+        "l": [
+          -0.075,
+          0.263,
+          0.16
+        ],
+        "errR": 0,
+        "errL": 0
+      },
+      "wristsView": {
+        "r": [
+          -0.2473,
+          -0.4963,
+          -0.4045
+        ],
+        "l": [
+          -0.0748,
+          -0.2274,
+          -0.9901
+        ]
+      },
+      "socketsView": {
+        "grip": [
+          -0.228,
+          -0.4339,
+          -0.411
+        ],
+        "support": [
+          -0.1136,
+          -0.175,
+          -0.9967
+        ]
+      },
+      "ndc": {
+        "grip": {
+          "x": 0.54,
+          "y": -1.829
+        },
+        "support": {
+          "x": 0.111,
+          "y": -0.304
+        },
+        "wristR": {
+          "x": 0.596,
+          "y": -2.125
+        },
+        "wristL": {
+          "x": 0.074,
+          "y": -0.398
+        },
+        "muzzle": {
+          "x": 0.029,
+          "y": -0.375
+        }
+      },
+      "worldTime": 0.02
+    },
+    "minigunFire": {
+      "weapon": "minigun",
+      "active": true,
+      "key": "minigun",
+      "raise": 1,
+      "wristBend": {
+        "r": 0.105,
+        "l": 0.556
+      },
+      "wristToSocketViewM": {
+        "r": 0.0656,
+        "l": 0.0656
+      },
+      "palmGripGunLocal": {
+        "r": [
+          0,
+          -0.017,
+          -0.52
+        ],
+        "l": [
+          -0.075,
+          0.263,
+          0.16
+        ],
+        "errR": 0,
+        "errL": 0
+      },
+      "wristsView": {
+        "r": [
+          -0.2473,
+          -0.4942,
+          -0.3917
+        ],
+        "l": [
+          -0.0749,
+          -0.2148,
+          -0.9733
+        ]
+      },
+      "socketsView": {
+        "grip": [
+          -0.228,
+          -0.4318,
+          -0.3981
+        ],
+        "support": [
+          -0.1136,
+          -0.1622,
+          -0.9789
+        ]
+      },
+      "ndc": {
+        "grip": {
+          "x": 0.558,
+          "y": -1.879
+        },
+        "support": {
+          "x": 0.113,
+          "y": -0.287
+        },
+        "wristR": {
+          "x": 0.615,
+          "y": -2.185
+        },
+        "wristL": {
+          "x": 0.075,
+          "y": -0.382
+        },
+        "muzzle": {
+          "x": 0.029,
+          "y": -0.35
+        }
+      },
+      "worldTime": 0.5,
+      "barrelRotDelta": 23.875,
+      "shotsDelta": 15
+    },
+    "chainsawIdle": {
+      "weapon": "chainsaw",
+      "active": true,
+      "key": "chainsaw",
+      "raise": 1,
+      "wristBend": {
+        "r": 0.87,
+        "l": 0.228
+      },
+      "wristToSocketViewM": {
+        "r": 0.0656,
+        "l": 0.0656
+      },
+      "palmGripGunLocal": {
+        "r": [
+          0,
+          -0.014,
+          -0.46
+        ],
+        "l": [
+          -0.01,
+          0.246,
+          -0.035
+        ],
+        "errR": 0,
+        "errL": 0
+      },
+      "wristsView": {
+        "r": [
+          -0.3762,
+          -0.3517,
+          -0.4419
+        ],
+        "l": [
+          -0.1144,
+          -0.1883,
+          -0.5696
+        ]
+      },
+      "socketsView": {
+        "grip": [
+          -0.315,
+          -0.3731,
+          -0.452
+        ],
+        "support": [
+          -0.1382,
+          -0.1278,
+          -0.5615
+        ]
+      },
+      "ndc": {
+        "grip": {
+          "x": 0.679,
+          "y": -1.43
+        },
+        "support": {
+          "x": 0.24,
+          "y": -0.394
+        },
+        "wristR": {
+          "x": 0.829,
+          "y": -1.379
+        },
+        "wristL": {
+          "x": 0.196,
+          "y": -0.573
+        },
+        "muzzle": {
+          "x": -0.103,
+          "y": 0.074
+        }
+      },
+      "worldTime": 0.5,
+      "chainToothIdleDelta10f": 0.0283
+    },
+    "chainsaw_042": {
+      "weapon": "chainsaw",
+      "active": true,
+      "key": "chainsaw",
+      "raise": 1,
+      "wristBend": {
+        "r": 0.87,
+        "l": 0.226
+      },
+      "wristToSocketViewM": {
+        "r": 0.0656,
+        "l": 0.0656
+      },
+      "palmGripGunLocal": {
+        "r": [
+          0,
+          -0.014,
+          -0.46
+        ],
+        "l": [
+          -0.01,
+          0.246,
+          -0.035
+        ],
+        "errR": 0,
+        "errL": 0
+      },
+      "wristsView": {
+        "r": [
+          -0.3762,
+          -0.3513,
+          -0.4421
+        ],
+        "l": [
+          -0.1143,
+          -0.188,
+          -0.5694
+        ]
+      },
+      "socketsView": {
+        "grip": [
+          -0.315,
+          -0.3728,
+          -0.452
+        ],
+        "support": [
+          -0.1382,
+          -0.1274,
+          -0.5613
+        ]
+      },
+      "ndc": {
+        "grip": {
+          "x": 0.679,
+          "y": -1.429
+        },
+        "support": {
+          "x": 0.24,
+          "y": -0.393
+        },
+        "wristR": {
+          "x": 0.829,
+          "y": -1.376
+        },
+        "wristL": {
+          "x": 0.196,
+          "y": -0.572
+        },
+        "muzzle": {
+          "x": -0.103,
+          "y": 0.075
+        }
+      },
+      "worldTime": 0.42
+    },
+    "chainsaw_dusk": {
+      "weapon": "chainsaw",
+      "active": true,
+      "key": "chainsaw",
+      "raise": 1,
+      "wristBend": {
+        "r": 0.87,
+        "l": 0.224
+      },
+      "wristToSocketViewM": {
+        "r": 0.0656,
+        "l": 0.0656
+      },
+      "palmGripGunLocal": {
+        "r": [
+          0,
+          -0.014,
+          -0.46
+        ],
+        "l": [
+          -0.01,
+          0.246,
+          -0.035
+        ],
+        "errR": 0,
+        "errL": 0
+      },
+      "wristsView": {
+        "r": [
+          -0.3762,
+          -0.3517,
+          -0.4424
+        ],
+        "l": [
+          -0.1142,
+          -0.1885,
+          -0.5696
+        ]
+      },
+      "socketsView": {
+        "grip": [
+          -0.315,
+          -0.3733,
+          -0.452
+        ],
+        "support": [
+          -0.1382,
+          -0.128,
+          -0.5616
+        ]
+      },
+      "ndc": {
+        "grip": {
+          "x": 0.679,
+          "y": -1.43
+        },
+        "support": {
+          "x": 0.24,
+          "y": -0.395
+        },
+        "wristR": {
+          "x": 0.828,
+          "y": -1.377
+        },
+        "wristL": {
+          "x": 0.195,
+          "y": -0.573
+        },
+        "muzzle": {
+          "x": -0.103,
+          "y": 0.073
+        }
+      },
+      "worldTime": 0.74
+    },
+    "chainsaw_night": {
+      "weapon": "chainsaw",
+      "active": true,
+      "key": "chainsaw",
+      "raise": 1,
+      "wristBend": {
+        "r": 0.87,
+        "l": 0.222
+      },
+      "wristToSocketViewM": {
+        "r": 0.0656,
+        "l": 0.0656
+      },
+      "palmGripGunLocal": {
+        "r": [
+          0,
+          -0.014,
+          -0.46
+        ],
+        "l": [
+          -0.01,
+          0.246,
+          -0.035
+        ],
+        "errR": 0,
+        "errL": 0
+      },
+      "wristsView": {
+        "r": [
+          -0.3762,
+          -0.3524,
+          -0.4425
+        ],
+        "l": [
+          -0.1141,
+          -0.1895,
+          -0.5701
+        ]
+      },
+      "socketsView": {
+        "grip": [
+          -0.315,
+          -0.3741,
+          -0.452
+        ],
+        "support": [
+          -0.1382,
+          -0.1291,
+          -0.5621
+        ]
+      },
+      "ndc": {
+        "grip": {
+          "x": 0.679,
+          "y": -1.434
+        },
+        "support": {
+          "x": 0.24,
+          "y": -0.398
+        },
+        "wristR": {
+          "x": 0.828,
+          "y": -1.379
+        },
+        "wristL": {
+          "x": 0.195,
+          "y": -0.576
+        },
+        "muzzle": {
+          "x": -0.103,
+          "y": 0.07
+        }
+      },
+      "worldTime": 0.02
+    },
+    "chainsawCut": {
+      "weapon": "chainsaw",
+      "active": true,
+      "key": "chainsaw",
+      "raise": 1,
+      "wristBend": {
+        "r": 0.87,
+        "l": 0.219
+      },
+      "wristToSocketViewM": {
+        "r": 0.0656,
+        "l": 0.0656
+      },
+      "palmGripGunLocal": {
+        "r": [
+          0,
+          -0.014,
+          -0.46
+        ],
+        "l": [
+          -0.01,
+          0.246,
+          -0.035
+        ],
+        "errR": 0,
+        "errL": 0
+      },
+      "wristsView": {
+        "r": [
+          -0.3762,
+          -0.3534,
+          -0.4425
+        ],
+        "l": [
+          -0.1141,
+          -0.1908,
+          -0.5706
+        ]
+      },
+      "socketsView": {
+        "grip": [
+          -0.315,
+          -0.375,
+          -0.452
+        ],
+        "support": [
+          -0.1382,
+          -0.1303,
+          -0.5627
+        ]
+      },
+      "ndc": {
+        "grip": {
+          "x": 0.679,
+          "y": -1.437
+        },
+        "support": {
+          "x": 0.239,
+          "y": -0.401
+        },
+        "wristR": {
+          "x": 0.828,
+          "y": -1.383
+        },
+        "wristL": {
+          "x": 0.195,
+          "y": -0.579
+        },
+        "muzzle": {
+          "x": -0.103,
+          "y": 0.066
+        }
+      },
+      "worldTime": 0.5,
+      "muzzleSwingDispM": 0.0003,
+      "chainToothCutDelta": 0.196,
+      "sawHeat": {
+        "heat": 0.014999999999999987,
+        "overheat": false,
+        "biteT": 0
+      }
+    }
+  },
+  "thirdPerson": {
+    "chainsawRest": {
+      "weapon": "chainsaw",
+      "viewFirst": false,
+      "holdTable": {
+        "twist": 0.5,
+        "hold": [
+          -0.24,
+          -0.34,
+          0.22
+        ],
+        "grip": [
+          0,
+          -0.014,
+          -0.46
+        ],
+        "trig": [
+          0,
+          -0.01,
+          -0.39
+        ],
+        "fore": [
+          -0.01,
+          0.246,
+          -0.035
+        ],
+        "level": true
+      },
+      "handWorld": {
+        "r": [
+          42.148,
+          -6.7782,
+          -19.866
+        ],
+        "l": [
+          42.1548,
+          -6.6247,
+          -19.5755
+        ]
+      },
+      "distToHoldAnchorM": {
+        "r": 0.0003,
+        "l": 0.0161
+      },
+      "distToGP20022HandleCentersM": {
+        "r": 0.0003,
+        "l": 0.0161
+      },
+      "gunCenter": [
+        42.1478,
+        -6.7439,
+        -19.5334
+      ],
+      "forward": [
+        0.0002,
+        0,
+        1
+      ]
+    },
+    "chainsawCut": {
+      "weapon": "chainsaw",
+      "viewFirst": false,
+      "holdTable": {
+        "twist": 0.5,
+        "hold": [
+          -0.24,
+          -0.34,
+          0.22
+        ],
+        "grip": [
+          0,
+          -0.014,
+          -0.46
+        ],
+        "trig": [
+          0,
+          -0.01,
+          -0.39
+        ],
+        "fore": [
+          -0.01,
+          0.246,
+          -0.035
+        ],
+        "level": true
+      },
+      "handWorld": {
+        "r": [
+          42.1518,
+          -6.7812,
+          -19.8647
+        ],
+        "l": [
+          42.1586,
+          -6.6277,
+          -19.5742
+        ]
+      },
+      "distToHoldAnchorM": {
+        "r": 0.0003,
+        "l": 0.0161
+      },
+      "distToGP20022HandleCentersM": {
+        "r": 0.0003,
+        "l": 0.0161
+      },
+      "gunCenter": [
+        42.1517,
+        -6.7469,
+        -19.5321
+      ],
+      "forward": [
+        0.0002,
+        0,
+        1
+      ]
+    },
+    "minigunRest": {
+      "weapon": "minigun",
+      "viewFirst": false,
+      "holdTable": {
+        "twist": 0.6,
+        "hold": [
+          -0.3,
+          -0.3,
+          0.2
+        ],
+        "grip": [
+          0,
+          0.2,
+          -0.28
+        ],
+        "fore": [
+          0,
+          0.14,
+          -0.05
+        ]
+      },
+      "handWorld": {
+        "r": [
+          42.1751,
+          -6.7369,
+          -19.8103
+        ],
+        "l": [
+          42.1922,
+          -6.7576,
+          -19.611
+        ]
+      },
+      "distToHoldAnchorM": {
+        "r": 0.0151,
+        "l": 0.0161
+      },
+      "distToGP20022HandleCentersM": {
+        "r": 0.298,
+        "l": 0.2258
+      },
+      "gunCenter": [
+        42.1748,
+        -6.7963,
+        -19.518
+      ],
+      "forward": [
+        0.0002,
+        0,
+        1
+      ]
+    },
+    "minigunFire": {
+      "weapon": "minigun",
+      "viewFirst": false,
+      "holdTable": {
+        "twist": 0.6,
+        "hold": [
+          -0.3,
+          -0.3,
+          0.2
+        ],
+        "grip": [
+          0,
+          0.2,
+          -0.28
+        ],
+        "fore": [
+          0,
+          0.14,
+          -0.05
+        ]
+      },
+      "handWorld": {
+        "r": [
+          42.1727,
+          -6.7401,
+          -19.8093
+        ],
+        "l": [
+          42.1908,
+          -6.761,
+          -19.6097
+        ]
+      },
+      "distToHoldAnchorM": {
+        "r": 0.0147,
+        "l": 0.0161
+      },
+      "distToGP20022HandleCentersM": {
+        "r": 0.2977,
+        "l": 0.2257
+      },
+      "gunCenter": [
+        42.1739,
+        -6.7998,
+        -19.5168
+      ],
+      "forward": [
+        0.0002,
+        0,
+        1
+      ]
+    }
+  }
+}

@@ -1,0 +1,246 @@
+GRANT grokbot GB-273: starting one game-test command
+
+=== node --test game/wall-cull.test.mjs
+✔ the band becomes straight segments of at most 6 m, none across the gap (0.8145ms)
+✔ behind the wall: hidden on the second read, not the first (0.8717ms)
+✔ through the gap: shown (0.2506ms)
+✔ at the wall foot on the near side: never hidden (0.2416ms)
+✔ a tall thing seen over the wall is shown (0.3007ms)
+✔ one seen read shows it again (walking round the end) (0.2786ms)
+✔ far cells round-robin within the budget, re-tested when the eye moves (1.5788ms)
+✔ an empty wall list hides nothing (0.4114ms)
+✔ a wide, low prop: the cell top is the draw own top, not the sphere top (AG-222) (0.3397ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 98.8357
+=== exit 0
+
+=== node tools/realtest.mjs tgb273
+ok    tgb273    5 pass   0 fail  43.0s  (real renderer)
+    INFO wall test 0.070 ms a frame (avg of 240)
+1 checks: 5 pass, 0 fail (real renderer)
+=== exit 0
+
+=== node tools/tests/run-all.mjs tgb273 t215 t95 t329 t80 --jobs 1 --all-fails
+check-players: 315 player.position reads, all in the allowed places
+           INFO wall test 0.085 ms a frame (avg of 240)
+ok    tgb273   5 pass   0 fail  55.2s
+ok    t80     14 pass   0 fail  156.6s
+ok    t95      9 pass   0 fail  54.0s
+ok    t215     4 pass   0 fail  38.6s
+ok    t329    10 pass   0 fail  23.1s
+
+5 checks: 42 pass, 0 fail
+=== exit 0
+
+=== node tools/smoke-real.mjs
+training: title up in 16.6 s, WebGPURenderer
+training: in the room (room built), 0 called in, frames still running: true
+training: page errors none
+match: title up in 22.1 s, WebGPURenderer
+match: in prep, past the insertion
+night: phase wave, lockdown true, zombies 15
+match: page errors none
+=== exit 0
+
+=== node qa/2026-11-03-GB-273/run-seats.mjs
+[AG-222] Verifying ?wallcull=0 URL flag...
+[AG-222] ?wallcull=0 check: { wallCullDbg: null, stoneWalls: true }
+[AG-222] Loading default index.html (stone walls + wallCull ON)...
+[AG-222] Starting match from Jerry launcher and warming up sceneCull spheres across the map...
+[AG-222] Warmup complete: {
+  cullDbg: {
+    hidden: 211,
+    tested: 352,
+    spheres: 0,
+    ms: 0.7999999523162842,
+    wallMs: 0,
+    on: true
+  },
+  wallCullDbg: { cells: 203, hidden: 10, tested: 0, segments: 139, ms: 0 }
+}
+[AG-222] Running Part 1: 5-Seat A/B Audit & 1080p Captures...
+[AG-222] seat1_hq_north_ring: behindBandDraws 178 -> 95 (-83, -46.6% | target >=66.7%: false) | rendererCalls: 19161 -> 19341 | pxDiff>8: 0.2082%
+[AG-222] seat2_hq_west_ring: behindBandDraws 107 -> 68 (-39, -36.4% | target >=66.7%: false) | rendererCalls: 19957 -> 20137 | pxDiff>8: 0.0967%
+[AG-222] seat3_quarter_nw: behindBandDraws 112 -> 83 (-29, -25.9% | target >=66.7%: false) | rendererCalls: 20753 -> 20933 | pxDiff>8: 0.2397%
+[AG-222] seat4_quarter_ne: behindBandDraws 82 -> 80 (-2, -2.4% | target >=66.7%: false) | rendererCalls: 21549 -> 21729 | pxDiff>8: 0.1172%
+[AG-222] seat5_quarter_sw: behindBandDraws 62 -> 57 (-5, -8.1% | target >=66.7%: false) | rendererCalls: 22345 -> 22525 | pxDiff>8: 1.6124%
+[AG-222] Discovering exact gap coordinates on hq-thicket and quarter bands for gap walks...
+[AG-222] Main bands: [
+  {
+    kind: 'hq-thicket',
+    width: 4,
+    pts: [
+      [Object], [Object], [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object],
+      ... 373 more items
+    ],
+    radius: 60,
+    gaps: [
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object],
+      [Object]
+    ],
+    solids: 374
+  },
+  {
+    kind: 'quarter-ne',
+    width: 5,
+    pts: [ [Object], [Object], [Object], [Object], [Object] ],
+    gaps: [ [Object], [Object] ],
+    solids: 168
+  },
+  {
+    kind: 'quarter-nw',
+    width: 5,
+    pts: [ [Object], [Object], [Object], [Object], [Object], [Object] ],
+    gaps: [ [Object], [Object] ],
+    solids: 146
+  },
+  {
+    kind: 'quarter-sw',
+    width: 5,
+    pts: [ [Object], [Object], [Object], [Object], [Object] ],
+    gaps: [ [Object], [Object] ],
+    solids: 158
+  },
+  {
+    kind: 'quarter-se',
+    width: 5,
+    pts: [ [Object], [Object] ],
+    gaps: [ [Object] ],
+    solids: 7
+  }
+]
+[AG-222] Discovered gap centers: {
+  ringGaps: [
+    {
+      ang: 0.0611,
+      widthM: 3.67,
+      x: 59.89,
+      z: 3.66,
+      nx: 0.9981,
+      nz: 0.061
+    },
+    {
+      ang: 0.1571,
+      widthM: 3.67,
+      x: 59.26,
+      z: 9.39,
+      nx: 0.9877,
+      nz: 0.1564
+    },
+    {
+      ang: 0.9163,
+      widthM: 9.95,
+      x: 36.53,
+      z: 47.6,
+      nx: 0.6088,
+      nz: 0.7934
+    },
+    {
+      ang: 1.6493,
+      widthM: 7.85,
+      x: -4.71,
+      z: 59.82,
+      nx: -0.0785,
+      nz: 0.9969
+    },
+    {
+      ang: 1.885,
+      widthM: 16.23,
+      x: -18.54,
+      z: 57.06,
+      nx: -0.309,
+      nz: 0.9511
+    },
+    {
+      ang: 3.4296,
+      widthM: 8.9,
+      x: -57.53,
+      z: -17.04,
+      nx: -0.9588,
+      nz: -0.284
+    },
+    {
+      ang: 3.6565,
+      widthM: 7.85,
+      x: -52.22,
+      z: -29.55,
+      nx: -0.8704,
+      nz: -0.4924
+    },
+    {
+      ang: 4.8171,
+      widthM: 10.47,
+      x: 6.27,
+      z: -59.67,
+      nx: 0.1045,
+      nz: -0.9945
+    },
+    {
+      ang: 5.6461,
+      widthM: 9.42,
+      x: 48.23,
+      z: -35.69,
+      nx: 0.8039,
+      nz: -0.5948
+    }
+  ],
+  hqNorth: {
+    ang: 1.6493,
+    widthM: 7.85,
+    x: -4.71,
+    z: 59.82,
+    nx: -0.0785,
+    nz: 0.9969
+  },
+  hqWest: {
+    ang: 0.0611,
+    widthM: 3.67,
+    x: 59.89,
+    z: 3.66,
+    nx: 0.9981,
+    nz: 0.061
+  },
+  quarterNw: { x: 95.51, z: 60.52, nx: 0.918, nz: -0.397 },
+  quarterNe: { x: -40.53, z: 122.37, nx: -0.614, nz: 0.789 }
+}
+[AG-222] Running walk1_hq_ring_arc (Walk 1: Along HQ Stone Ring (North-to-West Arc))...
+[AG-222] walk1_hq_ring_arc: hiddenCells [0..79] | shownEvents=293 | maxCheckpointDiffOver8=1.4093% | avgWallMs=0.125ms
+[AG-222] Running walk2_gap_hq_north (Walk 2: Through HQ Ring North Trail Gap)...
+[AG-222] walk2_gap_hq_north: hiddenCells [0..63] | shownEvents=270 | maxCheckpointDiffOver8=22.3043% | avgWallMs=0.1611ms
+[AG-222] Running walk3_gap_hq_west (Walk 3: Through HQ Ring West (Landing) Gap)...
+[AG-222] walk3_gap_hq_west: hiddenCells [0..97] | shownEvents=474 | maxCheckpointDiffOver8=0.0576% | avgWallMs=0.1847ms
+[AG-222] Running walk4_gap_quarter_nw (Walk 4: Through Quarter-NW Wall Gap)...
+[AG-222] walk4_gap_quarter_nw: hiddenCells [0..69] | shownEvents=212 | maxCheckpointDiffOver8=31.7298% | avgWallMs=0.1861ms
+[AG-222] Running walk5_gap_quarter_ne (Walk 5: Through Quarter-NE Wall Gap)...
+[AG-222] walk5_gap_quarter_ne: hiddenCells [0..100] | shownEvents=438 | maxCheckpointDiffOver8=28.0632% | avgWallMs=0.1958ms
+[AG-222] Running Part 3: Dawn & Dusk Shadow Check Behind a Wall...
+[AG-222] Shadow dawn_west_wall: behindBandDraws 106 -> 67 | groundShadowDiff>8: 0% | fullDiff>8: 0.1377%
+[AG-222] Shadow dusk_ne_wall: behindBandDraws 94 -> 92 | groundShadowDiff>8: 14.3262% | fullDiff>8: 6.5076%
+[AG-222] Saved telemetry.json and walks-traces.json successfully.
+=== exit 0

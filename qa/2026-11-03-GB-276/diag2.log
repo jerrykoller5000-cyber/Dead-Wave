@@ -1,0 +1,107 @@
+﻿Game-test request 658a7b44-db09-4d49-9e5f-19bf798a4b2f queued at position 1. Waiting...
+GRANT grokbot GB-276: starting one game-test command
+PASS the rig carries the pack spots ({"pistol":{"x":0.105,"y":0.87,"z":-0.35,"tilt":-0.08},"revolver":{"x":0.105,"y":0.87,"z":-0.35,"tilt":0}})
+== m4/ak/uzi/revolver tp 0.7 packFit {"pistol":{"x":0.105,"y":0.87,"z":-0.35,"tilt":-0.08},"revolver":{"x":0.105,"y":0.87,"z":-0.35,"tilt":0}}
+uzi pos 0.12,0.45,-0.395 gunBox torso x[-0.039,0.278] y[0.235,0.667] z[-0.432,-0.345]
+   uzi+ vs ? box x[-0.311,0.311] y[0.265,0.558] z[-0.13,0.141] hits 78 minAir 0.235
+   uzi+ vs ? box x[-0.115,0.116] y[0.062,0.495] z[-0.316,0.131] hits 126 minAir 0.031
+   uzi+ vs ? box x[-0.119,0.118] y[0.186,0.443] z[-0.312,-0.269] hits 22 minAir 0.053
+   uzi+ vs ? box x[-0.204,0.204] y[0.097,0.506] z[-0.181,0.189] hits 415 minAir 0.175
+   uzi+ vs ? box x[-0.211,0.211] y[0.128,0.451] z[-0.189,0.23] hits 61 minAir 0.184
+   uzi+ vs ? box x[-0.133,0.133] y[0.073,0.454] z[-0.315,-0.164] hits 332 minAir 0.058
+   uzi+ vs ? box x[-0.166,0.166] y[0.294,0.496] z[-0.264,0.237] hits 1 minAir 0.135
+   uzi+ vs ? box x[-0.132,0.182] y[0.065,0.445] z[-0.32,-0.175] hits 201 minAir 0.039
+   uzi+ vs ? box x[-0.25,0.25] y[0.234,0.266] z[-0.197,-0.183] hits 4 minAir 0.21
+   uzi+ vs live-sleeve box x[0.052,0.387] y[0.213,0.451] z[-0.056,0.438] hits 11 minAir 0.34
+   uzi+ vs marine-flexible-shirt box x[-0.26,0.26] y[0.014,0.51] z[-0.133,0.137] hits 496 minAir 0.215
+   uzi+ vs marine-shadow box x[-0.392,0.39] y[-0.706,0.876] z[-0.32,0.482] hits 536 minAir 0.031
+   uzi+ vs rig-skin box x[-0.234,0.233] y[-0.642,0.847] z[-0.316,0.187] hits 337 minAir 0.031
+   uzi+ vs rig-skin box x[-0.166,0.166] y[0.073,0.497] z[-0.315,0.154] hits 332 minAir 0.058
+revolver pos 0.105,0.17,-0.379 gunBox torso x[0.011,0.234] y[-0.013,0.332] z[-0.423,-0.345]
+   revolver+ vs fitted-pelvis box x[-0.176,0.188] y[-0.061,0.021] z[-0.133,0.123] hits 17 minAir 0.301
+   revolver+ vs ? box x[-0.181,0.19] y[-0.11,0.048] z[-0.15,0.183] hits 5 minAir 0.289
+   revolver+ vs ? box x[-0.218,0.203] y[-0.159,0.049] z[-0.14,0.186] hits 9 minAir 0.27
+   revolver+ vs live-seat box x[-0.178,0.19] y[-0.219,0.021] z[-0.138,0.125] hits 24 minAir 0.296
+   revolver+ vs ? box x[-0.115,0.116] y[0.062,0.495] z[-0.316,0.131] hits 140 minAir 0.042
+   revolver+ vs ? box x[-0.223,0.223] y[0.161,0.43] z[-0.269,0.237] hits 7 minAir 0.111
+   revolver+ vs ? box x[-0.119,0.118] y[0.186,0.443] z[-0.312,-0.269] hits 7 minAir 0.074
+   revolver+ vs ? box x[-0.204,0.204] y[0.097,0.506] z[-0.181,0.189] hits 683 minAir 0.175
+   revolver+ vs ? box x[-0.211,0.211] y[0.128,0.451] z[-0.189,0.23] hits 5 minAir 0.251
+   revolver+ vs ? box x[-0.133,0.133] y[0.073,0.454] z[-0.315,-0.164] hits 482 minAir 0.044
+   revolver+ vs ? box x[-0.132,0.182] y[0.065,0.445] z[-0.32,-0.175] hits 351 minAir 0.04
+   revolver+ vs ? box x[-0.25,0.25] y[0.234,0.266] z[-0.197,-0.183] hits 145 minAir 0.148
+   revolver+ vs marine-flexible-shirt box x[-0.26,0.26] y[0.014,0.51] z[-0.133,0.137] hits 734 minAir 0.228
+   revolver+ vs marine-shadow box x[-0.392,0.39] y[-0.706,0.876] z[-0.32,0.482] hits 627 minAir 0.04
+   revolver+ vs rig-skin box x[-0.243,0.251] y[-0.29,0.021] z[-0.133,0.144] hits 17 minAir 0.301
+   revolver+ vs rig-skin box x[-0.234,0.233] y[-0.642,0.847] z[-0.316,0.187] hits 260 minAir 0.042
+   revolver+ vs rig-skin box x[-0.245,0.252] y[-0.192,0.048] z[-0.15,0.183] hits 5 minAir 0.289
+   revolver+ vs rig-skin box x[-0.166,0.166] y[0.073,0.497] z[-0.315,0.154] hits 482 minAir 0.044
+uzi pos -0.12,0.45,-0.413 gunBox torso x[-0.277,0.04] y[0.235,0.668] z[-0.432,-0.345]
+   uzi- vs ? box x[-0.311,0.311] y[0.265,0.558] z[-0.13,0.141] hits 78 minAir 0.251
+   uzi- vs ? box x[-0.115,0.116] y[0.062,0.495] z[-0.316,0.131] hits 130 minAir 0.046
+   uzi- vs ? box x[-0.119,0.118] y[0.186,0.443] z[-0.312,-0.269] hits 22 minAir 0.069
+   uzi- vs ? box x[-0.204,0.204] y[0.097,0.506] z[-0.181,0.189] hits 415 minAir 0.176
+   uzi- vs ? box x[-0.211,0.211] y[0.128,0.451] z[-0.189,0.23] hits 75 minAir 0.198
+   uzi- vs ? box x[-0.133,0.133] y[0.073,0.454] z[-0.315,-0.164] hits 332 minAir 0.049
+   uzi- vs ? box x[-0.166,0.166] y[0.294,0.496] z[-0.264,0.237] hits 1 minAir 0.132
+   uzi- vs ? box x[-0.132,0.182] y[0.065,0.445] z[-0.32,-0.175] hits 121 minAir 0.039
+   uzi- vs ? box x[-0.25,0.25] y[0.234,0.266] z[-0.197,-0.183] hits 4 minAir 0.149
+   uzi- vs marine-flexible-shirt box x[-0.26,0.26] y[0.014,0.51] z[-0.133,0.137] hits 496 minAir 0.222
+   uzi- vs marine-shadow box x[-0.392,0.39] y[-0.706,0.876] z[-0.32,0.482] hits 500 minAir 0.039
+   uzi- vs rig-skin box x[-0.234,0.233] y[-0.642,0.847] z[-0.316,0.187] hits 337 minAir 0.046
+   uzi- vs rig-skin box x[-0.166,0.166] y[0.073,0.497] z[-0.315,0.154] hits 332 minAir 0.049
+revolver pos -0.105,0.17,-0.379 gunBox torso x[-0.234,-0.011] y[-0.013,0.332] z[-0.423,-0.345]
+   revolver- vs fitted-pelvis box x[-0.176,0.188] y[-0.061,0.021] z[-0.133,0.123] hits 11 minAir 0.29
+   revolver- vs ? box x[-0.181,0.19] y[-0.11,0.048] z[-0.15,0.183] hits 7 minAir 0.271
+   revolver- vs ? box x[-0.218,0.203] y[-0.159,0.049] z[-0.14,0.186] hits 5 minAir 0.28
+   revolver- vs live-seat box x[-0.178,0.19] y[-0.219,0.021] z[-0.138,0.125] hits 16 minAir 0.284
+   revolver- vs ? box x[-0.115,0.116] y[0.062,0.495] z[-0.316,0.131] hits 140 minAir 0.042
+   revolver- vs ? box x[-0.223,0.223] y[0.161,0.43] z[-0.269,0.237] hits 7 minAir 0.122
+   revolver- vs ? box x[-0.119,0.118] y[0.186,0.443] z[-0.312,-0.269] hits 7 minAir 0.075
+   revolver- vs ? box x[-0.204,0.204] y[0.097,0.506] z[-0.181,0.189] hits 683 minAir 0.175
+   revolver- vs ? box x[-0.211,0.211] y[0.128,0.451] z[-0.189,0.23] hits 5 minAir 0.26
+   revolver- vs ? box x[-0.133,0.133] y[0.073,0.454] z[-0.315,-0.164] hits 482 minAir 0.045
+   revolver- vs ? box x[-0.132,0.182] y[0.065,0.445] z[-0.32,-0.175] hits 275 minAir 0.04
+   revolver- vs ? box x[-0.25,0.25] y[0.234,0.266] z[-0.197,-0.183] hits 145 minAir 0.148
+   revolver- vs marine-flexible-shirt box x[-0.26,0.26] y[0.014,0.51] z[-0.133,0.137] hits 733 minAir 0.228
+   revolver- vs marine-shadow box x[-0.392,0.39] y[-0.706,0.876] z[-0.32,0.482] hits 590 minAir 0.04
+   revolver- vs rig-skin box x[-0.243,0.251] y[-0.29,0.021] z[-0.133,0.144] hits 11 minAir 0.29
+   revolver- vs rig-skin box x[-0.234,0.233] y[-0.642,0.847] z[-0.316,0.187] hits 256 minAir 0.042
+   revolver- vs rig-skin box x[-0.245,0.252] y[-0.192,0.048] z[-0.15,0.183] hits 7 minAir 0.271
+   revolver- vs rig-skin box x[-0.166,0.166] y[0.073,0.497] z[-0.315,0.154] hits 482 minAir 0.045
+== ak/m4/revolver/pistol tp 0.7 packFit {"pistol":{"x":0.105,"y":0.87,"z":-0.35,"tilt":-0.08},"revolver":{"x":0.105,"y":0.87,"z":-0.35,"tilt":0}}
+revolver pos 0.105,0.46,-0.379 gunBox torso x[0.011,0.234] y[0.277,0.622] z[-0.423,-0.345]
+   revolver+ vs ? box x[-0.311,0.311] y[0.265,0.558] z[-0.13,0.141] hits 69 minAir 0.29
+   revolver+ vs ? box x[-0.204,0.204] y[0.097,0.506] z[-0.181,0.189] hits 66 minAir 0.202
+   revolver+ vs ? box x[-0.166,0.166] y[0.294,0.496] z[-0.264,0.237] hits 12 minAir 0.228
+   revolver+ vs ? box x[-0.132,0.182] y[0.065,0.445] z[-0.32,-0.175] hits 25 minAir 0.116
+   revolver+ vs marine-flexible-shirt box x[-0.26,0.26] y[0.014,0.51] z[-0.133,0.137] hits 77 minAir 0.259
+   revolver+ vs marine-shadow box x[-0.392,0.39] y[-0.706,0.876] z[-0.32,0.482] hits 271 minAir 0.116
+   revolver+ vs rig-skin box x[-0.234,0.233] y[-0.642,0.847] z[-0.316,0.187] hits 187 minAir 0.224
+   revolver+ vs rig-skin box x[-0.166,0.166] y[0.073,0.497] z[-0.315,0.154] hits 12 minAir 0.228
+pistol pos 0.105,0.15,-0.37 gunBox torso x[0.028,0.205] y[0.012,0.277] z[-0.395,-0.345]
+   pistol+ vs fitted-pelvis box x[-0.176,0.188] y[-0.061,0.021] z[-0.133,0.123] hits 5 minAir 0.285
+   pistol+ vs ? box x[-0.181,0.19] y[-0.11,0.048] z[-0.15,0.183] hits 221 minAir 0.243
+   pistol+ vs ? box x[-0.218,0.203] y[-0.159,0.049] z[-0.14,0.186] hits 18 minAir 0.247
+   pistol+ vs live-seat box x[-0.178,0.19] y[-0.219,0.021] z[-0.138,0.125] hits 5 minAir 0.281
+   pistol+ vs ? box x[-0.115,0.116] y[0.062,0.495] z[-0.316,0.131] hits 99 minAir 0.042
+   pistol+ vs ? box x[-0.223,0.223] y[0.161,0.43] z[-0.269,0.237] hits 26 minAir 0.092
+   pistol+ vs ? box x[-0.119,0.118] y[0.186,0.443] z[-0.312,-0.269] hits 32 minAir 0.054
+   pistol+ vs ? box x[-0.204,0.204] y[0.097,0.506] z[-0.181,0.189] hits 580 minAir 0.185
+   pistol+ vs ? box x[-0.133,0.133] y[0.073,0.454] z[-0.315,-0.164] hits 242 minAir 0.044
+   pistol+ vs ? box x[-0.132,0.182] y[0.065,0.445] z[-0.32,-0.175] hits 262 minAir 0.04
+   pistol+ vs ? box x[-0.25,0.25] y[0.234,0.266] z[-0.197,-0.183] hits 155 minAir 0.162
+   pistol+ vs marine-flexible-shirt box x[-0.26,0.26] y[0.014,0.51] z[-0.133,0.137] hits 841 minAir 0.235
+   pistol+ vs marine-shadow box x[-0.392,0.39] y[-0.706,0.876] z[-0.32,0.482] hits 725 minAir 0.04
+   pistol+ vs rig-skin box x[-0.243,0.251] y[-0.29,0.021] z[-0.133,0.144] hits 5 minAir 0.285
+   pistol+ vs rig-skin box x[-0.234,0.233] y[-0.642,0.847] z[-0.316,0.187] hits 316 minAir 0.042
+   pistol+ vs rig-skin box x[-0.245,0.252] y[-0.192,0.048] z[-0.15,0.183] hits 221 minAir 0.243
+   pistol+ vs rig-skin box x[-0.166,0.166] y[0.073,0.497] z[-0.315,0.154] hits 242 minAir 0.044
+revolver pos -0.105,0.46,-0.379 gunBox torso x[-0.234,-0.011] y[0.277,0.622] z[-0.423,-0.345]
+   revolver- vs ? box x[-0.311,0.311] y[0.265,0.558] z[-0.13,0.141] hits 66 minAir 0.29
+   revolver- vs ? box x[-0.204,0.204] y[0.097,0.506] z[-0.181,0.189] hits 64 minAir 0.201
+   revolver- vs ? box x[-0.166,0.166] y[0.294,0.496] z[-0.264,0.237] hits 11 minAir 0.228
+   revolver- vs marine-flexible-shirt box x[-0.26,0.26] y[0.014,0.51] z[-0.133,0.137] hits 77 minAir 0.26
+   revolver- vs marine-shadow box x[-0.392,0.39] y[-0.706,0.876] z[-0.32,0.482] hits 249 minAir 0.226
+   revolver- vs rig-skin box x[-0.234,0.233] y[-0.642,0.847] z[-0.316,0.187] hits 187 minAir 0.226
+   revolver- vs rig-skin box x[-0.166,0.166] y[0.073,0.497] z[-0.315,0.154] hits 11 minAir 0.228

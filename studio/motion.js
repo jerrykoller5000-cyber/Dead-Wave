@@ -56,6 +56,26 @@ const DEFAULTS = {
 const isNum = (v) => typeof v === 'number' && Number.isFinite(v);
 const clamp01 = (v) => Math.max(0, Math.min(1, v));
 const smooth = (u) => { u = clamp01(u); return u * u * (3 - 2 * u); };
+// GB-277: the get-up key blend as a pure function, so a host that poses its own joints (the live brute, combat/brute-getup.js)
+// reads the keys exactly as createBody does: which two keys u falls between, and the eased share from the first to the second.
+const _span = { a: null, b: null, v: 0 }, ZERO3 = [0, 0, 0];
+export function getupSpan(keys, u, out = {}) {
+  u = clamp01(u);
+  let k = 0; while (k < keys.length - 2 && u > keys[k + 1].t) k++;
+  const a = keys[k], b = keys[k + 1];
+  out.a = a; out.b = b; out.v = smooth((u - a.t) / (b.t - a.t));
+  return out;
+}
+// One body point's key offset at u of the get-up: [x, y, z] in the rig's local axes, before the rig's scale.
+export function sampleGetupKeys(keys, u, name, out = [0, 0, 0]) {
+  const s = getupSpan(keys, u, _span), p = s.a.pose[name] || ZERO3, q = s.b.pose[name] || ZERO3;
+  out[0] = p[0] + (q[0] - p[0]) * s.v; out[1] = p[1] + (q[1] - p[1]) * s.v; out[2] = p[2] + (q[2] - p[2]) * s.v;
+  return out;
+}
+// A preset with authored get-up keys (GB-274): the muscles come up to full tone by this share of the get-up
+// (the keys, not the tone ramp, carry the rise), and the mesh keeps the simulated pose until GETUP_HAND_OFF,
+// then hands back to the animation over the rest. Presets without keys keep the plain ramps.
+const GETUP_KEYED_TONE = 0.7, GETUP_HAND_OFF = 0.5;
 
 // --- Presets --------------------------------------------------------------------------------
 // Every problem as a sentence, so an agent can fix a preset from the error alone.
@@ -234,6 +254,10 @@ export function createBody(inst, preset, opts = {}) {
   });
   const P = new Float64Array(n * 3), Q = new Float64Array(n * 3);      // now, and a step ago (Verlet)
   const A = new Float64Array(n * 3), A0 = new Float64Array(n * 3);     // the animated pose, and the one before
+  // The standing animation's own points (no get-up keys): what apply() turns the mesh from. A preset with
+  // authored get-up keys moves A (the spring targets) off the animation, and the mesh's joints are still
+  // posed by the animation, so apply() must measure the simulated pose against AB, not A. Without keys AB is A.
+  const AB = getupKeys ? new Float64Array(n * 3) : A;
   const pairs = (list, kind) => (list || []).map((e) => {
     for (const k of e.slice(0, 2)) if (idx[k] === undefined) throw new Error(`body ${kind} [${e.join(', ')}]: no point "${k}"`);
     return { a: idx[e[0]], b: idx[e[1]], lo: e[2] ?? 1, hi: e[3] ?? 1, len: 0 };
@@ -280,15 +304,13 @@ export function createBody(inst, preset, opts = {}) {
       _v.copy(offs[i]).applyMatrix4(joints[i].matrixWorld);
       A[i * 3] = _v.x; A[i * 3 + 1] = _v.y; A[i * 3 + 2] = _v.z;
     }
+    if (AB !== A) AB.set(A);
     // Authored get-up keys bias the animated point targets in the rig's local axes.
     // The physics constraints keep bone lengths and ground contact while the body
     // moves from hands/knees to the zero-offset standing key. Presets without keys
     // keep the original tone-ramp path exactly.
     if (body.state === 'getup' && getupKeys) {
-      const u = clamp01(stateT / preset.getup.time);
-      let k = 0; while (k < getupKeys.length - 2 && u > getupKeys[k + 1].t) k++;
-      const a = getupKeys[k], b = getupKeys[k + 1];
-      const v = smooth((u - a.t) / (b.t - a.t));
+      const sp = getupSpan(getupKeys, stateT / preset.getup.time, _span), a = sp.a, b = sp.b, v = sp.v;   // GB-277: the same blend the live brute reads
       const m = inst.group.matrixWorld.elements;
       for (let i = 0; i < n; i++) {
         const p = a.pose[names[i]] || [0, 0, 0], q = b.pose[names[i]] || [0, 0, 0];
@@ -447,7 +469,10 @@ export function createBody(inst, preset, opts = {}) {
     if (s === 'held') return preset.held.tone[g];
     let v = preset.tone[g];
     if (slump) v *= 1 - (slump.tone[g] || 0) * (1 - smooth(slump.t / slump.dur));
-    if (s === 'getup') v = v * smooth(stateT / preset.getup.time) + preset.fall.tone[g] * (1 - smooth(stateT / preset.getup.time));
+    if (s === 'getup') {
+      const k = smooth(stateT / (preset.getup.time * (getupKeys ? GETUP_KEYED_TONE : 1)));
+      v = v * k + preset.fall.tone[g] * (1 - k);
+    }
     return v;
   };
   const floorAt = (i) => {
@@ -657,7 +682,7 @@ export function createBody(inst, preset, opts = {}) {
     // Weight: in fast on waking, out on recovering, all the way while down or dead.
     const s = body.state;
     if (s === 'react') body.weight = body.recovering ? Math.max(0, 1 - body.recovering / preset.blendOut) : Math.min(1, woke / Math.max(1e-3, preset.blendIn));
-    else if (s === 'getup') body.weight = 1 - smooth(stateT / preset.getup.time);
+    else if (s === 'getup') body.weight = getupKeys ? 1 - smooth((stateT / preset.getup.time - GETUP_HAND_OFF) / (1 - GETUP_HAND_OFF)) : 1 - smooth(stateT / preset.getup.time);
     else if (s === 'held') body.weight = Math.min(1, Math.max(held ? held.w : 1, 0));
     else if (s !== 'animated') body.weight = Math.min(1, Math.max(body.weight, woke / Math.max(1e-3, preset.blendIn)));
     // How far the reaction has moved the body over the ground, for the host to take on as its own
@@ -714,18 +739,18 @@ export function createBody(inst, preset, opts = {}) {
     // The blend is between the points, not the joints' turns: a limb held the opposite way from its
     // animation (a leg hauled up by the ankle) then swings through, instead of a slerp between two
     // opposite turns picking a different way round each frame.
-    if (w >= 1) S.set(P); else for (let i = 0; i < n * 3; i++) S[i] = A[i] + (P[i] - A[i]) * w;
+    if (w >= 1) S.set(P); else for (let i = 0; i < n * 3; i++) S[i] = AB[i] + (P[i] - AB[i]) * w;
     const pm = new THREE.Matrix4(), pq = new THREE.Quaternion(), ps = new THREE.Vector3(), pp = new THREE.Vector3();
     for (const s of segs) {
       const j = s.j;
       s.animW.decompose(_p, _qa, _s);               // the animated world pose of this joint
       if (s.frame) {
-        frameQuat(A, s.frame, idx, _qb);
+        frameQuat(AB, s.frame, idx, _qb);
         frameQuat(S, s.frame, idx, _qc);
         _q.copy(_qc).multiply(_qb.invert()).multiply(_qa);
       } else if (s.aim) {
         const a = s.aimI[0] * 3, b = s.aimI[1] * 3;
-        _x.set(A[b] - A[a], A[b + 1] - A[a + 1], A[b + 2] - A[a + 2]).normalize();
+        _x.set(AB[b] - AB[a], AB[b + 1] - AB[a + 1], AB[b + 2] - AB[a + 2]).normalize();
         _y.set(S[b] - S[a], S[b + 1] - S[a + 1], S[b + 2] - S[a + 2]).normalize();
         // The first frame turns the bone from where the animation has it; after that each frame
         // turns on from where it was written last frame. A bone pointing nearly the opposite way

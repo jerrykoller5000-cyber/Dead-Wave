@@ -1,0 +1,13 @@
+BATCH 3 reds: t128 t129 t140 t141 t143
+Game-test request 456251af-117f-47f9-8e8a-03faa37362c5 queued at position 1. Waiting...
+GRANT grokbot GB-278: starting one game-test command
+check-players: 315 player.position reads, all in the allowed places
+ok    t128    28 pass   0 fail  90.3s
+ok    t129    22 pass   0 fail  40.4s
+ok    t140    17 pass   0 fail  32.8s
+ok    t141     7 pass   0 fail  36.8s
+ok    t143    17 pass   0 fail  67.1s
+
+5 checks: 91 pass, 0 fail
+
+BATCH DONE

@@ -1,0 +1,19 @@
+﻿Game-test request 337aea3f-0f12-45d4-951c-fcadd90b8ac7 queued at position 1. Waiting...
+GRANT grokbot GB-276: starting one game-test command
+PASS the rig carries the pack spots ({"pistol":{"x":0.105,"y":0.87,"z":-0.35,"tilt":-0.08},"revolver":{"x":0.105,"y":0.87,"z":-0.35,"tilt":0}})
+revolver+ per 5cm of torso y: n, hit, max z of points, x range, min air
+  y 0.25 n 54 hit 54 maxz -0.371 x[0.145,0.199] minAir 0.115
+  y 0.30 n 7 hit 7 maxz -0.383 x[0.193,0.197] minAir 0.291
+  y 0.40 n 40 hit 40 maxz -0.369 x[0.15,0.2] minAir 0.209
+  y 0.45 n 225 hit 119 maxz -0.345 x[0.082,0.217] minAir 0.228
+  y 0.50 n 248 hit 58 maxz -0.345 x[0.07,0.222] minAir 0.295
+  y 0.55 n 1082 hit 245 maxz -0.346 x[0.011,0.234] minAir 0.287
+  y 0.60 n 272 hit 193 maxz -0.359 x[0.013,0.226] minAir 0.282
+revolver- per 5cm of torso y: n, hit, max z of points, x range, min air
+  y 0.25 n 54 hit 54 maxz -0.371 x[-0.199,-0.145] minAir 0.201
+  y 0.30 n 7 hit 7 maxz -0.383 x[-0.197,-0.193] minAir 0.292
+  y 0.40 n 40 hit 40 maxz -0.369 x[-0.2,-0.15] minAir 0.21
+  y 0.45 n 225 hit 115 maxz -0.345 x[-0.217,-0.082] minAir 0.228
+  y 0.50 n 248 hit 55 maxz -0.345 x[-0.222,-0.07] minAir 0.295
+  y 0.55 n 1082 hit 273 maxz -0.348 x[-0.234,-0.011] minAir 0.286
+  y 0.60 n 272 hit 191 maxz -0.359 x[-0.226,-0.013] minAir 0.28

@@ -23,7 +23,7 @@
     await startMatch(T, 'Sights steady');
     T.clearZombies && T.clearZombies(); T.skipGrace && T.skipGrace(); T.runDevCommand('godmode');
     const THREE = T.THREE, cam = T.camera, P = T.player.position, F = () => T.fpDbg();
-    const sightSpec = (await import('./game/sight-points.js')).SIGHT.m4;
+    const sightSpec = (await import(new URL('/game/sight-points.js', location.origin).href)).SIGHT.m4;   // CU-239: from the repo root, so the test page (tools/tests/) finds it too
     const viewSight = () => {
       const vm = T.viewmodelDbg && T.viewmodelDbg();
       if (!vm || !vm.showing('m4')) return null;

@@ -1,0 +1,10 @@
+import { execFileSync } from 'node:child_process';
+import fs from 'node:fs';
+const A = ['--agent', 'grokbot', '--task', 'GB-275'];
+const cam = (...a) => execFileSync(process.execPath, ['tools/camera.mjs', ...a, ...A], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'inherit'] });
+cam('start', '--match');
+cam('eval', "T.setHp(100000); T.clearZombies&&T.clearZombies(); T.grantAllWeapons(); window.dispatchEvent(new KeyboardEvent('keydown',{code:'F13',key:'F13',bubbles:true})); return 'ok'");
+const body = fs.readFileSync('qa/2026-11-03-GB-275/scan-body.js', 'utf8');
+const out = cam('eval', body);
+console.log(out);
+cam('stop');

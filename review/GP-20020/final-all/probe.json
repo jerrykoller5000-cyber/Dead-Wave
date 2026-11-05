@@ -1,0 +1,849 @@
+{
+  "backend": "WebGPU",
+  "guns": {
+    "pistol-hip": {
+      "weapon": "pistol",
+      "fp": {
+        "first": true,
+        "w": 1,
+        "ads": 0
+      },
+      "vm": {
+        "active": true,
+        "key": "pistol",
+        "raise": 1
+      },
+      "backend": "WebGPU",
+      "muzzle": {
+        "x": 0.23411733745512026,
+        "y": -0.18655323053400516,
+        "d": 0.6711836606104846
+      },
+      "wristR": {
+        "x": 0.5133494720964937,
+        "y": -0.549418067002393,
+        "d": 0.4389546280132298
+      },
+      "wristL": {
+        "x": 0.2137992006695534,
+        "y": -0.676673441931453,
+        "d": 0.4521841791957515
+      },
+      "teeth": [],
+      "errors": []
+    },
+    "pistol-ads": {
+      "weapon": "pistol",
+      "fp": {
+        "first": true,
+        "w": 1,
+        "ads": 1
+      },
+      "vm": {
+        "active": true,
+        "key": "pistol",
+        "raise": 1
+      },
+      "backend": "WebGPU",
+      "muzzle": {
+        "x": -1.266330316166565e-24,
+        "y": -0.07871838422664576,
+        "d": 0.6632043619489532
+      },
+      "wristR": {
+        "x": 0.16291290409500142,
+        "y": -0.43471808630096864,
+        "d": 0.4413947831283145
+      },
+      "wristL": {
+        "x": -0.18242041943182113,
+        "y": -0.5335707686119717,
+        "d": 0.4382751388479951
+      },
+      "teeth": [],
+      "errors": []
+    },
+    "revolver-hip": {
+      "weapon": "revolver",
+      "fp": {
+        "first": true,
+        "w": 1,
+        "ads": 0
+      },
+      "vm": {
+        "active": true,
+        "key": "revolver",
+        "raise": 1
+      },
+      "backend": "WebGPU",
+      "muzzle": {
+        "x": 0.15795783404862349,
+        "y": -0.14594169025883516,
+        "d": 0.7808274926021812
+      },
+      "wristR": {
+        "x": 0.5454142791634864,
+        "y": -0.6815316216147724,
+        "d": 0.4617022406100053
+      },
+      "wristL": {
+        "x": 0.24778070833185914,
+        "y": -0.7704873426538743,
+        "d": 0.49470345890261835
+      },
+      "teeth": [],
+      "errors": []
+    },
+    "revolver-ads": {
+      "weapon": "revolver",
+      "fp": {
+        "first": true,
+        "w": 1,
+        "ads": 1
+      },
+      "vm": {
+        "active": true,
+        "key": "revolver",
+        "raise": 1
+      },
+      "backend": "WebGPU",
+      "muzzle": {
+        "x": -4.385838603384331e-24,
+        "y": -0.07943137462772501,
+        "d": 0.7396965256414031
+      },
+      "wristR": {
+        "x": 0.16815207353814388,
+        "y": -0.6486365728174299,
+        "d": 0.42764443625395016
+      },
+      "wristL": {
+        "x": -0.18375735463908638,
+        "y": -0.72118326780919,
+        "d": 0.4461498331224431
+      },
+      "teeth": [],
+      "errors": []
+    },
+    "revolver-reload-out": {
+      "weapon": "revolver",
+      "active": true,
+      "first": true,
+      "reloadU": 0.21999999999999997,
+      "handPlace": "ejector"
+    },
+    "revolver-reload-in": {
+      "weapon": "revolver",
+      "active": true,
+      "first": true,
+      "reloadU": 0.58,
+      "handPlace": "loader"
+    },
+    "revolver-reload-home": {
+      "weapon": "revolver",
+      "active": true,
+      "first": true,
+      "reloadU": 0.82,
+      "handPlace": "part"
+    },
+    "uzi-hip": {
+      "weapon": "uzi",
+      "fp": {
+        "first": true,
+        "w": 1,
+        "ads": 0
+      },
+      "vm": {
+        "active": true,
+        "key": "uzi",
+        "raise": 1
+      },
+      "backend": "WebGPU",
+      "muzzle": {
+        "x": 0.23113978163593574,
+        "y": -0.2634945194725295,
+        "d": 0.6669614441072136
+      },
+      "wristR": {
+        "x": 0.562685320403063,
+        "y": -0.8130870516626809,
+        "d": 0.38640314857588864
+      },
+      "wristL": {
+        "x": 0.21368613401200745,
+        "y": -0.76525290333158,
+        "d": 0.4330044294922914
+      },
+      "teeth": [],
+      "errors": []
+    },
+    "uzi-ads": {
+      "weapon": "uzi",
+      "fp": {
+        "first": true,
+        "w": 1,
+        "ads": 1
+      },
+      "vm": {
+        "active": true,
+        "key": "uzi",
+        "raise": 1
+      },
+      "backend": "WebGPU",
+      "muzzle": {
+        "x": 3.0096648591214037e-63,
+        "y": -0.12218894455910391,
+        "d": 0.8165948393245983
+      },
+      "wristR": {
+        "x": 0.13130522276473952,
+        "y": -0.40603492041373007,
+        "d": 0.5306856732704772
+      },
+      "wristL": {
+        "x": -0.12455630140365417,
+        "y": -0.4654098336716066,
+        "d": 0.5867356057477812
+      },
+      "teeth": [],
+      "errors": []
+    },
+    "m4-hip": {
+      "weapon": "m4",
+      "fp": {
+        "first": true,
+        "w": 1,
+        "ads": 0
+      },
+      "vm": {
+        "active": true,
+        "key": "m4",
+        "raise": 1
+      },
+      "backend": "WebGPU",
+      "muzzle": {
+        "x": 0.2104004451302519,
+        "y": -0.15711783085501554,
+        "d": 1.106029095070319
+      },
+      "wristR": {
+        "x": 0.6274625497997629,
+        "y": -1.0182346717868942,
+        "d": 0.3669825926877508
+      },
+      "wristL": {
+        "x": 0.24571735296050942,
+        "y": -0.4727402540950132,
+        "d": 0.686410714163971
+      },
+      "teeth": [],
+      "errors": []
+    },
+    "m4-ads": {
+      "weapon": "m4",
+      "fp": {
+        "first": true,
+        "w": 1,
+        "ads": 1
+      },
+      "vm": {
+        "active": true,
+        "key": "m4",
+        "raise": 1
+      },
+      "backend": "WebGPU",
+      "muzzle": {
+        "x": -1.5681298165899947e-24,
+        "y": -0.11769014456773143,
+        "d": 1.281505130006965
+      },
+      "wristR": {
+        "x": 0.11868968831769369,
+        "y": -0.5622908882070865,
+        "d": 0.5400109483036774
+      },
+      "wristL": {
+        "x": -0.04740163814365039,
+        "y": -0.33803020356664165,
+        "d": 0.8565968219491822
+      },
+      "teeth": [],
+      "errors": []
+    },
+    "ak-hip": {
+      "weapon": "ak",
+      "fp": {
+        "first": true,
+        "w": 1,
+        "ads": 0
+      },
+      "vm": {
+        "active": true,
+        "key": "ak",
+        "raise": 1
+      },
+      "backend": "WebGPU",
+      "muzzle": {
+        "x": 0.2045067454382722,
+        "y": -0.1393157744160942,
+        "d": 1.1583103415170937
+      },
+      "wristR": {
+        "x": 0.6271234241373489,
+        "y": -1.027053683647978,
+        "d": 0.3663458797152478
+      },
+      "wristL": {
+        "x": 0.2401827654810648,
+        "y": -0.44360033085389733,
+        "d": 0.7121889207902129
+      },
+      "teeth": [],
+      "errors": []
+    },
+    "ak-ads": {
+      "weapon": "ak",
+      "fp": {
+        "first": true,
+        "w": 1,
+        "ads": 1
+      },
+      "vm": {
+        "active": true,
+        "key": "ak",
+        "raise": 1
+      },
+      "backend": "WebGPU",
+      "muzzle": {
+        "x": -3.003989441788985e-26,
+        "y": -0.09140563345330904,
+        "d": 1.400146393442575
+      },
+      "wristR": {
+        "x": 0.10533209881025737,
+        "y": -0.458332957052088,
+        "d": 0.6044004680009119
+      },
+      "wristL": {
+        "x": -0.04256876363392013,
+        "y": -0.27531637366859135,
+        "d": 0.9489435450067216
+      },
+      "teeth": [],
+      "errors": []
+    },
+    "shotgun-hip": {
+      "weapon": "shotgun",
+      "fp": {
+        "first": true,
+        "w": 1,
+        "ads": 0
+      },
+      "vm": {
+        "active": true,
+        "key": "shotgun",
+        "raise": 1
+      },
+      "backend": "WebGPU",
+      "muzzle": {
+        "x": 0.21603038985507825,
+        "y": -0.11839603644229306,
+        "d": 1.2046757473179308
+      },
+      "wristR": {
+        "x": 0.6247340718455816,
+        "y": -0.9450637463160804,
+        "d": 0.3636397294058543
+      },
+      "wristL": {
+        "x": 0.22811502158088023,
+        "y": -0.5147418287432443,
+        "d": 0.6600326886025193
+      },
+      "teeth": [],
+      "errors": []
+    },
+    "shotgun-ads": {
+      "weapon": "shotgun",
+      "fp": {
+        "first": true,
+        "w": 1,
+        "ads": 1
+      },
+      "vm": {
+        "active": true,
+        "key": "shotgun",
+        "raise": 1
+      },
+      "backend": "WebGPU",
+      "muzzle": {
+        "x": 3.0289004483097684e-28,
+        "y": -0.058861952916161864,
+        "d": 1.3190764032639373
+      },
+      "wristR": {
+        "x": 0.13376736775939269,
+        "y": -0.5880832517928315,
+        "d": 0.47687130745852835
+      },
+      "wristL": {
+        "x": -0.07956712696678488,
+        "y": -0.35076781721511546,
+        "d": 0.767835667032463
+      },
+      "teeth": [],
+      "errors": []
+    },
+    "aa12-hip": {
+      "weapon": "aa12",
+      "fp": {
+        "first": true,
+        "w": 1,
+        "ads": 0
+      },
+      "vm": {
+        "active": true,
+        "key": "aa12",
+        "raise": 1
+      },
+      "backend": "WebGPU",
+      "muzzle": {
+        "x": 0.2263614610569952,
+        "y": -0.1191723251219425,
+        "d": 1.1752665131749644
+      },
+      "wristR": {
+        "x": 0.651907255350626,
+        "y": -0.9834709264387576,
+        "d": 0.3655523726037314
+      },
+      "wristL": {
+        "x": 0.24727353862986926,
+        "y": -0.42887464657329144,
+        "d": 0.7524783173010873
+      },
+      "teeth": [],
+      "errors": []
+    },
+    "aa12-ads": {
+      "weapon": "aa12",
+      "fp": {
+        "first": true,
+        "w": 1,
+        "ads": 1
+      },
+      "vm": {
+        "active": true,
+        "key": "aa12",
+        "raise": 1
+      },
+      "backend": "WebGPU",
+      "muzzle": {
+        "x": 1.753817870975608e-28,
+        "y": -0.16750633279185792,
+        "d": 1.2723659019697662
+      },
+      "wristR": {
+        "x": 0.1402240585812941,
+        "y": -0.9191229338547486,
+        "d": 0.4598340123159117
+      },
+      "wristL": {
+        "x": -0.04884393360613054,
+        "y": -0.4639874613029858,
+        "d": 0.8402370350762274
+      },
+      "teeth": [],
+      "errors": []
+    },
+    "sniper-hip": {
+      "weapon": "sniper",
+      "fp": {
+        "first": true,
+        "w": 1,
+        "ads": 0
+      },
+      "vm": {
+        "active": true,
+        "key": "sniper",
+        "raise": 1
+      },
+      "backend": "WebGPU",
+      "muzzle": {
+        "x": 0.1297522516288991,
+        "y": -0.18564399820241262,
+        "d": 1.5143563758913932
+      },
+      "wristR": {
+        "x": 0.5004642428557856,
+        "y": -0.8882861900366076,
+        "d": 0.5228426424681287
+      },
+      "wristL": {
+        "x": 0.18580352275824608,
+        "y": -0.5214426784411992,
+        "d": 0.8810795990840983
+      },
+      "teeth": [],
+      "errors": []
+    },
+    "sniper-ads": {
+      "weapon": "sniper",
+      "fp": {
+        "first": true,
+        "w": 1,
+        "ads": 1
+      },
+      "vm": {
+        "active": true,
+        "key": "sniper",
+        "raise": 1
+      },
+      "backend": "WebGPU",
+      "muzzle": {
+        "x": -1.1513446976683394e-17,
+        "y": -0.1170499271778973,
+        "d": 1.197113218628998
+      },
+      "wristR": {
+        "x": 0.31605137350657164,
+        "y": -1.5185368683370437,
+        "d": 0.20089243082837263
+      },
+      "wristL": {
+        "x": -0.07167678207343774,
+        "y": -0.5476375067093213,
+        "d": 0.5613038740946933
+      },
+      "teeth": [],
+      "errors": []
+    },
+    "chainsaw-hip": {
+      "weapon": "chainsaw",
+      "fp": {
+        "first": true,
+        "w": 1,
+        "ads": 0
+      },
+      "vm": {
+        "active": true,
+        "key": "chainsaw",
+        "raise": 1
+      },
+      "backend": "WebGPU",
+      "muzzle": {
+        "x": 2.319479678984437e-15,
+        "y": 0.10426081662281626,
+        "d": 1.379164791244235
+      },
+      "wristR": {
+        "x": 0.08599254319001126,
+        "y": -0.869697318600006,
+        "d": 0.6483310190558428
+      },
+      "wristL": {
+        "x": -0.05375265460347347,
+        "y": -0.23307859287350263,
+        "d": 0.7316165273445338
+      },
+      "teeth": [
+        {
+          "name": "",
+          "count": 22,
+          "sourceCount": 22
+        }
+      ],
+      "errors": []
+    },
+    "chainsaw-ads": {
+      "weapon": "chainsaw",
+      "fp": {
+        "first": true,
+        "w": 1,
+        "ads": 1
+      },
+      "vm": {
+        "active": true,
+        "key": "chainsaw",
+        "raise": 1
+      },
+      "backend": "WebGPU",
+      "muzzle": {
+        "x": 2.6274408904774e-29,
+        "y": -0.1882763630308885,
+        "d": 1.7605438711239496
+      },
+      "wristR": {
+        "x": 0.06616377028928919,
+        "y": -0.5546155399166423,
+        "d": 0.9256421731870909
+      },
+      "wristL": {
+        "x": -0.04114112234942593,
+        "y": -0.15620991638234244,
+        "d": 1.099689256535795
+      },
+      "teeth": [
+        {
+          "name": "",
+          "count": 22,
+          "sourceCount": 22
+        }
+      ],
+      "errors": []
+    },
+    "chainsaw-moving-teeth": {
+      "mirrored": true
+    },
+    "flamer-hip": {
+      "weapon": "flamer",
+      "fp": {
+        "first": true,
+        "w": 1,
+        "ads": 0
+      },
+      "vm": {
+        "active": true,
+        "key": "flamer",
+        "raise": 1
+      },
+      "backend": "WebGPU",
+      "muzzle": {
+        "x": 0.18784290614901833,
+        "y": -0.11821324796040932,
+        "d": 1.1808940387163798
+      },
+      "wristR": {
+        "x": 0.5769911089054287,
+        "y": -0.9146566565491269,
+        "d": 0.41188469021296914
+      },
+      "wristL": {
+        "x": 0.18380441453925167,
+        "y": -0.4421471404957195,
+        "d": 0.7383431713622484
+      },
+      "teeth": [],
+      "errors": []
+    },
+    "flamer-ads": {
+      "weapon": "flamer",
+      "fp": {
+        "first": true,
+        "w": 1,
+        "ads": 1
+      },
+      "vm": {
+        "active": true,
+        "key": "flamer",
+        "raise": 1
+      },
+      "backend": "WebGPU",
+      "muzzle": {
+        "x": 9.828547130534627e-29,
+        "y": -0.1139831944499804,
+        "d": 1.4434919637415173
+      },
+      "wristR": {
+        "x": 0.10299477995895379,
+        "y": -0.5683542881177093,
+        "d": 0.6755125262483493
+      },
+      "wristL": {
+        "x": -0.06545563646016297,
+        "y": -0.3635032815385762,
+        "d": 0.9957940789040154
+      },
+      "teeth": [],
+      "errors": []
+    },
+    "flamer-reload-out": {
+      "weapon": "flamer",
+      "active": true,
+      "first": true,
+      "reloadU": 0.21999999999999997,
+      "handPlace": "tank"
+    },
+    "flamer-reload-in": {
+      "weapon": "flamer",
+      "active": true,
+      "first": true,
+      "reloadU": 0.58,
+      "handPlace": "pouch"
+    },
+    "flamer-reload-home": {
+      "weapon": "flamer",
+      "active": true,
+      "first": true,
+      "reloadU": 0.82,
+      "handPlace": "tank"
+    },
+    "launcher-hip": {
+      "weapon": "launcher",
+      "fp": {
+        "first": true,
+        "w": 1,
+        "ads": 0
+      },
+      "vm": {
+        "active": true,
+        "key": "launcher",
+        "raise": 1
+      },
+      "backend": "WebGPU",
+      "muzzle": {
+        "x": 0.18200070668575768,
+        "y": -0.16562228044655214,
+        "d": 1.0811890876500267
+      },
+      "wristR": {
+        "x": 0.5004870167930239,
+        "y": -0.6617008135157975,
+        "d": 0.5201930186123384
+      },
+      "wristL": {
+        "x": 0.17419451899524407,
+        "y": -0.45381172011364057,
+        "d": 0.8715967434693515
+      },
+      "teeth": [],
+      "errors": []
+    },
+    "launcher-ads": {
+      "weapon": "launcher",
+      "fp": {
+        "first": true,
+        "w": 1,
+        "ads": 1
+      },
+      "vm": {
+        "active": true,
+        "key": "launcher",
+        "raise": 1
+      },
+      "backend": "WebGPU",
+      "muzzle": {
+        "x": 3.299616250269588e-71,
+        "y": -0.1069605605113032,
+        "d": 1.2419761686525195
+      },
+      "wristR": {
+        "x": 0.09449485754068782,
+        "y": -0.43269361556998054,
+        "d": 0.6778631239354098
+      },
+      "wristL": {
+        "x": -0.06033731026916602,
+        "y": -0.34640372355564564,
+        "d": 1.0278285948196184
+      },
+      "teeth": [],
+      "errors": []
+    },
+    "launcher-reload-out": {
+      "weapon": "launcher",
+      "active": true,
+      "first": true,
+      "reloadU": 0.21999999999999986,
+      "handPlace": "pouch"
+    },
+    "launcher-reload-in": {
+      "weapon": "launcher",
+      "active": true,
+      "first": true,
+      "reloadU": 0.5799999999999998,
+      "handPlace": "drum"
+    },
+    "launcher-reload-home": {
+      "weapon": "launcher",
+      "active": true,
+      "first": true,
+      "reloadU": 0.82,
+      "handPlace": "drum"
+    },
+    "minigun-hip": {
+      "weapon": "minigun",
+      "fp": {
+        "first": true,
+        "w": 1,
+        "ads": 0
+      },
+      "vm": {
+        "active": true,
+        "key": "minigun",
+        "raise": 1
+      },
+      "backend": "WebGPU",
+      "muzzle": {
+        "x": 0.0017843458345760768,
+        "y": -0.3792054531254887,
+        "d": 1.7479452450376116
+      },
+      "wristR": {
+        "x": 0.41687226395889176,
+        "y": -0.5970555125273441,
+        "d": 0.7119058981626516
+      },
+      "wristL": {
+        "x": 0.018034209562481893,
+        "y": -0.8074319480201725,
+        "d": 0.8295929102020448
+      },
+      "teeth": [],
+      "errors": []
+    },
+    "minigun-ads": {
+      "weapon": "minigun",
+      "fp": {
+        "first": true,
+        "w": 1,
+        "ads": 1
+      },
+      "vm": {
+        "active": true,
+        "key": "minigun",
+        "raise": 1
+      },
+      "backend": "WebGPU",
+      "muzzle": {
+        "x": -7.574132566021022e-110,
+        "y": -0.29796219719712524,
+        "d": 1.9127999999998238
+      },
+      "wristR": {
+        "x": 0.03067178314853447,
+        "y": -0.32341160112402506,
+        "d": 0.843903656230951
+      },
+      "wristL": {
+        "x": -0.22472660984394652,
+        "y": -0.5877548065392212,
+        "d": 1.036538719964399
+      },
+      "teeth": [],
+      "errors": []
+    },
+    "minigun-reload-out": {
+      "weapon": "minigun",
+      "active": true,
+      "first": true,
+      "reloadU": 0.21999999999999997,
+      "handPlace": "box"
+    },
+    "minigun-reload-in": {
+      "weapon": "minigun",
+      "active": true,
+      "first": true,
+      "reloadU": 0.58,
+      "handPlace": "box"
+    },
+    "minigun-reload-home": {
+      "weapon": "minigun",
+      "active": true,
+      "first": true,
+      "reloadU": 0.82,
+      "handPlace": "box"
+    }
+  },
+  "problems": []
+}

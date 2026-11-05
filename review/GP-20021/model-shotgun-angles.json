@@ -1,0 +1,10 @@
+[
+  {"target":"weapon:shotgun","view":"three","time":"noon","out":"review/GP-20021/model-shotgun-three-noon.png"},
+  {"target":"weapon:shotgun","view":"rear3","time":"noon","out":"review/GP-20021/model-shotgun-rear-noon.png"},
+  {"target":"weapon:shotgun","view":"three","time":0.42,"out":"review/GP-20021/model-shotgun-three-overcast.png"},
+  {"target":"weapon:shotgun","view":"rear3","time":0.42,"out":"review/GP-20021/model-shotgun-rear-overcast.png"},
+  {"target":"weapon:shotgun","view":"three","time":"dusk","out":"review/GP-20021/model-shotgun-three-dusk.png"},
+  {"target":"weapon:shotgun","view":"rear3","time":"dusk","out":"review/GP-20021/model-shotgun-rear-dusk.png"},
+  {"target":"weapon:shotgun","view":"three","time":"night","out":"review/GP-20021/model-shotgun-three-night.png"},
+  {"target":"weapon:shotgun","view":"rear3","time":"night","out":"review/GP-20021/model-shotgun-rear-night.png"}
+]

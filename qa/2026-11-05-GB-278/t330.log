@@ -1,0 +1,16 @@
+GRANT grokbot GB-278: starting one game-test command
+ok    t330     17 pass   0 fail  36.7s  (real renderer)
+node:fs:439
+    return binding.readFileUtf8(path, stringToFlags(options.flag));
+                   ^
+
+Error: ENOENT: no such file or directory, open 'C:\Users\Zero\Desktop\Tiny Trek\tools\tests\1.js'
+    at Object.readFileSync (node:fs:439:20)
+    at file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/realtest.mjs:20:19 {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\Zero\\Desktop\\Tiny Trek\\tools\\tests\\1.js'
+}
+
+Node.js v24.13.0

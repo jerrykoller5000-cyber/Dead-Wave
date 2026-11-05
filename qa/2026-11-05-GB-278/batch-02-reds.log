@@ -1,0 +1,12 @@
+BATCH 2 reds: t107 t115 t116 t126 t127
+GRANT grokbot GB-278: starting one game-test command
+check-players: 315 player.position reads, all in the allowed places
+ok    t107     8 pass   0 fail  38.5s
+ok    t115    10 pass   0 fail  34.8s
+ok    t116     7 pass   0 fail  42.9s
+ok    t126    12 pass   0 fail  41.6s
+ok    t127    28 pass   0 fail  87.9s
+
+5 checks: 65 pass, 0 fail
+
+BATCH DONE

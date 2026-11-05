@@ -1,0 +1,11 @@
+--- Running t298 on WORKING_TREE (test) ---
+WORKING_TREE (test): lateC = 0.0019450814770947055 lateAt = 164 worstC = 0.004717700725284524 at = 0
+--- Running t298 on WORKING_TREE (real) ---
+WORKING_TREE (real): lateC = 0.00900392073317869 lateAt = 159 worstC = 0.00900392073317869 at = 159
+--- Running t298 on 5adede46 (test) ---
+5adede46 (test): lateC =  lateAt =  worstC =  at = 
+--- Running t298 on 5adede46 (real) ---
+5adede46 (real): lateC =  lateAt =  worstC =  at = 
+--- 5adede46 is GREEN! Testing one changed file at a time from WORKING_TREE ---
+File index.html: (test) lateC=undefined at=undefined
+File game/viewmodel.js: (test) lateC=undefined at=undefined

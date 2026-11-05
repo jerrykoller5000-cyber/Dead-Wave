@@ -290,17 +290,25 @@
       ok(nHipS.x > 0 && nHipS.y < 0 && nHipS.d > 0.2, label + ': at the hip the grip is low and to the right (ndc ' + nHipS.x.toFixed(2) + ', ' + nHipS.y.toFixed(2) + ')');
       T.setZoomHeldDbg(true);
       let sawSight = null, sawAds = 0;
+      const sawList = [];   // (ads, ndc) samples below the scope's 0.82: the check reads them at one ADS (0.80), not at whatever the last frame step gave (ChatGPT, 3 Nov: .76 one run, .81 the next)
       const tAds = Date.now();
       while (Date.now() - tAds < 5000) {
         const ads = T.fpDbg().ads || 0;
-        if (key === 'sniper' && ads > sawAds && ads < 0.82) { sawAds = ads; sawSight = vm.ndc(gunAt(rear)); }
+        if (key === 'sniper' && ads > sawAds && ads < 0.82) { sawAds = ads; sawSight = vm.ndc(gunAt(rear)); sawList.push({ a: ads, x: sawSight.x, y: sawSight.y }); }
         if (ads > 0.99) break;
         await wait(30);
       }
       if (key === 'sniper') {
         ok(!vm.root.visible, label + ': full scope hides the view gun');
-        ok(!!sawSight && Math.abs(sawSight.x) < 0.12 && Math.abs(sawSight.y) < 0.12,
-          label + ': the scope axis was on the view just before it hides (ads ' + sawAds.toFixed(2) + ', ndc ' + (sawSight ? sawSight.x.toFixed(3) + ', ' + sawSight.y.toFixed(3) : 'missed') + ')');
+        // at ADS 0.80 from the two samples nearest it (in between, or on from the last two)
+        let at80 = sawSight ? { x: sawSight.x, y: sawSight.y } : null;
+        if (sawList.length >= 2) {
+          const L = sawList.slice().sort((p, q) => Math.abs(p.a - 0.8) - Math.abs(q.a - 0.8)).slice(0, 2).sort((p, q) => p.a - q.a);
+          const da = L[1].a - L[0].a;
+          if (da > 1e-3) { const k = (0.8 - L[0].a) / da; at80 = { x: L[0].x + (L[1].x - L[0].x) * k, y: L[0].y + (L[1].y - L[0].y) * k }; }
+        }
+        ok(!!at80 && Math.abs(at80.x) < 0.12 && Math.abs(at80.y) < 0.12,
+          label + ': the scope axis was on the view just before it hides (at ads 0.80 from ' + sawList.length + ' samples up to ' + sawAds.toFixed(2) + ', ndc ' + (at80 ? at80.x.toFixed(3) + ', ' + at80.y.toFixed(3) : 'missed') + ')');
       } else {
         ok((T.fpDbg().ads || 0) > 0.99, label + ': down the sights');
         await wait(400);

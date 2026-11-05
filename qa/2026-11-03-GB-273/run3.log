@@ -1,0 +1,248 @@
+GRANT grokbot GB-273: starting one game-test command
+
+=== node --test game/wall-cull.test.mjs
+✔ the band becomes straight segments of at most 6 m, none across the gap (0.7627ms)
+✔ behind the wall: hidden on the second read, not the first (0.7019ms)
+✔ through the gap: shown (0.2258ms)
+✔ at the wall foot on the near side: never hidden (0.1811ms)
+✔ a tall thing seen over the wall is shown (0.5144ms)
+✔ one seen read shows it again (walking round the end) (0.1596ms)
+✔ far cells round-robin within the budget, re-tested when the eye moves (1.7133ms)
+✔ an empty wall list hides nothing (0.1964ms)
+✔ a wide, low prop: the cell top is the draw own top, not the sphere top (AG-222) (0.2562ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 86.801
+=== exit 0
+
+=== node tools/realtest.mjs tgb273
+ok    tgb273    5 pass   0 fail  40.0s  (real renderer)
+    INFO wall test 0.057 ms a frame (avg of 240)
+1 checks: 5 pass, 0 fail (real renderer)
+=== exit 0
+
+=== node tools/tests/run-all.mjs tgb273 t215 t95 t329 t80 --jobs 1 --all-fails
+check-players: 315 player.position reads, all in the allowed places
+           INFO wall test 0.084 ms a frame (avg of 240)
+ok    tgb273   5 pass   0 fail  58.0s
+ok    t80     14 pass   0 fail  153.2s
+ok    t95      9 pass   0 fail  57.9s
+ok    t215     4 pass   0 fail  41.1s
+ok    t329    10 pass   0 fail  22.9s
+
+5 checks: 42 pass, 0 fail
+=== exit 0
+
+=== node tools/smoke-real.mjs
+training: title up in 18.3 s, WebGPURenderer
+training: in the room (room built), 0 called in, frames still running: true
+training: page errors none
+match: title up in 21.3 s, WebGPURenderer
+match: in prep, past the insertion
+night: phase wave, lockdown true, zombies 8
+match: page errors none
+=== exit 0
+
+=== node qa/2026-11-03-GB-273/run-probe.mjs
+[AG-222] Verifying ?wallcull=0 URL flag...
+[AG-222] ?wallcull=0 check: { wallCullDbg: null, stoneWalls: true }
+[AG-222] Loading default index.html (stone walls + wallCull ON)...
+[AG-222] Starting match from Jerry launcher and warming up sceneCull spheres across the map...
+[AG-222] Warmup complete: {
+  cullDbg: {
+    hidden: 212,
+    tested: 352,
+    spheres: 0,
+    ms: 0.3999999761581421,
+    wallMs: 0,
+    on: true
+  },
+  wallCullDbg: { cells: 150, hidden: 3, tested: 0, segments: 139, ms: 0 }
+}
+[AG-222] Running Part 1: 5-Seat A/B Audit & 1080p Captures...
+[AG-222] seat1_hq_north_ring: behindBandDraws 178 -> 100 (-78, -43.8% | target >=66.7%: false) | rendererCalls: 18906 -> 19086 | pxDiff>8: 0.1433%
+[AG-222] seat2_hq_west_ring: behindBandDraws 107 -> 78 (-29, -27.1% | target >=66.7%: false) | rendererCalls: 19702 -> 19882 | pxDiff>8: 0.0801%
+[AG-222] seat3_quarter_nw: behindBandDraws 112 -> 90 (-22, -19.6% | target >=66.7%: false) | rendererCalls: 20498 -> 20678 | pxDiff>8: 0.1423%
+[AG-222] seat4_quarter_ne: behindBandDraws 88 -> 87 (-1, -1.1% | target >=66.7%: false) | rendererCalls: 21294 -> 21474 | pxDiff>8: 0.102%
+[AG-222] seat5_quarter_sw: behindBandDraws 64 -> 64 (-0, -0% | target >=66.7%: false) | rendererCalls: 22090 -> 22270 | pxDiff>8: 0.0237%
+[AG-222] Discovering exact gap coordinates on hq-thicket and quarter bands for gap walks...
+[AG-222] Main bands: [
+  {
+    kind: 'hq-thicket',
+    width: 4,
+    pts: [
+      [Object], [Object], [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object],
+      ... 373 more items
+    ],
+    radius: 60,
+    gaps: [
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object],
+      [Object]
+    ],
+    solids: 374
+  },
+  {
+    kind: 'quarter-ne',
+    width: 5,
+    pts: [ [Object], [Object], [Object], [Object], [Object] ],
+    gaps: [ [Object], [Object] ],
+    solids: 168
+  },
+  {
+    kind: 'quarter-nw',
+    width: 5,
+    pts: [ [Object], [Object], [Object], [Object], [Object], [Object] ],
+    gaps: [ [Object], [Object] ],
+    solids: 146
+  },
+  {
+    kind: 'quarter-sw',
+    width: 5,
+    pts: [ [Object], [Object], [Object], [Object], [Object] ],
+    gaps: [ [Object], [Object] ],
+    solids: 158
+  },
+  {
+    kind: 'quarter-se',
+    width: 5,
+    pts: [ [Object], [Object] ],
+    gaps: [ [Object] ],
+    solids: 7
+  }
+]
+[AG-222] Discovered gap centers: {
+  ringGaps: [
+    {
+      ang: 0.0611,
+      widthM: 3.67,
+      x: 59.89,
+      z: 3.66,
+      nx: 0.9981,
+      nz: 0.061
+    },
+    {
+      ang: 0.1571,
+      widthM: 3.67,
+      x: 59.26,
+      z: 9.39,
+      nx: 0.9877,
+      nz: 0.1564
+    },
+    {
+      ang: 0.9163,
+      widthM: 9.95,
+      x: 36.53,
+      z: 47.6,
+      nx: 0.6088,
+      nz: 0.7934
+    },
+    {
+      ang: 1.6493,
+      widthM: 7.85,
+      x: -4.71,
+      z: 59.82,
+      nx: -0.0785,
+      nz: 0.9969
+    },
+    {
+      ang: 1.885,
+      widthM: 16.23,
+      x: -18.54,
+      z: 57.06,
+      nx: -0.309,
+      nz: 0.9511
+    },
+    {
+      ang: 3.4296,
+      widthM: 8.9,
+      x: -57.53,
+      z: -17.04,
+      nx: -0.9588,
+      nz: -0.284
+    },
+    {
+      ang: 3.6565,
+      widthM: 7.85,
+      x: -52.22,
+      z: -29.55,
+      nx: -0.8704,
+      nz: -0.4924
+    },
+    {
+      ang: 4.8171,
+      widthM: 10.47,
+      x: 6.27,
+      z: -59.67,
+      nx: 0.1045,
+      nz: -0.9945
+    },
+    {
+      ang: 5.6461,
+      widthM: 9.42,
+      x: 48.23,
+      z: -35.69,
+      nx: 0.8039,
+      nz: -0.5948
+    }
+  ],
+  hqNorth: {
+    ang: 1.6493,
+    widthM: 7.85,
+    x: -4.71,
+    z: 59.82,
+    nx: -0.0785,
+    nz: 0.9969
+  },
+  hqWest: {
+    ang: 0.0611,
+    widthM: 3.67,
+    x: 59.89,
+    z: 3.66,
+    nx: 0.9981,
+    nz: 0.061
+  },
+  quarterNw: { x: 95.51, z: 60.52, nx: 0.918, nz: -0.397 },
+  quarterNe: { x: -40.53, z: 122.37, nx: -0.614, nz: 0.789 }
+}
+[AG-222] Running walk1_hq_ring_arc (Walk 1: Along HQ Stone Ring (North-to-West Arc))...
+[AG-222] walk1_hq_ring_arc: hiddenCells [6..54] | shownEvents=180 | maxCheckpointDiffOver8=0.0473% | avgWallMs=0.1292ms
+[AG-222] Running walk2_gap_hq_north (Walk 2: Through HQ Ring North Trail Gap)...
+[AG-222] walk2_gap_hq_north: hiddenCells [5..50] | shownEvents=131 | maxCheckpointDiffOver8=22.55% | avgWallMs=0.1417ms
+[AG-222] Running walk3_gap_hq_west (Walk 3: Through HQ Ring West (Landing) Gap)...
+[AG-222] walk3_gap_hq_west: hiddenCells [36..73] | shownEvents=169 | maxCheckpointDiffOver8=0.0554% | avgWallMs=0.1819ms
+[AG-222] Running walk4_gap_quarter_nw (Walk 4: Through Quarter-NW Wall Gap)...
+[AG-222] walk4_gap_quarter_nw: hiddenCells [8..65] | shownEvents=110 | maxCheckpointDiffOver8=31.7291% | avgWallMs=0.1681ms
+[AG-222] Running walk5_gap_quarter_ne (Walk 5: Through Quarter-NE Wall Gap)...
+[AG-222] walk5_gap_quarter_ne: hiddenCells [7..88] | shownEvents=237 | maxCheckpointDiffOver8=28.0405% | avgWallMs=0.1889ms
+[AG-222] Running Part 3: Dawn & Dusk Shadow Check Behind a Wall...
+HIDDEN dawn_west_wall [{"name":"Mesh","kids":0,"r":0.78,"x":173.8,"z":96.7,"y0":4.14,"y1":4.38,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.76,"x":163.5,"z":104.3,"y0":3.99,"y1":4.26,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.85,"x":163.6,"z":104.6,"y0":4.04,"y1":4.42,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":1.07,"x":162.9,"z":103.2,"y0":3.59,"y1":4.06,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.73,"x":161.1,"z":91.4,"y0":3.85,"y1":4.07,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.88,"x":159.9,"z":91.7,"y0":3.55,"y1":3.89,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.87,"x":136.8,"z":93.4,"y0":3.42,"y1":3.77,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":1.39,"x":136.4,"z":94.9,"y0":3.8,"y1":4.7,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.98,"x":141,"z":82.7,"y0":3.77,"y1":4.21,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.79,"x":134.6,"z":80.9,"y0":3.43,"y1":3.74,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":1.42,"x":135.3,"z":80.6,"y0":3.3,"y1":4.19,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.82,"x":117.7,"z":88.4,"y0":3.25,"y1":3.57,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.99,"x":120.1,"z":76.8,"y0":3.61,"y1":4.04,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.69,"x":111.3,"z":87.9,"y0":3.36,"y1":3.55,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":1.13,"x":113.6,"z":76.2,"y0":3.19,"y1":3.85,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.78,"x":97.7,"z":84.3,"y0":2.89,"y1":3.17,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":1.1,"x":98.1,"z":85.9,"y0":3.22,"y1":3.83,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":1.03,"x":85.3,"z":81.7,"y0":3.18,"y1":3.65,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.94,"x":85,"z":81.5,"y0":3.16,"y1":3.62,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.92,"x":80.5,"z":70.2,"y0":3.18,"y1":3.6,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":1.03,"x":79.4,"z":70.2,"y0":3.04,"y1":3.57,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":1.33,"x":78.2,"z":80.9,"y0":3.66,"y1":4.28,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.89,"x":72.5,"z":68.5,"y0":3.52,"y1":3.92,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.98,"x":71.8,"z":79.8,"y0":3.93,"y1":4.45,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.84,"x":65.8,"z":67.3,"y0":3.42,"y1":3.73,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":1.05,"x":65.2,"z":78.6,"y0":3.05,"y1":3.61,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":1.06,"x":51.2,"z":78.6,"y0":2.59,"y1":3.02,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":1.11,"x":51.7,"z":78.5,"y0":2.5,"y1":3.01,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.9,"x":5.1,"z":61.2,"y0":1.36,"y1":1.76,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.68,"x":-59.5,"z":35.9,"y0":-1.4,"y1":-1.26,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":1.51,"x":-65.1,"z":44.4,"y0":-1.76,"y1":-0.8,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":1.17,"x":-58.7,"z":34.3,"y0":-1.24,"y1":-0.59,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.85,"x":-70.7,"z":41.1,"y0":-1.57,"y1":-1.21,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.81,"x":-71.3,"z":41.4,"y0":-1.47,"y1":-1.14,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":1.24,"x":-64.8,"z":29.8,"y0":-1.27,"y1":-0.49,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.84,"x":-77,"z":23.1,"y0":-1.65,"y1":-1.3,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.94,"x":-76.3,"z":23.1,"y0":-1.56,"y1":-1.1,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.91,"x":-77.3,"z":23.3,"y0":-1.79,"y1":-1.41,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.78,"x":-82.2,"z":20.2,"y0":-2.09,"y1":-1.84,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.8,"x":-95.2,"z":20.5,"y0":-1.29,"y1":-1.04,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.73,"x":-95.9,"z":-3.1,"y0":-2.13,"y1":-1.89,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":1.27,"x":-105,"z":1.9,"y0":-1.75,"y1":-0.95,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.76,"x":-97.2,"z":-10.3,"y0":-0.93,"y1":-0.69,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":1.36,"x":-108.6,"z":-5.2,"y0":-2.15,"y1":-1.32,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.74,"x":-110.8,"z":-10.7,"y0":-2.32,"y1":-2.08,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.83,"x":-111.4,"z":-39.8,"y0":-2.19,"y1":-1.9,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":1.08,"x":-123.3,"z":-37.6,"y0":-1.05,"y1":-0.49,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.79,"x":-125,"z":-44.2,"y0":-0.74,"y1":-0.45,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":1.07,"x":-122.9,"z":-45,"y0":-2.73,"y1":-2.14,"cast":true,"mesh":true},{"name":"lily-pad","kids":0,"r":1.36,"x":-218,"z":-97.3,"y0":-3.39,"y1":-3.31,"cast":false,"mesh":true},{"name":"lily-pad","kids":0,"r":1.32,"x":-83.1,"z":-127.8,"y0":-3.39,"y1":-3.31,"cast":false,"mesh":true},{"name":"lily-pad","kids":0,"r":1.18,"x":-141.5,"z":-63.5,"y0":-3.39,"y1":-3.31,"cast":false,"mesh":true},{"name":"lily-pad","kids":0,"r":1.2,"x":-138.2,"z":-62.6,"y0":-3.39,"y1":-3.31,"cast":false,"mesh":true},{"name":"lily-pad","kids":0,"r":1.34,"x":-152,"z":-64.4,"y0":-3.39,"y1":-3.31,"cast":false,"mesh":true},{"name":"lily-pad","kids":0,"r":1.38,"x":-95.4,"z":-159.4,"y0":-3.39,"y1":-3.31,"cast":false,"mesh":true},{"name":"Group","kids":36,"r":0.78,"x":-142.2,"z":-58.7,"y0":-3.16,"y1":-3.01,"cast":false,"mesh":false},{"name":"Group","kids":36,"r":0.67,"x":-149,"z":-60,"y0":-2.44,"y1":-2.3,"cast":false,"mesh":false},{"name":"Mesh","kids":0,"r":7.47,"x":-90,"z":-198,"y0":-4.21,"y1":-1.5,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":3.95,"x":-90,"z":-198,"y0":-4.06,"y1":-3.49,"cast":false,"mesh":true},{"name":"Mesh","kids":0,"r":9.61,"x":-90,"z":-126,"y0":-5.77,"y1":-3.52,"cast":false,"mesh":true},{"name":"Mesh","kids":0,"r":2.03,"x":-90,"z":-126,"y0":-3.36,"y1":-3.29,"cast":false,"mesh":true},{"name":"Mesh","kids":0,"r":2.8,"x":-162,"z":-54,"y0":-3.88,"y1":-2.03,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":5.46,"x":-162,"z":-54,"y0":-5.96,"y1":-3.65,"cast":false,"mesh":true},{"name":"Mesh","kids":0,"r":3.48,"x":-162,"z":-54,"y0":-3.36,"y1":-3.29,"cast":false,"mesh":true},{"name":"Mesh","kids":0,"r":2.28,"x":-126,"z":-54,"y0":-2.58,"y1":-0.35,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":2.65,"x":-54,"z":18,"y0":-1.21,"y1":0.41,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":5.84,"x":-54,"z":18,"y0":-2.47,"y1":-1.51,"cast":false,"mesh":true},{"name":"Mesh","kids":0,"r":8.07,"x":-54,"z":54,"y0":-2.41,"y1":-1.29,"cast":false,"mesh":true},{"name":"Mesh","kids":0,"r":1.13,"x":54,"z":90,"y0":1.74,"y1":2.18,"cast":false,"mesh":true},{"name":"Mesh","kids":0,"r":4.79,"x":126,"z":90,"y0":1.97,"y1":2.75,"cast":false,"mesh":true},{"name":"Mesh","kids":0,"r":2.11,"x":90,"z":90,"y0":2.13,"y1":4.07,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":7.13,"x":198,"z":126,"y0":4.24,"y1":6.86,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":3.47,"x":198,"z":126,"y0":3.51,"y1":4.59,"cast":false,"mesh":true},{"name":"Mesh","kids":0,"r":4.29,"x":162,"z":126,"y0":4.21,"y1":7,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":6.63,"x":-126,"z":-198,"y0":-4.28,"y1":-3.55,"cast":false,"mesh":true},{"name":"Mesh","kids":0,"r":6.27,"x":-126,"z":-198,"y0":-3.36,"y1":-3.29,"cast":false,"mesh":true},{"name":"Mesh","kids":0,"r":8.43,"x":-126,"z":-162,"y0":-3.36,"y1":-3.29,"cast":false,"mesh":true},{"name":"Mesh","kids":0,"r":6.77,"x":-162,"z":-90,"y0":-5.69,"y1":-3.79,"cast":false,"mesh":true},{"name":"Mesh","kids":0,"r":6.02,"x":198,"z":90,"y0":3.29,"y1":4.77,"cast":false,"mesh":true},{"name":"Mesh","kids":0,"r":9.87,"x":121.3,"z":0,"y0":-3.78,"y1":-1.65,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":1.69,"x":-114.2,"z":48.2,"y0":-0.15,"y1":1.57,"cast":true,"mesh":true},{"name":"hikers-cache","kids":2,"r":6.82,"x":-156.2,"z":91.9,"y0":0.69,"y1":1.55,"cast":false,"mesh":false},{"name":"brass","kids":36,"r":3.12,"x":20,"z":104.1,"y0":5.86,"y1":5.88,"cast":false,"mesh":false},{"name":"dropped-helmet","kids":2,"r":1,"x":18,"z":105.7,"y0":5.53,"y1":5.95,"cast":false,"mesh":false},{"name":"ranger-truck","kids":1,"r":5.03,"x":131.3,"z":6.2,"y0":-3.75,"y1":-1.02,"cast":false,"mesh":false},{"name":"trapper-post","kids":0,"r":1.47,"x":5.8,"z":135.1,"y0":4.42,"y1":6.02,"cast":false,"mesh":true},{"name":"Group","kids":1,"r":1.43,"x":-117.5,"z":39.8,"y0":-0.17,"y1":0.82,"cast":false,"mesh":false},{"name":"Group","kids":1,"r":1.52,"x":-153,"z":-13.1,"y0":1.45,"y1":2.45,"cast":false,"mesh":false},{"name":"rock-batch","kids":0,"r":3.11,"x":0,"z":0,"y0":4.51,"y1":6.75,"cast":true,"mesh":true},{"name":"rock-batch","kids":0,"r":3.94,"x":0,"z":0,"y0":3.15,"y1":4.7,"cast":true,"mesh":true},{"name":"rock-batch","kids":0,"r":1.82,"x":0,"z":0,"y0":4.42,"y1":5.55,"cast":true,"mesh":true},{"name":"rock-batch","kids":0,"r":1.99,"x":0,"z":0,"y0":5.15,"y1":6.36,"cast":true,"mesh":true},{"name":"rock-batch","kids":0,"r":1.94,"x":0,"z":0,"y0":6.68,"y1":7.26,"cast":true,"mesh":true},{"name":"rock-batch","kids":0,"r":1.57,"x":0,"z":0,"y0":2.46,"y1":3.05,"cast":true,"mesh":true},{"name":"rabbit-mound","kids":35,"r":2.58,"x":84.9,"z":166.6,"y0":2.39,"y1":3.18,"cast":false,"mesh":false},{"name":"sato-note","kids":3,"r":0.99,"x":-134.2,"z":-9.9,"y0":-0.06,"y1":0.09,"cast":false,"mesh":false},{"name":"sato-hat","kids":0,"r":0.9,"x":-134.5,"z":-10.6,"y0":0.02,"y1":0.18,"cast":true,"mesh":true},{"name":"sato-stool","kids":0,"r":0.97,"x":-133.7,"z":-10.2,"y0":-0.05,"y1":0.42,"cast":true,"mesh":true},{"name":"sato-claws","kids":0,"r":0.81,"x":-133.3,"z":-10.4,"y0":1.23,"y1":1.64,"cast":false,"mesh":true},{"name":"bolt-cutters","kids":0,"r":0.93,"x":-160.7,"z":86.8,"y0":0.68,"y1":0.72,"cast":true,"mesh":true},{"name":"sato-drag","kids":0,"r":3.68,"x":0,"z":0,"y0":-0.13,"y1":0.05,"cast":false,"mesh":true}]
+[AG-222] Shadow dawn_west_wall: behindBandDraws 106 -> 77 | groundShadowDiff>8: 0% | fullDiff>8: 0.0309%
+HIDDEN dusk_ne_wall [{"name":"Mesh","kids":0,"r":0.78,"x":173.8,"z":96.7,"y0":4.14,"y1":4.38,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.76,"x":163.5,"z":104.3,"y0":3.99,"y1":4.26,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.85,"x":163.6,"z":104.6,"y0":4.04,"y1":4.42,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":1.07,"x":162.9,"z":103.2,"y0":3.59,"y1":4.06,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.73,"x":161.1,"z":91.4,"y0":3.85,"y1":4.07,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.88,"x":159.9,"z":91.7,"y0":3.55,"y1":3.89,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.87,"x":136.8,"z":93.4,"y0":3.42,"y1":3.77,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":1.39,"x":136.4,"z":94.9,"y0":3.8,"y1":4.7,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.98,"x":141,"z":82.7,"y0":3.77,"y1":4.21,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.79,"x":134.6,"z":80.9,"y0":3.43,"y1":3.74,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":1.42,"x":135.3,"z":80.6,"y0":3.3,"y1":4.19,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.82,"x":117.7,"z":88.4,"y0":3.25,"y1":3.57,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.99,"x":120.1,"z":76.8,"y0":3.61,"y1":4.04,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.69,"x":111.3,"z":87.9,"y0":3.36,"y1":3.55,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":1.13,"x":113.6,"z":76.2,"y0":3.19,"y1":3.85,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.78,"x":97.7,"z":84.3,"y0":2.89,"y1":3.17,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":1.1,"x":98.1,"z":85.9,"y0":3.22,"y1":3.83,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":1.03,"x":85.3,"z":81.7,"y0":3.18,"y1":3.65,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.94,"x":85,"z":81.5,"y0":3.16,"y1":3.62,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.92,"x":80.5,"z":70.2,"y0":3.18,"y1":3.6,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":1.03,"x":79.4,"z":70.2,"y0":3.04,"y1":3.57,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":1.33,"x":78.2,"z":80.9,"y0":3.66,"y1":4.28,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.89,"x":72.5,"z":68.5,"y0":3.52,"y1":3.92,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.98,"x":71.8,"z":79.8,"y0":3.93,"y1":4.45,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.84,"x":65.8,"z":67.3,"y0":3.42,"y1":3.73,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":1.05,"x":65.2,"z":78.6,"y0":3.05,"y1":3.61,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":1.06,"x":51.2,"z":78.6,"y0":2.59,"y1":3.02,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":1.11,"x":51.7,"z":78.5,"y0":2.5,"y1":3.01,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.72,"x":37.1,"z":78.3,"y0":2.8,"y1":3.01,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.83,"x":37.7,"z":78.4,"y0":2.79,"y1":3.08,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.91,"x":37.9,"z":76.2,"y0":1.9,"y1":2.22,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.94,"x":32.4,"z":64.5,"y0":2.31,"y1":2.74,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":0.88,"x":30.7,"z":75.7,"y0":1.83,"y1":2.23,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":1.25,"x":30.4,"z":75.7,"y0":1.7,"y1":2.4,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":1.01,"x":24.6,"z":76.3,"y0":2.18,"y1":2.67,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":4.42,"x":-54,"z":-18,"y0":-4.32,"y1":-3.47,"cast":false,"mesh":true},{"name":"Mesh","kids":0,"r":1.13,"x":54,"z":90,"y0":1.74,"y1":2.18,"cast":false,"mesh":true},{"name":"Mesh","kids":0,"r":4.79,"x":126,"z":90,"y0":1.97,"y1":2.75,"cast":false,"mesh":true},{"name":"Mesh","kids":0,"r":2.11,"x":90,"z":90,"y0":2.07,"y1":4.02,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":7.13,"x":198,"z":126,"y0":4.56,"y1":7.48,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":3.47,"x":198,"z":126,"y0":3.51,"y1":4.59,"cast":false,"mesh":true},{"name":"Mesh","kids":0,"r":4.29,"x":162,"z":126,"y0":4.22,"y1":6.94,"cast":true,"mesh":true},{"name":"Mesh","kids":0,"r":6.02,"x":198,"z":90,"y0":3.29,"y1":4.77,"cast":false,"mesh":true},{"name":"Mesh","kids":0,"r":9.87,"x":121.3,"z":0,"y0":-3.78,"y1":-1.65,"cast":true,"mesh":true},{"name":"first-standing-stone","kids":1,"r":2.25,"x":60.9,"z":118.3,"y0":13.2,"y1":15.67,"cast":false,"mesh":false},{"name":"ranger-truck","kids":1,"r":5.03,"x":131.3,"z":6.2,"y0":-3.75,"y1":-1.02,"cast":false,"mesh":false},{"name":"rock-batch","kids":0,"r":3.94,"x":0,"z":0,"y0":3.15,"y1":4.7,"cast":true,"mesh":true},{"name":"rock-batch","kids":0,"r":1.82,"x":0,"z":0,"y0":4.42,"y1":5.55,"cast":true,"mesh":true},{"name":"rock-batch","kids":0,"r":1.99,"x":0,"z":0,"y0":5.15,"y1":6.36,"cast":true,"mesh":true},{"name":"rock-batch","kids":0,"r":1.94,"x":0,"z":0,"y0":6.68,"y1":7.26,"cast":true,"mesh":true},{"name":"rock-batch","kids":0,"r":1.57,"x":0,"z":0,"y0":2.46,"y1":3.05,"cast":true,"mesh":true}]
+[AG-222] Shadow dusk_ne_wall: behindBandDraws 99 -> 98 | groundShadowDiff>8: 0% | fullDiff>8: 0.1267%
+[AG-222] Saved telemetry.json and walks-traces.json successfully.
+=== exit 0

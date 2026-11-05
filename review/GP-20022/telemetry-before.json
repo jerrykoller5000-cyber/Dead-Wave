@@ -1,0 +1,162 @@
+{
+  "generatedAt": "2026-11-03T22:26:18.757Z",
+  "guns": {
+    "minigun": {
+      "noon": {
+        "weapon": "minigun",
+        "first": true,
+        "w": 1,
+        "vmKey": "minigun",
+        "raise": 1,
+        "ads": 0,
+        "worldTime": 0.50002,
+        "backend": "WebGPU",
+        "calls": 12500,
+        "materials": [
+          {
+            "uuid": "7dedb720-48a5-4e50-a43d-a22dcb6b317b",
+            "name": "vm:MeshStandardMaterial",
+            "color": "14303e",
+            "metalness": 0.9,
+            "roughness": 0.08,
+            "vertexColors": false
+          },
+          {
+            "uuid": "0c26f0e1-ff05-4458-a338-c8cfbe5ec2fc",
+            "name": "vm:MeshStandardMaterial",
+            "color": "565b62",
+            "metalness": 0.1,
+            "roughness": 0.58,
+            "vertexColors": false
+          },
+          {
+            "uuid": "f95b95ad-1568-423a-a5e8-864c25eb239a",
+            "name": "vm:MeshStandardMaterial",
+            "color": "ffffff",
+            "metalness": 0.08,
+            "roughness": 0.66,
+            "vertexColors": false
+          },
+          {
+            "uuid": "13f27c56-86ee-4b2f-bc12-ac251a62377a",
+            "name": "vm:furniture:minigun",
+            "color": "525a3b",
+            "metalness": 0.06,
+            "roughness": 0.74,
+            "vertexColors": false
+          },
+          {
+            "uuid": "640592bb-0949-4eab-9261-bc20693a6ef6",
+            "name": "vm:furniture:minigun",
+            "color": "505451",
+            "metalness": 0.02,
+            "roughness": 0.84,
+            "vertexColors": false
+          },
+          {
+            "uuid": "899f5406-79f6-45a2-bc39-0d0c8f1aa330",
+            "name": "vm:MeshBasicMaterial",
+            "color": "ffff99",
+            "vertexColors": false
+          },
+          {
+            "uuid": "c91eb879-e993-4261-a9b3-457da8d2b2fa",
+            "name": "vm:MeshStandardMaterial",
+            "color": "ff3322",
+            "metalness": 0,
+            "roughness": 1,
+            "vertexColors": false
+          },
+          {
+            "uuid": "6efc6280-7e2c-44fa-8435-67ab473c1b1c",
+            "name": "vm:fold-static",
+            "color": "ffffff",
+            "metalness": 0,
+            "roughness": 1,
+            "vertexColors": false
+          },
+          {
+            "uuid": "ba80bbd8-35d7-4602-b262-97b7bb8d9bce",
+            "name": "vm:MeshStandardMaterial",
+            "color": "2b2e31",
+            "metalness": 0.62,
+            "roughness": 0.42,
+            "vertexColors": false
+          },
+          {
+            "uuid": "6f60ef80-4b14-4193-8a60-d6cd3bfde7bb",
+            "name": "vm:MeshStandardMaterial",
+            "color": "4a4e52",
+            "metalness": 0.7,
+            "roughness": 0.35,
+            "vertexColors": false
+          }
+        ]
+      }
+    },
+    "chainsaw": {
+      "noon": {
+        "weapon": "chainsaw",
+        "first": true,
+        "w": 1,
+        "vmKey": "chainsaw",
+        "raise": 1,
+        "ads": 0,
+        "worldTime": 0.50002,
+        "backend": "WebGPU",
+        "calls": 14781,
+        "materials": [
+          {
+            "uuid": "82c5a969-2a22-452f-a053-c55f4b7d323a",
+            "name": "vm:MeshStandardMaterial",
+            "color": "858990",
+            "metalness": 0.08,
+            "roughness": 0.61,
+            "vertexColors": false
+          },
+          {
+            "uuid": "dc3dbf9d-5e99-49c6-b217-3b5833e4c12b",
+            "name": "vm:furniture:chainsaw",
+            "color": "505451",
+            "metalness": 0.02,
+            "roughness": 0.84,
+            "vertexColors": false
+          },
+          {
+            "uuid": "d3638ef3-69e0-45ac-8c35-3c763fd10f56",
+            "name": "vm:MeshStandardMaterial",
+            "color": "383b40",
+            "metalness": 0.08,
+            "roughness": 0.69,
+            "vertexColors": false
+          },
+          {
+            "uuid": "49ed3cd7-bcc9-4982-b47e-959ffd7850f5",
+            "name": "vm:MeshStandardMaterial",
+            "color": "c0c8d0",
+            "metalness": 0.6,
+            "roughness": 0.26,
+            "vertexColors": false
+          },
+          {
+            "uuid": "d98bc2e4-339c-4504-b554-6211e078c2aa",
+            "name": "vm:MeshStandardMaterial",
+            "color": "6d7178",
+            "metalness": 0.08,
+            "roughness": 0.63,
+            "vertexColors": false
+          },
+          {
+            "uuid": "6efc6280-7e2c-44fa-8435-67ab473c1b1c",
+            "name": "vm:fold-static",
+            "color": "ffffff",
+            "metalness": 0,
+            "roughness": 1,
+            "vertexColors": false
+          }
+        ]
+      }
+    }
+  },
+  "errors": []
+}

@@ -1,0 +1,4 @@
+GRANT grokbot GB-276: starting one game-test command
+ok    t215      4 pass   0 fail  32.4s  (real renderer)
+ok    t95       9 pass   0 fail  34.0s  (real renderer)
+2 checks: 13 pass, 0 fail (real renderer)

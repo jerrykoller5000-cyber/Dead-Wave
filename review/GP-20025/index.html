@@ -1,0 +1,15 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>GP-20025 optic model review</title>
+<style>body{margin:0;padding:24px;background:#151a1b;color:#e0e4df;font:15px system-ui}h1{margin:0 0 8px}p{color:#aeb8b4;max-width:75ch}h2{font-size:19px;margin:30px 0 12px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}a{display:block;color:#dce7e4;text-decoration:none;background:#252c2c;border:1px solid #3b4747}a:hover{border-color:#a8b7aa}img{width:100%;display:block}small{display:block;padding:8px 10px}code{color:#b6d4ca}</style></head><body>
+<h1>GP-20025 · optic model studies</h1>
+<p>Original military-family sight models for the 1.3 optics proposal. This is a design preview: the gun pictures use the current gun constructors through a preview-only geometry adapter and ray-grounded mount positions. Nothing is fitted in the game yet. Click a picture for its full resolution render.</p>
+<div id="shots"></div>
+<script>
+const sections=[
+  ['Mini-reflex · 254 triangles',['mini-reflex-front-noon','mini-reflex-side-noon','mini-reflex-three-noon','mini-reflex-three-overcast','mini-reflex-three-dusk','mini-reflex-three-night']],
+  ['Tube reflex · 520 triangles',['reflex-front-noon','reflex-side-noon','reflex-three-noon','reflex-three-overcast','reflex-three-dusk','reflex-three-night']],
+  ['Boxed holo · 342 triangles',['holo-front-noon','holo-side-noon','holo-three-noon','holo-three-overcast','holo-three-dusk','holo-three-night']],
+  ['Full gun fit',['pistol-three-noon','revolver-three-noon','uzi-three-noon','shotgun-three-noon','aa12-three-noon','m4-three-noon','ak-three-noon']],
+  ['Mount detail',['pistol-three-noon-1','revolver-three-noon-1','uzi-three-noon-1','shotgun-three-noon-1','aa12-three-noon-1','m4-three-noon-1','ak-three-noon-1']]
+];
+const root=document.getElementById('shots');for(const [title,names] of sections){const h=document.createElement('h2');h.textContent=title;root.append(h);const grid=document.createElement('div');grid.className='grid';for(const name of names){const a=document.createElement('a');a.href=name+'.png';const img=document.createElement('img');img.src=a.href;img.loading='lazy';img.alt=name;const caption=document.createElement('small');caption.textContent=name.replaceAll('-', ' ');a.append(img,caption);grid.append(a);}root.append(grid);}
+</script></body></html>

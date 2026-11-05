@@ -37,14 +37,16 @@
       const torso = ud.torsoG, inv = new THREE.Matrix4().copy(torso.matrixWorld).invert(), tp = ud.torsoPivotY || 0.7;
       const spots = [...rig.holsters, ...rig.pairs];
       const skip = new Set([ud.weaponMount, ud.armLG, ud.armRG, ud.headG].filter(Boolean)); for (const s of [...rig.slings, ...spots, rig.hip, rig.hipPair]) skip.add(s.g);
-      const body = []; marine.traverse((o) => { if (!o.isMesh || !o.visible || o.isInstancedMesh) return; for (let q = o; q; q = q.parent) { if (skip.has(q) || !q.visible) return; } body.push(o); });
+      // GB-276: his body only (see t189): skip effect meshes (the chapel halo: opacity 0, name chapel-glow).
+      const isEffect = (o) => { const mt = Array.isArray(o.material) ? o.material[0] : o.material; return o.name === 'chapel-glow' || !!(o.userData && (o.userData.effect || o.userData.halo)) || !!(mt && (mt.opacity === 0 || mt.visible === false || (mt.transparent && mt.opacity < 0.5))); };
+      const body = []; marine.traverse((o) => { if (!o.isMesh || !o.visible || o.isInstancedMesh || isEffect(o)) return; for (let q = o; q; q = q.parent) { if (skip.has(q) || !q.visible) return; } body.push(o); });
       let bodyT = null;
       for (const sp of spots) {
         if (!sp.gun || !sp.g.visible) continue;
         const side = sp.g.position.x >= 0 ? 1 : -1, tag = [a, b, c, d].join('/') + ' ' + sp.kind + (side > 0 ? '+' : '-');
         const fit = rig.packFit && rig.packFit[sp.kind];
-        // GB-190: since GP-19894 two handgun kinds ride in two rows (applyCarryPlan: the first +0.29 m, the second -0.02 m).
-        if (!fit || ![0, 0.29, -0.02].some((row) => Math.abs(sp.g.position.y - (fit.y - tp + row)) < 1e-6)) continue;   // CL-160: the pistol rides there too
+        // GB-190: since GP-19894 two handgun kinds ride in two rows (applyCarryPlan: the shorter +0.27 m, the taller -0.02 m; GB-276).
+        if (!fit || ![0, 0.27, -0.02].some((row) => Math.abs(sp.g.position.y - (fit.y - tp + row)) < 1e-6)) continue;   // CL-160: the pistol rides there too
         if (sp.kind === 'pistol') pistolSeen++; else seen++;
         const P = sp.g.position;
         // GB-177: GP-19920's clearCarryPack (ui/marine-kit-fit.js) now fits the gun's nearest surface to the pack's back face

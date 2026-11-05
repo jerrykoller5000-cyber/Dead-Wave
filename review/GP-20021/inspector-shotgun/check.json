@@ -1,0 +1,20 @@
+{
+ "at": "2026-11-03T19:41:20.484Z",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "results": [
+  {
+   "id": "weapon.shotgun",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 201,
+   "tris": 4596,
+   "size": [
+    0.088,
+    0.215,
+    1.149
+   ],
+   "error": null
+  }
+ ]
+}

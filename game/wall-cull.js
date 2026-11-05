@@ -112,7 +112,7 @@ export function createWallCull(segments, opt = WALL_CULL) {
     const f = new Uint32Array(cap); f.set(frameOf); frameOf = f;
   };
   // Put a static draw's box (its sphere's box is fine) in the cell its centre falls in; returns the cell id.
-  function include(cx, cy, cz, r) {
+  function include(cx, cy, cz, r, top) {   // top: the draw's own highest point (AG-222: the sphere's cy + r over-counts wide, low props)
     const key = Math.floor(cx / C) * 100003 + Math.floor(cz / C);
     let id = cellMap.get(key);
     if (id == null) {
@@ -123,7 +123,7 @@ export function createWallCull(segments, opt = WALL_CULL) {
     }
     const o = id * 6;
     box[o] = Math.min(box[o], cx - r); box[o + 1] = Math.min(box[o + 1], cy - r); box[o + 2] = Math.min(box[o + 2], cz - r);
-    box[o + 3] = Math.max(box[o + 3], cx + r); box[o + 4] = Math.max(box[o + 4], cy + r); box[o + 5] = Math.max(box[o + 5], cz + r);
+    box[o + 3] = Math.max(box[o + 3], cx + r); box[o + 4] = Math.max(box[o + 4], top === undefined ? cy + r : top); box[o + 5] = Math.max(box[o + 5], cz + r);
     tested[id] = 0; reads[id] = 0; hid[id] = 0;   // a grown box is seen until it's tested again
     return id;
   }

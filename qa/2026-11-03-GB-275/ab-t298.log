@@ -1,0 +1,5 @@
+GRANT grokbot GB-275: starting one game-test command
+OLD {"weapon":"pistol","lateC":0,"worstC":0}
+NEW {"weapon":"pistol","lateC":0,"worstC":0}
+OLD {"weapon":"pistol","lateC":0,"worstC":0}
+NEW {"weapon":"pistol","lateC":0,"worstC":0}

@@ -1,0 +1,6 @@
+[
+  {"target":"weapon:launcher","view":"three","time":0.42,"out":"review/GP-20021/model-launcher-three-overcast.png"},
+  {"target":"weapon:launcher","view":"rear3","time":0.42,"out":"review/GP-20021/model-launcher-rear-overcast.png"},
+  {"target":"weapon:flamer","view":"three","time":0.42,"out":"review/GP-20021/model-flamer-three-overcast.png"},
+  {"target":"weapon:flamer","view":"rear3","time":0.42,"out":"review/GP-20021/model-flamer-rear-overcast.png"}
+]

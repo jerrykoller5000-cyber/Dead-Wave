@@ -392,6 +392,8 @@ export function makeShotgunModel(ctx) {
     ...profileCurve([0.13, 0.073], [0.06, 0.068], [-0.035, 0.088], 5),
     ...profileCurve([-0.035, 0.088], [-0.087, 0.095], [-0.137, 0.085], 5), [-0.195, 0.055], [-0.192, -0.035],
     ...profileCurve([-0.192, -0.035], [-0.129, -0.066], [-0.056, -0.045], 5), [0.09, -0.038], [0.135, -0.046]], 0.106, gunBody, { bevel: 0.011, segs: 3 });
+  // Small receiver cross-pins give the close view a readable action without
+  // disturbing the rolled shoulder or the shotgun's original silhouette.
   K.slab([[0.011, 0.05], [0.145, 0.05], [0.153, 0.039], [0.149, 0.013], [0.013, 0.013]], 0.003, gunRubber, { x: 0.0535, bevel: 0.003 });
   K.slab([[0.026, 0.047], [0.142, 0.047], [0.143, 0.035], [0.026, 0.035]], 0.002, gunAccent, { x: 0.055, bevel: 0.001 });
   K.box(0.05, 0.004, 0.14, gunRubber, 0, -0.047, 0.08);
@@ -399,6 +401,7 @@ export function makeShotgunModel(ctx) {
     K.slab([[0.229, 0.018], [0.125, 0.018], [0.097, 0.007], [0.103, -0.008], [0.13, -0.014], [0.229, -0.014]], 0.002, gunDark, { x: sx * 0.053, bevel: 0.002 });
     K.slab(gunBand([[-0.172, 0.049], [-0.127, 0.063], [-0.09, 0.065], [-0.051, 0.046], [0.006, 0.04]], 0.002), 0.002, gunMid, { x: sx * 0.051, bevel: 0.001 });
     K.cyl(0.005, 0.005, 0.003, gunDark, sx * 0.054, -0.027, -0.025, null, 8, 'x');
+    for (const z of [0.038, 0.122]) K.cyl(0.0035, 0.0035, 0.002, gunMid, sx * 0.054, 0.031, z, null, 8, 'x');
   }
   K.box(0.018, 0.008, 0.022, gunDark, 0, 0.083, -0.13, 0.2, 0, 0, null, 0.003);
   // Stock with a recoil pad; the pistol grip, trigger guard and trigger; a sling loop.

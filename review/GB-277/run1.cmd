@@ -1,0 +1,1 @@
+cd /d "C:\Users\Zero\Desktop\Tiny Trek" && node crew/crew.mjs slot run grokbot GB-277 --checks "t330 (new) brute live get-up, real renderer" --minutes 15 -- node tools/realtest.mjs t330 > review\GB-277\real1.log 2>&1

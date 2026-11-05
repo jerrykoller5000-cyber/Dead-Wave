@@ -307,3 +307,40 @@ test('a scene refuses hits without a preset, and a bad hit, in sentences', () =>
   assert.throws(() => loadScene(bad, clipOf), (e) => /needs "motion"/.test(e.message) && /"kind" is one of/.test(e.message) && /"dir" is \[x, y, z\]/.test(e.message));
   assert.equal(HIT_KINDS.length, 5);
 });
+test('GB-274: a keyed get-up turns the mesh to the simulated pose (hands and knees), not only the points; unkeyed presets are untouched', () => {
+  // The keys move the spring targets (A); apply() must still turn the mesh from the standing animation,
+  // or the torso stays upright while the pelvis drops (AG-169/GP-19999: waist-deep, "pops up").
+  const spineUp = (inst) => new THREE.Vector3(0, 1, 0).applyQuaternion(inst.R.spine.getWorldQuaternion(new THREE.Quaternion()));
+  const getUp = (ref, create, power = 30) => {
+    const inst = rigs.get('zombie').create(create);
+    const body = createBody(inst, preset(ref));
+    const rows = []; let g = null;
+    body.follow();
+    for (let f = 0; f < 60 * 8; f++) {
+      body.follow();
+      if (f === 30) body.hit({ at: 'pelvis', dir: [0, .3, -1], power, kind: 'blast' });
+      for (const e of body.update(1 / 60)) if (e[0] === 'getup') g = f;
+      body.apply();
+      if (g !== null && body.state === 'getup') rows.push({ u: (f - g) / 60 / body.preset.getup.time, up: spineUp(inst).y, w: body.weight });
+    }
+    return { rows, body };
+  };
+  const at = (rows, u) => rows.reduce((a, b) => Math.abs(b.u - u) < Math.abs(a.u - u) ? b : a);
+  const brute = getUp('zombie/brute', { type: 'brute', scale: 1.38 });
+  assert.ok(brute.body.preset.getup.keys, 'the brute preset has authored get-up keys');
+  assert.equal(brute.body.state, 'animated', 'it recovers');
+  // On its hands and knees the torso is pitched well over, not standing (it was 1.0, upright, before the fix).
+  assert.ok(at(brute.rows, 0.25).up < 0.3, 'torso pitched at u=.25: spine up.y ' + at(brute.rows, 0.25).up.toFixed(2));
+  assert.ok(at(brute.rows, 0.35).up < 0.3, 'torso pitched at u=.35: spine up.y ' + at(brute.rows, 0.35).up.toFixed(2));
+  // The rise is a push, not a pop: the torso comes up gradually and is upright by the end.
+  const ups = brute.rows.map((r) => r.up);
+  let jump = 0; for (let i = 1; i < ups.length; i++) jump = Math.max(jump, Math.abs(ups[i] - ups[i - 1]));
+  assert.ok(jump < 0.12, 'no frame turns the torso more than 0.12 in up.y: ' + jump.toFixed(3));
+  assert.ok(at(brute.rows, 0.98).up > 0.95, 'upright again at the end');
+  // An unkeyed preset keeps the plain ramp: the mesh weight is 1 - smooth(u).
+  const sham = getUp('zombie/shambler', {}, 8);
+  assert.ok(!sham.body.preset.getup.keys);
+  const s5 = at(sham.rows, 0.5);
+  assert.ok(Math.abs(s5.w - 0.5) < 0.03, 'unkeyed weight at u=.5 is ' + s5.w.toFixed(2));
+  assert.ok(at(brute.rows, 0.4).w > 0.95, 'keyed weight holds while the keys carry the rise');
+});

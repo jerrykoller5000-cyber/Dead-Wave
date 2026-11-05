@@ -1,0 +1,18 @@
+[
+  {"target":"weapon:launcher","view":"three","time":"noon","out":"review/GP-20021/model-launcher-three-noon.png"},
+  {"target":"weapon:launcher","view":"rear3","time":"noon","out":"review/GP-20021/model-launcher-rear-noon.png"},
+  {"target":"weapon:launcher","view":"three","time":0.42,"out":"review/GP-20021/model-launcher-three-overcast.png"},
+  {"target":"weapon:launcher","view":"rear3","time":0.42,"out":"review/GP-20021/model-launcher-rear-overcast.png"},
+  {"target":"weapon:launcher","view":"three","time":"dusk","out":"review/GP-20021/model-launcher-three-dusk.png"},
+  {"target":"weapon:launcher","view":"rear3","time":"dusk","out":"review/GP-20021/model-launcher-rear-dusk.png"},
+  {"target":"weapon:launcher","view":"three","time":"night","out":"review/GP-20021/model-launcher-three-night.png"},
+  {"target":"weapon:launcher","view":"rear3","time":"night","out":"review/GP-20021/model-launcher-rear-night.png"},
+  {"target":"weapon:flamer","view":"three","time":"noon","out":"review/GP-20021/model-flamer-three-noon.png"},
+  {"target":"weapon:flamer","view":"rear3","time":"noon","out":"review/GP-20021/model-flamer-rear-noon.png"},
+  {"target":"weapon:flamer","view":"three","time":0.42,"out":"review/GP-20021/model-flamer-three-overcast.png"},
+  {"target":"weapon:flamer","view":"rear3","time":0.42,"out":"review/GP-20021/model-flamer-rear-overcast.png"},
+  {"target":"weapon:flamer","view":"three","time":"dusk","out":"review/GP-20021/model-flamer-three-dusk.png"},
+  {"target":"weapon:flamer","view":"rear3","time":"dusk","out":"review/GP-20021/model-flamer-rear-dusk.png"},
+  {"target":"weapon:flamer","view":"three","time":"night","out":"review/GP-20021/model-flamer-three-night.png"},
+  {"target":"weapon:flamer","view":"rear3","time":"night","out":"review/GP-20021/model-flamer-rear-night.png"}
+]

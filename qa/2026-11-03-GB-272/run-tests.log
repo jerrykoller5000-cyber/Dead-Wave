@@ -1,0 +1,43 @@
+﻿GRANT grokbot GB-272: starting one game-test command
+=== TESTPAGE
+check-players: 315 player.position reads, all in the allowed places
+ok    tcl275a  13 pass   0 fail  52.0s
+info  t27      0 pass   0 fail  75.7s  ΓÇö EMPTY WORLD visible meshes: 1880
+ok    t74     18 pass   0 fail  53.7s
+ok    t77     17 pass   0 fail  57.4s
+ok    t78     18 pass   0 fail  41.6s
+ok    t80     14 pass   0 fail  151.5s
+ok    t83     31 pass   0 fail  54.6s
+ok    t85     15 pass   0 fail  51.7s
+ok    t95      9 pass   0 fail  55.3s
+ok    t108     9 pass   0 fail  37.0s
+ok    t143    17 pass   0 fail  72.9s
+ok    t148    23 pass   0 fail  56.5s
+ok    t215     4 pass   0 fail  40.6s
+
+13 checks: 188 pass, 0 fail, 1 reported no assertions
+
+no assertions (probe, or the check bailed before asserting):
+  t27    EMPTY WORLD visible meshes: 1880
+=== REAL
+ok    t215      4 pass   0 fail  30.7s  (real renderer)
+ok    t95       9 pass   0 fail  32.8s  (real renderer)
+ok    t74      18 pass   0 fail  43.8s  (real renderer)
+ok    t77      17 pass   0 fail  43.4s  (real renderer)
+ok    t78      18 pass   0 fail  34.5s  (real renderer)
+ok    t83      31 pass   0 fail  44.4s  (real renderer)
+ok    t85      15 pass   0 fail  41.6s  (real renderer)
+ok    t80      14 pass   0 fail  137.4s  (real renderer)
+ok    t108      9 pass   0 fail  39.0s  (real renderer)
+ok    t143     17 pass   0 fail  100.5s  (real renderer)
+ok    t148     23 pass   0 fail  52.0s  (real renderer)
+11 checks: 175 pass, 0 fail (real renderer)
+=== SMOKE
+training: title up in 23.7 s, WebGPURenderer
+training: in the room (room built), 0 called in, frames still running: true
+training: page errors none
+match: title up in 22.5 s, WebGPURenderer
+match: in prep, past the insertion
+night: phase wave, lockdown true, zombies 15
+match: page errors none
+=== DONE

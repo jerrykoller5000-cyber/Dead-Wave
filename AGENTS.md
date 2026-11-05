@@ -132,6 +132,7 @@ card in `crew/status/`, appends to `crew/LOG.md`, and writes their own handoff n
      (for example `--touch "git"`). The check-in refuses if the other is already in it; wait
      until they check out.
    - `git pull --rebase` before you push, and never force-push.
+   - **This week (D-113, Jerry 5 Nov):** while Cursor's loop is down, Grokbot runs Claude's commit jobs: `cmd /c "Claude Commit.bat" < nul` only, after `--touch "git"` and `npm test`; no other git.
 7. **Done means all of these:**
    - `npm test` passes, or fails only where it already failed.
    - Anything visible has before-and-after shots from `tools/shoot.mjs`

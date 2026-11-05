@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>GP-20025 optic studies</title>
+<style>html,body{margin:0;width:100%;height:100%;background:#202724;color:#d8ddd5;font:14px system-ui}canvas{display:block}#label{position:fixed;left:24px;top:20px;padding:10px 15px;background:#1119;border-left:3px solid #9da99d;line-height:1.4}</style>
+<script type="importmap">{"imports":{"three":"../../vendor/three/three.webgpu.js","three/webgpu":"../../vendor/three/three.webgpu.js","three/tsl":"../../vendor/three/three.tsl.js","three/addons/":"../../vendor/three/addons/"}}</script>
+</head><body><div id="label"></div><script type="module">
+import * as T from 'three';
+import { makeOptic } from '../../studio/weapon-optics.js';
+import { makePistolModel, makeRevolverModel, makeUziModel } from '../../studio/weapon-sidearms.js';
+import { makeM4Model, makeAkModel, makeAa12Model, makeShotgunModel } from '../../studio/weapon-longarms.js';
+
+// A small preview adapter for the game's existing gun constructors. It supplies the
+// same material families and shape operations; no production builder is modified.
+const M = (color, metalness = .06, roughness = .7) => new T.MeshStandardMaterial({color,metalness,roughness,side:T.DoubleSide});
+const gunBody=M(0x494c4b),gunDark=M(0x27292d),gunMid=M(0x5c6068),gunAccent=M(0x383b41),gunPoly=M(0x323437),gunRubber=M(0x17181a,0,.95);
+const woodMat=M(0x7a4b29,.03,.6),woodDark=M(0x4a2c15,.03,.64),revolverSteel=M(0x9aa1a8,.85,.4),steelMat=M(0xb0b6bd,.62,.26);
+const magPoly=M(0x37393b),gunTan=M(0x9a8560),glassMat=M(0x14303e,.4,.18),sightDotMat=M(0xa53126),gaugeFace=M(0xe8e4d8),shellRedMat=M(0xb3261e,.2,.55),brassMat=M(0xc69b45,.65,.3);
+function gunBand(line,h){const a=[],b=[];for(let i=0;i<line.length;i++){const p=line[Math.max(0,i-1)],q=line[Math.min(line.length-1,i+1)],dz=q[0]-p[0],dy=q[1]-p[1],l=Math.hypot(dz,dy)||1;a.push([line[i][0]-dy/l*h,line[i][1]+dz/l*h]);b.push([line[i][0]+dy/l*h,line[i][1]-dz/l*h]);}return a.concat(b.reverse());}
+function gripOutline(cz,cy,h,d,rake){const s=Math.sin(rake),c=Math.cos(rake);return [[-.5,-.5],[.5,-.5],[.5,.5],[-.5,.5]].map(([u,v])=>[cz-u*h*s+v*d*c,cy-u*h*c-v*d*s]);}
+function profileCurve(a,b,c,n){return Array.from({length:n+1},(_,i)=>{const t=i/n,s=1-t;return [s*s*a[0]+2*s*t*b[0]+t*t*c[0],s*s*a[1]+2*s*t*b[1]+t*t*c[1]];});}
+function gunKit(gun){
+  const place=(g,m,x=0,y=0,z=0,rx=0,ry=0,rz=0,parent=gun)=>{const o=new T.Mesh(g,m);o.position.set(x,y,z);o.rotation.set(rx||0,ry||0,rz||0);o.castShadow=o.receiveShadow=true;(parent||gun).add(o);return o;};
+  const kit={
+    box:(w,h,d,m,x,y,z,rx,ry,rz,parent)=>place(new T.BoxGeometry(w,h,d),m,x,y,z,rx,ry,rz,parent),
+    cyl:(rt,rb,len,m,x,y,z,parent,seg=12,axis='z')=>place(new T.CylinderGeometry(rt,rb,len,seg),m,x,y,z,axis==='z'?Math.PI/2:0,0,axis==='x'?Math.PI/2:0,parent),
+    tor:(r,t,m,x,y,z,rx,ry,rz,parent,arc=Math.PI*2,seg=16)=>place(new T.TorusGeometry(r,t,6,seg,arc),m,x,y,z,rx,ry,rz,parent),
+    sph:(r,m,x,y,z,parent,seg=10)=>place(new T.SphereGeometry(r,seg,Math.max(4,seg>>1)),m,x,y,z,0,0,0,parent),
+    disc:(r,m,x,y,z,ry,parent,seg=12)=>place(new T.CircleGeometry(r,seg),m,x,y,z,0,ry,0,parent),
+    group:(x=0,y=0,z=0,parent=gun)=>{const g=new T.Group();g.position.set(x,y,z);(parent||gun).add(g);return g;},
+    slab:(pts,w,m,o={})=>{const sh=new T.Shape();pts.forEach(([z,y],i)=>i?sh.lineTo(z,y):sh.moveTo(z,y));sh.closePath();const g=new T.ExtrudeGeometry(sh,{depth:w,bevelEnabled:false,steps:1,curveSegments:2});g.rotateY(-Math.PI/2);g.translate(w/2,0,0);return place(g,m,o.x,o.y,o.z,o.rx,o.ry,o.rz,o.parent);},
+    lathe:(prof,m,o={})=>{const g=new T.LatheGeometry(prof.map(([r,z])=>new T.Vector2(r,z)),o.seg||14);g.rotateX(Math.PI/2);return place(g,m,o.x,o.y,o.z,o.rx,o.ry,o.rz,o.parent);},
+    rail:(len,x,y,z,parent,w=.042)=>{kit.box(w,.014,len,gunDark,x,y,z,0,0,0,parent);for(let s=-len/2+.012;s<len/2-.006;s+=.026)kit.box(w+.006,.018,.01,gunAccent,x,y+.002,z+s,0,0,0,parent);}
+  };return kit;
+}
+const ctx={THREE:T,gunKit,gunBand,gripOutline,profileCurve,gunEffects:(g,muzzle)=>{g.userData.laser=new T.Group();g.userData.muzzleLocal=muzzle.clone();},gunSuppressor:()=>{},finishGun:g=>g,
+  gunBody,gunDark,gunMid,gunAccent,gunPoly,gunRubber,woodMat,woodDark,revolverSteel,steelMat,magPoly,gunTan,glassMat,sightDotMat,gaugeFace,shellRedMat,brassMat};
+const guns={pistol:makePistolModel,revolver:makeRevolverModel,uzi:makeUziModel,m4:makeM4Model,ak:makeAkModel,aa12:makeAa12Model,shotgun:makeShotgunModel};
+const fit={pistol:['mini-reflex',-.065],revolver:['mini-reflex',0],uzi:['reflex',0],shotgun:['reflex',-.08],aa12:['reflex',-.09],m4:['holo',-.07],ak:['holo',-.08]};
+const q=new URLSearchParams(location.search),weapon=q.get('gun'),kind=q.get('kind')||fit[weapon]?.[0]||'mini-reflex',view=q.get('view')||'three',light=q.get('light')||'noon';
+const optic=makeOptic(kind),subject=new T.Group();
+if(weapon){
+  if(!guns[weapon])throw Error('unknown gun '+weapon);
+  const gun=guns[weapon](ctx),z=fit[weapon][1];subject.add(gun);gun.updateMatrixWorld(true);
+  const ray=new T.Raycaster(new T.Vector3(0,2,z),new T.Vector3(0,-1,0));
+  const hit=ray.intersectObject(gun,true)[0];
+  if(!hit)throw Error(`no receiver mount surface on ${weapon} at z=${z}`);
+  optic.position.set(0,hit.point.y,z);gun.add(optic);
+}else subject.add(optic);
+const scene=new T.Scene();scene.background=new T.Color(light==='night'?0x131b20:light==='dusk'?0x4b4543:light==='overcast'?0x697477:0xaeb9b8);scene.add(subject);
+const hemi=new T.HemisphereLight(0xdce7ec,0x303730,light==='night'?.32:light==='dusk'?.9:light==='overcast'?1.1:1.45);scene.add(hemi);
+const sun=new T.DirectionalLight(light==='dusk'?0xffba76:0xffffff,light==='night'?.45:light==='overcast'?.85:2.15);sun.position.set(1.3,2.4,3);scene.add(sun);
+if(light==='night'){const lamp=new T.PointLight(0xbad9df,6,2);lamp.position.set(-.4,.5,.4);scene.add(lamp);}
+const renderer=new T.WebGPURenderer({antialias:true,forceWebGL:true});await renderer.init();renderer.setPixelRatio(1);renderer.setSize(1280,720);renderer.shadowMap.enabled=true;document.body.appendChild(renderer.domElement);
+const bounds=new T.Box3().setFromObject(subject),center=bounds.getCenter(new T.Vector3()),size=bounds.getSize(new T.Vector3());
+let span=Math.max(size.x,size.y,size.z,.09);
+if(weapon&&q.has('close')){optic.updateMatrixWorld(true);center.copy(optic.getWorldPosition(new T.Vector3())).y-=.035;span=.38;}
+const camera=new T.PerspectiveCamera(33,1280/720,.001,50),distance=span*(weapon?2.0:2.6);
+if(view==='front')camera.position.set(center.x,center.y+.08*span,center.z+distance);
+else if(view==='side')camera.position.set(center.x+distance,center.y+.08*span,center.z);
+else camera.position.set(center.x+distance*.68,center.y+distance*.38,center.z+distance*.8);
+camera.lookAt(center);scene.add(camera);renderer.render(scene,camera);
+let triangles=0;optic.traverse(o=>{if(o.isMesh)triangles+=(o.geometry.index?.count??o.geometry.attributes.position.count)/3;});
+let allTriangles=0;subject.traverse(o=>{if(o.isMesh)allTriangles+=(o.geometry.index?.count??o.geometry.attributes.position.count)/3;});
+const gunTriangles=Math.round(allTriangles-triangles);
+document.getElementById('label').textContent=`GP-20025 · ${kind} · ${weapon?weapon+(q.has('close')?' mount detail':' fit study'):'optic alone'} · ${view} · ${light} · ${Math.round(triangles)} optic tris${weapon?' / '+gunTriangles+' gun tris':''}`;
+window.__ready=true;window.__triangles=Math.round(triangles);window.__gunTriangles=gunTriangles;
+</script></body></html>

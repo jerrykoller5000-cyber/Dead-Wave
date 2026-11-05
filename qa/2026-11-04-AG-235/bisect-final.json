@@ -1,0 +1,74 @@
+{
+  "wt_test": {
+    "text": "PASS the recorder is on TT\nPASS Math.random is the seeded generator (seed 1221634319)\nPASS first person settled before the clip (1)\nPASS the clip has 600 frames and 4 snapshots\nPASS the clip names the seed and the field of view\nPASS the player matches within 1 mm (0.00000 m)\nPASS the camera direction matches within 0.01 deg (0.0000)\nFAIL after the eye ease the camera position matches within 1 mm (0.0077 m)\nPASS the opening frames stay within 20 mm while the eye catches the head (0.0077 m at frame 174)\nPASS replay drove the frames itself",
+    "worstP": 1.387471792365379e-12,
+    "worstA": 0.0000017075472925031877,
+    "worstC": 0.00772463974802499,
+    "at": 174,
+    "lateC": 0.00772463974802499,
+    "lateAt": 174
+  },
+  "wt_real": {
+    "text": "PASS the recorder is on TT\nPASS Math.random is the seeded generator (seed 3592339281)\nPASS first person settled before the clip (1)\nPASS the clip has 600 frames and 4 snapshots\nPASS the clip names the seed and the field of view\nPASS the player matches within 1 mm (0.00000 m)\nPASS the camera direction matches within 0.01 deg (0.0000)\nFAIL after the eye ease the camera position matches within 1 mm (0.0042 m)\nPASS the opening frames stay within 20 mm while the eye catches the head (0.0043 m at frame 0)\nPASS replay drove the frames itself",
+    "worstP": 1.387471792365379e-12,
+    "worstA": 0.0000024148365394514667,
+    "worstC": 0.004343640349837631,
+    "at": 0,
+    "lateC": 0.004158674026438689,
+    "lateAt": 161
+  },
+  "c5adede46_test": {
+    "text": "PASS the recorder is on TT\nPASS Math.random is the seeded generator (seed 3814737321)\nPASS first person settled before the clip (1)\nPASS the clip has 600 frames and 4 snapshots\nPASS the clip names the seed and the field of view\nPASS the player matches within 1 mm (0.00000 m)\nPASS the camera direction matches within 0.01 deg (0.0000)\nFAIL after the eye ease the camera position matches within 1 mm (0.0018 m)\nPASS the opening frames stay within 20 mm while the eye catches the head (0.0046 m at frame 0)\nPASS replay drove the frames itself",
+    "worstP": 1.387471792365379e-12,
+    "worstA": 0.0000017075472925031877,
+    "worstC": 0.004591665482869928,
+    "at": 0,
+    "lateC": 0.001768843596593609,
+    "lateAt": 165
+  },
+  "c5adede46_real": {
+    "text": "PASS the recorder is on TT\nPASS Math.random is the seeded generator (seed 1413258620)\nPASS first person settled before the clip (1)\nPASS the clip has 600 frames and 4 snapshots\nPASS the clip names the seed and the field of view\nPASS the player matches within 1 mm (0.00000 m)\nPASS the camera direction matches within 0.01 deg (0.0000)\nFAIL after the eye ease the camera position matches within 1 mm (0.0065 m)\nPASS the opening frames stay within 20 mm while the eye catches the head (0.0065 m at frame 180)\nPASS replay drove the frames itself",
+    "worstP": 1.387471792365379e-12,
+    "worstA": 0.0000024148365394514667,
+    "worstC": 0.006496786009190942,
+    "at": 180,
+    "lateC": 0.006496786009190942,
+    "lateAt": 180
+  },
+  "f645ba77_test": {
+    "text": "PASS the recorder is on TT\nPASS Math.random is the seeded generator (seed 3629304444)\nPASS first person settled before the clip (1)\nPASS the clip has 600 frames and 4 snapshots\nPASS the clip names the seed and the field of view\nPASS the player matches within 1 mm (0.00000 m)\nPASS the camera direction matches within 0.01 deg (0.0000)\nFAIL after the eye ease the camera position matches within 1 mm (0.0020 m)\nPASS the opening frames stay within 20 mm while the eye catches the head (0.0047 m at frame 0)\nPASS replay drove the frames itself",
+    "worstP": 1.387471792365379e-12,
+    "worstA": 0.0000017075472925031877,
+    "worstC": 0.004696331914427157,
+    "at": 0,
+    "lateC": 0.0019529750464795277,
+    "lateAt": 147
+  },
+  "f645ba77_real": {
+    "text": "PASS the recorder is on TT\nPASS Math.random is the seeded generator (seed 3829576693)\nPASS first person settled before the clip (1)\nPASS the clip has 600 frames and 4 snapshots\nPASS the clip names the seed and the field of view\nPASS the player matches within 1 mm (0.00000 m)\nPASS the camera direction matches within 0.01 deg (0.0000)\nFAIL after the eye ease the camera position matches within 1 mm (0.0051 m)\nPASS the opening frames stay within 20 mm while the eye catches the head (0.0051 m at frame 184)\nPASS replay drove the frames itself",
+    "worstP": 1.387471792365379e-12,
+    "worstA": 0.0000024148365394514667,
+    "worstC": 0.0051255294351011185,
+    "at": 184,
+    "lateC": 0.0051255294351011185,
+    "lateAt": 184
+  },
+  "c5adede46_revert_cl293_test": {
+    "text": "PASS the recorder is on TT\nPASS Math.random is the seeded generator (seed 334294000)\nPASS first person settled before the clip (1)\nPASS the clip has 600 frames and 4 snapshots\nPASS the clip names the seed and the field of view\nFAIL the player matches within 1 mm (0.37576 m)\nFAIL the camera direction matches within 0.01 deg (0.1255)\nFAIL after the eye ease the camera position matches within 1 mm (0.4694 m)\nFAIL the opening frames stay within 20 mm while the eye catches the head (0.4694 m at frame 552)\nPASS replay drove the frames itself",
+    "worstP": 0.37575947602395404,
+    "worstA": 0.1254562272589732,
+    "worstC": 0.4694439911358097,
+    "at": 552,
+    "lateC": 0.4694439911358097,
+    "lateAt": 552
+  },
+  "c5adede46_revert_cl293_real": {
+    "text": "PASS the recorder is on TT\nPASS Math.random is the seeded generator (seed 3366609020)\nPASS first person settled before the clip (1)\nPASS the clip has 600 frames and 4 snapshots\nPASS the clip names the seed and the field of view\nPASS the player matches within 1 mm (0.00000 m)\nPASS the camera direction matches within 0.01 deg (0.0000)\nFAIL after the eye ease the camera position matches within 1 mm (0.0019 m)\nPASS the opening frames stay within 20 mm while the eye catches the head (0.0044 m at frame 0)\nPASS replay drove the frames itself",
+    "worstP": 1.387471792365379e-12,
+    "worstA": 0.0000024148365394514667,
+    "worstC": 0.004441396129012167,
+    "at": 0,
+    "lateC": 0.001923134238337331,
+    "lateAt": 164
+  }
+}

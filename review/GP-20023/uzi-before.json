@@ -1,0 +1,10 @@
+[
+  {"target":"weapon:uzi","view":"side","time":"noon","out":"review/GP-20023/uzi-before-side-noon.png"},
+  {"target":"weapon:uzi","view":"three","time":"noon","out":"review/GP-20023/uzi-before-three-noon.png"},
+  {"target":"weapon:uzi","view":"side","time":0.42,"out":"review/GP-20023/uzi-before-side-overcast.png"},
+  {"target":"weapon:uzi","view":"three","time":0.42,"out":"review/GP-20023/uzi-before-three-overcast.png"},
+  {"target":"weapon:uzi","view":"side","time":"dusk","out":"review/GP-20023/uzi-before-side-dusk.png"},
+  {"target":"weapon:uzi","view":"three","time":"dusk","out":"review/GP-20023/uzi-before-three-dusk.png"},
+  {"target":"weapon:uzi","view":"side","time":"night","out":"review/GP-20023/uzi-before-side-night.png"},
+  {"target":"weapon:uzi","view":"three","time":"night","out":"review/GP-20023/uzi-before-three-night.png"}
+]

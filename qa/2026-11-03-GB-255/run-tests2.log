@@ -1,0 +1,54 @@
+=== T76 TESTPAGE x3
+check-players: 315 player.position reads, all in the allowed places
+ok    t76     16 pass   0 fail  57.0s
+
+1 checks: 16 pass, 0 fail
+check-players: 315 player.position reads, all in the allowed places
+ok    t76     16 pass   0 fail  55.9s
+
+1 checks: 16 pass, 0 fail
+check-players: 315 player.position reads, all in the allowed places
+ok    t76     16 pass   0 fail  53.5s
+
+1 checks: 16 pass, 0 fail
+=== GRAZE CURRENT
+ok    tgb255f    9 pass   0 fail  109.9s  (real renderer)
+    PASS the HQ house is there
+    rep 0
+    PASS a spider on a line that grazes the corner takes one with room (start 0.29 m clear, end 3.71 m; tight 0% of the time after 3 s; closest 4.7 m)
+    rep 1
+    PASS a spider on a line that grazes the corner takes one with room (start 0.29 m clear, end 1.81 m; tight 0% of the time after 3 s; closest 4.4 m)
+    rep 2
+    PASS a spider on a line that grazes the corner takes one with room (start 0.29 m clear, end 2.91 m; tight 0% of the time after 3 s; closest 6.0 m)
+    rep 3
+    PASS a spider on a line that grazes the corner takes one with room (start 0.29 m clear, end 1.41 m; tight 0% of the time after 3 s; closest 4.4 m)
+    rep 4
+    PASS a spider on a line that grazes the corner takes one with room (start 0.29 m clear, end 1.91 m; tight 0% of the time after 3 s; closest 3.6 m)
+    rep 5
+    PASS a spider on a line that grazes the corner takes one with room (start 0.29 m clear, end 1.93 m; tight 0% of the time after 3 s; closest 3.7 m)
+    rep 6
+    PASS a spider on a line that grazes the corner takes one with room (start 0.29 m clear, end 2.86 m; tight 0% of the time after 3 s; closest 5.4 m)
+    rep 7
+    PASS a spider on a line that grazes the corner takes one with room (start 0.29 m clear, end 1.26 m; tight 0% of the time after 3 s; closest 4.4 m)
+1 checks: 9 pass, 0 fail (real renderer)
+=== GRAZE BEFORE
+ok    tgb255f    9 pass   0 fail  110.2s  (real renderer)
+    PASS the HQ house is there
+    rep 0
+    PASS a spider on a line that grazes the corner takes one with room (start 0.29 m clear, end 1.61 m; tight 0% of the time after 3 s; closest 6.2 m)
+    rep 1
+    PASS a spider on a line that grazes the corner takes one with room (start 0.29 m clear, end 2.69 m; tight 0% of the time after 3 s; closest 5.3 m)
+    rep 2
+    PASS a spider on a line that grazes the corner takes one with room (start 0.29 m clear, end 3.13 m; tight 0% of the time after 3 s; closest 5.3 m)
+    rep 3
+    PASS a spider on a line that grazes the corner takes one with room (start 0.29 m clear, end 1.43 m; tight 0% of the time after 3 s; closest 4.4 m)
+    rep 4
+    PASS a spider on a line that grazes the corner takes one with room (start 0.29 m clear, end 1.81 m; tight 0% of the time after 3 s; closest 3.6 m)
+    rep 5
+    PASS a spider on a line that grazes the corner takes one with room (start 0.29 m clear, end 1.38 m; tight 0% of the time after 3 s; closest 4.4 m)
+    rep 6
+    PASS a spider on a line that grazes the corner takes one with room (start 0.29 m clear, end 2.52 m; tight 0% of the time after 3 s; closest 5.3 m)
+    rep 7
+    PASS a spider on a line that grazes the corner takes one with room (start 0.29 m clear, end 1.74 m; tight 0% of the time after 3 s; closest 6.0 m)
+1 checks: 9 pass, 0 fail (real renderer)
+=== DONE

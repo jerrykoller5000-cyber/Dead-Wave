@@ -1,0 +1,445 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Reference viewer</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #121418; color: #e6e1d6; font: 14px/1.4 system-ui, sans-serif; }
+  #view { position: fixed; inset: 0; z-index: 0; }
+  #panel { position: fixed; top: 12px; left: 12px; z-index: 2; width: 320px; max-height: calc(100% - 24px); overflow: auto;
+    background: rgba(18,20,24,.92); border: 1px solid #3a4250; padding: 12px 14px; }
+  h1 { font-size: 15px; margin: 0 0 8px; }
+  p { margin: 0 0 8px; color: #b7b1a4; }
+  select, button { font: inherit; background: #1c2128; color: inherit; border: 1px solid #3a4250; padding: 4px 8px; }
+  button { margin-right: 6px; }
+  #readout { white-space: pre-wrap; font: 12px/1.45 ui-monospace, monospace; margin: 10px 0 0; }
+  #err { color: #e7b2a0; }
+</style>
+<div id="panel">
+  <h1>Reference viewer</h1>
+  <p>Jerry's models stay in Claude outputs and are never copied into the game. Ours is the studio gun at the game's CL-90 size. Theirs is scaled so its longest axis is the real length in the table below.</p>
+  <label>Gun <select id="gun"></select></label>
+  <p style="margin-top:8px"><button id="side" type="button">Side</button><button id="top" type="button">Top</button><button id="reset" type="button">Orbit</button></p>
+  <div id="err"></div>
+  <pre id="readout">loading…</pre>
+</div>
+<div id="view"></div>
+<script type="importmap">
+{
+  "imports": {
+    "three": "../../vendor/three/three.webgpu.js",
+    "three/webgpu": "../../vendor/three/three.webgpu.js",
+    "three/tsl": "../../vendor/three/three.tsl.js",
+    "three/addons/": "../../vendor/three/addons/"
+  }
+}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { weaponModelContext } from '../marine-inspector.js';
+import { makeM4Model, makeAkModel, makeAa12Model, makeShotgunModel, makeSniperModel } from '../../studio/weapon-longarms.js';
+import { makePistolModel, makeRevolverModel, makeUziModel } from '../../studio/weapon-sidearms.js';
+import { makeMinigunModel, makeLauncherModel, makeChainsawModel } from '../../studio/weapon-heavy.js';
+
+// CL-90 from index.html. len / m / look are WEAPON_SIZE. hand is the old in-hand
+// setScalar applied before m * look * MARINE_UPM / len (the minigun keeps 0.88 only).
+// real is the metre length the reference is scaled to: WEAPON_SIZE.m. The minigun
+// is not in that table; 0.80 m is this viewer's figure for the handheld gun.
+const MARINE_UPM = 1.655 / 1.80;
+const GUNS = [
+  { id: 'minigun', file: 'm134_handheld_minigun.glb', make: makeMinigunModel, real: 0.80, hand: 0.88 },
+  { id: 'm4', file: 'm4_sopmod.glb', make: makeM4Model, len: 1.423, m: 0.84, look: 1.35, real: 0.84, hand: 0.92 },
+  { id: 'ak', file: 'ak-47.glb', make: makeAkModel, len: 1.464, m: 0.88, look: 1.35, real: 0.88, hand: 0.92 },
+  { id: 'uzi', file: 'uzi.glb', make: makeUziModel, len: 0.816, m: 0.47, look: 1.0, real: 0.47, hand: 1.00 },
+  { id: 'shotgun', file: 'shotgun.glb', make: makeShotgunModel, len: 1.376, m: 1.0, look: 1.25, real: 1.0, hand: 0.95 },
+  { id: 'aa12', file: 'aa12.glb', make: makeAa12Model, len: 1.393, m: 0.96, look: 1.2, real: 0.96, hand: 0.90 },
+  { id: 'revolver', file: '38_special_revolver.glb', make: makeRevolverModel, len: 0.484, m: 0.27, look: 1.4, real: 0.27, hand: 1.08 },
+  { id: 'sniper', file: 'sniper.glb', make: makeSniperModel, len: 1.608, m: 1.15, look: 1.25, real: 1.15, hand: 0.88 },
+  { id: 'launcher', file: 'naders_grenade_launcher.glb', make: makeLauncherModel, len: 1.091, m: 0.75, look: 1.2, real: 0.75, hand: 0.92 },
+  { id: 'chainsaw', file: 'chainsaw.glb', make: makeChainsawModel, len: 1.376, m: 0.85, look: 1.2, real: 0.85, hand: 1.18 }
+];
+const gameScale = (g) => {
+  const hand = g.hand == null ? 1 : g.hand;
+  return g.len ? hand * g.m * (g.look || 1) * MARINE_UPM / g.len : hand;
+};
+
+const ctx = weaponModelContext();
+const ours = {};
+for (const g of GUNS) {
+  const gun = g.make(ctx);
+  const s = gameScale(g);
+  gun.scale.setScalar(s);
+  gun.userData.sizeK = s;
+  gun.visible = false;
+  ours[g.id] = gun;
+}
+
+const view = document.getElementById('view');
+const readout = document.getElementById('readout');
+const errEl = document.getElementById('err');
+const select = document.getElementById('gun');
+for (const g of GUNS) {
+  const o = document.createElement('option');
+  o.value = g.id;
+  o.textContent = g.id + '  ·  ' + g.file;
+  select.appendChild(o);
+}
+
+const renderer = new THREE.WebGPURenderer({ antialias: true, forceWebGL: true });
+await renderer.init();
+renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+view.appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x121418);
+const camera = new THREE.PerspectiveCamera(40, 1, 0.01, 80);
+scene.add(new THREE.HemisphereLight(0xdde2ea, 0x2a2722, 1.15));
+const sun = new THREE.DirectionalLight(0xfff4e0, 1.4);
+sun.position.set(2, 4, 3);
+scene.add(sun);
+const root = new THREE.Group();
+scene.add(root);
+for (const gun of Object.values(ours)) root.add(gun);
+let refRoot = new THREE.Group();
+root.add(refRoot);
+const ruler = new THREE.Group();
+scene.add(ruler);
+
+const orbit = { yaw: 0.7, pitch: 0.25, dist: 2.2, at: new THREE.Vector3(0, 0.15, 0) };
+function placeCam() {
+  const cp = Math.cos(orbit.pitch), sp = Math.sin(orbit.pitch);
+  camera.position.set(
+    orbit.at.x + Math.sin(orbit.yaw) * cp * orbit.dist,
+    orbit.at.y + sp * orbit.dist,
+    orbit.at.z + Math.cos(orbit.yaw) * cp * orbit.dist
+  );
+  camera.lookAt(orbit.at);
+}
+function resize() {
+  const w = view.clientWidth, h = view.clientHeight;
+  renderer.setSize(w, h, false);
+  camera.aspect = w / Math.max(1, h);
+  camera.updateProjectionMatrix();
+}
+resize();
+addEventListener('resize', resize);
+const el = renderer.domElement;
+let drag = 0, lx = 0, ly = 0;
+el.addEventListener('contextmenu', (e) => e.preventDefault());
+el.addEventListener('pointerdown', (e) => { drag = e.button + 1; lx = e.clientX; ly = e.clientY; el.setPointerCapture(e.pointerId); });
+el.addEventListener('pointerup', () => { drag = 0; });
+el.addEventListener('pointermove', (e) => {
+  if (!drag) return;
+  const dx = e.clientX - lx, dy = e.clientY - ly;
+  lx = e.clientX; ly = e.clientY;
+  if (drag === 1) { orbit.yaw -= dx * 0.008; orbit.pitch = Math.max(-1.2, Math.min(1.2, orbit.pitch + dy * 0.008)); }
+  else { orbit.at.x -= dx * 0.0015 * orbit.dist; orbit.at.y += dy * 0.0015 * orbit.dist; }
+});
+el.addEventListener('wheel', (e) => { e.preventDefault(); orbit.dist = Math.max(0.25, Math.min(12, orbit.dist * (e.deltaY > 0 ? 1.08 : 0.92))); }, { passive: false });
+const framed = { yaw: 0.7, pitch: 0.25 };
+document.getElementById('side').onclick = () => { orbit.yaw = Math.PI / 2; orbit.pitch = 0; };
+document.getElementById('top').onclick = () => { orbit.yaw = 0; orbit.pitch = Math.PI / 2 - 0.08; };
+document.getElementById('reset').onclick = () => { orbit.yaw = framed.yaw; orbit.pitch = framed.pitch; };
+
+function readAccessor(doc, bin, index) {
+  const acc = doc.accessors[index];
+  const bv = doc.bufferViews[acc.bufferView];
+  const start = (bv.byteOffset || 0) + (acc.byteOffset || 0);
+  const ncomp = { SCALAR: 1, VEC2: 2, VEC3: 3, VEC4: 4 }[acc.type];
+  const compSize = { 5120: 1, 5121: 1, 5122: 2, 5123: 2, 5125: 4, 5126: 4 }[acc.componentType];
+  const stride = bv.byteStride || compSize * ncomp;
+  const out = new Float32Array(acc.count * ncomp);
+  const dv = new DataView(bin);
+  for (let i = 0; i < acc.count; i++) {
+    const o = start + i * stride;
+    for (let c = 0; c < ncomp; c++) {
+      let v = 0;
+      if (acc.componentType === 5126) v = dv.getFloat32(o + c * 4, true);
+      else if (acc.componentType === 5123) v = dv.getUint16(o + c * 2, true);
+      else if (acc.componentType === 5125) v = dv.getUint32(o + c * 4, true);
+      else if (acc.componentType === 5121) v = dv.getUint8(o + c);
+      else if (acc.componentType === 5122) v = dv.getInt16(o + c * 2, true);
+      else if (acc.componentType === 5120) v = dv.getInt8(o + c);
+      out[i * ncomp + c] = v;
+    }
+  }
+  return out;
+}
+function nodeMatrix(n) {
+  const m = new THREE.Matrix4();
+  if (n.matrix) m.fromArray(n.matrix);
+  else {
+    const t = n.translation || [0, 0, 0];
+    const r = n.rotation || [0, 0, 0, 1];
+    const s = n.scale || [1, 1, 1];
+    m.compose(new THREE.Vector3(t[0], t[1], t[2]), new THREE.Quaternion(r[0], r[1], r[2], r[3]), new THREE.Vector3(s[0], s[1], s[2]));
+  }
+  return m;
+}
+function parseGlb(buf) {
+  const u8 = new Uint8Array(buf);
+  const dv = new DataView(buf);
+  if (dv.getUint32(0, true) !== 0x46546c67) throw new Error('not a glb');
+  let json = null, bin = null, binShort = false, o = 12;
+  while (o + 8 <= u8.length) {
+    const len = dv.getUint32(o, true);
+    const type = dv.getUint32(o + 4, true);
+    const chunk = u8.slice(o + 8, o + 8 + len);
+    if (type === 0x4e4f534a) json = JSON.parse(new TextDecoder().decode(chunk));
+    else if (type === 0x004e4942) {
+      const have = Math.max(0, Math.min(len, u8.length - (o + 8)));
+      const declared = json && json.buffers && json.buffers[0] ? (json.buffers[0].byteLength || 0) : 0;
+      const need = Math.max(have, declared);
+      const padded = new Uint8Array(need);
+      padded.set(u8.subarray(o + 8, o + 8 + have));
+      bin = padded.buffer;
+      binShort = have < need;
+    }
+    o += 8 + len;
+  }
+  if (!json || !bin) throw new Error('glb is missing json or bin');
+  const group = new THREE.Group();
+  group.userData.binShort = binShort;
+  const doc = json;
+  const nodes = doc.nodes || [];
+  const world = nodes.map(() => new THREE.Matrix4());
+  const kids = nodes.map(() => []);
+  nodes.forEach((n, i) => (n.children || []).forEach((c) => kids[i].push(c)));
+  const roots = new Set(nodes.map((_, i) => i));
+  kids.forEach((list) => list.forEach((c) => roots.delete(c)));
+  const sceneNodes = (doc.scenes && doc.scenes[doc.scene || 0] && doc.scenes[doc.scene || 0].nodes) || [...roots];
+  function walk(i, parent) {
+    world[i].multiplyMatrices(parent, nodeMatrix(nodes[i] || {}));
+    for (const c of kids[i]) walk(c, world[i]);
+  }
+  for (const r of sceneNodes) walk(r, new THREE.Matrix4());
+  const mat = new THREE.MeshStandardMaterial({ color: 0xb7b1a4, roughness: 0.6, metalness: 0.15 });
+  nodes.forEach((n, i) => {
+    if (n.mesh == null) return;
+    const mesh = doc.meshes[n.mesh];
+    for (const prim of mesh.primitives || []) {
+      if (prim.mode != null && prim.mode !== 4) continue;
+      if (prim.attributes.POSITION == null) continue;
+      const pos = readAccessor(doc, bin, prim.attributes.POSITION);
+      const geo = new THREE.BufferGeometry();
+      geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+      if (prim.attributes.NORMAL != null) geo.setAttribute('normal', new THREE.BufferAttribute(readAccessor(doc, bin, prim.attributes.NORMAL), 3));
+      if (prim.indices != null) {
+        const idx = readAccessor(doc, bin, prim.indices);
+        const acc = doc.accessors[prim.indices];
+        const Arr = acc.componentType === 5125 ? Uint32Array : Uint16Array;
+        geo.setIndex(new THREE.BufferAttribute(new Arr(idx), 1));
+      }
+      if (!geo.getAttribute('normal')) geo.computeVertexNormals();
+      const m = new THREE.Mesh(geo, mat);
+      m.applyMatrix4(world[i]);
+      m.castShadow = m.receiveShadow = true;
+      group.add(m);
+    }
+  });
+  return group;
+}
+
+function isShown(o) {
+  if (!o.isMesh || !o.visible || !o.geometry || !o.geometry.getAttribute('position')) return false;
+  for (let p = o.parent; p; p = p.parent) if (p.visible === false) return false;
+  return true;
+}
+function bodyBox(obj) {
+  const box = new THREE.Box3();
+  obj.updateWorldMatrix(true, true);
+  obj.traverse((o) => {
+    if (!isShown(o)) return;
+    if (!o.geometry.boundingBox) o.geometry.computeBoundingBox();
+    box.union(o.geometry.boundingBox.clone().applyMatrix4(o.matrixWorld));
+  });
+  return box;
+}
+function pointsOf(obj) {
+  obj.updateMatrixWorld(true);
+  const out = [];
+  const v = new THREE.Vector3();
+  obj.traverse((o) => {
+    if (!isShown(o)) return;
+    const p = o.geometry.getAttribute('position');
+    const step = Math.max(1, Math.floor(p.count / 800));
+    for (let i = 0; i < p.count; i += step) {
+      v.fromBufferAttribute(p, i).applyMatrix4(o.matrixWorld);
+      out.push(v.x, v.y, v.z);
+    }
+  });
+  return out;
+}
+function orientLongestToZ(obj) {
+  obj.updateMatrixWorld(true);
+  const box = bodyBox(obj);
+  const s = box.getSize(new THREE.Vector3());
+  const axes = [['x', s.x], ['y', s.y], ['z', s.z]].sort((a, b) => b[1] - a[1]);
+  if (axes[0][0] === 'x') obj.rotateY(Math.PI / 2);
+  else if (axes[0][0] === 'y') obj.rotateX(-Math.PI / 2);
+  obj.updateMatrixWorld(true);
+  const box2 = bodyBox(obj);
+  const s2 = box2.getSize(new THREE.Vector3());
+  if (s2.x > s2.y) obj.rotateZ(Math.PI / 2);
+  obj.updateMatrixWorld(true);
+  const box3 = bodyBox(obj);
+  const size = box3.getSize(new THREE.Vector3());
+  const yCut = box3.min.y + size.y * 0.5;
+  let zSum = 0, n = 0;
+  const v = new THREE.Vector3();
+  obj.traverse((o) => {
+    if (!isShown(o)) return;
+    const pos = o.geometry.getAttribute('position');
+    const step = Math.max(1, Math.floor(pos.count / 400));
+    for (let i = 0; i < pos.count; i += step) {
+      v.fromBufferAttribute(pos, i).applyMatrix4(o.matrixWorld);
+      if (v.y > yCut) continue;
+      zSum += v.z; n++;
+    }
+  });
+  if (n > 8 && zSum / n > (box3.min.z + box3.max.z) * 0.5) obj.rotateY(Math.PI);
+}
+function measure(obj) {
+  const pts = pointsOf(obj);
+  const box = bodyBox(obj);
+  if (pts.length < 12 || box.isEmpty()) return null;
+  const size = box.getSize(new THREE.Vector3());
+  const z0 = box.min.z, z1 = box.max.z, y0 = box.min.y, y1 = box.max.y;
+  const len = size.z, h = y1 - y0;
+  const grip = [];
+  for (let i = 0; i < pts.length; i += 3) {
+    const y = pts[i + 1], z = pts[i + 2];
+    if (z < z0 + len * 0.38 && y < y0 + h * 0.62) grip.push(y, z);
+  }
+  let sy = 0, sz = 0, syy = 0, szz = 0, syz = 0;
+  for (let i = 0; i < grip.length; i += 2) { sy += grip[i]; sz += grip[i + 1]; }
+  const n = Math.max(1, grip.length / 2);
+  const my = sy / n, mz = sz / n;
+  for (let i = 0; i < grip.length; i += 2) {
+    const dy = grip[i] - my, dz = grip[i + 1] - mz;
+    syy += dy * dy; szz += dz * dz; syz += dy * dz;
+  }
+  const ang = 0.5 * Math.atan2(2 * syz, syy - szz);
+  const rake = Math.abs(Math.atan2(Math.sin(ang), Math.cos(ang)) * 180 / Math.PI);
+  const muzzle = [];
+  for (let i = 0; i < pts.length; i += 3) if (pts[i + 2] > z1 - len * 0.18) muzzle.push(pts[i + 1]);
+  muzzle.sort((a, b) => a - b);
+  const boreY = muzzle.length ? muzzle[muzzle.length >> 1] : (y0 + y1) * 0.5;
+  const gripYs = [];
+  for (let i = 0; i < grip.length; i += 2) gripYs.push(grip[i]);
+  gripYs.sort((a, b) => a - b);
+  const gripY = gripYs.length ? gripYs[gripYs.length >> 1] : y0;
+  let sight = boreY;
+  for (let i = 0; i < pts.length; i += 3) {
+    if (pts[i + 2] < z0 + len * 0.55 && pts[i + 1] > sight) sight = pts[i + 1];
+  }
+  return {
+    length: len,
+    boreOverGrip: boreY - gripY,
+    rakeDeg: rake,
+    sightH: Math.max(0, sight - boreY)
+  };
+}
+function fmt(n) { return (Number.isFinite(n) ? n : 0).toFixed(3); }
+function buildRuler(span) {
+  while (ruler.children.length) ruler.remove(ruler.children[0]);
+  const mat = new THREE.LineBasicMaterial({ color: 0x8d8878 });
+  const pts = [new THREE.Vector3(0, 0, -0.05), new THREE.Vector3(0, 0, span)];
+  ruler.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), mat));
+  for (let z = 0; z <= span + 1e-6; z += 0.1) {
+    const h = Math.abs(z * 10 - Math.round(z * 10)) < 0.01 && Math.round(z * 10) % 5 === 0 ? 0.04 : 0.02;
+    ruler.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([
+      new THREE.Vector3(0, 0, z), new THREE.Vector3(0, h, z)
+    ]), mat));
+  }
+}
+
+function settle(obj) {
+  obj.updateMatrixWorld(true);
+  const box = bodyBox(obj);
+  if (box.isEmpty()) return new THREE.Vector3();
+  const c = box.getCenter(new THREE.Vector3());
+  obj.position.sub(c);
+  obj.position.y -= box.min.y - c.y;
+  return box.getSize(new THREE.Vector3());
+}
+
+let token = 0;
+async function show(id) {
+  const mine = ++token;
+  errEl.textContent = '';
+  const spec = GUNS.find((g) => g.id === id);
+  for (const g of GUNS) ours[g.id].visible = g.id === id;
+  const gun = ours[id];
+  gun.position.set(0, 0, 0);
+  gun.rotation.set(0, 0, 0);
+  gun.scale.setScalar(gameScale(spec));
+  const oursSize = settle(gun);
+  refRoot.clear();
+  const url = new URL('../../Claude outputs/refs/models/' + spec.file, import.meta.url);
+  let ref = null, refMeasure = null;
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(res.status + ' ' + url.pathname);
+    const group = parseGlb(await res.arrayBuffer());
+    if (mine !== token) return;
+    orientLongestToZ(group);
+    group.updateMatrixWorld(true);
+    const raw = new THREE.Box3().setFromObject(group).getSize(new THREE.Vector3());
+    const longest = Math.max(raw.x, raw.y, raw.z) || 1;
+    group.scale.setScalar(spec.real / longest);
+    settle(group);
+    ref = group;
+    refRoot.add(group);
+    refMeasure = measure(group);
+    if (group.userData.binShort) errEl.textContent = 'Reference file is shorter than its header. The last bytes are missing, so the tail of that model is incomplete.';
+  } catch (e) {
+    errEl.textContent = 'Reference did not load: ' + (e && e.message || e);
+  }
+  const gap = 0.18;
+  const oursBox = bodyBox(gun);
+  gun.position.x -= (oursBox.max.x + gap);
+  if (ref) {
+    const rb = bodyBox(ref);
+    ref.position.x += gap - rb.min.x;
+    ref.position.y += (oursBox.max.y - oursBox.min.y) + gap;
+  }
+  const both = bodyBox(root);
+  const mid = both.getCenter(new THREE.Vector3());
+  const s = both.getSize(new THREE.Vector3());
+  const aspect = Math.max(0.5, camera.aspect || 1);
+  const v = (camera.fov * Math.PI / 180) / 2;
+  const distV = (Math.max(s.y, s.z) / 2) / Math.tan(v);
+  const distH = (Math.max(s.x, s.z) / 2) / (Math.tan(v) * aspect);
+  orbit.at.copy(mid);
+  orbit.dist = Math.max(1.2, distV, distH) * 1.35;
+  orbit.yaw = framed.yaw;
+  orbit.pitch = framed.pitch;
+  const span = Math.max(1, spec.real, measure(gun)?.length || 1) + 0.2;
+  ruler.position.set(0, both.min.y - 0.02, both.min.z);
+  buildRuler(span);
+  const om = measure(gun);
+  const lines = [
+    'gun ' + id,
+    'realLength ' + fmt(spec.real),
+    'oursScale ' + fmt(gameScale(spec)),
+    'oursLength ' + fmt(om && om.length),
+    'oursBoreOverGrip ' + fmt(om && om.boreOverGrip),
+    'oursGripRakeDeg ' + fmt(om && om.rakeDeg),
+    'oursSightHeight ' + fmt(om && om.sightH),
+    'refLength ' + fmt(refMeasure && refMeasure.length),
+    'refBoreOverGrip ' + fmt(refMeasure && refMeasure.boreOverGrip),
+    'refGripRakeDeg ' + fmt(refMeasure && refMeasure.rakeDeg),
+    'refSightHeight ' + fmt(refMeasure && refMeasure.sightH),
+    'oursBox ' + [oursSize.x, oursSize.y, oursSize.z].map(fmt).join(' ')
+  ];
+  readout.textContent = lines.join('\n');
+  window.refview = { gun: id, real: spec.real, lines, ours: om, ref: refMeasure };
+}
+select.onchange = () => show(select.value);
+show(select.value);
+
+function frame() {
+  placeCam();
+  renderer.render(scene, camera);
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+</script>

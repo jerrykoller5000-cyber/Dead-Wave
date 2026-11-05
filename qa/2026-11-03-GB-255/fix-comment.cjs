@@ -1,0 +1,1 @@
+const fs=require('fs');let t=fs.readFileSync('tools/tests/t76.js','utf8');const a="since GB-241's turn (GP-19854) a shambler";if(!t.includes(a))throw new Error('x');t=t.replace(a,"since GP-19854's turning a shambler");fs.writeFileSync('tools/tests/t76.js',t);

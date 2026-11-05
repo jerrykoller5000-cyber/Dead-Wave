@@ -1,0 +1,65 @@
+{
+  "samples": [
+    {
+      "key": "launcher",
+      "label": "base",
+      "delta": {},
+      "weapon": "launcher",
+      "unarmed": false,
+      "backend": "WebGPU",
+      "first": true,
+      "ads": 0,
+      "active": true,
+      "vmKey": "launcher",
+      "raise": 1,
+      "muzzle": {
+        "x": 0.08409292034275594,
+        "y": -0.13399707492866506,
+        "d": 1.0739923684385448
+      },
+      "wristR": {
+        "x": 0.4441543655699095,
+        "y": -0.5882263923814329,
+        "d": 0.5234154795221898
+      },
+      "wristL": {
+        "x": 0.08787177721094327,
+        "y": -0.4178281926259376,
+        "d": 0.8634473254227096
+      }
+    },
+    {
+      "key": "launcher",
+      "label": "launcher-target",
+      "delta": {
+        "x": 0.03,
+        "y": -0.02,
+        "yaw": -0.15
+      },
+      "weapon": "launcher",
+      "unarmed": false,
+      "backend": "WebGPU",
+      "first": true,
+      "ads": 0,
+      "active": true,
+      "vmKey": "launcher",
+      "raise": 1,
+      "muzzle": {
+        "x": 0.18199802399971218,
+        "y": -0.16584202207149257,
+        "d": 1.081205024586117
+      },
+      "wristR": {
+        "x": 0.5003700105515204,
+        "y": -0.6626731129244723,
+        "d": 0.5190786956725546
+      },
+      "wristL": {
+        "x": 0.174435558429285,
+        "y": -0.45463818913487725,
+        "d": 0.8717090024451678
+      }
+    }
+  ],
+  "errors": []
+}

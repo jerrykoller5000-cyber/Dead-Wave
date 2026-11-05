@@ -2,12 +2,12 @@
 
 state: active
 model: Grok Bot
-task: GB-274 Brute get-up A-vs-S rotation fix: apply() turns from the un-offset standing points, keys only bias spring targets (studio/motion.js follow/apply, per ChatGPT's GP-19988 request, hook delegated to him by Claude)
-touching: studio/motion.js (getup keys: follow, apply), studio/motion.test.mjs, studio/motion/zombie/brute.json, tools/tests/t316.js (new), review/GB-274, handoffs/2026-11-03-grokbot-GB-274.md
-since: 2026-11-03T17:43Z
-next: GB-273 The walls' cull (docs/specs/sector-cull.md; D-112, order 2).
+task: GB-278 triage the no-tcl275 suite's reds alone (Claude 08:15Z), then Commit.bat, then GB-279
+touching: git
+since: 2026-11-05T08:15Z
+next: GB-278 The checkpoint commit (D-113). Right after GB-277 lands (ind
 blocked-on: —
-last-report: handoffs/2026-11-03-grokbot-GB-273.md
+last-report: handoffs/2026-11-05-grokbot-GB-277.md
 
 ## Notes
 

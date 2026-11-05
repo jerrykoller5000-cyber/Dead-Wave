@@ -1,0 +1,12 @@
+=== 1. WORKING_TREE ===
+WT (test): lateC=0.007725 at=174 worstC=0.007725 err=none
+WT (real): lateC=0.004159 at=161 worstC=0.004344 err=none
+=== 2. Checkpoint 5adede46 in worktree ===
+5adede46 (test): lateC=0.001769 at=165 worstC=0.004592 err=none
+5adede46 (real): lateC=0.006497 at=180 worstC=0.006497 err=none
+>>> 5adede46 IS ALREADY RED! Investigating 5adede46 vs f645ba77 and CL-293 <<<
+f645ba77 (test): lateC=0.001953 at=147 worstC=0.004696 err=none
+f645ba77 (real): lateC=0.005126 at=184 worstC=0.005126 err=none
+5adede46 Revert CL-293 (test): lateC=0.469444 at=552
+5adede46 Revert CL-293 (real): lateC=0.001923 at=164
+Done! Results written to C:\Users\Zero\Desktop\Tiny Trek\qa\2026-11-04-AG-235\bisect-final.json

@@ -1,0 +1,67 @@
+FAIL  tgb255g   16 pass   1 fail  147.3s  (real renderer)
+    PASS the HQ house is there
+    --- chain 0
+    PASS the spider starts with the house between them
+    PASS it comes round until the house is out of the line (clear after 5.7 s, in the line 100% of the time after; clear of the house)
+    PASS and it stays at range: never closer than 5.3 m
+    PASS a spitter behind the house keeps creeping in (moved 6.7 m, 13.0 to 8.7 m)
+    PASS a spider in the open holds its band (11.0 to 15.0 m)
+    PASS a flanker behind the house comes round to him (closest 2.7 m in 30 s; ended at -5.7,-2.7)
+    PASS a spider blind inside its back-off range comes on round the corner (clear after 5.3 s; clear of the house; 6.0 to 9.5 m)
+    rep 0 RED trace 0.1:0.49Bg@6.0 0.6:1.86Bg@6.0 1.0:2.90cgh@6.0 1.6:3.53ch@6.8 2.0:3.33ch@7.0 2.5:2.75ch@7.1 3.1:2.06BhL@7.4 3.6:1.52ch@8.0 4.0:0.90ch@8.1 4.6:0.22BhL@8.2 5.0:0.00BhL@8.7 5.5:0.05BhL@9.4 6.0:0.62BhL@9.6 6.6:1.20ch@9.7 7.0:1.67ch@9.9 7.5:1.71ch@10.8 8.1:1.23ch@11.1 8.6:0.76ch@11.2 9.0:0.30ch@11.2 9.5:0.00BhL@11.6 10.0:0.05BhL@12.4
+    FAIL a spider on a line that grazes the corner takes one with room (start 0.29 m clear, end 0.05 m; tight 38% of the time after 3 s; closest 6.0 m)
+    --- chain 1
+    PASS the spider starts with the house between them
+    PASS it comes round until the house is out of the line (clear after 4.7 s, in the line 100% of the time after; clear of the house)
+    PASS and it stays at range: never closer than 5.8 m
+    PASS a spitter behind the house keeps creeping in (moved 7.6 m, 13.0 to 7.6 m)
+    PASS a spider in the open holds its band (11.0 to 13.8 m)
+    PASS a flanker behind the house comes round to him (closest 2.3 m in 30 s; ended at -5.7,-3.1)
+    PASS a spider blind inside its back-off range comes on round the corner (clear after 5.3 s; clear of the house; 5.1 to 5.1 m)
+    rep 1 green trace 0.1:0.47Bg@6.0 0.5:1.79cgh@6.0 1.1:2.98cgh@6.1 1.5:3.29ch@7.0 2.0:3.05ch@7.1 2.5:2.46ch@7.2 3.0:1.78BhL@7.5 3.5:1.78ch@8.4 4.0:2.34BhL@8.7 4.6:2.61ch@9.5 5.0:2.26ch@10.0 5.5:1.86BhL@10.6 6.1:2.11ch@11.2 6.5:2.49BhL@11.5 7.1:2.52BhL@12.4 7.5:2.24BhL@12.8 8.0:2.07BhL@13.3 8.5:1.68Bsg@14.1 9.0:1.66Bsg@15.5 9.5:2.16Bsg@15.5 10.1:2.48Bsg@14.0
+    PASS a spider on a line that grazes the corner takes one with room (start 0.29 m clear, end 2.48 m; tight 0% of the time after 3 s; closest 6.0 m)
+ok    tgb255g   17 pass   0 fail  152.2s  (real renderer)
+    PASS the HQ house is there
+    --- chain 0
+    PASS the spider starts with the house between them
+    PASS it comes round until the house is out of the line (clear after 4.6 s, in the line 100% of the time after; clear of the house)
+    PASS and it stays at range: never closer than 5.6 m
+    PASS a spitter behind the house keeps creeping in (moved 7.7 m, 13.0 to 7.6 m)
+    PASS a spider in the open holds its band (11.0 to 15.0 m)
+    PASS a flanker behind the house comes round to him (closest 2.9 m in 30 s; ended at -5.7,-2.5)
+    PASS a spider blind inside its back-off range comes on round the corner (clear after 5.2 s; clear of the house; 5.7 to 5.7 m)
+    rep 0 green trace 0.1:0.49Bg@6.0 0.5:1.85Bg@6.0 1.0:2.89cgh@6.0 1.5:3.49ch@6.8 2.0:3.60ch@7.0 2.5:3.63BhL@7.2 3.0:3.64BhL@8.1 3.6:3.63BhL@8.7 4.0:3.62BhL@9.1 4.5:3.60Bsg@9.8 5.1:3.12Bsg@11.0 5.5:2.52Bsg@11.2 6.0:2.07Bsg@10.1 6.5:2.09Bsg@8.2 7.1:2.56csg@6.8 7.5:2.60csg@6.0 8.1:2.61csg@5.0 8.5:2.61cs@4.7 9.1:2.61cs@4.7 9.5:2.61cs@4.7 10.1:2.61cs@4.7
+    PASS a spider on a line that grazes the corner takes one with room (start 0.29 m clear, end 2.61 m; tight 0% of the time after 3 s; closest 4.7 m)
+    --- chain 1
+    PASS the spider starts with the house between them
+    PASS it comes round until the house is out of the line (clear after 4.6 s, in the line 100% of the time after; clear of the house)
+    PASS and it stays at range: never closer than 6.0 m
+    PASS a spitter behind the house keeps creeping in (moved 7.8 m, 13.0 to 7.4 m)
+    PASS a spider in the open holds its band (11.0 to 13.4 m)
+    PASS a flanker behind the house comes round to him (closest 2.7 m in 30 s; ended at -5.7,-2.7)
+    PASS a spider blind inside its back-off range comes on round the corner (clear after 7.4 s; clear of the house; 4.9 to 4.9 m)
+    rep 1 green trace 0.1:0.48Bg@6.0 0.5:1.77cgh@6.0 1.1:2.97cgh@6.1 1.5:3.33ch@7.0 2.0:3.50ch@7.0 2.5:3.62ch@7.1 3.0:3.64BhL@7.4 3.6:3.64BhL@8.3 4.0:3.63BhL@8.7 4.5:3.62BhL@9.2 5.1:3.52Bsg@10.3 5.5:3.45Bsg@11.8 6.0:3.00Bsg@12.5 6.5:2.46Bsg@11.5 7.0:2.20Bsg@10.0 7.5:2.12Bsg@8.2 8.1:2.71Bsg@7.0 8.5:2.85csg@6.8 9.1:2.85csg@5.8 9.5:2.85cs@5.3 10.1:2.85cs@5.3
+    PASS a spider on a line that grazes the corner takes one with room (start 0.29 m clear, end 2.85 m; tight 0% of the time after 3 s; closest 5.3 m)
+ok    tgb255g   17 pass   0 fail  151.9s  (real renderer)
+    PASS the HQ house is there
+    --- chain 0
+    PASS the spider starts with the house between them
+    PASS it comes round until the house is out of the line (clear after 5.7 s, in the line 100% of the time after; clear of the house)
+    PASS and it stays at range: never closer than 5.3 m
+    PASS a spitter behind the house keeps creeping in (moved 7.8 m, 13.0 to 7.5 m)
+    PASS a spider in the open holds its band (11.0 to 13.9 m)
+    PASS a flanker behind the house comes round to him (closest 2.4 m in 30 s; ended at -5.7,-3.0)
+    PASS a spider blind inside its back-off range comes on round the corner (clear after 7.4 s; clear of the house; 4.9 to 4.9 m)
+    rep 0 green trace 0.1:0.48Bg@6.0 0.5:1.83Bg@6.0 1.0:2.90Bsg@6.0 1.5:1.50Bsg@6.1 2.1:1.20csg@6.0 2.5:1.24csg@5.3 3.0:1.50cs@4.4 3.5:1.50cs@4.4 4.0:1.50cs@4.4 4.6:1.50cs@4.4 5.0:1.50cs@4.4 5.5:1.50cs@4.4 6.0:1.50cs@4.4 6.5:1.50cs@4.4 7.0:1.50cs@4.4 7.5:1.50cs@4.4 8.0:1.50cs@4.4 8.5:1.50cs@4.4 9.0:1.50cs@4.4 9.6:1.50cs@4.4 10.0:1.50cs@4.4
+    PASS a spider on a line that grazes the corner takes one with room (start 0.29 m clear, end 1.50 m; tight 0% of the time after 3 s; closest 4.4 m)
+    --- chain 1
+    PASS the spider starts with the house between them
+    PASS it comes round until the house is out of the line (clear after 4.6 s, in the line 100% of the time after; clear of the house)
+    PASS and it stays at range: never closer than 5.3 m
+    PASS a spitter behind the house keeps creeping in (moved 7.4 m, 13.0 to 7.9 m)
+    PASS a spider in the open holds its band (11.0 to 14.0 m)
+    PASS a flanker behind the house comes round to him (closest 2.4 m in 30 s; ended at -5.7,-3.0)
+    PASS a spider blind inside its back-off range comes on round the corner (clear after 7.4 s; clear of the house; 4.9 to 4.9 m)
+    rep 1 green trace 0.1:0.47Bg@6.0 0.5:1.79Bg@6.0 1.0:2.57Bsg@6.0 1.6:1.73csg@5.6 2.0:1.72csg@5.2 2.5:1.84cs@4.4 3.1:1.84cs@4.4 3.5:1.84cs@4.4 4.0:1.84cs@4.4 4.5:1.84cs@4.4 5.1:1.84cs@4.4 5.5:1.84cs@4.4 6.0:1.84cs@4.4 6.6:1.84cs@4.4 7.0:1.84cs@4.4 7.5:1.84cs@4.4 8.1:1.84cs@4.4 8.5:1.84cs@4.4 9.0:1.84cs@4.4 9.5:1.84cs@4.4 10.1:1.84cs@4.4
+    PASS a spider on a line that grazes the corner takes one with room (start 0.29 m clear, end 1.84 m; tight 0% of the time after 3 s; closest 4.4 m)
+3 checks: 50 pass, 1 fail (real renderer)

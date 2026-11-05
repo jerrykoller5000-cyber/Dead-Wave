@@ -1,0 +1,186 @@
+{
+  "aa12": {
+    "noon": {
+      "beforeMeanLuma": 51.26,
+      "ag227MeanLuma": 69.97,
+      "afterMeanLuma": 75.41,
+      "lumaGainPctVsBefore": 47.1,
+      "beforeP90Luma": 89.87,
+      "afterP90Luma": 135.59,
+      "beforeStdLuma": 25.92,
+      "ag227StdLuma": 31.4,
+      "afterStdLuma": 35.01
+    },
+    "overcast": {
+      "beforeMeanLuma": 39.88,
+      "ag227MeanLuma": 57.87,
+      "afterMeanLuma": 62.5,
+      "lumaGainPctVsBefore": 56.7,
+      "beforeP90Luma": 68.37,
+      "afterP90Luma": 107.59,
+      "beforeStdLuma": 18.38,
+      "ag227StdLuma": 23.01,
+      "afterStdLuma": 26.1
+    },
+    "dusk": {
+      "beforeMeanLuma": 14.32,
+      "ag227MeanLuma": 25.71,
+      "afterMeanLuma": 28.26,
+      "lumaGainPctVsBefore": 97.4,
+      "beforeP90Luma": 23.94,
+      "afterP90Luma": 50.74,
+      "beforeStdLuma": 7.09,
+      "ag227StdLuma": 11.89,
+      "afterStdLuma": 13.72
+    },
+    "night": {
+      "beforeMeanLuma": 14.36,
+      "ag227MeanLuma": 25.62,
+      "afterMeanLuma": 28.21,
+      "lumaGainPctVsBefore": 96.5,
+      "beforeP90Luma": 23.94,
+      "afterP90Luma": 50.74,
+      "beforeStdLuma": 7.16,
+      "ag227StdLuma": 11.92,
+      "afterStdLuma": 13.74
+    }
+  },
+  "shotgun": {
+    "noon": {
+      "beforeMeanLuma": 71.41,
+      "ag227MeanLuma": 87.57,
+      "afterMeanLuma": 88.19,
+      "lumaGainPctVsBefore": 23.5,
+      "beforeP90Luma": 86.39,
+      "afterP90Luma": 100.37,
+      "beforeStdLuma": 19.0,
+      "ag227StdLuma": 19.91,
+      "afterStdLuma": 20.1
+    },
+    "overcast": {
+      "beforeMeanLuma": 52.91,
+      "ag227MeanLuma": 69.68,
+      "afterMeanLuma": 70.22,
+      "lumaGainPctVsBefore": 32.7,
+      "beforeP90Luma": 69.04,
+      "afterP90Luma": 78.37,
+      "beforeStdLuma": 10.66,
+      "ag227StdLuma": 9.05,
+      "afterStdLuma": 9.31
+    },
+    "dusk": {
+      "beforeMeanLuma": 16.14,
+      "ag227MeanLuma": 28.45,
+      "afterMeanLuma": 28.68,
+      "lumaGainPctVsBefore": 77.7,
+      "beforeP90Luma": 23.63,
+      "afterP90Luma": 34.8,
+      "beforeStdLuma": 5.35,
+      "ag227StdLuma": 4.39,
+      "afterStdLuma": 4.54
+    },
+    "night": {
+      "beforeMeanLuma": 16.24,
+      "ag227MeanLuma": 28.57,
+      "afterMeanLuma": 28.82,
+      "lumaGainPctVsBefore": 77.5,
+      "beforeP90Luma": 24.28,
+      "afterP90Luma": 34.8,
+      "beforeStdLuma": 5.65,
+      "ag227StdLuma": 4.36,
+      "afterStdLuma": 4.49
+    }
+  },
+  "launcher": {
+    "noon": {
+      "beforeMeanLuma": 44.47,
+      "ag227MeanLuma": 60.43,
+      "afterMeanLuma": 61.67,
+      "lumaGainPctVsBefore": 38.7,
+      "beforeP90Luma": 75.15,
+      "afterP90Luma": 99.8,
+      "beforeStdLuma": 27.21,
+      "ag227StdLuma": 28.94,
+      "afterStdLuma": 29.54
+    },
+    "overcast": {
+      "beforeMeanLuma": 38.28,
+      "ag227MeanLuma": 53.31,
+      "afterMeanLuma": 54.49,
+      "lumaGainPctVsBefore": 42.4,
+      "beforeP90Luma": 57.08,
+      "afterP90Luma": 77.37,
+      "beforeStdLuma": 17.77,
+      "ag227StdLuma": 19.61,
+      "afterStdLuma": 20.3
+    },
+    "dusk": {
+      "beforeMeanLuma": 11.86,
+      "ag227MeanLuma": 23.28,
+      "afterMeanLuma": 23.72,
+      "lumaGainPctVsBefore": 100.1,
+      "beforeP90Luma": 19.01,
+      "afterP90Luma": 34.8,
+      "beforeStdLuma": 6.92,
+      "ag227StdLuma": 8.84,
+      "afterStdLuma": 9.56
+    },
+    "night": {
+      "beforeMeanLuma": 11.91,
+      "ag227MeanLuma": 23.33,
+      "afterMeanLuma": 23.76,
+      "lumaGainPctVsBefore": 99.6,
+      "beforeP90Luma": 18.94,
+      "afterP90Luma": 34.94,
+      "beforeStdLuma": 7.07,
+      "ag227StdLuma": 8.91,
+      "afterStdLuma": 9.62
+    }
+  },
+  "flamer": {
+    "noon": {
+      "beforeMeanLuma": 49.25,
+      "ag227MeanLuma": 50.19,
+      "afterMeanLuma": 64.76,
+      "lumaGainPctVsBefore": 31.5,
+      "beforeP90Luma": 86.82,
+      "afterP90Luma": 97.37,
+      "beforeStdLuma": 28.37,
+      "ag227StdLuma": 28.31,
+      "afterStdLuma": 32.24
+    },
+    "overcast": {
+      "beforeMeanLuma": 39.9,
+      "ag227MeanLuma": 41.09,
+      "afterMeanLuma": 55.03,
+      "lumaGainPctVsBefore": 37.9,
+      "beforeP90Luma": 70.4,
+      "afterP90Luma": 78.87,
+      "beforeStdLuma": 19.49,
+      "ag227StdLuma": 19.66,
+      "afterStdLuma": 22.87
+    },
+    "dusk": {
+      "beforeMeanLuma": 13.14,
+      "ag227MeanLuma": 13.44,
+      "afterMeanLuma": 24.21,
+      "lumaGainPctVsBefore": 84.2,
+      "beforeP90Luma": 23.63,
+      "afterP90Luma": 33.94,
+      "beforeStdLuma": 7.29,
+      "ag227StdLuma": 7.29,
+      "afterStdLuma": 10.39
+    },
+    "night": {
+      "beforeMeanLuma": 13.56,
+      "ag227MeanLuma": 13.32,
+      "afterMeanLuma": 24.54,
+      "lumaGainPctVsBefore": 81.0,
+      "beforeP90Luma": 24.63,
+      "afterP90Luma": 33.94,
+      "beforeStdLuma": 7.65,
+      "ag227StdLuma": 7.51,
+      "afterStdLuma": 10.32
+    }
+  }
+}

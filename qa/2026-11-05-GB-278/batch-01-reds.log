@@ -1,0 +1,23 @@
+BATCH 1 reds: t39 t60 t61 t73 t106
+GRANT grokbot GB-278: starting one game-test command
+check-players: 315 player.position reads, all in the allowed places
+ok    t39     15 pass   0 fail  44.8s
+ok    t60     43 pass   0 fail  62.1s
+ok    t61     22 pass   0 fail  55.2s
+FAIL  t73     10 pass   2 fail  52.9s
+FAIL  t106     5 pass   4 fail  131.8s
+
+5 checks: 95 pass, 6 fail
+
+by owner:
+  unassigned
+    t73    2 fail  FAIL with the horde out of sight it stalks: dropA (fight)
+           FAIL with the horde out of sight it stalks: dropA (fight)
+           FAIL the stalk loops on its own 8 bars, sample-accurately: {"start":20,"end":60,"loop":true}
+    t106   4 fail  FAIL the breather: the break: scarecrow (lull)
+           FAIL the breather: the break: scarecrow (lull)
+           FAIL within two bars, not after seconds of quiet: 8.1 s
+           FAIL the last push: the bridge: basilisk (surge)
+           FAIL then the climax: basilisk (last)
+
+BATCH DONE

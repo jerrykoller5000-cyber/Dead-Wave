@@ -1,0 +1,6 @@
+[
+  {"target":"weapon:minigun","view":"right","time":"noon","out":"review/GP-20024/minigun-after-left-noon.png"},
+  {"target":"weapon:minigun","view":"right","time":0.42,"out":"review/GP-20024/minigun-after-left-overcast.png"},
+  {"target":"weapon:minigun","view":"right","time":"dusk","out":"review/GP-20024/minigun-after-left-dusk.png"},
+  {"target":"weapon:minigun","view":"right","time":"night","out":"review/GP-20024/minigun-after-left-night.png"}
+]

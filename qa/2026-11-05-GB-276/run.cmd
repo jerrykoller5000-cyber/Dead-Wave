@@ -1,0 +1,1 @@
+cd /d "C:\Users\Zero\Desktop\Tiny Trek" && node crew/crew.mjs slot run grokbot GB-276 --checks "t224 t189 t188 real renderer after handgun rows by height" --minutes 25 -- node tools/realtest.mjs t224 t189 t188 > qa\2026-11-05-GB-276\real1.log 2>&1

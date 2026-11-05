@@ -1,0 +1,8 @@
+[
+  {"target":"weapon:minigun","view":"side","time":"noon","out":"review/GP-20022/minigun-before-side-noon.png"},
+  {"target":"weapon:minigun","view":"top","time":"noon","out":"review/GP-20022/minigun-before-top-noon.png"},
+  {"target":"weapon:minigun","view":"three","time":"noon","out":"review/GP-20022/minigun-before-three-noon.png"},
+  {"target":"weapon:chainsaw","view":"side","time":"noon","out":"review/GP-20022/chainsaw-before-side-noon.png"},
+  {"target":"weapon:chainsaw","view":"top","time":"noon","out":"review/GP-20022/chainsaw-before-top-noon.png"},
+  {"target":"weapon:chainsaw","view":"three","time":"noon","out":"review/GP-20022/chainsaw-before-three-noon.png"}
+]

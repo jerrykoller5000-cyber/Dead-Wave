@@ -354,16 +354,8 @@ export function makeUziModel(ctx) {
   K.box(.004, .023, .004, gunDark, 0, .1145, .198);
   for (const sx of [-1, 1]) K.box(.004, .038, .014, gunDark, sx * .011, .118, .198);
   K.box(.026, .004, .014, gunDark, 0, .135, .198);
-  // Folding stock: a straight wire frame and a butt, not the drooping struts.
-  for (const sx of [-1, 1]) {
-    K.slab([[-.118, .030], [-.305, .016], [-.305, .006], [-.118, .018]], .007, gunMid, {x: sx * .040, bevel: .002});
-    K.slab([[-.118, -.010], [-.305, -.030], [-.305, -.040], [-.118, -.022]], .007, gunDark, {x: sx * .038, bevel: .002});
-    K.cyl(.007, .007, .004, gunAccent, sx * .044, .020, -.122, null, 10, 'x');
-  }
-  K.slab([[-.318, .028], [-.300, .022], [-.306, -.048], [-.324, -.054]], .062, gunDark, {bevel: .004});
-  K.slab([[-.332, .024], [-.316, .020], [-.322, -.050], [-.338, -.054]], .066, gunRubber, {bevel: .003});
-  // The folded hinge stays on its original outer support envelope, which the
-  // stowed-weapon fitting code uses when another gun rests against this side.
+  // The stowed-weapon fitting uses this side support envelope when another
+  // gun rests against the Wasp; the stock struts, pivots and butt are gone.
   K.slab([[-.177, .019], [-.147, .019], [-.131, .032], [-.142, .049], [-.163, .054], [-.182, .04]], .03498504, gunMid, {x: .06, bevel: .005, segs: 2});
   // Grip. The safety is the same polymer as the grip and follows the backstrap.
   // Centre line is still gripOutline(-0.02, -0.1, 0.16, …, 0.22): the palm stays at the hold.

@@ -1,0 +1,535 @@
+{
+  "pageErrors": [],
+  "results": {
+    "minigun": {
+      "gun": "minigun",
+      "glbFile": "m134_handheld_minigun.glb",
+      "realTargetLength": 0.8,
+      "ours": {
+        "length": 1.2760000062942505,
+        "boreOverGrip": 0.07256266694762728,
+        "rakeDeg": 68.5780056511441,
+        "sightH": 0.3242045164108276,
+        "box": {
+          "x": 0.396,
+          "y": 0.555,
+          "z": 1.276
+        }
+      },
+      "ref": {
+        "length": 0.8,
+        "boreOverGrip": 0.015282961421639069,
+        "rakeDeg": 87.22276441132331,
+        "sightH": 0.13467402955587224,
+        "box": {
+          "x": 0.205,
+          "y": 0.211,
+          "z": 0.8
+        },
+        "meshCount": 27,
+        "triCount": 15834,
+        "binShort": false
+      },
+      "deltas": {
+        "lengthPct": 59.5,
+        "heightPct": 163,
+        "widthPct": 93.2,
+        "boreOverGripDeltaM": 0.057,
+        "gripRakeDeltaDeg": -18.6,
+        "sightHeightDeltaM": 0.19
+      },
+      "err": "",
+      "lines": [
+        "gun minigun",
+        "realLength 0.800",
+        "oursScale 0.880",
+        "oursLength 1.276",
+        "oursBoreOverGrip 0.073",
+        "oursGripRakeDeg 68.578",
+        "oursSightHeight 0.324",
+        "refLength 0.800",
+        "refBoreOverGrip 0.015",
+        "refGripRakeDeg 87.223",
+        "refSightHeight 0.135",
+        "oursBox 0.396 0.555 1.276"
+      ]
+    },
+    "m4": {
+      "gun": "m4",
+      "glbFile": "m4_sopmod.glb",
+      "realTargetLength": 0.84,
+      "ours": {
+        "length": 1.0428258449117316,
+        "boreOverGrip": 0.058662786623435575,
+        "rakeDeg": 83.55664237743949,
+        "sightH": 0.09210330698534439,
+        "box": {
+          "x": 0.088,
+          "y": 0.301,
+          "z": 1.043
+        }
+      },
+      "ref": {
+        "length": 0.8400000000000001,
+        "boreOverGrip": 0.06044324950737291,
+        "rakeDeg": 79.02503377458734,
+        "sightH": 0.03959544526952846,
+        "box": {
+          "x": 0.079,
+          "y": 0.214,
+          "z": 0.84
+        },
+        "meshCount": 12,
+        "triCount": 44672,
+        "binShort": false
+      },
+      "deltas": {
+        "lengthPct": 24.2,
+        "heightPct": 40.7,
+        "widthPct": 11.4,
+        "boreOverGripDeltaM": -0.002,
+        "gripRakeDeltaDeg": 4.5,
+        "sightHeightDeltaM": 0.053
+      },
+      "err": "",
+      "lines": [
+        "gun m4",
+        "realLength 0.840",
+        "oursScale 0.674",
+        "oursLength 1.043",
+        "oursBoreOverGrip 0.059",
+        "oursGripRakeDeg 83.557",
+        "oursSightHeight 0.092",
+        "refLength 0.840",
+        "refBoreOverGrip 0.060",
+        "refGripRakeDeg 79.025",
+        "refSightHeight 0.040",
+        "oursBox 0.088 0.301 1.043"
+      ]
+    },
+    "ak": {
+      "gun": "ak",
+      "glbFile": "ak-47.glb",
+      "realTargetLength": 0.88,
+      "ours": {
+        "length": 1.0920911042382486,
+        "boreOverGrip": 0.09011942584789742,
+        "rakeDeg": 89.05313915280975,
+        "sightH": 0.05540120049875963,
+        "box": {
+          "x": 0.098,
+          "y": 0.299,
+          "z": 1.092
+        }
+      },
+      "ref": {
+        "length": 0.8800000000000001,
+        "boreOverGrip": 0.07972984496013433,
+        "rakeDeg": 88.94259970896626,
+        "sightH": 0.04556574462192381,
+        "box": {
+          "x": 0.062,
+          "y": 0.252,
+          "z": 0.88
+        },
+        "meshCount": 65,
+        "triCount": 17392,
+        "binShort": false
+      },
+      "deltas": {
+        "lengthPct": 24.1,
+        "heightPct": 18.7,
+        "widthPct": 58.1,
+        "boreOverGripDeltaM": 0.01,
+        "gripRakeDeltaDeg": 0.1,
+        "sightHeightDeltaM": 0.01
+      },
+      "err": "",
+      "lines": [
+        "gun ak",
+        "realLength 0.880",
+        "oursScale 0.686",
+        "oursLength 1.092",
+        "oursBoreOverGrip 0.090",
+        "oursGripRakeDeg 89.053",
+        "oursSightHeight 0.055",
+        "refLength 0.880",
+        "refBoreOverGrip 0.080",
+        "refGripRakeDeg 88.943",
+        "refSightHeight 0.046",
+        "oursBox 0.098 0.299 1.092"
+      ]
+    },
+    "uzi": {
+      "gun": "uzi",
+      "glbFile": "uzi.glb",
+      "realTargetLength": 0.47,
+      "ours": {
+        "length": 0.43213888080810936,
+        "boreOverGrip": 0.08502387860859643,
+        "rakeDeg": 21.843149006567028,
+        "sightH": 0.06778649658083657,
+        "box": {
+          "x": 0.07,
+          "y": 0.257,
+          "z": 0.432
+        }
+      },
+      "ref": {
+        "length": 0.47,
+        "boreOverGrip": 0.037160488071835696,
+        "rakeDeg": 86.8895180742837,
+        "sightH": 0.05447428479770311,
+        "box": {
+          "x": 0.06,
+          "y": 0.259,
+          "z": 0.47
+        },
+        "meshCount": 10,
+        "triCount": 3525,
+        "binShort": false
+      },
+      "deltas": {
+        "lengthPct": -8.1,
+        "heightPct": -0.8,
+        "widthPct": 16.7,
+        "boreOverGripDeltaM": 0.048,
+        "gripRakeDeltaDeg": -65,
+        "sightHeightDeltaM": 0.013
+      },
+      "err": "",
+      "lines": [
+        "gun uzi",
+        "realLength 0.470",
+        "oursScale 0.530",
+        "oursLength 0.432",
+        "oursBoreOverGrip 0.085",
+        "oursGripRakeDeg 21.843",
+        "oursSightHeight 0.068",
+        "refLength 0.470",
+        "refBoreOverGrip 0.037",
+        "refGripRakeDeg 86.890",
+        "refSightHeight 0.054",
+        "oursBox 0.070 0.257 0.432"
+      ]
+    },
+    "shotgun": {
+      "gun": "shotgun",
+      "glbFile": "shotgun.glb",
+      "realTargetLength": 1,
+      "ours": {
+        "length": 1.1489714660759396,
+        "boreOverGrip": 0.04694718430965043,
+        "rakeDeg": 86.75904315829585,
+        "sightH": 0.07151540825459499,
+        "box": {
+          "x": 0.088,
+          "y": 0.215,
+          "z": 1.149
+        }
+      },
+      "ref": {
+        "length": 1,
+        "boreOverGrip": 0.1010539764265819,
+        "rakeDeg": 73.55088164995767,
+        "sightH": 0,
+        "box": {
+          "x": 0.147,
+          "y": 0.321,
+          "z": 1
+        },
+        "meshCount": 13,
+        "triCount": 9300,
+        "binShort": false
+      },
+      "deltas": {
+        "lengthPct": 14.9,
+        "heightPct": -33,
+        "widthPct": -40.1,
+        "boreOverGripDeltaM": -0.054,
+        "gripRakeDeltaDeg": 13.2,
+        "sightHeightDeltaM": 0.072
+      },
+      "err": "",
+      "lines": [
+        "gun shotgun",
+        "realLength 1.000",
+        "oursScale 0.793",
+        "oursLength 1.149",
+        "oursBoreOverGrip 0.047",
+        "oursGripRakeDeg 86.759",
+        "oursSightHeight 0.072",
+        "refLength 1.000",
+        "refBoreOverGrip 0.101",
+        "refGripRakeDeg 73.551",
+        "refSightHeight 0.000",
+        "oursBox 0.088 0.215 1.149"
+      ]
+    },
+    "aa12": {
+      "gun": "aa12",
+      "glbFile": "aa12.glb",
+      "realTargetLength": 0.96,
+      "ours": {
+        "length": 1.0644845744952482,
+        "boreOverGrip": 0.14786224988793095,
+        "rakeDeg": 62.20178419085714,
+        "sightH": 0.11291543943862303,
+        "box": {
+          "x": 0.212,
+          "y": 0.407,
+          "z": 1.064
+        }
+      },
+      "ref": {
+        "length": 0.9599999999999999,
+        "boreOverGrip": 0.14771060386780094,
+        "rakeDeg": 57.843383832833574,
+        "sightH": 0.14458396473294505,
+        "box": {
+          "x": 0.225,
+          "y": 0.383,
+          "z": 0.96
+        },
+        "meshCount": 5,
+        "triCount": 25296,
+        "binShort": false
+      },
+      "deltas": {
+        "lengthPct": 10.8,
+        "heightPct": 6.3,
+        "widthPct": -5.8,
+        "boreOverGripDeltaM": 0,
+        "gripRakeDeltaDeg": 4.4,
+        "sightHeightDeltaM": -0.032
+      },
+      "err": "",
+      "lines": [
+        "gun aa12",
+        "realLength 0.960",
+        "oursScale 0.684",
+        "oursLength 1.064",
+        "oursBoreOverGrip 0.148",
+        "oursGripRakeDeg 62.202",
+        "oursSightHeight 0.113",
+        "refLength 0.960",
+        "refBoreOverGrip 0.148",
+        "refGripRakeDeg 57.843",
+        "refSightHeight 0.145",
+        "oursBox 0.212 0.407 1.064"
+      ]
+    },
+    "revolver": {
+      "gun": "revolver",
+      "glbFile": "38_special_revolver.glb",
+      "realTargetLength": 0.27,
+      "ours": {
+        "length": 0.3470473451568845,
+        "boreOverGrip": 0.10392747631913182,
+        "rakeDeg": 31.393798686942038,
+        "sightH": 0.02760874452356349,
+        "box": {
+          "x": 0.078,
+          "y": 0.224,
+          "z": 0.347
+        }
+      },
+      "ref": {
+        "length": 0.27,
+        "boreOverGrip": 0.07173705560328714,
+        "rakeDeg": 49.460234880686855,
+        "sightH": 0.024669861819855782,
+        "box": {
+          "x": 0.042,
+          "y": 0.156,
+          "z": 0.27
+        },
+        "meshCount": 5,
+        "triCount": 10700,
+        "binShort": false
+      },
+      "deltas": {
+        "lengthPct": 28.5,
+        "heightPct": 43.6,
+        "widthPct": 85.7,
+        "boreOverGripDeltaM": 0.032,
+        "gripRakeDeltaDeg": -18.1,
+        "sightHeightDeltaM": 0.003
+      },
+      "err": "",
+      "lines": [
+        "gun revolver",
+        "realLength 0.270",
+        "oursScale 0.776",
+        "oursLength 0.347",
+        "oursBoreOverGrip 0.104",
+        "oursGripRakeDeg 31.394",
+        "oursSightHeight 0.028",
+        "refLength 0.270",
+        "refBoreOverGrip 0.072",
+        "refGripRakeDeg 49.460",
+        "refSightHeight 0.025",
+        "oursBox 0.078 0.224 0.347"
+      ]
+    },
+    "sniper": {
+      "gun": "sniper",
+      "glbFile": "sniper.glb",
+      "realTargetLength": 1.15,
+      "ours": {
+        "length": 1.3345238857440787,
+        "boreOverGrip": 0.08354336076235627,
+        "rakeDeg": 85.2814483456545,
+        "sightH": 0.12224094461691615,
+        "box": {
+          "x": 0.156,
+          "y": 0.298,
+          "z": 1.335
+        }
+      },
+      "ref": {
+        "length": 1.15,
+        "boreOverGrip": 0.02211047364127179,
+        "rakeDeg": 84.19935298634725,
+        "sightH": 0.08797154765488774,
+        "box": {
+          "x": 0.077,
+          "y": 0.221,
+          "z": 1.15
+        },
+        "meshCount": 8,
+        "triCount": 13087,
+        "binShort": false
+      },
+      "deltas": {
+        "lengthPct": 16.1,
+        "heightPct": 34.8,
+        "widthPct": 102.6,
+        "boreOverGripDeltaM": 0.061,
+        "gripRakeDeltaDeg": 1.1,
+        "sightHeightDeltaM": 0.034
+      },
+      "err": "",
+      "lines": [
+        "gun sniper",
+        "realLength 1.150",
+        "oursScale 0.723",
+        "oursLength 1.335",
+        "oursBoreOverGrip 0.084",
+        "oursGripRakeDeg 85.281",
+        "oursSightHeight 0.122",
+        "refLength 1.150",
+        "refBoreOverGrip 0.022",
+        "refGripRakeDeg 84.199",
+        "refSightHeight 0.088",
+        "oursBox 0.156 0.298 1.335"
+      ]
+    },
+    "launcher": {
+      "gun": "launcher",
+      "glbFile": "naders_grenade_launcher.glb",
+      "realTargetLength": 0.75,
+      "ours": {
+        "length": 0.8275910100950001,
+        "boreOverGrip": 0.05233501322895259,
+        "rakeDeg": 87.55886135575687,
+        "sightH": 0.08164262573220227,
+        "box": {
+          "x": 0.2,
+          "y": 0.238,
+          "z": 0.828
+        }
+      },
+      "ref": {
+        "length": 0.75,
+        "boreOverGrip": -0.01550183042990444,
+        "rakeDeg": 80.02145968594365,
+        "sightH": 0.13863579930775888,
+        "box": {
+          "x": 0.157,
+          "y": 0.291,
+          "z": 0.75
+        },
+        "meshCount": 21,
+        "triCount": 15516,
+        "binShort": true
+      },
+      "deltas": {
+        "lengthPct": 10.4,
+        "heightPct": -18.2,
+        "widthPct": 27.4,
+        "boreOverGripDeltaM": 0.068,
+        "gripRakeDeltaDeg": 7.5,
+        "sightHeightDeltaM": -0.057
+      },
+      "err": "Reference file is shorter than its header. The last bytes are missing, so the tail of that model is incomplete.",
+      "lines": [
+        "gun launcher",
+        "realLength 0.750",
+        "oursScale 0.698",
+        "oursLength 0.828",
+        "oursBoreOverGrip 0.052",
+        "oursGripRakeDeg 87.559",
+        "oursSightHeight 0.082",
+        "refLength 0.750",
+        "refBoreOverGrip -0.016",
+        "refGripRakeDeg 80.021",
+        "refSightHeight 0.139",
+        "oursBox 0.200 0.238 0.828"
+      ]
+    },
+    "chainsaw": {
+      "gun": "chainsaw",
+      "glbFile": "chainsaw.glb",
+      "realTargetLength": 0.85,
+      "ours": {
+        "length": 0.9222560669184308,
+        "boreOverGrip": 0.04494860851083601,
+        "rakeDeg": 76.72069723288179,
+        "sightH": 0.1443812661383539,
+        "box": {
+          "x": 0.303,
+          "y": 0.325,
+          "z": 0.922
+        }
+      },
+      "ref": {
+        "length": 0.8499999999999999,
+        "boreOverGrip": 0.01911065311807239,
+        "rakeDeg": 77.62814195183022,
+        "sightH": 0.2048594399035062,
+        "box": {
+          "x": 0.297,
+          "y": 0.36,
+          "z": 0.85
+        },
+        "meshCount": 3,
+        "triCount": 2647,
+        "binShort": false
+      },
+      "deltas": {
+        "lengthPct": 8.5,
+        "heightPct": -9.7,
+        "widthPct": 2,
+        "boreOverGripDeltaM": 0.026,
+        "gripRakeDeltaDeg": -0.9,
+        "sightHeightDeltaM": -0.06
+      },
+      "err": "",
+      "lines": [
+        "gun chainsaw",
+        "realLength 0.850",
+        "oursScale 0.804",
+        "oursLength 0.922",
+        "oursBoreOverGrip 0.045",
+        "oursGripRakeDeg 76.721",
+        "oursSightHeight 0.144",
+        "refLength 0.850",
+        "refBoreOverGrip 0.019",
+        "refGripRakeDeg 77.628",
+        "refSightHeight 0.205",
+        "oursBox 0.303 0.325 0.922"
+      ]
+    }
+  }
+}

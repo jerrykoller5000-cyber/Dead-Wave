@@ -1,0 +1,20 @@
+{
+ "at": "2026-11-04T00:03:29.573Z",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "results": [
+  {
+   "id": "weapon.chainsaw",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 241,
+   "tris": 8212,
+   "size": [
+    0.248,
+    0.242,
+    0.938
+   ],
+   "error": null
+  }
+ ]
+}

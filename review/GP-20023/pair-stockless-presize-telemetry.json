@@ -1,0 +1,63 @@
+{
+  "phase": "after",
+  "generatedAt": "2026-11-03T22:08:49.389Z",
+  "lights": {
+    "noon": {
+      "weapon": "uzi",
+      "first": true,
+      "dual": true,
+      "vmKey": "uzi",
+      "akimbo": true,
+      "gun2": true,
+      "raise": 1,
+      "ads": 0,
+      "unscaledZ": [
+        -0.18199999630451205,
+        0.4779999852180482
+      ],
+      "unscaledLength": 0.6599999815225602,
+      "vertices": 17958,
+      "size": {
+        "len": 0.816,
+        "m": 0.47,
+        "look": 1
+      },
+      "scale": 0.5295819716775599,
+      "backend": "WebGPU",
+      "calls": 11195
+    },
+    "dusk": {
+      "weapon": "uzi",
+      "first": true,
+      "dual": true,
+      "vmKey": "uzi",
+      "akimbo": true,
+      "gun2": true,
+      "raise": 1,
+      "ads": 0,
+      "unscaledZ": [
+        -0.1819999963045049,
+        0.4779999852180551
+      ],
+      "unscaledLength": 0.65999998152256,
+      "vertices": 17958,
+      "size": {
+        "len": 0.816,
+        "m": 0.47,
+        "look": 1
+      },
+      "scale": 0.5295819716775599,
+      "backend": "WebGPU",
+      "calls": 13324
+    }
+  },
+  "errors": [],
+  "holster": {
+    "first": false,
+    "holstered": [
+      "uzi",
+      "uzi"
+    ],
+    "backend": "WebGPU"
+  }
+}

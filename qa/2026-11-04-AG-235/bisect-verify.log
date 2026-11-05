@@ -1,0 +1,21 @@
+--- 1. WORKING_TREE (real & test) ---
+WORKING_TREE (real): lateC = 0.004411624145984689 lateAt = 186 worstC = 0.004411624145984689 at = 186 zCountBefore = 2 snapZCount = 2
+WORKING_TREE (test): lateC = 0.02261545993509695 lateAt = 164 worstC = 0.02261545993509695 at = 164 zCountBefore = 3 snapZCount = 3
+--- 2. Counterfactual A: WORKING_TREE + clearZombies before clip ---
+WT + clearZombies (real): lateC = 0.00013111717670097822 lateAt = 16 worstC = 0.004431191960366001 at = 0
+WT + clearZombies (test): lateC = 0.00013097997788760765 lateAt = 16 worstC = 0.0047347478840896445 at = 0
+--- 3. Counterfactual B: WORKING_TREE + aimYaw = OTS.yaw in first person ---
+WT + fpAimYaw=OTS.yaw (real): lateC = 0.00003101091850861093 lateAt = 16 worstC = 0.00010010770612121114 at = 6
+WT + fpAimYaw=OTS.yaw (test): lateC = 0.000031011161598213555 lateAt = 16 worstC = 0.00010011856394124379 at = 6
+--- 4. 5adede46 + WORKING_TREE index.html ---
+5adede46 + WT index.html (real): lateC = 0.006751594186576811 lateAt = 183 worstC = 0.006751594186576811
+5adede46 + WT index.html (test): lateC = 0.010986052716425004 lateAt = 172 worstC = 0.010986052716425004
+--- 5. Commit e10ed377 ---
+e10ed377 (real): lateC = 0.00026704898400845966 lateAt = 16 worstC = 0.009049750755553499 zCountBefore = 2
+e10ed377 (test): lateC = 0.00026686964253590337 lateAt = 16 worstC = 0.009209479040268689 zCountBefore = 2
+--- 5. Commit 2d9ab0b2 ---
+2d9ab0b2 (real): lateC = 0.00026704573931076765 lateAt = 16 worstC = 0.009056721167824099 zCountBefore = 3
+2d9ab0b2 (test): lateC = 0.00026680328313311187 lateAt = 16 worstC = 0.009322105547035676 zCountBefore = 3
+--- 5. Commit 5abd7576 ---
+5abd7576 (real): lateC = 0.00012138385288114686 lateAt = 16 worstC = 0.004390605207826887 zCountBefore = 2
+5abd7576 (test): lateC = 0.015041423827176102 lateAt = 163 worstC = 0.015041423827176102 zCountBefore = 3

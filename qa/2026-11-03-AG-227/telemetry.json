@@ -1,0 +1,343 @@
+{
+  "evaluation": "AG-227 GP-20021 Material & Contrast Audit",
+  "date": "2026-11-03",
+  "author": "Antigravity (Gemini 4 Argon High)",
+  "weapons": {
+    "launcher": {
+      "lights": {
+        "noon": {
+          "gp20021": {
+            "mean_lum": 66.86,
+            "median_lum": 76.95,
+            "p10": 23.98,
+            "p90": 100.16,
+            "contrast_ratio": 0.6136,
+            "edge_energy": 3.887
+          },
+          "ag225_baseline": {
+            "mean_lum": 59.68,
+            "median_lum": 74.62,
+            "p10": 15.67,
+            "p90": 97.32,
+            "contrast_ratio": 0.7226,
+            "edge_energy": 3.57
+          },
+          "lum_lift_ratio": 1.12,
+          "edge_energy_ratio": 1.089
+        },
+        "overcast": {
+          "gp20021": {
+            "mean_lum": 57.51,
+            "median_lum": 60.87,
+            "p10": 24.9,
+            "p90": 82.67,
+            "contrast_ratio": 0.537,
+            "edge_energy": 3.266
+          },
+          "ag225_baseline": {
+            "mean_lum": 50.75,
+            "median_lum": 55.27,
+            "p10": 13.67,
+            "p90": 79.72,
+            "contrast_ratio": 0.7072,
+            "edge_energy": 2.962
+          },
+          "lum_lift_ratio": 1.133,
+          "edge_energy_ratio": 1.103
+        },
+        "dusk": {
+          "gp20021": {
+            "mean_lum": 21.58,
+            "median_lum": 22.85,
+            "p10": 6.29,
+            "p90": 32.82,
+            "contrast_ratio": 0.6784,
+            "edge_energy": 1.397
+          },
+          "ag225_baseline": {
+            "mean_lum": 16.7,
+            "median_lum": 18.83,
+            "p10": 4.16,
+            "p90": 27.85,
+            "contrast_ratio": 0.7403,
+            "edge_energy": 1.179
+          },
+          "lum_lift_ratio": 1.292,
+          "edge_energy_ratio": 1.185
+        },
+        "night": {
+          "gp20021": {
+            "mean_lum": 22.01,
+            "median_lum": 23.16,
+            "p10": 6.27,
+            "p90": 33.15,
+            "contrast_ratio": 0.6819,
+            "edge_energy": 1.392
+          },
+          "ag225_baseline": {
+            "mean_lum": 17.16,
+            "median_lum": 18.83,
+            "p10": 4.16,
+            "p90": 29.33,
+            "contrast_ratio": 0.7517,
+            "edge_energy": 1.164
+          },
+          "lum_lift_ratio": 1.283,
+          "edge_energy_ratio": 1.196
+        }
+      }
+    },
+    "aa12": {
+      "lights": {
+        "noon": {
+          "gp20021": {
+            "mean_lum": 70.65,
+            "median_lum": 75.29,
+            "p10": 21.15,
+            "p90": 110.86,
+            "contrast_ratio": 0.6796,
+            "edge_energy": 3.407
+          },
+          "ag225_baseline": {
+            "mean_lum": 60.21,
+            "median_lum": 58.93,
+            "p10": 10.16,
+            "p90": 102.17,
+            "contrast_ratio": 0.8192,
+            "edge_energy": 3.216
+          },
+          "lum_lift_ratio": 1.173,
+          "edge_energy_ratio": 1.059
+        },
+        "overcast": {
+          "gp20021": {
+            "mean_lum": 61.6,
+            "median_lum": 61.67,
+            "p10": 32.9,
+            "p90": 91.07,
+            "contrast_ratio": 0.4692,
+            "edge_energy": 2.919
+          },
+          "ag225_baseline": {
+            "mean_lum": 51.28,
+            "median_lum": 46.16,
+            "p10": 21.9,
+            "p90": 83.8,
+            "contrast_ratio": 0.5856,
+            "edge_energy": 2.608
+          },
+          "lum_lift_ratio": 1.201,
+          "edge_energy_ratio": 1.119
+        },
+        "dusk": {
+          "gp20021": {
+            "mean_lum": 22.71,
+            "median_lum": 22.83,
+            "p10": 8.92,
+            "p90": 36.15,
+            "contrast_ratio": 0.6042,
+            "edge_energy": 1.382
+          },
+          "ag225_baseline": {
+            "mean_lum": 16.05,
+            "median_lum": 11.9,
+            "p10": 2.93,
+            "p90": 30.09,
+            "contrast_ratio": 0.8226,
+            "edge_energy": 1.029
+          },
+          "lum_lift_ratio": 1.415,
+          "edge_energy_ratio": 1.343
+        },
+        "night": {
+          "gp20021": {
+            "mean_lum": 23.17,
+            "median_lum": 22.85,
+            "p10": 8.67,
+            "p90": 36.67,
+            "contrast_ratio": 0.6175,
+            "edge_energy": 1.392
+          },
+          "ag225_baseline": {
+            "mean_lum": 16.5,
+            "median_lum": 11.9,
+            "p10": 2.93,
+            "p90": 31.18,
+            "contrast_ratio": 0.8282,
+            "edge_energy": 1.018
+          },
+          "lum_lift_ratio": 1.404,
+          "edge_energy_ratio": 1.367
+        }
+      }
+    },
+    "flamer": {
+      "lights": {
+        "noon": {
+          "gp20021": {
+            "mean_lum": 63.0,
+            "median_lum": 73.67,
+            "p10": 18.67,
+            "p90": 102.13,
+            "contrast_ratio": 0.6909,
+            "edge_energy": 3.672
+          },
+          "ag225_baseline": {
+            "mean_lum": 61.82,
+            "median_lum": 73.27,
+            "p10": 18.67,
+            "p90": 102.09,
+            "contrast_ratio": 0.6908,
+            "edge_energy": 3.571
+          },
+          "lum_lift_ratio": 1.019,
+          "edge_energy_ratio": 1.028
+        },
+        "overcast": {
+          "gp20021": {
+            "mean_lum": 53.34,
+            "median_lum": 56.33,
+            "p10": 15.67,
+            "p90": 83.94,
+            "contrast_ratio": 0.6853,
+            "edge_energy": 3.162
+          },
+          "ag225_baseline": {
+            "mean_lum": 52.07,
+            "median_lum": 52.27,
+            "p10": 15.67,
+            "p90": 83.72,
+            "contrast_ratio": 0.6846,
+            "edge_energy": 3.075
+          },
+          "lum_lift_ratio": 1.024,
+          "edge_energy_ratio": 1.028
+        },
+        "dusk": {
+          "gp20021": {
+            "mean_lum": 17.9,
+            "median_lum": 19.07,
+            "p10": 4.93,
+            "p90": 30.1,
+            "contrast_ratio": 0.7186,
+            "edge_energy": 1.241
+          },
+          "ag225_baseline": {
+            "mean_lum": 17.5,
+            "median_lum": 18.84,
+            "p10": 4.23,
+            "p90": 30.09,
+            "contrast_ratio": 0.7536,
+            "edge_energy": 1.203
+          },
+          "lum_lift_ratio": 1.023,
+          "edge_energy_ratio": 1.032
+        },
+        "night": {
+          "gp20021": {
+            "mean_lum": 18.41,
+            "median_lum": 19.19,
+            "p10": 4.93,
+            "p90": 31.33,
+            "contrast_ratio": 0.7281,
+            "edge_energy": 1.211
+          },
+          "ag225_baseline": {
+            "mean_lum": 18.43,
+            "median_lum": 19.13,
+            "p10": 4.27,
+            "p90": 32.17,
+            "contrast_ratio": 0.7656,
+            "edge_energy": 1.213
+          },
+          "lum_lift_ratio": 0.999,
+          "edge_energy_ratio": 0.998
+        }
+      }
+    },
+    "shotgun": {
+      "lights": {
+        "noon": {
+          "gp20021": {
+            "mean_lum": 82.54,
+            "median_lum": 90.32,
+            "p10": 38.19,
+            "p90": 106.64,
+            "contrast_ratio": 0.4726,
+            "edge_energy": 2.987
+          },
+          "ag225_baseline": {
+            "mean_lum": 75.82,
+            "median_lum": 80.16,
+            "p10": 17.96,
+            "p90": 106.94,
+            "contrast_ratio": 0.7124,
+            "edge_energy": 3.048
+          },
+          "lum_lift_ratio": 1.089,
+          "edge_energy_ratio": 0.98
+        },
+        "overcast": {
+          "gp20021": {
+            "mean_lum": 67.78,
+            "median_lum": 70.19,
+            "p10": 46.81,
+            "p90": 87.16,
+            "contrast_ratio": 0.3012,
+            "edge_energy": 2.6
+          },
+          "ag225_baseline": {
+            "mean_lum": 61.05,
+            "median_lum": 64.24,
+            "p10": 33.93,
+            "p90": 87.31,
+            "contrast_ratio": 0.4403,
+            "edge_energy": 2.571
+          },
+          "lum_lift_ratio": 1.11,
+          "edge_energy_ratio": 1.011
+        },
+        "dusk": {
+          "gp20021": {
+            "mean_lum": 25.68,
+            "median_lum": 26.16,
+            "p10": 17.67,
+            "p90": 33.88,
+            "contrast_ratio": 0.3143,
+            "edge_energy": 1.157
+          },
+          "ag225_baseline": {
+            "mean_lum": 20.4,
+            "median_lum": 21.85,
+            "p10": 4.99,
+            "p90": 31.87,
+            "contrast_ratio": 0.729,
+            "edge_energy": 1.068
+          },
+          "lum_lift_ratio": 1.259,
+          "edge_energy_ratio": 1.083
+        },
+        "night": {
+          "gp20021": {
+            "mean_lum": 26.28,
+            "median_lum": 26.85,
+            "p10": 17.73,
+            "p90": 34.83,
+            "contrast_ratio": 0.3254,
+            "edge_energy": 1.137
+          },
+          "ag225_baseline": {
+            "mean_lum": 21.01,
+            "median_lum": 22.85,
+            "p10": 4.93,
+            "p90": 32.88,
+            "contrast_ratio": 0.7392,
+            "edge_energy": 1.053
+          },
+          "lum_lift_ratio": 1.251,
+          "edge_energy_ratio": 1.08
+        }
+      }
+    }
+  }
+}

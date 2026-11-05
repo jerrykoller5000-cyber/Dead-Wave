@@ -4,6 +4,9 @@
 (async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+  // GB-255 (rule 13): a wait counted in game time, with a wall-clock cap so a stuck game still ends the check. The camera and the
+  // far-LOD flag move on game time, so a slow page that waited 0.5 s of wall clock had not yet drawn the guards close up.
+  const gwait = async (secs) => { const g0 = T.getSimTime(), w0 = Date.now(); while (T.getSimTime() - g0 < secs && Date.now() - w0 < 30000) await wait(20); };
   const until = async (cond, ms) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (cond()) return true; await wait(50); } return cond(); };
   const errs = []; window.addEventListener('error', (e) => errs.push(String(e.message || e.error)));
   const range = (a) => Math.max(...a) - Math.min(...a);
@@ -16,12 +19,12 @@
     const post = T.getPoiGuards().post;
     const hqx = post.x, hqz = post.z - 25;
     T.player.position.set(hqx, T.sampleHeight(hqx, hqz), hqz);
-    await wait(500);
+    await gwait(0.5);
     const gz = () => T.getPoiGuards().zombies.filter((z) => z.alive);
     const G = gz();
     ok(G.length >= 2 && G.every((z) => !z.poiAwake), 'guards asleep at their post (' + G.length + ')');
     ok(G.every((z) => !z.farLod), 'drawn close up, not the far LOD (' + G.map((z) => !!z.farLod).join('/') + ')');
-    await wait(300);
+    await gwait(0.3);
     // (1) Four seconds of the guards standing: breath, sway, head turns, all on their own clocks.
     const p0 = G.map((z) => ({ x: z.mesh.position.x, z: z.mesh.position.z }));
     const S = G.map(() => ({ head: [], sway: [], hips: [], moved: 0 }));
@@ -63,8 +66,9 @@
     const g = G[0];
     const st0 = g.idle.steps, yaw0 = g.mesh.rotation.y;
     g.idle.stepT = 0;
-    let lift = 0; const t1 = Date.now();
-    while (Date.now() - t1 < 1200) {
+    // GB-255 (rule 13): the same 1.2 s window, counted in game time, so a slow page still sees the whole shuffle.
+    let lift = 0; const t1 = T.getSimTime(), w1 = Date.now();
+    while (T.getSimTime() - t1 < 1.2 && Date.now() - w1 < 30000) {
       const ud = g.mesh.userData;
       lift = Math.max(lift, -(ud.legLG ? ud.legLG.rotation.x : 0), -(ud.legRG ? ud.legRG.rotation.x : 0));
       await wait(30);
@@ -78,9 +82,10 @@
     T.restartGraceDbg();
     await wait(300);
     const sp = T.spawnZombie(px + 15, pz, 'shambler', true, true);
-    await wait(1500);
-    const hd = [], wp0 = sp.walkPhase || 0; const t2 = Date.now();
-    while (Date.now() - t2 < 2500) { hd.push(sp.mesh.userData.head ? sp.mesh.userData.head.rotation.y : 0); await wait(40); }
+    // GB-255 (rule 13): 1.5 s to settle and 2.5 s of watching, both in game time (the same windows as before).
+    { const g1 = T.getSimTime(), w1 = Date.now(); while (T.getSimTime() - g1 < 1.5 && Date.now() - w1 < 30000) await wait(30); }
+    const hd = [], wp0 = sp.walkPhase || 0;
+    { const g2 = T.getSimTime(), w2 = Date.now(); while (T.getSimTime() - g2 < 2.5 && Date.now() - w2 < 30000) { hd.push(sp.mesh.userData.head ? sp.mesh.userData.head.rotation.y : 0); await wait(40); } }
     ok(T.graceActiveDbg() && sp.alive && sp.idle && sp.idle.amt > 0.9, 'a zombie held in the grace idles (amt ' + (sp.idle ? sp.idle.amt.toFixed(2) : '-') + ', grace ' + T.graceActiveDbg() + ')');
     ok((sp.walkPhase || 0) === wp0, 'it stands instead of walking on the spot');
     ok(range(hd) > 0.05, 'and looks about (' + range(hd).toFixed(2) + ' rad)');
@@ -89,6 +94,11 @@
     T.clearZombies && T.clearZombies();
     await wait(200);
     const w = T.spawnZombie(px + 25, pz, 'shambler', true, true);
+    // GB-255 (rule 13): spawnZombie leaves a non-spider facing a random way, and since GP-19854's turning a shambler
+    // facing away spends the first second turning round at a third of its pace: the phase gain over these 1.2 s ran from 3.7
+    // to 9.5 on the real renderer, and the bar of +3 is red when he is nearly behind it (+2.9, twice). The check is that a
+    // hunter coming for him walks, so it is set going at him (as the game does for a spider). Same 1.2 s, same bar.
+    w.mesh.rotation.y = Math.atan2(px - (px + 25), 0);
     const wp1 = w.walkPhase || 0;
     // GB-243 (rule 13): 1.2 s of GAME time, not wall clock: a loaded page advanced the walk only a fraction of
     // that, so the phase bar (+3) read +1.8. Same 1.2 s of walking, same bar.

@@ -1,0 +1,12 @@
+const fs = require('fs'); let t = fs.readFileSync('tools/tests/t80.js', 'utf8').replace(/\r\n/g, '\n');
+const a = t.indexOf('    // (1) A spider on the far side'), b = t.indexOf('    // GB-58: his AK');
+if (a < 0 || b < 0) throw new Error('anchors');
+let body = t.slice(a, b), head = t.slice(0, a);
+const rep = (s, x, y) => { if (!s.includes(x)) throw new Error('missing ' + x.slice(0, 50)); return s.replace(x, y); };
+body = rep(body, "while (Date.now() - f0 < 30000 && fz0.alive) {", "while (Date.now() - f0 < 30000 && fz0.alive && fMin >= 3) {");
+body = rep(body, "const q = gz.mesh.position; gMin", "const q = gz.mesh.position; { const e0 = T.getSimTime() - g0; if (e0 >= tr0) { tr0 += 0.5; tr.push(e0.toFixed(1) + ':' + clearance(q.x, q.z).toFixed(2) + (gz.lineClear === false ? 'B' : gz.lineClear ? 'c' : '?') + (gz.lineSawBlock ? 's' : '') + (gz.lineGo > 0 ? 'g' : '') + (gz.lineHad ? 'h' : '') + (gz.lineLostT > 0 ? 'L' : '') + '@' + Math.hypot(q.x - p.x, q.z - p.z).toFixed(1)); } } gMin");
+body = rep(body, "let tight = 0, n6 = 0, gMin = 1e9;", "const tr = []; let tr0 = 0; let tight = 0, n6 = 0, gMin = 1e9;");
+body = rep(body, "    ok(c0 < 0.45", "    out.push('rep ' + rep6 + ' ' + (tight / Math.max(1, n6) < 0.25 ? 'green' : 'RED') + ' trace ' + tr.join(' '));\n    ok(c0 < 0.45");
+const loop = "    for (let rep6 = 0; rep6 < 5; rep6++) {\n      out.push('--- chain ' + rep6);\n" + body.replace(/^    for \(let rep6 = 0; rep6 < 8; rep6\+\+\) \{\n/m, '') + "    }\n";
+const tail = "  } catch (e) { out.push('FAIL threw: ' + (e && e.stack || e.message)); }\n  return out.join('\\n');\n})()\n";
+fs.writeFileSync('tools/tests/tgb255g.js', head + loop + tail); console.log('ok', (head + loop + tail).length);

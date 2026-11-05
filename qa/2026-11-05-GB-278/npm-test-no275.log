@@ -1,0 +1,404 @@
+GRANT grokbot GB-278: starting one game-test command
+check-players: 315 player.position reads, all in the allowed places
+ok    t0       2 pass   0 fail  29.5s
+ok    t6a      2 pass   0 fail  39.4s
+           INFO chunk 0 matrix scale 0.00, debris 42
+           INFO spawnDust not exported
+ok    tcl280  10 pass   0 fail  44.9s
+           INFO = first person with the pistol: the view gun is up (raise 1.00)
+           INFO = his own arms (339/339) and pistol (23/23) are out of the eye's pass
+           INFO no rig skins on this page (the stand-in three): his arms are their own meshes
+           INFO = the radio and antenna are eye-hidden in first person while the worn carrier and shadow remain (hidden 3, visible 3, shadow 3 of 3; filter true; carrier shown 9; 3 radio meshes, 0 baked, 0 radio skins)
+           INFO = the eye's pass leaves them out (the render filter is on)
+           INFO = and they are still there for his shadow (visible)
+           INFO = both wrists on their sockets (0.00, 0.00 cm)
+           INFO the firing hand's grip through the pistol's grip (48.89 cm) (the stand-in three)
+           INFO = the wrists bend no more than VM.wristMax, at most 50 degrees (0.87, 0.87 of 0.87)
+           INFO the forearms leave the view, not at the eye (CL-293: the end of each sleeve off the bottom or the side, the elbow may show now the sleeve runs on; 110, 75 degrees off the eye line; elbows at ndc y -3.52, -1.55) (the stand-in three)
+           INFO = the mirrored meshes draw wound the other way on WebGPU, as they are elsewhere (flip false)
+           INFO = nothing on screen in front of the near plane (nearest 35.5 cm, 29 meshes)
+           INFO view gun draws: 29 meshes
+           INFO = at the hip the pistol is low right (grip ndc 0.36, -0.56; muzzle 0.23, -0.18)
+           INFO = the forearms don't cross: the firing elbow to the right of the support one (ndc x 1.50, 0.03)
+           INFO = and canted (-5.1 deg)
+           INFO = the rear notch and the front post on the view's centre, within a pixel at 1080p (-0.000, 0.000, 0.000, -0.000)
+           INFO = the eye stays at his eyes down the sights (0.000 m)
+           INFO = down the sights the wrists are on their sockets too (0.00, 0.00 cm)
+           INFO = a shot kicks the gun back (1.7 cm)
+           INFO the slide on the shot: 0.0 cm (gun units)
+           INFO = and it settles back (-0.02 cm off)
+           INFO = the magazine: seated, in his palm, away, back (seated hand pouch)
+           INFO = the support hand goes to the well, the pouch and the slide (fore well below pouch work)
+           INFO = the magazine rides the support palm (its foot within 0.00 cm)
+           INFO racking the slide, the support forearm runs down out of the view, at least 35 degrees below level on screen (70) (the stand-in three)
+           INFO = after it: the magazine seated in the well (0.0e+0)
+           INFO = and the support hand back on the gun (0.00 cm)
+           INFO = the view gun's muzzle in the world for the laser (0.69 m from the eye)
+           INFO = the GW-4: the view gun is up (raise 1.00)
+           INFO = the GW-4: the stock is one direct child, and the view copy shows it at the hip, not down the sights (ads 0.00, shown true)
+           INFO = the GW-4: both wrists on their sockets (0.00, 0.00 cm)
+           INFO = the GW-4: the wrists stay within VM.wristMax (0.87, 0.87 of 0.87)
+           INFO the GW-4: the forearms stay off the eye line, the support elbow low (88, 30 degrees; elbows ndc y -2.68, -0.76) (the stand-in three)
+           INFO = the GW-4: nothing on screen in front of the near plane (nearest 19.8 cm)
+           INFO = the GW-4: at the hip the grip is low and to the right (ndc 0.44, -0.90)
+           INFO = the GW-4: the rear sight on the view's centre (-0.000, 0.000)
+           INFO = the GW-4: down the sights the wrists are on their sockets (0.00, 0.00 cm)
+           INFO = the GW-4: the magazine seated, in his palm, away, back (seated hand pouch)
+           INFO = the GW-4: the support hand goes to the well, the pouch and the work part (fore well below pouch work)
+           INFO = the GW-4: the magazine rides the support palm (its foot within 0.00 cm)
+           INFO = the AK: the view gun is up (raise 1.00)
+           INFO = the AK: the stock is one direct child, and the view copy shows it at the hip, not down the sights (ads 0.00, shown true)
+           INFO = the AK: both wrists on their sockets (0.00, 0.00 cm)
+           INFO = the AK: the wrists stay within VM.wristMax (0.87, 0.87 of 0.87)
+           INFO the AK: the forearms stay off the eye line, the support elbow low (95, 56 degrees; elbows ndc y -2.63, -0.52) (the stand-in three)
+           INFO = the AK: nothing on screen in front of the near plane (nearest 21.8 cm)
+           INFO = the AK: at the hip the grip is low and to the right (ndc 0.44, -0.91)
+           INFO = the AK: the rear sight on the view's centre (-0.000, 0.000)
+           INFO = the AK: down the sights the wrists are on their sockets (0.00, 0.00 cm)
+           INFO = the AK: the magazine seated, in his palm, away, back (seated hand pouch)
+           INFO = the AK: the support hand goes to the well, the pouch and the work part (fore well below pouch work)
+           INFO = the AK: the magazine rides the support palm (its foot within 0.00 cm)
+           INFO = the Wasp: the view gun is up (raise 1.00)
+           INFO = the Wasp: both wrists on their sockets (0.00, 0.00 cm)
+           INFO = the Wasp: the wrists stay within VM.wristMax (0.87, 0.87 of 0.87)
+           INFO the Wasp: the forearms stay off the eye line, the sleeves leave the view (97, 63 degrees; elbows ndc y -1.67, -2.23) (the stand-in three)
+           INFO = the Wasp: nothing on screen in front of the near plane (nearest 27.2 cm)
+           INFO = the Wasp: at the hip the grip is low and to the right (ndc 0.39, -0.74)
+           INFO = the Wasp: the rear sight on the view's centre (0.000, 0.000)
+           INFO = the Wasp: down the sights the wrists are on their sockets (0.00, 0.00 cm)
+           INFO = the Wasp: the magazine seated, in his palm, away, back (seated hand pouch)
+           INFO = the Wasp: the support hand goes to the well, the pouch and the work part (fore well below pouch work)
+           INFO = the Wasp: the magazine rides the support palm (its foot within 0.00 cm)
+           INFO = the shotgun: the view gun is up (raise 1.00)
+           INFO = the shotgun: the stock is one direct child, and the view copy shows it at the hip, not down the sights (ads 0.00, shown true)
+           INFO = the shotgun: both wrists on their sockets (0.00, 0.00 cm)
+           INFO = the shotgun: the wrists stay within VM.wristMax (0.87, 0.87)
+           INFO the shotgun: the forearms stay off the eye line, the support elbow low (86, 61 degrees; elbows ndc y -2.70, -0.77) (the stand-in three)
+           INFO = the shotgun: nothing on screen in front of the near plane (nearest 19.7 cm)
+           INFO = the shotgun: at the hip the grip is low and to the right (ndc 0.44, -0.90)
+           INFO = the shotgun: the rear sight on the view's centre (0.000, 0.000)
+           INFO = the shotgun: the support hand leaves its hold (fore pouch port pump)
+           INFO = the Breacher: the view gun is up (raise 1.00)
+           INFO = the Breacher: the stock is one direct child, and the view copy shows it at the hip, not down the sights (ads 0.00, shown true)
+           INFO = the Breacher: both wrists on their sockets (0.00, 0.00 cm)
+           INFO = the Breacher: the wrists stay within VM.wristMax (0.87, 0.87)
+           INFO the Breacher: the forearms stay off the eye line, the support elbow low (83, 63 degrees; elbows ndc y -2.94, -0.63) (the stand-in three)
+           INFO = the Breacher: nothing on screen in front of the near plane (nearest 14.8 cm)
+           INFO = the Breacher: at the hip the grip is low and to the right (ndc 0.46, -0.95)
+           INFO = the Breacher: the rear sight on the view's centre (0.000, 0.000)
+           INFO = the Breacher: the support hand leaves its hold (fore well below pouch work)
+           INFO = the revolver: the view gun is up (raise 1.00)
+           INFO = the revolver: both wrists on their sockets (0.00, 0.00 cm)
+           INFO = the revolver: the wrists stay within VM.wristMax (0.87, 0.87)
+           INFO the revolver: the forearms stay off the eye line, the sleeves leave the view (81, 75 degrees; elbows ndc y -1.49, -1.34) (the stand-in three)
+           INFO = the revolver: nothing on screen in front of the near plane (nearest 33.9 cm)
+           INFO = the revolver: at the hip the grip is low and to the right (ndc 0.40, -0.67)
+           INFO = the revolver: the rear sight on the view's centre (-0.000, 0.000)
+           INFO = the revolver: the support hand leaves its hold (fore part ejector pouch loader)
+           INFO = the sniper: the view gun is up (raise 1.00)
+           INFO = the sniper: the stock is one direct child, and the view copy shows it at the hip, not down the sights (ads 0.00, shown true)
+           INFO = the sniper: both wrists on their sockets (0.00, 0.00 cm)
+           INFO = the sniper: the wrists stay within VM.wristMax (0.87, 0.87)
+           INFO the sniper: the forearms stay off the eye line, the support elbow low (84, 62 degrees; elbows ndc y -1.84, -0.72) (the stand-in three)
+           INFO = the sniper: nothing on screen in front of the near plane (nearest 24.4 cm)
+           INFO = the sniper: at the hip the grip is low and to the right (ndc 0.37, -0.88)
+           INFO = the sniper: the scope axis was on the view just before it hides (at ads 0.80 from 3 samples up to 0.80, ndc 0.109, -0.116)
+           INFO = the sniper: the support hand leaves its hold (fore well below pouch work)
+           INFO = the launcher: the view gun is up (raise 1.00)
+           INFO = the minigun: the view gun is up (raise 1.00)
+           INFO = the flamer: the view gun is up (raise 1.00)
+           INFO = the chainsaw: the view gun is up (raise 1.00)
+           INFO = his own arms back in the eye's pass (0 left out), the filter off
+           INFO = nothing of his left out of the eye's pass (0)
+           INFO = no page errors ()
+ok    tcl281 140 pass   0 fail  120.1s
+ok    tcl283   5 pass   0 fail  41.3s
+ok    tcl285a  11 pass   0 fail  44.5s
+ok    tcl285c  66 pass   0 fail  38.6s
+           INFO shadow passes ran with children left out (0 passes, 0 children out of the last) (the stand-in three)
+ok    tcl288a   4 pass   0 fail  39.1s
+           INFO walk: across 2.34 cm at 1.50 Hz, up/down 0.95 cm at 3.00 Hz; above 6 Hz 0.0 % / 0.2 %
+           INFO sprint: across 3.87 cm at 2.17 Hz, up/down 1.50 cm at 4.50 Hz; above 6 Hz 0.8 % / 0.9 %
+           INFO walk, own clock: across 2.34 cm at 1.50 Hz, up/down 0.95 cm at 3.00 Hz; above 6 Hz 0.0 % / 0.2 %
+           INFO sprint, own clock: across 3.87 cm at 2.17 Hz, up/down 1.50 cm at 4.50 Hz; above 6 Hz 0.2 % / 0.8 %
+           INFO the turn: the gun lags it by 4.9 degrees, home 0.30 s after the stop, overshoot 0 %
+           INFO the stream: the gun back 3.2 cm; the most a frame accelerates 0.07 / 0.07 mm
+           INFO one pistol shot: the view up 0.44 deg at 50 ms; -1 % left at 0.35 s
+ok    tcl293  24 pass   0 fail  57.2s
+ok    tcl294   8 pass   0 fail  57.5s
+           INFO his takes on this page: {"folders":0,"takes":0,"source":"none"} (the test page lists none, so every step is the synth: run it on the real page, node tools/realtest.mjs tcl295)
+           INFO walk, third person: 26.7 m in 4 s, 24 sounds
+           INFO   2 x noise leafHit <bandpass 1400 Hz>
+           INFO   1 x noise footstep <lowpass 424 Hz>
+           INFO   1 x noise footstep <bandpass 2901 Hz>
+           INFO   1 x noise footstep <lowpass 359 Hz>
+           INFO   1 x noise footstep <bandpass 2457 Hz>
+           INFO   1 x noise footstep <lowpass 419 Hz>
+           INFO   1 x noise footstep <bandpass 2870 Hz>
+           INFO   1 x noise footstep <lowpass 383 Hz>
+           INFO   1 x noise footstep <bandpass 2620 Hz>
+           INFO   1 x noise footstep <lowpass 414 Hz>
+           INFO   1 x noise footstep <bandpass 2834 Hz>
+           INFO   1 x noise footstep <lowpass 400 Hz>
+           INFO   1 x noise footstep <bandpass 2737 Hz>
+           INFO   1 x noise footstep <lowpass 388 Hz>
+           INFO   1 x noise footstep <bandpass 2658 Hz>
+           INFO   1 x noise footstep <lowpass 393 Hz>
+           INFO   1 x noise footstep <bandpass 2692 Hz>
+           INFO   1 x noise footstep <lowpass 356 Hz>
+           INFO   1 x noise footstep <bandpass 2439 Hz>
+           INFO   1 x noise footstep <lowpass 345 Hz>
+           INFO   1 x noise footstep <bandpass 2360 Hz>
+           INFO   1 x noise footstep <lowpass 357 Hz>
+           INFO   1 x noise footstep <bandpass 2444 Hz>
+           INFO run, third person: 38.6 m in 4 s, 38 sounds
+           INFO   2 x noise footstep <lowpass 409 Hz>
+           INFO   2 x tone birdChirp <sine 2281 Hz>
+           INFO   2 x tone birdChirp <sine 3086 Hz>
+           INFO   1 x noise footstep <bandpass 2796 Hz>
+           INFO   1 x noise footstep <lowpass 392 Hz>
+           INFO   1 x noise footstep <bandpass 2681 Hz>
+           INFO   1 x noise footstep <lowpass 417 Hz>
+           INFO   1 x noise footstep <bandpass 2850 Hz>
+           INFO   1 x noise footstep <lowpass 376 Hz>
+           INFO   1 x noise footstep <bandpass 2571 Hz>
+           INFO   1 x noise footstep <lowpass 421 Hz>
+           INFO   1 x noise footstep <bandpass 2882 Hz>
+           INFO   1 x noise footstep <lowpass 334 Hz>
+           INFO   1 x noise footstep <bandpass 2283 Hz>
+           INFO   1 x noise footstep <lowpass 423 Hz>
+           INFO   1 x noise footstep <bandpass 2895 Hz>
+           INFO   1 x noise footstep <lowpass 359 Hz>
+           INFO   1 x noise footstep <bandpass 2456 Hz>
+           INFO   1 x noise footstep <lowpass 375 Hz>
+           INFO   1 x noise footstep <bandpass 2568 Hz>
+           INFO   1 x noise footstep <lowpass 349 Hz>
+           INFO   1 x noise footstep <bandpass 2389 Hz>
+           INFO   1 x noise footstep <lowpass 335 Hz>
+           INFO   1 x noise footstep <bandpass 2291 Hz>
+           INFO   1 x noise footstep <lowpass 369 Hz>
+           INFO walk, first person: 25.0 m in 4 s, 23 sounds
+           INFO   3 x noise leafHit <bandpass 1400 Hz>
+           INFO   1 x noise footstep <lowpass 403 Hz>
+           INFO   1 x noise footstep <bandpass 2759 Hz>
+           INFO   1 x noise footstep <lowpass 400 Hz>
+           INFO   1 x noise footstep <bandpass 2735 Hz>
+           INFO   1 x noise footstep <lowpass 376 Hz>
+           INFO   1 x noise footstep <bandpass 2572 Hz>
+           INFO   1 x noise footstep <lowpass 371 Hz>
+           INFO   1 x noise footstep <bandpass 2540 Hz>
+           INFO   1 x noise footstep <lowpass 421 Hz>
+           INFO   1 x noise footstep <bandpass 2881 Hz>
+           INFO   1 x noise footstep <lowpass 330 Hz>
+           INFO   1 x noise footstep <bandpass 2259 Hz>
+           INFO   1 x noise footstep <lowpass 410 Hz>
+           INFO   1 x noise footstep <bandpass 2804 Hz>
+           INFO   1 x noise footstep <lowpass 435 Hz>
+           INFO   1 x noise footstep <bandpass 2978 Hz>
+           INFO   1 x noise footstep <lowpass 418 Hz>
+           INFO   1 x noise footstep <bandpass 2862 Hz>
+           INFO   1 x noise footstep <bandpass 1879 Hz>
+           INFO   1 x noise footstep <bandpass 1559 Hz>
+           INFO run, first person: 38.3 m in 4 s, 35 sounds
+           INFO   3 x tone birdChirp <sine 2029 Hz>
+           INFO   2 x noise footstep <lowpass 406 Hz>
+           INFO   2 x noise footstep <bandpass 2779 Hz>
+           INFO   2 x noise footstep <lowpass 346 Hz>
+           INFO   2 x noise footstep <lowpass 366 Hz>
+           INFO   1 x noise footstep <bandpass 1492 Hz>
+           INFO   1 x noise footstep <bandpass 1716 Hz>
+           INFO   1 x noise footstep <bandpass 1531 Hz>
+           INFO   1 x noise footstep <lowpass 435 Hz>
+           INFO   1 x noise footstep <bandpass 2977 Hz>
+           INFO   1 x noise footstep <lowpass 374 Hz>
+           INFO   1 x noise footstep <bandpass 2556 Hz>
+           INFO   1 x noise footstep <lowpass 337 Hz>
+           INFO   1 x noise footstep <bandpass 2308 Hz>
+           INFO   1 x noise footstep <lowpass 421 Hz>
+           INFO   1 x noise footstep <bandpass 2878 Hz>
+           INFO   1 x noise footstep <bandpass 2370 Hz>
+           INFO   1 x noise footstep <lowpass 383 Hz>
+           INFO   1 x noise footstep <bandpass 2622 Hz>
+           INFO   1 x noise footstep <lowpass 413 Hz>
+           INFO   1 x noise footstep <bandpass 2825 Hz>
+           INFO   1 x noise leafHit <bandpass 1400 Hz>
+           INFO   1 x noise footstep <lowpass 400 Hz>
+           INFO   1 x noise footstep <bandpass 2735 Hz>
+           INFO   1 x noise footstep <lowpass 415 Hz>
+ok    tcl295   9 pass   0 fail  55.1s
+           INFO his takes on this page: {"folders":0,"takes":0,"source":"none"} (the test page lists none, so every step is the synth: run it on the real page, node tools/realtest.mjs tcl295b)
+           INFO in the build room at -26.0, -632.0
+           INFO walk, third person: 19.3 m in 4 s, 0 sounds
+           INFO run, third person: 0.0 m in 4 s, 0 sounds
+           INFO walk, first person: 0.0 m in 4 s, 0 sounds
+           INFO run, first person: 0.0 m in 4 s, 0 sounds
+ok    tcl295b  10 pass   0 fail  46.5s
+           INFO ring depot at -112.0, 8.0 r 11.5 gates [[-104.3,16.5]] solids 83
+           INFO ring mast at -153.4, -4.2 r 18 gates [[-153.1,13.8]] solids 134
+           INFO ring hikers at 22.0, -126.0 r 18 gates [[5.1,-119.9]] solids 134
+           INFO ring rangers at 128.0, 0.0 r 18 gates [[113,9.9]] solids 134
+ok    tcl296  47 pass   0 fail  40.9s
+           INFO G -0.187,-0.113,-0.469,0.633 grip -0.190,-0.155,-0.460 WR -0.240,-0.142,-0.419 sock 0.483,-0.111,0.027 s 1.863
+           INFO forearm r -0.24,-0.59,0.77 l 0.24,-0.59,0.77, elbows z -0.264, -0.261
+ok    tcl301  22 pass   0 fail  43.9s
+ok    tfish    7 pass   0 fail  26.1s
+ok    t1       4 pass   0 fail  38.4s
+ok    t2       5 pass   0 fail  40.0s
+ok    t3       5 pass   0 fail  42.5s
+ok    t4       6 pass   0 fail  42.0s
+ok    t5      31 pass   0 fail  39.8s
+ok    t6      21 pass   0 fail  48.6s
+ok    t7      16 pass   0 fail  40.5s
+ok    t8       3 pass   0 fail  44.0s
+ok    t9      19 pass   0 fail  41.6s
+ok    t10     30 pass   0 fail  42.5s
+ok    t11     13 pass   0 fail  39.6s
+ok    t12     22 pass   0 fail  62.0s
+ok    t13      8 pass   0 fail  61.1s
+ok    t14     13 pass   0 fail  39.6s
+ok    t15     10 pass   0 fail  102.1s
+info  t16      0 pass   0 fail  77.8s  — 692
+ok    t17     10 pass   0 fail  66.9s
+ok    t18      7 pass   0 fail  39.6s
+ok    t19      6 pass   0 fail  83.4s
+info  t20      0 pass   0 fail  70.2s  — 56,-18 edge0 L0 yaw 0.00 rx 0.00 rz 0.00 ch 1
+ok    t21     16 pass   0 fail  103.0s
+info  t22      0 pass   0 fail  83.4s  — builds box 90,144 / -54,2 barrels before 6 after 12
+ok    t23      8 pass   0 fail  110.3s
+ok    t24     14 pass   0 fail  68.6s
+ok    t25     29 pass   0 fail  64.3s
+info  t26      0 pass   0 fail  70.5s  — pieces 692 failed: 
+info  t27      0 pass   0 fail  76.7s  — EMPTY WORLD visible meshes: 1956
+info  t28      0 pass   0 fail  41.6s  — shambler total 14: hips:1m/1mat torso:1m/1mat armL:1m/1mat Group:1m/1mat armR:1m/1mat Grou
+ok    t29     12 pass   0 fail  46.6s
+info  t30      0 pass   0 fail  44.9s  — turret at 46.0,-24.0 y -7.20
+ok    t31     26 pass   0 fail  44.2s
+info  t32      0 pass   0 fail  81.3s  — road pieces: wall/door@-44.0 wall/door@-30.0 wire/gate@-26.0 barricade/gate@-24.0
+ok    t33      4 pass   0 fail  48.7s
+ok    t34     20 pass   0 fail  66.5s
+ok    t35     28 pass   0 fail  72.1s
+ok    t36     22 pass   0 fail  69.5s
+ok    t37     17 pass   0 fail  162.1s
+ok    t38     12 pass   0 fail  84.6s
+FAIL  t39     14 pass   1 fail  54.9s
+ok    t40      6 pass   0 fail  51.0s
+ok    t41      9 pass   0 fail  43.5s
+           INFO root mesh 191.4 trees 192.2 hill 196.7 | shale mesh 201.3 trees 201.9 hill 210.0 | iron mesh 196.6 trees 194.2 hill 202.3 | wet mesh 199.8 trees 194.4 hill 205.0 | hill mesh 199.4 trees 197.8 hill 205.8 | chalk mesh 200.6 trees 200.0 hill 208.0
+ok    t42     18 pass   0 fail  30.4s
+ok    t43     35 pass   0 fail  44.1s
+ok    t44      6 pass   0 fail  31.0s
+ok    t45      8 pass   0 fail  32.6s
+ok    t46     11 pass   0 fail  32.9s
+ok    t47     17 pass   0 fail  30.3s
+ok    t48     22 pass   0 fail  45.5s
+ok    t49     32 pass   0 fail  50.6s
+ok    t50     15 pass   0 fail  35.8s
+ok    t51     19 pass   0 fail  54.9s
+ok    t52     17 pass   0 fail  30.3s
+ok    t53     76 pass   0 fail  54.1s
+ok    t54     32 pass   0 fail  43.1s
+ok    t55     10 pass   0 fail  45.3s
+ok    t56      1 pass   0 fail  34.0s
+ok    t57     10 pass   0 fail  30.8s
+ok    t58      9 pass   0 fail  51.0s
+ok    t59     48 pass   0 fail  75.5s
+FAIL  t60     42 pass   1 fail  63.7s
+FAIL  t61     21 pass   1 fail  57.6s
+ok    t62      4 pass   0 fail  46.2s
+ok    t63      6 pass   0 fail  44.3s
+ok    t64      8 pass   0 fail  49.9s
+ok    t65     12 pass   0 fail  51.6s
+           INFO largest height change across one puddle: 0.260 m
+ok    t66      4 pass   0 fail  51.1s
+ok    t67      9 pass   0 fail  64.9s
+ok    t68     15 pass   0 fail  42.8s
+ok    t69     18 pass   0 fail  79.0s
+ok    t70     21 pass   0 fail  85.6s
+ok    t71     16 pass   0 fail  66.5s
+ok    t72     21 pass   0 fail  71.8s
+FAIL  t73      8 pass   4 fail  67.6s
+ok    t74     18 pass   0 fail  57.9s
+ok    t75     16 pass   0 fail  54.6s
+ok    t76     16 pass   0 fail  63.5s
+ok    t77     17 pass   0 fail  62.0s
+ok    t78     18 pass   0 fail  46.2s
+ok    t79     12 pass   0 fail  66.7s
+ok    t80     14 pass   0 fail  177.7s
+           INFO the old drape (sampleHeight + 7 cm) went 0.37 m under the drawn bed at worst
+ok    t81      5 pass   0 fail  34.5s
+ok    t82      4 pass   0 fail  33.5s
+ok    t83     31 pass   0 fail  60.1s
+ok    t84     10 pass   0 fail  66.9s
+ok    t85     15 pass   0 fail  59.4s
+ok    t86     12 pass   0 fail  52.0s
+ok    t87     13 pass   0 fail  49.2s
+ok    t88     13 pass   0 fail  49.0s
+ok    t89     18 pass   0 fail  57.6s
+ok    t90      6 pass   0 fail  54.6s
+ok    t91      7 pass   0 fail  52.4s
+ok    t92      5 pass   0 fail  46.1s
+ok    t93     11 pass   0 fail  83.9s
+ok    t94      8 pass   0 fail  47.8s
+ok    t95      9 pass   0 fail  66.7s
+ok    t96     19 pass   0 fail  65.7s
+ok    t97     15 pass   0 fail  51.5s
+           INFO ragdoll off: 160 spawned, 160 alive at the end, 171 ticks, frame 109.39 ms avg / 164.80 ms worst (headless)
+           INFO ragdoll on: 160 spawned, 160 alive at the end, 127 ticks, frame 102.52 ms avg / 144.30 ms worst (headless)
+ok    t98     20 pass   0 fail  90.8s
+           INFO 120 spawned, 120 alive after 100.8 s and 26 legs (650 ticks)
+ok    t99      6 pass   0 fail  148.6s
+ok    t100     7 pass   0 fail  50.7s
+ok    t101     9 pass   0 fail  50.3s
+ok    t102    17 pass   0 fail  54.1s
+ok    t103     8 pass   0 fail  47.2s
+ok    t104     5 pass   0 fail  47.1s
+ok    t105    15 pass   0 fail  57.6s
+FAIL  t106     4 pass   5 fail  136.8s
+ERROR t107     0 pass   0 fail  120.8s  — window.TT never appeared: no page error reported
+ok    t108     9 pass   0 fail  43.8s
+ok    t109     5 pass   0 fail  54.4s
+ok    t110     4 pass   0 fail  44.7s
+           INFO brute head round: 0 of 1 checks blocked before a clear frame (0.00 s of game time)
+           INFO brute head round: 0 of 1 checks blocked before a clear frame (0.00 s of game time)
+           INFO shambler head round: 0 of 1 checks blocked before a clear frame (0.00 s of game time)
+           INFO feral head round: 0 of 1 checks blocked before a clear frame (0.00 s of game time)
+           INFO feral head centre p10 0.746, median 0.790 of hitH (line 0.7)
+           INFO leaper head round: 0 of 1 checks blocked before a clear frame (0.00 s of game time)
+           INFO leaper head centre p10 0.658, median 0.678 of hitH (line 0.55)
+           INFO spider head round: 0 of 1 checks blocked before a clear frame (0.00 s of game time)
+           INFO spider head centre p10 0.608, median 0.683 of hitH (line 0.6)
+ok    t111    11 pass   0 fail  53.3s
+ok    t112    13 pass   0 fail  51.6s
+ok    t113     5 pass   0 fail  68.4s
+ok    t114     8 pass   0 fail  44.2s
+ERROR t115     0 pass   0 fail  240.3s  — window.TT never appeared: no page error reported
+ERROR t116     0 pass   0 fail  240.3s  — window.TT never appeared: no page error reported
+ok    t117    17 pass   0 fail  46.7s
+ok    t119    20 pass   0 fail  41.3s
+ok    t120    11 pass   0 fail  43.0s
+ok    t121    31 pass   0 fail  28.2s
+ok    t122    14 pass   0 fail  40.4s
+ok    t123     6 pass   0 fail  31.6s
+ok    t124     5 pass   0 fail  46.2s
+ok    t125    10 pass   0 fail  44.6s
+ERROR t126     0 pass   0 fail  120.9s  — window.TT never appeared: no page error reported
+ERROR t127     0 pass   0 fail  131.8s  — window.TT never appeared: no page error reported
+ERROR t128     0 pass   0 fail  120.8s  — window.TT never appeared: no page error reported
+ERROR t129     0 pass   0 fail  240.3s  — window.TT never appeared: no page error reported
+ok    t130    14 pass   0 fail  40.8s
+ok    t131    18 pass   0 fail  58.3s
+ok    t132    11 pass   0 fail  41.8s
+ok    t133     9 pass   0 fail  46.5s
+ok    t134     9 pass   0 fail  30.5s
+ok    t135     8 pass   0 fail  43.8s
+ok    t136    36 pass   0 fail  51.2s
+ok    t137    15 pass   0 fail  45.9s
+ok    t138     6 pass   0 fail  41.4s
+ok    t139    13 pass   0 fail  51.2s
+ERROR t140     0 pass   0 fail  255.6s  — CDP timeout: Runtime.evaluate
+ERROR t141     0 pass   0 fail  240.3s  — window.TT never appeared: no page error reported
+ok    t142    10 pass   0 fail  61.4s
+ERROR t143     0 pass   0 fail  240.3s  — window.TT never appeared: no page error reported
+ok    t144     9 pass   0 fail  41.8s
+
+EXIT 4294967295
