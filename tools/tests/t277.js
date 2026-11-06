@@ -47,7 +47,24 @@
         ok(Math.abs(p.y - lineY) <= 0.003, k + ': eye on the notch-to-tip line within 3 mm (eye y ' + p.y.toFixed(4) + ', line ' + lineY.toFixed(4) + ')');
         continue;
       }
-      ok(s.kind === 'optic' || k === 'm4' ? p.y < bb.max.y && p.y > bb.max.y - 0.06 : p.y >= (rear ? rear.y : bb.max.y) - 0.005 && p.y <= bb.max.y + 0.08, k + ': eye clears the top line and stays near it (eye y ' + p.y.toFixed(3) + ', top ' + bb.max.y.toFixed(3) + ')');
+      // GB-259 (Claude 2026-11-02): aperture / ring sights — eye within 3 mm of the ring centre; nothing on the centre line inside the hole blocks it.
+      if (s.ring) {
+        const near = (z, dz, hx) => pts.filter((q) => Math.abs(q.z - z) < dz && Math.abs(q.x - mz.x) < hx);
+        const hole = near(s.ring[0], 0.02, 0.003).some((q) => q.y > s.ring[1] - 0.003 && q.y < s.ring[1] + 0.003);
+        ok(Math.abs(p.y - s.ring[1]) <= 0.003 && !hole, k + ': eye on the ring centre within 3 mm' + (hole ? ' (blocked)' : '') + ' (eye y ' + p.y.toFixed(4) + ', ring ' + s.ring[1].toFixed(4) + ')');
+        continue;
+      }
+      // GB-259 (Claude 2026-11-02): for kind 'optic' the eye sits on the scope's axis within 3 mm; the top-line rule is left out for optics.
+      if (s.kind === 'optic') {
+        // Claude 2026-11-02: eye within 3 mm of the scope's axis; top-line rule left out for optics.
+        // Same shape as the notch/tip check: the authored axis (SIGHT.pos) must sit on real tube/glass geometry.
+        const zScope = rear ? rear.z : p.z;
+        const onAxis = pts.some((q) => Math.abs(q.z - zScope) < 0.08 && Math.abs(q.x - mz.x) < 0.01 && Math.abs(q.y - p.y) <= 0.003);
+        ok(onAxis, k + ': eye on the scope axis within 3 mm (eye y ' + p.y.toFixed(4) + ', tube top ' + bb.max.y.toFixed(4) + ')');
+        continue;
+      }
+      // GB-259 (J18 + J20 / Claude 2026-11-03): m4 holo, minigun reflex and Breacher ring — eye on the sight centre (below the hood/ring top, within 6 cm), not the iron top-line rule.
+      ok(k === 'm4' || k === 'minigun' || k === 'aa12' ? p.y < bb.max.y && p.y > bb.max.y - 0.06 : p.y >= (rear ? rear.y : bb.max.y) - 0.005 && p.y <= bb.max.y + 0.08, k + ': eye clears the top line and stays near it (eye y ' + p.y.toFixed(3) + ', top ' + bb.max.y.toFixed(3) + ')');
     }
   } catch (e) { out.push('FAIL threw: ' + (e && (e.stack || e.message))); }
   return out.join('\n');

@@ -1,0 +1,54 @@
+{
+  "timestamp": "2026-11-06T21:13:11.013Z",
+  "gpu": "RTX 5080 (WebGPU)",
+  "resolution": "1920x1080",
+  "lighting": "Outdoor Daylight (worldTime = 0.50 High Noon)",
+  "targetDistance": "20.0 m (Marked Silhouette Target Plate)",
+  "guns": {
+    "aa12": {
+      "name": "Breacher-12",
+      "jerryNote": "J20: Sights unusable and inaccurate. GB-259 aligned rear datum through carry-handle ring centre (y=0.168) to front post tip (y=0.168).",
+      "sightKind": "carry-handle ring + hooded front post",
+      "weapon": "aa12",
+      "ads": 1,
+      "firstPerson": true,
+      "gunCoveragePct": 20.7,
+      "gunBoundsNDC": {
+        "minX": -0.463,
+        "maxX": 0.319,
+        "minY": -1.049,
+        "maxY": 0.008
+      }
+    },
+    "revolver": {
+      "name": "Revolver",
+      "jerryNote": "J13: Sights unusable: hammer in the way on aim. J57: Front sight post not visible. GP-20014 lowered idle hammer 6.3 mm under notch line.",
+      "sightKind": "rear top-strap notch + blade post over idle hammer",
+      "weapon": "revolver",
+      "ads": 1,
+      "firstPerson": true,
+      "gunCoveragePct": 35.7,
+      "gunBoundsNDC": {
+        "minX": -0.925,
+        "maxX": 0.397,
+        "minY": -1.05,
+        "maxY": 0.03
+      }
+    },
+    "launcher": {
+      "name": "Grenade Launcher",
+      "jerryNote": "J16: Leaf sight notch. GP-20033 opened leaf sight channel; sight line through first notch open to front post.",
+      "sightKind": "leaf sight notch + front post",
+      "weapon": "launcher",
+      "ads": 1,
+      "firstPerson": true,
+      "gunCoveragePct": 26,
+      "gunBoundsNDC": {
+        "minX": -0.449,
+        "maxX": 0.503,
+        "minY": -1.046,
+        "maxY": 0.046
+      }
+    }
+  }
+}

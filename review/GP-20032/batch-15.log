@@ -1,0 +1,17 @@
+GRANT chatgpt GP-20032: starting one game-test command
+check-players: 315 player.position reads, all in the allowed places
+ok    t265    30 pass   0 fail  43.8s
+ok    t266    32 pass   0 fail  42.2s
+ok    t267    24 pass   0 fail  58.4s
+ok    t268    27 pass   0 fail  36.2s
+ok    t270     1 pass   0 fail  24.5s
+ok    t271    10 pass   0 fail  45.3s
+info  t272     0 pass   0 fail  23.8s  — SKIP no SkinnedMesh in this three (the test page): run it with tools/realtest.mjs --soft
+ok    t273     9 pass   0 fail  36.9s
+ok    t274     3 pass   0 fail  41.3s
+ok    t275    15 pass   0 fail  49.0s
+
+10 checks: 151 pass, 0 fail, 1 reported no assertions
+
+no assertions (probe, or the check bailed before asserting):
+  t272   SKIP no SkinnedMesh in this three (the test page): run it with tools/realtest.mjs --soft

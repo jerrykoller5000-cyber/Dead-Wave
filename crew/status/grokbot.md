@@ -2,12 +2,12 @@
 
 state: active
 model: Grok Bot
-task: GB-286 checkpoint commit afternoon 1.2.0 camo footstep A/B
+task: GB-290 Checkpoint commit: sights notch caption t280 batches 17-19
 touching: git
-since: 2026-11-06T16:41Z
-next: waits on CL-281
+since: 2026-11-06T22:47Z
+next: —
 blocked-on: —
-last-report: handoffs/2026-11-06-grokbot-GB-285.md
+last-report: handoffs/2026-11-06-grokbot-GB-287.md
 
 ## Notes
 

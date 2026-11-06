@@ -66,31 +66,31 @@
       ok(D.shut(r.cx, r.cz) === true, r.place + ': inside counts as shut while the gate is locked (no guards, no bounty)');
       if (D.riseOk) { let bad = 0; for (let k = 0; k < 12; k++) { const a = k * Math.PI / 6, rr = r.r * 0.6; if (D.riseOk(r.cx + Math.cos(a) * rr, r.cz + Math.sin(a) * rr)) bad++; } ok(bad === 0, r.place + ': nothing rises inside it at night while shut (AG-213; ' + bad + ' of 12 spots allowed)'); }
     }
-    // The key opens it, here at the ring: give him the mast's key and press E at the gate.
-    const mast = rings.find((r) => r.place === 'mast');
-    if (mast) {
-      const st = T.chainDbg.read(); st.keys['sato-key'] = 'held'; T.chainDbg.load(st);
-      const g = mast.gates[0], a = Math.atan2(g.z - mast.cz, g.x - mast.cx);
+    // The key opens it, here at the ring: give him the rangers' key and press E at the gate (CL-303: the mast is now a fence with vines, the hikers' a ring of trees; tcl303 checks those, so the key check is on a stone ring).
+    const stoneRing = rings.find((r) => r.place === 'rangers');
+    if (stoneRing) {
+      const st = T.chainDbg.read(); st.keys['ranger-gate-key'] = 'held'; T.chainDbg.load(st);
+      const g = stoneRing.gates[0], a = Math.atan2(g.z - stoneRing.cz, g.x - stoneRing.cx);
       const pp = T.player.position; const ox = g.x + Math.cos(a) * 1.6, oz = g.z + Math.sin(a) * 1.6;
       pp.set(ox, T.sampleHeight(ox, oz), oz);
       await wait(300);
-      ok(D.near() === 'mast', 'at the mast\'s gate: near() names it (' + D.near() + ')');
+      ok(D.near() === 'rangers', 'at the rangers\' gate: near() names it (' + D.near() + ')');
       const prompt = T.chainDbg.prompt();
-      ok(/E/.test(String(prompt || '')), 'with Sato\'s key the prompt offers E (' + prompt + ')');
+      ok(/E/.test(String(prompt || '')), 'with Clarke\'s key the prompt offers E (' + prompt + ')');
       T.chainDbg.use();
-      const t0 = Date.now(); while (Date.now() - t0 < 8000 && !D.gates().filter((q) => q.place === 'mast').every((q) => q.w > 0.99)) await wait(200);
-      const after = D.gates().filter((q) => q.place === 'mast');
-      ok(T.chainDbg.read().gates['mast-yard'] === 'open', 'E at the ring opens the chain\'s mast-yard gate');
-      ok(after.every((q) => q.open && q.solids === 0 && q.blocks === 0 && q.w > 0.99), 'the mast\'s gate swung open, its solids and field block gone (' + JSON.stringify(after.map((q) => [q.open, q.solids, q.blocks, +q.w.toFixed(2)])) + ')');
-      ok(walkIn(mast, a) < mast.r - 4, 'the trail now goes in (' + walkIn(mast, a).toFixed(1) + ' m from the centre)');
-      ok(D.shut(mast.cx, mast.cz) === false, 'inside the open ring is no longer shut');
+      const t0 = Date.now(); while (Date.now() - t0 < 8000 && !D.gates().filter((q) => q.place === 'rangers').every((q) => q.w > 0.99)) await wait(200);
+      const after = D.gates().filter((q) => q.place === 'rangers');
+      ok(T.chainDbg.read().gates['ranger-gate'] === 'open', 'E at the ring opens the chain\'s ranger gate');
+      ok(after.every((q) => q.open && q.solids === 0 && q.blocks === 0 && q.w > 0.99), 'the rangers\' gate swung open, its solids and field block gone (' + JSON.stringify(after.map((q) => [q.open, q.solids, q.blocks, +q.w.toFixed(2)])) + ')');
+      ok(walkIn(stoneRing, a) < stoneRing.r - 4, 'the trail now goes in (' + walkIn(stoneRing, a).toFixed(1) + ' m from the centre)');
+      ok(D.shut(stoneRing.cx, stoneRing.cz) === false, 'inside the open ring is no longer shut');
       T.chainDbg.reset(); await wait(400);
-      const back = D.gates().filter((q) => q.place === 'mast');
+      const back = D.gates().filter((q) => q.place === 'rangers');
       ok(back.every((q) => !q.open && q.solids > 3 && q.blocks > 3), 'a run reset shuts it again (' + JSON.stringify(back.map((q) => [q.open, q.solids, q.blocks])) + ')');
       // Without the key: E says why and opens nothing.
       pp.set(ox, T.sampleHeight(ox, oz), oz); await wait(200);
       const p2 = T.chainDbg.prompt(); T.chainDbg.use(); await wait(300);
-      ok(T.chainDbg.read().gates['mast-yard'] === 'locked' && !/^E/.test(String(p2 || '')), 'without the key it stays locked and says why (' + p2 + ')');
+      ok(T.chainDbg.read().gates['ranger-gate'] === 'locked' && !/^E/.test(String(p2 || '')), 'without the key it stays locked and says why (' + p2 + ')');
     }
     ok(errs.length === 0, 'no page errors (' + errs.slice(0, 2).join(' | ') + ')');
   } catch (e) { out.push('FAIL threw: ' + (e && e.stack || e)); }

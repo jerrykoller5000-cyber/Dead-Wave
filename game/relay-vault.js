@@ -15,10 +15,12 @@
 // for the heavy stores (and go without the radio's calls and the sites it shows meanwhile).
 //
 // Pure: index.html says what he can still be given (can(item)) and applies what comes back.
+// Under ?gates=1, its can(item) rejects the machete: that blade is found in Price's shed instead.
+// The quartermaster source pool keeps it for ungated runs; filtering happens before every draw.
 //
 //   VAULT_FINAL_DAY, VAULT_TIERS     the roadmap (docs: the handoff CL-185 has it as a table)
 //   vaultTierFor(day)                the tier for that day
-//   vaultReward(day, can, rand)      { tier, label, items } — can({ kind, id }) true when he does not have it yet
+//   vaultReward(day, can, rand)      { tier, label, items } — can({ kind, id }) true when he can receive it
 //     items: { kind: 'weapon' | 'pair' | 'gear' | 'blade' | 'blueprint' | 'katana', id } or { kind: 'cash', amount }
 
 export const VAULT_FINAL_DAY = 20;

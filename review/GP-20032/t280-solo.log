@@ -1,0 +1,11 @@
+GRANT chatgpt GP-20032: starting one game-test command
+check-players: 315 player.position reads, all in the allowed places
+FAIL  t280    12 pass   1 fail  68.0s
+           recovering browser after t280: 1 fail
+
+1 checks: 12 pass, 1 fail
+
+by owner:
+  unassigned
+    t280   1 fail  FAIL down the uzi's sights his support arm is out of the view
+           FAIL down the uzi's sights his support arm is out of the view

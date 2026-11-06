@@ -1,0 +1,168 @@
+{
+  "timestamp": "2026-11-06T23:13:27.563Z",
+  "gpu": "RTX 5080 (Jerry PC)",
+  "ungated": {
+    "url": "http://127.0.0.1:6551/index.html?solid=1&debug=1&raf=timer",
+    "upgradesCount": 6,
+    "machetePresent": true,
+    "macheteDetails": {
+      "name": "Machete",
+      "tag": "replaces the knife",
+      "desc": "A heavier blade for F: 2.45m reach and 69 damage (knife: 2.4m, 26). Narrower swing, up to 3 targets, slightly quicker recovery.",
+      "btn": "$85",
+      "disabled": false,
+      "status": "",
+      "category": "upgrades",
+      "weapon": ""
+    },
+    "upgradesRows": [
+      {
+        "name": "Field Intel",
+        "tag": "",
+        "desc": "See every enemy type, count and approach at the HQ panel.",
+        "btn": "Buy — 120 Cash",
+        "disabled": false,
+        "status": "",
+        "category": "",
+        "weapon": ""
+      },
+      {
+        "name": "Machete",
+        "tag": "replaces the knife",
+        "desc": "A heavier blade for F: 2.45m reach and 69 damage (knife: 2.4m, 26). Narrower swing, up to 3 targets, slightly quicker recovery.",
+        "btn": "$85",
+        "disabled": false,
+        "status": "",
+        "category": "upgrades",
+        "weapon": ""
+      },
+      {
+        "name": "Pistol pair",
+        "tag": "akimbo",
+        "desc": "A second Pistol for the off hand. Y switches between one and two: twice the rate of fire and twice the loaded rounds, for a wider group, a slower reload, and no hand free for a grenade or the blade.",
+        "btn": "$120",
+        "disabled": false,
+        "status": "",
+        "category": "upgrades",
+        "weapon": ""
+      },
+      {
+        "name": "Pistol extended mag",
+        "tag": "",
+        "desc": "Magazine 12 → 18, and a bigger reserve to match.",
+        "btn": "$45",
+        "disabled": false,
+        "status": "",
+        "category": "upgrades",
+        "weapon": ""
+      },
+      {
+        "name": "Pistol suppressor",
+        "tag": "",
+        "desc": "A can on the muzzle: quieter, a little less punch.",
+        "btn": "$40",
+        "disabled": false,
+        "status": "",
+        "category": "upgrades",
+        "weapon": ""
+      },
+      {
+        "name": "Pistol auto sear",
+        "tag": "",
+        "desc": "Enables full auto. Climbs harder than the Wasp SMG. X switches SEMI / AUTO outside build mode.",
+        "btn": "$70",
+        "disabled": false,
+        "status": "",
+        "category": "upgrades",
+        "weapon": ""
+      }
+    ],
+    "weaponsCount": 6,
+    "chainsawPresent": true,
+    "chainsawDetails": {
+      "name": "Chainsaw",
+      "tag": "new tonight",
+      "desc": "No ammo, just gas. Hold to cut.",
+      "btn": "$190",
+      "disabled": false,
+      "status": "",
+      "category": "weapons",
+      "weapon": "chainsaw"
+    }
+  },
+  "gated": {
+    "url": "http://127.0.0.1:6551/index.html?gates=1&chaingates=1&solid=1&debug=1&raf=timer",
+    "upgradesCount": 5,
+    "machetePresent": false,
+    "buyMacheteGuard": {
+      "initialCash": 1040,
+      "finalCash": 1040,
+      "cashUnchanged": true,
+      "macheteNotGranted": true
+    },
+    "upgradesRows": [
+      {
+        "name": "Field Intel",
+        "tag": "",
+        "desc": "See every enemy type, count and approach at the HQ panel.",
+        "btn": "Buy — 120 Cash",
+        "disabled": false,
+        "status": "",
+        "category": "",
+        "weapon": ""
+      },
+      {
+        "name": "Pistol pair",
+        "tag": "akimbo",
+        "desc": "A second Pistol for the off hand. Y switches between one and two: twice the rate of fire and twice the loaded rounds, for a wider group, a slower reload, and no hand free for a grenade or the blade.",
+        "btn": "$120",
+        "disabled": false,
+        "status": "",
+        "category": "upgrades",
+        "weapon": ""
+      },
+      {
+        "name": "Pistol extended mag",
+        "tag": "",
+        "desc": "Magazine 12 → 18, and a bigger reserve to match.",
+        "btn": "$45",
+        "disabled": false,
+        "status": "",
+        "category": "upgrades",
+        "weapon": ""
+      },
+      {
+        "name": "Pistol suppressor",
+        "tag": "",
+        "desc": "A can on the muzzle: quieter, a little less punch.",
+        "btn": "$40",
+        "disabled": false,
+        "status": "",
+        "category": "upgrades",
+        "weapon": ""
+      },
+      {
+        "name": "Pistol auto sear",
+        "tag": "",
+        "desc": "Enables full auto. Climbs harder than the Wasp SMG. X switches SEMI / AUTO outside build mode.",
+        "btn": "$70",
+        "disabled": false,
+        "status": "",
+        "category": "upgrades",
+        "weapon": ""
+      }
+    ],
+    "weaponsCount": 6,
+    "chainsawPresent": true,
+    "chainsawDetails": {
+      "name": "Chainsaw",
+      "tag": "new tonight",
+      "desc": "No ammo, just gas. Hold to cut.",
+      "btn": "$190",
+      "disabled": false,
+      "status": "",
+      "category": "weapons",
+      "weapon": "chainsaw"
+    }
+  }
+}

@@ -2,12 +2,12 @@
 
 state: active
 model: GPT-6
-task: GP-20032 Add 1.2 camo note and run remaining suite batches gently
-touching: docs/release/patch-notes-1.2.md (The guns and Sources), review/GP-20032, handoffs/2026-11-06-chatgpt-GP-20032.md
-since: 2026-11-06T16:50Z
-next: —
+task: GP-20032 Finish paced release-suite batches 20 and 21 and tally real reds
+touching: review/GP-20032, handoffs/2026-11-06-chatgpt-GP-20032.md
+since: 2026-11-06T23:23Z
+next: GP-20032 The rest of the suite, gently (1.2 release step: the suite;
 blocked-on: —
-last-report: handoffs/2026-11-06-chatgpt-GP-20031.md
+last-report: handoffs/2026-11-06-chatgpt-GP-20034.md
 
 ## Notes
 

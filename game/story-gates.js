@@ -12,13 +12,16 @@
 const TAU = Math.PI * 2;
 
 // place: the name in the logs; gate: the chain gate it opens with; poi: its centre; site: its objective site's id.
+// kind (CL-303, D-116, Jerry 6 Nov): what the ring is made of. 'stone' the bands' wall and an iron gate; 'fence' chain link
+// with wire on top and a chain-link gate grown over with vines (the mast yard); 'trees' trees you can't get through, the
+// trail's mouth blocked by a crashed truck (the hikers' camp). The collision is the same band for all three.
 // Clarke's truck (the padlock is on the toolbox itself) and the trapper's camp (already a fenced yard) get none.
 export const STORY_RINGS = Object.freeze([
-  { place: 'depot', gate: 'depot-shed', lead: 'generator', poi: (P) => P.sheds && P.sheds[2], site: 'objective:fuel-depot' },
-  { place: 'mast', gate: 'mast-yard', lead: 'relay', poi: (P) => P.mast, site: 'objective:radio-repair' },
-  { place: 'convoy', gate: 'road-barrier', lead: 'medical', poi: (P) => P.wrecks && P.wrecks[0], site: 'objective:medical-convoy' },
-  { place: 'hikers', gate: 'trail-chain', lead: 'missing', poi: (P) => P.campsites && P.campsites[1], site: 'objective:hikers-cache' },
-  { place: 'rangers', gate: 'ranger-gate', lead: 'search', poi: (P) => P.campsites && P.campsites[0], site: 'objective:ranger-cache' },
+  { place: 'depot', kind: 'stone', gate: 'depot-shed', lead: 'generator', poi: (P) => P.sheds && P.sheds[2], site: 'objective:fuel-depot' },
+  { place: 'mast', kind: 'fence', gate: 'mast-yard', lead: 'relay', poi: (P) => P.mast, site: 'objective:radio-repair' },
+  { place: 'convoy', kind: 'stone', gate: 'road-barrier', lead: 'medical', poi: (P) => P.wrecks && P.wrecks[0], site: 'objective:medical-convoy' },
+  { place: 'hikers', kind: 'trees', gate: 'trail-chain', lead: 'missing', poi: (P) => P.campsites && P.campsites[1], site: 'objective:hikers-cache' },
+  { place: 'rangers', kind: 'stone', gate: 'ranger-gate', lead: 'search', poi: (P) => P.campsites && P.campsites[0], site: 'objective:ranger-cache' },
 ].map((r) => Object.freeze(r)));
 
 export const RING = Object.freeze({
@@ -174,8 +177,21 @@ export function planStoryRings({ POI, PATHS, sites = [], bands = [], solids = []
     });
     const near = (x, z, pad = 0) => Math.abs(Math.hypot(x - cx, z - cz) - r) < o.width * 0.5 + pad;
     const contains = (x, z) => Math.hypot(x - cx, z - cz) < r;
-    return { place: spec.place, gate: spec.gate, lead: spec.lead, cx, cz, r, width: o.width, pts, gaps, gates, near, contains };
+    return { place: spec.place, kind: spec.kind || 'stone', gate: spec.gate, lead: spec.lead, cx, cz, r, width: o.width, pts, gaps, gates, near, contains };
   }
+}
+
+// CL-303: the crashed truck's winch spots at a 'trees' ring's gate (g from ring.gates), in world x/z. The truck lies
+// across the trail along the ring; the winch pulls it outward and to one side (+along the ring) until it lies beside the
+// trail outside the ring. The anchor tree stands out there; the remote, on its lead, on the other side, clear of the swing.
+export function winchSpots(ring, g) {
+  const ox = -(g.x - ring.cx) / ring.r, oz = -(g.z - ring.cz) / ring.r;   // inward (the ring's +z at the gate)
+  const at = (along, inward) => ({ x: g.x + g.ax * along + ox * inward, z: g.z + g.az * along + oz * inward });
+  return {
+    anchor: at(g.span + 3.6, -7.5),    // the big tree the line ties to
+    remote: at(-(g.span + 2.2), -3.2), // where he stands with the remote
+    rest: at(g.span + 0.6, -5.4),      // the truck's centre once dragged clear (turned along the trail)
+  };
 }
 
 // The ring a point stands in, or null.

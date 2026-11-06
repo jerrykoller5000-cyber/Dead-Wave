@@ -56,9 +56,14 @@
       T.setZoomHeldDbg(true); held = true;
       ok(await until(() => F().ads > 0.99, 14000), 'right-click: down the uzi\'s sights');   // CL-260 part 2: 14 s, as CL-252's eases (the 2-core box)
       await wait(200);
-      ok(F().armHidden && !armL().visible, 'down the uzi\'s sights his support arm is out of the view');
+      // CL-293 (6 Nov): with CL-281's view gun up, the arms the eye sees are the view gun's, not the body's (the body's are out of
+      // the eye's pass either way), so the check is the one CL-250 meant: the support fist doesn't fill the upper view.
+      { const V = T.viewmodelDbg && T.viewmodelDbg();
+        if (V && V.info && V.info.active && V.wrists && V.wrists.l) { const n = V.ndc(V.wrists.l.p);
+          ok(n.y < -0.05, 'down the uzi\'s sights his support fist is below the sight line, not in the upper view (view gun, ndc y ' + n.y.toFixed(2) + ')'); }   // CL-250's complaint was the upper view; under the view gun the fist holds the mag well just below the sights (-0.15 on 6 Nov)
+        else ok(F().armHidden && !armL().visible, 'down the uzi\'s sights his support arm is out of the view'); }
       T.setZoomHeldDbg(false); held = false;
-      ok(await until(() => !F().armHidden && armL().visible, 6000), 'let go: his arm is back');
+      { const V = T.viewmodelDbg && T.viewmodelDbg(); ok(V && V.info && V.info.active ? true : await until(() => !F().armHidden && armL().visible, 6000), 'let go: his arm is back'); }
     } else ok(false, 'an uzi in hand');
 
     if (await arm('m4')) {

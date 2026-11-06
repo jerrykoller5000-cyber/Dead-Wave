@@ -1,0 +1,7 @@
+{
+  "weapon": "launcher",
+  "first": true,
+  "ads": 1,
+  "viewGun": "launcher",
+  "backend": "WebGPU"
+}

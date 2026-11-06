@@ -39,6 +39,17 @@ test('never something he already has; a full pool reaches up a tier, then down, 
   assert.deepEqual(none.items, [{ kind: 'cash', amount: vaultTierFor(9).cash }]);
 });
 
+test('gated story line filters the machete from vault draws without changing ungated rewards', () => {
+  const alwaysMachete = () => 0.3;
+  assert.deepEqual(vaultReward(4, () => true, alwaysMachete).items, [{ kind: 'blade', id: 'machete' }]);
+  for (let day = 1; day < VAULT_FINAL_DAY; day++) {
+    for (let seed = 1; seed <= 25; seed++) {
+      const reward = vaultReward(day, (it) => it.kind !== 'blade', seeded(seed));
+      assert.ok(reward.items.every((it) => it.kind !== 'blade'), `day ${day}, seed ${seed}: ${JSON.stringify(reward.items)}`);
+    }
+  }
+});
+
 test('the black cache draws two different things; the katana only on the final day', () => {
   for (let s = 1; s < 30; s++) {
     const r = vaultReward(17, () => true, seeded(s));

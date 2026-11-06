@@ -1,0 +1,15 @@
+GRANT chatgpt GP-20032: starting one game-test command
+check-players: 315 player.position reads, all in the allowed places
+ok    t286    11 pass   0 fail  61.5s
+ok    t287    10 pass   0 fail  38.5s
+ok    t288    18 pass   0 fail  44.9s
+ok    t289    13 pass   0 fail  96.3s
+ok    t290    19 pass   0 fail  57.9s
+           INFO the view height wobbles 0.44 cm, the sight 0.45 cm; the pitch 0.00 deg, the sight 0.00 deg
+ok    t291    13 pass   0 fail  52.3s
+ok    t292    15 pass   0 fail  51.5s
+ok    t293     6 pass   0 fail  46.0s
+ok    t294    24 pass   0 fail  61.0s
+ok    t295    11 pass   0 fail  21.9s
+
+10 checks: 140 pass, 0 fail

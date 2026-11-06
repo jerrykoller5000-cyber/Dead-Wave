@@ -1,0 +1,3 @@
+Game-test request 8daf77ed-b218-4b3d-9e84-2eef4ad38f7a queued at position 2. Waiting...
+GRANT chatgpt GP-20033: starting one game-test command
+{"weapon":"launcher","first":true,"ads":1,"viewGun":"launcher","backend":"WebGPU"}

@@ -224,9 +224,9 @@ export function makeLauncherModel(ctx) {
   K.cyl(0.0035, 0.0035, 0.03, gunDark, 0, 0.1225, -0.2, null, 8, 'x');   // the leaf's hinge pin on the datum
   for (const sx of [-1, 1]) {
     K.box(0.004, 0.034, 0.003, gunDark, sx * 0.011, 0.14, -0.2);   // the leaf's side rails (to y 0.157)
-    for (const y of [0.137, 0.144, 0.151]) K.box(0.0065, 0.002, 0.003, gunDark, sx * 0.00575, y - 0.001, -0.2);   // the rungs, a 5 mm notch between halves
+    for (const y of [0.137, 0.144, 0.151]) K.box(0.0055, 0.002, 0.003, gunDark, sx * 0.00625, y - 0.001, -0.2);   // open 7 mm notch: upper rungs stay clear of the lower sight line
   }
-  K.box(0.026, 0.003, 0.003, gunDark, 0, 0.1555, -0.2);   // the leaf's top bar
+  // Open above the highest rung too: a bridge across the centre masks every notch below it.
   for (const sx of [-1, 1]) {
     K.slab([[-0.245, -0.017], [-0.112, -0.017], [-0.103, -0.024], [-0.103, -0.051], [-0.233, -0.051], [-0.245, -0.04]], 0.004, gunMid, { x: sx * 0.082, bevel: 0.002 });
     for (const [z, y] of [[-0.229, 0.084], [0.023, 0.081], [-0.226, -0.035], [-0.12, -0.035]]) bolt(K, gunDark, gunAccent, sx * 0.087, y, z, 0.005);

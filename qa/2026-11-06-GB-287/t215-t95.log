@@ -1,0 +1,16 @@
+ok    t215      4 pass   0 fail  28.7s  (real renderer)
+    PASS read index.html and the scripts and styles the game loaded (227 files)
+    PASS no broken characters in them
+    PASS the HUD reads clean: timeLine "Daylight · 08:14 · Grace", tacticalLine "NVG - · Laser - · Light -", grenadeChips "G×3H×0", ammoDetail "12 / 12  ·  50 Bullets  ·  SEMI", hpNum "100 / 100"
+    PASS and shows its dots and times signs (NVG - · Laser - · Light - / G×3H×0)
+ok    t95       9 pass   0 fail  31.9s  (real renderer)
+    PASS the pick is x0.8 (0.8)
+    PASS laser off: the cone is the gun's own
+    PASS every gun with a laser, 200 draws each: x0.8 within 5% (minigun 0.800 m4 0.800 ak 0.800 pistol 0.800 uzi 0.800 shotgun 0.801 aa12 0.801 revolver 0.800 sniper 0.800 launcher 0.800)
+    PASS AK, 2000 free draws each: 5.987 -> 4.787 mrad (x0.799)
+    PASS Z (toggleLasers) with the laser sight bought: on, and it steadies
+    PASS Z again: off
+    PASS no laser sight owned: no change (6.033 vs 6.033 mrad)
+    PASS the chainsaw has no laser: nothing to steady
+    PASS no page errors
+2 checks: 13 pass, 0 fail (real renderer)

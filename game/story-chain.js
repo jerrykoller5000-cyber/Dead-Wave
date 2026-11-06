@@ -17,18 +17,27 @@ export const LEADS = Object.freeze([
 
 export const CHAIN_RULES = Object.freeze({ maxOpen: 2, fallbackDawns: 2, firstDay: 2 });
 
+// CL-303 (D-116, ?gates=1): the straight line. Jerry, 6 Nov: "make sure that our locations unlock in a linear fashion. You
+// cannot complete the one until you finish the other." One lead open at a time, each after the one before it in LEADS'
+// order (so the rangers' search comes after Clarke's truck), no fallback, and a lead can't be done while still closed.
+// stamp: the Grave Shift orders (his pick): Captain Hale's teleprinter prints the next sealed order at a dawn only once
+// the last one is stamped done at the HQ's duty board, so a done lead waits for its stamp (stamp(id)) before the next opens.
+export const LINE_RULES = Object.freeze({ maxOpen: 1, fallbackDawns: Infinity, firstDay: 2, line: true, stamp: true });
+
 const byId = new Map(LEADS.map((l) => [l.id, l]));
 export function leadOf(id) { return byId.get(id) || null; }
 export function leadForSite(site) { return LEADS.find((l) => l.site === site) || null; }
 
 export function createStoryChain(options = {}) {
   const rules = { ...CHAIN_RULES, ...(options.rules || {}) };
-  const leads = options.leads || LEADS;
+  const base = options.leads || LEADS;
+  // The line: each lead's cause is the one before it.
+  const leads = rules.line ? base.map((l, i) => ({ ...l, after: i ? base[i - 1].id : null })) : base;
   // Per lead: 'closed' | 'open' | 'done'; when it opened (day) and when it was done (day).
   let st = null;
   const fresh = () => {
     st = { day: 0, leads: {}, log: [] };
-    for (const l of leads) st.leads[l.id] = { state: 'closed', openedDay: null, doneDay: null };
+    for (const l of leads) st.leads[l.id] = { state: 'closed', openedDay: null, doneDay: null, stampedDay: null };
   };
   fresh();
   const s = (id) => st.leads[id];
@@ -40,7 +49,10 @@ export function createStoryChain(options = {}) {
     if (!l.after) return true;
     const a = s(l.after);
     if (!a) return true;
-    if (a.state === 'done') return a.doneDay == null || a.doneDay < day;   // done before this dawn
+    if (a.state === 'done') {
+      if (rules.stamp) return a.stampedDay != null && a.stampedDay < day;   // CL-303: stamped before this dawn
+      return a.doneDay == null || a.doneDay < day;   // done before this dawn
+    }
     return a.state === 'open' && a.openedDay != null && day - a.openedDay >= rules.fallbackDawns;
   };
   const api = {
@@ -67,11 +79,24 @@ export function createStoryChain(options = {}) {
     done(id) {
       const x = s(id);
       if (!x || x.state === 'done') return false;
+      if (rules.line && x.state === 'closed') return false;   // CL-303: not before its turn
       if (x.openedDay == null) x.openedDay = st.day;
       x.state = 'done'; x.doneDay = st.day;
       st.log.push({ day: st.day, id, what: 'done' });
       return true;
     },
+    // CL-303: the day's order stamped done at the HQ's duty board (a done lead only). The next opens at the dawn after.
+    stamp(id) {
+      const x = s(id);
+      if (!x || x.state !== 'done' || x.stampedDay != null) return false;
+      x.stampedDay = st.day;
+      st.log.push({ day: st.day, id, what: 'stamped' });
+      return true;
+    },
+    stamped(id) { const x = s(id); return !!x && x.stampedDay != null; },
+    // The done lead waiting for its stamp (the board's prompt), or null.
+    due() { const l = leads.find((y) => s(y.id).state === 'done' && s(y.id).stampedDay == null); return rules.stamp && l ? l.id : null; },
+    rules() { return { ...rules }; },
     // Dev and tests: open one now (or all).
     open(id) {
       const x = s(id);

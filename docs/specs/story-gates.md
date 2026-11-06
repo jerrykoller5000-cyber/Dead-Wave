@@ -49,3 +49,37 @@ tcl296 (the test page, `?gates=1&chaingates=1`): five rings, each closed but for
 no other place inside; no tree trunk within 2 m; walking in from outside along the trail stops at the gate while it's
 shut and goes through once the chain opens it; the dead's field blocks the gate while shut and clears it after; no
 guards inside a shut ring. Then AG's drive of each ring from Jerry's launcher (the his-way rule) and Cursor's A/B (D-99).
+
+## CL-303 (D-116, Jerry 6 Nov): each place its own lock, and the line
+
+Jerry: the depot and the rangers keep stone; "Radio mast yard should be chain link fence with wire on top of it like the
+one in the training area. The gate needs to be chain link", grown over with vines cut by the machete ("we will take the
+machete out of the buy menu and keep it as something that you have to find"); "Hikers' camp should be a ring of
+impenetrable trees", the path blocked by a crashed truck: "It needs a winch that you can take off of another truck. You tie
+it to a tree and yank the truck out." And "make sure that our locations unlock in a linear fashion. You cannot complete the
+one until you finish the other", with a reason for the days: the Grave Shift orders (his pick).
+
+| Place | Ring (`kind`) | Lock | Opens with | Where it lies |
+|---|---|---|---|---|
+| The depot | stone | the iron gate | Price's key | by the HQ generator (as before) |
+| The mast yard | fence (chain link, wire on top) | a chain-link gate grown over with vines | the machete (or the katana): three chops | the depot shed, by the pump (inside the depot's ring) |
+| The hikers' camp | trees (two rows grown, one young; the band's solids hold the line) | a crashed truck across the mouth | the winch: bolt it to the truck, tie its line to the big tree, hold E at the remote for 7 s | the convoy, by the escort truck behind the ambulance |
+| The rangers' camp | stone | the iron gate | Clarke's key | his truck's toolbox (as before) |
+
+- **The line** (`story-chain.js` LINE_RULES, `chain-gates.js` `line`): one lead open at a time, each the one before it in
+  LEADS' order (the rangers' search now after Clarke's truck), no two-dawn fallback, no spare keys on the HQ board, a lead
+  can't be done while closed, and no gate opens before its own lead is open (a tool got early, like the bolt cutters at the
+  mine from day 1, waits its turn).
+- **The Grave Shift orders**: Captain Hale set the HQ teleprinter on a dead-man's timer; it prints the next sealed order
+  at a dawn only once the last is stamped done at the duty board. A finished place says "Stamp it at the HQ duty board";
+  E there stamps it (`storyChain.stamp`), before the board's briefing. AG-247 builds the teleprinter and the stamp;
+  GP-20034 writes the eight orders in Hale's voice and the line's words (`chain.<lead>.line.*`, `order.*`).
+- **The winch's spots** (`winchSpots(ring, g)`): the truck lies across the mouth along the ring; the anchor tree stands
+  outside, 7.5 m out and past the truck's nose; the remote on its lead on the other side, 3.2 m out, clear of the swing;
+  the truck ends turned along the trail beside it, outside the ring (three solids there). The noise calls the dead.
+- **Looks are placeholders** until AG-245 (the fence and the vines), AG-246 (the trucks), AG-247 (the teleprinter), and
+  GB-288 (the machete's real chop at the vines). The fence and the trees are not the stone kit's and are not occluders.
+- **Hooks**: `TT.storyGatesDbg.line` { rules, due, stamp, stamped, gate(place), use(place, at), hold(place, on),
+  spots(place), prompt(place, at), why(place) }; `rings()` carries `kind`.
+- **Checks**: tcl303 (44: the kinds, the tools, the vines, the truck and winch, no way through the trees, the line and the
+  stamp); tcl296 (47; its key-at-the-ring check now on the rangers' stone ring); game/chain-line.test.mjs (7).

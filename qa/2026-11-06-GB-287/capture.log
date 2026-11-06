@@ -1,0 +1,7 @@
+PASS  1920px  fits=true  t=[550..1370] vw=1920  font=44px ws=nowrap
+    {"vw":1920,"vh":1080,"el":{"left":550,"right":1370,"width":820,"top":302},"t":{"left":550,"right":1370,"width":820,"height":44,"top":302},"whiteSpace":"nowrap","fontSize":"44px","letterSpacing":"8.8px","text":"SATO'S KEY FREES THE MAST YARD GATE. THE RELAY IS WITHIN REACH.","overflowLeft":false,"overflowRight":false,"fits":true}
+PASS  1280px  fits=true  t=[230..1050] vw=1280  font=44px ws=nowrap
+    {"vw":1280,"vh":1080,"el":{"left":230,"right":1050,"width":820,"top":302},"t":{"left":230,"right":1050,"width":820,"height":44,"top":302},"whiteSpace":"nowrap","fontSize":"44px","letterSpacing":"8.8px","text":"SATO'S KEY FREES THE MAST YARD GATE. THE RELAY IS WITHIN REACH.","overflowLeft":false,"overflowRight":false,"fits":true}
+PASS  390px  fits=true  t=[16..374] vw=390  font=44px ws=nowrap
+    {"vw":390,"vh":844,"el":{"left":15.6015625,"right":374.3984375,"width":358.796875,"top":231.1875},"t":{"left":15.6015625,"right":374.3984375,"width":358.796875,"height":44,"top":231.1875},"whiteSpace":"nowrap","fontSize":"44px","letterSpacing":"8.8px","text":"SATO'S KEY FREES THE MAST YARD GATE. THE RELAY IS WITHIN REACH.","overflowLeft":false,"overflowRight":false,"fits":true}
+3 widths: 3 pass, 0 fail

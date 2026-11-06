@@ -28,6 +28,7 @@ The woods now hide the valley. Follow the trail to Threshold, find the places be
 
 - Receivers, controls, steel, polymer and wood read more clearly at arm's length. The minigun and chainsaw have rebuilt bodies and grips; the Wasp no longer carries its folding stock.
 - Magazines and suppressors have had a size pass, and lasers move with the gun's recoil and stay lit through reloads.
+- Camouflage on the guns now matches the uniform's scale, in the hands, on the back and on the rack.
 
 ## Sound and music
 
@@ -63,6 +64,7 @@ Dead 2 -> CU-210 handoffs/2026-11-01-cursor-CU-210.md; CU-211 handoffs/2026-11-0
 Dead 3 -> GB-280 handoffs/2026-11-06-grokbot-GB-280.md; AG-236 qa/2026-11-06-AG-236/; Claude accepted in handoffs/requests.md.
 Guns 1 -> GP-20021 handoffs/2026-11-03-chatgpt-GP-20021.md; GP-20022 handoffs/2026-11-03-chatgpt-GP-20022.md; GP-20023 handoffs/2026-11-03-chatgpt-GP-20023.md; GP-20024 handoffs/2026-11-03-chatgpt-GP-20024.md.
 Guns 2 -> GB-260 handoffs/2026-11-01-grokbot-GB-260.md; GB-257 handoffs/2026-10-31-grokbot-GB-257.md.
+Guns 3 -> GP-20031 handoffs/2026-11-06-chatgpt-GP-20031.md; review/GP-20031/measurements.md.
 Sound 1 -> GP-20011 handoffs/2026-11-01-chatgpt-GP-20011.md; CU-219 handoffs/2026-11-01-cursor-CU-219.md.
 Sound 2 -> CL-294 core/audio.js calmFlow; AG-198 handoffs/2026-11-02-antigravity-AG-198.md.
 Sound 3 -> J53 core/audio.js TRAIN_TAKE player/footstep-stone; Claude's 2026-11-02 answer in handoffs/requests.md.

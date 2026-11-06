@@ -1,0 +1,227 @@
+{
+  "testDate": "2026-11-06T18:11:54.137Z",
+  "task": "AG-242",
+  "leadTask": "CL-296 (D-111 order 3)",
+  "hardware": "NVIDIA GeForce RTX 5080 WebGPU",
+  "resolution": "1920x1080",
+  "lighting": "Noon Daylight (worldTime = 0.50)",
+  "weapon": "Launcher (First Person)",
+  "rings": {
+    "depot": {
+      "label": "Depot Shed Ring",
+      "place": "depot",
+      "lead": "generator",
+      "key": "price-key",
+      "radius": 10.5,
+      "wide": {
+        "file": "depot-01-wide-shut.jpg",
+        "distance": 10.500000000000002,
+        "playerPos": [
+          -97.24555820501848,
+          -0.1555435039076949,
+          24.318898471358374
+        ],
+        "gatePos": [
+          -104.28745087989603,
+          16.53033329184642
+        ],
+        "isShut": true,
+        "gateOpen": false,
+        "gateW": 0
+      },
+      "gateShut": {
+        "file": "depot-02-gate-shut.jpg",
+        "distance": 2.2000000000000024,
+        "playerPos": [
+          -102.81200670039787,
+          -0.09261657463780307,
+          18.16222313898226
+        ],
+        "prompt": "The depot shed is locked. Price's fuel log is by the dead HQ generator.",
+        "isShut": true,
+        "gateOpen": false,
+        "gateW": 0,
+        "solids": 14,
+        "blocks": 14
+      },
+      "gateOpen": {
+        "file": "depot-03-gate-open.jpg",
+        "distance": 2.2000000000000024,
+        "playerPos": [
+          -102.81200670039787,
+          -0.09261657463780307,
+          18.16222313898226
+        ],
+        "promptWithKey": "E — Open the gate",
+        "promptAfter": null,
+        "isShut": false,
+        "gateOpen": true,
+        "gateW": 1,
+        "solids": 0,
+        "blocks": 0
+      }
+    },
+    "mast": {
+      "label": "Radio Mast Yard Ring",
+      "place": "mast",
+      "lead": "relay",
+      "key": "sato-key",
+      "radius": 11,
+      "wide": {
+        "file": "mast-01-wide-shut.jpg",
+        "distance": 10.999999999999998,
+        "playerPos": [
+          -152.8878349248982,
+          1.4634046173194948,
+          24.84322074985898
+        ],
+        "gatePos": [
+          -153.07001944585858,
+          13.84472954422889
+        ],
+        "isShut": true,
+        "gateOpen": false,
+        "gateW": 0
+      },
+      "gateShut": {
+        "file": "mast-02-gate-shut.jpg",
+        "distance": 2.2,
+        "playerPos": [
+          -153.0335825416665,
+          0.5514721741135805,
+          16.04442778535491
+        ],
+        "prompt": "The mast yard gate needs Sato's key. Once HQ has power, check the radio drawer.",
+        "isShut": true,
+        "gateOpen": false,
+        "gateW": 0,
+        "solids": 14,
+        "blocks": 14
+      },
+      "gateOpen": {
+        "file": "mast-03-gate-open.jpg",
+        "distance": 2.2,
+        "playerPos": [
+          -153.0335825416665,
+          0.5514721741135805,
+          16.04442778535491
+        ],
+        "promptWithKey": "E — Open the gate",
+        "promptAfter": null,
+        "isShut": false,
+        "gateOpen": true,
+        "gateW": 1,
+        "solids": 0,
+        "blocks": 0
+      }
+    },
+    "hikers": {
+      "label": "Hikers Camp Trail Ring",
+      "place": "hikers",
+      "lead": "missing",
+      "key": "chain-key",
+      "radius": 11.5,
+      "wide": {
+        "file": "hikers-01-wide-shut.jpg",
+        "distance": 11.500000000000002,
+        "playerPos": [
+          -5.7344581986499685,
+          7.1191984364183485,
+          -115.94764562764834
+        ],
+        "gatePos": [
+          5.077279743196631,
+          -119.86636004398882
+        ],
+        "isShut": true,
+        "gateOpen": false,
+        "gateW": 0
+      },
+      "gateShut": {
+        "file": "hikers-02-gate-shut.jpg",
+        "distance": 2.200000000000001,
+        "playerPos": [
+          3.0089472673651074,
+          7.213628012741068,
+          -119.11669293825412
+        ],
+        "prompt": "The camp chain is locked. A key was left in the ambulance glovebox.",
+        "isShut": true,
+        "gateOpen": false,
+        "gateW": 0,
+        "solids": 14,
+        "blocks": 14
+      },
+      "gateOpen": {
+        "file": "hikers-03-gate-open.jpg",
+        "distance": 2.200000000000001,
+        "playerPos": [
+          3.0089472673651074,
+          7.213628012741068,
+          -119.11669293825412
+        ],
+        "promptWithKey": "E — Open the gate",
+        "promptAfter": null,
+        "isShut": false,
+        "gateOpen": true,
+        "gateW": 1,
+        "solids": 0,
+        "blocks": 0
+      }
+    },
+    "rangers": {
+      "label": "Rangers Cache Ring",
+      "place": "rangers",
+      "lead": "search",
+      "key": "ranger-gate-key",
+      "radius": 11,
+      "wide": {
+        "file": "rangers-01-wide-shut.jpg",
+        "distance": 11.000000000000002,
+        "playerPos": [
+          103.82230165238461,
+          0.37312335685743925,
+          16.013709832881215
+        ],
+        "gatePos": [
+          112.99315274975596,
+          9.939544034202134
+        ],
+        "isShut": true,
+        "gateOpen": false,
+        "gateW": 0
+      },
+      "gateShut": {
+        "file": "rangers-02-gate-shut.jpg",
+        "distance": 2.200000000000003,
+        "playerPos": [
+          111.15898253028169,
+          -2.2023240302360816,
+          11.15437719393795
+        ],
+        "prompt": "The rangers' gate is locked. Clarke put its key in his toolbox.",
+        "isShut": true,
+        "gateOpen": false,
+        "gateW": 0,
+        "solids": 14,
+        "blocks": 14
+      },
+      "gateOpen": {
+        "file": "rangers-03-gate-open.jpg",
+        "distance": 2.200000000000003,
+        "playerPos": [
+          111.15898253028169,
+          -2.2023240302360816,
+          11.15437719393795
+        ],
+        "promptWithKey": "E — Open the gate",
+        "promptAfter": null,
+        "isShut": false,
+        "gateOpen": true,
+        "gateW": 1,
+        "solids": 0,
+        "blocks": 0
+      }
+    }
+  }
+}

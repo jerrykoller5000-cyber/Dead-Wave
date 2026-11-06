@@ -778,13 +778,13 @@
       text-align: center; opacity: 0; transition: opacity 0.45s ease;
       pointer-events: none; max-width: min(90vw, 640px);
     }
-    #bigBanner.center { top: 30%; transform: translate(-50%, -50%); width: max-content; }
+    #bigBanner.center { top: 30%; transform: translate(-50%, -50%); width: min(92vw, 1100px); max-width: min(92vw, 1100px); box-sizing: border-box; padding: 0 4vw; }
     #bigBanner .t {
       font-family: var(--font-display); font-size: 30px; font-weight: 400; letter-spacing: 0.05em;
       text-transform: uppercase; white-space: nowrap;
       text-shadow: 0 2px 10px rgba(0,0,0,.8);
     }
-    #bigBanner.center .t { font-size: 40px; letter-spacing: 0.16em; padding-left: 0.16em; }
+    #bigBanner.center .t { font-size: clamp(17px, 2.1vw + 12px, 40px); letter-spacing: 0.16em; padding-left: 0.16em; white-space: normal; overflow-wrap: anywhere; line-height: 1.28; }
     #bigBanner .s {
       font-size: 15px; font-weight: 600; opacity: .92; margin-top: 5px;
       text-shadow: 0 1px 6px rgba(0,0,0,.7);
@@ -1497,9 +1497,9 @@ import { fetchBruteGetUp, createBruteGetUp } from './combat/brute-getup.js'; // 
     import { createRelayPanel } from './ui/relay-panel.js';   // CL-183
     import { planVault, sampleVault, vaultEligible, vaultCanFire } from './game/player-vault.js';   // GP-19900
     import { vaultReward } from './game/relay-vault.js';   // CL-184: the vault's reward by the day
-    import { createStoryChain, leadOf as storyLeadOf, leadForSite as storyLeadForSite } from './game/story-chain.js';   // CL-263
-    import { createChainGates, gateOfLead, gateById, gateOfKey } from './game/chain-gates.js';   // CU-200
-    import { planStoryRings, storyRingAt, clipFenceToRing } from './game/story-gates.js';   // CL-296 (?gates=1)
+    import { createStoryChain, leadOf as storyLeadOf, leadForSite as storyLeadForSite, LINE_RULES as STORY_LINE_RULES } from './game/story-chain.js';   // CL-263; CL-303 the line
+    import { createChainGates, gateOfLead as gateOfLead0, gateById as gateById0, gateOfKey as gateOfKey0 } from './game/chain-gates.js';   // CU-200; CL-303: the line's specs under ?gates=1 (gateOfLead etc. below)
+    import { planStoryRings, storyRingAt, clipFenceToRing, winchSpots } from './game/story-gates.js';   // CL-296 (?gates=1); CL-303 winchSpots
     import { createUtilities } from './game/utilities.js';   // CU-201
     import { makeVaultModel, VAULT_SIZE } from './studio/relay-vault-model.js';   // CL-184
     import { makeKatanaModel, makeSheathedKatana } from './studio/katana.js';   // CL-184: the red katana
@@ -17636,9 +17636,15 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     const storyRings = STORY_GATES_ON ? planStoryRings({ POI, PATHS,
       sites: (() => { try { return window.objectiveSitesFrom ? window.objectiveSitesFrom(POI, null) : []; } catch (_) { return []; } })(),
       bands: wallBands, solids: worldSolids, isWater: (x, z) => waterDepthAt(x, z) > 0.05 }) : { rings: [], skipped: [] };
+    // CL-303 (D-116): under ?gates=1 the chain's specs are the line's (the mast's vines and machete, the hikers' crashed
+    // truck and winch); otherwise as before.
+    function gateOfLead(l) { return gateOfLead0(l, STORY_GATES_ON); }
+    function gateById(id) { return gateById0(id, STORY_GATES_ON); }
+    function gateOfKey(k) { return gateOfKey0(k, STORY_GATES_ON); }
+    const STORY_SOFT_BAND = new Set(['story-ring-fence', 'story-ring-trees']);   // CL-303: not the stone kit's, and no occluders
     for (const ring of storyRings.rings) {
       const band = makeWallBand({ pts: ring.pts, width: ring.width, gaps: ring.gaps, heightAt: sampleHeight, top: 3.2 });
-      band.kind = 'story-ring'; band.id = ring.place; band.near = ring.near; ring.band = band;
+      band.kind = ring.kind && ring.kind !== 'stone' ? 'story-ring-' + ring.kind : 'story-ring'; band.id = ring.place; band.near = ring.near; ring.band = band;
       wallBands.push(band);
       for (const s of band.solids) addSolid(s.x, s.z, s.radius, s.y0, s.y1).wallBand = band;
       for (const f of POI.fences) clipFenceToRing(f, ring);   // a camp's broken fence stops short of the wall
@@ -17646,7 +17652,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // GB-273 (docs/specs/sector-cull.md): the stone bands as occluders for sceneCull (not the hedge: it's under the eye).
     if (STONE_WALLS && urlParams.get('wallcull') !== '0') {
       const segs = [];
-      for (const b of wallBands) if (b.kind !== 'shortcut-deadfall' && b.solids && b.solids.length > 1) for (const sg of wallSegmentsFromBand(b, sampleHeight)) segs.push(sg);
+      for (const b of wallBands) if (b.kind !== 'shortcut-deadfall' && !STORY_SOFT_BAND.has(b.kind) && b.solids && b.solids.length > 1) for (const sg of wallSegmentsFromBand(b, sampleHeight)) segs.push(sg);
       if (segs.length) wallCull = createWallCull(segs);
     }
     const inHQThicket = (x, z, pad = 0) => wallBands.some((band) => band.near ? band.near(x, z, pad) : (   // CL-296: a ring knows its own line
@@ -18961,6 +18967,29 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         rec.kind = ring.tree;
         if (ring.id === 'mast') rec.lean = ring.lean * (rec.x >= ring.x ? 1 : -1);
       }
+      // CL-303 (D-116): the hikers' camp's ring of trees you can't get through ('trees' story rings): two staggered rows of
+      // grown trees with young ones between, leaving the trail's mouth where the crashed truck lies, the way it is dragged
+      // clear, the remote's spot, and the big tree its winch line ties to. The band's solids hold the line; this is its look.
+      for (const ring of storyRings.rings) {
+        if (ring.kind !== 'trees') continue;
+        const tr = mulberry32(0x7e3303);
+        const spots = ring.gates.map((g) => ({ g, s: winchSpots(ring, g) }));
+        const segD = (x, z, a, b) => { const dx = b.x - a.x, dz = b.z - a.z, q = dx * dx + dz * dz || 1, t = Math.max(0, Math.min(1, ((x - a.x) * dx + (z - a.z) * dz) / q)); return hypot(a.x + dx * t - x, a.z + dz * t - z); };
+        const clearOf = (x, z) => spots.every(({ g, s: w }) => hypot(x - g.x, z - g.z) > g.span + 1.4 && segD(x, z, g, w.rest) > 3.4 &&
+          hypot(x - w.remote.x, z - w.remote.z) > 2.2 && hypot(x - w.anchor.x, z - w.anchor.z) > 1.8);
+        for (let i = placed.length - 1; i >= 0; i--) if (hypot(placed[i].x - ring.cx, placed[i].z - ring.cz) < ring.r + 14 && !clearOf(placed[i].x, placed[i].z)) placed.splice(i, 1);
+        const rows = [{ dr: -0.7, step: 2.5, lo: 1.05, hi: 1.5, ph: 0 }, { dr: 0.7, step: 2.5, lo: 1.0, hi: 1.45, ph: 0.5 }, { dr: 0, step: 1.4, lo: 0.5, hi: 0.72, ph: 0.25 }];
+        for (const row of rows) {
+          const rr = ring.r + row.dr, n = Math.max(12, Math.round(Math.PI * 2 * rr / row.step));
+          for (let i = 0; i < n; i++) {
+            const an = (i + row.ph + (tr() - 0.5) * 0.3) / n * Math.PI * 2;
+            const x = ring.cx + Math.cos(an) * rr, z = ring.cz + Math.sin(an) * rr;
+            if (!clearOf(x, z) || waterDepthAt(x, z) > 0.02) continue;
+            placed.push({ x, z, kind: treeKindFor(sampleHeight(x, z), moistureAt(x, z), terrainSlope(x, z), tr), scale: row.lo + tr() * (row.hi - row.lo), lean: (tr() - 0.5) * 0.06, minSpace: 1.4, storyRing: ring.place });
+          }
+        }
+        for (const { s: w } of spots) placed.push({ x: w.anchor.x, z: w.anchor.z, kind: treeKindFor(sampleHeight(w.anchor.x, w.anchor.z), moistureAt(w.anchor.x, w.anchor.z), 0, tr), scale: 1.7, lean: 0, minSpace: 3, storyRing: ring.place, anchor: true });
+      }
       for (const p of placed) makeTree(p.x, p.z, p);
       buildUnderstory(placed, rnd);
       return placed.length;
@@ -19099,7 +19128,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     function buildWallBandVisuals() {
       if (!wallBands.length) return;
       if (STONE_WALLS) {
-        const lines = wallBands.filter((b) => b.kind !== 'shortcut-deadfall' && b.pts && b.pts.length > 1).map((b) => ({ pts: b.pts, gaps: b.gaps || [] }));
+        const lines = wallBands.filter((b) => b.kind !== 'shortcut-deadfall' && !STORY_SOFT_BAND.has(b.kind) && b.pts && b.pts.length > 1).map((b) => ({ pts: b.pts, gaps: b.gaps || [] }));
         if (lines.length) {
           const group = buildStoneWallKit({ THREE, sampleHeight, lines, seed: 0x510e9a11 });
           group.name = 'stone-wall-bands';
@@ -28609,8 +28638,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         }
       } else if (category === 'upgrades') {
          let any = false;
-        shopRow(dwText('shop.upgrade.machete'), macheteOwned ? dwText('shop.owned') : dwText('shop.upgrade.replacesKnife'), dwText('shop.upgrade.macheteHelp', { reach: BLADE_STATS.machete.reach, damage: BLADE_STATS.machete.dmg, knifeReach: BLADE_STATS.knife.reach, knifeDamage: BLADE_STATS.knife.dmg, maxHits: BLADE_STATS.machete.maxHits }),
-          macheteOwned ? 'OWNED' : '$' + equipmentPrice(MACHETE_PRICE, day), !macheteOwned && bank >= equipmentPrice(MACHETE_PRICE, day), macheteOwned ? null : () => buyMachete(), macheteOwned ? 'owned' : '');
+        if (!STORY_GATES_ON) {
+           shopRow(dwText('shop.upgrade.machete'), macheteOwned ? dwText('shop.owned') : dwText('shop.upgrade.replacesKnife'), dwText('shop.upgrade.macheteHelp', { reach: BLADE_STATS.machete.reach, damage: BLADE_STATS.machete.dmg, knifeReach: BLADE_STATS.knife.reach, knifeDamage: BLADE_STATS.knife.dmg, maxHits: BLADE_STATS.machete.maxHits }),
+            macheteOwned ? 'OWNED' : '$' + equipmentPrice(MACHETE_PRICE, day), !macheteOwned && bank >= equipmentPrice(MACHETE_PRICE, day), macheteOwned ? null : () => buyMachete(), macheteOwned ? 'owned' : '');
+        }
         // CL-113 (Jerry): an attachment is bought here and put on in the Armory. Owned, the row says where it is.
         const modRow = (name, owned, fitted, help, price, buy) => {
           const tag = fitted ? sayText('armory.kioskFitted', {}, 'fitted') : owned ? sayText('armory.kioskOwned', {}, 'owned · fit it at the Armory') : '';
@@ -28905,7 +28936,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       renderShop();
     }
     function buyMachete() {
-      if (macheteOwned || !spend(equipmentPrice(MACHETE_PRICE, day))) return;
+      if (STORY_GATES_ON || macheteOwned || !spend(equipmentPrice(MACHETE_PRICE, day))) return;
       macheteOwned = true;
       applyBladeModel();
       AudioSys.macheteSwing();
@@ -30892,7 +30923,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (it.kind === 'weapon') return !!WEAPON_STATS[it.id] && !weaponOwned[it.id];
       if (it.kind === 'pair') return !!DUAL_CAPABLE[it.id] && !!weaponOwned[it.id] && !dualOwned[it.id];
       if (it.kind === 'gear') return GEAR.some((g) => g.key === it.id) && !gearOwned[it.id];
-      if (it.kind === 'blade') return !macheteOwned && !katanaOwned;
+      if (it.kind === 'blade') return !STORY_GATES_ON && !macheteOwned && !katanaOwned;
       if (it.kind === 'blueprint') return !buildUnlocked[it.id];
       return true;
     }
@@ -33406,6 +33437,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (training.active) { trainingDoAction(a); return; }   // CL-115
       if (a === 'hqWindow') { readPropNote('hq'); hqDeposit(); }
       else if (a === 'hqPanel') { openHQBriefing(); readPropNote('hq'); }
+      else if (a === 'dutyBoard' && storyStampTry()) {}   // CL-303: the day's order stamped done first
       else if (a === 'dutyBoard' || a === 'hqRadio') openHQBriefing({panel:a==='dutyBoard'?'duty':'radio'});
       else if (a === 'hushWire') wireHushBoard();   // CL-259
       else if (a === 'utilPump' || a === 'utilBench' || a === 'utilSiren') utilityInstallAction(a);   // CU-201
@@ -33472,7 +33504,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // duty board, the radio; AG-125's props), 2026-10-26. The automated checks (?raf=timer) start with it off, as the
     // day missions' checks were written with every site open on day 1; a check of the chain turns it on ('story gate
     // on', TT.storyDbg.gate). Dev: 'story', 'story open <lead>', 'story done <lead>', 'story all', 'story gate on|off'.
-    const storyChain = createStoryChain();
+    const storyChain = createStoryChain(STORY_GATES_ON ? { rules: STORY_LINE_RULES } : {});   // CL-303 (D-116): the line under ?gates=1
     const STORY_GATE_PLAY = true;   // the gate in play
     let STORY_GATE = STORY_GATE_PLAY && urlParams.get('raf') !== 'timer', storyDay = 0, storySyncT = 0;
     const STORY_DONE = {
@@ -33506,10 +33538,25 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       for (const id of Object.keys(STORY_DONE)) {
         let d = false; try { d = !!STORY_DONE[id](); } catch (_) {}
         if (!d) continue;
-        if (storyChain.stateOf(id) !== 'done' && storyChain.done(id)) storyPublish('done', id);
+        if (storyChain.stateOf(id) !== 'done' && storyChain.done(id)) { storyPublish('done', id); storyLineDone(id); }
+        if (STORY_GATES_ON && chainGatesOn && storyChain.stateOf(id) === 'done') chainGates.event('lead-done:' + id);   // CL-303
         if (utilitiesOn) utilityLead(id);   // CU-201
       }
       survivorsAtThreadEnd();   // GB-232
+    }
+    // CL-303 (D-116): the Grave Shift orders (Jerry's pick). Captain Hale set the HQ's teleprinter on a dead-man's timer: it
+    // prints the next sealed order at a dawn only once the last is stamped done at the duty board (AG-247 builds the
+    // teleprinter and the stamp; the words are GP-20034's). A finished place says so; E at the duty board stamps it.
+    function storyLineDone(id) {
+      if (!STORY_GATES_ON || !STORY_GATE) return;
+      showBanner(chainSay('order.doneBanner', 'ORDER DONE'), chainSay('order.stampHint', 'Stamp it at the HQ duty board. The next order prints at dawn.'), 3.2, '#d7c6a4');
+    }
+    function storyStampTry() {
+      if (!STORY_GATES_ON || !STORY_GATE) return false;
+      const id = storyChain.due(); if (!id || !storyChain.stamp(id)) return false;
+      showBanner(chainSay('order.stampedBanner', 'ORDER STAMPED'), chainSay('order.stampedNote', 'The next order prints at dawn.'), 2.8, '#d7c6a4');
+      try { const sa = sndAt(localPlayer.position.x, localPlayer.position.z, 12); AudioSys.buildHit('wood', Math.max(0.25, sa.v * 0.5), sa.pan); } catch (_) {}
+      return true;
     }
     function resetStoryChain() { storyChain.reset(); storyDay = 0; storySyncT = 0; chainGates.reset(); chainClearWorld(); utilities.reset(); utilityClear(); }   // CU-201
     // CU-201 (CL-289, D-106): the HQ's utilities. Off on the suite's timer pages unless ?utilities=1.
@@ -33840,7 +33887,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // CU-200 (CL-285 part C, D-102): the chain's gates. The suite's timer pages start with them off, like the story
     // gate, unless ?chaingates=1. ?chaingates=0 leaves a real game without them. A lead shuts its site only once its
     // blocker is in the world. This page builds the generator's; the other seven register when their owners place them.
-    const chainGates = createChainGates();
+    const chainGates = createChainGates(STORY_GATES_ON ? { line: true,   // CL-303 (D-116): the line's locks, no spares, nothing before its turn
+      leadOpen: (l) => !STORY_GATE || storyChain.isOpen(l),
+      hasTool: (k) => k === 'machete' && (macheteOwned || katanaOwned) } : {});
     let chainGatesOn = urlParams.get('chaingates') === '1' || (urlParams.get('chaingates') !== '0' && urlParams.get('raf') !== 'timer');
     const chainLive = new Set();
     const chainWorld = { gates: new Map(), keys: new Map(), spare: null, opening: null };
@@ -33936,6 +33985,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
     function chainPlaceRelay() {
       if (!chainGatesOn || chainLive.has('relay')) return;
+      if (STORY_GATES_ON && storyRings.rings.some((r) => r.gate === 'mast-yard')) { chainLive.add('relay'); return; }   // CL-303: the ring's vine-grown gate is the lock
       const prop = objectiveProps?.props?.[RADIO_SITE];
       const mast = POI.mast;
       if (!prop?.centre && !mast) return;
@@ -33944,7 +33994,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const x = a.x + dx / len * 1.4, z = a.z + dz / len * 1.4;
       chainDropGate('mast-yard', 'relay', 'chain', x, z, Math.atan2(dx, dz), true);
       chainLive.add('relay');
-      if (house.radioSet && !chainWorld.keys.has('sato-key')) {
+      if (!STORY_GATES_ON && house.radioSet && !chainWorld.keys.has('sato-key')) {   // CL-303: the line has no Sato's key
         house.radioSet.updateWorldMatrix(true, true);
         const p = new THREE.Vector3(); house.radioSet.getWorldPosition(p);
         chainPlaceKey('sato-key', p.x, p.y, p.z);
@@ -33992,6 +34042,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
     function chainPlaceMissing() {
       if (!chainGatesOn) return;
+      if (STORY_GATES_ON && storyRings.rings.some((r) => r.gate === 'trail-chain')) { chainLive.add('missing'); return; }   // CL-303: the crashed truck is the lock
       if (!chainLive.has('missing')) {
         const camp = POI.campsites?.[1];
         if (camp) {
@@ -34038,7 +34089,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           }
         }
       }
-      if (chainLive.has('missing') && !chainWorld.keys.has('chain-key')) {
+      if (!STORY_GATES_ON && chainLive.has('missing') && !chainWorld.keys.has('chain-key')) {   // CL-303: no glovebox key on the line
         const cab = convoyParts()?.vehicle;
         if (cab) {
           cab.updateWorldMatrix(true, true);
@@ -34109,6 +34160,59 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (chainGates.keyState('price-key') === 'held') key.visible = false;
       chainWorld.keys.set('price-key', { mesh: key, x: kx, y: ky, z: kz });
     }
+    // CL-303 (D-116): the line's tools. The machete lies in the depot shed by the pump (inside the depot's ring); the winch
+    // by the convoy's escort truck behind the ambulance (AG-246 builds the truck; until then the winch on the ground).
+    // Their words are chain.<lead>.line.* (GP-20034 writes them; these fallbacks until then).
+    const CHAIN_LINE_WORDS = {
+      machete: { keyName: 'Machete', keyBanner: 'MACHETE FOUND', keyNote: "Price's brush blade. It would cut through vines.", open: 'THE VINES FALL AWAY. THE MAST YARD IS OPEN.' },
+      winch: { keyName: 'Winch', keyBanner: 'WINCH TAKEN', keyNote: "Off the escort truck's bumper. It could drag a dead truck.", open: "THE TRUCK DRAGS CLEAR. THE HIKERS' TRAIL IS OPEN." },
+    };
+    function chainLineWord(spec, field, fallback) {
+      const w = STORY_GATES_ON && spec && CHAIN_LINE_WORDS[spec.key];
+      if (w) return chainSay('chain.' + spec.lead + '.line.' + field, w[field] ?? fallback);
+      return chainSay('chain.' + (spec ? spec.lead : '') + '.' + field, fallback);
+    }
+    function chainToolMesh(kind) {
+      const g = new THREE.Group(); g.name = 'chain-tool-' + kind; g.userData.noCull = true;
+      if (kind === 'machete') {
+        chainBox(g, 0.5, 0.012, 0.075, 0x9aa0a6, 0.08, 0.03, 0, 0.35, 0.8);
+        chainBox(g, 0.15, 0.03, 0.035, 0x3a2a1e, -0.25, 0.03, 0, 0.9, 0);
+      } else {
+        chainBox(g, 0.42, 0.26, 0.26, 0x2f3533, 0, 0.13, 0, 0.6, 0.5);
+        const drum = new THREE.Mesh(new THREE.CylinderGeometry(0.11, 0.11, 0.3, 10), new THREE.MeshStandardMaterial({ color: 0x5a5f5c, roughness: 0.5, metalness: 0.6 }));
+        drum.rotation.z = Math.PI / 2; drum.position.set(0, 0.13, 0.17); g.add(drum);
+        chainBox(g, 0.06, 0.1, 0.04, 0xc4a15a, 0.28, 0.08, 0.1, 0.5, 0.3);   // the remote on its lead
+      }
+      return g;
+    }
+    function chainPlaceTool(key, kind, x, y, z, yaw = 0) {
+      if (chainWorld.keys.has(key)) return;
+      const mesh = chainToolMesh(kind); mesh.position.set(x, y, z); mesh.rotation.y = yaw;
+      mesh.visible = chainGates.keyState(key) === 'ready'; scene.add(mesh);
+      chainWorld.keys.set(key, { mesh, x, y, z });
+    }
+    function chainPlaceLineTools() {
+      if (!chainWorld.keys.has('machete') && fuelProps) {
+        const F = fuelProps, c = F.prop.centre, pump = F.pump;
+        const dx = pump.x - c.x, dz = pump.z - c.z, len = hypot(dx, dz) || 1;
+        const x = pump.x - dz / len * 0.9, z = pump.z + dx / len * 0.9;
+        chainPlaceTool('machete', 'machete', x, sampleHeight(x, z) + 0.02, z, Math.atan2(dx, dz));
+      }
+      if (!chainWorld.keys.has('winch')) {
+        const wreck = POI.wrecks && POI.wrecks[0];
+        if (wreck) {
+          let best = null, bd = 6;
+          for (const line of PATHS) { if (line.deck || line.length < 2) continue; for (const i of [0, line.length - 1]) { const d = hypot(line[i].x - wreck.x, line[i].z - wreck.z); if (d < bd) { bd = d; best = { line, i }; } } }
+          let x = wreck.x + 4, z = wreck.z, yaw = 0;
+          if (best) {
+            const a = best.line[best.i], b = best.line[best.i === 0 ? 1 : best.line.length - 2];
+            const dx = b.x - a.x, dz = b.z - a.z, len = hypot(dx, dz) || 1;
+            x = a.x + dx / len * 3 - dz / len * 2.2; z = a.z + dz / len * 3 + dx / len * 2.2; yaw = Math.atan2(dx, dz);
+          }
+          chainPlaceTool('winch', 'winch', x, sampleHeight(x, z) + 0.02, z, yaw);
+        }
+      }
+    }
     function chainSetOn(on) {
       chainGatesOn = !!on;
       if (!chainGatesOn) { chainClearWorld(); return; }
@@ -34138,7 +34242,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const g = chainWorld.gates.get(gateId);
       chainWorld.opening = { gate: gateId, t: 0 };
       const lead = g ? g.lead : (gateById(gateId) && gateById(gateId).lead);
-      if (lead) showBanner(chainSay('chain.' + lead + '.open', 'The way is open.'), '', 2.2, '#d7c6a4');
+      if (lead) showBanner(chainLineWord(gateById(gateId) || { lead }, 'open', 'The way is open.'), '', 2.2, '#d7c6a4');   // CL-303: the line's words
       return true;
     }
     function chainTryTake(key) {
@@ -34158,13 +34262,18 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const placed = chainWorld.keys.get(key);
       if (placed) placed.mesh.visible = false;
       if (chainWorld.spare && chainWorld.spare.key === key) { scene.remove(chainWorld.spare.mesh); chainWorld.spare = null; }
-      showBanner(chainSay('chain.' + spec.lead + '.keyBanner', 'KEY FOUND'), chainSay('chain.' + spec.lead + '.keyNote', ''), 2.6, '#d7c6a4');
+      if (key === 'machete') { macheteOwned = true; try { applyBladeModel(); } catch (_) {} try { AudioSys.macheteSwing(); } catch (_) {} }   // CL-303: the find is the blade
+      showBanner(chainLineWord(spec, 'keyBanner', 'KEY FOUND'), chainLineWord(spec, 'keyNote', ''), 2.6, '#d7c6a4');
       return true;
     }
     function chainUseE() {
       if (!chainGatesOn || !gameStarted || gameOver || won) return false;
       { const e = storyGateNear();   // CL-296: the ring's gate is the chain gate
-        if (e) { if (!chainTryOpen(e.ring.gate)) showBanner(chainSay('chain.' + e.ring.lead + '.locked', 'The gate is locked.'), '', 2.4, '#d7c6a4'); return true; } }
+        if (e) {   // CL-303: a stone gate opens; the vines are cut and the truck winched
+          if ((e.ring.kind || 'stone') === 'stone') { if (!chainTryOpen(e.ring.gate)) showBanner(storyGateWhy(e), '', 2.4, '#d7c6a4'); }
+          else if (!storyGateUse(e)) showBanner(storyGateWhy(e), '', 2.4, '#d7c6a4');
+          return true;
+        } }
       for (const [id, gate] of chainWorld.gates) {
         if (!chainGates.isOpen(id) && chainNear(gate.x, gate.z, 1.8) && chainTryOpen(id)) return true;
       }
@@ -34177,11 +34286,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     function chainPromptText() {
       if (!chainGatesOn || !gameStarted || gameOver || won) return null;
       { const e = storyGateNear();   // CL-296
-        if (e) return chainGates.canOpen(e.ring.gate) ? chainSay('chain.' + e.ring.lead + '.ringPrompt', 'E \u2014 Open the gate') : chainSay('chain.' + e.ring.lead + '.locked', 'The gate is locked.'); }
+        if (e) return storyGatePrompt(e); }   // CL-303
       for (const [key, placed] of chainWorld.keys) {
         if (placed.mesh.visible && chainGates.keyState(key) === 'ready' && chainKeyInReach(key, placed)) {
           const spec = gateOfKey(key);
-          if (spec) return 'E \u2014 ' + chainSay('chain.' + spec.lead + '.keyName', 'Key');
+          if (spec) return 'E \u2014 ' + chainLineWord(spec, 'keyName', 'Key');
         }
       }
       if (chainWorld.spare && chainGates.keyState(chainWorld.spare.key) === 'ready') {
@@ -34219,33 +34328,176 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         return !!ring && !chainGates.isOpen(ring.gate);
       } catch (_) { return false; }
     }
+    // CL-303 (D-116): the gates by their ring's kind. 'stone' as CL-296 (stone piers, iron leaves). 'fence' (the mast yard):
+    // steel posts, chain-link leaves, vines grown over them that a blade cuts in STORY_VINE_CHOPS chops (GB-288 makes it
+    // the real swing), and the ring itself as a placeholder chain-link fence with wire on top (AG-245 builds the real
+    // one). 'trees' (the hikers' camp): no leaves; a crashed truck across the trail's mouth (AG-246 builds the real one).
+    // With the winch: bolt it to the truck (E at the truck), tie the line to the big tree (E there), then hold E at the
+    // remote, clear of the swing, for STORY_WINCH_SECONDS: the truck drags out and round until it lies beside the trail.
+    const STORY_VINE_CHOPS = 3, STORY_WINCH_SECONDS = 7;
+    let storyLinkTex = null, storyCoilGeo = null;
+    function storyLinkMat() {
+      if (!storyLinkTex) {
+        const c = document.createElement('canvas'); c.width = c.height = 64;
+        const x = c.getContext('2d'); x.clearRect(0, 0, 64, 64); x.strokeStyle = '#b9c0c0'; x.lineWidth = 3;
+        x.beginPath(); x.moveTo(0, 32); x.lineTo(32, 0); x.lineTo(64, 32); x.lineTo(32, 64); x.closePath(); x.stroke();
+        storyLinkTex = new THREE.CanvasTexture(c); storyLinkTex.wrapS = storyLinkTex.wrapT = THREE.RepeatWrapping; storyLinkTex.colorSpace = THREE.SRGBColorSpace;
+      }
+      return new THREE.MeshStandardMaterial({ map: storyLinkTex, alphaTest: 0.5, side: THREE.DoubleSide, roughness: 0.6, metalness: 0.6 });
+    }
+    // Quads of chain link as one mesh: [{ ax, az, ya, bx, bz, yb, h }], the mesh tiled every 0.12 m.
+    function storyLinkQuads(quads, mat) {
+      const Pp = [], U = [], I = [];
+      for (const q of quads) {
+        const len = hypot(q.bx - q.ax, q.bz - q.az), v = Pp.length / 3, ur = len / 0.12, vr = q.h / 0.12;
+        Pp.push(q.ax, q.ya, q.az, q.bx, q.yb, q.bz, q.bx, q.yb + q.h, q.bz, q.ax, q.ya + q.h, q.az);
+        U.push(0, 0, ur, 0, ur, vr, 0, vr);
+        I.push(v, v + 1, v + 2, v, v + 2, v + 3);
+      }
+      const geo = new THREE.BufferGeometry();
+      geo.setAttribute('position', new THREE.Float32BufferAttribute(Pp, 3)); geo.setAttribute('uv', new THREE.Float32BufferAttribute(U, 2)); geo.setIndex(I); geo.computeVertexNormals();
+      const m = new THREE.Mesh(geo, mat); m.receiveShadow = true; return m;
+    }
+    function storyFenceRingBuild(ring, steel) {
+      const H = 2.3, keep = ring.pts.map((p) => !ring.gates.some((g) => hypot(p.x - g.x, p.z - g.z) < g.half + 0.1));
+      const quads = [], bars = [];
+      if (!storyCoilGeo) storyCoilGeo = new THREE.TorusGeometry(0.22, 0.012, 3, 12);
+      const run = (a, b) => {
+        const dx = b.x - a.x, dz = b.z - a.z, len = hypot(dx, dz); if (len < 0.05) return;
+        const ya = sampleHeight(a.x, a.z) + 0.04, yb = sampleHeight(b.x, b.z) + 0.04, th = Math.atan2(-dz, dx);
+        quads.push({ ax: a.x, az: a.z, ya, bx: b.x, bz: b.z, yb, h: H });
+        const rail = new THREE.Mesh(new THREE.CylinderGeometry(0.025, 0.025, len, 5), steel);
+        rail.position.set((a.x + b.x) / 2, (ya + yb) / 2 + H, (a.z + b.z) / 2); rail.rotation.set(0, th, Math.PI / 2); bars.push(rail);
+        for (let u = 0.15; u < len; u += 0.3) { const t = new THREE.Mesh(storyCoilGeo, steel), k = u / len; t.position.set(a.x + dx * k, ya + (yb - ya) * k + H + 0.26, a.z + dz * k); t.rotation.y = th + Math.PI / 2; bars.push(t); }
+      };
+      const post = (p) => { const m = new THREE.Mesh(new THREE.CylinderGeometry(0.045, 0.045, H + 0.5, 6), steel); m.position.set(p.x, sampleHeight(p.x, p.z) + (H + 0.5) / 2, p.z); bars.push(m); };
+      for (let i = 1; i < ring.pts.length; i++) if (keep[i - 1] && keep[i]) { run(ring.pts[i - 1], ring.pts[i]); if (i % 3 === 0) post(ring.pts[i]); }
+      // Close each side of a gate: from its post to the first kept point of the ring.
+      for (const g of ring.gates) for (const side of [-1, 1]) {
+        const gp = { x: g.x + g.ax * side * (g.half + 0.1), z: g.z + g.az * side * (g.half + 0.1) };
+        let best = null, bd = 3;
+        ring.pts.forEach((p, i) => { if (!keep[i]) return; const d = hypot(p.x - gp.x, p.z - gp.z); if (d < bd) { bd = d; best = p; } });
+        if (best) run(gp, best);
+      }
+      const group = new THREE.Group(); group.name = 'story-fence-' + ring.place;
+      if (quads.length) group.add(storyLinkQuads(quads, storyLinkMat()));
+      if (bars.length) group.add(mergeParts(bars, steel, { castShadow: true, receiveShadow: true }));
+      scene.add(group);
+      return group;
+    }
+    function storyVinesBuild(L) {
+      const vr = mulberry32(0x71e5), green = new THREE.MeshStandardMaterial({ color: 0x3b5a2a, roughness: 0.95 }), dark = new THREE.MeshStandardMaterial({ color: 0x2c4320, roughness: 0.95 });
+      const strands = [], clumps = [], cut = [];
+      for (let i = 0; i < 34; i++) {
+        const len = 0.8 + vr() * 1.9, m = new THREE.Mesh(new THREE.BoxGeometry(0.035, len, 0.035), vr() < 0.5 ? green : dark);
+        m.position.set((vr() - 0.5) * 2 * L, 0.3 + vr() * 1.9, (vr() < 0.5 ? -1 : 1) * 0.07); m.rotation.z = (vr() - 0.5) * 1.8; strands.push(m);
+      }
+      for (let i = 0; i < 26; i++) { const m = new THREE.Mesh(new THREE.IcosahedronGeometry(0.14 + vr() * 0.16, 0), vr() < 0.6 ? green : dark); m.position.set((vr() - 0.5) * 2 * L, 0.2 + vr() * 2.1, (vr() - 0.5) * 0.2); clumps.push(m); }
+      for (let i = 0; i < 8; i++) { const len = 0.25 + vr() * 0.45, m = new THREE.Mesh(new THREE.BoxGeometry(0.03, len, 0.03), dark); m.position.set((vr() - 0.5) * 2 * L, 2.2 - len / 2, 0.08); m.rotation.z = (vr() - 0.5) * 0.3; cut.push(m); }
+      const g = new THREE.Group(); g.name = 'story-vines';
+      const shut = new THREE.Group(); shut.add(mergeParts(strands, green, { castShadow: true })); shut.add(mergeParts(clumps, green, { castShadow: true })); g.add(shut);
+      const hanging = mergeParts(cut, dark, {}); hanging.visible = false; g.add(hanging);
+      g.userData.shut = shut; g.userData.cut = hanging;
+      return g;
+    }
+    function storyVinesCut(e, cutNow) {
+      if (!e.vines) return;
+      e.vines.userData.shut.visible = !cutNow; e.vines.userData.cut.visible = cutNow;
+    }
+    function storyTruckBuild(root) {
+      const truck = new THREE.Group(); truck.name = 'story-crashed-truck';
+      const olive = new THREE.MeshStandardMaterial({ color: 0x4b5137, roughness: 0.85, metalness: 0.2 });
+      const dark = new THREE.MeshStandardMaterial({ color: 0x202322, roughness: 0.9, metalness: 0 });
+      const glass = new THREE.MeshStandardMaterial({ color: 0x273a40, roughness: 0.3, metalness: 0.2 });
+      const body = [], b = (w, h, d, x, y, z) => { const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), olive); m.position.set(x, y, z); body.push(m); };
+      b(3.9, 0.25, 2.3, -0.9, 0.95, 0); b(3.9, 1.0, 0.08, -0.9, 1.55, 1.11); b(3.9, 1.0, 0.08, -0.9, 1.55, -1.11); b(0.08, 1.0, 2.3, -2.85, 1.55, 0);
+      b(1.9, 1.7, 2.3, 1.95, 1.55, 0); b(0.9, 0.9, 2.2, 3.3, 1.1, 0);
+      const inner = new THREE.Group(); inner.rotation.z = -0.07; truck.add(inner);   // nose down into the trees
+      inner.add(mergeParts(body, olive, { castShadow: true, receiveShadow: true }));
+      const wheels = [];
+      for (const [x, z] of [[-2.0, 1.05], [-2.0, -1.05], [-0.6, 1.05], [-0.6, -1.05], [2.3, 1.05], [2.3, -1.05]]) { const w = new THREE.Mesh(new THREE.CylinderGeometry(0.52, 0.52, 0.34, 12), dark); w.rotation.x = Math.PI / 2; w.position.set(x, 0.52, z); wheels.push(w); }
+      inner.add(mergeParts(wheels, dark, { castShadow: true, receiveShadow: true }));
+      const win = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.7, 2.0), glass); win.position.set(2.92, 1.95, 0); win.rotation.z = -0.1; inner.add(win);
+      truck.userData.inner = inner;
+      root.add(truck);
+      return truck;
+    }
+    // The truck's pose at winch progress t (0 across the mouth, 1 beside the trail outside the ring), in the gate's frame.
+    function storyTruckPose(e) {
+      const W = e.winch, k = W.t * W.t * (3 - 2 * W.t), g = e.g, along = (g.span + 0.6) * k, inward = -5.4 * k;
+      const wx = g.x + g.ax * along - g.az * inward, wz = g.z + g.az * along + g.ax * inward;
+      e.truck.position.set(along, sampleHeight(wx, wz) - e.root.position.y, inward);
+      e.truck.rotation.y = 0.12 + (Math.PI / 2 - 0.12) * k;
+    }
+    function storyWinchLineUpdate(e) {
+      if (!e.line) return;
+      const a = new THREE.Vector3(3.62, 0.62, 0); e.truck.updateWorldMatrix(true, false); e.truck.localToWorld(a);
+      const w = e.spots.anchor, b = new THREE.Vector3(w.x, sampleHeight(w.x, w.z) + 0.9, w.z);
+      const d = b.clone().sub(a), len = d.length();
+      e.line.position.copy(a).addScaledVector(d, 0.5); e.line.scale.set(1, Math.max(0.01, len), 1);
+      e.line.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), d.normalize()); e.line.visible = true;
+    }
+    function storyTruckRestSolids(e, on) {
+      for (const s of e.restSolids || []) { const i = worldSolids.indexOf(s); if (i >= 0) worldSolids.splice(i, 1); }
+      e.restSolids = [];
+      if (!on) return;
+      const g = e.g, along = g.span + 0.6, inward = -5.4;
+      for (const off of [-2.2, 0, 2.2]) {   // turned along the trail: its length runs inward/outward
+        const x = g.x + g.ax * along - g.az * (inward + off), z = g.z + g.az * along + g.ax * (inward + off), y = sampleHeight(x, z);
+        e.restSolids.push(addSolid(x, z, 1.25, y - 0.2, y + 2.6));
+      }
+    }
     function storyGatesBuild() {
       if (storyGates.built) return;
       storyGates.built = true;
       const iron = new THREE.MeshStandardMaterial({ color: 0x2f2d2a, roughness: 0.55, metalness: 0.55 });
       const stone = new THREE.MeshStandardMaterial({ color: 0x938a7a, roughness: 0.95, metalness: 0 });
-      const box = (w, h, d, x, y, z) => { const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), iron); m.position.set(x, y, z); return m; };
-      for (const ring of storyRings.rings) ring.gates.forEach((g, gi) => {
-        const y = sampleHeight(g.x, g.z), L = g.half;
-        const root = new THREE.Group(); root.name = 'story-gate-' + ring.place + '-' + gi;
-        root.position.set(g.x, y, g.z); root.rotation.y = Math.atan2(-g.az, g.ax);   // local +x along the ring, +z inward
-        const piers = [];
-        for (const side of [-1, 1]) { const p = new THREE.Mesh(new THREE.BoxGeometry(0.8, 3.0, 0.8), stone); p.position.set(side * (L + 0.4), 1.45, 0); piers.push(p); }
-        const pierMesh = mergeParts(piers, stone, { castShadow: true, receiveShadow: true }); root.add(pierMesh);
-        const leaves = [];
-        for (const side of [-1, 1]) {
-          const parts = [box(L, 0.07, 0.06, -side * L / 2, 0.3, 0), box(L, 0.07, 0.06, -side * L / 2, 1.25, 0), box(L, 0.07, 0.06, -side * L / 2, 2.15, 0),
-            box(0.08, 2.1, 0.08, -side * 0.04, 1.2, 0), box(0.08, 2.1, 0.08, -side * (L - 0.04), 1.2, 0)];
-          for (let b = 0.18; b < L - 0.1; b += 0.17) parts.push(box(0.03, 1.95, 0.03, -side * b, 1.22, 0));
-          const leaf = new THREE.Group(); leaf.position.set(side * L, 0, 0);
-          const m = mergeParts(parts, iron, { castShadow: true, receiveShadow: true }); leaf.add(m); root.add(leaf); leaves.push({ leaf, side });
-        }
-        const lock = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.16, 0.1), new THREE.MeshStandardMaterial({ color: 0x6d6258, roughness: 0.4, metalness: 0.8 }));
-        lock.position.set(0, 1.18, 0.08); root.add(lock);
-        scene.add(root);
-        const solids = g.solids.map((q) => { const s = { x: q.x, z: q.z, radius: q.r, y0: y - 0.25, y1: y + 2.6, landmark: null, kind: 'story-gate' }; return s; });
-        storyGates.push({ ring, g, root, leaves, lock, solids, open: true, w: 1, tag: 'story-gate-' + ring.place });
-      });
+      const steel = new THREE.MeshStandardMaterial({ color: 0x8d9493, roughness: 0.5, metalness: 0.7 });
+      const box = (w, h, d, x, y, z, m = iron) => { const b = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), m); b.position.set(x, y, z); return b; };
+      for (const ring of storyRings.rings) {
+        const kind = ring.kind || 'stone';
+        if (kind === 'fence') storyFenceRingBuild(ring, steel);
+        ring.gates.forEach((g, gi) => {
+          const y = sampleHeight(g.x, g.z), L = g.half;
+          const root = new THREE.Group(); root.name = 'story-gate-' + ring.place + '-' + gi;
+          root.position.set(g.x, y, g.z); root.rotation.y = Math.atan2(-g.az, g.ax);   // local +x along the ring, +z inward
+          const leaves = [], extra = {};
+          let lock;
+          if (kind === 'trees') {
+            lock = new THREE.Object3D();
+            extra.truck = storyTruckBuild(root);
+            extra.spots = winchSpots(ring, g);
+            extra.winch = { stage: 0, t: 0, called: false, tick: 0, held: false };
+            extra.winchMesh = chainToolMesh('winch'); extra.winchMesh.position.set(3.55, 0.45, 0); extra.winchMesh.rotation.y = Math.PI / 2; extra.winchMesh.visible = false; extra.truck.userData.inner.add(extra.winchMesh);
+            extra.line = new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.012, 1, 4), new THREE.MeshStandardMaterial({ color: 0x45494a, roughness: 0.6, metalness: 0.6 }));
+            extra.line.visible = false; scene.add(extra.line);
+          } else {
+            const fence = kind === 'fence', frame = fence ? steel : iron;
+            const piers = [];
+            for (const side of [-1, 1]) {
+              const p = fence ? new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.07, 3.0, 8), steel) : new THREE.Mesh(new THREE.BoxGeometry(0.8, 3.0, 0.8), stone);
+              p.position.set(side * (L + (fence ? 0.1 : 0.4)), 1.45, 0); piers.push(p);
+            }
+            root.add(mergeParts(piers, fence ? steel : stone, { castShadow: true, receiveShadow: true }));
+            const link = fence ? storyLinkMat() : null;
+            for (const side of [-1, 1]) {
+              const parts = [box(L, 0.07, 0.06, -side * L / 2, 0.3, 0, frame), box(L, 0.07, 0.06, -side * L / 2, 1.25, 0, frame), box(L, 0.07, 0.06, -side * L / 2, 2.15, 0, frame),
+                box(0.08, 2.1, 0.08, -side * 0.04, 1.2, 0, frame), box(0.08, 2.1, 0.08, -side * (L - 0.04), 1.2, 0, frame)];
+              if (!fence) for (let b = 0.18; b < L - 0.1; b += 0.17) parts.push(box(0.03, 1.95, 0.03, -side * b, 1.22, 0));
+              const leaf = new THREE.Group(); leaf.position.set(side * L, 0, 0);
+              const m = mergeParts(parts, frame, { castShadow: true, receiveShadow: true }); leaf.add(m);
+              if (fence) leaf.add(storyLinkQuads([{ ax: -side * 0.06, az: 0, ya: 0.3, bx: -side * (L - 0.06), bz: 0, yb: 0.3, h: 1.85 }], link));
+              root.add(leaf); leaves.push({ leaf, side });
+            }
+            if (fence) { lock = new THREE.Object3D(); extra.vines = storyVinesBuild(L); root.add(extra.vines); }
+            else { lock = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.16, 0.1), new THREE.MeshStandardMaterial({ color: 0x6d6258, roughness: 0.4, metalness: 0.8 })); lock.position.set(0, 1.18, 0.08); }
+            root.add(lock);
+          }
+          scene.add(root);
+          const solids = g.solids.map((q) => { const s = { x: q.x, z: q.z, radius: q.r, y0: y - 0.25, y1: y + 2.6, landmark: null, kind: 'story-gate' }; return s; });
+          storyGates.push({ ring, g, root, leaves, lock, solids, open: true, w: 1, tag: 'story-gate-' + ring.place, chops: 0, chopT: 0, at: null, ...extra });
+        });
+      }
       for (const e of storyGates) storyGateSet(e, false, true);
     }
     function storyGateSet(e, open, now = false) {
@@ -34255,10 +34507,14 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         for (const s of e.solids) { const i = worldSolids.indexOf(s); if (i >= 0) worldSolids.splice(i, 1); }
         if (!storyGates.some((o) => o !== e && o.ring === e.ring && !o.open)) valleyUnblock(e.tag);
         e.lock.visible = false;
+        storyVinesCut(e, true);   // CL-303
+        if (e.winch) { e.winch.t = 1; e.winch.stage = Math.max(e.winch.stage, 2); storyTruckPose(e); storyTruckRestSolids(e, true); if (e.line) e.line.visible = false; }
       } else {
         for (const s of e.solids) if (!worldSolids.includes(s)) worldSolids.push(s);
         for (const s of e.solids) valleyBlock(s.x, s.z, s.radius, e.tag);
         e.lock.visible = true; e.w = 0;
+        e.chops = 0; storyVinesCut(e, false);   // CL-303: a run reset grows them back, and puts the truck back
+        if (e.winch) { Object.assign(e.winch, { stage: 0, t: 0, called: false, tick: 0, held: false }); storyTruckPose(e); storyTruckRestSolids(e, false); if (e.line) e.line.visible = false; if (e.winchMesh) e.winchMesh.visible = false; }
       }
       if (now) e.w = open ? 1 : 0;
       for (const { leaf, side } of e.leaves) leaf.rotation.y = side * 1.75 * (e.w * e.w * (3 - 2 * e.w));
@@ -34274,12 +34530,81 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           const k = e.w * e.w * (3 - 2 * e.w);
           for (const { leaf, side } of e.leaves) leaf.rotation.y = side * 1.75 * k;
         }
+        if (e.vines && e.chopT > 0) { e.chopT = Math.max(0, e.chopT - dt); e.vines.rotation.z = Math.sin(e.chopT * 40) * 0.03 * e.chopT / 0.25; }   // CL-303: a chop shakes them
+        if (e.winch && !e.open) {   // CL-303: the winch, while E is held at the remote
+          const W = e.winch;
+          const atRemote = chainNear(e.spots.remote.x, e.spots.remote.z, 1.8);
+          if (W.stage === 2 && !paused && chainGates.canOpen(e.ring.gate) && (W.held || (objEDown && atRemote))) {
+            if (!W.called) { W.called = true; try { siteCallTheDead({ x: e.g.x, z: e.g.z }, 3, false, 'winchCalled'); } catch (_) {} }
+            W.t = Math.min(1, W.t + dt / STORY_WINCH_SECONDS);
+            W.tick -= dt; if (W.tick <= 0) { W.tick = 0.3; try { const sa = sndAt(e.g.x, e.g.z, 30); AudioSys.buildHit('metal', Math.max(0.2, sa.v * 0.45), sa.pan); } catch (_) {} }
+            storyTruckPose(e);
+            if (W.t >= 1) chainTryOpen(e.ring.gate);
+          }
+          if (W.stage >= 2 && !e.open) storyWinchLineUpdate(e);
+        }
       }
     }
     function storyGateNear() {
       if (!STORY_GATES_ON) return null;
-      for (const e of storyGates) if (!e.open && chainNear(e.g.x, e.g.z, 2.6)) return e;
+      for (const e of storyGates) {
+        if (e.open) continue;
+        if (e.winch) {   // CL-303: the truck, the tree, the remote
+          if (chainNear(e.spots.remote.x, e.spots.remote.z, 1.8)) { e.at = 'remote'; return e; }
+          if (chainNear(e.spots.anchor.x, e.spots.anchor.z, 2.2)) { e.at = 'tree'; return e; }
+          if (chainNear(e.g.x, e.g.z, 3.4)) { e.at = 'truck'; return e; }
+          continue;
+        }
+        if (chainNear(e.g.x, e.g.z, 2.6)) { e.at = 'gate'; return e; }
+      }
       return null;
+    }
+    // E at a fence or trees gate: a chop, or the winch's next step. False when there's nothing to do (the banner says why).
+    function storyGateUse(e) {
+      const kind = e.ring.kind || 'stone';
+      if (kind === 'stone' || !chainGates.canOpen(e.ring.gate)) return false;
+      if (kind === 'fence') {
+        e.chops++; e.chopT = 0.25;
+        try { const sa = sndAt(e.g.x, e.g.z, 20); (AudioSys.macheteChop || AudioSys.macheteSwing)(Math.max(0.3, sa.v), sa.pan); } catch (_) {}
+        if (e.chops >= STORY_VINE_CHOPS) { storyVinesCut(e, true); chainTryOpen(e.ring.gate); }
+        return true;
+      }
+      const W = e.winch; if (!W) return false;
+      if (W.stage === 0 && e.at === 'truck') {
+        W.stage = 1; if (e.winchMesh) e.winchMesh.visible = true;
+        try { const sa = sndAt(e.g.x, e.g.z, 20); AudioSys.buildHit('metal', Math.max(0.3, sa.v * 0.7), sa.pan); } catch (_) {}
+        showBanner(chainSay('chain.missing.line.boltedBanner', 'WINCH BOLTED ON'), chainSay('chain.missing.line.boltedNote', 'Run its line to the big tree off the trail.'), 2.6, '#d7c6a4');
+        return true;
+      }
+      if (W.stage === 1 && e.at === 'tree') {
+        W.stage = 2; storyWinchLineUpdate(e);
+        showBanner(chainSay('chain.missing.line.tiedBanner', 'LINE TIED OFF'), chainSay('chain.missing.line.tiedNote', 'Stand clear at the remote and hold E.'), 2.6, '#d7c6a4');
+        return true;
+      }
+      return W.stage === 2 && e.at === 'remote';   // held: storyGatesUpdate winches while E is down
+    }
+    function storyGateWhy(e) {
+      const kind = e.ring.kind || 'stone', why = chainGates.whyShut(e.ring.gate);
+      if (why === 'not-yet') return chainSay('order.notYet', 'Not yet. The orders come one a day, in their turn.');
+      if (kind === 'fence') return chainSay('chain.relay.line.locked', 'The gate is grown shut with vines. A blade would cut them.');
+      if (kind === 'trees') {
+        if (why === 'no-key') return chainSay('chain.missing.line.locked', "A truck has crashed across the trail. It won't move by hand.");
+        const st = e.winch ? e.winch.stage : 0;
+        return st === 0 ? chainSay('chain.missing.line.toTruck', 'Bolt the winch to the truck first.')
+          : st === 1 ? chainSay('chain.missing.line.toTree', 'Tie the line off at the big tree by the trail.')
+          : chainSay('chain.missing.line.toRemote', 'Stand clear at the remote and hold E.');
+      }
+      return chainSay('chain.' + e.ring.lead + '.locked', 'The gate is locked.');
+    }
+    function storyGatePrompt(e) {
+      const kind = e.ring.kind || 'stone', can = chainGates.canOpen(e.ring.gate);
+      if (kind === 'stone') return can ? chainSay('chain.' + e.ring.lead + '.ringPrompt', 'E \u2014 Open the gate') : storyGateWhy(e);
+      if (!can) return storyGateWhy(e);
+      if (kind === 'fence') return chainSay('chain.relay.line.cutPrompt', 'E \u2014 Cut the vines') + (e.chops ? ' (' + e.chops + '/' + STORY_VINE_CHOPS + ')' : '');
+      const W = e.winch;
+      if (W.stage === 0) return e.at === 'truck' ? chainSay('chain.missing.line.boltPrompt', 'E \u2014 Bolt the winch to the truck') : storyGateWhy(e);
+      if (W.stage === 1) return e.at === 'tree' ? chainSay('chain.missing.line.tiePrompt', 'E \u2014 Tie the line to the tree') : storyGateWhy(e);
+      return e.at === 'remote' ? chainSay('chain.missing.line.winchPrompt', 'Hold E \u2014 Winch the truck clear') + ' ' + Math.round(W.t * 100) + '%' : storyGateWhy(e);
     }
     function chainUpdate(dt) {
       storyGatesUpdate(dt);   // CL-296
@@ -34294,6 +34619,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           const s = trapper.cellarSpot;
           chainPlaceKey('trapper-keyring', s.x, (s.y || sampleHeight(s.x, s.z)) + 0.9, s.z);
         }
+        if (STORY_GATES_ON) try { chainPlaceLineTools(); } catch (_) {}   // CL-303
         for (const [key, placed] of chainWorld.keys) placed.mesh.visible = chainGates.keyState(key) === 'ready';
       }
       const o = chainWorld.opening; if (!o) return;
@@ -64431,14 +64757,28 @@ live++;
           blocked: (x, z, r = 0.35) => wallBands.some((b) => b.solids.some((s) => hypot(x - s.x, z - s.z) < s.radius + r)),
           resolve: (x, z, r = 0.35) => resolveStaticProps(x, z, r, sampleHeight(x, z)) };
         window.TT.storyGatesDbg = { on: STORY_GATES_ON,   // CL-296
-          rings: () => storyRings.rings.map((r) => ({ place: r.place, gate: r.gate, lead: r.lead, cx: r.cx, cz: r.cz, r: r.r, width: r.width,
+          rings: () => storyRings.rings.map((r) => ({ place: r.place, kind: r.kind, gate: r.gate, lead: r.lead, cx: r.cx, cz: r.cz, r: r.r, width: r.width,
             solids: r.band ? r.band.solids.length : 0, gates: r.gates.map((g) => ({ x: g.x, z: g.z, ax: g.ax, az: g.az, half: g.half, span: g.span })) })),
           skipped: () => storyRings.skipped.slice(),
           gates: () => storyGates.map((e) => ({ place: e.ring.place, gate: e.ring.gate, open: e.open, w: e.w, solids: e.solids.filter((s) => worldSolids.includes(s)).length,
             blocks: valleyBlocks.filter((b) => b.tag === e.tag).length, x: e.g.x, z: e.g.z })),
           shut: (x, z) => storyRingShut(x, z), near: () => { const e = storyGateNear(); return e ? e.ring.place : null; },
           riseOk: (x, z) => groundRiseSpotOk(x, z),   // AG-213
-          build: () => { storyGatesBuild(); return storyGates.length; } };
+          build: () => { storyGatesBuild(); return storyGates.length; },
+          // CL-303 (D-116): the line. gate(place) the gate's sub-state; use(place, at) as E there ('gate', 'truck', 'tree',
+          // 'remote'); hold(place, on) holds E at the remote; spots(place) the winch's spots; due/stamp the orders.
+          line: {
+            on: STORY_GATES_ON, rules: () => storyChain.rules(), due: () => storyChain.due(), stamp: () => storyStampTry(), stamped: (id) => storyChain.stamped(id),
+            gate: (place) => { const e = storyGates.find((o) => o.ring.place === place); return e ? { kind: e.ring.kind, open: e.open, chops: e.chops, why: chainGates.whyShut(e.ring.gate),
+              winch: e.winch ? { stage: e.winch.stage, t: e.winch.t, called: e.winch.called } : null, truck: e.truck ? { x: e.truck.position.x, z: e.truck.position.z, yaw: e.truck.rotation.y } : null,
+              vines: e.vines ? !!e.vines.userData.shut.visible : null, rest: (e.restSolids || []).length } : null; },
+            use: (place, at) => { const e = storyGates.find((o) => o.ring.place === place); if (!e) return false; e.at = at || e.at; return storyGateUse(e); },
+            hold: (place, on) => { const e = storyGates.find((o) => o.ring.place === place); if (!e || !e.winch) return null; e.winch.held = !!on; return e.winch.t; },
+            spots: (place) => { const e = storyGates.find((o) => o.ring.place === place); return e && e.spots ? JSON.parse(JSON.stringify(e.spots)) : null; },
+            prompt: (place, at) => { const e = storyGates.find((o) => o.ring.place === place); if (!e) return null; e.at = at || e.at; return storyGatePrompt(e); },
+            why: (place) => { const e = storyGates.find((o) => o.ring.place === place); return e ? storyGateWhy(e) : null; },
+            trees: () => (typeof TREE_RECORDS !== 'undefined' ? null : null),
+          } };
         window.TT.shortcutDbg = { on: SHORTCUTS_ON,
           list: () => shortcutBands.map((b) => ({ id: b.id, x: b.middle.x, z: b.middle.z,
             cut: b.cut, hold: b.holdSeconds, solids: b.solids.length })),

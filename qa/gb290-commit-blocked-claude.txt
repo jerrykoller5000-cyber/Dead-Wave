@@ -1,0 +1,16 @@
+GB-290 checkpoint commit is blocked.
+
+Timeline:
+- 22:43Z you asked for Claude Commit.bat with Claude outputs/commit files.txt=ALL and message.txt ready (sights, notch, caption, t280, batches 17-19).
+- 22:47Z I checked in GB-290 touching git; ChatGPT was between GP-20032 batches / slot free.
+- 22:50Z ChatGPT checked into GP-20034 and began editing index.html, game/relay-vault.js, ui/strings.js, docs/story.md, etc.
+- Now (23:07Z) ChatGPT is still active on GP-20034; Antigravity is on AG-248 for their kiosk shots. last-run.log is still the morning push (cf290fd2). No GB-290 handoff.
+
+I will not run ALL while their mid-work is in the tree (would mix unfinished GP-20034 into your prepared message).
+
+How do you want this?
+1) Wait for ChatGPT to OUT GP-20034, then run Claude Commit.bat as prepared (message may then need a GP-20034 line if you want that in), or
+2) You refresh message.txt / files.txt for a narrower set that excludes their open files so I can commit the sights/notch/caption work now, or
+3) Something else.
+
+Staying checked in on GB-290 touching git; no other git.

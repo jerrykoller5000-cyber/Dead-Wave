@@ -1,0 +1,142 @@
+GRANT chatgpt GP-20033: starting one game-test command
+check-players: 315 player.position reads, all in the allowed places
+           INFO = first person with the pistol: the view gun is up (raise 1.00)
+           INFO = his own arms (339/339) and pistol (23/23) are out of the eye's pass
+           INFO no rig skins on this page (the stand-in three): his arms are their own meshes
+           INFO = the radio and antenna are eye-hidden in first person while the worn carrier and shadow remain (hidden 3, visible 3, shadow 3 of 3; filter true; carrier shown 9; 3 radio meshes, 0 baked, 0 radio skins)
+           INFO = the eye's pass leaves them out (the render filter is on)
+           INFO = and they are still there for his shadow (visible)
+           INFO = both wrists on their sockets (0.00, 0.00 cm)
+           INFO the firing hand's grip through the pistol's grip (49.19 cm) (the stand-in three)
+           INFO = the wrists bend no more than VM.wristMax, at most 50 degrees (0.87, 0.87 of 0.87)
+           INFO the forearms leave the view, not at the eye (CL-293: the end of each sleeve off the bottom or the side, the elbow may show now the sleeve runs on; 110, 75 degrees off the eye line; elbows at ndc y -3.54, -1.55) (the stand-in three)
+           INFO = the mirrored meshes draw wound the other way on WebGPU, as they are elsewhere (flip false)
+           INFO = nothing on screen in front of the near plane (nearest 35.5 cm, 29 meshes)
+           INFO view gun draws: 29 meshes
+           INFO = at the hip the pistol is low right (grip ndc 0.36, -0.56; muzzle 0.23, -0.18)
+           INFO = the forearms don't cross: the firing elbow to the right of the support one (ndc x 1.50, 0.03)
+           INFO = and canted (-5.1 deg)
+           INFO = the rear notch and the front post on the view's centre, within a pixel at 1080p (-0.000, 0.000, 0.000, -0.000)
+           INFO = the eye stays at his eyes down the sights (0.000 m)
+           INFO = down the sights the wrists are on their sockets too (0.00, 0.00 cm)
+           INFO = a shot kicks the gun back (1.7 cm)
+           INFO the slide on the shot: 0.0 cm (gun units)
+           INFO = and it settles back (-0.02 cm off)
+           INFO = the magazine: seated, in his palm, away, back (seated hand pouch)
+           INFO = the support hand goes to the well, the pouch and the slide (fore well below pouch work)
+           INFO = the magazine rides the support palm (its foot within 0.00 cm)
+           INFO racking the slide, the support forearm runs down out of the view, at least 35 degrees below level on screen (69) (the stand-in three)
+           INFO = after it: the magazine seated in the well (0.0e+0)
+           INFO = and the support hand back on the gun (0.00 cm)
+           INFO = the view gun's muzzle in the world for the laser (0.69 m from the eye)
+           INFO = the GW-4: the view gun is up (raise 1.00)
+           INFO = the GW-4: the stock is one direct child, and the view copy shows it at the hip, not down the sights (ads 0.00, shown true)
+           INFO = the GW-4: both wrists on their sockets (0.00, 0.00 cm)
+           INFO = the GW-4: the wrists stay within VM.wristMax (0.87, 0.87 of 0.87)
+           INFO the GW-4: the forearms stay off the eye line, the support elbow low (88, 30 degrees; elbows ndc y -2.68, -0.76) (the stand-in three)
+           INFO = the GW-4: nothing on screen in front of the near plane (nearest 19.8 cm)
+           INFO = the GW-4: at the hip the grip is low and to the right (ndc 0.44, -0.90)
+           INFO = the GW-4: the rear sight on the view's centre (-0.000, 0.000)
+           INFO = the GW-4: down the sights the wrists are on their sockets (0.00, 0.00 cm)
+           INFO = the GW-4: the magazine seated, in his palm, away, back (seated hand pouch)
+           INFO = the GW-4: the support hand goes to the well, the pouch and the work part (fore well below pouch work)
+           INFO = the GW-4: the magazine rides the support palm (its foot within 0.00 cm)
+           INFO = the AK: the view gun is up (raise 1.00)
+           INFO = the AK: the stock is one direct child, and the view copy shows it at the hip, not down the sights (ads 0.00, shown true)
+           INFO = the AK: both wrists on their sockets (0.00, 0.00 cm)
+           INFO = the AK: the wrists stay within VM.wristMax (0.87, 0.87 of 0.87)
+           INFO the AK: the forearms stay off the eye line, the support elbow low (95, 55 degrees; elbows ndc y -2.62, -0.51) (the stand-in three)
+           INFO = the AK: nothing on screen in front of the near plane (nearest 21.8 cm)
+           INFO = the AK: at the hip the grip is low and to the right (ndc 0.44, -0.91)
+           INFO = the AK: the rear sight on the view's centre (0.000, -0.000)
+           INFO = the AK: down the sights the wrists are on their sockets (0.00, 0.00 cm)
+           INFO = the AK: the magazine seated, in his palm, away, back (seated hand pouch)
+           INFO = the AK: the support hand goes to the well, the pouch and the work part (fore well below pouch work)
+           INFO = the AK: the magazine rides the support palm (its foot within 0.00 cm)
+           INFO = the Wasp: the view gun is up (raise 1.00)
+           INFO = the Wasp: both wrists on their sockets (0.00, 0.00 cm)
+           INFO = the Wasp: the wrists stay within VM.wristMax (0.87, 0.87 of 0.87)
+           INFO the Wasp: the forearms stay off the eye line, the sleeves leave the view (97, 62 degrees; elbows ndc y -1.67, -2.23) (the stand-in three)
+           INFO = the Wasp: nothing on screen in front of the near plane (nearest 27.2 cm)
+           INFO = the Wasp: at the hip the grip is low and to the right (ndc 0.39, -0.74)
+           INFO = the Wasp: the rear sight on the view's centre (0.000, 0.000)
+           INFO = the Wasp: down the sights the wrists are on their sockets (0.00, 0.00 cm)
+           INFO = the Wasp: the magazine seated, in his palm, away, back (seated hand pouch)
+           INFO = the Wasp: the support hand goes to the well, the pouch and the work part (fore well below pouch work)
+           INFO = the Wasp: the magazine rides the support palm (its foot within 0.00 cm)
+           INFO = the shotgun: the view gun is up (raise 1.00)
+           INFO = the shotgun: the stock is one direct child, and the view copy shows it at the hip, not down the sights (ads 0.00, shown true)
+           INFO = the shotgun: both wrists on their sockets (0.00, 0.00 cm)
+           INFO = the shotgun: the wrists stay within VM.wristMax (0.87, 0.87)
+           INFO the shotgun: the forearms stay off the eye line, the support elbow low (86, 61 degrees; elbows ndc y -2.72, -0.77) (the stand-in three)
+           INFO = the shotgun: nothing on screen in front of the near plane (nearest 19.7 cm)
+           INFO = the shotgun: at the hip the grip is low and to the right (ndc 0.44, -0.91)
+           INFO = the shotgun: the rear sight on the view's centre (-0.000, 0.000)
+           INFO = the shotgun: the support hand leaves its hold (fore pouch port pump)
+           INFO = the Breacher: the view gun is up (raise 1.00)
+           INFO = the Breacher: the stock is one direct child, and the view copy shows it at the hip, not down the sights (ads 0.00, shown true)
+           INFO = the Breacher: both wrists on their sockets (0.00, 0.00 cm)
+           INFO = the Breacher: the wrists stay within VM.wristMax (0.87, 0.87)
+           INFO the Breacher: the forearms stay off the eye line, the support elbow low (83, 63 degrees; elbows ndc y -2.97, -0.63) (the stand-in three)
+           INFO = the Breacher: nothing on screen in front of the near plane (nearest 14.9 cm)
+           INFO = the Breacher: at the hip the grip is low and to the right (ndc 0.46, -0.96)
+           INFO = the Breacher: the rear sight on the view's centre (-0.000, 0.000)
+           INFO = the Breacher: the support hand leaves its hold (fore well below pouch work)
+           INFO = the revolver: the view gun is up (raise 1.00)
+           INFO = the revolver: both wrists on their sockets (0.00, 0.00 cm)
+           INFO = the revolver: the wrists stay within VM.wristMax (0.87, 0.87)
+           INFO the revolver: the forearms stay off the eye line, the sleeves leave the view (81, 75 degrees; elbows ndc y -1.49, -1.34) (the stand-in three)
+           INFO = the revolver: nothing on screen in front of the near plane (nearest 33.9 cm)
+           INFO = the revolver: at the hip the grip is low and to the right (ndc 0.40, -0.67)
+           INFO = the revolver: the rear sight on the view's centre (0.000, 0.000)
+           INFO = the revolver: the support hand leaves its hold (fore part ejector pouch loader)
+           INFO = the sniper: the view gun is up (raise 1.00)
+           INFO = the sniper: the stock is one direct child, and the view copy shows it at the hip, not down the sights (ads 0.00, shown true)
+           INFO = the sniper: both wrists on their sockets (0.00, 0.00 cm)
+           INFO = the sniper: the wrists stay within VM.wristMax (0.87, 0.87)
+           INFO the sniper: the forearms stay off the eye line, the support elbow low (84, 62 degrees; elbows ndc y -1.83, -0.72) (the stand-in three)
+           INFO = the sniper: nothing on screen in front of the near plane (nearest 24.4 cm)
+           INFO = the sniper: at the hip the grip is low and to the right (ndc 0.37, -0.88)
+           INFO = the sniper: the scope axis was on the view just before it hides (at ads 0.80 from 3 samples up to 0.80, ndc 0.109, -0.116)
+           INFO = the sniper: the support hand leaves its hold (fore well below pouch work)
+           INFO = the launcher: the view gun is up (raise 1.00)
+           INFO = the minigun: the view gun is up (raise 1.00)
+           INFO = the flamer: the view gun is up (raise 1.00)
+           INFO = the chainsaw: the view gun is up (raise 1.00)
+           INFO = his own arms back in the eye's pass (0 left out), the filter off
+           INFO = nothing of his left out of the eye's pass (0)
+           INFO = no page errors ()
+ok    tcl281 140 pass   0 fail  124.6s
+           INFO minigun muzzle 0.000,0.000,1.130 box -0.328,-0.262,-0.568 / 0.295,0.369,1.120
+           INFO minigun dir 1 rearTop -0.000,0.369,0.010 frontTop 0.000,0.108,1.058
+           INFO m4 muzzle 0.000,0.020,0.980 box -0.046,-0.278,-0.569 / 0.085,0.168,0.978
+           INFO m4 dir 1 rearTop 0.000,0.168,0.004 frontTop 0.000,0.138,0.673
+           INFO ak muzzle 0.000,-0.005,1.020 box -0.048,-0.331,-0.597 / 0.095,0.104,0.994
+           INFO ak dir 1 rearTop -0.005,0.090,0.218 frontTop 0.008,0.104,0.840
+           INFO aa12 muzzle 0.000,0.015,0.980 box -0.155,-0.415,-0.579 / 0.155,0.180,0.976
+           INFO aa12 dir 1 rearTop -0.000,0.180,-0.120 frontTop -0.014,0.175,0.750
+           INFO pistol muzzle 0.000,0.050,0.320 box -0.027,-0.178,-0.104 / 0.027,0.092,0.311
+           INFO pistol dir 1 rearTop -0.000,0.075,0.072 frontTop -0.002,0.092,0.287
+           INFO uzi muzzle 0.000,0.030,0.480 box -0.055,-0.324,-0.182 / 0.077,0.158,0.478
+           INFO uzi dir 1 rearTop -0.014,0.150,0.206 frontTop -0.001,0.067,0.354
+           INFO shotgun muzzle 0.000,0.030,0.970 box -0.056,-0.179,-0.496 / 0.056,0.091,0.952
+           INFO shotgun dir 1 rearTop 0.000,0.087,-0.129 frontTop 0.000,0.081,0.915
+           INFO revolver muzzle 0.000,0.083,0.350 box -0.051,-0.166,-0.115 / 0.051,0.123,0.332
+           INFO revolver dir 1 rearTop -0.005,0.109,0.081 frontTop -0.003,0.121,0.326
+           INFO sniper muzzle 0.000,0.040,1.220 box -0.147,-0.203,-0.640 / 0.068,0.209,1.205
+           INFO sniper dir 1 rearTop -0.000,0.209,0.069 frontTop 0.012,0.067,0.780
+           INFO launcher muzzle 0.000,0.040,0.720 box -0.143,-0.184,-0.504 / 0.143,0.157,0.682
+           INFO launcher dir 1 rearTop -0.015,0.125,-0.198 frontTop -0.000,0.102,0.650
+           INFO flamer muzzle 0.000,0.050,0.780 box -0.085,-0.175,-0.277 / 0.178,0.112,0.792
+           INFO flamer dir 1 rearTop -0.000,0.097,0.268 frontTop -0.000,0.112,0.786
+           INFO chainsaw muzzle 0.000,0.040,0.940 box -0.166,-0.109,-0.504 / 0.218,0.265,0.950
+           INFO chainsaw dir 1 rearTop -0.014,0.265,-0.031 frontTop -0.010,0.090,0.880
+FAIL  t277    38 pass   1 fail  34.9s
+           recovering browser after t277: 1 fail
+
+2 checks: 178 pass, 1 fail
+
+by owner:
+  unassigned
+    t277   1 fail  FAIL chainsaw: eye clears the top line and stays near it (eye y 0.250, top 0.265)
+           FAIL chainsaw: eye clears the top line and stays near it (eye y 0.250, top 0.265)

@@ -29,15 +29,32 @@ export const GATES = Object.freeze([
   { lead: 'below', gate: 'mine-iron-gate', blocker: 'chain', key: 'trapper-keyring', source: 'trapper-cellar', ready: 'cellar-open', kind: 'carried', also: 'hush-wired' },
 ].map((g) => Object.freeze(g)));
 
+// CL-303 (D-116, ?gates=1; Claude, CU-200's file taken under D-115): the story places' new locks. The mast yard's gate is
+// grown over with vines: a blade cuts them (the machete, a find in the depot shed, inside the depot's own ring; the katana
+// too, which the page reports through hasTool). The hikers' trail is blocked by a crashed truck: the winch off the
+// convoy's escort truck drags it clear. Both lie from day 1 at the place before; the line keeps them waiting their turn. The rest as GATES. With the line (LINE_RULES in
+// story-chain.js) there are no spares, and no gate opens before its own lead is open (leadOpen), so a key or a tool got
+// early (the bolt cutters lie at the mine from day 1) still waits its turn.
+export const LINE_GATES = Object.freeze(GATES.map((g) => {
+  if (g.gate === 'mast-yard') return Object.freeze({ ...g, blocker: 'vines', key: 'machete', source: 'depot-shed', ready: 'start', kind: 'tool' });
+  if (g.gate === 'trail-chain') return Object.freeze({ ...g, blocker: 'crashed-truck', key: 'winch', source: 'convoy-escort-truck', ready: 'start', kind: 'tool' });
+  return g;
+}));
+
 const byLead = new Map(GATES.map((g) => [g.lead, g]));
 const byGate = new Map(GATES.map((g) => [g.gate, g]));
 const byKey = new Map(GATES.map((g) => [g.key, g]));
-export function gateOfLead(lead) { return byLead.get(lead) || null; }
-export function gateById(id) { return byGate.get(id) || null; }
-export function gateOfKey(key) { return byKey.get(key) || null; }
+const lineByKey = new Map(LINE_GATES.map((g) => [g.key, g]));
+// The line's specs when `line` (the page passes STORY_GATES_ON); else the old ones.
+export function gateOfLead(lead, line = false) { return (line ? LINE_GATES.find((g) => g.lead === lead) : byLead.get(lead)) || null; }
+export function gateById(id, line = false) { return (line ? LINE_GATES.find((g) => g.gate === id) : byGate.get(id)) || null; }
+export function gateOfKey(key, line = false) { return (line ? lineByKey.get(key) : byKey.get(key)) || null; }
 
 export function createChainGates(options = {}) {
-  const gates = options.gates || GATES, spareDawns = options.spareDawns ?? SPARE_DAWNS;
+  const line = !!options.line;
+  const gates = options.gates || (line ? LINE_GATES : GATES), spareDawns = options.spareDawns ?? (line ? Infinity : SPARE_DAWNS);
+  const leadOpen = options.leadOpen || (() => true), hasTool = options.hasTool || (() => false);
+  const gByGate = new Map(gates.map((g) => [g.gate, g])), gByKey = new Map(gates.map((g) => [g.key, g]));
   let st = null;
   const fresh = () => {
     st = { events: new Set(['start']), keys: {}, gates: {}, spare: {} };
@@ -64,18 +81,23 @@ export function createChainGates(options = {}) {
       st.keys[key] = 'held'; return true;
     },
     keyState(key) { return st.keys[key] || null; },
+    // Held, or (a tool) in his hands another way (the katana for the vines: the page's hasTool).
+    has(key) { const g = gByKey.get(key); return st.keys[key] === 'held' || (!!g && g.kind === 'tool' && !!hasTool(key)); },
+    line,
     // Where the key is to be had now: its source, or the HQ's duty board for a spare.
-    keySource(key) { const g = byKey.get(key); if (!g) return null; return st.spare[g.gate] && !st.events.has(g.ready) ? 'hq-board' : g.source; },
+    keySource(key) { const g = gByKey.get(key); if (!g) return null; return st.spare[g.gate] && !st.events.has(g.ready) ? 'hq-board' : g.source; },
     // Can he open this gate now (the key in hand or in his head, and anything else it needs)?
     canOpen(gate) {
-      const g = byGate.get(gate); if (!g || st.gates[gate] !== 'locked') return false;
-      return st.keys[g.key] === 'held' && (!g.also || st.events.has(g.also));
+      const g = gByGate.get(gate); if (!g || st.gates[gate] !== 'locked') return false;
+      if (line && !leadOpen(g.lead)) return false;   // CL-303: not before its turn
+      return api.has(g.key) && (!g.also || st.events.has(g.also));
     },
     // Why not: 'open' | 'no-key' | 'needs:<event>' | null (he can).
     whyShut(gate) {
-      const g = byGate.get(gate); if (!g) return null;
+      const g = gByGate.get(gate); if (!g) return null;
       if (st.gates[gate] === 'open') return 'open';
-      if (st.keys[g.key] !== 'held') return 'no-key';
+      if (line && !leadOpen(g.lead)) return 'not-yet';
+      if (!api.has(g.key)) return 'no-key';
       if (g.also && !st.events.has(g.also)) return 'needs:' + g.also;
       return null;
     },

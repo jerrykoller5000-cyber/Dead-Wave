@@ -419,6 +419,47 @@ a default. He never speaks; the button is the report. Examples:
 **Signs.** The Cordon's PGB sign (section 6). On the HQ's supply terminal: "ORDERS PLACED AFTER 16:00 SHIP NEXT
 DAWN. ORDERS PLACED BEFORE 16:00 ALSO SHIP NEXT DAWN."
 
+### The sealed Grave Shift orders (D-116)
+
+Captain M. Hale wrote eight orders for the twelve's unfinished fieldwork. The first is already on paper, clipped to
+Price's fuel log at the dead HQ generator. The rest are sealed in the HQ teleprinter mounted beside the duty board on
+the outside wall, within reach while HQ remains sealed. Once the current order is stamped
+done at the duty board, its clock releases one next order at dawn. It never prints ahead. The papers give the marine a
+place and a job; the field notes at those places still hold the mystery. This replaces the generic lead card in the
+gated story line (`?gates=1`); it does not change the eight leads' order or their site rules.
+
+1. **Price's fuel log · the generator.** On the reverse of Price's "Day 4" entry, in Hale's hand: "Fuel depot. Fill a can
+   from Price's shed and bring the HQ generator back. The mast needs power before Sato can hear us. — Capt. Hale"
+2. **The relay.** "Relay mast. Reset Sato's breakers, tune the dish and bring the channel up. Report what answers.
+   — Capt. Hale"
+3. **The medical run.** "Road bend. Jack the ambulance and recover Threshold's medical case. We signed for twelve;
+   bring back what is left. — Capt. Hale"
+4. **The missing.** "Hikers' camp. Follow the ambulance's ranger-band log. Bring down the kit caught in the tree;
+   look for a name. — Capt. Hale"
+5. **Clarke's truck.** "Mine mouth, then the road bend. Take the cutters the hikers left at the mine and open Clarke's
+   chained toolbox. — Capt. Hale"
+6. **The search.** "Rangers' camp. Find the code they left on their search board, open the cache and read their last
+   log. — Capt. Hale"
+7. **The old man.** "Trapper's yard. Follow the horseshoes past his traps and check the cellar. Bring back anything
+   he knew about the iron. — Capt. Hale"
+8. **Below.** "Iron mine. Take the charged Hush through the gate and go below. Find our nine. Bring them home.
+   — Capt. Hale"
+
+**Teleprinter copy.** At dawn after a completion stamp: "SEALED ORDER READY"; at the machine: "E — Tear off the next
+order"; on the slip: "PGB · GRAVE SHIFT · ORDER {number} / CAPT. M. HALE". Before a stamp or before dawn: "NO ORDER
+RELEASED". It prints one numbered slip, never a list of all eight.
+
+**Duty board copy.** With a slip in hand: "E — Pin the order". On the pinned current order: "E — Read the order"; when
+its lead is complete: "E — Stamp done". After the stamp: "ORDER FILED · NEXT AT DAWN". Before the first printed order,
+Price's fuel log occupies the current-order space. A stamped slip stays there with Hale's earlier papers and the nine
+tag hooks, so finishing the job leaves a trace at HQ.
+
+**Hale's dead-man note.** Folded inside the printer's service cover, available whenever the player opens it:
+"If the radio goes down, the clock still turns. I sealed one job per morning. Stamp a job done at the board and the
+printer will release the next at first light; leave it unstamped and it will wait. Price's fuel log is the first. I
+set the clock before we lost the channel. If I am not here to give the orders, finish them anyway. — Capt. M. Hale"
+The note explains the paper timer and Hale's absence without saying why the lake has one quiet night in twenty.
+
 ## 12. What is never said (v3)
 
 The rule for a mystery people come back for: two or three facts the player can find, the facts agree, and the game
