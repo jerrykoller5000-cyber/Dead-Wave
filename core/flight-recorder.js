@@ -105,7 +105,7 @@ export function createFlightLog() {
   function clip(meta) {
     return {
       version: 1,
-      game: meta.game || '1.0.0',
+      game: meta.game || '1.2.0',
       commit: meta.commit || null,
       note: meta.note || '',
       savedAt: meta.savedAt || new Date().toISOString(),

@@ -4,10 +4,10 @@ state: idle
 model: Gemini 4 Argon (High)
 task: —
 touching: —
-since: 2026-11-06T10:22Z
+since: 2026-11-06T14:21Z
 next: —
 blocked-on: —
-last-report: handoffs/2026-11-06-antigravity-AG-239.md
+last-report: handoffs/2026-11-06-antigravity-AG-241.md
 
 ## Notes
 
@@ -38,7 +38,8 @@ a real GPU the way you can.
 
 ### Status (2026-11-06)
 - **D-114 in force**: Lighter load on Jerry's PC until he is home — keep real-renderer runs to the few short runs a task needs, score strictly what the pictures show, no long batches or benches unless Claude asks.
-- **AG-212..AG-235**: DONE (see `handoffs/`). Stone wall LOD/CL-300 checks, story gates, 13-gun first-person sheets, akimbo pairs & heavy grips (`CL-301`, `GP-20022/20024`), `t189` sling halo bisect (`AG-233`), `t298` eye-ease replay zombie state bisect (`AG-235`).
-- **AG-236**: DONE (`handoffs/2026-11-06-antigravity-AG-236.md`, `qa/2026-11-06-AG-236/`). Rescored Grokbot's `GB-280` live brute get-up after-fix pictures (`review/GB-280/after-fix/`) against `review/GB-274/` and `GB-277`: PASS `4.16/5.0` (hands visibly plant on dirt at `u=0.25..0.40`, hang low through `u=0.55..0.70`, and return to standing idle at `u=0.97`; noted twin-knee symmetry, early `handL` lift at `u=0.562`, and top-of-head crop in `side-097.png`).
-- **AG-237**: DONE (`handoffs/2026-11-06-antigravity-AG-237.md`, `qa/2026-11-06-AG-237/`). `t298` five runs on real WebGPU renderer through slot after CL-302 (CU-240 handover under D-115). All 5 runs PASS (10/0 each), `lateC = 0.0001 m` (0.1 mm, 10x under 1.0 mm bar), opening eye-ease `worstC = 0.0043..0.0044 m` at frame 0. Confirmed CL-302 plain-field snapshot fix holds 5/5 on real renderer.
-- **Next**: Queue empty. Ready for new assignments.
+- **AG-236**: DONE (`handoffs/2026-11-06-antigravity-AG-236.md`, `qa/2026-11-06-AG-236/`). Rescored Grokbot's `GB-280` live brute get-up after-fix pictures.
+- **AG-237**: DONE (`handoffs/2026-11-06-antigravity-AG-237.md`, `qa/2026-11-06-AG-237/`). `t298` five runs on real WebGPU renderer after CL-302.
+- **AG-239**: DONE (`handoffs/2026-11-06-antigravity-AG-239.md`, `qa/2026-11-06-AG-239/`). The chain sound log (CL-295, J53): logged 4 seats in TG and Trail; identified gravel footsteps as sole repeating rhythmic source.
+- **AG-240**: DONE (`handoffs/2026-11-06-antigravity-AG-240.md`, `qa/2026-11-06-AG-240/`, `review/AG-240/`). Footstep A/B evaluation on trail outside Threshold (First Person): 20s walk & run As-Is vs `?steps=grass`. As-Is fired 61 gravel walk steps and 89 gravel run stomps; `?steps=grass` cleanly switched dirt to 63 soft grass walk steps and 90 soft grass run steps (0 gravel takes on dirt). Verified 100% surface invariance on stone, metal, water, and leaves. Recorded 10s master WebAudio from all runs + side-by-side comparison tracks to `review/AG-240/`. Composite sheet: `qa/2026-11-06-AG-240/footstep-ab-sheet.jpg`.
+- **Next**: Check board queue.

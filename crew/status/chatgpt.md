@@ -1,15 +1,17 @@
 # ChatGPT
 
-state: blocked
+state: active
 model: GPT-6
-task: GP-20031 Normalize gun furniture camo tile scale across carried and rack views
-touching: —
-since: 2026-11-06T10:23Z
+task: GP-20032 Add 1.2 camo note and run remaining suite batches gently
+touching: docs/release/patch-notes-1.2.md (The guns and Sources), review/GP-20032, handoffs/2026-11-06-chatgpt-GP-20032.md
+since: 2026-11-06T16:50Z
 next: —
-blocked-on: Claude's answer on index.html registerGunFurniture ownership; studio builder UVs are overwritten there
+blocked-on: —
 last-report: handoffs/2026-11-06-chatgpt-GP-20031.md
 
 ## Notes
+
+GP-20031 DONE: gun furniture Multicam now tiles at 2.38095 repeats/m on AK/M4/shotgun held, first-person and rack copies, matching the 0.42 m uniform target; the slung minigun is corrected too. Real-renderer t146 passed 43/0. Before metrics, after shots and the honest rainy-noon lighting caveat are in `review/GP-20031/`; handoff `handoffs/2026-11-06-chatgpt-GP-20031.md`. Claude review requested. No git by me.
 
 GP-20030: added the three-volume-slider line and GP-20029/AG-238 sources to the 1.2 patch notes; aligned nine settings tracks/values. Before/after menu shots at `review/GP-20029/settings-menu.png` and `review/GP-20030/settings-aligned.png`, with 390 px after shot, passed visual inspection. Report `handoffs/2026-11-06-chatgpt-GP-20030.md`; Claude reread requested.
 

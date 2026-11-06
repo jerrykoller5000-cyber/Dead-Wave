@@ -1046,7 +1046,11 @@ export const AudioSys = (() => {
     playTone({ freq: 58, type: 'sine', dur: 0.1, vol: 0.1 * vol, slideTo: 36, when: 0.16 });
   }
   // CL-272: ground ('stone' | 'metal' | 'leaves', batch 3's folders, from CU-164's picks) once the page knows it
+  // CL-295 (J53, AG-239): the only sounds under his feet on a trail are the gravel takes, so their crunch is the 'chain'.
+  // An A/B for Jerry: ?steps=grass puts the softer grass takes on plain dirt (the default stays gravel until he picks).
+  const DIRT_SOFT = (() => { try { return typeof location !== 'undefined' && new URLSearchParams(location.search).get('steps') === 'grass'; } catch (_) { return false; } })();
   function footstep(wet, running, ground = null) {
+    if (!wet && !ground && DIRT_SOFT && tk('player/footstep-leaves', (running ? 1 : 0.85) * 0.34)) return;   // CL-295: x0.34 = the dirt folder's pack trim over the leaves' (0.55 / 1.61), so both sides of the A/B play at the same level
     if (!wet && (ground === 'stone' || ground === 'metal' || ground === 'leaves') && tk('player/footstep-' + ground, running ? 1 : 0.85)) return;
     if (tk(wet ? 'player/footstep-water' : running ? 'player/footstep-run-dirt' : 'player/footstep-dirt', running ? 1 : 0.85)) return;   // CL-161
     const p = 0.85 + Math.random() * 0.3;

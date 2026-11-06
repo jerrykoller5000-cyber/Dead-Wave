@@ -28,7 +28,7 @@ import { createUI } from './ui.js';
 import { createApi } from './api.js';
 import { createWaitQueue, abortError, boundedNumber } from './async.js';
 
-export const VERSION = '1.1.0';
+export const VERSION = '1.2.0';
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 async function until(f, ms = 60000, every = 50) { const t0 = performance.now(); while (performance.now() - t0 < ms) { try { if (f()) return true; } catch (_) {} await sleep(every); } return false; }
 

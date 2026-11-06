@@ -1,13 +1,13 @@
 # Grokbot
 
 state: active
-model: Grok
-task: GB-284 Checkpoint commit: npm test then Claude Commit.bat (D-113)
+model: Grok Bot
+task: GB-286 checkpoint commit afternoon 1.2.0 camo footstep A/B
 touching: git
-since: 2026-11-06T11:10Z
+since: 2026-11-06T16:41Z
 next: waits on CL-281
 blocked-on: —
-last-report: handoffs/2026-11-05-grokbot-GB-276.md
+last-report: handoffs/2026-11-06-grokbot-GB-285.md
 
 ## Notes
 

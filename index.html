@@ -20732,6 +20732,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           const src = o.geometry.index ? o.geometry.toNonIndexed() : o.geometry.clone();
           const P = src.attributes.position, uv = new Float32Array(P.count * 2);
           boxProjectUV(P.array, uv);
+          // P is in local units; root scale includes both the builder's scale and weaponSizeFactor.
+          // Match the 0.42 m tile on his uniform and on the rack's baked, reprojected copies.
+          const camoScale = Math.abs(gun.scale.x) || 1;
+          for (let i = 0; i < uv.length; i++) uv[i] *= camoScale;
           src.setAttribute('uv', new THREE.BufferAttribute(uv, 2));
           o.geometry = src;
         });
@@ -24028,13 +24032,27 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       return rig;
     }
     const carrySuppressed = (kind) => !!(kind && weaponMeshes[kind] && weaponMeshes[kind].userData.suppressed);
-    function carryCopy(rig, key, token) {
+    function carryCopy(rig, spot, key, token) {
       const k = key + ':' + token;
       if (!rig.copies.has(k)) {
         // One live appearance per mount; repeated workbench/camo changes must not grow the cache forever.
         for (const old of rig.copies.keys()) if (old.startsWith(key + ':')) rig.copies.delete(old);
-        const copy = carryGunCopy(token.split('+')[0]);
+        const kind = token.split('+')[0], copy = carryGunCopy(kind);
         if (copy) foldGun(copy, true);   // GB-200
+        // The minigun has no CARRY_FIT entry: its 0.62 sling shrink and 0.85 mount shrink both remain.
+        // This copy shares the held gun's geometry, so give only its camo furniture private UVs.
+        const carryScale = key.startsWith('sling') && !CARRY_FIT[kind]
+          ? (CARRY_SLING_SCALE[kind] || 1) * Math.abs(spot.g.getWorldScale(new THREE.Vector3()).x) : 1;
+        if (copy && carryScale !== 1 && gunFurniture[kind]) {
+          const furniture = new Set(gunFurniture[kind]);
+          copy.traverse((o) => {
+            if (!o.isMesh || !furniture.has(o.material) || !o.geometry?.attributes?.uv) return;
+            const geo = o.geometry.clone(), uv = geo.attributes.uv;
+            for (let i = 0; i < uv.array.length; i++) uv.array[i] *= carryScale;
+            uv.needsUpdate = true;
+            o.geometry = geo;
+          });
+        }
         rig.copies.set(k, copy);
       }
       return rig.copies.get(k);
@@ -24043,7 +24061,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const token = kind ? kind + '+' + gunLookKey(kind) : null;
       if (spot.token === token) return;
       if (spot.gun) spot.g.remove(spot.gun);
-      spot.gun = token ? carryCopy(rig, key, token) : null;
+      spot.gun = token ? carryCopy(rig, spot, key, token) : null;
       if (spot.gun) { if (key.startsWith('sling')) spot.gun.scale.setScalar(CARRY_SLING_SCALE[kind] || 1); spot.g.add(spot.gun); }
       spot.kind = kind; spot.token = token;
     }
@@ -63162,7 +63180,7 @@ live++;
     function flightClip(note) {
       const input = document.getElementById('clipNoteInput');
       const typed = (note != null && note !== '') ? note : (flightNote || (input && input.value) || '');
-      return flightLog.clip({ game: '1.0.0', note: String(typed).slice(0, 140), rngSeed: flightRng.seed, settings: { fpFov, lookSens, brightness } });
+      return flightLog.clip({ game: '1.2.0', note: String(typed).slice(0, 140), rngSeed: flightRng.seed, settings: { fpFov, lookSens, brightness } });
     }
     function flightWrite(clip) {
       const name = flightStamp() + '.json';
