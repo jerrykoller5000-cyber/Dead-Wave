@@ -97,9 +97,10 @@ class Connection {
 }
 
 class Page {
-  constructor(conn, sessionId) {
+  constructor(conn, sessionId, targetId = null) {
     this.conn = conn;
     this.sessionId = sessionId;
+    this.targetId = targetId;
     this.errors = [];
     this.console = [];
     this._loaded = false;
@@ -123,6 +124,18 @@ class Page {
     });
   }
   send(method, params, timeoutMs) { return this.conn.send(method, params, this.sessionId, timeoutMs); }
+  // GB-281: Page.close on a newWindow target often ACKs but leaves the target alive, so
+  // orphaned game pages pile up and later Page.navigate to the game never gets a CDP reply.
+  // Target.closeTarget actually destroys the window.
+  async close(timeoutMs = 8000) {
+    if (this.targetId) {
+      try {
+        await this.conn.send('Target.closeTarget', { targetId: this.targetId }, undefined, timeoutMs);
+        return;
+      } catch { /* fall through to Page.close */ }
+    }
+    try { await this.send('Page.close', {}, timeoutMs); } catch { /* target already gone */ }
+  }
   async setViewport(width, height, dsf = 1) {
     await this.send('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: dsf, mobile: false });
   }
@@ -192,7 +205,7 @@ export async function attach(port, urlPart = '') {
   }
   if (!target) throw new Error('no page matching ' + JSON.stringify(urlPart) + ' on port ' + port);
   const { sessionId } = await conn.send('Target.attachToTarget', { targetId: target.targetId, flatten: true });
-  const page = new Page(conn, sessionId);
+  const page = new Page(conn, sessionId, target.targetId);
   await page.send('Page.enable', {});
   await page.send('Runtime.enable', {});
   await page.send('Log.enable', {});
@@ -345,7 +358,7 @@ export async function launch({ headless = true, args = [] } = {}) {
         url: 'about:blank', newWindow: true, background: false, width, height
       });
       const { sessionId } = await conn.send('Target.attachToTarget', { targetId, flatten: true });
-      const page = new Page(conn, sessionId);
+      const page = new Page(conn, sessionId, targetId);
       await page.send('Page.enable', {});
       await page.send('Runtime.enable', {});
       await page.send('Log.enable', {});

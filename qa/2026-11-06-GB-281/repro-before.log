@@ -1,0 +1,10 @@
+GRANT grokbot GB-281: starting one game-test command
+check-players: 315 player.position reads, all in the allowed places
+FAIL  tcl275d  10 pass   1 fail  64.0s
+ok    tcl280  10 pass   0 fail  44.5s
+
+2 checks: 20 pass, 1 fail
+
+by owner:
+  unassigned
+    tcl275d 1 fail  FAIL home again: the day's calm (gh/gh-place-dawn)

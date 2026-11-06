@@ -1,0 +1,14 @@
+GRANT grokbot GB-283: starting one game-test command
+ok    t106b    11 pass   0 fail  79.2s  (real renderer)
+    PASS score on, night 1 track: gh/night-01
+    PASS music.json has layered kits for gh/night-01
+    PASS the fight is on: scarecrow / kit scarecrow (fight)
+    PASS the director has a pace
+    PASS the breather: lull kit scarecrow: scarecrow / scarecrow (lull)
+    PASS within two of its own bars (2.286 s), not after seconds of quiet: 0.1 s
+    PASS the next push: back to the fight: revenge (fight)
+    PASS the last push: surge basilisk: basilisk / basilisk (surge)
+    PASS then last basilisk: basilisk / basilisk (last)
+    PASS audible: 0.702
+    PASS never a sting and music at once
+1 checks: 11 pass, 0 fail (real renderer)

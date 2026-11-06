@@ -1,0 +1,25 @@
+import { execFileSync } from 'node:child_process';
+import fs from 'node:fs';
+const A = ['--agent', 'grokbot', '--task', 'GB-280'];
+const cam = (...a) => execFileSync(process.execPath, ['tools/camera.mjs', ...a, ...A], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'inherit'] });
+const U = 0.45;
+fs.mkdirSync('review/GB-280/hide2', { recursive: true });
+cam('start', '--match');
+cam('eval', "T.setHp(100000); T.clearZombies&&T.clearZombies(); T.skipGrace&&T.skipGrace(); const px=10,pz=10,gy=T.sampleHeight(px,pz); T.player.position.set(px,gy,pz); T.levelGroundRect(px-30,pz-30,px+30,pz+30,gy,6); await wait(1500); return JSON.stringify({gy})");
+cam('eval', `T.clearZombies(); const px=10,pz=10; for (let i=0;i<60&&!T.bruteGetUpDbg({}).loaded;i++) await wait(100); const z=T.spawnZombie(px+1,pz+7,'brute',true,true); z.mesh.position.set(px+1,T.sampleHeight(px+1,pz+7),pz+7); z.riseT=0; z.ttSpawn=false; z.speed=z.baseSpeed=0; z.hp=z.maxHp=5000; await wait(600); window.__z=z; const yaw=z.mesh.rotation.y; T.damageZombie(z,60,{kind:'explosive',dir:{x:Math.sin(yaw),z:Math.cos(yaw)}}); if(!window.__holdTimer) window.__holdTimer=setInterval(()=>{const h=window.__hold; if(h&&h.z.knockT>0) h.z.knockT=h.t;},4); return 'spawned'`);
+cam('eval', `window.__hold={z:window.__z,t:${(1.4 * (1 - U)).toFixed(4)}}; await wait(600); return 'held'`);
+const info = cam('eval', `const z=window.__z, THREE=await import('three'); z.mesh.updateWorldMatrix(true,true); const d=T.bruteGetUpDbg(z); const my=z.mesh.position.y; const rel=(p)=>p?[+(p[0]-z.mesh.position.x).toFixed(3),+(p[1]-my).toFixed(3),+(p[2]-z.mesh.position.z).toFixed(3)]:null; const u=z.mesh.userData; const meshCtr=(g)=>{const out=[]; g.traverse(o=>{if(!o.isMesh||!o.geometry)return; o.geometry.computeBoundingBox(); const c=o.geometry.boundingBox.getCenter(new THREE.Vector3()); o.localToWorld(c); out.push({n:o.name||o.parent?.name||'mesh', wy:+c.y.toFixed(3), hy:+(c.y-my).toFixed(3)});}); return out;}; const box=(g)=>{const b=new THREE.Box3().setFromObject(g); return {miny:+b.min.y.toFixed(3),maxy:+b.max.y.toFixed(3),hmin:+(b.min.y-my).toFixed(3),hmax:+(b.max.y-my).toFixed(3)};}; const row={u:d.u, over:d.overridden, mesh:[+z.mesh.position.x.toFixed(3),+my.toFixed(3),+z.mesh.position.z.toFixed(3)], rotX:+z.mesh.rotation.x.toFixed(4), hitH:d.hitH, plant:d.plant, live:{shoulderL:rel(d.live.shoulderL),elbowL:rel(d.live.elbowL),handL:rel(d.live.handL),shoulderR:rel(d.live.shoulderR),elbowR:rel(d.live.elbowR),handR:rel(d.live.handR),chest:rel(d.live.chest),pelvis:rel(d.live.pelvis)}, tgt:{handL:rel(d.targets.handL),handR:rel(d.targets.handR)}, armLbox:box(u.armLG), armRbox:box(u.armRG), armLmeshes:meshCtr(u.armLG), armRmeshes:meshCtr(u.armRG), armVis:[u.armLG.visible,u.armRG.visible]}; window.__shotCenter=z.mesh.position.clone(); window.__shotCenter.y = my + 0.9; return JSON.stringify(row);`);
+fs.writeFileSync('review/GB-280/hide2/info-visible.json', info.split('\n').filter(Boolean).pop());
+console.log('INFO', info.split('\n').filter(Boolean).pop());
+const c = JSON.parse(fs.readFileSync('review/GB-280/hide2/info-visible.json','utf8'));
+const xyz = `xyz:${c.mesh[0].toFixed(3)},${(c.mesh[1]+0.9).toFixed(3)},${c.mesh[2].toFixed(3)}`;
+console.log('CAM', xyz);
+cam('shot', xyz, '--yaw', '90', '--pitch', '8', '--zoom', '1.4', '--out', 'review/GB-280/hide2/a-visible.png');
+cam('eval', `const u=window.__z.mesh.userData; u.armLG.visible=false; u.armRG.visible=false; return 'hidden'`);
+cam('shot', xyz, '--yaw', '90', '--pitch', '8', '--zoom', '1.4', '--out', 'review/GB-280/hide2/b-armshidden.png');
+cam('eval', `const u=window.__z.mesh.userData; u.armLG.visible=true; u.armRG.visible=true; const mats=[]; window.__z.mesh.traverse(o=>{if(o.isMesh&&o.material){const m=o.material; if(!mats.includes(m)){mats.push(m); m.userData._ow=m.opacity; m.userData._tr=m.transparent; if(o.parent===u.armLG||o.parent===u.armRG||(o.parent&&(o.parent.parent===u.armLG||o.parent.parent===u.armRG))){m.transparent=true;m.opacity=0.15;m.needsUpdate=true;}}}}); return 'ghosted-approx'`);
+// Better: hide non-arm body to see only arms
+cam('eval', `const z=window.__z,u=z.mesh.userData; z.mesh.traverse(o=>{o.userData._wasVis=o.visible}); const keep=new Set(); [u.armLG,u.armRG].forEach(g=>g.traverse(o=>keep.add(o))); z.mesh.traverse(o=>{ if(o===z.mesh) return; if(!keep.has(o)) { let p=o; let under=false; while(p){if(keep.has(p)){under=true;break;}p=p.parent;} if(!under) o.visible=false; }}); u.armLG.visible=true; u.armRG.visible=true; return 'arms-only'`);
+cam('shot', xyz, '--yaw', '90', '--pitch', '8', '--zoom', '1.4', '--out', 'review/GB-280/hide2/c-armsonly.png');
+cam('eval', `const z=window.__z; z.mesh.traverse(o=>{ if(o.userData._wasVis!==undefined) o.visible=o.userData._wasVis; }); window.__hold=null; return 'restored'`);
+cam('stop');

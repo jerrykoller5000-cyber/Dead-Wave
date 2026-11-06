@@ -1,0 +1,5 @@
+GRANT grokbot GB-281: starting one game-test command
+t0: pages before-close=2 after-close=1
+t6a: pages before-close=2 after-close=2
+tcl275a: pages before-close=2 after-close=1
+final page targets: 1 (expect 1 = launch about:blank)

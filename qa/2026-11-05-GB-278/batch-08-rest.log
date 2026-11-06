@@ -1,0 +1,19 @@
+BATCH 8 rest: t185 t186 t187 t188 t189 t190 t191 t192 t193 t194
+GRANT grokbot GB-278: starting one game-test command
+check-players: 315 player.position reads, all in the allowed places
+           INFO holds: m4 1302 ms wall / 500 ms game, ak 1257 ms wall / 450 ms game, aa12 624 ms wall / 450 ms game, uzi 1166 ms wall / 400 ms game, shotgun 998 ms wall / 300 ms game, revolver 951 ms wall / 300 ms game, sniper 1042 ms wall / 300 ms game, pistol 344 ms wall / 300 ms game, pistol 580 ms wall / 400 ms game
+ok    t185    36 pass   0 fail  80.3s
+ok    t186    34 pass   0 fail  44.6s
+ok    t187    75 pass   0 fail  81.3s
+ok    t188    91 pass   0 fail  106.4s
+ok    t189     8 pass   0 fail  148.3s
+ok    t190    21 pass   0 fail  43.5s
+ok    t191    16 pass   0 fail  56.4s
+ok    t192    10 pass   0 fail  48.5s
+           INFO on the flat, walking, the lowest sole is -0.029 m
+ok    t193    18 pass   0 fail  64.2s
+ok    t194    35 pass   0 fail  76.5s
+
+10 checks: 344 pass, 0 fail
+
+BATCH DONE

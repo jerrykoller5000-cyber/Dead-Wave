@@ -1,0 +1,12 @@
+import { execFileSync } from 'node:child_process';
+const A = ['--agent', 'grokbot', '--task', 'GB-280'];
+const cam = (...a) => execFileSync(process.execPath, ['tools/camera.mjs', ...a, ...A], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'inherit'] });
+cam('start', '--match');
+cam('eval', "T.setHp(100000); T.clearZombies&&T.clearZombies(); T.skipGrace&&T.skipGrace(); const px=10,pz=10,gy=T.sampleHeight(px,pz); T.player.position.set(px,gy,pz); T.levelGroundRect(px-30,pz-30,px+30,pz+30,gy,6); await wait(1500); return 'ok'");
+cam('eval', `T.clearZombies(); const px=10,pz=10; for (let i=0;i<60&&!T.bruteGetUpDbg({}).loaded;i++) await wait(100); const z=T.spawnZombie(px+1,pz+7,'brute',true,true); z.mesh.position.set(px+1,T.sampleHeight(px+1,pz+7),pz+7); z.riseT=0; z.ttSpawn=false; z.speed=z.baseSpeed=0; z.hp=z.maxHp=5000; await wait(600); window.__z=z; const yaw=z.mesh.rotation.y; T.damageZombie(z,60,{kind:'explosive',dir:{x:Math.sin(yaw),z:Math.cos(yaw)}}); if(!window.__holdTimer) window.__holdTimer=setInterval(()=>{const h=window.__hold; if(h&&h.z.knockT>0) h.z.knockT=h.t;},4); return 'spawned'`);
+cam('eval', `window.__hold={z:window.__z,t:${(1.4 * 0.6).toFixed(4)}}; await wait(450); return 'held'`);
+cam('shot', 'xyz:11,-1.9,17', '--yaw', '90', '--pitch', '6', '--zoom', '1.6', '--out', 'review/GB-280/hide-a-visible.png');
+console.log(cam('eval', `const z=window.__z; const u=z.mesh.userData; let n=0; z.mesh.traverse(()=>n++); const fk=(g)=>{const a=[]; g.traverse(o=>{if(o.isMesh)a.push(o.name||o.geometry.type)}); return a}; const rows={nodes:n, armL:fk(u.armLG), armR:fk(u.armRG), vis:[u.armLG.visible,u.armRG.visible], torsoKids:u.torso.children.map(c=>c.name||c.type)}; u.armLG.visible=false; u.armRG.visible=false; return JSON.stringify(rows)`).slice(-900));
+cam('shot', 'xyz:11,-1.9,17', '--yaw', '90', '--pitch', '6', '--zoom', '1.6', '--out', 'review/GB-280/hide-b-armshidden.png');
+cam('eval', 'window.__hold=null; return "released"');
+cam('stop');

@@ -1,0 +1,32 @@
+GRANT grokbot GB-281: starting one game-test command
+ok t0 2/0 29.1s 
+TARGETS before-close t0: 2 pages -> http://127.0.0.1:21258/tools/tests/test-probe-18228.html?debug=1&raf=t | about:blank
+close t0: ok
+TARGETS after-close t0: 2 pages -> http://127.0.0.1:21258/tools/tests/test-probe-18228.html?debug=1&raf=t | about:blank
+ok t6a 2/0 40.4s 
+TARGETS before-close t6a: 2 pages -> about:blank | http://127.0.0.1:21258/tools/tests/test-probe-18228.html?debug=1&raf=t
+close t6a: ok
+TARGETS after-close t6a: 2 pages -> about:blank | http://127.0.0.1:21258/tools/tests/test-probe-18228.html?debug=1&raf=t
+ok tcl275a 13/0 46.2s 
+TARGETS before-close tcl275a: 3 pages -> about:blank | http://127.0.0.1:21258/tools/tests/test-probe-18228.html?debug=1&raf=t | http://127.0.0.1:21258/tools/tests/test-probe-18228.html?debug=1&raf=t
+close tcl275a: ok
+TARGETS after-close tcl275a: 3 pages -> about:blank | http://127.0.0.1:21258/tools/tests/test-probe-18228.html?debug=1&raf=t | http://127.0.0.1:21258/tools/tests/test-probe-18228.html?debug=1&raf=t
+ok tcl275b 6/0 46.9s 
+TARGETS before-close tcl275b: 4 pages -> about:blank | http://127.0.0.1:21258/tools/tests/test-probe-18228.html?debug=1&raf=t | http://127.0.0.1:21258/tools/tests/test-probe-18228.html?debug=1&raf=t | http://127.0.0.1:21258/tools/tests/test-probe-18228.html?debug=1&raf=t
+close tcl275b: ok
+TARGETS after-close tcl275b: 4 pages -> about:blank | http://127.0.0.1:21258/tools/tests/test-probe-18228.html?debug=1&raf=t | http://127.0.0.1:21258/tools/tests/test-probe-18228.html?debug=1&raf=t | http://127.0.0.1:21258/tools/tests/test-probe-18228.html?debug=1&raf=t
+ok tcl275c 7/0 27.7s 
+TARGETS before-close tcl275c: 5 pages -> http://127.0.0.1:21258/tools/tests/test-probe-18228.html?debug=1&raf=t | http://127.0.0.1:21258/tools/tests/test-probe-18228.html?debug=1&raf=t | about:blank | http://127.0.0.1:21258/tools/tests/test-probe-18228.html?debug=1&raf=t | http://127.0.0.1:21258/tools/tests/test-probe-18228.html?debug=1&raf=t
+close tcl275c: ok
+TARGETS after-close tcl275c: 5 pages -> http://127.0.0.1:21258/tools/tests/test-probe-18228.html?debug=1&raf=t | http://127.0.0.1:21258/tools/tests/test-probe-18228.html?debug=1&raf=t | about:blank | http://127.0.0.1:21258/tools/tests/test-probe-18228.html?debug=1&raf=t | http://127.0.0.1:21258/tools/tests/test-probe-18228.html?debug=1&raf=t
+FAIL tcl275d 10/1 56.9s 
+TARGETS before-close tcl275d: 6 pages -> http://127.0.0.1:21258/tools/tests/test-probe-18228.html?debug=1&raf=t | http://127.0.0.1:21258/tools/tests/test-probe-18228.html?debug=1&raf=t | http://127.0.0.1:21258/tools/tests/test-probe-18228.html?debug=1&raf=t | about:blank | http://127.0.0.1:21258/tools/tests/test-probe-18228.html?debug=1&raf=t | http://127.0.0.1:21258/tools/tests/test-probe-18228.html?debug=1&raf=t
+close tcl275d: ok
+TARGETS after-close tcl275d: 6 pages -> http://127.0.0.1:21258/tools/tests/test-probe-18228.html?debug=1&raf=t | http://127.0.0.1:21258/tools/tests/test-probe-18228.html?debug=1&raf=t | http://127.0.0.1:21258/tools/tests/test-probe-18228.html?debug=1&raf=t | about:blank | http://127.0.0.1:21258/tools/tests/test-probe-18228.html?debug=1&raf=t | http://127.0.0.1:21258/tools/tests/test-probe-18228.html?debug=1&raf=t
+--- post-wedge probes ---
+newPage: ok
+TARGETS after-newPage: 7 pages -> http://127.0.0.1:21258/tools/tests/test-probe-18228.html?debug=1&raf=t | http://127.0.0.1:21258/tools/tests/test-probe-18228.html?debug=1&raf=t | http://127.0.0.1:21258/tools/tests/test-probe-18228.html?debug=1&raf=t | about:blank | http://127.0.0.1:21258/tools/tests/test-probe-18228.html?debug=1&raf=t | http://127.0.0.1:21258/tools/tests/test-probe-18228.html?debug=1&raf=t | about:blank
+navigate about:blank: ok 0.0s
+navigate game: CDP timeout: Page.navigate 30.0s
+Browser.getVersion: ok 0.0s Chrome/156.0.8078.81
+done

@@ -148,7 +148,9 @@ try {
 
 buildTestPage();
 const server = await serve(ROOT, 0);
-const browser = await launch({ headless: true });
+// GB-281: one browser for the batch, but a FAIL/ERROR can leave Chrome unable to
+// Page.navigate for later checks — relaunch (keep the server) when that happens.
+let browser = await launch({ headless: true });
 const results = [];
 
 // CU-235. The first `// query: a=1&b=2` in the test's first lines is that page's flags.
@@ -224,7 +226,16 @@ async function runOne(name) {
   const detail = note ? '  — ' + note
     : (info ? '  — ' + (raw.trim() ? raw.trim().split('\n')[0].slice(0, 90) : 'returned nothing') : '');
   console.log(`${tag} ${name.padEnd(6)} ${String(pass).padStart(3)} pass ${String(fail).padStart(3)} fail  ${((Date.now() - t0) / 1000).toFixed(1)}s${detail}`);
-  try { await page.send('Page.close', {}); } catch { /* target already gone */ }
+  // GB-281: Target.closeTarget (via page.close) so the window actually goes away.
+  try { await page.close(); } catch { /* target already gone */ }
+  // A red or a navigate/timeout ERROR can still wedge Chrome (orphaned renderers,
+  // audio). Relaunch before the next check so one red cannot take the rest.
+  if (fail || note) {
+    const why = note || (fail + ' fail');
+    console.log(`           recovering browser after ${name}: ${why}`);
+    try { await browser.close(); } catch { /* already gone */ }
+    browser = await launch({ headless: true });
+  }
 }
 
 // A simple worker pool: JOBS pages in flight at once.

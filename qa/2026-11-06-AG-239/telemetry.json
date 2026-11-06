@@ -1,0 +1,5056 @@
+{
+  "timestamp": "2026-11-06T10:16:53.936Z",
+  "agent": "antigravity",
+  "task": "AG-239",
+  "runs": {
+    "tg_first_person": {
+      "walk": {
+        "traceList": [
+          {
+            "t": 28.093,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 29.943,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 33.543,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 34.644,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 38.276,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 41.893,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+            "v": 0.85
+          }
+        ],
+        "elapsedS": 20.151,
+        "totalDist": 618.75,
+        "avgSpeed": 30.71,
+        "reversals": 0,
+        "finalPos": [
+          -26,
+          -200,
+          -612.75
+        ],
+        "distToPath": 483.251,
+        "groundType": null,
+        "isTraining": true,
+        "viewFirst": true
+      },
+      "run": {
+        "traceList": [
+          {
+            "t": 46.309,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 46.526,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 46.76,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 46.976,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 47.209,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 47.426,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 47.643,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 47.876,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 48.093,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 48.325,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 48.543,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 48.776,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 48.993,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 49.226,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 49.443,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 49.676,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 49.893,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 50.125,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 50.343,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 50.56,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 50.793,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 51.009,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 51.243,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 51.458,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 51.693,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 51.909,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 52.142,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 52.359,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 52.592,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 52.809,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 53.043,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 53.257,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 53.492,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 53.707,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 53.926,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 54.159,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 54.376,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 54.609,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 54.825,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 55.059,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 55.275,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 55.509,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 55.726,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 55.959,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 56.176,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 56.409,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 56.626,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 56.843,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 57.076,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 57.293,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 57.526,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 57.743,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 57.976,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 58.192,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 58.427,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 58.644,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 58.876,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 59.093,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 59.326,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 59.542,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 59.776,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 59.991,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 60.209,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 60.443,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 60.66,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 60.89,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 61.107,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 61.34,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 61.558,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 61.792,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 62.007,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 62.241,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 62.459,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 62.692,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 62.909,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 63.125,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 63.358,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 63.576,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 63.81,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 64.026,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 64.259,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 64.476,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 64.71,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 64.926,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 65.159,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 65.374,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 65.609,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 65.826,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 66.057,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+            "v": 0.85
+          }
+        ],
+        "elapsedS": 20.13,
+        "totalDist": 618.75,
+        "avgSpeed": 30.74,
+        "reversals": 0,
+        "finalPos": [
+          -26,
+          -200,
+          -612.75
+        ],
+        "distToPath": 483.251,
+        "groundType": null,
+        "isTraining": true,
+        "viewFirst": true
+      },
+      "walkSummary": [
+        {
+          "kind": "take",
+          "name": "player/footstep-stone",
+          "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+          "v": 0.85,
+          "count": 2,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.1
+        },
+        {
+          "kind": "take",
+          "name": "player/footstep-stone",
+          "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+          "v": 0.85,
+          "count": 2,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.1
+        },
+        {
+          "kind": "take",
+          "name": "player/footstep-stone",
+          "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+          "v": 0.85,
+          "count": 1,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.05
+        },
+        {
+          "kind": "take",
+          "name": "player/footstep-stone",
+          "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+          "v": 0.85,
+          "count": 1,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.05
+        }
+      ],
+      "runSummary": [
+        {
+          "kind": "take",
+          "name": "player/footstep-stone",
+          "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+          "v": 0.85,
+          "count": 25,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 1.24
+        },
+        {
+          "kind": "take",
+          "name": "player/footstep-stone",
+          "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+          "v": 0.85,
+          "count": 22,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 1.09
+        },
+        {
+          "kind": "take",
+          "name": "player/footstep-stone",
+          "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+          "v": 0.85,
+          "count": 22,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 1.09
+        },
+        {
+          "kind": "take",
+          "name": "player/footstep-stone",
+          "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+          "v": 0.85,
+          "count": 20,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.99
+        }
+      ]
+    },
+    "tg_third_person": {
+      "walk": {
+        "traceList": [
+          {
+            "t": 68.46,
+            "kind": "noise",
+            "name": "playerBreath",
+            "file": "bandpass 952 Hz",
+            "v": 0.04
+          },
+          {
+            "t": 68.46,
+            "kind": "noise",
+            "name": "playerBreath",
+            "file": "lowpass 280 Hz",
+            "v": 0.01
+          },
+          {
+            "t": 69.509,
+            "kind": "take",
+            "name": "player/breath-tired",
+            "file": "player/breath-tired/breath-tired-2.ogg",
+            "v": 0.84
+          },
+          {
+            "t": 71.242,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 71.942,
+            "kind": "noise",
+            "name": "playerBreath",
+            "file": "bandpass 2310 Hz",
+            "v": 0.02
+          },
+          {
+            "t": 74.858,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 78.458,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 81.643,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 85.258,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          }
+        ],
+        "elapsedS": 20.2,
+        "totalDist": 618.75,
+        "avgSpeed": 30.63,
+        "reversals": 0,
+        "finalPos": [
+          -26,
+          -200,
+          -612.75
+        ],
+        "distToPath": 483.251,
+        "groundType": null,
+        "isTraining": true,
+        "viewFirst": false
+      },
+      "run": {
+        "traceList": [
+          {
+            "t": 89.159,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 89.375,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 89.608,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 89.825,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 90.058,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 90.275,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 90.508,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 90.725,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 90.958,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 91.175,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 91.392,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 91.623,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 91.855,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 92.074,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 92.291,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 92.525,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 92.742,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 92.975,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 93.192,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 93.425,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 93.641,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 93.874,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 94.09,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 94.323,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 94.542,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 94.758,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 94.992,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 95.208,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 95.441,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 95.658,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 95.89,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 96.108,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 96.341,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 96.558,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 96.79,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 97.007,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 97.241,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 97.458,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 97.691,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 97.907,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 98.14,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 98.357,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 98.575,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 98.807,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 99.025,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 99.258,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 99.473,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 99.708,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 99.923,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 100.156,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 100.375,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 100.607,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 100.824,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 101.041,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 101.273,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 101.492,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 101.725,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 101.942,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 102.173,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 102.391,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 102.624,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 102.841,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 103.075,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 103.292,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 103.524,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 103.741,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 103.958,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 104.192,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 104.407,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 104.642,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 104.873,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 105.091,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 105.308,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 105.541,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 105.758,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 105.991,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 106.208,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 106.441,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 106.658,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 106.891,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 107.108,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 107.325,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 107.558,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 107.774,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 108.007,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 108.224,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 108.458,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 108.673,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 108.907,
+            "kind": "take",
+            "name": "player/footstep-stone",
+            "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+            "v": 0.85
+          }
+        ],
+        "elapsedS": 20.149,
+        "totalDist": 618.75,
+        "avgSpeed": 30.71,
+        "reversals": 0,
+        "finalPos": [
+          -26,
+          -200,
+          -612.75
+        ],
+        "distToPath": 483.251,
+        "groundType": null,
+        "isTraining": true,
+        "viewFirst": false
+      },
+      "walkSummary": [
+        {
+          "kind": "take",
+          "name": "player/footstep-stone",
+          "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+          "v": 0.85,
+          "count": 2,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.1
+        },
+        {
+          "kind": "take",
+          "name": "player/footstep-stone",
+          "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+          "v": 0.85,
+          "count": 2,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.1
+        },
+        {
+          "kind": "noise",
+          "name": "playerBreath",
+          "file": "bandpass 952 Hz",
+          "v": 0.04,
+          "count": 1,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.05
+        },
+        {
+          "kind": "noise",
+          "name": "playerBreath",
+          "file": "lowpass 280 Hz",
+          "v": 0.01,
+          "count": 1,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.05
+        },
+        {
+          "kind": "take",
+          "name": "player/breath-tired",
+          "file": "player/breath-tired/breath-tired-2.ogg",
+          "v": 0.84,
+          "count": 1,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.05
+        },
+        {
+          "kind": "noise",
+          "name": "playerBreath",
+          "file": "bandpass 2310 Hz",
+          "v": 0.02,
+          "count": 1,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.05
+        },
+        {
+          "kind": "take",
+          "name": "player/footstep-stone",
+          "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+          "v": 0.85,
+          "count": 1,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.05
+        }
+      ],
+      "runSummary": [
+        {
+          "kind": "take",
+          "name": "player/footstep-stone",
+          "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+          "v": 0.85,
+          "count": 26,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 1.29
+        },
+        {
+          "kind": "take",
+          "name": "player/footstep-stone",
+          "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+          "v": 0.85,
+          "count": 21,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 1.04
+        },
+        {
+          "kind": "take",
+          "name": "player/footstep-stone",
+          "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+          "v": 0.85,
+          "count": 21,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 1.04
+        },
+        {
+          "kind": "take",
+          "name": "player/footstep-stone",
+          "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+          "v": 0.85,
+          "count": 21,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 1.04
+        }
+      ]
+    },
+    "trail_first_person": {
+      "walk": {
+        "traceList": [
+          {
+            "t": 34.573,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 34.994,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 35.486,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 35.824,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 36.146,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 36.483,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 36.844,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 36.96,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 37.291,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 37.624,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 37.957,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 38.291,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 38.616,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 38.941,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 39.27,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 39.599,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 39.943,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 40.177,
+            "kind": "take",
+            "name": "bullet-impacts/leaves",
+            "file": "bullet-impacts/leaves/leaves-3.ogg",
+            "v": 0.8
+          },
+          {
+            "t": 40.261,
+            "kind": "take",
+            "name": "player/footstep-leaves",
+            "file": "player/footstep-leaves/pk-ocular-grass-step-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 40.595,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 41.09,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 41.43,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 41.756,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 41.905,
+            "kind": "tone",
+            "name": "owlHoot",
+            "file": "sine 390 Hz",
+            "v": 0.03
+          },
+          {
+            "t": 41.905,
+            "kind": "tone",
+            "name": "owlHoot",
+            "file": "sine 370 Hz",
+            "v": 0.03
+          },
+          {
+            "t": 42.076,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 42.414,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 42.747,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 43.074,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 43.41,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 43.732,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 43.792,
+            "kind": "take",
+            "name": "horde/distant",
+            "file": "horde/distant/horde-distant-1.ogg",
+            "v": 0.69
+          },
+          {
+            "t": 44.072,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 44.39,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 44.733,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 45.213,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 45.542,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 45.862,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 46.195,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 46.526,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 46.865,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 47.193,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 47.524,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 47.854,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 48.182,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 48.511,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 48.907,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 49.017,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 49.341,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 49.685,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 50.006,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 50.334,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 50.679,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 50.995,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 51.323,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 51.654,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 51.99,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 52.32,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 52.648,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 52.972,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 53.458,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 53.782,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 54.109,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 54.44,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-03.ogg",
+            "v": 0.85
+          }
+        ],
+        "elapsedS": 20.248,
+        "totalDist": 138.78,
+        "avgSpeed": 6.85,
+        "reversals": 5,
+        "finalPos": [
+          18.6,
+          -3.26,
+          -13.45
+        ],
+        "distToPath": 0.135,
+        "groundType": null,
+        "isTraining": false,
+        "viewFirst": true
+      },
+      "run": {
+        "traceList": [
+          {
+            "t": 55.788,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-02.ogg",
+            "v": 1
+          },
+          {
+            "t": 56.014,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-04.ogg",
+            "v": 1
+          },
+          {
+            "t": 56.251,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 56.48,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-04.ogg",
+            "v": 1
+          },
+          {
+            "t": 56.699,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-02.ogg",
+            "v": 1
+          },
+          {
+            "t": 56.915,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 57.302,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-02.ogg",
+            "v": 1
+          },
+          {
+            "t": 57.517,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 57.746,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-03.ogg",
+            "v": 1
+          },
+          {
+            "t": 57.977,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-02.ogg",
+            "v": 1
+          },
+          {
+            "t": 58.19,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-03.ogg",
+            "v": 1
+          },
+          {
+            "t": 58.386,
+            "kind": "take",
+            "name": "horde/distant",
+            "file": "horde/distant/horde-distant-1.ogg",
+            "v": 0.71
+          },
+          {
+            "t": 58.418,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-04.ogg",
+            "v": 1
+          },
+          {
+            "t": 58.649,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-03.ogg",
+            "v": 1
+          },
+          {
+            "t": 58.864,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-04.ogg",
+            "v": 1
+          },
+          {
+            "t": 59.094,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-03.ogg",
+            "v": 1
+          },
+          {
+            "t": 59.196,
+            "kind": "take",
+            "name": "bullet-impacts/leaves",
+            "file": "bullet-impacts/leaves/leaves-2.ogg",
+            "v": 0.8
+          },
+          {
+            "t": 59.325,
+            "kind": "take",
+            "name": "player/footstep-leaves",
+            "file": "player/footstep-leaves/pk-ocular-grass-step-02.ogg",
+            "v": 1
+          },
+          {
+            "t": 59.604,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-04.ogg",
+            "v": 1
+          },
+          {
+            "t": 59.72,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-02.ogg",
+            "v": 1
+          },
+          {
+            "t": 59.935,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 60.163,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-03.ogg",
+            "v": 1
+          },
+          {
+            "t": 60.392,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 60.621,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-02.ogg",
+            "v": 1
+          },
+          {
+            "t": 60.852,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-03.ogg",
+            "v": 1
+          },
+          {
+            "t": 61.069,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-04.ogg",
+            "v": 1
+          },
+          {
+            "t": 61.298,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 61.503,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-02.ogg",
+            "v": 1
+          },
+          {
+            "t": 61.725,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 61.964,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-02.ogg",
+            "v": 1
+          },
+          {
+            "t": 62.182,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 62.364,
+            "kind": "noise",
+            "name": "playerBreath",
+            "file": "bandpass 956 Hz",
+            "v": 0.05
+          },
+          {
+            "t": 62.364,
+            "kind": "noise",
+            "name": "playerBreath",
+            "file": "lowpass 280 Hz",
+            "v": 0.02
+          },
+          {
+            "t": 62.545,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-04.ogg",
+            "v": 1
+          },
+          {
+            "t": 62.777,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-02.ogg",
+            "v": 1
+          },
+          {
+            "t": 62.995,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 63.225,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-03.ogg",
+            "v": 1
+          },
+          {
+            "t": 63.442,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-04.ogg",
+            "v": 1
+          },
+          {
+            "t": 63.674,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 63.891,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-03.ogg",
+            "v": 1
+          },
+          {
+            "t": 64.124,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-04.ogg",
+            "v": 1
+          },
+          {
+            "t": 64.34,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-03.ogg",
+            "v": 1
+          },
+          {
+            "t": 64.579,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 64.796,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-03.ogg",
+            "v": 1
+          },
+          {
+            "t": 64.962,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 64.979,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-02.ogg",
+            "v": 1
+          },
+          {
+            "t": 65.203,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-04.ogg",
+            "v": 1
+          },
+          {
+            "t": 65.422,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 65.651,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-02.ogg",
+            "v": 1
+          },
+          {
+            "t": 65.876,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 66.115,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-02.ogg",
+            "v": 1
+          },
+          {
+            "t": 66.328,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-04.ogg",
+            "v": 1
+          },
+          {
+            "t": 66.562,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-02.ogg",
+            "v": 1
+          },
+          {
+            "t": 66.777,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 66.995,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-03.ogg",
+            "v": 1
+          },
+          {
+            "t": 67.221,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-04.ogg",
+            "v": 1
+          },
+          {
+            "t": 67.451,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-02.ogg",
+            "v": 1
+          },
+          {
+            "t": 67.82,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-03.ogg",
+            "v": 1
+          },
+          {
+            "t": 68.053,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 68.269,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-02.ogg",
+            "v": 1
+          },
+          {
+            "t": 68.501,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-03.ogg",
+            "v": 1
+          },
+          {
+            "t": 68.716,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-02.ogg",
+            "v": 1
+          },
+          {
+            "t": 68.945,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 69.173,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-03.ogg",
+            "v": 1
+          },
+          {
+            "t": 69.401,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-02.ogg",
+            "v": 1
+          },
+          {
+            "t": 69.633,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 69.85,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-04.ogg",
+            "v": 1
+          },
+          {
+            "t": 70.064,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-02.ogg",
+            "v": 1
+          },
+          {
+            "t": 70.239,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-03.ogg",
+            "v": 1
+          },
+          {
+            "t": 70.463,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 70.556,
+            "kind": "take",
+            "name": "world/owl",
+            "file": "world/owl/owl-3.ogg",
+            "v": 0.8
+          },
+          {
+            "t": 70.709,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-04.ogg",
+            "v": 1
+          },
+          {
+            "t": 70.924,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 71.143,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-04.ogg",
+            "v": 1
+          },
+          {
+            "t": 71.36,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 71.618,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-02.ogg",
+            "v": 1
+          },
+          {
+            "t": 71.815,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-04.ogg",
+            "v": 1
+          },
+          {
+            "t": 72.03,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-02.ogg",
+            "v": 1
+          },
+          {
+            "t": 72.267,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-04.ogg",
+            "v": 1
+          },
+          {
+            "t": 72.478,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 72.709,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-03.ogg",
+            "v": 1
+          },
+          {
+            "t": 73.081,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-04.ogg",
+            "v": 1
+          },
+          {
+            "t": 73.312,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-03.ogg",
+            "v": 1
+          },
+          {
+            "t": 73.526,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-02.ogg",
+            "v": 1
+          },
+          {
+            "t": 73.757,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 73.986,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-03.ogg",
+            "v": 1
+          },
+          {
+            "t": 74.2,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 74.43,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-03.ogg",
+            "v": 1
+          },
+          {
+            "t": 74.659,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 74.87,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-04.ogg",
+            "v": 1
+          },
+          {
+            "t": 75.103,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-02.ogg",
+            "v": 1
+          },
+          {
+            "t": 75.505,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-03.ogg",
+            "v": 1
+          },
+          {
+            "t": 75.72,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-04.ogg",
+            "v": 1
+          },
+          {
+            "t": 75.951,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-02.ogg",
+            "v": 1
+          }
+        ],
+        "elapsedS": 20.253,
+        "totalDist": 219.55,
+        "avgSpeed": 10.84,
+        "reversals": 8,
+        "finalPos": [
+          30.41,
+          -5.12,
+          -17.5
+        ],
+        "distToPath": 3.986,
+        "groundType": null,
+        "isTraining": false,
+        "viewFirst": true
+      },
+      "walkSummary": [
+        {
+          "kind": "take",
+          "name": "player/footstep-dirt",
+          "file": "player/footstep-dirt/pk-ocular-gravel-step-04.ogg",
+          "v": 0.85,
+          "count": 18,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.89
+        },
+        {
+          "kind": "take",
+          "name": "player/footstep-dirt",
+          "file": "player/footstep-dirt/pk-ocular-gravel-step-01.ogg",
+          "v": 0.85,
+          "count": 15,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.74
+        },
+        {
+          "kind": "take",
+          "name": "player/footstep-dirt",
+          "file": "player/footstep-dirt/pk-ocular-gravel-step-03.ogg",
+          "v": 0.85,
+          "count": 13,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.64
+        },
+        {
+          "kind": "take",
+          "name": "player/footstep-dirt",
+          "file": "player/footstep-dirt/pk-ocular-gravel-step-02.ogg",
+          "v": 0.85,
+          "count": 13,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.64
+        },
+        {
+          "kind": "take",
+          "name": "bullet-impacts/leaves",
+          "file": "bullet-impacts/leaves/leaves-3.ogg",
+          "v": 0.8,
+          "count": 1,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.05
+        },
+        {
+          "kind": "take",
+          "name": "player/footstep-leaves",
+          "file": "player/footstep-leaves/pk-ocular-grass-step-01.ogg",
+          "v": 0.85,
+          "count": 1,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.05
+        },
+        {
+          "kind": "tone",
+          "name": "owlHoot",
+          "file": "sine 390 Hz",
+          "v": 0.03,
+          "count": 1,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.05
+        },
+        {
+          "kind": "tone",
+          "name": "owlHoot",
+          "file": "sine 370 Hz",
+          "v": 0.03,
+          "count": 1,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.05
+        },
+        {
+          "kind": "take",
+          "name": "horde/distant",
+          "file": "horde/distant/horde-distant-1.ogg",
+          "v": 0.69,
+          "count": 1,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.05
+        }
+      ],
+      "runSummary": [
+        {
+          "kind": "take",
+          "name": "player/footstep-run-dirt",
+          "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+          "v": 1,
+          "count": 25,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 1.23
+        },
+        {
+          "kind": "take",
+          "name": "player/footstep-run-dirt",
+          "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-02.ogg",
+          "v": 1,
+          "count": 23,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 1.14
+        },
+        {
+          "kind": "take",
+          "name": "player/footstep-run-dirt",
+          "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-04.ogg",
+          "v": 1,
+          "count": 20,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.99
+        },
+        {
+          "kind": "take",
+          "name": "player/footstep-run-dirt",
+          "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-03.ogg",
+          "v": 1,
+          "count": 20,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.99
+        },
+        {
+          "kind": "take",
+          "name": "horde/distant",
+          "file": "horde/distant/horde-distant-1.ogg",
+          "v": 0.71,
+          "count": 1,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.05
+        },
+        {
+          "kind": "take",
+          "name": "bullet-impacts/leaves",
+          "file": "bullet-impacts/leaves/leaves-2.ogg",
+          "v": 0.8,
+          "count": 1,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.05
+        },
+        {
+          "kind": "take",
+          "name": "player/footstep-leaves",
+          "file": "player/footstep-leaves/pk-ocular-grass-step-02.ogg",
+          "v": 1,
+          "count": 1,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.05
+        },
+        {
+          "kind": "noise",
+          "name": "playerBreath",
+          "file": "bandpass 956 Hz",
+          "v": 0.05,
+          "count": 1,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.05
+        },
+        {
+          "kind": "noise",
+          "name": "playerBreath",
+          "file": "lowpass 280 Hz",
+          "v": 0.02,
+          "count": 1,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.05
+        },
+        {
+          "kind": "take",
+          "name": "world/owl",
+          "file": "world/owl/owl-3.ogg",
+          "v": 0.8,
+          "count": 1,
+          "classification": "NONE",
+          "bus": "amb",
+          "ratePerSec": 0.05
+        }
+      ]
+    },
+    "trail_third_person": {
+      "walk": {
+        "traceList": [
+          {
+            "t": 77.741,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 77.759,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 78.072,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 78.403,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 78.741,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 79.074,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 79.402,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 79.732,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 80.058,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 80.39,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 80.391,
+            "kind": "take",
+            "name": "bullet-impacts/leaves",
+            "file": "bullet-impacts/leaves/leaves-1.ogg",
+            "v": 0.8
+          },
+          {
+            "t": 80.726,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 80.743,
+            "kind": "take",
+            "name": "horde/distant",
+            "file": "horde/distant/horde-distant-1.ogg",
+            "v": 0.77
+          },
+          {
+            "t": 81.043,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 81.376,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 81.707,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 82.04,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 82.373,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 82.708,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 83.04,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 83.358,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 83.689,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 84.022,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 84.364,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 84.693,
+            "kind": "take",
+            "name": "player/footstep-leaves",
+            "file": "player/footstep-leaves/pk-ocular-grass-step-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 85.022,
+            "kind": "take",
+            "name": "player/footstep-leaves",
+            "file": "player/footstep-leaves/pk-ocular-grass-step-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 85.058,
+            "kind": "take",
+            "name": "bullet-impacts/leaves",
+            "file": "bullet-impacts/leaves/leaves-2.ogg",
+            "v": 0.8
+          },
+          {
+            "t": 85.354,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 85.684,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 86.011,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 86.338,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 86.679,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 87.01,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 87.341,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 87.673,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 87.99,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 88.323,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 88.657,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 88.987,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 89.315,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 89.646,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 89.975,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 90.304,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 90.632,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 90.963,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 91.295,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 91.631,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 91.663,
+            "kind": "take",
+            "name": "horde/distant",
+            "file": "horde/distant/horde-distant-1.ogg",
+            "v": 0.65
+          },
+          {
+            "t": 91.963,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 92.292,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 92.631,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 92.957,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 93.288,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 93.627,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 93.94,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 94.284,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 94.612,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-02.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 94.94,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 95.273,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-04.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 95.608,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 95.935,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 96.263,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 96.591,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 96.922,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-03.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 97.25,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-01.ogg",
+            "v": 0.85
+          },
+          {
+            "t": 97.583,
+            "kind": "take",
+            "name": "player/footstep-dirt",
+            "file": "player/footstep-dirt/pk-ocular-gravel-step-02.ogg",
+            "v": 0.85
+          }
+        ],
+        "elapsedS": 20.219,
+        "totalDist": 86.28,
+        "avgSpeed": 4.27,
+        "reversals": 0,
+        "finalPos": [
+          4.28,
+          2.14,
+          57.44
+        ],
+        "distToPath": 31.131,
+        "groundType": null,
+        "isTraining": false,
+        "viewFirst": false
+      },
+      "run": {
+        "traceList": [
+          {
+            "t": 98.898,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-04.ogg",
+            "v": 1
+          },
+          {
+            "t": 99.113,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-02.ogg",
+            "v": 1
+          },
+          {
+            "t": 99.342,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-03.ogg",
+            "v": 1
+          },
+          {
+            "t": 99.576,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-02.ogg",
+            "v": 1
+          },
+          {
+            "t": 99.79,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-03.ogg",
+            "v": 1
+          },
+          {
+            "t": 100.023,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-02.ogg",
+            "v": 1
+          },
+          {
+            "t": 100.252,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 100.466,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-03.ogg",
+            "v": 1
+          },
+          {
+            "t": 100.485,
+            "kind": "take",
+            "name": "bullet-impacts/leaves",
+            "file": "bullet-impacts/leaves/leaves-1.ogg",
+            "v": 0.8
+          },
+          {
+            "t": 100.699,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-02.ogg",
+            "v": 1
+          },
+          {
+            "t": 100.912,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-03.ogg",
+            "v": 1
+          },
+          {
+            "t": 101.143,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 101.358,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-04.ogg",
+            "v": 1
+          },
+          {
+            "t": 101.609,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 101.811,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-03.ogg",
+            "v": 1
+          },
+          {
+            "t": 102.041,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-04.ogg",
+            "v": 1
+          },
+          {
+            "t": 102.269,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 102.482,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-02.ogg",
+            "v": 1
+          },
+          {
+            "t": 102.712,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 102.943,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-03.ogg",
+            "v": 1
+          },
+          {
+            "t": 103.158,
+            "kind": "take",
+            "name": "player/footstep-leaves",
+            "file": "player/footstep-leaves/pk-ocular-grass-step-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 103.391,
+            "kind": "take",
+            "name": "player/footstep-leaves",
+            "file": "player/footstep-leaves/pk-ocular-grass-step-02.ogg",
+            "v": 1
+          },
+          {
+            "t": 103.409,
+            "kind": "take",
+            "name": "bullet-impacts/leaves",
+            "file": "bullet-impacts/leaves/leaves-2.ogg",
+            "v": 0.8
+          },
+          {
+            "t": 103.615,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-04.ogg",
+            "v": 1
+          },
+          {
+            "t": 103.83,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-03.ogg",
+            "v": 1
+          },
+          {
+            "t": 104.057,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 104.289,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-02.ogg",
+            "v": 1
+          },
+          {
+            "t": 104.502,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 104.728,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-03.ogg",
+            "v": 1
+          },
+          {
+            "t": 104.959,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 105.175,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-04.ogg",
+            "v": 1
+          },
+          {
+            "t": 105.406,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-03.ogg",
+            "v": 1
+          },
+          {
+            "t": 105.636,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 105.851,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-03.ogg",
+            "v": 1
+          },
+          {
+            "t": 106.079,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-02.ogg",
+            "v": 1
+          },
+          {
+            "t": 106.296,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-03.ogg",
+            "v": 1
+          },
+          {
+            "t": 106.529,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-02.ogg",
+            "v": 1
+          },
+          {
+            "t": 106.744,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 106.976,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-04.ogg",
+            "v": 1
+          },
+          {
+            "t": 107.192,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-02.ogg",
+            "v": 1
+          },
+          {
+            "t": 107.423,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-03.ogg",
+            "v": 1
+          },
+          {
+            "t": 107.656,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 107.867,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-04.ogg",
+            "v": 1
+          },
+          {
+            "t": 108.098,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-02.ogg",
+            "v": 1
+          },
+          {
+            "t": 108.328,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-03.ogg",
+            "v": 1
+          },
+          {
+            "t": 108.543,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 108.774,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-02.ogg",
+            "v": 1
+          },
+          {
+            "t": 108.992,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 109.225,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-03.ogg",
+            "v": 1
+          },
+          {
+            "t": 109.44,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 109.675,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-02.ogg",
+            "v": 1
+          },
+          {
+            "t": 109.893,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 110.123,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-03.ogg",
+            "v": 1
+          },
+          {
+            "t": 110.34,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-02.ogg",
+            "v": 1
+          },
+          {
+            "t": 110.601,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-03.ogg",
+            "v": 1
+          },
+          {
+            "t": 110.782,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 111.013,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-04.ogg",
+            "v": 1
+          },
+          {
+            "t": 111.243,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-02.ogg",
+            "v": 1
+          },
+          {
+            "t": 111.458,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 111.694,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-03.ogg",
+            "v": 1
+          },
+          {
+            "t": 111.911,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 112.142,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-03.ogg",
+            "v": 1
+          },
+          {
+            "t": 112.357,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-02.ogg",
+            "v": 1
+          },
+          {
+            "t": 112.589,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 112.807,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-02.ogg",
+            "v": 1
+          },
+          {
+            "t": 113.04,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 113.19,
+            "kind": "take",
+            "name": "bullet-impacts/leaves",
+            "file": "bullet-impacts/leaves/leaves-1.ogg",
+            "v": 0.8
+          },
+          {
+            "t": 113.254,
+            "kind": "take",
+            "name": "player/footstep-leaves",
+            "file": "player/footstep-leaves/pk-ocular-grass-step-04.ogg",
+            "v": 1
+          },
+          {
+            "t": 113.483,
+            "kind": "take",
+            "name": "player/footstep-leaves",
+            "file": "player/footstep-leaves/pk-ocular-grass-step-03.ogg",
+            "v": 1
+          },
+          {
+            "t": 113.485,
+            "kind": "take",
+            "name": "bullet-impacts/leaves",
+            "file": "bullet-impacts/leaves/leaves-4.ogg",
+            "v": 0.8
+          },
+          {
+            "t": 113.709,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-02.ogg",
+            "v": 1
+          },
+          {
+            "t": 113.925,
+            "kind": "take",
+            "name": "player/footstep-water",
+            "file": "player/footstep-water/pk-ocular-boot-water-03.ogg",
+            "v": 1
+          },
+          {
+            "t": 114.171,
+            "kind": "take",
+            "name": "player/footstep-water",
+            "file": "player/footstep-water/pk-ocular-boot-water-02.ogg",
+            "v": 1
+          },
+          {
+            "t": 114.387,
+            "kind": "take",
+            "name": "player/footstep-water",
+            "file": "player/footstep-water/pk-ocular-boot-water-03.ogg",
+            "v": 1
+          },
+          {
+            "t": 114.617,
+            "kind": "take",
+            "name": "player/footstep-water",
+            "file": "player/footstep-water/pk-ocular-boot-water-04.ogg",
+            "v": 1
+          },
+          {
+            "t": 114.836,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-03.ogg",
+            "v": 1
+          },
+          {
+            "t": 115.053,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 115.283,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-04.ogg",
+            "v": 1
+          },
+          {
+            "t": 115.507,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-02.ogg",
+            "v": 1
+          },
+          {
+            "t": 115.733,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 115.948,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-04.ogg",
+            "v": 1
+          },
+          {
+            "t": 116.184,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 116.394,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-04.ogg",
+            "v": 1
+          },
+          {
+            "t": 116.642,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-03.ogg",
+            "v": 1
+          },
+          {
+            "t": 116.841,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-04.ogg",
+            "v": 1
+          },
+          {
+            "t": 117.075,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 117.292,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-03.ogg",
+            "v": 1
+          },
+          {
+            "t": 117.518,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-04.ogg",
+            "v": 1
+          },
+          {
+            "t": 117.694,
+            "kind": "tone",
+            "name": "trapperIronChime",
+            "file": "triangle 880 Hz",
+            "v": 0.01
+          },
+          {
+            "t": 117.695,
+            "kind": "tone",
+            "name": "trapperIronChime",
+            "file": "sine 1760 Hz",
+            "v": 0
+          },
+          {
+            "t": 117.695,
+            "kind": "noise",
+            "name": "trapperIronChime",
+            "file": "highpass 5000 Hz",
+            "v": 0
+          },
+          {
+            "t": 117.747,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 117.963,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-02.ogg",
+            "v": 1
+          },
+          {
+            "t": 118.13,
+            "kind": "take",
+            "name": "horde/distant",
+            "file": "horde/distant/horde-distant-1.ogg",
+            "v": 0.7
+          },
+          {
+            "t": 118.196,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+            "v": 1
+          },
+          {
+            "t": 118.414,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-03.ogg",
+            "v": 1
+          },
+          {
+            "t": 118.663,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-02.ogg",
+            "v": 1
+          },
+          {
+            "t": 118.873,
+            "kind": "take",
+            "name": "player/footstep-run-dirt",
+            "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-04.ogg",
+            "v": 1
+          }
+        ],
+        "elapsedS": 20.147,
+        "totalDist": 149.88,
+        "avgSpeed": 7.44,
+        "reversals": 0,
+        "finalPos": [
+          -3.21,
+          3.04,
+          115
+        ],
+        "distToPath": 26.502,
+        "groundType": null,
+        "isTraining": false,
+        "viewFirst": false
+      },
+      "walkSummary": [
+        {
+          "kind": "take",
+          "name": "player/footstep-dirt",
+          "file": "player/footstep-dirt/pk-ocular-gravel-step-01.ogg",
+          "v": 0.85,
+          "count": 19,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.94
+        },
+        {
+          "kind": "take",
+          "name": "player/footstep-dirt",
+          "file": "player/footstep-dirt/pk-ocular-gravel-step-04.ogg",
+          "v": 0.85,
+          "count": 16,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.79
+        },
+        {
+          "kind": "take",
+          "name": "player/footstep-dirt",
+          "file": "player/footstep-dirt/pk-ocular-gravel-step-02.ogg",
+          "v": 0.85,
+          "count": 14,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.69
+        },
+        {
+          "kind": "take",
+          "name": "player/footstep-dirt",
+          "file": "player/footstep-dirt/pk-ocular-gravel-step-03.ogg",
+          "v": 0.85,
+          "count": 11,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.54
+        },
+        {
+          "kind": "take",
+          "name": "horde/distant",
+          "file": "horde/distant/horde-distant-1.ogg",
+          "v": 0.77,
+          "count": 2,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.1
+        },
+        {
+          "kind": "take",
+          "name": "bullet-impacts/leaves",
+          "file": "bullet-impacts/leaves/leaves-1.ogg",
+          "v": 0.8,
+          "count": 1,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.05
+        },
+        {
+          "kind": "take",
+          "name": "player/footstep-leaves",
+          "file": "player/footstep-leaves/pk-ocular-grass-step-03.ogg",
+          "v": 0.85,
+          "count": 1,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.05
+        },
+        {
+          "kind": "take",
+          "name": "player/footstep-leaves",
+          "file": "player/footstep-leaves/pk-ocular-grass-step-04.ogg",
+          "v": 0.85,
+          "count": 1,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.05
+        },
+        {
+          "kind": "take",
+          "name": "bullet-impacts/leaves",
+          "file": "bullet-impacts/leaves/leaves-2.ogg",
+          "v": 0.8,
+          "count": 1,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.05
+        }
+      ],
+      "runSummary": [
+        {
+          "kind": "take",
+          "name": "player/footstep-run-dirt",
+          "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+          "v": 1,
+          "count": 26,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 1.29
+        },
+        {
+          "kind": "take",
+          "name": "player/footstep-run-dirt",
+          "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-03.ogg",
+          "v": 1,
+          "count": 22,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 1.09
+        },
+        {
+          "kind": "take",
+          "name": "player/footstep-run-dirt",
+          "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-02.ogg",
+          "v": 1,
+          "count": 20,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.99
+        },
+        {
+          "kind": "take",
+          "name": "player/footstep-run-dirt",
+          "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-04.ogg",
+          "v": 1,
+          "count": 14,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.69
+        },
+        {
+          "kind": "take",
+          "name": "bullet-impacts/leaves",
+          "file": "bullet-impacts/leaves/leaves-1.ogg",
+          "v": 0.8,
+          "count": 2,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.1
+        },
+        {
+          "kind": "take",
+          "name": "player/footstep-water",
+          "file": "player/footstep-water/pk-ocular-boot-water-03.ogg",
+          "v": 1,
+          "count": 2,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.1
+        },
+        {
+          "kind": "take",
+          "name": "player/footstep-leaves",
+          "file": "player/footstep-leaves/pk-ocular-grass-step-01.ogg",
+          "v": 1,
+          "count": 1,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.05
+        },
+        {
+          "kind": "take",
+          "name": "player/footstep-leaves",
+          "file": "player/footstep-leaves/pk-ocular-grass-step-02.ogg",
+          "v": 1,
+          "count": 1,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.05
+        },
+        {
+          "kind": "take",
+          "name": "bullet-impacts/leaves",
+          "file": "bullet-impacts/leaves/leaves-2.ogg",
+          "v": 0.8,
+          "count": 1,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.05
+        },
+        {
+          "kind": "take",
+          "name": "player/footstep-leaves",
+          "file": "player/footstep-leaves/pk-ocular-grass-step-04.ogg",
+          "v": 1,
+          "count": 1,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.05
+        },
+        {
+          "kind": "take",
+          "name": "player/footstep-leaves",
+          "file": "player/footstep-leaves/pk-ocular-grass-step-03.ogg",
+          "v": 1,
+          "count": 1,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.05
+        },
+        {
+          "kind": "take",
+          "name": "bullet-impacts/leaves",
+          "file": "bullet-impacts/leaves/leaves-4.ogg",
+          "v": 0.8,
+          "count": 1,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.05
+        },
+        {
+          "kind": "take",
+          "name": "player/footstep-water",
+          "file": "player/footstep-water/pk-ocular-boot-water-02.ogg",
+          "v": 1,
+          "count": 1,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.05
+        },
+        {
+          "kind": "take",
+          "name": "player/footstep-water",
+          "file": "player/footstep-water/pk-ocular-boot-water-04.ogg",
+          "v": 1,
+          "count": 1,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.05
+        },
+        {
+          "kind": "tone",
+          "name": "trapperIronChime",
+          "file": "triangle 880 Hz",
+          "v": 0.01,
+          "count": 1,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.05
+        },
+        {
+          "kind": "tone",
+          "name": "trapperIronChime",
+          "file": "sine 1760 Hz",
+          "v": 0,
+          "count": 1,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.05
+        },
+        {
+          "kind": "noise",
+          "name": "trapperIronChime",
+          "file": "highpass 5000 Hz",
+          "v": 0,
+          "count": 1,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.05
+        },
+        {
+          "kind": "take",
+          "name": "horde/distant",
+          "file": "horde/distant/horde-distant-1.ogg",
+          "v": 0.7,
+          "count": 1,
+          "classification": "NONE",
+          "bus": "fx",
+          "ratePerSec": 0.05
+        }
+      ]
+    }
+  },
+  "tables": {
+    "tg_first_person": [
+      {
+        "kind": "take",
+        "name": "player/footstep-stone",
+        "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 2,
+        "runCount": 25,
+        "totalCount": 27,
+        "walkRate": 0.1,
+        "runRate": 1.24
+      },
+      {
+        "kind": "take",
+        "name": "player/footstep-stone",
+        "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 2,
+        "runCount": 22,
+        "totalCount": 24,
+        "walkRate": 0.1,
+        "runRate": 1.09
+      },
+      {
+        "kind": "take",
+        "name": "player/footstep-stone",
+        "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 1,
+        "runCount": 22,
+        "totalCount": 23,
+        "walkRate": 0.05,
+        "runRate": 1.09
+      },
+      {
+        "kind": "take",
+        "name": "player/footstep-stone",
+        "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 1,
+        "runCount": 20,
+        "totalCount": 21,
+        "walkRate": 0.05,
+        "runRate": 0.99
+      }
+    ],
+    "tg_third_person": [
+      {
+        "kind": "take",
+        "name": "player/footstep-stone",
+        "file": "player/footstep-stone/pk-ocular-boot-concrete-01.ogg",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 0,
+        "runCount": 26,
+        "totalCount": 26,
+        "walkRate": 0,
+        "runRate": 1.29
+      },
+      {
+        "kind": "take",
+        "name": "player/footstep-stone",
+        "file": "player/footstep-stone/pk-ocular-boot-concrete-03.ogg",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 2,
+        "runCount": 21,
+        "totalCount": 23,
+        "walkRate": 0.1,
+        "runRate": 1.04
+      },
+      {
+        "kind": "take",
+        "name": "player/footstep-stone",
+        "file": "player/footstep-stone/pk-ocular-boot-concrete-04.ogg",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 2,
+        "runCount": 21,
+        "totalCount": 23,
+        "walkRate": 0.1,
+        "runRate": 1.04
+      },
+      {
+        "kind": "take",
+        "name": "player/footstep-stone",
+        "file": "player/footstep-stone/pk-ocular-boot-concrete-02.ogg",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 1,
+        "runCount": 21,
+        "totalCount": 22,
+        "walkRate": 0.05,
+        "runRate": 1.04
+      },
+      {
+        "kind": "noise",
+        "name": "playerBreath",
+        "file": "bandpass 952 Hz",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 1,
+        "runCount": 0,
+        "totalCount": 1,
+        "walkRate": 0.05,
+        "runRate": 0
+      },
+      {
+        "kind": "noise",
+        "name": "playerBreath",
+        "file": "lowpass 280 Hz",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 1,
+        "runCount": 0,
+        "totalCount": 1,
+        "walkRate": 0.05,
+        "runRate": 0
+      },
+      {
+        "kind": "take",
+        "name": "player/breath-tired",
+        "file": "player/breath-tired/breath-tired-2.ogg",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 1,
+        "runCount": 0,
+        "totalCount": 1,
+        "walkRate": 0.05,
+        "runRate": 0
+      },
+      {
+        "kind": "noise",
+        "name": "playerBreath",
+        "file": "bandpass 2310 Hz",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 1,
+        "runCount": 0,
+        "totalCount": 1,
+        "walkRate": 0.05,
+        "runRate": 0
+      }
+    ],
+    "trail_first_person": [
+      {
+        "kind": "take",
+        "name": "player/footstep-run-dirt",
+        "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 0,
+        "runCount": 25,
+        "totalCount": 25,
+        "walkRate": 0,
+        "runRate": 1.23
+      },
+      {
+        "kind": "take",
+        "name": "player/footstep-run-dirt",
+        "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-02.ogg",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 0,
+        "runCount": 23,
+        "totalCount": 23,
+        "walkRate": 0,
+        "runRate": 1.14
+      },
+      {
+        "kind": "take",
+        "name": "player/footstep-run-dirt",
+        "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-04.ogg",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 0,
+        "runCount": 20,
+        "totalCount": 20,
+        "walkRate": 0,
+        "runRate": 0.99
+      },
+      {
+        "kind": "take",
+        "name": "player/footstep-run-dirt",
+        "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-03.ogg",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 0,
+        "runCount": 20,
+        "totalCount": 20,
+        "walkRate": 0,
+        "runRate": 0.99
+      },
+      {
+        "kind": "take",
+        "name": "player/footstep-dirt",
+        "file": "player/footstep-dirt/pk-ocular-gravel-step-04.ogg",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 18,
+        "runCount": 0,
+        "totalCount": 18,
+        "walkRate": 0.89,
+        "runRate": 0
+      },
+      {
+        "kind": "take",
+        "name": "player/footstep-dirt",
+        "file": "player/footstep-dirt/pk-ocular-gravel-step-01.ogg",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 15,
+        "runCount": 0,
+        "totalCount": 15,
+        "walkRate": 0.74,
+        "runRate": 0
+      },
+      {
+        "kind": "take",
+        "name": "player/footstep-dirt",
+        "file": "player/footstep-dirt/pk-ocular-gravel-step-03.ogg",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 13,
+        "runCount": 0,
+        "totalCount": 13,
+        "walkRate": 0.64,
+        "runRate": 0
+      },
+      {
+        "kind": "take",
+        "name": "player/footstep-dirt",
+        "file": "player/footstep-dirt/pk-ocular-gravel-step-02.ogg",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 13,
+        "runCount": 0,
+        "totalCount": 13,
+        "walkRate": 0.64,
+        "runRate": 0
+      },
+      {
+        "kind": "take",
+        "name": "horde/distant",
+        "file": "horde/distant/horde-distant-1.ogg",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 1,
+        "runCount": 1,
+        "totalCount": 2,
+        "walkRate": 0.05,
+        "runRate": 0.05
+      },
+      {
+        "kind": "take",
+        "name": "bullet-impacts/leaves",
+        "file": "bullet-impacts/leaves/leaves-3.ogg",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 1,
+        "runCount": 0,
+        "totalCount": 1,
+        "walkRate": 0.05,
+        "runRate": 0
+      },
+      {
+        "kind": "take",
+        "name": "player/footstep-leaves",
+        "file": "player/footstep-leaves/pk-ocular-grass-step-01.ogg",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 1,
+        "runCount": 0,
+        "totalCount": 1,
+        "walkRate": 0.05,
+        "runRate": 0
+      },
+      {
+        "kind": "tone",
+        "name": "owlHoot",
+        "file": "sine 390 Hz",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 1,
+        "runCount": 0,
+        "totalCount": 1,
+        "walkRate": 0.05,
+        "runRate": 0
+      },
+      {
+        "kind": "tone",
+        "name": "owlHoot",
+        "file": "sine 370 Hz",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 1,
+        "runCount": 0,
+        "totalCount": 1,
+        "walkRate": 0.05,
+        "runRate": 0
+      },
+      {
+        "kind": "take",
+        "name": "bullet-impacts/leaves",
+        "file": "bullet-impacts/leaves/leaves-2.ogg",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 0,
+        "runCount": 1,
+        "totalCount": 1,
+        "walkRate": 0,
+        "runRate": 0.05
+      },
+      {
+        "kind": "take",
+        "name": "player/footstep-leaves",
+        "file": "player/footstep-leaves/pk-ocular-grass-step-02.ogg",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 0,
+        "runCount": 1,
+        "totalCount": 1,
+        "walkRate": 0,
+        "runRate": 0.05
+      },
+      {
+        "kind": "noise",
+        "name": "playerBreath",
+        "file": "bandpass 956 Hz",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 0,
+        "runCount": 1,
+        "totalCount": 1,
+        "walkRate": 0,
+        "runRate": 0.05
+      },
+      {
+        "kind": "noise",
+        "name": "playerBreath",
+        "file": "lowpass 280 Hz",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 0,
+        "runCount": 1,
+        "totalCount": 1,
+        "walkRate": 0,
+        "runRate": 0.05
+      },
+      {
+        "kind": "take",
+        "name": "world/owl",
+        "file": "world/owl/owl-3.ogg",
+        "bus": "amb",
+        "classification": "NONE",
+        "walkCount": 0,
+        "runCount": 1,
+        "totalCount": 1,
+        "walkRate": 0,
+        "runRate": 0.05
+      }
+    ],
+    "trail_third_person": [
+      {
+        "kind": "take",
+        "name": "player/footstep-run-dirt",
+        "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-01.ogg",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 0,
+        "runCount": 26,
+        "totalCount": 26,
+        "walkRate": 0,
+        "runRate": 1.29
+      },
+      {
+        "kind": "take",
+        "name": "player/footstep-run-dirt",
+        "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-03.ogg",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 0,
+        "runCount": 22,
+        "totalCount": 22,
+        "walkRate": 0,
+        "runRate": 1.09
+      },
+      {
+        "kind": "take",
+        "name": "player/footstep-run-dirt",
+        "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-02.ogg",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 0,
+        "runCount": 20,
+        "totalCount": 20,
+        "walkRate": 0,
+        "runRate": 0.99
+      },
+      {
+        "kind": "take",
+        "name": "player/footstep-dirt",
+        "file": "player/footstep-dirt/pk-ocular-gravel-step-01.ogg",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 19,
+        "runCount": 0,
+        "totalCount": 19,
+        "walkRate": 0.94,
+        "runRate": 0
+      },
+      {
+        "kind": "take",
+        "name": "player/footstep-dirt",
+        "file": "player/footstep-dirt/pk-ocular-gravel-step-04.ogg",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 16,
+        "runCount": 0,
+        "totalCount": 16,
+        "walkRate": 0.79,
+        "runRate": 0
+      },
+      {
+        "kind": "take",
+        "name": "player/footstep-dirt",
+        "file": "player/footstep-dirt/pk-ocular-gravel-step-02.ogg",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 14,
+        "runCount": 0,
+        "totalCount": 14,
+        "walkRate": 0.69,
+        "runRate": 0
+      },
+      {
+        "kind": "take",
+        "name": "player/footstep-run-dirt",
+        "file": "player/footstep-run-dirt/pk-ocular-gravel-stomp-04.ogg",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 0,
+        "runCount": 14,
+        "totalCount": 14,
+        "walkRate": 0,
+        "runRate": 0.69
+      },
+      {
+        "kind": "take",
+        "name": "player/footstep-dirt",
+        "file": "player/footstep-dirt/pk-ocular-gravel-step-03.ogg",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 11,
+        "runCount": 0,
+        "totalCount": 11,
+        "walkRate": 0.54,
+        "runRate": 0
+      },
+      {
+        "kind": "take",
+        "name": "bullet-impacts/leaves",
+        "file": "bullet-impacts/leaves/leaves-1.ogg",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 1,
+        "runCount": 2,
+        "totalCount": 3,
+        "walkRate": 0.05,
+        "runRate": 0.1
+      },
+      {
+        "kind": "take",
+        "name": "horde/distant",
+        "file": "horde/distant/horde-distant-1.ogg",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 2,
+        "runCount": 1,
+        "totalCount": 3,
+        "walkRate": 0.1,
+        "runRate": 0.05
+      },
+      {
+        "kind": "take",
+        "name": "player/footstep-leaves",
+        "file": "player/footstep-leaves/pk-ocular-grass-step-03.ogg",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 1,
+        "runCount": 1,
+        "totalCount": 2,
+        "walkRate": 0.05,
+        "runRate": 0.05
+      },
+      {
+        "kind": "take",
+        "name": "player/footstep-leaves",
+        "file": "player/footstep-leaves/pk-ocular-grass-step-04.ogg",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 1,
+        "runCount": 1,
+        "totalCount": 2,
+        "walkRate": 0.05,
+        "runRate": 0.05
+      },
+      {
+        "kind": "take",
+        "name": "bullet-impacts/leaves",
+        "file": "bullet-impacts/leaves/leaves-2.ogg",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 1,
+        "runCount": 1,
+        "totalCount": 2,
+        "walkRate": 0.05,
+        "runRate": 0.05
+      },
+      {
+        "kind": "take",
+        "name": "player/footstep-water",
+        "file": "player/footstep-water/pk-ocular-boot-water-03.ogg",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 0,
+        "runCount": 2,
+        "totalCount": 2,
+        "walkRate": 0,
+        "runRate": 0.1
+      },
+      {
+        "kind": "take",
+        "name": "player/footstep-leaves",
+        "file": "player/footstep-leaves/pk-ocular-grass-step-01.ogg",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 0,
+        "runCount": 1,
+        "totalCount": 1,
+        "walkRate": 0,
+        "runRate": 0.05
+      },
+      {
+        "kind": "take",
+        "name": "player/footstep-leaves",
+        "file": "player/footstep-leaves/pk-ocular-grass-step-02.ogg",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 0,
+        "runCount": 1,
+        "totalCount": 1,
+        "walkRate": 0,
+        "runRate": 0.05
+      },
+      {
+        "kind": "take",
+        "name": "bullet-impacts/leaves",
+        "file": "bullet-impacts/leaves/leaves-4.ogg",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 0,
+        "runCount": 1,
+        "totalCount": 1,
+        "walkRate": 0,
+        "runRate": 0.05
+      },
+      {
+        "kind": "take",
+        "name": "player/footstep-water",
+        "file": "player/footstep-water/pk-ocular-boot-water-02.ogg",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 0,
+        "runCount": 1,
+        "totalCount": 1,
+        "walkRate": 0,
+        "runRate": 0.05
+      },
+      {
+        "kind": "take",
+        "name": "player/footstep-water",
+        "file": "player/footstep-water/pk-ocular-boot-water-04.ogg",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 0,
+        "runCount": 1,
+        "totalCount": 1,
+        "walkRate": 0,
+        "runRate": 0.05
+      },
+      {
+        "kind": "tone",
+        "name": "trapperIronChime",
+        "file": "triangle 880 Hz",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 0,
+        "runCount": 1,
+        "totalCount": 1,
+        "walkRate": 0,
+        "runRate": 0.05
+      },
+      {
+        "kind": "tone",
+        "name": "trapperIronChime",
+        "file": "sine 1760 Hz",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 0,
+        "runCount": 1,
+        "totalCount": 1,
+        "walkRate": 0,
+        "runRate": 0.05
+      },
+      {
+        "kind": "noise",
+        "name": "trapperIronChime",
+        "file": "highpass 5000 Hz",
+        "bus": "fx",
+        "classification": "NONE",
+        "walkCount": 0,
+        "runCount": 1,
+        "totalCount": 1,
+        "walkRate": 0,
+        "runRate": 0.05
+      }
+    ]
+  }
+}

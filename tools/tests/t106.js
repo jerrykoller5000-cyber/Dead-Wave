@@ -9,6 +9,8 @@
   const until = async (cond, maxMs) => { const t0 = Date.now(); while (Date.now() - t0 < maxMs) { if (cond()) return true; await wait(100); } return cond(); };
   try {
     await startMatch(T, 'Shape');
+    // CL-297 / GB-283: these checks are the old music's (break/bridge/climax); the score is on by default since D-97, so ask for the old music as t73 does (?score=0). Score's own checks: tcl275a-d.
+    if (T.AudioSys && T.AudioSys.setScore) T.AudioSys.setScore(false);
     T.runDevCommand('godmode');   // the marine stands in the fight for the bridge's 40 s
     if (A.setMuted) A.setMuted(false);
     if (!ms().playing) A.startMusic();

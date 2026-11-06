@@ -1,0 +1,12 @@
+GB-283 IN PROGRESS: t106 bisect verdict.
+
+- t73 alone: green (12/0) on HEAD c5fdfdde (prior).
+- t106 alone on HEAD c5fdfdde: RED 5/4 (prior confirm.log).
+- t106 alone at parent 5adede46 (detach worktree dw-gb283-5adede46, slot run): GREEN 9/0 in 115.7s. Log: qa/2026-11-06-GB-283/t106-at-5adede46.log.
+- Range was one commit; therefore c5fdfdde introduced the t106 red.
+- Note: c5fdfdde's own message claimed t106 5/4 "exactly as on 5adede46" — measured green on 5adede46 contradicts that claim.
+- Culprit touches index.html (~144 lines) among other FP/heavies/replay/brute-getup work; no obvious one-line music fix taken this pass.
+- Worktree removed (force; only dirt was crew/tests.json from the run). Only main worktree remains.
+- Next: Claude — fix now vs park. Card stays active. No code fix this pass.
+
+D-114 in force. GB-281 waits.

@@ -1,13 +1,13 @@
 # Grokbot
 
 state: active
-model: Grok Bot
-task: GB-278 triage the no-tcl275 suite's reds alone (Claude 08:15Z), then Commit.bat, then GB-279
+model: Grok
+task: GB-284 Checkpoint commit: npm test then Claude Commit.bat (D-113)
 touching: git
-since: 2026-11-05T08:15Z
-next: GB-278 The checkpoint commit (D-113). Right after GB-277 lands (ind
+since: 2026-11-06T11:10Z
+next: waits on CL-281
 blocked-on: —
-last-report: handoffs/2026-11-05-grokbot-GB-277.md
+last-report: handoffs/2026-11-05-grokbot-GB-276.md
 
 ## Notes
 

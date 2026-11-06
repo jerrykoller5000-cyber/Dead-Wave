@@ -95,15 +95,16 @@ function tube(root) {
 
 function holo(root) {
   foot(root, 0.052, 0.105);
-  beveledBox(root, 'polymer battery and emitter chassis', paint, [0.054, 0.023, 0.082], [0, 0.020, -0.010], 0.0025);
+  // Keep the emitter in the low chassis; the glass above it occupies nearly the whole face.
+  beveledBox(root, 'polymer battery and emitter chassis', paint, [0.054, 0.017, 0.082], [0, 0.018, -0.010], 0.0025);
   for (const side of [-1, 1]) {
-    box(root, 'cast protective side wall', alloy, [0.006, 0.044, 0.060], [side * 0.027, 0.052, 0.007], side * 0.04);
-    box(root, 'outer painted cheek', paint, [0.0015, 0.032, 0.052], [side * 0.0308, 0.052, 0.005]);
-    box(root, 'window upright', edge, [0.0035, 0.042, 0.008], [side * 0.021, 0.055, 0.032]);
+    box(root, 'hood side wall', alloy, [0.003, 0.015, 0.068], [side * 0.027, 0.069, 0.005]);
+    box(root, 'front window upright', edge, [0.003, 0.042, 0.005], [side * 0.025, 0.055, 0.034]);
+    box(root, 'rear hood support', alloy, [0.003, 0.050, 0.005], [side * 0.025, 0.0515, -0.026]);
   }
-  beveledBox(root, 'hood eave', alloy, [0.056, 0.007, 0.070], [0, 0.077, 0.007]);
-  box(root, 'window lower sill', alloy, [0.046, 0.005, 0.009], [0, 0.035, 0.032]);
-  glass(root, 0.039, 0.035, 0.055, 0.032);
+  beveledBox(root, 'hood eave', alloy, [0.056, 0.006, 0.070], [0, 0.079, 0.007]);
+  box(root, 'window lower sill', alloy, [0.049, 0.004, 0.009], [0, 0.033, 0.032]);
+  glass(root, 0.046, 0.043, 0.055, 0.032);
   cylinder(root, 'brightness dial', rubber, 0.007, 0.005, [0.034, 0.026, -0.027], 'x', 12);
   return { eye: [0, 0.055, -0.061], dot: [0, 0.055, 0.032] };
 }

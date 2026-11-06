@@ -119,15 +119,36 @@ export function createBruteGetUp(mesh, scale, getup) {
     }
   }
 
+  // Bind-local place for the pelvis. GB-280: skinZombieMesh sets matrixAutoUpdate=false on the joint groups, so a
+  // restore that only copied position/quaternion left a stale local matrix; the next pose() then sampled AB from the
+  // previous keyed world pose and the hips walked tens of metres under the mesh (skinned fists stayed up at bind).
+  // Always put the pelvis back on the bind height, and rebuild every segment's local matrix before sampling.
+  for (const sg of segs) if (sg.posI !== null) {
+    sg.bindP = sg.j.position.clone();
+    if (sg.j === R.pelvis && mesh.userData.baseHipsY != null) sg.bindP.set(sg.bindP.x, mesh.userData.baseHipsY, sg.bindP.z);
+  }
+
   out.restore = () => {
     if (!out.overridden) return;
-    for (const sg of segs) { sg.j.quaternion.copy(sg.saveQ); if (sg.posI !== null) sg.j.position.copy(sg.saveP); }
+    for (const sg of segs) {
+      sg.lastW = null;
+      sg.j.quaternion.copy(sg.saveQ);
+      if (sg.posI !== null) sg.j.position.copy(sg.bindP);
+      sg.j.updateMatrix();
+    }
+    mesh.updateWorldMatrix(true, true);
     out.overridden = false;
   };
 
   // u of the get-up (0 to 1). The mesh is upright at its (shifted) place; the joints still hold the animation's pose.
   out.pose = (u, hitH0) => {
     u = Math.max(0, Math.min(1, u));
+    // GB-280: pelvis back on bind (in case restore was skipped), then every segment's matrix from the animation's
+    // latest position/quaternion (matrixAutoUpdate is false on these bones).
+    for (const sg of segs) {
+      if (sg.posI !== null) sg.j.position.copy(sg.bindP);
+      sg.j.updateMatrix();
+    }
     mesh.updateWorldMatrix(true, true);
     const MW = mesh.matrixWorld;
     _inv.copy(MW).invert();
@@ -162,11 +183,13 @@ export function createBruteGetUp(mesh, scale, getup) {
       } else if (sg.aim) {
         const a = sg.aimI[0] * 3, e = sg.aimI[1] * 3;
         _x.set(AB[e] - AB[a], AB[e + 1] - AB[a + 1], AB[e + 2] - AB[a + 2]).normalize();
-        // aimed from where this joint's pivot really is now (its parents have already turned), not from where its target is, so a chain
-        // whose bones were kept to length still lands each end as near its target as the bones allow
-        _pm.copy(j.parent.matrixWorld); _w.copy(j.position).applyMatrix4(_pm);
-        _y.set(S[e] - _w.x, S[e + 1] - _w.y, S[e + 2] - _w.z).normalize();
-        _q.setFromUnitVectors(_x, _y).multiply(_qa);
+        // GB-280: same as studio/motion.js apply — aim the bone along the keyed target segment (S), and after the
+        // first write turn from lastDir so a limb opposite its animation does not pick a new shortest arc each frame.
+        _y.set(S[e] - S[a], S[e + 1] - S[a + 1], S[e + 2] - S[a + 2]).normalize();
+        if (sg.lastW) _q.setFromUnitVectors(sg.lastDir, _y).multiply(sg.lastW);
+        else _q.setFromUnitVectors(_x, _y).multiply(_qa);
+        (sg.lastDir ||= new THREE.Vector3()).copy(_y);
+        (sg.lastW ||= new THREE.Quaternion()).copy(_q);
       } else continue;
       _qa.copy(_q);
       const parent = j.parent;
@@ -193,6 +216,7 @@ export function createBruteGetUp(mesh, scale, getup) {
   // The targets the last pose() aimed at (world), and where the joints really are now (world), by point name.
   out.targets = () => Object.fromEntries(NAMES.map((k, i) => [k, [S[i * 3], S[i * 3 + 1], S[i * 3 + 2]]]));
   out.points = () => {
+    for (const sg of segs) sg.j.updateMatrix();
     mesh.updateWorldMatrix(true, true);
     return Object.fromEntries(NAMES.map((k, i) => { _v.copy(offs[i]).applyMatrix4(joints[i].matrixWorld); return [k, [_v.x, _v.y, _v.z]]; }));
   };

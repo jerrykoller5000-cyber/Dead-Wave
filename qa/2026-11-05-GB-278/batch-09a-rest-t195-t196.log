@@ -1,0 +1,5 @@
+BATCH 9 rest: t195 t196 t197 t198 t199 t200 t201 t202 t203 t204
+GRANT grokbot GB-278: starting one game-test command
+check-players: 315 player.position reads, all in the allowed places
+ok    t195    16 pass   0 fail  92.6s
+ok    t196    17 pass   0 fail  44.1s

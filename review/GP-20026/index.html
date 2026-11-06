@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>GP-20026 · Open holo sight</title>
+<style>
+body{margin:0;background:#141a1b;color:#e0e6df;font:16px system-ui,sans-serif}main{max-width:1440px;margin:auto;padding:28px}h1{font-size:28px;margin:0 0 8px}h2{font-size:21px;margin:32px 0 12px}p{color:#aebcb8;max-width:78ch;line-height:1.5}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.card{background:#20292a;border:1px solid #384647;padding:10px}.card b{display:block;margin:0 0 8px}.card img{display:block;width:100%;height:auto}a{color:#b7d4cf}@media(max-width:800px){.grid{grid-template-columns:1fr}}
+</style></head><body><main>
+<h1>GP-20026 · Open holo sight</h1><p>Claude's review of GP-20025 asked for the holo to read as a window under a protective hood. These are direct before-and-after shots from the same preview camera. The optic stays model-only; its sight and mount points are unchanged.</p>
+<div id="comparisons"></div>
+<h2>New holo under four lights</h2><div id="lights" class="grid"></div>
+<script>
+const pairs=[['Front','holo-front-noon.png'],['Side','holo-side-noon.png'],['Three-quarter','holo-three-noon.png'],['M4 mount detail','m4-three-noon-1.png'],['AK mount detail','ak-three-noon-1.png']];
+const comps=document.getElementById('comparisons');
+for(const [title,file] of pairs){const h=document.createElement('h2');h.textContent=title;comps.append(h);const g=document.createElement('div');g.className='grid';for(const [caption,base] of [['Before','../GP-20025/'],['After','']]){const c=document.createElement('div');c.className='card';const b=document.createElement('b');b.textContent=caption;const a=document.createElement('a');a.href=base+file;const img=document.createElement('img');img.src=a.href;img.alt=`${caption}: ${title}`;a.append(img);c.append(b,a);g.append(c)}comps.append(g)}
+const lights=document.getElementById('lights');for(const light of ['noon','overcast','dusk','night']){const file=`holo-three-${light}.png`,c=document.createElement('div');c.className='card';const b=document.createElement('b');b.textContent=light[0].toUpperCase()+light.slice(1);const a=document.createElement('a');a.href=file;const img=document.createElement('img');img.src=file;img.alt=`Holo three-quarter in ${light}`;a.append(img);c.append(b,a);lights.append(c)}
+</script></main></body></html>

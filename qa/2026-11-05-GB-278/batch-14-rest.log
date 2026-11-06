@@ -1,0 +1,19 @@
+BATCH 14 rest: t255 t256 t257 t258 t259 t260 t261 t262 t263 t264
+GRANT grokbot GB-278: starting one game-test command
+check-players: 315 player.position reads, all in the allowed places
+           INFO smoking pinch: solved 2.6 cm, sampled 2.6 cm, wrist miss 5.2 cm; shoulder target/actual 27.7/27.7 cm; hand offset 15.8 cm
+ok    t255     5 pass   0 fail  48.0s
+ok    t256    10 pass   0 fail  58.3s
+ok    t257     7 pass   0 fail  29.1s
+ok    t258     4 pass   0 fail  27.3s
+ok    t259     8 pass   0 fail  52.5s
+           INFO night 8: day 8 bloodMoon true preview.bloodMoon true silenced false quest {"runId":1,"day":8,"order":[0,4,7,5,6],"unlocked":true,"triedDay":6,"known":[false,false,false,false,false],"silencedDay":6,"silenced":false,"heart":null,"done":false} total 315
+ok    t260     9 pass   0 fail  40.3s
+ok    t261     9 pass   0 fail  39.5s
+ok    t262    24 pass   0 fail  109.4s
+ok    t263    17 pass   0 fail  41.0s
+ok    t264    22 pass   0 fail  42.8s
+
+10 checks: 115 pass, 0 fail
+
+BATCH DONE

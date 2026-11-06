@@ -7,3 +7,11 @@ ok    t157     6 pass   0 fail  37.2s
 ok    t158    13 pass   0 fail  25.9s
 ok    t159    10 pass   0 fail  44.4s
 ok    t160    11 pass   0 fail  52.2s
+ok    t161     7 pass   0 fail  26.9s
+ok    t162    21 pass   0 fail  66.5s
+ok    t163    16 pass   0 fail  61.1s
+ok    t164    14 pass   0 fail  41.1s
+
+10 checks: 134 pass, 0 fail
+
+BATCH DONE

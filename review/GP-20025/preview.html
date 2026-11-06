@@ -61,6 +61,6 @@ camera.lookAt(center);scene.add(camera);renderer.render(scene,camera);
 let triangles=0;optic.traverse(o=>{if(o.isMesh)triangles+=(o.geometry.index?.count??o.geometry.attributes.position.count)/3;});
 let allTriangles=0;subject.traverse(o=>{if(o.isMesh)allTriangles+=(o.geometry.index?.count??o.geometry.attributes.position.count)/3;});
 const gunTriangles=Math.round(allTriangles-triangles);
-document.getElementById('label').textContent=`GP-20025 · ${kind} · ${weapon?weapon+(q.has('close')?' mount detail':' fit study'):'optic alone'} · ${view} · ${light} · ${Math.round(triangles)} optic tris${weapon?' / '+gunTriangles+' gun tris':''}`;
+document.getElementById('label').textContent=`${q.get('pass')||'GP-20025'} · ${kind} · ${weapon?weapon+(q.has('close')?' mount detail':' fit study'):'optic alone'} · ${view} · ${light} · ${Math.round(triangles)} optic tris${weapon?' / '+gunTriangles+' gun tris':''}`;
 window.__ready=true;window.__triangles=Math.round(triangles);window.__gunTriangles=gunTriangles;
 </script></body></html>

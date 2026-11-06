@@ -70,6 +70,13 @@
     const first = A.rows.filter((r) => r.u > 0.25 && r.u < 0.45)[0], late = A.rows.filter((r) => r.u > 0.8)[0];
     ok(first && late && (first.live.chest[1] - first.pos[1]) < 0.5 * chestStand && (late.live.chest[1] - late.pos[1]) > (first.live.chest[1] - first.pos[1]) + 0.4,
       'the chest is low on hands and knees at u ' + f2(first && first.u) + ' (' + f2(first && first.live.chest[1] - first.pos[1]) + ' m of ' + f2(chestStand) + ') and has come up by u ' + f2(late && late.u) + ' (' + f2(late && late.live.chest[1] - late.pos[1]) + ' m)');
+    // GB-280: both hands within a hand's height of the ground at u 0.4-0.55 (hand-knee-push, not fists at the chest).
+    const midHands = A.rows.filter((r) => r.u >= 0.4 && r.u <= 0.55);
+    const handH = (r, k) => r.live[k][1] - r.pos[1];
+    const handSpan = 0.5;   // ~handEnd length on the brute (~0.34 * scale)
+    const handsLow = midHands.filter((r) => handH(r, 'handL') < handSpan && handH(r, 'handR') < handSpan);
+    ok(midHands.length >= 3 && handsLow.length === midHands.length,
+      'both hands are within a hand\'s height of the ground at u 0.4-0.55 (' + midHands.length + ' samples; worst L/R ' + f2(Math.max(...midHands.map((r) => handH(r, 'handL')))) + '/' + f2(Math.max(...midHands.map((r) => handH(r, 'handR')))) + ' m of ' + f2(handSpan) + ')');
     // the hit column follows the body
     let hitMono = true; for (let i = 1; i < A.rows.length; i++) if (A.rows[i].hitH < A.rows[i - 1].hitH - 0.12) hitMono = false;
     const hFirst = A.rows[0].hitH, hLast = A.rows[A.rows.length - 1].hitH;

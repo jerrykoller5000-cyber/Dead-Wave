@@ -575,7 +575,9 @@ const messages = {
 
   // settings
   "settings.title": "Settings",
+  "settings.master": "Master",
   "settings.music": "Music",
+  "settings.ambience": "Ambience",
   "settings.sfx": "SFX",
   "settings.look": "Look",
   "settings.aimFov": "Aim FOV",

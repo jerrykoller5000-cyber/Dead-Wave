@@ -1,0 +1,52 @@
+BATCH 11 rest: t215 t216 t217 t218 t219 t220 t221 t222 t223 t224
+GRANT grokbot GB-278: starting one game-test command
+check-players: 315 player.position reads, all in the allowed places
+ok    t215     4 pass   0 fail  41.0s
+           INFO angular acceleration, rad/s^2: walk 452, run 615, jump 996, walk2 297, stop 257
+ok    t216    22 pass   0 fail  46.8s
+ok    t217    55 pass   0 fail  26.8s
+ok    t218    21 pass   0 fail  104.9s
+ok    t219    22 pass   0 fail  29.4s
+ok    t220    16 pass   0 fail  48.9s
+ok    t221    27 pass   0 fail  48.9s
+           INFO the spot: -140, 0, its lane within 0.55 m of his feet
+           INFO shambler  head: head 6 | chest: body 6 | legs: ground 4, legs 2
+           INFO feral     head: head 6 | chest: body 4, head 2 | legs: legs 4, ground 1, body 1
+           INFO brute     head: head 5, miss 1 | chest: head 2, body 4 | legs: legs 5, body 1
+           INFO spider    head: head 6 | chest: body 3, head 3 | legs: -
+           INFO leaper    head: head 5, body 1 | chest: body 5, head 1 | legs: -
+           INFO colossus at 90 deg 6 m: its head is covered by its own gear from the camera here (no head case)
+           INFO colossus at 90 deg 14 m: its head is covered by its own gear from the camera here (no head case)
+           INFO colossus  head: head 4 | chest: body 6 | legs: body 2, legs 4
+           INFO the reticle rings a head lined up, and not a chest (false, los-clear) (would fail; INFO on the test page)
+           INFO the gold-X round: 0 aim(s) blocked before a clear line to the head
+           INFO pistol 8 m 3 m/s +: hit, lead 0.34 m (pace x flight 0.33) at 0.62 of its height
+           INFO pistol 8 m 3 m/s -: hit, lead -0.35 m (pace x flight -0.33) at 0.64 of its height
+           INFO pistol 8 m 6 m/s +: hit, lead 0.60 m (pace x flight 0.60) at 0.61 of its height
+           INFO pistol 8 m 6 m/s -: hit, lead -0.60 m (pace x flight -0.60) at 0.68 of its height
+           INFO pistol 18 m 3 m/s +: hit, lead 0.71 m (pace x flight 0.71) at 0.58 of its height
+           INFO pistol 18 m 3 m/s -: miss, lead -0.13 m (pace x flight -0.79)
+           INFO pistol 18 m 6 m/s +: hit, lead 1.39 m (pace x flight 1.40) at 0.63 of its height
+           INFO pistol 18 m 6 m/s -: miss, lead -0.40 m (pace x flight -1.64)
+           INFO m4 8 m 3 m/s +: hit, lead 0.24 m (pace x flight 0.23) at 0.61 of its height
+           INFO m4 8 m 3 m/s -: hit, lead -0.24 m (pace x flight -0.23) at 0.61 of its height
+           INFO m4 8 m 6 m/s +: hit, lead 0.43 m (pace x flight 0.43) at 0.63 of its height
+           INFO m4 8 m 6 m/s -: hit, lead -0.43 m (pace x flight -0.43) at 0.61 of its height
+           INFO m4 18 m 3 m/s +: hit, lead 0.55 m (pace x flight 0.52) at 0.63 of its height
+           INFO m4 18 m 3 m/s -: hit, lead -0.08 m (pace x flight -0.58) at 0.59 of its height
+           INFO m4 18 m 6 m/s +: hit, lead 1.02 m (pace x flight 1.02) at 0.62 of its height
+           INFO m4 18 m 6 m/s -: miss, lead -0.31 m (pace x flight -1.20)
+           INFO the 6 m/s runners on the test page: hit 6, miss 2 (not a bar: the fake models; 1.x, CL FYI)
+           INFO launcher 12 m 6 m/s +: miss, lead 0.01 m (pace x flight 2.11)
+FAIL  t222     7 pass   1 fail  161.3s
+ok    t223    15 pass   0 fail  55.0s
+ok    t224    27 pass   0 fail  146.8s
+
+10 checks: 216 pass, 1 fail
+
+by owner:
+  unassigned
+    t222   1 fail  FAIL pointing at the legs lands low: 15/24 (bar 65 %)
+           FAIL pointing at the legs lands low: 15/24 (bar 65 %)
+
+BATCH DONE

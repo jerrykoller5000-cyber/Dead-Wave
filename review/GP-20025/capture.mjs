@@ -6,7 +6,8 @@ import { serve } from '../../tools/serve.mjs';
 import { launch } from '../../tools/cdp.mjs';
 
 const root = path.resolve(fileURLToPath(new URL('../..', import.meta.url)));
-const output = path.dirname(fileURLToPath(import.meta.url));
+const outputArg = process.argv.find(arg => arg.startsWith('--output-dir='))?.slice('--output-dir='.length);
+const output = outputArg ? path.resolve(root, outputArg) : path.dirname(fileURLToPath(import.meta.url));
 const server = await serve(root, 0);
 const browser = await launch({ headless: true });
 const page = await browser.newPage({ width: 1280, height: 720 });
@@ -23,9 +24,10 @@ try {
   for (const job of jobs) {
     const onlyGun = process.argv.find(arg => arg.startsWith('--only-gun='))?.slice('--only-gun='.length);
     if (onlyGun && job.gun !== onlyGun) continue;
+    if (process.argv.includes('--only-holo') && job.kind !== 'holo' && !['m4', 'ak'].includes(job.gun)) continue;
     const refreshReflex = process.argv.includes('--refresh-reflex');
     if (refreshReflex && job.kind !== 'reflex' && !['uzi', 'shotgun', 'aa12'].includes(job.gun)) continue;
-    const query = new URLSearchParams(job).toString();
+    const query = new URLSearchParams({ ...job, pass: outputArg ? 'GP-20026' : 'GP-20025' }).toString();
     const name = Object.values(job).join('-');
     if (existsSync(path.join(output, `${name}.png`)) && !(process.argv.includes('--refresh-guns') && job.gun) && !refreshReflex) continue;
     await page.goto(`${server.origin}/review/GP-20025/preview.html?${query}`);

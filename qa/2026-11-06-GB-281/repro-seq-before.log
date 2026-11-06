@@ -1,0 +1,16 @@
+GRANT grokbot GB-281: starting one game-test command
+check-players: 315 player.position reads, all in the allowed places
+ok    t0       2 pass   0 fail  27.0s
+ok    t6a      2 pass   0 fail  40.6s
+ok    tcl275a  13 pass   0 fail  48.9s
+ok    tcl275b   6 pass   0 fail  54.1s
+ok    tcl275c   7 pass   0 fail  35.0s
+FAIL  tcl275d  10 pass   1 fail  62.6s
+ERROR tcl280   0 pass   0 fail  120.0s  — CDP timeout: Page.navigate
+
+7 checks: 40 pass, 1 fail, 1 could not run
+
+by owner:
+  unassigned
+    tcl275d 1 fail  FAIL home again: the day's calm (gh/gh-place-dawn)
+    tcl280 0 fail  CDP timeout: Page.navigate

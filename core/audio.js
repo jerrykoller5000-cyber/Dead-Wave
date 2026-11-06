@@ -10,6 +10,9 @@ export const AudioSys = (() => {
   let trainingMode=false,trainingSound=null,trainingFacility=null;
   let ctx = null;
   let masterGain = null;
+  let userMasterGain = null;
+  let userMusicGain = null;
+  let userAmbienceGain = null;
   let koGain = null;   // CL-171: the Training Ground knockout: everything fades under it (the ringing goes round it)
   let sfxGain = null;
   let musicGain = null;
@@ -56,13 +59,15 @@ export const AudioSys = (() => {
     hushBehindOpening(ctx);
     masterGain = ctx.createGain();
     masterGain.gain.value = window.DWOpening?.active ? 0 : 1;
+    userMasterGain = ctx.createGain();
+    userMasterGain.gain.value = userMaster;
     // CL-134: a last limiter on everything, so the louder guns (and a grenade in a crowd) never clip the output.
     try {
       limiter = ctx.createDynamicsCompressor();
       limiter.threshold.value = -1.5; limiter.knee.value = 0; limiter.ratio.value = 20;
       limiter.attack.value = 0.0015; limiter.release.value = 0.12;
-      koGain = ctx.createGain(); masterGain.connect(koGain); koGain.connect(limiter); limiter.connect(ctx.destination);
-    } catch (_) { koGain = ctx.createGain(); masterGain.connect(koGain); koGain.connect(ctx.destination); limiter = null; }
+      koGain = ctx.createGain(); masterGain.connect(koGain); koGain.connect(userMasterGain); userMasterGain.connect(limiter); limiter.connect(ctx.destination);
+    } catch (_) { koGain = ctx.createGain(); masterGain.connect(koGain); koGain.connect(userMasterGain); userMasterGain.connect(ctx.destination); limiter = null; }
     // The mix. Everything used to share one SFX bus, so a rain bed, the wind and
     // the river sat at the same level as — and in the same 2-4 kHz band as — the
     // crack of a rifle, and nothing gave way when you fired. Now:
@@ -70,15 +75,20 @@ export const AudioSys = (() => {
     //            the other two for a moment every time they fire (see duckForShot);
     //   fx       zombies, the marine, UI;
     //   ambience wind, rain, river, crickets, birds, thunder — pulled right down.
-    // All three meet at the user's SFX fader, then a gentle compressor glues them
+    // All three meet at the SFX mix gain, then a gentle compressor glues them
     // and keeps a grenade in a crowd from clipping.
     glue = ctx.createDynamicsCompressor();
     // CL-134: a slower attack (8 ms) lets the front of every shot through before the glue reacts: that front is the punch.
     glue.threshold.value = -14; glue.knee.value = 10; glue.ratio.value = 3;
     glue.attack.value = 0.008; glue.release.value = 0.2;
+    userMusicGain = ctx.createGain();
+    userMusicGain.gain.value = userMusic;
+    userMusicGain.connect(masterGain);
+    userAmbienceGain = ctx.createGain();
+    userAmbienceGain.gain.value = userAmbience;
     glue.connect(masterGain);
     sfxGain = ctx.createGain();
-    sfxGain.gain.value = 0.5 * userSfx;
+    sfxGain.gain.value = 0.5;
     // CL-26: the relief sting clears every other sound. soloGain sits after the SFX fader
     // so the user's volume and the solo never fight over one gain.
     soloGain = ctx.createGain();
@@ -87,10 +97,10 @@ export const AudioSys = (() => {
     soloGain.connect(glue);
     weapBus = ctx.createGain(); weapBus.gain.value = BUS_WEAP; weapBus.connect(sfxGain);
     fxBus = ctx.createGain(); fxBus.gain.value = BUS_FX; fxBus.connect(sfxGain);
-    ambBus = ctx.createGain(); ambBus.gain.value = BUS_AMB; ambBus.connect(sfxGain);
+    ambBus = ctx.createGain(); ambBus.gain.value = BUS_AMB; ambBus.connect(userAmbienceGain); userAmbienceGain.connect(sfxGain);
     musicGain = ctx.createGain();
     musicGain.gain.value = 0.14;
-    musicGain.connect(masterGain);
+    musicGain.connect(userMusicGain);
     // Outdoor reverb send for the SFX: a short synthetic impulse (decaying noise,
     // darkened over time) so shots and explosions get a tail off the treeline
     // instead of stopping dead. Sources opt in with a `rev` amount.
@@ -142,23 +152,36 @@ export const AudioSys = (() => {
       }
     };
   }
-  // User volume settings (pause > settings sliders), remembered per browser.
-  let userSfx = 0.8, userMusic = 0.3;
+  // User volume settings (pause > settings sliders), remembered with the profile.
+  // tt_vol_sfx was the old SFX control; keep its saved value as the new master level.
+  let userMaster = 1, userMusic = 1, userAmbience = 1;
   try {
-    const sv = localStorage.getItem('tt_vol_sfx'), mv = localStorage.getItem('tt_vol_music');
-    if (sv != null && isFinite(+sv)) userSfx = Math.max(0, Math.min(1, +sv));
+    const sv = localStorage.getItem('tt_vol_sfx'), mv = localStorage.getItem('tt_vol_music'), av = localStorage.getItem('tt_vol_ambience');
+    if (sv != null && isFinite(+sv)) userMaster = Math.max(0, Math.min(1, +sv));
     if (mv != null && isFinite(+mv)) userMusic = Math.max(0, Math.min(1, +mv));
+    if (av != null && isFinite(+av)) userAmbience = Math.max(0, Math.min(1, +av));
   } catch (_) {}
-  function setSfxVolume(v) {
-    userSfx = Math.max(0, Math.min(1, +v || 0));
-    try { localStorage.setItem('tt_vol_sfx', String(userSfx)); } catch (_) {}
-    if (sfxGain && ctx) { try { sfxGain.gain.setTargetAtTime(0.5 * userSfx, ctx.currentTime, 0.03); } catch (_) {} }
+  function setUserGain(node, value) {
+    if (!node || !ctx) return;
+    try { node.gain.setTargetAtTime(value, ctx.currentTime, 0.03); } catch (_) { node.gain.value = value; }
   }
+  function setMasterVolume(v) {
+    userMaster = Math.max(0, Math.min(1, +v || 0));
+    try { localStorage.setItem('tt_vol_sfx', String(userMaster)); } catch (_) {}
+    setUserGain(userMasterGain, userMaster);
+  }
+  const setSfxVolume = setMasterVolume; // Older test pages still call the former SFX control.
   function setMusicVolume(v) {
     userMusic = Math.max(0, Math.min(1, +v || 0));
     try { localStorage.setItem('tt_vol_music', String(userMusic)); } catch (_) {}
+    setUserGain(userMusicGain, userMusic);
   }
-  function getVolumes() { return { sfx: userSfx, music: userMusic }; }
+  function setAmbienceVolume(v) {
+    userAmbience = Math.max(0, Math.min(1, +v || 0));
+    try { localStorage.setItem('tt_vol_ambience', String(userAmbience)); } catch (_) {}
+    setUserGain(userAmbienceGain, userAmbience);
+  }
+  function getVolumes() { return { master: userMaster, music: userMusic, ambience: userAmbience, sfx: userMaster }; }
   function makeImpulse(seconds, decay) {
     const len = Math.floor(ctx.sampleRate * seconds);
     const buf = ctx.createBuffer(2, len, ctx.sampleRate);
@@ -500,7 +523,7 @@ export const AudioSys = (() => {
   // zombies fade out. Maybe a tinnitus sound."): knockout(hold) fades the whole mix (music, zombies, guns, the room) to
   // nothing over about a second and rings a tinnitus over the silence for `hold` seconds; knockoutEnd() brings the mix
   // back. The ring is two close high tones beating slowly with a faint, darker one under them, on its own path to the
-  // output so the fade does not take it, and the SFX fader sets its level.
+  // output so the fade does not take it, and the master fader sets its level.
   let koRing = null;
   function knockout(hold = 3.5) {
     const c = ensure(); if (!c || !koGain) return false;
@@ -508,7 +531,7 @@ export const AudioSys = (() => {
     koGain.gain.cancelScheduledValues(t); koGain.gain.setValueAtTime(koGain.gain.value, t); koGain.gain.setTargetAtTime(0, t, 0.32);
     if (koRing) { try { koRing.stop(); } catch (_) {} koRing = null; }
     if (muted) return true;
-    const out = limiter || c.destination, g = c.createGain(), v = 0.05 * Math.max(0.15, userSfx);
+    const out = userMasterGain, g = c.createGain(), v = 0.05;
     g.gain.setValueAtTime(0, t);
     g.gain.linearRampToValueAtTime(v, t + 0.5);
     g.gain.setTargetAtTime(v * 0.55, t + 0.9, 1.1);
@@ -1510,7 +1533,7 @@ export const AudioSys = (() => {
     if (secOut) return;
     secOut = ctx.createGain(); secOut.gain.value = 0;
     secLp = ctx.createBiquadFilter(); secLp.type = 'lowpass'; secLp.frequency.value = 20000; secLp.Q.value = 0.5;   // CL-101: shut below
-    secOut.connect(secLp); secLp.connect(ctx.destination);
+    secOut.connect(secLp); secLp.connect(userMusicGain);
   }
   // CL-275: how much of each layer the fight wants. The drums and bass always; the rhythm guitars once one is within
   // flow.rhythmAt (or the night's last push, or its last few); the leads once one is within flow.leadAt, or then.
@@ -1673,7 +1696,7 @@ export const AudioSys = (() => {
     const live = state.threat || 0;
     motif.quietT = live > 0 ? 0 : motif.quietT + dt;
     if (motif.quietT > 3) { secStop(1.5); motif = null; return; }
-    const out = Math.max(0, Math.min(1, MUSIC_VOL * userMusic * gainOf(motif.track) * (state.paused ? 0.45 : 1)));
+    const out = Math.max(0, Math.min(1, MUSIC_VOL * gainOf(motif.track) * (state.paused ? 0.45 : 1)));
     if (secOut) { try { secOut.gain.setTargetAtTime(out, ctx.currentTime, 0.05); } catch (_) { secOut.gain.value = out; } }
     if (sec) secLayersUpdate(state);
   }
@@ -1699,6 +1722,7 @@ export const AudioSys = (() => {
   function ensureDeck() {
     if (deck) return deck;
     deck = new Audio();
+    routeMusicElement(deck);
     deck.preload = 'auto';
     deck.volume = 0;
     deck.addEventListener('ended', onDeckEnded);
@@ -1712,6 +1736,10 @@ export const AudioSys = (() => {
       deckTrack = null; gapT = 1.5;
     });
     return deck;
+  }
+  function routeMusicElement(el) {
+    const c = ensure();
+    if (c && userMusicGain && c.createMediaElementSource) c.createMediaElementSource(el).connect(userMusicGain);
   }
   function stopDeck() {
     secStop();
@@ -1775,6 +1803,7 @@ export const AudioSys = (() => {
     try {
       if (!sting) {
         sting = new Audio();
+        routeMusicElement(sting);
         sting.addEventListener('ended', () => { if (stingName) finishSting(); });
         sting.addEventListener('error', () => { const e = sting.error; if (stingName && !(e && e.code === 1)) { if (/\/gh\/gh-cue-/.test(sting.src || '')) { scoreCalmLost = true; applyScorePools(false, true); } finishSting(); } });   // CL-275: no gh files here
       }
@@ -1782,7 +1811,7 @@ export const AudioSys = (() => {
       stingName = name;
       stingLeft = 9;          // until its length is known; covers a blocked play() too
       sting.addEventListener('loadedmetadata', () => { if (stingName === name && sting.duration) stingLeft = sting.duration + 0.25; }, { once: true });
-      sting.volume = Math.max(0, Math.min(1, MUSIC_VOL * userMusic * gainOf(file) * briefDuck));
+      sting.volume = Math.max(0, Math.min(1, MUSIC_VOL * gainOf(file) * briefDuck));
       const p = sting.play();
       if (p && typeof p.catch === 'function') p.catch(() => {});
     } catch (_) { finishSting(); }
@@ -1850,9 +1879,9 @@ export const AudioSys = (() => {
     if (file === cueLastFile && tNow - cueLastAt < 20) { lastCue.played = false; lastCue.held = true; return; }
     cueLastFile = file; cueLastAt = tNow;
     try {
-      if (!cueEl) cueEl = new Audio();
+      if (!cueEl) { cueEl = new Audio(); routeMusicElement(cueEl); }
       cueEl.src = trackUrl(file);
-      cueEl.volume = Math.max(0, Math.min(1, MUSIC_VOL * userMusic * gainOf(file)));
+      cueEl.volume = Math.max(0, Math.min(1, MUSIC_VOL * gainOf(file)));
       const p = cueEl.play(); if (p && typeof p.catch === 'function') p.catch(() => {});
     } catch (_) {}
   }
@@ -1963,7 +1992,7 @@ export const AudioSys = (() => {
   }
   // Called every frame by the game loop with the current state.
   function updateMusic(dt, state) {
-    if(trainingMode){trainingSound?.update(muted?0:userMusic*(motif&&sec?0.35:1),!!state.paused);trainingFacility?.tick(muted||!!state.paused);motifUpdate(dt,state);return;}
+    if(trainingMode){trainingSound?.update(muted?0:(motif&&sec?0.35:1),!!state.paused);trainingFacility?.tick(muted||!!state.paused);motifUpdate(dt,state);return;}
     lastState = state;
     const started = !!state.started;
     const phaseNow = state.phase;
@@ -2037,7 +2066,7 @@ export const AudioSys = (() => {
     if (stingName) {
       stingLeft -= dt;
       if (stingLeft <= 0) finishSting();
-      else if (sting) sting.volume = Math.max(0, Math.min(1, MUSIC_VOL * userMusic * gainOf(MUSIC_STINGS[stingName] || '') * briefDuck));
+      else if (sting) sting.volume = Math.max(0, Math.min(1, MUSIC_VOL * gainOf(MUSIC_STINGS[stingName] || '') * briefDuck));
     }
     // --- the gap after the alarm sting ---
     if (stage === 'alarm' && !stingName && nowMs() >= alarmUntil) { stage = 'gap'; gapT = GAP_AFTER_ALARM; }
@@ -2080,7 +2109,7 @@ export const AudioSys = (() => {
     if (deckTrack && (deck || sec)) {
       const fightMul = (stage === 'fight' || stage === 'dayfight' || stage === 'release' || stage === 'campclear') ? prox : 1;
       const nightMul = (stage === 'fight' || stage === 'release') ? nm.gain : 1;   // CL-70: the wave only, not day fights
-      const v = MUSIC_VOL * userMusic * gainOf(deckTrack) * deckLevel * fightMul * nightMul * briefDuck * duck * musicShotDuck * belowMusic * placeDread;
+      const v = MUSIC_VOL * gainOf(deckTrack) * deckLevel * fightMul * nightMul * briefDuck * duck * musicShotDuck * belowMusic * placeDread;
       const out = Math.max(0, Math.min(1, v));
       if (sec && secOut && ctx) {
         try { secOut.gain.setTargetAtTime(out, ctx.currentTime, 0.02); } catch (_) { secOut.gain.value = out; }
@@ -3825,7 +3854,7 @@ export const AudioSys = (() => {
     try { if (on) setTimeout(() => { if (trainingMode) bed('vent', 'training/ventilation', 1, { bus: fxBus || sfxGain, tc: 1.5 }); }, 400); else stopBed('vent', 0.8); } catch (_) {}   // CL-161
     if(on){
       stopMusic();rainStop();setSolo(false);
-      const c=ensure();if(c){ambBus.gain.cancelScheduledValues(c.currentTime);ambBus.gain.setValueAtTime(0,c.currentTime);trainingSound=createTrainingAudio(c,masterGain,fxBus);trainingSound.update(userMusic);
+      const c=ensure();if(c){ambBus.gain.cancelScheduledValues(c.currentTime);ambBus.gain.setValueAtTime(0,c.currentTime);trainingSound=createTrainingAudio(c,userMusicGain,fxBus);trainingSound.update(1);
         trainingFacility=createTrainingFacilityAudio({clock:()=>c.currentTime,
           move:up=>trainingSound.cue('door:'+(up?1:.9)+':0'),
           bump:()=>tk('build-attacks/wire-hit',.6),
@@ -4094,7 +4123,7 @@ export const AudioSys = (() => {
     shotgunPump: W(shotgunPump), revolverCylinder: W(revolverCylinder), revolverSpin: W(revolverSpin),
     launcherDrum: W(launcherDrum), launcherShellInsert: W(launcherShellInsert),
     jump, nvgClick, coin, leafHit: W(leafHit), treeFell, treeThud, crownFire, trunkBump, woodsWarning,
-    depotGeneratorCough, mastWireSing, hikersPhoneRing, rangerRadioSquelch, trapperIronChime,
+    depotGeneratorCough: A(depotGeneratorCough), mastWireSing: A(mastWireSing), hikersPhoneRing: A(hikersPhoneRing), rangerRadioSquelch: A(rangerRadioSquelch), trapperIronChime: A(trapperIronChime),
     win, resetBlip, noteSpin, startMusic, stopMusic,
     place, invalid, turretShot: W(turretShot, [0.7, 0.88]), zombieHit: W(zombieHit), zombieDeath: W(zombieDeath),
     groan, headshot: W(headshot), dodgeRoll, streak, footstep, heartbeat,
@@ -4111,9 +4140,9 @@ export const AudioSys = (() => {
     bulletImpact: W(bulletImpact), knifeHit: W(knifeHit), gore: W(gore), grenadeThrow: W(grenadeThrow),
     grenadeBounce: W(grenadeBounce), heavyStep, emerge, shutter, medkit, medPen, playerBreath, deadVoice, DEAD_VOICES, voiceCount, deadStep, stepCount, shotCount, planeFlyover, chuteOpen, gravePat, chisel, heave, bigSplash, graveAmbience, surface,
     // Read-only view of the mix, for tests and the perf overlay.
-    mixState: () => ({ ctx: ctx ? ctx.state : 'none', weap: weapBus ? weapBus.gain.value : null, fx: fxBus ? fxBus.gain.value : null, amb: ambBus ? ambBus.gain.value : null, musicDuck: musicShotDuck, rain: rainLoop ? rainLoop.gain.gain.value : null }),
+    mixState: () => ({ ctx: ctx ? ctx.state : 'none', weap: weapBus ? weapBus.gain.value : null, fx: fxBus ? fxBus.gain.value : null, amb: ambBus ? ambBus.gain.value : null, masterVolume: userMasterGain ? userMasterGain.gain.value : null, musicVolume: userMusicGain ? userMusicGain.gain.value : null, ambienceVolume: userAmbienceGain ? userAmbienceGain.gain.value : null, musicDuck: musicShotDuck, rain: rainLoop ? rainLoop.gain.gain.value : null }),
     rainStart, rainStop, rainSetIntensity, isRainRunning,
-    updateMusic, musicState, musicCue, cueLength, setMood, setSfxVolume, setMusicVolume, getVolumes, setScore, calmFlow, traceDbg,   // CL-275, CL-294, CL-295
+    updateMusic, musicState, musicCue, cueLength, setMood, setMasterVolume, setSfxVolume, setMusicVolume, setAmbienceVolume, getVolumes, setScore, calmFlow, traceDbg,   // CL-275, CL-294, CL-295
     ambienceStart, updateAmbience, birdChirp: A(birdChirp), owlHoot: A(owlHoot), thunder: A(thunder), lightningStrike: A(lightningStrike), holyChoir, chapelChoir, rabbitScreech, holyBlast, dayCleared,
     distantGroan: A(distantGroan),
     clip, preloadClips, clipState,   // CL-147

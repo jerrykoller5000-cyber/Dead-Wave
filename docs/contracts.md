@@ -358,6 +358,11 @@ page: red pulse, slow motion for the relief sting's length, a kill cam on the bo
 - `dw-game` `{ type: 'wave-last-kill', x, z, typeKey, duration }`: the music director cuts the
   fight, plays `sting_clear` alone and silences every other sound until it ends.
 - `AudioSys.cueLength(name)` → seconds (0 until it's known); the finisher uses it for its length.
+- Volumes (GP-20029, 6 Nov; the settings menu's Master, Music and Ambience sliders, 0-1, default 1, saved with the profile):
+  `AudioSys.setMasterVolume(v)` (after the knockout mix, so it scales everything), `setMusicVolume(v)` (the music bus: tracks,
+  stingers, the Training Ground's music), `setAmbienceVolume(v)` (the ambience bus: ambient beds and the places' voices);
+  `getVolumes()` → `{ master, music, ambience, sfx }` (`sfx` and `setSfxVolume` stay as aliases for older callers);
+  `mixState()` adds `masterVolume`, `musicVolume`, `ambienceVolume`. Weapon and zombie sounds keep their own buses under master.
 - Test hooks: `TT.getWaveFinisher()`, `TT.getSlowMo()`, `TT.drainWavePlanDbg()`.
 
 ## Skull value accumulator (GP-33, approved by Claude 2026-09-25)

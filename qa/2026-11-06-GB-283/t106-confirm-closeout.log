@@ -1,0 +1,12 @@
+GRANT grokbot GB-283: starting one game-test command
+ok    t106      9 pass   0 fail  104.8s  (real renderer)
+    PASS the fight is on: dropA
+    PASS the director has a pace
+    PASS the breather: the break: break (lull)
+    PASS within two bars, not after seconds of quiet: 2.4 s
+    PASS the next push: back to the fight: riffB (fight)
+    PASS the last push: the bridge: bridge (surge)
+    PASS then the climax: climax (last)
+    PASS audible: 0.443
+    PASS never a sting and music at once
+1 checks: 9 pass, 0 fail (real renderer)

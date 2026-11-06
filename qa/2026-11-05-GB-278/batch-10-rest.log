@@ -1,0 +1,18 @@
+BATCH 10 rest: t205 t206 t207 t208 t209 t210 t211 t212 t213 t214
+GRANT grokbot GB-278: starting one game-test command
+check-players: 315 player.position reads, all in the allowed places
+ok    t205    13 pass   0 fail  56.0s
+ok    t206    19 pass   0 fail  62.2s
+ok    t207    20 pass   0 fail  41.1s
+ok    t208    10 pass   0 fail  56.7s
+ok    t209    13 pass   0 fail  47.5s
+ok    t210     9 pass   0 fail  43.3s
+           INFO aimed at a zombie 16 m out, it hits it: 100 damage from 16 rounds (zombie 15.31 m)
+ok    t211    25 pass   0 fail  59.6s
+ok    t212    18 pass   0 fail  43.2s
+ok    t213    22 pass   0 fail  66.0s
+ok    t214    29 pass   0 fail  61.1s
+
+10 checks: 178 pass, 0 fail
+
+BATCH DONE
