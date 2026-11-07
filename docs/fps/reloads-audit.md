@@ -103,3 +103,16 @@ blocks and their rears stand into the view; the GW-4's stock block shows at the 
   model) or lifts the gun into the frame for the swap. The shotgun's port: behind the receiver at roll .55 and 1.15
   (the forearm then a log on the right); left at .75 with the gun lifted; the shell is seen going in only from the
   side. Both carried on the audit table as 'partly'.
+
+## 16:00Z: the knife and the grenade (CL-307 a-g), the sniper's side (CL-306 k)
+- The blade: the view no longer drops to the body's arm (the dark blob past the eye); the gun goes below the view and the
+  firing hand swings a copy of the knife group (VM_BLADES). Filmed: the machete's chop (p16-kn: raised at the top right,
+  swept across with the flat to the eye, follow-through at the lower centre, back), the katana's cut (p18-bl: the long red
+  blade across the lower view), the knife's slash (p19-kn: quick, the short blade up out of the fist). A thrust was tried
+  first and the blade vanished behind the fist (it points along the eye's line): slashes read, thrusts don't.
+- The grenade: the support hand to the pouch, cocked beside the head while G is held, the whip, the open hand's follow-
+  through and back, the gun up in the other hand throughout (p16-gr). The cocked fist moved from 30 to 42 cm from the eye.
+- The sniper's bolt on the right in first person (p17-sniper): the firing hand works it on the right of the receiver after
+  the magazine seats and between shots.
+- Still the body's arms in first person (next, CL-307 h+): the mortar (carry, set, fire), ladders and the mast climb,
+  building and E, the empty hands and the flashlight.

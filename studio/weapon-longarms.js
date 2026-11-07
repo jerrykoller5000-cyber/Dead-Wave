@@ -224,7 +224,7 @@ export function makeAkModel(ctx) {
   for (const sx of [-1, 1]) {
     K.slab(gunBand([[-0.32, -0.035], [-0.386, -0.049], [-0.472, -0.056], [-0.535, -0.049]], 0.0015), 0.002, woodDark, { x: sx * 0.035, bevel: 0, parent: stock });
     K.slab(gunBand([[-0.396, -0.066], [-0.451, -0.079], [-0.536, -0.096]], 0.0011), 0.002, woodDark, { x: sx * 0.035, bevel: 0, parent: stock });
-    K.cyl(0.0075, 0.0075, 0.003, gunDark, sx * 0.033, -0.15, -0.104, null, 10, 'x');
+    K.cyl(0.0075, 0.0075, 0.003, gunDark, sx * 0.0285, -0.15, -0.104, null, 10, 'x');   // GB-297: seated on the grip face (half-width 0.027)
   }
   K.tor(0.014, 0.004, gunDark, 0, -0.122, -0.45, 0, Math.PI / 2, 0, stock);
   gun.userData.fpStock = stock;
@@ -598,18 +598,21 @@ export function makeSniperModel(ctx) {
     const a = i * Math.PI / 8;
     K.box(0.003, 0.015, 0.003, gunDark, Math.cos(a) * 0.0192, 0.199, 0.05 + Math.sin(a) * 0.0192, 0, -a, 0, null, 0);
   }
-  // Bolt handle — GB-146 (Jerry, 2026-10-09: "The sniper bolt is on the wrong side"): on the gun's right (-x) now,
-  // where it was on the left (+x). Lifts by turning about the bolt's axis (boltSide sets which way), worked between
-  // shots and after the magazine is seated on a reload (sniperBoltPose).
-  const bolt = K.group(-0.055, 0.055, -0.18);
+  // Bolt handle — GB-146 (Jerry, 2026-10-09: "The sniper bolt is on the wrong side") put it on the gun's right (-x) for
+  // the eye of the time, which looked out of his (left-handed) head unmirrored. CL-306 (7 Nov): the first-person view
+  // now mirrors his hold (D-75, VM.mirror), so -x read on the LEFT again; the handle is on +x (the gun's left) so it
+  // reads on the right in first person, where Jerry looks. Lifts by turning about the bolt's axis (boltSide sets which
+  // way), worked between shots and after the magazine is seated on a reload (sniperBoltPose).
+  const BS = 1;   // the handle's side: +1 the gun's left (+x), -1 its right
+  const bolt = K.group(BS * 0.055, 0.055, -0.18);
   K.box(0.018, 0.018, 0.09, gunMid, 0, 0, 0, 0, 0, 0, bolt, 0.006);
-  K.cyl(0.0065, 0.0065, 0.07, gunAccent, -0.035, 0.012, 0.02, bolt, 8, 'x');
-  K.sph(0.017, gunDark, -0.075, 0.012, 0.02, bolt, 12);
-  K.cyl(0.008, 0.008, 0.018, gunBody, -0.048, 0.012, 0.02, bolt, 12, 'x');
-  K.tor(0.012, 0.0015, gunBody, -0.082, 0.012, 0.02, 0, Math.PI / 2, 0, bolt, Math.PI * 2, 12);
-  bolt.userData.gb145Grab = new THREE.Vector3(-0.075, 0.012, 0.02);   // the support hand takes the knob
+  K.cyl(0.0065, 0.0065, 0.07, gunAccent, BS * 0.035, 0.012, 0.02, bolt, 8, 'x');
+  K.sph(0.017, gunDark, BS * 0.075, 0.012, 0.02, bolt, 12);
+  K.cyl(0.008, 0.008, 0.018, gunBody, BS * 0.048, 0.012, 0.02, bolt, 12, 'x');
+  K.tor(0.012, 0.0015, gunBody, BS * 0.082, 0.012, 0.02, 0, Math.PI / 2, 0, bolt, Math.PI * 2, 12);
+  bolt.userData.gb145Grab = new THREE.Vector3(BS * 0.075, 0.012, 0.02);   // the hand takes the knob
   gun.userData.bolt = bolt;
-  gun.userData.boltSide = -1;
+  gun.userData.boltSide = BS;
   gun.userData.baseBoltPos = bolt.position.clone();
   gun.userData.baseBoltRot = bolt.rotation.clone();
   // GB-301: for Claude's VM_RELOADS — the firing hand works this part after each shot and on the reload's work beat.

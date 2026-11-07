@@ -1,0 +1,41 @@
+<!doctype html><meta charset="utf-8"><title>GB-297 close parts</title>
+<style>html,body{margin:0;background:#3a4050}</style>
+<script type="importmap">{"imports":{"three":"../../vendor/three/three.webgpu.js","three/webgpu":"../../vendor/three/three.webgpu.js","three/tsl":"../../vendor/three/three.tsl.js","three/addons/":"../../vendor/three/addons/"}}</script>
+<script type="module">
+window.onerror = (m,s,l,c,e) => { window.ERR = String((e && e.stack) || m); };
+import * as THREE from 'three';
+try {
+  const q = new URLSearchParams(location.search);
+  const w = q.get('w');
+  const c = (q.get('c') || '0.3,0.1,0.1,0,0,0,28').split(',').map(Number);
+  const { weaponModelContext } = await import('../../tools/marine-inspector.js?' + Date.now());
+  const L = await import('../../studio/weapon-longarms.js?' + Date.now());
+  const S = await import('../../studio/weapon-sidearms.js?' + Date.now());
+  const H = await import('../../studio/weapon-heavy.js?' + Date.now());
+  const O = await import('../../studio/weapon-optics.js?' + Date.now());
+  const make = {
+    pistol: S.makePistolModel, revolver: S.makeRevolverModel, uzi: S.makeUziModel,
+    m4: L.makeM4Model, ak: L.makeAkModel, aa12: L.makeAa12Model,
+    shotgun: L.makeShotgunModel, sniper: L.makeSniperModel,
+    minigun: H.makeMinigunModel, launcher: H.makeLauncherModel,
+    flamer: H.makeFlamerModel, chainsaw: H.makeChainsawModel,
+    m240: (ctx) => H.makeM240Model(ctx, false), mortar: (ctx) => H.makeMortarModel(ctx),
+    knife: S.makeKnifeModel,
+    'optic-holo': () => O.makeOptic('holo'),
+    'optic-mini': () => O.makeOptic('mini-reflex'),
+    'optic-reflex': () => O.makeOptic('reflex')
+  }[w];
+  const R = new THREE.WebGPURenderer({ antialias: true, forceWebGL: true });
+  R.setSize(innerWidth, innerHeight); document.body.appendChild(R.domElement); await R.init();
+  const Sc = new THREE.Scene(); Sc.background = new THREE.Color(0x3a4050);
+  Sc.add(new THREE.HemisphereLight(0xffffff, 0x334, 1.2));
+  const sun = new THREE.DirectionalLight(0xffffff, 2.2); sun.position.set(2, 3, 2.5); Sc.add(sun);
+  const fill = new THREE.DirectionalLight(0xffffff, 0.7); fill.position.set(-2, 1, -1); Sc.add(fill);
+  const gun = make.length ? make(weaponModelContext()) : make(weaponModelContext());
+  Sc.add(gun);
+  const C = new THREE.PerspectiveCamera(c[6], innerWidth / innerHeight, 0.004, 20);
+  C.position.set(c[0], c[1], c[2]); C.lookAt(c[3], c[4], c[5]);
+  R.render(Sc, C); await new Promise((r) => setTimeout(r, 250)); R.render(Sc, C);
+} catch (e) { window.ERR = String(e && e.stack || e); }
+window.DONE = true;
+</script>

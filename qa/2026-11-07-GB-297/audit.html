@@ -1,0 +1,150 @@
+<!doctype html><meta charset="utf-8"><title>GB-297 parts-attach audit</title>
+<script type="importmap">{"imports":{"three":"../../vendor/three/three.webgpu.js","three/webgpu":"../../vendor/three/three.webgpu.js","three/tsl":"../../vendor/three/three.tsl.js","three/addons/":"../../vendor/three/addons/"}}</script>
+<script type="module">
+window.onerror = (m,s,l,c,e) => { window.ERR = String((e && e.stack) || m); };
+import * as THREE from 'three';
+try {
+  const { weaponModelContext } = await import('../../tools/marine-inspector.js?' + Date.now());
+  const L = await import('../../studio/weapon-longarms.js?' + Date.now());
+  const S = await import('../../studio/weapon-sidearms.js?' + Date.now());
+  const H = await import('../../studio/weapon-heavy.js?' + Date.now());
+  const O = await import('../../studio/weapon-optics.js?' + Date.now());
+
+  const MAKERS = {
+    pistol: S.makePistolModel, revolver: S.makeRevolverModel, uzi: S.makeUziModel,
+    m4: L.makeM4Model, ak: L.makeAkModel, aa12: L.makeAa12Model,
+    shotgun: L.makeShotgunModel, sniper: L.makeSniperModel,
+    minigun: H.makeMinigunModel, launcher: H.makeLauncherModel,
+    flamer: H.makeFlamerModel, chainsaw: H.makeChainsawModel,
+    m240: (ctx) => H.makeM240Model(ctx, false), mortar: (ctx) => H.makeMortarModel(ctx),
+    knife: S.makeKnifeModel
+  };
+
+  const SKIP_NAME = /flash|laser|flare|suppressor|light/i;
+  const EPS = 0.0015;
+  const SMALL_MAX = 0.018;
+
+  function aabbOf(mesh) {
+    mesh.updateWorldMatrix(true, false);
+    return new THREE.Box3().setFromObject(mesh);
+  }
+  function vol(b) {
+    const s = b.getSize(new THREE.Vector3());
+    return Math.max(0, s.x) * Math.max(0, s.y) * Math.max(0, s.z);
+  }
+  function longest(b) {
+    const s = b.getSize(new THREE.Vector3());
+    return Math.max(s.x, s.y, s.z);
+  }
+  function touches(a, b, eps) {
+    return a.clone().expandByScalar(eps).intersectsBox(b);
+  }
+  function gap(a, b) {
+    let g = 0;
+    if (a.max.x < b.min.x) g = Math.max(g, b.min.x - a.max.x);
+    if (b.max.x < a.min.x) g = Math.max(g, a.min.x - b.max.x);
+    if (a.max.y < b.min.y) g = Math.max(g, b.min.y - a.max.y);
+    if (b.max.y < a.min.y) g = Math.max(g, a.min.y - b.max.y);
+    if (a.max.z < b.min.z) g = Math.max(g, b.min.z - a.max.z);
+    if (b.max.z < a.min.z) g = Math.max(g, a.min.z - b.max.z);
+    return a.intersectsBox(b) ? 0 : g;
+  }
+  function centerDeepInside(small, big) {
+    const c = small.getCenter(new THREE.Vector3());
+    const inner = big.clone().expandByScalar(-0.002);
+    if (inner.isEmpty()) return false;
+    return inner.containsPoint(c);
+  }
+
+  function auditGun(name, gun) {
+    gun.updateMatrixWorld(true);
+    const meshes = [];
+    gun.traverse((o) => {
+      if (!o.isMesh) return;
+      if (o.name && SKIP_NAME.test(o.name)) return;
+      const mat = o.material;
+      if (mat && mat.transparent && mat.opacity === 0) return;
+      const b = aabbOf(o);
+      if (b.isEmpty()) return;
+      meshes.push({ mesh: o, box: b, vol: vol(b), long: longest(b), name: o.name || o.type });
+    });
+    const smalls = meshes.filter((m) => m.long <= SMALL_MAX && m.vol > 0);
+    const bigs = meshes.filter((m) => m.long > SMALL_MAX);
+    const floaters = [];
+    const sunk = [];
+    for (const s of smalls) {
+      let bestGap = Infinity, best = null, anyTouch = false, sunkIn = null;
+      for (const b of bigs) {
+        if (b.mesh === s.mesh) continue;
+        const g = gap(s.box, b.box);
+        if (g < bestGap) { bestGap = g; best = b; }
+        if (touches(s.box, b.box, EPS)) anyTouch = true;
+        if (centerDeepInside(s.box, b.box)) sunkIn = b;
+      }
+      if (!anyTouch) {
+        floaters.push({
+          name: s.name,
+          longMm: +(s.long * 1000).toFixed(2),
+          gapMm: best === null ? null : +(bestGap * 1000).toFixed(2),
+          center: s.box.getCenter(new THREE.Vector3()).toArray().map((v) => +v.toFixed(4)),
+          sizeMm: s.box.getSize(new THREE.Vector3()).toArray().map((v) => +(v * 1000).toFixed(2))
+        });
+      } else if (sunkIn && s.long < 0.012) {
+        const inter = s.box.clone().intersect(sunkIn.box);
+        if (!inter.isEmpty() && vol(inter) > s.vol * 0.85) {
+          sunk.push({
+            name: s.name,
+            longMm: +(s.long * 1000).toFixed(2),
+            center: s.box.getCenter(new THREE.Vector3()).toArray().map((v) => +v.toFixed(4))
+          });
+        }
+      }
+    }
+    return {
+      gun: name,
+      meshCount: meshes.length,
+      smallCount: smalls.length,
+      bigCount: bigs.length,
+      floaterCount: floaters.length,
+      sunkCount: sunk.length,
+      floaters,
+      sunk
+    };
+  }
+
+  const reports = {};
+  const ctxBase = weaponModelContext();
+  for (const [name, make] of Object.entries(MAKERS)) {
+    let captured = null;
+    const ctx = {
+      ...ctxBase,
+      finishGun(gun) {
+        captured = auditGun(name, gun);
+        return ctxBase.finishGun(gun);
+      }
+    };
+    try {
+      const gun = make(ctx);
+      if (!captured) captured = auditGun(name, gun);
+      reports[name] = captured;
+    } catch (e) {
+      reports[name] = { gun: name, error: String(e && e.stack || e) };
+    }
+  }
+
+  try {
+    for (const kind of ['mini-reflex', 'reflex', 'holo', 'acog']) {
+      const root = O.makeOptic(kind);
+      reports['optic:' + kind] = auditGun('optic:' + kind, root);
+    }
+  } catch (e) {
+    reports['optic'] = { error: String(e && e.stack || e) };
+  }
+
+  window.REPORT = reports;
+  window.SUMMARY = Object.fromEntries(Object.entries(reports).map(([k, v]) => [k, v.error ? { error: v.error } : { small: v.smallCount, float: v.floaterCount, sunk: v.sunkCount }]));
+} catch (e) {
+  window.ERR = String(e && e.stack || e);
+}
+window.DONE = true;
+</script>

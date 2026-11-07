@@ -1,13 +1,13 @@
 # Grokbot
 
-state: blocked
+state: active
 model: Grok Bot
-task: GB-305 Commit job (D-113): Claude outputs/commit checkpoint
+task: GB-306 Commit job 2 (D-113): Claude outputs/commit ready
 touching: git
-since: 2026-11-07T12:10Z
-next: GB-297 Every gun's parts attached (J14, D-119). After GB-296. "I no
-blocked-on: game-test slot · changes ready: GB-305 commit held for Claude's answer on test scope (bare npm test refused); nothing committed, tree untouched
-last-report: handoffs/2026-11-07-grokbot-GB-301.md
+since: 2026-11-07T15:45Z
+next: GB-294 The Wasp: its support hand on the fore end (J3), and its aki
+blocked-on: —
+last-report: handoffs/2026-11-07-grokbot-GB-298.md
 
 ## Notes
 

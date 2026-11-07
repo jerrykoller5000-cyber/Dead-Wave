@@ -52,15 +52,15 @@ the motion smooth. The yardstick is docs/fps/feel.md.
 | Shotgun | in work (CL-306, 7 Nov) | the gun rolls left and lifts for the shell; the port still behind the receiver from the eye (partly) | | | | |
 | Breacher-12 | open | | | | | |
 | Sniper | in work (GB-301 done; the mirror, 7 Nov 13:20Z) | the firing hand works the bolt after the mag seats and between shots (filmed: right). Not OK yet: the bolt reads on the LEFT in first person (the view mirrors the lefty's hold; all asymmetric parts do): CL-309 proposed to Jerry. | | | | |
-| Launcher | in work (CL-306 c, 7 Nov 11:40Z) | the support hand's path on GP-20039's swing-out drum is in (latch, swing, three rounds at the bottom chamber, wind, shut; filmed in the cloud: reads as an MGL reload). Open: a round in the fingers (ChatGPT part), the right hand on the grip (GP-20037), a 5080 film. | | | | |
+| Launcher | reload OK, hold open (7 Nov 15:20Z) | the swing-out reload (GP-20039 + CL-306's hands + the loose round): OK on AG's 5080 sheet (latch, drum out, round between the fingers at .42, seated, key, shut). Open: the hip hold's receiver filling the lower centre as a flat block (GP-20037). | | | OK (4-light, 11-shot set, reload beats) | |
 | Flamethrower | in work (CL-306 b, 7 Nov) | the can comes off in the palm, goes to the belt, a fresh one on (re-filming) | | | | |
 | Chainsaw | sent back x2 (Claude, 7 Nov 08:30Z) | NOT OK: the redo puts the hands on the right handles (J1 met) but the left forearm lies across the lower-left of the view as a log in every frame of the set; the saw too close. Back to GB-292. | NOT OK (the first set); the redo: not yet reviewed | OK from Grokbot's side (its own fix) | OK ("J1 hands verified"); the forearm not mentioned | |
 | Rotary Gun | in work (CL-306 b, 7 Nov) | the box comes off in the palm, to the pouch, a fresh one on (re-filming) | | | | |
 | Pistol pair | in work (CL-306 b, 7 Nov) | one gun at a time: the right drops out of the view to its pouch (.06-.50) and comes back loaded, then the left (.48-.92); filmed OK | | | | |
 | Wasp pair | in work (CL-306 b, 7 Nov) | as the pistol pair; a sliver of the muzzle at the bottom edge at u .68 (tuned, re-film). The cant: GB-294. | | | | |
 | Revolver pair | in work (CL-306 b, 7 Nov) | each gun in turn, up, rolled in, with its cylinder out (GB-300); no empties/loader on the pair yet (no free hand) | | | | |
-| Knife / machete / katana | open | | | | | |
-| Grenade throw | open | | | | | |
+| Knife / machete / katana | in work (CL-307 a-e, 7 Nov) | the view's own swing: the gun put away, the blade in the firing hand (machete chop filmed in the cloud: raised, swept across with the flat to the eye, follow-through, back); the knife's thrust and the katana's cut authored, not filmed | | | | |
+| Grenade throw | in work (CL-307 c/f, 7 Nov) | the support hand to the pouch, cocked beside the head while G is held, the whip, the open hand's follow-through, back (filmed in the cloud; the grenade in the fist hard to see: hold offset raised) | | | | |
 | Mortar (carry, set, fire) | open | | | | | |
 | Building and E (the hands on walls, doors, crates) | open | | | | | |
 | Ladders and the mast climb | open | | | | | |

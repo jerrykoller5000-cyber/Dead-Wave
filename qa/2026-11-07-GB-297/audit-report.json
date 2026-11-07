@@ -1,0 +1,707 @@
+{
+  "pistol": {
+    "gun": "pistol",
+    "meshCount": 90,
+    "smallCount": 13,
+    "bigCount": 76,
+    "floaterCount": 0,
+    "sunkCount": 5,
+    "floaters": [],
+    "sunk": [
+      {
+        "name": "Mesh",
+        "longMm": 4,
+        "center": [
+          0,
+          0.086,
+          0.2695
+        ]
+      },
+      {
+        "name": "Mesh",
+        "longMm": 6.8,
+        "center": [
+          -0.0226,
+          -0.004,
+          0.006
+        ]
+      },
+      {
+        "name": "Mesh",
+        "longMm": 5.2,
+        "center": [
+          -0.0228,
+          -0.024,
+          -0.016
+        ]
+      },
+      {
+        "name": "Mesh",
+        "longMm": 6.8,
+        "center": [
+          0.0226,
+          -0.004,
+          0.006
+        ]
+      },
+      {
+        "name": "Mesh",
+        "longMm": 5.2,
+        "center": [
+          0.0228,
+          -0.024,
+          -0.016
+        ]
+      }
+    ]
+  },
+  "revolver": {
+    "gun": "revolver",
+    "meshCount": 78,
+    "smallCount": 22,
+    "bigCount": 50,
+    "floaterCount": 0,
+    "sunkCount": 2,
+    "floaters": [],
+    "sunk": [
+      {
+        "name": "Mesh",
+        "longMm": 6,
+        "center": [
+          0,
+          0.115,
+          0.2985
+        ]
+      },
+      {
+        "name": "Mesh",
+        "longMm": 11.2,
+        "center": [
+          0,
+          0.1028,
+          -0.109
+        ]
+      }
+    ]
+  },
+  "uzi": {
+    "gun": "uzi",
+    "meshCount": 119,
+    "smallCount": 29,
+    "bigCount": 90,
+    "floaterCount": 0,
+    "sunkCount": 6,
+    "floaters": [],
+    "sunk": [
+      {
+        "name": "Mesh",
+        "longMm": 11,
+        "center": [
+          0.0111,
+          0.115,
+          0.1211
+        ]
+      },
+      {
+        "name": "Mesh",
+        "longMm": 11,
+        "center": [
+          -0.0111,
+          0.115,
+          0.1211
+        ]
+      },
+      {
+        "name": "Mesh",
+        "longMm": 11,
+        "center": [
+          -0.0111,
+          0.115,
+          0.0989
+        ]
+      },
+      {
+        "name": "Mesh",
+        "longMm": 11,
+        "center": [
+          0.0111,
+          0.115,
+          0.0989
+        ]
+      },
+      {
+        "name": "Mesh",
+        "longMm": 7.6,
+        "center": [
+          -0.0407,
+          0.002,
+          0.198
+        ]
+      },
+      {
+        "name": "Mesh",
+        "longMm": 7.6,
+        "center": [
+          0.0407,
+          0.002,
+          0.198
+        ]
+      }
+    ]
+  },
+  "m4": {
+    "gun": "m4",
+    "meshCount": 123,
+    "smallCount": 14,
+    "bigCount": 109,
+    "floaterCount": 0,
+    "sunkCount": 0,
+    "floaters": [],
+    "sunk": []
+  },
+  "ak": {
+    "gun": "ak",
+    "meshCount": 87,
+    "smallCount": 26,
+    "bigCount": 61,
+    "floaterCount": 0,
+    "sunkCount": 0,
+    "floaters": [],
+    "sunk": []
+  },
+  "aa12": {
+    "gun": "aa12",
+    "meshCount": 124,
+    "smallCount": 52,
+    "bigCount": 72,
+    "floaterCount": 0,
+    "sunkCount": 17,
+    "floaters": [],
+    "sunk": [
+      {
+        "name": "Mesh",
+        "longMm": 9,
+        "center": [
+          -0.077,
+          0.03,
+          0.177
+        ]
+      },
+      {
+        "name": "Mesh",
+        "longMm": 4.5,
+        "center": [
+          -0.078,
+          0.03,
+          0.177
+        ]
+      },
+      {
+        "name": "Mesh",
+        "longMm": 9,
+        "center": [
+          -0.077,
+          -0.044,
+          0.177
+        ]
+      },
+      {
+        "name": "Mesh",
+        "longMm": 4.5,
+        "center": [
+          -0.078,
+          -0.044,
+          0.177
+        ]
+      },
+      {
+        "name": "Mesh",
+        "longMm": 9,
+        "center": [
+          -0.077,
+          0.03,
+          -0.181
+        ]
+      },
+      {
+        "name": "Mesh",
+        "longMm": 4.5,
+        "center": [
+          -0.078,
+          0.03,
+          -0.181
+        ]
+      },
+      {
+        "name": "Mesh",
+        "longMm": 9,
+        "center": [
+          -0.077,
+          -0.044,
+          -0.181
+        ]
+      },
+      {
+        "name": "Mesh",
+        "longMm": 4.5,
+        "center": [
+          -0.078,
+          -0.044,
+          -0.181
+        ]
+      },
+      {
+        "name": "Mesh",
+        "longMm": 9,
+        "center": [
+          0.077,
+          0.03,
+          0.177
+        ]
+      },
+      {
+        "name": "Mesh",
+        "longMm": 4.5,
+        "center": [
+          0.078,
+          0.03,
+          0.177
+        ]
+      },
+      {
+        "name": "Mesh",
+        "longMm": 9,
+        "center": [
+          0.077,
+          -0.044,
+          0.177
+        ]
+      },
+      {
+        "name": "Mesh",
+        "longMm": 4.5,
+        "center": [
+          0.078,
+          -0.044,
+          0.177
+        ]
+      },
+      {
+        "name": "Mesh",
+        "longMm": 9,
+        "center": [
+          0.077,
+          0.03,
+          -0.181
+        ]
+      },
+      {
+        "name": "Mesh",
+        "longMm": 4.5,
+        "center": [
+          0.078,
+          0.03,
+          -0.181
+        ]
+      },
+      {
+        "name": "Mesh",
+        "longMm": 9,
+        "center": [
+          0.077,
+          -0.044,
+          -0.181
+        ]
+      },
+      {
+        "name": "Mesh",
+        "longMm": 4.5,
+        "center": [
+          0.078,
+          -0.044,
+          -0.181
+        ]
+      },
+      {
+        "name": "Mesh",
+        "longMm": 7,
+        "center": [
+          0,
+          -0.128,
+          -0.059
+        ]
+      }
+    ]
+  },
+  "shotgun": {
+    "gun": "shotgun",
+    "meshCount": 67,
+    "smallCount": 21,
+    "bigCount": 46,
+    "floaterCount": 0,
+    "sunkCount": 2,
+    "floaters": [],
+    "sunk": [
+      {
+        "name": "Mesh",
+        "longMm": 8,
+        "center": [
+          0,
+          0.06,
+          0.22
+        ]
+      },
+      {
+        "name": "Mesh",
+        "longMm": 8,
+        "center": [
+          0,
+          0.06,
+          0.87
+        ]
+      }
+    ]
+  },
+  "sniper": {
+    "gun": "sniper",
+    "meshCount": 171,
+    "smallCount": 47,
+    "bigCount": 124,
+    "floaterCount": 0,
+    "sunkCount": 12,
+    "floaters": [],
+    "sunk": [
+      {
+        "name": "Mesh",
+        "longMm": 9,
+        "center": [
+          -0.035,
+          0.025,
+          -0.29
+        ]
+      },
+      {
+        "name": "Mesh",
+        "longMm": 9,
+        "center": [
+          -0.035,
+          -0.025,
+          -0.29
+        ]
+      },
+      {
+        "name": "Mesh",
+        "longMm": 9,
+        "center": [
+          -0.035,
+          0.052,
+          -0.584
+        ]
+      },
+      {
+        "name": "Mesh",
+        "longMm": 9,
+        "center": [
+          -0.035,
+          -0.081,
+          -0.588
+        ]
+      },
+      {
+        "name": "Mesh",
+        "longMm": 9,
+        "center": [
+          0.035,
+          0.025,
+          -0.29
+        ]
+      },
+      {
+        "name": "Mesh",
+        "longMm": 9,
+        "center": [
+          0.035,
+          -0.025,
+          -0.29
+        ]
+      },
+      {
+        "name": "Mesh",
+        "longMm": 9,
+        "center": [
+          0.035,
+          0.052,
+          -0.584
+        ]
+      },
+      {
+        "name": "Mesh",
+        "longMm": 9,
+        "center": [
+          0.035,
+          -0.081,
+          -0.588
+        ]
+      },
+      {
+        "name": "Mesh",
+        "longMm": 7,
+        "center": [
+          -0.0335,
+          0.14,
+          -0.061
+        ]
+      },
+      {
+        "name": "Mesh",
+        "longMm": 7,
+        "center": [
+          0.0335,
+          0.14,
+          -0.061
+        ]
+      },
+      {
+        "name": "Mesh",
+        "longMm": 7,
+        "center": [
+          -0.0335,
+          0.14,
+          0.147
+        ]
+      },
+      {
+        "name": "Mesh",
+        "longMm": 7,
+        "center": [
+          0.0335,
+          0.14,
+          0.147
+        ]
+      }
+    ]
+  },
+  "minigun": {
+    "gun": "minigun",
+    "meshCount": 146,
+    "smallCount": 14,
+    "bigCount": 132,
+    "floaterCount": 0,
+    "sunkCount": 8,
+    "floaters": [],
+    "sunk": [
+      {
+        "name": "Mesh",
+        "longMm": 8.42,
+        "center": [
+          0.0974,
+          -0.1397,
+          -0.125
+        ]
+      },
+      {
+        "name": "Mesh",
+        "longMm": 5.13,
+        "center": [
+          0.0974,
+          -0.1397,
+          -0.125
+        ]
+      },
+      {
+        "name": "Mesh",
+        "longMm": 8.42,
+        "center": [
+          0.0974,
+          -0.1397,
+          0.075
+        ]
+      },
+      {
+        "name": "Mesh",
+        "longMm": 5.13,
+        "center": [
+          0.0974,
+          -0.1397,
+          0.075
+        ]
+      },
+      {
+        "name": "Mesh",
+        "longMm": 8.42,
+        "center": [
+          0.2841,
+          -0.1172,
+          -0.125
+        ]
+      },
+      {
+        "name": "Mesh",
+        "longMm": 5.13,
+        "center": [
+          0.2841,
+          -0.1172,
+          -0.125
+        ]
+      },
+      {
+        "name": "Mesh",
+        "longMm": 8.42,
+        "center": [
+          0.2841,
+          -0.1172,
+          0.075
+        ]
+      },
+      {
+        "name": "Mesh",
+        "longMm": 5.13,
+        "center": [
+          0.2841,
+          -0.1172,
+          0.075
+        ]
+      }
+    ]
+  },
+  "launcher": {
+    "gun": "launcher",
+    "meshCount": 121,
+    "smallCount": 40,
+    "bigCount": 81,
+    "floaterCount": 0,
+    "sunkCount": 0,
+    "floaters": [],
+    "sunk": []
+  },
+  "flamer": {
+    "gun": "flamer",
+    "meshCount": 131,
+    "smallCount": 30,
+    "bigCount": 101,
+    "floaterCount": 0,
+    "sunkCount": 0,
+    "floaters": [],
+    "sunk": []
+  },
+  "chainsaw": {
+    "gun": "chainsaw",
+    "meshCount": 186,
+    "smallCount": 113,
+    "bigCount": 73,
+    "floaterCount": 0,
+    "sunkCount": 3,
+    "floaters": [],
+    "sunk": [
+      {
+        "name": "Mesh",
+        "longMm": 11,
+        "center": [
+          0.1455,
+          -0.012,
+          0.058
+        ]
+      },
+      {
+        "name": "Mesh",
+        "longMm": 6.3,
+        "center": [
+          0.1455,
+          -0.012,
+          0.058
+        ]
+      },
+      {
+        "name": "Mesh",
+        "longMm": 6,
+        "center": [
+          0,
+          0,
+          0
+        ]
+      }
+    ]
+  },
+  "m240": {
+    "gun": "m240",
+    "meshCount": 123,
+    "smallCount": 46,
+    "bigCount": 77,
+    "floaterCount": 0,
+    "sunkCount": 0,
+    "floaters": [],
+    "sunk": []
+  },
+  "mortar": {
+    "gun": "mortar",
+    "meshCount": 70,
+    "smallCount": 4,
+    "bigCount": 66,
+    "floaterCount": 0,
+    "sunkCount": 2,
+    "floaters": [],
+    "sunk": [
+      {
+        "name": "Mesh",
+        "longMm": 8.1,
+        "center": [
+          -0.3266,
+          0.1927,
+          0.2593
+        ]
+      },
+      {
+        "name": "Mesh",
+        "longMm": 8.1,
+        "center": [
+          0.2474,
+          0.1599,
+          0.2655
+        ]
+      }
+    ]
+  },
+  "knife": {
+    "gun": "knife",
+    "meshCount": 12,
+    "smallCount": 0,
+    "bigCount": 12,
+    "floaterCount": 0,
+    "sunkCount": 0,
+    "floaters": [],
+    "sunk": []
+  },
+  "optic:mini-reflex": {
+    "gun": "optic:mini-reflex",
+    "meshCount": 15,
+    "smallCount": 7,
+    "bigCount": 7,
+    "floaterCount": 0,
+    "sunkCount": 0,
+    "floaters": [],
+    "sunk": []
+  },
+  "optic:reflex": {
+    "gun": "optic:reflex",
+    "meshCount": 16,
+    "smallCount": 4,
+    "bigCount": 11,
+    "floaterCount": 0,
+    "sunkCount": 0,
+    "floaters": [],
+    "sunk": []
+  },
+  "optic:holo": {
+    "gun": "optic:holo",
+    "meshCount": 18,
+    "smallCount": 3,
+    "bigCount": 14,
+    "floaterCount": 0,
+    "sunkCount": 0,
+    "floaters": [],
+    "sunk": []
+  },
+  "optic": {
+    "error": "RangeError: Unknown optic kind: acog\n    at Module.makeOptic (http://127.0.0.1:18638/studio/weapon-optics.js?1794059552988:116:21)\n    at http://127.0.0.1:18638/qa/2026-11-07-GB-297/audit.html?__gameTestToken=c015b9eb-8424-4bde-9423-2ef6ee6beb72:137:22"
+  }
+}

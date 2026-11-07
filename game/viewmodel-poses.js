@@ -344,12 +344,12 @@ const VM_STAGE3_RELOADS = Object.freeze({
       [.51, 'pouch', 'pinch'], [.57, 'loadIn', 'pinch'], [.61, 'load', 'pinch'], [.64, 'load', 'open'],
       [.67, 'pouch', 'pinch'], [.73, 'loadIn', 'pinch'], [.76, 'load', 'pinch'], [.79, 'load', 'open'],
       [.81, 'wind', 'pinch'], [.86, 'wind', 'pinch'], [.89, 'drumOut', 'cup'], [.96, 'fore', 'fore'], [1, 'fore', 'fore']],
-    round: { trips: [[.33, .46], [.51, .63], [.67, .78]], ahead: .09 },   // GP-20039's loadRound ahead of the fingertips (the pinch reaches ~6 cm past the palm), each trip, until the push home
+    round: { trips: [[.33, .46], [.51, .63], [.67, .78]], ahead: .09, up: .04 },   // GP-20039's loadRound ahead of the fingertips (the pinch reaches ~6 cm past the palm), each trip, until the push home
     places: {
       latch: { part: 'latch', rootAt: [-.02, -.015, -.025], z: [-.5, .85, 0], y: [-.5, -.5, -.7] },
       drumOut: { part: 'drum', rootAt: [0, -.15, 0], z: [0, 1, 0], y: [-.45, -.55, -.7] },   // cupping its underside through the swing
-      loadIn: { part: 'drum', rootAt: [0, -.075, -.20], z: [0, 0, 1], y: [-.5, -.5, -.7] },   // the round at the chamber's mouth (the palm 13 cm behind the drum's back, the fingertips at the round)
-      load: { part: 'drum', rootAt: [0, -.075, -.145], z: [0, 0, 1], y: [-.5, -.5, -.7] },    // pushed home: the fingertips at the back face (ChatGPT, 13:03Z: at -.105 the glove was through the drum)
+      loadIn: { part: 'drum', rootAt: [0, -.115, -.20], z: [0, .3, 1], y: [-.5, -.5, -.7] },   // the round at the chamber's mouth: the palm 13 cm behind the drum's back and 4 cm under the chamber, the round above the fingertips (seen past the glove)
+      load: { part: 'drum', rootAt: [0, -.115, -.145], z: [0, .3, 1], y: [-.5, -.5, -.7] },    // pushed home: the fingertips at the back face (ChatGPT, 13:03Z: at -.105 the glove was through the drum)
       wind: { part: 'winder', rootAt: [.01, 0, -.03], z: [0, 0, 1], y: [-.5, -.5, -.7] },
       pouch: { at: [-.29, -.51, -.32], z: [.25, .9, .3], y: [-.4, -.6, .65] } }
   }
@@ -358,6 +358,56 @@ const VM_STAGE3_RELOADS = Object.freeze({
 // Gun-local contact points. The support point is on the handguard for the rifles and beside the grip on the Wasp.
 // A magazine's foot stays in the support palm during the reload. The work point is a fixed bolt/handle target until
 // the weapon builders expose moving direct-child nodes; the viewmodel then follows those nodes.
+// CL-307: the blade in the firing hand. Each key [u, { p, e }] is a gun-like frame in view space as the eye sees it
+// (metres right/up/-forward; yaw, pitch, roll in radians: the "bore" is the blade's line), the fist on it as on a pistol's
+// grip (the hold's right socket); hold is the blade's root in that frame (the knife's handle middle is 4 cm behind its
+// root). The gun is put away below the view for the swing and comes back up after; the support hand is out of the view.
+// e: [yaw, pitch, roll, swing]. Pitch > 0 points the blade down (as the gun's own pitch); yaw > 0 turns it in toward the
+// middle; swing turns the whole thing about the view's own depth axis (a raised blade swept across the view: the chop),
+// which the gun's yaw/pitch/roll cannot do (a blade turned from up to down through them passes through pointing away
+// from the eye and vanishes behind the fist: the first cloud strip).
+export const VM_BLADES = Object.freeze({
+  knife: {   // a slash (0.22 s): the blade up out of the fist, swept from the right across the lower middle, back (a thrust
+             // points the 30 cm blade at the eye's line and it vanishes behind the fist: fpshot p18)
+    keys: [[0, { p: [0.30, -0.34, -0.30], e: [0.2, -0.9, 0.3, -0.3] }], [0.30, { p: [0.20, -0.10, -0.45], e: [0.1, -1.1, 1.2, -0.2] }],
+      [0.60, { p: [-0.02, -0.14, -0.55], e: [0.0, -0.9, 1.5, 1.1] }], [0.80, { p: [0.10, -0.20, -0.45], e: [0.1, -0.7, 1.2, 0.8] }],
+      [1, { p: [0.30, -0.34, -0.30], e: [0.2, -0.9, 0.3, -0.3] }]],
+    hold: { pos: [0, -0.07, 0.0], rot: [0, 0.15, 0] },
+    away: [-0.22, -0.46, -0.36]   // the support wrist, out of the view (view space)
+  },
+  machete: {   // a chop (0.40 s): raised high at the right with the blade straight up, swept across and down to the lower left, back
+    keys: [[0, { p: [0.30, -0.34, -0.30], e: [0.2, -0.3, 0.2, 0] }], [0.30, { p: [0.26, 0.06, -0.42], e: [0.1, -1.35, 0.3, -0.3] }],
+      [0.58, { p: [0.03, -0.18, -0.58], e: [0.0, -1.0, 1.5, 1.5] }], [0.80, { p: [0.16, -0.22, -0.44], e: [0.1, -0.6, 1.0, 0.9] }],
+      [1, { p: [0.30, -0.34, -0.30], e: [0.2, -0.3, 0.2, 0] }]],   // the fist stays right of the middle (the forearm was a log across the view at -0.06); the flat to the eye in the chop (roll)
+    hold: { pos: [0, -0.07, 0.0], rot: [0, 0.15, 0] },
+    away: [-0.22, -0.46, -0.36]
+  },
+  katana: {   // a cut (0.30 s): the same arc, the blade long
+    keys: [[0, { p: [0.30, -0.34, -0.30], e: [0.2, -0.3, 0.2, 0] }], [0.28, { p: [0.24, 0.08, -0.44], e: [0.1, -1.4, 0.3, -0.3] }],
+      [0.56, { p: [0.02, -0.18, -0.60], e: [0.0, -1.0, 1.5, 1.5] }], [0.80, { p: [0.16, -0.22, -0.44], e: [0.1, -0.6, 1.0, 0.9] }],
+      [1, { p: [0.30, -0.34, -0.30], e: [0.2, -0.3, 0.2, 0] }]],
+    hold: { pos: [0, -0.07, 0.0], rot: [0, 0.15, 0] },
+    away: [-0.22, -0.46, -0.36]
+  }
+});
+
+// CL-307: the grenade in the support hand (index.html GRENADE_ANIM's phases and times). Places are gun-like frames in
+// view space as the eye sees it (the fist on them as on a mirrored pistol grip), the grenade's root at hold in the fist.
+// grab: from the gun down to the pouch (the grenade in hand from inHand); raise: up to cocked beside the head; cocked:
+// held there while G is held; throw: the whip forward (the grenade leaves at whip) and the follow-through; back: to the gun.
+export const VM_GRENADE = Object.freeze({
+  times: { grab: 0.16, inHand: 0.11, raise: 0.14, whip: 0.08, follow: 0.14, back: 0.2 },
+  places: {
+    pouch: { p: [-0.26, -0.44, -0.30], e: [-0.4, 0.6, -0.3] },
+    lift: { p: [-0.30, -0.10, -0.42], e: [-0.5, -0.3, -0.5] },
+    cocked: { p: [-0.26, 0.06, -0.42], e: [-0.6, -0.9, -0.6] },   // was 30 cm from the eye: a fist the size of the view's corner
+    whip: { p: [-0.08, 0.06, -0.60], e: [-0.1, -0.2, -0.3] },
+    follow: { p: [0.02, -0.16, -0.62], e: [0.1, 0.5, -0.1] }
+  },
+  hold: { pos: [0, -0.045, 0.01], rot: [0, 0, 0] },   // the grenade's top out of the fist
+  bob: { y: 0.006, rate: 1.6 }   // the cocked hand's breathing
+});
+
 export const VM_SOCKETS = Object.freeze({
   // CL-293 (J54: "the left hand should grip the pistol the way a real shooter would"): the support hand comes in off the body's
   // hold (its fist sat 16 cm out from the grip, beside it) onto the grip's front, its fingers over the strong hand's (the
@@ -369,7 +419,7 @@ export const VM_SOCKETS = Object.freeze({
   shotgun: { grip: [0, -0.088, -0.056], support: [0, -0.035, 0.28], port: [0.02, -0.05, 0.22] },
   aa12: { grip: [0, -0.145, -0.166], support: [0, -0.035, 0.36], magFoot: [0, -0.415, 0.05], work: [-0.08, 0.05, 0.18] },
   revolver: { grip: [0, -0.07, -0.04], support: [-0.012, -0.10, -0.014] },   // J57: palm cups the grip, not air beside it
-  sniper: { grip: [0, -0.088, -0.117], support: [0, -0.005, 0.35], magFoot: [0, -0.203, 0.02], boltKnob: [-0.13, 0.067, -0.16] },
+  sniper: { grip: [0, -0.088, -0.117], support: [0, -0.005, 0.35], magFoot: [0, -0.203, 0.02], boltKnob: [0.13, 0.067, -0.16] },   // CL-306: the handle on +x (reads right in the mirrored view)
   // CL-301 (GP-20022): rear throttle + front hoop. GB-292 (J1): contacts were already R=rear/L=front but the left fist
   // sat on the cowling behind the hoop (basis too steep) and the right hand had no gripBasis so the rear throttle read empty.
   // Right: vertical throttle, palm inward, elbow back; left: motorcycle on the hoop top, palm down, forearm mostly back.

@@ -1,0 +1,95 @@
+{
+  "pistol": {
+    "small": 13,
+    "float": 0,
+    "sunk": 5
+  },
+  "revolver": {
+    "small": 22,
+    "float": 0,
+    "sunk": 2
+  },
+  "uzi": {
+    "small": 29,
+    "float": 0,
+    "sunk": 6
+  },
+  "m4": {
+    "small": 14,
+    "float": 0,
+    "sunk": 0
+  },
+  "ak": {
+    "small": 26,
+    "float": 0,
+    "sunk": 0
+  },
+  "aa12": {
+    "small": 52,
+    "float": 0,
+    "sunk": 17
+  },
+  "shotgun": {
+    "small": 21,
+    "float": 0,
+    "sunk": 2
+  },
+  "sniper": {
+    "small": 47,
+    "float": 0,
+    "sunk": 12
+  },
+  "minigun": {
+    "small": 14,
+    "float": 0,
+    "sunk": 8
+  },
+  "launcher": {
+    "small": 40,
+    "float": 0,
+    "sunk": 0
+  },
+  "flamer": {
+    "small": 30,
+    "float": 0,
+    "sunk": 0
+  },
+  "chainsaw": {
+    "small": 113,
+    "float": 0,
+    "sunk": 3
+  },
+  "m240": {
+    "small": 46,
+    "float": 0,
+    "sunk": 0
+  },
+  "mortar": {
+    "small": 4,
+    "float": 0,
+    "sunk": 2
+  },
+  "knife": {
+    "small": 0,
+    "float": 0,
+    "sunk": 0
+  },
+  "optic:mini-reflex": {
+    "small": 7,
+    "float": 0,
+    "sunk": 0
+  },
+  "optic:reflex": {
+    "small": 4,
+    "float": 0,
+    "sunk": 0
+  },
+  "optic:holo": {
+    "small": 3,
+    "float": 0,
+    "sunk": 0
+  },
+  "optic": {
+    "error": "RangeError: Unknown optic kind: acog\n    at Module.makeOptic (http://127.0.0.1:18638/studio/weapon-optics.js?1794059552988:116:21)\n    at http://127.0.0.1:18638/qa/2026-11-07-GB-297/audit.html?__gameTestToken=c015b9eb-8424-4bde-9423-2ef6ee6beb72:137:22"
+  }
+}

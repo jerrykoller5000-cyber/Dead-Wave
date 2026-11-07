@@ -15,7 +15,7 @@
 //
 // index.html calls update(dt, state) each frame before it draws and place() in renderFrame; it asks muzzleWorld()
 // where the view gun's muzzle appears (the laser leaves from there).
-import { VM, VM_POSES, VM_RELOADS, VM_SOCKETS } from './viewmodel-poses.js';
+import { VM, VM_POSES, VM_RELOADS, VM_SOCKETS, VM_BLADES, VM_GRENADE } from './viewmodel-poses.js';
 import { SIGHT } from './sight-points.js';
 import { buildViewArm, wristSpacePoint, HAND_SCALE } from '../studio/fp-arms.js';
 import { copyPose, lerpPose, HAND_POSES } from '../studio/marine-hand.js';
@@ -44,6 +44,8 @@ export function createViewmodel(ctx) {
   // CL-301 (Jerry, 3 Nov: the akimbo pistols in first person were one big pistol at the bottom left and no hands): a pair
   // has its second gun (the off hand's, ctx.offhand) here, in the left hand: the right hand's hold mirrored across the view.
   const gunHolder2 = new T.Group(); gunHolder2.name = 'vm-gun-2'; space.add(gunHolder2);
+  const bladeHolder = new T.Group(); bladeHolder.name = 'vm-blade'; space.add(bladeHolder);   // CL-307: the knife in the firing hand
+  const grenadeHolder = new T.Group(); grenadeHolder.name = 'vm-grenade'; space.add(grenadeHolder);   // CL-307: the grenade in the support hand
   // AG-168 v2: on the WebGPU backend the mirror drew everything below `space` inside out (r175 doesn't flip the front
   // face for a mirrored mesh; game/vm-flip.js). There each mesh below it draws a twin of its geometry wound the other way.
   const FLIP = needsFlip(renderer, MX < 0);
@@ -283,6 +285,32 @@ export function createViewmodel(ctx) {
     return o;
   }
   let gun2 = null;  // CL-301: the pair's other gun (the same record), in the left hand
+  // CL-307: a copy of his knife group (ctx.blade(): the knife, the machete and the katana as its children, one shown), kept
+  // across guns; its parts mirrored from his each frame while a swing shows it.
+  let blade = null;   // { src, root, pairs }
+  function bladeCopy() {
+    const src = ctx.blade ? ctx.blade() : null;
+    if (!src) return null;
+    if (blade && blade.src === src && blade.nodes === countNodes(src)) return blade;
+    if (blade) bladeHolder.remove(blade.root);
+    const pairs = [], r = cloneLean(src, pairs, new Set());
+    r.position.set(0, 0, 0); r.quaternion.set(0, 0, 0, 1); r.scale.set(1, 1, 1);
+    bladeHolder.add(r);
+    blade = { src, root: r, pairs: pairs.filter(([s]) => s !== src), nodes: countNodes(src), s: 1 };
+    return blade;
+  }
+  let grenadeC = null;   // CL-307: a copy of the grenade in his hand (ctx.grenade())
+  function grenadeCopy() {
+    const src = ctx.grenade ? ctx.grenade() : null;
+    if (!src) return null;
+    if (grenadeC && grenadeC.src === src) return grenadeC;
+    if (grenadeC) grenadeHolder.remove(grenadeC.root);
+    const pairs = [], r = cloneLean(src, pairs, new Set());
+    r.position.set(0, 0, 0); r.quaternion.set(0, 0, 0, 1); r.scale.set(1, 1, 1);
+    grenadeHolder.add(r);
+    grenadeC = { src, root: r, pairs: pairs.filter(([s]) => s !== src), s: 1 };
+    return grenadeC;
+  }
   function dropGun() {
     if (arms) { for (const a of [arms.r, arms.l]) if (a) a.twist = null; }   // CL-305: a new gun's twist starts afresh
     if (gun) { gunHolder.remove(gun.root); gun = null; }
@@ -815,12 +843,15 @@ export function createViewmodel(ctx) {
       if (S.raise > 0.02 && gun) S.raise = Math.max(0, S.raise - dt * VM.raise * 1.6);
       else { S.raise = 0; if (key) { syncArmMaterials(); buildGun(key, pair); } else dropGun(); }
     } else if (key) S.raise = Math.min(1, S.raise + dt * VM.raise);
-    const active = !!gun && S.raise > 0.001;
-    info.active = active; info.key = gun ? gun.key : null; info.raise = S.raise; info.akimbo = !!gun2;
+    // CL-307: a blade swing (index.html st.blade) keeps the view on with the gun put away below it
+    const BL = gun && st && st.blade && VM_BLADES[st.blade.kind] ? VM_BLADES[st.blade.kind] : null;
+    if (BL) S.raise = Math.max(0, S.raise - dt * VM.raise * 2.5);
+    const active = !!gun && (S.raise > 0.001 || !!BL);
+    info.active = active; info.key = gun ? gun.key : null; info.raise = S.raise; info.akimbo = !!gun2; info.blade = BL ? st.blade.kind : null;
     // The world's scope mask owns the full sniper sight picture above 82% ADS.
     root.visible = active && !(gun && gun.key === 'sniper' && (st.ads || 0) >= 0.82);
     setEyeHide(active, active ? gun.src : null, active && gun2 ? gun2.src : null);
-    if (!active) { S.camQ = null; S.lastPlace = null; return; }
+    if (!active) { S.camQ = null; S.lastPlace = null; if (blade) blade.root.visible = false; return; }
     syncArmMaterials();
     if (gunNodes(gun.src) !== gun.nodes) buildGun(gun.key, !!gun2);
     if (!sockets.r || !sockets.l || sockets.key !== gun.key) readSockets(gun.key, true, dt);
@@ -849,6 +880,7 @@ export function createViewmodel(ctx) {
       gun2.root.position.copy(G2.p); gun2.root.quaternion.copy(G2.q); gun2.root.scale.setScalar(G2.s);
     }
     gun.root.position.copy(G.p); gun.root.quaternion.copy(G.q); gun.root.scale.setScalar(G.s);
+    gun.root.visible = !BL; if (gun2) gun2.root.visible = !BL;   // CL-307: put away for the blade
     // The copied action cycles on a shot; the original gun keeps its third-person animation.
     S.slideT += dt;
     if (gun.slide && P.slideKick) { const t = S.slideT, k = t < 0.018 ? t / 0.018 : t < 0.075 ? 1 - (t - 0.018) / 0.057 : 0; gun.slide.position.z -= P.slideKick * k; }
@@ -913,11 +945,13 @@ export function createViewmodel(ctx) {
     const boltW = (!AK && gun.bolt && (st.boltHand || 0) > 0.001) ? clamp(st.boltHand, 0, 1) : 0;
     if (boltW > 0) {
       gun.bolt.updateMatrix();
-      // Live bolt part grab (moves with lift/pull).
-      const _bat = _pat, _bz = _pz, _by = _py;
-      _bat.set(-0.075, 0.012, 0.02).applyMatrix4(gun.bolt.matrix);
-      _bz.set(-0.8, 0.1, -0.6).normalize();
-      _by.set(0.6, -0.25, -0.76).addScaledVector(_bz, -_by.dot(_bz)).normalize();
+      // Live bolt part grab (moves with lift/pull). CL-306: the knob from the model (gb145Grab) and the hand's facing
+      // by the handle's side (boltSide: +1 the gun's left, which the mirrored view shows on the right).
+      const _bat = _pat, _bz = _pz, _by = _py, sud = gun.src.userData, bs = sud.boltSide || -1;
+      if (sud.bolt && sud.bolt.userData && sud.bolt.userData.gb145Grab) _bat.copy(sud.bolt.userData.gb145Grab); else _bat.set(bs * 0.075, 0.012, 0.02);
+      _bat.applyMatrix4(gun.bolt.matrix);
+      _bz.set(bs * 0.8, 0.1, -0.6).normalize();
+      _by.set(-bs * 0.6, -0.25, -0.76).addScaledVector(_bz, -_by.dot(_bz)).normalize();
       const _bx = _px.crossVectors(_by, _bz);
       const _bF = _local2; basisQ(_bx, _by, _bz, _bF.q); _bF.s = sockets.r.s;
       const palmR = wristSpacePoint(arms.r, 'palm', _ppalm).multiplyScalar(_bF.s).applyQuaternion(_bF.q);
@@ -963,6 +997,11 @@ export function createViewmodel(ctx) {
       twistToward(arms.l, WL, eL); info.handPlace = boltW > 0 ? 'bolt' : 'fore';
     }
     // (CL-306: the reload's elbow is set above, from the hold's wrist)
+    const GRN = !AK && st.grenade && st.grenade.phase ? st.grenade : null;   // CL-307: the throw
+    if (GRN) poseL = grenadeFrame(GRN, WL, eL, dt) || poseL;
+    else if (grenadeC) grenadeC.root.visible = false;
+    if (BL) { poseR = sockets.poseR; poseL = POSE_RELAXED; bladeFrame(BL, st.blade, WR, WL, eR, eL); }
+    else if (blade) blade.root.visible = false;
     mirrorWorn(arms.r, 1); mirrorWorn(arms.l, -1);
     info.wrist.r = poseArm(arms.r, WR, eR, VM.wristMax);
     info.wrist.l = poseArm(arms.l, WL, eL, VM.wristMax);
@@ -1054,7 +1093,7 @@ export function createViewmodel(ctx) {
       if (on) {
         const local = placeLocalOfWrist(_local2), ahead = R.round.ahead || 0.045;
         Rd.position.copy(wristSpacePoint(arms.l, 'palm', _ppalm).multiplyScalar(local.s).applyQuaternion(local.q).add(local.p));
-        Rd.position.z += ahead;   // its back end at the fingertips
+        Rd.position.z += ahead; Rd.position.y += R.round.up || 0;   // its back end at the fingertips, above them so the eye sees it past the glove
         Rd.quaternion.copy(gun.loadRoundBase.quat);
         Rd.visible = true;
       } else { Rd.position.copy(gun.loadRoundBase.pos); Rd.quaternion.copy(gun.loadRoundBase.quat); Rd.visible = false; }
@@ -1081,6 +1120,84 @@ export function createViewmodel(ctx) {
     }
   }
   const _pq2 = Q();
+  // CL-307: the blade's swing. A gun-like frame on the key path (view space, as the eye sees it: x and the yaw/roll turned
+  // for his side), the fist on it as on the gun's grip (sockets.r), the blade's root at hold in that frame; the support
+  // wrist away out of the view, both elbows toward the shoulders.
+  const _bfA = F(), _bfB = F(), _bfF = F(), _bfH = F(), _bfQ = Q(), POSE_RELAXED = copyPose(HAND_POSES.relaxed);
+  function bladeFrame(BL, bs, WR, WL, eR, eL) {
+    const u = clamp(bs.u || 0, 0, 1), K = BL.keys;
+    let i = 0; while (i < K.length - 1 && u >= K[i + 1][0]) i++;
+    const j = Math.min(K.length - 1, i + 1), t = j === i ? 0 : smooth((u - K[i][0]) / (K[j][0] - K[i][0]));
+    const keyF = (k, out) => {
+      const a = K[k][1];
+      out.p.set(a.p[0] * MX, a.p[1], a.p[2]); out.s = gun.s;
+      out.q.copy(BORE_AHEAD).multiply(eulerQ(a.e[0] * MX, a.e[1], a.e[2] * MX, _bfQ));
+      if (a.e[3]) out.q.premultiply(_bfQ.setFromAxisAngle(AX_Z, a.e[3] * MX));   // the swing, about the view's depth axis
+      return out;
+    };
+    lerpF(keyF(i, _bfA), keyF(j, _bfB), t, _bfF);
+    mul(_bfF, sockets.r, WR);   // the fist where the grip would be
+    const B = bladeCopy();
+    if (B) {
+      mirrorParts(B);
+      _bfH.p.set(BL.hold.pos[0] * MX, BL.hold.pos[1], BL.hold.pos[2]); _bfH.s = B.s;
+      eulerQ(BL.hold.rot[0] * MX, BL.hold.rot[1], BL.hold.rot[2] * MX, _bfH.q);
+      mul(_bfF, _bfH, _bfF);
+      B.root.position.copy(_bfF.p); B.root.quaternion.copy(_bfF.q); B.root.scale.setScalar(_bfF.s * (B.src.scale.x || 1));
+      B.root.visible = true;
+    }
+    WL.p.set(BL.away[0] * MX, BL.away[1], BL.away[2]); WL.q.copy(WR.q); WL.s = WR.s;
+    eR[0] = WR.p.x + 0.10 * MX; eR[1] = WR.p.y - 0.30; eR[2] = WR.p.z + 0.22;
+    eL[0] = WL.p.x - 0.08 * MX; eL[1] = WL.p.y - 0.25; eL[2] = WL.p.z + 0.18;
+    twistToward(arms.r, WR, eR);
+    info.handPlace = 'blade';
+  }
+  // CL-307: the grenade throw's support hand. The body's phase and its time pick two of VM_GRENADE's places and the way
+  // between them; 'fore' is the hand's place on the gun. The fist as on a mirrored pistol grip (the pair's left hand);
+  // the grenade's root at hold in it while the body has one in hand.
+  const _grA = F(), _grB = F(), _grF = F(), _grS = F(), _grH = F(), _grQ = Q();
+  function grenadeFrame(gr, WL, eL, dt) {
+    const T0 = VM_GRENADE.times, P = VM_GRENADE.places, ph = gr.phase, t = gr.t || 0;
+    let a, b, k, inHand;
+    if (ph === 'grab') { a = 'fore'; b = 'pouch'; k = smooth(t / T0.grab); inHand = t >= T0.inHand; }
+    else if (ph === 'raise') { a = 'pouch'; b = 'cocked'; k = smooth(t / T0.raise); inHand = true; }
+    else if (ph === 'cocked') { a = 'cocked'; b = 'cocked'; k = 0; inHand = true; }
+    else if (ph === 'throw') {
+      if (t < T0.whip) { a = 'cocked'; b = 'whip'; k = smooth(t / T0.whip); inHand = true; }
+      else { a = 'whip'; b = 'follow'; k = smooth((t - T0.whip) / T0.follow); inHand = false; }
+    }
+    else if (ph === 'back') { a = 'follow'; b = 'fore'; k = smooth(t / T0.back); inHand = false; }
+    else return null;
+    const placeF = (name, out) => {
+      if (name === 'fore') { mul(G, sockets.l, out); return out; }
+      const q = P[name];
+      out.p.set(q.p[0] * MX, q.p[1], q.p[2]); out.s = gun.s;
+      out.q.copy(BORE_AHEAD).multiply(eulerQ(q.e[0] * MX, q.e[1], q.e[2] * MX, _grQ));
+      mul(out, mirrorSocket(sockets.r, _grS), out);   // the fist on it
+      return out;
+    };
+    lerpF(placeF(a, _grA), placeF(b, _grB), k, WL);
+    if (ph === 'cocked') { S.grBob = (S.grBob || 0) + dt; WL.p.y += VM_GRENADE.bob.y * Math.sin(S.grBob * VM_GRENADE.bob.rate * Math.PI * 2); } else S.grBob = 0;
+    const C = grenadeCopy();
+    if (C) {
+      if (inHand) {
+        mirrorParts(C);
+        // the grenade at hold in the fist: from the wrist back through the mirrored grip socket to the gun-like frame
+        mirrorSocket(sockets.r, _grS);
+        _grF.q.copy(_grS.q).invert(); _grF.s = 1 / _grS.s; _grF.p.copy(_grS.p).multiplyScalar(-_grF.s).applyQuaternion(_grF.q);
+        mul(WL, _grF, _grF);
+        _grH.p.set(VM_GRENADE.hold.pos[0] * MX, VM_GRENADE.hold.pos[1], VM_GRENADE.hold.pos[2]); _grH.s = 1;
+        eulerQ(VM_GRENADE.hold.rot[0] * MX, VM_GRENADE.hold.rot[1], VM_GRENADE.hold.rot[2] * MX, _grH.q);
+        mul(_grF, _grH, _grF);
+        C.root.position.copy(_grF.p); C.root.quaternion.copy(_grF.q); C.root.scale.setScalar(_grF.s * (C.src.scale.x || 1));
+        C.root.visible = true;
+      } else C.root.visible = false;
+    }
+    eL[0] = WL.p.x - 0.12 * MX; eL[1] = WL.p.y - 0.30; eL[2] = WL.p.z + 0.16;
+    twistToward(arms.l, WL, eL);
+    info.handPlace = 'grenade';
+    return inHand ? sockets.poseR : POSES.open;
+  }
   // The support wrist's frame in the gun's own space (WL is view space).
   function placeLocalOfWrist(out) {
     const gi = _gi.copy(G.q).invert();

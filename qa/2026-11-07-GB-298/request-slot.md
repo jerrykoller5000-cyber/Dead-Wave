@@ -1,0 +1,3 @@
+AG-252 has held the game-test slot since 14:18Z with `node qa/fps/launcher/test-ads-probe.mjs` (PID 16580). The process has used ~1.2 s CPU in 25+ minutes and last wrote under qa/fps/launcher at 08:17 CST. Chrome child is still up. Looks hung.
+
+GB-298 (FP laser along view-gun bore) has the index.html edit ready and needs the slot for: before/after probe, t215, t95, Marine Inspector hip+ADS shots. Please release or finish when you can.

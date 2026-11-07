@@ -16781,9 +16781,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       revolver: { sx: 0.68, sy: 0.68, sz: 0.78, ox: 0.055, oy: 0.05, oz: 0.0 },
       // Launcher: oversized 40mm brass - eject-on-reload only (no per-shot spawn)
       launcher: { sx: 2.6,  sy: 2.6,  sz: 2.85, ox: 0.08, oy: 0.02, oz: 0.08 },
-      // GB-146: the sniper's bolt is on the gun's right (-x), so its brass goes out that side, and on the bolt's pull
-      // (sniperBoltEject), not on the shot.
-      sniper:   { sx: 1.05, sy: 1.05, sz: 1.28, ox: 0.08, oy: 0.05, oz: 0.08, side: -1 }
+      // GB-146: the sniper's brass goes out on the bolt's side, and on the bolt's pull (sniperBoltEject), not on the
+      // shot. CL-306: the handle is on +x again (it reads on the right in the mirrored first-person view).
+      sniper:   { sx: 1.05, sy: 1.05, sz: 1.28, ox: 0.08, oy: 0.05, oz: 0.08, side: 1 }
     };
     let sniperCasePending = 0, sniperEjectDue = false;   // GB-146: the fired case still in the sniper's chamber until the bolt is pulled
 
@@ -51555,14 +51555,20 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         if (!gameStarted || !VM_ON) return;
         try { viewmodel = createViewmodel({ THREE, TSL, renderer, scene, camera, marine, weaponMeshes, hold: (k) => WEAPON_HOLD[k],
           stowed: () => (carryRig ? [...carryRig.slings.map((x) => x.g), ...carryRig.holsters.map((x) => x.g)] : []),   // AG-168: his stowed guns out of the eye
-          offhand: (k) => offhandMeshes[k] || null }); }   // CL-301: a pair's other gun
+          offhand: (k) => offhandMeshes[k] || null,   // CL-301: a pair's other gun
+          blade: () => knife,   // CL-307: his knife group (the knife, machete or katana shown) for the view's own swing
+          grenade: () => grenadeHand }); }   // CL-307: the one in his hand, for the view's own throw
         catch (err) { console.warn('Grave Shift: the first-person view gun failed to build.', err); viewmodel = false; }
       }
       if (!viewmodel) return;
       const st = _vmState;
       // CL-301 (Jerry, 3 Nov): a pair too (st.akimbo): the view's two guns, one in each hand (it fell back to the old view)
-      st.want = viewFirst && OTS.w > 0.6 && gameStarted && !gameOver && !won && !unarmed && holdW > 0.5 && weaponMount.visible &&
-        !playerSwimming && !mortarMounted && !mortarCarried && !onAnyLadder() && !vault && !scriptedKill && !cine && !(knifeAnimT > 0);
+      // CL-307: a blade swing no longer drops the view (it was the body's left arm past the eye): the view does its own
+      const bladeNow = knifeAnimT > 0 && !akimboOn();
+      st.want = viewFirst && OTS.w > 0.6 && gameStarted && !gameOver && !won && !unarmed && holdW > 0.5 && (weaponMount.visible || bladeNow) &&
+        !playerSwimming && !mortarMounted && !mortarCarried && !onAnyLadder() && !vault && !scriptedKill && !cine;
+      st.blade = bladeNow ? { kind: katanaOwned ? 'katana' : macheteOwned ? 'machete' : 'knife', u: 1 - knifeAnimT / Math.max(0.01, knifeSwingDur || KNIFE_ANIM_DUR) } : null;
+      st.grenade = grenadeAnim.phase ? { phase: grenadeAnim.phase, t: grenadeAnim.t } : null;   // CL-307: the throw's phase and its time
       st.weapon = currentWeapon; st.akimbo = akimboOn(); st.ads = fpAdsW; st.vx = velX; st.vz = velZ; st.vy = vy; st.grounded = grounded;
       // CL-293 (J55): the view gun's bob on his stride's own cycle (the one his legs and his eye ride), walk to run by his gait's weight
       st.phase = walkPhase; st.run = POSE.gaitRun || 0; st.sprint = !!(keys.ShiftLeft || keys.ShiftRight) && hypot(velX, velZ) > 0.5;
@@ -52117,15 +52123,28 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           // and the reload, and stops on the first material along that line. At rest the hold points the bore at the
           // aim point (the round's), so it meets the cursor there; the reach is that point's distance plus a margin.
           const mz = gun.userData.muzzleLocal;
-          // CL-281: in first person with the view gun the beam leaves the view gun's muzzle (where the eye sees it) for
-          // the aim point; his own gun, out of the eye's pass, still holds the beam's mesh.
-          const vmLaser = !!viewmodel && viewmodel.showing(name) && !!viewmodel.muzzleWorld(_laserOrigin, offhand ? 2 : 1);   // CL-301: the pair's left beam from the left view gun
+          // CL-281 / GB-298 (J15): in first person the beam leaves the view gun's muzzle along the view
+          // gun's bore (its sway and kick), not from the eye, the body's gun, or toward the aim point.
+          // His own gun, out of the eye's pass, still holds the beam's mesh.
+          const vmWhich = offhand ? 2 : 1;
+          const vmLaser = !!viewmodel && viewmodel.showing(name) && !!viewmodel.muzzleWorld(_laserOrigin, vmWhich);   // CL-301: the pair's left beam from the left view gun
           if (!vmLaser) { _laserOrigin.set(mz.x, mz.y, mz.z); gun.localToWorld(_laserOrigin); }
           weaponAimPoint(_laserAim);
           const reach = _laserAim.distanceTo(_laserOrigin);
           if (reach < 0.05) { laser.visible = false; continue; }
           if (vmLaser) {
-            _laserDir.subVectors(_laserAim, _laserOrigin).normalize();
+            const gVm = vmWhich === 2 ? viewmodel.gun2 : viewmodel.gun;
+            const mzV = gVm.src.userData.muzzleLocal;
+            const sgn = mzV.z >= 0 ? 1 : -1;
+            // Ahead of the muzzle along the bore, projected the same way as muzzleWorld.
+            viewmodel.viewPoint(_vmLaserAt.set(mzV.x, mzV.y, mzV.z + sgn), _vmLaserAt, vmWhich);
+            const kFov = Math.tan((camera.fov || 60) * Math.PI / 360) / Math.tan(viewmodel.proj.fov * Math.PI / 360);
+            const mx = viewmodel.space.scale.x;
+            _vmLaserAt.x *= kFov * mx; _vmLaserAt.y *= kFov;
+            camera.updateMatrixWorld(true);
+            _vmLaserAt.applyMatrix4(camera.matrixWorld);
+            _laserDir.subVectors(_vmLaserAt, _laserOrigin);
+            if (_laserDir.lengthSq() < 1e-10) _laserDir.set(0, 0, -1); else _laserDir.normalize();
             _laserLocal.copy(_laserDir).transformDirection(_vmLaserInv.copy(gun.matrixWorld).invert());
           } else {
             _laserLocal.set(0, 0, mz.z >= 0 ? 1 : -1);

@@ -1,0 +1,282 @@
+[
+ {
+  "gun": "minigun",
+  "view": "first",
+  "hip": {
+   "vis": true,
+   "beamViewBore": null,
+   "beamAim": 8.26,
+   "originMissBodyCm": 0,
+   "originMissViewCm": null,
+   "reportOriginMissViewCm": null,
+   "len": 13.48,
+   "surface": true
+  },
+  "ads": {
+   "vis": true,
+   "beamViewBore": null,
+   "beamAim": 1.35,
+   "reportOriginMissViewCm": null,
+   "len": 12.73,
+   "surface": true
+  },
+  "fire": {
+   "boreSwingDeg": 0,
+   "beamOffViewBoreDeg": 0,
+   "beamOffAimDeg": 8.63,
+   "visFrames": "20/20"
+  }
+ },
+ {
+  "gun": "m4",
+  "view": "first",
+  "hip": {
+   "vis": true,
+   "beamViewBore": null,
+   "beamAim": 3.38,
+   "originMissBodyCm": 0,
+   "originMissViewCm": null,
+   "reportOriginMissViewCm": null,
+   "len": 14.98,
+   "surface": true
+  },
+  "ads": {
+   "vis": true,
+   "beamViewBore": null,
+   "beamAim": 1.08,
+   "reportOriginMissViewCm": null,
+   "len": 13.48,
+   "surface": true
+  },
+  "fire": {
+   "boreSwingDeg": 0,
+   "beamOffViewBoreDeg": 0,
+   "beamOffAimDeg": 9.23,
+   "visFrames": "20/20"
+  }
+ },
+ {
+  "gun": "ak",
+  "view": "first",
+  "hip": {
+   "vis": true,
+   "beamViewBore": null,
+   "beamAim": 3.83,
+   "originMissBodyCm": 0,
+   "originMissViewCm": null,
+   "reportOriginMissViewCm": null,
+   "len": 15.73,
+   "surface": true
+  },
+  "ads": {
+   "vis": true,
+   "beamViewBore": null,
+   "beamAim": 0.94,
+   "reportOriginMissViewCm": null,
+   "len": 13.48,
+   "surface": true
+  },
+  "fire": {
+   "boreSwingDeg": 0,
+   "beamOffViewBoreDeg": 0,
+   "beamOffAimDeg": 13.79,
+   "visFrames": "20/20"
+  }
+ },
+ {
+  "gun": "pistol",
+  "view": "first",
+  "hip": {
+   "vis": true,
+   "beamViewBore": null,
+   "beamAim": 1.06,
+   "originMissBodyCm": 0,
+   "originMissViewCm": null,
+   "reportOriginMissViewCm": null,
+   "len": 14.98,
+   "surface": true
+  },
+  "ads": {
+   "vis": true,
+   "beamViewBore": null,
+   "beamAim": 0.57,
+   "reportOriginMissViewCm": null,
+   "len": 14.23,
+   "surface": true
+  },
+  "fire": {
+   "boreSwingDeg": 0,
+   "beamOffViewBoreDeg": 0,
+   "beamOffAimDeg": 7.15,
+   "visFrames": "20/20"
+  }
+ },
+ {
+  "gun": "uzi",
+  "view": "first",
+  "hip": {
+   "vis": true,
+   "beamViewBore": null,
+   "beamAim": 2.09,
+   "originMissBodyCm": 0,
+   "originMissViewCm": null,
+   "reportOriginMissViewCm": null,
+   "len": 16.48,
+   "surface": true
+  },
+  "ads": {
+   "vis": true,
+   "beamViewBore": null,
+   "beamAim": 0.88,
+   "reportOriginMissViewCm": null,
+   "len": 14.23,
+   "surface": true
+  },
+  "fire": {
+   "boreSwingDeg": 0,
+   "beamOffViewBoreDeg": 0,
+   "beamOffAimDeg": 6.91,
+   "visFrames": "20/20"
+  }
+ },
+ {
+  "gun": "shotgun",
+  "view": "first",
+  "hip": {
+   "vis": true,
+   "beamViewBore": null,
+   "beamAim": 6.29,
+   "originMissBodyCm": 0,
+   "originMissViewCm": null,
+   "reportOriginMissViewCm": null,
+   "len": 14.98,
+   "surface": true
+  },
+  "ads": {
+   "vis": true,
+   "beamViewBore": null,
+   "beamAim": 0.47,
+   "reportOriginMissViewCm": null,
+   "len": 14.23,
+   "surface": true
+  },
+  "fire": {
+   "boreSwingDeg": 0,
+   "beamOffViewBoreDeg": 0,
+   "beamOffAimDeg": 15.32,
+   "visFrames": "20/20"
+  }
+ },
+ {
+  "gun": "aa12",
+  "view": "first",
+  "hip": {
+   "vis": true,
+   "beamViewBore": null,
+   "beamAim": 5.96,
+   "originMissBodyCm": 0,
+   "originMissViewCm": null,
+   "reportOriginMissViewCm": null,
+   "len": 14.23,
+   "surface": true
+  },
+  "ads": {
+   "vis": true,
+   "beamViewBore": null,
+   "beamAim": 1.08,
+   "reportOriginMissViewCm": null,
+   "len": 13.48,
+   "surface": true
+  },
+  "fire": {
+   "boreSwingDeg": 0,
+   "beamOffViewBoreDeg": 0,
+   "beamOffAimDeg": 9.48,
+   "visFrames": "20/20"
+  }
+ },
+ {
+  "gun": "revolver",
+  "view": "first",
+  "hip": {
+   "vis": true,
+   "beamViewBore": null,
+   "beamAim": 11.74,
+   "originMissBodyCm": 0,
+   "originMissViewCm": null,
+   "reportOriginMissViewCm": null,
+   "len": 18.73,
+   "surface": true
+  },
+  "ads": {
+   "vis": true,
+   "beamViewBore": null,
+   "beamAim": 1.13,
+   "reportOriginMissViewCm": null,
+   "len": 13.48,
+   "surface": true
+  },
+  "fire": {
+   "boreSwingDeg": 0,
+   "beamOffViewBoreDeg": 0,
+   "beamOffAimDeg": 17.13,
+   "visFrames": "20/20"
+  }
+ },
+ {
+  "gun": "sniper",
+  "view": "first",
+  "hip": {
+   "vis": true,
+   "beamViewBore": null,
+   "beamAim": 1.69,
+   "originMissBodyCm": 0,
+   "originMissViewCm": null,
+   "reportOriginMissViewCm": null,
+   "len": 14.23,
+   "surface": true
+  },
+  "ads": {
+   "vis": true,
+   "beamViewBore": null,
+   "beamAim": 0.92,
+   "reportOriginMissViewCm": null,
+   "len": 13.48,
+   "surface": true
+  },
+  "fire": {
+   "boreSwingDeg": 0,
+   "beamOffViewBoreDeg": 0,
+   "beamOffAimDeg": 15.53,
+   "visFrames": "20/20"
+  }
+ },
+ {
+  "gun": "launcher",
+  "view": "first",
+  "hip": {
+   "vis": true,
+   "beamViewBore": null,
+   "beamAim": 1.86,
+   "originMissBodyCm": 0,
+   "originMissViewCm": null,
+   "reportOriginMissViewCm": null,
+   "len": 15.73,
+   "surface": true
+  },
+  "ads": {
+   "vis": true,
+   "beamViewBore": null,
+   "beamAim": 1.04,
+   "reportOriginMissViewCm": null,
+   "len": 13.48,
+   "surface": true
+  },
+  "fire": {
+   "boreSwingDeg": 0,
+   "beamOffViewBoreDeg": 0,
+   "beamOffAimDeg": 13.66,
+   "visFrames": "20/20"
+  }
+ }
+]

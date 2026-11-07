@@ -105,7 +105,7 @@ function holo(root) {
   beveledBox(root, 'hood eave', alloy, [0.056, 0.006, 0.070], [0, 0.079, 0.007]);
   box(root, 'window lower sill', alloy, [0.049, 0.004, 0.009], [0, 0.033, 0.032]);
   glass(root, 0.046, 0.043, 0.055, 0.032);
-  cylinder(root, 'brightness dial', rubber, 0.007, 0.005, [0.034, 0.026, -0.027], 'x', 12);
+  cylinder(root, 'brightness dial', rubber, 0.007, 0.005, [0.0295, 0.026, -0.027], 'x', 12);   // GB-297: seated on the chassis side (half-width 0.027)
   return { eye: [0, 0.055, -0.061], dot: [0, 0.055, 0.032] };
 }
 
