@@ -1,0 +1,6 @@
+GRANT chatgpt GP-20035: starting one game-test command
+check-players: 315 player.position reads, all in the allowed places
+           INFO kinds {"depot":"stone","mast":"fence","hikers":"trees","rangers":"stone"} skipped [{"place":"convoy","why":"trail x45"}]
+ok    tcl303  44 pass   0 fail  50.4s
+
+1 checks: 44 pass, 0 fail

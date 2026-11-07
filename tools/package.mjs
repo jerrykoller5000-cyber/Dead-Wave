@@ -113,6 +113,22 @@ for (const f of files) {
   fs.copyFileSync(path.join(ROOT, f), to);
 }
 fs.writeFileSync(path.join(OUT, 'version.json'), JSON.stringify({ version: pkg.version, built: new Date().toISOString() }, null, 2) + '\n');
+// Claude (Jerry, 7 Nov: a playtest build with the story gates on; CU's file, a small option taken under D-115):
+// DW_PLAYTEST_QUERY="gates=1" makes the packaged copy start as if its address carried that query (a playtest build only;
+// a release leaves it unset). The game reads location.search, so one classic script at the head sets it before the
+// game's modules run. Flags already in the address win.
+const PLAYTEST_Q = (process.env.DW_PLAYTEST_QUERY || '').replace(/^\?/, '');
+if (PLAYTEST_Q) {
+  const ix = path.join(OUT, 'index.html');
+  const tag = '<script>/* playtest build: ' + PLAYTEST_Q + ' */ (function () { var q = new URLSearchParams(location.search), add = new URLSearchParams('
+    + JSON.stringify(PLAYTEST_Q) + '); add.forEach(function (v, k) { if (!q.has(k)) q.set(k, v); }); var s = q.toString();'
+    + " if (s !== location.search.slice(1)) history.replaceState(null, '', location.pathname + '?' + s + location.hash); })();</script>";
+  const html = fs.readFileSync(ix, 'utf8');
+  if (!/<head(\s[^>]*)?>/i.test(html)) throw new Error('package: no <head> in index.html for the playtest query');
+  fs.writeFileSync(ix, html.replace(/<head(\s[^>]*)?>/i, (m) => m + tag));
+  fs.writeFileSync(path.join(OUT, 'version.json'), JSON.stringify({ version: pkg.version, playtest: PLAYTEST_Q, built: new Date().toISOString() }, null, 2) + '\n');
+  console.log('package: playtest build, the game starts with ?' + PLAYTEST_Q);
+}
 const { listZSounds } = await import('./serve.mjs');
 const takes = listZSounds(ROOT);
 const zIndex = path.join(OUT, 'z-sounds', 'index.json');

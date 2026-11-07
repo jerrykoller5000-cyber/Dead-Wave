@@ -1,0 +1,95 @@
+{
+  "task": "AG-246",
+  "order": "D-116",
+  "date": "2026-11-07T00:33:52.123Z",
+  "renderer": "NVIDIA GeForce RTX 5080 WebGPU",
+  "resolution": "1920x1080",
+  "lighting": "Noon Daylight (worldTime = 0.50)",
+  "truckCheck": {
+    "hasEscortTruck": true,
+    "hasCrashedTruck": true,
+    "escortChildren": 1,
+    "crashedChildren": 1,
+    "hasHikersRing": true
+  },
+  "stills": {
+    "escort": {
+      "playerPos": [
+        -113.44672593850939,
+        -0.4735249564542493,
+        42.57211758011432
+      ],
+      "winchPos": [
+        -117.64672593850939,
+        0.19846308606857327,
+        45.97211758011432
+      ],
+      "escortPos": [
+        -114.0967259385094,
+        -0.24344123284256655,
+        45.97211758011432
+      ],
+      "winchVisible": true,
+      "prompt": null
+    },
+    "winchTaken": {
+      "took": true,
+      "winchState": "held",
+      "winchVisible": false,
+      "meshVisible": false
+    },
+    "crashed": {
+      "playerPos": [
+        -1.315747909373532,
+        6.954938328069131,
+        -117.54920717171792
+      ],
+      "gatePos": [
+        5.077279743196631,
+        -119.86636004398882
+      ],
+      "gateState": {
+        "kind": "trees",
+        "open": false,
+        "chops": 0,
+        "why": null,
+        "winch": {
+          "stage": 0,
+          "t": 0,
+          "called": false
+        },
+        "truck": {
+          "x": 0,
+          "z": 0,
+          "yaw": 0.12
+        },
+        "vines": null,
+        "rest": 0
+      },
+      "prompt": "E — Bolt on the winch",
+      "why": "Bolt the winch to the truck first."
+    },
+    "winched": {
+      "gateState": {
+        "kind": "trees",
+        "open": true,
+        "chops": 0,
+        "why": "open",
+        "winch": {
+          "stage": 2,
+          "t": 1,
+          "called": true
+        },
+        "truck": {
+          "x": 3.7,
+          "z": -5.4,
+          "yaw": 1.5707963267948966
+        },
+        "vines": null,
+        "rest": 3
+      },
+      "prompt": "Stand clear at the remote and hold E.",
+      "why": "Stand clear at the remote and hold E."
+    }
+  }
+}

@@ -1,0 +1,14 @@
+GRANT chatgpt GP-20032: starting one game-test command
+check-players: 315 player.position reads, all in the allowed places
+ok    t316     8 pass   0 fail  39.1s
+ok    t317    22 pass   0 fail  38.8s
+ok    t318     7 pass   0 fail  26.7s
+ok    t319     5 pass   0 fail  25.6s
+ok    t320    23 pass   0 fail  148.8s
+ok    t321     7 pass   0 fail  25.2s
+ok    t322    20 pass   0 fail  81.3s
+ok    t323     5 pass   0 fail  23.1s
+ok    t324     2 pass   0 fail  26.8s
+ok    t325    25 pass   0 fail  88.3s
+
+10 checks: 124 pass, 0 fail

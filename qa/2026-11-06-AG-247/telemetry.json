@@ -1,0 +1,50 @@
+{
+  "task": "AG-247",
+  "order": "D-116",
+  "date": "2026-11-07T00:39:59.468Z",
+  "renderer": "NVIDIA GeForce RTX 5080 WebGPU",
+  "resolution": "1920x1080",
+  "lighting": "Noon Daylight (worldTime = 0.50)",
+  "objCheck": {
+    "hasTeleprinter": true,
+    "hasDutyBoard": true,
+    "tpChildren": 11,
+    "tpPos": [
+      -0.95,
+      0.4,
+      -5.35
+    ],
+    "dbPos": [
+      -1.62,
+      1.56,
+      -5.08
+    ]
+  },
+  "stills": {
+    "idle": {
+      "playerPos": [
+        -1.35,
+        -1.5186761379241944,
+        -3.4999999999999996
+      ],
+      "tpWorld": [
+        -0.95,
+        -2.7686761379241944,
+        -5.35
+      ],
+      "lookYaw": 2.928654304010396
+    },
+    "chatter": {
+      "isPrinting": true,
+      "hasSheet": true
+    },
+    "ready": {
+      "isPrinting": false,
+      "hasSheet": true
+    },
+    "stamp": {
+      "isStamping": true,
+      "stampY": 0.75
+    }
+  }
+}

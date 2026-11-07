@@ -1,0 +1,324 @@
+{
+  "task": "AG-249",
+  "request": "GP-20035 winch prompt screenshot",
+  "date": "2026-11-07T01:11:31.046Z",
+  "renderer": "NVIDIA GeForce RTX 5080 WebGPU",
+  "resolution": "1920x1080",
+  "lighting": "Noon Daylight (worldTime = 0.50)",
+  "prompts": {
+    "winchBolt": {
+      "playerPos": [
+        4.566143080195699,
+        7.620566247552155,
+        -121.27658673205576
+      ],
+      "gateState": {
+        "kind": "trees",
+        "open": false,
+        "chops": 0,
+        "why": null,
+        "winch": {
+          "stage": 0,
+          "t": 0,
+          "called": false
+        },
+        "truck": {
+          "x": 0,
+          "z": 0,
+          "yaw": 0.12
+        },
+        "vines": null,
+        "rest": 0
+      },
+      "promptText": "E — Bolt on the winch",
+      "whyText": "Bolt the winch to the truck first.",
+      "chainPrompt": null,
+      "dom": {
+        "text": "",
+        "html": "",
+        "keyText": null,
+        "className": "floating",
+        "visible": false,
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "clip": {
+          "x": 0,
+          "y": 0,
+          "width": 48,
+          "height": 32
+        }
+      }
+    },
+    "skippedNeedBolt": {
+      "playerPos": [
+        -3.4569307918756014,
+        8.442384351377486,
+        -124.10968926901653
+      ],
+      "gateState": {
+        "kind": "trees",
+        "open": false,
+        "chops": 0,
+        "why": null,
+        "winch": {
+          "stage": 0,
+          "t": 0,
+          "called": false
+        },
+        "truck": {
+          "x": 0,
+          "z": 0,
+          "yaw": 0.12
+        },
+        "vines": null,
+        "rest": 0
+      },
+      "promptText": "Bolt the winch to the truck first.",
+      "whyText": "Bolt the winch to the truck first.",
+      "chainPrompt": null,
+      "dom": {
+        "text": "BOLT THE WINCH TO THE TRUCK FIRST.",
+        "html": "Bolt the winch to the truck first.",
+        "keyText": null,
+        "className": "floating",
+        "visible": false,
+        "rect": {
+          "x": 816.859375,
+          "y": 641.203125,
+          "width": 286.28125,
+          "height": 16.796875
+        },
+        "clip": {
+          "x": 792.859375,
+          "y": 625.203125,
+          "width": 334.28125,
+          "height": 48.796875
+        }
+      }
+    },
+    "skippedNeedTie": {
+      "playerPos": [
+        4.174812351257103,
+        6.896206749323556,
+        -113.99313419841695
+      ],
+      "gateState": {
+        "kind": "trees",
+        "open": false,
+        "chops": 0,
+        "why": null,
+        "winch": {
+          "stage": 1,
+          "t": 0,
+          "called": false
+        },
+        "truck": {
+          "x": 0,
+          "z": 0,
+          "yaw": 0.12
+        },
+        "vines": null,
+        "rest": 0
+      },
+      "promptText": "Tie the cable to the big tree first.",
+      "whyText": "Tie the cable to the big tree first.",
+      "chainPrompt": "Tie the cable to the big tree first.",
+      "dom": {
+        "text": "TIE THE CABLE TO THE BIG TREE FIRST.",
+        "html": "Tie the cable to the big tree first.",
+        "keyText": null,
+        "className": "floating on",
+        "visible": false,
+        "rect": {
+          "x": 815.3984375,
+          "y": 641.203125,
+          "width": 289.203125,
+          "height": 16.796875
+        },
+        "clip": {
+          "x": 791.3984375,
+          "y": 625.203125,
+          "width": 337.203125,
+          "height": 48.796875
+        }
+      }
+    },
+    "winchTie": {
+      "playerPos": [
+        -3.4569307918756014,
+        8.442384351377486,
+        -124.10968926901653
+      ],
+      "gateState": {
+        "kind": "trees",
+        "open": false,
+        "chops": 0,
+        "why": null,
+        "winch": {
+          "stage": 1,
+          "t": 0,
+          "called": false
+        },
+        "truck": {
+          "x": 0,
+          "z": 0,
+          "yaw": 0.12
+        },
+        "vines": null,
+        "rest": 0
+      },
+      "promptText": "E — Tie off the cable",
+      "whyText": "Tie the cable to the big tree first.",
+      "chainPrompt": null,
+      "dom": {
+        "text": "TIE THE CABLE TO THE BIG TREE FIRST.",
+        "html": "Tie the cable to the big tree first.",
+        "keyText": null,
+        "className": "floating",
+        "visible": true,
+        "rect": {
+          "x": 815.3984375,
+          "y": 641.203125,
+          "width": 289.203125,
+          "height": 16.796875
+        },
+        "clip": {
+          "x": 791.3984375,
+          "y": 625.203125,
+          "width": 337.203125,
+          "height": 48.796875
+        }
+      }
+    },
+    "cableTiedBanner": {
+      "bannerInfo": {
+        "kind": "trees",
+        "open": false,
+        "chops": 0,
+        "why": null,
+        "winch": {
+          "stage": 2,
+          "t": 0,
+          "called": false
+        },
+        "truck": {
+          "x": 0,
+          "z": 0,
+          "yaw": 0.12
+        },
+        "vines": null,
+        "rest": 0
+      },
+      "dom": {
+        "title": "CABLE TIED OFF",
+        "sub": "Stand clear at the remote and hold E.",
+        "className": "show",
+        "visible": true,
+        "rect": {
+          "x": 16,
+          "y": 272.375,
+          "width": 248,
+          "height": 60.140625
+        },
+        "clip": {
+          "x": 0,
+          "y": 252.375,
+          "width": 308,
+          "height": 100.140625
+        }
+      }
+    },
+    "holdEWinchPrompt": {
+      "playerPos": [
+        4.174812351257103,
+        6.896206749323556,
+        -113.99313419841695
+      ],
+      "gateState": {
+        "kind": "trees",
+        "open": false,
+        "chops": 0,
+        "why": null,
+        "winch": {
+          "stage": 2,
+          "t": 0,
+          "called": false
+        },
+        "truck": {
+          "x": 0,
+          "z": 0,
+          "yaw": 0.12
+        },
+        "vines": null,
+        "rest": 0
+      },
+      "promptText": "Hold E — Winch the truck clear 0%",
+      "whyText": "Stand clear at the remote and hold E.",
+      "chainPrompt": "Hold E — Winch the truck clear 0%",
+      "dom": {
+        "text": "HOLD EWINCH THE TRUCK CLEAR 0%",
+        "html": "<span class=\"key\">Hold E</span>Winch the truck clear 0%",
+        "keyText": "HOLD E",
+        "className": "floating on",
+        "visible": false,
+        "rect": {
+          "x": 815.7578125,
+          "y": 638.203125,
+          "width": 288.484375,
+          "height": 19.796875
+        },
+        "clip": {
+          "x": 791.7578125,
+          "y": 622.203125,
+          "width": 336.484375,
+          "height": 51.796875
+        }
+      }
+    },
+    "winchingInProgress": {
+      "gateState": {
+        "kind": "trees",
+        "open": false,
+        "chops": 0,
+        "why": null,
+        "winch": {
+          "stage": 2,
+          "t": 0.357142857142857,
+          "called": true
+        },
+        "truck": {
+          "x": 1.07871720116618,
+          "z": -1.5743440233236141,
+          "yaw": 0.5429726900276663
+        },
+        "vines": null,
+        "rest": 0
+      },
+      "promptText": "Hold E — Winch the truck clear 36%",
+      "chainPrompt": "Hold E — Winch the truck clear 36%",
+      "dom": {
+        "text": "HOLD EWINCH THE TRUCK CLEAR 32%",
+        "html": "<span class=\"key\">Hold E</span>Winch the truck clear 32%",
+        "keyText": "HOLD E",
+        "className": "floating on",
+        "visible": true,
+        "rect": {
+          "x": 811.6640625,
+          "y": 638.203125,
+          "width": 296.671875,
+          "height": 19.796875
+        },
+        "clip": {
+          "x": 787.6640625,
+          "y": 622.203125,
+          "width": 344.671875,
+          "height": 51.796875
+        }
+      }
+    }
+  }
+}

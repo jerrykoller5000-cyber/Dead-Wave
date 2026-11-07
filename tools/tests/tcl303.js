@@ -89,7 +89,7 @@
       D.line.hold('hikers', false); const t1 = D.line.gate('hikers').winch.t; await wait(800);
       ok(Math.abs(D.line.gate('hikers').winch.t - t1) < 0.02, 'let go: it stops');
       D.line.hold('hikers', true);
-      const t0 = Date.now(); while (Date.now() - t0 < 12000 && !D.line.gate('hikers').open) await wait(250);
+      const t0 = Date.now(); while (Date.now() - t0 < 30000 && !D.line.gate('hikers').open) await wait(250);   // 7 s of game time; the test page runs slower than real time
       D.line.hold('hikers', false);
       st = D.line.gate('hikers');
       ok(st.open && st.winch.t === 1 && st.rest === 3 && C.read().gates['trail-chain'] === 'open', 'held long enough: the truck lies clear and the way is open (' + JSON.stringify(st) + ')');

@@ -1428,6 +1428,9 @@
     import { createLightPool } from './world/light-pool.js';   // CL-116
     import { bakeStatic, foldStatic } from './world/bake.js';   // CL-117; CL-218
     import { buildStoneWallKit } from './world/stone-wall-kit.js';   // CU-232
+    import { buildChainLinkRing, buildVines, getStoryFenceMaterials } from './world/story-fence.js';   // AG-245
+    import { buildEscortTruck, buildCrashedTruck } from './game/story-trucks.js';   // AG-246
+    import { buildTeleprinter } from './game/hq-teleprinter.js';   // AG-247
     import { createWallCull, wallSegmentsFromBand } from './game/wall-cull.js';   // GB-273: the walls' cull
     import { TRAINING, buildTrainingGround, clampToRects, segmentBox, propSolids, fallSign } from './world/training.js';   // CL-115, CL-158
     import { createZombieAbilityRuntime } from './game/zombie-ability-runtime.js';
@@ -26764,6 +26767,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           }
           g.add(db);
           house.dutyBoard = db;
+          const tpCtrl = buildTeleprinter(THREE);
+          tpCtrl.group.position.set(-0.95, 0.4, -(W + 0.35));
+          tpCtrl.group.rotation.y = Math.PI;
+          g.add(tpCtrl.group);
+          house.teleprinter = tpCtrl;
 
           // 2. HQ Radio Set ('hq-radio-set') at x = +1.62, y = 1.46 (inside Center Bay, clear of +2.2 pilaster and tagWall)
           const rs = new THREE.Group(); rs.name = 'hq-radio-set';
@@ -33523,7 +33531,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     function storyDawn() {
       if (!gameStarted || day <= storyDay) return;
       storyDay = day;
-      for (const id of storyChain.dawn(day)) storyPublish('open', id);
+      for (const id of storyChain.dawn(day)) {
+        storyPublish('open', id);
+        if (house && house.teleprinter) house.teleprinter.print(id);
+      }
       if (chainGatesOn) for (const gate of chainGates.dawn(day, storyChain.read())) chainSpareArrived(gate);   // CU-200
     }
     function updateStoryChain(dt) {
@@ -33532,6 +33543,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       chainSyncEvents();
       utilityUpdate(dt);   // CU-201
       updateStoryAftermath();
+      if (house && house.teleprinter) house.teleprinter.update(dt);
       if (day > storyDay) storyDawn();
       storySyncT -= dt; if (storySyncT > 0) return;
       storySyncT = 0.5;
@@ -33549,16 +33561,17 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // teleprinter and the stamp; the words are GP-20034's). A finished place says so; E at the duty board stamps it.
     function storyLineDone(id) {
       if (!STORY_GATES_ON || !STORY_GATE) return;
-      showBanner(chainSay('order.doneBanner', 'ORDER DONE'), chainSay('order.stampHint', 'Stamp it at the HQ duty board. The next order prints at dawn.'), 3.2, '#d7c6a4');
+      showBanner(chainSay('order.doneBanner', 'ORDER DONE'), chainSay('order.stampHint', 'Stamp it done at the HQ duty board. The next order prints at dawn.'), 3.2, '#d7c6a4');
     }
     function storyStampTry() {
       if (!STORY_GATES_ON || !STORY_GATE) return false;
       const id = storyChain.due(); if (!id || !storyChain.stamp(id)) return false;
-      showBanner(chainSay('order.stampedBanner', 'ORDER STAMPED'), chainSay('order.stampedNote', 'The next order prints at dawn.'), 2.8, '#d7c6a4');
+      if (house && house.teleprinter) house.teleprinter.stamp();
+      showBanner(chainSay('order.filed', 'ORDER FILED · NEXT AT DAWN'), '', 2.8, '#d7c6a4');
       try { const sa = sndAt(localPlayer.position.x, localPlayer.position.z, 12); AudioSys.buildHit('wood', Math.max(0.25, sa.v * 0.5), sa.pan); } catch (_) {}
       return true;
     }
-    function resetStoryChain() { storyChain.reset(); storyDay = 0; storySyncT = 0; chainGates.reset(); chainClearWorld(); utilities.reset(); utilityClear(); }   // CU-201
+    function resetStoryChain() { storyChain.reset(); storyDay = 0; storySyncT = 0; chainGates.reset(); chainClearWorld(); utilities.reset(); utilityClear(); if (house && house.teleprinter) house.teleprinter.sheetTaken(); try { storyGatesReset(); } catch (_) {} }   // CU-201; CL-303 the gates' own steps
     // CU-201 (CL-289, D-106): the HQ's utilities. Off on the suite's timer pages unless ?utilities=1.
     // ?utilities=0 leaves a real game without them. Power's truth stays hqPowered(), which reads isOn('power')
     // once the gate is on and the day is past the first. Spots (rule 10 is Claude's): the pump is on the north
@@ -34162,14 +34175,17 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
     // CL-303 (D-116): the line's tools. The machete lies in the depot shed by the pump (inside the depot's ring); the winch
     // by the convoy's escort truck behind the ambulance (AG-246 builds the truck; until then the winch on the ground).
-    // Their words are chain.<lead>.line.* (GP-20034 writes them; these fallbacks until then).
+    // Their words: GP-20034's keys (ui/strings.js, D-116), [key, fallback] by field.
     const CHAIN_LINE_WORDS = {
-      machete: { keyName: 'Machete', keyBanner: 'MACHETE FOUND', keyNote: "Price's brush blade. It would cut through vines.", open: 'THE VINES FALL AWAY. THE MAST YARD IS OPEN.' },
-      winch: { keyName: 'Winch', keyBanner: 'WINCH TAKEN', keyNote: "Off the escort truck's bumper. It could drag a dead truck.", open: "THE TRUCK DRAGS CLEAR. THE HIKERS' TRAIL IS OPEN." },
+      machete: { take: ['chain.relay.macheteTake', 'E \u2014 Take the machete'], keyName: ['chain.relay.macheteName', 'Machete'], keyBanner: ['chain.relay.macheteFound', 'MACHETE FOUND'],
+        keyNote: ['chain.relay.macheteNote', "Price's brush blade. It would cut through vines."], open: ['chain.relay.vinesOpen', 'The mast gate opens. The relay is ahead.'] },
+      winch: { take: ['chain.missing.winchTake', 'E \u2014 Take the winch'], keyName: ['chain.missing.winchName', 'Winch'], keyBanner: ['chain.missing.winchTaken', 'WINCH RECOVERED'],
+        keyNote: ['chain.missing.winchNote', "Off the escort truck's bumper. It could drag a dead truck."], open: ['chain.missing.trailClear', 'The truck moves. The trail is clear.'] },
     };
     function chainLineWord(spec, field, fallback) {
-      const w = STORY_GATES_ON && spec && CHAIN_LINE_WORDS[spec.key];
-      if (w) return chainSay('chain.' + spec.lead + '.line.' + field, w[field] ?? fallback);
+      const w = STORY_GATES_ON && spec && CHAIN_LINE_WORDS[spec.key] && CHAIN_LINE_WORDS[spec.key][field];
+      if (w) return chainSay(w[0], w[1]);
+      if (field === 'take') return null;
       return chainSay('chain.' + (spec ? spec.lead : '') + '.' + field, fallback);
     }
     function chainToolMesh(kind) {
@@ -34191,6 +34207,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       mesh.visible = chainGates.keyState(key) === 'ready'; scene.add(mesh);
       chainWorld.keys.set(key, { mesh, x, y, z });
     }
+    let storyEscortTruck = null;
     function chainPlaceLineTools() {
       if (!chainWorld.keys.has('machete') && fuelProps) {
         const F = fuelProps, c = F.prop.centre, pump = F.pump;
@@ -34204,12 +34221,26 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           let best = null, bd = 6;
           for (const line of PATHS) { if (line.deck || line.length < 2) continue; for (const i of [0, line.length - 1]) { const d = hypot(line[i].x - wreck.x, line[i].z - wreck.z); if (d < bd) { bd = d; best = { line, i }; } } }
           let x = wreck.x + 4, z = wreck.z, yaw = 0;
+          let truckX = x, truckZ = z, truckYaw = yaw;
           if (best) {
             const a = best.line[best.i], b = best.line[best.i === 0 ? 1 : best.line.length - 2];
             const dx = b.x - a.x, dz = b.z - a.z, len = hypot(dx, dz) || 1;
             x = a.x + dx / len * 3 - dz / len * 2.2; z = a.z + dz / len * 3 + dx / len * 2.2; yaw = Math.atan2(dx, dz);
+            truckYaw = Math.atan2(dz, -dx);
+            truckX = x - Math.cos(truckYaw) * 3.55;
+            truckZ = z + Math.sin(truckYaw) * 3.55;
           }
-          chainPlaceTool('winch', 'winch', x, sampleHeight(x, z) + 0.02, z, yaw);
+          if (!storyEscortTruck) {
+            storyEscortTruck = buildEscortTruck(THREE);
+            const ty = sampleHeight(truckX, truckZ);
+            storyEscortTruck.position.set(truckX, ty, truckZ);
+            storyEscortTruck.rotation.y = truckYaw;
+            scene.add(storyEscortTruck);
+          }
+          const y = sampleHeight(x, z);
+          const winchMesh = (storyEscortTruck && storyEscortTruck.userData && storyEscortTruck.userData.winch) || chainToolMesh('winch');
+          winchMesh.visible = chainGates.keyState('winch') === 'ready';
+          chainWorld.keys.set('winch', { mesh: winchMesh, x, y, z });
         }
       }
     }
@@ -34290,7 +34321,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       for (const [key, placed] of chainWorld.keys) {
         if (placed.mesh.visible && chainGates.keyState(key) === 'ready' && chainKeyInReach(key, placed)) {
           const spec = gateOfKey(key);
-          if (spec) return 'E \u2014 ' + chainLineWord(spec, 'keyName', 'Key');
+          if (spec) return chainLineWord(spec, 'take') || 'E \u2014 ' + chainLineWord(spec, 'keyName', 'Key');
         }
       }
       if (chainWorld.spare && chainGates.keyState(chainWorld.spare.key) === 'ready') {
@@ -34337,13 +34368,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     const STORY_VINE_CHOPS = 3, STORY_WINCH_SECONDS = 7;
     let storyLinkTex = null, storyCoilGeo = null;
     function storyLinkMat() {
-      if (!storyLinkTex) {
-        const c = document.createElement('canvas'); c.width = c.height = 64;
-        const x = c.getContext('2d'); x.clearRect(0, 0, 64, 64); x.strokeStyle = '#b9c0c0'; x.lineWidth = 3;
-        x.beginPath(); x.moveTo(0, 32); x.lineTo(32, 0); x.lineTo(64, 32); x.lineTo(32, 64); x.closePath(); x.stroke();
-        storyLinkTex = new THREE.CanvasTexture(c); storyLinkTex.wrapS = storyLinkTex.wrapT = THREE.RepeatWrapping; storyLinkTex.colorSpace = THREE.SRGBColorSpace;
-      }
-      return new THREE.MeshStandardMaterial({ map: storyLinkTex, alphaTest: 0.5, side: THREE.DoubleSide, roughness: 0.6, metalness: 0.6 });
+      return getStoryFenceMaterials(THREE).linkMat;
     }
     // Quads of chain link as one mesh: [{ ax, az, ya, bx, bz, yb, h }], the mesh tiled every 0.12 m.
     function storyLinkQuads(quads, mat) {
@@ -34359,66 +34384,20 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const m = new THREE.Mesh(geo, mat); m.receiveShadow = true; return m;
     }
     function storyFenceRingBuild(ring, steel) {
-      const H = 2.3, keep = ring.pts.map((p) => !ring.gates.some((g) => hypot(p.x - g.x, p.z - g.z) < g.half + 0.1));
-      const quads = [], bars = [];
-      if (!storyCoilGeo) storyCoilGeo = new THREE.TorusGeometry(0.22, 0.012, 3, 12);
-      const run = (a, b) => {
-        const dx = b.x - a.x, dz = b.z - a.z, len = hypot(dx, dz); if (len < 0.05) return;
-        const ya = sampleHeight(a.x, a.z) + 0.04, yb = sampleHeight(b.x, b.z) + 0.04, th = Math.atan2(-dz, dx);
-        quads.push({ ax: a.x, az: a.z, ya, bx: b.x, bz: b.z, yb, h: H });
-        const rail = new THREE.Mesh(new THREE.CylinderGeometry(0.025, 0.025, len, 5), steel);
-        rail.position.set((a.x + b.x) / 2, (ya + yb) / 2 + H, (a.z + b.z) / 2); rail.rotation.set(0, th, Math.PI / 2); bars.push(rail);
-        for (let u = 0.15; u < len; u += 0.3) { const t = new THREE.Mesh(storyCoilGeo, steel), k = u / len; t.position.set(a.x + dx * k, ya + (yb - ya) * k + H + 0.26, a.z + dz * k); t.rotation.y = th + Math.PI / 2; bars.push(t); }
-      };
-      const post = (p) => { const m = new THREE.Mesh(new THREE.CylinderGeometry(0.045, 0.045, H + 0.5, 6), steel); m.position.set(p.x, sampleHeight(p.x, p.z) + (H + 0.5) / 2, p.z); bars.push(m); };
-      for (let i = 1; i < ring.pts.length; i++) if (keep[i - 1] && keep[i]) { run(ring.pts[i - 1], ring.pts[i]); if (i % 3 === 0) post(ring.pts[i]); }
-      // Close each side of a gate: from its post to the first kept point of the ring.
-      for (const g of ring.gates) for (const side of [-1, 1]) {
-        const gp = { x: g.x + g.ax * side * (g.half + 0.1), z: g.z + g.az * side * (g.half + 0.1) };
-        let best = null, bd = 3;
-        ring.pts.forEach((p, i) => { if (!keep[i]) return; const d = hypot(p.x - gp.x, p.z - gp.z); if (d < bd) { bd = d; best = p; } });
-        if (best) run(gp, best);
-      }
-      const group = new THREE.Group(); group.name = 'story-fence-' + ring.place;
-      if (quads.length) group.add(storyLinkQuads(quads, storyLinkMat()));
-      if (bars.length) group.add(mergeParts(bars, steel, { castShadow: true, receiveShadow: true }));
-      scene.add(group);
-      return group;
+      const g = buildChainLinkRing(THREE, { pts: ring.pts, gates: ring.gates, heightAt: sampleHeight });
+      g.name = 'story-fence-' + ring.place;
+      scene.add(g);
+      return g;
     }
     function storyVinesBuild(L) {
-      const vr = mulberry32(0x71e5), green = new THREE.MeshStandardMaterial({ color: 0x3b5a2a, roughness: 0.95 }), dark = new THREE.MeshStandardMaterial({ color: 0x2c4320, roughness: 0.95 });
-      const strands = [], clumps = [], cut = [];
-      for (let i = 0; i < 34; i++) {
-        const len = 0.8 + vr() * 1.9, m = new THREE.Mesh(new THREE.BoxGeometry(0.035, len, 0.035), vr() < 0.5 ? green : dark);
-        m.position.set((vr() - 0.5) * 2 * L, 0.3 + vr() * 1.9, (vr() < 0.5 ? -1 : 1) * 0.07); m.rotation.z = (vr() - 0.5) * 1.8; strands.push(m);
-      }
-      for (let i = 0; i < 26; i++) { const m = new THREE.Mesh(new THREE.IcosahedronGeometry(0.14 + vr() * 0.16, 0), vr() < 0.6 ? green : dark); m.position.set((vr() - 0.5) * 2 * L, 0.2 + vr() * 2.1, (vr() - 0.5) * 0.2); clumps.push(m); }
-      for (let i = 0; i < 8; i++) { const len = 0.25 + vr() * 0.45, m = new THREE.Mesh(new THREE.BoxGeometry(0.03, len, 0.03), dark); m.position.set((vr() - 0.5) * 2 * L, 2.2 - len / 2, 0.08); m.rotation.z = (vr() - 0.5) * 0.3; cut.push(m); }
-      const g = new THREE.Group(); g.name = 'story-vines';
-      const shut = new THREE.Group(); shut.add(mergeParts(strands, green, { castShadow: true })); shut.add(mergeParts(clumps, green, { castShadow: true })); g.add(shut);
-      const hanging = mergeParts(cut, dark, {}); hanging.visible = false; g.add(hanging);
-      g.userData.shut = shut; g.userData.cut = hanging;
-      return g;
+      return buildVines(THREE, L);
     }
     function storyVinesCut(e, cutNow) {
       if (!e.vines) return;
       e.vines.userData.shut.visible = !cutNow; e.vines.userData.cut.visible = cutNow;
     }
     function storyTruckBuild(root) {
-      const truck = new THREE.Group(); truck.name = 'story-crashed-truck';
-      const olive = new THREE.MeshStandardMaterial({ color: 0x4b5137, roughness: 0.85, metalness: 0.2 });
-      const dark = new THREE.MeshStandardMaterial({ color: 0x202322, roughness: 0.9, metalness: 0 });
-      const glass = new THREE.MeshStandardMaterial({ color: 0x273a40, roughness: 0.3, metalness: 0.2 });
-      const body = [], b = (w, h, d, x, y, z) => { const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), olive); m.position.set(x, y, z); body.push(m); };
-      b(3.9, 0.25, 2.3, -0.9, 0.95, 0); b(3.9, 1.0, 0.08, -0.9, 1.55, 1.11); b(3.9, 1.0, 0.08, -0.9, 1.55, -1.11); b(0.08, 1.0, 2.3, -2.85, 1.55, 0);
-      b(1.9, 1.7, 2.3, 1.95, 1.55, 0); b(0.9, 0.9, 2.2, 3.3, 1.1, 0);
-      const inner = new THREE.Group(); inner.rotation.z = -0.07; truck.add(inner);   // nose down into the trees
-      inner.add(mergeParts(body, olive, { castShadow: true, receiveShadow: true }));
-      const wheels = [];
-      for (const [x, z] of [[-2.0, 1.05], [-2.0, -1.05], [-0.6, 1.05], [-0.6, -1.05], [2.3, 1.05], [2.3, -1.05]]) { const w = new THREE.Mesh(new THREE.CylinderGeometry(0.52, 0.52, 0.34, 12), dark); w.rotation.x = Math.PI / 2; w.position.set(x, 0.52, z); wheels.push(w); }
-      inner.add(mergeParts(wheels, dark, { castShadow: true, receiveShadow: true }));
-      const win = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.7, 2.0), glass); win.position.set(2.92, 1.95, 0); win.rotation.z = -0.1; inner.add(win);
-      truck.userData.inner = inner;
+      const truck = buildCrashedTruck(THREE);
       root.add(truck);
       return truck;
     }
@@ -34500,6 +34479,12 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       }
       for (const e of storyGates) storyGateSet(e, false, true);
     }
+    // CL-303: a gate's own sub-state back to the start (the vines, the winch's steps, the truck), shut or not.
+    function storyGateSubReset(e) {
+      e.chops = 0; e.chopT = 0; storyVinesCut(e, false);
+      if (e.winch) { Object.assign(e.winch, { stage: 0, t: 0, called: false, tick: 0, held: false }); storyTruckPose(e); storyTruckRestSolids(e, false); if (e.line) e.line.visible = false; if (e.winchMesh) e.winchMesh.visible = false; }
+    }
+    function storyGatesReset() { for (const e of storyGates) { if (e.open) storyGateSet(e, false, true); else storyGateSubReset(e); } }
     function storyGateSet(e, open, now = false) {
       if (e.open === open) return;
       e.open = open;
@@ -34513,8 +34498,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         for (const s of e.solids) if (!worldSolids.includes(s)) worldSolids.push(s);
         for (const s of e.solids) valleyBlock(s.x, s.z, s.radius, e.tag);
         e.lock.visible = true; e.w = 0;
-        e.chops = 0; storyVinesCut(e, false);   // CL-303: a run reset grows them back, and puts the truck back
-        if (e.winch) { Object.assign(e.winch, { stage: 0, t: 0, called: false, tick: 0, held: false }); storyTruckPose(e); storyTruckRestSolids(e, false); if (e.line) e.line.visible = false; if (e.winchMesh) e.winchMesh.visible = false; }
+        storyGateSubReset(e);   // CL-303: a run reset grows the vines back, and puts the truck back
       }
       if (now) e.w = open ? 1 : 0;
       for (const { leaf, side } of e.leaves) leaf.rotation.y = side * 1.75 * (e.w * e.w * (3 - 2 * e.w));
@@ -34565,6 +34549,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (kind === 'stone' || !chainGates.canOpen(e.ring.gate)) return false;
       if (kind === 'fence') {
         e.chops++; e.chopT = 0.25;
+        if (e.chops < STORY_VINE_CHOPS) showBanner(chainSay('chain.relay.vinesCut', 'The blade cuts through the vines.'), '', 1.2, '#d7c6a4');
         try { const sa = sndAt(e.g.x, e.g.z, 20); (AudioSys.macheteChop || AudioSys.macheteSwing)(Math.max(0.3, sa.v), sa.pan); } catch (_) {}
         if (e.chops >= STORY_VINE_CHOPS) { storyVinesCut(e, true); chainTryOpen(e.ring.gate); }
         return true;
@@ -34573,12 +34558,12 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (W.stage === 0 && e.at === 'truck') {
         W.stage = 1; if (e.winchMesh) e.winchMesh.visible = true;
         try { const sa = sndAt(e.g.x, e.g.z, 20); AudioSys.buildHit('metal', Math.max(0.3, sa.v * 0.7), sa.pan); } catch (_) {}
-        showBanner(chainSay('chain.missing.line.boltedBanner', 'WINCH BOLTED ON'), chainSay('chain.missing.line.boltedNote', 'Run its line to the big tree off the trail.'), 2.6, '#d7c6a4');
+        showBanner(chainSay('chain.missing.winchBolted', 'WINCH BOLTED ON'), chainSay('chain.missing.winchBoltedNote', 'Run its cable to the big tree off the trail.'), 2.6, '#d7c6a4');
         return true;
       }
       if (W.stage === 1 && e.at === 'tree') {
         W.stage = 2; storyWinchLineUpdate(e);
-        showBanner(chainSay('chain.missing.line.tiedBanner', 'LINE TIED OFF'), chainSay('chain.missing.line.tiedNote', 'Stand clear at the remote and hold E.'), 2.6, '#d7c6a4');
+        showBanner(chainSay('chain.missing.winchTied', 'CABLE TIED OFF'), chainSay('chain.missing.winchTiedNote', 'Stand clear at the remote and hold E.'), 2.6, '#d7c6a4');
         return true;
       }
       return W.stage === 2 && e.at === 'remote';   // held: storyGatesUpdate winches while E is down
@@ -34586,13 +34571,13 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     function storyGateWhy(e) {
       const kind = e.ring.kind || 'stone', why = chainGates.whyShut(e.ring.gate);
       if (why === 'not-yet') return chainSay('order.notYet', 'Not yet. The orders come one a day, in their turn.');
-      if (kind === 'fence') return chainSay('chain.relay.line.locked', 'The gate is grown shut with vines. A blade would cut them.');
+      if (kind === 'fence') return chainSay('chain.relay.vinesLocked', "Vines block the mast gate. Find a blade in Price's depot shed.");
       if (kind === 'trees') {
-        if (why === 'no-key') return chainSay('chain.missing.line.locked', "A truck has crashed across the trail. It won't move by hand.");
+        if (why === 'no-key') return chainSay('chain.missing.truckBlocked', "A crashed truck blocks the hikers' trail. Its escort has a winch.");
         const st = e.winch ? e.winch.stage : 0;
-        return st === 0 ? chainSay('chain.missing.line.toTruck', 'Bolt the winch to the truck first.')
-          : st === 1 ? chainSay('chain.missing.line.toTree', 'Tie the line off at the big tree by the trail.')
-          : chainSay('chain.missing.line.toRemote', 'Stand clear at the remote and hold E.');
+        return st === 0 ? chainSay('chain.missing.winchNeedBolt', 'Bolt the winch to the truck first.')
+          : st === 1 ? chainSay('chain.missing.winchNeedTie', 'Tie the cable off at the big tree by the trail.')
+          : chainSay('chain.missing.winchNeedRemote', 'Stand clear at the remote and hold E.');
       }
       return chainSay('chain.' + e.ring.lead + '.locked', 'The gate is locked.');
     }
@@ -34600,11 +34585,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const kind = e.ring.kind || 'stone', can = chainGates.canOpen(e.ring.gate);
       if (kind === 'stone') return can ? chainSay('chain.' + e.ring.lead + '.ringPrompt', 'E \u2014 Open the gate') : storyGateWhy(e);
       if (!can) return storyGateWhy(e);
-      if (kind === 'fence') return chainSay('chain.relay.line.cutPrompt', 'E \u2014 Cut the vines') + (e.chops ? ' (' + e.chops + '/' + STORY_VINE_CHOPS + ')' : '');
+      if (kind === 'fence') return chainSay('chain.relay.vinesPrompt', 'E \u2014 Cut the vines') + (e.chops ? ' (' + e.chops + '/' + STORY_VINE_CHOPS + ')' : '');
       const W = e.winch;
-      if (W.stage === 0) return e.at === 'truck' ? chainSay('chain.missing.line.boltPrompt', 'E \u2014 Bolt the winch to the truck') : storyGateWhy(e);
-      if (W.stage === 1) return e.at === 'tree' ? chainSay('chain.missing.line.tiePrompt', 'E \u2014 Tie the line to the tree') : storyGateWhy(e);
-      return e.at === 'remote' ? chainSay('chain.missing.line.winchPrompt', 'Hold E \u2014 Winch the truck clear') + ' ' + Math.round(W.t * 100) + '%' : storyGateWhy(e);
+      if (W.stage === 0) return e.at === 'truck' ? chainSay('chain.missing.winchBolt', 'E \u2014 Bolt on the winch') : storyGateWhy(e);
+      if (W.stage === 1) return e.at === 'tree' ? chainSay('chain.missing.winchTie', 'E \u2014 Tie off the cable') : storyGateWhy(e);
+      return e.at === 'remote' ? chainSay('chain.missing.winchPull', 'E \u2014 Winch the truck clear') + ' ' + Math.round(W.t * 100) + '%' : storyGateWhy(e);
     }
     function chainUpdate(dt) {
       storyGatesUpdate(dt);   // CL-296

@@ -1,0 +1,10 @@
+Game-test request e8a89ef8-dd60-4a76-838d-9feddac629bb queued at position 1. Waiting...
+GRANT chatgpt GP-20032: starting one game-test command
+check-players: 315 player.position reads, all in the allowed places
+ok    t326    13 pass   0 fail  50.3s
+ok    t327    43 pass   0 fail  35.6s
+ok    t328    14 pass   0 fail  29.0s
+ok    t329    10 pass   0 fail  24.6s
+ok    t330    18 pass   0 fail  45.8s
+
+5 checks: 98 pass, 0 fail

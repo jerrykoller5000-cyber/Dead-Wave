@@ -2,12 +2,12 @@
 
 state: active
 model: Grok Bot
-task: GB-290 Checkpoint commit: sights notch caption t280 batches 17-19
+task: GB-291 Checkpoint commit: story gates first looks, gates reset, playtest build option, last chain words
 touching: git
-since: 2026-11-06T22:47Z
-next: —
+since: 2026-11-07T01:46Z
+next: GB-288 The machete's chop on the mast gate's vines (D-116). After t
 blocked-on: —
-last-report: handoffs/2026-11-06-grokbot-GB-287.md
+last-report: handoffs/2026-11-06-grokbot-GB-290.md
 
 ## Notes
 

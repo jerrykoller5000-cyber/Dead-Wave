@@ -1,0 +1,109 @@
+{
+  "task": "AG-245",
+  "order": "D-116",
+  "date": "2026-11-07T00:19:43.153Z",
+  "renderer": "NVIDIA GeForce RTX 5080 WebGPU",
+  "resolution": "1920x1080",
+  "lighting": "Noon Daylight (worldTime = 0.50)",
+  "ring": {
+    "ok": true,
+    "mastCenter": [
+      -153.3681395710665,
+      -4.152801519529441
+    ],
+    "radius": 18,
+    "kind": "fence",
+    "gateCount": 1,
+    "hasFenceMesh": true,
+    "fenceChildren": [
+      {
+        "name": "fence-link-mesh",
+        "tris": 184
+      },
+      {
+        "name": "fence-steel-mesh",
+        "tris": 25110.666666666668
+      }
+    ],
+    "hasVines": true
+  },
+  "stills": {
+    "wide": {
+      "playerPos": [
+        -152.87955381030906,
+        1.526289744761659,
+        25.34315216829671
+      ],
+      "gatePos": [
+        -153.07001944585858,
+        13.84472954422889
+      ],
+      "dist": 11.5,
+      "lookYaw": -3.125029667127658,
+      "prompt": null
+    },
+    "shut": {
+      "playerPos": [
+        -153.03027009583084,
+        0.5544065352417991,
+        16.24440035273
+      ],
+      "gatePos": [
+        -153.07001944585858,
+        13.84472954422889
+      ],
+      "dist": 2.4,
+      "gateState": {
+        "kind": "fence",
+        "open": false,
+        "chops": 0,
+        "why": null,
+        "winch": null,
+        "truck": null,
+        "vines": true,
+        "rest": 0
+      },
+      "prompt": "E — Cut the vines",
+      "why": "Vines block the mast gate. Find a blade in Price's depot shed."
+    },
+    "cut": {
+      "gateState": {
+        "kind": "fence",
+        "open": true,
+        "chops": 3,
+        "why": "open",
+        "winch": null,
+        "truck": null,
+        "vines": false,
+        "rest": 0
+      },
+      "prompt": "Vines block the mast gate. Find a blade in Price's depot shed.",
+      "shutVisible": false,
+      "cutVisible": true
+    },
+    "open": {
+      "gateState": {
+        "kind": "fence",
+        "open": true,
+        "chops": 3,
+        "why": "open",
+        "winch": null,
+        "truck": null,
+        "vines": false,
+        "rest": 0
+      },
+      "gatesDbg": [
+        {
+          "place": "mast",
+          "gate": "mast-yard",
+          "open": true,
+          "w": 1,
+          "solids": 0,
+          "blocks": 0,
+          "x": -153.07001944585858,
+          "z": 13.84472954422889
+        }
+      ]
+    }
+  }
+}

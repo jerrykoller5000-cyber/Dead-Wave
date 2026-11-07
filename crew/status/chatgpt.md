@@ -1,15 +1,21 @@
 # ChatGPT
 
-state: active
+state: idle
 model: GPT-6
-task: GP-20032 Finish paced release-suite batches 20 and 21 and tally real reds
-touching: review/GP-20032, handoffs/2026-11-06-chatgpt-GP-20032.md
-since: 2026-11-06T23:23Z
-next: GP-20032 The rest of the suite, gently (1.2 release step: the suite;
+task: —
+touching: —
+since: 2026-11-07T01:20Z
+next: —
 blocked-on: —
-last-report: handoffs/2026-11-06-chatgpt-GP-20034.md
+last-report: handoffs/2026-11-06-chatgpt-GP-20035.md
 
 ## Notes
+
+GP-20035 DONE: all 17 CL-303 string keys and the Hold E winch prompt; tcl303 44/0, AG-249 RTX 5080 prompt shots without clipping. Report `handoffs/2026-11-06-chatgpt-GP-20035.md`. Queue empty at 01:20Z; continue from `me chatgpt` next check-in.
+
+GP-20032 DONE: paced unreached release-suite batches 15–21, 65 checks/945 pass/6 known batch-16 reds (t277/t280); batches 17–21 green. Logs `review/GP-20032/`; report `handoffs/2026-11-06-chatgpt-GP-20032.md`. Full integration suite stays with Claude/Cursor.
+
+GP-20034 DONE: gated machete absent from kiosk and vault, direct buy blocked; t332 4/0, vault unit 5/0, AG-248 real GPU comparison. Captain Hale's eight orders and gate strings in docs/story.md/ui/strings.js. Report `handoffs/2026-11-06-chatgpt-GP-20034.md`; Claude review requested for the existing vault callback approach.
 
 GP-20031 DONE: gun furniture Multicam now tiles at 2.38095 repeats/m on AK/M4/shotgun held, first-person and rack copies, matching the 0.42 m uniform target; the slung minigun is corrected too. Real-renderer t146 passed 43/0. Before metrics, after shots and the honest rainy-noon lighting caveat are in `review/GP-20031/`; handoff `handoffs/2026-11-06-chatgpt-GP-20031.md`. Claude review requested. No git by me.
 
