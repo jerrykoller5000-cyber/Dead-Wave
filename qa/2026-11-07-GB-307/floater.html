@@ -1,0 +1,21 @@
+﻿<!doctype html><meta charset="utf-8"><title>floater</title>
+<script type="importmap">{"imports":{"three":"../../vendor/three/three.webgpu.js","three/webgpu":"../../vendor/three/three.webgpu.js","three/tsl":"../../vendor/three/three.tsl.js","three/addons/":"../../vendor/three/addons/"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import { weaponModelContext } from '../../tools/marine-inspector.js';
+import { makePistolModel } from '../../studio/weapon-sidearms.js';
+import { floatingParts } from '../../studio/gun-detail.js';
+const gun = makePistolModel(weaponModelContext());
+gun.updateMatrixWorld(true);
+const floats = floatingParts(THREE, gun);
+const info = floats.map((o) => {
+  const b = new THREE.Box3().setFromObject(o);
+  return { name: o.name, type: o.type, mat: o.material && (o.material.name || o.material.color && o.material.color.getHexString()), parent: o.parent && (o.parent.name || o.parent.type), pos: o.position.toArray().map(v=>+v.toFixed(4)), box: {min:b.min.toArray().map(v=>+v.toFixed(4)), max:b.max.toArray().map(v=>+v.toFixed(4))} };
+});
+// also list all mesh local positions for controls
+const meshes = [];
+gun.traverse((o) => { if (o.isMesh) meshes.push({ pos: o.position.toArray().map(v=>+v.toFixed(4)), parent: o.parent===gun?'gun':(o.parent&&o.parent.name)||'grp', size: (()=>{ const b=new THREE.Box3().setFromObject(o); const s=b.getSize(new THREE.Vector3()); return s.toArray().map(v=>+v.toFixed(4)); })() }); });
+window.OUT = { floatingCount: floats.length, floats: info, meshCount: meshes.length };
+document.body.textContent = JSON.stringify(window.OUT, null, 2);
+window.DONE = true;
+</script>

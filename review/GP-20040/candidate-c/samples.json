@@ -1,0 +1,326 @@
+{
+  "phase": "candidate-c",
+  "samples": [
+    {
+      "key": "m4",
+      "hip": {
+        "at": [
+          0.3,
+          -0.26,
+          -0.5
+        ],
+        "yaw": 0.24,
+        "pitch": 0.08,
+        "roll": -0.11
+      },
+      "weapon": "m4",
+      "backend": "WebGPU",
+      "hipInfo": {
+        "tune": {},
+        "active": true,
+        "key": "m4",
+        "akimbo": false,
+        "raise": 1,
+        "ads": 0,
+        "wrist": {
+          "r": 0.822381778517743,
+          "l": 0.18369797048932143
+        },
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "hack": true,
+        "filter": true,
+        "flip": true,
+        "wristMax": 0.87,
+        "blade": null,
+        "reloadKind": null
+      },
+      "hipFp": {
+        "first": true,
+        "ads": 0
+      },
+      "ads": {
+        "ads": 1,
+        "info": {
+          "tune": {},
+          "active": true,
+          "key": "m4",
+          "akimbo": false,
+          "raise": 1,
+          "ads": 1,
+          "wrist": {
+            "r": 0.87,
+            "l": 0.14600194414021225
+          },
+          "magState": "seated",
+          "handPlace": "fore",
+          "reloadU": null,
+          "hack": true,
+          "filter": true,
+          "flip": true,
+          "wristMax": 0.87,
+          "blade": null,
+          "reloadKind": null
+        }
+      }
+    },
+    {
+      "key": "ak",
+      "hip": {
+        "at": [
+          0.27,
+          -0.26,
+          -0.5
+        ],
+        "yaw": 0.18,
+        "pitch": 0.09,
+        "roll": -0.12
+      },
+      "weapon": "ak",
+      "backend": "WebGPU",
+      "hipInfo": {
+        "tune": {},
+        "active": true,
+        "key": "ak",
+        "akimbo": false,
+        "raise": 1,
+        "ads": 0,
+        "wrist": {
+          "r": 0.6901729289825831,
+          "l": 0.12827425078512192
+        },
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "hack": true,
+        "filter": true,
+        "flip": true,
+        "wristMax": 0.87,
+        "blade": null,
+        "reloadKind": null
+      },
+      "hipFp": {
+        "first": true,
+        "ads": 0
+      },
+      "ads": {
+        "ads": 1,
+        "info": {
+          "tune": {},
+          "active": true,
+          "key": "ak",
+          "akimbo": false,
+          "raise": 1,
+          "ads": 1,
+          "wrist": {
+            "r": 0.87,
+            "l": 0.14771737919741137
+          },
+          "magState": "seated",
+          "handPlace": "fore",
+          "reloadU": null,
+          "hack": true,
+          "filter": true,
+          "flip": true,
+          "wristMax": 0.87,
+          "blade": null,
+          "reloadKind": null
+        }
+      }
+    },
+    {
+      "key": "shotgun",
+      "hip": {
+        "at": [
+          0.35,
+          -0.31,
+          -0.5
+        ],
+        "yaw": 0.35,
+        "pitch": 0.12,
+        "roll": 0.105
+      },
+      "weapon": "shotgun",
+      "backend": "WebGPU",
+      "hipInfo": {
+        "tune": {},
+        "active": true,
+        "key": "shotgun",
+        "akimbo": false,
+        "raise": 1,
+        "ads": 0,
+        "wrist": {
+          "r": 0.87,
+          "l": 0.5656540377777619
+        },
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "hack": true,
+        "filter": true,
+        "flip": true,
+        "wristMax": 0.87,
+        "blade": null,
+        "reloadKind": null
+      },
+      "hipFp": {
+        "first": true,
+        "ads": 0
+      },
+      "ads": {
+        "ads": 1,
+        "info": {
+          "tune": {},
+          "active": true,
+          "key": "shotgun",
+          "akimbo": false,
+          "raise": 1,
+          "ads": 1,
+          "wrist": {
+            "r": 0.87,
+            "l": 0.7756017804647721
+          },
+          "magState": "seated",
+          "handPlace": "fore",
+          "reloadU": null,
+          "hack": true,
+          "filter": true,
+          "flip": true,
+          "wristMax": 0.87,
+          "blade": null,
+          "reloadKind": null
+        }
+      }
+    },
+    {
+      "key": "aa12",
+      "hip": {
+        "at": [
+          0.34,
+          -0.31,
+          -0.5
+        ],
+        "yaw": 0.32,
+        "pitch": 0.11,
+        "roll": 0.095
+      },
+      "weapon": "aa12",
+      "backend": "WebGPU",
+      "hipInfo": {
+        "tune": {},
+        "active": true,
+        "key": "aa12",
+        "akimbo": false,
+        "raise": 1,
+        "ads": 0,
+        "wrist": {
+          "r": 0.87,
+          "l": 0.23552162516393335
+        },
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "hack": true,
+        "filter": true,
+        "flip": true,
+        "wristMax": 0.87,
+        "blade": null,
+        "reloadKind": null
+      },
+      "hipFp": {
+        "first": true,
+        "ads": 0
+      },
+      "ads": {
+        "ads": 1,
+        "info": {
+          "tune": {},
+          "active": true,
+          "key": "aa12",
+          "akimbo": false,
+          "raise": 1,
+          "ads": 1,
+          "wrist": {
+            "r": 0.87,
+            "l": 0.13052886157074736
+          },
+          "magState": "seated",
+          "handPlace": "fore",
+          "reloadU": null,
+          "hack": true,
+          "filter": true,
+          "flip": true,
+          "wristMax": 0.87,
+          "blade": null,
+          "reloadKind": null
+        }
+      }
+    },
+    {
+      "key": "sniper",
+      "hip": {
+        "at": [
+          0.3,
+          -0.33,
+          -0.65
+        ],
+        "yaw": 0.28,
+        "pitch": 0.08,
+        "roll": 0.09
+      },
+      "weapon": "sniper",
+      "backend": "WebGPU",
+      "hipInfo": {
+        "tune": {},
+        "active": true,
+        "key": "sniper",
+        "akimbo": false,
+        "raise": 1,
+        "ads": 0,
+        "wrist": {
+          "r": 0.87,
+          "l": 0.2471679905767925
+        },
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "hack": true,
+        "filter": true,
+        "flip": true,
+        "wristMax": 0.87,
+        "blade": null,
+        "reloadKind": null
+      },
+      "hipFp": {
+        "first": true,
+        "ads": 0
+      },
+      "ads": {
+        "ads": 1,
+        "info": {
+          "tune": {},
+          "active": true,
+          "key": "sniper",
+          "akimbo": false,
+          "raise": 1,
+          "ads": 1,
+          "wrist": {
+            "r": 0.87,
+            "l": 0.16976350897874198
+          },
+          "magState": "seated",
+          "handPlace": "fore",
+          "reloadU": null,
+          "hack": true,
+          "filter": true,
+          "flip": true,
+          "wristMax": 0.87,
+          "blade": null,
+          "reloadKind": null
+        }
+      }
+    }
+  ],
+  "errors": []
+}

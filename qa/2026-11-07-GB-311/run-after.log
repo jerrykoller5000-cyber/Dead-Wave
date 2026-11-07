@@ -1,0 +1,105 @@
+GRANT grokbot GB-311: starting one game-test command
+
+=== page-load ===
+page-load PASS {"ms":9549,"tt":true,"version":"v1.2.0","renderer":"WebGPURenderer"}
+page-load exit 0
+
+=== t215-t95 ===
+check-players: 315 player.position reads, all in the allowed places
+ok    t95      9 pass   0 fail  65.5s
+ok    t215     4 pass   0 fail  43.7s
+
+2 checks: 13 pass, 0 fail
+t215-t95 exit 0
+
+=== tcl281 ===
+check-players: 315 player.position reads, all in the allowed places
+ok    tcl281 153 pass   0 fail  119.5s
+
+1 checks: 153 pass, 0 fail
+tcl281 exit 0
+
+=== shots-shotgun ===
+{
+  "weapon": "shotgun",
+  "handPlace": "fore",
+  "r": {
+    "p": [
+      0.0378,
+      -0.0698,
+      -0.1272
+    ],
+    "contact": [
+      0,
+      -0.088,
+      -0.056
+    ]
+  },
+  "l": {
+    "p": [
+      -0.0612,
+      -0.0599,
+      0.336
+    ],
+    "contact": [
+      0,
+      -0.016,
+      0.37
+    ]
+  },
+  "pumpLocal": [
+    0,
+    -0.006,
+    0.28
+  ],
+  "forend": {
+    "size": [
+      0.0502,
+      0.0471,
+      0.3499
+    ],
+    "minY": -0.0343,
+    "maxY": 0.0229,
+    "bottomY": -0.0343
+  }
+}
+after fp-hip
+after fp-ads
+tp
+shots-shotgun exit 0
+
+=== shots-ak ===
+{
+  "weapon": "ak",
+  "handPlace": "fore",
+  "r": {
+    "p": [
+      0.0435,
+      -0.105,
+      -0.1774
+    ],
+    "contact": [
+      0,
+      -0.126,
+      -0.095
+    ]
+  },
+  "l": {
+    "p": [
+      -0.0637,
+      -0.0961,
+      0.3659
+    ],
+    "contact": [
+      0,
+      -0.025,
+      0.37
+    ]
+  },
+  "pumpLocal": null,
+  "forend": null
+}
+after fp-hip
+after fp-ads
+tp
+shots-ak exit 0

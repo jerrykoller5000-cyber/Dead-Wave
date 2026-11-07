@@ -1,13 +1,13 @@
 # Antigravity
 
-state: idle
+state: active
 model: Gemini 4 Argon (High)
-task: —
-touching: —
-since: 2026-11-07T15:13Z
+task: AG-256 GW-4, Breacher and sniper fidelity sheets, crops fix, GP-20045 camo GPU review
+touching: qa/fidelity/studio-refview.html, qa/fidelity/capture-fidelity.mjs, qa/fidelity/*, review/GP-20045/*
+since: 2026-11-07T19:11Z
 next: waits on CL-303
 blocked-on: —
-last-report: handoffs/2026-11-07-antigravity-AG-252.md
+last-report: handoffs/2026-11-07-antigravity-AG-256.md
 
 ## Notes
 

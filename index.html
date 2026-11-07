@@ -20752,31 +20752,60 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (m && m === worldMarine) dressGuns(s);   // his guns are the world's (the rack, the offhand and the carry copies share their materials)
       return m && m.userData.dress ? m.userData.dress.picked : null;
     }
-    // CL-97 part 2: camo on each gun's furniture (the stock, grip and handguard: its wood and polymer), one pick per
-    // gun (wardrobe.guns). Metal stays metal. Each gun gets its own copies of the furniture materials once, with
-    // camo UVs at the marine's scale; the offhand, carry and rack copies are clones, so they share them.
+    // GP-20045 (J20): one paint projection in each gun's root space, across its
+    // receiver, furniture and fitted attachments. Kept under the old registry name
+    // for the armory and rune callers; cloned copies share these per-gun materials.
     let gunFurniture = null;
+    const gunPaintSources = {};
     function registerGunFurniture(guns) {
-      const FURNITURE = new Set([woodMat, woodDark, gunPoly, gunOlive, gunTan]);
-      const out = {};
+      const EXCLUDE = new Set([gunRubber, brassMat, glassMat, sightDotMat]);
+      const out = gunFurniture || {};
+      const point = new THREE.Vector3(), relative = new THREE.Matrix4(), inverse = new THREE.Matrix4();
       for (const [id, gun] of Object.entries(guns)) {
-        const copies = new Map();
+        if (!gun) continue;
+        const copies = gunPaintSources[id] || (gunPaintSources[id] = new Map());
+        const mats = out[id] || (out[id] = []);
+        gun.updateWorldMatrix(true, true);
+        inverse.copy(gun.matrixWorld).invert();
+        const fx = new Set([gun.userData.laser, gun.userData.flash, gun.userData.flashLight].filter(Boolean));
         gun.traverse((o) => {
-          if (!o.isMesh || Array.isArray(o.material) || !FURNITURE.has(o.material)) return;
-          let c = copies.get(o.material);
-          if (!c) { c = o.material.clone(); c.name = 'furniture:' + id; c.userData.issueColor = c.color.getHex(); copies.set(o.material, c); }
+          if (!o.isMesh || !o.geometry?.attributes?.position || Array.isArray(o.material)) return;
+          const base = o.material;
+          if (!(base instanceof THREE.MeshStandardMaterial) || EXCLUDE.has(base) || base.transparent || base.opacity < 1 ||
+              (base.emissive && base.emissive.getHex() && base.emissiveIntensity > 0)) return;
+          for (let p = o; p && p !== gun; p = p.parent)
+            if (fx.has(p) || /(?:laser|flash|bore|lens|glass)/i.test(p.name || '')) return;
+          let c = copies.get(base);
+          if (!c) {
+            c = base.userData.gunPaintId === id ? base : base.clone();
+            if (c !== base) c.userData = { ...base.userData };
+            c.name = 'gunPaint:' + id;
+            c.userData.gunPaintId = id;
+            c.userData.issueColor = c.color.getHex();
+            c.userData.issueMap = c.map || null;
+            c.userData.issueRoughness = c.roughness;
+            c.userData.issueMetalness = c.metalness;
+            copies.set(base, c);
+            copies.set(c, c);
+            if (!mats.includes(c)) mats.push(c);
+          }
           o.material = c;
+          if (o.userData.gunPaintUV === id) return;
           const src = o.geometry.index ? o.geometry.toNonIndexed() : o.geometry.clone();
-          const P = src.attributes.position, uv = new Float32Array(P.count * 2);
-          boxProjectUV(P.array, uv);
-          // P is in local units; root scale includes both the builder's scale and weaponSizeFactor.
-          // Match the 0.42 m tile on his uniform and on the rack's baked, reprojected copies.
+          const P = src.attributes.position, uv = new Float32Array(P.count * 2), pos = new Float32Array(P.count * 3);
+          relative.multiplyMatrices(inverse, o.matrixWorld);
+          for (let i = 0; i < P.count; i++) {
+            point.fromBufferAttribute(P, i).applyMatrix4(relative);
+            pos[i * 3] = point.x; pos[i * 3 + 1] = point.y; pos[i * 3 + 2] = point.z;
+          }
+          boxProjectUV(pos, uv);
+          // Root units become world metres at the gun's fixed builder scale.
           const camoScale = Math.abs(gun.scale.x) || 1;
           for (let i = 0; i < uv.length; i++) uv[i] *= camoScale;
           src.setAttribute('uv', new THREE.BufferAttribute(uv, 2));
           o.geometry = src;
+          o.userData.gunPaintUV = id;
         });
-        out[id] = [...copies.values()];
       }
       return out;
     }
@@ -20788,13 +20817,15 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         const tex = key && isGunFinishKey(key) ? camoTile(key) : null;   // CL-111: or the rune finish, once it is his
         const rune = tex && key === RUNE_FINISH_KEY;
         for (const mat of mats) {
-          mat.map = tex;
+          mat.map = tex || mat.userData.issueMap;
           if (mat.emissive) {   // the rune finish's faint light at night; every other finish has none
             mat.emissiveMap = rune ? runeFinish.glowTex : null;
             mat.emissive.setHex(rune ? 0xffffff : 0x000000);
             mat.emissiveIntensity = rune ? 0.55 * Math.max(0, runeFinish.level) : 1;
           }
           mat.color.setHex(tex ? 0xe6e2d6 : mat.userData.issueColor);
+          mat.roughness = tex ? 0.62 : mat.userData.issueRoughness;
+          mat.metalness = tex ? 0.05 : mat.userData.issueMetalness;
           mat.needsUpdate = true;
         }
       }
@@ -23427,6 +23458,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       for (const mats of Object.values(gunFurniture || {})) for (const m of mats) hold.add(m);
       const add = (v) => { if (v && v.isObject3D) keep.add(v); else if (v && v.isMaterial) hold.add(v); };
       for (const v of Object.values(gun.userData || {})) { if (Array.isArray(v)) v.forEach(add); else add(v); }
+      // Paint needs its UVs and mutable material, so foldStatic cannot batch it.
+      // Merge static pieces by paint material first, preserving named/moving anchors.
+      const paintKeep = new Set(keep);
+      gun.traverse((o) => { if (o.name || (o.isMesh && !o.material?.userData?.gunPaintId)) paintKeep.add(o); });
+      mergeStaticKeepUV(gun, paintKeep);
       return foldStatic(THREE, TSL, gun, { skip: (o) => keep.has(o), enter: () => stowed, hold });
     }
     for (const k in weaponMeshes) foldGun(weaponMeshes[k]);
@@ -24518,7 +24554,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         if (!gun) continue;
         if (EXT_MAG_PRICE[w]) gunExtLook(gun, w, !!extMag[w]);
         if (HEAVY_LOOK[w]) gunHeavyLook(gun, w, !!heavyFitted[w]);
+        // New heavy sleeves and extended tubes are created on first fit, after
+        // the initial paint registration and sometimes on an offhand copy.
+        if (gunFurniture) registerGunFurniture({ [w]: gun });
       }
+      if (gunFurniture) dressGuns(wardrobeState);
     }
     function issueWeaponMagazines(w, loaded = singleMagSize(w), spare = 0) {
       // GB-141: rounds already loose in the calibre's reserve (cave haul ammo before the gun, an old save) are packed into
@@ -27424,7 +27464,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           }
           at += P.count;
         }
-        if (mat.map) boxProjectUV(pos, uv);
+        // Painted UVs already live in the source gun's root space. Reprojecting
+        // the flattened rack copy would shift the pattern at every material join.
+        if (mat.map && !gunFurniture?.[kind]?.includes(mat)) boxProjectUV(pos, uv);
         const geo = new THREE.BufferGeometry();
         geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
         geo.setAttribute('normal', new THREE.BufferAttribute(nrm, 3));
@@ -52195,7 +52237,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       revolver: { twist: 0.1, hold: [-0.32, -0.08, 0.4], grip: [0, -0.07, -0.04], trig: [0, -0.02, 0.035], fore: [-0.058, -0.1, -0.014] },
       uzi:      { twist: 0.2, hold: [-0.3, -0.16, 0.34], grip: [0, -0.088, -0.027], trig: [0, -0.056, 0.05], fore: [0, -0.03, 0.18] },   // GB-236: grip on the thicker grip's centre line (was -0.017)
       m4:       { twist: 0.8, hold: [-0.24, -0.12, 0.28], grip: [0, -0.106, -0.076], trig: [0, -0.078, -0.011], fore: [0, 0.0, 0.36], sh: { butt: [0, -0.003, -0.569], eye: [0, 0.134, -0.20] } },
-      ak:       { twist: 0.8, hold: [-0.24, -0.12, 0.28], grip: [0, -0.126, -0.095], trig: [0, -0.062, -0.019], fore: [0, -0.02, 0.37], sh: { butt: [0, -0.078, -0.597], eye: [0, 0.09, -0.30] } },
+      ak:       { twist: 0.8, hold: [-0.24, -0.12, 0.28], grip: [0, -0.126, -0.095], trig: [0, -0.052, -0.019], fore: [0, -0.02, 0.37], sh: { butt: [0, -0.078, -0.597], eye: [0, 0.074, -0.30] } },   // GB-311 (CL-311): the slim KR-7's cover 2.6 cm lower (SIGHT.ak 0.074), its trigger 1 cm up
       aa12:     { twist: 0.8, hold: [-0.24, -0.13, 0.203], grip: [0, -0.145, -0.166], trig: [0, -0.104, -0.086], fore: [0, -0.035, 0.36], sh: { butt: [0, -0.005, -0.572], eye: [0, 0.16, -0.30] } },   // GB-173: the grip moved 70 mm back on the model; hold -0.057 (x0.82) keeps the gun where it was; GB-188: fore 20 mm lower, the fist round the underside of GB-180's box handguard
       shotgun:  { twist: 0.8, hold: [-0.24, -0.12, 0.24], grip: [0, -0.088, -0.056], trig: [0, -0.058, 0.023], fore: 'pump', pumpDy: -0.015, sh: { butt: [0, -0.02, -0.496], eye: [0, 0.08, -0.28] } },
       sniper:   { twist: 0.8, hold: [-0.24, -0.12, 0.28], grip: [0, -0.088, -0.117], trig: [0, -0.064, -0.052], fore: [0, -0.005, 0.35], sh: { butt: [0, -0.018, -0.622], eye: [0, 0.15, -0.40] } },

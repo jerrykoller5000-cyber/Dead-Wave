@@ -174,7 +174,7 @@
     // point, the same one adsOf uses). The shotgun is stage 3 and still has no entry.
     const stage2 = [
       ['m4', 'the GW-4', [0, 0.134, -0.12], [0, -0.106, -0.076]],
-      ['ak', 'the AK', [0, 0.090, 0], [0, -0.126, -0.095]],
+      ['ak', 'the AK', [0, 0.074, 0], [0, -0.126, -0.095]],
       ['uzi', 'the Wasp', [0, 0.126, -0.25], [0, -0.088, -0.027]]
     ];
     const scanNear = () => {
@@ -268,7 +268,7 @@
     // CU-227 stage 3 (GP-20014). Rear points are game/sight-points.js after GB-259.
     // The sniper's view gun hides at full ADS (0.82); the sight is read on the way there.
     const stage3 = [
-      ['shotgun', 'the shotgun', [0, 0.105, -0.25], [0, -0.088, -0.056], true],
+      ['shotgun', 'the shotgun', [0, 0.070, -0.25], [0, -0.088, -0.056], true],   // CL-312 (D-121): the receiver 62 mm tall now; SIGHT.shotgun follows the model, the bar stays
       ['aa12', 'the Breacher', [0, 0.168, -0.25], [0, -0.145, -0.166], true],   // GB-259 (J20 / Claude 2026-11-03): rear through ring centre
       ['revolver', 'the revolver', [0, 0.114, -0.05], [0, -0.07, -0.04], false],
       ['sniper', 'the sniper', [0, 0.140, -0.20], [0, -0.088, -0.117], true]

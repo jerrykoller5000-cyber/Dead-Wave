@@ -1,0 +1,70 @@
+{
+  "phase": "before",
+  "samples": [
+    {
+      "key": "shotgun",
+      "hip": {
+        "at": [
+          0.35,
+          -0.31,
+          -0.5
+        ],
+        "yaw": 0.35,
+        "pitch": 0.12,
+        "roll": 0.105
+      },
+      "weapon": "shotgun",
+      "backend": "WebGPU",
+      "hipInfo": {
+        "tune": {},
+        "active": true,
+        "key": "shotgun",
+        "akimbo": false,
+        "raise": 1,
+        "ads": 0,
+        "wrist": {
+          "r": 0.8695451349480119,
+          "l": 0.5140960228428944
+        },
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "hack": true,
+        "filter": true,
+        "flip": true,
+        "wristMax": 0.87,
+        "blade": null,
+        "reloadKind": null
+      },
+      "hipFp": {
+        "first": true,
+        "ads": 0
+      },
+      "ads": {
+        "ads": 1,
+        "info": {
+          "tune": {},
+          "active": true,
+          "key": "shotgun",
+          "akimbo": false,
+          "raise": 1,
+          "ads": 1,
+          "wrist": {
+            "r": 0.87,
+            "l": 0.7320746869734648
+          },
+          "magState": "seated",
+          "handPlace": "fore",
+          "reloadU": null,
+          "hack": true,
+          "filter": true,
+          "flip": true,
+          "wristMax": 0.87,
+          "blade": null,
+          "reloadKind": null
+        }
+      }
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,29 @@
+{
+  "floatingCount": 1,
+  "floats": [
+    {
+      "name": "",
+      "type": "Mesh",
+      "mat": "ff2b1a",
+      "parent": "Group",
+      "pos": [
+        0,
+        0.05,
+        3.3
+      ],
+      "box": {
+        "min": [
+          -0.0026,
+          0.047,
+          3.3
+        ],
+        "max": [
+          0.0026,
+          0.053,
+          5.5
+        ]
+      }
+    }
+  ],
+  "meshCount": 22
+}

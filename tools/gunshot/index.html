@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Gun shot: one of our guns, four views (CL-309, D-121)</title>
+<style>html,body{margin:0;background:#121418;height:100%;overflow:hidden}#view{width:100vw;height:100vh}#readout{position:fixed;left:8px;top:8px;color:#9fd;font:12px/1.4 monospace;white-space:pre;pointer-events:none}</style>
+<script type="importmap">
+{ "imports": { "three": "../../vendor/three/three.webgpu.js", "three/webgpu": "../../vendor/three/three.webgpu.js", "three/tsl": "../../vendor/three/three.tsl.js", "three/addons/": "../../vendor/three/addons/" } }
+</script>
+</head>
+<body>
+<div id="view"></div>
+<pre id="readout"></pre>
+<script type="module">
+// tools/gunshot: ?gun=shotgun&view=side|top|quarter|close|closeL|grip&w=1280&h=720&fov=28&at=x,y,z&d=0.6&lit=noon|night
+// The builder's model at the game's scale (tools/refview's GUNS table), lit as the inspector lights it. For the fidelity
+// pass's own look loop (D-121): a builder shoots before and after without the game. window.GUNSHOT.ready resolves with
+// { tris, box } once drawn; window.GUNSHOT.shoot(view) re-aims and draws.
+import * as THREE from 'three';
+import { weaponModelContext } from '../marine-inspector.js';
+import { makeM4Model, makeAkModel, makeAa12Model, makeShotgunModel, makeSniperModel } from '../../studio/weapon-longarms.js';
+import { makePistolModel, makeRevolverModel, makeUziModel, makeKnifeModel } from '../../studio/weapon-sidearms.js';
+import { makeMinigunModel, makeLauncherModel, makeChainsawModel, makeFlamerModel } from '../../studio/weapon-heavy.js';
+import { makeKatanaModel } from '../../studio/katana.js';
+import { makeFragGrenade } from '../../studio/frag-grenade.js';
+import { floatingParts } from '../../studio/gun-detail.js';
+
+const MARINE_UPM = 1.655 / 1.80;
+const GUNS = {
+  minigun: { make: makeMinigunModel, hand: 0.88 },
+  m4: { make: makeM4Model, len: 1.423, m: 0.84, look: 1.35, hand: 0.92 },
+  ak: { make: makeAkModel, len: 1.464, m: 0.88, look: 1.35, hand: 0.92 },
+  uzi: { make: makeUziModel, len: 0.816, m: 0.47, look: 1.0, hand: 1.0 },
+  shotgun: { make: makeShotgunModel, len: 1.376, m: 1.0, look: 1.25, hand: 0.95 },
+  aa12: { make: makeAa12Model, len: 1.393, m: 0.96, look: 1.2, hand: 0.9 },
+  revolver: { make: makeRevolverModel, len: 0.484, m: 0.27, look: 1.4, hand: 1.08 },
+  pistol: { make: makePistolModel, len: 0.42, m: 0.19, look: 1.4, hand: 1.08 },
+  sniper: { make: makeSniperModel, len: 1.608, m: 1.15, look: 1.25, hand: 0.88 },
+  launcher: { make: makeLauncherModel, len: 1.091, m: 0.75, look: 1.2, hand: 0.92 },
+  chainsaw: { make: makeChainsawModel, len: 1.376, m: 0.85, look: 1.2, hand: 1.18 },
+  flamer: { make: makeFlamerModel, hand: 1.0 },
+  knife: { make: (c) => { const g = makeKnifeModel(c); g.scale.setScalar(1.15); return g; }, hand: 1.0 },
+  katana: { make: ({ THREE }) => makeKatanaModel({ THREE }), hand: 1.0 },
+  grenade: { make: ({ THREE }) => makeFragGrenade({ THREE, r: 0.05 }), hand: 1.0 }
+};
+const q = new URLSearchParams(location.search);
+const id = q.get('gun') || 'shotgun', W = +q.get('w') || 1280, H = +q.get('h') || 720;
+const G = GUNS[id];
+const ctx = weaponModelContext();
+const gun = G.make(ctx);
+const s = (G.hand == null ? 1 : G.hand) * (G.len ? G.m * (G.look || 1) * MARINE_UPM / G.len : 1);
+gun.scale.multiplyScalar(s);
+if (id === 'knife') { for (const k of ['macheteModel', 'katanaModel']) if (gun.userData[k]) gun.userData[k].visible = false; if (q.get('blade') === 'machete') { gun.userData.knifeModel && (gun.userData.knifeModel.visible = false); gun.userData.macheteModel && (gun.userData.macheteModel.visible = true); } }
+if (gun.userData && gun.userData.suppressor && q.get('can') === '1') gun.userData.suppressor.visible = true;
+
+const renderer = new THREE.WebGPURenderer({ antialias: true, forceWebGL: true });
+await renderer.init();
+renderer.setPixelRatio(1);
+renderer.setSize(W, H, false);
+renderer.domElement.style.width = W + 'px'; renderer.domElement.style.height = H + 'px';
+document.getElementById('view').appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x121418);
+const night = q.get('lit') === 'night';
+scene.add(new THREE.HemisphereLight(night ? 0x334455 : 0xdde2ea, night ? 0x111214 : 0x3a3732, night ? 0.4 : 1.8));
+const sun = new THREE.DirectionalLight(night ? 0x8899bb : 0xfff4e0, night ? 0.4 : 2.2);
+sun.position.set(2, 4, 3); scene.add(sun);
+const fill = new THREE.DirectionalLight(0xc8d0e0, night ? 0.1 : 0.35); fill.position.set(-3, 1, -2); scene.add(fill);
+for (const k of ['laser', 'flash', 'flashLight']) if (gun.userData && gun.userData[k]) gun.userData[k].visible = false;   // the beam ran the box out to 5 m
+scene.add(gun);
+gun.updateMatrixWorld(true);
+const box = new THREE.Box3(); const _bb = new THREE.Box3();
+gun.traverse((o) => { let v = o.visible, p = o.parent; while (v && p && p !== gun.parent) { v = p.visible; p = p.parent; } if (!v || !o.isMesh || !o.geometry) return; if (!o.geometry.boundingBox) o.geometry.computeBoundingBox(); _bb.copy(o.geometry.boundingBox).applyMatrix4(o.matrixWorld); box.union(_bb); });
+const size = box.getSize(new THREE.Vector3()), centre = box.getCenter(new THREE.Vector3());
+let tris = 0; gun.traverse((o) => { if (o.isMesh && o.visible && o.geometry) { const g = o.geometry; tris += g.index ? g.index.count / 3 : g.attributes.position.count / 3; } });
+const camera = new THREE.PerspectiveCamera(+q.get('fov') || 28, W / H, 0.005, 50);
+function aim(view) {
+  const at = q.get('at') ? q.get('at').split(',').map(Number) : null;
+  const target = at ? new THREE.Vector3(at[0], at[1], at[2]) : (view === 'close' ? new THREE.Vector3(centre.x, centre.y + size.y * 0.1, centre.z - size.z * 0.12) : centre.clone());   // close: the receiver
+  const span = Math.max(size.x, size.y, size.z);
+  const dist = +q.get('d') || (view === 'close' ? 0.55 : span * 0.52 / Math.tan(camera.fov * Math.PI / 360) * 1.08);
+  if (view === 'side') camera.position.set(target.x + dist, target.y, target.z);          // the gun's left (+x): what the mirrored first-person eye sees
+  else if (view === 'sideR') camera.position.set(target.x - dist, target.y, target.z);
+  else if (view === 'top') camera.position.set(target.x, target.y + dist, target.z + 0.0001);
+  else if (view === 'quarter') camera.position.set(target.x + dist * 0.7, target.y + dist * 0.45, target.z - dist * 0.55);
+  else if (view === 'close') camera.position.set(target.x + dist * 0.65, target.y + dist * 0.35, target.z - dist * 0.65);   // over the left shoulder, as the eye sees the receiver
+  else if (view === 'rear') camera.position.set(target.x, target.y + dist * 0.25, target.z - dist);
+  else camera.position.set(target.x + dist * 0.7, target.y + dist * 0.45, target.z - dist * 0.55);
+  camera.lookAt(target);
+  camera.updateProjectionMatrix();
+}
+const readout = document.getElementById('readout');
+async function shoot(view) {
+  aim(view);
+  await renderer.renderAsync(scene, camera);
+  readout.textContent = id + ' · ' + view + ' · tris ' + Math.round(tris) + ' · ' + size.toArray().map((v) => v.toFixed(3)).join(' x ') + ' m';
+  // CL-314: the loose parts (J14), named by their material and place, so a builder sees what floats without the sheet.
+  // The hidden laser beam and the flash are not parts.
+  const floats = floatingParts(THREE, gun).filter((o) => o.visible && o !== gun.userData.laser && o !== gun.userData.flash).map((o) => { const p = new THREE.Vector3(); o.getWorldPosition(p); return { name: o.name || (o.material && o.material.name) || o.geometry.type, at: p.toArray().map((v) => +(v / s).toFixed(3)) }; });
+  return { tris: Math.round(tris), box: { min: box.min.toArray(), max: box.max.toArray() }, floats };
+}
+window.GUNSHOT = { shoot, gun, scene, camera, renderer, THREE };
+window.GUNSHOT.ready = shoot(q.get('view') || 'quarter');
+</script>
+</body>
+</html>

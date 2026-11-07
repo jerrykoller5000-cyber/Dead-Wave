@@ -1,0 +1,638 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Fidelity Upgrade Studio & Reference Viewer</title>
+<style>
+  html, body { margin: 0; background: #121418; color: #e6e1d6; overflow: hidden; font: 14px/1.4 system-ui, sans-serif; }
+  #view { position: fixed; inset: 0; z-index: 1; }
+  #readout { display: none; }
+</style>
+<div id="view"></div>
+<pre id="readout"></pre>
+<script type="importmap">
+{
+  "imports": {
+    "three": "../../vendor/three/three.webgpu.js",
+    "three/webgpu": "../../vendor/three/three.webgpu.js",
+    "three/tsl": "../../vendor/three/three.tsl.js",
+    "three/addons/": "../../vendor/three/addons/"
+  }
+}
+</script>
+<script type="module">
+window.onerror = (m, s, l, c, e) => { window.ERR = String((e && e.stack) || m); };
+import * as THREE from 'three';
+import { weaponModelContext } from '../../tools/marine-inspector.js';
+import { floatingParts } from '../../studio/gun-detail.js';
+
+// AFTER models from working tree
+import { makePistolModel as makePistolAfter } from '../../studio/weapon-sidearms.js';
+import {
+  makeM4Model as makeM4After,
+  makeAkModel as makeAkAfter,
+  makeAa12Model as makeAa12After,
+  makeShotgunModel as makeShotgunAfter,
+  makeSniperModel as makeSniperAfter
+} from '../../studio/weapon-longarms.js';
+
+// BEFORE models from commit 28137581
+import { makePistolModel as makePistolBefore } from '../weapon-sidearms.28137581.js';
+import {
+  makeM4Model as makeM4Before,
+  makeAkModel as makeAkBefore,
+  makeAa12Model as makeAa12Before,
+  makeShotgunModel as makeShotgunBefore,
+  makeSniperModel as makeSniperBefore
+} from '../weapon-longarms.28137581.js';
+
+const MARINE_UPM = 1.655 / 1.80;
+
+const WEAPONS = {
+  pistol: {
+    id: 'pistol',
+    name: 'Pistol (Service Pistol / Glock-19 style)',
+    refFile: 'low_poly_glock-19.glb',
+    real: 0.195,
+    sizeK: 0.195 * 1.45 * MARINE_UPM / 0.431,
+    makeBefore: makePistolBefore,
+    makeAfter: makePistolAfter,
+    receiverCenter: [0, 0.04, 0.05],
+    gripCenter: [0, -0.066, -0.016],
+    orderIx: 3
+  },
+  ak: {
+    id: 'ak',
+    name: 'KR-7 Rifle (AKM Pattern)',
+    refFile: 'ak-47.glb',
+    real: 0.88,
+    sizeK: (0.88 * 1.35 * MARINE_UPM / 1.464) * 0.92,
+    makeBefore: makeAkBefore,
+    makeAfter: makeAkAfter,
+    receiverCenter: [0, 0.02, 0],
+    gripCenter: [0, -0.126, -0.095],
+    orderIx: 2
+  },
+  shotgun: {
+    id: 'shotgun',
+    name: 'Shotgun (Tactical Pump Action)',
+    refFile: 'shotgun.glb',
+    real: 1.0,
+    sizeK: (1.0 * 1.25 * MARINE_UPM / 1.376) * 0.95,
+    makeBefore: makeShotgunBefore,
+    makeAfter: makeShotgunAfter,
+    receiverCenter: [0, 0.0, 0],
+    gripCenter: [0, -0.088, -0.056],
+    forendCenter: [0, -0.006, 0.25],
+    orderIx: 5
+  },
+  m4: {
+    id: 'm4',
+    name: 'GW-4 Carbine (M4A1 Pattern)',
+    refFile: 'm4_sopmod.glb',
+    real: 0.84,
+    sizeK: (0.84 * 1.35 * MARINE_UPM / 1.423) * 0.92,
+    makeBefore: makeM4Before,
+    makeAfter: makeM4After,
+    receiverCenter: [0, 0.03, 0],
+    gripCenter: [0, -0.106, -0.076],
+    orderIx: 1
+  },
+  aa12: {
+    id: 'aa12',
+    name: 'Breacher-12 (AA-12 Pattern)',
+    refFile: 'aa12.glb',
+    real: 0.96,
+    sizeK: (0.96 * 1.2 * MARINE_UPM / 1.393) * 0.90,
+    makeBefore: makeAa12Before,
+    makeAfter: makeAa12After,
+    receiverCenter: [0, 0.02, 0],
+    gripCenter: [0, -0.145, -0.166],
+    orderIx: 6
+  },
+  sniper: {
+    id: 'sniper',
+    name: 'Sniper Rifle (L96 Chassis Pattern)',
+    refFile: 'sniper.glb',
+    real: 1.15,
+    sizeK: (1.15 * 1.25 * MARINE_UPM / 1.608) * 0.88,
+    makeBefore: makeSniperBefore,
+    makeAfter: makeSniperAfter,
+    receiverCenter: [0, 0.05, -0.1],
+    gripCenter: [0, -0.088, -0.117],
+    orderIx: 8
+  }
+};
+
+const viewEl = document.getElementById('view');
+const renderer = new THREE.WebGPURenderer({ antialias: true, forceWebGL: true });
+renderer.setSize(1280, 720);
+renderer.setPixelRatio(1);
+viewEl.appendChild(renderer.domElement);
+await renderer.init();
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x121418);
+
+// Studio 4-point lighting
+const hemi = new THREE.HemisphereLight(0xdde2ea, 0x2a2722, 1.2);
+scene.add(hemi);
+const sun = new THREE.DirectionalLight(0xfff4e0, 1.6);
+sun.position.set(2.5, 3.8, 3.0);
+scene.add(sun);
+const fill = new THREE.DirectionalLight(0xffffff, 0.7);
+fill.position.set(-2.5, 1.2, -1.5);
+scene.add(fill);
+const rim = new THREE.DirectionalLight(0xaaccff, 0.4);
+rim.position.set(-1.0, 2.0, -3.0);
+scene.add(rim);
+
+const camera = new THREE.PerspectiveCamera(36, 1280 / 720, 0.01, 80);
+
+const rootOurs = new THREE.Group();
+const rootBefore = new THREE.Group();
+const rootRef = new THREE.Group();
+const rootRuler = new THREE.Group();
+scene.add(rootOurs);
+scene.add(rootBefore);
+scene.add(rootRef);
+scene.add(rootRuler);
+
+function readAccessor(doc, bin, index) {
+  const acc = doc.accessors[index];
+  const bv = doc.bufferViews[acc.bufferView];
+  const start = (bv.byteOffset || 0) + (acc.byteOffset || 0);
+  const ncomp = { SCALAR: 1, VEC2: 2, VEC3: 3, VEC4: 4 }[acc.type];
+  const compSize = { 5120: 1, 5121: 1, 5122: 2, 5123: 2, 5125: 4, 5126: 4 }[acc.componentType];
+  const stride = bv.byteStride || compSize * ncomp;
+  const out = new Float32Array(acc.count * ncomp);
+  const dv = new DataView(bin);
+  for (let i = 0; i < acc.count; i++) {
+    const o = start + i * stride;
+    for (let c = 0; c < ncomp; c++) {
+      let v = 0;
+      if (acc.componentType === 5126) v = dv.getFloat32(o + c * 4, true);
+      else if (acc.componentType === 5123) v = dv.getUint16(o + c * 2, true);
+      else if (acc.componentType === 5125) v = dv.getUint32(o + c * 4, true);
+      else if (acc.componentType === 5121) v = dv.getUint8(o + c);
+      else if (acc.componentType === 5122) v = dv.getInt16(o + c * 2, true);
+      else if (acc.componentType === 5120) v = dv.getInt8(o + c);
+      out[i * ncomp + c] = v;
+    }
+  }
+  return out;
+}
+
+function nodeMatrix(n) {
+  const m = new THREE.Matrix4();
+  if (n.matrix) m.fromArray(n.matrix);
+  else {
+    const t = n.translation || [0, 0, 0];
+    const r = n.rotation || [0, 0, 0, 1];
+    const s = n.scale || [1, 1, 1];
+    m.compose(new THREE.Vector3(t[0], t[1], t[2]), new THREE.Quaternion(r[0], r[1], r[2], r[3]), new THREE.Vector3(s[0], s[1], s[2]));
+  }
+  return m;
+}
+
+function parseGlb(buf) {
+  const u8 = new Uint8Array(buf);
+  const dv = new DataView(buf);
+  if (dv.getUint32(0, true) !== 0x46546c67) throw new Error('not a glb');
+  let json = null, bin = null, o = 12;
+  while (o + 8 <= u8.length) {
+    const len = dv.getUint32(o, true);
+    const type = dv.getUint32(o + 4, true);
+    const chunk = u8.slice(o + 8, o + 8 + len);
+    if (type === 0x4e4f534a) json = JSON.parse(new TextDecoder().decode(chunk));
+    else if (type === 0x004e4942) {
+      const have = Math.max(0, Math.min(len, u8.length - (o + 8)));
+      const declared = json && json.buffers && json.buffers[0] ? (json.buffers[0].byteLength || 0) : 0;
+      const need = Math.max(have, declared);
+      const padded = new Uint8Array(need);
+      padded.set(u8.subarray(o + 8, o + 8 + have));
+      bin = padded.buffer;
+    }
+    o += 8 + len;
+  }
+  if (!json || !bin) throw new Error('glb is missing json or bin');
+  const group = new THREE.Group();
+  const doc = json;
+  const nodes = doc.nodes || [];
+  const world = nodes.map(() => new THREE.Matrix4());
+  const kids = nodes.map(() => []);
+  nodes.forEach((n, i) => (n.children || []).forEach((c) => kids[i].push(c)));
+  const roots = new Set(nodes.map((_, i) => i));
+  kids.forEach((list) => list.forEach((c) => roots.delete(c)));
+  const sceneNodes = (doc.scenes && doc.scenes[doc.scene || 0] && doc.scenes[doc.scene || 0].nodes) || [...roots];
+  function walk(i, parent) {
+    world[i].multiplyMatrices(parent, nodeMatrix(nodes[i] || {}));
+    for (const c of kids[i]) walk(c, world[i]);
+  }
+  for (const r of sceneNodes) walk(r, new THREE.Matrix4());
+  const mat = new THREE.MeshStandardMaterial({ color: 0xb7b1a4, roughness: 0.6, metalness: 0.15 });
+  nodes.forEach((n, i) => {
+    if (n.mesh == null) return;
+    const mesh = doc.meshes[n.mesh];
+    for (const prim of mesh.primitives || []) {
+      if (prim.mode != null && prim.mode !== 4) continue;
+      if (prim.attributes.POSITION == null) continue;
+      const pos = readAccessor(doc, bin, prim.attributes.POSITION);
+      const geo = new THREE.BufferGeometry();
+      geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+      if (prim.attributes.NORMAL != null) geo.setAttribute('normal', new THREE.BufferAttribute(readAccessor(doc, bin, prim.attributes.NORMAL), 3));
+      if (prim.indices != null) {
+        const idx = readAccessor(doc, bin, prim.indices);
+        const acc = doc.accessors[prim.indices];
+        const Arr = acc.componentType === 5125 ? Uint32Array : Uint16Array;
+        geo.setIndex(new THREE.BufferAttribute(new Arr(idx), 1));
+      }
+      if (!geo.getAttribute('normal')) geo.computeVertexNormals();
+      const m = new THREE.Mesh(geo, mat);
+      m.applyMatrix4(world[i]);
+      group.add(m);
+    }
+  });
+  return group;
+}
+
+function isShown(o) {
+  if (!o.isMesh || !o.visible || !o.geometry || !o.geometry.getAttribute('position')) return false;
+  if (/laser|muzzle|flash|spark|smoke/i.test(o.name || '')) return false;
+  for (let p = o.parent; p; p = p.parent) if (p.visible === false) return false;
+  return true;
+}
+
+function bodyBox(obj) {
+  const box = new THREE.Box3();
+  obj.updateWorldMatrix(true, true);
+  obj.traverse((o) => {
+    if (!isShown(o)) return;
+    if (!o.geometry.boundingBox) o.geometry.computeBoundingBox();
+    const b = o.geometry.boundingBox.clone().applyMatrix4(o.matrixWorld);
+    if (b.max.z > 2.5) return; // avoid laser discs
+    box.union(b);
+  });
+  return box;
+}
+
+function pointsOf(obj) {
+  obj.updateMatrixWorld(true);
+  const out = [];
+  const v = new THREE.Vector3();
+  obj.traverse((o) => {
+    if (!isShown(o)) return;
+    const p = o.geometry.getAttribute('position');
+    const step = Math.max(1, Math.floor(p.count / 800));
+    for (let i = 0; i < p.count; i += step) {
+      v.fromBufferAttribute(p, i).applyMatrix4(o.matrixWorld);
+      if (v.z > 2.5) continue;
+      out.push(v.x, v.y, v.z);
+    }
+  });
+  return out;
+}
+
+function orientLongestToZ(obj) {
+  obj.updateMatrixWorld(true);
+  const box = bodyBox(obj);
+  const s = box.getSize(new THREE.Vector3());
+  const axes = [['x', s.x], ['y', s.y], ['z', s.z]].sort((a, b) => b[1] - a[1]);
+  if (axes[0][0] === 'x') obj.rotateY(Math.PI / 2);
+  else if (axes[0][0] === 'y') obj.rotateX(-Math.PI / 2);
+  obj.updateMatrixWorld(true);
+  const box2 = bodyBox(obj);
+  const s2 = box2.getSize(new THREE.Vector3());
+  if (s2.x > s2.y) obj.rotateZ(Math.PI / 2);
+  obj.updateMatrixWorld(true);
+  const box3 = bodyBox(obj);
+  const size = box3.getSize(new THREE.Vector3());
+  const yCut = box3.min.y + size.y * 0.5;
+  let zSum = 0, n = 0;
+  const v = new THREE.Vector3();
+  obj.traverse((o) => {
+    if (!isShown(o)) return;
+    const pos = o.geometry.getAttribute('position');
+    const step = Math.max(1, Math.floor(pos.count / 400));
+    for (let i = 0; i < pos.count; i += step) {
+      v.fromBufferAttribute(pos, i).applyMatrix4(o.matrixWorld);
+      if (v.y > yCut) continue;
+      zSum += v.z; n++;
+    }
+  });
+  if (n > 8 && zSum / n > (box3.min.z + box3.max.z) * 0.5) obj.rotateY(Math.PI);
+}
+
+function measure(obj) {
+  const pts = pointsOf(obj);
+  const box = bodyBox(obj);
+  if (pts.length < 12 || box.isEmpty()) return null;
+  const size = box.getSize(new THREE.Vector3());
+  const z0 = box.min.z, z1 = box.max.z, y0 = box.min.y, y1 = box.max.y;
+  const len = size.z, h = y1 - y0;
+  const grip = [];
+  for (let i = 0; i < pts.length; i += 3) {
+    const y = pts[i + 1], z = pts[i + 2];
+    if (z < z0 + len * 0.38 && y < y0 + h * 0.62) grip.push(y, z);
+  }
+  let sy = 0, sz = 0, syy = 0, szz = 0, syz = 0;
+  for (let i = 0; i < grip.length; i += 2) { sy += grip[i]; sz += grip[i + 1]; }
+  const n = Math.max(1, grip.length / 2);
+  const my = sy / n, mz = sz / n;
+  for (let i = 0; i < grip.length; i += 2) {
+    const dy = grip[i] - my, dz = grip[i + 1] - mz;
+    syy += dy * dy; szz += dz * dz; syz += dy * dz;
+  }
+  const ang = 0.5 * Math.atan2(2 * syz, syy - szz);
+  const rake = Math.abs(Math.atan2(Math.sin(ang), Math.cos(ang)) * 180 / Math.PI);
+  const muzzle = [];
+  for (let i = 0; i < pts.length; i += 3) if (pts[i + 2] > z1 - len * 0.18) muzzle.push(pts[i + 1]);
+  muzzle.sort((a, b) => a - b);
+  const boreY = muzzle.length ? muzzle[muzzle.length >> 1] : (y0 + y1) * 0.5;
+  const gripYs = [];
+  for (let i = 0; i < grip.length; i += 2) gripYs.push(grip[i]);
+  gripYs.sort((a, b) => a - b);
+  const gripY = gripYs.length ? gripYs[gripYs.length >> 1] : y0;
+  let sight = boreY;
+  for (let i = 0; i < pts.length; i += 3) {
+    if (pts[i + 2] < z0 + len * 0.55 && pts[i + 1] > sight) sight = pts[i + 1];
+  }
+  return {
+    length: +len.toFixed(4),
+    boreOverGrip: +(boreY - gripY).toFixed(4),
+    rakeDeg: +rake.toFixed(1),
+    sightH: +Math.max(0, sight - boreY).toFixed(4)
+  };
+}
+
+function countTrisAndMats(obj) {
+  let tris = 0, meshes = 0;
+  const matIds = new Set();
+  obj.traverse((o) => {
+    if (!isShown(o)) return;
+    meshes++;
+    if (o.material) {
+      if (Array.isArray(o.material)) o.material.forEach((m) => matIds.add(m.uuid));
+      else matIds.add(o.material.uuid);
+    }
+    const idx = o.geometry.index, pos = o.geometry.attributes.position;
+    tris += idx ? idx.count / 3 : pos.count / 3;
+  });
+  return { tris: Math.round(tris), meshes, materials: matIds.size };
+}
+
+function buildRuler(span) {
+  rootRuler.clear();
+  const mat = new THREE.LineBasicMaterial({ color: 0x8d8878 });
+  const pts = [new THREE.Vector3(0, 0, -0.05), new THREE.Vector3(0, 0, span)];
+  rootRuler.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), mat));
+  for (let z = 0; z <= span + 1e-6; z += 0.1) {
+    const h = Math.abs(z * 10 - Math.round(z * 10)) < 0.01 && Math.round(z * 10) % 5 === 0 ? 0.04 : 0.02;
+    rootRuler.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([
+      new THREE.Vector3(0, 0, z), new THREE.Vector3(0, h, z)
+    ]), mat));
+  }
+}
+
+function settle(obj) {
+  obj.updateMatrixWorld(true);
+  const box = bodyBox(obj);
+  if (box.isEmpty()) return new THREE.Vector3();
+  const c = box.getCenter(new THREE.Vector3());
+  obj.position.sub(c);
+  obj.position.y -= box.min.y - c.y;
+  return box.getSize(new THREE.Vector3());
+}
+
+let activeSpec = null;
+let gunOurs = null;
+let gunBefore = null;
+let gunRef = null;
+let metricsData = null;
+
+async function loadWeapon(gunId) {
+  const spec = WEAPONS[gunId];
+  if (!spec) throw new Error('Unknown gun ' + gunId);
+  activeSpec = spec;
+
+  rootOurs.clear();
+  rootBefore.clear();
+  rootRef.clear();
+  rootRuler.clear();
+
+  const ctx = weaponModelContext();
+
+  // 1. Build AFTER gun
+  gunOurs = spec.makeAfter(ctx);
+  gunOurs.scale.setScalar(spec.sizeK);
+  gunOurs.traverse((o) => {
+    if (/laser|muzzle|flash|spark|smoke/i.test(o.name || '')) o.visible = false;
+  });
+  if (gunOurs.userData.laser) gunOurs.userData.laser.visible = false;
+  if (gunOurs.userData.muzzleFlash) gunOurs.userData.muzzleFlash.visible = false;
+  rootOurs.add(gunOurs);
+
+  // 2. Build BEFORE gun
+  gunBefore = spec.makeBefore(ctx);
+  gunBefore.scale.setScalar(spec.sizeK);
+  gunBefore.traverse((o) => {
+    if (/laser|muzzle|flash|spark|smoke/i.test(o.name || '')) o.visible = false;
+  });
+  if (gunBefore.userData.laser) gunBefore.userData.laser.visible = false;
+  if (gunBefore.userData.muzzleFlash) gunBefore.userData.muzzleFlash.visible = false;
+  rootBefore.add(gunBefore);
+
+  // 3. Load Reference GLB
+  const url = `../../Claude outputs/refs/models/${spec.refFile}`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`Failed to load ${url}: ${res.status}`);
+  const glbBuf = await res.arrayBuffer();
+  gunRef = parseGlb(glbBuf);
+  orientLongestToZ(gunRef);
+  gunRef.updateMatrixWorld(true);
+  gunRef.userData.orientedQuat = gunRef.quaternion.clone();
+  const rawRefSize = new THREE.Box3().setFromObject(gunRef).getSize(new THREE.Vector3());
+  const longest = Math.max(rawRefSize.x, rawRefSize.y, rawRefSize.z) || 1;
+  gunRef.scale.setScalar(spec.real / longest);
+  rootRef.add(gunRef);
+
+  // Measurements
+  const afterCounts = countTrisAndMats(gunOurs);
+  const beforeCounts = countTrisAndMats(gunBefore);
+  const refCounts = countTrisAndMats(gunRef);
+
+  const afterMeas = measure(gunOurs);
+  const beforeMeas = measure(gunBefore);
+  const refMeas = measure(gunRef);
+
+  const isExcludedPart = (o) => {
+    if (!o.visible) return true;
+    if (o === gunOurs.userData.laser || o === gunOurs.userData.flash || o === gunOurs.userData.muzzleFlash) return true;
+    if (o === gunBefore.userData.laser || o === gunBefore.userData.flash || o === gunBefore.userData.muzzleFlash) return true;
+    if (/laser|flash|muzzle|spark|smoke/i.test(o.name || '')) return true;
+    if (o.geometry && o.geometry.type === 'CylinderGeometry' && o.position && Math.abs(o.position.z) > 1.8) return true;
+    return false;
+  };
+  const afterFloats = floatingParts(THREE, gunOurs).filter((o) => !isExcludedPart(o));
+  const beforeFloats = floatingParts(THREE, gunBefore).filter((o) => !isExcludedPart(o));
+
+  const afterBox = bodyBox(gunOurs).getSize(new THREE.Vector3());
+  const beforeBox = bodyBox(gunBefore).getSize(new THREE.Vector3());
+  const refBox = bodyBox(gunRef).getSize(new THREE.Vector3());
+
+  metricsData = {
+    gun: gunId,
+    name: spec.name,
+    refFile: spec.refFile,
+    realLength: spec.real,
+    sizeK: +spec.sizeK.toFixed(4),
+    before: {
+      tris: beforeCounts.tris,
+      meshes: beforeCounts.meshes,
+      materials: beforeCounts.materials,
+      floatingCount: beforeFloats.length,
+      box: { x: +beforeBox.x.toFixed(4), y: +beforeBox.y.toFixed(4), z: +beforeBox.z.toFixed(4) },
+      measure: beforeMeas
+    },
+    after: {
+      tris: afterCounts.tris,
+      meshes: afterCounts.meshes,
+      materials: afterCounts.materials,
+      floatingCount: afterFloats.length,
+      box: { x: +afterBox.x.toFixed(4), y: +afterBox.y.toFixed(4), z: +afterBox.z.toFixed(4) },
+      measure: afterMeas
+    },
+    ref: {
+      tris: refCounts.tris,
+      meshes: refCounts.meshes,
+      box: { x: +refBox.x.toFixed(4), y: +refBox.y.toFixed(4), z: +refBox.z.toFixed(4) },
+      measure: refMeas
+    }
+  };
+
+  window.METRICS = metricsData;
+  return metricsData;
+}
+
+async function renderView(viewName) {
+  if (!activeSpec) throw new Error('No weapon loaded');
+
+  // Reset visibilities
+  rootOurs.visible = false;
+  rootBefore.visible = false;
+  rootRef.visible = false;
+  rootRuler.visible = false;
+
+  gunOurs.position.set(0, 0, 0);
+  gunOurs.rotation.set(0, 0, 0);
+  gunBefore.position.set(0, 0, 0);
+  gunBefore.rotation.set(0, 0, 0);
+  gunRef.position.set(0, 0, 0);
+  if (gunRef.userData.orientedQuat) {
+    gunRef.quaternion.copy(gunRef.userData.orientedQuat);
+  } else {
+    gunRef.rotation.set(0, 0, 0);
+  }
+
+  camera.fov = 36;
+  camera.up.set(0, 1, 0);
+  camera.updateProjectionMatrix();
+
+  if (viewName.startsWith('refview-')) {
+    // Both Ours (AFTER) and Reference at 1m with ruler
+    rootOurs.visible = true;
+    rootRef.visible = true;
+    rootRuler.visible = true;
+
+    settle(gunOurs);
+    settle(gunRef);
+
+    const gap = activeSpec.real > 0.4 ? 0.22 : 0.12;
+    const ob = bodyBox(gunOurs);
+    const rb = bodyBox(gunRef);
+
+    gunOurs.position.x = -(ob.max.x + gap * 0.5);
+    gunRef.position.x = gap * 0.5 - rb.min.x;
+    gunRef.position.y += (ob.max.y - ob.min.y) + gap * 0.8;
+
+    const both = new THREE.Box3().union(bodyBox(gunOurs)).union(bodyBox(gunRef));
+    const mid = both.getCenter(new THREE.Vector3());
+    const span = Math.max(1, activeSpec.real) + 0.2;
+    rootRuler.position.set(0, both.min.y - 0.02, both.min.z);
+    buildRuler(span);
+
+    const dist = Math.max(1.1, activeSpec.real * 1.55);
+
+    if (viewName === 'refview-side') {
+      camera.up.set(0, 1, 0);
+      camera.position.set(mid.x + dist, mid.y, mid.z);
+      camera.lookAt(mid.x, mid.y, mid.z);
+    } else if (viewName === 'refview-top') {
+      camera.up.set(0, 0, -1);
+      camera.position.set(mid.x, mid.y + dist * 1.1, mid.z);
+      camera.lookAt(mid.x, mid.y, mid.z);
+    } else if (viewName === 'refview-tq') {
+      camera.up.set(0, 1, 0);
+      camera.position.set(mid.x + dist * 0.75, mid.y + dist * 0.45, mid.z + dist * 0.65);
+      camera.lookAt(mid.x, mid.y, mid.z);
+    }
+  } else if (viewName.startsWith('studio-')) {
+    camera.up.set(0, 1, 0);
+    // Single model studio view: 'studio-side-before', 'studio-side-after', etc.
+    const isAfter = viewName.endsWith('-after');
+    const targetRoot = isAfter ? rootOurs : rootBefore;
+    const targetGun = isAfter ? gunOurs : gunBefore;
+    targetRoot.visible = true;
+
+    settle(targetGun);
+    const box = bodyBox(targetGun);
+    const mid = box.getCenter(new THREE.Vector3());
+    const len = Math.max(0.2, box.getSize(new THREE.Vector3()).z);
+    const dist = Math.max(0.48, len * 1.35);
+
+    if (viewName.includes('-side-')) {
+      camera.position.set(mid.x + dist, mid.y + 0.02, mid.z);
+      camera.lookAt(mid);
+    } else if (viewName.includes('-tq-')) {
+      camera.position.set(mid.x + dist * 0.8, mid.y + dist * 0.35, mid.z + dist * 0.6);
+      camera.lookAt(mid);
+    }
+  } else if (viewName.startsWith('crop-')) {
+    camera.up.set(0, 1, 0);
+    // 2x zoomed crop views
+    const isAfter = viewName.endsWith('-after');
+    const targetRoot = isAfter ? rootOurs : rootBefore;
+    const targetGun = isAfter ? gunOurs : gunBefore;
+    targetRoot.visible = true;
+
+    // Do NOT settle for crop views - keep gun at (0,0,0) so coordinates match gun space * sizeK
+    targetGun.position.set(0, 0, 0);
+    targetGun.rotation.set(0, 0, 0);
+    targetGun.updateMatrixWorld(true);
+
+    const isReceiver = viewName.includes('receiver');
+    const isForend = viewName.includes('forend');
+    const anchorGunSpace = isReceiver
+      ? activeSpec.receiverCenter
+      : (isForend && activeSpec.forendCenter ? activeSpec.forendCenter : activeSpec.gripCenter);
+
+    const target = new THREE.Vector3(anchorGunSpace[0], anchorGunSpace[1], anchorGunSpace[2]).multiplyScalar(activeSpec.sizeK);
+    const dist = 0.30;
+    camera.fov = 28;
+    camera.updateProjectionMatrix();
+
+    // Viewed from the gun's left (+x) as seen in first-person / tools/gunshot
+    camera.position.set(target.x + dist * 0.85, target.y + dist * 0.20, target.z - dist * 0.35);
+    camera.lookAt(target);
+  }
+
+  renderer.render(scene, camera);
+  await new Promise((r) => setTimeout(r, 100));
+  renderer.render(scene, camera);
+  return renderer.domElement.toDataURL('image/png');
+}
+
+window.FIDELITY = {
+  load: loadWeapon,
+  renderView,
+  ready: true
+};
+</script>

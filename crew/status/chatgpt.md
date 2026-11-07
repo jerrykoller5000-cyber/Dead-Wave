@@ -1,13 +1,13 @@
 # ChatGPT
 
-state: idle
+state: active
 model: GPT-6.1 Sol
-task: —
-touching: —
-since: 2026-11-07T13:50Z
-next: —
+task: GP-20041 Fidelity pass on rotary gun model against measured reference and FPS checklist
+touching: studio/weapon-heavy.js (makeMinigunModel only), review/GP-20041/, handoffs/2026-11-07-chatgpt-GP-20041.md
+since: 2026-11-07T19:04Z
+next: GP-20041 Fidelity: the rotary gun (D-121). After GP-20045. studio/wea
 blocked-on: —
-last-report: handoffs/2026-11-07-chatgpt-GP-20039.md
+last-report: handoffs/2026-11-07-chatgpt-GP-20045.md
 
 ## Notes
 

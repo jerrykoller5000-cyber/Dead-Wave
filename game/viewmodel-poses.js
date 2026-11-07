@@ -44,7 +44,7 @@ export const VM = Object.freeze({
   akimbo: {
     pistol: { at: [0.19, -0.155, -0.46], yaw: 0.05, pitch: 0.02, roll: 0.07 },     // MW (Jerry's refs, 3 Nov): low, nearly upright, muzzles nearly ahead
     revolver: { at: [0.23, -0.165, -0.54], yaw: 0.30, pitch: 0.025, roll: 0.05 },  // Warzone: further out, turned in (the outer sides show)
-    uzi: { at: [0.20, -0.13, -0.40], yaw: 0.40, pitch: 0.04, roll: 0 },           // MW3: big, close, high, turned in
+    uzi: { at: [0.20, -0.13, -0.40], yaw: 0.18, pitch: 0.04, roll: 0 },           // GB-294 J11: less inward than MW3 0.40
     // The forearms up from below behind the grips (the refs; the cloud look, 3 Nov: the body's hold has them out flat to
     // the sides, and run on along the hand they still came in flat from the sides, by perspective): each hand first turns
     // round its grip toward `behind` (from its wrist, out to its side), at most twistMax, then its elbow hangs at elbowRel.
@@ -86,7 +86,7 @@ export const VM_POSES = Object.freeze({
     reload: 'pistol'
   },
   m4: {
-    hip: { at: [0.18, -0.21, -0.40], yaw: -0.07, pitch: 0.035, roll: -0.11 },
+    hip: { at: [0.30, -0.26, -0.50], yaw: 0.37, pitch: 0.08, roll: -0.11 },
     ads: { rear: 0.54 },   // holographic window at a readable size once the shoulder stock is eye-hidden
     kick: { back: 0.044, up: 0.09, side: 0.018, ads: 0.50 },
     workKick: 0.025,
@@ -95,7 +95,7 @@ export const VM_POSES = Object.freeze({
     reload: 'carbine'
   },
   ak: {
-    hip: { at: [0.18, -0.21, -0.40], yaw: -0.07, pitch: 0.045, roll: -0.12 },
+    hip: { at: [0.27, -0.26, -0.50], yaw: 0.32, pitch: 0.09, roll: -0.12 },
     ads: { rear: 0.70 },   // KR-7 leaf sight; the shoulder stock shows at hip and is hidden down the sights
     kick: { back: 0.063, up: 0.15, side: 0.032, ads: 0.58 },
     workKick: 0.035,
@@ -113,7 +113,7 @@ export const VM_POSES = Object.freeze({
     reload: 'smg'
   },
   shotgun: {
-    hip: { at: [0.18, -0.21, -0.40], yaw: -0.12, pitch: 0.045, roll: 0.105 },
+    hip: { at: [0.35, -0.31, -0.50], yaw: 0.27, pitch: 0.10, roll: 0.105 },
     ads: { rear: 0.35 },
     kick: { back: 0.075, up: 0.19, side: 0.035, ads: 0.58 },
     elbows: { r: [0.36, -0.64, -0.10], l: [-0.40, -1.02, -0.24] },
@@ -121,7 +121,7 @@ export const VM_POSES = Object.freeze({
     reload: 'tube'
   },
   aa12: {
-    hip: { at: [0.19, -0.22, -0.40], yaw: -0.12, pitch: 0.035, roll: 0.095 },
+    hip: { at: [0.34, -0.31, -0.50], yaw: 0.32, pitch: 0.11, roll: 0.095 },
     ads: { rear: 0.43 },
     kick: { back: 0.032, up: 0.075, side: 0.015, ads: 0.48 },
     elbows: { r: [0.37, -0.66, -0.10], l: [-0.42, -1.18, -0.25] },
@@ -137,7 +137,7 @@ export const VM_POSES = Object.freeze({
     reload: 'cylinder'
   },
   sniper: {
-    hip: { at: [0.21, -0.28, -0.55], yaw: 0, pitch: 0.025, roll: 0.09 },
+    hip: { at: [0.23, -0.28, -0.57], yaw: 0, pitch: 0.025, roll: 0.09 },
     ads: { rear: 0.17 },
     kick: { back: 0.09, up: 0.24, side: 0.018, ads: 0.58 },
     elbows: { r: [0.38, -0.67, -0.11], l: [-0.44, -1.40, -0.27] },
@@ -193,7 +193,7 @@ const VM_STAGE2_RELOADS = Object.freeze({
       [.82, 'work', 'open'], [.88, 'fore', 'fore'], [1, 'fore', 'fore']],
     mag: { grab: .12, swapOut: .335, swapIn: .385, seat: .62 },
     places: { well: { z: [0, .94, .34], y: [-.55, -.34, -.76] }, below: { drop: .14 },
-      work: { at: [-.038, -.03, .11], z: [-1, .05, .1], y: [-.35, -.65, -.65] },
+      work: { at: [-.03, -.03, .105], z: [-1, .05, .1], y: [-.35, -.65, -.65] },   // CL-310: the bolt catch on the slim lower
       pouch: { at: [-.29, -.51, -.32], z: [.25, .9, .3], y: [-.4, -.6, .65] } }
   },
   ak: {
@@ -212,7 +212,7 @@ const VM_STAGE2_RELOADS = Object.freeze({
     rock: { out: [.12, .19], in: [.50, .62], angle: .27 },
     rack: [.76, .80, .83, .045],
     places: { well: { z: [.15, .90, .41], y: [-.60, -.28, -.75] }, below: { drop: .16 },
-      work: { at: [.083, .042, .13], z: [.65, .25, -.72], y: [-.7, .15, -.4] },
+      work: { at: [.041, .02, .13], z: [.65, .25, -.72], y: [-.7, .15, -.4] },   // CL-311: the knob on the slim receiver
       pouch: { at: [-.31, -.54, -.35], z: [.25, .9, .3], y: [-.4, -.6, .65] } }
   },
   smg: {
@@ -251,7 +251,7 @@ const VM_STAGE3_RELOADS = Object.freeze({
       [.83, 'work', 'pinch'], [.88, 'fore', 'fore'], [1, 'fore', 'fore']],
     mag: { grab: .12, swapOut: .335, swapIn: .385, seat: .62 },
     places: { well: { z: [0, .94, .34], y: [.62, -.28, -.73] }, below: { drop: .19 },
-      work: { at: [-.08, .05, .18], z: [-.6, .25, -.75], y: [.65, -.35, -.67] },
+      work: { at: [-.058, .05, .18], z: [-.6, .25, -.75], y: [.65, -.35, -.67] },   // CL-313: the handle on the slim receiver
       pouch: { at: [-.32, -.60, -.38], z: [.25, .9, .3], y: [-.4, -.6, .65] } }
   },
   sniper: {
@@ -280,8 +280,8 @@ const VM_STAGE3_RELOADS = Object.freeze({
     hand: [[0, 'fore', 'fore'], [.14, 'pouch', 'pouch'], [.29, 'pouch', 'cup'],
       [.50, 'port', 'cup'], [.56, 'port', 'cup'], [.74, 'port', 'open'],
       [.81, 'pump', 'cup'], [.94, 'pump', 'cup'], [1, 'fore', 'fore']],
-    places: { port: { at: [.02, -.05, .22], z: [0, .9, .43], y: [.68, -.22, -.70] },
-      pump: { part: 'pump', at: [0, -.015, 0], z: [0, .5, .866], y: [.65, -.42, -.64] },
+    places: { port: { at: [0, -.036, .12], z: [0, .9, .43], y: [.68, -.22, -.70] },   // CL-312: the port under the receiver's front
+      pump: { part: 'pump', at: [0, -.022, .09], z: [0, .5, .866], y: [.65, -.42, -.64] },
       pouch: { at: [-.28, -.52, -.30], z: [.25, .9, .3], y: [-.4, -.6, .65] } }
   },
   cylinder: {
@@ -355,7 +355,7 @@ const VM_STAGE3_RELOADS = Object.freeze({
   }
 });
 
-// Gun-local contact points. The support point is on the handguard for the rifles and beside the grip on the Wasp.
+// Gun-local contact points. The support point is on the handguard for the rifles and under the fore end on the Wasp (GB-294).
 // A magazine's foot stays in the support palm during the reload. The work point is a fixed bolt/handle target until
 // the weapon builders expose moving direct-child nodes; the viewmodel then follows those nodes.
 // CL-307: the blade in the firing hand. Each key [u, { p, e }] is a gun-like frame in view space as the eye sees it
@@ -413,11 +413,17 @@ export const VM_SOCKETS = Object.freeze({
   // hold (its fist sat 16 cm out from the grip, beside it) onto the grip's front, its fingers over the strong hand's (the
   // cloud look, 2026-11-02: in from -0.03 to -0.012 the fingers wrap without coming through the far side).
   pistol: { support: [-0.012, -0.10, -0.02] },
-  m4: { grip: [0, -0.106, -0.076], support: [0, -0.005, 0.36], magFoot: [0, -0.278, 0.04], work: [-0.038, -0.03, 0.11] },
-  ak: { grip: [0, -0.126, -0.095], support: [0, -0.025, 0.37], magFoot: [0, -0.331, 0.14], work: [0.083, 0.042, 0.13] },
-  uzi: { grip: [0, -0.088, -0.027], support: [-0.055, -0.035, 0.055], magFoot: [0, -0.324, -0.043], work: [0, 0.115, 0.11] },
-  shotgun: { grip: [0, -0.088, -0.056], support: [0, -0.035, 0.28], port: [0.02, -0.05, 0.22] },
-  aa12: { grip: [0, -0.145, -0.166], support: [0, -0.035, 0.36], magFoot: [0, -0.415, 0.05], work: [-0.08, 0.05, 0.18] },
+  m4: { grip: [0, -0.106, -0.076], support: [0, 0.004, 0.36], magFoot: [0, -0.278, 0.04], work: [-0.03, -0.03, 0.105] },   // CL-310: the 40 mm handguard (its bottom -0.01, was -0.027) and the bolt catch on the 32 mm lower
+  // GB-311 (CL-311/CL-312, GB-153's fit run on the view gun and view hands, qa/2026-11-07-GB-311/fit/fit-fp-run2.json): the
+  // support fingers curled to the slim handguard (44 mm, was 74) until each touches; the fist's thumb sat 19 mm into it.
+  ak: { grip: [0, -0.126, -0.095], support: [0, -0.025, 0.37], magFoot: [0, -0.311, 0.14], work: [0.041, 0.02, 0.13],   // CL-311: the slim receiver's charging knob (x 0.041, was 0.083) and the mag 2 cm higher
+    supportPose: { f: [[0.949, 1.091, 0.902, 0], [0.973, 1.119, 0.924, 0], [1.055, 1.213, 1.002, 0], [0.973, 1.119, 0.924, 0]], t: [0.08, -0.15, 0.048] } },
+  uzi: { grip: [0, -0.088, -0.027], support: [0, -0.03, 0.18], magFoot: [0, -0.324, -0.043], work: [0, 0.115, 0.11] },
+  // GB-311 (CL-312, the same fit): the fingers close further round the 44 mm forend (the fist's middle finger sat 10 mm in
+  // at its root, so it curls round instead; the little finger meets nothing past the forend and keeps the fist's curl).
+  shotgun: { grip: [0, -0.088, -0.056], support: [0, -0.016, 0.37], port: [0, -0.034, 0.12],   // CL-312 (D-121): the forend 44 mm across on the tube (its middle y -0.006, z 0.28-0.49); the loading port under the receiver
+    supportPose: { f: [[1.181, 1.358, 1.122, 0], [1.45, 1.668, 1.378, 0], [1.45, 1.668, 1.378, 0], [1.08, 1.242, 1.026, 0]], t: [1.45, -0.15, 0.87] } },
+  aa12: { grip: [0, -0.145, -0.166], support: [0, -0.035, 0.36], magFoot: [0, -0.415, 0.05], work: [-0.058, 0.05, 0.18] },   // CL-313: the charging handle on the 62 mm receiver (was 96)
   revolver: { grip: [0, -0.07, -0.04], support: [-0.012, -0.10, -0.014] },   // J57: palm cups the grip, not air beside it
   sniper: { grip: [0, -0.088, -0.117], support: [0, -0.005, 0.35], magFoot: [0, -0.203, 0.02], boltKnob: [0.13, 0.067, -0.16] },   // CL-306: the handle on +x (reads right in the mirrored view)
   // CL-301 (GP-20022): rear throttle + front hoop. GB-292 (J1): contacts were already R=rear/L=front but the left fist

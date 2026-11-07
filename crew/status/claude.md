@@ -2,9 +2,9 @@
 
 state: active
 model: Claude Fable 5.1 (Cowork)
-task: CL-306 The reloads (CL-306 b-j): the pairs one gun at a time, GB-302's parts driven, the launcher's swing-out by the support hand with the loose round; the shotgun's roll; the sniper's bolt read (the mirror)
-touching: game/viewmodel.js, game/viewmodel-poses.js, docs/fps/*
-since: 2026-11-07T13:40Z
+task: CL-307 First person: the knife/grenade in (committed 28137581); next the holds review (J19) and the mortar/ladders/empty hands
+touching: game/viewmodel.js, docs/fps/*
+since: 2026-11-07T15:58Z
 next: CL-293 The first-person pass (D-111 order 1; J54, J55, J59, J62; do
 blocked-on: —
 last-report: handoffs/2026-11-03-claude-CL-301-akimbo.md

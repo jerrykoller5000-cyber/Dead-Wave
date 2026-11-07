@@ -67,6 +67,15 @@ function rod(T, K, a, b, radius, mat, parent = null) {
   const mesh = K.cyl(radius, radius, delta.length(), mat, mid.x, mid.y, mid.z, parent, 8, 'y');
   mesh.quaternion.setFromUnitVectors(new T.Vector3(0, 1, 0), delta.normalize()); return mesh;
 }
+// Side profile about an existing pistol-grip centre line. u runs down the handle;
+// positive v faces the trigger. The socket at the palm stays on that centre line.
+function gripShape(cz, cy, h, d, rake, points) {
+  const sn = Math.sin(rake), cs = Math.cos(rake), scale = d / 0.08;
+  return points.map(([u, v]) => {
+    const along = (u - 0.5) * h, across = v * scale;
+    return [cz - along * sn + across * cs, cy - along * cs - across * sn];
+  });
+}
 // Six genuinely recessed chambers. Each sector is a closed cell surrounding its bore.
 function launcherDrum(T) {
   return geometry(T, 'launcher-six-chambers', (quad) => {
@@ -124,6 +133,19 @@ export function makeMinigunModel(ctx) {
   for (let i = 0; i < 6; i++) { const z = -0.15 + i * 0.04; fins.push([0.072, z - 0.006], [0.084, z - 0.006], [0.084, z + 0.006], [0.072, z + 0.006]); }
   fins.push([0.072, 0.08], [0, 0.08]);
   K.lathe(fins, gunDark, { y: -0.18, seg: 14 });
+  // The motor is a separate serviceable unit: rear fan guard, eight open radial
+  // windows and a bolted end cap. Its axle remains below the main receiver.
+  K.cyl(0.064, 0.064, 0.006, gunMid, 0, -0.18, -0.191, null, 24);
+  K.cyl(0.051, 0.051, 0.007, gunDark, 0, -0.18, -0.196, null, 24);
+  K.cyl(0.013, 0.013, 0.011, gunAccent, 0, -0.18, -0.202, null, 12);
+  for (let i = 0; i < 8; i++) {
+    const a = i * Math.PI / 4;
+    const x = Math.cos(a) * 0.039, y = -0.18 + Math.sin(a) * 0.039;
+    rod(THREE, K, [x * 0.42, -0.18 + (y + 0.18) * 0.42, -0.201], [x, y, -0.201], 0.003, gunMid);
+  }
+  for (const sx of [-1, 1]) for (const z of [-0.13, 0.055]) {
+    K.box(0.008, 0.026, 0.012, gunAccent, sx * 0.086, -0.18, z, 0, 0, 0, null, 0.002);
+  }
   // GB-172: the power lead was a black bar floating out past the housing. The motor stays.
   // The rear firing hand grips behind the motor. A left-side peg keeps the support forearm clear of the housing.
   // The low arch remains as the reflex-sight mount, not as a hand rest.
@@ -172,7 +194,15 @@ export function makeMinigunModel(ctx) {
   // from the spindle out past the barrels, the six barrels running through it, with a raised rim and bolts between them.
   for (const [rz, radius] of [[0.04, 0.118], [0.39, 0.112], [0.80, 0.108]]) {
     K.lathe([[0.026, rz - 0.016], [radius - 0.003, rz - 0.016], [radius, rz - 0.012], [radius, rz + 0.012], [radius - 0.003, rz + 0.016], [0.026, rz + 0.016], [0.026, rz - 0.016]], gunMid, { parent: barrelAssembly, seg: 28 });
-    for (let i = 0; i < 6; i++) { const a = i * Math.PI / 3 + Math.PI / 6; K.cyl(0.007, 0.007, 0.04, gunDark, Math.cos(a) * 0.075, Math.sin(a) * 0.075, rz, barrelAssembly, 8); }
+    // Stepped rim and six transverse fasteners read as a barrel clamp rather
+    // than a smooth ring; they turn with the animated barrel assembly.
+    for (const dz of [-0.018, 0.018]) K.tor(radius - 0.004, 0.002, gunDark, 0, 0, rz + dz, 0, 0, 0, barrelAssembly, Math.PI * 2, 28);
+    for (let i = 0; i < 6; i++) {
+      const a = i * Math.PI / 3 + Math.PI / 6;
+      const x = Math.cos(a) * 0.075, y = Math.sin(a) * 0.075;
+      K.cyl(0.007, 0.007, 0.04, gunDark, x, y, rz, barrelAssembly, 8);
+      K.cyl(0.010, 0.010, 0.004, gunAccent, x, y, rz + 0.019, barrelAssembly, 6);
+    }
   }
   gun.add(barrelAssembly);
   // Box feed and linked chute. Keep the animated reload group and its origin intact.
@@ -181,6 +211,14 @@ export function makeMinigunModel(ctx) {
   ammoBox.rotation.z = 0.12;
   K.box(0.17, 0.21, 0.27, gunOlive, -0.015, -0.06, -0.005, 0, 0, 0, ammoBox, 0.02);
   K.box(0.183, 0.026, 0.284, gunMid, -0.015, 0.052, -0.005, 0, 0, 0, ammoBox, 0.006);
+  // Folded lid lip, rear hinge pin and two over-centre clasps remain attached
+  // to the animated ammo box during reload.
+  K.box(0.178, 0.006, 0.011, gunDark, -0.015, 0.037, 0.137, 0, 0, 0, ammoBox, 0.002);
+  K.cyl(0.005, 0.005, 0.166, gunDark, -0.015, 0.051, -0.149, ammoBox, 10, 'x');
+  for (const x of [-0.065, 0.035]) {
+    K.box(0.017, 0.032, 0.009, gunDark, x, 0.017, 0.137, 0, 0, 0, ammoBox, 0.003);
+    K.box(0.012, 0.006, 0.011, gunAccent, x, 0.031, 0.14, 0, 0, 0, ammoBox, 0.002);
+  }
   for (const sx of [-1, 1]) {
     K.box(0.008, 0.11, 0.2, gunDark, -0.015 + sx * 0.089, -0.07, -0.005, 0, 0, 0, ammoBox, 0.003);
     for (const z of [-0.105, 0.095]) bolt(K, gunDark, gunAccent, -0.015 + sx * 0.094, -0.047, z, 0.004, ammoBox);
@@ -192,6 +230,11 @@ export function makeMinigunModel(ctx) {
     K.box(0.055, 0.012, 0.064, gunDark, x, y, 0.027 - u * 0.035, 0, 0, -0.4, null, 0.002);
     K.cyl(0.005, 0.005, 0.052, brassMat, x + 0.004, y + 0.002, 0.027 - u * 0.035, null, 6);
   }
+  // The feed throat is enclosed by a removable delinker cover. The dark seam
+  // below its raised steel lid distinguishes it from the moving ammunition.
+  K.box(0.064, 0.035, 0.103, gunDark, 0.172, 0.121, 0.034, 0, 0, -0.12, null, 0.006);
+  K.box(0.068, 0.008, 0.108, gunMid, 0.172, 0.141, 0.034, 0, 0, -0.12, null, 0.003);
+  for (const z of [-0.011, 0.079]) K.cyl(0.005, 0.005, 0.004, gunAccent, 0.172, 0.147, z, null, 8, 'y');
   gunEffects(gun, new THREE.Vector3(0, 0, 0.27 + barrelLen + 0.02), 0.08, 4, 8, 0.008);
   gun.userData.laser.position.set(0, 0, 0.27 + barrelLen + 4);
   gun.userData.laserBaseZ = 0.27 + barrelLen;
@@ -254,7 +297,25 @@ export function makeLauncherModel(ctx) {
   }
   for (const p of gun.children.slice(stockStart)) stock.add(p);
   gun.userData.fpStock = stock;
-  K.slab(gripOutline(-0.05, -0.1, 0.16, 0.08, 0.3), 0.066, gunPoly, { bevel: 0.014, segs: 3 });
+  // A2-style moulding on the same grip centre: one index-finger nub, shallow
+  // lower grooves, a backstrap swell and a capped base. The 52 mm local width
+  // is 36 mm at the launcher's game scale, so the glove can wrap the sides.
+  const launcherGrip = (points) => gripShape(-0.05, -0.1, 0.16, 0.08, 0.3, points);
+  K.slab(launcherGrip([
+    [-0.08, 0.014], [0.06, 0.026], [0.28, 0.028], [0.37, 0.028], [0.43, 0.039],
+    [0.51, 0.029], [0.7, 0.03], [0.9, 0.028], [1, 0.018], [1, -0.028],
+    [0.8, -0.036], [0.5, -0.04], [0.2, -0.036], [0.04, -0.034], [-0.06, -0.043]
+  ]), 0.052, gunPoly, { bevel: 0.009, segs: 3 });
+  for (const sx of [-1, 1]) {
+    K.slab(launcherGrip([[0.14, 0.014], [0.79, 0.016], [0.86, -0.024], [0.14, -0.026]]),
+      0.004, gunRubber, { x: sx * 0.026, bevel: 0.002 });
+    for (const y of [-0.091, -0.107, -0.123])
+      K.box(0.0015, 0.002, 0.027, gunPoly, sx * 0.0284, y, -0.05, 0.25, 0, 0, null, 0.0005);
+  }
+  for (const u of [0.59, 0.76]) K.slab(launcherGrip([[u, 0.018], [u + 0.025, 0.019], [u + 0.025, 0.032], [u, 0.032]]),
+    0.047, gunRubber, { bevel: 0.001 });
+  K.slab(launcherGrip([[0.965, 0.025], [1.035, 0.022], [1.035, -0.033], [0.965, -0.035]]),
+    0.054, gunDark, { bevel: 0.003 });
   K.slab(gunBand([[0.03, -0.058], [0.03, -0.088], [0.016, -0.096], [-0.01, -0.09]], 0.007), 0.03, gunDark, { bevel: 0.004 });   // GB-180: a moulded guard, not a wire (pass 4: as wide as a real guard)
   // GB-175: trigger face toward the grip, tip curling forward (the convention Jerry set on the revolver and sniper).
   // GB-180: a solid trigger blade (wide at the root, tapering to the curled tip), not a wire.
@@ -446,30 +507,43 @@ export function makeFlamerModel(ctx) {
   });
   // Rear pistol grip (now completely clear of the fuel tanks!), grip housing mount, closed trigger guard, and curved trigger.
   K.box(0.054, 0.024, 0.115, gunDark, 0, -0.034, -0.125, 0, 0, 0, null, 0.004);
-  K.slab([
+  // Narrow the palm swell to 36 x 59 mm without moving the grip's centre or rake.
+  // The moulded finger notches stay in the front edge; rubber side panels carry
+  // shallow cross ribs so neither close-up face is an empty rectangle.
+  const rearGrip = (outline) => outline.map(([z, y]) => [-0.16 + (z + 0.16) * 0.65, y]);
+  K.slab(rearGrip([
     [-0.195, -0.032], [-0.122, -0.032], [-0.126, -0.062], [-0.118, -0.082],
     [-0.128, -0.105], [-0.122, -0.126], [-0.132, -0.148], [-0.142, -0.162],
     [-0.196, -0.158], [-0.208, -0.142], [-0.192, -0.092], [-0.202, -0.052]
-  ], 0.048, gunPoly, { bevel: 0.011, segs: 3 });
+  ]), 0.036, gunPoly, { bevel: 0.008, segs: 3 });
   for (const sx of [-1, 1]) {
-    K.slab([[-0.186, -0.052], [-0.136, -0.052], [-0.144, -0.144], [-0.19, -0.142]], 0.004, gunDark, { x: sx * 0.025, bevel: 0.002 });
+    K.slab(rearGrip([[-0.186, -0.052], [-0.136, -0.052], [-0.144, -0.144], [-0.19, -0.142]]),
+      0.003, gunRubber, { x: sx * 0.018, bevel: 0.002 });
+    for (const y of [-0.078, -0.101, -0.124])
+      K.box(0.0015, 0.0025, 0.025, gunPoly, sx * 0.0195, y, -0.16, 0.22, 0, 0, null, 0.0005);
   }
-  K.box(0.054, 0.012, 0.066, gunDark, 0, -0.162, -0.168, 0, 0, -0.06, null, 0.003);
+  K.box(0.04, 0.012, 0.05, gunDark, 0, -0.162, -0.165, 0, 0, -0.06, null, 0.003);
   K.slab(gunBand([[-0.064, -0.034], [-0.064, -0.064], [-0.078, -0.076], [-0.128, -0.076], [-0.132, -0.062]], 0.007), 0.03, gunDark, { bevel: 0.004 });   // GB-180: a moulded guard, not a wire (pass 4: as wide as a real guard)
   // GB-175: trigger face toward the grip, tip curling forward (the convention Jerry set on the revolver and sniper).
   // GB-180: a solid trigger blade (wide at the root, tapering to the curled tip), not a wire, moved to mid-guard.
   K.slab([[-0.088, -0.0357], [-0.0927, -0.0484], [-0.092, -0.056], [-0.0875, -0.0615], [-0.0925, -0.0665], [-0.1, -0.06], [-0.1033, -0.0476], [-0.1, -0.0323]], 0.011, gunAccent, { bevel: 0.002 });
   // Ergonomic angled front pistol foregrip with upper collar, finger grooves, side panels, and flared baseplate.
   K.box(0.056, 0.018, 0.068, gunDark, 0, -0.034, 0.282, 0, 0, 0, null, 0.003);
-  K.slab([
+  // 36 mm wide, round-ended and 56 mm deep at the support palm. The socket
+  // remains (0,-0.07,0.28); the glove can close over the grooves on the front.
+  const frontGrip = (outline) => outline.map(([z, y]) => [0.28 + (z - 0.28) * 0.8, y]);
+  K.slab(frontGrip([
     [0.252, -0.032], [0.312, -0.032], [0.304, -0.058], [0.31, -0.078],
     [0.302, -0.098], [0.307, -0.116], [0.296, -0.134], [0.25, -0.132],
     [0.242, -0.116], [0.254, -0.078], [0.246, -0.048]
-  ], 0.046, gunPoly, { bevel: 0.011, segs: 3 });
+  ]), 0.036, gunPoly, { bevel: 0.01, segs: 3 });
   for (const sx of [-1, 1]) {
-    K.slab([[0.258, -0.048], [0.296, -0.048], [0.29, -0.12], [0.252, -0.118]], 0.004, gunDark, { x: sx * 0.024, bevel: 0.002 });
+    K.slab(frontGrip([[0.258, -0.048], [0.296, -0.048], [0.29, -0.12], [0.252, -0.118]]),
+      0.003, gunRubber, { x: sx * 0.018, bevel: 0.002 });
+    for (const y of [-0.067, -0.087, -0.107])
+      K.box(0.0015, 0.0025, 0.022, gunPoly, sx * 0.0195, y, 0.28, -0.18, 0, 0, null, 0.0005);
   }
-  K.box(0.052, 0.011, 0.058, gunDark, 0, -0.135, 0.273, 0, 0, 0, null, 0.003);
+  K.box(0.04, 0.011, 0.047, gunDark, 0, -0.135, 0.275, 0, 0, 0, null, 0.003);
   gun.userData.muzzleLocal = new THREE.Vector3(0, 0.05, 0.78);
   return finishGun(gun);
 }

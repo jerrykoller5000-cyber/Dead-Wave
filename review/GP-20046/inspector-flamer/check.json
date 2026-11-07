@@ -1,0 +1,20 @@
+{
+ "at": "2026-11-07T18:09:45.315Z",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "results": [
+  {
+   "id": "weapon.flamer",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 138,
+   "tris": 11244,
+   "size": [
+    0.22,
+    0.241,
+    0.896
+   ],
+   "error": null
+  }
+ ]
+}

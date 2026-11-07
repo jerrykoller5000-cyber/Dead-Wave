@@ -2,6 +2,8 @@
 
 // Millimetre-scale knurl teeth do not need the rounded box helper's subdivisions.
 // Same centre line as gripOutline. u runs down the grip, v+ is the front strap.
+import { gunDetail } from './gun-detail.js';
+
 function shapedGrip(cz, cy, h, d, rake, pts) {
   const sr = Math.sin(rake), cr = Math.cos(rake), k = d / 0.08;
   return pts.map(([u, v]) => {
@@ -109,6 +111,7 @@ export function makePistolModel(ctx) {
   const { THREE, gunKit, gunBand, gunEffects, gunSuppressor, finishGun, gunBody, gunDark, gunMid, gunPoly, gunRubber, gunAccent, magPoly, gaugeFace, sightDotMat, glassMat } = ctx;
   const gun = new THREE.Group();
   const K = gunKit(gun);
+  const D = gunDetail(ctx);   // GB-307 / CL-309 helpers
   // Slide (moves): chamfered top, rear and front serrations, sights, the ejection port and extractor.
   const slide = K.group(0, 0.05, 0.05);
   // GB-154 (Jerry: "slide and frame are too short and do not reach the muzzle"): the slide runs 120 mm further forward,
@@ -221,6 +224,55 @@ export function makePistolModel(ctx) {
   K.disc(.014, glassMat, 0, -.055, .2745, 0, frame, 18);
   for (const sx of [-1, 1]) K.box(.003, .01, .016, gunAccent, sx * .018, -.052, .158, 0, 0, 0, frame);   // switch paddles
   gun.userData.frame = frame;
+  // --- GB-307 fidelity (D-121 / docs/fps/fidelity.md pistol list) ---
+  // Mag witness holes: six recessed windows each side of the body (bases inside the mag wall).
+  for (const sx of [-1, 1]) {
+    for (let i = 0; i < 6; i++) {
+      const yy = 0.055 - i * 0.022;
+      const hole = new THREE.Mesh(new THREE.CylinderGeometry(0.0034, 0.0034, 0.0032, 12), gunRubber);
+      hole.rotation.z = Math.PI / 2;
+      hole.position.set(sx * (0.0200 - 0.0006), yy, 0);   // sunk 0.6 mm into the wall
+      hole.castShadow = hole.receiveShadow = true;
+      mag.add(hole);
+    }
+  }
+  // Backstrap texture: shallow polymer ribs down the grip's rear (no bare strap).
+  D.ribs(gun, { x: 0, y: -0.10, z: -0.068, axis: 'z', side: -1, along: 'y', count: 11, pitch: 0.011, w: 0.030, h: 0.0010, t: 0.0020, mat: D.mats.polymer });
+  // Undercut trigger guard: a high-hold bite where the guard meets the front strap.
+  K.slab([[0.028, -0.026], [0.046, -0.026], [0.044, -0.038], [0.026, -0.036]], 0.026, gunPoly, { bevel: 0.002 });
+  // Muzzle crown: recessed ring at the barrel tip (sits on the barrel; bore disc stays).
+  K.cyl(0.0136, 0.0122, 0.0032, gunMid, 0, 0.05, 0.3092, frame, 16);
+  K.cyl(0.0108, 0.0108, 0.0015, gunDark, 0, 0.05, 0.3108, frame, 14);
+  // Slide-stop lever (left): a recognisable paddle over the existing stop post, sunk into the frame face.
+  K.slab([[-0.014, -0.003], [0.020, -0.003], [0.022, 0.003], [0.016, 0.007], [-0.012, 0.005]], 0.0020, gunDark, { x: -0.0228, y: 0.004, z: 0.055, bevel: 0.0007 });
+  D.screw(gun, -0.0226, 0.004, 0.040, { axis: 'x', side: -1, r: 0.0022, head: 0.0011, kind: 'slot' });
+  // Takedown lever: keyed tabs both sides + one through-pin (base inside the frame).
+  for (const sx of [-1, 1]) {
+    K.slab([[-0.009, -0.0035], [0.009, -0.0035], [0.009, 0.0035], [-0.009, 0.0035]], 0.0016, gunDark, { x: sx * 0.0228, y: -0.018, z: 0.018, bevel: 0.0005 });
+  }
+  D.pin(gun, 0, -0.018, 0.018, { axis: 'x', len: 0.048, r: 0.0013 });
+  // Extractor claw in the port's right wall (attached to the slide).
+  K.slab([[0.000, -0.003], [0.011, -0.001], [0.013, 0.003], [0.001, 0.005]], 0.0015, gunMid, { x: 0.0226, y: 0.010, z: -0.004, parent: slide, bevel: 0.0004 });
+  // Panel lines on the slide top and the dust-cover seam (yardstick: no bare >3 cm face).
+  D.groove(slide, { x: 0, y: 0.024, z: 0.05, axis: 'y', side: 1, along: 'z', len: 0.20, w: 0.0007 });
+  D.groove(gun, { x: 0, y: 0.012, z: 0.14, axis: 'y', side: 1, along: 'z', len: 0.14, w: 0.0007 });
+  // Front-strap finger grooves: three shallow recesses into the front strap (not proud blocks).
+  for (let i = 0; i < 3; i++) {
+    const yy = -0.048 - i * 0.028;
+    // dark inset box: its outer face sits 0.4 mm inside the strap so it reads as a groove
+    K.box(0.022, 0.014, 0.010, gunDark, 0, yy, 0.026, 0.3, 0, 0, null, 0.002);
+  }
+  // Grip-panel screws (attached; CL-309 sink).
+  for (const sx of [-1, 1]) {
+    D.screw(gun, sx * 0.0268, -0.052, -0.018, { axis: 'x', side: sx, r: 0.0025, head: 0.0012, kind: 'slot' });
+    D.screw(gun, sx * 0.0268, -0.108, -0.026, { axis: 'x', side: sx, r: 0.0025, head: 0.0012, kind: 'slot' });
+  }
+  // Deeper cut under the existing slide serrations so they read machined, not painted on.
+  for (const sx of [-1, 1]) {
+    D.ribs(slide, { x: sx * 0.0228, y: -0.004, z: -0.095, axis: 'x', side: sx, along: 'z', count: 8, pitch: 0.009, w: 0.017, h: 0.0008, t: 0.0011, mat: D.mats.dark });
+    D.ribs(slide, { x: sx * 0.0228, y: -0.004, z: 0.220, axis: 'x', side: sx, along: 'z', count: 5, pitch: 0.009, w: 0.015, h: 0.0008, t: 0.0011, mat: D.mats.dark });
+  }
+
   gunEffects(gun, new THREE.Vector3(0, 0.05, 0.32), 0.045, 2.5, 6, 0.005);
   gun.userData.laser.position.set(0, 0.05, 3.3);
   gun.userData.laserBaseZ = 0.3;

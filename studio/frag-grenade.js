@@ -23,6 +23,40 @@ const hash = (i) => { const s = Math.sin(i * 127.1 + 311.7) * 43758.5453; return
 
 export const FRAG = Object.freeze({ TALL: 1.12, NECK: 0.3 });
 
+const STENCIL = new WeakMap();
+function stencilMaterial(THREE) {
+  let m = STENCIL.get(THREE);
+  if (m !== undefined) return m;
+  if (typeof document === 'undefined') { STENCIL.set(THREE, null); return null; }
+  const c = document.createElement('canvas'); c.width = 256; c.height = 128;
+  const x = c.getContext('2d');
+  x.clearRect(0, 0, 256, 128);
+  x.fillStyle = '#d8c24a'; x.textAlign = 'center'; x.textBaseline = 'middle';
+  x.font = 'bold 34px "Courier New", monospace';
+  x.fillText('GRENADE', 128, 30); x.fillText('HAND FRAG', 128, 66);
+  x.font = 'bold 28px "Courier New", monospace'; x.fillText('M67', 128, 100);
+  const tex = new THREE.CanvasTexture(c); tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = 4;
+  m = new THREE.MeshStandardMaterial({ map: tex, transparent: true, alphaTest: 0.25, roughness: 0.85, metalness: 0.02, polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -1 });
+  STENCIL.set(THREE, m);
+  return m;
+}
+function makeStencil(THREE, tall) {
+  const mat = stencilMaterial(THREE);
+  if (!mat) return null;
+  const geo = new THREE.PlaneGeometry(0.72, 0.42, 8, 5);
+  const p = geo.attributes.position;
+  for (let i = 0; i < p.count; i++) {
+    // the plane's x,y map to the body's angle and height on the -x side, then onto the ellipsoid's skin
+    const ang = Math.PI - p.getX(i) * 0.78, y = 0.16 * tall + p.getY(i) * tall * 0.9;   // x along -z so the patch faces out (-x) and reads the right way round
+    const rr = Math.sqrt(Math.max(0, 1 - (y / tall) ** 2)) * 1.004;
+    p.setXYZ(i, Math.cos(ang) * rr, y, Math.sin(ang) * rr);
+  }
+  geo.computeVertexNormals();
+  const mesh = new THREE.Mesh(geo, mat);
+  mesh.renderOrder = 1;
+  return mesh;
+}
+
 export function makeFragGrenade({ THREE, r = 0.05, tall = FRAG.TALL }) {
   const M = mats(THREE);
   const outer = new THREE.Group(); outer.name = 'frag-grenade';
@@ -93,7 +127,16 @@ export function makeFragGrenade({ THREE, r = 0.05, tall = FRAG.TALL }) {
   ring.position.set(0.33, top + 0.15, -0.34); ring.rotation.set(0, 0.35, 0.2); g.add(ring);
   const clip = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.05, 0.38), M.metal); clip.name = 'clip';
   clip.position.set(0.5, top + 0.12, 0); clip.rotation.z = -0.5; spoon.add(clip);
+  // CL-315 (D-121): the spoon's spring tab, the bent lip at its top that rides under the fuse head.
+  const tab = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.05, 0.3), M.spoon); tab.name = 'spoon-tab';
+  tab.position.set(0.24, top + 0.52, 0); tab.rotation.z = 0.35; spoon.add(tab);
 
-  outer.userData.parts = { body, fuse, spoon, pin, ring, clip };
+  // CL-315 (D-121): the stencil, yellow on the olive under the band on the side away from the spoon: a decal patch laid
+  // on the body's skin (its vertices pushed onto the ellipsoid, 0.4 % proud) with a canvas texture; left out where
+  // there is no canvas (node tests).
+  const stencil = makeStencil(THREE, tall);
+  if (stencil) { stencil.name = 'stencil'; g.add(stencil); }
+
+  outer.userData.parts = { body, fuse, spoon, pin, ring, clip, tab, stencil };
   return outer;
 }

@@ -1,0 +1,63 @@
+{
+  "gun": "shotgun",
+  "name": "Shotgun (Tactical Pump)",
+  "refFile": "shotgun.glb",
+  "realLength": 1,
+  "sizeK": 0.7935,
+  "before": {
+    "tris": 4596,
+    "meshes": 16,
+    "materials": 7,
+    "floatingCount": 1,
+    "box": {
+      "x": 0.0885,
+      "y": 0.2145,
+      "z": 1.149
+    },
+    "measure": {
+      "length": 1.149,
+      "boreOverGrip": 0.0469,
+      "rakeDeg": 86.5,
+      "sightH": 0.0715
+    }
+  },
+  "after": {
+    "tris": 5680,
+    "meshes": 22,
+    "materials": 7,
+    "floatingCount": 1,
+    "box": {
+      "x": 0.0492,
+      "y": 0.1938,
+      "z": 1.149
+    },
+    "measure": {
+      "length": 1.149,
+      "boreOverGrip": 0.0701,
+      "rakeDeg": 88,
+      "sightH": 0.0394
+    }
+  },
+  "ref": {
+    "tris": 9300,
+    "meshes": 13,
+    "box": {
+      "x": 0.1473,
+      "y": 0.3211,
+      "z": 1
+    },
+    "measure": {
+      "length": 1,
+      "boreOverGrip": 0.1011,
+      "rakeDeg": 73.6,
+      "sightH": 0
+    }
+  },
+  "duskPerf": {
+    "fps": 60.793302770218894,
+    "low": 55.24861880272417,
+    "worst": 18.099999994039536,
+    "hitches": 16,
+    "frames": 61
+  }
+}

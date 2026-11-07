@@ -1,0 +1,63 @@
+{
+  "gun": "pistol",
+  "name": "Pistol (Glock-19 style)",
+  "refFile": "low_poly_glock-19.glb",
+  "realLength": 0.195,
+  "sizeK": 0.6032,
+  "before": {
+    "tris": 5232,
+    "meshes": 18,
+    "materials": 10,
+    "floatingCount": 1,
+    "box": {
+      "x": 0.0328,
+      "y": 0.166,
+      "z": 0.2506
+    },
+    "measure": {
+      "length": 0.2506,
+      "boreOverGrip": 0.054,
+      "rakeDeg": 21.9,
+      "sightH": 0.0448
+    }
+  },
+  "after": {
+    "tris": 7152,
+    "meshes": 35,
+    "materials": 11,
+    "floatingCount": 1,
+    "box": {
+      "x": 0.0339,
+      "y": 0.166,
+      "z": 0.2507
+    },
+    "measure": {
+      "length": 0.2507,
+      "boreOverGrip": 0.0698,
+      "rakeDeg": 24,
+      "sightH": 0.0321
+    }
+  },
+  "ref": {
+    "tris": 17846,
+    "meshes": 1,
+    "box": {
+      "x": 0.0404,
+      "y": 0.1436,
+      "z": 0.195
+    },
+    "measure": {
+      "length": 0.195,
+      "boreOverGrip": 0.0843,
+      "rakeDeg": 23.7,
+      "sightH": 0.0216
+    }
+  },
+  "duskPerf": {
+    "fps": 59.674319814616545,
+    "low": 53.191489327973834,
+    "worst": 18.80000001192093,
+    "hitches": 15,
+    "frames": 59
+  }
+}

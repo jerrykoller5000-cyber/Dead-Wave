@@ -1,0 +1,134 @@
+{
+  "phase": "lights",
+  "samples": [
+    {
+      "key": "m4",
+      "hip": {
+        "at": [
+          0.3,
+          -0.26,
+          -0.5
+        ],
+        "yaw": 0.37,
+        "pitch": 0.08,
+        "roll": -0.11
+      },
+      "weapon": "m4",
+      "backend": "WebGPU",
+      "hipInfo": {
+        "tune": {},
+        "active": true,
+        "key": "m4",
+        "akimbo": false,
+        "raise": 1,
+        "ads": 0,
+        "wrist": {
+          "r": 0.8410980738184904,
+          "l": 0.17401344282925163
+        },
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "hack": true,
+        "filter": true,
+        "flip": true,
+        "wristMax": 0.87,
+        "blade": null,
+        "reloadKind": null
+      },
+      "hipFp": {
+        "first": true,
+        "ads": 0
+      },
+      "ads": {
+        "ads": 1,
+        "info": {
+          "tune": {},
+          "active": true,
+          "key": "m4",
+          "akimbo": false,
+          "raise": 1,
+          "ads": 1,
+          "wrist": {
+            "r": 0.87,
+            "l": 0.15617917518038463
+          },
+          "magState": "seated",
+          "handPlace": "fore",
+          "reloadU": null,
+          "hack": true,
+          "filter": true,
+          "flip": true,
+          "wristMax": 0.87,
+          "blade": null,
+          "reloadKind": null
+        }
+      }
+    },
+    {
+      "key": "ak",
+      "hip": {
+        "at": [
+          0.27,
+          -0.26,
+          -0.5
+        ],
+        "yaw": 0.32,
+        "pitch": 0.09,
+        "roll": -0.12
+      },
+      "weapon": "ak",
+      "backend": "WebGPU",
+      "hipInfo": {
+        "tune": {},
+        "active": true,
+        "key": "ak",
+        "akimbo": false,
+        "raise": 1,
+        "ads": 0,
+        "wrist": {
+          "r": 0.6774562909074658,
+          "l": 0.07354769147252126
+        },
+        "magState": "seated",
+        "handPlace": "fore",
+        "reloadU": null,
+        "hack": true,
+        "filter": true,
+        "flip": true,
+        "wristMax": 0.87,
+        "blade": null,
+        "reloadKind": null
+      },
+      "hipFp": {
+        "first": true,
+        "ads": 0
+      },
+      "ads": {
+        "ads": 1,
+        "info": {
+          "tune": {},
+          "active": true,
+          "key": "ak",
+          "akimbo": false,
+          "raise": 1,
+          "ads": 1,
+          "wrist": {
+            "r": 0.87,
+            "l": 0.13643510424294122
+          },
+          "magState": "seated",
+          "handPlace": "fore",
+          "reloadU": null,
+          "hack": true,
+          "filter": true,
+          "flip": true,
+          "wristMax": 0.87,
+          "blade": null,
+          "reloadKind": null
+        }
+      }
+    }
+  ],
+  "errors": []
+}

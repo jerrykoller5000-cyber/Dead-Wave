@@ -1,0 +1,63 @@
+{
+  "gun": "ak",
+  "name": "KR-7 Rifle (AKM)",
+  "refFile": "ak-47.glb",
+  "realLength": 0.88,
+  "sizeK": 0.6864,
+  "before": {
+    "tris": 5432,
+    "meshes": 15,
+    "materials": 7,
+    "floatingCount": 1,
+    "box": {
+      "x": 0.0982,
+      "y": 0.2993,
+      "z": 1.0921
+    },
+    "measure": {
+      "length": 1.0921,
+      "boreOverGrip": 0.0901,
+      "rakeDeg": 89.1,
+      "sightH": 0.0554
+    }
+  },
+  "after": {
+    "tris": 8184,
+    "meshes": 32,
+    "materials": 8,
+    "floatingCount": 1,
+    "box": {
+      "x": 0.0563,
+      "y": 0.2715,
+      "z": 1.0948
+    },
+    "measure": {
+      "length": 1.0948,
+      "boreOverGrip": 0.0917,
+      "rakeDeg": 87.4,
+      "sightH": 0.0467
+    }
+  },
+  "ref": {
+    "tris": 17392,
+    "meshes": 65,
+    "box": {
+      "x": 0.0623,
+      "y": 0.2515,
+      "z": 0.7542
+    },
+    "measure": {
+      "length": 0.7542,
+      "boreOverGrip": 0.0877,
+      "rakeDeg": 81.6,
+      "sightH": 0.0304
+    }
+  },
+  "duskPerf": {
+    "fps": 61.24497991967872,
+    "low": 57.471264348129,
+    "worst": 17.400000005960464,
+    "hitches": 18,
+    "frames": 61
+  }
+}
