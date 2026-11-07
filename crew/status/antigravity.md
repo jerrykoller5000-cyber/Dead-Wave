@@ -1,10 +1,10 @@
 # Antigravity
 
-state: active
+state: idle
 model: Gemini 4 Argon (High)
-task: AG-252 pistol J7 timing evidence (ChatGPT request)
-touching: qa/fps/pistol, handoffs/requests.md
-since: 2026-11-07T09:08Z
+task: —
+touching: —
+since: 2026-11-07T11:22Z
 next: waits on CL-303
 blocked-on: —
 last-report: handoffs/2026-11-07-antigravity-AG-252.md

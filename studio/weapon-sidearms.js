@@ -230,7 +230,7 @@ export function makePistolModel(ctx) {
 }
 
 export function makeRevolverModel(ctx) {
-  const { THREE, gunKit, gunBand, gunEffects, finishGun, revolverSteel: steelMat, woodMat, woodDark, gunDark, gunAccent, gunRubber } = ctx;   // GB-233: its own steel
+  const { THREE, gunKit, gunBand, gunEffects, finishGun, revolverSteel: steelMat, woodMat, woodDark, gunDark, gunAccent, gunRubber, brassMat } = ctx;   // GB-233: its own steel; GB-302 brass for empties/loader
   const gun = new THREE.Group();
   const K = gunKit(gun);
   // Stainless frame round the cylinder's window: the recoil shield and hammer housing, the top strap, the
@@ -283,6 +283,52 @@ export function makeRevolverModel(ctx) {
   // GB-300: pair reload timing (matches index.html akimboReloadDip / pairCylLocal) and swing amounts the viewmodel can read.
   gun.userData.pairReload = { right: [0.06, 0.50], left: [0.48, 0.92] };
   gun.userData.cylinderSwing = { openX: -0.095, openY: -0.008, openZ: 0.01, yaw: -0.16, ejectX: -0.012 };
+  // GB-302: six empties + a speedloader Claude can drive on the reload (pair cylinder swing is GB-300).
+  const empties = new THREE.Group();
+  empties.name = 'empties';
+  const emptyCasings = [];
+  for (let i = 0; i < 6; i++) {
+    const a = Math.PI / 6 + i * Math.PI / 3;
+    const casing = new THREE.Group();
+    casing.position.set(Math.cos(a) * 0.033, 0.05 + Math.sin(a) * 0.033, 0.02);
+    const body = new THREE.Mesh(new THREE.CylinderGeometry(0.008, 0.0085, 0.038, 8), brassMat);
+    body.rotation.x = Math.PI / 2;
+    const rim = new THREE.Mesh(new THREE.CylinderGeometry(0.0095, 0.0095, 0.004, 8), brassMat);
+    rim.rotation.x = Math.PI / 2;
+    rim.position.z = -0.019;
+    casing.add(body, rim);
+    casing.visible = false;
+    empties.add(casing);
+    emptyCasings.push(casing);
+  }
+  gun.add(empties);
+  gun.userData.empties = empties;
+  gun.userData.emptyCasings = emptyCasings;
+  gun.userData.baseEmptiesPos = empties.position.clone();
+  gun.userData.baseEmptiesRot = empties.rotation.clone();
+  const speedloader = new THREE.Group();
+  speedloader.name = 'speedloader';
+  speedloader.position.set(-0.02, 0.05, 0.02);
+  const loaderRing = new THREE.Mesh(new THREE.TorusGeometry(0.038, 0.004, 8, 16), gunDark);
+  loaderRing.rotation.y = Math.PI / 2;
+  speedloader.add(loaderRing);
+  for (let i = 0; i < 6; i++) {
+    const a = Math.PI / 6 + i * Math.PI / 3;
+    const rnd = new THREE.Mesh(new THREE.CylinderGeometry(0.0075, 0.008, 0.036, 8), brassMat);
+    rnd.rotation.x = Math.PI / 2;
+    rnd.position.set(Math.cos(a) * 0.033, Math.sin(a) * 0.033, 0);
+    speedloader.add(rnd);
+  }
+  speedloader.visible = false;
+  gun.add(speedloader);
+  gun.userData.speedloader = speedloader;
+  gun.userData.baseSpeedloaderPos = speedloader.position.clone();
+  gun.userData.baseSpeedloaderRot = speedloader.rotation.clone();
+  gun.userData.reloadParts = Object.assign(gun.userData.reloadParts || {}, {
+    empties: { restPos: [0, 0, 0], restRot: [0, 0, 0], visibleAtRest: false, chamberR: 0.033, chamberY0: 0.05, chamberZ0: 0.02, note: 'six casings; show on eject, then fall' },
+    speedloader: { restPos: [-0.02, 0.05, 0.02], restRot: [0, 0, 0], visibleAtRest: false, note: 'into the open cylinder; hide at rest' },
+    cylinder: { restPos: [0, 0.05, 0.02], swing: gun.userData.cylinderSwing, pairReload: gun.userData.pairReload }
+  });
   // The reference has a smooth full underlug and continuous top rib.
   // GB-173 (Jerry: the barrel did not line up with the cylinder): the bore is on the top chamber's axis (y 0.083),
   // 33 mm above the cylinder's centre; the underlug, rib, sight, muzzle and laser moved up with it.

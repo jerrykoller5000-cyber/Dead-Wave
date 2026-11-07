@@ -54,7 +54,15 @@ export const VM = Object.freeze({
     follow: null,
     aim: { in: 0.04, up: 0.035, fwd: 0.02 },
     kick: 1.2,
-    dip: { down: 0.14, back: 0, pitch: 0.35, roll: 0.6 }   // muzzles up and canted in: muzzle down turned the forearms up into the eye (the cloud look)
+    dip: { down: 0.14, back: 0, pitch: 0.35, roll: 0.6 },  // muzzles up and canted in: muzzle down turned the forearms up into the eye (the cloud look)
+    // CL-306: each gun's own dip in turn (the right 0.06-0.50 of the reload, the left 0.48-0.92, the body's windows). A
+    // pistol or a Wasp drops out of the view to the pouch (the mag change happens below the frame, as Warzone's pair
+    // does); a revolver stays in the view, muzzle up and rolled in, so its cylinder (GB-300) swings out to the eye.
+    dipBy: {
+      pistol: { down: 0.42, back: 0.10, out: 0.03, pitch: 0.30, roll: 0.5 },
+      uzi: { down: 0.54, back: 0.10, out: 0.03, pitch: 0.18, roll: 0.45 },   // long: a muzzle sliver showed at the bottom edge at .46/.28
+      revolver: { down: 0.10, back: 0.02, out: 0, pitch: 0.45, roll: 0.95 }
+    }
   }
 });
 
@@ -264,9 +272,11 @@ const VM_STAGE3_RELOADS = Object.freeze({
   },
   tube: {
     kind: 'shell',
-    gun: [[0, null], [.12, { pos: [-.025, .055, .015], rot: [-.14, .10, .04] }],
-      [.78, { pos: [-.025, .055, .015], rot: [-.14, .10, .04] }],
-      [.90, { pos: [-.02, .04, .015], rot: [-.08, .05, .02] }], [1, null]],
+    // CL-306 (the audit: the load happened unseen behind the receiver): the gun rolls 30 degrees to the left and lifts, so
+    // the loading port under the receiver turns toward the eye and the shell is seen going in
+    gun: [[0, null], [.12, { pos: [-.05, .05, .02], rot: [-.10, .14, .75] }],
+      [.78, { pos: [-.05, .05, .02], rot: [-.10, .14, .75] }],
+      [.90, { pos: [-.03, .03, .0], rot: [-.06, .06, .30] }], [1, null]],
     hand: [[0, 'fore', 'fore'], [.14, 'pouch', 'pouch'], [.29, 'pouch', 'cup'],
       [.50, 'port', 'cup'], [.56, 'port', 'cup'], [.74, 'port', 'open'],
       [.81, 'pump', 'cup'], [.94, 'pump', 'cup'], [1, 'fore', 'fore']],
@@ -283,6 +293,11 @@ const VM_STAGE3_RELOADS = Object.freeze({
       [.20, 'ejector', 'pinch'], [.28, 'pouch', 'open'], [.36, 'pouch', 'pinch'],
       [.46, 'loader', 'pinch'], [.76, 'loader', 'open'],
       [.82, 'part', 'cup'], [.94, 'fore', 'fore'], [1, 'fore', 'fore']],
+    // CL-306 (GB-302's parts): the six empties show once the cylinder is out, slide out of its back under the ejector's
+    // press (.18-.26) and are gone (the body drops the real ones); the loader comes up in the palm from the pouch (.38),
+    // goes onto the cylinder's back (.46-.52), pushes the rounds home (.58-.70) and is gone with the hand's release.
+    empties: { show: .10, out: [.18, .26], travel: .05, gone: .27 },
+    loader: { show: .38, toPart: [.44, .52], back: .085, seat: .045, push: [.58, .70], gone: .76 },
     places: { part: { part: 'cylinder', at: [0, -.035, -.04], z: [0, .95, .31], y: [.65, -.3, -.7] },
       ejector: { part: 'cylinder', at: [0, -.004, .123], z: [0, .8, .6], y: [.65, -.3, -.7] },
       loader: { part: 'cylinder', at: [0, 0, -.06], z: [0, .9, .44], y: [.65, -.3, -.7] },
@@ -291,11 +306,15 @@ const VM_STAGE3_RELOADS = Object.freeze({
   // The source gun opens and closes its ammo box. Follow that direct child
   // with the support palm while the trigger hand stays on the carry grip.
   minigunBox: {
-    gun: [[0, null], [.16, { pos: [0, .025, 0], rot: [0, -.08, .025] }],
-      [.78, { pos: [0, .025, 0], rot: [0, -.08, .025] }], [1, null]],
+    // CL-306: the box hangs on the gun's right 20 cm out, below the frame from the eye whatever the roll (two tries); the
+    // swap is seen only as the hand leaving and coming back until the box moves under the receiver (a second pass)
+    gun: [[0, null], [.16, { pos: [-.04, .03, 0], rot: [.04, -.10, -.25] }],
+      [.78, { pos: [-.04, .03, 0], rot: [.04, -.10, -.25] }], [1, null]],
     hand: [[0, 'fore', 'fore'], [.12, 'box', 'cup'], [.28, 'box', 'cup'],
       [.38, 'pouch', 'pouch'], [.48, 'pouch', 'cup'], [.62, 'box', 'cup'],
       [.80, 'box', 'open'], [.90, 'fore', 'fore'], [1, 'fore', 'fore']],
+    // CL-306 (the audit: nothing on the gun changed): the box comes off in the palm, goes to the pouch, a fresh one back on
+    mag: { grab: .16, swapOut: .37, swapIn: .49, seat: .64 }, magPlace: 'box',
     places: { box: { part: 'mag', at: [0, -.065, 0], z: [-.2, -.8, .56], y: [-.6, -.4, -.69] },
       pouch: { at: [-.32, -.52, -.35], z: [.25, .9, .3], y: [-.4, -.6, .65] } }
   },
@@ -305,15 +324,33 @@ const VM_STAGE3_RELOADS = Object.freeze({
     hand: [[0, 'fore', 'fore'], [.20, 'tank', 'cup'], [.35, 'tank', 'cup'],
       [.45, 'pouch', 'pouch'], [.55, 'pouch', 'cup'], [.70, 'tank', 'cup'],
       [.86, 'tank', 'open'], [.96, 'fore', 'fore'], [1, 'fore', 'fore']],
+    // CL-306 (the audit: the can never moved): the can comes off in the palm, goes to the belt, a fresh one back on
+    mag: { grab: .24, swapOut: .44, swapIn: .56, seat: .74 }, magPlace: 'tank',
     places: { tank: { part: 'mag', at: [0, -.10, .08], z: [0, -.8, .6], y: [-.6, -.45, -.66] },
       pouch: { at: [-.29, -.50, -.31], z: [.25, .9, .3], y: [-.4, -.6, .65] } }
   },
+  // CL-306 (GP-20039, J18: the six-shot swing-out MGL; ChatGPT's beats: open to .18, eject to .28, the rounds in one at a
+  // time to .78, wind to .86, shut by 1). The carrier swings a half turn on a hinge parallel to the bore, out to the gun's
+  // left at its own height, its chambers' backs toward the eye; between rounds the body turns it a chamber, so the chamber
+  // being loaded is always at the open drum's bottom. The support hand thumbs the latch, cups the drum's underside and
+  // pulls it round, then three trips from the pouch to that chamber (a round pushed home each), a twist of the winding
+  // key at the drum's back, and pushes the drum shut. Places are about the parts' origins in the gun's own axes (rootAt).
   launcherDrum: {
-    gun: [[0, null], [.13, { pos: [-.035, .045, .025], rot: [-.05, .16, .06] }],
-      [.78, { pos: [-.035, .045, .025], rot: [-.05, .16, .06] }], [1, null]],
-    hand: [[0, 'fore', 'fore'], [.18, 'pouch', 'pouch'], [.30, 'pouch', 'cup'],
-      [.50, 'drum', 'cup'], [.76, 'drum', 'open'], [.91, 'fore', 'fore'], [1, 'fore', 'fore']],
-    places: { drum: { part: 'mag', at: [0, -.03, .055], z: [0, .8, .6], y: [.55, -.4, -.72] },
+    gun: [[0, null], [.14, { pos: [-.03, .03, 0], rot: [-.18, .12, .22] }],
+      [.86, { pos: [-.03, .03, 0], rot: [-.18, .12, .22] }],
+      [.95, { pos: [-.015, .015, 0], rot: [-.08, .05, .08] }], [1, null]],
+    hand: [[0, 'fore', 'fore'], [.05, 'latch', 'pinch'], [.10, 'latch', 'pinch'], [.14, 'drumOut', 'cup'], [.24, 'drumOut', 'cup'],
+      [.29, 'pouch', 'pouch'], [.33, 'pouch', 'pinch'], [.40, 'loadIn', 'pinch'], [.44, 'load', 'pinch'], [.47, 'load', 'open'],
+      [.51, 'pouch', 'pinch'], [.57, 'loadIn', 'pinch'], [.61, 'load', 'pinch'], [.64, 'load', 'open'],
+      [.67, 'pouch', 'pinch'], [.73, 'loadIn', 'pinch'], [.76, 'load', 'pinch'], [.79, 'load', 'open'],
+      [.81, 'wind', 'pinch'], [.86, 'wind', 'pinch'], [.89, 'drumOut', 'cup'], [.96, 'fore', 'fore'], [1, 'fore', 'fore']],
+    round: { trips: [[.33, .46], [.51, .63], [.67, .78]], ahead: .09 },   // GP-20039's loadRound ahead of the fingertips (the pinch reaches ~6 cm past the palm), each trip, until the push home
+    places: {
+      latch: { part: 'latch', rootAt: [-.02, -.015, -.025], z: [-.5, .85, 0], y: [-.5, -.5, -.7] },
+      drumOut: { part: 'drum', rootAt: [0, -.15, 0], z: [0, 1, 0], y: [-.45, -.55, -.7] },   // cupping its underside through the swing
+      loadIn: { part: 'drum', rootAt: [0, -.075, -.20], z: [0, 0, 1], y: [-.5, -.5, -.7] },   // the round at the chamber's mouth (the palm 13 cm behind the drum's back, the fingertips at the round)
+      load: { part: 'drum', rootAt: [0, -.075, -.145], z: [0, 0, 1], y: [-.5, -.5, -.7] },    // pushed home: the fingertips at the back face (ChatGPT, 13:03Z: at -.105 the glove was through the drum)
+      wind: { part: 'winder', rootAt: [.01, 0, -.03], z: [0, 0, 1], y: [-.5, -.5, -.7] },
       pouch: { at: [-.29, -.51, -.32], z: [.25, .9, .3], y: [-.4, -.6, .65] } }
   }
 });

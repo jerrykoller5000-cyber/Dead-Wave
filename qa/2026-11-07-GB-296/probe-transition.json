@@ -1,0 +1,307 @@
+[
+  {
+    "gun": "m4",
+    "levels": [
+      {
+        "want": 0,
+        "ads": 0,
+        "stockVis": true,
+        "onScreen": 0,
+        "corners": 24
+      },
+      {
+        "want": 0.1,
+        "ads": 0.523,
+        "stockVis": false,
+        "onScreen": 0,
+        "corners": 0
+      },
+      {
+        "want": 0.2,
+        "ads": 0.918,
+        "stockVis": false,
+        "onScreen": 0,
+        "corners": 0
+      },
+      {
+        "want": 0.3,
+        "ads": 1,
+        "stockVis": false,
+        "onScreen": 0,
+        "corners": 0
+      },
+      {
+        "want": 0.34,
+        "ads": 1,
+        "stockVis": false,
+        "onScreen": 0,
+        "corners": 0
+      },
+      {
+        "want": 0.35,
+        "ads": 1,
+        "stockVis": false,
+        "onScreen": 0,
+        "corners": 0
+      },
+      {
+        "want": 0.5,
+        "ads": 1,
+        "stockVis": false,
+        "onScreen": 0,
+        "corners": 0
+      },
+      {
+        "want": 1,
+        "ads": 1,
+        "stockVis": false,
+        "onScreen": 0,
+        "corners": 0
+      }
+    ]
+  },
+  {
+    "gun": "ak",
+    "levels": [
+      {
+        "want": 0,
+        "ads": 0,
+        "stockVis": true,
+        "onScreen": 0,
+        "corners": 32
+      },
+      {
+        "want": 0.1,
+        "ads": 0.486,
+        "stockVis": false,
+        "onScreen": 0,
+        "corners": 0
+      },
+      {
+        "want": 0.2,
+        "ads": 0.881,
+        "stockVis": false,
+        "onScreen": 0,
+        "corners": 0
+      },
+      {
+        "want": 0.3,
+        "ads": 1,
+        "stockVis": false,
+        "onScreen": 0,
+        "corners": 0
+      },
+      {
+        "want": 0.34,
+        "ads": 1,
+        "stockVis": false,
+        "onScreen": 0,
+        "corners": 0
+      },
+      {
+        "want": 0.35,
+        "ads": 1,
+        "stockVis": false,
+        "onScreen": 0,
+        "corners": 0
+      },
+      {
+        "want": 0.5,
+        "ads": 1,
+        "stockVis": false,
+        "onScreen": 0,
+        "corners": 0
+      },
+      {
+        "want": 1,
+        "ads": 1,
+        "stockVis": false,
+        "onScreen": 0,
+        "corners": 0
+      }
+    ]
+  },
+  {
+    "gun": "shotgun",
+    "levels": [
+      {
+        "want": 0,
+        "ads": 0,
+        "stockVis": true,
+        "onScreen": 0,
+        "corners": 24
+      },
+      {
+        "want": 0.1,
+        "ads": 0.502,
+        "stockVis": false,
+        "onScreen": 0,
+        "corners": 0
+      },
+      {
+        "want": 0.2,
+        "ads": 0.873,
+        "stockVis": false,
+        "onScreen": 0,
+        "corners": 0
+      },
+      {
+        "want": 0.3,
+        "ads": 1,
+        "stockVis": false,
+        "onScreen": 0,
+        "corners": 0
+      },
+      {
+        "want": 0.34,
+        "ads": 1,
+        "stockVis": false,
+        "onScreen": 0,
+        "corners": 0
+      },
+      {
+        "want": 0.35,
+        "ads": 1,
+        "stockVis": false,
+        "onScreen": 0,
+        "corners": 0
+      },
+      {
+        "want": 0.5,
+        "ads": 1,
+        "stockVis": false,
+        "onScreen": 0,
+        "corners": 0
+      },
+      {
+        "want": 1,
+        "ads": 1,
+        "stockVis": false,
+        "onScreen": 0,
+        "corners": 0
+      }
+    ]
+  },
+  {
+    "gun": "aa12",
+    "levels": [
+      {
+        "want": 0,
+        "ads": 0,
+        "stockVis": true,
+        "onScreen": 0,
+        "corners": 16
+      },
+      {
+        "want": 0.1,
+        "ads": 0.493,
+        "stockVis": false,
+        "onScreen": 0,
+        "corners": 0
+      },
+      {
+        "want": 0.2,
+        "ads": 0.851,
+        "stockVis": false,
+        "onScreen": 0,
+        "corners": 0
+      },
+      {
+        "want": 0.3,
+        "ads": 1,
+        "stockVis": false,
+        "onScreen": 0,
+        "corners": 0
+      },
+      {
+        "want": 0.34,
+        "ads": 1,
+        "stockVis": false,
+        "onScreen": 0,
+        "corners": 0
+      },
+      {
+        "want": 0.35,
+        "ads": 1,
+        "stockVis": false,
+        "onScreen": 0,
+        "corners": 0
+      },
+      {
+        "want": 0.5,
+        "ads": 1,
+        "stockVis": false,
+        "onScreen": 0,
+        "corners": 0
+      },
+      {
+        "want": 1,
+        "ads": 1,
+        "stockVis": false,
+        "onScreen": 0,
+        "corners": 0
+      }
+    ]
+  },
+  {
+    "gun": "sniper",
+    "levels": [
+      {
+        "want": 0,
+        "ads": 0,
+        "stockVis": true,
+        "onScreen": 0,
+        "corners": 32
+      },
+      {
+        "want": 0.1,
+        "ads": 0.77,
+        "stockVis": false,
+        "onScreen": 0,
+        "corners": 0
+      },
+      {
+        "want": 0.2,
+        "ads": 0.927,
+        "stockVis": false,
+        "onScreen": 0,
+        "corners": 0
+      },
+      {
+        "want": 0.3,
+        "ads": 0.975,
+        "stockVis": false,
+        "onScreen": 0,
+        "corners": 0
+      },
+      {
+        "want": 0.34,
+        "ads": 1,
+        "stockVis": false,
+        "onScreen": 0,
+        "corners": 0
+      },
+      {
+        "want": 0.35,
+        "ads": 1,
+        "stockVis": false,
+        "onScreen": 0,
+        "corners": 0
+      },
+      {
+        "want": 0.5,
+        "ads": 1,
+        "stockVis": false,
+        "onScreen": 0,
+        "corners": 0
+      },
+      {
+        "want": 1,
+        "ads": 1,
+        "stockVis": false,
+        "onScreen": 0,
+        "corners": 0
+      }
+    ]
+  }
+]

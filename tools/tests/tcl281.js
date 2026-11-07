@@ -232,6 +232,12 @@
       ok(Math.abs(nS.x) < 0.002 && Math.abs(nS.y) < 0.002, label + ': the rear sight on the view\'s centre (' + nS.x.toFixed(3) + ', ' + nS.y.toFixed(3) + ')');
       const eA2 = sockErr(A.r, wr.r), eB2 = sockErr(A.l, wr.l);
       ok(eA2 < 0.01 && eB2 < 0.01, label + ': down the sights the wrists are on their sockets (' + (eA2 * 100).toFixed(2) + ', ' + (eB2 * 100).toFixed(2) + ' cm)');
+      if (key !== 'uzi') {
+        // GB-296 (J9): no stock in frame in ADS
+        let adsStock = null;
+        if (vm.gun && vm.gun.root) vm.gun.root.traverse((o) => { if (o.name === 'fp-stock') adsStock = o; });
+        ok(!!adsStock && adsStock.visible === false, label + ': down the sights the stock is put away (shown ' + !!(adsStock && adsStock.visible) + ')');
+      }
       T.setZoomHeldDbg(false);
       await until(() => T.fpDbg().ads < 0.02, 9000);
       await wait(200);
@@ -328,6 +334,12 @@
         await wait(400);
         const nSs = vm.ndc(gunAt(rear));
         ok(Math.abs(nSs.x) < 0.02 && Math.abs(nSs.y) < 0.02, label + ': the rear sight on the view\'s centre (' + nSs.x.toFixed(3) + ', ' + nSs.y.toFixed(3) + ')');
+      }
+      if (stock) {
+        // GB-296 (J9): no stock in frame in ADS (sniper view gun is already hidden at full ADS)
+        let adsStock = null;
+        if (vm.gun && vm.gun.root) vm.gun.root.traverse((o) => { if (o.name === 'fp-stock') adsStock = o; });
+        ok(!!adsStock && (key === 'sniper' || adsStock.visible === false), label + ': down the sights the stock is put away (shown ' + !!(adsStock && adsStock.visible) + ')');
       }
       T.setZoomHeldDbg(false);
       await until(() => (T.fpDbg().ads || 0) < 0.05, 9000);

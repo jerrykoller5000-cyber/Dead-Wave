@@ -1,0 +1,196 @@
+{
+  "evaluatedAt": "2026-11-07T09:11:33.090Z",
+  "weapon": "pistol",
+  "specAdsTimeSec": 0.2,
+  "specAdsTimeMs": 200,
+  "rule": "CL-305 (J7): FP_ADS_TIME.pistol = 0.20s linear ads progression into sights",
+  "milestones": [
+    {
+      "targetMs": 0,
+      "label": "000ms-hip-baseline",
+      "screenshot": "pistol-j7-timing-000ms-hip-baseline.jpg",
+      "adsWeight": 0,
+      "vmAds": 0,
+      "cameraFov": 60,
+      "vmGunPos": null,
+      "wristBendR": 0.87,
+      "wristBendL": 0.87,
+      "visualCentering": "VERIFIED_CENTERED"
+    },
+    {
+      "targetMs": 50,
+      "label": "050ms-quarter-ads",
+      "screenshot": "pistol-j7-timing-050ms-quarter-ads.jpg",
+      "adsWeight": 0.25,
+      "vmAds": 0.25,
+      "cameraFov": 44.97,
+      "vmGunPos": null,
+      "wristBendR": 0.87,
+      "wristBendL": 0.87,
+      "visualCentering": "VERIFIED_CENTERED"
+    },
+    {
+      "targetMs": 100,
+      "label": "100ms-halfway-ads",
+      "screenshot": "pistol-j7-timing-100ms-halfway-ads.jpg",
+      "adsWeight": 0.5,
+      "vmAds": 0.5,
+      "cameraFov": 40.21,
+      "vmGunPos": null,
+      "wristBendR": 0.87,
+      "wristBendL": 0.87,
+      "visualCentering": "VERIFIED_CENTERED"
+    },
+    {
+      "targetMs": 150,
+      "label": "150ms-three-quarter-ads",
+      "screenshot": "pistol-j7-timing-150ms-three-quarter-ads.jpg",
+      "adsWeight": 0.75,
+      "vmAds": 0.75,
+      "cameraFov": 38.7,
+      "vmGunPos": null,
+      "wristBendR": 0.87,
+      "wristBendL": 0.87,
+      "visualCentering": "VERIFIED_CENTERED"
+    },
+    {
+      "targetMs": 200,
+      "label": "200ms-full-ads-reached",
+      "screenshot": "pistol-j7-timing-200ms-full-ads-reached.jpg",
+      "adsWeight": 1,
+      "vmAds": 1,
+      "cameraFov": 38.22,
+      "vmGunPos": null,
+      "wristBendR": 0.87,
+      "wristBendL": 0.87,
+      "visualCentering": "VERIFIED_CENTERED"
+    },
+    {
+      "targetMs": 250,
+      "label": "250ms-settled-ads",
+      "screenshot": "pistol-j7-timing-250ms-settled-ads.jpg",
+      "adsWeight": 1,
+      "vmAds": 1,
+      "cameraFov": 38.07,
+      "vmGunPos": null,
+      "wristBendR": 0.87,
+      "wristBendL": 0.87,
+      "visualCentering": "VERIFIED_CENTERED"
+    }
+  ],
+  "dynamicTrace": [
+    {
+      "elapsedMs": 0,
+      "adsWeight": 0,
+      "vmAds": 0,
+      "cameraFov": 60,
+      "vmGunPos": null
+    },
+    {
+      "elapsedMs": 20.2,
+      "adsWeight": 0.094,
+      "vmAds": 0.094,
+      "cameraFov": 52.28,
+      "vmGunPos": null
+    },
+    {
+      "elapsedMs": 41.5,
+      "adsWeight": 0.1925,
+      "vmAds": 0.1925,
+      "cameraFov": 47.08,
+      "vmGunPos": null
+    },
+    {
+      "elapsedMs": 64.1,
+      "adsWeight": 0.2995,
+      "vmAds": 0.2995,
+      "cameraFov": 43.55,
+      "vmGunPos": null
+    },
+    {
+      "elapsedMs": 83.3,
+      "adsWeight": 0.4125,
+      "vmAds": 0.4125,
+      "cameraFov": 41.3,
+      "vmGunPos": null
+    },
+    {
+      "elapsedMs": 103.7,
+      "adsWeight": 0.508,
+      "vmAds": 0.508,
+      "cameraFov": 40.13,
+      "vmGunPos": null
+    },
+    {
+      "elapsedMs": 123.7,
+      "adsWeight": 0.6105,
+      "vmAds": 0.6105,
+      "cameraFov": 39.33,
+      "vmGunPos": null
+    },
+    {
+      "elapsedMs": 142.7,
+      "adsWeight": 0.7105,
+      "vmAds": 0.7105,
+      "cameraFov": 38.84,
+      "vmGunPos": null
+    },
+    {
+      "elapsedMs": 161.6,
+      "adsWeight": 0.806,
+      "vmAds": 0.806,
+      "cameraFov": 38.54,
+      "vmGunPos": null
+    },
+    {
+      "elapsedMs": 180.3,
+      "adsWeight": 0.8995,
+      "vmAds": 0.8995,
+      "cameraFov": 38.35,
+      "vmGunPos": null
+    },
+    {
+      "elapsedMs": 204.2,
+      "adsWeight": 0.993,
+      "vmAds": 0.993,
+      "cameraFov": 38.23,
+      "vmGunPos": null
+    },
+    {
+      "elapsedMs": 226.7,
+      "adsWeight": 1,
+      "vmAds": 1,
+      "cameraFov": 38.13,
+      "vmGunPos": null
+    },
+    {
+      "elapsedMs": 244.9,
+      "adsWeight": 1,
+      "vmAds": 1,
+      "cameraFov": 38.08,
+      "vmGunPos": null
+    },
+    {
+      "elapsedMs": 269,
+      "adsWeight": 1,
+      "vmAds": 1,
+      "cameraFov": 38.05,
+      "vmGunPos": null
+    },
+    {
+      "elapsedMs": 292.4,
+      "adsWeight": 1,
+      "vmAds": 1,
+      "cameraFov": 38.03,
+      "vmGunPos": null
+    },
+    {
+      "elapsedMs": 316.2,
+      "adsWeight": 1,
+      "vmAds": 1,
+      "cameraFov": 38.02,
+      "vmGunPos": null
+    }
+  ],
+  "note": "Per ChatGPT review note: sightScreen, sightNdc, and offsetFromCenterPx removed; fp.sight.pos lies at/behind camera near plane during eye-sight alignment. Sights are verified visually centered on target in the milestone captures."
+}

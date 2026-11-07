@@ -1,8 +1,9 @@
 // qa/fps/pistol/run-pistol-review.mjs
-// Task AG-252: The review sets (D-119). Pistol review set (CL-305 J8 run focus).
+// Task AG-252: The review sets (D-119). Pistol review set (Reshoot with mid-action fire and reload).
 // Captures on Jerry's RTX 5080 WebGPU PC through shared test slot queue.
-// Evaluates: hip idle, walk, run, ADS still, ADS moving, fire at hip, fire aimed,
-// reload tactical/empty, switch away/to, and motion frame sequence for clip.
+// Evaluates: hip idle, walk, run, ADS still, ADS moving, fire at hip (mid-action with tracer & flash),
+// fire aimed (mid-action with tracer & flash), reload tactical (u=0.3, 0.6, 0.8), reload empty (u=0.3, 0.6, 0.8),
+// switch away/to, and motion frame sequence for clip.
 
 import fs from 'node:fs';
 import path from 'node:path';
@@ -20,6 +21,24 @@ const FRAMES_DIR = path.join(OUT_DIR, 'frames');
 fs.mkdirSync(OUT_DIR, { recursive: true });
 fs.mkdirSync(FRAMES_DIR, { recursive: true });
 
+function safeWriteFile(filePath, buffer) {
+  const tmp = filePath + '.' + Date.now() + Math.random().toString(36).slice(2) + '.tmp';
+  fs.writeFileSync(tmp, buffer);
+  for (let i = 0; i < 20; i++) {
+    try {
+      try { if (fs.existsSync(filePath)) fs.unlinkSync(filePath); } catch {}
+      fs.renameSync(tmp, filePath);
+      return;
+    } catch (e) {
+      if (i === 19) {
+        try { fs.writeFileSync(filePath, buffer); return; } catch (_) { throw e; }
+      }
+      const start = Date.now();
+      while (Date.now() - start < 60) {}
+    }
+  }
+}
+
 async function captureShot(page, filename) {
   const isJpg = filename.endsWith('.jpg') || filename.endsWith('.jpeg');
   const params = {
@@ -29,7 +48,7 @@ async function captureShot(page, filename) {
   if (isJpg) params.quality = 95;
   const shot = await page.send('Page.captureScreenshot', params);
   const outPath = path.join(OUT_DIR, filename);
-  fs.writeFileSync(outPath, Buffer.from(shot.data, 'base64'));
+  safeWriteFile(outPath, Buffer.from(shot.data, 'base64'));
   console.log(`[AG-252-Pistol] Saved screenshot: ${filename} (${shot.data.length} bytes base64)`);
   return outPath;
 }
@@ -43,7 +62,7 @@ async function captureFrame(page, filename) {
   if (isJpg) params.quality = 90;
   const shot = await page.send('Page.captureScreenshot', params);
   const outPath = path.join(FRAMES_DIR, filename);
-  fs.writeFileSync(outPath, Buffer.from(shot.data, 'base64'));
+  safeWriteFile(outPath, Buffer.from(shot.data, 'base64'));
   return outPath;
 }
 
@@ -56,7 +75,7 @@ function evalCode(page, fn, ...args) {
 
 async function main() {
   console.log('\n========================================================================');
-  console.log('=== [AG-252] First-Person Review Set: Pistol (D-119, CL-305 J7/J8)   ===');
+  console.log('=== [AG-252] First-Person Review Set: Pistol (D-119 Reshoot)        ===');
   console.log('=== Real WebGPU Hardware (RTX 5080)                                  ===');
   console.log('========================================================================\n');
 
@@ -125,6 +144,10 @@ async function main() {
         await wait(100);
       }
 
+      // Ensure spare magazines exist for realistic reload cycles
+      if (T.setSpareMags) T.setSpareMags('pistol', 5);
+      T.setAmmoDbg('pistol', 15);
+
       // Settle raise
       for (let i = 0; i < 60; i++) {
         const vm = T.viewmodelDbg && T.viewmodelDbg();
@@ -145,6 +168,8 @@ async function main() {
     console.log('[AG-252-Pistol] Environment & weapon initialized:', initEnv);
 
     // Setup 20m target plate in FOB yard
+    // Fixed: backing board is styled with realistic dark range wood/backing (#2c322b)
+    // so it doesn't create bright white glare through the opening between the forearms
     console.log('[AG-252-Pistol] Placing player in FOB yard facing +Z with 20m target plate...');
     await evalCode(page, () => {
       const T = window.TT, THREE = T.THREE || window.THREE;
@@ -178,24 +203,34 @@ async function main() {
       canvas.height = 768;
       const c = canvas.getContext('2d');
 
-      c.fillStyle = '#f5f7fa';
+      // Realistic range backer (dark olive / charcoal timber backing)
+      c.fillStyle = '#2b302c';
       c.fillRect(0, 0, 512, 768);
       c.lineWidth = 10;
-      c.strokeStyle = '#2b3035';
+      c.strokeStyle = '#181c19';
       c.strokeRect(5, 5, 502, 758);
 
+      // Centered paper target sheet
+      c.fillStyle = '#e8eae6';
+      c.fillRect(45, 45, 422, 678);
+      c.lineWidth = 3;
+      c.strokeStyle = '#5a6256';
+      c.strokeRect(45, 45, 422, 678);
+
+      // Silhouette target
       c.fillStyle = '#1c2127';
       c.beginPath();
       c.arc(256, 175, 75, 0, Math.PI * 2);
       c.fill();
       c.beginPath();
-      c.moveTo(110, 740);
+      c.moveTo(110, 680);
       c.lineTo(135, 275);
       c.quadraticCurveTo(256, 230, 377, 275);
-      c.lineTo(402, 740);
+      c.lineTo(402, 680);
       c.closePath();
       c.fill();
 
+      // Scoring rings and crosshair
       const cx = 256, cy = 430;
       c.strokeStyle = '#ffffff'; c.lineWidth = 4;
       c.beginPath(); c.arc(cx, cy, 140, 0, Math.PI * 2); c.stroke();
@@ -211,11 +246,11 @@ async function main() {
       c.fillStyle = '#e83020';
       c.beginPath(); c.arc(256, 175, 26, 0, Math.PI * 2); c.fill();
 
-      c.font = 'bold 36px Impact, sans-serif';
-      c.fillStyle = '#f5f7fa';
+      c.font = 'bold 32px Impact, sans-serif';
+      c.fillStyle = '#2b302c';
       c.textAlign = 'center';
       c.textBaseline = 'middle';
-      c.fillText('20.0 M TARGET', 256, 680);
+      c.fillText('20.0 M TARGET', 256, 650);
 
       const texture = new THREE.CanvasTexture(canvas);
       const mesh = new THREE.Mesh(
@@ -284,7 +319,6 @@ async function main() {
           wristL = project(wp);
         }
 
-        // Check gun parts
         let gunBox = null;
         try {
           const gunObj = vm && (vm.gun && vm.gun.src ? vm.gun.src : (vm.gun && vm.gun.isObject3D ? vm.gun : null));
@@ -302,12 +336,10 @@ async function main() {
           gunBox = { error: String(e.message || e) };
         }
 
-        // Live wrist angles vs clamp
         const wristBendR = vmInfo.wrist ? vmInfo.wrist.r : null;
         const wristBendL = vmInfo.wrist ? vmInfo.wrist.l : null;
         const wristMax = vmInfo.wristMax || 0.87;
 
-        // Dismiss error card if ever created
         const errCard = document.getElementById('errorCard');
         const errText = (errCard && !errCard.hidden) ? errCard.textContent.trim() : null;
         if (errCard) errCard.hidden = true;
@@ -327,18 +359,12 @@ async function main() {
           handPlace: vmInfo.handPlace,
           magState: vmInfo.magState,
           reloadU: vmInfo.reloadU,
+          reloadKind: vmInfo.reloadKind,
           gunBox,
           shadowReceive: arms?.r?.meshes?.fore ? arms.r.meshes.fore.receiveShadow : null,
           screenError: errText
         };
       }, stateName);
-    };
-
-    // Safe key dispatch helper (dispatches on document.body so e.target is a Node, avoiding ui/prep-checklist.js:116 crash)
-    const dispatchKey = async (type, code) => {
-      await evalCode(page, (t, c) => {
-        document.body.dispatchEvent(new KeyboardEvent(t, { code: c, bubbles: true }));
-      }, type, code);
     };
 
     // =========================================================================
@@ -439,37 +465,65 @@ async function main() {
     });
 
     // =========================================================================
-    // 6. CAPTURE FIRE AT HIP (Muzzle flash & recoil kick)
+    // 6. CAPTURE FIRE AT HIP (Mid-action with muzzle flash & tracer line)
     // =========================================================================
-    console.log('[AG-252-Pistol] 6. Capturing FIRE AT HIP...');
+    console.log('[AG-252-Pistol] 6. Capturing FIRE AT HIP (mid-action: tracer & flash)...');
     await evalCode(page, async () => {
       const T = window.TT, wait = ms => new Promise(r => setTimeout(r, ms));
-      if (T.stepFireDbg) T.stepFireDbg(0.016);
-      await wait(40); // Capture muzzle flash and slide kick
+      T.setAmmoDbg('pistol', 15);
+      T.setZoomHeldDbg(false);
+      T.setVelDbg(0, 0);
+      for (let i = 0; i < 30; i++) {
+        if (T.fpDbg().ads < 0.02) break;
+        await wait(30);
+      }
+      await wait(300);
+
+      // Deterministic trigger using flightHold & stepFrame
+      T.flightHold(true);
+      T.setMouseFireDbg(true);
+      T.stepFrame(1 / 60); // Triggers shot, spawns tracer mesh at muzzle, starts muzzle flash
+      T.setMouseFireDbg(false);
+      T.stepFrame(1 / 60); // Advances tracer forward 1.17m; flash is still bright (flashTimer > 0)
     });
     telemetry.shots['06-fire-hip'] = await getTelemetry('06-fire-hip');
     await captureShot(page, '06-fire-hip.jpg');
-    await wait(400); // Settle recoil
 
-    // =========================================================================
-    // 7. CAPTURE FIRE AIMED (ADS Fire & recoil recovery)
-    // =========================================================================
-    console.log('[AG-252-Pistol] 7. Capturing FIRE AIMED (ADS Fire)...');
+    // Release flightHold and settle recoil
     await evalCode(page, async () => {
       const T = window.TT, wait = ms => new Promise(r => setTimeout(r, ms));
+      T.flightHold(false);
+      await wait(400);
+    });
+
+    // =========================================================================
+    // 7. CAPTURE FIRE AIMED (ADS Fire: mid-action with tracer & flash down sight line)
+    // =========================================================================
+    console.log('[AG-252-Pistol] 7. Capturing FIRE AIMED (ADS Fire: mid-action tracer & flash)...');
+    await evalCode(page, async () => {
+      const T = window.TT, wait = ms => new Promise(r => setTimeout(r, ms));
+      T.setAmmoDbg('pistol', 15);
       T.setZoomHeldDbg(true);
       for (let i = 0; i < 60; i++) {
         if (T.fpDbg().ads > 0.98) break;
         await wait(50);
       }
-      if (T.stepFireDbg) T.stepFireDbg(0.016);
-      await wait(40);
+      await wait(300); // Settle ADS spring
+
+      // Deterministic trigger
+      T.flightHold(true);
+      T.setMouseFireDbg(true);
+      T.stepFrame(1 / 60);
+      T.setMouseFireDbg(false);
+      T.stepFrame(1 / 60);
     });
     telemetry.shots['07-fire-ads'] = await getTelemetry('07-fire-ads');
     await captureShot(page, '07-fire-ads.jpg');
 
+    // Release flightHold and return to hip
     await evalCode(page, async () => {
       const T = window.TT, wait = ms => new Promise(r => setTimeout(r, ms));
+      T.flightHold(false);
       T.setZoomHeldDbg(false);
       for (let i = 0; i < 60; i++) {
         if (T.fpDbg().ads < 0.02) break;
@@ -479,59 +533,137 @@ async function main() {
     });
 
     // =========================================================================
-    // 8. CAPTURE RELOAD TACTICAL (Rounds left in mag)
+    // 8. CAPTURE RELOAD TACTICAL (Rounds left in mag; Claude: u=0.3, 0.6, 0.8)
     // =========================================================================
-    console.log('[AG-252-Pistol] 8. Capturing RELOAD TACTICAL (rounds retained)...');
+    console.log('[AG-252-Pistol] 8. Capturing RELOAD TACTICAL (rounds retained in mag)...');
     await evalCode(page, async () => {
       const T = window.TT, wait = ms => new Promise(r => setTimeout(r, ms));
-      if (T.setLoadedDbg) T.setLoadedDbg('pistol', 5);
+      // Give spare full magazines, set current magazine to 5 rounds (tactical swap)
+      if (T.setSpareMags) T.setSpareMags('pistol', 4);
+      T.setAmmoDbg('pistol', 5);
+      T.setZoomHeldDbg(false);
+      T.setVelDbg(0, 0);
+      await wait(200);
+
+      T.flightHold(true);
       if (T.startReload) T.startReload();
-      else document.body.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyR', bubbles: true }));
-      await wait(450); // Mid-reload: fresh mag / hand to mag well
+      document.body.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyR', bubbles: true }));
+    });
+
+    // Step until u >= 0.30
+    await evalCode(page, () => {
+      const T = window.TT;
+      for (let i = 0; i < 150; i++) {
+        T.stepFrame(1 / 60);
+        const vm = T.viewmodelDbg && T.viewmodelDbg();
+        if (vm && vm.info.reloadU != null && vm.info.reloadU >= 0.30) break;
+      }
+    });
+    await captureShot(page, '08-reload-tactical-u03.jpg');
+
+    // Step until u >= 0.60 (mid-action: fresh mag being inserted into well)
+    await evalCode(page, () => {
+      const T = window.TT;
+      for (let i = 0; i < 150; i++) {
+        T.stepFrame(1 / 60);
+        const vm = T.viewmodelDbg && T.viewmodelDbg();
+        if (vm && vm.info.reloadU != null && vm.info.reloadU >= 0.60) break;
+      }
     });
     telemetry.shots['08-reload-tactical'] = await getTelemetry('08-reload-tactical');
-    await captureShot(page, '08-reload-tactical.jpg');
+    await captureShot(page, '08-reload-tactical-u06.jpg');
+    await captureShot(page, '08-reload-tactical.jpg'); // Master sheet shot
 
-    // Settle reload
+    // Step until u >= 0.80 (seating / recovery)
+    await evalCode(page, () => {
+      const T = window.TT;
+      for (let i = 0; i < 150; i++) {
+        T.stepFrame(1 / 60);
+        const vm = T.viewmodelDbg && T.viewmodelDbg();
+        if (vm && vm.info.reloadU != null && vm.info.reloadU >= 0.80) break;
+      }
+    });
+    await captureShot(page, '08-reload-tactical-u08.jpg');
+
+    // Complete reload
+    await evalCode(page, () => {
+      const T = window.TT;
+      for (let i = 0; i < 200; i++) {
+        if (!T.isReloading || !T.isReloading()) break;
+        T.stepFrame(1 / 60);
+      }
+      T.flightHold(false);
+    });
+    await wait(300);
+
+    // =========================================================================
+    // 9. CAPTURE RELOAD EMPTY (0 rounds retained; Claude: u=0.3, 0.6, 0.8)
+    // =========================================================================
+    console.log('[AG-252-Pistol] 9. Capturing RELOAD EMPTY (0 rounds, slide locked open)...');
     await evalCode(page, async () => {
       const T = window.TT, wait = ms => new Promise(r => setTimeout(r, ms));
-      for (let i = 0; i < 80; i++) {
-        if (!T.isReloading || !T.isReloading()) break;
-        await wait(50);
-      }
-      await wait(300);
+      if (T.setSpareMags) T.setSpareMags('pistol', 4);
+      T.setAmmoDbg('pistol', 0); // Empty magazine
+      T.setZoomHeldDbg(false);
+      T.setVelDbg(0, 0);
+      await wait(200);
+
+      T.flightHold(true);
+      if (T.startReload) T.startReload();
+      document.body.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyR', bubbles: true }));
     });
 
-    // =========================================================================
-    // 9. CAPTURE RELOAD EMPTY (0 rounds, slide locked back)
-    // =========================================================================
-    console.log('[AG-252-Pistol] 9. Capturing RELOAD EMPTY (slide locked)...');
-    await evalCode(page, async () => {
-      const T = window.TT, wait = ms => new Promise(r => setTimeout(r, ms));
-      if (T.setLoadedDbg) T.setLoadedDbg('pistol', 0);
-      if (T.startReload) T.startReload();
-      else document.body.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyR', bubbles: true }));
-      await wait(450); // Mid-reload
+    // Step until u >= 0.30
+    await evalCode(page, () => {
+      const T = window.TT;
+      for (let i = 0; i < 150; i++) {
+        T.stepFrame(1 / 60);
+        const vm = T.viewmodelDbg && T.viewmodelDbg();
+        if (vm && vm.info.reloadU != null && vm.info.reloadU >= 0.30) break;
+      }
+    });
+    await captureShot(page, '09-reload-empty-u03.jpg');
+
+    // Step until u >= 0.60 (mid-action: empty well / fresh mag insertion)
+    await evalCode(page, () => {
+      const T = window.TT;
+      for (let i = 0; i < 150; i++) {
+        T.stepFrame(1 / 60);
+        const vm = T.viewmodelDbg && T.viewmodelDbg();
+        if (vm && vm.info.reloadU != null && vm.info.reloadU >= 0.60) break;
+      }
     });
     telemetry.shots['09-reload-empty'] = await getTelemetry('09-reload-empty');
-    await captureShot(page, '09-reload-empty.jpg');
+    await captureShot(page, '09-reload-empty-u06.jpg');
+    await captureShot(page, '09-reload-empty.jpg'); // Master sheet shot
 
-    // Settle reload
-    await evalCode(page, async () => {
-      const T = window.TT, wait = ms => new Promise(r => setTimeout(r, ms));
-      for (let i = 0; i < 80; i++) {
-        if (!T.isReloading || !T.isReloading()) break;
-        await wait(50);
+    // Step until u >= 0.80 (slide rack / slide release forward)
+    await evalCode(page, () => {
+      const T = window.TT;
+      for (let i = 0; i < 150; i++) {
+        T.stepFrame(1 / 60);
+        const vm = T.viewmodelDbg && T.viewmodelDbg();
+        if (vm && vm.info.reloadU != null && vm.info.reloadU >= 0.80) break;
       }
-      if (T.setLoadedDbg) T.setLoadedDbg('pistol', 15);
-      await wait(300);
     });
+    await captureShot(page, '09-reload-empty-u08.jpg');
+
+    // Complete reload
+    await evalCode(page, () => {
+      const T = window.TT;
+      for (let i = 0; i < 200; i++) {
+        if (!T.isReloading || !T.isReloading()) break;
+        T.stepFrame(1 / 60);
+      }
+      T.flightHold(false);
+      T.setAmmoDbg('pistol', 15);
+    });
+    await wait(300);
 
     // =========================================================================
     // 10. CAPTURE SWITCH AWAY (Lowering) & SWITCH TO (Raising)
     // =========================================================================
     console.log('[AG-252-Pistol] 10. Capturing SWITCH AWAY & SWITCH TO...');
-    // Initiate switch to revolver, capture mid-lower
     await evalCode(page, async () => {
       const T = window.TT;
       const idx = T.WEAPON_ORDER.indexOf('revolver');
@@ -574,9 +706,8 @@ async function main() {
 
     // =========================================================================
     // 11. CAPTURE CONSECUTIVE MOTION SEQUENCE (24 frames)
-    //     Focus: 8 frames sprint transition & cycle for CL-305 J8 verification
     // =========================================================================
-    console.log('[AG-252-Pistol] 11. Capturing 24-frame motion sequence (J8 sprint focus)...');
+    console.log('[AG-252-Pistol] 11. Capturing 24-frame motion sequence...');
     const seqConfigs = [
       {
         name: 'sprint',
@@ -612,7 +743,12 @@ async function main() {
         name: 'fire',
         action: async () => {
           const T = window.TT;
-          if (T.stepFireDbg) T.stepFireDbg(0.016);
+          T.flightHold(true);
+          T.setMouseFireDbg(true);
+          T.stepFrame(1 / 60);
+          T.setMouseFireDbg(false);
+          T.stepFrame(1 / 60);
+          T.flightHold(false);
         },
         frames: 5
       }
@@ -640,12 +776,10 @@ async function main() {
       document.body.dispatchEvent(new KeyboardEvent('keyup', { code: 'ShiftLeft', bubbles: true }));
     });
 
-    // Record any page errors
     telemetry.errors = page.errors || [];
 
-    // Save telemetry
     const telemPath = path.join(OUT_DIR, 'telemetry.json');
-    fs.writeFileSync(telemPath, JSON.stringify(telemetry, null, 2), 'utf8');
+    safeWriteFile(telemPath, Buffer.from(JSON.stringify(telemetry, null, 2), 'utf8'));
     console.log(`[AG-252-Pistol] Telemetry saved to: ${telemPath}`);
 
     console.log('\n========================================================================');

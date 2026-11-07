@@ -1,12 +1,12 @@
 # Grokbot
 
-state: active
+state: blocked
 model: Grok Bot
-task: GB-304 Checkpoint commit (the reloads' first round)
+task: GB-305 Commit job (D-113): Claude outputs/commit checkpoint
 touching: git
-since: 2026-11-07T09:09Z
-next: GB-295 Hip fire tracer from view-gun muzzle
-blocked-on: —
+since: 2026-11-07T12:10Z
+next: GB-297 Every gun's parts attached (J14, D-119). After GB-296. "I no
+blocked-on: game-test slot · changes ready: GB-305 commit held for Claude's answer on test scope (bare npm test refused); nothing committed, tree untouched
 last-report: handoffs/2026-11-07-grokbot-GB-301.md
 
 ## Notes

@@ -201,6 +201,10 @@ export function makeMinigunModel(ctx) {
   gun.userData.baseBarrelRotX = 0;
   gun.userData.baseAmmoPos = ammoBox.position.clone();
   gun.userData.baseAmmoRot = ammoBox.rotation.clone();
+  // GB-302: Claude drives the ammo box (view gun.ammoBox / mag).
+  gun.userData.reloadParts = Object.assign(gun.userData.reloadParts || {}, {
+    ammoBox: { restPos: [0.2, -0.08, -0.02], restRot: [0, 0, 0.12], visibleAtRest: true }
+  });
   return finishGun(gun);
 }
 
@@ -306,6 +310,22 @@ export function makeLauncherModel(ctx) {
   gun.userData.mag = drumHinge;
   gun.userData.baseMagPos = drumHinge.position.clone();
   gun.userData.baseMagRot = drumHinge.rotation.clone();
+  // One loose 40 mm round for the support palm during each loading trip. Its origin is the round's centre;
+  // keep it as a hidden direct child so the first-person copy can move it independently of the drum.
+  const loadRound = K.group(0, 0, 0);
+  K.lathe([[0, -0.052], [0.025, -0.052], [0.027, -0.047], [0.027, -0.038],
+    [0.025, -0.033], [0.025, 0.016], [0.022, 0.031], [0.014, 0.048], [0, 0.052]], gunOlive,
+  { parent: loadRound, seg: 16 });
+  K.cyl(0.0275, 0.0275, 0.005, gunAccent, 0, 0, -0.048, loadRound, 16);
+  K.cyl(0.0255, 0.0255, 0.004, hazardYellow, 0, 0, -0.032, loadRound, 16);
+  loadRound.visible = false;
+  gun.userData.loadRound = loadRound;
+  gun.userData.baseLoadRoundPos = loadRound.position.clone();
+  gun.userData.baseLoadRoundRot = loadRound.rotation.clone();
+  gun.userData.reloadParts = Object.assign(gun.userData.reloadParts || {}, {
+    loadRound: { restPos: [0, 0, 0], restRot: [0, 0, 0], visibleAtRest: false,
+      note: 'one loose grenade in the support palm, reused for each insertion' }
+  });
   // Unrailed barrel with shallow longitudinal reinforcing ribs and the original foregrip contact.
   K.lathe([[0, 0.2], [0.052, 0.2], [0.052, 0.66], [0, 0.66]], gunAccent, { y: 0.04, seg: 16 });
   for (const x of [0.058, -0.058]) K.box(0.012, 0.03, 0.3, gunDark, x, 0.04, 0.42);
@@ -417,6 +437,13 @@ export function makeFlamerModel(ctx) {
   gun.userData.mag = tanks;
   gun.userData.baseMagPos = tanks.position.clone();
   gun.userData.baseMagRot = tanks.rotation.clone();
+  // GB-302: the reload's moving can (off/on). Same group as mag; Claude drives fuelCan.
+  gun.userData.fuelCan = tanks;
+  gun.userData.baseFuelCanPos = tanks.position.clone();
+  gun.userData.baseFuelCanRot = tanks.rotation.clone();
+  gun.userData.reloadParts = Object.assign(gun.userData.reloadParts || {}, {
+    fuelCan: { restPos: [0, 0, 0], restRot: [0, 0, 0], visibleAtRest: true, note: 'whole tank bank; pull down/away, fresh on with a twist' }
+  });
   // Rear pistol grip (now completely clear of the fuel tanks!), grip housing mount, closed trigger guard, and curved trigger.
   K.box(0.054, 0.024, 0.115, gunDark, 0, -0.034, -0.125, 0, 0, 0, null, 0.004);
   K.slab([
@@ -476,7 +503,16 @@ export function makeChainsawModel(ctx) {
   // Exhaust muffler with a dark vent, fuel and oil caps, spark-plug boot at rear of cowling.
   K.box(0.05, 0.09, 0.1, gunDark, 0.14, 0.02, 0.05, 0, 0, 0, null, 0.012);
   for (let i = 0; i < 3; i++) K.box(0.006, 0.05, 0.012, gunRubber, 0.166, 0.02, 0.025 + i * 0.022);
-  K.cyl(0.025, 0.025, 0.02, gunRubber, -0.12, 0.1, -0.15, null, 10, 'x');
+  // GB-302: fuel cap is a named part Claude can unscrew during the gas refill.
+  const fuelCap = K.group(-0.12, 0.1, -0.15);
+  K.cyl(0.025, 0.025, 0.02, gunRubber, 0, 0, 0, fuelCap, 10, 'x');
+  K.cyl(0.012, 0.012, 0.008, gunAccent, 0.012, 0, 0, fuelCap, 8, 'x');
+  gun.userData.fuelCap = fuelCap;
+  gun.userData.baseFuelCapPos = fuelCap.position.clone();
+  gun.userData.baseFuelCapRot = fuelCap.rotation.clone();
+  gun.userData.reloadParts = Object.assign(gun.userData.reloadParts || {}, {
+    fuelCap: { restPos: [-0.12, 0.1, -0.15], restRot: [0, 0, 0], visibleAtRest: true, note: 'unscrew, pour, screw back' }
+  });
   K.cyl(0.02, 0.02, 0.02, gunRubber, -0.12, 0.02, -0.03, null, 10, 'x');
   K.box(0.028, 0.024, 0.036, gunRubber, 0.045, 0.168, -0.232, -0.35, 0, 0, null, 0.008);
   // Rear throttle grip is in line with the bar, beyond the engine housing.

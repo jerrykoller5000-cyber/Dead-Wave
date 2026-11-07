@@ -312,6 +312,15 @@ export function createViewmodel(ctx) {
       work: map.get(direct(ud.work || ud.slide)) || null, mag: map.get(direct(ud.mag)) || null,
       pump: map.get(direct(ud.pump)) || null, bolt: map.get(direct(ud.bolt)) || null,
       cylinder: map.get(direct(ud.cylinder)) || null, shell: map.get(direct(ud.reloadShell)) || null,
+      // GB-302: reload moving parts Claude drives (direct children of the gun root, as pump/slide).
+      ammoBox: map.get(direct(ud.ammoBox)) || null,
+      fuelCan: map.get(direct(ud.fuelCan)) || null,
+      empties: map.get(direct(ud.empties)) || null,
+      speedloader: map.get(direct(ud.speedloader)) || null,
+      fuelCap: map.get(direct(ud.fuelCap)) || null,
+      // CL-306: the launcher's drum on its hinge (GP-20039: ud.mag is the hinge), its latch and winding key
+      drum: map.get(ud.drum) || null, latch: map.get(direct(ud.drumLatch)) || null, winder: map.get(ud.drumWinder) || null,
+      loadRound: map.get(direct(ud.loadRound)) || null,   // GP-20039: the loose round for the support fingers
       stock: map.get(ud.fpStock) || null,
       flash: map.get(ud.flash) || null,
       nodes: countNodes(src), s: 1, foot: null, magBase: null };
@@ -319,9 +328,15 @@ export function createViewmodel(ctx) {
     gun.pumpBase = gun.pump ? gun.pump.position.clone() : null;
     gun.boltBase = gun.bolt ? gun.bolt.position.clone() : null;   // GB-301: exposed like the shotgun's pump
     gun.shellBase = gun.shell ? { pos: gun.shell.position.clone(), quat: gun.shell.quaternion.clone() } : null;
+    gun.ammoBoxBase = gun.ammoBox ? { pos: gun.ammoBox.position.clone(), quat: gun.ammoBox.quaternion.clone() } : null;
+    gun.fuelCanBase = gun.fuelCan ? { pos: gun.fuelCan.position.clone(), quat: gun.fuelCan.quaternion.clone() } : null;
+    gun.emptiesBase = gun.empties ? { pos: gun.empties.position.clone(), quat: gun.empties.quaternion.clone() } : null;
+    gun.speedloaderBase = gun.speedloader ? { pos: gun.speedloader.position.clone(), quat: gun.speedloader.quaternion.clone() } : null;
+    gun.fuelCapBase = gun.fuelCap ? { pos: gun.fuelCap.position.clone(), quat: gun.fuelCap.quaternion.clone() } : null;
+    gun.loadRoundBase = gun.loadRound ? { pos: gun.loadRound.position.clone(), quat: gun.loadRound.quaternion.clone() } : null;
     gun.pairs = pairs.filter(([s]) => s !== src);   // the copy's root is placed here, not mirrored
-    if (gun.mag && ud.baseMagPos) {
-      const mp = ud.baseMagPos, mr = ud.baseMagRot;
+    if (gun.mag && (ud.baseMagPos || ud.baseAmmoPos)) {
+      const mp = ud.baseMagPos || ud.baseAmmoPos, mr = ud.baseMagRot || ud.baseAmmoRot;   // CL-306: the rotary gun's box (index.html names its rest baseAmmo*)
       const q = Q(); if (mr) q.setFromEuler(mr); else q.copy(gun.mag.quaternion);
       gun.magBase = { pos: mp.clone(), quat: q, scale: gun.mag.scale.clone() };
     }
@@ -438,11 +453,17 @@ export function createViewmodel(ctx) {
       const place = pl[name];
       const part = place.part ? gun[place.part] : (name === 'work' ? gun.work : null);
       if (place.part && part) {
-        part.updateMatrix();
-        if (place.at) at.set(...place.at);
-        else if (place.grab) at.set(...place.grab);
-        else at.set(0, 0, 0);
-        at.applyMatrix4(part.matrix);
+        // CL-306: the frame in the gun root's space (a drum on its hinge is two deep); the magazine as it sits at rest
+        // (it rides the palm during a reload, so a place on it must not follow it round).
+        if (place.part === 'mag' && gun.magBase) _pm.compose(gun.magBase.pos, gun.magBase.quat, gun.magBase.scale);
+        else partMatrix(part, _pm);
+        if (place.rootAt) at.set(0, 0, 0).applyMatrix4(_pm).add(_pg.set(...place.rootAt));   // from the part's origin, in the gun's own axes (a drum that turns)
+        else {
+          if (place.at) at.set(...place.at);
+          else if (place.grab) at.set(...place.grab);
+          else at.set(0, 0, 0);
+          at.applyMatrix4(_pm);
+        }
       } else if (place.at) {
         at.set(...place.at);
         if (name === 'work' && gun.work && gun.workBase) at.add(_pg.copy(gun.work.position).sub(gun.workBase));
@@ -452,6 +473,7 @@ export function createViewmodel(ctx) {
         at.copy(gun.grab).add(_pg.set(...place.grab)).applyMatrix4(part.matrix);
       } else at.set(0, 0, 0);
       z.set(...place.z); y.set(...place.y);
+      if (place.part && part && place.local) { _pq.setFromRotationMatrix(_pm); z.applyQuaternion(_pq); y.applyQuaternion(_pq); }   // CL-306: directions in the part's own space (the swung drum)
     } else {
       if (!gun.foot) footOf();
       if (gun.foot) at.copy(gun.foot); else at.set(0, 0, 0);
@@ -464,6 +486,13 @@ export function createViewmodel(ctx) {
     out.s = sL.s;
     const palm = wristSpacePoint(arm, 'palm', _ppalm).multiplyScalar(out.s).applyQuaternion(out.q);
     out.p.copy(at).sub(palm);
+    return out;
+  }
+  // CL-306: a part's local matrix composed up to the gun root (mirrorParts copies position/quaternion/scale only).
+  const _pm = M4(), _pq = Q();
+  function partMatrix(part, out) {
+    out.identity();
+    for (let o = part; o && o !== gun.root; o = o.parent) { o.updateMatrix(); out.premultiply(o.matrix); }
     return out;
   }
   function footOf() {
@@ -688,10 +717,14 @@ export function createViewmodel(ctx) {
       sp.rot.x[2] + (bs * mixRun(b.roll) * bk + PS.roll * spr) * MX, _rqq);
     // the reload's own moves (CL-301: a pair dips out of the view and comes back up loaded)
     const R = reloadOf(P, st);   // CL-306: the tactical path when rounds are left
+    S.pairDip = null;
     if (AK && st.reloadU != null) {
-      const u = clamp(st.reloadU, 0, 1), D = VM.akimbo.dip, k = smooth(u / 0.22) * (1 - smooth((u - 0.78) / 0.22));
-      off.y -= D.down * k; off.z += D.back * k;
-      rq.multiply(eulerQ(0, D.pitch * k, D.roll * k * MX, _rq));
+      // CL-306 (the audit: both guns dipped together and nothing else happened): each gun in turn, the right first, on the
+      // body's own windows (index.html akimboReloadDip, GB-300's cylinders): applied after the mirror, in update(), so the
+      // left gun has its own dip. A pistol or a Wasp goes down out of the view to its pouch and comes back up loaded; a
+      // revolver stays in view, muzzle up, for its cylinder.
+      const u = clamp(st.reloadU, 0, 1), seg = (a, b) => smooth((u - a) / (b - a));
+      S.pairDip = { r: seg(0.06, 0.24) * (1 - seg(0.34, 0.50)), l: seg(0.48, 0.66) * (1 - seg(0.76, 0.92)) };
     } else if (R && st.reloadU != null) {
       const pos = _rpos, rot = _rrot;
       reloadGunOffset(R, st.reloadU, pos, rot);
@@ -721,6 +754,16 @@ export function createViewmodel(ctx) {
   const mirrorFrame = (a, out) => { out.p.set(-a.p.x, a.p.y, a.p.z); out.q.set(a.q.x, -a.q.y, -a.q.z, a.q.w); out.s = a.s; return out; };
   // A pair's own kick (K) on a gun's frame, turned about its grip (gx: the grip's x, mirrored for the left gun).
   const _kq = Q(), _kp = V3();
+  // CL-306: a pair's reload dip on one gun's frame (view space): down and back by k, pitched (muzzle up) and rolled in.
+  const _dipQ = Q(), _dipP = V3();
+  function dipFrame(Fr, D, k, sx, grip, gx) {
+    if (!(k > 0.0005)) return;
+    const pivot = _dipP.set(gx, grip.y, grip.z).multiplyScalar(Fr.s).applyQuaternion(Fr.q).add(Fr.p);
+    eulerQ(0, D.pitch * k, D.roll * k * sx, _dipQ);
+    Fr.p.sub(pivot).applyQuaternion(_dipQ).add(pivot);   // turns about the grip, like the kick
+    Fr.q.premultiply(_dipQ);
+    Fr.p.x += (D.out || 0) * k * sx; Fr.p.y -= D.down * k; Fr.p.z += D.back * k;
+  }
   function kickFrame(Fr, K, grip, gx) {
     const pivot = _kp.set(gx, grip.y, grip.z).multiplyScalar(Fr.s).applyQuaternion(Fr.q).add(Fr.p);
     eulerQ(K.rot.x[0], K.rot.x[1], K.rot.x[2], _kq);
@@ -789,13 +832,19 @@ export function createViewmodel(ctx) {
     mirrorParts(gun); if (gun2) mirrorParts(gun2);
     // The launcher's butt sits behind the view eye against the shoulder.
     // Apply this after mirroring or the source restores its visible flag.
-    if (gun.stock) gun.stock.visible = gun.key !== 'launcher' && (st.ads || 0) < 0.35;
+    // GB-296 (J9): hide the stock as soon as ADS starts (was 0.35), so it never sweeps into the
+    // sight picture on the way up. Launcher stock stays off always (GP-20037).
+    if (gun.stock) gun.stock.visible = gun.key !== 'launcher' && (st.ads || 0) < 0.08;
     S.ads = st.ads || 0; info.ads = S.ads;
     const AK = gun2 ? (info.tune.akimbo && info.tune.akimbo[gun.key]) || VM.akimbo[gun.key] : null;   // live: info.tune.akimbo = { pistol: {...}, elbowRel }
     gunFrame(P, gun.key, st, dt, AK);
     if (gun2) {   // CL-301: the left gun the right one's mirror, then each its own kick
       const H = holdOf(gun.key), gr = H && H.grip ? _grip.set(H.grip[0], H.grip[1], H.grip[2]) : _grip.set(0, 0, 0);
       mirrorFrame(G, G2);
+      if (S.pairDip) {   // CL-306: each gun's own reload dip (the right first)
+        const D = (VM.akimbo.dipBy && VM.akimbo.dipBy[gun.key]) || VM.akimbo.dip;
+        dipFrame(G, D, S.pairDip.r, MX, gr, gr.x); dipFrame(G2, D, S.pairDip.l, -MX, gr, -gr.x);
+      }
       kickFrame(G, KA, gr, gr.x); kickFrame(G2, KB, gr, -gr.x);
       gun2.root.position.copy(G2.p); gun2.root.quaternion.copy(G2.q); gun2.root.scale.setScalar(G2.s);
     }
@@ -933,7 +982,7 @@ export function createViewmodel(ctx) {
       const ms = R ? magState(R, u) : 'seated';
       info.magState = ms;
       if (ms === 'hand') {
-        placeFrame('well', R, u, _wellF);
+        placeFrame(R.magPlace || 'well', R, u, _wellF);   // CL-306: a tank or a box has its own place
         _mf.p.copy(gun.magBase.pos); _mf.q.copy(gun.magBase.quat); _mf.s = gun.magBase.scale.x;
         // the magazine rides the palm as it was when the palm took it at the well: M = W * (Wwell^-1 * Mbase)
         const wi = _wiF; wi.q.copy(_wellF.q).invert(); wi.s = 1 / _wellF.s;
@@ -972,8 +1021,66 @@ export function createViewmodel(ctx) {
         gun.shell.quaternion.copy(gun.shellBase.quat);
       }
     }
+    driveParts(R, u);
     place();
   }
+  // CL-306: the reload's moving parts (GB-302: named on the gun, at rest unless the view moves them). The revolver's six
+  // empties show in the open cylinder, slide out of its back at the ejector's press and are gone; its speedloader comes up in
+  // the support palm from the pouch, goes onto the cylinder's back and is gone once the rounds are in. Everything in the
+  // cylinder's own frame, so it rides the swing (the body's; GB-300 on the pair).
+  const _cm = M4(), _cb = M4(), _cq = Q(), _cp = V3(), _cs = V3(), _lp = V3();
+  function driveParts(R, u) {
+    if (!R || gun2) return;   // the pair: the body's cylinders (GB-300); no hand is free for a loader
+    if (gun.empties && gun.emptiesBase) {
+      const E = gun.empties, win = R.empties;
+      if (win && u != null && gun.cylinder && gun.magBase && u >= win.show && u < win.gone) {
+        // the cylinder's frame now, over its frame at rest: the casings were built in the chambers at rest
+        partMatrix(gun.cylinder, _cm); _cb.compose(gun.magBase.pos, gun.magBase.quat, gun.magBase.scale).invert();
+        _cm.multiply(_cb).decompose(_cp, _cq, _cs);
+        const k = smooth((u - win.out[0]) / (win.out[1] - win.out[0]));
+        _lp.set(0, 0, -win.travel * k).applyQuaternion(_cq);   // out of the back (the cylinder's -z), muzzle up
+        E.position.copy(_cp).add(_lp); E.quaternion.copy(_cq); E.visible = true;
+        for (const c of E.children) c.visible = true;
+      } else {
+        E.position.copy(gun.emptiesBase.pos); E.quaternion.copy(gun.emptiesBase.quat); E.visible = false;
+      }
+    }
+    if (gun.loadRound && gun.loadRoundBase) {
+      // the launcher's loose round: in the support fingers on each trip from the pouch to the open drum's bottom chamber,
+      // its nose along the bore (it goes into the chamber's back), gone at the push home (the body's round shows then)
+      const Rd = gun.loadRound, trips = R.round && R.round.trips;
+      let on = null;
+      if (trips && u != null) for (const t of trips) if (u >= t[0] && u < t[1]) { on = t; break; }
+      if (on) {
+        const local = placeLocalOfWrist(_local2), ahead = R.round.ahead || 0.045;
+        Rd.position.copy(wristSpacePoint(arms.l, 'palm', _ppalm).multiplyScalar(local.s).applyQuaternion(local.q).add(local.p));
+        Rd.position.z += ahead;   // its back end at the fingertips
+        Rd.quaternion.copy(gun.loadRoundBase.quat);
+        Rd.visible = true;
+      } else { Rd.position.copy(gun.loadRoundBase.pos); Rd.quaternion.copy(gun.loadRoundBase.quat); Rd.visible = false; }
+    }
+    if (gun.speedloader && gun.speedloaderBase) {
+      const L = gun.speedloader, win = R.loader;
+      if (win && u != null && gun.cylinder && u >= win.show && u < win.gone) {
+        L.visible = true;
+        const local = placeLocalOfWrist(_local2);
+        // in the palm (from the pouch), then onto the cylinder's back, the rounds into the chambers
+        const inPalm = u < win.toPart[0], tp = smooth((u - win.toPart[0]) / (win.toPart[1] - win.toPart[0]));
+        partMatrix(gun.cylinder, _cm); _cm.decompose(_cp, _cq, _cs);
+        const push = smooth((u - win.push[0]) / (win.push[1] - win.push[0]));
+        _lp.set(0, 0, -(win.back - (win.back - win.seat) * push)).applyQuaternion(_cq).add(_cp);
+        if (inPalm || tp < 1) {
+          const pp = wristSpacePoint(arms.l, 'palm', _ppalm).multiplyScalar(local.s).applyQuaternion(local.q).add(local.p);
+          const pq = _pq2.copy(local.q).multiply(gun.speedloaderBase.quat);
+          if (inPalm) { L.position.copy(pp); L.quaternion.copy(pq); }
+          else { L.position.copy(pp).lerp(_lp, tp); L.quaternion.copy(pq).slerp(_cq, tp); }
+        } else { L.position.copy(_lp); L.quaternion.copy(_cq); }
+      } else {
+        L.position.copy(gun.speedloaderBase.pos); L.quaternion.copy(gun.speedloaderBase.quat); L.visible = false;
+      }
+    }
+  }
+  const _pq2 = Q();
   // The support wrist's frame in the gun's own space (WL is view space).
   function placeLocalOfWrist(out) {
     const gi = _gi.copy(G.q).invert();

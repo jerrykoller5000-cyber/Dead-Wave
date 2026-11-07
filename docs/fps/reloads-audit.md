@@ -61,3 +61,45 @@ blocks and their rears stand into the view; the GW-4's stock block shows at the 
   far forward (60 cm) for the pull, as shooters do. (b) is the realistic one for the KR-7 and the sniper's bolt both.
 - The "floating magazine" in the audit's KR-7 and sniper lines is the body's DROPPED magazine falling past the lower
   left of the view (the third-person reload drops one into the world): fine, not a bug.
+
+## 11:40Z: the pairs, the parts, the launcher (CL-306 b/c)
+- The pairs reload one gun at a time (viewmodel.js S.pairDip + dipFrame, viewmodel-poses.js akimbo.dipBy): the right gun
+  on the body's window .06-.50, the left on .48-.92 (index.html akimboReloadDip, GB-300's cylinders). A pistol or a Wasp
+  drops out of the bottom of the view to its pouch (down .42/.46 m, back .10, muzzle up .30) and comes back up loaded, the
+  other stays up and aimed; a revolver stays in the view (down .10, rolled in .95) with its cylinder out (GB-300). Filmed
+  (fpshot pair2, pair-uzi): the right gun gone by u .31, back by .50, the left gone by .70, back by .91; a sliver of the
+  Wasp's muzzle shows at the bottom edge at u .68 (its pitch now .28; re-film). Nothing else moves on the pair: no hand is
+  free, as on the real thing.
+- GB-302's parts are driven (viewmodel.js driveParts, magPlace; viewmodel-poses.js): the revolver's six empties show in
+  the open cylinder from u .10, slide out of its back under the ejector's press (.18-.26) and are gone; the speedloader
+  comes up in the palm from the pouch (.38), goes onto the cylinder's back (.44-.52), pushes the rounds home (.58-.70)
+  and is gone at the release (.76). The flamer's can and the rotary gun's box ride the palm the way a magazine does
+  (mag windows on flamerTank .24/.44/.56/.74 and minigunBox .16/.37/.49/.64; the place is the part's rest pose, so the
+  hand does not chase the part it is carrying). The launcher: ChatGPT's drum swings a half turn about a hinge parallel
+  to the bore (z, not y), out to the gun's left at its own height with the chambers' backs to the eye, and turns a chamber
+  per round, so the chamber being loaded is always at the open drum's bottom; the support hand thumbs the latch (.05-.10),
+  cups the drum's underside through the swing (.14-.24), three trips pouch -> chamber mouth -> pushed home (.33-.79), a
+  twist of the winding key at the back (.81-.86), pushes it shut (.89). Filmed (fpshot p1-launcher2): reads as an MGL
+  reload; the hand at the bottom chamber is low in the frame (wrist ndc y -0.8) but in it. Missing: a round in the fingers
+  (asked ChatGPT for a loadRound part); the right hand on the grip (GP-20037).
+- viewmodel.js place options for the crew: `part` (a view-gun part; parts deeper than the root compose up: a drum on its
+  hinge), `rootAt` (an offset from the part's origin in the gun's own axes, for a part that turns), `local` (z/y in the
+  part's frame), `magPlace` on a reload (the place the magazine is taken from and seated at, when it is not a well).
+- The chainsaw still has no reload (reloadU stays null): index.html's refuel is instant. Asked Grokbot for a 1.6 s reload
+  on the refuel and a fuel can part (next).
+- Found on the way (10:30Z): c2203b95's GB-301 edit had wiped the pistol, shotgun, revolver and sniper reload branches
+  from index.html (boltHand undefined on every rifle reload; the revolver's cylinder never swung). Grokbot restored them
+  from 16b3adfb (tcl281 164/0, t228 95/0); the commit is queued (D-113).
+- 13:20Z, the sniper (fpshot p5-sniper): GB-301 works. The firing hand leaves the grip for the bolt after the magazine
+  seats (u .61-.95) and between shots (the cycle, the case flying), the support hand stays on the forend. But the bolt
+  handle reads on the LEFT of the receiver in first person: the view mirrors his left-handed hold (D-75, VM.mirror), so
+  every gun's asymmetric parts appear mirrored in first person: the sniper's bolt (gun -x, the gun's right, where Jerry
+  had it moved for the body in GB-146) shows on the left; the revolver's cylinder (also gun -x) swings out to the view's
+  left, which happens to read right; the KR-7's handle (+x) reads on the right. A real right-handed FPS read needs the
+  gun un-mirrored in the view while the hold stays mirrored (CL-309, a day: every gun-local hand place through the flip,
+  the WebGPU winding twins per mesh, the revolver's crane to the gun's left for the body). For Jerry tonight: now or 1.3.
+- The rotary gun's box: 20 cm out on the gun's right and below the frame from the eye at any roll (two tries); the
+  swap reads only as the hand leaving and coming back. A second pass moves the box under the receiver (Grokbot, the
+  model) or lifts the gun into the frame for the swap. The shotgun's port: behind the receiver at roll .55 and 1.15
+  (the forearm then a log on the right); left at .75 with the gun lifted; the shell is seen going in only from the
+  side. Both carried on the audit table as 'partly'.

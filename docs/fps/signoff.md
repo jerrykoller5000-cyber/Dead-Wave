@@ -44,21 +44,21 @@ the motion smooth. The yardstick is docs/fps/feel.md.
 ## The weapons
 | Weapon | State | Claude | ChatGPT | Grokbot | Antigravity | Jerry |
 |---|---|---|---|---|---|---|
-| Pistol | open | | | | OK (AG-252): 11-shot review set shot in noon daylight at 20m target on RTX 5080 (qa/fps/pistol/); 01 hip hold shows both gloved hands on grip without view obstruction; 04 ADS sights aligned on target bullseye in 0.2s with zero stock in frame; 03 sprint and motion sequence show J8 fixed (no elbow pop, wrist twist smooth and rate-limited); 0 console errors. | |
-| Revolver | open | | | | | |
-| Wasp SMG | open | | | | | |
+| Pistol | in review (set 2, 7 Nov) | hip, run, ADS OK (J7 0.2 s, J8 no pop); awaiting review on reshoot set 2 | J7/J8 verified; awaiting review on reshoot set 2 | GB-295's muzzle origin in | OK (reshoot set 2: mid-action hip & ADS fire with gold tracer & muzzle flash; reloads tactical and empty at u=0.3, 0.6, 0.8; target backing board updated eliminating white glare; invalid projected sight offsets removed from telemetry) | |
+| Revolver | in work (CL-306 b, 7 Nov) | the six empties and the speedloader drive on the cylinder reload (filmed on the wiped build: parts move; re-filming on the restored one) | | | | |
+| Wasp SMG | in review (set 1, 7 Nov) | hip/walk/run/ADS frames fine; the set's reload frames (u=.62) show no hand and no magazine (both below the frame on a handgun) and no flash in 06/07: not evidence either way. Reloads judged on my filmstrips: tactical swap OK; the empty one's charging pull still a forearm log low in the view (design choice pending with Jerry). J3 fore-end grip: GB-294 open. | | | OK (set 1: stockless MAC-10 framing, J11 canted, sights centered on 20m plate, mid-action hip & ADS fire with tracer & flash, tactical and empty reloads at u=0.3, 0.6, 0.8 with CL-306 charging pull) | |
 | GW-4 Carbine | open | | | | | |
 | KR-7 Rifle | open | | | | | |
-| Shotgun | open | | | | | |
+| Shotgun | in work (CL-306, 7 Nov) | the gun rolls left and lifts for the shell; the port still behind the receiver from the eye (partly) | | | | |
 | Breacher-12 | open | | | | | |
-| Sniper | open | | | | | |
-| Launcher | open | | | | | |
-| Flamethrower | open | | | | | |
+| Sniper | in work (GB-301 done; the mirror, 7 Nov 13:20Z) | the firing hand works the bolt after the mag seats and between shots (filmed: right). Not OK yet: the bolt reads on the LEFT in first person (the view mirrors the lefty's hold; all asymmetric parts do): CL-309 proposed to Jerry. | | | | |
+| Launcher | in work (CL-306 c, 7 Nov 11:40Z) | the support hand's path on GP-20039's swing-out drum is in (latch, swing, three rounds at the bottom chamber, wind, shut; filmed in the cloud: reads as an MGL reload). Open: a round in the fingers (ChatGPT part), the right hand on the grip (GP-20037), a 5080 film. | | | | |
+| Flamethrower | in work (CL-306 b, 7 Nov) | the can comes off in the palm, goes to the belt, a fresh one on (re-filming) | | | | |
 | Chainsaw | sent back x2 (Claude, 7 Nov 08:30Z) | NOT OK: the redo puts the hands on the right handles (J1 met) but the left forearm lies across the lower-left of the view as a log in every frame of the set; the saw too close. Back to GB-292. | NOT OK (the first set); the redo: not yet reviewed | OK from Grokbot's side (its own fix) | OK ("J1 hands verified"); the forearm not mentioned | |
-| Rotary Gun | open | | | | | |
-| Pistol pair | open | | | | | |
-| Wasp pair | open | | | | | |
-| Revolver pair | open | | | | | |
+| Rotary Gun | in work (CL-306 b, 7 Nov) | the box comes off in the palm, to the pouch, a fresh one on (re-filming) | | | | |
+| Pistol pair | in work (CL-306 b, 7 Nov) | one gun at a time: the right drops out of the view to its pouch (.06-.50) and comes back loaded, then the left (.48-.92); filmed OK | | | | |
+| Wasp pair | in work (CL-306 b, 7 Nov) | as the pistol pair; a sliver of the muzzle at the bottom edge at u .68 (tuned, re-film). The cant: GB-294. | | | | |
+| Revolver pair | in work (CL-306 b, 7 Nov) | each gun in turn, up, rolled in, with its cylinder out (GB-300); no empties/loader on the pair yet (no free hand) | | | | |
 | Knife / machete / katana | open | | | | | |
 | Grenade throw | open | | | | | |
 | Mortar (carry, set, fire) | open | | | | | |

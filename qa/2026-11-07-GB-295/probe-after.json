@@ -1,0 +1,222 @@
+[
+  {
+    "ok": true,
+    "gun": "pistol",
+    "viewMz": [
+      41.8592,
+      -6.202,
+      -19.2011
+    ],
+    "getMz": [
+      41.8592,
+      -6.202,
+      -19.2011
+    ],
+    "bodyMz": [
+      42.0725,
+      -6.1909,
+      -19.3806
+    ],
+    "dViewCm": 0,
+    "dBodyCm": 27.9,
+    "tracer0": [
+      41.861,
+      -6.2021,
+      -19.2009
+    ],
+    "dTracerViewCm": 0.18,
+    "ndcDist": 0.00271,
+    "kind": "bullet",
+    "limitCm": 8,
+    "showing": true,
+    "class": "pistol"
+  },
+  {
+    "ok": true,
+    "gun": "m4",
+    "viewMz": [
+      41.7572,
+      -6.2198,
+      -18.78
+    ],
+    "getMz": [
+      41.7572,
+      -6.2198,
+      -18.78
+    ],
+    "bodyMz": [
+      42.275,
+      -6.2152,
+      -18.9087
+    ],
+    "dViewCm": 0,
+    "dBodyCm": 53.36,
+    "tracer0": [
+      41.757,
+      -6.2196,
+      -18.7804
+    ],
+    "dTracerViewCm": 0.05,
+    "ndcDist": 0.0004,
+    "kind": "bullet",
+    "limitCm": 8,
+    "showing": true,
+    "class": "rifle"
+  },
+  {
+    "ok": true,
+    "gun": "uzi",
+    "viewMz": [
+      41.8358,
+      -6.2083,
+      -19.1554
+    ],
+    "getMz": [
+      41.8358,
+      -6.2083,
+      -19.1554
+    ],
+    "bodyMz": [
+      42.049,
+      -6.2811,
+      -19.3855
+    ],
+    "dViewCm": 0,
+    "dBodyCm": 32.21,
+    "tracer0": [
+      41.8357,
+      -6.2086,
+      -19.155
+    ],
+    "dTracerViewCm": 0.04,
+    "ndcDist": 0.00042,
+    "kind": "bullet",
+    "limitCm": 8,
+    "showing": true,
+    "class": "smg"
+  },
+  {
+    "ok": true,
+    "gun": "shotgun",
+    "viewMz": [
+      41.7261,
+      -6.2001,
+      -18.6805
+    ],
+    "getMz": [
+      41.7261,
+      -6.2001,
+      -18.6805
+    ],
+    "bodyMz": [
+      42.2674,
+      -6.1925,
+      -18.8067
+    ],
+    "dViewCm": 0,
+    "dBodyCm": 55.59,
+    "tracer0": [
+      41.7261,
+      -6.2,
+      -18.6808
+    ],
+    "dTracerViewCm": 0.03,
+    "ndcDist": 0.00017,
+    "kind": "pellet",
+    "limitCm": 8,
+    "showing": true,
+    "class": "shotgun"
+  },
+  {
+    "ok": true,
+    "gun": "sniper",
+    "viewMz": [
+      41.793,
+      -6.2922,
+      -18.3666
+    ],
+    "getMz": [
+      41.793,
+      -6.2922,
+      -18.3666
+    ],
+    "bodyMz": [
+      42.2614,
+      -6.1916,
+      -18.652
+    ],
+    "dViewCm": 0,
+    "dBodyCm": 55.76,
+    "tracer0": [
+      41.793,
+      -6.2923,
+      -18.3664
+    ],
+    "dTracerViewCm": 0.02,
+    "ndcDist": 0.00004,
+    "kind": "bullet",
+    "limitCm": 8,
+    "showing": true,
+    "class": "sniper"
+  },
+  {
+    "ok": true,
+    "gun": "minigun",
+    "viewMz": [
+      41.9401,
+      -6.5224,
+      -18.0377
+    ],
+    "getMz": [
+      41.9401,
+      -6.5224,
+      -18.0377
+    ],
+    "bodyMz": [
+      42.3297,
+      -6.2519,
+      -18.4473
+    ],
+    "dViewCm": 0,
+    "dBodyCm": 62.67,
+    "tracer0": null,
+    "dTracerViewCm": null,
+    "ndcDist": null,
+    "kind": null,
+    "limitCm": 8,
+    "showing": true,
+    "class": "heavy"
+  },
+  {
+    "ok": true,
+    "gun": "launcher",
+    "viewMz": [
+      41.8044,
+      -6.2231,
+      -18.8021
+    ],
+    "getMz": [
+      41.8044,
+      -6.2231,
+      -18.8021
+    ],
+    "bodyMz": [
+      42.2735,
+      -6.2117,
+      -19.084
+    ],
+    "dViewCm": 0,
+    "dBodyCm": 54.75,
+    "tracer0": [
+      41.8044,
+      -6.2231,
+      -18.8021
+    ],
+    "dTracerViewCm": 0,
+    "ndcDist": 0,
+    "kind": "shell-via-getMz",
+    "limitCm": 8,
+    "showing": true,
+    "class": "launcher"
+  }
+]

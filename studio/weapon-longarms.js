@@ -414,7 +414,7 @@ export function makeShotgunModel(ctx) {
     ...profileCurve([-0.27, -0.094], [-0.228, -0.025], [-0.196, -0.035], 5), [-0.155, -0.044]], 0.084, gunPoly, { bevel: 0.012, segs: 3, parent: stock });
   K.slab([[-0.494, 0.055], [-0.464, 0.054], [-0.47, -0.12], [-0.491, -0.124], [-0.496, -0.103]], 0.088, gunRubber, { bevel: 0.008, parent: stock });
   K.slab([[-0.294, 0.047], [-0.45, 0.047], [-0.447, 0.024], [-0.424, 0.014], [-0.326, 0.026]], 0.087, gunPoly, { bevel: 0.007, segs: 3, parent: stock });
-  K.slab(gunBand([[-0.251, -0.044], [-0.204, -0.017], [-0.167, -0.019], [-0.105, -0.062]], 0.02), 0.07, gunPoly, { bevel: 0.008, segs: 3 });
+  K.slab(gunBand([[-0.251, -0.044], [-0.204, -0.017], [-0.167, -0.019], [-0.105, -0.062]], 0.02), 0.07, gunPoly, { bevel: 0.008, segs: 3, parent: stock });   // GB-296: stock wrist with fp-stock
   // Grip centre line is still gripOutline(-0.06, -0.1, 0.16, …, 0.28): the palm stays at the hold.
   // GB-178 (Jerry: grips were butchered): a clean pistol grip: an even front strap, a filled backstrap up into the stock arch on the same centre line and hand anchor (u 0.42, v 0).
   K.slab(shapedGrip(-0.06, -0.1, 0.16, 0.068, 0.28, [
@@ -477,6 +477,11 @@ export function makeShotgunModel(ctx) {
   gun.add(loadShell);
   gun.userData.reloadShell = loadShell;
   gun.userData.baseReloadShellPos = loadShell.position.clone();
+  gun.userData.baseReloadShellRot = loadShell.rotation.clone();
+  // GB-302: Claude drives the loading-port shell via VM_RELOADS (view gun.shell).
+  gun.userData.reloadParts = Object.assign(gun.userData.reloadParts || {}, {
+    reloadShell: { restPos: [0.02, -0.05, 0.22], restRot: [Math.PI / 2, 0, 0], visibleAtRest: false }
+  });
   gunSuppressor(gun, K, 'shotgun');   // CL-95
   return finishGun(gun);
 }

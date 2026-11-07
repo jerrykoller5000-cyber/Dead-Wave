@@ -18,10 +18,10 @@ SHOTS = [
     ("03-run.jpg", "3. RUN / SPRINT (6.4 m/s)", "Sprint carry stance. CL-305 J8 check: no elbow pop up/down; wrist twist rate-limited."),
     ("04-ads-still.jpg", "4. ADS STILL (AIMED)", "Fast 0.2s ADS entry (CL-305 J7). Sights centered on 20.0m target plate. Zero stock intrusion."),
     ("05-ads-moving.jpg", "5. ADS MOVING", "Aimed forward movement (2.0 m/s). Point of aim tracks target with settled springs."),
-    ("06-fire-hip.jpg", "6. FIRE AT HIP", "Muzzle flash & slide cycling rearward. Recoil impulse tracks down bore line."),
-    ("07-fire-ads.jpg", "7. FIRE AIMED (ADS FIRE)", "Aimed fire. Sights remain aligned on target plate during recoil impulse."),
-    ("08-reload-tactical.jpg", "8. RELOAD TACTICAL (5/15)", "Tactical reload: left hand extracts partial magazine, inserts fresh magazine from belt."),
-    ("09-reload-empty.jpg", "9. RELOAD EMPTY (0/15)", "Empty reload: slide locked open, fresh magazine seated, slide release forward."),
+    ("06-fire-hip.jpg", "6. FIRE AT HIP", "Mid-action shot: muzzle flash & gold tracer line leaving barrel; slide cycling rearward."),
+    ("07-fire-ads.jpg", "7. FIRE AIMED (ADS FIRE)", "Mid-action aimed fire: muzzle flash & tracer streak down bore axis; sights track target."),
+    ("08-reload-tactical.jpg", "8. RELOAD TACTICAL (5/15, u=0.60)", "Tactical swap (rounds left): left hand retrieves fresh mag from pouch and guides into well."),
+    ("09-reload-empty.jpg", "9. RELOAD EMPTY (0/15, u=0.60)", "Empty reload (slide locked): left hand seats fresh magazine; slide release/rack follows."),
     ("10-switch-away.jpg", "10. SWITCH AWAY (LOWER)", "Downward holstering transition when swapping weapons. Zero mesh clipping or popping."),
     ("11-switch-to.jpg", "11. SWITCH TO (RAISE)", "Weapon raise and grip acquisition returning to active viewmodel ready stance.")
 ]
@@ -95,9 +95,12 @@ def build_contact_sheet():
         gun_box = s_telem.get("gunBox") or {}
         fill_pct = gun_box.get("fillPct")
         screen_err = s_telem.get("screenError")
+        reload_u = s_telem.get("reloadU")
         
         detail = f"ADS: {ads_val:.2f}"
-        if wrist_r is not None and wrist_l is not None:
+        if reload_u is not None:
+            detail += f" · Reload Progress u: {reload_u:.2f}"
+        elif wrist_r is not None and wrist_l is not None:
             detail += f" · Wrist Bend R: {wrist_r:.2f}rad L: {wrist_l:.2f}rad (max 0.87)"
         if fill_pct is not None:
             detail += f" · Screen Fill: {fill_pct:.1f}%"
@@ -128,7 +131,6 @@ def build_motion_gif():
     gif_frames = []
     for ff in frame_files:
         im = Image.open(ff).resize((640, 360), Image.Resampling.LANCZOS)
-        # Convert to palette mode for clean gif
         pal_im = im.convert("P", palette=Image.Palette.ADAPTIVE, colors=128)
         gif_frames.append(pal_im)
         
