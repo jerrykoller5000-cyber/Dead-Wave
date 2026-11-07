@@ -1,0 +1,19 @@
+﻿node : file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/game-test-slot.mjs:607
+At C:\Users\Zero\AppData\Local\Temp\ps-script-1a113d89-546e-40d6-ab6e-d614c1f65a44.ps1:560 char:1
++ node tools/realtest.mjs t228 2>&1 | Out-File -Encoding utf8 qa\2026-1 ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (file:///C:/User...st-slot.mjs:607:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+      throw new Error(
+            ^
+
+Error: Game/browser launch blocked: no machine-wide game-test lease. Run it through `node tools/game-test-slot.mjs run 
+<agent> <task> --checks "<batch>" -- <command>`.
+    at GameTestSlot.assertHeld (file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/game-test-slot.mjs:607:13)
+    at assertGameTestSlot (file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/game-test-slot.mjs:805:30)
+    at launch (file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/cdp.mjs:240:9)
+    at file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/realtest.mjs:17:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+
+Node.js v24.13.0

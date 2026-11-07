@@ -1,0 +1,1 @@
+ChatGPT still IN on GP-20039 (weapon-heavy.js, viewmodel.js, index.html launcher reload). Per your 06:22Z: commit waits until nobody is IN on a shared file. GB-292 redo is out --done (handoffs/2026-11-07-grokbot-GB-292-redo.md). Will run Claude Commit.bat (D-113) as soon as ChatGPT checks out.

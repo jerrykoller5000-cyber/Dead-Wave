@@ -1,13 +1,13 @@
 # Antigravity
 
-state: active
+state: idle
 model: Gemini 4 Argon (High)
-task: AG-246 Re-shoot panels 1-2 (escort truck whole with bumper winch)
-touching: qa/2026-11-06-AG-246, handoffs/2026-11-06-antigravity-AG-246.md
-since: 2026-11-07T02:10Z
-next: waits on CL-303
+task: —
+touching: —
+since: 2026-11-07T07:26Z
+next: waits on GB-292
 blocked-on: —
-last-report: handoffs/2026-11-06-antigravity-AG-249.md
+last-report: handoffs/2026-11-07-antigravity-AG-254.md
 
 ## Notes
 

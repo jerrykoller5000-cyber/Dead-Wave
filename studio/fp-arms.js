@@ -71,7 +71,10 @@ export function buildViewArm(T, side, mats) {
   const root = new T.Group(); root.name = 'vm-arm-' + (side > 0 ? 'r' : 'l');
   const sleeve = new T.Group(); sleeve.name = 'vm-sleeve'; root.add(sleeve);
   const rolled = new T.Group(); rolled.name = 'vm-rolled'; root.add(rolled);
-  const mesh = (geo, mat, name, parent) => { const m = new T.Mesh(geo, mat); m.name = name; m.castShadow = false; m.receiveShadow = true; m.frustumCulled = false; parent.add(m); return m; };
+  // CL-304 (J6, AG-250): the view arms take no shadow from the world: his own body behind the camera cast its cascaded
+  // shadow onto them, and the sleeves flipped from shadow to sun in one frame as he moved (the pop). Lights and the night's
+  // goggles still light them; a view model is lit without the world's shadows, as in every shooter.
+  const mesh = (geo, mat, name, parent) => { const m = new T.Mesh(geo, mat); m.name = name; m.castShadow = false; m.receiveShadow = false; m.frustumCulled = false; parent.add(m); return m; };
   const fore = loftRings(T, toRings(sleeveRings(L), 0.72, SLIM), 30, { caps: 'first' });
   const meshes = {};
   meshes.fore = mesh(bodyCamoUV(T, fore.geo), mats.uniform, 'vm-forearm', sleeve);
@@ -90,7 +93,7 @@ export function buildViewArm(T, side, mats) {
   for (const [key, mat, pads] of [['glove', mats.glove, mats.pads], ['bare', mats.skin, null]]) {
     const h = new T.Group(); h.name = 'vm-hand-' + key; h.position.set(-L.wrist[0], -L.wrist[1], -L.wrist[2]); wrist.add(h);
     const b = buildHandMeshes({ T, s: side, ox: L.ox, gz: L.gz, mat, padMat: pads || null });
-    for (const k of ['main', 'pads']) { const m = b.meshes[k]; if (!m) continue; m.castShadow = false; m.receiveShadow = true; m.frustumCulled = false; m.name = 'vm-hand-' + key + '-' + k; h.add(m); meshes[key + (k === 'main' ? '' : 'Pads')] = m; }
+    for (const k of ['main', 'pads']) { const m = b.meshes[k]; if (!m) continue; m.castShadow = false; m.receiveShadow = false; m.frustumCulled = false; m.name = 'vm-hand-' + key + '-' + k; h.add(m); meshes[key + (k === 'main' ? '' : 'Pads')] = m; }
     builds.push(b); parts[key] = h;
   }
   const rig = makeHandRig(side, builds, HAND_POSES.relaxed);
@@ -98,7 +101,7 @@ export function buildViewArm(T, side, mats) {
   wrist.scale.setScalar(HAND_SCALE);
   let bridge = null;
   try { bridge = wristTransition(T, rolled, wrist, mats.skin, { ox: L.ox, oz: L.oz, gz: L.gz, scale: HAND_SCALE }); } catch (_) { bridge = null; }
-  if (bridge) { bridge.castShadow = false; bridge.receiveShadow = true; bridge.name = 'vm-wrist-skin'; meshes.bridge = bridge; }
+  if (bridge) { bridge.castShadow = false; bridge.receiveShadow = false; bridge.name = 'vm-wrist-skin'; meshes.bridge = bridge; }
   parts.glove.visible = true; parts.bare.visible = false; rolled.visible = false;
   const arm = { side, root, wrist, upper, rig, layout: L, parts, meshes, bridge };
   // Swap materials (the camo and the glove change at the CIF): { uniform, skin, glove, pads }.

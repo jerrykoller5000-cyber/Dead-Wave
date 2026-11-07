@@ -21,6 +21,11 @@ export function weldSeam(geo, cols, pole = false) {
 function balaclavaNoseRoom(y,c) {
   return .018*Math.max(0,Math.min(1,(y-1.326)/.029))*Math.max(0,c)**16;
 }
+// The half mask rises over the nose and meets the ear line at each cheek,
+// then drops to the nape. The scalp and ears remain uncovered.
+function balaclavaTopY(c,s) {
+  return 1.355 + .046*Math.max(0,c)**5 + .032*Math.abs(s)**4;
+}
 function surface(T, rings, {opening = false, frontOnly = false, wrap = false, cloth = false} = {}) {
   const segments = 32, positions = [], uv = [], indices = [];
   for (let r = 0; r < rings.length; r++) {
@@ -28,7 +33,7 @@ function surface(T, rings, {opening = false, frontOnly = false, wrap = false, cl
     for (let j = 0; j <= segments; j++) {
       const a = -Math.PI + j / segments * Math.PI * 2, c = Math.cos(a), s = Math.sin(a);
       let yy = y;
-      if (wrap && r === rings.length - 1) yy = 1.355 + .046 * Math.max(0, c) ** 5;
+      if (wrap && r === rings.length - 1) yy = balaclavaTopY(c,s);
       if (frontOnly && r === rings.length - 1) yy += .05 * s * s;
       if (opening && r === 4 && c > 0) yy += .015 * c ** 8 + .01 * s ** 4;
       if (opening && r === 5 && c > 0) yy += .019 * c;
@@ -151,21 +156,8 @@ export function buildBalaclava(T, material) {
     [1.309,.09,.151,.091],[1.326,.105,.16,.104],[1.341,.118,.164,.117],[1.355,.123,.166,.123]];
   const front=new T.Mesh(surface(T,rings,{wrap:true,cloth:true}),material);
   front.name='cloth-balaclava';front.castShadow=front.receiveShadow=true;group.add(front);
-  // Hood covers the ears, back and scalp with one eye opening. Its crown sits
-  // inside both the cover and fitted helmet; no new wardrobe item is needed.
-  const hoodGeo=surface(T,[[1.341,.118,.164,.117],[1.355,.123,.166,.123],
-    [1.38,.128,.158,.125],[1.396,.129,.157,.128],[1.403,.130,.157,.129],
-    [1.449,.131,.155,.132],[1.48,.129,.148,.130],[1.51,.12,.132,.123],
-    [1.538,.091,.101,.094],[1.555,.035,.04,.037],[1.56,.001,.001,.001]]);
-  const source=Array.from(hoodGeo.index.array),ix=[];
-  for(let tri=0;tri<source.length;tri+=6){const a=source[tri],row=Math.floor(a/33),j=a%33;
-    const angle=-Math.PI+(j+.5)/32*Math.PI*2;
-    if(row<5&&Math.abs(angle)<1.0)continue;
-    ix.push(...source.slice(tri,tri+6));}
-  hoodGeo.setIndex(ix);hoodGeo.computeVertexNormals();
-  const hood=new T.Mesh(hoodGeo,material);hood.name='balaclava-fitted-hood';hood.castShadow=hood.receiveShadow=true;group.add(hood);
   const edge=[];for(let j=0;j<32;j++){const a=-Math.PI+j/32*Math.PI*2,c=Math.cos(a);
-    edge.push(new T.Vector3(.123*Math.sin(a),1.355+.046*Math.max(0,c)**5-1.22,c>=0?.167*c**.55+balaclavaNoseRoom(1.355,c):-.124*(-c)**.8));}
+    edge.push(new T.Vector3(.123*Math.sin(a),balaclavaTopY(c,Math.sin(a))-1.22,c>=0?.167*c**.55+balaclavaNoseRoom(1.355,c):-.124*(-c)**.8));}
   const hem=new T.Mesh(new T.TubeGeometry(new T.CatmullRomCurve3(edge,true),48,.0014,4,true),material);
   hem.castShadow=hem.receiveShadow=true;group.add(hem);
   const parts=[front,hem].map(mesh=>({mesh,rest:Float32Array.from(mesh.geometry.attributes.position.array)}));

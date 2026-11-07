@@ -1,0 +1,9 @@
+# chatgpt — GP-20038 Flamethrower cans — 2026-11-07
+
+Changed: Fixed the flamer's firing clock so idle time and reload time cannot accumulate as negative cooldown and instantly consume a new fuel can when the trigger is pressed. Continuous fire still advances its tick clock normally. The magazine inventory and HUD boxes needed no changes.
+Files: `index.html` (flamer firing branch, lines near 54185).
+Tests: A direct three-cycle probe extracted the actual flamer branch from `index.html` and used `game/magazines.js` plus `ui/magazine-hud.js`: after each 2.4 s reload and the first 16 ms trigger frame, the loaded can read 59.5/60 and the untouched spare boxes read `[60,60]`, `[60]`, then `[]`; PASS. `node --test game/magazines.test.mjs ui/magazine-hud.test.mjs` → 6 pass, 0 fail. Antigravity's queued live WebGPU check on Jerry's RTX 5080 (`review/GP-20038/telemetry.json`, AG-253) passed three reloads: each fresh can started at 60/60, a brief burst left 59/60, and untouched spare boxes stayed at 60 with 2→1→0 boxes. Two earlier attempts in my headless runner loaded the page but did not reach prep within 45 s; the shared slot was released each time. The coordinated full suite belongs to the committer.
+Screenshots: `review/GP-20038/00-initial-flamer-ready.jpg`, `01-reload-1-burst.jpg`, `02-reload-2-burst.jpg`, `03-reload-3-burst.jpg`, and `hud-flamer-reloads-sheet.jpg`; real GPU at 1080p by Antigravity (AG-253). The sheet shows 60 at start, then 59 loaded after each short burst, while the spare boxes remain full and decline 3→2→1→0.
+Not verified: Cold-load and controlled FPS comparisons were not run; this small firing-clock change adds no objects or work per frame. The existing HUD calls fuel units "Bullets"; that copy was outside this drain fix and remains for a separate text pass.
+Requests: `GP-20038 GPU: three flamer reloads and HUD` sent to Antigravity and answered DONE with AG-253 shots and telemetry.
+Contract changes: None.

@@ -1,3 +1,4 @@
+// query: hqwall=1&quarterwalls=1&shortcuts=1   (CL-304: the HQ ring, the quarter lines and the shortcuts are off by default, D-118)
 // t322 - GB-266 (CL-289 iron, CL-287 W2; D-106): horseshoes hung over a ring gap close it to the dead only.
 // The old man's lead gives four sets (the HUD count); E at a gap hangs one (the count goes down, a line on posts);
 // the dead's field routes round it and a shambler from outside that gap comes in through another one, never across

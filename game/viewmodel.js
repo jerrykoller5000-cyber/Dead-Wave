@@ -272,10 +272,10 @@ export function createViewmodel(ctx) {
       o.instanceMatrix.needsUpdate = true;
       o.userData.vmInstanceVersion = src.instanceMatrix.version;
       if (src.instanceColor) o.instanceColor = src.instanceColor.clone();
-      o.castShadow = false; o.receiveShadow = !!src.receiveShadow; o.frustumCulled = false; o.renderOrder = src.renderOrder || 0;
+      o.castShadow = false; o.receiveShadow = false; o.frustumCulled = false; o.renderOrder = src.renderOrder || 0;   // CL-304 (J6): no world shadow on the view gun either
     } else if (src.isMesh) {
       o = new T.Mesh(geoOf(src.geometry), vmMaterial(src.material));
-      o.castShadow = false; o.receiveShadow = !!src.receiveShadow; o.frustumCulled = false; o.renderOrder = src.renderOrder || 0;
+      o.castShadow = false; o.receiveShadow = false; o.frustumCulled = false; o.renderOrder = src.renderOrder || 0;   // CL-304 (J6): no world shadow on the view gun either
     } else o = new T.Group();
     o.name = src.name; o.position.copy(src.position); o.quaternion.copy(src.quaternion); o.scale.copy(src.scale); o.visible = src.visible;
     pairs.push([src, o]);
@@ -284,6 +284,7 @@ export function createViewmodel(ctx) {
   }
   let gun2 = null;  // CL-301: the pair's other gun (the same record), in the left hand
   function dropGun() {
+    if (arms) { for (const a of [arms.r, arms.l]) if (a) a.twist = null; }   // CL-305: a new gun's twist starts afresh
     if (gun) { gunHolder.remove(gun.root); gun = null; }
     if (gun2) { gunHolder2.remove(gun2.root); gun2 = null; }
   }
@@ -391,7 +392,9 @@ export function createViewmodel(ctx) {
       if (first || !sockets[side]) sockets[side] = { p: _sf.p.clone(), q: _sf.q.clone(), s: _sf.s };
       else lerpF(sockets[side], _sf, k, sockets[side]);
       const authored = VM_SOCKETS[key], tnp = info.tune[key] && info.tune[key][side] && info.tune[key][side].p;
-      const tgt = tnp || (authored && (side === 'r' ? authored.grip : authored.support));
+      // A pistol grip can keep its gun-frame anchor while the glove closes on its
+      // visible side. The launcher uses this to show the trigger hand below the receiver.
+      const tgt = tnp || (authored && (side === 'r' ? (authored.gripContact || authored.grip) : authored.support));
       if (tgt && arms) {
         _target.set(tgt[0], tgt[1], tgt[2]);
         wristSpacePoint(arms[side], 'grip', _contact).multiplyScalar(sockets[side].s).applyQuaternion(sockets[side].q);
@@ -473,6 +476,24 @@ export function createViewmodel(ctx) {
     gun.foot = inMag.applyMatrix4(gun.mag.matrix);
     gun.mag.position.copy(keep.p); gun.mag.quaternion.copy(keep.q);
   }
+  // CL-306 (J13/J19, the audit docs/fps/reloads-audit.md): a reload with rounds left is a tactical one: the magazine comes
+  // out and the fresh one goes in, and NO slide, bolt or charging handle is worked (a chambered round stays). The empty
+  // reload is the authored path as it is. The tactical path is the same path cut after the seat and stretched over the
+  // reload's whole time, so the hands take their time instead of waiting at the end. Built once per reload path.
+  const tacCache = new WeakMap();
+  function tacticalOf(R) {
+    if (!R || !R.mag || !R.rack) return R;   // no rack: a tube, a cylinder, a drum: the same reload either way
+    let T2 = tacCache.get(R); if (T2) return T2;
+    const end = Math.min(0.9, (R.mag.seat || 0.6) + 0.1), k = 1 / end;
+    const hand = R.hand.filter((h) => h[0] <= end && h[1] !== 'work').map((h) => [Math.min(1, h[0] * k), h[1], h[2]]);
+    hand.push([1, 'fore', 'fore']);
+    const gun = R.gun.filter((g) => g[0] <= end).map((g) => [Math.min(1, g[0] * k), g[1]]);
+    gun.push([Math.min(1, end * k + 0.001), null], [1, null]);
+    const mag = { grab: R.mag.grab * k, swapOut: R.mag.swapOut * k, swapIn: R.mag.swapIn * k, seat: R.mag.seat * k };
+    T2 = Object.freeze({ ...R, hand: Object.freeze(hand), gun: Object.freeze(gun), mag: Object.freeze(mag), rack: null, rock: R.rock ? { ...R.rock, out: R.rock.out.map((v) => v * k), in: R.rock.in.map((v) => v * k) } : null, tactical: true });
+    tacCache.set(R, T2); return T2;
+  }
+  const reloadOf = (P, st) => { const R = P.reload && VM_RELOADS[P.reload]; return R && st.reloadU != null && st.reloadEmpty === false ? tacticalOf(R) : R; };
   const POSES = { mag: gripPose(ITEM_POSES.mag), pouch: gripPose(ITEM_POSES.pouch), cup: gripPose(ITEM_POSES.cup), pinch: gripPose(ITEM_POSES.pinch), open: copyPose(HAND_POSES.open) };
   const fingerPose = (name) => (name === 'fore' ? sockets.poseL : POSES[name] || sockets.poseL);
   const _ka = F(), _kb = F(), _pa = copyPose(HAND_POSES.relaxed);
@@ -507,15 +528,28 @@ export function createViewmodel(ctx) {
   // AG-168 (the GPU's first look: the forearms came straight at the eye, the right one across the body): a hand on a
   // grip may turn round it in its fist, so before the wrist bends, the hand turns round its grip channel (its own x
   // through the channel's middle, which stays put) toward its elbow, at most VM.twistMax.
+  // CL-305 (J8, Jerry 7 Nov: "Fps Arms elobow popping up and down on run with pistol"): measured in the cloud (steps-elbow3),
+  // the gun eased smoothly into the sprint pose while the hand's twist ran -0.27 -> -0.6 and then flipped to +0.6 in one
+  // frame (1.19 rad; the forearm followed with 1.08): as the sprint pitches the gun down, the elbow hint passes behind the
+  // grip, atan2 crosses +-pi and the clamp changes side. Now a twist keeps the side it was on while the hint is in the far
+  // half, and changes at most TWIST_RATE rad/s, per arm and per hint (arm.twist[key]); a new gun starts afresh (dropGun).
+  const TWIST_RATE = 5;   // 0.6 rad (the clamp's whole range) in 0.12 s, in step with the sprint's 0.18 s ease; after: the worst frame 0.08 rad (was 1.08)
+  let frameDt = 1 / 60;
   const _ta = V3(), _ty = V3(), _td = V3(), _tc = V3(), _tq = Q(), _tp = V3();
-  function twistToward(arm, W, hint, max = VM.twistMax) {
+  function twistToward(arm, W, hint, max = VM.twistMax, key = 'elbow') {
     _ta.set(1, 0, 0).applyQuaternion(W.q);
     _ty.set(0, 1, 0).applyQuaternion(W.q).addScaledVector(_ta, -_ty.set(0, 1, 0).applyQuaternion(W.q).dot(_ta));
     _td.set(hint[0], hint[1], hint[2]).sub(W.p); _td.addScaledVector(_ta, -_td.dot(_ta));
     if (_ty.lengthSq() < 1e-10 || _td.lengthSq() < 1e-10) return 0;
     _ty.normalize(); _td.normalize();
     let ang = Math.atan2(_tp.crossVectors(_ty, _td).dot(_ta), _ty.dot(_td));
-    ang = clamp(ang, -max, max);
+    const tw = arm.twist || (arm.twist = {}), prev = tw[key];
+    if (prev != null) {
+      if (Math.abs(ang) > Math.PI / 2 && prev !== 0 && Math.sign(ang) !== Math.sign(prev)) ang = Math.sign(prev) * Math.abs(ang);   // the far half: stay on our side
+      ang = clamp(ang, -max, max);
+      ang = clamp(ang, prev - TWIST_RATE * frameDt, prev + TWIST_RATE * frameDt);
+    } else ang = clamp(ang, -max, max);
+    tw[key] = ang;
     wristSpacePoint(arm, 'grip', _tc).multiplyScalar(W.s).applyQuaternion(W.q).add(W.p);   // the channel's middle
     _tq.setFromAxisAngle(_ta, ang);
     W.q.premultiply(_tq);
@@ -557,6 +591,7 @@ export function createViewmodel(ctx) {
   // The view gun's frame for this frame (view space), from the pose, the springs and the reload.
   const _hipQ = Q(), _adsQ = Q(), _hipP = V3(), _adsP = V3(), _gp = V3(), _rq = Q(), _grip = V3(), _cdq = Q(), _ciq = Q(), _lv = V3(), _off = V3(), _rqq = Q();
   const _rpos = [0, 0, 0], _rrot = [0, 0, 0];
+  const _foreWL = F();   // CL-306
   const adsCache = {};   // per gun: the sights' turn and the rear sight (its own space), constants
   function adsOf(key) {
     if (adsCache[key] !== undefined) return adsCache[key];
@@ -651,7 +686,7 @@ export function createViewmodel(ctx) {
     const rq = eulerQ(sp.rot.x[0] + (bs * mixRun(b.yaw) * bk + PS.yaw * spr) * MX, sp.rot.x[1] + bth * br.pitch + PS.pitch * spr + PB.pitch * pu,
       sp.rot.x[2] + (bs * mixRun(b.roll) * bk + PS.roll * spr) * MX, _rqq);
     // the reload's own moves (CL-301: a pair dips out of the view and comes back up loaded)
-    const R = P.reload && VM_RELOADS[P.reload];
+    const R = reloadOf(P, st);   // CL-306: the tactical path when rounds are left
     if (AK && st.reloadU != null) {
       const u = clamp(st.reloadU, 0, 1), D = VM.akimbo.dip, k = smooth(u / 0.22) * (1 - smooth((u - 0.78) / 0.22));
       off.y -= D.down * k; off.z += D.back * k;
@@ -724,6 +759,7 @@ export function createViewmodel(ctx) {
   const _wm = M4(), _mf = F(), _mrel = F(), _wellF = F(), _localF = F(), _wiF = F(), _local2 = F(), _outF = F(), _gi = Q(), _psc = V3(), _mw = V3(), _rockQ = Q(), _rockPivot = V3(), _rockMoved = V3();
   function update(dt, st) {
     dt = Math.min(0.05, Math.max(0, dt || 0));
+    frameDt = dt > 0 ? dt : 1 / 60;   // CL-305: the twist's rate limit
     const candidate = st && st.want && st.weapon && VM_POSES[st.weapon] ? weaponMeshes[st.weapon] : null;
     const needsStockSplit = st && (st.weapon === 'm4' || st.weapon === 'ak' ||
       st.weapon === 'shotgun' || st.weapon === 'aa12' || st.weapon === 'sniper');
@@ -740,7 +776,6 @@ export function createViewmodel(ctx) {
     // The world's scope mask owns the full sniper sight picture above 82% ADS.
     root.visible = active && !(gun && gun.key === 'sniper' && (st.ads || 0) >= 0.82);
     setEyeHide(active, active ? gun.src : null, active && gun2 ? gun2.src : null);
-    if (gun && gun.stock) gun.stock.visible = (st.ads || 0) < 0.35;   // CL-293: the stock at the hip, away down the sights
     if (!active) { S.camQ = null; S.lastPlace = null; return; }
     syncArmMaterials();
     if (gunNodes(gun.src) !== gun.nodes) buildGun(gun.key, !!gun2);
@@ -751,6 +786,9 @@ export function createViewmodel(ctx) {
     gun.src.matrixWorld.decompose(_dp, _dq, _dsc); gun.s = Math.abs(_dsc.x) || 1;
     readSockets(gun.key, !!st.settled, dt);
     mirrorParts(gun); if (gun2) mirrorParts(gun2);
+    // The launcher's butt sits behind the view eye against the shoulder.
+    // Apply this after mirroring or the source restores its visible flag.
+    if (gun.stock) gun.stock.visible = gun.key !== 'launcher' && (st.ads || 0) < 0.35;
     S.ads = st.ads || 0; info.ads = S.ads;
     const AK = gun2 ? (info.tune.akimbo && info.tune.akimbo[gun.key]) || VM.akimbo[gun.key] : null;   // live: info.tune.akimbo = { pistol: {...}, elbowRel }
     gunFrame(P, gun.key, st, dt, AK);
@@ -771,12 +809,13 @@ export function createViewmodel(ctx) {
       if (gun2.work && gun2.work !== gun2.slide && P.workKick) gun2.work.position.z -= P.workKick * k;
     }
     // The reload's bolt/charging-handle pull follows the support hand after the magazine seats.
-    { const Rr = P.reload && VM_RELOADS[P.reload], rk = Rr && Rr.rack, ur = st.reloadU;
+    { const Rr = reloadOf(P, st), rk = Rr && Rr.rack, ur = st.reloadU;
       if (gun.work && rk && ur != null) { const back = smooth((ur - rk[0]) / (rk[1] - rk[0])) * (1 - smooth((ur - rk[2]) / 0.03)); gun.work.position.z -= rk[3] * back; } }
     // the hands (CL-301: a pair has no support hand: the left holds the left gun as the right holds its own, and no
     // reload hands; both guns dip in gunFrame)
-    const R = AK ? null : P.reload && VM_RELOADS[P.reload];
+    const R = AK ? null : reloadOf(P, st);
     const u = R && st.reloadU != null ? clamp(st.reloadU, 0, 1) : null;
+    info.reloadKind = u != null ? (R.tactical ? 'tactical' : 'empty') : null;   // CL-306
     info.reloadU = AK && st.reloadU != null ? clamp(st.reloadU, 0, 1) : u;
     const eR = _eR, eL = _eL;
     const EB = (info.tune[gun.key] && info.tune[gun.key].elbows) || P.elbows;   // CL-293: live tuning
@@ -813,7 +852,7 @@ export function createViewmodel(ctx) {
     // forearms come back toward him from below, then run on along the hand.
     const AKB = AK && ((info.tune.akimbo && info.tune.akimbo.behind) || VM.akimbo.behind);
     const _akh = _eA;
-    if (AKB) { _akh[0] = WR.p.x + AKB[0] * MX; _akh[1] = WR.p.y + AKB[1]; _akh[2] = WR.p.z + AKB[2]; twistToward(arms.r, WR, _akh, VM.akimbo.twistMax); }
+    if (AKB) { _akh[0] = WR.p.x + AKB[0] * MX; _akh[1] = WR.p.y + AKB[1]; _akh[2] = WR.p.z + AKB[2]; twistToward(arms.r, WR, _akh, VM.akimbo.twistMax, 'behind'); }
     if (AKF) followK(WR, eR);
     else if (FOL) follow(WR, eR);
     else if (REL) rel(WR, REL.r, eR);
@@ -824,11 +863,18 @@ export function createViewmodel(ctx) {
     { const tp = (info.tune[gun.key] && info.tune[gun.key].poseL) || (VM_SOCKETS[gun.key] && VM_SOCKETS[gun.key].supportPose); if (tp) poseL = tp; }
     if (AK) {   // CL-301: the left hand on the left gun, the right hand's hold mirrored, the right hand's fingers
       mul(G2, mirrorSocket(SR, _localF), WL);
-      if (AKB) { _akh[0] = WL.p.x - AKB[0] * MX; _akh[1] = WL.p.y + AKB[1]; _akh[2] = WL.p.z + AKB[2]; twistToward(arms.l, WL, _akh, VM.akimbo.twistMax); }
+      if (AKB) { _akh[0] = WL.p.x - AKB[0] * MX; _akh[1] = WL.p.y + AKB[1]; _akh[2] = WL.p.z + AKB[2]; twistToward(arms.l, WL, _akh, VM.akimbo.twistMax, 'behind'); }
       if (AKF) followK(WL, eL); else rel(WL, REL.l, eL);
       twistToward(arms.l, WL, eL); info.handPlace = 'pair';
       poseL = sockets.poseR;
-    } else if (u != null) { poseL = reloadHand(R, u, _localF); mul(G, _localF, WL); }
+    } else if (u != null) {
+      poseL = reloadHand(R, u, _localF); mul(G, _localF, WL);
+      // CL-306 (the audit: the Wasp's and KR-7's charging pulls swept the support forearm across the view, 10 cm from the
+      // eye): during a reload the support elbow stays where the hold keeps it, so the forearm pivots from low left up to
+      // the magazine or the handle instead of standing up through the middle of the view under the raised hand.
+      mul(G, sockets.l, _foreWL);
+      if (FOL) follow(_foreWL, eL); else if (REL) rel(_foreWL, REL.l, eL);
+    }
     else {
       mul(G, sockets.l, WL);
       // A shotgun's support hand stays on the moving forend through each pump stroke.
@@ -837,8 +883,7 @@ export function createViewmodel(ctx) {
       else if (REL) rel(WL, REL.l, eL);
       twistToward(arms.l, WL, eL); info.handPlace = 'fore';
     }
-    if (FOL && u != null) follow(WL, eL);
-    else if (REL && u != null) rel(WL, REL.l, eL);
+    // (CL-306: the reload's elbow is set above, from the hold's wrist)
     mirrorWorn(arms.r, 1); mirrorWorn(arms.l, -1);
     info.wrist.r = poseArm(arms.r, WR, eR, VM.wristMax);
     info.wrist.l = poseArm(arms.l, WL, eL, VM.wristMax);

@@ -236,7 +236,6 @@ export function makeLauncherModel(ctx) {
   K.box(0.024, 0.012, 0.03, gunDark, 0, 0.096, 0.29);
   K.box(0.004, 0.035, 0.004, gunDark, 0, 0.1195, 0.29);
   for (const sx of [-1, 1]) K.box(0.003, 0.03, 0.012, gunDark, sx * 0.012, 0.117, 0.29);
-  K.cyl(0.018, 0.018, 0.5, gunMid, 0, -0.02, 0.12, null, 8);
   // Collapsible stock on its tube, with a pad; pistol grip, trigger guard, trigger.
   // J62 (GP-20016): the stock tube, olive body, rubber pad and stock-side slabs (with their bolts) are one group,
   // gun.userData.fpStock ('fp-stock'), for the view gun to leave out of the eye; third person and the shadow keep it.
@@ -258,28 +257,55 @@ export function makeLauncherModel(ctx) {
   K.slab([[0.0219, -0.062], [0.0173, -0.0725], [0.0179, -0.0788], [0.0223, -0.0832], [0.0177, -0.0888], [0.0101, -0.0832], [0.0067, -0.0715], [0.0101, -0.058]], 0.011, gunAccent, { bevel: 0.002 });
   // 6-chamber drum like a real M32/Milkor: cylinder axis along the bore (+z),
   // chambers parallel to the barrel, circular faces front/rear — not sideways.
+  const drumHinge = new THREE.Group();
+  drumHinge.position.set(-0.14, -0.02, 0.12);
+  K.cyl(0.016, 0.016, 0.15, gunDark, -0.14, -0.02, 0.12, null, 12);
+  K.box(0.14, 0.018, 0.026, gunMid, 0.07, 0, 0, 0, 0, 0, drumHinge, 0.004);
+  const drumLatch = new THREE.Group();
+  drumLatch.position.set(-0.076, 0.057, 0.043);
+  K.box(0.031, 0.011, 0.064, gunDark, 0, 0, 0, 0, 0, 0, drumLatch, 0.003);
+  K.cyl(0.007, 0.007, 0.035, gunAccent, 0, 0, -0.024, drumLatch, 10, 'x');
+  gun.add(drumLatch);
   const drum = new THREE.Group();
-  drum.position.set(0, -0.02, 0.12);
+  drum.position.set(0.14, 0, 0);
+  K.cyl(0.018, 0.018, 0.14, gunMid, 0, 0, 0, drum, 8);
   part(THREE, launcherDrum(THREE), gunMid, drum);
   // The rim sits proud of the cap: coplanar flange/cap faces cause visible depth flicker.
   for (const sz of [-1, 1]) K.lathe([[0.125, sz * 0.0635 - 0.003], [0.143, sz * 0.0635 - 0.003], [0.143, sz * 0.0635 + 0.003], [0.125, sz * 0.0635 + 0.003], [0.125, sz * 0.0635 - 0.003]], gunDark, { parent: drum, seg: 36 });
+  const drumRounds = [];
   for (let i = 0; i < 6; i++) {
     const ang = (i / 6) * Math.PI * 2;
     const cx = Math.sin(ang) * 0.075, cy = Math.cos(ang) * 0.075;
-    K.cyl(0.0305, 0.0305, 0.006, gunDark, cx, cy, 0.026, drum, 16);
-    K.lathe([[0, 0.032], [0.025, 0.032], [0.025, 0.044], [0.024, 0.048], [0.020, 0.053], [0.012, 0.057], [0, 0.058]], gunOlive, { x: cx, y: cy, parent: drum, seg: 16 });
-    K.cyl(0.0255, 0.0255, 0.003, hazardYellow, cx, cy, 0.044, drum, 16);
+    const round = new THREE.Group();
+    K.cyl(0.0305, 0.0305, 0.006, gunDark, cx, cy, 0.026, round, 16);
+    K.lathe([[0, 0.032], [0.025, 0.032], [0.025, 0.044], [0.024, 0.048], [0.020, 0.053], [0.012, 0.057], [0, 0.058]], gunOlive, { x: cx, y: cy, parent: round, seg: 16 });
+    K.cyl(0.0255, 0.0255, 0.003, hazardYellow, cx, cy, 0.044, round, 16);
+    drum.add(round);
+    drumRounds.push(round);
     const fa = ang + Math.PI / 6;
     K.box(0.012, 0.004, 0.083, gunDark, Math.sin(fa) * 0.14, Math.cos(fa) * 0.14, 0, 0, 0, -fa, drum, 0.002);
     for (const z of [-0.043, 0.043]) K.box(0.016, 0.007, 0.01, gunAccent, Math.sin(fa) * 0.138, Math.cos(fa) * 0.138, z, 0, 0, -fa, drum, 0.001);
   }
-  gun.add(drum);
+  // A small rear winding key is reachable only after the cylinder swings out.
+  const drumWinder = new THREE.Group();
+  drumWinder.position.z = -0.071;
+  K.cyl(0.011, 0.011, 0.014, gunAccent, 0, 0, 0, drumWinder, 12);
+  K.box(0.042, 0.009, 0.009, gunDark, 0.019, 0, -0.003, 0, 0, 0, drumWinder, 0.003);
+  drum.add(drumWinder);
+  drumHinge.add(drum);
+  gun.add(drumHinge);
   gun.userData.drum = drum;
+  gun.userData.drumRounds = drumRounds;
+  gun.userData.drumWinder = drumWinder;
+  gun.userData.drumHinge = drumHinge;
+  gun.userData.drumLatch = drumLatch;
+  gun.userData.baseDrumHingeRot = drumHinge.rotation.clone();
+  gun.userData.baseDrumHingePos = drumHinge.position.clone();
   gun.userData.baseDrumRot = drum.rotation.clone();
   gun.userData.baseDrumPos = drum.position.clone();
-  gun.userData.mag = drum;
-  gun.userData.baseMagPos = drum.position.clone();
-  gun.userData.baseMagRot = drum.rotation.clone();
+  gun.userData.mag = drumHinge;
+  gun.userData.baseMagPos = drumHinge.position.clone();
+  gun.userData.baseMagRot = drumHinge.rotation.clone();
   // Unrailed barrel with shallow longitudinal reinforcing ribs and the original foregrip contact.
   K.lathe([[0, 0.2], [0.052, 0.2], [0.052, 0.66], [0, 0.66]], gunAccent, { y: 0.04, seg: 16 });
   for (const x of [0.058, -0.058]) K.box(0.012, 0.03, 0.3, gunDark, x, 0.04, 0.42);

@@ -1,3 +1,4 @@
+// query: hqwall=1&quarterwalls=1&shortcuts=1   (CL-304: the HQ ring, the quarter lines and the shortcuts are off by default, D-118)
 // t319 - CU-210: the valley field, seeded at the HQ, still has a way in once the
 // thicket ring is up. A sealed ring would leave the outside at Infinity.
 (async () => {

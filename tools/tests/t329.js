@@ -1,3 +1,4 @@
+// query: hqwall=1&quarterwalls=1&shortcuts=1   (CL-304: the HQ ring, the quarter lines and the shortcuts are off by default, D-118)
 // t329 - CU-230 (Claude, after CU-229): GP-20015's bridge and ford clearance, held by the suite.
 // The same walk as review/GP-20015/clearance-probe.mjs: both bridges and the four fords,
 // the deck and a step to each side, none of it inside a wall band. J68.

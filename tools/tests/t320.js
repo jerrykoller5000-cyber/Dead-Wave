@@ -1,3 +1,4 @@
+// query: hqwall=1&quarterwalls=1&shortcuts=1   (CL-304: the HQ ring, the quarter lines and the shortcuts are off by default, D-118)
 // t320 - CU-211: the dead walk through the HQ ring's gaps. One shambler at a
 // time, from outside each gap and from halfway between two gaps, with him in
 // the clearing. Then a short night 20, and the same walk with him past the ring.

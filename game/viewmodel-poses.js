@@ -138,7 +138,7 @@ export const VM_POSES = Object.freeze({
   },
   // J60: the bar runs up the middle, with both hands on the two real handles.
   chainsaw: {
-    hip: { at: [0.315, -0.374, -0.452], yaw: 0.55, pitch: 0.45, roll: 0.55 },   // GP-20022: placed by the new rear grip (the saw where it was)   // CL-301 (Jerry, 3 Nov: "Chainsaw... still weird"; his L4D2 refs): the body low right, the bar up to the upper left (was up the middle, the body hiding it)
+    hip: { at: [0.26, -0.23, -0.62], yaw: 0.25, pitch: 0.45, roll: 0.4 },   // GB-292 redo: saw low right, nose up so the bar shows above the left forearm; both hands on their handles in view
     ads: { rear: 0.90 },
     kick: { back: 0, up: 0, side: 0, ads: 1 },
     elbows: { r: [0.35, -0.94, -0.10], l: [-0.35, -0.97, -0.24] },
@@ -164,7 +164,7 @@ export const VM_POSES = Object.freeze({
   },
   launcher: {
     hip: { at: [0.21, -0.21, -0.55], yaw: 0, pitch: 0.035, roll: 0.09 },
-    ads: { rear: 0.60 },   // J62: new leaf and front post stay legible over the receiver at the eye
+    ads: { rear: 0.82 },   // GP-20037: more eye relief shrinks the rear receiver without moving the leaf/front sight line
     kick: { back: 0.11, up: 0.20, side: 0.025, ads: 0.58 },
     elbows: { r: [0.39, -0.74, -0.11], l: [-0.44, -1.10, -0.27] },
     elbowRel: { r: [0.16, -0.26, 0.24], l: [-0.04, -0.34, 0.14] },   // CL-293: the strong arm from the lower right, the support forearm up from the bottom (Jerry's CS references, 3 Nov)
@@ -327,10 +327,14 @@ export const VM_SOCKETS = Object.freeze({
   aa12: { grip: [0, -0.145, -0.166], support: [0, -0.035, 0.36], magFoot: [0, -0.415, 0.05], work: [-0.08, 0.05, 0.18] },
   revolver: { grip: [0, -0.07, -0.04], support: [-0.012, -0.10, -0.014] },   // J57: palm cups the grip, not air beside it
   sniper: { grip: [0, -0.088, -0.117], support: [0, -0.005, 0.35], magFoot: [0, -0.203, 0.02], boltKnob: [-0.13, 0.067, -0.16] },
-  // CL-301 (GP-20022, Jerry's refs): onto the rebuilt saw's handles: the rear throttle grip in line behind the body, the front hoop's top.
-  // Jerry, 4 Nov: "Left hand should have a motorcycle grip on chainsaw palm facing down": the left hand's own axes set outright
-  // (supportBasis: its grip channel along the hoop's top bar, its forearm down and back), the fingers in a fist round the bar.
-  chainsaw: { grip: [0, -0.014, -0.46], support: [-0.01, 0.246, -0.035], supportBasis: { x: [-1, 0, 0], y: [0, -0.85, -0.5] },
+  // CL-301 (GP-20022): rear throttle + front hoop. GB-292 (J1): contacts were already R=rear/L=front but the left fist
+  // sat on the cowling behind the hoop (basis too steep) and the right hand had no gripBasis so the rear throttle read empty.
+  // Right: vertical throttle, palm inward, elbow back; left: motorcycle on the hoop top, palm down, forearm mostly back.
+  // GB-292 redo (Claude's 04:14Z review: one forearm filled the view): elbowFollow runs each forearm along its hand's y, which
+  // the code keeps square to the channel x. With x along the hoop the left forearm could only run back, so it crossed the view
+  // over the rear hand. The left channel now crosses the bar on a diagonal and the forearms run out to the bottom corners.
+  chainsaw: { grip: [0, -0.014, -0.43], gripBasis: { x: [0, -1, 0], y: [0.5, -0.1, -0.85] },
+    support: [-0.01, 0.250, -0.035], supportBasis: { x: [-0.4, 0.2, 0.7], y: [-0.85, -0.3, -0.4] },
     supportPose: { f: [[1.05, 1.15, 1.0, 0], [1.05, 1.15, 1.0, 0], [1.05, 1.15, 1.0, 0], [1.08, 1.2, 1.0, 0]], t: [1.0, -0.3, 0.55] } },   // HAND_POSES.fist
   // CL-301 (Jerry, 3 Nov: "Right hand is sticking through minigun"; GP-20022 rebuilt it to his refs): the rear firing grip
   // behind the housing and the front vertical post on top (ChatGPT's handle centres).
@@ -339,7 +343,9 @@ export const VM_SOCKETS = Object.freeze({
   minigun: { grip: [0, -0.017, -0.52], support: [-0.304, 0.012, 0.16], supportBasis: { x: [0, -1, 0], y: [-0.6, -0.3, -0.74] },
     supportPose: { f: [[1.05, 1.15, 1.0, 0], [1.05, 1.15, 1.0, 0], [1.05, 1.15, 1.0, 0], [1.08, 1.2, 1.0, 0]], t: [1.0, -0.3, 0.55] } },   // HAND_POSES.fist
   flamer: { grip: [0, -0.078, -0.157], support: [0, -0.07, 0.28] },
-  launcher: { grip: [0, -0.088, -0.046], support: [0, -0.075, 0.42] }
+  // The frame stays anchored on the grip centre; the trigger glove closes lower
+  // and on the visible side of that same grip (GP-20037, J4).
+  launcher: { grip: [0, -0.088, -0.046], gripContact: [-0.05, -0.15, -0.10], support: [0, -0.075, 0.42] }
 });
 
 // Reloads in view space. gun: [beat, pose] keys (pose: an offset from the hold, view space: pos m, rot [yaw, pitch,

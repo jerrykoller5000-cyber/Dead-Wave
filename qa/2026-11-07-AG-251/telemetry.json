@@ -1,0 +1,836 @@
+{
+  "timestamp": "2026-11-07T04:13:56.643Z",
+  "task": "AG-251",
+  "decision": "D-118",
+  "gpu": "NVIDIA RTX 5080 (WebGPU Hardware)",
+  "resolution": "1920x1080",
+  "lighting": "Outdoor High Noon Daylight (worldTime = 0.50)",
+  "targetDistance": "20.0 m (Marked Silhouette Target Plate)",
+  "guns": {
+    "01_pistol": {
+      "id": "01",
+      "key": "pistol",
+      "name": "Pistol",
+      "full": "Pistol (M9)",
+      "isPair": false,
+      "hip": {
+        "file": "01-pistol-hip.jpg",
+        "telem": {
+          "weapon": "pistol",
+          "state": "hip",
+          "isPair": false,
+          "firstPerson": true,
+          "ads": 0,
+          "vmActive": true,
+          "vmKey": "pistol",
+          "vmRaise": 1,
+          "akimbo": false,
+          "handPlace": "fore",
+          "stockMeshes": [],
+          "stockInFrame": false,
+          "stockBounds": null,
+          "gunScreenBounds": {
+            "minX": 593.5,
+            "maxX": 946.9,
+            "minY": 554.2,
+            "maxY": 686.9
+          }
+        }
+      },
+      "aimed": {
+        "file": "01-pistol-aimed.jpg",
+        "telem": {
+          "weapon": "pistol",
+          "state": "aimed",
+          "isPair": false,
+          "firstPerson": true,
+          "ads": 1,
+          "vmActive": true,
+          "vmKey": "pistol",
+          "vmRaise": 1,
+          "akimbo": false,
+          "handPlace": "fore",
+          "stockMeshes": [],
+          "stockInFrame": false,
+          "stockBounds": null,
+          "gunScreenBounds": {
+            "minX": 899,
+            "maxX": 936.3,
+            "minY": 612.8,
+            "maxY": 729.5
+          }
+        }
+      }
+    },
+    "02_revolver": {
+      "id": "02",
+      "key": "revolver",
+      "name": "Revolver",
+      "full": "Revolver (.44 Magnum)",
+      "isPair": false,
+      "hip": {
+        "file": "02-revolver-hip.jpg",
+        "telem": {
+          "weapon": "revolver",
+          "state": "hip",
+          "isPair": false,
+          "firstPerson": true,
+          "ads": 0,
+          "vmActive": true,
+          "vmKey": "revolver",
+          "vmRaise": 1,
+          "akimbo": false,
+          "handPlace": "fore",
+          "stockMeshes": [],
+          "stockInFrame": false,
+          "stockBounds": null,
+          "gunScreenBounds": {
+            "minX": 522.5,
+            "maxX": 951.9,
+            "minY": 453.9,
+            "maxY": 606.8
+          }
+        }
+      },
+      "aimed": {
+        "file": "02-revolver-aimed.jpg",
+        "telem": {
+          "weapon": "revolver",
+          "state": "aimed",
+          "isPair": false,
+          "firstPerson": true,
+          "ads": 1,
+          "vmActive": true,
+          "vmKey": "revolver",
+          "vmRaise": 1,
+          "akimbo": false,
+          "handPlace": "fore",
+          "stockMeshes": [],
+          "stockInFrame": false,
+          "stockBounds": null,
+          "gunScreenBounds": {
+            "minX": 261.8,
+            "maxX": 944.9,
+            "minY": 572.2,
+            "maxY": 931.6
+          }
+        }
+      }
+    },
+    "03_uzi": {
+      "id": "03",
+      "key": "uzi",
+      "name": "Wasp SMG",
+      "full": "Wasp SMG",
+      "isPair": false,
+      "hip": {
+        "file": "03-uzi-hip.jpg",
+        "telem": {
+          "weapon": "uzi",
+          "state": "hip",
+          "isPair": false,
+          "firstPerson": true,
+          "ads": 0,
+          "vmActive": true,
+          "vmKey": "uzi",
+          "vmRaise": 1,
+          "akimbo": false,
+          "handPlace": "fore",
+          "stockMeshes": [],
+          "stockInFrame": false,
+          "stockBounds": null,
+          "gunScreenBounds": {
+            "minX": 923.7,
+            "maxX": 953.2,
+            "minY": 564.4,
+            "maxY": 671.4
+          }
+        }
+      },
+      "aimed": {
+        "file": "03-uzi-aimed.jpg",
+        "telem": {
+          "weapon": "uzi",
+          "state": "aimed",
+          "isPair": false,
+          "firstPerson": true,
+          "ads": 1,
+          "vmActive": true,
+          "vmKey": "uzi",
+          "vmRaise": 1,
+          "akimbo": false,
+          "handPlace": "fore",
+          "stockMeshes": [],
+          "stockInFrame": false,
+          "stockBounds": null,
+          "gunScreenBounds": {
+            "minX": 897.6,
+            "maxX": 946.7,
+            "minY": 620,
+            "maxY": 799.2
+          }
+        }
+      }
+    },
+    "04_m4": {
+      "id": "04",
+      "key": "m4",
+      "name": "GW-4 Carbine",
+      "full": "GW-4 Carbine (M4)",
+      "isPair": false,
+      "hip": {
+        "file": "04-m4-hip.jpg",
+        "telem": {
+          "weapon": "m4",
+          "state": "hip",
+          "isPair": false,
+          "firstPerson": true,
+          "ads": 0,
+          "vmActive": true,
+          "vmKey": "m4",
+          "vmRaise": 1,
+          "akimbo": false,
+          "handPlace": "fore",
+          "stockMeshes": [],
+          "stockInFrame": false,
+          "stockBounds": null,
+          "gunScreenBounds": {
+            "minX": 871.5,
+            "maxX": 902.9,
+            "minY": 538.3,
+            "maxY": 615.5
+          }
+        }
+      },
+      "aimed": {
+        "file": "04-m4-aimed.jpg",
+        "telem": {
+          "weapon": "m4",
+          "state": "aimed",
+          "isPair": false,
+          "firstPerson": true,
+          "ads": 1,
+          "vmActive": true,
+          "vmKey": "m4",
+          "vmRaise": 1,
+          "akimbo": false,
+          "handPlace": "fore",
+          "stockMeshes": [],
+          "stockInFrame": false,
+          "stockBounds": null,
+          "gunScreenBounds": {
+            "minX": 874.4,
+            "maxX": 920.8,
+            "minY": 594.3,
+            "maxY": 731.1
+          }
+        }
+      }
+    },
+    "05_ak": {
+      "id": "05",
+      "key": "ak",
+      "name": "KR-7 Rifle",
+      "full": "KR-7 Rifle (AK-47)",
+      "isPair": false,
+      "hip": {
+        "file": "05-ak-hip.jpg",
+        "telem": {
+          "weapon": "ak",
+          "state": "hip",
+          "isPair": false,
+          "firstPerson": true,
+          "ads": 0,
+          "vmActive": true,
+          "vmKey": "ak",
+          "vmRaise": 1,
+          "akimbo": false,
+          "handPlace": "fore",
+          "stockMeshes": [],
+          "stockInFrame": false,
+          "stockBounds": null,
+          "gunScreenBounds": {
+            "minX": 873.6,
+            "maxX": 905.3,
+            "minY": 536.5,
+            "maxY": 611.8
+          }
+        }
+      },
+      "aimed": {
+        "file": "05-ak-aimed.jpg",
+        "telem": {
+          "weapon": "ak",
+          "state": "aimed",
+          "isPair": false,
+          "firstPerson": true,
+          "ads": 1,
+          "vmActive": true,
+          "vmKey": "ak",
+          "vmRaise": 1,
+          "akimbo": false,
+          "handPlace": "fore",
+          "stockMeshes": [],
+          "stockInFrame": false,
+          "stockBounds": null,
+          "gunScreenBounds": {
+            "minX": 881.4,
+            "maxX": 930.6,
+            "minY": 590.4,
+            "maxY": 722.4
+          }
+        }
+      }
+    },
+    "06_shotgun": {
+      "id": "06",
+      "key": "shotgun",
+      "name": "Shotgun",
+      "full": "Shotgun (Remington 870)",
+      "isPair": false,
+      "hip": {
+        "file": "06-shotgun-hip.jpg",
+        "telem": {
+          "weapon": "shotgun",
+          "state": "hip",
+          "isPair": false,
+          "firstPerson": true,
+          "ads": 0,
+          "vmActive": true,
+          "vmKey": "shotgun",
+          "vmRaise": 1,
+          "akimbo": false,
+          "handPlace": "fore",
+          "stockMeshes": [],
+          "stockInFrame": false,
+          "stockBounds": null,
+          "gunScreenBounds": {
+            "minX": 881.1,
+            "maxX": 909.5,
+            "minY": 544,
+            "maxY": 598.7
+          }
+        }
+      },
+      "aimed": {
+        "file": "06-shotgun-aimed.jpg",
+        "telem": {
+          "weapon": "shotgun",
+          "state": "aimed",
+          "isPair": false,
+          "firstPerson": true,
+          "ads": 1,
+          "vmActive": true,
+          "vmKey": "shotgun",
+          "vmRaise": 1,
+          "akimbo": false,
+          "handPlace": "fore",
+          "stockMeshes": [],
+          "stockInFrame": false,
+          "stockBounds": null,
+          "gunScreenBounds": {
+            "minX": 894.5,
+            "maxX": 940.8,
+            "minY": 600,
+            "maxY": 697.7
+          }
+        }
+      }
+    },
+    "07_aa12": {
+      "id": "07",
+      "key": "aa12",
+      "name": "Breacher-12",
+      "full": "Breacher-12 (AA-12)",
+      "isPair": false,
+      "hip": {
+        "file": "07-aa12-hip.jpg",
+        "telem": {
+          "weapon": "aa12",
+          "state": "hip",
+          "isPair": false,
+          "firstPerson": true,
+          "ads": 0,
+          "vmActive": true,
+          "vmKey": "aa12",
+          "vmRaise": 1,
+          "akimbo": false,
+          "handPlace": "fore",
+          "stockMeshes": [],
+          "stockInFrame": false,
+          "stockBounds": null,
+          "gunScreenBounds": {
+            "minX": 855.2,
+            "maxX": 914.5,
+            "minY": 534.5,
+            "maxY": 647.9
+          }
+        }
+      },
+      "aimed": {
+        "file": "07-aa12-aimed.jpg",
+        "telem": {
+          "weapon": "aa12",
+          "state": "aimed",
+          "isPair": false,
+          "firstPerson": true,
+          "ads": 1,
+          "vmActive": true,
+          "vmKey": "aa12",
+          "vmRaise": 1,
+          "akimbo": false,
+          "handPlace": "fore",
+          "stockMeshes": [],
+          "stockInFrame": false,
+          "stockBounds": null,
+          "gunScreenBounds": {
+            "minX": 856.3,
+            "maxX": 960.1,
+            "minY": 594,
+            "maxY": 797.4
+          }
+        }
+      }
+    },
+    "08_sniper": {
+      "id": "08",
+      "key": "sniper",
+      "name": "Sniper Rifle",
+      "full": "Sniper Rifle",
+      "isPair": false,
+      "hip": {
+        "file": "08-sniper-hip.jpg",
+        "telem": {
+          "weapon": "sniper",
+          "state": "hip",
+          "isPair": false,
+          "firstPerson": true,
+          "ads": 0,
+          "vmActive": true,
+          "vmKey": "sniper",
+          "vmRaise": 1,
+          "akimbo": false,
+          "handPlace": "fore",
+          "stockMeshes": [],
+          "stockInFrame": false,
+          "stockBounds": null,
+          "gunScreenBounds": {
+            "minX": 894.4,
+            "maxX": 925,
+            "minY": 529.5,
+            "maxY": 588.1
+          }
+        }
+      },
+      "aimed": {
+        "file": "08-sniper-aimed.jpg",
+        "telem": {
+          "weapon": "sniper",
+          "state": "aimed",
+          "isPair": false,
+          "firstPerson": true,
+          "ads": 1,
+          "vmActive": true,
+          "vmKey": "sniper",
+          "vmRaise": 1,
+          "akimbo": false,
+          "handPlace": "fore",
+          "stockMeshes": [],
+          "stockInFrame": false,
+          "stockBounds": null,
+          "gunScreenBounds": {
+            "minX": 878.2,
+            "maxX": 961.5,
+            "minY": 581.2,
+            "maxY": 746.5
+          }
+        }
+      }
+    },
+    "09_launcher": {
+      "id": "09",
+      "key": "launcher",
+      "name": "Grenade Launcher",
+      "full": "Grenade Launcher",
+      "isPair": false,
+      "hip": {
+        "file": "09-launcher-hip.jpg",
+        "telem": {
+          "weapon": "launcher",
+          "state": "hip",
+          "isPair": false,
+          "firstPerson": true,
+          "ads": 0,
+          "vmActive": true,
+          "vmKey": "launcher",
+          "vmRaise": 1,
+          "akimbo": false,
+          "handPlace": "fore",
+          "stockMeshes": [],
+          "stockInFrame": false,
+          "stockBounds": null,
+          "gunScreenBounds": {
+            "minX": 833.6,
+            "maxX": 899.2,
+            "minY": 541.9,
+            "maxY": 620.4
+          }
+        }
+      },
+      "aimed": {
+        "file": "09-launcher-aimed.jpg",
+        "telem": {
+          "weapon": "launcher",
+          "state": "aimed",
+          "isPair": false,
+          "firstPerson": true,
+          "ads": 1,
+          "vmActive": true,
+          "vmKey": "launcher",
+          "vmRaise": 1,
+          "akimbo": false,
+          "handPlace": "fore",
+          "stockMeshes": [],
+          "stockInFrame": false,
+          "stockBounds": null,
+          "gunScreenBounds": {
+            "minX": 833.4,
+            "maxX": 947.9,
+            "minY": 618.4,
+            "maxY": 759.1
+          }
+        }
+      }
+    },
+    "10_flamer": {
+      "id": "10",
+      "key": "flamer",
+      "name": "Flamethrower",
+      "full": "Flamethrower",
+      "isPair": false,
+      "hip": {
+        "file": "10-flamer-hip.jpg",
+        "telem": {
+          "weapon": "flamer",
+          "state": "hip",
+          "isPair": false,
+          "firstPerson": true,
+          "ads": 0,
+          "vmActive": true,
+          "vmKey": "flamer",
+          "vmRaise": 1,
+          "akimbo": false,
+          "handPlace": "fore",
+          "stockMeshes": [],
+          "stockInFrame": false,
+          "stockBounds": null,
+          "gunScreenBounds": {
+            "minX": 620.1,
+            "maxX": 834.7,
+            "minY": 573.3,
+            "maxY": 817.5
+          }
+        }
+      },
+      "aimed": {
+        "file": "10-flamer-aimed.jpg",
+        "telem": {
+          "weapon": "flamer",
+          "state": "aimed",
+          "isPair": false,
+          "firstPerson": true,
+          "ads": 1,
+          "vmActive": true,
+          "vmKey": "flamer",
+          "vmRaise": 1,
+          "akimbo": false,
+          "handPlace": "fore",
+          "stockMeshes": [],
+          "stockInFrame": false,
+          "stockBounds": null,
+          "gunScreenBounds": {
+            "minX": 496.7,
+            "maxX": 818.9,
+            "minY": 833.5,
+            "maxY": 833.5
+          }
+        }
+      }
+    },
+    "11_chainsaw": {
+      "id": "11",
+      "key": "chainsaw",
+      "name": "Chainsaw",
+      "full": "Chainsaw",
+      "isPair": false,
+      "hip": {
+        "file": "11-chainsaw-hip.jpg",
+        "telem": {
+          "weapon": "chainsaw",
+          "state": "hip",
+          "isPair": false,
+          "firstPerson": true,
+          "ads": 0,
+          "vmActive": true,
+          "vmKey": "chainsaw",
+          "vmRaise": 1,
+          "akimbo": false,
+          "handPlace": "fore",
+          "stockMeshes": [],
+          "stockInFrame": false,
+          "stockBounds": null,
+          "gunScreenBounds": {
+            "minX": 673.7,
+            "maxX": 919.5,
+            "minY": 677.5,
+            "maxY": 971.3
+          }
+        }
+      },
+      "aimed": {
+        "file": "11-chainsaw-aimed.jpg",
+        "telem": {
+          "weapon": "chainsaw",
+          "state": "aimed",
+          "isPair": false,
+          "firstPerson": true,
+          "ads": 1,
+          "vmActive": true,
+          "vmKey": "chainsaw",
+          "vmRaise": 1,
+          "akimbo": false,
+          "handPlace": "fore",
+          "stockMeshes": [],
+          "stockInFrame": false,
+          "stockBounds": null,
+          "gunScreenBounds": {
+            "minX": 484.7,
+            "maxX": 898.4,
+            "minY": 767.5,
+            "maxY": 767.5
+          }
+        }
+      }
+    },
+    "12_minigun": {
+      "id": "12",
+      "key": "minigun",
+      "name": "Rotary Gun",
+      "full": "Rotary Gun (Minigun)",
+      "isPair": false,
+      "hip": {
+        "file": "12-minigun-hip.jpg",
+        "telem": {
+          "weapon": "minigun",
+          "state": "hip",
+          "isPair": false,
+          "firstPerson": true,
+          "ads": 0,
+          "vmActive": true,
+          "vmKey": "minigun",
+          "vmRaise": 1,
+          "akimbo": false,
+          "handPlace": "fore",
+          "stockMeshes": [],
+          "stockInFrame": false,
+          "stockBounds": null,
+          "gunScreenBounds": {
+            "minX": 843,
+            "maxX": 948.8,
+            "minY": 503.1,
+            "maxY": 609.4
+          }
+        }
+      },
+      "aimed": {
+        "file": "12-minigun-aimed.jpg",
+        "telem": {
+          "weapon": "minigun",
+          "state": "aimed",
+          "isPair": false,
+          "firstPerson": true,
+          "ads": 1,
+          "vmActive": true,
+          "vmKey": "minigun",
+          "vmRaise": 1,
+          "akimbo": false,
+          "handPlace": "fore",
+          "stockMeshes": [],
+          "stockInFrame": false,
+          "stockBounds": null,
+          "gunScreenBounds": {
+            "minX": 780.6,
+            "maxX": 956,
+            "minY": 492.1,
+            "maxY": 669.2
+          }
+        }
+      }
+    },
+    "13_pistol_pair": {
+      "id": "13",
+      "key": "pistol",
+      "name": "Pistol Pair",
+      "full": "Pistol Pair (Akimbo)",
+      "isPair": true,
+      "hip": {
+        "file": "13-pistol-pair-hip.jpg",
+        "telem": {
+          "weapon": "pistol",
+          "state": "hip",
+          "isPair": true,
+          "firstPerson": true,
+          "ads": 0,
+          "vmActive": true,
+          "vmKey": "pistol",
+          "vmRaise": 1,
+          "akimbo": false,
+          "handPlace": "fore",
+          "stockMeshes": [],
+          "stockInFrame": false,
+          "stockBounds": null,
+          "gunScreenBounds": {
+            "minX": 565.4,
+            "maxX": 948.1,
+            "minY": 550.4,
+            "maxY": 658.5
+          }
+        }
+      },
+      "aimed": {
+        "file": "13-pistol-pair-aimed.jpg",
+        "telem": {
+          "weapon": "pistol",
+          "state": "aimed",
+          "isPair": true,
+          "firstPerson": true,
+          "ads": 1,
+          "vmActive": true,
+          "vmKey": "pistol",
+          "vmRaise": 1,
+          "akimbo": false,
+          "handPlace": "fore",
+          "stockMeshes": [],
+          "stockInFrame": false,
+          "stockBounds": null,
+          "gunScreenBounds": {
+            "minX": 899.6,
+            "maxX": 937,
+            "minY": 609.6,
+            "maxY": 726.4
+          }
+        }
+      }
+    },
+    "14_uzi_pair": {
+      "id": "14",
+      "key": "uzi",
+      "name": "Wasp Pair",
+      "full": "Wasp Pair (Akimbo)",
+      "isPair": true,
+      "hip": {
+        "file": "14-uzi-pair-hip.jpg",
+        "telem": {
+          "weapon": "uzi",
+          "state": "hip",
+          "isPair": true,
+          "firstPerson": true,
+          "ads": 0,
+          "vmActive": true,
+          "vmKey": "uzi",
+          "vmRaise": 1,
+          "akimbo": false,
+          "handPlace": "fore",
+          "stockMeshes": [],
+          "stockInFrame": false,
+          "stockBounds": null,
+          "gunScreenBounds": {
+            "minX": 935.3,
+            "maxX": 965,
+            "minY": 565.3,
+            "maxY": 671.7
+          }
+        }
+      },
+      "aimed": {
+        "file": "14-uzi-pair-aimed.jpg",
+        "telem": {
+          "weapon": "uzi",
+          "state": "aimed",
+          "isPair": true,
+          "firstPerson": true,
+          "ads": 1,
+          "vmActive": true,
+          "vmKey": "uzi",
+          "vmRaise": 1,
+          "akimbo": false,
+          "handPlace": "fore",
+          "stockMeshes": [],
+          "stockInFrame": false,
+          "stockBounds": null,
+          "gunScreenBounds": {
+            "minX": 899.9,
+            "maxX": 949,
+            "minY": 618.7,
+            "maxY": 798
+          }
+        }
+      }
+    },
+    "15_revolver_pair": {
+      "id": "15",
+      "key": "revolver",
+      "name": "Revolver Pair",
+      "full": "Revolver Pair (Akimbo)",
+      "isPair": true,
+      "hip": {
+        "file": "15-revolver-pair-hip.jpg",
+        "telem": {
+          "weapon": "revolver",
+          "state": "hip",
+          "isPair": true,
+          "firstPerson": true,
+          "ads": 0,
+          "vmActive": true,
+          "vmKey": "revolver",
+          "vmRaise": 1,
+          "akimbo": false,
+          "handPlace": "fore",
+          "stockMeshes": [],
+          "stockInFrame": false,
+          "stockBounds": null,
+          "gunScreenBounds": {
+            "minX": 667.7,
+            "maxX": 1002.4,
+            "minY": 452.8,
+            "maxY": 606.2
+          }
+        }
+      },
+      "aimed": {
+        "file": "15-revolver-pair-aimed.jpg",
+        "telem": {
+          "weapon": "revolver",
+          "state": "aimed",
+          "isPair": true,
+          "firstPerson": true,
+          "ads": 1,
+          "vmActive": true,
+          "vmKey": "revolver",
+          "vmRaise": 1,
+          "akimbo": false,
+          "handPlace": "fore",
+          "stockMeshes": [],
+          "stockInFrame": false,
+          "stockBounds": null,
+          "gunScreenBounds": {
+            "minX": 334.5,
+            "maxX": 950.7,
+            "minY": 572.1,
+            "maxY": 929.1
+          }
+        }
+      }
+    }
+  }
+}

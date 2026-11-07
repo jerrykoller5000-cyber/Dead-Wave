@@ -1,0 +1,166 @@
+{
+  "timestamp": "2026-11-07T06:11:01.886Z",
+  "gpu": "RTX 5080",
+  "cycles": [
+    {
+      "cycle": 1,
+      "preBurstState": {
+        "ammo": 60,
+        "magSnap": {
+          "size": 60,
+          "maxSpare": 5,
+          "loaded": [
+            60
+          ],
+          "spare": [
+            60,
+            60
+          ]
+        }
+      },
+      "postBurstSnap": {
+        "loadedAmmo": 59,
+        "magSnap": {
+          "size": 60,
+          "maxSpare": 5,
+          "loaded": [
+            59
+          ],
+          "spare": [
+            60,
+            60
+          ]
+        },
+        "hud": {
+          "ammoCount": "59",
+          "ammoDetail": "59 / 60  ·  120 Bullets",
+          "glyphs": [
+            {
+              "rounds": "60",
+              "text": "60",
+              "fill": "100%"
+            },
+            {
+              "rounds": "60",
+              "text": "60",
+              "fill": "100%"
+            }
+          ]
+        }
+      },
+      "screenshot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-07-AG-253\\01-reload-1-burst.jpg",
+      "verdict": "PASS"
+    },
+    {
+      "cycle": 2,
+      "preBurstState": {
+        "ammo": 60,
+        "magSnap": {
+          "size": 60,
+          "maxSpare": 5,
+          "loaded": [
+            60
+          ],
+          "spare": [
+            60
+          ]
+        }
+      },
+      "postBurstSnap": {
+        "loadedAmmo": 59,
+        "magSnap": {
+          "size": 60,
+          "maxSpare": 5,
+          "loaded": [
+            59
+          ],
+          "spare": [
+            60
+          ]
+        },
+        "hud": {
+          "ammoCount": "59",
+          "ammoDetail": "59 / 60  ·  60 Bullets",
+          "glyphs": [
+            {
+              "rounds": "60",
+              "text": "60",
+              "fill": "100%"
+            }
+          ]
+        }
+      },
+      "screenshot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-07-AG-253\\02-reload-2-burst.jpg",
+      "verdict": "PASS"
+    },
+    {
+      "cycle": 3,
+      "preBurstState": {
+        "ammo": 60,
+        "magSnap": {
+          "size": 60,
+          "maxSpare": 5,
+          "loaded": [
+            60
+          ],
+          "spare": []
+        }
+      },
+      "postBurstSnap": {
+        "loadedAmmo": 59,
+        "magSnap": {
+          "size": 60,
+          "maxSpare": 5,
+          "loaded": [
+            59
+          ],
+          "spare": []
+        },
+        "hud": {
+          "ammoCount": "59",
+          "ammoDetail": "59 / 60  ·  0 Bullets",
+          "glyphs": []
+        }
+      },
+      "screenshot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-07-AG-253\\03-reload-3-burst.jpg",
+      "verdict": "PASS"
+    }
+  ],
+  "initial": {
+    "weapon": "flamer",
+    "loadedAmmo": 60,
+    "magSnap": {
+      "size": 60,
+      "maxSpare": 5,
+      "loaded": [
+        60
+      ],
+      "spare": [
+        60,
+        60,
+        60
+      ]
+    },
+    "hud": {
+      "ammoCount": "60",
+      "ammoDetail": "60 / 60  ·  180 Bullets",
+      "glyphs": [
+        {
+          "rounds": "60",
+          "text": "60",
+          "fill": "100%"
+        },
+        {
+          "rounds": "60",
+          "text": "60",
+          "fill": "100%"
+        },
+        {
+          "rounds": "60",
+          "text": "60",
+          "fill": "100%"
+        }
+      ]
+    }
+  }
+}

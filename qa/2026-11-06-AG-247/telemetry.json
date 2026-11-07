@@ -1,7 +1,7 @@
 {
   "task": "AG-247",
   "order": "D-116",
-  "date": "2026-11-07T00:39:59.468Z",
+  "date": "2026-11-07T02:32:26.498Z",
   "renderer": "NVIDIA GeForce RTX 5080 WebGPU",
   "resolution": "1920x1080",
   "lighting": "Noon Daylight (worldTime = 0.50)",
@@ -23,16 +23,13 @@
   "stills": {
     "idle": {
       "playerPos": [
-        -1.35,
-        -1.5186761379241944,
-        -3.4999999999999996
+        -1.25,
+        -3.1686761379241943,
+        -6.95
       ],
-      "tpWorld": [
-        -0.95,
-        -2.7686761379241944,
-        -5.35
-      ],
-      "lookYaw": 2.928654304010396
+      "distToTeleprinter": 1.6278820596099712,
+      "distToDutyBoard": 1.9062528688503007,
+      "lookYaw": -0.020170174900161257
     },
     "chatter": {
       "isPrinting": true,
@@ -44,7 +41,8 @@
     },
     "stamp": {
       "isStamping": true,
-      "stampY": 0.75
+      "stampY": 0.75,
+      "stampX": 0.24500000000000002
     }
   }
 }

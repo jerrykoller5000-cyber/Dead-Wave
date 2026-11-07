@@ -66,17 +66,15 @@ async function main() {
 
   await page.evaluate(fs.readFileSync(path.join(ROOT, 'tools/tests/lib.js'), 'utf8'));
 
-  // Start match in First Person inside HQ
-  console.log('[AG-247] Starting match in First Person inside HQ...');
+  // Start match in First Person, noon daylight, holster weapon for unobstructed station view
+  console.log('[AG-247] Starting match in First Person (Noon Daylight, Weapon Holstered)...');
   await page.evaluate(`(async () => {
     const T = window.TT;
     await startMatch(T, 'AG247');
     if (T.clearZombies) T.clearZombies();
     T.setHp(100000);
     T.grantAllWeapons();
-    if (T.isUnarmed()) T.toggleHolster();
-    T.setWeapon(T.WEAPON_ORDER.indexOf('launcher'));
-    T.setAmmoDbg('launcher', 9999);
+    if (!T.isUnarmed()) T.toggleHolster();
     T.setViewFirstDbg(true);
     if (T.setWorldTime) T.setWorldTime(0.50); // Noon daylight
   })()`);
@@ -108,48 +106,52 @@ async function main() {
     stills: {}
   };
 
+  // Helper to position camera at 1.7 m close-up framing both the teleprinter and the board
+  const setCloseFraming = async () => {
+    return await page.evaluate(`(() => {
+      const T = window.TT;
+      const px = -1.25, pz = -6.95;
+      const py = T.sampleHeight(px, pz);
+      T.player.position.set(px, py, pz);
+
+      const targetX = -1.285, targetZ = -5.215;
+      const lookYaw = Math.atan2(targetX - px, targetZ - pz);
+      T.setAimYawDbg(lookYaw);
+      T.setOtsAimDbg(lookYaw, -0.16);
+      T.setVelDbg(0, 0);
+
+      for (let i = 0; i < 30; i++) T.stepFrame(1/60);
+
+      const tp = T.scene.getObjectByName('hq-teleprinter');
+      const db = T.scene.getObjectByName('hq-duty-board');
+      const tpWorld = new T.THREE.Vector3();
+      tp.getWorldPosition(tpWorld);
+      const dbWorld = new T.THREE.Vector3();
+      db.getWorldPosition(dbWorld);
+
+      return {
+        playerPos: [px, py, pz],
+        distToTeleprinter: Math.hypot(tpWorld.x - px, tpWorld.z - pz),
+        distToDutyBoard: Math.hypot(dbWorld.x - px, dbWorld.z - pz),
+        lookYaw
+      };
+    })()`);
+  };
+
   // -------------------------------------------------------------------------
   // STILL 1: TELEPRINTER IDLE BESIDE DUTY BOARD (teleprinter-01-idle.jpg)
-  // Player standing in front of duty board and teleprinter desk.
+  // Close-up at 1.7 m: teleprinter on desk beside duty board, stamp at rest.
   // -------------------------------------------------------------------------
-  console.log('[AG-247] Capturing Shot 1: Teleprinter Idle on Desk beside Duty Board...');
-  const idleInfo = await page.evaluate(`(async () => {
-    const T = window.TT;
-    const db = T.scene.getObjectByName('hq-duty-board');
-    const tp = T.scene.getObjectByName('hq-teleprinter');
-
-    // Teleprinter world position
-    const tpWorld = new T.THREE.Vector3();
-    tp.getWorldPosition(tpWorld);
-
-    // Stand ~2.1m back in Center Bay looking south at the duty board & teleprinter desk
-    const px = tpWorld.x - 0.4;
-    const pz = tpWorld.z + 1.85;
-    const py = tpWorld.y + 1.25;
-
-    T.player.position.set(px, py, pz);
-    const lookYaw = Math.atan2(tpWorld.x - px, tpWorld.z - pz);
-    T.setAimYawDbg(lookYaw);
-    T.setOtsAimDbg(lookYaw, -0.22);
-    T.setVelDbg(0, 0);
-
-    for (let i = 0; i < 30; i++) T.stepFrame(1/60);
-
-    return {
-      playerPos: [px, py, pz],
-      tpWorld: [tpWorld.x, tpWorld.y, tpWorld.z],
-      lookYaw
-    };
-  })()`);
-
+  console.log('[AG-247] Capturing Shot 1: Teleprinter Idle on Desk beside Duty Board (1.7 m)...');
+  const idleInfo = await setCloseFraming();
   await captureShot(page, 'teleprinter-01-idle.jpg');
   telemetry.stills.idle = idleInfo;
 
   // -------------------------------------------------------------------------
   // STILL 2: CHATTERING & FEEDING OUT ORDER SHEET (teleprinter-02-chatter-print.jpg)
-  // Closer view as teleprinter chatters and feeds paper strip out of platen.
+  // Close-up as teleprinter chatters and feeds paper strip out of platen.
   // -------------------------------------------------------------------------
-  console.log('[AG-247] Triggering print() and capturing mid-feed chatter...');
+  console.log('[AG-247] Triggering print() and capturing mid-feed chatter (paper out)...');
   const chatterInfo = await page.evaluate(`(async () => {
     const T = window.TT;
     const tp = T.scene.getObjectByName('hq-teleprinter');
@@ -174,7 +176,7 @@ async function main() {
   // STILL 3: ORDER SHEET FULLY PRINTED (teleprinter-03-sheet-ready.jpg)
   // Complete printed order sheet resting on the front feed ramp.
   // -------------------------------------------------------------------------
-  console.log('[AG-247] Stepping to completion of order feed-out...');
+  console.log('[AG-247] Stepping to completion of order feed-out (sheet on tray)...');
   const readyInfo = await page.evaluate(`(async () => {
     const T = window.TT;
     const tp = T.scene.getObjectByName('hq-teleprinter');
@@ -196,7 +198,7 @@ async function main() {
   // STILL 4: RUBBER STAMP FILING ACTION (teleprinter-04-stamping.jpg)
   // Rubber stamp animated downward to stamp order sheet on the desk/pad.
   // -------------------------------------------------------------------------
-  console.log('[AG-247] Triggering stamp() animation...');
+  console.log('[AG-247] Triggering stamp() animation (stamp down)...');
   const stampInfo = await page.evaluate(`(async () => {
     const T = window.TT;
     const tp = T.scene.getObjectByName('hq-teleprinter');
@@ -205,14 +207,15 @@ async function main() {
     // Trigger stamp
     ctrl.stamp();
 
-    // Step into impact phase (0.45s into 0.55s cycle)
-    for (let i = 0; i < 26; i++) T.stepFrame(1/60);
+    // Step into impact phase (0.33s into 0.55s cycle: progress = 0.60, stamp down)
+    for (let i = 0; i < 20; i++) T.stepFrame(1/60);
 
     const stampMesh = tp.getObjectByName('duty-board-rubber-stamp');
 
     return {
       isStamping: ctrl.isStamping,
-      stampY: stampMesh ? stampMesh.position.y : null
+      stampY: stampMesh ? stampMesh.position.y : null,
+      stampX: stampMesh ? stampMesh.position.x : null
     };
   })()`);
 

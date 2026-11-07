@@ -2,12 +2,12 @@
 
 state: active
 model: Grok Bot
-task: GB-291 Checkpoint commit: story gates first looks, gates reset, playtest build option, last chain words
+task: GB-303 Checkpoint commit: weekend first-person round (CL-304/305, signoff, GB-292 redo)
 touching: git
-since: 2026-11-07T01:46Z
-next: GB-288 The machete's chop on the mast gate's vines (D-116). After t
+since: 2026-11-07T07:47Z
+next: GB-300 The revolver pair's cylinders in the reload (J18, D-119: "th
 blocked-on: —
-last-report: handoffs/2026-11-06-grokbot-GB-290.md
+last-report: handoffs/2026-11-07-grokbot-GB-292-redo.md
 
 ## Notes
 

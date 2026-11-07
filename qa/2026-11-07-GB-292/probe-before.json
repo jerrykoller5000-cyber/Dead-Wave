@@ -1,0 +1,78 @@
+{
+  "weapon": "chainsaw",
+  "active": true,
+  "key": "chainsaw",
+  "raise": 1,
+  "ads": 0,
+  "handPlace": "fore",
+  "flip": true,
+  "wrist": {
+    "r": 0.1281678205548897,
+    "l": 0.059744914668557886
+  },
+  "authored": {
+    "grip": [
+      0,
+      -0.014,
+      -0.46
+    ],
+    "support": [
+      -0.01,
+      0.246,
+      -0.035
+    ]
+  },
+  "hasSocks": true,
+  "hasArms": true,
+  "sockKey": "chainsaw",
+  "sockR": {
+    "p": [
+      0.1012,
+      -0.0163,
+      -0.4511
+    ],
+    "s": 1.8287,
+    "contact": [
+      0,
+      -0.014,
+      -0.46
+    ]
+  },
+  "sockL": {
+    "p": [
+      -0.01,
+      0.1963,
+      -0.1236
+    ],
+    "s": 1.8287,
+    "contact": [
+      -0.01,
+      0.246,
+      -0.035
+    ]
+  },
+  "rContactToGrip": 0,
+  "rContactToSupport": 0.4983,
+  "lContactToGrip": 0.4983,
+  "lContactToSupport": 0,
+  "bodyWR": {
+    "name": "elbowRG",
+    "gunLocal": [
+      0.0981,
+      -0.0205,
+      -0.4344
+    ]
+  },
+  "bodyWL": {
+    "name": "elbowLG",
+    "gunLocal": [
+      -0.0998,
+      0.1508,
+      0.0115
+    ]
+  },
+  "bodyRToGrip": 0.1016,
+  "bodyRToSupport": 0.4922,
+  "bodyLToGrip": 0.5093,
+  "bodyLToSupport": 0.1389
+}

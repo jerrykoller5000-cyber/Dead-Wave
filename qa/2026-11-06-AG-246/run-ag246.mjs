@@ -66,17 +66,15 @@ async function main() {
 
   await page.evaluate(fs.readFileSync(path.join(ROOT, 'tools/tests/lib.js'), 'utf8'));
 
-  // Start match in First Person, high noon daylight for crisp vehicle inspection
-  console.log('[AG-246] Starting match in First Person (Noon Daylight)...');
+  // Start match in First Person, high noon daylight, holster weapon for clear viewing
+  console.log('[AG-246] Starting match in First Person (Noon Daylight, Weapon Holstered)...');
   await page.evaluate(`(async () => {
     const T = window.TT;
     await startMatch(T, 'AG246');
     if (T.clearZombies) T.clearZombies();
     T.setHp(100000);
     T.grantAllWeapons();
-    if (T.isUnarmed()) T.toggleHolster();
-    T.setWeapon(T.WEAPON_ORDER.indexOf('launcher'));
-    T.setAmmoDbg('launcher', 9999);
+    if (!T.isUnarmed()) T.toggleHolster();
     T.setViewFirstDbg(true);
     if (T.setWorldTime) T.setWorldTime(0.50);
     // Ensure story gates & line tools are initialized
@@ -114,39 +112,35 @@ async function main() {
   };
 
   // -------------------------------------------------------------------------
-  // STILL 1: ESCORT TRUCK AT MEDICAL CONVOY (truck-01-convoy-escort.jpg)
+  // STILL 1: ESCORT TRUCK WHOLE FROM 6-8 M WITH BUMPER WINCH (truck-01-convoy-escort.jpg)
   // Behind overturned ambulance, sitting tilted in the ditch with winch mounted.
   // -------------------------------------------------------------------------
-  console.log('[AG-246] Capturing Shot 1: Escort Truck at Convoy with Front Bumper Winch...');
+  console.log('[AG-246] Capturing Shot 1: Escort Truck Whole from ~7 m with Front Bumper Winch...');
   const escortInfo = await page.evaluate(`(async () => {
     const T = window.TT, C = T.chainDbg;
     const wk = C.keyAt('winch');
-    const wreck = T.POI.wrecks[0];
     const escort = T.scene.getObjectByName('story-escort-truck');
 
-    // Position player on the road looking down at the escort truck and ambulance
-    // The winch is at wk.x, wk.z
-    const targetX = wk ? wk.x : escort.position.x;
-    const targetZ = wk ? wk.z : escort.position.z;
-    const targetY = T.sampleHeight(targetX, targetZ);
-
-    // Stand ~5.5m away on the road shoulder facing the truck's front quarter
-    const px = targetX + 4.2;
-    const pz = targetZ - 3.4;
+    // Stand ~7m back on road facing the escort truck 3/4 front view
+    const px = -121.5, pz = 50.0;
     const py = T.sampleHeight(px, pz);
-
     T.player.position.set(px, py, pz);
-    const lookYaw = Math.atan2(targetX - px, targetZ - pz);
+
+    const tx = -116.0, tz = 54.0;
+    const lookYaw = Math.atan2(tx - px, tz - pz);
     T.setAimYawDbg(lookYaw);
-    T.setOtsAimDbg(lookYaw, -0.08);
+    T.setOtsAimDbg(lookYaw, -0.10);
     T.setVelDbg(0, 0);
 
     for (let i = 0; i < 30; i++) T.stepFrame(1/60);
 
     return {
       playerPos: [px, py, pz],
-      winchPos: [targetX, targetY, targetZ],
+      distToCenter: Math.hypot(escort.position.x - px, escort.position.z - pz),
+      distToWinch: wk ? Math.hypot(wk.x - px, wk.z - pz) : null,
       escortPos: [escort.position.x, escort.position.y, escort.position.z],
+      escortRot: escort.rotation.y,
+      winchPos: wk ? [wk.x, wk.y, wk.z] : null,
       winchVisible: wk ? wk.visible : false,
       prompt: C.prompt()
     };
@@ -156,30 +150,35 @@ async function main() {
   telemetry.stills.escort = escortInfo;
 
   // -------------------------------------------------------------------------
-  // STILL 2: ESCORT TRUCK WITH WINCH TAKEN (truck-02-convoy-winch-taken.jpg)
-  // Closer shot at front bumper: winch removed from mounting plate, held by player.
+  // STILL 2: ESCORT TRUCK WITH WINCH TAKEN, SAME FRAMING (truck-02-convoy-winch-taken.jpg)
+  // Exact same camera perspective: winch removed from bumper bracket, held by player.
   // -------------------------------------------------------------------------
-  console.log('[AG-246] Taking winch from escort truck bumper...');
+  console.log('[AG-246] Taking winch from escort truck bumper and capturing Shot 2 (same framing)...');
   const winchTakenInfo = await page.evaluate(`(async () => {
     const T = window.TT, C = T.chainDbg;
     const wk = C.keyAt('winch');
     const escort = T.scene.getObjectByName('story-escort-truck');
 
-    // Walk up right to bumper
-    const bx = wk.x + 1.2;
-    const bz = wk.z - 0.8;
-    const by = T.sampleHeight(bx, bz);
-    T.player.position.set(bx, by, bz);
-    const lookYaw = Math.atan2(wk.x - bx, wk.z - bz);
-    T.setAimYawDbg(lookYaw);
-    T.setOtsAimDbg(lookYaw, -0.15);
-    T.setVelDbg(0, 0);
-
+    // Walk up right to bumper winch to pick it up
+    T.player.position.set(wk.x + 0.8, T.sampleHeight(wk.x + 0.8, wk.z), wk.z);
     for (let i = 0; i < 15; i++) T.stepFrame(1/60);
 
     // Take the winch tool
     const took = C.use();
     for (let i = 0; i < 20; i++) T.stepFrame(1/60);
+
+    // Return to exact same Shot 1 perspective (~7m whole truck view)
+    const px = -121.5, pz = 50.0;
+    const py = T.sampleHeight(px, pz);
+    T.player.position.set(px, py, pz);
+
+    const tx = -116.0, tz = 54.0;
+    const lookYaw = Math.atan2(tx - px, tz - pz);
+    T.setAimYawDbg(lookYaw);
+    T.setOtsAimDbg(lookYaw, -0.10);
+    T.setVelDbg(0, 0);
+
+    for (let i = 0; i < 30; i++) T.stepFrame(1/60);
 
     const wkAfter = C.keyAt('winch');
     const winchObj = escort.userData.winch;

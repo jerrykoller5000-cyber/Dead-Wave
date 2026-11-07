@@ -1,0 +1,20 @@
+{
+ "at": "2026-11-07T03:22:17.486Z",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "results": [
+  {
+   "id": "marine.fresh",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 389,
+   "tris": 32090,
+   "size": [
+    0.779,
+    1.577,
+    0.955
+   ],
+   "error": null
+  }
+ ]
+}

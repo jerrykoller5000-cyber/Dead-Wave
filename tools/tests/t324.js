@@ -1,3 +1,4 @@
+// query: hqwall=1&quarterwalls=1&shortcuts=1   (CL-304: the HQ ring, the quarter lines and the shortcuts are off by default, D-118)
 // t324 - CU-218: each dry opening in the HQ ring is one trail, at most 6 m of arc.
 (async () => {
   const T = window.TT; const out = [];

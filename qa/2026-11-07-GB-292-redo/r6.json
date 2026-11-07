@@ -1,0 +1,16 @@
+{
+ "out": "after",
+ "configs": [
+  {
+   "name": "after-hip"
+  },
+  {
+   "name": "after-ads",
+   "ads": true,
+   "wait": 1500
+  },
+  {
+   "name": "after-hip-again"
+  }
+ ]
+}

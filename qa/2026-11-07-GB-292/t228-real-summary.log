@@ -1,0 +1,6 @@
+﻿ok    t228     95 pass   0 fail  96.7s  (real renderer)
+PASS chainsaw standing: the firing hand closes on the grip (0.0 cm)
+PASS chainsaw standing: the support hand on its anchor (1.6 cm)
+PASS chainsaw walking: the firing hand closes on the grip (0.1 cm)
+PASS chainsaw walking: the support hand on its anchor (1.6 cm)
+1 checks: 95 pass, 0 fail (real renderer)
