@@ -16,7 +16,7 @@ What the reviews measure against. A target, not a rule; where a number is off, t
   manual of arms: the support hand goes to the magazine release or the mag, strips it, takes a fresh one from the belt (off
   screen, low left), seats it with a push, then the charging handle, bolt or slide where the gun has one (only on an empty
   reload); the gun tilts toward the work and comes back; the shotgun loads shell by shell, the revolver swings its cylinder,
-  the launcher breaks open. The arms move as arms do (shoulders and elbows follow the hands, no snapping). Times near
+  the launcher's six-shot drum swings out to the left (an MGL: unlatch, swing, eject, load each chamber, wind, close; GP-20039). The arms move as arms do (shoulders and elbows follow the hands, no snapping). Times near
   Jerry's references (2-5.6 s, docs/fps/feel.md's sources: his GLBs). The counts on the HUD stay true (J12).
 - **Switching:** lowers one gun and raises the next without a jump.
 - **The body in view:** the arms' texture never pops (J6); the balaclava stops at the ears (J5); sleeves and gloves as in third person.

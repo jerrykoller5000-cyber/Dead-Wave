@@ -193,7 +193,9 @@ const VM_STAGE2_RELOADS = Object.freeze({
       [.34, { pos: [-.07, .07, .01], rot: [.18, .26, -.36] }],
       [.50, { pos: [-.07, .07, .01], rot: [.18, .26, -.36] }],
       [.62, { pos: [-.058, .075, .008], rot: [.12, .22, -.28] }],
-      [.79, { pos: [-.025, .045, 0], rot: [.20, .06, -.10] }], [1, null]],
+      [.72, { pos: [-.08, -.10, -.08], rot: [.10, -.10, -.42] }],   // CL-306: for the pull the gun goes down and ahead, rolled left, so the arm crosses low
+      [.84, { pos: [-.08, -.10, -.08], rot: [.10, -.10, -.42] }],
+      [.92, { pos: [-.025, .03, 0], rot: [.18, .04, -.10] }], [1, null]],
     hand: [[0, 'fore', 'fore'], [.10, 'well', 'mag'], [.19, 'below', 'mag'],
       [.34, 'pouch', 'mag'], [.38, 'pouch', 'pouch'], [.50, 'below', 'mag'],
       [.62, 'well', 'mag'], [.66, 'well', 'cup'], [.76, 'work', 'pinch'],
@@ -206,10 +208,14 @@ const VM_STAGE2_RELOADS = Object.freeze({
       pouch: { at: [-.31, -.54, -.35], z: [.25, .9, .3], y: [-.4, -.6, .65] } }
   },
   smg: {
+    // CL-306 (the audit): for the rack the gun goes out and down (ahead 9 cm, down 4) so the top knob is away from the eye
+    // and the support forearm comes up to it from the lower left instead of across the view.
     gun: [[0, null], [.10, { pos: [-.035, .05, .015], rot: [.10, .20, -.23] }],
       [.51, { pos: [-.035, .055, .015], rot: [.10, .22, -.23] }],
       [.58, { pos: [-.03, .065, .008], rot: [.08, .16, -.18] }],
-      [.72, { pos: [-.018, .04, 0], rot: [.14, .08, -.05] }], [1, null]],
+      [.66, { pos: [-.07, -.12, -.10], rot: [.04, -.12, -.30] }],   // (rolled 63 degrees was tried: the forearm filled the centre of the view instead)
+      [.80, { pos: [-.07, -.12, -.10], rot: [.04, -.12, -.30] }],
+      [.90, { pos: [-.018, .02, -.01], rot: [.12, .06, -.05] }], [1, null]],
     hand: [[0, 'fore', 'fore'], [.08, 'well', 'mag'], [.17, 'below', 'mag'],
       [.32, 'pouch', 'mag'], [.36, 'pouch', 'pouch'], [.49, 'below', 'mag'],
       [.58, 'well', 'mag'], [.62, 'well', 'cup'], [.70, 'work', 'pinch'],
@@ -217,7 +223,7 @@ const VM_STAGE2_RELOADS = Object.freeze({
     mag: { grab: .10, swapOut: .315, swapIn: .365, seat: .58 },
     rack: [.70, .74, .78, .045],
     places: { well: { z: [0, .98, .20], y: [-.7, -.2, -.68] }, below: { drop: .12 },
-      work: { at: [0, .115, .11], z: [0, -1, 0], y: [-.75, 0, -.66] },
+      work: { at: [0, .115, .11], z: [0, -1, 0], y: [-.72, -.38, -.58] },   // CL-306: the forearm from the lower left
       pouch: { at: [-.24, -.46, -.29], z: [.25, .9, .3], y: [-.4, -.6, .65] } }
   }
 });
@@ -360,9 +366,9 @@ export const VM_RELOADS = Object.freeze({
       [0.12, { pos: [-0.045, 0.045, 0.03], rot: [0.16, 0.34, -0.42] }],
       [0.55, { pos: [-0.045, 0.05, 0.03], rot: [0.16, 0.36, -0.42] }],
       [0.62, { pos: [-0.04, 0.062, 0.025], rot: [0.14, 0.31, -0.4] }],   // the slap lifts it
-      [0.68, { pos: [-0.03, 0.04, 0.02], rot: [0.26, 0.12, 0.55] }],     // turned to present the slide, rolled in toward the support hand
-      [0.80, { pos: [-0.012, 0.03, 0.045], rot: [0.28, 0.1, 0.6] }],     // pushed out against the rack (AG-171: rolled in, so the
-      [0.90, { pos: [-0.018, 0.035, 0.02], rot: [0.22, 0.12, 0.42] }],   // support forearm comes up from low left, not across the gun)
+      [0.68, { pos: [-0.04, 0.0, -0.03], rot: [0.22, 0.0, 0.42] }],      // CL-306 (the audit: it rolled 90 degrees): a 25-degree tilt in toward the support hand, the gun a little ahead
+      [0.80, { pos: [-0.03, -0.005, -0.02], rot: [0.24, 0.0, 0.45] }],   // pushed out against the rack
+      [0.90, { pos: [-0.02, 0.0, 0.0], rot: [0.2, 0.06, 0.3] }],
       [1.00, null]
     ],
     hand: [

@@ -23515,10 +23515,14 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       offhandMeshes[k] = m;
     }
     function syncDualWeaponParts() {
+      // GB-300: during an akimbo revolver reload each cylinder swings on its own beat
+      // (right then left, matching akimboReloadDip). Do not mirror the right onto the left.
+      const skipPairCyl = reloading && akimboOn() && currentWeapon === 'revolver';
       for (const name of Object.keys(offhandMeshes)) {
         const a = weaponMeshes[name].userData, b = offhandMeshes[name].userData;
         for (const key of ['mag', 'slide', 'cylinder', 'hammer']) {
           if (!a[key] || !b[key]) continue;
+          if (skipPairCyl && name === 'revolver' && (key === 'cylinder' || key === 'mag')) continue;
           b[key].position.copy(a[key].position);
           b[key].quaternion.copy(a[key].quaternion);
           b[key].visible = a[key].visible;
@@ -25394,9 +25398,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // GB-146 (Jerry, 2026-10-09: "The sniper bolt is on the wrong side. Move it to the other side of the gun and make an
     // animation for the bolt action in-between shots"). After a shot that leaves a round the bolt is worked inside the
     // wait the gun already has between shots: up, back (the case flies out the right), forward, down, the support hand
-    // on the knob. Visual only: fireCooldown, the interval, damage and the reload are untouched; the cycle is sized from
-    // the cooldown left when it starts and is over before that runs out. No cycle after the last round: the reload's
-    // own bolt beat works it and throws that case. Beats are fractions of the cycle (from..to of the cooldown).
+    // on the knob (GB-301 / J18: the FIRING hand works it; support stays on the forend). Fire waits while
+    // boltCycle.active (as the shotgun waits on its pump). The cycle is sized from the cooldown left when it starts;
+    // no cycle after the last round: the reload's own bolt beat works it and throws that case. Beats are fractions of
+    // the cycle (from..to of the cooldown).
     const SNIPER_BOLT = { from: 0.08, to: 0.86, reach: 0.2, lift: [0.2, 0.35], back: [0.35, 0.52], eject: 0.48, fwd: [0.56, 0.72], down: [0.72, 0.85] };
     let sniperBoltPrevAmmo = null;
     function sniperBoltPose(gun, open, back) {
@@ -25657,328 +25662,20 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         reloadArmOff.x = reloadArmOff.y = reloadArmOff.z = 0;
         reloadElbowOffR.x = reloadElbowOffR.y = reloadElbowOffR.z = 0;
 
-        // Left hand: fetch → seat slam
-        reloadArmOffL.x = -0.20 * fetchDown - 0.10 * fetchUp - 0.12 * slap;
+        // GB-301 (J18): LH fetch/seat only; the FIRING hand works the bolt after the mag seats.
+        reloadArmOffL.x = -0.20 * fetchDown - 0.10 * fetchUp - 0.08 * slap;
         reloadArmOffL.y = 0.10 * fetchDown + 0.05 * fetchUp;
         reloadArmOffL.z = 0.16 * fetchDown + 0.08 * fetchUp;
-        reloadElbowOffL.x = -0.80 * fetchDown - 0.50 * fetchUp - 1.05 * slap;
+        reloadElbowOffL.x = -0.80 * fetchDown - 0.50 * fetchUp - 0.90 * slap;
         reloadElbowOffL.y = 0.12 * fetchDown;
-        reloadElbowOffL.z = 0.08 * fetchUp - 0.14 * slap;
-
-        const base = GUN_BASE[currentWeapon];
-        if (base) {
-          gun.position.copy(base.pos);
-          gun.rotation.copy(base.rot);
-        }
-
-        if (RELOAD_CLIP && RELOAD_CLIP_GUNS.has(currentWeapon) && gun.userData.mag && gun.userData.baseMagPos) {
-          // CL-84: the clip says what the magazine does; while it is in his hand holdWeapon places it.
-          const mag = gun.userData.mag, bp = gun.userData.baseMagPos, ms = Studio.magAt(RELOAD_CLIP, progress);
-          if (ms.state === 'drop') {
-            const d = ms.k * ms.k;
-            mag.visible = true;
-            mag.position.set(bp.x + 0.03 * d, bp.y - deep * d, bp.z + 0.05 * d);
-            mag.rotation.x = 0.55 * d; mag.rotation.z = 0.22 * d;
-          } else if (ms.state === 'gone') {
-            mag.visible = false;
-          } else if (ms.state === 'seated') {
-            mag.visible = true;
-            mag.position.copy(bp); mag.rotation.x = 0; mag.rotation.z = 0;
-          }
-        } else {
-          reloadMagPose(gun, currentWeapon, progress);   // GB-145: seated, in the palm (holdWeapon) or in the pouch; never in midair
-        }
-      } else if (currentWeapon === 'pistol') {
-        // RH stays in idle grip pose - gun parented to gripR must NOT tumble.
-        // Only a slight muzzle-up tip for magwell access; LH does mag + slide work.
-        const present = _seg(progress, 0.0, 0.18);
-        const recover = _seg(progress, 0.90, 1.0);
-        const tilt = present * (1 - recover);
-
-        const drop = _seg(progress, 0.10, 0.32);
-        const holdGone = progress >= 0.30 && progress < 0.42;
-        const insert = _seg(progress, 0.42, 0.68);
-        const insertSettle = _seg(progress, 0.68, 0.74);
-
-        const fetchDown = _pulse(progress, 0.28, 0.36, 0.44);
-        const fetchUp = _seg(progress, 0.38, 0.48);
-        const slap = _pulse(progress, 0.55, 0.64, 0.72);
-        const rackPull = _seg(progress, 0.72, 0.88);
-        const rackFwd = _seg(progress, 0.88, 0.96);
-        const slideAmt = rackPull * (1 - rackFwd);
-        const rackHand = _pulse(progress, 0.70, 0.80, 0.96);
-
-        if (!reloadSlideCuePlayed && progress >= 0.72) reloadSlideCuePlayed = true;
-        // Eject world mag once when drop window begins (~0.12)
-        if (!reloadMagDropped && progress >= 0.12) {
-          reloadMagDropped = true;
-          spawnDroppedMag();
-        }
-
-        // Slight tip-back only (no big arm/elbow deltas - those caused a full spin on gripR)
-        reloadMountOff.rx = -0.22 * tilt;  // muzzle tips up a little
-        reloadMountOff.rz = 0.05 * tilt;   // tiny magwell roll toward LH
-        reloadMountOff.y = 0;
-        if (viewFirst) { reloadMountOff.rx = -0.06 * tilt; reloadMountOff.rz = FP_RELOAD_CANT * tilt; reloadMountOff.y = -0.03 * tilt; }   // GB-233: the handguns cant like the long guns; GB-228: the zero goes first or it wipes the dip
-        reloadArmOff.x = reloadArmOff.y = reloadArmOff.z = 0;
-        reloadElbowOffR.x = reloadElbowOffR.y = reloadElbowOffR.z = 0;
-
-        // Left hand: grab → guide → slap → rack
-        reloadArmOffL.x = -0.22 * fetchDown - 0.12 * fetchUp - 0.08 * slap - 0.18 * rackHand;
-        reloadArmOffL.y = 0.12 * fetchDown + 0.06 * fetchUp;
-        reloadArmOffL.z = 0.18 * fetchDown + 0.10 * fetchUp + 0.08 * rackHand;
-        reloadElbowOffL.x =
-          -0.85 * fetchDown - 0.55 * fetchUp - 0.95 * slap - 0.70 * rackHand * rackPull;
-        reloadElbowOffL.y = 0.14 * fetchDown + 0.08 * rackHand;
-        reloadElbowOffL.z = 0.10 * fetchUp - 0.12 * slap;
-
-        const base = GUN_BASE.pistol;
-        if (base) {
-          gun.position.copy(base.pos);
-          gun.rotation.copy(base.rot);
-        }
-
-        // Frame/barrel stay planted on the receiver for the whole rack - never move
-        // with the slide (that was the fire-detach bug). Slide may still travel.
-        if (gun.userData.frame) {
-          gun.userData.frame.position.set(0, 0, 0);
-          gun.userData.frame.rotation.set(0, 0, 0);
-        }
-        if (gun.userData.slide && gun.userData.baseSlidePos) {
-          gun.userData.slide.position.set(
-            gun.userData.baseSlidePos.x,
-            gun.userData.baseSlidePos.y,
-            gun.userData.baseSlidePos.z - 0.13 * slideAmt
-          );
-        }
-        reloadMagPose(gun, 'pistol', progress);   // GB-145: seated, in the palm (holdWeapon) or in the pouch; never in midair
-      } else if (currentWeapon === 'shotgun') {
-        // Tube-fed pump reload - RH locked (pistol playbook). No mag drop / elbow tumble.
-        // Phases over dynamic duration (0.45 + need*0.42):
-        //   Ready tip 0.00–0.12 | Load shells 0.12–(0.78 or 0.82) | Optional chamber pump if started empty
-        const need = Math.max(1, shotgunReloadNeed || 1);
-        const startedEmpty = !!shotgunReloadStartedEmpty;
-        const loadStart = 0.12;
-        const loadEnd = startedEmpty ? 0.78 : 0.88;
-        const tip = _seg(progress, 0.0, 0.12) * (1 - _seg(progress, 0.90, 1.0));
-
-        let insertPulse = 0;
-        let shellFlash = 0;
-        if (progress >= loadStart && progress < loadEnd) {
-          const t = (progress - loadStart) / (loadEnd - loadStart);
-          const idx = Math.min(need - 1, Math.floor(t * need));
-          const local = t * need - idx;
-          insertPulse = Math.sin(_clamp01(local) * Math.PI);
-          // Flash strongest mid-insert
-          shellFlash = insertPulse;
-          if (local > 0.5 && idx > reloadInsertCueIdx) { reloadInsertCueIdx = idx; AudioSys.reloadCue('shell'); }
-        }
-
-        // Final chambering pump only if tube was empty at start (no live eject)
-        let chamberPump = 0;
-        if (startedEmpty) {
-          const pb = _seg(progress, 0.80, 0.90);
-          const pf = _seg(progress, 0.90, 0.98);
-          chamberPump = pb * (1 - pf);
-          if (!reloadOpenCuePlayed && progress >= 0.80) {
-            reloadOpenCuePlayed = true;
-            if (AudioSys.shotgunPump) AudioSys.shotgunPump();
-          }
-          if (!reloadCloseCuePlayed && progress >= 0.90) {
-            reloadCloseCuePlayed = true;
-            if (AudioSys.shotgunPump) AudioSys.shotgunPump();
-          }
-        }
-
-        // Modest tip for tube port access - zero RH arm/elbow tumble
-        reloadMountOff.rx = -0.14 * tip - 0.04 * insertPulse;
-        reloadMountOff.rz = 0.04 * tip;
-        reloadMountOff.y = 0.006 * tip;
-        reloadArmOff.x = reloadArmOff.y = reloadArmOff.z = 0;
-        reloadElbowOffR.x = reloadElbowOffR.y = reloadElbowOffR.z = 0;
-
-        // LH: one-by-one shells into magazine tube (under barrel)
-        reloadArmOffL.x = -0.14 * insertPulse - 0.10 * chamberPump - 0.06 * tip;
-        reloadArmOffL.y = 0.06 * insertPulse + 0.04 * tip;
-        reloadArmOffL.z = 0.12 * insertPulse + 0.08 * chamberPump + 0.05 * tip;
-        reloadElbowOffL.x = -0.75 * insertPulse - 0.45 * chamberPump - 0.15 * tip;
-        reloadElbowOffL.y = 0.08 * insertPulse;
-        reloadElbowOffL.z = 0.10 * insertPulse - 0.05 * chamberPump;
-
-        const base = GUN_BASE.shotgun;
-        if (base) {
-          gun.position.copy(base.pos);
-          gun.rotation.copy(base.rot);
-        }
-
-        // Pump stays mostly forward while loading; optional chamber rack at end
-        if (gun.userData.pump && gun.userData.basePumpPos) {
-          const p = gun.userData.pump;
-          p.position.set(
-            gun.userData.basePumpPos.x,
-            gun.userData.basePumpPos.y,
-            gun.userData.basePumpPos.z - 0.12 * chamberPump
-          );
-        }
-
-        // GB-145: the shell rides in his palm from the pouch to the port (holdWeapon places it), then is pushed into
-        // the port with the hand on it; hidden otherwise (it used to flash at the port with no hand near it).
-        if (gun.userData.reloadShell && gun.userData.baseReloadShellPos) {
-          const rs = gun.userData.reloadShell;
-          const bp = gun.userData.baseReloadShellPos;
-          const ss = reloadShellState(progress);
-          const k = ss === 'port' ? _seg(progress, 0.56, 0.72) : 0;
-          rs.visible = ss === 'hand' || ss === 'port';
-          rs.position.set(bp.x, bp.y - 0.02 * (1 - k), bp.z - 0.03 * (1 - k));
-          rs.scale.setScalar(1);
-        }
-      } else if (currentWeapon === 'revolver') {
-        // Real cylinder reload - RH locked (pistol playbook). No elbow tumble / full 360 spin.
-        // Phases over dynamic duration (0.55 + need*0.38):
-        //   Open 0.00–0.18 | Eject ~0.16–0.28 | Load 0.28–0.78 | Close 0.78–1.00
-        const need = Math.max(1, Math.ceil((revolverReloadNeed || 1) / (akimboOn() ? 2 : 1)));
-        const openAmt = _seg(progress, 0.0, 0.16) * (1 - _seg(progress, 0.80, 0.96));
-        const tip = _seg(progress, 0.0, 0.14) * (1 - _seg(progress, 0.84, 1.0));
-        const ejector = _pulse(progress, 0.14, 0.20, 0.28);
-        const closeAmt = _seg(progress, 0.78, 0.96);
-        const hammerCock = _pulse(progress, 0.88, 0.94, 1.0);
-
-        // Load loop: equal slices across 0.28–0.78
-        const loadStart = 0.28;
-        const loadEnd = 0.78;
-        let insertPulse = 0;
-        let chamberStep = 0;
-        if (progress >= loadStart && progress < loadEnd) {
-          const t = (progress - loadStart) / (loadEnd - loadStart);
-          const idx = Math.min(need - 1, Math.floor(t * need));
-          const local = t * need - idx;
-          insertPulse = Math.sin(_clamp01(local) * Math.PI);
-          chamberStep = idx + _smooth(local);
-        } else if (progress >= loadEnd) {
-          chamberStep = need;
-        }
-
-        // Modest mount tip-back only - zero RH arm/elbow tumble
-        reloadMountOff.rx = -0.16 * tip;
-        reloadMountOff.rz = 0.05 * tip;
-        reloadMountOff.y = 0.008 * tip;
-        if (viewFirst) { reloadMountOff.rx = -0.06 * tip; reloadMountOff.rz = FP_RELOAD_CANT * tip; reloadMountOff.y = -0.03 * tip; }   // GB-233: the handguns cant like the long guns; GB-228: the zero goes first or it wipes the dip
-        reloadArmOff.x = reloadArmOff.y = reloadArmOff.z = 0;
-        reloadElbowOffR.x = reloadElbowOffR.y = reloadElbowOffR.z = 0;
-
-        // LH: open assist + per-round insert beats + close nudge
-        reloadArmOffL.x = -0.10 * openAmt - 0.16 * insertPulse - 0.06 * closeAmt;
-        reloadArmOffL.y = 0.08 * openAmt + 0.05 * insertPulse;
-        reloadArmOffL.z = 0.14 * openAmt + 0.10 * insertPulse + 0.05 * closeAmt;
-        reloadElbowOffL.x = -0.55 * openAmt - 0.85 * insertPulse - 0.25 * closeAmt;
-        reloadElbowOffL.y = 0.10 * openAmt + 0.08 * insertPulse;
-        reloadElbowOffL.z = 0.12 * openAmt - 0.06 * insertPulse;
-
-        const base = GUN_BASE.revolver;
-        if (base) {
-          gun.position.copy(base.pos);
-          gun.rotation.copy(base.rot);
-        }
-
-        // J57: the crane is on gun-local -x, so the cylinder opens toward it
-        // (screen-left in the mirrored first-person view), not across the gun.
-        if (gun.userData.cylinder) {
-          const cyl = gun.userData.cylinder;
-          const bp = gun.userData.baseCylinderPos || gun.userData.baseMagPos;
-          const br = gun.userData.baseCylinderRot || gun.userData.baseMagRot;
-          if (bp && br) {
-            const swing = openAmt;
-            cyl.position.set(
-              bp.x - 0.095 * swing - 0.012 * ejector,
-              bp.y - 0.008 * swing,
-              bp.z + 0.01 * swing
-            );
-            cyl.rotation.set(
-              br.x,
-              br.y - 0.16 * swing,
-              br.z + chamberStep * (Math.PI * 2 / 6)
-            );
-          }
-        }
-
-        // Optional ejector-rod nudge during eject window
-        if (gun.userData.hammer && gun.userData.baseHammerRot) {
-          const hm = gun.userData.hammer;
-          hm.rotation.x = gun.userData.baseHammerRot.x - 0.55 * hammerCock;
-        }
-
-        // Eject only spent casings once cylinder is open
-        if (!revolverEjectDone && progress >= 0.18) {
-          revolverEjectDone = true;
-          const n = Math.max(0, revolverReloadSpent | 0);
-          const right = akimboOn() ? Math.ceil(n / 2) : n;
-          const left = n - right;
-          for (let i = 0; i < right; i++) spawnRevolverEjectCasing(i, right);
-          for (let i = 0; i < left; i++) spawnRevolverEjectCasing(i, left, offhandMeshes.revolver);
-        }
-        if (!reloadOpenCuePlayed && progress >= 0.06) {
-          reloadOpenCuePlayed = true;
-          if (AudioSys.revolverCylinder) AudioSys.revolverCylinder();
-        }
-        if (progress >= loadStart && progress < loadEnd) {
-          const tIns = (progress - loadStart) / (loadEnd - loadStart);
-          const idx = Math.min(need - 1, Math.floor(tIns * need));
-          if (idx > reloadInsertCueIdx) {
-            reloadInsertCueIdx = idx;
-            if (AudioSys.revolverSpin) AudioSys.revolverSpin();
-            else if (AudioSys.magThud) AudioSys.magThud();
-          }
-        }
-        if (!reloadCloseCuePlayed && progress >= 0.82) {
-          reloadCloseCuePlayed = true;
-          if (AudioSys.revolverCylinder) AudioSys.revolverCylinder();
-        }
-      } else if (currentWeapon === 'sniper') {
-        // RH locked (same rule as pistol) - tip-back for magwell only; LH fetch/seat; bolt after seat.
-        const present = _seg(progress, 0.0, 0.16);
-        const recover = _seg(progress, 0.92, 1.0);
-        const tilt = present * (1 - recover);
-
-        const drop = _seg(progress, 0.08, 0.28);
-        const holdGone = progress >= 0.28 && progress < 0.42;
-        const insert = _seg(progress, 0.42, 0.58);
-        const insertSettle = _seg(progress, 0.58, 0.64);
-
-        const fetchDown = _pulse(progress, 0.24, 0.32, 0.40);
-        const fetchUp = _seg(progress, 0.34, 0.44);
-        const slap = _pulse(progress, 0.48, 0.56, 0.64);
-
-        // Bolt cycle after mag seated: lift → pull → push → close
-        const boltLift = _seg(progress, 0.64, 0.72);
-        const boltPull = _seg(progress, 0.70, 0.80);
-        const boltPush = _seg(progress, 0.80, 0.90);
-        const boltClose = _seg(progress, 0.88, 0.96);
-        const boltOpen = boltLift * (1 - boltClose);
-        const boltBack = boltPull * (1 - boltPush);
-        const boltHand = _pulse(progress, 0.62, 0.76, 0.96);
-
-        if (!reloadSlideCuePlayed && progress >= 0.66) reloadSlideCuePlayed = true;
-        if (!reloadMagDropped && progress >= 0.12) {
-          reloadMagDropped = true;
-          spawnDroppedMag();
-        }
-
-        // Slight tip-back only - zero RH arm/elbow tumble
-        reloadMountOff.rx = -0.20 * tilt;
-        reloadMountOff.rz = 0.04 * tilt;
-        reloadMountOff.y = 0;
-        if (viewFirst) { reloadMountOff.rx = -0.08 * tilt; reloadMountOff.rz = FP_RELOAD_CANT_DEEP * tilt; reloadMountOff.y = -0.07 * tilt; }   // GB-233: deeper cant and a dip, the magazine seen going in; GB-228: the zero goes first
-        reloadArmOff.x = reloadArmOff.y = reloadArmOff.z = 0;
-        reloadElbowOffR.x = reloadElbowOffR.y = reloadElbowOffR.z = 0;
-
-        // Left hand: fetch → seat → assist bolt
-        reloadArmOffL.x = -0.20 * fetchDown - 0.10 * fetchUp - 0.08 * slap - 0.14 * boltHand;
-        reloadArmOffL.y = 0.10 * fetchDown + 0.05 * fetchUp;
-        reloadArmOffL.z = 0.16 * fetchDown + 0.08 * fetchUp + 0.10 * boltHand;
-        reloadElbowOffL.x =
-          -0.80 * fetchDown - 0.50 * fetchUp - 0.90 * slap - 0.55 * boltHand * boltBack;
-        reloadElbowOffL.y = 0.12 * fetchDown + 0.10 * boltHand;
-        reloadElbowOffL.z = 0.08 * fetchUp - 0.10 * slap + 0.08 * boltOpen;
+        reloadElbowOffL.z = 0.08 * fetchUp - 0.10 * slap;
+        // RH leaves the grip onto the bolt (lift / pull / push / close), then returns.
+        reloadArmOff.x = -0.10 * boltHand - 0.06 * boltBack;
+        reloadArmOff.y = 0.04 * boltOpen;
+        reloadArmOff.z = -0.12 * boltHand - 0.04 * boltOpen;
+        reloadElbowOffR.x = -0.45 * boltHand - 0.35 * boltBack;
+        reloadElbowOffR.y = 0.08 * boltHand;
+        reloadElbowOffR.z = 0.06 * boltOpen;
 
         const base = GUN_BASE.sniper;
         if (base) {
@@ -50763,6 +50460,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (isMagazineWeapon(currentWeapon) ? !magazineStore[currentWeapon]?.spare.length : reserveOf(currentWeapon) <= 0) return false;
       if (isMagazineWeapon(currentWeapon) && !reloadGainsMagazine(currentWeapon)) return false;
       if (currentWeapon === 'shotgun' && shotgunPumping) return false;
+      if (currentWeapon === 'sniper') {
+        const _bs = weaponMeshes.sniper && weaponMeshes.sniper.userData.boltCycle;
+        if (_bs && _bs.active) return false;
+      }
       autoReloadT += dt;
       if (autoReloadT < AUTO_RELOAD_DELAY) return false;
       autoReloadT = 0;
@@ -51507,6 +51208,22 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       st.stream = flamerOn && currentWeapon === 'flamer';   // CL-293 (J59): the flamer's steady pushback
       st.reloadU = reloading ? _clamp01(1 - reloadTimer / Math.max(0.05, reloadAnimDuration || 1)) : null;
       st.reloadEmpty = reloading ? reloadWasEmpty : null;   // CL-306: tactical (rounds left) or empty
+      // GB-301: between shots the firing hand's weight on the bolt (0..1); the viewmodel rides the bolt knob.
+      { const _bs = (!reloading && currentWeapon === 'sniper' && weaponMeshes.sniper)
+          ? weaponMeshes.sniper.userData.boltCycle : null;
+        st.boltHand = (_bs && _bs.active) ? (_bs.hand || 0) : 0;
+        // Reload work window: same signal so FP RH takes the bolt after the mag seats.
+        if (reloading && currentWeapon === 'sniper' && RELOAD_PLAN.sniper) {
+          const u = _clamp01(1 - reloadTimer / Math.max(0.05, reloadAnimDuration || 1));
+          const K = RELOAD_PLAN.sniper.keys;
+          let i = 0; while (i < K.length - 1 && u >= K[i + 1][0]) i++;
+          const a = K[i][1], b = K[Math.min(K.length - 1, i + 1)][1];
+          if (a === 'work' || b === 'work') {
+            const t = (i < K.length - 1) ? _smooth((u - K[i][0]) / Math.max(1e-4, K[i + 1][0] - K[i][0])) : 0;
+            st.boltHand = Math.max(st.boltHand, a === 'work' && b === 'work' ? 1 : (a === 'work' ? 1 - t : t));
+          }
+        }
+      }
       // AG-168 (defect 3): the hands' places on the gun are read off him only at rest: settled, level, not aimed, standing.
       st.settled = holdW > 0.98 && !reloading && Math.abs(OTS.pitch) < 0.35 && !diving() && fpAdsW < 0.01 && hypot(velX, velZ) < 0.3;
       viewmodel.update(dt, st);
@@ -52995,14 +52712,24 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       } else if (reloading && RELOAD_PLAN[currentWeapon]) {
         // GB-145: the support hand follows the gun's reload plan; a magazine or a shell between the well and the pouch
         // rides in the palm (placed once the arm is solved, below).
+        // GB-301 (J18): sniper 'work' is the firing hand on the bolt — support stays on the forend for those beats.
         const u = _clamp01(1 - reloadTimer / Math.max(0.05, reloadAnimDuration || WEAPON_STATS[currentWeapon].reload));
-        palmItem = reloadSupportTarget(currentWeapon, u, gun, fore, ud, torso);
+        if (currentWeapon === 'sniper') {
+          const K = RELOAD_PLAN.sniper.keys;
+          let i = 0; while (i < K.length - 1 && u >= K[i + 1][0]) i++;
+          const a = K[i][1], b = K[Math.min(K.length - 1, i + 1)][1];
+          if (a === 'work' || b === 'work') {
+            /* fore stays on forend */ boltWork = 0;
+          } else {
+            palmItem = reloadSupportTarget(currentWeapon, u, gun, fore, ud, torso);
+          }
+        } else {
+          palmItem = reloadSupportTarget(currentWeapon, u, gun, fore, ud, torso);
+        }
       } else if (!reloading && currentWeapon === 'sniper' && gun.userData.bolt && gun.userData.boltCycle && gun.userData.boltCycle.hand > 0) {
-        // GB-146: between shots the support hand goes to the bolt's knob (the gun's right) and rides it through the cycle.
-        const bolt = gun.userData.bolt;
-        bolt.updateMatrixWorld(true);
-        boltWork = gun.userData.boltCycle.hand;
-        fore.lerp(bolt.localToWorld(_rsp.work.copy(bolt.userData.gb145Grab || reloadGrabPoint(bolt, 'bolt'))), boltWork);
+        // GB-301: bolt animates; FP firing hand rides it via st.boltHand. 3P RH leave-grip skipped (gun is parented
+        // to gripR — not cheap). Support stays on the forend.
+        boltWork = 0;
       } else if (reloading && gun.userData.mag !== undefined) {
         const st = WEAPON_STATS[currentWeapon];
         const u = _clamp01(1 - reloadTimer / Math.max(0.05, reloadAnimDuration || st.reload));
@@ -53017,7 +52744,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         else fore.lerp(well, 1 - _smooth((u - 0.8) / 0.2));
       }
       // CL-122: the support palm onto the forend or the foregrip; it lets go of the roll through a magazine change.
-      handRollLW += ((reloading ? 0 : 1 - boltWork) - handRollLW) * _lerpK(12, dt);   // GB-146: and off the forend for the bolt
+      // GB-301: bolt work is the firing hand; support keeps its forend roll (off only while swapping the mag).
+      handRollLW += ((reloading ? 0 : 1) - handRollLW) * _lerpK(12, dt);
       // CU-100: the forend (the foregrip, the saw's handle) through the fist and the hand turned onto it at the wrist,
       // fading to the hand point and a resting wrist as it lets go for a magazine or the bolt; the pistol and the
       // revolver keep their cup round the firing fist as it was.
@@ -54248,6 +53976,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         fireCooldown -= dt;
         if (reloading || won || gameOver || !gameStarted) return;
         if (currentWeapon === 'shotgun' && shotgunPumping) return;
+        // GB-301: the sniper's shot cadence waits for the bolt (J18).
+        if (currentWeapon === 'sniper') {
+          const _bs = weaponMeshes.sniper && weaponMeshes.sniper.userData.boltCycle;
+          if (_bs && _bs.active) return;
+        }
         if (ammo <= 0) {
           if (fireHeld && edge) AudioSys.emptyClick();
           return;
@@ -64637,6 +64370,21 @@ live++;
       PROF.mark('camera');
       flightRecord(dt);   // CU-160
       updateViewmodel(realDt);   // CL-281
+      // GB-300: the view gun clones mirror the world guns' parts, but the akimbo reload path
+      // reseats gun2.mag (the cylinder). Re-apply each world cylinder onto the view guns so
+      // first person shows the open swing (right then left). VM_RELOADS hands stay Claude's.
+      if (viewmodel && viewmodel.info && viewmodel.info.active && currentWeapon === 'revolver' && reloading) {
+        const vg = viewmodel.gun, vg2 = viewmodel.gun2;
+        const wr = weaponMeshes.revolver, wl = offhandMeshes && offhandMeshes.revolver;
+        if (vg && vg.cylinder && wr && wr.userData.cylinder) {
+          vg.cylinder.position.copy(wr.userData.cylinder.position);
+          vg.cylinder.quaternion.copy(wr.userData.cylinder.quaternion);
+        }
+        if (vg2 && vg2.cylinder && wl && wl.userData.cylinder) {
+          vg2.cylinder.position.copy(wl.userData.cylinder.position);
+          vg2.cylinder.quaternion.copy(wl.userData.cylinder.quaternion);
+        }
+      }
       PROF.mark('viewmodel');
       const fpPunched = fpPunchApply();   // CL-293: the shot's turn of the view, for this draw only
       try { renderFrame(); } finally { if (fpPunched) fpPunchUndo(); }

@@ -1,0 +1,44 @@
+[
+  {
+    "u": 0.12,
+    "handPlace": "well",
+    "boltHandSt": 0,
+    "worldD": 0.01
+  },
+  {
+    "u": 0.319,
+    "handPlace": "pouch",
+    "boltHandSt": 0,
+    "worldD": 0.01
+  },
+  {
+    "u": 0.516,
+    "handPlace": "well",
+    "boltHandSt": 0,
+    "worldD": 0.01
+  },
+  {
+    "u": 0.639,
+    "handPlace": "bolt",
+    "boltHandSt": 1,
+    "worldD": 0.01
+  },
+  {
+    "u": 0.737,
+    "handPlace": "bolt",
+    "boltHandSt": 1,
+    "worldD": 0.01
+  },
+  {
+    "u": 0.84,
+    "handPlace": "bolt",
+    "boltHandSt": 1,
+    "worldD": 0.01
+  },
+  {
+    "u": 0.942,
+    "handPlace": "bolt",
+    "boltHandSt": 0.997,
+    "worldD": 0.01
+  }
+]

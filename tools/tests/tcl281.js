@@ -121,9 +121,11 @@
     }
     // the reload
     {
-      T.setAmmoDbg('pistol', 2);
+      T.setAmmoDbg('pistol', 0);   // CL-306: the empty reload (with rounds left the view does the tactical one: no slide)
       T.startReload();
       ok(await until(() => T.isReloading(), 3000), 'a reload starts');
+      await until(() => vm.info.reloadKind != null, 2000);
+      ok(vm.info.reloadKind === 'empty', 'an empty magazine: the empty reload (' + vm.info.reloadKind + ')');
       const seen = new Set(), places = new Set(); let handFit = Infinity, maxFit = 0, hidden = false, rackSteep = Infinity;
       const palmOf = () => { const p = new THREE.Vector3(); A.l.rig.point('palm', p); const W = A.l.layout.wrist; return inView(A.l.wrist, p.set(p.x - W[0], p.y - W[1], p.z - W[2])); };
       while (T.isReloading()) {
@@ -143,6 +145,16 @@
       }
       ok(seen.has('hand') && seen.has('pouch') && seen.has('seated'), 'the magazine: seated, in his palm, away, back (' + [...seen].join(' ') + ')');
       ok(places.has('well') && places.has('pouch') && places.has('work'), 'the support hand goes to the well, the pouch and the slide (' + [...places].join(' ') + ')');
+      // CL-306: with rounds left, the tactical reload: the swap only, the slide left alone
+      await until(() => !T.isReloading(), 6000); await wait(300);
+      { T.setAmmoDbg('pistol', 3); T.startReload();
+        const started = await until(() => T.isReloading(), 3000); await until(() => vm.info.reloadKind != null, 2000);
+        ok(started && vm.info.reloadKind === 'tactical', 'rounds left: the tactical reload (' + vm.info.reloadKind + ')');
+        const tp = new Set(), ts = new Set(); let slideMoved = 0; const srcSlide = src.userData.slide;
+        while (T.isReloading()) { tp.add(vm.info.handPlace); ts.add(vm.info.magState); if (vm.gun.slide && srcSlide) slideMoved = Math.max(slideMoved, Math.abs(vm.gun.slide.position.z - srcSlide.position.z)); await wait(30); }
+        ok(tp.has('well') && tp.has('pouch') && !tp.has('work'), 'tactical: the support hand goes to the well and the pouch and never to the slide (' + [...tp].join(' ') + ')');
+        ok(ts.has('hand') && ts.has('pouch') && ts.has('seated'), 'tactical: the magazine out, away and back (' + [...ts].join(' ') + ')');
+        ok(slideMoved < 0.005, 'tactical: the view racks no slide of its own (' + (slideMoved * 100).toFixed(2) + ' cm off the body\'s)'); }
       ok(maxFit < 0.015, 'the magazine rides the support palm (its foot within ' + (maxFit * 100).toFixed(2) + ' cm)');
       ok(hidden, 'away in the pouch it is out of sight');
       (real ? ok : (c, m) => out.push('INFO ' + m + ' (the stand-in three)'))(rackSteep > 0.61 && rackSteep < Infinity, 'racking the slide, the support forearm runs down out of the view, at least 35 degrees below level on screen (' + (rackSteep * 180 / Math.PI).toFixed(0) + ')');
@@ -223,9 +235,11 @@
       T.setZoomHeldDbg(false);
       await until(() => T.fpDbg().ads < 0.02, 9000);
       await wait(200);
-      T.setAmmoDbg(key, 2);
+      T.setAmmoDbg(key, 0);   // CL-306: the empty reload
       T.startReload();
       ok(await until(() => T.isReloading(), 3000), label + ': a reload starts');
+      await until(() => vm.info.reloadKind != null, 2000);
+      ok(vm.info.reloadKind === 'empty', label + ': an empty magazine: the empty reload (' + vm.info.reloadKind + ')');
       const seen = new Set(), places = new Set();
       let maxFit = 0, hidden = false;
       const palmOf = () => { const p = new THREE.Vector3(); A.l.rig.point('palm', p); const W = A.l.layout.wrist; return inView(A.l.wrist, p.set(p.x - W[0], p.y - W[1], p.z - W[2])); };

@@ -2,12 +2,12 @@
 
 state: active
 model: Grok Bot
-task: GB-303 Checkpoint commit: weekend first-person round (CL-304/305, signoff, GB-292 redo)
+task: GB-304 Checkpoint commit (the reloads' first round)
 touching: git
-since: 2026-11-07T07:47Z
-next: GB-300 The revolver pair's cylinders in the reload (J18, D-119: "th
+since: 2026-11-07T09:09Z
+next: GB-295 Hip fire tracer from view-gun muzzle
 blocked-on: —
-last-report: handoffs/2026-11-07-grokbot-GB-292-redo.md
+last-report: handoffs/2026-11-07-grokbot-GB-301.md
 
 ## Notes
 

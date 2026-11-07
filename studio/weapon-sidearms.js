@@ -280,6 +280,9 @@ export function makeRevolverModel(ctx) {
   gun.userData.mag = cylinder;
   gun.userData.baseMagPos = cylinder.position.clone();
   gun.userData.baseMagRot = cylinder.rotation.clone();
+  // GB-300: pair reload timing (matches index.html akimboReloadDip / pairCylLocal) and swing amounts the viewmodel can read.
+  gun.userData.pairReload = { right: [0.06, 0.50], left: [0.48, 0.92] };
+  gun.userData.cylinderSwing = { openX: -0.095, openY: -0.008, openZ: 0.01, yaw: -0.16, ejectX: -0.012 };
   // The reference has a smooth full underlug and continuous top rib.
   // GB-173 (Jerry: the barrel did not line up with the cylinder): the bore is on the top chamber's axis (y 0.083),
   // 33 mm above the cylinder's centre; the underlug, rib, sight, muzzle and laser moved up with it.

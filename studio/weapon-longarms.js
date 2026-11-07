@@ -607,6 +607,14 @@ export function makeSniperModel(ctx) {
   gun.userData.boltSide = -1;
   gun.userData.baseBoltPos = bolt.position.clone();
   gun.userData.baseBoltRot = bolt.rotation.clone();
+  // GB-301: for Claude's VM_RELOADS — the firing hand works this part after each shot and on the reload's work beat.
+  // Grab is bolt-local (knob); beats match SNIPER_BOLT in index.html (fractions of the between-shot cycle).
+  gun.userData.boltWork = {
+    hand: 'fire',
+    grab: [-0.075, 0.012, 0.02],
+    afterShot: { from: 0.08, to: 0.86, reach: 0.2, lift: [0.2, 0.35], back: [0.35, 0.52], fwd: [0.56, 0.72], down: [0.72, 0.85] },
+    reloadWork: [0.62, 0.94]
+  };
   gunEffects(gun, new THREE.Vector3(0, 0.04, 1.22), 0.055, 3.5, 10, 0.005);
   gun.userData.laser.position.set(0, 0.04, 6.2);
   gun.userData.laserBaseZ = 1.2;

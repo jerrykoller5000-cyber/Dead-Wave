@@ -317,6 +317,7 @@ export function createViewmodel(ctx) {
       nodes: countNodes(src), s: 1, foot: null, magBase: null };
     gun.workBase = gun.work ? gun.work.position.clone() : null;
     gun.pumpBase = gun.pump ? gun.pump.position.clone() : null;
+    gun.boltBase = gun.bolt ? gun.bolt.position.clone() : null;   // GB-301: exposed like the shotgun's pump
     gun.shellBase = gun.shell ? { pos: gun.shell.position.clone(), quat: gun.shell.quaternion.clone() } : null;
     gun.pairs = pairs.filter(([s]) => s !== src);   // the copy's root is placed here, not mirrored
     if (gun.mag && ud.baseMagPos) {
@@ -857,6 +858,31 @@ export function createViewmodel(ctx) {
     else if (FOL) follow(WR, eR);
     else if (REL) rel(WR, REL.r, eR);
     twistToward(arms.r, WR, eR);
+    // GB-301 (J18): the firing hand leaves the grip onto the sniper's bolt knob (after each shot and on reload work).
+    // Gun frame stays put (unlike 3P where the gun is parented to the hand). Support stays on the forend.
+    let poseR = sockets.poseR;
+    const boltW = (!AK && gun.bolt && (st.boltHand || 0) > 0.001) ? clamp(st.boltHand, 0, 1) : 0;
+    if (boltW > 0) {
+      gun.bolt.updateMatrix();
+      // Live bolt part grab (moves with lift/pull).
+      const _bat = _pat, _bz = _pz, _by = _py;
+      _bat.set(-0.075, 0.012, 0.02).applyMatrix4(gun.bolt.matrix);
+      _bz.set(-0.8, 0.1, -0.6).normalize();
+      _by.set(0.6, -0.25, -0.76).addScaledVector(_bz, -_by.dot(_bz)).normalize();
+      const _bx = _px.crossVectors(_by, _bz);
+      const _bF = _local2; basisQ(_bx, _by, _bz, _bF.q); _bF.s = sockets.r.s;
+      const palmR = wristSpacePoint(arms.r, 'palm', _ppalm).multiplyScalar(_bF.s).applyQuaternion(_bF.q);
+      _bF.p.copy(_bat).sub(palmR);
+      mul(G, _bF, _outF);
+      // lerp wrist from grip to bolt
+      WR.p.lerp(_outF.p, boltW);
+      WR.q.slerp(_outF.q, boltW);
+      if (FOL) follow(WR, eR);
+      else if (REL) rel(WR, REL.r, eR);
+      twistToward(arms.r, WR, eR);
+      poseR = POSES.pinch || sockets.poseR;
+      info.handPlace = 'bolt';
+    }
     let poseL = sockets.poseL;
     // CL-293 (J54): a support hand's own fingers and thumb for a gun (VM_SOCKETS supportPose, a HAND_POSES-shaped pose: the
     // pistol's thumbs forward), or tried live (info.tune[key].poseL); the body's hold gives the rest.
@@ -869,6 +895,10 @@ export function createViewmodel(ctx) {
       poseL = sockets.poseR;
     } else if (u != null) {
       poseL = reloadHand(R, u, _localF); mul(G, _localF, WL);
+      // GB-301 (J18): sniper 'work' is the firing hand on the bolt — support returns to the forend for those beats.
+      if (gun.key === 'sniper' && info.handPlace === 'work') {
+        mul(G, sockets.l, WL); poseL = sockets.poseL; info.handPlace = boltW > 0 ? 'bolt' : 'fore';
+      }
       // CL-306 (the audit: the Wasp's and KR-7's charging pulls swept the support forearm across the view, 10 cm from the
       // eye): during a reload the support elbow stays where the hold keeps it, so the forearm pivots from low left up to
       // the magazine or the handle instead of standing up through the middle of the view under the raised hand.
@@ -881,7 +911,7 @@ export function createViewmodel(ctx) {
       if (gun.pump && gun.pumpBase) WL.p.add(_pg.copy(gun.pump.position).sub(gun.pumpBase).multiplyScalar(G.s).applyQuaternion(G.q));
       if (FOL) follow(WL, eL);
       else if (REL) rel(WL, REL.l, eL);
-      twistToward(arms.l, WL, eL); info.handPlace = 'fore';
+      twistToward(arms.l, WL, eL); info.handPlace = boltW > 0 ? 'bolt' : 'fore';
     }
     // (CL-306: the reload's elbow is set above, from the hold's wrist)
     mirrorWorn(arms.r, 1); mirrorWorn(arms.l, -1);
@@ -896,7 +926,7 @@ export function createViewmodel(ctx) {
       const len = _sh.length();
       if (len > 1e-4) { a.upper.quaternion.setFromUnitVectors(AX_Y, _sh.multiplyScalar(1 / len)); a.upper.scale.set(1, Math.max(1, len / 0.34), 1); }
     }
-    arms.r.rig.set(sockets.poseR).update(); arms.l.rig.set(poseL).update();
+    arms.r.rig.set(poseR).update(); arms.l.rig.set(poseL).update();
     for (const a of [arms.r, arms.l]) if (a.bridge && a.parts.rolled.visible && a.bridge.userData.bend) a.bridge.userData.bend();
     // the magazine: seated, in the support palm, or away in the pouch
     if (gun.mag && gun.magBase && (!R || R.mag)) {

@@ -54,7 +54,7 @@ the motion smooth. The yardstick is docs/fps/feel.md.
 | Sniper | open | | | | | |
 | Launcher | open | | | | | |
 | Flamethrower | open | | | | | |
-| Chainsaw | sent back (Claude, 7 Nov 06:25Z) | NOT OK: 01-hip-idle and 04-ads-still show one camo forearm filling the lower right, the saw small at the left, no hand on either handle; ADS is all sleeve. Back to GB-292. | NOT OK (same, at full size; a TypeError in the ADS frame's console) | | (struck: its OK conflicted with its own frames) | |
+| Chainsaw | sent back x2 (Claude, 7 Nov 08:30Z) | NOT OK: the redo puts the hands on the right handles (J1 met) but the left forearm lies across the lower-left of the view as a log in every frame of the set; the saw too close. Back to GB-292. | NOT OK (the first set); the redo: not yet reviewed | OK from Grokbot's side (its own fix) | OK ("J1 hands verified"); the forearm not mentioned | |
 | Rotary Gun | open | | | | | |
 | Pistol pair | open | | | | | |
 | Wasp pair | open | | | | | |

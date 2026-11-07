@@ -114,6 +114,10 @@ async function main() {
       if (T.isUnarmed && T.isUnarmed()) T.toggleHolster();
       if (T.setWorldTime) T.setWorldTime(0.50); // High noon daylight
 
+      // Dismiss any lingering error card
+      const errCard = document.getElementById('errorCard');
+      if (errCard) errCard.remove();
+
       // Equip chainsaw
       const idx = T.WEAPON_ORDER.indexOf('chainsaw');
       for (let i = 0; i < 20 && T.getCurrentWeapon() !== 'chainsaw'; i++) {
@@ -313,6 +317,15 @@ async function main() {
         // Saw fuel & cut status
         const sawCut = T.sawCutDbg ? T.sawCutDbg() : null;
 
+        const wristBendR = vmInfo.wrist ? vmInfo.wrist.r : null;
+        const wristBendL = vmInfo.wrist ? vmInfo.wrist.l : null;
+        const wristMax = vmInfo.wristMax || 0.87;
+
+        // Dismiss error card if ever created
+        const errCard = document.getElementById('errorCard');
+        const errText = (errCard && !errCard.hidden) ? errCard.textContent.trim() : null;
+        if (errCard) errCard.hidden = true;
+
         return {
           state,
           playerPos: { x: p.x, y: p.y, z: p.z },
@@ -322,11 +335,15 @@ async function main() {
           raise: vmInfo.raise,
           wristR,
           wristL,
+          wristBendR,
+          wristBendL,
+          wristMax,
           sawBox,
           j1Hands,
           sawCut,
           fuel: T.getSawFuel ? T.getSawFuel() : null,
-          shadowReceive: arms?.r?.meshes?.fore ? arms.r.meshes.fore.receiveShadow : null
+          shadowReceive: arms?.r?.meshes?.fore ? arms.r.meshes.fore.receiveShadow : null,
+          screenError: errText
         };
       }, stateName);
     };
@@ -355,7 +372,7 @@ async function main() {
       const T = window.TT, wait = ms => new Promise(r => setTimeout(r, ms));
       T.setZoomHeldDbg(false);
       T.setVelDbg(0, 3.2); // Walk forward speed 3.2 m/s
-      window.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyW' }));
+      document.body.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyW', bubbles: true }));
       await wait(800); // Walk bob in progress
     });
     telemetry.shots['02-walk'] = await getTelemetry('02-walk');
@@ -368,8 +385,8 @@ async function main() {
     await evalCode(page, async () => {
       const T = window.TT, wait = ms => new Promise(r => setTimeout(r, ms));
       T.setVelDbg(0, 6.4); // Sprint speed 6.4 m/s
-      window.dispatchEvent(new KeyboardEvent('keydown', { code: 'ShiftLeft' }));
-      window.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyW' }));
+      document.body.dispatchEvent(new KeyboardEvent('keydown', { code: 'ShiftLeft', bubbles: true }));
+      document.body.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyW', bubbles: true }));
       await wait(800); // Sprint bob in progress
     });
     telemetry.shots['03-run'] = await getTelemetry('03-run');
@@ -379,8 +396,8 @@ async function main() {
     await evalCode(page, () => {
       const T = window.TT;
       T.setVelDbg(0, 0);
-      window.dispatchEvent(new KeyboardEvent('keyup', { code: 'KeyW' }));
-      window.dispatchEvent(new KeyboardEvent('keyup', { code: 'ShiftLeft' }));
+      document.body.dispatchEvent(new KeyboardEvent('keyup', { code: 'KeyW', bubbles: true }));
+      document.body.dispatchEvent(new KeyboardEvent('keyup', { code: 'ShiftLeft', bubbles: true }));
     });
     await wait(300);
 
@@ -408,7 +425,7 @@ async function main() {
       const T = window.TT, wait = ms => new Promise(r => setTimeout(r, ms));
       T.setZoomHeldDbg(true);
       T.setVelDbg(0, 2.0); // ADS walk speed
-      window.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyW' }));
+      document.body.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyW', bubbles: true }));
       await wait(800);
     });
     telemetry.shots['05-ads-moving'] = await getTelemetry('05-ads-moving');
@@ -419,7 +436,7 @@ async function main() {
       const T = window.TT, wait = ms => new Promise(r => setTimeout(r, ms));
       T.setZoomHeldDbg(false);
       T.setVelDbg(0, 0);
-      window.dispatchEvent(new KeyboardEvent('keyup', { code: 'KeyW' }));
+      document.body.dispatchEvent(new KeyboardEvent('keyup', { code: 'KeyW', bubbles: true }));
       for (let i = 0; i < 60; i++) {
         if (T.fpDbg().ads < 0.02) break;
         await wait(50);
@@ -486,9 +503,9 @@ async function main() {
     console.log('[AG-252-Chainsaw] 8. Capturing RELOAD response (tactical & empty)...');
     await evalCode(page, async () => {
       const T = window.TT, wait = ms => new Promise(r => setTimeout(r, ms));
-      window.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyR' }));
+      document.body.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyR', bubbles: true }));
       await wait(100);
-      window.dispatchEvent(new KeyboardEvent('keyup', { code: 'KeyR' }));
+      document.body.dispatchEvent(new KeyboardEvent('keyup', { code: 'KeyR', bubbles: true }));
       await wait(200);
     });
     telemetry.shots['08-reload-tactical'] = await getTelemetry('08-reload-tactical');
@@ -502,9 +519,9 @@ async function main() {
         const dbg = T.sawCutDbg();
         if (dbg) dbg.fuel = 0;
       }
-      window.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyR' }));
+      document.body.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyR', bubbles: true }));
       await wait(200);
-      window.dispatchEvent(new KeyboardEvent('keyup', { code: 'KeyR' }));
+      document.body.dispatchEvent(new KeyboardEvent('keyup', { code: 'KeyR', bubbles: true }));
       await wait(200);
     });
     telemetry.shots['09-reload-empty'] = await getTelemetry('09-reload-empty');
@@ -570,10 +587,10 @@ async function main() {
     console.log('[AG-252-Chainsaw] 10. Capturing 24-frame motion sequence for clip...');
     // Sequence: 6 frames walk, 6 frames run, 6 frames ads, 6 frames rev/fire
     const seqConfigs = [
-      { name: 'walk', action: async () => { const T = window.TT; T.setVelDbg(0, 3.2); T.setZoomHeldDbg(false); }, frames: 6 },
-      { name: 'run', action: async () => { const T = window.TT; T.setVelDbg(0, 6.4); T.setZoomHeldDbg(false); }, frames: 6 },
-      { name: 'ads', action: async () => { const T = window.TT; T.setVelDbg(0, 0); T.setZoomHeldDbg(true); }, frames: 6 },
-      { name: 'fire', action: async () => { const T = window.TT; T.setVelDbg(0, 0); T.setZoomHeldDbg(true); if (T.stepFireDbg) T.stepFireDbg(0.033); }, frames: 6 },
+      { name: 'walk', action: async () => { const T = window.TT; T.setVelDbg(0, 3.2); T.setZoomHeldDbg(false); document.body.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyW', bubbles: true })); }, frames: 6 },
+      { name: 'run', action: async () => { const T = window.TT; T.setVelDbg(0, 6.4); T.setZoomHeldDbg(false); document.body.dispatchEvent(new KeyboardEvent('keydown', { code: 'ShiftLeft', bubbles: true })); document.body.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyW', bubbles: true })); }, frames: 6 },
+      { name: 'ads', action: async () => { const T = window.TT; T.setVelDbg(0, 0); document.body.dispatchEvent(new KeyboardEvent('keyup', { code: 'KeyW', bubbles: true })); document.body.dispatchEvent(new KeyboardEvent('keyup', { code: 'ShiftLeft', bubbles: true })); T.setZoomHeldDbg(true); }, frames: 6 },
+      { name: 'fire', action: async () => { const T = window.TT; T.setVelDbg(0, 0); T.setZoomHeldDbg(true); if (T.stepFireDbg) T.stepFireDbg(0.033); if (T.sawCutTick) T.sawCutTick(0.033); }, frames: 6 },
     ];
 
     let frameIdx = 0;
@@ -594,9 +611,12 @@ async function main() {
       const T = window.TT;
       T.setVelDbg(0, 0);
       T.setZoomHeldDbg(false);
-      window.dispatchEvent(new KeyboardEvent('keyup', { code: 'KeyW' }));
-      window.dispatchEvent(new KeyboardEvent('keyup', { code: 'ShiftLeft' }));
+      document.body.dispatchEvent(new KeyboardEvent('keyup', { code: 'KeyW', bubbles: true }));
+      document.body.dispatchEvent(new KeyboardEvent('keyup', { code: 'ShiftLeft', bubbles: true }));
     });
+
+    // Record any page errors
+    telemetry.errors = page.errors || [];
 
     // Save telemetry
     const telemPath = path.join(OUT_DIR, 'telemetry.json');

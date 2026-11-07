@@ -57,9 +57,15 @@ function cuffRings(L) {
 // J63 (Jerry, 2026-11-02: the camo "will switch in texture size... They pop between two sizes"; AG-201): the loft's own UVs
 // wrapped the camo once round the forearm, 3.0-3.8 repeats a metre against his body's sleeve's 2.3, so the pattern changed
 // size whenever first person went from his own arms to these and back. Laid on by position as the body's is (core/geometry.js).
+// CL-304 (J6, AG-254's side-by-side): the body's sleeve is projected in the marine's root space and this one in the
+// elbow's, so the pattern sat 0.25 m across and 1.05 m along (a half-tile phase) from the body's and the camo jumped at
+// the swap. The projection is shifted by that so the two patterns line up.
+const CAMO_SHIFT = [0.25, 1.05, 0];
 function bodyCamoUV(T, geo) {
   const g = geo.index ? geo.toNonIndexed() : geo, P = g.attributes.position, uv = new Float32Array(P.count * 2);
-  boxProjectUV(P.array, uv);
+  const shifted = new Float32Array(P.array.length);
+  for (let i = 0; i < P.array.length; i += 3) { shifted[i] = P.array[i] + CAMO_SHIFT[0]; shifted[i + 1] = P.array[i + 1] + CAMO_SHIFT[1]; shifted[i + 2] = P.array[i + 2] + CAMO_SHIFT[2]; }
+  boxProjectUV(shifted, uv);
   g.setAttribute('uv', new T.Float32BufferAttribute(uv, 2));
   return g;
 }

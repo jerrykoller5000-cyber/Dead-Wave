@@ -3,6 +3,8 @@
 
 import json
 import os
+import shutil
+import time
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
@@ -11,6 +13,35 @@ QA_DIR = ROOT / "qa/fps/chainsaw"
 FRAMES_DIR = QA_DIR / "frames"
 REVIEW_DIR = ROOT / "review/fps/chainsaw"
 REVIEW_DIR.mkdir(parents=True, exist_ok=True)
+
+def safe_save(img, path, **kwargs):
+    p = Path(path)
+    tmp = p.with_name(p.stem + ".tmp" + p.suffix)
+    for attempt in range(5):
+        try:
+            img.save(str(tmp), **kwargs)
+            os.replace(str(tmp), str(p))
+            return
+        except OSError as e:
+            print(f"safe_save attempt {attempt} failed: {e}")
+            time.sleep(0.5)
+    img.save(str(tmp), **kwargs)
+    os.replace(str(tmp), str(p))
+
+def safe_copy(src, dst):
+    s = Path(src)
+    d = Path(dst)
+    tmp = d.with_name(d.stem + ".tmp" + d.suffix)
+    for attempt in range(5):
+        try:
+            shutil.copy2(str(s), str(tmp))
+            os.replace(str(tmp), str(d))
+            return
+        except OSError as e:
+            print(f"safe_copy attempt {attempt} failed: {e}")
+            time.sleep(0.5)
+    shutil.copy2(str(s), str(tmp))
+    os.replace(str(tmp), str(d))
 
 SHOTS = [
     ("01-hip-idle.jpg", "1. HIP IDLE", "Neutral resting stance, high noon daylight. J1 check: right hand on rear grip, left on front hoop."),
@@ -48,7 +79,7 @@ def build_contact_sheet():
     draw.rectangle([0, 0, sheet_w, 80], fill=(22, 27, 34))
     draw.line([0, 80, sheet_w, 80], fill=(48, 54, 61), width=2)
     
-    draw.text((30, 16), "AG-252 FIRST-PERSON REVIEW SET: CHAINSAW (D-119 / GB-292 J1 FIX)", fill=(240, 246, 252))
+    draw.text((30, 16), "AG-252 FIRST-PERSON REVIEW SET: CHAINSAW (D-119 / GB-292 J1 REDO)", fill=(240, 246, 252))
     draw.text((30, 48), "Real WebGPU Hardware (RTX 5080) · Jerry's Launcher · 20.0m Target Plate · Daylight Noon · Sign-off Matrix", fill=(139, 148, 158))
     
     # Load telemetry if present
@@ -107,12 +138,12 @@ def build_contact_sheet():
         draw.text((x0 + 15, card_y + 52), detail, fill=(63, 185, 80))
         
     out_sheet = QA_DIR / "chainsaw-review-sheet.jpg"
-    canvas.save(out_sheet, quality=92)
+    safe_save(canvas, out_sheet, quality=92)
     print(f"[AG-252] Saved master contact sheet: {out_sheet}")
     
     # Mirror to review/
     rev_sheet = REVIEW_DIR / "chainsaw-review-sheet.jpg"
-    canvas.save(rev_sheet, quality=92)
+    safe_copy(out_sheet, rev_sheet)
     print(f"[AG-252] Mirrored contact sheet to: {rev_sheet}")
 
 
@@ -133,7 +164,8 @@ def build_motion_gif():
         
     if gif_frames:
         out_gif = QA_DIR / "chainsaw-motion.gif"
-        gif_frames[0].save(
+        safe_save(
+            gif_frames[0],
             out_gif,
             save_all=True,
             append_images=gif_frames[1:],
@@ -145,14 +177,7 @@ def build_motion_gif():
         
         # Mirror to review
         rev_gif = REVIEW_DIR / "chainsaw-motion.gif"
-        gif_frames[0].save(
-            rev_gif,
-            save_all=True,
-            append_images=gif_frames[1:],
-            duration=120,
-            loop=0,
-            optimize=True
-        )
+        safe_copy(out_gif, rev_gif)
         print(f"[AG-252] Mirrored animated clip to: {rev_gif}")
 
 

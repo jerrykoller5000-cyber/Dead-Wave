@@ -42,3 +42,22 @@ tactical reload, which it shouldn't), and the pair reloads are the single's. Tho
 5. ADS and moving: the same reloads from ADS drop to the hip first (as real), and keep the bob while walking.
 Hip and ADS holds (J19): from the AG-251 set, the Breacher's, shotgun's and launcher's receivers fill the lower centre as flat
 blocks and their rears stand into the view; the GW-4's stock block shows at the lower right at the hip. GB-296/GP-20037.
+
+## 09:10Z: what CL-306 has changed so far, and what the pictures say
+- Two reloads per gun are in: with rounds left the view does the tactical one (mag out and in over the whole time, no slide,
+  bolt or charging handle); empty, the authored one. index.html tells the view (st.reloadEmpty). Filmed: the Wasp's and
+  the pistol's tactical reloads show the swap only (right).
+- The support elbow stays at the hold's during a reload (the forearm no longer stands up through the middle of the view
+  under a raised hand): the mid-reload frames are clean on the pistol, Wasp and KR-7.
+- The pistol's rack: a 25-degree tilt instead of the 90-degree roll, the hand over the slide from the left (filmed: right,
+  the gun a little low at first; raised 3 cm).
+- The Wasp's and KR-7's charging pulls: the gun now drops low and ahead for the pull, so the forearm crosses the bottom
+  quarter of the view instead of the top (filmed: better, still a log). Rolling the Wasp 63 degrees to pull the knob from
+  the side was tried and was worse (the forearm filled the centre). The limit is geometry: a hand at a top-mounted knob
+  40 cm from the eye puts the forearm across the view whatever the elbow does. The cure is a design choice, to decide with
+  Jerry: (a) the Wasp's knob on the left side of the receiver (a side-cocking SMG), pulled sideways with the forearm out of
+  frame; (b) the firing hand works the charging handle (the KR-7's real manual of arms: the right hand off the grip, the
+  support hand holding the rifle), which needs the strong-hand reload path the view doesn't have yet; (c) the gun pushed
+  far forward (60 cm) for the pull, as shooters do. (b) is the realistic one for the KR-7 and the sniper's bolt both.
+- The "floating magazine" in the audit's KR-7 and sniper lines is the body's DROPPED magazine falling past the lower
+  left of the view (the third-person reload drops one into the world): fine, not a bug.
