@@ -162,6 +162,7 @@ const gunPoly = new THREE.MeshStandardMaterial({ color: 0x323437, metalness: 0.0
 const gunRubber = new THREE.MeshStandardMaterial({ color: 0x17181a, metalness: 0.0, roughness: 0.95 });
 const woodDark = new THREE.MeshStandardMaterial({ color: 0x4a2c15, roughness: 0.64, metalness: 0.03 });
 const steelMat = new THREE.MeshStandardMaterial({ color: 0xb0b6bd, metalness: 0.62, roughness: 0.26 });
+const revolverSteel = new THREE.MeshStandardMaterial({ color: 0x9aa1a8, metalness: 0.85, roughness: 0.4 });   // CL-316: GB-233's revolver steel, as index.html has it (it was missing here, so the studio, refview and gunshot drew the revolver's frame white)
 const brassMat = new THREE.MeshStandardMaterial({ color: 0xc69b45, metalness: 0.65, roughness: 0.3 });
 const gunOlive = new THREE.MeshStandardMaterial({ color: 0x525a3b, metalness: 0.06, roughness: 0.74 });
 const gunTan = new THREE.MeshStandardMaterial({ color: 0x9a8560, metalness: 0.05, roughness: 0.74 });
@@ -657,7 +658,7 @@ export function weaponModelContext() {
     THREE, gunKit, gunBand, gripOutline, gunArc, gunEffects, gunSuppressor, finishGun,
     mergeRigidMeshes, profileCurve, layoutChainsawChain, M240_PIVOT,
     gunMetal, gunBody, gunDark, gunMid, gunAccent, woodMat, bladeMat, gunPoly, gunRubber,
-    woodDark, steelMat, brassMat, gunOlive, gunTan, magPoly, glassMat, sightDotMat,
+    woodDark, steelMat, revolverSteel, brassMat, gunOlive, gunTan, magPoly, glassMat, sightDotMat,
     shellRedMat, fuelRedMat, hazardYellow, gaugeFace
   };
 }

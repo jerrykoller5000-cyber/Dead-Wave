@@ -1,0 +1,11 @@
+import fs from 'node:fs';
+const FILE = 'game/viewmodel-poses.js';
+const raw = fs.readFileSync(FILE);
+const nl = raw.toString('utf8').includes('\r\n') ? '\r\n' : '\n';
+const lines = raw.toString('utf8').split(/\r?\n/);
+const i = lines.findIndex((l) => l.includes('aa12: { grip:') && l.includes('support:'));
+const j = i + 1;
+lines[i] = '  aa12: { grip: [0, -0.145, -0.166], support: [0, -0.047, 0.36], magFoot: [0, -0.415, 0.05], work: [-0.058, 0.05, 0.18],   // CL-313 b: support 12 mm lower (was -0.035); GB-314 keeps Claude\'s socket';
+lines[j] = '    supportPose: { f: [[1.45, 1.668, 1.378, 0], [1.45, 1.668, 1.378, 0], [1.45, 1.668, 1.378, 0], [1.306, 1.502, 1.241, 0]], t: [1.45, -0.15, 0.87] } },   // GB-314 GB-153 fit; palmD still ~-9.5 mm (note to Claude)';
+fs.writeFileSync(FILE, lines.join(nl));
+console.log('reverted socket to -0.047, pose kept');

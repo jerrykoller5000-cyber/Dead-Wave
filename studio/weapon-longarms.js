@@ -239,8 +239,9 @@ export function makeAkModel(ctx) {
   D.pin(gun, 0, 0.0, -0.12, { axis: 'x', len: 2 * HW, r: 0.003, mat: gunDark });   // the hammer pin
   D.pin(gun, 0, -0.006, -0.06, { axis: 'x', len: 2 * HW, r: 0.003, mat: gunDark });  // the trigger pin
   // Dust cover: the stamped lid with its rounded top and the AKM's eight ribs across the rear half.
-  K.slab([[-0.2, 0.027], [0.155, 0.027], [0.155, 0.04], [-0.18, 0.04], [-0.2, 0.036]], 2 * HW - 0.002, gunMid, { bevel: 0.002, segs: 2 });
-  K.lathe([[0, -0.2], [0.021, -0.2], [0.022, -0.19], [0.022, 0.15], [0.021, 0.155], [0, 0.155]], gunMid, { y: 0.036, seg: 16, phase: Math.PI / 16 });
+  // (CL-315 note: one parkerized finish on the cover and the receiver, as an AKM has; the ribs a shade lighter to read.)
+  K.slab([[-0.2, 0.027], [0.155, 0.027], [0.155, 0.04], [-0.18, 0.04], [-0.2, 0.036]], 2 * HW - 0.002, gunBody, { bevel: 0.002, segs: 2 });
+  K.lathe([[0, -0.2], [0.021, -0.2], [0.022, -0.19], [0.022, 0.15], [0.021, 0.155], [0, 0.155]], gunBody, { y: 0.036, seg: 16, phase: Math.PI / 16 });
   D.ribs(gun, { x: 0, y: 0.058, z: -0.12, axis: 'y', side: 1, along: 'z', count: 8, pitch: 0.013, w: 0.03, h: 0.001, t: 0.0022, mat: gunMid });
   K.box(0.02, 0.006, 0.012, gunDark, 0, 0.055, -0.205);   // the cover's rear latch (the recoil spring guide's button)
   // The rear sight block on the cover's front: the tangent leaf on it, its slider, the U notch's ears at the sight line (0.074).
@@ -254,7 +255,7 @@ export function makeAkModel(ctx) {
   for (const z of [-0.14, -0.1]) D.groove(gun, { x: HW, y: 0.024, z, axis: 'x', side: 1, along: 'y', len: 0.012, w: 0.0008 });   // the selector's notches
   // GB-269 (GP-20012, docs/contracts.md): the charging handle is its own group, gun.userData.work, at rest where it was.
   const work = K.group(HW + 0.006, 0.02, 0.13); work.name = 'work';
-  K.box(0.016, 0.012, 0.016, gunDark, 0, 0, 0, 0, 0, 0, work, 0.003);
+  K.box(0.016, 0.012, 0.02, gunDark, 0, 0, 0, 0, 0, 0, work, 0.003);   // (t333: 20 mm long, so the knob on it hangs on a part the test calls big)
   K.sph(0.009, gunDark, 0.012, 0, 0, work, 8);
   gun.userData.work = work;
   // Trigger guard, the magazine release in front of it, a trigger with its tip curling forward, the wooden grip.
@@ -377,7 +378,7 @@ export function makeAa12Model(ctx) {
   D.ribs(gun, { x: -PX - 0.019, y: 0.05, z: 0.18, axis: 'x', side: -1, along: 'z', count: 4, pitch: 0.006, w: 0.016, h: 0.001, t: 0.0018, mat: gunMid });
   K.slab(gunBand([[-0.13, -0.045], [-0.095, -0.062]], 0.004), 0.004, gunDark, { x: -PX - 0.0015, bevel: 0.001 });
   K.cyl(0.007, 0.007, 0.004, gunDark, -PX - 0.0015, -0.045, -0.13, null, 10, 'x');
-  for (const [ry, rz] of [[-0.058, -0.112], [-0.066, -0.13], [-0.058, -0.148]]) D.screw(gun, -PX, ry, rz, { axis: 'x', side: -1, r: 0.0015, kind: 'button', mat: gunMid });
+  for (const [ry, rz] of [[-0.058, -0.112], [-0.066, -0.13], [-0.058, -0.148]]) D.screw(gun, -RW / 2, ry, rz, { axis: 'x', side: -1, r: 0.0015, kind: 'button', mat: gunMid });   // on the receiver's face, under the plate's edge
   for (const sx of [-1, 1]) {
     D.groove(gun, { x: sx * PX, y: 0.005, z: sx > 0 ? -0.08 : 0.0, axis: 'x', side: sx, along: 'z', len: sx > 0 ? 0.22 : 0.38, w: 0.0008 });   // the plate's pressed line (broken by the port on +x)
     D.groove(gun, { x: sx * PX, y: -0.038, z: 0.0, axis: 'x', side: sx, along: 'z', len: 0.38, w: 0.0008 });

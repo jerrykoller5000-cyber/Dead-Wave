@@ -1,0 +1,10 @@
+import fs from 'node:fs';
+const FILE = 'studio/weapon-sidearms.js';
+const raw = fs.readFileSync(FILE);
+const nl = raw.toString('utf8').includes('\r\n') ? '\r\n' : '\n';
+const lines = raw.toString('utf8').split(/\r?\n/);
+const i = lines.findIndex((l) => l.includes('GB-308/GB-313: adjustable rear sight'));
+if (i < 0) throw new Error('line missing');
+lines[i] = '  // GB-308/GB-313: adjustable rear sight - blade + ears + elevation screws seated ON the notch base (t333: no floats).';
+fs.writeFileSync(FILE, lines.join(nl));
+console.log('fixed comment line', i + 1);

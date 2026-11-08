@@ -1,0 +1,63 @@
+{
+  "gun": "chainsaw",
+  "name": "Chainsaw (Heavy Tool / Stihl Pattern)",
+  "refFile": "chainsaw.glb",
+  "realLength": 0.85,
+  "sizeK": 0.8042,
+  "before": {
+    "tris": 7152,
+    "meshes": 15,
+    "materials": 11,
+    "floatingCount": 0,
+    "box": {
+      "x": 0.3088,
+      "y": 0.3012,
+      "z": 1.169
+    },
+    "measure": {
+      "length": 1.169,
+      "boreOverGrip": 0.0188,
+      "rakeDeg": 86.2,
+      "sightH": 0.1814
+    }
+  },
+  "after": {
+    "tris": 8952,
+    "meshes": 15,
+    "materials": 11,
+    "floatingCount": 0,
+    "box": {
+      "x": 0.3161,
+      "y": 0.3012,
+      "z": 1.169
+    },
+    "measure": {
+      "length": 1.169,
+      "boreOverGrip": 0.0113,
+      "rakeDeg": 84.4,
+      "sightH": 0.1814
+    }
+  },
+  "ref": {
+    "tris": 2647,
+    "meshes": 3,
+    "box": {
+      "x": 0.2974,
+      "y": 0.3597,
+      "z": 0.85
+    },
+    "measure": {
+      "length": 0.85,
+      "boreOverGrip": 0.0191,
+      "rakeDeg": 77.6,
+      "sightH": 0.2049
+    }
+  },
+  "duskPerf": {
+    "fps": 60.89039728416264,
+    "low": 55.86592176910688,
+    "worst": 17.900000005960464,
+    "hitches": 15,
+    "frames": 61
+  }
+}

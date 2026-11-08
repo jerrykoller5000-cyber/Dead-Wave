@@ -1,0 +1,63 @@
+{
+  "gun": "revolver",
+  "name": "Revolver (.357 Magnum Pattern)",
+  "refFile": "38_special_revolver.glb",
+  "realLength": 0.27,
+  "sizeK": 0.7755,
+  "before": {
+    "tris": 6102,
+    "meshes": 11,
+    "materials": 6,
+    "floatingCount": 0,
+    "box": {
+      "x": 0.0783,
+      "y": 0.2241,
+      "z": 0.347
+    },
+    "measure": {
+      "length": 0.347,
+      "boreOverGrip": 0.1297,
+      "rakeDeg": 25.9,
+      "sightH": 0.0199
+    }
+  },
+  "after": {
+    "tris": 6750,
+    "meshes": 29,
+    "materials": 7,
+    "floatingCount": 0,
+    "box": {
+      "x": 0.0783,
+      "y": 0.2234,
+      "z": 0.347
+    },
+    "measure": {
+      "length": 0.347,
+      "boreOverGrip": 0.1295,
+      "rakeDeg": 25.7,
+      "sightH": 0.0194
+    }
+  },
+  "ref": {
+    "tris": 10700,
+    "meshes": 5,
+    "box": {
+      "x": 0.0415,
+      "y": 0.156,
+      "z": 0.27
+    },
+    "measure": {
+      "length": 0.27,
+      "boreOverGrip": 0.0717,
+      "rakeDeg": 49.5,
+      "sightH": 0.0247
+    }
+  },
+  "duskPerf": {
+    "fps": 59.89219404999604,
+    "low": 52.63157894736842,
+    "worst": 19,
+    "hitches": 20,
+    "frames": 60
+  }
+}

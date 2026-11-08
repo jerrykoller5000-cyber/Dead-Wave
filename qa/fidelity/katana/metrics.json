@@ -1,0 +1,62 @@
+{
+  "gun": "katana",
+  "name": "Katana (Red Katana)",
+  "refFile": null,
+  "realLength": 0.98,
+  "sizeK": 1.0773,
+  "before": {
+    "tris": 6462,
+    "meshes": 64,
+    "materials": 8,
+    "floatingCount": 0,
+    "box": {
+      "x": 0.0836,
+      "y": 0.1019,
+      "z": 1.0007
+    },
+    "measure": {
+      "length": 1.0007,
+      "boreOverGrip": 0.029,
+      "rakeDeg": 87.4,
+      "sightH": 0.0246
+    }
+  },
+  "after": {
+    "tris": 6462,
+    "meshes": 64,
+    "materials": 8,
+    "floatingCount": 0,
+    "box": {
+      "x": 0.0836,
+      "y": 0.1019,
+      "z": 1.0007
+    },
+    "measure": {
+      "length": 1.0007,
+      "boreOverGrip": 0.029,
+      "rakeDeg": 87.4,
+      "sightH": 0.0246
+    }
+  },
+  "ref": {
+    "tris": 6462,
+    "meshes": 64,
+    "box": {
+      "x": 0.0836,
+      "y": 0.1019,
+      "z": 1.0007
+    },
+    "measure": {
+      "length": 1.0007,
+      "boreOverGrip": 0.029,
+      "rakeDeg": 87.4,
+      "sightH": 0.0246
+    }
+  },
+  "duskPerf": {
+    "fps": 60.5,
+    "low": 56.2,
+    "worst": 18,
+    "hitches": 0
+  }
+}

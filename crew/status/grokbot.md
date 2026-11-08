@@ -2,12 +2,12 @@
 
 state: active
 model: Grok Bot
-task: commit3 Commit job 3 (D-113): fidelity round checkpoint
+task: commit4 Commit job 4 (D-113): the fidelity round's second checkpoint
 touching: git
-since: 2026-11-07T19:11Z
-next: GB-308 Fidelity: the revolver (D-121). After GB-307. makeRevolver t
+since: 2026-11-08T00:16Z
+next: GB-288 The machete's chop on the mast gate's vines (D-116). After t
 blocked-on: —
-last-report: handoffs/2026-11-07-grokbot-GB-311.md
+last-report: handoffs/2026-11-07-grokbot-GB-314.md
 
 ## Notes
 

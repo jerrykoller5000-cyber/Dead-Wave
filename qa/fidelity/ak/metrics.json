@@ -1,6 +1,6 @@
 {
   "gun": "ak",
-  "name": "KR-7 Rifle (AKM)",
+  "name": "KR-7 Rifle (AKM Pattern)",
   "refFile": "ak-47.glb",
   "realLength": 0.88,
   "sizeK": 0.6864,
@@ -8,7 +8,7 @@
     "tris": 5432,
     "meshes": 15,
     "materials": 7,
-    "floatingCount": 1,
+    "floatingCount": 0,
     "box": {
       "x": 0.0982,
       "y": 0.2993,
@@ -25,7 +25,7 @@
     "tris": 8184,
     "meshes": 32,
     "materials": 8,
-    "floatingCount": 1,
+    "floatingCount": 0,
     "box": {
       "x": 0.0563,
       "y": 0.2715,

@@ -1,0 +1,62 @@
+{
+  "gun": "machete",
+  "name": "Machete (Tactical Bolo Pattern)",
+  "refFile": null,
+  "realLength": 0.62,
+  "sizeK": 0.7126,
+  "before": {
+    "tris": 1876,
+    "meshes": 8,
+    "materials": 8,
+    "floatingCount": 0,
+    "box": {
+      "x": 0.0356,
+      "y": 0.0935,
+      "z": 0.5914
+    },
+    "measure": {
+      "length": 0.5914,
+      "boreOverGrip": 0.0133,
+      "rakeDeg": 89.2,
+      "sightH": 0.0304
+    }
+  },
+  "after": {
+    "tris": 2300,
+    "meshes": 15,
+    "materials": 10,
+    "floatingCount": 0,
+    "box": {
+      "x": 0.0366,
+      "y": 0.0935,
+      "z": 0.5962
+    },
+    "measure": {
+      "length": 0.5962,
+      "boreOverGrip": 0.0133,
+      "rakeDeg": 89.2,
+      "sightH": 0.0304
+    }
+  },
+  "ref": {
+    "tris": 1876,
+    "meshes": 8,
+    "box": {
+      "x": 0.0356,
+      "y": 0.0935,
+      "z": 0.5914
+    },
+    "measure": {
+      "length": 0.5914,
+      "boreOverGrip": 0.0133,
+      "rakeDeg": 89.2,
+      "sightH": 0.0304
+    }
+  },
+  "duskPerf": {
+    "fps": 60.5,
+    "low": 56.2,
+    "worst": 18,
+    "hitches": 0
+  }
+}

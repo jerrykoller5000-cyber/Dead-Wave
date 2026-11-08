@@ -1,0 +1,28 @@
+{
+  "knife": {
+    "which": "knife",
+    "tris": 2780,
+    "meshes": 4,
+    "materials": 4,
+    "floatingCount": 0,
+    "bbox": {
+      "x": 0.0858,
+      "y": 0.0475,
+      "z": 0.4076
+    },
+    "sizeK": 0.7662037037037037
+  },
+  "machete": {
+    "which": "machete",
+    "tris": 1876,
+    "meshes": 8,
+    "materials": 8,
+    "floatingCount": 0,
+    "bbox": {
+      "x": 0.0383,
+      "y": 0.1005,
+      "z": 0.6359
+    },
+    "sizeK": 0.7662037037037037
+  }
+}

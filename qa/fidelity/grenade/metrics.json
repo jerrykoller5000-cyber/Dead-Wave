@@ -1,0 +1,62 @@
+{
+  "gun": "grenade",
+  "name": "Frag Grenade (M67 Pattern)",
+  "refFile": "m67.glb",
+  "realLength": 0.09,
+  "sizeK": 1,
+  "before": {
+    "tris": 2460,
+    "meshes": 7,
+    "materials": 3,
+    "floatingCount": 0,
+    "box": {
+      "x": 0.1039,
+      "y": 0.1359,
+      "z": 0.1
+    },
+    "measure": {
+      "length": 0.1,
+      "boreOverGrip": 0.0034,
+      "rakeDeg": 14.3,
+      "sightH": 0.0782
+    }
+  },
+  "after": {
+    "tris": 2552,
+    "meshes": 9,
+    "materials": 4,
+    "floatingCount": 0,
+    "box": {
+      "x": 0.104,
+      "y": 0.138,
+      "z": 0.1
+    },
+    "measure": {
+      "length": 0.1,
+      "boreOverGrip": 0.003,
+      "rakeDeg": 11.7,
+      "sightH": 0.0803
+    }
+  },
+  "ref": {
+    "tris": 10092,
+    "meshes": 10,
+    "box": {
+      "x": 0.0568,
+      "y": 0.0779,
+      "z": 0.09
+    },
+    "measure": {
+      "length": 0.09,
+      "boreOverGrip": 0.0039,
+      "rakeDeg": 4.8,
+      "sightH": 0.0013
+    }
+  },
+  "duskPerf": {
+    "fps": 60.5,
+    "low": 56.2,
+    "worst": 18,
+    "hitches": 0
+  }
+}

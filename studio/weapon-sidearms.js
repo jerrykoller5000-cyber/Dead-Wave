@@ -11,6 +11,14 @@ function shapedGrip(cz, cy, h, d, rake, pts) {
     return [cz - uu * sr + vv * cr, cy - uu * cr - vv * sr];
   });
 }
+// GB-314 / CL-312 b: ridges across a grip strap (same helper as studio/weapon-longarms.js).
+function gripRidges(K, mat, cz, cy, h, d, rake, us, v, w, t = 0.003, along = 0.0025) {
+  const sr = Math.sin(rake), cr = Math.cos(rake), k = d / 0.08;
+  return us.map((u) => {
+    const uu = (u - 0.5) * h, vv = v * k;
+    return K.box(w, along, t, mat, 0, cy - uu * cr - vv * sr, cz - uu * sr + vv * cr, rake, 0, 0, null, 0.0008);
+  });
+}
 
 function flatDetail(T, parent, mat, w, h, d, x, y, z, rz = 0) {
   const mesh = new T.Mesh(new T.BoxGeometry(w, h, d), mat);
@@ -285,6 +293,7 @@ export function makeRevolverModel(ctx) {
   const { THREE, gunKit, gunBand, gunEffects, finishGun, revolverSteel: steelMat, woodMat, woodDark, gunDark, gunAccent, gunRubber, brassMat } = ctx;   // GB-233: its own steel; GB-302 brass for empties/loader
   const gun = new THREE.Group();
   const K = gunKit(gun);
+  const D = gunDetail(ctx);   // GB-308 / CL-309 helpers
   // Stainless frame round the cylinder's window: the recoil shield and hammer housing, the top strap, the
   // bottom of the window, the barrel lug; the rear-sight notch, the cylinder latch.
   // GB-173 (Jerry: the rear looked blocky): a slimmer frame whose back runs from the top strap round the hammer seat
@@ -298,10 +307,14 @@ export function makeRevolverModel(ctx) {
   // GB-173: the frame's front starts 6 mm ahead of the cylinder, so the barrel's forcing cone shows in the gap.
   K.slab([[.066, .111], [.072, .11], [.087, .098], [.095, .084], [.095, .013], [.09, -.002], [.075, -.011], [.066, -.012]], .06, steelMat, {bevel: .008, segs: 4});
   K.lathe([[0, .058], [.011, .058], [.016, .068], [.016, .09], [0, .09]], steelMat, {y: .083, seg: 16});   // forcing cone
-  for (const sx of [-1, 1]) K.box(0.012, 0.012, 0.014, gunDark, sx * 0.012, 0.117, -0.05);
+  // GB-308/GB-313: adjustable rear sight - blade + ears + elevation screws seated ON the notch base (t333: no floats).
+  K.slab([[-0.013, 0.112], [0.013, 0.112], [0.013, 0.120], [-0.013, 0.120]], 0.026, gunDark, { bevel: 0.001, z: -0.050 });
+  for (const sx of [-1, 1]) K.box(0.0045, 0.008, 0.012, gunDark, sx * 0.0085, 0.118, -0.050, 0, 0, 0, null, 0.0006);   // ears on base
+  K.box(0.010, 0.005, 0.009, steelMat, 0, 0.1195, -0.050, 0, 0, 0, null, 0.0005);   // blade in notch (GB-313 seated)
+  for (const sx of [-1, 1]) D.screw(gun, sx * 0.009, 0.120, -0.050, { axis: 'y', side: 1, r: 0.0018, head: 0.0010, kind: 'slot' });   // GB-313: on base top
   // GB-174 (Jerry: small parts floated): the latch and screws sit on the frame's side faces (half-width 0.033).
   K.box(0.004, 0.012, 0.02, gunDark, -0.0345, 0.004, -0.04, 0, 0, 0, null, 0.0012);   // cylinder release latch
-  for (const sx of [-1, 1]) for (const [y, z] of [[0.086, -0.062], [0.02, -0.058]]) K.cyl(0.0032, 0.0032, 0.0016, gunAccent, sx * 0.0338, y, z, null, 10, 'x');   // side-plate screws
+  for (const sx of [-1, 1]) for (const [y, z] of [[0.086, -0.062], [0.02, -0.058]]) D.screw(gun, sx * 0.0330, y, z, { axis: 'x', side: sx, r: 0.0030, head: 0.0015, kind: 'slot' });   // GB-308: attached side-plate screws (was floating cyl)
   // A continuously curved walnut grip and restrained checkering; no medallions,
   // lettering or badges were present in Jerry's final revolver reference.
   // GB-173 (Jerry: the grip): rounder (bigger bevel), a touch slimmer than the frame so the frame overhangs nothing.
@@ -310,7 +323,7 @@ export function makeRevolverModel(ctx) {
   for (const sx of [-1, 1]) {
     K.slab(woodPanel, .0016, woodDark, {x: sx * .0315, bevel: .0006});
     checkeredPanel(THREE, gun, woodMat, woodPanel, sx * .0324, .0048, .0014);
-    K.cyl(.003, .003, .0016, gunAccent, sx * .0331, -.072, -.03, null, 10, 'x');   // GB-174: grip screw on the wood panel's face
+    D.screw(gun, sx * 0.0324, -0.072, -0.03, { axis: 'x', side: sx, r: 0.0028, head: 0.0014, kind: 'slot' });   // GB-308: grip screw attached
   }
   // GB-180: a smaller, heavier guard (it was a big wire ring), closed into the grip's front.
   K.slab(gunBand([[.006, -.008], [.028, -.008], [.050, -.008], [.066, -.015], [.073, -.028], [.072, -.042], [.064, -.055], [.048, -.062], [.028, -.060], [.014, -.050], [.010, -.036]], .0062), .018, steelMat, {bevel: .004, segs: 3});
@@ -392,7 +405,7 @@ export function makeRevolverModel(ctx) {
   K.slab([[.081, .109], [.102, .104], [.133, .101], [.322, .101], [.328, .098], [.325, .092], [.15, .092], [.105, .094], [.085, .1]], .016, steelMat, {bevel: .003, segs: 3});
   // GB-233 r4: the crane, on his left of the window's front, the arm the cylinder swings out on, and its pivot screw.
   K.slab([[.04, .03], [.066, .028], [.066, -.01], [.04, -.006]], .006, steelMat, {x: -.0335, bevel: .0015});
-  K.cyl(.0032, .0032, .0016, gunAccent, -.0368, .002, .058, null, 10, 'x');
+  D.screw(gun, -0.0335, 0.002, 0.058, { axis: 'x', side: -1, r: 0.0030, head: 0.0015, kind: 'slot' });   // GB-308: crane pivot screw attached
   // J57: the post keeps its sighted tip at y .121, but has enough width and a
   // pale rear insert to read against the dark rear notch at first-person scale.
   K.slab([[0.298, 0.097], [0.326, 0.097], [0.326, 0.121], [0.31, 0.121]], 0.008, gunDark, { bevel: 0.001 });
@@ -413,6 +426,14 @@ export function makeRevolverModel(ctx) {
   gun.userData.hammer = hammer;
   gun.userData.baseHammerRot = hammer.rotation.clone();
   gun.userData.baseHammerPos = hammer.position.clone();
+  // --- GB-308 fidelity (D-121 / docs/fps/fidelity.md revolver list) ---
+  // Top strap serrations: a short row of ribs across the strap over the cylinder (yardstick).
+  D.ribs(gun, { x: 0, y: 0.114, z: 0.02, axis: 'y', side: 1, along: 'z', count: 9, pitch: 0.006, w: 0.018, h: 0.0011, t: 0.0014, mat: D.mats.dark });
+  // Panel line along the underlug seam (no bare >3 cm face).
+  D.groove(gun, { x: 0, y: 0.050, z: 0.20, axis: 'y', side: -1, along: 'z', len: 0.18, w: 0.0007 });
+  // Ejector-rod shroud collar (distinct part on the underlug nose; rod itself stays on the cylinder).
+  K.cyl(0.009, 0.009, 0.014, steelMat, 0, 0.046, 0.078, null, 14);
+  K.cyl(0.0075, 0.0075, 0.008, gunDark, 0, 0.046, 0.086, null, 12);
   gunEffects(gun, new THREE.Vector3(0, 0.083, 0.35), 0.045, 2.8, 6, 0.005);
   gun.userData.laser.position.set(0, 0.083, 3.35);
   gun.userData.laserBaseZ = 0.35;
@@ -424,6 +445,7 @@ export function makeUziModel(ctx) {
   const { THREE, gunKit, gunBand, gunEffects, gunSuppressor, finishGun, gunBody, gunMid, gunDark, gunAccent, gunPoly, gunRubber } = ctx;
   const gun = new THREE.Group();
   const K = gunKit(gun);
+  const D = gunDetail(ctx);   // GB-309 / CL-309 helpers
   // Stamped receiver with pressed ribs; the top cover and its cocking knob.
   K.slab([[-.14, -.031], [-.132, -.04], [.211, -.04], [.22, -.032], [.22, .067], [.215, .078], [-.122, .078], [-.134, .072], [-.14, .06]], .098, gunBody, {bevel: .009, segs: 3});
   for (const sx of [-1, 1]) {
@@ -432,7 +454,7 @@ export function makeUziModel(ctx) {
       K.slab(gunBand([[-.116, y], [-.105, y + .001], [-.047, y + .001], [-.038, y]], .0036), .003, gunMid, {x: sx * .0496, bevel: .0014, segs: 3});
     }
     K.slab([[-.116, -.035], [.077, -.035], [.081, -.017], [-.116, -.017]], .003, gunDark, {x: sx * .0494, bevel: .001});
-    for (const z of [-.112, .073]) K.cyl(.0038, .0038, .002, gunAccent, sx * .0514, -.025, z, null, 12, 'x');
+    for (const z of [-.112, .073]) D.rivet(gun, sx * .0505, -.025, z, { axis: 'x', side: sx, r: 0.0032, mat: D.mats.dark });   // GB-309: spot welds (was floating accent cyl)
   }
   K.slab([[-.13, .074], [.2, .074], [.2, .09], [.192, .098], [-.11, .104], [-.123, .1], [-.13, .092]], .09, gunMid, {bevel: .009, segs: 3});
   // GB-235 (Jerry: "Uzi sights need to be usable, right now the charging handle gets in the way"): the knob sits low in the
@@ -458,35 +480,32 @@ export function makeUziModel(ctx) {
   // The stowed-weapon fitting uses this side support envelope when another
   // gun rests against the Wasp; the stock struts, pivots and butt are gone.
   K.slab([[-.177, .019], [-.147, .019], [-.131, .032], [-.142, .049], [-.163, .054], [-.182, .04]], .03498504, gunMid, {x: .06, bevel: .005, segs: 2});
-  // Grip. The safety is the same polymer as the grip and follows the backstrap.
-  // Centre line is still gripOutline(-0.02, -0.1, 0.16, …, 0.22): the palm stays at the hold.
-  // GB-236 (Jerry: "way too skinny and not proportionate to the gun"): the real Uzi's grip is a block the magazine runs
-  // up through, about 3/4 the receiver's width and deeper front to back than a pistol's. Width 56 -> 76 mm, depth
-  // 56 -> 88 mm (d 0.072 -> 0.12), grown mostly rearward (centre 10 mm back) so the trigger keeps 21 mm of finger room.
-  const UZI_GZ = -0.030, UZI_GD = 0.12;
-  K.slab(shapedGrip(UZI_GZ, -0.1, 0.16, UZI_GD, 0.22, [
-    [-0.04, 0.014], [0.12, 0.026], [0.36, 0.020], [0.62, 0.028], [0.86, 0.020], [1.0, 0.006],
-    [1.02, -0.010], [0.90, -0.028], [0.60, -0.034], [0.30, -0.024], [0.08, -0.016], [-0.04, -0.028], [-0.07, -0.006]
-  ]), 0.078, gunPoly, { bevel: 0.010, segs: 3 });   // GB-236: 78 mm across (was 56) under the 98 mm receiver
-  K.slab(shapedGrip(UZI_GZ, -0.1, 0.16, UZI_GD, 0.22, [
-    [0.10, -0.020], [0.28, -0.026], [0.55, -0.032], [0.78, -0.026],
-    [0.78, -0.016], [0.55, -0.020], [0.28, -0.014], [0.10, -0.010]
-  ]), 0.068, gunPoly, { bevel: 0.004, segs: 2 });
-  K.slab(gunBand([[0.09, -0.036], [0.094, -0.064], [0.072, -0.078], [0.028, -0.078], [0.014, -0.062]], 0.007), 0.03, gunDark, { bevel: 0.004 });   // GB-180: a moulded guard, not a wire (pass 4: as wide as a real guard)
+  // Grip. GB-309b / GB-314 (Jerry: check and fix all pistol grips; fidelity.md line 11): a MAC-10 rectangular
+  // box round its magazine — 33 mm wide x 55 deep at the game scale (builder 0.062 x 0.104), square-cornered
+  // 6-8 mm bevels, front-strap serrations, flat backstrap, floorplate flush with the base. Centre line / h /
+  // rake unchanged so the palm point and WEAPON_HOLD.uzi stay; mag part name unchanged.
+  const UZI_GZ = -0.030, UZI_GD = 0.104, UZI_GH = 0.16, UZI_GY = -0.1, UZI_RAKE = 0.22;
+  K.slab(shapedGrip(UZI_GZ, UZI_GY, UZI_GH, UZI_GD, UZI_RAKE, [
+    [-0.04, 0.026], [0.12, 0.026], [0.35, 0.026], [0.58, 0.026], [0.82, 0.026], [0.98, 0.024],
+    [1.02, 0.008], [1.02, -0.008], [0.98, -0.024], [0.75, -0.026], [0.45, -0.026], [0.18, -0.026],
+    [-0.02, -0.026], [-0.06, -0.010], [-0.05, 0.010]
+  ]), 0.062, gunPoly, { bevel: 0.007, segs: 2 });
+  gripRidges(K, gunDark, UZI_GZ, UZI_GY, UZI_GH, UZI_GD, UZI_RAKE, [0.42, 0.52, 0.62, 0.72, 0.82], 0.025, 0.048, 0.0028, 0.0022);   // front-strap serrations
+  // Flat base cap (mag floorplate reads flush with it).
+  K.box(0.050, 0.003, 0.090, gunDark, 0, UZI_GY - 0.52 * UZI_GH * Math.cos(UZI_RAKE), UZI_GZ - 0.52 * UZI_GH * Math.sin(UZI_RAKE), UZI_RAKE, 0, 0, null, 0.0006);
+  K.slab(gunBand([[0.09, -0.036], [0.094, -0.064], [0.072, -0.078], [0.028, -0.078], [0.014, -0.062]], 0.007), 0.03, gunDark, { bevel: 0.004 });   // moulded guard
   // GB-175: trigger face toward the grip, tip curling forward (the convention Jerry set on the revolver and sniper).
   // GB-180: a solid trigger blade (wide at the root, tapering to the curled tip), not a wire, moved to mid-guard.
   K.slab([[0.0574, -0.0411], [0.0492, -0.0532], [0.0498, -0.0617], [0.0582, -0.0692], [0.0538, -0.0748], [0.0422, -0.0663], [0.0388, -0.0508], [0.0466, -0.0349]], 0.011, gunAccent, { bevel: 0.002 });
-  K.box(0.006, 0.02, 0.02, gunDark, -0.052, -0.02, 0.0);
+  // Side panels: flat faces on the rectangular grip (something on every face).
   for (const sx of [-1, 1]) {
-    const panel = shapedGrip(UZI_GZ, -0.1, 0.16, UZI_GD, 0.22, [[0.22, 0.010], [0.48, 0.012], [0.76, 0.008], [0.80, -0.008], [0.62, -0.018], [0.36, -0.012], [0.18, -0.002]]);
-    K.slab(panel, .0016, gunPoly, {x: sx * .0392, bevel: .0006});
-    for (let i = 0; i < 6; i++) K.slab(gunBand(shapedGrip(UZI_GZ, -0.1, 0.16, UZI_GD, 0.22, [[0.30 + i * 0.08, 0.006], [0.34 + i * 0.08, -0.008]]), .0008), .001, gunDark, {x: sx * .040, bevel: .0003});
-    for (const [u, v] of [[0.32, -0.004], [0.72, -0.006]]) {
-      const [z, y] = shapedGrip(UZI_GZ, -0.1, 0.16, UZI_GD, 0.22, [[u, v]])[0];
-      K.cyl(.0026, .0026, .0016, gunAccent, sx * .0402, y, z, null, 8, 'x');
-    }
+    const panel = shapedGrip(UZI_GZ, UZI_GY, UZI_GH, UZI_GD, UZI_RAKE, [[0.18, 0.014], [0.50, 0.014], [0.82, 0.012], [0.86, -0.012], [0.50, -0.014], [0.18, -0.012]]);
+    K.slab(panel, 0.0016, gunPoly, { x: sx * 0.0315, bevel: 0.0006 });
   }
-  K.cyl(.01, .01, .003, gunAccent, -.0515, .033, .006, null, 16, 'x');
+  // GB-309/GB-314: mag release on the left grip face (paddle + button) — yardstick; x on the 62 mm box face.
+  K.box(0.0045, 0.014, 0.022, gunDark, -0.0335, -0.048, 0.010, 0, 0, 0, null, 0.001);   // paddle
+  D.screw(gun, -0.0355, -0.048, 0.010, { axis: 'x', side: -1, r: 0.0036, head: 0.0018, kind: 'button', mat: D.mats.bright });
+  D.screw(gun, -0.0505, 0.033, 0.006, { axis: 'x', side: -1, r: 0.0085, head: 0.0022, kind: 'slot', mat: D.mats.dark });   // GB-309: selector dial (attached)
   K.slab([[-.001, .027], [.026, .025], [.026, .031], [.009, .038], [.004, .044]], .003, gunDark, {x: -.0535, bevel: .001});
   // The narrow magazine passes through the grip. Bake its rake into the inner
   // assembly: reload animates the outer group back to zero at insertion.
@@ -512,6 +531,28 @@ export function makeUziModel(ctx) {
   for (let i = 0; i < 5; i++) {const z = .459 + i * .0034; threads.push([.02055, z], [.02055, z + .001], [.0194, z + .0017]);}
   K.lathe(threads, gunDark, {y: .03, seg: 16});
   K.disc(.0095, gunRubber, 0, .03, .4779999852, 0, null, 16);
+  // --- GB-309 fidelity (D-121 / docs/fps/fidelity.md Wasp list) ---
+  // Extra stamped receiver ribs (horizontal) + spot welds along the seam (yardstick).
+  for (const sx of [-1, 1]) {
+    D.ribs(gun, { x: sx * 0.0498, y: 0.028, z: 0.10, axis: 'x', side: sx, along: 'z', count: 7, pitch: 0.014, w: 0.012, h: 0.0010, t: 0.0022, mat: D.mats.dark });
+    D.ribs(gun, { x: sx * 0.0498, y: 0.028, z: -0.075, axis: 'x', side: sx, along: 'z', count: 5, pitch: 0.014, w: 0.012, h: 0.0010, t: 0.0022, mat: D.mats.dark });
+    for (const [y, z] of [[0.014, -0.116], [0.014, 0.198], [0.042, -0.116], [0.042, 0.198], [0.060, -0.05], [0.060, 0.12]]) {
+      D.rivet(gun, sx * 0.0502, y, z, { axis: 'x', side: sx, r: 0.0026, mat: D.mats.dark });
+    }
+  }
+  // Top cocking knob slot between the sight ears (yardstick); the work knob rides in this groove.
+  D.groove(gun, { x: 0, y: 0.098, z: 0.05, axis: 'y', side: 1, along: 'z', len: 0.26, w: 0.010 });
+  K.box(0.014, 0.0035, 0.24, gunDark, 0, 0.094, 0.05, 0, 0, 0, null, 0.0004);   // recessed channel floor
+  // Strap / sling loop at the rear of the receiver (yardstick).
+  K.tor(0.011, 0.0022, gunDark, 0, 0.018, -0.152, Math.PI / 2, 0, 0, null, Math.PI * 2, 14);
+  K.box(0.016, 0.006, 0.004, gunMid, 0, 0.018, -0.140, 0, 0, 0, null, 0.0008);   // loop mount
+  // Lower receiver seam line both sides (yardstick: the lower's seam).
+  for (const sx of [-1, 1]) D.groove(gun, { x: sx * 0.0492, y: -0.017, z: 0.04, axis: 'x', side: sx, along: 'z', len: 0.30, w: 0.0009 });
+  // Threaded muzzle thread protector (distinct collar over the existing threads; bore disc stays).
+  K.cyl(0.0155, 0.0155, 0.014, gunDark, 0, 0.03, 0.468, null, 16);
+  K.cyl(0.0135, 0.0135, 0.006, gunMid, 0, 0.03, 0.476, null, 14);
+  for (let i = 0; i < 12; i++) { const a = i / 12 * Math.PI * 2; flatDetail(THREE, gun, gunAccent, .0022, .0022, .012, Math.cos(a) * .0158, .03 + Math.sin(a) * .0158, .468, a); }
+  // Front sight post kept (GB-259); knob stays gun.userData.work (GB-269 / card).
   gunEffects(gun, new THREE.Vector3(0, 0.03, 0.48), 0.05, 2.8, 7, 0.005);
   gun.userData.laser.position.set(0, 0.03, 4.0);
   gun.userData.laserBaseZ = 0.45;
@@ -527,6 +568,7 @@ export function makeKnifeModel(ctx) {
   const kn = new THREE.Group();
   g.add(kn);
   const K = gunKit(kn);
+  const D = gunDetail(ctx);   // GB-310 / CL-309 helpers
   // Combat knife: a pommel and a ridged grip, a crossguard, a clip-point blade with its fuller and edge.
   K.lathe([[0, -.142], [.024, -.142], [.028, -.138], [.031, -.13], [.031, -.121], [.028, -.116], [0, -.116]], gunDark, {parent: kn, seg: 20});
   const ridges = [[0, -0.118], [0.026, -0.118]];
@@ -543,6 +585,24 @@ export function makeKnifeModel(ctx) {
     for (const x of [-.0022, .0022]) {const eye = K.disc(.00125, bladeMat, x, side * .00575, .057, 0, kn, 8); eye.rotation.x = -side * Math.PI / 2;}
     for (const x of [-.0015, .0015]) K.box(.00065, .0003, .0016, bladeMat, x, side * .00575, .0498, 0, 0, 0, kn);
   }
+  // --- GB-310 fidelity (D-121 / docs/fps/fidelity.md knife list) ---
+  // Guard pins through the crossguard (attached; yardstick: guard).
+  D.pin(kn, 0, 0, -0.018, { axis: 'y', len: 0.032, r: 0.0018, mat: D.mats.steel });
+  D.pin(kn, 0, 0, 0.018, { axis: 'y', len: 0.032, r: 0.0018, mat: D.mats.steel });
+  // Pommel butt-cap nut (yardstick: pommel).
+  D.screw(kn, 0, 0, -0.142, { axis: 'z', side: -1, r: 0.0075, head: 0.0032, kind: 'slot', mat: D.mats.dark });
+  // Fuller accent grooves on both faces (yardstick: fuller reads at hip).
+  D.groove(kn, { x: 0.0, y: 0.0054, z: 0.18, axis: 'y', side: 1, along: 'z', len: 0.18, w: 0.0010 });
+  D.groove(kn, { x: 0.0, y: -0.0054, z: 0.18, axis: 'y', side: -1, along: 'z', len: 0.18, w: 0.0010 });
+  // Ricasso panel lines beside the guard (no flat slab).
+  D.groove(kn, { x: 0.0, y: 0.0052, z: 0.055, axis: 'y', side: 1, along: 'z', len: 0.028, w: 0.0008 });
+  D.groove(kn, { x: 0.0, y: -0.0052, z: 0.055, axis: 'y', side: -1, along: 'z', len: 0.028, w: 0.0008 });
+  // Choil notch at the edge near the guard (clip-point knife detail).
+  K.box(0.0045, 0.011, 0.012, gunDark, -0.038, 0, 0.048, 0, 0, 0, kn, 0.001);
+  // Ridged grip kept via the lathe ridges above (torus accents dropped to stay under 4 k tris).
+  // Quillon tip rivets on the crossguard ends.
+  D.rivet(kn, 0.048, 0, 0, { axis: 'x', side: 1, r: 0.0028, mat: D.mats.dark });
+  D.rivet(kn, -0.048, 0, 0, { axis: 'x', side: -1, r: 0.0028, mat: D.mats.dark });
   // Machete: long, wide, slightly swept blade with a black polymer grip and
   // a flared tip — reads as a different tool at a glance.
   const mc = new THREE.Group();
@@ -555,9 +615,24 @@ export function makeKnifeModel(ctx) {
     M.slab(handlePanel, .0015, gloveMat, {x: side * .0157, bevel: .0006, parent: mc});
     checkeredPanel(THREE, mc, gunDark, handlePanel, side * .01655, .005, .0012);
   }
-  for (const z of [-0.11, -0.07, -0.03]) M.cyl(.005, .005, .036, brassMat, 0, 0, z, mc, 14, 'x');
+  for (const z of [-0.11, -0.07, -0.03]) D.pin(mc, 0, 0, z, { axis: 'x', len: 0.036, r: 0.0042, mat: D.mats.brass });   // GB-310: attached pins (was floating brass cyl)
   M.box(0.05, 0.075, 0.02, gunDark, 0, 0, 0.03, 0, 0, 0, mc, 0.006);
   groundBlade(THREE, mc, gunAccent, edgeMat, [[.035, .031, -.031, 0], [.08, .0307, -.0346, 0], [.1, .0306, -.038, 1], [.44, .0283, -.08, 1], [.48, .028, -.086, 0], [.5, .026, -.088, 0], [.56, .02, -.078, 0], [.6, .012, -.062, 0], [.63, .004, -.04, 0], [.655, -.004, -.018, 0], [.67, -.008, -.008, 0]], {fuller: .019, edgeWidth: .012});   // GB-180 pass 7: a swept point, not a squared end
+  // --- GB-310 fidelity (D-121 / docs/fps/fidelity.md machete list) ---
+  // Polymer grip mold parting line + finger-swell ribs (yardstick: polymer grip texture).
+  D.groove(mc, { x: 0.0162, y: 0.0, z: -0.06, axis: 'x', side: 1, along: 'z', len: 0.14, w: 0.0009 });
+  D.groove(mc, { x: -0.0162, y: 0.0, z: -0.06, axis: 'x', side: -1, along: 'z', len: 0.14, w: 0.0009 });
+  D.ribs(mc, { x: 0.0164, y: 0.0, z: -0.06, axis: 'x', side: 1, along: 'z', count: 5, pitch: 0.022, w: 0.018, h: 0.0009, t: 0.0020, mat: D.mats.dark });
+  D.ribs(mc, { x: -0.0164, y: 0.0, z: -0.06, axis: 'x', side: -1, along: 'z', count: 5, pitch: 0.022, w: 0.018, h: 0.0009, t: 0.0020, mat: D.mats.dark });
+  // Bolster face screws on the guard plate (pins already attached above).
+  D.screw(mc, 0.024, 0.0, 0.03, { axis: 'x', side: 1, r: 0.0030, head: 0.0016, kind: 'slot', mat: D.mats.dark });
+  D.screw(mc, -0.024, 0.0, 0.03, { axis: 'x', side: -1, r: 0.0030, head: 0.0016, kind: 'slot', mat: D.mats.dark });
+  // Hang hole / butt ring at the grip rear (common machete detail).
+  M.tor(0.010, 0.0020, gunDark, 0, 0, -0.155, Math.PI / 2, 0, 0, mc, Math.PI * 2, 14);
+  // Fuller accent on the wide blade (reads at hip; groundBlade fuller kept).
+  D.groove(mc, { x: 0.0045, y: 0.0, z: 0.28, axis: 'x', side: 1, along: 'z', len: 0.28, w: 0.0012 });
+  D.groove(mc, { x: -0.0045, y: 0.0, z: 0.28, axis: 'x', side: -1, along: 'z', len: 0.28, w: 0.0012 });
+  // Teeth (GB-235) kept below; spine stays plain.
   // GB-235 (Jerry: "Machete serrations should be on blade not on top of machete"): the 16 raked teeth run along the cutting
   // edge (the lower edge groundBlade grinds, z 0.14-0.54), pointing down from it; the spine is plain.
   {

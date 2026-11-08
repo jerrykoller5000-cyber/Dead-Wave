@@ -1,0 +1,63 @@
+{
+  "gun": "launcher",
+  "name": "Grenade Launcher (M32 MGL / Milkor Pattern)",
+  "refFile": "naders_grenade_launcher.glb",
+  "realLength": 0.75,
+  "sizeK": 0.6978,
+  "before": {
+    "tris": 8980,
+    "meshes": 35,
+    "materials": 8,
+    "floatingCount": 0,
+    "box": {
+      "x": 0.2086,
+      "y": 0.2379,
+      "z": 0.8276
+    },
+    "measure": {
+      "length": 0.8276,
+      "boreOverGrip": 0.0523,
+      "rakeDeg": 87.3,
+      "sightH": 0.0816
+    }
+  },
+  "after": {
+    "tris": 11840,
+    "meshes": 36,
+    "materials": 8,
+    "floatingCount": 0,
+    "box": {
+      "x": 0.2086,
+      "y": 0.2643,
+      "z": 0.8276
+    },
+    "measure": {
+      "length": 0.8276,
+      "boreOverGrip": 0.0765,
+      "rakeDeg": 74.2,
+      "sightH": 0.0615
+    }
+  },
+  "ref": {
+    "tris": 15516,
+    "meshes": 21,
+    "box": {
+      "x": 0.1569,
+      "y": 0.2909,
+      "z": 0.75
+    },
+    "measure": {
+      "length": 0.75,
+      "boreOverGrip": -0.0155,
+      "rakeDeg": 80,
+      "sightH": 0.1386
+    }
+  },
+  "duskPerf": {
+    "fps": 57.9150579157594,
+    "low": 47.169811347278674,
+    "worst": 21.19999998807907,
+    "hitches": 19,
+    "frames": 57
+  }
+}

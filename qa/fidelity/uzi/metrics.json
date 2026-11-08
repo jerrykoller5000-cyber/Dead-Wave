@@ -1,0 +1,63 @@
+{
+  "gun": "uzi",
+  "name": "Wasp SMG (MAC-10 / Uzi Pattern)",
+  "refFile": "uzi.glb",
+  "realLength": 0.47,
+  "sizeK": 0.6548,
+  "before": {
+    "tris": 5986,
+    "meshes": 10,
+    "materials": 6,
+    "floatingCount": 0,
+    "box": {
+      "x": 0.0868,
+      "y": 0.3174,
+      "z": 0.4321
+    },
+    "measure": {
+      "length": 0.4321,
+      "boreOverGrip": 0.092,
+      "rakeDeg": 6.5,
+      "sightH": 0.0838
+    }
+  },
+  "after": {
+    "tris": 8284,
+    "meshes": 17,
+    "materials": 8,
+    "floatingCount": 0,
+    "box": {
+      "x": 0.0868,
+      "y": 0.3174,
+      "z": 0.4328
+    },
+    "measure": {
+      "length": 0.4328,
+      "boreOverGrip": 0.0736,
+      "rakeDeg": 15.4,
+      "sightH": 0.0838
+    }
+  },
+  "ref": {
+    "tris": 3525,
+    "meshes": 10,
+    "box": {
+      "x": 0.0603,
+      "y": 0.2589,
+      "z": 0.47
+    },
+    "measure": {
+      "length": 0.47,
+      "boreOverGrip": 0.0372,
+      "rakeDeg": 86.9,
+      "sightH": 0.0545
+    }
+  },
+  "duskPerf": {
+    "fps": 60.58770069785257,
+    "low": 57.471264348129,
+    "worst": 17.400000005960464,
+    "hitches": 15,
+    "frames": 60
+  }
+}

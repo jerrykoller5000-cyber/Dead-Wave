@@ -1,0 +1,45 @@
+{
+  "gun": "minigun",
+  "name": "Rotary Gun (M134)",
+  "timestamp": "2026-11-07T21:10:00.000Z",
+  "source": "review/GP-20041/fps-ab.json",
+  "before": {
+    "run1": {
+      "fps": 60.2,
+      "low": 52.91,
+      "worst": 18.9,
+      "hitches": 0
+    },
+    "run2": {
+      "fps": 58.87,
+      "low": 33.78,
+      "worst": 29.6,
+      "hitches": 0
+    },
+    "meanFps": 59.54,
+    "meanLow": 43.35,
+    "worst": 29.6,
+    "hitches": 0
+  },
+  "after": {
+    "run1": {
+      "fps": 58.1,
+      "low": 43.86,
+      "worst": 22.8,
+      "hitches": 0
+    },
+    "run2": {
+      "fps": 59.85,
+      "low": 52.91,
+      "worst": 18.9,
+      "hitches": 0
+    },
+    "meanFps": 58.98,
+    "meanLow": 48.38,
+    "worst": 22.8,
+    "hitches": 0
+  },
+  "deltaFps": -0.56,
+  "deltaLow": 5.03,
+  "d99Pass": true
+}

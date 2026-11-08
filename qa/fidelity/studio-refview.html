@@ -25,7 +25,12 @@ import { weaponModelContext } from '../../tools/marine-inspector.js';
 import { floatingParts } from '../../studio/gun-detail.js';
 
 // AFTER models from working tree
-import { makePistolModel as makePistolAfter } from '../../studio/weapon-sidearms.js';
+import {
+  makePistolModel as makePistolAfter,
+  makeRevolverModel as makeRevolverAfter,
+  makeUziModel as makeUziAfter,
+  makeKnifeModel as makeKnifeAfter
+} from '../../studio/weapon-sidearms.js';
 import {
   makeM4Model as makeM4After,
   makeAkModel as makeAkAfter,
@@ -33,9 +38,21 @@ import {
   makeShotgunModel as makeShotgunAfter,
   makeSniperModel as makeSniperAfter
 } from '../../studio/weapon-longarms.js';
+import {
+  makeMinigunModel as makeMinigunAfter,
+  makeLauncherModel as makeLauncherAfter,
+  makeChainsawModel as makeChainsawAfter
+} from '../../studio/weapon-heavy.js';
+import { makeKatanaModel as makeKatanaAfter } from '../../studio/katana.js';
+import { makeFragGrenade as makeFragGrenadeAfter } from '../../studio/frag-grenade.js';
 
 // BEFORE models from commit 28137581
-import { makePistolModel as makePistolBefore } from '../weapon-sidearms.28137581.js';
+import {
+  makePistolModel as makePistolBefore,
+  makeRevolverModel as makeRevolverBefore,
+  makeUziModel as makeUziBefore,
+  makeKnifeModel as makeKnifeBefore
+} from '../weapon-sidearms.28137581.js';
 import {
   makeM4Model as makeM4Before,
   makeAkModel as makeAkBefore,
@@ -43,6 +60,13 @@ import {
   makeShotgunModel as makeShotgunBefore,
   makeSniperModel as makeSniperBefore
 } from '../weapon-longarms.28137581.js';
+import {
+  makeMinigunModel as makeMinigunBefore,
+  makeLauncherModel as makeLauncherBefore,
+  makeChainsawModel as makeChainsawBefore
+} from '../weapon-heavy.28137581.js';
+import { makeKatanaModel as makeKatanaBefore } from '../katana.28137581.js';
+import { makeFragGrenade as makeFragGrenadeBefore } from '../frag-grenade.28137581.js';
 
 const MARINE_UPM = 1.655 / 1.80;
 
@@ -116,9 +140,141 @@ const WEAPONS = {
     sizeK: (1.15 * 1.25 * MARINE_UPM / 1.608) * 0.88,
     makeBefore: makeSniperBefore,
     makeAfter: makeSniperAfter,
-    receiverCenter: [0, 0.05, -0.1],
+    receiverCenter: [0.03, 0.05, -0.05],
     gripCenter: [0, -0.088, -0.117],
     orderIx: 8
+  },
+  minigun: {
+    id: 'minigun',
+    name: 'Rotary Gun (M134 Handheld Minigun)',
+    refFile: 'm134_handheld_minigun.glb',
+    real: 0.80,
+    sizeK: 0.88,
+    makeBefore: makeMinigunBefore,
+    makeAfter: makeMinigunAfter,
+    receiverCenter: [0.12, 0.09, 0.0],
+    gripCenter: [-0.304, 0.012, 0.160],
+    orderIx: 0
+  },
+  revolver: {
+    id: 'revolver',
+    name: 'Revolver (.357 Magnum Pattern)',
+    refFile: '38_special_revolver.glb',
+    real: 0.27,
+    sizeK: (0.27 * 1.4 * MARINE_UPM / 0.484) * 1.08,
+    makeBefore: makeRevolverBefore,
+    makeAfter: makeRevolverAfter,
+    receiverCenter: [0, 0.04, 0.02],
+    gripCenter: [0, -0.065, -0.08],
+    orderIx: 7
+  },
+  uzi: {
+    id: 'uzi',
+    name: 'Wasp SMG (MAC-10 / Uzi Pattern)',
+    refFile: 'uzi.glb',
+    real: 0.47,
+    sizeK: 0.47 * 1.0 * MARINE_UPM / 0.660,
+    makeBefore: makeUziBefore,
+    makeAfter: makeUziAfter,
+    receiverCenter: [0, 0.04, 0.0],
+    gripCenter: [0, -0.09, -0.05],
+    orderIx: 4
+  },
+  launcher: {
+    id: 'launcher',
+    name: 'Grenade Launcher (M32 MGL / Milkor Pattern)',
+    refFile: 'naders_grenade_launcher.glb',
+    real: 0.75,
+    sizeK: (0.75 * 1.2 * MARINE_UPM / 1.091) * 0.92,
+    makeBefore: makeLauncherBefore,
+    makeAfter: makeLauncherAfter,
+    receiverCenter: [0.08, 0.13, -0.16],
+    gripCenter: [0, -0.09, -0.05],
+    orderIx: 9
+  },
+  chainsaw: {
+    id: 'chainsaw',
+    name: 'Chainsaw (Heavy Tool / Stihl Pattern)',
+    refFile: 'chainsaw.glb',
+    real: 0.85,
+    sizeK: (0.85 * 1.2 * MARINE_UPM / 1.376) * 1.18,
+    makeBefore: makeChainsawBefore,
+    makeAfter: makeChainsawAfter,
+    receiverCenter: [0.08, 0.06, -0.15],
+    gripCenter: [0, 0.04, -0.44],
+    orderIx: 11
+  },
+  knife: {
+    id: 'knife',
+    name: 'Combat Knife (KA-BAR Pattern)',
+    refFile: null,
+    real: 0.30,
+    sizeK: 0.30 * 1.3 * MARINE_UPM / 0.603,
+    makeBefore: (ctx) => {
+      const g = makeKnifeBefore(ctx);
+      g.visible = true;
+      if (g.userData.knifeModel) g.userData.knifeModel.visible = true;
+      if (g.userData.macheteModel) g.userData.macheteModel.visible = false;
+      return g;
+    },
+    makeAfter: (ctx) => {
+      const g = makeKnifeAfter(ctx);
+      g.visible = true;
+      if (g.userData.knifeModel) g.userData.knifeModel.visible = true;
+      if (g.userData.macheteModel) g.userData.macheteModel.visible = false;
+      return g;
+    },
+    receiverCenter: [0, 0.03, 0.06],
+    gripCenter: [0, 0.0, -0.06],
+    orderIx: null
+  },
+  machete: {
+    id: 'machete',
+    name: 'Machete (Tactical Bolo Pattern)',
+    refFile: null,
+    real: 0.62,
+    sizeK: 0.62 * 1.15 * MARINE_UPM / 0.92,
+    makeBefore: (ctx) => {
+      const g = makeKnifeBefore(ctx);
+      g.visible = true;
+      if (g.userData.knifeModel) g.userData.knifeModel.visible = false;
+      if (g.userData.macheteModel) g.userData.macheteModel.visible = true;
+      return g;
+    },
+    makeAfter: (ctx) => {
+      const g = makeKnifeAfter(ctx);
+      g.visible = true;
+      if (g.userData.knifeModel) g.userData.knifeModel.visible = false;
+      if (g.userData.macheteModel) g.userData.macheteModel.visible = true;
+      return g;
+    },
+    receiverCenter: [0, 0.0, 0.28],
+    gripCenter: [0, 0.0, -0.06],
+    orderIx: null
+  },
+  katana: {
+    id: 'katana',
+    name: 'Katana (Red Katana)',
+    refFile: null,
+    real: 0.98,
+    sizeK: 0.98 * 1.1 * MARINE_UPM / 0.92,
+    makeBefore: (ctx) => makeKatanaBefore({ THREE: ctx.THREE }),
+    makeAfter: (ctx) => makeKatanaAfter({ THREE: ctx.THREE }),
+    receiverCenter: [0, 0.0, 0.12],
+    gripCenter: [0, 0.0, -0.15],
+    orderIx: null
+  },
+  grenade: {
+    id: 'grenade',
+    name: 'Frag Grenade (M67 Pattern)',
+    refFile: 'm67.glb',
+    real: 0.09,
+    sizeK: 1.0,
+    makeBefore: (ctx) => makeFragGrenadeBefore({ THREE: ctx.THREE }),
+    makeAfter: (ctx) => makeFragGrenadeAfter({ THREE: ctx.THREE }),
+    receiverCenter: [0, 0.02, 0.0],
+    gripCenter: [0, 0.06, 0.0],
+    orderIx: null
   }
 };
 
@@ -261,20 +417,20 @@ function isShown(o) {
   return true;
 }
 
-function bodyBox(obj) {
+function bodyBox(obj, isRef = false) {
   const box = new THREE.Box3();
   obj.updateWorldMatrix(true, true);
   obj.traverse((o) => {
     if (!isShown(o)) return;
     if (!o.geometry.boundingBox) o.geometry.computeBoundingBox();
     const b = o.geometry.boundingBox.clone().applyMatrix4(o.matrixWorld);
-    if (b.max.z > 2.5) return; // avoid laser discs
+    if (!isRef && b.max.z > 2.5 && /laser/i.test(o.name)) return;
     box.union(b);
   });
   return box;
 }
 
-function pointsOf(obj) {
+function pointsOf(obj, isRef = false) {
   obj.updateMatrixWorld(true);
   const out = [];
   const v = new THREE.Vector3();
@@ -284,7 +440,7 @@ function pointsOf(obj) {
     const step = Math.max(1, Math.floor(p.count / 800));
     for (let i = 0; i < p.count; i += step) {
       v.fromBufferAttribute(p, i).applyMatrix4(o.matrixWorld);
-      if (v.z > 2.5) continue;
+      if (!isRef && v.z > 2.5 && /laser/i.test(o.name)) continue;
       out.push(v.x, v.y, v.z);
     }
   });
@@ -293,17 +449,17 @@ function pointsOf(obj) {
 
 function orientLongestToZ(obj) {
   obj.updateMatrixWorld(true);
-  const box = bodyBox(obj);
+  const box = bodyBox(obj, true);
   const s = box.getSize(new THREE.Vector3());
   const axes = [['x', s.x], ['y', s.y], ['z', s.z]].sort((a, b) => b[1] - a[1]);
   if (axes[0][0] === 'x') obj.rotateY(Math.PI / 2);
   else if (axes[0][0] === 'y') obj.rotateX(-Math.PI / 2);
   obj.updateMatrixWorld(true);
-  const box2 = bodyBox(obj);
+  const box2 = bodyBox(obj, true);
   const s2 = box2.getSize(new THREE.Vector3());
   if (s2.x > s2.y) obj.rotateZ(Math.PI / 2);
   obj.updateMatrixWorld(true);
-  const box3 = bodyBox(obj);
+  const box3 = bodyBox(obj, true);
   const size = box3.getSize(new THREE.Vector3());
   const yCut = box3.min.y + size.y * 0.5;
   let zSum = 0, n = 0;
@@ -321,9 +477,9 @@ function orientLongestToZ(obj) {
   if (n > 8 && zSum / n > (box3.min.z + box3.max.z) * 0.5) obj.rotateY(Math.PI);
 }
 
-function measure(obj) {
-  const pts = pointsOf(obj);
-  const box = bodyBox(obj);
+function measure(obj, isRef = false) {
+  const pts = pointsOf(obj, isRef);
+  const box = bodyBox(obj, isRef);
   if (pts.length < 12 || box.isEmpty()) return null;
   const size = box.getSize(new THREE.Vector3());
   const z0 = box.min.z, z1 = box.max.z, y0 = box.min.y, y1 = box.max.y;
@@ -392,9 +548,9 @@ function buildRuler(span) {
   }
 }
 
-function settle(obj) {
+function settle(obj, isRef = false) {
   obj.updateMatrixWorld(true);
-  const box = bodyBox(obj);
+  const box = bodyBox(obj, isRef);
   if (box.isEmpty()) return new THREE.Vector3();
   const c = box.getCenter(new THREE.Vector3());
   obj.position.sub(c);
@@ -441,18 +597,25 @@ async function loadWeapon(gunId) {
   rootBefore.add(gunBefore);
 
   // 3. Load Reference GLB
-  const url = `../../Claude outputs/refs/models/${spec.refFile}`;
-  const res = await fetch(url);
-  if (!res.ok) throw new Error(`Failed to load ${url}: ${res.status}`);
-  const glbBuf = await res.arrayBuffer();
-  gunRef = parseGlb(glbBuf);
-  orientLongestToZ(gunRef);
-  gunRef.updateMatrixWorld(true);
-  gunRef.userData.orientedQuat = gunRef.quaternion.clone();
-  const rawRefSize = new THREE.Box3().setFromObject(gunRef).getSize(new THREE.Vector3());
-  const longest = Math.max(rawRefSize.x, rawRefSize.y, rawRefSize.z) || 1;
-  gunRef.scale.setScalar(spec.real / longest);
-  rootRef.add(gunRef);
+  if (spec.refFile) {
+    const url = `../../Claude outputs/refs/models/${spec.refFile}`;
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`Failed to load ${url}: ${res.status}`);
+    const glbBuf = await res.arrayBuffer();
+    gunRef = parseGlb(glbBuf);
+    orientLongestToZ(gunRef);
+    gunRef.updateMatrixWorld(true);
+    gunRef.userData.orientedQuat = gunRef.quaternion.clone();
+    const rawRefSize = new THREE.Box3().setFromObject(gunRef).getSize(new THREE.Vector3());
+    const longest = Math.max(rawRefSize.x, rawRefSize.y, rawRefSize.z) || 1;
+    gunRef.scale.setScalar(spec.real / longest);
+    rootRef.add(gunRef);
+  } else {
+    gunRef = gunBefore.clone(true);
+    gunRef.updateMatrixWorld(true);
+    gunRef.userData.orientedQuat = gunRef.quaternion.clone();
+    rootRef.add(gunRef);
+  }
 
   // Measurements
   const afterCounts = countTrisAndMats(gunOurs);
@@ -461,7 +624,7 @@ async function loadWeapon(gunId) {
 
   const afterMeas = measure(gunOurs);
   const beforeMeas = measure(gunBefore);
-  const refMeas = measure(gunRef);
+  const refMeas = measure(gunRef, true);
 
   const isExcludedPart = (o) => {
     if (!o.visible) return true;
@@ -476,7 +639,7 @@ async function loadWeapon(gunId) {
 
   const afterBox = bodyBox(gunOurs).getSize(new THREE.Vector3());
   const beforeBox = bodyBox(gunBefore).getSize(new THREE.Vector3());
-  const refBox = bodyBox(gunRef).getSize(new THREE.Vector3());
+  const refBox = bodyBox(gunRef, true).getSize(new THREE.Vector3());
 
   metricsData = {
     gun: gunId,
@@ -543,23 +706,25 @@ async function renderView(viewName) {
     rootRuler.visible = true;
 
     settle(gunOurs);
-    settle(gunRef);
+    settle(gunRef, true);
 
     const gap = activeSpec.real > 0.4 ? 0.22 : 0.12;
     const ob = bodyBox(gunOurs);
-    const rb = bodyBox(gunRef);
+    const rb = bodyBox(gunRef, true);
 
     gunOurs.position.x = -(ob.max.x + gap * 0.5);
     gunRef.position.x = gap * 0.5 - rb.min.x;
     gunRef.position.y += (ob.max.y - ob.min.y) + gap * 0.8;
 
-    const both = new THREE.Box3().union(bodyBox(gunOurs)).union(bodyBox(gunRef));
+    const both = new THREE.Box3().union(bodyBox(gunOurs)).union(bodyBox(gunRef, true));
     const mid = both.getCenter(new THREE.Vector3());
-    const span = Math.max(1, activeSpec.real) + 0.2;
+    const bothSize = both.getSize(new THREE.Vector3());
+    const maxDimension = Math.max(bothSize.x, bothSize.y, bothSize.z, activeSpec.real);
+    const span = Math.max(0.2, maxDimension) + 0.1;
     rootRuler.position.set(0, both.min.y - 0.02, both.min.z);
     buildRuler(span);
 
-    const dist = Math.max(1.1, activeSpec.real * 1.55);
+    const dist = Math.max(0.35, maxDimension * 1.55);
 
     if (viewName === 'refview-side') {
       camera.up.set(0, 1, 0);
@@ -585,14 +750,25 @@ async function renderView(viewName) {
     settle(targetGun);
     const box = bodyBox(targetGun);
     const mid = box.getCenter(new THREE.Vector3());
-    const len = Math.max(0.2, box.getSize(new THREE.Vector3()).z);
-    const dist = Math.max(0.48, len * 1.35);
+    const sz = box.getSize(new THREE.Vector3());
+    const len = Math.max(0.08, sz.z, sz.x, sz.y);
+    const dist = Math.max(0.22, len * 1.35);
 
     if (viewName.includes('-side-')) {
       camera.position.set(mid.x + dist, mid.y + 0.02, mid.z);
       camera.lookAt(mid);
+    } else if (viewName.includes('-sider-')) {
+      camera.position.set(mid.x - dist, mid.y + 0.02, mid.z);
+      camera.lookAt(mid);
+    } else if (viewName.includes('-top-')) {
+      camera.up.set(0, 0, -1);
+      camera.position.set(mid.x, mid.y + dist * 1.1, mid.z);
+      camera.lookAt(mid);
     } else if (viewName.includes('-tq-')) {
       camera.position.set(mid.x + dist * 0.8, mid.y + dist * 0.35, mid.z + dist * 0.6);
+      camera.lookAt(mid);
+    } else if (viewName.includes('-tqr-')) {
+      camera.position.set(mid.x - dist * 0.8, mid.y + dist * 0.35, mid.z - dist * 0.6);
       camera.lookAt(mid);
     }
   } else if (viewName.startsWith('crop-')) {
@@ -615,13 +791,19 @@ async function renderView(viewName) {
       : (isForend && activeSpec.forendCenter ? activeSpec.forendCenter : activeSpec.gripCenter);
 
     const target = new THREE.Vector3(anchorGunSpace[0], anchorGunSpace[1], anchorGunSpace[2]).multiplyScalar(activeSpec.sizeK);
-    const dist = 0.30;
+    const dist = (activeSpec.id === 'minigun' && isReceiver) ? 0.38 : (activeSpec.id === 'minigun' && !isReceiver) ? 0.32 : (activeSpec.id === 'chainsaw') ? 0.52 : (activeSpec.id === 'grenade') ? 0.18 : (activeSpec.id === 'revolver') ? 0.24 : (activeSpec.id === 'uzi') ? 0.26 : (activeSpec.id === 'launcher') ? 0.34 : 0.30;
     camera.fov = 28;
     camera.updateProjectionMatrix();
 
-    // Viewed from the gun's left (+x) as seen in first-person / tools/gunshot
-    camera.position.set(target.x + dist * 0.85, target.y + dist * 0.20, target.z - dist * 0.35);
-    camera.lookAt(target);
+    if (activeSpec.id === 'minigun' && !isReceiver) {
+      // Minigun side peg is at -X: view from -X so the peg and its mount are fully visible
+      camera.position.set(target.x - dist * 0.85, target.y + dist * 0.25, target.z + dist * 0.35);
+      camera.lookAt(target);
+    } else {
+      // Viewed from the gun's left (+x) as seen in first-person / tools/gunshot
+      camera.position.set(target.x + dist * 0.85, target.y + dist * 0.20, target.z - dist * 0.35);
+      camera.lookAt(target);
+    }
   }
 
   renderer.render(scene, camera);

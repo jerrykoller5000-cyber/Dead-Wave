@@ -408,24 +408,51 @@ export const VM_GRENADE = Object.freeze({
   bob: { y: 0.006, rate: 1.6 }   // the cocked hand's breathing
 });
 
+// CL-317 (the audit: unarmed and on a ladder the view fell back to the body's own arms past the eye): the hands without a
+// gun. 'empty': both hands hanging easy at the bottom corners, a slow breathing bob; the view keeps its last gun's arms
+// with the gun put away. 'ladder': each hand on the rung the body's own climb put it on (index.html _lad.hand, world
+// space, mirrored into the view like the hold), gripping over the rung (the fingers curl over and behind it: the hand
+// as on a grip rolled flat, pitched down), the elbows below and a little outside. Places p in view space as the eye sees
+// it (x mirrored for the left), e = [yaw, pitch, roll] of a hand as on a grip pointing that way.
+export const VM_HANDS = Object.freeze({
+  empty: {
+    r: { p: [0.21, -0.25, -0.46], e: [-0.15, 0.20, 0.60] },   // as on a grip pointing a little in and down, rolled in (view-space angles, as a gun's hip): the palms turn in, the fingers curled easy
+    l: { p: [-0.20, -0.26, -0.44], e: [0.15, 0.20, -0.60] },
+    elbow: { r: [0.08, -0.40, 0.14], l: [-0.08, -0.40, 0.14] },   // from the wrist (view space, the right's; the left's x mirrored): below and a little behind
+    bob: { y: 0.008, x: 0.004, rate: 1.4 }
+  },
+  ladder: {
+    grab: { e: [0.0, 1.05, 1.45], back: 0.03, down: 0.02 },   // the wrist a little behind and under the rung point
+    elbow: { r: [0.10, -0.36, 0.06], l: [-0.10, -0.36, 0.06] }
+  }
+});
+
 export const VM_SOCKETS = Object.freeze({
   // CL-293 (J54: "the left hand should grip the pistol the way a real shooter would"): the support hand comes in off the body's
   // hold (its fist sat 16 cm out from the grip, beside it) onto the grip's front, its fingers over the strong hand's (the
   // cloud look, 2026-11-02: in from -0.03 to -0.012 the fingers wrap without coming through the far side).
   pistol: { support: [-0.012, -0.10, -0.02] },
-  m4: { grip: [0, -0.106, -0.076], support: [0, 0.004, 0.36], magFoot: [0, -0.278, 0.04], work: [-0.03, -0.03, 0.105] },   // CL-310: the 40 mm handguard (its bottom -0.01, was -0.027) and the bolt catch on the 32 mm lower
+  // GB-312 (CL-310, GB-153 fit qa/2026-11-07-GB-312/fit/fit-fp.json): support fingers curled to the 40 mm handguard until each touches.
+  m4: { grip: [0, -0.106, -0.076], support: [0, 0.004, 0.36], magFoot: [0, -0.278, 0.04], work: [-0.03, -0.03, 0.105],   // CL-310: the 40 mm handguard (its bottom -0.01, was -0.027) and the bolt catch on the 32 mm lower
+    supportPose: { f: [[1.038, 1.194, 0.986, 0], [1.257, 1.446, 1.194, 0], [1.357, 1.561, 1.289, 0], [1.45, 1.668, 1.378, 0]], t: [1.45, -0.15, 0.87] } },
+  // GB-312 (re-fit after CL-310/313/314; was GB-311): support fingers on the 44 mm handguard; thumb curl 0.079 (was 0.08).
   // GB-311 (CL-311/CL-312, GB-153's fit run on the view gun and view hands, qa/2026-11-07-GB-311/fit/fit-fp-run2.json): the
   // support fingers curled to the slim handguard (44 mm, was 74) until each touches; the fist's thumb sat 19 mm into it.
   ak: { grip: [0, -0.126, -0.095], support: [0, -0.025, 0.37], magFoot: [0, -0.311, 0.14], work: [0.041, 0.02, 0.13],   // CL-311: the slim receiver's charging knob (x 0.041, was 0.083) and the mag 2 cm higher
-    supportPose: { f: [[0.949, 1.091, 0.902, 0], [0.973, 1.119, 0.924, 0], [1.055, 1.213, 1.002, 0], [0.973, 1.119, 0.924, 0]], t: [0.08, -0.15, 0.048] } },
+    supportPose: { f: [[0.946, 1.088, 0.899, 0], [0.976, 1.122, 0.927, 0], [1.03, 1.184, 0.978, 0], [0.966, 1.111, 0.918, 0]], t: [0.079, -0.15, 0.047] } },
   uzi: { grip: [0, -0.088, -0.027], support: [0, -0.03, 0.18], magFoot: [0, -0.324, -0.043], work: [0, 0.115, 0.11] },
+  // GB-312 (re-fit): index closes to a full curl (1.45; was 1.181); little finger free past the forend keeps the fist.
   // GB-311 (CL-312, the same fit): the fingers close further round the 44 mm forend (the fist's middle finger sat 10 mm in
   // at its root, so it curls round instead; the little finger meets nothing past the forend and keeps the fist's curl).
   shotgun: { grip: [0, -0.088, -0.056], support: [0, -0.016, 0.37], port: [0, -0.034, 0.12],   // CL-312 (D-121): the forend 44 mm across on the tube (its middle y -0.006, z 0.28-0.49); the loading port under the receiver
-    supportPose: { f: [[1.181, 1.358, 1.122, 0], [1.45, 1.668, 1.378, 0], [1.45, 1.668, 1.378, 0], [1.08, 1.242, 1.026, 0]], t: [1.45, -0.15, 0.87] } },
-  aa12: { grip: [0, -0.145, -0.166], support: [0, -0.035, 0.36], magFoot: [0, -0.415, 0.05], work: [-0.058, 0.05, 0.18] },   // CL-313: the charging handle on the 62 mm receiver (was 96)
+    supportPose: { f: [[1.45, 1.668, 1.378, 0], [1.45, 1.668, 1.378, 0], [1.45, 1.668, 1.378, 0], [1.08, 1.242, 1.026, 0]], t: [1.45, -0.15, 0.87] } },
+  // GB-312 (CL-313, GB-153 fit): support fingers wrap the 62 mm handguard; roots stay a few mm in (socket depth; WEAPON_HOLD unchanged).
+  aa12: { grip: [0, -0.145, -0.166], support: [0, -0.10, 0.36], magFoot: [0, -0.415, 0.05], work: [-0.058, 0.05, 0.18],   // CL-313 c: the support is a bar's axis in the fist; a box handguard 18 cm tall is held by its underside (-0.082), so the axis sits 2 cm under it (GB-312/314: at -0.035/-0.047 the palm was in the box)
+    supportPose: { f: [[1.45, 1.668, 1.378, 0], [1.45, 1.668, 1.378, 0], [1.45, 1.668, 1.378, 0], [1.306, 1.502, 1.241, 0]], t: [1.45, -0.15, 0.87] } },   // GB-314 GB-153 fit; palmD still ~-9.5 mm (note to Claude)
   revolver: { grip: [0, -0.07, -0.04], support: [-0.012, -0.10, -0.014] },   // J57: palm cups the grip, not air beside it
-  sniper: { grip: [0, -0.088, -0.117], support: [0, -0.005, 0.35], magFoot: [0, -0.203, 0.02], boltKnob: [0.13, 0.067, -0.16] },   // CL-306: the handle on +x (reads right in the mirrored view)
+  // GB-312 (CL-314, GB-153 fit): support fingers open on the 50 mm forend (fist sat 7-15 mm in); thumb keeps a full curl.
+  sniper: { grip: [0, -0.088, -0.117], support: [0, -0.005, 0.35], magFoot: [0, -0.203, 0.02], boltKnob: [0.13, 0.067, -0.16],   // CL-306: the handle on +x (reads right in the mirrored view)
+    supportPose: { f: [[0.766, 0.881, 0.728, 0], [0.527, 0.606, 0.501, 0], [0.2, 0.23, 0.19, 0], [0.09, 0.103, 0.085, 0]], t: [1.45, -0.15, 0.87] } },
   // CL-301 (GP-20022): rear throttle + front hoop. GB-292 (J1): contacts were already R=rear/L=front but the left fist
   // sat on the cowling behind the hoop (basis too steep) and the right hand had no gripBasis so the rear throttle read empty.
   // Right: vertical throttle, palm inward, elbow back; left: motorcycle on the hoop top, palm down, forearm mostly back.

@@ -1,0 +1,63 @@
+{
+  "gun": "aa12",
+  "name": "Breacher-12 (AA-12 Pattern)",
+  "refFile": "aa12.glb",
+  "realLength": 0.96,
+  "sizeK": 0.6843,
+  "before": {
+    "tris": 8876,
+    "meshes": 12,
+    "materials": 6,
+    "floatingCount": 0,
+    "box": {
+      "x": 0.2121,
+      "y": 0.4072,
+      "z": 1.0645
+    },
+    "measure": {
+      "length": 1.0645,
+      "boreOverGrip": 0.1479,
+      "rakeDeg": 62.2,
+      "sightH": 0.1129
+    }
+  },
+  "after": {
+    "tris": 13164,
+    "meshes": 100,
+    "materials": 7,
+    "floatingCount": 0,
+    "box": {
+      "x": 0.2121,
+      "y": 0.4072,
+      "z": 1.0652
+    },
+    "measure": {
+      "length": 1.0652,
+      "boreOverGrip": 0.0802,
+      "rakeDeg": 69,
+      "sightH": 0.1102
+    }
+  },
+  "ref": {
+    "tris": 25296,
+    "meshes": 5,
+    "box": {
+      "x": 0.2245,
+      "y": 0.3834,
+      "z": 0.96
+    },
+    "measure": {
+      "length": 0.96,
+      "boreOverGrip": 0.1477,
+      "rakeDeg": 57.8,
+      "sightH": 0.1446
+    }
+  },
+  "duskPerf": {
+    "fps": 53.823499543659615,
+    "low": 35.587188581905174,
+    "worst": 28.100000023841858,
+    "hitches": 17,
+    "frames": 53
+  }
+}

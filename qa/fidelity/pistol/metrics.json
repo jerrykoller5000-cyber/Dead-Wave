@@ -1,6 +1,6 @@
 {
   "gun": "pistol",
-  "name": "Pistol (Glock-19 style)",
+  "name": "Pistol (Service Pistol / Glock-19 style)",
   "refFile": "low_poly_glock-19.glb",
   "realLength": 0.195,
   "sizeK": 0.6032,
@@ -8,7 +8,7 @@
     "tris": 5232,
     "meshes": 18,
     "materials": 10,
-    "floatingCount": 1,
+    "floatingCount": 0,
     "box": {
       "x": 0.0328,
       "y": 0.166,
@@ -25,7 +25,7 @@
     "tris": 7152,
     "meshes": 35,
     "materials": 11,
-    "floatingCount": 1,
+    "floatingCount": 0,
     "box": {
       "x": 0.0339,
       "y": 0.166,

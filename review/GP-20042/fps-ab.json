@@ -1,0 +1,55 @@
+{
+  "setup": {
+    "backend": "WebGPU",
+    "beforeScale": 0.6452730806608357,
+    "currentScale": 0.6452730806608357
+  },
+  "runs": [
+    {
+      "label": "after",
+      "fps": 59.11231339580437,
+      "low": 52.910052893366746,
+      "worst": 18.900000005960464,
+      "hitches": 0,
+      "frames": 59,
+      "weapon": "chainsaw",
+      "view": "chainsaw"
+    },
+    {
+      "label": "before",
+      "fps": 57.930483418861485,
+      "low": 42.016806754257104,
+      "worst": 23.799999982118607,
+      "hitches": 0,
+      "frames": 58,
+      "weapon": "chainsaw",
+      "view": "chainsaw"
+    },
+    {
+      "label": "before",
+      "fps": 60.13831813062508,
+      "low": 53.191489327973834,
+      "worst": 18.80000001192093,
+      "hitches": 0,
+      "frames": 60,
+      "weapon": "chainsaw",
+      "view": "chainsaw"
+    },
+    {
+      "label": "after",
+      "fps": 60.108194751268826,
+      "low": 52.356020958746925,
+      "worst": 19.099999994039536,
+      "hitches": 0,
+      "frames": 60,
+      "weapon": "chainsaw",
+      "view": null
+    }
+  ],
+  "mean": {
+    "before": 59.03440077474328,
+    "after": 59.610254073536595,
+    "delta": 0.5758532987933123
+  },
+  "errors": []
+}

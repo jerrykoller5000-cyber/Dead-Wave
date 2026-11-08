@@ -1,0 +1,15 @@
+{
+  "tris": 6090,
+  "meshes": 12,
+  "materials": 6,
+  "floatingCount": 1,
+  "bbox": {
+    "x": 0.0868,
+    "y": 0.3174,
+    "z": 0.5186
+  },
+  "sizeK": 0.6547558922558921,
+  "hasWork": true,
+  "hasMag": true,
+  "workName": "work"
+}

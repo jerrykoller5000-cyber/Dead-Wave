@@ -1,0 +1,91 @@
+<!doctype html><meta charset="utf-8"><title>GB-313 revolver rear sight</title>
+<style>html,body{margin:0;background:#121418;overflow:hidden}</style>
+<script type="importmap">{"imports":{"three":"../../vendor/three/three.webgpu.js","three/webgpu":"../../vendor/three/three.webgpu.js","three/tsl":"../../vendor/three/three.tsl.js","three/addons/":"../../vendor/three/addons/"}}</script>
+<script type="module">
+window.onerror = (m,s,l,c,e) => { window.ERR = String((e && e.stack) || m); };
+import * as THREE from 'three';
+import { weaponModelContext } from '../../tools/marine-inspector.js';
+import { makeRevolverModel } from '../../studio/weapon-sidearms.js';
+import { floatingParts } from '../../studio/gun-detail.js';
+
+const q = new URLSearchParams(location.search);
+const view = q.get('view') || 'side';
+const MARINE_UPM = 1.655 / 1.80;
+const sizeK = 0.484 * 1.4 * MARINE_UPM / 0.538;
+
+const R = new THREE.WebGPURenderer({ antialias: true, forceWebGL: true });
+R.setSize(1280, 720); document.body.appendChild(R.domElement); await R.init();
+const Sc = new THREE.Scene(); Sc.background = new THREE.Color(0x121418);
+Sc.add(new THREE.HemisphereLight(0xdde2ea, 0x2a2722, 1.2));
+const sun = new THREE.DirectionalLight(0xfff4e0, 1.7); sun.position.set(2.2, 3.5, 2.8); Sc.add(sun);
+const fill = new THREE.DirectionalLight(0xffffff, 0.65); fill.position.set(-2.2, 1.2, -1.2); Sc.add(fill);
+const rim = new THREE.DirectionalLight(0xaaccff, 0.35); rim.position.set(-1, 2, -3); Sc.add(rim);
+
+const gun = makeRevolverModel(weaponModelContext());
+gun.scale.setScalar(sizeK);
+Sc.add(gun);
+// Hide laser/muzzle flash helpers so they don't inflate the framing box.
+gun.traverse((o) => {
+  if (/laser|muzzle|flash|spark|smoke/i.test(o.name || '')) o.visible = false;
+  if (o.isSprite || (o.isPoints && o !== gun)) o.visible = false;
+});
+if (gun.userData.laser) gun.userData.laser.visible = false;
+if (gun.userData.muzzleFlash) gun.userData.muzzleFlash.visible = false;
+gun.updateMatrixWorld(true);
+
+let tris = 0, meshes = 0;
+const matIds = new Set();
+gun.traverse((o) => {
+  if (!o.isMesh || !o.geometry || !o.visible) return;
+  meshes++;
+  if (o.material) matIds.add(o.material.uuid);
+  const idx = o.geometry.index, pos = o.geometry.attributes.position;
+  tris += idx ? idx.count / 3 : pos.count / 3;
+});
+const box = new THREE.Box3();
+gun.traverse((o) => {
+  if (!o.isMesh || !o.visible || !o.geometry) return;
+  // skip tiny far laser discs
+  const b = new THREE.Box3().setFromObject(o);
+  if (b.max.z > 1.0) return; // past muzzle helpers
+  box.union(b);
+});
+if (box.isEmpty()) box.setFromObject(gun);
+const size = box.getSize(new THREE.Vector3());
+const floats = floatingParts(THREE, gun);
+window.METRICS = {
+  tris: Math.round(tris), meshes, materials: matIds.size, floatingCount: floats.length,
+  bbox: { x:+size.x.toFixed(4), y:+size.y.toFixed(4), z:+size.z.toFixed(4) },
+  sizeK, hasSlide: !!gun.userData.slide, hasMag: !!gun.userData.mag
+};
+
+const C = new THREE.PerspectiveCamera(32, 1280/720, 0.004, 20);
+const mid = box.getCenter(new THREE.Vector3());
+// Fixed framing around the pistol body (~0.2 m), not the laser.
+if (view === 'side') {
+  C.position.set(mid.x + 0.55, mid.y + 0.04, mid.z);
+  C.lookAt(mid);
+} else if (view === 'top') {
+  C.position.set(mid.x, mid.y + 0.55, mid.z);
+  C.up.set(0, 0, -1); C.lookAt(mid); C.up.set(0, 1, 0);
+} else if (view === 'tq') {
+  C.position.set(mid.x + 0.38, mid.y + 0.22, mid.z + 0.32);
+  C.lookAt(mid);
+} else if (view === 'recv') {
+  C.fov = 28; C.updateProjectionMatrix();
+  C.position.set(0.18 * sizeK / 0.6, 0.08 * sizeK / 0.6, 0.04 * sizeK / 0.6);
+  C.lookAt(0, 0.06 * sizeK / 0.6, 0.02 * sizeK / 0.6);
+} else if (view === 'rearsight') {
+  C.fov = 26; C.updateProjectionMatrix();
+  const k = sizeK / 0.6;
+  C.position.set(0.14 * k, 0.14 * k, -0.02 * k);
+  C.lookAt(0, 0.118 * k, -0.050 * k);
+} else if (view === 'grip') {
+  C.fov = 28; C.updateProjectionMatrix();
+  C.position.set(0.16 * sizeK / 0.6, -0.04 * sizeK / 0.6, -0.02 * sizeK / 0.6);
+  C.lookAt(0, -0.08 * sizeK / 0.6, -0.04 * sizeK / 0.6);
+
+}
+R.render(Sc, C); await new Promise((r) => setTimeout(r, 200)); R.render(Sc, C);
+window.DONE = true;
+</script>

@@ -1,0 +1,8 @@
+{
+  "zombieCount": 48,
+  "baselineFps": 19.328585961342828,
+  "camoFps": 35.24672708962739,
+  "camoLow": 21.786492386044237,
+  "camoWorst": 45.89999997615814,
+  "backend": "WebGPU"
+}

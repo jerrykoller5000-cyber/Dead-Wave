@@ -1,0 +1,14 @@
+{
+  "tris": 7582,
+  "meshes": 52,
+  "materials": 24,
+  "floatingCount": 1,
+  "bbox": {
+    "x": 0.124,
+    "y": 0.337,
+    "z": 0.5182
+  },
+  "sizeK": 1.1580214787277983,
+  "hasSlide": false,
+  "hasMag": true
+}

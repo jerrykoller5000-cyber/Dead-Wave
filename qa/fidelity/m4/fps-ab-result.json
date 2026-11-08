@@ -1,0 +1,36 @@
+{
+  "gun": "m4",
+  "name": "GW-4 Carbine",
+  "timestamp": "2026-11-07T20:19:09.699Z",
+  "before": {
+    "run1": {
+      "fps": 57.87,
+      "low": 41.32,
+      "worst": 24.2
+    },
+    "run2": {
+      "fps": 59.24,
+      "low": 42.74,
+      "worst": 23.4
+    },
+    "meanFps": 58.55,
+    "meanLow": 42.03
+  },
+  "after": {
+    "run1": {
+      "fps": 58.34,
+      "low": 51.55,
+      "worst": 19.4
+    },
+    "run2": {
+      "fps": 60.27,
+      "low": 52.91,
+      "worst": 18.9
+    },
+    "meanFps": 59.31,
+    "meanLow": 52.23
+  },
+  "deltaFps": 0.76,
+  "deltaLow": 10.2,
+  "d99Pass": true
+}

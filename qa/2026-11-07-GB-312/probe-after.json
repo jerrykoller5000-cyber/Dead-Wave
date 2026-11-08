@@ -1,0 +1,22 @@
+{
+  "m4": {
+    "weapon": "m4",
+    "handPlace": "fore"
+  },
+  "aa12": {
+    "weapon": "aa12",
+    "handPlace": "fore"
+  },
+  "sniper": {
+    "weapon": "sniper",
+    "handPlace": "fore"
+  },
+  "ak": {
+    "weapon": "ak",
+    "handPlace": "fore"
+  },
+  "shotgun": {
+    "weapon": "shotgun",
+    "handPlace": "fore"
+  }
+}

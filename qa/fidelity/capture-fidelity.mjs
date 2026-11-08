@@ -15,7 +15,7 @@ function getArg(flag, def) {
 }
 
 const GUN = getArg('--gun', 'shotgun');
-const SKIP_GAME = argv.includes('--skip-game') || argv.includes('--crops-only');
+let SKIP_GAME = argv.includes('--skip-game') || argv.includes('--crops-only');
 const OUT_DIR = path.join(HERE, GUN);
 fs.mkdirSync(OUT_DIR, { recursive: true });
 
@@ -67,10 +67,74 @@ const WEAPON_CONFIG = {
     orderIx: 8,
     refFile: 'sniper.glb',
     sheetName: 'sniper-fidelity-sheet.jpg'
+  },
+  minigun: {
+    id: 'minigun',
+    title: 'Rotary Gun (M134 Handheld Minigun)',
+    orderIx: 0,
+    refFile: 'm134_handheld_minigun.glb',
+    sheetName: 'minigun-fidelity-sheet.jpg'
+  },
+  revolver: {
+    id: 'revolver',
+    title: 'Revolver (.357 Magnum Pattern)',
+    orderIx: 7,
+    refFile: '38_special_revolver.glb',
+    sheetName: 'revolver-fidelity-sheet.jpg'
+  },
+  uzi: {
+    id: 'uzi',
+    title: 'Wasp SMG (MAC-10 / Uzi Pattern)',
+    orderIx: 4,
+    refFile: 'uzi.glb',
+    sheetName: 'wasp-fidelity-sheet.jpg'
+  },
+  chainsaw: {
+    id: 'chainsaw',
+    title: 'Chainsaw (Heavy Tool / Stihl Pattern)',
+    orderIx: 11,
+    refFile: 'chainsaw.glb',
+    sheetName: 'chainsaw-fidelity-sheet.jpg'
+  },
+  launcher: {
+    id: 'launcher',
+    title: 'Grenade Launcher (M32 MGL / Milkor Pattern)',
+    orderIx: 9,
+    refFile: 'naders_grenade_launcher.glb',
+    sheetName: 'launcher-fidelity-sheet.jpg'
+  },
+  knife: {
+    id: 'knife',
+    title: 'Combat Knife (KA-BAR Pattern)',
+    orderIx: null,
+    refFile: null,
+    sheetName: 'knife-fidelity-sheet.jpg'
+  },
+  machete: {
+    id: 'machete',
+    title: 'Machete (Tactical Bolo Pattern)',
+    orderIx: null,
+    refFile: null,
+    sheetName: 'machete-fidelity-sheet.jpg'
+  },
+  katana: {
+    id: 'katana',
+    title: 'Katana (Red Katana Pattern)',
+    orderIx: null,
+    refFile: null,
+    sheetName: 'katana-fidelity-sheet.jpg'
+  },
+  grenade: {
+    id: 'grenade',
+    title: 'Frag Grenade (M67 Pattern)',
+    orderIx: null,
+    refFile: 'm67.glb',
+    sheetName: 'grenade-fidelity-sheet.jpg'
   }
 };
 
 const config = WEAPON_CONFIG[GUN];
+if (config?.orderIx == null) SKIP_GAME = true;
 if (!config) {
   console.error('Unknown gun:', GUN, 'Supported:', Object.keys(WEAPON_CONFIG).join(', '));
   process.exit(2);
@@ -117,6 +181,9 @@ try {
 
   if (GUN === 'shotgun') {
     studioViews.push('crop-forend-before', 'crop-forend-after');
+  }
+  if (config.orderIx == null) {
+    studioViews.push('studio-top-before', 'studio-top-after', 'studio-sider-after', 'studio-tqr-after');
   }
 
   for (const v of studioViews) {
@@ -235,6 +302,7 @@ try {
   await compPage.goto(`${server.origin}/qa/fidelity/studio-refview.html`, { timeout: 30000 });
 
   // Read images as base64 for canvas rendering
+  const hasGameStills = fs.existsSync(path.join(OUT_DIR, 'fp-hip-noon.png'));
   const images = {
     refSide: fs.readFileSync(path.join(OUT_DIR, 'refview-side.png')).toString('base64'),
     refTop: fs.readFileSync(path.join(OUT_DIR, 'refview-top.png')).toString('base64'),
@@ -247,10 +315,15 @@ try {
     recvAfter: fs.readFileSync(path.join(OUT_DIR, 'crop-receiver-after.png')).toString('base64'),
     gripBefore: fs.readFileSync(path.join(OUT_DIR, GUN === 'shotgun' ? 'crop-forend-before.png' : 'crop-grip-before.png')).toString('base64'),
     gripAfter: fs.readFileSync(path.join(OUT_DIR, GUN === 'shotgun' ? 'crop-forend-after.png' : 'crop-grip-after.png')).toString('base64'),
-    fpHipNoon: fs.readFileSync(path.join(OUT_DIR, 'fp-hip-noon.png')).toString('base64'),
-    fpAdsNoon: fs.readFileSync(path.join(OUT_DIR, 'fp-ads-noon.png')).toString('base64'),
-    fpHipNight: fs.readFileSync(path.join(OUT_DIR, 'fp-hip-night.png')).toString('base64'),
-    fpAdsNight: fs.readFileSync(path.join(OUT_DIR, 'fp-ads-night.png')).toString('base64'),
+    hasGameStills,
+    fpHipNoon: hasGameStills ? fs.readFileSync(path.join(OUT_DIR, 'fp-hip-noon.png')).toString('base64') : null,
+    fpAdsNoon: hasGameStills ? fs.readFileSync(path.join(OUT_DIR, 'fp-ads-noon.png')).toString('base64') : null,
+    fpHipNight: hasGameStills ? fs.readFileSync(path.join(OUT_DIR, 'fp-hip-night.png')).toString('base64') : null,
+    fpAdsNight: hasGameStills ? fs.readFileSync(path.join(OUT_DIR, 'fp-ads-night.png')).toString('base64') : null,
+    topBefore: fs.existsSync(path.join(OUT_DIR, 'studio-top-before.png')) ? fs.readFileSync(path.join(OUT_DIR, 'studio-top-before.png')).toString('base64') : null,
+    topAfter: fs.existsSync(path.join(OUT_DIR, 'studio-top-after.png')) ? fs.readFileSync(path.join(OUT_DIR, 'studio-top-after.png')).toString('base64') : null,
+    siderAfter: fs.existsSync(path.join(OUT_DIR, 'studio-sider-after.png')) ? fs.readFileSync(path.join(OUT_DIR, 'studio-sider-after.png')).toString('base64') : null,
+    tqrAfter: fs.existsSync(path.join(OUT_DIR, 'studio-tqr-after.png')) ? fs.readFileSync(path.join(OUT_DIR, 'studio-tqr-after.png')).toString('base64') : null,
   };
 
   const sheetDataUrl = await compPage.evaluate(`(async () => {
@@ -321,9 +394,19 @@ try {
     const refSideImg = await loadImg(images.refSide);
     const refTopImg = await loadImg(images.refTop);
     const refTqImg = await loadImg(images.refTq);
-    drawTile(refSideImg, 20, y1, w1, h1, 'REFVIEW SIDE (1m): Ours [Bottom] vs Reference [Top]', { text: '1.0m PROPORTIONS', color: '#68d391' });
-    drawTile(refTopImg, 20 + w1 + gap1, y1, w1, h1, 'REFVIEW TOP (1m): Width & Alignment', { text: 'SIGHT LINE / AXIS', color: '#68d391' });
-    drawTile(refTqImg, 20 + (w1 + gap1) * 2, y1, w1, h1, 'REFVIEW 3/4 (1m): Perspective Form', { text: 'REAL-GUN PROFILE', color: '#68d391' });
+    const isChainsaw = cfg.id === 'chainsaw';
+    const isMinigun = cfg.id === 'minigun';
+    const isLauncher = cfg.id === 'launcher';
+    const sideTagText = isChainsaw ? '1.169m HELD vs 0.850m REF' : isMinigun ? '1.485m HELD vs 0.800m REF' : isLauncher ? '0.828m HELD vs 0.750m REF' : '1.0m PROPORTIONS';
+    const sideTagColor = (isChainsaw || isMinigun || isLauncher) ? '#ecc94b' : '#68d391';
+    const sideTitle = isChainsaw
+      ? 'REFVIEW SIDE (1m): Ours [Bottom] (1.169m) vs Reference [Top] (0.850m)'
+      : isLauncher
+      ? 'REFVIEW SIDE (1m): Ours [Bottom] (0.828m) vs Reference [Top] (0.750m)'
+      : 'REFVIEW SIDE (1m): Ours [Bottom] vs Reference [Top]';
+    drawTile(refSideImg, 20, y1, w1, h1, sideTitle, { text: sideTagText, color: sideTagColor });
+    drawTile(refTopImg, 20 + w1 + gap1, y1, w1, h1, 'REFVIEW TOP (1m): Width & Alignment', { text: (isChainsaw || isMinigun) ? 'CHAIN & BAR AXIS' : isLauncher ? 'DRUM & SIGHT AXIS' : 'SIGHT LINE / AXIS', color: '#68d391' });
+    drawTile(refTqImg, 20 + (w1 + gap1) * 2, y1, w1, h1, 'REFVIEW 3/4 (1m): Perspective Form', { text: isChainsaw ? 'TOOL PROFILE' : 'REAL-GUN PROFILE', color: '#68d391' });
 
     // SECTION 2: Studio Model Evolution (Before vs After)
     // Row 2: 4 tiles (580 x 300 each)
@@ -345,23 +428,69 @@ try {
     const rAImg = await loadImg(images.recvAfter);
     const gBImg = await loadImg(images.gripBefore);
     const gAImg = await loadImg(images.gripAfter);
-    const gripName = cfg.id === 'shotgun' ? 'FOREND & PUMP RIBS' : 'PISTOL GRIP & SWELL';
-    drawTile(rBImg, 20, y3, w2, h2, '2x CROP: RECEIVER BEFORE', { text: 'NO CONTROLS', color: '#fc8181' });
-    drawTile(rAImg, 20 + w2 + gap2, y3, w2, h2, '2x CROP: RECEIVER AFTER (Controls/Pins/Screws/Bevels)', { text: 'PASS J14 / D-121', color: '#68d391' });
-    drawTile(gBImg, 20 + (w2 + gap2) * 2, y3, w2, h2, '2x CROP: ' + gripName + ' BEFORE', { text: 'FLAT SLAB', color: '#fc8181' });
-    drawTile(gAImg, 20 + (w2 + gap2) * 3, y3, w2, h2, '2x CROP: ' + gripName + ' AFTER (Contoured/Textured)', { text: 'PASS J19 / J20', color: '#68d391' });
+    const gripName = cfg.id === 'shotgun' ? 'FOREND & PUMP RIBS' :
+                     cfg.id === 'minigun' ? 'SIDE SUPPORT PEG & MOUNT' :
+                     cfg.id === 'chainsaw' ? 'REAR HANDLE & THROTTLE' :
+                     cfg.id === 'knife' ? 'RIDGED GRIP & POMMEL' :
+                     cfg.id === 'machete' ? 'POLYMER GRIP & CHECKERING' :
+                     cfg.id === 'katana' ? 'TSUKA & ITO WRAP' :
+                     cfg.id === 'grenade' ? 'FUZE HEAD, SPOON & TAB' :
+                     cfg.id === 'revolver' ? 'CHECKERED GRIP PANELS & SCREW' :
+                     cfg.id === 'uzi' ? 'PISTOL GRIP & MAG RELEASE' :
+                     cfg.id === 'launcher' ? 'A2 PISTOL GRIP & SWELL' :
+                     'PISTOL GRIP & SWELL';
+    const recvName = cfg.id === 'chainsaw' ? 'ENGINE & AIR FILTER' :
+                     cfg.id === 'knife' ? 'RICASSO & CROSSGUARD' :
+                     cfg.id === 'machete' ? 'BLADE FULLER & SERRATIONS' :
+                     cfg.id === 'katana' ? 'TSUBA & BLADE EDGE' :
+                     cfg.id === 'grenade' ? 'BODY & M67 STENCIL' :
+                     cfg.id === 'revolver' ? 'CYLINDER & REAR SIGHT' :
+                     cfg.id === 'uzi' ? 'STAMPED RECEIVER & RIBS' :
+                     cfg.id === 'launcher' ? 'QUADRANT SIGHT & TOP STRAP' :
+                     'RECEIVER';
+    const rALabel = cfg.id === 'chainsaw' ? '2x CROP: ' + recvName + ' AFTER (Intake/Vents/Recoil/Fasteners)' :
+                    cfg.id === 'launcher' ? '2x CROP: ' + recvName + ' AFTER (Quadrant/Rails/Lips/Stops)' :
+                    '2x CROP: ' + recvName + ' AFTER (Controls/Pins/Screws/Bevels)';
+    const rATag = cfg.id === 'chainsaw' ? { text: 'PASS GP-20042', color: '#68d391' } :
+                  cfg.id === 'launcher' ? { text: 'PASS GP-20043', color: '#68d391' } :
+                  { text: 'PASS J14 / D-121', color: '#68d391' };
+    const gBTag = cfg.id === 'chainsaw' ? { text: 'NO THROTTLE LOCK', color: '#fc8181' } :
+                  cfg.id === 'launcher' ? { text: 'FLAT SLAB', color: '#fc8181' } :
+                  { text: 'FLAT SLAB', color: '#fc8181' };
+    const gALabel = cfg.id === 'chainsaw' ? '2x CROP: ' + gripName + ' AFTER (Throttle-Lock Paddle Added)' :
+                    cfg.id === 'launcher' ? '2x CROP: ' + gripName + ' AFTER (A2 Contoured & Textured)' :
+                    '2x CROP: ' + gripName + ' AFTER (Contoured/Textured)';
+    const gATag = cfg.id === 'chainsaw' ? { text: 'PASS GP-20042', color: '#68d391' } :
+                  cfg.id === 'launcher' ? { text: 'PASS GP-20046', color: '#68d391' } :
+                  { text: 'PASS J19 / J20', color: '#68d391' };
 
-    // SECTION 4: In-Game First-Person Gameplay on RTX 5080
+    drawTile(rBImg, 20, y3, w2, h2, '2x CROP: ' + recvName + ' BEFORE', { text: cfg.id === 'chainsaw' ? 'BASE ENGINE' : 'NO CONTROLS', color: '#fc8181' });
+    drawTile(rAImg, 20 + w2 + gap2, y3, w2, h2, rALabel, rATag);
+    drawTile(gBImg, 20 + (w2 + gap2) * 2, y3, w2, h2, '2x CROP: ' + gripName + ' BEFORE', gBTag);
+    drawTile(gAImg, 20 + (w2 + gap2) * 3, y3, w2, h2, gALabel, gATag);
+
+    // SECTION 4: In-Game First-Person Gameplay or Detailed Model Views
     // Row 4: 4 tiles (580 x 300 each)
     const y4 = y3 + h2 + 20;
-    const fpHNImg = await loadImg(images.fpHipNoon);
-    const fpANImg = await loadImg(images.fpAdsNoon);
-    const fpHNtImg = await loadImg(images.fpHipNight);
-    const fpANtImg = await loadImg(images.fpAdsNight);
-    drawTile(fpHNImg, 20, y4, w2, h2, 'FP HIP (NOON) · Hands & Low-Ready Hold', { text: 'RTX 5080 WebGPU', color: '#63b3ed' });
-    drawTile(fpANImg, 20 + w2 + gap2, y4, w2, h2, 'FP ADS (NOON) · Sight Alignment', { text: 'SIGHT DATUM PASS', color: '#68d391' });
-    drawTile(fpHNtImg, 20 + (w2 + gap2) * 2, y4, w2, h2, 'FP HIP (NIGHT) · Night Readability & Materials', { text: 'SHADOW / ILLUM', color: '#63b3ed' });
-    drawTile(fpANtImg, 20 + (w2 + gap2) * 3, y4, w2, h2, 'FP ADS (NIGHT) · Night Sights & Contrast', { text: 'GLOW / PROFILE', color: '#68d391' });
+    if (images.hasGameStills) {
+      const fpHNImg = await loadImg(images.fpHipNoon);
+      const fpANImg = await loadImg(images.fpAdsNoon);
+      const fpHNtImg = await loadImg(images.fpHipNight);
+      const fpANtImg = await loadImg(images.fpAdsNight);
+      drawTile(fpHNImg, 20, y4, w2, h2, 'FP HIP (NOON) · Hands & Low-Ready Hold', { text: 'RTX 5080 WebGPU', color: '#63b3ed' });
+      drawTile(fpANImg, 20 + w2 + gap2, y4, w2, h2, 'FP ADS (NOON) · Sight Alignment', { text: 'SIGHT DATUM PASS', color: '#68d391' });
+      drawTile(fpHNtImg, 20 + (w2 + gap2) * 2, y4, w2, h2, 'FP HIP (NIGHT) · Night Readability & Materials', { text: 'SHADOW / ILLUM', color: '#63b3ed' });
+      drawTile(fpANtImg, 20 + (w2 + gap2) * 3, y4, w2, h2, 'FP ADS (NIGHT) · Night Sights & Contrast', { text: 'GLOW / PROFILE', color: '#68d391' });
+    } else {
+      const topBImg = await loadImg(images.topBefore);
+      const topAImg = await loadImg(images.topAfter);
+      const siderAImg = await loadImg(images.siderAfter);
+      const tqrAImg = await loadImg(images.tqrAfter);
+      drawTile(topBImg, 20, y4, w2, h2, 'STUDIO TOP BEFORE (Commit 28137581)', { text: 'OLD FORM', color: '#fc8181' });
+      drawTile(topAImg, 20 + w2 + gap2, y4, w2, h2, 'STUDIO TOP AFTER (Working Tree)', { text: 'SPINE / PROFILE', color: '#68d391' });
+      drawTile(siderAImg, 20 + (w2 + gap2) * 2, y4, w2, h2, 'STUDIO REVERSE PROFILE (Opposite Face & Details)', { text: 'SYMMETRY / MARKINGS', color: '#63b3ed' });
+      drawTile(tqrAImg, 20 + (w2 + gap2) * 3, y4, w2, h2, 'STUDIO REAR 3/4 (Butt / Pommel & Seams)', { text: 'FINISH & SEAMS', color: '#68d391' });
+    }
 
     // Bottom telemetry bar
     const yB = y4 + h2 + 18;
@@ -374,7 +503,14 @@ try {
     ctx.font = 'bold 15px monospace';
     const om = m.after?.measure || {};
     const rm = m.ref?.measure || {};
-    const metricsLine = 'METRICS: len=' + (om.length || 0) + 'm (ref ' + (rm.length || 0) + 'm) | boreOverGrip=' + (om.boreOverGrip || 0) + 'm (ref ' + (rm.boreOverGrip || 0) + 'm) | gripRake=' + (om.rakeDeg || 0) + '° (ref ' + (rm.rakeDeg || 0) + '°) | sightH=' + (om.sightH || 0) + 'm (ref ' + (rm.sightH || 0) + 'm)';
+    let metricsLine;
+    if (isChainsaw) {
+      metricsLine = 'METRICS: heldLen=' + (om.length || 0) + 'm (ref ' + (rm.length || 0) + 'm, +37.5% longer bar intent) | heldBox=[' + (m.after?.box?.x || 0) + ', ' + (m.after?.box?.y || 0) + ', ' + (m.after?.box?.z || 0) + ']m | refBox=[' + (m.ref?.box?.x || 0) + ', ' + (m.ref?.box?.y || 0) + ', ' + (m.ref?.box?.z || 0) + ']m | exception: GP-20049';
+    } else if (isLauncher) {
+      metricsLine = 'METRICS: heldLen=' + (om.length || 0) + 'm (ref ' + (rm.length || 0) + 'm, +10.4%) | heldBox=[' + (m.after?.box?.x || 0) + ', ' + (m.after?.box?.y || 0) + ', ' + (m.after?.box?.z || 0) + ']m | drumW: ours 0.200m vs ref 0.157m (GP-20050) | boreOverGrip=' + (om.boreOverGrip || 0) + 'm (ref ' + (rm.boreOverGrip || 0) + 'm) | gripRake=' + (om.rakeDeg || 0) + '° (ref ' + (rm.rakeDeg || 0) + '°)';
+    } else {
+      metricsLine = 'METRICS: len=' + (om.length || 0) + 'm (ref ' + (rm.length || 0) + 'm) | boreOverGrip=' + (om.boreOverGrip || 0) + 'm (ref ' + (rm.boreOverGrip || 0) + 'm) | gripRake=' + (om.rakeDeg || 0) + '° (ref ' + (rm.rakeDeg || 0) + '°) | sightH=' + (om.sightH || 0) + 'm (ref ' + (rm.sightH || 0) + 'm)';
+    }
     ctx.fillText(metricsLine, 25, yB + 30);
 
     ctx.fillStyle = '#68d391';
@@ -385,7 +521,14 @@ try {
 
     ctx.fillStyle = '#e2e8f0';
     ctx.font = '14px system-ui';
-    ctx.fillText('Yardstick: Proportions <=5%, Controls present, No flat slabs, 0 floats, 4+ mats, Hands fit, Sights align, Budget passed.', 25, yB + 84);
+    const yardstickLine = isChainsaw
+      ? 'Yardstick: Length 1.169m held vs 0.850m ref (GP-20049 coordinated followup), Controls/hardware present, No flat slabs, 0 floats, 11 mats, Hands fit, Budget passed.'
+      : isMinigun
+      ? 'Yardstick: Length 1.485m held vs 0.800m ref (GP-20048 coordinated followup), Controls/hardware present, No flat slabs, 0 floats, 11 mats, Hands fit, Budget passed.'
+      : isLauncher
+      ? 'Yardstick: Length 0.828m held vs 0.750m ref (drum width 0.200m vs 0.157m ref under GP-20050), Quadrant/rails/lips/stops present, 0 floats, Hands fit, Budget passed.'
+      : 'Yardstick: Proportions <=5%, Controls present, No flat slabs, 0 floats, 4+ mats, Hands fit, Sights align, Budget passed.';
+    ctx.fillText(yardstickLine, 25, yB + 84);
 
     return canvas.toDataURL('image/jpeg', 0.94);
   })()`, 120000);

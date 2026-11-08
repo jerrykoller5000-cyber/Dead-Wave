@@ -1,6 +1,6 @@
 {
   "gun": "shotgun",
-  "name": "Shotgun (Tactical Pump)",
+  "name": "Shotgun (Tactical Pump Action)",
   "refFile": "shotgun.glb",
   "realLength": 1,
   "sizeK": 0.7935,
@@ -8,7 +8,7 @@
     "tris": 4596,
     "meshes": 16,
     "materials": 7,
-    "floatingCount": 1,
+    "floatingCount": 0,
     "box": {
       "x": 0.0885,
       "y": 0.2145,
@@ -25,7 +25,7 @@
     "tris": 5680,
     "meshes": 22,
     "materials": 7,
-    "floatingCount": 1,
+    "floatingCount": 0,
     "box": {
       "x": 0.0492,
       "y": 0.1938,

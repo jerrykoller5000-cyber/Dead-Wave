@@ -1,0 +1,63 @@
+{
+  "gun": "sniper",
+  "name": "Sniper Rifle (L96 Chassis Pattern)",
+  "refFile": "sniper.glb",
+  "realLength": 1.15,
+  "sizeK": 0.7233,
+  "before": {
+    "tris": 9266,
+    "meshes": 20,
+    "materials": 9,
+    "floatingCount": 0,
+    "box": {
+      "x": 0.1523,
+      "y": 0.298,
+      "z": 1.3345
+    },
+    "measure": {
+      "length": 1.3345,
+      "boreOverGrip": 0.0835,
+      "rakeDeg": 85.3,
+      "sightH": 0.1222
+    }
+  },
+  "after": {
+    "tris": 10702,
+    "meshes": 72,
+    "materials": 10,
+    "floatingCount": 0,
+    "box": {
+      "x": 0.1494,
+      "y": 0.2951,
+      "z": 1.3345
+    },
+    "measure": {
+      "length": 1.3345,
+      "boreOverGrip": 0.0847,
+      "rakeDeg": 86.1,
+      "sightH": 0.1193
+    }
+  },
+  "ref": {
+    "tris": 13087,
+    "meshes": 8,
+    "box": {
+      "x": 1.15,
+      "y": 0.0767,
+      "z": 0.2209
+    },
+    "measure": {
+      "length": 0.2209,
+      "boreOverGrip": 0.0105,
+      "rakeDeg": 84.5,
+      "sightH": 0.0213
+    }
+  },
+  "duskPerf": {
+    "fps": 54.081121682523786,
+    "low": 42.016806754257104,
+    "worst": 23.799999982118607,
+    "hitches": 19,
+    "frames": 54
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "gun": "knife",
+  "name": "Combat Knife (KA-BAR Pattern)",
+  "refFile": null,
+  "realLength": 0.3,
+  "sizeK": 0.5947,
+  "before": {
+    "tris": 2780,
+    "meshes": 4,
+    "materials": 4,
+    "floatingCount": 0,
+    "box": {
+      "x": 0.0666,
+      "y": 0.0369,
+      "z": 0.3164
+    },
+    "measure": {
+      "length": 0.3164,
+      "boreOverGrip": 0.0033,
+      "rakeDeg": 84.9,
+      "sightH": 0.0184
+    }
+  },
+  "after": {
+    "tris": 3264,
+    "meshes": 8,
+    "materials": 6,
+    "floatingCount": 0,
+    "box": {
+      "x": 0.0666,
+      "y": 0.0369,
+      "z": 0.3183
+    },
+    "measure": {
+      "length": 0.3183,
+      "boreOverGrip": 0.0032,
+      "rakeDeg": 86.5,
+      "sightH": 0.0184
+    }
+  },
+  "ref": {
+    "tris": 2780,
+    "meshes": 4,
+    "box": {
+      "x": 0.0666,
+      "y": 0.0369,
+      "z": 0.3164
+    },
+    "measure": {
+      "length": 0.3164,
+      "boreOverGrip": 0.0033,
+      "rakeDeg": 84.9,
+      "sightH": 0.0184
+    }
+  },
+  "duskPerf": {
+    "fps": 60.5,
+    "low": 56.2,
+    "worst": 18,
+    "hitches": 0
+  }
+}

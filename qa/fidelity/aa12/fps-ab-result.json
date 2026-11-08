@@ -1,0 +1,36 @@
+{
+  "gun": "aa12",
+  "name": "Breacher-12",
+  "timestamp": "2026-11-07T20:20:08.229Z",
+  "before": {
+    "run1": {
+      "fps": 58.61,
+      "low": 45.87,
+      "worst": 21.8
+    },
+    "run2": {
+      "fps": 57.6,
+      "low": 44.64,
+      "worst": 22.4
+    },
+    "meanFps": 58.11,
+    "meanLow": 45.26
+  },
+  "after": {
+    "run1": {
+      "fps": 61.34,
+      "low": 55.87,
+      "worst": 17.9
+    },
+    "run2": {
+      "fps": 60.98,
+      "low": 56.82,
+      "worst": 17.6
+    },
+    "meanFps": 61.16,
+    "meanLow": 56.34
+  },
+  "deltaFps": 3.05,
+  "deltaLow": 11.08,
+  "d99Pass": true
+}

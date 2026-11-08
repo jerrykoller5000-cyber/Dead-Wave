@@ -1,0 +1,63 @@
+{
+  "gun": "m4",
+  "name": "GW-4 Carbine (M4A1 Pattern)",
+  "refFile": "m4_sopmod.glb",
+  "realLength": 0.84,
+  "sizeK": 0.6741,
+  "before": {
+    "tris": 8168,
+    "meshes": 15,
+    "materials": 10,
+    "floatingCount": 0,
+    "box": {
+      "x": 0.088,
+      "y": 0.3006,
+      "z": 1.0428
+    },
+    "measure": {
+      "length": 1.0428,
+      "boreOverGrip": 0.0587,
+      "rakeDeg": 83.6,
+      "sightH": 0.0921
+    }
+  },
+  "after": {
+    "tris": 11828,
+    "meshes": 48,
+    "materials": 11,
+    "floatingCount": 0,
+    "box": {
+      "x": 0.0698,
+      "y": 0.3006,
+      "z": 1.0428
+    },
+    "measure": {
+      "length": 1.0428,
+      "boreOverGrip": 0.0724,
+      "rakeDeg": 80.2,
+      "sightH": 0.0927
+    }
+  },
+  "ref": {
+    "tris": 44672,
+    "meshes": 12,
+    "box": {
+      "x": 0.0785,
+      "y": 0.2135,
+      "z": 0.84
+    },
+    "measure": {
+      "length": 0.84,
+      "boreOverGrip": -0.0131,
+      "rakeDeg": 75.6,
+      "sightH": 0.0768
+    }
+  },
+  "duskPerf": {
+    "fps": 58.85934645793502,
+    "low": 47.84688993850767,
+    "worst": 20.900000005960464,
+    "hitches": 16,
+    "frames": 58
+  }
+}

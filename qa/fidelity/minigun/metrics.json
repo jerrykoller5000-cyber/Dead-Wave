@@ -1,0 +1,63 @@
+{
+  "gun": "minigun",
+  "name": "Rotary Gun (M134 Handheld Minigun)",
+  "refFile": "m134_handheld_minigun.glb",
+  "realLength": 0.8,
+  "sizeK": 0.88,
+  "before": {
+    "tris": 8280,
+    "meshes": 17,
+    "materials": 11,
+    "floatingCount": 0,
+    "box": {
+      "x": 0.549,
+      "y": 0.5552,
+      "z": 1.4851
+    },
+    "measure": {
+      "length": 1.4851,
+      "boreOverGrip": 0.062,
+      "rakeDeg": 81.4,
+      "sightH": 0.3242
+    }
+  },
+  "after": {
+    "tris": 12176,
+    "meshes": 17,
+    "materials": 11,
+    "floatingCount": 0,
+    "box": {
+      "x": 0.549,
+      "y": 0.5552,
+      "z": 1.4851
+    },
+    "measure": {
+      "length": 1.4851,
+      "boreOverGrip": 0.0714,
+      "rakeDeg": 80.8,
+      "sightH": 0.3247
+    }
+  },
+  "ref": {
+    "tris": 15834,
+    "meshes": 27,
+    "box": {
+      "x": 0.2052,
+      "y": 0.2109,
+      "z": 0.8
+    },
+    "measure": {
+      "length": 0.8,
+      "boreOverGrip": -0.0163,
+      "rakeDeg": 90,
+      "sightH": 0.0586
+    }
+  },
+  "duskPerf": {
+    "fps": 60.981705489443605,
+    "low": 56.81818174121301,
+    "worst": 17.600000023841858,
+    "hitches": 19,
+    "frames": 61
+  }
+}
