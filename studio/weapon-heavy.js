@@ -172,12 +172,18 @@ export function makeMinigunModel(ctx) {
   K.box(0.05, 0.035, 0.18, gunRubber, 0, 0.26, 0);
   for (const z of [-0.12, 0.12]) { K.cyl(0.018, 0.018, 0.047, gunMid, 0, 0.155, z, null, 10, 'x'); bolt(K, gunDark, gunAccent, -0.025, 0.155, z); }
   for (let i = 0; i < 8; i++) K.box(0.051, 0.003, 0.007, gunPoly, 0, 0.278, -0.072 + i * 0.020, 0, 0, 0, null, 0.001);
-  // GB-259 (J18, GP-20017): a small open reflex sight on the carry handle's top bar (rubber top 0.2775), its window
-  // and dot at y 0.330 so the aim line clears the rear top grip (tops out 0.320 near z -0.30). Dot 3.5 mm in a thin ring, as GW-4.
-  K.box(0.04, 0.012, 0.07, gunDark, 0, 0.2835, 0.01, 0, 0, 0, null, 0.003);
-  for (const sx of [-1, 1]) K.box(0.005, 0.072, 0.06, gunDark, sx * 0.024, 0.325, 0.01, 0, 0, 0, null, 0.0015);
-  K.box(0.053, 0.008, 0.06, gunDark, 0, 0.365, 0.01, 0, 0, 0, null, 0.002);
-  const reflexGlass = Object.assign(glassMat.clone(), { transparent: true, opacity: 0.18, depthWrite: false });
+  // GP-20051/J22: protective chamfered reflex hood, lens, elevation/windage dials
+  // and emitter housing. The red aiming datum stays at (0, .330, .0355).
+  K.box(0.045, 0.013, 0.083, gunDark, 0, 0.284, 0.006, 0, 0, 0, null, 0.003);
+  K.box(0.052, 0.017, 0.025, gunMid, 0, 0.298, -0.022, 0, 0, 0, null, 0.003);
+  for (const sx of [-1, 1])
+    K.slab([[-0.029, 0.294], [-0.029, 0.346], [-0.017, 0.366], [0.038, 0.366], [0.045, 0.352], [0.045, 0.294]], 0.005, gunDark, { x: sx * 0.025, bevel: 0.0015 });
+  K.box(0.055, 0.007, 0.055, gunDark, 0, 0.367, 0.01, 0, 0, 0, null, 0.002);
+  K.box(0.051, 0.003, 0.009, gunAccent, 0, 0.367, 0.04, 0, 0, 0, null, 0.001);
+  K.cyl(0.012, 0.012, 0.013, gunMid, 0, 0.373, -0.007, null, 12, 'y');
+  K.cyl(0.011, 0.011, 0.013, gunMid, 0.03, 0.329, -0.016, null, 12, 'x');
+  const reflexGlass = Object.assign(glassMat.clone(), { transparent: true, opacity: 0.18, depthWrite: false, side: THREE.DoubleSide });
+  reflexGlass.color.setHex(0x78919b);
   K.box(0.043, 0.064, 0.003, reflexGlass, 0, 0.325, 0.035);
   K.box(0.0035, 0.0035, 0.002, sightDotMat, 0, 0.330, 0.0355);
   K.tor(0.0075, 0.0006, sightDotMat, 0, 0.330, 0.0355, 0, 0, 0, null, Math.PI * 2, 24);
@@ -232,14 +238,17 @@ export function makeMinigunModel(ctx) {
   }
   for (let i = 0; i < 5; i++) K.box(0.008, 0.11, 0.006, gunMid, 0.078, -0.065, -0.09 + i * 0.043, 0, 0, 0, ammoBox, 0.002);
   gun.add(ammoBox);
+  // GP-20051/J21: the visible linked rounds have a slim case and a short
+  // steel feed clip each, spaced along the chute rather than buried in slabs.
   for (let i = 0; i < 9; i++) {
-    const u = i / 8, x = 0.20 - u * 0.046, y = 0.022 + u * 0.074;
-    K.box(0.055, 0.012, 0.064, gunDark, x, y, 0.027 - u * 0.035, 0, 0, -0.4, null, 0.002);
-    K.cyl(0.005, 0.005, 0.052, brassMat, x + 0.004, y + 0.002, 0.027 - u * 0.035, null, 6);
+    const u = i / 8, x = 0.20 - u * 0.046, y = 0.022 + u * 0.074, z = 0.027 - u * 0.035;
+    K.cyl(0.0046, 0.0046, 0.052, brassMat, x, y, z, null, 8);
+    K.cyl(0.0012, 0.0046, 0.011, gunAccent, x, y, z + 0.031, null, 8);
+    K.box(0.016, 0.010, 0.012, gunMid, x, y - 0.003, z - 0.015, 0, 0, -0.4, null, 0.002);
   }
   // The feed throat is enclosed by a removable delinker cover. The dark seam
   // below its raised steel lid distinguishes it from the moving ammunition.
-  K.box(0.064, 0.035, 0.103, gunDark, 0.172, 0.121, 0.034, 0, 0, -0.12, null, 0.006);
+  K.box(0.064, 0.055, 0.103, gunDark, 0.172, 0.111, 0.034, 0, 0, -0.12, null, 0.006);
   K.box(0.068, 0.008, 0.108, gunMid, 0.172, 0.141, 0.034, 0, 0, -0.12, null, 0.003);
   for (const z of [-0.011, 0.079]) K.cyl(0.005, 0.005, 0.004, gunAccent, 0.172, 0.147, z, null, 8, 'y');
   gunEffects(gun, new THREE.Vector3(0, 0, 0.27 + barrelLen + 0.02), 0.08, 4, 8, 0.008);
@@ -452,8 +461,23 @@ export function makeFlamerModel(ctx) {
   K.cyl(0.004, 0.004, 0.05, steelMat, 0, 0.02, 0.73, null, 5, 'y');
   K.cyl(0.009, 0.009, 0.058, brassMat, 0, 0.01, 0.746, null, 8);
   K.cyl(0.005, 0.005, 0.015, steelMat, 0, 0.01, 0.78, null, 8);
-  const pilot = new THREE.Mesh(new THREE.SphereGeometry(0.028, 8, 6), new THREE.MeshStandardMaterial({ color: 0xffa040, emissive: 0xff6a10, emissiveIntensity: 1.6 }));
-  pilot.position.set(0, 0.05, 0.72); gun.add(pilot);
+  // GP-20044: the pilot sits below the bell, inside an open steel cage instead
+  // of hidden in the bore. The sparker cable is clamped to the wand underside.
+  for (const sx of [-1, 1]) {
+    K.box(0.002, 0.024, 0.043, gunMid, sx * 0.017, -0.001, 0.702, 0, 0, 0, null, 0.001);
+    K.box(0.002, 0.004, 0.024, brassMat, sx * 0.019, 0.002, 0.7, 0, 0, 0, null, 0.0005);
+    rod(THREE, K, [sx * 0.018, -0.028, 0.735], [sx * 0.018, -0.028, 0.788], 0.0026, steelMat);
+  }
+  for (const z of [0.736, 0.786])
+    K.lathe([[0.015, z - 0.002], [0.02, z - 0.002], [0.02, z + 0.002], [0.015, z + 0.002]], gunAccent, { y: -0.028, seg: 10 });
+  for (let i = 0; i < 8; i++) {
+    const pt = u => [0, -0.014 - Math.sin(Math.PI * u) * 0.007, 0.285 + 0.4 * u];
+    rod(THREE, K, pt(i / 8), pt((i + 1) / 8), 0.0033, gunRubber);
+  }
+  for (const z of [0.37, 0.57]) K.box(0.018, 0.004, 0.01, gunMid, 0, -0.018, z, 0, 0, 0, null, 0.002);
+  rod(THREE, K, [0, -0.018, 0.727], [0, -0.028, 0.766], 0.003, steelMat); // seated pilot electrode
+  const pilot = new THREE.Mesh(new THREE.SphereGeometry(0.009, 8, 6), new THREE.MeshStandardMaterial({ color: 0xffa040, emissive: 0xff6a10, emissiveIntensity: 1.6 }));
+  pilot.position.set(0, -0.028, 0.766); gun.add(pilot);
   gun.userData.pilot = pilot.material;
   // Fuel tanks with domed ends shifted forward of the rear pistol grip/trigger so the grip is fully exposed:
   // straps, mounting brackets, manifold valves, connected front/rear hoses, and a pressure gauge.
@@ -469,6 +493,7 @@ export function makeFlamerModel(ctx) {
       K.lathe([[r - 0.004, z - 0.012], [outer, z - 0.012], [outer, z + 0.012], [r - 0.004, z + 0.012], [r - 0.004, z - 0.012]], gunPoly, { x, y, seg: 24 });
       K.box(0.011, 0.03, 0.031, gunMid, x + r + 0.002, y, z, 0, 0, 0, null, 0.002);
       K.box(0.012, 0.018, 0.016, gunDark, x + r + 0.004, y, z, 0, 0, 0, null, 0.001);
+      K.cyl(0.0032, 0.0032, 0.002, steelMat, x + r + 0.006, y, z, null, 8, 'x');
     }
   }
   // Front tank valves and receiver feed manifold block (connecting both front tank outlets into the receiver body).
@@ -485,6 +510,10 @@ export function makeFlamerModel(ctx) {
   K.cyl(0.022, 0.022, 0.028, gunDark, 0.11, -0.05, 0.184, null, 10);
   K.cyl(0.01, 0.01, 0.034, steelMat, 0.11, -0.05, 0.206, null, 6);
   K.cyl(0.028, 0.012, 0.012, hazardYellow, 0.11, -0.05, 0.224, null, 10);          // valve wheel
+  K.cyl(0.008, 0.008, 0.014, gunDark, 0.11, -0.05, 0.232, null, 8);
+  for (const a of [0, Math.PI / 2, Math.PI, 3 * Math.PI / 2])
+    rod(THREE, K, [0.11 + 0.009 * Math.cos(a), -0.05 + 0.009 * Math.sin(a), 0.231],
+      [0.11 + 0.022 * Math.cos(a), -0.05 + 0.022 * Math.sin(a), 0.231], 0.0025, gunDark);
   K.cyl(0.012, 0.012, 0.016, brassMat, 0.098, -0.042, 0.196, null, 8, 'x');
   K.cyl(0.012, 0.012, 0.016, brassMat, 0.048, -0.034, 0.215, null, 8, 'x');
   for (let i = 0; i < 8; i++) {
@@ -496,16 +525,24 @@ export function makeFlamerModel(ctx) {
     ];
     rod(THREE, K, pt(u0), pt(u1), 0.0085, gunRubber);
   }
-  // Pressure gauge on left side with manifold stem seated into both the main tank and receiver underside.
-  K.box(0.028, 0.032, 0.028, gunDark, -0.028, -0.034, 0.065, 0, 0, 0, null, 0.003);
-  K.cyl(0.026, 0.026, 0.014, steelMat, -0.04, -0.03, 0.065, null, 12, 'x');
-  K.disc(0.021, gaugeFace, -0.048, -0.03, 0.065, -Math.PI / 2, null, 12);
-  K.box(0.002, 0.016, 0.003, sightDotMat, -0.049, -0.024, 0.065, 0, 0, 0.6);
+  // Tank-mounted gauge on the exposed left flank, clear of the receiver panel.
+  K.box(0.027, 0.018, 0.018, gunDark, -0.075, -0.065, 0.076, 0, 0, 0, null, 0.003);
+  K.cyl(0.027, 0.027, 0.014, steelMat, -0.088, -0.065, 0.076, null, 12, 'x');
+  K.disc(0.022, gaugeFace, -0.096, -0.065, 0.076, -Math.PI / 2, null, 12);
+  for (const a of [-2.3, -1.75, -1.2, -0.65, -0.1])
+    rod(THREE, K, [-0.097, -0.065 + 0.015 * Math.cos(a), 0.076 + 0.015 * Math.sin(a)],
+      [-0.097, -0.065 + 0.019 * Math.cos(a), 0.076 + 0.019 * Math.sin(a)], 0.0012, gunDark);
+  rod(THREE, K, [-0.098, -0.065, 0.076], [-0.098, -0.057, 0.088], 0.0017, sightDotMat);
+  K.cyl(0.0023, 0.0023, 0.001, gunDark, -0.0965, -0.065, 0.076, null, 8, 'x');
   // Rear hose loop from the rear receiver bulkhead Fitting (z = -0.17) out to z = -0.262 and forward into the side tank rear dome (z = -0.038).
   K.cyl(0.02, 0.02, 0.018, gunDark, 0, 0.044, -0.168, null, 8);
   K.cyl(0.015, 0.015, 0.024, brassMat, 0, 0.044, -0.178, null, 8);
   K.cyl(0.022, 0.022, 0.026, gunDark, 0.11, -0.05, -0.042, null, 10);
   K.cyl(0.015, 0.015, 0.024, brassMat, 0.11, -0.05, -0.056, null, 8);
+  for (const [x, y, z] of [[0, 0.044, -0.188], [0.11, -0.05, -0.066]]) {
+    K.cyl(0.016, 0.016, 0.008, gunMid, x, y, z, null, 10);
+    K.cyl(0.013, 0.013, 0.004, brassMat, x, y, z - 0.005, null, 10);
+  }
   for (let i = 0; i < 18; i++) {
     const point = (u) => [
       0.11 * Math.pow(u, 0.85),
@@ -697,7 +734,9 @@ export function makeChainsawModel(ctx) {
   chainGroup.position.set(0, 0.04, 0.48);
   const toothCount = 22;
   const chainTeeth = [];
-  const toothPrototype = K.slab([[-0.016, -0.009], [0.016, -0.009], [0.016, 0.002], [0.009, 0.011], [-0.001, 0.011], [-0.003, 0.003], [-0.016, 0.003]], 0.053, bladeMat, { bevel: 0.001, segs: 1 });
+  // GP-20051/J31: tall angled cutter crowns break the bar's outline at the
+  // normal sheet scale; bright steel separates them from the grey guide bar.
+  const toothPrototype = K.slab([[-0.016, -0.011], [0.013, -0.011], [0.016, 0.001], [0.008, 0.019], [-0.001, 0.014], [-0.004, 0.002], [-0.016, 0.002]], 0.053, steelMat, { bevel: 0.001, segs: 1 });
   gun.remove(toothPrototype);
   for (let i = 0; i < toothCount; i++) {
     // GB-189: teeth are transform-only nodes; one InstancedMesh draws all of them.
@@ -705,7 +744,7 @@ export function makeChainsawModel(ctx) {
     chainGroup.add(tooth);
     chainTeeth.push(tooth);
   }
-  const chainInst = new THREE.InstancedMesh(toothPrototype.geometry, bladeMat, toothCount);
+  const chainInst = new THREE.InstancedMesh(toothPrototype.geometry, steelMat, toothCount);
   chainInst.castShadow = chainInst.receiveShadow = true;
   chainInst.frustumCulled = false;
   chainGroup.add(chainInst);
@@ -716,6 +755,13 @@ export function makeChainsawModel(ctx) {
   gun.userData.chainTeeth = chainTeeth;
   gun.userData.chainPhase = 0;
   layoutChainsawChain(gun);
+  // The inspector supplies only the transform nodes; seed the instance buffer
+  // here too so a static sheet sees the same cutters the running game updates.
+  for (let i = 0; i < toothCount; i++) {
+    chainTeeth[i].updateMatrix();
+    chainInst.setMatrixAt(i, chainTeeth[i].matrix);
+  }
+  chainInst.instanceMatrix.needsUpdate = true;
   gun.userData.heatMat = bodyMat;
   gun.userData.flash = null;
   gun.userData.flashLight = null;

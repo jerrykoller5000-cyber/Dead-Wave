@@ -63,7 +63,7 @@ function gripRidges(K, mat, cz, cy, h, d, rake, us, v, w, t = 0.003, along = 0.0
 }
 
 export function makeM4Model(ctx) {
-  const { THREE, gunKit, gunBand, gunEffects, gunSuppressor, finishGun, profileCurve, gunBody, gunMid, gunDark, gunAccent, gunPoly, gunRubber, magPoly, glassMat, sightDotMat, gaugeFace } = ctx;
+  const { THREE, gunKit, gunBand, gunEffects, gunSuppressor, finishGun, profileCurve, gunBody, gunMid, gunDark, gunAccent, gunPoly, gunRubber, gunMetal, magPoly, glassMat, sightDotMat, gaugeFace } = ctx;
   const gun = new THREE.Group();
   const K = gunKit(gun);
   const D = gunDetail(ctx);
@@ -81,10 +81,14 @@ export function makeM4Model(ctx) {
   K.slab([[-0.18, -0.006], [0.2, -0.006], [0.2, 0.07], [0.192, 0.078], [-0.168, 0.078], [-0.18, 0.066]], UW, gunBody, { bevel: 0.005, segs: 2 });
   K.rail(0.36, 0, 0.085, 0.01, null, 0.031);
   K.slab([[-0.11, 0.0], [0.16, 0.0], [0.16, 0.058], [-0.06, 0.058], [-0.11, 0.04]], 0.012, gunBody, { x: UW / 2, bevel: 0.004 });   // the bulge round the port
-  K.box(0.004, 0.028, 0.072, gunRubber, UW / 2 + 0.0043, 0.03, 0.06, 0, 0, 0, null, 0.001);                                      // the ejection port: a dark recess, 0.3 mm over the bulge's face
-  K.box(0.004, 0.016, 0.04, gunMid, UW / 2 + 0.0047, 0.03, 0.058, 0, 0, 0, null, 0.001);                                         // the bolt carrier's side seen in it
-  K.slab([[0.022, -0.02], [0.096, -0.02], [0.096, 0.012], [0.022, 0.012]], 0.004, gunBody, { x: LW / 2 + 0.005, bevel: 0.0015 });   // the port cover, open: hinged under the port, hanging down the lower's side
-  D.pin(gun, LW / 2 + 0.004, 0.013, 0.059, { axis: 'z', len: 0.08, r: 0.0016 });                                                      // its hinge pin along the port's bottom edge
+  // CL-318 (J26: "ejection port needs work"): the port as a real cut: a raised rim round a 57 x 22 mm opening, the dark
+  // recess, the bolt carrier's bright side seen through it with the bolt face at its front.
+  K.slab(gunBand([[0.013, 0.012], [0.013, 0.046], [0.105, 0.046], [0.105, 0.012], [0.013, 0.012]], 0.003), 0.003, gunMid, { x: UW / 2 + 0.0065, bevel: 0.0008 });   // the rim
+  K.box(0.004, 0.032, 0.088, gunRubber, UW / 2 + 0.0043, 0.029, 0.059, 0, 0, 0, null, 0.001);                                      // the recess, 0.3 mm over the bulge's face
+  K.box(0.004, 0.02, 0.052, gunMetal, UW / 2 + 0.0047, 0.029, 0.045, 0, 0, 0, null, 0.001);                                       // the carrier's side
+  K.box(0.004, 0.02, 0.014, gunMid, UW / 2 + 0.0047, 0.029, 0.082, 0, 0, 0, null, 0.001);                                         // the bolt's face
+  K.slab([[0.014, -0.022], [0.104, -0.022], [0.104, 0.011], [0.014, 0.011]], 0.004, gunBody, { x: LW / 2 + 0.005, bevel: 0.0015 });   // the port cover, open: hinged under the port, hanging down the lower's side
+  D.pin(gun, LW / 2 + 0.004, 0.012, 0.059, { axis: 'z', len: 0.096, r: 0.0016 });                                                     // its hinge pin along the port's bottom edge
   K.slab([[-0.062, 0.018], [-0.026, 0.018], [-0.018, 0.06], [-0.062, 0.066]], 0.02, gunBody, { x: UW / 2 + 0.006, bevel: 0.004 });   // the brass deflector
   K.lathe([[0, -0.125], [0.011, -0.125], [0.011, -0.088], [0.0085, -0.082], [0.0085, -0.06], [0, -0.06]], gunBody, { x: UW / 2 + 0.014, y: 0.046, seg: 10 });   // the forward assist
   D.ribs(gun, { x: UW / 2 + 0.014, y: 0.046, z: -0.114, axis: 'y', side: 1, along: 'z', count: 4, pitch: 0.004, w: 0.012, h: 0.001, t: 0.0014, mat: gunMid });   // its button's grooves
@@ -110,18 +114,24 @@ export function makeM4Model(ctx) {
   K.tor(0.009, 0.0025, gunBody, LW / 2 + 0.0015, -0.03, 0.09, 0, Math.PI / 2, 0, null, Math.PI * 2, 12);                            // the mag release's fence
   K.cyl(0.006, 0.006, 0.006, gunDark, LW / 2 + 0.003, -0.03, 0.09, null, 10, 'x');                                                    // the button
   K.box(0.006, 0.006, 0.012, gunDark, LW / 2 + 0.001, -0.07, 0.03, 0, 0, 0, null, 0.001);                                            // the pivot pin's detent plate
-  K.slab(gunBand([[0.016, -0.05], [0.028, -0.09], [0.004, -0.122], [-0.028, -0.132], [-0.052, -0.112], [-0.048, -0.078]], 0.0095), 0.026, gunDark, { bevel: 0.004 });   // the trigger guard
-  K.slab([[-0.0103, -0.0525], [-0.0187, -0.0689], [-0.0179, -0.0843], [-0.0092, -0.0957], [-0.0148, -0.1003], [-0.0261, -0.0877], [-0.0293, -0.0671], [-0.0217, -0.0475]], 0.012, gunDark, { bevel: 0.002 });   // GB-175/180: the trigger
+  // CL-318 (J26: "trigger and trigger guard look too shallow and vertically narrow; pistol grip needs to slide back opening
+  // up more space"): the trigger 18 units behind where it was (15 mm behind the well's rear face), the guard a real loop
+  // from the well's rear to the grip's front, 4 cm deep, and the grip 4 units back on its mount boss.
+  K.slab(gunBand([[-0.008, -0.062], [-0.014, -0.1], [-0.03, -0.108], [-0.066, -0.108], [-0.082, -0.096], [-0.08, -0.07]], 0.008), 0.03, gunDark, { bevel: 0.003 });   // the trigger guard
+  K.slab([[-0.0283, -0.0525], [-0.0367, -0.0689], [-0.0359, -0.0843], [-0.0272, -0.0957], [-0.0328, -0.1003], [-0.0441, -0.0877], [-0.0473, -0.0671], [-0.0397, -0.0475]], 0.012, gunDark, { bevel: 0.002 });   // GB-175/180: the trigger
+  K.slab(shapedGrip(-0.12, -0.12, 0.18, 0.08, 0.3, [[-0.12, 0.04], [0.04, 0.04], [0.04, -0.046], [-0.12, -0.046]]), 0.048, gunBody, { bevel: 0.006, segs: 2 });   // the lower's grip mount, the grip grows out of it
   // CL-312 b (Jerry: "check and fix all pistol grips"): an A2 grip at an A2's size (32 mm wide, 53 mm deep under the
   // beavertail, 46 at the palm): the finger nub on the front strap and the four ridges under it, the backstrap's swell,
   // a flat base with its trapdoor and screw. The centre line, h and rake are as before, so the palm point stays.
-  K.slab(shapedGrip(-0.08, -0.12, 0.18, 0.08, 0.3, [
+  // CL-318: the grip's centre line 4 units back (cz -0.12, was -0.08): the palm point with it (VM_SOCKETS.m4 grip,
+  // WEAPON_HOLD.m4 grip and trig: z -0.116, -0.029).
+  K.slab(shapedGrip(-0.12, -0.12, 0.18, 0.08, 0.3, [
     [-0.06, 0.038], [0.08, 0.034], [0.22, 0.028], [0.32, 0.027], [0.39, 0.035], [0.46, 0.027], [0.6, 0.024], [0.8, 0.025], [0.96, 0.027],
     [1.03, 0.012], [1.03, -0.022], [0.98, -0.038], [0.8, -0.04], [0.55, -0.04], [0.3, -0.037], [0.1, -0.036], [-0.03, -0.044], [-0.08, -0.02]
   ]), 0.047, gunPoly, { bevel: 0.011, segs: 3 });
-  gripRidges(K, gunPoly, -0.08, -0.12, 0.18, 0.08, 0.3, [0.56, 0.64, 0.72, 0.8], 0.0245, 0.03);   // the front strap's ridges
-  K.box(0.024, 0.003, 0.03, gunDark, 0, -0.12 - 0.53 * 0.18 * Math.cos(0.3), -0.08 - 0.53 * 0.18 * Math.sin(0.3) - 0.004, 0.3, 0, 0, null, 0.0008);   // the base's trapdoor
-  D.screw(gun, 0, -0.12 - 0.535 * 0.18 * Math.cos(0.3), -0.08 - 0.535 * 0.18 * Math.sin(0.3) + 0.012, { axis: 'y', side: -1, r: 0.0035, kind: 'hex' });   // the grip screw
+  gripRidges(K, gunPoly, -0.12, -0.12, 0.18, 0.08, 0.3, [0.56, 0.64, 0.72, 0.8], 0.0245, 0.03);   // the front strap's ridges
+  K.box(0.024, 0.003, 0.03, gunDark, 0, -0.12 - 0.53 * 0.18 * Math.cos(0.3), -0.12 - 0.53 * 0.18 * Math.sin(0.3) - 0.004, 0.3, 0, 0, null, 0.0008);   // the base's trapdoor
+  D.screw(gun, 0, -0.12 - 0.535 * 0.18 * Math.cos(0.3), -0.12 - 0.535 * 0.18 * Math.sin(0.3) + 0.012, { axis: 'y', side: -1, r: 0.0035, kind: 'hex' });   // the grip screw
   // Buffer tube with its castle nut and end plate, the six-position stock: the cheek tube over the buffer, the open web,
   // the butt with its rubber pad and sling slot, the release lever, the QD socket. GB-269: all one group, fpStock.
   const stock = K.group(0, 0, 0); stock.name = 'fp-stock';
@@ -172,17 +182,24 @@ export function makeM4Model(ctx) {
   for (let i = 0; i < 5; i++) { const a = Math.PI / 2 + (i - 2) * 0.62; K.box(0.004, 0.004, 0.034, gunRubber, Math.cos(a) * 0.0158, 0.02 + Math.sin(a) * 0.0158, 0.952, 0, 0, a); }
   // Holographic sight on the upper's rail (its dot the sight line: unchanged), the clamp's lever and screw; the weapon
   // light on the right of the handguard with its bezel and tail switch.
-  K.box(0.05, 0.02, 0.11, gunDark, 0, 0.1, 0.0, 0, 0, 0, null, 0.004);
-  for (const sx of [-1, 1]) K.slab([[-0.05, 0.108], [0.052, 0.108], [0.05, 0.158], [-0.042, 0.162]], 0.006, gunDark, { x: sx * 0.026, bevel: 0.002 });
-  K.box(0.058, 0.01, 0.1, gunDark, 0, 0.163, 0.004, 0, 0, 0, null, 0.003);
+  // CL-318 (J22: "red dot sights need an upgrade"): a hooded holographic sight: the clamp base on the rail, the lower
+  // housing (its battery cap and buttons), a hood frame of four bars round the window rather than a box, the window's
+  // glass with the dot and its ring on the same line (0, 0.134, 0.0455).
+  K.box(0.05, 0.018, 0.112, gunDark, 0, 0.099, 0.0, 0, 0, 0, null, 0.004);                   // the base
+  K.slab([[-0.052, 0.108], [0.054, 0.108], [0.054, 0.118], [-0.052, 0.118]], 0.05, gunDark, { bevel: 0.003 });   // the housing's floor
+  K.box(0.046, 0.02, 0.04, gunDark, 0, 0.126, -0.03, 0, 0, 0, null, 0.003);                   // the rear housing (the emitter)
+  for (const sx of [-1, 1]) K.box(0.007, 0.05, 0.03, gunDark, sx * 0.0235, 0.14, 0.046, 0, 0, 0, null, 0.0025);   // the hood's uprights
+  K.box(0.054, 0.007, 0.03, gunDark, 0, 0.1665, 0.046, 0, 0, 0, null, 0.0025);                                  // the hood's top bar
+  K.box(0.054, 0.006, 0.03, gunDark, 0, 0.1125, 0.046, 0, 0, 0, null, 0.002);                                   // its bottom bar
+  for (const sx of [-1, 1]) D.screw(gun, sx * 0.027, 0.1665, 0.04, { axis: 'x', side: sx, r: 0.002, kind: 'torx' });   // the hood's screws
   // GB-233: a holographic sight's window is clear glass with a small dot (EOTech-style), not an opaque teal plate.
   const holoGlass = Object.assign(glassMat.clone(), { transparent: true, opacity: 0.18, depthWrite: false });
-  K.box(0.046, 0.044, 0.003, holoGlass, 0, 0.134, 0.045);
+  K.box(0.04, 0.047, 0.003, holoGlass, 0, 0.1395, 0.045);
   // GB-259 (J10): a 3.5 mm dot inside a thin ring, EOTech-style.
   K.box(0.0035, 0.0035, 0.002, sightDotMat, 0, 0.134, 0.0455);
   K.tor(0.0075, 0.0006, sightDotMat, 0, 0.134, 0.0455, 0, 0, 0, null, Math.PI * 2, 24);
-  for (const z of [-0.02, 0.0]) K.box(0.008, 0.008, 0.012, gunRubber, 0.03, 0.118, z);            // the brightness buttons
-  K.cyl(0.008, 0.008, 0.012, gunMid, -0.032, 0.106, 0.019, null, 10, 'x');                        // the battery cap
+  for (const z of [-0.036, -0.022]) K.box(0.006, 0.008, 0.01, gunRubber, 0.0255, 0.126, z);        // the brightness buttons on the emitter's side
+  K.cyl(0.008, 0.008, 0.012, gunMid, -0.028, 0.126, -0.03, null, 10, 'x');                        // the battery cap
   K.slab([[-0.046, 0.092], [-0.02, 0.092], [-0.02, 0.098], [-0.046, 0.098]], 0.008, gunDark, { x: 0.03, bevel: 0.0015 });   // the clamp's lever
   for (const sx of [-1, 1]) D.screw(gun, sx * 0.025, 0.1, 0.033, { axis: 'x', side: sx, r: 0.0025, kind: 'hex' });
   K.rail(0.086, 0.031, 0.02, 0.504, null, 0.025, 1);
@@ -250,44 +267,64 @@ export function makeAkModel(ctx) {
   K.box(0.024, 0.006, 0.01, gunMid, 0, 0.069, 0.182);                                         // the slider
   for (const sx of [-1, 1]) K.box(0.004, 0.004, 0.008, gunAccent, sx * 0.005, 0.072, 0.218);   // GB-259: the U notch's ears, their tops the sight line
   // Right side (+x in the mirrored view): the long safety lever in its notches, the charging handle on the carrier.
-  K.slab(gunBand([[-0.17, 0.018], [-0.02, 0.014], [0.005, -0.006]], 0.006), 0.004, gunDark, { x: HW + 0.001, bevel: 0.0015 });
-  K.box(0.004, 0.022, 0.012, gunDark, HW + 0.002, -0.004, 0.012);                      // the lever's tab
-  for (const z of [-0.14, -0.1]) D.groove(gun, { x: HW, y: 0.024, z, axis: 'x', side: 1, along: 'y', len: 0.012, w: 0.0008 });   // the selector's notches
+  // CL-318 (J27: "the safety needs to look more realistic and like an AK-47 safety"): the stamped selector lever: its
+  // hub on the axle above and behind the trigger, the long flat blade running forward along the receiver's side to the
+  // thumb tab over the trigger guard's front, the two notches it clicks into at the cover's edge.
+  K.cyl(0.011, 0.011, 0.004, gunDark, HW + 0.002, 0.004, -0.12, null, 14, 'x');                                             // the hub
+  D.screw(gun, HW + 0.004, 0.004, -0.12, { axis: 'x', side: 1, r: 0.004, kind: 'slot' });                                    // the axle's head
+  K.slab(gunBand([[-0.12, 0.012], [-0.05, 0.01], [0.012, 0.004]], 0.0055), 0.0035, gunDark, { x: HW + 0.0022, bevel: 0.0012 });   // the blade
+  K.slab(gunBand([[0.006, 0.006], [0.02, -0.004], [0.028, -0.02]], 0.005), 0.0035, gunDark, { x: HW + 0.0022, bevel: 0.0012 });   // the thumb tab, bent down at the front
+  K.box(0.005, 0.004, 0.012, gunDark, HW + 0.0045, -0.012, 0.024, 0, 0, 0, null, 0.001);                                       // its lip, bent out
+  for (const z of [-0.145, -0.108]) D.groove(gun, { x: HW, y: 0.024, z, axis: 'x', side: 1, along: 'y', len: 0.012, w: 0.0008 });   // the selector's notches
+  // CL-318 (J27: "ejection port and charging handle need to line up and be properly sized"): the port cut in the
+  // receiver's right wall in front of the handle, 58 x 23 mm, its rim, the carrier's bright side in it; the handle's
+  // slot runs back from the port's top edge under the cover, the handle (the work part) riding in it at the slot's front.
+  K.slab(gunBand([[0.15, 0.001], [0.15, 0.031], [0.225, 0.031], [0.225, 0.001], [0.15, 0.001]], 0.0025), 0.003, gunMid, { x: HW + 0.001, bevel: 0.0008 });   // the rim
+  K.box(0.004, 0.028, 0.072, gunRubber, HW - 0.0003, 0.016, 0.1875, 0, 0, 0, null, 0.001);   // the recess
+  K.box(0.004, 0.016, 0.03, gunMetal, HW + 0.0002, 0.016, 0.172, 0, 0, 0, null, 0.001);      // the carrier's side
+  K.box(0.0035, 0.009, 0.1, gunRubber, HW - 0.0005, 0.03, 0.095, 0, 0, 0, null, 0.001);      // the handle's slot
   // GB-269 (GP-20012, docs/contracts.md): the charging handle is its own group, gun.userData.work, at rest where it was.
   const work = K.group(HW + 0.006, 0.02, 0.13); work.name = 'work';
-  K.box(0.016, 0.012, 0.02, gunDark, 0, 0, 0, 0, 0, 0, work, 0.003);   // (t333: 20 mm long, so the knob on it hangs on a part the test calls big)
-  K.sph(0.009, gunDark, 0.012, 0, 0, work, 8);
+  K.box(0.016, 0.014, 0.022, gunDark, 0, 0.004, 0, 0, 0, 0, work, 0.003);   // the handle's root in the slot (t333: 22 mm long, so the knob on it hangs on a part the test calls big)
+  K.cyl(0.0045, 0.0045, 0.012, gunDark, 0.012, 0.004, 0, work, 8, 'x');      // the stem
+  K.sph(0.0095, gunDark, 0.021, 0.004, 0, work, 10);                          // the knob
   gun.userData.work = work;
   // Trigger guard, the magazine release in front of it, a trigger with its tip curling forward, the wooden grip.
   // Grip centre line is still gripOutline(-0.1, -0.14, 0.19, ..., 0.34): the palm stays at the hold.
-  K.slab(gunBand([[0.002, -0.028], [0.004, -0.07], [-0.016, -0.088], [-0.042, -0.084], [-0.048, -0.062]], 0.006), 0.022, gunDark, { bevel: 0.003 });
-  K.box(0.016, 0.018, 0.006, gunDark, 0, -0.04, 0.0);   // the mag release paddle
+  // CL-318 (J27: the guard squeezed between the grip and the magazine; the grip shortened): the guard a real loop from
+  // the mag release's rear to the grip's front, 36 units long; the grip 3 units back and 2.5 shorter.
+  K.slab(gunBand([[0.002, -0.028], [0.0, -0.072], [-0.016, -0.084], [-0.06, -0.084], [-0.076, -0.068], [-0.074, -0.04]], 0.0055), 0.022, gunDark, { bevel: 0.003 });
+  K.box(0.016, 0.018, 0.006, gunDark, 0, -0.04, 0.004);   // the mag release paddle
   // GB-175: trigger face toward the grip, tip curling forward; GB-180: a solid blade.
   K.slab([[-0.0165, -0.0329], [-0.0248, -0.046], [-0.024, -0.0581], [-0.0155, -0.0675], [-0.0205, -0.0725], [-0.032, -0.0619], [-0.0352, -0.044], [-0.0275, -0.0271]], 0.009, gunDark, { bevel: 0.002 });
   // GB-178: a clean AK grip on the same centre line and hand anchor (u 0.42, v 0); its top runs up into the receiver.
   // CL-312 b (Jerry: "check and fix all pistol grips"): the AKM grip widens a little to a flat base (it tapered to a point).
-  K.slab(shapedGrip(-0.1, -0.14, 0.19, 0.08, 0.34, [
-    [-0.12, 0.02], [-0.02, 0.022], [0.14, 0.024], [0.4, 0.024], [0.64, 0.026], [0.86, 0.03], [1.0, 0.031], [1.04, 0.018],
-    [1.04, -0.02], [0.98, -0.036], [0.8, -0.038], [0.5, -0.034], [0.2, -0.03], [0.0, -0.028], [-0.12, -0.014]
+  // The centre line cz -0.13, cy -0.135, h 0.165 (was -0.1, -0.14, 0.19): the palm point (u 0.42) is (-0.1256, -0.1226) now:
+  // VM_SOCKETS.ak grip, WEAPON_HOLD.ak grip and trig follow.
+  K.slab(shapedGrip(-0.13, -0.135, 0.165, 0.08, 0.34, [
+    [-0.14, 0.02], [-0.02, 0.022], [0.14, 0.024], [0.4, 0.024], [0.64, 0.026], [0.86, 0.03], [1.0, 0.031], [1.04, 0.018],
+    [1.04, -0.02], [0.98, -0.036], [0.8, -0.038], [0.5, -0.034], [0.2, -0.03], [0.0, -0.028], [-0.14, -0.014]
   ]), 0.042, woodMat, { bevel: 0.008, segs: 3 });
-  K.box(0.03, 0.003, 0.036, gunDark, 0, -0.14 - 0.54 * 0.19 * Math.cos(0.34), -0.1 - 0.54 * 0.19 * Math.sin(0.34), 0.34, 0, 0, null, 0.0008);   // the base's steel plate
-  for (const sx of [-1, 1]) D.checkering(gun, woodDark, shapedGrip(-0.1, -0.14, 0.15, 0.05, 0.34, [[0.12, 0.012], [0.88, 0.012], [0.88, -0.022], [0.12, -0.022]]), sx * 0.0212, 0.0045, 0.0011);   // the grip's checkering
-  D.screw(gun, 0.0212, -0.155, -0.108, { axis: 'x', side: 1, r: 0.0045, kind: 'slot' });                 // GB-178: the grip screw on the panel
-  K.slab([[-0.142, -0.027], [-0.058, -0.027], [-0.062, -0.04], [-0.136, -0.042]], 0.046, gunDark, { bevel: 0.002 });   // GB-180: the grip's steel mounting tang under the receiver
+  K.box(0.03, 0.003, 0.036, gunDark, 0, -0.135 - 0.54 * 0.165 * Math.cos(0.34), -0.13 - 0.54 * 0.165 * Math.sin(0.34), 0.34, 0, 0, null, 0.0008);   // the base's steel plate
+  for (const sx of [-1, 1]) D.checkering(gun, woodDark, shapedGrip(-0.13, -0.135, 0.13, 0.05, 0.34, [[0.12, 0.012], [0.88, 0.012], [0.88, -0.022], [0.12, -0.022]]), sx * 0.0212, 0.0045, 0.0011);   // the grip's checkering
+  D.screw(gun, 0.0212, -0.15, -0.136, { axis: 'x', side: 1, r: 0.0045, kind: 'slot' });                 // GB-178: the grip screw on the panel
+  K.slab([[-0.17, -0.027], [-0.088, -0.027], [-0.092, -0.04], [-0.164, -0.042]], 0.046, gunDark, { bevel: 0.002 });   // GB-180: the grip's steel mounting tang under the receiver
   // Stock: the dropped wooden butt with its wrist, a steel buttplate, the tang, a sling loop. GB-269: one group, fpStock.
   const stock = K.group(0, 0, 0); stock.name = 'fp-stock';
-  K.slab([[-0.222, 0.03], ...profileCurve([-0.255, 0.03], [-0.34, 0.012], [-0.412, 0.012], 5),
+  // CL-318 (J27: "the stock needs to transition better to the receiver"): the wood runs into a steel rear-trunnion sleeve
+  // the receiver's own width, riveted, instead of meeting the receiver's end with a step and a block on top.
+  K.slab([[-0.232, 0.028], ...profileCurve([-0.255, 0.03], [-0.34, 0.012], [-0.412, 0.012], 5),
     ...profileCurve([-0.412, 0.012], [-0.515, 0.017], [-0.571, -0.009], 5), [-0.579, -0.145], [-0.57, -0.153],
     ...profileCurve([-0.57, -0.153], [-0.414, -0.084], [-0.337, -0.069], 5),
-    ...profileCurve([-0.337, -0.069], [-0.27, -0.044], [-0.222, -0.03], 4)], 0.052, woodMat, { bevel: 0.012, segs: 3, parent: stock });
+    ...profileCurve([-0.337, -0.069], [-0.27, -0.044], [-0.232, -0.028], 4)], 0.046, woodMat, { bevel: 0.01, segs: 3, parent: stock });
+  K.slab([[-0.252, 0.029], [-0.218, 0.029], [-0.218, -0.029], [-0.252, -0.029]], 2 * HW + 0.001, gunBody, { bevel: 0.0025, parent: stock });   // the rear trunnion's sleeve
+  for (const sx of [-1, 1]) for (const ry of [0.014, -0.014]) D.rivet(stock, sx * (HW + 0.0005), ry, -0.236, { axis: 'x', side: sx, r: 0.0032 });
   K.slab([[-0.592, 0.0], [-0.573, -0.004], [-0.579, -0.152], [-0.597, -0.156]], 0.056, gunDark, { bevel: 0.003, parent: stock });   // the buttplate
   D.screw(stock, 0, -0.03, -0.593, { axis: 'z', side: -1, r: 0.003, kind: 'slot' }); D.screw(stock, 0, -0.125, -0.593, { axis: 'z', side: -1, r: 0.003, kind: 'slot' });   // its screws
   K.box(0.022, 0.03, 0.016, gunDark, 0, -0.06, -0.593, 0, 0, 0, stock, 0.002);                     // the trapdoor
-  K.box(0.05, 0.018, 0.05, gunDark, 0, 0.018, -0.236, 0, 0, 0, stock, 0.002);                       // the rear tang's block
   for (const sx of [-1, 1]) {
-    K.slab(gunBand([[-0.32, -0.035], [-0.386, -0.049], [-0.472, -0.056], [-0.535, -0.049]], 0.0015), 0.002, woodDark, { x: sx * 0.026, bevel: 0, parent: stock });
-    K.slab(gunBand([[-0.396, -0.066], [-0.451, -0.079], [-0.536, -0.096]], 0.0011), 0.002, woodDark, { x: sx * 0.026, bevel: 0, parent: stock });
-    D.rivet(stock, sx * 0.025, -0.0, -0.24, { axis: 'x', side: sx, r: 0.0032 });   // the stock's tang rivets
+    K.slab(gunBand([[-0.32, -0.035], [-0.386, -0.049], [-0.472, -0.056], [-0.535, -0.049]], 0.0015), 0.002, woodDark, { x: sx * 0.023, bevel: 0, parent: stock });
+    K.slab(gunBand([[-0.396, -0.066], [-0.451, -0.079], [-0.536, -0.096]], 0.0011), 0.002, woodDark, { x: sx * 0.023, bevel: 0, parent: stock });
   }
   K.tor(0.012, 0.0035, gunDark, 0, -0.122, -0.45, 0, Math.PI / 2, 0, stock);
   gun.userData.fpStock = stock;
@@ -339,7 +376,7 @@ export function makeAkModel(ctx) {
 }
 
 export function makeAa12Model(ctx) {
-  const { THREE, gunKit, gunBand, gripOutline, gunEffects, finishGun, gunBody, gunMid, gunDark, gunAccent, gunPoly, gunRubber } = ctx;
+  const { THREE, gunKit, gunBand, gripOutline, gunEffects, finishGun, gunBody, gunMid, gunDark, gunAccent, gunPoly, gunRubber, gunMetal } = ctx;
   const gun = new THREE.Group();
   const K = gunKit(gun);
   const D = gunDetail(ctx);
@@ -371,8 +408,13 @@ export function makeAa12Model(ctx) {
   // Ejection port on +x with the bolt's face in it; the charging handle in its slot on -x (the work part's place); the
   // selector over the grip on -x with its marks.
   const PX = RW / 2 + 0.003;   // the side plates' outer face
-  K.box(0.004, 0.05, 0.12, gunRubber, PX + 0.0003, 0.02, 0.1, 0, 0, 0, null, 0.001);
-  K.box(0.004, 0.03, 0.05, gunMid, PX + 0.0008, 0.02, 0.08, 0, 0, 0, null, 0.001);
+  // CL-318 (J28: "ejection port needs to look more believable"): a rimmed 85 x 36 mm opening, the recess, the bolt
+  // carrier's bright side in it with the bolt's face and the extractor at the front.
+  K.slab(gunBand([[0.04, -0.004], [0.04, 0.046], [0.16, 0.046], [0.16, -0.004], [0.04, -0.004]], 0.003), 0.0035, gunMid, { x: PX + 0.001, bevel: 0.001 });   // the rim
+  K.box(0.004, 0.046, 0.116, gunRubber, PX + 0.0003, 0.021, 0.1, 0, 0, 0, null, 0.001);   // the recess
+  K.box(0.004, 0.03, 0.07, gunMetal, PX + 0.0008, 0.021, 0.08, 0, 0, 0, null, 0.001);     // the carrier's side
+  K.box(0.004, 0.03, 0.016, gunMid, PX + 0.0009, 0.021, 0.124, 0, 0, 0, null, 0.001);     // the bolt's face
+  K.box(0.005, 0.008, 0.014, gunDark, PX + 0.001, 0.036, 0.13, 0, 0, 0, null, 0.001);     // the extractor
   K.box(0.004, 0.014, 0.26, gunRubber, -PX - 0.0003, 0.055, 0.025, 0, 0, 0, null, 0.002);
   K.box(0.022, 0.022, 0.035, gunDark, -PX - 0.008, 0.05, 0.18, 0, 0, 0, null, 0.004);
   D.ribs(gun, { x: -PX - 0.019, y: 0.05, z: 0.18, axis: 'x', side: -1, along: 'z', count: 4, pitch: 0.006, w: 0.016, h: 0.001, t: 0.0018, mat: gunMid });
@@ -386,14 +428,16 @@ export function makeAa12Model(ctx) {
   // Stock: the moulded nose stepping the receiver's width down, the body, the comb, the side panels, the rubber pad.
   // GB-259 (GP-20014): one group, gun.userData.fpStock ('fp-stock'). Every part is where it was, narrower.
   const stock = K.group(0, 0, 0); stock.name = 'fp-stock';
-  K.slab([[-0.255, 0.074], [-0.31, 0.072], [-0.31, -0.07], [-0.282, -0.074], [-0.255, -0.078]], 0.08, gunPoly, { bevel: 0.01, segs: 3, parent: stock });
-  K.slab([[-0.3, 0.07], [-0.535, 0.064], [-0.553, 0.058], [-0.553, -0.1], [-0.538, -0.106], [-0.47, -0.092], [-0.36, -0.07], [-0.3, -0.066]], 0.07, gunPoly, { bevel: 0.012, segs: 3, parent: stock });
-  K.slab([[-0.34, 0.078], [-0.522, 0.073], [-0.532, 0.064], [-0.34, 0.068]], 0.054, gunPoly, { bevel: 0.006, segs: 2, parent: stock });   // the comb
+  // CL-318 (J28: "stock needs to transition into the gun not leave a giant shelf on the top portion"): the nose fills the
+  // receiver's rear profile up to its rounded top and the comb runs straight back from there, as an AA-12's does.
+  K.slab([[-0.255, 0.11], [-0.31, 0.104], [-0.31, -0.07], [-0.282, -0.074], [-0.255, -0.078]], 0.08, gunPoly, { bevel: 0.01, segs: 3, parent: stock });
+  K.slab([[-0.3, 0.104], [-0.535, 0.068], [-0.553, 0.06], [-0.553, -0.1], [-0.538, -0.106], [-0.47, -0.092], [-0.36, -0.07], [-0.3, -0.066]], 0.07, gunPoly, { bevel: 0.012, segs: 3, parent: stock });
+  K.slab([[-0.33, 0.108], [-0.522, 0.076], [-0.532, 0.066], [-0.33, 0.096]], 0.054, gunPoly, { bevel: 0.006, segs: 2, parent: stock });   // the comb
   for (const sx of [-1, 1]) {
     K.slab([[-0.335, 0.04], [-0.5, 0.034], [-0.5, -0.042], [-0.42, -0.054], [-0.335, -0.038]], 0.003, gunPoly, { x: sx * 0.036, bevel: 0.002, parent: stock });
     D.groove(stock, { x: sx * 0.035, y: 0.0, z: -0.42, axis: 'x', side: sx, along: 'z', len: 0.17, w: 0.0008 });   // the moulding seam
   }
-  K.slab([[-0.576, 0.058], [-0.553, 0.06], [-0.553, -0.102], [-0.573, -0.108], [-0.579, -0.09], [-0.579, 0.044]], 0.074, gunRubber, { bevel: 0.007, parent: stock });   // the pad
+  K.slab([[-0.576, 0.064], [-0.553, 0.066], [-0.553, -0.102], [-0.573, -0.108], [-0.579, -0.09], [-0.579, 0.05]], 0.074, gunRubber, { bevel: 0.007, parent: stock });   // the pad
   for (let i = 0; i < 5; i++) K.box(0.07, 0.004, 0.002, gunDark, 0, -0.085 + i * 0.032, -0.579, 0, 0, 0, stock, 0);
   K.tor(0.01, 0.003, gunDark, 0, -0.095, -0.45, 0, Math.PI / 2, 0, stock);   // the sling loop
   gun.userData.fpStock = stock;
@@ -405,8 +449,10 @@ export function makeAa12Model(ctx) {
     [1.03, 0.014], [1.03, -0.022], [0.98, -0.04], [0.8, -0.042], [0.55, -0.042], [0.3, -0.038], [0.1, -0.036], [-0.06, -0.04]
   ]), 0.052, gunPoly, { bevel: 0.012, segs: 3 });
   for (const sx of [-1, 1]) K.slab(shapedGrip(-0.17, -0.16, 0.19, 0.08, 0.3, [[0.16, 0.012], [0.94, 0.014], [0.94, -0.026], [0.16, -0.022]]), 0.003, gunRubber, { x: sx * 0.0255, bevel: 0.002 });
-  K.slab(gunBand([[-0.06, -0.088], [-0.062, -0.124], [-0.072, -0.136], [-0.112, -0.136], [-0.122, -0.12]], 0.01), 0.046, gunPoly, { bevel: 0.006, segs: 2 });   // GB-180: the moulded guard
-  K.slab([[-0.0781, -0.09], [-0.0827, -0.1005], [-0.082, -0.1081], [-0.0773, -0.1147], [-0.0827, -0.1193], [-0.09, -0.1119], [-0.0933, -0.0995], [-0.0899, -0.086]], 0.011, gunAccent, { bevel: 0.002 });   // GB-174/180: the trigger
+  // CL-318 (J28: "trigger guard needs work"): a real loop, 9 units long from the receiver's underside ahead of the
+  // trigger to the grip's front, 5 cm deep, 2 cm wide; the trigger in its middle (18 units ahead of where it was).
+  K.slab(gunBand([[-0.03, -0.088], [-0.034, -0.13], [-0.05, -0.142], [-0.1, -0.142], [-0.118, -0.128], [-0.116, -0.1]], 0.009), 0.03, gunPoly, { bevel: 0.0035, segs: 2 });
+  K.slab([[-0.0601, -0.09], [-0.0647, -0.1005], [-0.064, -0.1081], [-0.0593, -0.1147], [-0.0647, -0.1193], [-0.072, -0.1119], [-0.0753, -0.0995], [-0.0719, -0.086]], 0.011, gunAccent, { bevel: 0.002 });   // GB-174/180: the trigger
   // The drum: its axis along the bore, 89 mm thick now, the rolled rims, the hub with its winding cover and key on the
   // front face, the eight face bolts, the feed tower up into the receiver, the latches at its sides.
   const mag = new THREE.Group();
@@ -477,50 +523,66 @@ export function makeShotgunModel(ctx) {
   // tube. The grip, trigger, guard, stock and the hold's palm points stay where they were (the hands fit); the forend's
   // centre moved up 2 cm with the tube (VM_SOCKETS.shotgun support and WEAPON_HOLD follow, the same card).
   const HW = 0.0255;   // the receiver's half width
-  // Receiver: flat sides, the top rolled over the bolt, the tang running back into the stock's wrist, the bottom flat
-  // with the loading port cut into it. Side outline [z, y].
-  K.slab([[0.23, -0.03], [0.23, 0.027], [-0.195, 0.027], [-0.195, -0.028], [-0.17, -0.03], [0.09, -0.03], [0.135, -0.032]], 2 * HW, gunBody, { bevel: 0.003, segs: 2 });
-  // the rolled top: a half-round the receiver's width, tangent to the flat sides, running back over the tang into the stock's wrist
-  K.lathe([[0, -0.195], [0.0245, -0.195], [0.0255, -0.185], [0.0255, 0.225], [0.0245, 0.23], [0, 0.23]], gunBody, { y: 0.026, seg: 20, phase: Math.PI / 20 });
-  K.lathe([[0, -0.2], [0.0205, -0.2], [0.0225, -0.19], [0.0225, -0.1], [0, -0.1]], gunBody, { y: 0.026, seg: 16 });   // the tang's round, into the wrist
+  // Receiver: flat sides, the top rolled over the bolt, the bottom flat with the loading port cut into it. Side outline
+  // [z, y]. CL-319 (Jerry, 8 Nov, a picture of a tactical pump with a one-piece pistol-grip stock: "not satisfied with the
+  // shotgun stock, needs to look like this"): the receiver ends just behind the trigger guard (z -0.03, it ran back to
+  // -0.195 over the grip) and the stock's wrist starts there, as on the reference.
+  K.slab([[0.23, -0.03], [0.23, 0.027], [-0.03, 0.027], [-0.03, -0.03], [0.09, -0.03], [0.135, -0.032]], 2 * HW, gunBody, { bevel: 0.003, segs: 2 });
+  // the rolled top: a half-round the receiver's width, tangent to the flat sides
+  K.lathe([[0, -0.03], [0.0245, -0.03], [0.0255, -0.022], [0.0255, 0.225], [0.0245, 0.23], [0, 0.23]], gunBody, { y: 0.026, seg: 20, phase: Math.PI / 20 });
   // The ejection port on the gun's real right, which is +x here: the mirrored first-person view shows +x on the right (docs/fps/fidelity.md).
-  K.box(0.006, 0.026, 0.068, gunRubber, HW - 0.002, 0.016, 0.098, 0, 0, 0, null, 0.001);
-  K.box(0.004, 0.02, 0.058, gunMetal, HW - 0.004, 0.016, 0.1, 0, 0, 0, null, 0.001);   // the bolt's side, bright
-  K.box(0.005, 0.006, 0.012, gunDark, HW - 0.0045, 0.025, 0.126);                        // the extractor
+  // CL-318 (J29: "ejection port should be more believable"): a rimmed 65 x 26 mm opening (an 870's), the recess, the
+  // bolt's bright side in it with its face at the front and the extractor claw; the parts sat inside the wall before.
+  K.slab(gunBand([[0.06, 0.002], [0.06, 0.034], [0.142, 0.034], [0.142, 0.002], [0.06, 0.002]], 0.0025), 0.003, gunMid, { x: HW + 0.001, bevel: 0.0008 });   // the rim
+  K.box(0.004, 0.03, 0.08, gunRubber, HW + 0.0003, 0.018, 0.101, 0, 0, 0, null, 0.001);   // the recess
+  K.box(0.004, 0.02, 0.05, gunMetal, HW + 0.0008, 0.018, 0.088, 0, 0, 0, null, 0.001);    // the bolt's side, bright
+  K.box(0.004, 0.02, 0.012, gunMid, HW + 0.0009, 0.018, 0.12, 0, 0, 0, null, 0.001);      // its face
+  K.box(0.005, 0.006, 0.012, gunDark, HW + 0.0012, 0.027, 0.126, 0, 0, 0, null, 0.0008);  // the extractor
   // The loading port underneath: the opening, the shell latch and the lifter (carrier) seen in it.
   K.box(0.03, 0.006, 0.07, gunRubber, 0, -0.028, 0.12, 0, 0, 0, null, 0.001);
   K.box(0.022, 0.003, 0.062, gunMetal, 0, -0.0265, 0.12, 0, 0, 0, null, 0.001);   // the carrier
   K.box(0.004, 0.004, 0.02, gunDark, 0.012, -0.027, 0.1);                           // the shell latch
   // The receiver's cross pins (two trigger-plate pins), the stamped lines, the serial band, the safety's cross bolt.
-  for (const z of [-0.09, 0.05]) D.pin(gun, 0, -0.012, z, { axis: 'x', len: 2 * HW, r: 0.0035, mat: gunDark });
+  for (const z of [-0.012, 0.05]) D.pin(gun, 0, -0.012, z, { axis: 'x', len: 2 * HW, r: 0.0035, mat: gunDark });
   for (const sx of [-1, 1]) {
-    D.groove(gun, { x: sx * HW, y: 0.036, z: 0.0, axis: 'x', side: sx, along: 'z', len: 0.4, w: 0.0007 });     // the top edge's stamping line
-    D.groove(gun, { x: sx * HW, y: -0.018, z: 0.02, axis: 'x', side: sx, along: 'z', len: 0.37, w: 0.0007 });   // the lower line
+    D.groove(gun, { x: sx * HW, y: 0.036, z: 0.1, axis: 'x', side: sx, along: 'z', len: 0.24, w: 0.0007 });     // the top edge's stamping line
+    D.groove(gun, { x: sx * HW, y: -0.018, z: 0.1, axis: 'x', side: sx, along: 'z', len: 0.24, w: 0.0007 });   // the lower line
     D.screw(gun, sx * HW, 0.012, 0.19, { axis: 'x', side: sx, r: 0.0028, kind: 'slot' });                       // the barrel-band screw
   }
-  D.pin(gun, 0, -0.04, -0.06, { axis: 'x', len: 0.034, r: 0.004, mat: gunDark });   // the safety button through the trigger plate
-  K.box(0.018, 0.006, 0.02, gunDark, 0, 0.052, -0.13, 0.15, 0, 0, null, 0.002);       // the receiver's top at the tang: the notch block for the sight line
+  D.pin(gun, 0, -0.043, -0.011, { axis: 'x', len: 0.05, r: 0.004, mat: gunDark });   // the safety's cross-bolt through the trigger plate, behind the trigger
+  K.box(0.018, 0.006, 0.02, gunDark, 0, 0.052, -0.012, 0.15, 0, 0, null, 0.002);      // the receiver's rear top: the notch block for the sight line
   // Trigger plate, guard, trigger and the pistol grip: the plate hangs below the receiver's new bottom (-0.03).
   K.slab([[0.086, -0.028], [-0.036, -0.028], [-0.04, -0.04], [-0.03, -0.054], [0.08, -0.054], [0.088, -0.044]], 0.044, gunDark, { bevel: 0.004, segs: 2 });
   K.slab(gunBand([[0.072, -0.052], [0.076, -0.08], [0.064, -0.098], [0.012, -0.1], [-0.012, -0.09], [-0.02, -0.052]], 0.009), 0.034, gunDark, { bevel: 0.004, segs: 2 });
   // GB-175/180: the trigger's face toward the grip, the tip curling forward, a solid blade.
   K.slab([[0.0384, -0.0471], [0.0303, -0.0589], [0.0319, -0.0699], [0.0405, -0.0795], [0.0355, -0.0845], [0.0241, -0.0741], [0.0197, -0.0571], [0.0276, -0.0409]], 0.012, gunAccent, { bevel: 0.002 });
-  // Stock with a recoil pad; the pistol grip; a sling loop. GB-259: the stock group is gun.userData.fpStock ('fp-stock').
+  // Stock with a recoil pad; the pistol grip; the sling slot. GB-259: the stock group is gun.userData.fpStock ('fp-stock').
   const stock = K.group(0, 0, 0); stock.name = 'fp-stock';
-  // CL-312 b (Jerry, 7 Nov: "that weird protrusion where the stock fades into the receiver"): the stock's front meets the
-  // receiver's rear face flush and its underside sweeps forward as one wrist into the grip's back, as a one-piece
-  // pistol-grip stock is moulded; nothing hangs under the receiver any more (the old toe and the GB-296 wedge).
-  K.slab([[-0.29, 0.054], [-0.302, 0.057], [-0.454, 0.052], [-0.468, 0.048], [-0.469, -0.118], [-0.454, -0.121],
-    ...profileCurve([-0.454, -0.121], [-0.346, -0.064], [-0.29, -0.073], 5)], 0.058, gunPoly, { bevel: 0.01, segs: 3, parent: stock });
-  K.slab([[-0.494, 0.055], [-0.464, 0.054], [-0.47, -0.12], [-0.491, -0.124], [-0.496, -0.103]], 0.062, gunRubber, { bevel: 0.007, parent: stock });
-  K.slab([[-0.294, 0.047], [-0.45, 0.047], [-0.447, 0.024], [-0.424, 0.014], [-0.326, 0.026]], 0.06, gunPoly, { bevel: 0.006, segs: 3, parent: stock });   // the comb
-  for (const sx of [-1, 1]) D.groove(stock, { x: sx * 0.029, y: -0.02, z: -0.38, axis: 'x', side: sx, along: 'z', len: 0.14, w: 0.0008 });   // the stock's moulding seam
-  // GB-296: the wrist goes with fp-stock. Its underside is the concave sweep from the stock's toe to the grip's backstrap.
-  // The wrist is narrower than the receiver (3.8 cm to its 4 cm) and runs from the receiver's rear face, under the dip
-  // behind it, to the comb, where the butt widens to 4.6 cm.
-  K.slab([[-0.2, 0.046], ...profileCurve([-0.2, 0.046], [-0.235, 0.012], [-0.266, 0.027], 5), [-0.3, 0.054],
-    [-0.3, -0.072], ...profileCurve([-0.3, -0.072], [-0.2, -0.092], [-0.084, -0.074], 6),
-    [-0.072, -0.052], [-0.062, -0.026], [-0.2, -0.026]], 0.048, gunPoly, { bevel: 0.007, segs: 3, parent: stock });
+  // CL-319 (Jerry's reference: a one-piece synthetic pistol-grip stock): its outline measured off the picture at the
+  // receiver's height (66 px = 0.0785) and laid from the receiver's rear (z -0.03) to the pad's end (z -0.496, the old
+  // length; the hold and the shoulder keep it). The top runs from the receiver's top with a short fall and then a long,
+  // nearly straight drop to the heel at the receiver's bottom height; the butt is deep (the toe 2 cm under the grip's
+  // base); the underside runs dead straight from the toe up to the web behind the grip, where it turns down into the
+  // grip's back. The wrist is 44 mm wide at the receiver and widens smoothly to 56 at the butt (the slab is tapered in x).
+  const stockBody = K.slab([
+    [-0.029, 0.045], [-0.045, 0.036], [-0.062, 0.0265], [-0.0753, 0.0205], [-0.0882, 0.0164], [-0.1012, 0.0128], [-0.1141, 0.0104],
+    [-0.1271, 0.008], [-0.1918, 0.0009], [-0.2565, -0.0062], [-0.3212, -0.0122], [-0.3859, -0.0181], [-0.4506, -0.0253], [-0.4744, -0.0275],
+    [-0.4744, -0.197], [-0.4506, -0.1907], [-0.3212, -0.1348], [-0.1918, -0.0788], [-0.1271, -0.0515], [-0.112, -0.0452], [-0.103, -0.0413],
+    [-0.097, -0.0397], [-0.092, -0.0412], [-0.087, -0.047], [-0.0815, -0.056], [-0.0748, -0.042], [-0.0718, -0.031], [-0.029, -0.031]
+  ], 0.056, gunPoly, { bevel: 0.012, segs: 4, parent: stock });
+  {
+    const P = stockBody.geometry.attributes.position;
+    for (let k = 0; k < P.count; k++) {
+      const t = Math.min(1, Math.max(0, (-0.03 - P.getZ(k)) / 0.3)), e = t * t * (3 - 2 * t);
+      P.setX(k, P.getX(k) * (0.786 + 0.214 * e));   // 44 mm at the receiver to 56 at the butt
+    }
+    P.needsUpdate = true; stockBody.geometry.computeBoundingSphere();
+  }
+  // the black rubber pad, a little proud of the butt all round
+  K.slab([[-0.4734, -0.0262], [-0.4935, -0.0268], [-0.4962, -0.034], [-0.4968, -0.19], [-0.4945, -0.1985], [-0.4734, -0.198]], 0.059, gunRubber, { bevel: 0.006, segs: 2, parent: stock });
+  // the sling slot through the butt, in a shallow frame
+  K.box(0.0572, 0.03, 0.01, gunRubber, 0, -0.088, -0.36, 0, 0, 0, stock, 0.001);
+  for (const sx of [-1, 1]) K.slab(gunBand([[-0.388, -0.069], [-0.388, -0.107], [-0.342, -0.107], [-0.342, -0.069], [-0.388, -0.069]], 0.003), 0.002, gunPoly, { x: sx * 0.0281, bevel: 0.0006, parent: stock });
   // Grip centre line is still gripOutline(-0.06, -0.1, 0.16, ..., 0.28): the palm stays at the hold (GB-178).
   // CL-312 b (Jerry: "skinny and ugly"): a tactical pump's rubber-feel polymer grip, 5 cm deep at the palm swell, 3.3 cm
   // wide, with its heel flared and its base a rounded cap, not a point; the finger grooves down the front strap. The
@@ -531,8 +593,11 @@ export function makeShotgunModel(ctx) {
     [0.5, -0.036], [0.3, -0.032], [0.1, -0.03], [-0.14, -0.028]
   ];
   K.slab(shapedGrip(-0.06, -0.1, 0.16, 0.08, 0.28, gripPts), 0.042, gunPoly, { bevel: 0.009, segs: 3 });
-  for (const sx of [-1, 1]) D.checkering(gun, gunPoly, shapedGrip(-0.06, -0.1, 0.16, 0.08, 0.28, [[0.2, 0.012], [0.96, 0.014], [0.96, -0.024], [0.2, -0.02]]), sx * 0.0212, 0.0045, 0.0011);   // the grip's checkering
-  K.tor(0.012, 0.004, gunDark, 0, -0.088, -0.4, 0, Math.PI / 2, 0, stock);
+  // CL-319: the reference's moulded ribs across the grip's sides (they were checkering), square to its centre line.
+  for (let r = 0; r < 8; r++) {
+    const u = 0.3 + r * 0.085, d = (0.5 - u) * 0.16, cz = -0.06 + d * Math.sin(0.28) - 0.006 * Math.cos(0.28), cy = -0.1 + d * Math.cos(0.28) + 0.006 * Math.sin(0.28);
+    for (const sx of [-1, 1]) K.box(0.0016, 0.0024, 0.032, gunPoly, sx * 0.0212, cy, cz, 0.28, 0, 0, null, 0.0006);
+  }
   gun.userData.fpStock = stock;
   // The forend (the pump): 44 mm across round the magazine tube, 19 cm long, with its grooves round the lower two
   // thirds and the two action bars running back into the receiver. Its root stays at the old place (z 0.28) and it
@@ -587,7 +652,7 @@ export function makeShotgunModel(ctx) {
 }
 
 export function makeSniperModel(ctx) {
-  const { THREE, gunKit, gunBand, gripOutline, gunEffects, gunSuppressor, finishGun, gunBody, gunMid, gunDark, gunAccent, gunPoly, gunRubber, gunTan, steelMat, glassMat } = ctx;
+  const { THREE, gunKit, gunBand, gripOutline, gunEffects, gunSuppressor, finishGun, gunBody, gunMid, gunDark, gunAccent, gunPoly, gunRubber, gunMetal, gunTan, brassMat, steelMat, glassMat } = ctx;
   const gun = new THREE.Group();
   const K = gunKit(gun);
   const D = gunDetail(ctx);
@@ -641,10 +706,12 @@ export function makeSniperModel(ctx) {
     K.slab(shapedGrip(-0.12, -0.1, 0.16, 0.08, 0.25, [[0.2, 0.012], [0.95, 0.014], [0.95, -0.026], [0.2, -0.022]]), 0.003, gunRubber, { x: sx * 0.0235, bevel: 0.002 });
     D.screw(gun, sx * 0.025, -0.1 - 0.1 * 0.16 * Math.cos(0.25), -0.12 - 0.1 * 0.16 * Math.sin(0.25), { axis: 'x', side: sx, r: 0.003, kind: 'slot' });   // the panel screw at the palm point
   }
+  // CL-318 (J30: "the mag should have more width"): 36 mm (0.05) like a big-bore box, the floorplate 40, the ribs at its edges.
   const mag = K.group(0, -0.12, 0.02);
-  K.slab([[-0.04, 0.07], [0.04, 0.07], [0.04, -0.07], [-0.04, -0.07]], 0.042, gunAccent, { bevel: 0.005, parent: mag });
-  K.slab([[-0.043, -0.068], [0.043, -0.068], [0.043, -0.083], [-0.043, -0.083]], 0.048, gunDark, { bevel: 0.004, parent: mag });
-  for (const sx of [-1, 1]) for (const z of [-0.026, 0.026]) K.box(0.0025, 0.113, 0.004, gunBody, sx * 0.021, -0.004, z, 0, 0, 0, mag, 0.001);
+  K.slab([[-0.04, 0.07], [0.04, 0.07], [0.04, -0.07], [-0.04, -0.07]], 0.05, gunAccent, { bevel: 0.005, parent: mag });
+  K.slab([[-0.043, -0.068], [0.043, -0.068], [0.043, -0.083], [-0.043, -0.083]], 0.056, gunDark, { bevel: 0.004, parent: mag });
+  for (const sx of [-1, 1]) for (const z of [-0.026, 0.026]) K.box(0.0025, 0.113, 0.004, gunBody, sx * 0.025, -0.004, z, 0, 0, 0, mag, 0.001);
+  for (const sx of [-1, 1]) K.box(0.002, 0.03, 0.05, gunDark, sx * 0.0255, -0.02, 0, 0, 0, 0, mag, 0.001);   // the witness window's frame
   K.box(0.021, 0.017, 0.007, gunDark, 0, -0.064, -0.031, 0, 0, 0, null, 0.002);
   gun.userData.mag = mag;
   gun.userData.baseMagPos = mag.position.clone();
@@ -674,8 +741,26 @@ export function makeSniperModel(ctx) {
   K.slab([[-0.245, 0.014], [-0.026, 0.014], [-0.026, -0.04], [-0.245, -0.04]], 0.056, gunTan, { bevel: 0.006 });
   // Round action with its bolt shroud, and the rail.
   // GB-180 pass 6: a beefier round action (r 0.036 -> 0.042), a big bolt shroud and a recoil lug under it.
-  K.lathe([[0, -0.272], [0.018, -0.272], [0.024, -0.25], [0.027, -0.24], [0.027, 0.14], [0.022, 0.152], [0, 0.152]], gunBody, { y: 0.045, seg: 18 });
+  // CL-318 (J30: "the bolt and its recess need to look a little better"; Jerry, 8 Nov: "a bolt action sniper does not
+  // have a separate ejection port: the action of the bolt kicks out the round when lifted and pulled to the rear"): the
+  // action is three pieces now. The rear part under a flat-sided rear bridge (an AXMC's) with the handle's notch cut in
+  // its +x side, where the handle's root sits closed; the front ring from the chamber forward; between them the
+  // receiver's right wall is cut away from 20 degrees under the bore line to 60 above it, the way a bolt gun's is, and
+  // the bolt's bright body shows in the opening: no rim, no carrier, the round leaves this way when the bolt comes back.
+  // CL-319 (Jerry's bolt-action diagram): the opening sits over the magazine, where the bolt's face travels (z -0.035 to
+  // 0.067; the chamber starts at its front), and the bolt (below) is a real bolt's length, from the rear bridge to the face.
+  K.lathe([[0, -0.272], [0.018, -0.272], [0.024, -0.25], [0.027, -0.24], [0.027, -0.035], [0, -0.035]], gunBody, { y: 0.045, seg: 18 });
+  K.lathe([[0, 0.067], [0.027, 0.067], [0.027, 0.14], [0.022, 0.152], [0, 0.152]], gunBody, { y: 0.045, seg: 18 });
+  {
+    const shellMat = gunBody.clone(); shellMat.side = THREE.DoubleSide;   // the wall shows its inside through the cut
+    const shell = new THREE.Mesh(new THREE.CylinderGeometry(0.027, 0.027, 0.102, 14, 1, true, 2.618, 4.887), shellMat);   // cylinder theta 0 is -y; 2.618 = 60 degrees over +x, round the top and -x to 20 under +x
+    shell.position.set(0, 0.045, 0.016); shell.rotation.x = Math.PI / 2; shell.castShadow = true; shell.receiveShadow = true; gun.add(shell);
+    for (const a of [-0.349, 1.047]) K.box(0.0045, 0.002, 0.102, gunBody, 0.0248 * Math.cos(a), 0.045 + 0.0248 * Math.sin(a), 0.016, 0, 0, a);   // the wall's thickness at the cut's edges
+  }
   K.box(0.031, 0.014, 0.34, gunDark, 0, 0.074, -0.02, 0, 0, 0, null, 0.002);   // the rail's base on the action's flat
+  K.box(0.054, 0.054, 0.104, gunBody, 0, 0.045, -0.184, 0, 0, 0, null, 0.005);   // the rear bridge, the action's width
+  K.box(0.004, 0.026, 0.1, gunRubber, 0.0265, 0.055, -0.18, 0, 0, 0, null, 0.001);   // the handle notch
+  for (const z of [-0.232, -0.138]) D.screw(gun, 0.027, 0.03, z, { axis: 'x', side: 1, r: 0.0028, kind: 'hex' });   // the bridge's bedding screws
   K.lathe([[0, -0.3], [0.014, -0.3], [0.02, -0.29], [0.022, -0.27], [0, -0.27]], gunDark, { y: 0.045, seg: 14 });
   K.box(0.05, 0.03, 0.03, gunDark, 0, 0.012, 0.12, 0, 0, 0, null, 0.004);
   K.rail(0.34, 0, 0.085, -0.02, null, 0.031);
@@ -687,29 +772,34 @@ export function makeSniperModel(ctx) {
   K.slab([[1.095, 0.019], [1.2, 0.019], [1.205, 0.025], [1.205, 0.055], [1.2, 0.061], [1.095, 0.061]], 0.046, gunMid, { bevel: 0.008 });   // pass 5: brake kept inside the can (t217)
   for (let i = 0; i < 3; i++) for (const sx of [-1, 1]) K.box(0.006, 0.024, 0.018, gunRubber, sx * 0.023, 0.04, 1.115 + i * 0.03);
   // Scope: ocular, tube, saddle and objective in one turned profile; a rubber eyecup; turrets; rings.
+  // CL-318 (Jerry, 8 Nov: "the scope sits too far forward and hangs off the railing; move the scope and its mounting
+  // rings back an inch or two"): the whole scope and both rings 0.06 back (4.3 cm): the front ring at 0.087 on the rail
+  // (its base hung past the rail's end at 0.15), the rear at -0.121, the eyecup at -0.296 (the cheek riser starts at
+  // -0.32). The axis (y 0.14, the sight line) is unchanged and SIGHT.sniper's point (-0.20) is still inside the tube.
+  const scope = K.group(0, 0, -0.06); scope.name = 'scope';
   K.lathe([[0, -0.218], [0.028, -0.218], [0.032, -0.21], [0.032, -0.175], [0.027, -0.16], [0.024, -0.14], [0.0235, -0.13], [0.0235, 0.165], [0.028, 0.19],
-           [0.038, 0.25], [0.039, 0.3], [0.039, 0.318], [0.034, 0.322], [0, 0.322]], gunDark, { y: 0.14, seg: 20 });
-  K.lathe([[0.028, -0.236], [0.033, -0.236], [0.033, -0.214], [0.028, -0.214], [0.028, -0.236]], gunRubber, { y: 0.14, seg: 16 });
-  K.disc(0.033, glassMat, 0, 0.14, 0.3225, 0, null, 16);
-  K.disc(0.026, glassMat, 0, 0.14, -0.2185, Math.PI, null, 14);
-  K.box(0.05, 0.052, 0.075, gunDark, 0, 0.14, 0.05, 0, 0, 0, null, 0.011);
-  K.cyl(0.017, 0.017, 0.04, gunMid, 0, 0.185, 0.05, null, 14, 'y');
-  K.cyl(0.017, 0.017, 0.04, gunMid, 0.044, 0.14, 0.05, null, 14, 'x');
-  K.cyl(0.015, 0.015, 0.035, gunMid, -0.042, 0.14, 0.05, null, 12, 'x');
+           [0.038, 0.25], [0.039, 0.3], [0.039, 0.318], [0.034, 0.322], [0, 0.322]], gunDark, { y: 0.14, seg: 20, parent: scope });
+  K.lathe([[0.028, -0.236], [0.033, -0.236], [0.033, -0.214], [0.028, -0.214], [0.028, -0.236]], gunRubber, { y: 0.14, seg: 16, parent: scope });
+  K.disc(0.033, glassMat, 0, 0.14, 0.3225, 0, scope, 16);
+  K.disc(0.026, glassMat, 0, 0.14, -0.2185, Math.PI, scope, 14);
+  K.box(0.05, 0.052, 0.075, gunDark, 0, 0.14, 0.05, 0, 0, 0, scope, 0.011);
+  K.cyl(0.017, 0.017, 0.04, gunMid, 0, 0.185, 0.05, scope, 14, 'y');
+  K.cyl(0.017, 0.017, 0.04, gunMid, 0.044, 0.14, 0.05, scope, 14, 'x');
+  K.cyl(0.015, 0.015, 0.035, gunMid, -0.042, 0.14, 0.05, scope, 12, 'x');
   // GB-174 (Jerry: the rings floated): each ring's base sits flush on the rail top (0.092), jaws hug the rail's sides
   // with a cross-bolt through a rail slot; a split ring clamps the 0.0255 tube on its axis (y 0.14).
   for (const z of [-0.061, 0.147]) {
-    K.box(0.04, 0.016, 0.022, gunDark, 0, 0.1, z, 0, 0, 0, null, 0.003);
-    for (const sx of [-1, 1]) K.box(0.006, 0.02, 0.022, gunDark, sx * 0.0185, 0.092, z, 0, 0, 0, null, 0.0015);
-    K.cyl(0.003, 0.003, 0.05, gunMid, 0, 0.088, z, null, 8, 'x');
-    K.box(0.03, 0.01, 0.018, gunDark, 0, 0.11, z, 0, 0, 0, null, 0.002);
-    K.lathe([[0.0235, z - 0.009], [0.0295, z - 0.009], [0.031, z - 0.007], [0.031, z + 0.007], [0.0295, z + 0.009], [0.0235, z + 0.009]], gunDark, { y: 0.14, seg: 20 });
-    for (const sx of [-1, 1]) D.screw(gun, sx * 0.031, 0.14 + 0.012, z, { axis: 'x', side: sx, r: 0.003, kind: 'torx' });
+    K.box(0.04, 0.016, 0.022, gunDark, 0, 0.1, z, 0, 0, 0, scope, 0.003);
+    for (const sx of [-1, 1]) K.box(0.006, 0.02, 0.022, gunDark, sx * 0.0185, 0.092, z, 0, 0, 0, scope, 0.0015);
+    K.cyl(0.003, 0.003, 0.05, gunMid, 0, 0.088, z, scope, 8, 'x');
+    K.box(0.03, 0.01, 0.018, gunDark, 0, 0.11, z, 0, 0, 0, scope, 0.002);
+    K.lathe([[0.0235, z - 0.009], [0.0295, z - 0.009], [0.031, z - 0.007], [0.031, z + 0.007], [0.0295, z + 0.009], [0.0235, z + 0.009]], gunDark, { y: 0.14, seg: 20, parent: scope });
+    for (const sx of [-1, 1]) D.screw(scope, sx * 0.031, 0.14 + 0.012, z, { axis: 'x', side: sx, r: 0.003, kind: 'torx' });
   }
-  for (const z of [-0.164, -0.151, 0.303]) K.lathe([[0.023, z - 0.003], [z > 0 ? 0.041 : 0.029, z - 0.003], [z > 0 ? 0.041 : 0.029, z + 0.003], [0.023, z + 0.003]], gunBody, { y: 0.14, seg: 20 });
+  for (const z of [-0.164, -0.151, 0.303]) K.lathe([[0.023, z - 0.003], [z > 0 ? 0.041 : 0.029, z - 0.003], [z > 0 ? 0.041 : 0.029, z + 0.003], [0.023, z + 0.003]], gunBody, { y: 0.14, seg: 20, parent: scope });
   for (let i = 0; i < 16; i++) {
     const a = i * Math.PI / 8;
-    K.box(0.003, 0.015, 0.003, gunDark, Math.cos(a) * 0.0172, 0.195, 0.05 + Math.sin(a) * 0.0172, 0, -a, 0, null, 0);
+    K.box(0.003, 0.015, 0.003, gunDark, Math.cos(a) * 0.0172, 0.195, 0.05 + Math.sin(a) * 0.0172, 0, -a, 0, scope, 0);
   }
   // Bolt handle — GB-146 (Jerry, 2026-10-09: "The sniper bolt is on the wrong side") put it on the gun's right (-x) for
   // the eye of the time, which looked out of his (left-handed) head unmirrored. CL-306 (7 Nov): the first-person view
@@ -717,13 +807,53 @@ export function makeSniperModel(ctx) {
   // reads on the right in first person, where Jerry looks. Lifts by turning about the bolt's axis (boltSide sets which
   // way), worked between shots and after the magazine is seated on a reload (sniperBoltPose).
   const BS = 1;   // the handle's side: +1 the gun's left (+x), -1 its right
-  const bolt = K.group(BS * 0.04, 0.055, -0.18);   // CL-314: the root on the 38 mm action; the knob stays at x 0.13 (VM_SOCKETS.sniper.boltKnob)
-  K.box(0.018, 0.018, 0.09, gunMid, 0, 0, 0, 0, 0, 0, bolt, 0.006);
-  K.cyl(0.0065, 0.0065, 0.084, gunAccent, BS * 0.05, 0.012, 0.02, bolt, 8, 'x');
-  K.sph(0.017, gunDark, BS * 0.09, 0.012, 0.02, bolt, 12);
-  K.cyl(0.008, 0.008, 0.018, gunBody, BS * 0.063, 0.012, 0.02, bolt, 12, 'x');
-  K.tor(0.012, 0.0015, gunBody, BS * 0.097, 0.012, 0.02, 0, Math.PI / 2, 0, bolt, Math.PI * 2, 12);
-  bolt.userData.gb145Grab = new THREE.Vector3(BS * 0.09, 0.012, 0.02);   // the hand takes the knob
+  // CL-319 (Jerry, 8 Nov, the bolt-action cycle: 0 closed, 1 the handle turned up, 2 drawn back and the case thrown out,
+  // 3 pushed forward, the next round into the chamber, 4 turned down): the bolt group's origin is on the bore's axis
+  // (it was 4 cm beside the action, so the handle swung round a point outside the gun), so the handle turns about the
+  // bolt's own axis; the bolt's body is in the group and slides back with the handle through the open receiver. Closed,
+  // the knob is 4 cm out and 3 cm down from the axis (VM_SOCKETS.sniper.boltKnob [0.13, 0.035, -0.16], was y 0.067).
+  const bolt = K.group(0, 0.045, -0.18);
+  K.slab([[-0.045, -0.009], [0.038, -0.009], [0.045, 0], [0.038, 0.009], [-0.045, 0.009]], 0.03, gunMid, { x: BS * 0.027, y: 0.01, bevel: 0.004, segs: 2, parent: bolt });   // the root, out of the bridge's notch
+  // the handle swept down 12 degrees from its root, so turned up 60 degrees its knob stands out to the side and clears the
+  // scope's eyepiece (straight out, the knob rose into it on the pull)
+  const stem = K.group(BS * 0.04, 0.01, 0.02, bolt); stem.rotation.z = BS * -0.2187;
+  K.cyl(0.0065, 0.0065, 0.084, gunAccent, BS * 0.045, 0, 0, stem, 8, 'x');
+  K.sph(0.017, gunDark, BS * 0.0922, 0, 0, stem, 12);
+  K.cyl(0.008, 0.008, 0.018, gunBody, BS * 0.063, 0, 0, stem, 12, 'x');
+  K.tor(0.012, 0.0015, gunBody, BS * 0.099, 0, 0, 0, Math.PI / 2, 0, stem, Math.PI * 2, 12);
+  // the body: closed, its tail in the rear bridge and its face at the chamber (z 0.067); bright, with two flutes that turn
+  // up out of the opening as the handle lifts, the lug ring and the extractor band behind the face, the extractor's claw
+  K.cyl(0.0205, 0.0205, 0.207, gunMetal, 0, 0, 0.1435, bolt, 18, 'z');
+  for (const z of [0.225, 0.238]) K.cyl(0.0212, 0.0212, 0.004, gunMid, 0, 0, z, bolt, 18, 'z');
+  for (const a of [0.05, 0.75]) K.box(0.0035, 0.003, 0.12, gunDark, Math.cos(a) * 0.0195, Math.sin(a) * 0.0195, 0.135, 0, 0, a, bolt, 0.0008);
+  K.box(0.004, 0.006, 0.014, gunDark, BS * 0.0205, -0.004, 0.24, 0, 0, 0, bolt, 0.0008);
+  bolt.userData.gb145Grab = new THREE.Vector3(BS * 0.13, -0.01, 0.02);   // the hand takes the knob
+  // The next round (CL-319): up on the magazine's lips in the open receiver once the bolt is drawn back, driven forward
+  // and up into the chamber by the bolt's face on the forward stroke. The case it replaces is thrown from the opening
+  // (gun.userData.ejectPort, index.html's spawnCasing) on the back stroke.
+  const round = K.group(0, 0.033, -0.022);
+  K.lathe([[0, 0], [0.0083, 0], [0.0083, 0.055], [0.0072, 0.062], [0.0056, 0.066], [0, 0.066]], brassMat, { seg: 12, parent: round });
+  K.lathe([[0, 0.066], [0.0056, 0.066], [0.0054, 0.075], [0.0032, 0.091], [0, 0.098]], gunAccent, { seg: 12, parent: round });
+  round.visible = false;
+  gun.userData.boltRound = round;
+  gun.userData.ejectPort = [0.03, 0.058, 0.01];
+  {
+    const RB = round.position.clone(), BY = bolt.position.y;
+    let prevBack = 0, stroke = 0;
+    gun.userData.boltPoseHook = (open, back) => {
+      bolt.position.y = BY;   // the bolt turns on its own axis: index.html's 1 cm lift was for the old pivot beside the action
+      if (back > prevBack + 1e-4) stroke = 1; else if (back < prevBack - 1e-4) stroke = -1;
+      prevBack = back;
+      if (back < 0.002) { round.visible = false; stroke = 0; return; }
+      if (stroke >= 0) {   // 2: drawn back; the next round rises onto the lips once the face has passed it
+        const up = Math.min(1, Math.max(0, (back - 0.75) / 0.25));
+        round.visible = up > 0; round.position.set(0, RB.y - 0.014 * (1 - up), RB.z);
+      } else {             // 3: pushed forward; the face drives it up the ramp into the chamber
+        const f = 1 - back;
+        round.visible = true; round.position.set(0, RB.y + (BY - RB.y) * f, RB.z + 0.09 * f);
+      }
+    };
+  }
   gun.userData.bolt = bolt;
   gun.userData.boltSide = BS;
   gun.userData.baseBoltPos = bolt.position.clone();
@@ -732,7 +862,7 @@ export function makeSniperModel(ctx) {
   // Grab is bolt-local (knob); beats match SNIPER_BOLT in index.html (fractions of the between-shot cycle).
   gun.userData.boltWork = {
     hand: 'fire',
-    grab: [BS * 0.09, 0.012, 0.02],
+    grab: [BS * 0.13, -0.01, 0.02],
     afterShot: { from: 0.08, to: 0.86, reach: 0.2, lift: [0.2, 0.35], back: [0.35, 0.52], fwd: [0.56, 0.72], down: [0.72, 0.85] },
     reloadWork: [0.62, 0.94]
   };

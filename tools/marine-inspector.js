@@ -631,8 +631,10 @@ function gunSuppressor(gun, K, key) {
 function layoutChainsawChain(gun) {
   const teeth = gun && gun.userData && gun.userData.chainTeeth;
   if (!teeth || !teeth.length) return;
-  const L = 0.34, R = 0.055, straight = 2 * L, cap = Math.PI * R, total = 2 * straight + 2 * cap;
-  const n = teeth.length;
+  // CL-319 (GP-20051's find): the game's path (index.html SAW_CHAIN_L 0.40 since GP-20022, SAW_CHAIN_R 0.055) and, as the
+  // game does, each tooth's matrix copied into the instanced chain (gun.userData.chainInst), which is what draws.
+  const L = 0.40, R = 0.055, straight = 2 * L, cap = Math.PI * R, total = 2 * straight + 2 * cap;
+  const n = teeth.length, inst = gun.userData.chainInst;
   for (let i = 0; i < n; i++) {
     let s = ((i / n) % 1) * total, ang = 0;
     const pos = teeth[i].position;
@@ -641,7 +643,9 @@ function layoutChainsawChain(gun) {
     else if ((s -= cap) < straight) { pos.set(0, -R, L - s); ang = Math.PI; }
     else { s -= straight; ang = Math.PI + s / R; pos.set(0, R * Math.cos(ang), -L + R * Math.sin(ang)); }
     teeth[i].rotation.set(ang, 0, 0);
+    if (inst && inst.setMatrixAt) { teeth[i].updateMatrix(); inst.setMatrixAt(i, teeth[i].matrix); }
   }
+  if (inst && inst.instanceMatrix) inst.instanceMatrix.needsUpdate = true;
 }
 function finishGun(gun) {
   const keep = new Set();

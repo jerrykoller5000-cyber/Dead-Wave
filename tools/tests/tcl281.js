@@ -173,8 +173,8 @@
     // game/sight-points.js (none of the three has a notch, so the view gun centres that
     // point, the same one adsOf uses). The shotgun is stage 3 and still has no entry.
     const stage2 = [
-      ['m4', 'the GW-4', [0, 0.134, -0.12], [0, -0.106, -0.076]],
-      ['ak', 'the AK', [0, 0.074, 0], [0, -0.126, -0.095]],
+      ['m4', 'the GW-4', [0, 0.134, -0.12], [0, -0.106, -0.116]],   // CL-318: the grip 4 units back
+      ['ak', 'the AK', [0, 0.074, 0], [0, -0.123, -0.126]],   // CL-318: the grip 3 units back and shorter
       ['uzi', 'the Wasp', [0, 0.126, -0.25], [0, -0.088, -0.027]]
     ];
     const scanNear = () => {

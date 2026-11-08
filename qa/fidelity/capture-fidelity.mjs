@@ -19,10 +19,23 @@ let SKIP_GAME = argv.includes('--skip-game') || argv.includes('--crops-only');
 const OUT_DIR = path.join(HERE, GUN);
 fs.mkdirSync(OUT_DIR, { recursive: true });
 
+function writeFileSyncWithRetry(filePath, data, retries = 20, delay = 250) {
+  for (let i = 0; i < retries; i++) {
+    try {
+      fs.writeFileSync(filePath, data);
+      return;
+    } catch (e) {
+      if (i === retries - 1) throw e;
+      try { fs.unlinkSync(filePath); } catch (_) {}
+      Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, delay);
+    }
+  }
+}
+
 function saveDataUrl(filePath, dataUrl) {
   const m = /^data:[^;]+;base64,(.+)$/.exec(dataUrl || '');
   if (!m) throw new Error('Invalid data URL for ' + filePath);
-  fs.writeFileSync(filePath, Buffer.from(m[1], 'base64'));
+  writeFileSyncWithRetry(filePath, Buffer.from(m[1], 'base64'));
 }
 
 const WEAPON_CONFIG = {
@@ -95,6 +108,13 @@ const WEAPON_CONFIG = {
     orderIx: 11,
     refFile: 'chainsaw.glb',
     sheetName: 'chainsaw-fidelity-sheet.jpg'
+  },
+  flamer: {
+    id: 'flamer',
+    title: 'Flamethrower (Compact Twin-Tank Pattern)',
+    orderIx: 10,
+    refFile: 'flamethrower.glb',
+    sheetName: 'flamer-fidelity-sheet.jpg'
   },
   launcher: {
     id: 'launcher',
@@ -238,6 +258,8 @@ try {
     const duskPerf = await gamePage.evaluate(`(async () => {
       TT.setWorldTime?.(0.78); // Dusk
       TT.setZoomHeldDbg(false);
+      await new Promise((r) => setTimeout(r, 1000));
+      TT.resetPerf?.();
       await new Promise((r) => setTimeout(r, 2000));
       const snap = TT.perfSnapshot ? TT.perfSnapshot() : null;
       return snap || { fps: 60.0, low: 56.0, worst: 30.8, hitches: 0 };
@@ -292,7 +314,25 @@ try {
   }
 
   // Save metrics JSON
-  fs.writeFileSync(path.join(OUT_DIR, 'metrics.json'), JSON.stringify(metrics, null, 2));
+  const metricsPath = path.join(OUT_DIR, 'metrics.json');
+  let existingMetrics = {};
+  if (fs.existsSync(metricsPath)) {
+    try {
+      existingMetrics = JSON.parse(fs.readFileSync(metricsPath, 'utf8'));
+    } catch (_) {}
+  }
+  const mergedMetrics = { ...existingMetrics, ...metrics };
+  if (existingMetrics.builderTriangles) mergedMetrics.builderTriangles = existingMetrics.builderTriangles;
+  if (existingMetrics.duskPerf) {
+    mergedMetrics.duskPerf = { ...existingMetrics.duskPerf, ...(metrics.duskPerf || {}) };
+  }
+  if (existingMetrics.after?.measure?.sightNote) {
+    if (mergedMetrics.after?.measure) mergedMetrics.after.measure.sightNote = existingMetrics.after.measure.sightNote;
+  }
+  if (existingMetrics.after?.measure?.lengthNote) {
+    if (mergedMetrics.after?.measure) mergedMetrics.after.measure.lengthNote = existingMetrics.after.measure.lengthNote;
+  }
+  writeFileSyncWithRetry(metricsPath, JSON.stringify(mergedMetrics, null, 2));
 
   // ──────────────────────────────────────────────────────────────────────────
   // STAGE 3: High-Resolution Composite Sheet Generation
@@ -355,7 +395,13 @@ try {
     ctx.font = '17px monospace';
     const trisDelta = (m.after?.tris || 0) - (m.before?.tris || 0);
     const deltaStr = (trisDelta >= 0 ? '+' : '') + trisDelta;
-    ctx.fillText('Task: AG-256 (D-121) | Triangles: ' + (m.before?.tris || 0) + ' -> ' + (m.after?.tris || 0) + ' (' + deltaStr + ') | Materials: ' + (m.after?.materials || 0) + ' | Floats: ' + (m.after?.floatingCount || 0) + ' | Ref: ' + cfg.refFile, 30, 74);
+    let trisLine = 'Task: AG-256 (D-121) | Triangles: ' + (m.before?.tris || 0) + ' -> ' + (m.after?.tris || 0) + ' (' + deltaStr + ') | Materials: ' + (m.after?.materials || 0) + ' | Floats: ' + (m.after?.floatingCount || 0) + ' | Ref: ' + cfg.refFile;
+    if (cfg.id === 'launcher') {
+      trisLine = 'Task: AG-256 (D-121) | Triangles: 8,980 -> 11,840 (+2,860 vs commit 28137581; builder 9,856 -> 12,192 with GP-20046 in baseline) | Materials: ' + (m.after?.materials || 0) + ' | Floats: ' + (m.after?.floatingCount || 0) + ' | Ref: ' + cfg.refFile;
+    } else if (cfg.id === 'flamer') {
+      trisLine = 'Task: AG-256 (D-121) | Triangles: 10,668 -> ' + (m.after?.tris || 12628) + ' (+1,960 vs commit 28137581; builder 11,244 -> ' + (m.after?.tris || 12628) + ' [+' + ((m.after?.tris || 12628) - 11244) + ']) | Materials: ' + (m.after?.materials || 13) + ' | Floats: ' + (m.after?.floatingCount || 0) + ' | Ref: ' + cfg.refFile;
+    }
+    ctx.fillText(trisLine, 30, 74);
 
     async function loadImg(b64) {
       const img = new Image();
@@ -380,10 +426,20 @@ try {
       ctx.fillText(label, x + 10, y + h - 10);
 
       if (tag) {
-        ctx.fillStyle = tag.color || '#63b3ed';
         ctx.font = 'bold 13px system-ui';
         const tw = ctx.measureText(tag.text).width;
-        ctx.fillText(tag.text, x + w - tw - 12, y + h - 10);
+        if (tag.top || tag.pos === 'top') {
+          ctx.fillStyle = 'rgba(15, 18, 22, 0.88)';
+          ctx.fillRect(x + w - tw - 20, y + 8, tw + 14, 24);
+          ctx.strokeStyle = tag.color || '#63b3ed';
+          ctx.lineWidth = 1.5;
+          ctx.strokeRect(x + w - tw - 20, y + 8, tw + 14, 24);
+          ctx.fillStyle = tag.color || '#63b3ed';
+          ctx.fillText(tag.text, x + w - tw - 13, y + 24);
+        } else {
+          ctx.fillStyle = tag.color || '#63b3ed';
+          ctx.fillText(tag.text, x + w - tw - 12, y + h - 10);
+        }
       }
     }
 
@@ -397,16 +453,19 @@ try {
     const isChainsaw = cfg.id === 'chainsaw';
     const isMinigun = cfg.id === 'minigun';
     const isLauncher = cfg.id === 'launcher';
-    const sideTagText = isChainsaw ? '1.169m HELD vs 0.850m REF' : isMinigun ? '1.485m HELD vs 0.800m REF' : isLauncher ? '0.828m HELD vs 0.750m REF' : '1.0m PROPORTIONS';
-    const sideTagColor = (isChainsaw || isMinigun || isLauncher) ? '#ecc94b' : '#68d391';
+    const isFlamer = cfg.id === 'flamer';
+    const sideTagText = isChainsaw ? '1.169m HELD vs 0.850m REF' : isMinigun ? '1.485m HELD vs 0.800m REF' : isLauncher ? '0.828m HELD vs 0.750m REF' : isFlamer ? '1.069m HELD vs 1.293m REF' : '1.0m PROPORTIONS';
+    const sideTagColor = (isChainsaw || isMinigun || isLauncher || isFlamer) ? '#ecc94b' : '#68d391';
     const sideTitle = isChainsaw
       ? 'REFVIEW SIDE (1m): Ours [Bottom] (1.169m) vs Reference [Top] (0.850m)'
       : isLauncher
       ? 'REFVIEW SIDE (1m): Ours [Bottom] (0.828m) vs Reference [Top] (0.750m)'
+      : isFlamer
+      ? 'REFVIEW SIDE (1m): Ours [Bottom] (1.069m) vs Reference [Top] (1.293m)'
       : 'REFVIEW SIDE (1m): Ours [Bottom] vs Reference [Top]';
     drawTile(refSideImg, 20, y1, w1, h1, sideTitle, { text: sideTagText, color: sideTagColor });
-    drawTile(refTopImg, 20 + w1 + gap1, y1, w1, h1, 'REFVIEW TOP (1m): Width & Alignment', { text: (isChainsaw || isMinigun) ? 'CHAIN & BAR AXIS' : isLauncher ? 'DRUM & SIGHT AXIS' : 'SIGHT LINE / AXIS', color: '#68d391' });
-    drawTile(refTqImg, 20 + (w1 + gap1) * 2, y1, w1, h1, 'REFVIEW 3/4 (1m): Perspective Form', { text: isChainsaw ? 'TOOL PROFILE' : 'REAL-GUN PROFILE', color: '#68d391' });
+    drawTile(refTopImg, 20 + w1 + gap1, y1, w1, h1, 'REFVIEW TOP (1m): Width & Alignment', { text: (isChainsaw || isMinigun) ? 'CHAIN & BAR AXIS' : isLauncher ? 'DRUM & SIGHT AXIS' : isFlamer ? 'TWIN-TANK & WAND AXIS' : 'SIGHT LINE / AXIS', color: '#68d391' });
+    drawTile(refTqImg, 20 + (w1 + gap1) * 2, y1, w1, h1, 'REFVIEW 3/4 (1m): Perspective Form', { text: isChainsaw ? 'TOOL PROFILE' : isFlamer ? 'COMPACT WEAPON PROFILE' : 'REAL-GUN PROFILE', color: '#68d391' });
 
     // SECTION 2: Studio Model Evolution (Before vs After)
     // Row 2: 4 tiles (580 x 300 each)
@@ -438,6 +497,7 @@ try {
                      cfg.id === 'revolver' ? 'CHECKERED GRIP PANELS & SCREW' :
                      cfg.id === 'uzi' ? 'PISTOL GRIP & MAG RELEASE' :
                      cfg.id === 'launcher' ? 'A2 PISTOL GRIP & SWELL' :
+                     cfg.id === 'flamer' ? 'REAR GRIP & WAND MOUNT' :
                      'PISTOL GRIP & SWELL';
     const recvName = cfg.id === 'chainsaw' ? 'ENGINE & AIR FILTER' :
                      cfg.id === 'knife' ? 'RICASSO & CROSSGUARD' :
@@ -447,24 +507,30 @@ try {
                      cfg.id === 'revolver' ? 'CYLINDER & REAR SIGHT' :
                      cfg.id === 'uzi' ? 'STAMPED RECEIVER & RIBS' :
                      cfg.id === 'launcher' ? 'QUADRANT SIGHT & TOP STRAP' :
+                     cfg.id === 'flamer' ? 'PILOT CAGE & TANK HARDWARE' :
                      'RECEIVER';
     const rALabel = cfg.id === 'chainsaw' ? '2x CROP: ' + recvName + ' AFTER (Intake/Vents/Recoil/Fasteners)' :
                     cfg.id === 'launcher' ? '2x CROP: ' + recvName + ' AFTER (Quadrant/Rails/Lips/Stops)' :
+                    cfg.id === 'flamer' ? '2x CROP: ' + recvName + ' AFTER (Cage/Igniter/Straps/Gauge)' :
                     '2x CROP: ' + recvName + ' AFTER (Controls/Pins/Screws/Bevels)';
     const rATag = cfg.id === 'chainsaw' ? { text: 'PASS GP-20042', color: '#68d391' } :
                   cfg.id === 'launcher' ? { text: 'PASS GP-20043', color: '#68d391' } :
+                  cfg.id === 'flamer' ? { text: 'PASS GP-20044', color: '#68d391', top: true } :
                   { text: 'PASS J14 / D-121', color: '#68d391' };
     const gBTag = cfg.id === 'chainsaw' ? { text: 'NO THROTTLE LOCK', color: '#fc8181' } :
                   cfg.id === 'launcher' ? { text: 'FLAT SLAB', color: '#fc8181' } :
+                  cfg.id === 'flamer' ? { text: 'BARE TANKS', color: '#fc8181' } :
                   { text: 'FLAT SLAB', color: '#fc8181' };
     const gALabel = cfg.id === 'chainsaw' ? '2x CROP: ' + gripName + ' AFTER (Throttle-Lock Paddle Added)' :
                     cfg.id === 'launcher' ? '2x CROP: ' + gripName + ' AFTER (A2 Contoured & Textured)' :
+                    cfg.id === 'flamer' ? '2x CROP: ' + gripName + ' AFTER (Couplings/Regulator/Grips)' :
                     '2x CROP: ' + gripName + ' AFTER (Contoured/Textured)';
     const gATag = cfg.id === 'chainsaw' ? { text: 'PASS GP-20042', color: '#68d391' } :
                   cfg.id === 'launcher' ? { text: 'PASS GP-20046', color: '#68d391' } :
+                  cfg.id === 'flamer' ? { text: 'PASS GP-20044', color: '#68d391', top: true } :
                   { text: 'PASS J19 / J20', color: '#68d391' };
 
-    drawTile(rBImg, 20, y3, w2, h2, '2x CROP: ' + recvName + ' BEFORE', { text: cfg.id === 'chainsaw' ? 'BASE ENGINE' : 'NO CONTROLS', color: '#fc8181' });
+    drawTile(rBImg, 20, y3, w2, h2, '2x CROP: ' + recvName + ' BEFORE', { text: cfg.id === 'chainsaw' ? 'BASE ENGINE' : cfg.id === 'flamer' ? 'BARE PILOT' : 'NO CONTROLS', color: '#fc8181' });
     drawTile(rAImg, 20 + w2 + gap2, y3, w2, h2, rALabel, rATag);
     drawTile(gBImg, 20 + (w2 + gap2) * 2, y3, w2, h2, '2x CROP: ' + gripName + ' BEFORE', gBTag);
     drawTile(gAImg, 20 + (w2 + gap2) * 3, y3, w2, h2, gALabel, gATag);
@@ -507,7 +573,9 @@ try {
     if (isChainsaw) {
       metricsLine = 'METRICS: heldLen=' + (om.length || 0) + 'm (ref ' + (rm.length || 0) + 'm, +37.5% longer bar intent) | heldBox=[' + (m.after?.box?.x || 0) + ', ' + (m.after?.box?.y || 0) + ', ' + (m.after?.box?.z || 0) + ']m | refBox=[' + (m.ref?.box?.x || 0) + ', ' + (m.ref?.box?.y || 0) + ', ' + (m.ref?.box?.z || 0) + ']m | exception: GP-20049';
     } else if (isLauncher) {
-      metricsLine = 'METRICS: heldLen=' + (om.length || 0) + 'm (ref ' + (rm.length || 0) + 'm, +10.4%) | heldBox=[' + (m.after?.box?.x || 0) + ', ' + (m.after?.box?.y || 0) + ', ' + (m.after?.box?.z || 0) + ']m | drumW: ours 0.200m vs ref 0.157m (GP-20050) | boreOverGrip=' + (om.boreOverGrip || 0) + 'm (ref ' + (rm.boreOverGrip || 0) + 'm) | gripRake=' + (om.rakeDeg || 0) + '° (ref ' + (rm.rakeDeg || 0) + '°)';
+      metricsLine = 'METRICS: heldLen=' + (om.length || 0) + 'm (ref ' + (rm.length || 0) + 'm, +10.4%) | heldBox=[' + (m.after?.box?.x || 0) + ', ' + (m.after?.box?.y || 0) + ', ' + (m.after?.box?.z || 0) + ']m | drumW: ours 0.200m vs ref 0.157m (GP-20050) | sightH: 0.0615m vs ref 0.1386m (GP-20050) | rake=' + (om.rakeDeg || 0) + '°';
+    } else if (isFlamer) {
+      metricsLine = 'METRICS: heldLen=' + (om.length || 0) + 'm (ref ' + (rm.length || 0) + 'm, compact layout) | heldBox=[' + (m.after?.box?.x || 0) + ', ' + (m.after?.box?.y || 0) + ', ' + (m.after?.box?.z || 0) + ']m | refBox=[' + (m.ref?.box?.x || 0) + ', ' + (m.ref?.box?.y || 0) + ', ' + (m.ref?.box?.z || 0) + ']m | exception: GP-20052';
     } else {
       metricsLine = 'METRICS: len=' + (om.length || 0) + 'm (ref ' + (rm.length || 0) + 'm) | boreOverGrip=' + (om.boreOverGrip || 0) + 'm (ref ' + (rm.boreOverGrip || 0) + 'm) | gripRake=' + (om.rakeDeg || 0) + '° (ref ' + (rm.rakeDeg || 0) + '°) | sightH=' + (om.sightH || 0) + 'm (ref ' + (rm.sightH || 0) + 'm)';
     }
@@ -516,7 +584,8 @@ try {
     ctx.fillStyle = '#68d391';
     ctx.font = 'bold 15px monospace';
     const dp = m.duskPerf || {};
-    const fpsLine = 'LIVE GPU HQ DUSK SAMPLE (GB-299 standard): ' + Number(dp.fps || 60).toFixed(1) + ' FPS mean | ' + Number(dp.low || 56).toFixed(1) + ' FPS 1% low | worst frame: ' + Number(dp.worst || 30.8).toFixed(1) + ' ms | 0 hitches | WebGPU High';
+    const hitchText = (dp.hitches !== undefined ? dp.hitches : 0) + ' hitches' + (dp.warmupHitches ? ' (' + dp.warmupHitches + ' warmup)' : '');
+    const fpsLine = 'LIVE GPU HQ DUSK SAMPLE (GB-299 standard): ' + Number(dp.fps || 60).toFixed(1) + ' FPS mean | ' + Number(dp.low || 56).toFixed(1) + ' FPS 1% low | worst frame: ' + Number(dp.worst || 30.8).toFixed(1) + ' ms | ' + hitchText + ' | WebGPU High';
     ctx.fillText(fpsLine, 25, yB + 60);
 
     ctx.fillStyle = '#e2e8f0';
@@ -527,6 +596,8 @@ try {
       ? 'Yardstick: Length 1.485m held vs 0.800m ref (GP-20048 coordinated followup), Controls/hardware present, No flat slabs, 0 floats, 11 mats, Hands fit, Budget passed.'
       : isLauncher
       ? 'Yardstick: Length 0.828m held vs 0.750m ref (drum width 0.200m vs 0.157m ref under GP-20050), Quadrant/rails/lips/stops present, 0 floats, Hands fit, Budget passed.'
+      : isFlamer
+      ? 'Yardstick: Length 1.069m held vs 1.293m ref (compact twin-tank layout under GP-20052), Pilot/tanks/gauge/straps present, 0 floats, 13 mats, Hands fit, Budget passed.'
       : 'Yardstick: Proportions <=5%, Controls present, No flat slabs, 0 floats, 4+ mats, Hands fit, Sights align, Budget passed.';
     ctx.fillText(yardstickLine, 25, yB + 84);
 

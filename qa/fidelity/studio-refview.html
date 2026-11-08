@@ -41,7 +41,8 @@ import {
 import {
   makeMinigunModel as makeMinigunAfter,
   makeLauncherModel as makeLauncherAfter,
-  makeChainsawModel as makeChainsawAfter
+  makeChainsawModel as makeChainsawAfter,
+  makeFlamerModel as makeFlamerAfter
 } from '../../studio/weapon-heavy.js';
 import { makeKatanaModel as makeKatanaAfter } from '../../studio/katana.js';
 import { makeFragGrenade as makeFragGrenadeAfter } from '../../studio/frag-grenade.js';
@@ -63,7 +64,8 @@ import {
 import {
   makeMinigunModel as makeMinigunBefore,
   makeLauncherModel as makeLauncherBefore,
-  makeChainsawModel as makeChainsawBefore
+  makeChainsawModel as makeChainsawBefore,
+  makeFlamerModel as makeFlamerBefore
 } from '../weapon-heavy.28137581.js';
 import { makeKatanaModel as makeKatanaBefore } from '../katana.28137581.js';
 import { makeFragGrenade as makeFragGrenadeBefore } from '../frag-grenade.28137581.js';
@@ -203,6 +205,18 @@ const WEAPONS = {
     receiverCenter: [0.08, 0.06, -0.15],
     gripCenter: [0, 0.04, -0.44],
     orderIx: 11
+  },
+  flamer: {
+    id: 'flamer',
+    name: 'Flamethrower (Compact Twin-Tank Pattern)',
+    refFile: 'flamethrower.glb',
+    real: 1.293,
+    sizeK: 1.0,
+    makeBefore: makeFlamerBefore,
+    makeAfter: makeFlamerAfter,
+    receiverCenter: [0.0, 0.0, 0.72],
+    gripCenter: [0, -0.10, -0.16],
+    orderIx: 10
   },
   knife: {
     id: 'knife',

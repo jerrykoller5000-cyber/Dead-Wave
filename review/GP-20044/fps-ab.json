@@ -1,0 +1,55 @@
+{
+  "setup": {
+    "backend": "WebGPU",
+    "beforeScale": 0.8383417123705056,
+    "currentScale": 0.8383417123705056
+  },
+  "runs": [
+    {
+      "label": "after",
+      "fps": 60.18054162487462,
+      "low": 54.054054054054056,
+      "worst": 18.5,
+      "hitches": 0,
+      "frames": 60,
+      "weapon": "flamer",
+      "view": "flamer"
+    },
+    {
+      "label": "before",
+      "fps": 58.5444635113535,
+      "low": 33.222591368705054,
+      "worst": 30.099999994039536,
+      "hitches": 0,
+      "frames": 58,
+      "weapon": "flamer",
+      "view": "flamer"
+    },
+    {
+      "label": "before",
+      "fps": 60.01800540233617,
+      "low": 55.86592176910688,
+      "worst": 17.900000005960464,
+      "hitches": 0,
+      "frames": 60,
+      "weapon": "flamer",
+      "view": "flamer"
+    },
+    {
+      "label": "after",
+      "fps": 59.988002400235075,
+      "low": 54.94505498104374,
+      "worst": 18.19999998807907,
+      "hitches": 0,
+      "frames": 60,
+      "weapon": "flamer",
+      "view": "flamer"
+    }
+  ],
+  "mean": {
+    "before": 59.281234456844835,
+    "after": 60.08427201255485,
+    "delta": 0.8030375557100129
+  },
+  "errors": []
+}

@@ -16804,6 +16804,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       gun.updateMatrixWorld(true);
       // Ejection port: right side of receiver (gun +X), mid body - not the muzzle
       _casingPos.set(cfg.ox * side, cfg.oy, cfg.oz);   // GB-146: side -1 = the gun's right
+      { const ep = gun.userData && gun.userData.ejectPort; if (ep) _casingPos.set(ep[0], ep[1], ep[2]); }   // CL-319: the model's own port (the sniper's open receiver)
       gun.localToWorld(_casingPos);
       const tint = brassTint();
       // Pooled, and the brass tint is re-rolled onto the pooled material rather than
@@ -25476,6 +25477,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const bp = gd.baseBoltPos, br = gd.baseBoltRot || { x: 0, y: 0, z: 0 }, side = gd.boltSide || 1;
       gd.bolt.position.set(bp.x, bp.y + 0.01 * open, bp.z - 0.09 * back);
       gd.bolt.rotation.set(br.x, br.y, (br.z || 0) + side * 1.05 * open);
+      if (gd.boltPoseHook) gd.boltPoseHook(open, back);   // CL-319: the model's own bolt mechanics (the axis, the next round)
     }
     function sniperBoltEject() {
       // GB-181: thrown at the start of the next frame (updateCasings), from the gun as it was drawn. Spawned here, mid-frame,
@@ -52240,8 +52242,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       pistol:   { twist: 0.1, hold: [-0.32, -0.08, 0.4], grip: [0, -0.066, -0.016], trig: [0, -0.05, 0.073], fore: [-0.058, -0.09, 0.012] },   // GB-151: fore = the support fist round the firing fingers
       revolver: { twist: 0.1, hold: [-0.32, -0.08, 0.4], grip: [0, -0.07, -0.04], trig: [0, -0.02, 0.035], fore: [-0.058, -0.1, -0.014] },
       uzi:      { twist: 0.2, hold: [-0.3, -0.16, 0.34], grip: [0, -0.088, -0.027], trig: [0, -0.056, 0.05], fore: [0, -0.03, 0.18] },   // GB-236: grip on the thicker grip's centre line (was -0.017)
-      m4:       { twist: 0.8, hold: [-0.24, -0.12, 0.28], grip: [0, -0.106, -0.076], trig: [0, -0.078, -0.011], fore: [0, 0.0, 0.36], sh: { butt: [0, -0.003, -0.569], eye: [0, 0.134, -0.20] } },
-      ak:       { twist: 0.8, hold: [-0.24, -0.12, 0.28], grip: [0, -0.126, -0.095], trig: [0, -0.052, -0.019], fore: [0, -0.02, 0.37], sh: { butt: [0, -0.078, -0.597], eye: [0, 0.074, -0.30] } },   // GB-311 (CL-311): the slim KR-7's cover 2.6 cm lower (SIGHT.ak 0.074), its trigger 1 cm up
+      m4:       { twist: 0.8, hold: [-0.24, -0.12, 0.28], grip: [0, -0.106, -0.116], trig: [0, -0.078, -0.029], fore: [0, 0.0, 0.36], sh: { butt: [0, -0.003, -0.569], eye: [0, 0.134, -0.20] } },   // GB-317 (CL-318): grip followed the A2 4 cm back (cz -0.12, z -0.116); trig on the new blade (z -0.029)
+      ak:       { twist: 0.8, hold: [-0.24, -0.12, 0.28], grip: [0, -0.123, -0.126], trig: [0, -0.052, -0.026], fore: [0, -0.02, 0.37], sh: { butt: [0, -0.078, -0.597], eye: [0, 0.074, -0.30] } },   // GB-317 (CL-318): palm u 0.42 on cz -0.13 / h 0.165 (z -0.126, y -0.123 = VM_SOCKETS.ak); trig on the new blade; GB-311: cover 2.6 cm lower (SIGHT.ak 0.074)
       aa12:     { twist: 0.8, hold: [-0.24, -0.13, 0.203], grip: [0, -0.145, -0.166], trig: [0, -0.104, -0.086], fore: [0, -0.035, 0.36], sh: { butt: [0, -0.005, -0.572], eye: [0, 0.16, -0.30] } },   // GB-173: the grip moved 70 mm back on the model; hold -0.057 (x0.82) keeps the gun where it was; GB-188: fore 20 mm lower, the fist round the underside of GB-180's box handguard
       shotgun:  { twist: 0.8, hold: [-0.24, -0.12, 0.24], grip: [0, -0.088, -0.056], trig: [0, -0.058, 0.023], fore: 'pump', pumpDy: -0.015, sh: { butt: [0, -0.02, -0.496], eye: [0, 0.08, -0.28] } },
       sniper:   { twist: 0.8, hold: [-0.24, -0.12, 0.28], grip: [0, -0.088, -0.117], trig: [0, -0.064, -0.052], fore: [0, -0.005, 0.35], sh: { butt: [0, -0.018, -0.622], eye: [0, 0.15, -0.40] } },

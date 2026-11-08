@@ -1,0 +1,45 @@
+{
+  "floats": [
+    {
+      "at": [
+        0,
+        -0.028,
+        0.766
+      ],
+      "len": 0.018,
+      "geom": "SphereGeometry",
+      "mat": "MeshStandardMaterial"
+    },
+    {
+      "at": [
+        0.179,
+        -0.05,
+        0.005
+      ],
+      "len": 0.0064,
+      "geom": "CylinderGeometry",
+      "mat": "MeshStandardMaterial"
+    },
+    {
+      "at": [
+        0.179,
+        -0.05,
+        0.14
+      ],
+      "len": 0.0064,
+      "geom": "CylinderGeometry",
+      "mat": "MeshStandardMaterial"
+    },
+    {
+      "at": [
+        -0.099,
+        -0.065,
+        0.076
+      ],
+      "len": 0.0046,
+      "geom": "CylinderGeometry",
+      "mat": "MeshStandardMaterial"
+    }
+  ],
+  "errors": []
+}

@@ -433,12 +433,12 @@ export const VM_SOCKETS = Object.freeze({
   // cloud look, 2026-11-02: in from -0.03 to -0.012 the fingers wrap without coming through the far side).
   pistol: { support: [-0.012, -0.10, -0.02] },
   // GB-312 (CL-310, GB-153 fit qa/2026-11-07-GB-312/fit/fit-fp.json): support fingers curled to the 40 mm handguard until each touches.
-  m4: { grip: [0, -0.106, -0.076], support: [0, 0.004, 0.36], magFoot: [0, -0.278, 0.04], work: [-0.03, -0.03, 0.105],   // CL-310: the 40 mm handguard (its bottom -0.01, was -0.027) and the bolt catch on the 32 mm lower
+  m4: { grip: [0, -0.106, -0.116], support: [0, 0.004, 0.36], magFoot: [0, -0.278, 0.04], work: [-0.03, -0.03, 0.105],   // CL-310: the 40 mm handguard (its bottom -0.01, was -0.027) and the bolt catch on the 32 mm lower
     supportPose: { f: [[1.038, 1.194, 0.986, 0], [1.257, 1.446, 1.194, 0], [1.357, 1.561, 1.289, 0], [1.45, 1.668, 1.378, 0]], t: [1.45, -0.15, 0.87] } },
   // GB-312 (re-fit after CL-310/313/314; was GB-311): support fingers on the 44 mm handguard; thumb curl 0.079 (was 0.08).
   // GB-311 (CL-311/CL-312, GB-153's fit run on the view gun and view hands, qa/2026-11-07-GB-311/fit/fit-fp-run2.json): the
   // support fingers curled to the slim handguard (44 mm, was 74) until each touches; the fist's thumb sat 19 mm into it.
-  ak: { grip: [0, -0.126, -0.095], support: [0, -0.025, 0.37], magFoot: [0, -0.311, 0.14], work: [0.041, 0.02, 0.13],   // CL-311: the slim receiver's charging knob (x 0.041, was 0.083) and the mag 2 cm higher
+  ak: { grip: [0, -0.123, -0.126], support: [0, -0.025, 0.37], magFoot: [0, -0.311, 0.14], work: [0.041, 0.02, 0.13],   // CL-311: the slim receiver's charging knob (x 0.041, was 0.083) and the mag 2 cm higher
     supportPose: { f: [[0.946, 1.088, 0.899, 0], [0.976, 1.122, 0.927, 0], [1.03, 1.184, 0.978, 0], [0.966, 1.111, 0.918, 0]], t: [0.079, -0.15, 0.047] } },
   uzi: { grip: [0, -0.088, -0.027], support: [0, -0.03, 0.18], magFoot: [0, -0.324, -0.043], work: [0, 0.115, 0.11] },
   // GB-312 (re-fit): index closes to a full curl (1.45; was 1.181); little finger free past the forend keeps the fist.
@@ -451,7 +451,7 @@ export const VM_SOCKETS = Object.freeze({
     supportPose: { f: [[1.45, 1.668, 1.378, 0], [1.45, 1.668, 1.378, 0], [1.45, 1.668, 1.378, 0], [1.306, 1.502, 1.241, 0]], t: [1.45, -0.15, 0.87] } },   // GB-314 GB-153 fit; palmD still ~-9.5 mm (note to Claude)
   revolver: { grip: [0, -0.07, -0.04], support: [-0.012, -0.10, -0.014] },   // J57: palm cups the grip, not air beside it
   // GB-312 (CL-314, GB-153 fit): support fingers open on the 50 mm forend (fist sat 7-15 mm in); thumb keeps a full curl.
-  sniper: { grip: [0, -0.088, -0.117], support: [0, -0.005, 0.35], magFoot: [0, -0.203, 0.02], boltKnob: [0.13, 0.067, -0.16],   // CL-306: the handle on +x (reads right in the mirrored view)
+  sniper: { grip: [0, -0.088, -0.117], support: [0, -0.005, 0.35], magFoot: [0, -0.203, 0.02], boltKnob: [0.13, 0.035, -0.16],   // CL-306: the handle on +x (reads right in the mirrored view)
     supportPose: { f: [[0.766, 0.881, 0.728, 0], [0.527, 0.606, 0.501, 0], [0.2, 0.23, 0.19, 0], [0.09, 0.103, 0.085, 0]], t: [1.45, -0.15, 0.87] } },
   // CL-301 (GP-20022): rear throttle + front hoop. GB-292 (J1): contacts were already R=rear/L=front but the left fist
   // sat on the cowling behind the hoop (basis too steep) and the right hand had no gripBasis so the rear throttle read empty.

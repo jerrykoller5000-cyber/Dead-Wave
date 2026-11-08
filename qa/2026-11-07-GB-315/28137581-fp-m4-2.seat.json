@@ -1,0 +1,1 @@
+{"cpuPct":10.6,"loadPct":14,"top":[{"Name":"git#1","PercentProcessorTime":99},{"Name":"claude#5","PercentProcessorTime":11},{"Name":"svchost","PercentProcessorTime":5},{"Name":"WmiPrvSE#2","PercentProcessorTime":5},{"Name":"System","PercentProcessorTime":5},{"Name":"svchost#16","PercentProcessorTime":0}],"counts":{"msedge":13,"Cursor":0,"node":8,"chrome":0,"git":2,"ChatGPT":15}}

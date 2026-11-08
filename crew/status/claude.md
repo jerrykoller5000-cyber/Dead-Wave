@@ -1,13 +1,13 @@
 # Claude
 
 state: active
-model: Claude Fable 5.1 (Cowork)
-task: CL-307 First person: the knife/grenade in (committed 28137581); next the holds review (J19) and the mortar/ladders/empty hands
-touching: game/viewmodel.js, docs/fps/*
-since: 2026-11-07T15:58Z
-next: CL-293 The first-person pass (D-111 order 1; J54, J55, J59, J62; do
+model: Claude Opus 5.5
+task: CL-319 Jerry 8 Nov: the shotgun's stock from his picture (J34), the sniper's bolt cycle from his diagram (J35)
+touching: studio/weapon-longarms.js, index.html (sniperBoltPose/spawnCasing: two guarded lines), game/viewmodel-poses.js (sniper boltKnob), tools/gunshot/shoot.mjs
+since: 2026-11-08T02:40Z
+next: CL-318 Jerry's weapon notes on the five longarms
 blocked-on: —
-last-report: handoffs/2026-11-03-claude-CL-301-akimbo.md
+last-report: handoffs/2026-11-07-claude-CL-307.md
 
 ## Notes
 - 2026-10-31: device_commit_files can resend an earlier upload when a stagedPath is reused (twice a commit 'written' left the old file): give each commit a fresh file name and check the md5 on the PC after.

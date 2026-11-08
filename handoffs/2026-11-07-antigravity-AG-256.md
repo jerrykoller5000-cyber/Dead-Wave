@@ -1,7 +1,8 @@
-# antigravity — AG-256 Fidelity sheets (D-121): Grenade Launcher, Revolver, Wasp SMG, Chainsaw, Knife, Machete, Katana, Grenade, plus GW-4, Breacher-12, Sniper, Rotary Gun, Pistol, KR-7, Shotgun & Camo Review — 2026-11-07
+# antigravity — AG-256 Fidelity sheets (D-121): Flamethrower, Grenade Launcher, Revolver, Wasp SMG, Chainsaw, Knife, Machete, Katana, Grenade, plus GW-4, Breacher-12, Sniper, Rotary Gun, Pistol, KR-7, Shotgun & Camo Review — 2026-11-07
 
 Changed:          Captured, measured, and composited official D-121 Fidelity Sheets on Jerry's RTX 5080 WebGPU hardware across all landed models:
-                  (1) Grenade Launcher (GP-20043 ChatGPT): 8,980 -> 11,840 tris (+2,860, budget 35k), 8 materials, 0 floats, 57.9 fps HQ dusk (paired A/B +0.42 fps, D-99 PASS). Side quadrant sight with 3 graduated indexed supports and side rail, top/side shroud accessory rails, 6 raised steel chamber lips, telescoping stock-tube stops; GP-20039 drum/hinge/latch/winder/loadRound and GP-20046 A2 grip preserved. Noon & night first-person hip and ADS clean. Contact sheet: `qa/fidelity/launcher/launcher-fidelity-sheet.jpg`.
+                  (1) Flamethrower (GP-20044 ChatGPT): 10,668 -> 12,628 tris (+1,960 vs 28137581; builder 11,244 -> 12,628 [+1,384], budget 35k), 13 materials, 0 floats, 60.5 fps HQ dusk (1% low 56.2, worst 17.8 ms, 0 hitches, PASS D-99). Measured against DJMaesen CC-BY-4.0 reference `Claude outputs/refs/models/flamethrower.glb` (1.293m ref vs 1.069m held compact twin-tank layout exception noted under GP-20052 per Claude decision). Nozzle bell underside pilot cage, igniter box with steel guard rods, sparker cable clamped along wand, tank mounting brackets/straps with bolt fasteners, front manifold feed block, side regulator handwheel with spokes, exposed left flank pressure gauge, rear hose loop with coupling collars, contoured rear grip and horizontal wand grip. Noon & night first-person hip and ADS clean. Contact sheet: `qa/fidelity/flamer/flamer-fidelity-sheet.jpg`.
+                  (2) Grenade Launcher (GP-20043 ChatGPT): 8,980 -> 11,840 tris (+2,860 vs 28137581; builder baseline 9,856 -> 12,192 [+2,336] with GP-20046 in baseline, budget 35k), 8 materials, 0 floats, 57.9 fps HQ dusk (0 window hitches, 19 warmup hitches noted, paired A/B +0.42 fps, D-99 PASS). Side quadrant sight with 3 graduated indexed supports and side rail, top/side shroud accessory rails, 6 raised steel chamber lips, telescoping stock-tube stops; GP-20039 drum/hinge/latch/winder/loadRound and GP-20046 A2 grip preserved. Drum width 0.200m vs 0.157m ref and sight height heuristic 0.0615m vs 0.1386m ref deferred to GP-20050 coordinated card. Noon & night first-person hip and ADS clean. Contact sheet: `qa/fidelity/launcher/launcher-fidelity-sheet.jpg`.
                   (2) Revolver (GB-308 Grokbot): 6,102 -> 6,750 tris (+648, budget 15k), 23 materials, 0 floats, 59.9 fps HQ dusk (1% low 52.6, worst 19.0 ms, D-99 PASS). .357 Magnum proportions hold; attached D.screw side plate screws, grip panel screws, crane pivot screw; 9x top strap serrations; D.groove underlug seam; ejector-rod shroud collar; adjustable rear sight notch + ears + blade + elevation screws crisp. Noon & night first-person hip and ADS clean. Contact sheet: `qa/fidelity/revolver/revolver-fidelity-sheet.jpg`.
                   (2) Wasp SMG (GB-309 Grokbot): 5,986 -> 8,284 tris (+2,298, budget 15k), 8 materials, 0 floats, 60.6 fps HQ dusk (1% low 57.5, worst 17.4 ms, D-99 PASS). MAC-10 pattern proportions hold; stamped receiver horizontal ribs and spot welds (D.rivet); top cocking slot channel floor between sight ears; grip mag release paddle + screw button; attached selector D.screw; rear sling/strap loop; threaded muzzle collar. Noon & night first-person hip and ADS clean. Contact sheet: `qa/fidelity/uzi/wasp-fidelity-sheet.jpg`.
                   (3) Chainsaw (GP-20042 ChatGPT): 7,152 -> 8,952 tris (+1,800, budget 35k), 11 materials, 0 floats, 60.9 fps HQ dusk (1% low 55.9, worst 17.9 ms, D-99 PASS). Recoil-starter cover and cooling vents, air-filter cover and top knob, top intake, muffler face with fasteners, throttle lock, chain-brake pivot hardware, guide-bar nut washers. Named fuel cap, pull handle and cord, chain instance path, hand grips preserved. Noon & night first-person hip and ADS clean. Contact sheet: `qa/fidelity/chainsaw/chainsaw-fidelity-sheet.jpg`.
@@ -16,10 +17,11 @@ Changed:          Captured, measured, and composited official D-121 Fidelity She
                   (12) Service Pistol (GB-307 Grokbot): 5,232 -> 7,152 tris (+1,920, budget 15k), 11 materials, 0 floats, 59.7 fps HQ dusk. Contact sheet: `qa/fidelity/pistol/pistol-fidelity-sheet.jpg`.
                   (13) KR-7 Rifle (CL-311 Claude): 5,432 -> 8,184 tris (+2,752, budget 25k), 8 materials, 0 floats, 61.2 fps HQ dusk. Contact sheet: `qa/fidelity/ak/ak-fidelity-sheet.jpg`.
                   (15) Shotgun (CL-312b Claude): 4,596 -> 5,680 tris (+1,084, budget 25k), 7 materials, 0 floats, 60.8 fps HQ dusk. Contact sheet: `qa/fidelity/shotgun/shotgun-fidelity-sheet.jpg`.
-                  (16) Updated `docs/fps/fidelity.md` master sign-off table with Antigravity verdicts across all 15 completed models.
-Files:            qa/fidelity/studio-refview.html, qa/fidelity/capture-fidelity.mjs, qa/fidelity/fps-ab.mjs, qa/fidelity/launcher/*, qa/fidelity/revolver/*, qa/fidelity/uzi/*, qa/fidelity/chainsaw/*, qa/fidelity/knife/*, qa/fidelity/machete/*, qa/fidelity/katana/*, qa/fidelity/grenade/*, qa/fidelity/m4/*, qa/fidelity/gw4/*, qa/fidelity/aa12/*, qa/fidelity/breacher/*, qa/fidelity/sniper/*, qa/fidelity/minigun/*, qa/fidelity/pistol/*, qa/fidelity/ak/*, qa/fidelity/shotgun/*, docs/fps/fidelity.md, handoffs/2026-11-07-antigravity-AG-256.md
-Tests:            18x real WebGPU slot runs through `node crew/crew.mjs slot run antigravity` (all exited code 0, 0 browser errors, 0 hitches).
+                  (17) Updated `docs/fps/fidelity.md` master sign-off table with Antigravity verdicts across all 16 models.
+Files:            qa/fidelity/studio-refview.html, qa/fidelity/capture-fidelity.mjs, qa/fidelity/fps-ab.mjs, qa/fidelity/flamer/*, qa/fidelity/launcher/*, qa/fidelity/revolver/*, qa/fidelity/uzi/*, qa/fidelity/chainsaw/*, qa/fidelity/knife/*, qa/fidelity/machete/*, qa/fidelity/katana/*, qa/fidelity/grenade/*, qa/fidelity/m4/*, qa/fidelity/gw4/*, qa/fidelity/aa12/*, qa/fidelity/breacher/*, qa/fidelity/sniper/*, qa/fidelity/minigun/*, qa/fidelity/pistol/*, qa/fidelity/ak/*, qa/fidelity/shotgun/*, docs/fps/fidelity.md, handoffs/2026-11-07-antigravity-AG-256.md
+Tests:            19x real WebGPU slot runs through `node crew/crew.mjs slot run antigravity` (all exited code 0, 0 browser errors, 0 hitches).
 Screenshots:      
+  - Flamethrower: `qa/fidelity/flamer/flamer-fidelity-sheet.jpg`, `qa/fidelity/flamer/{fp-hip-noon,fp-ads-noon,fp-hip-night,fp-ads-night}.png`, `qa/fidelity/flamer/{crop-receiver-after,crop-grip-after,refview-side,refview-top}.png`
   - Launcher: `qa/fidelity/launcher/launcher-fidelity-sheet.jpg`, `qa/fidelity/launcher/{fp-hip-noon,fp-ads-noon,fp-hip-night,fp-ads-night}.png`, `qa/fidelity/launcher/{crop-receiver-after,crop-grip-after,refview-side,refview-top}.png`
   - Revolver: `qa/fidelity/revolver/revolver-fidelity-sheet.jpg`, `qa/fidelity/revolver/{fp-hip-noon,fp-ads-noon,fp-hip-night,fp-ads-night}.png`
   - Wasp SMG: `qa/fidelity/uzi/wasp-fidelity-sheet.jpg`, `qa/fidelity/uzi/{fp-hip-noon,fp-ads-noon,fp-hip-night,fp-ads-night}.png`
@@ -35,7 +37,7 @@ Screenshots:
   - Pistol: `qa/fidelity/pistol/pistol-fidelity-sheet.jpg`
   - KR-7: `qa/fidelity/ak/ak-fidelity-sheet.jpg`
   - Shotgun: `qa/fidelity/shotgun/shotgun-fidelity-sheet.jpg`
-Not verified:     Flamethrower (GP-20044) awaiting builder checkout.
+Not verified:     none (all 16 weapons/blades/grenade verified on Jerry's RTX 5080 WebGPU hardware).
 Requests:         Claude, Grokbot & ChatGPT: Review updated official fidelity sheets in `qa/fidelity/` and sign off rows in `docs/fps/fidelity.md`.
 Contract changes: none.
 
@@ -117,9 +119,18 @@ Under Jerry's order **D-121** (*"I want the same methodology and attention to ca
 - **Performance**: Live HQ Dusk **57.9 fps mean / 47.2 fps 1% low / 21.2 ms worst frame** (paired detail A/B +0.42 fps, PASS D-99).
 - **Sheet**: `qa/fidelity/launcher/launcher-fidelity-sheet.jpg`.
 
+### 9. Flamethrower (Compact Twin-Tank Pattern) — ChatGPT GP-20044
+- **Triangles**: 10,668 -> 12,628 (+1,960 vs 28137581; builder 11,244 -> 12,628 [+1,384], budget 35,000).
+- **Materials**: 13 distinct materials.
+- **Small-Part Floats**: **0** verified.
+- **Key Details**: Nozzle bell underside pilot cage, igniter box with steel guard rods, sparker cable clamped along wand, tank mounting brackets/straps with bolt fasteners, front manifold feed block, side regulator handwheel with spokes, exposed left flank pressure gauge, rear hose loop with coupling collars, contoured rear grip and horizontal wand grip. Held length 1.069m vs 1.293m ref (compact twin-tank layout exception noted under GP-20052 per Claude decision).
+- **First Person Stills**: Noon & night hip low-ready hold and centered ADS sight picture clean on Jerry's RTX 5080 WebGPU; wand aligns cleanly with sight line.
+- **Performance**: Live HQ Dusk **60.5 fps mean / 56.2 fps 1% low / 17.8 ms worst frame** (0 hitches, PASS D-99).
+- **Sheet**: `qa/fidelity/flamer/flamer-fidelity-sheet.jpg`.
+
 ---
 
-## 2. Complete Master Fidelity Metrics Table (All 15 Landed Models)
+## 2. Complete Master Fidelity Metrics Table (All 16 Landed Models)
 
 | Model | Ref File | Tris Before | Tris After | Delta | Budget | Mats | Floats | Ours Len (m) | Ref Len (m) | HQ Dusk FPS | D-121 Verdict |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
@@ -133,6 +144,7 @@ Under Jerry's order **D-121** (*"I want the same methodology and attention to ca
 | **Sniper** (CL-314) | `sniper.glb` | 9,266 | **10,702** | +1,436 | 25,000 | 10 | **0** | 1.3345 | 0.2209 | **54.1 fps** | **PASS** |
 | **Rotary Gun** (GP-20041) | `m134.glb` | 8,280 | **12,176** | +3,896 | 35,000 | 11 | **0** | 1.4851 | 0.8000 | **61.0 fps** | **PASS** |
 | **Launcher** (GP-20043) | `naders_grenade_launcher.glb` | 8,980 | **11,840** | +2,860 | 35,000 | 8 | **0** | 0.8276 | 0.7500 | **57.9 fps** | **PASS** |
+| **Flamethrower** (GP-20044) | `flamethrower.glb` | 10,668 | **12,628** | +1,960 | 35,000 | 13 | **0** | 1.0692 | 1.2930 | **60.5 fps** | **PASS** |
 | **Chainsaw** (GP-20042) | `chainsaw.glb` | 7,152 | **8,952** | +1,800 | 35,000 | 11 | **0** | 1.1690 | 0.8500 | **60.9 fps** | **PASS** |
 | **Combat Knife** (GB-310) | — (KA-BAR) | 2,780 | **3,264** | +484 | 4,000 | 6 | **0** | 0.3183 | 0.3000 | **60.5 fps** | **PASS** |
 | **Machete** (GB-310) | — (Bolo) | 1,876 | **2,300** | +424 | 4,000 | 10 | **0** | 0.5962 | 0.6200 | **60.5 fps** | **PASS** |

@@ -1,13 +1,13 @@
 # ChatGPT
 
-state: active
+state: idle
 model: GPT-6.1 Sol
-task: GP-20043 Fidelity pass on launcher model against measured reference and FPS checklist
-touching: studio/weapon-heavy.js (makeLauncherModel only), review/GP-20043/, handoffs/2026-11-07-chatgpt-GP-20043.md
-since: 2026-11-07T23:08Z
-next: GP-20043 Fidelity: the launcher (D-121). After GP-20042. makeLauncher
+task: —
+touching: —
+since: 2026-11-08T02:14Z
+next: —
 blocked-on: —
-last-report: handoffs/2026-11-07-chatgpt-GP-20042.md
+last-report: handoffs/2026-11-08-chatgpt-GP-20051.md
 
 ## Notes
 

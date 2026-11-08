@@ -1,0 +1,70 @@
+{
+  "gun": "flamer",
+  "name": "Flamethrower (Compact Twin-Tank Pattern)",
+  "refFile": "flamethrower.glb",
+  "realLength": 1.293,
+  "sizeK": 1,
+  "builderTriangles": {
+    "baseline": 11244,
+    "after": 12628,
+    "delta": 1384,
+    "note": "Builder baseline in GP-20044 was 11,244 to 12,628 triangles (+1,384). Saved commit 28137581 baseline was 10,668."
+  },
+  "before": {
+    "tris": 10668,
+    "meshes": 18,
+    "materials": 13,
+    "floatingCount": 0,
+    "box": {
+      "x": 0.263,
+      "y": 0.287,
+      "z": 1.0692
+    },
+    "measure": {
+      "length": 1.0692,
+      "boreOverGrip": 0.088,
+      "rakeDeg": 86.7,
+      "sightH": 0.0676
+    }
+  },
+  "after": {
+    "tris": 12628,
+    "meshes": 19,
+    "materials": 13,
+    "floatingCount": 0,
+    "box": {
+      "x": 0.2777,
+      "y": 0.287,
+      "z": 1.0692
+    },
+    "measure": {
+      "length": 1.0692,
+      "boreOverGrip": 0.066,
+      "rakeDeg": 89.1,
+      "sightH": 0.0949,
+      "lengthNote": "1.069m held vs 1.293m ref (compact twin-tank layout); wand length and proportion call deferred to GP-20052 per Claude decision."
+    }
+  },
+  "ref": {
+    "tris": 7016,
+    "meshes": 5,
+    "box": {
+      "x": 0.2181,
+      "y": 0.2991,
+      "z": 1.293
+    },
+    "measure": {
+      "length": 1.293,
+      "boreOverGrip": 0.0415,
+      "rakeDeg": 77.9,
+      "sightH": 0.1192
+    }
+  },
+  "duskPerf": {
+    "fps": 60.48996874648599,
+    "low": 56.179775243274435,
+    "worst": 17.80000001192093,
+    "hitches": 0,
+    "frames": 60
+  }
+}

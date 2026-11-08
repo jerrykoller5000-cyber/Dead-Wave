@@ -28,6 +28,9 @@ let info = null;
 try {
   info = await page.evaluate(() => window.GUNSHOT.ready, undefined);
 } catch (e) { errors.push(String(e)); }
+// CL-319: --pose "<js>" runs in the page before the views (G = window.GUNSHOT, g = its gun), e.g. a bolt worked open:
+// --pose "g.userData.bolt.rotation.z = 1.05; g.userData.bolt.position.z -= 0.09; g.userData.boltPoseHook && g.userData.boltPoseHook(1, 1)"
+if (str('--pose')) { try { await page.evaluate((js) => { const G = window.GUNSHOT, g = G.gun; return new Function('G', 'g', js)(G, g); }, str('--pose')); } catch (e) { errors.push('pose: ' + e); } }
 for (const v of views) {
   try { await page.evaluate((view) => window.GUNSHOT.shoot(view), v); } catch (e) { errors.push(v + ': ' + e); }
   await page.waitForTimeout(150);

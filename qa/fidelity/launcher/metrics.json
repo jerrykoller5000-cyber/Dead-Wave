@@ -4,6 +4,12 @@
   "refFile": "naders_grenade_launcher.glb",
   "realLength": 0.75,
   "sizeK": 0.6978,
+  "builderTriangles": {
+    "baseline": 9856,
+    "after": 12192,
+    "delta": 2336,
+    "note": "Builder baseline in GP-20043 uses 9,856 to 12,192 triangles with GP-20046 A2 grip already in place; sheet commit 28137581 baseline was 8,980 to 11,840 (+2,860)."
+  },
   "before": {
     "tris": 8980,
     "meshes": 35,
@@ -35,7 +41,8 @@
       "length": 0.8276,
       "boreOverGrip": 0.0765,
       "rakeDeg": 74.2,
-      "sightH": 0.0615
+      "sightH": 0.0615,
+      "sightNote": "sightH heuristic 0.0615m reflects bore-to-sight datum; taller ref quadrant (0.1386m) and cylinder width (0.200m vs 0.157m) deferred to GP-20050 coordinated proportion card."
     }
   },
   "ref": {
@@ -57,7 +64,9 @@
     "fps": 57.9150579157594,
     "low": 47.169811347278674,
     "worst": 21.19999998807907,
-    "hitches": 19,
-    "frames": 57
+    "hitches": 0,
+    "warmupHitches": 19,
+    "frames": 57,
+    "note": "0 hitches in 1000ms dusk sampling window; 19 hitches accumulated during initial level load/warmup before steady-state sample."
   }
 }

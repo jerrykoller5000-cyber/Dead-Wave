@@ -1,0 +1,55 @@
+{
+  "setup": {
+    "backend": "WebGPU",
+    "beforeScale": 0.88,
+    "currentScale": 0.88
+  },
+  "runs": [
+    {
+      "label": "after",
+      "fps": 59.79669124939564,
+      "low": 45.8715596079435,
+      "worst": 21.80000001192093,
+      "hitches": 0,
+      "frames": 60,
+      "weapon": "minigun",
+      "view": "minigun"
+    },
+    {
+      "label": "before",
+      "fps": 59.147460738682994,
+      "low": 49.26108371491439,
+      "worst": 20.30000001192093,
+      "hitches": 0,
+      "frames": 58,
+      "weapon": "minigun",
+      "view": "minigun"
+    },
+    {
+      "label": "before",
+      "fps": 53.82238612674417,
+      "low": 27.247956412120462,
+      "worst": 36.69999998807907,
+      "hitches": 0,
+      "frames": 54,
+      "weapon": "minigun",
+      "view": "minigun"
+    },
+    {
+      "label": "after",
+      "fps": 57.79194898400206,
+      "low": 50.76142135051387,
+      "worst": 19.69999998807907,
+      "hitches": 0,
+      "frames": 58,
+      "weapon": "minigun",
+      "view": "minigun"
+    }
+  ],
+  "mean": {
+    "before": 56.484923432713586,
+    "after": 58.794320116698856,
+    "delta": 2.3093966839852698
+  },
+  "errors": []
+}
