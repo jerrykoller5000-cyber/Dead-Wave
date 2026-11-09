@@ -112,7 +112,7 @@ function weapons(c) {
       build: (c2) => need(c2.B.mortar, 'makeMortarMesh')() },
     { id: 'weapon.mortar-collapsed', name: 'Mortar, collapsed (carried)', group: 'Weapons', owner: 'grokbot', source: 'index.html: makeMortarMesh(null, true)',
       build: (c2) => need(c2.B.mortar, 'makeMortarMesh')(null, true) },
-    { id: 'weapon.mortar-round', name: 'Mortar round (60 mm)', group: 'Weapons', owner: 'grokbot', float: 1.1, source: 'index.html: makeMortarRoundMesh()',
+    { id: 'weapon.mortar-round', name: 'Mortar round (81 mm)', group: 'Weapons', owner: 'grokbot', float: 1.1, source: 'index.html: makeMortarRoundMesh()',
       build: (c2) => need(c2.B.mortarRound, 'makeMortarRoundMesh')() },
     { id: 'weapon.frag-grenade', name: 'Frag grenade (in his hand)', group: 'Weapons', owner: 'grokbot', float: 1.1, source: 'index.html: the grenadeHand group',
       build: (c2) => {

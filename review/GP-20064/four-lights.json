@@ -1,0 +1,22 @@
+{
+  "out": "review/GP-20064/four-lights",
+  "cols": 4,
+  "shots": [
+    {"target":"weapon.knife","view":"three","pre":"await DWInspect.light('noon');","out":"review/GP-20064/four-lights/knife-noon.png"},
+    {"target":"weapon.knife","view":"three","pre":"await DWInspect.light('overcast');","out":"review/GP-20064/four-lights/knife-overcast.png"},
+    {"target":"weapon.knife","view":"three","pre":"await DWInspect.light('dusk');","out":"review/GP-20064/four-lights/knife-dusk.png"},
+    {"target":"weapon.knife","view":"three","pre":"await DWInspect.light('night');","out":"review/GP-20064/four-lights/knife-night.png"},
+    {"target":"weapon.machete","view":"three","pre":"await DWInspect.light('noon');","out":"review/GP-20064/four-lights/machete-noon.png"},
+    {"target":"weapon.machete","view":"three","pre":"await DWInspect.light('overcast');","out":"review/GP-20064/four-lights/machete-overcast.png"},
+    {"target":"weapon.machete","view":"three","pre":"await DWInspect.light('dusk');","out":"review/GP-20064/four-lights/machete-dusk.png"},
+    {"target":"weapon.machete","view":"three","pre":"await DWInspect.light('night');","out":"review/GP-20064/four-lights/machete-night.png"},
+    {"target":"weapon.katana","view":"three","pre":"await DWInspect.light('noon');","out":"review/GP-20064/four-lights/katana-noon.png"},
+    {"target":"weapon.katana","view":"three","pre":"await DWInspect.light('overcast');","out":"review/GP-20064/four-lights/katana-overcast.png"},
+    {"target":"weapon.katana","view":"three","pre":"await DWInspect.light('dusk');","out":"review/GP-20064/four-lights/katana-dusk.png"},
+    {"target":"weapon.katana","view":"three","pre":"await DWInspect.light('night');","out":"review/GP-20064/four-lights/katana-night.png"},
+    {"target":"weapon.frag-grenade","view":"three","pre":"await DWInspect.light('noon');","out":"review/GP-20064/four-lights/grenade-noon.png"},
+    {"target":"weapon.frag-grenade","view":"three","pre":"await DWInspect.light('overcast');","out":"review/GP-20064/four-lights/grenade-overcast.png"},
+    {"target":"weapon.frag-grenade","view":"three","pre":"await DWInspect.light('dusk');","out":"review/GP-20064/four-lights/grenade-dusk.png"},
+    {"target":"weapon.frag-grenade","view":"three","pre":"await DWInspect.light('night');","out":"review/GP-20064/four-lights/grenade-night.png"}
+  ]
+}

@@ -1,7 +1,7 @@
 // t328 - CU-229 (Jerry's J58). Buy an attachment at the Training Ground kiosk and use it.
 // The purchase is owned and not fitted. The shop covers the banner, so closing it says the
 // attachment is fitted at the Armory. Using the row again says the same thing, and never
-// "NOT OWNED". The flashlight, bought on the gear tab, then turns on.
+// "NOT OWNED". The laser/light, bought on the gear tab and fitted, then turns on.
 (async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -18,44 +18,42 @@
     ok(T.openMenuDbg('shop'), 'the kiosk opens');
     T.setShopTabDbg('upgrades');
     await wait(50);
-    const supRow = () => rows().find((r) => /suppressor/i.test((r.querySelector('.name') || {}).textContent || '') && /pistol/i.test((r.querySelector('.name') || {}).textContent || ''));
-    ok(!!supRow(), 'the pistol suppressor is for sale (' + rows().map((r) => (r.querySelector('.name') || {}).textContent).slice(0, 4).join(' | ') + ')');
-    if (supRow()) supRow().querySelector('button').click();
-    await wait(50);
-    const tag = (supRow() && supRow().querySelector('.name') || {}).textContent || '';
-    ok(/armory/i.test(tag), 'the row says to fit it at the Armory (' + tag + ')');
-    ok(/armory/i.test(banner()) && !/NOT OWNED/i.test(banner()), 'the purchase says the Armory (' + banner() + ')');
+    ok(!rows().some((r) => /suppressor/i.test((r.querySelector('.name') || {}).textContent || '')), 'the kiosk no longer sells the pistol suppressor (D-124)');
     T.closeMenuDbg('shop');
-    await wait(100);
-    ok(/armory/i.test(banner()) && !/NOT OWNED/i.test(banner()), 'closing the kiosk still says the Armory (' + banner() + ')');
+    T.openMenuDbg('armory');
+    await wait(50);
+    T.armoryDbg.ui().bench('pistol');
+    await wait(50);
+    const supBtn = () => document.querySelector('#armoryPanel [data-mod="suppressor"] button');
+    ok(!!supBtn(), 'the pistol suppressor is for sale at the pistol workbench (D-124)');
+    if (supBtn()) supBtn().click();
+    await wait(50);
     const mod = T.armoryDbg.mods('pistol').find((m) => m.id === 'suppressor');
     ok(!!mod && mod.owned && !mod.fitted, 'the Armory has the suppressor, and it is not on the pistol yet');
-    ok(T.openMenuDbg('shop'), 'the kiosk again');
+    const st = (document.querySelector('#armoryPanel [data-mod="suppressor"]') || {}).textContent || '';
+    ok(!/NOT OWNED/i.test(st) && !/NOT OWNED/i.test(banner()), 'buying it never says NOT OWNED (' + st.slice(0, 60) + ' | ' + banner() + ')');
+    T.closeMenuDbg('armory');
+    await wait(100);
+    ok(!/NOT OWNED/i.test(banner()), 'closing the Armory does not say NOT OWNED (' + banner() + ')');
+    T.addCash && T.addCash(500);
+    ok(T.openMenuDbg('armory'), 'the Armory (for the store)');
+    await wait(50);
+    document.querySelector('#armoryPanel .armory-actions button:nth-child(2)').click();
     T.setShopTabDbg('upgrades');
     await wait(50);
-    const again = rows().find((r) => /suppressor/i.test((r.querySelector('.name') || {}).textContent || '') && /pistol/i.test((r.querySelector('.name') || {}).textContent || ''));
-    const btn = again && again.querySelector('button');
-    ok(!!btn && !btn.disabled, 'the bought suppressor can still be used (' + (btn ? btn.textContent : 'missing') + ')');
-    if (btn) btn.click();
-    T.closeMenuDbg('shop');
-    await wait(100);
-    ok(/armory/i.test(banner()) && !/NOT OWNED/i.test(banner()), 'using it points at the Armory (' + banner() + ')');
-    ok(T.openMenuDbg('shop'), 'the gear tab');
-    T.setShopTabDbg('gear');
-    await wait(50);
-    const light = findRow(/flashlight/i);
-    ok(!!light, 'the flashlight is for sale');
+    const light = findRow(/laser\/light/i);
+    ok(!!light, 'the laser/light is for sale in the Armory store (D-124)');
     if (light) light.querySelector('button').click();
-    await wait(50);
-    ok(!!T.getGearOwned().flashlight, 'the flashlight is owned');
-    T.closeMenuDbg('shop');
+    await wait(50);    ok(!!T.getGearOwned().laserLight, 'the laser/light is owned');
+    T.armoryDbg.fit(T.getCurrentWeapon() || 'pistol', 'laserLight', true);
+    T.closeMenuDbg('shop'); T.closeMenuDbg('armory');
     window.dispatchEvent(new KeyboardEvent('keydown', { code: 'Digit4', bubbles: true }));
     window.dispatchEvent(new KeyboardEvent('keyup', { code: 'Digit4', bubbles: true }));
     await wait(50);
     window.dispatchEvent(new KeyboardEvent('keydown', { code: 'Digit2', bubbles: true }));
     window.dispatchEvent(new KeyboardEvent('keyup', { code: 'Digit2', bubbles: true }));
     await wait(50);
-    ok(!/NOT OWNED/i.test(banner()), 'turning the flashlight on does not say NOT OWNED (' + banner() + ')');
+    ok(!/NOT OWNED/i.test(banner()), 'turning the laser/light on does not say NOT OWNED (' + banner() + ')');
   } catch (e) {
     ok(false, 't328 threw: ' + String((e && e.stack) || e).slice(0, 400));
   } finally {

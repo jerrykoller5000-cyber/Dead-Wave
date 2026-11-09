@@ -124,6 +124,7 @@ export const VM_POSES = Object.freeze({
     hip: { at: [0.34, -0.31, -0.50], yaw: 0.32, pitch: 0.11, roll: 0.095 },
     ads: { rear: 0.43 },
     kick: { back: 0.032, up: 0.075, side: 0.015, ads: 0.48 },
+    boltStroke: 0.10,   // CL-322: the constant-recoil bolt's stroke per shot (model units; recoilBoltPose)
     elbows: { r: [0.37, -0.66, -0.10], l: [-0.42, -1.18, -0.25] },
     elbowRel: { r: [0.16, -0.26, 0.24], l: [-0.04, -0.34, 0.14] },   // CL-293: the strong arm from the lower right, the support forearm up from the bottom (Jerry's CS references, 3 Nov)
     reload: 'drum'
@@ -146,8 +147,8 @@ export const VM_POSES = Object.freeze({
   },
   // J60: the bar runs up the middle, with both hands on the two real handles.
   chainsaw: {
-    hip: { at: [0.26, -0.23, -0.62], yaw: 0.25, pitch: 0.45, roll: 0.4 },   // GB-292 redo: saw low right, nose up so the bar shows above the left forearm; both hands on their handles in view
-    ads: { rear: 0.90 },
+    hip: { at: [0.30, -0.27, -0.60], yaw: 0.75, pitch: 0.40, roll: 0.55 },   // CL-322 (9c): the nose left, the bar and teeth out beside the engine (was [0.26,-0.23,-0.62] 0.25/0.58/0.4);   // CL-322: pitch 0.45 -> 0.58, GP-20063's shorter bar up out of the forearm;   // GB-292 redo: saw low right, nose up so the bar shows above the left forearm; both hands on their handles in view
+    ads: { rear: 0.90, pose: { at: [0.24, -0.26, -0.64], yaw: 0.40, pitch: 0.75, roll: 0.30 } },   // CL-322 (AG-261: the bar hidden down the sights): raised, centred, the bar up the middle (J60)
     kick: { back: 0, up: 0, side: 0, ads: 1 },
     elbows: { r: [0.35, -0.94, -0.10], l: [-0.35, -0.97, -0.24] },
     elbowFollow: [0.28, 0.04]   // CL-301 (the motorcycle grip): each forearm on along its hand's line, the wrists straight
@@ -155,7 +156,7 @@ export const VM_POSES = Object.freeze({
   // J61: the carrying hand holds the top trigger and the other palm bears the
   // underside of the drive housing, away from the spinning barrel cluster.
   minigun: {
-    hip: { at: [0.228, -0.433, -0.411], yaw: 0.12, pitch: 0.015, roll: -0.09 },   // CL-301 (Jerry's L4D2 and render refs, 3 Nov): the barrels nearer the middle; GP-20022: placed by the rear grip (the gun where it was)
+    hip: { at: [0.215, -0.395, -0.43], yaw: 0.12, pitch: 0.015, roll: -0.09 },   // CL-322: up 4 cm, in 1 cm, forward 2 cm for GP-20063's 0.70 gun (was [0.228, -0.433, -0.411]);   // CL-301 (Jerry's L4D2 and render refs, 3 Nov): the barrels nearer the middle; GP-20022: placed by the rear grip (the gun where it was)
     ads: { rear: 0.76 },
     kick: { back: 0.012, up: 0.012, side: 0.004, ads: 0.45 },
     elbows: { r: [0.40, -0.86, -0.09], l: [-0.43, -1.00, -0.25] },
@@ -204,12 +205,15 @@ const VM_STAGE2_RELOADS = Object.freeze({
       [.72, { pos: [-.08, -.10, -.08], rot: [.10, -.10, -.42] }],   // CL-306: for the pull the gun goes down and ahead, rolled left, so the arm crosses low
       [.84, { pos: [-.08, -.10, -.08], rot: [.10, -.10, -.42] }],
       [.92, { pos: [-.025, .03, 0], rot: [.18, .04, -.10] }], [1, null]],
-    hand: [[0, 'fore', 'fore'], [.10, 'well', 'mag'], [.19, 'below', 'mag'],
+    // CL-322 (the AK manual, GP-20056's lugs): out, the catch pressed, the magazine rocks forward on its front lug at the
+    // well (.12-.17) and only then comes down; in, it arrives tilted with the front lug in the well (.555) and rocks back
+    // on it until the rear lug catches (.585-.64). The palm turns about the lug with it (rock.pivot, mag-local).
+    hand: [[0, 'fore', 'fore'], [.10, 'well', 'mag'], [.17, 'well', 'mag'], [.22, 'below', 'mag'],
       [.34, 'pouch', 'mag'], [.38, 'pouch', 'pouch'], [.50, 'below', 'mag'],
-      [.62, 'well', 'mag'], [.66, 'well', 'cup'], [.76, 'work', 'pinch'],
+      [.555, 'well', 'mag'], [.64, 'well', 'mag'], [.67, 'well', 'cup'], [.76, 'work', 'pinch'],
       [.83, 'work', 'pinch'], [.90, 'fore', 'fore'], [1, 'fore', 'fore']],
-    mag: { grab: .12, swapOut: .335, swapIn: .385, seat: .62 },
-    rock: { out: [.12, .19], in: [.50, .62], angle: .27 },
+    mag: { grab: .12, swapOut: .335, swapIn: .385, seat: .64 },
+    rock: { out: [.12, .17], in: [.585, .64], angle: .27, pivot: [0, .012, .066] },
     rack: [.76, .80, .83, .045],
     places: { well: { z: [.15, .90, .41], y: [-.60, -.28, -.75] }, below: { drop: .16 },
       work: { at: [.041, .02, .13], z: [.65, .25, -.72], y: [-.7, .15, -.4] },   // CL-311: the knob on the slim receiver
@@ -299,7 +303,7 @@ const VM_STAGE3_RELOADS = Object.freeze({
     empties: { show: .10, out: [.18, .26], travel: .05, gone: .27 },
     loader: { show: .38, toPart: [.44, .52], back: .085, seat: .045, push: [.58, .70], gone: .76 },
     places: { part: { part: 'cylinder', at: [0, -.035, -.04], z: [0, .95, .31], y: [.65, -.3, -.7] },
-      ejector: { part: 'cylinder', at: [0, -.004, .123], z: [0, .8, .6], y: [.65, -.3, -.7] },
+      ejector: { part: 'cylinder', at: [0, 0, .219], z: [0, .8, .6], y: [.65, -.3, -.7] },   // CL-320: the ejector rod's head (two inches short of the muzzle)
       loader: { part: 'cylinder', at: [0, 0, -.06], z: [0, .9, .44], y: [.65, -.3, -.7] },
       pouch: { at: [-.24, -.49, -.27], z: [.25, .9, .3], y: [-.4, -.6, .65] } }
   },
@@ -347,9 +351,9 @@ const VM_STAGE3_RELOADS = Object.freeze({
     round: { trips: [[.33, .46], [.51, .63], [.67, .78]], ahead: .09, up: .04 },   // GP-20039's loadRound ahead of the fingertips (the pinch reaches ~6 cm past the palm), each trip, until the push home
     places: {
       latch: { part: 'latch', rootAt: [-.02, -.015, -.025], z: [-.5, .85, 0], y: [-.5, -.5, -.7] },
-      drumOut: { part: 'drum', rootAt: [0, -.15, 0], z: [0, 1, 0], y: [-.45, -.55, -.7] },   // cupping its underside through the swing
-      loadIn: { part: 'drum', rootAt: [0, -.115, -.20], z: [0, .3, 1], y: [-.5, -.5, -.7] },   // the round at the chamber's mouth: the palm 13 cm behind the drum's back and 4 cm under the chamber, the round above the fingertips (seen past the glove)
-      load: { part: 'drum', rootAt: [0, -.115, -.145], z: [0, .3, 1], y: [-.5, -.5, -.7] },    // pushed home: the fingertips at the back face (ChatGPT, 13:03Z: at -.105 the glove was through the drum)
+      drumOut: { part: 'drum', rootAt: [0, -.122, 0], z: [0, 1, 0], y: [-.45, -.55, -.7] },   // cupping its underside through the swing   // CL-322: GP-20063 narrowed the drum (r .14 -> .112, orbit .075 -> .065): drumOut -.15 -> -.122, loadIn/load -.115 -> -.105
+      loadIn: { part: 'drum', rootAt: [0, -.105, -.20], z: [0, .3, 1], y: [-.5, -.5, -.7] },   // the round at the chamber's mouth: the palm 13 cm behind the drum's back and 4 cm under the chamber, the round above the fingertips (seen past the glove)
+      load: { part: 'drum', rootAt: [0, -.105, -.145], z: [0, .3, 1], y: [-.5, -.5, -.7] },    // pushed home: the fingertips at the back face (ChatGPT, 13:03Z: at -.105 the glove was through the drum)
       wind: { part: 'winder', rootAt: [.01, 0, -.03], z: [0, 0, 1], y: [-.5, -.5, -.7] },
       pouch: { at: [-.29, -.51, -.32], z: [.25, .9, .3], y: [-.4, -.6, .65] } }
   }
@@ -433,7 +437,7 @@ export const VM_SOCKETS = Object.freeze({
   // cloud look, 2026-11-02: in from -0.03 to -0.012 the fingers wrap without coming through the far side).
   pistol: { support: [-0.012, -0.10, -0.02] },
   // GB-312 (CL-310, GB-153 fit qa/2026-11-07-GB-312/fit/fit-fp.json): support fingers curled to the 40 mm handguard until each touches.
-  m4: { grip: [0, -0.106, -0.116], support: [0, 0.004, 0.36], magFoot: [0, -0.278, 0.04], work: [-0.03, -0.03, 0.105],   // CL-310: the 40 mm handguard (its bottom -0.01, was -0.027) and the bolt catch on the 32 mm lower
+  m4: { grip: [0, -0.106, -0.116], support: [0, -0.01, 0.43], magFoot: [0, -0.278, 0.04], work: [-0.03, -0.03, 0.105],   // CL-310: the 40 mm handguard (its bottom -0.01, was -0.027) and the bolt catch on the 32 mm lower; CL-322: the support on GP-20055's quad rail (was [0, .004, .36])
     supportPose: { f: [[1.038, 1.194, 0.986, 0], [1.257, 1.446, 1.194, 0], [1.357, 1.561, 1.289, 0], [1.45, 1.668, 1.378, 0]], t: [1.45, -0.15, 0.87] } },
   // GB-312 (re-fit after CL-310/313/314; was GB-311): support fingers on the 44 mm handguard; thumb curl 0.079 (was 0.08).
   // GB-311 (CL-311/CL-312, GB-153's fit run on the view gun and view hands, qa/2026-11-07-GB-311/fit/fit-fp-run2.json): the
@@ -444,12 +448,12 @@ export const VM_SOCKETS = Object.freeze({
   // GB-312 (re-fit): index closes to a full curl (1.45; was 1.181); little finger free past the forend keeps the fist.
   // GB-311 (CL-312, the same fit): the fingers close further round the 44 mm forend (the fist's middle finger sat 10 mm in
   // at its root, so it curls round instead; the little finger meets nothing past the forend and keeps the fist's curl).
-  shotgun: { grip: [0, -0.088, -0.056], support: [0, -0.016, 0.37], port: [0, -0.034, 0.12],   // CL-312 (D-121): the forend 44 mm across on the tube (its middle y -0.006, z 0.28-0.49); the loading port under the receiver
+  shotgun: { grip: [0, -0.088, -0.056], support: [0, -0.016, 0.465], port: [0, -0.034, 0.12],   // CL-312 (D-121): the forend 44 mm across on the tube (its middle y -0.006, z 0.28-0.49); the loading port under the receiver   // CL-322: the forend a stroke further forward (its root 0.28 -> 0.375), the palm with it
     supportPose: { f: [[1.45, 1.668, 1.378, 0], [1.45, 1.668, 1.378, 0], [1.45, 1.668, 1.378, 0], [1.08, 1.242, 1.026, 0]], t: [1.45, -0.15, 0.87] } },
   // GB-312 (CL-313, GB-153 fit): support fingers wrap the 62 mm handguard; roots stay a few mm in (socket depth; WEAPON_HOLD unchanged).
   aa12: { grip: [0, -0.145, -0.166], support: [0, -0.10, 0.36], magFoot: [0, -0.415, 0.05], work: [-0.058, 0.05, 0.18],   // CL-313 c: the support is a bar's axis in the fist; a box handguard 18 cm tall is held by its underside (-0.082), so the axis sits 2 cm under it (GB-312/314: at -0.035/-0.047 the palm was in the box)
     supportPose: { f: [[1.45, 1.668, 1.378, 0], [1.45, 1.668, 1.378, 0], [1.45, 1.668, 1.378, 0], [1.306, 1.502, 1.241, 0]], t: [1.45, -0.15, 0.87] } },   // GB-314 GB-153 fit; palmD still ~-9.5 mm (note to Claude)
-  revolver: { grip: [0, -0.07, -0.04], support: [-0.012, -0.10, -0.014] },   // J57: palm cups the grip, not air beside it
+  revolver: { grip: [0, -0.07, -0.059], support: [-0.012, -0.10, -0.041] },   // J57: palm cups the grip, not air beside it; CL-320: the S&W grip raked back (0.27 of its depth)
   // GB-312 (CL-314, GB-153 fit): support fingers open on the 50 mm forend (fist sat 7-15 mm in); thumb keeps a full curl.
   sniper: { grip: [0, -0.088, -0.117], support: [0, -0.005, 0.35], magFoot: [0, -0.203, 0.02], boltKnob: [0.13, 0.035, -0.16],   // CL-306: the handle on +x (reads right in the mirrored view)
     supportPose: { f: [[0.766, 0.881, 0.728, 0], [0.527, 0.606, 0.501, 0], [0.2, 0.23, 0.19, 0], [0.09, 0.103, 0.085, 0]], t: [1.45, -0.15, 0.87] } },
@@ -466,7 +470,7 @@ export const VM_SOCKETS = Object.freeze({
   // behind the housing and the front vertical post on top (ChatGPT's handle centres).
   // Jerry, 4 Nov: "create a grip that juts off to the side. Something like a peg to hold into. That way his arm will not clip
   // through the gun": GP-20024's side peg (centre (-0.304, 0.012, 0.16), axis vertical), the left hand round it from outside.
-  minigun: { grip: [0, -0.017, -0.52], support: [-0.304, 0.012, 0.16], supportBasis: { x: [0, -1, 0], y: [-0.6, -0.3, -0.74] },
+  minigun: { grip: [0, -0.0119, -0.364], support: [-0.2128, 0.0084, 0.112], supportBasis: { x: [0, -1, 0], y: [-0.6, -0.3, -0.74] },   // CL-322: GP-20063 scaled the gun 0.70: the grip and the peg with it (was [0,-.017,-.52], [-.304,.012,.16])
     supportPose: { f: [[1.05, 1.15, 1.0, 0], [1.05, 1.15, 1.0, 0], [1.05, 1.15, 1.0, 0], [1.08, 1.2, 1.0, 0]], t: [1.0, -0.3, 0.55] } },   // HAND_POSES.fist
   flamer: { grip: [0, -0.078, -0.157], support: [0, -0.07, 0.28] },
   // The frame stays anchored on the grip centre; the trigger glove closes lower

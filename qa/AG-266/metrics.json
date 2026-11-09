@@ -1,0 +1,386 @@
+{
+  "timestamp": "2026-11-09T00:38:52.941Z",
+  "gpu": "NVIDIA GeForce RTX 5080 (WebGPU)",
+  "switchTiming": {
+    "flipSteps": [
+      {
+        "frame": 1,
+        "topW": 0.1111,
+        "fov": 13.54,
+        "angDevRad": 0
+      },
+      {
+        "frame": 2,
+        "topW": 0.2222,
+        "fov": 14.24,
+        "angDevRad": 0
+      },
+      {
+        "frame": 3,
+        "topW": 0.3333,
+        "fov": 15.64,
+        "angDevRad": 0
+      },
+      {
+        "frame": 4,
+        "topW": 0.4444,
+        "fov": 17.7,
+        "angDevRad": 0
+      },
+      {
+        "frame": 5,
+        "topW": 0.5556,
+        "fov": 20.3,
+        "angDevRad": 0
+      },
+      {
+        "frame": 6,
+        "topW": 0.6667,
+        "fov": 23.23,
+        "angDevRad": 0
+      },
+      {
+        "frame": 7,
+        "topW": 0.7778,
+        "fov": 26.23,
+        "angDevRad": 0
+      },
+      {
+        "frame": 8,
+        "topW": 0.8889,
+        "fov": 29.03,
+        "angDevRad": 0
+      },
+      {
+        "frame": 9,
+        "topW": 1,
+        "fov": 31.32,
+        "angDevRad": 0
+      }
+    ],
+    "returnSteps": [
+      {
+        "frame": 1,
+        "topW": 0.8889,
+        "fov": 33.14,
+        "angDevRad": 0
+      },
+      {
+        "frame": 2,
+        "topW": 0.7778,
+        "fov": 33.61,
+        "angDevRad": 0
+      },
+      {
+        "frame": 3,
+        "topW": 0.6667,
+        "fov": 33.14,
+        "angDevRad": 0
+      },
+      {
+        "frame": 4,
+        "topW": 0.5556,
+        "fov": 31.8,
+        "angDevRad": 0
+      },
+      {
+        "frame": 5,
+        "topW": 0.4444,
+        "fov": 29.74,
+        "angDevRad": 0
+      },
+      {
+        "frame": 6,
+        "topW": 0.3333,
+        "fov": 27.17,
+        "angDevRad": 0
+      },
+      {
+        "frame": 7,
+        "topW": 0.2222,
+        "fov": 24.39,
+        "angDevRad": 0
+      },
+      {
+        "frame": 8,
+        "topW": 0.1111,
+        "fov": 21.71,
+        "angDevRad": 0
+      },
+      {
+        "frame": 9,
+        "topW": 0,
+        "fov": 19.49,
+        "angDevRad": 0
+      }
+    ],
+    "liveWallClock": {
+      "flipTo1xMs": 172,
+      "flipTo1xFrames": 8,
+      "returnTo4xMs": 157.5,
+      "returnTo4xFrames": 8
+    },
+    "targetSeconds": 0.15,
+    "flipTo1xDurationSec": 0.15,
+    "returnTo4xDurationSec": 0.15,
+    "maxAngularDevRad": 0
+  },
+  "optics": {
+    "acog_30": {
+      "ads": 0.321,
+      "fov": 23.76,
+      "glassOpacity": "0",
+      "zoomLabel": "2X"
+    },
+    "acog_60": {
+      "ads": 0.641,
+      "fov": 15.46,
+      "glassOpacity": "0.186281",
+      "zoomLabel": "4X"
+    },
+    "acog_80": {
+      "ads": 0.833,
+      "fov": 14.02,
+      "glassOpacity": "0.945662",
+      "zoomLabel": "4X"
+    },
+    "acog_full4x": {
+      "ads": 1,
+      "fov": 13.42,
+      "glassKind": "acog",
+      "glassOpacity": "1",
+      "zoomLabel": "4X"
+    },
+    "acog_full1x": {
+      "topW": 1,
+      "fov": 31.32,
+      "glassOpacity": "0",
+      "dotOpacity": "1",
+      "zoomLabel": "1X"
+    },
+    "gw4_prism": {
+      "fov": 17.02,
+      "kind": "prism",
+      "opacity": "1",
+      "zoomLabel": "3X"
+    },
+    "rev_prism": {
+      "fov": 17.01,
+      "kind": "prism",
+      "opacity": "1",
+      "zoomLabel": "3X"
+    },
+    "pistol_rmr": {
+      "weapon": "pistol",
+      "fov": 38,
+      "dotOpacity": "1",
+      "aimAds": 1
+    },
+    "kr7_rmr": {
+      "weapon": "ak",
+      "fov": 38,
+      "dotOpacity": "1",
+      "aimAds": 1
+    },
+    "breacher_rmr": {
+      "weapon": "aa12",
+      "fov": 38.01,
+      "dotOpacity": "1",
+      "aimAds": 1
+    },
+    "rotary_rmr": {
+      "weapon": "minigun",
+      "fov": 38.01,
+      "dotOpacity": "1",
+      "aimAds": 1
+    },
+    "sniper_2x": {
+      "power": "2X",
+      "fov": 24.11,
+      "ffp": "0.536",
+      "zoomLabel": "2X"
+    },
+    "sniper_4x": {
+      "power": "4X",
+      "fov": 13.82,
+      "ffp": "1.000",
+      "zoomLabel": "4X"
+    },
+    "sniper_6x": {
+      "power": "6X",
+      "fov": 9.28,
+      "ffp": "1.448",
+      "zoomLabel": "6X"
+    }
+  },
+  "frames": {
+    "acog_30": {
+      "filename": "gw4-acog-noon-30.png",
+      "width": 1280,
+      "height": 720,
+      "meanLuminance": 82.68,
+      "stdDev": 41.99,
+      "nonBlank": true
+    },
+    "acog_60": {
+      "filename": "gw4-acog-noon-60.png",
+      "width": 1280,
+      "height": 720,
+      "meanLuminance": 66.67,
+      "stdDev": 33.03,
+      "nonBlank": true
+    },
+    "acog_80": {
+      "filename": "gw4-acog-noon-80.png",
+      "width": 1280,
+      "height": 720,
+      "meanLuminance": 32.57,
+      "stdDev": 36.35,
+      "nonBlank": true
+    },
+    "acog_full4x": {
+      "filename": "gw4-acog-noon-full4x.png",
+      "width": 1280,
+      "height": 720,
+      "meanLuminance": 37.63,
+      "stdDev": 43.67,
+      "nonBlank": true
+    },
+    "acog_full1x": {
+      "filename": "gw4-acog-noon-full1x.png",
+      "width": 1280,
+      "height": 720,
+      "meanLuminance": 80.85,
+      "stdDev": 33.86,
+      "nonBlank": true
+    },
+    "acog_mid": {
+      "filename": "gw4-acog-noon-switch-mid.png",
+      "width": 1280,
+      "height": 720,
+      "meanLuminance": 65.16,
+      "stdDev": 38.21,
+      "nonBlank": true
+    },
+    "acog_back4x": {
+      "filename": "gw4-acog-noon-back4x.png",
+      "width": 1280,
+      "height": 720,
+      "meanLuminance": 36.49,
+      "stdDev": 45.6,
+      "nonBlank": true
+    },
+    "gw4_prism": {
+      "filename": "gw4-prism-noon-ads.png",
+      "width": 1280,
+      "height": 720,
+      "meanLuminance": 37.12,
+      "stdDev": 43.63,
+      "nonBlank": true
+    },
+    "rev_prism": {
+      "filename": "revolver-prism-noon-ads.png",
+      "width": 1280,
+      "height": 720,
+      "meanLuminance": 37.37,
+      "stdDev": 43.93,
+      "nonBlank": true
+    },
+    "pistol_rmr": {
+      "filename": "pistol-rmr-noon-ads.png",
+      "width": 1280,
+      "height": 720,
+      "meanLuminance": 80.13,
+      "stdDev": 46.97,
+      "nonBlank": true
+    },
+    "kr7_rmr": {
+      "filename": "kr7-rmr-noon-ads.png",
+      "width": 1280,
+      "height": 720,
+      "meanLuminance": 86.51,
+      "stdDev": 44.05,
+      "nonBlank": true
+    },
+    "breacher_rmr": {
+      "filename": "breacher-rmr-noon-ads.png",
+      "width": 1280,
+      "height": 720,
+      "meanLuminance": 87.86,
+      "stdDev": 43.84,
+      "nonBlank": true
+    },
+    "rotary_rmr": {
+      "filename": "rotary-rmr-noon-ads.png",
+      "width": 1280,
+      "height": 720,
+      "meanLuminance": 85.8,
+      "stdDev": 44.98,
+      "nonBlank": true
+    },
+    "sniper_2x": {
+      "filename": "sniper-noon-2x.png",
+      "width": 1280,
+      "height": 720,
+      "meanLuminance": 36.89,
+      "stdDev": 44.81,
+      "nonBlank": true
+    },
+    "sniper_4x": {
+      "filename": "sniper-noon-4x.png",
+      "width": 1280,
+      "height": 720,
+      "meanLuminance": 39.06,
+      "stdDev": 47.04,
+      "nonBlank": true
+    },
+    "sniper_6x": {
+      "filename": "sniper-noon-6x.png",
+      "width": 1280,
+      "height": 720,
+      "meanLuminance": 40.88,
+      "stdDev": 48.53,
+      "nonBlank": true
+    },
+    "acog_night_4x": {
+      "filename": "gw4-acog-night-4x.png",
+      "width": 1280,
+      "height": 720,
+      "meanLuminance": 17.26,
+      "stdDev": 16.09,
+      "nonBlank": true
+    },
+    "acog_night_1x": {
+      "filename": "gw4-acog-night-1x.png",
+      "width": 1280,
+      "height": 720,
+      "meanLuminance": 28.54,
+      "stdDev": 23.25,
+      "nonBlank": true
+    },
+    "prism_night_3x": {
+      "filename": "gw4-prism-night-3x.png",
+      "width": 1280,
+      "height": 720,
+      "meanLuminance": 17.12,
+      "stdDev": 16.5,
+      "nonBlank": true
+    },
+    "pistol_night_1x": {
+      "filename": "pistol-rmr-night-1x.png",
+      "width": 1280,
+      "height": 720,
+      "meanLuminance": 26.78,
+      "stdDev": 23.67,
+      "nonBlank": true
+    },
+    "sniper_night_4x": {
+      "filename": "sniper-night-4x.png",
+      "width": 1280,
+      "height": 720,
+      "meanLuminance": 15.79,
+      "stdDev": 18.52,
+      "nonBlank": true
+    }
+  }
+}

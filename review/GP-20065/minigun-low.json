@@ -1,0 +1,20 @@
+{
+  "out": "review/GP-20065/mounts",
+  "shots": [
+    {
+      "target": "xyz:-40,29.32,-70",
+      "cam": {
+        "x": -38.7678,
+        "y": 30.2821,
+        "z": -68.3492,
+        "tx": -40.0103,
+        "ty": 29.4215,
+        "tz": -69.8299,
+        "fov": 35
+      },
+      "time": "noon",
+      "out": "review/GP-20065/mounts/minigun-rmr-low.png",
+      "pre": "T.opticDbg.grant('minigun','rmr'); T.opticDbg.fit('minigun','rmr'); if(window.gp65)T.scene.remove(window.gp65); const g=T.cloneLean(T.weaponMeshes.minigun); g.position.set(-40,T.sampleHeight(-40,-70)+34,-70); g.visible=true; g.traverse(o=>{if(o.name==='flash'||o.name==='laser')o.visible=false}); T.scene.add(g); window.gp65=g;"
+    }
+  ]
+}

@@ -1,0 +1,213 @@
+{
+  "guns": {
+    "m4": {
+      "key": "m4",
+      "name": "GW-4 Rifle (M4)",
+      "laserError": 0.016531989183231087,
+      "lightError": 0.016391526166930397,
+      "unitMounted": true,
+      "unitVisible": true,
+      "laserLens": [
+        0.09775,
+        0.056,
+        0.7225
+      ],
+      "lightLens": [
+        0.06814,
+        0.056,
+        0.7225
+      ],
+      "handClearance": true,
+      "errors": []
+    },
+    "ak": {
+      "key": "ak",
+      "name": "KR-7 Rifle (AKM)",
+      "laserError": 0.00019438757186417013,
+      "lightError": 0.00019423957822097394,
+      "unitMounted": true,
+      "unitVisible": true,
+      "laserLens": [
+        0.016,
+        -0.05,
+        0.6559999999999999
+      ],
+      "lightLens": [
+        -0.01408,
+        -0.05,
+        0.6559999999999999
+      ],
+      "handClearance": true,
+      "errors": []
+    },
+    "shotgun": {
+      "key": "shotgun",
+      "name": "Shotgun (Stevens 320)",
+      "laserError": 0.008884460226470116,
+      "lightError": 0.008871666824973406,
+      "unitMounted": true,
+      "unitVisible": true,
+      "laserLens": [
+        0.066,
+        -0.008,
+        0.871
+      ],
+      "lightLens": [
+        0.066,
+        0.031,
+        0.871
+      ],
+      "handClearance": true,
+      "errors": []
+    },
+    "aa12": {
+      "key": "aa12",
+      "name": "Breacher-12 (AA-12)",
+      "laserError": 0.00011796645842037085,
+      "lightError": 0.00011794342015385866,
+      "unitMounted": true,
+      "unitVisible": true,
+      "laserLens": [
+        0.075,
+        0.087,
+        0.9
+      ],
+      "lightLens": [
+        0.057,
+        0.087,
+        0.9
+      ],
+      "handClearance": true,
+      "errors": []
+    },
+    "revolver": {
+      "key": "revolver",
+      "name": "Revolver (S&W)",
+      "laserError": 0.00453789050398512,
+      "lightError": 0.004537588105387421,
+      "unitMounted": true,
+      "unitVisible": true,
+      "laserLens": [
+        0.01075,
+        0.041,
+        0.3035
+      ],
+      "lightLens": [
+        -0.00946,
+        0.041,
+        0.3035
+      ],
+      "handClearance": true,
+      "errors": []
+    },
+    "sniper": {
+      "key": "sniper",
+      "name": "Sniper Rifle",
+      "laserError": 0.0004172871726704929,
+      "lightError": 0.00041727177559555386,
+      "unitMounted": true,
+      "unitVisible": true,
+      "laserLens": [
+        0.08575,
+        0,
+        0.5975
+      ],
+      "lightLens": [
+        0.05614000000000001,
+        0,
+        0.5975
+      ],
+      "handClearance": true,
+      "errors": []
+    },
+    "launcher": {
+      "key": "launcher",
+      "name": "Launcher (40mm)",
+      "laserError": 0.00011725493584656699,
+      "lightError": 0.00011714423438464926,
+      "unitMounted": true,
+      "unitVisible": true,
+      "laserLens": [
+        0.102,
+        0.045,
+        0.28450000000000003
+      ],
+      "lightLens": [
+        0.07379999999999999,
+        0.045,
+        0.28450000000000003
+      ],
+      "handClearance": true,
+      "errors": []
+    },
+    "uzi": {
+      "key": "uzi",
+      "name": "Wasp SMG (Uzi)",
+      "laserError": 0.002285191137453932,
+      "lightError": 0.0022850927647406353,
+      "unitMounted": true,
+      "unitVisible": true,
+      "laserLens": [
+        0.013,
+        -0.067,
+        0.28700000000000003
+      ],
+      "lightLens": [
+        -0.011439999999999999,
+        -0.067,
+        0.28700000000000003
+      ],
+      "handClearance": true,
+      "errors": []
+    }
+  },
+  "flamer": {
+    "active": true,
+    "lightsCount": 4,
+    "lights": [
+      {
+        "color": "ffa13d",
+        "intensity": 1.437602139019873,
+        "distance": 3.5,
+        "pos": [
+          41.7773885508346,
+          -6.182426772813633,
+          -18.757945410217687
+        ]
+      },
+      {
+        "color": "ff8a30",
+        "intensity": 2.730313977971673,
+        "distance": 10,
+        "pos": [
+          41.811588115863216,
+          -5.872973223842858,
+          -16.558231560608217
+        ]
+      },
+      {
+        "color": "ff8a30",
+        "intensity": 2.730313977971673,
+        "distance": 10,
+        "pos": [
+          41.811588115863216,
+          -5.872973223842858,
+          -16.558231560608217
+        ]
+      },
+      {
+        "color": "ffa13d",
+        "intensity": 1.437602139019873,
+        "distance": 3.5,
+        "pos": [
+          41.7773885508346,
+          -6.182426772813633,
+          -18.757945410217687
+        ]
+      }
+    ],
+    "flamerHasAttachment": false
+  },
+  "verdict": "PASS",
+  "errors": []
+}

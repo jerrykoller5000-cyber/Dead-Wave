@@ -1,0 +1,173 @@
+[
+  {
+    "u": 0,
+    "reloadU": 0,
+    "reloadKind": "empty",
+    "magState": "seated",
+    "handPlace": "fore",
+    "rock": 0,
+    "magVisible": true,
+    "magPos": [
+      0,
+      -0.04,
+      0.04
+    ],
+    "workPos": [
+      0.028999999999999998,
+      0.02,
+      0.13
+    ]
+  },
+  {
+    "u": 0.1,
+    "reloadU": 0.09999999999999998,
+    "reloadKind": "empty",
+    "magState": "seated",
+    "handPlace": "well",
+    "rock": 0,
+    "magVisible": true,
+    "magPos": [
+      0.0006122448979591821,
+      -0.05061224489795916,
+      0.041020408163265305
+    ],
+    "workPos": [
+      0.028999999999999998,
+      0.02,
+      0.13
+    ]
+  },
+  {
+    "u": 0.16,
+    "reloadU": 0.16000000000000003,
+    "reloadKind": "empty",
+    "magState": "hand",
+    "handPlace": "well",
+    "rock": 0.24192000000000013,
+    "magVisible": true,
+    "magPos": [
+      0.009795918367346943,
+      -0.20979591836734707,
+      0.05632653061224491
+    ],
+    "workPos": [
+      0.028999999999999998,
+      0.02,
+      0.13
+    ]
+  },
+  {
+    "u": 0.22,
+    "reloadU": 0.21999999999999997,
+    "reloadKind": "empty",
+    "magState": "hand",
+    "handPlace": "below",
+    "rock": 0.27,
+    "magVisible": true,
+    "magPos": [
+      0.02999999999999997,
+      -0.5599999999999996,
+      0.08999999999999997
+    ],
+    "workPos": [
+      0.028999999999999998,
+      0.02,
+      0.13
+    ]
+  },
+  {
+    "u": 0.38,
+    "reloadU": 0.38,
+    "reloadKind": "empty",
+    "magState": "pouch",
+    "handPlace": "pouch",
+    "rock": 0.27,
+    "magVisible": true,
+    "magPos": [
+      -0.09986809288383111,
+      -0.46229510039670957,
+      -0.1825292165072829
+    ],
+    "workPos": [
+      0.028999999999999998,
+      0.02,
+      0.13
+    ]
+  },
+  {
+    "u": 0.56,
+    "reloadU": 0.56,
+    "reloadKind": "empty",
+    "magState": "hand",
+    "handPlace": "well",
+    "rock": 0.27,
+    "magVisible": true,
+    "magPos": [
+      -0.010932835225574422,
+      -0.08233959683537592,
+      0.05171977897852372
+    ],
+    "workPos": [
+      0.028999999999999998,
+      0.02,
+      0.13
+    ]
+  },
+  {
+    "u": 0.61,
+    "reloadU": 0.61,
+    "reloadKind": "empty",
+    "magState": "hand",
+    "handPlace": "well",
+    "rock": 0.1533583771600301,
+    "magVisible": true,
+    "magPos": [
+      0,
+      -0.04,
+      0.04
+    ],
+    "workPos": [
+      0.028999999999999998,
+      0.02,
+      0.13
+    ]
+  },
+  {
+    "u": 0.65,
+    "reloadU": 0.65,
+    "reloadKind": "empty",
+    "magState": "seated",
+    "handPlace": "well",
+    "rock": 0,
+    "magVisible": true,
+    "magPos": [
+      0,
+      -0.04,
+      0.04
+    ],
+    "workPos": [
+      0.028999999999999998,
+      0.02,
+      0.13
+    ]
+  },
+  {
+    "u": 0.8,
+    "reloadU": 0.8,
+    "reloadKind": "empty",
+    "magState": "seated",
+    "handPlace": "work",
+    "rock": 0,
+    "magVisible": true,
+    "magPos": [
+      0,
+      -0.04,
+      0.04
+    ],
+    "workPos": [
+      0.028999999999999998,
+      0.02,
+      0.13
+    ]
+  }
+]

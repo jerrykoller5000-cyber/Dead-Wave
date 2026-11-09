@@ -1,0 +1,20 @@
+{
+ "at": "2026-11-08T18:04:18.221Z",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "results": [
+  {
+   "id": "weapon.knife",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 149,
+   "tris": 3264,
+   "size": [
+    0.071,
+    0.129,
+    0.616
+   ],
+   "error": null
+  }
+ ]
+}

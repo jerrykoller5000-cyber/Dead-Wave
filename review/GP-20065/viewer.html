@@ -1,0 +1,31 @@
+<!doctype html><html><head><meta charset="utf-8"><title>GP-20065 optics</title>
+<style>html,body{margin:0;background:#121418;overflow:hidden}</style>
+<script type="importmap">{"imports":{"three":"../../vendor/three/three.webgpu.js","three/webgpu":"../../vendor/three/three.webgpu.js","three/tsl":"../../vendor/three/three.tsl.js","three/addons/":"../../vendor/three/addons/"}}</script>
+</head><body><script type="module">
+import * as THREE from 'three';
+import { makeOptic } from '../../studio/weapon-optics.js';
+const q = new URLSearchParams(location.search), kind = q.get('kind') || 'rmr';
+const model = makeOptic(kind), scene = new THREE.Scene(); scene.background = new THREE.Color(0x121418); scene.add(model);
+const hemi = new THREE.HemisphereLight(0xd5e4ff, 0x8d7b62, 1.25), sun = new THREE.DirectionalLight(0xfff4dc, 3.1), fill = new THREE.DirectionalLight(0xb7c1d2, 0.16);
+sun.position.set(0.12, 0.98, 0.16); fill.position.set(-1, 0.5, -1); scene.add(hemi, sun, fill);
+const renderer = new THREE.WebGPURenderer({ antialias:true, forceWebGL:true }); await renderer.init(); renderer.setSize(1280,720); document.body.appendChild(renderer.domElement);
+const camera = new THREE.PerspectiveCamera(28, 1280/720, 0.001, 10), box = new THREE.Box3().setFromObject(model), size = box.getSize(new THREE.Vector3()), centre = box.getCenter(new THREE.Vector3());
+let tris = 0; model.traverse(o => { if(o.isMesh){const g=o.geometry; tris += g.index ? g.index.count/3 : g.attributes.position.count/3;} });
+async function shoot(view='quarter', light='noon') {
+  const presets = {
+    noon: { sky:0xd5e4ff, ground:0x8d7b62, si:1.25, sun:0xfff4dc, ui:3.1, fill:0.16 },
+    overcast: { sky:0xd4d7de, ground:0x7c7e82, si:1.85, sun:0xe6e8ee, ui:0.65, fill:0.42 },
+    dusk: { sky:0xffc4a2, ground:0x4a3428, si:0.65, sun:0xffb07a, ui:1.55, fill:0.1 },
+    night: { sky:0x5468a0, ground:0x15171c, si:0.25, sun:0x8fa6d8, ui:0.35, fill:0.04 }
+  };
+  const p=presets[light]; hemi.color.setHex(p.sky); hemi.groundColor.setHex(p.ground); hemi.intensity=p.si; sun.color.setHex(p.sun); sun.intensity=p.ui; fill.intensity=p.fill;
+  const span=Math.max(size.x,size.y,size.z), d=span*0.53/Math.tan(camera.fov*Math.PI/360)*1.08;
+  if(view==='side') camera.position.set(centre.x+d,centre.y,centre.z);
+  else if(view==='sideR') camera.position.set(centre.x-d,centre.y,centre.z);
+  else if(view==='rear') camera.position.set(centre.x,centre.y+0.15*d,centre.z-d);
+  else camera.position.set(centre.x+0.7*d,centre.y+0.4*d,centre.z+0.65*d);
+  camera.lookAt(centre); await renderer.renderAsync(scene,camera);
+}
+window.VIEW = { model, scene, camera, renderer, shoot, info:{kind,tris:Math.round(tris),size:size.toArray(),sight:model.userData.sight,modes:model.userData.sightModes||null} };
+await shoot();
+</script></body></html>

@@ -256,7 +256,7 @@ export function mountBriefing({ doc = document, bus = window } = {}) {
     else if(data.type==='hq-prompt') { if(data.element)data.element.textContent=text(data.alarm?'hq.alarmSounding':'wavePreview.prompt'); }
     else if(data.type==='prep-label') data.element.textContent=text(data.alarm?'prep.alarmSounding':data.intelOwned?'prep.day':'wavePreview.prepDay',{day:data.day,count:data.total});
     else if(data.type==='prep-hud') data.element.textContent=text(data.intelOwned?'wavePreview.hudFull':'wavePreview.hudBasic',{day:data.day,count:data.total});
-    else if(data.type==='shop-render'&&data.tab==='upgrades') {
+    else if(data.type==='shop-render'&&data.mode==='kiosk'&&data.tab==='gear') {
       const offer=intelOffer(data.cash,data.intelOwned), row=doc.createElement('div');row.className='perk';row.dataset.item='field-intel';
       line(row,'div',text('fieldIntel.name'),'name');line(row,'div',text('fieldIntel.description'),'desc');
       const buy=line(row,'button',offer.label);buy.type='button';buy.disabled=!offer.enabled;

@@ -1,0 +1,34 @@
+{
+ "schema": "dw-camera-shot",
+ "schemaVersion": 2,
+ "target": "weapon:mortarCarried",
+ "label": "weapon mortarCarried",
+ "view": "three",
+ "cam": {
+  "x": -38.128576342314865,
+  "y": 31.21755347762397,
+  "z": -67.77422413435687,
+  "tx": -40,
+  "ty": 29.92130650240183,
+  "tz": -70.00450000166893,
+  "fov": 35
+ },
+ "time": 0.5002185199999929,
+ "size": [
+  1280,
+  720
+ ],
+ "center": {
+  "x": -40,
+  "y": 29.92130650240183,
+  "z": -70.00450000166893
+ },
+ "boxSize": {
+  "x": 0.5336000323295593,
+  "y": 1.3528000048398994,
+  "z": 0.26899999380111694
+ },
+ "mode": "title",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "at": "2026-11-08T08:31:48.408Z"
+}

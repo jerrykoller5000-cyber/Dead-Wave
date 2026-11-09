@@ -8,7 +8,7 @@ try{
  browser=await chromium.launch({executablePath:'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',headless:true});const page=await browser.newPage({viewport:{width:1280,height:720}}),errors=[];page.on('pageerror',e=>errors.push(e.message));
  await page.route('**/index.html?*',r=>r.fulfill({body:src,contentType:'text/html'}));await page.goto(server.origin+'/index.html?debug=1&raf=timer');await page.waitForFunction(()=>window.TT&&DWLoad.snapshot().state==='ready',null,{timeout:120000});await page.evaluate(()=>DWOpening.dismissForTesting());await page.waitForFunction(()=>document.getElementById('opening').hidden);
  await page.fill('#playerName','Grenade Tester');await page.click('#modeHunt');await page.waitForFunction(()=>TT.getPhase()==='prep'&&!document.body.classList.contains('deploying'),null,{timeout:45000});
- await page.evaluate(()=>{TT.openShop(true);grenadeStock.setup();window.grenadeReceipts=[];window.addEventListener('dw-game',({detail:e})=>{if(e.type==='purchase-delivered')grenadeReceipts.push(e);});});
+ await page.evaluate(()=>{TT.openShop(true,'armory');TT.setShopTabDbg('ammo');grenadeStock.setup();window.grenadeReceipts=[];window.addEventListener('dw-game',({detail:e})=>{if(e.type==='purchase-delivered')grenadeReceipts.push(e);});});
  const all=page.locator('[data-restock-all] button');
  for(const width of [1280,390]){await page.setViewportSize({width,height:width===390?844:720});await page.screenshot({path:path.join(shots,(before?'before':'after')+'-'+width+'.png')});}
  if(!before){

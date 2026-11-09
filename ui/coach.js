@@ -27,7 +27,7 @@ export function createCoach({ load = () => null, save = () => {} } = {}) {
     if (event.type === 'prep-state') prep = {day:event.day,phase:event.phase,cash:event.cash};
     if (event.type === 'purchase-delivered' && event.cashSpent > 0) {
       if (event.source === 'build') { profile.built = true; if(card === 'build') card = null; persist(); }
-      if (event.source === 'kiosk' && /^dual:/.test(event.itemId || '')) pairBought = true;
+      if (event.source === 'armory' && /^dual:/.test(event.itemId || '')) pairBought = true;
     }
     const warning = event.type === 'cave-guardian' && event.warning === true ? 'caveWarning' :
       event.type === 'pit-near' ? 'pitWarning' : null;
@@ -48,7 +48,7 @@ export function createCoach({ load = () => null, save = () => {} } = {}) {
       processing = false; profile.banked = true; persist();
       if (card === 'pickup' || card === 'bank') card = null;
     } else if (event.type === 'purchase-delivered' && event.cashSpent > 0 &&
-        ['kiosk', 'build', 'upgrade', 'repair'].includes(event.source)) {
+        ['kiosk', 'armory', 'build', 'upgrade', 'repair'].includes(event.source)) {
       profile.purchased = true; purchasePending = !profile.purchaseShown; persist();
     }
   }

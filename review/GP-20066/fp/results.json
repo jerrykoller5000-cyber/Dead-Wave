@@ -1,0 +1,9 @@
+{
+  "setup": {
+    "backend": "WebGPU",
+    "fp": 1,
+    "laserError": 0.00017987867156871008,
+    "whiteError": 0.00015505271423337481
+  },
+  "errors": []
+}

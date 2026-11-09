@@ -1,0 +1,53 @@
+{
+  "captures": [
+    "minigun-hip",
+    "minigun-ads",
+    "chainsaw-hip",
+    "chainsaw-ads",
+    "launcher-swing",
+    "launcher-insert1",
+    "launcher-insert2",
+    "launcher-wind",
+    "launcher-close"
+  ],
+  "errors": [],
+  "setup": {
+    "backend": "WebGPU",
+    "fp": 0
+  },
+  "minigun": {
+    "weapon": "minigun",
+    "view": "minigun",
+    "ads": 1
+  },
+  "chainsaw": {
+    "weapon": "chainsaw",
+    "view": "chainsaw",
+    "ads": 1
+  },
+  "launcher": {
+    "weapon": "launcher",
+    "view": "launcher",
+    "reload": true,
+    "swing": {
+      "u": 0.18,
+      "handPlace": "drumOut"
+    },
+    "insert1": {
+      "u": 0.44,
+      "handPlace": "load"
+    },
+    "insert2": {
+      "u": 0.61,
+      "handPlace": "load"
+    },
+    "wind": {
+      "u": 0.83,
+      "handPlace": "wind"
+    },
+    "close": {
+      "u": 0.96,
+      "handPlace": "fore"
+    }
+  }
+}

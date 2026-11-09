@@ -43,14 +43,14 @@ test('twenty-night budget includes the late skull trim and purchasable mod sinks
   assert.equal(r.ammo,Math.ceil(r.shots/(r.weapon==='pistol'?12:30))*(r.weapon==='pistol'?3:12),'full-mag upkeep');
  }
  assert.equal(rows[0].cost,39);assert.equal(rows[1].upkeep,36);assert.equal(rows[2].upkeep,110);
- assert.equal(rows[6].purchase,'Laser sight + AK suppressor');
+ assert.equal(rows[6].purchase,'Laser/light + AK suppressor');
  assert.equal(rows[7].purchase,'Helmet + night vision + AK extended mag + heavy barrel');
  assert.equal(rows[7].cost,400,'the heavy barrel is a paid mod alongside the extended mag');
  assert.match(rows[11].purchase,/M4 suppressor/);
  assert.equal(rows[11].cost,565,'the launcher and second suppressor are both counted');
  for(const night of [11,13,15,16,17,18,19,20])assert(rows[night-1].cost>=500,'Night '+night+' needs a useful late sink');
  assert.match(rows[19].purchase,/Mk III/);
- assert.equal(rows[19].afterPurchase,4206,'D-93 (Jerry): the late payout and the owned sinks end night 20 at about $4,200');
+ assert.equal(rows[19].afterPurchase,4176,'D-93 (Jerry): the late payout and the owned sinks end night 20 at about $4,200; D-123 combo is 90 Cash');
  // D-93: from night 11 the reserve holds near Jerry's ~$4,200 (it was GB-53's 2-3k band).
  for(const r of rows.slice(10))assert(r.afterPurchase>=3500&&r.afterPurchase<=5000,'night '+r.night+' stays near the D-93 reserve');
 });

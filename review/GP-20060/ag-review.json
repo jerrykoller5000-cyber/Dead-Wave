@@ -1,0 +1,31 @@
+{
+  "setup": {
+    "backend": "WebGPU",
+    "weapon": "launcher",
+    "vm": "launcher",
+    "tris": 15840,
+    "deltaTris": 3152,
+    "bounds": [
+      0.213,
+      0.277,
+      0.828
+    ],
+    "floats": 0
+  },
+  "verdict": "PASS",
+  "features": {
+    "silhouette": "PASS (M32A1 4-quadrant barrel rail, matte stainless receiver steel #858a8d, ambidextrous safety selector, spring housing)",
+    "sightClearance": "PASS (M2A1 reflex hood on receiver rail, clean rectangular window, unobstructed view in ADS, backup leaf retained)",
+    "handClearance": "PASS (support hand grips lower rail assembly cleanly; firing hand firmly seated on pistol grip; zero clipping)",
+    "openDrumHinge": "PASS (cylinder swings open -0.65 PI on drumHinge.rotation.z for reload contracts with 0 geometry binding)",
+    "adjustableStock": "PASS (fpStock pivot gun-local [0,0.04,-0.25] angles cleanly by 0.18 rad on X without moving rest pose)",
+    "fourLightMaterial": "PASS (matte stainless frame, black quad rails, and olive stock read authentically with balanced specularity across all lights)"
+  },
+  "lightingReadability": {
+    "noon": "Direct overhead light highlights matte stainless receiver chamfers and Picatinny rail teeth",
+    "overcast": "Diffuse storm illumination preserves clear separation between cylinder chambers and frame housing",
+    "dusk": "Warm rim lighting grazes M2A1 optic hood, side quadrant sight frame, and cylinder locking grooves",
+    "night": "Flashlight beam casts clean shadows through quad-rail vents and barrel sleeve without obscuring sights"
+  },
+  "errors": []
+}

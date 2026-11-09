@@ -1,0 +1,31 @@
+{
+  "setup": {
+    "backend": "WebGPU",
+    "weapon": "sniper",
+    "vm": "sniper",
+    "tris": 14290,
+    "deltaTris": 1904,
+    "bounds": [
+      0.152,
+      0.295,
+      1.335
+    ],
+    "floats": 0
+  },
+  "verdict": "PASS",
+  "features": {
+    "silhouette": "PASS (Barrett MRAD upper/lower receiver geometry, continuous rail over barrel extension, 3/6/9 handguard slots)",
+    "foldingStock": "PASS (fpStock pivot gun-local [0,0,-0.26] on Y, -2.7 rad folds cleanly to +x ejection side with complete clearance of bolt/chassis)",
+    "boltAction": "PASS (bolt retraction -0.09m on z exposes open chamber and brass casing cleanly with zero clipping; driven by boltPoseHook)",
+    "firstPersonGrip": "PASS (support hand grips lower handguard cleanly; firing hand wraps pistol grip; trigger finger inside guard; 0 clipping)",
+    "fourLightMaterial": "PASS (matte tan chassis, black anodized rail, and steel barrel/scope read crisply across noon, overcast, dusk, and night)",
+    "portedBrake": "PASS (heavy 3-port side-vented muzzle brake with top blast baffles aligns accurately with barrel bore)"
+  },
+  "lightingReadability": {
+    "noon": "Sharp directional shadows define Picatinny rail slots, cheek piece, and handguard vents",
+    "overcast": "Soft diffuse lighting maintains full contrast on receiver markings and bolt handle",
+    "dusk": "Warm 20-degree sun angle highlights cheek riser, scope turrets, and ported brake bevels",
+    "night": "High-intensity flashlight illuminates barrel fluting, optics hood, and receiver with zero bloom wash"
+  },
+  "errors": []
+}

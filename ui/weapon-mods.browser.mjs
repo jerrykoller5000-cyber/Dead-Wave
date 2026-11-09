@@ -30,7 +30,7 @@ try {
   await page.click('#modeHunt');
   await page.waitForFunction(() => TT.getPhase() === 'prep' && !document.body.classList.contains('deploying'), null, { timeout: 45000 });
   await page.evaluate(() => {
-    TT.grantAllWeapons(); TT.addCash(200 - TT.getBank()); TT.openShop(true); TT.setShopTabDbg('upgrades');
+    TT.grantAllWeapons(); TT.addCash(200 - TT.getBank()); TT.openShop(true, 'armory'); TT.setShopTabDbg('upgrades');
     window.modReceipts = [];
     window.addEventListener('dw-game', ({ detail }) => { if (detail.type === 'purchase-delivered') modReceipts.push(detail); });
   });

@@ -1,0 +1,272 @@
+[
+  {
+    "u": 0,
+    "file": "m240-reload-u00-rest.png",
+    "label": "1. M240 Rest: Mounted Firing Grip (Left Rest, Right Spade)",
+    "feedCoverRotX": 0,
+    "chargerPosZ": 0.06,
+    "distLhToCatchMm": 345,
+    "distLhToTrayMm": 372,
+    "distRhToKnobMm": 430,
+    "lhWorld": [
+      42.151274213648804,
+      -6.67933589791798,
+      -19.16760877560647
+    ],
+    "rhWorld": [
+      42.39987481149376,
+      -6.824885238060169,
+      -18.75462667953152
+    ],
+    "catchWorld": [
+      42.07508724353268,
+      -6.638895058465117,
+      -18.833612097424147
+    ],
+    "knobWorld": [
+      42.00214188817936,
+      -6.6972972595939,
+      -18.654145782936748
+    ]
+  },
+  {
+    "u": 0.18,
+    "file": "m240-reload-u18-cover-rising.png",
+    "label": "2. Cover Rising: Cover Opens (+1.05 rad), Left Hand at Rear Catch",
+    "feedCoverRotX": 1.05,
+    "chargerPosZ": 0.06,
+    "distLhToCatchMm": 365,
+    "distLhToTrayMm": 305,
+    "distRhToKnobMm": 418,
+    "lhWorld": [
+      42.14474389689595,
+      -6.584301451010141,
+      -19.096673518976367
+    ],
+    "rhWorld": [
+      42.39938261096885,
+      -6.807108920928932,
+      -18.724506751212925
+    ],
+    "catchWorld": [
+      41.9885195517536,
+      -6.450098353378319,
+      -18.794861132689068
+    ],
+    "knobWorld": [
+      42.002139275280896,
+      -6.697297248129799,
+      -18.65414574620397
+    ]
+  },
+  {
+    "u": 0.35,
+    "file": "m240-reload-u35-belt-lay.png",
+    "label": "3. Belt Lay: Cover Open, Left Hand Down at Tray Laying Belt",
+    "feedCoverRotX": 1.05,
+    "chargerPosZ": 0.06,
+    "distLhToCatchMm": 386,
+    "distLhToTrayMm": 303,
+    "distRhToKnobMm": 418,
+    "lhWorld": [
+      42.13824300078142,
+      -6.629885335009177,
+      -19.10133526408209
+    ],
+    "rhWorld": [
+      42.3994687931807,
+      -6.807335583017344,
+      -18.724690268371965
+    ],
+    "catchWorld": [
+      41.988519551753484,
+      -6.450098353378312,
+      -18.794861132689654
+    ],
+    "knobWorld": [
+      42.00213927527417,
+      -6.69729724812977,
+      -18.654145746203877
+    ]
+  },
+  {
+    "u": 0.5,
+    "file": "m240-reload-u50-mid-tray.png",
+    "label": "4. Tray Seated: First Round in Feed Tray Pawls",
+    "feedCoverRotX": 1.0469280258855451,
+    "chargerPosZ": 0.06,
+    "distLhToCatchMm": 366,
+    "distLhToTrayMm": 306,
+    "distRhToKnobMm": 418,
+    "lhWorld": [
+      42.14474232281355,
+      -6.584397507100913,
+      -19.097480769337448
+    ],
+    "rhWorld": [
+      42.399539361042336,
+      -6.807679074941541,
+      -18.724774479859285
+    ],
+    "catchWorld": [
+      41.98901329965578,
+      -6.450454158421988,
+      -18.795082143655446
+    ],
+    "knobWorld": [
+      42.00213927527417,
+      -6.69729724812977,
+      -18.654145746203877
+    ]
+  },
+  {
+    "u": 0.6,
+    "file": "m240-reload-u60-cover-closing.png",
+    "label": "5. Cover Closing: Left Hand on Rear Catch Snapping Shut",
+    "feedCoverRotX": 0,
+    "chargerPosZ": 0.06,
+    "distLhToCatchMm": 282,
+    "distLhToTrayMm": 319,
+    "distRhToKnobMm": 419,
+    "lhWorld": [
+      42.168554220522864,
+      -6.690124962200788,
+      -19.094550605993966
+    ],
+    "rhWorld": [
+      42.399567503578304,
+      -6.807815917427112,
+      -18.724808710163906
+    ],
+    "catchWorld": [
+      42.07508786085559,
+      -6.638895074828182,
+      -18.83361075676393
+    ],
+    "knobWorld": [
+      42.00213927527417,
+      -6.69729724812977,
+      -18.654145746203877
+    ]
+  },
+  {
+    "u": 0.78,
+    "file": "m240-reload-u78-reach-charger.png",
+    "label": "6. Charger Reach: Right Hand Reaches for Charging Handle Knob",
+    "feedCoverRotX": 0,
+    "chargerPosZ": -0.1279352494036501,
+    "distLhToCatchMm": 316,
+    "distLhToTrayMm": 339,
+    "distRhToKnobMm": 281,
+    "lhWorld": [
+      42.12305473120548,
+      -6.706982546782814,
+      -19.137968400703322
+    ],
+    "rhWorld": [
+      42.41896651275235,
+      -6.818255203692179,
+      -18.634065622641643
+    ],
+    "catchWorld": [
+      42.07508786085559,
+      -6.638895074828182,
+      -18.83361075676393
+    ],
+    "knobWorld": [
+      42.17187470815962,
+      -6.724446183762963,
+      -18.730122559019268
+    ]
+  },
+  {
+    "u": 0.82,
+    "file": "m240-reload-u82-charger-pull.png",
+    "label": "7. Charger Pull: Handle Retracted Full (-0.19m) to Sear",
+    "feedCoverRotX": 0,
+    "chargerPosZ": 0.0020992592921331016,
+    "distLhToCatchMm": 316,
+    "distLhToTrayMm": 339,
+    "distRhToKnobMm": 292,
+    "lhWorld": [
+      42.122980934042765,
+      -6.70800396209258,
+      -19.138001526644416
+    ],
+    "rhWorld": [
+      42.3431623052632,
+      -6.728301896165162,
+      -18.64393323104752
+    ],
+    "catchWorld": [
+      42.07508786085559,
+      -6.638895074828182,
+      -18.83361075676393
+    ],
+    "knobWorld": [
+      42.05443285681155,
+      -6.705661530442854,
+      -18.677553349368228
+    ]
+  },
+  {
+    "u": 0.88,
+    "file": "m240-reload-u88-charger-forward.png",
+    "label": "8. Charger Return: Handle Returned Forward to Battery",
+    "feedCoverRotX": 0,
+    "chargerPosZ": 0.06,
+    "distLhToCatchMm": 316,
+    "distLhToTrayMm": 339,
+    "distRhToKnobMm": 331,
+    "lhWorld": [
+      42.12305132757637,
+      -6.708455598391884,
+      -19.137961469767315
+    ],
+    "rhWorld": [
+      42.331763123768646,
+      -6.711198171275377,
+      -18.674012867665436
+    ],
+    "catchWorld": [
+      42.07508786085559,
+      -6.638895074828182,
+      -18.83361075676393
+    ],
+    "knobWorld": [
+      42.00213927527417,
+      -6.69729724812977,
+      -18.654145746203877
+    ]
+  },
+  {
+    "u": 1,
+    "file": "m240-reload-u100-ready.png",
+    "label": "9. Cycle Complete: Both Hands Returned to Firing Grips",
+    "feedCoverRotX": 0,
+    "chargerPosZ": 0.06,
+    "distLhToCatchMm": 316,
+    "distLhToTrayMm": 339,
+    "distRhToKnobMm": 418,
+    "lhWorld": [
+      42.12319406541918,
+      -6.708877652604435,
+      -19.13788347411837
+    ],
+    "rhWorld": [
+      42.399233153301914,
+      -6.806194004154899,
+      -18.724421694964306
+    ],
+    "catchWorld": [
+      42.07508786085559,
+      -6.638895074828182,
+      -18.83361075676393
+    ],
+    "knobWorld": [
+      42.00213927527417,
+      -6.69729724812977,
+      -18.654145746203877
+    ]
+  }
+]

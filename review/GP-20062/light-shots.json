@@ -1,0 +1,10 @@
+{
+  "out": "review/GP-20062/lights",
+  "cols": 4,
+  "shots": [
+    {"target":"weapon:m240","view":"three","time":"noon","out":"review/GP-20062/lights/noon.png","caption":"noon","pre":"T.weather.raining=false;T.weather.rainTimeLeft=0;T.weather.intensity=0;"},
+    {"target":"weapon:m240","view":"three","time":"noon","out":"review/GP-20062/lights/overcast.png","caption":"overcast rain","pre":"T.weather.raining=true;T.weather.rainTimeLeft=100;T.weather.intensity=1;"},
+    {"target":"weapon:m240","view":"three","time":"dusk","out":"review/GP-20062/lights/dusk.png","caption":"dusk","pre":"T.weather.raining=false;T.weather.rainTimeLeft=0;T.weather.intensity=0;"},
+    {"target":"weapon:m240","view":"three","time":"night","out":"review/GP-20062/lights/night.png","caption":"night","pre":"T.weather.raining=false;T.weather.rainTimeLeft=0;T.weather.intensity=0;"}
+  ]
+}

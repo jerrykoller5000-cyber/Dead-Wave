@@ -1,0 +1,12 @@
+{
+  "out": "review/GP-20062/before",
+  "cols": 3,
+  "shots": [
+    {"target":"weapon:m240","view":"side","time":"noon","caption":"mounted left"},
+    {"target":"weapon:m240","view":"right","time":"noon","caption":"mounted right"},
+    {"target":"weapon:m240","view":"top","time":"noon","caption":"mounted top"},
+    {"target":"weapon:m240","view":"three","time":"noon","caption":"mounted front quarter"},
+    {"target":"weapon:m240Carried","view":"side","time":"noon","caption":"folded left"},
+    {"target":"weapon:m240Carried","view":"right","time":"noon","caption":"folded right"}
+  ]
+}

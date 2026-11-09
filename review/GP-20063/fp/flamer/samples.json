@@ -1,0 +1,29 @@
+{
+  "setup": {
+    "backend": "WebGPU",
+    "weapon": "flamer",
+    "view": {
+      "tune": {},
+      "active": true,
+      "key": "flamer",
+      "akimbo": false,
+      "raise": 1,
+      "ads": 0,
+      "wrist": {
+        "r": 0.87,
+        "l": 0.87
+      },
+      "magState": "seated",
+      "handPlace": "fore",
+      "reloadU": null,
+      "hack": true,
+      "filter": true,
+      "flip": true,
+      "wristMax": 0.87,
+      "blade": null,
+      "hands": null,
+      "reloadKind": null
+    }
+  },
+  "errors": []
+}

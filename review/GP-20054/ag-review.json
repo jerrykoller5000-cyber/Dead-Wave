@@ -1,0 +1,30 @@
+{
+  "setup": {
+    "backend": "WebGPU",
+    "weapon": "uzi",
+    "vm": "uzi",
+    "tris": 10116,
+    "deltaTris": 960,
+    "bounds": [
+      0.064,
+      0.257,
+      0.337
+    ],
+    "floats": 0
+  },
+  "verdict": "PASS",
+  "features": {
+    "silhouette": "PASS (Classic stockless Micro UZI profile preserved under J44, top cover catch, barrel latch, heel magazine release)",
+    "cockingKnobClearance": "PASS (RMR bridge rail z -.009.. .079 at top y .145 clears reciprocating top cocking knob with 4mm margin)",
+    "suppressorSeating": "PASS (Suppressor can seats firmly around barrel nut z .34, extending forward to established suppressed muzzle point)",
+    "handClearance": "PASS (Firing hand firmly depresses backstrap grip safety; fingers wrap around grip and clear heel release)",
+    "fourLightMaterial": "PASS (Parkerized stamped receiver metal, ribbed polymer grip panels, and steel controls read authentically in all lights)"
+  },
+  "lightingReadability": {
+    "noon": "Sharp sun highlights top charging slide slot, front post protector wings, and barrel nut serrations",
+    "overcast": "Soft storm lighting clearly displays selector switch index markings (A/R/S) and lower frame stamped ribs",
+    "dusk": "Low grazing light illuminates rear sight aperture, top cover latch, and grip safety contour",
+    "night": "Weapon-mounted flashlight reflects cleanly from barrel nut and suppressor cylinder"
+  },
+  "errors": []
+}

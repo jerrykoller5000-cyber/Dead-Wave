@@ -9,8 +9,9 @@
   const okReal = real ? ok : (c, m) => out.push('INFO ' + m + (c ? '' : ' (would fail; INFO on the test page)'));
   // GB-233 (rule 13, with t277's iron-sight ruling 2026-10-26): the pistol's and revolver's rear is the notch, not the slide's or rib's mid-top (was .075@.072, .109@.081).
   // GB-259 (Claude 2026-11-02/03): RF tracks game/sight-points.js — pistol ears .092, uzi aperture centre .126 + front .126@.198, aa12 ring .168 / post .168@.75, launcher leaf .137 / post .137@.29.
-  const RF = { pistol: [[0,.092,-.064],[0,.092,.282]], revolver: [[0,.114,-.05],[0,.121,.318]], uzi: [[0,.126,-.08],[0,.126,.198]],
-    m4: [[0,.134,.0455],[0,.138,.673]], ak: [[0,.090,.218],[0,.090,.84]], aa12: [[0,.168,-.12],[0,.168,.75]], launcher: [[0,.137,-.2],[0,.137,.29]] };
+  // CL-322 (t284's datums): the revolver's rear notch floor 0.120 on CL-320's strap; the launcher through the M2A1's dot (no front post).
+  const RF = { pistol: [[0,.092,-.064],[0,.092,.282]], revolver: [[0,.120,-.05],[0,.121,.318]], uzi: [[0,.126,-.08],[0,.126,.198]],
+    m4: [[0,.134,.0455],[0,.138,.673]], ak: [[0,.074,.218],[0,.0745,.84]], aa12: [[0,.168,-.12],[0,.168,.75]], launcher: [[0,.17,-.0145],null] };
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
   try {
     await startMatch(T, 'Sights');

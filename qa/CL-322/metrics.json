@@ -1,0 +1,75 @@
+{
+  "setup": {
+    "backend": "WebGPU",
+    "weapon": "shotgun",
+    "basePumpPos": [
+      0,
+      -0.006,
+      0.375
+    ],
+    "ejectPort": [
+      0.028499999999999998,
+      0.018,
+      0.1
+    ]
+  },
+  "fpClosedMetrics": {
+    "pumpZ": 0.375,
+    "basePumpZ": 0.375,
+    "boltPartsVisible": [
+      {
+        "name": "",
+        "visible": true,
+        "posZ": 0.09675
+      },
+      {
+        "name": "",
+        "visible": true,
+        "posZ": 0.134
+      },
+      {
+        "name": "",
+        "visible": true,
+        "posZ": 0.133
+      }
+    ],
+    "vmActive": true,
+    "handPlace": "fore"
+  },
+  "fpRackedMetrics": {
+    "pumpZ": 0.255,
+    "basePumpZ": 0.255,
+    "travelApplied": 0.12,
+    "boltPartsVisible": [
+      {
+        "name": "",
+        "visible": true,
+        "posZ": 0.09675
+      },
+      {
+        "name": "",
+        "visible": true,
+        "posZ": 0.134
+      },
+      {
+        "name": "",
+        "visible": true,
+        "posZ": 0.133
+      }
+    ],
+    "vmActive": true,
+    "handPlace": "fore"
+  },
+  "fireEjectMetrics": {
+    "shellFound": false,
+    "casingPos": null,
+    "pumpZDuringFire": 0.375,
+    "casingsCount": 0
+  },
+  "tpFireEjectMetrics": {
+    "shellFound": false,
+    "casingPos": null,
+    "casingsCount": 0
+  },
+  "errors": []
+}

@@ -1,0 +1,30 @@
+{
+  "setup": {
+    "backend": "WebGPU",
+    "weapon": "revolver",
+    "vm": "revolver",
+    "tris": 11686,
+    "deltaTris": 448,
+    "bounds": [
+      0.064,
+      0.237,
+      0.37
+    ],
+    "floats": 0
+  },
+  "verdict": "PASS",
+  "features": {
+    "silhouette": "PASS (Classic Smith & Wesson large-frame revolver profile, target hammer spur, serrated top rib, fluted cylinder)",
+    "underlugSaddle": "PASS (Underlug saddle rail clamps flush against full-length underlug shroud with zero geometry separation or clipping)",
+    "attachmentFit": "PASS (Combined laser/light unit mounts securely onto underlug Picatinny rail; support hand clears unit during 2-handed grip)",
+    "sightPicture": "PASS (SIGHT.revolver rear notch at 0.120 provides clean, crisp framing for ramp front blade in ADS)",
+    "fourLightMaterial": "PASS (Deep blued steel specular sheen, checkered walnut grip stocks, and polished cylinder crane authentic across all lights)"
+  },
+  "lightingReadability": {
+    "noon": "Deep blued steel reflections highlight cylinder flutes, top strap serrations, and ejector shroud",
+    "overcast": "Soft overcast lighting shows subtle contrast between blued frame and rich walnut wood grain",
+    "dusk": "Low-angle warm light catches hammer checkering, trigger curve, and cylinder release thumbpiece",
+    "night": "Weapon flashlight beam illuminates cylinder face and barrel bore with realistic falloff"
+  },
+  "errors": []
+}

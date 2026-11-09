@@ -336,7 +336,7 @@ export function createViewmodel(ctx) {
     // MU-11 (finding 3): the palm ride and the slide's grab work in the gun root's space: a magazine or slide deeper in the
     // gun's tree is left to his own gun's animation (mirrored) instead.
     const direct = (o) => (o && o.parent === src ? o : null);
-    const gun = { key, src, root: r, pairs, slide: map.get(direct(ud.slide)) || null,
+    const gun = { key, src, root: r, pairs, slide: map.get(direct(ud.slide)) || null, recoilBolt: map.get(ud.recoilBolt) || null,   // CL-322: the Breacher's stroke
       work: map.get(direct(ud.work || ud.slide)) || null, mag: map.get(direct(ud.mag)) || null,
       pump: map.get(direct(ud.pump)) || null, bolt: map.get(direct(ud.bolt)) || null,
       cylinder: map.get(direct(ud.cylinder)) || null, shell: map.get(direct(ud.reloadShell)) || null,
@@ -469,6 +469,9 @@ export function createViewmodel(ctx) {
 
   const _pz = V3(), _py = V3(), _pat = V3(), _px = V3(), _pinv = Q(), _pg = V3(), _ppalm = V3();
   // The left hand's places through a reload, as wrist frames in the gun's own space.
+  let rockNow = 0;   // CL-322: the rock's angle while the hand's places are worked out (reloadHand)
+  const _rkPivot = V3(), _rkQ = Q();
+  const rockAngle = (R, u) => R.rock.angle * (smooth((u - R.rock.out[0]) / (R.rock.out[1] - R.rock.out[0])) - smooth((u - R.rock.in[0]) / (R.rock.in[1] - R.rock.in[0])));
   function placeFrame(name, R, u, out) {
     const pl = R.places, arm = arms.l, sL = sockets.l;
     if (name === 'fore' || !gun) { out.p.copy(sL.p); out.q.copy(sL.q); out.s = sL.s; return out; }
@@ -507,6 +510,15 @@ export function createViewmodel(ctx) {
       if (gun.foot) at.copy(gun.foot); else at.set(0, 0, 0);
       if (name === 'below') at.y -= pl.below.drop;
       z.set(...pl.well.z); y.set(...pl.well.y);
+      if (rockNow && R.rock && R.rock.pivot && gun.magBase) {
+        // CL-322 (the AK manual): the magazine rocks on its front lug, in and out; the palm holding it turns with it
+        // about that lug (the bottom forward on the way out, back on the way in), so the hand never leaves the magazine.
+        _pm.compose(gun.magBase.pos, gun.magBase.quat, gun.magBase.scale);
+        _rkPivot.set(...R.rock.pivot).applyMatrix4(_pm);
+        _rkQ.setFromAxisAngle(AX_X, -rockNow);
+        at.sub(_rkPivot).applyQuaternion(_rkQ).add(_rkPivot);
+        z.applyQuaternion(_rkQ); y.applyQuaternion(_rkQ);
+      }
     }
     z.normalize(); y.addScaledVector(z, -y.dot(z)).normalize();
     const x = _px.crossVectors(y, z);
@@ -559,7 +571,10 @@ export function createViewmodel(ctx) {
     const K = R.hand;
     let i = 0; while (i < K.length - 1 && u >= K[i + 1][0]) i++;
     const j = Math.min(K.length - 1, i + 1), t = j === i ? 0 : smooth((u - K[i][0]) / (K[j][0] - K[i][0]));
+    rockNow = R.rock && R.rock.pivot ? rockAngle(R, u) : 0;
+    info.rock = rockNow;
     placeFrame(K[i][1], R, u, _ka); placeFrame(K[j][1], R, u, _kb);
+    rockNow = 0;
     lerpF(_ka, _kb, t, out);
     lerpPose(fingerPose(K[i][2]), fingerPose(K[j][2]), t, _pa);
     info.handPlace = t < 0.5 ? K[i][1] : K[j][1];
@@ -664,6 +679,25 @@ export function createViewmodel(ctx) {
     const rear = sg.notch ? new T.Vector3(0, sg.notch[1], sg.notch[0]) : new T.Vector3(sg.pos[0], sg.pos[1], sg.pos[2]);
     return (adsCache[key] = { q, rear });
   }
+  // CL-323: a fitted optic's sight line (index.html's mount.userData.line, in the gun's own space), level along the optic's
+  // axis. A red dot keeps the gun where its irons held it (the rear point at the irons' z, P.ads.rear ahead); a magnified
+  // optic (the prism, the ACOG) comes up to the eye, its eye point VM.opticRelief ahead, and the world's glass takes over
+  // (index.html's #scopeOverlay; the view hides at 82%, as the sniper's). The ACOG's RMR on top: top (st.opticTop 0..1)
+  // blends the two lines and the two reliefs (J51).
+  const _optQ = Q(), _optRear = V3(), _optAd = { q: _optQ, rear: _optRear, relief: 0, magW: 0 };
+  let _optQSet = false;
+  function opticAds(key, src, P, top) {
+    const m = src && src.userData.fittedOptic, L = m && m.userData.line;
+    if (!L || !P.ads) return null;
+    if (!_optQSet) { const mm = M4(); mm.set(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1); _optQ.setFromRotationMatrix(mm); _optQSet = true; }   // the gun's +z onto the view's -z
+    const sg = SIGHT[key], ironZ = sg ? (sg.notch ? sg.notch[0] : sg.pos[2]) : L.eye[2];
+    const R = VM.opticRelief || { acog: 0.10, prism: 0.12 }, mag = R[L.kind] != null;
+    const t = L.topEye ? Math.min(1, Math.max(0, top || 0)) : 0;
+    let y = L.eye[1], z = mag ? L.eye[2] : ironZ, d = mag ? R[L.kind] : P.ads.rear;
+    if (t > 0) { y += (L.topEye[1] - L.eye[1]) * t; z += (ironZ - z) * t; d += (P.ads.rear - d) * t; }
+    _optRear.set(0, y, z); _optAd.relief = d; _optAd.magW = mag ? 1 - t : 0;
+    return _optAd;
+  }
   function gunFrame(P, key, st, dt, AK = null) {
     // CL-301 (GP-20022): the view's own grip point (VM_SOCKETS grip) when it has one, so the view holds still when the third
     // person's hold (WEAPON_HOLD grip) moves; the hold's grip otherwise.
@@ -675,12 +709,17 @@ export function createViewmodel(ctx) {
     _hipP.set(HP.at[0] * MX, HP.at[1], HP.at[2]).sub(_gp.copy(grip).multiplyScalar(s).applyQuaternion(_hipQ));
     // down the sights: the sight line onto the view's centre line, the rear sight P.ads.rear ahead of the eye. A pair
     // has no sights: right-click brings both guns in and up a little (VM.akimbo.aim).
-    const ad = AK ? null : adsOf(key);
+    const AP = !AK && P.ads && P.ads.pose;   // CL-322: a sightless gun's raised pose instead of a sight line (the saw: J60)
+    const OA = AK || AP ? null : opticAds(key, gun.src, P, st.opticTop);   // CL-323: a fitted optic's line
+    const ad = AK || AP ? null : OA || adsOf(key);
     if (ad) {
       _adsQ.copy(ad.q);
-      _adsP.set(0, 0, -P.ads.rear).sub(_gp.copy(ad.rear).multiplyScalar(s).applyQuaternion(_adsQ));
+      _adsP.set(0, 0, -(OA ? OA.relief : P.ads.rear)).sub(_gp.copy(ad.rear).multiplyScalar(s).applyQuaternion(_adsQ));
+    } else if (AP) {
+      eulerQ(AP.yaw * MX, AP.pitch, AP.roll * MX, _adsQ).multiply(BORE_AHEAD);
+      _adsP.set(AP.at[0] * MX, AP.at[1], AP.at[2]).sub(_gp.copy(grip).multiplyScalar(s).applyQuaternion(_adsQ));
     } else { _adsQ.copy(_hipQ); _adsP.copy(_hipP); }
-    const a = smooth(st.ads || 0);
+    const a = smooth(OA && OA.magW > 0 ? Math.min(1, (st.ads || 0) / (1 - 0.25 * OA.magW)) : (st.ads || 0));   // CL-323: a magnified optic at the eye by 75% of the aim, before its glass
     G.p.copy(_hipP).lerp(_adsP, a); G.q.copy(_hipQ).slerp(_adsQ, a); G.s = s;
     if (AK && VM.akimbo && VM.akimbo.aim) { const am = VM.akimbo.aim; G.p.x -= am.in * a * MX; G.p.y += am.up * a; G.p.z -= am.fwd * a; }
     // the pivot for the offsets' turns: the grip
@@ -852,7 +891,7 @@ export function createViewmodel(ctx) {
     info.active = active; info.key = gun ? gun.key : null; info.raise = S.raise; info.akimbo = !!gun2; info.blade = BL ? st.blade.kind : null;
     info.hands = HN ? st.hands.kind : null;
     // The world's scope mask owns the full sniper sight picture above 82% ADS.
-    root.visible = active && !(gun && gun.key === 'sniper' && (st.ads || 0) >= 0.82);
+    root.visible = active && !(gun && ((gun.key === 'sniper' && (st.ads || 0) >= 0.82) || (st.opticGlass && (st.ads || 0) >= 0.88)));   // CL-323: a magnified optic's glass too (full at 88%)
     setEyeHide(active, active ? gun.src : null, active && gun2 ? gun2.src : null);
     if (!active) { S.camQ = null; S.lastPlace = null; if (blade) blade.root.visible = false; return; }
     syncArmMaterials();
@@ -888,6 +927,8 @@ export function createViewmodel(ctx) {
     S.slideT += dt;
     if (gun.slide && P.slideKick) { const t = S.slideT, k = t < 0.018 ? t / 0.018 : t < 0.075 ? 1 - (t - 0.018) / 0.057 : 0; gun.slide.position.z -= P.slideKick * k; }
     if (gun.work && gun.work !== gun.slide && P.workKick) { const t = S.slideT, k = t < 0.018 ? t / 0.018 : t < 0.075 ? 1 - (t - 0.018) / 0.057 : 0; gun.work.position.z -= P.workKick * k; }
+    // CL-322: a constant-recoil bolt's long stroke (the Breacher: back in 0.04 s, home by 0.13 s), drawn by the model's own pose
+    if (gun.recoilBolt && P.boltStroke && gun.src.userData.recoilBoltPose) { const t = S.slideT, k = t < 0.04 ? t / 0.04 : t < 0.13 ? 1 - (t - 0.04) / 0.09 : 0; gun.src.userData.recoilBoltPose(gun.recoilBolt, P.boltStroke * k); }
     if (gun2) {   // CL-301: the left gun's action on its own shots
       S.slideT2 += dt; const t = S.slideT2, k = t < 0.018 ? t / 0.018 : t < 0.075 ? 1 - (t - 0.018) / 0.057 : 0;
       if (gun2.slide && P.slideKick) gun2.slide.position.z -= P.slideKick * k;
@@ -1034,7 +1075,7 @@ export function createViewmodel(ctx) {
         const local = placeLocalOfWrist(_local2);
         const out = mul(local, _mrel, _outF);
         gun.mag.position.copy(out.p); gun.mag.quaternion.copy(out.q); gun.mag.scale.setScalar(out.s);
-        if (R.rock && gun.magFootLocal) {
+        if (R.rock && !R.rock.pivot && gun.magFootLocal) {   // CL-322: with a pivot the palm's frame turns instead (placeFrame)
           const rock = R.rock;
           const angle = rock.angle * (smooth((u - rock.out[0]) / (rock.out[1] - rock.out[0])) - smooth((u - rock.in[0]) / (rock.in[1] - rock.in[0])));
           _rockPivot.copy(gun.magFootLocal).multiplyScalar(out.s).applyQuaternion(gun.mag.quaternion);
@@ -1278,17 +1319,21 @@ export function createViewmodel(ctx) {
     out.x = v.x * MX / (Math.max(1e-6, d) * t * (proj.aspect || 1)); out.y = v.y / (Math.max(1e-6, d) * t); out.d = d;
     return out;
   }
-  // The world point the main camera shows where the view gun's muzzle is drawn, at the muzzle's own distance.
-  function muzzleWorld(out, which = 1) {   // CL-301: which 2, the pair's left gun's (null without one)
+  // Project any gun-local point through the view gun's lens into the main
+  // camera's world. The laser and white-light windows use this separately.
+  function pointWorld(local, out, which = 1) {
     const g = which === 2 ? gun2 : gun;
-    if (!g) return null;
-    const mz = g.src.userData.muzzleLocal;
-    if (!mz) return null;
-    const v = viewPoint(mz, _mw, which);
+    if (!g || !local) return null;
+    const v = viewPoint(local, _mw, which);
     const k = Math.tan((camera.fov || 60) * Math.PI / 360) / Math.tan(proj.fov * Math.PI / 360);
     v.x *= k * MX; v.y *= k;
     camera.updateMatrixWorld();
     return out.copy(v).applyMatrix4(camera.matrixWorld);
+  }
+  // The world point the main camera shows where the view gun's muzzle is drawn.
+  function muzzleWorld(out, which = 1) {   // CL-301: which 2, the pair's left gun
+    const g = which === 2 ? gun2 : gun;
+    return pointWorld(g?.src.userData.muzzleLocal, out, which);
   }
   function showing(key) { return info.active && !!gun && gun.key === key && S.raise > 0.5; }
   function dispose() {
@@ -1297,7 +1342,7 @@ export function createViewmodel(ctx) {
     if (root.parent) root.parent.remove(root);
   }
   return {
-    root, space, update, place, muzzleWorld, showing, viewPoint, ndc, dispose, info, retune: () => { sockets.key = null; },
+    root, space, update, place, muzzleWorld, pointWorld, showing, viewPoint, ndc, dispose, info, retune: () => { sockets.key = null; },
     // CL-293: the view's turn for this shot's spring (radians: p up, y left); 0 unless the view gun is up.
     cameraPunch: (out = { p: 0, y: 0 }) => { const on = info.active && S.raise > 0.5; out.p = on ? cs.x[0] : 0; out.y = on ? cs.x[1] : 0; return out; },
     get gun() { return gun; }, get gun2() { return gun2; }, get frame2() { return G2; }, get arms() { return arms; }, get sockets() { return sockets; }, get frame() { return G; },

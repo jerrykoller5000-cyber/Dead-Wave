@@ -17,7 +17,7 @@ try{
  await page.evaluate(()=>DWOpening.dismissForTesting());await page.waitForFunction(()=>document.getElementById('opening').hidden);
  await page.fill('#playerName','Economy Tester');await page.click('#modeHunt');
  await page.waitForFunction(()=>TT.getPhase()==='prep'&&!document.body.classList.contains('deploying'),null,{timeout:45000});
- await page.evaluate(()=>{TT.openShop(true);TT.setShopTabDbg('weapons');});await shot('kiosk');
+ await page.evaluate(()=>{TT.openShop(true,'armory');TT.setShopTabDbg('weapons');});await shot('armory-store');
  if(!before)assert.match(await page.locator('#shopHint').innerText(),/1 skull value before bonuses/);
  await page.keyboard.press('Escape');
  await page.evaluate(()=>dispatchEvent(new CustomEvent('dw-game',{detail:{type:'briefing-open',day:1,phase:'prep',preview:{day:1,total:15,byTypeAndCave:[{typeKey:'shambler',count:15,caveIndex:0,caveName:'North Cave'}],caveIndices:[0],bearings:[Math.PI/2]}}})));

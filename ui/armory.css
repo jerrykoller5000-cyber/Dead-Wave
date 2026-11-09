@@ -77,7 +77,7 @@
 #cif .armory-mods li { display:grid; grid-template-columns:minmax(0,1fr) auto; grid-template-areas:"text btn" "state btn"; gap:2px 10px; align-items:center;
   padding:8px 10px; border-radius:3px; background:#ffffff08; border-left:3px solid #6b7a4a; }
 #cif .armory-mods li.fitted { border-left-color:#9fd36a; background:#9fd36a10; }
-#cif .armory-mods li.missing { opacity:.62; border-left-color:#5a5a50; }
+#cif .armory-mods li.missing { border-left-color:#d8ac4a; }
 #cif .armory-mod-text { grid-area:text; display:grid; }
 #cif .armory-mod-text strong { font-size:13px; }
 #cif .armory-mod-text small { font-size:11px; opacity:.72; }

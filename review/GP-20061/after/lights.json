@@ -1,0 +1,26 @@
+{
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "loadSec": 16.635,
+  "captures": [
+    {
+      "light": "noon",
+      "file": "review/GP-20061/after/mortar-noon.png"
+    },
+    {
+      "light": "overcast",
+      "file": "review/GP-20061/after/mortar-overcast.png"
+    },
+    {
+      "light": "dusk",
+      "file": "review/GP-20061/after/mortar-dusk.png"
+    },
+    {
+      "light": "night",
+      "file": "review/GP-20061/after/mortar-night.png"
+    },
+    {
+      "light": "carried",
+      "file": "review/GP-20061/after/mortar-collapsed.png"
+    }
+  ]
+}

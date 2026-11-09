@@ -1,0 +1,7 @@
+{
+  "out": "review/GP-20065/mounts",
+  "shots": [
+    {"target":"xyz:-40,29.32,-70","cam":{"x":-39.0351,"y":29.9695,"z":-68.7365,"tx":-39.9796,"ty":29.3153,"tz":-69.8621,"fov":35},"time":"noon","out":"review/GP-20065/mounts/m4-bare.png","pre":"T.opticDbg.clear('m4'); if(window.gp65)T.scene.remove(window.gp65); const g=T.cloneLean(T.weaponMeshes.m4); g.position.set(-40,T.sampleHeight(-40,-70)+34,-70); g.visible=true; g.traverse(o=>{if(o.name==='flash'||o.name==='laser')o.visible=false}); T.scene.add(g); window.gp65=g;"},
+    {"target":"xyz:-40,29.32,-70","cam":{"x":-39.0351,"y":29.9695,"z":-68.7365,"tx":-39.9796,"ty":29.3153,"tz":-69.8621,"fov":35},"time":"noon","out":"review/GP-20065/mounts/m4-acog.png","pre":"T.opticDbg.grant('m4','acog'); T.opticDbg.fit('m4','acog'); if(window.gp65)T.scene.remove(window.gp65); const g=T.cloneLean(T.weaponMeshes.m4); g.position.set(-40,T.sampleHeight(-40,-70)+34,-70); g.visible=true; g.traverse(o=>{if(o.name==='flash'||o.name==='laser')o.visible=false}); T.scene.add(g); window.gp65=g;"}
+  ]
+}

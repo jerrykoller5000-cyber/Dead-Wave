@@ -1,0 +1,55 @@
+{
+  "setup": {
+    "backend": "WebGPU",
+    "beforeScale": 0.7934885739664083,
+    "currentScale": 0.7934885739664083
+  },
+  "runs": [
+    {
+      "label": "after",
+      "fps": 59.017705310537835,
+      "low": 51.54639173674018,
+      "worst": 19.400000005960464,
+      "hitches": 0,
+      "frames": 59,
+      "weapon": "shotgun",
+      "view": "shotgun"
+    },
+    {
+      "label": "before",
+      "fps": 59.9760095958042,
+      "low": 57.471264348129,
+      "worst": 17.400000005960464,
+      "hitches": 0,
+      "frames": 60,
+      "weapon": "shotgun",
+      "view": "shotgun"
+    },
+    {
+      "label": "before",
+      "fps": 58.84699780430578,
+      "low": 51.282051282051285,
+      "worst": 19.5,
+      "hitches": 0,
+      "frames": 59,
+      "weapon": "shotgun",
+      "view": "shotgun"
+    },
+    {
+      "label": "after",
+      "fps": 59.97001499250374,
+      "low": 52.08333328482695,
+      "worst": 19.200000017881393,
+      "hitches": 0,
+      "frames": 60,
+      "weapon": "shotgun",
+      "view": "shotgun"
+    }
+  ],
+  "mean": {
+    "before": 59.41150370005499,
+    "after": 59.49386015152079,
+    "delta": 0.08235645146579884
+  },
+  "errors": []
+}

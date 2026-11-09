@@ -1,18 +1,18 @@
 {
- "at": "2026-11-08T02:11:12.560Z",
+ "at": "2026-11-08T06:22:19.509Z",
  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
  "results": [
   {
-   "id": "weapon.chainsaw",
+   "id": "weapon.sniper",
    "variant": null,
    "mode": null,
    "ok": true,
-   "ms": 270,
-   "tris": 10044,
+   "ms": 206,
+   "tris": 13594,
    "size": [
-    0.254,
-    0.242,
-    0.941
+    0.152,
+    0.295,
+    1.335
    ],
    "error": null
   }

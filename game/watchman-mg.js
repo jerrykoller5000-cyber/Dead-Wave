@@ -25,6 +25,16 @@ export function stepWatchman(s, origin, target, dt) {
   s.pitch+=(pitch-s.pitch)*follow;
   return s;
 }
+// CL-322 (D-122; the M240B handout's belt change: raise the cover, lay the first round in the tray, close the cover, then
+// charge: the handle pulled to the rear and pushed forward): the beats over the feed (reload 0..1), each 0..1.
+export function watchmanFeed(r, out={}) {
+  out.cover=smooth((r-0.10)/0.12)*(1-smooth((r-0.56)/0.10));       // the cover up (about its front pin) and down again
+  out.lOnCover=smooth(r/0.10)*(1-smooth((r-0.66)/0.08));           // the left hand on the cover's rear catch
+  out.lTray=smooth((r-0.24)/0.08)*(1-smooth((r-0.46)/0.08));       // ... down at the tray, laying the belt's first round
+  out.rOnCharger=smooth((r-0.68)/0.07)*(1-smooth((r-0.92)/0.07));  // the right hand off the grip to the charging handle
+  out.pull=smooth((r-0.75)/0.07)*(1-smooth((r-0.84)/0.06));        // the handle to the rear and forward again
+  return out;
+}
 export function watchmanPose(s, feedT=0, feedS=3.2, out={}) {
   out.weight=smooth(s.age/(s.mountS||WATCHMAN.mountS));
   out.kick=Math.pow(clamp(s.kick/WATCHMAN.kickS,0,1),2);
@@ -33,6 +43,8 @@ export function watchmanPose(s, feedT=0, feedS=3.2, out={}) {
   const reload=feedT>0?clamp(1-feedT/feedS,0,1):0;
   out.feed=feedT>0?Math.sin(Math.PI*reload):0;
   out.charge=feedT>0?smooth((reload-0.72)/0.1)*(1-smooth((reload-0.90)/0.1)):0;
+  watchmanFeed(feedT>0?reload:0, out);   // CL-322: the cover, the handle and the hands' places
+  if(!(feedT>0)){out.cover=out.lOnCover=out.lTray=out.rOnCharger=out.pull=0;}
   return out;
 }
 export function watchmanLeg(hipHeight, footY, footZ, out={}) {

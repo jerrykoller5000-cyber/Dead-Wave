@@ -1,0 +1,141 @@
+{
+  "aa12": {
+    "fp": {
+      "key": "aa12",
+      "current": "aa12",
+      "raise": 1,
+      "ads": 0,
+      "meshSize": [
+        0.21439422831834776,
+        0.411592795028743,
+        3.4079156853156434
+      ],
+      "muzzleLocal": [
+        0,
+        0.015,
+        0.98
+      ]
+    },
+    "tpHeld": {
+      "key": "aa12",
+      "scale": 0.6843359655419957,
+      "sizeEntry": {
+        "len": 1.393,
+        "m": 0.96,
+        "look": 1.2
+      },
+      "factor": 0.7603732950466618
+    },
+    "tpCarried": {
+      "gunKey": "aa12",
+      "slung": [
+        "aa12",
+        null
+      ],
+      "inHand": "m4"
+    }
+  },
+  "minigun": {
+    "fp": {
+      "key": "minigun",
+      "current": "minigun",
+      "raise": 0.5620999998748303,
+      "ads": 0,
+      "meshSize": [
+        3.1919236840369862,
+        1.2389463006671546,
+        1.389472611413204
+      ],
+      "muzzleLocal": [
+        0,
+        0,
+        0.7909999999999999
+      ]
+    },
+    "tpHeld": {
+      "key": "minigun",
+      "scale": 0.88,
+      "factor": 1
+    },
+    "tpCarried": {
+      "gunKey": "minigun",
+      "slung": [
+        "minigun",
+        null
+      ],
+      "inHand": "m4"
+    }
+  },
+  "flamer": {
+    "fp": {
+      "key": "flamer",
+      "current": "flamer",
+      "raise": 0.42280000004172325,
+      "ads": 0,
+      "meshSize": [
+        0.7829591714595097,
+        0.8988097676017599,
+        0.7277161907711367
+      ],
+      "muzzleLocal": [
+        0,
+        0.05,
+        0.9980500000000001
+      ]
+    },
+    "tpHeld": {
+      "key": "flamer",
+      "scale": 0.8383417123705056,
+      "sizeEntry": {
+        "len": 1.094,
+        "m": 0.95,
+        "look": 1.05
+      },
+      "factor": 0.8383417123705056
+    },
+    "tpCarried": {
+      "gunKey": "flamer",
+      "slung": [
+        "flamer",
+        null
+      ],
+      "inHand": "m4"
+    }
+  },
+  "chainsaw": {
+    "fp": {
+      "key": "chainsaw",
+      "current": "chainsaw",
+      "raise": 0.5705,
+      "ads": 0,
+      "meshSize": [
+        0.25362610918863027,
+        0.4874260682376965,
+        0.8123874215242779
+      ],
+      "muzzleLocal": [
+        0,
+        0.04,
+        0.6963999999999999
+      ]
+    },
+    "tpHeld": {
+      "key": "chainsaw",
+      "scale": 0.6452730806608357,
+      "sizeEntry": {
+        "len": 1.715,
+        "m": 0.85,
+        "look": 1.2
+      },
+      "factor": 0.5468415937803692
+    },
+    "tpCarried": {
+      "gunKey": "chainsaw",
+      "slung": [
+        "chainsaw",
+        null
+      ],
+      "inHand": "m4"
+    }
+  }
+}

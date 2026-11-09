@@ -1,0 +1,23 @@
+{
+  "setup": {
+    "backend": "WebGPU",
+    "weapon": "ak",
+    "magPresent": true
+  },
+  "verdict": "PASS",
+  "features": {
+    "rearCamButton": "PASS (cylindrical protrusion through receiver cover rear, clean metal tone)",
+    "selectorSweepStops": "PASS (embossed sweep arc with distinct upper SAFE and lower FIRE notch stops)",
+    "gasTubeLockArm": "PASS (lever mounted to rear sight block right cheek, clear of wood handguard)",
+    "frontSightTower": "PASS (cross windage drum and elevation post base cleanly centered in protective hood)",
+    "compensatorDetent": "PASS (spring-loaded pin securing slant muzzle brake to front sight base)",
+    "magazineLugs": "PASS (front lip and rear latch tab firmly engaged in receiver magazine well)"
+  },
+  "lightingReadability": {
+    "noon": "Crisp shadow cast along receiver grooves and wooden furniture highlights",
+    "overcast": "Diffuse specular reflections preserve selector notches and gas lock lever silhouette",
+    "dusk": "Warm rim grazing highlights compensator detent, sight hood, and recoil cam button",
+    "night": "Weapon flashlight beam illuminates front sight tower and tangent leaf without washed-out bloom"
+  },
+  "errors": []
+}

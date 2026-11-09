@@ -1,0 +1,90 @@
+{
+  "timestamp": "2026-11-08T18:15:32.157Z",
+  "gpu": "RTX 5080 WebGPU",
+  "breacher": {
+    "setup": {
+      "currentWeapon": "aa12",
+      "hasRecoilBolt": true,
+      "hasRecoilBoltPose": true,
+      "boltChildren": 3,
+      "initialStrokeT": null
+    },
+    "peakStroke": {
+      "stroke": 0.1,
+      "sideVisible": false,
+      "sideScaleZ": 0.02857142857142857,
+      "sidePosZ": 0.044,
+      "faceVisible": false,
+      "facePosZ": 0.024,
+      "clawVisible": false,
+      "clawPosZ": 0.03
+    },
+    "burst": {
+      "strokeT": 0.0415,
+      "inStroke": true
+    },
+    "fp": {
+      "active": true,
+      "key": "aa12",
+      "raise": 1,
+      "boltStroke": 0.1
+    }
+  },
+  "chainsaw": {
+    "fp": {
+      "currentWeapon": "chainsaw",
+      "vmActive": true,
+      "vmKey": "chainsaw",
+      "raise": 1,
+      "fpW": 1,
+      "meshSize": [
+        0.31539359715051063,
+        0.35197557064301854,
+        0.9891787544617259
+      ],
+      "hipPose": {
+        "at": [
+          0.3,
+          -0.27,
+          -0.6
+        ],
+        "yaw": 0.75,
+        "pitch": 0.4,
+        "roll": 0.55
+      },
+      "adsPose": {
+        "at": [
+          0.24,
+          -0.26,
+          -0.64
+        ],
+        "yaw": 0.4,
+        "pitch": 0.75,
+        "roll": 0.3
+      }
+    },
+    "ads": {
+      "ads": 1,
+      "adsPoseActive": true,
+      "key": "chainsaw"
+    },
+    "tpHeld": {
+      "key": "chainsaw",
+      "scale": 0.8024782066276803,
+      "sizeEntry": {
+        "len": 1.425,
+        "m": 0.85,
+        "look": 1.24
+      },
+      "factor": 0.6800662768031189
+    },
+    "tpCarried": {
+      "key": "chainsaw",
+      "slung": [
+        "chainsaw",
+        null
+      ],
+      "inHand": "m4"
+    }
+  }
+}

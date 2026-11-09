@@ -270,7 +270,7 @@
     const stage3 = [
       ['shotgun', 'the shotgun', [0, 0.070, -0.25], [0, -0.088, -0.056], true],   // CL-312 (D-121): the receiver 62 mm tall now; SIGHT.shotgun follows the model, the bar stays
       ['aa12', 'the Breacher', [0, 0.168, -0.25], [0, -0.145, -0.166], true],   // GB-259 (J20 / Claude 2026-11-03): rear through ring centre
-      ['revolver', 'the revolver', [0, 0.114, -0.05], [0, -0.07, -0.04], false],
+      ['revolver', 'the revolver', [0, 0.120, -0.05], [0, -0.07, -0.059], false],   // CL-320: the grip raked back; CL-322: the rear notch's floor 0.120 (SIGHT.revolver)
       ['sniper', 'the sniper', [0, 0.140, -0.20], [0, -0.088, -0.117], true]
     ];
     for (const [key, label, rear, grip, stock] of stage3) {

@@ -1,0 +1,197 @@
+{
+  "timestamp": "2026-11-09T01:13:01.989Z",
+  "gpu": "NVIDIA GeForce RTX 5080 (WebGPU)",
+  "task": "AG-267",
+  "target": "GP-20068",
+  "viewports": [
+    "1280x720",
+    "390x844"
+  ],
+  "checks": [
+    {
+      "name": "1280 Kiosk Tabs are Supplies and Builds only",
+      "pass": true,
+      "detail": "Supplies|Builds"
+    },
+    {
+      "name": "1280 Kiosk Supplies contains MedPens & Field Intel",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 Kiosk Supplies contains Wearables (CU-241 pending)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 Kiosk Supplies excludes Weapons",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 Kiosk Supplies excludes Ammo",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 Kiosk Supplies excludes Laser/light",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 Kiosk Close button visible inside viewport",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 Kiosk Builds contains Structure Blueprints",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 Kiosk Builds excludes Weapon Blueprints",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 Armory panel open",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 Armory actions contains Store button",
+      "pass": true,
+      "detail": "Move to shelf | Store | Done"
+    },
+    {
+      "name": "1280 Armory Store heading is \"Armory Store\"",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 Armory Store tabs are Guns|Ammo|Weapon builds",
+      "pass": true,
+      "detail": "Guns|Ammo|Weapon builds"
+    },
+    {
+      "name": "1280 Armory Store Guns tab lists purchasable weapons",
+      "pass": true,
+      "detail": "6 guns listed"
+    },
+    {
+      "name": "1280 Armory Store: M4 and Shotgun purchased",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 Armory Store Ammo tab lists magazines with prices",
+      "pass": true,
+      "detail": "3 ammo rows listed"
+    },
+    {
+      "name": "1280 Armory Store Upgrades contains Laser/light",
+      "pass": true,
+      "detail": "Price: $90"
+    },
+    {
+      "name": "1280 Armory Store Weapon builds contains Watchman MG blueprint",
+      "pass": true,
+      "detail": "Total plans: 10"
+    },
+    {
+      "name": "1280 M4 Workbench ACOG row present",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 M4 Workbench unowned ACOG displays price in Cash",
+      "pass": true,
+      "detail": "$150 Cash"
+    },
+    {
+      "name": "1280 M4 Workbench unowned ACOG button says \"Buy\"",
+      "pass": true,
+      "detail": "Buy"
+    },
+    {
+      "name": "1280 M4 Workbench ACOG bought: cash deducted",
+      "pass": true,
+      "detail": "Bank: 4750 -> 4600"
+    },
+    {
+      "name": "1280 M4 Workbench ACOG bought: state is \"Owned · not fitted\"",
+      "pass": true,
+      "detail": "Owned · not fitted"
+    },
+    {
+      "name": "1280 M4 Workbench ACOG bought: button says \"Fit\"",
+      "pass": true,
+      "detail": "Fit"
+    },
+    {
+      "name": "1280 M4 Workbench ACOG fitted: state is \"Fitted\"",
+      "pass": true,
+      "detail": "Fitted"
+    },
+    {
+      "name": "1280 M4 Workbench ACOG fitted: button says \"Remove\"",
+      "pass": true,
+      "detail": "Remove"
+    },
+    {
+      "name": "390 Armory Workbench fits mobile viewport width",
+      "pass": true,
+      "detail": "Width: 374.4px"
+    },
+    {
+      "name": "390 Armory Workbench footer actions visible on screen",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "390 Armory Workbench footer buttons have 0 overlap",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "390 Armory Store fits mobile viewport width",
+      "pass": true,
+      "detail": "Card width: 374.4px"
+    },
+    {
+      "name": "390 Armory Store close button visible inside viewport",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "390 Armory Store weapon rows fit card without spill",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "390 Kiosk fits mobile viewport width",
+      "pass": true,
+      "detail": "Card width: 374.4px"
+    },
+    {
+      "name": "390 Kiosk close button visible inside viewport",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "390 Kiosk list overflow CSS set to auto/scroll",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "390 Kiosk list contained within card boundary",
+      "pass": true,
+      "detail": ""
+    }
+  ],
+  "kioskExclusion": {},
+  "armoryStore": {},
+  "workbench": {},
+  "layoutIntegrity": {},
+  "screenshots": {}
+}

@@ -1,0 +1,20 @@
+{
+ "at": "2026-11-08T07:36:37.493Z",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "results": [
+  {
+   "id": "weapon.uzi",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 149,
+   "tris": 9224,
+   "size": [
+    0.079,
+    0.317,
+    0.416
+   ],
+   "error": null
+  }
+ ]
+}

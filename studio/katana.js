@@ -125,7 +125,7 @@ export function makeKatanaModel({ THREE }) {
 
 // High-fidelity curved red katana blade:
 // - Starts at z = 0.006 inside the habaki/tsuba so there is zero gap at the hilt.
-// - 12-vertex cross-section with a deep recessed bo-hi (blood groove) on both sides, a sharp shinogi ridge,
+// - Symmetric 14-vertex cross-section with a deep recessed bo-hi (blood groove) on both sides, a sharp shinogi ridge,
 //   and a procedural wavy gunome-midare hamon glowing along the razor edge up to the geometric yokote & kissaki tip.
 function bladeMesh(THREE, mat) {
   const N = 48, { BLADE_FROM: z0, BLADE_TO: z1, WIDTH: W, SORI } = KATANA;
@@ -138,7 +138,7 @@ function bladeMesh(THREE, mat) {
   const hamonCol = new THREE.Color(0xff7868);
   const edgeCol = new THREE.Color(0xffe0d6);
   const tmpCol = new THREE.Color();
-  const ring = 12;
+  const ring = 14;
 
   for (let i = 0; i <= N; i++) {
     const u = i / N;
@@ -173,7 +173,7 @@ function bladeMesh(THREE, mat) {
     const tg = Math.max(0.0008, t * 0.82 - grooveDepth);
     const th = t * 0.52;
 
-    // 12-point cross-section around the blade perimeter (clockwise from top spine ridge).
+    // Paired facets on both faces, clockwise from the top spine ridge to the cutting edge and back.
     const pts = [
       [0, ySpinePeak],
       [ts, ySpineShoulder],
@@ -186,11 +186,10 @@ function bladeMesh(THREE, mat) {
       [-th, yHamon],
       [-t, yShinogi],
       [-t * 0.92, yGrooveBot],
-      [-tg, yGrooveMid]
+      [-tg, yGrooveMid],
+      [-t * 0.88, yGrooveTop],
+      [-ts, ySpineShoulder]
     ];
-    // Replace index 11/10 symmetry cleanly with 12 symmetric points:
-    pts[10] = [-tg, yGrooveMid];
-    pts[11] = [-ts, ySpineShoulder];
 
     const grooveC = tmpCol.copy(bodyCol).lerp(fullerCol, grooveFade * 0.85);
     const cols = [
@@ -204,7 +203,9 @@ function bladeMesh(THREE, mat) {
       edgeCol,
       hamonCol,
       shinogiCol,
+      bodyCol,
       grooveC,
+      bodyCol,
       spineCol
     ];
     for (let k = 0; k < ring; k++) {

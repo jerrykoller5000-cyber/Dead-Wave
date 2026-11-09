@@ -7,7 +7,7 @@ function literal(name, extra){const match=source.match(new RegExp('const '+name+
 const pace=literal('ZOMBIE_PACE');
 const plan=literal('NIGHT_PLAN'),types=literal('ZOMBIE_TYPES', { ZOMBIE_PACE: pace }),weapons=literal('WEAPON_STATS'),ammo=literal('AMMO_PACK');
 const gunPrices=literal('WEAPON_PRICE'),buildPrices=literal('BUILD_UNLOCK_PRICE'),placement=literal('COST'),magPrices=literal('EXT_MAG_PRICE'),heavyPrices=literal('HEAVY_BARREL_PRICE'),suppressorPrices=literal('SUPPRESSOR_PRICE'),upgrades=literal('UPGRADE_TRACKS');
-const gear=literal('GEAR'),medicalPrice=literal('MEDKIT_PRICE');
+const gear=literal('GEAR', { dwText: key => key }),medicalPrice=literal('MEDKIT_PRICE');
 const lateCashRule=source.match(/const LATE_CASH_NIGHT = (\d+), LATE_CASH_FACTOR = ([\d.]+)(?:, LATE_CASH_STEP = ([\d.]+))?;/);
 if(!lateCashRule)throw Error('Missing late kill-payout rule');
 const lateCashNight=Number(lateCashRule[1]),lateCashFactor=Number(lateCashRule[2]),lateCashStep=lateCashRule[3]==null?null:Number(lateCashRule[3]);
@@ -21,7 +21,7 @@ function opportunity(n,next){
  return [null,
   ['Wall blueprint + one wall',buildPrices.wall+placement.wall],['Two barricades',2*placement.barricade],
   ['Pistol extended magazine',equipmentPrice(magPrices.pistol,next)],['Field Intel',literal('FIELD_INTEL_COST')],
-  ['M4 (with full ammo)',gun('m4'),'m4'],['AK (with full ammo)',gun('ak'),'ak'],['Laser sight + AK suppressor',kit('laser')+suppressorPrices.ak],
+  ['M4 (with full ammo)',gun('m4'),'m4'],['AK (with full ammo)',gun('ak'),'ak'],['Laser/light + AK suppressor',kit('laserLight')+suppressorPrices.ak],
   ['Helmet + night vision + AK extended mag + heavy barrel',kit('helmet')+kit('nvg')+magPrices.ak+heavyPrices.ak],['Plate carrier + pads',kit('vest')+kit('pads')],
   ['Heavy turret plans + two turrets',buildPrices.heavy+2*placement.heavy],['Heavy Mk II plans + two upgrades',tier('heavy',1,2)],
   ['Launcher + M4 suppressor (with full launcher ammo)',gun('launcher')+suppressorPrices.m4,'launcher'],['AA-12 (with full ammo)',gun('aa12'),'aa12'],['Flamethrower and tank',gun('flamer')+85,'flamer'],

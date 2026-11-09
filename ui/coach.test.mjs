@@ -20,6 +20,11 @@ test('starting-Cash purchase and failed/debug purchases do not suppress skull le
   c.handle({ type:'purchase-delivered', cashSpent:20, source:'kiosk' }); assert.equal(c.tick(frame({ skulls:0 })).id, 'purchase');
   pickup(c); assert.equal(c.tick(frame({ nearWindow:true })).id, 'bank'); assert.equal(c.profile().banked, false);
 });
+test('an Armory gun purchase teaches the paid purchase step', () => {
+  const c = start();
+  c.handle({ type:'purchase-delivered', cashSpent:180, source:'armory', itemId:'weapon:m4' });
+  assert.equal(c.tick(frame({ skulls:0 })).id, 'purchase');
+});
 test('duplicate events never replay a shown prompt; hidden gameplay pauses expiry', () => {
   const c = start(); pickup(c); assert.equal(c.tick(frame()).id, 'pickup');
   for(let i=0;i<20;i++) assert.equal(c.tick(frame({ active:false,dt:1 })),null);
@@ -107,7 +112,7 @@ test('pair coaching waits for a delivered pair and compatible held gun; no day-o
  const c=start({load:()=>JSON.stringify({version:1,purchaseShown:true,buildShown:true})});
  c.handle({type:'purchase-delivered',source:'debug',cashSpent:80,itemId:'dual:pistol'});
  assert.equal(c.tick(lessonFrame({hasPair:true})),null);
- c.handle({type:'purchase-delivered',source:'kiosk',cashSpent:80,itemId:'dual:pistol'});
+ c.handle({type:'purchase-delivered',source:'armory',cashSpent:80,itemId:'dual:pistol'});
  for(const f of [{day:1,hasPair:true},{hasPair:false},{hasPair:true,active:false}])assert.equal(c.tick(lessonFrame(f)),null);
  assert.equal(c.tick(lessonFrame({hasPair:true})).id,'pair');
  assert.equal(c.tick(lessonFrame({hasPair:true,akimbo:true})),null);

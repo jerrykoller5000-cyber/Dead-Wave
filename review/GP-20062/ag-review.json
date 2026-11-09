@@ -1,0 +1,36 @@
+{
+  "setup": {
+    "backend": "WebGPU",
+    "weapon": "m240",
+    "trisMounted": 13340,
+    "trisFolded": 11532,
+    "boundsMounted": [
+      0.953,
+      0.958,
+      1.334
+    ],
+    "boundsFolded": [
+      0.231,
+      0.366,
+      1.334
+    ],
+    "floats": 0
+  },
+  "verdict": "PASS",
+  "features": {
+    "silhouette": "PASS (Authentic M240B silhouette with perforated heat shield, gas cylinder, flash hider, spade/buttstock and tripod pintle)",
+    "tripodTE": "PASS (Tubular tripod legs, pintle mount, and T&E elevation mechanism clear gun receiver without geometry clipping)",
+    "carriedFold": "PASS (Tripod legs fold compactly underneath gun body into [0.231, 0.366, 1.334]m envelope for carried traversal)",
+    "peqPlacement": "PASS (Standard-issue PEQ-16 mounted cleanly on right handguard rail at x 0.093, y 0.875, z 0.42; zero interference with barrel handle)",
+    "feedCoverHinge": "PASS (feedCover group hinges at front cross pin, rotation.x +1.05 opens upward to expose feed tray for belt reloads)",
+    "barrelHandle": "PASS (barrelHandle group rotates around [0,0.875,0.26] by -1.1 rad on Z to lay flat to the right; chargingHandle retracts smoothly)",
+    "fourLightMaterial": "PASS (Dark parkerized steel receiver, heat shroud, and tripod tubing exhibit authentic diffuse/specular balance across all 4 lights)"
+  },
+  "lightingReadability": {
+    "noon": "Crisp shadow cast through tripod legs and receiver cooling vents across grass terrain",
+    "overcast": "Diffuse rain lighting preserves distinct edge definition of feed cover rail and charging handle",
+    "dusk": "Low-angle warm lighting highlights barrel shroud contours, gas collar, and rear sight aperture",
+    "night": "High-contrast moonlight highlights tripod structure and gun profile against terrain and sky"
+  },
+  "errors": []
+}

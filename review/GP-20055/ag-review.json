@@ -1,0 +1,30 @@
+{
+  "setup": {
+    "backend": "WebGPU",
+    "weapon": "m4",
+    "vm": "m4",
+    "tris": 16896,
+    "deltaTris": 3920,
+    "bounds": [
+      0.071,
+      0.302,
+      1.043
+    ],
+    "floats": 0
+  },
+  "verdict": "PASS",
+  "features": {
+    "silhouette": "PASS (Authentic M4 carbine profile, 4-strip Picatinny handguard with ribbed rail covers, 4-position buffer tube stock stops, bayonet lug)",
+    "handContact": "PASS (Support hand grips lower rail cover assembly comfortably; firing hand wraps pistol grip; zero geometry clipping)",
+    "attachmentClearance": "PASS (Front-right rail hosts combined laser/light unit with complete barrel and gas block clearance; zero hand obstruction)",
+    "sightPicture": "PASS (Aimed sight line clear through holographic optic; front post perfectly centered on bore datum)",
+    "fourLightMaterial": "PASS (Balanced matte phosphate barrel, anodized aluminum upper/lower, and polymer rail covers across all lighting conditions)"
+  },
+  "lightingReadability": {
+    "noon": "Crisp specular highlights across Picatinny teeth and ribbed rail cover ridges",
+    "overcast": "Diffuse overcast illumination preserves clean definition of delta ring, gas tube, and forward assist",
+    "dusk": "Warm rim grazing defines receiver contours, magazine release button, and brass deflector",
+    "night": "Flashlight beam casts realistic shadows forward from handguard quad rail vents"
+  },
+  "errors": []
+}

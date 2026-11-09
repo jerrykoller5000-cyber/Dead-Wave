@@ -1,0 +1,9 @@
+{
+  "setup": {
+    "backend": "WebGPU",
+    "fp": 1,
+    "weapon": "m4",
+    "vm": "m4"
+  },
+  "errors": []
+}

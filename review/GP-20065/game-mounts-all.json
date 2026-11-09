@@ -1,0 +1,515 @@
+{
+  "out": "review/GP-20065/mounts",
+  "shots": [
+    {
+      "target": "xyz:-40,29.32,-70",
+      "cam": {
+        "x": -39.0351,
+        "y": 29.9695,
+        "z": -68.7365,
+        "tx": -39.9796,
+        "ty": 29.3153,
+        "tz": -69.8621,
+        "fov": 35
+      },
+      "time": "noon",
+      "out": "review/GP-20065/mounts/m4-bare.png",
+      "pre": "T.opticDbg.clear('m4'); if(window.gp65)T.scene.remove(window.gp65); const g=T.cloneLean(T.weaponMeshes.m4); g.position.set(-40,T.sampleHeight(-40,-70)+34,-70); g.visible=true; g.traverse(o=>{if(o.name==='flash'||o.name==='laser')o.visible=false}); T.scene.add(g); window.gp65=g;"
+    },
+    {
+      "target": "xyz:-40,29.32,-70",
+      "cam": {
+        "x": -39.0351,
+        "y": 29.9695,
+        "z": -68.7365,
+        "tx": -39.9796,
+        "ty": 29.3153,
+        "tz": -69.8621,
+        "fov": 35
+      },
+      "time": "noon",
+      "out": "review/GP-20065/mounts/m4-acog.png",
+      "pre": "T.opticDbg.grant('m4','acog'); T.opticDbg.fit('m4','acog'); if(window.gp65)T.scene.remove(window.gp65); const g=T.cloneLean(T.weaponMeshes.m4); g.position.set(-40,T.sampleHeight(-40,-70)+34,-70); g.visible=true; g.traverse(o=>{if(o.name==='flash'||o.name==='laser')o.visible=false}); T.scene.add(g); window.gp65=g;"
+    },
+    {
+      "target": "xyz:-40,29.32,-70",
+      "cam": {
+        "x": -39.0351,
+        "y": 29.9695,
+        "z": -68.7365,
+        "tx": -39.9796,
+        "ty": 29.3153,
+        "tz": -69.8621,
+        "fov": 35
+      },
+      "time": "overcast",
+      "out": "review/GP-20065/mounts/m4-acog-overcast.png",
+      "pre": "T.opticDbg.grant('m4','acog'); T.opticDbg.fit('m4','acog'); if(window.gp65)T.scene.remove(window.gp65); const g=T.cloneLean(T.weaponMeshes.m4); g.position.set(-40,T.sampleHeight(-40,-70)+34,-70); g.visible=true; g.traverse(o=>{if(o.name==='flash'||o.name==='laser')o.visible=false}); T.scene.add(g); window.gp65=g;"
+    },
+    {
+      "target": "xyz:-40,29.32,-70",
+      "cam": {
+        "x": -39.0351,
+        "y": 29.9695,
+        "z": -68.7365,
+        "tx": -39.9796,
+        "ty": 29.3153,
+        "tz": -69.8621,
+        "fov": 35
+      },
+      "time": "dusk",
+      "out": "review/GP-20065/mounts/m4-acog-dusk.png",
+      "pre": "T.opticDbg.grant('m4','acog'); T.opticDbg.fit('m4','acog'); if(window.gp65)T.scene.remove(window.gp65); const g=T.cloneLean(T.weaponMeshes.m4); g.position.set(-40,T.sampleHeight(-40,-70)+34,-70); g.visible=true; g.traverse(o=>{if(o.name==='flash'||o.name==='laser')o.visible=false}); T.scene.add(g); window.gp65=g;"
+    },
+    {
+      "target": "xyz:-40,29.32,-70",
+      "cam": {
+        "x": -39.0351,
+        "y": 29.9695,
+        "z": -68.7365,
+        "tx": -39.9796,
+        "ty": 29.3153,
+        "tz": -69.8621,
+        "fov": 35
+      },
+      "time": "night",
+      "out": "review/GP-20065/mounts/m4-acog-night.png",
+      "pre": "T.opticDbg.grant('m4','acog'); T.opticDbg.fit('m4','acog'); if(window.gp65)T.scene.remove(window.gp65); const g=T.cloneLean(T.weaponMeshes.m4); g.position.set(-40,T.sampleHeight(-40,-70)+34,-70); g.visible=true; g.traverse(o=>{if(o.name==='flash'||o.name==='laser')o.visible=false}); T.scene.add(g); window.gp65=g;"
+    },
+    {
+      "target": "xyz:-40,29.32,-70",
+      "cam": {
+        "x": -39.0351,
+        "y": 29.9695,
+        "z": -68.7365,
+        "tx": -39.9796,
+        "ty": 29.3153,
+        "tz": -69.8621,
+        "fov": 35
+      },
+      "time": "noon",
+      "out": "review/GP-20065/mounts/m4-prism.png",
+      "pre": "T.opticDbg.grant('m4','prism'); T.opticDbg.fit('m4','prism'); if(window.gp65)T.scene.remove(window.gp65); const g=T.cloneLean(T.weaponMeshes.m4); g.position.set(-40,T.sampleHeight(-40,-70)+34,-70); g.visible=true; g.traverse(o=>{if(o.name==='flash'||o.name==='laser')o.visible=false}); T.scene.add(g); window.gp65=g;"
+    },
+    {
+      "target": "xyz:-40,29.32,-70",
+      "cam": {
+        "x": -39.0351,
+        "y": 29.9695,
+        "z": -68.7365,
+        "tx": -39.9796,
+        "ty": 29.3153,
+        "tz": -69.8621,
+        "fov": 35
+      },
+      "time": "noon",
+      "out": "review/GP-20065/mounts/m4-rmr.png",
+      "pre": "T.opticDbg.grant('m4','rmr'); T.opticDbg.fit('m4','rmr'); if(window.gp65)T.scene.remove(window.gp65); const g=T.cloneLean(T.weaponMeshes.m4); g.position.set(-40,T.sampleHeight(-40,-70)+34,-70); g.visible=true; g.traverse(o=>{if(o.name==='flash'||o.name==='laser')o.visible=false}); T.scene.add(g); window.gp65=g;"
+    },
+    {
+      "target": "xyz:-40,29.32,-70",
+      "cam": {
+        "x": -39.0742,
+        "y": 29.9088,
+        "z": -68.7728,
+        "tx": -39.9907,
+        "ty": 29.274,
+        "tz": -69.8651,
+        "fov": 35
+      },
+      "time": "noon",
+      "out": "review/GP-20065/mounts/ak-bare.png",
+      "pre": "T.opticDbg.clear('ak'); if(window.gp65)T.scene.remove(window.gp65); const g=T.cloneLean(T.weaponMeshes.ak); g.position.set(-40,T.sampleHeight(-40,-70)+34,-70); g.visible=true; g.traverse(o=>{if(o.name==='flash'||o.name==='laser')o.visible=false}); T.scene.add(g); window.gp65=g;"
+    },
+    {
+      "target": "xyz:-40,29.32,-70",
+      "cam": {
+        "x": -39.0742,
+        "y": 29.9088,
+        "z": -68.7728,
+        "tx": -39.9907,
+        "ty": 29.274,
+        "tz": -69.8651,
+        "fov": 35
+      },
+      "time": "noon",
+      "out": "review/GP-20065/mounts/ak-acog.png",
+      "pre": "T.opticDbg.grant('ak','acog'); T.opticDbg.fit('ak','acog'); if(window.gp65)T.scene.remove(window.gp65); const g=T.cloneLean(T.weaponMeshes.ak); g.position.set(-40,T.sampleHeight(-40,-70)+34,-70); g.visible=true; g.traverse(o=>{if(o.name==='flash'||o.name==='laser')o.visible=false}); T.scene.add(g); window.gp65=g;"
+    },
+    {
+      "target": "xyz:-40,29.32,-70",
+      "cam": {
+        "x": -39.0742,
+        "y": 29.9088,
+        "z": -68.7728,
+        "tx": -39.9907,
+        "ty": 29.274,
+        "tz": -69.8651,
+        "fov": 35
+      },
+      "time": "noon",
+      "out": "review/GP-20065/mounts/ak-prism.png",
+      "pre": "T.opticDbg.grant('ak','prism'); T.opticDbg.fit('ak','prism'); if(window.gp65)T.scene.remove(window.gp65); const g=T.cloneLean(T.weaponMeshes.ak); g.position.set(-40,T.sampleHeight(-40,-70)+34,-70); g.visible=true; g.traverse(o=>{if(o.name==='flash'||o.name==='laser')o.visible=false}); T.scene.add(g); window.gp65=g;"
+    },
+    {
+      "target": "xyz:-40,29.32,-70",
+      "cam": {
+        "x": -39.0742,
+        "y": 29.9088,
+        "z": -68.7728,
+        "tx": -39.9907,
+        "ty": 29.274,
+        "tz": -69.8651,
+        "fov": 35
+      },
+      "time": "noon",
+      "out": "review/GP-20065/mounts/ak-rmr.png",
+      "pre": "T.opticDbg.grant('ak','rmr'); T.opticDbg.fit('ak','rmr'); if(window.gp65)T.scene.remove(window.gp65); const g=T.cloneLean(T.weaponMeshes.ak); g.position.set(-40,T.sampleHeight(-40,-70)+34,-70); g.visible=true; g.traverse(o=>{if(o.name==='flash'||o.name==='laser')o.visible=false}); T.scene.add(g); window.gp65=g;"
+    },
+    {
+      "target": "xyz:-40,29.32,-70",
+      "cam": {
+        "x": -39.6498,
+        "y": 29.5654,
+        "z": -69.5156,
+        "tx": -40,
+        "ty": 29.3228,
+        "tz": -69.933,
+        "fov": 35
+      },
+      "time": "noon",
+      "out": "review/GP-20065/mounts/pistol-bare.png",
+      "pre": "T.opticDbg.clear('pistol'); if(window.gp65)T.scene.remove(window.gp65); const g=T.cloneLean(T.weaponMeshes.pistol); g.position.set(-40,T.sampleHeight(-40,-70)+34,-70); g.visible=true; g.traverse(o=>{if(o.name==='flash'||o.name==='laser')o.visible=false}); T.scene.add(g); window.gp65=g;"
+    },
+    {
+      "target": "xyz:-40,29.32,-70",
+      "cam": {
+        "x": -39.6498,
+        "y": 29.5654,
+        "z": -69.5156,
+        "tx": -40,
+        "ty": 29.3228,
+        "tz": -69.933,
+        "fov": 35
+      },
+      "time": "noon",
+      "out": "review/GP-20065/mounts/pistol-rmr.png",
+      "pre": "T.opticDbg.grant('pistol','rmr'); T.opticDbg.fit('pistol','rmr'); if(window.gp65)T.scene.remove(window.gp65); const g=T.cloneLean(T.weaponMeshes.pistol); g.position.set(-40,T.sampleHeight(-40,-70)+34,-70); g.visible=true; g.traverse(o=>{if(o.name==='flash'||o.name==='laser')o.visible=false}); T.scene.add(g); window.gp65=g;"
+    },
+    {
+      "target": "xyz:-40,29.32,-70",
+      "cam": {
+        "x": -39.6498,
+        "y": 29.5654,
+        "z": -69.5156,
+        "tx": -40,
+        "ty": 29.3228,
+        "tz": -69.933,
+        "fov": 35
+      },
+      "time": "overcast",
+      "out": "review/GP-20065/mounts/pistol-rmr-overcast.png",
+      "pre": "T.opticDbg.grant('pistol','rmr'); T.opticDbg.fit('pistol','rmr'); if(window.gp65)T.scene.remove(window.gp65); const g=T.cloneLean(T.weaponMeshes.pistol); g.position.set(-40,T.sampleHeight(-40,-70)+34,-70); g.visible=true; g.traverse(o=>{if(o.name==='flash'||o.name==='laser')o.visible=false}); T.scene.add(g); window.gp65=g;"
+    },
+    {
+      "target": "xyz:-40,29.32,-70",
+      "cam": {
+        "x": -39.6498,
+        "y": 29.5654,
+        "z": -69.5156,
+        "tx": -40,
+        "ty": 29.3228,
+        "tz": -69.933,
+        "fov": 35
+      },
+      "time": "dusk",
+      "out": "review/GP-20065/mounts/pistol-rmr-dusk.png",
+      "pre": "T.opticDbg.grant('pistol','rmr'); T.opticDbg.fit('pistol','rmr'); if(window.gp65)T.scene.remove(window.gp65); const g=T.cloneLean(T.weaponMeshes.pistol); g.position.set(-40,T.sampleHeight(-40,-70)+34,-70); g.visible=true; g.traverse(o=>{if(o.name==='flash'||o.name==='laser')o.visible=false}); T.scene.add(g); window.gp65=g;"
+    },
+    {
+      "target": "xyz:-40,29.32,-70",
+      "cam": {
+        "x": -39.6498,
+        "y": 29.5654,
+        "z": -69.5156,
+        "tx": -40,
+        "ty": 29.3228,
+        "tz": -69.933,
+        "fov": 35
+      },
+      "time": "night",
+      "out": "review/GP-20065/mounts/pistol-rmr-night.png",
+      "pre": "T.opticDbg.grant('pistol','rmr'); T.opticDbg.fit('pistol','rmr'); if(window.gp65)T.scene.remove(window.gp65); const g=T.cloneLean(T.weaponMeshes.pistol); g.position.set(-40,T.sampleHeight(-40,-70)+34,-70); g.visible=true; g.traverse(o=>{if(o.name==='flash'||o.name==='laser')o.visible=false}); T.scene.add(g); window.gp65=g;"
+    },
+    {
+      "target": "xyz:-40,29.32,-70",
+      "cam": {
+        "x": -39.4335,
+        "y": 29.7585,
+        "z": -69.2482,
+        "tx": -40.0034,
+        "ty": 29.3637,
+        "tz": -69.9274,
+        "fov": 35
+      },
+      "time": "noon",
+      "out": "review/GP-20065/mounts/revolver-bare.png",
+      "pre": "T.opticDbg.clear('revolver'); if(window.gp65)T.scene.remove(window.gp65); const g=T.cloneLean(T.weaponMeshes.revolver); g.position.set(-40,T.sampleHeight(-40,-70)+34,-70); g.visible=true; g.traverse(o=>{if(o.name==='flash'||o.name==='laser')o.visible=false}); T.scene.add(g); window.gp65=g;"
+    },
+    {
+      "target": "xyz:-40,29.32,-70",
+      "cam": {
+        "x": -39.4335,
+        "y": 29.7585,
+        "z": -69.2482,
+        "tx": -40.0034,
+        "ty": 29.3637,
+        "tz": -69.9274,
+        "fov": 35
+      },
+      "time": "noon",
+      "out": "review/GP-20065/mounts/revolver-prism.png",
+      "pre": "T.opticDbg.grant('revolver','prism'); T.opticDbg.fit('revolver','prism'); if(window.gp65)T.scene.remove(window.gp65); const g=T.cloneLean(T.weaponMeshes.revolver); g.position.set(-40,T.sampleHeight(-40,-70)+34,-70); g.visible=true; g.traverse(o=>{if(o.name==='flash'||o.name==='laser')o.visible=false}); T.scene.add(g); window.gp65=g;"
+    },
+    {
+      "target": "xyz:-40,29.32,-70",
+      "cam": {
+        "x": -39.4335,
+        "y": 29.7585,
+        "z": -69.2482,
+        "tx": -40.0034,
+        "ty": 29.3637,
+        "tz": -69.9274,
+        "fov": 35
+      },
+      "time": "noon",
+      "out": "review/GP-20065/mounts/revolver-rmr.png",
+      "pre": "T.opticDbg.grant('revolver','rmr'); T.opticDbg.fit('revolver','rmr'); if(window.gp65)T.scene.remove(window.gp65); const g=T.cloneLean(T.weaponMeshes.revolver); g.position.set(-40,T.sampleHeight(-40,-70)+34,-70); g.visible=true; g.traverse(o=>{if(o.name==='flash'||o.name==='laser')o.visible=false}); T.scene.add(g); window.gp65=g;"
+    },
+    {
+      "target": "xyz:-40,29.32,-70",
+      "cam": {
+        "x": -39.3645,
+        "y": 29.7451,
+        "z": -69.1411,
+        "tx": -39.9967,
+        "ty": 29.3072,
+        "tz": -69.8945,
+        "fov": 35
+      },
+      "time": "noon",
+      "out": "review/GP-20065/mounts/uzi-bare.png",
+      "pre": "T.opticDbg.clear('uzi'); if(window.gp65)T.scene.remove(window.gp65); const g=T.cloneLean(T.weaponMeshes.uzi); g.position.set(-40,T.sampleHeight(-40,-70)+34,-70); g.visible=true; g.traverse(o=>{if(o.name==='flash'||o.name==='laser')o.visible=false}); T.scene.add(g); window.gp65=g;"
+    },
+    {
+      "target": "xyz:-40,29.32,-70",
+      "cam": {
+        "x": -39.3645,
+        "y": 29.7451,
+        "z": -69.1411,
+        "tx": -39.9967,
+        "ty": 29.3072,
+        "tz": -69.8945,
+        "fov": 35
+      },
+      "time": "noon",
+      "out": "review/GP-20065/mounts/uzi-rmr.png",
+      "pre": "T.opticDbg.grant('uzi','rmr'); T.opticDbg.fit('uzi','rmr'); if(window.gp65)T.scene.remove(window.gp65); const g=T.cloneLean(T.weaponMeshes.uzi); g.position.set(-40,T.sampleHeight(-40,-70)+34,-70); g.visible=true; g.traverse(o=>{if(o.name==='flash'||o.name==='laser')o.visible=false}); T.scene.add(g); window.gp65=g;"
+    },
+    {
+      "target": "xyz:-40,29.32,-70",
+      "cam": {
+        "x": -39.004,
+        "y": 30.0101,
+        "z": -68.6583,
+        "tx": -39.9782,
+        "ty": 29.3352,
+        "tz": -69.8194,
+        "fov": 35
+      },
+      "time": "noon",
+      "out": "review/GP-20065/mounts/shotgun-bare.png",
+      "pre": "T.opticDbg.clear('shotgun'); if(window.gp65)T.scene.remove(window.gp65); const g=T.cloneLean(T.weaponMeshes.shotgun); g.position.set(-40,T.sampleHeight(-40,-70)+34,-70); g.visible=true; g.traverse(o=>{if(o.name==='flash'||o.name==='laser')o.visible=false}); T.scene.add(g); window.gp65=g;"
+    },
+    {
+      "target": "xyz:-40,29.32,-70",
+      "cam": {
+        "x": -39.004,
+        "y": 30.0101,
+        "z": -68.6583,
+        "tx": -39.9782,
+        "ty": 29.3352,
+        "tz": -69.8194,
+        "fov": 35
+      },
+      "time": "noon",
+      "out": "review/GP-20065/mounts/shotgun-prism.png",
+      "pre": "T.opticDbg.grant('shotgun','prism'); T.opticDbg.fit('shotgun','prism'); if(window.gp65)T.scene.remove(window.gp65); const g=T.cloneLean(T.weaponMeshes.shotgun); g.position.set(-40,T.sampleHeight(-40,-70)+34,-70); g.visible=true; g.traverse(o=>{if(o.name==='flash'||o.name==='laser')o.visible=false}); T.scene.add(g); window.gp65=g;"
+    },
+    {
+      "target": "xyz:-40,29.32,-70",
+      "cam": {
+        "x": -39.004,
+        "y": 30.0101,
+        "z": -68.6583,
+        "tx": -39.9782,
+        "ty": 29.3352,
+        "tz": -69.8194,
+        "fov": 35
+      },
+      "time": "noon",
+      "out": "review/GP-20065/mounts/shotgun-rmr.png",
+      "pre": "T.opticDbg.grant('shotgun','rmr'); T.opticDbg.fit('shotgun','rmr'); if(window.gp65)T.scene.remove(window.gp65); const g=T.cloneLean(T.weaponMeshes.shotgun); g.position.set(-40,T.sampleHeight(-40,-70)+34,-70); g.visible=true; g.traverse(o=>{if(o.name==='flash'||o.name==='laser')o.visible=false}); T.scene.add(g); window.gp65=g;"
+    },
+    {
+      "target": "xyz:-40,29.32,-70",
+      "cam": {
+        "x": -38.8663,
+        "y": 30.0641,
+        "z": -68.5132,
+        "tx": -40,
+        "ty": 29.2788,
+        "tz": -69.8643,
+        "fov": 35
+      },
+      "time": "noon",
+      "out": "review/GP-20065/mounts/aa12-bare.png",
+      "pre": "T.opticDbg.clear('aa12'); if(window.gp65)T.scene.remove(window.gp65); const g=T.cloneLean(T.weaponMeshes.aa12); g.position.set(-40,T.sampleHeight(-40,-70)+34,-70); g.visible=true; g.traverse(o=>{if(o.name==='flash'||o.name==='laser')o.visible=false}); T.scene.add(g); window.gp65=g;"
+    },
+    {
+      "target": "xyz:-40,29.32,-70",
+      "cam": {
+        "x": -38.8663,
+        "y": 30.0641,
+        "z": -68.5132,
+        "tx": -40,
+        "ty": 29.2788,
+        "tz": -69.8643,
+        "fov": 35
+      },
+      "time": "noon",
+      "out": "review/GP-20065/mounts/aa12-rmr.png",
+      "pre": "T.opticDbg.grant('aa12','rmr'); T.opticDbg.fit('aa12','rmr'); if(window.gp65)T.scene.remove(window.gp65); const g=T.cloneLean(T.weaponMeshes.aa12); g.position.set(-40,T.sampleHeight(-40,-70)+34,-70); g.visible=true; g.traverse(o=>{if(o.name==='flash'||o.name==='laser')o.visible=false}); T.scene.add(g); window.gp65=g;"
+    },
+    {
+      "target": "xyz:-40,29.32,-70",
+      "cam": {
+        "x": -38.7678,
+        "y": 30.2821,
+        "z": -68.3492,
+        "tx": -40.0103,
+        "ty": 29.4215,
+        "tz": -69.8299,
+        "fov": 35
+      },
+      "time": "noon",
+      "out": "review/GP-20065/mounts/minigun-bare.png",
+      "pre": "T.opticDbg.clear('minigun'); if(window.gp65)T.scene.remove(window.gp65); const g=T.cloneLean(T.weaponMeshes.minigun); g.position.set(-40,T.sampleHeight(-40,-70)+34,-70); g.visible=true; g.traverse(o=>{if(o.name==='flash'||o.name==='laser')o.visible=false}); T.scene.add(g); window.gp65=g;"
+    },
+    {
+      "target": "xyz:-40,29.32,-70",
+      "cam": {
+        "x": -38.7678,
+        "y": 30.2821,
+        "z": -68.3492,
+        "tx": -40.0103,
+        "ty": 29.4215,
+        "tz": -69.8299,
+        "fov": 35
+      },
+      "time": "noon",
+      "out": "review/GP-20065/mounts/minigun-rmr.png",
+      "pre": "T.opticDbg.grant('minigun','rmr'); T.opticDbg.fit('minigun','rmr'); if(window.gp65)T.scene.remove(window.gp65); const g=T.cloneLean(T.weaponMeshes.minigun); g.position.set(-40,T.sampleHeight(-40,-70)+34,-70); g.visible=true; g.traverse(o=>{if(o.name==='flash'||o.name==='laser')o.visible=false}); T.scene.add(g); window.gp65=g;"
+    },
+    {
+      "target": "xyz:-40,29.32,-70",
+      "cam": {
+        "x": -39.2066,
+        "y": 29.919,
+        "z": -68.947,
+        "tx": -40.0157,
+        "ty": 29.3586,
+        "tz": -69.9113,
+        "fov": 35
+      },
+      "time": "noon",
+      "out": "review/GP-20065/mounts/launcher-bare.png",
+      "pre": "T.opticDbg.clear('launcher'); if(window.gp65)T.scene.remove(window.gp65); const g=T.cloneLean(T.weaponMeshes.launcher); g.position.set(-40,T.sampleHeight(-40,-70)+34,-70); g.visible=true; g.traverse(o=>{if(o.name==='flash'||o.name==='laser')o.visible=false}); T.scene.add(g); window.gp65=g;"
+    },
+    {
+      "target": "xyz:-40,29.32,-70",
+      "cam": {
+        "x": -39.2066,
+        "y": 29.919,
+        "z": -68.947,
+        "tx": -40.0157,
+        "ty": 29.3586,
+        "tz": -69.9113,
+        "fov": 35
+      },
+      "time": "noon",
+      "out": "review/GP-20065/mounts/launcher-rmr.png",
+      "pre": "T.opticDbg.grant('launcher','rmr'); T.opticDbg.fit('launcher','rmr'); if(window.gp65)T.scene.remove(window.gp65); const g=T.cloneLean(T.weaponMeshes.launcher); g.position.set(-40,T.sampleHeight(-40,-70)+34,-70); g.visible=true; g.traverse(o=>{if(o.name==='flash'||o.name==='laser')o.visible=false}); T.scene.add(g); window.gp65=g;"
+    },
+    {
+      "target": "xyz:-40,29.32,-70",
+      "cam": {
+        "x": -38.8576,
+        "y": 30.1219,
+        "z": -68.4718,
+        "tx": -39.9685,
+        "ty": 29.3524,
+        "tz": -69.7957,
+        "fov": 35
+      },
+      "time": "noon",
+      "out": "review/GP-20065/mounts/sniper-nx8.png",
+      "pre": "if(window.gp65)T.scene.remove(window.gp65); const g=T.cloneLean(T.weaponMeshes.sniper); g.position.set(-40,T.sampleHeight(-40,-70)+34,-70); g.visible=true; g.traverse(o=>{if(o.name==='flash'||o.name==='laser')o.visible=false}); T.scene.add(g); window.gp65=g;"
+    },
+    {
+      "target": "xyz:-40,29.32,-70",
+      "cam": {
+        "x": -38.8576,
+        "y": 30.1219,
+        "z": -68.4718,
+        "tx": -39.9685,
+        "ty": 29.3524,
+        "tz": -69.7957,
+        "fov": 35
+      },
+      "time": "overcast",
+      "out": "review/GP-20065/mounts/sniper-nx8-overcast.png",
+      "pre": "if(window.gp65)T.scene.remove(window.gp65); const g=T.cloneLean(T.weaponMeshes.sniper); g.position.set(-40,T.sampleHeight(-40,-70)+34,-70); g.visible=true; g.traverse(o=>{if(o.name==='flash'||o.name==='laser')o.visible=false}); T.scene.add(g); window.gp65=g;"
+    },
+    {
+      "target": "xyz:-40,29.32,-70",
+      "cam": {
+        "x": -38.8576,
+        "y": 30.1219,
+        "z": -68.4718,
+        "tx": -39.9685,
+        "ty": 29.3524,
+        "tz": -69.7957,
+        "fov": 35
+      },
+      "time": "dusk",
+      "out": "review/GP-20065/mounts/sniper-nx8-dusk.png",
+      "pre": "if(window.gp65)T.scene.remove(window.gp65); const g=T.cloneLean(T.weaponMeshes.sniper); g.position.set(-40,T.sampleHeight(-40,-70)+34,-70); g.visible=true; g.traverse(o=>{if(o.name==='flash'||o.name==='laser')o.visible=false}); T.scene.add(g); window.gp65=g;"
+    },
+    {
+      "target": "xyz:-40,29.32,-70",
+      "cam": {
+        "x": -38.8576,
+        "y": 30.1219,
+        "z": -68.4718,
+        "tx": -39.9685,
+        "ty": 29.3524,
+        "tz": -69.7957,
+        "fov": 35
+      },
+      "time": "night",
+      "out": "review/GP-20065/mounts/sniper-nx8-night.png",
+      "pre": "if(window.gp65)T.scene.remove(window.gp65); const g=T.cloneLean(T.weaponMeshes.sniper); g.position.set(-40,T.sampleHeight(-40,-70)+34,-70); g.visible=true; g.traverse(o=>{if(o.name==='flash'||o.name==='laser')o.visible=false}); T.scene.add(g); window.gp65=g;"
+    }
+  ]
+}

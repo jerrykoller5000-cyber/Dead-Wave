@@ -1,0 +1,16 @@
+[
+  {"target":"weapon:m4","view":"three","time":"noon","out":"m4-bare.png","pre":"T.opticDbg.clear('m4');"},
+  {"target":"weapon:m4","view":"three","time":"noon","out":"m4-acog.png","pre":"T.opticDbg.grant('m4','acog'); T.opticDbg.fit('m4','acog');"},
+  {"target":"weapon:ak","view":"three","time":"noon","out":"ak-bare.png","pre":"T.opticDbg.clear('ak');"},
+  {"target":"weapon:ak","view":"three","time":"noon","out":"ak-prism.png","pre":"T.opticDbg.grant('ak','prism'); T.opticDbg.fit('ak','prism');"},
+  {"target":"weapon:pistol","view":"three","time":"noon","out":"pistol-bare.png","pre":"T.opticDbg.clear('pistol');"},
+  {"target":"weapon:pistol","view":"three","time":"noon","out":"pistol-rmr.png","pre":"T.opticDbg.grant('pistol','rmr'); T.opticDbg.fit('pistol','rmr');"},
+  {"target":"weapon:revolver","view":"three","time":"noon","out":"revolver-prism.png","pre":"T.opticDbg.grant('revolver','prism'); T.opticDbg.fit('revolver','prism');"},
+  {"target":"weapon:uzi","view":"three","time":"noon","out":"uzi-rmr.png","pre":"T.opticDbg.grant('uzi','rmr'); T.opticDbg.fit('uzi','rmr');"},
+  {"target":"weapon:shotgun","view":"three","time":"noon","out":"shotgun-prism.png","pre":"T.opticDbg.grant('shotgun','prism'); T.opticDbg.fit('shotgun','prism');"},
+  {"target":"weapon:aa12","view":"three","time":"noon","out":"aa12-rmr.png","pre":"T.opticDbg.grant('aa12','rmr'); T.opticDbg.fit('aa12','rmr');"},
+  {"target":"weapon:minigun","view":"three","time":"noon","out":"minigun-rmr.png","pre":"T.opticDbg.grant('minigun','rmr'); T.opticDbg.fit('minigun','rmr');"},
+  {"target":"weapon:launcher","view":"three","time":"noon","out":"launcher-rmr.png","pre":"T.opticDbg.grant('launcher','rmr'); T.opticDbg.fit('launcher','rmr');"},
+  {"target":"weapon:sniper","view":"three","time":"noon","out":"sniper-nx8.png"},
+  {"target":"weapon:m240","view":"three","time":"noon","out":"m240-acog.png"}
+]

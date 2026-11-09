@@ -1,0 +1,9 @@
+{
+  "out": "review/GP-20062/poses",
+  "cols": 3,
+  "shots": [
+    {"target":"weapon:m240","view":"side","out":"review/GP-20062/poses/cover-open.png","caption":"feed cover up","pre":"await R.target('weapon:m240'); const at=n=>{let a;T.scene.traverse(o=>{if(o.name===n&&o.getWorldPosition(new T.THREE.Vector3()).y>20)a=o});return a}; const c=at('m240-feed-cover'); if(!c) throw Error('feed cover missing'); c.rotation.x=1.05;"},
+    {"target":"weapon:m240","view":"right","out":"review/GP-20062/poses/handle-charger.png","caption":"barrel handle right, charger back","pre":"await R.target('weapon:m240'); const at=n=>{let a;T.scene.traverse(o=>{if(o.name===n&&o.getWorldPosition(new T.THREE.Vector3()).y>20)a=o});return a}; const c=at('m240-feed-cover'), h=at('m240-barrel-handle'), q=at('m240-charging-handle'); if(!c||!h||!q) throw Error('M240 part missing'); c.rotation.x=0; h.rotation.z=-1.1; q.position.z=-0.13;"},
+    {"target":"weapon:m240","view":"side","out":"review/GP-20062/poses/sight-upright.png","caption":"rear sight upright","pre":"await R.target('weapon:m240'); const at=n=>{let a;T.scene.traverse(o=>{if(o.name===n&&o.getWorldPosition(new T.THREE.Vector3()).y>20)a=o});return a}; const h=at('m240-barrel-handle'), q=at('m240-charging-handle'), s=at('m240-rear-sight-leaf'); if(!h||!q||!s) throw Error('M240 part missing'); h.rotation.z=0; q.position.z=0.06; s.rotation.x=-1.25;"}
+  ]
+}

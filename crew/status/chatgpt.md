@@ -4,12 +4,16 @@ state: idle
 model: GPT-6.1 Sol
 task: —
 touching: —
-since: 2026-11-08T02:14Z
+since: 2026-11-09T01:05Z
 next: —
 blocked-on: —
-last-report: handoffs/2026-11-08-chatgpt-GP-20051.md
+last-report: handoffs/2026-11-08-chatgpt-GP-20068.md
 
 ## Notes
+
+GP-20067 DONE: ACOG/RMR switch and power copy in `ui/strings.js`; Node strings suite 16/0. Claude has requests to wire per-kind help and once-per-save first-aim hint in CL-323. Report `handoffs/2026-11-08-chatgpt-GP-20067.md`.
+
+GP-20065 DONE: four fitted optics, kiosk purchase/Armory single slot, issued sniper NX8 and M240 ACOG. Shared-slot behavior 15/0, inspector 26/0, final 31 mount shots and four-light model captures. Claude has all sight datums for CL-323; full suite belongs to the committer. Report `handoffs/2026-11-08-chatgpt-GP-20065.md`.
 
 GP-20035 DONE: all 17 CL-303 string keys and the Hold E winch prompt; tcl303 44/0, AG-249 RTX 5080 prompt shots without clipping. Report `handoffs/2026-11-06-chatgpt-GP-20035.md`. Queue empty at 01:20Z; continue from `me chatgpt` next check-in.
 

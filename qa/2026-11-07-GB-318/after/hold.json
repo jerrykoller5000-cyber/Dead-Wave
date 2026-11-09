@@ -1,0 +1,282 @@
+{
+  "ok": {
+    "ok": true,
+    "weapon": "revolver",
+    "hold": {
+      "twist": 0.1,
+      "hold": [
+        -0.32,
+        -0.08,
+        0.4
+      ],
+      "grip": [
+        0,
+        -0.07,
+        -0.059
+      ],
+      "trig": [
+        0,
+        -0.02,
+        0.035
+      ],
+      "fore": [
+        -0.058,
+        -0.1,
+        -0.041
+      ]
+    },
+    "chain": [
+      {
+        "name": "Group",
+        "vis": true
+      },
+      {
+        "name": "Group",
+        "vis": false
+      },
+      {
+        "name": "Group",
+        "vis": true
+      },
+      {
+        "name": "Group",
+        "vis": true
+      },
+      {
+        "name": "Group",
+        "vis": true
+      },
+      {
+        "name": "Group",
+        "vis": true
+      },
+      {
+        "name": "Group",
+        "vis": true
+      },
+      {
+        "name": "Group",
+        "vis": true
+      },
+      {
+        "name": "Group",
+        "vis": true
+      },
+      {
+        "name": "Scene",
+        "vis": true
+      }
+    ],
+    "forced": true
+  },
+  "size": {
+    "n": 2002,
+    "widthMm": 71.6,
+    "depthMm": 133.3,
+    "xmin": -0.0358,
+    "xmax": 0.0358,
+    "zmin": -0.1082,
+    "zmax": 0.0251
+  },
+  "meas": {
+    "weapon": "revolver",
+    "R": {
+      "palm": [
+        0.012,
+        0.007,
+        0.011
+      ],
+      "knuckles": [
+        0.013,
+        0.013,
+        0.044
+      ],
+      "index": [
+        0.016,
+        0.035,
+        0.048
+      ],
+      "little": [
+        0.007,
+        -0.031,
+        0.037
+      ],
+      "thumbBase": [
+        0.044,
+        0.042,
+        -0.008
+      ],
+      "thumbTip": [
+        -0.029,
+        0.052,
+        0.005
+      ],
+      "indexTip": [
+        -0.063,
+        0.049,
+        0.032
+      ],
+      "mirrored": false,
+      "wrist": [
+        0.061,
+        0.006,
+        -0.023
+      ],
+      "elbow": [
+        0.202,
+        -0.081,
+        -0.168
+      ]
+    },
+    "L": {
+      "palm": [
+        0.073,
+        -0.064,
+        0.162
+      ],
+      "knuckles": [
+        0.079,
+        -0.062,
+        0.195
+      ],
+      "index": [
+        0.072,
+        -0.042,
+        0.203
+      ],
+      "little": [
+        0.092,
+        -0.102,
+        0.18
+      ],
+      "thumbBase": [
+        0.031,
+        -0.036,
+        0.156
+      ],
+      "thumbTip": [
+        0.095,
+        -0.006,
+        0.181
+      ],
+      "indexTip": [
+        0.157,
+        -0.015,
+        0.214
+      ],
+      "mirrored": false,
+      "wrist": [
+        0.019,
+        -0.073,
+        0.139
+      ],
+      "elbow": [
+        -0.183,
+        -0.105,
+        0.048
+      ]
+    },
+    "forearmR_vs_barrel": 48.8,
+    "forearmL_vs_barrel": 66,
+    "elbowBendR": 49.5,
+    "elbowBendL": 45.5,
+    "thumbsGap": 0.223,
+    "palmL_to_fingersR": 0.153,
+    "palmGap": 0.178,
+    "reachR": 0.461,
+    "reachL": 0.45,
+    "wristTurn": {
+      "r": 0.6269425164164032,
+      "l": 0.5538747742871603,
+      "needR": 0.6269425164164032,
+      "needL": 1.0051702729725107
+    },
+    "gripA": {
+      "r": 1,
+      "l": 0.9999999999997479
+    },
+    "gripPointR": [
+      0.001,
+      0.01,
+      0.003
+    ],
+    "gripPointL": [
+      0.081,
+      -0.058,
+      0.152
+    ],
+    "foreAnchor": [
+      -0.045,
+      -0.023,
+      0.014
+    ],
+    "gripInTorso": [
+      -0.103,
+      0.2,
+      0.202
+    ],
+    "holdInTorso": [
+      0.02,
+      0.301,
+      0.42
+    ],
+    "oldForeFromShoulderL": 0.291,
+    "foreFromShoulderL": 0.32
+  },
+  "fit": {
+    "fire": {
+      "entry": {
+        "f": [
+          1.45,
+          1.013,
+          0.892,
+          0.967
+        ],
+        "t": [
+          1.45,
+          -0.6
+        ]
+      },
+      "dists": [
+        -0.0068,
+        -0.0077,
+        -0.0056,
+        -0.003,
+        -0.0021
+      ],
+      "near": [
+        "touch(root in)",
+        "touch(root in)",
+        "touch(root in)",
+        "touch",
+        "touch(root in)"
+      ],
+      "tris": 8260,
+      "dbg": {
+        "cur": "revolver",
+        "wShown": true,
+        "wVis": true,
+        "wPar": "Group",
+        "wParVis": true,
+        "gunKey": "revolver",
+        "gunVis": [
+          true
+        ],
+        "grip": [
+          -0.12,
+          -199.075,
+          -640.49
+        ],
+        "gunAt": [
+          -0.164,
+          -199.095,
+          -640.481
+        ]
+      }
+    },
+    "support": {
+      "none": true
+    }
+  },
+  "fitErr": null
+}

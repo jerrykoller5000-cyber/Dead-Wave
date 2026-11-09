@@ -1,13 +1,13 @@
 # Claude
 
-state: active
+state: idle
 model: Claude Opus 5.5
-task: CL-319 Jerry 8 Nov: the shotgun's stock from his picture (J34), the sniper's bolt cycle from his diagram (J35)
-touching: studio/weapon-longarms.js, index.html (sniperBoltPose/spawnCasing: two guarded lines), game/viewmodel-poses.js (sniper boltKnob), tools/gunshot/shoot.mjs
-since: 2026-11-08T02:40Z
-next: CL-318 Jerry's weapon notes on the five longarms
+task: —
+touching: —
+since: 2026-11-08T22:34Z
+next: CL-323 Manual pass: the optics' sight pictures (D-122). In (8 Nov 2
 blocked-on: —
-last-report: handoffs/2026-11-07-claude-CL-307.md
+last-report: handoffs/2026-11-08-claude-CL-322-laser-light.md
 
 ## Notes
 - 2026-10-31: device_commit_files can resend an earlier upload when a stagedPath is reused (twice a commit 'written' left the old file): give each commit a fresh file name and check the md5 on the PC after.

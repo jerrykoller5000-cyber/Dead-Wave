@@ -22,7 +22,7 @@ try{
  }
  await page.setViewportSize({width:1280,height:720});await page.fill('#playerName','Polish Tester');await page.click('#modeHunt');
  await page.waitForFunction(()=>TT.getPhase()==='prep'&&!document.body.classList.contains('deploying'),null,{timeout:45000});
- await page.evaluate(()=>{TT.openShop(true);TT.setShopTabDbg('weapons');});await shot('kiosk');
+ await page.evaluate(()=>{TT.openShop(true,'armory');TT.setShopTabDbg('weapons');});await shot('armory-store');
  if(!before)assert.deepEqual(await page.locator('[data-weapon]').evaluateAll(es=>es.map(e=>e.dataset.weapon)),['pistol']);/* CL-114 (Jerry): night 1 lists only the guns in stock; the rest arrive on their nights */
  await page.keyboard.press('Escape');await page.evaluate(()=>polishBanner());
  await page.waitForFunction(()=>getComputedStyle(document.getElementById('bigBanner')).opacity==='1');

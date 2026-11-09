@@ -5,9 +5,11 @@ import { text, hasText } from './strings.js';
 // GP-78 presents a per-player armory beside the CIF. CU-65 connects the
 // selected loadout to the game wheel and purchases through these callbacks.
 // CL-113 (Jerry, 2026-10-01): the Armory shows the real guns on its shelves, each with the attachments it wears, and
-// its workbench is where attachments go on and come off (they are bought at the kiosk). The game supplies:
-//   getMods(kind)        -> [{ id, name, desc, slot, owned, fitted }]   what this gun takes
+// its workbench is where attachments are bought, put on and taken off. The game supplies:
+//   getMods(kind)        -> [{ id, name, desc, slot, owned, fitted, price, affordable }]
 //   onFit(kind, id, on)  -> boolean                                     put one on or take it off
+//   onBuyMod(kind, id)   -> boolean                                     buy an attachment for this gun
+//   onStore()            -> void                                        open the Armory catalogue
 //   picture(kind)        -> Promise<dataURL | null>                     the real gun as it looks now
 //   icon(kind)           -> svg markup (24x24 paths)                    a stand-in until the picture comes
 //   describe(kind)       -> string                                      its ammo as it stands
@@ -18,7 +20,7 @@ import { text, hasText } from './strings.js';
 // Called only for a visible workbench and an interaction/refresh; angles are radians.
 export function mountArmory({ doc = document, bus = window, cif = doc.getElementById('cif'),
   getPhase = () => 'prep', getOwned = () => [], onApply = () => {}, onReset = null, armory: shared = null,
-  getMods = () => [], onFit = () => false, picture = async () => null, icon = () => '', describe = () => '',
+  getMods = () => [], onFit = () => false, onBuyMod = () => false, onStore = () => {}, picture = async () => null, icon = () => '', describe = () => '',
   getFinishes = () => null, onFinish = () => false, preview = null,
   getLaser = () => null, onLaser = () => false } = {}) {
   if (!cif?.querySelector('.card > .modes')) throw new Error('CIF window is missing');
@@ -37,7 +39,7 @@ export function mountArmory({ doc = document, bus = window, cif = doc.getElement
   const head = el('header', 'armory-head');
   const eyebrow = el('p', 'armory-eyebrow', t('armory.eyebrow', {}, 'HQ · Weapons locker'));
   const heading = el('h2', null, text('armory.title')); heading.id = 'armoryTitle';
-  const hint = el('p', 'hint', t('armory.hint2', {}, 'Pick a slot, then a gun from the shelves. Attachments bought at the kiosk go on at the workbench.'));
+  const hint = el('p', 'hint', t('armory.hint2', {}, 'Pick a slot, then a gun from the shelves. Buy and fit attachments at the workbench.'));
   head.append(eyebrow, heading, hint);
   const body = el('div', 'armory-body');
   const left = el('div', 'armory-left');
@@ -58,8 +60,9 @@ export function mountArmory({ doc = document, bus = window, cif = doc.getElement
   body.append(left, benchEl);
   const actions = el('div', 'armory-actions');
   const stow = el('button', null, text('armory.stow')); stow.type = 'button';
+  const store = el('button', null, text('armory.store.open')); store.type = 'button';
   const done = el('button', null, text('armory.done')); done.type = 'button';
-  actions.append(stow, done); panel.append(head, body, actions); cif.append(panel);
+  actions.append(stow, store, done); panel.append(head, body, actions); cif.append(panel);
 
   // The second of an akimbo pair is its own gun in the Armory (GP-78); say so.
   const labelGun = gun => /:second$/.test(gun.id) ? t('armory.pair', { gun: text(`weapon.${gun.kind}.name`) }, '{gun} · pair') : text(`weapon.${gun.kind}.name`);
@@ -133,10 +136,10 @@ export function mountArmory({ doc = document, bus = window, cif = doc.getElement
       li.dataset.mod = m.id;
       const txt = el('div', 'armory-mod-text');
       txt.append(el('strong', null, m.name), el('small', null, m.desc || ''));
-      const state = el('span', 'armory-mod-state', m.fitted ? t('armory.fitted', {}, 'Fitted') : m.owned ? t('armory.inStore', {}, 'In the locker') : t('armory.atKiosk', {}, 'Buy it at the supply terminal'));
-      const b = el('button', null, m.fitted ? t('armory.remove', {}, 'Take off') : t('armory.fit', {}, 'Put on')); b.type = 'button';
-      b.disabled = !m.owned;
-      b.addEventListener('click', () => { if (onFit(kind, m.id, !m.fitted)) render(); });
+      const state = el('span', 'armory-mod-state', m.fitted ? t('armory.fitted', {}, 'Fitted') : m.owned ? t('armory.inStore', {}, 'Owned · not fitted') : m.shortfall ? t('armory.store.shortfall', { price: m.price, amount: m.shortfall }, '${price} · Need {amount} more Cash') : t('armory.store.price', { price: m.price }, '${price} Cash'));
+      const b = el('button', null, !m.owned ? t('armory.store.buy', {}, 'Buy') : m.fitted ? t('armory.remove', {}, 'Take off') : t('armory.fit', {}, 'Put on')); b.type = 'button';
+      b.disabled = !m.owned && !m.affordable;
+      b.addEventListener('click', () => { if (m.owned ? onFit(kind, m.id, !m.fitted) : onBuyMod(kind, m.id)) render(); });
       li.append(txt, state, b);
       list.append(li);
     }
@@ -267,6 +270,7 @@ export function mountArmory({ doc = document, bus = window, cif = doc.getElement
     panel.querySelector('button')?.focus({ preventScroll: true });
   });
   stow.addEventListener('click', () => { armory.stow(selected.type, selected.index); render(); });
+  store.addEventListener('click', () => { if (open) onStore(); });
   done.addEventListener('click', close);
   const observer = new MutationObserver(() => {
     if (!cif.classList.contains('show')) close();

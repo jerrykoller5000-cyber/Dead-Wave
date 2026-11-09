@@ -1,0 +1,48 @@
+{
+ "at": "2026-11-08T08:11:07.319Z",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "results": [
+  {
+   "id": "weapon.mortar",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 159,
+   "tris": 4996,
+   "size": [
+    0.92,
+    1.185,
+    1.31
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.mortar-collapsed",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 122,
+   "tris": 4192,
+   "size": [
+    0.92,
+    1.546,
+    0.27
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.mortar-round",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 118,
+   "tris": 636,
+   "size": [
+    0.175,
+    0.18,
+    0.532
+   ],
+   "error": null
+  }
+ ]
+}

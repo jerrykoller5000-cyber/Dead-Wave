@@ -152,9 +152,9 @@ try {
     await shot('basic'); await page.setViewportSize({width:390,height:640});await shot('mobile');await page.setViewportSize({width:1280,height:720});
     await page.keyboard.press('Escape');assert(await page.locator('#hqBriefing').isHidden());
     assert.equal(await page.evaluate(()=>uiProbe.getPaused()),false);assert.equal(await page.evaluate(()=>JSON.stringify(TT.getWavePreview())),plan);
-    await page.evaluate(()=>{TT.openShop(true);TT.setShopTabDbg('upgrades');});
+    await page.evaluate(()=>{TT.openShop(true);TT.setShopTabDbg('gear');});
     assert.equal(await page.locator('[data-item="field-intel"] button').textContent(),'Need 80 more Cash');await shot('shortfall');
-    await page.evaluate(()=>{uiProbe.setCash(200);TT.setShopTabDbg('upgrades');});await page.locator('[data-item="field-intel"] button').click();
+    await page.evaluate(()=>{uiProbe.setCash(200);TT.setShopTabDbg('gear');});await page.locator('[data-item="field-intel"] button').click();
     assert.equal(await page.evaluate(()=>TT.getBank()),80);assert.equal(await page.evaluate(()=>uiProbe.getIntel()),true);
     await page.evaluate(()=>{for(let i=0;i<3;i++)window.dispatchEvent(new CustomEvent('dw-game',{detail:{type:'intel-purchase-request'}}));});
     assert.equal(await page.evaluate(()=>TT.getBank()),80);await shot('owned');await page.evaluate(()=>TT.closeShop());

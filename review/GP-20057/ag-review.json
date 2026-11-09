@@ -1,0 +1,30 @@
+{
+  "setup": {
+    "backend": "WebGPU",
+    "weapon": "pistol",
+    "vm": "pistol",
+    "tris": 7874,
+    "deltaTris": -290,
+    "bounds": [
+      0.035,
+      0.173,
+      0.259
+    ],
+    "floats": 0
+  },
+  "verdict": "PASS",
+  "features": {
+    "silhouette": "PASS (Clean Glock 17 profile restored by removing permanent flashlight; frame dust cover rail exposed for kiosk attachment)",
+    "slideDetail": "PASS (Slide rear cover plate with recessed firing-pin channel and front recoil spring guide plug accurately rendered)",
+    "magazineRake": "PASS (Six witness windows aligned to 17-degree magazine rake angle; zero drift relative to frame mag well)",
+    "handClearance": "PASS (Firing hand seats firmly on beaver tail with trigger finger resting on blade safety; zero mesh clipping)",
+    "fourLightMaterial": "PASS (Tenifer matte black slide finish, textured polymer receiver frame, and white contrast sight dots balanced across all lights)"
+  },
+  "lightingReadability": {
+    "noon": "Sharp glare off slide bevels highlights extractor pin and ejection port chamfer",
+    "overcast": "Diffuse daylight showcases crisp separation between metal slide and polymer frame",
+    "dusk": "Warm rim lighting emphasizes rear cocking serrations and slide cover plate perimeter",
+    "night": "Flashlight beam casts clean forward beam without clipping into barrel or frame"
+  },
+  "errors": []
+}

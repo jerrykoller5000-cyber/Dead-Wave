@@ -1,0 +1,29 @@
+{
+  "setup": {
+    "backend": "WebGPU",
+    "weapon": "shotgun",
+    "view": {
+      "tune": {},
+      "active": true,
+      "key": "shotgun",
+      "akimbo": false,
+      "raise": 1,
+      "ads": 0,
+      "wrist": {
+        "r": 0.87,
+        "l": 0.5454345885385642
+      },
+      "magState": "seated",
+      "handPlace": "fore",
+      "reloadU": null,
+      "hack": true,
+      "filter": true,
+      "flip": true,
+      "wristMax": 0.87,
+      "blade": null,
+      "hands": null,
+      "reloadKind": null
+    }
+  },
+  "errors": []
+}

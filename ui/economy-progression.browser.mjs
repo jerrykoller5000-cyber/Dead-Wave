@@ -8,7 +8,7 @@ const server=await serve(root,0);let browser;
 try{
  browser=await chromium.launch({executablePath:'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',headless:true});const page=await browser.newPage({viewport:{width:1280,height:720}}),errors=[];page.on('pageerror',e=>errors.push(e.message));
  await page.route('**/index.html?*',r=>r.fulfill({body:src,contentType:'text/html'}));await page.goto(server.origin+'/index.html?debug=1&raf=timer');await page.waitForFunction(()=>window.TT&&DWLoad.snapshot().state==='ready',null,{timeout:120000});await page.evaluate(()=>DWOpening.dismissForTesting());await page.waitForFunction(()=>document.getElementById('opening').hidden);
- await page.fill('#playerName','Economy Tester');await page.click('#modeHunt');await page.waitForFunction(()=>TT.getPhase()==='prep'&&!document.body.classList.contains('deploying'),null,{timeout:45000});await page.evaluate(()=>TT.openShop(true));
+ await page.fill('#playerName','Economy Tester');await page.click('#modeHunt');await page.waitForFunction(()=>TT.getPhase()==='prep'&&!document.body.classList.contains('deploying'),null,{timeout:45000});await page.evaluate(()=>TT.openShop(true,'armory'));
  for(const night of [1,4,10,20]){await page.evaluate(n=>econProbe.setup(n),night);for(const width of [1280,390]){await page.setViewportSize({width,height:width===390?844:720});await page.screenshot({path:path.join(shots,(before?'before':'after')+'-night-'+night+'-'+width+'.png')});}}
  if(!before){
   const base=await page.evaluate(()=>TT.WEAPON_PRICE);
@@ -26,8 +26,8 @@ try{
   await check(()=>TT.buyWeapon('chainsaw'),190,'weapon:chainsaw');await check(()=>econProbe.buyTank(),85,'saw-tank');
   await check(()=>econProbe.buyMed(),35,'medpen');await check(()=>econProbe.buyMag(),45,'magazine:pistol');await check(()=>econProbe.buyPair(),120,'dual:pistol');await check(()=>econProbe.buyMachete(),85,'machete');
   await check(()=>TT.buyGear(TT.GEAR.find(g=>g.key==='helmet')),70,'gear:helmet');
-  await page.evaluate(()=>{econProbe.reset();TT.openShop(true);});assert.equal(await page.evaluate(()=>econProbe.quotes().weapons.m4),180,'new run keeps fixed price');
-  for(const [completed,expected]of [[1,'New at the kiosk: Wasp SMG, Shotgun.'],[3,'New at the kiosk: GW-4 Carbine, Chainsaw.'],[9,'New at the kiosk: Breacher-12.'],[10,''],[19,'']]){
+  await page.evaluate(()=>{econProbe.reset();TT.openShop(true,'armory');});assert.equal(await page.evaluate(()=>econProbe.quotes().weapons.m4),180,'new run keeps fixed price');
+  for(const [completed,expected]of [[1,'New at the Armory: Wasp SMG, Shotgun.'],[3,'New at the Armory: GW-4 Carbine, Chainsaw.'],[9,'New at the Armory: Breacher-12.'],[10,''],[19,'']]){
    await page.evaluate(n=>econProbe.dawn(n),completed);assert.equal(await page.locator('#dawnCard .dawn-stock').textContent(),expected);assert.equal(await page.locator('#dawnCard .dawn-stock').isHidden(),!expected);
    if(completed===9){await page.evaluate(()=>{TT.closeShop();document.getElementById('perf').style.display='none';});await page.waitForTimeout(600);await page.locator('#dawnCard').screenshot({path:path.join(shots,'after-dawn-aa12-1280.png')});}
   }

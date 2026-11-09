@@ -1,0 +1,20 @@
+{
+ "at": "2026-11-08T06:29:28.693Z",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "results": [
+  {
+   "id": "weapon.sniper",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 225,
+   "tris": 13522,
+   "size": [
+    0.152,
+    0.295,
+    1.335
+   ],
+   "error": null
+  }
+ ]
+}

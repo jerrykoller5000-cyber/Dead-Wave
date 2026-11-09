@@ -540,6 +540,7 @@ class MaterialBase {
   customProgramCacheKey() { return ''; }
 }
 export class MeshStandardMaterial extends MaterialBase {}
+export class MeshPhysicalMaterial extends MeshStandardMaterial {}   // CL-323: GP-20065's optic glass
 export class MeshBasicMaterial extends MaterialBase {}
 export class MeshStandardNodeMaterial extends MaterialBase {}
 export class MeshBasicNodeMaterial extends MaterialBase {}

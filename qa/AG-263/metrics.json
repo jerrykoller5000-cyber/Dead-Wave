@@ -1,0 +1,166 @@
+{
+  "timestamp": "2026-11-08T16:12:58.728Z",
+  "gpu": "RTX 5080 WebGPU",
+  "minigun": {
+    "fp": {
+      "currentWeapon": "minigun",
+      "vmActive": true,
+      "vmKey": "minigun",
+      "raise": 1,
+      "fpW": 1,
+      "meshSize": [
+        0.39156207259681963,
+        0.39817144588091224,
+        3.4979843276611113
+      ],
+      "pegSocket": [
+        -0.2128,
+        0.0084,
+        0.112
+      ],
+      "rearGripSocket": [
+        0,
+        -0.0119,
+        -0.364
+      ]
+    },
+    "tpHeld": {
+      "key": "minigun",
+      "scale": 0.88,
+      "sizeFactor": 1,
+      "holdPoints": {
+        "grip": [
+          0,
+          -0.0119,
+          -0.364
+        ],
+        "fore": [
+          -0.2128,
+          0.0084,
+          0.112
+        ]
+      }
+    },
+    "tpCarried": {
+      "key": "minigun",
+      "slung": [
+        "minigun",
+        null
+      ],
+      "inHand": "m4"
+    }
+  },
+  "chainsaw": {
+    "fp": {
+      "currentWeapon": "chainsaw",
+      "vmActive": true,
+      "vmKey": "chainsaw",
+      "raise": 1,
+      "fpW": 1,
+      "meshSize": [
+        0.31539729876381273,
+        0.35201651789484956,
+        0.989191954491826
+      ],
+      "pitch": 0.58
+    },
+    "ads": {
+      "ads": 1,
+      "adsPoseActive": true,
+      "key": "chainsaw"
+    },
+    "tpHeld": {
+      "key": "chainsaw",
+      "scale": 0.8024782066276803,
+      "sizeEntry": {
+        "len": 1.425,
+        "m": 0.85,
+        "look": 1.24
+      },
+      "factor": 0.6800662768031189
+    },
+    "tpCarried": {
+      "key": "chainsaw",
+      "slung": [
+        "chainsaw",
+        null
+      ],
+      "inHand": "m4",
+      "sizeEntry": {
+        "len": 1.425,
+        "m": 0.85,
+        "look": 1.24
+      },
+      "factor": 0.6800662768031189
+    }
+  },
+  "launcher": {
+    "fp": {
+      "currentWeapon": "launcher",
+      "vmActive": true,
+      "vmKey": "launcher",
+      "raise": 1,
+      "fpW": 1,
+      "meshSize": [
+        0.19742312976386955,
+        0.280461005017937,
+        2.8805714849652766
+      ]
+    },
+    "kf1": {
+      "u": 0.18,
+      "handPlace": "drumOut",
+      "drumHingeRotZ": -2.9675685707378774,
+      "targetPlace": "drumOut",
+      "targetRootAt": [
+        0,
+        -0.122,
+        0
+      ]
+    },
+    "kf2": {
+      "u": 0.44,
+      "handPlace": "load",
+      "loadRoundVis": false,
+      "loadRoundPos": [
+        0,
+        0,
+        0
+      ],
+      "targetPlace": "load",
+      "targetRootAt": [
+        0,
+        -0.105,
+        -0.145
+      ]
+    },
+    "kf3": {
+      "u": 0.61,
+      "handPlace": "load",
+      "loadRoundVis": false,
+      "loadRoundPos": [
+        0,
+        0,
+        0
+      ],
+      "targetPlace": "load",
+      "targetRootAt": [
+        0,
+        -0.105,
+        -0.145
+      ]
+    },
+    "kf4": {
+      "u": 0.83,
+      "handPlace": "wind",
+      "winderExists": true,
+      "targetPlace": "wind"
+    },
+    "kf5": {
+      "u": 0.96,
+      "handPlace": "fore",
+      "drumHingeRotZ": -0.6228230333647411,
+      "targetPlace": "fore"
+    }
+  }
+}

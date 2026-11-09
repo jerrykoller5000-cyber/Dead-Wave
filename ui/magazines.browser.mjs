@@ -77,7 +77,7 @@ try {
     await page.waitForFunction(() => document.getElementById('opening').hidden);
     await page.fill('#playerName', 'Magazine Tester'); await page.click('#modeHunt');
     await page.waitForFunction(() => TT.getPhase() === 'prep' && !document.body.classList.contains('deploying'), null, { timeout:45000 });
-    await page.evaluate(() => { TT.openShop(true); magProbe.shop(); });
+    await page.evaluate(() => { TT.openShop(true, 'armory'); magProbe.shop(); });
     const shots = path.join(root, 'Claude outputs/shots/gp89'); fs.mkdirSync(shots, { recursive:true });
     await page.screenshot({ path:path.join(shots, 'after-ammo-kiosk.png') });
     console.log('GPU kiosk screenshot: Claude outputs/shots/gp89/after-ammo-kiosk.png');

@@ -1,0 +1,10 @@
+{
+  "result": {
+    "backend": "WebGPU",
+    "owned": false,
+    "unitOnElev": true,
+    "laserError": 0.000017073627904362298,
+    "lightError": 0
+  },
+  "errors": []
+}

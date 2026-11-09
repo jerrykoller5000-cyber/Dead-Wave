@@ -54,18 +54,21 @@
 
     // (4) Z toggles it in play, with the kiosk gear.
     T.setLasersDbg(false);
-    T.setGearDbg('laser');
+    T.setGearDbg('laserLight');
+    T.armoryDbg.fit(T.getCurrentWeapon(), 'laserLight', true);
     T.toggleLasers();
-    ok(T.laserSteadies(), 'Z (toggleLasers) with the laser sight bought: on, and it steadies');
+    ok(T.laserSteadies(), 'Z (toggleLasers) with the laser/light bought: on, and it steadies');
     T.toggleLasers();
     ok(!T.laserSteadies(), 'Z again: off');
 
     // (5) Without the kiosk gear, a stray lasersEnabled does nothing.
     T.setLasersDbg(true);
-    T.getGearOwned().laser = false;
+    T.getGearOwned().laserLight = false;
+    for (const w of W) T.armoryDbg.fit(w, 'laserLight', false);
     const n0 = meanAngle(200, 0, 77); T.setLasersDbg(false); const n1 = meanAngle(200, 0, 77);
-    ok(!T.laserSteadies() && Math.abs(n0 - n1) < 1e-9, 'no laser sight owned: no change (' + f3(n0 * 1000) + ' vs ' + f3(n1 * 1000) + ' mrad)');
-    T.setGearDbg('laser');
+    ok(!T.laserSteadies() && Math.abs(n0 - n1) < 1e-9, 'no laser/light owned: no change (' + f3(n0 * 1000) + ' vs ' + f3(n1 * 1000) + ' mrad)');
+    T.setGearDbg('laserLight');
+    T.armoryDbg.fit(T.getCurrentWeapon(), 'laserLight', true);
 
     // (6) The chainsaw carries no laser.
     T.setWeapon(W.indexOf('chainsaw')); await wait(200);

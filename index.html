@@ -839,23 +839,36 @@
        fade tracks the same smoothstep curve as the camera move. */
     #scopeOverlay {
       position: fixed; inset: 0; pointer-events: none; z-index: 6; opacity: 0;
+      /* CL-323: the NX8's mil reticle in the first focal plane: it grows with the power (--ffp, 1 at 4X: a mil hash every
+         12.5vh, the old ticks' 90 px at 720p); the tube's ring and black over it, the reticle under (only the glass shows it) */
+      --ffp: 1;
       background:
-        /* center pip */
-        radial-gradient(circle at center, rgba(220,255,230,0.95) 0 1.6px, transparent 2px) center/100% 100% no-repeat,
-        /* crosshair, reaching from the lens edge to just short of the pip */
-        linear-gradient(rgba(220,255,230,0.85), rgba(220,255,230,0.85)) center/2px 72% no-repeat,
-        linear-gradient(rgba(220,255,230,0.85), rgba(220,255,230,0.85)) center/72% 2px no-repeat,
-        /* fine mil-dot ticks along each arm */
-        radial-gradient(circle at center, rgba(220,255,230,0.7) 0 1.4px, transparent 1.6px) center calc(50% - 90px)/8px 8px no-repeat,
-        radial-gradient(circle at center, rgba(220,255,230,0.7) 0 1.4px, transparent 1.6px) center calc(50% + 90px)/8px 8px no-repeat,
-        radial-gradient(circle at center, rgba(220,255,230,0.7) 0 1.4px, transparent 1.6px) calc(50% - 90px) center/8px 8px no-repeat,
-        radial-gradient(circle at center, rgba(220,255,230,0.7) 0 1.4px, transparent 1.6px) calc(50% + 90px) center/8px 8px no-repeat,
-        /* thin ring at the lens edge, then the scope tube itself blacking out the rest */
         radial-gradient(circle at center, transparent 0 40.5%, rgba(190,235,210,0.35) 40.7% 41.1%, transparent 41.3%),
-        radial-gradient(circle at center, transparent 0 40%, rgba(4,6,3,0.6) 44%, #050603 48%, #050603 100%);
+        radial-gradient(circle at center, transparent 0 40%, rgba(4,6,3,0.6) 44%, #050603 48%, #050603 100%),
+        url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-100 -100 200 200'><g stroke='%23dcffe6' stroke-opacity='.9' fill='none'><path d='M-100 0H-1.4M1.4 0H100M0 -100V-1.4M0 1.4V100' stroke-width='.28'/><path d='M-100 0H-60M60 0H100M0 -100V-60M0 60V100' stroke-width='1.1'/><path d='M-50 -2V2M-40 -2V2M-30 -2V2M-20 -2V2M-10 -2V2M10 -2V2M20 -2V2M30 -2V2M40 -2V2M50 -2V2M-2 -50H2M-2 -40H2M-2 -30H2M-2 -20H2M-2 -10H2M-2 10H2M-2 20H2M-2 30H2M-2 40H2M-2 50H2' stroke-width='.4'/><path d='M-45 -1V1M-35 -1V1M-25 -1V1M-15 -1V1M-5 -1V1M5 -1V1M15 -1V1M25 -1V1M35 -1V1M45 -1V1M-1 5H1M-1 15H1M-1 25H1M-1 35H1M-1 45H1' stroke-width='.3'/></g><circle r='.7' fill='%23ff4a32'/></svg>") center / calc(var(--ffp) * 250vh) calc(var(--ffp) * 250vh) no-repeat;
     }
+    /* CL-323: the magnified optics' glass down the sights in first person: the ACOG's red chevron and BDC stadia (4X), the
+       prism's red horseshoe, dot and BDC (3X); index.html sets data-kind */
+    #scopeOverlay[data-kind="acog"] {
+      background:
+        radial-gradient(circle at center, transparent 0 41.5%, rgba(60,58,48,0.55) 41.7% 42.4%, transparent 42.6%),
+        radial-gradient(circle at center, rgba(255,238,200,0.03) 0 30%, transparent 41%, rgba(4,6,3,0.6) 45%, #050603 49%, #050603 100%),
+        url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-100 -100 200 200'><path d='M-100 0H-30M30 0H100' stroke='%23141614' stroke-width='.9'/><path d='M0 12V60' stroke='%23141614' stroke-width='.6'/><path d='M-6 20H6M-4.8 29H4.8M-3.7 38H3.7M-2.8 47H2.8M-2.1 56H2.1' stroke='%23141614' stroke-width='.9'/><path d='M-6 8.5L0 1L6 8.5' stroke='%23ff3a1e' stroke-opacity='.35' stroke-width='3.2' fill='none'/><path d='M-6 8.5L0 1L6 8.5' stroke='%23ff5a30' stroke-width='1.3' fill='none'/></svg>") center / 100vh 100vh no-repeat;
+    }
+    #scopeOverlay[data-kind="prism"] {
+      background:
+        radial-gradient(circle at center, transparent 0 41.5%, rgba(60,58,48,0.55) 41.7% 42.4%, transparent 42.6%),
+        radial-gradient(circle at center, rgba(255,238,200,0.03) 0 30%, transparent 41%, rgba(4,6,3,0.6) 45%, #050603 49%, #050603 100%),
+        url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-100 -100 200 200'><path d='M-100 0H-24M24 0H100' stroke='%23141614' stroke-width='.8'/><path d='M0 17V54' stroke='%23141614' stroke-width='.6'/><path d='M-4 24H4M-3.2 32H3.2M-2.5 40H2.5M-1.9 48H1.9' stroke='%23141614' stroke-width='.8'/><path d='M-8.6 12.3A15 15 0 1 1 8.6 12.3' stroke='%23ff3a1e' stroke-opacity='.3' stroke-width='3' fill='none'/><path d='M-8.6 12.3A15 15 0 1 1 8.6 12.3' stroke='%23ff5a30' stroke-width='1.2' fill='none'/><circle r='1.3' fill='%23ff5a30'/></svg>") center / 100vh 100vh no-repeat;
+    }
+    /* CL-323: the red dot's dot at the sight line (the centre), at a constant size as a real one projects it */
+    #opticDot {
+      position: fixed; left: 50%; top: 50%; width: 5px; height: 5px; margin: -2.5px 0 0 -2.5px; border-radius: 50%;
+      background: #ff4a2e; box-shadow: 0 0 3px 1px rgba(255, 70, 40, 0.7); z-index: 6; opacity: 0; pointer-events: none;
+    }
+    body.cine #opticDot { visibility: hidden !important; }
     #scopeZoomLabel {
-      position: fixed; left: 50%; bottom: 30%; transform: translateX(-50%);
+      position: fixed; left: calc(50% + 12vh); bottom: 30%; transform: translateX(-50%);   /* CL-323: right of the reticle's vertical line */
       z-index: 6; opacity: 0; pointer-events: none;
       font-family: var(--font-hud); font-weight: 700; font-size: 15px;
       letter-spacing: 0.08em; color: rgba(220,255,230,0.9);
@@ -1009,6 +1022,7 @@
   <div id="lowHp"></div>
   <div id="scopeOverlay" aria-hidden="true"></div>
   <div id="scopeZoomLabel" aria-hidden="true">2X</div>
+  <div id="opticDot" aria-hidden="true"></div>
   <div id="reticle" aria-hidden="true"><i class="rt rt-u"></i><i class="rt rt-d"></i><i class="rt rt-l"></i><i class="rt rt-r"></i><i class="rh"></i><i class="rx"></i></div>
   <div id="hitPing" aria-hidden="true">HEADSHOT</div>
   <div id="menuCameraFade" aria-hidden="true"></div>
@@ -1388,6 +1402,7 @@
     import { makePistolModel, makeRevolverModel, makeUziModel, makeKnifeModel } from './studio/weapon-sidearms.js';
     import { makeM4Model, makeAkModel, makeAa12Model, makeShotgunModel, makeSniperModel } from './studio/weapon-longarms.js';
     import { makeMinigunModel, makeLauncherModel, makeFlamerModel, makeChainsawModel, makeMortarModel, makeM240Model } from './studio/weapon-heavy.js';
+    import { makeOptic } from './studio/weapon-optics.js';
     import { buildMarineHelmet, detailMarineNvg, fitMarineHelmetParts } from './studio/marine-headgear.js';
     import { buildMarineHats } from './studio/marine-hats.js';
     import { webbingGeometry, bandolierFit } from './ui/marine-webbing.js';
@@ -1646,8 +1661,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
     const scopeOverlayEl = document.getElementById('scopeOverlay');
     const scopeZoomLabelEl = document.getElementById('scopeZoomLabel');
+    const opticDotEl = document.getElementById('opticDot');   // CL-323
     function updateScopeZoomHud() {
       scopeZoomLabelEl.textContent = SCOPE_ZOOM_LABELS[scopeZoomLevel];
+      // CL-323: the NX8's first-focal-plane reticle keeps its angle in the world, so on the screen it grows with the power
+      scopeOverlayEl.style.setProperty('--ffp', (Math.tan(SCOPE_ZOOM_FOV[1] * Math.PI / 360) / Math.tan(SCOPE_ZOOM_FOV[scopeZoomLevel] * Math.PI / 360)).toFixed(3));
     }
 
     // CL-220: V8 allocates a double array for every Math.hypot call (about 64 bytes each; in node 22, 5e6 calls ran 311
@@ -16770,7 +16788,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     const _casingVel = new THREE.Vector3();
     const _casingQuat = new THREE.Quaternion();
     const CASING_WEAPONS = {
-      minigun:  { sx: 0.72, sy: 0.72, sz: 0.9,  ox: 0.09, oy: 0.03, oz: 0.12 },
+      minigun:  { sx: 0.72, sy: 0.72, sz: 0.9,  ox: 0.063, oy: 0.021, oz: 0.084 },   // CL-322: the port 0.70 with GP-20063's scaled gun (was 0.09/0.03/0.12)
       m4:       { sx: 1.0,  sy: 1.0,  sz: 1.15, ox: 0.08, oy: 0.04, oz: 0.04 },
       // Fatter 7.62 case than the M4's, and a hull rather than brass for the AA-12.
       ak:       { sx: 1.15, sy: 1.15, sz: 1.2,  ox: 0.085, oy: 0.045, oz: 0.05 },
@@ -21670,10 +21688,13 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     function updateTacticalHud() {
       if (!tacticalLineEl) return;
       const g = gearOwned;
-      tacticalLineEl.textContent =
-        'NVG ' + (!g.nvg ? '-' : (nvgDown ? (isNight ? 'ON' : 'down') : 'off')) +
-        ' · Laser ' + (!g.laser ? '-' : (lasersEnabled ? 'ON' : 'off')) +
-        ' · Light ' + (!g.flashlight ? '-' : (flashlightActive() ? 'ON' : 'off'));
+      const fitted = mortarMounted?.type === 'm240' || !!laserLightFitted[currentWeapon];
+      const owned = mortarMounted?.type === 'm240' || !!g.laserLight;
+      tacticalLineEl.textContent = dwText('hud.tactical', {
+        nvg: !g.nvg ? '-' : (nvgDown ? (isNight ? 'ON' : 'down') : 'off'),
+        laser: !owned || !fitted ? '-' : (lasersEnabled ? 'ON' : 'off'),
+        light: !owned || !fitted ? '-' : (flashlightActive() ? 'ON' : 'off')
+      });
     }
 
     // Tactical gear is bought, not issued. Toggling something you don't own just
@@ -21696,7 +21717,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     scene.add(flashlight.target);
     const _flashDir = new THREE.Vector3();
     function flashlightActive() {
-      return flashlightOn && gearOwned.flashlight && gameStarted && !gameOver && !won &&
+      if (mortarMounted?.type === 'm240') return flashlightOn && gameStarted && !gameOver && !won;
+      return flashlightOn && gearOwned.laserLight && laserLightFitted[currentWeapon] && gameStarted && !gameOver && !won &&
         !unarmed && weaponMount.visible;
     }
     function updateFlashlight() {
@@ -21708,16 +21730,27 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const dark = isNight || (training.active && training.lightsOff);
       flashlight.intensity = on ? (dark ? 42 : 6) : 0;
       if (!on) { updateReadablePaperMats(); return; }
-      // Follow the muzzle by hand, since it is no longer a child of the gun.
-      flashlight.position.copy(getMuzzleWorld());
-      _flashDir.copy(getAimDir());
+      // The scene-level spotlight follows the white lens, including the view
+      // gun's projected lens when the player is looking through his own eyes.
+      const mountedUnit = mortarMounted?.type === 'm240' ? mortarMounted.mesh?.userData.laserLightUnit : null;
+      if (mountedUnit) {
+        mountedUnit.updateMatrixWorld(true);
+        mountedUnit.localToWorld(flashlight.position.copy(mountedUnit.userData.lightLens));
+        _flashDir.set(0, 0, 1).transformDirection(mountedUnit.matrixWorld);
+      } else {
+        const gun = weaponMeshes[currentWeapon], lens = gun?.userData.lightLensLocal;
+        if (lens && viewmodel?.showing(currentWeapon)) viewmodel.pointWorld(lens, flashlight.position);
+        else if (lens) { flashlight.position.copy(lens); gun.localToWorld(flashlight.position); }
+        else flashlight.position.copy(getMuzzleWorld());
+        _flashDir.copy(getAimDir());
+      }
       flashlight.target.position.copy(flashlight.position).addScaledVector(_flashDir, 10);
       flashlight.target.updateMatrixWorld();
       updateReadablePaperMats();
     }
     function toggleFlashlight() {
-      if (!gameStarted || gameOver || won || unarmed) return;
-      if (!needGear('flashlight', 'Flashlight')) return;
+      if (!gameStarted || gameOver || won || (unarmed && mortarMounted?.type !== 'm240')) return;
+      if (mortarMounted?.type !== 'm240' && !needGear('laserLight', dwText('gear.laserLight.name'))) return;
       flashlightOn = !flashlightOn;
       AudioSys.nvgClick();
       updateFlashlight();
@@ -21783,7 +21816,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
 
     function toggleLasers() {
-      if (gameStarted && !needGear('laser', 'Laser sight')) return;
+      if (gameStarted && mortarMounted?.type !== 'm240' && !needGear('laserLight', dwText('gear.laserLight.name'))) return;
       lasersEnabled = !lasersEnabled;
       if (AudioSys.laserClick) AudioSys.laserClick(); else AudioSys.nvgClick();   // CL-162
       updateLasers();
@@ -23356,6 +23389,13 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
 
     const weaponMeshes = { minigun, m4, ak, aa12, pistol, uzi, shotgun, revolver, sniper, launcher, flamer, chainsaw };
+    // GP-20065: the rifle's NX8 is standard equipment, on its existing action rail.
+    // Its eye axis stays at y .14, as the previous scope's did.
+    const oldSniperScope = sniper.getObjectByName('scope');
+    if (oldSniperScope) oldSniperScope.visible = false;
+    const sniperNx8 = makeOptic('nx8');
+    sniperNx8.position.set(0, 0.085, -0.12);
+    sniper.add(sniperNx8);
     // GB-130 (Jerry): each gun at its real size for this marine. He stands 1.655 units to the crown
     // (no helmet), a 1.80 m man, so a metre is 0.919 units (MARINE_UPM). len = the model's overall
     // length (butt to muzzle, visible parts) at its old in-hand scale, in units; m = the real overall
@@ -23381,7 +23421,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       sniper:   { len: 1.608, m: 1.15,  look: 1.25 },   // bolt sniper 1.1-1.2 m
       launcher: { len: 1.091, m: 0.75,  look: 1.2 },    // 40 mm revolver launcher 0.7-0.8 m
       flamer:   { len: 1.094, m: 0.95,  look: 1.05 },   // hand-held flame gun
-      chainsaw: { len: 1.715, m: 0.85,  look: 1.2 }     // GP-20022 (Jerry's refs, 3 Nov): re-measured with the new rear handle and the longer bar (t188: 1.271 m at len 1.376); was 1.376 (GB-188)
+      chainsaw: { len: 1.425, m: 0.85,  look: 1.24 }   // CL-322: GP-20063 shortened the bar (0.71): len re-measured 1.425 (the old 1.715 held it at 0.78 m, 0.53 m on the pack, AG-261); look 1.24 holds it at 0.971 m as GP-20063 measured;     // GP-20022 (Jerry's refs, 3 Nov): re-measured with the new rear handle and the longer bar (t188: 1.271 m at len 1.376); was 1.376 (GB-188)
     };
     const weaponSizeFactor = (k) => { const s = WEAPON_SIZE[k]; return s ? s.m * (s.look || 1) * MARINE_UPM / s.len : 1; };
     for (const k in WEAPON_SIZE) { const f = weaponSizeFactor(k); weaponMeshes[k].scale.multiplyScalar(f); weaponMeshes[k].userData.sizeK = f; }
@@ -23791,6 +23831,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     const EXT_MAG_PRICE = { pistol: 45, uzi: 70, shotgun: 80, m4: 95, ak: 100, aa12: 130, sniper: 90, minigun: 140, flamer: 90 }; // revolver + launcher deliberately excluded; flamer's is a bigger tank
     // CU-68 (P-127, D-65): a can per gun. The AA-12 has none. The shot itself is unchanged until P-129.
     const SUPPRESSOR_PRICE = { pistol: 40, uzi: 60, shotgun: 75, m4: 85, ak: 90, sniper: 95 };
+    // One sight per gun; the sniper's NX8 and the mounted M240's ACOG are issued with those guns.
+    const OPTIC_OPTIONS = { m4: ['acog', 'prism', 'rmr'], ak: ['acog', 'prism', 'rmr'],
+      pistol: ['rmr'], revolver: ['prism', 'rmr'], uzi: ['rmr'], shotgun: ['prism', 'rmr'],
+      aa12: ['rmr'], minigun: ['rmr'], launcher: ['rmr'] };
+    const OPTIC_PRICE = { rmr: 75, prism: 115, acog: 150 };
     const SAW_FUEL_BASE = 60;          // seconds of cutting per full tank
     const SAW_TANK_PRICE = 85;         // "bigger tank": +50% capacity
     // GB-52: the saw's gas and heat matter. Running it burns 1 s of gas a second, and
@@ -23811,6 +23856,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       let heavyFitted = {};              // GB-84: weapon key -> true while the heavy barrel is fitted
       let suppressor = {};               // CU-68: weapon key -> true while the can is FITTED (CL-113: in the Armory)
       let suppressorOwned = {};          // CL-113: weapon key -> true once the can is bought at the kiosk
+      let opticOwned = {};               // GP-20065: weapon key -> purchased optic kinds
+      let opticFitted = {};              // GP-20065: weapon key -> one fitted optic kind
+      let laserLightFitted = {};         // GP-20066: one purchased combo, fitted separately on each eligible gun
+      let opticTopWant = {}, opticTop = {}, opticLabelT = 0;   // CL-323 (J51): per gun, the ACOG's eye on its RMR on top (wanted; eased 0..1); the label's flash
     let sawFuel = SAW_FUEL_BASE;
     let sawTankUpgraded = false;       // bought
     let sawTankFitted = false;         // CL-113: fitted in the Armory
@@ -24440,25 +24489,36 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       updateAmmoHud();
       return true;
     }
-    // CL-113 (Jerry): every attachment is bought at the kiosk and put on (or taken off) in the Armory. Per gun:
+    // D-124: each attachment is priced, bought and fitted at its gun's Armory workbench. Per gun:
     //   ext / heavy   the GB-84 mod slot (one or the other): the extended magazine (the flamer's bigger tank) or the
     //                 heavy barrel
     //   suppressor    the can (CL-95, CU-68)
     //   auto          the pistol's auto sear
     //   tank          the chainsaw's bigger gas tank
     // armoryMods(w) lists them with owned/fitted; fitArmoryMod(w, id, on) puts one on or takes it off (free; refused
-    // when it isn't owned). The laser and the flashlight are gear on every gun, not attachments (Jerry).
+    // when it isn't owned). The combined laser/light is bought once and fitted per gun (D-123).
     function armoryMods(w) {
       const out = [];
+      const pricingNight = Math.max(1, day | 0);   // title/inspector can ask before the first night exists.
       if (EXT_MAG_PRICE[w]) out.push({ id: 'ext', slot: 'mag', name: dwText(w === 'flamer' ? 'armory.mod.tank' : 'armory.mod.extended'),
         desc: dwText(w === 'flamer' ? 'armory.mod.fuelHelp' : 'armory.mod.magHelp', { before: WEAPON_STATS[w].maxAmmo, after: Math.round(WEAPON_STATS[w].maxAmmo * 1.5) }),
-        owned: !!extMagOwned[w], fitted: !!extMag[w] });
+        owned: !!extMagOwned[w], fitted: !!extMag[w], price: equipmentPrice(EXT_MAG_PRICE[w], pricingNight) });
       if (HEAVY_BARREL_PRICE[w]) out.push({ id: 'heavy', slot: 'mag', name: dwText('armory.mod.heavy'), desc: dwText('armory.mod.heavyHelp'),
-        owned: !!heavyOwned[w], fitted: !!heavyFitted[w] });
+        owned: !!heavyOwned[w], fitted: !!heavyFitted[w], price: equipmentPrice(HEAVY_BARREL_PRICE[w], pricingNight) });
       if (SUPPRESSOR_PRICE[w]) out.push({ id: 'suppressor', slot: 'muzzle', name: dwText('armory.mod.suppressor'), desc: dwText('armory.mod.suppressorHelp'),
-        owned: !!suppressorOwned[w], fitted: !!suppressor[w] });
-      if (w === 'pistol') out.push({ id: 'auto', slot: 'trigger', name: dwText('armory.mod.auto'), desc: dwText('armory.mod.autoHelp'), owned: pistolAutoOwned, fitted: pistolAutoFitted });
-      if (w === 'chainsaw') out.push({ id: 'tank', slot: 'tank', name: dwText('armory.mod.sawTank'), desc: dwText('armory.mod.sawTankHelp'), owned: sawTankUpgraded, fitted: sawTankFitted });
+        owned: !!suppressorOwned[w], fitted: !!suppressor[w], price: equipmentPrice(SUPPRESSOR_PRICE[w], pricingNight) });
+      for (const kind of OPTIC_OPTIONS[w] || []) out.push({ id: `optic:${kind}`, slot: 'optic', name: dwText(`armory.mod.optic.${kind}`),
+        desc: dwText('armory.mod.opticHelp.' + kind), owned: !!opticOwned[w]?.[kind], fitted: opticFitted[w] === kind,
+        price: equipmentPrice(OPTIC_PRICE[kind], pricingNight) });
+      if (weaponMeshes[w]?.userData.laserLightUnit) out.push({ id: 'laserLight', slot: 'tactical', name: dwText('armory.mod.laserLight'),
+        desc: dwText('armory.mod.laserLightHelp'), owned: !!gearOwned.laserLight, fitted: !!laserLightFitted[w],
+        price: equipmentPrice(GEAR.find(g => g.key === 'laserLight').cost, pricingNight) });
+      if (w === 'pistol') out.push({ id: 'auto', slot: 'trigger', name: dwText('armory.mod.auto'), desc: dwText('armory.mod.autoHelp'), owned: pistolAutoOwned, fitted: pistolAutoFitted, price: equipmentPrice(PISTOL_AUTO_PRICE, pricingNight) });
+      if (w === 'chainsaw') out.push({ id: 'tank', slot: 'tank', name: dwText('armory.mod.sawTank'), desc: dwText('armory.mod.sawTankHelp'), owned: sawTankUpgraded, fitted: sawTankFitted, price: SAW_TANK_PRICE });
+      for (const mod of out) {
+        mod.affordable = bank >= mod.price || devInfiniteCash || training.active;
+        mod.shortfall = mod.affordable ? 0 : mod.price - bank;
+      }
       return out;
     }
     function fitArmoryMod(w, id, on) {
@@ -24472,6 +24532,15 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         if (on) suppressor[w] = true; else delete suppressor[w];
         fitSuppressors();
         if (AudioSys.suppressorOn) AudioSys.suppressorOn(on);   // CL-162
+      } else if (id === 'laserLight') {
+        if (on) laserLightFitted[w] = true; else delete laserLightFitted[w];
+        syncLaserLightLooks();
+        updateLasers(); updateFlashlight(); updateTacticalHud();
+      } else if (id.startsWith('optic:')) {
+        const kind = id.slice(6);
+        if (on) opticFitted[w] = kind;
+        else if (opticFitted[w] === kind) delete opticFitted[w];
+        syncOpticLooks();
       } else if (id === 'auto') {
         pistolAutoFitted = on;   // GB-127: unfitted it fires semi whatever fireMode says; fitted again, his last choice (AUTO by default)
       } else if (id === 'tank') {
@@ -24561,6 +24630,79 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       }
       if (gunFurniture) dressGuns(wardrobeState);
     }
+    function syncLaserLightLooks() {
+      for (const w of WEAPON_ORDER) for (const gun of [weaponMeshes[w], offhandMeshes && offhandMeshes[w]]) {
+        if (gun?.userData.laserLightUnit) gun.userData.laserLightUnit.visible = !!laserLightFitted[w];
+      }
+    }
+    // Mounts are made only for a fitted optic, so a bare gun keeps its original profile.
+    // The pistol mount follows its animated slide; the other mounts ride the gun body.
+    const OPTIC_MOUNT = { m4: [0, 0.107, 0.005], ak: [0, 0.101, 0.065],
+      pistol: [0, 0.026, -0.061], revolver: [0, 0.122, -0.018],
+      uzi: [0, 0.155, 0.035], shotgun: [0, 0.065, 0.065],
+      aa12: [0, 0.166, -0.045], minigun: [0, 0.195, 0.006], launcher: [0, 0.146, -0.049] };
+    function syncOpticLooks() {
+      for (const w of Object.keys(OPTIC_OPTIONS)) for (const gun of [weaponMeshes[w], offhandMeshes && offhandMeshes[w]]) {
+        if (!gun) continue;
+        const kind = opticFitted[w] || null, old = gun.userData.fittedOptic;
+        if (old?.userData.kind === kind) continue;
+        if (old) { old.parent.remove(old); gun.userData.fittedOptic = null; }
+        if (gun.userData.defaultSight) gun.userData.defaultSight.visible = !kind;
+        if (gun.userData.opticPlate) gun.userData.opticPlate.visible = !!kind;
+        if (gun.userData.opticRail) gun.userData.opticRail.visible = !!kind;
+        if (!kind) continue;
+        const parent = w === 'pistol' ? gun.userData.slide : gun;
+        const mount = new THREE.Group(); mount.name = `fitted-optic-${kind}`;
+        mount.userData.kind = kind;
+        mount.position.set(...OPTIC_MOUNT[w]);
+        parent.add(mount);
+        // Removable short rails also bridge the rotary arch and the launcher's receiver
+        // after their larger stock reflex units come off.
+        if (['ak', 'shotgun', 'aa12', 'minigun', 'launcher'].includes(w)) {
+          const railY = w === 'minigun' ? -0.014 : w === 'launcher' ? -0.017 : -0.009;
+          gunKit(mount).rail(kind === 'acog' ? 0.11 : 0.075, 0, railY, 0, null, 0.034);
+        }
+        const optic = makeOptic(kind); mount.add(optic);
+        gun.userData.fittedOptic = mount;
+        // CL-323: the sight lines in the gun's own space (the pistol's slide at rest here), for the view down the sights
+        { gun.updateMatrixWorld(true); const S = optic.userData.sight, gl = (p) => gun.worldToLocal(optic.localToWorld(new THREE.Vector3(p[0], p[1], p[2]))).toArray();
+          mount.userData.line = { kind, eye: gl(S.eye), dot: gl(S.dot), topEye: S.topEye ? gl(S.topEye) : null, topDot: S.topDot ? gl(S.topDot) : null }; }
+      }
+    }
+    // CL-323: the fitted optic's view down the sights in first person: its field (1X keeps the Aim FOV; the prism 3X, the ACOG
+    // 4X as the sniper's 4X), its glass (the magnified ones: #scopeOverlay's reticle, the view gun hidden as the sniper's) and
+    // its label. The ACOG's RMR on top (J51) blends to 1X by opticTop. null without one, for a pair, or the sniper (its NX8 is
+    // the scope's own path).
+    const OPTIC_VIEW = { rmr: { fov: 0, glass: '', label: '' }, prism: { fov: 17, glass: 'prism', label: '3X' }, acog: { fov: 13, glass: 'acog', label: '4X' } };
+    const OPTIC_SWITCH_T = 0.15;   // J51: the eye up to the RMR on top or down to the 4X in 0.15 s
+    const _ov = { kind: '', fov: 0, glass: '', glassW: 0, label: '', top: 0 };
+    function fittedOpticLine(w) { const m = weaponMeshes[w] && weaponMeshes[w].userData.fittedOptic; return (m && m.userData.line) || null; }
+    function opticViewNow(w = currentWeapon) {
+      const kind = opticFitted[w], V = kind && OPTIC_VIEW[kind];
+      if (!V || w === 'sniper' || akimboOn() || !fittedOpticLine(w)) return null;
+      const u = Math.min(1, Math.max(0, opticTop[w] || 0)), t = kind === 'acog' ? u * u * (3 - 2 * u) : 0;
+      const d2r = Math.PI / 360, one = Math.tan(aimFov * d2r), own = V.fov ? Math.tan(V.fov * d2r) : one;
+      _ov.kind = kind; _ov.top = t; _ov.fov = Math.atan(own + (one - own) * t) / d2r;
+      _ov.glass = V.glass; _ov.glassW = V.glass ? 1 - t : 0;
+      _ov.label = kind === 'acog' ? (opticTopWant[w] ? '1X' : '4X') : V.label;
+      return _ov;
+    }
+    // J51 ("We can only have a red dot on top if you have an efficient way of cycling between the two."): top null flips.
+    function switchOptic(w = currentWeapon, top = null) {
+      if (opticFitted[w] !== 'acog' || akimboOn()) return false;
+      const want = top == null ? !opticTopWant[w] : !!top;
+      if (!!opticTopWant[w] === want) return false;
+      opticTopWant[w] = want; opticLabelT = 0.9;
+      if (gameStarted) AudioSys.nvgClick();
+      return true;
+    }
+    function stepOpticTop(dt) {
+      for (const w in opticTopWant) {
+        const g = opticTopWant[w] ? 1 : 0, v = opticTop[w] || 0;
+        opticTop[w] = w !== currentWeapon ? g : g > v ? Math.min(g, v + dt / OPTIC_SWITCH_T) : Math.max(g, v - dt / OPTIC_SWITCH_T);
+      }
+      if (opticLabelT > 0) opticLabelT = Math.max(0, opticLabelT - dt);
+    }
     function issueWeaponMagazines(w, loaded = singleMagSize(w), spare = 0) {
       // GB-141: rounds already loose in the calibre's reserve (cave haul ammo before the gun, an old save) are packed into
       // the new magazines, so buying or finding a gun never lowers a reserve. What is over the spare cap stays carried over
@@ -24587,10 +24729,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       { key: 'vest', name: 'Plate carrier', desc: 'Front and back plates with mag pouches: +50 armor.', cost: 120, armor: 50 },
       { key: 'pads', name: 'Knee & elbow pads', desc: '+15 armor.', cost: 50, armor: 15 },   // CL-248: the dodge roll and the dive are gone (ChatGPT's GP-19961 FYI)
       { key: 'nvg', name: 'Night vision', desc: 'Flip-down NVGs (N) on the helmet rails. The nights get very dark without them.', cost: 130, needs: 'helmet', needsLabel: 'Needs the helmet' },
-      { key: 'laser', name: 'Laser sight', desc: 'Aiming laser on every gun (Z). Tighter groups, easier tracking.', cost: 60 },
-      { key: 'flashlight', name: 'Gun flashlight', desc: 'Weapon-mounted light (L). A cone of visibility at night.', cost: 45 }
+      { key: 'laserLight', name: dwText('gear.laserLight.name'), desc: dwText('gear.laserLight.description'), cost: 90 }
     ];
-    const GEAR_NONE = () => ({ helmet: false, vest: false, pads: false, nvg: false, laser: false, flashlight: false });
+    const GEAR_NONE = () => ({ helmet: false, vest: false, pads: false, nvg: false, laserLight: false });
     let gearOwned = GEAR_NONE();
     // CU-108: the sight itself is learned in the Training Ground (and still sold at the
     // kiosk). Each gun, and each gun of an akimbo pair, keeps its own colour. Red is
@@ -24618,7 +24759,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     function armoryLaser(gunId) {
       const kind = String(gunId || '').replace(/:second$/, '');
       const st = WEAPON_STATS[kind];
-      if (!st || st.melee) return null;
+      // The pistol and pump shotgun use fixed green emitters (D-123), so a
+      // selectable palette here would promise colours their hardware cannot show.
+      if (!st || st.melee || kind === 'pistol' || kind === 'shotgun') return null;
       const night = laserProgress();
       const current = laserColors[gunId] && laserColorOpen(laserColors[gunId], night) ? laserColors[gunId] : 'red';
       return {
@@ -24632,6 +24775,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       };
     }
     function setArmoryLaser(gunId, id) {
+      const kind = String(gunId || '').replace(/:second$/, '');
+      if (kind === 'pistol' || kind === 'shotgun') return false;
       if (!laserColorById(id) || !laserColorOpen(id, laserProgress())) return false;
       laserColors[gunId] = id;
       try { localStorage.setItem(LASER_COLOR_KEY, JSON.stringify(laserColors)); } catch (_) {}
@@ -24663,6 +24808,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       extMag = {};
       extMagOwned = {}; heavyOwned = {}; heavyFitted = {};   // GB-84
       suppressor = {}; suppressorOwned = {};   // CL-113
+      opticOwned = {}; opticFitted = {};
+      opticTopWant = {}; opticTop = {}; opticLabelT = 0;   // CL-323
+      syncOpticLooks();
+      laserLightFitted = {};
+      syncLaserLightLooks();
       fitSuppressors();
       syncGunModLooks();
       resetFireModes();
@@ -24699,7 +24849,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       for (const k of Object.keys(DUAL_CAPABLE)) if (isMagazineWeapon(k) && magazineStore[k]) {
         issueSecondGun(magazineStore, k); syncMagazine(k);
       }
-      gearOwned = { helmet: true, vest: true, pads: true, nvg: true, laser: true, flashlight: true };
+      gearOwned = { helmet: true, vest: true, pads: true, nvg: true, laserLight: true };
+      for (const w of WEAPON_ORDER) if (weaponMeshes[w]?.userData.laserLightUnit) laserLightFitted[w] = true;
+      syncLaserLightLooks();
       playerArmor = armorMax();
       applyGearVisibility();
       macheteOwned = true;
@@ -25060,6 +25212,16 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       shotgunPumpSfxFwd = false;
     }
 
+    // CL-322: the Breacher's constant-recoil stroke on his own gun (the third-person camera sees its port; the view gun
+    // runs its copy's in game/viewmodel.js): the model's recoilBoltPose, back in 0.04 s, home by 0.13 s, 0.10 long.
+    function updateAa12Stroke(dt) {
+      const u = weaponMeshes.aa12 && weaponMeshes.aa12.userData;
+      if (!u || !u.recoilBoltPose || !u.recoilBolt || u.strokeT == null) return;
+      u.strokeT += dt;
+      const t = u.strokeT, k = t < 0.04 ? t / 0.04 : t < 0.13 ? 1 - (t - 0.04) / 0.09 : 0;
+      u.recoilBoltPose(u.recoilBolt, 0.10 * k);
+      if (t >= 0.13) u.strokeT = null;
+    }
     function updateShotgunPump(dt) {
       if (!shotgunPumping) return;
       const gun = weaponMeshes.shotgun;
@@ -25079,7 +25241,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         if (AudioSys.shotgunPump) AudioSys.shotgunPump();
       }
 
-      const travel = 0.24; // forend slide distance
+      const travel = 0.12; // forend slide distance (CL-322: a real pump's 9.5 cm stroke, the reload's rack the same; 0.24 drove the forend 9 cm into the receiver)
       const base = GUN_BASE.shotgun;
 
       if (gun && !reloading) {
@@ -25093,6 +25255,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         if (gun.userData.pump && gun.userData.basePumpPos) {
           const bp = gun.userData.basePumpPos;
           gun.userData.pump.position.set(bp.x, bp.y, bp.z - travel * pumpAmt);
+          if (gun.userData.pumpPoseHook) gun.userData.pumpPoseHook();   // CL-322: the bolt rides with the forend
         }
         // RH locked on grip - zero tumble offsets
         reloadArmOff.x = reloadArmOff.y = reloadArmOff.z = 0;
@@ -25125,6 +25288,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           }
           if (gun.userData.pump && gun.userData.basePumpPos) {
             gun.userData.pump.position.copy(gun.userData.basePumpPos);
+            if (gun.userData.pumpPoseHook) gun.userData.pumpPoseHook();   // CL-322: the bolt rides with the forend
           }
           reloadArmOff.x = reloadArmOff.y = reloadArmOff.z = 0;
           reloadArmOffL.x = reloadArmOffL.y = reloadArmOffL.z = 0;
@@ -25195,6 +25359,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         }
         if (gun.userData.pump && gun.userData.basePumpPos) {
           gun.userData.pump.position.copy(gun.userData.basePumpPos);
+          if (gun.userData.pumpPoseHook) gun.userData.pumpPoseHook();   // CL-322: the bolt rides with the forend
         }
         if (gun.userData.reloadShell) {
           gun.userData.reloadShell.visible = false;
@@ -25582,6 +25747,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         }
         updateShotgunPump(dt);
         updateSniperBoltCycle(dt);   // GB-146
+        updateAa12Stroke(dt);   // CL-322
         const quiet =
           !(gestureT > 0) &&
           !shotgunPumping &&
@@ -25892,6 +26058,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
             gun.userData.basePumpPos.y,
             gun.userData.basePumpPos.z - 0.12 * chamberPump
           );
+          if (gun.userData.pumpPoseHook) gun.userData.pumpPoseHook();   // CL-322: the bolt rides with the forend
         }
 
         // GB-145: the shell rides in his palm from the pouch to the port (holdWeapon places it), then is pushed into
@@ -28575,21 +28742,24 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         // D-11: target selection and repair completion come from the combat owner.
         repairs: readPrepRepairs({ runId: uiRunId, day, phase: enabled ? phase : 'inactive' }) });
     }
-    function reportPurchase(itemId, cashSpent, source = 'kiosk') {
+    function reportPurchase(itemId, cashSpent, source = shopMode === 'armory' || (cifOpen && cifEl.classList.contains('armory-show')) ? 'armory' : 'kiosk') {
       if (source === 'build' && gameStarted && UPGRADE_TRACKS[itemId]) tipOnce('buildUpgrade', 'tips.building.upgrade', 'tips.building.title');   // GB-139: the first wall, door, gate, floor or turret
       if (gameStarted && !devInfiniteCash && cashSpent > 0) publishUI('purchase-delivered', { itemId, quantity: 1, cashSpent, source, cashAfter: bank });
     }
     window.addEventListener('dw-game', ({ detail }) => {
-      if (detail?.type !== 'intel-purchase-request' || !shopOpen || !['loadout', 'upgrades'].includes(shopTab) || !gameStarted || gameOver || won || fieldIntelOwned) return;
+      if (detail?.type !== 'intel-purchase-request' || !shopOpen || shopMode !== 'kiosk' || !['supplies', 'gear'].includes(shopTab) || !gameStarted || gameOver || won || fieldIntelOwned) return;
       if (!spend(FIELD_INTEL_COST)) return;
       fieldIntelOwned = true;
       reportPurchase('field-intel', FIELD_INTEL_COST);
       renderShop();
     });
     let shopTab = 'supplies';
-    const SHOP_TABS = [
-      ['loadout', ['weapons', 'upgrades']], ['supplies', ['ammo', 'gear']], ['builds', ['build', 'fortify']]
+    let shopMode = 'kiosk';
+    const SHOP_TABS_ARMORY = [
+      ['loadout', ['weapons', 'upgrades']], ['supplies', ['ammo']], ['builds', ['build', 'fortify']]
     ];
+    const SHOP_TABS_KIOSK = [ ['supplies', ['gear']], ['builds', ['build', 'fortify']] ];
+    const WEAPON_BUILD_PLANS = new Set(['m240', 'mortar', 'light', 'flame', 'heavy', 'mine']);
     const SHOP_ICONS = { weapons: '⌖', upgrades: '◇', ammo: '▥', gear: '+', build: '▤', fortify: '⬡' };
     const SHOP_GROUP_HINT = {
       loadout: dwText('shop.groupHint.loadout'), supplies: dwText('shop.groupHint.supplies'), builds: dwText('shop.groupHint.builds')
@@ -28637,8 +28807,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (!shopListEl || (day < 1 && !training.active)) return;   // GP-19976: no equipment quotes while the hidden pre-match shop has no night. CU-229: the Training Ground kiosk still sells.
       shopCashEl.textContent = devInfiniteCash || training.active ? '∞' : String(bank);
       shopListEl.innerHTML = '';
-      const group = SHOP_TABS.find(([key, pages]) => key === shopTab || pages.includes(shopTab)) || SHOP_TABS[1];
-      const pages = shopTab === group[0] ? group[1] : [shopTab];
+      const tabs = shopMode === 'armory' ? SHOP_TABS_ARMORY : SHOP_TABS_KIOSK;
+      const group = tabs.find(([key, pages]) => key === shopTab || pages.includes(shopTab)) || tabs[0];
+      const pages = shopTab === group[0] || !group[1].includes(shopTab) ? group[1] : [shopTab];
       if (shopTabsEl) {
         const sub = document.getElementById('shopSubtabs');
         shopTabsEl.replaceChildren(); sub.replaceChildren(); sub.hidden = true;
@@ -28651,11 +28822,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
             document.querySelector('#' + parent.id + ' [data-shop-page="' + key + '"]')?.focus(); });
           parent.appendChild(b);
         };
-        for (const [key] of SHOP_TABS) addTab(shopTabsEl, key, dwText('shop.tabs.' + key), group[0] === key);
+        for (const [key] of tabs) addTab(shopTabsEl, key, dwText((shopMode === 'armory' ? 'armory.store.tabs.' : 'shop.tabs.') + key), group[0] === key);
       }
       if (shopHintEl) {
-        const fullHint = (SHOP_GROUP_HINT[group[0]] || '') + (day === 1 ? ' ' + dwText('economy.dayOne') : '');
-        shopHintEl.textContent = matchMedia('(max-width: 480px)').matches ? dwText('shop.compactHint.' + group[0]) : fullHint;
+        const fullHint = (shopMode === 'armory' ? dwText('armory.store.hint.' + group[0]) : SHOP_GROUP_HINT[group[0]] || '') + (day === 1 ? ' ' + dwText('economy.dayOne') : '');
+        shopHintEl.textContent = shopMode === 'kiosk' && matchMedia('(max-width: 480px)').matches ? dwText('shop.compactHint.' + group[0]) : fullHint;
         shopHintEl.title = fullHint;
       }
       for (const category of pages) {
@@ -28714,7 +28885,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           const feeds = c === '60mm' ? 'Feeds the mortar.'
             : c === '7.62 belt' ? sayText('shop.ammo.feedsM240', {}, 'Feeds the Watchman MG.')   // GB-138 (the minigun takes belt boxes)
             : (guns.length ? 'Feeds ' + guns.join(' and ') + '.' : '');
-          const row = shopRow(c, res + ' / ' + cap + ' spare',
+          const row = shopRow(c === '60mm' ? sayText('calibre.60mm', {}, '81mm') : c, res + ' / ' + cap + ' spare',
             '+' + pk.n + ' ' + caliberUnit(c) + ' to the reserve. ' + feeds + (full ? ' Reserve is full.' : ''),
             full ? 'FULL' : '$' + pk.cost, !full && bank >= pk.cost, () => buyAmmo(c));
           row.dataset.ammo = c;
@@ -28730,6 +28901,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         shopRow('MedPen', medkits + ' / ' + MAX_MEDKITS + ' carried', 'Auto-injector. H to jab one: heals 60% of max health. Natural regen only ever climbs back to 40%.',
           medkits >= MAX_MEDKITS ? 'FULL' : '$' + MEDKIT_PRICE, medkits < MAX_MEDKITS && bank >= MEDKIT_PRICE, () => buyMedkit());
         for (const gr of GEAR) {
+          if (gr.key === 'laserLight') continue;   // D-124: gun attachment, sold in the Armory.
           // CU-109 (Jerry): the flashlight and the laser both start locked and are bought here.
           const owned = !!gearOwned[gr.key], price = equipmentPrice(gr.cost, day);
           // Jerry: an add-on stays off the list until what it fits on is bought.
@@ -28754,6 +28926,14 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         }
       } else if (category === 'upgrades') {
          let any = false;
+        const laserLight = GEAR.find(gr => gr.key === 'laserLight');
+        if (laserLight) {
+          const owned = !!gearOwned.laserLight, price = equipmentPrice(laserLight.cost, day);
+          shopRow(laserLight.name, owned ? dwText('shop.owned') : '', laserLight.desc,
+            owned ? dwText('shop.ownedButton') : '$' + price, !owned && bank >= price,
+            owned ? null : () => buyGear(laserLight), owned ? 'owned' : '');
+          any = true;
+        }
         if (!STORY_GATES_ON) {
            shopRow(dwText('shop.upgrade.machete'), macheteOwned ? dwText('shop.owned') : dwText('shop.upgrade.replacesKnife'), dwText('shop.upgrade.macheteHelp', { reach: BLADE_STATS.machete.reach, damage: BLADE_STATS.machete.dmg, knifeReach: BLADE_STATS.knife.reach, knifeDamage: BLADE_STATS.knife.dmg, maxHits: BLADE_STATS.machete.maxHits }),
             macheteOwned ? 'OWNED' : '$' + equipmentPrice(MACHETE_PRICE, day), !macheteOwned && bank >= equipmentPrice(MACHETE_PRICE, day), macheteOwned ? null : () => buyMachete(), macheteOwned ? 'owned' : '');
@@ -28799,6 +28979,12 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
              modRow(dwText('shop.upgrade.suppressor', { weapon: WEAPON_STATS[w].name }), !!suppressorOwned[w], !!suppressor[w], dwText('shop.upgrade.suppressorHelp'),
               equipmentPrice(SUPPRESSOR_PRICE[w], day), () => buySuppressor(w));
           }
+          for (const kind of OPTIC_OPTIONS[w] || []) {
+            any = true;
+            modRow(dwText('shop.upgrade.optic', { weapon: WEAPON_STATS[w].name, optic: dwText(`armory.mod.optic.${kind}`) }),
+              !!opticOwned[w]?.[kind], opticFitted[w] === kind, dwText('shop.upgrade.opticHelp.' + kind),
+              equipmentPrice(OPTIC_PRICE[kind], day), () => buyOptic(w, kind));
+          }
           if (w === 'pistol') {
             any = true;
             modRow(dwText('shop.upgrade.auto'), pistolAutoOwned, pistolAutoFitted, dwText('shop.upgrade.autoHelp'),
@@ -28812,6 +28998,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         // that is bought.
         for (const track of Object.keys(UPGRADE_TRACKS)) {
           const base = track === 'bars' ? 'window' : track;
+          if (WEAPON_BUILD_PLANS.has(base) !== (shopMode === 'armory')) continue;
           const baseOwned = !!buildUnlocked[base];
           if (!baseOwned && shopTab !== 'builds') continue;
           const tr = UPGRADE_TRACKS[track], have = upgradeOwned[track] | 0;
@@ -28835,13 +29022,14 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         }
       } else if (category === 'build') {
         for (const k of BUILD_ORDER) {
+          if (WEAPON_BUILD_PLANS.has(k) !== (shopMode === 'armory')) continue;
           const owned = !!buildUnlocked[k];
           const price = BUILD_UNLOCK_PRICE[k];
           shopRow(BUILD_NAMES[k] + ' blueprint', owned ? 'owned' : '', BUILD_BLURB[k] + ' Places for $' + COST[k] + '.',
             owned ? 'OWNED' : '$' + price, !owned && bank >= price, owned ? null : () => buyBuild(k), owned ? 'owned' : '');
         }
       }
-      publishUI('shop-render', { tab: category, cash: bank, intelOwned: fieldIntelOwned, container: shopListEl });
+      publishUI('shop-render', { tab: category, mode: shopMode, cash: bank, intelOwned: fieldIntelOwned, container: shopListEl });
       if (heading && category === 'upgrades') {
         const intel = shopListEl.querySelector('[data-item="field-intel"]');
         if (intel) heading.after(intel);
@@ -28910,7 +29098,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       return true;
     }
 
-    // Which calibres the kiosk should offer: whatever the guns you own eat, plus
+    // Which calibres the Armory should offer: whatever the guns you own eat, plus
     // mortar shells once the tube's plans are bought.
     function stockedCalibers() {
       const out = [];
@@ -29002,9 +29190,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       updateHpHud();
       renderShop();
     }
-    // CL-113 (Jerry): the kiosk sells attachments; he puts them on in the Armory.
+    // D-124: the Armory sells attachments; he puts them on at its workbench.
     let armoryFitHint = null;
     function boughtForArmory(name) {
+      if (cifOpen && cifEl.classList.contains('armory-show')) return;
       const title = sayText('armory.boughtTitle', { item: name }, name.toUpperCase() + ' BOUGHT');
       const sub = sayText('armory.boughtHint', {}, 'Fit it at the Armory');
       armoryFitHint = { title: title, sub: sub };
@@ -29043,6 +29232,13 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       reportPurchase('suppressor:' + w, equipmentPrice(SUPPRESSOR_PRICE[w], day));
       renderShop();
     }
+    function buyOptic(w, kind) {
+      if (!OPTIC_OPTIONS[w]?.includes(kind) || opticOwned[w]?.[kind] || !spend(equipmentPrice(OPTIC_PRICE[kind], day))) return;
+      (opticOwned[w] ||= {})[kind] = true;
+      boughtForArmory(dwText('shop.upgrade.opticItem', { optic: dwText(`armory.mod.optic.${kind}`) }));
+      reportPurchase(`optic:${kind}:${w}`, equipmentPrice(OPTIC_PRICE[kind], day));
+      renderShop();
+    }
     function buyPistolAuto() {
       if (pistolAutoOwned || !spend(equipmentPrice(PISTOL_AUTO_PRICE, day))) return;
       pistolAutoOwned = true;
@@ -29075,15 +29271,20 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
     // The kiosk is a place: you have to walk up to it (E). It can also keep hours - see
     // KIOSK_PREP_ONLY, currently off. The sim freezes while the menu is up.
-    function openShop(force = false) {
+    function openShop(force = false, mode = 'kiosk') {
       if(rangeFeature?.owns())rangeFeature.exit();
       if (fullMapOpen) setFullMap(false);
       if (!gameStarted || gameOver || won || shopOpen) return;
+      if (mode === 'armory' && (phase !== 'prep' || nightLockdown())) { refuseLockdown(); return; }
       if (!force) {
         if (!nearKiosk()) { AudioSys.invalid(); showBanner(dwText('shop.findTitle'), dwText('shop.find'), 1.8, '#ffb347'); return; }
         if (nightLockdown()) { refuseLockdown(); return; }   // CU-82
         if (!kioskOpenAllowed()) { AudioSys.invalid(); showBanner(dwText('shop.lockedTitle'), dwText('shop.lockedReason'), 1.8, '#ffb347'); return; }
       }
+      shopMode = mode;
+      shopTab = mode === 'armory' ? 'loadout' : 'supplies';
+      shopEl.querySelector('.shop-heading').textContent = dwText(mode === 'armory' ? 'armory.store.title' : 'shop.title');
+      document.getElementById('shopClose').textContent = dwText(mode === 'armory' ? 'armory.store.back' : 'shop.close');
       shopOpen = true;
       otsLockWanted(false);   // GP-19970: the paused shop cannot wait for updateOts to release the cursor
       paused = true;
@@ -29100,7 +29301,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
     function closeShop() {
       if (!shopOpen) return;
+      const returnToArmory = shopMode === 'armory';
       shopOpen = false;
+      shopMode = 'kiosk';
       AudioSys.shutter(false);
       shopEl.classList.remove('show');
       paused = false;
@@ -29108,6 +29311,13 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       syncReticleVisibility();
       // CU-229: the shop covers the banner. Say it once the shop is gone.
       if (armoryFitHint) { const hint = armoryFitHint; armoryFitHint = null; showBanner(hint.title, hint.sub, 2.6, '#9fd36a'); }
+      if (returnToArmory) { openCIF(); armoryUI.open(); cifEl.classList.add('armory-only'); }
+    }
+    function openArmoryStore() {
+      if (!cifOpen || !cifEl.classList.contains('armory-show') || nightLockdown()) return;
+      armoryUI.close();
+      closeCIF();
+      openShop(true, 'armory');
     }
     document.getElementById('shopClose').addEventListener('click', closeShop);
 
@@ -29622,6 +29832,20 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       // CL-113: the real guns, their attachments, and fitting them.
       getMods: (kind) => armoryMods(kind),
       onFit: (kind, id, on) => { const okFit = fitArmoryMod(kind, id, on); if (okFit) { AudioSys.magThud && AudioSys.magThud(0.6, 0); refreshArmoryRack(true); } return okFit; },
+      onBuyMod: (kind, id) => {
+        if (phase !== 'prep' || nightLockdown() || !weaponOwned[kind]) return false;
+        const mod = armoryMods(kind).find(m => m.id === id);
+        if (!mod || mod.owned || bank < mod.price) return false;
+        if (id === 'ext') buyExtMag(kind);
+        else if (id === 'heavy') buyHeavyBarrel(kind);
+        else if (id === 'suppressor') buySuppressor(kind);
+        else if (id.startsWith('optic:')) buyOptic(kind, id.slice(6));
+        else if (id === 'laserLight') buyGear(GEAR.find(gr => gr.key === 'laserLight'));
+        else if (id === 'auto') buyPistolAuto();
+        else if (id === 'tank') buySawTank();
+        return !!armoryMods(kind).find(m => m.id === id)?.owned;
+      },
+      onStore: openArmoryStore,
       picture: (kind) => armoryPicture(kind),
       preview: (kind, view) => armoryPreview(kind, view),   // GP-141, Claude approved 2026-10-06
       icon: (kind) => WHEEL_ICONS[kind] || '',
@@ -36286,7 +36510,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (mode && nightLockdown()) { refuseLockdown(); return; }   // CU-82
       if (mode && !buildUnlocked[mode]) {
         AudioSys.invalid();
-        showBanner(dwText('build.message.noBlueprint', { name: BUILD_NAMES[mode].toUpperCase() }), dwText('build.message.buyBlueprint', { price: BUILD_UNLOCK_PRICE[mode] }), 1.6, '#ffb347');
+        showBanner(dwText('build.message.noBlueprint', { name: BUILD_NAMES[mode].toUpperCase() }), dwText(WEAPON_BUILD_PLANS.has(mode) ? 'build.message.buyWeaponBlueprint' : 'build.message.buyBlueprint', { price: BUILD_UNLOCK_PRICE[mode] }), 1.6, '#ffb347');
         return;
       }
       placeMode = mode;
@@ -39013,7 +39237,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const tr = UPGRADE_TRACKS[track], from = tierOf(b, track), to = from + 1;
       const base = { track, from, parts };
       if (to >= tr.names.length) return Object.assign(base, { why: sayText('build.message.maxUpgrade', { name: tr.names[from] }, tr.names[from] + ' - fully upgraded') });
-      if ((upgradeOwned[track] | 0) < to) return Object.assign(base, { why: dwText('build.message.requiresUpgrade', { name: tr.names[to] }) });   // GB-133: the catalogue's line
+      if ((upgradeOwned[track] | 0) < to) return Object.assign(base, { why: dwText(WEAPON_BUILD_PLANS.has(track) ? 'build.message.requiresWeaponUpgrade' : 'build.message.requiresUpgrade', { name: tr.names[to] }) });   // D-124: each plan names its store.
       return Object.assign(base, { to, cost: tr.cost[to], name: tr.names[to], fromName: tr.names[from] });
     }
     // The piece the reticle is on, in reach, for upgrading.
@@ -39625,7 +39849,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // with the aim; the tripod and its head stay put. folded: the legs swung forward and closed up under the barrel, the
     // way it is carried (carriedM240Mesh).
     function makeM240Mesh(folded = false) {
-      return makeM240Model({ ...weaponModelContext(), M240_PIVOT }, folded);
+      const gun = makeM240Model({ ...weaponModelContext(), M240_PIVOT }, folded);
+      const optic = makeOptic('acog');
+      optic.position.set(0, 0.055, -0.11);
+      gun.userData.feedCover.add(optic); // standard ACOG follows the hinged cover
+      return gun;
     }
     function spawnBuild(kind, x, z) {
       const st = BUILD_STATS[kind] || BUILD_STATS.barricade;
@@ -40487,16 +40715,19 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // GB-156: the crew pose moved to updateMortarCrew (after the hold and the idle, so nothing above overwrites it, and
     // blended in and out instead of snapping on the first frame he is on the tube). Kept as a no-op for its call site.
     function updateMortarCrewPose() {}
-    function makeMortarRoundMesh() {   // the 60 mm round: the shell in flight and (GB-156) the round in his hand
+    function makeMortarRoundMesh() {   // M29A1 81 mm HE round: in flight and (GB-156) in his hand
       const g = new THREE.Group();
-      // GB-175: a real 60 mm bomb shape instead of a can and a plank: a teardrop olive body, a brass point-detonating fuze,
-      // a tail boom with four fins and their ring. Same length (z -0.26..0.27) and girth (r 0.09) as before.
+      // Keep the existing 0.53 m length and hand/projectile anchors. Scale only
+      // radial dimensions so the teardrop body has an 81 mm diameter.
+      g.scale.set(0.45, 0.45, 1);
       const lathe = (pts, mat) => { const m = new THREE.Mesh(new THREE.LatheGeometry(pts.map(([r, y]) => new THREE.Vector2(r, y)), 14), mat); m.rotation.x = Math.PI / 2; g.add(m); return m; };
-      lathe([[0, -0.15], [0.03, -0.15], [0.056, -0.128], [0.078, -0.085], [0.09, -0.03], [0.09, 0.05], [0.084, 0.1], [0.07, 0.135], [0, 0.135]], new THREE.MeshStandardMaterial({ color: 0x4a5530, roughness: 0.55, metalness: 0.4 }));
-      lathe([[0, 0.134], [0.07, 0.134], [0.058, 0.17], [0.04, 0.21], [0.024, 0.245], [0.012, 0.262], [0, 0.27]], new THREE.MeshStandardMaterial({ color: 0x9a7a3a, metalness: 0.65, roughness: 0.35 }));
+      lathe([[0, -0.15], [0.03, -0.15], [0.056, -0.128], [0.078, -0.085], [0.09, -0.03], [0.09, 0.05], [0.084, 0.1], [0.07, 0.145], [0.044, 0.19], [0.030, 0.205], [0, 0.205]], new THREE.MeshStandardMaterial({ color: 0x4a5530, roughness: 0.6, metalness: 0.18 }));
+      const yellowBand = new THREE.MeshStandardMaterial({ color: 0xb7a64f, roughness: 0.72, metalness: 0.02 });
+      lathe([[0.0895, 0.020], [0.091, 0.020], [0.091, 0.031], [0.0895, 0.031]], yellowBand);
+      lathe([[0, 0.204], [0.030, 0.204], [0.027, 0.225], [0.018, 0.245], [0.012, 0.262], [0, 0.27]], new THREE.MeshStandardMaterial({ color: 0x797b72, metalness: 0.7, roughness: 0.4 }));
       lathe([[0, -0.262], [0.024, -0.262], [0.024, -0.14], [0, -0.14]], gunMetal);
       for (let i = 0; i < 4; i++) { const fin = new THREE.Mesh(new THREE.BoxGeometry(0.008, 0.066, 0.1), gunMetal); const a = i * Math.PI / 2 + Math.PI / 4; fin.position.set(Math.cos(a) * 0.056, Math.sin(a) * 0.056, -0.2); fin.rotation.z = a - Math.PI / 2; g.add(fin); }
-      lathe([[0.084, -0.25], [0.09, -0.25], [0.09, -0.225], [0.084, -0.225], [0.084, -0.25]], gunMetal);
+      lathe([[0.055, -0.25], [0.06, -0.25], [0.06, -0.225], [0.055, -0.225]], gunMetal);
       return g;
     }
 
@@ -40716,6 +40947,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       holdHand(u.armLG, u.elbowLG, _HAND_L, _watchman.l, _watchman.channel, 1, _POLE_L, wL, 1, wL);
       poseHands(u, wR, wL);
     }
+    const _m240Feed = { c: new THREE.Vector3(), t: new THREE.Vector3(), a: new THREE.Vector3(), k: new THREE.Vector3() };   // CL-322
     function updateWatchmanExperiencePose(dt) {
       const m = mortarMounted?.type === 'm240' ? mortarMounted : null;
       const u = marine.userData, p = rollPivot.parent.position;
@@ -40734,8 +40966,23 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         _watchman.feetW = w;   // the feet themselves: updateMortarCrew, after the root has settled
         if (m) {
           const e = m.mesh.userData.elev;
-          const right = [0.025 + f.charge * 0.055, -0.105 + f.charge * 0.15, -0.15 + f.charge * 0.19];
-          const left = [-0.095 - f.feed * 0.025, 0.005 + f.feed * 0.105, -0.02 + f.feed * 0.06];
+          // CL-322 (the M240B handout's belt change, GP-20062's parts): the cover opens on its front pin and the charging
+          // handle runs back and forward (watchmanFeed's beats); the hands go to the cover's rear catch, the tray and the
+          // handle's knob, all in the elevating group's space, from their rest places on the grip and the cover's side.
+          const gd = m.mesh.userData, restR = [0.025, -0.105, -0.15], restL = [-0.095, 0.005, -0.02];
+          if (gd.feedCover) gd.feedCover.rotation.x = (gd.baseFeedCoverRot ? gd.baseFeedCoverRot.x : 0) + 1.05 * (f.cover || 0);
+          if (gd.chargingHandle && gd.baseChargingHandlePos) gd.chargingHandle.position.z = gd.baseChargingHandlePos.z - 0.19 * (f.pull || 0);
+          let right = restR, left = restL;
+          if (gd.feedCover && f.lOnCover > 0) {
+            const c = _m240Feed.c.set(0, 0.018, -0.21).applyEuler(gd.feedCover.rotation).add(gd.feedCover.position);
+            const tr = gd.feedTray ? _m240Feed.t.set(-0.035, 0.022, -0.02).add(gd.feedTray.position) : c;
+            const at = _m240Feed.a.set(c.x - 0.022, c.y + 0.012, c.z).lerp(tr, f.lTray || 0);
+            left = [restL[0] + (at.x - restL[0]) * f.lOnCover, restL[1] + (at.y - restL[1]) * f.lOnCover, restL[2] + (at.z - restL[2]) * f.lOnCover];
+          }
+          if (gd.chargingHandle && f.rOnCharger > 0) {
+            const k = _m240Feed.k.set(0.057, 0, 0).add(gd.chargingHandle.position);
+            right = [restR[0] + (k.x - restR[0]) * f.rOnCharger, restR[1] + (k.y - restR[1]) * f.rOnCharger, restR[2] + (k.z - restR[2]) * f.rOnCharger];
+          }
           _watchman.gripGun = e; _watchman.gripRight = right; _watchman.gripLeft = left;
           watchmanHands(e, right, left, w, w);
           _watchman.late = [e, right, left, w];   // GB-156: solved again once the root has settled (crewLateFeet)
@@ -50761,6 +51008,17 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     const _laserLocal = new THREE.Vector3();
     const _laserInv = new THREE.Matrix4();
     const _laserZ = new THREE.Vector3(0, 0, 1);
+    // One scene-level beam for the mounted M240. The PEQ-16 is standard issue
+    // on every built gun, but only the one being manned draws a beam.
+    const m240LaserBeam = new THREE.Mesh(makeLaserBeamGeo(), glowMat(new THREE.MeshBasicMaterial({
+      color: 0xff3030, transparent: true, opacity: 0, depthWrite: false,
+      blending: THREE.AdditiveBlending, side: THREE.DoubleSide
+    }), 3.4));
+    m240LaserBeam.name = 'm240-laser-beam';
+    m240LaserBeam.visible = false;
+    m240LaserBeam.frustumCulled = false;
+    m240LaserBeam.raycast = () => {};
+    scene.add(m240LaserBeam);
     const laserImpacts = [0, 1].map(() => {
       const m = new THREE.Mesh(new THREE.SphereGeometry(1, 8, 6), new THREE.MeshBasicMaterial({
         color: 0xff2b2b, transparent: true, opacity: 0, depthWrite: false, blending: THREE.AdditiveBlending
@@ -51080,6 +51338,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (scopeAnchor) scopeAnchor = { nx: aimPointerNdc.x, ny: aimPointerNdc.y, yaw: scopeYaw, pitch: scopePitch };
       updateScopeZoomHud();
     }
+    updateScopeZoomHud();   // CL-323: the NX8 reticle's first-focal-plane size from the start (2X)
     let pointerOnCanvas = false;
     let mouseFireHeld = false;
     // Snap aim for crisp TPS feel (no laggy turnToward)
@@ -51618,6 +51877,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         st.hands = !base ? null : (onAnyLadder() && _lad.handsOn) ? { kind: 'ladder', l: _lad.hand[0], r: _lad.hand[1] } : (unarmed && !st.want) ? { kind: 'empty' } : null; }
       st.grenade = grenadeAnim.phase ? { phase: grenadeAnim.phase, t: grenadeAnim.t } : null;   // CL-307: the throw's phase and its time
       st.weapon = currentWeapon; st.akimbo = akimboOn(); st.ads = fpAdsW; st.vx = velX; st.vz = velZ; st.vy = vy; st.grounded = grounded;
+      { const ov = opticViewNow(); st.opticTop = ov ? ov.top : 0; st.opticGlass = !!(ov && ov.glass && ov.glassW > 0.5); }   // CL-323: the optic's line (the ACOG's RMR on top) and its glass
       // CL-293 (J55): the view gun's bob on his stride's own cycle (the one his legs and his eye ride), walk to run by his gait's weight
       st.phase = walkPhase; st.run = POSE.gaitRun || 0; st.sprint = !!(keys.ShiftLeft || keys.ShiftRight) && hypot(velX, velZ) > 0.5;
       st.stream = flamerOn && currentWeapon === 'flamer';   // CL-293 (J59): the flamer's steady pushback
@@ -51920,6 +52180,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         // scope is raised, so it can be dialled in before you commit.
         if (!wasDrag && gameStarted && !gameOver && !won && !paused && !placeMode && !buildMode && currentWeapon === 'sniper') {
           setScopeZoomLevel(scopeZoomLevel >= SCOPE_ZOOM_FOV.length - 1 ? 0 : scopeZoomLevel + 1);
+        } else if (!wasDrag && gameStarted && !gameOver && !won && !paused && !placeMode && !buildMode && opticFitted[currentWeapon] === 'acog') {
+          switchOptic(currentWeapon);   // CL-323 (J51): a middle-click flips the ACOG's eye between the 4X and the RMR on top
         }
       }
     });
@@ -51935,7 +52197,13 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       // Scoped, a dolly change is invisible (the scope branch in tick() overwrites the
       // camera position outright), so the wheel dials magnification instead - same cycle
       // the middle-click gives.
-      if (scopeAmt > 0.5 && currentWeapon === 'sniper') {
+      // CL-323 (J51): down the sights in first person with the ACOG fitted, a notch flips the eye: down to the RMR on top
+      // (1X), up back to the 4X, as the sniper's wheel steps its power.
+      if (viewFirst && OTS.on && fpAdsW > 0.5 && opticFitted[currentWeapon] === 'acog' && !akimboOn()) {
+        if (Math.abs(dy) > 1) switchOptic(currentWeapon, dy > 0);
+        return;
+      }
+      if ((scopeAmt > 0.5 || (viewFirst && OTS.on && fpAdsW > 0.5)) && currentWeapon === 'sniper') {   // CL-323: first person's scope too
         // Up for more power, down for less, stopping at the ends (it used to wrap, so
         // one scroll too many threw you from 6X back to 2X).
         if (Math.abs(dy) > 1) setScopeZoomLevel(scopeZoomLevel + (dy < 0 ? 1 : -1));
@@ -52157,34 +52425,34 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           const st = WEAPON_STATS[name];
           const active = name === currentWeapon && gun.visible && gun.parent && gun.parent.visible;
           // GB-257 (J9): the beam stays on through a reload; it rides the gun as the hands work the magazine.
-          const on = lasersEnabled && gearOwned.laser && active && !st.melee && gameStarted && !placeMode && !gameOver && !won && !playerSwimming && !mortarMounted;
+          const on = lasersEnabled && gearOwned.laserLight && laserLightFitted[name] && active && !st.melee && gameStarted && !placeMode && !gameOver && !won && !playerSwimming && !mortarMounted;
           laser.visible = on;
           if (!on) { laser.material.opacity = 0; continue; }
           const offhand = gun === offhandMeshes[name];
-          const tint = laserTintFor(offhand ? name + ':second' : name);
+          const tint = (name === 'pistol' || name === 'shotgun') ? 0x3dff62 : laserTintFor(offhand ? name + ':second' : name);
           laser.material.color.setHex(tint);
           // Bright enough to read in daylight; the colour stays the one fitted on this gun.
           laser.material.opacity = (nvgDown && isNight) ? 0.96 : (isNight ? 0.9 : 0.72);
           laser.material.blending = THREE.AdditiveBlending;
           gun.updateMatrixWorld(true);
-          // GB-257 (J8): the cone leaves this muzzle along the bore every frame, so it moves with the recoil, the sway
-          // and the reload, and stops on the first material along that line. At rest the hold points the bore at the
+          // D-123: the beam leaves the fitted laser aperture along the bore every frame, so it moves with recoil and sway
+          // and stops on the first material along that line. At rest the hold points the bore at the
           // aim point (the round's), so it meets the cursor there; the reach is that point's distance plus a margin.
-          const mz = gun.userData.muzzleLocal;
-          // CL-281 / GB-298 (J15): in first person the beam leaves the view gun's muzzle along the view
+          const mz = gun.userData.laserLensLocal || gun.userData.muzzleLocal;
+          // CL-281 / GB-298 (J15): in first person the beam leaves the view gun's lens along the view
           // gun's bore (its sway and kick), not from the eye, the body's gun, or toward the aim point.
           // His own gun, out of the eye's pass, still holds the beam's mesh.
           const vmWhich = offhand ? 2 : 1;
-          const vmLaser = !!viewmodel && viewmodel.showing(name) && !!viewmodel.muzzleWorld(_laserOrigin, vmWhich);   // CL-301: the pair's left beam from the left view gun
+          const vmLaser = !!viewmodel && viewmodel.showing(name) && !!viewmodel.pointWorld(mz, _laserOrigin, vmWhich);   // CL-301: the pair's left beam from the left view gun
           if (!vmLaser) { _laserOrigin.set(mz.x, mz.y, mz.z); gun.localToWorld(_laserOrigin); }
           weaponAimPoint(_laserAim);
           const reach = _laserAim.distanceTo(_laserOrigin);
           if (reach < 0.05) { laser.visible = false; continue; }
           if (vmLaser) {
             const gVm = vmWhich === 2 ? viewmodel.gun2 : viewmodel.gun;
-            const mzV = gVm.src.userData.muzzleLocal;
+            const mzV = gVm.src.userData.laserLensLocal || gVm.src.userData.muzzleLocal;
             const sgn = mzV.z >= 0 ? 1 : -1;
-            // Ahead of the muzzle along the bore, projected the same way as muzzleWorld.
+            // Ahead of the aperture along the bore, projected the same way as pointWorld.
             viewmodel.viewPoint(_vmLaserAt.set(mzV.x, mzV.y, mzV.z + sgn), _vmLaserAt, vmWhich);
             const kFov = Math.tan((camera.fov || 60) * Math.PI / 360) / Math.tan(viewmodel.proj.fov * Math.PI / 360);
             const mx = viewmodel.space.scale.x;
@@ -52221,6 +52489,30 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           }
         }
       }
+      const unit = mortarMounted?.type === 'm240' ? mortarMounted.mesh?.userData.laserLightUnit : null;
+      const m240On = !!unit && lasersEnabled && gameStarted && !gameOver && !won && !placeMode && !playerSwimming;
+      m240LaserBeam.visible = m240On;
+      if (m240On) {
+        unit.updateMatrixWorld(true);
+        unit.localToWorld(_laserOrigin.copy(unit.userData.laserLens));
+        _laserDir.set(0, 0, 1).transformDirection(unit.matrixWorld);
+        const stop = laserStop(_laserOrigin, _laserDir, 80);
+        m240LaserBeam.position.copy(_laserOrigin);
+        m240LaserBeam.quaternion.setFromUnitVectors(_laserZ, _laserDir);
+        poseLaserBeam(m240LaserBeam, stop.len, 0.0038, 0.0038 + 0.00015 * stop.len);
+        m240LaserBeam.material.opacity = isNight ? 0.9 : 0.72;
+        _laserEnd.copy(_laserOrigin).addScaledVector(_laserDir, stop.len);
+        laserAimReport = { x: _laserEnd.x, y: _laserEnd.y, z: _laserEnd.z, len: stop.len,
+          ox: _laserOrigin.x, oy: _laserOrigin.y, oz: _laserOrigin.z, surface: stop.surface };
+        if (stop.surface && shown < laserImpacts.length) {
+          const dot = laserImpacts[shown++];
+          dot.visible = true;
+          dot.position.copy(_laserEnd);
+          dot.material.color.copy(m240LaserBeam.material.color);
+          dot.material.opacity = Math.min(1, m240LaserBeam.material.opacity + 0.15);
+          dot.scale.setScalar(0.02 + Math.min(0.045, stop.len * 0.0012));
+        }
+      }
       for (let i = shown; i < laserImpacts.length; i++) laserImpacts[i].visible = false;
     }
 
@@ -52240,15 +52532,15 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // butt lands in the right shoulder and the support hand sits just ahead of the mag.
     const WEAPON_HOLD = {
       pistol:   { twist: 0.1, hold: [-0.32, -0.08, 0.4], grip: [0, -0.066, -0.016], trig: [0, -0.05, 0.073], fore: [-0.058, -0.09, 0.012] },   // GB-151: fore = the support fist round the firing fingers
-      revolver: { twist: 0.1, hold: [-0.32, -0.08, 0.4], grip: [0, -0.07, -0.04], trig: [0, -0.02, 0.035], fore: [-0.058, -0.1, -0.014] },
+      revolver: { twist: 0.1, hold: [-0.32, -0.08, 0.4], grip: [0, -0.07, -0.059], trig: [0, -0.02, 0.035], fore: [-0.058, -0.1, -0.041] },   // GB-318 (CL-320): grip/fore followed the raked S&W grip (z -0.059 / -0.041; VM_SOCKETS grip/support); trig unchanged
       uzi:      { twist: 0.2, hold: [-0.3, -0.16, 0.34], grip: [0, -0.088, -0.027], trig: [0, -0.056, 0.05], fore: [0, -0.03, 0.18] },   // GB-236: grip on the thicker grip's centre line (was -0.017)
-      m4:       { twist: 0.8, hold: [-0.24, -0.12, 0.28], grip: [0, -0.106, -0.116], trig: [0, -0.078, -0.029], fore: [0, 0.0, 0.36], sh: { butt: [0, -0.003, -0.569], eye: [0, 0.134, -0.20] } },   // GB-317 (CL-318): grip followed the A2 4 cm back (cz -0.12, z -0.116); trig on the new blade (z -0.029)
+      m4:       { twist: 0.8, hold: [-0.24, -0.12, 0.28], grip: [0, -0.106, -0.116], trig: [0, -0.078, -0.029], fore: [0, -0.01, 0.43], sh: { butt: [0, -0.003, -0.569], eye: [0, 0.134, -0.20] } },   // CL-322: fore on GP-20055's quad rail (was [0, 0, 0.36], the old tube)   // GB-317 (CL-318): grip followed the A2 4 cm back (cz -0.12, z -0.116); trig on the new blade (z -0.029)
       ak:       { twist: 0.8, hold: [-0.24, -0.12, 0.28], grip: [0, -0.123, -0.126], trig: [0, -0.052, -0.026], fore: [0, -0.02, 0.37], sh: { butt: [0, -0.078, -0.597], eye: [0, 0.074, -0.30] } },   // GB-317 (CL-318): palm u 0.42 on cz -0.13 / h 0.165 (z -0.126, y -0.123 = VM_SOCKETS.ak); trig on the new blade; GB-311: cover 2.6 cm lower (SIGHT.ak 0.074)
       aa12:     { twist: 0.8, hold: [-0.24, -0.13, 0.203], grip: [0, -0.145, -0.166], trig: [0, -0.104, -0.086], fore: [0, -0.035, 0.36], sh: { butt: [0, -0.005, -0.572], eye: [0, 0.16, -0.30] } },   // GB-173: the grip moved 70 mm back on the model; hold -0.057 (x0.82) keeps the gun where it was; GB-188: fore 20 mm lower, the fist round the underside of GB-180's box handguard
       shotgun:  { twist: 0.8, hold: [-0.24, -0.12, 0.24], grip: [0, -0.088, -0.056], trig: [0, -0.058, 0.023], fore: 'pump', pumpDy: -0.015, sh: { butt: [0, -0.02, -0.496], eye: [0, 0.08, -0.28] } },
       sniper:   { twist: 0.8, hold: [-0.24, -0.12, 0.28], grip: [0, -0.088, -0.117], trig: [0, -0.064, -0.052], fore: [0, -0.005, 0.35], sh: { butt: [0, -0.018, -0.622], eye: [0, 0.15, -0.40] } },
       launcher: { twist: 0.8, hold: [-0.24, -0.14, 0.26], grip: [0, -0.088, -0.046], trig: [0, -0.074, 0.014], fore: [0, -0.075, 0.42], sh: { butt: [0, 0.008, -0.504], eye: [0, 0.19, -0.18] } },
-      minigun:  { twist: 1.0, hold: [-0.3, -0.25, 0.34], grip: [0, -0.017, -0.52], fore: [-0.304, 0.012, 0.16] },   // GB-275: onto GP-20022's rear grip (0,-0.017,-0.52) and GP-20024's -X side peg (-0.304,0.012,0.16); was the top carry handle (grip [0,0.2,-0.28], fore [0,0.14,-0.05], twist 0.6, hold [-0.3,-0.3,0.2]). The grip is 0.5 m behind the old one, so the hold moves with it: twist 1.0 and hold 0.34 forward keep the housing out of his belly (31 cm in, now ~6) with the left fist round the peg
+      minigun:  { twist: 1.0, hold: [-0.3, -0.25, 0.34], grip: [0, -0.0119, -0.364], fore: [-0.2128, 0.0084, 0.112] },   // CL-322: GP-20063's 0.70 rotary gun (the grip and peg scaled; AG-261: the hand 10 cm off the peg).   // GB-275: onto GP-20022's rear grip (0,-0.017,-0.52) and GP-20024's -X side peg (-0.304,0.012,0.16); was the top carry handle (grip [0,0.2,-0.28], fore [0,0.14,-0.05], twist 0.6, hold [-0.3,-0.3,0.2]). The grip is 0.5 m behind the old one, so the hold moves with it: twist 1.0 and hold 0.34 forward keep the housing out of his belly (31 cm in, now ~6) with the left fist round the peg
       flamer:   { twist: 0.6, hold: [-0.26, -0.26, 0.22], grip: [0, -0.078, -0.157], trig: [0, -0.048, -0.09], fore: [0, -0.07, 0.28] },
       chainsaw: { twist: 0.5, hold: [-0.24, -0.34, 0.22], grip: [0, -0.014, -0.46], trig: [0, -0.01, -0.39], fore: [-0.01, 0.246, -0.035], level: true }   // GB-275: onto GP-20022's handles: the rear throttle grip (0,-0.014,-0.46), the front hoop's top bar (-0.01,0.246,-0.035)
     };
@@ -53296,7 +53588,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // Recoil (climb and wander) is the gun's and is left alone.
     const LASER_SPREAD_MUL = 0.8;
     function laserSteadies() {
-      if (!lasersEnabled || !gearOwned.laser) return false;
+      if (!lasersEnabled || !gearOwned.laserLight || !laserLightFitted[currentWeapon]) return false;
       const st = WEAPON_STATS[currentWeapon];
       if (!st || st.melee) return false;
       const gun = weaponMeshes[currentWeapon];
@@ -53580,7 +53872,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           flameEmitAcc -= 1;
           spawnFlameBlob(o.x, o.y, o.z, dir, Math.random() * dt);
         }
-        // Light thrown by the stream itself, a couple of metres out.
+        // Both the nozzle and the stream draw from the existing fixed light pool.
+        // The near glow keeps the flamer visible before any fuel reaches the ground.
+        requestEffectLight(o.x, o.y, o.z, 0xffa13d, 1.25 + Math.random() * 0.25, 3.5);
         requestEffectLight(o.x + dir.x * 2.2, o.y + dir.y * 2.2 + 0.3, o.z + dir.z * 2.2, 0xff8a30, 2.4 + Math.random() * 0.8, 10);
         if (flare) {
           flare.visible = true;
@@ -54451,7 +54745,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
             curShotId = 0;
             // Pump shotgun: red hull ejects on pump-back - no gold brass here.
             // The AA-12 has no pump to work, so it throws its hull on the shot.
-            if (currentWeapon === 'aa12') spawnCasing('aa12');
+            if (currentWeapon === 'aa12') { spawnCasing('aa12'); if (weaponMeshes.aa12) weaponMeshes.aa12.userData.strokeT = 0; }   // CL-322: the constant-recoil stroke (updateAa12Stroke)
           } else {
             // One-handed and unsupported: the pair throws a noticeably wider group.
             const spr = akimboOn() ? (st.spread || 0) * 2.0 + 0.028 : (st.spread || 0);
@@ -61997,7 +62291,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       .map((k) => ({ key: k, name: sayText('enemy.' + k + '.name', {}, ZOMBIE_TYPES[k].name) }));
     // GP-19901: the console owns only its session and borrowed ammunition, never unlocks or weapon balance.
     let rangeFeature=null,rangeShotPacket=null,rangeEventSerial=0;
-    function rangeSignature(w){return JSON.stringify({mode:weaponIsAuto(w)?'auto':'semi',ext:!!extMag[w],heavy:!!heavyFitted[w],can:!!suppressor[w],laser:!!gearOwned.laser&&lasersEnabled,auto:w==='pistol'&&pistolAutoFitted,skills:Object.fromEntries(Object.keys(SKILL_RANKS).map(k=>[k,skillLvl(localPlayer,k)]))});}
+    function rangeSignature(w){return JSON.stringify({mode:weaponIsAuto(w)?'auto':'semi',ext:!!extMag[w],heavy:!!heavyFitted[w],can:!!suppressor[w],laser:!!gearOwned.laserLight&&!!laserLightFitted[w]&&lasersEnabled,auto:w==='pistol'&&pistolAutoFitted,skills:Object.fromEntries(Object.keys(SKILL_RANKS).map(k=>[k,skillLvl(localPlayer,k)]))});}
     function rangeRefill(w,d=null){
       if(!w)return;
       fireCooldown=0;
@@ -63906,7 +64200,9 @@ live++;
           !diving() && !shopOpen && !(viewFirst && OTS.on);   // CL-249: in first person its scope is the aim down the sights
         if (sniperScoping !== sniperScopingNow) AudioSys.reloadCue('grab', 0.4);
         sniperScopingNow = sniperScoping;
-        const fovZoom = sniperZoom ? SCOPE_ZOOM_FOV[scopeZoomLevel] : aimFov;   // CL-175: the Aim FOV setting (FOV_ZOOM 38 was fixed)
+        stepOpticTop(realDt);   // CL-323
+        const optView = viewFirst && OTS.on && !sniperZoom ? opticViewNow() : null;   // CL-323: a fitted optic's field (3X, 4X; 1X keeps the Aim FOV)
+        const fovZoom = sniperZoom ? SCOPE_ZOOM_FOV[scopeZoomLevel] : optView ? optView.fov : aimFov;   // CL-175: the Aim FOV setting (FOV_ZOOM 38 was fixed)
         const distZoom = sniperZoom ? CAM_DIST_DEFAULT : CAM_DIST_ZOOM;
         // A few degrees wider at a full sprint: the world opens up and the speed reads.
         const sprintKick = (!wantZoom && sprintFovKick > 0) ? sprintFovKick : 0;
@@ -64743,10 +65039,21 @@ live++;
       // CL-249: in first person the sniper's aim down the sights is its scope (the glass and the label), and down iron
       // sights the crosshair goes (the sights are the aim); a sightless gun keeps it.
       const fpKind = viewFirst && OTS.w > 0.5 && fpAdsW > 0 ? (SIGHT[currentWeapon] && !akimboOn() ? SIGHT[currentWeapon].kind : 'over') : null;
-      const glass = Math.max(scopeAmt, fpKind === 'optic' ? fpAdsW : 0);
+      // CL-323: a magnified optic's glass (the prism, the ACOG; not on its RMR on top) and its label; the ACOG's label flashes
+      // 4X / 1X on a switch
+      const ovw = fpKind && fpKind !== 'optic' ? opticViewNow() : null, ovu = Math.min(1, Math.max(0, (fpAdsW - 0.55) / 0.33));
+      const optGlass = ovw && ovw.glass ? ovw.glassW * ovu * ovu * (3 - 2 * ovu) : 0;   // the glass from 55% of the aim to 88%, the optic at the eye by then
+      if (ovw && ovw.kind === 'acog' && fpAdsW > 0.9) tipOnce('acogSwitch', 'tips.combat.acogSwitch', 'tips.combat.title');   // GP-20067: the first ACOG aim names the switch
+      const glass = Math.max(scopeAmt, fpKind === 'optic' ? fpAdsW : 0, optGlass);
+      { const gk = optGlass > 0 && optGlass >= scopeAmt ? ovw.glass : '';
+        if ((scopeOverlayEl.dataset.kind || '') !== gk) scopeOverlayEl.dataset.kind = gk;
+        const lab = ovw && (gk || (ovw.kind === 'acog' && opticLabelT > 0)) ? ovw.label : SCOPE_ZOOM_LABELS[scopeZoomLevel];
+        if (scopeZoomLabelEl.textContent !== lab) scopeZoomLabelEl.textContent = lab; }
       rollPivot.visible = glass < 0.82;
       scopeOverlayEl.style.opacity = String(glass);
-      scopeZoomLabelEl.style.opacity = String(glass > 0.6 ? Math.min(1, (glass - 0.6) * 2.5) : 0);
+      scopeZoomLabelEl.style.opacity = String(Math.max(glass > 0.6 ? Math.min(1, (glass - 0.6) * 2.5) : 0, ovw && ovw.kind === 'acog' && fpAdsW > 0.5 ? Math.min(1, opticLabelT / 0.3) : 0));
+      { const du = Math.min(1, Math.max(0, (fpAdsW - 0.8) / 0.17)), dw = ovw && (ovw.kind === 'rmr' || ovw.kind === 'acog') ? (ovw.kind === 'acog' ? ovw.top : 1) * du * du * (3 - 2 * du) : 0;   // CL-323: the red dot's dot
+        const ds = dw > 0.001 ? dw.toFixed(3) : '0'; if (opticDotEl.style.opacity !== ds) opticDotEl.style.opacity = ds; }
       // Crossfade the ordinary cursor-following reticle out as the scope's own
       // centred crosshair fades in, so there's never two overlapping at once.
       reticleEl.style.opacity = String(Math.max(0, 1 - glass * 1.6) * (fpKind === 'iron' ? 1 - fpAdsW : 1));
@@ -64940,6 +65247,15 @@ live++;
             lights: () => ({ on: !training.lightsOff, night: isNight, room: training.tg ? training.tg.lightsOn() : null }), toggleLights: () => toggleTrainingLights() /* CU-94 */ }, /* CL-114 */ stockNoticeDbg: { arrivals: (n) => stockArrivals(n), queue: (n) => queueStockNotice(n), state: () => ({ t: stockNotice.t, hold: stockNotice.hold, guns: stockNotice.guns.slice(), shown: stockNotice.shown.slice(), visible: !!(stockNotice.el && stockNotice.el.classList.contains('show')) }), tick: (dt) => updateStockNotice(dt), show: (guns) => showStockNotice(guns), setDay: (n) => { day = n; }, NIGHT: GUN_STOCK_NIGHT }, armoryFinishDbg: { list: (k) => armoryFinishes(k), paint: (k, key) => paintArmoryGun(k, key) }, /* CL-113 */ armoryDbg: { mods: (w) => armoryMods(w), fit: (w, id, on) => fitArmoryMod(w, id, on), inReach: () => weaponsInReach(), picture: (k) => armoryPicture(k), pics: () => ({ drawn: armoryPics.drawn, cached: armoryPics.cache.size, ok: !!armoryPics.r }), rack: () => (house.armoryRack ? house.armoryRack.children.map((g) => g.userData.rackKind).filter(Boolean) : null), refreshRack: () => refreshArmoryRack(true), stored: () => armoryStoredKinds(), bigtex: () => bigtexWheel, ui: () => armoryUI, owned: () => ({ suppressor: { ...suppressorOwned }, auto: pistolAutoOwned, tank: sawTankUpgraded }) }, /* CL-83 */ nightRimDbg, /* CL-108, CL-109 */ historyProps, storyPropInReach, /* CL-111 */ runeFinishDbg: { unlocked: () => runeFinishUnlocked(), unlock: () => unlockRuneFinish(), lock: () => { runeFinish.unlocked = false; try { localStorage.removeItem(RUNE_FINISH_STORE); } catch (_) {} }, isGunFinishKey: (k) => isGunFinishKey(k), tex: () => runeFinish.tex, glow: (l) => updateRuneFinishGlow(l), state: () => runeFinish, furniture: () => gunFurniture, readWardrobe: () => readWardrobe(), KEY: RUNE_FINISH_KEY }, /* CL-78 */ guardianBossDbg: { rigOf: (z) => (z && z.mesh && z.mesh.userData.bossRig) || null, update: (dt) => updateGuardianBossRigs(dt), BOSS_RIG }, /* CL-93 */ rabbitDbg: { ensure: () => ensureRabbitMound(), state: () => rabbitMound, update: (dt) => updateRabbitMound(dt), wake: () => wakeKillerRabbit(), hit: (a, b) => rabbitMoundHit(a.x, a.y, a.z, b.x, b.y, b.z), give: () => { ensureRabbitMound(); rabbitMound.holy = true; rabbitMound.reliquary.userData.grenade.visible = false; }, ready: () => holyGrenadeReady(), throwG: () => { grenadeCd = 0; throwGrenade(); }, reset: () => resetRabbitMound(), distToPath: (x, z) => distToPath(x, z), RABBIT }, /* CL-92 */ lightningDbg: { yank: () => bootsYankPress(), yankState: () => ({ ...bootsYank, inReach: bootsYankInReach() }), skeleton: () => POI.mast && POI.mast.skeleton, strike: (k) => strikeLightning(k || null), update: (dt) => updateLightning(dt), state: () => lightning, odds: (o) => { lightning.odds = o || null; }, boots: () => ensureInsulatedBoots(), wear: (p) => wearInsulatedBoots(p || localPlayer), /* CL-178 */ mast: () => ({ ladder: mastLadder(), climb: mastClimb, high: onMastHigh(), perch: POI.mast ? POI.mast.perch : null, PERCH: MAST_PERCH }), climbMast: (y) => { const L = mastLadder(); if (!L) return false; mastClimb.on = true; climbingTower = true; player.position.set(L.x, Math.min(L.top, L.foot + (y || 0)), L.z); velX = 0; velZ = 0; vy = 0; return true; }, leaveMast: () => letGoOfMast(), /* CL-179 */ fall: () => mastFall, smoke: () => zapSmoke, ladderNow: () => ladderNow(), holster: () => ({ ...ladderHolster, unarmed }), /* CL-180 */ limbs: () => _lad.st, handTargets: () => _lad.hand, LADDER_GRIP, worn: (p) => insulatedBootsOn(p || localPlayer), reset: () => resetLightning(), marine: () => worldMarine, bolt: (x, z, hold) => { showBolt({ x, y: sampleHeight(x, z), z }); if (hold) { lightning.boltT = 1e9; lightning.flashT = 0; lightning.flashEl.style.opacity = '0'; } }, LIGHTNING, BOOTS_HEX }, /* CL-76 */ fogNightDbg: { active: () => fogNightActive(), k: () => fogNightK, force: (v) => { fogNightForce = v; }, step: (dt) => updateDayNight(dt), apply: (dt) => applyFogNight(dt), FOG_NIGHT }, /* CL-75 */ makeSurvivorFigure, SURVIVOR_LOOK, resolveTreeCollisionsDbg: (dt) => resolveTreeCollisions(dt),   /* CL-80 */ boatRig, getExtractionBoat: () => extractionBoat, /* CL-143 */ trainingBuildDbg: { refusal: (x, z, gx, gz, kind) => { const was = placeMode; if (kind) placeMode = kind; try { return placeRefusal(x, z, gx, gz); } finally { placeMode = was; } }, area: () => training.tg && training.tg.build, gridIndex }, /* CL-142 */ makeCargoPlane, insertionDbg: { begin: () => beginMarineInsertion(), rig: () => marineInsertion, ordersEl: () => ordersCardEl }, BOARD_HOLD_S, boardingDbg: () => ({ holdT: boardHoldT, pending: !!boardPending, reach: boardingReach(), won, gameOver, hot: !!matchStats.hotExtraction, state: extractionState }),   /* CL-73 */ setGunSuppressor, SUPPRESSOR,   /* CL-95 */
           addDummyPlayer, removeDummyPlayer, nearestPlayer, playersNear, playerById, players, getPlayers: () => players, nightKindForDay: (d) => nightKindOf(d, nightPlanFor(d), isGuardianNight(d)),   /* CU-77 */
         });
+        window.TT.opticDbg = { options: OPTIC_OPTIONS, mount: OPTIC_MOUNT,
+          owned: () => opticOwned, fitted: () => opticFitted,
+          grant: (w, kind) => { if (!OPTIC_OPTIONS[w]?.includes(kind)) return false; (opticOwned[w] ||= {})[kind] = true; return true; },
+          buy: (w, kind) => buyOptic(w, kind),
+          fit: (w, kind) => fitArmoryMod(w, `optic:${kind}`, true),
+          clear: (w) => { if (opticFitted[w]) return fitArmoryMod(w, `optic:${opticFitted[w]}`, false); return true; },
+          standard: { sniper: sniperNx8 },
+          switchTo: (w, top) => switchOptic(w, top), top: (w) => ({ want: !!opticTopWant[w], w: opticTop[w] || 0 }),   // CL-323
+          view: (w) => { const v = opticViewNow(w); return v ? { ...v } : null; }, line: (w) => fittedOpticLine(w) };
         window.TT.nightWarningsDbg = { enabled: nightWarningsOn, events: nightWarnings.events,
           stats: nightWarnings.stats, cover: (x, z) => nightWarningCover(x, sampleHeight(x, z), z),
           state: (z) => ({ night: isNight, nvg: nvgDown, flashlight: flashlightActive(),

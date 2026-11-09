@@ -1,0 +1,29 @@
+{
+  "setup": {
+    "backend": "WebGPU",
+    "weapon": "chainsaw",
+    "view": {
+      "tune": {},
+      "active": true,
+      "key": "chainsaw",
+      "akimbo": false,
+      "raise": 1,
+      "ads": 0,
+      "wrist": {
+        "r": 0.1099934957885829,
+        "l": 0.03855138117987517
+      },
+      "magState": "seated",
+      "handPlace": "fore",
+      "reloadU": null,
+      "hack": true,
+      "filter": true,
+      "flip": true,
+      "wristMax": 0.87,
+      "blade": null,
+      "hands": null,
+      "reloadKind": null
+    }
+  },
+  "errors": []
+}
