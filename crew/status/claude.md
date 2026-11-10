@@ -4,10 +4,10 @@ state: idle
 model: Claude Opus 5.5
 task: —
 touching: —
-since: 2026-11-10T17:01Z
-next: CL-334 J101: a new, detailed hand (first and third person). Now, fi
+since: 2026-11-10T18:17Z
+next: CL-334 the hands on the guns: attachments on, two hands, the support wraps
 blocked-on: —
-last-report: handoffs/2026-11-10-claude-CL-344.md
+last-report: handoffs/2026-11-10-claude-CL-347.md
 
 ## Notes
 - 2026-10-31: device_commit_files can resend an earlier upload when a stagedPath is reused (twice a commit 'written' left the old file): give each commit a fresh file name and check the md5 on the PC after.

@@ -1,14 +1,24 @@
 /**
  * Machine-wide game-test queue.
  *
+ * CL-347 (Jerry, 10 Nov 2026: "If the bottleneck is available test slots I give you guys the authority to open as many
+ * as you think is feasible without cooking the machine"): on a computer with a graphics card it can read, more than one
+ * lease at a time, each still one game and one worker. The first lease is granted as before; a further one only while
+ * fewer than the computer's slots are in use, no lease is Jerry's or exclusive and the next in line is neither (his own
+ * game and the timing benches have the computer alone, and nothing new starts while he waits), the last start was over
+ * staggerSec ago (a game's load is its peak), and the computer has the room right then (free memory, the cores, the
+ * graphics card's free memory and its temperature, measured at the grant). A reclaimed lease (its processes died without
+ * releasing: a crash or a killed session) puts the computer back to one at a time for backoffMin.
+ * tools/game-test-slot.config.json overrides any of SLOT_DEFAULTS; DW_GAME_TEST_SLOTS overrides the count.
+ *
  * The state and mutex live in the OS temp directory, not in the repository, so
  * a cloud workspace and Jerry's PC do not block each other.  Every official
  * game/browser launcher must either run through this CLI or validate the
  * DW_GAME_TEST_TOKEN that the CLI gives its child process.
  */
-import { spawn } from 'node:child_process';
+import { execFile, spawn } from 'node:child_process';
 import { createHash, randomUUID } from 'node:crypto';
-import { watch as watchFs } from 'node:fs';
+import { readFileSync, watch as watchFs } from 'node:fs';
 import {
   appendFile,
   copyFile,
@@ -35,6 +45,111 @@ const RECONCILE_MS = 5_000;
 const WRITE_ATTEMPTS = 20;
 const WRITE_RETRY_MS = 250;
 const RETRYABLE_WRITE = new Set(['EACCES', 'EPERM', 'EBUSY', 'UNKNOWN']);
+
+// CL-347: how many at once, and the room each start needs (see the header).
+export const SLOT_DEFAULTS = Object.freeze({
+  slots: 'auto',        // a number, or 'auto': from this computer's memory, cores and graphics card, never over hardMax
+  hardMax: 3,
+  reserveGB: 8,         // memory kept for Windows, Jerry's programs and the agents' own apps
+  perGameGB: 5,         // one game instance (headless, software-rendered: 4-5 GB measured, CL-334)
+  keepFreeGB: 4,        // never start one that would leave less memory free than this
+  cpusPerGame: 4,
+  perGameVramGB: 2.5,
+  keepFreeVramGB: 1.5,
+  maxGpuTempC: 80,      // no new start while the graphics card is this hot
+  maxCpuBusy: 0.75,     // or while the cores are this busy
+  staggerSec: 30,
+  backoffMin: 20,
+  sampleSec: 10,
+});
+const SLOT_CONFIG = path.join('tools', 'game-test-slot.config.json');
+
+export function loadSlotLimits(repoRoot = REPO_ROOT, env = process.env) {
+  let file = {};
+  try {
+    file = JSON.parse(readFileSync(path.join(repoRoot, SLOT_CONFIG), 'utf8')) || {};
+  } catch {
+    file = {};
+  }
+  const limits = { ...SLOT_DEFAULTS };
+  for (const key of Object.keys(SLOT_DEFAULTS)) {
+    if (file[key] === undefined) continue;
+    limits[key] = key === 'slots' && file[key] === 'auto' ? 'auto' : Number(file[key]);
+  }
+  if (env.DW_GAME_TEST_SLOTS) {
+    limits.slots = env.DW_GAME_TEST_SLOTS === 'auto' ? 'auto' : Number(env.DW_GAME_TEST_SLOTS);
+  }
+  return limits;
+}
+
+function nvidiaSmi(timeout = 4000) {
+  return new Promise(resolve => {
+    try {
+      execFile(
+        'nvidia-smi',
+        ['--query-gpu=name,memory.total,memory.used,temperature.gpu', '--format=csv,noheader,nounits'],
+        { timeout, windowsHide: true },
+        (error, stdout) => {
+          if (error) return resolve(null);
+          const first = String(stdout).split(/\r?\n/).find(line => line.trim());
+          if (!first) return resolve(null);
+          const [name, total, used, temp] = first.split(',').map(part => part.trim());
+          const totalMB = Number(total);
+          const usedMB = Number(used);
+          if (!Number.isFinite(totalMB) || totalMB <= 0 || !Number.isFinite(usedMB)) return resolve(null);
+          return resolve({
+            name,
+            vramTotalGB: totalMB / 1024,
+            vramFreeGB: (totalMB - usedMB) / 1024,
+            tempC: Number.isFinite(Number(temp)) ? Number(temp) : null,
+          });
+        },
+      );
+    } catch {
+      resolve(null);
+    }
+  });
+}
+
+async function cpuBusyOver(ms) {
+  const before = os.cpus().map(cpu => cpu.times);
+  await delay(ms);
+  let idle = 0;
+  let total = 0;
+  os.cpus().forEach((cpu, index) => {
+    const prior = before[index];
+    if (!prior) return;
+    for (const key of Object.keys(cpu.times)) total += cpu.times[key] - (prior[key] || 0);
+    idle += cpu.times.idle - prior.idle;
+  });
+  return total > 0 ? Math.max(0, Math.min(1, 1 - idle / total)) : 0;
+}
+
+export const machineProbe = {
+  async machine() {
+    return { totalGB: os.totalmem() / 2 ** 30, cpus: os.cpus().length, gpu: await nvidiaSmi() };
+  },
+  async sample() {
+    const [cpuBusy, gpu] = await Promise.all([cpuBusyOver(500), nvidiaSmi()]);
+    return { freeGB: os.freemem() / 2 ** 30, cpuBusy, gpu };
+  },
+};
+
+export function autoSlots(limits, machine) {
+  if (typeof limits.slots === 'number' && Number.isFinite(limits.slots)) {
+    return Math.max(1, Math.min(6, Math.floor(limits.slots)));
+  }
+  // No graphics card we can read (a cloud box, a VM: software rendering): one at a time.
+  if (!machine?.gpu) return 1;
+  const byMemory = Math.floor((machine.totalGB - limits.reserveGB) / limits.perGameGB);
+  const byCores = Math.floor(machine.cpus / limits.cpusPerGame);
+  const byVram = Math.floor((machine.gpu.vramTotalGB - limits.keepFreeVramGB) / limits.perGameVramGB);
+  return Math.max(1, Math.min(limits.hardMax, byMemory, byCores, byVram));
+}
+
+function isExclusive(entry) {
+  return Boolean(entry) && (entry.priority === 'jerry' || entry.exclusive === true);
+}
 
 function delay(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -120,6 +235,7 @@ function emptyState(machine, clock) {
     computer: machine,
     updatedAt: nowIso(clock),
     holder: null,
+    holders: [],
     queue: [],
     events: [],
   };
@@ -150,36 +266,45 @@ function publicRequest(entry, position) {
     queuedAt: entry.queuedAt,
     ready: Boolean(entry.waitPid),
     priority: entry.priority || 'normal',
+    exclusive: isExclusive(entry),
+  };
+}
+
+function publicHolder(holder) {
+  if (!holder) return null;
+  return {
+    id: holder.id,
+    agent: holder.agent,
+    task: holder.task,
+    checks: holder.checks,
+    minutes: holder.minutes,
+    pid: holder.controllerPid,
+    command: holder.command,
+    queuedAt: holder.queuedAt,
+    startedAt: holder.startedAt,
+    priority: holder.priority || 'normal',
+    exclusive: isExclusive(holder),
+    processes: (holder.processes || []).map(publicProcess),
+    reservation: holder.gameReservation
+      ? {
+          pid: holder.gameReservation.pid,
+          role: holder.gameReservation.role,
+          reservedAt: holder.gameReservation.reservedAt,
+        }
+      : null,
   };
 }
 
 export function publicState(state) {
+  const holders = (state.holders || (state.holder ? [state.holder] : [])).map(publicHolder);
   return {
     version: state.version,
     computer: state.computer,
     updatedAt: state.updatedAt,
-    holder: state.holder
-      ? {
-          id: state.holder.id,
-          agent: state.holder.agent,
-          task: state.holder.task,
-          checks: state.holder.checks,
-          minutes: state.holder.minutes,
-          pid: state.holder.controllerPid,
-          command: state.holder.command,
-          queuedAt: state.holder.queuedAt,
-          startedAt: state.holder.startedAt,
-          priority: state.holder.priority || 'normal',
-          processes: (state.holder.processes || []).map(publicProcess),
-          reservation: state.holder.gameReservation
-            ? {
-                pid: state.holder.gameReservation.pid,
-                role: state.holder.gameReservation.role,
-                reservedAt: state.holder.gameReservation.reservedAt,
-              }
-            : null,
-        }
-      : null,
+    // The first lease, for readers from before CL-347; `holders` has them all.
+    holder: holders[0] || null,
+    holders,
+    slots: state.slots ? JSON.parse(JSON.stringify(state.slots)) : null,
     queue: state.queue.map((entry, index) => publicRequest(entry, index + 1)),
     events: (state.events || []).map(({ token: _token, ...entry }) => entry),
   };
@@ -194,6 +319,11 @@ export class GameTestSlot {
     isProcessAlive = processLiveness,
     isLockOwnerAlive = processLiveness,
     writeCrewLog = process.env.DW_GAME_TEST_NO_LOG !== '1',
+    // CL-347: 1 (one lease at a time, as before), a number, or 'config' (tools/game-test-slot.config.json, else
+    // 'auto' from the computer: the CLI's default).
+    slots = 1,
+    limits = null,
+    probe = machineProbe,
   } = {}) {
     this.stateDir = stateDir;
     this.machine = machine;
@@ -202,6 +332,10 @@ export class GameTestSlot {
     this.isProcessAlive = isProcessAlive;
     this.isLockOwnerAlive = isLockOwnerAlive;
     this.writeCrewLog = writeCrewLog;
+    this.slots = slots;
+    this.limits = { ...SLOT_DEFAULTS, ...(limits || (slots === 'config' ? loadSlotLimits(repoRoot) : {})) };
+    this.probe = probe;
+    this.machineInfo = undefined;
     this.stateFile = path.join(stateDir, 'state.json');
     this.backupFile = path.join(stateDir, 'state.backup.json');
     this.lockFile = path.join(stateDir, 'state.lock');
@@ -221,6 +355,20 @@ export class GameTestSlot {
         }
         parsed.queue ||= [];
         parsed.events ||= [];
+        parsed.holders = Array.isArray(parsed.holders) ? parsed.holders : [];
+        // CL-347: `holder` mirrors holders[0] for the copies of this tool from before it (a waiter started before the
+        // change). Whatever such a copy did to `holder` wins: it released or reclaimed the lease we mirrored (gone),
+        // granted itself (added), or registered its processes (that copy replaces ours).
+        const legacy = parsed.holder || null;
+        const mirrored = parsed.mirrorToken ?? null;
+        if (mirrored && legacy?.token !== mirrored) {
+          parsed.holders = parsed.holders.filter(entry => entry.token !== mirrored);
+        }
+        if (legacy) {
+          const index = parsed.holders.findIndex(entry => entry.token === legacy.token);
+          if (index >= 0) parsed.holders[index] = legacy;
+          else parsed.holders.unshift(legacy);
+        }
         return parsed;
       } catch (error) {
         if (error?.code !== 'ENOENT') lastError = error;
@@ -232,6 +380,9 @@ export class GameTestSlot {
 
   async #writeRawState(state) {
     state.updatedAt = nowIso(this.clock);
+    state.holders ||= [];
+    state.holder = state.holders[0] || null;
+    state.mirrorToken = state.holder?.token ?? null;
     const temp = `${this.stateFile}.${process.pid}.${randomUUID()}.tmp`;
     await writeFile(temp, `${JSON.stringify(state, null, 2)}\n`, 'utf8');
     // CU-193: ChatGPT's runner got EPERM renaming this temp (and slot status writes through here too).
@@ -313,29 +464,44 @@ export class GameTestSlot {
     return (await this.isProcessAlive(Number(pid))) === true;
   }
 
+  #slotsOf(state) {
+    state.slots ||= {};
+    return state.slots;
+  }
+
+  #holderOf(state, token) {
+    return (state.holders || []).find(entry => entry.token === token) || null;
+  }
+
   async #reconcile(state, newEvents) {
-    if (state.holder) {
-      const processes = state.holder.processes?.length
-        ? [...state.holder.processes]
-        : [{ pid: state.holder.controllerPid, role: 'controller' }];
-      if (state.holder.gameReservation) processes.push(state.holder.gameReservation);
+    const survivors = [];
+    for (const holder of state.holders) {
+      const processes = holder.processes?.length
+        ? [...holder.processes]
+        : [{ pid: holder.controllerPid, role: 'controller' }];
+      if (holder.gameReservation) processes.push(holder.gameReservation);
       let anyAliveOrUnknown = false;
       for (const owned of processes) {
         const alive = await this.isProcessAlive(Number(owned.pid));
         if (alive !== false) anyAliveOrUnknown = true;
       }
-      if (!anyAliveOrUnknown) {
-        const prior = state.holder;
-        state.holder = null;
-        newEvents.push(
-          this.#addEvent(state, 'RECLAIM', {
-            agent: prior.agent,
-            task: prior.task,
-            message: `reclaimed after every recorded owner PID was proven gone`,
-          }),
-        );
+      if (anyAliveOrUnknown) {
+        survivors.push(holder);
+        continue;
       }
+      // CL-347: a lease whose processes all died without releasing is the sign of a crash (or a killed session):
+      // back to one at a time for a while.
+      const backoffUntil = new Date(this.clock() + (this.limits.backoffMin || 0) * 60_000).toISOString();
+      this.#slotsOf(state).backoffUntil = backoffUntil;
+      newEvents.push(
+        this.#addEvent(state, 'RECLAIM', {
+          agent: holder.agent,
+          task: holder.task,
+          message: `reclaimed after every recorded owner PID was proven gone`,
+        }),
+      );
     }
+    state.holders = survivors;
     for (const request of state.queue) {
       if (!request.waitPid) continue;
       if ((await this.isProcessAlive(Number(request.waitPid))) === false) {
@@ -352,40 +518,133 @@ export class GameTestSlot {
     }
   }
 
-  async #promote(state, newEvents) {
-    if (state.holder) return;
-    let selectedIndex = -1;
-    for (let index = 0; index < state.queue.length; index += 1) {
-      const request = state.queue[index];
-      if (request.waitPid && (await this.#isDefinitelyAlive(request.waitPid))) {
-        selectedIndex = index;
-        break;
+  async #capacity(state) {
+    const slots = this.#slotsOf(state);
+    let cap;
+    if (typeof this.slots === 'number') {
+      cap = Math.max(1, Math.floor(this.slots));
+    } else {
+      if (this.machineInfo === undefined) {
+        this.machineInfo = await this.probe.machine().catch(() => null);
+      }
+      cap = autoSlots(this.limits, this.machineInfo);
+      const m = this.machineInfo;
+      slots.machine = m
+        ? {
+            memoryGB: Math.round(m.totalGB),
+            cores: m.cpus,
+            gpu: m.gpu ? `${m.gpu.name} ${Math.round(m.gpu.vramTotalGB)} GB` : null,
+          }
+        : null;
+    }
+    slots.cap = cap;
+    if (slots.backoffUntil && this.clock() < Date.parse(slots.backoffUntil)) return 1;
+    return cap;
+  }
+
+  async #sample(state) {
+    const slots = this.#slotsOf(state);
+    const at = Date.parse(slots.sample?.at || '');
+    if (slots.sample && Number.isFinite(at) && this.clock() - at < this.limits.sampleSec * 1000) return slots.sample;
+    const raw = await this.probe.sample();
+    slots.sample = {
+      at: nowIso(this.clock),
+      freeGB: Math.round(raw.freeGB * 10) / 10,
+      cpuBusy: Math.round(raw.cpuBusy * 100) / 100,
+      gpu: raw.gpu
+        ? { vramFreeGB: Math.round(raw.gpu.vramFreeGB * 10) / 10, tempC: raw.gpu.tempC }
+        : null,
+    };
+    return slots.sample;
+  }
+
+  async #admit(state, request) {
+    const holders = state.holders;
+    if (holders.length === 0) return { ok: true, why: 'free' };
+    const alone = holders.find(isExclusive);
+    if (alone) return { ok: false, why: `${alone.agent} ${alone.task} has the computer to itself` };
+    if (isExclusive(request)) {
+      return { ok: false, why: `${request.agent} ${request.task} waits for the running checks to end (it runs alone)` };
+    }
+    const cap = await this.#capacity(state);
+    const slots = this.#slotsOf(state);
+    if (holders.length >= cap) {
+      const backoff = slots.backoffUntil && this.clock() < Date.parse(slots.backoffUntil);
+      return {
+        ok: false,
+        why: `${holders.length} of ${cap} in use` + (backoff ? ` (one at a time after a reclaim, until ${slots.backoffUntil})` : ''),
+      };
+    }
+    const L = this.limits;
+    const last = Date.parse(slots.lastGrantAt || '');
+    if (Number.isFinite(last) && this.clock() - last < L.staggerSec * 1000) {
+      return { ok: false, why: 'the last game is still starting' };
+    }
+    const sample = await this.#sample(state);
+    if (sample.freeGB - L.perGameGB < L.keepFreeGB) return { ok: false, why: `memory: ${sample.freeGB} GB free` };
+    if (sample.cpuBusy > L.maxCpuBusy) return { ok: false, why: `cores ${Math.round(sample.cpuBusy * 100)}% busy` };
+    if (sample.gpu) {
+      if (sample.gpu.vramFreeGB - L.perGameVramGB < L.keepFreeVramGB) {
+        return { ok: false, why: `graphics memory: ${sample.gpu.vramFreeGB} GB free` };
+      }
+      if (sample.gpu.tempC !== null && sample.gpu.tempC >= L.maxGpuTempC) {
+        return { ok: false, why: `graphics card at ${sample.gpu.tempC} °C` };
       }
     }
-    if (selectedIndex < 0) return;
-    const [request] = state.queue.splice(selectedIndex, 1);
-    const startedAt = nowIso(this.clock);
-    state.holder = {
-      ...request,
-      controllerPid: request.waitPid,
-      startedAt,
-      processes: [
-        {
-          pid: request.waitPid,
-          role: 'controller',
-          registeredAt: startedAt,
-        },
-      ],
+    return {
+      ok: true,
+      why: 'room',
+      detail:
+        `${holders.length + 1} of ${cap}; ${sample.freeGB} GB free, cores ${Math.round(sample.cpuBusy * 100)}% busy` +
+        (sample.gpu ? `, card ${sample.gpu.vramFreeGB} GB free at ${sample.gpu.tempC} °C` : ''),
     };
-    delete state.holder.waitPid;
-    newEvents.push(
-      this.#addEvent(state, 'GRANT', {
-        agent: request.agent,
-        task: request.task,
-        requestId: request.id,
-        message: `${request.agent} ${request.task} automatically granted the game-test slot`,
-      }),
-    );
+  }
+
+  async #promote(state, newEvents) {
+    for (;;) {
+      let selectedIndex = -1;
+      for (let index = 0; index < state.queue.length; index += 1) {
+        const request = state.queue[index];
+        if (request.waitPid && (await this.#isDefinitelyAlive(request.waitPid))) {
+          selectedIndex = index;
+          break;
+        }
+      }
+      if (selectedIndex < 0) return;
+      const decision = await this.#admit(state, state.queue[selectedIndex]);
+      const slots = this.#slotsOf(state);
+      slots.next = decision.ok
+        ? null
+        : { agent: state.queue[selectedIndex].agent, task: state.queue[selectedIndex].task, why: decision.why };
+      if (!decision.ok) return;
+      const [request] = state.queue.splice(selectedIndex, 1);
+      const startedAt = nowIso(this.clock);
+      const holder = {
+        ...request,
+        controllerPid: request.waitPid,
+        startedAt,
+        processes: [
+          {
+            pid: request.waitPid,
+            role: 'controller',
+            registeredAt: startedAt,
+          },
+        ],
+      };
+      delete holder.waitPid;
+      state.holders.push(holder);
+      slots.lastGrantAt = startedAt;
+      newEvents.push(
+        this.#addEvent(state, 'GRANT', {
+          agent: request.agent,
+          task: request.task,
+          requestId: request.id,
+          message:
+            `${request.agent} ${request.task} automatically granted the game-test slot` +
+            (decision.detail ? ` (${decision.detail})` : isExclusive(request) && request.priority !== 'jerry' ? ' (alone)' : ''),
+        }),
+      );
+    }
   }
 
   async #appendCrewEvents(events) {
@@ -426,7 +685,8 @@ export class GameTestSlot {
 
   async status({ reconcile = true } = {}) {
     if (reconcile) {
-      return (await this.#mutate(() => undefined)).state;
+      // CL-347: how many this computer runs at once, for the status line
+      return (await this.#mutate(state => this.#capacity(state).then(() => undefined))).state;
     }
     await this.#ensureDir();
     return publicState(await this.#readRawState());
@@ -440,6 +700,7 @@ export class GameTestSlot {
     command = '',
     waitPid = null,
     priority = null,
+    exclusive = false,
   }) {
     agent = String(agent || '').trim().toLowerCase();
     task = String(task || '').trim();
@@ -447,9 +708,10 @@ export class GameTestSlot {
     const effectivePriority = priority || (agent === 'jerry' ? 'jerry' : 'normal');
     const numericPid = waitPid ? Number(waitPid) : null;
     const result = await this.#mutate(async (state, events) => {
-      if (state.holder?.agent === agent) {
+      const held = state.holders.find(entry => entry.agent === agent);
+      if (held) {
         throw new Error(
-          `${agent} already holds the game-test slot for ${state.holder.task}; nested launches are blocked`,
+          `${agent} already holds the game-test slot for ${held.task}; nested launches are blocked`,
         );
       }
       const existing = state.queue.find(entry => entry.agent === agent);
@@ -471,6 +733,7 @@ export class GameTestSlot {
         if (command) existing.command = command;
         if (checks) existing.checks = checks;
         if (minutes !== null) existing.minutes = Number(minutes);
+        if (exclusive) existing.exclusive = true;
         events.push(
           this.#addEvent(state, 'READY', {
             agent,
@@ -493,6 +756,7 @@ export class GameTestSlot {
         queuedAt,
         waitPid: numericPid,
         priority: effectivePriority,
+        exclusive: Boolean(exclusive),
       };
       if (effectivePriority === 'jerry') {
         const afterJerry = state.queue.findLastIndex?.(item => item.priority === 'jerry') ?? -1;
@@ -539,7 +803,7 @@ export class GameTestSlot {
     const check = async () => {
       const granted = (
         await this.#mutate(state =>
-          state.holder?.token === token ? publicState(state).holder : null,
+          publicHolder(this.#holderOf(state, token)),
         )
       ).value;
       if (granted) return granted;
@@ -610,14 +874,15 @@ export class GameTestSlot {
       );
     }
     const result = await this.#mutate(state => {
-      if (!state.holder || state.holder.token !== token) {
+      const holder = this.#holderOf(state, token);
+      if (!holder) {
         throw new Error('Game/browser launch blocked: the supplied game-test lease is not active');
       }
       return {
-        id: state.holder.id,
-        agent: state.holder.agent,
-        task: state.holder.task,
-        startedAt: state.holder.startedAt,
+        id: holder.id,
+        agent: holder.agent,
+        task: holder.task,
+        startedAt: holder.startedAt,
       };
     });
     return result.value;
@@ -627,11 +892,12 @@ export class GameTestSlot {
     pid = Number(pid);
     if (!Number.isInteger(pid) || pid <= 0) throw new Error(`invalid process PID: ${pid}`);
     const result = await this.#mutate(async state => {
-      if (!state.holder || state.holder.token !== token) {
+      const holder = this.#holderOf(state, token);
+      if (!holder) {
         throw new Error('cannot register a process without the active game-test lease');
       }
       if (isGameProcessRole(role)) {
-        const reservation = state.holder.gameReservation;
+        const reservation = holder.gameReservation;
         if (
           !reservation ||
           reservation.pid !== process.pid ||
@@ -639,7 +905,7 @@ export class GameTestSlot {
         ) {
           throw new Error('game/browser process was not reserved by this launcher');
         }
-        for (const owned of state.holder.processes) {
+        for (const owned of holder.processes) {
           if (
             owned.pid !== pid &&
             isGameProcessRole(owned.role) &&
@@ -650,20 +916,20 @@ export class GameTestSlot {
             );
           }
         }
-        state.holder.gameReservation = null;
+        holder.gameReservation = null;
       }
-      const existing = state.holder.processes.find(entry => entry.pid === pid);
+      const existing = holder.processes.find(entry => entry.pid === pid);
       if (existing) {
         existing.role = role;
       } else {
-        state.holder.processes.push({
+        holder.processes.push({
           pid,
           role,
           registeredAt: nowIso(this.clock),
         });
       }
       return publicProcess(
-        state.holder.processes.find(entry => entry.pid === pid),
+        holder.processes.find(entry => entry.pid === pid),
       );
     });
     return result.value;
@@ -672,10 +938,11 @@ export class GameTestSlot {
   async reserveGameProcess(token, role = 'game/browser', pid = process.pid) {
     pid = Number(pid);
     const result = await this.#mutate(async state => {
-      if (!state.holder || state.holder.token !== token) {
+      const holder = this.#holderOf(state, token);
+      if (!holder) {
         throw new Error('cannot reserve a game/browser process without the active lease');
       }
-      const prior = state.holder.gameReservation;
+      const prior = holder.gameReservation;
       if (prior) {
         if (prior.pid === pid) {
           throw new Error(`another game launch is already reserved by PID ${prior.pid}`);
@@ -684,7 +951,7 @@ export class GameTestSlot {
           throw new Error(`another game launch is already reserved by PID ${prior.pid}`);
         }
       }
-      for (const owned of state.holder.processes) {
+      for (const owned of holder.processes) {
         if (
           isGameProcessRole(owned.role) &&
           (await this.isProcessAlive(Number(owned.pid))) !== false
@@ -693,7 +960,7 @@ export class GameTestSlot {
         }
       }
       const reservationId = randomUUID();
-      state.holder.gameReservation = {
+      holder.gameReservation = {
         id: reservationId,
         pid,
         role: `${role} reservation`,
@@ -707,9 +974,10 @@ export class GameTestSlot {
   async releaseGameReservation(token, pid = process.pid) {
     pid = Number(pid);
     const result = await this.#mutate(state => {
-      if (!state.holder || state.holder.token !== token) return false;
-      if (state.holder.gameReservation?.pid !== pid) return false;
-      state.holder.gameReservation = null;
+      const holder = this.#holderOf(state, token);
+      if (!holder) return false;
+      if (holder.gameReservation?.pid !== pid) return false;
+      holder.gameReservation = null;
       return true;
     });
     return result.value;
@@ -718,10 +986,11 @@ export class GameTestSlot {
   async unregisterProcess(token, pid) {
     pid = Number(pid);
     const result = await this.#mutate(state => {
-      if (!state.holder || state.holder.token !== token) return false;
-      const before = state.holder.processes.length;
-      state.holder.processes = state.holder.processes.filter(entry => entry.pid !== pid);
-      return state.holder.processes.length !== before;
+      const holder = this.#holderOf(state, token);
+      if (!holder) return false;
+      const before = holder.processes.length;
+      holder.processes = holder.processes.filter(entry => entry.pid !== pid);
+      return holder.processes.length !== before;
     });
     return result.value;
   }
@@ -729,18 +998,19 @@ export class GameTestSlot {
   async adoptController(token, pid = process.pid, role = 'controller') {
     pid = Number(pid);
     const result = await this.#mutate(state => {
-      if (!state.holder || state.holder.token !== token) {
+      const holder = this.#holderOf(state, token);
+      if (!holder) {
         throw new Error('cannot adopt an inactive game-test lease');
       }
-      const priorControllerPid = state.holder.controllerPid;
-      state.holder.controllerPid = pid;
-      state.holder.processes = state.holder.processes.filter(
+      const priorControllerPid = holder.controllerPid;
+      holder.controllerPid = pid;
+      holder.processes = holder.processes.filter(
         entry => entry.pid !== priorControllerPid,
       );
-      const existing = state.holder.processes.find(entry => entry.pid === pid);
+      const existing = holder.processes.find(entry => entry.pid === pid);
       if (existing) existing.role = role;
       else {
-        state.holder.processes.push({
+        holder.processes.push({
           pid,
           role,
           registeredAt: nowIso(this.clock),
@@ -754,13 +1024,14 @@ export class GameTestSlot {
   async release(token, { pid = process.pid, reason = 'checks complete' } = {}) {
     pid = Number(pid);
     const result = await this.#mutate(async (state, events) => {
-      if (!state.holder || state.holder.token !== token) return false;
-      if (state.holder.controllerPid !== pid) {
+      const holder = this.#holderOf(state, token);
+      if (!holder) return false;
+      if (holder.controllerPid !== pid) {
         throw new Error(
-          `only controller PID ${state.holder.controllerPid} may release this game-test lease`,
+          `only controller PID ${holder.controllerPid} may release this game-test lease`,
         );
       }
-      for (const owned of state.holder.processes) {
+      for (const owned of holder.processes) {
         if (owned.pid === pid) continue;
         const alive = await this.isProcessAlive(Number(owned.pid));
         if (alive !== false) {
@@ -769,17 +1040,17 @@ export class GameTestSlot {
           );
         }
       }
-      if (state.holder.gameReservation) {
-        const alive = await this.isProcessAlive(Number(state.holder.gameReservation.pid));
+      if (holder.gameReservation) {
+        const alive = await this.isProcessAlive(Number(holder.gameReservation.pid));
         if (alive !== false) {
           throw new Error(
-            `cannot release while ${state.holder.gameReservation.role} PID ` +
-              `${state.holder.gameReservation.pid} is alive or unproven`,
+            `cannot release while ${holder.gameReservation.role} PID ` +
+              `${holder.gameReservation.pid} is alive or unproven`,
           );
         }
       }
-      const prior = state.holder;
-      state.holder = null;
+      const prior = holder;
+      state.holders = state.holders.filter(entry => entry !== holder);
       events.push(
         this.#addEvent(state, 'RELEASE', {
           agent: prior.agent,
@@ -799,7 +1070,7 @@ export class GameTestSlot {
   }
 }
 
-export const defaultGameTestSlot = new GameTestSlot();
+export const defaultGameTestSlot = new GameTestSlot({ slots: 'config' });
 
 export async function assertGameTestSlot(token) {
   return defaultGameTestSlot.assertHeld(token);
@@ -855,6 +1126,7 @@ function parseOptions(args) {
     else if (arg === '--checks') options.checks = args[++index];
     else if (arg === '--minutes') options.minutes = Number(args[++index]);
     else if (arg === '--token') options.token = args[++index];
+    else if (arg === '--exclusive') options.exclusive = true;
     else if (arg.startsWith('--')) throw new Error(`unknown option: ${arg}`);
     else options.positional.push(arg);
     index += 1;
@@ -867,12 +1139,25 @@ function printStatus(state, json = false) {
     console.log(JSON.stringify(state, null, 2));
     return;
   }
-  console.log(`Game-test slot on ${state.computer}`);
-  if (state.holder) {
-    console.log(
-      `HOLDER ${state.holder.agent} ${state.holder.task} · PID ${state.holder.pid} · since ${state.holder.startedAt}`,
-    );
-    console.log(`  ${state.holder.command || '(command not recorded)'}`);
+  const holders = state.holders || (state.holder ? [state.holder] : []);
+  const slots = state.slots || {};
+  const machine = slots.machine
+    ? ` (this computer: ${slots.machine.memoryGB} GB, ${slots.machine.cores} cores, ${slots.machine.gpu || 'no graphics card read'})`
+    : '';
+  console.log(
+    `Game-test slot on ${state.computer}` + (slots.cap ? ` · ${holders.length} of ${slots.cap} in use${machine}` : ''),
+  );
+  if (slots.backoffUntil && Date.parse(slots.backoffUntil) > Date.now()) {
+    console.log(`BACKOFF one at a time until ${slots.backoffUntil} (a lease was reclaimed)`);
+  }
+  if (holders.length) {
+    for (const holder of holders) {
+      console.log(
+        `HOLDER ${holder.agent} ${holder.task} · PID ${holder.pid} · since ${holder.startedAt}` +
+          (holder.exclusive ? ' · alone' : ''),
+      );
+      console.log(`  ${holder.command || '(command not recorded)'}`);
+    }
   } else {
     console.log('HOLDER none');
   }
@@ -881,9 +1166,11 @@ function printStatus(state, json = false) {
   } else {
     for (const item of state.queue) {
       console.log(
-        `QUEUE ${item.position}. ${item.agent} ${item.task} · ${item.ready ? `PID ${item.pid}` : 'prepared; not waiting'} · ${item.queuedAt}`,
+        `QUEUE ${item.position}. ${item.agent} ${item.task} · ${item.ready ? `PID ${item.pid}` : 'prepared; not waiting'} · ${item.queuedAt}` +
+          (item.exclusive ? ' · alone' : ''),
       );
     }
+    if (slots.next) console.log(`NEXT ${slots.next.agent} ${slots.next.task} waits: ${slots.next.why}`);
   }
 }
 
@@ -894,7 +1181,7 @@ async function waitForChild(child) {
   });
 }
 
-async function runQueuedCommand({ agent, task, checks, minutes, command, requestId = null }) {
+async function runQueuedCommand({ agent, task, checks, minutes, command, requestId = null, exclusive = false }) {
   if (!command.length) throw new Error('a command is required after `--`');
   const commandText = formatCommand(command);
   const queued = await defaultGameTestSlot.request({
@@ -904,6 +1191,7 @@ async function runQueuedCommand({ agent, task, checks, minutes, command, request
     minutes,
     command: commandText,
     waitPid: process.pid,
+    exclusive,
   });
   if (requestId && queued.id !== requestId) {
     throw new Error(`request ${requestId} does not match ${agent} ${task} (${queued.id})`);
@@ -998,6 +1286,7 @@ export async function main(args = process.argv.slice(2)) {
       checks: options.checks,
       minutes: options.minutes,
       command: options.command.length ? formatCommand(options.command) : '',
+      exclusive: Boolean(options.exclusive),
     });
     console.log(
       `Queued ${agent} ${task} as ${queued.id}. Run the prepared command with:\n` +
@@ -1014,6 +1303,7 @@ export async function main(args = process.argv.slice(2)) {
       checks: options.checks || '',
       minutes: options.minutes,
       command: options.command,
+      exclusive: Boolean(options.exclusive),
     });
     return;
   }
@@ -1026,6 +1316,7 @@ export async function main(args = process.argv.slice(2)) {
       checks: options.checks || '',
       minutes: options.minutes,
       command: options.command,
+      exclusive: Boolean(options.exclusive),
     });
     return;
   }

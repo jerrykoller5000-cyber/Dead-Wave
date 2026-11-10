@@ -12,11 +12,15 @@ const server = await serve(ROOT, 0);
 let browser;
 try {
   browser = await launch({ headless: true });
+  // CL-347: more than one lease may run at once; this check reads its own (its agent and task).
+  const own = state => (state.holders || [state.holder]).find(
+    h => h && h.task === process.env.DW_GAME_TEST_TASK && h.agent === process.env.DW_GAME_TEST_AGENT,
+  ) || null;
   const during = await defaultGameTestSlot.status();
-  const browserProcesses = during.holder?.processes.filter(process =>
+  const browserProcesses = own(during)?.processes.filter(process =>
     /browser|chrome|edge/i.test(process.role),
   ) || [];
-  assert.equal(during.holder?.task, process.env.DW_GAME_TEST_TASK);
+  assert.equal(own(during)?.task, process.env.DW_GAME_TEST_TASK);
   assert.equal(browserProcesses.length, 1, 'exactly one browser PID must be registered');
 
   const page = await browser.newPage({ width: 1280, height: 720 });
@@ -38,7 +42,7 @@ try {
   browser = null;
   const afterClose = await defaultGameTestSlot.status();
   assert.equal(
-    afterClose.holder?.processes.some(process => /browser|chrome|edge/i.test(process.role)),
+    own(afterClose)?.processes.some(process => /browser|chrome|edge/i.test(process.role)),
     false,
     'browser PID must be removed before the command releases its lease',
   );

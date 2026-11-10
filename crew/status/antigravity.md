@@ -1,18 +1,18 @@
 # Antigravity
 
-state: idle
-model: Gemini 4 Argon (High)
-task: —
-touching: —
-since: 2026-11-10T05:16Z
-next: waits on CL-303
+state: active
+model: Gemini 4 Carbon
+task: AG-284 J128: the buildables and props, part on part
+touching: index.html (build meshes, makeSkeletalMarine), tools/tests/tag284.js (new), qa/2026-11-10-AG-284/, review/AG-284/
+since: 2026-11-10T18:04Z
+next: AG-284 J128 (Jerry, 10 Nov, standing, D-140): the buildables and pr
 blocked-on: —
-last-report: handoffs/2026-11-10-antigravity-AG-277.md
+last-report: handoffs/2026-11-10-antigravity-AG-285.md
 
 ## Notes
 
 ### Your model (Jerry, 2026-10-29)
-You run on **Gemini 4 Argon (High)**, not Gemini 3.1 Pro: check in with `--model "Gemini 4 Argon (High)"`.
+You run on **Gemini 4 Carbon** (Jerry, 10 Nov 2026; Gemini 4 Argon before): check in with `--model "Gemini 4 Carbon"`.
 
 
 ### STANDING RULE (Jerry, 2026-10-15, effective immediately): ONE active game-testing session per computer

@@ -1,6 +1,6 @@
 # AGENTS.md — how the Grave Shift crew works
 
-Every agent reads this first, every session: Claude, Claude 2, Claude 3, ChatGPT and Antigravity
+Every agent reads this first, every session: Claude, Claude 2, Claude 3, ChatGPT, ChatGPT 2 and Antigravity
 (Grokbot and Muse were retired by Jerry on 10 Nov 2026, D-134; Cursor the same day, D-137: Claude 2 took its lane).
 Jerry has the final say. Claude leads.
 
@@ -40,7 +40,7 @@ the crew panel, so what you log is how he knows what you're doing.
    that task. Whenever you find or finish something, roughly every 10-15 minutes:
    `node crew/crew.mjs note <you> "<one line: what you found or finished>"`.
    That line is what Jerry sees on your card while you work.
-   **Game checks** go through the queue (rule 16): `node crew/crew.mjs slot run <you> <task> --checks "<batch>" -- <command>`.
+   **Game checks** go through the queue (rule 16; several at once when the PC has the room, D-143): `node crew/crew.mjs slot run <you> <task> --checks "<batch>" -- <command>`.
    If your session has to end before your turn: `node crew/crew.mjs wait <you> "<what is ready>"`.
    That tells Jerry's panel "changes ready; waiting for testing slot" and gives him a resume prompt.
 5. **Check out.** Write your handoff note in the template below, then:
@@ -84,8 +84,8 @@ before the commit (or Claude). ChatGPT's runner does not get past Chrome: `CDP t
 in `tools/cdp.mjs`, even with one worker. That is his environment, not a failing check.
 He writes "not run" and whoever commits runs the suite for him at commit time.
 
-Agent names for the commands: `claude`, `claude2`, `claude3`, `chatgpt`, `antigravity`.
-Task ids: `CL-`, `CB-`, `CC-`, `GP-`, `AG-` (`CU-`, `GB-` and `MU-` are retired, D-134, D-137).
+Agent names for the commands: `claude`, `claude2`, `claude3`, `chatgpt`, `chatgpt2`, `antigravity`.
+Task ids: `CL-`, `CB-`, `CC-`, `GP-`, `GT-`, `AG-` (`CU-`, `GB-` and `MU-` are retired, D-134, D-137).
 
 ## Who owns what
 
@@ -97,6 +97,7 @@ The current split (Jerry, 2026-10-15) is on the board under **Who owns what**; i
 | Claude 2 | Cursor's lane (D-137): integration, tools and the game-test queue, the full suite (in its cloud), engine core, combat; direct fixes from Jerry that Claude routes to it. No git (rule 6) | the `index.html` shell, `core/*`, `tools/*`, `vendor/*`, `package.json`, `combat/*` (not the zombie looks) |
 | Claude 3 | The heavy model work in Claude's lane (D-141): the marine's third-person body and fabric, his head and face. No git (rule 6) | `studio/marine-body.js`, `studio/marine-cloth.js`, `studio/marine-hats.js`, `ui/marine-face.js` |
 | ChatGPT | Every zombie's look; the marine's fitted helpers and waist (the head and balaclava: Claude 3, D-141); what the player reads and decides | `studio/zombie-*.js`, `combat/demon-visual.js`, `combat/zombie-joins.js`, `ui/*`, `game/*` |
+| ChatGPT 2 | Every weapon (D-142): the models from their manuals, the optics and attachments; WEAPON_HOLD/VM_SOCKETS when a grip or sight moves. No git (rule 6) | `studio/weapon-*.js`, `studio/frag-grenade.js`, `studio/weapon-optics.js` |
 | Antigravity | The look of buildables and props; eyes on Jerry's GPU (screenshots and reports) | `index.html` (build meshes), `qa/*` |
 
 A file not in this table: ask Claude before you start. Until the split lands, "files" means the matching sections of `index.html`. Several agents
@@ -173,22 +174,35 @@ card in `crew/status/`, appends to `crew/LOG.md`, and writes their own handoff n
 15. **Show your proof.** "Done" and "it works" need evidence in the handoff: the command you
     ran with the lines of output that show it passed, or a screenshot path. A claim with no
     proof counts as not verified.
-16. **One game test at a time on Jerry's PC** (Jerry, 2026-10-15; the queue is Cursor's CU-146, verified 07:43Z). Anything that
+16. **Game tests on Jerry's PC go through the slots** (Jerry, 2026-10-15: one at a time; 2026-11-10, D-143: "open as many
+    as you think is feasible without cooking the machine"; the queue is `tools/game-test-slot.mjs`, CL-347). Anything that
     starts the game is a game test: the Marine Inspector, the camera and screenshots, browser-based `npm test` runs, and
-    hidden or headless instances. They all go through the machine-wide queue, which grants one at a time, first come first
-    served, Jerry first, and wakes the next in line itself:
-    - `node crew/crew.mjs slot status` shows the holder and who waits.
-    - `node crew/crew.mjs slot run <you> <task> --checks "<batch>" -- <command>` queues your prepared batch, waits for
-      its turn, runs it and releases when its browser has closed. `slot request` (with `--minutes`) queues without
-      running; `slot cancel <you> <id>` leaves the queue. The camera, shoot, `npm test` and the launchers queue themselves.
-    - Never start a game any other way, and never work around the queue's refusal. Jerry's own game or Marine Inspector
-      comes first; never close his windows or another agent's processes.
-    - One game instance and one test worker (`--jobs 1`); no overlapping helpers or extra tabs.
+    hidden or headless instances. They all go through the machine-wide queue: first come first served, Jerry first, and it
+    wakes the next in line itself.
+    - **Several at once, only with the room.** The PC runs up to its slots at once (auto from its memory, cores and
+      graphics card, never over 3; `tools/game-test-slot.config.json`). The first lease starts as always; a further one
+      only when the last start was 30 s ago and the computer has the room right then: free memory for one more game
+      plus 4 GB, the cores under 75% busy, the card's memory free and the card under 80 °C. A lease whose processes die
+      without releasing (a crash, a killed session) puts the PC back to one at a time for 20 minutes. Claude's cloud and
+      any computer without a readable graphics card stay at one.
+    - **Jerry runs alone.** His Play and Inspector launchers queue as him: he goes first, nothing new starts while he
+      waits, and his game starts when the running checks end. Never close his windows or another agent's processes.
+    - `--exclusive` for anything that measures speed (frame times, load times, the speed checks, timing benches): it
+      waits for the others to end and runs alone. Looks and checks don't need it.
+    - `node crew/crew.mjs slot status` shows every holder, who waits and why (`NEXT ... waits: ...`).
+    - `node crew/crew.mjs slot run <you> <task> --checks "<batch>" [--exclusive] -- <command>` queues your prepared
+      batch, waits for its turn, runs it and releases when its browser has closed. `slot request` (with `--minutes`)
+      queues without running; `slot cancel <you> <id>` leaves the queue. The camera, shoot, `npm test` and the
+      launchers queue themselves.
+    - Never start a game any other way, and never work around the queue's refusal.
+    - One game instance and one test worker per lease (`--jobs 1`); one lease per agent; no overlapping helpers or extra
+      tabs. Keep batches short: every one of them is what Jerry waits for when he presses Play.
+    - The slot is the only gate: don't wait on a guess that Jerry is playing (ask Claude if you think he is).
     - The slot is only for running the game, never for coding: make your changes and prepare your checks, queue them, keep
       working while you wait. If your session ends before your turn, say so plainly on your card and in the log:
       "Changes ready; waiting for testing slot". Never stop silently or call the task done before its checks have run.
     - The full suite is one coordinated integration job, not a check after each edit. **D-135:** Claude runs full suites
-      and broad batches in his cloud workspace; the PC's slot is for Antigravity's looks on Jerry's GPU, for Jerry, and
+      and broad batches in his cloud workspace; the PC's slots are for Antigravity's looks on Jerry's GPU, for Jerry, and
       for each owner's targeted tests of the item in hand.
     - Claude's cloud workspace is a separate computer (the queue keeps a separate state there); Claude keeps it to one
       instance at a time and logs those runs. Every test on Jerry's PC, Claude's included, goes through the queue.
@@ -244,7 +258,7 @@ card in `crew/status/`, appends to `crew/LOG.md`, and writes their own handoff n
 Four agents, each good at something different. The board gives each one tasks that fit.
 The roadmap to 1.0 (`crew/BOARD.md` and `docs/roadmap.md`, D-43) is laid out that way: the board's "Who
 does what" says what to give each agent and what to keep away from it.
-- **Claude, Claude 2, Claude 3 and ChatGPT** take the big, cross-cutting work inside
+- **Claude, Claude 2, Claude 3, ChatGPT and ChatGPT 2** take the big, cross-cutting work inside
   `index.html` and their modules.
 - **Antigravity** can see: it runs the game in a real browser on a real GPU. Every visible
   change goes through it: the pit, the cave warnings, the loading screen, the build aiming.

@@ -15,13 +15,13 @@
   :root {
     --bg: #f3f2ee; --panel: #fff; --ink: #1c1e1b; --muted: #676b63; --faint: #9a9d95; --line: #e0ded6;
     --chip: #efeee8; --accent: #b4452f; --danger: #c0392b; --warn: #b8710c; --ok: #2f8a4c;
-    --claude: #c0673a; --claude2: #a8512a; --claude3: #7d3a1e; --cursor: #3867d6; --chatgpt: #1f9d7a; --grokbot: #8e44ad; --opencode: #a88408; --antigravity: #c93d74; --muse: #2f8fa8;
+    --claude: #c0673a; --claude2: #a8512a; --claude3: #7d3a1e; --cursor: #3867d6; --chatgpt: #1f9d7a; --chatgpt2: #137a5e; --grokbot: #8e44ad; --opencode: #a88408; --antigravity: #c93d74; --muse: #2f8fa8;
   }
   @media (prefers-color-scheme: dark) {
     :root {
       --bg: #111310; --panel: #1a1d19; --ink: #e8e9e3; --muted: #9da196; --faint: #6f7369; --line: #2c302a;
       --chip: #252922; --accent: #e27a61; --danger: #ef6b5b; --warn: #e4a23d; --ok: #53c47a;
-      --claude: #e08a5c; --claude2: #f0a57e; --claude3: #f7c9a8; --cursor: #6f95f0; --chatgpt: #3fc79f; --grokbot: #b57bd0; --opencode: #e0bd3c; --antigravity: #ee7aa6; --muse: #5cc2dc;
+      --claude: #e08a5c; --claude2: #f0a57e; --claude3: #f7c9a8; --cursor: #6f95f0; --chatgpt: #3fc79f; --chatgpt2: #7fe0c2; --grokbot: #b57bd0; --opencode: #e0bd3c; --antigravity: #ee7aa6; --muse: #5cc2dc;
     }
   }
   * { box-sizing: border-box; }
@@ -248,7 +248,7 @@
   <section class="box you need"><h3>Needs you <small id="needN"></small></h3><div id="you"></div></section>
   <section class="box mission" id="missionBox" hidden><div id="mission"></div></section>
   <div class="agents" id="agents"></div>
-  <section class="box slot" id="slotBox"><h3>Game-test slot <small>one game test at a time on this computer · Jerry first · automatic</small></h3><div id="slot"></div></section>
+  <section class="box slot" id="slotBox"><h3>Game-test slots <small>one game per test, as many at once as this computer has room for · Jerry first, and alone · automatic</small></h3><div id="slot"></div></section>
   <section class="box done"><h3>Done today <small id="doneN"></small> <small>what changed, and what nobody could check</small></h3><ul class="feed" id="doneToday"></ul></section>
   <section class="box"><h3>Who worked when <small id="tlnote"></small></h3><div id="timeline"></div></section>
   <div class="grid2">
@@ -270,7 +270,7 @@
   </ul></details></section>
 </main>
 <script>
-const AGENTS = [['claude', 'Claude', 'CL'], ['claude2', 'Claude 2', 'CB'], ['claude3', 'Claude 3', 'CC'], ['chatgpt', 'ChatGPT', 'GP'], ['antigravity', 'Antigravity', 'AG']];
+const AGENTS = [['claude', 'Claude', 'CL'], ['claude2', 'Claude 2', 'CB'], ['claude3', 'Claude 3', 'CC'], ['chatgpt', 'ChatGPT', 'GP'], ['chatgpt2', 'ChatGPT 2', 'GT'], ['antigravity', 'Antigravity', 'AG']];
 const NAME = Object.fromEntries(AGENTS.map(([a, n]) => [a, n]));
 const BY_NAME = Object.fromEntries(AGENTS.map(([a, n]) => [n.toLowerCase(), a]));
 const STALE_HOURS = 8;
@@ -327,7 +327,7 @@ function parseGit(text) {
 function boardTasks(board) {
   const out = []; let owner = null;
   for (const line of board.replace(/\r\n/g, '\n').split('\n')) {
-    const h = /^### (\w+)/.exec(line); if (h) owner = BY_NAME[h[1].toLowerCase()] || owner;
+    const h = /^### (.+?)\s*$/.exec(line); if (h) owner = BY_NAME[h[1].toLowerCase()] || BY_NAME[h[1].split(/\s/)[0].toLowerCase()] || owner;
     const m = /^\s*- \[( |x|>|!|~)\] \*\*([A-Z]{2}-\d+[a-z]?)\*\*\s*(.*)$/.exec(line);
     if (m) { const pre = m[2].slice(0, 2); const a = (AGENTS.find((x) => x[2] === pre) || [owner])[0]; out.push({ box: m[1], id: m[2], text: m[3], agent: a }); }
     else if (out.length && /^\s{2,}\S/.test(line) && !/^\s*- /.test(line)) out[out.length - 1].text += ' ' + line.trim();
@@ -449,15 +449,25 @@ function renderGameTestSlot(S) {
     badge.className = 'badge warnb';
     return;
   }
-  const h = S.holder;
-  box.className = 'box slot' + (h ? ' busy' : '') + (h?.agent === 'jerry' ? ' jerry' : '');
-  badge.textContent = h ? `test slot: ${NAME[h.agent] || h.agent} ${h.task}` : `test slot free · ${S.queue.length} queued`;
-  badge.className = 'badge ' + (h ? (h.agent === 'jerry' ? 'on' : 'warnb') : 'good');
+  // CL-347: several leases at once on a computer with the room (tools/game-test-slot.mjs); Jerry's always alone.
+  const hs = S.holders || (S.holder ? [S.holder] : []);
+  const cap = (S.slots && S.slots.cap) || 1;
+  const h = hs[0];
+  const jerryHolds = hs.some(x => x.agent === 'jerry');
+  box.className = 'box slot' + (h ? ' busy' : '') + (jerryHolds ? ' jerry' : '');
+  badge.textContent = h ? (hs.length > 1 || cap > 1 ? `test slots: ${hs.length} of ${cap} in use` : `test slot: ${NAME[h.agent] || h.agent} ${h.task}`) : `test slot${cap > 1 ? 's' : ''} free · ${S.queue.length} queued`;
+  badge.className = 'badge ' + (h ? (jerryHolds ? 'on' : 'warnb') : 'good');
+  const nm = (a) => NAME[a] || String(a || '').replace(/^./, (c) => c.toUpperCase());   // a retired agent's name, capitalised
+  const holderHtml = (h) => `<div class="holder" style="margin-bottom:8px"><div><div class="name">${esc(nm(h.agent))} · ${esc(h.task)}${h.exclusive ? ' <span class="faint">(alone)</span>' : ''}</div><div class="muted">PID ${esc(h.pid)} · started ${esc(ago(h.startedAt))} · queued ${esc(ago(h.queuedAt))}${h.minutes ? ` · planned ${esc(h.minutes)} min` : ''}</div><div>${esc(h.checks || 'checks not described')}</div></div><div><div class="cmd">${esc(h.command || '(command not recorded)')}</div><div class="faint">${(h.processes || []).map(p => `${esc(p.role)} PID ${esc(p.pid)}`).join(' · ')}</div></div></div>`;
+  const m = S.slots && S.slots.machine;
+  const capLine = cap > 1 || hs.length > 1 ? `<div class="faint" style="margin-bottom:8px">${hs.length} of ${cap} running at once on this computer${m ? ` (${esc(m.memoryGB)} GB, ${esc(m.cores)} cores${m.gpu ? ', ' + esc(m.gpu) : ''})` : ''}. Each is one game and one worker; Jerry's game runs alone.</div>` : '';
+  const backoff = S.slots && S.slots.backoffUntil && Date.parse(S.slots.backoffUntil) > Date.now() ? `<div class="item bad" style="margin-top:10px"><b>One at a time until ${esc(ago(S.slots.backoffUntil).replace(' ago', ''))}.</b> A test ended without closing (a crash or a killed session).</div>` : '';
+  const why = S.slots && S.slots.next && S.queue.length ? `<div class="faint" style="margin-top:8px">Next: ${esc(nm(S.slots.next.agent))} ${esc(S.slots.next.task)} waits: ${esc(S.slots.next.why)}.</div>` : '';
   const queue = S.queue.length
     ? `<ol>${S.queue.map(q => `<li><b>${esc(NAME[q.agent] || q.agent)} · ${esc(q.task)}</b> <span class="${q.ready ? 'ready' : 'prepared'}">${q.ready ? 'waiting process ready' : 'prepared; needs resume'}</span> · queued ${esc(ago(q.queuedAt))}${q.minutes ? ` · asks ${esc(q.minutes)} min` : ''}<br><span>${esc(q.checks || 'checks not described')}</span>${q.command ? `<div class="cmd">${esc(q.command)}</div>` : ''}</li>`).join('')}</ol>`
     : '<div class="faint" style="margin-top:8px">Queue empty.</div>';
   document.getElementById('slot').innerHTML = h
-    ? `<div class="holder"><div><div class="name">${esc(NAME[h.agent] || h.agent)} · ${esc(h.task)}</div><div class="muted">PID ${esc(h.pid)} · started ${esc(ago(h.startedAt))} · queued ${esc(ago(h.queuedAt))}${h.minutes ? ` · planned ${esc(h.minutes)} min` : ''}</div><div>${esc(h.checks || 'checks not described')}</div></div><div><div class="cmd">${esc(h.command || '(command not recorded)')}</div><div class="faint">${(h.processes || []).map(p => `${esc(p.role)} PID ${esc(p.pid)}`).join(' · ')}</div></div></div>${S.queue.some(q => q.agent === 'jerry') ? '<div class="item bad" style="margin-top:10px"><b>Jerry is waiting.</b> Holder: finish the current batch, close owned processes and release promptly. Never close Jerry’s processes.</div>' : ''}${queue}`
+    ? `${capLine}${hs.map(holderHtml).join('')}${S.queue.some(q => q.agent === 'jerry') ? '<div class="item bad" style="margin-top:10px"><b>Jerry is waiting.</b> Nothing new starts. Holders: finish the current batch, close owned processes and release promptly. Never close Jerry’s processes.</div>' : ''}${backoff}${why}${queue}`
     : `<b>Free.</b> The first live waiter is granted atomically; a prepared-only entry stays visible until its agent resumes the saved command.${queue}`;
 }
 
@@ -553,13 +563,13 @@ async function refresh() {
     if (cs[a] === 'active' && (hoursSince(f.since) ?? 0) > STALE_HOURS) need.push(yi(a, `${esc(n)} stopped mid-task?`, `checked in ${esc(ago(f.since))} and never checked out: ${clean2(f.task, 90)}. If its chat has ended, start it again:`, copyBtn(PROMPT(a, (f.task || '').split(' ')[0])), 'bad'));
   }
   // Prepared test batches whose agent has gone away (Cursor's queue knows): they need a prompt to run.
-  const live = new Set([...(slotState?.queue || []).filter((q) => q.ready).map((q) => q.agent), slotState?.holder?.agent].filter(Boolean));
+  const live = new Set([...(slotState?.queue || []).filter((q) => q.ready).map((q) => q.agent), ...(slotState?.holders || [slotState?.holder]).map((x) => x && x.agent)].filter(Boolean));
   for (const q of (slotState?.queue || []).filter((q) => !q.ready)) {
     const prompt = `Resume ${NAME[q.agent] || q.agent} on ${q.task}. Its prepared game-test queue request is ${q.id}. Read AGENTS.md and the Crew Board, then run: node tools/game-test-slot.mjs wait ${q.agent} ${q.task} ${q.id} --checks ${JSON.stringify(q.checks || 'prepared game checks')} -- ${q.command || '<command was not recorded; reconstruct the prepared batch>'}. The command waits for the atomic slot, runs automatically on grant with one worker, closes its owned game process, and releases.`;
     need.push(yi(q.agent, `Resume ${esc(NAME[q.agent] || q.agent)}`, `its game checks for <b>${esc(q.task)}</b> are queued but its session ended: ${esc(cut(q.checks || 'prepared batch', 120))}`, copyBtn(prompt)));
   }
   // "Changes ready; waiting for testing slot" on a card, with nothing of theirs in the queue: someone has to restart them.
-  const slotFree = slotState?.ok && !slotState.holder;
+  const slotFree = slotState?.ok && (slotState.holders || [slotState.holder].filter(Boolean)).length < ((slotState.slots && slotState.slots.cap) || 1);
   for (const [a, n] of AGENTS) {
     if (cs[a] !== 'slot' || live.has(a) || (slotState?.queue || []).some((q) => q.agent === a)) continue;
     const id = (statuses[a].task || '').split(' ')[0];
@@ -609,7 +619,7 @@ async function refresh() {
     const next = openMine.find((t) => t.box !== '!' && !gateOf(t, tasks)) || null;
     const chips = splitList(f.touching).map((t) => `<span class="chip">${esc(t)}</span>`).join('');
     const inQueue = (slotState?.queue || []).find((q) => q.agent === a);
-    const holds = slotState?.holder?.agent === a;
+    const holds = (slotState?.holders || [slotState?.holder]).some((x) => x && x.agent === a);
     return `<div class="card ${esc(st)}" ${cvar(a)}>
       <div class="top"><button class="face" type="button" data-card="${esc(a)}" title="${esc(n)}" aria-label="Show ${esc(n)}'s card"><img src="faces/${esc(a)}.png" alt="" onerror="this.parentNode.remove()"></button><div class="hd">
       <h2><span class="dot"></span>${n}<span class="state">${esc(holds ? 'TESTING NOW' : STATE_WORD[st] || st.toUpperCase())}</span></h2>

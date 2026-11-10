@@ -1,0 +1,11 @@
+{
+  "_note": "CL-347 (D-143): how many game tests run at once on this computer, and the room each new start needs. 'auto' reads the memory, cores and graphics card (nvidia-smi) and never goes over hardMax; a number is used as given (at most 6). Any key left out keeps its default in tools/game-test-slot.mjs SLOT_DEFAULTS. DW_GAME_TEST_SLOTS overrides slots for one shell. 1 is the old one-at-a-time.",
+  "slots": "auto",
+  "hardMax": 3,
+  "perGameGB": 5,
+  "keepFreeGB": 4,
+  "maxCpuBusy": 0.75,
+  "maxGpuTempC": 80,
+  "staggerSec": 30,
+  "backoffMin": 20
+}

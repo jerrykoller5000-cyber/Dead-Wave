@@ -49,7 +49,7 @@
 //   node crew/crew.mjs reviewed <report path> "<verdict>"
 //   node crew/crew.mjs reviewed --before <YYYY-MM-DD> "<verdict>"   every review older than that, at once
 //
-// Agents: claude, claude2, claude3, chatgpt, antigravity. Task ids: CL-, CB- (the second Claude), CC- (the third), GP-, AG-.
+// Agents: claude, claude2, claude3, chatgpt, chatgpt2, antigravity. Task ids: CL-, CB- (the second Claude), CC- (the third), GP-, GT- (the second ChatGPT), AG-.
 // (CU-, GB- and MU- ids in the log and the archive are the retired Cursor's, Grokbot's and Muse's: D-134, D-137.)
 // The files are the truth; this only reads and writes them (always as UTF-8). By hand is fine:
 //   crew/status/<agent>.md   your own check-in card. Only you write yours.
@@ -64,8 +64,8 @@ import { parseNotes, reviewState, notesStub } from './notes.mjs';
 
 const CREW = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(CREW, '..');
-const AGENTS = { claude: 'Claude', claude2: 'Claude 2', claude3: 'Claude 3', chatgpt: 'ChatGPT', antigravity: 'Antigravity' };
-const PREFIX = { claude: 'CL', claude2: 'CB', claude3: 'CC', chatgpt: 'GP', antigravity: 'AG' };
+const AGENTS = { claude: 'Claude', claude2: 'Claude 2', claude3: 'Claude 3', chatgpt: 'ChatGPT', chatgpt2: 'ChatGPT 2', antigravity: 'Antigravity' };
+const PREFIX = { claude: 'CL', claude2: 'CB', claude3: 'CC', chatgpt: 'GP', chatgpt2: 'GT', antigravity: 'AG' };
 const FIELDS = ['state', 'model', 'task', 'touching', 'since', 'next', 'blocked-on', 'last-report'];
 const STATES = ['active', 'idle', 'blocked', 'away'];
 // Append-only files everyone shares. Checking in on them never clashes with anyone.
@@ -556,7 +556,8 @@ async function slotSummary() {
   try {
     const { defaultGameTestSlot } = await import('../tools/game-test-slot.mjs');
     const s = await defaultGameTestSlot.status({ reconcile: false });
-    const h = s.holder ? `${AGENTS[s.holder.agent] || s.holder.agent} has it (${s.holder.task}, since ${ago(s.holder.startedAt)})` : 'free';
+    const hs = s.holders || (s.holder ? [s.holder] : []), cap = (s.slots && s.slots.cap) || 1;   // CL-347: more than one at a time
+    const h = hs.length ? hs.map((x) => `${AGENTS[x.agent] || x.agent} has ${cap > 1 ? 'one' : 'it'} (${x.task}, since ${ago(x.startedAt)})`).join('; ') + (cap > 1 ? ` · ${hs.length} of ${cap} in use` : '') : (cap > 1 ? `free (${cap} at once)` : 'free');
     const q = s.queue.length ? ' · queue: ' + s.queue.map((x) => `${x.position}. ${AGENTS[x.agent] || x.agent} ${x.task}${x.ready ? '' : ' (prepared; its agent must resume it)'}`).join(', ') : ' · queue empty';
     return `${h}${q}`;
   } catch (e) { return `unknown here (${e.message.split('\n')[0]})`; }
